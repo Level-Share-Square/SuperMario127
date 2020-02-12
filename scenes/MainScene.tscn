@@ -232,3 +232,4 @@ script = ExtResource( 21 )
 script = ExtResource( 27 )
 
 [node name="Mario" parent="." instance=ExtResource( 13 )]
+airFriction = 2.3
