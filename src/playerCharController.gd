@@ -264,20 +264,20 @@ func _physics_process(delta):
 			wallBuffer = 0.1;
 			lastWallDirection = 1;
 			wallJumping = false;
-			if collisionLeft:
+			if collisionRight:
 				lastWallDirection = -1;
 		if !collisionDown && wallBuffer > 0 && wjBuffer > 0 && !jumpPlaying && !diving:
 			facingDirection = 1;
 			if lastWallDirection == -1:
 				facingDirection = -1;
-			velocity.x = wallJumpPower.x * -facingDirection;
+			velocity.x = wallJumpPower.x * facingDirection;
 			velocity.y = -wallJumpPower.y;
 			self.position.x -= 2;
 			self.position.y -= 2;
 			collisionLeft = false;
 			collisionRight = false;
 			collisionDown = false;
-			directionOnWJ = -facingDirection;
+			directionOnWJ = facingDirection;
 			wallJumping = true;
 			wallBuffer = 0;
 			wjBuffer = 0;
