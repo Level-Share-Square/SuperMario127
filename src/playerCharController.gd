@@ -263,6 +263,7 @@ func _physics_process(delta):
 		if (collisionLeft || collisionRight):
 			wallBuffer = 0.1;
 			lastWallDirection = 1;
+			wallJumping = false;
 			if collisionLeft:
 				lastWallDirection = -1;
 		if !collisionDown && wallBuffer > 0 && wjBuffer > 0 && !jumpPlaying && !diving:
