@@ -1,4 +1,4 @@
-extends ParallaxLayer
+extends Sprite
 
 func hide():
 	visible = false

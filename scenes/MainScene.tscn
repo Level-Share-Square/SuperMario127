@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/textures/backgrounds/1/background.png" type="Texture" id=1]
 [ext_resource path="res://src/cameraScript.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://src/toggleGrid.gd" type="Script" id=11]
 [ext_resource path="res://src/GlobalVars.gd" type="Script" id=12]
 [ext_resource path="res://scenes/actors/mario/Mario.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/ModeSwitcher.gd" type="Script" id=14]
 [ext_resource path="res://src/pauseScript.gd" type="Script" id=15]
 [ext_resource path="res://assets/fonts/delfino_black_outline.tres" type="DynamicFont" id=16]
 [ext_resource path="res://Assets/Fonts/texteffect_matrix.tres" type="RichTextEffect" id=17]
@@ -20,6 +21,8 @@
 [ext_resource path="res://Assets/Fonts/texteffect_ghost.tres" type="RichTextEffect" id=19]
 [ext_resource path="res://assets/music/grass/yoshi_star_galaxy.ogg" type="AudioStream" id=20]
 [ext_resource path="res://src/musicManager.gd" type="Script" id=21]
+[ext_resource path="res://scenes/GhostTile.gd" type="Script" id=22]
+[ext_resource path="res://scenes/Banner.gd" type="Script" id=23]
 [ext_resource path="res://src/fpsSetter.gd" type="Script" id=27]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -118,6 +121,7 @@ motion_scale = Vector2( 0.3, 0.5 )
 motion_mirroring = Vector2( 1536, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 0, -1.43195 )
 texture = ExtResource( 5 )
 centered = false
 
@@ -158,6 +162,7 @@ visible = false
 scale = Vector2( 0.332695, 0.33526 )
 texture = ExtResource( 7 )
 centered = false
+script = ExtResource( 23 )
 
 [node name="Pause" type="ColorRect" parent="UI"]
 pause_mode = 2
@@ -191,11 +196,13 @@ __meta__ = {
 }
 
 [node name="GhostTile" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 8 )
 centered = false
 offset = Vector2( -32, -32 )
 region_enabled = true
 region_rect = Rect2( 96, 0, 32, 32 )
+script = ExtResource( 22 )
 
 [node name="Grid" type="ParallaxBackground" parent="."]
 layer = -1
@@ -232,3 +239,6 @@ script = ExtResource( 21 )
 script = ExtResource( 27 )
 
 [node name="Mario" parent="." instance=ExtResource( 13 )]
+
+[node name="ModeSwitcher" type="Node2D" parent="."]
+script = ExtResource( 14 )

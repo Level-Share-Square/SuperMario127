@@ -1,4 +1,4 @@
-extends ParallaxLayer
+extends ParallaxBackground
 
 func hide():
 	visible = false

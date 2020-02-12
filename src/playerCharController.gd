@@ -40,6 +40,14 @@ var ledgeBuffer = 0.0;
 var wjBuffer = 0.0;
 var wallBuffer = 0.0;
 
+func hide():
+	visible = false;
+	velocity = Vector2(0, 0);
+	position = initPos;
+	
+func show():
+	visible = true;
+
 func _physics_process(delta):
 	var globalVarsNode = get_node("../GlobalVars");
 	var levelSettingsNode = get_node("../LevelSettings");
@@ -303,8 +311,7 @@ func _physics_process(delta):
 		
 		# Boundaries
 		if position.y > (levelSettingsNode.levelSize.y * 32) + 128:
-			position = initPos;
-			velocity = Vector2(0, 0);
+			kill();
 		if position.x < 0:
 			position.x = 0;
 			velocity.x = 0;
@@ -312,3 +319,7 @@ func _physics_process(delta):
 			position.x = levelSettingsNode.levelSize.x * 32;
 			velocity.x = 0;
 		lastVelocity = velocity;
+
+func kill():
+	var modeSwitcher = get_node("../ModeSwitcher");
+	modeSwitcher.switchToEditing();
