@@ -1,0 +1,18 @@
+{
+    "items":{
+        "1":{
+            "position": {"y": 865,"x": 32},
+            "angle": 0,
+            "entityID": "001"
+        }
+    },
+    "formatVersion": "0.1.0",
+    "backgroundTiles":["0000*2400"],
+    "foregroundTiles":["0000*2004","aa11","aa02*2","aa12","0000*76","aa15","aa03","aa06","aa16","0000*74","aa11","aa12","aa15","aa05","aa03","aa16","0000*72","aa01*2","aa17","aa18","aa17","aa03*2","aa16","0000*72","aa03*2","aa05","aa03","aa06","aa03*2","aa16","0000*72"],
+    "settings":{
+        "name":"My Level",
+        "background": 1,
+        "music": 1,
+        "courseSize":{"y": 30,"x": 80}
+    }
+}
