@@ -9,13 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://src/playerCharController.gd"
+}, {
 "base": "Camera2D",
 "class": "DesignerCameraFollow",
 "language": "GDScript",
 "path": "res://src/cameraScript.gd"
+}, {
+"base": "Reference",
+"class": "State",
+"language": "GDScript",
+"path": "res://State.gd"
 } ]
 _global_script_class_icons={
-"DesignerCameraFollow": ""
+"Character": "",
+"DesignerCameraFollow": "",
+"State": ""
 }
 
 [application]

@@ -9,26 +9,26 @@ func switchModes():
 	
 func switchToEditing():
 	var globalVarsNode = get_node("../GlobalVars");
-	var mario = get_node("../Mario");
+	var character = get_node("../Character");
 	var ghostTile = get_node("../GhostTile");
 	var grid = get_node("../Grid/ParallaxLayer");
 	var banner = get_node("../UI/Banner");
 	
 	globalVarsNode.gameMode = "Editing";
-	mario.hide();
+	character.hide();
 	ghostTile.show();
 	grid.show();
 	banner.show();
 
 func switchToTesting():
 	var globalVarsNode = get_node("../GlobalVars");
-	var mario = get_node("../Mario");
+	var character = get_node("../Character");
 	var ghostTile = get_node("../GhostTile");
 	var grid = get_node("../Grid/ParallaxLayer");
 	var banner = get_node("../UI/Banner");
 	
 	globalVarsNode.gameMode = "Testing";
-	mario.show();
+	character.show();
 	ghostTile.hide();
 	grid.hide();
 	banner.hide();

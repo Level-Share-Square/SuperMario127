@@ -222,6 +222,7 @@ gameMode = "Testing"
 maxGravityVelocity = Vector2( 475, 475 )
 
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
 z_index = -9
 z_as_relative = false
 tile_set = SubResource( 4 )
@@ -238,7 +239,8 @@ script = ExtResource( 21 )
 [node name="FPSSetter" type="Node" parent="."]
 script = ExtResource( 27 )
 
-[node name="Mario" parent="." instance=ExtResource( 13 )]
+[node name="Character" parent="." instance=ExtResource( 13 )]
+stateNames = [ "Jump" ]
 
 [node name="ModeSwitcher" type="Node2D" parent="."]
 script = ExtResource( 14 )

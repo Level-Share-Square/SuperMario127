@@ -49,6 +49,6 @@ func _physics_process(deltaTime):
 		elif Input.is_key_pressed(KEY_D) and (self.position.x + viewportSize.x) < self.limit_right:
 			self.position += Vector2(cameraSpeed, 0);
 	else:
-		var mario = get_node("../Mario");
-		position = mario.position;
+		var character = get_node("../Character");
+		position = character.position;
 	pass
