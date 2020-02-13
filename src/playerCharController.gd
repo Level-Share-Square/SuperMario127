@@ -45,10 +45,20 @@ var wallBuffer = 0.0;
 var state = null;
 var lastState = null;
 var controllable = true;
-export var stateNames = [
-	
-];
+export var stateNames: PoolStringArray = [];
 var states = [];
+
+# Collision vars
+var collisionDown;
+var collisionUp;
+var collisionLeft;
+var collisionRight;
+
+func isGrounded():
+	return test_move(self.transform, Vector2(0, 0.1));
+	
+func isWalled():
+	return test_move(self.transform, Vector2(-0.1, 0)) or test_move(self.transform, Vector2(0.1, 0))
 
 func hide():
 	visible = false;
@@ -59,6 +69,7 @@ func show():
 	visible = true;
 	
 func setState(state, delta: float):
+	self.state = null
 	if self.state != null:
 		self.state._stop(delta);
 	if state != null:
@@ -67,134 +78,126 @@ func setState(state, delta: float):
 	
 func _ready():
 	for name in stateNames:
-		var State = load("res://" + name + ".gd");
-		var state = State.new();
+		var state = load("res://src/stateResources/" + name + ".tres");
 		state.character = self;
 		states.append(state);
 	pass;
 	
 func _physics_process(delta: float):
-	for state in states:
-		state.handleUpdate(delta);
-	
-#func _physics_process(delta):
-#	var globalVarsNode = get_node("../GlobalVars");
-#	var levelSettingsNode = get_node("../LevelSettings");
-#
-#	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")");
-#
-#	if globalVarsNode.gameMode != "Editing":
-#
-#		var collisionShape = get_node("CollisionShape2D");
-#		var sprite = get_node("AnimatedSprite");
-#		var jumpPlayer = get_node("JumpSoundPlayer");
-#		var divePlayer = get_node("DiveSoundPlayer");
-#
-#		# Buffers
-#		if jumpBuffer > 0:
-#			jumpBuffer -= delta;
-#			if jumpBuffer < 0:
-#				jumpBuffer = 0;
-#		if ledgeBuffer > 0:
-#			ledgeBuffer -= delta;
-#			if ledgeBuffer < 0:
-#				ledgeBuffer = 0;
-#		if wjBuffer > 0:
-#			wjBuffer -= delta;
-#			if wjBuffer < 0:
-#				wjBuffer = 0;
-#		if wallBuffer > 0:
-#			wallBuffer -= delta;
-#			if wallBuffer < 0:
-#				wallBuffer = 0;
-#		if wallJumpTimer > 0:
-#			wallJumpTimer -= delta;
-#			if wallJumpTimer < 0:
-#				wallJumpTimer = 0;
-#
-#		# Gravity
-#		velocity += globalVarsNode.gravity * Vector2(gravityScale, gravityScale);
-#
-#		# Collision Checks
-#		var collisionDown;
-#		var collisionUp;
-#		var collisionLeft;
-#		var collisionRight;
-#		# Down
-#		if (test_move(self.transform, Vector2(0, 0.1))):
-#			collisionDown = true;
-#			velocity.y = 0;
-#			ledgeBuffer = 0.075;
-#		# Up
-#		if (test_move(self.transform, Vector2(0, -0.1))):
-#			collisionUp = true;
-#			velocity.y = 10;
-#		# Left
-#		if (test_move(self.transform, Vector2(-0.1, 0))):
-#			collisionLeft = true;
-#			velocity.x = 0;
-#		# Right
-#		if (test_move(self.transform, Vector2(0.1, 0))):
-#			collisionRight = true;
-#			velocity.x = 0;
-#
-#		# Movement
-#		var moveDirection = 0;
-#		if (Input.is_action_pressed("move_left") && canMove):
-#			moveDirection = -1;
-#		elif (Input.is_action_pressed("move_right") && canMove):
-#			moveDirection = 1;
-#		if moveDirection != 0:
-#			if collisionDown:
-#				if ((velocity.x > 0 && moveDirection == -1) || (velocity.x < 0 && moveDirection == 1)):
-#					velocity.x += deceleration * moveDirection;
-#				elif ((velocity.x < moveSpeed && moveDirection == 1) || (velocity.x > -moveSpeed && moveDirection == -1)):
-#					velocity.x += acceleration * moveDirection;
-#				elif ((velocity.x > moveSpeed && moveDirection == 1) || (velocity.x < -moveSpeed && moveDirection == -1)):
-#					velocity.x -= 3.5 * moveDirection;
-#				facingDirection = moveDirection;
-#
-#				if moveDirection == 1:
-#					sprite.animation = "movingRight";
-#				else:
-#					sprite.animation = "movingLeft";
-#				if (abs(velocity.x) > moveSpeed):
-#					sprite.speed_scale = abs(velocity.x) / moveSpeed;
-#				else:
-#					sprite.speed_scale = 1;
-#			else:
-#				if ((velocity.x < moveSpeed && moveDirection == 1) || (velocity.x > -moveSpeed && moveDirection == -1)):
-#					velocity.x += airAccel * moveDirection;
-#				elif ((velocity.x > moveSpeed && moveDirection == 1) || (velocity.x < -moveSpeed && moveDirection == -1)):
-#					velocity.x -= 0.25 * moveDirection;
-#
-#				if (velocity.x > 0 && moveDirection == 1) or (velocity.x < 0 && moveDirection == -1):
-#					facingDirection = moveDirection;
-#		else:
-#			if (velocity.x > 0):
-#				if (velocity.x > 15):
-#					if (collisionDown):
-#						velocity.x -= friction;				
-#					else:
-#						velocity.x -= airFriction;
-#				else:
-#					velocity.x = 0;
-#			elif (velocity.x < 0):
-#				if (velocity.x < -15):
-#					if (collisionDown):
-#						velocity.x += friction;
-#					else:
-#						velocity.x += airFriction;
-#				else:
-#					velocity.x = 0;
-#
-#			if collisionDown:
-#				if facingDirection == 1:
-#					sprite.animation = "idleRight";
-#				else:
-#					sprite.animation = "idleLeft";
-#				sprite.speed_scale = 1;
-#
+	var globalVarsNode = get_node("../GlobalVars");
+	var levelSettingsNode = get_node("../LevelSettings");
+
+	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")");
+
+	if globalVarsNode.gameMode != "Editing":
+
+		var collisionShape = get_node("CollisionShape2D");
+		var sprite = get_node("AnimatedSprite");
+		var jumpPlayer = get_node("JumpSoundPlayer");
+		var divePlayer = get_node("DiveSoundPlayer");
+
+		# Buffers
+		if jumpBuffer > 0:
+			jumpBuffer -= delta;
+			if jumpBuffer < 0:
+				jumpBuffer = 0;
+		if ledgeBuffer > 0:
+			ledgeBuffer -= delta;
+			if ledgeBuffer < 0:
+				ledgeBuffer = 0;
+		if wjBuffer > 0:
+			wjBuffer -= delta;
+			if wjBuffer < 0:
+				wjBuffer = 0;
+		if wallBuffer > 0:
+			wallBuffer -= delta;
+			if wallBuffer < 0:
+				wallBuffer = 0;
+		if wallJumpTimer > 0:
+			wallJumpTimer -= delta;
+			if wallJumpTimer < 0:
+				wallJumpTimer = 0;
+
+		# Gravity
+		velocity += globalVarsNode.gravity * Vector2(gravityScale, gravityScale);
+
+		# Collision Checks
+		# Down
+		if (test_move(self.transform, Vector2(0, 0.1))):
+			collisionDown = true;
+			velocity.y = 0;
+			ledgeBuffer = 0.075;
+		# Up
+		if (test_move(self.transform, Vector2(0, -0.1))):
+			collisionUp = true;
+			velocity.y = 10;
+		# Left
+		if (test_move(self.transform, Vector2(-0.1, 0))):
+			collisionLeft = true;
+			velocity.x = 0;
+		# Right
+		if (test_move(self.transform, Vector2(0.1, 0))):
+			collisionRight = true;
+			velocity.x = 0;
+
+		# Movement
+		var moveDirection = 0;
+		if (Input.is_action_pressed("move_left") && canMove):
+			moveDirection = -1;
+		elif (Input.is_action_pressed("move_right") && canMove):
+			moveDirection = 1;
+		if moveDirection != 0:
+			if collisionDown:
+				if ((velocity.x > 0 && moveDirection == -1) || (velocity.x < 0 && moveDirection == 1)):
+					velocity.x += deceleration * moveDirection;
+				elif ((velocity.x < moveSpeed && moveDirection == 1) || (velocity.x > -moveSpeed && moveDirection == -1)):
+					velocity.x += acceleration * moveDirection;
+				elif ((velocity.x > moveSpeed && moveDirection == 1) || (velocity.x < -moveSpeed && moveDirection == -1)):
+					velocity.x -= 3.5 * moveDirection;
+				facingDirection = moveDirection;
+
+				if moveDirection == 1:
+					sprite.animation = "movingRight";
+				else:
+					sprite.animation = "movingLeft";
+				if (abs(velocity.x) > moveSpeed):
+					sprite.speed_scale = abs(velocity.x) / moveSpeed;
+				else:
+					sprite.speed_scale = 1;
+			else:
+				if ((velocity.x < moveSpeed && moveDirection == 1) || (velocity.x > -moveSpeed && moveDirection == -1)):
+					velocity.x += airAccel * moveDirection;
+				elif ((velocity.x > moveSpeed && moveDirection == 1) || (velocity.x < -moveSpeed && moveDirection == -1)):
+					velocity.x -= 0.25 * moveDirection;
+
+				if (velocity.x > 0 && moveDirection == 1) or (velocity.x < 0 && moveDirection == -1):
+					facingDirection = moveDirection;
+		else:
+			if (velocity.x > 0):
+				if (velocity.x > 15):
+					if (collisionDown):
+						velocity.x -= friction;				
+					else:
+						velocity.x -= airFriction;
+				else:
+					velocity.x = 0;
+			elif (velocity.x < 0):
+				if (velocity.x < -15):
+					if (collisionDown):
+						velocity.x += friction;
+					else:
+						velocity.x += airFriction;
+				else:
+					velocity.x = 0;
+
+			if collisionDown:
+				if facingDirection == 1:
+					sprite.animation = "idleRight";
+				else:
+					sprite.animation = "idleLeft";
+				sprite.speed_scale = 1;
+
+##		
 #		# Jump
 #		if Input.is_action_just_pressed("jump") && canJump:
 #			jumpBuffer = 0.075;
@@ -334,20 +337,23 @@ func _physics_process(delta: float):
 #				sprite.animation = "wallSlideRight";
 #			else:
 #				sprite.animation = "wallSlideLeft";
-#
-#		# Move by velocity
-#		move_and_slide(velocity);
-#
-#		# Boundaries
-#		if position.y > (levelSettingsNode.levelSize.y * 32) + 128:
-#			kill();
-#		if position.x < 0:
-#			position.x = 0;
-#			velocity.x = 0;
-#		if position.x > levelSettingsNode.levelSize.x * 32:
-#			position.x = levelSettingsNode.levelSize.x * 32;
-#			velocity.x = 0;
-#		lastVelocity = velocity;
+
+		# Move by velocity
+		move_and_slide(velocity);
+
+		# Boundaries
+		if position.y > (levelSettingsNode.levelSize.y * 32) + 128:
+			kill();
+		if position.x < 0:
+			position.x = 0;
+			velocity.x = 0;
+		if position.x > levelSettingsNode.levelSize.x * 32:
+			position.x = levelSettingsNode.levelSize.x * 32;
+			velocity.x = 0;
+		lastVelocity = velocity;
+		
+		for state in states:
+			state.handleUpdate(delta);
 
 func kill():
 	var modeSwitcher = get_node("../ModeSwitcher");

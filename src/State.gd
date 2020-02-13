@@ -1,4 +1,4 @@
-class_name State
+extends Resource
 
 var character: Character
 

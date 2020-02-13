@@ -222,7 +222,6 @@ gameMode = "Testing"
 maxGravityVelocity = Vector2( 475, 475 )
 
 [node name="TileMap" type="TileMap" parent="."]
-visible = false
 z_index = -9
 z_as_relative = false
 tile_set = SubResource( 4 )
@@ -240,7 +239,7 @@ script = ExtResource( 21 )
 script = ExtResource( 27 )
 
 [node name="Character" parent="." instance=ExtResource( 13 )]
-stateNames = [ "Jump" ]
+stateNames = PoolStringArray( "Jump", "Dive" )
 
 [node name="ModeSwitcher" type="Node2D" parent="."]
 script = ExtResource( 14 )

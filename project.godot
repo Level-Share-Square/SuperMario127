@@ -19,15 +19,27 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/cameraScript.gd"
 }, {
-"base": "Reference",
-"class": "State",
+"base": "Resource",
+"class": "DiveState",
 "language": "GDScript",
-"path": "res://State.gd"
+"path": "res://src/states/Dive.gd"
+}, {
+"base": "Node",
+"class": "ExampleObject",
+"language": "GDScript",
+"path": "res://src/objects/ExampleObject.gd"
+}, {
+"base": "Resource",
+"class": "JumpState",
+"language": "GDScript",
+"path": "res://src/states/Jump.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
 "DesignerCameraFollow": "",
-"State": ""
+"DiveState": "",
+"ExampleObject": "",
+"JumpState": ""
 }
 
 [application]
