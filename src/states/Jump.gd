@@ -26,11 +26,6 @@ func _update(delta):
 			sprite.animation = "jumpLeft";
 	else:
 		jumpPlaying = false;
-		if !character.isGrounded():
-			if character.facingDirection == 1:
-				sprite.animation = "fallRight";
-			else:
-				sprite.animation = "fallLeft";
 
 func _stopCheck(delta):
 	return character.isGrounded();

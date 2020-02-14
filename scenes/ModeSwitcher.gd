@@ -13,12 +13,14 @@ func switchToEditing():
 	var ghostTile = get_node("../GhostTile");
 	var grid = get_node("../Grid/ParallaxLayer");
 	var banner = get_node("../UI/Banner");
+	var music = get_node("../Music");
 	
 	globalVarsNode.gameMode = "Editing";
 	character.hide();
 	ghostTile.show();
 	grid.show();
 	banner.show();
+	music.stop();
 
 func switchToTesting():
 	var globalVarsNode = get_node("../GlobalVars");
@@ -26,12 +28,17 @@ func switchToTesting():
 	var ghostTile = get_node("../GhostTile");
 	var grid = get_node("../Grid/ParallaxLayer");
 	var banner = get_node("../UI/Banner");
+	var music = get_node("../Music");
 	
 	globalVarsNode.gameMode = "Testing";
 	character.show();
 	ghostTile.hide();
 	grid.hide();
 	banner.hide();
+	music.play();
+	
+	if Input.is_key_pressed(KEY_SHIFT):
+		character.position = get_global_mouse_position();
 
 func _ready():
 	var globalVarsNode = get_node("../GlobalVars");

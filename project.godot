@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://src/objects/ExampleObject.gd"
 }, {
 "base": "Resource",
+"class": "FallState",
+"language": "GDScript",
+"path": "res://src/states/Fall.gd"
+}, {
+"base": "Resource",
 "class": "JumpState",
 "language": "GDScript",
 "path": "res://src/states/Jump.gd"
@@ -39,6 +44,7 @@ _global_script_class_icons={
 "DesignerCameraFollow": "",
 "DiveState": "",
 "ExampleObject": "",
+"FallState": "",
 "JumpState": ""
 }
 

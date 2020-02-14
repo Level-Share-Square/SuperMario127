@@ -23,13 +23,22 @@ func _gamemode_changed(gameMode):
 	var levelSizeNode = get_node("../LevelSettings");
 	var levelSize = levelSizeNode.levelSize;
 	
-	limit_left = 0;
-	limit_right = levelSize.x * 32;
+	self.limit_left = 0;
+	self.limit_right = levelSize.x * 32;
 	if gameMode == "Editing":
-		limit_top = -80;
+		self.limit_top = -80;
+		var viewportSize = get_viewport_rect().size;
+		if (self.position.y - viewportSize.y/2) < self.limit_top:
+			self.position.y = self.limit_top + viewportSize.y/2;
+		elif (self.position.y + viewportSize.y/2) > self.limit_bottom:
+			self.position.y = self.limit_bottom - viewportSize.y/2;
+		if (self.position.x - viewportSize.x/2) < self.limit_left:
+			self.position.x = self.limit_left + viewportSize.x/2;
+		elif (self.position.x + viewportSize.x/2) > self.limit_right:
+			self.position.x = self.limit_right - viewportSize.x/2;
 	else:
-		limit_top = 0;
-		limit_bottom = levelSize.y * 32;
+		self.limit_top = 0;
+		self.limit_bottom = levelSize.y * 32;
 	pass
 
 func _physics_process(deltaTime):
@@ -40,13 +49,13 @@ func _physics_process(deltaTime):
 		_gamemode_changed(globalVarsNode.gameMode);
 		
 	if globalVarsNode.gameMode == "Editing":
-		if Input.is_key_pressed(KEY_W) and self.position.y > self.limit_top:
+		if Input.is_key_pressed(KEY_W) and (self.position.y - viewportSize.y/2) > self.limit_top:
 			self.position -= Vector2(0, cameraSpeed);
-		elif Input.is_key_pressed(KEY_S) and (self.position.y + viewportSize.y) < self.limit_bottom:
+		elif Input.is_key_pressed(KEY_S) and (self.position.y + viewportSize.y/2) < self.limit_bottom:
 			self.position += Vector2(0, cameraSpeed);
-		if Input.is_key_pressed(KEY_A) and self.position.x > self.limit_left:
+		if Input.is_key_pressed(KEY_A) and (self.position.x - viewportSize.x/2) > self.limit_left:
 			self.position -= Vector2(cameraSpeed, 0);
-		elif Input.is_key_pressed(KEY_D) and (self.position.x + viewportSize.x) < self.limit_right:
+		elif Input.is_key_pressed(KEY_D) and (self.position.x + viewportSize.x/2) < self.limit_right:
 			self.position += Vector2(cameraSpeed, 0);
 	else:
 		var character = get_node("../Character");

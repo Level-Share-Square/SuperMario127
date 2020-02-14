@@ -95,6 +95,7 @@ func _physics_process(delta: float):
 		var sprite = get_node("AnimatedSprite");
 		var jumpPlayer = get_node("JumpSoundPlayer");
 		var divePlayer = get_node("DiveSoundPlayer");
+		var fallPlayer = get_node("FallSoundPlayer");
 
 		# Buffers
 		if jumpBuffer > 0:
@@ -343,6 +344,7 @@ func _physics_process(delta: float):
 
 		# Boundaries
 		if position.y > (levelSettingsNode.levelSize.y * 32) + 128:
+			#fallPlayer.play();
 			kill();
 		if position.x < 0:
 			position.x = 0;
