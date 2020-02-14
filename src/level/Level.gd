@@ -51,5 +51,10 @@ func loadIn(json: LevelJSON):
 	else:
 		print("Incorrect format version, current version is 0.1.0 level uses version " + formatVersion);
 
-func save() -> String:
-	return "";
+func unload(node: Node):
+	var levelObjects = node.get_node("../LevelObjects")
+	for child in levelObjects.get_children():
+		child.queue_free();
+
+func saveIn(json: LevelJSON):
+	pass;
