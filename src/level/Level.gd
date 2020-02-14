@@ -29,7 +29,7 @@ func getSettings(result) -> LevelAreaSettings:
 
 func getObject(result) -> LevelObject:
 	var object = LevelObject.new();
-	object.position = getVector2(result.position);
+	object.type = result.type;
 	object.properties = result.properties;
 	return object;
 

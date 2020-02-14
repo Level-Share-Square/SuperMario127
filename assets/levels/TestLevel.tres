@@ -11,8 +11,14 @@ contents = "{
         {
             \"objects\": [
                 {
-                    \"position\": {\"y\": 865,\"x\": 32},
-					\"properties\": {}
+                    \"type\": \"Oscillating\",
+					\"properties\": {
+						\"position\": {
+							\"type\": \"Vector2\",
+							\"construction\": [500, 300]
+						},
+						\"frequency\": 5
+					}
                 }
             ],
             \"backgroundTiles\":[\"0000*2400\"],
