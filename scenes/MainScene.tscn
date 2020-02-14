@@ -199,6 +199,7 @@ __meta__ = {
 visible = false
 texture = ExtResource( 8 )
 centered = false
+offset = Vector2( -32, -32 )
 region_enabled = true
 region_rect = Rect2( 96, 0, 32, 32 )
 script = ExtResource( 22 )
@@ -238,6 +239,9 @@ script = ExtResource( 21 )
 script = ExtResource( 27 )
 
 [node name="Character" parent="." instance=ExtResource( 13 )]
+stateNames = PoolStringArray( "Jump", "Dive" )
 
 [node name="ModeSwitcher" type="Node2D" parent="."]
 script = ExtResource( 14 )
+
+[node name="LevelObjects" type="Node2D" parent="."]

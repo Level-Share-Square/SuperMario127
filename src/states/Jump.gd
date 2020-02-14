@@ -5,12 +5,13 @@ class_name JumpState
 export var jumpPower: float = 350;
 var jumpBuffer = 0;
 var jumpPlaying = false;
+onready var sprite = character.get_node("AnimatedSprite");
+onready var jumpPlayer = character.get_node("JumpSoundPlayer");
 
 func _startCheck(delta):
 	return character.isGrounded() and jumpBuffer > 0;
 
 func _start(delta):
-	var jumpPlayer = character.get_node("JumpSoundPlayer");
 	character.velocity.y = -jumpPower;
 	character.position.y -= 3;
 	jumpBuffer = 0;
@@ -18,7 +19,6 @@ func _start(delta):
 	jumpPlayer.play();
 
 func _update(delta):
-	var sprite = character.get_node("AnimatedSprite");
 	if jumpPlaying && character.velocity.y < 0 && !character.isGrounded():
 		if character.facingDirection == 1:
 			sprite.animation = "jumpRight";

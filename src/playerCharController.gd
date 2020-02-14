@@ -54,6 +54,15 @@ var collisionUp;
 var collisionLeft;
 var collisionRight;
 
+
+onready var globalVarsNode = get_node("../GlobalVars");
+onready var levelSettingsNode = get_node("../LevelSettings");
+onready var collisionShape = get_node("CollisionShape2D");
+onready var sprite = get_node("AnimatedSprite");
+onready var jumpPlayer = get_node("JumpSoundPlayer");
+onready var divePlayer = get_node("DiveSoundPlayer");
+onready var fallPlayer = get_node("FallSoundPlayer");
+
 func isGrounded():
 	return test_move(self.transform, Vector2(0, 0.1));
 	
@@ -84,18 +93,10 @@ func _ready():
 	pass;
 	
 func _physics_process(delta: float):
-	var globalVarsNode = get_node("../GlobalVars");
-	var levelSettingsNode = get_node("../LevelSettings");
 
 	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")");
 
 	if globalVarsNode.gameMode != "Editing":
-
-		var collisionShape = get_node("CollisionShape2D");
-		var sprite = get_node("AnimatedSprite");
-		var jumpPlayer = get_node("JumpSoundPlayer");
-		var divePlayer = get_node("DiveSoundPlayer");
-		var fallPlayer = get_node("FallSoundPlayer");
 
 		# Buffers
 		if jumpBuffer > 0:
@@ -338,6 +339,9 @@ func _physics_process(delta: float):
 #				sprite.animation = "wallSlideRight";
 #			else:
 #				sprite.animation = "wallSlideLeft";
+		
+		for state in states:
+			state.handleUpdate(delta);
 
 		# Move by velocity
 		move_and_slide(velocity);
@@ -353,9 +357,6 @@ func _physics_process(delta: float):
 			position.x = levelSettingsNode.levelSize.x * 32;
 			velocity.x = 0;
 		lastVelocity = velocity;
-		
-		for state in states:
-			state.handleUpdate(delta);
 
 func kill():
 	var modeSwitcher = get_node("../ModeSwitcher");

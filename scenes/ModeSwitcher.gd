@@ -1,20 +1,19 @@
 extends Node2D
 
+onready var globalVarsNode = get_node("../GlobalVars");
+onready var character = get_node("../Character");
+onready var ghostTile = get_node("../GhostTile");
+onready var grid = get_node("../Grid/ParallaxLayer");
+onready var banner = get_node("../UI/Banner");
+onready var music = get_node("../Music");
+
 func switchModes():
-	var globalVarsNode = get_node("../GlobalVars");
 	if globalVarsNode.gameMode == "Testing":
 		switchToEditing();
 	else:
 		switchToTesting();
 	
 func switchToEditing():
-	var globalVarsNode = get_node("../GlobalVars");
-	var character = get_node("../Character");
-	var ghostTile = get_node("../GhostTile");
-	var grid = get_node("../Grid/ParallaxLayer");
-	var banner = get_node("../UI/Banner");
-	var music = get_node("../Music");
-	
 	globalVarsNode.gameMode = "Editing";
 	character.hide();
 	ghostTile.show();
@@ -23,13 +22,6 @@ func switchToEditing():
 	music.stop();
 
 func switchToTesting():
-	var globalVarsNode = get_node("../GlobalVars");
-	var character = get_node("../Character");
-	var ghostTile = get_node("../GhostTile");
-	var grid = get_node("../Grid/ParallaxLayer");
-	var banner = get_node("../UI/Banner");
-	var music = get_node("../Music");
-	
 	globalVarsNode.gameMode = "Testing";
 	character.show();
 	ghostTile.hide();
@@ -41,7 +33,6 @@ func switchToTesting():
 		character.position = get_global_mouse_position();
 
 func _ready():
-	var globalVarsNode = get_node("../GlobalVars");
 	if globalVarsNode.gameMode == "Editing":
 		switchToEditing();
 	else:

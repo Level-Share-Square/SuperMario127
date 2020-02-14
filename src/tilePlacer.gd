@@ -1,20 +1,20 @@
 extends TileMap
 
 var levelSize = Vector2(0 ,0);
+onready var levelSizeNode = get_node("../LevelSettings");
+onready var globalVarsNode = get_node("../GlobalVars");
+onready var ghostTile = get_node("../GhostTile");
 
 func _ready():
-	var levelSizeNode = get_node("../LevelSettings");
 	var levelSizeTemp = levelSizeNode.levelSize;
 	levelSize = Vector2(levelSizeTemp.x * 32, levelSizeTemp.y * 32);
 	pass
 
 func _physics_process(delta):
-	var globalVarsNode = get_node("../GlobalVars");
 	if globalVarsNode.gameMode == "Editing":
 		var mousePos = get_global_mouse_position();
 		var mouseTilePos = Vector2(floor(mousePos.x / 32), floor(mousePos.y / 32));
 		
-		var ghostTile = get_node("../GhostTile");
 		ghostTile.modulate = Color(1, 1, 1, 0.5);
 		ghostTile.position = Vector2(mouseTilePos.x * 32, mouseTilePos.y * 32);
 		
