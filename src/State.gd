@@ -1,5 +1,7 @@
 extends Resource
 
+class_name State
+
 var character: Character
 
 func handleUpdate(delta: float):

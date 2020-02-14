@@ -1,4 +1,4 @@
-extends "res://src/State.gd"
+extends State
 
 class_name FallState
 

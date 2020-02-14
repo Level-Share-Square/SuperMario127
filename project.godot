@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/cameraScript.gd"
 }, {
-"base": "Resource",
+"base": "State",
 "class": "DiveState",
 "language": "GDScript",
 "path": "res://src/states/Dive.gd"
@@ -29,15 +29,45 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/objects/ExampleObject.gd"
 }, {
-"base": "Resource",
+"base": "State",
 "class": "FallState",
 "language": "GDScript",
 "path": "res://src/states/Fall.gd"
 }, {
-"base": "Resource",
+"base": "State",
 "class": "JumpState",
 "language": "GDScript",
 "path": "res://src/states/Jump.gd"
+}, {
+"base": "Resource",
+"class": "Level",
+"language": "GDScript",
+"path": "res://src/level/Level.gd"
+}, {
+"base": "Resource",
+"class": "LevelArea",
+"language": "GDScript",
+"path": "res://src/level/Area.gd"
+}, {
+"base": "Resource",
+"class": "LevelAreaSettings",
+"language": "GDScript",
+"path": "res://src/level/AreaSettings.gd"
+}, {
+"base": "Resource",
+"class": "LevelJSON",
+"language": "GDScript",
+"path": "res://src/level/JSON.gd"
+}, {
+"base": "Resource",
+"class": "LevelObject",
+"language": "GDScript",
+"path": "res://src/level/Object.gd"
+}, {
+"base": "Resource",
+"class": "State",
+"language": "GDScript",
+"path": "res://src/State.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
@@ -45,7 +75,13 @@ _global_script_class_icons={
 "DiveState": "",
 "ExampleObject": "",
 "FallState": "",
-"JumpState": ""
+"JumpState": "",
+"Level": "",
+"LevelArea": "",
+"LevelAreaSettings": "",
+"LevelJSON": "",
+"LevelObject": "",
+"State": ""
 }
 
 [application]

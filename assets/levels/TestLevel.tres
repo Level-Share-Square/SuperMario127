@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/level/JSON.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+contents = "{
+    \"formatVersion\": \"0.1.0\",
+    \"name\":\"My Level\",
+    \"areas\":[
+        {
+            \"objects\": [
+                {
+                    \"position\": {\"y\": 865,\"x\": 32},
+					\"properties\": {}
+                }
+            ],
+            \"backgroundTiles\":[\"0000*2400\"],
+            \"foregroundTiles\":[\"0000*2004\",\"aa11\",\"aa02*2\",\"aa12\",\"0000*76\",\"aa15\",\"aa03\",\"aa06\",\"aa16\",\"0000*74\",\"aa11\",\"aa12\",\"aa15\",\"aa05\",\"aa03\",\"aa16\",\"0000*72\",\"aa01*2\",\"aa17\",\"aa18\",\"aa17\",\"aa03*2\",\"aa16\",\"0000*72\",\"aa03*2\",\"aa05\",\"aa03\",\"aa06\",\"aa03*2\",\"aa16\",\"0000*72\"],
+            \"settings\":{
+                \"background\": 1,
+                \"music\": 1,
+                \"size\":{\"y\": 30,\"x\": 80},
+				\"spawn\":{\"x\":0,\"y\":0}
+            }
+        }
+	]
+}"

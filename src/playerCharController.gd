@@ -87,7 +87,7 @@ func setState(state, delta: float):
 	
 func _ready():
 	for name in stateNames:
-		var state = load("res://src/stateResources/" + name + ".tres");
+		var state = load("res://assets/states/" + name + ".tres");
 		state.character = self;
 		states.append(state);
 	pass;
