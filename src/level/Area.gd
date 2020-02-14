@@ -8,4 +8,6 @@ var foregroundTiles: PoolStringArray;
 var settings: LevelAreaSettings;
 
 func loadIn(node: Node):
-	pass;
+	var character = node.get_node("../Character")
+	var levelObjects = node.get_node("../LevelObjects")
+	character.position = settings.spawn;
