@@ -245,7 +245,6 @@ script = ExtResource( 21 )
 script = ExtResource( 27 )
 
 [node name="Character" parent="." instance=ExtResource( 13 )]
-stateNames = PoolStringArray( "Jump", "Dive" )
 
 [node name="ModeSwitcher" type="Node2D" parent="."]
 script = ExtResource( 14 )
