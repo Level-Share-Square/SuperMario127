@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-60a0ca2c6fae18551e923f955c128a4e.stex"
+path="res://.import/item_box_hover.png-5b427c506a092cc12b992a2c60e8b8a8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/tilesets/grass/icon.png"
-dest_files=[ "res://.import/icon.png-60a0ca2c6fae18551e923f955c128a4e.stex" ]
+source_file="res://assets/textures/ui/item_box_hover.png"
+dest_files=[ "res://.import/item_box_hover.png-5b427c506a092cc12b992a2c60e8b8a8.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

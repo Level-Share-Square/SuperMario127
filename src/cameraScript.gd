@@ -28,7 +28,7 @@ func _gamemode_changed(gameMode):
 	self.limit_left = 0
 	self.limit_right = levelSize.x * 32
 	if gameMode == "Editing":
-		self.limit_top = -80
+		self.limit_top = -70
 		var viewportSize = get_viewport_rect().size
 		if (self.position.y - viewportSize.y/2) < self.limit_top:
 			self.position.y = self.limit_top + viewportSize.y/2

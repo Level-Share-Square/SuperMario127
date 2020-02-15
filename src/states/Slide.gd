@@ -2,8 +2,6 @@ extends State
 
 class_name SlideState
 
-export var divePower: Vector2 = Vector2(1350, 75)
-var sliding = false
 onready var sprite = character.get_node("AnimatedSprite")
 onready var divePlayer = character.get_node("JumpSoundPlayer")
 
@@ -16,5 +14,8 @@ func _start(delta):
 func _update(delta):
 	pass
 
+func _stop(delta):
+	character.friction = 7.5
+
 func _stopCheck(delta):
-	return false
+	return abs(character.velocity.x) < 5 or Input.is_action_just_pressed("jump")

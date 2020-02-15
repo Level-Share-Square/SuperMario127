@@ -13,8 +13,7 @@ export var acceleration = 7.5
 export var deceleration = 25.0
 export var airAccel = 7.5
 export var friction = 10.5
-export var airFriction = 2.30
-
+export var airFriction = 1.15
 export var jumpPower = 350.0
 var jumpPlaying = true
 
@@ -79,12 +78,12 @@ func show():
 	visible = true
 	
 func setState(state, delta: float):
-	self.state = null
-	if self.state != null:
-		self.state._stop(delta)
 	if state != null:
 		self.state = state
 		state._start(delta)
+	else:
+		self.state._stop(delta)
+		self.state = state;
 	
 func getStateInstance(name: String):
 	return stateMap[name]
@@ -152,12 +151,12 @@ func _physics_process(delta: float):
 
 		# Movement
 		var moveDirection = 0
-		if (Input.is_action_pressed("move_left") && canMove):
+		if (Input.is_action_pressed("move_left") && state != getStateInstance("Slide")):
 			moveDirection = -1
-		elif (Input.is_action_pressed("move_right") && canMove):
+		elif (Input.is_action_pressed("move_right") && state != getStateInstance("Slide")):
 			moveDirection = 1
 		if moveDirection != 0:
-			if collisionDown:
+			if isGrounded():
 				if ((velocity.x > 0 && moveDirection == -1) || (velocity.x < 0 && moveDirection == 1)):
 					velocity.x += deceleration * moveDirection
 				elif ((velocity.x < moveSpeed && moveDirection == 1) || (velocity.x > -moveSpeed && moveDirection == -1)):
@@ -185,7 +184,7 @@ func _physics_process(delta: float):
 		else:
 			if (velocity.x > 0):
 				if (velocity.x > 15):
-					if (collisionDown):
+					if (isGrounded()):
 						velocity.x -= friction				
 					else:
 						velocity.x -= airFriction
@@ -193,14 +192,14 @@ func _physics_process(delta: float):
 					velocity.x = 0
 			elif (velocity.x < 0):
 				if (velocity.x < -15):
-					if (collisionDown):
+					if (isGrounded()):
 						velocity.x += friction
 					else:
 						velocity.x += airFriction
 				else:
 					velocity.x = 0
 
-			if collisionDown:
+			if isGrounded():
 				if facingDirection == 1:
 					sprite.animation = "idleRight"
 				else:
@@ -218,22 +217,22 @@ func _physics_process(delta: float):
 #			jumpBuffer = 0
 #			jumpPlaying = true
 #			jumpPlayer.play()
-#			collisionDown = false
-#		if jumpPlaying && velocity.y < 0 && !collisionDown:
+#			isGrounded() = false
+#		if jumpPlaying && velocity.y < 0 && !isGrounded():
 #			if facingDirection == 1:
 #				sprite.animation = "jumpRight"
 #			else:
 #				sprite.animation = "jumpLeft"
 #		else:
 #			jumpPlaying = false
-#			if !collisionDown:
+#			if !isGrounded():
 #				if facingDirection == 1:
 #					sprite.animation = "fallRight"
 #				else:
 #					sprite.animation = "fallLeft"
 #
 #		# Dive
-#		if Input.is_action_pressed("dive") && !collisionDown && !collisionLeft && !collisionRight && canDive:
+#		if Input.is_action_pressed("dive") && !isGrounded() && !collisionLeft && !collisionRight && canDive:
 #			velocity.x = velocity.x - (velocity.x - (divePower.x * facingDirection)) / 5
 #			velocity.y += divePower.y
 #			canDive = false
@@ -243,7 +242,7 @@ func _physics_process(delta: float):
 #			canJump = false
 #			divePlayer.play()
 #		if (diving):
-#			if (collisionDown):
+#			if (isGrounded()):
 #				friction = 2.25
 #				diving = false
 #				sliding = true
@@ -308,7 +307,7 @@ func _physics_process(delta: float):
 #				lastAboveRotLimit = true
 #
 #		# Wall Jump
-#		if Input.is_action_just_pressed("jump") && !collisionDown:
+#		if Input.is_action_just_pressed("jump") && !isGrounded():
 #			wjBuffer = 0.075
 #		if (collisionLeft || collisionRight):
 #			wallBuffer = 0.1
@@ -316,7 +315,7 @@ func _physics_process(delta: float):
 #			wallJumping = false
 #			if collisionRight:
 #				lastWallDirection = -1
-#		if !collisionDown && wallBuffer > 0 && wjBuffer > 0 && !jumpPlaying && !diving:
+#		if !isGrounded() && wallBuffer > 0 && wjBuffer > 0 && !jumpPlaying && !diving:
 #			facingDirection = 1
 #			if lastWallDirection == -1:
 #				facingDirection = -1
@@ -326,7 +325,7 @@ func _physics_process(delta: float):
 #			self.position.y -= 2
 #			collisionLeft = false
 #			collisionRight = false
-#			collisionDown = false
+#			isGrounded() = false
 #			directionOnWJ = facingDirection
 #			wallJumping = true
 #			wallBuffer = 0
@@ -340,9 +339,9 @@ func _physics_process(delta: float):
 #				sprite.animation = "jumpRight"
 #			else:
 #				sprite.animation = "jumpLeft"
-#			if (collisionDown):
+#			if (isGrounded()):
 #				wallJumping = false
-#		elif (collisionLeft || collisionRight) && !diving && !collisionDown:
+#		elif (collisionLeft || collisionRight) && !diving && !isGrounded():
 #			if (collisionRight):
 #				sprite.animation = "wallSlideRight"
 #			else:

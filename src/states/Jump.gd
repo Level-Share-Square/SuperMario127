@@ -9,7 +9,7 @@ onready var sprite = character.get_node("AnimatedSprite")
 onready var jumpPlayer = character.get_node("JumpSoundPlayer")
 
 func _startCheck(delta):
-	return character.isGrounded() and jumpBuffer > 0
+	return character.isGrounded() and jumpBuffer > 0 and character.state != character.getStateInstance("Slide")
 
 func _start(delta):
 	character.velocity.y = -jumpPower
@@ -26,6 +26,9 @@ func _update(delta):
 			sprite.animation = "jumpLeft"
 	else:
 		jumpPlaying = false
+		
+func _stop(delta):
+	pass
 
 func _stopCheck(delta):
 	return character.isGrounded()
