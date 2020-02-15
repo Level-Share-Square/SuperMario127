@@ -179,6 +179,11 @@ switch_modes={
  ]
 }
 
+[layer_names]
+
+2d_render/layer_1="player"
+2d_render/layer_2="coins"
+
 [physics]
 
 common/physics_fps=120

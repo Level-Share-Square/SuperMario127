@@ -15,7 +15,7 @@ contents = "{
 					\"properties\": {
 						\"position\": {
 							\"type\": \"Vector2\",
-							\"construction\": [500, 500]
+							\"construction\": [400, 350]
 						}
 					}
                 }
