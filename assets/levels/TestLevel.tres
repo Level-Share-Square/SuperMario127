@@ -11,13 +11,12 @@ contents = "{
         {
             \"objects\": [
                 {
-                    \"type\": \"Oscillating\",
+                    \"type\": \"Coin\",
 					\"properties\": {
 						\"position\": {
 							\"type\": \"Vector2\",
-							\"construction\": [500, 300]
-						},
-						\"frequency\": 5
+							\"construction\": [500, 500]
+						}
 					}
                 }
             ],

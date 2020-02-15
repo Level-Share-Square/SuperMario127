@@ -2,4 +2,4 @@ extends Resource
 
 class_name LevelJSON
 
-export(String, MULTILINE) var contents;
+export(String, MULTILINE) var contents
