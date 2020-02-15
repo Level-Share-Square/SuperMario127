@@ -86,7 +86,7 @@ func setState(state, delta: float):
 		self.state = state
 		state._start(delta)
 	
-func getState(name: String):
+func getStateInstance(name: String):
 	return stateMap[name]
 	
 func setStateByName(name: String, delta: float):

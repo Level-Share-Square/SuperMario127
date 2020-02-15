@@ -7,7 +7,6 @@ var character: Character
 func handleUpdate(delta: float):
 	if character.controllable:
 		if character.state != self and _startCheck(delta):
-			print("ranstcheck for " + name)
 			character.setState(self, delta)
 		if character.state == self:
 			_update(delta)
