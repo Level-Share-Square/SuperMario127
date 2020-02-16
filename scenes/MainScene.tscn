@@ -28,7 +28,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
-export var levelSize = Vector2(380, 30);
+export var level_size = Vector2(380, 30);
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
@@ -156,7 +156,6 @@ drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
 script = ExtResource( 2 )
-cameraSpeed = 7
 
 [node name="LevelSettings" type="Node2D" parent="."]
 script = SubResource( 1 )
@@ -222,8 +221,9 @@ texture = ExtResource( 10 )
 centered = false
 
 [node name="GlobalVars" type="Node2D" parent="."]
+position = Vector2( 14, 0 )
 script = ExtResource( 12 )
-gameMode = "Testing"
+game_mode = "Testing"
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -9

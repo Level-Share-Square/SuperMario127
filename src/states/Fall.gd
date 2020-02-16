@@ -2,7 +2,7 @@ extends State
 
 class_name FallState
 	
-func _startCheck(delta):
+func _start_check(delta):
 	return character.velocity.y > 0 && !character.is_grounded() && character.state != character.get_state_instance("Dive") && character.state != character.get_state_instance("WallSlide") and character.state != character.get_state_instance("WallJump")
 
 func _start(delta):
@@ -18,8 +18,5 @@ func _update(delta):
 func _stop(delta):
 	pass
 
-func _stopCheck(delta):
+func _stop_check(delta):
 	return character.is_grounded()
-
-func _generalUpdate(delta):
-	pass

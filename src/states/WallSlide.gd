@@ -4,7 +4,7 @@ class_name WallSlideState
 
 var wall_buffer = 0.0
 
-func _startCheck(delta):
+func _start_check(delta):
 	return character.is_walled()
 
 func _start(delta):
@@ -33,5 +33,5 @@ func _stop(delta):
 	wall_buffer = 0
 	pass
 
-func _stopCheck(delta):
+func _stop_check(delta):
 	return wall_buffer <= 0

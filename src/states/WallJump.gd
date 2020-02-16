@@ -8,7 +8,7 @@ var press_buffer = 0.0
 var wall_jump_timer = 0.0
 var direction_on_wj = 1
 
-func _startCheck(delta):
+func _start_check(delta):
 	return character.state == character.get_state_instance("WallSlide") and press_buffer > 0
 
 func _start(delta):
@@ -35,7 +35,7 @@ func _update(delta):
 func _stop(delta):
 	pass
 
-func _stopCheck(delta):
+func _stop_check(delta):
 	return wall_jump_timer <= 0 or character.is_walled() or character.is_grounded()
 	
 func _generalUpdate(delta):

@@ -2,34 +2,35 @@ extends Resource
 
 class_name Level
 
-var formatVersion: String = "0.1.0"
-var name: String = "My Level"
+var current_format_version := "0.3.0"
+var format_version := "0.3.0"
+var name := "My Level"
 var areas = []
 
-func getVector2(result) -> Vector2:
+func get_vector2(result) -> Vector2:
 	return Vector2(result.x, result.y)
 
-func getArea(result) -> LevelArea:
+func get_area(result) -> LevelArea:
 	var area = LevelArea.new()
-	area.settings = getSettings(result.settings)
-	for tilesResult in result.foregroundTiles:
-		var tiles = getTiles(tilesResult)
+	area.settings = get_settings(result.settings)
+	for tiles_result in result.foreground_tiles:
+		var tiles = get_tiles(tiles_result)
 		for tile in tiles:
-			area.foregroundTiles.append(tile)
-	for objectResult in result.objects:
-		var object = getObject(objectResult)
+			area.foreground_tiles.append(tile)
+	for object_result in result.objects:
+		var object = get_object(object_result)
 		area.objects.append(object)
 	return area
 	
-func getSettings(result) -> LevelAreaSettings:
+func get_settings(result) -> LevelAreaSettings:
 	var settings = LevelAreaSettings.new()
 	settings.background = result.background
 	settings.music = result.music
-	settings.size = getVector2(result.size)
-	settings.spawn = getVector2(result.spawn)
+	settings.size = get_vector2(result.size)
+	settings.spawn = get_vector2(result.spawn)
 	return settings
 	
-func getTiles(result) -> Array:
+func get_tiles(result) -> Array:
 	var tileset_id_string = "0x" + result[0] + result[1]
 	var tile_id_string = "0x" + result[2]
 	var tile_repeat_string = "0x"
@@ -46,33 +47,33 @@ func getTiles(result) -> Array:
 		tiles.append(tile)
 	return tiles
 
-func getObject(result) -> LevelObject:
+func get_object(result) -> LevelObject:
 	var object = LevelObject.new()
 	object.type = result.type
 	object.properties = result.properties
 	return object
 
-func loadIn(json: LevelJSON):
+func load_in(json: LevelJSON):
 	var parse = JSON.parse(json.contents)
 	if parse.error != 0:
 		print("Error " + parse.error_string + " at line " + parse.error_line)
 		
 	var result = parse.result
-	assert(result.formatVersion)
+	assert(result.format_version)
 	assert(result.name)
-	formatVersion = result.formatVersion
+	format_version = result.format_version
 	name = result.name
-	if formatVersion == "0.2.0":
-		for areaResult in result.areas:
-			var area = getArea(areaResult)
+	if format_version == current_format_version:
+		for area_result in result.areas:
+			var area = get_area(area_result)
 			areas.append(area)
 	else:
-		print("Outdated format version. Current version is 0.1.0, but course uses version " + formatVersion + ".")
+		print("Outdated format version. Current version is " + current_format_version + ", but course uses version " + format_version + ".")
 
 func unload(node: Node):
-	var levelObjects = node.get_node("../LevelObjects")
-	for child in levelObjects.get_children():
+	var level_objects = node.get_node("../LevelObjects")
+	for child in level_objects.get_children():
 		child.queue_free()
 
-func saveIn(json: LevelJSON):
+func save_in(json: LevelJSON):
 	pass

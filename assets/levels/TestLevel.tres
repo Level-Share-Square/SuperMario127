@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 contents = "{
-    \"formatVersion\": \"0.2.0\",
+    \"format_version\": \"0.3.0\",
     \"name\":\"My Level\",
     \"areas\":[
         {
@@ -20,8 +20,8 @@ contents = "{
 					}
                 }
             ],
-            \"backgroundTiles\":[\"0000*2400\"],
-			\"foregroundTiles\":[\"000ff\", \"010a\", \"000\"],
+            \"background_tiles\":[\"0000*2400\"],
+			\"foreground_tiles\":[\"000ff\", \"010a\", \"000\"],
             \"settings\":{
                 \"background\": 1,
                 \"music\": 1,
