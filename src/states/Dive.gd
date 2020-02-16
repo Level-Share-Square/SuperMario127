@@ -25,7 +25,6 @@ func _update(delta):
 		sprite.animation = "diveLeft"
 		
 func _stop(delta):
-	character.friction = 2.25
 	character.setStateByName("Slide", delta)
 
 func _stopCheck(delta):

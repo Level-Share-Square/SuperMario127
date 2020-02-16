@@ -9,6 +9,7 @@ func _startCheck(delta):
 	return false
 
 func _start(delta):
+	character.friction = 2.25
 	pass
 
 func _update(delta):
