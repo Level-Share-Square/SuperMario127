@@ -216,10 +216,8 @@ animations = [ {
 [node name="Mario" type="KinematicBody2D"]
 position = Vector2( 32.5, 128 )
 script = ExtResource( 2 )
-initPos = Vector2( 32.5, 128 )
 deceleration = 15.0
 friction = 7.5
-stateNames = PoolStringArray( "Fall", "Jump", "Dive", "Slide" )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 8 )

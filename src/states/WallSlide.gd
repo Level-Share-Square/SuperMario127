@@ -5,10 +5,10 @@ class_name WallSlideState
 var wall_buffer = 0.0
 
 func _startCheck(delta):
-	return character.isWalled()
+	return character.is_walled()
 
 func _start(delta):
-	if character.isWalledRight():
+	if character.is_walled_right():
 		character.direction_on_stick = 1
 	else:
 		character.direction_on_stick = -1
@@ -16,7 +16,7 @@ func _start(delta):
 	pass
 
 func _update(delta):
-	if !character.isWalled() || character.isGrounded():
+	if !character.is_walled() || character.is_grounded():
 		wall_buffer -= delta
 		if wall_buffer <= 0:
 			wall_buffer = 0

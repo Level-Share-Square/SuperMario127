@@ -3,7 +3,7 @@ extends State
 class_name SlideState
 
 onready var sprite = character.get_node("AnimatedSprite")
-onready var divePlayer = character.get_node("JumpSoundPlayer")
+onready var dive_player = character.get_node("JumpSoundPlayer")
 
 func _start(delta):
 	character.friction = 2.25

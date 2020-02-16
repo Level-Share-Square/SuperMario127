@@ -2,26 +2,26 @@ extends State
 
 class_name WallJumpState
 
-export var wallJumpPower = Vector2(350, 320)
+export var walljump_power = Vector2(350, 320)
 
 var press_buffer = 0.0
 var wall_jump_timer = 0.0
 var direction_on_wj = 1
 
 func _startCheck(delta):
-	return character.state == character.getStateInstance("WallSlide") and press_buffer > 0
+	return character.state == character.get_state_instance("WallSlide") and press_buffer > 0
 
 func _start(delta):
-	var jumpPlayer = character.get_node("JumpSoundPlayer")
+	var jump_player = character.get_node("JumpSoundPlayer")
 	press_buffer = 0
-	character.facingDirection = -character.direction_on_stick
-	character.velocity.x = wallJumpPower.x * character.facingDirection
-	character.velocity.y = -wallJumpPower.y
+	character.facing_direction = -character.direction_on_stick
+	character.velocity.x = walljump_power.x * character.facing_direction
+	character.velocity.y = -walljump_power.y
 	character.position.x -= 2
 	character.position.y -= 2
-	direction_on_wj = character.facingDirection
+	direction_on_wj = character.facing_direction
 	wall_jump_timer = 0.45
-	jumpPlayer.play()
+	jump_player.play()
 	pass
 
 func _update(delta):
@@ -36,10 +36,10 @@ func _stop(delta):
 	pass
 
 func _stopCheck(delta):
-	return wall_jump_timer <= 0 or character.isWalled() or character.isGrounded()
+	return wall_jump_timer <= 0 or character.is_walled() or character.is_grounded()
 	
 func _generalUpdate(delta):
-	if Input.is_action_just_pressed("jump") && !character.isGrounded():
+	if Input.is_action_just_pressed("jump") && !character.is_grounded():
 		press_buffer = 0.075
 	if press_buffer > 0:
 		press_buffer -= delta
