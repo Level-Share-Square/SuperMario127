@@ -12,8 +12,10 @@ func getVector2(result) -> Vector2:
 func getArea(result) -> LevelArea:
 	var area = LevelArea.new()
 	area.settings = getSettings(result.settings)
-	area.backgroundTiles = result.backgroundTiles
-	area.foregroundTiles = result.foregroundTiles
+	for tilesResult in result.foregroundTiles:
+		var tiles = getTiles(tilesResult)
+		for tile in tiles:
+			area.foregroundTiles.append(tile)
 	for objectResult in result.objects:
 		var object = getObject(objectResult)
 		area.objects.append(object)
@@ -26,6 +28,23 @@ func getSettings(result) -> LevelAreaSettings:
 	settings.size = getVector2(result.size)
 	settings.spawn = getVector2(result.spawn)
 	return settings
+	
+func getTiles(result) -> Array:
+	var tileset_id_string = "0x" + result[0] + result[1]
+	var tile_id_string = "0x" + result[2]
+	var tile_repeat_string = "0x"
+	for index in range(3, result.length()):
+		tile_repeat_string += result[index]
+	var tileset_id = tileset_id_string.hex_to_int()
+	var tile_id = tile_id_string.hex_to_int()
+	var tile_repeat = tile_repeat_string.hex_to_int()
+	if tile_repeat == 0:
+		tile_repeat = 1
+	var tile = [tileset_id, tile_id]
+	var tiles = []
+	for iterator in range(tile_repeat):
+		tiles.append(tile)
+	return tiles
 
 func getObject(result) -> LevelObject:
 	var object = LevelObject.new()
@@ -43,7 +62,7 @@ func loadIn(json: LevelJSON):
 	assert(result.name)
 	formatVersion = result.formatVersion
 	name = result.name
-	if formatVersion == "0.1.0":
+	if formatVersion == "0.2.0":
 		for areaResult in result.areas:
 			var area = getArea(areaResult)
 			areas.append(area)

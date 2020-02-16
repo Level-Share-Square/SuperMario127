@@ -3,8 +3,8 @@ extends Resource
 class_name LevelArea
 
 var objects = []
-var backgroundTiles: PoolStringArray
-var foregroundTiles: PoolStringArray
+var backgroundTiles := []
+var foregroundTiles := []
 var settings: LevelAreaSettings
 
 func getTrueValue(value):
