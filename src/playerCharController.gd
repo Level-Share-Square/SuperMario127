@@ -2,20 +2,20 @@ extends KinematicBody2D
 
 class_name Character
 
-export var initPos = Vector2(0, 0)
+export var init_pos = Vector2(0, 0)
 export var velocity = Vector2(0, 0)
-var lastVelocity = Vector2(0, 0)
-export var gravityScale = 1
-export var facingDirection = 1
+var last_velocity = Vector2(0, 0)
+export var gravity_scale = 1
+export var facing_direction = 1
 
-export var moveSpeed = 216.0
+export var move_speed = 216.0
 export var acceleration = 7.5
 export var deceleration = 25.0
-export var airAccel = 7.5
+export var air_accel = 7.5
 export var friction = 10.5
-export var airFriction = 1.15
-export var jumpPower = 350.0
-var jumpPlaying = true
+export var air_fricc = 1.15
+export var jump_power = 350.0
+var jump_playing = true
 
 export var divePower = Vector2(1350, 75)
 var diving = false
@@ -30,7 +30,7 @@ var lastAboveRotLimit = false
 var canJump = true
 var canMove = true
 
-export var wallJumpPower = Vector2(350, 320)
+export var walljump_power = Vector2(350, 320)
 var directionOnWJ = 1
 var direction_on_stick = 1
 var wallJumping = false
@@ -43,75 +43,75 @@ var wjBuffer = 0.0
 var wallBuffer = 0.0
 
 var state = null
-var lastState = null
+var last_state = null
 var controllable = true
-export var stateNames: PoolStringArray = []
+export var state_names: PoolStringArray = []
 var states = []
-var stateMap = {}
+var state_map = {}
 
 # Collision vars
-var collisionDown
-var collisionUp
-var collisionLeft
-var collisionRight
+var collision_down
+var collision_up
+var collision_left
+var collision_right
 
 
-onready var globalVarsNode = get_node("../GlobalVars")
-onready var levelSettingsNode = get_node("../LevelSettings")
-onready var collisionShape = get_node("CollisionShape2D")
+onready var global_vars_node = get_node("../GlobalVars")
+onready var level_settings_node = get_node("../LevelSettings")
+onready var collision_shape = get_node("CollisionShape2D")
 onready var sprite = get_node("AnimatedSprite")
-onready var jumpPlayer = get_node("JumpSoundPlayer")
-onready var divePlayer = get_node("DiveSoundPlayer")
-onready var fallPlayer = get_node("FallSoundPlayer")
+onready var jump_player = get_node("JumpSoundPlayer")
+onready var dive_player = get_node("DiveSoundPlayer")
+onready var fall_player = get_node("FallSoundPlayer")
 
-func isGrounded():
+func is_grounded():
 	return test_move(self.transform, Vector2(0, 0.1))
 	
-func isWalled():
-	return isWalledLeft() or isWalledRight()
+func is_walled():
+	return is_walled_left() or is_walled_right()
 
-func isWalledLeft():
+func is_walled_left():
 	return test_move(self.transform, Vector2(-0.1, 0))
 
-func isWalledRight():
+func is_walled_right():
 	return test_move(self.transform, Vector2(0.1, 0))
 
 func hide():
 	visible = false
 	velocity = Vector2(0, 0)
-	position = initPos
+	position = init_pos
 	
 func show():
 	visible = true
 	
-func setState(state, delta: float):
-	var oldState = self.state
+func set_state(state, delta: float):
+	var old_state = self.state
 	self.state = null
-	if oldState != null:
-		oldState._stop(delta);
+	if old_state != null:
+		old_state._stop(delta);
 	if state != null:
 		self.state = state;
 		state._start(delta);
 	
-func getStateInstance(name: String):
-	return stateMap[name]
+func get_state_instance(name: String):
+	return state_map[name]
 	
-func setStateByName(name: String, delta: float):
-	setState(stateMap[name], delta)
+func set_state_by_name(name: String, delta: float):
+	set_state(state_map[name], delta)
 	
 func _ready():
-	for name in stateNames:
+	for name in state_names:
 		var state = load("res://assets/states/" + name + ".tres")
 		state.character = self
 		state.name = name
 		states.append(state)
-		stateMap[name] = state
+		state_map[name] = state
 	
 func _physics_process(delta: float):
 
 	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")
 
-	if globalVarsNode.gameMode != "Editing":
+	if global_vars_node.gameMode != "Editing":
 
 		# Buffers
 		if jumpBuffer > 0:
@@ -136,79 +136,79 @@ func _physics_process(delta: float):
 				wallJumpTimer = 0
 
 		# Gravity
-		velocity += globalVarsNode.gravity * Vector2(gravityScale, gravityScale)
+		velocity += global_vars_node.gravity * Vector2(gravity_scale, gravity_scale)
 
 		# Collision Checks
 		# Down
 		if (test_move(self.transform, Vector2(0, 0.1))):
-			collisionDown = true
+			collision_down = true
 			velocity.y = 0
 			ledgeBuffer = 0.075
 		# Up
 		if (test_move(self.transform, Vector2(0, -0.1))):
-			collisionUp = true
+			collision_up = true
 			velocity.y = 10
 		# Left
 		if (test_move(self.transform, Vector2(-0.1, 0))):
-			collisionLeft = true
+			collision_left = true
 			velocity.x = 0
 		# Right
 		if (test_move(self.transform, Vector2(0.1, 0))):
-			collisionRight = true
+			collision_right = true
 			velocity.x = 0
 
 		# Movement
 		var moveDirection = 0
-		if (Input.is_action_pressed("move_left") && state != getStateInstance("Slide")):
+		if (Input.is_action_pressed("move_left") && state != get_state_instance("Slide")):
 			moveDirection = -1
-		elif (Input.is_action_pressed("move_right") && state != getStateInstance("Slide")):
+		elif (Input.is_action_pressed("move_right") && state != get_state_instance("Slide")):
 			moveDirection = 1
 		if moveDirection != 0:
-			if isGrounded():
+			if is_grounded():
 				if ((velocity.x > 0 && moveDirection == -1) || (velocity.x < 0 && moveDirection == 1)):
 					velocity.x += deceleration * moveDirection
-				elif ((velocity.x < moveSpeed && moveDirection == 1) || (velocity.x > -moveSpeed && moveDirection == -1)):
+				elif ((velocity.x < move_speed && moveDirection == 1) || (velocity.x > -move_speed && moveDirection == -1)):
 					velocity.x += acceleration * moveDirection
-				elif ((velocity.x > moveSpeed && moveDirection == 1) || (velocity.x < -moveSpeed && moveDirection == -1)):
+				elif ((velocity.x > move_speed && moveDirection == 1) || (velocity.x < -move_speed && moveDirection == -1)):
 					velocity.x -= 3.5 * moveDirection
-				facingDirection = moveDirection
+				facing_direction = moveDirection
 
 				if moveDirection == 1:
 					sprite.animation = "movingRight"
 				else:
 					sprite.animation = "movingLeft"
-				if (abs(velocity.x) > moveSpeed):
-					sprite.speed_scale = abs(velocity.x) / moveSpeed
+				if (abs(velocity.x) > move_speed):
+					sprite.speed_scale = abs(velocity.x) / move_speed
 				else:
 					sprite.speed_scale = 1
 			else:
-				if ((velocity.x < moveSpeed && moveDirection == 1) || (velocity.x > -moveSpeed && moveDirection == -1)):
-					velocity.x += airAccel * moveDirection
-				elif ((velocity.x > moveSpeed && moveDirection == 1) || (velocity.x < -moveSpeed && moveDirection == -1)):
+				if ((velocity.x < move_speed && moveDirection == 1) || (velocity.x > -move_speed && moveDirection == -1)):
+					velocity.x += air_accel * moveDirection
+				elif ((velocity.x > move_speed && moveDirection == 1) || (velocity.x < -move_speed && moveDirection == -1)):
 					velocity.x -= 0.25 * moveDirection
 
 				if (velocity.x > 0 && moveDirection == 1) or (velocity.x < 0 && moveDirection == -1):
-					facingDirection = moveDirection
+					facing_direction = moveDirection
 		else:
 			if (velocity.x > 0):
 				if (velocity.x > 15):
-					if (isGrounded()):
+					if (is_grounded()):
 						velocity.x -= friction				
 					else:
-						velocity.x -= airFriction
+						velocity.x -= air_fricc
 				else:
 					velocity.x = 0
 			elif (velocity.x < 0):
 				if (velocity.x < -15):
-					if (isGrounded()):
+					if (is_grounded()):
 						velocity.x += friction
 					else:
-						velocity.x += airFriction
+						velocity.x += air_fricc
 				else:
 					velocity.x = 0
 
-			if isGrounded():
-				if facingDirection == 1:
+			if is_grounded():
+				if facing_direction == 1:
 					sprite.animation = "idleRight"
 				else:
 					sprite.animation = "idleLeft"
@@ -219,38 +219,38 @@ func _physics_process(delta: float):
 #		if Input.is_action_just_pressed("jump") && canJump:
 #			jumpBuffer = 0.075
 #		if jumpBuffer > 0 && ledgeBuffer > 0 && canJump:
-#			velocity.y = -jumpPower
+#			velocity.y = -jump_power
 #			position.y -= 3
 #			ledgeBuffer = 0
 #			jumpBuffer = 0
-#			jumpPlaying = true
-#			jumpPlayer.play()
-#			isGrounded() = false
-#		if jumpPlaying && velocity.y < 0 && !isGrounded():
-#			if facingDirection == 1:
+#			jump_playing = true
+#			jump_player.play()
+#			is_grounded() = false
+#		if jump_playing && velocity.y < 0 && !is_grounded():
+#			if facing_direction == 1:
 #				sprite.animation = "jumpRight"
 #			else:
 #				sprite.animation = "jumpLeft"
 #		else:
-#			jumpPlaying = false
-#			if !isGrounded():
-#				if facingDirection == 1:
+#			jump_playing = false
+#			if !is_grounded():
+#				if facing_direction == 1:
 #					sprite.animation = "fallRight"
 #				else:
 #					sprite.animation = "fallLeft"
 #
 #		# Dive
-#		if Input.is_action_pressed("dive") && !isGrounded() && !collisionLeft && !collisionRight && canDive:
-#			velocity.x = velocity.x - (velocity.x - (divePower.x * facingDirection)) / 5
+#		if Input.is_action_pressed("dive") && !is_grounded() && !collision_left && !collision_right && canDive:
+#			velocity.x = velocity.x - (velocity.x - (divePower.x * facing_direction)) / 5
 #			velocity.y += divePower.y
 #			canDive = false
 #			diving = true
 #			oldFriction = friction
 #			rotating = true
 #			canJump = false
-#			divePlayer.play()
+#			dive_player.play()
 #		if (diving):
-#			if (isGrounded()):
+#			if (is_grounded()):
 #				friction = 2.25
 #				diving = false
 #				sliding = true
@@ -260,12 +260,12 @@ func _physics_process(delta: float):
 #				velocity.y = 0
 #			else:
 #				friction = oldFriction
-#			if (facingDirection == 1):
+#			if (facing_direction == 1):
 #				sprite.animation = "diveRight"
 #			else:
 #				sprite.animation = "diveLeft"
 #		if (sliding):
-#			if (facingDirection == 1):
+#			if (facing_direction == 1):
 #				sprite.animation = "diveRight"
 #			else:
 #				sprite.animation = "diveLeft"
@@ -277,7 +277,7 @@ func _physics_process(delta: float):
 #				canJump = true
 #				canMove = true
 #				sprite.rotation_degrees = 0
-#				if (facingDirection == 1):
+#				if (facing_direction == 1):
 #					sprite.animation = "idleRight"
 #				else:
 #					sprite.animation = "idleLeft"
@@ -291,9 +291,9 @@ func _physics_process(delta: float):
 #					canMove = true
 #					friction = oldFriction
 #					velocity.y = -getUpPower
-#					jumpPlayer.play()
+#					jump_player.play()
 #					sprite.rotation_degrees = 0
-#					if (facingDirection == 1):
+#					if (facing_direction == 1):
 #						sprite.animation = "jumpRight"
 #					else:
 #						sprite.animation = "jumpLeft"
@@ -304,42 +304,42 @@ func _physics_process(delta: float):
 #				gettingUp = false
 #				canDive = true
 #		if (rotating || sliding):
-#			var newAngle = ((velocity.y / 7) * facingDirection) + (90 * facingDirection)
-#			if (velocity.y < globalVarsNode.maxGravityVelocity.y):
+#			var newAngle = ((velocity.y / 7) * facing_direction) + (90 * facing_direction)
+#			if (velocity.y < global_vars_node.maxGravityVelocity.y):
 #				sprite.rotation_degrees = newAngle
 #				lastAboveRotLimit = false
 #			else:
 #				if (!lastAboveRotLimit):
-#					sprite.rotation_degrees = ((globalVarsNode.maxGravityVelocity.y / 7) * facingDirection) + (90 * facingDirection)
+#					sprite.rotation_degrees = ((global_vars_node.maxGravityVelocity.y / 7) * facing_direction) + (90 * facing_direction)
 #				sprite.rotation_degrees += 0.1
 #				lastAboveRotLimit = true
 #
 #		# Wall Jump
-#		if Input.is_action_just_pressed("jump") && !isGrounded():
+#		if Input.is_action_just_pressed("jump") && !is_grounded():
 #			wjBuffer = 0.075
-#		if (collisionLeft || collisionRight):
+#		if (collision_left || collision_right):
 #			wallBuffer = 0.1
 #			lastWallDirection = 1
 #			wallJumping = false
-#			if collisionRight:
+#			if collision_right:
 #				lastWallDirection = -1
-#		if !isGrounded() && wallBuffer > 0 && wjBuffer > 0 && !jumpPlaying && !diving:
-#			facingDirection = 1
+#		if !is_grounded() && wallBuffer > 0 && wjBuffer > 0 && !jump_playing && !diving:
+#			facing_direction = 1
 #			if lastWallDirection == -1:
-#				facingDirection = -1
-#			velocity.x = wallJumpPower.x * facingDirection
-#			velocity.y = -wallJumpPower.y
+#				facing_direction = -1
+#			velocity.x = walljump_power.x * facing_direction
+#			velocity.y = -walljump_power.y
 #			self.position.x -= 2
 #			self.position.y -= 2
-#			collisionLeft = false
-#			collisionRight = false
-#			isGrounded() = false
-#			directionOnWJ = facingDirection
+#			collision_left = false
+#			collision_right = false
+#			is_grounded() = false
+#			directionOnWJ = facing_direction
 #			wallJumping = true
 #			wallBuffer = 0
 #			wjBuffer = 0
 #			wallJumpTimer = 0.45
-#			jumpPlayer.play()
+#			jump_player.play()
 #		if diving:
 #			wallJumping = false
 #		if wallJumping:
@@ -347,10 +347,10 @@ func _physics_process(delta: float):
 #				sprite.animation = "jumpRight"
 #			else:
 #				sprite.animation = "jumpLeft"
-#			if (isGrounded()):
+#			if (is_grounded()):
 #				wallJumping = false
-#		elif (collisionLeft || collisionRight) && !diving && !isGrounded():
-#			if (collisionRight):
+#		elif (collision_left || collision_right) && !diving && !is_grounded():
+#			if (collision_right):
 #				sprite.animation = "wallSlideRight"
 #			else:
 #				sprite.animation = "wallSlideLeft"
@@ -362,16 +362,16 @@ func _physics_process(delta: float):
 		move_and_slide(velocity)
 
 		# Boundaries
-		if position.y > (levelSettingsNode.levelSize.y * 32) + 128:
-			#fallPlayer.play()
+		if position.y > (level_settings_node.levelSize.y * 32) + 128:
+			#fall_player.play()
 			kill()
 		if position.x < 0:
 			position.x = 0
 			velocity.x = 0
-		if position.x > levelSettingsNode.levelSize.x * 32:
-			position.x = levelSettingsNode.levelSize.x * 32
+		if position.x > level_settings_node.levelSize.x * 32:
+			position.x = level_settings_node.levelSize.x * 32
 			velocity.x = 0
-		lastVelocity = velocity
+		last_velocity = velocity
 
 func kill():
 	var modeSwitcher = get_node("../ModeSwitcher")
