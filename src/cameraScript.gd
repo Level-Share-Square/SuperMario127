@@ -7,7 +7,7 @@ var lastGameMode = "None"
 export var currentZoomLevel = 1.0
 
 onready var levelSizeNode = get_node("../LevelSettings")
-onready var globalVarsNode = get_node("../GlobalVars")
+onready var global_vars_node = get_node("../GlobalVars")
 onready var character = get_node("../Character")
 
 func _input(event):
@@ -45,11 +45,11 @@ func _gamemode_changed(gameMode):
 
 func _physics_process(deltaTime):
 	var viewportSize = get_viewport_rect().size
-	if lastGameMode != globalVarsNode.gameMode:
-		lastGameMode = globalVarsNode.gameMode
-		_gamemode_changed(globalVarsNode.gameMode)
+	if lastGameMode != global_vars_node.gameMode:
+		lastGameMode = global_vars_node.gameMode
+		_gamemode_changed(global_vars_node.gameMode)
 		
-	if globalVarsNode.gameMode == "Editing":
+	if global_vars_node.gameMode == "Editing":
 		if Input.is_key_pressed(KEY_W) and (self.position.y - viewportSize.y/2) > self.limit_top:
 			self.position -= Vector2(0, cameraSpeed)
 		elif Input.is_key_pressed(KEY_S) and (self.position.y + viewportSize.y/2) < self.limit_bottom:

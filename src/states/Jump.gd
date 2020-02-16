@@ -2,36 +2,36 @@ extends State
 
 class_name JumpState
 
-export var jumpPower: float = 350
+export var jump_power: float = 350
 var jumpBuffer = 0
-var jumpPlaying = false
-onready var sprite = character.get_node("AnimatedSprite")
-onready var jumpPlayer = character.get_node("JumpSoundPlayer")
+var jump_playing = false
 
 func _startCheck(delta):
-	return character.isGrounded() and jumpBuffer > 0 and character.state != character.getStateInstance("Slide")
+	return character.is_grounded() and jumpBuffer > 0 and character.state != character.get_state_instance("Slide")
 
 func _start(delta):
-	character.velocity.y = -jumpPower
+	var jump_player = character.get_node("JumpSoundPlayer")
+	character.velocity.y = -jump_power
 	character.position.y -= 3
 	jumpBuffer = 0
-	jumpPlaying = true
-	jumpPlayer.play()
+	jump_playing = true
+	jump_player.play()
 
 func _update(delta):
-	if jumpPlaying && character.velocity.y < 0 && !character.isGrounded():
-		if character.facingDirection == 1:
+	var sprite = character.get_node("AnimatedSprite")
+	if jump_playing && character.velocity.y < 0 && !character.is_grounded():
+		if character.facing_direction == 1:
 			sprite.animation = "jumpRight"
 		else:
 			sprite.animation = "jumpLeft"
 	else:
-		jumpPlaying = false
+		jump_playing = false
 		
 func _stop(delta):
 	pass
 
 func _stopCheck(delta):
-	return character.isGrounded()
+	return character.is_grounded()
 
 func _generalUpdate(delta):
 	if jumpBuffer > 0:
