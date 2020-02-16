@@ -12,6 +12,7 @@ func _start(delta):
 	pass
 
 func _update(delta):
+	print_debug("a")
 	pass
 
 func _stop(delta):

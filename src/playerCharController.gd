@@ -32,6 +32,7 @@ var canMove = true
 
 export var wallJumpPower = Vector2(350, 320)
 var directionOnWJ = 1
+var direction_on_stick = 1
 var wallJumping = false
 var wallJumpTimer = 0.0
 var lastWallDirection = 1
@@ -67,7 +68,13 @@ func isGrounded():
 	return test_move(self.transform, Vector2(0, 0.1))
 	
 func isWalled():
-	return test_move(self.transform, Vector2(-0.1, 0)) or test_move(self.transform, Vector2(0.1, 0))
+	return isWalledLeft() or isWalledRight()
+
+func isWalledLeft():
+	return test_move(self.transform, Vector2(-0.1, 0))
+
+func isWalledRight():
+	return test_move(self.transform, Vector2(0.1, 0))
 
 func hide():
 	visible = false

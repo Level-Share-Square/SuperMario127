@@ -6,7 +6,7 @@ onready var shape := CollisionShape2D.new()
 onready var sound := AudioStreamPlayer.new()
 
 var collected = false
-var destroyTimer = 0.0
+var destroy_timer = 0.0
 
 func destroy():
 	queue_free()
@@ -16,7 +16,7 @@ func collect(body):
 		sound.play()
 		collected = true;
 		emit_signal("on_collect")
-		destroyTimer = 2
+		destroy_timer = 2
 
 func _ready():
 	texture = load("res://assets/textures/items/coins/yellow.png")
@@ -31,13 +31,13 @@ func _ready():
 	add_child(sound)
 	
 func _physics_process(delta):
-	if destroyTimer > 0:
-		destroyTimer -= delta
+	if destroy_timer > 0:
+		destroy_timer -= delta
 		if self.scale.x > 0:
 			self.scale -= Vector2(0.1, 0.1)
 		else:
 			self.scale = Vector2(0, 0)
 			self.visible = false;
-		if destroyTimer <= 0:
-			destroyTimer = 0
+		if destroy_timer <= 0:
+			destroy_timer = 0
 			destroy()

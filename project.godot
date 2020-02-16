@@ -68,6 +68,16 @@ _global_script_classes=[ {
 "class": "State",
 "language": "GDScript",
 "path": "res://src/State.gd"
+}, {
+"base": "State",
+"class": "WallJumpState",
+"language": "GDScript",
+"path": "res://src/states/WallJump.gd"
+}, {
+"base": "State",
+"class": "WallSlideState",
+"language": "GDScript",
+"path": "res://src/states/WallSlide.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
@@ -81,7 +91,9 @@ _global_script_class_icons={
 "LevelJSON": "",
 "LevelObject": "",
 "SlideState": "",
-"State": ""
+"State": "",
+"WallJumpState": "",
+"WallSlideState": ""
 }
 
 [application]
