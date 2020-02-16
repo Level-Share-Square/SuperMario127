@@ -1,7 +1,7 @@
 extends Node
 
 func _ready():
-	var levelJSON = load("res://assets/levels/TestLevel.tres");
+	var level_JSON = load("res://assets/levels/TestLevel.tres");
 	var level = Level.new();
-	level.loadIn(levelJSON);
-	level.areas[0].loadIn(self);
+	level.load_in(level_JSON);
+	level.areas[0].load_in(self);

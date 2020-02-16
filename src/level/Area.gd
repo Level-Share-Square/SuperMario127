@@ -3,11 +3,11 @@ extends Resource
 class_name LevelArea
 
 var objects = []
-var backgroundTiles := []
-var foregroundTiles := []
+var background_tiles := []
+var foreground_tiles := []
 var settings: LevelAreaSettings
 
-func getTrueValue(value):
+func get_true_value(value):
 	if typeof(value) == TYPE_DICTIONARY:
 		# very hacky cause i dont know how else to add it
 		if value.type == "Vector2":
@@ -15,13 +15,13 @@ func getTrueValue(value):
 	else:
 		return value
 
-func loadObject(object: LevelObject):
-	var objectClass = load("res://src/objects/" + object.type + ".gd")
-	var node = objectClass.new()
+func load_object(object: LevelObject):
+	var object_class = load("res://src/objects/" + object.type + ".gd")
+	var node = object_class.new()
 	for key in object.properties:
 		var value = object.properties[key]
-		var trueValue = getTrueValue(value)
-		node[key] = trueValue
+		var true_value = get_true_value(value)
+		node[key] = true_value
 	return node
 
 func get_position_from_tile_index(index: int) -> Vector2:
@@ -39,15 +39,15 @@ func load_tile(tile: Array) -> int:
 	else:
 		return 1
 
-func loadIn(node: Node):
+func load_in(node: Node):
 	var character = node.get_node("../Character")
 	var level_objects = node.get_node("../LevelObjects")
 	var tile_map = node.get_node("../TileMap")
-	for index in range(foregroundTiles.size()):
-		var tile = foregroundTiles[index]
+	for index in range(foreground_tiles.size()):
+		var tile = foreground_tiles[index]
 		var position = get_position_from_tile_index(index)
 		tile_map.set_cell(position.x, position.y, load_tile(tile))
 	character.position = settings.spawn
 	for object in objects:
-		var nodeObject = loadObject(object)
-		level_objects.add_child(nodeObject)
+		var node_object = load_object(object)
+		level_objects.add_child(node_object)
