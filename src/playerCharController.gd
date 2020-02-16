@@ -111,7 +111,7 @@ func _physics_process(delta: float):
 
 	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")
 
-	if global_vars_node.gameMode != "Editing":
+	if global_vars_node.game_mode != "Editing":
 
 		# Buffers
 		if jumpBuffer > 0:
@@ -362,14 +362,14 @@ func _physics_process(delta: float):
 		move_and_slide(velocity)
 
 		# Boundaries
-		if position.y > (level_settings_node.levelSize.y * 32) + 128:
+		if position.y > (level_settings_node.level_size.y * 32) + 128:
 			#fall_player.play()
 			kill()
 		if position.x < 0:
 			position.x = 0
 			velocity.x = 0
-		if position.x > level_settings_node.levelSize.x * 32:
-			position.x = level_settings_node.levelSize.x * 32
+		if position.x > level_settings_node.level_size.x * 32:
+			position.x = level_settings_node.level_size.x * 32
 			velocity.x = 0
 		last_velocity = velocity
 
