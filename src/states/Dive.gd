@@ -2,15 +2,15 @@ extends State
 
 class_name DiveState
 
-export var divePower: Vector2 = Vector2(1350, 75)
+export var dive_power: Vector2 = Vector2(1350, 75)
 
 func _start_check(delta):
 	return Input.is_action_just_pressed("dive") and !character.is_grounded() and !character.is_walled()
 
 func _start(delta):
 	var dive_player = character.get_node("DiveSoundPlayer")
-	character.velocity.x = character.velocity.x - (character.velocity.x - (divePower.x * character.facing_direction)) / 5
-	character.velocity.y += divePower.y
+	character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
+	character.velocity.y += dive_power.y
 	character.old_friction = character.friction
 	character.rotating = true
 	dive_player.play()
