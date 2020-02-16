@@ -2,7 +2,7 @@ extends State
 
 class_name DiveState
 
-export var divePower: Vector2 = Vector2(1350, 75)
+export var dive_power: Vector2 = Vector2(1350, 75)
 export var maxVelocityX: float = 700
 var last_above_rot_limit = false
 
