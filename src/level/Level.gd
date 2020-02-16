@@ -67,7 +67,7 @@ func loadIn(json: LevelJSON):
 			var area = getArea(areaResult)
 			areas.append(area)
 	else:
-		print("Incorrect format version, current version is 0.1.0 level uses version " + formatVersion)
+		print("Outdated format version. Current version is 0.1.0, but course uses version " + formatVersion + ".")
 
 func unload(node: Node):
 	var levelObjects = node.get_node("../LevelObjects")
