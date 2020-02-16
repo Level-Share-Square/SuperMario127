@@ -85,12 +85,13 @@ func show():
 	visible = true
 	
 func setState(state, delta: float):
+	var oldState = self.state
+	self.state = null
+	if oldState != null:
+		oldState._stop(delta);
 	if state != null:
-		self.state = state
-		state._start(delta)
-	else:
-		self.state._stop(delta)
 		self.state = state;
+		state._start(delta);
 	
 func getStateInstance(name: String):
 	return stateMap[name]
