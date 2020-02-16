@@ -222,6 +222,7 @@ centered = false
 
 [node name="GlobalVars" type="Node2D" parent="."]
 script = ExtResource( 12 )
+game_mode = "Testing"
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -9
