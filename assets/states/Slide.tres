@@ -4,3 +4,4 @@
 
 [resource]
 script = ExtResource( 1 )
+get_up_power = 320

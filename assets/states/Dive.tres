@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource( 1 )
 divePower = Vector2( 1350, 75 )
+maxVelocityX = 700.0

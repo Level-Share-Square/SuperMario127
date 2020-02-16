@@ -224,7 +224,6 @@ centered = false
 [node name="GlobalVars" type="Node2D" parent="."]
 script = ExtResource( 12 )
 gameMode = "Testing"
-maxGravityVelocity = Vector2( 475, 475 )
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -9
@@ -244,7 +243,7 @@ script = ExtResource( 21 )
 script = ExtResource( 27 )
 
 [node name="Character" parent="." instance=ExtResource( 13 )]
-state_names = PoolStringArray( "Jump", "Dive", "Fall", "Slide", "WallJump", "WallSlide" )
+state_names = PoolStringArray( "Fall", "Jump", "Dive", "Slide", "WallSlide", "WallJump" )
 
 [node name="ModeSwitcher" type="Node2D" parent="."]
 script = ExtResource( 14 )
