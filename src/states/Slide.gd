@@ -11,5 +11,5 @@ func _start(delta):
 func _stop(delta):
 	character.friction = 7.5
 
-func _stopCheck(delta):
+func _stop_check(delta):
 	return abs(character.velocity.x) < 5 or Input.is_action_just_pressed("jump")

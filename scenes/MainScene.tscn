@@ -221,6 +221,7 @@ texture = ExtResource( 10 )
 centered = false
 
 [node name="GlobalVars" type="Node2D" parent="."]
+position = Vector2( 14, 0 )
 script = ExtResource( 12 )
 game_mode = "Testing"
 
