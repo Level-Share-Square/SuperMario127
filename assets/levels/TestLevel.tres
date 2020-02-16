@@ -21,7 +21,7 @@ contents = "{
                 }
             ],
             \"backgroundTiles\":[\"0000*2400\"],
-			\"foregroundTiles\":[\"000f\", \"010a\", \"000\"],
+			\"foregroundTiles\":[\"000ff\", \"010a\", \"000\"],
             \"settings\":{
                 \"background\": 1,
                 \"music\": 1,

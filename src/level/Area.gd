@@ -24,10 +24,30 @@ func loadObject(object: LevelObject):
 		node[key] = trueValue
 	return node
 
+func get_position_from_tile_index(index: int) -> Vector2:
+	return Vector2(
+		index - (floor(index / settings.size.x) * settings.size.x),
+		floor(index / settings.size.x)
+	)
+
+func get_tile_index_from_position(position: Vector2) -> int:
+	return int(floor((settings.size.x * position.y) + position.x))
+	
+func load_tile(tile: Array) -> int:
+	if tile[0] == 0:
+		return -1
+	else:
+		return 1
+
 func loadIn(node: Node):
 	var character = node.get_node("../Character")
-	var levelObjects = node.get_node("../LevelObjects")
+	var level_objects = node.get_node("../LevelObjects")
+	var tile_map = node.get_node("../TileMap")
+	for index in range(foregroundTiles.size()):
+		var tile = foregroundTiles[index]
+		var position = get_position_from_tile_index(index)
+		tile_map.set_cell(position.x, position.y, load_tile(tile))
 	character.position = settings.spawn
 	for object in objects:
 		var nodeObject = loadObject(object)
-		levelObjects.add_child(nodeObject)
+		level_objects.add_child(nodeObject)
