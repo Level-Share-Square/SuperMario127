@@ -23,8 +23,11 @@ func _physics_process(delta):
 			if Input.is_mouse_button_pressed(1):
 				if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x + 1:
 					if mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_size.y + 1:
-						self.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, 1)
+						if self.get_cell(mouse_tile_pos.x, mouse_tile_pos.y) != 3:
+							self.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, 3)
+							self.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
 			elif Input.is_mouse_button_pressed(2):
 				if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x + 1:
 					if mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_size.y + 1:
 						self.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, -1)
+						self.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
