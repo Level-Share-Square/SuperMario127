@@ -47,6 +47,7 @@ func load_in(node: Node):
 		var tile = foreground_tiles[index]
 		var position = get_position_from_tile_index(index)
 		tile_map.set_cell(position.x, position.y, load_tile(tile))
+		tile_map.update_bitmask_area(Vector2(position.x, position.y))
 	character.position = settings.spawn
 	for object in objects:
 		var node_object = load_object(object)
