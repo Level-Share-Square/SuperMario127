@@ -70,10 +70,5 @@ func load_in(json: LevelJSON):
 	else:
 		print("Outdated format version. Current version is " + current_format_version + ", but course uses version " + format_version + ".")
 
-func unload(node: Node):
-	var level_objects = node.get_node("../LevelObjects")
-	for child in level_objects.get_children():
-		child.queue_free()
-
 func save_in(json: LevelJSON):
 	pass

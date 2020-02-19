@@ -37,7 +37,7 @@ func load_tile(tile: Array) -> int:
 	if tile[0] == 0:
 		return -1
 	else:
-		return 1
+		return 2
 
 func load_in(node: Node):
 	var character = node.get_node("../Character")
@@ -52,3 +52,12 @@ func load_in(node: Node):
 	for object in objects:
 		var node_object = load_object(object)
 		level_objects.add_child(node_object)
+
+func unload(node: Node):
+	var level_objects = node.get_node("../LevelObjects")
+	var tile_map = node.get_node("../TileMap")
+	for child in level_objects.get_children():
+		child.queue_free()
+	for x in range(settings.size.x):
+		for y in range(settings.size.y):
+			tile_map.set_cell(x, y, -1)

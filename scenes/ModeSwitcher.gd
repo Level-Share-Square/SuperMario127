@@ -15,6 +15,7 @@ func switch_modes():
 	
 func switch_to_editing():
 	global_vars_node.game_mode = "Editing"
+	global_vars_node.unload()
 	character.hide()
 	ghost_tile.show()
 	grid.show()
@@ -23,6 +24,7 @@ func switch_to_editing():
 
 func switch_to_testing():
 	global_vars_node.game_mode = "Testing"
+	global_vars_node.reload()
 	character.show()
 	ghost_tile.hide()
 	grid.hide()

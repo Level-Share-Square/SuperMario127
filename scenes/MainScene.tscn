@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://assets/textures/backgrounds/1/background.png" type="Texture" id=1]
 [ext_resource path="res://src/cameraScript.gd" type="Script" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://assets/textures/ui/item_box_hover.png" type="Texture" id=28]
 [ext_resource path="res://assets/textures/ui/item_box.png" type="Texture" id=29]
 [ext_resource path="res://assets/textures/tilesets/bricks/icon.png" type="Texture" id=30]
+[ext_resource path="res://assets/levels/TestLevel.tres" type="Resource" id=31]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -368,6 +369,7 @@ centered = false
 position = Vector2( 14, 0 )
 script = ExtResource( 12 )
 game_mode = "Testing"
+levelJSON = ExtResource( 31 )
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = 2
