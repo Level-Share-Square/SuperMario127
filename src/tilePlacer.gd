@@ -9,8 +9,7 @@ export var selected_tile:int = 3
 export var selected_tile_rect:Rect2 = Rect2(96, 0, 32, 32)
 
 func _ready():
-	var level_size_temp = level_size_node.level_size
-	level_size = Vector2(level_size_temp.x * 32, level_size_temp.y * 32)
+	level_size = level_size_node.level_size
 	pass
 
 func _physics_process(delta):
@@ -29,13 +28,47 @@ func _physics_process(delta):
 		
 		if mouse_screen_pos.y > 70:
 			if Input.is_mouse_button_pressed(1):
-				if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x + 1:
-					if mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_size.y + 1:
+				if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x:
+					if mouse_tile_pos.y > -1 and mouse_tile_pos.y < level_size.y:
 						if self.get_cell(mouse_tile_pos.x, mouse_tile_pos.y) != selected_tile:
 							self.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, selected_tile)
-							self.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
+							
+							if mouse_tile_pos.x == 0:
+								self.set_cell(-1, mouse_tile_pos.y, selected_tile)
+							elif mouse_tile_pos.x == level_size.x - 1:
+								self.set_cell(level_size.x, mouse_tile_pos.y, selected_tile)
+								
+							if mouse_tile_pos.y == 0:
+								self.set_cell(mouse_tile_pos.x, -1, selected_tile)	
+							elif mouse_tile_pos.y == level_size.y - 1:
+								self.set_cell(mouse_tile_pos.x, level_size.y, selected_tile)
+								
+							if mouse_tile_pos.x == 0 and mouse_tile_pos.y == 0:
+								self.set_cell(-1, -1, selected_tile)
+								
+							if mouse_tile_pos.x == level_size.x - 1 and mouse_tile_pos.y == level_size.y - 1:
+								self.set_cell(level_size.x, level_size.y, selected_tile)
+								
+							self.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))					
 			elif Input.is_mouse_button_pressed(2):
-				if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x + 1:
-					if mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_size.y + 1:
+				if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x:
+					if mouse_tile_pos.y > -1 and mouse_tile_pos.y < level_size.y:
 						self.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, -1)
+
+						if mouse_tile_pos.x == 0:
+							self.set_cell(-1, mouse_tile_pos.y, -1)
+						elif mouse_tile_pos.x == level_size.x - 1:
+							self.set_cell(level_size.x, mouse_tile_pos.y, -1)
+							
+						if mouse_tile_pos.y == 0:
+							self.set_cell(mouse_tile_pos.x, -1, -1)	
+						elif mouse_tile_pos.y == level_size.y - 1:
+							self.set_cell(mouse_tile_pos.x, level_size.y, -1)
+							
+						if mouse_tile_pos.x == 0 and mouse_tile_pos.y == 0:
+							self.set_cell(-1, -1, -1)
+							
+						if mouse_tile_pos.x == level_size.x - 1 and mouse_tile_pos.y == level_size.y - 1:
+							self.set_cell(level_size.x, level_size.y, -1)
+							
 						self.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
