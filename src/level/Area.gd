@@ -32,22 +32,18 @@ func get_position_from_tile_index(index: int) -> Vector2:
 
 func get_tile_index_from_position(position: Vector2) -> int:
 	return int(floor((settings.size.x * position.y) + position.x))
-	
-func load_tile(tile: Array) -> int:
-	if tile[0] == 0:
-		return -1
-	else:
-		return 2
 
 func load_in(node: Node):
 	var character = node.get_node("../Character")
 	var level_objects = node.get_node("../LevelObjects")
 	var tile_map = node.get_node("../TileMap")
+	var global_vars = node.get_node("../GlobalVars")
 	for index in range(foreground_tiles.size()):
 		var tile = foreground_tiles[index]
 		var position = get_position_from_tile_index(index)
-		tile_map.set_cell(position.x, position.y, load_tile(tile))
-		tile_map.update_bitmask_area(Vector2(position.x, position.y))
+		print(global_vars.get_tile(tile[0], tile[1]))
+		tile_map.set_cell(position.x, position.y, global_vars.get_tile(tile[0], tile[1]))
+#		tile_map.update_bitmask_area(Vector2(position.x, position.y))
 	character.position = settings.spawn
 	for object in objects:
 		var node_object = load_object(object)

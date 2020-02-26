@@ -27,3 +27,16 @@ func reload():
 	unload()
 	area = level.areas[areaIndex]
 	area.load_in(self)
+		
+func get_tile(tileset_id, tile_id):
+	var level_tilesets : LevelTilesets = load("res://assets/level_tilesets.tres")
+	var tileset : LevelTileset = load("res://assets/tilesets/" + level_tilesets.tilesets[tileset_id] + ".tres")
+	if tile_id == 0:
+		return tileset.block_tile_id
+	elif tile_id == 1:
+		return tileset.slab_tile_id
+	elif tile_id == 2:
+		return tileset.left_slope_tile_id
+	else:
+		return tileset.right_slope_tile_id
+	

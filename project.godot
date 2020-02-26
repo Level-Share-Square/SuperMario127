@@ -64,6 +64,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/level/Object.gd"
 }, {
+"base": "Resource",
+"class": "LevelTileset",
+"language": "GDScript",
+"path": "res://src/level/Tileset.gd"
+}, {
+"base": "Resource",
+"class": "LevelTilesets",
+"language": "GDScript",
+"path": "res://src/level/Tilesets.gd"
+}, {
 "base": "State",
 "class": "SlideState",
 "language": "GDScript",
@@ -101,6 +111,8 @@ _global_script_class_icons={
 "LevelEditor": "",
 "LevelJSON": "",
 "LevelObject": "",
+"LevelTileset": "",
+"LevelTilesets": "",
 "SlideState": "",
 "State": "",
 "TileButton": "",
