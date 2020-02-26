@@ -5,9 +5,8 @@ onready var level_size_node = get_node("../LevelSettings")
 onready var global_vars_node = get_node("../GlobalVars")
 onready var ghost_tile = get_node("../GhostTile")
 onready var global_vars = get_node("../GlobalVars")
+onready var air_tile = global_vars.get_tile(0, 0)
 
-export var selected_tileset_id := 1
-export var selected_tile_id := 0
 export var selected_tile_rect:Rect2 = Rect2(96, 0, 32, 32)
 
 func _ready():
@@ -28,16 +27,17 @@ func _physics_process(delta):
 #		else:
 #			ghost_tile.texture = load("res://assets/textures/tilesets/bricks/tileset.png")
 		ghost_tile.region_rect = selected_tile_rect
-		
+		var tile = global_vars.get_tile(global_vars.selected_tileset_id, global_vars.selected_tile_id)
 		if mouse_screen_pos.y > 70:
 			if Input.is_mouse_button_pressed(1):
 				if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x + 1:
 					if mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_size.y + 1:
-						if self.get_cell(mouse_tile_pos.x, mouse_tile_pos.y) != 0:
-							global_vars.editor.set_tile(selected_tileset_id, selected_tile_id)
-							self.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
+						set_cell(mouse_tile_pos.x, mouse_tile_pos.y, tile)
+						global_vars.editor.set_tile(global_vars.selected_tileset_id, global_vars.selected_tile_id)
+#						self.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
 			elif Input.is_mouse_button_pressed(2):
 				if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x + 1:
 					if mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_size.y + 1:
+						set_cell(mouse_tile_pos.x, mouse_tile_pos.y, air_tile)
 						global_vars.editor.set_tile(0, 0)
-						self.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
+#						self.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))

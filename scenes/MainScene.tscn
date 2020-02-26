@@ -306,7 +306,7 @@ script = ExtResource( 25 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-tileset = 2
+tileset_id = 2
 tile_rect = Rect2( 128, 0, 32, 32 )
 
 [node name="Icon2" type="Sprite" parent="UI/Banner/Grass"]

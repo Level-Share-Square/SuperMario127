@@ -10,7 +10,8 @@ var level := Level.new()
 var area : LevelArea
 var editor := LevelEditor.new()
 
-var selected_tile := 1
+var selected_tile_id := 0
+var selected_tileset_id := 1
 var selected_tile_rect := Rect2(96, 0, 32, 32)
 
 func _ready():
