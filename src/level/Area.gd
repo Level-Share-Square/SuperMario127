@@ -33,7 +33,7 @@ func get_position_from_tile_index(index: int) -> Vector2:
 func get_tile_index_from_position(position: Vector2) -> int:
 	return int(floor((settings.size.x * position.y) + position.x))
 
-func load_in(node: Node):
+func load_in(node: Node, isEditing: bool):
 	var character = node.get_node("../Character")
 	var level_objects = node.get_node("../LevelObjects")
 	var tile_map = node.get_node("../TileMap")
@@ -44,9 +44,10 @@ func load_in(node: Node):
 		tile_map.set_cell(position.x, position.y, global_vars.get_tile(tile[0], tile[1]))
 #		tile_map.update_bitmask_area(Vector2(position.x, position.y))
 	character.position = settings.spawn
-	for object in objects:
-		var node_object = load_object(object)
-		level_objects.add_child(node_object)
+	if !isEditing:
+		for object in objects:
+			var node_object = load_object(object)
+			level_objects.add_child(node_object)
 
 func unload(node: Node):
 	var level_objects = node.get_node("../LevelObjects")

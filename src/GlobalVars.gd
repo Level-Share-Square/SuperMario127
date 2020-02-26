@@ -27,7 +27,7 @@ func unload():
 func reload():
 	unload()
 	area = level.areas[areaIndex]
-	area.load_in(self)
+	area.load_in(self, false)
 		
 func get_tile(tileset_id, tile_id):
 	var level_tilesets : LevelTilesets = load("res://assets/level_tilesets.tres")
