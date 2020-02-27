@@ -392,6 +392,7 @@ position = Vector2( 14, 0 )
 script = ExtResource( 12 )
 game_mode = "Testing"
 levelJSON = ExtResource( 31 )
+placement_mode = "Tile"
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = 2

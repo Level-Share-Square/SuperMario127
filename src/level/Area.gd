@@ -27,6 +27,7 @@ func load_object(object: LevelObject):
 func load_editor_object(object: LevelObject):
 	var object_class = load("res://src/editor_objects/" + object.type + ".gd")
 	var node = object_class.new()
+	node.level_object = object
 	for key in object.properties:
 		var value = object.properties[key]
 		var true_value = get_true_value(value)

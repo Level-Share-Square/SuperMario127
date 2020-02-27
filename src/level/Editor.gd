@@ -41,5 +41,8 @@ func create_object(node: Node, type: String, properties: Dictionary):
 		var node_object = area.load_editor_object(level_object)
 		level_objects.add_child(node_object)
 
-func delete_object(object: LevelObject):
-	pass
+func delete_object_at_position(node: Node, position: Vector2):
+	var object_node = get_object_at_position(node, position)
+	if object_node:
+		area.objects.erase(object_node.level_object)
+		object_node.queue_free()

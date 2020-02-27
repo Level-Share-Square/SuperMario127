@@ -6,6 +6,7 @@ export var gravity = Vector2(0, 7.82)
 export var max_gravity_velocity = Vector2(950, 950)
 export var levelJSON : Resource
 export var areaIndex := 0
+export var placement_mode = "Drag"
 var level := Level.new()
 var area : LevelArea
 var editor := LevelEditor.new()
@@ -43,3 +44,9 @@ func get_tile(tileset_id, tile_id):
 	else:
 		return tileset.right_slope_tile_id
 	
+func _process(delta):
+	if game_mode == "Editing" && Input.is_action_just_pressed("switch_placement_mode"):
+		if placement_mode == "Drag":
+			placement_mode = "Tile"
+		else:
+			placement_mode = "Drag"
