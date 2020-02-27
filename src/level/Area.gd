@@ -65,8 +65,8 @@ func load_in(node: Node, isEditing: bool):
 func unload(node: Node):
 	var level_objects = node.get_node("../LevelObjects")
 	var tile_map = node.get_node("../TileMap")
-	for child in level_objects.get_children():
-		child.queue_free()
+	for object in level_objects.get_children():
+		object.queue_free()
 	for x in range(settings.size.x):
 		for y in range(settings.size.y):
 			tile_map.set_cell(x, y, -1)

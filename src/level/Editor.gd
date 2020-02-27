@@ -24,9 +24,22 @@ func set_tile(position: Vector2, tileset_id, tile_id):
 	if position.x > size.x || position.y > size.y:
 		area.settings.size = position
 	area.foreground_tiles[index] = [tileset_id, tile_id]
+	
+func get_object_at_position(node: Node, position: Vector2):
+	var level_objects = node.get_node("../LevelObjects")
+	for object in level_objects.get_children():
+		if object.position == position:
+			return object
 
-func create_object(object: LevelObject):
-	pass
+func create_object(node: Node, type: String, properties: Dictionary):
+	var level_objects = node.get_node("../LevelObjects")
+	if !get_object_at_position(node, properties.position):
+		var level_object = LevelObject.new()
+		level_object.type = type
+		level_object.properties = properties
+		area.objects.append(level_object)
+		var node_object = area.load_editor_object(level_object)
+		level_objects.add_child(node_object)
 
 func delete_object(object: LevelObject):
 	pass

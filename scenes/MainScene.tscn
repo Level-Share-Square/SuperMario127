@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://assets/textures/backgrounds/1/background.png" type="Texture" id=1]
 [ext_resource path="res://src/cameraScript.gd" type="Script" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://assets/textures/ui/item_box.png" type="Texture" id=29]
 [ext_resource path="res://assets/textures/tilesets/bricks/icon.png" type="Texture" id=30]
 [ext_resource path="res://assets/levels/TestLevel.tres" type="Resource" id=31]
+[ext_resource path="res://assets/textures/items/coins/yellow.png" type="Texture" id=32]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -270,7 +271,6 @@ script = SubResource( 1 )
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Banner" type="Sprite" parent="UI"]
-visible = false
 scale = Vector2( 0.332695, 0.33526 )
 texture = ExtResource( 7 )
 centered = false
@@ -311,6 +311,28 @@ tile_rect = Rect2( 128, 0, 32, 32 )
 
 [node name="Icon2" type="Sprite" parent="UI/Banner/Grass"]
 texture = ExtResource( 26 )
+centered = false
+offset = Vector2( 0, 9 )
+
+[node name="Coin" type="TextureButton" parent="UI/Banner"]
+margin_left = 324.0
+margin_top = 12.0
+margin_right = 312.0
+margin_bottom = 164.0
+texture_normal = ExtResource( 29 )
+texture_pressed = ExtResource( 29 )
+texture_hover = ExtResource( 28 )
+script = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+is_tile = false
+tileset_id = 2
+object_type = "Coin"
+tile_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Icon2" type="Sprite" parent="UI/Banner/Coin"]
+texture = ExtResource( 32 )
 centered = false
 offset = Vector2( 0, 9 )
 
