@@ -24,6 +24,15 @@ func load_object(object: LevelObject):
 		node[key] = true_value
 	return node
 
+func load_editor_object(object: LevelObject):
+	var object_class = load("res://src/editor_objects/" + object.type + ".gd")
+	var node = object_class.new()
+	for key in object.properties:
+		var value = object.properties[key]
+		var true_value = get_true_value(value)
+		node[key] = true_value
+	return node
+
 func get_position_from_tile_index(index: int) -> Vector2:
 	return Vector2(
 		index - (floor(index / settings.size.x) * settings.size.x),
@@ -42,11 +51,15 @@ func load_in(node: Node, isEditing: bool):
 		var tile = foreground_tiles[index]
 		var position = get_position_from_tile_index(index)
 		tile_map.set_cell(position.x, position.y, global_vars.get_tile(tile[0], tile[1]))
-#		tile_map.update_bitmask_area(Vector2(position.x, position.y))
+		tile_map.update_bitmask_area(Vector2(position.x, position.y))
 	character.position = settings.spawn
 	if !isEditing:
 		for object in objects:
 			var node_object = load_object(object)
+			level_objects.add_child(node_object)
+	else:
+		for object in objects:
+			var node_object = load_editor_object(object)
 			level_objects.add_child(node_object)
 
 func unload(node: Node):

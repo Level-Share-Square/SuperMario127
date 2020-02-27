@@ -91,7 +91,6 @@ func _ready():
 		state_map[name] = state
 	
 func _physics_process(delta: float):
-
 	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")
 
 	if global_vars_node.game_mode != "Editing":

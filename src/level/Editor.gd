@@ -5,6 +5,9 @@ var area: LevelArea
 
 func load_in(node: Node):
 	area.load_in(node, true)
+	
+func unload(node: Node):
+	area.unload(node)
 
 func clear():
 	pass

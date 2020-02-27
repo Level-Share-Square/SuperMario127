@@ -25,6 +25,7 @@ func switch_to_editing():
 
 func switch_to_testing():
 	global_vars_node.game_mode = "Testing"
+	global_vars_node.editor.unload(self)
 	global_vars_node.reload()
 	character.show()
 	ghost_tile.hide()
