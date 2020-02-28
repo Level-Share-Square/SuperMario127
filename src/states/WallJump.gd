@@ -9,7 +9,7 @@ var wall_jump_timer = 0.0
 var direction_on_wj = 1
 
 func _start_check(delta):
-	return character.state == character.get_state_instance("WallSlide") and press_buffer > 0
+	return character.state == character.get_state_instance("WallSlide") && press_buffer > 0 && character.state != character.get_state_instance("Bonked")
 
 func _start(delta):
 	var jump_player = character.get_node("JumpSoundPlayer")
@@ -38,7 +38,7 @@ func _stop(delta):
 func _stop_check(delta):
 	return wall_jump_timer <= 0 or character.is_walled() or character.is_grounded()
 	
-func _generalUpdate(delta):
+func _general_update(delta):
 	if Input.is_action_just_pressed("jump") && !character.is_grounded():
 		press_buffer = 0.075
 	if press_buffer > 0:

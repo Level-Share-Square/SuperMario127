@@ -5,7 +5,7 @@ class_name WallSlideState
 var wall_buffer = 0.0
 
 func _start_check(delta):
-	return character.is_walled()
+	return character.is_walled() and character.state != character.get_state_instance("Bonked")
 
 func _start(delta):
 	if character.is_walled_right():
@@ -27,7 +27,8 @@ func _update(delta):
 		else:
 			sprite.animation = "wallSlideLeft"
 		wall_buffer = 0.075
-	pass
+	if character.is_ceiling():
+		character.velocity.y = 3
 
 func _stop(delta):
 	wall_buffer = 0

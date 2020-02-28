@@ -26,6 +26,8 @@ func _update(delta):
 			sprite.animation = "jumpLeft"
 	else:
 		jump_playing = false
+	if character.is_ceiling():
+		character.velocity.y = 3
 		
 func _stop(delta):
 	pass

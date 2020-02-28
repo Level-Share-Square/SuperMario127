@@ -3,11 +3,12 @@ extends State
 class_name DiveState
 
 export var dive_power: Vector2 = Vector2(1350, 75)
+export var bonk_power: float = 150
 export var maxVelocityX: float = 700
 var last_above_rot_limit = false
 
-func _startCheck(delta):
-	return Input.is_action_pressed("dive") and character.state != character.get_state_instance("Slide")  and !character.is_grounded() and !character.is_walled()
+func _start_check(delta):
+	return Input.is_action_pressed("dive") and character.state != character.get_state_instance("Slide") and !character.is_grounded() and !character.is_walled() and character.state != character.get_state_instance("Bonked")
 
 func _start(delta):
 	var dive_player = character.get_node("DiveSoundPlayer")
@@ -40,8 +41,12 @@ func _update(delta):
 func _stop(delta):
 	var sprite = character.get_node("AnimatedSprite")
 	sprite.rotation_degrees = 0
-	if (character.is_grounded()):
+	if character.is_grounded():
 		character.set_state_by_name("Slide", delta)
+	elif character.is_walled():
+		character.velocity.x = bonk_power * -character.facing_direction 
+		character.position.x -= 2 * character.facing_direction
+		character.set_state_by_name("Bonked", delta)
 
 func _stop_check(delta):
-	return character.is_grounded()
+	return character.is_grounded() or character.is_walled()

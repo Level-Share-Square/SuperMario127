@@ -10,6 +10,15 @@ contents = "{
     \"areas\":[
         {
             \"objects\": [
+                {
+                    \"type\": \"Coin\",
+					\"properties\": {
+						\"position\": {
+							\"type\": \"Vector2\",
+							\"construction\": [400, 350]
+						}
+					}
+                }
             ],
             \"background_tiles\":[\"0000*2400\"],
 			\"foreground_tiles\":[\"000ff\", \"010a\", \"000\"],
