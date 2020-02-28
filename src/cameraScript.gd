@@ -10,7 +10,7 @@ onready var level_size_node = get_node("../LevelSettings")
 onready var global_vars_node = get_node("../GlobalVars")
 onready var character = get_node("../Character")
 
-func _input(event):
+func _input_disabled(event):
 	if event.is_action_pressed("zoom_in"):
 		if current_zoom_level > 0.5:
 			current_zoom_level -= 0.25
