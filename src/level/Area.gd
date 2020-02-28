@@ -62,6 +62,26 @@ func load_in(node: Node, isEditing: bool):
 		for object in objects:
 			var node_object = load_editor_object(object)
 			level_objects.add_child(node_object)
+			
+func save_out(node: Node, isEditing: bool):
+	var tile_map = node.get_node("../TileMap")
+	var global_vars = node.get_node("../GlobalVars")
+	
+	var saved_json = File.new()
+	var level_dictionary = {}
+	level_dictionary.format_version = "0.3.0"
+	level_dictionary.foreground_tiles = []
+	
+	for index in range(settings.size.x * settings.size.y):
+		var position = get_position_from_tile_index(index)
+		var tile = tile_map.get_cell(position.x, position.y)
+		var encoded_tile = global_vars.get_tile_from_godot_id(tile)
+		var appended_tile = encoded_tile[0] + encoded_tile[1]
+		level_dictionary.foreground_tiles.append(appended_tile)
+	
+	var exportstr = JSON.print(level_dictionary)
+	OS.clipboard = exportstr
+	pass
 
 func unload(node: Node):
 	var level_objects = node.get_node("../LevelObjects")

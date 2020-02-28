@@ -119,9 +119,9 @@ func _physics_process(delta: float):
 
 		# Movement
 		var moveDirection = 0
-		if (Input.is_action_pressed("move_left") && (state != get_state_instance("Slide") || is_grounded())) and state != get_state_instance("Bonked"):
+		if (Input.is_action_pressed("move_left") && (state != get_state_instance("Slide") || !is_grounded()) and state != get_state_instance("Bonked")):
 			moveDirection = -1
-		elif (Input.is_action_pressed("move_right") && (state != get_state_instance("Slide") || is_grounded())) and state != get_state_instance("Bonked"):
+		elif (Input.is_action_pressed("move_right") && (state != get_state_instance("Slide") || !is_grounded()) and state != get_state_instance("Bonked")):
 			moveDirection = 1
 		if moveDirection != 0:
 			if is_grounded():

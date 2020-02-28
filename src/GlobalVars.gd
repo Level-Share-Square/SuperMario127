@@ -43,7 +43,25 @@ func get_tile(tileset_id, tile_id):
 		return tileset.left_slope_tile_id
 	else:
 		return tileset.right_slope_tile_id
-	
+		
+func get_tile_from_godot_id(id):
+	var level_tilesets : LevelTilesets = load("res://assets/level_tilesets.tres")
+	if id == -1:
+		var tileset_id = 0
+		var tileset : LevelTileset = load("res://assets/tilesets/" + level_tilesets.tilesets[tileset_id] + ".tres")
+		var tile_id = 0
+		return [str(tileset_id).pad_zeros(2), str(tile_id)]
+	elif id == 2:
+		var tileset_id = 2
+		var tileset : LevelTileset = load("res://assets/tilesets/" + level_tilesets.tilesets[tileset_id] + ".tres")
+		var tile_id = 0
+		return [str(tileset_id).pad_zeros(2), str(tile_id)]
+	elif id == 3:
+		var tileset_id = 1
+		var tileset : LevelTileset = load("res://assets/tilesets/" + level_tilesets.tilesets[tileset_id] + ".tres")
+		var tile_id = 0
+		return [str(tileset_id).pad_zeros(2), str(tile_id)]
+
 func _process(delta):
 	if game_mode == "Editing" && Input.is_action_just_pressed("switch_placement_mode"):
 		if placement_mode == "Drag":

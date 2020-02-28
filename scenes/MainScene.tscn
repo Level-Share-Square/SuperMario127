@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=2]
+[gd_scene load_steps=99 format=2]
 
 [ext_resource path="res://assets/textures/backgrounds/1/background.png" type="Texture" id=1]
 [ext_resource path="res://src/cameraScript.gd" type="Script" id=2]
@@ -40,6 +40,8 @@
 [ext_resource path="res://assets/textures/ui/stop_press.png" type="Texture" id=38]
 [ext_resource path="res://src/StopButton.gd" type="Script" id=39]
 [ext_resource path="res://assets/textures/ui/stop.png" type="Texture" id=40]
+[ext_resource path="res://assets/textures/ui/playdisabled.png" type="Texture" id=41]
+[ext_resource path="res://assets/textures/ui/stopdisabled.png" type="Texture" id=42]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -717,6 +719,7 @@ rect_scale = Vector2( 0.9, 0.9 )
 texture_normal = ExtResource( 35 )
 texture_pressed = ExtResource( 34 )
 texture_hover = ExtResource( 33 )
+texture_disabled = ExtResource( 41 )
 script = ExtResource( 36 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -763,6 +766,7 @@ rect_scale = Vector2( 0.28, 0.28 )
 texture_normal = ExtResource( 40 )
 texture_pressed = ExtResource( 38 )
 texture_hover = ExtResource( 37 )
+texture_disabled = ExtResource( 42 )
 script = ExtResource( 39 )
 __meta__ = {
 "_edit_use_anchors_": false

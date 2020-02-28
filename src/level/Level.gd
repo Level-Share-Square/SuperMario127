@@ -69,6 +69,3 @@ func load_in(json: LevelJSON):
 			areas.append(area)
 	else:
 		print("Outdated format version. Current version is " + current_format_version + ", but course uses version " + format_version + ".")
-
-func save_in(json: LevelJSON):
-	pass
