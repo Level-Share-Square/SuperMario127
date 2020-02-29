@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/states/Fall.gd"
 }, {
+"base": "AnimatedSprite",
+"class": "GameObject",
+"language": "GDScript",
+"path": "res://src/level/GameObject.gd"
+}, {
 "base": "Reference",
 "class": "JSONBeautifier",
 "language": "GDScript",
@@ -126,6 +131,7 @@ _global_script_class_icons={
 "DiveState": "",
 "EditorObject": "",
 "FallState": "",
+"GameObject": "",
 "JSONBeautifier": "",
 "JumpState": "",
 "Level": "",

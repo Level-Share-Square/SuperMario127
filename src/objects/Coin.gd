@@ -1,4 +1,4 @@
-extends AnimatedSprite
+extends GameObject
 
 signal on_collect
 onready var area := Area2D.new()
