@@ -155,6 +155,7 @@ _global_script_class_icons={
 config/name="Super Mario 127 "
 run/main_scene="res://scenes/MainScene.tscn"
 config/icon="res://Assets/icon.png"
+config/windows_native_icon="res://assets/icon.ico"
 
 [debug]
 
