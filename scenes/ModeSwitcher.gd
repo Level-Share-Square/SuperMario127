@@ -59,13 +59,14 @@ func _process(delta):
 	if Input.is_action_just_pressed("copy_level") and global_vars_node.game_mode == "Editing":
 		global_vars_node.editor.save_out(self)
 	if Input.is_action_just_pressed("paste_level") and global_vars_node.game_mode == "Editing":
+		var editor = global_vars_node.editor
+		editor.unload(self)
 		var level = Level.new()
 		var level_json = LevelJSON.new()
 		level_json.contents = OS.clipboard
 		level.load_in(level_json)
 		global_vars_node.level = level
 		global_vars_node.area = level.areas[0]
-		var editor = global_vars_node.editor
 		editor.area = level.areas[0]
 		editor.load_in(self)
 		pass
