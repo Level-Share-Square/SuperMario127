@@ -154,7 +154,9 @@ _global_script_class_icons={
 
 config/name="Super Mario 127 "
 run/main_scene="res://scenes/MainScene.tscn"
-config/icon="res://Assets/icon.png"
+boot_splash/image="res://assets/startup.png"
+boot_splash/bg_color=Color( 0.341176, 0, 0.498039, 1 )
+config/icon="res://assets/icon.png"
 config/windows_native_icon="res://assets/icon.ico"
 
 [debug]
@@ -167,7 +169,7 @@ window/size/width=768
 window/size/height=432
 window/size/test_width=768
 window/size/test_height=432
-mouse_cursor/custom_image="res://Assets/Textures/Cursor/Normal.png"
+mouse_cursor/custom_image="res://assets/textures/cursor/normal.png"
 mouse_cursor/tooltip_position_offset=Vector2( 0, 0 )
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
