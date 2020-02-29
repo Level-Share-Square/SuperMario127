@@ -6,6 +6,7 @@ onready var global_vars_node = get_node("../GlobalVars")
 onready var ghost_tile = get_node("../GhostTile")
 onready var global_vars = get_node("../GlobalVars")
 onready var air_tile = global_vars.get_tile(0, 0)
+var ghost_object
 
 func _ready():
 	var level_size_temp = level_size_node.level_size
@@ -19,14 +20,18 @@ func _physics_process(delta):
 		var mouse_tile_pos = Vector2(floor(mouse_pos.x / 32), floor(mouse_pos.y / 32))
 		var mouse_grid_pos = Vector2((mouse_tile_pos.x * 32) + 16, (mouse_tile_pos.y * 32) + 16)
 		
-		ghost_tile.modulate = Color(1, 1, 1, 0.5)
-		ghost_tile.position = Vector2(mouse_tile_pos.x * 32, mouse_tile_pos.y * 32)
-		
 		if global_vars.is_tile:
+			ghost_tile.visible = true
 			var level_tilesets : LevelTilesets = load("res://assets/level_tilesets.tres")
 			var tileset_info = load("res://assets/tilesets/" + level_tilesets.tilesets[global_vars.selected_tileset_id] + ".tres")
 			ghost_tile.texture = tileset_info.placing_texture
 			ghost_tile.region_rect = tileset_info.placing_rect
+			ghost_tile.modulate = Color(1, 1, 1, 0.5)
+			ghost_tile.position = Vector2(mouse_tile_pos.x * 32, mouse_tile_pos.y * 32)
+		else:
+			ghost_tile.visible = false
+			ghost_object.modulate = Color(1, 1, 1, 0.5)
+			ghost_object.position = Vector2(mouse_tile_pos.x * 32, mouse_tile_pos.y * 32)
 		
 		var tile = global_vars.get_tile(global_vars.selected_tileset_id, global_vars.selected_tile_id)
 		if mouse_screen_pos.y > 70:

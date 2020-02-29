@@ -824,3 +824,5 @@ script = ExtResource( 14 )
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource( 6 )
+
+[node name="GhostTileContainer" type="Node2D" parent="."]
