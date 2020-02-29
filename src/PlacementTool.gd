@@ -30,6 +30,7 @@ func _physics_process(delta):
 			ghost_tile.position = Vector2(mouse_tile_pos.x * 32, mouse_tile_pos.y * 32)
 		else:
 			ghost_tile.visible = false
+			ghost_object.visible = true
 			ghost_object.modulate = Color(1, 1, 1, 0.5)
 			if global_vars_node.placement_mode == "Tile":
 				ghost_object.position = mouse_grid_pos
@@ -59,4 +60,7 @@ func _physics_process(delta):
 				if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x:
 					if mouse_tile_pos.y > -1 and mouse_tile_pos.y < level_size.y:
 						pass
-				
+	else:
+		ghost_tile.visible = false
+		if !global_vars.is_tile:
+			ghost_object.visible = false	
