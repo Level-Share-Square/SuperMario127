@@ -14,6 +14,13 @@ func get_true_value(value):
 			return Vector2(value.construction[0], value.construction[1])
 	else:
 		return value
+		
+func get_value_from_true(value):
+	# again very hacky cause i dont know how else to add it
+	if typeof(value) == TYPE_VECTOR2:
+		return {type="Vector2", construction=[value.x, value.y]}
+	else:
+		return value
 
 func load_object(object: LevelObject):
 	var object_class = load("res://src/objects/" + object.type + ".gd")
@@ -93,7 +100,12 @@ func save_out(node: Node, isEditing: bool):
 	level_dictionary.areas[0].foreground_tiles = rle_encode(level_dictionary.areas[0].foreground_tiles)
 	
 	for index in objects:
-		print("a")
+		var added_object = {}
+		added_object.type = index.type
+		added_object.properties = {}
+		for property in index.properties:
+			added_object.properties[property] = get_value_from_true(index.properties[property])
+		level_dictionary.areas[0].objects.append(added_object)
 	
 	var exportstr = JSON.print(level_dictionary)
 	OS.clipboard = exportstr

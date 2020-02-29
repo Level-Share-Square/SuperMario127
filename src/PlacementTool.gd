@@ -39,7 +39,7 @@ func _physics_process(delta):
 								global_vars.editor.set_tile(mouse_tile_pos, global_vars.selected_tileset_id, global_vars.selected_tile_id)
 								self.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
 						elif global_vars.placement_mode == "Tile":
-							global_vars.editor.create_object(self, global_vars_node.selected_object_type, { "position": mouse_grid_pos })
+							global_vars.editor.create_object(self, global_vars_node.selected_object_type, { "position": mouse_grid_pos, "scale": Vector2(1, 1), "rotation_degrees": 0 })
 			elif Input.is_mouse_button_pressed(2):
 				if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x:
 					if mouse_tile_pos.y > -1 and mouse_tile_pos.y < level_size.y:
