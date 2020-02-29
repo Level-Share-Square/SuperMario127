@@ -31,7 +31,10 @@ func _physics_process(delta):
 		else:
 			ghost_tile.visible = false
 			ghost_object.modulate = Color(1, 1, 1, 0.5)
-			ghost_object.position = Vector2(mouse_tile_pos.x * 32, mouse_tile_pos.y * 32)
+			if global_vars_node.placement_mode == "Tile":
+				ghost_object.position = mouse_grid_pos
+			else:
+				ghost_object.position = mouse_screen_pos
 		
 		var tile = global_vars.get_tile(global_vars.selected_tileset_id, global_vars.selected_tile_id)
 		if mouse_screen_pos.y > 70:
@@ -53,5 +56,7 @@ func _physics_process(delta):
 						self.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
 						global_vars.editor.delete_object_at_position(self, mouse_grid_pos)
 			if Input.is_action_just_pressed("click"):
-				pass
+				if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x:
+					if mouse_tile_pos.y > -1 and mouse_tile_pos.y < level_size.y:
+						pass
 				
