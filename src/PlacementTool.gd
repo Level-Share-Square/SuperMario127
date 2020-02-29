@@ -31,7 +31,7 @@ func _physics_process(delta):
 		else:
 			ghost_tile.visible = false
 			ghost_object.modulate = Color(1, 1, 1, 0.5)
-			ghost_object.position = Vector2(mouse_tile_pos.x * 32, mouse_tile_pos.y * 32)
+			ghost_object.position = Vector2(mouse_tile_pos.x * 32 + 16, mouse_tile_pos.y * 32 + 16)
 		
 		var tile = global_vars.get_tile(global_vars.selected_tileset_id, global_vars.selected_tile_id)
 		if mouse_screen_pos.y > 70:

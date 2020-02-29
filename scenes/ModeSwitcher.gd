@@ -4,6 +4,7 @@ onready var global_vars_node = get_node("../GlobalVars")
 onready var character = get_node("../Character")
 onready var ghost_tile = get_node("../GhostTile")
 onready var grid = get_node("../Grid/ParallaxLayer")
+onready var tile_map = get_node("../TileMap")
 onready var banner = get_node("../UI/Banner")
 onready var test_button = get_node("../UI/Banner/Testing")
 onready var stop_button = get_node("../UI/StopButton")
@@ -28,6 +29,8 @@ func switch_to_editing():
 	grid.show()
 	banner.show()
 	music.stop()
+	if tile_map.ghost_object:
+		tile_map.ghost_object.visible = true
 
 func switch_to_testing():
 	stop_button.disabled = false
@@ -43,6 +46,8 @@ func switch_to_testing():
 	grid.hide()
 	banner.hide()
 	music.play()
+	if tile_map.ghost_object:
+		tile_map.ghost_object.visible = false
 	
 	if Input.is_key_pressed(KEY_SHIFT):
 		character.position = get_global_mouse_position()
