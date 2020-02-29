@@ -15,7 +15,6 @@ var is_tile := true
 var selected_object_type : String
 var selected_tile_id := 0
 var selected_tileset_id := 1
-var selected_tile_rect := Rect2(96, 0, 32, 32)
 
 func _ready():
 	level.load_in(levelJSON)

@@ -2,8 +2,8 @@ extends Resource
 
 class_name Level
 
-var current_format_version := "0.3.0"
-var format_version := "0.3.0"
+var current_format_version := "0.3.1"
+var format_version := "0.3.1"
 var name := "My Level"
 var areas = []
 

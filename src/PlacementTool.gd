@@ -7,8 +7,6 @@ onready var ghost_tile = get_node("../GhostTile")
 onready var global_vars = get_node("../GlobalVars")
 onready var air_tile = global_vars.get_tile(0, 0)
 
-export var selected_tile_rect:Rect2 = Rect2(96, 0, 32, 32)
-
 func _ready():
 	var level_size_temp = level_size_node.level_size
 	level_size = level_size_temp
@@ -23,7 +21,13 @@ func _physics_process(delta):
 		
 		ghost_tile.modulate = Color(1, 1, 1, 0.5)
 		ghost_tile.position = Vector2(mouse_tile_pos.x * 32, mouse_tile_pos.y * 32)
-		ghost_tile.region_rect = selected_tile_rect
+		
+		if global_vars.is_tile:
+			var level_tilesets : LevelTilesets = load("res://assets/level_tilesets.tres")
+			var tileset_info = load("res://assets/tilesets/" + level_tilesets.tilesets[global_vars.selected_tileset_id] + ".tres")
+			ghost_tile.texture = tileset_info.placing_texture
+			ghost_tile.region_rect = tileset_info.placing_rect
+		
 		var tile = global_vars.get_tile(global_vars.selected_tileset_id, global_vars.selected_tile_id)
 		if mouse_screen_pos.y > 70:
 			if Input.is_mouse_button_pressed(1):

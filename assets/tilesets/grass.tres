@@ -1,6 +1,7 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://src/level/Tileset.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/tilesets/grass/tileset.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
@@ -8,3 +9,5 @@ block_tile_id = 2
 slab_tile_id = 0
 left_slope_tile_id = 0
 right_slope_tile_id = 0
+placing_texture = ExtResource( 2 )
+placing_rect = Rect2( 128, 0, 32, 32 )

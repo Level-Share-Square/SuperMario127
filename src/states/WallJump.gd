@@ -17,7 +17,7 @@ func _start(delta):
 	character.facing_direction = -character.direction_on_stick
 	character.velocity.x = walljump_power.x * character.facing_direction
 	character.velocity.y = -walljump_power.y
-	character.position.x -= 2
+	character.position.x += 2 * character.facing_direction
 	character.position.y -= 2
 	direction_on_wj = character.facing_direction
 	wall_jump_timer = 0.45
@@ -35,7 +35,8 @@ func _update(delta):
 		character.velocity.y = 3
 
 func _stop(delta):
-	pass
+	if character.is_walled():
+		character.velocity.x = character.velocity.x/4
 
 func _stop_check(delta):
 	return wall_jump_timer <= 0 or character.is_walled() or character.is_grounded()

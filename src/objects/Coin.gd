@@ -1,4 +1,4 @@
-extends Sprite
+extends AnimatedSprite
 
 signal on_collect
 onready var area := Area2D.new()
@@ -15,11 +15,14 @@ func collect(body):
 	if !collected:
 		sound.play()
 		collected = true;
+		animation = "collect"
 		emit_signal("on_collect")
 		destroy_timer = 2
 
 func _ready():
-	texture = load("res://assets/textures/items/coins/yellow.png")
+	var sprite_frames = load("res://assets/textures/items/coins/yellow.tres")
+	frames = sprite_frames
+	playing = true
 	shape.shape = RectangleShape2D.new()
 	shape.scale = Vector2(1.5, 1.5)
 	area.connect("body_entered", self, "collect")
@@ -33,11 +36,6 @@ func _ready():
 func _physics_process(delta):
 	if destroy_timer > 0:
 		destroy_timer -= delta
-		if self.scale.x > 0:
-			self.scale -= Vector2(0.1, 0.1)
-		else:
-			self.scale = Vector2(0, 0)
-			self.visible = false;
 		if destroy_timer <= 0:
 			destroy_timer = 0
 			destroy()

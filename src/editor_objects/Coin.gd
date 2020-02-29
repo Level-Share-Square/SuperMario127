@@ -1,4 +1,6 @@
 extends EditorObject
 
 func _ready():
-	texture = load("res://assets/textures/items/coins/yellow.png")
+	var sprite_frames = load("res://assets/textures/items/coins/yellow.tres")
+	frames = sprite_frames
+	playing = true

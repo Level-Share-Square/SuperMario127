@@ -22,12 +22,16 @@ func _update(delta):
 	var sprite = character.get_node("AnimatedSprite")
 	if sprite.animation != "spinning":
 		sprite.animation = "spinning"
+	if character.velocity.y < 0:
+		character.gravity_scale = old_gravity_scale
+	else:
+		character.gravity_scale = gravity_scale
 		
 func _stop(delta):
 	character.gravity_scale = old_gravity_scale
 
 func _stop_check(delta):
-	return !Input.is_action_pressed("spin")
+	return !Input.is_action_pressed("spin") or character.is_grounded()
 	
 func _general_update(delta):
 	if character.is_grounded():

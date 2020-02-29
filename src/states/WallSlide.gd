@@ -2,6 +2,8 @@ extends State
 
 class_name WallSlideState
 
+export var gravity_scale: float = 0.5
+var old_gravity_scale = 1
 var wall_buffer = 0.0
 
 func _start_check(delta):
@@ -13,6 +15,8 @@ func _start(delta):
 	else:
 		character.direction_on_stick = -1
 	wall_buffer = 0.075
+	old_gravity_scale = character.gravity_scale
+	character.gravity_scale = gravity_scale
 	pass
 
 func _update(delta):
@@ -29,8 +33,13 @@ func _update(delta):
 		wall_buffer = 0.075
 	if character.is_ceiling():
 		character.velocity.y = 3
+	if character.velocity.y < 0:
+		character.gravity_scale = old_gravity_scale
+	else:
+		character.gravity_scale = gravity_scale
 
 func _stop(delta):
+	character.gravity_scale = old_gravity_scale
 	wall_buffer = 0
 	pass
 
