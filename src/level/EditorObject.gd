@@ -1,4 +1,4 @@
-extends AnimatedSprite
+extends Sprite
 
 class_name EditorObject
 

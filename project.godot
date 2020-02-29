@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/states/Dive.gd"
 }, {
-"base": "AnimatedSprite",
+"base": "Sprite",
 "class": "EditorObject",
 "language": "GDScript",
 "path": "res://src/level/EditorObject.gd"

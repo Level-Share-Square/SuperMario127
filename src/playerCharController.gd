@@ -98,7 +98,6 @@ func _physics_process(delta: float):
 
 	if global_vars_node.game_mode != "Editing":
 
-
 		# Gravity
 		velocity += global_vars_node.gravity * Vector2(gravity_scale, gravity_scale)
 
