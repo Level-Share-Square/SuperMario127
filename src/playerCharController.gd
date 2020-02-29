@@ -17,6 +17,8 @@ export var air_fricc = 1.15
 export var jump_power = 350.0
 var old_friction = 10.5
 var jump_playing = true
+var current_jump = 0
+var jump_animation = 0
 
 var diving = false
 var rotating = false
@@ -192,5 +194,6 @@ func _physics_process(delta: float):
 		last_velocity = velocity
 
 func kill():
+	current_jump = 0
 	var mode_switcher = get_node("../ModeSwitcher")
 	mode_switcher.switch_to_editing()

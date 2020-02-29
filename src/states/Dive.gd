@@ -19,6 +19,7 @@ func _start(delta):
 	dive_player.play()
 	if abs(character.velocity.x) > maxVelocityX:
 		character.velocity.x = maxVelocityX * character.facing_direction
+	character.jump_animation = 0
 
 func _update(delta):
 	var sprite = character.get_node("AnimatedSprite")

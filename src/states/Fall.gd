@@ -11,9 +11,15 @@ func _start(delta):
 func _update(delta):
 	var sprite = character.get_node("AnimatedSprite")
 	if character.facing_direction == 1:
-		sprite.animation = "fallRight"
+		if character.jump_animation == 0:
+			sprite.animation = "fallRight"
+		elif character.jump_animation == 1:
+			sprite.animation = "doubleFallRight"
 	else:
-		sprite.animation = "fallLeft"
+		if character.jump_animation == 0:
+			sprite.animation = "fallLeft"
+		elif character.jump_animation == 1:
+			sprite.animation = "doubleFallLeft"
 
 func _stop(delta):
 	pass

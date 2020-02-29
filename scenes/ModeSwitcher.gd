@@ -9,6 +9,7 @@ onready var banner = get_node("../UI/Banner")
 onready var test_button = get_node("../UI/Banner/Testing")
 onready var stop_button = get_node("../UI/StopButton")
 onready var music = get_node("../Music")
+onready var ghost_tile_container = get_node("../GhostTileContainer")
 
 func switch_modes():
 	if global_vars_node.game_mode == "Testing":
@@ -29,8 +30,7 @@ func switch_to_editing():
 	grid.show()
 	banner.show()
 	music.stop()
-	if tile_map.ghost_object:
-		tile_map.ghost_object.visible = true
+	ghost_tile_container.visible = true
 
 func switch_to_testing():
 	stop_button.disabled = false
@@ -46,8 +46,7 @@ func switch_to_testing():
 	grid.hide()
 	banner.hide()
 	music.play()
-	if tile_map.ghost_object:
-		tile_map.ghost_object.visible = false
+	ghost_tile_container.visible = false
 	
 	if Input.is_key_pressed(KEY_SHIFT):
 		character.position = get_global_mouse_position()

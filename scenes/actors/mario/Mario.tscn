@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
 [ext_resource path="res://src/playerCharController.gd" type="Script" id=2]
@@ -9,10 +9,40 @@
 [ext_resource path="res://scenes/actors/mario/sounds/Dive1.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/actors/mario/sounds/Jump3.wav" type="AudioStream" id=8]
 [ext_resource path="res://scenes/actors/mario/sounds/Dive2.wav" type="AudioStream" id=9]
+[ext_resource path="res://scenes/actors/mario/sounds/TripleJump2.wav" type="AudioStream" id=10]
 [ext_resource path="res://scenes/actors/mario/sounds/Fall.wav" type="AudioStream" id=11]
+[ext_resource path="res://scenes/actors/mario/sounds/TripleJump1.wav" type="AudioStream" id=12]
+[ext_resource path="res://scenes/actors/mario/sounds/DoubleJump2.wav" type="AudioStream" id=13]
+[ext_resource path="res://scenes/actors/mario/sounds/TripleJump3.wav" type="AudioStream" id=14]
+[ext_resource path="res://scenes/actors/mario/sounds/DoubleJump3.wav" type="AudioStream" id=15]
+[ext_resource path="res://scenes/actors/mario/sounds/DoubleJump1.wav" type="AudioStream" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 15 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 4 )
+region = Rect2( 144, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 4 )
+region = Rect2( 240, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 4 )
+region = Rect2( 240, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 4 )
+region = Rect2( 144, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 192, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 4 )
@@ -192,6 +222,36 @@ region = Rect2( 0, 528, 48, 48 )
 
 [sub_resource type="SpriteFrames" id=46]
 animations = [ {
+"frames": [ SubResource( 47 ) ],
+"loop": false,
+"name": "doubleJumpRight",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 51 ) ],
+"loop": true,
+"name": "tripleJumpLeft",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 52 ) ],
+"loop": false,
+"name": "tripleJumpRight",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 48 ) ],
+"loop": false,
+"name": "doubleJumpLeft",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 49 ) ],
+"loop": false,
+"name": "doubleFallLeft",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 50 ) ],
+"loop": false,
+"name": "doubleFallRight",
+"speed": 0.0
+}, {
 "frames": [ SubResource( 2 ) ],
 "loop": false,
 "name": "bonkedRight",
@@ -298,6 +358,32 @@ stream = ExtResource( 8 )
 
 [node name="Jump4" type="AudioStreamPlayer" parent="JumpSoundPlayer"]
 stream = ExtResource( 5 )
+
+[node name="DoubleJumpSoundPlayer" type="Node" parent="."]
+script = ExtResource( 1 )
+sound_number = 1
+
+[node name="DoubleJump1" type="AudioStreamPlayer" parent="DoubleJumpSoundPlayer"]
+stream = ExtResource( 16 )
+
+[node name="DoubleJump2" type="AudioStreamPlayer" parent="DoubleJumpSoundPlayer"]
+stream = ExtResource( 13 )
+
+[node name="DoubleJump3" type="AudioStreamPlayer" parent="DoubleJumpSoundPlayer"]
+stream = ExtResource( 15 )
+
+[node name="TripleJumpSoundPlayer" type="Node" parent="."]
+script = ExtResource( 1 )
+sound_number = 1
+
+[node name="TripleJump1" type="AudioStreamPlayer" parent="TripleJumpSoundPlayer"]
+stream = ExtResource( 12 )
+
+[node name="TripleJump2" type="AudioStreamPlayer" parent="TripleJumpSoundPlayer"]
+stream = ExtResource( 10 )
+
+[node name="TripleJump3" type="AudioStreamPlayer" parent="TripleJumpSoundPlayer"]
+stream = ExtResource( 14 )
 
 [node name="DiveSoundPlayer" type="Node" parent="."]
 script = ExtResource( 1 )

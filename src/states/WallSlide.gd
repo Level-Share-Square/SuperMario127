@@ -20,7 +20,9 @@ func _start(delta):
 	pass
 
 func _update(delta):
-	if !character.is_walled() || character.is_grounded():
+	if !character.is_walled():
+		if (character.velocity.x > 0 and character.direction_on_stick == 1) or (character.velocity.x < 0 and character.direction_on_stick == -1):
+			character.velocity.x = character.velocity.x/4
 		wall_buffer -= delta
 		if wall_buffer <= 0:
 			wall_buffer = 0
@@ -44,4 +46,4 @@ func _stop(delta):
 	pass
 
 func _stop_check(delta):
-	return wall_buffer <= 0
+	return wall_buffer <= 0 or character.is_grounded()
