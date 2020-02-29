@@ -78,6 +78,7 @@ func save_out(node: Node, isEditing: bool):
 		var encoded_tile = global_vars.get_tile_from_godot_id(tile)
 		var appended_tile = encoded_tile[0] + encoded_tile[1]
 		level_dictionary.foreground_tiles.append(appended_tile)
+	level_dictionary.foreground_tiles = rle_encode(level_dictionary.foreground_tiles)
 	
 	var exportstr = JSON.print(level_dictionary)
 	OS.clipboard = exportstr
@@ -91,3 +92,27 @@ func unload(node: Node):
 	for x in range(settings.size.x):
 		for y in range(settings.size.y):
 			tile_map.set_cell(x, y, -1)
+
+func rle_encode(data):
+	var new_data = []
+	var last_index = ""
+	var count = 1
+	
+	for index in data:
+		if index != last_index:
+			if last_index:
+				var append_string = "*" + str(count)
+				if count == 1:
+					append_string = ""
+				new_data.append(last_index + append_string)
+			count = 1
+			last_index = index
+		else:
+			count += 1
+			
+	var append_string_last = "*" + str(count)
+	if count == 1:
+		append_string_last = ""
+	new_data.append(last_index + append_string_last)
+	
+	return new_data

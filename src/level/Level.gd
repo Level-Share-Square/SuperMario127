@@ -31,16 +31,17 @@ func get_settings(result) -> LevelAreaSettings:
 	return settings
 	
 func get_tiles(result) -> Array:
-	var tileset_id_string = "0x" + result[0] + result[1]
-	var tile_id_string = "0x" + result[2]
-	var tile_repeat_string = "0x"
-	for index in range(3, result.length()):
-		tile_repeat_string += result[index]
+	var tileset_id_string = "0x" + result[0] + result[1] + result[2]
+	var tile_id_string = "0x" + result[3]
+	var tile_repeat_string = ""
+	if result.length() > 4:
+		for index in range(5, result.length()):
+			tile_repeat_string += result[index]
+	else:
+		tile_repeat_string += "1"
 	var tileset_id = tileset_id_string.hex_to_int()
 	var tile_id = tile_id_string.hex_to_int()
-	var tile_repeat = tile_repeat_string.hex_to_int()
-	if tile_repeat == 0:
-		tile_repeat = 1
+	var tile_repeat = int(tile_repeat_string)
 	var tile = [tileset_id, tile_id]
 	var tiles = []
 	for iterator in range(tile_repeat):
