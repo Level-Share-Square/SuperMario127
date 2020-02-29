@@ -63,6 +63,9 @@ func _process(delta):
 		var level_json = LevelJSON.new()
 		level_json.contents = OS.clipboard
 		level.load_in(level_json)
-		level.areas[0].unload(self)
-		level.areas[0].load_in(self, false)
+		global_vars_node.level = level
+		global_vars_node.area = level.areas[0]
+		var editor = global_vars_node.editor
+		editor.area = level.areas[0]
+		editor.load_in(self)
 		pass
