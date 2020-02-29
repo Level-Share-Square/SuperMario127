@@ -5,6 +5,7 @@ onready var level_size_node = get_node("../LevelSettings")
 onready var global_vars_node = get_node("../GlobalVars")
 onready var ghost_tile = get_node("../GhostTile")
 onready var global_vars = get_node("../GlobalVars")
+onready var level_objects = get_node("../LevelObjects")
 onready var air_tile = global_vars.get_tile(0, 0)
 var ghost_object
 
@@ -35,7 +36,7 @@ func _physics_process(delta):
 			if global_vars_node.placement_mode == "Tile":
 				ghost_object.position = mouse_grid_pos
 			else:
-				ghost_object.position = mouse_screen_pos
+				ghost_object.position = mouse_pos
 		
 		var tile = global_vars.get_tile(global_vars.selected_tileset_id, global_vars.selected_tile_id)
 		if mouse_screen_pos.y > 70:
@@ -56,10 +57,20 @@ func _physics_process(delta):
 						global_vars.editor.set_tile(mouse_tile_pos, 0, 0)
 						self.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
 						global_vars.editor.delete_object_at_position(self, mouse_grid_pos)
-			if Input.is_action_just_pressed("click"):
-				if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x:
-					if mouse_tile_pos.y > -1 and mouse_tile_pos.y < level_size.y:
-						pass
+			if global_vars.placement_mode == "Drag" && !global_vars.is_tile:
+				if Input.is_action_just_pressed("click"):
+					if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x:
+						if mouse_tile_pos.y > -1 and mouse_tile_pos.y < level_size.y:
+							global_vars.editor.create_object(self, global_vars_node.selected_object_type, { "position": mouse_pos, "scale": Vector2(1, 1), "rotation_degrees": 0 })
+				elif Input.is_action_just_pressed("right_click"):
+					if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x:
+						if mouse_tile_pos.y > -1 and mouse_tile_pos.y < level_size.y:
+							var objectsToDelete = []
+							for object in level_objects.get_children():
+								if (object.position - mouse_pos).length() <= 16:
+									objectsToDelete.append(object)	
+							for object in objectsToDelete:
+								global_vars.editor.delete_object(object)
 	else:
 		ghost_tile.visible = false
 		if !global_vars.is_tile:

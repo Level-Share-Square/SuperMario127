@@ -47,5 +47,8 @@ func create_object(node: Node, type: String, properties: Dictionary):
 func delete_object_at_position(node: Node, position: Vector2):
 	var object_node = get_object_at_position(node, position)
 	if object_node:
-		area.objects.erase(object_node.level_object)
-		object_node.queue_free()
+		delete_object(object_node)
+		
+func delete_object(object_node: Node):
+	area.objects.erase(object_node.level_object)
+	object_node.queue_free()
