@@ -67,18 +67,29 @@ func save_out(node: Node, isEditing: bool):
 	var tile_map = node.get_node("../TileMap")
 	var global_vars = node.get_node("../GlobalVars")
 	
+	var level_size = Vector2(80, 30)
+	var spawn_location = Vector2(0, 0)
+	
 	var saved_json = File.new()
 	var level_dictionary = {}
 	level_dictionary.format_version = "0.3.0"
-	level_dictionary.foreground_tiles = []
+	level_dictionary.name = "My Level"
+	level_dictionary.areas = [{}]
+	level_dictionary.areas[0].foreground_tiles = []
+	level_dictionary.areas[0].objects = []
+	level_dictionary.areas[0].settings = {}
+	level_dictionary.areas[0].settings.background = "1"
+	level_dictionary.areas[0].settings.music = "1"
+	level_dictionary.areas[0].settings.size = {x = level_size.x, y = level_size.y}
+	level_dictionary.areas[0].settings.spawn = {x = spawn_location.x, y = spawn_location.y}
 	
 	for index in range(settings.size.x * settings.size.y):
 		var position = get_position_from_tile_index(index)
 		var tile = tile_map.get_cell(position.x, position.y)
 		var encoded_tile = global_vars.get_tile_from_godot_id(tile)
 		var appended_tile = encoded_tile[0] + encoded_tile[1]
-		level_dictionary.foreground_tiles.append(appended_tile)
-	level_dictionary.foreground_tiles = rle_encode(level_dictionary.foreground_tiles)
+		level_dictionary.areas[0].foreground_tiles.append(appended_tile)
+	level_dictionary.areas[0].foreground_tiles = rle_encode(level_dictionary.areas[0].foreground_tiles)
 	
 	var exportstr = JSON.print(level_dictionary)
 	OS.clipboard = exportstr
