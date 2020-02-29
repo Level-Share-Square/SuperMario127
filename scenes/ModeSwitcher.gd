@@ -58,3 +58,6 @@ func _process(delta):
 		switch_modes()
 	if Input.is_action_just_pressed("copy_level") and global_vars_node.game_mode == "Editing":
 		global_vars_node.editor.save_out(self)
+	if Input.is_action_just_pressed("paste_level") and global_vars_node.game_mode == "Editing":
+		global_vars_node.editor.load_in(OS.clipboard)
+		pass

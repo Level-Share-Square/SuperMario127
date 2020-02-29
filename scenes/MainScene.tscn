@@ -613,7 +613,7 @@ centered = false
 layer = -128
 
 [node name="Sprite" type="Sprite" parent="CloudBackground"]
-position = Vector2( 0, -0.704425 )
+position = Vector2( 0, -0.775714 )
 z_index = -4096
 z_as_relative = false
 texture = ExtResource( 1 )
