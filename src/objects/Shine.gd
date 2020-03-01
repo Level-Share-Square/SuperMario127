@@ -9,7 +9,7 @@ var effects_instance
 var collected = false
 
 func collect(body):
-	if !collected && body == character:
+	if !collected && body == character && character.controllable:
 		character.controllable = false
 		character.set_state_by_name("Fall", 0)
 		character.velocity = Vector2(0, 0)
