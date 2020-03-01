@@ -5,6 +5,7 @@ class_name LevelArea
 var objects = []
 var background_tiles := []
 var foreground_tiles := []
+var very_foreground_tiles := []
 var settings: LevelAreaSettings
 
 func get_true_value(value):
@@ -53,13 +54,27 @@ func get_tile_index_from_position(position: Vector2) -> int:
 func load_in(node: Node, isEditing: bool):
 	var character = node.get_node("../Character")
 	var level_objects = node.get_node("../LevelObjects")
+	var background_tile_map = node.get_node("../BackgroundTileMap")
 	var tile_map = node.get_node("../TileMap")
+	var very_foreground_tile_map = node.get_node("../VeryForegroundTileMap")
 	var global_vars = node.get_node("../GlobalVars")
+	for index in range(very_foreground_tiles.size()):
+		var tile = very_foreground_tiles[index]
+		var position = get_position_from_tile_index(index)
+		very_foreground_tile_map.set_cell(position.x, position.y, global_vars.get_tile(tile[0], tile[1]))
+		very_foreground_tile_map.update_bitmask_area(Vector2(position.x, position.y))
+		
 	for index in range(foreground_tiles.size()):
 		var tile = foreground_tiles[index]
 		var position = get_position_from_tile_index(index)
 		tile_map.set_cell(position.x, position.y, global_vars.get_tile(tile[0], tile[1]))
 		tile_map.update_bitmask_area(Vector2(position.x, position.y))
+		
+	for index in range(background_tiles.size()):
+		var tile = background_tiles[index]
+		var position = get_position_from_tile_index(index)
+		background_tile_map.set_cell(position.x, position.y, global_vars.get_tile(tile[0], tile[1]))
+		background_tile_map.update_bitmask_area(Vector2(position.x, position.y))
 	character.position = settings.spawn
 	if !isEditing:
 		for object in objects:
@@ -71,7 +86,9 @@ func load_in(node: Node, isEditing: bool):
 			level_objects.add_child(node_object)
 			
 func save_out(node: Node, isEditing: bool):
+	var background_tile_map = node.get_node("../BackgroundTileMap")
 	var tile_map = node.get_node("../TileMap")
+	var very_foreground_tile_map = node.get_node("../VeryForegroundTileMap")
 	var global_vars = node.get_node("../GlobalVars")
 	var level_objects = node.get_node("../LevelObjects")
 	
@@ -80,10 +97,12 @@ func save_out(node: Node, isEditing: bool):
 	
 	var saved_json = File.new()
 	var level_dictionary = {}
-	level_dictionary.format_version = "0.3.1"
+	level_dictionary.format_version = "0.3.2"
 	level_dictionary.name = "My Level"
 	level_dictionary.areas = [{}]
+	level_dictionary.areas[0].background_tiles = []
 	level_dictionary.areas[0].foreground_tiles = []
+	level_dictionary.areas[0].very_foreground_tiles = []
 	level_dictionary.areas[0].objects = []
 	level_dictionary.areas[0].settings = {}
 	level_dictionary.areas[0].settings.background = "1"
@@ -97,7 +116,19 @@ func save_out(node: Node, isEditing: bool):
 		var encoded_tile = global_vars.get_tile_from_godot_id(tile)
 		var appended_tile = encoded_tile[0] + encoded_tile[1]
 		level_dictionary.areas[0].foreground_tiles.append(appended_tile)
+		
+		var tile_background = background_tile_map.get_cell(position.x, position.y)
+		var encoded_tile_background = global_vars.get_tile_from_godot_id(tile)
+		var appended_tile_background = encoded_tile[0] + encoded_tile[1]
+		level_dictionary.areas[0].background_tiles.append(appended_tile_background)
+		
+		var tile_very_foreground = very_foreground_tile_map.get_cell(position.x, position.y)
+		var encoded_tile_very_foreground = global_vars.get_tile_from_godot_id(tile)
+		var appended_tile_very_foreground = encoded_tile[0] + encoded_tile[1]
+		level_dictionary.areas[0].very_foreground_tiles.append(appended_tile_very_foreground)
+	level_dictionary.areas[0].background_tiles = rle_encode(level_dictionary.areas[0].background_tiles)
 	level_dictionary.areas[0].foreground_tiles = rle_encode(level_dictionary.areas[0].foreground_tiles)
+	level_dictionary.areas[0].very_foreground_tiles = rle_encode(level_dictionary.areas[0].very_foreground_tiles)
 	
 	for index in objects:
 		var added_object = {}
