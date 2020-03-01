@@ -39,6 +39,7 @@ func switch_to_testing():
 	global_vars_node.game_mode = "Testing"
 	global_vars_node.editor.unload(self)
 	global_vars_node.reload()
+	character.controllable = true
 	character.show()
 	character.set_state_by_name("Fall", 0)
 	stop_button.show()
