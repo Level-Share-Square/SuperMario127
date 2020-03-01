@@ -74,6 +74,7 @@ func show():
 	
 func set_state(state, delta: float):
 	var old_state = self.state
+	last_state = old_state
 	self.state = null
 	if old_state != null:
 		old_state._stop(delta);
@@ -134,21 +135,22 @@ func _physics_process(delta: float):
 					elif ((velocity.x > move_speed && move_direction == 1) || (velocity.x < -move_speed && move_direction == -1)):
 						velocity.x -= 3.5 * move_direction
 					facing_direction = move_direction
-	
-					if !test_move(transform, Vector2(velocity.x * delta, 0)):
-						if move_direction == 1:
-							sprite.animation = "movingRight"
+
+					if state != get_state_instance("Spinning"):
+						if !test_move(transform, Vector2(velocity.x * delta, 0)):
+							if move_direction == 1:
+								sprite.animation = "movingRight"
+							else:
+								sprite.animation = "movingLeft"
 						else:
-							sprite.animation = "movingLeft"
-					else:
-						if facing_direction == 1:
-							sprite.animation = "idleRight"
+							if facing_direction == 1:
+								sprite.animation = "idleRight"
+							else:
+								sprite.animation = "idleLeft"
+						if (abs(velocity.x) > move_speed):
+							sprite.speed_scale = abs(velocity.x) / move_speed
 						else:
-							sprite.animation = "idleLeft"
-					if (abs(velocity.x) > move_speed):
-						sprite.speed_scale = abs(velocity.x) / move_speed
-					else:
-						sprite.speed_scale = 1
+							sprite.speed_scale = 1
 				else:
 					if ((velocity.x < move_speed && move_direction == 1) || (velocity.x > -move_speed && move_direction == -1)):
 						velocity.x += air_accel * move_direction
@@ -160,7 +162,7 @@ func _physics_process(delta: float):
 				if (velocity.x > 0):
 					if (velocity.x > 15):
 						if (is_grounded()):
-							velocity.x -= friction				
+							velocity.x -= friction
 						else:
 							velocity.x -= air_fricc
 					else:
@@ -174,14 +176,16 @@ func _physics_process(delta: float):
 					else:
 						velocity.x = 0
 	
-				if is_grounded():
-					if facing_direction == 1:
-						sprite.animation = "idleRight"
-					else:
-						sprite.animation = "idleLeft"
-					sprite.speed_scale = 1
+				if state != get_state_instance("Spinning"):
+					if is_grounded():
+						if facing_direction == 1:
+							sprite.animation = "idleRight"
+						else:
+							sprite.animation = "idleLeft"
+						sprite.speed_scale = 1
 		else:
-			sprite.animation = "idleRight"
+			if state != get_state_instance("Spinning"):
+				sprite.animation = "idleRight"
 		
 		for state in states:
 			state.handle_update(delta)

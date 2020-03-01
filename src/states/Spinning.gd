@@ -2,19 +2,23 @@ extends State
 
 class_name SpinningState
 
-export var boost_power: float = 5
+export var boost_power: float = 150
 export var gravity_scale: float = 0.5
 var old_gravity_scale = 1
 var can_boost = true
+var cooldown_timer = 0
 
 func _start_check(delta):
 	return Input.is_action_just_pressed("spin") && character.state != character.get_state_instance("Dive") and character.jump_animation != 2
 
 func _start(delta):
-	if can_boost == true && !character.is_grounded():
+	if can_boost == true && !character.is_grounded() && character.current_jump == 0:
 		can_boost = false
+		cooldown_timer = 0.5
 		if character.velocity.y > 0:
 			character.velocity.y -= boost_power
+		else:
+			character.velocity.y -= boost_power/2
 	old_gravity_scale = character.gravity_scale
 	character.gravity_scale = gravity_scale
 	
@@ -31,8 +35,13 @@ func _stop(delta):
 	character.gravity_scale = old_gravity_scale
 
 func _stop_check(delta):
-	return !Input.is_action_pressed("spin") or character.is_grounded()
+	return !Input.is_action_pressed("spin")
 	
 func _general_update(delta):
+	if cooldown_timer > 0:
+		cooldown_timer -= delta
+		if cooldown_timer <= 0:
+			cooldown_timer = 0
+			can_boost = true
 	if character.is_grounded():
 		can_boost = true

@@ -25,6 +25,8 @@ func _start(delta):
 	jump_playing = true
 	if character.current_jump == 2 and abs(character.velocity.x) < 5:
 		character.current_jump = 1
+	if character.current_jump != 2 && character.last_state == character.get_state_instance("Spinning"):
+		character.set_state_by_name("Spinning", delta)
 	if character.current_jump == 0:
 		var jump_player = character.get_node("JumpSoundPlayer")
 		jump_player.play()

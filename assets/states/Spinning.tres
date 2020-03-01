@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource( 1 )
-boost_power = 25.0
+boost_power = 150.0
 gravity_scale = 0.5
