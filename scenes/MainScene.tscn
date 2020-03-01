@@ -16,9 +16,9 @@
 [ext_resource path="res://scenes/ModeSwitcher.gd" type="Script" id=14]
 [ext_resource path="res://src/pauseScript.gd" type="Script" id=15]
 [ext_resource path="res://assets/fonts/delfino_black_outline.tres" type="DynamicFont" id=16]
-[ext_resource path="res://assets/fonts/texteffect_matrix.tres" type="RichTextEffect" id=17]
-[ext_resource path="res://assets/fonts/texteffect_pulse.tres" type="RichTextEffect" id=18]
-[ext_resource path="res://assets/fonts/texteffect_ghost.tres" type="RichTextEffect" id=19]
+[ext_resource path="res://Assets/Fonts/texteffect_matrix.tres" type="RichTextEffect" id=17]
+[ext_resource path="res://Assets/Fonts/texteffect_pulse.tres" type="RichTextEffect" id=18]
+[ext_resource path="res://Assets/Fonts/texteffect_ghost.tres" type="RichTextEffect" id=19]
 [ext_resource path="res://assets/music/grass/yoshi_star_galaxy.ogg" type="AudioStream" id=20]
 [ext_resource path="res://src/musicManager.gd" type="Script" id=21]
 [ext_resource path="res://scenes/GhostTile.gd" type="Script" id=22]
@@ -42,7 +42,7 @@
 [ext_resource path="res://assets/textures/ui/stop.png" type="Texture" id=40]
 [ext_resource path="res://assets/textures/ui/playdisabled.png" type="Texture" id=41]
 [ext_resource path="res://assets/textures/ui/stopdisabled.png" type="Texture" id=42]
-[ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=43]
+[ext_resource path="res://assets/icon.png" type="Texture" id=43]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -707,7 +707,7 @@ tileset_id = 2
 object_type = "Coin"
 tile_rect = Rect2( 128, 0, 32, 32 )
 
-[node name="Icon3" type="Sprite" parent="UI/Banner/Coin"]
+[node name="Icon2" type="Sprite" parent="UI/Banner/Coin"]
 texture = ExtResource( 32 )
 centered = false
 offset = Vector2( 0, 9 )
@@ -730,8 +730,7 @@ tileset_id = 2
 object_type = "Entrance"
 tile_rect = Rect2( 128, 0, 32, 32 )
 
-[node name="Icon4" type="Sprite" parent="UI/Banner/Entrance"]
-position = Vector2( 0, -0.8 )
+[node name="Icon2" type="Sprite" parent="UI/Banner/Entrance"]
 texture = ExtResource( 43 )
 centered = false
 offset = Vector2( 0, 9 )
@@ -822,6 +821,7 @@ centered = false
 position = Vector2( 14, 0 )
 script = ExtResource( 12 )
 levelJSON = ExtResource( 31 )
+placement_mode = "Tile"
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = 2
