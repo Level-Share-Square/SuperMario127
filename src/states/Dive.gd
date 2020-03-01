@@ -20,6 +20,7 @@ func _start(delta):
 	if abs(character.velocity.x) > maxVelocityX:
 		character.velocity.x = maxVelocityX * character.facing_direction
 	character.jump_animation = 0
+	character.current_jump = 0
 
 func _update(delta):
 	var sprite = character.get_node("AnimatedSprite")
