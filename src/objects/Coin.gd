@@ -2,12 +2,13 @@ extends GameAreaCollisionObject
 
 signal on_collect
 onready var sound := AudioStreamPlayer.new()
+onready var character = get_node("../../Character")
 
 var collected = false
 var destroy_timer = 0.0
 
 func collect(body):
-	if !collected:
+	if !collected && body == character:
 		sound.play()
 		collected = true;
 		animation = "collect"

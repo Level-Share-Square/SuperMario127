@@ -124,56 +124,59 @@ func _physics_process(delta: float):
 			moveDirection = -1
 		elif (Input.is_action_pressed("move_right") && (state != get_state_instance("Slide") || !is_grounded()) and state != get_state_instance("Bonked")):
 			moveDirection = 1
-		if moveDirection != 0:
-			if is_grounded():
-				if ((velocity.x > 0 && moveDirection == -1) || (velocity.x < 0 && moveDirection == 1)):
-					velocity.x += deceleration * moveDirection
-				elif ((velocity.x < move_speed && moveDirection == 1) || (velocity.x > -move_speed && moveDirection == -1)):
-					velocity.x += acceleration * moveDirection
-				elif ((velocity.x > move_speed && moveDirection == 1) || (velocity.x < -move_speed && moveDirection == -1)):
-					velocity.x -= 3.5 * moveDirection
-				facing_direction = moveDirection
-
-				if moveDirection == 1:
-					sprite.animation = "movingRight"
-				else:
-					sprite.animation = "movingLeft"
-				if (abs(velocity.x) > move_speed):
-					sprite.speed_scale = abs(velocity.x) / move_speed
-				else:
-					sprite.speed_scale = 1
-			else:
-				if ((velocity.x < move_speed && moveDirection == 1) || (velocity.x > -move_speed && moveDirection == -1)):
-					velocity.x += air_accel * moveDirection
-				elif ((velocity.x > move_speed && moveDirection == 1) || (velocity.x < -move_speed && moveDirection == -1)):
-					velocity.x -= 0.25 * moveDirection
-
-				if (velocity.x > 0 && moveDirection == 1) or (velocity.x < 0 && moveDirection == -1):
+		if controllable:
+			if moveDirection != 0:
+				if is_grounded():
+					if ((velocity.x > 0 && moveDirection == -1) || (velocity.x < 0 && moveDirection == 1)):
+						velocity.x += deceleration * moveDirection
+					elif ((velocity.x < move_speed && moveDirection == 1) || (velocity.x > -move_speed && moveDirection == -1)):
+						velocity.x += acceleration * moveDirection
+					elif ((velocity.x > move_speed && moveDirection == 1) || (velocity.x < -move_speed && moveDirection == -1)):
+						velocity.x -= 3.5 * moveDirection
 					facing_direction = moveDirection
+	
+					if moveDirection == 1:
+						sprite.animation = "movingRight"
+					else:
+						sprite.animation = "movingLeft"
+					if (abs(velocity.x) > move_speed):
+						sprite.speed_scale = abs(velocity.x) / move_speed
+					else:
+						sprite.speed_scale = 1
+				else:
+					if ((velocity.x < move_speed && moveDirection == 1) || (velocity.x > -move_speed && moveDirection == -1)):
+						velocity.x += air_accel * moveDirection
+					elif ((velocity.x > move_speed && moveDirection == 1) || (velocity.x < -move_speed && moveDirection == -1)):
+						velocity.x -= 0.25 * moveDirection
+	
+					if (velocity.x > 0 && moveDirection == 1) or (velocity.x < 0 && moveDirection == -1):
+						facing_direction = moveDirection
+			else:
+				if (velocity.x > 0):
+					if (velocity.x > 15):
+						if (is_grounded()):
+							velocity.x -= friction				
+						else:
+							velocity.x -= air_fricc
+					else:
+						velocity.x = 0
+				elif (velocity.x < 0):
+					if (velocity.x < -15):
+						if (is_grounded()):
+							velocity.x += friction
+						else:
+							velocity.x += air_fricc
+					else:
+						velocity.x = 0
+	
+				if is_grounded():
+					if facing_direction == 1:
+						sprite.animation = "idleRight"
+					else:
+						sprite.animation = "idleLeft"
+					sprite.speed_scale = 1
 		else:
-			if (velocity.x > 0):
-				if (velocity.x > 15):
-					if (is_grounded()):
-						velocity.x -= friction				
-					else:
-						velocity.x -= air_fricc
-				else:
-					velocity.x = 0
-			elif (velocity.x < 0):
-				if (velocity.x < -15):
-					if (is_grounded()):
-						velocity.x += friction
-					else:
-						velocity.x += air_fricc
-				else:
-					velocity.x = 0
-
-			if is_grounded():
-				if facing_direction == 1:
-					sprite.animation = "idleRight"
-				else:
-					sprite.animation = "idleLeft"
-				sprite.speed_scale = 1
+			sprite.animation = "idleRight"
 		
 		for state in states:
 			state.handle_update(delta)
