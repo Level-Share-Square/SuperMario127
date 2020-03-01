@@ -68,7 +68,12 @@ func _process(delta):
 		editor.unload(self)
 		var level = Level.new()
 		var level_json = LevelJSON.new()
-		level_json.contents = OS.clipboard
+		if OS.has_feature('JavaScript'):
+			var js_return = JavaScript.eval("""navigator.permissions.query({name: 'clipboard-read'}).then(result => { if (result.state == 'granted' || result.state == 'prompt') {return navigator.clipboard.readText();}})""", true);
+			level_json.contents = js_return
+			print("a")
+		else:
+			level_json.contents = OS.clipboard
 		level.load_in(level_json)
 		global_vars_node.level = level
 		global_vars_node.area = level.areas[0]

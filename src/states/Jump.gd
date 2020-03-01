@@ -12,6 +12,9 @@ var last_grounded = false
 var rotating = false
 var direction_on_tj = 1
 
+func lerp(a, b, t):
+	return (1 - t) * a + t * b
+
 func _start_check(delta):
 	return character.is_grounded() and jump_buffer > 0 and character.state != character.get_state_instance("Slide")
 
@@ -85,16 +88,17 @@ func _stop_check(delta):
 func _general_update(delta):
 	var sprite = character.get_node("AnimatedSprite")
 	if rotating:
+		if character.velocity.y > 0:
+			character.jump_animation = 0
 		if character.state == character.get_state_instance("Dive"):
 			rotating = false
 			character.jump_animation = 0
-		if character.is_grounded() or abs(sprite.rotation_degrees) > 360 or character.state == character.get_state_instance("WallSlide"):
+		if character.is_grounded() or abs(sprite.rotation_degrees) > 360 or character.state == character.get_state_instance("WallSlide") or character.controllable == false:
 			rotating = false
 			sprite.rotation_degrees = 0
 			character.jump_animation = 0
 		else:
-			sprite.rotation_degrees += 4 * direction_on_tj
-			character.facing_direction = direction_on_tj
+			sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 380, 4 * delta) * direction_on_tj
 	if character.is_grounded() and !last_grounded:
 		ground_buffer = 0.1
 	if ground_buffer > 0:

@@ -7,6 +7,7 @@ export var tileset_id := 1
 export var tile_id := 0
 export var object_type : String
 export var tile_rect:Rect2 = Rect2(96, 0, 32, 32)
+export var hotkey : int
 onready var global_vars = get_node("../../../GlobalVars")
 onready var tile_map = get_node("../../../TileMap")
 onready var ghost_tile_container = get_node("../../../GhostTileContainer")
@@ -22,3 +23,7 @@ func _pressed():
 	global_vars.selected_tileset_id = tileset_id
 	global_vars.selected_tile_id = tile_id
 	global_vars.selected_object_type = object_type
+
+func _input(event):
+	if event is InputEventKey and event.scancode == hotkey and event.is_pressed() and !event.is_echo():		
+		_pressed()

@@ -44,7 +44,7 @@ func _stop(delta):
 	sprite.rotation_degrees = 0
 	if character.is_grounded():
 		character.set_state_by_name("Slide", delta)
-	elif character.is_walled():
+	if character.is_walled():
 		character.velocity.x = bonk_power * -character.facing_direction 
 		character.position.x -= 2 * character.facing_direction
 		character.set_state_by_name("Bonked", delta)

@@ -22,6 +22,7 @@ func _start(delta):
 	direction_on_wj = character.facing_direction
 	wall_jump_timer = 0.45
 	jump_player.play()
+	character.jump_animation = 0
 	pass
 
 func _update(delta):

@@ -8,7 +8,7 @@ var old_gravity_scale = 1
 var can_boost = true
 
 func _start_check(delta):
-	return Input.is_action_just_pressed("spin") && character.state != character.get_state_instance("Dive") && character.state != character.get_state_instance("WallSlide") and character.state != character.get_state_instance("Bonked") && !character.is_grounded()
+	return Input.is_action_just_pressed("spin") && character.state != character.get_state_instance("Dive") and character.jump_animation != 2
 
 func _start(delta):
 	if can_boost == true && !character.is_grounded():
