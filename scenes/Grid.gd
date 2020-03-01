@@ -1,7 +1,7 @@
 extends ParallaxBackground
 
 func hide():
-	visible = false
+	self.visible = false
 	
 func show():
-	visible = true
+	self.visible = true

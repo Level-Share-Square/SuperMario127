@@ -8,6 +8,7 @@ func _start_check(delta):
 	
 func _start(delta):
 	bonk_direction = character.facing_direction
+	character.current_jump = 0
 
 func _update(delta):
 	var sprite = character.get_node("AnimatedSprite")
