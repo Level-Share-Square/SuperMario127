@@ -76,26 +76,16 @@ func _process(delta):
 		var level = Level.new()
 		var level_json = LevelJSON.new()
 		if OS.has_feature("JavaScript"):
-#			var js_return = JavaScript.eval("""
-#				if (navigator && navigator.clipboard && navigator.clipboard.readText) {
-#					const value = await navigator.clipboard.readText()
-#					console.log(value)
-#				} else {
-#					false
-#				}
-#			""", true)
 			JavaScript.eval("""
 				jsResult = false
-				setTimeout(() => {
-					jsResult = 'this is test'
-				}, 3000)
+				navigator.clipboard.readText().then(clipText => {
+					jsResult = clipText
+				})
 			""", true)
 			var js_result_state = get_js_result()
 			var js_result = yield(js_result_state, "completed")
-			print(js_result)
-			
-#			if js_result != false:
-#				level_json.contents = js_result
+			if typeof(js_result) == TYPE_STRING:
+				level_json.contents = js_result
 		else:
 			level_json.contents = OS.clipboard
 		if level_json.contents:
