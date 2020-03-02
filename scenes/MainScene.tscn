@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=2]
+[gd_scene load_steps=102 format=2]
 
 [ext_resource path="res://assets/textures/backgrounds/1/background.png" type="Texture" id=1]
 [ext_resource path="res://src/cameraScript.gd" type="Script" id=2]
@@ -26,7 +26,6 @@
 [ext_resource path="res://assets/textures/tilesets/grass/tileset.png" type="Texture" id=24]
 [ext_resource path="res://src/UIButton.gd" type="Script" id=25]
 [ext_resource path="res://assets/textures/tilesets/grass/icon.png" type="Texture" id=26]
-[ext_resource path="res://src/fpsSetter.gd" type="Script" id=27]
 [ext_resource path="res://assets/textures/ui/item_box_hover.png" type="Texture" id=28]
 [ext_resource path="res://assets/textures/ui/item_box.png" type="Texture" id=29]
 [ext_resource path="res://assets/textures/tilesets/bricks/icon.png" type="Texture" id=30]
@@ -917,9 +916,6 @@ tile_data = PoolIntArray( 1835033, 1, 0, 1900570, 1, 0, 1900571, 1, 0, 1900572, 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
 script = ExtResource( 21 )
-
-[node name="FPSSetter" type="Node" parent="."]
-script = ExtResource( 27 )
 
 [node name="Character" parent="." instance=ExtResource( 13 )]
 state_names = PoolStringArray( "Fall", "Jump", "Dive", "Slide", "WallSlide", "WallJump", "Bonked", "Spinning" )
