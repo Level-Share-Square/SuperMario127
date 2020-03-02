@@ -18,15 +18,21 @@ func clear():
 func set_level_area(area: LevelArea):
 	self.area = area
 
-func set_tile(position: Vector2, tileset_id, tile_id):
+func set_tile(position: Vector2, tileset_id, tile_id, layer):
+	var tiles_array = area.foreground_tiles
+	if layer == 0:
+		tiles_array = area.background_tiles
+	elif layer == 2:
+		tiles_array = area.very_foreground_tiles
+		
 	var index = area.get_tile_index_from_position(position)
-	if index + 1 >= area.foreground_tiles.size():
-		for newIndex in range(area.foreground_tiles.size(), index + 1):
-			area.foreground_tiles.append([0, 0])
+	if index + 1 >= tiles_array.size():
+		for newIndex in range(tiles_array.size(), index + 1):
+			tiles_array.append([0, 0])
 	var size = area.settings.size
 	if position.x > size.x || position.y > size.y:
 		area.settings.size = position
-	area.foreground_tiles[index] = [tileset_id, tile_id]
+	tiles_array[index] = [tileset_id, tile_id]
 	
 func get_object_at_position(node: Node, position: Vector2):
 	var level_objects = node.get_node("../LevelObjects")
