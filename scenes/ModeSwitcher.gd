@@ -41,7 +41,6 @@ func switch_to_testing():
 	global_vars_node.reload()
 	character.controllable = true
 	character.show()
-	character.set_state_by_name("Fall", 0)
 	stop_button.show()
 	ghost_tile.hide()
 	grid.hide()

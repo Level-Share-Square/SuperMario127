@@ -15,7 +15,7 @@ func _start(delta):
 	if can_boost == true && !character.is_grounded() && (character.state != character.get_state_instance("Jump") or character.current_jump == 1):
 		can_boost = false
 		cooldown_timer = 0.5
-		if character.velocity.y > 0:
+		if character.velocity.y > 50:
 			character.velocity.y -= boost_power
 		else:
 			character.velocity.y -= boost_power/2
@@ -38,7 +38,6 @@ func _stop_check(delta):
 	return !Input.is_action_pressed("spin")
 	
 func _general_update(delta):
-	print("a")
 	if cooldown_timer > 0:
 		cooldown_timer -= delta
 		if cooldown_timer <= 0:

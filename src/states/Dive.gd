@@ -51,4 +51,4 @@ func _stop(delta):
 		character.set_state_by_name("Bonked", delta)
 
 func _stop_check(delta):
-	return character.is_grounded() or character.is_walled()
+	return character.is_grounded() or (character.is_walled_right() && character.facing_direction == 1) or (character.is_walled_left() && character.facing_direction == -1)

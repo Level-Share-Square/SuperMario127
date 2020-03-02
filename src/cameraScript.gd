@@ -50,13 +50,13 @@ func _physics_process(deltaTime):
 		_gamemode_changed(global_vars_node.game_mode)
 		
 	if global_vars_node.game_mode == "Editing":
-		if Input.is_key_pressed(KEY_W) and (self.position.y - viewport_size.y/2) > self.limit_top:
+		if Input.is_action_pressed("editor_up") and (self.position.y - viewport_size.y/2) > self.limit_top:
 			self.position -= Vector2(0, camera_speed)
-		elif Input.is_key_pressed(KEY_S) and (self.position.y + viewport_size.y/2) < self.limit_bottom:
+		elif Input.is_action_pressed("editor_down") and (self.position.y + viewport_size.y/2) < self.limit_bottom:
 			self.position += Vector2(0, camera_speed)
-		if Input.is_key_pressed(KEY_A) and (self.position.x - viewport_size.x/2) > self.limit_left:
+		if Input.is_action_pressed("editor_left") and (self.position.x - viewport_size.x/2) > self.limit_left:
 			self.position -= Vector2(camera_speed, 0)
-		elif Input.is_key_pressed(KEY_D) and (self.position.x + viewport_size.x/2) < self.limit_right:
+		elif Input.is_action_pressed("editor_right") and (self.position.x + viewport_size.x/2) < self.limit_right:
 			self.position += Vector2(camera_speed, 0)
 	else:
 		position = character.position

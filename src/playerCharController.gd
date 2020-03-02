@@ -218,5 +218,12 @@ func _physics_process(delta: float):
 
 func kill():
 	current_jump = 0
+	set_state_by_name("Fall", 0)
+	var global_vars = get_node("../GlobalVars")
+	global_vars.reload()
+
+func exit():
+	current_jump = 0
+	set_state_by_name("Fall", 0)
 	var mode_switcher = get_node("../ModeSwitcher")
 	mode_switcher.switch_to_editing()

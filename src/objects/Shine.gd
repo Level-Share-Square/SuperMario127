@@ -35,7 +35,7 @@ func _ready():
 	
 func _physics_process(delta):
 	if collected and character.is_grounded():
-		character.kill()
+		character.exit()
 	elif collected:
 		var sprite = character.get_node("AnimatedSprite")
 		sprite.animation = "shineFall"

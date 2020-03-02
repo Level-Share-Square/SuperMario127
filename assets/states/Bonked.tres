@@ -4,3 +4,4 @@
 
 [resource]
 script = ExtResource( 1 )
+bonk_direction = 1
