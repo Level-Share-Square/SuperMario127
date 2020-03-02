@@ -58,6 +58,7 @@ func load_in(node: Node, isEditing: bool):
 	var tile_map = node.get_node("../TileMap")
 	var very_foreground_tile_map = node.get_node("../VeryForegroundTileMap")
 	var global_vars = node.get_node("../GlobalVars")
+	
 	for index in range(very_foreground_tiles.size()):
 		var tile = very_foreground_tiles[index]
 		var position = get_position_from_tile_index(index)
@@ -118,13 +119,13 @@ func save_out(node: Node, isEditing: bool):
 		level_dictionary.areas[0].foreground_tiles.append(appended_tile)
 		
 		var tile_background = background_tile_map.get_cell(position.x, position.y)
-		var encoded_tile_background = global_vars.get_tile_from_godot_id(tile)
-		var appended_tile_background = encoded_tile[0] + encoded_tile[1]
+		var encoded_tile_background = global_vars.get_tile_from_godot_id(tile_background)
+		var appended_tile_background = encoded_tile_background[0] + encoded_tile_background[1]
 		level_dictionary.areas[0].background_tiles.append(appended_tile_background)
 		
 		var tile_very_foreground = very_foreground_tile_map.get_cell(position.x, position.y)
-		var encoded_tile_very_foreground = global_vars.get_tile_from_godot_id(tile)
-		var appended_tile_very_foreground = encoded_tile[0] + encoded_tile[1]
+		var encoded_tile_very_foreground = global_vars.get_tile_from_godot_id(tile_very_foreground)
+		var appended_tile_very_foreground = encoded_tile_very_foreground[0] + encoded_tile_very_foreground[1]
 		level_dictionary.areas[0].very_foreground_tiles.append(appended_tile_very_foreground)
 	level_dictionary.areas[0].background_tiles = rle_encode(level_dictionary.areas[0].background_tiles)
 	level_dictionary.areas[0].foreground_tiles = rle_encode(level_dictionary.areas[0].foreground_tiles)
@@ -144,12 +145,16 @@ func save_out(node: Node, isEditing: bool):
 
 func unload(node: Node):
 	var level_objects = node.get_node("../LevelObjects")
+	var background_tile_map = node.get_node("../BackgroundTileMap")
 	var tile_map = node.get_node("../TileMap")
+	var very_foreground_tile_map = node.get_node("../VeryForegroundTileMap")
 	for object in level_objects.get_children():
 		object.queue_free()
 	for x in range(settings.size.x):
 		for y in range(settings.size.y):
+			background_tile_map.set_cell(x, y, -1)
 			tile_map.set_cell(x, y, -1)
+			very_foreground_tile_map.set_cell(x, y, -1)
 
 func rle_encode(data):
 	var new_data = []
