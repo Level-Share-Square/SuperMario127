@@ -7,6 +7,7 @@ export var velocity = Vector2(0, 0)
 var last_velocity = Vector2(0, 0)
 export var gravity_scale = 1
 export var facing_direction = 1
+export var move_direction = 0
 
 export var move_speed = 216.0
 export var acceleration = 7.5
@@ -120,7 +121,7 @@ func _physics_process(delta: float):
 			collision_right = true
 
 		# Movement
-		var move_direction = 0
+		move_direction = 0
 		if (Input.is_action_pressed("move_left") && (state != get_state_instance("Slide") || !is_grounded()) and state != get_state_instance("Bonked")):
 			move_direction = -1
 		elif (Input.is_action_pressed("move_right") && (state != get_state_instance("Slide") || !is_grounded()) and state != get_state_instance("Bonked")):

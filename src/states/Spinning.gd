@@ -12,7 +12,7 @@ func _start_check(delta):
 	return Input.is_action_just_pressed("spin") && character.state != character.get_state_instance("Dive") and character.jump_animation != 2
 
 func _start(delta):
-	if can_boost == true && !character.is_grounded() && character.current_jump == 0:
+	if can_boost == true && !character.is_grounded() && (character.state != character.get_state_instance("Jump") or character.current_jump == 1):
 		can_boost = false
 		cooldown_timer = 0.5
 		if character.velocity.y > 0:
@@ -38,6 +38,7 @@ func _stop_check(delta):
 	return !Input.is_action_pressed("spin")
 	
 func _general_update(delta):
+	print("a")
 	if cooldown_timer > 0:
 		cooldown_timer -= delta
 		if cooldown_timer <= 0:
