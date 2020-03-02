@@ -1,0 +1,38 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/level/JSON.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+contents = "{
+    \"format_version\": \"0.3.1\",
+    \"name\":\"My Level\",
+    \"areas\":[
+        {
+            \"objects\": [
+                {
+                    \"type\": \"Coin\",
+					\"properties\": {
+						\"position\": {
+							\"type\": \"Vector2\",
+							\"construction\": [400, 350]
+						},
+						\"scale\": {
+							\"type\":\"Vector2\",
+							\"construction\": [1.5, 1.3]
+						},
+						\"rotation_degrees\": 90
+					}
+                }
+            ],
+            \"background_tiles\":[\"0000*2400\"],
+			\"foreground_tiles\":[\"0000*255\", \"0010*10\", \"0000\"],
+            \"settings\":{
+                \"background\": 1,
+                \"music\": 1,
+                \"size\":{\"y\": 30,\"x\": 80},
+				\"spawn\":{\"x\":500,\"y\":0}
+            }
+        }
+	]
+}"

@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "State",
+"class": "BonkedState",
+"language": "GDScript",
+"path": "res://src/states/Bonked.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
@@ -24,10 +29,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/states/Dive.gd"
 }, {
+"base": "AnimatedSprite",
+"class": "EditorObject",
+"language": "GDScript",
+"path": "res://src/level/EditorObject.gd"
+}, {
 "base": "State",
 "class": "FallState",
 "language": "GDScript",
 "path": "res://src/states/Fall.gd"
+}, {
+"base": "GameObject",
+"class": "GameAreaCollisionObject",
+"language": "GDScript",
+"path": "res://src/base_objects/GameAreaCollisionObject.gd"
+}, {
+"base": "AnimatedSprite",
+"class": "GameObject",
+"language": "GDScript",
+"path": "res://src/level/GameObject.gd"
+}, {
+"base": "Reference",
+"class": "JSONBeautifier",
+"language": "GDScript",
+"path": "res://addons/json_beautifier/json_beautifier.gd"
 }, {
 "base": "State",
 "class": "JumpState",
@@ -49,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/level/AreaSettings.gd"
 }, {
+"base": "Reference",
+"class": "LevelEditor",
+"language": "GDScript",
+"path": "res://src/level/Editor.gd"
+}, {
 "base": "Resource",
 "class": "LevelJSON",
 "language": "GDScript",
@@ -60,29 +90,80 @@ _global_script_classes=[ {
 "path": "res://src/level/Object.gd"
 }, {
 "base": "Resource",
+"class": "LevelTileset",
+"language": "GDScript",
+"path": "res://src/level/Tileset.gd"
+}, {
+"base": "Resource",
+"class": "LevelTilesets",
+"language": "GDScript",
+"path": "res://src/level/Tilesets.gd"
+}, {
+"base": "State",
+"class": "SlideState",
+"language": "GDScript",
+"path": "res://src/states/Slide.gd"
+}, {
+"base": "State",
+"class": "SpinningState",
+"language": "GDScript",
+"path": "res://src/states/Spinning.gd"
+}, {
+"base": "Resource",
 "class": "State",
 "language": "GDScript",
 "path": "res://src/State.gd"
+}, {
+"base": "TextureButton",
+"class": "TileButton",
+"language": "GDScript",
+"path": "res://src/UIButton.gd"
+}, {
+"base": "State",
+"class": "WallJumpState",
+"language": "GDScript",
+"path": "res://src/states/WallJump.gd"
+}, {
+"base": "State",
+"class": "WallSlideState",
+"language": "GDScript",
+"path": "res://src/states/WallSlide.gd"
 } ]
 _global_script_class_icons={
+"BonkedState": "",
 "Character": "",
 "DesignerCameraFollow": "",
 "DiveState": "",
+"EditorObject": "",
 "FallState": "",
+"GameAreaCollisionObject": "",
+"GameObject": "",
+"JSONBeautifier": "",
 "JumpState": "",
 "Level": "",
 "LevelArea": "",
 "LevelAreaSettings": "",
+"LevelEditor": "",
 "LevelJSON": "",
 "LevelObject": "",
-"State": ""
+"LevelTileset": "",
+"LevelTilesets": "",
+"SlideState": "",
+"SpinningState": "",
+"State": "",
+"TileButton": "",
+"WallJumpState": "",
+"WallSlideState": ""
 }
 
 [application]
 
 config/name="Super Mario 127 "
 run/main_scene="res://scenes/MainScene.tscn"
-config/icon="res://Assets/icon.png"
+boot_splash/image="res://assets/startup.png"
+boot_splash/bg_color=Color( 0.341176, 0, 0.498039, 1 )
+config/icon="res://assets/icon.png"
+config/windows_native_icon="res://assets/icon.ico"
 
 [debug]
 
@@ -94,7 +175,7 @@ window/size/width=768
 window/size/height=432
 window/size/test_width=768
 window/size/test_height=432
-mouse_cursor/custom_image="res://Assets/Textures/Cursor/Normal.png"
+mouse_cursor/custom_image="res://assets/textures/cursor/normal.png"
 mouse_cursor/tooltip_position_offset=Vector2( 0, 0 )
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
@@ -172,6 +253,46 @@ switch_modes={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":84,"unicode":0,"echo":false,"script":null)
  ]
 }
+switch_placement_mode={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":72,"unicode":0,"echo":false,"script":null)
+ ]
+}
+click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+spin={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"unicode":0,"echo":false,"script":null)
+ ]
+}
+copy_level={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"unicode":0,"echo":false,"script":null)
+ ]
+}
+paste_level={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":86,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right_click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+switch_layers={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":76,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_render/layer_1="player"
+2d_render/layer_2="coins"
 
 [physics]
 

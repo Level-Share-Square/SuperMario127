@@ -2,59 +2,85 @@ extends Resource
 
 class_name Level
 
-var formatVersion: String = "0.1.0";
-var name: String = "My Level";
-var areas = [];
+var current_format_version := "0.3.2"
+var format_version := "0.3.2"
+var name := "My Level"
+var areas = []
 
-func getVector2(result) -> Vector2:
-	return Vector2(result.x, result.y);
+func get_vector2(result) -> Vector2:
+	return Vector2(result.x, result.y)
 
-func getArea(result) -> LevelArea:
-	var area = LevelArea.new();
-	area.settings = getSettings(result.settings);
-	area.backgroundTiles = result.backgroundTiles;
-	area.foregroundTiles = result.foregroundTiles;
-	for objectResult in result.objects:
-		var object = getObject(objectResult);
-		area.objects.append(object);
-	return area;
+func get_area(result) -> LevelArea:
+	var area = LevelArea.new()
+	area.settings = get_settings(result.settings)
+	for very_foreground_tiles_result in result.very_foreground_tiles:
+		var tiles = get_tiles(very_foreground_tiles_result)
+		for tile in tiles:
+			area.very_foreground_tiles.append(tile)
+	for tiles_result in result.foreground_tiles:
+		var tiles = get_tiles(tiles_result)
+		for tile in tiles:
+			area.foreground_tiles.append(tile)
+	for background_tiles_result in result.background_tiles:
+		var tiles = get_tiles(background_tiles_result)
+		for tile in tiles:
+			area.background_tiles.append(tile)
+	for object_result in result.objects:
+		var object = get_object(object_result)
+		area.objects.append(object)
+	return area
 	
-func getSettings(result) -> LevelAreaSettings:
-	var settings = LevelAreaSettings.new();
-	settings.background = result.background;
-	settings.music = result.music;
-	settings.size = getVector2(result.size);
-	settings.spawn = getVector2(result.spawn);
-	return settings;
-
-func getObject(result) -> LevelObject:
-	var object = LevelObject.new();
-	object.type = result.type;
-	object.properties = result.properties;
-	return object;
-
-func loadIn(json: LevelJSON):
-	var parse = JSON.parse(json.contents);
-	if parse.error != 0:
-		print("Error " + parse.error_string + " at line " + parse.error_line);
-		
-	var result = parse.result;
-	assert(result.formatVersion);
-	assert(result.name);
-	formatVersion = result.formatVersion;
-	name = result.name;
-	if formatVersion == "0.1.0":
-		for areaResult in result.areas:
-			var area = getArea(areaResult);
-			areas.append(area);
-		print(areas[0].settings.background)
+func get_settings(result) -> LevelAreaSettings:
+	var settings = LevelAreaSettings.new()
+	settings.background = result.background
+	settings.music = result.music
+	settings.size = get_vector2(result.size)
+	settings.spawn = get_vector2(result.spawn)
+	return settings
+	
+func get_tiles(result) -> Array:
+	var tileset_id_string = "0x" + result[0] + result[1] + result[2]
+	var tile_id_string = "0x" + result[3]
+	var tile_repeat_string = ""
+	if result.length() > 4:
+		for index in range(5, result.length()):
+			tile_repeat_string += result[index]
 	else:
-		print("Incorrect format version, current version is 0.1.0 level uses version " + formatVersion);
+		tile_repeat_string += "1"
+	var tileset_id = tileset_id_string.hex_to_int()
+	var tile_id = tile_id_string.hex_to_int()
+	var tile_repeat = int(tile_repeat_string)
+	var tile = [tileset_id, tile_id]
+	var tiles = []
+	for iterator in range(tile_repeat):
+		tiles.append(tile)
+	return tiles
 
-func unload(node: Node):
-	var levelObjects = node.get_node("../LevelObjects")
-	for child in levelObjects.get_children():
-		child.queue_free();
+func get_object(result) -> LevelObject:
+	var object = LevelObject.new()
+	object.type = result.type
+	object.properties = result.properties
+	return object
 
-func saveIn(json: LevelJSON):
-	pass;
+func load_in(json: LevelJSON):
+	var parse = JSON.parse(json.contents)
+	if parse.error != 0:
+		print("Error " + parse.error_string + " at line " + parse.error_line)
+		
+	var result = parse.result
+	assert(result.format_version)
+	assert(result.name)
+	format_version = result.format_version
+	name = result.name
+	if format_version == "0.3.1":
+		result.format_version = "0.3.2"
+		format_version = "0.3.2"
+		for area_result in result.areas:
+			area_result.background_tiles = []
+			area_result.very_foreground_tiles = []
+	if format_version == current_format_version:
+		for area_result in result.areas:
+			var area = get_area(area_result)
+			areas.append(area)
+	else:
+		print("Outdated format version. Current version is " + current_format_version + ", but course uses version " + format_version + ".")

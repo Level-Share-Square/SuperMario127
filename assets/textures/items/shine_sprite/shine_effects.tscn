@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/textures/items/shine_sprite/lighting_effect.png" type="Texture" id=1]
+
+[sub_resource type="Curve" id=1]
+max_value = 6.0
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 6 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.537037, 1 )
+colors = PoolColorArray( 1, 0.843137, 0, 1, 1, 0.843137, 0, 0.709804, 1, 0.772549, 0, 0 )
+
+[node name="ShineEffects" type="Node2D"]
+position = Vector2( 0, 2 )
+
+[node name="LeftBeam" type="Line2D" parent="."]
+z_index = -1
+points = PoolVector2Array( 0, 0, -70, 0 )
+width = 5.0
+width_curve = SubResource( 1 )
+default_color = Color( 1, 0.772549, 0, 1 )
+gradient = SubResource( 2 )
+
+[node name="RightBeam" type="Line2D" parent="."]
+z_index = -1
+points = PoolVector2Array( 0, 0, 70, 0 )
+width = 6.0
+width_curve = SubResource( 1 )
+default_color = Color( 1, 0.772549, 0, 1 )
+gradient = SubResource( 2 )
+
+[node name="TopBeam" type="Line2D" parent="."]
+z_index = -1
+points = PoolVector2Array( 0, 0, 0, -70 )
+width = 6.0
+width_curve = SubResource( 1 )
+default_color = Color( 1, 0.772549, 0, 1 )
+gradient = SubResource( 2 )
+
+[node name="BottomBeam" type="Line2D" parent="."]
+z_index = -1
+points = PoolVector2Array( 0, 0, 0, 70 )
+width = 6.0
+width_curve = SubResource( 1 )
+default_color = Color( 1, 0.772549, 0, 1 )
+gradient = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.75, 0.75 )
+z_index = -2
+texture = ExtResource( 1 )
