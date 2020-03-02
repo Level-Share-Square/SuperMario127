@@ -52,6 +52,13 @@ func switch_to_testing():
 	if Input.is_key_pressed(KEY_SHIFT):
 		character.position = get_global_mouse_position()
 
+func get_js_result():
+	yield(get_tree().create_timer(0.01), "timeout")
+	var js_result = JavaScript.eval("""
+		jsResult
+	""", true)
+	return js_result if typeof(js_result) == TYPE_STRING else get_js_result()
+
 func _ready():
 	if global_vars_node.game_mode == "Editing":
 		switch_to_editing()
@@ -68,15 +75,32 @@ func _process(delta):
 		editor.unload(self)
 		var level = Level.new()
 		var level_json = LevelJSON.new()
-		if OS.has_feature('JavaScript'):
-			var js_return = JavaScript.eval("""navigator.permissions.query({name: 'clipboard-read'}).then(result => { if (result.state == 'granted' || result.state == 'prompt') {return navigator.clipboard.readText();}})""", true);
-			level_json.contents = js_return
-			print("a")
+		if OS.has_feature("JavaScript"):
+#			var js_return = JavaScript.eval("""
+#				if (navigator && navigator.clipboard && navigator.clipboard.readText) {
+#					const value = await navigator.clipboard.readText()
+#					console.log(value)
+#				} else {
+#					false
+#				}
+#			""", true)
+			JavaScript.eval("""
+				jsResult = false
+				setTimeout(() => {
+					jsResult = 'this is test'
+				}, 3000)
+			""", true)
+			var js_result_state = get_js_result()
+			var js_result = yield(js_result_state, "completed")
+			print(js_result)
+			
+#			if js_result != false:
+#				level_json.contents = js_result
 		else:
 			level_json.contents = OS.clipboard
-		level.load_in(level_json)
-		global_vars_node.level = level
-		global_vars_node.area = level.areas[0]
-		editor.area = level.areas[0]
-		editor.load_in(self)
-		pass
+		if level_json.contents:
+			level.load_in(level_json)
+			global_vars_node.level = level
+			global_vars_node.area = level.areas[0]
+			editor.area = level.areas[0]
+			editor.load_in(self)
