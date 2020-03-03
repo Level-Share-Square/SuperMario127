@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource( 1 )
-walljump_power = Vector2( 350, 285 )
+walljump_power = Vector2( 350, 310 )
