@@ -57,37 +57,31 @@ func _physics_process(delta):
 		var tile = global_vars.get_tile(global_vars.selected_tileset_id, global_vars.selected_tile_id)
 		if mouse_screen_pos.y > 70:
 			if Input.is_mouse_button_pressed(1):
-				if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x:
-					if mouse_tile_pos.y > -1 and mouse_tile_pos.y < level_size.y:
-						if global_vars.is_tile:
-							if (tilemap_node.get_cell(mouse_tile_pos.x, mouse_tile_pos.y) != tile):
-								tilemap_node.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, tile)
-								global_vars.editor.set_tile(mouse_tile_pos, global_vars.selected_tileset_id, global_vars.selected_tile_id, layer)
-								tilemap_node.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
-						elif global_vars.placement_mode == "Tile":
-							global_vars.editor.create_object(self, global_vars_node.selected_object_type, { "position": mouse_grid_pos, "scale": Vector2(1, 1), "rotation_degrees": 0 })
+				if global_vars.is_tile:
+					if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x:
+						if mouse_tile_pos.y > -1 and mouse_tile_pos.y < level_size.y:
+								if (tilemap_node.get_cell(mouse_tile_pos.x, mouse_tile_pos.y) != tile):
+									tilemap_node.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, tile)
+									global_vars.editor.set_tile(mouse_tile_pos, global_vars.selected_tileset_id, global_vars.selected_tile_id, layer)
+									tilemap_node.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
+				elif global_vars.placement_mode == "Tile":
+					global_vars.editor.create_object(self, global_vars_node.selected_object_type, { "position": mouse_grid_pos, "scale": Vector2(1, 1), "rotation_degrees": 0 })
 			elif Input.is_mouse_button_pressed(2):
-				if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x:
-					if mouse_tile_pos.y > -1 and mouse_tile_pos.y < level_size.y:
-						tilemap_node.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, air_tile)
-						global_vars.editor.set_tile(mouse_tile_pos, 0, 0, layer)
-						tilemap_node.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
-						if layer == 1:
-							global_vars.editor.delete_object_at_position(self, mouse_grid_pos)
+				tilemap_node.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, air_tile)
+				global_vars.editor.set_tile(mouse_tile_pos, 0, 0, layer)
+				tilemap_node.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
+				if layer == 1:
+					global_vars.editor.delete_object_at_position(self, mouse_grid_pos)
 			if global_vars.placement_mode == "Drag" && !global_vars.is_tile:
 				if Input.is_action_just_pressed("click"):
-					if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x:
-						if mouse_tile_pos.y > -1 and mouse_tile_pos.y < level_size.y:
-							global_vars.editor.create_object(self, global_vars_node.selected_object_type, { "position": mouse_pos, "scale": Vector2(1, 1), "rotation_degrees": 0 })
+					global_vars.editor.create_object(self, global_vars_node.selected_object_type, { "position": mouse_pos, "scale": Vector2(1, 1), "rotation_degrees": 0 })
 				elif Input.is_action_just_pressed("right_click"):
-					if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x:
-						if mouse_tile_pos.y > -1 and mouse_tile_pos.y < level_size.y:
-							var objectsToDelete = []
-							for object in level_objects.get_children():
-								if (object.position - mouse_pos).length() <= 16:
-									objectsToDelete.append(object)	
-							for object in objectsToDelete:
-								global_vars.editor.delete_object(object)
+					var objectsToDelete = []
+					for object in level_objects.get_children():
+						if (object.position - mouse_pos).length() <= 16:
+							objectsToDelete.append(object)	
+					for object in objectsToDelete:
+						global_vars.editor.delete_object(object)
 	else:
 		ghost_tile.visible = false
 		if !global_vars.is_tile:

@@ -30,6 +30,7 @@ func switch_to_editing():
 	grid.show()
 	banner.show()
 	music.stop()
+	music.playing = false
 	ghost_tile_container.visible = true
 
 func switch_to_testing():
@@ -46,6 +47,7 @@ func switch_to_testing():
 	grid.hide()
 	banner.hide()
 	music.play()
+	music.playing = true
 	ghost_tile_container.visible = false
 	
 	if Input.is_key_pressed(KEY_SHIFT):

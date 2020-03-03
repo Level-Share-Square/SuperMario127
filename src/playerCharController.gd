@@ -217,13 +217,22 @@ func _physics_process(delta: float):
 		last_velocity = velocity
 
 func kill():
+	var music = get_node("../Music")
 	current_jump = 0
+	velocity = Vector2(0, 0)
+	controllable = true
 	set_state_by_name("Fall", 0)
 	var global_vars = get_node("../GlobalVars")
 	global_vars.reload()
+	music.stop()
+	music.play()
 
 func exit():
+	var music = get_node("../Music")
 	current_jump = 0
+	velocity = Vector2(0, 0)
+	controllable = true
 	set_state_by_name("Fall", 0)
+	music.stop()
 	var mode_switcher = get_node("../ModeSwitcher")
 	mode_switcher.switch_to_editing()
