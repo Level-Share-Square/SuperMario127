@@ -61,18 +61,21 @@ func load_in(node: Node, isEditing: bool):
 	
 	for index in range(very_foreground_tiles.size()):
 		var tile = very_foreground_tiles[index]
-		var position = get_position_from_tile_index(index)
-		very_foreground_tile_map.set_cell(position.x, position.y, global_vars.get_tile(tile[0], tile[1]))
+		if tile[0] != 0:
+			var position = get_position_from_tile_index(index)
+			very_foreground_tile_map.set_cell(position.x, position.y, global_vars.get_tile(tile[0], tile[1]))
 		
 	for index in range(foreground_tiles.size()):
 		var tile = foreground_tiles[index]
-		var position = get_position_from_tile_index(index)
-		tile_map.set_cell(position.x, position.y, global_vars.get_tile(tile[0], tile[1]))
+		if tile[0] != 0:
+			var position = get_position_from_tile_index(index)
+			tile_map.set_cell(position.x, position.y, global_vars.get_tile(tile[0], tile[1]))
 		
 	for index in range(background_tiles.size()):
 		var tile = background_tiles[index]
-		var position = get_position_from_tile_index(index)
-		background_tile_map.set_cell(position.x, position.y, global_vars.get_tile(tile[0], tile[1]))
+		if tile[0] != 0:
+			var position = get_position_from_tile_index(index)
+			background_tile_map.set_cell(position.x, position.y, global_vars.get_tile(tile[0], tile[1]))
 		
 	very_foreground_tile_map.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
 	tile_map.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
@@ -161,11 +164,9 @@ func unload(node: Node):
 	var very_foreground_tile_map = node.get_node("../VeryForegroundTileMap")
 	for object in level_objects.get_children():
 		object.queue_free()
-	for x in range(settings.size.x):
-		for y in range(settings.size.y):
-			background_tile_map.set_cell(x, y, -1)
-			tile_map.set_cell(x, y, -1)
-			very_foreground_tile_map.set_cell(x, y, -1)
+	background_tile_map.clear()
+	tile_map.clear()
+	very_foreground_tile_map.clear()
 
 func rle_encode(data):
 	var new_data = []
