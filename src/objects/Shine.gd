@@ -25,6 +25,7 @@ func _ready():
 	effects_instance = shine_effects.instance()
 	add_child(effects_instance)
 	frames = sprite_frames
+	light_mask = 2
 	playing = true
 	shape.scale = Vector2(0.5, 0.5)
 	connect("on_collide", self, "collect")

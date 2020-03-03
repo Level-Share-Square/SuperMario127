@@ -7,8 +7,8 @@ max_value = 6.0
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 6 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=2]
-offsets = PoolRealArray( 0, 0.537037, 1 )
-colors = PoolColorArray( 1, 0.843137, 0, 1, 1, 0.843137, 0, 0.709804, 1, 0.772549, 0, 0 )
+offsets = PoolRealArray( 0, 0.302469 )
+colors = PoolColorArray( 1, 0.819608, 0, 0.25098, 1, 0.607843, 0, 0 )
 
 [node name="ShineEffects" type="Node2D"]
 position = Vector2( 0, 2 )
@@ -18,7 +18,7 @@ z_index = -1
 points = PoolVector2Array( 0, 0, -70, 0 )
 width = 5.0
 width_curve = SubResource( 1 )
-default_color = Color( 1, 0.772549, 0, 1 )
+default_color = Color( 1, 0.819608, 0, 1 )
 gradient = SubResource( 2 )
 
 [node name="RightBeam" type="Line2D" parent="."]
@@ -26,7 +26,7 @@ z_index = -1
 points = PoolVector2Array( 0, 0, 70, 0 )
 width = 6.0
 width_curve = SubResource( 1 )
-default_color = Color( 1, 0.772549, 0, 1 )
+default_color = Color( 1, 0.819608, 0, 1 )
 gradient = SubResource( 2 )
 
 [node name="TopBeam" type="Line2D" parent="."]
@@ -34,7 +34,7 @@ z_index = -1
 points = PoolVector2Array( 0, 0, 0, -70 )
 width = 6.0
 width_curve = SubResource( 1 )
-default_color = Color( 1, 0.772549, 0, 1 )
+default_color = Color( 1, 0.819608, 0, 1 )
 gradient = SubResource( 2 )
 
 [node name="BottomBeam" type="Line2D" parent="."]
@@ -42,10 +42,13 @@ z_index = -1
 points = PoolVector2Array( 0, 0, 0, 70 )
 width = 6.0
 width_curve = SubResource( 1 )
-default_color = Color( 1, 0.772549, 0, 1 )
+default_color = Color( 1, 0.819608, 0, 1 )
 gradient = SubResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.75, 0.75 )
-z_index = -2
+[node name="Light2D" type="Light2D" parent="."]
+scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
+color = Color( 1, 0.909804, 0.435294, 1 )
+energy = 1.6
+range_layer_min = -512
+range_layer_max = 512

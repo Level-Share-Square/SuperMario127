@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lighting_effect.png-04d0f35617c0f4a9fad7daae56e2f371.stex"
+path="res://.import/parallax_2.png-e26d82e9233bd68a94d7e946166c98aa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/items/shine_sprite/lighting_effect.png"
-dest_files=[ "res://.import/lighting_effect.png-04d0f35617c0f4a9fad7daae56e2f371.stex" ]
+source_file="res://assets/textures/backgrounds/mountains/parallax_2.png"
+dest_files=[ "res://.import/parallax_2.png-e26d82e9233bd68a94d7e946166c98aa.stex" ]
 
 [params]
 

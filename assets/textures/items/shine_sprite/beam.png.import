@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lighting_effect.png-04d0f35617c0f4a9fad7daae56e2f371.stex"
+path="res://.import/beam.png-d200f5229dec2efdb4b13d41adca085f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/items/shine_sprite/lighting_effect.png"
-dest_files=[ "res://.import/lighting_effect.png-04d0f35617c0f4a9fad7daae56e2f371.stex" ]
+source_file="res://assets/textures/items/shine_sprite/beam.png"
+dest_files=[ "res://.import/beam.png-d200f5229dec2efdb4b13d41adca085f.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/parallax_3.png-00bb9805a3ea5ba02c01faf9aa929f8e.stex"
+path="res://.import/day.png-227ee9b3b0b461a056a3c5d4e4219879.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/backgrounds/1/parallax_3.png"
-dest_files=[ "res://.import/parallax_3.png-00bb9805a3ea5ba02c01faf9aa929f8e.stex" ]
+source_file="res://assets/textures/backgrounds/day.png"
+dest_files=[ "res://.import/day.png-227ee9b3b0b461a056a3c5d4e4219879.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
