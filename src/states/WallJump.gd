@@ -17,6 +17,7 @@ func _start_check(delta):
 func _start(delta):
 	var jump_player = character.get_node("JumpSoundPlayer")
 	press_buffer = 0
+	position_on_wj = character.position
 	character.facing_direction = -character.direction_on_stick
 	character.velocity.x = walljump_power.x * character.facing_direction
 	character.velocity.y = -walljump_power.y
@@ -27,7 +28,6 @@ func _start(delta):
 	jump_player.play()
 	character.jump_animation = 0
 	limit_y = true
-	position_on_wj = character.position
 	pass
 
 func _update(delta):
