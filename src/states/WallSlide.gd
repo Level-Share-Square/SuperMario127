@@ -7,9 +7,10 @@ var old_gravity_scale = 1
 var wall_buffer = 0.0
 
 func _start_check(delta):
-	return character.is_walled() and !character.is_grounded() and character.velocity.y > 0 and character.state != character.get_state_instance("Bonked") and character.jump_animation != 2
+	return character.is_walled() and !character.is_grounded() and character.velocity.y > 0 and character.state != character.get_state_instance("Bonked") and character.state != character.get_state_instance("Dive") and character.jump_animation != 2
 
 func _start(delta):
+	character.velocity.y = character.velocity.y/3
 	if character.is_walled_right():
 		character.direction_on_stick = 1
 	else:

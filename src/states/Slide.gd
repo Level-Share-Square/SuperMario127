@@ -10,8 +10,9 @@ export var get_up_power = 320
 var stop_counter = 0.0
 
 func _start(delta):
-	var sprite = character.get_node("AnimatedSprite")
-	character.friction = 2.25
+	if character.state != character.get_state_instance("Jump"):
+		var sprite = character.get_node("AnimatedSprite")
+		character.friction = 2.25
 	
 func _update(delta):
 	var sprite = character.get_node("AnimatedSprite")

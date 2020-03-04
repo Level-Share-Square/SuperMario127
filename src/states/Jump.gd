@@ -80,9 +80,6 @@ func _update(delta):
 		jump_playing = false
 	if character.is_ceiling():
 		character.velocity.y = 3
-		
-func _stop(delta):
-	pass
 
 func _stop_check(delta):
 	return character.is_grounded()

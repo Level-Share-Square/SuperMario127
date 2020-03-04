@@ -32,6 +32,7 @@ func _start(delta):
 
 func _update(delta):
 	var sprite = character.get_node("AnimatedSprite")
+	character.facing_direction = direction_on_wj
 	if (direction_on_wj == 1):
 		sprite.animation = "jumpRight"
 	else:
@@ -39,10 +40,9 @@ func _update(delta):
 	pass
 	if character.is_ceiling():
 		character.velocity.y = 3
-
+		
 func _stop(delta):
-	if character.is_walled():
-		character.velocity.x = character.velocity.x/4
+	character.facing_direction = direction_on_wj
 
 func _stop_check(delta):
 	return wall_jump_timer <= 0 or character.is_walled() or character.is_grounded()
@@ -50,8 +50,6 @@ func _stop_check(delta):
 func _general_update(delta):
 	if character.position.x > position_on_wj.x - 3 && character.position.x < position_on_wj.x + 3:
 		character_in_range = true
-		if press_buffer > 0:
-			press_buffer = 0.075
 	else:
 		character_in_range = false
 	if character.is_grounded():

@@ -110,15 +110,26 @@ func _physics_process(delta: float):
 		if (test_move(self.transform, Vector2(0, 0.1))):
 			collision_down = true
 			velocity.y = 0
+		else:
+			collision_down = false
 		# Up
 		if (test_move(self.transform, Vector2(0, -0.1))):
 			collision_up = true
+			velocity.y = 1
+		else:
+			collision_up = false
 		# Left
 		if (test_move(self.transform, Vector2(-0.1, 0))):
 			collision_left = true
+			velocity.x = 0
+		else:
+			collision_left = false
 		# Right
 		if (test_move(self.transform, Vector2(0.1, 0))):
 			collision_right = true
+			velocity.x = 0
+		else:
+			collision_right = false
 
 		# Movement
 		move_direction = 0

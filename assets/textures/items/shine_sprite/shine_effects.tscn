@@ -8,7 +8,7 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 6 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.302469 )
-colors = PoolColorArray( 1, 0.819608, 0, 0.25098, 1, 0.607843, 0, 0 )
+colors = PoolColorArray( 1, 0.862745, 0.541176, 0.25098, 1, 0.796078, 0, 0 )
 
 [node name="ShineEffects" type="Node2D"]
 position = Vector2( 0, 2 )
@@ -48,7 +48,8 @@ gradient = SubResource( 2 )
 [node name="Light2D" type="Light2D" parent="."]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
-color = Color( 1, 0.909804, 0.435294, 1 )
-energy = 1.6
+color = Color( 1, 0.843137, 0.478431, 1 )
+energy = 1.75
+mode = 2
 range_layer_min = -512
 range_layer_max = 512

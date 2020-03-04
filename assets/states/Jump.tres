@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource( 1 )
-jump_power = 350.0
+jump_power = 365.0
 double_jump_power = 425.0
 triple_jump_power = 495.0
