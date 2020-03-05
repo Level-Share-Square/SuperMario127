@@ -117,7 +117,7 @@ func _physics_process(delta: float):
 		# Up
 		if (test_move(self.transform, Vector2(0, -0.1))):
 			collision_up = true
-			velocity.y = 1
+			velocity.y = 3
 		else:
 			collision_up = false
 		# Left

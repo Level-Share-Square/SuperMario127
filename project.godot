@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/level/GameObject.gd"
 }, {
+"base": "GameObject",
+"class": "GamePlatformObject",
+"language": "GDScript",
+"path": "res://src/base_objects/GamePlatformObject.gd"
+}, {
 "base": "Reference",
 "class": "JSONBeautifier",
 "language": "GDScript",
@@ -138,6 +143,7 @@ _global_script_class_icons={
 "FallState": "",
 "GameAreaCollisionObject": "",
 "GameObject": "",
+"GamePlatformObject": "",
 "JSONBeautifier": "",
 "JumpState": "",
 "Level": "",

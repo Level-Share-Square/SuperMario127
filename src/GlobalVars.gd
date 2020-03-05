@@ -8,6 +8,7 @@ export var levelJSON : Resource
 export var areaIndex := 0
 export var placement_mode = "Drag"
 export var mouse_hovering := false
+export var currently_centered := true
 var level := Level.new()
 var area : LevelArea
 var editor := LevelEditor.new()
@@ -61,6 +62,25 @@ func get_tile_from_godot_id(id):
 		var tileset : LevelTileset = load("res://assets/tilesets/" + level_tilesets.tilesets[tileset_id] + ".tres")
 		var tile_id = 0
 		return [str(tileset_id).pad_zeros(3), str(tile_id)]
+		
+func place_edges(pos, placing_tile, bounds, tilemap_node):
+	if pos.x == 0:
+		tilemap_node.set_cell(-1, pos.y, placing_tile)
+	if pos.y == 0:
+		tilemap_node.set_cell(pos.x, -1, placing_tile)
+	if pos.x == 0 && pos.y == 0:
+		tilemap_node.set_cell(-1, -1, placing_tile)
+	if pos.x == 0 && pos.y == bounds.y - 1:
+		tilemap_node.set_cell(-1, bounds.y, placing_tile)
+		
+	if pos.x == bounds.x - 1:
+		tilemap_node.set_cell(bounds.x, pos.y, placing_tile)
+	if pos.y == bounds.y - 1:
+		tilemap_node.set_cell(pos.x, bounds.y, placing_tile)
+	if pos.x == bounds.x - 1 && pos.y == bounds.y - 1:
+		tilemap_node.set_cell(bounds.x, bounds.y, placing_tile)
+	if pos.x == bounds.x - 1 && pos.y == 0:
+		tilemap_node.set_cell(bounds.x, -1, placing_tile)
 
 func _process(delta):
 	if game_mode == "Editing" && Input.is_action_just_pressed("switch_placement_mode"):

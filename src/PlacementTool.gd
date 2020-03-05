@@ -66,6 +66,8 @@ func _physics_process(delta):
 			ghost_object.visible = true
 			ghost_object.modulate = Color(1, 1, 1, 0.5)
 			if global_vars_node.placement_mode == "Tile":
+				if !global_vars.currently_centered:
+					mouse_grid_pos -= Vector2(16, 16)
 				ghost_object.position = mouse_grid_pos
 			else:
 				ghost_object.position = mouse_pos
@@ -79,12 +81,16 @@ func _physics_process(delta):
 								if (tilemap_node.get_cell(mouse_tile_pos.x, mouse_tile_pos.y) != tile):
 									tilemap_node.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, tile)
 									global_vars.editor.set_tile(mouse_tile_pos, global_vars.selected_tileset_id, global_vars.selected_tile_id, layer)
+									global_vars.place_edges(mouse_tile_pos, tile, level_size, self)
+									
 									tilemap_node.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
 				elif global_vars.placement_mode == "Tile":
 					global_vars.editor.create_object(self, global_vars_node.selected_object_type, { "position": mouse_grid_pos, "scale": Vector2(1, 1), "rotation_degrees": 0 })
 			elif right_mouse_held:
 				tilemap_node.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, air_tile)
 				global_vars.editor.set_tile(mouse_tile_pos, 0, 0, layer)
+				global_vars.place_edges(mouse_tile_pos, air_tile, level_size, self)
+				
 				tilemap_node.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
 				if layer == 1:
 					global_vars.editor.delete_object_at_position(self, mouse_grid_pos)

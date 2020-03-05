@@ -18,6 +18,7 @@ func _pressed():
 	if !is_tile:
 		var ghost_object = load("res://src/editor_objects/" + object_type + ".gd").new()
 		tile_map.ghost_object = ghost_object
+		global_vars.currently_centered = ghost_object.placing_centered
 		ghost_tile_container.add_child(ghost_object)
 	global_vars.is_tile = is_tile
 	global_vars.selected_tileset_id = tileset_id

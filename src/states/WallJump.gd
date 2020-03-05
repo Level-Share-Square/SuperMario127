@@ -38,8 +38,6 @@ func _update(delta):
 	else:
 		sprite.animation = "jumpLeft"
 	pass
-	if character.is_ceiling():
-		character.velocity.y = 3
 		
 func _stop(delta):
 	character.facing_direction = direction_on_wj

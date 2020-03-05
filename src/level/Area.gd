@@ -63,19 +63,25 @@ func load_in(node: Node, isEditing: bool):
 		var tile = very_foreground_tiles[index]
 		if tile[0] != 0:
 			var position = get_position_from_tile_index(index)
-			very_foreground_tile_map.set_cell(position.x, position.y, global_vars.get_tile(tile[0], tile[1]))
+			var cache_tile = global_vars.get_tile(tile[0], tile[1])
+			very_foreground_tile_map.set_cell(position.x, position.y, cache_tile)
+			global_vars.place_edges(Vector2(position.x, position.y), cache_tile, settings.size, very_foreground_tile_map)
 		
 	for index in range(foreground_tiles.size()):
 		var tile = foreground_tiles[index]
 		if tile[0] != 0:
 			var position = get_position_from_tile_index(index)
+			var cache_tile = global_vars.get_tile(tile[0], tile[1])
 			tile_map.set_cell(position.x, position.y, global_vars.get_tile(tile[0], tile[1]))
+			global_vars.place_edges(Vector2(position.x, position.y), cache_tile, settings.size, tile_map)
 		
 	for index in range(background_tiles.size()):
 		var tile = background_tiles[index]
 		if tile[0] != 0:
 			var position = get_position_from_tile_index(index)
+			var cache_tile = global_vars.get_tile(tile[0], tile[1])
 			background_tile_map.set_cell(position.x, position.y, global_vars.get_tile(tile[0], tile[1]))
+			global_vars.place_edges(Vector2(position.x, position.y), cache_tile, settings.size, background_tile_map)
 		
 	very_foreground_tile_map.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
 	tile_map.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
