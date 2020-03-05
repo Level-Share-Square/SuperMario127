@@ -1,14 +1,12 @@
-extends NinePatchRect
+extends WindowDialog
 
-onready var global_vars = get_node("../../GlobalVars")
-onready var label = get_node("Label")
-export var window_title := "Window"
-var drag_position = null
+onready var close = get_node("Close")
 
 func _ready():
-	label.text = window_title
+	popup_centered()
+	pass
 
-func _on_Window_gui_input(event):
-	if event is InputEventMouseButton:
-		if event.pressed:
-			print("e")
+func _process(delta):
+	if close.pressed:
+		hide()
+

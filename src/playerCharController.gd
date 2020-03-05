@@ -20,6 +20,7 @@ var old_friction = 10.5
 var jump_playing = true
 var current_jump = 0
 var jump_animation = 0
+export var real_fricion = 0
 
 var diving = false
 var rotating = false
@@ -90,6 +91,7 @@ func set_state_by_name(name: String, delta: float):
 	set_state(state_map[name], delta)
 	
 func _ready():
+	real_fricion = friction
 	for name in state_names:
 		var state = load("res://assets/states/" + name + ".tres")
 		state.character = self
