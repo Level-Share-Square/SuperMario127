@@ -58,7 +58,7 @@ func _physics_process(delta):
 			var level_tilesets : LevelTilesets = load("res://assets/level_tilesets.tres")
 			var tileset_info = load("res://assets/tilesets/" + level_tilesets.tilesets[global_vars.selected_tileset_id] + ".tres")
 			ghost_tile.texture = tileset_info.placing_texture
-			ghost_tile.region_rect = tileset_info.placing_rect
+			ghost_tile.region_rect = global_vars.placing_rect
 			ghost_tile.modulate = Color(1, 1, 1, 0.5)
 			ghost_tile.position = Vector2(mouse_tile_pos.x * 32, mouse_tile_pos.y * 32)
 		else:
@@ -78,12 +78,12 @@ func _physics_process(delta):
 				if global_vars.is_tile:
 					if mouse_tile_pos.x > -1 and mouse_tile_pos.x < level_size.x:
 						if mouse_tile_pos.y > -1 and mouse_tile_pos.y < level_size.y:
-								if (tilemap_node.get_cell(mouse_tile_pos.x, mouse_tile_pos.y) != tile):
-									tilemap_node.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, tile)
-									global_vars.editor.set_tile(mouse_tile_pos, global_vars.selected_tileset_id, global_vars.selected_tile_id, layer)
-									global_vars.place_edges(mouse_tile_pos, tile, level_size, self)
-									
-									tilemap_node.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
+							if (tilemap_node.get_cell(mouse_tile_pos.x, mouse_tile_pos.y) != tile):
+								tilemap_node.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, tile)
+								global_vars.editor.set_tile(mouse_tile_pos, global_vars.selected_tileset_id, global_vars.selected_tile_id, layer)
+								global_vars.place_edges(mouse_tile_pos, tile, level_size, self)
+								
+								tilemap_node.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
 				elif global_vars.placement_mode == "Tile":
 					global_vars.editor.create_object(self, global_vars_node.selected_object_type, { "position": mouse_grid_pos, "scale": Vector2(1, 1), "rotation_degrees": 0 })
 			elif right_mouse_held:

@@ -7,6 +7,7 @@ export var max_gravity_velocity = Vector2(950, 950)
 export var levelJSON : Resource
 export var areaIndex := 0
 export var placement_mode = "Drag"
+export var placing_rect := Rect2(96, 0, 32, 32)
 export var mouse_hovering := false
 export var currently_centered := true
 var level := Level.new()

@@ -24,6 +24,7 @@ func _pressed():
 	global_vars.selected_tileset_id = tileset_id
 	global_vars.selected_tile_id = tile_id
 	global_vars.selected_object_type = object_type
+	global_vars.placing_rect = tile_rect
 
 func _input(event):
 	if event is InputEventKey and event.scancode == hotkey and event.is_pressed() and !event.is_echo():		
