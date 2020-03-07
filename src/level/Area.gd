@@ -57,6 +57,7 @@ func load_in(node: Node, isEditing: bool):
 	var background_tile_map = node.get_node("../BackgroundTileMap")
 	var tile_map = node.get_node("../TileMap")
 	var very_foreground_tile_map = node.get_node("../VeryForegroundTileMap")
+	var music_node : AudioStreamPlayer = node.get_node("../Music")
 	var global_vars = node.get_node("../GlobalVars")
 	
 	for index in range(very_foreground_tiles.size()):
@@ -96,6 +97,11 @@ func load_in(node: Node, isEditing: bool):
 		for object in objects:
 			var node_object = load_editor_object(object)
 			level_objects.add_child(node_object)
+	
+	var song = global_vars.get_song(settings.music)
+	music_node.stream = song.stream
+	music_node.volume_db = song.volume_db
+	music_node.pitch_scale = song.pitch_scale
 			
 func save_out(node: Node, isEditing: bool):
 	var background_tile_map = node.get_node("../BackgroundTileMap")

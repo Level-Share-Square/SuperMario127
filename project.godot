@@ -95,6 +95,16 @@ _global_script_classes=[ {
 "path": "res://src/level/Object.gd"
 }, {
 "base": "Resource",
+"class": "LevelSong",
+"language": "GDScript",
+"path": "res://src/level/Song.gd"
+}, {
+"base": "Resource",
+"class": "LevelSongs",
+"language": "GDScript",
+"path": "res://src/level/Songs.gd"
+}, {
+"base": "Resource",
 "class": "LevelTileset",
 "language": "GDScript",
 "path": "res://src/level/Tileset.gd"
@@ -152,6 +162,8 @@ _global_script_class_icons={
 "LevelEditor": "",
 "LevelJSON": "",
 "LevelObject": "",
+"LevelSong": "",
+"LevelSongs": "",
 "LevelTileset": "",
 "LevelTilesets": "",
 "SlideState": "",

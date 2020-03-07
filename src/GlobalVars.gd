@@ -82,6 +82,11 @@ func place_edges(pos, placing_tile, bounds, tilemap_node):
 		tilemap_node.set_cell(bounds.x, bounds.y, placing_tile)
 	if pos.x == bounds.x - 1 && pos.y == 0:
 		tilemap_node.set_cell(bounds.x, -1, placing_tile)
+		
+func get_song(song_id: int):
+	var level_songs : LevelSongs = load("res://assets/level_songs.tres")
+	var song : LevelSong = load("res://assets/songs/" + level_songs.songs[song_id] + ".tres")
+	return song
 
 func _process(delta):
 	if game_mode == "Editing" && Input.is_action_just_pressed("switch_placement_mode"):
