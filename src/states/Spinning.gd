@@ -15,10 +15,11 @@ func _start(delta):
 	if can_boost == true && !character.is_grounded() && (character.state != character.get_state_instance("Jump") or character.current_jump == 1):
 		can_boost = false
 		cooldown_timer = 0.5
-		if character.velocity.y > 50:
-			character.velocity.y -= boost_power
-		else:
-			character.velocity.y -= boost_power/2
+		if character.velocity.y > -boost_power:
+			if character.velocity.y > 50:
+				character.velocity.y -= boost_power
+			else:
+				character.velocity.y -= boost_power/2
 	old_gravity_scale = character.gravity_scale
 	character.gravity_scale = gravity_scale
 	

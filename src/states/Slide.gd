@@ -39,7 +39,7 @@ func _update(delta):
 
 func _stop(delta):
 	var sprite = character.get_node("AnimatedSprite")
-	character.friction = character.real_fricion
+	character.friction = character.real_friction
 	sprite.rotation_degrees = 0
 	stop_counter = 0
 

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://src/level/Song.gd" type="Script" id=1]
-[ext_resource path="res://assets/music/grass/yoshi_star_galaxy.ogg" type="AudioStream" id=2]
+[ext_resource path="res://assets/music/silence.ogg" type="AudioStream" id=2]
 
 [resource]
 script = ExtResource( 1 )
 stream = ExtResource( 2 )
-volume_db = -2
+volume_db = 0
 pitch_scale = 1

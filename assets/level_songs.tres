@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource( 1 )
-songs = PoolStringArray( "YoshiStar" )
+songs = PoolStringArray( "Silence", "YoshiStar", "BobOmb", "PurpleComet", "PwnedSlide" )

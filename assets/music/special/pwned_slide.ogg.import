@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/pwned_slide.ogg-952da72ccc8d6b7e55b61990e2d2560d.oggstr"
+
+[deps]
+
+source_file="res://assets/music/special/pwned_slide.ogg"
+dest_files=[ "res://.import/pwned_slide.ogg-952da72ccc8d6b7e55b61990e2d2560d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=27.475
