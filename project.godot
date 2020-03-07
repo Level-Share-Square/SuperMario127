@@ -62,7 +62,7 @@ _global_script_classes=[ {
 "base": "State",
 "class": "JumpState",
 "language": "GDScript",
-"path": "res://src/states/Jump.gd"
+"path": "res://assets/Jump.gd"
 }, {
 "base": "Resource",
 "class": "Level",
