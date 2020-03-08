@@ -74,7 +74,7 @@ func load_in(node: Node, isEditing: bool):
 	var level_settings = node.get_node("../LevelSettings")
 	var camera = node.get_node("../Camera2D")
 	level_settings.level_size = settings.size
-	camera.position = Vector2(0, 0)
+	camera.position = Vector2(0, (settings.size.y * 32) - (camera.get_viewport().size.y / 2))
 	camera._gamemode_changed("Editing")
 	
 	for index in range(very_foreground_tiles.size()):
@@ -186,7 +186,17 @@ func save_out(node: Node, isEditing: bool):
 		level_dictionary.areas[0].objects.append(added_object)
 	
 	var exportstr = JSON.print(level_dictionary)
-	global_vars.saved_code = exportstr
+	if OS.has_feature("JavaScript"):
+		JavaScript.eval("""
+			const el = document.createElement('textarea')
+			el.value = '""" + exportstr + """'
+			document.body.appendChild(el)
+			el.select()
+			document.execCommand('copy')
+			document.body.removeChild(el)
+		""", true)
+	else:
+		OS.clipboard = exportstr
 
 func unload(node: Node):
 	var level_objects = node.get_node("../LevelObjects")

@@ -69,21 +69,8 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("switch_modes"):
 		switch_modes()
-	if Input.is_action_just_pressed("save_level") and global_vars_node.game_mode == "Editing":
-		global_vars_node.editor.save_out(self)
 	if Input.is_action_just_pressed("copy_level") and global_vars_node.game_mode == "Editing":
-		var exportstr = global_vars_node.saved_code
-		if OS.has_feature("JavaScript"):
-			JavaScript.eval("""
-				const el = document.createElement('textarea')
-				el.value = '""" + exportstr + """'
-				document.body.appendChild(el)
-				el.select()
-				document.execCommand('copy')
-				document.body.removeChild(el)
-			""", true)
-		else:
-			OS.clipboard = exportstr
+		global_vars_node.editor.save_out(self)
 	if Input.is_action_just_pressed("paste_level") and global_vars_node.game_mode == "Editing":
 		var editor = global_vars_node.editor
 		editor.unload(self)

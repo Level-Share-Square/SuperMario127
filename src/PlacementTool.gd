@@ -6,6 +6,9 @@ onready var global_vars_node = get_node("../GlobalVars")
 onready var ghost_tile = get_node("../GhostTile")
 onready var global_vars = get_node("../GlobalVars")
 onready var level_objects = get_node("../LevelObjects")
+onready var middle_tilemap = self
+onready var background_tilemap = get_node("../BackgroundTileMap")
+onready var foreground_tilemap = get_node("../VeryForegroundTileMap")
 onready var air_tile = global_vars.get_tile(0, 0)
 var ghost_object
 var layer = 1
@@ -13,6 +16,7 @@ var left_mouse_held = false
 var right_mouse_held = false
 var last_left = false
 var last_right = false
+var transparency_amount = 1
 
 func _unhandled_input(event):
 	if event.is_action("click"):
@@ -30,6 +34,10 @@ func switch_layers():
 	layer += 1
 	if layer > 2:
 		layer = 0
+		
+func _input(event):
+	if event.is_action_pressed("toggle_transparency"):
+		transparency_amount = 1 if (transparency_amount == 0.5) else 0.5
 
 func _physics_process(delta):
 	if global_vars_node.game_mode == "Editing":
@@ -44,9 +52,19 @@ func _physics_process(delta):
 		ghost_tile.z_index = 1
 		if layer == 0:
 			tilemap_node = get_node("../BackgroundTileMap")
+			tilemap_node.modulate.a = 1
+			middle_tilemap.modulate.a = transparency_amount
+			foreground_tilemap.modulate.a = transparency_amount
 			ghost_tile.z_index = -11
+		elif layer == 1:
+			tilemap_node.modulate.a = 1
+			foreground_tilemap.modulate.a = transparency_amount
+			background_tilemap.modulate.a = transparency_amount
 		elif layer == 2:
 			tilemap_node = get_node("../VeryForegroundTileMap")
+			tilemap_node.modulate.a = 1
+			middle_tilemap.modulate.a = transparency_amount
+			background_tilemap.modulate.a = transparency_amount
 			ghost_tile.z_index = 9
 		
 		if global_vars.is_tile:
@@ -78,7 +96,7 @@ func _physics_process(delta):
 								seed(mouse_tile_pos.x + mouse_tile_pos.y)
 								tilemap_node.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, tile)
 								global_vars.editor.set_tile(mouse_tile_pos, global_vars.selected_tileset_id, global_vars.selected_tile_id, layer)
-								global_vars.place_edges(mouse_tile_pos, tile, level_size, self)
+								global_vars.place_edges(mouse_tile_pos, tile, level_size, tilemap_node)
 								
 								tilemap_node.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
 				elif global_vars.placement_mode == "Tile":
@@ -87,7 +105,7 @@ func _physics_process(delta):
 				seed(mouse_tile_pos.x + mouse_tile_pos.y)
 				tilemap_node.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, air_tile)
 				global_vars.editor.set_tile(mouse_tile_pos, 0, 0, layer)
-				global_vars.place_edges(mouse_tile_pos, air_tile, level_size, self)
+				global_vars.place_edges(mouse_tile_pos, air_tile, level_size, tilemap_node)
 				
 				tilemap_node.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
 				if layer == 1:
@@ -106,5 +124,8 @@ func _physics_process(delta):
 		ghost_tile.visible = false
 		if !global_vars.is_tile:
 			ghost_object.visible = false	
+		middle_tilemap.modulate.a = 1
+		background_tilemap.modulate.a = 1
+		foreground_tilemap.modulate.a = 1
 	last_left = left_mouse_held
 	last_right = right_mouse_held
