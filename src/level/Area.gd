@@ -105,7 +105,7 @@ func load_in(node: Node, isEditing: bool):
 	tile_map.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
 	background_tile_map.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
 		
-	character.position = settings.spawn
+	character.position = Vector2(0, 0)
 	if !isEditing:
 		for object in objects:
 			var node_object = load_object(object)
@@ -139,7 +139,6 @@ func save_out(node: Node, isEditing: bool):
 	var level_objects = node.get_node("../LevelObjects")
 	
 	var level_size = settings.size
-	var spawn_location = Vector2(0, 0)
 	
 	var saved_json = File.new()
 	var level_dictionary = {}
@@ -155,7 +154,6 @@ func save_out(node: Node, isEditing: bool):
 	level_dictionary.areas[0].settings.background = settings.background
 	level_dictionary.areas[0].settings.music = settings.music
 	level_dictionary.areas[0].settings.size = {x = level_size.x, y = level_size.y}
-	level_dictionary.areas[0].settings.spawn = {x = spawn_location.x, y = spawn_location.y}
 	
 	for index in range(settings.size.x * settings.size.y):
 		var position = get_position_from_tile_index(index)

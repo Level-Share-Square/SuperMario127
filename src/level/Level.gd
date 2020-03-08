@@ -36,7 +36,6 @@ func get_settings(result) -> LevelAreaSettings:
 	settings.background = result.background
 	settings.music = result.music
 	settings.size = get_vector2(result.size)
-	settings.spawn = get_vector2(result.spawn)
 	return settings
 	
 func get_tiles(result) -> Array:
