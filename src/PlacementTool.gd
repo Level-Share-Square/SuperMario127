@@ -1,6 +1,6 @@
 extends TileMap
 
-var level_size = Vector2(0 ,0)
+export var level_size = Vector2(0 ,0)
 onready var level_size_node = get_node("../LevelSettings")
 onready var global_vars_node = get_node("../GlobalVars")
 onready var ghost_tile = get_node("../GhostTile")
@@ -31,13 +31,9 @@ func switch_layers():
 	if layer > 2:
 		layer = 0
 
-func _ready():
-	var level_size_temp = level_size_node.level_size
-	level_size = level_size_temp
-	pass
-
 func _physics_process(delta):
 	if global_vars_node.game_mode == "Editing":
+		level_size = level_size_node.level_size
 		if Input.is_action_just_pressed("switch_layers"):
 			switch_layers()
 		var mouse_pos = get_global_mouse_position()

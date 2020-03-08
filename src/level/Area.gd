@@ -60,6 +60,7 @@ func load_in(node: Node, isEditing: bool):
 	var music_node : AudioStreamPlayer = node.get_node("../Music")
 	var sky_node = node.get_node("../Background/Sprite")
 	
+	
 	var parallax_layer_1_node = node.get_node("../Parallax/ParallaxLayer")
 	var parallax_sprite_1_node = node.get_node("../Parallax/ParallaxLayer/Sprite")
 	
@@ -70,6 +71,11 @@ func load_in(node: Node, isEditing: bool):
 	var parallax_sprite_3_node = node.get_node("../Parallax/ParallaxLayer3/Sprite")
 	
 	var global_vars = node.get_node("../GlobalVars")
+	var level_settings = node.get_node("../LevelSettings")
+	var camera = node.get_node("../Camera2D")
+	level_settings.level_size = settings.size
+	camera.position = Vector2(0, 0)
+	camera._gamemode_changed("Editing")
 	
 	for index in range(very_foreground_tiles.size()):
 		var tile = very_foreground_tiles[index]
@@ -132,7 +138,7 @@ func save_out(node: Node, isEditing: bool):
 	var global_vars = node.get_node("../GlobalVars")
 	var level_objects = node.get_node("../LevelObjects")
 	
-	var level_size = Vector2(80, 30)
+	var level_size = settings.size
 	var spawn_location = Vector2(0, 0)
 	
 	var saved_json = File.new()
