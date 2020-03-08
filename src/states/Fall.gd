@@ -22,6 +22,7 @@ func _update(delta):
 			sprite.animation = "doubleFallLeft"
 
 func _stop(delta):
+	character.jump_animation = 0
 	pass
 
 func _stop_check(delta):

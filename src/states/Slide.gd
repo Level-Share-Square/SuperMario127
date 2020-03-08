@@ -33,7 +33,7 @@ func _update(delta):
 	if Input.is_action_pressed("jump") and stop_counter <= 0:
 		character.velocity.y = -get_up_power
 		character.position.y -= 1
-		character.friction = 7.5
+		character.friction = character.real_friction
 		sprite.rotation_degrees = 0
 		stop_counter += delta
 

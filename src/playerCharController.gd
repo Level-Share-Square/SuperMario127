@@ -111,25 +111,21 @@ func _physics_process(delta: float):
 		# Down
 		if (test_move(self.transform, Vector2(0, 0.1))):
 			collision_down = true
-			velocity.y = 0
 		else:
 			collision_down = false
 		# Up
 		if (test_move(self.transform, Vector2(0, -0.1))):
 			collision_up = true
-			velocity.y = 3
 		else:
 			collision_up = false
 		# Left
 		if (test_move(self.transform, Vector2(-0.1, 0))):
 			collision_left = true
-			velocity.x = 0
 		else:
 			collision_left = false
 		# Right
 		if (test_move(self.transform, Vector2(0.1, 0))):
 			collision_right = true
-			velocity.x = 0
 		else:
 			collision_right = false
 
@@ -205,7 +201,7 @@ func _physics_process(delta: float):
 			state.handle_update(delta)
 
 		# Move by velocity
-		move_and_slide(velocity)
+		velocity = move_and_slide(velocity)
 
 		# Boundaries
 		if position.y > (level_settings_node.level_size.y * 32) + 128:
