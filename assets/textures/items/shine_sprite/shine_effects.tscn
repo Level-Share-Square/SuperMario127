@@ -47,6 +47,7 @@ gradient = SubResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="."]
 scale = Vector2( 2, 2 )
+editor_only = true
 texture = ExtResource( 1 )
 color = Color( 1, 0.843137, 0.478431, 1 )
 energy = 1.75

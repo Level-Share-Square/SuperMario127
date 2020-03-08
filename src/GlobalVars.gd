@@ -10,6 +10,7 @@ export var placement_mode = "Drag"
 export var placing_rect := Rect2(96, 0, 32, 32)
 export var mouse_hovering := false
 export var currently_centered := true
+export var saved_code := ""
 var level := Level.new()
 var area : LevelArea
 var editor := LevelEditor.new()

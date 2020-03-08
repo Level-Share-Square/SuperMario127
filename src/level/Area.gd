@@ -180,17 +180,7 @@ func save_out(node: Node, isEditing: bool):
 		level_dictionary.areas[0].objects.append(added_object)
 	
 	var exportstr = JSON.print(level_dictionary)
-	if OS.has_feature("JavaScript"):
-		JavaScript.eval("""
-			const el = document.createElement('textarea')
-			el.value = '""" + exportstr + """'
-			document.body.appendChild(el)
-			el.select()
-			document.execCommand('copy')
-			document.body.removeChild(el)
-		""", true)
-	else:
-		OS.clipboard = exportstr
+	global_vars.saved_code = exportstr
 
 func unload(node: Node):
 	var level_objects = node.get_node("../LevelObjects")
