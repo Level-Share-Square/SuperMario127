@@ -16,7 +16,6 @@ position = Vector2( 0, 2 )
 [node name="LeftBeam" type="Line2D" parent="."]
 z_index = -1
 points = PoolVector2Array( 0, 0, -70, 0 )
-width = 5.0
 width_curve = SubResource( 1 )
 default_color = Color( 1, 0.819608, 0, 1 )
 gradient = SubResource( 2 )
@@ -24,7 +23,6 @@ gradient = SubResource( 2 )
 [node name="RightBeam" type="Line2D" parent="."]
 z_index = -1
 points = PoolVector2Array( 0, 0, 70, 0 )
-width = 6.0
 width_curve = SubResource( 1 )
 default_color = Color( 1, 0.819608, 0, 1 )
 gradient = SubResource( 2 )
@@ -32,7 +30,6 @@ gradient = SubResource( 2 )
 [node name="TopBeam" type="Line2D" parent="."]
 z_index = -1
 points = PoolVector2Array( 0, 0, 0, -70 )
-width = 6.0
 width_curve = SubResource( 1 )
 default_color = Color( 1, 0.819608, 0, 1 )
 gradient = SubResource( 2 )
@@ -40,7 +37,6 @@ gradient = SubResource( 2 )
 [node name="BottomBeam" type="Line2D" parent="."]
 z_index = -1
 points = PoolVector2Array( 0, 0, 0, 70 )
-width = 6.0
 width_curve = SubResource( 1 )
 default_color = Color( 1, 0.819608, 0, 1 )
 gradient = SubResource( 2 )

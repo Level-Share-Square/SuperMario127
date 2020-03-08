@@ -11,6 +11,7 @@ export var placing_rect := Rect2(96, 0, 32, 32)
 export var mouse_hovering := false
 export var currently_centered := true
 export var saved_code := ""
+export var tileset_cache := []
 var level := Level.new()
 var area : LevelArea
 var editor := LevelEditor.new()
@@ -21,6 +22,11 @@ var selected_tile_id := 0
 var selected_tileset_id := 1
 
 func _ready():
+	var level_tilesets : LevelTilesets = load("res://assets/level_tilesets.tres")
+	for tileset_id in level_tilesets.tilesets:
+		var tileset : LevelTileset = load("res://assets/tilesets/" + tileset_id + ".tres")
+		tileset_cache.append(tileset)
+	
 	level.load_in(levelJSON)
 	area = level.areas[areaIndex]
 	editor.set_level_area(area)
@@ -36,8 +42,7 @@ func reload():
 	area.load_in(self, false)
 		
 func get_tile(tileset_id, tile_id):
-	var level_tilesets : LevelTilesets = load("res://assets/level_tilesets.tres")
-	var tileset : LevelTileset = load("res://assets/tilesets/" + level_tilesets.tilesets[tileset_id] + ".tres")
+	var tileset = tileset_cache[tileset_id]
 	if tile_id == 0:
 		return tileset.block_tile_id
 	elif tile_id == 1:
@@ -48,20 +53,19 @@ func get_tile(tileset_id, tile_id):
 		return tileset.right_slope_tile_id
 		
 func get_tile_from_godot_id(id):
-	var level_tilesets : LevelTilesets = load("res://assets/level_tilesets.tres")
 	if id == -1:
 		var tileset_id = 0
-		var tileset : LevelTileset = load("res://assets/tilesets/" + level_tilesets.tilesets[tileset_id] + ".tres")
+		var tileset = tileset_cache[tileset_id]
 		var tile_id = 0
 		return [str(tileset_id).pad_zeros(3), str(tile_id)]
 	elif id == 2:
 		var tileset_id = 2
-		var tileset : LevelTileset = load("res://assets/tilesets/" + level_tilesets.tilesets[tileset_id] + ".tres")
+		var tileset = tileset_cache[tileset_id]
 		var tile_id = 0
 		return [str(tileset_id).pad_zeros(3), str(tile_id)]
 	elif id == 3:
 		var tileset_id = 1
-		var tileset : LevelTileset = load("res://assets/tilesets/" + level_tilesets.tilesets[tileset_id] + ".tres")
+		var tileset = tileset_cache[tileset_id]
 		var tile_id = 0
 		return [str(tileset_id).pad_zeros(3), str(tile_id)]
 		
