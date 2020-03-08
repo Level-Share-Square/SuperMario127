@@ -22,9 +22,16 @@ func get_value_from_true(value):
 		return {type="Vector2", construction=[value.x, value.y]}
 	else:
 		return value
+		
+func encode_value(value):
+	# again very hacky cause i dont know how else to add it
+	if typeof(value) == TYPE_VECTOR2:
+		return "V2" + str(stepify(value.x,0.01)) + "x" + str(stepify(value.y, 0.01))
+	else:
+		return str(value)
 
 func load_object(object: LevelObject):
-	var object_class = load("res://src/objects/" + object.type + ".gd")
+	var object_class = load("res://src/objects/" + object.name + ".gd")
 	var node = object_class.new()
 	for key in object.properties:
 		var value = object.properties[key]
@@ -33,7 +40,7 @@ func load_object(object: LevelObject):
 	return node
 
 func load_editor_object(object: LevelObject):
-	var object_class = load("res://src/editor_objects/" + object.type + ".gd")
+	var object_class = load("res://src/editor_objects/" + object.name + ".gd")
 	var node = object_class.new()
 	node.level_object = object
 	for key in object.properties:
@@ -59,7 +66,6 @@ func load_in(node: Node, isEditing: bool):
 	var very_foreground_tile_map = node.get_node("../VeryForegroundTileMap")
 	var music_node : AudioStreamPlayer = node.get_node("../Music")
 	var sky_node = node.get_node("../Background/Sprite")
-	
 	
 	var parallax_layer_1_node = node.get_node("../Parallax/ParallaxLayer")
 	var parallax_sprite_1_node = node.get_node("../Parallax/ParallaxLayer/Sprite")
@@ -138,52 +144,122 @@ func save_out(node: Node, isEditing: bool):
 	var global_vars = node.get_node("../GlobalVars")
 	var level_objects = node.get_node("../LevelObjects")
 	
+	var level_string = ""
 	var level_size = settings.size
+	var format_version = "0.4.0"
+	var level_name = "My Level"
 	
-	var saved_json = File.new()
-	var level_dictionary = {}
-	level_dictionary.format_version = "0.3.3"
-	level_dictionary.name = "My Level"
-	level_dictionary.areas = [{}]
-	level_dictionary.areas[0].background_tiles = []
-	level_dictionary.areas[0].foreground_tiles = []
-	level_dictionary.areas[0].very_foreground_tiles = []
-	level_dictionary.areas[0].objects = []
-	level_dictionary.areas[0].settings = {}
-	level_dictionary.areas[0].settings.sky = settings.sky
-	level_dictionary.areas[0].settings.background = settings.background
-	level_dictionary.areas[0].settings.music = settings.music
-	level_dictionary.areas[0].settings.size = {x = level_size.x, y = level_size.y}
+	var tiles = []
+	var background_tiles = []
+	var foreground_tiles = []
 	
+	level_string += format_version + ","
+	level_string += level_name.percent_encode() + ","
+	
+	level_string += "["
+	
+	# Settings
+	level_string += encode_value(settings.size) + ","
+	level_string += encode_value(settings.sky) + ","
+	level_string += encode_value(settings.background) + ","
+	level_string += encode_value(settings.music) + "~"
+	
+	# Tiles
 	for index in range(settings.size.x * settings.size.y):
 		var position = get_position_from_tile_index(index)
 		var tile = tile_map.get_cell(position.x, position.y)
 		var encoded_tile = global_vars.get_tile_from_godot_id(tile)
 		var appended_tile = encoded_tile[0] + encoded_tile[1]
-		level_dictionary.areas[0].foreground_tiles.append(appended_tile)
+		tiles.append(appended_tile)	
 		
+	for index in range(settings.size.x * settings.size.y):
+		var position = get_position_from_tile_index(index)
 		var tile_background = background_tile_map.get_cell(position.x, position.y)
 		var encoded_tile_background = global_vars.get_tile_from_godot_id(tile_background)
 		var appended_tile_background = encoded_tile_background[0] + encoded_tile_background[1]
-		level_dictionary.areas[0].background_tiles.append(appended_tile_background)
-		
+		background_tiles.append(appended_tile_background)	
+
+	for index in range(settings.size.x * settings.size.y):
+		var position = get_position_from_tile_index(index)
 		var tile_very_foreground = very_foreground_tile_map.get_cell(position.x, position.y)
 		var encoded_tile_very_foreground = global_vars.get_tile_from_godot_id(tile_very_foreground)
 		var appended_tile_very_foreground = encoded_tile_very_foreground[0] + encoded_tile_very_foreground[1]
-		level_dictionary.areas[0].very_foreground_tiles.append(appended_tile_very_foreground)
-	level_dictionary.areas[0].background_tiles = rle_encode(level_dictionary.areas[0].background_tiles)
-	level_dictionary.areas[0].foreground_tiles = rle_encode(level_dictionary.areas[0].foreground_tiles)
-	level_dictionary.areas[0].very_foreground_tiles = rle_encode(level_dictionary.areas[0].very_foreground_tiles)
+		foreground_tiles.append(appended_tile_very_foreground)	
+	tiles = rle_encode(tiles)
+	background_tiles = rle_encode(background_tiles)
+	foreground_tiles = rle_encode(foreground_tiles)
+	
+	for tile in tiles:
+		level_string += tile + ","
+	level_string.erase(level_string.length() - 1, 1)
+	level_string += "~"
+	
+	for tile in background_tiles:
+		level_string += tile + ","
+	level_string.erase(level_string.length() - 1, 1)
+	level_string += "~"
+	
+	for tile in foreground_tiles:
+		level_string += tile + ","
+	level_string.erase(level_string.length() - 1, 1)
+	level_string += "~"
 	
 	for index in objects:
-		var added_object = {}
-		added_object.type = index.type
-		added_object.properties = {}
+		var added_object = ""
+		added_object += index.id + ","
 		for property in index.properties:
-			added_object.properties[property] = get_value_from_true(index.properties[property])
-		level_dictionary.areas[0].objects.append(added_object)
+			added_object += encode_value(get_true_value(index.properties[property])) + ","
+		added_object.erase(added_object.length() - 1, 1)
+		level_string += added_object + "|"
+	level_string.erase(level_string.length() - 1, 1)
+	level_string += "]"
 	
-	var exportstr = JSON.print(level_dictionary)
+	
+#	var saved_json = File.new()
+#	var level_dictionary = {}
+#	level_dictionary.format_version = "0.3.3"
+#	level_dictionary.name = "My Level"
+#	level_dictionary.areas = [{}]
+#	level_dictionary.areas[0].background_tiles = []
+#	level_dictionary.areas[0].foreground_tiles = []
+#	level_dictionary.areas[0].very_foreground_tiles = []
+#	level_dictionary.areas[0].objects = []
+#	level_dictionary.areas[0].settings = {}
+#	level_dictionary.areas[0].settings.sky = settings.sky
+#	level_dictionary.areas[0].settings.background = settings.background
+#	level_dictionary.areas[0].settings.music = settings.music
+#	level_dictionary.areas[0].settings.size = {x = level_size.x, y = level_size.y}
+#
+#	for index in range(settings.size.x * settings.size.y):
+#		var position = get_position_from_tile_index(index)
+#		var tile = tile_map.get_cell(position.x, position.y)
+#		var encoded_tile = global_vars.get_tile_from_godot_id(tile)
+#		var appended_tile = encoded_tile[0] + encoded_tile[1]
+#		level_dictionary.areas[0].foreground_tiles.append(appended_tile)
+#
+#		var tile_background = background_tile_map.get_cell(position.x, position.y)
+#		var encoded_tile_background = global_vars.get_tile_from_godot_id(tile_background)
+#		var appended_tile_background = encoded_tile_background[0] + encoded_tile_background[1]
+#		level_dictionary.areas[0].background_tiles.append(appended_tile_background)
+#
+#		var tile_very_foreground = very_foreground_tile_map.get_cell(position.x, position.y)
+#		var encoded_tile_very_foreground = global_vars.get_tile_from_godot_id(tile_very_foreground)
+#		var appended_tile_very_foreground = encoded_tile_very_foreground[0] + encoded_tile_very_foreground[1]
+#		level_dictionary.areas[0].very_foreground_tiles.append(appended_tile_very_foreground)
+#	level_dictionary.areas[0].background_tiles = rle_encode(level_dictionary.areas[0].background_tiles)
+#	level_dictionary.areas[0].foreground_tiles = rle_encode(level_dictionary.areas[0].foreground_tiles)
+#	level_dictionary.areas[0].very_foreground_tiles = rle_encode(level_dictionary.areas[0].very_foreground_tiles)
+#
+#	for index in objects:
+#		var added_object = {}
+#		added_object.type = index.type
+#		added_object.properties = {}
+#		for property in index.properties:
+#			added_object.properties[property] = get_value_from_true(index.properties[property])
+#		level_dictionary.areas[0].objects.append(added_object)
+#
+#	var exportstr = JSON.print(level_dictionary)
+	var exportstr = level_string
 	if OS.has_feature("JavaScript"):
 		JavaScript.eval("""
 			const el = document.createElement('textarea')
@@ -195,6 +271,7 @@ func save_out(node: Node, isEditing: bool):
 		""", true)
 	else:
 		OS.clipboard = exportstr
+	
 
 func unload(node: Node):
 	var level_objects = node.get_node("../LevelObjects")

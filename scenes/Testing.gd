@@ -1,6 +1,6 @@
 extends Node
 
-func _ready():
+func _readynt():
 	var level_JSON = load("res://assets/levels/TestLevel.tres")
 	var level = Level.new()
 	level.load_in(level_JSON)

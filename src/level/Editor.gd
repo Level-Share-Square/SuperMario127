@@ -40,11 +40,12 @@ func get_object_at_position(node: Node, position: Vector2):
 		if object.position == position:
 			return object
 
-func create_object(node: Node, type: String, properties: Dictionary):
+func create_object(node: Node, id: int, name:String, properties: Dictionary):
 	var level_objects = node.get_node("../LevelObjects")
 	if !get_object_at_position(node, properties.position):
 		var level_object = LevelObject.new()
-		level_object.type = type
+		level_object.id = id
+		level_object.name = name
 		level_object.properties = properties
 		area.objects.append(level_object)
 		var node_object = area.load_editor_object(level_object)

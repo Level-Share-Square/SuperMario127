@@ -100,7 +100,7 @@ func _physics_process(delta):
 								
 								tilemap_node.update_bitmask_area(Vector2(mouse_tile_pos.x, mouse_tile_pos.y))
 				elif global_vars.placement_mode == "Tile":
-					global_vars.editor.create_object(self, global_vars_node.selected_object_type, { "position": mouse_grid_pos, "scale": Vector2(1, 1), "rotation_degrees": 0 })
+					global_vars.editor.create_object(self, global_vars_node.selected_object_id, global_vars_node.selected_object_name, { "position": mouse_grid_pos, "scale": Vector2(1, 1), "rotation_degrees": 0 })
 			elif right_mouse_held:
 				seed(mouse_tile_pos.x + mouse_tile_pos.y)
 				tilemap_node.set_cell(mouse_tile_pos.x, mouse_tile_pos.y, air_tile)
@@ -112,7 +112,7 @@ func _physics_process(delta):
 					global_vars.editor.delete_object_at_position(self, mouse_grid_pos)
 			if global_vars.placement_mode == "Drag" && !global_vars.is_tile:
 				if left_mouse_held and !last_left:
-					global_vars.editor.create_object(self, global_vars_node.selected_object_type, { "position": mouse_pos, "scale": Vector2(1, 1), "rotation_degrees": 0 })
+					global_vars.editor.create_object(self, global_vars_node.selected_object_id, global_vars_node.selected_object_name, { "position": mouse_pos, "scale": Vector2(1, 1), "rotation_degrees": 0 })
 				elif right_mouse_held and !last_right:
 					var objectsToDelete = []
 					for object in level_objects.get_children():

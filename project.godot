@@ -50,9 +50,14 @@ _global_script_classes=[ {
 "path": "res://src/level/GameObject.gd"
 }, {
 "base": "GameObject",
-"class": "GamePlatformObject",
+"class": "GameSolidObject",
 "language": "GDScript",
-"path": "res://src/base_objects/GamePlatformObject.gd"
+"path": "res://src/base_objects/GameSolidObject.gd"
+}, {
+"base": "Resource",
+"class": "IdMappings",
+"language": "GDScript",
+"path": "res://src/IdMapResource.gd"
 }, {
 "base": "Reference",
 "class": "JSONBeautifier",
@@ -163,7 +168,8 @@ _global_script_class_icons={
 "FallState": "",
 "GameAreaCollisionObject": "",
 "GameObject": "",
-"GamePlatformObject": "",
+"GameSolidObject": "",
+"IdMappings": "",
 "JSONBeautifier": "",
 "JumpState": "",
 "Level": "",
@@ -385,6 +391,7 @@ common/physics_fps=120
 [rendering]
 
 quality/driver/driver_name="GLES2"
+quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_environment="res://default_env.tres"

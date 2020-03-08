@@ -75,6 +75,7 @@ func _process(delta):
 		var editor = global_vars_node.editor
 		editor.unload(self)
 		var level = Level.new()
+		level.global_vars_node = global_vars_node
 		var level_json = LevelJSON.new()
 		if OS.has_feature("JavaScript"):
 			JavaScript.eval("""

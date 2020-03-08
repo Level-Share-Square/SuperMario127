@@ -895,7 +895,8 @@ __meta__ = {
 }
 is_tile = false
 tileset_id = 2
-object_type = "Coin"
+object_name = "Coin"
+object_id = 2
 tile_rect = Rect2( 128, 0, 32, 32 )
 hotkey = 54
 
@@ -919,7 +920,8 @@ __meta__ = {
 }
 is_tile = false
 tileset_id = 2
-object_type = "Entrance"
+object_name = "Entrance"
+object_id = 1
 tile_rect = Rect2( 128, 0, 32, 32 )
 hotkey = 49
 
@@ -943,7 +945,8 @@ __meta__ = {
 }
 is_tile = false
 tileset_id = 2
-object_type = "Shine"
+object_name = "Shine"
+object_id = 3
 tile_rect = Rect2( 128, 0, 32, 32 )
 hotkey = 55
 
@@ -967,7 +970,8 @@ __meta__ = {
 }
 is_tile = false
 tileset_id = 2
-object_type = "MetalPlatform"
+object_name = "MetalPlatform"
+object_id = 4
 tile_rect = Rect2( 128, 0, 32, 32 )
 hotkey = 56
 
@@ -1153,7 +1157,7 @@ tile_data = PoolIntArray( 1769472, 2, 8, 1769473, 2, 10, 1769474, 2, 10, 1769475
 script = ExtResource( 9 )
 
 [node name="BackgroundTileMap" type="TileMap" parent="."]
-modulate = Color( 0.8, 0.8, 0.8, 0.501961 )
+modulate = Color( 0.6, 0.6, 0.6, 0.501961 )
 z_index = -10
 z_as_relative = false
 tile_set = SubResource( 57 )

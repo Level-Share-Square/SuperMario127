@@ -2,5 +2,6 @@ extends Resource
 
 class_name LevelObject
 
-var type: String = "Object"
+var name: String = "Object"
+var id: String = "0"
 var properties = {}

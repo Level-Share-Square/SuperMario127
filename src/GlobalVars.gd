@@ -12,20 +12,28 @@ export var mouse_hovering := false
 export var currently_centered := true
 export var saved_code := ""
 export var tileset_cache := []
+export var id_map_cache := {}
 var level := Level.new()
 var area : LevelArea
 var editor := LevelEditor.new()
 
 var is_tile := true
-var selected_object_type : String
+var selected_object_name : String
+var selected_object_id : int
 var selected_tile_id := 0
 var selected_tileset_id := 1
 
 func _ready():
+	level.global_vars_node = self
+	
 	var level_tilesets : LevelTilesets = load("res://assets/level_tilesets.tres")
 	for tileset_id in level_tilesets.tilesets:
 		var tileset : LevelTileset = load("res://assets/tilesets/" + tileset_id + ".tres")
 		tileset_cache.append(tileset)
+		
+	var id_mapping : IdMappings = load("res://assets/id_map.tres")
+	id_map_cache = id_mapping.mappings
+	print_debug(id_map_cache)
 	
 	level.load_in(levelJSON)
 	area = level.areas[areaIndex]
@@ -57,17 +65,17 @@ func get_tile_from_godot_id(id):
 		var tileset_id = 0
 		var tileset = tileset_cache[tileset_id]
 		var tile_id = 0
-		return [str(tileset_id).pad_zeros(3), str(tile_id)]
+		return [str(tileset_id).pad_zeros(2), str(tile_id)]
 	elif id == 2:
 		var tileset_id = 2
 		var tileset = tileset_cache[tileset_id]
 		var tile_id = 0
-		return [str(tileset_id).pad_zeros(3), str(tile_id)]
+		return [str(tileset_id).pad_zeros(2), str(tile_id)]
 	elif id == 3:
 		var tileset_id = 1
 		var tileset = tileset_cache[tileset_id]
 		var tile_id = 0
-		return [str(tileset_id).pad_zeros(3), str(tile_id)]
+		return [str(tileset_id).pad_zeros(2), str(tile_id)]
 		
 func place_edges(pos, placing_tile, bounds, tilemap_node):
 	if pos.x == 0:
@@ -109,3 +117,63 @@ func _process(delta):
 			placement_mode = "Tile"
 		else:
 			placement_mode = "Drag"
+			
+func decode_value(value: String):
+	if value.is_valid_integer():
+		return int(value)
+	elif value.begins_with("V2"):
+		value = value.trim_prefix("V2")
+		var array_value = value.split("x")
+		return Vector2(array_value[0], array_value[1])
+	else:
+		return str(value)
+
+func parse_code(code: String):
+	var result = {}
+	var code_array = code.split("[")
+	
+	var level_settings_array = code_array[0].split(",")
+	result.format_version = level_settings_array[0]
+	result.name = level_settings_array[1].percent_decode()
+	
+	var area_array = code_array[1].split("~")
+	area_array[0].erase(area_array[0].length() - 1, 1)
+	
+	var area_settings_array = area_array[0].split(",")
+	result.areas = [{}]
+	result.areas[0].settings = {}
+	result.areas[0].settings.size = decode_value(area_settings_array[0])
+	result.areas[0].settings.sky = decode_value(area_settings_array[1])
+	result.areas[0].settings.background = decode_value(area_settings_array[2])
+	result.areas[0].settings.music = decode_value(area_settings_array[3])
+	
+	var area_tiles_array = area_array[1].split(",")
+	result.areas[0].foreground_tiles = []
+	for tile in area_tiles_array:
+		result.areas[0].foreground_tiles.append(tile)
+		
+	var area_background_tiles_array = area_array[2].split(",")
+	result.areas[0].background_tiles = []
+	for tile in area_background_tiles_array:
+		result.areas[0].background_tiles.append(tile)
+		
+	var area_foreground_tiles_array = area_array[3].split(",")
+	result.areas[0].very_foreground_tiles = []
+	for tile in area_foreground_tiles_array:
+		result.areas[0].very_foreground_tiles.append(tile)
+		
+	result.areas[0].objects = []
+	if area_array.size() > 4:
+		var objects_array = area_array[4].split("|")
+		for object in objects_array:
+			var object_array = object.split(",")
+			var decoded_object = {}
+			decoded_object.properties = {}
+			decoded_object.id = object[0]
+			decoded_object.name = id_map_cache.get(int(object[0]))
+			decoded_object.properties.position = decode_value(object[1])
+			decoded_object.properties.scale = decode_value(object[2])
+			decoded_object.properties.rotation_degrees = decode_value(object[3])
+			result.areas[0].objects.append(decoded_object)
+	
+	return result

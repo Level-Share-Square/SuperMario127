@@ -2,11 +2,12 @@ extends Resource
 
 class_name Level
 
-var current_format_version := "0.3.3"
-var format_version := "0.3.3"
+var current_format_version := "0.4.0"
+var format_version := "0.4.0"
 var name := "My Level"
 var areas = []
-
+var global_vars_node = null
+	
 func get_vector2(result) -> Vector2:
 	return Vector2(result.x, result.y)
 
@@ -39,11 +40,11 @@ func get_settings(result) -> LevelAreaSettings:
 	return settings
 	
 func get_tiles(result) -> Array:
-	var tileset_id_string = "0x" + result[0] + result[1] + result[2]
-	var tile_id_string = "0x" + result[3]
+	var tileset_id_string = "0x" + result[0] + result[1]
+	var tile_id_string = "0x" + result[2]
 	var tile_repeat_string = ""
-	if result.length() > 4:
-		for index in range(5, result.length()):
+	if result.length() > 3:
+		for index in range(4, result.length()):
 			tile_repeat_string += result[index]
 	else:
 		tile_repeat_string += "1"
@@ -58,34 +59,18 @@ func get_tiles(result) -> Array:
 
 func get_object(result) -> LevelObject:
 	var object = LevelObject.new()
-	object.type = result.type
+	object.id = result.id
 	object.properties = result.properties
 	return object
 
 func load_in(json: LevelJSON):
-	var parse = JSON.parse(json.contents)
-	if parse.error != 0:
-		print("Error " + parse.error_string + " at line " + parse.error_line)
-		
-	var result = parse.result
+	var result = global_vars_node.parse_code(json.contents)
+
 	assert(result.format_version)
 	assert(result.name)
 	format_version = result.format_version
 	name = result.name
 	
-	if format_version == "0.3.1":
-		result.format_version = "0.3.2"
-		format_version = "0.3.2"
-		for area_result in result.areas:
-			area_result.background_tiles = []
-			area_result.very_foreground_tiles = []
-			
-	if format_version == "0.3.2":
-		result.format_version = "0.3.3"
-		format_version = "0.3.3"
-		for area_result in result.areas:
-			area_result.settings.sky = "1"
-			
 	if format_version == current_format_version:
 		for area_result in result.areas:
 			var area = get_area(area_result)
