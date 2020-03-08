@@ -58,6 +58,17 @@ func load_in(node: Node, isEditing: bool):
 	var tile_map = node.get_node("../TileMap")
 	var very_foreground_tile_map = node.get_node("../VeryForegroundTileMap")
 	var music_node : AudioStreamPlayer = node.get_node("../Music")
+	var sky_node = node.get_node("../Background/Sprite")
+	
+	var parallax_layer_1_node = node.get_node("../Parallax/ParallaxLayer")
+	var parallax_sprite_1_node = node.get_node("../Parallax/ParallaxLayer/Sprite")
+	
+	var parallax_layer_2_node = node.get_node("../Parallax/ParallaxLayer2")
+	var parallax_sprite_2_node = node.get_node("../Parallax/ParallaxLayer2/Sprite")
+	
+	var parallax_layer_3_node = node.get_node("../Parallax/ParallaxLayer3")
+	var parallax_sprite_3_node = node.get_node("../Parallax/ParallaxLayer3/Sprite")
+	
 	var global_vars = node.get_node("../GlobalVars")
 	
 	for index in range(very_foreground_tiles.size()):
@@ -102,6 +113,17 @@ func load_in(node: Node, isEditing: bool):
 	music_node.stream = song.stream
 	music_node.volume_db = song.volume_db
 	music_node.pitch_scale = song.pitch_scale
+	
+	var sky = global_vars.get_sky(settings.sky)
+	sky_node.texture = sky.texture
+	parallax_layer_1_node.modulate = sky.parallax_modulate
+	parallax_layer_2_node.modulate = sky.parallax_modulate
+	parallax_layer_3_node.modulate = sky.parallax_modulate
+	
+	var parallax = global_vars.get_parallax(settings.background)
+	parallax_sprite_1_node.texture = parallax.parallax1_texture
+	parallax_sprite_2_node.texture = parallax.parallax2_texture
+	parallax_sprite_3_node.texture = parallax.parallax3_texture
 			
 func save_out(node: Node, isEditing: bool):
 	var background_tile_map = node.get_node("../BackgroundTileMap")
@@ -115,7 +137,7 @@ func save_out(node: Node, isEditing: bool):
 	
 	var saved_json = File.new()
 	var level_dictionary = {}
-	level_dictionary.format_version = "0.3.2"
+	level_dictionary.format_version = "0.3.3"
 	level_dictionary.name = "My Level"
 	level_dictionary.areas = [{}]
 	level_dictionary.areas[0].background_tiles = []
@@ -123,8 +145,9 @@ func save_out(node: Node, isEditing: bool):
 	level_dictionary.areas[0].very_foreground_tiles = []
 	level_dictionary.areas[0].objects = []
 	level_dictionary.areas[0].settings = {}
-	level_dictionary.areas[0].settings.background = "1"
-	level_dictionary.areas[0].settings.music = "1"
+	level_dictionary.areas[0].settings.sky = settings.sky
+	level_dictionary.areas[0].settings.background = settings.background
+	level_dictionary.areas[0].settings.music = settings.music
 	level_dictionary.areas[0].settings.size = {x = level_size.x, y = level_size.y}
 	level_dictionary.areas[0].settings.spawn = {x = spawn_location.x, y = spawn_location.y}
 	

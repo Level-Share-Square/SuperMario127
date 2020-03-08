@@ -87,6 +87,16 @@ func get_song(song_id: int):
 	var level_songs : LevelSongs = load("res://assets/level_songs.tres")
 	var song : LevelSong = load("res://assets/songs/" + level_songs.songs[song_id] + ".tres")
 	return song
+	
+func get_sky(sky_id: int):
+	var level_skies : LevelSongs = load("res://assets/level_skies.tres")
+	var sky : SkyResource = load("res://assets/skies/" + level_skies.songs[sky_id] + ".tres")
+	return sky
+	
+func get_parallax(background_id: int):
+	var level_backgrounds : LevelSongs = load("res://assets/level_backgrounds.tres")
+	var background : ParallaxResource = load("res://assets/backgrounds/" + level_backgrounds.songs[background_id] + ".tres")
+	return background
 
 func _process(delta):
 	if game_mode == "Editing" && Input.is_action_just_pressed("switch_placement_mode"):

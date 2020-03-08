@@ -2,8 +2,8 @@ extends Resource
 
 class_name Level
 
-var current_format_version := "0.3.2"
-var format_version := "0.3.2"
+var current_format_version := "0.3.3"
+var format_version := "0.3.3"
 var name := "My Level"
 var areas = []
 
@@ -32,6 +32,7 @@ func get_area(result) -> LevelArea:
 	
 func get_settings(result) -> LevelAreaSettings:
 	var settings = LevelAreaSettings.new()
+	settings.sky = result.sky
 	settings.background = result.background
 	settings.music = result.music
 	settings.size = get_vector2(result.size)
@@ -72,12 +73,20 @@ func load_in(json: LevelJSON):
 	assert(result.name)
 	format_version = result.format_version
 	name = result.name
+	
 	if format_version == "0.3.1":
 		result.format_version = "0.3.2"
 		format_version = "0.3.2"
 		for area_result in result.areas:
 			area_result.background_tiles = []
 			area_result.very_foreground_tiles = []
+			
+	if format_version == "0.3.2":
+		result.format_version = "0.3.3"
+		format_version = "0.3.3"
+		for area_result in result.areas:
+			area_result.settings.sky = "1"
+			
 	if format_version == current_format_version:
 		for area_result in result.areas:
 			var area = get_area(area_result)

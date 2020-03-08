@@ -62,7 +62,7 @@ _global_script_classes=[ {
 "base": "State",
 "class": "JumpState",
 "language": "GDScript",
-"path": "res://assets/Jump.gd"
+"path": "res://src/states/Jump.gd"
 }, {
 "base": "Resource",
 "class": "Level",
@@ -113,6 +113,16 @@ _global_script_classes=[ {
 "class": "LevelTilesets",
 "language": "GDScript",
 "path": "res://src/level/Tilesets.gd"
+}, {
+"base": "Resource",
+"class": "ParallaxResource",
+"language": "GDScript",
+"path": "res://src/ParallaxResource.gd"
+}, {
+"base": "Resource",
+"class": "SkyResource",
+"language": "GDScript",
+"path": "res://src/SkyResource.gd"
 }, {
 "base": "State",
 "class": "SlideState",
@@ -166,6 +176,8 @@ _global_script_class_icons={
 "LevelSongs": "",
 "LevelTileset": "",
 "LevelTilesets": "",
+"ParallaxResource": "",
+"SkyResource": "",
 "SlideState": "",
 "SpinningState": "",
 "State": "",

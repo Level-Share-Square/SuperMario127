@@ -14,6 +14,7 @@ func _start(delta):
 	var dive_player = character.get_node("DiveSoundPlayer")
 	character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
 	character.velocity.y += dive_power.y
+	character.position.y -= 5
 	character.rotating = true
 	dive_player.play()
 	if abs(character.velocity.x) > maxVelocityX:

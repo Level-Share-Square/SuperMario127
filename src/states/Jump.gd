@@ -16,7 +16,7 @@ func lerp(a, b, t):
 	return (1 - t) * a + t * b
 
 func _start_check(delta):
-	return character.is_grounded() and jump_buffer > 0 and character.state != character.get_state_instance("Slide")
+	return character.is_grounded() and jump_buffer > 0 and character.state != character.get_state_instance("Slide") and character.state != character.get_state_instance("Dive")
 
 func _start(delta):
 	var sprite = character.get_node("AnimatedSprite")
