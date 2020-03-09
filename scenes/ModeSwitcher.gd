@@ -67,6 +67,8 @@ func _ready():
 		switch_to_testing()
 
 func _process(delta):
+	if Input.is_action_just_pressed("fullscreen"):
+		OS.window_fullscreen = !OS.window_fullscreen
 	if Input.is_action_just_pressed("switch_modes"):
 		switch_modes()
 	if Input.is_action_just_pressed("copy_level") and global_vars_node.game_mode == "Editing":
