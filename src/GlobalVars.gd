@@ -12,6 +12,7 @@ export var mouse_hovering := false
 export var placing_offset := Vector2(0, 0)
 export var saved_code := ""
 export var tileset_cache := []
+export var object_cache := {}
 export var id_map_cache := {}
 var level := Level.new()
 var area : LevelArea
@@ -26,12 +27,17 @@ var selected_tileset_id := 1
 func _ready():
 	level.global_vars_node = self
 	
-	var level_tilesets : LevelTilesets = load("res://assets/level_tilesets.tres")
+	var level_tilesets : LevelTilesets = preload("res://assets/level_tilesets.tres")
 	for tileset_id in level_tilesets.tilesets:
 		var tileset : LevelTileset = load("res://assets/tilesets/" + tileset_id + ".tres")
 		tileset_cache.append(tileset)
 		
-	var id_mapping : IdMappings = load("res://assets/id_map.tres")
+	var objects = list_files_in_directory("res://src/objects")
+	for object in objects:
+		object = object.substr(0, object.length() - 3)
+		object_cache[object] = load("res://src/objects/" + object + ".gd")
+		
+	var id_mapping : IdMappings = preload("res://assets/id_map.tres")
 	id_map_cache = id_mapping.mappings
 	
 	level.load_in(levelJSON)
@@ -47,7 +53,24 @@ func reload():
 	unload()
 	area = level.areas[areaIndex]
 	area.load_in(self, false)
-		
+	
+func list_files_in_directory(path):
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin()
+	
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			files.append(file)
+
+	dir.list_dir_end()
+
+	return files
+			
 func get_tile(tileset_id, tile_id):
 	var tileset = tileset_cache[tileset_id]
 	if tile_id == 0:
@@ -96,17 +119,17 @@ func place_edges(pos, placing_tile, bounds, tilemap_node):
 		tilemap_node.set_cell(bounds.x, -1, placing_tile)
 		
 func get_song(song_id: int):
-	var level_songs : LevelSongs = load("res://assets/level_songs.tres")
+	var level_songs : LevelSongs = preload("res://assets/level_songs.tres")
 	var song : LevelSong = load("res://assets/songs/" + level_songs.songs[song_id] + ".tres")
 	return song
 	
 func get_sky(sky_id: int):
-	var level_skies : LevelSongs = load("res://assets/level_skies.tres")
+	var level_skies : LevelSongs = preload("res://assets/level_skies.tres")
 	var sky : SkyResource = load("res://assets/skies/" + level_skies.songs[sky_id] + ".tres")
 	return sky
 	
 func get_parallax(background_id: int):
-	var level_backgrounds : LevelSongs = load("res://assets/level_backgrounds.tres")
+	var level_backgrounds : LevelSongs = preload("res://assets/level_backgrounds.tres")
 	var background : ParallaxResource = load("res://assets/backgrounds/" + level_backgrounds.songs[background_id] + ".tres")
 	return background
 

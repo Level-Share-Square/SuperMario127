@@ -20,8 +20,8 @@ func collect(body):
 		emit_signal("on_collect")
 
 func _ready():
-	var sprite_frames = load("res://assets/textures/items/shine_sprite/game.tres")
-	var shine_effects = load("res://assets/textures/items/shine_sprite/shine_effects.tscn")
+	var sprite_frames = preload("res://assets/textures/items/shine_sprite/game.tres")
+	var shine_effects = preload("res://assets/textures/items/shine_sprite/shine_effects.tscn")
 	effects_instance = shine_effects.instance()
 	add_child(effects_instance)
 	frames = sprite_frames
@@ -29,7 +29,7 @@ func _ready():
 	playing = true
 	shape.scale = Vector2(0.5, 0.5)
 	connect("on_collide", self, "collect")
-	var stream = load("res://assets/sounds/shine.wav")
+	var stream = preload("res://assets/sounds/shine.wav")
 	sound.stream = stream
 	sound.volume_db = 5;
 	add_child(sound)

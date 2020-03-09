@@ -16,12 +16,12 @@ func collect(body):
 		destroy_timer = 2
 
 func _ready():
-	var sprite_frames = load("res://assets/textures/items/coins/yellow.tres")
+	var sprite_frames = preload("res://assets/textures/items/coins/yellow.tres")
 	frames = sprite_frames
 	playing = true
 	shape.scale = Vector2(1.5, 1.5)
 	connect("on_collide", self, "collect")
-	var stream = load("res://assets/sounds/coin.wav")
+	var stream = preload("res://assets/sounds/coin.wav")
 	sound.stream = stream
 	sound.volume_db = 5;
 	add_child(sound)

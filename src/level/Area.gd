@@ -30,8 +30,8 @@ func encode_value(value):
 	else:
 		return str(value)
 
-func load_object(object: LevelObject):
-	var object_class = load("res://src/objects/" + object.name + ".gd")
+func load_object(object: LevelObject, global_vars):
+	var object_class = global_vars.object_cache[object.name]
 	var node = object_class.new()
 	for key in object.properties:
 		var value = object.properties[key]
@@ -114,7 +114,7 @@ func load_in(node: Node, isEditing: bool):
 	character.position = Vector2(0, 0)
 	if !isEditing:
 		for object in objects:
-			var node_object = load_object(object)
+			var node_object = load_object(object, global_vars)
 			level_objects.add_child(node_object)
 	else:
 		for object in objects:

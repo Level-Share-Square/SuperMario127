@@ -69,7 +69,7 @@ func _physics_process(delta):
 		
 		if global_vars.is_tile:
 			ghost_tile.visible = true
-			var level_tilesets : LevelTilesets = load("res://assets/level_tilesets.tres")
+			var level_tilesets : LevelTilesets = preload("res://assets/level_tilesets.tres")
 			var tileset_info = load("res://assets/tilesets/" + level_tilesets.tilesets[global_vars.selected_tileset_id] + ".tres")
 			ghost_tile.texture = tileset_info.placing_texture
 			ghost_tile.region_rect = global_vars.placing_rect
