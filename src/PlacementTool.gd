@@ -83,6 +83,8 @@ func _physics_process(delta):
 				mouse_grid_pos += global_vars.placing_offset
 				ghost_object.position = mouse_grid_pos
 			else:
+				if Input.is_action_pressed("8_pixel_lock"):
+					mouse_pos = Vector2(stepify(mouse_pos.x, 8), stepify(mouse_pos.y, 8))
 				ghost_object.position = mouse_pos
 		
 		var tile = global_vars.get_tile(global_vars.selected_tileset_id, global_vars.selected_tile_id)
