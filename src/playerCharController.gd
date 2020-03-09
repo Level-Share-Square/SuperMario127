@@ -27,6 +27,7 @@ var rotating = false
 var sliding = false
 
 export var walljump_power = Vector2(350, 320)
+export var is_wj_chained = false
 var direction_on_stick = 1
 
 var state = null

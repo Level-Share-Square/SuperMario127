@@ -7,6 +7,7 @@ export var double_jump_power: float = 425
 export var triple_jump_power: float = 495
 var ground_buffer = 0
 var jump_buffer = 0
+var ledge_buffer = 0
 var jump_playing = false
 var last_grounded = false
 var rotating = false
@@ -16,7 +17,7 @@ func lerp(a, b, t):
 	return (1 - t) * a + t * b
 
 func _start_check(delta):
-	return character.is_grounded() and jump_buffer > 0 and character.state != character.get_state_instance("Slide") and character.state != character.get_state_instance("Dive")
+	return ledge_buffer > 0 and jump_buffer > 0 and character.state != character.get_state_instance("Slide") and character.state != character.get_state_instance("Dive")
 
 func _start(delta):
 	var sprite = character.get_node("AnimatedSprite")
@@ -97,12 +98,18 @@ func _general_update(delta):
 		else:
 			sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 380, 4 * delta) * direction_on_tj
 	if character.is_grounded() and !last_grounded:
-		ground_buffer = 0.1
+		ground_buffer = 0.20
+	elif character.is_grounded():
+		ledge_buffer = 0.125
 	if ground_buffer > 0:
 		ground_buffer -= delta
 		if ground_buffer < 0:
 			ground_buffer = 0
 			character.current_jump = 0
+	if ledge_buffer > 0 && !character.is_grounded():
+		ledge_buffer -= delta
+		if ledge_buffer < 0:
+			ledge_buffer = 0	
 	if jump_buffer > 0:
 		jump_buffer -= delta
 		if jump_buffer < 0:

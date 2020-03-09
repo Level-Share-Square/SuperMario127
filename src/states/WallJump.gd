@@ -28,6 +28,7 @@ func _start(delta):
 	jump_player.play()
 	character.jump_animation = 0
 	limit_y = true
+	character.is_wj_chained = true
 	pass
 
 func _update(delta):
@@ -52,6 +53,7 @@ func _general_update(delta):
 		character_in_range = false
 	if character.is_grounded():
 		limit_y = false
+		character.is_wj_chained = false
 	if Input.is_action_just_pressed("jump") && !character.is_grounded():
 		press_buffer = 0.075
 	if press_buffer > 0:

@@ -7,7 +7,7 @@ var old_gravity_scale = 1
 var wall_buffer = 0.0
 
 func _start_check(delta):
-	return ((character.is_walled_right() and character.move_direction == 1) or (character.is_walled_left() and character.move_direction == -1)) and !character.is_grounded() and character.velocity.y > 0 and character.state != character.get_state_instance("Bonked") and character.state != character.get_state_instance("Spinning") and character.state != character.get_state_instance("Dive") and character.jump_animation != 2
+	return ((character.is_walled_right() and (character.move_direction == 1 or character.is_wj_chained)) or (character.is_walled_left() and (character.move_direction == -1 or character.is_wj_chained))) and !character.is_grounded() and (character.velocity.y > 0 or character.is_wj_chained) and character.state != character.get_state_instance("Bonked") and character.state != character.get_state_instance("Spinning") and character.state != character.get_state_instance("Dive") and character.jump_animation != 2
 
 func _start(delta):
 	character.velocity.y = character.velocity.y/3
@@ -21,9 +21,8 @@ func _start(delta):
 	pass
 
 func _update(delta):
-	if !((character.is_walled_right() and character.move_direction == 1) or (character.is_walled_left() and character.move_direction == -1)):
-		if (character.velocity.x > 0 and character.direction_on_stick == 1) or (character.velocity.x < 0 and character.direction_on_stick == -1):
-			character.velocity.x = character.velocity.x/4
+	character.velocity.x += character.direction_on_stick
+	if !(character.is_walled()):
 		wall_buffer -= delta
 		if wall_buffer <= 0:
 			wall_buffer = 0

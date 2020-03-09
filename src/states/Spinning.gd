@@ -16,7 +16,9 @@ func _start(delta):
 		can_boost = false
 		cooldown_timer = 0.5
 		if character.velocity.y > -boost_power:
-			if character.velocity.y > 50:
+			if character.velocity.y > 100:
+				character.velocity.y /= 1.5
+			if character.velocity.y > 0:
 				character.velocity.y -= boost_power
 			else:
 				character.velocity.y -= boost_power/2

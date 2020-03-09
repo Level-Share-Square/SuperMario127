@@ -1145,6 +1145,7 @@ centered = false
 [node name="GlobalVars" type="Node2D" parent="."]
 position = Vector2( 14, 0 )
 script = ExtResource( 12 )
+max_gravity_velocity = Vector2( 300, 300 )
 levelJSON = ExtResource( 31 )
 
 [node name="TileMap" type="TileMap" parent="."]
