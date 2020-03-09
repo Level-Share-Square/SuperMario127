@@ -228,24 +228,21 @@ func _physics_process(delta: float):
 				else:
 					sprite.animation = "idleLeft"
 		last_velocity = velocity
+		
+func reset_vars():
+	var music = get_node("../Music")
+	current_jump = 0
+	velocity = Vector2(0, 0)
+	controllable = true
+	set_state_by_name("Fall", 0)
+	is_wj_chained = false
 
 func kill():
-	var music = get_node("../Music")
-	current_jump = 0
-	velocity = Vector2(0, 0)
-	controllable = true
-	set_state_by_name("Fall", 0)
+	reset_vars()
 	var global_vars = get_node("../GlobalVars")
 	global_vars.reload()
-	music.stop()
-	music.play()
 
 func exit():
-	var music = get_node("../Music")
-	current_jump = 0
-	velocity = Vector2(0, 0)
-	controllable = true
-	set_state_by_name("Fall", 0)
-	music.stop()
+	reset_vars()
 	var mode_switcher = get_node("../ModeSwitcher")
 	mode_switcher.switch_to_editing()
