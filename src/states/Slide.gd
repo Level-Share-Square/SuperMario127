@@ -12,7 +12,7 @@ var stop_counter = 0.0
 func _start(delta):
 	if character.state != character.get_state_instance("Jump"):
 		var sprite = character.get_node("AnimatedSprite")
-		character.friction = 2.25
+		character.friction = 4
 	
 func _update(delta):
 	var sprite = character.get_node("AnimatedSprite")
@@ -44,4 +44,4 @@ func _stop(delta):
 	stop_counter = 0
 
 func _stopCheck(delta):
-	return abs(character.velocity.x) < 5 or stop_counter > 0.35
+	return abs(character.velocity.x) < 5 or stop_counter > 0.25

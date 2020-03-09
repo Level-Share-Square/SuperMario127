@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource( 1 )
-dive_power = Vector2( 1350, 75 )
+dive_power = Vector2( 1350, 135 )
 bonk_power = 150.0
 maxVelocityX = 700.0

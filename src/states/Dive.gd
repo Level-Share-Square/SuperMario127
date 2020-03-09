@@ -30,7 +30,7 @@ func _update(delta):
 		sprite.animation = "diveRight"
 	else:
 		sprite.animation = "diveLeft"
-	var new_angle = ((character.velocity.y / 7) * character.facing_direction) + (90 * character.facing_direction)
+	var new_angle = ((character.velocity.y / 15) * character.facing_direction) + (90 * character.facing_direction)
 	if (abs(new_angle) < 185):
 		sprite.rotation_degrees = new_angle
 		last_above_rot_limit = false
