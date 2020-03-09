@@ -1,6 +1,6 @@
 extends EditorObject
 
-var placing_centered = false
+var tile_placing_offset = Vector2(0, 4)
 
 func _ready():
 	frames = load("res://assets/textures/items/metal_platform/gamer.tres")

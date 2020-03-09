@@ -7,7 +7,7 @@ export var tileset_id := 1
 export var tile_id := 0
 export var object_name : String
 export var object_id : int
-export var tile_rect:Rect2 = Rect2(96, 0, 32, 32)
+export var tile_rect: Rect2 = Rect2(96, 0, 32, 32)
 export var hotkey : int
 onready var global_vars = get_node("../../../GlobalVars")
 onready var tile_map = get_node("../../../TileMap")
@@ -19,7 +19,7 @@ func _pressed():
 	if !is_tile:
 		var ghost_object = load("res://src/editor_objects/" + object_name + ".gd").new()
 		tile_map.ghost_object = ghost_object
-		global_vars.currently_centered = ghost_object.placing_centered
+		global_vars.placing_offset = ghost_object.tile_placing_offset
 		ghost_tile_container.add_child(ghost_object)
 	global_vars.is_tile = is_tile
 	global_vars.selected_tileset_id = tileset_id

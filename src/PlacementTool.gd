@@ -47,7 +47,7 @@ func _physics_process(delta):
 		var mouse_pos = get_global_mouse_position()
 		var mouse_screen_pos = get_viewport().get_mouse_position()
 		var mouse_tile_pos = Vector2(floor(mouse_pos.x / 32), floor(mouse_pos.y / 32))
-		var mouse_grid_pos = Vector2((mouse_tile_pos.x * 32) + 16, (mouse_tile_pos.y * 32) + 16)
+		var mouse_grid_pos = Vector2((mouse_tile_pos.x * 32), (mouse_tile_pos.y * 32))
 		var tilemap_node = self
 		ghost_tile.z_index = 1
 		if layer == 0:
@@ -80,8 +80,7 @@ func _physics_process(delta):
 			ghost_object.visible = true
 			ghost_object.modulate = Color(1, 1, 1, 0.5)
 			if global_vars_node.placement_mode == "Tile":
-				if !global_vars.currently_centered:
-					mouse_grid_pos -= Vector2(16, 16)
+				mouse_grid_pos += global_vars.placing_offset
 				ghost_object.position = mouse_grid_pos
 			else:
 				ghost_object.position = mouse_pos
