@@ -34,7 +34,7 @@ func _ready():
 		
 	var objects = list_files_in_directory("res://src/objects")
 	for object in objects:
-		object = object.substr(0, object.length() - 3)
+		object = object.split(".")[0]
 		object_cache[object] = load("res://src/objects/" + object + ".gd")
 		
 	var id_mapping : IdMappings = preload("res://assets/id_map.tres")
