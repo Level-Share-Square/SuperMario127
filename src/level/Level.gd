@@ -60,6 +60,7 @@ func get_tiles(result) -> Array:
 func get_object(result) -> LevelObject:
 	var object = LevelObject.new()
 	object.id = result.id
+	object.name = result.name
 	object.properties = result.properties
 	return object
 

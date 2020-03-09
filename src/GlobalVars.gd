@@ -33,7 +33,6 @@ func _ready():
 		
 	var id_mapping : IdMappings = load("res://assets/id_map.tres")
 	id_map_cache = id_mapping.mappings
-	print_debug(id_map_cache)
 	
 	level.load_in(levelJSON)
 	area = level.areas[areaIndex]
@@ -119,12 +118,14 @@ func _process(delta):
 			placement_mode = "Drag"
 			
 func decode_value(value: String):
-	if value.is_valid_integer():
-		return int(value)
-	elif value.begins_with("V2"):
+	if value.begins_with("V2"):
 		value = value.trim_prefix("V2")
 		var array_value = value.split("x")
 		return Vector2(array_value[0], array_value[1])
+	elif value.is_valid_integer():
+		return int(value)
+	elif value.is_valid_float():
+		return float(value)
 	else:
 		return str(value)
 
@@ -169,11 +170,11 @@ func parse_code(code: String):
 			var object_array = object.split(",")
 			var decoded_object = {}
 			decoded_object.properties = {}
-			decoded_object.id = object[0]
-			decoded_object.name = id_map_cache.get(int(object[0]))
-			decoded_object.properties.position = decode_value(object[1])
-			decoded_object.properties.scale = decode_value(object[2])
-			decoded_object.properties.rotation_degrees = decode_value(object[3])
+			decoded_object.id = object_array[0]
+			decoded_object.name = id_map_cache.get(int(object_array[0]))
+			decoded_object.properties.position = decode_value(object_array[1])
+			decoded_object.properties.scale = decode_value(object_array[2])
+			decoded_object.properties.rotation_degrees = int(decode_value(object_array[3]))
 			result.areas[0].objects.append(decoded_object)
 	
 	return result
