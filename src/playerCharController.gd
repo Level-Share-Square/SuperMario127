@@ -41,6 +41,7 @@ var collision_down
 var collision_up
 var collision_left
 var collision_right
+var collided_last_frame = false
 
 
 onready var global_vars_node = get_node("../GlobalVars")
@@ -52,19 +53,19 @@ onready var dive_player = get_node("DiveSoundPlayer")
 onready var fall_player = get_node("FallSoundPlayer")
 
 func is_grounded():
-	return test_move(self.transform, Vector2(0, 0.1))
+	return test_move(self.transform, Vector2(0, 0.1)) and collided_last_frame
 	
 func is_ceiling():
-	return test_move(self.transform, Vector2(0, -0.1))
+	return test_move(self.transform, Vector2(0, -0.1)) and collided_last_frame
 	
 func is_walled():
-	return is_walled_left() or is_walled_right()
+	return (is_walled_left() or is_walled_right()) and collided_last_frame
 
 func is_walled_left():
-	return test_move(self.transform, Vector2(-0.1, 0))
+	return test_move(self.transform, Vector2(-0.1, 0)) and collided_last_frame
 
 func is_walled_right():
-	return test_move(self.transform, Vector2(0.1, 0))
+	return test_move(self.transform, Vector2(0.1, 0)) and collided_last_frame
 
 func hide():
 	visible = false
@@ -202,7 +203,9 @@ func _physics_process(delta: float):
 
 		# Move by velocity
 		velocity = move_and_slide(velocity)
-
+		var slide_count = get_slide_count()
+		collided_last_frame = true if slide_count else false
+		
 		# Boundaries
 		if position.y > (level_settings_node.level_size.y * 32) + 128:
 			#fall_player.play()
