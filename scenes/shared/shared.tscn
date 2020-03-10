@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/shared/shared.gd" type="Script" id=1]
+[ext_resource path="res://scenes/shared/background/foregrounds/hills/middle_parallax.png" type="Texture" id=2]
+[ext_resource path="res://scenes/shared/background/backgrounds/night/night.png" type="Texture" id=3]
+[ext_resource path="res://scenes/shared/background/foregrounds/hills/back_parallax.png" type="Texture" id=4]
+[ext_resource path="res://scenes/shared/background/foregrounds/hills/front_parallax.png" type="Texture" id=5]
+
+[node name="shared" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Parallax" type="ParallaxBackground" parent="."]
+layer = -1
+scroll_base_offset = Vector2( 0, 290 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Parallax"]
+modulate = Color( 0.711, 0.7173, 0.9, 1 )
+motion_scale = Vector2( 0.075, 0.5 )
+motion_mirroring = Vector2( 1024, 0 )
+
+[node name="Sprite" type="Sprite" parent="Parallax/ParallaxLayer"]
+texture = ExtResource( 4 )
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Parallax"]
+modulate = Color( 0.709804, 0.717647, 0.901961, 1 )
+z_index = 1
+motion_scale = Vector2( 0.15, 0.5 )
+motion_mirroring = Vector2( 1616, 0 )
+
+[node name="Sprite" type="Sprite" parent="Parallax/ParallaxLayer2"]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="Parallax"]
+modulate = Color( 0.711, 0.7173, 0.9, 1 )
+z_index = 2
+motion_scale = Vector2( 0.3, 0.5 )
+motion_mirroring = Vector2( 1536, 0 )
+
+[node name="Sprite" type="Sprite" parent="Parallax/ParallaxLayer3"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -128
+
+[node name="Sprite" type="Sprite" parent="Background"]
+position = Vector2( -0.3078, -0.307785 )
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 3 )
+centered = false

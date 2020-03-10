@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/front_parallax.png-29aaf06faebc21331487b5c339ba08fe.stex"
+path="res://.import/front_parallax.png-48219d43f6c6838edf569cbf150a0c07.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/foregrounds/hills/front_parallax.png"
-dest_files=[ "res://.import/front_parallax.png-29aaf06faebc21331487b5c339ba08fe.stex" ]
+source_file="res://scenes/shared/background/foregrounds/hills/front_parallax.png"
+dest_files=[ "res://.import/front_parallax.png-48219d43f6c6838edf569cbf150a0c07.stex" ]
 
 [params]
 

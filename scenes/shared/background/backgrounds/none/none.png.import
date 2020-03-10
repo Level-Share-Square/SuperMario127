@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/back_parallax.png-9a7e458c56cf844fe5d567a6ff098767.stex"
+path="res://.import/none.png-07ed43d096c309533f9374582e57d95c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/foregrounds/hills/back_parallax.png"
-dest_files=[ "res://.import/back_parallax.png-9a7e458c56cf844fe5d567a6ff098767.stex" ]
+source_file="res://scenes/shared/background/backgrounds/none/none.png"
+dest_files=[ "res://.import/none.png-07ed43d096c309533f9374582e57d95c.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
