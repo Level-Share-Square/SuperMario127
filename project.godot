@@ -9,193 +9,61 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "State",
-"class": "BonkedState",
-"language": "GDScript",
-"path": "res://src/states/Bonked.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "Character",
-"language": "GDScript",
-"path": "res://src/playerCharController.gd"
-}, {
-"base": "Camera2D",
-"class": "DesignerCameraFollow",
-"language": "GDScript",
-"path": "res://src/cameraScript.gd"
-}, {
-"base": "State",
-"class": "DiveState",
-"language": "GDScript",
-"path": "res://src/states/Dive.gd"
-}, {
-"base": "AnimatedSprite",
-"class": "EditorObject",
-"language": "GDScript",
-"path": "res://src/level/EditorObject.gd"
-}, {
-"base": "State",
-"class": "FallState",
-"language": "GDScript",
-"path": "res://src/states/Fall.gd"
-}, {
-"base": "GameObject",
-"class": "GameAreaCollisionObject",
-"language": "GDScript",
-"path": "res://src/base_objects/GameAreaCollisionObject.gd"
-}, {
-"base": "AnimatedSprite",
-"class": "GameObject",
-"language": "GDScript",
-"path": "res://src/level/GameObject.gd"
-}, {
-"base": "GameObject",
-"class": "GameSolidObject",
-"language": "GDScript",
-"path": "res://src/base_objects/GameSolidObject.gd"
-}, {
-"base": "Resource",
-"class": "IdMappings",
-"language": "GDScript",
-"path": "res://src/IdMapResource.gd"
-}, {
 "base": "Reference",
-"class": "JSONBeautifier",
-"language": "GDScript",
-"path": "res://addons/json_beautifier/json_beautifier.gd"
-}, {
-"base": "State",
-"class": "JumpState",
-"language": "GDScript",
-"path": "res://src/states/Jump.gd"
-}, {
-"base": "Resource",
-"class": "Level",
-"language": "GDScript",
-"path": "res://src/level/Level.gd"
-}, {
-"base": "Resource",
 "class": "LevelArea",
 "language": "GDScript",
-"path": "res://src/level/Area.gd"
-}, {
-"base": "Resource",
-"class": "LevelAreaSettings",
-"language": "GDScript",
-"path": "res://src/level/AreaSettings.gd"
+"path": "res://level/Area.gd"
 }, {
 "base": "Reference",
-"class": "LevelEditor",
+"class": "LevelAreaSettings",
 "language": "GDScript",
-"path": "res://src/level/Editor.gd"
+"path": "res://level/AreaSettings.gd"
 }, {
-"base": "Resource",
-"class": "LevelJSON",
+"base": "Reference",
+"class": "LevelData",
 "language": "GDScript",
-"path": "res://src/level/JSON.gd"
+"path": "res://level/Data.gd"
 }, {
-"base": "Resource",
+"base": "Reference",
 "class": "LevelObject",
 "language": "GDScript",
-"path": "res://src/level/Object.gd"
+"path": "res://level/Object.gd"
 }, {
 "base": "Resource",
-"class": "LevelSong",
+"class": "LevelResource",
 "language": "GDScript",
-"path": "res://src/level/Song.gd"
+"path": "res://level/Resource.gd"
 }, {
-"base": "Resource",
-"class": "LevelSongs",
+"base": "Reference",
+"class": "clipboard_util",
 "language": "GDScript",
-"path": "res://src/level/Songs.gd"
+"path": "res://util/clipboard_util.gd"
 }, {
-"base": "Resource",
-"class": "LevelTileset",
+"base": "Reference",
+"class": "rle_util",
 "language": "GDScript",
-"path": "res://src/level/Tileset.gd"
+"path": "res://util/rle_util.gd"
 }, {
-"base": "Resource",
-"class": "LevelTilesets",
+"base": "Reference",
+"class": "tile_util",
 "language": "GDScript",
-"path": "res://src/level/Tilesets.gd"
-}, {
-"base": "Resource",
-"class": "ParallaxResource",
-"language": "GDScript",
-"path": "res://src/ParallaxResource.gd"
-}, {
-"base": "Resource",
-"class": "SkyResource",
-"language": "GDScript",
-"path": "res://src/SkyResource.gd"
-}, {
-"base": "State",
-"class": "SlideState",
-"language": "GDScript",
-"path": "res://src/states/Slide.gd"
-}, {
-"base": "State",
-"class": "SpinningState",
-"language": "GDScript",
-"path": "res://src/states/Spinning.gd"
-}, {
-"base": "Resource",
-"class": "State",
-"language": "GDScript",
-"path": "res://src/State.gd"
-}, {
-"base": "TextureButton",
-"class": "TileButton",
-"language": "GDScript",
-"path": "res://src/UIButton.gd"
-}, {
-"base": "State",
-"class": "WallJumpState",
-"language": "GDScript",
-"path": "res://src/states/WallJump.gd"
-}, {
-"base": "State",
-"class": "WallSlideState",
-"language": "GDScript",
-"path": "res://src/states/WallSlide.gd"
+"path": "res://util/tile_util.gd"
 } ]
 _global_script_class_icons={
-"BonkedState": "",
-"Character": "",
-"DesignerCameraFollow": "",
-"DiveState": "",
-"EditorObject": "",
-"FallState": "",
-"GameAreaCollisionObject": "",
-"GameObject": "",
-"GameSolidObject": "",
-"IdMappings": "",
-"JSONBeautifier": "",
-"JumpState": "",
-"Level": "",
 "LevelArea": "",
 "LevelAreaSettings": "",
-"LevelEditor": "",
-"LevelJSON": "",
+"LevelData": "",
 "LevelObject": "",
-"LevelSong": "",
-"LevelSongs": "",
-"LevelTileset": "",
-"LevelTilesets": "",
-"ParallaxResource": "",
-"SkyResource": "",
-"SlideState": "",
-"SpinningState": "",
-"State": "",
-"TileButton": "",
-"WallJumpState": "",
-"WallSlideState": ""
+"LevelResource": "",
+"clipboard_util": "",
+"rle_util": "",
+"tile_util": ""
 }
 
 [application]
 
 config/name="Super Mario 127 "
-run/main_scene="res://scenes/MainScene.tscn"
+run/main_scene="res://scenes/player/player.tscn"
 boot_splash/image="res://assets/startup.png"
 boot_splash/bg_color=Color( 0.341176, 0, 0.498039, 1 )
 config/icon="res://assets/icon.png"
@@ -218,7 +86,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "mixing-desk" )
+enabled=PoolStringArray(  )
 
 [input]
 
@@ -409,4 +277,3 @@ quality/driver/driver_name="GLES2"
 quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_environment="res://default_env.tres"
