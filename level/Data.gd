@@ -86,7 +86,12 @@ func get_object(result, is_json) -> LevelObject:
 
 func load_in(code):
 	var result
-	result = rle_util.decode(code)
+	var is_json = false
+	if code[0] == "{":
+		result = JSON.decode(code)
+		is_json = true
+	else:
+		result = rle_util.decode(code)
 
 	assert(result.format_version)
 	assert(result.name)
@@ -99,3 +104,75 @@ func load_in(code):
 			areas.append(area)
 	else:
 		print("Outdated format version. Current version is " + current_format_version + ", but course uses version " + format_version + ".")
+
+func get_encoded_level_data():
+	
+	var level_string = ""
+	var format_version = "0.4.0"
+	var level_name = "My Level"
+	
+	
+	level_string += format_version + ","
+	level_string += level_name.percent_encode() + ","
+	
+	for area in areas:
+		var saved_tiles = []
+		var saved_background_tiles = []
+		var saved_foreground_tiles = []
+		
+		var settings = area.settings
+		
+		level_string += "["
+		
+		# Settings
+		var level_size = settings.size
+		level_string += value_util.encode_value(settings.size) + ","
+		level_string += value_util.encode_value(settings.sky) + ","
+		level_string += value_util.encode_value(settings.background) + ","
+		level_string += value_util.encode_value(settings.music) + "~"
+		
+		# Tiles
+		for index in range(settings.size.x * settings.size.y):
+			var encoded_tile = area.foreground_tiles[index]
+			var appended_tile = encoded_tile[0] + encoded_tile[1]
+			saved_tiles.append(appended_tile)	
+			
+		for index in range(settings.size.x * settings.size.y):
+			var encoded_tile_background = area.background_tiles[index]
+			var appended_tile_background = encoded_tile_background[0] + encoded_tile_background[1]
+			saved_background_tiles.append(appended_tile_background)	
+	
+		for index in range(settings.size.x * settings.size.y):
+			var encoded_tile_very_foreground = area.very_foreground_tiles[index]
+			var appended_tile_very_foreground = encoded_tile_very_foreground[0] + encoded_tile_very_foreground[1]
+			saved_foreground_tiles.append(appended_tile_very_foreground)	
+		saved_tiles = rle_util.encode(saved_tiles)
+		saved_background_tiles = rle_util.encode(saved_background_tiles)
+		saved_foreground_tiles = rle_util.encode(saved_foreground_tiles)
+		
+		for tile in saved_tiles:
+			level_string += tile + ","
+		level_string.erase(level_string.length() - 1, 1)
+		level_string += "~"
+		
+		for tile in saved_background_tiles:
+			level_string += tile + ","
+		level_string.erase(level_string.length() - 1, 1)
+		level_string += "~"
+		
+		for tile in saved_foreground_tiles:
+			level_string += tile + ","
+		level_string.erase(level_string.length() - 1, 1)
+		level_string += "~"
+		
+		for index in area.objects:
+			var added_object = ""
+			added_object += index.id + ","
+			for property in index.properties:
+				added_object += value_util.encode_value(value_util.get_true_value(index.properties[property])) + ","
+			added_object.erase(added_object.length() - 1, 1)
+			level_string += added_object + "|"
+		level_string.erase(level_string.length() - 1, 1)
+		level_string += "],"
+	level_string.erase(level_string.length() - 1, 1)
+	return level_string
