@@ -4,11 +4,11 @@
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/actors/mario/mario.tscn" type="PackedScene" id=3]
 
-[node name="player" type="Node2D"]
+[node name="Player" type="Node2D"]
 script = ExtResource( 1 )
+nodes_to_load = [ NodePath("Shared"), NodePath("Character") ]
 
-[node name="shared" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, -1.05261 )
+[node name="Shared" parent="." instance=ExtResource( 2 )]
 
-[node name="body" parent="." instance=ExtResource( 3 )]
+[node name="Character" parent="." instance=ExtResource( 3 )]
 position = Vector2( 32.5, 126.947 )
