@@ -12,4 +12,4 @@ dest_files=[ "res://.import/yoshi_star_galaxy.ogg-abf6133b92aac9d817a0326bac68f8
 [params]
 
 loop=true
-loop_offset=0
+loop_offset=20.16

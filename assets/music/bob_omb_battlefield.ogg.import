@@ -12,4 +12,4 @@ dest_files=[ "res://.import/bob_omb_battlefield.ogg-d93b4b8a3b2992121aff5a95125d
 [params]
 
 loop=true
-loop_offset=0
+loop_offset=8.452

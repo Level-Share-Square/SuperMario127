@@ -12,4 +12,4 @@ dest_files=[ "res://.import/purple_coins.ogg-609e297fb48566b61fa0832c744a5825.og
 [params]
 
 loop=true
-loop_offset=0
+loop_offset=3.584

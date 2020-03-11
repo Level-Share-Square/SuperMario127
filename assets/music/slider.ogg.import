@@ -12,4 +12,4 @@ dest_files=[ "res://.import/slider.ogg-d15e50a826997d4c264f382a4ff01df6.oggstr" 
 [params]
 
 loop=true
-loop_offset=0
+loop_offset=27.475
