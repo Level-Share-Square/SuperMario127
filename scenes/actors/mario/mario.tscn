@@ -72,77 +72,77 @@ data = PoolByteArray( 0, 0, 255, 255, 0, 0, 255, 255, 255, 255, 255, 255, 0, 0, 
 format = 1
 mix_rate = 28000
 
-[node name="character" type="Node2D"]
-
-[node name="body" type="KinematicBody2D" parent="."]
+[node name="character" type="KinematicBody2D"]
 position = Vector2( 32.5, 128 )
 script = ExtResource( 3 )
 deceleration = 15.0
 
-[node name="collision" type="CollisionShape2D" parent="body"]
+[node name="collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 8 )
 shape = SubResource( 1 )
 
-[node name="sprite" type="AnimatedSprite" parent="body"]
+[node name="sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "shineFall"
 playing = true
 
-[node name="jump_sounds" type="Node" parent="body"]
+[node name="jump_sounds" type="Node" parent="."]
 script = ExtResource( 2 )
 sound_number = 1
 
-[node name="jump_1" type="AudioStreamPlayer" parent="body/jump_sounds"]
+[node name="jump_1" type="AudioStreamPlayer" parent="jump_sounds"]
 stream = SubResource( 2 )
 
-[node name="jump_2" type="AudioStreamPlayer" parent="body/jump_sounds"]
+[node name="jump_2" type="AudioStreamPlayer" parent="jump_sounds"]
 stream = SubResource( 3 )
 
-[node name="jump_3" type="AudioStreamPlayer" parent="body/jump_sounds"]
+[node name="jump_3" type="AudioStreamPlayer" parent="jump_sounds"]
 stream = SubResource( 4 )
 
-[node name="jump_4" type="AudioStreamPlayer" parent="body/jump_sounds"]
+[node name="jump_4" type="AudioStreamPlayer" parent="jump_sounds"]
 stream = SubResource( 5 )
 
-[node name="dble_jump_sounds" type="Node" parent="body"]
+[node name="dble_jump_sounds" type="Node" parent="."]
 script = ExtResource( 2 )
 sound_number = 1
 
-[node name="double_jump1" type="AudioStreamPlayer" parent="body/dble_jump_sounds"]
+[node name="double_jump1" type="AudioStreamPlayer" parent="dble_jump_sounds"]
 stream = SubResource( 6 )
 
-[node name="double_jump2" type="AudioStreamPlayer" parent="body/dble_jump_sounds"]
+[node name="double_jump2" type="AudioStreamPlayer" parent="dble_jump_sounds"]
 stream = SubResource( 7 )
 
-[node name="double_jump3" type="AudioStreamPlayer" parent="body/dble_jump_sounds"]
+[node name="double_jump3" type="AudioStreamPlayer" parent="dble_jump_sounds"]
 stream = SubResource( 8 )
 
-[node name="trple_jump_sounds" type="Node" parent="body"]
+[node name="trple_jump_sounds" type="Node" parent="."]
 script = ExtResource( 2 )
 sound_number = 1
 
-[node name="triple_jump1" type="AudioStreamPlayer" parent="body/trple_jump_sounds"]
+[node name="triple_jump1" type="AudioStreamPlayer" parent="trple_jump_sounds"]
 stream = SubResource( 9 )
 
-[node name="triple_jump2" type="AudioStreamPlayer" parent="body/trple_jump_sounds"]
+[node name="triple_jump2" type="AudioStreamPlayer" parent="trple_jump_sounds"]
 stream = SubResource( 10 )
 
-[node name="triple_jump3" type="AudioStreamPlayer" parent="body/trple_jump_sounds"]
+[node name="triple_jump3" type="AudioStreamPlayer" parent="trple_jump_sounds"]
 stream = SubResource( 11 )
 
-[node name="dive_sounds" type="Node" parent="body"]
+[node name="dive_sounds" type="Node" parent="."]
 script = ExtResource( 2 )
 sound_number = 1
 
-[node name="dive_1" type="AudioStreamPlayer" parent="body/dive_sounds"]
+[node name="dive_1" type="AudioStreamPlayer" parent="dive_sounds"]
 stream = SubResource( 12 )
 
-[node name="dive_2" type="AudioStreamPlayer" parent="body/dive_sounds"]
+[node name="dive_2" type="AudioStreamPlayer" parent="dive_sounds"]
 stream = SubResource( 13 )
 
-[node name="fall_sounds" type="Node" parent="body"]
+[node name="fall_sounds" type="Node" parent="."]
 script = ExtResource( 2 )
 sound_number = 1
 
-[node name="fall_1" type="AudioStreamPlayer" parent="body/fall_sounds"]
+[node name="fall_1" type="AudioStreamPlayer" parent="fall_sounds"]
 stream = SubResource( 14 )
+
+[node name="character" type="Node2D" parent="."]
