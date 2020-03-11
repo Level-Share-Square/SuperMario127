@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 class_name Character
 
+
+
 #export var init_pos = Vector2(0, 0)
 #export var velocity = Vector2(0, 0)
 #var last_velocity = Vector2(0, 0)

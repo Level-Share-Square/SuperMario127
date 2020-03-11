@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://src/ParallaxResource.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/backgrounds/nothing/nothing.png" type="Texture" id=4]
+
+[resource]
+script = ExtResource( 1 )
+parallax1_texture = ExtResource( 4 )
+parallax1_scale = Vector2( 0, 0 )
+parallax1_mirroring = Vector2( 0, 0 )
+parallax2_texture = ExtResource( 4 )
+parallax2_scale = Vector2( 0, 0 )
+parallax2_mirroring = Vector2( 0, 0 )
+parallax3_texture = ExtResource( 4 )
+parallax3_scale = Vector2( 0, 0 )
+parallax3_mirroring = Vector2( 0, 0 )
