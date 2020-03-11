@@ -1,0 +1,321 @@
+[gd_resource type="SpriteFrames" load_steps=53 format=2]
+
+[sub_resource type="StreamTexture" id=52]
+load_path = "res://.import/mario.png-89e4c062a5546725b54c0aaaf22b050a.stex"
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = SubResource( 52 )
+region = Rect2( 0, 624, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = SubResource( 52 )
+region = Rect2( 192, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = SubResource( 52 )
+region = Rect2( 96, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = SubResource( 52 )
+region = Rect2( 144, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = SubResource( 52 )
+region = Rect2( 0, 384, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = SubResource( 52 )
+region = Rect2( 0, 480, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = SubResource( 52 )
+region = Rect2( 0, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = SubResource( 52 )
+region = Rect2( 48, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = SubResource( 52 )
+region = Rect2( 96, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = SubResource( 52 )
+region = Rect2( 144, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = SubResource( 52 )
+region = Rect2( 192, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = SubResource( 52 )
+region = Rect2( 240, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = SubResource( 52 )
+region = Rect2( 288, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = SubResource( 52 )
+region = Rect2( 336, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = SubResource( 52 )
+region = Rect2( 384, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = SubResource( 52 )
+region = Rect2( 432, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = SubResource( 52 )
+region = Rect2( 480, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=69]
+atlas = SubResource( 52 )
+region = Rect2( 528, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=70]
+atlas = SubResource( 52 )
+region = Rect2( 192, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=71]
+atlas = SubResource( 52 )
+region = Rect2( 528, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=72]
+atlas = SubResource( 52 )
+region = Rect2( 0, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=73]
+atlas = SubResource( 52 )
+region = Rect2( 48, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=74]
+atlas = SubResource( 52 )
+region = Rect2( 96, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=75]
+atlas = SubResource( 52 )
+region = Rect2( 144, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=76]
+atlas = SubResource( 52 )
+region = Rect2( 192, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=77]
+atlas = SubResource( 52 )
+region = Rect2( 240, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=78]
+atlas = SubResource( 52 )
+region = Rect2( 288, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=79]
+atlas = SubResource( 52 )
+region = Rect2( 336, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=80]
+atlas = SubResource( 52 )
+region = Rect2( 384, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=81]
+atlas = SubResource( 52 )
+region = Rect2( 432, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=82]
+atlas = SubResource( 52 )
+region = Rect2( 480, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=83]
+atlas = SubResource( 52 )
+region = Rect2( 528, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=84]
+atlas = SubResource( 52 )
+region = Rect2( 240, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=85]
+atlas = SubResource( 52 )
+region = Rect2( 48, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=86]
+atlas = SubResource( 52 )
+region = Rect2( 144, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=87]
+atlas = SubResource( 52 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=88]
+atlas = SubResource( 52 )
+region = Rect2( 0, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=89]
+atlas = SubResource( 52 )
+region = Rect2( 240, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=90]
+atlas = SubResource( 52 )
+region = Rect2( 96, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=91]
+atlas = SubResource( 52 )
+region = Rect2( 0, 576, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=92]
+atlas = SubResource( 52 )
+region = Rect2( 0, 432, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=93]
+atlas = SubResource( 52 )
+region = Rect2( 0, 528, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=94]
+atlas = SubResource( 52 )
+region = Rect2( 48, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=95]
+atlas = SubResource( 52 )
+region = Rect2( 0, 672, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=96]
+atlas = SubResource( 52 )
+region = Rect2( 48, 672, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=97]
+atlas = SubResource( 52 )
+region = Rect2( 96, 672, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=98]
+atlas = SubResource( 52 )
+region = Rect2( 144, 672, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=99]
+atlas = SubResource( 52 )
+region = Rect2( 192, 672, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=100]
+atlas = SubResource( 52 )
+region = Rect2( 240, 672, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=101]
+atlas = SubResource( 52 )
+region = Rect2( 288, 672, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=102]
+atlas = SubResource( 52 )
+region = Rect2( 336, 672, 48, 48 )
+
+[resource]
+animations = [ {
+"frames": [ SubResource( 12 ) ],
+"loop": false,
+"name": "bonkedLeft",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 53 ) ],
+"loop": false,
+"name": "doubleFallLeft",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 54 ) ],
+"loop": false,
+"name": "fallRight",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 55 ) ],
+"loop": false,
+"name": "doubleJumpLeft",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 56 ) ],
+"loop": false,
+"name": "diveRight",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 57 ) ],
+"loop": true,
+"name": "wallSlideRight",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ) ],
+"loop": true,
+"name": "movingRight",
+"speed": 18.0
+}, {
+"frames": [ SubResource( 70 ) ],
+"loop": false,
+"name": "doubleFallRight",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 71 ) ],
+"loop": false,
+"name": "shineFall",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ) ],
+"loop": true,
+"name": "movingLeft",
+"speed": 18.0
+}, {
+"frames": [ SubResource( 84 ) ],
+"loop": true,
+"name": "tripleJumpLeft",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 85 ) ],
+"loop": false,
+"name": "jumpLeft",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 86 ) ],
+"loop": false,
+"name": "doubleJumpRight",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 87 ) ],
+"loop": false,
+"name": "idleRight",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 88 ) ],
+"loop": false,
+"name": "idleLeft",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 89 ) ],
+"loop": false,
+"name": "tripleJumpRight",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 90 ) ],
+"loop": false,
+"name": "fallLeft",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 91 ) ],
+"loop": false,
+"name": "bonkedRight",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 92 ) ],
+"loop": false,
+"name": "diveLeft",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 93 ) ],
+"loop": true,
+"name": "wallSlideLeft",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 94 ) ],
+"loop": false,
+"name": "jumpRight",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 95 ), SubResource( 96 ), SubResource( 97 ), SubResource( 98 ), SubResource( 99 ), SubResource( 100 ), SubResource( 101 ), SubResource( 102 ) ],
+"loop": true,
+"name": "spinning",
+"speed": 20.0
+} ]

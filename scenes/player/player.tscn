@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/tiles/tiles.tres" type="TileSet" id=3]
+[ext_resource path="res://scenes/actors/mario/mario.tscn" type="PackedScene" id=4]
 
 [node name="player" type="Node2D"]
 script = ExtResource( 1 )
@@ -9,4 +11,9 @@ script = ExtResource( 1 )
 [node name="shared" parent="." instance=ExtResource( 2 )]
 
 [node name="E" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 32, 32 )
 format = 1
+tile_data = PoolIntArray( 851968, 2, 8, 851969, 2, 10, 851970, 2, 10, 851971, 2, 10, 851972, 2, 10, 851973, 2, 10, 851974, 2, 10, 851975, 2, 10, 851976, 2, 10, 851977, 2, 10, 851978, 2, 11, 917504, 2, 65544, 917505, 2, 12, 917506, 2, 131081, 917507, 2, 131081, 917508, 2, 131081, 917509, 2, 131081, 917510, 2, 131081, 917511, 2, 12, 917512, 2, 131081, 917513, 2, 131081, 917514, 2, 131083, 983040, 2, 196616, 983041, 2, 196617, 983042, 2, 196617, 983043, 2, 196617, 983044, 2, 196617, 983045, 2, 196617, 983046, 2, 196617, 983047, 2, 196617, 983048, 2, 196617, 983049, 2, 196617, 983050, 2, 196619 )
+
+[node name="character" parent="." instance=ExtResource( 4 )]

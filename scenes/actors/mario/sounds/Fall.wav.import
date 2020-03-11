@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Fall.wav-c6c16426a81e67074db27acdb1e36df6.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds/Fall.wav"
+dest_files=[ "res://.import/Fall.wav-c6c16426a81e67074db27acdb1e36df6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
