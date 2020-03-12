@@ -89,11 +89,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Spinning.gd"
 }, {
-"base": "Node",
-"class": "TilesetCache",
-"language": "GDScript",
-"path": "res://caches/tileset_cache.gd"
-}, {
 "base": "State",
 "class": "WallJumpState",
 "language": "GDScript",
@@ -125,11 +120,6 @@ _global_script_classes=[ {
 "path": "res://util/rle_util.gd"
 }, {
 "base": "Reference",
-"class": "tile_util",
-"language": "GDScript",
-"path": "res://util/tile_util.gd"
-}, {
-"base": "Reference",
 "class": "value_util",
 "language": "GDScript",
 "path": "res://util/value_util.gd"
@@ -151,14 +141,12 @@ _global_script_class_icons={
 "SkyResource": "",
 "SlideState": "",
 "SpinningState": "",
-"TilesetCache": "",
 "WallJumpState": "",
 "WallSlideState": "",
 "clipboard_util": "",
 "id_map": "",
 "level_tileset": "",
 "rle_util": "",
-"tile_util": "",
 "value_util": ""
 }
 
