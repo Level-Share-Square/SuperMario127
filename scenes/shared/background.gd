@@ -14,8 +14,6 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	
 	background.texture = background_resource.texture
 	
-	print_debug(background_mapped_id)
-	
 	for layer in foreground_resource.layers:
 		var parallax_instance = ParallaxLayer.new()
 		parallax_instance.motion_scale = layer.scale

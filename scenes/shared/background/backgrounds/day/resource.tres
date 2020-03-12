@@ -1,7 +1,8 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://scenes/shared/sky_resource.gd" type="Script" id=1]
+[ext_resource path="res://classes/sky_resource.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=2]
+
 
 [resource]
 script = ExtResource( 1 )
