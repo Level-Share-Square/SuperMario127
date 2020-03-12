@@ -9,203 +9,203 @@ region = Rect2( 240, 240, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = SubResource( 1 )
-region = Rect2( 0, 480, 48, 48 )
+region = Rect2( 0, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = SubResource( 1 )
-region = Rect2( 0, 672, 48, 48 )
+region = Rect2( 96, 192, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = SubResource( 1 )
-region = Rect2( 48, 672, 48, 48 )
+region = Rect2( 0, 624, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = SubResource( 1 )
-region = Rect2( 96, 672, 48, 48 )
+region = Rect2( 192, 192, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = SubResource( 1 )
-region = Rect2( 144, 672, 48, 48 )
+region = Rect2( 144, 192, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = SubResource( 1 )
-region = Rect2( 192, 672, 48, 48 )
+region = Rect2( 0, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = SubResource( 1 )
-region = Rect2( 240, 672, 48, 48 )
+region = Rect2( 48, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = SubResource( 1 )
-region = Rect2( 288, 672, 48, 48 )
+region = Rect2( 96, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = SubResource( 1 )
-region = Rect2( 336, 672, 48, 48 )
+region = Rect2( 144, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = SubResource( 1 )
-region = Rect2( 0, 576, 48, 48 )
+region = Rect2( 192, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = SubResource( 1 )
-region = Rect2( 48, 192, 48, 48 )
+region = Rect2( 240, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = SubResource( 1 )
-region = Rect2( 0, 528, 48, 48 )
+region = Rect2( 288, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = SubResource( 1 )
-region = Rect2( 0, 432, 48, 48 )
+region = Rect2( 336, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = SubResource( 1 )
-region = Rect2( 0, 624, 48, 48 )
+region = Rect2( 384, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = SubResource( 1 )
-region = Rect2( 192, 240, 48, 48 )
+region = Rect2( 432, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = SubResource( 1 )
-region = Rect2( 528, 0, 48, 48 )
+region = Rect2( 480, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = SubResource( 1 )
-region = Rect2( 0, 48, 48, 48 )
+region = Rect2( 528, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = SubResource( 1 )
-region = Rect2( 96, 240, 48, 48 )
+region = Rect2( 48, 240, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=21]
 atlas = SubResource( 1 )
-region = Rect2( 240, 192, 48, 48 )
+region = Rect2( 192, 240, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=22]
 atlas = SubResource( 1 )
-region = Rect2( 96, 192, 48, 48 )
+region = Rect2( 0, 576, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=23]
 atlas = SubResource( 1 )
-region = Rect2( 0, 96, 48, 48 )
+region = Rect2( 0, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=24]
 atlas = SubResource( 1 )
-region = Rect2( 48, 96, 48, 48 )
+region = Rect2( 0, 432, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=25]
 atlas = SubResource( 1 )
-region = Rect2( 96, 96, 48, 48 )
+region = Rect2( 240, 192, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=26]
 atlas = SubResource( 1 )
-region = Rect2( 144, 96, 48, 48 )
+region = Rect2( 48, 192, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=27]
 atlas = SubResource( 1 )
-region = Rect2( 192, 96, 48, 48 )
+region = Rect2( 96, 240, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=28]
 atlas = SubResource( 1 )
-region = Rect2( 240, 96, 48, 48 )
+region = Rect2( 0, 384, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=29]
 atlas = SubResource( 1 )
-region = Rect2( 288, 96, 48, 48 )
+region = Rect2( 528, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=30]
 atlas = SubResource( 1 )
-region = Rect2( 336, 96, 48, 48 )
+region = Rect2( 0, 528, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=31]
 atlas = SubResource( 1 )
-region = Rect2( 384, 96, 48, 48 )
+region = Rect2( 144, 240, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=32]
 atlas = SubResource( 1 )
-region = Rect2( 432, 96, 48, 48 )
+region = Rect2( 0, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=33]
 atlas = SubResource( 1 )
-region = Rect2( 480, 96, 48, 48 )
+region = Rect2( 48, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=34]
 atlas = SubResource( 1 )
-region = Rect2( 528, 96, 48, 48 )
+region = Rect2( 96, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=35]
 atlas = SubResource( 1 )
-region = Rect2( 144, 192, 48, 48 )
+region = Rect2( 144, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=36]
 atlas = SubResource( 1 )
-region = Rect2( 0, 144, 48, 48 )
+region = Rect2( 192, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=37]
 atlas = SubResource( 1 )
-region = Rect2( 48, 144, 48, 48 )
+region = Rect2( 240, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=38]
 atlas = SubResource( 1 )
-region = Rect2( 96, 144, 48, 48 )
+region = Rect2( 288, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=39]
 atlas = SubResource( 1 )
-region = Rect2( 144, 144, 48, 48 )
+region = Rect2( 336, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=40]
 atlas = SubResource( 1 )
-region = Rect2( 192, 144, 48, 48 )
+region = Rect2( 0, 144, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=41]
 atlas = SubResource( 1 )
-region = Rect2( 240, 144, 48, 48 )
+region = Rect2( 48, 144, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=42]
 atlas = SubResource( 1 )
-region = Rect2( 288, 144, 48, 48 )
+region = Rect2( 96, 144, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=43]
 atlas = SubResource( 1 )
-region = Rect2( 336, 144, 48, 48 )
+region = Rect2( 144, 144, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=44]
 atlas = SubResource( 1 )
-region = Rect2( 384, 144, 48, 48 )
+region = Rect2( 192, 144, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=45]
 atlas = SubResource( 1 )
-region = Rect2( 432, 144, 48, 48 )
+region = Rect2( 240, 144, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=46]
 atlas = SubResource( 1 )
-region = Rect2( 480, 144, 48, 48 )
+region = Rect2( 288, 144, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=47]
 atlas = SubResource( 1 )
-region = Rect2( 528, 144, 48, 48 )
+region = Rect2( 336, 144, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=48]
 atlas = SubResource( 1 )
-region = Rect2( 48, 240, 48, 48 )
+region = Rect2( 384, 144, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=49]
 atlas = SubResource( 1 )
-region = Rect2( 144, 240, 48, 48 )
+region = Rect2( 432, 144, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=50]
 atlas = SubResource( 1 )
-region = Rect2( 192, 192, 48, 48 )
+region = Rect2( 480, 144, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=51]
 atlas = SubResource( 1 )
-region = Rect2( 0, 384, 48, 48 )
+region = Rect2( 528, 144, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=52]
 atlas = SubResource( 1 )
-region = Rect2( 0, 0, 48, 48 )
+region = Rect2( 0, 480, 48, 48 )
 
 [resource]
 animations = [ {
@@ -215,107 +215,107 @@ animations = [ {
 "speed": 5.0
 }, {
 "frames": [ SubResource( 3 ) ],
-"loop": true,
-"name": "wallSlideRight",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
-"loop": true,
-"name": "spinning",
-"speed": 20.0
-}, {
-"frames": [ SubResource( 12 ) ],
 "loop": false,
-"name": "bonkedRight",
+"name": "idleRight",
 "speed": 0.0
 }, {
-"frames": [ SubResource( 13 ) ],
-"loop": false,
-"name": "jumpRight",
-"speed": 12.0
-}, {
-"frames": [ SubResource( 14 ) ],
-"loop": true,
-"name": "wallSlideLeft",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 15 ) ],
-"loop": false,
-"name": "diveLeft",
-"speed": 0.0
-}, {
-"frames": [ SubResource( 16 ) ],
-"loop": false,
-"name": "bonkedLeft",
-"speed": 0.0
-}, {
-"frames": [ SubResource( 17 ) ],
-"loop": false,
-"name": "doubleFallLeft",
-"speed": 0.0
-}, {
-"frames": [ SubResource( 18 ) ],
-"loop": false,
-"name": "shineFall",
-"speed": 0.0
-}, {
-"frames": [ SubResource( 19 ) ],
-"loop": false,
-"name": "idleLeft",
-"speed": 0.0
-}, {
-"frames": [ SubResource( 20 ) ],
-"loop": false,
-"name": "fallLeft",
-"speed": 0.0
-}, {
-"frames": [ SubResource( 21 ) ],
-"loop": false,
-"name": "tripleJumpRight",
-"speed": 0.0
-}, {
-"frames": [ SubResource( 22 ) ],
+"frames": [ SubResource( 4 ) ],
 "loop": false,
 "name": "fallRight",
 "speed": 0.0
 }, {
-"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ) ],
-"loop": true,
-"name": "movingRight",
-"speed": 18.0
-}, {
-"frames": [ SubResource( 35 ) ],
+"frames": [ SubResource( 5 ) ],
 "loop": false,
-"name": "doubleJumpRight",
+"name": "bonkedLeft",
 "speed": 0.0
 }, {
-"frames": [ SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ) ],
-"loop": true,
-"name": "movingLeft",
-"speed": 18.0
-}, {
-"frames": [ SubResource( 48 ) ],
-"loop": false,
-"name": "jumpLeft",
-"speed": 12.0
-}, {
-"frames": [ SubResource( 49 ) ],
-"loop": false,
-"name": "doubleJumpLeft",
-"speed": 0.0
-}, {
-"frames": [ SubResource( 50 ) ],
+"frames": [ SubResource( 6 ) ],
 "loop": false,
 "name": "doubleFallRight",
 "speed": 0.0
 }, {
-"frames": [ SubResource( 51 ) ],
+"frames": [ SubResource( 7 ) ],
+"loop": false,
+"name": "doubleJumpRight",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"loop": true,
+"name": "movingRight",
+"speed": 18.0
+}, {
+"frames": [ SubResource( 20 ) ],
+"loop": false,
+"name": "jumpLeft",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 21 ) ],
+"loop": false,
+"name": "doubleFallLeft",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 22 ) ],
+"loop": false,
+"name": "bonkedRight",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 23 ) ],
+"loop": false,
+"name": "idleLeft",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 24 ) ],
+"loop": false,
+"name": "diveLeft",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 25 ) ],
+"loop": false,
+"name": "tripleJumpRight",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 26 ) ],
+"loop": false,
+"name": "jumpRight",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 27 ) ],
+"loop": false,
+"name": "fallLeft",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 28 ) ],
 "loop": false,
 "name": "diveRight",
 "speed": 0.0
 }, {
-"frames": [ SubResource( 52 ) ],
+"frames": [ SubResource( 29 ) ],
 "loop": false,
-"name": "idleRight",
+"name": "shineFall",
 "speed": 0.0
+}, {
+"frames": [ SubResource( 30 ) ],
+"loop": true,
+"name": "wallSlideLeft",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 31 ) ],
+"loop": false,
+"name": "doubleJumpLeft",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ) ],
+"loop": true,
+"name": "spinning",
+"speed": 20.0
+}, {
+"frames": [ SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ) ],
+"loop": true,
+"name": "movingLeft",
+"speed": 18.0
+}, {
+"frames": [ SubResource( 52 ) ],
+"loop": true,
+"name": "wallSlideRight",
+"speed": 5.0
 } ]

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scenes/shared/background/foregrounds/hills/front_parallax.png" type="Texture" id=1]
+[ext_resource path="res://scenes/shared/parallax_layer_resource.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+texture = ExtResource( 1 )
+scale = Vector2( 0.3, 0.5 )
+mirroring = Vector2( 1536, 0 )

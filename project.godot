@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Fall.gd"
 }, {
+"base": "Resource",
+"class": "ForegroundResource",
+"language": "GDScript",
+"path": "res://scenes/shared/foreground_resource.gd"
+}, {
 "base": "State",
 "class": "JumpState",
 "language": "GDScript",
@@ -65,9 +70,9 @@ _global_script_classes=[ {
 "path": "res://level/Resource.gd"
 }, {
 "base": "Resource",
-"class": "ParallaxResource",
+"class": "ParallaxLayerResource",
 "language": "GDScript",
-"path": "res://scenes/shared/parallax_resource.gd"
+"path": "res://scenes/shared/parallax_layer_resource.gd"
 }, {
 "base": "Resource",
 "class": "SkyResource",
@@ -124,6 +129,7 @@ _global_script_class_icons={
 "Character": "",
 "DiveState": "",
 "FallState": "",
+"ForegroundResource": "",
 "JumpState": "",
 "LevelArea": "",
 "LevelAreaSettings": "",
@@ -131,7 +137,7 @@ _global_script_class_icons={
 "LevelDataLoader": "",
 "LevelObject": "",
 "LevelResource": "",
-"ParallaxResource": "",
+"ParallaxLayerResource": "",
 "SkyResource": "",
 "SlideState": "",
 "SpinningState": "",
@@ -361,3 +367,4 @@ quality/driver/driver_name="GLES2"
 quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+environment/default_clear_color=Color( 0, 0, 0, 1 )
