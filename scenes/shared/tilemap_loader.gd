@@ -57,6 +57,15 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	var middle_tilemap = get_node(middle_tilemap_path)
 	var front_tilemap = get_node(front_tilemap_path)
 	
+	back_tilemap.clear()
+	for index in range(level_area.background_tiles.size()):
+		var tile = level_area.background_tiles[index]
+		if tile[0] != 0:
+			var position = get_position_from_tile_index(index, level_area.settings.size)
+			var cache_tile = get_tile(tile[0], tile[1])
+			back_tilemap.set_cell(position.x, position.y, get_tile(tile[0], tile[1]))
+			place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, back_tilemap)
+	
 	middle_tilemap.clear()
 	for index in range(level_area.foreground_tiles.size()):
 		var tile = level_area.foreground_tiles[index]
@@ -65,3 +74,12 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 			var cache_tile = get_tile(tile[0], tile[1])
 			middle_tilemap.set_cell(position.x, position.y, get_tile(tile[0], tile[1]))
 			place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, middle_tilemap)
+			
+	front_tilemap.clear()
+	for index in range(level_area.very_foreground_tiles.size()):
+		var tile = level_area.very_foreground_tiles[index]
+		if tile[0] != 0:
+			var position = get_position_from_tile_index(index, level_area.settings.size)
+			var cache_tile = get_tile(tile[0], tile[1])
+			front_tilemap.set_cell(position.x, position.y, get_tile(tile[0], tile[1]))
+			place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, front_tilemap)
