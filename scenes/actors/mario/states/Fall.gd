@@ -3,7 +3,7 @@ extends State
 class_name FallState
 	
 func _start_check(delta):
-	return character.velocity.y > 0 && !character.is_grounded() && character.state != character.get_state_instance("Dive") && character.state != character.get_state_instance("WallSlide") and character.state != character.get_state_instance("WallJump") and character.state != character.get_state_instance("Bonked") and character.state != character.get_state_instance("Spinning")
+	return character.velocity.y > 0 && !character.is_grounded() && character.state != character.get_state_node("Dive") && character.state != character.get_state_node("WallSlide") and character.state != character.get_state_node("WallJump") and character.state != character.get_state_node("Bonked") and character.state != character.get_state_node("Spinning")
 
 func _start(delta):
 	pass

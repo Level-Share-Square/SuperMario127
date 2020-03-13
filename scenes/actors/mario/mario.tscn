@@ -1,8 +1,16 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=2]
-[ext_resource path="res://scenes/actors/mario/main_controller.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/mario/mario.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/mario/states/Spinning.gd" type="Script" id=4]
+[ext_resource path="res://scenes/actors/mario/states/WallJump.gd" type="Script" id=5]
+[ext_resource path="res://scenes/actors/mario/states/Jump.gd" type="Script" id=6]
+[ext_resource path="res://scenes/actors/mario/states/Slide.gd" type="Script" id=7]
+[ext_resource path="res://scenes/actors/mario/states/Bonked.gd" type="Script" id=8]
+[ext_resource path="res://scenes/actors/mario/states/Fall.gd" type="Script" id=9]
+[ext_resource path="res://scenes/actors/mario/states/WallSlide.gd" type="Script" id=10]
+[ext_resource path="res://scenes/actors/mario/states/Dive.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 15 )
@@ -76,72 +84,96 @@ mix_rate = 28000
 position = Vector2( 32.5, 128 )
 script = ExtResource( 3 )
 
-[node name="collision" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 8 )
 shape = SubResource( 1 )
 
-[node name="sprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "shineFall"
 playing = true
 
-[node name="jump_sounds" type="Node" parent="."]
+[node name="JumpSoundPlayer" type="Node" parent="."]
 script = ExtResource( 2 )
 sound_number = 1
 
-[node name="jump_1" type="AudioStreamPlayer" parent="jump_sounds"]
+[node name="jump_1" type="AudioStreamPlayer" parent="JumpSoundPlayer"]
 stream = SubResource( 2 )
 
-[node name="jump_2" type="AudioStreamPlayer" parent="jump_sounds"]
+[node name="jump_2" type="AudioStreamPlayer" parent="JumpSoundPlayer"]
 stream = SubResource( 3 )
 
-[node name="jump_3" type="AudioStreamPlayer" parent="jump_sounds"]
+[node name="jump_3" type="AudioStreamPlayer" parent="JumpSoundPlayer"]
 stream = SubResource( 4 )
 
-[node name="jump_4" type="AudioStreamPlayer" parent="jump_sounds"]
+[node name="jump_4" type="AudioStreamPlayer" parent="JumpSoundPlayer"]
 stream = SubResource( 5 )
 
-[node name="dble_jump_sounds" type="Node" parent="."]
+[node name="DoubleJumpSoundPlayer" type="Node" parent="."]
 script = ExtResource( 2 )
 sound_number = 1
 
-[node name="double_jump1" type="AudioStreamPlayer" parent="dble_jump_sounds"]
+[node name="double_jump1" type="AudioStreamPlayer" parent="DoubleJumpSoundPlayer"]
 stream = SubResource( 6 )
 
-[node name="double_jump2" type="AudioStreamPlayer" parent="dble_jump_sounds"]
+[node name="double_jump2" type="AudioStreamPlayer" parent="DoubleJumpSoundPlayer"]
 stream = SubResource( 7 )
 
-[node name="double_jump3" type="AudioStreamPlayer" parent="dble_jump_sounds"]
+[node name="double_jump3" type="AudioStreamPlayer" parent="DoubleJumpSoundPlayer"]
 stream = SubResource( 8 )
 
-[node name="trple_jump_sounds" type="Node" parent="."]
+[node name="TripleJumpSoundPlayer" type="Node" parent="."]
 script = ExtResource( 2 )
 sound_number = 1
 
-[node name="triple_jump1" type="AudioStreamPlayer" parent="trple_jump_sounds"]
+[node name="triple_jump1" type="AudioStreamPlayer" parent="TripleJumpSoundPlayer"]
 stream = SubResource( 9 )
 
-[node name="triple_jump2" type="AudioStreamPlayer" parent="trple_jump_sounds"]
+[node name="triple_jump2" type="AudioStreamPlayer" parent="TripleJumpSoundPlayer"]
 stream = SubResource( 10 )
 
-[node name="triple_jump3" type="AudioStreamPlayer" parent="trple_jump_sounds"]
+[node name="triple_jump3" type="AudioStreamPlayer" parent="TripleJumpSoundPlayer"]
 stream = SubResource( 11 )
 
-[node name="dive_sounds" type="Node" parent="."]
+[node name="DiveSoundPlayer" type="Node" parent="."]
 script = ExtResource( 2 )
 sound_number = 1
 
-[node name="dive_1" type="AudioStreamPlayer" parent="dive_sounds"]
+[node name="dive_1" type="AudioStreamPlayer" parent="DiveSoundPlayer"]
 stream = SubResource( 12 )
 
-[node name="dive_2" type="AudioStreamPlayer" parent="dive_sounds"]
+[node name="dive_2" type="AudioStreamPlayer" parent="DiveSoundPlayer"]
 stream = SubResource( 13 )
 
-[node name="fall_sounds" type="Node" parent="."]
+[node name="FallSoundPlayer" type="Node" parent="."]
 script = ExtResource( 2 )
 sound_number = 1
 
-[node name="fall_1" type="AudioStreamPlayer" parent="fall_sounds"]
+[node name="fall_1" type="AudioStreamPlayer" parent="FallSoundPlayer"]
 stream = SubResource( 14 )
 
 [node name="States" type="Node" parent="."]
+
+[node name="BonkedState" type="Node" parent="States"]
+script = ExtResource( 8 )
+
+[node name="DiveState" type="Node" parent="States"]
+script = ExtResource( 11 )
+
+[node name="FallState" type="Node" parent="States"]
+script = ExtResource( 9 )
+
+[node name="JumpState" type="Node" parent="States"]
+script = ExtResource( 6 )
+
+[node name="SlideState" type="Node" parent="States"]
+script = ExtResource( 7 )
+
+[node name="SpinningState" type="Node" parent="States"]
+script = ExtResource( 4 )
+
+[node name="WallJumpState" type="Node" parent="States"]
+script = ExtResource( 5 )
+
+[node name="WallSlideState" type="Node" parent="States"]
+script = ExtResource( 10 )

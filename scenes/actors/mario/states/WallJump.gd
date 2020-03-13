@@ -12,7 +12,7 @@ var limit_y = false
 var character_in_range = false
 
 func _start_check(delta):
-	return character.state == character.get_state_instance("WallSlide") && !(limit_y && character.position.y < position_on_wj.y && character_in_range) && press_buffer > 0 && character.state != character.get_state_instance("Bonked")
+	return character.state == character.get_state_node("WallSlide") && !(limit_y && character.position.y < position_on_wj.y && character_in_range) && press_buffer > 0 && character.state != character.get_state_node("Bonked")
 
 func _start(delta):
 	var jump_player = character.get_node("JumpSoundPlayer")

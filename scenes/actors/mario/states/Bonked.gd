@@ -1,6 +1,7 @@
 extends State
 
 class_name BonkedState
+
 export var bonk_direction: int = 1
 
 func _start_check(delta):

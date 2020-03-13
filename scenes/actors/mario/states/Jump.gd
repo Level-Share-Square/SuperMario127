@@ -17,7 +17,7 @@ func lerp(a, b, t):
 	return (1 - t) * a + t * b
 
 func _start_check(delta):
-	return ledge_buffer > 0 and jump_buffer > 0 and character.state != character.get_state_instance("Slide") and character.state != character.get_state_instance("Dive")
+	return ledge_buffer > 0 and jump_buffer > 0 and character.state != character.get_state_node("Slide") and character.state != character.get_state_node("Dive")
 
 func _start(delta):
 	var sprite = character.get_node("AnimatedSprite")
@@ -26,7 +26,7 @@ func _start(delta):
 	jump_playing = true
 	if character.current_jump == 2 and abs(character.velocity.x) < 5:
 		character.current_jump = 1
-	if character.current_jump != 2 && character.last_state == character.get_state_instance("Spinning"):
+	if character.current_jump != 2 && character.last_state == character.get_state_node("Spinning"):
 		character.set_state_by_name("Spinning", delta)
 	if character.current_jump == 0:
 		var jump_player = character.get_node("JumpSoundPlayer")
@@ -88,10 +88,10 @@ func _general_update(delta):
 	if rotating:
 		if character.velocity.y > 0:
 			character.jump_animation = 0
-		if character.state == character.get_state_instance("Dive"):
+		if character.state == character.get_state_node("Dive"):
 			rotating = false
 			character.jump_animation = 0
-		if character.is_grounded() or abs(sprite.rotation_degrees) > 360 or character.state == character.get_state_instance("WallSlide") or character.controllable == false:
+		if character.is_grounded() or abs(sprite.rotation_degrees) > 360 or character.state == character.get_state_node("WallSlide") or character.controllable == false:
 			rotating = false
 			sprite.rotation_degrees = 0
 			character.jump_animation = 0

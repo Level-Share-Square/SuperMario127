@@ -9,6 +9,7 @@ export var gravity_scale = 1
 export var facing_direction = 1
 export var move_direction = 0
 onready var states_node = $States
+onready var animated_sprite = $AnimatedSprite
 
 export var move_speed = 216.0
 export var acceleration = 7.5
@@ -94,8 +95,6 @@ func set_state_by_name(name: String, delta: float):
 
 func _ready():
 	real_friction = friction
-	for state_node in states_node.get_children():
-		state.character = self
 
 func _physics_process(delta: float):
 	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")
