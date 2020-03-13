@@ -1,10 +1,259 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/editor/PlaceableItem.gd" type="Script" id=3]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+use_filter = true
+font_data = ExtResource( 4 )
 
 [node name="Editor" type="Node2D"]
 script = ExtResource( 1 )
 nodes_to_load = [ NodePath("Shared") ]
+placeable_items = NodePath("PlaceableItems")
 
 [node name="Shared" parent="." instance=ExtResource( 2 )]
+
+[node name="PlaceableItems" type="Node" parent="."]
+
+[node name="Grass" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 2
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Banner" type="Sprite" parent="UI"]
+scale = Vector2( 0.333, 0.333 )
+centered = false
+
+[node name="Bricks" type="TextureButton" parent="UI/Banner"]
+margin_left = 168.0
+margin_top = 12.0
+margin_right = 312.0
+margin_bottom = 164.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="Sprite" parent="UI/Banner/Bricks"]
+centered = false
+offset = Vector2( 0, 9 )
+
+[node name="Grass" type="TextureButton" parent="UI/Banner"]
+margin_left = 324.0
+margin_top = 12.0
+margin_right = 468.0
+margin_bottom = 164.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="Sprite" parent="UI/Banner/Grass"]
+centered = false
+offset = Vector2( 0, 9 )
+
+[node name="GrassRightSlope" type="TextureButton" parent="UI/Banner"]
+visible = false
+margin_left = 480.0
+margin_top = 12.0
+margin_right = 624.0
+margin_bottom = 164.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="Sprite" parent="UI/Banner/GrassRightSlope"]
+centered = false
+offset = Vector2( 0, 9 )
+
+[node name="GrassLeftSlope" type="TextureButton" parent="UI/Banner"]
+visible = false
+margin_left = 636.0
+margin_top = 12.0
+margin_right = 780.0
+margin_bottom = 164.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="Sprite" parent="UI/Banner/GrassLeftSlope"]
+centered = false
+offset = Vector2( 0, 9 )
+
+[node name="Coin" type="TextureButton" parent="UI/Banner"]
+margin_left = 480.0
+margin_top = 12.0
+margin_right = 624.0
+margin_bottom = 164.0
+rect_pivot_offset = Vector2( -537.662, 396.408 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="Sprite" parent="UI/Banner/Coin"]
+centered = false
+offset = Vector2( 0, 9 )
+
+[node name="Entrance" type="TextureButton" parent="UI/Banner"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 156.0
+margin_bottom = 164.0
+rect_pivot_offset = Vector2( -615.629, 837.31 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="Sprite" parent="UI/Banner/Entrance"]
+centered = false
+offset = Vector2( 0, 8 )
+
+[node name="Shine" type="TextureButton" parent="UI/Banner"]
+margin_left = 636.0
+margin_top = 12.0
+margin_right = 780.0
+margin_bottom = 164.0
+rect_pivot_offset = Vector2( -615.629, 837.31 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="Sprite" parent="UI/Banner/Shine"]
+centered = false
+offset = Vector2( 0, 9 )
+
+[node name="MetalPlatform" type="TextureButton" parent="UI/Banner"]
+margin_left = 792.0
+margin_top = 12.0
+margin_right = 936.0
+margin_bottom = 164.0
+rect_pivot_offset = Vector2( -615.629, 837.31 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="Sprite" parent="UI/Banner/MetalPlatform"]
+centered = false
+offset = Vector2( 0, 9 )
+
+[node name="Testing" type="TextureButton" parent="UI/Banner"]
+margin_left = 2145.72
+margin_top = 14.0
+margin_right = 2311.72
+margin_bottom = 190.0
+rect_scale = Vector2( 0.9, 0.9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LayerSwitcher" type="TextureButton" parent="UI/Banner"]
+margin_left = 2000.0
+margin_top = 12.0
+margin_right = 2144.0
+margin_bottom = 164.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Banner/LayerSwitcher"]
+anchor_right = 0.388
+margin_left = 16.0
+margin_top = 37.0
+margin_right = 94.128
+margin_bottom = 167.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+custom_colors/default_color = Color( 0, 0.0156863, 0.541176, 1 )
+bbcode_enabled = true
+bbcode_text = "Layer
+     1"
+text = "Layer
+     1"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pause" type="ColorRect" parent="UI"]
+pause_mode = 2
+visible = false
+anchor_right = 0.4
+margin_right = 460.8
+margin_bottom = 432.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.501961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="UI/Pause"]
+anchor_top = 0.35
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 144.0
+margin_top = -39.4
+margin_right = -163.2
+margin_bottom = 155.0
+mouse_filter = 2
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=150 freq=2][center][rainbow freq=0.3][wave]PAUSE[/wave][/rainbow][/center]"
+text = "PAUSE"
+scroll_active = false
+custom_effects = [ null, null, null ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StopButton" type="TextureButton" parent="UI"]
+visible = false
+margin_left = 712.0
+margin_top = 376.0
+margin_right = 888.0
+margin_bottom = 552.0
+rect_scale = Vector2( 0.28, 0.28 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Window" type="NinePatchRect" parent="UI"]
+visible = false
+margin_left = 149.028
+margin_top = 125.474
+margin_right = 1423.03
+margin_bottom = 790.474
+rect_scale = Vector2( 0.333, 0.333 )
+region_rect = Rect2( 0, 0, 660, 610 )
+patch_margin_left = 40
+patch_margin_top = 110
+patch_margin_right = 40
+patch_margin_bottom = 40
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="RichTextLabel" parent="UI/Window"]
+margin_left = 24.0
+margin_top = 24.2632
+margin_right = 456.0
+margin_bottom = 102.263
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_text = "Level Settings"
+text = "Level Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="UI/Window"]
+margin_left = 1109.65
+margin_top = 12.9531
+margin_right = 1264.65
+margin_bottom = 93.9531
+rect_scale = Vector2( 0.95, 0.95 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

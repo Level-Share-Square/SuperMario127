@@ -84,6 +84,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/ParallaxLayerResource.gd"
 }, {
+"base": "Node",
+"class": "PlaceableItem",
+"language": "GDScript",
+"path": "res://scenes/editor/PlaceableItem.gd"
+}, {
 "base": "Resource",
 "class": "SkyResource",
 "language": "GDScript",
@@ -145,6 +150,7 @@ _global_script_class_icons={
 "LevelResource": "",
 "LevelTileset": "",
 "ParallaxLayerResource": "",
+"PlaceableItem": "",
 "SkyResource": "",
 "SlideState": "",
 "SpinningState": "",
