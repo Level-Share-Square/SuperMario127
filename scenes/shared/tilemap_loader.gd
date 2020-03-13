@@ -58,7 +58,8 @@ func place_edges(pos, placing_tile, bounds, tilemap_node):
 
 func load_in(level_data : LevelData, level_area : LevelArea):
 	
-	back_tilemap_node.clear()
+	var settings = level_area.settings
+	
 	for index in range(level_area.background_tiles.size()):
 		var tile = level_area.background_tiles[index]
 		if tile[0] != 0:
@@ -66,8 +67,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 			var cache_tile = get_tile(tile[0], tile[1])
 			back_tilemap_node.set_cell(position.x, position.y, get_tile(tile[0], tile[1]))
 			place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, back_tilemap_node)
-	
-	middle_tilemap_node.clear()
+			
 	for index in range(level_area.foreground_tiles.size()):
 		var tile = level_area.foreground_tiles[index]
 		if tile[0] != 0:
@@ -76,7 +76,6 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 			middle_tilemap_node.set_cell(position.x, position.y, get_tile(tile[0], tile[1]))
 			place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, middle_tilemap_node)
 			
-	front_tilemap_node.clear()
 	for index in range(level_area.very_foreground_tiles.size()):
 		var tile = level_area.very_foreground_tiles[index]
 		if tile[0] != 0:
@@ -84,3 +83,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 			var cache_tile = get_tile(tile[0], tile[1])
 			front_tilemap_node.set_cell(position.x, position.y, get_tile(tile[0], tile[1]))
 			place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, front_tilemap_node)
+	
+	back_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
+	middle_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
+	front_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
