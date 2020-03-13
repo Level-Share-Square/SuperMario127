@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -6,9 +6,8 @@
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://scenes/editor/assets/shadow_shader.material" type="Material" id=5]
 [ext_resource path="res://scenes/editor/assets/item_box_hover.png" type="Texture" id=6]
-[ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=7]
+[ext_resource path="res://scenes/editor/item_box.gd" type="Script" id=7]
 [ext_resource path="res://scenes/editor/assets/item_box.png" type="Texture" id=8]
-[ext_resource path="res://assets/tiles/bricks/icon.png" type="Texture" id=9]
 [ext_resource path="res://assets/tiles/grass/icon.png" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=11]
 
@@ -29,6 +28,7 @@ placeable_items = NodePath("PlaceableItems")
 [node name="Grass" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 tileset_id = 2
+icon = ExtResource( 10 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -37,7 +37,28 @@ scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 11 )
 centered = false
 
-[node name="Bricks" type="TextureButton" parent="UI/Banner"]
+[node name="Box1" type="TextureButton" parent="UI/Banner"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 156.0
+margin_bottom = 164.0
+rect_clip_content = true
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 6 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+object = NodePath("../../../PlaceableItems/Grass")
+
+[node name="Icon" type="Sprite" parent="UI/Banner/Box1"]
+material = ExtResource( 5 )
+scale = Vector2( 3, 3 )
+centered = false
+offset = Vector2( 0, 3 )
+
+[node name="Box2" type="TextureButton" parent="UI/Banner"]
 margin_left = 168.0
 margin_top = 12.0
 margin_right = 312.0
@@ -50,14 +71,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="UI/Banner/Bricks"]
+[node name="Icon" type="Sprite" parent="UI/Banner/Box2"]
 material = ExtResource( 5 )
 scale = Vector2( 3, 3 )
-texture = ExtResource( 9 )
 centered = false
 offset = Vector2( 0, 3 )
 
-[node name="Grass" type="TextureButton" parent="UI/Banner"]
+[node name="Box3" type="TextureButton" parent="UI/Banner"]
 margin_left = 324.0
 margin_top = 12.0
 margin_right = 468.0
@@ -70,15 +90,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="UI/Banner/Grass"]
+[node name="Icon" type="Sprite" parent="UI/Banner/Box3"]
 material = ExtResource( 5 )
 scale = Vector2( 3, 3 )
-texture = ExtResource( 10 )
 centered = false
 offset = Vector2( 0, 3 )
 
-[node name="GrassRightSlope" type="TextureButton" parent="UI/Banner"]
-visible = false
+[node name="Box4" type="TextureButton" parent="UI/Banner"]
 margin_left = 480.0
 margin_top = 12.0
 margin_right = 624.0
@@ -91,73 +109,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="UI/Banner/GrassRightSlope"]
-centered = false
-offset = Vector2( 0, 9 )
-
-[node name="GrassLeftSlope" type="TextureButton" parent="UI/Banner"]
-visible = false
-margin_left = 636.0
-margin_top = 12.0
-margin_right = 780.0
-margin_bottom = 164.0
-rect_clip_content = true
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="UI/Banner/GrassLeftSlope"]
-centered = false
-offset = Vector2( 0, 9 )
-
-[node name="Coin" type="TextureButton" parent="UI/Banner"]
-margin_left = 480.0
-margin_top = 12.0
-margin_right = 624.0
-margin_bottom = 164.0
-rect_pivot_offset = Vector2( -537.662, 396.408 )
-rect_clip_content = true
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="UI/Banner/Coin"]
-centered = false
-offset = Vector2( 0, 9 )
-
-[node name="Entrance" type="TextureButton" parent="UI/Banner"]
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 156.0
-margin_bottom = 164.0
-rect_pivot_offset = Vector2( -615.629, 837.31 )
-rect_clip_content = true
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="UI/Banner/Entrance"]
+[node name="Icon" type="Sprite" parent="UI/Banner/Box4"]
 material = ExtResource( 5 )
 scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
 centered = false
 offset = Vector2( 0, 3 )
 
-[node name="Shine" type="TextureButton" parent="UI/Banner"]
+[node name="Box5" type="TextureButton" parent="UI/Banner"]
 margin_left = 636.0
 margin_top = 12.0
 margin_right = 780.0
 margin_bottom = 164.0
-rect_pivot_offset = Vector2( -615.629, 837.31 )
 rect_clip_content = true
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 8 )
@@ -166,16 +128,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="UI/Banner/Shine"]
+[node name="Icon" type="Sprite" parent="UI/Banner/Box5"]
+material = ExtResource( 5 )
+scale = Vector2( 3, 3 )
 centered = false
-offset = Vector2( 0, 9 )
+offset = Vector2( 0, 3 )
 
-[node name="MetalPlatform" type="TextureButton" parent="UI/Banner"]
+[node name="Box6" type="TextureButton" parent="UI/Banner"]
 margin_left = 792.0
 margin_top = 12.0
 margin_right = 936.0
 margin_bottom = 164.0
-rect_pivot_offset = Vector2( -615.629, 837.31 )
 rect_clip_content = true
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 8 )
@@ -184,48 +147,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="UI/Banner/MetalPlatform"]
+[node name="Icon" type="Sprite" parent="UI/Banner/Box6"]
+material = ExtResource( 5 )
+scale = Vector2( 3, 3 )
 centered = false
-offset = Vector2( 0, 9 )
+offset = Vector2( 0, 3 )
 
-[node name="Testing" type="TextureButton" parent="UI/Banner"]
-margin_left = 2145.72
-margin_top = 14.0
-margin_right = 2311.72
-margin_bottom = 190.0
-rect_scale = Vector2( 0.9, 0.9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LayerSwitcher" type="TextureButton" parent="UI/Banner"]
-margin_left = 2000.0
+[node name="Box7" type="TextureButton" parent="UI/Banner"]
+margin_left = 948.0
 margin_top = 12.0
-margin_right = 2144.0
+margin_right = 1092.0
 margin_bottom = 164.0
+rect_clip_content = true
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Banner/LayerSwitcher"]
-anchor_right = 0.388
-margin_left = 16.0
-margin_top = 37.0
-margin_right = 94.128
-margin_bottom = 167.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-custom_colors/default_color = Color( 0, 0.0156863, 0.541176, 1 )
-bbcode_enabled = true
-bbcode_text = "Layer
-     1"
-text = "Layer
-     1"
-scroll_active = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Icon" type="Sprite" parent="UI/Banner/Box7"]
+material = ExtResource( 5 )
+scale = Vector2( 3, 3 )
+centered = false
+offset = Vector2( 0, 3 )
 
 [node name="Pause" type="ColorRect" parent="UI"]
 pause_mode = 2
