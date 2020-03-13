@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
-"path": "res://scenes/actors/mario/main_controller.gd"
+"path": "res://scenes/actors/mario/mario.gd"
 }, {
 "base": "State",
 "class": "DiveState",
@@ -99,6 +99,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Spinning.gd"
 }, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/State.gd"
+}, {
 "base": "State",
 "class": "WallJumpState",
 "language": "GDScript",
@@ -143,6 +148,7 @@ _global_script_class_icons={
 "SkyResource": "",
 "SlideState": "",
 "SpinningState": "",
+"State": "",
 "WallJumpState": "",
 "WallSlideState": "",
 "clipboard_util": "",

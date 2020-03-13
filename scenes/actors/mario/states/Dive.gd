@@ -8,7 +8,7 @@ export var maxVelocityX: float = 700
 var last_above_rot_limit = false
 
 func _start_check(delta):
-	return Input.is_action_pressed("dive") and character.state != character.get_state_instance("Slide") and !character.is_grounded() and !character.is_walled() and character.state != character.get_state_instance("Bonked")
+	return Input.is_action_pressed("dive") and character.state != character.get_state_node("Slide") and !character.is_grounded() and !character.is_walled() and character.state != character.get_state_node("Bonked")
 
 func _start(delta):
 	var dive_player = character.get_node("DiveSoundPlayer")

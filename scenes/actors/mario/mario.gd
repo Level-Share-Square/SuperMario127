@@ -4,6 +4,7 @@ class_name Character
 
 export var scene_location = ""
 onready var states_node = $States
+onready var animated_sprite = $AnimatedSprite
 
 # Basic Physics
 export var init_pos = Vector2(0, 0)
@@ -90,8 +91,6 @@ func set_state_by_name(name: String, delta: float):
 
 func _ready():
 	real_friction = friction
-	for state_node in states_node.get_children():
-		state.character = self
 
 func _physics_process(delta: float):
 	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")

@@ -9,10 +9,10 @@ var can_boost = true
 var cooldown_timer = 0
 
 func _start_check(delta):
-	return Input.is_action_just_pressed("spin") && character.state != character.get_state_instance("Dive") and character.jump_animation != 2
+	return Input.is_action_just_pressed("spin") && character.state != character.get_state_node("Dive") and character.jump_animation != 2
 
 func _start(delta):
-	if can_boost == true && !character.is_grounded() && (character.state != character.get_state_instance("Jump") or character.current_jump == 1):
+	if can_boost == true && !character.is_grounded() && (character.state != character.get_state_node("Jump") or character.current_jump == 1):
 		can_boost = false
 		cooldown_timer = 0.5
 		if character.velocity.y > -boost_power:
