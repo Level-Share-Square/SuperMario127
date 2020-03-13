@@ -74,7 +74,11 @@ mix_rate = 28000
 
 [node name="Character" type="KinematicBody2D"]
 position = Vector2( 32.5, 128 )
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 3 )
+scene_location = "res://scenes/actors/mario/mario.tscn"
+deceleration = 15.0
 
 [node name="collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 8 )

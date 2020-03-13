@@ -13,8 +13,6 @@ nodes_to_load = [ NodePath("Shared"), NodePath("Character") ]
 
 [node name="Character" parent="." instance=ExtResource( 3 )]
 position = Vector2( 32.5, 126.947 )
-collision_layer = 2
-collision_mask = 2
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 0, -80 )

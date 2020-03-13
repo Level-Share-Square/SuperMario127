@@ -2,13 +2,17 @@ extends KinematicBody2D
 
 class_name Character
 
+export var scene_location = ""
+onready var states_node = $States
+
+# Basic Physics
 export var init_pos = Vector2(0, 0)
 export var velocity = Vector2(0, 0)
 var last_velocity = Vector2(0, 0)
+
 export var gravity_scale = 1
 export var facing_direction = 1
 export var move_direction = 0
-onready var states_node = $States
 
 export var move_speed = 216.0
 export var acceleration = 7.5
@@ -16,21 +20,13 @@ export var deceleration = 25.0
 export var air_accel = 7.5
 export var friction = 10.5
 export var air_fricc = 1.15
-export var jump_power = 350.0
-var old_friction = 10.5
-var jump_playing = true
-var current_jump = 0
-var jump_animation = 0
-export var real_friction = 0
 
-var diving = false
-var rotating = false
-var sliding = false
-
-export var walljump_power = Vector2(350, 320)
+# Extra
 export var is_wj_chained = false
-var direction_on_stick = 1
+export var real_friction = 0
+export var current_jump = 0
 
+# States
 var state = null
 var last_state = null
 var controllable = true
@@ -106,33 +102,11 @@ func _physics_process(delta: float):
 		# Gravity
 		velocity += gravity * Vector2(gravity_scale, gravity_scale)
 
-		# Collision Checks
-		# Down
-		if (test_move(self.transform, Vector2(0, 0.1))):
-			collision_down = true
-		else:
-			collision_down = false
-		# Up
-		if (test_move(self.transform, Vector2(0, -0.1))):
-			collision_up = true
-		else:
-			collision_up = false
-		# Left
-		if (test_move(self.transform, Vector2(-0.1, 0))):
-			collision_left = true
-		else:
-			collision_left = false
-		# Right
-		if (test_move(self.transform, Vector2(0.1, 0))):
-			collision_right = true
-		else:
-			collision_right = false
-
 		# Movement
 		move_direction = 0
-		if (Input.is_action_pressed("move_left") && (state != get_state_node("Slide") || !is_grounded()) and state != get_state_node("Bonked")):
+		if Input.is_action_pressed("move_left") and state.disable_movement == false:
 			move_direction = -1
-		elif (Input.is_action_pressed("move_right") && (state != get_state_node("Slide") || !is_grounded()) and state != get_state_node("Bonked")):
+		elif Input.is_action_pressed("move_right") and state.disable_movement == false:
 			move_direction = 1
 		if controllable:
 			if move_direction != 0:
@@ -145,7 +119,7 @@ func _physics_process(delta: float):
 						velocity.x -= 3.5 * move_direction
 					facing_direction = move_direction
 
-					if state != get_state_node("Spinning"):
+					if !state.disable_animation:
 						if !test_move(transform, Vector2(velocity.x * delta, 0)):
 							if move_direction == 1:
 								sprite.animation = "movingRight"
@@ -165,7 +139,7 @@ func _physics_process(delta: float):
 						velocity.x += air_accel * move_direction
 					elif ((velocity.x > move_speed && move_direction == 1) || (velocity.x < -move_speed && move_direction == -1)):
 						velocity.x -= 0.25 * move_direction
-					if state != get_state_node("Dive"):
+					if !state.disable_turning:
 						facing_direction = move_direction
 			else:
 				if (velocity.x > 0):
@@ -185,7 +159,7 @@ func _physics_process(delta: float):
 					else:
 						velocity.x = 0
 
-				if state != get_state_node("Spinning"):
+				if !state.disable_animation:
 					if is_grounded():
 						if facing_direction == 1:
 							sprite.animation = "idleRight"
@@ -193,7 +167,7 @@ func _physics_process(delta: float):
 							sprite.animation = "idleLeft"
 						sprite.speed_scale = 1
 		else:
-			if state != get_state_node("Spinning"):
+			if !state.disable_animation:
 				sprite.animation = "idleRight"
 
 		for state_node in states_node.get_children():
@@ -211,7 +185,7 @@ func _physics_process(delta: float):
 		if position.x < 0:
 			position.x = 0
 			velocity.x = 0
-			if is_grounded() and move_direction != 0:
+			if is_grounded() and move_direction != 0 and !state.disable_animation:
 				if facing_direction == 1:
 					sprite.animation = "idleRight"
 				else:
@@ -219,27 +193,19 @@ func _physics_process(delta: float):
 		if position.x > temp_level_size.x * 32:
 			position.x = temp_level_size.x * 32
 			velocity.x = 0
-			if is_grounded() and move_direction != 0:
+			if is_grounded() and move_direction != 0 and !state.disable_animation:
 				if facing_direction == 1:
 					sprite.animation = "idleRight"
 				else:
 					sprite.animation = "idleLeft"
 		last_velocity = velocity
 
-func reset_vars():
-	#var music = get_node("../Music")
-	current_jump = 0
-	velocity = Vector2(0, 0)
-	controllable = true
-	set_state_by_name("Fall", 0)
-	is_wj_chained = false
-
 func kill():
-	reset_vars()
+	load(scene_location)
 	#var global_vars = get_node("../GlobalVars")
 	#global_vars.reload()
 
 func exit():
-	reset_vars()
+	hide()
 	#var mode_switcher = get_node("../ModeSwitcher")
 	#mode_switcher.switch_to_editing()
