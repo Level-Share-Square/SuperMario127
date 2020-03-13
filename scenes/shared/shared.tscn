@@ -17,6 +17,8 @@ scroll_base_offset = Vector2( 0, 290 )
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -128
 script = ExtResource( 6 )
+parallax = NodePath("../Parallax")
+background = NodePath("Sprite")
 
 [node name="Sprite" type="Sprite" parent="Background"]
 position = Vector2( -0.3078, -0.307785 )
@@ -27,9 +29,9 @@ centered = false
 
 [node name="Tilemaps" type="Node2D" parent="."]
 script = ExtResource( 2 )
-back_tilemap_path = NodePath("Back")
-middle_tilemap_path = NodePath("Middle")
-front_tilemap_path = NodePath("Front")
+back_tilemap = NodePath("Back")
+middle_tilemap = NodePath("Middle")
+front_tilemap = NodePath("Front")
 
 [node name="Back" type="TileMap" parent="Tilemaps"]
 modulate = Color( 0.545098, 0.545098, 0.545098, 1 )
