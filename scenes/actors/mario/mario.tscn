@@ -72,7 +72,7 @@ data = PoolByteArray( 0, 0, 255, 255, 0, 0, 255, 255, 255, 255, 255, 255, 0, 0, 
 format = 1
 mix_rate = 28000
 
-[node name="character" type="KinematicBody2D"]
+[node name="Character" type="KinematicBody2D"]
 position = Vector2( 32.5, 128 )
 script = ExtResource( 3 )
 
@@ -144,4 +144,4 @@ sound_number = 1
 [node name="fall_1" type="AudioStreamPlayer" parent="fall_sounds"]
 stream = SubResource( 14 )
 
-[node name="character" type="Node2D" parent="."]
+[node name="States" type="Node" parent="."]

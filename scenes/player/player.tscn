@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/actors/mario/mario.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/player/camera.gd" type="Script" id=4]
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
@@ -12,3 +13,22 @@ nodes_to_load = [ NodePath("Shared"), NodePath("Character") ]
 
 [node name="Character" parent="." instance=ExtResource( 3 )]
 position = Vector2( 32.5, 126.947 )
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 0, -80 )
+rotating = true
+current = true
+process_mode = 0
+limit_left = 0
+limit_top = 0
+limit_right = 960
+limit_bottom = 960
+limit_smoothed = true
+smoothing_enabled = true
+smoothing_speed = 15.0
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
+script = ExtResource( 4 )
+character = NodePath("../Character")
