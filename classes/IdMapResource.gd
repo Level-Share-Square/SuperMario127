@@ -1,5 +1,5 @@
 extends Resource
 
-class_name id_map
+class_name IdMap
 
 export var ids : PoolStringArray

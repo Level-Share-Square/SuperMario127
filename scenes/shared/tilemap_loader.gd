@@ -13,7 +13,7 @@ var tileset_cache := []
 func _ready():
 	var level_tilesets := preload("res://assets/tiles/ids.tres")
 	for tileset_id in level_tilesets.ids:
-		var tileset : level_tileset = load("res://assets/tiles/" + tileset_id + "/resource.tres")
+		var tileset : LevelTileset = load("res://assets/tiles/" + tileset_id + "/resource.tres")
 		tileset_cache.append(tileset)
 
 func get_position_from_tile_index(index: int, size: Vector2) -> Vector2:

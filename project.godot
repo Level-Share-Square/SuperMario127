@@ -32,7 +32,12 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "ForegroundResource",
 "language": "GDScript",
-"path": "res://classes/foreground_resource.gd"
+"path": "res://classes/ForegroundResource.gd"
+}, {
+"base": "Resource",
+"class": "IdMap",
+"language": "GDScript",
+"path": "res://classes/IdMapResource.gd"
 }, {
 "base": "State",
 "class": "JumpState",
@@ -70,14 +75,19 @@ _global_script_classes=[ {
 "path": "res://level/Resource.gd"
 }, {
 "base": "Resource",
+"class": "LevelTileset",
+"language": "GDScript",
+"path": "res://classes/LevelTileset.gd"
+}, {
+"base": "Resource",
 "class": "ParallaxLayerResource",
 "language": "GDScript",
-"path": "res://classes/parallax_layer_resource.gd"
+"path": "res://classes/ParallaxLayerResource.gd"
 }, {
 "base": "Resource",
 "class": "SkyResource",
 "language": "GDScript",
-"path": "res://classes/sky_resource.gd"
+"path": "res://classes/SkyResource.gd"
 }, {
 "base": "State",
 "class": "SlideState",
@@ -104,16 +114,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://util/clipboard_util.gd"
 }, {
-"base": "Resource",
-"class": "id_map",
-"language": "GDScript",
-"path": "res://classes/id_map_resource.gd"
-}, {
-"base": "Resource",
-"class": "level_tileset",
-"language": "GDScript",
-"path": "res://classes/level_tileset.gd"
-}, {
 "base": "Reference",
 "class": "rle_util",
 "language": "GDScript",
@@ -130,6 +130,7 @@ _global_script_class_icons={
 "DiveState": "",
 "FallState": "",
 "ForegroundResource": "",
+"IdMap": "",
 "JumpState": "",
 "LevelArea": "",
 "LevelAreaSettings": "",
@@ -137,6 +138,7 @@ _global_script_class_icons={
 "LevelDataLoader": "",
 "LevelObject": "",
 "LevelResource": "",
+"LevelTileset": "",
 "ParallaxLayerResource": "",
 "SkyResource": "",
 "SlideState": "",
@@ -144,8 +146,6 @@ _global_script_class_icons={
 "WallJumpState": "",
 "WallSlideState": "",
 "clipboard_util": "",
-"id_map": "",
-"level_tileset": "",
 "rle_util": "",
 "value_util": ""
 }
