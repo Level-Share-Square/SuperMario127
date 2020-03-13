@@ -17,7 +17,7 @@ export var move_direction = 0
 
 export var move_speed = 216.0
 export var acceleration = 7.5
-export var deceleration = 25.0
+export var deceleration = 15.0
 export var air_accel = 7.5
 export var friction = 10.5
 export var air_fricc = 1.15
@@ -26,6 +26,10 @@ export var air_fricc = 1.15
 export var is_wj_chained = false
 export var real_friction = 0
 export var current_jump = 0
+
+export var disable_movement = false
+export var disable_turning = false
+export var disable_animation = false
 
 # States
 var state = null
@@ -73,14 +77,15 @@ func show():
 	visible = true
 
 func set_state(state, delta: float):
-	var old_state = self.state
-	last_state = old_state
-	self.state = null
-	if old_state != null:
-		old_state._stop(delta);
-	if state != null:
-		self.state = state;
-		state._start(delta);
+	if state.priority > (self.state.priority or -1):
+		var old_state = self.state
+		last_state = old_state
+		self.state = null
+		if old_state != null:
+			old_state._stop(delta);
+		if state != null:
+			self.state = state;
+			state._start(delta);
 
 func get_state_node(name: String):
 	if states_node.has_node(name):
@@ -100,12 +105,21 @@ func _physics_process(delta: float):
 		var gravity = 7.82 #global_vars_node.gravity
 		# Gravity
 		velocity += gravity * Vector2(gravity_scale, gravity_scale)
+		
+		if state != null:
+			disable_movement = state.disable_movement
+			disable_turning = state.disable_turning
+			disable_animation = state.disable_animation
+		else:
+			disable_movement = false
+			disable_turning = false
+			disable_animation = false
 
 		# Movement
 		move_direction = 0
-		if Input.is_action_pressed("move_left") and state.disable_movement == false:
+		if Input.is_action_pressed("move_left") and disable_movement == false:
 			move_direction = -1
-		elif Input.is_action_pressed("move_right") and state.disable_movement == false:
+		elif Input.is_action_pressed("move_right") and disable_movement == false:
 			move_direction = 1
 		if controllable:
 			if move_direction != 0:
@@ -118,7 +132,7 @@ func _physics_process(delta: float):
 						velocity.x -= 3.5 * move_direction
 					facing_direction = move_direction
 
-					if !state.disable_animation:
+					if !disable_animation:
 						if !test_move(transform, Vector2(velocity.x * delta, 0)):
 							if move_direction == 1:
 								sprite.animation = "movingRight"
@@ -138,7 +152,7 @@ func _physics_process(delta: float):
 						velocity.x += air_accel * move_direction
 					elif ((velocity.x > move_speed && move_direction == 1) || (velocity.x < -move_speed && move_direction == -1)):
 						velocity.x -= 0.25 * move_direction
-					if !state.disable_turning:
+					if !disable_turning:
 						facing_direction = move_direction
 			else:
 				if (velocity.x > 0):
@@ -158,7 +172,7 @@ func _physics_process(delta: float):
 					else:
 						velocity.x = 0
 
-				if !state.disable_animation:
+				if !disable_animation:
 					if is_grounded():
 						if facing_direction == 1:
 							sprite.animation = "idleRight"
@@ -166,7 +180,7 @@ func _physics_process(delta: float):
 							sprite.animation = "idleLeft"
 						sprite.speed_scale = 1
 		else:
-			if !state.disable_animation:
+			if !disable_animation:
 				sprite.animation = "idleRight"
 
 		for state_node in states_node.get_children():
@@ -184,7 +198,7 @@ func _physics_process(delta: float):
 		if position.x < 0:
 			position.x = 0
 			velocity.x = 0
-			if is_grounded() and move_direction != 0 and !state.disable_animation:
+			if is_grounded() and move_direction != 0 and !disable_animation:
 				if facing_direction == 1:
 					sprite.animation = "idleRight"
 				else:
@@ -192,7 +206,7 @@ func _physics_process(delta: float):
 		if position.x > temp_level_size.x * 32:
 			position.x = temp_level_size.x * 32
 			velocity.x = 0
-			if is_grounded() and move_direction != 0 and !state.disable_animation:
+			if is_grounded() and move_direction != 0 and !disable_animation:
 				if facing_direction == 1:
 					sprite.animation = "idleRight"
 				else:
@@ -200,7 +214,7 @@ func _physics_process(delta: float):
 		last_velocity = velocity
 
 func kill():
-	load(scene_location)
+	pass
 	#var global_vars = get_node("../GlobalVars")
 	#global_vars.reload()
 
