@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/editor/placeable_item_button.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/assets/shadow_shader.material" type="Material" id=2]
+[ext_resource path="res://scenes/editor/assets/item_box.png" type="Texture" id=3]
+[ext_resource path="res://scenes/editor/assets/item_box_hover.png" type="Texture" id=4]
+
+[node name="PlaceableItemButton" type="TextureButton"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 156.0
+margin_bottom = 164.0
+rect_clip_content = true
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 4 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="Sprite" parent="."]
+material = ExtResource( 2 )
+scale = Vector2( 3, 3 )
+centered = false
+offset = Vector2( 0, 3 )

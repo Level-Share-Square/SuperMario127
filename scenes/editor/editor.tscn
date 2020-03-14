@@ -1,13 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/editor/PlaceableItem.gd" type="Script" id=3]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://scenes/editor/assets/shadow_shader.material" type="Material" id=5]
-[ext_resource path="res://scenes/editor/assets/item_box_hover.png" type="Texture" id=6]
-[ext_resource path="res://scenes/editor/item_box.gd" type="Script" id=7]
-[ext_resource path="res://scenes/editor/assets/item_box.png" type="Texture" id=8]
+[ext_resource path="res://scenes/editor/placeable_items_container.gd" type="Script" id=9]
 [ext_resource path="res://assets/tiles/grass/icon.png" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=11]
 
@@ -30,147 +27,19 @@ script = ExtResource( 3 )
 tileset_id = 2
 icon = ExtResource( 10 )
 
+[node name="Brick" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+button_placement = 1
+tileset_id = 1
+icon = ExtResource( 10 )
+
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Banner" type="Sprite" parent="UI"]
+[node name="PlaceableItemsContainer" type="Sprite" parent="UI"]
 scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 11 )
 centered = false
-
-[node name="Box1" type="TextureButton" parent="UI/Banner"]
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 156.0
-margin_bottom = 164.0
-rect_clip_content = true
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 6 )
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-object = NodePath("../../../PlaceableItems/Grass")
-
-[node name="Icon" type="Sprite" parent="UI/Banner/Box1"]
-material = ExtResource( 5 )
-scale = Vector2( 3, 3 )
-centered = false
-offset = Vector2( 0, 3 )
-
-[node name="Box2" type="TextureButton" parent="UI/Banner"]
-margin_left = 168.0
-margin_top = 12.0
-margin_right = 312.0
-margin_bottom = 164.0
-rect_clip_content = true
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="UI/Banner/Box2"]
-material = ExtResource( 5 )
-scale = Vector2( 3, 3 )
-centered = false
-offset = Vector2( 0, 3 )
-
-[node name="Box3" type="TextureButton" parent="UI/Banner"]
-margin_left = 324.0
-margin_top = 12.0
-margin_right = 468.0
-margin_bottom = 164.0
-rect_clip_content = true
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="UI/Banner/Box3"]
-material = ExtResource( 5 )
-scale = Vector2( 3, 3 )
-centered = false
-offset = Vector2( 0, 3 )
-
-[node name="Box4" type="TextureButton" parent="UI/Banner"]
-margin_left = 480.0
-margin_top = 12.0
-margin_right = 624.0
-margin_bottom = 164.0
-rect_clip_content = true
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="UI/Banner/Box4"]
-material = ExtResource( 5 )
-scale = Vector2( 3, 3 )
-centered = false
-offset = Vector2( 0, 3 )
-
-[node name="Box5" type="TextureButton" parent="UI/Banner"]
-margin_left = 636.0
-margin_top = 12.0
-margin_right = 780.0
-margin_bottom = 164.0
-rect_clip_content = true
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="UI/Banner/Box5"]
-material = ExtResource( 5 )
-scale = Vector2( 3, 3 )
-centered = false
-offset = Vector2( 0, 3 )
-
-[node name="Box6" type="TextureButton" parent="UI/Banner"]
-margin_left = 792.0
-margin_top = 12.0
-margin_right = 936.0
-margin_bottom = 164.0
-rect_clip_content = true
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="UI/Banner/Box6"]
-material = ExtResource( 5 )
-scale = Vector2( 3, 3 )
-centered = false
-offset = Vector2( 0, 3 )
-
-[node name="Box7" type="TextureButton" parent="UI/Banner"]
-margin_left = 948.0
-margin_top = 12.0
-margin_right = 1092.0
-margin_bottom = 164.0
-rect_clip_content = true
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="UI/Banner/Box7"]
-material = ExtResource( 5 )
-scale = Vector2( 3, 3 )
-centered = false
-offset = Vector2( 0, 3 )
+script = ExtResource( 9 )
 
 [node name="Pause" type="ColorRect" parent="UI"]
 pause_mode = 2
