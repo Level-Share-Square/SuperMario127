@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/tiles/bricks/icon.png" type="Texture" id=5]
 [ext_resource path="res://scenes/editor/assets/grid.png" type="Texture" id=6]
+[ext_resource path="res://scenes/editor/camera_controls.gd" type="Script" id=7]
 [ext_resource path="res://scenes/editor/placeable_items_container.gd" type="Script" id=9]
 [ext_resource path="res://assets/tiles/grass/icon.png" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=11]
@@ -17,7 +18,7 @@ font_data = ExtResource( 4 )
 
 [node name="Editor" type="Node2D"]
 script = ExtResource( 1 )
-nodes_to_load = [ NodePath("Shared") ]
+nodes_to_load = [ NodePath("Shared"), NodePath("Camera2D") ]
 placeable_items = NodePath("PlaceableItems")
 
 [node name="Shared" parent="." instance=ExtResource( 2 )]
@@ -27,13 +28,13 @@ placeable_items = NodePath("PlaceableItems")
 [node name="Grass" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 tileset_id = 2
-change_to = "Grass"
+change_to = "Brick"
 icon = ExtResource( 10 )
 
 [node name="Brick" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 tileset_id = 1
-change_to = "Brick"
+change_to = "Grass"
 icon = ExtResource( 5 )
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -134,3 +135,14 @@ motion_mirroring = Vector2( 1024, 512 )
 [node name="Sprite" type="Sprite" parent="Grid/Layer"]
 texture = ExtResource( 6 )
 centered = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_top = 0
+limit_smoothed = true
+smoothing_enabled = true
+smoothing_speed = 15.0
+editor_draw_screen = false
+script = ExtResource( 7 )
+speed = 7

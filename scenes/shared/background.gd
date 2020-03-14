@@ -20,6 +20,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	for layer in foreground_resource.layers:
 		var parallax_layer = ParallaxLayer.new()
 		parallax_layer.motion_scale = layer.scale
+		parallax_layer.motion_offset = layer.offset
 		parallax_layer.motion_mirroring = layer.mirroring
 		
 		var sprite_instance = Sprite.new()

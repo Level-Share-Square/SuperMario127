@@ -33,6 +33,8 @@ offset = Vector2( 0, 3 )
 
 [node name="Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+volume_db = -10.0
