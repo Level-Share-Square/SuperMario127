@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/ForegroundResource.gd"
 }, {
+"base": "Node2D",
+"class": "GameObject",
+"language": "GDScript",
+"path": "res://classes/GameObject.gd"
+}, {
 "base": "Resource",
 "class": "IdMap",
 "language": "GDScript",
@@ -140,6 +145,7 @@ _global_script_class_icons={
 "DiveState": "",
 "FallState": "",
 "ForegroundResource": "",
+"GameObject": "",
 "IdMap": "",
 "JumpState": "",
 "LevelArea": "",
@@ -173,7 +179,7 @@ config/windows_native_icon="res://assets/misc/icon.ico"
 
 [autoload]
 
-mode_switcher="*res://scenes/other/mode_switcher.tscn"
+mode_switcher="*res://scenes/actors/mode_switcher/mode_switcher.tscn"
 
 [debug]
 

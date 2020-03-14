@@ -71,17 +71,16 @@ static func decode(code: String):
 		result.areas[0].very_foreground_tiles.append(tile)
 		
 	result.areas[0].objects = []
-#	if area_array.size() > 4:
-#		var objects_array = area_array[4].split("|")
-#		for object in objects_array:
-#			var object_array = object.split(",")
-#			var decoded_object = {}
-#			decoded_object.properties = {}
-#			decoded_object.id = object_array[0]
-#			decoded_object.name = id_map_cache.get(int(object_array[0]))
-#			decoded_object.properties.position = decode_value(object_array[1])
-#			decoded_object.properties.scale = decode_value(object_array[2])
-#			decoded_object.properties.rotation_degrees = int(decode_value(object_array[3]))
-#			result.areas[0].objects.append(decoded_object)
+	if area_array.size() > 4:
+		var objects_array = area_array[4].split("|")
+		for object in objects_array:
+			var object_array = object.split(",")
+			var decoded_object = {}
+			decoded_object.properties = {}
+			decoded_object.type_id = int(object_array[0])
+			decoded_object.properties.position = decode_value(object_array[1])
+			decoded_object.properties.scale = decode_value(object_array[2])
+			decoded_object.properties.rotation_degrees = int(decode_value(object_array[3]))
+			result.areas[0].objects.append(decoded_object)
 	
 	return result

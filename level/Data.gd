@@ -66,8 +66,7 @@ func get_object(result, is_json) -> LevelObject:
 	var object
 	if !is_json:
 		object = LevelObject.new()
-		object.id = result.id
-		object.name = result.name
+		object.type_id = result.type_id
 		object.properties = result.properties
 	else:
 		object = LevelObject.new()

@@ -41,8 +41,9 @@ func _gui_input(event):
 		var editor = get_tree().get_current_scene()
 		if event.is_pressed() and item != null:
 			if editor.selected_item == item:
-				item = get_node(placeable_items_path + "/" + item.change_to)
-				item_changed()
+#				item = get_node(placeable_items_path + "/" + item.change_to)
+#				item_changed()
+				pass
 			
 			editor.set_selected_item(item)
 			

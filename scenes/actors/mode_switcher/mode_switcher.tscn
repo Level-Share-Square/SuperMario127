@@ -1,11 +1,13 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scenes/other/ui/play_button.png" type="Texture" id=1]
-[ext_resource path="res://scenes/other/ui/stop_button.png" type="Texture" id=2]
-[ext_resource path="res://scenes/other/ui/coin.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/mode_switcher/ui/play_button.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/mode_switcher/ui/stop_button.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/mode_switcher/ui/coin.png" type="Texture" id=3]
 [ext_resource path="res://scenes/shared/sounds/play_button_reverb.wav" type="AudioStream" id=4]
-[ext_resource path="res://scenes/other/mode_switcher_button.gd" type="Script" id=5]
+[ext_resource path="res://scenes/actors/mode_switcher/mode_switcher_button.gd" type="Script" id=5]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=6]
+
+
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 101

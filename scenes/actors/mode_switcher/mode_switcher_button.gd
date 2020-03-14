@@ -48,7 +48,7 @@ func _pressed():
 	switch()
 		
 func change_visuals(new_scene):
-	self.texture_normal = texture_stop if new_scene == "Player" else texture_play
+	self.texture_normal = texture_stop if new_scene == 0 else texture_play
 
 func switch():
 	if !switching_disabled:
@@ -79,7 +79,7 @@ func switch():
 		
 		yield(tween, "tween_completed")
 		
-		var new_scene = "Player" if get_tree().get_current_scene().get_name() == "Editor" else "Editor"
+		var new_scene = get_tree().get_current_scene().mode
 		get_tree().get_current_scene().switch_scenes()
 		change_visuals(new_scene)
 		

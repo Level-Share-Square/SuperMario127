@@ -1,5 +1,4 @@
 class_name LevelObject
 
-var name: String = "Object"
-var id: String = "0"
+var type_id := 0
 var properties = {}
