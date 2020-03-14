@@ -8,8 +8,6 @@ func _ready():
 	var data = LevelData.new()
 	data.load_in(load("res://assets/level_data/test_level.tres").contents)
 	load_in(data, data.areas[0])
-	
-func _process(delta):
-	#if Input.is_action_just_pressed("reload"): - Why is this in the editor
-		#get_tree().reload_current_scene()
-	pass
+
+func switch_scenes():
+	get_tree().change_scene("res://scenes/player/player.tscn")
