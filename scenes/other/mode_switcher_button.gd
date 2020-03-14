@@ -21,11 +21,14 @@ func _process(delta):
 		self.modulate = Color(0.85, 0.85, 0.85)
 	else:
 		self.modulate = Color(1, 1, 1)
-	change_visuals()
 		
-func change_visuals():
-	self.texture_normal = bottom_texture_stop if get_tree().get_current_scene().get_name() == "Player" else bottom_texture_play
-	top_part.texture = top_texture_stop if get_tree().get_current_scene().get_name() == "Player" else top_texture_play
+func _input(event):
+	if event.is_action_pressed("switch_modes"):
+		_pressed()
+		
+func change_visuals(new_scene):
+	self.texture_normal = bottom_texture_stop if new_scene == "Player" else bottom_texture_play
+	top_part.texture = top_texture_stop if new_scene == "Player" else top_texture_play
 
 func _pressed():
 	if !pressing_disabled:
@@ -51,9 +54,10 @@ func _pressed():
 		yield(tween, "tween_completed")
 		
 		sound.play()
+		var new_scene = "Player" if get_tree().get_current_scene().get_name() == "Editor" else "Editor"
 		var scene_path = "res://scenes/player/player.tscn" if get_tree().get_current_scene().get_name() == "Editor" else "res://scenes/editor/editor.tscn" 
 		get_tree().change_scene(scene_path)
-		change_visuals()
+		change_visuals(new_scene)
 		
 		tween.interpolate_property(top_part, "rect_rotation",
 			-45, 0, 0.20,
