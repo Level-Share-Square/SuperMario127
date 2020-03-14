@@ -8,7 +8,7 @@
 [ext_resource path="res://scenes/other/ui/stop_button_top.png" type="Texture" id=7]
 
 [node name="CanvasLayer" type="CanvasLayer"]
-layer = 99
+layer = 101
 
 [node name="Fader" type="ColorRect" parent="."]
 visible = false

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/editor/PlaceableItem.gd" type="Script" id=3]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/tiles/bricks/icon.png" type="Texture" id=5]
+[ext_resource path="res://scenes/editor/assets/grid.png" type="Texture" id=6]
 [ext_resource path="res://scenes/editor/placeable_items_container.gd" type="Script" id=9]
 [ext_resource path="res://assets/tiles/grass/icon.png" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=11]
@@ -36,6 +37,7 @@ change_to = "Brick"
 icon = ExtResource( 5 )
 
 [node name="UI" type="CanvasLayer" parent="."]
+layer = 100
 
 [node name="PlaceableItemsContainer" type="Sprite" parent="UI"]
 scale = Vector2( 0.333, 0.333 )
@@ -122,3 +124,13 @@ rect_scale = Vector2( 0.95, 0.95 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Grid" type="ParallaxBackground" parent="."]
+layer = 15
+
+[node name="Layer" type="ParallaxLayer" parent="Grid"]
+motion_mirroring = Vector2( 1024, 512 )
+
+[node name="Sprite" type="Sprite" parent="Grid/Layer"]
+texture = ExtResource( 6 )
+centered = false
