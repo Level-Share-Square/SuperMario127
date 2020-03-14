@@ -179,7 +179,7 @@ config/windows_native_icon="res://assets/misc/icon.ico"
 
 [autoload]
 
-mode_switcher="*res://scenes/other/mode_switcher.tscn"
+mode_switcher="*res://scenes/actors/mode_switcher/mode_switcher.tscn"
 
 [debug]
 
