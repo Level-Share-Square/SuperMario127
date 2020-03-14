@@ -22,6 +22,9 @@ export var friction = 10.5
 export var aerial_friction = 1.15
 
 # Extra
+var is_wj_chained = false
+var real_friction = 0
+var current_jump = 0
 
 export var disable_movement = false
 export var disable_turning = false
@@ -91,7 +94,7 @@ func set_state_by_name(name: String, delta: float):
 	set_state(get_state_node(name), delta)
 
 func _ready():
-	pass
+	real_friction = friction
 
 func _physics_process(delta: float):
 	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")

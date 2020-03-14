@@ -17,6 +17,7 @@ func lerp(a, b, t):
 	return (1 - t) * a + t * b
 
 func _start_check(delta):
+
 	return ledge_buffer > 0 and jump_buffer > 0 and character.state != character.get_state_node("Slide") and character.state != character.get_state_node("Dive")
 
 func _start(delta):
