@@ -6,7 +6,7 @@ onready var states_node = $States
 onready var animated_sprite = $AnimatedSprite
 
 # Basic Physics
-export var init_pos = Vector2(0, 0)
+export var initial_position = Vector2(0, 0)
 export var velocity = Vector2(0, 0)
 var last_velocity = Vector2(0, 0)
 
@@ -17,14 +17,11 @@ export var move_direction = 0
 export var move_speed = 216.0
 export var acceleration = 7.5
 export var deceleration = 15.0
-export var air_accel = 7.5
+export var aerial_acceleration = 7.5
 export var friction = 10.5
-export var air_fricc = 1.15
+export var aerial_friction = 1.15
 
 # Extra
-export var is_wj_chained = false
-export var real_friction = 0
-export var current_jump = 0
 
 export var disable_movement = false
 export var disable_turning = false
@@ -70,7 +67,7 @@ func is_walled_right():
 func hide():
 	visible = false
 	velocity = Vector2(0, 0)
-	position = init_pos
+	position = initial_position
 
 func show():
 	visible = true
@@ -94,123 +91,120 @@ func set_state_by_name(name: String, delta: float):
 	set_state(get_state_node(name), delta)
 
 func _ready():
-	real_friction = friction
+	pass
 
 func _physics_process(delta: float):
 	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")
 
-	if true:#global_vars_node.game_mode != "Editing":
-
-		var gravity = 7.82 #global_vars_node.gravity
-		# Gravity
-		velocity += gravity * Vector2(gravity_scale, gravity_scale)
-		
-		if state != null:
-			disable_movement = state.disable_movement
-			disable_turning = state.disable_turning
-			disable_animation = state.disable_animation
-		else:
-			disable_movement = false
-			disable_turning = false
-			disable_animation = false
-
-		# Movement
-		move_direction = 0
-		if Input.is_action_pressed("move_left") and disable_movement == false:
-			move_direction = -1
-		elif Input.is_action_pressed("move_right") and disable_movement == false:
-			move_direction = 1
-		if controllable:
-			if move_direction != 0:
-				if is_grounded():
-					if ((velocity.x > 0 && move_direction == -1) || (velocity.x < 0 && move_direction == 1)):
-						velocity.x += deceleration * move_direction
-					elif ((velocity.x < move_speed && move_direction == 1) || (velocity.x > -move_speed && move_direction == -1)):
-						velocity.x += acceleration * move_direction
-					elif ((velocity.x > move_speed && move_direction == 1) || (velocity.x < -move_speed && move_direction == -1)):
-						velocity.x -= 3.5 * move_direction
-					facing_direction = move_direction
-
-					if !disable_animation:
-						if !test_move(transform, Vector2(velocity.x * delta, 0)):
-							if move_direction == 1:
-								sprite.animation = "movingRight"
-							else:
-								sprite.animation = "movingLeft"
-						else:
-							if facing_direction == 1:
-								sprite.animation = "idleRight"
-							else:
-								sprite.animation = "idleLeft"
-						if (abs(velocity.x) > move_speed):
-							sprite.speed_scale = abs(velocity.x) / move_speed
-						else:
-							sprite.speed_scale = 1
-				else:
-					if ((velocity.x < move_speed && move_direction == 1) || (velocity.x > -move_speed && move_direction == -1)):
-						velocity.x += air_accel * move_direction
-					elif ((velocity.x > move_speed && move_direction == 1) || (velocity.x < -move_speed && move_direction == -1)):
-						velocity.x -= 0.25 * move_direction
-					if !disable_turning:
-						facing_direction = move_direction
-			else:
-				if (velocity.x > 0):
-					if (velocity.x > 15):
-						if (is_grounded()):
-							velocity.x -= friction
-						else:
-							velocity.x -= air_fricc
-					else:
-						velocity.x = 0
-				elif (velocity.x < 0):
-					if (velocity.x < -15):
-						if (is_grounded()):
-							velocity.x += friction
-						else:
-							velocity.x += air_fricc
-					else:
-						velocity.x = 0
+	var gravity = 7.82 #global_vars_node.gravity
+	# Gravity
+	velocity += gravity * Vector2(0, gravity_scale)
+	
+	if state != null:
+		disable_movement = state.disable_movement
+		disable_turning = state.disable_turning
+		disable_animation = state.disable_animation
+	else:
+		disable_movement = false
+		disable_turning = false
+		disable_animation = false
+	# Movement
+	move_direction = 0
+	if Input.is_action_pressed("move_left") and disable_movement == false:
+		move_direction = -1
+	elif Input.is_action_pressed("move_right") and disable_movement == false:
+		move_direction = 1
+	if controllable:
+		if move_direction != 0:
+			if is_grounded():
+				if ((velocity.x > 0 && move_direction == -1) || (velocity.x < 0 && move_direction == 1)):
+					velocity.x += deceleration * move_direction
+				elif ((velocity.x < move_speed && move_direction == 1) || (velocity.x > -move_speed && move_direction == -1)):
+					velocity.x += acceleration * move_direction
+				elif ((velocity.x > move_speed && move_direction == 1) || (velocity.x < -move_speed && move_direction == -1)):
+					velocity.x -= 3.5 * move_direction
+				facing_direction = move_direction
 
 				if !disable_animation:
-					if is_grounded():
+					if !test_move(transform, Vector2(velocity.x * delta, 0)):
+						if move_direction == 1:
+							sprite.animation = "movingRight"
+						else:
+							sprite.animation = "movingLeft"
+					else:
 						if facing_direction == 1:
 							sprite.animation = "idleRight"
 						else:
 							sprite.animation = "idleLeft"
+					if (abs(velocity.x) > move_speed):
+						sprite.speed_scale = abs(velocity.x) / move_speed
+					else:
 						sprite.speed_scale = 1
+			else:
+				if ((velocity.x < move_speed && move_direction == 1) || (velocity.x > -move_speed && move_direction == -1)):
+					velocity.x += aerial_acceleration * move_direction
+				elif ((velocity.x > move_speed && move_direction == 1) || (velocity.x < -move_speed && move_direction == -1)):
+					velocity.x -= 0.25 * move_direction
+				if !disable_turning:
+					facing_direction = move_direction
 		else:
+			if (velocity.x > 0):
+				if (velocity.x > 15):
+					if (is_grounded()):
+						velocity.x -= friction
+					else:
+						velocity.x -= aerial_friction
+				else:
+					velocity.x = 0
+			elif (velocity.x < 0):
+				if (velocity.x < -15):
+					if (is_grounded()):
+						velocity.x += friction
+					else:
+						velocity.x += aerial_friction
+				else:
+					velocity.x = 0
+
 			if !disable_animation:
+				if is_grounded():
+					if facing_direction == 1:
+						sprite.animation = "idleRight"
+					else:
+						sprite.animation = "idleLeft"
+					sprite.speed_scale = 1
+	else:
+		if !disable_animation:
+			sprite.animation = "idleRight"
+
+	for state_node in states_node.get_children():
+		state_node.handle_update(delta)
+
+	# Move by velocity
+	velocity = move_and_slide(velocity)
+	var slide_count = get_slide_count()
+	collided_last_frame = true if slide_count else false
+
+	# Boundaries
+	if position.y > (temp_level_size.y * 32) + 128:
+		#fall_player.play()
+		kill()
+	if position.x < 0:
+		position.x = 0
+		velocity.x = 0
+		if is_grounded() and move_direction != 0 and !disable_animation:
+			if facing_direction == 1:
 				sprite.animation = "idleRight"
-
-		for state_node in states_node.get_children():
-			state_node.handle_update(delta)
-
-		# Move by velocity
-		velocity = move_and_slide(velocity)
-		var slide_count = get_slide_count()
-		collided_last_frame = true if slide_count else false
-
-		# Boundaries
-		if position.y > (temp_level_size.y * 32) + 128:
-			#fall_player.play()
-			kill()
-		if position.x < 0:
-			position.x = 0
-			velocity.x = 0
-			if is_grounded() and move_direction != 0 and !disable_animation:
-				if facing_direction == 1:
-					sprite.animation = "idleRight"
-				else:
-					sprite.animation = "idleLeft"
-		if position.x > temp_level_size.x * 32:
-			position.x = temp_level_size.x * 32
-			velocity.x = 0
-			if is_grounded() and move_direction != 0 and !disable_animation:
-				if facing_direction == 1:
-					sprite.animation = "idleRight"
-				else:
-					sprite.animation = "idleLeft"
-		last_velocity = velocity
+			else:
+				sprite.animation = "idleLeft"
+	if position.x > temp_level_size.x * 32:
+		position.x = temp_level_size.x * 32
+		velocity.x = 0
+		if is_grounded() and move_direction != 0 and !disable_animation:
+			if facing_direction == 1:
+				sprite.animation = "idleRight"
+			else:
+				sprite.animation = "idleLeft"
+	last_velocity = velocity
 
 func kill():
 	pass
