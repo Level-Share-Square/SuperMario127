@@ -35,6 +35,7 @@ front_tilemap = NodePath("Front")
 
 [node name="Back" type="TileMap" parent="Tilemaps"]
 modulate = Color( 0.545098, 0.545098, 0.545098, 1 )
+z_index = -10
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
 format = 1
@@ -47,6 +48,7 @@ collision_mask = 2
 format = 1
 
 [node name="Front" type="TileMap" parent="Tilemaps"]
+z_index = 10
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 4

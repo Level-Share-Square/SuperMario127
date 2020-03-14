@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/editor/PlaceableItem.gd" type="Script" id=3]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/tiles/bricks/icon.png" type="Texture" id=5]
 [ext_resource path="res://scenes/editor/placeable_items_container.gd" type="Script" id=9]
 [ext_resource path="res://assets/tiles/grass/icon.png" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=11]
@@ -25,13 +26,14 @@ placeable_items = NodePath("PlaceableItems")
 [node name="Grass" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 tileset_id = 2
+change_to = "Brick"
 icon = ExtResource( 10 )
 
 [node name="Brick" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
-button_placement = 1
 tileset_id = 1
-icon = ExtResource( 10 )
+change_to = "Grass"
+icon = ExtResource( 5 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
