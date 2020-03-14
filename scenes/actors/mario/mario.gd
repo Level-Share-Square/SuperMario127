@@ -2,7 +2,6 @@ extends KinematicBody2D
 
 class_name Character
 
-export var scene_location = ""
 onready var states_node = $States
 onready var animated_sprite = $AnimatedSprite
 
@@ -219,6 +218,6 @@ func kill():
 	#global_vars.reload()
 
 func exit():
-	hide()
+	pass
 	#var mode_switcher = get_node("../ModeSwitcher")
 	#mode_switcher.switch_to_editing()
