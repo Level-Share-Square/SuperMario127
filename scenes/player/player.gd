@@ -8,3 +8,6 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("reload"):
 		get_tree().reload_current_scene()
+
+func switch_scenes():
+	get_tree().change_scene("res://scenes/editor/editor.tscn")

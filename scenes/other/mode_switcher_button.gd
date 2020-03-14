@@ -9,7 +9,7 @@ onready var sound = $Sound
 onready var hover_sound = $HoverSound
 onready var fader = get_node("../Fader")
 onready var fader_tween = get_node("../Fader/Tween")
-var pressing_disabled = false
+var switching_disabled = false
 var start_pos
 var last_hovered = false
 
@@ -43,14 +43,17 @@ func _process(delta):
 func _input(event):
 	if event.is_action_pressed("switch_modes"):
 		_pressed()
+
+func _pressed():
+	switch()
 		
 func change_visuals(new_scene):
 	self.texture_normal = texture_stop if new_scene == "Player" else texture_play
 
-func _pressed():
-	if !pressing_disabled:
+func switch():
+	if !switching_disabled:
 		sound.play()
-		pressing_disabled = true
+		switching_disabled = true
 		rect_position = start_pos
 		
 		tween.interpolate_property(self, "rect_position",
@@ -77,8 +80,7 @@ func _pressed():
 		yield(tween, "tween_completed")
 		
 		var new_scene = "Player" if get_tree().get_current_scene().get_name() == "Editor" else "Editor"
-		var scene_path = "res://scenes/player/player.tscn" if get_tree().get_current_scene().get_name() == "Editor" else "res://scenes/editor/editor.tscn" 
-		get_tree().change_scene(scene_path)
+		get_tree().get_current_scene().switch_scenes()
 		change_visuals(new_scene)
 		
 		tween.interpolate_property(self, "rect_position",
@@ -95,4 +97,4 @@ func _pressed():
 		
 		fader.visible = false
 		rect_position = start_pos
-		pressing_disabled = false
+		switching_disabled = false
