@@ -1,5 +1,7 @@
 extends LevelDataLoader
 
+export var character : NodePath
+
 var mode = 0
 
 func _ready():
