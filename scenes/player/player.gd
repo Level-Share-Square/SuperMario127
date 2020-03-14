@@ -1,5 +1,7 @@
 extends LevelDataLoader
 
+var mode = 0
+
 func _ready():
 	var data = LevelData.new()
 	data.load_in(load("res://assets/level_data/test_level.tres").contents)

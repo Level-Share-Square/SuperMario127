@@ -1,5 +1,7 @@
 extends LevelDataLoader
 
+var mode = 1
+
 export var placeable_items : NodePath
 export var placeable_items_button_container : NodePath
 var selected_box : int = 0

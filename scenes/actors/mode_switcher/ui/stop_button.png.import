@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/coin.png-f7d84087a1f0ec124af37ea7fd070b30.stex"
+path="res://.import/stop_button.png-2b243a38b97601299ac3c235b752ec62.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/other/ui/coin.png"
-dest_files=[ "res://.import/coin.png-f7d84087a1f0ec124af37ea7fd070b30.stex" ]
+source_file="res://scenes/actors/mode_switcher/ui/stop_button.png"
+dest_files=[ "res://.import/stop_button.png-2b243a38b97601299ac3c235b752ec62.stex" ]
 
 [params]
 
