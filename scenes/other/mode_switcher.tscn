@@ -28,7 +28,8 @@ margin_right = 360.0
 margin_bottom = 500.0
 rect_scale = Vector2( 0.25, 0.25 )
 rect_pivot_offset = Vector2( 60, 300 )
-texture_normal = ExtResource( 3 )
+action_mode = 0
+texture_normal = ExtResource( 1 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -43,7 +44,7 @@ margin_top = 1.0
 margin_right = 400.0
 margin_bottom = 401.0
 rect_pivot_offset = Vector2( 40, 192 )
-texture = ExtResource( 7 )
+texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
