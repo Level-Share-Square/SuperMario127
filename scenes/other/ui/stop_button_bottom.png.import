@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stop_button_bottom.png-db81592b2ee87e60d826574188516854.stex"
+path="res://.import/stop_button_bottom.png-cfb4d421bfd0a9ea562c7b9a07faf5ca.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/shared/ui/stop_button_bottom.png"
-dest_files=[ "res://.import/stop_button_bottom.png-db81592b2ee87e60d826574188516854.stex" ]
+source_file="res://scenes/other/ui/stop_button_bottom.png"
+dest_files=[ "res://.import/stop_button_bottom.png-cfb4d421bfd0a9ea562c7b9a07faf5ca.stex" ]
 
 [params]
 

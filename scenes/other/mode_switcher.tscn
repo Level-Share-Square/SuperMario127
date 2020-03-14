@@ -1,13 +1,25 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scenes/shared/ui/play_button_top.png" type="Texture" id=1]
-[ext_resource path="res://scenes/shared/ui/stop_button_top.png" type="Texture" id=2]
-[ext_resource path="res://scenes/shared/ui/stop_button_bottom.png" type="Texture" id=3]
+[ext_resource path="res://scenes/other/ui/play_button_bottom.png" type="Texture" id=1]
+[ext_resource path="res://scenes/other/ui/play_button_top.png" type="Texture" id=2]
+[ext_resource path="res://scenes/other/ui/stop_button_bottom.png" type="Texture" id=3]
 [ext_resource path="res://scenes/shared/sounds/play_button_reverb.wav" type="AudioStream" id=4]
-[ext_resource path="res://scenes/shared/mode_switcher_button.gd" type="Script" id=5]
-[ext_resource path="res://scenes/shared/ui/play_button_bottom.png" type="Texture" id=6]
+[ext_resource path="res://scenes/other/mode_switcher_button.gd" type="Script" id=5]
+[ext_resource path="res://scenes/other/ui/stop_button_top.png" type="Texture" id=7]
 
 [node name="CanvasLayer" type="CanvasLayer"]
+layer = 99
+
+[node name="Fader" type="ColorRect" parent="."]
+visible = false
+margin_right = 768.0
+margin_bottom = 432.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="Fader"]
 
 [node name="ModeSwitcherButton" type="TextureButton" parent="."]
 margin_left = -40.0
@@ -16,22 +28,22 @@ margin_right = 360.0
 margin_bottom = 500.0
 rect_scale = Vector2( 0.25, 0.25 )
 rect_pivot_offset = Vector2( 60, 300 )
-texture_normal = ExtResource( 6 )
+texture_normal = ExtResource( 3 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-bottom_texture_play = ExtResource( 6 )
-top_texture_play = ExtResource( 1 )
+bottom_texture_play = ExtResource( 1 )
+top_texture_play = ExtResource( 2 )
 bottom_texture_stop = ExtResource( 3 )
-top_texture_stop = ExtResource( 2 )
+top_texture_stop = ExtResource( 7 )
 
 [node name="TopPart" type="TextureRect" parent="ModeSwitcherButton"]
 margin_top = 1.0
 margin_right = 400.0
 margin_bottom = 401.0
 rect_pivot_offset = Vector2( 40, 192 )
-texture = ExtResource( 1 )
+texture = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

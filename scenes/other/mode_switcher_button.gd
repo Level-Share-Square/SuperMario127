@@ -4,6 +4,8 @@ onready var top_part = $TopPart
 onready var tween = $Tween
 onready var tween_bottom = $TweenBottom
 onready var sound = $Sound
+onready var fader = get_node("../Fader")
+onready var fader_tween = get_node("../Fader/Tween")
 var pressing_disabled = false
 
 export var bottom_texture_play : StreamTexture
@@ -35,13 +37,19 @@ func _pressed():
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
 		tween_bottom.start()
 		
+		fader.visible = true
+		fader_tween.interpolate_property(fader, "modulate",
+			Color(1, 1, 1, 0), Color(1, 1, 1, 1), 0.35,
+			Tween.TRANS_LINEAR, Tween.EASE_OUT)
+		fader_tween.start()
+		
 		yield(tween, "tween_completed")
 		
 		sound.play()
-		self.texture_normal = bottom_texture_play if texture_normal == bottom_texture_stop else bottom_texture_stop
-		top_part.texture = top_texture_play if top_part.texture == top_texture_stop else top_texture_stop
 		var scene_path = "res://scenes/player/player.tscn" if get_tree().get_current_scene().get_name() == "Editor" else "res://scenes/editor/editor.tscn" 
 		get_tree().change_scene(scene_path)
+		self.texture_normal = bottom_texture_stop if get_tree().get_current_scene().get_name() == "Editor" else bottom_texture_play
+		top_part.texture = top_texture_stop if get_tree().get_current_scene().get_name() == "Editor" else top_texture_play
 		
 		tween.interpolate_property(top_part, "rect_rotation",
 			-45, 0, 0.20,
@@ -52,8 +60,14 @@ func _pressed():
 			Tween.TRANS_BACK, Tween.EASE_OUT)
 		tween_bottom.start()
 		
+		fader_tween.interpolate_property(fader, "modulate",
+			Color(1, 1, 1, 1), Color(1, 1, 1, 0), 0.20,
+			Tween.TRANS_LINEAR, Tween.EASE_OUT)
+		fader_tween.start()
+		
 		yield(tween, "tween_completed")
 		
+		fader.visible = false
 		rect_rotation = 0
 		top_part.rect_rotation = 0
 		pressing_disabled = false
