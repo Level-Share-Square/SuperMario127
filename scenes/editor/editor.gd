@@ -10,5 +10,6 @@ func _ready():
 	load_in(data, data.areas[0])
 	
 func _process(delta):
-	if Input.is_action_just_pressed("reload"):
-		get_tree().reload_current_scene()
+	#if Input.is_action_just_pressed("reload"): - Why is this in the editor
+		#get_tree().reload_current_scene()
+	pass
