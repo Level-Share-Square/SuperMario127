@@ -53,11 +53,11 @@ func _pressed():
 		
 		yield(tween, "tween_completed")
 		
-		sound.play()
 		var new_scene = "Player" if get_tree().get_current_scene().get_name() == "Editor" else "Editor"
 		var scene_path = "res://scenes/player/player.tscn" if get_tree().get_current_scene().get_name() == "Editor" else "res://scenes/editor/editor.tscn" 
 		get_tree().change_scene(scene_path)
 		change_visuals(new_scene)
+		sound.play()
 		
 		tween.interpolate_property(top_part, "rect_rotation",
 			-45, 0, 0.20,
