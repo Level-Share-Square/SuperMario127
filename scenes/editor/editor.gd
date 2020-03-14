@@ -2,7 +2,7 @@ extends LevelDataLoader
 
 export var placeable_items : NodePath
 export var placeable_items_button_container : NodePath
-var selected_item : PlaceableItem
+var selected_box : int = 0
 
 onready var placeable_items_node = get_node(placeable_items)
 onready var placeable_items_button_container_node = get_node(placeable_items_button_container)
@@ -12,8 +12,8 @@ func _ready():
 	data.load_in(load("res://assets/level_data/test_level.tres").contents)
 	load_in(data, data.areas[0])
 	
-func set_selected_item(item : PlaceableItem):
-	selected_item = item
+func set_selected_box(index: int):
+	selected_box = index
 	for placeable_item_button in placeable_items_button_container_node.get_children():
 		placeable_item_button.update_selection()
 

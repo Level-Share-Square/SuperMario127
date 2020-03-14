@@ -11,6 +11,7 @@ var normal_color : Color
 var selected_color : Color
 var item : PlaceableItem
 var placeable_items_path : String = ""
+var box_index = 1
 
 var last_hovered = false
 
@@ -39,19 +40,19 @@ func _process(delta):
 func _gui_input(event):
 	if event is InputEventMouseButton:
 		var editor = get_tree().get_current_scene()
-		if event.is_pressed() and item != null:
-			if editor.selected_item == item:
-				item = get_node(placeable_items_path + "/" + item.change_to)
-				item_changed()
-			
-			editor.set_selected_item(item)
-			
-			click_sound.play()
-			tween.interpolate_property(icon, "position",
-				Vector2(0, 0), Vector2(0, -18), 0.075,
-				Tween.TRANS_CIRC, Tween.EASE_OUT)
-			tween.start()
-		else:
+		if event.is_pressed():
+			if item != null:
+				if editor.selected_box == box_index:
+					item = get_node(placeable_items_path + "/" + item.change_to)
+					item_changed()
+				
+				click_sound.play()
+				tween.interpolate_property(icon, "position",
+					Vector2(0, 0), Vector2(0, -18), 0.075,
+					Tween.TRANS_CIRC, Tween.EASE_OUT)
+				tween.start()
+			editor.set_selected_box(box_index)
+		elif item != null:
 			tween.interpolate_property(icon, "position",
 				Vector2(0, -18), Vector2(0, 0), 0.15,
 				Tween.TRANS_BOUNCE, Tween.EASE_IN)
@@ -59,7 +60,7 @@ func _gui_input(event):
 			
 func update_selection():
 	var editor = get_tree().get_current_scene()
-	if item != null and editor.selected_item == item:
+	if editor.selected_box == box_index:
 		self_modulate = selected_color
 	else:
 		self_modulate = normal_color

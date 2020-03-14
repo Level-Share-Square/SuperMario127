@@ -78,6 +78,8 @@ z_index = -1
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 3 )
+acceleration = 10.5
+friction = 13.5
 
 [node name="collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 8 )
@@ -85,7 +87,8 @@ shape = SubResource( 1 )
 
 [node name="sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "shineFall"
+animation = "movingRight"
+frame = 1
 playing = true
 
 [node name="jump_sounds" type="Node" parent="."]

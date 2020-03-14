@@ -24,4 +24,5 @@ func _ready():
 		placeable_item_button.placeable_items_path = "../../../PlaceableItems"
 		placeable_item_button.normal_color = normal_color
 		placeable_item_button.selected_color = selected_color
+		placeable_item_button.box_index = index
 		add_child(placeable_item_button)
