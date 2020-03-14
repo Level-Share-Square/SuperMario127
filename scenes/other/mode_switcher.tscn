@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scenes/other/ui/play_button_bottom.png" type="Texture" id=1]
-[ext_resource path="res://scenes/other/ui/play_button_top.png" type="Texture" id=2]
-[ext_resource path="res://scenes/other/ui/stop_button_bottom.png" type="Texture" id=3]
+[ext_resource path="res://scenes/other/ui/play_button.png" type="Texture" id=1]
+[ext_resource path="res://scenes/other/ui/stop_button.png" type="Texture" id=2]
+[ext_resource path="res://scenes/other/ui/coin.png" type="Texture" id=3]
 [ext_resource path="res://scenes/shared/sounds/play_button_reverb.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/other/mode_switcher_button.gd" type="Script" id=5]
-[ext_resource path="res://scenes/other/ui/stop_button_top.png" type="Texture" id=7]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=6]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 101
@@ -22,11 +22,11 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="Fader"]
 
 [node name="ModeSwitcherButton" type="TextureButton" parent="."]
-margin_left = -40.0
-margin_top = 100.0
-margin_right = 360.0
-margin_bottom = 500.0
-rect_scale = Vector2( 0.25, 0.25 )
+margin_left = 652.0
+margin_top = 154.903
+margin_right = 852.0
+margin_bottom = 354.903
+rect_scale = Vector2( 0.333, 0.333 )
 rect_pivot_offset = Vector2( 60, 300 )
 action_mode = 0
 texture_normal = ExtResource( 1 )
@@ -34,24 +34,26 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-bottom_texture_play = ExtResource( 1 )
-top_texture_play = ExtResource( 2 )
-bottom_texture_stop = ExtResource( 3 )
-top_texture_stop = ExtResource( 7 )
-
-[node name="TopPart" type="TextureRect" parent="ModeSwitcherButton"]
-margin_top = 1.0
-margin_right = 400.0
-margin_bottom = 401.0
-rect_pivot_offset = Vector2( 40, 192 )
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture_play = ExtResource( 1 )
+texture_stop = ExtResource( 2 )
 
 [node name="Tween" type="Tween" parent="ModeSwitcherButton"]
 
-[node name="TweenBottom" type="Tween" parent="ModeSwitcherButton"]
+[node name="TweenHover" type="Tween" parent="ModeSwitcherButton"]
+
+[node name="TweenCoin" type="Tween" parent="ModeSwitcherButton"]
+
+[node name="TweenDisappear" type="Tween" parent="ModeSwitcherButton"]
 
 [node name="Sound" type="AudioStreamPlayer" parent="ModeSwitcherButton"]
 stream = ExtResource( 4 )
+volume_db = -10.0
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="ModeSwitcherButton"]
+stream = ExtResource( 6 )
+volume_db = -10.0
+
+[node name="Coin" type="Sprite" parent="ModeSwitcherButton"]
+show_behind_parent = true
+texture = ExtResource( 3 )
+centered = false
