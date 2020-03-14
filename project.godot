@@ -171,6 +171,10 @@ boot_splash/bg_color=Color( 0.341176, 0, 0.498039, 1 )
 config/icon="res://assets/images/misc/icon.png"
 config/windows_native_icon="res://assets/images/misc/icon.ico"
 
+[autoload]
+
+mode_switcher="*res://scenes/other/mode_switcher.tscn"
+
 [debug]
 
 settings/fps/force_fps=60

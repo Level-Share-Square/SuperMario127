@@ -2,6 +2,8 @@ extends TextureButton
 
 onready var icon = $Icon
 onready var tween = $Tween
+onready var sound = $Sound
+onready var click_sound = $ClickSound
 var margin := 0
 var base_margin := 0
 var button_placement := 0
@@ -19,6 +21,7 @@ func item_changed():
 	
 func _process(delta):
 	if is_hovered() and !last_hovered:
+		sound.play()
 		tween.interpolate_property(icon, "offset",
 			Vector2(0, 3), Vector2(0, 0), 0.075,
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
@@ -32,10 +35,11 @@ func _process(delta):
 	
 func _gui_input(event):
 	if event is InputEventMouseButton:
-		if event.is_pressed():
+		if event.is_pressed() and item != null:
 			item = get_node(placeable_items_path + "/" + item.change_to)
 			item_changed()
 			
+			click_sound.play()
 			tween.interpolate_property(icon, "position",
 				Vector2(0, 0), Vector2(0, -18), 0.075,
 				Tween.TRANS_CIRC, Tween.EASE_OUT)
