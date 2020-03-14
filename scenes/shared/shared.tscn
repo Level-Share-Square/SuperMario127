@@ -12,7 +12,6 @@ nodes_to_load = [ NodePath("Background"), NodePath("Tilemaps") ]
 
 [node name="Parallax" type="ParallaxBackground" parent="."]
 layer = -1
-scroll_base_offset = Vector2( 0, 290 )
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -128
@@ -21,7 +20,6 @@ parallax = NodePath("../Parallax")
 background = NodePath("Sprite")
 
 [node name="Sprite" type="Sprite" parent="Background"]
-position = Vector2( -0.3078, -0.307785 )
 z_index = -512
 z_as_relative = false
 texture = ExtResource( 3 )

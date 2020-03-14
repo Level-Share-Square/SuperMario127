@@ -29,3 +29,4 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		
 		parallax_layer.add_child(sprite_instance)
 		parallax_node.add_child(parallax_layer)
+		parallax_node.scroll_base_offset.y = (level_area.settings.size.y * 32) / 3
