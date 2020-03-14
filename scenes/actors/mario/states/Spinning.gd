@@ -26,7 +26,7 @@ func _start(delta):
 	character.gravity_scale = gravity_scale
 	
 func _update(delta):
-	var sprite = character.get_node("AnimatedSprite")
+	var sprite = character.animated_sprite
 	if sprite.animation != "spinning":
 		sprite.animation = "spinning"
 	if character.velocity.y < 0:

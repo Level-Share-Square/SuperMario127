@@ -3,7 +3,7 @@ extends KinematicBody2D
 class_name Character
 
 onready var states_node = $States
-onready var animated_sprite = $AnimatedSprite
+onready var animated_sprite = $sprite
 
 # Basic Physics
 export var initial_position = Vector2(0, 0)
@@ -22,9 +22,11 @@ export var friction = 10.5
 export var aerial_friction = 1.15
 
 # Extra
-var is_wj_chained = false
-var real_friction = 0
-var current_jump = 0
+export var is_wj_chained = false
+export var real_friction = 0
+export var current_jump = 0
+export var jump_animation = 0
+export var direction_on_stick = 1
 
 export var disable_movement = false
 export var disable_turning = false
@@ -47,10 +49,10 @@ var collided_last_frame = false
 onready var collision_shape = get_node("collision")
 onready var sprite = get_node("sprite")
 
-const temp_level_size = Vector2(80, 30)
+var level_size = Vector2(80, 30)
 
 func load_in(level_data : LevelData, level_area : LevelArea):
-	pass
+	level_size = level_area.settings.size
 
 func is_grounded():
 	return test_move(self.transform, Vector2(0, 0.1)) and collided_last_frame
@@ -76,7 +78,8 @@ func show():
 	visible = true
 
 func set_state(state, delta: float):
-	if state.priority > (self.state.priority or -1):
+	var old_priority = -1 if self.state == null else self.state.priority
+	if state == null or state.priority >= old_priority:
 		var old_state = self.state
 		last_state = old_state
 		self.state = null
@@ -91,7 +94,8 @@ func get_state_node(name: String):
 		return states_node.get_node(name)
 
 func set_state_by_name(name: String, delta: float):
-	set_state(get_state_node(name), delta)
+	if get_state_node(name) != null:
+		set_state(get_state_node(name), delta)
 
 func _ready():
 	real_friction = friction
@@ -188,7 +192,7 @@ func _physics_process(delta: float):
 	collided_last_frame = true if slide_count else false
 
 	# Boundaries
-	if position.y > (temp_level_size.y * 32) + 128:
+	if position.y > (level_size.y * 32) + 128:
 		#fall_player.play()
 		kill()
 	if position.x < 0:
@@ -199,8 +203,8 @@ func _physics_process(delta: float):
 				sprite.animation = "idleRight"
 			else:
 				sprite.animation = "idleLeft"
-	if position.x > temp_level_size.x * 32:
-		position.x = temp_level_size.x * 32
+	if position.x > level_size.x * 32:
+		position.x = level_size.x * 32
 		velocity.x = 0
 		if is_grounded() and move_direction != 0 and !disable_animation:
 			if facing_direction == 1:

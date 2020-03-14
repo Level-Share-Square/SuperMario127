@@ -12,7 +12,7 @@ func _start(delta):
 	character.current_jump = 0
 
 func _update(delta):
-	var sprite = character.get_node("AnimatedSprite")
+	var sprite = character.animated_sprite
 	if (bonk_direction == 1):
 		sprite.animation = "bonkedRight"
 	else:

@@ -4,6 +4,11 @@ class_name State
 
 var character: Character
 
+export var priority = 0
+export var disable_movement = false
+export var disable_animation = false
+export var disable_turning = false
+
 func _ready():
 	character = get_node("../../")
 

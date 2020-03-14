@@ -3,13 +3,13 @@ extends State
 class_name FallState
 	
 func _start_check(delta):
-	return character.velocity.y > 0 && !character.is_grounded() && character.state != character.get_state_node("Dive") && character.state != character.get_state_node("WallSlide") and character.state != character.get_state_node("WallJump") and character.state != character.get_state_node("Bonked") and character.state != character.get_state_node("Spinning")
+	return character.velocity.y > 0 && !character.is_grounded()
 
 func _start(delta):
 	pass
 
 func _update(delta):
-	var sprite = character.get_node("AnimatedSprite")
+	var sprite = character.animated_sprite
 	if character.facing_direction == 1:
 		if character.jump_animation == 0:
 			sprite.animation = "fallRight"

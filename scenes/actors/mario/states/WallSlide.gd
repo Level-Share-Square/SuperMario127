@@ -6,8 +6,11 @@ export var gravity_scale: float = 0.5
 var old_gravity_scale = 1
 var wall_buffer = 0.0
 
+func _ready():
+	priority = 1
+
 func _start_check(delta):
-	return ((character.is_walled_right() and (character.move_direction == 1 or character.is_wj_chained)) or (character.is_walled_left() and (character.move_direction == -1 or character.is_wj_chained))) and !character.is_grounded() and (character.velocity.y > 0 or character.is_wj_chained) and character.state != character.get_state_node("Bonked") and character.state != character.get_state_node("Spinning") and character.state != character.get_state_node("Dive") and character.jump_animation != 2
+	return ((character.is_walled_right() and (character.move_direction == 1 or character.is_wj_chained)) or (character.is_walled_left() and (character.move_direction == -1 or character.is_wj_chained))) and !character.is_grounded() and (character.velocity.y > 0 or character.is_wj_chained) and character.jump_animation != 2
 
 func _start(delta):
 	character.velocity.y = character.velocity.y/3
@@ -27,7 +30,7 @@ func _update(delta):
 		if wall_buffer <= 0:
 			wall_buffer = 0
 	else:
-		var sprite = character.get_node("AnimatedSprite")
+		var sprite = character.animated_sprite
 		if character.direction_on_stick == 1:
 			sprite.animation = "wallSlideRight"
 		else:

@@ -13,38 +13,40 @@ var last_grounded = false
 var rotating = false
 var direction_on_tj = 1
 
+func _ready():
+	priority = 1
+
 func lerp(a, b, t):
 	return (1 - t) * a + t * b
 
 func _start_check(delta):
-
-	return ledge_buffer > 0 and jump_buffer > 0 and character.state != character.get_state_node("Slide") and character.state != character.get_state_node("Dive")
+	return ledge_buffer > 0 and jump_buffer > 0
 
 func _start(delta):
-	var sprite = character.get_node("AnimatedSprite")
+	var sprite = character.animated_sprite
 	jump_buffer = 0
 	ground_buffer = 0
 	jump_playing = true
-	if character.current_jump == 2 and abs(character.velocity.x) < 5:
+	if character.current_jump == 2 and abs(character.velocity.x) < 160:
 		character.current_jump = 1
 	if character.current_jump != 2 && character.last_state == character.get_state_node("Spinning"):
 		character.set_state_by_name("Spinning", delta)
 	if character.current_jump == 0:
-		var jump_player = character.get_node("JumpSoundPlayer")
+		var jump_player = character.get_node("jump_sounds")
 		jump_player.play()
 		character.velocity.y = -jump_power
 		character.position.y -= 3
 		character.jump_animation = 0
 		character.current_jump = 1
 	elif character.current_jump == 1:
-		var jump_player = character.get_node("DoubleJumpSoundPlayer")
+		var jump_player = character.get_node("dble_jump_sounds")
 		jump_player.play()
 		character.velocity.y = -double_jump_power
 		character.position.y -= 3
 		character.jump_animation = 1
 		character.current_jump = 2
 	elif character.current_jump == 2:
-		var jump_player = character.get_node("TripleJumpSoundPlayer")
+		var jump_player = character.get_node("trple_jump_sounds")
 		jump_player.play()
 		character.velocity.y = -triple_jump_power
 		character.position.y -= 3
@@ -54,7 +56,7 @@ func _start(delta):
 		sprite.rotation_degrees = direction_on_tj
 
 func _update(delta):
-	var sprite = character.get_node("AnimatedSprite")
+	var sprite = character.animated_sprite
 	if jump_playing && character.velocity.y < 0 && !character.is_grounded():
 		if character.facing_direction == 1:
 			if character.jump_animation == 0:
@@ -82,10 +84,10 @@ func _update(delta):
 		jump_playing = false
 
 func _stop_check(delta):
-	return character.is_grounded()
+	return character.is_grounded() or character.velocity.y > 0
 
 func _general_update(delta):
-	var sprite = character.get_node("AnimatedSprite")
+	var sprite = character.animated_sprite
 	if rotating:
 		if character.velocity.y > 0:
 			character.jump_animation = 0

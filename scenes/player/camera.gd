@@ -6,3 +6,8 @@ onready var character_node = get_node(character)
 
 func _process(delta):
 	position = character_node.position
+
+func load_in(level_data : LevelData, level_area : LevelArea):
+	var level_size = level_area.settings.size
+	limit_right = level_size.x * 32
+	limit_bottom = level_size.y * 32

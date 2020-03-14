@@ -1,8 +1,12 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/mario/mario.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/mario/states/Fall.gd" type="Script" id=4]
+[ext_resource path="res://scenes/actors/mario/states/Jump.gd" type="Script" id=5]
+[ext_resource path="res://scenes/actors/mario/states/WallSlide.gd" type="Script" id=6]
+[ext_resource path="res://scenes/actors/mario/states/WallJump.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 15 )
@@ -88,7 +92,7 @@ shape = SubResource( 1 )
 [node name="sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "movingRight"
-frame = 1
+frame = 9
 playing = true
 
 [node name="jump_sounds" type="Node" parent="."]
@@ -151,3 +155,15 @@ sound_number = 1
 stream = SubResource( 14 )
 
 [node name="States" type="Node" parent="."]
+
+[node name="FallState" type="Node" parent="States"]
+script = ExtResource( 4 )
+
+[node name="JumpState" type="Node" parent="States"]
+script = ExtResource( 5 )
+
+[node name="WallSlideState" type="Node" parent="States"]
+script = ExtResource( 6 )
+
+[node name="WallJumpState" type="Node" parent="States"]
+script = ExtResource( 7 )

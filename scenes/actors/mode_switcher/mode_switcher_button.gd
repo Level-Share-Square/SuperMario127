@@ -48,7 +48,7 @@ func _pressed():
 	switch()
 		
 func change_visuals(new_scene):
-	self.texture_normal = texture_stop if new_scene == 0 else texture_play
+	self.texture_normal = texture_play if new_scene == 0 else texture_stop
 
 func switch():
 	if !switching_disabled:

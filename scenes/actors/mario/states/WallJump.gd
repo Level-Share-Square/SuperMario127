@@ -11,11 +11,14 @@ var position_on_wj = Vector2(0, 0)
 var limit_y = false
 var character_in_range = false
 
+func _ready():
+	priority = 2
+
 func _start_check(delta):
-	return character.state == character.get_state_node("WallSlide") && !(limit_y && character.position.y < position_on_wj.y && character_in_range) && press_buffer > 0 && character.state != character.get_state_node("Bonked")
+	return character.state == character.get_state_node("WallSlideState") && !(limit_y && character.position.y < position_on_wj.y && character_in_range) && press_buffer > 0
 
 func _start(delta):
-	var jump_player = character.get_node("JumpSoundPlayer")
+	var jump_player = character.get_node("jump_sounds")
 	press_buffer = 0
 	position_on_wj = character.position
 	character.facing_direction = -character.direction_on_stick
@@ -32,7 +35,7 @@ func _start(delta):
 	pass
 
 func _update(delta):
-	var sprite = character.get_node("AnimatedSprite")
+	var sprite = character.animated_sprite
 	character.facing_direction = direction_on_wj
 	if (direction_on_wj == 1):
 		sprite.animation = "jumpRight"

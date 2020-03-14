@@ -23,7 +23,7 @@ func _start(delta):
 	character.current_jump = 0
 
 func _update(delta):
-	var sprite = character.get_node("AnimatedSprite")
+	var sprite = character.animated_sprite
 	if (!character.is_grounded()):
 		character.friction = character.real_friction
 	if (character.facing_direction == 1):
@@ -41,7 +41,7 @@ func _update(delta):
 		last_above_rot_limit = true
 		
 func _stop(delta):
-	var sprite = character.get_node("AnimatedSprite")
+	var sprite = character.animated_sprite
 	sprite.rotation_degrees = 0
 	if character.is_grounded():
 		character.set_state_by_name("Slide", delta)

@@ -7,7 +7,7 @@
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
-nodes_to_load = [ NodePath("Shared"), NodePath("Character") ]
+nodes_to_load = [ NodePath("Shared"), NodePath("Character"), NodePath("Camera") ]
 character = NodePath("Character")
 
 [node name="Shared" parent="." instance=ExtResource( 2 )]
