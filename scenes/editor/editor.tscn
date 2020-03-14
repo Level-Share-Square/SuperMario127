@@ -20,6 +20,7 @@ font_data = ExtResource( 4 )
 script = ExtResource( 1 )
 nodes_to_load = [ NodePath("Shared"), NodePath("Camera2D") ]
 placeable_items = NodePath("PlaceableItems")
+placeable_items_button_container = NodePath("UI/PlaceableItemsContainer")
 
 [node name="Shared" parent="." instance=ExtResource( 2 )]
 
@@ -45,6 +46,8 @@ scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 11 )
 centered = false
 script = ExtResource( 9 )
+normal_color = Color( 1, 1, 1, 1 )
+selected_color = Color( 0.313726, 0.309804, 0.882353, 1 )
 
 [node name="Pause" type="ColorRect" parent="UI"]
 pause_mode = 2
