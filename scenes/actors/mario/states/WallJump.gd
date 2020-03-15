@@ -12,7 +12,7 @@ var limit_y = false
 var character_in_range = false
 
 func _ready():
-	priority = 2
+	priority = 1
 	disable_turning = true
 
 func _start_check(delta):
@@ -33,7 +33,6 @@ func _start(delta):
 	character.jump_animation = 0
 	limit_y = true
 	character.is_wj_chained = true
-	pass
 
 func _update(delta):
 	var sprite = character.animated_sprite
@@ -42,9 +41,6 @@ func _update(delta):
 	else:
 		sprite.animation = "jumpLeft"
 	pass
-		
-func _stop(delta):
-	character.facing_direction = direction_on_wj
 
 func _stop_check(delta):
 	return wall_jump_timer <= 0 or character.is_walled() or character.is_grounded()
@@ -67,4 +63,3 @@ func _general_update(delta):
 		wall_jump_timer -= delta
 		if wall_jump_timer <= 0:
 			wall_jump_timer = 0
-	pass

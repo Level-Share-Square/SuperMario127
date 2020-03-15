@@ -42,7 +42,7 @@ func _stop(delta):
 	character.gravity_scale = old_gravity_scale
 
 func _stop_check(delta):
-	return !Input.is_action_pressed("spin")
+	return !Input.is_action_pressed("spin") or character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0))
 	
 func _general_update(delta):
 	if cooldown_timer > 0:

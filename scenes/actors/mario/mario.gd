@@ -34,6 +34,7 @@ export var real_friction = 0
 export var current_jump = 0
 export var jump_animation = 0
 export var direction_on_stick = 1
+export var rotating = true
 
 export var disable_movement = false
 export var disable_turning = false
@@ -86,16 +87,14 @@ func show():
 	visible = true
 
 func set_state(state, delta: float):
-	var old_priority = -1 if self.state == null else self.state.priority
-	if state == null or state.priority >= old_priority:
-		var old_state = self.state
-		last_state = old_state
-		self.state = null
-		if old_state != null:
-			old_state._stop(delta);
-		if state != null:
-			self.state = state;
-			state._start(delta);
+	var old_state = self.state
+	last_state = old_state
+	self.state = null
+	if old_state != null:
+		old_state._stop(delta);
+	if state != null:
+		self.state = state;
+		state._start(delta);
 
 func get_state_node(name: String):
 	if states_node.has_node(name):

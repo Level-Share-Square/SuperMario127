@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=2]
@@ -10,6 +10,10 @@
 [ext_resource path="res://scenes/actors/mario/states/Spinning.gd" type="Script" id=8]
 [ext_resource path="res://scenes/actors/mario/other/cutout_other.png" type="Texture" id=9]
 [ext_resource path="res://scenes/actors/mario/other/cutout_death.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/mario/states/Slide.gd" type="Script" id=11]
+[ext_resource path="res://scenes/actors/mario/states/Bonked.gd" type="Script" id=12]
+[ext_resource path="res://scenes/actors/mario/states/Dive.gd" type="Script" id=13]
+[ext_resource path="res://scenes/actors/mario/states/Getup.gd" type="Script" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 15 )
@@ -97,7 +101,7 @@ shape = SubResource( 1 )
 [node name="sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "movingRight"
-frame = 3
+frame = 7
 playing = true
 
 [node name="jump_sounds" type="Node" parent="."]
@@ -175,3 +179,17 @@ script = ExtResource( 7 )
 
 [node name="SpinningState" type="Node" parent="States"]
 script = ExtResource( 8 )
+
+[node name="DiveState" type="Node" parent="States"]
+script = ExtResource( 13 )
+dive_power = Vector2( 1350, 135 )
+
+[node name="SlideState" type="Node" parent="States"]
+script = ExtResource( 11 )
+
+[node name="BonkedState" type="Node" parent="States"]
+script = ExtResource( 12 )
+
+[node name="GetupState" type="Node" parent="States"]
+script = ExtResource( 14 )
+get_up_power = 200

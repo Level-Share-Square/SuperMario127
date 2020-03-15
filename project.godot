@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/GameObject.gd"
 }, {
+"base": "State",
+"class": "GetupState",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/states/Getup.gd"
+}, {
 "base": "Resource",
 "class": "IdMap",
 "language": "GDScript",
@@ -146,6 +151,7 @@ _global_script_class_icons={
 "FallState": "",
 "ForegroundResource": "",
 "GameObject": "",
+"GetupState": "",
 "IdMap": "",
 "JumpState": "",
 "LevelArea": "",

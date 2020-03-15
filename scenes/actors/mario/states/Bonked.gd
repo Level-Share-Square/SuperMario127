@@ -4,6 +4,11 @@ class_name BonkedState
 
 export var bonk_direction: int = 1
 
+func _ready():
+	priority = 5
+	disable_turning = true
+	disable_movement = true
+
 func _start_check(delta):
 	return false
 	

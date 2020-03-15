@@ -6,12 +6,18 @@ export var dive_power: Vector2 = Vector2(1350, 75)
 export var bonk_power: float = 150
 export var maxVelocityX: float = 700
 var last_above_rot_limit = false
+var dive_buffer = 0
+
+func _ready():
+	priority = 3
+	disable_turning = true
+	blacklisted_states = ["SlideState", "GetupState"]
 
 func _start_check(delta):
-	return Input.is_action_pressed("dive") and character.state != character.get_state_node("Slide") and !character.is_grounded() and !character.is_walled() and character.state != character.get_state_node("Bonked")
+	return dive_buffer > 0 and !character.is_grounded() and !character.is_walled()
 
 func _start(delta):
-	var dive_player = character.get_node("DiveSoundPlayer")
+	var dive_player = character.get_node("dive_sounds")
 	character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
 	character.velocity.y += dive_power.y
 	character.position.y -= 5
@@ -44,11 +50,19 @@ func _stop(delta):
 	var sprite = character.animated_sprite
 	sprite.rotation_degrees = 0
 	if character.is_grounded():
-		character.set_state_by_name("Slide", delta)
+		character.set_state_by_name("SlideState", delta)
 	if character.is_walled():
 		character.velocity.x = bonk_power * -character.facing_direction 
 		character.position.x -= 2 * character.facing_direction
-		character.set_state_by_name("Bonked", delta)
+		character.set_state_by_name("BonkedState", delta)
 
 func _stop_check(delta):
 	return character.is_grounded() or (character.is_walled_right() && character.facing_direction == 1) or (character.is_walled_left() && character.facing_direction == -1)
+
+func _general_update(delta):
+	if Input.is_action_pressed("dive"):
+		dive_buffer = 0.075
+	if dive_buffer > 0:
+		dive_buffer -= delta
+		if dive_buffer < 0:
+			dive_buffer = 0
