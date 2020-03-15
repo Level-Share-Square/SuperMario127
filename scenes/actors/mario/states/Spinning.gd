@@ -8,8 +8,12 @@ var old_gravity_scale = 1
 var can_boost = true
 var cooldown_timer = 0
 
+func _ready():
+	priority = 2
+	disable_animation = true
+
 func _start_check(delta):
-	return Input.is_action_just_pressed("spin") && character.state != character.get_state_node("Dive") and character.jump_animation != 2
+	return Input.is_action_just_pressed("spin") && (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2 and !character.test_move(character.transform, Vector2(8, 0)) and !character.test_move(character.transform, Vector2(-8, 0))
 
 func _start(delta):
 	if can_boost == true && !character.is_grounded() && (character.state != character.get_state_node("Jump") or character.current_jump == 1):

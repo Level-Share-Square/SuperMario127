@@ -13,6 +13,7 @@ var character_in_range = false
 
 func _ready():
 	priority = 2
+	disable_turning = true
 
 func _start_check(delta):
 	return character.state == character.get_state_node("WallSlideState") && !(limit_y && character.position.y < position_on_wj.y && character_in_range) && press_buffer > 0
@@ -36,7 +37,6 @@ func _start(delta):
 
 func _update(delta):
 	var sprite = character.animated_sprite
-	character.facing_direction = direction_on_wj
 	if (direction_on_wj == 1):
 		sprite.animation = "jumpRight"
 	else:

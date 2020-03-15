@@ -27,7 +27,7 @@ func _start(delta):
 	jump_buffer = 0
 	ground_buffer = 0
 	jump_playing = true
-	if character.current_jump == 2 and abs(character.velocity.x) < 160:
+	if character.current_jump == 2 and abs(character.velocity.x) < 80:
 		character.current_jump = 1
 	if character.current_jump != 2 && character.last_state == character.get_state_node("Spinning"):
 		character.set_state_by_name("Spinning", delta)

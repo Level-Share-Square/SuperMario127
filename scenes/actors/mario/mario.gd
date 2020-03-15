@@ -5,6 +5,10 @@ class_name Character
 onready var states_node = $States
 onready var animated_sprite = $sprite
 
+# Cutout
+export var cutout_death : StreamTexture
+export var cutout_other : StreamTexture
+
 # Basic Physics
 export var initial_position = Vector2(0, 0)
 export var velocity = Vector2(0, 0)
@@ -21,6 +25,9 @@ export var aerial_acceleration = 7.5
 export var friction = 10.5
 export var aerial_friction = 1.15
 
+# Sounds
+onready var fall_sound_player = $fall_sounds
+
 # Extra
 export var is_wj_chained = false
 export var real_friction = 0
@@ -36,6 +43,7 @@ export var disable_animation = false
 var state = null
 var last_state = null
 var controllable = true
+var dead = false
 
 # Collision vars
 var collision_down
@@ -193,8 +201,7 @@ func _physics_process(delta: float):
 
 	# Boundaries
 	if position.y > (level_size.y * 32) + 128:
-		#fall_player.play()
-		kill()
+		kill("fall")
 	if position.x < 0:
 		position.x = 0
 		velocity.x = 0
@@ -213,12 +220,21 @@ func _physics_process(delta: float):
 				sprite.animation = "idleLeft"
 	last_velocity = velocity
 
-func kill():
-	pass
-	#var global_vars = get_node("../GlobalVars")
-	#global_vars.reload()
+func kill(cause):
+	if !dead:
+		dead = true
+		var cutout_in = cutout_other
+		var cutout_out = cutout_other
+		var transition_time = 0.75
+		if cause == "fall":
+			cutout_in = cutout_death
+			fall_sound_player.play()
+			yield(get_tree().create_timer(.75), "timeout")
+		elif cause == "reload":
+			transition_time = 0.4
+		get_tree().get_root().get_node("/root/scene_transitions").reload_scene(cutout_in, cutout_out, transition_time)
 
 func exit():
-	pass
+	get_tree().change_scene("res://scenes/editor/editor.tscn")
 	#var mode_switcher = get_node("../ModeSwitcher")
 	#mode_switcher.switch_to_editing()

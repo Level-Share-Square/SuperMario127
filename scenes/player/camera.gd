@@ -11,3 +11,4 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	var level_size = level_area.settings.size
 	limit_right = level_size.x * 32
 	limit_bottom = level_size.y * 32
+	position = character_node.position
