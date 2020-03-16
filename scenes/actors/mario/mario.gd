@@ -17,6 +17,7 @@ var last_velocity = Vector2(0, 0)
 export var gravity_scale = 1
 export var facing_direction = 1
 export var move_direction = 0
+export var last_move_direction = 0
 
 export var move_speed = 216.0
 export var acceleration = 7.5
@@ -114,6 +115,13 @@ func _physics_process(delta: float):
 	# Gravity
 	velocity += gravity * Vector2(0, gravity_scale)
 	
+	if test_move(transform, Vector2(velocity.x * delta, -1)) and !test_move(transform.translated(Vector2(0, -5)), Vector2(velocity.x * delta, 0)):
+		var space_state = get_world_2d().direct_space_state
+		var result = space_state.intersect_ray(position - Vector2(0, 5), position)
+		velocity.y = 0
+		if not result.empty():
+			position.y = result.position.y + 2
+	
 	if state != null:
 		disable_movement = state.disable_movement
 		disable_turning = state.disable_turning
@@ -141,10 +149,15 @@ func _physics_process(delta: float):
 
 				if !disable_animation:
 					if !test_move(transform, Vector2(velocity.x * delta, 0)):
+						var animation_frame = sprite.frame
 						if move_direction == 1:
 							sprite.animation = "movingRight"
+							if last_move_direction != move_direction:
+								sprite.frame = animation_frame + 1
 						else:
 							sprite.animation = "movingLeft"
+							if last_move_direction != move_direction:
+								sprite.frame = animation_frame + 1
 					else:
 						if facing_direction == 1:
 							sprite.animation = "idleRight"
@@ -218,6 +231,7 @@ func _physics_process(delta: float):
 			else:
 				sprite.animation = "idleLeft"
 	last_velocity = velocity
+	last_move_direction = move_direction
 
 func kill(cause):
 	if !dead:
