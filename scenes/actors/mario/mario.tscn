@@ -181,7 +181,7 @@ script = ExtResource( 8 )
 
 [node name="DiveState" type="Node" parent="States"]
 script = ExtResource( 13 )
-dive_power = Vector2( 1350, 135 )
+dive_power = Vector2( 1350, 175 )
 
 [node name="SlideState" type="Node" parent="States"]
 script = ExtResource( 11 )
