@@ -19,11 +19,6 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time):
 		Tween.TRANS_CIRC, Tween.EASE_OUT)
 	canvas_tween.start()
 	
-	canvas_tween.interpolate_property(music, "volume_multiplier",
-		1, 10, transition_time,
-		Tween.TRANS_CIRC, Tween.EASE_OUT)
-	canvas_tween.start()
-	
 	yield(canvas_tween, "tween_completed")
 	yield(get_tree().create_timer(0.1), "timeout")
 	
