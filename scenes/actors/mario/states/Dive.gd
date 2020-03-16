@@ -18,11 +18,12 @@ func _start_check(delta):
 
 func _start(delta):
 	var dive_player = character.get_node("dive_sounds")
-	character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
-	character.velocity.y += dive_power.y
+	if dive_buffer > 0:
+		character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
+		character.velocity.y += dive_power.y
+		dive_player.play()
 	character.position.y -= 5
 	character.rotating = true
-	dive_player.play()
 	if abs(character.velocity.x) > maxVelocityX:
 		character.velocity.x = maxVelocityX * character.facing_direction
 	character.jump_animation = 0

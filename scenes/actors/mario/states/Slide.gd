@@ -31,14 +31,16 @@ func _update(delta):
 func _stop(delta):
 	var sprite = character.animated_sprite
 	character.friction = character.real_friction
-	if getup_buffer > 0:
+	if !character.is_grounded():
+		character.set_state_by_name("DiveState", delta)
+	elif getup_buffer > 0 or abs(character.velocity.x) < 5:
 		character.set_state_by_name("GetupState", delta)
 	else:
 		sprite.rotation_degrees = 0
 	stop = false
 
 func _stop_check(delta):
-	return abs(character.velocity.x) < 5 or stop
+	return abs(character.velocity.x) < 5 or stop or !character.is_grounded()
 
 func _general_update(delta):
 	if Input.is_action_pressed("jump"):
