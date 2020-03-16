@@ -9,3 +9,4 @@ export var is_object := false
 export var change_to : String = self.name
 
 export var icon : Texture = null
+export var preview : Texture = null
