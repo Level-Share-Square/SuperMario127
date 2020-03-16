@@ -19,7 +19,7 @@ func handle_update(delta: float):
 			var old_priority = -1 if character.state == null else character.state.priority
 			var blacklisted = false
 			for state_name in blacklisted_states:
-				if character.state == character.get_state_node(state_name):
+				if character.state == character.get_state_node(state_name) and character.state != null:
 					blacklisted = true
 			if self.priority >= old_priority and !blacklisted:
 				character.set_state(self, delta)
