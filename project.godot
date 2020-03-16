@@ -140,6 +140,11 @@ _global_script_classes=[ {
 "path": "res://util/rle_util.gd"
 }, {
 "base": "Reference",
+"class": "tile_util",
+"language": "GDScript",
+"path": "res://util/tile_util.gd"
+}, {
+"base": "Reference",
 "class": "value_util",
 "language": "GDScript",
 "path": "res://util/value_util.gd"
@@ -171,6 +176,7 @@ _global_script_class_icons={
 "WallSlideState": "",
 "clipboard_util": "",
 "rle_util": "",
+"tile_util": "",
 "value_util": ""
 }
 
@@ -383,6 +389,11 @@ reload={
 test_at_pos={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
+ ]
+}
+place={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 

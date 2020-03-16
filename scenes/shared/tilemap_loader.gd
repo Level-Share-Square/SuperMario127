@@ -8,6 +8,9 @@ onready var back_tilemap_node = get_node(back_tilemap)
 onready var middle_tilemap_node = get_node(middle_tilemap)
 onready var front_tilemap_node = get_node(front_tilemap)
 
+var level_data : LevelData
+var level_area : LevelArea
+
 var tileset_cache := []
 
 func _ready():
@@ -15,15 +18,6 @@ func _ready():
 	for tileset_id in level_tilesets.ids:
 		var tileset : LevelTileset = load("res://assets/tiles/" + tileset_id + "/resource.tres")
 		tileset_cache.append(tileset)
-
-func get_position_from_tile_index(index: int, size: Vector2) -> Vector2:
-	return Vector2(
-		index - (floor(index / size.x) * size.x),
-		floor(index / size.x)
-	)
-
-func get_tile_index_from_position(position: Vector2, size: Vector2) -> int:
-	return int(floor((size.x * position.y) + position.x))
 	
 func get_tile(tileset_id, tile_id):
 	var tileset = tileset_cache[tileset_id]
@@ -54,35 +48,65 @@ func place_edges(pos, placing_tile, bounds, tilemap_node):
 		tilemap_node.set_cell(bounds.x, bounds.y, placing_tile)
 	if pos.x == bounds.x - 1 && pos.y == 0:
 		tilemap_node.set_cell(bounds.x, -1, placing_tile)
-
+		
+func set_tile(index: int, layer: int, tileset_id: int, tile_id: int):
+	var tiles_array
+	if layer == 0:
+		tiles_array = level_area.background_tiles
+	elif layer == 1:
+		tiles_array = level_area.foreground_tiles
+	elif layer == 2:
+		tiles_array = level_area.very_foreground_tiles
+		
+	if index + 1 >= tiles_array.size():
+		for new_index in range(tiles_array.size(), index + 1):
+			tiles_array.append([0, 0])
+	var size = level_area.settings.size
+	if position.x > size.x || position.y > size.y:
+		level_area.settings.size = position
+	tiles_array[index] = [tileset_id, tile_id]
+	
+	set_tile_visual(index, layer, tileset_id, tile_id)
+	var settings = level_area.settings
+	if layer == 0:
+		back_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
+	elif layer == 1:
+		middle_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
+	elif layer == 2:
+		front_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
+		
+func set_tile_visual(index: int, layer: int, tileset_id: int, tile_id: int):
+	var position = tile_util.get_position_from_tile_index(index, level_area.settings.size)
+	var cache_tile = get_tile(tileset_id, tile_id)
+	if layer == 0:
+		back_tilemap_node.set_cell(position.x, position.y, cache_tile)
+	elif layer == 1:
+		middle_tilemap_node.set_cell(position.x, position.y, cache_tile)
+	elif layer == 2:
+		front_tilemap_node.set_cell(position.x, position.y, cache_tile)
+	place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, back_tilemap_node)
 
 func load_in(level_data : LevelData, level_area : LevelArea):
+	
+	self.level_data = level_data
+	self.level_area = level_area
 	
 	var settings = level_area.settings
 	
 	for index in range(level_area.background_tiles.size()):
 		var tile = level_area.background_tiles[index]
 		if tile[0] != 0:
-			var position = get_position_from_tile_index(index, level_area.settings.size)
-			var cache_tile = get_tile(tile[0], tile[1])
-			back_tilemap_node.set_cell(position.x, position.y, get_tile(tile[0], tile[1]))
-			place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, back_tilemap_node)
+			set_tile_visual(index, 0, tile[0], tile[1])
 			
 	for index in range(level_area.foreground_tiles.size()):
 		var tile = level_area.foreground_tiles[index]
 		if tile[0] != 0:
-			var position = get_position_from_tile_index(index, level_area.settings.size)
-			var cache_tile = get_tile(tile[0], tile[1])
-			middle_tilemap_node.set_cell(position.x, position.y, get_tile(tile[0], tile[1]))
-			place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, middle_tilemap_node)
+			set_tile_visual(index, 0, tile[0], tile[1])
 			
 	for index in range(level_area.very_foreground_tiles.size()):
 		var tile = level_area.very_foreground_tiles[index]
 		if tile[0] != 0:
-			var position = get_position_from_tile_index(index, level_area.settings.size)
-			var cache_tile = get_tile(tile[0], tile[1])
-			front_tilemap_node.set_cell(position.x, position.y, get_tile(tile[0], tile[1]))
-			place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, front_tilemap_node)
+			set_tile_visual(index, 0, tile[0], tile[1])
 	
 	back_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
 	middle_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
