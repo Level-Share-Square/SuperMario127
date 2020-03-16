@@ -24,6 +24,7 @@ nodes_to_load = [ NodePath("Shared"), NodePath("Camera2D") ]
 placeable_items = NodePath("PlaceableItems")
 placeable_items_button_container = NodePath("UI/PlaceableItemsContainer")
 item_preview = NodePath("ItemPreview")
+shared = NodePath("Shared")
 
 [node name="Shared" parent="." instance=ExtResource( 2 )]
 
