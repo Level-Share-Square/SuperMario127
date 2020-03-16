@@ -8,6 +8,7 @@ export var triple_jump_power: float = 495
 var ground_buffer = 0
 var jump_buffer = 0
 var ledge_buffer = 0
+var dive_buffer = 0
 var jump_playing = false
 var last_grounded = false
 var rotating = false
@@ -21,20 +22,23 @@ func lerp(a, b, t):
 	return (1 - t) * a + t * b
 
 func _start_check(delta):
-	return ledge_buffer > 0 and jump_buffer > 0
+	return ledge_buffer > 0 and (jump_buffer > 0 or dive_buffer > 0)
 
 func _start(delta):
 	var sprite = character.animated_sprite
 	jump_buffer = 0
 	ground_buffer = 0
 	jump_playing = true
+	if Input.is_action_pressed("dive"):
+		character.current_jump = 0
 	if character.current_jump == 2 and abs(character.velocity.x) < 80:
 		character.current_jump = 1
 	if character.current_jump != 2 && character.last_state == character.get_state_node("SpinningState"):
 		character.set_state_by_name("SpinningState", delta)
 	if character.current_jump == 0:
 		var jump_player = character.get_node("jump_sounds")
-		jump_player.play()
+		if !Input.is_action_pressed("dive"):
+			jump_player.play()
 		character.velocity.y = -jump_power
 		character.position.y -= 3
 		character.jump_animation = 0
@@ -121,5 +125,11 @@ func _general_update(delta):
 			jump_buffer = 0
 	if Input.is_action_just_pressed("jump"):
 		jump_buffer = 0.075
+	if Input.is_action_just_pressed("dive"):
+		dive_buffer = 0.075
+	if dive_buffer > 0:
+		dive_buffer -= delta
+		if dive_buffer < 0:
+			dive_buffer = 0
 	last_grounded = character.is_grounded()
 	

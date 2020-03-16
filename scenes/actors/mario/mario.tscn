@@ -100,9 +100,7 @@ shape = SubResource( 1 )
 
 [node name="sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "movingRight"
-frame = 1
-playing = true
+animation = "fallRight"
 
 [node name="jump_sounds" type="Node" parent="."]
 script = ExtResource( 2 )

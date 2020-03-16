@@ -14,7 +14,7 @@ func _ready():
 	blacklisted_states = ["SlideState", "GetupState"]
 
 func _start_check(delta):
-	return dive_buffer > 0 and !character.is_grounded() and !character.is_walled()
+	return dive_buffer > 0 and !character.test_move(character.transform, Vector2(0, 8)) and !character.is_walled()
 
 func _start(delta):
 	var dive_player = character.get_node("dive_sounds")
@@ -61,7 +61,7 @@ func _stop_check(delta):
 	return character.is_grounded() or (character.is_walled_right() && character.facing_direction == 1) or (character.is_walled_left() && character.facing_direction == -1)
 
 func _general_update(delta):
-	if Input.is_action_pressed("dive"):
+	if Input.is_action_just_pressed("dive"):
 		dive_buffer = 0.075
 	if dive_buffer > 0:
 		dive_buffer -= delta
