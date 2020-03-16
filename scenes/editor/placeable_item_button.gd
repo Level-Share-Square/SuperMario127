@@ -42,7 +42,7 @@ func _gui_input(event):
 		var editor = get_tree().get_current_scene()
 		if event.is_pressed():
 			if item != null:
-				if editor.selected_box == box_index:
+				if editor.selected_box == self:
 					item = get_node(placeable_items_path + "/" + item.change_to)
 					item_changed()
 				
@@ -51,7 +51,7 @@ func _gui_input(event):
 					Vector2(0, 0), Vector2(0, -18), 0.075,
 					Tween.TRANS_CIRC, Tween.EASE_OUT)
 				tween.start()
-			editor.set_selected_box(box_index)
+			editor.set_selected_box(self)
 		elif item != null:
 			tween.interpolate_property(icon, "position",
 				Vector2(0, -18), Vector2(0, 0), 0.15,
@@ -60,7 +60,7 @@ func _gui_input(event):
 			
 func update_selection():
 	var editor = get_tree().get_current_scene()
-	if editor.selected_box == box_index:
+	if editor.selected_box == self:
 		self_modulate = selected_color
 	else:
 		self_modulate = normal_color

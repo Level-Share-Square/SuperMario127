@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -7,9 +7,11 @@
 [ext_resource path="res://assets/tiles/bricks/icon.png" type="Texture" id=5]
 [ext_resource path="res://scenes/editor/assets/grid.png" type="Texture" id=6]
 [ext_resource path="res://scenes/editor/camera_controls.gd" type="Script" id=7]
+[ext_resource path="res://scenes/editor/item_preview.gd" type="Script" id=8]
 [ext_resource path="res://scenes/editor/placeable_items_container.gd" type="Script" id=9]
 [ext_resource path="res://assets/tiles/grass/icon.png" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=11]
+[ext_resource path="res://assets/misc/cursor.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -21,6 +23,7 @@ script = ExtResource( 1 )
 nodes_to_load = [ NodePath("Shared"), NodePath("Camera2D") ]
 placeable_items = NodePath("PlaceableItems")
 placeable_items_button_container = NodePath("UI/PlaceableItemsContainer")
+item_preview = NodePath("ItemPreview")
 
 [node name="Shared" parent="." instance=ExtResource( 2 )]
 
@@ -31,12 +34,21 @@ script = ExtResource( 3 )
 tileset_id = 2
 change_to = "Brick"
 icon = ExtResource( 10 )
+preview = ExtResource( 10 )
 
 [node name="Brick" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 tileset_id = 1
 change_to = "Grass"
 icon = ExtResource( 5 )
+preview = ExtResource( 5 )
+
+[node name="Entrance" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+is_object = true
+change_to = "Grass"
+icon = ExtResource( 12 )
+preview = ExtResource( 12 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
@@ -149,3 +161,7 @@ smoothing_speed = 15.0
 editor_draw_screen = false
 script = ExtResource( 7 )
 speed = 7
+
+[node name="ItemPreview" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.501961 )
+script = ExtResource( 8 )
