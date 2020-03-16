@@ -22,7 +22,7 @@ func lerp(a, b, t):
 	return (1 - t) * a + t * b
 
 func _start_check(delta):
-	return ledge_buffer > 0 and (jump_buffer > 0 or dive_buffer > 0)
+	return ledge_buffer > 0 and (jump_buffer > 0 or (dive_buffer > 0 and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0))))
 
 func _start(delta):
 	var sprite = character.animated_sprite

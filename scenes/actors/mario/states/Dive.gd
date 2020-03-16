@@ -14,7 +14,7 @@ func _ready():
 	blacklisted_states = ["SlideState", "GetupState"]
 
 func _start_check(delta):
-	return dive_buffer > 0 and !character.test_move(character.transform, Vector2(0, 8)) and !character.is_walled()
+	return dive_buffer > 0 and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0)) and !character.is_walled()
 
 func _start(delta):
 	var dive_player = character.get_node("dive_sounds")

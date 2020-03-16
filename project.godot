@@ -187,6 +187,7 @@ config/windows_native_icon="res://assets/misc/icon.ico"
 
 mode_switcher="*res://scenes/actors/mode_switcher/mode_switcher.tscn"
 scene_transitions="*res://scenes/actors/scene_transitions/CanvasLayer.tscn"
+music="*res://scenes/actors/music/music.tscn"
 
 [debug]
 

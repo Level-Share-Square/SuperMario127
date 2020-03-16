@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/music/yoshi_star_galaxy.ogg" type="AudioStream" id=1]
+[ext_resource path="res://scenes/actors/music/music.gd" type="Script" id=2]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource( 1 )
+volume_db = -6.073
+autoplay = true
+bus = "Editor"
+script = ExtResource( 2 )
+play_bus = "Master"
+edit_bus = "Editor"
