@@ -21,18 +21,21 @@ func _start(delta):
 	
 func _update(delta):
 	var sprite = character.animated_sprite
-	if sprite.rotation_degrees < 365 and sprite.rotation_degrees != 0:
+	if abs(sprite.rotation_degrees) < 320 and sprite.rotation_degrees != 0:
 		if (character.facing_direction == 1):
 			sprite.animation = "tripleJumpRight"
 		else:
 			sprite.animation = "tripleJumpLeft"
-		sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 380, 8 * delta) * character.facing_direction
+		sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 360, 12 * delta) * character.facing_direction
 	else:
 		if (character.facing_direction == 1):
-			sprite.animation = "jumpRight"
+			sprite.animation = "fallRight"
 		else:
-			sprite.animation = "jumpLeft"
-		sprite.rotation_degrees = 0
+			sprite.animation = "fallLeft"
+		if abs(sprite.rotation_degrees) > 360:
+			sprite.rotation_degrees = 0
+		else:
+			sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 360, 12 * delta) * character.facing_direction
 	stop_counter += delta
 
 func _stop(delta):
