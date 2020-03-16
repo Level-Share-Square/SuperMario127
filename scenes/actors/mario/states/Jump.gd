@@ -96,11 +96,7 @@ func _general_update(delta):
 	if rotating:
 		if character.velocity.y > 0:
 			character.jump_animation = 0
-		if character.state != null and character.state != character.get_state_node("JumpState") and character.state != character.get_state_node("FallState") and rotating:
-			rotating = false
-			sprite.rotation_degrees = 5
-			character.jump_animation = 0
-		if character.is_grounded() or abs(sprite.rotation_degrees) > 360 or character.state == character.get_state_node("WallSlideState") or character.controllable == false:
+		if (character.state != null and character.state != character.get_state_node("JumpState") and character.state != character.get_state_node("FallState") and rotating) or character.is_grounded() or abs(sprite.rotation_degrees) > 360 or character.controllable == false:
 			rotating = false
 			sprite.rotation_degrees = 0
 			character.jump_animation = 0
