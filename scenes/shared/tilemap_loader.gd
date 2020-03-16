@@ -78,13 +78,15 @@ func set_tile(index: int, layer: int, tileset_id: int, tile_id: int):
 func set_tile_visual(index: int, layer: int, tileset_id: int, tile_id: int):
 	var position = tile_util.get_position_from_tile_index(index, level_area.settings.size)
 	var cache_tile = get_tile(tileset_id, tile_id)
+	var layer_tilemap_node = back_tilemap_node
 	if layer == 0:
-		back_tilemap_node.set_cell(position.x, position.y, cache_tile)
+		layer_tilemap_node = back_tilemap_node	
 	elif layer == 1:
-		middle_tilemap_node.set_cell(position.x, position.y, cache_tile)
+		layer_tilemap_node = middle_tilemap_node	
 	elif layer == 2:
-		front_tilemap_node.set_cell(position.x, position.y, cache_tile)
-	place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, back_tilemap_node)
+		layer_tilemap_node = front_tilemap_node	
+	layer_tilemap_node.set_cell(position.x, position.y, cache_tile)
+	place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, layer_tilemap_node)
 
 func load_in(level_data : LevelData, level_area : LevelArea):
 	
@@ -101,12 +103,12 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	for index in range(level_area.foreground_tiles.size()):
 		var tile = level_area.foreground_tiles[index]
 		if tile[0] != 0:
-			set_tile_visual(index, 0, tile[0], tile[1])
+			set_tile_visual(index, 1, tile[0], tile[1])
 			
 	for index in range(level_area.very_foreground_tiles.size()):
 		var tile = level_area.very_foreground_tiles[index]
 		if tile[0] != 0:
-			set_tile_visual(index, 0, tile[0], tile[1])
+			set_tile_visual(index, 2, tile[0], tile[1])
 	
 	back_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
 	middle_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
