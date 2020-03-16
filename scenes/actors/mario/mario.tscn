@@ -8,8 +8,8 @@
 [ext_resource path="res://scenes/actors/mario/states/WallSlide.gd" type="Script" id=6]
 [ext_resource path="res://scenes/actors/mario/states/WallJump.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/mario/states/Spinning.gd" type="Script" id=8]
-[ext_resource path="res://scenes/actors/mario/other/cutout_other.png" type="Texture" id=9]
-[ext_resource path="res://scenes/actors/mario/other/cutout_death.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/mario/misc/cutout_circle.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/mario/misc/cutout_death.png" type="Texture" id=10]
 [ext_resource path="res://scenes/actors/mario/states/Slide.gd" type="Script" id=11]
 [ext_resource path="res://scenes/actors/mario/states/Bonked.gd" type="Script" id=12]
 [ext_resource path="res://scenes/actors/mario/states/Dive.gd" type="Script" id=13]
@@ -90,7 +90,7 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource( 3 )
 cutout_death = ExtResource( 10 )
-cutout_other = ExtResource( 9 )
+cutout_circle = ExtResource( 9 )
 acceleration = 10.5
 friction = 13.5
 

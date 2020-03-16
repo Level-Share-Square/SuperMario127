@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cutout_other.png-32b9f5f32567b448fde3ceb33b2b0c0d.stex"
+path="res://.import/cutout_circle.png-8ba28b28dc2749491d85a8b16cae032f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mario/other/cutout_other.png"
-dest_files=[ "res://.import/cutout_other.png-32b9f5f32567b448fde3ceb33b2b0c0d.stex" ]
+source_file="res://scenes/actors/mario/misc/cutout_circle.png"
+dest_files=[ "res://.import/cutout_circle.png-8ba28b28dc2749491d85a8b16cae032f.stex" ]
 
 [params]
 

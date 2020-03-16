@@ -2,12 +2,15 @@ extends KinematicBody2D
 
 class_name Character
 
+signal died
+signal state_changed
+
 onready var states_node = $States
 onready var animated_sprite = $sprite
 
 # Cutout
 export var cutout_death : StreamTexture
-export var cutout_other : StreamTexture
+export var cutout_circle : StreamTexture
 
 # Basic Physics
 export var initial_position = Vector2(0, 0)
@@ -88,14 +91,14 @@ func show():
 	visible = true
 
 func set_state(state, delta: float):
-	var old_state = self.state
-	last_state = old_state
+	last_state = self.state
 	self.state = null
-	if old_state != null:
-		old_state._stop(delta);
+	if last_state != null:
+		last_state._stop(delta)
 	if state != null:
-		self.state = state;
-		state._start(delta);
+		self.state = state
+		state._start(delta)
+	emit_signal("state_changed", state, last_state)
 
 func get_state_node(name: String):
 	if states_node.has_node(name):
@@ -236,8 +239,9 @@ func _physics_process(delta: float):
 func kill(cause):
 	if !dead:
 		dead = true
-		var cutout_in = cutout_other
-		var cutout_out = cutout_other
+		emit_signal("dead")
+		var cutout_in = cutout_circle
+		var cutout_out = cutout_circle
 		var transition_time = 0.75
 		if cause == "fall":
 			cutout_in = cutout_death
