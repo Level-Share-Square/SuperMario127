@@ -35,5 +35,14 @@ func _process(delta):
 		var mouse_screen_pos = get_viewport().get_mouse_position()
 		var mouse_tile_pos = Vector2(floor(mouse_pos.x / 32), floor(mouse_pos.y / 32))
 		var tile_index = tile_util.get_tile_index_from_position(mouse_tile_pos, level_area.settings.size)
+		var layer = 1 # magic numbers suck
 		
-		shared_node.set_tile(tile_index, 1, item.tileset_id, item.tile_id)
+		shared_node.set_tile(tile_index, layer, item.tileset_id, item.tile_id)
+	elif Input.is_action_pressed("erase"):
+		var mouse_pos = get_global_mouse_position()
+		var mouse_screen_pos = get_viewport().get_mouse_position()
+		var mouse_tile_pos = Vector2(floor(mouse_pos.x / 32), floor(mouse_pos.y / 32))
+		var tile_index = tile_util.get_tile_index_from_position(mouse_tile_pos, level_area.settings.size)
+		var layer = 1
+		
+		shared_node.set_tile(tile_index, layer, 0, 0)
