@@ -80,8 +80,8 @@ func set_tile_visual(index: int, layer: int, tileset_id: int, tile_id: int):
 		layer_tilemap_node = front_tilemap_node	
 	if layer_tilemap_node.get_cell(position.x, position.y) != cache_tile:
 		layer_tilemap_node.set_cell(position.x, position.y, cache_tile)
-		layer_tilemap_node.update_bitmask_area(Vector2(position.x, position.y))
 		place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, layer_tilemap_node)
+		layer_tilemap_node.update_bitmask_area(Vector2(position.x, position.y))
 
 func load_in(level_data : LevelData, level_area : LevelArea):
 	
