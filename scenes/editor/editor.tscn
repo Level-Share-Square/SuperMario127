@@ -40,7 +40,7 @@ preview = ExtResource( 10 )
 [node name="Brick" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 tileset_id = 1
-change_to = "Grass"
+change_to = "Brick"
 icon = ExtResource( 5 )
 preview = ExtResource( 5 )
 
