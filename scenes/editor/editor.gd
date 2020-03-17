@@ -13,6 +13,10 @@ onready var placeable_items_button_container_node = get_node(placeable_items_but
 onready var item_preview_node = get_node(item_preview)
 onready var shared_node = get_node(shared)
 
+var lock_axis = "none"
+var lock_pos = 0
+var last_mouse_pos = Vector2(0, 0)
+
 func _ready():
 	var data = LevelData.new()
 	data.load_in(load("res://assets/level_data/test_level.tres").contents)
@@ -29,21 +33,34 @@ func switch_scenes():
 
 func _process(delta):
 	if get_viewport().get_mouse_position().y > 70:
+		var mouse_pos = get_global_mouse_position()
+		var mouse_screen_pos = get_viewport().get_mouse_position()
+		if Input.is_action_pressed("lock_tile_axis") and (Input.is_action_pressed("place") or Input.is_action_pressed("erase")):
+			if Input.is_action_just_pressed("place") or Input.is_action_just_pressed("erase"):
+				if abs(mouse_pos.x) - abs(last_mouse_pos.x) > abs(mouse_pos.y) - abs(last_mouse_pos.y):
+					lock_axis = "x"
+					lock_pos = mouse_pos.x
+				else:
+					lock_axis = "y"
+					lock_pos = mouse_pos.y
+			if lock_axis == "x":
+				mouse_pos.x = lock_pos
+			elif lock_axis == "y":
+				mouse_pos.y = lock_pos
+		else:
+			lock_axis = "none"
+			lock_pos = 0
+		
+		var mouse_tile_pos = Vector2(floor(mouse_pos.x / 32), floor(mouse_pos.y / 32))
+		var tile_index = tile_util.get_tile_index_from_position(mouse_tile_pos, level_area.settings.size)
+		
 		if Input.is_action_pressed("place") and selected_box and selected_box.item:
 			var item = selected_box.item
-			
-			var mouse_pos = get_global_mouse_position()
-			var mouse_screen_pos = get_viewport().get_mouse_position()
-			var mouse_tile_pos = Vector2(floor(mouse_pos.x / 32), floor(mouse_pos.y / 32))
-			var tile_index = tile_util.get_tile_index_from_position(mouse_tile_pos, level_area.settings.size)
 			var layer = 1 # magic numbers suck
 			
 			shared_node.set_tile(tile_index, layer, item.tileset_id, item.tile_id)
 		elif Input.is_action_pressed("erase"):
-			var mouse_pos = get_global_mouse_position()
-			var mouse_screen_pos = get_viewport().get_mouse_position()
-			var mouse_tile_pos = Vector2(floor(mouse_pos.x / 32), floor(mouse_pos.y / 32))
-			var tile_index = tile_util.get_tile_index_from_position(mouse_tile_pos, level_area.settings.size)
 			var layer = 1
 			
 			shared_node.set_tile(tile_index, layer, 0, 0)
+		last_mouse_pos = mouse_pos

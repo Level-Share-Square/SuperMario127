@@ -143,7 +143,7 @@ __meta__ = {
 }
 
 [node name="Grid" type="ParallaxBackground" parent="."]
-layer = 15
+layer = 99
 
 [node name="Layer" type="ParallaxLayer" parent="Grid"]
 motion_mirroring = Vector2( 1024, 512 )
