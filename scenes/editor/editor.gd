@@ -18,8 +18,7 @@ var lock_pos = 0
 var last_mouse_pos = Vector2(0, 0)
 
 func _ready():
-	var data = LevelData.new()
-	data.load_in(load("res://assets/level_data/test_level.tres").contents)
+	var data = CurrentLevelData.level_data
 	load_in(data, data.areas[0])
 	
 func set_selected_box(selected_box: Node):

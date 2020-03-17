@@ -5,8 +5,7 @@ export var character : NodePath
 var mode = 0
 
 func _ready():
-	var data = LevelData.new()
-	data.load_in(load("res://assets/level_data/test_level.tres").contents)
+	var data = CurrentLevelData.level_data
 	load_in(data, data.areas[0])
 	
 func _process(delta):
