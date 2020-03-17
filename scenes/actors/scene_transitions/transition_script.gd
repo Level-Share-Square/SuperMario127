@@ -3,10 +3,13 @@ extends CanvasLayer
 onready var canvas_background = $Background
 onready var canvas_mask = $Light2D
 onready var canvas_tween = $Tween
+onready var music_tween = $MusicTween
 
 var can_load = true
 
 func reload_scene(transition_in_tex, transition_out_tex, transition_time):
+	var music_node = get_node("/root/music")
+	
 	canvas_tween.stop_all()
 	
 	canvas_background.visible = true
@@ -19,6 +22,11 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time):
 		Tween.TRANS_CIRC, Tween.EASE_OUT)
 	canvas_tween.start()
 	
+	music_tween.interpolate_property(music_node, "volume_multiplier",
+		1, 3, transition_time,
+		Tween.TRANS_CIRC, Tween.EASE_OUT)
+	music_tween.start()
+	
 	yield(canvas_tween, "tween_completed")
 	yield(get_tree().create_timer(0.1), "timeout")
 	
@@ -30,6 +38,11 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time):
 		0, 11, transition_time,
 		Tween.TRANS_CIRC, Tween.EASE_IN)
 	canvas_tween.start()
+	
+	music_tween.interpolate_property(music_node, "volume_multiplier",
+		3, 1, transition_time,
+		Tween.TRANS_CIRC, Tween.EASE_OUT)
+	music_tween.start()
 	
 	yield(canvas_tween, "tween_completed")
 	

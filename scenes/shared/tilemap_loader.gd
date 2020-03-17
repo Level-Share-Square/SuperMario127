@@ -67,13 +67,6 @@ func set_tile(index: int, layer: int, tileset_id: int, tile_id: int):
 	tiles_array[index] = [tileset_id, tile_id]
 	
 	set_tile_visual(index, layer, tileset_id, tile_id)
-	var settings = level_area.settings
-	if layer == 0:
-		back_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
-	elif layer == 1:
-		middle_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
-	elif layer == 2:
-		front_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
 		
 func set_tile_visual(index: int, layer: int, tileset_id: int, tile_id: int):
 	var position = tile_util.get_position_from_tile_index(index, level_area.settings.size)
@@ -85,8 +78,10 @@ func set_tile_visual(index: int, layer: int, tileset_id: int, tile_id: int):
 		layer_tilemap_node = middle_tilemap_node	
 	elif layer == 2:
 		layer_tilemap_node = front_tilemap_node	
-	layer_tilemap_node.set_cell(position.x, position.y, cache_tile)
-	place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, layer_tilemap_node)
+	if layer_tilemap_node.get_cell(position.x, position.y) != cache_tile:
+		layer_tilemap_node.set_cell(position.x, position.y, cache_tile)
+		layer_tilemap_node.update_bitmask_area(Vector2(position.x, position.y))
+		place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, layer_tilemap_node)
 
 func load_in(level_data : LevelData, level_area : LevelArea):
 	
