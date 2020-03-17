@@ -22,10 +22,11 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time):
 		Tween.TRANS_CIRC, Tween.EASE_OUT)
 	canvas_tween.start()
 	
-	music_tween.interpolate_property(music_node, "volume_multiplier",
-		1, 3, transition_time,
-		Tween.TRANS_CIRC, Tween.EASE_OUT)
-	music_tween.start()
+	if music_node.volume_multiplier != 10:
+		music_tween.interpolate_property(music_node, "volume_multiplier",
+			1, 3, transition_time,
+			Tween.TRANS_CIRC, Tween.EASE_OUT)
+		music_tween.start()
 	
 	yield(canvas_tween, "tween_completed")
 	yield(get_tree().create_timer(0.1), "timeout")
@@ -39,10 +40,11 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time):
 		Tween.TRANS_CIRC, Tween.EASE_IN)
 	canvas_tween.start()
 	
-	music_tween.interpolate_property(music_node, "volume_multiplier",
-		3, 1, transition_time,
-		Tween.TRANS_CIRC, Tween.EASE_OUT)
-	music_tween.start()
+	if music_node.volume_multiplier != 10:
+		music_tween.interpolate_property(music_node, "volume_multiplier",
+			3, 1, transition_time,
+			Tween.TRANS_CIRC, Tween.EASE_OUT)
+		music_tween.start()
 	
 	yield(canvas_tween, "tween_completed")
 	
