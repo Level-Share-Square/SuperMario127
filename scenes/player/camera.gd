@@ -5,7 +5,8 @@ export var character : NodePath
 onready var character_node = get_node(character)
 
 func _process(delta):
-	position = character_node.position
+	if character_node.controllable == true:
+		position = character_node.position
 
 func load_in(level_data : LevelData, level_area : LevelArea):
 	var level_size = level_area.settings.size

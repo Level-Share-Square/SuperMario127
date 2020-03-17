@@ -47,8 +47,8 @@ export var disable_animation = false
 # States
 var state = null
 var last_state = null
-var controllable = true
-var dead = false
+export var controllable = true
+export var dead = false
 
 # Collision vars
 var collision_down
@@ -110,6 +110,18 @@ func set_state_by_name(name: String, delta: float):
 
 func _ready():
 	real_friction = friction
+	
+func is_action_pressed(input):
+	if controllable:
+		return Input.is_action_pressed(input)
+	else:
+		return false
+		
+func is_action_just_pressed(input):
+	if controllable:
+		return Input.is_action_just_pressed(input)
+	else:
+		return false
 
 func _physics_process(delta: float):
 	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")
@@ -135,76 +147,72 @@ func _physics_process(delta: float):
 		disable_animation = false
 	# Movement
 	move_direction = 0
-	if Input.is_action_pressed("move_left") and disable_movement == false:
+	if is_action_pressed("move_left") and disable_movement == false:
 		move_direction = -1
-	elif Input.is_action_pressed("move_right") and disable_movement == false:
+	elif is_action_pressed("move_right") and disable_movement == false:
 		move_direction = 1
-	if controllable:
-		if move_direction != 0:
-			if is_grounded():
-				if ((velocity.x > 0 && move_direction == -1) || (velocity.x < 0 && move_direction == 1)):
-					velocity.x += deceleration * move_direction
-				elif ((velocity.x < move_speed && move_direction == 1) || (velocity.x > -move_speed && move_direction == -1)):
-					velocity.x += acceleration * move_direction
-				elif ((velocity.x > move_speed && move_direction == 1) || (velocity.x < -move_speed && move_direction == -1)):
-					velocity.x -= 3.5 * move_direction
-				facing_direction = move_direction
-
-				if !disable_animation:
-					if !test_move(transform, Vector2(velocity.x * delta, 0)):
-						var animation_frame = sprite.frame
-						if move_direction == 1:
-							sprite.animation = "movingRight"
-							if last_move_direction != move_direction:
-								sprite.frame = animation_frame + 1
-						else:
-							sprite.animation = "movingLeft"
-							if last_move_direction != move_direction:
-								sprite.frame = animation_frame + 1
-					else:
-						if facing_direction == 1:
-							sprite.animation = "idleRight"
-						else:
-							sprite.animation = "idleLeft"
-					if (abs(velocity.x) > move_speed):
-						sprite.speed_scale = abs(velocity.x) / move_speed
-					else:
-						sprite.speed_scale = 1
-			else:
-				if ((velocity.x < move_speed && move_direction == 1) || (velocity.x > -move_speed && move_direction == -1)):
-					velocity.x += aerial_acceleration * move_direction
-				elif ((velocity.x > move_speed && move_direction == 1) || (velocity.x < -move_speed && move_direction == -1)):
-					velocity.x -= 0.25 * move_direction
-				if !disable_turning:
-					facing_direction = move_direction
-		else:
-			if (velocity.x > 0):
-				if (velocity.x > 15):
-					if (is_grounded()):
-						velocity.x -= friction
-					else:
-						velocity.x -= aerial_friction
-				else:
-					velocity.x = 0
-			elif (velocity.x < 0):
-				if (velocity.x < -15):
-					if (is_grounded()):
-						velocity.x += friction
-					else:
-						velocity.x += aerial_friction
-				else:
-					velocity.x = 0
+	if move_direction != 0:
+		if is_grounded():
+			if ((velocity.x > 0 && move_direction == -1) || (velocity.x < 0 && move_direction == 1)):
+				velocity.x += deceleration * move_direction
+			elif ((velocity.x < move_speed && move_direction == 1) || (velocity.x > -move_speed && move_direction == -1)):
+				velocity.x += acceleration * move_direction
+			elif ((velocity.x > move_speed && move_direction == 1) || (velocity.x < -move_speed && move_direction == -1)):
+				velocity.x -= 3.5 * move_direction
+			facing_direction = move_direction
 
 			if !disable_animation:
-				if is_grounded():
+				if !test_move(transform, Vector2(velocity.x * delta, 0)):
+					var animation_frame = sprite.frame
+					if move_direction == 1:
+						sprite.animation = "movingRight"
+						if last_move_direction != move_direction:
+							sprite.frame = animation_frame + 1
+					else:
+						sprite.animation = "movingLeft"
+						if last_move_direction != move_direction:
+							sprite.frame = animation_frame + 1
+				else:
 					if facing_direction == 1:
 						sprite.animation = "idleRight"
 					else:
 						sprite.animation = "idleLeft"
+				if (abs(velocity.x) > move_speed):
+					sprite.speed_scale = abs(velocity.x) / move_speed
+				else:
 					sprite.speed_scale = 1
+		else:
+			if ((velocity.x < move_speed && move_direction == 1) || (velocity.x > -move_speed && move_direction == -1)):
+				velocity.x += aerial_acceleration * move_direction
+			elif ((velocity.x > move_speed && move_direction == 1) || (velocity.x < -move_speed && move_direction == -1)):
+				velocity.x -= 0.25 * move_direction
+			if !disable_turning:
+				facing_direction = move_direction
 	else:
+		if (velocity.x > 0):
+			if (velocity.x > 15):
+				if (is_grounded()):
+					velocity.x -= friction
+				else:
+					velocity.x -= aerial_friction
+			else:
+				velocity.x = 0
+		elif (velocity.x < 0):
+			if (velocity.x < -15):
+				if (is_grounded()):
+					velocity.x += friction
+				else:
+					velocity.x += aerial_friction
+			else:
+				velocity.x = 0
+
 		if !disable_animation:
-			sprite.animation = "idleRight"
+			if is_grounded():
+				if facing_direction == 1:
+					sprite.animation = "idleRight"
+				else:
+					sprite.animation = "idleLeft"
+				sprite.speed_scale = 1
 
 	for state_node in states_node.get_children():
 		state_node.handle_update(delta)
@@ -244,6 +252,7 @@ func kill(cause):
 		var cutout_out = cutout_circle
 		var transition_time = 0.75
 		if cause == "fall":
+			controllable = false
 			cutout_in = cutout_death
 			fall_sound_player.play()
 			yield(get_tree().create_timer(.75), "timeout")

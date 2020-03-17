@@ -13,7 +13,7 @@ func _ready():
 	disable_animation = true
 
 func _start_check(delta):
-	return Input.is_action_just_pressed("spin") && (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2 and !character.test_move(character.transform, Vector2(8, 0)) and !character.test_move(character.transform, Vector2(-8, 0))
+	return character.is_action_just_pressed("spin") && (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2 and !character.test_move(character.transform, Vector2(8, 0)) and !character.test_move(character.transform, Vector2(-8, 0))
 
 func _start(delta):
 	if can_boost == true && !character.is_grounded() && (character.state != character.get_state_node("Jump") or character.current_jump == 1):
@@ -42,7 +42,7 @@ func _stop(delta):
 	character.gravity_scale = old_gravity_scale
 
 func _stop_check(delta):
-	return !Input.is_action_pressed("spin") or character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0))
+	return !character.is_action_pressed("spin") or character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0))
 	
 func _general_update(delta):
 	if cooldown_timer > 0:

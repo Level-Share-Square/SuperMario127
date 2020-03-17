@@ -29,7 +29,7 @@ func _start(delta):
 	jump_buffer = 0
 	ground_buffer = 0
 	jump_playing = true
-	if Input.is_action_pressed("dive"):
+	if character.is_action_pressed("dive"):
 		character.current_jump = 0
 	if character.current_jump == 2 and abs(character.velocity.x) < 80:
 		character.current_jump = 1
@@ -37,7 +37,7 @@ func _start(delta):
 		character.set_state_by_name("SpinningState", delta)
 	if character.current_jump == 0:
 		var jump_player = character.get_node("jump_sounds")
-		if !Input.is_action_pressed("dive"):
+		if !character.is_action_pressed("dive"):
 			jump_player.play()
 		character.velocity.y = -jump_power
 		character.position.y -= 3
@@ -119,9 +119,9 @@ func _general_update(delta):
 		jump_buffer -= delta
 		if jump_buffer < 0:
 			jump_buffer = 0
-	if Input.is_action_just_pressed("jump"):
+	if character.is_action_just_pressed("jump"):
 		jump_buffer = 0.075
-	if Input.is_action_just_pressed("dive"):
+	if character.is_action_just_pressed("dive"):
 		dive_buffer = 0.075
 	if dive_buffer > 0:
 		dive_buffer -= delta

@@ -61,7 +61,7 @@ func _stop_check(delta):
 	return character.is_grounded() or (character.is_walled_right() && character.facing_direction == 1) or (character.is_walled_left() && character.facing_direction == -1)
 
 func _general_update(delta):
-	if Input.is_action_just_pressed("dive"):
+	if character.is_action_just_pressed("dive"):
 		dive_buffer = 0.075
 	if dive_buffer > 0:
 		dive_buffer -= delta
