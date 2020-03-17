@@ -55,6 +55,7 @@ preview = ExtResource( 12 )
 layer = 100
 
 [node name="PlaceableItemsContainer" type="Sprite" parent="UI"]
+position = Vector2( 0, 0.716972 )
 scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 11 )
 centered = false

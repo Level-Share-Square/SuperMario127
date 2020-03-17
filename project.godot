@@ -85,6 +85,11 @@ _global_script_classes=[ {
 "path": "res://level/Resource.gd"
 }, {
 "base": "Resource",
+"class": "LevelSong",
+"language": "GDScript",
+"path": "res://classes/LevelSong.gd"
+}, {
+"base": "Resource",
 "class": "LevelTileset",
 "language": "GDScript",
 "path": "res://classes/LevelTileset.gd"
@@ -165,6 +170,7 @@ _global_script_class_icons={
 "LevelDataLoader": "",
 "LevelObject": "",
 "LevelResource": "",
+"LevelSong": "",
 "LevelTileset": "",
 "ParallaxLayerResource": "",
 "PlaceableItem": "",
