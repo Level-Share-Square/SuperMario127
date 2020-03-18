@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/tiles/grass/icon.png" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=11]
 [ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=12]
+[ext_resource path="res://assets/tiles/grass/right_slope_icon.png" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -33,9 +34,17 @@ shared = NodePath("Shared")
 [node name="Grass" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 tileset_id = 2
-change_to = "Grass"
+change_to = "GrassSlopeRight"
 icon = ExtResource( 10 )
 preview = ExtResource( 10 )
+
+[node name="GrassSlopeRight" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 2
+tile_id = 4
+change_to = "Grass"
+icon = ExtResource( 13 )
+preview = ExtResource( 13 )
 
 [node name="Brick" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )

@@ -2,7 +2,7 @@ tool
 extends TileSet
 
 const GRASS_BLOCK = 2
-const GRASS_SLOPE_RIGHT = 2
+const GRASS_SLOPE_RIGHT = 4
 const GRASS_SLOPE_LEFT = 2
 const BRICK = 3
 
