@@ -4,7 +4,7 @@ export var character : NodePath
 
 onready var character_node = get_node(character)
 
-func _process(delta):
+func _physics_process(delta):
 	if character_node.controllable == true:
 		position = character_node.position
 

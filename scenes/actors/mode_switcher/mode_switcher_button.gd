@@ -19,7 +19,7 @@ export var texture_stop : StreamTexture
 func _ready():
 	start_pos = self.rect_position
 
-func _process(delta):
+func _physics_process(delta):
 	if pressed:
 		self.modulate = Color(0.65, 0.65, 0.65)
 	elif is_hovered():
