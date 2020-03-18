@@ -11,3 +11,6 @@ func set_tile(index: int, layer: int, tileset_id: int, tile_id: int):
 
 func create_object(object, add_to_data):
 	objects_node.create_object(object, add_to_data)
+
+func get_object_at_position(position):
+	objects_node.get_object_at_position(position)

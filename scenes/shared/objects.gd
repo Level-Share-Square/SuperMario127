@@ -14,7 +14,6 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		create_object(object, false)
 
 func create_object(object, add_to_data):
-	print_debug("a")
 	var mode = get_tree().get_current_scene().mode
 	var object_name = object_id_map.ids[object.type_id] # ok boomer
 	var object_scene = load("res://scenes/actors/objects/" + object_name + "/" + object_name + ".tscn")
@@ -30,3 +29,8 @@ func create_object(object, add_to_data):
 			level_area.objects.append(object)
 	else:
 		print("Object type " + object_name + " doesn't exist.")
+		
+func get_object_at_position(position: Vector2):
+	for object in self.get_children():
+		if object.position == position:
+			return object
