@@ -16,11 +16,11 @@ func check_borders():
 	var camera_down = position.y + (get_viewport_rect().size.y / 2)
 	
 	if camera_left < limit_left:
-		position.x = get_viewport_rect().size.x / 2
+		position.x = limit_left + (get_viewport_rect().size.x / 2)
 	if camera_right > limit_right:
 		position.x = limit_right - (get_viewport_rect().size.x / 2)
 	if camera_up < limit_top:
-		position.y = get_viewport_rect().size.y / 2
+		position.y = limit_top + (get_viewport_rect().size.y / 2)
 	if camera_down > limit_bottom:
 		position.y = limit_bottom - (get_viewport_rect().size.y / 2)
 
