@@ -11,7 +11,7 @@
 [ext_resource path="res://scenes/editor/placeable_items_container.gd" type="Script" id=9]
 [ext_resource path="res://assets/tiles/grass/icon.png" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=11]
-[ext_resource path="res://assets/misc/cursor.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -33,7 +33,7 @@ shared = NodePath("Shared")
 [node name="Grass" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 tileset_id = 2
-change_to = "Brick"
+change_to = "Grass"
 icon = ExtResource( 10 )
 preview = ExtResource( 10 )
 
@@ -47,7 +47,7 @@ preview = ExtResource( 5 )
 [node name="Entrance" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 is_object = true
-change_to = "Grass"
+change_to = "Entrance"
 icon = ExtResource( 12 )
 preview = ExtResource( 12 )
 

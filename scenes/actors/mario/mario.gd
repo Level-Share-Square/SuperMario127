@@ -258,9 +258,7 @@ func kill(cause):
 			yield(get_tree().create_timer(.75), "timeout")
 		elif cause == "reload":
 			transition_time = 0.4
-		get_tree().get_root().get_node("/root/scene_transitions").reload_scene(cutout_in, cutout_out, transition_time)
+		scene_transitions.reload_scene(cutout_in, cutout_out, transition_time)
 
 func exit():
-	get_tree().change_scene("res://scenes/editor/editor.tscn")
-	#var mode_switcher = get_node("../ModeSwitcher")
-	#mode_switcher.switch_to_editing()
+	mode_switcher.get_node("ModeSwitcherButton").switch()
