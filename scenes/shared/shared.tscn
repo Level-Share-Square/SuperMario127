@@ -11,6 +11,7 @@
 script = ExtResource( 1 )
 nodes_to_load = [ NodePath("Background"), NodePath("Tilemaps"), NodePath("Objects") ]
 tilemaps = NodePath("Tilemaps")
+objects = NodePath("Objects")
 
 [node name="Parallax" type="ParallaxBackground" parent="."]
 layer = -1

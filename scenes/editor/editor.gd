@@ -57,7 +57,16 @@ func _process(delta):
 			var item = selected_box.item
 			var layer = 1 # magic numbers suck
 			
-			shared_node.set_tile(tile_index, layer, item.tileset_id, item.tile_id)
+			if !item.is_object:
+				shared_node.set_tile(tile_index, layer, item.tileset_id, item.tile_id)
+			else:
+				var object = LevelObject.new()
+				object.type_id = item.object_id
+				object.properties = {}
+				object.properties.position = (mouse_tile_pos * 32) + item.object_center
+				object.properties.scale = Vector2(1, 1)
+				object.properties.rotation_degrees = 0
+				shared_node.create_object(object, true)
 		elif Input.is_action_pressed("erase"):
 			var layer = 1
 			

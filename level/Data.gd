@@ -25,6 +25,7 @@ func get_area(result, is_json) -> LevelArea:
 		for tile in tiles:
 			area.background_tiles.append(tile)
 	for object_result in result.objects:
+		object_result.type_id -= 1 # sorry for being a big dum dum
 		var object = get_object(object_result, is_json)
 		area.objects.append(object)
 	return area
@@ -74,13 +75,13 @@ func get_object(result, is_json) -> LevelObject:
 		object.properties = result.properties
 		object.id = 2
 		if object.name == "Entrance": # i don't even care lol
-			object.id = 1
+			object.id = 0
 		elif object.name == "Coin":
-			object.id = 2
+			object.id = 1
 		elif object.name == "Shine":
-			object.id = 3
+			object.id = 2
 		elif object.name == "MetalPlatform":
-			object.id = 4
+			object.id = 3
 	return object
 
 func load_in(code):

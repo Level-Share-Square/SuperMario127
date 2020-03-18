@@ -65,6 +65,7 @@ preview = ExtResource( 5 )
 [node name="Entrance" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 is_object = true
+object_center = Vector2( 15, 16 )
 change_to = "Entrance"
 icon = ExtResource( 12 )
 preview = ExtResource( 12 )
