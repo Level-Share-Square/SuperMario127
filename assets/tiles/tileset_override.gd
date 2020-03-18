@@ -3,7 +3,7 @@ extends TileSet
 
 const GRASS_BLOCK = 2
 const GRASS_SLOPE_RIGHT = 4
-const GRASS_SLOPE_LEFT = 2
+const GRASS_SLOPE_LEFT = 5
 const BRICK = 3
 
 var binds = {
