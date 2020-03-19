@@ -2,6 +2,8 @@ extends LevelDataLoader
 
 var mode = 1
 
+export var placement_mode := "Drag"
+export var surface_snap := false
 export var placeable_items : NodePath
 export var placeable_items_button_container : NodePath
 export var item_preview : NodePath
@@ -16,6 +18,12 @@ onready var shared_node = get_node(shared)
 var lock_axis = "none"
 var lock_pos = 0
 var last_mouse_pos = Vector2(0, 0)
+
+func _input(event):
+	if event.is_action_pressed("switch_placement_mode"):
+		placement_mode = "Tile" if placement_mode == "Drag" else "Drag"
+	elif event.is_action_pressed("toggle_surface_snap"):
+		surface_snap = !surface_snap
 
 func _ready():
 	var data = CurrentLevelData.level_data
@@ -60,7 +68,17 @@ func _process(delta):
 			if !item.is_object:
 				shared_node.set_tile(tile_index, layer, item.tileset_id, item.tile_id)
 			else:
-				var object_pos = (mouse_tile_pos * 32) + item.object_center
+				var object_pos
+				if placement_mode == "Tile":
+					object_pos = (mouse_tile_pos * 32) + item.object_center
+				else:
+					object_pos = mouse_pos
+					if surface_snap:
+						var object_bottom = object_pos + Vector2(0, item.object_size.y)
+						var space_state = get_world_2d().direct_space_state
+						var result = space_state.intersect_ray(object_bottom, object_bottom + Vector2(0, 16))
+						if result:
+							object_pos = result.position - Vector2(0, item.object_size.y)
 				if !shared_node.is_object_at_position(object_pos):
 					print_debug("A")
 					var object = LevelObject.new()
@@ -73,7 +91,13 @@ func _process(delta):
 		elif Input.is_action_pressed("erase"):
 			var layer = 1
 			if selected_box:
-				var object_pos = (mouse_tile_pos * 32) + selected_box.item.object_center
-				shared_node.destroy_object_at_position(object_pos, true)
-			shared_node.set_tile(tile_index, layer, 0, 0)
+				var item = selected_box.item
+				if item.is_object:
+					if placement_mode == "Tile":
+						var object_pos = (mouse_tile_pos * 32) + item.object_center
+						shared_node.destroy_object_at_position(object_pos, true)
+					else:
+						shared_node.destroy_objects_overlapping_position(mouse_pos, true)
+				else:
+					shared_node.set_tile(tile_index, layer, 0, 0)
 		last_mouse_pos = mouse_pos

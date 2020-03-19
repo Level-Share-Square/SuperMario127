@@ -66,6 +66,8 @@ preview = ExtResource( 5 )
 script = ExtResource( 3 )
 is_object = true
 object_center = Vector2( 15, 16 )
+object_size = Vector2( 52, 52 )
+z_index = -1
 change_to = "Entrance"
 icon = ExtResource( 12 )
 preview = ExtResource( 12 )
@@ -185,4 +187,5 @@ speed = 7
 
 [node name="ItemPreview" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.501961 )
+z_index = -1
 script = ExtResource( 8 )
