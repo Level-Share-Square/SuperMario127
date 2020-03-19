@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/actors/objects/coin/sound.wav" type="AudioStream" id=1]
+[ext_resource path="res://scenes/actors/objects/coin/yellow.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/actors/objects/coin/coin.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/coin/yellow/spin.tres" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Coin" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
+frames = ExtResource( 2 )
+animation = "collect"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -9.0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 24, 24 )

@@ -19,9 +19,7 @@ func collect(body):
 		emit_signal("on_collect")
 
 func _ready():
-	if mode == 1:
-		effects.visible = false
-	else:
+	if mode != 1:
 		area.connect("body_entered", self, "collect")
 
 func _physics_process(delta):

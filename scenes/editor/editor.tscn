@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -14,6 +14,9 @@
 [ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=12]
 [ext_resource path="res://assets/tiles/grass/right_slope_icon.png" type="Texture" id=13]
 [ext_resource path="res://assets/tiles/grass/left_slope_icon.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/shine/icon.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/coin/preview.png" type="Texture" id=16]
+[ext_resource path="res://scenes/actors/objects/coin/icon.png" type="Texture" id=17]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -66,17 +69,34 @@ preview = ExtResource( 5 )
 script = ExtResource( 3 )
 is_object = true
 object_center = Vector2( 15, 16 )
-object_size = Vector2( 52, 52 )
 z_index = -1
 change_to = "Entrance"
 icon = ExtResource( 12 )
 preview = ExtResource( 12 )
 
+[node name="Shine" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 2
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "Shine"
+icon = ExtResource( 15 )
+preview = ExtResource( 15 )
+
+[node name="Coin" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 1
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "Coin"
+icon = ExtResource( 17 )
+preview = ExtResource( 16 )
+
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
 
 [node name="PlaceableItemsContainer" type="Sprite" parent="UI"]
-position = Vector2( 0, 0.716972 )
+position = Vector2( 0, -0.01 )
 scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 11 )
 centered = false

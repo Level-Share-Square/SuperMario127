@@ -5,7 +5,7 @@ export var character : NodePath
 onready var character_node = get_node(character)
 
 func _physics_process(delta):
-	if character_node.controllable == true:
+	if !character_node.dead:
 		position = character_node.position
 
 func load_in(level_data : LevelData, level_area : LevelArea):

@@ -31,6 +31,10 @@ func _start(delta):
 	
 func _update(delta):
 	var sprite = character.animated_sprite
+	if character.is_grounded():
+		priority = 0
+	else:
+		priority = 2
 	if sprite.animation != "spinning":
 		sprite.animation = "spinning"
 	if character.velocity.y < 0:
@@ -40,6 +44,7 @@ func _update(delta):
 		
 func _stop(delta):
 	character.gravity_scale = old_gravity_scale
+	priority = 2
 
 func _stop_check(delta):
 	return !character.is_action_pressed("spin") or character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0))

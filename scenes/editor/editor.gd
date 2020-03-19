@@ -77,6 +77,8 @@ func _process(delta):
 					object_pos = (mouse_tile_pos * 32) + item.object_center
 				elif Input.is_action_just_pressed("place"):
 					object_pos = mouse_pos
+					if Input.is_action_pressed("8_pixel_lock"):
+						object_pos = Vector2(stepify(object_pos.x, 8), stepify(object_pos.y, 8))
 					if surface_snap:
 						var object_bottom = object_pos + Vector2(0, item.object_size.y)
 						var space_state = get_world_2d().direct_space_state
@@ -84,7 +86,6 @@ func _process(delta):
 						if result:
 							object_pos = result.position - Vector2(0, item.object_size.y)
 				if object_pos and !shared_node.is_object_at_position(object_pos):
-					print_debug("A")
 					var object = LevelObject.new()
 					object.type_id = item.object_id
 					object.properties = {}
