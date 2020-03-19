@@ -9,6 +9,7 @@ export var placeable_items_button_container : NodePath
 export var item_preview : NodePath
 export var shared : NodePath
 var selected_box : Node
+var selected_object : Node
 
 onready var placeable_items_node = get_node(placeable_items)
 onready var placeable_items_button_container_node = get_node(placeable_items_button_container)
@@ -61,6 +62,9 @@ func _process(delta):
 		var mouse_tile_pos = Vector2(floor(mouse_pos.x / 32), floor(mouse_pos.y / 32))
 		var tile_index = tile_util.get_tile_index_from_position(mouse_tile_pos, level_area.settings.size)
 		
+		if Input.is_action_just_pressed("place"):
+			pass
+		
 		if Input.is_action_pressed("place") and selected_box and selected_box.item:
 			var item = selected_box.item
 			var layer = 1 # magic numbers suck
@@ -71,7 +75,7 @@ func _process(delta):
 				var object_pos
 				if placement_mode == "Tile":
 					object_pos = (mouse_tile_pos * 32) + item.object_center
-				else:
+				elif Input.is_action_just_pressed("place"):
 					object_pos = mouse_pos
 					if surface_snap:
 						var object_bottom = object_pos + Vector2(0, item.object_size.y)
@@ -79,7 +83,7 @@ func _process(delta):
 						var result = space_state.intersect_ray(object_bottom, object_bottom + Vector2(0, 16))
 						if result:
 							object_pos = result.position - Vector2(0, item.object_size.y)
-				if !shared_node.is_object_at_position(object_pos):
+				if object_pos and !shared_node.is_object_at_position(object_pos):
 					print_debug("A")
 					var object = LevelObject.new()
 					object.type_id = item.object_id
@@ -96,7 +100,7 @@ func _process(delta):
 					if placement_mode == "Tile":
 						var object_pos = (mouse_tile_pos * 32) + item.object_center
 						shared_node.destroy_object_at_position(object_pos, true)
-					else:
+					elif Input.is_action_just_pressed("erase"):
 						shared_node.destroy_objects_overlapping_position(mouse_pos, true)
 				else:
 					shared_node.set_tile(tile_index, layer, 0, 0)

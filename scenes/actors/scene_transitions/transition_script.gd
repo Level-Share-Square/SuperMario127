@@ -9,6 +9,7 @@ var can_load = true
 
 func reload_scene(transition_in_tex, transition_out_tex, transition_time):
 	var music_node = get_node("/root/music")
+	var old_multiplier = music_node.volume_multiplier
 	
 	canvas_tween.stop_all()
 	
@@ -22,9 +23,9 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time):
 		Tween.TRANS_CIRC, Tween.EASE_OUT)
 	canvas_tween.start()
 	
-	if music_node.volume_multiplier != 10:
+	if music_node.volume_multiplier != 0:
 		music_tween.interpolate_property(music_node, "volume_multiplier",
-			1, 3, transition_time,
+			old_multiplier, old_multiplier / 4, transition_time,
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
 		music_tween.start()
 	
@@ -40,9 +41,9 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time):
 		Tween.TRANS_CIRC, Tween.EASE_IN)
 	canvas_tween.start()
 	
-	if music_node.volume_multiplier != 10:
+	if music_node.volume_multiplier != 0:
 		music_tween.interpolate_property(music_node, "volume_multiplier",
-			3, 1, transition_time,
+			old_multiplier / 4, old_multiplier, transition_time,
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
 		music_tween.start()
 	

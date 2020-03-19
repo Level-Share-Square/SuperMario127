@@ -11,7 +11,7 @@ func get_vector2(result) -> Vector2:
 
 func get_area(result, is_json) -> LevelArea:
 	var area = LevelArea.new()
-	area.settings = get_settings(result.settings)
+	area.settings = get_settings(result.settings, is_json)
 	for very_foreground_tiles_result in result.very_foreground_tiles:
 		var tiles = get_tiles(very_foreground_tiles_result, is_json)
 		for tile in tiles:
@@ -30,11 +30,11 @@ func get_area(result, is_json) -> LevelArea:
 		area.objects.append(object)
 	return area
 	
-func get_settings(result) -> LevelAreaSettings:
+func get_settings(result, is_json) -> LevelAreaSettings:
 	var settings = LevelAreaSettings.new()
 	settings.sky = result.sky
 	settings.background = result.background
-	settings.music = result.music
+	settings.music = result.music if !is_json and result.music != 0 else result.music + 1
 	settings.size = get_vector2(result.size)
 	return settings
 	
@@ -73,7 +73,7 @@ func get_object(result, is_json) -> LevelObject:
 		object = LevelObject.new()
 		object.name = result.type
 		object.properties = result.properties
-		object.id = 2
+		object.id = 1
 		if object.name == "Entrance": # i don't even care lol
 			object.id = 0
 		elif object.name == "Coin":

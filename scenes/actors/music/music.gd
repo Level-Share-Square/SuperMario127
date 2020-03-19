@@ -3,8 +3,8 @@ extends AudioStreamPlayer
 export var play_bus: String
 export var edit_bus: String
 
-export var volume_multiplier = 1
-var orig_volume = 1
+export var volume_multiplier : float = 1
+var orig_volume = 0
 
 var last_mode = 3
 
@@ -26,9 +26,9 @@ func _process(delta):
 			bus = play_bus
 		else:
 			bus = edit_bus
-	volume_db = orig_volume * volume_multiplier
+	volume_db = linear2db(db2linear(orig_volume) * volume_multiplier)
 	last_mode = get_tree().get_current_scene().mode
 
 func _input(event):
 	if event.is_action_pressed("mute"):
-		volume_multiplier = 10 if volume_multiplier == 1 else 1
+		volume_multiplier = 0 if volume_multiplier == 1 else 1

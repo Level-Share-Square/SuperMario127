@@ -1,9 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://assets/music/peach_castle.ogg" type="AudioStream" id=1]
 [ext_resource path="res://scenes/actors/music/music.gd" type="Script" id=2]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer"]
-volume_db = -6.0
+stream = ExtResource( 1 )
 autoplay = true
 bus = "Editor"
 script = ExtResource( 2 )
