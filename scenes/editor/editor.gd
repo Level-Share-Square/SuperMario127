@@ -61,7 +61,8 @@ func _process(delta):
 				shared_node.set_tile(tile_index, layer, item.tileset_id, item.tile_id)
 			else:
 				var object_pos = (mouse_tile_pos * 32) + item.object_center
-				if !shared_node.get_object_at_position(object_pos): # can't get this to work, maybe you could try
+				if !shared_node.is_object_at_position(object_pos):
+					print_debug("A")
 					var object = LevelObject.new()
 					object.type_id = item.object_id
 					object.properties = {}
@@ -71,6 +72,8 @@ func _process(delta):
 					shared_node.create_object(object, true)
 		elif Input.is_action_pressed("erase"):
 			var layer = 1
-			
+			if selected_box:
+				var object_pos = (mouse_tile_pos * 32) + selected_box.item.object_center
+				shared_node.destroy_object_at_position(object_pos, true)
 			shared_node.set_tile(tile_index, layer, 0, 0)
 		last_mouse_pos = mouse_pos
