@@ -124,8 +124,6 @@ func is_action_just_pressed(input):
 		return false
 
 func _physics_process(delta: float):
-	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")
-
 	var gravity = 7.82 #global_vars_node.gravity
 	# Gravity
 	velocity += gravity * Vector2(0, gravity_scale)

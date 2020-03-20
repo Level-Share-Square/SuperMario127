@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -31,10 +31,20 @@
 [ext_resource path="res://scenes/editor/assets/level_settings_hover.png" type="Texture" id=29]
 [ext_resource path="res://scenes/editor/assets/level_settings_press.png" type="Texture" id=30]
 [ext_resource path="res://scenes/editor/window_open_button.gd" type="Script" id=31]
+[ext_resource path="res://scenes/editor/assets/music_background.png" type="Texture" id=32]
+[ext_resource path="res://scenes/editor/music_changer.gd" type="Script" id=33]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
 use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 28
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
 font_data = ExtResource( 4 )
 
 [node name="Editor" type="Node2D"]
@@ -163,11 +173,11 @@ __meta__ = {
 
 [node name="LevelSettingsWindow" type="NinePatchRect" parent="UI"]
 visible = false
-margin_left = 150.0
-margin_top = 125.0
-margin_right = 1424.0
-margin_bottom = 790.0
-rect_scale = Vector2( 0.333, 0.333 )
+margin_left = 165.0
+margin_top = 130.0
+margin_right = 1218.0
+margin_bottom = 680.0
+rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 0
 texture = ExtResource( 18 )
 region_rect = Rect2( 0, 0, 660, 610 )
@@ -194,10 +204,10 @@ __meta__ = {
 }
 
 [node name="CloseButton" type="TextureButton" parent="UI/LevelSettingsWindow"]
-margin_left = 1109.65
-margin_top = 12.9531
-margin_right = 1264.65
-margin_bottom = 93.9531
+margin_left = 888.65
+margin_top = 12.953
+margin_right = 1043.65
+margin_bottom = 93.953
 rect_scale = Vector2( 0.95, 0.95 )
 texture_normal = ExtResource( 20 )
 texture_pressed = ExtResource( 20 )
@@ -210,8 +220,8 @@ __meta__ = {
 anchor_bottom = 0.06
 margin_left = 17.0
 margin_top = 104.0
-margin_right = 1254.0
-margin_bottom = 606.1
+margin_right = 1036.0
+margin_bottom = 498.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -339,6 +349,83 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Music" type="Control" parent="UI/LevelSettingsWindow/Contents"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 33 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="UI/LevelSettingsWindow/Contents/Music"]
+margin_left = 85.0
+margin_top = 270.0
+margin_right = 464.0
+margin_bottom = 380.0
+texture = ExtResource( 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicTitle" type="Label" parent="UI/LevelSettingsWindow/Contents/Music"]
+margin_left = 97.0
+margin_top = 279.0
+margin_right = 452.0
+margin_bottom = 330.0
+custom_fonts/font = SubResource( 2 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicNote" type="Label" parent="UI/LevelSettingsWindow/Contents/Music"]
+margin_left = 127.0
+margin_top = 340.0
+margin_right = 422.0
+margin_bottom = 378.0
+custom_fonts/font = SubResource( 3 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="Control" parent="UI/LevelSettingsWindow/Contents/Music"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Left" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/Music/Buttons"]
+margin_left = -5.0
+margin_top = 241.0
+margin_right = 123.0
+margin_bottom = 369.0
+rect_rotation = 180.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/Music/Buttons"]
+margin_left = 425.0
+margin_top = 241.0
+margin_right = 553.0
+margin_bottom = 369.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="LevelSettingsButton" type="TextureButton" parent="UI"]
 margin_left = 708.0
 margin_top = 4.0
@@ -353,7 +440,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 window = NodePath("../LevelSettingsWindow")
-starting_position = Vector2( 150, 125 )
+starting_position = Vector2( 165, 130 )
 
 [node name="Grid" type="ParallaxBackground" parent="."]
 layer = 99
@@ -362,7 +449,6 @@ layer = 99
 motion_mirroring = Vector2( 1024, 512 )
 
 [node name="Sprite" type="Sprite" parent="Grid/Layer"]
-position = Vector2( 0.17923, 0.29937 )
 texture = ExtResource( 6 )
 centered = false
 

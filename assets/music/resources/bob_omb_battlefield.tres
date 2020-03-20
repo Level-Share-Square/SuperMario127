@@ -8,3 +8,5 @@ script = ExtResource( 1 )
 stream = ExtResource( 2 )
 volume_db = 0
 pitch_scale = 1
+title = "Bob Omb Battlefield"
+note = "Remix by Can of Nothing"

@@ -8,3 +8,5 @@ script = ExtResource( 1 )
 stream = ExtResource( 2 )
 volume_db = 0
 pitch_scale = 1
+title = "Mario's Pwnd Slide"
+note = "Remix by m477zorz"

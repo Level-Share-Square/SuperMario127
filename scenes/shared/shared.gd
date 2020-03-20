@@ -35,3 +35,6 @@ func destroy_objects_overlapping_position(position, remove_from_data):
 
 func update_background(area):
 	background_node.update_background(area)
+
+func _process(delta):
+	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")
