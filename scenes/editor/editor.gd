@@ -20,11 +20,22 @@ var lock_axis = "none"
 var lock_pos = 0
 var last_mouse_pos = Vector2(0, 0)
 
-func _input(event):
+var left_held = false
+var right_held = false
+
+func _unhandled_input(event):
 	if event.is_action_pressed("switch_placement_mode"):
 		placement_mode = "Tile" if placement_mode == "Drag" else "Drag"
 	elif event.is_action_pressed("toggle_surface_snap"):
 		surface_snap = !surface_snap
+	elif event.is_action_pressed("place"):
+		left_held = true
+	elif event.is_action_released("place"):
+		left_held = false
+	elif event.is_action_pressed("erase"):
+		right_held = true
+	elif event.is_action_released("erase"):
+		right_held = false
 
 func _ready():
 	var data = CurrentLevelData.level_data
@@ -62,10 +73,7 @@ func _process(delta):
 		var mouse_tile_pos = Vector2(floor(mouse_pos.x / 32), floor(mouse_pos.y / 32))
 		var tile_index = tile_util.get_tile_index_from_position(mouse_tile_pos, level_area.settings.size)
 		
-		if Input.is_action_just_pressed("place"):
-			pass
-		
-		if Input.is_action_pressed("place") and selected_box and selected_box.item:
+		if left_held and selected_box and selected_box.item:
 			var item = selected_box.item
 			var layer = 1 # magic numbers suck
 			
@@ -93,7 +101,7 @@ func _process(delta):
 					object.properties.scale = Vector2(1, 1)
 					object.properties.rotation_degrees = 0
 					shared_node.create_object(object, true)
-		elif Input.is_action_pressed("erase"):
+		elif right_held:
 			var layer = 1
 			if selected_box:
 				var item = selected_box.item

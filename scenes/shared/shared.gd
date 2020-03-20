@@ -2,9 +2,11 @@ extends LevelDataLoader
 
 export var tilemaps : NodePath
 export var objects : NodePath
+export var background : NodePath
 
 onready var tilemaps_node = get_node(tilemaps)
 onready var objects_node = get_node(objects)
+onready var background_node = get_node(background)
 
 func set_tile(index: int, layer: int, tileset_id: int, tile_id: int):
 	tilemaps_node.set_tile(index, layer, tileset_id, tile_id)
@@ -30,3 +32,6 @@ func destroy_objects_overlapping_position(position, remove_from_data):
 			level_area.objects.erase(object_node.level_object)
 		object_node.queue_free()
 	pass
+
+func update_background(area):
+	background_node.update_background(area)

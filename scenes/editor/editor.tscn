@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -17,9 +17,23 @@
 [ext_resource path="res://scenes/actors/objects/shine/icon.png" type="Texture" id=15]
 [ext_resource path="res://scenes/actors/objects/coin/preview.png" type="Texture" id=16]
 [ext_resource path="res://scenes/actors/objects/coin/icon.png" type="Texture" id=17]
+[ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=18]
+[ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=19]
+[ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=20]
+[ext_resource path="res://scenes/editor/window.gd" type="Script" id=21]
+[ext_resource path="res://scenes/shared/background/foregrounds/none/preview.png" type="Texture" id=22]
+[ext_resource path="res://scenes/editor/assets/outline.png" type="Texture" id=23]
+[ext_resource path="res://scenes/shared/background/backgrounds/night/night.png" type="Texture" id=24]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow_hover.png" type="Texture" id=25]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=26]
+[ext_resource path="res://scenes/editor/background_changer.gd" type="Script" id=27]
+[ext_resource path="res://scenes/editor/assets/level_settings.png" type="Texture" id=28]
+[ext_resource path="res://scenes/editor/assets/level_settings_hover.png" type="Texture" id=29]
+[ext_resource path="res://scenes/editor/assets/level_settings_press.png" type="Texture" id=30]
+[ext_resource path="res://scenes/editor/window_open_button.gd" type="Script" id=31]
 
 [sub_resource type="DynamicFont" id=1]
-size = 48
+size = 56
 use_filter = true
 font_data = ExtResource( 4 )
 
@@ -32,6 +46,7 @@ item_preview = NodePath("ItemPreview")
 shared = NodePath("Shared")
 
 [node name="Shared" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, -0.27018 )
 
 [node name="PlaceableItems" type="Node" parent="."]
 
@@ -146,27 +161,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Window" type="NinePatchRect" parent="UI"]
+[node name="LevelSettingsWindow" type="NinePatchRect" parent="UI"]
 visible = false
-margin_left = 149.028
-margin_top = 125.474
-margin_right = 1423.03
-margin_bottom = 790.474
+margin_left = 150.0
+margin_top = 125.0
+margin_right = 1424.0
+margin_bottom = 790.0
 rect_scale = Vector2( 0.333, 0.333 )
+mouse_filter = 0
+texture = ExtResource( 18 )
 region_rect = Rect2( 0, 0, 660, 610 )
 patch_margin_left = 40
 patch_margin_top = 110
 patch_margin_right = 40
 patch_margin_bottom = 40
+script = ExtResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="RichTextLabel" parent="UI/Window"]
+[node name="Title" type="RichTextLabel" parent="UI/LevelSettingsWindow"]
 margin_left = 24.0
 margin_top = 24.2632
 margin_right = 456.0
 margin_bottom = 102.263
+mouse_filter = 2
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_text = "Level Settings"
 text = "Level Settings"
@@ -174,15 +193,167 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="UI/Window"]
+[node name="CloseButton" type="TextureButton" parent="UI/LevelSettingsWindow"]
 margin_left = 1109.65
 margin_top = 12.9531
 margin_right = 1264.65
 margin_bottom = 93.9531
 rect_scale = Vector2( 0.95, 0.95 )
+texture_normal = ExtResource( 20 )
+texture_pressed = ExtResource( 20 )
+texture_hover = ExtResource( 19 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Contents" type="Control" parent="UI/LevelSettingsWindow"]
+anchor_bottom = 0.06
+margin_left = 17.0
+margin_top = 104.0
+margin_right = 1254.0
+margin_bottom = 606.1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundEdit" type="Control" parent="UI/LevelSettingsWindow/Contents"]
+margin_top = 30.0
+margin_right = 40.0
+margin_bottom = 70.0
+script = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+shared_node_path = NodePath("../../../../Shared")
+
+[node name="Preview" type="Control" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit"]
+margin_left = 80.0
+margin_right = 120.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Outline" type="TextureRect" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit/Preview"]
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 798.0
+margin_bottom = 467.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 23 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundPreview" type="TextureRect" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit/Preview"]
+margin_right = 768.0
+margin_bottom = 432.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForegroundPreview" type="TextureRect" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit/Preview"]
+margin_right = 768.0
+margin_bottom = 432.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundButtons" type="Control" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit/BackgroundButtons"]
+margin_left = -28.1108
+margin_right = 99.8892
+margin_bottom = 128.0
+rect_rotation = 180.0
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit/BackgroundButtons"]
+margin_left = 445.0
+margin_right = 573.0
+margin_bottom = 128.0
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForegroundButtons" type="Control" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit"]
+margin_top = 100.0
+margin_right = 40.0
+margin_bottom = 140.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit/ForegroundButtons"]
+margin_left = -28.1108
+margin_top = -7.49707
+margin_right = 99.8892
+margin_bottom = 120.503
+rect_rotation = 180.0
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit/ForegroundButtons"]
+margin_left = 445.0
+margin_top = -7.497
+margin_right = 573.0
+margin_bottom = 120.503
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelSettingsButton" type="TextureButton" parent="UI"]
+margin_left = 708.0
+margin_top = 4.0
+margin_right = 852.0
+margin_bottom = 156.0
+rect_scale = Vector2( 0.333, 0.333 )
+texture_normal = ExtResource( 28 )
+texture_pressed = ExtResource( 30 )
+texture_hover = ExtResource( 29 )
+script = ExtResource( 31 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+window = NodePath("../LevelSettingsWindow")
+starting_position = Vector2( 150, 125 )
 
 [node name="Grid" type="ParallaxBackground" parent="."]
 layer = 99
@@ -191,6 +362,7 @@ layer = 99
 motion_mirroring = Vector2( 1024, 512 )
 
 [node name="Sprite" type="Sprite" parent="Grid/Layer"]
+position = Vector2( 0.17923, 0.29937 )
 texture = ExtResource( 6 )
 centered = false
 

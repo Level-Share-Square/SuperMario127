@@ -130,12 +130,13 @@ func _physics_process(delta: float):
 	# Gravity
 	velocity += gravity * Vector2(0, gravity_scale)
 	
-	if test_move(transform, Vector2(velocity.x * delta, -1)) and !test_move(transform.translated(Vector2(0, -5)), Vector2(velocity.x * delta, 0)):
+	if test_move(transform, Vector2(velocity.x * delta, -1)) and !test_move(transform.translated(Vector2(0, -5)), Vector2(move_direction * 5, 0)) and is_grounded():
 		var space_state = get_world_2d().direct_space_state
 		var result = space_state.intersect_ray(position - Vector2(0, 5), position)
-		velocity.y = 0
+		velocity.y = -1
 		if not result.empty():
-			position.y = result.position.y + 2
+			position.x += move_direction * 5
+			position.y = result.position.y + 3
 	
 	if state != null:
 		disable_movement = state.disable_movement
