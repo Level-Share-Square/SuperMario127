@@ -5,7 +5,9 @@ export var speed = 5
 func load_in(level_data : LevelData, level_area : LevelArea):
 	position.x = get_viewport_rect().size.x / 2
 	position.y = (level_area.settings.size.y * 32) - (get_viewport_rect().size.y / 2)
+	update_limits(level_area)
 	
+func update_limits(level_area : LevelArea):	
 	limit_right = level_area.settings.size.x * 32
 	limit_bottom = level_area.settings.size.y * 32
 	

@@ -88,7 +88,14 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	self.level_data = level_data
 	self.level_area = level_area
 	
+	update_tilemaps()
+
+func update_tilemaps():
 	var settings = level_area.settings
+	
+	back_tilemap_node.clear()
+	middle_tilemap_node.clear()
+	front_tilemap_node.clear()
 	
 	for index in range(level_area.background_tiles.size()):
 		var tile = level_area.background_tiles[index]

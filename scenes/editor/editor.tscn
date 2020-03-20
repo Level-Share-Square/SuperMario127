@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -33,6 +33,9 @@
 [ext_resource path="res://scenes/editor/window_open_button.gd" type="Script" id=31]
 [ext_resource path="res://scenes/editor/assets/music_background.png" type="Texture" id=32]
 [ext_resource path="res://scenes/editor/music_changer.gd" type="Script" id=33]
+[ext_resource path="res://scenes/editor/level_size.gd" type="Script" id=34]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=35]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=36]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -45,6 +48,10 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 112
 font_data = ExtResource( 4 )
 
 [node name="Editor" type="Node2D"]
@@ -172,7 +179,6 @@ __meta__ = {
 }
 
 [node name="LevelSettingsWindow" type="NinePatchRect" parent="UI"]
-visible = false
 margin_left = 165.0
 margin_top = 130.0
 margin_right = 1218.0
@@ -215,6 +221,14 @@ texture_hover = ExtResource( 19 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/CloseButton"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/CloseButton"]
+stream = ExtResource( 36 )
+volume_db = -10.0
 
 [node name="Contents" type="Control" parent="UI/LevelSettingsWindow"]
 anchor_bottom = 0.06
@@ -349,6 +363,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
 [node name="Music" type="Control" parent="UI/LevelSettingsWindow/Contents"]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -426,6 +448,211 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/Contents/Music"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/Contents/Music"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="LevelSize" type="Control" parent="UI/LevelSettingsWindow/Contents"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 34 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+shared_node_path = NodePath("../../../../Shared")
+camera_node_path = NodePath("../../../../Camera2D")
+
+[node name="Middle" type="TextureRect" parent="UI/LevelSettingsWindow/Contents/LevelSize"]
+margin_left = 787.283
+margin_top = 212.103
+margin_right = 1445.28
+margin_bottom = 689.103
+rect_scale = Vector2( 0.22, 0.3 )
+texture = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/LevelSettingsWindow/Contents/LevelSize/Middle"]
+margin_left = -35.0
+margin_top = 27.0
+margin_right = 552.0
+margin_bottom = 451.0
+rect_scale = Vector2( 1.25, 1 )
+custom_fonts/font = SubResource( 4 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="Control" parent="UI/LevelSettingsWindow/Contents/LevelSize"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="Control" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Out" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Left"]
+margin_left = 696.842
+margin_top = 248.5
+margin_right = 824.842
+margin_bottom = 376.5
+rect_rotation = 180.0
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="In" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Left"]
+margin_left = 696.842
+margin_top = 188.0
+margin_right = 824.842
+margin_bottom = 316.0
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="Control" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons"]
+margin_left = 200.0
+margin_right = 240.0
+margin_bottom = 40.0
+
+[node name="Out" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Right"]
+margin_left = 696.842
+margin_top = 248.5
+margin_right = 824.842
+margin_bottom = 376.5
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="In" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Right"]
+margin_left = 696.842
+margin_top = 188.0
+margin_right = 824.842
+margin_bottom = 316.0
+rect_rotation = 180.0
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Up" type="Control" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons"]
+margin_left = 215.0
+margin_right = 255.0
+margin_bottom = 40.0
+
+[node name="Out" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Up"]
+margin_left = 545.403
+margin_top = 119.6
+margin_right = 673.403
+margin_bottom = 247.6
+rect_rotation = -89.9999
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="In" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Up"]
+margin_left = 614.42
+margin_top = 119.6
+margin_right = 742.42
+margin_bottom = 247.6
+rect_rotation = 90.0
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Down" type="Control" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons"]
+margin_left = 215.0
+margin_top = 200.0
+margin_right = 255.0
+margin_bottom = 240.0
+
+[node name="Out" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Down"]
+margin_left = 545.403
+margin_top = 119.6
+margin_right = 673.403
+margin_bottom = 247.6
+rect_rotation = 90.0
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="In" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Down"]
+margin_left = 614.42
+margin_top = 119.6
+margin_right = 742.42
+margin_bottom = 247.6
+rect_rotation = -90.0
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/Contents/LevelSize"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/Contents/LevelSize"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="Tween" type="Tween" parent="UI/LevelSettingsWindow"]
+
 [node name="LevelSettingsButton" type="TextureButton" parent="UI"]
 margin_left = 708.0
 margin_top = 4.0
@@ -442,6 +669,14 @@ __meta__ = {
 window = NodePath("../LevelSettingsWindow")
 starting_position = Vector2( 165, 130 )
 
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelSettingsButton"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsButton"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
 [node name="Grid" type="ParallaxBackground" parent="."]
 layer = 99
 
@@ -449,6 +684,7 @@ layer = 99
 motion_mirroring = Vector2( 1024, 512 )
 
 [node name="Sprite" type="Sprite" parent="Grid/Layer"]
+position = Vector2( -0.131775, 0 )
 texture = ExtResource( 6 )
 centered = false
 

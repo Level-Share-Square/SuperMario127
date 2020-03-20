@@ -35,4 +35,4 @@ func update_background(area):
 		
 		parallax_layer.add_child(sprite_instance)
 		parallax_node.add_child(parallax_layer)
-		parallax_node.scroll_base_offset.y = (area.settings.size.y * 32) / 3
+		parallax_node.scroll_base_offset.y = (area.settings.size.y * 32) - 640
