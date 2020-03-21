@@ -17,7 +17,7 @@ func _process(delta):
 			
 			z_index = item.z_index
 			if editor.placement_mode == "Tile" or !item.is_object:
-				position = mouse_grid_pos
+				position = mouse_grid_pos + item.tile_mode_offset
 			else:
 				if Input.is_action_pressed("8_pixel_lock"):
 					mouse_pos = Vector2(stepify(mouse_pos.x, 8), stepify(mouse_pos.y, 8))

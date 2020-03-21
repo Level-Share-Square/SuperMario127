@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -41,6 +41,8 @@
 [ext_resource path="res://scenes/editor/assets/layer_icon_hover.png" type="Texture" id=39]
 [ext_resource path="res://scenes/editor/assets/layer_icon_press.png" type="Texture" id=40]
 [ext_resource path="res://scenes/editor/layer_switcher_button.gd" type="Script" id=41]
+[ext_resource path="res://scenes/actors/objects/metal_platform/icon.png" type="Texture" id=42]
+[ext_resource path="res://scenes/actors/objects/metal_platform/2_wide.png" type="Texture" id=43]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -147,6 +149,16 @@ change_to = "Coin"
 icon = ExtResource( 17 )
 preview = ExtResource( 16 )
 
+[node name="MetalPlatform" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 3
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+change_to = "MetalPlatform"
+icon = ExtResource( 42 )
+preview = ExtResource( 43 )
+
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
 
@@ -197,6 +209,7 @@ margin_top = 376.0
 margin_right = 888.0
 margin_bottom = 552.0
 rect_scale = Vector2( 0.28, 0.28 )
+action_mode = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -708,6 +721,7 @@ margin_top = 4.0
 margin_right = 852.0
 margin_bottom = 156.0
 rect_scale = Vector2( 0.333, 0.333 )
+action_mode = 0
 texture_normal = ExtResource( 28 )
 texture_pressed = ExtResource( 30 )
 texture_hover = ExtResource( 29 )
@@ -732,6 +746,7 @@ margin_top = 3.0
 margin_right = 800.0
 margin_bottom = 163.0
 rect_scale = Vector2( 0.333, 0.333 )
+action_mode = 0
 texture_normal = ExtResource( 38 )
 texture_pressed = ExtResource( 40 )
 texture_hover = ExtResource( 39 )
