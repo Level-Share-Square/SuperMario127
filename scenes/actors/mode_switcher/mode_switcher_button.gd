@@ -40,7 +40,7 @@ func _physics_process(delta):
 		tween_hover.start()
 	last_hovered = is_hovered()
 		
-func _input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("switch_modes"):
 		_pressed()
 

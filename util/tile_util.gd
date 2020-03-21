@@ -13,7 +13,7 @@ static func expand_left(area, tiles):
 	var new_tiles = [[0, 0]]
 	var index = 1
 	for tile in tiles:
-		if index % int(area.settings.size.x) == 0 and index != 0 and index != tiles.size():
+		if index % int(area.settings.size.x) == 0:
 			new_tiles.append([0, 0])
 		new_tiles.append(tile)
 		index += 1

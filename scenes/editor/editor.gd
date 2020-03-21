@@ -78,7 +78,8 @@ func _process(delta):
 			var layer = 1 # magic numbers suck
 			
 			if !item.is_object:
-				shared_node.set_tile(tile_index, layer, item.tileset_id, item.tile_id)
+				if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:
+					shared_node.set_tile(tile_index, layer, item.tileset_id, item.tile_id)
 			else:
 				var object_pos
 				if placement_mode == "Tile":
@@ -112,5 +113,6 @@ func _process(delta):
 					elif Input.is_action_just_pressed("erase"):
 						shared_node.destroy_objects_overlapping_position(mouse_pos, true)
 				else:
-					shared_node.set_tile(tile_index, layer, 0, 0)
+					if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:
+						shared_node.set_tile(tile_index, layer, 0, 0)
 		last_mouse_pos = mouse_pos

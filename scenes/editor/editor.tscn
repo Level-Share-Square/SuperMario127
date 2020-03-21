@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -36,6 +36,7 @@
 [ext_resource path="res://scenes/editor/level_size.gd" type="Script" id=34]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=35]
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=36]
+[ext_resource path="res://scenes/editor/level_name_editor.gd" type="Script" id=37]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -54,6 +55,20 @@ font_data = ExtResource( 4 )
 size = 112
 font_data = ExtResource( 4 )
 
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 16
+border_width_right = 16
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 4 )
+
 [node name="Editor" type="Node2D"]
 script = ExtResource( 1 )
 nodes_to_load = [ NodePath("Shared"), NodePath("Camera2D") ]
@@ -63,7 +78,7 @@ item_preview = NodePath("ItemPreview")
 shared = NodePath("Shared")
 
 [node name="Shared" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, -0.27018 )
+position = Vector2( 0.198608, -0.468788 )
 
 [node name="PlaceableItems" type="Node" parent="."]
 
@@ -179,7 +194,6 @@ __meta__ = {
 }
 
 [node name="LevelSettingsWindow" type="NinePatchRect" parent="UI"]
-visible = false
 margin_left = 165.0
 margin_top = 130.0
 margin_right = 1218.0
@@ -233,9 +247,9 @@ volume_db = -10.0
 
 [node name="Contents" type="Control" parent="UI/LevelSettingsWindow"]
 anchor_bottom = 0.06
-margin_left = 17.0
+margin_left = 17.4044
 margin_top = 104.0
-margin_right = 1036.0
+margin_right = 1036.4
 margin_bottom = 498.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -651,6 +665,31 @@ volume_db = -10.0
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/Contents/LevelSize"]
 stream = ExtResource( 36 )
 volume_db = -10.0
+
+[node name="LevelName" type="Control" parent="UI/LevelSettingsWindow/Contents"]
+margin_left = -17.0
+margin_top = -104.0
+margin_right = 23.0
+margin_bottom = -64.0
+script = ExtResource( 37 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="UI/LevelSettingsWindow/Contents/LevelName"]
+margin_left = 577.0
+margin_top = 134.0
+margin_right = 1025.0
+margin_bottom = 212.0
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
+context_menu_enabled = false
+placeholder_text = "Level Name"
+placeholder_alpha = 0.35
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tween" type="Tween" parent="UI/LevelSettingsWindow"]
 

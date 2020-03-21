@@ -1,6 +1,31 @@
 extends Camera2D
 
 export var speed = 5
+var up_held = false
+var down_held = false
+var left_held = false
+var right_held = false
+
+func _unhandled_input(event):
+	if event.is_action_pressed("editor_up"):
+		up_held = true
+	elif event.is_action_released("editor_up"):
+		up_held = false
+	
+	if event.is_action_pressed("editor_down"):
+		down_held = true
+	elif event.is_action_released("editor_down"):
+		down_held = false
+		
+	if event.is_action_pressed("editor_left"):
+		left_held = true
+	elif event.is_action_released("editor_left"):
+		left_held = false
+		
+	if event.is_action_pressed("editor_right"):
+		right_held = true
+	elif event.is_action_released("editor_right"):
+		right_held = false
 
 func load_in(level_data : LevelData, level_area : LevelArea):
 	position.x = get_viewport_rect().size.x / 2
@@ -27,15 +52,15 @@ func check_borders():
 		position.y = limit_bottom - (get_viewport_rect().size.y / 2)
 
 func _physics_process(delta):
-	if Input.is_action_pressed("editor_up"):
+	if up_held:
 		position.y -= speed
 		check_borders()
-	elif Input.is_action_pressed("editor_down"):
+	elif down_held:
 		position.y += speed
 		check_borders()
-	if Input.is_action_pressed("editor_left"):
+	if left_held:
 		position.x -= speed
 		check_borders()
-	elif Input.is_action_pressed("editor_right"):
+	elif right_held:
 		position.x += speed
 		check_borders()

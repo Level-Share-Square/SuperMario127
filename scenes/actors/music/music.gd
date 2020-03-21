@@ -35,6 +35,6 @@ func _process(delta):
 	last_mode = get_tree().get_current_scene().mode
 	last_song = CurrentLevelData.level_data.areas[0].settings.music
 
-func _input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("mute"):
 		volume_multiplier = 0 if volume_multiplier == 1 else 1
