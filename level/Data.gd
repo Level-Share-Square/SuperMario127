@@ -25,7 +25,6 @@ func get_area(result, is_json) -> LevelArea:
 		for tile in tiles:
 			area.background_tiles.append(tile)
 	for object_result in result.objects:
-		object_result.type_id -= 1 # sorry for being a big dum dum
 		var object = get_object(object_result, is_json)
 		area.objects.append(object)
 	return area
@@ -71,25 +70,25 @@ func get_object(result, is_json) -> LevelObject:
 		object.properties = result.properties
 	else:
 		object = LevelObject.new()
-		object.name = result.type
 		object.properties = result.properties
-		object.id = 1
-		if object.name == "Entrance": # i don't even care lol
-			object.id = 0
-		elif object.name == "Coin":
-			object.id = 1
-		elif object.name == "Shine":
-			object.id = 2
-		elif object.name == "MetalPlatform":
-			object.id = 3
+		object.type_id = 1
+		if result.type == "Entrance": # i don't even care lol
+			object.type_id = 0
+		elif result.type == "Coin":
+			object.type_id = 1
+		elif result.type == "Shine":
+			object.type_id = 2
+		elif result.type == "MetalPlatform":
+			object.type_id = 3
 	return object
 
 func load_in(code):
 	var result
 	var is_json = false
 	if code[0] == "{":
-		result = JSON.decode(code)
+		result = JSON.parse(code).result
 		is_json = true
+		result.format_version = "0.4.0"
 	else:
 		result = rle_util.decode(code)
 
@@ -109,7 +108,7 @@ func get_encoded_level_data():
 	
 	var level_string = ""
 	var format_version = "0.4.0"
-	var level_name = "My Level"
+	var level_name = name
 	
 	
 	level_string += format_version + ","
@@ -134,17 +133,17 @@ func get_encoded_level_data():
 		# Tiles
 		for index in range(settings.size.x * settings.size.y):
 			var encoded_tile = area.foreground_tiles[index]
-			var appended_tile = encoded_tile[0] + encoded_tile[1]
+			var appended_tile = str(encoded_tile[0]).pad_zeros(2) + str(encoded_tile[1])
 			saved_tiles.append(appended_tile)	
 			
 		for index in range(settings.size.x * settings.size.y):
 			var encoded_tile_background = area.background_tiles[index]
-			var appended_tile_background = encoded_tile_background[0] + encoded_tile_background[1]
+			var appended_tile_background = str(encoded_tile_background[0]).pad_zeros(2) + str(encoded_tile_background[1])
 			saved_background_tiles.append(appended_tile_background)	
 	
 		for index in range(settings.size.x * settings.size.y):
 			var encoded_tile_very_foreground = area.very_foreground_tiles[index]
-			var appended_tile_very_foreground = encoded_tile_very_foreground[0] + encoded_tile_very_foreground[1]
+			var appended_tile_very_foreground = str(encoded_tile_very_foreground[0]).pad_zeros(2) + str(encoded_tile_very_foreground[1])
 			saved_foreground_tiles.append(appended_tile_very_foreground)	
 		saved_tiles = rle_util.encode(saved_tiles)
 		saved_background_tiles = rle_util.encode(saved_background_tiles)
@@ -167,7 +166,7 @@ func get_encoded_level_data():
 		
 		for index in area.objects:
 			var added_object = ""
-			added_object += index.id + ","
+			added_object += str(index.type_id) + ","
 			for property in index.properties:
 				added_object += value_util.encode_value(value_util.get_true_value(index.properties[property])) + ","
 			added_object.erase(added_object.length() - 1, 1)

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://level/Resource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+contents = "0.4.0,My%20Level,[V280x30,1,1,1~000*2240,020*15,000*65,020*15,000*65~000*2400~000*2400~0,V2112x876,V21x1,0]"

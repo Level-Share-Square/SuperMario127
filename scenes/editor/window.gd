@@ -1,5 +1,7 @@
 extends NinePatchRect
 
+signal window_opened
+
 onready var close_button = $CloseButton
 onready var hover_sound = $CloseButton/HoverSound
 onready var click_sound = $CloseButton/ClickSound
@@ -17,6 +19,7 @@ func _gui_input(event):
 		rect_global_position = get_global_mouse_position() - drag_position
 
 func open():
+	emit_signal("window_opened")
 	visible = true
 	tween.interpolate_property(self, "rect_scale",
 		Vector2(0, 0), Vector2(0.4, 0.4), 0.15,
