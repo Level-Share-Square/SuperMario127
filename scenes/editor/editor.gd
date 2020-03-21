@@ -23,6 +23,16 @@ var last_mouse_pos = Vector2(0, 0)
 var left_held = false
 var right_held = false
 
+export var layer = 1
+
+func switch_layers():
+	if layer == 0:
+		layer = 1
+	elif layer == 1:
+		layer = 2
+	else:
+		layer = 0
+
 func _unhandled_input(event):
 	if event.is_action_pressed("switch_placement_mode"):
 		placement_mode = "Tile" if placement_mode == "Drag" else "Drag"
@@ -75,7 +85,6 @@ func _process(delta):
 		
 		if left_held and selected_box and selected_box.item:
 			var item = selected_box.item
-			var layer = 1 # magic numbers suck
 			
 			if !item.is_object:
 				if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:
@@ -103,7 +112,6 @@ func _process(delta):
 					object.properties.rotation_degrees = 0
 					shared_node.create_object(object, true)
 		elif right_held:
-			var layer = 1
 			if selected_box:
 				var item = selected_box.item
 				if item.is_object:

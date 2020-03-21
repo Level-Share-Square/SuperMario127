@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -15,8 +15,8 @@
 [ext_resource path="res://assets/tiles/grass/right_slope_icon.png" type="Texture" id=13]
 [ext_resource path="res://assets/tiles/grass/left_slope_icon.png" type="Texture" id=14]
 [ext_resource path="res://scenes/actors/objects/shine/icon.png" type="Texture" id=15]
-[ext_resource path="res://scenes/actors/objects/coin/preview.png" type="Texture" id=16]
-[ext_resource path="res://scenes/actors/objects/coin/icon.png" type="Texture" id=17]
+[ext_resource path="res://scenes/actors/objects/yellow_coin/preview.png" type="Texture" id=16]
+[ext_resource path="res://scenes/actors/objects/yellow_coin/icon.png" type="Texture" id=17]
 [ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=18]
 [ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=19]
 [ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=20]
@@ -37,6 +37,10 @@
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=35]
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=36]
 [ext_resource path="res://scenes/editor/level_name_editor.gd" type="Script" id=37]
+[ext_resource path="res://scenes/editor/assets/layer_icon.png" type="Texture" id=38]
+[ext_resource path="res://scenes/editor/assets/layer_icon_hover.png" type="Texture" id=39]
+[ext_resource path="res://scenes/editor/assets/layer_icon_press.png" type="Texture" id=40]
+[ext_resource path="res://scenes/editor/layer_switcher_button.gd" type="Script" id=41]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -67,6 +71,10 @@ corner_radius_bottom_left = 24
 
 [sub_resource type="DynamicFont" id=6]
 size = 32
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 64
 font_data = ExtResource( 4 )
 
 [node name="Editor" type="Node2D"]
@@ -715,6 +723,40 @@ stream = ExtResource( 35 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsButton"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="LayerSwitcher" type="TextureButton" parent="UI"]
+margin_left = 640.0
+margin_top = 3.0
+margin_right = 800.0
+margin_bottom = 163.0
+rect_scale = Vector2( 0.333, 0.333 )
+texture_normal = ExtResource( 38 )
+texture_pressed = ExtResource( 40 )
+texture_hover = ExtResource( 39 )
+script = ExtResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+editor_node_path = NodePath("../..")
+
+[node name="Label" type="Label" parent="UI/LayerSwitcher"]
+margin_left = 22.0
+margin_top = 40.0
+margin_right = 136.0
+margin_bottom = 155.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0.258824, 0.270588, 0.658824, 1 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LayerSwitcher"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LayerSwitcher"]
 stream = ExtResource( 36 )
 volume_db = -10.0
 

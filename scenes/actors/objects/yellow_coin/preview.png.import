@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/frame3.png-01c0b9e7cf29b3bda2625d4c03004978.stex"
+path="res://.import/preview.png-f4436fed87cd78821acf5a72c77c82a5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/coin/yellow/frame3.png"
-dest_files=[ "res://.import/frame3.png-01c0b9e7cf29b3bda2625d4c03004978.stex" ]
+source_file="res://scenes/actors/objects/yellow_coin/preview.png"
+dest_files=[ "res://.import/preview.png-f4436fed87cd78821acf5a72c77c82a5.stex" ]
 
 [params]
 
