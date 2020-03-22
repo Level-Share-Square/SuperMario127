@@ -14,7 +14,7 @@ func _ready():
 	blacklisted_states = ["SlideState", "GetupState"]
 
 func _start_check(delta):
-	return dive_buffer > 0 and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0)) and !character.is_walled()
+	return dive_buffer > 0 and !(abs(character.velocity.x) <= 150 and character.is_grounded()) and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0)) and !character.is_walled()
 
 func _start(delta):
 	var dive_player = character.get_node("dive_sounds")
@@ -47,8 +47,8 @@ func _update(delta):
 		last_above_rot_limit = false
 	else:
 		if (!last_above_rot_limit):
-			sprite.rotation_degrees = 185
-		sprite.rotation_degrees += 0.35
+			sprite.rotation_degrees = 185 * character.facing_direction
+		sprite.rotation_degrees += 0.15 * character.facing_direction
 		last_above_rot_limit = true
 		
 func _stop(delta):
