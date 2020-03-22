@@ -1,7 +1,0 @@
-Known Issues
-
-Standing Fall
-If you stand right on the edge of a tile, the game will treat Mario as if he is falling.
-
-Floating Rotation
-When diving, the sprite's rotation is different than the collision rotation.

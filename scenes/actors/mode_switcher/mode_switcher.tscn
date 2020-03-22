@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/actors/mode_switcher/ui/play_button.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/mode_switcher/ui/stop_button.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/mode_switcher/ui/coin.png" type="Texture" id=3]
+[ext_resource path="res://scenes/shared/sounds/play_button_reverb.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/actors/mode_switcher/mode_switcher_button.gd" type="Script" id=5]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=6]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 101
+
+[node name="Fader" type="ColorRect" parent="."]
+visible = false
+margin_right = 768.0
+margin_bottom = 432.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="Fader"]
+
+[node name="ModeSwitcherButton" type="TextureButton" parent="."]
+margin_left = 652.0
+margin_top = 154.903
+margin_right = 852.0
+margin_bottom = 354.903
+rect_scale = Vector2( 0.333, 0.333 )
+rect_pivot_offset = Vector2( 60, 300 )
+action_mode = 0
+texture_normal = ExtResource( 1 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+texture_play = ExtResource( 1 )
+texture_stop = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="ModeSwitcherButton"]
+
+[node name="TweenHover" type="Tween" parent="ModeSwitcherButton"]
+
+[node name="TweenCoin" type="Tween" parent="ModeSwitcherButton"]
+
+[node name="TweenDisappear" type="Tween" parent="ModeSwitcherButton"]
+
+[node name="Sound" type="AudioStreamPlayer" parent="ModeSwitcherButton"]
+stream = ExtResource( 4 )
+volume_db = -10.0
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="ModeSwitcherButton"]
+stream = ExtResource( 6 )
+volume_db = -10.0
+
+[node name="Coin" type="Sprite" parent="ModeSwitcherButton"]
+show_behind_parent = true
+texture = ExtResource( 3 )
+centered = false

@@ -1,0 +1,1455 @@
+[gd_scene load_steps=74 format=2]
+
+[ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
+[ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/editor/PlaceableItem.gd" type="Script" id=3]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/tiles/bricks/icon.png" type="Texture" id=5]
+[ext_resource path="res://scenes/editor/assets/grid.png" type="Texture" id=6]
+[ext_resource path="res://scenes/editor/camera_controls.gd" type="Script" id=7]
+[ext_resource path="res://scenes/editor/item_preview.gd" type="Script" id=8]
+[ext_resource path="res://scenes/editor/placeable_items_container.gd" type="Script" id=9]
+[ext_resource path="res://assets/tiles/grass/icon.png" type="Texture" id=10]
+[ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=12]
+[ext_resource path="res://assets/tiles/grass/right_slope_icon.png" type="Texture" id=13]
+[ext_resource path="res://assets/tiles/grass/left_slope_icon.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/shine/icon.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/yellow_coin/preview.png" type="Texture" id=16]
+[ext_resource path="res://scenes/actors/objects/yellow_coin/icon.png" type="Texture" id=17]
+[ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=18]
+[ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=19]
+[ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=20]
+[ext_resource path="res://scenes/editor/window.gd" type="Script" id=21]
+[ext_resource path="res://scenes/shared/background/foregrounds/none/preview.png" type="Texture" id=22]
+[ext_resource path="res://scenes/editor/assets/outline.png" type="Texture" id=23]
+[ext_resource path="res://scenes/shared/background/backgrounds/night/night.png" type="Texture" id=24]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow_hover.png" type="Texture" id=25]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=26]
+[ext_resource path="res://scenes/editor/background_changer.gd" type="Script" id=27]
+[ext_resource path="res://scenes/editor/assets/level_settings.png" type="Texture" id=28]
+[ext_resource path="res://scenes/editor/assets/level_settings_hover.png" type="Texture" id=29]
+[ext_resource path="res://scenes/editor/assets/level_settings_press.png" type="Texture" id=30]
+[ext_resource path="res://scenes/editor/window_open_button.gd" type="Script" id=31]
+[ext_resource path="res://scenes/editor/assets/music_background.png" type="Texture" id=32]
+[ext_resource path="res://scenes/editor/music_changer.gd" type="Script" id=33]
+[ext_resource path="res://scenes/editor/level_size.gd" type="Script" id=34]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=35]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=36]
+[ext_resource path="res://scenes/editor/level_name_editor.gd" type="Script" id=37]
+[ext_resource path="res://scenes/editor/assets/layer_icon.png" type="Texture" id=38]
+[ext_resource path="res://scenes/editor/assets/layer_icon_hover.png" type="Texture" id=39]
+[ext_resource path="res://scenes/editor/assets/layer_icon_press.png" type="Texture" id=40]
+[ext_resource path="res://scenes/editor/layer_switcher_button.gd" type="Script" id=41]
+[ext_resource path="res://scenes/actors/objects/metal_platform/icon.png" type="Texture" id=42]
+[ext_resource path="res://scenes/actors/objects/metal_platform/2_wide.png" type="Texture" id=43]
+[ext_resource path="res://scenes/editor/load_button.gd" type="Script" id=44]
+[ext_resource path="res://scenes/editor/assets/save_icon.png" type="Texture" id=45]
+[ext_resource path="res://scenes/editor/assets/save_icon_press.png" type="Texture" id=46]
+[ext_resource path="res://scenes/editor/assets/save_icon_hover.png" type="Texture" id=47]
+[ext_resource path="res://scenes/editor/save_button.gd" type="Script" id=48]
+[ext_resource path="res://scenes/editor/copy_button.gd" type="Script" id=49]
+[ext_resource path="res://scenes/actors/objects/big_tree/big_tree.png" type="Texture" id=50]
+[ext_resource path="res://scenes/actors/objects/big_tree/icon.png" type="Texture" id=51]
+
+[sub_resource type="DynamicFont" id=1]
+size = 56
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 28
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 112
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 16
+border_width_right = 16
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="Theme" id=16]
+Button/colors/font_color = Color( 0, 0, 0, 1 )
+Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
+Button/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+CheckBox/colors/font_color = Color( 0, 0, 0, 1 )
+CheckBox/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+CheckBox/colors/font_color_hover = Color( 0, 0, 0, 1 )
+CheckBox/colors/font_color_hover_pressed = Color( 0, 0, 0, 1 )
+CheckBox/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+CheckBox/constants/check_vadjust = 0
+CheckBox/constants/hseparation = 4
+CheckBox/fonts/font = null
+CheckBox/icons/checked = null
+CheckBox/icons/radio_checked = null
+CheckBox/icons/radio_unchecked = null
+CheckBox/icons/unchecked = null
+CheckBox/styles/disabled = null
+CheckBox/styles/focus = null
+CheckBox/styles/hover = null
+CheckBox/styles/hover_pressed = null
+CheckBox/styles/normal = null
+CheckBox/styles/pressed = null
+CheckButton/colors/font_color = Color( 0, 0, 0, 1 )
+CheckButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+CheckButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
+CheckButton/colors/font_color_hover_pressed = Color( 0, 0, 0, 1 )
+CheckButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+CheckButton/constants/check_vadjust = 0
+CheckButton/constants/hseparation = 4
+CheckButton/fonts/font = null
+CheckButton/icons/off = null
+CheckButton/icons/off_disabled = null
+CheckButton/icons/on = null
+CheckButton/icons/on_disabled = null
+CheckButton/styles/disabled = null
+CheckButton/styles/focus = null
+CheckButton/styles/hover = null
+CheckButton/styles/hover_pressed = null
+CheckButton/styles/normal = null
+CheckButton/styles/pressed = null
+ColorPicker/constants/h_width = 30
+ColorPicker/constants/label_width = 10
+ColorPicker/constants/margin = 4
+ColorPicker/constants/sv_height = 256
+ColorPicker/constants/sv_width = 256
+ColorPicker/icons/add_preset = null
+ColorPicker/icons/color_hue = null
+ColorPicker/icons/color_sample = null
+ColorPicker/icons/overbright_indicator = null
+ColorPicker/icons/preset_bg = null
+ColorPicker/icons/screen_picker = null
+ColorPickerButton/colors/font_color = Color( 0, 0, 0, 1 )
+ColorPickerButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+ColorPickerButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
+ColorPickerButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+ColorPickerButton/constants/hseparation = 2
+ColorPickerButton/fonts/font = null
+ColorPickerButton/icons/bg = null
+ColorPickerButton/styles/disabled = null
+ColorPickerButton/styles/focus = null
+ColorPickerButton/styles/hover = null
+ColorPickerButton/styles/normal = null
+ColorPickerButton/styles/pressed = null
+Dialogs/constants/button_margin = 32
+Dialogs/constants/margin = 8
+FileDialog/colors/files_disabled = Color( 0, 0, 0, 1 )
+FileDialog/colors/folder_icon_modulate = Color( 0, 0, 0, 1 )
+FileDialog/icons/folder = null
+FileDialog/icons/parent_folder = null
+FileDialog/icons/reload = null
+FileDialog/icons/toggle_hidden = null
+Fonts/fonts/large = null
+Fonts/fonts/normal = null
+GraphEdit/colors/activity = Color( 0, 0, 0, 1 )
+GraphEdit/colors/grid_major = Color( 0, 0, 0, 1 )
+GraphEdit/colors/grid_minor = Color( 0, 0, 0, 1 )
+GraphEdit/colors/selection_fill = Color( 0, 0, 0, 1 )
+GraphEdit/colors/selection_stroke = Color( 0, 0, 0, 1 )
+GraphEdit/constants/bezier_len_neg = 160
+GraphEdit/constants/bezier_len_pos = 80
+GraphEdit/constants/port_grab_distance_horizontal = 48
+GraphEdit/constants/port_grab_distance_vertical = 6
+GraphEdit/icons/minus = null
+GraphEdit/icons/more = null
+GraphEdit/icons/reset = null
+GraphEdit/icons/snap = null
+GraphEdit/styles/bg = null
+GraphNode/colors/close_color = Color( 0, 0, 0, 1 )
+GraphNode/colors/resizer_color = Color( 0, 0, 0, 1 )
+GraphNode/colors/title_color = Color( 0, 0, 0, 1 )
+GraphNode/constants/close_offset = 18
+GraphNode/constants/port_offset = 3
+GraphNode/constants/separation = 1
+GraphNode/constants/title_offset = 20
+GraphNode/fonts/title_font = null
+GraphNode/icons/close = null
+GraphNode/icons/port = null
+GraphNode/icons/resizer = null
+GraphNode/styles/breakpoint = null
+GraphNode/styles/comment = null
+GraphNode/styles/commentfocus = null
+GraphNode/styles/defaultfocus = null
+GraphNode/styles/defaultframe = null
+GraphNode/styles/frame = null
+GraphNode/styles/position = null
+GraphNode/styles/selectedframe = null
+GridContainer/constants/hseparation = 4
+GridContainer/constants/vseparation = 4
+HBoxContainer/constants/separation = 4
+HScrollBar/icons/decrement = null
+HScrollBar/icons/decrement_highlight = null
+HScrollBar/icons/increment = null
+HScrollBar/icons/increment_highlight = null
+HScrollBar/styles/grabber = SubResource( 7 )
+HScrollBar/styles/grabber_highlight = SubResource( 8 )
+HScrollBar/styles/grabber_pressed = SubResource( 9 )
+HScrollBar/styles/scroll = SubResource( 10 )
+HScrollBar/styles/scroll_focus = SubResource( 11 )
+HSeparator/constants/separation = 4
+HSeparator/styles/separator = null
+HSlider/icons/grabber = null
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = null
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = null
+HSlider/styles/slider = null
+HSplitContainer/constants/autohide = 1
+HSplitContainer/constants/separation = 12
+HSplitContainer/icons/grabber = null
+HSplitContainer/styles/bg = null
+Icons/icons/close = null
+ItemList/colors/font_color = Color( 0, 0, 0, 1 )
+ItemList/colors/font_color_selected = Color( 0, 0, 0, 1 )
+ItemList/colors/guide_color = Color( 0, 0, 0, 1 )
+ItemList/constants/hseparation = 4
+ItemList/constants/icon_margin = 4
+ItemList/constants/line_separation = 2
+ItemList/constants/vseparation = 2
+ItemList/fonts/font = null
+ItemList/styles/bg = null
+ItemList/styles/bg_focus = null
+ItemList/styles/cursor = null
+ItemList/styles/cursor_unfocused = null
+ItemList/styles/selected = null
+ItemList/styles/selected_focus = null
+Label/colors/font_color = Color( 0, 0, 0, 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+Label/colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/fonts/font = null
+Label/styles/normal = null
+LineEdit/colors/clear_button_color = Color( 0, 0, 0, 1 )
+LineEdit/colors/clear_button_color_pressed = Color( 0, 0, 0, 1 )
+LineEdit/colors/cursor_color = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0, 0, 0, 1 )
+LineEdit/colors/selection_color = Color( 0, 0, 0, 1 )
+LineEdit/constants/minimum_spaces = 12
+LineEdit/fonts/font = null
+LineEdit/icons/clear = null
+LineEdit/styles/focus = null
+LineEdit/styles/normal = null
+LineEdit/styles/read_only = null
+LinkButton/colors/font_color = Color( 0, 0, 0, 1 )
+LinkButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
+LinkButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+LinkButton/constants/underline_spacing = 2
+LinkButton/fonts/font = null
+LinkButton/styles/focus = null
+MarginContainer/constants/margin_bottom = 0
+MarginContainer/constants/margin_left = 0
+MarginContainer/constants/margin_right = 0
+MarginContainer/constants/margin_top = 0
+MenuButton/colors/font_color = Color( 0, 0, 0, 1 )
+MenuButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+MenuButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
+MenuButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+MenuButton/constants/hseparation = 3
+MenuButton/fonts/font = null
+MenuButton/styles/disabled = null
+MenuButton/styles/focus = null
+MenuButton/styles/hover = null
+MenuButton/styles/normal = null
+MenuButton/styles/pressed = null
+OptionButton/colors/font_color = Color( 0, 0, 0, 1 )
+OptionButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+OptionButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
+OptionButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+OptionButton/constants/arrow_margin = 2
+OptionButton/constants/hseparation = 2
+OptionButton/fonts/font = null
+OptionButton/icons/arrow = null
+OptionButton/styles/disabled = null
+OptionButton/styles/focus = null
+OptionButton/styles/hover = null
+OptionButton/styles/normal = null
+OptionButton/styles/pressed = null
+Panel/styles/panel = null
+PanelContainer/styles/panel = null
+PopupDialog/styles/panel = null
+PopupMenu/colors/font_color = Color( 0, 0, 0, 1 )
+PopupMenu/colors/font_color_accel = Color( 0, 0, 0, 1 )
+PopupMenu/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+PopupMenu/colors/font_color_hover = Color( 0, 0, 0, 1 )
+PopupMenu/constants/hseparation = 4
+PopupMenu/constants/vseparation = 4
+PopupMenu/fonts/font = null
+PopupMenu/icons/checked = null
+PopupMenu/icons/radio_checked = null
+PopupMenu/icons/radio_unchecked = null
+PopupMenu/icons/submenu = null
+PopupMenu/icons/unchecked = null
+PopupMenu/styles/hover = null
+PopupMenu/styles/labeled_separator_left = null
+PopupMenu/styles/labeled_separator_right = null
+PopupMenu/styles/panel = null
+PopupMenu/styles/panel_disabled = null
+PopupMenu/styles/separator = null
+PopupPanel/styles/panel = null
+ProgressBar/colors/font_color = Color( 0, 0, 0, 1 )
+ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+ProgressBar/fonts/font = null
+ProgressBar/styles/bg = null
+ProgressBar/styles/fg = null
+RichTextLabel/colors/default_color = Color( 0, 0, 0, 1 )
+RichTextLabel/colors/font_color_selected = Color( 0, 0, 0, 1 )
+RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+RichTextLabel/colors/selection_color = Color( 0, 0, 0, 1 )
+RichTextLabel/constants/line_separation = 1
+RichTextLabel/constants/shadow_as_outline = 0
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/table_hseparation = 3
+RichTextLabel/constants/table_vseparation = 3
+RichTextLabel/fonts/bold_font = null
+RichTextLabel/fonts/bold_italics_font = null
+RichTextLabel/fonts/italics_font = null
+RichTextLabel/fonts/mono_font = null
+RichTextLabel/fonts/normal_font = null
+RichTextLabel/styles/focus = null
+RichTextLabel/styles/normal = null
+ScrollContainer/styles/bg = null
+SpinBox/icons/updown = null
+TabContainer/colors/font_color_bg = Color( 0, 0, 0, 1 )
+TabContainer/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+TabContainer/colors/font_color_fg = Color( 0, 0, 0, 1 )
+TabContainer/constants/hseparation = 4
+TabContainer/constants/label_valign_bg = 2
+TabContainer/constants/label_valign_fg = 0
+TabContainer/constants/side_margin = 8
+TabContainer/constants/top_margin = 24
+TabContainer/fonts/font = null
+TabContainer/icons/decrement = null
+TabContainer/icons/decrement_highlight = null
+TabContainer/icons/increment = null
+TabContainer/icons/increment_highlight = null
+TabContainer/icons/menu = null
+TabContainer/icons/menu_highlight = null
+TabContainer/styles/panel = null
+TabContainer/styles/tab_bg = null
+TabContainer/styles/tab_disabled = null
+TabContainer/styles/tab_fg = null
+Tabs/colors/font_color_bg = Color( 0, 0, 0, 1 )
+Tabs/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+Tabs/colors/font_color_fg = Color( 0, 0, 0, 1 )
+Tabs/constants/hseparation = 4
+Tabs/constants/label_valign_bg = 2
+Tabs/constants/label_valign_fg = 0
+Tabs/constants/top_margin = 24
+Tabs/fonts/font = null
+Tabs/icons/close = null
+Tabs/icons/decrement = null
+Tabs/icons/decrement_highlight = null
+Tabs/icons/increment = null
+Tabs/icons/increment_highlight = null
+Tabs/styles/button = null
+Tabs/styles/button_pressed = null
+Tabs/styles/panel = null
+Tabs/styles/tab_bg = null
+Tabs/styles/tab_disabled = null
+Tabs/styles/tab_fg = null
+TextEdit/colors/background_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/bookmark_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/brace_mismatch_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/breakpoint_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/caret_background_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/caret_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/code_folding_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/completion_background_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/completion_existing_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/completion_font_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/completion_scroll_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/completion_selected_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/current_line_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/executing_line_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/font_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/font_color_readonly = Color( 0, 0, 0, 1 )
+TextEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
+TextEdit/colors/function_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/line_number_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/mark_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/member_variable_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/number_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/safe_line_number_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/selection_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/symbol_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/word_highlighted_color = Color( 0, 0, 0, 1 )
+TextEdit/constants/completion_lines = 7
+TextEdit/constants/completion_max_width = 50
+TextEdit/constants/completion_scroll_width = 3
+TextEdit/constants/line_spacing = 4
+TextEdit/fonts/font = null
+TextEdit/icons/fold = null
+TextEdit/icons/folded = null
+TextEdit/icons/space = null
+TextEdit/icons/tab = null
+TextEdit/styles/completion = null
+TextEdit/styles/focus = null
+TextEdit/styles/normal = null
+TextEdit/styles/read_only = null
+ToolButton/colors/font_color = Color( 0, 0, 0, 1 )
+ToolButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+ToolButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
+ToolButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+ToolButton/constants/hseparation = 3
+ToolButton/fonts/font = null
+ToolButton/styles/disabled = null
+ToolButton/styles/focus = null
+ToolButton/styles/hover = null
+ToolButton/styles/normal = null
+ToolButton/styles/pressed = null
+TooltipLabel/colors/font_color = Color( 0, 0, 0, 1 )
+TooltipLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+TooltipLabel/constants/shadow_offset_x = 1
+TooltipLabel/constants/shadow_offset_y = 1
+TooltipLabel/fonts/font = null
+TooltipPanel/styles/panel = null
+Tree/colors/cursor_color = Color( 0, 0, 0, 1 )
+Tree/colors/custom_button_font_highlight = Color( 0, 0, 0, 1 )
+Tree/colors/drop_position_color = Color( 0, 0, 0, 1 )
+Tree/colors/font_color = Color( 0, 0, 0, 1 )
+Tree/colors/font_color_selected = Color( 0, 0, 0, 1 )
+Tree/colors/guide_color = Color( 0, 0, 0, 1 )
+Tree/colors/relationship_line_color = Color( 0, 0, 0, 1 )
+Tree/colors/selection_color = Color( 0, 0, 0, 1 )
+Tree/colors/title_button_color = Color( 0, 0, 0, 1 )
+Tree/constants/button_margin = 4
+Tree/constants/draw_guides = 1
+Tree/constants/draw_relationship_lines = 0
+Tree/constants/hseparation = 4
+Tree/constants/item_margin = 12
+Tree/constants/scroll_border = 4
+Tree/constants/scroll_speed = 12
+Tree/constants/vseparation = 4
+Tree/fonts/font = null
+Tree/fonts/title_button_font = null
+Tree/icons/arrow = null
+Tree/icons/arrow_collapsed = null
+Tree/icons/checked = null
+Tree/icons/select_arrow = null
+Tree/icons/unchecked = null
+Tree/icons/updown = null
+Tree/styles/bg = null
+Tree/styles/bg_focus = null
+Tree/styles/button_pressed = null
+Tree/styles/cursor = null
+Tree/styles/cursor_unfocused = null
+Tree/styles/custom_button = null
+Tree/styles/custom_button_hover = null
+Tree/styles/custom_button_pressed = null
+Tree/styles/selected = null
+Tree/styles/selected_focus = null
+Tree/styles/title_button_hover = null
+Tree/styles/title_button_normal = null
+Tree/styles/title_button_pressed = null
+VBoxContainer/constants/separation = 4
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/styles/grabber = SubResource( 12 )
+VScrollBar/styles/grabber_highlight = SubResource( 13 )
+VScrollBar/styles/grabber_pressed = SubResource( 13 )
+VScrollBar/styles/scroll = SubResource( 14 )
+VScrollBar/styles/scroll_focus = SubResource( 15 )
+VSeparator/constants/separation = 4
+VSeparator/styles/separator = null
+VSlider/icons/grabber = null
+VSlider/icons/grabber_disabled = null
+VSlider/icons/grabber_highlight = null
+VSlider/icons/tick = null
+VSlider/styles/grabber_area = null
+VSlider/styles/slider = null
+VSplitContainer/constants/autohide = 1
+VSplitContainer/constants/separation = 12
+VSplitContainer/icons/grabber = null
+VSplitContainer/styles/bg = null
+WindowDialog/colors/title_color = Color( 0, 0, 0, 1 )
+WindowDialog/constants/close_h_ofs = 18
+WindowDialog/constants/close_v_ofs = 18
+WindowDialog/constants/scaleborder_size = 4
+WindowDialog/constants/title_height = 20
+WindowDialog/fonts/title_font = null
+WindowDialog/icons/close = null
+WindowDialog/icons/close_highlight = null
+WindowDialog/styles/panel = null
+
+[sub_resource type="StyleBoxFlat" id=17]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="DynamicFont" id=18]
+size = 32
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.0705882, 0, 0.231373, 1 )
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="DynamicFont" id=21]
+size = 48
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=22]
+size = 64
+font_data = ExtResource( 4 )
+
+[node name="Editor" type="Node2D"]
+script = ExtResource( 1 )
+nodes_to_load = [ NodePath("Shared"), NodePath("Camera2D") ]
+placeable_items = NodePath("PlaceableItems")
+placeable_items_button_container = NodePath("UI/PlaceableItemsContainer")
+item_preview = NodePath("ItemPreview")
+shared = NodePath("Shared")
+
+[node name="Shared" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0.198608, -0.468788 )
+
+[node name="PlaceableItems" type="Node" parent="."]
+
+[node name="Grass" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 2
+change_to = "GrassSlopeLeft"
+icon = ExtResource( 10 )
+preview = ExtResource( 10 )
+
+[node name="GrassSlopeRight" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 2
+tile_id = 3
+change_to = "Grass"
+icon = ExtResource( 13 )
+preview = ExtResource( 13 )
+
+[node name="GrassSlopeLeft" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 2
+tile_id = 2
+change_to = "GrassSlopeRight"
+icon = ExtResource( 14 )
+preview = ExtResource( 14 )
+
+[node name="Brick" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 1
+change_to = "Brick"
+icon = ExtResource( 5 )
+preview = ExtResource( 5 )
+
+[node name="Entrance" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+is_object = true
+object_center = Vector2( 15, 16 )
+z_index = -1
+change_to = "Entrance"
+icon = ExtResource( 12 )
+preview = ExtResource( 12 )
+
+[node name="Shine" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 2
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "Shine"
+icon = ExtResource( 15 )
+preview = ExtResource( 15 )
+
+[node name="Coin" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 1
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "Coin"
+icon = ExtResource( 17 )
+preview = ExtResource( 16 )
+
+[node name="MetalPlatform" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 3
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+change_to = "MetalPlatform"
+icon = ExtResource( 42 )
+preview = ExtResource( 43 )
+
+[node name="BigTree" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 4
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+z_index = -9
+change_to = "BigTree"
+icon = ExtResource( 51 )
+preview = ExtResource( 50 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="PlaceableItemsContainer" type="Sprite" parent="UI"]
+position = Vector2( 0, 0.397257 )
+scale = Vector2( 0.333, 0.333 )
+texture = ExtResource( 11 )
+centered = false
+script = ExtResource( 9 )
+normal_color = Color( 1, 1, 1, 1 )
+selected_color = Color( 0.313726, 0.309804, 0.882353, 1 )
+
+[node name="Pause" type="ColorRect" parent="UI"]
+pause_mode = 2
+visible = false
+anchor_right = 0.4
+margin_right = 460.8
+margin_bottom = 432.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.501961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="UI/Pause"]
+anchor_top = 0.35
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 144.0
+margin_top = -39.4
+margin_right = -163.2
+margin_bottom = 155.0
+mouse_filter = 2
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=150 freq=2][center][rainbow freq=0.3][wave]PAUSE[/wave][/rainbow][/center]"
+text = "PAUSE"
+scroll_active = false
+custom_effects = [ null, null, null ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StopButton" type="TextureButton" parent="UI"]
+visible = false
+margin_left = 712.0
+margin_top = 376.0
+margin_right = 888.0
+margin_bottom = 552.0
+rect_scale = Vector2( 0.28, 0.28 )
+action_mode = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelSettingsWindow" type="NinePatchRect" parent="UI"]
+visible = false
+margin_left = 165.0
+margin_top = 130.0
+margin_right = 1218.0
+margin_bottom = 680.0
+rect_scale = Vector2( 0.4, 0.4 )
+mouse_filter = 0
+texture = ExtResource( 18 )
+region_rect = Rect2( 0, 0, 660, 610 )
+patch_margin_left = 40
+patch_margin_top = 110
+patch_margin_right = 40
+patch_margin_bottom = 40
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="RichTextLabel" parent="UI/LevelSettingsWindow"]
+margin_left = 24.0
+margin_top = 24.2632
+margin_right = 456.0
+margin_bottom = 102.263
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_text = "Level Settings"
+text = "Level Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="TextureButton" parent="UI/LevelSettingsWindow"]
+margin_left = 888.65
+margin_top = 12.953
+margin_right = 1043.65
+margin_bottom = 93.953
+rect_scale = Vector2( 0.95, 0.95 )
+texture_normal = ExtResource( 20 )
+texture_pressed = ExtResource( 20 )
+texture_hover = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/CloseButton"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/CloseButton"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="Contents" type="Control" parent="UI/LevelSettingsWindow"]
+anchor_bottom = 0.06
+margin_left = 17.4044
+margin_top = 104.0
+margin_right = 1036.4
+margin_bottom = 498.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundEdit" type="Control" parent="UI/LevelSettingsWindow/Contents"]
+margin_top = 30.0
+margin_right = 40.0
+margin_bottom = 70.0
+script = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+shared_node_path = NodePath("../../../../Shared")
+
+[node name="Preview" type="Control" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit"]
+margin_left = 80.0
+margin_right = 120.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Outline" type="TextureRect" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit/Preview"]
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 798.0
+margin_bottom = 467.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 23 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundPreview" type="TextureRect" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit/Preview"]
+margin_right = 768.0
+margin_bottom = 432.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForegroundPreview" type="TextureRect" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit/Preview"]
+margin_right = 768.0
+margin_bottom = 432.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundButtons" type="Control" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit/BackgroundButtons"]
+margin_left = -28.1108
+margin_right = 99.8892
+margin_bottom = 128.0
+rect_rotation = 180.0
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit/BackgroundButtons"]
+margin_left = 445.0
+margin_right = 573.0
+margin_bottom = 128.0
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForegroundButtons" type="Control" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit"]
+margin_top = 100.0
+margin_right = 40.0
+margin_bottom = 140.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit/ForegroundButtons"]
+margin_left = -28.1108
+margin_top = -7.49707
+margin_right = 99.8892
+margin_bottom = 120.503
+rect_rotation = 180.0
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit/ForegroundButtons"]
+margin_left = 445.0
+margin_top = -7.497
+margin_right = 573.0
+margin_bottom = 120.503
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="Music" type="Control" parent="UI/LevelSettingsWindow/Contents"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 33 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="UI/LevelSettingsWindow/Contents/Music"]
+margin_left = 85.0
+margin_top = 270.0
+margin_right = 464.0
+margin_bottom = 380.0
+texture = ExtResource( 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicTitle" type="Label" parent="UI/LevelSettingsWindow/Contents/Music"]
+margin_left = 97.0
+margin_top = 279.0
+margin_right = 452.0
+margin_bottom = 330.0
+custom_fonts/font = SubResource( 2 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicNote" type="Label" parent="UI/LevelSettingsWindow/Contents/Music"]
+margin_left = 127.0
+margin_top = 340.0
+margin_right = 422.0
+margin_bottom = 378.0
+custom_fonts/font = SubResource( 3 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="Control" parent="UI/LevelSettingsWindow/Contents/Music"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Left" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/Music/Buttons"]
+margin_left = -5.0
+margin_top = 241.0
+margin_right = 123.0
+margin_bottom = 369.0
+rect_rotation = 180.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/Music/Buttons"]
+margin_left = 425.0
+margin_top = 241.0
+margin_right = 553.0
+margin_bottom = 369.0
+rect_scale = Vector2( 0.3, 0.3 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/Contents/Music"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/Contents/Music"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="LevelSize" type="Control" parent="UI/LevelSettingsWindow/Contents"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 34 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+shared_node_path = NodePath("../../../../Shared")
+camera_node_path = NodePath("../../../../Camera2D")
+
+[node name="Middle" type="TextureRect" parent="UI/LevelSettingsWindow/Contents/LevelSize"]
+margin_left = 787.283
+margin_top = 212.103
+margin_right = 1445.28
+margin_bottom = 689.103
+rect_scale = Vector2( 0.22, 0.3 )
+texture = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/LevelSettingsWindow/Contents/LevelSize/Middle"]
+margin_left = -35.0
+margin_top = 27.0
+margin_right = 552.0
+margin_bottom = 451.0
+rect_scale = Vector2( 1.25, 1 )
+custom_fonts/font = SubResource( 4 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="Control" parent="UI/LevelSettingsWindow/Contents/LevelSize"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="Control" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Out" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Left"]
+margin_left = 696.842
+margin_top = 248.5
+margin_right = 824.842
+margin_bottom = 376.5
+rect_rotation = 180.0
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="In" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Left"]
+margin_left = 696.842
+margin_top = 188.0
+margin_right = 824.842
+margin_bottom = 316.0
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="Control" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons"]
+margin_left = 200.0
+margin_right = 240.0
+margin_bottom = 40.0
+
+[node name="Out" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Right"]
+margin_left = 696.842
+margin_top = 248.5
+margin_right = 824.842
+margin_bottom = 376.5
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="In" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Right"]
+margin_left = 696.842
+margin_top = 188.0
+margin_right = 824.842
+margin_bottom = 316.0
+rect_rotation = 180.0
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Up" type="Control" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons"]
+margin_left = 215.0
+margin_right = 255.0
+margin_bottom = 40.0
+
+[node name="Out" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Up"]
+margin_left = 545.403
+margin_top = 119.6
+margin_right = 673.403
+margin_bottom = 247.6
+rect_rotation = -89.9999
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="In" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Up"]
+margin_left = 614.42
+margin_top = 119.6
+margin_right = 742.42
+margin_bottom = 247.6
+rect_rotation = 90.0
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Down" type="Control" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons"]
+margin_left = 215.0
+margin_top = 200.0
+margin_right = 255.0
+margin_bottom = 240.0
+
+[node name="Out" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Down"]
+margin_left = 545.403
+margin_top = 119.6
+margin_right = 673.403
+margin_bottom = 247.6
+rect_rotation = 90.0
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="In" type="TextureButton" parent="UI/LevelSettingsWindow/Contents/LevelSize/Buttons/Down"]
+margin_left = 614.42
+margin_top = 119.6
+margin_right = 742.42
+margin_bottom = 247.6
+rect_rotation = -90.0
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 26 )
+texture_pressed = ExtResource( 26 )
+texture_hover = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/Contents/LevelSize"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/Contents/LevelSize"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="LevelName" type="Control" parent="UI/LevelSettingsWindow/Contents"]
+margin_left = -17.0
+margin_top = -104.0
+margin_right = 23.0
+margin_bottom = -64.0
+script = ExtResource( 37 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="UI/LevelSettingsWindow/Contents/LevelName"]
+margin_left = 577.0
+margin_top = 134.0
+margin_right = 1025.0
+margin_bottom = 212.0
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
+context_menu_enabled = false
+placeholder_text = "Level Name"
+placeholder_alpha = 0.35
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="UI/LevelSettingsWindow"]
+
+[node name="LevelCodeWindow" type="NinePatchRect" parent="UI"]
+visible = false
+margin_left = 165.0
+margin_top = 130.0
+margin_right = 1218.0
+margin_bottom = 680.0
+rect_scale = Vector2( 0.4, 0.4 )
+mouse_filter = 0
+texture = ExtResource( 18 )
+region_rect = Rect2( 0, 0, 660, 610 )
+patch_margin_left = 40
+patch_margin_top = 110
+patch_margin_right = 40
+patch_margin_bottom = 40
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="RichTextLabel" parent="UI/LevelCodeWindow"]
+margin_left = 24.0
+margin_top = 24.2632
+margin_right = 456.0
+margin_bottom = 102.263
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_text = "Level Code"
+text = "Level Code"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="TextureButton" parent="UI/LevelCodeWindow"]
+margin_left = 888.65
+margin_top = 12.953
+margin_right = 1043.65
+margin_bottom = 93.953
+rect_scale = Vector2( 0.95, 0.95 )
+texture_normal = ExtResource( 20 )
+texture_pressed = ExtResource( 20 )
+texture_hover = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelCodeWindow/CloseButton"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelCodeWindow/CloseButton"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="Contents" type="Control" parent="UI/LevelCodeWindow"]
+anchor_bottom = 0.06
+margin_left = 17.4044
+margin_top = 104.0
+margin_right = 1036.4
+margin_bottom = 498.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit" type="TextEdit" parent="UI/LevelCodeWindow/Contents"]
+margin_left = 18.0
+margin_top = 122.0
+margin_right = 1000.0
+margin_bottom = 405.0
+rect_rotation = 0.0197835
+theme = SubResource( 16 )
+custom_styles/normal = SubResource( 17 )
+custom_fonts/font = SubResource( 18 )
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.188235, 0.258824, 0.494118, 1 )
+custom_colors/completion_font_color = Color( 0, 0, 0, 1 )
+context_menu_enabled = false
+v_scroll_speed = 0.0
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoadButton" type="Button" parent="UI/LevelCodeWindow/Contents"]
+margin_left = 534.307
+margin_top = 6.79156
+margin_right = 934.307
+margin_bottom = 96.7916
+custom_styles/hover = SubResource( 19 )
+custom_styles/pressed = SubResource( 20 )
+custom_styles/normal = SubResource( 20 )
+custom_fonts/font = SubResource( 21 )
+shortcut_in_tooltip = false
+action_mode = 0
+text = "Load Level"
+script = ExtResource( 44 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+window_path = NodePath("../..")
+text_edit_path = NodePath("../TextEdit")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelCodeWindow/Contents/LoadButton"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelCodeWindow/Contents/LoadButton"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="CopyButton" type="Button" parent="UI/LevelCodeWindow/Contents"]
+margin_left = 82.2546
+margin_top = 6.79156
+margin_right = 482.255
+margin_bottom = 96.7916
+custom_styles/hover = SubResource( 19 )
+custom_styles/pressed = SubResource( 20 )
+custom_styles/normal = SubResource( 20 )
+custom_fonts/font = SubResource( 21 )
+shortcut_in_tooltip = false
+action_mode = 0
+text = "Copy Text"
+script = ExtResource( 49 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text_edit_path = NodePath("../TextEdit")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelCodeWindow/Contents/CopyButton"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelCodeWindow/Contents/CopyButton"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="Tween" type="Tween" parent="UI/LevelCodeWindow"]
+
+[node name="LevelSettingsButton" type="TextureButton" parent="UI"]
+margin_left = 708.0
+margin_top = 4.0
+margin_right = 852.0
+margin_bottom = 156.0
+rect_scale = Vector2( 0.333, 0.333 )
+action_mode = 0
+texture_normal = ExtResource( 28 )
+texture_pressed = ExtResource( 30 )
+texture_hover = ExtResource( 29 )
+script = ExtResource( 31 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+window = NodePath("../LevelSettingsWindow")
+starting_position = Vector2( 165, 130 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelSettingsButton"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsButton"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="LayerSwitcher" type="TextureButton" parent="UI"]
+margin_left = 580.0
+margin_top = 3.0
+margin_right = 740.0
+margin_bottom = 163.0
+rect_scale = Vector2( 0.333, 0.333 )
+action_mode = 0
+texture_normal = ExtResource( 38 )
+texture_pressed = ExtResource( 40 )
+texture_hover = ExtResource( 39 )
+script = ExtResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+editor_node_path = NodePath("../..")
+
+[node name="Label" type="Label" parent="UI/LayerSwitcher"]
+margin_left = 22.0
+margin_top = 40.0
+margin_right = 136.0
+margin_bottom = 155.0
+custom_fonts/font = SubResource( 22 )
+custom_colors/font_color = Color( 0.258824, 0.270588, 0.658824, 1 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LayerSwitcher"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LayerSwitcher"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="SaveButton" type="TextureButton" parent="UI"]
+margin_left = 645.0
+margin_top = 6.0
+margin_right = 789.0
+margin_bottom = 158.0
+rect_scale = Vector2( 0.333, 0.333 )
+action_mode = 0
+texture_normal = ExtResource( 45 )
+texture_pressed = ExtResource( 46 )
+texture_hover = ExtResource( 47 )
+script = ExtResource( 48 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+window = NodePath("../LevelCodeWindow")
+starting_position = Vector2( 165, 130 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/SaveButton"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/SaveButton"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="Grid" type="ParallaxBackground" parent="."]
+layer = 99
+
+[node name="Layer" type="ParallaxLayer" parent="Grid"]
+motion_mirroring = Vector2( 1024, 512 )
+
+[node name="Sprite" type="Sprite" parent="Grid/Layer"]
+texture = ExtResource( 6 )
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_top = -70
+limit_smoothed = true
+smoothing_enabled = true
+smoothing_speed = 15.0
+editor_draw_screen = false
+script = ExtResource( 7 )
+speed = 7
+
+[node name="ItemPreview" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.501961 )
+z_index = -1
+script = ExtResource( 8 )

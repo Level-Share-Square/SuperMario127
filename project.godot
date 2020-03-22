@@ -12,194 +12,195 @@ _global_script_classes=[ {
 "base": "State",
 "class": "BonkedState",
 "language": "GDScript",
-"path": "res://src/states/Bonked.gd"
+"path": "res://scenes/actors/mario/states/Bonked.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
-"path": "res://src/playerCharController.gd"
-}, {
-"base": "Camera2D",
-"class": "DesignerCameraFollow",
-"language": "GDScript",
-"path": "res://src/cameraScript.gd"
+"path": "res://scenes/actors/mario/mario.gd"
 }, {
 "base": "State",
 "class": "DiveState",
 "language": "GDScript",
-"path": "res://src/states/Dive.gd"
-}, {
-"base": "AnimatedSprite",
-"class": "EditorObject",
-"language": "GDScript",
-"path": "res://src/level/EditorObject.gd"
+"path": "res://scenes/actors/mario/states/Dive.gd"
 }, {
 "base": "State",
 "class": "FallState",
 "language": "GDScript",
-"path": "res://src/states/Fall.gd"
-}, {
-"base": "GameObject",
-"class": "GameAreaCollisionObject",
-"language": "GDScript",
-"path": "res://src/base_objects/GameAreaCollisionObject.gd"
-}, {
-"base": "AnimatedSprite",
-"class": "GameObject",
-"language": "GDScript",
-"path": "res://src/level/GameObject.gd"
-}, {
-"base": "GameObject",
-"class": "GameSolidObject",
-"language": "GDScript",
-"path": "res://src/base_objects/GameSolidObject.gd"
+"path": "res://scenes/actors/mario/states/Fall.gd"
 }, {
 "base": "Resource",
-"class": "IdMappings",
+"class": "ForegroundResource",
 "language": "GDScript",
-"path": "res://src/IdMapResource.gd"
+"path": "res://classes/ForegroundResource.gd"
 }, {
-"base": "Reference",
-"class": "JSONBeautifier",
+"base": "Node2D",
+"class": "GameObject",
 "language": "GDScript",
-"path": "res://addons/json_beautifier/json_beautifier.gd"
+"path": "res://classes/GameObject.gd"
+}, {
+"base": "State",
+"class": "GetupState",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/states/Getup.gd"
+}, {
+"base": "Resource",
+"class": "IdMap",
+"language": "GDScript",
+"path": "res://classes/IdMapResource.gd"
 }, {
 "base": "State",
 "class": "JumpState",
 "language": "GDScript",
-"path": "res://src/states/Jump.gd"
-}, {
-"base": "Resource",
-"class": "Level",
-"language": "GDScript",
-"path": "res://src/level/Level.gd"
-}, {
-"base": "Resource",
-"class": "LevelArea",
-"language": "GDScript",
-"path": "res://src/level/Area.gd"
-}, {
-"base": "Resource",
-"class": "LevelAreaSettings",
-"language": "GDScript",
-"path": "res://src/level/AreaSettings.gd"
+"path": "res://scenes/actors/mario/states/Jump.gd"
 }, {
 "base": "Reference",
-"class": "LevelEditor",
+"class": "LevelArea",
 "language": "GDScript",
-"path": "res://src/level/Editor.gd"
+"path": "res://level/Area.gd"
 }, {
-"base": "Resource",
-"class": "LevelJSON",
+"base": "Reference",
+"class": "LevelAreaSettings",
 "language": "GDScript",
-"path": "res://src/level/JSON.gd"
+"path": "res://level/AreaSettings.gd"
 }, {
-"base": "Resource",
+"base": "Reference",
+"class": "LevelData",
+"language": "GDScript",
+"path": "res://level/Data.gd"
+}, {
+"base": "Node2D",
+"class": "LevelDataLoader",
+"language": "GDScript",
+"path": "res://classes/LevelDataLoader.gd"
+}, {
+"base": "Reference",
 "class": "LevelObject",
 "language": "GDScript",
-"path": "res://src/level/Object.gd"
+"path": "res://level/Object.gd"
+}, {
+"base": "Resource",
+"class": "LevelResource",
+"language": "GDScript",
+"path": "res://level/Resource.gd"
 }, {
 "base": "Resource",
 "class": "LevelSong",
 "language": "GDScript",
-"path": "res://src/level/Song.gd"
-}, {
-"base": "Resource",
-"class": "LevelSongs",
-"language": "GDScript",
-"path": "res://src/level/Songs.gd"
+"path": "res://classes/LevelSong.gd"
 }, {
 "base": "Resource",
 "class": "LevelTileset",
 "language": "GDScript",
-"path": "res://src/level/Tileset.gd"
+"path": "res://classes/LevelTileset.gd"
 }, {
 "base": "Resource",
-"class": "LevelTilesets",
+"class": "ParallaxLayerResource",
 "language": "GDScript",
-"path": "res://src/level/Tilesets.gd"
+"path": "res://classes/ParallaxLayerResource.gd"
 }, {
-"base": "Resource",
-"class": "ParallaxResource",
+"base": "Node",
+"class": "PlaceableItem",
 "language": "GDScript",
-"path": "res://src/ParallaxResource.gd"
+"path": "res://scenes/editor/PlaceableItem.gd"
 }, {
 "base": "Resource",
 "class": "SkyResource",
 "language": "GDScript",
-"path": "res://src/SkyResource.gd"
+"path": "res://classes/SkyResource.gd"
 }, {
 "base": "State",
 "class": "SlideState",
 "language": "GDScript",
-"path": "res://src/states/Slide.gd"
+"path": "res://scenes/actors/mario/states/Slide.gd"
 }, {
 "base": "State",
 "class": "SpinningState",
 "language": "GDScript",
-"path": "res://src/states/Spinning.gd"
+"path": "res://scenes/actors/mario/states/Spinning.gd"
 }, {
-"base": "Resource",
+"base": "Node",
 "class": "State",
 "language": "GDScript",
-"path": "res://src/State.gd"
-}, {
-"base": "TextureButton",
-"class": "TileButton",
-"language": "GDScript",
-"path": "res://src/UIButton.gd"
+"path": "res://scenes/actors/mario/State.gd"
 }, {
 "base": "State",
 "class": "WallJumpState",
 "language": "GDScript",
-"path": "res://src/states/WallJump.gd"
+"path": "res://scenes/actors/mario/states/WallJump.gd"
 }, {
 "base": "State",
 "class": "WallSlideState",
 "language": "GDScript",
-"path": "res://src/states/WallSlide.gd"
+"path": "res://scenes/actors/mario/states/WallSlide.gd"
+}, {
+"base": "Reference",
+"class": "clipboard_util",
+"language": "GDScript",
+"path": "res://util/clipboard_util.gd"
+}, {
+"base": "Reference",
+"class": "rle_util",
+"language": "GDScript",
+"path": "res://util/rle_util.gd"
+}, {
+"base": "Reference",
+"class": "tile_util",
+"language": "GDScript",
+"path": "res://util/tile_util.gd"
+}, {
+"base": "Reference",
+"class": "value_util",
+"language": "GDScript",
+"path": "res://util/value_util.gd"
 } ]
 _global_script_class_icons={
 "BonkedState": "",
 "Character": "",
-"DesignerCameraFollow": "",
 "DiveState": "",
-"EditorObject": "",
 "FallState": "",
-"GameAreaCollisionObject": "",
+"ForegroundResource": "",
 "GameObject": "",
-"GameSolidObject": "",
-"IdMappings": "",
-"JSONBeautifier": "",
+"GetupState": "",
+"IdMap": "",
 "JumpState": "",
-"Level": "",
 "LevelArea": "",
 "LevelAreaSettings": "",
-"LevelEditor": "",
-"LevelJSON": "",
+"LevelData": "",
+"LevelDataLoader": "",
 "LevelObject": "",
+"LevelResource": "",
 "LevelSong": "",
-"LevelSongs": "",
 "LevelTileset": "",
-"LevelTilesets": "",
-"ParallaxResource": "",
+"ParallaxLayerResource": "",
+"PlaceableItem": "",
 "SkyResource": "",
 "SlideState": "",
 "SpinningState": "",
 "State": "",
-"TileButton": "",
 "WallJumpState": "",
-"WallSlideState": ""
+"WallSlideState": "",
+"clipboard_util": "",
+"rle_util": "",
+"tile_util": "",
+"value_util": ""
 }
 
 [application]
 
-config/name="Super Mario 127 "
-run/main_scene="res://scenes/MainScene.tscn"
-boot_splash/image="res://assets/startup.png"
+config/name="Super Mario 127"
+run/main_scene="res://scenes/editor/editor.tscn"
+boot_splash/image="res://assets/misc/startup.png"
 boot_splash/bg_color=Color( 0.341176, 0, 0.498039, 1 )
-config/icon="res://assets/icon.png"
-config/windows_native_icon="res://assets/icon.ico"
+config/icon="res://assets/misc/icon.png"
+config/windows_native_icon="res://assets/misc/icon.ico"
+
+[autoload]
+
+mode_switcher="*res://scenes/actors/mode_switcher/mode_switcher.tscn"
+scene_transitions="*res://scenes/actors/scene_transitions/CanvasLayer.tscn"
+music="*res://scenes/actors/music/music.tscn"
+CurrentLevelData="*res://scenes/shared/level_data.tscn"
 
 [debug]
 
@@ -211,14 +212,14 @@ window/size/width=768
 window/size/height=432
 window/size/test_width=768
 window/size/test_height=432
-mouse_cursor/custom_image="res://assets/textures/cursor/normal.png"
+mouse_cursor/custom_image="res://assets/misc/cursor.png"
 mouse_cursor/tooltip_position_offset=Vector2( 0, 0 )
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "mixing-desk" )
+enabled=PoolStringArray(  )
 
 [input]
 
@@ -272,11 +273,6 @@ mute={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":54,"unicode":0,"echo":false,"script":null)
  ]
 }
-reset={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
- ]
-}
 zoom_in={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":61,"unicode":0,"echo":false,"script":null)
@@ -292,9 +288,8 @@ zoom_out={
 dive={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
-, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":7,"axis_value":1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":2,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
 switch_modes={
@@ -308,32 +303,21 @@ switch_placement_mode={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":72,"unicode":0,"echo":false,"script":null)
  ]
 }
-click={
-"deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
- ]
-}
 spin={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":2,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
 copy_level={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":8,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
 paste_level={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":86,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":9,"pressure":0.0,"pressed":false,"script":null)
- ]
-}
-right_click={
-"deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 switch_layers={
@@ -393,6 +377,40 @@ fullscreen={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
  ]
 }
+reload={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":9,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+test_at_pos={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
+ ]
+}
+place={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+erase={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+lock_tile_axis={
+"deadzone": 0.5,
+"events": [  ]
+}
+toggle_surface_snap={
+"deadzone": 0.5,
+"events": [  ]
+}
+text_release_focus={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -409,4 +427,4 @@ quality/driver/driver_name="GLES2"
 quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_environment="res://default_env.tres"
+environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
