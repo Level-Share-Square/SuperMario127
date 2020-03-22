@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -49,6 +49,8 @@
 [ext_resource path="res://scenes/editor/assets/save_icon_hover.png" type="Texture" id=47]
 [ext_resource path="res://scenes/editor/save_button.gd" type="Script" id=48]
 [ext_resource path="res://scenes/editor/copy_button.gd" type="Script" id=49]
+[ext_resource path="res://scenes/actors/objects/big_tree/big_tree.png" type="Texture" id=50]
+[ext_resource path="res://scenes/actors/objects/big_tree/icon.png" type="Texture" id=51]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -636,6 +638,17 @@ tile_mode_offset = Vector2( 16, -16 )
 change_to = "MetalPlatform"
 icon = ExtResource( 42 )
 preview = ExtResource( 43 )
+
+[node name="BigTree" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 4
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+z_index = -9
+change_to = "BigTree"
+icon = ExtResource( 51 )
+preview = ExtResource( 50 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
