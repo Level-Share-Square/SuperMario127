@@ -200,4 +200,4 @@ script = ExtResource( 12 )
 
 [node name="GetupState" type="Node" parent="States"]
 script = ExtResource( 14 )
-get_up_power = 200
+get_up_power = 230

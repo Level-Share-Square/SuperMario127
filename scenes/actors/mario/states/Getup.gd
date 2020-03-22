@@ -2,7 +2,7 @@ extends State
 
 class_name GetupState
 
-export var get_up_power = 320
+export var get_up_power = 360
 
 var stop_counter = 0.0
 
@@ -15,7 +15,7 @@ func _start(delta):
 	var dive_player = character.get_node("dive_sounds")
 	dive_player.play()
 	character.velocity.y = -get_up_power
-	character.position.y -= 1
+	character.position.y -= 7
 	character.friction = character.real_friction
 	sprite.rotation_degrees = 90 * character.facing_direction
 	stop_counter += delta
