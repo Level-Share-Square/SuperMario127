@@ -56,15 +56,15 @@ func _stop(delta):
 	var dive_collision = character.get_node("dive_collision")
 	var sprite = character.animated_sprite
 	sprite.rotation_degrees = 0
+	if character.is_walled() and !character.is_grounded():
+		character.velocity.x = bonk_power * -character.facing_direction 
+		character.position.x -= 2 * character.facing_direction
+		character.set_state_by_name("BonkedState", delta)
 	if character.is_grounded():
 		character.set_state_by_name("SlideState", delta)
 	else:
 		collision.disabled = false
 		dive_collision.disabled = true
-	if character.is_walled():
-		character.velocity.x = bonk_power * -character.facing_direction 
-		character.position.x -= 2 * character.facing_direction
-		character.set_state_by_name("BonkedState", delta)
 
 func _stop_check(delta):
 	return character.is_grounded() or (character.is_walled_right() && character.facing_direction == 1) or (character.is_walled_left() && character.facing_direction == -1)
