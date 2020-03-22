@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -48,6 +48,7 @@
 [ext_resource path="res://scenes/editor/assets/save_icon_press.png" type="Texture" id=46]
 [ext_resource path="res://scenes/editor/assets/save_icon_hover.png" type="Texture" id=47]
 [ext_resource path="res://scenes/editor/save_button.gd" type="Script" id=48]
+[ext_resource path="res://scenes/editor/copy_button.gd" type="Script" id=49]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -80,6 +81,8 @@ corner_radius_bottom_left = 24
 size = 32
 font_data = ExtResource( 4 )
 
+[sub_resource type="StyleBoxEmpty" id=7]
+
 [sub_resource type="StyleBoxEmpty" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=9]
@@ -96,9 +99,7 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxEmpty" id=15]
 
-[sub_resource type="StyleBoxEmpty" id=16]
-
-[sub_resource type="Theme" id=17]
+[sub_resource type="Theme" id=16]
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -219,11 +220,11 @@ HScrollBar/icons/decrement = null
 HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
 HScrollBar/icons/increment_highlight = null
-HScrollBar/styles/grabber = SubResource( 8 )
-HScrollBar/styles/grabber_highlight = SubResource( 9 )
-HScrollBar/styles/grabber_pressed = SubResource( 10 )
-HScrollBar/styles/scroll = SubResource( 11 )
-HScrollBar/styles/scroll_focus = SubResource( 12 )
+HScrollBar/styles/grabber = SubResource( 7 )
+HScrollBar/styles/grabber_highlight = SubResource( 8 )
+HScrollBar/styles/grabber_pressed = SubResource( 9 )
+HScrollBar/styles/scroll = SubResource( 10 )
+HScrollBar/styles/scroll_focus = SubResource( 11 )
 HSeparator/constants/separation = 4
 HSeparator/styles/separator = null
 HSlider/icons/grabber = null
@@ -490,11 +491,11 @@ VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/increment = null
 VScrollBar/icons/increment_highlight = null
-VScrollBar/styles/grabber = SubResource( 13 )
-VScrollBar/styles/grabber_highlight = SubResource( 14 )
-VScrollBar/styles/grabber_pressed = SubResource( 14 )
-VScrollBar/styles/scroll = SubResource( 15 )
-VScrollBar/styles/scroll_focus = SubResource( 16 )
+VScrollBar/styles/grabber = SubResource( 12 )
+VScrollBar/styles/grabber_highlight = SubResource( 13 )
+VScrollBar/styles/grabber_pressed = SubResource( 13 )
+VScrollBar/styles/scroll = SubResource( 14 )
+VScrollBar/styles/scroll_focus = SubResource( 15 )
 VSeparator/constants/separation = 4
 VSeparator/styles/separator = null
 VSlider/icons/grabber = null
@@ -517,7 +518,7 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
-[sub_resource type="StyleBoxFlat" id=18]
+[sub_resource type="StyleBoxFlat" id=17]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -529,30 +530,30 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="DynamicFont" id=19]
+[sub_resource type="DynamicFont" id=18]
 size = 32
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=24]
+[sub_resource type="StyleBoxFlat" id=19]
 bg_color = Color( 0.0705882, 0, 0.231373, 1 )
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id=22]
+[sub_resource type="StyleBoxFlat" id=20]
 bg_color = Color( 0, 0.0470588, 0.317647, 1 )
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="DynamicFont" id=23]
+[sub_resource type="DynamicFont" id=21]
 size = 48
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=22]
 size = 64
 font_data = ExtResource( 4 )
 
@@ -1193,7 +1194,6 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="UI/LevelSettingsWindow"]
 
 [node name="LevelCodeWindow" type="NinePatchRect" parent="UI"]
-visible = false
 margin_left = 165.0
 margin_top = 130.0
 margin_right = 1218.0
@@ -1261,13 +1261,12 @@ margin_top = 122.0
 margin_right = 1000.0
 margin_bottom = 405.0
 rect_rotation = 0.0197835
-theme = SubResource( 17 )
-custom_styles/normal = SubResource( 18 )
-custom_fonts/font = SubResource( 19 )
+theme = SubResource( 16 )
+custom_styles/normal = SubResource( 17 )
+custom_fonts/font = SubResource( 18 )
 custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0.188235, 0.258824, 0.494118, 1 )
 custom_colors/completion_font_color = Color( 0, 0, 0, 1 )
-text = "0.4.0,My%20Level,[V280x30,1,1,1~000*2240,020*23,000*3,020*44,000*10,020*23,000*3,020*44,000*10~000*2400~000*2400~1,V264x874,V21x1,0|3,V2240x816,V21x1,0]"
 context_menu_enabled = false
 v_scroll_speed = 0.0
 wrap_enabled = true
@@ -1276,14 +1275,14 @@ __meta__ = {
 }
 
 [node name="LoadButton" type="Button" parent="UI/LevelCodeWindow/Contents"]
-margin_left = 300.0
-margin_top = 10.0
-margin_right = 700.0
-margin_bottom = 100.0
-custom_styles/hover = SubResource( 24 )
-custom_styles/pressed = SubResource( 22 )
-custom_styles/normal = SubResource( 22 )
-custom_fonts/font = SubResource( 23 )
+margin_left = 534.307
+margin_top = 6.79156
+margin_right = 934.307
+margin_bottom = 96.7916
+custom_styles/hover = SubResource( 19 )
+custom_styles/pressed = SubResource( 20 )
+custom_styles/normal = SubResource( 20 )
+custom_fonts/font = SubResource( 21 )
 shortcut_in_tooltip = false
 action_mode = 0
 text = "Load Level"
@@ -1299,6 +1298,32 @@ stream = ExtResource( 35 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelCodeWindow/Contents/LoadButton"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="CopyButton" type="Button" parent="UI/LevelCodeWindow/Contents"]
+margin_left = 82.2546
+margin_top = 6.79156
+margin_right = 482.255
+margin_bottom = 96.7916
+custom_styles/hover = SubResource( 19 )
+custom_styles/pressed = SubResource( 20 )
+custom_styles/normal = SubResource( 20 )
+custom_fonts/font = SubResource( 21 )
+shortcut_in_tooltip = false
+action_mode = 0
+text = "Copy Text"
+script = ExtResource( 49 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text_edit_path = NodePath("../TextEdit")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelCodeWindow/Contents/CopyButton"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelCodeWindow/Contents/CopyButton"]
 stream = ExtResource( 36 )
 volume_db = -10.0
 
@@ -1350,7 +1375,7 @@ margin_left = 22.0
 margin_top = 40.0
 margin_right = 136.0
 margin_bottom = 155.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 22 )
 custom_colors/font_color = Color( 0.258824, 0.270588, 0.658824, 1 )
 text = "1"
 align = 1

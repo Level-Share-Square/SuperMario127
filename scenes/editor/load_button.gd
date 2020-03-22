@@ -12,6 +12,7 @@ onready var click_sound = $ClickSound
 var last_hovered = false
 
 func _pressed():
+	click_sound.play()
 	focus_mode = 0
 	var level_data = LevelData.new()
 	level_data.load_in(text_edit_node.text)

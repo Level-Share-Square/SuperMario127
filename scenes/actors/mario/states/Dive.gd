@@ -18,11 +18,15 @@ func _start_check(delta):
 
 func _start(delta):
 	var dive_player = character.get_node("dive_sounds")
+	var collision = character.get_node("collision")
+	var dive_collision = character.get_node("dive_collision")
 	if dive_buffer > 0:
 		character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
 		character.velocity.y += dive_power.y
 		dive_player.play()
-	character.position.y -= 5
+	character.position.y += 4
+	collision.disabled = true
+	dive_collision.disabled = false
 	character.rotating = true
 	if abs(character.velocity.x) > maxVelocityX:
 		character.velocity.x = maxVelocityX * character.facing_direction
@@ -48,10 +52,15 @@ func _update(delta):
 		last_above_rot_limit = true
 		
 func _stop(delta):
+	var collision = character.get_node("collision")
+	var dive_collision = character.get_node("dive_collision")
 	var sprite = character.animated_sprite
 	sprite.rotation_degrees = 0
 	if character.is_grounded():
 		character.set_state_by_name("SlideState", delta)
+	else:
+		collision.disabled = false
+		dive_collision.disabled = true
 	if character.is_walled():
 		character.velocity.x = bonk_power * -character.facing_direction 
 		character.position.x -= 2 * character.facing_direction

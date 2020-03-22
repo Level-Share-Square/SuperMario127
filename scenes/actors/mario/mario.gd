@@ -60,6 +60,7 @@ var collided_last_frame = false
 #onready var global_vars_node = get_node("../GlobalVars")
 #onready var level_settings_node = get_node("../LevelSettings")
 onready var collision_shape = get_node("collision")
+onready var dive_collision_shape = get_node("dive_collision")
 onready var sprite = get_node("sprite")
 
 var level_size = Vector2(80, 30)

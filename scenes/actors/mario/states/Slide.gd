@@ -29,14 +29,22 @@ func _update(delta):
 		stop = true
 
 func _stop(delta):
+	var collision = character.get_node("collision")
+	var dive_collision = character.get_node("dive_collision")
 	var sprite = character.animated_sprite
 	character.friction = character.real_friction
 	if !character.is_grounded():
 		character.set_state_by_name("DiveState", delta)
 	elif getup_buffer > 0 or abs(character.velocity.x) < 5:
 		character.set_state_by_name("GetupState", delta)
+		if !character.test_move(character.transform, Vector2(0, -16)):
+			character.position.y -= 16
+		collision.disabled = false
+		dive_collision.disabled = true
 	else:
 		sprite.rotation_degrees = 0
+		collision.disabled = false
+		dive_collision.disabled = true
 	stop = false
 
 func _stop_check(delta):

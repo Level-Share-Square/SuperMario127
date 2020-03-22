@@ -70,7 +70,9 @@ func get_object(result, is_json) -> LevelObject:
 		object.properties = result.properties
 	else:
 		object = LevelObject.new()
-		object.properties = result.properties
+		object.properties = {}
+		for key in result.properties:
+			object.properties[key] = value_util.get_true_value(result.properties[key])
 		object.type_id = 1
 		if result.type == "Entrance": # i don't even care lol
 			object.type_id = 0
