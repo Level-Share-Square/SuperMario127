@@ -30,9 +30,13 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time):
 		music_tween.start()
 	
 	yield(canvas_tween, "tween_completed")
+	music.loading = true
 	yield(get_tree().create_timer(0.1), "timeout")
 	
 	get_tree().reload_current_scene()
+	
+	yield(get_tree().create_timer(0.1), "timeout")
+	music.loading = false
 	
 	canvas_mask.texture = transition_out_tex
 	

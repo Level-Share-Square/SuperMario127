@@ -4,6 +4,7 @@ export var play_bus: String
 export var edit_bus: String
 
 export var volume_multiplier : float = 1
+export var loading = false
 var orig_volume = 0
 
 var last_mode = 3
@@ -29,6 +30,12 @@ func change_song():
 		bus = edit_bus
 
 func _process(delta):
+	if loading and OS.has_feature("JavaScript"):
+		AudioServer.set_bus_mute(0, true)
+		AudioServer.set_bus_mute(1, true)
+	else:
+		AudioServer.set_bus_mute(0, false)
+		AudioServer.set_bus_mute(1, false)
 	if get_tree().get_current_scene().mode != last_mode or CurrentLevelData.level_data.areas[0].settings.music != last_song:
 		change_song()
 	volume_db = linear2db(db2linear(orig_volume) * volume_multiplier)
