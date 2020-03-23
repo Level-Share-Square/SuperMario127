@@ -80,6 +80,7 @@ func switch():
 		yield(tween, "tween_completed")
 		music.loading = true
 		yield(get_tree().create_timer(0.3), "timeout")
+		get_tree().paused = false
 		
 		var new_scene = get_tree().get_current_scene().mode
 		get_tree().get_current_scene().switch_scenes()

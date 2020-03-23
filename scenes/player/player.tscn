@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -6,10 +6,53 @@
 [ext_resource path="res://scenes/player/camera.gd" type="Script" id=4]
 [ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=5]
 [ext_resource path="res://assets/fonts/sm256.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/player/pause_screen.gd" type="Script" id=8]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=9]
+[ext_resource path="res://scenes/shared/button_sound_player.gd" type="Script" id=10]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=11]
 
 [sub_resource type="DynamicFont" id=1]
-size = 38
+size = 100
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.0705882, 0, 0.231373, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="DynamicFont" id=21]
+size = 76
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+outline_size = 4
+outline_color = Color( 0.054902, 0, 0.25098, 1 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+outline_size = 4
+outline_color = Color( 0.0392157, 0, 0.188235, 1 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+outline_size = 2
+outline_color = Color( 0.054902, 0, 0.25098, 1 )
+use_mipmaps = true
+font_data = ExtResource( 7 )
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
@@ -41,18 +84,22 @@ editor_draw_screen = false
 script = ExtResource( 4 )
 character = NodePath("../Character")
 
-[node name="Pause" type="CanvasLayer" parent="."]
-layer = 128
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 127
 
-[node name="Control" type="Control" parent="Pause"]
+[node name="PauseScreen" type="Control" parent="UI"]
+pause_mode = 2
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+darken_color = Color( 0.121569, 0.137255, 0.184314, 0.501961 )
+character_node_path = NodePath("../../Character")
 
-[node name="Darken" type="ColorRect" parent="Pause/Control"]
+[node name="Darken" type="ColorRect" parent="UI/PauseScreen"]
 margin_right = 768.0
 margin_bottom = 432.0
 color = Color( 0.121569, 0.137255, 0.184314, 0.501961 )
@@ -60,7 +107,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Top" type="TextureRect" parent="Pause/Control"]
+[node name="Top" type="TextureRect" parent="UI/PauseScreen"]
 margin_right = 2305.0
 margin_bottom = 210.0
 rect_scale = Vector2( 0.333, 0.333 )
@@ -69,11 +116,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Bottom" type="TextureRect" parent="Pause/Control"]
+[node name="PAUSED" type="Label" parent="UI/PauseScreen/Top"]
+margin_left = 914.958
+margin_top = 48.048
+margin_right = 1317.96
+margin_bottom = 148.048
+rect_pivot_offset = Vector2( 72, 0 )
+custom_fonts/font = SubResource( 1 )
+text = "PAUSED"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bottom" type="TextureRect" parent="UI/PauseScreen"]
 margin_left = 768.0
-margin_top = 432.0
+margin_top = 400.0
 margin_right = 3073.0
-margin_bottom = 642.0
+margin_bottom = 610.0
 rect_rotation = 180.0
 rect_scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 5 )
@@ -81,14 +142,114 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PAUSED" type="Label" parent="Pause/Control"]
-margin_left = 304.0
-margin_top = 12.561
-margin_right = 457.0
-margin_bottom = 51.561
+[node name="Bottom2" type="TextureRect" parent="UI/PauseScreen/Bottom"]
+margin_left = 2311.0
+margin_top = 5.0
+margin_right = 9268.0
+margin_bottom = 215.0
+rect_rotation = 180.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResumeButton" type="Button" parent="UI/PauseScreen/Bottom"]
+margin_left = 2242.55
+margin_top = 128.886
+margin_right = 3262.55
+margin_bottom = 308.886
+rect_rotation = 180.0
+custom_styles/hover = SubResource( 19 )
+custom_styles/pressed = SubResource( 20 )
+custom_styles/normal = SubResource( 20 )
+custom_fonts/font = SubResource( 21 )
+action_mode = 0
+text = "Resume"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/ResumeButton"]
+stream = ExtResource( 9 )
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/ResumeButton"]
+stream = ExtResource( 11 )
+
+[node name="RetryButton" type="Button" parent="UI/PauseScreen/Bottom"]
+margin_left = 1107.42
+margin_top = 128.886
+margin_right = 2127.42
+margin_bottom = 308.886
+rect_rotation = 180.0
+custom_styles/hover = SubResource( 19 )
+custom_styles/pressed = SubResource( 20 )
+custom_styles/normal = SubResource( 20 )
+custom_fonts/font = SubResource( 21 )
+action_mode = 0
+text = "Retry"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/RetryButton"]
+stream = ExtResource( 9 )
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/RetryButton"]
+stream = ExtResource( 11 )
+
+[node name="TweenTopbar" type="Tween" parent="UI/PauseScreen"]
+
+[node name="TweenBottombar" type="Tween" parent="UI/PauseScreen"]
+
+[node name="TweenFade" type="Tween" parent="UI/PauseScreen"]
+
+[node name="TweenShineInfo" type="Tween" parent="UI/PauseScreen"]
+
+[node name="ShineInfo" type="Control" parent="UI/PauseScreen"]
+margin_right = 768.0
+margin_bottom = 332.0
+rect_pivot_offset = Vector2( 384, 166 )
+
+[node name="ShineName" type="Label" parent="UI/PauseScreen/ShineInfo"]
+margin_top = 143.986
+margin_right = 768.0
+margin_bottom = 182.986
 rect_pivot_offset = Vector2( 72, 0 )
-custom_fonts/font = SubResource( 1 )
-text = "PAUSED"
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "No Shine Selected"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShineNameBacking" type="Label" parent="UI/PauseScreen/ShineInfo/ShineName"]
+show_behind_parent = true
+margin_top = -17.0
+margin_right = 768.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 72, 0 )
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.0392157, 0, 0.188235, 1 )
+text = "No Shine Selected"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShineDescription" type="RichTextLabel" parent="UI/PauseScreen/ShineInfo"]
+margin_left = 0.375946
+margin_top = 194.168
+margin_right = 768.376
+margin_bottom = 275.168
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[center]You are in a custom level.[/center]"
+text = "You are in a custom level."
 __meta__ = {
 "_edit_use_anchors_": false
 }

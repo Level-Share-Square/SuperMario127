@@ -539,17 +539,17 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxFlat" id=19]
 bg_color = Color( 0.0705882, 0, 0.231373, 1 )
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
 
 [sub_resource type="StyleBoxFlat" id=20]
 bg_color = Color( 0, 0.0470588, 0.317647, 1 )
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
 
 [sub_resource type="DynamicFont" id=21]
 size = 48
