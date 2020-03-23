@@ -14,6 +14,11 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	var mode = get_tree().get_current_scene().mode
 	for object in level_area.objects:
 		create_object(object, false)
+		
+func set_property(object_node, property, value):
+	var level_object = object_node.level_object
+	level_object.properties[property] = value
+	object_node[property] = value
 
 func create_object(object, add_to_data):
 	var mode = get_tree().get_current_scene().mode

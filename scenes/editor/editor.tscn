@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -52,6 +52,8 @@
 [ext_resource path="res://scenes/actors/objects/big_tree/big_tree.png" type="Texture" id=50]
 [ext_resource path="res://scenes/actors/objects/big_tree/icon.png" type="Texture" id=51]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=52]
+[ext_resource path="res://scenes/editor/entrance_item/entrance_removal.gd" type="Script" id=53]
+[ext_resource path="res://scenes/editor/entrance_item/entrance_placement.gd" type="Script" id=54]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -611,6 +613,10 @@ z_index = -1
 change_to = "Entrance"
 icon = ExtResource( 12 )
 preview = ExtResource( 12 )
+has_placement_action = true
+placement_action = ExtResource( 54 )
+has_removal_action = true
+removal_action = ExtResource( 53 )
 
 [node name="Shine" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )

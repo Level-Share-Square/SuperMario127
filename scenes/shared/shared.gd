@@ -8,6 +8,9 @@ onready var tilemaps_node = get_node(tilemaps)
 onready var objects_node = get_node(objects)
 onready var background_node = get_node(background)
 
+func get_objects_node():
+	return objects_node
+
 func set_tile(index: int, layer: int, tileset_id: int, tile_id: int):
 	tilemaps_node.set_tile(index, layer, tileset_id, tile_id)
 
