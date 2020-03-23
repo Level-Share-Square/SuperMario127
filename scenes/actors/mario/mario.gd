@@ -6,7 +6,7 @@ signal died
 signal state_changed
 
 onready var states_node = $States
-onready var animated_sprite = $sprite
+onready var animated_sprite = $Sprite
 
 # Cutout
 export var cutout_death : StreamTexture
@@ -30,7 +30,7 @@ export var friction = 10.5
 export var aerial_friction = 1.15
 
 # Sounds
-onready var fall_sound_player = $fall_sounds
+onready var fall_sound_player = $FallSounds
 
 # Extra
 export var is_wj_chained = false
@@ -63,9 +63,9 @@ export(Array, NodePath) var collision_exceptions = []
 
 #onready var global_vars_node = get_node("../GlobalVars")
 #onready var level_settings_node = get_node("../LevelSettings")
-onready var collision_shape = get_node("collision")
-onready var dive_collision_shape = get_node("dive_collision")
-onready var sprite = get_node("sprite")
+onready var collision_shape = $Collision
+onready var dive_collision_shape = $DiveCollision
+onready var sprite = $Sprite
 
 var level_size = Vector2(80, 30)
 

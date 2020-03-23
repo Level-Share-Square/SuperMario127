@@ -29,8 +29,8 @@ func _update(delta):
 		stop = true
 
 func _stop(delta):
-	var collision = character.get_node("collision")
-	var dive_collision = character.get_node("dive_collision")
+	var collision = character.get_node("Collision")
+	var dive_collision = character.get_node("DiveCollision")
 	var sprite = character.animated_sprite
 	character.friction = character.real_friction
 	if !character.is_grounded():
