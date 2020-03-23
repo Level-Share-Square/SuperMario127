@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -11,43 +11,45 @@
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=9]
 [ext_resource path="res://scenes/shared/button_sound_player.gd" type="Script" id=10]
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=11]
+[ext_resource path="res://scenes/player/viewports.gd" type="Script" id=12]
+[ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
-[sub_resource type="StyleBoxFlat" id=19]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.0705882, 0, 0.231373, 1 )
 corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[sub_resource type="StyleBoxFlat" id=20]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0, 0.0470588, 0.317647, 1 )
 corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[sub_resource type="DynamicFont" id=21]
+[sub_resource type="DynamicFont" id=4]
 size = 76
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=5]
 size = 32
 outline_size = 4
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=6]
 size = 32
 outline_size = 4
 outline_color = Color( 0.0392157, 0, 0.188235, 1 )
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=7]
 size = 20
 outline_size = 2
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
@@ -56,33 +58,9 @@ font_data = ExtResource( 7 )
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
-nodes_to_load = [ NodePath("Shared"), NodePath("Character"), NodePath("Camera") ]
-character = NodePath("Character")
-
-[node name="Shared" parent="." instance=ExtResource( 2 )]
-
-[node name="Character" parent="." instance=ExtResource( 3 )]
-position = Vector2( 32.5, 126.947 )
-
-[node name="Camera" type="Camera2D" parent="."]
-position = Vector2( 0, -80 )
-rotating = true
-current = true
-process_mode = 0
-limit_left = 0
-limit_top = 0
-limit_right = 960
-limit_bottom = 960
-limit_smoothed = true
-smoothing_enabled = true
-smoothing_speed = 15.0
-drag_margin_left = 0.0
-drag_margin_top = 0.0
-drag_margin_right = 0.0
-drag_margin_bottom = 0.0
-editor_draw_screen = false
-script = ExtResource( 4 )
-character = NodePath("../Character")
+nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"), NodePath("Viewports/ViewportContainer/Viewport/World/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/World/Character2"), NodePath("Viewports/ViewportContainer2/Viewport/CameraP2"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds"), NodePath("Viewports/ViewportContainer2/Viewport/Backgrounds") ]
+character = NodePath("Viewports/ViewportContainer/Viewport/World/Character")
+character2 = NodePath("Viewports/ViewportContainer/Viewport/World/Character2")
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 127
@@ -97,7 +75,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 darken_color = Color( 0.121569, 0.137255, 0.184314, 0.501961 )
-character_node_path = NodePath("../../Character")
+character_node_path = NodePath("../../Viewports/ViewportContainer/Viewport/World/Character")
 
 [node name="Darken" type="ColorRect" parent="UI/PauseScreen"]
 margin_right = 768.0
@@ -160,10 +138,10 @@ margin_top = 128.886
 margin_right = 3262.55
 margin_bottom = 308.886
 rect_rotation = 180.0
-custom_styles/hover = SubResource( 19 )
-custom_styles/pressed = SubResource( 20 )
-custom_styles/normal = SubResource( 20 )
-custom_fonts/font = SubResource( 21 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 action_mode = 0
 text = "Resume"
 script = ExtResource( 10 )
@@ -185,10 +163,10 @@ margin_top = 128.886
 margin_right = 2127.42
 margin_bottom = 308.886
 rect_rotation = 180.0
-custom_styles/hover = SubResource( 19 )
-custom_styles/pressed = SubResource( 20 )
-custom_styles/normal = SubResource( 20 )
-custom_fonts/font = SubResource( 21 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 action_mode = 0
 text = "Retry"
 script = ExtResource( 10 )
@@ -222,7 +200,7 @@ margin_top = 143.986
 margin_right = 768.0
 margin_bottom = 182.986
 rect_pivot_offset = Vector2( 72, 0 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "No Shine Selected"
 align = 1
@@ -237,7 +215,7 @@ margin_top = -17.0
 margin_right = 768.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( 72, 0 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.0392157, 0, 0.188235, 1 )
 text = "No Shine Selected"
 align = 1
@@ -251,10 +229,103 @@ margin_left = 0.375946
 margin_top = 194.168
 margin_right = 768.376
 margin_bottom = 275.168
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 7 )
 bbcode_enabled = true
 bbcode_text = "[center]You are in a custom level.[/center]"
 text = "You are in a custom level."
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Viewports" type="HBoxContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="Viewports"]
+margin_right = 384.0
+margin_bottom = 432.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer"]
+size = Vector2( 384, 432 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="CameraP1" type="Camera2D" parent="Viewports/ViewportContainer/Viewport"]
+position = Vector2( 0, -80 )
+rotating = true
+current = true
+process_mode = 0
+limit_left = 0
+limit_top = 0
+limit_right = 960
+limit_bottom = 960
+limit_smoothed = true
+smoothing_enabled = true
+smoothing_speed = 15.0
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
+editor_draw_screen = false
+script = ExtResource( 4 )
+character = NodePath("../World/Character")
+
+[node name="World" type="Node2D" parent="Viewports/ViewportContainer/Viewport"]
+
+[node name="Shared" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 2 )]
+tilemaps = NodePath("../World/Shared/Tilemaps")
+objects = NodePath("../World/Shared/Objects")
+background = NodePath("../World/Shared/Background")
+
+[node name="Character" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 3 )]
+position = Vector2( 32.5, 126.947 )
+collision_exceptions = [ NodePath("../Character2") ]
+
+[node name="Character2" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 3 )]
+position = Vector2( 32.5, 126.947 )
+player_id = 1
+collision_exceptions = [ NodePath("../Character") ]
+
+[node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
+
+[node name="ViewportContainer2" type="ViewportContainer" parent="Viewports"]
+margin_left = 388.0
+margin_right = 772.0
+margin_bottom = 432.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer2"]
+size = Vector2( 384, 432 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="CameraP2" type="Camera2D" parent="Viewports/ViewportContainer2/Viewport"]
+position = Vector2( 0, -80 )
+rotating = true
+current = true
+process_mode = 0
+limit_left = 0
+limit_top = 0
+limit_right = 960
+limit_bottom = 960
+limit_smoothed = true
+smoothing_enabled = true
+smoothing_speed = 15.0
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
+editor_draw_screen = false
+script = ExtResource( 4 )
+character = NodePath("../../../ViewportContainer/Viewport/World/Character2")
+
+[node name="Backgrounds" parent="Viewports/ViewportContainer2/Viewport" instance=ExtResource( 13 )]

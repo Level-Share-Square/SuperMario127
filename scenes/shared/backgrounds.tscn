@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=1]
+[ext_resource path="res://scenes/shared/background.gd" type="Script" id=2]
+
+[node name="Backgrounds" type="Node2D"]
+script = ExtResource( 2 )
+parallax = NodePath("Parallax")
+background = NodePath("Background/Sprite")
+
+[node name="Parallax" type="ParallaxBackground" parent="."]
+layer = -1
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -128
+
+[node name="Sprite" type="Sprite" parent="Background"]
+z_index = -512
+z_as_relative = false
+texture = ExtResource( 1 )
+centered = false

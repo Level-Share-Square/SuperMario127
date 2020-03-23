@@ -44,6 +44,8 @@ export var disable_movement = false
 export var disable_turning = false
 export var disable_animation = false
 
+export var player_id = 0
+
 # States
 var state = null
 var last_state = null
@@ -57,6 +59,8 @@ var collision_left
 var collision_right
 var collided_last_frame = false
 
+export(Array, NodePath) var collision_exceptions = []
+
 #onready var global_vars_node = get_node("../GlobalVars")
 #onready var level_settings_node = get_node("../LevelSettings")
 onready var collision_shape = get_node("collision")
@@ -67,6 +71,8 @@ var level_size = Vector2(80, 30)
 
 func load_in(level_data : LevelData, level_area : LevelArea):
 	level_size = level_area.settings.size
+	for exception in collision_exceptions:
+		add_collision_exception_with(get_node(exception))
 
 func is_grounded():
 	return test_move(self.transform, Vector2(0, 0.1)) and collided_last_frame
@@ -114,13 +120,13 @@ func _ready():
 	
 func is_action_pressed(input):
 	if controllable:
-		return Input.is_action_pressed(input)
+		return Input.is_action_pressed(input + "_" + str(player_id))
 	else:
 		return false
 		
 func is_action_just_pressed(input):
 	if controllable:
-		return Input.is_action_just_pressed(input)
+		return Input.is_action_just_pressed(input + "_" + str(player_id))
 	else:
 		return false
 

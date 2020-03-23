@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -51,6 +51,7 @@
 [ext_resource path="res://scenes/editor/copy_button.gd" type="Script" id=49]
 [ext_resource path="res://scenes/actors/objects/big_tree/big_tree.png" type="Texture" id=50]
 [ext_resource path="res://scenes/actors/objects/big_tree/icon.png" type="Texture" id=51]
+[ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=52]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -561,7 +562,7 @@ font_data = ExtResource( 4 )
 
 [node name="Editor" type="Node2D"]
 script = ExtResource( 1 )
-nodes_to_load = [ NodePath("Shared"), NodePath("Camera2D") ]
+nodes_to_load = [ NodePath("Shared"), NodePath("Camera2D"), NodePath("Backgrounds") ]
 placeable_items = NodePath("PlaceableItems")
 placeable_items_button_container = NodePath("UI/PlaceableItemsContainer")
 item_preview = NodePath("ItemPreview")
@@ -1453,3 +1454,5 @@ speed = 7
 modulate = Color( 1, 1, 1, 0.501961 )
 z_index = -1
 script = ExtResource( 8 )
+
+[node name="Backgrounds" parent="." instance=ExtResource( 52 )]

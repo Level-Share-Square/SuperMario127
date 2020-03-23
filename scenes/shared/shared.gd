@@ -45,7 +45,7 @@ func update_tilemaps():
 	tilemaps_node.update_tilemaps()
 
 func update_background(area):
-	background_node.update_background(area)
+	pass #background_node.update_background(area)
 
 func _process(delta):
 	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")

@@ -1,33 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/shared/shared.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/tilemap_loader.gd" type="Script" id=2]
-[ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=3]
 [ext_resource path="res://assets/tiles/tiles.tres" type="TileSet" id=4]
 [ext_resource path="res://scenes/shared/objects.gd" type="Script" id=5]
-[ext_resource path="res://scenes/shared/background.gd" type="Script" id=6]
 
 [node name="Shared" type="Node2D"]
 script = ExtResource( 1 )
-nodes_to_load = [ NodePath("Background"), NodePath("Tilemaps"), NodePath("Objects") ]
+nodes_to_load = [ NodePath("Tilemaps"), NodePath("Objects") ]
 tilemaps = NodePath("Tilemaps")
 objects = NodePath("Objects")
-background = NodePath("Background")
-
-[node name="Parallax" type="ParallaxBackground" parent="."]
-layer = -1
-
-[node name="Background" type="CanvasLayer" parent="."]
-layer = -128
-script = ExtResource( 6 )
-parallax = NodePath("../Parallax")
-background = NodePath("Sprite")
-
-[node name="Sprite" type="Sprite" parent="Background"]
-z_index = -512
-z_as_relative = false
-texture = ExtResource( 3 )
-centered = false
 
 [node name="Tilemaps" type="Node2D" parent="."]
 script = ExtResource( 2 )

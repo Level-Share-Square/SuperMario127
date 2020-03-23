@@ -1,6 +1,7 @@
 extends LevelDataLoader
 
 export var character : NodePath
+export var character2 : NodePath
 
 var mode = 0
 

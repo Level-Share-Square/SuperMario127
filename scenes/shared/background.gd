@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Node2D
 
 export var parallax : NodePath
 export var background : NodePath
