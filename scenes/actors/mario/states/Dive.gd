@@ -52,8 +52,8 @@ func _update(delta):
 		last_above_rot_limit = true
 		
 func _stop(delta):
-	var collision = character.get_node("collision")
-	var dive_collision = character.get_node("dive_collision")
+	var collision = character.get_node("Collision")
+	var dive_collision = character.get_node("DiveCollision")
 	var sprite = character.animated_sprite
 	sprite.rotation_degrees = 0
 	if character.test_move(character.transform, Vector2(0.1 * character.facing_direction, -15)) and !character.is_grounded():
