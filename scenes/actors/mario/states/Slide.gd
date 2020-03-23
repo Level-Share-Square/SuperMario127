@@ -35,6 +35,7 @@ func _stop(delta):
 	character.friction = character.real_friction
 	if !character.is_grounded():
 		character.set_state_by_name("DiveState", delta)
+		character.position.y -= 5
 	elif getup_buffer > 0 or abs(character.velocity.x) < 5:
 		character.set_state_by_name("GetupState", delta)
 		if !character.test_move(character.transform, Vector2(0, -16)):

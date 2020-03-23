@@ -173,9 +173,11 @@ __meta__ = {
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/ResumeButton"]
 stream = ExtResource( 9 )
+volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/ResumeButton"]
 stream = ExtResource( 11 )
+volume_db = -10.0
 
 [node name="RetryButton" type="Button" parent="UI/PauseScreen/Bottom"]
 margin_left = 1107.42
@@ -196,9 +198,11 @@ __meta__ = {
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/RetryButton"]
 stream = ExtResource( 9 )
+volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/RetryButton"]
 stream = ExtResource( 11 )
+volume_db = -10.0
 
 [node name="TweenTopbar" type="Tween" parent="UI/PauseScreen"]
 

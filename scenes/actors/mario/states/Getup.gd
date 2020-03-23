@@ -46,4 +46,4 @@ func _stop(delta):
 	stop_counter = 0
 
 func _stop_check(delta):
-	return stop_counter > 0.5 or character.is_grounded()
+	return character.velocity.y > 0 or character.is_grounded()

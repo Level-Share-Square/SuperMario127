@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource( 1 )
-ids = PoolStringArray( "nothing", "peach_castle", "yoshi_star_galaxy", "bob_omb_battlefield", "purple_coins", "slider" )
+ids = PoolStringArray( "nothing", "peach_castle", "cloudy_court_galaxy", "bob_omb_battlefield", "purple_coins", "slider", "double_cherry_pass", "champions_road" )

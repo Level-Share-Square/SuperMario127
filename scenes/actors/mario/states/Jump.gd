@@ -89,7 +89,7 @@ func _update(delta):
 		jump_playing = false
 
 func _stop_check(delta):
-	return character.is_grounded() or character.velocity.y > 0
+	return character.velocity.y > 0
 
 func _general_update(delta):
 	var sprite = character.animated_sprite
