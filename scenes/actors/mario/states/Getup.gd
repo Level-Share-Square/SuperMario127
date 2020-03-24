@@ -12,8 +12,8 @@ func _ready():
 	
 func _start(delta):
 	var sprite = character.animated_sprite
-	var dive_player = character.get_node("DiveSounds")
-	dive_player.play()
+	var sound_player = character.get_node("Sounds")
+	sound_player.play_dive_sound()
 	character.velocity.y = -get_up_power
 	character.position.y -= 7
 	character.friction = character.real_friction

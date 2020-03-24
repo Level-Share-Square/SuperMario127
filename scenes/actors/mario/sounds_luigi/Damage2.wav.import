@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Damage2.wav-9cb7740b842374c701203818b49aaaff.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_luigi/Damage2.wav"
+dest_files=[ "res://.import/Damage2.wav-9cb7740b842374c701203818b49aaaff.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -17,13 +17,13 @@ func _start_check(delta):
 	return dive_buffer > 0 and !(abs(character.velocity.x) <= 150 and character.is_grounded()) and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0)) and !character.is_walled()
 
 func _start(delta):
-	var dive_player = character.get_node("DiveSounds")
+	var sound_player = character.get_node("Sounds")
 	var collision = character.get_node("Collision")
 	var dive_collision = character.get_node("DiveCollision")
 	if dive_buffer > 0:
 		character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
 		character.velocity.y += dive_power.y
-		dive_player.play()
+		sound_player.play_dive_sound()
 	character.position.y += 4
 	collision.disabled = true
 	dive_collision.disabled = false

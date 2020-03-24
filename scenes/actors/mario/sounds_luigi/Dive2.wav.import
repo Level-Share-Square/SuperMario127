@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Dive2.wav-26ebd6b53e09e25d99e1bc7056905a97.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_luigi/Dive2.wav"
+dest_files=[ "res://.import/Dive2.wav-26ebd6b53e09e25d99e1bc7056905a97.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

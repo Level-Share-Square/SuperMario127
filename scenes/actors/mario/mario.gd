@@ -30,9 +30,7 @@ export var friction = 10.5
 export var aerial_friction = 1.15
 
 # Sounds
-onready var fall_sound_player = $FallSounds
-onready var hit_sound_player = $HitSounds
-onready var stomped_sound_player = $StompedSounds
+var sound_player
 
 # Extra
 export var is_wj_chained = false
@@ -65,16 +63,62 @@ var collision_right
 var collided_last_frame = false
 
 export(Array, NodePath) var collision_exceptions = []
-onready var player_collision = $PlayerCollision
+
+# Character vars
+export var character := 0
+
+export var mario_frames : SpriteFrames
+export var luigi_frames : SpriteFrames
+
+export var mario_collision : RectangleShape2D
+export var mario_collision_offset : Vector2
+export var mario_dive_collision : RectangleShape2D
+export var mario_dive_collision_offset : Vector2
+
+export var luigi_collision : RectangleShape2D
+export var luigi_collision_offset : Vector2
+export var luigi_dive_collision : RectangleShape2D
+export var luigi_dive_collision_offset : Vector2
+
+export var mario_sounds : String
+export var luigi_sounds : String
 
 #onready var global_vars_node = get_node("../GlobalVars")
 #onready var level_settings_node = get_node("../LevelSettings")
 onready var collision_shape = $Collision
 onready var dive_collision_shape = $DiveCollision
+onready var player_collision = $PlayerCollision
+onready var player_collision_shape = $PlayerCollision/CollisionShape2D
 onready var sprite = $Sprite
 
 var level_size = Vector2(80, 30)
 var number_of_players = 2
+
+func _ready():
+	real_friction = friction
+	player_collision.connect("body_entered", self, "player_hit")
+	if character == 0:
+		var sound_scene = load(mario_sounds)
+		sound_player = sound_scene.instance()
+		add_child(sound_player)
+		sprite.frames = mario_frames
+		collision_shape.position = mario_collision_offset
+		collision_shape.shape = mario_collision
+		player_collision_shape.position = mario_collision_offset
+		player_collision_shape.shape = mario_collision
+		dive_collision_shape.shape = mario_dive_collision
+		dive_collision_shape.position = mario_dive_collision_offset
+	else:
+		var sound_scene = load(luigi_sounds)
+		sound_player = sound_scene.instance()
+		add_child(sound_player)
+		sprite.frames = luigi_frames
+		collision_shape.position = luigi_collision_offset
+		collision_shape.shape = luigi_collision
+		player_collision_shape.position = luigi_collision_offset
+		player_collision_shape.shape = luigi_collision
+		dive_collision_shape.shape = luigi_dive_collision
+		dive_collision_shape.position = luigi_dive_collision_offset
 
 func load_in(level_data : LevelData, level_area : LevelArea):
 	level_size = level_area.settings.size
@@ -121,10 +165,6 @@ func get_state_node(name: String):
 func set_state_by_name(name: String, delta: float):
 	if get_state_node(name) != null:
 		set_state(get_state_node(name), delta)
-
-func _ready():
-	real_friction = friction
-	player_collision.connect("body_entered", self, "player_hit")
 	
 func is_action_pressed(input):
 	if controllable:
@@ -153,7 +193,7 @@ func player_hit(body):
 				velocity.y = -175
 				body.velocity.x = 250
 				set_state_by_name("BonkedState", 0)
-				hit_sound_player.play()
+				sound_player.play_hit_sound()
 			elif !attacking or (body.attacking and attacking):
 				velocity.x = -250
 				body.velocity.x = 250
@@ -163,7 +203,7 @@ func player_hit(body):
 				velocity.y = -175
 				body.velocity.x = -250
 				set_state_by_name("BonkedState", 0)
-				hit_sound_player.play()
+				sound_player.play_hit_sound()
 			elif !attacking or (body.attacking and attacking):
 				velocity.x = 250
 				body.velocity.x = -250
@@ -298,7 +338,7 @@ func kill(cause):
 		var transition_time = 0.75
 		if cause == "fall":
 			controllable = false
-			fall_sound_player.play()
+			sound_player.play_fall_sound()
 			if number_of_players == 1:
 				cutout_in = cutout_death
 				yield(get_tree().create_timer(.75), "timeout")

@@ -303,6 +303,7 @@ collision_exceptions = [ NodePath("../Character2") ]
 position = Vector2( 32.5, 126.947 )
 player_id = 1
 collision_exceptions = [ NodePath("../Character") ]
+character = 1
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 

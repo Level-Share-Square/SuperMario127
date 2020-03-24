@@ -42,7 +42,7 @@ region = Rect2( 48, 240, 48, 48 )
 atlas = ExtResource( 1 )
 region = Rect2( 192, 192, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=52]
 atlas = ExtResource( 1 )
 region = Rect2( 528, 0, 48, 48 )
 
@@ -258,7 +258,7 @@ animations = [ {
 "name": "doubleFallRight",
 "speed": 0.0
 }, {
-"frames": [ SubResource( 11 ) ],
+"frames": [ SubResource( 52 ) ],
 "loop": false,
 "name": "shineFall",
 "speed": 0.0

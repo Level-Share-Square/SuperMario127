@@ -1,0 +1,99 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Dive1.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/mario/sounds/Stomped3.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Damage1.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/actors/mario/sounds/Stomped1.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Damage2.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/actors/mario/sounds/Stomped2.wav" type="AudioStream" id=8]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Dive2.wav" type="AudioStream" id=9]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Fall1.wav" type="AudioStream" id=10]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/TripleJump1.wav" type="AudioStream" id=11]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/TripleJump2.wav" type="AudioStream" id=12]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Jump1.wav" type="AudioStream" id=13]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Jump3.wav" type="AudioStream" id=14]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Jump4.wav" type="AudioStream" id=15]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Jump2.wav" type="AudioStream" id=16]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/DoubleJump1.wav" type="AudioStream" id=17]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/DoubleJump2.wav" type="AudioStream" id=19]
+
+[node name="Sounds" type="Node"]
+script = ExtResource( 2 )
+
+[node name="JumpSounds" type="Node" parent="."]
+script = ExtResource( 1 )
+sound_number = 1
+
+[node name="Jump1" type="AudioStreamPlayer" parent="JumpSounds"]
+stream = ExtResource( 13 )
+
+[node name="Jump2" type="AudioStreamPlayer" parent="JumpSounds"]
+stream = ExtResource( 16 )
+
+[node name="Jump3" type="AudioStreamPlayer" parent="JumpSounds"]
+stream = ExtResource( 14 )
+
+[node name="Jump4" type="AudioStreamPlayer" parent="JumpSounds"]
+stream = ExtResource( 15 )
+
+[node name="DoubleJumpSounds" type="Node" parent="."]
+script = ExtResource( 1 )
+sound_number = 1
+
+[node name="DoubleJump1" type="AudioStreamPlayer" parent="DoubleJumpSounds"]
+stream = ExtResource( 17 )
+
+[node name="DoubleJump2" type="AudioStreamPlayer" parent="DoubleJumpSounds"]
+stream = ExtResource( 19 )
+
+[node name="TripleJumpSounds" type="Node" parent="."]
+script = ExtResource( 1 )
+sound_number = 1
+
+[node name="TripleJump1" type="AudioStreamPlayer" parent="TripleJumpSounds"]
+stream = ExtResource( 11 )
+
+[node name="TripleJump2" type="AudioStreamPlayer" parent="TripleJumpSounds"]
+stream = ExtResource( 12 )
+
+[node name="DiveSounds" type="Node" parent="."]
+script = ExtResource( 1 )
+sound_number = 1
+
+[node name="Dive1" type="AudioStreamPlayer" parent="DiveSounds"]
+stream = ExtResource( 3 )
+
+[node name="Dive2" type="AudioStreamPlayer" parent="DiveSounds"]
+stream = ExtResource( 9 )
+
+[node name="FallSounds" type="Node" parent="."]
+script = ExtResource( 1 )
+sound_number = 1
+
+[node name="Fall1" type="AudioStreamPlayer" parent="FallSounds"]
+stream = ExtResource( 10 )
+
+[node name="HitSounds" type="Node" parent="."]
+script = ExtResource( 1 )
+sound_number = 1
+
+[node name="Hit1" type="AudioStreamPlayer" parent="HitSounds"]
+stream = ExtResource( 5 )
+
+[node name="Hit2" type="AudioStreamPlayer" parent="HitSounds"]
+stream = ExtResource( 7 )
+
+[node name="StompedSounds" type="Node" parent="."]
+script = ExtResource( 1 )
+sound_number = 1
+
+[node name="Stomped1" type="AudioStreamPlayer" parent="StompedSounds"]
+stream = ExtResource( 6 )
+
+[node name="Stomped2" type="AudioStreamPlayer" parent="StompedSounds"]
+stream = ExtResource( 8 )
+
+[node name="Stomped3" type="AudioStreamPlayer" parent="StompedSounds"]
+stream = ExtResource( 4 )

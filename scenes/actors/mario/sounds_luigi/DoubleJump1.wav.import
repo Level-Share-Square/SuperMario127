@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/DoubleJump1.wav-86b12e738ec6e6953f6849c839c19dc5.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_luigi/DoubleJump1.wav"
+dest_files=[ "res://.import/DoubleJump1.wav-86b12e738ec6e6953f6849c839c19dc5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
