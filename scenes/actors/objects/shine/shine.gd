@@ -7,7 +7,7 @@ var collected = false
 var character
 
 func collect(body):
-	if !collected && body.name == "Character" && body.controllable:
+	if !collected && body.name.begins_with("Character") && body.controllable:
 		character = body
 		character.set_state_by_name("Fall", 0)
 		character.velocity = Vector2(0, 0)

@@ -28,6 +28,7 @@ func _start(delta):
 				character.velocity.y -= boost_power/2
 	old_gravity_scale = character.gravity_scale
 	character.gravity_scale = gravity_scale
+	character.attacking = true
 	
 func _update(delta):
 	var sprite = character.animated_sprite
@@ -45,6 +46,7 @@ func _update(delta):
 func _stop(delta):
 	character.gravity_scale = old_gravity_scale
 	priority = 2
+	character.attacking = false
 
 func _stop_check(delta):
 	return !character.is_action_pressed("spin") or character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0))

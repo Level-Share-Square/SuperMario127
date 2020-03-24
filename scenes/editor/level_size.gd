@@ -5,6 +5,9 @@ extends Control
 export var shared_node_path : NodePath
 onready var shared_node = get_node(shared_node_path)
 
+export var backgrounds_node_path : NodePath
+onready var backgrounds_node = get_node(backgrounds_node_path)
+
 export var camera_node_path : NodePath
 onready var camera_node = get_node(camera_node_path)
 
@@ -111,7 +114,7 @@ func button_press():
 		area.very_foreground_tiles = tile_util.expand_down(area, area.very_foreground_tiles)
 		area.settings.size.y += 1
 		shared_node.update_tilemaps()
-		shared_node.update_background(area)
+		backgrounds_node.update_background(area)
 		camera_node.update_limits(area)
 		camera_node.position.y += 32
 		update_label()
@@ -123,7 +126,7 @@ func button_press():
 		area.very_foreground_tiles = tile_util.shrink_down(area, area.very_foreground_tiles)
 		area.settings.size.y -= 1
 		shared_node.update_tilemaps()
-		shared_node.update_background(area)
+		backgrounds_node.update_background(area)
 		camera_node.update_limits(area)
 		update_label()
 		click_sound.play()
@@ -135,7 +138,7 @@ func button_press():
 		area.very_foreground_tiles = tile_util.expand_up(area, area.very_foreground_tiles)
 		area.settings.size.y += 1
 		shared_node.update_tilemaps()
-		shared_node.update_background(area)
+		backgrounds_node.update_background(area)
 		camera_node.update_limits(area)
 		camera_node.position.y += 32
 		update_label()
@@ -148,7 +151,7 @@ func button_press():
 		area.very_foreground_tiles = tile_util.shrink_up(area, area.very_foreground_tiles)
 		area.settings.size.y -= 1
 		shared_node.update_tilemaps()
-		shared_node.update_background(area)
+		backgrounds_node.update_background(area)
 		camera_node.update_limits(area)
 		update_label()
 		click_sound.play()

@@ -44,6 +44,8 @@ export var disable_movement = false
 export var disable_turning = false
 export var disable_animation = false
 
+export var attacking = false
+
 export var player_id = 0
 
 # States
@@ -60,14 +62,17 @@ var collision_right
 var collided_last_frame = false
 
 export(Array, NodePath) var collision_exceptions = []
+onready var player_collision = $PlayerCollision
 
 #onready var global_vars_node = get_node("../GlobalVars")
 #onready var level_settings_node = get_node("../LevelSettings")
 onready var collision_shape = get_node("collision")
 onready var dive_collision_shape = get_node("dive_collision")
 onready var sprite = get_node("sprite")
+onready var bubble = get_node("Bubble")
 
 var level_size = Vector2(80, 30)
+var number_of_players = 2
 
 func load_in(level_data : LevelData, level_area : LevelArea):
 	level_size = level_area.settings.size
@@ -117,6 +122,7 @@ func set_state_by_name(name: String, delta: float):
 
 func _ready():
 	real_friction = friction
+	player_collision.connect("body_entered", self, "player_hit")
 	
 func is_action_pressed(input):
 	if controllable:
@@ -129,6 +135,31 @@ func is_action_just_pressed(input):
 		return Input.is_action_just_pressed(input + "_" + str(player_id))
 	else:
 		return false
+		
+func player_hit(body):
+	if body.name.begins_with("Character"):
+		if global_position.y + 8 < body.global_position.y:
+			velocity.y = -230
+			if state != get_state_node("DiveState"):
+				set_state_by_name("JumpState", 0)
+		elif global_position.y - 8 > body.global_position.y:
+			velocity.y = 150
+		elif global_position.x + 4 < body.global_position.x:
+			if body.attacking == true and !attacking:
+				velocity.x = -205
+				velocity.y = -175
+				body.velocity.x = 250
+				set_state_by_name("BonkedState", 0)
+			elif !attacking or (body.attacking and attacking):
+				velocity.x = -250
+		elif global_position.x - 4 > body.global_position.x:
+			if body.attacking == true and !attacking:
+				velocity.x = 205
+				velocity.y = -175
+				body.velocity.x = -250
+				set_state_by_name("BonkedState", 0)
+			elif !attacking or (body.attacking and attacking):
+				velocity.x = 250
 
 func _physics_process(delta: float):
 	var gravity = 7.82 #global_vars_node.gravity
@@ -253,18 +284,23 @@ func _physics_process(delta: float):
 func kill(cause):
 	if !dead:
 		dead = true
+		var reload = true
 		emit_signal("dead")
 		var cutout_in = cutout_circle
 		var cutout_out = cutout_circle
 		var transition_time = 0.75
 		if cause == "fall":
 			controllable = false
-			cutout_in = cutout_death
 			fall_sound_player.play()
-			yield(get_tree().create_timer(.75), "timeout")
+			if number_of_players == 1:
+				cutout_in = cutout_death
+				yield(get_tree().create_timer(.75), "timeout")
+			else:
+				reload = false
 		elif cause == "reload":
 			transition_time = 0.4
-		scene_transitions.reload_scene(cutout_in, cutout_out, transition_time)
+		if reload:
+			scene_transitions.reload_scene(cutout_in, cutout_out, transition_time)
 
 func exit():
 	mode_switcher.get_node("ModeSwitcherButton").switch()

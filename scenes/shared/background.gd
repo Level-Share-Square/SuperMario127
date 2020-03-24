@@ -1,15 +1,19 @@
 extends Node2D
 
-export var parallax : NodePath
-export var background : NodePath
+onready var parallax_node = $Parallax
+onready var background_node = $Background/Sprite
 
-onready var parallax_node = get_node(parallax)
-onready var background_node = get_node(background)
+var ready = false
+
+func _ready():
+	ready = true
 
 func load_in(level_data : LevelData, level_area : LevelArea):
 	update_background(level_area)
 
 func update_background(area):
+	if !ready:
+		yield(self,"ready")
 	var background_id_mapper = preload("res://scenes/shared/background/backgrounds/ids.tres")
 	var background_mapped_id = background_id_mapper.ids[area.settings.sky]
 	var background_resource = load("res://scenes/shared/background/backgrounds/" + background_mapped_id + "/resource.tres")

@@ -4,6 +4,7 @@ export var character : NodePath
 export var character2 : NodePath
 
 var mode = 0
+export var number_of_players = 2
 
 func _ready():
 	var data = CurrentLevelData.level_data
@@ -11,7 +12,10 @@ func _ready():
 	
 func _process(delta):
 	if Input.is_action_just_pressed("reload"):
-		get_node(character).kill("reload")
+		if !get_node(character).dead:
+			get_node(character).kill("reload")
+		else:
+			get_node(character2).kill("reload")
 
 func switch_scenes():
 	get_tree().change_scene("res://scenes/editor/editor.tscn")

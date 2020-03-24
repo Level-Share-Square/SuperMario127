@@ -777,7 +777,7 @@ script = ExtResource( 27 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-shared_node_path = NodePath("../../../../Shared")
+backgrounds_node_path = NodePath("../../../../Backgrounds")
 
 [node name="Preview" type="Control" parent="UI/LevelSettingsWindow/Contents/BackgroundEdit"]
 margin_left = 80.0
@@ -993,6 +993,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 shared_node_path = NodePath("../../../../Shared")
+backgrounds_node_path = NodePath("../../../../Backgrounds")
 camera_node_path = NodePath("../../../../Camera2D")
 
 [node name="Middle" type="TextureRect" parent="UI/LevelSettingsWindow/Contents/LevelSize"]

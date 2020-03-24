@@ -1,7 +1,7 @@
 extends Control
 
-export var shared_node_path : NodePath
-onready var shared_node = get_node(shared_node_path)
+export var backgrounds_node_path : NodePath
+onready var backgrounds_node = get_node(backgrounds_node_path)
 
 onready var preview_background = $Preview/BackgroundPreview
 onready var preview_foreground = $Preview/ForegroundPreview
@@ -32,7 +32,7 @@ func update_preview():
 	preview_foreground.texture = foreground_resource.preview
 	preview_foreground.modulate = background_resource.parallax_modulate
 	
-	shared_node.update_background(area)
+	backgrounds_node.update_background(area)
 	pass
 
 func _ready():

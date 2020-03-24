@@ -29,36 +29,40 @@ func _start(delta):
 	jump_buffer = 0
 	ground_buffer = 0
 	jump_playing = true
-	if dive_buffer > 0:
-		character.current_jump = 0
-	if character.current_jump == 2 and abs(character.velocity.x) < 80:
-		character.current_jump = 1
-	if character.current_jump != 2 && character.last_state == character.get_state_node("SpinningState"):
-		character.set_state_by_name("SpinningState", delta)
-	if character.current_jump == 0:
-		var jump_player = character.get_node("jump_sounds")
-		if !dive_buffer > 0:
+	if ledge_buffer > 0:
+		if dive_buffer > 0:
+			character.current_jump = 0
+		if character.current_jump == 2 and abs(character.velocity.x) < 80:
+			character.current_jump = 1
+		if character.current_jump != 2 && character.last_state == character.get_state_node("SpinningState"):
+			character.set_state_by_name("SpinningState", delta)
+		if character.current_jump == 0:
+			var jump_player = character.get_node("jump_sounds")
+			if !dive_buffer > 0:
+				jump_player.play()
+			character.velocity.y = -jump_power
+			character.position.y -= 3
+			character.jump_animation = 0
+			character.current_jump = 1
+		elif character.current_jump == 1:
+			var jump_player = character.get_node("dble_jump_sounds")
 			jump_player.play()
-		character.velocity.y = -jump_power
-		character.position.y -= 3
+			character.velocity.y = -double_jump_power
+			character.position.y -= 3
+			character.jump_animation = 1
+			character.current_jump = 2
+		elif character.current_jump == 2:
+			var jump_player = character.get_node("trple_jump_sounds")
+			jump_player.play()
+			character.velocity.y = -triple_jump_power
+			character.position.y -= 3
+			character.jump_animation = 2
+			character.current_jump = 0
+			direction_on_tj = character.facing_direction
+			sprite.rotation_degrees = direction_on_tj
+	else:
 		character.jump_animation = 0
-		character.current_jump = 1
-	elif character.current_jump == 1:
-		var jump_player = character.get_node("dble_jump_sounds")
-		jump_player.play()
-		character.velocity.y = -double_jump_power
-		character.position.y -= 3
-		character.jump_animation = 1
-		character.current_jump = 2
-	elif character.current_jump == 2:
-		var jump_player = character.get_node("trple_jump_sounds")
-		jump_player.play()
-		character.velocity.y = -triple_jump_power
-		character.position.y -= 3
-		character.jump_animation = 2
-		character.current_jump = 0
-		direction_on_tj = character.facing_direction
-		sprite.rotation_degrees = direction_on_tj
+	ledge_buffer = 0
 
 func _update(delta):
 	var sprite = character.animated_sprite

@@ -9,7 +9,7 @@ var collected = false
 var destroy_timer = 0.0
 
 func collect(body):
-	if !collected && body.name == "Character" && body.controllable:
+	if !collected && body.name.begins_with("Character") && body.controllable:
 		sound.play()
 		collected = true;
 		# this shouldn't have to be a thing, but godot is annoying

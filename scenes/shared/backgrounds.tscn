@@ -5,8 +5,6 @@
 
 [node name="Backgrounds" type="Node2D"]
 script = ExtResource( 2 )
-parallax = NodePath("Parallax")
-background = NodePath("Background/Sprite")
 
 [node name="Parallax" type="ParallaxBackground" parent="."]
 layer = -1
