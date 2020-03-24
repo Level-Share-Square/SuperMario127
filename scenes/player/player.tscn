@@ -237,6 +237,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Divider" type="ColorRect" parent="UI"]
+margin_left = 384.0
+margin_right = 388.0
+margin_bottom = 432.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Viewports" type="HBoxContainer" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -244,6 +253,7 @@ script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+divider_path = NodePath("../UI/Divider")
 
 [node name="ViewportContainer" type="ViewportContainer" parent="Viewports"]
 margin_right = 384.0
