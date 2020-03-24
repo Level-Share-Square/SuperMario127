@@ -29,17 +29,31 @@ func _ready():
 
 func _process(delta):
 	if number_of_players == 2:
-		if player2.dead and number_of_players:
-			number_of_players = 1
-			player1.number_of_players = number_of_players
+		if player2.dead:
 			viewport_container2.visible = false
-			viewport_container1.rect_size.x = 768
+			viewport_container1.visible = true
 			viewport1.size.x = 768
-			divider.visible = false
-		elif player1.dead and number_of_players:
-			number_of_players = 1
-			player2.number_of_players = number_of_players
+			viewport_container1.rect_size.x = 768
+			viewport2.size.x = 384
+			viewport_container2.rect_size.x = 384
+			
+		if player1.dead:
 			viewport_container1.visible = false
-			viewport_container2.rect_size.x = 768
+			viewport_container2.visible = true
 			viewport2.size.x = 768
+			viewport_container2.rect_size.x = 768
+			viewport1.size.x = 384
+			viewport_container1.rect_size.x = 384
+			
+		if !player2.dead and !player1.dead:
+			viewport_container1.visible = true
+			viewport_container2.visible = true
+			viewport2.size.x = 384
+			viewport_container2.rect_size.x = 384
+			viewport1.size.x = 384
+			viewport_container1.rect_size.x = 384
+
+		if player1.dead or player2.dead:
 			divider.visible = false
+		else:
+			divider.visible = true

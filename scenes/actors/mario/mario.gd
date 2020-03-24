@@ -41,6 +41,7 @@ export var current_jump = 0
 export var jump_animation = 0
 export var direction_on_stick = 1
 export var rotating = true
+export var spawn_pos = Vector2(0, 0)
 
 export var disable_movement = false
 export var disable_turning = false
@@ -302,7 +303,12 @@ func kill(cause):
 				cutout_in = cutout_death
 				yield(get_tree().create_timer(.75), "timeout")
 			else:
+				yield(get_tree().create_timer(5), "timeout")
+				position = spawn_pos
+				dead = false
 				reload = false
+				controllable = true
+				set_state_by_name("FallState", 0)
 		elif cause == "reload":
 			transition_time = 0.4
 		if reload:

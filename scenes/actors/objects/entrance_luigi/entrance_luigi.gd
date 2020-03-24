@@ -5,3 +5,4 @@ func _ready():
 		var player = get_tree().get_current_scene()
 		var character2 = player.get_node(player.character2)
 		character2.position = position
+		character2.spawn_pos = position

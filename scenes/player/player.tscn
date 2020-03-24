@@ -238,6 +238,7 @@ __meta__ = {
 }
 
 [node name="Divider" type="ColorRect" parent="UI"]
+visible = false
 margin_left = 384.0
 margin_right = 388.0
 margin_bottom = 432.0
