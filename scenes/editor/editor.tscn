@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=80 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -54,6 +54,9 @@
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=52]
 [ext_resource path="res://scenes/editor/entrance_item/entrance_removal.gd" type="Script" id=53]
 [ext_resource path="res://scenes/editor/entrance_item/entrance_placement.gd" type="Script" id=54]
+[ext_resource path="res://scenes/actors/objects/entrance_luigi/sprite.png" type="Texture" id=55]
+[ext_resource path="res://scenes/editor/luigi_entrance_item/entrance_placement.gd" type="Script" id=56]
+[ext_resource path="res://scenes/editor/luigi_entrance_item/entrance_removal.gd" type="Script" id=57]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -610,13 +613,27 @@ script = ExtResource( 3 )
 is_object = true
 object_center = Vector2( 15, 16 )
 z_index = -1
-change_to = "Entrance"
+change_to = "EntranceLuigi"
 icon = ExtResource( 12 )
 preview = ExtResource( 12 )
 has_placement_action = true
 placement_action = ExtResource( 54 )
 has_removal_action = true
 removal_action = ExtResource( 53 )
+
+[node name="EntranceLuigi" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 5
+is_object = true
+object_center = Vector2( 15, 16 )
+z_index = -1
+change_to = "Entrance"
+icon = ExtResource( 55 )
+preview = ExtResource( 55 )
+has_placement_action = true
+placement_action = ExtResource( 56 )
+has_removal_action = true
+removal_action = ExtResource( 57 )
 
 [node name="Shine" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
