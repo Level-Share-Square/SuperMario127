@@ -11,7 +11,7 @@ func collect(body):
 		character = body
 		character.set_state_by_name("Fall", 0)
 		character.velocity = Vector2(0, 0)
-		character.get_node("sprite").rotation_degrees = 0
+		character.get_node("Sprite").rotation_degrees = 0
 		character.controllable = false
 		#sound.play() -Sound doesn't carry over between scenes, so it cuts off
 		collected = true

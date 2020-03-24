@@ -25,6 +25,9 @@ var right_held = false
 
 export var layer = 1
 
+func get_shared_node():
+	return shared_node
+
 func switch_layers():
 	if layer == 0:
 		layer = 1
@@ -87,8 +90,9 @@ func _process(delta):
 			var item = selected_box.item
 			
 			if !item.is_object:
-				if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:
-					shared_node.set_tile(tile_index, layer, item.tileset_id, item.tile_id)
+				if item.on_place(mouse_tile_pos, level_data, level_area):
+					if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:
+						shared_node.set_tile(tile_index, layer, item.tileset_id, item.tile_id)
 			else:
 				var object_pos
 				if placement_mode == "Tile":
@@ -103,7 +107,7 @@ func _process(delta):
 						var result = space_state.intersect_ray(object_bottom, object_bottom + Vector2(0, 16))
 						if result:
 							object_pos = result.position - Vector2(0, item.object_size.y)
-				if object_pos and !shared_node.is_object_at_position(object_pos):
+				if object_pos and !shared_node.is_object_at_position(object_pos) and item.on_place(object_pos, level_data, level_area):
 					var object = LevelObject.new()
 					object.type_id = item.object_id
 					object.properties = {}
@@ -117,10 +121,13 @@ func _process(delta):
 				if item.is_object:
 					if placement_mode == "Tile":
 						var object_pos = (mouse_tile_pos * 32) + item.object_center
-						shared_node.destroy_object_at_position(object_pos, true)
+						if item.on_erase(object_pos, level_data, level_area):
+							shared_node.destroy_object_at_position(object_pos, true)
 					elif Input.is_action_just_pressed("erase"):
-						shared_node.destroy_objects_overlapping_position(mouse_pos, true)
+						if item.on_erase(mouse_pos, level_data, level_area):
+							shared_node.destroy_objects_overlapping_position(mouse_pos, true)
 				else:
-					if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:
-						shared_node.set_tile(tile_index, layer, 0, 0)
+					if item.on_erase(mouse_tile_pos, level_data, level_area):
+						if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:
+							shared_node.set_tile(tile_index, layer, 0, 0)
 		last_mouse_pos = mouse_pos

@@ -37,7 +37,7 @@ func _start(delta):
 		if character.current_jump != 2 && character.last_state == character.get_state_node("SpinningState"):
 			character.set_state_by_name("SpinningState", delta)
 		if character.current_jump == 0:
-			var jump_player = character.get_node("jump_sounds")
+			var jump_player = character.get_node("JumpSounds")
 			if !dive_buffer > 0:
 				jump_player.play()
 			character.velocity.y = -jump_power
@@ -45,14 +45,14 @@ func _start(delta):
 			character.jump_animation = 0
 			character.current_jump = 1
 		elif character.current_jump == 1:
-			var jump_player = character.get_node("dble_jump_sounds")
+			var jump_player = character.get_node("DoubleJumpSounds")
 			jump_player.play()
 			character.velocity.y = -double_jump_power
 			character.position.y -= 3
 			character.jump_animation = 1
 			character.current_jump = 2
 		elif character.current_jump == 2:
-			var jump_player = character.get_node("trple_jump_sounds")
+			var jump_player = character.get_node("TripleJumpSounds")
 			jump_player.play()
 			character.velocity.y = -triple_jump_power
 			character.position.y -= 3

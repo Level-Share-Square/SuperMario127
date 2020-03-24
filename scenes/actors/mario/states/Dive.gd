@@ -17,9 +17,9 @@ func _start_check(delta):
 	return dive_buffer > 0 and !(abs(character.velocity.x) <= 150 and character.is_grounded()) and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0)) and !character.is_walled()
 
 func _start(delta):
-	var dive_player = character.get_node("dive_sounds")
-	var collision = character.get_node("collision")
-	var dive_collision = character.get_node("dive_collision")
+	var dive_player = character.get_node("DiveSounds")
+	var collision = character.get_node("Collision")
+	var dive_collision = character.get_node("DiveCollision")
 	if dive_buffer > 0:
 		character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
 		character.velocity.y += dive_power.y
@@ -52,8 +52,8 @@ func _update(delta):
 		last_above_rot_limit = true
 		
 func _stop(delta):
-	var collision = character.get_node("collision")
-	var dive_collision = character.get_node("dive_collision")
+	var collision = character.get_node("Collision")
+	var dive_collision = character.get_node("DiveCollision")
 	var sprite = character.animated_sprite
 	sprite.rotation_degrees = 0
 	if character.test_move(character.transform, Vector2(0.1 * character.facing_direction, -15)) and !character.is_grounded():
