@@ -42,10 +42,12 @@ func _stop(delta):
 			character.position.y -= 16
 		collision.disabled = false
 		dive_collision.disabled = true
+		character.attacking = false
 	else:
 		sprite.rotation_degrees = 0
 		collision.disabled = false
 		dive_collision.disabled = true
+		character.attacking = false
 	stop = false
 
 func _stop_check(delta):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=2]
@@ -14,6 +14,12 @@
 [ext_resource path="res://scenes/actors/mario/states/Bonked.gd" type="Script" id=12]
 [ext_resource path="res://scenes/actors/mario/states/Dive.gd" type="Script" id=13]
 [ext_resource path="res://scenes/actors/mario/states/Getup.gd" type="Script" id=14]
+[ext_resource path="res://scenes/actors/mario/sounds/Damage3.wav" type="AudioStream" id=15]
+[ext_resource path="res://scenes/actors/mario/sounds/Damage1.wav" type="AudioStream" id=16]
+[ext_resource path="res://scenes/actors/mario/sounds/Damage2.wav" type="AudioStream" id=17]
+[ext_resource path="res://scenes/actors/mario/sounds/Stomped3.wav" type="AudioStream" id=18]
+[ext_resource path="res://scenes/actors/mario/sounds/Stomped1.wav" type="AudioStream" id=19]
+[ext_resource path="res://scenes/actors/mario/sounds/Stomped2.wav" type="AudioStream" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 15 )
@@ -173,6 +179,32 @@ sound_number = 1
 
 [node name="Fall1" type="AudioStreamPlayer" parent="FallSounds"]
 stream = SubResource( 15 )
+
+[node name="HitSounds" type="Node" parent="."]
+script = ExtResource( 2 )
+sound_number = 1
+
+[node name="Hit1" type="AudioStreamPlayer" parent="HitSounds"]
+stream = ExtResource( 16 )
+
+[node name="Hit2" type="AudioStreamPlayer" parent="HitSounds"]
+stream = ExtResource( 17 )
+
+[node name="Hit3" type="AudioStreamPlayer" parent="HitSounds"]
+stream = ExtResource( 15 )
+
+[node name="StompedSounds" type="Node" parent="."]
+script = ExtResource( 2 )
+sound_number = 1
+
+[node name="Stomped1" type="AudioStreamPlayer" parent="StompedSounds"]
+stream = ExtResource( 19 )
+
+[node name="Stomped2" type="AudioStreamPlayer" parent="StompedSounds"]
+stream = ExtResource( 20 )
+
+[node name="Stomped3" type="AudioStreamPlayer" parent="StompedSounds"]
+stream = ExtResource( 18 )
 
 [node name="States" type="Node" parent="."]
 

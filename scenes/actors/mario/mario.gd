@@ -31,6 +31,8 @@ export var aerial_friction = 1.15
 
 # Sounds
 onready var fall_sound_player = $FallSounds
+onready var hit_sound_player = $HitSounds
+onready var stomped_sound_player = $StompedSounds
 
 # Extra
 export var is_wj_chained = false
@@ -139,6 +141,7 @@ func player_hit(body):
 	if body.name.begins_with("Character"):
 		if global_position.y + 8 < body.global_position.y:
 			velocity.y = -230
+			#body.stomped_sound_player.play() -Felt weird without animations
 			if state != get_state_node("DiveState"):
 				set_state_by_name("JumpState", 0)
 		elif global_position.y - 8 > body.global_position.y:
@@ -149,16 +152,20 @@ func player_hit(body):
 				velocity.y = -175
 				body.velocity.x = 250
 				set_state_by_name("BonkedState", 0)
+				hit_sound_player.play()
 			elif !attacking or (body.attacking and attacking):
 				velocity.x = -250
+				body.velocity.x = 250
 		elif global_position.x - 4 > body.global_position.x:
 			if body.attacking == true and !attacking:
 				velocity.x = 205
 				velocity.y = -175
 				body.velocity.x = -250
 				set_state_by_name("BonkedState", 0)
+				hit_sound_player.play()
 			elif !attacking or (body.attacking and attacking):
 				velocity.x = 250
+				body.velocity.x = -250
 
 func _physics_process(delta: float):
 	var gravity = 7.82 #global_vars_node.gravity

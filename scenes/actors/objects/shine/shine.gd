@@ -25,7 +25,7 @@ func _ready():
 func _physics_process(delta):
 	effects.rotation_degrees += 0.5
 	if collected:
-		var sprite = character.get_node("sprite")
+		var sprite = character.get_node("Sprite")
 		sprite.animation = "shineFall"
 		if character.is_grounded():
 			character.exit()

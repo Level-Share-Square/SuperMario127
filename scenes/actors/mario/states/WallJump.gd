@@ -19,7 +19,7 @@ func _start_check(delta):
 	return character.state == character.get_state_node("WallSlideState") && !(limit_y && character.position.y < position_on_wj.y && character_in_range) && press_buffer > 0
 
 func _start(delta):
-	var jump_player = character.get_node("jump_sounds")
+	var jump_player = character.get_node("JumpSounds")
 	press_buffer = 0
 	position_on_wj = character.position
 	character.facing_direction = -character.direction_on_stick
