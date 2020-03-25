@@ -3,6 +3,7 @@ extends State
 class_name GetupState
 
 export var get_up_power = 360
+export var get_up_power_luigi = 360
 
 var stop_counter = 0.0
 
@@ -14,7 +15,10 @@ func _start(delta):
 	var sprite = character.animated_sprite
 	var sound_player = character.get_node("Sounds")
 	sound_player.play_dive_sound()
-	character.velocity.y = -get_up_power
+	if character.character == 0:
+		character.velocity.y = -get_up_power
+	else:
+		character.velocity.y = -get_up_power_luigi
 	character.position.y -= 7
 	character.friction = character.real_friction
 	sprite.rotation_degrees = 90 * character.facing_direction

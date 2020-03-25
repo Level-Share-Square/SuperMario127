@@ -83,6 +83,10 @@ export var luigi_dive_collision_offset : Vector2
 export var mario_sounds : String
 export var luigi_sounds : String
 
+export var luigi_accel : float
+export var luigi_fric : float
+export var luigi_speed : float
+
 #onready var global_vars_node = get_node("../GlobalVars")
 #onready var level_settings_node = get_node("../LevelSettings")
 onready var collision_shape = $Collision
@@ -95,7 +99,6 @@ var level_size = Vector2(80, 30)
 var number_of_players = 2
 
 func _ready():
-	real_friction = friction
 	player_collision.connect("body_entered", self, "player_hit")
 	if character == 0:
 		var sound_scene = load(mario_sounds)
@@ -108,6 +111,7 @@ func _ready():
 		player_collision_shape.shape = mario_collision
 		dive_collision_shape.shape = mario_dive_collision
 		dive_collision_shape.position = mario_dive_collision_offset
+		real_friction = friction
 	else:
 		var sound_scene = load(luigi_sounds)
 		sound_player = sound_scene.instance()
@@ -119,6 +123,10 @@ func _ready():
 		player_collision_shape.shape = luigi_collision
 		dive_collision_shape.shape = luigi_dive_collision
 		dive_collision_shape.position = luigi_dive_collision_offset
+		move_speed = luigi_speed
+		acceleration = luigi_accel
+		friction = luigi_fric
+		real_friction = luigi_fric
 
 func load_in(level_data : LevelData, level_area : LevelArea):
 	level_size = level_area.settings.size
@@ -180,14 +188,14 @@ func is_action_just_pressed(input):
 		
 func player_hit(body):
 	if body.name.begins_with("Character"):
-		if global_position.y + 8 < body.global_position.y:
+		if global_position.y + 16 < body.global_position.y:
 			velocity.y = -230
 			#body.stomped_sound_player.play() -Felt weird without animations
 			if state != get_state_node("DiveState"):
-				set_state_by_name("JumpState", 0)
+				set_state_by_name("BounceState", 0)
 		elif global_position.y - 8 > body.global_position.y:
 			velocity.y = 150
-		elif global_position.x + 4 < body.global_position.x:
+		elif global_position.x < body.global_position.x:
 			if body.attacking == true and !attacking:
 				velocity.x = -205
 				velocity.y = -175
@@ -197,7 +205,7 @@ func player_hit(body):
 			elif !attacking or (body.attacking and attacking):
 				velocity.x = -250
 				body.velocity.x = 250
-		elif global_position.x - 4 > body.global_position.x:
+		elif global_position.x > body.global_position.x:
 			if body.attacking == true and !attacking:
 				velocity.x = 205
 				velocity.y = -175

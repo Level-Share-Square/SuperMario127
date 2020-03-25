@@ -3,6 +3,7 @@ extends State
 class_name DiveState
 
 export var dive_power: Vector2 = Vector2(1350, 75)
+export var dive_power_luigi: Vector2 = Vector2(1350, 75)
 export var bonk_power: float = 150
 export var maxVelocityX: float = 700
 var last_above_rot_limit = false
@@ -21,8 +22,12 @@ func _start(delta):
 	var collision = character.get_node("Collision")
 	var dive_collision = character.get_node("DiveCollision")
 	if dive_buffer > 0:
-		character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
-		character.velocity.y += dive_power.y
+		if character.character == 0:
+			character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
+			character.velocity.y += dive_power.y
+		else:
+			character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power_luigi.x * character.facing_direction)) / 5
+			character.velocity.y += dive_power_luigi.y
 		sound_player.play_dive_sound()
 	character.position.y += 4
 	collision.disabled = true

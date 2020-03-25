@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/mario/mario.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/mario/states/Fall.gd" type="Script" id=4]
 [ext_resource path="res://scenes/actors/mario/states/Jump.gd" type="Script" id=5]
@@ -15,16 +16,16 @@
 [ext_resource path="res://scenes/actors/mario/states/Getup.gd" type="Script" id=14]
 [ext_resource path="res://scenes/actors/mario/luigi_frames.tres" type="SpriteFrames" id=21]
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 15 )
 
-[sub_resource type="RectangleShape2D" id=17]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 15, 5 )
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5.5, 18 )
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 5.5, 16 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 17, 5 )
 
 [node name="Character" type="KinematicBody2D"]
@@ -40,24 +41,27 @@ acceleration = 10.5
 friction = 13.5
 mario_frames = ExtResource( 1 )
 luigi_frames = ExtResource( 21 )
-mario_collision = SubResource( 16 )
+mario_collision = SubResource( 1 )
 mario_collision_offset = Vector2( 0.5, 8 )
-mario_dive_collision = SubResource( 17 )
+mario_dive_collision = SubResource( 2 )
 mario_dive_collision_offset = Vector2( 0, 4 )
-luigi_collision = SubResource( 1 )
-luigi_collision_offset = Vector2( 0.5, 5 )
-luigi_dive_collision = SubResource( 2 )
+luigi_collision = SubResource( 3 )
+luigi_collision_offset = Vector2( 0.5, 7 )
+luigi_dive_collision = SubResource( 4 )
 luigi_dive_collision_offset = Vector2( -4, 4 )
 mario_sounds = "res://scenes/actors/mario/mario_sounds.tscn"
 luigi_sounds = "res://scenes/actors/mario/luigi_sounds.tscn"
+luigi_accel = 10.5
+luigi_fric = 13.5
+luigi_speed = 216.0
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2( 0.5, 5 )
-shape = SubResource( 1 )
+position = Vector2( 0.5, 7 )
+shape = SubResource( 3 )
 
 [node name="DiveCollision" type="CollisionShape2D" parent="."]
 position = Vector2( -4, 4 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
@@ -85,6 +89,7 @@ script = ExtResource( 8 )
 [node name="DiveState" type="Node" parent="States"]
 script = ExtResource( 13 )
 dive_power = Vector2( 1350, 175 )
+dive_power_luigi = Vector2( 1350, 175 )
 
 [node name="SlideState" type="Node" parent="States"]
 script = ExtResource( 11 )
@@ -95,13 +100,17 @@ script = ExtResource( 12 )
 [node name="GetupState" type="Node" parent="States"]
 script = ExtResource( 14 )
 get_up_power = 230
+get_up_power_luigi = 230
+
+[node name="BounceState" type="Node" parent="States"]
+script = ExtResource( 2 )
 
 [node name="PlayerCollision" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollision"]
-position = Vector2( 0.5, 5 )
-shape = SubResource( 1 )
+position = Vector2( 0.5, 7 )
+shape = SubResource( 3 )
 
 [node name="Bubble" type="Sprite" parent="."]

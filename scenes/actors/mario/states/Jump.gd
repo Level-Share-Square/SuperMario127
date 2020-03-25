@@ -5,6 +5,11 @@ class_name JumpState
 export var jump_power: float = 350
 export var double_jump_power: float = 425
 export var triple_jump_power: float = 495
+
+export var jump_power_luigi: float = 350
+export var double_jump_power_luigi: float = 425
+export var triple_jump_power_luigi: float = 495
+
 var ground_buffer = 0
 var jump_buffer = 0
 var ledge_buffer = 0
@@ -40,19 +45,28 @@ func _start(delta):
 		if character.current_jump == 0:
 			if !dive_buffer > 0:
 				sound_player.play_jump_sound()
-			character.velocity.y = -jump_power
+			if character.character == 0:
+				character.velocity.y = -jump_power
+			else:
+				character.velocity.y = -jump_power_luigi
 			character.position.y -= 3
 			character.jump_animation = 0
 			character.current_jump = 1
 		elif character.current_jump == 1:
 			sound_player.play_double_jump_sound()
-			character.velocity.y = -double_jump_power
+			if character.character == 0:
+				character.velocity.y = -double_jump_power
+			else:
+				character.velocity.y = -double_jump_power_luigi
 			character.position.y -= 3
 			character.jump_animation = 1
 			character.current_jump = 2
 		elif character.current_jump == 2:
 			sound_player.play_triple_jump_sound()
-			character.velocity.y = -triple_jump_power
+			if character.character == 0:
+				character.velocity.y = -triple_jump_power
+			else:
+				character.velocity.y = -triple_jump_power_luigi
 			character.position.y -= 3
 			character.jump_animation = 2
 			character.current_jump = 0

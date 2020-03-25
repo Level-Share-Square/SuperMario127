@@ -65,6 +65,16 @@ character2 = NodePath("Viewports/ViewportContainer/Viewport/World/Character2")
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 127
 
+[node name="Divider" type="ColorRect" parent="UI"]
+visible = false
+margin_left = 384.0
+margin_right = 388.0
+margin_bottom = 432.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2
 visible = false
@@ -76,6 +86,7 @@ __meta__ = {
 }
 darken_color = Color( 0.121569, 0.137255, 0.184314, 0.501961 )
 character_node_path = NodePath("../../Viewports/ViewportContainer/Viewport/World/Character")
+character2_node_path = NodePath("../../Viewports/ViewportContainer/Viewport/World/Character2")
 
 [node name="Darken" type="ColorRect" parent="UI/PauseScreen"]
 margin_right = 768.0
@@ -233,16 +244,6 @@ custom_fonts/normal_font = SubResource( 7 )
 bbcode_enabled = true
 bbcode_text = "[center]You are in a custom level.[/center]"
 text = "You are in a custom level."
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Divider" type="ColorRect" parent="UI"]
-visible = false
-margin_left = 384.0
-margin_right = 388.0
-margin_bottom = 432.0
-color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

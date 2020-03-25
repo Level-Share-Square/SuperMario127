@@ -5,6 +5,9 @@ export var darken_color : Color
 export var character_node_path : NodePath
 onready var character_node = get_node(character_node_path)
 
+export var character2_node_path : NodePath
+onready var character2_node = get_node(character2_node_path)
+
 onready var topbar = $Top
 
 onready var bottombar = $Bottom
@@ -20,7 +23,7 @@ onready var bottombar_tween = $TweenBottombar
 onready var info_tween = $TweenShineInfo
 
 func _unhandled_input(event):
-	if event.is_action_pressed("pause") and !character_node.dead:
+	if event.is_action_pressed("pause") and !(character_node.dead and character2_node.dead):
 		toggle_pause()
 
 func toggle_pause():
@@ -75,7 +78,10 @@ func toggle_pause():
 	
 func retry():
 	retry_button.focus_mode = 0
-	character_node.kill("reload")
+	if !character_node.dead:
+		character_node.kill("reload")
+	else:
+		character2_node.kill("reload")
 
 func _ready():
 	resume_button.connect("pressed", self, "toggle_pause")
