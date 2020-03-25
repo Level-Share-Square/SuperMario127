@@ -23,6 +23,9 @@ func _process(delta):
 			if data[0] != uuid:
 				if data[1] == "connection":
 					status_print("Client connected")
+					# Get the encoded level string
+					var encoded_level_string
+					socket.put_packet(JSON.print([uuid, "load_level", encoded_level_string]).to_ascii())
 				else:
 					status_print("Unknown data received: " + data[1])
 

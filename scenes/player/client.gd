@@ -23,6 +23,9 @@ func _process(delta):
 			if data[0] != uuid:
 				if data[1] == "quit":
 					stop_hosting()
+				elif data[1] == "load_level":
+					status_print("Loading level")
+					# Load level in here
 				else:
 					status_print("Unknown data received: " + data[1])
 
