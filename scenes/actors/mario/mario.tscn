@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/actors/mario/alt_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/mario/mario.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/mario/states/Fall.gd" type="Script" id=4]
