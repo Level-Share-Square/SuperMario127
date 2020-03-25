@@ -53,7 +53,7 @@ func _general_update(delta):
 	if character.is_grounded():
 		limit_y = false
 		character.is_wj_chained = false
-	if character.is_action_just_pressed("jump") && !character.is_grounded():
+	if character.jump_just_pressed && !character.is_grounded():
 		press_buffer = 0.075
 	if press_buffer > 0:
 		press_buffer -= delta

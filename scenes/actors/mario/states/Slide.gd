@@ -54,7 +54,7 @@ func _stop_check(delta):
 	return abs(character.velocity.x) < 5 or stop or !character.is_grounded()
 
 func _general_update(delta):
-	if character.is_action_just_pressed("jump"):
+	if character.jump_just_pressed:
 		getup_buffer = 0.075
 	if getup_buffer > 0:
 		getup_buffer -= delta

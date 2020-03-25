@@ -87,6 +87,24 @@ export var luigi_accel : float
 export var luigi_fric : float
 export var luigi_speed : float
 
+# Inputs
+export var left = false
+export var left_just_pressed = false
+
+export var right = false
+export var right_just_pressed = false
+
+export var jump = false
+export var jump_just_pressed = false
+
+export var dive = false
+export var dive_just_pressed = false
+
+export var spin = false
+export var spin_just_pressed = false
+
+export var controlled_locally = true
+
 #onready var global_vars_node = get_node("../GlobalVars")
 #onready var level_settings_node = get_node("../LevelSettings")
 onready var collision_shape = $Collision
@@ -172,18 +190,6 @@ func get_state_node(name: String):
 func set_state_by_name(name: String, delta: float):
 	if get_state_node(name) != null:
 		set_state(get_state_node(name), delta)
-	
-func is_action_pressed(input):
-	if controllable:
-		return Input.is_action_pressed(input + "_" + str(player_id))
-	else:
-		return false
-		
-func is_action_just_pressed(input):
-	if controllable:
-		return Input.is_action_just_pressed(input + "_" + str(player_id))
-	else:
-		return false
 		
 func player_hit(body):
 	if body.name.begins_with("Character"):
@@ -227,6 +233,70 @@ func _physics_process(delta: float):
 		if not result.empty():
 			position.x += move_direction * 5
 			position.y = result.position.y + 3
+			
+	# Inputs
+	if controlled_locally:
+		if controllable:
+			if Input.is_action_pressed("move_left_" + str(player_id)):
+				left = true
+			else:
+				left = false
+			if Input.is_action_just_pressed("move_left_" + str(player_id)):
+				left_just_pressed = true
+			else:
+				left_just_pressed = false
+				
+			if Input.is_action_pressed("move_right_" + str(player_id)):
+				right = true
+			else:
+				right = false
+			if Input.is_action_just_pressed("move_right_" + str(player_id)):
+				right_just_pressed = true
+			else:
+				right_just_pressed = false
+				
+			if Input.is_action_pressed("jump_" + str(player_id)):
+				jump = true
+			else:
+				jump = false
+			if Input.is_action_just_pressed("jump_" + str(player_id)):
+				jump_just_pressed = true
+			else:
+				jump_just_pressed = false
+				
+			if Input.is_action_pressed("dive_" + str(player_id)):
+				dive = true
+			else:
+				dive = false
+			if Input.is_action_just_pressed("dive_" + str(player_id)):
+				dive_just_pressed = true
+			else:
+				dive_just_pressed = false
+				
+			if Input.is_action_pressed("spin_" + str(player_id)):
+				spin = true
+			else:
+				spin = false
+			if Input.is_action_just_pressed("spin_" + str(player_id)):
+				spin_just_pressed = true
+			else:
+				spin_just_pressed = false
+		else:
+			left = false
+			left_just_pressed = false
+			
+			right = false
+			right_just_pressed = false
+			
+			jump = false
+			jump_just_pressed = false
+			
+			dive = false
+			dive_just_pressed = false
+			
+			spin = false
+			spin_just_pressed = false
+		
 	
 	if state != null:
 		disable_movement = state.disable_movement
@@ -238,9 +308,9 @@ func _physics_process(delta: float):
 		disable_animation = false
 	# Movement
 	move_direction = 0
-	if is_action_pressed("move_left") and disable_movement == false:
+	if left and disable_movement == false:
 		move_direction = -1
-	elif is_action_pressed("move_right") and disable_movement == false:
+	elif right and disable_movement == false:
 		move_direction = 1
 	if move_direction != 0:
 		if is_grounded():
