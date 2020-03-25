@@ -188,7 +188,7 @@ func is_action_just_pressed(input):
 		
 func player_hit(body):
 	if body.name.begins_with("Character"):
-		if global_position.y + 16 < body.global_position.y:
+		if global_position.y + 8 < body.global_position.y:
 			velocity.y = -230
 			#body.stomped_sound_player.play() -Felt weird without animations
 			if state != get_state_node("DiveState"):
