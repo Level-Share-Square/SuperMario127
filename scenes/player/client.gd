@@ -24,8 +24,14 @@ func _process(delta):
 				if data[1] == "quit":
 					stop_hosting()
 				elif data[1] == "load_level":
+					print_debug("A")
 					status_print("Loading level")
-					# Load level in here
+					var level_data = LevelData.new()
+					level_data.load_in(data[2])
+					CurrentLevelData.level_data = level_data
+					music.loading = true
+					yield(get_tree().create_timer(0.1), "timeout")
+					get_tree().reload_current_scene()
 				else:
 					status_print("Unknown data received: " + data[1])
 
