@@ -1,6 +1,6 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://scenes/actors/mario/alt_frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/mario/mario.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/mario/states/Fall.gd" type="Script" id=4]
@@ -14,6 +14,7 @@
 [ext_resource path="res://scenes/actors/mario/states/Bonked.gd" type="Script" id=12]
 [ext_resource path="res://scenes/actors/mario/states/Dive.gd" type="Script" id=13]
 [ext_resource path="res://scenes/actors/mario/states/Getup.gd" type="Script" id=14]
+[ext_resource path="res://scenes/actors/mario/alt_frames.tres" type="SpriteFrames" id=15]
 [ext_resource path="res://scenes/actors/mario/luigi_frames.tres" type="SpriteFrames" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -65,7 +66,7 @@ shape = SubResource( 4 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 1 )
+frames = ExtResource( 15 )
 animation = "idleRight"
 playing = true
 
