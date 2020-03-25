@@ -22,7 +22,7 @@ func _process(delta):
 			var data = JSON.parse(data_string).result
 			if data[0] != uuid:
 				if data[1] == "connection":
-					status_print("Client disconnected")
+					status_print("Client connected")
 				else:
 					status_print("Unknown data received: " + data[1])
 
