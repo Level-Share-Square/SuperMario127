@@ -21,7 +21,10 @@ func _process(delta):
 			var data_string = socket.get_packet().get_string_from_ascii()
 			var data = JSON.parse(data_string).result
 			if data[0] != uuid:
-				status_print("Unknown data received: " + data[1])
+				if data[1] == "connection":
+					status_print("Client disconnected")
+				else:
+					status_print("Unknown data received: " + data[1])
 
 func start_hosting():
 	active = true
