@@ -256,6 +256,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 divider_path = NodePath("../UI/Divider")
+character_scene_path = "res://scenes/actors/mario/mario.tscn"
 
 [node name="ViewportContainer" type="ViewportContainer" parent="Viewports"]
 margin_right = 384.0

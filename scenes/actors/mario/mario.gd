@@ -98,8 +98,12 @@ onready var sprite = $Sprite
 var level_size = Vector2(80, 30)
 var number_of_players = 2
 
-func _ready():
+func load_in(level_data : LevelData, level_area : LevelArea):
+	level_size = level_area.settings.size
+	for exception in collision_exceptions:
+		add_collision_exception_with(get_node(exception))
 	player_collision.connect("body_entered", self, "player_hit")
+		
 	if character == 0:
 		var sound_scene = load(mario_sounds)
 		sound_player = sound_scene.instance()
@@ -127,11 +131,6 @@ func _ready():
 		acceleration = luigi_accel
 		friction = luigi_fric
 		real_friction = luigi_fric
-
-func load_in(level_data : LevelData, level_area : LevelArea):
-	level_size = level_area.settings.size
-	for exception in collision_exceptions:
-		add_collision_exception_with(get_node(exception))
 
 func is_grounded():
 	return test_move(self.transform, Vector2(0, 0.1)) and collided_last_frame

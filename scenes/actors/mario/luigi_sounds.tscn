@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Jump4.wav" type="AudioStream" id=15]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Jump2.wav" type="AudioStream" id=16]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/DoubleJump1.wav" type="AudioStream" id=17]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Dive3.wav" type="AudioStream" id=18]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/DoubleJump2.wav" type="AudioStream" id=19]
 
 [node name="Sounds" type="Node"]
@@ -67,6 +68,9 @@ stream = ExtResource( 3 )
 
 [node name="Dive2" type="AudioStreamPlayer" parent="DiveSounds"]
 stream = ExtResource( 9 )
+
+[node name="Dive3" type="AudioStreamPlayer" parent="DiveSounds"]
+stream = ExtResource( 18 )
 
 [node name="FallSounds" type="Node" parent="."]
 script = ExtResource( 1 )

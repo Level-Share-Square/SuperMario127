@@ -14,7 +14,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("reload"):
 		if !get_node(character).dead:
 			get_node(character).kill("reload")
-		else:
+		elif number_of_players == 2:
 			get_node(character2).kill("reload")
 
 func switch_scenes():
