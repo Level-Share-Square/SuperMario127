@@ -127,8 +127,9 @@ var sync_interpolation_speed = 25
 #spin, spin_just_pressed
 #)
 
-slave func sync(pos, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_dead, is_controllable):
+slave func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_dead, is_controllable):
 	next_position = pos
+	velocity = vel
 	sprite.animation = sprite_animation
 	sprite.frame = sprite_frame
 	sprite.rotation_degrees = sprite_rotation
@@ -430,7 +431,7 @@ func _physics_process(delta: float):
 	
 	if PlayerSettings.other_player_id != -1:
 		if player_id == PlayerSettings.my_player_index and is_network_master():
-			rpc_unreliable("sync", position, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, dead, controllable)
+			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, dead, controllable)
 
 func kill(cause):
 	if !dead:
