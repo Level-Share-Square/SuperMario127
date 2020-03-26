@@ -75,7 +75,7 @@ font_data = ExtResource( 4 )
 size = 112
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 16
 border_width_right = 16
@@ -85,15 +85,15 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=9]
 size = 32
 font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
-[sub_resource type="StyleBoxEmpty" id=8]
+[sub_resource type="StyleBoxEmpty" id=23]
 
-[sub_resource type="StyleBoxEmpty" id=9]
+[sub_resource type="StyleBoxEmpty" id=24]
 
 [sub_resource type="StyleBoxEmpty" id=10]
 
@@ -229,8 +229,8 @@ HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
 HScrollBar/icons/increment_highlight = null
 HScrollBar/styles/grabber = SubResource( 7 )
-HScrollBar/styles/grabber_highlight = SubResource( 8 )
-HScrollBar/styles/grabber_pressed = SubResource( 9 )
+HScrollBar/styles/grabber_highlight = SubResource( 23 )
+HScrollBar/styles/grabber_pressed = SubResource( 24 )
 HScrollBar/styles/scroll = SubResource( 10 )
 HScrollBar/styles/scroll_focus = SubResource( 11 )
 HSeparator/constants/separation = 4
@@ -1219,8 +1219,8 @@ margin_left = 577.0
 margin_top = 134.0
 margin_right = 1025.0
 margin_bottom = 212.0
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 6 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
 context_menu_enabled = false
 placeholder_text = "Level Name"

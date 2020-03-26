@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -13,48 +13,65 @@
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=11]
 [ext_resource path="res://scenes/player/viewports.gd" type="Script" id=12]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/player/ip_setter.gd" type="Script" id=14]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=9]
 size = 100
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.0705882, 0, 0.231373, 1 )
 corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0, 0.0470588, 0.317647, 1 )
 corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=12]
 size = 76
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=13]
 size = 32
 outline_size = 4
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=14]
 size = 32
 outline_size = 4
 outline_color = Color( 0.0392157, 0, 0.188235, 1 )
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=15]
 size = 20
 outline_size = 2
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 use_mipmaps = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 16
+border_width_right = 16
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="DynamicFont" id=16]
+size = 20
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=17]
+size = 27
 font_data = ExtResource( 7 )
 
 [node name="Player" type="Node2D"]
@@ -113,7 +130,7 @@ margin_top = 48.048
 margin_right = 1317.96
 margin_bottom = 148.048
 rect_pivot_offset = Vector2( 72, 0 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 9 )
 text = "PAUSED"
 align = 1
 valign = 1
@@ -151,10 +168,10 @@ margin_top = 128.886
 margin_right = 3262.55
 margin_bottom = 308.886
 rect_rotation = 180.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 4 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/normal = SubResource( 11 )
+custom_fonts/font = SubResource( 12 )
 action_mode = 0
 text = "Resume"
 script = ExtResource( 10 )
@@ -176,10 +193,10 @@ margin_top = 128.886
 margin_right = 2127.42
 margin_bottom = 308.886
 rect_rotation = 180.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 4 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/normal = SubResource( 11 )
+custom_fonts/font = SubResource( 12 )
 action_mode = 0
 text = "Retry"
 script = ExtResource( 10 )
@@ -213,7 +230,7 @@ margin_top = 143.986
 margin_right = 768.0
 margin_bottom = 182.986
 rect_pivot_offset = Vector2( 72, 0 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "No Shine Selected"
 align = 1
@@ -228,7 +245,7 @@ margin_top = -17.0
 margin_right = 768.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( 72, 0 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 14 )
 custom_colors/font_color = Color( 0.0392157, 0, 0.188235, 1 )
 text = "No Shine Selected"
 align = 1
@@ -242,7 +259,7 @@ margin_left = 0.375946
 margin_top = 194.168
 margin_right = 768.376
 margin_bottom = 275.168
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 15 )
 bbcode_enabled = true
 bbcode_text = "[center]You are in a custom level.[/center]"
 text = "You are in a custom level."
@@ -250,17 +267,68 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LineEdit" type="LineEdit" parent="UI/PauseScreen"]
-margin_top = 73.0
-margin_right = 238.0
-margin_bottom = 131.0
-text = "127.0.0.1"
+[node name="IpAddress" type="LineEdit" parent="UI/PauseScreen"]
+margin_left = 268.374
+margin_top = 255.742
+margin_right = 481.374
+margin_bottom = 292.742
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 16 )
+custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
 context_menu_enabled = false
-placeholder_text = "127.0.0.1"
-script = ExtResource( 14 )
+placeholder_text = "Ip Address"
+placeholder_alpha = 0.35
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ConnectButton" type="Button" parent="UI/PauseScreen"]
+margin_left = 481.947
+margin_top = 252.62
+margin_right = 608.947
+margin_bottom = 296.62
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/normal = SubResource( 11 )
+custom_fonts/font = SubResource( 17 )
+action_mode = 0
+text = "Connect"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ConnectButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ConnectButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="HostButton" type="Button" parent="UI/PauseScreen"]
+margin_left = 138.789
+margin_top = 252.731
+margin_right = 265.789
+margin_bottom = 296.731
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/normal = SubResource( 11 )
+custom_fonts/font = SubResource( 17 )
+action_mode = 0
+text = "Host"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/HostButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/HostButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
 
 [node name="Viewports" type="HBoxContainer" parent="."]
 margin_right = 772.0

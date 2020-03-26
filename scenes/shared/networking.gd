@@ -2,15 +2,6 @@ extends Node
 
 var network
 var connected_type = "None"
-
-func _input(event):
-	if get_tree().get_current_scene().mode == 0:
-		if event.is_action_pressed("host_game") and connected_type == "None":
-			start_server()
-			connected_type = "Server"
-		if event.is_action_pressed("connect_to_game") and connected_type == "None":
-			start_client()
-			connected_type = "Client"
 		
 func start_server():
 	network = NetworkedMultiplayerENet.new()
@@ -20,15 +11,17 @@ func start_server():
 	get_tree().multiplayer.connect("network_peer_disconnected", self, "_peer_disconnected")
 	get_tree().multiplayer.connect("network_peer_packet", self, "_packet_recieved")
 	print("Hosting!")
+	connected_type = "Server"
 	
-func start_client():
+func start_client(ip):
 	network = NetworkedMultiplayerENet.new()
-	network.create_client(PlayerSettings.connect_to_ip, 4242)
+	network.create_client(ip, 4242)
 	get_tree().set_network_peer(network)
 	get_tree().multiplayer.connect("network_peer_connected", self, "_peer_connected")
 	get_tree().multiplayer.connect("network_peer_disconnected", self, "_peer_disconnected")
 	get_tree().multiplayer.connect("network_peer_packet", self, "_packet_recieved")
 	print("Searching...")
+	connected_type = "Client"
 	
 func _peer_connected(id):
 	PlayerSettings.other_player_id = id

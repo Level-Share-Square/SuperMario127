@@ -22,6 +22,10 @@ onready var topbar_tween = $TweenTopbar
 onready var bottombar_tween = $TweenBottombar
 onready var info_tween = $TweenShineInfo
 
+onready var ip_address = $IpAddress
+onready var connect_button = $ConnectButton
+onready var host_button = $HostButton
+
 func _unhandled_input(event):
 	if event.is_action_pressed("pause") and !(character_node.dead and character2_node.dead):
 		toggle_pause()
@@ -82,7 +86,19 @@ func retry():
 		character_node.kill("reload")
 	else:
 		character2_node.kill("reload")
+		
+func connect_to_server():
+	if Networking.connected_type == "None":
+		print(ip_address.text)
+		Networking.start_client(ip_address.text)
+	
+func host_server():
+	if Networking.connected_type == "None":
+		Networking.start_server()
 
 func _ready():
 	resume_button.connect("pressed", self, "toggle_pause")
 	retry_button.connect("pressed", self, "retry")
+	
+	connect_button.connect("pressed", self, "connect_to_server")
+	host_button.connect("pressed", self, "host_server")
