@@ -9,3 +9,4 @@ func _input(event):
 
 func _ready():
 	connect("focus_exited", self, "focus_exit")
+	self.text = PlayerSettings.connect_to_ip
