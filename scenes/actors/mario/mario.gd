@@ -117,7 +117,7 @@ var level_size = Vector2(80, 30)
 var number_of_players = 2
 
 var next_position : Vector2
-var sync_interpolation_speed = 25
+var sync_interpolation_speed = 20
 
 #rpc_unreliable("update_inputs", 
 #left, left_just_pressed,
@@ -127,7 +127,7 @@ var sync_interpolation_speed = 25
 #spin, spin_just_pressed
 #)
 
-slave func sync(pos, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_dead, is_controllable):
+slave func sync(pos, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_dead, is_controllable, collision_disabled, dive_collision_disabled):
 	next_position = pos
 	sprite.animation = sprite_animation
 	sprite.frame = sprite_frame
@@ -135,6 +135,8 @@ slave func sync(pos, sprite_frame, sprite_animation, sprite_rotation, is_attacki
 	attacking = is_attacking
 	dead = is_dead
 	controllable = is_controllable
+	collision_shape.disabled = collision_disabled
+	dive_collision_shape.disabled = dive_collision_disabled
 
 func load_in(level_data : LevelData, level_area : LevelArea):
 	level_size = level_area.settings.size
@@ -430,7 +432,7 @@ func _physics_process(delta: float):
 	
 	if PlayerSettings.other_player_id != -1:
 		if player_id == PlayerSettings.my_player_index and is_network_master():
-			rpc_unreliable("sync", position, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, dead, controllable)
+			rpc_unreliable("sync", position, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, dead, controllable, collision_shape.disabled, dive_collision_shape.disabled)
 
 func kill(cause):
 	if !dead:
