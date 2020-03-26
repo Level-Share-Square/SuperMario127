@@ -46,6 +46,7 @@ func _unhandled_input(event):
 
 func _pressed():
 	switch()
+	Networking.disconnect_from_peers()
 		
 func change_visuals(new_scene):
 	self.texture_normal = texture_play if new_scene == 0 else texture_stop
