@@ -42,6 +42,8 @@ func _peer_connected(id):
 func _peer_disconnected(id):
 	print("Player disconnected. ID: " + str(id))
 	connected_type = "None"
+	PlayerSettings.other_player_id = -1
+	PlayerSettings.my_player_index = 0
 
 func _packet_recieved(id, packet_ascii):
 	var packet = JSON.parse(packet_ascii.get_string_from_ascii()).result
@@ -59,3 +61,5 @@ func _packet_recieved(id, packet_ascii):
 func disconnect_from_peers():
 	get_tree().multiplayer.set_network_peer(null)
 	connected_type = "None"
+	PlayerSettings.other_player_id = -1
+	PlayerSettings.my_player_index = 0
