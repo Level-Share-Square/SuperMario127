@@ -10,7 +10,10 @@ var destroy_timer = 0.0
 
 func collect(body):
 	if !collected && body.name.begins_with("Character") && body.controllable:
-		sound.play()
+		if PlayerSettings.number_of_players == -1:
+			sound.play()
+		elif PlayerSettings.my_player_index == 0 and body.name == "Character" or PlayerSettings.my_player_index == 1 and body.name == "Character2":
+			sound.play()
 		collected = true;
 		# this shouldn't have to be a thing, but godot is annoying
 		synced_sprite.visible = false
