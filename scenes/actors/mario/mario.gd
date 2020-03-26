@@ -116,6 +116,9 @@ onready var sprite = $Sprite
 var level_size = Vector2(80, 30)
 var number_of_players = 2
 
+var next_position : Vector2
+var sync_interpolation_speed = 25
+
 #rpc_unreliable("update_inputs", 
 #left, left_just_pressed,
 #right, right_just_pressed,
@@ -125,7 +128,7 @@ var number_of_players = 2
 #)
 
 slave func sync(pos, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_dead, is_controllable):
-	position = pos
+	next_position = pos
 	sprite.animation = sprite_animation
 	sprite.frame = sprite_frame
 	sprite.rotation_degrees = sprite_rotation
@@ -237,6 +240,10 @@ func player_hit(body):
 			elif !attacking or (body.attacking and attacking):
 				velocity.x = 250
 				body.velocity.x = -250
+
+func _process(delta: float):
+	if next_position:
+		position = position.linear_interpolate(next_position, delta * sync_interpolation_speed)
 
 func _physics_process(delta: float):
 	var gravity = 7.82 #global_vars_node.gravity
