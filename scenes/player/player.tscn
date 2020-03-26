@@ -254,6 +254,8 @@ margin_top = 73.0
 margin_right = 238.0
 margin_bottom = 131.0
 text = "127.0.0.1"
+context_menu_enabled = false
+placeholder_text = "127.0.0.1"
 script = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
