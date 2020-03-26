@@ -21,7 +21,7 @@ func start_server():
 	
 func start_client():
 	network = NetworkedMultiplayerENet.new()
-	network.create_client("127.0.0.1", 4242)
+	network.create_client(PlayerSettings.connect_to_ip, 4242)
 	get_tree().set_network_peer(network)
 	get_tree().multiplayer.connect("network_peer_connected", self, "_peer_connected")
 	get_tree().multiplayer.connect("network_peer_packet", self, "packet_recieved")

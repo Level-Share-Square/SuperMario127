@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=11]
 [ext_resource path="res://scenes/player/viewports.gd" type="Script" id=12]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/player/ip_setter.gd" type="Script" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -78,7 +79,6 @@ __meta__ = {
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
@@ -249,9 +249,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="LineEdit" type="LineEdit" parent="UI/PauseScreen"]
+margin_top = 73.0
+margin_right = 238.0
+margin_bottom = 131.0
+text = "127.0.0.1"
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Viewports" type="HBoxContainer" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 772.0
+margin_bottom = 432.0
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
