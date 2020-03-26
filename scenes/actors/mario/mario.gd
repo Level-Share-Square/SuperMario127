@@ -116,6 +116,23 @@ onready var sprite = $Sprite
 var level_size = Vector2(80, 30)
 var number_of_players = 2
 
+#rpc_unreliable("update_inputs", 
+#left, left_just_pressed,
+#right, right_just_pressed,
+#jump, jump_just_pressed,
+#dive, dive_just_pressed,
+#spin, spin_just_pressed
+#)
+
+slave func sync(pos, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_dead, is_controllable):
+	position = pos
+	sprite.animation = sprite_animation
+	sprite.frame = sprite_frame
+	sprite.rotation_degrees = sprite_rotation
+	attacking = is_attacking
+	dead = is_dead
+	controllable = is_controllable
+
 func load_in(level_data : LevelData, level_area : LevelArea):
 	level_size = level_area.settings.size
 	for exception in collision_exceptions:
@@ -296,7 +313,6 @@ func _physics_process(delta: float):
 			
 			spin = false
 			spin_just_pressed = false
-		
 	
 	if state != null:
 		disable_movement = state.disable_movement
@@ -404,6 +420,10 @@ func _physics_process(delta: float):
 				sprite.animation = "idleLeft"
 	last_velocity = velocity
 	last_move_direction = move_direction
+	
+	if PlayerSettings.other_player_id != -1:
+		if player_id == PlayerSettings.my_player_index:
+			rpc_unreliable("sync", position, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, dead, controllable)
 
 func kill(cause):
 	if !dead:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -13,8 +13,6 @@
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=11]
 [ext_resource path="res://scenes/player/viewports.gd" type="Script" id=12]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/player/server.gd" type="Script" id=14]
-[ext_resource path="res://scenes/player/client.gd" type="Script" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -63,6 +61,7 @@ script = ExtResource( 1 )
 nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"), NodePath("Viewports/ViewportContainer/Viewport/World/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/World/Character2"), NodePath("Viewports/ViewportContainer2/Viewport/CameraP2"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds"), NodePath("Viewports/ViewportContainer2/Viewport/Backgrounds") ]
 character = NodePath("Viewports/ViewportContainer/Viewport/World/Character")
 character2 = NodePath("Viewports/ViewportContainer/Viewport/World/Character2")
+camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 127
@@ -345,11 +344,3 @@ script = ExtResource( 4 )
 character = NodePath("../../../ViewportContainer/Viewport/World/Character2")
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer2/Viewport" instance=ExtResource( 13 )]
-
-[node name="Client" type="Node" parent="."]
-script = ExtResource( 15 )
-server = NodePath("../Server")
-
-[node name="Server" type="Node" parent="."]
-script = ExtResource( 14 )
-client = NodePath("../Client")

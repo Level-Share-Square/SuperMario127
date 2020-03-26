@@ -79,7 +79,7 @@ func _ready():
 		remove_player()
 
 func _process(delta):
-	if PlayerSettings.number_of_players == 2:
+	if PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
 		if Input.is_action_just_pressed("copy_level"):
 			remove_player()
 		if player2.dead:
