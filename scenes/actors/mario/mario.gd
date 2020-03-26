@@ -54,7 +54,6 @@ var state = null
 var last_state = null
 export var controllable = true
 export var dead = false
-var last_dead = false
 
 # Collision vars
 var collision_down
@@ -436,11 +435,6 @@ func _physics_process(delta: float):
 	if PlayerSettings.other_player_id != -1:
 		if player_id == PlayerSettings.my_player_index and is_network_master():
 			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, dead, controllable, collision_shape.disabled, dive_collision_shape.disabled)
-		else:
-			if dead and !last_dead:
-				sound_player.play_fall_sound()
-	last_dead = dead
-	
 	
 func kill(cause):
 	if !dead:
