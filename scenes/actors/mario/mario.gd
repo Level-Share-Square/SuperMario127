@@ -338,7 +338,7 @@ func _physics_process(delta: float):
 				velocity.x -= 3.5 * move_direction
 			facing_direction = move_direction
 
-			if !disable_animation:
+			if !disable_animation and controlled_locally:
 				if !test_move(transform, Vector2(velocity.x * delta, 0)):
 					var animation_frame = sprite.frame
 					if move_direction == 1:
@@ -383,7 +383,7 @@ func _physics_process(delta: float):
 			else:
 				velocity.x = 0
 
-		if !disable_animation:
+		if !disable_animation and controlled_locally:
 			if is_grounded():
 				if facing_direction == 1:
 					sprite.animation = "idleRight"
@@ -405,7 +405,7 @@ func _physics_process(delta: float):
 	if position.x < 0:
 		position.x = 0
 		velocity.x = 0
-		if is_grounded() and move_direction != 0 and !disable_animation:
+		if is_grounded() and move_direction != 0 and !disable_animation and controlled_locally:
 			if facing_direction == 1:
 				sprite.animation = "idleRight"
 			else:
@@ -413,7 +413,7 @@ func _physics_process(delta: float):
 	if position.x > level_size.x * 32:
 		position.x = level_size.x * 32
 		velocity.x = 0
-		if is_grounded() and move_direction != 0 and !disable_animation:
+		if is_grounded() and move_direction != 0 and !disable_animation and controlled_locally:
 			if facing_direction == 1:
 				sprite.animation = "idleRight"
 			else:

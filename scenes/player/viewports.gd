@@ -127,6 +127,9 @@ func _process(delta):
 			
 		last_player1_dead = player1.dead
 		last_player2_dead = player2.dead
+		
+		player1.controlled_locally = true
+		player2.controlled_locally = true
 	else:
 		viewport_container2.visible = false
 		viewport_container1.visible = true
