@@ -264,47 +264,50 @@ func _physics_process(delta: float):
 	# Inputs
 	if controlled_locally:
 		if controllable:
-			if Input.is_action_pressed("move_left_" + str(player_id)):
+			var control_id = player_id
+			if PlayerSettings.other_player_id != -1:
+				control_id = 0
+			if Input.is_action_pressed("move_left_" + str(control_id)):
 				left = true
 			else:
 				left = false
-			if Input.is_action_just_pressed("move_left_" + str(player_id)):
+			if Input.is_action_just_pressed("move_left_" + str(control_id)):
 				left_just_pressed = true
 			else:
 				left_just_pressed = false
 				
-			if Input.is_action_pressed("move_right_" + str(player_id)):
+			if Input.is_action_pressed("move_right_" + str(control_id)):
 				right = true
 			else:
 				right = false
-			if Input.is_action_just_pressed("move_right_" + str(player_id)):
+			if Input.is_action_just_pressed("move_right_" + str(control_id)):
 				right_just_pressed = true
 			else:
 				right_just_pressed = false
 				
-			if Input.is_action_pressed("jump_" + str(player_id)):
+			if Input.is_action_pressed("jump_" + str(control_id)):
 				jump = true
 			else:
 				jump = false
-			if Input.is_action_just_pressed("jump_" + str(player_id)):
+			if Input.is_action_just_pressed("jump_" + str(control_id)):
 				jump_just_pressed = true
 			else:
 				jump_just_pressed = false
 				
-			if Input.is_action_pressed("dive_" + str(player_id)):
+			if Input.is_action_pressed("dive_" + str(control_id)):
 				dive = true
 			else:
 				dive = false
-			if Input.is_action_just_pressed("dive_" + str(player_id)):
+			if Input.is_action_just_pressed("dive_" + str(control_id)):
 				dive_just_pressed = true
 			else:
 				dive_just_pressed = false
 				
-			if Input.is_action_pressed("spin_" + str(player_id)):
+			if Input.is_action_pressed("spin_" + str(control_id)):
 				spin = true
 			else:
 				spin = false
-			if Input.is_action_just_pressed("spin_" + str(player_id)):
+			if Input.is_action_just_pressed("spin_" + str(control_id)):
 				spin_just_pressed = true
 			else:
 				spin_just_pressed = false
