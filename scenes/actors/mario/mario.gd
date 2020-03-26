@@ -429,7 +429,7 @@ func _physics_process(delta: float):
 	last_move_direction = move_direction
 	
 	if PlayerSettings.other_player_id != -1:
-		if player_id == PlayerSettings.my_player_index:
+		if player_id == PlayerSettings.my_player_index and is_network_master():
 			rpc_unreliable("sync", position, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, dead, controllable)
 
 func kill(cause):
