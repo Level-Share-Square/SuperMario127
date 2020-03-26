@@ -55,8 +55,10 @@ func _packet_recieved(id, packet_ascii):
 		yield(get_tree().create_timer(0.1), "timeout")
 		get_tree().reload_current_scene()
 		get_tree().multiplayer.send_bytes(JSON.print(["level loaded"]).to_ascii())
-	if packet[0] == "level loaded":
+	elif packet[0] == "level loaded":
 		get_tree().reload_current_scene()
+	elif packet[0] == "reload":
+		get_tree().get_current_scene().get_node(get_tree().get_current_scene().character).kill("reload")
 		
 func disconnect_from_peers():
 	get_tree().multiplayer.set_network_peer(null)
