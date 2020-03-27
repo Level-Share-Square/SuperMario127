@@ -104,59 +104,59 @@ region = Rect2( 528, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 1 )
-region = Rect2( 48, 240, 48, 48 )
+region = Rect2( 192, 192, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=27]
 atlas = ExtResource( 1 )
-region = Rect2( 528, 0, 48, 48 )
+region = Rect2( 144, 192, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=28]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 672, 48, 48 )
+region = Rect2( 0, 576, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 1 )
-region = Rect2( 48, 672, 48, 48 )
+region = Rect2( 528, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 1 )
-region = Rect2( 96, 672, 48, 48 )
+region = Rect2( 0, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 1 )
-region = Rect2( 144, 672, 48, 48 )
+region = Rect2( 48, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=32]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 672, 48, 48 )
+region = Rect2( 96, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 1 )
-region = Rect2( 240, 672, 48, 48 )
+region = Rect2( 144, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=34]
 atlas = ExtResource( 1 )
-region = Rect2( 288, 672, 48, 48 )
+region = Rect2( 192, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=35]
 atlas = ExtResource( 1 )
-region = Rect2( 336, 672, 48, 48 )
+region = Rect2( 240, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=36]
 atlas = ExtResource( 1 )
-region = Rect2( 96, 240, 48, 48 )
+region = Rect2( 288, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=37]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 432, 48, 48 )
+region = Rect2( 336, 672, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=38]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 576, 48, 48 )
+region = Rect2( 0, 528, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=39]
 atlas = ExtResource( 1 )
-region = Rect2( 240, 192, 48, 48 )
+region = Rect2( 0, 384, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=40]
 atlas = ExtResource( 1 )
@@ -164,7 +164,7 @@ region = Rect2( 96, 192, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=41]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 48, 48 )
+region = Rect2( 48, 240, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=42]
 atlas = ExtResource( 1 )
@@ -172,39 +172,39 @@ region = Rect2( 0, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=43]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 192, 48, 48 )
+region = Rect2( 0, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=44]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 480, 48, 48 )
+region = Rect2( 48, 192, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=45]
 atlas = ExtResource( 1 )
-region = Rect2( 144, 240, 48, 48 )
+region = Rect2( 0, 432, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=46]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 384, 48, 48 )
+region = Rect2( 0, 624, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=47]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 624, 48, 48 )
+region = Rect2( 144, 240, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=48]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 528, 48, 48 )
+region = Rect2( 96, 240, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=49]
 atlas = ExtResource( 1 )
-region = Rect2( 144, 192, 48, 48 )
+region = Rect2( 240, 192, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=50]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 240, 48, 48 )
+region = Rect2( 0, 480, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=51]
 atlas = ExtResource( 1 )
-region = Rect2( 48, 192, 48, 48 )
+region = Rect2( 192, 240, 48, 48 )
 
 [resource]
 animations = [ {
@@ -225,37 +225,37 @@ animations = [ {
 }, {
 "frames": [ SubResource( 26 ) ],
 "loop": false,
-"name": "jumpLeft",
-"speed": 12.0
+"name": "doubleFallRight",
+"speed": 0.0
 }, {
 "frames": [ SubResource( 27 ) ],
 "loop": false,
-"name": "shineFall",
+"name": "doubleJumpRight",
 "speed": 0.0
 }, {
-"frames": [ SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
-"loop": true,
-"name": "spinning",
-"speed": 20.0
-}, {
-"frames": [ SubResource( 36 ) ],
-"loop": false,
-"name": "fallLeft",
-"speed": 0.0
-}, {
-"frames": [ SubResource( 37 ) ],
-"loop": false,
-"name": "diveLeft",
-"speed": 0.0
-}, {
-"frames": [ SubResource( 38 ) ],
+"frames": [ SubResource( 28 ) ],
 "loop": false,
 "name": "bonkedRight",
 "speed": 0.0
 }, {
+"frames": [ SubResource( 29 ) ],
+"loop": false,
+"name": "shineFall",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ) ],
+"loop": true,
+"name": "spinning",
+"speed": 20.0
+}, {
+"frames": [ SubResource( 38 ) ],
+"loop": true,
+"name": "wallSlideLeft",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 39 ) ],
 "loop": false,
-"name": "tripleJumpRight",
+"name": "diveRight",
 "speed": 0.0
 }, {
 "frames": [ SubResource( 40 ) ],
@@ -265,8 +265,8 @@ animations = [ {
 }, {
 "frames": [ SubResource( 41 ) ],
 "loop": false,
-"name": "idleRight",
-"speed": 0.0
+"name": "jumpLeft",
+"speed": 12.0
 }, {
 "frames": [ SubResource( 42 ) ],
 "loop": false,
@@ -275,46 +275,46 @@ animations = [ {
 }, {
 "frames": [ SubResource( 43 ) ],
 "loop": false,
-"name": "doubleFallRight",
+"name": "idleRight",
 "speed": 0.0
 }, {
 "frames": [ SubResource( 44 ) ],
-"loop": true,
-"name": "wallSlideRight",
-"speed": 5.0
+"loop": false,
+"name": "jumpRight",
+"speed": 12.0
 }, {
 "frames": [ SubResource( 45 ) ],
 "loop": false,
-"name": "doubleJumpLeft",
+"name": "diveLeft",
 "speed": 0.0
 }, {
 "frames": [ SubResource( 46 ) ],
 "loop": false,
-"name": "diveRight",
+"name": "bonkedLeft",
 "speed": 0.0
 }, {
 "frames": [ SubResource( 47 ) ],
 "loop": false,
-"name": "bonkedLeft",
+"name": "doubleJumpLeft",
 "speed": 0.0
 }, {
 "frames": [ SubResource( 48 ) ],
-"loop": true,
-"name": "wallSlideLeft",
-"speed": 5.0
+"loop": false,
+"name": "fallLeft",
+"speed": 0.0
 }, {
 "frames": [ SubResource( 49 ) ],
 "loop": false,
-"name": "doubleJumpRight",
+"name": "tripleJumpRight",
 "speed": 0.0
 }, {
 "frames": [ SubResource( 50 ) ],
-"loop": false,
-"name": "doubleFallLeft",
-"speed": 0.0
+"loop": true,
+"name": "wallSlideRight",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 51 ) ],
 "loop": false,
-"name": "jumpRight",
-"speed": 12.0
+"name": "doubleFallLeft",
+"speed": 0.0
 } ]
