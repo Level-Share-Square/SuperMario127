@@ -7,9 +7,9 @@ var last_hovered
 
 func _pressed():
 	click_sound.play()
+	focus_mode = 0
 	
 func _process(delta):
 	if is_hovered() and !last_hovered:
 		hover_sound.play()	
 	last_hovered = is_hovered()
-	pass

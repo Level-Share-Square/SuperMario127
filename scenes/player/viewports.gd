@@ -80,7 +80,7 @@ func _ready():
 
 func _process(delta):
 	if PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
-		if Input.is_action_just_pressed("copy_level"):
+		if Input.is_action_just_pressed("(disabled)copy_level"):
 			remove_player()
 		if player2.dead:
 			viewport_container2.visible = false
@@ -139,5 +139,5 @@ func _process(delta):
 		viewport_container2.rect_size.x = 0
 		
 		divider.visible = false
-		if Input.is_action_just_pressed("paste_level"):
+		if Input.is_action_just_pressed("(disabled)paste_level"):
 			add_player()

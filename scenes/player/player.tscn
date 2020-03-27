@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://assets/fonts/texteffect_pulse.tres" type="RichTextEffect" id=19]
 [ext_resource path="res://scenes/player/chat.gd" type="Script" id=20]
 [ext_resource path="res://scenes/player/disconnect_button.gd" type="Script" id=21]
+[ext_resource path="res://scenes/player/multiplayer_menu_button.gd" type="Script" id=22]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -193,10 +194,10 @@ __meta__ = {
 }
 
 [node name="ResumeButton" type="Button" parent="UI/PauseScreen/Bottom"]
-margin_left = 2242.55
-margin_top = 128.886
-margin_right = 3262.55
-margin_bottom = 308.886
+margin_left = 2245.0
+margin_top = 129.0
+margin_right = 2840.0
+margin_bottom = 311.0
 rect_rotation = 180.0
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
@@ -218,10 +219,10 @@ stream = ExtResource( 11 )
 volume_db = -10.0
 
 [node name="RetryButton" type="Button" parent="UI/PauseScreen/Bottom"]
-margin_left = 1107.42
-margin_top = 128.886
-margin_right = 2127.42
-margin_bottom = 308.886
+margin_left = 1559.45
+margin_top = 129.0
+margin_right = 2268.45
+margin_bottom = 311.0
 rect_rotation = 180.0
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
@@ -242,6 +243,33 @@ volume_db = -10.0
 stream = ExtResource( 11 )
 volume_db = -10.0
 
+[node name="MultiplayerButton" type="Button" parent="UI/PauseScreen/Bottom"]
+margin_left = 768.0
+margin_top = 129.0
+margin_right = 1477.0
+margin_bottom = 311.0
+rect_rotation = 180.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
+action_mode = 0
+text = "Multiplayer"
+script = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+shine_info = NodePath("../../ShineInfo")
+multiplayer_options = NodePath("../../MultiplayerOptions")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/MultiplayerButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/MultiplayerButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
 [node name="TweenTopbar" type="Tween" parent="UI/PauseScreen"]
 
 [node name="TweenBottombar" type="Tween" parent="UI/PauseScreen"]
@@ -251,7 +279,6 @@ volume_db = -10.0
 [node name="TweenShineInfo" type="Tween" parent="UI/PauseScreen"]
 
 [node name="ShineInfo" type="Control" parent="UI/PauseScreen"]
-visible = false
 margin_right = 768.0
 margin_bottom = 332.0
 rect_pivot_offset = Vector2( 384, 166 )
@@ -299,6 +326,7 @@ __meta__ = {
 }
 
 [node name="MultiplayerOptions" type="Control" parent="UI/PauseScreen"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 

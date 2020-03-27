@@ -16,6 +16,7 @@ onready var retry_button = $Bottom/RetryButton
 onready var darken = $Darken
 
 onready var shine_info = $ShineInfo
+onready var multiplayer_options = $MultiplayerOptions
 
 onready var fade_tween = $TweenFade
 onready var topbar_tween = $TweenTopbar
@@ -31,6 +32,9 @@ func _unhandled_input(event):
 		toggle_pause()
 
 func toggle_pause():
+	if !shine_info.visible:
+		multiplayer_options.visible = false
+		shine_info.visible = true
 	resume_button.focus_mode = 0
 	get_tree().paused = false if self.visible else true
 	if self.visible:
