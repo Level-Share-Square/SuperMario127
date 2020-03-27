@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -16,6 +16,10 @@
 [ext_resource path="res://scenes/player/connect_button.gd" type="Script" id=14]
 [ext_resource path="res://scenes/player/host_button.gd" type="Script" id=15]
 [ext_resource path="res://scenes/player/ip_address.gd" type="Script" id=16]
+[ext_resource path="res://assets/fonts/texteffect_ghost.tres" type="RichTextEffect" id=17]
+[ext_resource path="res://assets/fonts/texteffect_matrix.tres" type="RichTextEffect" id=18]
+[ext_resource path="res://assets/fonts/texteffect_pulse.tres" type="RichTextEffect" id=19]
+[ext_resource path="res://scenes/player/chat.gd" type="Script" id=20]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -61,8 +65,8 @@ font_data = ExtResource( 7 )
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 16
-border_width_right = 16
+border_width_left = 5
+border_width_right = 5
 border_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 24
 corner_radius_top_right = 24
@@ -83,6 +87,19 @@ corner_radius_bottom_left = 64
 [sub_resource type="DynamicFont" id=11]
 size = 27
 font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=12]
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0, 0, 0, 0.12549 )
+border_width_left = 5
+border_width_right = 5
+border_color = Color( 0, 0, 0, 0.12549 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
@@ -348,6 +365,55 @@ volume_db = -10.0
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/HostButton"]
 stream = ExtResource( 11 )
 volume_db = -10.0
+
+[node name="ChatBox" type="Control" parent="UI"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 288.0
+margin_bottom = 169.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ChatBox"]
+visible = false
+margin_right = 283.0
+margin_bottom = 164.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/ChatBox/VBoxContainer"]
+margin_right = 283.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/mono_font = SubResource( 12 )
+custom_fonts/bold_italics_font = SubResource( 12 )
+custom_fonts/italics_font = SubResource( 12 )
+custom_fonts/bold_font = SubResource( 12 )
+custom_fonts/normal_font = SubResource( 12 )
+bbcode_enabled = true
+custom_effects = [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ]
+
+[node name="EnterText" type="LineEdit" parent="UI/ChatBox/VBoxContainer"]
+margin_top = 145.0
+margin_right = 283.0
+margin_bottom = 164.0
+custom_styles/normal = SubResource( 13 )
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color = Color( 0.0901961, 0.196078, 0.458824, 1 )
+text = "Bruh moment lmao"
+context_menu_enabled = false
+placeholder_text = "Enter text here"
+placeholder_alpha = 0.35
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Viewports" type="HBoxContainer" parent="."]
 margin_left = 0.42926

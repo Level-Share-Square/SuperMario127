@@ -263,11 +263,11 @@ func _physics_process(delta: float):
 			
 	# Inputs
 	if controlled_locally:
-		if controllable:
+		if controllable and !FocusCheck.is_ui_focused:
 			var control_id = player_id
 			if PlayerSettings.other_player_id != -1:
 				control_id = 0
-			if Input.is_action_pressed("move_left_" + str(control_id)):
+			if Input.is_action_pressed("move_left_" + str(control_id)) and !Input.is_blocking_signals():
 				left = true
 			else:
 				left = false
@@ -404,8 +404,9 @@ func _physics_process(delta: float):
 					sprite.animation = "idleLeft"
 				sprite.speed_scale = 1
 
-	for state_node in states_node.get_children():
-		state_node.handle_update(delta)
+	if PlayerSettings.other_player_id == -1 or PlayerSettings.my_player_index == player_id:
+		for state_node in states_node.get_children():
+			state_node.handle_update(delta)
 
 	# Move by velocity
 	velocity = move_and_slide(velocity)

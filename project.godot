@@ -215,6 +215,7 @@ music="*res://scenes/actors/music/music.tscn"
 CurrentLevelData="*res://scenes/shared/level_data.tscn"
 PlayerSettings="*res://scenes/player/player_settings.gd"
 Networking="*res://scenes/shared/networking.tscn"
+FocusCheck="*res://scenes/player/focus_check.gd"
 
 [debug]
 
@@ -470,6 +471,16 @@ host_game={
 connect_to_game={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":79,"unicode":0,"echo":false,"script":null)
+ ]
+}
+send_message={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
+ ]
+}
+cancel_chat={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
  ]
 }
 

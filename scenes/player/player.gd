@@ -24,8 +24,8 @@ func _ready():
 			get_node(character).controlled_locally = false
 			get_node(camera).character_node = get_node(character2)
 	
-func _process(delta):
-	if Input.is_action_just_pressed("reload"):
+func _unhandled_input(event):
+	if event.is_action_pressed("reload"):
 		if !get_node(character).dead:
 			get_node(character).kill("reload")
 		elif number_of_players == 2:
