@@ -21,7 +21,6 @@ func add_message(text, player_id):
 func text_entered(text):
 	text_enter.release_focus()
 	if text != "":
-		print_debug("A")
 		add_message(text, PlayerSettings.my_player_index)
 		text_enter.text = ""
 		get_tree().multiplayer.send_bytes(JSON.print(["send message", text]).to_ascii())
