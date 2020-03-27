@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://assets/fonts/texteffect_matrix.tres" type="RichTextEffect" id=18]
 [ext_resource path="res://assets/fonts/texteffect_pulse.tres" type="RichTextEffect" id=19]
 [ext_resource path="res://scenes/player/chat.gd" type="Script" id=20]
+[ext_resource path="res://scenes/player/disconnect_button.gd" type="Script" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -123,6 +124,7 @@ __meta__ = {
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
@@ -302,9 +304,9 @@ margin_bottom = 40.0
 
 [node name="IpAddress" type="LineEdit" parent="UI/PauseScreen/MultiplayerOptions"]
 margin_left = 79.8377
-margin_top = 122.0
+margin_top = 93.2382
 margin_right = 292.838
-margin_bottom = 164.0
+margin_bottom = 135.238
 custom_styles/normal = SubResource( 8 )
 custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
@@ -318,9 +320,9 @@ __meta__ = {
 
 [node name="ConnectButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
 margin_left = 79.8377
-margin_top = 177.168
+margin_top = 148.406
 margin_right = 292.838
-margin_bottom = 221.168
+margin_bottom = 192.406
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/disabled = SubResource( 10 )
@@ -341,11 +343,37 @@ volume_db = -10.0
 stream = ExtResource( 11 )
 volume_db = -10.0
 
+[node name="DisconnectButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_left = 79.8377
+margin_top = 258.731
+margin_right = 292.838
+margin_bottom = 302.731
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 11 )
+action_mode = 0
+text = "Disconnect"
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+pause_screen = NodePath("../..")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/DisconnectButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/DisconnectButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
 [node name="HostButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
 margin_left = 79.8377
-margin_top = 233.104
+margin_top = 204.342
 margin_right = 292.838
-margin_bottom = 277.104
+margin_bottom = 248.342
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/disabled = SubResource( 10 )
@@ -398,6 +426,8 @@ custom_fonts/italics_font = SubResource( 12 )
 custom_fonts/bold_font = SubResource( 12 )
 custom_fonts/normal_font = SubResource( 12 )
 bbcode_enabled = true
+scroll_active = false
+scroll_following = true
 custom_effects = [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ]
 
 [node name="EnterText" type="LineEdit" parent="UI/ChatBox/VBoxContainer"]
@@ -407,9 +437,8 @@ margin_bottom = 164.0
 custom_styles/normal = SubResource( 13 )
 custom_fonts/font = SubResource( 12 )
 custom_colors/font_color = Color( 0.0901961, 0.196078, 0.458824, 1 )
-text = "Bruh moment lmao"
 context_menu_enabled = false
-placeholder_text = "Enter text here"
+placeholder_text = "Enter text here."
 placeholder_alpha = 0.35
 __meta__ = {
 "_edit_use_anchors_": false

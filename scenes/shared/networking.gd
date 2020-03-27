@@ -54,8 +54,11 @@ func _packet_recieved(id, packet_ascii):
 		get_tree().paused = false
 	elif packet[0] == "reload":
 		get_tree().get_current_scene().get_node(get_tree().get_current_scene().character).kill("reload")
+	elif packet[0] == "disconnect":
+		disconnect_from_peers()	
 		
 func disconnect_from_peers():
+	get_tree().multiplayer.send_bytes(JSON.print(["disconnect"]).to_ascii())
 	get_tree().multiplayer.set_network_peer(null)
 	connected_type = "None"
 	PlayerSettings.other_player_id = -1
