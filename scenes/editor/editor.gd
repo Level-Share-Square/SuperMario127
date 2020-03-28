@@ -110,10 +110,10 @@ func _process(delta):
 				if object_pos and !shared_node.is_object_at_position(object_pos) and item.on_place(object_pos, level_data, level_area):
 					var object = LevelObject.new()
 					object.type_id = item.object_id
-					object.properties = {}
-					object.properties.position = object_pos
-					object.properties.scale = Vector2(1, 1)
-					object.properties.rotation_degrees = 0
+					object.properties = []
+					object.properties.append(object_pos)
+					object.properties.append(Vector2(1, 1))
+					object.properties.append(0)
 					shared_node.create_object(object, true)
 		elif right_held:
 			if selected_box:

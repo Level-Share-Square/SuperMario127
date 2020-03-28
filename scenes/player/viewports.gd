@@ -71,9 +71,9 @@ func _ready():
 	player2.number_of_players = PlayerSettings.number_of_players
 	for object in CurrentLevelData.level_data.areas[0].objects:
 		if object.type_id == 0:
-			player1_spawn = object.properties.position
+			player1_spawn = object.properties[0]
 		elif object.type_id == 5:
-			player2_spawn = object.properties.position
+			player2_spawn = object.properties[0]
 	if PlayerSettings.number_of_players == 1:
 		PlayerSettings.number_of_players = 2
 		remove_player()

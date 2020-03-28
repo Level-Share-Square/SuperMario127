@@ -25,6 +25,9 @@ static func encode(data):
 	return new_data
 	
 static func decode_value(value: String):
+	if value.ends_with("]"):
+		value = value.rstrip("]")
+		
 	if value.begins_with("V2"):
 		value = value.trim_prefix("V2")
 		var array_value = value.split("x")
@@ -81,7 +84,7 @@ static func decode(code: String):
 			var index = 0
 			for value in object_array:
 				if index > 0:
-					decoded_object.properties.append(value)
+					decoded_object.properties.append(decode_value(value))
 				index += 1
 			result.areas[0].objects.append(decoded_object)
 	

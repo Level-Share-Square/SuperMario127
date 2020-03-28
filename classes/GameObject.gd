@@ -19,13 +19,21 @@ func is_savable_property(key) -> bool:
 			return true
 	
 	return false
+	
+func get_property_index(key) -> int:
+	var index = 0
+	for savable_property in (base_savable_properties + savable_properties):
+		if key == savable_property:
+			return index
+			
+	return index
 
 func set_property(key, value, change_level_object):
 	self[key] = value
 	if change_level_object and is_savable_property(key):
-		level_object.properties[key] = value
+		var index = get_property_index(key)
+		level_object.properties[index] = value
 
 func set_property_by_index(index, value, change_level_object):
-	print(value)
 	var key = (base_savable_properties + savable_properties)[index]
-#	set_property(key, value, change_level_object)
+	set_property(key, value, change_level_object)

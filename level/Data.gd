@@ -169,8 +169,8 @@ func get_encoded_level_data():
 		for object in area.objects:
 			var added_object = ""
 			added_object += str(object.type_id) + ","
-			for property in object.properties:
-				added_object += value_util.encode_value(value_util.get_true_value(object.properties[property])) + ","
+			for value in object.properties:
+				added_object += value_util.encode_value(value_util.get_true_value(value)) + ","
 			added_object.erase(added_object.length() - 1, 1)
 			level_string += added_object + "|"
 		level_string.erase(level_string.length() - 1, 1)
