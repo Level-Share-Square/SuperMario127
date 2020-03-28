@@ -24,3 +24,7 @@ func _process(delta):
 	if is_hovered() and !last_hovered:
 		hover_sound.play()	
 	last_hovered = is_hovered()
+	if PlayerSettings.other_player_id != -1:
+		disabled = true
+	else:
+		disabled = false

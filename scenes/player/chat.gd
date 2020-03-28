@@ -9,6 +9,8 @@ var colors = [
 ]
 
 func _ready():
+	text_enter.connect("focus_entered", self, "_focused")
+	text_enter.connect("focus_exited", self, "_unfocused")
 	text_enter.connect("text_entered", self, "text_entered")
 	get_tree().multiplayer.connect("network_peer_packet", self, "_packet_recieved")
 
@@ -30,7 +32,12 @@ func _process(delta):
 		visible = true
 	else:
 		visible = false
-	FocusCheck.is_ui_focused = text_enter.has_focus()
+	
+func _focused():
+	FocusCheck.is_ui_focused = true
+
+func _unfocused():
+	FocusCheck.is_ui_focused = false
 		
 func _input(event):
 	if event.is_action_pressed("cancel_chat"):
