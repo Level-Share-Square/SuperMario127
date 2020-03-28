@@ -102,3 +102,4 @@ func retry():
 func _ready():
 	resume_button.connect("pressed", self, "toggle_pause")
 	retry_button.connect("pressed", self, "retry")
+	FocusCheck.is_ui_focused = false
