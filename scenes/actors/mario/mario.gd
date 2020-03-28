@@ -70,6 +70,9 @@ export var character := 0
 export var mario_frames : SpriteFrames
 export var luigi_frames : SpriteFrames
 
+export var mario_alt_frames : SpriteFrames
+export var luigi_alt_frames : SpriteFrames
+
 export var mario_collision : RectangleShape2D
 export var mario_collision_offset : Vector2
 export var mario_dive_collision : RectangleShape2D
@@ -116,6 +119,29 @@ onready var sprite = $Sprite
 var level_size = Vector2(80, 30)
 var number_of_players = 2
 
+var next_position : Vector2
+var sync_interpolation_speed = 20
+
+#rpc_unreliable("update_inputs", 
+#left, left_just_pressed,
+#right, right_just_pressed,
+#jump, jump_just_pressed,
+#dive, dive_just_pressed,
+#spin, spin_just_pressed
+#)
+
+slave func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_dead, is_controllable, collision_disabled, dive_collision_disabled):
+	next_position = pos
+	velocity = vel
+	sprite.animation = sprite_animation
+	sprite.frame = sprite_frame
+	sprite.rotation_degrees = sprite_rotation
+	attacking = is_attacking
+	dead = is_dead
+	controllable = is_controllable
+	collision_shape.disabled = collision_disabled
+	dive_collision_shape.disabled = dive_collision_disabled
+
 func load_in(level_data : LevelData, level_area : LevelArea):
 	level_size = level_area.settings.size
 	for exception in collision_exceptions:
@@ -126,7 +152,10 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		var sound_scene = load(mario_sounds)
 		sound_player = sound_scene.instance()
 		add_child(sound_player)
-		sprite.frames = mario_frames
+		if PlayerSettings.player1_character != PlayerSettings.player2_character or player_id == 0:
+			sprite.frames = mario_frames
+		else:
+			sprite.frames = mario_alt_frames
 		collision_shape.position = mario_collision_offset
 		collision_shape.shape = mario_collision
 		player_collision_shape.position = mario_collision_offset
@@ -138,7 +167,10 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		var sound_scene = load(luigi_sounds)
 		sound_player = sound_scene.instance()
 		add_child(sound_player)
-		sprite.frames = luigi_frames
+		if PlayerSettings.player1_character != PlayerSettings.player2_character or player_id == 0:
+			sprite.frames = luigi_frames
+		else:
+			sprite.frames = luigi_alt_frames
 		collision_shape.position = luigi_collision_offset
 		collision_shape.shape = luigi_collision
 		player_collision_shape.position = luigi_collision_offset
@@ -221,6 +253,10 @@ func player_hit(body):
 				velocity.x = 250
 				body.velocity.x = -250
 
+func _process(delta: float):
+	if next_position:
+		position = position.linear_interpolate(next_position, delta * sync_interpolation_speed)
+
 func _physics_process(delta: float):
 	var gravity = 7.82 #global_vars_node.gravity
 	# Gravity
@@ -236,48 +272,51 @@ func _physics_process(delta: float):
 			
 	# Inputs
 	if controlled_locally:
-		if controllable:
-			if Input.is_action_pressed("move_left_" + str(player_id)):
+		if controllable and !FocusCheck.is_ui_focused:
+			var control_id = player_id
+			if PlayerSettings.other_player_id != -1 or number_of_players == 1:
+				control_id = PlayerSettings.control_mode
+			if Input.is_action_pressed("move_left_" + str(control_id)) and !Input.is_blocking_signals():
 				left = true
 			else:
 				left = false
-			if Input.is_action_just_pressed("move_left_" + str(player_id)):
+			if Input.is_action_just_pressed("move_left_" + str(control_id)):
 				left_just_pressed = true
 			else:
 				left_just_pressed = false
 				
-			if Input.is_action_pressed("move_right_" + str(player_id)):
+			if Input.is_action_pressed("move_right_" + str(control_id)):
 				right = true
 			else:
 				right = false
-			if Input.is_action_just_pressed("move_right_" + str(player_id)):
+			if Input.is_action_just_pressed("move_right_" + str(control_id)):
 				right_just_pressed = true
 			else:
 				right_just_pressed = false
 				
-			if Input.is_action_pressed("jump_" + str(player_id)):
+			if Input.is_action_pressed("jump_" + str(control_id)):
 				jump = true
 			else:
 				jump = false
-			if Input.is_action_just_pressed("jump_" + str(player_id)):
+			if Input.is_action_just_pressed("jump_" + str(control_id)):
 				jump_just_pressed = true
 			else:
 				jump_just_pressed = false
 				
-			if Input.is_action_pressed("dive_" + str(player_id)):
+			if Input.is_action_pressed("dive_" + str(control_id)):
 				dive = true
 			else:
 				dive = false
-			if Input.is_action_just_pressed("dive_" + str(player_id)):
+			if Input.is_action_just_pressed("dive_" + str(control_id)):
 				dive_just_pressed = true
 			else:
 				dive_just_pressed = false
 				
-			if Input.is_action_pressed("spin_" + str(player_id)):
+			if Input.is_action_pressed("spin_" + str(control_id)):
 				spin = true
 			else:
 				spin = false
-			if Input.is_action_just_pressed("spin_" + str(player_id)):
+			if Input.is_action_just_pressed("spin_" + str(control_id)):
 				spin_just_pressed = true
 			else:
 				spin_just_pressed = false
@@ -296,7 +335,6 @@ func _physics_process(delta: float):
 			
 			spin = false
 			spin_just_pressed = false
-		
 	
 	if state != null:
 		disable_movement = state.disable_movement
@@ -322,7 +360,7 @@ func _physics_process(delta: float):
 				velocity.x -= 3.5 * move_direction
 			facing_direction = move_direction
 
-			if !disable_animation:
+			if !disable_animation and controlled_locally:
 				if !test_move(transform, Vector2(velocity.x * delta, 0)):
 					var animation_frame = sprite.frame
 					if move_direction == 1:
@@ -367,7 +405,7 @@ func _physics_process(delta: float):
 			else:
 				velocity.x = 0
 
-		if !disable_animation:
+		if !disable_animation and controlled_locally:
 			if is_grounded():
 				if facing_direction == 1:
 					sprite.animation = "idleRight"
@@ -375,8 +413,9 @@ func _physics_process(delta: float):
 					sprite.animation = "idleLeft"
 				sprite.speed_scale = 1
 
-	for state_node in states_node.get_children():
-		state_node.handle_update(delta)
+	if PlayerSettings.other_player_id == -1 or PlayerSettings.my_player_index == player_id:
+		for state_node in states_node.get_children():
+			state_node.handle_update(delta)
 
 	# Move by velocity
 	velocity = move_and_slide(velocity)
@@ -385,11 +424,12 @@ func _physics_process(delta: float):
 
 	# Boundaries
 	if position.y > (level_size.y * 32) + 128:
-		kill("fall")
+		if PlayerSettings.other_player_id == -1 or PlayerSettings.my_player_index == player_id:
+			kill("fall")
 	if position.x < 0:
 		position.x = 0
 		velocity.x = 0
-		if is_grounded() and move_direction != 0 and !disable_animation:
+		if is_grounded() and move_direction != 0 and !disable_animation and controlled_locally:
 			if facing_direction == 1:
 				sprite.animation = "idleRight"
 			else:
@@ -397,14 +437,18 @@ func _physics_process(delta: float):
 	if position.x > level_size.x * 32:
 		position.x = level_size.x * 32
 		velocity.x = 0
-		if is_grounded() and move_direction != 0 and !disable_animation:
+		if is_grounded() and move_direction != 0 and !disable_animation and controlled_locally:
 			if facing_direction == 1:
 				sprite.animation = "idleRight"
 			else:
 				sprite.animation = "idleLeft"
 	last_velocity = velocity
 	last_move_direction = move_direction
-
+	
+	if PlayerSettings.other_player_id != -1:
+		if player_id == PlayerSettings.my_player_index and is_network_master():
+			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, dead, controllable, collision_shape.disabled, dive_collision_shape.disabled)
+	
 func kill(cause):
 	if !dead:
 		dead = true

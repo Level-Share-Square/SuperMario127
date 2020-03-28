@@ -16,20 +16,34 @@ onready var retry_button = $Bottom/RetryButton
 onready var darken = $Darken
 
 onready var shine_info = $ShineInfo
+onready var multiplayer_options = $MultiplayerOptions
 
 onready var fade_tween = $TweenFade
 onready var topbar_tween = $TweenTopbar
 onready var bottombar_tween = $TweenBottombar
 onready var info_tween = $TweenShineInfo
 
+onready var ip_address = $IpAddress
+onready var connect_button = $ConnectButton
+onready var host_button = $HostButton
+
+export var chat_path : NodePath
+onready var chat_node = get_node(chat_path)
+
 func _unhandled_input(event):
 	if event.is_action_pressed("pause") and !(character_node.dead and character2_node.dead):
 		toggle_pause()
 
 func toggle_pause():
+	if !shine_info.visible:
+		multiplayer_options.visible = false
+		shine_info.visible = true
 	resume_button.focus_mode = 0
-	get_tree().paused = false if self.visible else true
+	
+	get_tree().paused = true if !self.visible and PlayerSettings.other_player_id == -1 else false
 	if self.visible:
+		FocusCheck.is_ui_focused = false
+		chat_node.visible = true
 		fade_tween.interpolate_property(darken, "modulate",
 		darken_color, Color(0, 0, 0, 0), 0.20,
 		Tween.TRANS_LINEAR, Tween.EASE_OUT)
@@ -53,7 +67,9 @@ func toggle_pause():
 		yield(fade_tween, "tween_completed")
 		self.visible = false
 	else:
+		FocusCheck.is_ui_focused = true
 		self.visible = true
+		chat_node.visible = false
 		fade_tween.interpolate_property(darken, "modulate",
 		Color(0, 0, 0, 0), darken_color, 0.20,
 		Tween.TRANS_LINEAR, Tween.EASE_OUT)
@@ -86,3 +102,4 @@ func retry():
 func _ready():
 	resume_button.connect("pressed", self, "toggle_pause")
 	retry_button.connect("pressed", self, "retry")
+	FocusCheck.is_ui_focused = false

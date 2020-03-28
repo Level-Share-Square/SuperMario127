@@ -52,6 +52,11 @@ func change_visuals(new_scene):
 
 func switch():
 	if !switching_disabled:
+		
+		var new_scene = get_tree().get_current_scene().mode
+		if new_scene == 0:
+			Networking.disconnect_from_peers()
+		
 		sound.play()
 		switching_disabled = true
 		rect_position = start_pos
@@ -82,7 +87,6 @@ func switch():
 		yield(get_tree().create_timer(0.3), "timeout")
 		get_tree().paused = false
 		
-		var new_scene = get_tree().get_current_scene().mode
 		get_tree().get_current_scene().switch_scenes()
 		change_visuals(new_scene)
 		

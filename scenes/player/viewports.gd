@@ -79,8 +79,8 @@ func _ready():
 		remove_player()
 
 func _process(delta):
-	if PlayerSettings.number_of_players == 2:
-		if Input.is_action_just_pressed("copy_level"):
+	if PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
+		if Input.is_action_just_pressed("(disabled)copy_level"):
 			remove_player()
 		if player2.dead:
 			viewport_container2.visible = false
@@ -127,6 +127,9 @@ func _process(delta):
 			
 		last_player1_dead = player1.dead
 		last_player2_dead = player2.dead
+		
+		player1.controlled_locally = true
+		player2.controlled_locally = true
 	else:
 		viewport_container2.visible = false
 		viewport_container1.visible = true
@@ -136,5 +139,5 @@ func _process(delta):
 		viewport_container2.rect_size.x = 0
 		
 		divider.visible = false
-		if Input.is_action_just_pressed("paste_level"):
+		if Input.is_action_just_pressed("(disabled)paste_level"):
 			add_player()

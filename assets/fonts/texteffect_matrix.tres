@@ -1,0 +1,7 @@
+[gd_resource type="RichTextEffect" load_steps=2 format=2]
+
+[ext_resource path="res://assets/fonts/matrix.gd" type="Script" id=1]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource( 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -13,6 +13,22 @@
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=11]
 [ext_resource path="res://scenes/player/viewports.gd" type="Script" id=12]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/player/connect_button.gd" type="Script" id=14]
+[ext_resource path="res://scenes/player/host_button.gd" type="Script" id=15]
+[ext_resource path="res://scenes/player/ip_address.gd" type="Script" id=16]
+[ext_resource path="res://assets/fonts/texteffect_ghost.tres" type="RichTextEffect" id=17]
+[ext_resource path="res://assets/fonts/texteffect_matrix.tres" type="RichTextEffect" id=18]
+[ext_resource path="res://assets/fonts/texteffect_pulse.tres" type="RichTextEffect" id=19]
+[ext_resource path="res://scenes/player/chat.gd" type="Script" id=20]
+[ext_resource path="res://scenes/player/disconnect_button.gd" type="Script" id=21]
+[ext_resource path="res://scenes/player/multiplayer_menu_button.gd" type="Script" id=22]
+[ext_resource path="res://scenes/player/control_changer.gd" type="Script" id=23]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow_hover.png" type="Texture" id=24]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=25]
+[ext_resource path="res://scenes/player/num_of_plrs.gd" type="Script" id=26]
+[ext_resource path="res://scenes/player/player_1_char.gd" type="Script" id=27]
+[ext_resource path="res://scenes/player/player_2_char.gd" type="Script" id=28]
+[ext_resource path="res://scenes/player/confirm_button.gd" type="Script" id=29]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -56,11 +72,54 @@ outline_color = Color( 0.054902, 0, 0.25098, 1 )
 use_mipmaps = true
 font_data = ExtResource( 7 )
 
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 5
+border_width_right = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="DynamicFont" id=9]
+size = 20
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.15, 0.15, 0.15, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="DynamicFont" id=11]
+size = 27
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 24
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=13]
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0, 0, 0, 0.12549 )
+border_width_left = 5
+border_width_right = 5
+border_color = Color( 0, 0, 0, 0.12549 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
 nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"), NodePath("Viewports/ViewportContainer/Viewport/World/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/World/Character2"), NodePath("Viewports/ViewportContainer2/Viewport/CameraP2"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds"), NodePath("Viewports/ViewportContainer2/Viewport/Backgrounds") ]
 character = NodePath("Viewports/ViewportContainer/Viewport/World/Character")
 character2 = NodePath("Viewports/ViewportContainer/Viewport/World/Character2")
+camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 127
@@ -87,10 +146,13 @@ __meta__ = {
 darken_color = Color( 0.121569, 0.137255, 0.184314, 0.501961 )
 character_node_path = NodePath("../../Viewports/ViewportContainer/Viewport/World/Character")
 character2_node_path = NodePath("../../Viewports/ViewportContainer/Viewport/World/Character2")
+chat_path = NodePath("../ChatBox")
 
 [node name="Darken" type="ColorRect" parent="UI/PauseScreen"]
-margin_right = 768.0
-margin_bottom = 432.0
+margin_left = -0.440735
+margin_top = 0.440735
+margin_right = 767.559
+margin_bottom = 432.441
 color = Color( 0.121569, 0.137255, 0.184314, 0.501961 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -144,10 +206,10 @@ __meta__ = {
 }
 
 [node name="ResumeButton" type="Button" parent="UI/PauseScreen/Bottom"]
-margin_left = 2242.55
-margin_top = 128.886
-margin_right = 3262.55
-margin_bottom = 308.886
+margin_left = 2245.0
+margin_top = 129.0
+margin_right = 2840.0
+margin_bottom = 311.0
 rect_rotation = 180.0
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
@@ -169,10 +231,10 @@ stream = ExtResource( 11 )
 volume_db = -10.0
 
 [node name="RetryButton" type="Button" parent="UI/PauseScreen/Bottom"]
-margin_left = 1107.42
-margin_top = 128.886
-margin_right = 2127.42
-margin_bottom = 308.886
+margin_left = 1559.45
+margin_top = 129.0
+margin_right = 2268.45
+margin_bottom = 311.0
 rect_rotation = 180.0
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
@@ -190,6 +252,33 @@ stream = ExtResource( 9 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/RetryButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="MultiplayerButton" type="Button" parent="UI/PauseScreen/Bottom"]
+margin_left = 768.0
+margin_top = 129.0
+margin_right = 1477.0
+margin_bottom = 311.0
+rect_rotation = 180.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
+action_mode = 0
+text = "Multiplayer"
+script = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+shine_info = NodePath("../../ShineInfo")
+multiplayer_options = NodePath("../../MultiplayerOptions")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/MultiplayerButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/MultiplayerButton"]
 stream = ExtResource( 11 )
 volume_db = -10.0
 
@@ -248,9 +337,434 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewports" type="HBoxContainer" parent="."]
+[node name="MultiplayerOptions" type="Control" parent="UI/PauseScreen"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
+
+[node name="IpAddress" type="LineEdit" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_left = 79.8377
+margin_top = 93.2382
+margin_right = 292.838
+margin_bottom = 135.238
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
+context_menu_enabled = false
+placeholder_text = "IP Address"
+placeholder_alpha = 0.35
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConnectButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_left = 79.8377
+margin_top = 148.406
+margin_right = 292.838
+margin_bottom = 192.406
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 11 )
+action_mode = 0
+text = "Connect"
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/ConnectButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/ConnectButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="DisconnectButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_left = 79.8377
+margin_top = 258.731
+margin_right = 292.838
+margin_bottom = 302.731
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 11 )
+action_mode = 0
+text = "Disconnect"
+script = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+pause_screen = NodePath("../..")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/DisconnectButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/DisconnectButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="ConfirmButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_left = 370.0
+margin_top = 259.0
+margin_right = 699.0
+margin_bottom = 303.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 11 )
+action_mode = 0
+text = "Confirm"
+script = ExtResource( 29 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+num_of_players = NodePath("../NumberOfPlayers")
+player1_char = NodePath("../Player1Char")
+player2_char = NodePath("../Player2Char")
+character_node_path = NodePath("../../../../Viewports/ViewportContainer/Viewport/World/Character")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/ConfirmButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/ConfirmButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="HostButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_left = 79.8377
+margin_top = 204.342
+margin_right = 292.838
+margin_bottom = 248.342
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 11 )
+action_mode = 0
+text = "Host"
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/HostButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/HostButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="ControlMode" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
+margin_left = 673.654
+margin_top = 104.791
+margin_right = 801.654
+margin_bottom = 232.791
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
+margin_left = 635.0
+margin_top = 130.5
+margin_right = 763.0
+margin_bottom = 258.5
+rect_rotation = 180.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
+margin_left = 442.0
+margin_top = 103.0
+margin_right = 604.0
+margin_bottom = 135.0
+custom_fonts/font = SubResource( 12 )
+text = "Control Mode:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
+margin_left = 636.0
+margin_top = 103.0
+margin_right = 674.0
+margin_bottom = 135.0
+custom_fonts/font = SubResource( 12 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NumberOfPlayers" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_top = 50.0
+margin_right = 40.0
+margin_bottom = 90.0
+script = ExtResource( 26 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
+margin_left = 673.654
+margin_top = 104.791
+margin_right = 801.654
+margin_bottom = 232.791
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
+margin_left = 635.0
+margin_top = 130.5
+margin_right = 763.0
+margin_bottom = 258.5
+rect_rotation = 180.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
+margin_left = 498.359
+margin_top = 102.986
+margin_right = 604.359
+margin_bottom = 134.986
+custom_fonts/font = SubResource( 12 )
+text = "Players:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
+margin_left = 636.0
+margin_top = 103.0
+margin_right = 674.0
+margin_bottom = 135.0
+custom_fonts/font = SubResource( 12 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player1Char" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_top = 85.0
+margin_right = 40.0
+margin_bottom = 125.0
+script = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
+margin_left = 673.654
+margin_top = 104.791
+margin_right = 801.654
+margin_bottom = 232.791
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
+margin_left = 635.0
+margin_top = 130.5
+margin_right = 763.0
+margin_bottom = 258.5
+rect_rotation = 180.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
+margin_left = 373.359
+margin_top = 102.0
+margin_right = 597.359
+margin_bottom = 134.0
+custom_fonts/font = SubResource( 12 )
+text = "Player 1 Character:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
+margin_left = 636.0
+margin_top = 103.0
+margin_right = 674.0
+margin_bottom = 134.0
+custom_fonts/font = SubResource( 12 )
+text = "M"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player2Char" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_top = 120.0
+margin_right = 40.0
+margin_bottom = 160.0
+script = ExtResource( 28 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
+margin_left = 673.654
+margin_top = 104.791
+margin_right = 801.654
+margin_bottom = 232.791
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
+margin_left = 635.0
+margin_top = 130.5
+margin_right = 763.0
+margin_bottom = 258.5
+rect_rotation = 180.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
+margin_left = 370.0
+margin_top = 101.184
+margin_right = 597.0
+margin_bottom = 133.184
+custom_fonts/font = SubResource( 12 )
+text = "Player 2 Character:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
+margin_left = 636.0
+margin_top = 103.0
+margin_right = 674.0
+margin_bottom = 134.0
+custom_fonts/font = SubResource( 12 )
+text = "L"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChatBox" type="Control" parent="UI"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 288.0
+margin_bottom = 169.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ChatBox"]
+visible = false
+margin_right = 283.0
+margin_bottom = 164.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/ChatBox/VBoxContainer"]
+margin_right = 283.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/mono_font = SubResource( 13 )
+custom_fonts/bold_italics_font = SubResource( 13 )
+custom_fonts/italics_font = SubResource( 13 )
+custom_fonts/bold_font = SubResource( 13 )
+custom_fonts/normal_font = SubResource( 13 )
+bbcode_enabled = true
+scroll_active = false
+scroll_following = true
+custom_effects = [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ]
+
+[node name="EnterText" type="LineEdit" parent="UI/ChatBox/VBoxContainer"]
+margin_top = 145.0
+margin_right = 283.0
+margin_bottom = 164.0
+custom_styles/normal = SubResource( 14 )
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color = Color( 0.0901961, 0.196078, 0.458824, 1 )
+context_menu_enabled = false
+placeholder_text = "Enter text here."
+placeholder_alpha = 0.35
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewports" type="HBoxContainer" parent="."]
+margin_left = 0.42926
+margin_top = -0.858551
+margin_right = 772.429
+margin_bottom = 431.141
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
