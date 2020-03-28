@@ -20,7 +20,7 @@ func set_property(object_node : GameObject, property, value):
 
 func create_object(object, add_to_data):
 	var mode = get_tree().get_current_scene().mode
-	var object_name = object_id_map.ids[object.type_id] # ok boomer
+	var object_name = object_id_map.ids[object.type_id]
 	var object_scene = load("res://scenes/actors/objects/" + object_name + "/" + object_name + ".tscn")
 	if object_scene != null:
 		var object_node = object_scene.instance()

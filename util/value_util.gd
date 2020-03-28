@@ -19,8 +19,10 @@ static func encode_value(value):
 	# again very hacky cause i dont know how else to add it
 	var type = typeof(value)
 	if type == TYPE_VECTOR2:
-		return "V2" + str(stepify(value.x,0.01)) + "x" + str(stepify(value.y, 0.01))
+		return "V2" + str(stepify(value.x,0.1)) + "x" + str(stepify(value.y, 0.1))
 	elif type == TYPE_BOOL:
 		return "BL" + str(0 if value == false else 1)
+	elif type == TYPE_STRING:
+		return str(value).percent_encode()
 	else:
 		return str(value)

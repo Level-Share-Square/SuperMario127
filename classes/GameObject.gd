@@ -25,7 +25,7 @@ func get_property_index(key) -> int:
 	for savable_property in (base_savable_properties + savable_properties):
 		if key == savable_property:
 			return index
-			
+		index += 1
 	return index
 
 func set_property(key, value, change_level_object):

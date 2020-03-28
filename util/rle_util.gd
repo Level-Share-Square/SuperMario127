@@ -40,7 +40,7 @@ static func decode_value(value: String):
 	elif value.is_valid_float():
 		return float(value)
 	else:
-		return str(value)
+		return str(value).percent_decode()
 
 static func decode(code: String):
 	var result = {}

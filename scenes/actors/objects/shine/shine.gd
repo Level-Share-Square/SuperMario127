@@ -6,8 +6,8 @@ onready var sound = $CollectSound
 var collected = false
 var character
 
-var shine_name := ""
-var shine_description := ""
+var shine_name := "Unnamed Shine"
+var shine_description := "This is a shine! Collect it to win the level."
 
 func _set_properties():
 	savable_properties = ["shine_name", "shine_description"]
