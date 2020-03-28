@@ -1,7 +1,7 @@
 class_name LevelData
 
-var current_format_version := "0.4.0"
-var format_version := "0.4.0"
+var current_format_version := "0.4.1"
+var format_version := "0.4.1"
 var name := "My Level"
 var areas = []
 var global_vars_node = null
@@ -90,7 +90,7 @@ func load_in(code):
 	if code[0] == "{":
 		result = JSON.parse(code).result
 		is_json = true
-		result.format_version = "0.4.0"
+		result.format_version = "0.4.1"
 	else:
 		result = rle_util.decode(code)
 
@@ -109,7 +109,7 @@ func load_in(code):
 func get_encoded_level_data():
 	
 	var level_string = ""
-	var format_version = "0.4.0"
+	var format_version = "0.4.1"
 	var level_name = name
 	
 	
