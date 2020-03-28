@@ -32,8 +32,17 @@ func set_property(key, value, change_level_object):
 	self[key] = value
 	if change_level_object and is_savable_property(key):
 		var index = get_property_index(key)
-		level_object.properties[index] = value
+		if index == level_object.properties.size():
+			level_object.properties.append(value)
+		else:
+			level_object.properties[index] = value
 
 func set_property_by_index(index, value, change_level_object):
 	var key = (base_savable_properties + savable_properties)[index]
 	set_property(key, value, change_level_object)
+	
+func _set_properties():
+	pass
+	
+func _set_property_values():
+	pass

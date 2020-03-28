@@ -6,6 +6,16 @@ onready var sound = $CollectSound
 var collected = false
 var character
 
+var shine_name := ""
+var shine_description := ""
+
+func _set_properties():
+	savable_properties = ["shine_name", "shine_description"]
+	
+func _set_property_values():
+	set_property("shine_name", shine_name, true)
+	set_property("shine_description", shine_description, true)
+
 func collect(body):
 	if !collected && body.name.begins_with("Character") && body.controllable:
 		character = body

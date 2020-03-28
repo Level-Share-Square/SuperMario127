@@ -26,11 +26,13 @@ func create_object(object, add_to_data):
 		var object_node = object_scene.instance()
 		object_node.mode = mode
 		object_node.level_object = object
+		object_node._set_properties()
 		var index = 0
 		for value in object.properties:
 			var true_value = value_util.get_true_value(value)
 			object_node.set_property_by_index(index, true_value, false)
 			index += 1
+		object_node._set_property_values()
 		add_child(object_node)
 		if add_to_data:
 			level_area.objects.append(object)
