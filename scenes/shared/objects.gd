@@ -15,10 +15,8 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	for object in level_area.objects:
 		create_object(object, false)
 		
-func set_property(object_node, property, value):
-	var level_object = object_node.level_object
-	level_object.properties[property] = value
-	object_node[property] = value
+func set_property(object_node : GameObject, property, value):
+	object_node.set_property(property, value, true)
 
 func create_object(object, add_to_data):
 	var mode = get_tree().get_current_scene().mode
@@ -28,10 +26,11 @@ func create_object(object, add_to_data):
 		var object_node = object_scene.instance()
 		object_node.mode = mode
 		object_node.level_object = object
-		for key in object.properties:
-			var value = object.properties[key]
+		var index = 0
+		for value in object.properties:
 			var true_value = value_util.get_true_value(value)
-			object_node[key] = true_value
+			object_node.set_property_by_index(index, true_value, false)
+			index += 1
 		add_child(object_node)
 		if add_to_data:
 			level_area.objects.append(object)

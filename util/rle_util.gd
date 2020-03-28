@@ -76,11 +76,13 @@ static func decode(code: String):
 		for object in objects_array:
 			var object_array = object.split(",")
 			var decoded_object = {}
-			decoded_object.properties = {}
+			decoded_object.properties = []
 			decoded_object.type_id = int(object_array[0])
-			decoded_object.properties.position = decode_value(object_array[1])
-			decoded_object.properties.scale = decode_value(object_array[2])
-			decoded_object.properties.rotation_degrees = int(decode_value(object_array[3]))
+			var index = 0
+			for value in object_array:
+				if index > 0:
+					decoded_object.properties.append(value)
+				index += 1
 			result.areas[0].objects.append(decoded_object)
 	
 	return result
