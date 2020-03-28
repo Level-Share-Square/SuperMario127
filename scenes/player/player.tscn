@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -22,6 +22,13 @@
 [ext_resource path="res://scenes/player/chat.gd" type="Script" id=20]
 [ext_resource path="res://scenes/player/disconnect_button.gd" type="Script" id=21]
 [ext_resource path="res://scenes/player/multiplayer_menu_button.gd" type="Script" id=22]
+[ext_resource path="res://scenes/player/control_changer.gd" type="Script" id=23]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow_hover.png" type="Texture" id=24]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=25]
+[ext_resource path="res://scenes/player/num_of_plrs.gd" type="Script" id=26]
+[ext_resource path="res://scenes/player/player_1_char.gd" type="Script" id=27]
+[ext_resource path="res://scenes/player/player_2_char.gd" type="Script" id=28]
+[ext_resource path="res://scenes/player/confirm_button.gd" type="Script" id=29]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -88,6 +95,10 @@ corner_radius_bottom_left = 64
 
 [sub_resource type="DynamicFont" id=11]
 size = 27
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 24
 font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=12]
@@ -397,6 +408,35 @@ volume_db = -10.0
 stream = ExtResource( 11 )
 volume_db = -10.0
 
+[node name="ConfirmButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_left = 370.0
+margin_top = 259.0
+margin_right = 699.0
+margin_bottom = 303.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 11 )
+action_mode = 0
+text = "Confirm"
+script = ExtResource( 29 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+num_of_players = NodePath("../NumberOfPlayers")
+player1_char = NodePath("../Player1Char")
+player2_char = NodePath("../Player2Char")
+character_node_path = NodePath("../../../../Viewports/ViewportContainer/Viewport/World/Character")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/ConfirmButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/ConfirmButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
 [node name="HostButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
 margin_left = 79.8377
 margin_top = 204.342
@@ -421,6 +461,253 @@ volume_db = -10.0
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/HostButton"]
 stream = ExtResource( 11 )
 volume_db = -10.0
+
+[node name="ControlMode" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
+margin_left = 673.654
+margin_top = 104.791
+margin_right = 801.654
+margin_bottom = 232.791
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
+margin_left = 635.0
+margin_top = 130.5
+margin_right = 763.0
+margin_bottom = 258.5
+rect_rotation = 180.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
+margin_left = 442.0
+margin_top = 103.0
+margin_right = 604.0
+margin_bottom = 135.0
+custom_fonts/font = SubResource( 14 )
+text = "Control Mode:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
+margin_left = 636.0
+margin_top = 103.0
+margin_right = 674.0
+margin_bottom = 135.0
+custom_fonts/font = SubResource( 14 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NumberOfPlayers" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_top = 50.0
+margin_right = 40.0
+margin_bottom = 90.0
+script = ExtResource( 26 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
+margin_left = 673.654
+margin_top = 104.791
+margin_right = 801.654
+margin_bottom = 232.791
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
+margin_left = 635.0
+margin_top = 130.5
+margin_right = 763.0
+margin_bottom = 258.5
+rect_rotation = 180.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
+margin_left = 498.359
+margin_top = 102.986
+margin_right = 604.359
+margin_bottom = 134.986
+custom_fonts/font = SubResource( 14 )
+text = "Players:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
+margin_left = 636.0
+margin_top = 103.0
+margin_right = 674.0
+margin_bottom = 135.0
+custom_fonts/font = SubResource( 14 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player1Char" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_top = 85.0
+margin_right = 40.0
+margin_bottom = 125.0
+script = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
+margin_left = 673.654
+margin_top = 104.791
+margin_right = 801.654
+margin_bottom = 232.791
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
+margin_left = 635.0
+margin_top = 130.5
+margin_right = 763.0
+margin_bottom = 258.5
+rect_rotation = 180.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
+margin_left = 373.359
+margin_top = 102.0
+margin_right = 597.359
+margin_bottom = 134.0
+custom_fonts/font = SubResource( 14 )
+text = "Player 1 Character:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
+margin_left = 636.0
+margin_top = 103.0
+margin_right = 674.0
+margin_bottom = 134.0
+custom_fonts/font = SubResource( 14 )
+text = "M"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player2Char" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_top = 120.0
+margin_right = 40.0
+margin_bottom = 160.0
+script = ExtResource( 28 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
+margin_left = 673.654
+margin_top = 104.791
+margin_right = 801.654
+margin_bottom = 232.791
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
+margin_left = 635.0
+margin_top = 130.5
+margin_right = 763.0
+margin_bottom = 258.5
+rect_rotation = 180.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
+margin_left = 370.0
+margin_top = 101.184
+margin_right = 597.0
+margin_bottom = 133.184
+custom_fonts/font = SubResource( 14 )
+text = "Player 2 Character:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
+margin_left = 636.0
+margin_top = 103.0
+margin_right = 674.0
+margin_bottom = 134.0
+custom_fonts/font = SubResource( 14 )
+text = "L"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ChatBox" type="Control" parent="UI"]
 margin_left = 5.0

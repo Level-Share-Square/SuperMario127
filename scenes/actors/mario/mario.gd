@@ -265,8 +265,8 @@ func _physics_process(delta: float):
 	if controlled_locally:
 		if controllable and !FocusCheck.is_ui_focused:
 			var control_id = player_id
-			if PlayerSettings.other_player_id != -1:
-				control_id = 0
+			if PlayerSettings.other_player_id != -1 or number_of_players == 1:
+				control_id = PlayerSettings.control_mode
 			if Input.is_action_pressed("move_left_" + str(control_id)) and !Input.is_blocking_signals():
 				left = true
 			else:
