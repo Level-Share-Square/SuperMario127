@@ -21,6 +21,6 @@ static func encode_value(value):
 	if type == TYPE_VECTOR2:
 		return "V2" + str(stepify(value.x,0.01)) + "x" + str(stepify(value.y, 0.01))
 	elif type == TYPE_BOOL:
-		return "BOOL" + str(0 if value == false else 1)
+		return "BL" + str(0 if value == false else 1)
 	else:
 		return str(value)
