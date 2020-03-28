@@ -32,6 +32,9 @@ static func decode_value(value: String):
 		value = value.trim_prefix("V2")
 		var array_value = value.split("x")
 		return Vector2(array_value[0], array_value[1])
+	elif value.begins_with("BOOL"):
+		value = value.trim_prefix("BOOL")
+		return true if value == "1" else false
 	elif value.is_valid_integer():
 		return int(value)
 	elif value.is_valid_float():
@@ -86,6 +89,23 @@ static func decode(code: String):
 				if index > 0:
 					decoded_object.properties.append(decode_value(value))
 				index += 1
+			
+			var size = decoded_object.properties.size()
+			
+			# filling in new properties
+			
+			for index in range(size, 5):
+				if index == 0:
+					decoded_object.properties.append(Vector2())
+				elif index == 1:
+					decoded_object.properties.append(Vector2())
+				elif index == 2:
+					decoded_object.properties.append(0)
+				elif index == 3:
+					decoded_object.properties.append(true)
+				elif index == 4:
+					decoded_object.properties.append(true)
+			
 			result.areas[0].objects.append(decoded_object)
 	
 	return result

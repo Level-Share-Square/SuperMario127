@@ -114,6 +114,8 @@ func _process(delta):
 					object.properties.append(object_pos)
 					object.properties.append(Vector2(1, 1))
 					object.properties.append(0)
+					object.properties.append(true)
+					object.properties.append(true)
 					shared_node.create_object(object, true)
 		elif right_held:
 			if selected_box:

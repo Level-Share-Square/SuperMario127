@@ -17,7 +17,10 @@ static func get_value_from_true(value):
 		
 static func encode_value(value):
 	# again very hacky cause i dont know how else to add it
-	if typeof(value) == TYPE_VECTOR2:
+	var type = typeof(value)
+	if type == TYPE_VECTOR2:
 		return "V2" + str(stepify(value.x,0.01)) + "x" + str(stepify(value.y, 0.01))
+	elif type == TYPE_BOOL:
+		return "BOOL" + str(0 if value == false else 1)
 	else:
 		return str(value)
