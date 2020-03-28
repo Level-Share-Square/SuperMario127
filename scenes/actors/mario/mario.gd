@@ -70,6 +70,9 @@ export var character := 0
 export var mario_frames : SpriteFrames
 export var luigi_frames : SpriteFrames
 
+export var mario_alt_frames : SpriteFrames
+export var luigi_alt_frames : SpriteFrames
+
 export var mario_collision : RectangleShape2D
 export var mario_collision_offset : Vector2
 export var mario_dive_collision : RectangleShape2D
@@ -149,7 +152,10 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		var sound_scene = load(mario_sounds)
 		sound_player = sound_scene.instance()
 		add_child(sound_player)
-		sprite.frames = mario_frames
+		if PlayerSettings.player1_character != PlayerSettings.player2_character or player_id == 0:
+			sprite.frames = mario_frames
+		else:
+			sprite.frames = mario_alt_frames
 		collision_shape.position = mario_collision_offset
 		collision_shape.shape = mario_collision
 		player_collision_shape.position = mario_collision_offset
@@ -161,7 +167,10 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		var sound_scene = load(luigi_sounds)
 		sound_player = sound_scene.instance()
 		add_child(sound_player)
-		sprite.frames = luigi_frames
+		if PlayerSettings.player1_character != PlayerSettings.player2_character or player_id == 0:
+			sprite.frames = luigi_frames
+		else:
+			sprite.frames = luigi_alt_frames
 		collision_shape.position = luigi_collision_offset
 		collision_shape.shape = luigi_collision
 		player_collision_shape.position = luigi_collision_offset

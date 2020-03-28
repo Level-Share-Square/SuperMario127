@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://scenes/actors/mario/states/Dive.gd" type="Script" id=13]
 [ext_resource path="res://scenes/actors/mario/states/Getup.gd" type="Script" id=14]
 [ext_resource path="res://scenes/actors/mario/alt_frames.tres" type="SpriteFrames" id=15]
+[ext_resource path="res://scenes/actors/mario/luigi_alt_frames.tres" type="SpriteFrames" id=16]
 [ext_resource path="res://scenes/actors/mario/luigi_frames.tres" type="SpriteFrames" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -42,6 +43,8 @@ acceleration = 10.5
 friction = 13.5
 mario_frames = ExtResource( 1 )
 luigi_frames = ExtResource( 21 )
+mario_alt_frames = ExtResource( 15 )
+luigi_alt_frames = ExtResource( 16 )
 mario_collision = SubResource( 1 )
 mario_collision_offset = Vector2( 0.5, 8 )
 mario_dive_collision = SubResource( 2 )
