@@ -7,13 +7,14 @@ export var gravity_scale: float = 0.5
 var old_gravity_scale = 1
 var can_boost = true
 var cooldown_timer = 0
+var stop_timer = 0
 
 func _ready():
 	priority = 2
 	disable_animation = true
 
 func _start_check(delta):
-	return character.spin && (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2 and !character.test_move(character.transform, Vector2(8, 0)) and !character.test_move(character.transform, Vector2(-8, 0))
+	return stop_timer > 0 && (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2 and !character.test_move(character.transform, Vector2(8, 0)) and !character.test_move(character.transform, Vector2(-8, 0))
 
 func _start(delta):
 	if can_boost == true && !character.is_grounded() && (character.state != character.get_state_node("Jump") or character.current_jump == 1):
@@ -29,6 +30,7 @@ func _start(delta):
 	old_gravity_scale = character.gravity_scale
 	character.gravity_scale = gravity_scale
 	character.attacking = true
+	stop_timer = 0.15
 	
 func _update(delta):
 	var sprite = character.animated_sprite
@@ -49,7 +51,7 @@ func _stop(delta):
 	character.attacking = false
 
 func _stop_check(delta):
-	return !character.spin or character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0))
+	return stop_timer == 0 or character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0))
 	
 func _general_update(delta):
 	if cooldown_timer > 0:
@@ -57,5 +59,13 @@ func _general_update(delta):
 		if cooldown_timer <= 0:
 			cooldown_timer = 0
 			can_boost = true
+	if stop_timer > 0:
+		if character.jump_animation == 2 and character.state == character.get_state_node("JumpState"):
+			stop_timer = 0.15
+		stop_timer -= delta
+		if stop_timer <= 0:
+			stop_timer = 0
+	if character.spin or character.spin_just_pressed:
+		stop_timer = 0.15	
 	if character.is_grounded():
 		can_boost = true
