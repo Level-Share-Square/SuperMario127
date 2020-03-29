@@ -8,6 +8,9 @@ onready var property_scene = load("res://scenes/editor/property.tscn")
 onready var grid_container_node = get_node(grid_container)
 
 func open_object(object: GameObject):
+	for property in grid_container_node.get_children():
+		property.queue_free()
+		
 	self.object = object
 	for key in (object.editable_properties + object.base_editable_properties):
 		var property = property_scene.instance()

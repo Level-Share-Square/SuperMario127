@@ -10,7 +10,7 @@ corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 2 )
 
@@ -33,7 +33,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="."]
 margin_right = 321.0
 margin_bottom = 61.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Property"
 align = 1
