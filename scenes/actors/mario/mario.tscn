@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://scenes/actors/mario/states/Getup.gd" type="Script" id=14]
 [ext_resource path="res://scenes/actors/mario/alt_frames.tres" type="SpriteFrames" id=15]
 [ext_resource path="res://scenes/actors/mario/luigi_alt_frames.tres" type="SpriteFrames" id=16]
+[ext_resource path="res://assets/tiles/layer2_mask.png" type="Texture" id=17]
 [ext_resource path="res://scenes/actors/mario/luigi_frames.tres" type="SpriteFrames" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -118,3 +119,10 @@ position = Vector2( 0.5, 7 )
 shape = SubResource( 3 )
 
 [node name="Bubble" type="Sprite" parent="."]
+
+[node name="Spotlight" type="Light2D" parent="."]
+light_mask = 0
+texture = ExtResource( 17 )
+mode = 3
+range_item_cull_mask = 524288
+shadow_item_cull_mask = 524288

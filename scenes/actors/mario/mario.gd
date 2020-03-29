@@ -8,6 +8,8 @@ signal state_changed
 onready var states_node = $States
 onready var animated_sprite = $Sprite
 
+onready var spotlight = $Spotlight
+
 # Cutout
 export var cutout_death : StreamTexture
 export var cutout_circle : StreamTexture
