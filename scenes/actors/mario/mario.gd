@@ -464,7 +464,7 @@ func kill(cause):
 				cutout_in = cutout_death
 				yield(get_tree().create_timer(1), "timeout")
 			else:
-				yield(get_tree().create_timer(2), "timeout")
+				yield(get_tree().create_timer(3), "timeout")
 				position = spawn_pos
 				dead = false
 				reload = false
