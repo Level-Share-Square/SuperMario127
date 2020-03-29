@@ -28,7 +28,7 @@ line_edit = NodePath("LineEdit")
 [node name="LineEdit" type="LineEdit" parent="."]
 margin_left = 7.0
 margin_top = 58.0
-margin_right = 307.0
+margin_right = 314.0
 margin_bottom = 112.0
 custom_styles/normal = SubResource( 1 )
 custom_fonts/font = SubResource( 2 )
