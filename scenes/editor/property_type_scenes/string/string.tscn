@@ -6,8 +6,6 @@
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 16
-border_width_right = 16
 border_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 24
 corner_radius_top_right = 24
@@ -25,7 +23,6 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-line_edit = NodePath("LineEdit")
 
 [node name="LineEdit" type="LineEdit" parent="."]
 margin_left = 7.0

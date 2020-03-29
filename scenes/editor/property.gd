@@ -21,6 +21,8 @@ func _ready():
 		type_scene_name = "float"
 	elif type == TYPE_STRING:
 		type_scene_name = "string"
+	elif type == TYPE_BOOL:
+		type_scene_name = "bool"
 	
 	if type_scene_name != "None":
 		var property_type_scene = load("res://scenes/editor/property_type_scenes/" + type_scene_name + "/" + type_scene_name + ".tscn")
