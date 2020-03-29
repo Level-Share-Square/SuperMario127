@@ -9,47 +9,42 @@ var global_vars_node = null
 func get_vector2(result) -> Vector2:
 	return Vector2(result.x, result.y)
 
-func get_area(result, is_json) -> LevelArea:
+func get_area(result) -> LevelArea:
 	var area = LevelArea.new()
-	area.settings = get_settings(result.settings, is_json)
+	area.settings = get_settings(result.settings)
 	for very_foreground_tiles_result in result.very_foreground_tiles:
-		var tiles = get_tiles(very_foreground_tiles_result, is_json)
+		var tiles = get_tiles(very_foreground_tiles_result)
 		for tile in tiles:
 			area.very_foreground_tiles.append(tile)
 	for tiles_result in result.foreground_tiles:
-		var tiles = get_tiles(tiles_result, is_json)
+		var tiles = get_tiles(tiles_result)
 		for tile in tiles:
 			area.foreground_tiles.append(tile)
 	for background_tiles_result in result.background_tiles:
-		var tiles = get_tiles(background_tiles_result, is_json)
+		var tiles = get_tiles(background_tiles_result)
 		for tile in tiles:
 			area.background_tiles.append(tile)
 	for object_result in result.objects:
-		var object = get_object(object_result, is_json)
+		var object = get_object(object_result)
 		area.objects.append(object)
 	return area
 	
-func get_settings(result, is_json) -> LevelAreaSettings:
+func get_settings(result) -> LevelAreaSettings:
 	var settings = LevelAreaSettings.new()
 	settings.sky = result.sky
 	settings.background = result.background
-	settings.music = result.music if !is_json and result.music != 0 else result.music + 1
+	settings.music = result.music
 	settings.size = get_vector2(result.size)
 	return settings
 	
-func get_tiles(result, is_json) -> Array:
+func get_tiles(result) -> Array:
 	var tileset_id_string
 	var tile_id_string
-	if !is_json:
-		tileset_id_string = "0x" + result[0] + result[1]
-		tile_id_string = "0x" + result[2]
-	else:
-		tileset_id_string = "0x" + result[0] + result[1] + result[2]
-		tile_id_string = "0x" + result[3]
+	tileset_id_string = "0x" + result[0] + result[1]
+	tile_id_string = "0x" + result[2]
 	var tile_repeat_string = ""
-	var add_amount = 1 if is_json else 0
-	if result.length() > 3 + add_amount:
-		for index in range(4 + add_amount, result.length()):
+	if result.length() > 3:
+		for index in range(4, result.length()):
 			tile_repeat_string += result[index]
 	else:
 		tile_repeat_string += "1"
@@ -62,26 +57,11 @@ func get_tiles(result, is_json) -> Array:
 		tiles.append(tile)
 	return tiles
 
-func get_object(result, is_json) -> LevelObject:
+func get_object(result) -> LevelObject:
 	var object
-	if !is_json:
-		object = LevelObject.new()
-		object.type_id = result.type_id
-		object.properties = result.properties
-	else:
-		object = LevelObject.new()
-		object.properties = {}
-		for key in result.properties:
-			object.properties[key] = value_util.get_true_value(result.properties[key])
-		object.type_id = 1
-		if result.type == "Entrance": # i don't even care lol
-			object.type_id = 0
-		elif result.type == "Coin":
-			object.type_id = 1
-		elif result.type == "Shine":
-			object.type_id = 2
-		elif result.type == "MetalPlatform":
-			object.type_id = 3
+	object = LevelObject.new()
+	object.type_id = result.type_id
+	object.properties = result.properties
 	return object
 
 func load_in(code):
@@ -90,9 +70,13 @@ func load_in(code):
 	if code[0] == "{":
 		result = JSON.parse(code).result
 		is_json = true
-		result.format_version = "0.4.1"
 	else:
 		result = rle_util.decode(code)
+
+	if result.format_version == "0.3.3":
+		result = conversion_util.convert_033_to_040(result)
+	if result.format_version == "0.4.0":
+		result.format_version = "0.4.1"
 
 	assert(result.format_version)
 	assert(result.name)
@@ -101,7 +85,7 @@ func load_in(code):
 	
 	if format_version == current_format_version:
 		for area_result in result.areas:
-			var area = get_area(area_result, is_json)
+			var area = get_area(area_result)
 			areas.append(area)
 	else:
 		print("Outdated format version. Current version is " + current_format_version + ", but course uses version " + format_version + ".")

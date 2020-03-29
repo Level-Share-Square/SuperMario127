@@ -145,6 +145,11 @@ _global_script_classes=[ {
 "path": "res://util/clipboard_util.gd"
 }, {
 "base": "Reference",
+"class": "conversion_util",
+"language": "GDScript",
+"path": "res://util/conversion_util.gd"
+}, {
+"base": "Reference",
 "class": "rle_util",
 "language": "GDScript",
 "path": "res://util/rle_util.gd"
@@ -192,6 +197,7 @@ _global_script_class_icons={
 "WallJumpState": "",
 "WallSlideState": "",
 "clipboard_util": "",
+"conversion_util": "",
 "rle_util": "",
 "tile_util": "",
 "uuid_util": "",
