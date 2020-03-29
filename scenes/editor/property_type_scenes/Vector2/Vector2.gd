@@ -15,7 +15,7 @@ func set_value(value: Vector2):
 	y_edit_node.text = str(value.y)
 
 func get_value() -> Vector2:
-	return Vector2(int(x_edit_node.text), int(y_edit_node.text))
+	return Vector2(float(x_edit_node.text), float(y_edit_node.text))
 
 func update_value():
 	get_node("../").update_value(get_value())
