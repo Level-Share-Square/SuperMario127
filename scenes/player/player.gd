@@ -6,7 +6,6 @@ export var character2 : NodePath
 export var camera : NodePath
 
 var mode = 0
-export var number_of_players = 2
 
 func _ready():
 	var data = CurrentLevelData.level_data
@@ -28,7 +27,7 @@ func _unhandled_input(event):
 	if event.is_action_pressed("reload"):
 		if !get_node(character).dead:
 			get_node(character).kill("reload")
-		elif number_of_players == 2:
+		elif PlayerSettings.number_of_players == 2:
 			get_node(character2).kill("reload")
 		if PlayerSettings.other_player_id != -1:
 			get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())

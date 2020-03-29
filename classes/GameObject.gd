@@ -7,10 +7,10 @@ var level_object = null
 
 var enabled = true
 
-var base_savable_properties : PoolStringArray = ["position", "scale", "rotation", "enabled", "visible"]
+var base_savable_properties : PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible"]
 var savable_properties : PoolStringArray = []
 
-var base_editable_properties : PoolStringArray = ["enabled", "visible", "rotation", "scale", "position"]
+var base_editable_properties : PoolStringArray = ["enabled", "visible", "rotation_degrees", "scale", "position"]
 var editable_properties : PoolStringArray = []
 
 func is_savable_property(key) -> bool:
