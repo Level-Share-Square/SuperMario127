@@ -1234,7 +1234,6 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="UI/LevelSettingsWindow"]
 
 [node name="ObjectSettingsWindow" type="NinePatchRect" parent="UI"]
-visible = false
 margin_left = 165.0
 margin_top = 130.0
 margin_right = 1218.0
@@ -1251,7 +1250,7 @@ script = ExtResource( 58 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-contents = NodePath("Contents")
+grid_container = NodePath("Contents/ScrollContainer/GridContainer")
 
 [node name="Title" type="RichTextLabel" parent="UI/ObjectSettingsWindow"]
 margin_left = 24.0
@@ -1291,11 +1290,24 @@ volume_db = -10.0
 anchor_bottom = 0.06
 margin_left = 17.4044
 margin_top = 104.0
-margin_right = 1036.4
-margin_bottom = 498.0
+margin_right = 1037.4
+margin_bottom = 491.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/ObjectSettingsWindow/Contents"]
+margin_left = 10.0
+margin_right = 1010.0
+margin_bottom = 420.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="UI/ObjectSettingsWindow/Contents/ScrollContainer"]
+custom_constants/vseparation = 140
+custom_constants/hseparation = 340
+columns = 3
 
 [node name="Tween" type="Tween" parent="UI/ObjectSettingsWindow"]
 
@@ -1548,3 +1560,4 @@ z_index = -1
 script = ExtResource( 8 )
 
 [node name="Backgrounds" parent="." instance=ExtResource( 52 )]
+position = Vector2( -31.2415, -9.55621 )

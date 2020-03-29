@@ -3,9 +3,13 @@ extends Control
 var object : GameObject
 var key : String
 
+onready var label = $Label
+
 var property_type
 
 func _ready():
+	label.text = key.capitalize()
+	
 	var value = object[key]
 	var type = typeof(value)
 	var type_scene_name := "None"

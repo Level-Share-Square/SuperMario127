@@ -1,11 +1,11 @@
 extends EditorWindow
 
-export var contents : NodePath
+export var grid_container : NodePath
 
 var object
 
 onready var property_scene = load("res://scenes/editor/property.tscn")
-onready var contents_node = get_node(contents)
+onready var grid_container_node = get_node(grid_container)
 
 func open_object(object: GameObject):
 	self.object = object
@@ -13,6 +13,6 @@ func open_object(object: GameObject):
 		var property = property_scene.instance()
 		property.object = object
 		property.key = key
-		contents_node.add_child(property)
+		grid_container_node.add_child(property)
 	open()
 	
