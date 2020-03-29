@@ -11,6 +11,10 @@ func _ready():
 	var type_scene_name := "None"
 	if type == TYPE_VECTOR2:
 		type_scene_name = "Vector2"
+	elif type == TYPE_INT:
+		type_scene_name = "int"
+	elif type == TYPE_REAL:
+		type_scene_name = "float"
 	
 	if type_scene_name != "None":
 		var property_type_scene = load("res://scenes/editor/property_type_scenes/" + type_scene_name + "/" + type_scene_name + ".tscn")
