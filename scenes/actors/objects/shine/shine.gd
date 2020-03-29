@@ -8,13 +8,15 @@ var character
 
 var shine_name := "Unnamed Shine"
 var shine_description := "This is a shine! Collect it to win the level."
+var show_in_menu := false
 
 func _set_properties():
-	savable_properties = ["shine_name", "shine_description"]
+	savable_properties = ["shine_name", "shine_description", "show_in_menu"]
 	
 func _set_property_values():
 	set_property("shine_name", shine_name, true)
 	set_property("shine_description", shine_description, true)
+	set_property("show_in_menu", show_in_menu, true)
 
 func collect(body):
 	if !collected && body.name.begins_with("Character") && body.controllable:

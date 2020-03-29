@@ -39,7 +39,7 @@ func destroy_objects_overlapping_position(position, remove_from_data):
 func move_all_objects_by(offset):
 	for object_node in objects_node.get_children():
 		object_node.position += offset
-		object_node.level_object.properties.position += offset
+		object_node.level_object.properties[0] += offset
 		if object_node.position.x < -32 or object_node.position.x > (CurrentLevelData.level_data.areas[0].settings.size.x * 32) + 32 or object_node.position.y < -32 or object_node.position.y > (CurrentLevelData.level_data.areas[0].settings.size.y * 32) + 32:
 			level_area.objects.erase(object_node.level_object)
 			object_node.queue_free()
