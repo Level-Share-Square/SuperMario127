@@ -36,22 +36,6 @@ static func convert_033_to_040(result):
 				for key in object_result.properties:
 					object.properties.append(value_util.get_true_value(object_result.properties[key]))
 					
-				var size = object.properties.size()
-				
-				# filling in new properties
-				
-				for index in range(size, 5):
-					if index == 0:
-						object.properties.append(Vector2())
-					elif index == 1:
-						object.properties.append(Vector2())
-					elif index == 2:
-						object.properties.append(0)
-					elif index == 3:
-						object.properties.append(true)
-					elif index == 4:
-						object.properties.append(true)
-					
 				object.type_id = 1
 				if object_result.type == "Entrance": # i don't even care lol
 					object.type_id = 0
@@ -65,3 +49,28 @@ static func convert_033_to_040(result):
 				
 			new_result.areas.append(area)
 	return new_result
+
+static func convert_040_to_041(result):
+	result.format_version = "0.4.1"
+	for area_result in result.areas:
+		if typeof(area_result) == TYPE_DICTIONARY:
+			var new_objects = []
+			for object_result in area_result.objects:
+				var object = object_result
+				var size = object.properties.size()
+				
+				# filling in new properties
+				for index in range(size, 5):
+					if index == 0:
+						object.properties.append(Vector2())
+					elif index == 1:
+						object.properties.append(Vector2())
+					elif index == 2:
+						object.properties.append(0)
+					elif index == 3:
+						object.properties.append(true)
+					elif index == 4:
+						object.properties.append(true)
+				new_objects.append(object)
+			area_result.objects = new_objects
+	return result

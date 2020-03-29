@@ -76,7 +76,7 @@ func load_in(code):
 	if result.format_version == "0.3.3":
 		result = conversion_util.convert_033_to_040(result)
 	if result.format_version == "0.4.0":
-		result.format_version = "0.4.1"
+		result = conversion_util.convert_040_to_041(result)
 
 	assert(result.format_version)
 	assert(result.name)

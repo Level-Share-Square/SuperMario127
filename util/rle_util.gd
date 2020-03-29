@@ -91,21 +91,6 @@ static func decode(code: String):
 				index += 1
 			
 			var size = decoded_object.properties.size()
-			
-			# filling in new properties
-			
-			for index in range(size, 5):
-				if index == 0:
-					decoded_object.properties.append(Vector2())
-				elif index == 1:
-					decoded_object.properties.append(Vector2())
-				elif index == 2:
-					decoded_object.properties.append(0)
-				elif index == 3:
-					decoded_object.properties.append(true)
-				elif index == 4:
-					decoded_object.properties.append(true)
-			
 			result.areas[0].objects.append(decoded_object)
 	
 	return result
