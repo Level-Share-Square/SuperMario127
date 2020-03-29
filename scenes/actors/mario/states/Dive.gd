@@ -62,8 +62,10 @@ func _stop(delta):
 	var dive_collision = character.get_node("DiveCollision")
 	var sprite = character.animated_sprite
 	if character.test_move(character.transform, Vector2(0.1 * character.facing_direction, -15)) and !character.is_grounded():
-		character.velocity.x = bonk_power * -character.facing_direction 
+		character.velocity.x = bonk_power * -character.facing_direction
+		character.velocity.y = -65
 		character.position.x -= 2 * character.facing_direction
+		character.position.y -= 16
 		character.set_state_by_name("BonkedState", delta)
 		character.attacking = false
 		sprite.rotation_degrees = 0
