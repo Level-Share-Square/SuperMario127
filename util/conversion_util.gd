@@ -57,8 +57,9 @@ static func convert_040_to_041(result):
 			var new_objects = []
 			for object_result in area_result.objects:
 				var object = object_result
-				var size = object.properties.size()
+				object.properties[2] = int(object.properties[2])
 				
+				var size = object.properties.size()
 				# filling in new properties
 				for index in range(size, 5):
 					if index == 0:

@@ -22,7 +22,11 @@ static func encode_value(value):
 		return "V2" + str(stepify(value.x,0.1)) + "x" + str(stepify(value.y, 0.1))
 	elif type == TYPE_BOOL:
 		return "BL" + str(0 if value == false else 1)
+	elif type == TYPE_INT:
+		return "IT" + str(value)
+	elif type == TYPE_REAL:
+		return "FL" + str(value)
 	elif type == TYPE_STRING:
-		return str(value).percent_encode()
+		return "ST" + str(value).percent_encode()
 	else:
 		return str(value)

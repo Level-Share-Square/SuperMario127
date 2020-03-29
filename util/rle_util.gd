@@ -35,12 +35,17 @@ static func decode_value(value: String):
 	elif value.begins_with("BL"):
 		value = value.trim_prefix("BL")
 		return true if value == "1" else false
-	elif value.is_valid_integer():
+	elif value.begins_with("IT"):
+		value = value.trim_prefix("IT")
 		return int(value)
-	elif value.is_valid_float():
+	elif value.begins_with("FL"):
+		value = value.trim_prefix("FL")
 		return float(value)
-	else:
+	elif value.begins_with("ST"):
+		value = value.trim_prefix("ST")
 		return str(value).percent_decode()
+	else:
+		return str(value)
 
 static func decode(code: String):
 	var result = {}
