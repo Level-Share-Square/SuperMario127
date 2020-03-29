@@ -6,8 +6,6 @@
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 16
-border_width_right = 16
 border_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 32
 corner_radius_top_right = 32
