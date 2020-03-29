@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -57,6 +57,7 @@
 [ext_resource path="res://scenes/actors/objects/entrance_luigi/sprite.png" type="Texture" id=55]
 [ext_resource path="res://scenes/editor/luigi_entrance_item/entrance_placement.gd" type="Script" id=56]
 [ext_resource path="res://scenes/editor/luigi_entrance_item/entrance_removal.gd" type="Script" id=57]
+[ext_resource path="res://scenes/editor/ObjectSettingsWindow.gd" type="Script" id=58]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -572,6 +573,7 @@ placeable_items = NodePath("PlaceableItems")
 placeable_items_button_container = NodePath("UI/PlaceableItemsContainer")
 item_preview = NodePath("ItemPreview")
 shared = NodePath("Shared")
+object_settings = NodePath("UI/ObjectSettingsWindow")
 
 [node name="Shared" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0.198608, -0.468788 )
@@ -1230,6 +1232,72 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="UI/LevelSettingsWindow"]
+
+[node name="ObjectSettingsWindow" type="NinePatchRect" parent="UI"]
+visible = false
+margin_left = 165.0
+margin_top = 130.0
+margin_right = 1218.0
+margin_bottom = 680.0
+rect_scale = Vector2( 0.4, 0.4 )
+mouse_filter = 0
+texture = ExtResource( 18 )
+region_rect = Rect2( 0, 0, 660, 610 )
+patch_margin_left = 40
+patch_margin_top = 110
+patch_margin_right = 40
+patch_margin_bottom = 40
+script = ExtResource( 58 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+contents = NodePath("Contents")
+
+[node name="Title" type="RichTextLabel" parent="UI/ObjectSettingsWindow"]
+margin_left = 24.0
+margin_top = 24.2632
+margin_right = 456.0
+margin_bottom = 102.263
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_text = "Object Settings"
+text = "Object Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="TextureButton" parent="UI/ObjectSettingsWindow"]
+margin_left = 888.65
+margin_top = 12.953
+margin_right = 1043.65
+margin_bottom = 93.953
+rect_scale = Vector2( 0.95, 0.95 )
+texture_normal = ExtResource( 20 )
+texture_pressed = ExtResource( 20 )
+texture_hover = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/ObjectSettingsWindow/CloseButton"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/ObjectSettingsWindow/CloseButton"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="Contents" type="Control" parent="UI/ObjectSettingsWindow"]
+anchor_bottom = 0.06
+margin_left = 17.4044
+margin_top = 104.0
+margin_right = 1036.4
+margin_bottom = 498.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="UI/ObjectSettingsWindow"]
 
 [node name="LevelCodeWindow" type="NinePatchRect" parent="UI"]
 visible = false

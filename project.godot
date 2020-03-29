@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Dive.gd"
 }, {
+"base": "NinePatchRect",
+"class": "EditorWindow",
+"language": "GDScript",
+"path": "res://scenes/editor/window.gd"
+}, {
 "base": "State",
 "class": "FallState",
 "language": "GDScript",
@@ -174,6 +179,7 @@ _global_script_class_icons={
 "BounceState": "",
 "Character": "",
 "DiveState": "",
+"EditorWindow": "",
 "FallState": "",
 "ForegroundResource": "",
 "GameObject": "",

@@ -8,6 +8,7 @@ export var placeable_items : NodePath
 export var placeable_items_button_container : NodePath
 export var item_preview : NodePath
 export var shared : NodePath
+export var object_settings : NodePath
 var selected_box : Node
 var selected_object : Node
 

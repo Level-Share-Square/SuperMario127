@@ -1,5 +1,7 @@
 extends NinePatchRect
 
+class_name EditorWindow
+
 signal window_opened
 
 onready var close_button = $CloseButton
