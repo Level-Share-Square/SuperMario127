@@ -462,9 +462,9 @@ func kill(cause):
 			sound_player.play_fall_sound()
 			if number_of_players == 1:
 				cutout_in = cutout_death
-				yield(get_tree().create_timer(.75), "timeout")
+				yield(get_tree().create_timer(1), "timeout")
 			else:
-				yield(get_tree().create_timer(5), "timeout")
+				yield(get_tree().create_timer(2), "timeout")
 				position = spawn_pos
 				dead = false
 				reload = false

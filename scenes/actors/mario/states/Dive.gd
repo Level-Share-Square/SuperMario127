@@ -49,7 +49,7 @@ func _update(delta):
 		sprite.animation = "diveLeft"
 	var new_angle = (character.velocity.y / 15) + 90
 	if (abs(new_angle) < 185):
-		sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), new_angle, 32 * delta) * character.facing_direction
+		sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), new_angle, 36 * delta) * character.facing_direction
 		last_above_rot_limit = false
 	else:
 		if (!last_above_rot_limit):
@@ -61,18 +61,19 @@ func _stop(delta):
 	var collision = character.get_node("Collision")
 	var dive_collision = character.get_node("DiveCollision")
 	var sprite = character.animated_sprite
-	sprite.rotation_degrees = 0
 	if character.test_move(character.transform, Vector2(0.1 * character.facing_direction, -15)) and !character.is_grounded():
 		character.velocity.x = bonk_power * -character.facing_direction 
 		character.position.x -= 2 * character.facing_direction
 		character.set_state_by_name("BonkedState", delta)
 		character.attacking = false
+		sprite.rotation_degrees = 0
 	if character.is_grounded():
 		character.set_state_by_name("SlideState", delta)
 	else:
 		collision.disabled = false
 		dive_collision.disabled = true
 		character.attacking = false
+		sprite.rotation_degrees = 0
 
 func _stop_check(delta):
 	return character.is_grounded() or (character.is_walled_right() && character.facing_direction == 1) or (character.is_walled_left() && character.facing_direction == -1)
