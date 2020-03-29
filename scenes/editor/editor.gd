@@ -117,7 +117,9 @@ func _process(delta):
 					object.properties.append(0)
 					object.properties.append(true)
 					object.properties.append(true)
-					shared_node.create_object(object, true)
+					var object_node = shared_node.create_object(object, true)
+					var object_settings = get_tree().get_current_scene().get_node(get_tree().get_current_scene().object_settings)
+					object_settings.open_object(object_node)
 		elif right_held:
 			if selected_box:
 				var item = selected_box.item

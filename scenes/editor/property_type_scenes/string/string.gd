@@ -1,19 +1,17 @@
 extends Control
 
-export var button : NodePath
+export var line_edit : NodePath
 
-onready var button_node : LineEdit = get_node(button)
-
-var value = true
+onready var line_edit_node : LineEdit = get_node(line_edit)
 
 func _ready():
-	button_node.connect("pressed", self, "update_value")
+	line_edit_node.connect("focus_exited", self, "update_value")
 
-func set_value(value: bool):
-	value = value
+func set_value(value: String):
+	line_edit_node.text = value
 
-func get_value() -> bool:
-	return value
+func get_value() -> String:
+	return line_edit_node.text
 
 func update_value():
 	get_node("../").update_value(get_value())

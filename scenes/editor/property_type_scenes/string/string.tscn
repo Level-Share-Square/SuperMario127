@@ -23,6 +23,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+line_edit = NodePath("LineEdit")
 
 [node name="LineEdit" type="LineEdit" parent="."]
 margin_left = 7.0
