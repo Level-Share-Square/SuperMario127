@@ -16,6 +16,7 @@ onready var placeable_items_node = get_node(placeable_items)
 onready var placeable_items_button_container_node = get_node(placeable_items_button_container)
 onready var item_preview_node = get_node(item_preview)
 onready var shared_node = get_node(shared)
+onready var object_settings_node = get_node(object_settings)
 
 var lock_axis = "none"
 var lock_pos = 0
@@ -23,6 +24,8 @@ var last_mouse_pos = Vector2(0, 0)
 
 var left_held = false
 var right_held = false
+
+var hovered_object
 
 export var layer = 1
 
@@ -87,6 +90,23 @@ func _process(delta):
 		var mouse_tile_pos = Vector2(floor(mouse_pos.x / 32), floor(mouse_pos.y / 32))
 		var tile_index = tile_util.get_tile_index_from_position(mouse_tile_pos, level_area.settings.size)
 		
+		if selected_box and selected_box.item and selected_box.item.is_object:
+			var objects = shared_node.get_objects_overlapping_position(mouse_pos)
+			if objects.size() > 0 and placement_mode != "Tile":
+				if hovered_object != objects[0]:
+					if hovered_object != null:
+						hovered_object.modulate = Color(1, 1, 1)
+					hovered_object = objects[0]
+					hovered_object.modulate = Color(0.65, 0.65, 1)
+					item_preview_node.visible = false
+			elif hovered_object != null:
+				hovered_object.modulate = Color(1, 1, 1)
+				hovered_object = null
+				item_preview_node.visible = true
+				
+		if hovered_object and left_held and Input.is_action_just_pressed("place"):
+			object_settings_node.open_object(hovered_object)
+		
 		if left_held and selected_box and selected_box.item:
 			var item = selected_box.item
 			
@@ -94,7 +114,7 @@ func _process(delta):
 				if item.on_place(mouse_tile_pos, level_data, level_area):
 					if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:
 						shared_node.set_tile(tile_index, layer, item.tileset_id, item.tile_id)
-			else:
+			elif hovered_object == null:
 				var object_pos
 				if placement_mode == "Tile":
 					object_pos = (mouse_tile_pos * 32) + item.object_center
@@ -119,7 +139,6 @@ func _process(delta):
 					object.properties.append(true)
 					var object_node = shared_node.create_object(object, true)
 					var object_settings = get_tree().get_current_scene().get_node(get_tree().get_current_scene().object_settings)
-					object_settings.open_object(object_node)
 		elif right_held:
 			if selected_box:
 				var item = selected_box.item
@@ -130,7 +149,8 @@ func _process(delta):
 							shared_node.destroy_object_at_position(object_pos, true)
 					elif Input.is_action_just_pressed("erase"):
 						if item.on_erase(mouse_pos, level_data, level_area):
-							shared_node.destroy_objects_overlapping_position(mouse_pos, true)
+							shared_node.destroy_object(hovered_object, true)
+							hovered_object = null
 				else:
 					if item.on_erase(mouse_tile_pos, level_data, level_area):
 						if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:

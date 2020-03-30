@@ -16,6 +16,9 @@ func set_tile(index: int, layer: int, tileset_id: int, tile_id: int):
 
 func create_object(object, add_to_data):
 	return objects_node.create_object(object, add_to_data)
+	
+func destroy_object(object, remove_from_data):
+	objects_node.destroy_object(object, remove_from_data)
 
 func is_object_at_position(position):
 	return objects_node.get_object_at_position(position)
@@ -24,6 +27,13 @@ func destroy_object_at_position(position, remove_from_data):
 	var object_node = objects_node.get_object_at_position(position)
 	if object_node:
 		objects_node.destroy_object(object_node, remove_from_data)
+		
+func get_objects_overlapping_position(position):
+	var objects = []
+	for object_node in objects_node.get_children():
+		if (object_node.position - get_global_mouse_position()).length() <= 16:
+			objects.append(object_node)	
+	return objects
 
 func destroy_objects_overlapping_position(position, remove_from_data):
 	var objectsToDelete = []
