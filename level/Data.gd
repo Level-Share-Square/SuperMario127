@@ -13,8 +13,8 @@ func _init():
 	var object_scale = InterpreterVar.new()
 	object_scale.path = ["object", "scale"]
 	
-	var new_scale = Addition.new()
-	new_scale.values = [object_scale, Vector2(1, 1)]
+	var new_scale = AdditionOperation.new()
+	new_scale.values = [object_scale, Vector2(0.1, 0.1)]
 	
 	var call_method = CallMethodInstruction.new()
 	call_method.path = ["object", "set_property"]

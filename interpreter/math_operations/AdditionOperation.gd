@@ -1,4 +1,4 @@
-class_name Addition
+class_name AdditionOperation
 
 var values = []
 
