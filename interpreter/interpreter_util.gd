@@ -54,10 +54,11 @@ static func get_path_value(path, environment: InterpreterEnvironment):
 		return object
 
 static func get_path_parent_key(path, environment: InterpreterEnvironment):
-	var key = path[path.size() - 1]
-	path.erase(key)
+	var path_used = path.duplicate()
+	var key = path_used[path_used.size() - 1]
+	path_used.erase(key)
 	var object = environment
-	for other_key in path:
+	for other_key in path_used:
 		object = object[other_key]
 		
 	return [object, key]

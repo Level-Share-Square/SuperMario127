@@ -25,7 +25,10 @@ func create_object(object, add_to_data):
 	if object_scene != null:
 		var object_node = object_scene.instance()
 		object_node.mode = mode
+		object_node.level_data = level_data
+		object_node.level_area = level_area
 		object_node.level_object = object
+		object_node._init_signals()
 		object_node._set_properties()
 		var index = 0
 		for value in object.properties:

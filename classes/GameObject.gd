@@ -3,6 +3,8 @@ extends Node2D
 class_name GameObject
 
 var mode := 0
+var level_data = null
+var level_area = null
 var level_object = null
 
 var enabled = true
@@ -12,6 +14,9 @@ var savable_properties : PoolStringArray = []
 
 var base_editable_properties : PoolStringArray = ["enabled", "visible", "rotation_degrees", "scale", "position"]
 var editable_properties : PoolStringArray = []
+
+var base_connectable_signals : PoolStringArray = ["ready", "process", "physics_process"]
+var connectable_signals : PoolStringArray = []
 
 func is_savable_property(key) -> bool:
 	for savable_property in (base_savable_properties + savable_properties):
@@ -46,3 +51,15 @@ func _set_properties():
 	
 func _set_property_values():
 	pass
+
+func _init_signals():
+	var index = 0
+	for signal_name in (base_connectable_signals + connectable_signals):
+		connect(signal_name, self, "on_signal_fire", [index])
+		index += 1
+
+func on_signal_fire(index):
+	var functions = level_object.signal_connections[index]
+	for function_name in functions:
+		var function_struct = level_data.functions[function_name]
+		interpreter_util.run_function(function_struct, self)

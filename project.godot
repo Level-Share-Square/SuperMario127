@@ -162,12 +162,12 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "LevelSong",
 "language": "GDScript",
-"path": "res://classes/LevelSong.gd"
+"path": "res://level/Song.gd"
 }, {
 "base": "Resource",
 "class": "LevelTileset",
 "language": "GDScript",
-"path": "res://classes/LevelTileset.gd"
+"path": "res://level/Tileset.gd"
 }, {
 "base": "Reference",
 "class": "NotCondition",

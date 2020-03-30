@@ -1,7 +1,9 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://classes/LevelTileset.gd" type="Script" id=1]
+[ext_resource path="res://level/Tileset.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/grass/grass.png" type="Texture" id=2]
+
+
 
 [resource]
 script = ExtResource( 1 )

@@ -4,8 +4,19 @@ var current_format_version := "0.4.1"
 var format_version := "0.4.1"
 var name := "My Level"
 var areas = []
+var functions = {}
 var global_vars_node = null
+
+func _init():
+	var function_struct = FunctionStruct.new()
 	
+	var call_method = CallMethodInstruction.new()
+	call_method.path = ["object", "set_property"]
+	call_method.args = ["scale", Vector2(10, 10), true]
+	function_struct.instructions.append(call_method)
+	
+	functions.my_function = function_struct
+
 func get_vector2(result) -> Vector2:
 	return Vector2(result.x, result.y)
 

@@ -151,15 +151,6 @@ func _process(delta):
 					object.properties.append(true)
 					object.properties.append(true)
 					var object_node = shared_node.create_object(object, true)
-					
-					var function_struct = FunctionStruct.new()
-					
-					var call_method = CallMethodInstruction.new()
-					call_method.path = ["object", "set_property"]
-					call_method.args = ["position", Vector2(10, 10), true]
-					function_struct.instructions.append(call_method)
-					
-					interpreter_util.run_function(function_struct, object_node)
 		elif right_held:
 			if selected_box:
 				var item = selected_box.item
