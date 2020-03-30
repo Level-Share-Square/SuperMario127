@@ -118,7 +118,7 @@ func _process(delta):
 				object_settings_node.open_object(hovered_object)
 			else:
 				rotating = false
-				hovered_object.set_property("rotation_degrees", hovered_object.rotation_degrees, true)
+				hovered_object.set_property("rotation_degrees", fmod(hovered_object.rotation_degrees, 360), true)
 		
 		if left_held and selected_box and selected_box.item:
 			var item = selected_box.item
