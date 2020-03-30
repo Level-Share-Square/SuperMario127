@@ -59,7 +59,14 @@ func _init_signals():
 		index += 1
 
 func on_signal_fire(index):
-	var functions = level_object.signal_connections[index]
-	for function_name in functions:
-		var function_struct = level_data.functions[function_name]
-		interpreter_util.run_function(function_struct, self)
+	var mode = get_tree().get_current_scene().mode
+	if mode == 0:
+		var functions = level_object.player_signal_connections[index]
+		for function_name in functions:
+			var function_struct = level_data.functions[function_name]
+			interpreter_util.run_function(function_struct, self)
+	elif mode == 1:
+		var functions = level_object.editor_signal_connections[index]
+		for function_name in functions:
+			var function_struct = level_data.functions[function_name]
+			interpreter_util.run_function(function_struct, self)

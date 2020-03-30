@@ -12,7 +12,7 @@ func _init():
 	
 	var call_method = CallMethodInstruction.new()
 	call_method.path = ["object", "set_property"]
-	call_method.args = ["scale", Vector2(10, 10), true]
+	call_method.args = ["scale", Vector2(10, 10), false]
 	function_struct.instructions.append(call_method)
 	
 	functions.my_function = function_struct
