@@ -11,8 +11,8 @@ func _init():
 	var function_struct = FunctionStruct.new()
 	
 	var call_method = CallMethodInstruction.new()
-	call_method.path = ["object", "set_property"]
-	call_method.args = ["scale", Vector2(10, 10), false]
+	call_method.path = ["util", "log"]
+	call_method.args = ["bruh"]
 	function_struct.instructions.append(call_method)
 	
 	functions.my_function = function_struct

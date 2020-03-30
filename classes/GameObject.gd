@@ -18,6 +18,9 @@ var editable_properties : PoolStringArray = []
 var base_connectable_signals : PoolStringArray = ["ready", "process", "physics_process"]
 var connectable_signals : PoolStringArray = []
 
+signal process
+signal physics_process
+
 func is_savable_property(key) -> bool:
 	for savable_property in (base_savable_properties + savable_properties):
 		if key == savable_property:
@@ -51,6 +54,12 @@ func _set_properties():
 	
 func _set_property_values():
 	pass
+	
+func _process(delta):
+	emit_signal("process")
+	
+func _physics_process(delta):
+	emit_signal("physics_process")
 
 func _init_signals():
 	var index = 0
