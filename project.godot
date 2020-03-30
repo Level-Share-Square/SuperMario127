@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "Addition",
+"language": "GDScript",
+"path": "res://interpreter/math_operations/Addition.gd"
+}, {
+"base": "Reference",
 "class": "AndCondition",
 "language": "GDScript",
 "path": "res://interpreter/conditions/AndCondition.gd"
@@ -265,6 +270,7 @@ _global_script_classes=[ {
 "path": "res://util/value_util.gd"
 } ]
 _global_script_class_icons={
+"Addition": "",
 "AndCondition": "",
 "BonkedState": "",
 "BounceState": "",

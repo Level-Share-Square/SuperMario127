@@ -10,10 +10,21 @@ var global_vars_node = null
 func _init():
 	var function_struct = FunctionStruct.new()
 	
+	var object_scale = InterpreterVar.new()
+	object_scale.path = ["object", "scale"]
+	
+	var new_scale = Addition.new()
+	new_scale.values = [object_scale, Vector2(1, 1)]
+	
 	var call_method = CallMethodInstruction.new()
-	call_method.path = ["util", "log"]
-	call_method.args = ["bruh"]
+	call_method.path = ["object", "set_property"]
+	call_method.args = ["scale", new_scale, false]
 	function_struct.instructions.append(call_method)
+	
+	var call_method1 = CallMethodInstruction.new()
+	call_method1.path = ["util", "log"]
+	call_method1.args = [object_scale]
+	function_struct.instructions.append(call_method1)
 	
 	functions.my_function = function_struct
 

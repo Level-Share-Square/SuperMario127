@@ -47,7 +47,7 @@ static func get_path_value(path, environment: InterpreterEnvironment):
 				break
 		else:
 			object = object[key]
-	
+			
 	if object == null and environment.parent:
 		return get_path_value(path, environment.parent)
 	else:
