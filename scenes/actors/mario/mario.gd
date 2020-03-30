@@ -15,9 +15,9 @@ export var cutout_death : StreamTexture
 export var cutout_circle : StreamTexture
 
 # Basic Physics
-export var initial_position = Vector2(0, 0)
-export var velocity = Vector2(0, 0)
-var last_velocity = Vector2(0, 0)
+export var initial_position := Vector2(0, 0)
+export var velocity := Vector2(0, 0)
+var last_velocity := Vector2(0, 0)
 
 export var gravity_scale = 1
 export var facing_direction = 1

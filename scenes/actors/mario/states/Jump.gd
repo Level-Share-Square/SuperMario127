@@ -119,7 +119,7 @@ func _general_update(delta):
 		else:
 			sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 380, 4 * delta) * direction_on_tj
 	if character.is_grounded() and !last_grounded:
-		ground_buffer = 0.20
+		ground_buffer = 0.125
 	elif character.is_grounded():
 		ledge_buffer = 0.125
 	if ground_buffer > 0:
