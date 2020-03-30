@@ -1683,6 +1683,7 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="UI/LevelSettingsWindow"]
 
 [node name="ObjectSettingsWindow" type="NinePatchRect" parent="UI"]
+visible = false
 margin_left = 165.0
 margin_top = 130.0
 margin_right = 1218.0
