@@ -26,6 +26,7 @@ var left_held = false
 var right_held = false
 
 var hovered_object
+var rotating = false
 
 export var layer = 1
 
@@ -92,20 +93,32 @@ func _process(delta):
 		
 		if selected_box and selected_box.item and selected_box.item.is_object:
 			var objects = shared_node.get_objects_overlapping_position(mouse_pos)
-			if objects.size() > 0 and placement_mode != "Tile":
+			if objects.size() > 0 and placement_mode != "Tile" and !rotating:
 				if hovered_object != objects[0]:
 					if hovered_object != null:
 						hovered_object.modulate = Color(1, 1, 1)
 					hovered_object = objects[0]
 					hovered_object.modulate = Color(0.65, 0.65, 1)
 					item_preview_node.visible = false
-			elif hovered_object != null:
+			elif hovered_object != null and !rotating:
 				hovered_object.modulate = Color(1, 1, 1)
 				hovered_object = null
 				item_preview_node.visible = true
+		
+		if hovered_object and Input.is_action_just_pressed("rotate"):
+			rotating = true
+		
+		if hovered_object and rotating:
+			hovered_object.rotation = -90 + hovered_object.position.angle_to_point(mouse_pos)
+			if Input.is_action_pressed("8_pixel_lock"):
+				hovered_object.rotation_degrees = stepify(hovered_object.rotation_degrees, 15)
 				
 		if hovered_object and left_held and Input.is_action_just_pressed("place"):
-			object_settings_node.open_object(hovered_object)
+			if !rotating:
+				object_settings_node.open_object(hovered_object)
+			else:
+				rotating = false
+				hovered_object.set_property("rotation_degrees", hovered_object.rotation_degrees, true)
 		
 		if left_held and selected_box and selected_box.item:
 			var item = selected_box.item
@@ -147,10 +160,11 @@ func _process(delta):
 						var object_pos = (mouse_tile_pos * 32) + item.object_center
 						if item.on_erase(object_pos, level_data, level_area):
 							shared_node.destroy_object_at_position(object_pos, true)
-					elif Input.is_action_just_pressed("erase"):
+					elif Input.is_action_just_pressed("erase") and hovered_object and !rotating:
 						if item.on_erase(mouse_pos, level_data, level_area):
 							shared_node.destroy_object(hovered_object, true)
 							hovered_object = null
+							item_preview_node.visible = true
 				else:
 					if item.on_erase(mouse_tile_pos, level_data, level_area):
 						if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:
