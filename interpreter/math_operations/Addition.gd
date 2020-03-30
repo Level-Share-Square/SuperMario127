@@ -7,7 +7,7 @@ func get_value(environment: InterpreterEnvironment) -> bool:
 	var type = null
 	for value in values:
 		value = interpreter_util.decode_var(value, environment)
-		type = typeof(value) if type == null else type		
+		type = typeof(value) if type == null else type
 		if total == null:
 			if type == TYPE_INT or type == TYPE_REAL:
 				total = 0

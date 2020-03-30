@@ -21,11 +21,6 @@ func _init():
 	call_method.args = ["scale", new_scale, false]
 	function_struct.instructions.append(call_method)
 	
-	var call_method1 = CallMethodInstruction.new()
-	call_method1.path = ["util", "log"]
-	call_method1.args = [object_scale]
-	function_struct.instructions.append(call_method1)
-	
 	functions.my_function = function_struct
 
 func get_vector2(result) -> Vector2:

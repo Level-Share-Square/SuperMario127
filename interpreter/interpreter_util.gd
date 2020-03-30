@@ -29,8 +29,11 @@ static func decode_var(possible_var, environment: InterpreterEnvironment):
 	if typeof(possible_var) == TYPE_OBJECT:
 		if possible_var.get_class() == "InterpreterVar" or possible_var.get_class() == "InterpreterCondition":
 			var value = possible_var.get_value(environment)
-			if typeof(possible_var) == TYPE_OBJECT and possible_var.get_class() == "InterpreterVar" or possible_var.get_class() == "InterpreterCondition":
-				return decode_var(value, environment)
+			if typeof(value) == TYPE_OBJECT:
+				if value.get_class() == "InterpreterVar" or value.get_class() == "InterpreterCondition":
+					return decode_var(value, environment)
+				else:
+					return value
 			else:
 				return value
 		return possible_var
