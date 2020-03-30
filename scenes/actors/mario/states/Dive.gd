@@ -78,7 +78,7 @@ func _stop(delta):
 		sprite.rotation_degrees = 0
 
 func _stop_check(delta):
-	return character.is_grounded() or (character.is_walled_right() && character.facing_direction == 1) or (character.is_walled_left() && character.facing_direction == -1)
+	return character.is_grounded() or (character.is_walled_right() and character.facing_direction == 1) or (character.is_walled_left() and character.facing_direction == -1)
 
 func _general_update(delta):
 	if character.dive_just_pressed:

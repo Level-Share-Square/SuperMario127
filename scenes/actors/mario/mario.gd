@@ -354,11 +354,11 @@ func _physics_process(delta: float):
 		move_direction = 1
 	if move_direction != 0:
 		if is_grounded():
-			if ((velocity.x > 0 && move_direction == -1) || (velocity.x < 0 && move_direction == 1)):
+			if ((velocity.x > 0 and move_direction == -1) or (velocity.x < 0 and move_direction == 1)):
 				velocity.x += deceleration * move_direction
-			elif ((velocity.x < move_speed && move_direction == 1) || (velocity.x > -move_speed && move_direction == -1)):
+			elif ((velocity.x < move_speed and move_direction == 1) or (velocity.x > -move_speed and move_direction == -1)):
 				velocity.x += acceleration * move_direction
-			elif ((velocity.x > move_speed && move_direction == 1) || (velocity.x < -move_speed && move_direction == -1)):
+			elif ((velocity.x > move_speed and move_direction == 1) or (velocity.x < -move_speed and move_direction == -1)):
 				velocity.x -= 3.5 * move_direction
 			facing_direction = move_direction
 
@@ -383,9 +383,9 @@ func _physics_process(delta: float):
 				else:
 					sprite.speed_scale = 1
 		else:
-			if ((velocity.x < move_speed && move_direction == 1) || (velocity.x > -move_speed && move_direction == -1)):
+			if ((velocity.x < move_speed and move_direction == 1) or (velocity.x > -move_speed and move_direction == -1)):
 				velocity.x += aerial_acceleration * move_direction
-			elif ((velocity.x > move_speed && move_direction == 1) || (velocity.x < -move_speed && move_direction == -1)):
+			elif ((velocity.x > move_speed and move_direction == 1) or (velocity.x < -move_speed and move_direction == -1)):
 				velocity.x -= 0.25 * move_direction
 			if !disable_turning:
 				facing_direction = move_direction

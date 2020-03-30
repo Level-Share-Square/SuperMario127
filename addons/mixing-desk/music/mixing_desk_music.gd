@@ -102,7 +102,7 @@ func _process(delta):
 	if playing:
 		time = current_song.get_child(0).get_playback_position()
 		beat = int(floor(((time/beats_in_sec) * 1000.0) + 1.0))
-		if beat != last_beat && (beat - 1) % int(bars * beats_in_bar) + 1 != last_beat:
+		if beat != last_beat and (beat - 1) % int(bars * beats_in_bar) + 1 != last_beat:
 			_beat()
 		last_beat = beat
 

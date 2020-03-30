@@ -26,7 +26,7 @@ func _process_custom_fx(char_fx):
 	matrix_time = 0.0 if matrix_time < clear_time else \
 				(matrix_time - clear_time)/dirty_time
 	
-	if( value >= 65 && value < 126 && matrix_time > 0.0 ):
+	if( value >= 65 and value < 126 and matrix_time > 0.0 ):
 		value -= 65
 		value = value + int((1 * matrix_time * (126-65)))
 		value %= (126 - 65)

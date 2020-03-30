@@ -9,7 +9,7 @@ var collected = false
 var destroy_timer = 0.0
 
 func collect(body):
-	if !collected && body.name.begins_with("Character") && body.controllable:
+	if enabled and !collected and body.name.begins_with("Character") and body.controllable:
 		var player_id = 1
 		if body.name == "Character":
 			player_id = 0

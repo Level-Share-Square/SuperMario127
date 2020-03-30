@@ -40,7 +40,7 @@ func _start(delta):
 			character.current_jump = 0
 		if character.current_jump == 2 and abs(character.velocity.x) < 80:
 			character.current_jump = 1
-		if character.current_jump != 2 && character.last_state == character.get_state_node("SpinningState"):
+		if character.current_jump != 2 and character.last_state == character.get_state_node("SpinningState"):
 			character.set_state_by_name("SpinningState", delta)
 		if character.current_jump == 0:
 			if !dive_buffer > 0:
@@ -78,7 +78,7 @@ func _start(delta):
 
 func _update(delta):
 	var sprite = character.animated_sprite
-	if jump_playing && character.velocity.y < 0 && !character.is_grounded():
+	if jump_playing and character.velocity.y < 0 and !character.is_grounded():
 		if character.facing_direction == 1:
 			if character.jump_animation == 0:
 				sprite.animation = "jumpRight"
@@ -127,7 +127,7 @@ func _general_update(delta):
 		if ground_buffer < 0:
 			ground_buffer = 0
 			character.current_jump = 0
-	if ledge_buffer > 0 && !character.is_grounded():
+	if ledge_buffer > 0 and !character.is_grounded():
 		ledge_buffer -= delta
 		if ledge_buffer < 0:
 			ledge_buffer = 0	

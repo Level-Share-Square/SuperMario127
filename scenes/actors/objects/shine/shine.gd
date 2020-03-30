@@ -20,7 +20,7 @@ func _set_property_values():
 	set_property("show_in_menu", show_in_menu, true)
 
 func collect(body):
-	if !collected && body.name.begins_with("Character") && body.controllable:
+	if enabled and !collected and body.name.begins_with("Character") and body.controllable:
 		character = body
 		character.set_state_by_name("Fall", 0)
 		character.velocity = Vector2(0, 0)

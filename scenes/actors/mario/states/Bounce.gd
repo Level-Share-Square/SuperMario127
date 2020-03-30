@@ -11,7 +11,7 @@ func _start_check(delta):
 
 func _update(delta):
 	var sprite = character.animated_sprite
-	if character.velocity.y < 0 && !character.is_grounded():
+	if character.velocity.y < 0 and !character.is_grounded():
 		if character.facing_direction == 1:
 			sprite.animation = "jumpRight"
 		else:

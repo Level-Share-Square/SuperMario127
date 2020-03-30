@@ -3,7 +3,7 @@ extends State
 class_name FallState
 	
 func _start_check(delta):
-	return character.velocity.y > 0 && !character.is_grounded()
+	return character.velocity.y > 0 and !character.is_grounded()
 
 func _start(delta):
 	pass

@@ -16,7 +16,7 @@ func _ready():
 	disable_turning = true
 
 func _start_check(delta):
-	return character.state == character.get_state_node("WallSlideState") && !(limit_y && character.position.y < position_on_wj.y && character_in_range) && press_buffer > 0
+	return character.state == character.get_state_node("WallSlideState") and !(limit_y and character.position.y < position_on_wj.y and character_in_range) and press_buffer > 0
 
 func _start(delta):
 	var sound_player = character.get_node("Sounds")
@@ -46,14 +46,14 @@ func _stop_check(delta):
 	return wall_jump_timer <= 0 or character.is_walled() or character.is_grounded()
 	
 func _general_update(delta):
-	if character.position.x > position_on_wj.x - 3 && character.position.x < position_on_wj.x + 3:
+	if character.position.x > position_on_wj.x - 3 and character.position.x < position_on_wj.x + 3:
 		character_in_range = true
 	else:
 		character_in_range = false
 	if character.is_grounded():
 		limit_y = false
 		character.is_wj_chained = false
-	if character.jump_just_pressed && !character.is_grounded():
+	if character.jump_just_pressed and !character.is_grounded():
 		press_buffer = 0.075
 	if press_buffer > 0:
 		press_buffer -= delta

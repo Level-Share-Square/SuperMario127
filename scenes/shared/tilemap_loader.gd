@@ -35,18 +35,18 @@ func place_edges(pos, placing_tile, bounds, tilemap_node):
 		tilemap_node.set_cell(-1, pos.y, placing_tile)
 	if pos.y == 0:
 		tilemap_node.set_cell(pos.x, -1, placing_tile)
-	if pos.x == 0 && pos.y == 0:
+	if pos.x == 0 and pos.y == 0:
 		tilemap_node.set_cell(-1, -1, placing_tile)
-	if pos.x == 0 && pos.y == bounds.y - 1:
+	if pos.x == 0 and pos.y == bounds.y - 1:
 		tilemap_node.set_cell(-1, bounds.y, placing_tile)
 		
 	if pos.x == bounds.x - 1:
 		tilemap_node.set_cell(bounds.x, pos.y, placing_tile)
 	if pos.y == bounds.y - 1:
 		tilemap_node.set_cell(pos.x, bounds.y, placing_tile)
-	if pos.x == bounds.x - 1 && pos.y == bounds.y - 1:
+	if pos.x == bounds.x - 1 and pos.y == bounds.y - 1:
 		tilemap_node.set_cell(bounds.x, bounds.y, placing_tile)
-	if pos.x == bounds.x - 1 && pos.y == 0:
+	if pos.x == bounds.x - 1 and pos.y == 0:
 		tilemap_node.set_cell(bounds.x, -1, placing_tile)
 		
 func set_tile(index: int, layer: int, tileset_id: int, tile_id: int):
@@ -62,7 +62,7 @@ func set_tile(index: int, layer: int, tileset_id: int, tile_id: int):
 		for new_index in range(tiles_array.size(), index + 1):
 			tiles_array.append([0, 0])
 	var size = level_area.settings.size
-	if position.x > size.x || position.y > size.y:
+	if position.x > size.x or position.y > size.y:
 		level_area.settings.size = position
 	tiles_array[index] = [tileset_id, tile_id]
 	
