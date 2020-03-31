@@ -1,4 +1,4 @@
-class_name AdditionOperation
+class_name SubtractionOperation
 
 var values = []
 
@@ -10,8 +10,8 @@ func get_value(environment: InterpreterEnvironment) -> bool:
 		if total == null:
 			total = value
 		else:
-			total += value
-		
+			total -= value
+			
 	return total
 
 func get_class():

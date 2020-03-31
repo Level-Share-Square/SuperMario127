@@ -15,17 +15,43 @@ func _init():
 	####################
 	
 	var process_function_struct = FunctionStruct.new()
+	
+#	var time_alive = InterpreterVar.new()
+#	time_alive.path = ["object", "global", "time_alive"]
+#
+#	var should_scale_condition = LessThanCondition.new()
+#	should_scale_condition.values = [time_alive, 10]
+#
+#	var if_scale = IfStatementInstruction.new()
+#	if_scale.value = should_scale_condition
+#	process_function_struct.instructions.append(if_scale)
+#
+	var object_scale = InterpreterVar.new()
+	object_scale.path = ["object", "scale"]
+	
+	var new_scale = AdditionOperation.new()
+	new_scale.values = [object_scale, Vector2(0.1, 0.1)]
 
-	var object_rotation = InterpreterVar.new()
-	object_rotation.path = ["object", "rotation_degrees"]
-
-	var new_rotation = AdditionOperation.new()
-	new_rotation.values = [object_rotation, 1]
-
+	var method_execution = MethodExecution.new()
+	method_execution.path = ["object", "set_property"]
+	method_execution.args = ["scale", new_scale, false]
+	
 	var call_method = CallMethodInstruction.new()
-	call_method.path = ["object", "set_property"]
-	call_method.args = ["rotation_degrees", new_rotation, false]
+	call_method.scope = 0
+	call_method.value = method_execution
 	process_function_struct.instructions.append(call_method)
+#
+#	var exit_scope = ExitScopeInstruction.new()
+#	exit_scope.scope = 1
+#	process_function_struct.instructions.append(exit_scope)
+#
+#	var time_alive_addition = AdditionOperation.new()
+#	time_alive_addition.values = [time_alive, 1]
+#
+#	var set_time_alive = SetValueInstruction.new()
+#	set_time_alive.path = ["object", "global", "time_alive"]
+#	set_time_alive.value = time_alive_addition
+#	process_function_struct.instructions.append(set_time_alive)
 	
 	functions.size_process_function = process_function_struct
 
