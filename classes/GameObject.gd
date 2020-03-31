@@ -2,6 +2,8 @@ extends Node2D
 
 class_name GameObject
 
+var global := {}
+
 var mode := 0
 var level_data = null
 var level_area = null

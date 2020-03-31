@@ -8,20 +8,55 @@ var functions = {}
 var global_vars_node = null
 
 func _init():
-	var function_struct = FunctionStruct.new()
+	var ready_function_struct = FunctionStruct.new()
 	
-	var object_scale = InterpreterVar.new()
-	object_scale.path = ["object", "scale"]
+#	var define_time_alive = SetValueInstruction.new()
+#	define_time_alive.scope = 1
+#	define_time_alive.path = ["object", "global", "time_alive"]
+#	define_time_alive.value = 0
+#	ready_function_struct.instructions.append(define_time_alive)
 	
-	var new_scale = AdditionOperation.new()
-	new_scale.values = [object_scale, Vector2(0.1, 0.1)]
+	functions.size_ready_function = ready_function_struct
 	
-	var call_method = CallMethodInstruction.new()
-	call_method.path = ["object", "set_property"]
-	call_method.args = ["scale", new_scale, false]
-	function_struct.instructions.append(call_method)
+	####################
 	
-	functions.my_function = function_struct
+	var process_function_struct = FunctionStruct.new()
+	
+#	var time_alive = InterpreterVar.new()
+#	time_alive.path = ["object", "global", "time_alive"]
+#
+#	var should_scale_condition = LessThanCondition.new()
+#	should_scale_condition.values = [time_alive, 10]
+#
+#	var if_scale = IfStatementInstruction.new()
+#	if_scale.value = should_scale_condition
+#	process_function_struct.instructions.append(if_scale)
+#
+#	var object_scale = InterpreterVar.new()
+#	object_scale.path = ["object", "scale"]
+#
+#	var new_scale = AdditionOperation.new()
+#	new_scale.values = [object_scale, Vector2(0.1, 0.1)]
+#
+#	var call_method = CallMethodInstruction.new()
+#	call_method.scope = 1
+#	call_method.path = ["object", "set_property"]
+#	call_method.args = ["scale", new_scale, false]
+#	process_function_struct.instructions.append(call_method)
+#
+#	var exit_scope = ExitScopeInstruction.new()
+#	exit_scope.scope = 1
+#	process_function_struct.instructions.append(exit_scope)
+#
+#	var time_alive_addition = AdditionOperation.new()
+#	time_alive_addition.values = [time_alive, 1]
+#
+#	var set_time_alive = SetValueInstruction.new()
+#	set_time_alive.path = ["object", "global", "time_alive"]
+#	set_time_alive.value = time_alive_addition
+#	process_function_struct.instructions.append(set_time_alive)
+	
+	functions.size_process_function = process_function_struct
 
 func get_vector2(result) -> Vector2:
 	return Vector2(result.x, result.y)

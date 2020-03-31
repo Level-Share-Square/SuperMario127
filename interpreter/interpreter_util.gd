@@ -2,28 +2,28 @@ class_name interpreter_util
 
 static func run_function(function_struct: FunctionStruct, object):
 	var environments = []
-	var global_environment = InterpreterEnvironment.new()
-	global_environment.object = object
-	environments.append(global_environment)
+	var main_environment = InterpreterEnvironment.new()
+	main_environment.object = object
+	environments.append(main_environment)
 	
 	var highest_available_scope = 0
 	
 	for instruction in function_struct.instructions:
-		instruction.scope = highest_available_scope
-		var return_code = instruction.execute(environments[highest_available_scope])
-		if return_code == 1:
-			# execute next scope
-			highest_available_scope += 1
-			var environment = InterpreterEnvironment.new()
-			environment.object = object
-			environment.parent = environments[highest_available_scope - 1]
-			environment.scope = highest_available_scope
-			environments.append(environment)
-		elif return_code == 2:
-			# exit current scope
-			var current_scope = environments[highest_available_scope]
-			environments.erase(current_scope)
-			highest_available_scope -= 1
+		if highest_available_scope >= 0 and instruction.scope == highest_available_scope:
+			var return_code = instruction.execute(environments[highest_available_scope])
+			if return_code == 1:
+				# execute next scope
+				highest_available_scope += 1
+				var environment = InterpreterEnvironment.new()
+				environment.object = object
+				environment.parent = environments[highest_available_scope - 1]
+				environment.scope = highest_available_scope
+				environments.append(environment)
+			elif return_code == 2:
+				# exit current scope
+				var current_scope = environments[highest_available_scope]
+				environments.erase(current_scope)
+				highest_available_scope -= 1
 
 static func decode_var(possible_var, environment: InterpreterEnvironment):
 	if typeof(possible_var) == TYPE_OBJECT:
