@@ -49,13 +49,16 @@ static func decode_value(value: String):
 
 static func decode(code: String):
 	var result = {}
-	var code_array = code.split("[")
 	
-	var level_settings_array = code_array[0].split(",")
+	code = code.strip_edges()
+	
+	var level_settings_array = code.substr(0, code.find("[", 0)).split(",")
 	result.format_version = level_settings_array[0]
 	result.name = level_settings_array[1].percent_decode()
 	
-	var area_array = code_array[1].split("~")
+	var find_left_bracket = code.find("[", 0) + 1
+	var find_right_bracket = code.find("]", find_left_bracket)
+	var area_array = code.substr(find_left_bracket, find_right_bracket - find_left_bracket).split("~")
 	area_array[0].erase(area_array[0].length() - 1, 1)
 	
 	var area_settings_array = area_array[0].split(",")

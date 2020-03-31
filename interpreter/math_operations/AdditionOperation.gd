@@ -1,6 +1,7 @@
 class_name AdditionOperation
 
 var values = []
+var id = "ADD"
 
 func get_value(environment: InterpreterEnvironment) -> bool:
 	var total = null

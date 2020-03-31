@@ -1,7 +1,7 @@
 class_name LevelData
 
-var current_format_version := "0.4.1"
-var format_version := "0.4.1"
+var current_format_version := "0.4.2"
+var format_version := "0.4.2"
 var name := "My Level"
 var areas = []
 var functions = {}
@@ -126,6 +126,8 @@ func load_in(code):
 		result = conversion_util.convert_033_to_040(result)
 	if result.format_version == "0.4.0":
 		result = conversion_util.convert_040_to_041(result)
+	elif result.format_version == "0.4.1":
+		result.format_version = "0.4.2"
 
 	assert(result.format_version)
 	assert(result.name)
@@ -142,7 +144,7 @@ func load_in(code):
 func get_encoded_level_data():
 	
 	var level_string = ""
-	var format_version = "0.4.1"
+	var format_version = "0.4.2"
 	var level_name = name
 	
 	
@@ -153,10 +155,41 @@ func get_encoded_level_data():
 	for func_key in functions:
 		level_string += func_key.percent_encode()
 		level_string += "["
-		for instruction_key in functions[func_key].instructions:
-			var instruction = functions[func_key].instructions[instruction_key]
-			level_string += instruction.id
-			level_string += instruction.scope
+		for instruction in functions[func_key].instructions:
+			level_string += str(instruction.id) + ","
+			level_string += str(instruction.scope) + ","
+			
+			var instruction_value = instruction.value
+			level_string += str(instruction_value.id) + "["
+			
+			level_string += "["
+			for key in instruction_value.path:
+				level_string += value_util.encode_value(key) + ","
+			level_string.erase(level_string.length() - 1, 1)
+			level_string += "],"
+			
+			level_string += "["
+			for argument in instruction_value.args:
+				if typeof(argument) == TYPE_OBJECT: # there's a good joke in here somewhere
+					level_string += argument.id + "["
+					for value in argument.values:
+						if typeof(value) == TYPE_OBJECT:
+							level_string += value.id + "["
+							for key in value.path:
+								level_string += value_util.encode_value(key) + ","
+							level_string.erase(level_string.length() - 1, 1)
+							level_string += "],"
+						else:
+							level_string += value_util.encode_value(value) + ","
+					level_string.erase(level_string.length() - 1, 1)
+					level_string += "],"
+				else:
+					level_string += value_util.encode_value(argument) + ","
+			level_string.erase(level_string.length() - 1, 1)
+			level_string += "]"
+			
+		level_string += "],"
+	level_string.erase(level_string.length() - 1, 1)
 	level_string += "],"
 	
 	for area in areas:
