@@ -32,15 +32,15 @@ func _init():
 #	if_scale.value = should_scale_condition
 #	process_function_struct.instructions.append(if_scale)
 #
-#	var object_scale = InterpreterVar.new()
-#	object_scale.path = ["object", "scale"]
-#
-#	var new_scale = AdditionOperation.new()
-#	new_scale.values = [object_scale, Vector2(0.1, 0.1)]
+	var object_scale = InterpreterVar.new()
+	object_scale.path = ["object", "scale"]
+	
+	var new_scale = AdditionOperation.new()
+	new_scale.values = [object_scale, Vector2(0.1, 0.1)]
 
 	var method_execution = MethodExecution.new()
-	method_execution.path = ["util", "log"]
-	method_execution.args = ["TEST"]
+	method_execution.path = ["object", "set_property"]
+	method_execution.args = ["scale", new_scale, true]
 	
 	var call_method = CallMethodInstruction.new()
 	call_method.scope = 0
