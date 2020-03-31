@@ -1,5 +1,6 @@
 class_name CallMethodInstruction
 
+var id := 0
 var scope := 0
 var path := []
 var args = []

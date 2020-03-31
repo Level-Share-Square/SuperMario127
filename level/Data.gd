@@ -10,51 +10,22 @@ var global_vars_node = null
 func _init():
 	var ready_function_struct = FunctionStruct.new()
 	
-#	var define_time_alive = SetValueInstruction.new()
-#	define_time_alive.scope = 1
-#	define_time_alive.path = ["object", "global", "time_alive"]
-#	define_time_alive.value = 0
-#	ready_function_struct.instructions.append(define_time_alive)
-	
 	functions.size_ready_function = ready_function_struct
 	
 	####################
 	
 	var process_function_struct = FunctionStruct.new()
-	
-#	var time_alive = InterpreterVar.new()
-#	time_alive.path = ["object", "global", "time_alive"]
-#
-#	var should_scale_condition = LessThanCondition.new()
-#	should_scale_condition.values = [time_alive, 10]
-#
-#	var if_scale = IfStatementInstruction.new()
-#	if_scale.value = should_scale_condition
-#	process_function_struct.instructions.append(if_scale)
-#
-#	var object_scale = InterpreterVar.new()
-#	object_scale.path = ["object", "scale"]
-#
-#	var new_scale = AdditionOperation.new()
-#	new_scale.values = [object_scale, Vector2(0.1, 0.1)]
-#
-#	var call_method = CallMethodInstruction.new()
-#	call_method.scope = 1
-#	call_method.path = ["object", "set_property"]
-#	call_method.args = ["scale", new_scale, false]
-#	process_function_struct.instructions.append(call_method)
-#
-#	var exit_scope = ExitScopeInstruction.new()
-#	exit_scope.scope = 1
-#	process_function_struct.instructions.append(exit_scope)
-#
-#	var time_alive_addition = AdditionOperation.new()
-#	time_alive_addition.values = [time_alive, 1]
-#
-#	var set_time_alive = SetValueInstruction.new()
-#	set_time_alive.path = ["object", "global", "time_alive"]
-#	set_time_alive.value = time_alive_addition
-#	process_function_struct.instructions.append(set_time_alive)
+
+	var object_rotation = InterpreterVar.new()
+	object_rotation.path = ["object", "rotation_degrees"]
+
+	var new_rotation = AdditionOperation.new()
+	new_rotation.values = [object_rotation, 1]
+
+	var call_method = CallMethodInstruction.new()
+	call_method.path = ["object", "set_property"]
+	call_method.args = ["rotation_degrees", new_rotation, false]
+	process_function_struct.instructions.append(call_method)
 	
 	functions.size_process_function = process_function_struct
 
@@ -151,6 +122,16 @@ func get_encoded_level_data():
 	
 	level_string += format_version + ","
 	level_string += level_name.percent_encode() + ","
+	
+	level_string += "["
+	for func_key in functions:
+		level_string += func_key.percent_encode()
+		level_string += "["
+		for instruction_key in functions[func_key].instructions:
+			var instruction = functions[func_key].instructions[instruction_key]
+			level_string += instruction.id
+			level_string += instruction.scope
+	level_string += "],"
 	
 	for area in areas:
 		var saved_tiles = []
