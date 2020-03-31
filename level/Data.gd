@@ -37,12 +37,15 @@ func _init():
 #
 #	var new_scale = AdditionOperation.new()
 #	new_scale.values = [object_scale, Vector2(0.1, 0.1)]
-#
-#	var call_method = CallMethodInstruction.new()
-#	call_method.scope = 1
-#	call_method.path = ["object", "set_property"]
-#	call_method.args = ["scale", new_scale, false]
-#	process_function_struct.instructions.append(call_method)
+
+	var method_execution = MethodExecution.new()
+	method_execution.path = ["util", "log"]
+	method_execution.args = ["TEST"]
+	
+	var call_method = CallMethodInstruction.new()
+	call_method.scope = 0
+	call_method.value = method_execution
+	process_function_struct.instructions.append(call_method)
 #
 #	var exit_scope = ExitScopeInstruction.new()
 #	exit_scope.scope = 1

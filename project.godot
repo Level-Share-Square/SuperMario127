@@ -190,6 +190,11 @@ _global_script_classes=[ {
 "path": "res://level/Tileset.gd"
 }, {
 "base": "Reference",
+"class": "MethodExecution",
+"language": "GDScript",
+"path": "res://interpreter/MethodExecution.gd"
+}, {
+"base": "Reference",
 "class": "NotCondition",
 "language": "GDScript",
 "path": "res://interpreter/conditions/NotCondition.gd"
@@ -321,6 +326,7 @@ _global_script_class_icons={
 "LevelResource": "",
 "LevelSong": "",
 "LevelTileset": "",
+"MethodExecution": "",
 "NotCondition": "",
 "OrCondition": "",
 "ParallaxLayerResource": "",
