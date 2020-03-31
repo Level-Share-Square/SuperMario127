@@ -240,6 +240,11 @@ _global_script_classes=[ {
 "path": "res://scenes/actors/mario/State.gd"
 }, {
 "base": "Reference",
+"class": "SubtractionOperation",
+"language": "GDScript",
+"path": "res://interpreter/math_operations/SubtractionOperation.gd"
+}, {
+"base": "Reference",
 "class": "UtilEnvironment",
 "language": "GDScript",
 "path": "res://interpreter/environments/UtilEnvironment.gd"
@@ -336,6 +341,7 @@ _global_script_class_icons={
 "SlideState": "",
 "SpinningState": "",
 "State": "",
+"SubtractionOperation": "",
 "UtilEnvironment": "",
 "WallJumpState": "",
 "WallSlideState": "",
