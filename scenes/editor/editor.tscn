@@ -1701,7 +1701,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 grid_container = NodePath("Contents/ScrollContainer/GridContainer")
-preview_sprite = NodePath("Contents/Preview/Sprite")
+preview = NodePath("Contents/Preview")
+delete_button = NodePath("Contents/DeleteButton")
+shared = NodePath("../../Shared")
 
 [node name="Title" type="RichTextLabel" parent="UI/ObjectSettingsWindow"]
 margin_left = 24.0
@@ -1759,11 +1761,6 @@ texture = ExtResource( 59 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Sprite" type="Sprite" parent="UI/ObjectSettingsWindow/Contents/Preview"]
-position = Vector2( 72, 92 )
-scale = Vector2( 2.5, 2.5 )
-texture = ExtResource( 12 )
 
 [node name="DeleteButton" type="Button" parent="UI/ObjectSettingsWindow/Contents"]
 margin_left = 32.0

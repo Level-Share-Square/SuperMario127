@@ -10,6 +10,7 @@ var level_area = null
 var level_object = null
 
 var enabled = true
+var preview_position := Vector2(72, 92)
 
 var base_savable_properties : PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible"]
 var savable_properties : PoolStringArray = []

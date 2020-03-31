@@ -1,14 +1,21 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/actors/objects/entrance/entrance_sprite.gd" type="Script" id=1]
-[ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/entrance/entrance.gd" type="Script" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "default",
+"speed": 0.0
+} ]
 
 [node name="Entrance" type="Node2D"]
 z_index = -1
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 2 )
-animation = "idleRight"
+frames = SubResource( 1 )
 script = ExtResource( 1 )

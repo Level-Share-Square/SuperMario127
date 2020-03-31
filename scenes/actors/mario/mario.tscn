@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -17,6 +17,9 @@
 [ext_resource path="res://scenes/actors/mario/alt_frames.tres" type="SpriteFrames" id=15]
 [ext_resource path="res://scenes/actors/mario/luigi_alt_frames.tres" type="SpriteFrames" id=16]
 [ext_resource path="res://assets/tiles/layer2_mask.png" type="Texture" id=17]
+[ext_resource path="res://scenes/actors/mario/states/GroundPoundStart.gd" type="Script" id=18]
+[ext_resource path="res://scenes/actors/mario/states/GroundPound.gd" type="Script" id=19]
+[ext_resource path="res://scenes/actors/mario/states/GroundPoundEnd.gd" type="Script" id=20]
 [ext_resource path="res://scenes/actors/mario/luigi_frames.tres" type="SpriteFrames" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -70,8 +73,8 @@ shape = SubResource( 4 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 15 )
-animation = "idleRight"
+frames = ExtResource( 1 )
+animation = "groundPoundEndLeft"
 playing = true
 
 [node name="States" type="Node" parent="."]
@@ -109,6 +112,15 @@ get_up_power_luigi = 230
 
 [node name="BounceState" type="Node" parent="States"]
 script = ExtResource( 2 )
+
+[node name="GroundPoundStartState" type="Node" parent="States"]
+script = ExtResource( 18 )
+
+[node name="GroundPoundState" type="Node" parent="States"]
+script = ExtResource( 19 )
+
+[node name="GroundPoundEndState" type="Node" parent="States"]
+script = ExtResource( 20 )
 
 [node name="PlayerCollision" type="Area2D" parent="."]
 collision_layer = 2
