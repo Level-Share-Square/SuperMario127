@@ -40,7 +40,7 @@ func _init():
 
 	var method_execution = MethodExecution.new()
 	method_execution.path = ["object", "set_property"]
-	method_execution.args = ["scale", new_scale, true]
+	method_execution.args = ["scale", new_scale, false]
 	
 	var call_method = CallMethodInstruction.new()
 	call_method.scope = 0
