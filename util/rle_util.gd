@@ -46,20 +46,48 @@ static func decode_value(value: String):
 		return str(value).percent_decode()
 	else:
 		return str(value)
-
+	
+static func split_code_top_level(string):
+	var parts = []
+	var start_from = 0
+	var bracket_level = 0
+	for index in range(start_from, string.length()):
+		var value = string[index]
+		if value == ',' and bracket_level == 0 and string[index - 1] != "]":
+			parts.append(string.substr(start_from, index - start_from))
+			start_from = index + 1
+		elif value == '[':
+			bracket_level += 1
+			if bracket_level == 1:
+				start_from = index + 1
+		elif value == ']':
+			bracket_level -= 1
+			if bracket_level == 0:
+				parts.append(string.substr(start_from, index - start_from))
+				start_from = index + 1
+	return parts
+		
 static func decode(code: String):
 	var result = {}
-	
+
 	code = code.strip_edges()
+	var code_array = split_code_top_level(code)
 	
-	var level_settings_array = code.substr(0, code.find("[", 0)).split(",")
-	result.format_version = level_settings_array[0]
-	result.name = level_settings_array[1].percent_decode()
+	result.format_version = code_array[0]
+	result.name = code_array[1].percent_decode()
 	
-	var find_left_bracket = code.find("[", 0) + 1
-	var find_right_bracket = code.find("]", find_left_bracket)
-	var area_array = code.substr(find_left_bracket, find_right_bracket - find_left_bracket).split("~")
-	area_array[0].erase(area_array[0].length() - 1, 1)
+	var add_amount = 1
+	var func_array = []
+	if result.format_version == "0.4.0" or result.format_version == "0.4.1":
+		add_amount = 0
+	else:
+		func_array = split_code_top_level(code_array[2])
+		
+	for function in func_array:
+		if function != "":
+			print("B")
+		
+	var area_array = code_array[2 + add_amount].split("~")
 	
 	var area_settings_array = area_array[0].split(",")
 	result.areas = [{}]

@@ -8,13 +8,14 @@ var functions = {}
 var global_vars_node = null
 
 func _init():
-	var ready_function_struct = FunctionStruct.new()
+	pass
+#	var ready_function_struct = FunctionStruct.new()
 	
-	functions.size_ready_function = ready_function_struct
+#	functions.size_ready_function = ready_function_struct
 	
 	####################
 	
-	var process_function_struct = FunctionStruct.new()
+#	var process_function_struct = FunctionStruct.new()
 	
 #	var time_alive = InterpreterVar.new()
 #	time_alive.path = ["object", "global", "time_alive"]
@@ -26,20 +27,20 @@ func _init():
 #	if_scale.value = should_scale_condition
 #	process_function_struct.instructions.append(if_scale)
 #
-	var object_scale = InterpreterVar.new()
-	object_scale.path = ["object", "scale"]
-	
-	var new_scale = AdditionOperation.new()
-	new_scale.values = [object_scale, Vector2(0.1, 0.1)]
+#	var object_scale = InterpreterVar.new()
+#	object_scale.path = ["object", "scale"]
 
-	var method_execution = MethodExecution.new()
-	method_execution.path = ["object", "set_property"]
-	method_execution.args = ["scale", new_scale, false]
-	
-	var call_method = CallMethodInstruction.new()
-	call_method.scope = 0
-	call_method.value = method_execution
-	process_function_struct.instructions.append(call_method)
+#	var new_scale = AdditionOperation.new()
+#	new_scale.values = [object_scale, Vector2(0.1, 0.1)]
+
+#	var method_execution = MethodExecution.new()
+#	method_execution.path = ["object", "set_property"]
+#	method_execution.args = ["scale", new_scale, false]
+
+#	var call_method = CallMethodInstruction.new()
+#	call_method.scope = 0
+#	call_method.value = method_execution
+#	process_function_struct.instructions.append(call_method)
 #
 #	var exit_scope = ExitScopeInstruction.new()
 #	exit_scope.scope = 1
@@ -53,7 +54,7 @@ func _init():
 #	set_time_alive.value = time_alive_addition
 #	process_function_struct.instructions.append(set_time_alive)
 	
-	functions.size_process_function = process_function_struct
+#	functions.size_process_function = process_function_struct
 
 func get_vector2(result) -> Vector2:
 	return Vector2(result.x, result.y)
@@ -188,8 +189,8 @@ func get_encoded_level_data():
 			level_string.erase(level_string.length() - 1, 1)
 			level_string += "]"
 			
+			level_string += "]"
 		level_string += "],"
-	level_string.erase(level_string.length() - 1, 1)
 	level_string += "],"
 	
 	for area in areas:

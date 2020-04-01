@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=2]
+[gd_scene load_steps=94 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -60,6 +60,8 @@
 [ext_resource path="res://scenes/editor/ObjectSettingsWindow.gd" type="Script" id=58]
 [ext_resource path="res://scenes/editor/assets/item_box.png" type="Texture" id=59]
 [ext_resource path="res://scenes/shared/button_sound_player.gd" type="Script" id=60]
+[ext_resource path="res://assets/tiles/bricks/icon_slope_left.png" type="Texture" id=61]
+[ext_resource path="res://assets/tiles/bricks/icon_slope_right.png" type="Texture" id=62]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -1055,9 +1057,25 @@ preview = ExtResource( 14 )
 [node name="Brick" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 tileset_id = 1
-change_to = "Brick"
+change_to = "BrickSlopeLeft"
 icon = ExtResource( 5 )
 preview = ExtResource( 5 )
+
+[node name="BrickSlopeRight" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 1
+tile_id = 3
+change_to = "Brick"
+icon = ExtResource( 62 )
+preview = ExtResource( 62 )
+
+[node name="BrickSlopeLeft" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 1
+tile_id = 2
+change_to = "BrickSlopeRight"
+icon = ExtResource( 61 )
+preview = ExtResource( 61 )
 
 [node name="Entrance" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
@@ -1995,6 +2013,9 @@ custom_colors/font_color = Color( 0.258824, 0.270588, 0.658824, 1 )
 text = "1"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/LayerSwitcher"]
 stream = ExtResource( 35 )

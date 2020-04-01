@@ -194,10 +194,10 @@ func is_walled():
 	return (is_walled_left() or is_walled_right()) and collided_last_frame
 
 func is_walled_left():
-	return test_move(self.transform, Vector2(-0.1, 0)) and collided_last_frame
+	return test_move(self.transform, Vector2(-0.1, 1)) and collided_last_frame
 
 func is_walled_right():
-	return test_move(self.transform, Vector2(0.1, 0)) and collided_last_frame
+	return test_move(self.transform, Vector2(0.1, 1)) and collided_last_frame
 
 func hide():
 	visible = false
