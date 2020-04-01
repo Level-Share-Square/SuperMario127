@@ -64,6 +64,8 @@ var collision_left
 var collision_right
 var collided_last_frame = false
 
+export var snap := Vector2(0, 32)
+
 export(Array, NodePath) var collision_exceptions = []
 
 # Character vars
@@ -113,6 +115,7 @@ export var controlled_locally = true
 #onready var global_vars_node = get_node("../GlobalVars")
 #onready var level_settings_node = get_node("../LevelSettings")
 onready var collision_shape = $Collision
+onready var collision_raycast = $GroundCollision
 onready var dive_collision_shape = $DiveCollision
 onready var player_collision = $PlayerCollision
 onready var player_collision_shape = $PlayerCollision/CollisionShape2D
@@ -185,7 +188,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		real_friction = luigi_fric
 
 func is_grounded():
-	return test_move(self.transform, Vector2(0, 0.1)) and collided_last_frame
+	return test_move(self.transform, Vector2(0, 32)) if state != get_state_node("JumpState") else false
 
 func is_ceiling():
 	return test_move(self.transform, Vector2(0, -0.1)) and collided_last_frame
@@ -419,10 +422,18 @@ func _physics_process(delta: float):
 		for state_node in states_node.get_children():
 			state_node.handle_update(delta)
 
+	if state == get_state_node("JumpState") or state == get_state_node("WallSlideState"):
+		snap = Vector2(0, 0)
+	else:
+		snap = Vector2(0, 32)
+	
 	# Move by velocity
-	velocity = move_and_slide(velocity)
+	velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, rad2deg(46), false)
 	var slide_count = get_slide_count()
-	collided_last_frame = true if slide_count else false
+	if slide_count > 0:
+		collided_last_frame = true
+	else:
+		collided_last_frame = false
 
 	# Boundaries
 	if position.y > (level_size.y * 32) + 128:
