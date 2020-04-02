@@ -24,7 +24,7 @@ func _update(delta):
 		sprite.animation = "diveRight"
 	else:
 		sprite.animation = "diveLeft"
-	sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 90, 36 * delta) * character.facing_direction 
+	sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 90, 28 * delta) * character.facing_direction 
 		
 	if getup_buffer > 0:
 		stop = true

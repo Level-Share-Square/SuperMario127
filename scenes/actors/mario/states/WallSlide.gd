@@ -24,7 +24,7 @@ func _start(delta):
 	pass
 
 func _update(delta):
-	character.velocity.x += character.direction_on_stick
+	character.velocity.x += character.direction_on_stick * 5
 	if !(character.is_walled()):
 		wall_buffer -= delta
 		if wall_buffer <= 0:
