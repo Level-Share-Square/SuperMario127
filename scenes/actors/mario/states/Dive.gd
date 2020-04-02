@@ -13,6 +13,7 @@ func _ready():
 	priority = 3
 	disable_turning = true
 	blacklisted_states = ["SlideState", "GetupState"]
+	override_rotation = true
 
 func _start_check(delta):
 	return dive_buffer > 0 and character.dive_cooldown <= 0 and !(abs(character.velocity.x) <= 150 and character.is_grounded()) and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0)) and !character.is_walled()

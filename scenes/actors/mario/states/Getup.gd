@@ -8,6 +8,7 @@ export var get_up_power_luigi = 360
 func _ready():
 	priority = 1
 	disable_turning = true
+	override_rotation = true
 	
 func _start(delta):
 	var sprite = character.animated_sprite

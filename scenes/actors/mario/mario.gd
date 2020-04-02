@@ -129,14 +129,12 @@ onready var player_collision = $PlayerCollision
 onready var player_collision_shape = $PlayerCollision/CollisionShape2D
 onready var sprite = $Sprite
 
-var override_rotation = false
-
 var level_size = Vector2(80, 30)
 var number_of_players = 2
 
 var next_position : Vector2
 var sync_interpolation_speed = 20
-var rotation_interpolation_speed = 5
+export var rotation_interpolation_speed = 15
 
 #rpc_unreliable("update_inputs", 
 #left, left_just_pressed,
@@ -279,7 +277,7 @@ func _physics_process(delta: float):
 	# Gravity
 	velocity += gravity * Vector2(0, gravity_scale)
 	
-	if !override_rotation:
+	if state == null or !state.override_rotation:
 		
 		var sprite_rotation = 0
 		

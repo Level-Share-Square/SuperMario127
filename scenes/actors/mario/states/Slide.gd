@@ -12,6 +12,7 @@ func _ready():
 	disable_movement = true
 	disable_animation = true
 	disable_snap = false
+	override_rotation = true
 
 func _start(delta):
 	if character.state != character.get_state_node("Jump"):
@@ -24,7 +25,16 @@ func _update(delta):
 		sprite.animation = "diveRight"
 	else:
 		sprite.animation = "diveLeft"
-	sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 90, 28 * delta) * character.facing_direction 
+		
+	var ground_check = character.get_node("GroundCheck")
+	var sprite_rotation = 90
+	
+	if character.is_grounded():
+		var normal = character.ground_check.get_collision_normal()
+		sprite_rotation = atan2(normal.y, normal.x) + (PI/2)
+		sprite_rotation += PI/2 * character.facing_direction
+		
+	sprite.rotation = lerp(sprite.rotation, sprite_rotation, delta * character.rotation_interpolation_speed)
 		
 	if getup_buffer > 0:
 		stop = true

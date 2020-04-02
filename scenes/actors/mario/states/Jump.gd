@@ -110,6 +110,7 @@ func _stop_check(delta):
 func _general_update(delta):
 	var sprite = character.animated_sprite
 	if rotating:
+		override_rotation = true
 		if character.velocity.y > 0:
 			character.jump_animation = 0
 		if (character.state != null and character.state != character.get_state_node("JumpState") and character.state != character.get_state_node("FallState") and rotating) or character.is_grounded() or abs(sprite.rotation_degrees) > 360 or character.controllable == false:
@@ -118,6 +119,8 @@ func _general_update(delta):
 			character.jump_animation = 0
 		else:
 			sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 380, 4 * delta) * direction_on_tj
+	else:
+		override_rotation = false
 	if character.is_grounded() and !last_grounded:
 		ground_buffer = 0.125
 	elif character.is_grounded():
