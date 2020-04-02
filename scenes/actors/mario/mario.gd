@@ -110,6 +110,12 @@ export var dive_just_pressed = false
 export var spin = false
 export var spin_just_pressed = false
 
+export var gp = false
+export var gp_just_pressed = false
+
+export var gp_cancel = false
+export var gp_cancel_just_pressed = false
+
 export var controlled_locally = true
 
 #onready var global_vars_node = get_node("../GlobalVars")
@@ -190,7 +196,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 
 func is_grounded():
 	ground_check.force_raycast_update()
-	return ground_check.is_colliding()
+	return ground_check.is_colliding() and velocity.y >= 0
 
 func is_ceiling():
 	return test_move(self.transform, Vector2(0, -0.1)) and collided_last_frame
@@ -319,6 +325,24 @@ func _physics_process(delta: float):
 				spin_just_pressed = true
 			else:
 				spin_just_pressed = false
+				
+			if Input.is_action_pressed("ground_pound_" + str(control_id)):
+				gp = true
+			else:
+				gp = false
+			if Input.is_action_just_pressed("ground_pound_" + str(control_id)):
+				gp_just_pressed = true
+			else:
+				gp_just_pressed = false
+				
+			if Input.is_action_pressed("ground_pound_cancel_" + str(control_id)):
+				gp_cancel = true
+			else:
+				gp_cancel = false
+			if Input.is_action_just_pressed("ground_pound_cancel_" + str(control_id)):
+				gp_cancel_just_pressed = true
+			else:
+				gp_cancel_just_pressed = false
 		else:
 			left = false
 			left_just_pressed = false
@@ -418,14 +442,14 @@ func _physics_process(delta: float):
 
 	if state != null:
 		if state.disable_snap:
-			snap = Vector2(0, 1)
+			snap = Vector2(0, 0)
 		else:
-			snap = Vector2(0, 32)
+			snap = Vector2(0, 38)
 	else:
-		snap = Vector2(0, 32)
+		snap = Vector2(0, 38)
 	
 	# Move by velocity
-	velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, rad2deg(46), false)
+	velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
 	var slide_count = get_slide_count()
 	if slide_count > 0:
 		collided_last_frame = true

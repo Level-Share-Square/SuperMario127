@@ -30,7 +30,8 @@ func _stop(delta):
 	if character.is_grounded():
 		character.set_state_by_name("GroundPoundEndState", delta)
 	else:
+		character.jump_animation = 0
 		character.velocity.y = character.velocity.y / 4
 
 func _stop_check(delta):
-	return character.is_grounded() or Input.is_action_just_pressed("ground_pound_cancel")
+	return character.is_grounded() or character.gp_cancel_just_pressed
