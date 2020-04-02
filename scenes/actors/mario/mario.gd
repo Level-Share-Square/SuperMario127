@@ -56,6 +56,7 @@ var state = null
 var last_state = null
 export var controllable = true
 export var dead = false
+export var dive_cooldown = 0
 
 # Collision vars
 var collision_down
