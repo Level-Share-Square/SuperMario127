@@ -40,7 +40,7 @@ length = 15.0
 
 [sub_resource type="RayShape2D" id=5]
 custom_solver_bias = 0.5
-length = 5.0
+length = 7.0
 
 [node name="Character" type="KinematicBody2D"]
 position = Vector2( 32.5, 128 )
@@ -151,6 +151,7 @@ shape = SubResource( 1 )
 
 [node name="Spotlight" type="Light2D" parent="."]
 light_mask = 0
+position = Vector2( 0, 0.0750427 )
 texture = ExtResource( 17 )
 mode = 3
 range_item_cull_mask = 524288
