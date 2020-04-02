@@ -23,7 +23,6 @@ func _update(delta):
 
 func _stop(delta):
 	character.jump_animation = 0
-	pass
 
 func _stop_check(delta):
 	return character.is_grounded()

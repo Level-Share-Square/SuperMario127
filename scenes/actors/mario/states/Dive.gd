@@ -19,8 +19,8 @@ func _start_check(delta):
 
 func _start(delta):
 	var sound_player = character.get_node("Sounds")
-	var collision = character.get_node("Collision")
-	var dive_collision = character.get_node("DiveCollision")
+	var collision = character.get_node("GroundCollision")
+	var dive_collision = character.get_node("GroundCollisionDive")
 	if dive_buffer > 0:
 		if character.character == 0:
 			character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
@@ -58,8 +58,8 @@ func _update(delta):
 		last_above_rot_limit = true
 		
 func _stop(delta):
-	var collision = character.get_node("Collision")
-	var dive_collision = character.get_node("DiveCollision")
+	var collision = character.get_node("GroundCollision")
+	var dive_collision = character.get_node("GroundCollisionDive")
 	var sprite = character.animated_sprite
 	if character.test_move(character.transform, Vector2(0.1 * character.facing_direction, -15)) and !character.is_grounded():
 		character.velocity.x = bonk_power * -character.facing_direction

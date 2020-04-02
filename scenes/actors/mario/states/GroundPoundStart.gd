@@ -9,7 +9,7 @@ func _ready():
 	disable_turning = true
 	disable_movement = true
 	disable_animation = true
-	blacklisted_states = ["DiveState"]
+	blacklisted_states = ["DiveState", "GroundPoundState", "GroundPoundEndState"]
 
 func _start_check(delta):
 	return Input.is_action_just_pressed("ground_pound") and !character.is_grounded()

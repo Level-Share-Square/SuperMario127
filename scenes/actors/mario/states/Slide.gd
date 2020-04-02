@@ -11,6 +11,7 @@ func _ready():
 	priority = 4
 	disable_movement = true
 	disable_animation = true
+	disable_snap = false
 
 func _start(delta):
 	if character.state != character.get_state_node("Jump"):
@@ -29,8 +30,8 @@ func _update(delta):
 		stop = true
 
 func _stop(delta):
-	var collision = character.get_node("Collision")
-	var dive_collision = character.get_node("DiveCollision")
+	var collision = character.get_node("GroundCollision")
+	var dive_collision = character.get_node("GroundCollisionDive")
 	var sprite = character.animated_sprite
 	character.friction = character.real_friction
 	if !character.is_grounded():

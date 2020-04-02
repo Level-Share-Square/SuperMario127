@@ -116,7 +116,8 @@ export var controlled_locally = true
 #onready var level_settings_node = get_node("../LevelSettings")
 onready var collision_shape = $Collision
 onready var collision_raycast = $GroundCollision
-onready var dive_collision_shape = $DiveCollision
+onready var ground_check = $GroundCheck
+onready var dive_collision_shape = $GroundCollisionDive
 onready var player_collision = $PlayerCollision
 onready var player_collision_shape = $PlayerCollision/CollisionShape2D
 onready var sprite = $Sprite
@@ -161,12 +162,12 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 			sprite.frames = mario_frames
 		else:
 			sprite.frames = mario_alt_frames
-		collision_shape.position = mario_collision_offset
-		collision_shape.shape = mario_collision
-		player_collision_shape.position = mario_collision_offset
-		player_collision_shape.shape = mario_collision
-		dive_collision_shape.shape = mario_dive_collision
-		dive_collision_shape.position = mario_dive_collision_offset
+		#collision_shape.position = mario_collision_offset
+		#collision_shape.shape = mario_collision
+		#player_collision_shape.position = mario_collision_offset
+		#player_collision_shape.shape = mario_collision
+		#dive_collision_shape.shape = mario_dive_collision
+		#dive_collision_shape.position = mario_dive_collision_offset
 		real_friction = friction
 	else:
 		var sound_scene = load(luigi_sounds)
@@ -176,19 +177,20 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 			sprite.frames = luigi_frames
 		else:
 			sprite.frames = luigi_alt_frames
-		collision_shape.position = luigi_collision_offset
-		collision_shape.shape = luigi_collision
-		player_collision_shape.position = luigi_collision_offset
-		player_collision_shape.shape = luigi_collision
-		dive_collision_shape.shape = luigi_dive_collision
-		dive_collision_shape.position = luigi_dive_collision_offset
+		#collision_shape.position = luigi_collision_offset
+		#collision_shape.shape = luigi_collision
+		#player_collision_shape.position = luigi_collision_offset
+		#player_collision_shape.shape = luigi_collision
+		#dive_collision_shape.shape = luigi_dive_collision
+		#dive_collision_shape.position = luigi_dive_collision_offset
 		move_speed = luigi_speed
 		acceleration = luigi_accel
 		friction = luigi_fric
 		real_friction = luigi_fric
 
 func is_grounded():
-	return test_move(self.transform, Vector2(0, 32)) if state != get_state_node("JumpState") else false
+	ground_check.force_raycast_update()
+	return ground_check.is_colliding()
 
 func is_ceiling():
 	return test_move(self.transform, Vector2(0, -0.1)) and collided_last_frame
@@ -266,14 +268,6 @@ func _physics_process(delta: float):
 	var gravity = 7.82 #global_vars_node.gravity
 	# Gravity
 	velocity += gravity * Vector2(0, gravity_scale)
-	
-	if test_move(transform, Vector2(velocity.x * delta, -1)) and !test_move(transform.translated(Vector2(0, -5)), Vector2(move_direction * 5, 0)) and is_grounded():
-		var space_state = get_world_2d().direct_space_state
-		var result = space_state.intersect_ray(position - Vector2(0, 5), position)
-		velocity.y = -1
-		if not result.empty():
-			position.x += move_direction * 5
-			position.y = result.position.y + 3
 			
 	# Inputs
 	if controlled_locally:
@@ -422,8 +416,11 @@ func _physics_process(delta: float):
 		for state_node in states_node.get_children():
 			state_node.handle_update(delta)
 
-	if state == get_state_node("JumpState") or state == get_state_node("WallSlideState"):
-		snap = Vector2(0, 0)
+	if state != null:
+		if state.disable_snap:
+			snap = Vector2(0, 1)
+		else:
+			snap = Vector2(0, 32)
 	else:
 		snap = Vector2(0, 32)
 	

@@ -36,8 +36,10 @@ func _update(delta):
 	var sprite = character.animated_sprite
 	if character.is_grounded():
 		priority = 0
+		disable_snap = false
 	else:
 		priority = 2
+		disable_snap = true
 	if sprite.animation != "spinning":
 		sprite.animation = "spinning"
 	if character.velocity.y < 0:
