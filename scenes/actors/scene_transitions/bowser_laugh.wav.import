@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bowser_laugh.wav-ddf09213aa6cb6d93f1bc57b0d8ec310.sample"
+
+[deps]
+
+source_file="res://scenes/actors/scene_transitions/bowser_laugh.wav"
+dest_files=[ "res://.import/bowser_laugh.wav-ddf09213aa6cb6d93f1bc57b0d8ec310.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
