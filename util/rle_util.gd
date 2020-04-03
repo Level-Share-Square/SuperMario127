@@ -90,7 +90,8 @@ static func decode(code: String):
 	var area_array = code_array[2 + add_amount].split("~")
 	
 	var area_settings_array = area_array[0].split(",")
-	result.areas = [{}]
+	result.areas = []
+	result.areas.append({})
 	result.areas[0].settings = {}
 	result.areas[0].settings.size = decode_value(area_settings_array[0])
 	result.areas[0].settings.sky = decode_value(area_settings_array[1])

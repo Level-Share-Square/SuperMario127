@@ -287,6 +287,9 @@ func _physics_process(delta: float):
 			var normal = ground_check.get_collision_normal()
 			sprite_rotation = atan2(normal.y, normal.x) + (PI/2)
 			
+		if is_grounded():
+			velocity.y += abs(sprite_rotation) * 100 # this is required to keep mario from falling off slopes
+			
 		sprite.rotation = lerp(sprite.rotation, sprite_rotation, delta * rotation_interpolation_speed)
 			
 	# Inputs
@@ -458,10 +461,10 @@ func _physics_process(delta: float):
 		if state.disable_snap:
 			snap = Vector2()
 		else:
-			snap = Vector2(0, 38)
+			snap = Vector2(0, 32)
 	else:
-		snap = Vector2(0, 38)
-	
+		snap = Vector2(0, 32)
+
 	# Move by velocity
 	velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
 	var slide_count = get_slide_count()
