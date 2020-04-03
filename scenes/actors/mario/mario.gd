@@ -119,6 +119,8 @@ export var gp_cancel_just_pressed = false
 
 export var controlled_locally = true
 
+export var rotating_jump = false
+
 #onready var global_vars_node = get_node("../GlobalVars")
 #onready var level_settings_node = get_node("../LevelSettings")
 onready var collision_shape = $Collision
@@ -277,7 +279,7 @@ func _physics_process(delta: float):
 	# Gravity
 	velocity += gravity * Vector2(0, gravity_scale)
 	
-	if state == null or !state.override_rotation:
+	if state == null or !state.override_rotation and !rotating_jump:
 		
 		var sprite_rotation = 0
 		
@@ -454,7 +456,7 @@ func _physics_process(delta: float):
 
 	if state != null:
 		if state.disable_snap:
-			snap = Vector2(0, 0)
+			snap = Vector2()
 		else:
 			snap = Vector2(0, 38)
 	else:

@@ -16,13 +16,12 @@ var ledge_buffer = 0
 var dive_buffer = 0
 var jump_playing = false
 var last_grounded = false
-var rotating = false
 var direction_on_tj = 1
 
 func _ready():
 	priority = 1
 	blacklisted_states = ["DiveState", "SlideState", "GetupState"]
-
+	
 func lerp(a, b, t):
 	return (1 - t) * a + t * b
 
@@ -89,7 +88,7 @@ func _update(delta):
 					sprite.animation = "tripleJumpRight"
 				else:
 					sprite.animation = "tripleJumpLeft"
-				rotating = true
+				character.rotating_jump = true
 		else:
 			if character.jump_animation == 0:
 				sprite.animation = "jumpLeft"
@@ -100,7 +99,7 @@ func _update(delta):
 					sprite.animation = "tripleJumpRight"
 				else:
 					sprite.animation = "tripleJumpLeft"
-				rotating = true
+				character.rotating_jump = true
 	else:
 		jump_playing = false
 
@@ -109,18 +108,15 @@ func _stop_check(delta):
 
 func _general_update(delta):
 	var sprite = character.animated_sprite
-	if rotating:
-		override_rotation = true
+	if character.rotating_jump:
 		if character.velocity.y > 0:
 			character.jump_animation = 0
-		if (character.state != null and character.state != character.get_state_node("JumpState") and character.state != character.get_state_node("FallState") and rotating) or character.is_grounded() or abs(sprite.rotation_degrees) > 360 or character.controllable == false:
-			rotating = false
+		if (character.state != null and character.state != character.get_state_node("JumpState") and character.state != character.get_state_node("FallState") and character.rotating_jump) or character.is_grounded() or abs(sprite.rotation_degrees) > 360 or character.controllable == false:
+			character.rotating_jump = false
 			sprite.rotation_degrees = 0
 			character.jump_animation = 0
 		else:
 			sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 380, 4 * delta) * direction_on_tj
-	else:
-		override_rotation = false
 	if character.is_grounded() and !last_grounded:
 		ground_buffer = 0.125
 	elif character.is_grounded():

@@ -9,6 +9,7 @@ func _ready():
 	disable_turning = true
 	disable_movement = true
 	disable_animation = true
+	override_rotation = true
 	blacklisted_states = ["DiveState", "GroundPoundState", "GroundPoundEndState"]
 
 func _start_check(delta):
