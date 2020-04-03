@@ -3,7 +3,7 @@ extends GameObject
 onready var area = $Area2D
 onready var collision_shape = $StaticBody2D/CollisionShape2D
 
-var buffer := 5
+var buffer := -5
 var character = null
 
 func _ready():
