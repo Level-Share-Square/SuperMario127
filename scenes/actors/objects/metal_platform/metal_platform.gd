@@ -19,6 +19,7 @@ func enter_area(body):
 func exit_area(body):
 	if body == character:
 		character = null
+		
 
 func _physics_process(delta):
 	if character != null:
