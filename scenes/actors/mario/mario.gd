@@ -48,6 +48,7 @@ export var disable_turning = false
 export var disable_animation = false
 
 export var attacking = false
+export var big_attack = false
 
 export var player_id = 0
 
@@ -128,6 +129,8 @@ onready var collision_raycast = $GroundCollision
 onready var ground_check = $GroundCheck
 onready var left_check = $LeftCheck
 onready var right_check = $RightCheck
+onready var left_collision = $LeftCollision
+onready var right_collision = $RightCollision
 onready var dive_collision_shape = $GroundCollisionDive
 onready var player_collision = $PlayerCollision
 onready var player_collision_shape = $PlayerCollision/CollisionShape2D
@@ -148,17 +151,16 @@ export var rotation_interpolation_speed = 15
 #spin, spin_just_pressed
 #)
 
-slave func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_dead, is_controllable, collision_disabled, dive_collision_disabled):
+slave func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_big_attacking, is_dead, is_controllable):
 	next_position = pos
 	velocity = vel
 	sprite.animation = sprite_animation
 	sprite.frame = sprite_frame
 	sprite.rotation_degrees = sprite_rotation
 	attacking = is_attacking
+	big_attack = is_big_attacking
 	dead = is_dead
 	controllable = is_controllable
-	collision_shape.disabled = collision_disabled
-	dive_collision_shape.disabled = dive_collision_disabled
 
 func load_in(level_data : LevelData, level_area : LevelArea):
 	level_size = level_area.settings.size
@@ -211,10 +213,10 @@ func is_walled():
 	return (is_walled_left() or is_walled_right()) and collided_last_frame
 
 func is_walled_left():
-	return test_move(self.transform, Vector2(-0.1, 1)) and collided_last_frame
+	return test_move(self.transform, Vector2(-0.5, 1)) and collided_last_frame
 
 func is_walled_right():
-	return test_move(self.transform, Vector2(0.1, 1)) and collided_last_frame
+	return test_move(self.transform, Vector2(0.5, 1)) and collided_last_frame
 
 func hide():
 	visible = false
@@ -244,33 +246,48 @@ func set_state_by_name(name: String, delta: float):
 		
 func player_hit(body):
 	if body.name.begins_with("Character"):
-		if global_position.y + 8 < body.global_position.y:
-			velocity.y = -230
-			#body.stomped_sound_player.play() -Felt weird without animations
-			if state != get_state_node("DiveState"):
-				set_state_by_name("BounceState", 0)
-		elif global_position.y - 8 > body.global_position.y:
-			velocity.y = 150
-		elif global_position.x < body.global_position.x:
-			if body.attacking == true and !attacking:
+		if !body.big_attack:
+			if global_position.y + 8 < body.global_position.y:
+				velocity.y = -230
+				#body.stomped_sound_player.play() -Felt weird without animations
+				if state != get_state_node("DiveState") and state != get_state_node("GroundPoundState") and state != get_state_node("GroundPoundStartState") and state != get_state_node("GroundPoundEndState"):
+					set_state_by_name("BounceState", 0)
+			elif global_position.y - 8 > body.global_position.y:
+				velocity.y = 150
+			elif global_position.x < body.global_position.x:
+				if body.attacking == true and !attacking:
+					velocity.x = -205
+					velocity.y = -175
+					body.velocity.x = 250
+					set_state_by_name("BonkedState", 0)
+					sound_player.play_hit_sound()
+				elif !attacking or (body.attacking and attacking):
+					velocity.x = -250
+					body.velocity.x = 250
+			elif global_position.x > body.global_position.x:
+				if body.attacking == true and !attacking:
+					velocity.x = 205
+					velocity.y = -175
+					body.velocity.x = -250
+					set_state_by_name("BonkedState", 0)
+					sound_player.play_hit_sound()
+				elif !attacking or (body.attacking and attacking):
+					velocity.x = 250
+					body.velocity.x = -250
+		else:
+			print("A")
+			if global_position.x < body.global_position.x:
 				velocity.x = -205
 				velocity.y = -175
 				body.velocity.x = 250
 				set_state_by_name("BonkedState", 0)
 				sound_player.play_hit_sound()
-			elif !attacking or (body.attacking and attacking):
-				velocity.x = -250
-				body.velocity.x = 250
-		elif global_position.x > body.global_position.x:
-			if body.attacking == true and !attacking:
+			else:
 				velocity.x = 205
 				velocity.y = -175
 				body.velocity.x = -250
 				set_state_by_name("BonkedState", 0)
 				sound_player.play_hit_sound()
-			elif !attacking or (body.attacking and attacking):
-				velocity.x = 250
-				body.velocity.x = -250
 
 func _process(delta: float):
 	if next_position:
@@ -505,7 +522,7 @@ func _physics_process(delta: float):
 	
 	if PlayerSettings.other_player_id != -1:
 		if player_id == PlayerSettings.my_player_index and is_network_master():
-			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, dead, controllable, collision_shape.disabled, dive_collision_shape.disabled)
+			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, dead, controllable)
 	
 func kill(cause):
 	if !dead:
@@ -523,7 +540,7 @@ func kill(cause):
 				yield(get_tree().create_timer(1), "timeout")
 			else:
 				yield(get_tree().create_timer(3), "timeout")
-				position = spawn_pos
+				position = spawn_pos - Vector2(0, 16)
 				dead = false
 				reload = false
 				controllable = true

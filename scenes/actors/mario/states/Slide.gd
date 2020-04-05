@@ -43,6 +43,8 @@ func _stop(delta):
 	var collision = character.get_node("Collision")
 	var dive_collision = character.get_node("CollisionDive")
 	var ground_collision = character.get_node("GroundCollision")
+	var left_collision = character.get_node("LeftCollision")
+	var right_collision = character.get_node("RightCollision")
 	var dive_ground_collision = character.get_node("GroundCollisionDive")
 	var sprite = character.animated_sprite
 	character.friction = character.real_friction
@@ -55,6 +57,8 @@ func _stop(delta):
 			character.position.y -= 16
 		collision.disabled = false
 		ground_collision.disabled = false
+		left_collision.disabled = false
+		right_collision.disabled = false
 		dive_collision.disabled = true
 		dive_ground_collision.disabled = true
 		character.attacking = false
@@ -62,6 +66,8 @@ func _stop(delta):
 		sprite.rotation_degrees = 0
 		collision.disabled = false
 		ground_collision.disabled = false
+		left_collision.disabled = false
+		right_collision.disabled = false
 		dive_collision.disabled = true
 		dive_ground_collision.disabled = true
 	stop = false

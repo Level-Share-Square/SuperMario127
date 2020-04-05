@@ -21,12 +21,15 @@ func _start(delta):
 		sprite.animation = "groundPoundLeft"
 	character.velocity.y = ground_pound_power
 	character.attacking = true
+	character.big_attack = true
 
 func _update(delta):
-	pass
+	character.attacking = true
+	character.big_attack = true
 
 func _stop(delta):
 	character.attacking = false
+	character.big_attack = false
 	if character.is_grounded():
 		character.set_state_by_name("GroundPoundEndState", delta)
 	else:

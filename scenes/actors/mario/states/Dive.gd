@@ -23,6 +23,8 @@ func _start(delta):
 	var collision = character.get_node("Collision")
 	var dive_collision = character.get_node("CollisionDive")
 	var ground_collision = character.get_node("GroundCollision")
+	var left_collision = character.get_node("LeftCollision")
+	var right_collision = character.get_node("RightCollision")
 	var dive_ground_collision = character.get_node("GroundCollisionDive")
 	if dive_buffer > 0:
 		if character.character == 0:
@@ -37,6 +39,8 @@ func _start(delta):
 	ground_collision.disabled = true
 	dive_collision.disabled = false
 	dive_ground_collision.disabled = false
+	left_collision.disabled = true
+	right_collision.disabled = true
 	character.rotating = true
 	if abs(character.velocity.x) > maxVelocityX:
 		character.velocity.x = maxVelocityX * character.facing_direction
@@ -66,6 +70,8 @@ func _stop(delta):
 	var collision = character.get_node("Collision")
 	var dive_collision = character.get_node("CollisionDive")
 	var ground_collision = character.get_node("GroundCollision")
+	var left_collision = character.get_node("LeftCollision")
+	var right_collision = character.get_node("RightCollision")
 	var dive_ground_collision = character.get_node("GroundCollisionDive")
 	var sprite = character.animated_sprite
 	if character.test_move(character.transform, Vector2(0.1 * character.facing_direction, -15)) and !character.is_grounded():
@@ -81,6 +87,8 @@ func _stop(delta):
 	else:
 		collision.disabled = false
 		ground_collision.disabled = false
+		left_collision.disabled = false
+		right_collision.disabled = false
 		dive_collision.disabled = true
 		dive_ground_collision.disabled = true
 		character.attacking = false

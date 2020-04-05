@@ -125,7 +125,6 @@ camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
 layer = 127
 
 [node name="Divider" type="ColorRect" parent="UI"]
-visible = false
 margin_left = 384.0
 margin_right = 388.0
 margin_bottom = 432.0
@@ -761,8 +760,10 @@ __meta__ = {
 }
 
 [node name="Viewports" type="HBoxContainer" parent="."]
-margin_right = 768.0
+margin_right = 772.0
 margin_bottom = 432.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -771,16 +772,16 @@ divider_path = NodePath("../UI/Divider")
 character_scene_path = "res://scenes/actors/mario/mario.tscn"
 
 [node name="ViewportContainer" type="ViewportContainer" parent="Viewports"]
-margin_right = 768.0
+margin_right = 384.0
 margin_bottom = 432.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer"]
-size = Vector2( 768, 432 )
-size_override_stretch = true
+size = Vector2( 384, 432 )
 handle_input_locally = false
 render_target_update_mode = 3
 
@@ -824,10 +825,11 @@ character = 1
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="Viewports"]
-visible = false
 margin_left = 388.0
 margin_right = 772.0
 margin_bottom = 432.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -835,7 +837,7 @@ __meta__ = {
 [node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer2"]
 size = Vector2( 384, 432 )
 handle_input_locally = false
-render_target_update_mode = 0
+render_target_update_mode = 3
 
 [node name="CameraP2" type="Camera2D" parent="Viewports/ViewportContainer2/Viewport"]
 position = Vector2( 0, -80 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -34,13 +34,20 @@ extents = Vector2( 17, 5 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5.5, 1 )
 
-[sub_resource type="RayShape2D" id=5]
+[sub_resource type="RayShape2D" id=8]
 custom_solver_bias = 0.5
 length = 15.0
+
+[sub_resource type="RayShape2D" id=5]
+custom_solver_bias = 0.5
+length = 6.0
 
 [sub_resource type="RayShape2D" id=6]
 custom_solver_bias = 0.5
 length = 7.0
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 8.5, 20 )
 
 [node name="Character" type="KinematicBody2D"]
 position = Vector2( 32.5, 128 )
@@ -82,6 +89,16 @@ disabled = true
 
 [node name="GroundCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 8 )
+shape = SubResource( 8 )
+
+[node name="LeftCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 0.5, 8 )
+rotation = -1.5708
+shape = SubResource( 5 )
+
+[node name="RightCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 0.5, 8 )
+rotation = 1.5708
 shape = SubResource( 5 )
 
 [node name="GroundCollisionDive" type="CollisionShape2D" parent="."]
@@ -91,7 +108,7 @@ disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "fallRight"
+animation = "idleRight"
 playing = true
 
 [node name="States" type="Node" parent="."]
@@ -144,8 +161,9 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollision"]
-position = Vector2( 0.5, -4 )
-shape = SubResource( 1 )
+modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
+position = Vector2( 0.5, 4 )
+shape = SubResource( 7 )
 
 [node name="Bubble" type="Sprite" parent="."]
 
