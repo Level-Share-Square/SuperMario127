@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=2]
+[gd_scene load_steps=95 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -62,6 +62,7 @@
 [ext_resource path="res://scenes/shared/button_sound_player.gd" type="Script" id=60]
 [ext_resource path="res://assets/tiles/bricks/icon_slope_left.png" type="Texture" id=61]
 [ext_resource path="res://assets/tiles/bricks/icon_slope_right.png" type="Texture" id=62]
+[ext_resource path="res://assets/tiles/grass/slab_icon.png" type="Texture" id=63]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -1034,7 +1035,7 @@ position = Vector2( 0.198608, -0.468788 )
 [node name="Grass" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 tileset_id = 2
-change_to = "GrassSlopeLeft"
+change_to = "GrassSlab"
 icon = ExtResource( 10 )
 preview = ExtResource( 10 )
 
@@ -1053,6 +1054,14 @@ tile_id = 2
 change_to = "GrassSlopeRight"
 icon = ExtResource( 14 )
 preview = ExtResource( 14 )
+
+[node name="GrassSlab" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 2
+tile_id = 1
+change_to = "GrassSlopeLeft"
+icon = ExtResource( 63 )
+preview = ExtResource( 63 )
 
 [node name="Brick" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )

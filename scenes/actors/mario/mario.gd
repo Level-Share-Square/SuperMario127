@@ -126,6 +126,8 @@ export var rotating_jump = false
 onready var collision_shape = $Collision
 onready var collision_raycast = $GroundCollision
 onready var ground_check = $GroundCheck
+onready var left_check = $LeftCheck
+onready var right_check = $RightCheck
 onready var dive_collision_shape = $GroundCollisionDive
 onready var player_collision = $PlayerCollision
 onready var player_collision_shape = $PlayerCollision/CollisionShape2D
@@ -460,10 +462,15 @@ func _physics_process(delta: float):
 	if state != null:
 		if state.disable_snap:
 			snap = Vector2()
-		else:
+		elif !left_check.is_colliding() and !right_check.is_colliding():
 			snap = Vector2(0, 32)
+		else:
+			snap = Vector2()
 	else:
-		snap = Vector2(0, 32)
+		if !left_check.is_colliding() and !right_check.is_colliding():
+			snap = Vector2(0, 32)
+		else:
+			snap = Vector2()
 
 	# Move by velocity
 	velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
