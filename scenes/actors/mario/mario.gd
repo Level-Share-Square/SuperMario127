@@ -388,9 +388,9 @@ func _physics_process(delta: float):
 		disable_animation = false
 	# Movement
 	move_direction = 0
-	if left and disable_movement == false:
+	if left and !right and disable_movement == false:
 		move_direction = -1
-	elif right and disable_movement == false:
+	elif right and !left and disable_movement == false:
 		move_direction = 1
 	if move_direction != 0:
 		if is_grounded():
@@ -462,12 +462,12 @@ func _physics_process(delta: float):
 	if state != null:
 		if state.disable_snap:
 			snap = Vector2()
-		elif !left_check.is_colliding() and !right_check.is_colliding():
+		elif !left_check.is_colliding() and !right_check.is_colliding() and velocity.y > 0:
 			snap = Vector2(0, 32)
 		else:
 			snap = Vector2()
 	else:
-		if !left_check.is_colliding() and !right_check.is_colliding():
+		if !left_check.is_colliding() and !right_check.is_colliding() and velocity.y > 0:
 			snap = Vector2(0, 32)
 		else:
 			snap = Vector2()
