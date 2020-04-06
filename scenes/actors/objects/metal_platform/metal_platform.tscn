@@ -4,10 +4,10 @@
 [ext_resource path="res://scenes/actors/objects/metal_platform/metal_platform.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 4 )
+extents = Vector2( 32, 1 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 39.7264, 16.5033 )
+extents = Vector2( 38, 16 )
 
 [node name="MetalPlatform" type="Node2D"]
 z_index = -1
@@ -21,6 +21,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 0, -3 )
 shape = SubResource( 1 )
 one_way_collision_margin = 0.0
 

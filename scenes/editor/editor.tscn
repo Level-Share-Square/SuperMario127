@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=2]
+[gd_scene load_steps=109 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -68,6 +68,12 @@
 [ext_resource path="res://scenes/editor/assets/search_icon.png" type="Texture" id=66]
 [ext_resource path="res://scenes/editor/assets/search_icon_hover.png" type="Texture" id=67]
 [ext_resource path="res://scenes/editor/assets/search_icon_press.png" type="Texture" id=68]
+[ext_resource path="res://scenes/actors/objects/mushroom_body/mushroom_body.png" type="Texture" id=69]
+[ext_resource path="res://scenes/actors/objects/mushroom_curve/mushroom_curve.png" type="Texture" id=70]
+[ext_resource path="res://scenes/actors/objects/mushroom_top/mushroom_top.png" type="Texture" id=71]
+[ext_resource path="res://scenes/actors/objects/mushroom_top/icon.png" type="Texture" id=72]
+[ext_resource path="res://scenes/actors/objects/mushroom_body/icon.png" type="Texture" id=73]
+[ext_resource path="res://scenes/actors/objects/mushroom_curve/icon.png" type="Texture" id=74]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -1170,6 +1176,39 @@ z_index = -9
 change_to = "BigTree"
 icon = ExtResource( 51 )
 preview = ExtResource( 50 )
+
+[node name="MushroomTop" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 6
+is_object = true
+object_center = Vector2( 32, 12 )
+tile_mode_offset = Vector2( 16, -4 )
+z_index = -1
+change_to = "MushroomBody"
+icon = ExtResource( 72 )
+preview = ExtResource( 71 )
+
+[node name="MushroomBody" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 7
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+z_index = -1
+change_to = "MushroomCurve"
+icon = ExtResource( 73 )
+preview = ExtResource( 69 )
+
+[node name="MushroomCurve" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 8
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+z_index = -1
+change_to = "MushroomTop"
+icon = ExtResource( 74 )
+preview = ExtResource( 70 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100

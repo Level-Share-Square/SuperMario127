@@ -10,11 +10,11 @@ export var selected_color : Color
 func _ready():
 	var editor = get_tree().get_current_scene()
 	var placeable_items = editor.get_node(editor.placeable_items)
-	var starting_toolbar = load("res://scenes/editor/starting_toolbar.tres")
+	var starting_toolbar = ToolbarLayout.ids
 	for index in range(number_of_boxes):
 		var item
-		if index < starting_toolbar.ids.size():
-			item = placeable_items.get_node(starting_toolbar.ids[index])
+		if index < starting_toolbar.size():
+			item = placeable_items.get_node(starting_toolbar[index])
 
 		var placeable_item_button = PLACEABLE_ITEM_BUTTON.instance()		
 		if index == 0:

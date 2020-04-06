@@ -24,6 +24,7 @@ func _ready():
 
 func item_changed():
 	icon.texture = null if item == null else item.icon
+	ToolbarLayout.ids[box_index] = item.name
 	
 func is_hovered():
 	var mouse_pos = get_global_mouse_position()

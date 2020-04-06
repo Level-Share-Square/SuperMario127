@@ -372,6 +372,7 @@ CurrentLevelData="*res://scenes/shared/level_data.tscn"
 PlayerSettings="*res://scenes/player/player_settings.gd"
 Networking="*res://scenes/shared/networking.tscn"
 FocusCheck="*res://scenes/player/focus_check.gd"
+ToolbarLayout="*res://scenes/editor/layout.gd"
 
 [debug]
 
