@@ -28,3 +28,7 @@ func _process(delta):
 					if result:
 						mouse_pos = result.position - Vector2(0, item.object_size.y)
 				position = mouse_pos
+	if editor.dragging_item != null:
+		visible = false
+	else:
+		visible = true

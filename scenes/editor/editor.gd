@@ -12,6 +12,8 @@ export var object_settings : NodePath
 var selected_box : Node
 var selected_object : Node
 
+var dragging_item : Node
+
 onready var placeable_items_node = get_node(placeable_items)
 onready var placeable_items_button_container_node = get_node(placeable_items_button_container)
 onready var item_preview_node = get_node(item_preview)

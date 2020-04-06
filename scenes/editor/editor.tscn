@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=2]
+[gd_scene load_steps=103 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -63,6 +63,11 @@
 [ext_resource path="res://assets/tiles/bricks/icon_slope_left.png" type="Texture" id=61]
 [ext_resource path="res://assets/tiles/bricks/icon_slope_right.png" type="Texture" id=62]
 [ext_resource path="res://assets/tiles/grass/slab_icon.png" type="Texture" id=63]
+[ext_resource path="res://scenes/editor/item_picker.gd" type="Script" id=64]
+[ext_resource path="res://scenes/editor/dragged_item.gd" type="Script" id=65]
+[ext_resource path="res://scenes/editor/assets/search_icon.png" type="Texture" id=66]
+[ext_resource path="res://scenes/editor/assets/search_icon_hover.png" type="Texture" id=67]
+[ext_resource path="res://scenes/editor/assets/search_icon_press.png" type="Texture" id=68]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -1016,6 +1021,20 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=31]
 size = 64
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=34]
+bg_color = Color( 0, 0.033, 0.22, 1 )
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=32]
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="DynamicFont" id=33]
+size = 128
 font_data = ExtResource( 4 )
 
 [node name="Editor" type="Node2D"]
@@ -2042,6 +2061,30 @@ volume_db = -10.0
 stream = ExtResource( 36 )
 volume_db = -10.0
 
+[node name="SearchButton" type="TextureButton" parent="UI"]
+margin_left = 364.0
+margin_top = 3.0
+margin_right = 524.0
+margin_bottom = 163.0
+rect_scale = Vector2( 0.333, 0.333 )
+action_mode = 0
+texture_normal = ExtResource( 66 )
+texture_pressed = ExtResource( 68 )
+texture_hover = ExtResource( 67 )
+script = ExtResource( 31 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+window = NodePath("../ItemPicker")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/SearchButton"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/SearchButton"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
 [node name="SaveButton" type="TextureButton" parent="UI"]
 margin_left = 645.0
 margin_top = 6.0
@@ -2066,6 +2109,91 @@ volume_db = -10.0
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/SaveButton"]
 stream = ExtResource( 36 )
 volume_db = -10.0
+
+[node name="ItemPicker" type="TextureRect" parent="UI"]
+visible = false
+margin_left = 773.0
+margin_top = 542.0
+margin_right = 3162.0
+margin_bottom = 752.0
+rect_rotation = 180.0
+rect_scale = Vector2( 0.333, 0.333 )
+texture = ExtResource( 11 )
+stretch_mode = 1
+script = ExtResource( 64 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+item_dragger_path = "res://scenes/editor/item_dragger.tscn"
+placeable_items = NodePath("../../PlaceableItems")
+
+[node name="Bottom" type="TextureRect" parent="UI/ItemPicker"]
+margin_left = 2389.0
+margin_right = 4783.0
+margin_bottom = 210.0
+rect_rotation = -180.0
+texture = ExtResource( 11 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/ItemPicker"]
+margin_left = 2294.0
+margin_top = 166.0
+margin_right = 3707.0
+margin_bottom = 512.0
+rect_rotation = -180.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="UI/ItemPicker/ScrollContainer"]
+custom_constants/vseparation = 12
+custom_constants/hseparation = 12
+columns = 4
+
+[node name="CloseButton" type="Button" parent="UI/ItemPicker"]
+show_behind_parent = true
+margin_left = 13.0
+margin_top = 175.0
+margin_right = 403.0
+margin_bottom = 320.0
+custom_styles/hover = SubResource( 34 )
+custom_styles/pressed = SubResource( 32 )
+custom_styles/normal = SubResource( 32 )
+custom_fonts/font = SubResource( 33 )
+script = ExtResource( 60 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="TextureRect" parent="UI/ItemPicker/CloseButton"]
+margin_left = 160.0
+margin_top = 115.0
+margin_right = 288.0
+margin_bottom = 243.0
+rect_rotation = -90.0
+rect_scale = Vector2( 0.55, 0.55 )
+texture = ExtResource( 26 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/ItemPicker/CloseButton"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/ItemPicker/CloseButton"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="Tween" type="Tween" parent="UI/ItemPicker"]
+
+[node name="DraggedItem" type="Sprite" parent="UI"]
+modulate = Color( 1, 1, 1, 0.501961 )
+position = Vector2( -26.9707, 159.734 )
+script = ExtResource( 65 )
 
 [node name="Grid" type="ParallaxBackground" parent="."]
 layer = 99
@@ -2094,4 +2222,4 @@ z_index = -1
 script = ExtResource( 8 )
 
 [node name="Backgrounds" parent="." instance=ExtResource( 52 )]
-position = Vector2( -51.3474, 82.6023 )
+position = Vector2( -63.2031, 71.7084 )
