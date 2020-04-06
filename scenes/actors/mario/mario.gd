@@ -127,6 +127,7 @@ export var rotating_jump = false
 onready var collision_shape = $Collision
 onready var collision_raycast = $GroundCollision
 onready var ground_check = $GroundCheck
+onready var ground_check_dive = $GroundCheckDive
 onready var left_check = $LeftCheck
 onready var right_check = $RightCheck
 onready var left_collision = $LeftCollision
@@ -207,8 +208,11 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	right_collision.disabled = false
 
 func is_grounded():
-	ground_check.force_raycast_update()
-	return ground_check.is_colliding() and velocity.y >= 0
+	var raycast_node = ground_check
+	if !dive_collision_shape.disabled:
+		raycast_node = ground_check_dive
+	raycast_node.force_raycast_update()
+	return raycast_node.is_colliding() and velocity.y >= 0
 
 func is_ceiling():
 	return test_move(self.transform, Vector2(0, -0.1)) and collided_last_frame
