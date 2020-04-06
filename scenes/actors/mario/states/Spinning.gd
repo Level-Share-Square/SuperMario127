@@ -69,5 +69,7 @@ func _general_update(delta):
 			spin_timer = 0
 	if character.spin or character.spin_just_pressed:
 		spin_timer = 0.15	
+	if character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0)):
+		spin_timer = 0
 	if character.is_grounded():
 		can_boost = true
