@@ -201,6 +201,10 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		acceleration = luigi_accel
 		friction = luigi_fric
 		real_friction = luigi_fric
+		collision_shape.disabled = false
+		collision_raycast.disabled = false
+		left_collision.disabled = false
+		right_collision.disabled = false
 
 func is_grounded():
 	ground_check.force_raycast_update()

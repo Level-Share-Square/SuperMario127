@@ -34,19 +34,17 @@ extents = Vector2( 17, 5 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5.5, 1 )
 
-[sub_resource type="RayShape2D" id=8]
-custom_solver_bias = 0.5
+[sub_resource type="RayShape2D" id=5]
 length = 15.0
 
-[sub_resource type="RayShape2D" id=5]
-custom_solver_bias = 0.5
+[sub_resource type="RayShape2D" id=6]
 length = 6.0
 
-[sub_resource type="RayShape2D" id=6]
+[sub_resource type="RayShape2D" id=7]
 custom_solver_bias = 0.5
 length = 7.0
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 8.5, 20 )
 
 [node name="Character" type="KinematicBody2D"]
@@ -81,6 +79,7 @@ luigi_speed = 216.0
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, -4 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="CollisionDive" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, -7 )
@@ -89,21 +88,27 @@ disabled = true
 
 [node name="GroundCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 8 )
-shape = SubResource( 8 )
+shape = SubResource( 5 )
+disabled = true
+one_way_collision_margin = 0.0
 
 [node name="LeftCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 8 )
 rotation = -1.5708
-shape = SubResource( 5 )
+shape = SubResource( 6 )
+disabled = true
+one_way_collision_margin = 0.0
 
 [node name="RightCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 8 )
 rotation = 1.5708
-shape = SubResource( 5 )
+shape = SubResource( 6 )
+disabled = true
+one_way_collision_margin = 0.0
 
 [node name="GroundCollisionDive" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 0 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
@@ -163,7 +168,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollision"]
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0.5, 4 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="Bubble" type="Sprite" parent="."]
 
