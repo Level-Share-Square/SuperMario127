@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mushroom_curve_cave.png-404d502ae1387dd9ad51becbd0ff0332.stex"
+path="res://.import/middle.png-c093ba562a40dcdea32e2209adc5ad7b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/mushroom_curve/mushroom_curve_cave.png"
-dest_files=[ "res://.import/mushroom_curve_cave.png-404d502ae1387dd9ad51becbd0ff0332.stex" ]
+source_file="res://scenes/actors/objects/cloud_platform/middle.png"
+dest_files=[ "res://.import/middle.png-c093ba562a40dcdea32e2209adc5ad7b.stex" ]
 
 [params]
 

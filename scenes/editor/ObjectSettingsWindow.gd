@@ -18,17 +18,18 @@ func _ready():
 	delete_button_node.connect("pressed", self, "delete_pressed")
 	
 func _process(delta):
-	if object and preview_object:
-		preview_object.scale = Vector2(2.5, 2.5) * object.scale
-		preview_object.rotation_degrees = object.rotation_degrees
-		preview_object.visible = object.visible
+	if object != null and object.get_ref() and preview_object:
+		var obj_node = object.get_ref()
+		preview_object.scale = Vector2(2.5, 2.5) * obj_node.scale
+		preview_object.rotation_degrees = obj_node.rotation_degrees
+		preview_object.visible = obj_node.visible
 	
 func delete_pressed():
 	close()
+	shared_node.destroy_object(object.get_ref(), true)
 	object = null
 	preview_object.queue_free()
 	preview_object = null
-	shared_node.destroy_object(object, true)
 
 func open_object(object: GameObject):
 	for property in grid_container_node.get_children():
@@ -50,7 +51,7 @@ func open_object(object: GameObject):
 	preview_object.scale = Vector2(2.5, 2.5) * object.scale
 	preview_node.add_child(preview_object)
 
-	self.object = object
+	self.object = weakref(object)
 	for key in (object.editable_properties + object.base_editable_properties):
 		var property = property_scene.instance()
 		property.object = object
