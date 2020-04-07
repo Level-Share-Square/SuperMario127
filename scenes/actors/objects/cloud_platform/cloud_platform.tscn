@@ -16,7 +16,7 @@ extents = Vector2( 32, 16 )
 script = ExtResource( 2 )
 
 [node name="CloudPlatform" type="Node2D" parent="."]
-position = Vector2( -32, -6 )
+position = Vector2( -32, -4 )
 z_index = -1
 script = ExtResource( 5 )
 middle_texture = ExtResource( 3 )
@@ -24,12 +24,12 @@ base_collision_width = 46
 part_width = 18
 
 [node name="LeftSprite" type="Sprite" parent="CloudPlatform"]
-position = Vector2( 0, -6 )
+position = Vector2( 0, -8 )
 texture = ExtResource( 4 )
 centered = false
 
 [node name="RightSprite" type="Sprite" parent="CloudPlatform"]
-position = Vector2( 40, -6 )
+position = Vector2( 40, -8 )
 texture = ExtResource( 1 )
 centered = false
 

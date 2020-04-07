@@ -32,7 +32,7 @@ func update_parts():
 		part.centered = false
 		part.texture = middle_texture
 		part.position.x = left_width + (part_width * index)
-		part.position.y = -6
+		part.position.y = -8
 		parts_holder.add_child(part)
 	right.position.x = left_width + (part_width * parts)
 	

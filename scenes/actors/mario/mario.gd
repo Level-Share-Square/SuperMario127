@@ -316,7 +316,7 @@ func _physics_process(delta: float):
 			
 		if is_grounded():
 			velocity.y += abs(sprite_rotation) * 100 # this is required to keep mario from falling off slopes
-			
+		
 		sprite.rotation = lerp(sprite.rotation, sprite_rotation, delta * rotation_interpolation_speed)
 			
 	# Inputs

@@ -1031,17 +1031,17 @@ font_data = ExtResource( 4 )
 size = 64
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=34]
+[sub_resource type="StyleBoxFlat" id=32]
 bg_color = Color( 0, 0.033, 0.22, 1 )
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id=32]
+[sub_resource type="StyleBoxFlat" id=33]
 bg_color = Color( 0, 0.0470588, 0.317647, 1 )
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="DynamicFont" id=33]
+[sub_resource type="DynamicFont" id=34]
 size = 128
 font_data = ExtResource( 4 )
 
@@ -1194,8 +1194,8 @@ preview = ExtResource( 71 )
 script = ExtResource( 3 )
 object_id = 7
 is_object = true
-object_center = Vector2( 20, 0 )
-tile_mode_offset = Vector2( 4, -16 )
+object_center = Vector2( 16, 0 )
+tile_mode_offset = Vector2( 0, -16 )
 z_index = -1
 change_to = "MushroomCurve"
 icon = ExtResource( 73 )
@@ -1205,8 +1205,8 @@ preview = ExtResource( 69 )
 script = ExtResource( 3 )
 object_id = 8
 is_object = true
-object_center = Vector2( 28, 20 )
-tile_mode_offset = Vector2( 12, 4 )
+object_center = Vector2( 30, 18 )
+tile_mode_offset = Vector2( 14, 2 )
 z_index = -1
 change_to = "MushroomTop"
 icon = ExtResource( 74 )
@@ -2210,10 +2210,10 @@ margin_left = 13.0
 margin_top = 175.0
 margin_right = 403.0
 margin_bottom = 320.0
-custom_styles/hover = SubResource( 34 )
-custom_styles/pressed = SubResource( 32 )
-custom_styles/normal = SubResource( 32 )
-custom_fonts/font = SubResource( 33 )
+custom_styles/hover = SubResource( 32 )
+custom_styles/pressed = SubResource( 33 )
+custom_styles/normal = SubResource( 33 )
+custom_fonts/font = SubResource( 34 )
 script = ExtResource( 60 )
 __meta__ = {
 "_edit_use_anchors_": false
