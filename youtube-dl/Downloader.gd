@@ -14,7 +14,6 @@ func download_from_web(url : String, destination : String ="user://", filename :
 	threads.append(thread)
 
 func _dl_thread(arguments):
-	
 	var percent_loaded = 0
 
 	var url = arguments[0]
