@@ -72,4 +72,4 @@ func _physics_process(delta):
 		var perp = Vector2(-diff.y, diff.x)
 		var d = (p - p1).dot(perp)
 		
-		collision_shape.disabled = sign(d) == 1
+		collision_shape.disabled = sign(d) == 1 or character.velocity.y < 0
