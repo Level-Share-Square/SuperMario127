@@ -24,7 +24,6 @@ func exit_area(body):
 func _physics_process(delta):
 	if character != null:
 		var direction = transform.y.normalized()
-		print(direction)
 		var line_center = position + (direction * buffer)
 		var line_direction = Vector2(-direction.y, direction.x)
 		var p1 = line_center + line_direction

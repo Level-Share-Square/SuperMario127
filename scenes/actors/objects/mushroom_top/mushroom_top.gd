@@ -33,3 +33,8 @@ func _physics_process(delta):
 		var d = (p - p1).dot(perp)
 		
 		collision_shape.disabled = sign(d) == 1
+
+		if character.velocity.y < -10 and direction.y > 0:
+			collision_shape.disabled = true
+		if character.velocity.y > 10 and direction.y < 0:
+			collision_shape.disabled = true
