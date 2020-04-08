@@ -23,10 +23,6 @@ onready var topbar_tween = $TweenTopbar
 onready var bottombar_tween = $TweenBottombar
 onready var info_tween = $TweenShineInfo
 
-onready var ip_address = $IpAddress
-onready var connect_button = $ConnectButton
-onready var host_button = $HostButton
-
 export var chat_path : NodePath
 onready var chat_node = get_node(chat_path)
 

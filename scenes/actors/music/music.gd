@@ -21,9 +21,7 @@ func get_song(song_id: int):
 
 func _ready():
 	orig_volume = volume_db
-	var _connect = connect("music_changed", self, "change_song")
-	
-	var _connect2 = downloader.connect("request_completed", self, "load_ogg")
+	var _connect = downloader.connect("request_completed", self, "load_ogg")
 	
 	#youtube_dl = YoutubeDl.new()
 	#youtube_dl.connect("download_complete", self, "download_complete")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=2]
+[gd_scene load_steps=112 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -83,18 +83,26 @@ use_filter = true
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 28
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=3]
 size = 20
 font_data = ExtResource( 4 )
 
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 0 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
 [sub_resource type="DynamicFont" id=4]
+size = 30
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=5]
 size = 112
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 16
 border_width_right = 16
@@ -104,29 +112,27 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=7]
 size = 32
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.513726, 0.0156863, 0.0156863, 1 )
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.698039, 0.2, 0.2, 1 )
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=10]
 size = 48
 font_data = ExtResource( 4 )
-
-[sub_resource type="StyleBoxEmpty" id=10]
 
 [sub_resource type="StyleBoxEmpty" id=11]
 
@@ -136,7 +142,9 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxEmpty" id=14]
 
-[sub_resource type="Theme" id=15]
+[sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="Theme" id=16]
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -528,11 +536,11 @@ VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/increment = null
 VScrollBar/icons/increment_highlight = null
-VScrollBar/styles/grabber = SubResource( 10 )
-VScrollBar/styles/grabber_highlight = SubResource( 11 )
-VScrollBar/styles/grabber_pressed = SubResource( 12 )
-VScrollBar/styles/scroll = SubResource( 13 )
-VScrollBar/styles/scroll_focus = SubResource( 14 )
+VScrollBar/styles/grabber = SubResource( 11 )
+VScrollBar/styles/grabber_highlight = SubResource( 12 )
+VScrollBar/styles/grabber_pressed = SubResource( 13 )
+VScrollBar/styles/scroll = SubResource( 14 )
+VScrollBar/styles/scroll_focus = SubResource( 15 )
 VSeparator/constants/separation = 4
 VSeparator/styles/separator = null
 VSlider/icons/grabber = null
@@ -555,8 +563,6 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
-[sub_resource type="StyleBoxEmpty" id=16]
-
 [sub_resource type="StyleBoxEmpty" id=17]
 
 [sub_resource type="StyleBoxEmpty" id=18]
@@ -573,7 +579,9 @@ WindowDialog/styles/panel = null
 
 [sub_resource type="StyleBoxEmpty" id=24]
 
-[sub_resource type="Theme" id=25]
+[sub_resource type="StyleBoxEmpty" id=25]
+
+[sub_resource type="Theme" id=26]
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -694,11 +702,11 @@ HScrollBar/icons/decrement = null
 HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
 HScrollBar/icons/increment_highlight = null
-HScrollBar/styles/grabber = SubResource( 16 )
-HScrollBar/styles/grabber_highlight = SubResource( 17 )
-HScrollBar/styles/grabber_pressed = SubResource( 18 )
-HScrollBar/styles/scroll = SubResource( 19 )
-HScrollBar/styles/scroll_focus = SubResource( 20 )
+HScrollBar/styles/grabber = SubResource( 17 )
+HScrollBar/styles/grabber_highlight = SubResource( 18 )
+HScrollBar/styles/grabber_pressed = SubResource( 19 )
+HScrollBar/styles/scroll = SubResource( 20 )
+HScrollBar/styles/scroll_focus = SubResource( 21 )
 HSeparator/constants/separation = 4
 HSeparator/styles/separator = null
 HSlider/icons/grabber = null
@@ -965,11 +973,11 @@ VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/increment = null
 VScrollBar/icons/increment_highlight = null
-VScrollBar/styles/grabber = SubResource( 21 )
-VScrollBar/styles/grabber_highlight = SubResource( 22 )
-VScrollBar/styles/grabber_pressed = SubResource( 22 )
-VScrollBar/styles/scroll = SubResource( 23 )
-VScrollBar/styles/scroll_focus = SubResource( 24 )
+VScrollBar/styles/grabber = SubResource( 22 )
+VScrollBar/styles/grabber_highlight = SubResource( 23 )
+VScrollBar/styles/grabber_pressed = SubResource( 23 )
+VScrollBar/styles/scroll = SubResource( 24 )
+VScrollBar/styles/scroll_focus = SubResource( 25 )
 VSeparator/constants/separation = 4
 VSeparator/styles/separator = null
 VSlider/icons/grabber = null
@@ -992,7 +1000,7 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
-[sub_resource type="StyleBoxFlat" id=26]
+[sub_resource type="StyleBoxFlat" id=27]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 5
 border_width_top = 5
@@ -1004,44 +1012,44 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="DynamicFont" id=27]
+[sub_resource type="DynamicFont" id=28]
 size = 32
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=28]
+[sub_resource type="StyleBoxFlat" id=29]
 bg_color = Color( 0.0705882, 0, 0.231373, 1 )
 corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[sub_resource type="StyleBoxFlat" id=29]
+[sub_resource type="StyleBoxFlat" id=30]
 bg_color = Color( 0, 0.0470588, 0.317647, 1 )
 corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[sub_resource type="DynamicFont" id=30]
+[sub_resource type="DynamicFont" id=31]
 size = 48
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=31]
+[sub_resource type="DynamicFont" id=32]
 size = 64
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=32]
+[sub_resource type="StyleBoxFlat" id=33]
 bg_color = Color( 0, 0.033, 0.22, 1 )
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id=33]
+[sub_resource type="StyleBoxFlat" id=34]
 bg_color = Color( 0, 0.0470588, 0.317647, 1 )
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="DynamicFont" id=34]
+[sub_resource type="DynamicFont" id=35]
 size = 128
 font_data = ExtResource( 4 )
 
@@ -1489,11 +1497,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MusicTitle" type="Label" parent="UI/LevelSettingsWindow/Contents/Music"]
-margin_left = 97.0
-margin_top = 279.0
-margin_right = 452.0
-margin_bottom = 330.0
+[node name="MusicNote" type="Label" parent="UI/LevelSettingsWindow/Contents/Music"]
+margin_left = 127.0
+margin_top = 340.0
+margin_right = 422.0
+margin_bottom = 378.0
 custom_fonts/font = SubResource( 2 )
 align = 1
 valign = 1
@@ -1501,14 +1509,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MusicNote" type="Label" parent="UI/LevelSettingsWindow/Contents/Music"]
-margin_left = 127.0
-margin_top = 340.0
-margin_right = 422.0
-margin_bottom = 378.0
-custom_fonts/font = SubResource( 3 )
+[node name="MusicTitle" type="LineEdit" parent="UI/LevelSettingsWindow/Contents/Music"]
+margin_left = 97.0
+margin_top = 279.0
+margin_right = 452.0
+margin_bottom = 330.0
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 align = 1
-valign = 1
+context_menu_enabled = false
+placeholder_text = "Custom Music URL"
+placeholder_alpha = 0.35
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1584,7 +1596,7 @@ margin_top = 27.0
 margin_right = 552.0
 margin_bottom = 451.0
 rect_scale = Vector2( 1.25, 1 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 align = 1
 valign = 1
 __meta__ = {
@@ -1775,8 +1787,8 @@ margin_left = 577.0
 margin_top = 134.0
 margin_right = 1025.0
 margin_bottom = 212.0
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 6 )
+custom_styles/normal = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
 context_menu_enabled = false
 placeholder_text = "Level Name"
@@ -1872,10 +1884,10 @@ margin_left = 32.0
 margin_top = 336.0
 margin_right = 320.0
 margin_bottom = 415.0
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
-custom_styles/normal = SubResource( 8 )
-custom_fonts/font = SubResource( 9 )
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/normal = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 text = "Delete"
 script = ExtResource( 60 )
 __meta__ = {
@@ -1895,7 +1907,7 @@ margin_left = 360.0
 margin_right = 1010.0
 margin_bottom = 420.0
 rect_clip_content = false
-theme = SubResource( 15 )
+theme = SubResource( 16 )
 scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1981,9 +1993,9 @@ margin_top = 122.0
 margin_right = 1000.0
 margin_bottom = 405.0
 rect_rotation = 0.0197835
-theme = SubResource( 25 )
-custom_styles/normal = SubResource( 26 )
-custom_fonts/font = SubResource( 27 )
+theme = SubResource( 26 )
+custom_styles/normal = SubResource( 27 )
+custom_fonts/font = SubResource( 28 )
 custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0.188235, 0.258824, 0.494118, 1 )
 custom_colors/completion_font_color = Color( 0, 0, 0, 1 )
@@ -1999,10 +2011,10 @@ margin_left = 534.307
 margin_top = 6.79156
 margin_right = 934.307
 margin_bottom = 96.7916
-custom_styles/hover = SubResource( 28 )
-custom_styles/pressed = SubResource( 29 )
-custom_styles/normal = SubResource( 29 )
-custom_fonts/font = SubResource( 30 )
+custom_styles/hover = SubResource( 29 )
+custom_styles/pressed = SubResource( 30 )
+custom_styles/normal = SubResource( 30 )
+custom_fonts/font = SubResource( 31 )
 shortcut_in_tooltip = false
 action_mode = 0
 text = "Load Level"
@@ -2026,10 +2038,10 @@ margin_left = 82.2546
 margin_top = 6.79156
 margin_right = 482.255
 margin_bottom = 96.7916
-custom_styles/hover = SubResource( 28 )
-custom_styles/pressed = SubResource( 29 )
-custom_styles/normal = SubResource( 29 )
-custom_fonts/font = SubResource( 30 )
+custom_styles/hover = SubResource( 29 )
+custom_styles/pressed = SubResource( 30 )
+custom_styles/normal = SubResource( 30 )
+custom_fonts/font = SubResource( 31 )
 shortcut_in_tooltip = false
 action_mode = 0
 text = "Copy Text"
@@ -2095,7 +2107,7 @@ margin_left = 22.0
 margin_top = 40.0
 margin_right = 136.0
 margin_bottom = 155.0
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 32 )
 custom_colors/font_color = Color( 0.258824, 0.270588, 0.658824, 1 )
 text = "1"
 align = 1
@@ -2210,10 +2222,10 @@ margin_left = 13.0
 margin_top = 175.0
 margin_right = 403.0
 margin_bottom = 320.0
-custom_styles/hover = SubResource( 32 )
-custom_styles/pressed = SubResource( 33 )
-custom_styles/normal = SubResource( 33 )
-custom_fonts/font = SubResource( 34 )
+custom_styles/hover = SubResource( 33 )
+custom_styles/pressed = SubResource( 34 )
+custom_styles/normal = SubResource( 34 )
+custom_fonts/font = SubResource( 35 )
 script = ExtResource( 60 )
 __meta__ = {
 "_edit_use_anchors_": false

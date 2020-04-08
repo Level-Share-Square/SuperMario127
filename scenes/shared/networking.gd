@@ -61,8 +61,9 @@ func _packet_recieved(_id, packet_ascii):
 		disconnect_from_peers()	
 		
 func disconnect_from_peers():
-	var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["disconnect"]).to_ascii())
-	get_tree().multiplayer.set_network_peer(null)
+	if get_tree().multiplayer.network_peer != null:
+		var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["disconnect"]).to_ascii())
+		get_tree().multiplayer.set_network_peer(null)
 	connected_type = "None"
 	PlayerSettings.other_player_id = -1
 	PlayerSettings.my_player_index = 0

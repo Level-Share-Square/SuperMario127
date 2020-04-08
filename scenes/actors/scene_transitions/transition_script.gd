@@ -4,7 +4,6 @@ onready var canvas_background = $Background
 onready var canvas_mask = $Light2D
 onready var canvas_tween = $Tween
 onready var music_tween = $MusicTween
-onready var bowser_laugh = $AudioStreamPlayer
 
 var can_load = true
 

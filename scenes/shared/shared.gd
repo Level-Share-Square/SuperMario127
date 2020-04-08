@@ -2,11 +2,9 @@ extends LevelDataLoader
 
 export var tilemaps : NodePath
 export var objects : NodePath
-export var background : NodePath
 
 onready var tilemaps_node = get_node(tilemaps)
 onready var objects_node = get_node(objects)
-onready var background_node = get_node(background)
 
 func get_objects_node():
 	return objects_node

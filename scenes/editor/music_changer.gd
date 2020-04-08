@@ -1,8 +1,5 @@
 extends Control
 
-export var shared_node_path : NodePath
-onready var shared_node = get_node(shared_node_path)
-
 onready var button_left = $Buttons/Left
 onready var button_right = $Buttons/Right
 

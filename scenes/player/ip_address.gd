@@ -1,7 +1,5 @@
 extends LineEdit
 
-onready var line_edit = $LineEdit
-
 func _ready():
 	text = PlayerSettings.connect_to_ip
 	var _connect = connect("focus_exited", self, "update_ip")

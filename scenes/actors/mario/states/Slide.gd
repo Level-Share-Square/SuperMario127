@@ -2,8 +2,6 @@ extends State
 
 class_name SlideState
 
-onready var dive_player = character.get_node("JumpSoundPlayer")
-
 var stop = false
 var getup_buffer = 0
 
