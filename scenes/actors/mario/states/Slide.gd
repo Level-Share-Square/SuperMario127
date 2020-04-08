@@ -14,9 +14,8 @@ func _ready():
 	disable_snap = false
 	override_rotation = true
 
-func _start(delta):
+func _start(_delta):
 	if character.state != character.get_state_node("Jump"):
-		var sprite = character.animated_sprite
 		character.friction = 4
 	
 func _update(delta):
@@ -26,7 +25,6 @@ func _update(delta):
 	else:
 		sprite.animation = "diveLeft"
 		
-	var ground_check = character.get_node("GroundCheck")
 	var sprite_rotation = 90
 	
 	if character.is_grounded():
@@ -51,7 +49,6 @@ func _stop(delta):
 	var left_collision = character.get_node("LeftCollision")
 	var right_collision = character.get_node("RightCollision")
 	var dive_ground_collision = character.get_node("GroundCollisionDive")
-	var sprite = character.animated_sprite
 	character.friction = character.real_friction
 	if character.is_grounded():
 		character.set_state_by_name("GetupState", delta)
@@ -66,7 +63,7 @@ func _stop(delta):
 		character.attacking = false
 	stop = false
 
-func _stop_check(delta):
+func _stop_check(_delta):
 	return abs(character.velocity.x) < 5 or stop
 
 func _general_update(delta):

@@ -36,17 +36,17 @@ func update_preview():
 	pass
 
 func _ready():
-	background_button_left.connect("pressed", self, "button_press")
-	background_button_right.connect("pressed", self, "button_press")
+	var _connect = background_button_left.connect("pressed", self, "button_press")
+	var _connect2 = background_button_right.connect("pressed", self, "button_press")
 	
-	foreground_button_left.connect("pressed", self, "button_press")
-	foreground_button_right.connect("pressed", self, "button_press")
+	var _connect3 = foreground_button_left.connect("pressed", self, "button_press")
+	var _connect4 = foreground_button_right.connect("pressed", self, "button_press")
 	
-	background_button_left.connect("mouse_entered", self, "button_hovered")
-	background_button_right.connect("mouse_entered", self, "button_hovered")
+	var _connect5 = background_button_left.connect("mouse_entered", self, "button_hovered")
+	var _connect6 = background_button_right.connect("mouse_entered", self, "button_hovered")
 	
-	foreground_button_left.connect("mouse_entered", self, "button_hovered")
-	foreground_button_right.connect("mouse_entered", self, "button_hovered")
+	var _connect7 = foreground_button_left.connect("mouse_entered", self, "button_hovered")
+	var _connect8 = foreground_button_right.connect("mouse_entered", self, "button_hovered")
 	update_preview()
 	
 func button_hovered():

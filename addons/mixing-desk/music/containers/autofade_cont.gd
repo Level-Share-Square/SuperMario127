@@ -14,7 +14,7 @@ export(float, 0.0, 1.0) var track_speed
 var param
 
 func _ready():
-	get_node("../..").connect("beat", self, "_update")
+	var _connect = get_node("../..").connect("beat", self, "_update")
 
 func _update(beat):
 	param = get_node(target_node).get(target_property)

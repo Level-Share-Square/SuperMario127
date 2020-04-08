@@ -41,8 +41,8 @@ func close():
 	visible = false
 
 func _ready():
-	close_button.connect("mouse_entered", self, "hovered")
-	close_button.connect("pressed", self, "pressed")
+	var _connect = close_button.connect("mouse_entered", self, "hovered")
+	var _connect2 = close_button.connect("pressed", self, "pressed")
 
 func hovered():
 	hover_sound.play()

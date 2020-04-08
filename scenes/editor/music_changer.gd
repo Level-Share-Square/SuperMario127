@@ -39,13 +39,13 @@ func text_entered(text):
 		update_display()
 
 func _ready():
-	button_left.connect("pressed", self, "button_press")
-	button_right.connect("pressed", self, "button_press")
+	var _connect = button_left.connect("pressed", self, "button_press")
+	var _connect2 = button_right.connect("pressed", self, "button_press")
 	
-	button_left.connect("mouse_entered", self, "button_hovered")
-	button_right.connect("mouse_entered", self, "button_hovered")
+	var _connect3 = button_left.connect("mouse_entered", self, "button_hovered")
+	var _connect4 = button_right.connect("mouse_entered", self, "button_hovered")
 	
-	music_title.connect("text_entered", self, "text_entered")
+	var _connect5 = music_title.connect("text_entered", self, "text_entered")
 	update_display()
 	
 func button_hovered():

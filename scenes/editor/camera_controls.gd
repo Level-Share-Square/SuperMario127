@@ -27,14 +27,14 @@ func _unhandled_input(event):
 	elif event.is_action_released("editor_right"):
 		right_held = false
 
-func load_in(level_data : LevelData, level_area : LevelArea):
+func load_in(_level_data : LevelData, level_area : LevelArea):
 	position.x = get_viewport_rect().size.x / 2
 	position.y = (level_area.settings.size.y * 32) - (get_viewport_rect().size.y / 2)
 	update_limits(level_area)
 	
 func update_limits(level_area : LevelArea):	
-	limit_right = level_area.settings.size.x * 32
-	limit_bottom = level_area.settings.size.y * 32
+	limit_right = int(level_area.settings.size.x * 32)
+	limit_bottom = int(level_area.settings.size.y * 32)
 	
 func check_borders():
 	var camera_left = position.x - (get_viewport_rect().size.x / 2)
@@ -51,7 +51,7 @@ func check_borders():
 	if camera_down > limit_bottom:
 		position.y = limit_bottom - (get_viewport_rect().size.y / 2)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if up_held:
 		position.y -= speed
 		check_borders()

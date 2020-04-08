@@ -13,7 +13,7 @@ func _pressed():
 	Networking.disconnect_from_peers()
 	pause_screen_node.toggle_pause()
 	
-func _process(delta):
+func _process(_delta):
 	if is_hovered() and !last_hovered:
 		hover_sound.play()	
 	last_hovered = is_hovered()

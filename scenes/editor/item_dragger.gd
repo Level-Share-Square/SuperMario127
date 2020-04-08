@@ -13,7 +13,7 @@ var last_clicking = false
 func _ready():
 	icon.texture = item.icon
 	
-func _process(delta):
+func _process(_delta):
 	if is_hovered() and !last_hovered:
 		sound.play()
 	last_hovered = is_hovered()

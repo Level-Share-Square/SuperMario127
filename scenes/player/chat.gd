@@ -9,10 +9,10 @@ var colors = [
 ]
 
 func _ready():
-	text_enter.connect("focus_entered", self, "_focused")
-	text_enter.connect("focus_exited", self, "_unfocused")
-	text_enter.connect("text_entered", self, "text_entered")
-	get_tree().multiplayer.connect("network_peer_packet", self, "_packet_recieved")
+	var _connect = text_enter.connect("focus_entered", self, "_focused")
+	var _connect2 = text_enter.connect("focus_exited", self, "_unfocused")
+	var _connect3 = text_enter.connect("text_entered", self, "text_entered")
+	var _connect4 = get_tree().multiplayer.connect("network_peer_packet", self, "_packet_recieved")
 
 func add_message(text, player_id):
 	text_label.bbcode_text += "\n"
@@ -25,9 +25,9 @@ func text_entered(text):
 	if text != "":
 		add_message(text, PlayerSettings.my_player_index)
 		text_enter.text = ""
-		get_tree().multiplayer.send_bytes(JSON.print(["send message", text]).to_ascii())
+		var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["send message", text]).to_ascii())
 
-func _process(delta):
+func _process(_delta):
 	if PlayerSettings.other_player_id != -1:
 		visible = true
 	else:
@@ -43,7 +43,7 @@ func _input(event):
 	if event.is_action_pressed("cancel_chat"):
 		text_enter.release_focus()
 
-func _packet_recieved(id, packet_ascii):
+func _packet_recieved(_id, packet_ascii):
 	var packet = JSON.parse(packet_ascii.get_string_from_ascii()).result
 	if packet[0] == "send message":
 		add_message(packet[1], 1 if PlayerSettings.my_player_index == 0 else 0)

@@ -12,10 +12,10 @@ func _ready():
 	override_rotation = true
 	blacklisted_states = ["DiveState", "GroundPoundState", "GroundPoundEndState"]
 
-func _start_check(delta):
+func _start_check(_delta):
 	return character.gp_just_pressed and !character.is_grounded()
 
-func _start(delta):
+func _start(_delta):
 	wait_timer = 0.35
 
 func _update(delta):
@@ -32,7 +32,7 @@ func _stop(delta):
 	sprite.rotation_degrees = 0
 	character.set_state_by_name("GroundPoundState", delta)
 
-func _stop_check(delta):
+func _stop_check(_delta):
 	return wait_timer <= 0
 
 func _general_update(delta):

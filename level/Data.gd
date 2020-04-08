@@ -103,7 +103,7 @@ func get_tiles(result) -> Array:
 	var tile_repeat = int(tile_repeat_string)
 	var tile = [tileset_id, tile_id]
 	var tiles = []
-	for iterator in range(tile_repeat):
+	for _iterator in range(tile_repeat):
 		tiles.append(tile)
 	return tiles
 
@@ -116,10 +116,8 @@ func get_object(result) -> LevelObject:
 
 func load_in(code):
 	var result
-	var is_json = false
 	if code[0] == "{":
 		result = JSON.parse(code).result
-		is_json = true
 	else:
 		result = rle_util.decode(code)
 
@@ -145,11 +143,11 @@ func load_in(code):
 func get_encoded_level_data():
 	
 	var level_string = ""
-	var format_version = "0.4.2"
+	var data_format_version = "0.4.2"
 	var level_name = name
 	
 	
-	level_string += format_version + ","
+	level_string += data_format_version + ","
 	level_string += level_name.percent_encode() + ","
 	
 	level_string += "["
@@ -203,7 +201,6 @@ func get_encoded_level_data():
 		level_string += "["
 		
 		# Settings
-		var level_size = settings.size
 		level_string += value_util.encode_value(settings.size) + ","
 		level_string += value_util.encode_value(settings.sky) + ","
 		level_string += value_util.encode_value(settings.background) + ","

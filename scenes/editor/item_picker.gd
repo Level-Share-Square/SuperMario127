@@ -28,7 +28,7 @@ func pressed():
 	close()
 
 func _ready():
-	close_button.connect("pressed", self, "pressed")
+	var _connect = close_button.connect("pressed", self, "pressed")
 	
 	var group_resource = load("res://scenes/editor/groups/" + group + ".tres")
 	

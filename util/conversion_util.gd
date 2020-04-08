@@ -55,6 +55,7 @@ static func convert_040_to_041(result):
 	for area_result in result.areas:
 		if typeof(area_result) == TYPE_DICTIONARY:
 			var new_objects = []
+			area_result.settings.music = int(area_result.settings.music)
 			for object_result in area_result.objects:
 				var object = object_result
 				object.properties[2] = int(object.properties[2])

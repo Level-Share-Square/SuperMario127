@@ -20,7 +20,7 @@ export(String) var bus = "Music"
 func _ready():
 	if auto_transition:
 		var sig_node = get_node(auto_signal_node)
-		sig_node.connect(auto_signal, self, "_transition", [transition_type])
+		var _connect = sig_node.connect(auto_signal, self, "_transition", [transition_type])
 	var busnum = AudioServer.get_bus_index(bus)
 	if busnum == -1:
 		var new_bus = AudioServer.add_bus(AudioServer.bus_count)

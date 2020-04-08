@@ -21,9 +21,9 @@ func get_song(song_id: int):
 
 func _ready():
 	orig_volume = volume_db
-	connect("music_changed", self, "change_song")
+	var _connect = connect("music_changed", self, "change_song")
 	
-	downloader.connect("request_completed", self, "load_ogg")
+	var _connect2 = downloader.connect("request_completed", self, "load_ogg")
 	
 	#youtube_dl = YoutubeDl.new()
 	#youtube_dl.connect("download_complete", self, "download_complete")
@@ -66,7 +66,7 @@ func change_song(old_setting):
 	else:
 		bus = edit_bus
 
-func _process(delta):
+func _process(_delta):
 	var current_song = CurrentLevelData.level_data.areas[0].settings.music
 	if loading and OS.has_feature("JavaScript"):
 		AudioServer.set_bus_mute(0, true)

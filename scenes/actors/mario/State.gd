@@ -30,20 +30,20 @@ func handle_update(delta: float):
 		if character.state == self and _stop_check(delta):
 			character.set_state(null, delta)
 	_general_update(delta)
-func _start_check(delta: float):
+func _start_check(_delta: float):
 	pass
 	
-func _start(delta: float):
+func _start(_delta: float):
 	pass
 	
-func _update(delta: float):
+func _update(_delta: float):
 	pass
 	
-func _stop_check(delta: float):
+func _stop_check(_delta: float):
 	pass
 	
-func _stop(delta: float):
+func _stop(_delta: float):
 	pass
 	
-func _general_update(delta: float):
+func _general_update(_delta: float):
 	pass

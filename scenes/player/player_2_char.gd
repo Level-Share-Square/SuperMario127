@@ -15,8 +15,8 @@ var value_to_names = [
 func _ready():
 	value = PlayerSettings.player2_character
 	value_text.text = value_to_names[value]
-	left.connect("pressed", self, "decrease_value")
-	right.connect("pressed", self, "increase_value")
+	var _connect = left.connect("pressed", self, "decrease_value")
+	var _connect2 = right.connect("pressed", self, "increase_value")
 	
 func decrease_value():
 	value -= 1

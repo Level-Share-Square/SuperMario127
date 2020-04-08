@@ -10,7 +10,7 @@ var value = true
 var last_hovered = false
 
 func _ready():
-	button_node.connect("pressed", self, "pressed")
+	var _connect = button_node.connect("pressed", self, "pressed")
 	
 func pressed():
 	click_sound.play()

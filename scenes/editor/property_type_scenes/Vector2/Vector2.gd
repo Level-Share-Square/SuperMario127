@@ -7,8 +7,8 @@ onready var x_edit_node : LineEdit = get_node(x_edit)
 onready var y_edit_node : LineEdit = get_node(y_edit)
 
 func _ready():
-	x_edit_node.connect("focus_exited", self, "update_value")
-	y_edit_node.connect("focus_exited", self, "update_value")
+	var _connect = x_edit_node.connect("focus_exited", self, "update_value")
+	var _connect2 = y_edit_node.connect("focus_exited", self, "update_value")
 
 func set_value(value: Vector2):
 	x_edit_node.text = str(value.x)

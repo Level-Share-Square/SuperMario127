@@ -10,7 +10,7 @@ func _ready():
 	disable_turning = true
 	override_rotation = true
 	
-func _start(delta):
+func _start(_delta):
 	var sprite = character.animated_sprite
 	var sound_player = character.get_node("Sounds")
 	sound_player.play_dive_sound()
@@ -42,11 +42,11 @@ func _update(delta):
 		else:
 			sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 360, 12 * delta) * character.facing_direction
 
-func _stop(delta):
+func _stop(_delta):
 	var sprite = character.animated_sprite
 	sprite.rotation_degrees = 0
 
-func _stop_check(delta):
+func _stop_check(_delta):
 	return character.velocity.y > 0 or character.is_grounded()
 
 func _general_update(delta):

@@ -4,7 +4,7 @@ onready var line_edit = $LineEdit
 
 func _ready():
 	line_edit.text = CurrentLevelData.level_data.name
-	line_edit.connect("focus_exited", self, "update_name")
+	var _connect = line_edit.connect("focus_exited", self, "update_name")
 	
 func update_name():
 	CurrentLevelData.level_data.name = line_edit.text

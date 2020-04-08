@@ -8,7 +8,7 @@ var ready = false
 func _ready():
 	ready = true
 
-func load_in(level_data : LevelData, level_area : LevelArea):
+func load_in(_level_data : LevelData, level_area : LevelArea):
 	update_background(level_area)
 
 func update_background(area):

@@ -25,7 +25,7 @@ func _ready():
 func lerp(a, b, t):
 	return (1 - t) * a + t * b
 
-func _start_check(delta):
+func _start_check(_delta):
 	return ledge_buffer > 0 and (jump_buffer > 0 or (dive_buffer > 0 and abs(character.velocity.x) > 50 and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0))))
 
 func _start(delta):
@@ -75,7 +75,7 @@ func _start(delta):
 		character.jump_animation = 0
 	ledge_buffer = 0
 
-func _update(delta):
+func _update(_delta):
 	var sprite = character.animated_sprite
 	if jump_playing and character.velocity.y < 0 and !character.is_grounded():
 		if character.facing_direction == 1:
@@ -103,7 +103,7 @@ func _update(delta):
 	else:
 		jump_playing = false
 
-func _stop_check(delta):
+func _stop_check(_delta):
 	return character.velocity.y > 0
 
 func _general_update(delta):

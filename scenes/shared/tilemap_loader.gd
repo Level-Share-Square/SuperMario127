@@ -59,7 +59,7 @@ func set_tile(index: int, layer: int, tileset_id: int, tile_id: int):
 		tiles_array = level_area.very_foreground_tiles
 		
 	if index + 1 >= tiles_array.size():
-		for new_index in range(tiles_array.size(), index + 1):
+		for _new_index in range(tiles_array.size(), index + 1):
 			tiles_array.append([0, 0])
 	var size = level_area.settings.size
 	if position.x > size.x or position.y > size.y:
@@ -83,10 +83,10 @@ func set_tile_visual(index: int, layer: int, tileset_id: int, tile_id: int):
 		place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, layer_tilemap_node)
 		layer_tilemap_node.update_bitmask_area(Vector2(position.x, position.y))
 
-func load_in(level_data : LevelData, level_area : LevelArea):
+func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
 	
-	self.level_data = level_data
-	self.level_area = level_area
+	level_data = loaded_level_data
+	level_area = loaded_level_area
 	
 	update_tilemaps()
 

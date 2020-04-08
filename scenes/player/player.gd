@@ -30,10 +30,10 @@ func _unhandled_input(event):
 		elif PlayerSettings.number_of_players == 2:
 			get_node(character2).kill("reload")
 		if PlayerSettings.other_player_id != -1:
-			get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())
+			var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())
 
 func switch_scenes():
-	get_tree().change_scene("res://scenes/editor/editor.tscn")
+	var _change_scene = get_tree().change_scene("res://scenes/editor/editor.tscn")
 
 func reload_scene():
-	get_tree().reload_current_scene()
+	var _reload = get_tree().reload_current_scene()

@@ -58,26 +58,26 @@ func _set_properties():
 func _set_property_values():
 	pass
 	
-func _process(delta):
+func _process(_delta):
 	emit_signal("process")
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	emit_signal("physics_process")
 
 func _init_signals():
 	var index = 0
 	for signal_name in (base_connectable_signals + connectable_signals):
-		connect(signal_name, self, "on_signal_fire", [index])
+		var _connect = connect(signal_name, self, "on_signal_fire", [index])
 		index += 1
 
 func on_signal_fire(index):
-	var mode = get_tree().get_current_scene().mode
-	if mode == 0:
+	var current_mode = get_tree().get_current_scene().mode
+	if current_mode == 0:
 		var functions = level_object.player_signal_connections[index]
 		for function_name in functions:
 			var function_struct = level_data.functions[function_name]
 			interpreter_util.run_function(function_struct, self)
-	elif mode == 1:
+	elif current_mode == 1:
 		var functions = level_object.editor_signal_connections[index]
 		for function_name in functions:
 			var function_struct = level_data.functions[function_name]

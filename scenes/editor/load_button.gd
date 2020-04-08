@@ -19,7 +19,7 @@ func _pressed():
 	CurrentLevelData.level_data = level_data
 	music.loading = true
 	yield(get_tree().create_timer(0.1), "timeout")
-	get_tree().reload_current_scene()
+	var _reload = get_tree().reload_current_scene()
 
 func update_text():
 	music.loading = true
@@ -29,11 +29,11 @@ func update_text():
 	music.loading = false
 	
 func _ready():
-	window_node.connect("window_opened", self, "update_text")
+	var _connect = window_node.connect("window_opened", self, "update_text")
 	yield(get_tree().create_timer(0.1), "timeout")
 	music.loading = false
 
-func _process(delta):
+func _process(_delta):
 	if is_hovered() and !last_hovered:
 		hover_sound.play()
 	last_hovered = is_hovered()

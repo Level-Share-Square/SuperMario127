@@ -78,7 +78,7 @@ func _ready():
 		PlayerSettings.number_of_players = 2
 		remove_player()
 
-func _process(delta):
+func _process(_delta):
 	if PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
 		if Input.is_action_just_pressed("(disabled)copy_level"):
 			remove_player()

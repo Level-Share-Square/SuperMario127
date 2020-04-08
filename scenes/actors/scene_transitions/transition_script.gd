@@ -34,7 +34,7 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time):
 	music.loading = true
 	yield(get_tree().create_timer(0.1), "timeout")
 	
-	get_tree().reload_current_scene()
+	var _reload = get_tree().reload_current_scene()
 	
 	yield(get_tree().create_timer(0.1), "timeout")
 	get_tree().paused = false

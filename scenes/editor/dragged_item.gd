@@ -6,7 +6,7 @@ var dragging = false
 func _ready():
 	editor = get_tree().get_current_scene()
 	
-func _process(delta):
+func _process(_delta):
 	var item = editor.dragging_item
 	if item != null and !dragging:
 		texture = item.preview

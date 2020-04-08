@@ -15,8 +15,8 @@ signal ready
 var ready = false
 
 func _init():
-	_downloader.connect("request_completed", self, "_http_download_complete")
-	connect("download_complete", self, "loldelete")
+	var _connect = _downloader.connect("request_completed", self, "_http_download_complete")
+	var _connect2 = connect("download_complete", self, "loldelete")
 
 	# Download youtube-dl
 	if current_os == "X11" or current_os == "OSX":

@@ -20,7 +20,7 @@ func _pressed():
 	character_node.dead = false
 	character_node.kill("reload")
 	
-func _process(delta):
+func _process(_delta):
 	if is_hovered() and !last_hovered:
 		hover_sound.play()	
 	last_hovered = is_hovered()

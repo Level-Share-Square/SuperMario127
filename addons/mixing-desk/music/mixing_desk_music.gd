@@ -48,7 +48,7 @@ func _ready():
 	var root = Node.new()
 	root.name = "root"
 	add_child(root)
-	shuff.connect("timeout", self, "shuffle_songs")
+	var _connect = shuff.connect("timeout", self, "shuffle_songs")
 	for song in songs:
 		for i in song.get_children():
 			if i.cont == "core":
@@ -71,7 +71,7 @@ func init_song(track):
 	var root = song._get_core()
 	current_song_num = track
 	current_song = songs[track]._get_core()
-	current_song.get_child(0).connect("finished", self, "_core_finished")
+	var _connect = current_song.get_child(0).connect("finished", self, "_core_finished")
 	repeats= 0
 	for i in root.get_children():
 		if song.fading_out:
@@ -125,7 +125,7 @@ func _iplay(track):
 	twe.name = "Tween"
 	trk.add_child(twe)
 	trk.play()
-	trk.connect("finished", self, "_overlay_finished", [trk])
+	var _connect = trk.connect("finished", self, "_overlay_finished", [trk])
 
 #kills overlays when finished
 func _overlay_finished(trk):
@@ -136,7 +136,7 @@ func _stop_overlays():
 	for i in get_node("root").get_children():
 		i.get_node("Tween").interpolate_property(i, "volume_db", i.volume_db, -60, transition_beats, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		i.get_node("Tween").start()
-		i.get_node("Tween").connect("tween_completed", self, "_overlay_faded", [i])
+		var _connect = i.get_node("Tween").connect("tween_completed", self, "_overlay_faded", [i])
 
 #delete overlay on fade
 func _overlay_faded(object, key, overlay):
@@ -216,7 +216,7 @@ func _play_overlays(song):
 func _play_concat(concat):
 	var rantrk = _get_rantrk(concat)
 	rantrk.play()
-	rantrk.connect("finished", self, "concat_fin", [concat])
+	var _connect = rantrk.connect("finished", self, "concat_fin", [concat])
 
 func _concat_fin(concat):
 	for i in concat.get_children():

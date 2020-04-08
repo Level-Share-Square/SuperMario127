@@ -2,7 +2,6 @@ extends KinematicBody2D
 
 class_name Character
 
-signal died
 signal state_changed
 
 onready var states_node = $States
@@ -152,7 +151,7 @@ export var rotation_interpolation_speed = 15
 #spin, spin_just_pressed
 #)
 
-slave func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_big_attacking, is_dead, is_controllable):
+puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_big_attacking, is_dead, is_controllable): # Ok slave
 	next_position = pos
 	velocity = vel
 	sprite.animation = sprite_animation
@@ -163,11 +162,11 @@ slave func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_at
 	dead = is_dead
 	controllable = is_controllable
 
-func load_in(level_data : LevelData, level_area : LevelArea):
+func load_in(_level_data : LevelData, level_area : LevelArea):
 	level_size = level_area.settings.size
 	for exception in collision_exceptions:
 		add_collision_exception_with(get_node(exception))
-	player_collision.connect("body_entered", self, "player_hit")
+	var _connect = player_collision.connect("body_entered", self, "player_hit")
 		
 	if character == 0:
 		var sound_scene = load(mario_sounds)
@@ -234,15 +233,15 @@ func hide():
 func show():
 	visible = true
 
-func set_state(state, delta: float):
-	last_state = self.state
-	self.state = null
+func set_state(new_state, delta: float):
+	last_state = state
+	state = null
 	if last_state != null:
 		last_state._stop(delta)
-	if state != null:
-		self.state = state
-		state._start(delta)
-	emit_signal("state_changed", state, last_state)
+	if new_state != null:
+		state = new_state
+		new_state._start(delta)
+	emit_signal("state_changed", new_state, last_state)
 
 func get_state_node(name: String):
 	if states_node.has_node(name):

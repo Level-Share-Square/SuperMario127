@@ -7,9 +7,9 @@ func start_server():
 	network = NetworkedMultiplayerENet.new()
 	network.create_server(4242, 2)
 	get_tree().set_network_peer(network)
-	get_tree().multiplayer.connect("network_peer_connected", self, "_peer_connected")
-	get_tree().multiplayer.connect("network_peer_disconnected", self, "_peer_disconnected")
-	get_tree().multiplayer.connect("network_peer_packet", self, "_packet_recieved")
+	var _connect1 = get_tree().multiplayer.connect("network_peer_connected", self, "_peer_connected")
+	var _connect2 = get_tree().multiplayer.connect("network_peer_disconnected", self, "_peer_disconnected")
+	var _connect3 = get_tree().multiplayer.connect("network_peer_packet", self, "_packet_recieved")
 	print("Hosting!")
 	connected_type = "Server"
 	
@@ -17,9 +17,9 @@ func start_client(ip):
 	network = NetworkedMultiplayerENet.new()
 	network.create_client(ip, 4242)
 	get_tree().set_network_peer(network)
-	get_tree().multiplayer.connect("network_peer_connected", self, "_peer_connected")
-	get_tree().multiplayer.connect("network_peer_disconnected", self, "_peer_disconnected")
-	get_tree().multiplayer.connect("network_peer_packet", self, "_packet_recieved")
+	var _connect1 = get_tree().multiplayer.connect("network_peer_connected", self, "_peer_connected")
+	var _connect2 = get_tree().multiplayer.connect("network_peer_disconnected", self, "_peer_disconnected")
+	var _connect3 = get_tree().multiplayer.connect("network_peer_packet", self, "_packet_recieved")
 	print("Searching...")
 	connected_type = "Client"
 	
@@ -29,8 +29,8 @@ func _peer_connected(id):
 	if connected_type == "Server":
 		PlayerSettings.my_player_index = 0
 		print("Player connected! ID: " + str(id))
-		get_tree().multiplayer.send_bytes(JSON.print(["load level", CurrentLevelData.level_data.get_encoded_level_data(), PlayerSettings.player1_character, PlayerSettings.player2_character]).to_ascii())
-		get_tree().reload_current_scene()
+		var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["load level", CurrentLevelData.level_data.get_encoded_level_data(), PlayerSettings.player1_character, PlayerSettings.player2_character]).to_ascii())
+		var _reload = get_tree().reload_current_scene()
 	else:
 		PlayerSettings.my_player_index = 1
 
@@ -40,7 +40,7 @@ func _peer_disconnected(id):
 	PlayerSettings.other_player_id = -1
 	PlayerSettings.my_player_index = 0
 
-func _packet_recieved(id, packet_ascii):
+func _packet_recieved(_id, packet_ascii):
 	var packet = JSON.parse(packet_ascii.get_string_from_ascii()).result
 	if packet[0] == "load level":
 		PlayerSettings.player1_character = packet[2]
@@ -50,8 +50,8 @@ func _packet_recieved(id, packet_ascii):
 		CurrentLevelData.level_data = level_data
 		music.loading = true
 		yield(get_tree().create_timer(0.1), "timeout")
-		get_tree().reload_current_scene()
-		get_tree().multiplayer.send_bytes(JSON.print(["level loaded"]).to_ascii())
+		var _reload = get_tree().reload_current_scene()
+		var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["level loaded"]).to_ascii())
 		get_tree().paused = false
 	elif packet[0] == "level loaded":
 		get_tree().paused = false
@@ -61,7 +61,7 @@ func _packet_recieved(id, packet_ascii):
 		disconnect_from_peers()	
 		
 func disconnect_from_peers():
-	get_tree().multiplayer.send_bytes(JSON.print(["disconnect"]).to_ascii())
+	var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["disconnect"]).to_ascii())
 	get_tree().multiplayer.set_network_peer(null)
 	connected_type = "None"
 	PlayerSettings.other_player_id = -1

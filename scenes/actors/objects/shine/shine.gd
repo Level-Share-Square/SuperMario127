@@ -33,7 +33,7 @@ func collect(body):
 
 func _ready():
 	if mode != 1:
-		area.connect("body_entered", self, "collect")
+		var _connect = area.connect("body_entered", self, "collect")
 
 func _physics_process(delta):
 	effects.rotation_degrees += 0.5

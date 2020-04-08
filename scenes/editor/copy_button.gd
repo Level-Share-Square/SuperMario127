@@ -13,7 +13,7 @@ func _pressed():
 	focus_mode = 0
 	clipboard_util.copy(text_edit_node.text)
 
-func _process(delta):
+func _process(_delta):
 	if is_hovered() and !last_hovered:
 		hover_sound.play()
 	last_hovered = is_hovered()

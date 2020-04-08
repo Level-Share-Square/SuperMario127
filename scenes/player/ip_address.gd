@@ -4,7 +4,7 @@ onready var line_edit = $LineEdit
 
 func _ready():
 	text = PlayerSettings.connect_to_ip
-	connect("focus_exited", self, "update_ip")
+	var _connect = connect("focus_exited", self, "update_ip")
 	
 func update_ip():
 	PlayerSettings.connect_to_ip = text

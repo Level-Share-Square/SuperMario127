@@ -100,6 +100,6 @@ func retry():
 		character2_node.kill("reload")
 
 func _ready():
-	resume_button.connect("pressed", self, "toggle_pause")
-	retry_button.connect("pressed", self, "retry")
+	var _connect = resume_button.connect("pressed", self, "toggle_pause")
+	var _connect2 = retry_button.connect("pressed", self, "retry")
 	FocusCheck.is_ui_focused = false

@@ -15,10 +15,10 @@ func _ready():
 	priority = 1
 	disable_turning = true
 
-func _start_check(delta):
+func _start_check(_delta):
 	return character.state == character.get_state_node("WallSlideState") and !(limit_y and character.position.y < position_on_wj.y and character_in_range) and press_buffer > 0
 
-func _start(delta):
+func _start(_delta):
 	var sound_player = character.get_node("Sounds")
 	press_buffer = 0
 	position_on_wj = character.position
@@ -34,7 +34,7 @@ func _start(delta):
 	limit_y = true
 	character.is_wj_chained = true
 
-func _update(delta):
+func _update(_delta):
 	var sprite = character.animated_sprite
 	if (direction_on_wj == 1):
 		sprite.animation = "jumpRight"
@@ -42,7 +42,7 @@ func _update(delta):
 		sprite.animation = "jumpLeft"
 	pass
 
-func _stop_check(delta):
+func _stop_check(_delta):
 	return wall_jump_timer <= 0 or character.is_walled() or character.is_grounded()
 	
 func _general_update(delta):

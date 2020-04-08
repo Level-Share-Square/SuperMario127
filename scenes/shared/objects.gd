@@ -7,12 +7,11 @@ var level_area : LevelArea
 
 var object_id_map : IdMap = load("res://scenes/actors/objects/ids.tres")
 
-func load_in(level_data : LevelData, level_area : LevelArea):
-	self.level_data = level_data
-	self.level_area = level_area
+func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
+	level_data = loaded_level_data
+	level_area = loaded_level_area
 	
-	var mode = get_tree().get_current_scene().mode
-	for object in level_area.objects:
+	for object in loaded_level_area.objects:
 		create_object(object, false)
 		
 func set_property(object_node : GameObject, property, value):

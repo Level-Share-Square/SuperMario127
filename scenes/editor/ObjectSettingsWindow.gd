@@ -15,9 +15,9 @@ onready var delete_button_node = get_node(delete_button)
 onready var shared_node = get_node(shared)
 
 func _ready():
-	delete_button_node.connect("pressed", self, "delete_pressed")
+	var _connect = delete_button_node.connect("pressed", self, "delete_pressed")
 	
-func _process(delta):
+func _process(_delta):
 	if object != null and object.get_ref() and preview_object:
 		var obj_node = object.get_ref()
 		preview_object.scale = Vector2(2.5, 2.5) * obj_node.scale
@@ -31,37 +31,37 @@ func delete_pressed():
 	preview_object.queue_free()
 	preview_object = null
 
-func open_object(object: GameObject):
+func open_object(object_to_open: GameObject):
 	for property in grid_container_node.get_children():
 		property.queue_free()
 
 	for child in preview_node.get_children():
 		child.queue_free()
 		
-	preview_object = object.duplicate()
+	preview_object = object_to_open.duplicate()
 	preview_object.mode = 1
-	for child in object.get_children():
+	for child in object_to_open.get_children():
 		preview_object.z_index += 10
 		preview_object.add_child(child)
 	preview_object.set_property("enabled", false, false)
-	preview_object.position = object.preview_position
+	preview_object.position = object_to_open.preview_position
 	preview_object.z_index += 10
 	preview_object.visible = true
 	preview_object.modulate = Color(1, 1, 1)
-	preview_object.scale = Vector2(2.5, 2.5) * object.scale
+	preview_object.scale = Vector2(2.5, 2.5) * object_to_open.scale
 	preview_node.add_child(preview_object)
 
-	self.object = weakref(object)
-	for key in (object.editable_properties + object.base_editable_properties):
+	object = weakref(object_to_open)
+	for key in (object_to_open.editable_properties + object_to_open.base_editable_properties):
 		var property = property_scene.instance()
-		property.object = object
+		property.object = object_to_open
 		property.key = key
 		grid_container_node.add_child(property)
-	for index in range(2): # this is so scrolling actually works properly
+	for _index in range(2): # this is so scrolling actually works properly
 		var blank_property = property_scene.instance()
 		blank_property.modulate.a = 0
 		blank_property.set_process(false)
-		blank_property.object = object
+		blank_property.object = object_to_open
 		blank_property.key = "position"
 		grid_container_node.add_child(blank_property)
 	open()

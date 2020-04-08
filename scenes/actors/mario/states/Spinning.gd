@@ -13,10 +13,10 @@ func _ready():
 	priority = 2
 	disable_animation = true
 
-func _start_check(delta):
+func _start_check(_delta):
 	return spin_timer > 0 and (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2 and !character.test_move(character.transform, Vector2(8, 0)) and !character.test_move(character.transform, Vector2(-8, 0))
 
-func _start(delta):
+func _start(_delta):
 	if can_boost == true and !character.is_grounded() and (character.state != character.get_state_node("Jump") or character.current_jump == 1):
 		can_boost = false
 		cooldown_timer = 0.5
@@ -32,7 +32,7 @@ func _start(delta):
 	character.attacking = true
 	spin_timer = 0.15
 	
-func _update(delta):
+func _update(_delta):
 	var sprite = character.animated_sprite
 	if character.is_grounded():
 		priority = 0
@@ -47,12 +47,12 @@ func _update(delta):
 	else:
 		character.gravity_scale = gravity_scale
 		
-func _stop(delta):
+func _stop(_delta):
 	character.gravity_scale = old_gravity_scale
 	priority = 2
 	character.attacking = false
 
-func _stop_check(delta):
+func _stop_check(_delta):
 	return spin_timer == 0 or character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0))
 	
 func _general_update(delta):

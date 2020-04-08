@@ -9,10 +9,10 @@ var wall_buffer = 0.0
 func _ready():
 	priority = 1
 
-func _start_check(delta):
+func _start_check(_delta):
 	return ((character.is_walled_right() and (character.move_direction == 1 or character.is_wj_chained)) or (character.is_walled_left() and (character.move_direction == -1 or character.is_wj_chained))) and !character.is_grounded() and (character.velocity.y > 0 or character.is_wj_chained) and character.jump_animation != 2
 
-func _start(delta):
+func _start(_delta):
 	character.velocity.y = character.velocity.y/3
 	if character.is_walled_right():
 		character.direction_on_stick = 1
@@ -43,10 +43,10 @@ func _update(delta):
 	else:
 		character.gravity_scale = gravity_scale
 
-func _stop(delta):
+func _stop(_delta):
 	character.gravity_scale = old_gravity_scale
 	wall_buffer = 0
 	pass
 
-func _stop_check(delta):
+func _stop_check(_delta):
 	return wall_buffer <= 0 or character.is_grounded()

@@ -34,7 +34,7 @@ func is_hovered():
 	else:
 		return false
 	
-func _process(delta):
+func _process(_delta):
 	if is_hovered() and !last_hovered:
 		sound.play()
 		tween.interpolate_property(icon, "offset",

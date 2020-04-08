@@ -1,7 +1,7 @@
 extends LineEdit
 
 func _ready():
-	connect("focus_exited", self, "update")
+	var _connect = connect("focus_exited", self, "update")
 	
 func update():
 	if !text.is_valid_integer():

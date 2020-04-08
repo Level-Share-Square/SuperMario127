@@ -28,14 +28,14 @@ func destroy_object_at_position(position, remove_from_data):
 	if object_node:
 		objects_node.destroy_object(object_node, remove_from_data)
 		
-func get_objects_overlapping_position(position):
-	var objects = []
+func get_objects_overlapping_position(_position):
+	var found_objects = []
 	for object_node in objects_node.get_children():
 		if (object_node.position - get_global_mouse_position()).length() <= 16:
-			objects.append(object_node)	
-	return objects
+			found_objects.append(object_node)	
+	return found_objects
 
-func destroy_objects_overlapping_position(position, remove_from_data):
+func destroy_objects_overlapping_position(_position, remove_from_data):
 	var objectsToDelete = []
 	for object_node in objects_node.get_children():
 		if (object_node.position - get_global_mouse_position()).length() <= 16:
@@ -57,8 +57,5 @@ func move_all_objects_by(offset):
 func update_tilemaps():
 	tilemaps_node.update_tilemaps()
 
-func update_background(area):
-	pass #background_node.update_background(area)
-
-func _process(delta):
+func _process(_delta):
 	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")

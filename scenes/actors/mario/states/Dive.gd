@@ -15,10 +15,10 @@ func _ready():
 	blacklisted_states = ["SlideState", "GetupState"]
 	override_rotation = true
 
-func _start_check(delta):
+func _start_check(_delta):
 	return dive_buffer > 0 and character.dive_cooldown <= 0 and !(abs(character.velocity.x) <= 150 and character.is_grounded()) and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0)) and !character.is_walled()
 
-func _start(delta):
+func _start(_delta):
 	var sound_player = character.get_node("Sounds")
 	var collision = character.get_node("Collision")
 	var dive_collision = character.get_node("CollisionDive")
@@ -94,7 +94,7 @@ func _stop(delta):
 		character.attacking = false
 		sprite.rotation_degrees = 0
 
-func _stop_check(delta):
+func _stop_check(_delta):
 	return character.is_grounded() or (character.is_walled_right() and character.facing_direction == 1) or (character.is_walled_left() and character.facing_direction == -1)
 
 func _general_update(delta):

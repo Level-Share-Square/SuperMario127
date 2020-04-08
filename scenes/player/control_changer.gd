@@ -7,8 +7,8 @@ onready var value_text = $Value
 
 func _ready():
 	value_text.text = str(PlayerSettings.control_mode + 1)
-	left.connect("pressed", self, "decrease_value")
-	right.connect("pressed", self, "increase_value")
+	var _connect = left.connect("pressed", self, "decrease_value")
+	var _connect2 = right.connect("pressed", self, "increase_value")
 	
 func decrease_value():
 	PlayerSettings.control_mode -= 1

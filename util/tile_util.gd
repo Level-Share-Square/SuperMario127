@@ -51,7 +51,7 @@ static func expand_down(area, tiles):
 	var new_tiles = []
 	for tile in tiles:
 		new_tiles.append(tile)
-	for index in range(area.settings.size.x):
+	for _index in range(area.settings.size.x):
 		new_tiles.append([0, 0])
 	return new_tiles
 
@@ -59,13 +59,13 @@ static func shrink_down(area, tiles):
 	var new_tiles = []
 	for tile in tiles:
 		new_tiles.append(tile)
-	for index in range(area.settings.size.x):
+	for _index in range(area.settings.size.x):
 		new_tiles.pop_back()
 	return new_tiles
 
 static func expand_up(area, tiles):
 	var new_tiles = []
-	for index in range(area.settings.size.x):
+	for _index in range(area.settings.size.x):
 		new_tiles.append([0, 0])
 	for tile in tiles:
 		new_tiles.append(tile)
@@ -75,6 +75,6 @@ static func shrink_up(area, tiles):
 	var new_tiles = []
 	for tile in tiles:
 		new_tiles.append(tile)
-	for index in range(area.settings.size.x):
+	for _index in range(area.settings.size.x):
 		new_tiles.pop_front()
 	return new_tiles

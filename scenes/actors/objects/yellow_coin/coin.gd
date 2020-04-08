@@ -23,7 +23,7 @@ func collect(body):
 		destroy_timer = 2
 		
 func _ready():
-	area.connect("body_entered", self, "collect")
+	var _connect = area.connect("body_entered", self, "collect")
 
 func _physics_process(delta):
 	if destroy_timer > 0:

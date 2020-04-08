@@ -10,10 +10,10 @@ func _ready():
 	disable_animation = true
 	blacklisted_states = []
 
-func _start_check(delta):
+func _start_check(_delta):
 	return false
 
-func _start(delta):
+func _start(_delta):
 	var sprite = character.sprite
 	if character.facing_direction == 1:
 		sprite.animation = "groundPoundRight"
@@ -23,7 +23,7 @@ func _start(delta):
 	character.attacking = true
 	character.big_attack = true
 
-func _update(delta):
+func _update(_delta):
 	character.attacking = true
 	character.big_attack = true
 
@@ -36,5 +36,5 @@ func _stop(delta):
 		character.jump_animation = 0
 		character.velocity.y = character.velocity.y / 4
 
-func _stop_check(delta):
+func _stop_check(_delta):
 	return character.is_grounded() or character.gp_cancel_just_pressed

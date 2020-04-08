@@ -12,10 +12,10 @@ func _ready():
 	disable_movement = true
 	blacklisted_states = []
 
-func _start_check(delta):
+func _start_check(_delta):
 	return false
 
-func _start(delta):
+func _start(_delta):
 	end_timer = 0.3
 	var sprite = character.sprite
 	if character.facing_direction == 1:
@@ -34,7 +34,7 @@ func _stop(delta):
 		character.position.y -= 1
 		character.velocity.y = -150
 
-func _stop_check(delta):
+func _stop_check(_delta):
 	return end_timer <= 0 or jump_timer > 0
 	
 func _general_update(delta):

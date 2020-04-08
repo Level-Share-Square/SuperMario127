@@ -4,14 +4,13 @@ func update_preview(item: Node):
 	if item:
 		texture = item.preview
 
-func _process(delta):
+func _process(_delta):
 	var editor = get_parent()
 	var selected_box = editor.selected_box
 	if selected_box:
 		if selected_box.item:
 			var item = selected_box.item
 			var mouse_pos = get_global_mouse_position()
-			var mouse_screen_pos = get_viewport().get_mouse_position()
 			var mouse_tile_pos = Vector2(floor(mouse_pos.x / 32), floor(mouse_pos.y / 32))
 			var mouse_grid_pos = Vector2((mouse_tile_pos.x * 32) + 16, (mouse_tile_pos.y * 32) + 16)
 			

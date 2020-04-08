@@ -35,29 +35,29 @@ func update_label():
 	size_label.text = "x: " + str(area.settings.size.x) + "\ny: " + str(area.settings.size.y)
 	
 func _ready():
-	button_left_out.connect("pressed", self, "button_press")
-	button_left_in.connect("pressed", self, "button_press")
+	var _connect = button_left_out.connect("pressed", self, "button_press")
+	var _connect2 = button_left_in.connect("pressed", self, "button_press")
 	
-	button_right_out.connect("pressed", self, "button_press")
-	button_right_in.connect("pressed", self, "button_press")
+	var _connect3 = button_right_out.connect("pressed", self, "button_press")
+	var _connect4 = button_right_in.connect("pressed", self, "button_press")
 	
-	button_down_out.connect("pressed", self, "button_press")
-	button_down_in.connect("pressed", self, "button_press")
+	var _connect5 = button_down_out.connect("pressed", self, "button_press")
+	var _connect6 = button_down_in.connect("pressed", self, "button_press")
 	
-	button_up_out.connect("pressed", self, "button_press")
-	button_up_in.connect("pressed", self, "button_press")
+	var _connect7 = button_up_out.connect("pressed", self, "button_press")
+	var _connect8 = button_up_in.connect("pressed", self, "button_press")
 	
-	button_left_out.connect("mouse_entered", self, "button_hovered")
-	button_left_in.connect("mouse_entered", self, "button_hovered")
+	var _connect9 = button_left_out.connect("mouse_entered", self, "button_hovered")
+	var _connect10 = button_left_in.connect("mouse_entered", self, "button_hovered")
 	
-	button_right_out.connect("mouse_entered", self, "button_hovered")
-	button_right_in.connect("mouse_entered", self, "button_hovered")
+	var _connect11 = button_right_out.connect("mouse_entered", self, "button_hovered")
+	var _connect12 = button_right_in.connect("mouse_entered", self, "button_hovered")
 	
-	button_down_out.connect("mouse_entered", self, "button_hovered")
-	button_down_in.connect("mouse_entered", self, "button_hovered")
+	var _connect13 = button_down_out.connect("mouse_entered", self, "button_hovered")
+	var _connect14 = button_down_in.connect("mouse_entered", self, "button_hovered")
 	
-	button_up_out.connect("mouse_entered", self, "button_hovered")
-	button_up_in.connect("mouse_entered", self, "button_hovered")
+	var _connect15 = button_up_out.connect("mouse_entered", self, "button_hovered")
+	var _connect16 = button_up_in.connect("mouse_entered", self, "button_hovered")
 	update_label()
 	
 func button_hovered():
@@ -74,7 +74,7 @@ func button_press():
 		
 	click_sound.play()
 	
-	for integer in range(amount):
+	for _integer in range(amount):
 		if button_left_out.pressed:
 			shared_node.move_all_objects_by(Vector2(32, 0))
 			area.background_tiles = tile_util.expand_left(area, area.background_tiles)

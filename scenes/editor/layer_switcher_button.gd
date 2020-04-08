@@ -8,7 +8,7 @@ onready var hover_sound = $HoverSound
 onready var click_sound = $ClickSound
 var last_hovered = false
 
-func _process(delta):
+func _process(_delta):
 	if pressed:
 		label.rect_position.y = 43
 	else:

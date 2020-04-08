@@ -61,19 +61,18 @@ func _ready():
 	var data = CurrentLevelData.level_data
 	load_in(data, data.areas[0])
 	
-func set_selected_box(selected_box: Node):
-	item_preview_node.update_preview(selected_box.item)
-	self.selected_box = selected_box
+func set_selected_box(new_selected_box: Node):
+	item_preview_node.update_preview(new_selected_box.item)
+	selected_box = new_selected_box
 	for placeable_item_button in placeable_items_button_container_node.get_children():
 		placeable_item_button.update_selection()
 
 func switch_scenes():
-	get_tree().change_scene("res://scenes/player/player.tscn")
+	var _change_scene = get_tree().change_scene("res://scenes/player/player.tscn")
 
-func _process(delta):
+func _process(_delta):
 	if get_viewport().get_mouse_position().y > 70:
 		var mouse_pos = get_global_mouse_position()
-		var mouse_screen_pos = get_viewport().get_mouse_position()
 		if Input.is_action_pressed("lock_tile_axis") and (Input.is_action_pressed("place") or Input.is_action_pressed("erase")):
 			if Input.is_action_just_pressed("place") or Input.is_action_just_pressed("erase"):
 				if abs(mouse_pos.x) - abs(last_mouse_pos.x) > abs(mouse_pos.y) - abs(last_mouse_pos.y):
@@ -152,7 +151,7 @@ func _process(delta):
 					object.properties.append(0)
 					object.properties.append(true)
 					object.properties.append(true)
-					var object_node = shared_node.create_object(object, true)
+					shared_node.create_object(object, true)
 		elif right_held:
 			if selected_box:
 				var item = selected_box.item

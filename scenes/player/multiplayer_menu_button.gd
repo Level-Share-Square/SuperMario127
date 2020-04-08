@@ -21,7 +21,7 @@ func _pressed():
 		multiplayer_options_node.visible = false
 		shine_info_node.visible = true
 
-func _process(delta):
+func _process(_delta):
 	if is_hovered() and !last_hovered:
 		hover_sound.play()	
 	last_hovered = is_hovered()

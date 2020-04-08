@@ -10,7 +10,7 @@ func _pressed():
 	if Networking.connected_type == "None":
 		Networking.start_server()
 
-func _process(delta):
+func _process(_delta):
 	if is_hovered() and !last_hovered:
 		hover_sound.play()	
 	last_hovered = is_hovered()

@@ -17,7 +17,7 @@ export(float) var track_speed
 var cont = "autolayer"
 
 func _ready():
-	get_node("../..").connect("beat", self, "_update")
+	var _connect = get_node("../..").connect("beat", self, "_update")
 
 func _update(beat):
 	var layer = layer_max

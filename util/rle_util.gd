@@ -126,8 +126,6 @@ static func decode(code: String):
 				if index > 0:
 					decoded_object.properties.append(decode_value(value))
 				index += 1
-			
-			var size = decoded_object.properties.size()
 			result.areas[0].objects.append(decoded_object)
 	
 	return result

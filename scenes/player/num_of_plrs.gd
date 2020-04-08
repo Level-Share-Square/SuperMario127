@@ -10,8 +10,8 @@ export var value = 1
 func _ready():
 	value = PlayerSettings.number_of_players
 	value_text.text = str(value)
-	left.connect("pressed", self, "decrease_value")
-	right.connect("pressed", self, "increase_value")
+	var _connect = left.connect("pressed", self, "decrease_value")
+	var _connect2 = right.connect("pressed", self, "increase_value")
 	
 func decrease_value():
 	value -= 1

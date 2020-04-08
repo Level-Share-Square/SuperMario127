@@ -11,10 +11,10 @@ func _ready():
 	disable_movement = true
 	frames_bonked = 0
 
-func _start_check(delta):
+func _start_check(_delta):
 	return false
 	
-func _start(delta):
+func _start(_delta):
 	bonk_direction = character.facing_direction
 	character.current_jump = 0
 
@@ -27,10 +27,10 @@ func _update(delta):
 		sprite.animation = "bonkedLeft"
 	sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 90, 0.75 * delta) * -character.facing_direction
 	
-func _stop(delta):
+func _stop(_delta):
 	var sprite = character.animated_sprite
 	sprite.rotation_degrees = 0
 	frames_bonked = 0
 
-func _stop_check(delta):
+func _stop_check(_delta):
 	return character.is_grounded()
