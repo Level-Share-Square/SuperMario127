@@ -10,6 +10,7 @@ func _ready():
 	disable_turning = true
 	disable_animation = true
 	disable_movement = true
+	override_rotation = true
 	blacklisted_states = []
 
 func _start_check(_delta):
@@ -17,6 +18,7 @@ func _start_check(_delta):
 
 func _start(_delta):
 	end_timer = 0.3
+	character.velocity.x = 0
 	var sprite = character.sprite
 	if character.facing_direction == 1:
 		sprite.animation = "groundPoundEndRight"

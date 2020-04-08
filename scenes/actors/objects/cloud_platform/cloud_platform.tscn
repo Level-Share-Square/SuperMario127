@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/actors/objects/cloud_platform/cloud_platform.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 1 )
+extents = Vector2( 32, 0.1 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32, 16 )
