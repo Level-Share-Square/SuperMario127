@@ -67,15 +67,15 @@ func _physics_process(delta):
 			sprite.offset = Vector2()
 			time_falling = 0.0
 			tween.interpolate_property(sprite, "modulate",
-			Color(1, 1, 1, 1), Color(1, 1, 1, 0), 1,
+			Color(1, 1, 1, 1), Color(1, 1, 1, 0), 2.5,
 			Tween.TRANS_QUART, Tween.EASE_IN)
 			tween.start()
 	if falling:
 		position.y += 0.4 + (time_falling * 2)
-		$StaticBody2D.constant_linear_velocity.y = 400
+		$StaticBody2D.constant_linear_velocity.y = 600
 		time_falling += delta
 		
-		if time_falling > 1:
+		if time_falling > 2.5:
 			falling = false
 			position = orig_pos
 			tween.interpolate_property(sprite, "modulate",
