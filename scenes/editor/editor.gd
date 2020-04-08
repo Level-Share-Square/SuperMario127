@@ -152,21 +152,20 @@ func _process(_delta):
 					object.properties.append(true)
 					object.properties.append(true)
 					shared_node.create_object(object, true)
-		elif right_held:
-			if selected_box:
-				var item = selected_box.item
-				if item.is_object:
-					if placement_mode == "Tile":
-						var object_pos = (mouse_tile_pos * 32) + item.object_center
-						if item.on_erase(object_pos, level_data, level_area):
-							shared_node.destroy_object_at_position(object_pos, true)
-					elif Input.is_action_just_pressed("erase") and hovered_object and !rotating:
-						if item.on_erase(mouse_pos, level_data, level_area):
-							shared_node.destroy_object(hovered_object, true)
-							hovered_object = null
-							item_preview_node.visible = true
-				else:
-					if item.on_erase(mouse_tile_pos, level_data, level_area):
-						if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:
-							shared_node.set_tile(tile_index, layer, 0, 0)
+		if right_held and selected_box and selected_box.item:
+			var item = selected_box.item
+			if item.is_object:
+				if placement_mode == "Tile":
+					var object_pos = (mouse_tile_pos * 32) + item.object_center
+					if item.on_erase(object_pos, level_data, level_area):
+						shared_node.destroy_object_at_position(object_pos, true)
+				elif Input.is_action_just_pressed("erase") and hovered_object and !rotating:
+					if item.on_erase(mouse_pos, level_data, level_area):
+						shared_node.destroy_object(hovered_object, true)
+						hovered_object = null
+						item_preview_node.visible = true
+			else:
+				if item.on_erase(mouse_tile_pos, level_data, level_area):
+					if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:
+						shared_node.set_tile(tile_index, layer, 0, 0)
 		last_mouse_pos = mouse_pos
