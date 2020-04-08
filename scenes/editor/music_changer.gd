@@ -18,11 +18,12 @@ func update_display():
 	var data = CurrentLevelData.level_data
 	var area = data.areas[0]
 	
-	var mapped_id = music_id_mapper.ids[area.settings.music]
-	var resource = load("res://assets/music/resources/" + mapped_id + ".tres")
-	
-	music_title.text = resource.title
-	music_note.text = resource.note
+	if typeof(area.settings.music) == TYPE_INT:
+		var mapped_id = music_id_mapper.ids[area.settings.music]
+		var resource = load("res://assets/music/resources/" + mapped_id + ".tres")
+		
+		music_title.text = resource.title
+		music_note.text = resource.note
 
 func _ready():
 	button_left.connect("pressed", self, "button_press")
@@ -38,6 +39,8 @@ func button_hovered():
 func button_press():
 	var data = CurrentLevelData.level_data
 	var area = data.areas[0]
+	
+	area.settings.music = int(area.settings.music)
 	
 	if button_left.pressed:
 		click_sound.play()

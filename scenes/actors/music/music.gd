@@ -23,13 +23,13 @@ func _ready():
 	orig_volume = volume_db
 	connect("music_changed", self, "change_song")
 	
-	downloader.download_from_web("https://upload.wikimedia.org/wikipedia/commons/c/c8/Example.ogg", "user://", "bg_music")
 	downloader.connect("request_completed", self, "load_ogg")
 	
 	#youtube_dl = YoutubeDl.new()
 	#youtube_dl.connect("download_complete", self, "download_complete")
 	#youtube_dl.connect("ready", self, "ready_to_dl")
 	#youtube_dl.download("https://youtu.be/ogMNV33AhCY", "/home/user/folder/", "audioclip", true, YoutubeDl.VIDEO_WEBM, YoutubeDl.AUDIO_VORBIS)
+	
 	
 func load_ogg():
 	var path = "user://bg_music.ogg"
@@ -38,6 +38,7 @@ func load_ogg():
 	var bytes = ogg_file.get_buffer(ogg_file.get_len())
 	var stream = AudioStreamOGGVorbis.new()
 	stream.data = bytes
+	stream.loop = true
 	if stream.data == null:
 		return
 	ogg_file.close()
@@ -45,32 +46,38 @@ func load_ogg():
 	play()
 	print("Audio Loaded!")
 	
-func change_song():
+func change_song(old_setting):
 	var music_setting = CurrentLevelData.level_data.areas[0].settings.music
 	var song
+	
 	if typeof(music_setting) == TYPE_INT:
 		song = get_song(music_setting)
-	#if typeof(music_setting) != TYPE_STRING:
-		# download from youtube
+	elif typeof(music_setting) == TYPE_STRING:
+		if typeof(music_setting) != typeof(old_setting) or music_setting != old_setting:
+			stop()
+			downloader.download_from_web(music_setting, "user://", "bg_music.ogg")
 	
-	if song != null and stream != song.stream:
-		pass
-		#stream = song.stream
-		#play()
+	if song != null:
+		if stream != song.stream:
+			stream = song.stream
+			play()
 	if get_tree().get_current_scene().mode == 0:
 		bus = play_bus
 	else:
 		bus = edit_bus
 
 func _process(delta):
+	var current_song = CurrentLevelData.level_data.areas[0].settings.music
 	if loading and OS.has_feature("JavaScript"):
 		AudioServer.set_bus_mute(0, true)
 		AudioServer.set_bus_mute(1, true)
 	else:
 		AudioServer.set_bus_mute(0, false)
 		AudioServer.set_bus_mute(1, false)
-	if get_tree().get_current_scene().mode != last_mode or CurrentLevelData.level_data.areas[0].settings.music != last_song:
-		change_song()
+	if get_tree().get_current_scene().mode != last_mode or typeof(last_song) != typeof(current_song):
+		change_song(last_song)
+	elif last_song != current_song:
+		change_song(last_song)
 	volume_db = linear2db(db2linear(orig_volume) * volume_multiplier)
 	last_mode = get_tree().get_current_scene().mode
 	last_song = CurrentLevelData.level_data.areas[0].settings.music
