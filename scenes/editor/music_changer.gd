@@ -24,6 +24,19 @@ func update_display():
 		
 		music_title.text = resource.title
 		music_note.text = resource.note
+	else:
+		music_title.text = area.settings.music
+		music_note.text = "Custom Music URL"
+		
+func text_entered(text):
+	var re = RegEx.new()
+	re.compile("(https:\\/\\/[^\\/]*)(.*)")
+
+	if not re.search_all(text):
+		music_note.text = "Invalid URL"
+	else:
+		CurrentLevelData.level_data.areas[0].settings.music = text
+		update_display()
 
 func _ready():
 	button_left.connect("pressed", self, "button_press")
@@ -31,6 +44,8 @@ func _ready():
 	
 	button_left.connect("mouse_entered", self, "button_hovered")
 	button_right.connect("mouse_entered", self, "button_hovered")
+	
+	music_title.connect("text_entered", self, "text_entered")
 	update_display()
 	
 func button_hovered():
