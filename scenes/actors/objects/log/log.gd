@@ -18,6 +18,8 @@ var time_shaking = 0.0
 
 var shake_amount := 1.0
 
+var fall_speed := 1.0
+
 func _set_properties():
 	savable_properties = ["fall_on_touch"]
 	editable_properties = ["fall_on_touch"]
@@ -26,6 +28,8 @@ func _set_property_values():
 	set_property("fall_on_touch", fall_on_touch, true)
 
 func _ready():
+	if !enabled:
+		collision_shape.disabled = true
 	orig_pos = position
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "enter_area")
@@ -34,7 +38,7 @@ func _ready():
 		var _connect3 = fall_detector.connect("body_entered", self, "fall_detector")
 		
 func fall_detector(body):
-	if character:
+	if character and enabled:
 		var can_fall = false
 		var direction = transform.y.normalized()
 		if character.velocity.y > -10 and direction.y > 0:
@@ -43,8 +47,18 @@ func fall_detector(body):
 			can_fall = true
 			
 		if body.name.begins_with("Character") and fall_on_touch and !falling and can_fall and !shaking:
-			shaking = true
-			time_shaking = 0.0
+			if !character.heavy:
+				shaking = true
+				time_shaking = 0.0
+				fall_speed = 1.0
+			else:
+				fall_speed = 7.5
+				falling = true
+				time_falling = 0.0
+				tween.interpolate_property(sprite, "modulate",
+				Color(1, 1, 1, 1), Color(1, 1, 1, 0), 2.5,
+				Tween.TRANS_QUART, Tween.EASE_IN)
+				tween.start()
 
 func enter_area(body):
 	if body.name.begins_with("Character"):
@@ -71,8 +85,8 @@ func _physics_process(delta):
 			Tween.TRANS_QUART, Tween.EASE_IN)
 			tween.start()
 	if falling:
-		position.y += 0.4 + (time_falling * 2)
-		$StaticBody2D.constant_linear_velocity.y = 600
+		position.y += (0.4 + (time_falling * 2)) * fall_speed
+		$StaticBody2D.constant_linear_velocity.y = 600 * fall_speed
 		time_falling += delta
 		
 		if time_falling > 2.5:
@@ -83,7 +97,7 @@ func _physics_process(delta):
 			Tween.TRANS_QUART, Tween.EASE_OUT)
 			tween.start()
 		
-	if character != null and !falling:
+	if character != null and !falling and enabled:
 		var direction = transform.y.normalized()
 		var line_center = position + (direction * buffer)
 		var line_direction = Vector2(-direction.y, direction.x)
@@ -99,4 +113,6 @@ func _physics_process(delta):
 		if character.velocity.y < -10 and direction.y > 0:
 			collision_shape.disabled = true
 		if character.velocity.y > 10 and direction.y < 0:
+			collision_shape.disabled = true
+		if character.heavy:
 			collision_shape.disabled = true

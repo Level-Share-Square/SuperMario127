@@ -26,15 +26,17 @@ func _start(_delta):
 func _update(_delta):
 	character.attacking = true
 	character.big_attack = true
+	character.heavy = true
 
 func _stop(delta):
-	character.attacking = false
-	character.big_attack = false
 	if character.is_grounded():
 		character.set_state_by_name("GroundPoundEndState", delta)
 	else:
 		character.jump_animation = 0
 		character.velocity.y = character.velocity.y / 4
+		character.attacking = false
+		character.big_attack = false
+		character.heavy = false
 
 func _stop_check(_delta):
 	return character.is_grounded() or character.gp_cancel_just_pressed

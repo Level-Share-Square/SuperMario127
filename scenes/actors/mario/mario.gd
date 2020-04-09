@@ -48,6 +48,7 @@ export var disable_animation = false
 
 export var attacking = false
 export var big_attack = false
+export var heavy = false
 
 export var player_id = 0
 
@@ -151,7 +152,7 @@ export var rotation_interpolation_speed = 15
 #spin, spin_just_pressed
 #)
 
-puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_big_attacking, is_dead, is_controllable): # Ok slave
+puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_big_attacking, is_heavy, is_dead, is_controllable): # Ok slave
 	next_position = pos
 	velocity = vel
 	sprite.animation = sprite_animation
@@ -159,6 +160,7 @@ puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_a
 	sprite.rotation_degrees = sprite_rotation
 	attacking = is_attacking
 	big_attack = is_big_attacking
+	heavy = is_heavy
 	dead = is_dead
 	controllable = is_controllable
 
@@ -529,7 +531,7 @@ func _physics_process(delta: float):
 	
 	if PlayerSettings.other_player_id != -1:
 		if player_id == PlayerSettings.my_player_index and is_network_master():
-			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, dead, controllable)
+			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
 	
 func kill(cause):
 	if !dead:

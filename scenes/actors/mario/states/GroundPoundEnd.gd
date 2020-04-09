@@ -26,6 +26,9 @@ func _start(_delta):
 		sprite.animation = "groundPoundEndLeft"
 
 func _stop(delta):
+	character.attacking = false
+	character.big_attack = false
+	character.heavy = false
 	if jump_timer > 0:
 		character.current_jump = 1
 		character.set_state_by_name("JumpState", delta)

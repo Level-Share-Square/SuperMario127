@@ -19,6 +19,8 @@ export var base_collision_width = 13
 export var part_width = 19
 
 func _ready():
+	if !get_parent().enabled:
+		collision_shape.disabled = true
 	if get_parent().mode != 1:
 		var _connect = area.connect("body_entered", self, "enter_area")
 		var _connect2 = area.connect("body_exited", self, "exit_area")
@@ -61,7 +63,7 @@ func exit_area(body):
 		
 
 func _physics_process(delta):
-	if character != null:
+	if character != null and get_parent().enabled:
 		var direction = transform.y.normalized()
 		var line_center = get_parent().position + (direction * buffer)
 		var line_direction = Vector2(-direction.y, direction.x)
