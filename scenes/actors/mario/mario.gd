@@ -255,7 +255,7 @@ func set_state_by_name(name: String, delta: float):
 		
 func player_hit(body):
 	if body.name.begins_with("Character"):
-		if !body.big_attack:
+		if !body.big_attack and !big_attack:
 			if global_position.y + 8 < body.global_position.y:
 				velocity.y = -230
 				#body.stomped_sound_player.play() -Felt weird without animations
@@ -283,8 +283,7 @@ func player_hit(body):
 				elif !attacking or (body.attacking and attacking):
 					velocity.x = 250
 					body.velocity.x = -250
-		else:
-			print("A")
+		elif !big_attack:
 			if global_position.x < body.global_position.x:
 				velocity.x = -205
 				velocity.y = -175

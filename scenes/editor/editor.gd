@@ -89,7 +89,7 @@ func _process(_delta):
 			lock_axis = "none"
 			lock_pos = 0
 		
-		var mouse_tile_pos = Vector2(floor(mouse_pos.x / 32), floor(mouse_pos.y / 32))
+		var mouse_tile_pos = Vector2(floor(mouse_pos.x / selected_box.item.tile_mode_step), floor(mouse_pos.y / selected_box.item.tile_mode_step))
 		var tile_index = tile_util.get_tile_index_from_position(mouse_tile_pos, level_area.settings.size)
 		
 		if selected_box and selected_box.item and selected_box.item.is_object:
@@ -131,7 +131,7 @@ func _process(_delta):
 			elif hovered_object == null:
 				var object_pos
 				if placement_mode == "Tile":
-					object_pos = (mouse_tile_pos * 32) + item.object_center
+					object_pos = (mouse_tile_pos * item.tile_mode_step) + item.object_center
 				elif Input.is_action_just_pressed("place"):
 					object_pos = mouse_pos
 					if Input.is_action_pressed("8_pixel_lock"):
@@ -156,7 +156,7 @@ func _process(_delta):
 			var item = selected_box.item
 			if item.is_object:
 				if placement_mode == "Tile":
-					var object_pos = (mouse_tile_pos * 32) + item.object_center
+					var object_pos = (mouse_tile_pos * item.tile_mode_step) + item.object_center
 					if item.on_erase(object_pos, level_data, level_area):
 						shared_node.destroy_object_at_position(object_pos, true)
 				elif Input.is_action_just_pressed("erase") and hovered_object and !rotating:

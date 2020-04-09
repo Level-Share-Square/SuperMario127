@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=2]
+[gd_scene load_steps=133 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -84,6 +84,15 @@
 [ext_resource path="res://scenes/actors/objects/big_bush/icon.png" type="Texture" id=82]
 [ext_resource path="res://scenes/actors/objects/bone_platform/bone_platform.png" type="Texture" id=83]
 [ext_resource path="res://scenes/actors/objects/bone_platform/icon.png" type="Texture" id=84]
+[ext_resource path="res://assets/tiles/bricks_red/icon_slope_right.png" type="Texture" id=85]
+[ext_resource path="res://assets/tiles/bricks_green/icon.png" type="Texture" id=86]
+[ext_resource path="res://assets/tiles/bricks_yellow/icon_slope_left.png" type="Texture" id=87]
+[ext_resource path="res://assets/tiles/bricks_green/icon_slope_left.png" type="Texture" id=88]
+[ext_resource path="res://assets/tiles/bricks_red/icon.png" type="Texture" id=89]
+[ext_resource path="res://assets/tiles/bricks_yellow/icon.png" type="Texture" id=90]
+[ext_resource path="res://assets/tiles/bricks_yellow/icon_slope_right.png" type="Texture" id=91]
+[ext_resource path="res://assets/tiles/bricks_red/icon_slope_left.png" type="Texture" id=92]
+[ext_resource path="res://assets/tiles/bricks_green/icon_slope_right.png" type="Texture" id=93]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -1047,18 +1056,18 @@ font_data = ExtResource( 4 )
 size = 64
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=36]
+[sub_resource type="StyleBoxFlat" id=33]
 bg_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxEmpty" id=37]
+[sub_resource type="StyleBoxEmpty" id=34]
 
-[sub_resource type="StyleBoxEmpty" id=38]
+[sub_resource type="StyleBoxEmpty" id=35]
 
-[sub_resource type="Theme" id=39]
+[sub_resource type="Theme" id=36]
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -1179,11 +1188,11 @@ HScrollBar/icons/decrement = null
 HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
 HScrollBar/icons/increment_highlight = null
-HScrollBar/styles/grabber = SubResource( 36 )
-HScrollBar/styles/grabber_highlight = SubResource( 36 )
-HScrollBar/styles/grabber_pressed = SubResource( 36 )
-HScrollBar/styles/scroll = SubResource( 37 )
-HScrollBar/styles/scroll_focus = SubResource( 38 )
+HScrollBar/styles/grabber = SubResource( 33 )
+HScrollBar/styles/grabber_highlight = SubResource( 33 )
+HScrollBar/styles/grabber_pressed = SubResource( 33 )
+HScrollBar/styles/scroll = SubResource( 34 )
+HScrollBar/styles/scroll_focus = SubResource( 35 )
 HSeparator/constants/separation = 4
 HSeparator/styles/separator = null
 HSlider/icons/grabber = null
@@ -1477,17 +1486,17 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
-[sub_resource type="StyleBoxFlat" id=33]
+[sub_resource type="StyleBoxFlat" id=37]
 bg_color = Color( 0, 0.033, 0.22, 1 )
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id=34]
+[sub_resource type="StyleBoxFlat" id=38]
 bg_color = Color( 0, 0.0470588, 0.317647, 1 )
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="DynamicFont" id=35]
+[sub_resource type="DynamicFont" id=39]
 size = 128
 font_data = ExtResource( 4 )
 
@@ -1558,6 +1567,75 @@ tile_id = 2
 change_to = "BrickSlopeRight"
 icon = ExtResource( 61 )
 preview = ExtResource( 61 )
+
+[node name="GreenBrick" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 3
+change_to = "GreenBrickSlopeLeft"
+icon = ExtResource( 86 )
+preview = ExtResource( 86 )
+
+[node name="GreenBrickSlopeRight" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 3
+tile_id = 3
+change_to = "GreenBrick"
+icon = ExtResource( 93 )
+preview = ExtResource( 93 )
+
+[node name="GreenBrickSlopeLeft" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 3
+tile_id = 2
+change_to = "GreenBrickSlopeRight"
+icon = ExtResource( 88 )
+preview = ExtResource( 88 )
+
+[node name="RedBrick" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 4
+change_to = "RedBrickSlopeLeft"
+icon = ExtResource( 89 )
+preview = ExtResource( 89 )
+
+[node name="RedBrickSlopeRight" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 4
+tile_id = 3
+change_to = "RedBrick"
+icon = ExtResource( 85 )
+preview = ExtResource( 85 )
+
+[node name="RedBrickSlopeLeft" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 4
+tile_id = 2
+change_to = "RedBrickSlopeRight"
+icon = ExtResource( 92 )
+preview = ExtResource( 92 )
+
+[node name="YellowBrick" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 5
+change_to = "YellowBrickSlopeLeft"
+icon = ExtResource( 90 )
+preview = ExtResource( 90 )
+
+[node name="YellowBrickSlopeRight" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 5
+tile_id = 3
+change_to = "YellowBrick"
+icon = ExtResource( 91 )
+preview = ExtResource( 91 )
+
+[node name="YellowBrickSlopeLeft" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 5
+tile_id = 2
+change_to = "YellowBrickSlopeRight"
+icon = ExtResource( 87 )
+preview = ExtResource( 87 )
 
 [node name="Entrance" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
@@ -1662,8 +1740,9 @@ preview = ExtResource( 70 )
 script = ExtResource( 3 )
 object_id = 9
 is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 16, -16 )
+object_center = Vector2( 64, 0 )
+tile_mode_offset = Vector2( 32, -32 )
+tile_mode_step = 64
 change_to = "CloudPlatform"
 icon = ExtResource( 75 )
 preview = ExtResource( 76 )
@@ -1672,8 +1751,8 @@ preview = ExtResource( 76 )
 script = ExtResource( 3 )
 object_id = 10
 is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 16, -16 )
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
 z_index = -1
 change_to = "Log"
 icon = ExtResource( 78 )
@@ -1705,7 +1784,8 @@ preview = ExtResource( 80 )
 script = ExtResource( 3 )
 object_id = 13
 is_object = true
-object_center = Vector2( 16, 16 )
+object_center = Vector2( 16, 0 )
+tile_mode_offset = Vector2( 0, -16 )
 z_index = -1
 change_to = "BonePlatform"
 icon = ExtResource( 84 )
@@ -2655,6 +2735,7 @@ stream = ExtResource( 36 )
 volume_db = -10.0
 
 [node name="ItemPicker" type="TextureRect" parent="UI"]
+visible = false
 margin_left = 773.0
 margin_top = 542.0
 margin_right = 3162.0
@@ -2687,7 +2768,7 @@ margin_top = 166.0
 margin_right = 3707.0
 margin_bottom = 512.0
 rect_rotation = -180.0
-theme = SubResource( 39 )
+theme = SubResource( 36 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -2703,10 +2784,10 @@ margin_left = 13.0
 margin_top = 175.0
 margin_right = 403.0
 margin_bottom = 320.0
-custom_styles/hover = SubResource( 33 )
-custom_styles/pressed = SubResource( 34 )
-custom_styles/normal = SubResource( 34 )
-custom_fonts/font = SubResource( 35 )
+custom_styles/hover = SubResource( 37 )
+custom_styles/pressed = SubResource( 38 )
+custom_styles/normal = SubResource( 38 )
+custom_fonts/font = SubResource( 39 )
 script = ExtResource( 60 )
 __meta__ = {
 "_edit_use_anchors_": false

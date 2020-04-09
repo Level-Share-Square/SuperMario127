@@ -812,11 +812,11 @@ tilemaps = NodePath("../World/Shared/Tilemaps")
 objects = NodePath("../World/Shared/Objects")
 
 [node name="Character" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 3 )]
-position = Vector2( 32.5, 126.947 )
+position = Vector2( -1000, -1000 )
 collision_exceptions = [ NodePath("../Character2") ]
 
 [node name="Character2" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 3 )]
-position = Vector2( 32.5, 126.947 )
+position = Vector2( -1000, -1000 )
 player_id = 1
 collision_exceptions = [ NodePath("../Character") ]
 character = 1

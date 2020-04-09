@@ -11,8 +11,8 @@ func _process(_delta):
 		if selected_box.item:
 			var item = selected_box.item
 			var mouse_pos = get_global_mouse_position()
-			var mouse_tile_pos = Vector2(floor(mouse_pos.x / 32), floor(mouse_pos.y / 32))
-			var mouse_grid_pos = Vector2((mouse_tile_pos.x * 32) + 16, (mouse_tile_pos.y * 32) + 16)
+			var mouse_tile_pos = Vector2(floor(mouse_pos.x / item.tile_mode_step), floor(mouse_pos.y / item.tile_mode_step))
+			var mouse_grid_pos = Vector2((mouse_tile_pos.x * item.tile_mode_step) + (item.tile_mode_step / 2), (mouse_tile_pos.y * item.tile_mode_step) + (item.tile_mode_step / 2))
 			
 			z_index = item.z_index
 			if editor.placement_mode == "Tile" or !item.is_object:
