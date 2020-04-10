@@ -29,15 +29,19 @@ sound_number = 1
 
 [node name="Jump1" type="AudioStreamPlayer" parent="JumpSounds"]
 stream = ExtResource( 13 )
+bus = "Voices"
 
 [node name="Jump2" type="AudioStreamPlayer" parent="JumpSounds"]
 stream = ExtResource( 16 )
+bus = "Voices"
 
 [node name="Jump3" type="AudioStreamPlayer" parent="JumpSounds"]
 stream = ExtResource( 14 )
+bus = "Voices"
 
 [node name="Jump4" type="AudioStreamPlayer" parent="JumpSounds"]
 stream = ExtResource( 15 )
+bus = "Voices"
 
 [node name="DoubleJumpSounds" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -45,9 +49,11 @@ sound_number = 1
 
 [node name="DoubleJump1" type="AudioStreamPlayer" parent="DoubleJumpSounds"]
 stream = ExtResource( 17 )
+bus = "Voices"
 
 [node name="DoubleJump2" type="AudioStreamPlayer" parent="DoubleJumpSounds"]
 stream = ExtResource( 19 )
+bus = "Voices"
 
 [node name="TripleJumpSounds" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -55,9 +61,11 @@ sound_number = 1
 
 [node name="TripleJump1" type="AudioStreamPlayer" parent="TripleJumpSounds"]
 stream = ExtResource( 11 )
+bus = "Voices"
 
 [node name="TripleJump2" type="AudioStreamPlayer" parent="TripleJumpSounds"]
 stream = ExtResource( 12 )
+bus = "Voices"
 
 [node name="DiveSounds" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -65,12 +73,15 @@ sound_number = 1
 
 [node name="Dive1" type="AudioStreamPlayer" parent="DiveSounds"]
 stream = ExtResource( 3 )
+bus = "Voices"
 
 [node name="Dive2" type="AudioStreamPlayer" parent="DiveSounds"]
 stream = ExtResource( 9 )
+bus = "Voices"
 
 [node name="Dive3" type="AudioStreamPlayer" parent="DiveSounds"]
 stream = ExtResource( 18 )
+bus = "Voices"
 
 [node name="FallSounds" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -78,6 +89,7 @@ sound_number = 1
 
 [node name="Fall1" type="AudioStreamPlayer" parent="FallSounds"]
 stream = ExtResource( 10 )
+bus = "Voices"
 
 [node name="HitSounds" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -85,9 +97,11 @@ sound_number = 1
 
 [node name="Hit1" type="AudioStreamPlayer" parent="HitSounds"]
 stream = ExtResource( 5 )
+bus = "Voices"
 
 [node name="Hit2" type="AudioStreamPlayer" parent="HitSounds"]
 stream = ExtResource( 7 )
+bus = "Voices"
 
 [node name="StompedSounds" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -95,9 +109,12 @@ sound_number = 1
 
 [node name="Stomped1" type="AudioStreamPlayer" parent="StompedSounds"]
 stream = ExtResource( 6 )
+bus = "Voices"
 
 [node name="Stomped2" type="AudioStreamPlayer" parent="StompedSounds"]
 stream = ExtResource( 8 )
+bus = "Voices"
 
 [node name="Stomped3" type="AudioStreamPlayer" parent="StompedSounds"]
 stream = ExtResource( 4 )
+bus = "Voices"

@@ -808,8 +808,6 @@ character = NodePath("../World/Character")
 [node name="World" type="Node2D" parent="Viewports/ViewportContainer/Viewport"]
 
 [node name="Shared" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 2 )]
-tilemaps = NodePath("../World/Shared/Tilemaps")
-objects = NodePath("../World/Shared/Objects")
 
 [node name="Character" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 3 )]
 collision_exceptions = [ NodePath("../Character2") ]

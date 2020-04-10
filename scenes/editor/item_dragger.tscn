@@ -12,6 +12,8 @@
 margin_right = 40.0
 margin_bottom = 40.0
 rect_clip_content = true
+focus_mode = 0
+enabled_focus_mode = 0
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 7 )
 texture_hover = ExtResource( 4 )

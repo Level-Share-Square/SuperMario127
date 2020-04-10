@@ -3,9 +3,12 @@ extends TextureRect
 export var group := "all"
 export var item_dragger_path : String 
 export var placeable_items : NodePath
+onready var scroll_container = $ScrollContainer
 onready var grid_container = $ScrollContainer/GridContainer
 onready var tween = $Tween
 onready var close_button = $CloseButton
+
+var hovered = false
 
 func open():
 	if !visible:
@@ -24,11 +27,25 @@ func close():
 	yield(tween, "tween_completed")
 	visible = false
 	
+func mouse_entered():
+	hovered = true
+	
+func mouse_exited():
+	hovered = false
+	
 func pressed():
 	close()
+	
+func _physics_process(_delta):
+	if Input.is_action_pressed("ui_right") and visible and hovered:
+		scroll_container.scroll_horizontal += 5
+	if Input.is_action_pressed("ui_left") and visible and hovered:
+		scroll_container.scroll_horizontal -= 5
 
 func _ready():
 	var _connect = close_button.connect("pressed", self, "pressed")
+	var _connect2 = connect("mouse_entered", self, "mouse_entered")
+	var _connect3 = connect("mouse_exited", self, "mouse_exited")
 	
 	var group_resource = load("res://scenes/editor/groups/" + group + ".tres")
 	

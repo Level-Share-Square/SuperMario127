@@ -10,9 +10,9 @@ var orig_volume = 0
 var last_mode = 3
 var last_song = 0
 
-var youtube_dl
 var dl_ready = false
 var downloader = Downloader.new()
+var youtube_dl = YouTubeDl.new()
 
 func get_song(song_id: int):
 	var level_songs : IdMap  = preload("res://assets/music/ids.tres")
@@ -23,11 +23,8 @@ func _ready():
 	orig_volume = volume_db
 	var _connect = downloader.connect("request_completed", self, "load_ogg")
 	
-	#youtube_dl = YoutubeDl.new()
-	#youtube_dl.connect("download_complete", self, "download_complete")
-	#youtube_dl.connect("ready", self, "ready_to_dl")
-	#youtube_dl.download("https://youtu.be/ogMNV33AhCY", "/home/user/folder/", "audioclip", true, YoutubeDl.VIDEO_WEBM, YoutubeDl.AUDIO_VORBIS)
-	
+	youtube_dl.connect("download_complete", self, "load_ogg")
+	youtube_dl.connect("ready", self, "ready_to_dl")
 	
 func load_ogg():
 	var path = "user://bg_music.ogg"
@@ -53,7 +50,13 @@ func change_song(old_setting):
 	elif typeof(music_setting) == TYPE_STRING:
 		if typeof(music_setting) != typeof(old_setting) or music_setting != old_setting:
 			stop()
-			downloader.download_from_web(music_setting, "user://", "bg_music.ogg")
+			var re = RegEx.new()
+			re.compile("^(http(s)?:\\/\\/)?((w){3}.)?youtu(be|.be)?(\\.com)?\\/.+")
+		
+			if re.search_all(music_setting):
+				youtube_dl.download(music_setting, OS.get_user_data_dir() + "/", "bg_music", true, YouTubeDl.VIDEO_WEBM, YouTubeDl.AUDIO_VORBIS)
+			else:
+				downloader.download(music_setting, "user://", "bg_music.ogg")
 	
 	if song != null:
 		if stream != song.stream:

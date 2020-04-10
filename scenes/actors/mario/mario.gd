@@ -554,7 +554,6 @@ func kill(cause):
 	if !dead:
 		dead = true
 		var reload = true
-		emit_signal("dead")
 		var cutout_in = cutout_circle
 		var cutout_out = cutout_circle
 		var transition_time = 0.75

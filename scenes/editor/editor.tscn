@@ -1066,9 +1066,10 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxEmpty" id=34]
+[sub_resource type="StyleBoxFlat" id=34]
+bg_color = Color( 0.521569, 0.521569, 0.521569, 1 )
 
-[sub_resource type="StyleBoxEmpty" id=35]
+[sub_resource type="StyleBoxFlat" id=35]
 
 [sub_resource type="Theme" id=36]
 Button/colors/font_color = Color( 0, 0, 0, 1 )
@@ -2795,6 +2796,7 @@ margin_right = 3707.0
 margin_bottom = 512.0
 rect_rotation = -180.0
 theme = SubResource( 36 )
+scroll_vertical_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -2802,7 +2804,7 @@ __meta__ = {
 [node name="GridContainer" type="GridContainer" parent="UI/ItemPicker/ScrollContainer"]
 custom_constants/vseparation = 12
 custom_constants/hseparation = 12
-columns = 4
+columns = 500
 
 [node name="CloseButton" type="Button" parent="UI/ItemPicker"]
 show_behind_parent = true
