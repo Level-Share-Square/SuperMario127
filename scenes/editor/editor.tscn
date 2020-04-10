@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=2]
+[gd_scene load_steps=136 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -94,6 +94,8 @@
 [ext_resource path="res://assets/tiles/bricks_red/icon_slope_left.png" type="Texture" id=92]
 [ext_resource path="res://assets/tiles/bricks_green/icon_slope_right.png" type="Texture" id=93]
 [ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=94]
+[ext_resource path="res://scenes/actors/objects/green_demon/green_demon.png" type="Texture" id=95]
+[ext_resource path="res://scenes/actors/objects/green_demon/icon.png" type="Texture" id=96]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -1802,6 +1804,17 @@ z_index = -1
 change_to = "Sign"
 icon = ExtResource( 94 )
 preview = ExtResource( 94 )
+
+[node name="GreenDemon" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 15
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+z_index = -1
+change_to = "GreenDemon"
+icon = ExtResource( 96 )
+preview = ExtResource( 95 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100

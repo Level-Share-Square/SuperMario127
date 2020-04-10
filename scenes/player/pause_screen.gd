@@ -27,7 +27,7 @@ export var chat_path : NodePath
 onready var chat_node = get_node(chat_path)
 
 func _unhandled_input(event):
-	if event.is_action_pressed("pause") and !(character_node.dead and character2_node.dead):
+	if event.is_action_pressed("pause") and !(character_node.dead and (PlayerSettings.number_of_players != 1 and character2_node.dead)):
 		toggle_pause()
 
 func toggle_pause():

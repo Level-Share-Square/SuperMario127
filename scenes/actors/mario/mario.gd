@@ -573,6 +573,9 @@ func kill(cause):
 				set_state_by_name("FallState", 0)
 		elif cause == "reload":
 			transition_time = 0.4
+		elif cause == "green_demon":
+			controllable = false
+			cutout_in = cutout_death
 		if reload:
 			scene_transitions.reload_scene(cutout_in, cutout_out, transition_time)
 
