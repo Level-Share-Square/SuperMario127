@@ -6,6 +6,7 @@ export var margin := 156
 export var base_margin := 12
 export var normal_color : Color
 export var selected_color : Color
+export var editor : NodePath
 
 func _ready():
 	var editor = get_tree().get_current_scene()

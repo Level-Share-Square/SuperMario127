@@ -21,6 +21,7 @@ func _ready():
 	margin_left = base_margin + (margin * button_placement)
 	normal_texture = texture_normal
 	item_changed()
+	update_selection()
 
 func item_changed():
 	icon.texture = null if item == null else item.icon
@@ -58,6 +59,7 @@ func _process(_delta):
 	if !clicking and last_clicking and editor.dragging_item != null and is_hovered():
 		item = editor.dragging_item
 		item_changed()
+		get_parent().get_node(get_parent().editor).set_selected_box(self)
 	
 	last_hovered = is_hovered()
 	last_clicking = clicking
