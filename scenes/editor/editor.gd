@@ -31,6 +31,7 @@ var hovered_object
 var rotating = false
 
 export var layer = 1
+export var layers_transparent = false
 
 func get_shared_node():
 	return shared_node
@@ -42,6 +43,7 @@ func switch_layers():
 		layer = 2
 	else:
 		layer = 0
+	shared_node.toggle_layer_transparency(layer, layers_transparent)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("switch_placement_mode"):
@@ -56,6 +58,12 @@ func _unhandled_input(event):
 		right_held = true
 	elif event.is_action_released("erase"):
 		right_held = false
+		
+	if event.is_action_pressed("switch_layers"):
+		switch_layers()
+	if event.is_action_pressed("toggle_transparency"):
+		layers_transparent = !layers_transparent
+		shared_node.toggle_layer_transparency(layer, layers_transparent)
 
 func _ready():
 	var data = CurrentLevelData.level_data

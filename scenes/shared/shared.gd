@@ -54,6 +54,20 @@ func move_all_objects_by(offset):
 		
 func update_tilemaps():
 	tilemaps_node.update_tilemaps()
+	
+func toggle_layer_transparency(current_layer, is_transparent):
+	var index = 0 
+	for tilemap in tilemaps_node.get_children():
+		var tilemap_color = Color(1, 1, 1, 1)
+		if tilemap.name == "Back":
+			tilemap_color = Color(0.54, 0.54, 0.54, 1)
+		if index == current_layer:
+			tilemap.modulate = tilemap_color
+		else:
+			if is_transparent:
+				tilemap_color.a = 0.25
+			tilemap.modulate = tilemap_color
+		index += 1
 
 func _process(_delta):
 	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")
