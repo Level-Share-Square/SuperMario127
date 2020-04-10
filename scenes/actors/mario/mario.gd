@@ -118,6 +118,9 @@ export var gp_just_pressed = false
 export var gp_cancel = false
 export var gp_cancel_just_pressed = false
 
+export var interact = false
+export var interact_just_pressed = false
+
 export var controlled_locally = true
 
 export var rotating_jump = false
@@ -387,6 +390,15 @@ func _physics_process(delta: float):
 				gp_cancel_just_pressed = true
 			else:
 				gp_cancel_just_pressed = false
+				
+			if Input.is_action_pressed("interact_" + str(control_id)):
+				interact = true
+			else:
+				interact = false
+			if Input.is_action_just_pressed("interact_" + str(control_id)):
+				interact_just_pressed = true
+			else:
+				interact_just_pressed = false
 		else:
 			left = false
 			left_just_pressed = false
@@ -402,6 +414,12 @@ func _physics_process(delta: float):
 			
 			spin = false
 			spin_just_pressed = false
+			
+			gp_cancel = false
+			gp_cancel_just_pressed = false
+			
+			interact = false
+			interact_just_pressed = false
 	
 	if state != null:
 		disable_movement = state.disable_movement

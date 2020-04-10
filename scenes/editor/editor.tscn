@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=2]
+[gd_scene load_steps=134 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -93,6 +93,7 @@
 [ext_resource path="res://assets/tiles/bricks_yellow/icon_slope_right.png" type="Texture" id=91]
 [ext_resource path="res://assets/tiles/bricks_red/icon_slope_left.png" type="Texture" id=92]
 [ext_resource path="res://assets/tiles/bricks_green/icon_slope_right.png" type="Texture" id=93]
+[ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=94]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -1790,6 +1791,17 @@ z_index = -1
 change_to = "BonePlatform"
 icon = ExtResource( 84 )
 preview = ExtResource( 83 )
+
+[node name="Sign" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 14
+is_object = true
+object_center = Vector2( 16, 12 )
+tile_mode_offset = Vector2( 0, -4 )
+z_index = -1
+change_to = "Sign"
+icon = ExtResource( 94 )
+preview = ExtResource( 94 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
