@@ -53,7 +53,6 @@ func req(arguments):
 		print("[ERROR] Connection failed: ", http.get_status()) # Else return from the function
 		return
 
-
 	# Setup headers
 	var headers = [
 		"User-Agent: Mozilla/5.0",

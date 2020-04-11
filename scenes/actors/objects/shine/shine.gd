@@ -29,7 +29,6 @@ func collect(body):
 		#sound.play() -Sound doesn't carry over between scenes, so it cuts off
 		collected = true
 		visible = false
-		emit_signal("on_collect")
 
 func _ready():
 	if mode != 1:
