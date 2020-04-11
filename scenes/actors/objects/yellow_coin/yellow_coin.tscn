@@ -5,8 +5,6 @@
 [ext_resource path="res://scenes/actors/objects/yellow_coin/coin.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/yellow/spin.tres" type="Texture" id=4]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="Coin" type="Node2D"]
@@ -31,3 +29,7 @@ volume_db = -9.0
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 24, 24 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+process_parent = true
+physics_process_parent = true

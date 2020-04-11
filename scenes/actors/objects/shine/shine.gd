@@ -35,7 +35,7 @@ func _ready():
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "collect")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	effects.rotation_degrees += 0.5
 	if collected:
 		var sprite = character.get_node("Sprite")

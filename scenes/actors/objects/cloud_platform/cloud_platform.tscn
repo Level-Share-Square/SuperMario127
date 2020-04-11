@@ -51,3 +51,12 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CloudPlatform/Area2D"]
 position = Vector2( 32, 0 )
 shape = SubResource( 2 )
+
+[node name="VisibilityEnabler2D2" type="VisibilityEnabler2D" parent="CloudPlatform"]
+position = Vector2( 32, 4 )
+process_parent = true
+physics_process_parent = true
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+process_parent = true
+physics_process_parent = true

@@ -38,3 +38,7 @@ shape = SubResource( 3 )
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+process_parent = true
+physics_process_parent = true

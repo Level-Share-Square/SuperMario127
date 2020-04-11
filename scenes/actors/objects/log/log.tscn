@@ -46,3 +46,7 @@ collision_mask = 2
 shape = SubResource( 3 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+process_parent = true
+physics_process_parent = true
