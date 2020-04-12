@@ -76,10 +76,10 @@ func _dl_thread(arguments):
 			AUDIO_WAV:format = "wav"
 
 		if current_os == "X11" or current_os == "OSX":
-			OS.execute(str(user_directory) + "/youtube-dl",  PoolStringArray(["-x", "--audio-format", format, "--no-continue", "-q", destination_path+filename+".%(ext)s", url]), true)
+			OS.execute(str(user_directory) + "/youtube-dl",  PoolStringArray(["-x", "--audio-format", format, "--no-continue", "-o", destination_path+filename+".%(ext)s", url]), true)
 		elif current_os == "Windows":
 			var time_start : float = OS.get_ticks_msec()
-			OS.execute(str(user_directory) + "/youtube-dl.exe",  PoolStringArray(["-x", "--audio-format", format, "--no-continue", "-q", destination_path+filename+".%(ext)s", url]), true)
+			OS.execute(str(user_directory) + "/youtube-dl.exe",  PoolStringArray(["-x", "--audio-format", format, "--no-continue", "-o", destination_path+filename+".%(ext)s", url]), true)
 			print(str((OS.get_ticks_msec() - time_start) / 1000.0))
 
 	else:
