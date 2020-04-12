@@ -57,7 +57,7 @@ func req(arguments):
 	var headers = [
 		"User-Agent: Mozilla/5.0",
 		"Accept: */*"
- ]
+	]
 
 
 	# Make the request

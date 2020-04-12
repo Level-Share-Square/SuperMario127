@@ -76,9 +76,10 @@ func _dl_thread(arguments):
 			AUDIO_WAV:format = "wav"
 
 		if current_os == "X11" or current_os == "OSX":
-			OS.execute(str(user_directory) + "/youtube-dl",  PoolStringArray(["-x", "--audio-format", format, "--no-continue","-o", destination_path+filename+".%(ext)s",url]), true)
+			OS.execute(str(user_directory) + "/youtube-dl",  PoolStringArray(["-x", "--audio-format", format, "--no-continue","-o", "-4", "/c/q", destination_path+filename+".%(ext)s",url]), true)
 		elif current_os == "Windows":
-			OS.execute(str(user_directory) + "/youtube-dl.exe",  PoolStringArray(["-x", "--audio-format", format, "--no-continue","-o", destination_path+filename+".%(ext)s",url]), true)
+			print("B")
+			OS.execute(str(user_directory) + "/youtube-dl.exe",  PoolStringArray(["-x", "--audio-format", format, "--no-continue","-o", "-4", "/c/q", destination_path+filename+".%(ext)s",url]), true)
 
 	else:
 		
@@ -98,7 +99,8 @@ func _dl_thread(arguments):
 			OS.execute(str(user_directory) + "/youtube-dl",  PoolStringArray(["-f", format, "--no-continue","-o", destination_path+filename+".%(ext)s",url]), true)
 		elif current_os == "Windows":
 			OS.execute(str(user_directory) + "/youtube-dl.exe",  PoolStringArray(["-f", format, "--no-continue","-o", destination_path+filename+".%(ext)s",url]), true)
-
+			print("A")
+	
 	emit_signal("download_complete")
 
 #func load_ogg():
