@@ -24,6 +24,12 @@ var connectable_signals : PoolStringArray = []
 signal process
 signal physics_process
 
+var process_frame_counter = 0
+var physics_frame_counter = 0
+
+var has_process_connection = false
+var has_physics_connection = false
+
 func is_savable_property(key) -> bool:
 	for savable_property in (base_savable_properties + savable_properties):
 		if key == savable_property:
@@ -59,16 +65,33 @@ func _set_property_values():
 	pass
 	
 func _process(_delta):
-	emit_signal("process")
+	if has_process_connection:
+		process_frame_counter -= 1
+		if process_frame_counter <= 0:
+			emit_signal("process")
+			process_frame_counter = 4
 	
 func _physics_process(_delta):
-	emit_signal("physics_process")
+	if has_physics_connection:
+		physics_frame_counter -= 1
+		if physics_frame_counter <= 0:
+			emit_signal("physics_process")
+			physics_frame_counter = 4
 
 func _init_signals():
 	var index = 0
 	for signal_name in (base_connectable_signals + connectable_signals):
 		var _connect = connect(signal_name, self, "on_signal_fire", [index])
 		index += 1
+		if index < level_object.player_signal_connections.size():
+			if signal_name == "physics_process":
+				if level_object.player_signal_connections[index].size() > 0:
+					has_physics_connection = true
+					print("A")
+			elif signal_name == "process":
+				if level_object.player_signal_connections[index].size() > 0:
+					has_process_connection = true
+
 
 func on_signal_fire(index):
 	var current_mode = get_tree().get_current_scene().mode

@@ -21,7 +21,7 @@ func exit_area(body):
 		character = null
 		
 
-func _physics_process(_delta):
+func _process(_delta):
 	if character != null:
 		var direction = transform.y.normalized()
 		var line_center = position + (direction * buffer)
