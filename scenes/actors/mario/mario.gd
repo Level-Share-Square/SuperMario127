@@ -309,7 +309,7 @@ func _physics_process(delta: float):
 	# Gravity
 	velocity += gravity * Vector2(0, gravity_scale)
 	
-	if (state == null or !state.override_rotation) and !rotating_jump:
+	if (state == null or !state.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
 		
 		var sprite_rotation = 0
 		
