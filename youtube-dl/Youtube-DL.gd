@@ -15,36 +15,19 @@ signal ready
 var ready = false
 
 func _init():
-	print("[YouTubeDl]: Downloading latest youtube-dl version...")
 	_downloader.connect("request_completed", self, "_http_download_complete")
 
 	# Download youtube-dl
 	if current_os == "X11" or current_os == "OSX":
-		_downloader.download("https://yt-dl.org/downloads/latest/youtube-dl", user_directory + "/", "youtube-dl")
+		pass
+		#_downloader.download("https://yt-dl.org/downloads/latest/youtube-dl", user_directory + "/", "youtube-dl")
 
 	elif current_os == "Windows":
 		var file = File.new()
-		if not file.file_exists(user_directory + "/youtube-dl.exe"):
-			_downloader.download("https://yt-dl.org/downloads/latest/youtube-dl.exe", user_directory + "/", "youtube-dl.exe")
-		else:
+		if file.file_exists(user_directory + "/youtube-dl.exe"):
 			_http_download_complete()
 
 func _http_download_complete():
-	if current_os == "Windows": # If on Windows, download ffmpeg and ffprobe
-		print("[YouTubeDl]: Downloading ffmpeg and ffprobe")
-		var file = File.new()
-
-		if not file.file_exists(user_directory + "/ffmpeg.exe"):
-			_downloader.download("https://framadrive.org/s/AyDTFJ7sRi3T2eD/download", user_directory + "/", "ffmpeg.exe")
-			return
-
-		elif not file.file_exists(user_directory + "/ffprobe.exe"):
-			_downloader.download("https://framadrive.org/s/tKoXQpcpgG4LKcM/download", user_directory + "/", "ffprobe.exe")
-			return
-
-	elif current_os =="X11" or current_os =="OSX": # Else on Linux and OSX make youtube-dl executable
-		OS.execute("chmod", PoolStringArray(["+x", OS.get_user_data_dir()+"/youtube-dl"]), false)
-
 	ready = true
 	print("[YouTubeDl]: Ready!")
 	emit_signal("ready")
