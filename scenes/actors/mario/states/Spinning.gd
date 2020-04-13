@@ -67,7 +67,7 @@ func _general_update(delta):
 		spin_timer -= delta
 		if spin_timer <= 0:
 			spin_timer = 0
-	if character.spin or character.spin_just_pressed:
+	if character.inputs[4][0] or character.inputs[4][1]:
 		spin_timer = 0.15	
 	if character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0)):
 		spin_timer = 0

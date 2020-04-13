@@ -39,4 +39,4 @@ func _stop(delta):
 		character.heavy = false
 
 func _stop_check(_delta):
-	return character.is_grounded() or character.gp_cancel_just_pressed
+	return character.is_grounded() or character.inputs[6][1]

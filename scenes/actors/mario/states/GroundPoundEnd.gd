@@ -51,5 +51,5 @@ func _general_update(delta):
 		jump_timer -= delta
 		if jump_timer <= 0:
 			jump_timer = 0
-	if character.jump_just_pressed:
+	if character.inputs[2][1]:
 		jump_timer = 0.15

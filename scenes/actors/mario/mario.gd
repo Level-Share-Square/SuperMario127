@@ -59,6 +59,10 @@ export var controllable = true
 export var dead = false
 export var dive_cooldown = 0
 
+var fludd = null
+var fuel := 100
+var stamina := 100
+
 # Collision vars
 var collision_down
 var collision_up
@@ -96,30 +100,20 @@ export var luigi_accel : float
 export var luigi_fric : float
 export var luigi_speed : float
 
-# Inputs
-export var left = false
-export var left_just_pressed = false
-
-export var right = false
-export var right_just_pressed = false
-
-export var jump = false
-export var jump_just_pressed = false
-
-export var dive = false
-export var dive_just_pressed = false
-
-export var spin = false
-export var spin_just_pressed = false
-
-export var gp = false
-export var gp_just_pressed = false
-
-export var gp_cancel = false
-export var gp_cancel_just_pressed = false
-
-export var interact = false
-export var interact_just_pressed = false
+# Inputs 
+# First parameter is "pressed",
+# second parameter is "just_pressed", 
+# and third parameter is the input name.
+export var inputs = [
+	[false, false, "move_left_"], # Index 0
+	[false, false, "move_right_"], # Index 1
+	[false, false, "jump_"], # Index 2
+	[false, false, "dive_"], # Index 3
+	[false, false, "spin_"], # Index 4
+	[false, false, "ground_pound_"], # Index 5
+	[false, false, "ground_pound_cancel_"], # Index 6
+	[false, false, "use_fludd_"] # Index 7
+]
 
 export var controlled_locally = true
 
@@ -328,98 +322,22 @@ func _physics_process(delta: float):
 			var control_id = player_id
 			if PlayerSettings.other_player_id != -1 or number_of_players == 1:
 				control_id = PlayerSettings.control_mode
-			if Input.is_action_pressed("move_left_" + str(control_id)) and !Input.is_blocking_signals():
-				left = true
-			else:
-				left = false
-			if Input.is_action_just_pressed("move_left_" + str(control_id)):
-				left_just_pressed = true
-			else:
-				left_just_pressed = false
+			for input in inputs:
+				var input_id = input[2]
 				
-			if Input.is_action_pressed("move_right_" + str(control_id)):
-				right = true
-			else:
-				right = false
-			if Input.is_action_just_pressed("move_right_" + str(control_id)):
-				right_just_pressed = true
-			else:
-				right_just_pressed = false
+				if Input.is_action_pressed(input_id + str(control_id)):
+					input[0] = true
+				else:
+					input[0] = false
 				
-			if Input.is_action_pressed("jump_" + str(control_id)):
-				jump = true
-			else:
-				jump = false
-			if Input.is_action_just_pressed("jump_" + str(control_id)):
-				jump_just_pressed = true
-			else:
-				jump_just_pressed = false
-				
-			if Input.is_action_pressed("dive_" + str(control_id)):
-				dive = true
-			else:
-				dive = false
-			if Input.is_action_just_pressed("dive_" + str(control_id)):
-				dive_just_pressed = true
-			else:
-				dive_just_pressed = false
-				
-			if Input.is_action_pressed("spin_" + str(control_id)):
-				spin = true
-			else:
-				spin = false
-			if Input.is_action_just_pressed("spin_" + str(control_id)):
-				spin_just_pressed = true
-			else:
-				spin_just_pressed = false
-				
-			if Input.is_action_pressed("ground_pound_" + str(control_id)):
-				gp = true
-			else:
-				gp = false
-			if Input.is_action_just_pressed("ground_pound_" + str(control_id)):
-				gp_just_pressed = true
-			else:
-				gp_just_pressed = false
-				
-			if Input.is_action_pressed("ground_pound_cancel_" + str(control_id)):
-				gp_cancel = true
-			else:
-				gp_cancel = false
-			if Input.is_action_just_pressed("ground_pound_cancel_" + str(control_id)):
-				gp_cancel_just_pressed = true
-			else:
-				gp_cancel_just_pressed = false
-				
-			if Input.is_action_pressed("interact_" + str(control_id)):
-				interact = true
-			else:
-				interact = false
-			if Input.is_action_just_pressed("interact_" + str(control_id)):
-				interact_just_pressed = true
-			else:
-				interact_just_pressed = false
+				if Input.is_action_just_pressed(input_id + str(control_id)):
+					input[1] = true
+				else:
+					input[1] = false
 		else:
-			left = false
-			left_just_pressed = false
-			
-			right = false
-			right_just_pressed = false
-			
-			jump = false
-			jump_just_pressed = false
-			
-			dive = false
-			dive_just_pressed = false
-			
-			spin = false
-			spin_just_pressed = false
-			
-			gp_cancel = false
-			gp_cancel_just_pressed = false
-			
-			interact = false
-			interact_just_pressed = false
+			for input in inputs:
+				input[0] = false
+				input[1] = false
 	
 	if state != null:
 		disable_movement = state.disable_movement
@@ -431,10 +349,11 @@ func _physics_process(delta: float):
 		disable_animation = false
 	# Movement
 	move_direction = 0
-	if left and !right and disable_movement == false:
+	if inputs[0][0] and !inputs[1][0] and disable_movement == false:
 		move_direction = -1
-	elif right and !left and disable_movement == false:
+	elif inputs[1][0] and !inputs[0][0] and disable_movement == false:
 		move_direction = 1
+		
 	if move_direction != 0:
 		if is_grounded():
 			if ((velocity.x > 0 and move_direction == -1) or (velocity.x < 0 and move_direction == 1)):

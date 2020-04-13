@@ -13,7 +13,7 @@ func _ready():
 	blacklisted_states = ["DiveState", "GroundPoundState", "GroundPoundEndState"]
 
 func _start_check(_delta):
-	return character.gp_just_pressed and !character.is_grounded()
+	return character.inputs[5][1] and !character.is_grounded()
 
 func _start(_delta):
 	wait_timer = 0.35

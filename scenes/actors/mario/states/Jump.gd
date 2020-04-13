@@ -134,9 +134,9 @@ func _general_update(delta):
 		jump_buffer -= delta
 		if jump_buffer < 0:
 			jump_buffer = 0
-	if character.jump_just_pressed:
+	if character.inputs[2][1]:
 		jump_buffer = 0.075
-	if character.dive_just_pressed:
+	if character.inputs[3][1]:
 		dive_buffer = 0.075
 	if dive_buffer > 0:
 		dive_buffer -= delta
