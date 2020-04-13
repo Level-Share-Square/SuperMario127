@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://scenes/player/player_1_char.gd" type="Script" id=27]
 [ext_resource path="res://scenes/player/player_2_char.gd" type="Script" id=28]
 [ext_resource path="res://scenes/player/confirm_button.gd" type="Script" id=29]
+[ext_resource path="res://scenes/actors/fludd_display/fludd_display.tscn" type="PackedScene" id=30]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -758,6 +759,8 @@ placeholder_alpha = 0.35
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="FluddDisplay" parent="UI" instance=ExtResource( 30 )]
 
 [node name="Viewports" type="HBoxContainer" parent="."]
 margin_right = 772.0

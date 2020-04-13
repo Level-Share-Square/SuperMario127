@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://scenes/actors/mario/states/GroundPound.gd" type="Script" id=19]
 [ext_resource path="res://scenes/actors/mario/states/GroundPoundEnd.gd" type="Script" id=20]
 [ext_resource path="res://scenes/actors/mario/luigi_frames.tres" type="SpriteFrames" id=21]
+[ext_resource path="res://scenes/actors/mario/nozzles/Hover.gd" type="Script" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -218,3 +219,8 @@ position = Vector2( 8.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 32 )
 collision_mask = 2
+
+[node name="Nozzles" type="Node" parent="."]
+
+[node name="HoverNozzle" type="Node" parent="Nozzles"]
+script = ExtResource( 22 )

@@ -1,6 +1,6 @@
 extends GameObject
 
-var show_behind_layer := true
+var show_behind_layer := false
 
 func _set_properties():
 	savable_properties = ["show_behind_layer"]

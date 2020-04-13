@@ -5,6 +5,7 @@ class_name Character
 signal state_changed
 
 onready var states_node = $States
+onready var nozzles_node = $Nozzles
 onready var animated_sprite = $Sprite
 
 onready var spotlight = $Spotlight
@@ -59,9 +60,9 @@ export var controllable = true
 export var dead = false
 export var dive_cooldown = 0
 
-var fludd = null
-var fuel := 100
-var stamina := 100
+var nozzle = null
+var fuel := 100.0
+var stamina := 100.0
 
 # Collision vars
 var collision_down
@@ -162,6 +163,7 @@ puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_a
 	controllable = is_controllable
 
 func load_in(_level_data : LevelData, level_area : LevelArea):
+	nozzle = $Nozzles/HoverNozzle
 	level_size = level_area.settings.size
 	for exception in collision_exceptions:
 		add_collision_exception_with(get_node(exception))
@@ -420,6 +422,9 @@ func _physics_process(delta: float):
 	if PlayerSettings.other_player_id == -1 or PlayerSettings.my_player_index == player_id:
 		for state_node in states_node.get_children():
 			state_node.handle_update(delta)
+			
+		for nozzle_node in nozzles_node.get_children():
+			nozzle_node.handle_update(delta)
 
 	if state != null:
 		if state.disable_snap:

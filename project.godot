@@ -74,11 +74,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Fall.gd"
 }, {
-"base": "Node",
-"class": "Fludd",
-"language": "GDScript",
-"path": "res://scenes/actors/mario/Fludd.gd"
-}, {
 "base": "Resource",
 "class": "ForegroundResource",
 "language": "GDScript",
@@ -123,6 +118,11 @@ _global_script_classes=[ {
 "class": "GroundPoundState",
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/GroundPound.gd"
+}, {
+"base": "Nozzle",
+"class": "HoverNozzle",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/nozzles/Hover.gd"
 }, {
 "base": "Resource",
 "class": "IdMap",
@@ -208,6 +208,11 @@ _global_script_classes=[ {
 "class": "NotCondition",
 "language": "GDScript",
 "path": "res://interpreter/conditions/NotCondition.gd"
+}, {
+"base": "Node",
+"class": "Nozzle",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/Nozzle.gd"
 }, {
 "base": "Reference",
 "class": "OrCondition",
@@ -323,7 +328,6 @@ _global_script_class_icons={
 "EqualsCondition": "",
 "ExitScopeInstruction": "",
 "FallState": "",
-"Fludd": "",
 "ForegroundResource": "",
 "FunctionStruct": "",
 "GameObject": "",
@@ -333,6 +337,7 @@ _global_script_class_icons={
 "GroundPoundEndState": "",
 "GroundPoundStartState": "",
 "GroundPoundState": "",
+"HoverNozzle": "",
 "IdMap": "",
 "IfStatementInstruction": "",
 "InterpreterEnvironment": "",
@@ -350,6 +355,7 @@ _global_script_class_icons={
 "LevelTileset": "",
 "MethodExecution": "",
 "NotCondition": "",
+"Nozzle": "",
 "OrCondition": "",
 "ParallaxLayerResource": "",
 "PlaceableItem": "",
