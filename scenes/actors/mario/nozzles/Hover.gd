@@ -36,7 +36,6 @@ func _activated_update(delta):
 	var normal = character.sprite.transform.y.normalized()
 	character.jump_animation = 0
 	
-	character.is_wj_chained = false
 	if is_state("WallJumpState"):
 		character.state.limit_y = false
 	
