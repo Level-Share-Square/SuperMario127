@@ -1,5 +1,9 @@
 extends Sprite
 
+func _ready():
+	var editor = get_parent()
+	update_preview(editor.selected_box.item)
+
 func update_preview(item: Node):
 	if item:
 		texture = item.preview

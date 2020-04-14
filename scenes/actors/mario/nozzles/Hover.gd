@@ -36,9 +36,6 @@ func _activated_update(delta):
 	var normal = character.sprite.transform.y.normalized()
 	character.jump_animation = 0
 	
-	if is_state("WallJumpState"):
-		character.state.limit_y = false
-	
 	var power = -boost_power * (character.stamina / 100)
 	if abs(character.velocity.x) < abs(power * normal.x) * 8:
 		character.velocity.x -= accel * normal.x
