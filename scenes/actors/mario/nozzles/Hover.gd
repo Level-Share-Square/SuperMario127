@@ -2,8 +2,8 @@ extends Nozzle
 
 class_name HoverNozzle
 
-export var boost_power := 30
-export var depletion := 0.20
+export var boost_power := 40
+export var depletion := 0.3
 var last_activated = false
 
 var accel = 15
