@@ -30,6 +30,8 @@ var right_held = false
 var hovered_object
 var rotating = false
 
+var time_clicked = 0.0
+
 export var layer = 1
 export var layers_transparent = false
 
@@ -102,7 +104,7 @@ func _process(delta):
 		
 		if selected_box and selected_box.item and selected_box.item.is_object:
 			var objects = shared_node.get_objects_overlapping_position(mouse_pos)
-			if objects.size() > 0 and placement_mode != "Tile" and !rotating:
+			if objects.size() > 0 and placement_mode != "Tile" and !rotating and time_clicked <= 0:
 				if hovered_object != objects[0]:
 					if hovered_object != null:
 						hovered_object.modulate = Color(1, 1, 1)
@@ -110,7 +112,7 @@ func _process(delta):
 					hovered_object.hovered = true
 					hovered_object.modulate = Color(0.65, 0.65, 1)
 					item_preview_node.visible = false
-			elif hovered_object != null and !rotating:
+			elif hovered_object != null and !rotating and time_clicked <= 0:
 				hovered_object.modulate = Color(1, 1, 1)
 				hovered_object.hovered = false
 				hovered_object = null
@@ -118,18 +120,33 @@ func _process(delta):
 		
 		if hovered_object and Input.is_action_just_pressed("rotate"):
 			rotating = true
+			
+		if hovered_object and left_held and Input.is_action_just_pressed("place") and !rotating:
+			time_clicked += delta
+			
+		if hovered_object and time_clicked > 0 and left_held:
+			time_clicked += delta
+			if time_clicked > 0.1:
+				var obj_position = mouse_pos
+				if Input.is_action_pressed("8_pixel_lock"):
+					obj_position = Vector2(stepify(obj_position.x, 8), stepify(obj_position.y, 8))
+				hovered_object.set_property("position", obj_position, true)
 		
 		if hovered_object and rotating:
 			hovered_object.rotation = -90 + hovered_object.position.angle_to_point(mouse_pos)
 			if Input.is_action_pressed("8_pixel_lock"):
 				hovered_object.rotation_degrees = stepify(hovered_object.rotation_degrees, 15)
 				
-		if hovered_object and left_held and Input.is_action_just_pressed("place"):
+		if hovered_object and Input.is_action_just_released("place") and time_clicked > 0 and time_clicked < 0.1:
 			if !rotating:
 				object_settings_node.open_object(hovered_object)
-			else:
-				rotating = false
-				hovered_object.set_property("rotation_degrees", fmod(hovered_object.rotation_degrees, 360), true)
+				
+		if hovered_object and Input.is_action_just_pressed("place") and rotating:
+			rotating = false
+			hovered_object.set_property("rotation_degrees", fmod(hovered_object.rotation_degrees, 360), true)
+
+		if !left_held:
+			time_clicked = 0
 		
 		if left_held and selected_box and selected_box.item:
 			var item = selected_box.item

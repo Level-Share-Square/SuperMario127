@@ -23,7 +23,7 @@ func ready():
 	preview_position = Vector2(0, 92)
 
 func _input(event):
-	if event.is_pressed() and hovered:
+	if event is InputEventMouseButton and event.is_pressed() and hovered:
 		if event.button_index == 5: # Mouse wheel down
 			parts -= 1
 			if parts < 0:
