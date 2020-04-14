@@ -43,7 +43,8 @@ func _activated_update(delta):
 	var power = -boost_power * (character.stamina / 100)
 	if abs(character.velocity.x) < abs(power * normal.x) * 3.5:
 		character.velocity.x -= accel * normal.x
-	if character.velocity.y > power * normal.y:
+		
+	if (character.velocity.y > power * normal.y and normal.y > 0) or (character.velocity.y < power * normal.y and normal.y < 0):
 		character.velocity.y -= accel * normal.y
 	character.stamina -= depletion
 	
