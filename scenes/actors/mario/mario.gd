@@ -134,6 +134,7 @@ onready var dive_collision_shape = $GroundCollisionDive
 onready var player_collision = $PlayerCollision
 onready var player_collision_shape = $PlayerCollision/CollisionShape2D
 onready var sprite = $Sprite
+onready var fludd_sprite = $Sprite/Fludd
 
 var level_size = Vector2(80, 30)
 var number_of_players = 2
@@ -305,7 +306,7 @@ func _physics_process(delta: float):
 	# Gravity
 	velocity += gravity * Vector2(0, gravity_scale)
 	
-	if (state == null or !state.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
+	if (state == null or !state.override_rotation) and (nozzle == null or !nozzle.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
 		
 		var sprite_rotation = 0
 		

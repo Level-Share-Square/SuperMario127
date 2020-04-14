@@ -127,6 +127,10 @@ frames = ExtResource( 1 )
 animation = "idleRight"
 playing = true
 
+[node name="Fludd" type="AnimatedSprite" parent="Sprite"]
+animation = "idleRight"
+playing = true
+
 [node name="States" type="Node" parent="."]
 
 [node name="FallState" type="Node" parent="States"]
@@ -186,7 +190,7 @@ shape = SubResource( 8 )
 
 [node name="Spotlight" type="Light2D" parent="."]
 light_mask = 0
-position = Vector2( 0, 0.0750427 )
+position = Vector2( 0.107422, -0.0325013 )
 texture = ExtResource( 17 )
 mode = 3
 range_item_cull_mask = 524288

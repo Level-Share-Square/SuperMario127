@@ -4,8 +4,10 @@ class_name Nozzle
 
 var character: Character
 var activated: bool
-export var sprite: StreamTexture
+var override_rotation: bool
 var blacklisted_states = []
+
+export var sprite: StreamTexture
 
 func _ready():
 	character = get_node("../../")
