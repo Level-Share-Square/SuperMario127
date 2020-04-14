@@ -78,7 +78,7 @@ func set_selected_box(new_selected_box: Node):
 func switch_scenes():
 	var _change_scene = get_tree().change_scene("res://scenes/player/player.tscn")
 
-func _process(_delta):
+func _process(delta):
 	if get_viewport().get_mouse_position().y > 70:
 		var mouse_pos = get_global_mouse_position()
 		if Input.is_action_pressed("lock_tile_axis") and (Input.is_action_pressed("place") or Input.is_action_pressed("erase")):
@@ -107,10 +107,12 @@ func _process(_delta):
 					if hovered_object != null:
 						hovered_object.modulate = Color(1, 1, 1)
 					hovered_object = objects[0]
+					hovered_object.hovered = true
 					hovered_object.modulate = Color(0.65, 0.65, 1)
 					item_preview_node.visible = false
 			elif hovered_object != null and !rotating:
 				hovered_object.modulate = Color(1, 1, 1)
+				hovered_object.hovered = false
 				hovered_object = null
 				item_preview_node.visible = true
 		

@@ -8,6 +8,7 @@ var mode := 0
 var level_data = null
 var level_area = null
 var level_object = null
+var hovered := false
 
 var enabled = true
 var preview_position := Vector2(72, 92)

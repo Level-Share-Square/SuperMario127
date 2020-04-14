@@ -22,6 +22,17 @@ func _set_property_values():
 func ready():
 	preview_position = Vector2(0, 92)
 
+func _input(event):
+	if event.is_pressed() and hovered:
+		if event.button_index == 5: # Mouse wheel down
+			parts -= 1
+			if parts < 0:
+				parts = 0
+			set_property("parts", parts, true)
+		elif event.button_index == 4: # Mouse wheel up
+			parts += 1
+			set_property("parts", parts, true)
+
 func _process(delta):
 	if parts != last_parts:
 		platform.parts = parts
