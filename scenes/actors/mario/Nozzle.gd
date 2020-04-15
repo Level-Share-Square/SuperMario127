@@ -7,7 +7,10 @@ var activated: bool
 var override_rotation: bool
 var blacklisted_states = []
 
-export var sprite: StreamTexture
+export var frames : SpriteFrames
+export var animation_water_positions = {}
+export var fallback_water_pos_left : Vector2
+export var fallback_water_pos_right : Vector2
 
 func _ready():
 	character = get_node("../../")

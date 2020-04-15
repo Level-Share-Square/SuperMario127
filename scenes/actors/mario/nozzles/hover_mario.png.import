@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hover.png-1c2c33c9d234fdd938465ce37b0a9c7f.stex"
+path="res://.import/hover_mario.png-7c09796840608113de9e11b845a9ec97.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mario/nozzles/hover.png"
-dest_files=[ "res://.import/hover.png-1c2c33c9d234fdd938465ce37b0a9c7f.stex" ]
+source_file="res://scenes/actors/mario/nozzles/hover_mario.png"
+dest_files=[ "res://.import/hover_mario.png-7c09796840608113de9e11b845a9ec97.stex" ]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://scenes/actors/mario/states/GroundPoundEnd.gd" type="Script" id=20]
 [ext_resource path="res://scenes/actors/mario/luigi_frames.tres" type="SpriteFrames" id=21]
 [ext_resource path="res://scenes/actors/mario/nozzles/Hover.gd" type="Script" id=22]
+[ext_resource path="res://scenes/actors/mario/nozzles/hover_frames.tres" type="SpriteFrames" id=23]
+[ext_resource path="res://scenes/actors/mario/nozzles/water_frames.tres" type="SpriteFrames" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -128,8 +130,17 @@ animation = "idleRight"
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
+frames = ExtResource( 23 )
 animation = "idleRight"
 playing = true
+
+[node name="Water" type="AnimatedSprite" parent="Sprite"]
+position = Vector2( -16, -11 )
+frames = ExtResource( 24 )
+animation = "in"
+frame = 6
+playing = true
+centered = false
 
 [node name="States" type="Node" parent="."]
 
@@ -190,7 +201,6 @@ shape = SubResource( 8 )
 
 [node name="Spotlight" type="Light2D" parent="."]
 light_mask = 0
-position = Vector2( 0.107422, -0.0325013 )
 texture = ExtResource( 17 )
 mode = 3
 range_item_cull_mask = 524288
@@ -228,3 +238,19 @@ collision_mask = 2
 
 [node name="HoverNozzle" type="Node" parent="Nozzles"]
 script = ExtResource( 22 )
+frames = ExtResource( 23 )
+animation_water_positions = {
+"diveLeft": Vector2( -4, -12 ),
+"diveRight": Vector2( -16, -11 ),
+"fallLeft": Vector2( -1, -4 ),
+"fallRight": Vector2( -20, -4 ),
+"jumpLeft": Vector2( -1, -4 ),
+"jumpRight": Vector2( -20, -4 ),
+"spinning": Vector2( 0, 1e+06 ),
+"tripleJumpLeft": Vector2( 0, 1e+06 ),
+"tripleJumpRight": Vector2( 0, 1e+06 ),
+"wallSlideLeft": Vector2( 0, 1e+06 ),
+"wallSlideRight": Vector2( 0, 1e+06 )
+}
+fallback_water_pos_left = Vector2( -3, -2 )
+fallback_water_pos_right = Vector2( -18, -2 )

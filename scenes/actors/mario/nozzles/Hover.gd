@@ -50,3 +50,12 @@ func _update(_delta):
 		
 	if !activated:
 		override_rotation = false
+
+	if activated and !last_activated:
+		character.water_sprite.animation = "out"
+		character.water_sprite.frame = 0
+	elif !activated and last_activated:
+		character.water_sprite.animation = "in"
+		character.water_sprite.frame = 0
+
+	last_activated = activated

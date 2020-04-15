@@ -135,6 +135,7 @@ onready var player_collision = $PlayerCollision
 onready var player_collision_shape = $PlayerCollision/CollisionShape2D
 onready var sprite = $Sprite
 onready var fludd_sprite = $Sprite/Fludd
+onready var water_sprite = $Sprite/Water
 
 var level_size = Vector2(80, 30)
 var number_of_players = 2
@@ -439,6 +440,22 @@ func _physics_process(delta: float):
 			snap = Vector2(0, 32)
 		else:
 			snap = Vector2()
+			
+	if nozzle != null:
+		fludd_sprite.frames = nozzle.frames
+		fludd_sprite.animation = sprite.animation
+		fludd_sprite.frame = sprite.frame
+		
+		if sprite.animation in nozzle.animation_water_positions:
+			water_sprite.position = nozzle.animation_water_positions[sprite.animation]
+		else:
+			if facing_direction == 1:
+				water_sprite.position = nozzle.fallback_water_pos_right
+			else:
+				water_sprite.position = nozzle.fallback_water_pos_left
+	else:
+		fludd_sprite.frames = null
+		water_sprite.visible = null
 
 	# Move by velocity
 	velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
