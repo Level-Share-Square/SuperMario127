@@ -6,6 +6,7 @@ var name := "My Level"
 var areas = []
 var functions = {}
 var global_vars_node = null
+var vars : LevelVars
 
 func _init():
 	pass
@@ -137,6 +138,7 @@ func load_in(code):
 		for area_result in result.areas:
 			var area = get_area(area_result)
 			areas.append(area)
+		vars = LevelVars.new()
 	else:
 		print("Outdated format version. Current version is " + current_format_version + ", but course uses version " + format_version + ".")
 

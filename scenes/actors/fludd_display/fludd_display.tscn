@@ -9,6 +9,7 @@ bg_color = Color( 1, 0, 0, 1 )
 bg_color = Color( 0.360784, 0, 0, 1 )
 
 [node name="FluddDisplay" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

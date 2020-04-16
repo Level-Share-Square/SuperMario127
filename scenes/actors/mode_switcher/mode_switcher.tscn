@@ -22,6 +22,7 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="Fader"]
 
 [node name="ModeSwitcherButton" type="TextureButton" parent="."]
+pause_mode = 2
 margin_left = 652.0
 margin_top = 154.903
 margin_right = 852.0

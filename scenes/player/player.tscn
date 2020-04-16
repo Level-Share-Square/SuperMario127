@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -30,82 +30,14 @@
 [ext_resource path="res://scenes/player/player_2_char.gd" type="Script" id=28]
 [ext_resource path="res://scenes/player/confirm_button.gd" type="Script" id=29]
 [ext_resource path="res://scenes/actors/fludd_display/fludd_display.tscn" type="PackedScene" id=30]
+[ext_resource path="res://scenes/player/ui/coin.png" type="Texture" id=31]
+[ext_resource path="res://scenes/player/coin_counter.gd" type="Script" id=32]
+[ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
 
 [sub_resource type="DynamicFont" id=1]
-size = 100
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 6 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.0705882, 0, 0.231373, 1 )
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0, 0.0470588, 0.317647, 1 )
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-
-[sub_resource type="DynamicFont" id=4]
-size = 76
-font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=5]
-size = 32
-outline_size = 4
-outline_color = Color( 0.054902, 0, 0.25098, 1 )
-font_data = ExtResource( 6 )
-
-[sub_resource type="DynamicFont" id=6]
-size = 32
-outline_size = 4
-outline_color = Color( 0.0392157, 0, 0.188235, 1 )
-font_data = ExtResource( 6 )
-
-[sub_resource type="DynamicFont" id=7]
-size = 20
-outline_size = 2
-outline_color = Color( 0.054902, 0, 0.25098, 1 )
-use_mipmaps = true
-font_data = ExtResource( 7 )
-
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 5
-border_width_right = 5
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
-[sub_resource type="DynamicFont" id=9]
-size = 20
-font_data = ExtResource( 7 )
-
-[sub_resource type="StyleBoxFlat" id=10]
-bg_color = Color( 0.15, 0.15, 0.15, 1 )
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-
-[sub_resource type="DynamicFont" id=11]
-size = 27
-font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=12]
-size = 24
-font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=13]
-font_data = ExtResource( 7 )
-
-[sub_resource type="StyleBoxFlat" id=14]
 bg_color = Color( 0, 0, 0, 0.12549 )
 border_width_left = 5
 border_width_right = 5
@@ -115,6 +47,93 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="DynamicFont" id=3]
+size = 24
+outline_size = 3
+outline_color = Color( 0.756863, 0.388235, 0, 1 )
+extra_spacing_char = 1
+extra_spacing_space = -8
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 24
+outline_size = 3
+outline_color = Color( 1, 0.627451, 0, 1 )
+extra_spacing_char = 1
+extra_spacing_space = -8
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 100
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.0705882, 0, 0.231373, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="DynamicFont" id=8]
+size = 76
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 32
+outline_size = 4
+outline_color = Color( 0.054902, 0, 0.25098, 1 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 32
+outline_size = 4
+outline_color = Color( 0.0392157, 0, 0.188235, 1 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 20
+outline_size = 2
+outline_color = Color( 0.054902, 0, 0.25098, 1 )
+use_mipmaps = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 5
+border_width_right = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="DynamicFont" id=13]
+size = 20
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.15, 0.15, 0.15, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="DynamicFont" id=15]
+size = 27
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 24
+font_data = ExtResource( 7 )
+
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
 nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"), NodePath("Viewports/ViewportContainer/Viewport/World/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/World/Character2"), NodePath("Viewports/ViewportContainer2/Viewport/CameraP2"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds"), NodePath("Viewports/ViewportContainer2/Viewport/Backgrounds") ]
@@ -123,7 +142,9 @@ character2 = NodePath("Viewports/ViewportContainer/Viewport/World/Character2")
 camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
 
 [node name="UI" type="CanvasLayer" parent="."]
-layer = 127
+pause_mode = 2
+layer = 63
+script = ExtResource( 33 )
 
 [node name="Divider" type="ColorRect" parent="UI"]
 margin_left = 384.0
@@ -133,6 +154,99 @@ color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ChatBox" type="Control" parent="UI"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 288.0
+margin_bottom = 169.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ChatBox"]
+visible = false
+margin_right = 283.0
+margin_bottom = 164.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/ChatBox/VBoxContainer"]
+margin_right = 283.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+scroll_active = false
+scroll_following = true
+custom_effects = [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ]
+
+[node name="EnterText" type="LineEdit" parent="UI/ChatBox/VBoxContainer"]
+margin_top = 145.0
+margin_right = 283.0
+margin_bottom = 164.0
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0901961, 0.196078, 0.458824, 1 )
+context_menu_enabled = false
+placeholder_text = "Enter text here."
+placeholder_alpha = 0.35
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FluddDisplay" parent="UI" instance=ExtResource( 30 )]
+
+[node name="CoinCounter" type="Control" parent="UI"]
+margin_left = 5.0
+margin_top = 15.0
+margin_right = 45.0
+margin_bottom = 55.0
+rect_rotation = -0.0704831
+script = ExtResource( 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelShadow" type="Label" parent="UI/CoinCounter"]
+margin_left = 44.0
+margin_top = 3.0
+margin_right = 189.0
+margin_bottom = 78.0
+rect_rotation = 0.0366689
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.756863, 0.388235, 0, 1 )
+text = "00
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/CoinCounter"]
+margin_left = 44.0
+margin_right = 189.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 1, 0.898039, 0, 1 )
+text = "00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Coin" type="Sprite" parent="UI/CoinCounter"]
+position = Vector2( 22, 11 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 31 )
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2
@@ -173,7 +287,7 @@ margin_top = 48.048
 margin_right = 1317.96
 margin_bottom = 148.048
 rect_pivot_offset = Vector2( 72, 0 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 5 )
 text = "PAUSED"
 align = 1
 valign = 1
@@ -211,10 +325,10 @@ margin_top = 129.0
 margin_right = 2840.0
 margin_bottom = 311.0
 rect_rotation = 180.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 4 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 action_mode = 0
 text = "Resume"
 script = ExtResource( 10 )
@@ -236,10 +350,10 @@ margin_top = 129.0
 margin_right = 2268.45
 margin_bottom = 311.0
 rect_rotation = 180.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 4 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 action_mode = 0
 text = "Retry"
 script = ExtResource( 10 )
@@ -261,10 +375,10 @@ margin_top = 129.0
 margin_right = 1477.0
 margin_bottom = 311.0
 rect_rotation = 180.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 4 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 action_mode = 0
 text = "Multiplayer"
 script = ExtResource( 22 )
@@ -300,7 +414,7 @@ margin_top = 143.986
 margin_right = 768.0
 margin_bottom = 182.986
 rect_pivot_offset = Vector2( 72, 0 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "No Shine Selected"
 align = 1
@@ -315,7 +429,7 @@ margin_top = -17.0
 margin_right = 768.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( 72, 0 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0.0392157, 0, 0.188235, 1 )
 text = "No Shine Selected"
 align = 1
@@ -329,7 +443,7 @@ margin_left = 0.375946
 margin_top = 194.168
 margin_right = 768.376
 margin_bottom = 275.168
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 11 )
 bbcode_enabled = true
 bbcode_text = "[center]You are in a custom level.[/center]"
 text = "You are in a custom level."
@@ -347,8 +461,8 @@ margin_left = 79.8377
 margin_top = 93.2382
 margin_right = 292.838
 margin_bottom = 135.238
-custom_styles/normal = SubResource( 8 )
-custom_fonts/font = SubResource( 9 )
+custom_styles/normal = SubResource( 12 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
 context_menu_enabled = false
 placeholder_text = "IP Address"
@@ -363,11 +477,11 @@ margin_left = 79.8377
 margin_top = 148.406
 margin_right = 292.838
 margin_bottom = 192.406
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/disabled = SubResource( 10 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 11 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 15 )
 action_mode = 0
 text = "Connect"
 script = ExtResource( 14 )
@@ -388,11 +502,11 @@ margin_left = 79.8377
 margin_top = 258.731
 margin_right = 292.838
 margin_bottom = 302.731
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/disabled = SubResource( 10 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 11 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 15 )
 action_mode = 0
 text = "Disconnect"
 script = ExtResource( 21 )
@@ -414,11 +528,11 @@ margin_left = 370.0
 margin_top = 259.0
 margin_right = 699.0
 margin_bottom = 303.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/disabled = SubResource( 10 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 11 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 15 )
 action_mode = 0
 text = "Confirm"
 script = ExtResource( 29 )
@@ -443,11 +557,11 @@ margin_left = 79.8377
 margin_top = 204.342
 margin_right = 292.838
 margin_bottom = 248.342
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/disabled = SubResource( 10 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 11 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 15 )
 action_mode = 0
 text = "Host"
 script = ExtResource( 15 )
@@ -503,7 +617,7 @@ margin_left = 442.0
 margin_top = 103.0
 margin_right = 604.0
 margin_bottom = 135.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 16 )
 text = "Control Mode:"
 align = 1
 valign = 1
@@ -516,7 +630,7 @@ margin_left = 636.0
 margin_top = 103.0
 margin_right = 674.0
 margin_bottom = 135.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 16 )
 text = "1"
 align = 1
 valign = 1
@@ -565,7 +679,7 @@ margin_left = 498.359
 margin_top = 102.986
 margin_right = 604.359
 margin_bottom = 134.986
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 16 )
 text = "Players:"
 align = 1
 valign = 1
@@ -578,7 +692,7 @@ margin_left = 636.0
 margin_top = 103.0
 margin_right = 674.0
 margin_bottom = 135.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 16 )
 text = "1"
 align = 1
 valign = 1
@@ -627,7 +741,7 @@ margin_left = 373.359
 margin_top = 102.0
 margin_right = 597.359
 margin_bottom = 134.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 16 )
 text = "Player 1 Character:"
 align = 1
 valign = 1
@@ -640,7 +754,7 @@ margin_left = 636.0
 margin_top = 103.0
 margin_right = 674.0
 margin_bottom = 134.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 16 )
 text = "M"
 align = 1
 valign = 1
@@ -689,7 +803,7 @@ margin_left = 370.0
 margin_top = 101.184
 margin_right = 597.0
 margin_bottom = 133.184
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 16 )
 text = "Player 2 Character:"
 align = 1
 valign = 1
@@ -702,65 +816,13 @@ margin_left = 636.0
 margin_top = 103.0
 margin_right = 674.0
 margin_bottom = 134.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 16 )
 text = "L"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ChatBox" type="Control" parent="UI"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 288.0
-margin_bottom = 169.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/ChatBox"]
-visible = false
-margin_right = 283.0
-margin_bottom = 164.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource( 20 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/ChatBox/VBoxContainer"]
-margin_right = 283.0
-margin_bottom = 141.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/mono_font = SubResource( 13 )
-custom_fonts/bold_italics_font = SubResource( 13 )
-custom_fonts/italics_font = SubResource( 13 )
-custom_fonts/bold_font = SubResource( 13 )
-custom_fonts/normal_font = SubResource( 13 )
-bbcode_enabled = true
-scroll_active = false
-scroll_following = true
-custom_effects = [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ]
-
-[node name="EnterText" type="LineEdit" parent="UI/ChatBox/VBoxContainer"]
-margin_top = 145.0
-margin_right = 283.0
-margin_bottom = 164.0
-custom_styles/normal = SubResource( 14 )
-custom_fonts/font = SubResource( 13 )
-custom_colors/font_color = Color( 0.0901961, 0.196078, 0.458824, 1 )
-context_menu_enabled = false
-placeholder_text = "Enter text here."
-placeholder_alpha = 0.35
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FluddDisplay" parent="UI" instance=ExtResource( 30 )]
 
 [node name="Viewports" type="HBoxContainer" parent="."]
 margin_right = 772.0

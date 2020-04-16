@@ -11,6 +11,7 @@ var destroy_timer = 0.0
 
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
+		CurrentLevelData.level_data.vars.coins_collected += 1
 		var player_id = 1
 		if body.name == "Character":
 			player_id = 0

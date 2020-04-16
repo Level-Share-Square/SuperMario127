@@ -43,6 +43,7 @@ func _activated_update(delta):
 	if (character.velocity.y > power * normal.y and normal.y > 0) or (character.velocity.y < power * normal.y and normal.y < 0):
 		character.velocity.y -= accel * normal.y
 	character.stamina -= depletion
+	character.attacking = true
 	
 func _update(_delta):
 	if character.is_grounded():
@@ -58,6 +59,14 @@ func _update(_delta):
 	elif !activated and last_activated:
 		character.water_sprite.animation = "in"
 		character.water_sprite.frame = 0
+		character.attacking = false
 		character.fludd_sound.stop()
 
 	last_activated = activated
+
+func _process(delta):
+	if character.nozzle == self:
+		if character.water_sprite.flip_h:
+			character.water_sprite.flip_h = false
+		else:
+			character.water_sprite.flip_h = true

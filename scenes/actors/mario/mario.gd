@@ -63,6 +63,7 @@ export var dive_cooldown = 0
 var nozzle = null
 var fuel := 100.0
 var stamina := 100.0
+var nozzles_list_index := 0
 
 # Collision vars
 var collision_down
@@ -114,7 +115,8 @@ export var inputs = [
 	[false, false, "ground_pound_"], # Index 5
 	[false, false, "ground_pound_cancel_"], # Index 6
 	[false, false, "use_fludd_"], # Index 7
-	[false, false, "crouch_"] # Index 8
+	[false, false, "switch_nozzles_"], # Index 8
+	[false, false, "crouch_"] # Index 9
 ]
 
 export var controlled_locally = true
@@ -138,6 +140,7 @@ onready var sprite = $Sprite
 onready var fludd_sprite = $Sprite/Fludd
 onready var water_sprite = $Sprite/Water
 onready var fludd_sound = $FluddSound
+onready var nozzle_switch_sound = $NozzleSwitchSound
 
 var level_size = Vector2(80, 30)
 var number_of_players = 2
@@ -166,8 +169,15 @@ puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_a
 	dead = is_dead
 	controllable = is_controllable
 
-func load_in(_level_data : LevelData, level_area : LevelArea):
+func load_in(level_data : LevelData, level_area : LevelArea):
 	nozzle = $Nozzles/HoverNozzle
+	var nozzle_found
+	for collected_nozzle in level_data.vars.nozzles_collected:
+		if collected_nozzle == nozzle:
+			nozzle_found = true
+	if !nozzle_found:
+		level_data.vars.nozzles_collected.append(nozzle)
+	
 	level_size = level_area.settings.size
 	for exception in collision_exceptions:
 		add_collision_exception_with(get_node(exception))
@@ -309,7 +319,7 @@ func _physics_process(delta: float):
 	# Gravity
 	velocity += gravity * Vector2(0, gravity_scale)
 	
-	if (state == null or !state.override_rotation) and (nozzle == null or !nozzle.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
+	if (state == null or !state.override_rotation) and (!is_instance_valid(nozzle) or !nozzle.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
 		
 		var sprite_rotation = 0
 		
@@ -443,7 +453,19 @@ func _physics_process(delta: float):
 		else:
 			snap = Vector2()
 			
-	if nozzle != null:
+	if inputs[8][1]:
+		nozzles_list_index += 1
+		if nozzles_list_index >= CurrentLevelData.level_data.vars.nozzles_collected.size():
+			nozzles_list_index = 0
+		
+		var new_nozzle = CurrentLevelData.level_data.vars.nozzles_collected[nozzles_list_index]
+		nozzle = new_nozzle
+		
+		nozzle_switch_sound.play()
+		
+	if is_instance_valid(nozzle):
+		fludd_sprite.visible = true
+		water_sprite.visible = true
 		if character == 0:
 			fludd_sprite.frames = nozzle.frames
 		else:
@@ -468,8 +490,8 @@ func _physics_process(delta: float):
 				else:
 					water_sprite.position = nozzle.fallback_water_pos_left_luigi
 	else:
-		fludd_sprite.frames = null
-		water_sprite.visible = null
+		fludd_sprite.visible = false
+		water_sprite.visible = false
 
 	# Move by velocity
 	velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
@@ -528,6 +550,7 @@ func kill(cause):
 				set_state_by_name("FallState", 0)
 		elif cause == "reload":
 			transition_time = 0.4
+			CurrentLevelData.level_data.vars = LevelVars.new()
 		elif cause == "green_demon":
 			controllable = false
 			cutout_in = cutout_death

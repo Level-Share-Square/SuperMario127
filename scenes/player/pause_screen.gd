@@ -31,62 +31,63 @@ func _unhandled_input(event):
 		toggle_pause()
 
 func toggle_pause():
-	if !shine_info.visible:
-		multiplayer_options.visible = false
-		shine_info.visible = true
-	resume_button.focus_mode = 0
-	
-	get_tree().paused = true if !self.visible and PlayerSettings.other_player_id == -1 else false
-	if self.visible:
-		FocusCheck.is_ui_focused = false
-		chat_node.visible = true
-		fade_tween.interpolate_property(darken, "modulate",
-		darken_color, Color(0, 0, 0, 0), 0.20,
-		Tween.TRANS_LINEAR, Tween.EASE_OUT)
-		fade_tween.start()
+	if !PhotoMode.enabled:
+		if !shine_info.visible:
+			multiplayer_options.visible = false
+			shine_info.visible = true
+		resume_button.focus_mode = 0
 		
-		topbar_tween.interpolate_property(topbar, "rect_position",
-		Vector2(0, 0), Vector2(0, -70), 0.20,
-		Tween.TRANS_QUAD, Tween.EASE_IN)
-		topbar_tween.start()
-		
-		bottombar_tween.interpolate_property(bottombar, "rect_position",
-		Vector2(768, 400), Vector2(768, 500), 0.20,
-		Tween.TRANS_QUAD, Tween.EASE_IN)
-		bottombar_tween.start()
-		
-		info_tween.interpolate_property(shine_info, "rect_scale",
-		Vector2(1, 1), Vector2(0, 0), 0.20,
-		Tween.TRANS_QUAD, Tween.EASE_IN)
-		info_tween.start()
-		
-		yield(fade_tween, "tween_completed")
-		self.visible = false
-	else:
-		FocusCheck.is_ui_focused = true
-		self.visible = true
-		chat_node.visible = false
-		fade_tween.interpolate_property(darken, "modulate",
-		Color(0, 0, 0, 0), darken_color, 0.20,
-		Tween.TRANS_LINEAR, Tween.EASE_OUT)
-		fade_tween.start()
-		
-		topbar_tween.interpolate_property(topbar, "rect_position",
-		Vector2(0, -70), Vector2(0, 0), 0.20,
-		Tween.TRANS_CIRC, Tween.EASE_OUT)
-		topbar_tween.start()
-		
-		bottombar_tween.interpolate_property(bottombar, "rect_position",
-		Vector2(768, 500), Vector2(768, 400), 0.20,
-		Tween.TRANS_CIRC, Tween.EASE_OUT)
-		bottombar_tween.start()
-		
-		info_tween.interpolate_property(shine_info, "rect_scale",
-		Vector2(0, 0), Vector2(1, 1), 0.20,
-		Tween.TRANS_CIRC, Tween.EASE_OUT)
-		info_tween.start()
-		
-		yield(fade_tween, "tween_completed")
+		get_tree().paused = true if !self.visible and PlayerSettings.other_player_id == -1 else false
+		if self.visible:
+			FocusCheck.is_ui_focused = false
+			chat_node.visible = true
+			fade_tween.interpolate_property(darken, "modulate",
+			darken_color, Color(0, 0, 0, 0), 0.20,
+			Tween.TRANS_LINEAR, Tween.EASE_OUT)
+			fade_tween.start()
+			
+			topbar_tween.interpolate_property(topbar, "rect_position",
+			Vector2(0, 0), Vector2(0, -70), 0.20,
+			Tween.TRANS_QUAD, Tween.EASE_IN)
+			topbar_tween.start()
+			
+			bottombar_tween.interpolate_property(bottombar, "rect_position",
+			Vector2(768, 400), Vector2(768, 500), 0.20,
+			Tween.TRANS_QUAD, Tween.EASE_IN)
+			bottombar_tween.start()
+			
+			info_tween.interpolate_property(shine_info, "rect_scale",
+			Vector2(1, 1), Vector2(0, 0), 0.20,
+			Tween.TRANS_QUAD, Tween.EASE_IN)
+			info_tween.start()
+			
+			yield(fade_tween, "tween_completed")
+			self.visible = false
+		else:
+			FocusCheck.is_ui_focused = true
+			self.visible = true
+			chat_node.visible = false
+			fade_tween.interpolate_property(darken, "modulate",
+			Color(0, 0, 0, 0), darken_color, 0.20,
+			Tween.TRANS_LINEAR, Tween.EASE_OUT)
+			fade_tween.start()
+			
+			topbar_tween.interpolate_property(topbar, "rect_position",
+			Vector2(0, -70), Vector2(0, 0), 0.20,
+			Tween.TRANS_CIRC, Tween.EASE_OUT)
+			topbar_tween.start()
+			
+			bottombar_tween.interpolate_property(bottombar, "rect_position",
+			Vector2(768, 500), Vector2(768, 400), 0.20,
+			Tween.TRANS_CIRC, Tween.EASE_OUT)
+			bottombar_tween.start()
+			
+			info_tween.interpolate_property(shine_info, "rect_scale",
+			Vector2(0, 0), Vector2(1, 1), 0.20,
+			Tween.TRANS_CIRC, Tween.EASE_OUT)
+			info_tween.start()
+			
+			yield(fade_tween, "tween_completed")
 	
 func retry():
 	retry_button.focus_mode = 0

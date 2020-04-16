@@ -12,6 +12,7 @@ onready var fader_tween = get_node("../Fader/Tween")
 var switching_disabled = false
 var start_pos
 var last_hovered = false
+var last_photo_mode := false
 
 export var texture_play : StreamTexture
 export var texture_stop : StreamTexture
@@ -39,6 +40,12 @@ func _physics_process(_delta):
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
 		tween_hover.start()
 	last_hovered = is_hovered()
+	
+	if PhotoMode.enabled and !last_photo_mode:
+		visible = false
+	elif !PhotoMode.enabled and last_photo_mode:
+		visible = true
+	last_photo_mode = PhotoMode.enabled
 		
 func _unhandled_input(event):
 	if event.is_action_pressed("switch_modes"):
@@ -51,8 +58,7 @@ func change_visuals(new_scene):
 	self.texture_normal = texture_play if new_scene == 0 else texture_stop
 
 func switch():
-	if !switching_disabled:
-		
+	if !switching_disabled and !PhotoMode.enabled:
 		var new_scene = get_tree().get_current_scene().mode
 		if new_scene == 0:
 			Networking.disconnect_from_peers()
@@ -86,6 +92,7 @@ func switch():
 		music.loading = true
 		yield(get_tree().create_timer(0.3), "timeout")
 		get_tree().paused = false
+		CurrentLevelData.level_data.vars = LevelVars.new() # Reset vars
 		
 		get_tree().get_current_scene().switch_scenes()
 		change_visuals(new_scene)
