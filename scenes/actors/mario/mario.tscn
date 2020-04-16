@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://scenes/actors/mario/nozzles/hover_frames.tres" type="SpriteFrames" id=23]
 [ext_resource path="res://scenes/actors/mario/nozzles/water_frames.tres" type="SpriteFrames" id=24]
 [ext_resource path="res://scenes/actors/mario/nozzles/spray.wav" type="AudioStream" id=25]
+[ext_resource path="res://scenes/actors/mario/nozzles/hover_frames_luigi.tres" type="SpriteFrames" id=26]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -126,17 +127,18 @@ shape = SubResource( 7 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 1 )
-animation = "idleRight"
+frames = ExtResource( 21 )
+animation = "diveRight"
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
-frames = ExtResource( 23 )
-animation = "idleRight"
+frames = ExtResource( 26 )
+animation = "diveRight"
 playing = true
 
 [node name="Water" type="AnimatedSprite" parent="Sprite"]
-position = Vector2( -16, -11 )
+position = Vector2( -7, -11 )
+rotation = -0.00178115
 frames = ExtResource( 24 )
 animation = "in"
 frame = 6
@@ -240,6 +242,7 @@ collision_mask = 2
 [node name="HoverNozzle" type="Node" parent="Nozzles"]
 script = ExtResource( 22 )
 frames = ExtResource( 23 )
+frames_luigi = ExtResource( 26 )
 animation_water_positions = {
 "diveLeft": Vector2( -4, -12 ),
 "diveRight": Vector2( -16, -11 ),
@@ -256,6 +259,21 @@ animation_water_positions = {
 }
 fallback_water_pos_left = Vector2( -3, -2 )
 fallback_water_pos_right = Vector2( -18, -2 )
+animation_water_positions_luigi = {
+"diveLeft": Vector2( -7, -11 ),
+"diveRight": Vector2( -15, -6 ),
+"fallLeft": Vector2( -5, -5 ),
+"fallRight": Vector2( -17, -5 ),
+"jumpLeft": Vector2( -2, -6 ),
+"jumpRight": Vector2( -19, -6 ),
+"spinning": Vector2( 0, 1e+06 ),
+"tripleJumpLeft": Vector2( 0, 1e+06 ),
+"tripleJumpRight": Vector2( 0, 1e+06 ),
+"wallSlideLeft": Vector2( 0, 1e+06 ),
+"wallSlideRight": Vector2( 0, 1e+06 )
+}
+fallback_water_pos_left_luigi = Vector2( -3, -2 )
+fallback_water_pos_right_luigi = Vector2( -17, -2 )
 
 [node name="FluddSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 25 )

@@ -113,7 +113,8 @@ export var inputs = [
 	[false, false, "spin_"], # Index 4
 	[false, false, "ground_pound_"], # Index 5
 	[false, false, "ground_pound_cancel_"], # Index 6
-	[false, false, "use_fludd_"] # Index 7
+	[false, false, "use_fludd_"], # Index 7
+	[false, false, "crouch_"] # Index 8
 ]
 
 export var controlled_locally = true
@@ -443,17 +444,29 @@ func _physics_process(delta: float):
 			snap = Vector2()
 			
 	if nozzle != null:
-		fludd_sprite.frames = nozzle.frames
+		if character == 0:
+			fludd_sprite.frames = nozzle.frames
+		else:
+			fludd_sprite.frames = nozzle.frames_luigi
 		fludd_sprite.animation = sprite.animation
 		fludd_sprite.frame = sprite.frame
 		
-		if sprite.animation in nozzle.animation_water_positions:
-			water_sprite.position = nozzle.animation_water_positions[sprite.animation]
-		else:
-			if facing_direction == 1:
-				water_sprite.position = nozzle.fallback_water_pos_right
+		if character == 0:
+			if sprite.animation in nozzle.animation_water_positions:
+				water_sprite.position = nozzle.animation_water_positions[sprite.animation]
 			else:
-				water_sprite.position = nozzle.fallback_water_pos_left
+				if facing_direction == 1:
+					water_sprite.position = nozzle.fallback_water_pos_right
+				else:
+					water_sprite.position = nozzle.fallback_water_pos_left
+		else:
+			if sprite.animation in nozzle.animation_water_positions_luigi:
+				water_sprite.position = nozzle.animation_water_positions_luigi[sprite.animation]
+			else:
+				if facing_direction == 1:
+					water_sprite.position = nozzle.fallback_water_pos_right_luigi
+				else:
+					water_sprite.position = nozzle.fallback_water_pos_left_luigi
 	else:
 		fludd_sprite.frames = null
 		water_sprite.visible = null

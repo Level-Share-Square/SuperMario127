@@ -61,7 +61,7 @@ func change_to_getup(delta):
 	ledge_buffer = 0
 
 func _stop_check(_delta):
-	return abs(character.velocity.x) < 5 or stop or !character.is_grounded()
+	return (abs(character.velocity.x) < 5 and !character.inputs[8][0]) or stop or !character.is_grounded()
 
 func _general_update(delta):
 	if character.inputs[2][1]:

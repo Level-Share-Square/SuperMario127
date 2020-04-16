@@ -8,9 +8,15 @@ var override_rotation: bool
 var blacklisted_states = []
 
 export var frames : SpriteFrames
+export var frames_luigi : SpriteFrames
+
 export var animation_water_positions = {}
 export var fallback_water_pos_left : Vector2
 export var fallback_water_pos_right : Vector2
+
+export var animation_water_positions_luigi = {}
+export var fallback_water_pos_left_luigi : Vector2
+export var fallback_water_pos_right_luigi : Vector2
 
 func _ready():
 	character = get_node("../../")
