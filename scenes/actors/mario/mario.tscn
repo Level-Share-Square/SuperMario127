@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://scenes/actors/mario/nozzles/Hover.gd" type="Script" id=22]
 [ext_resource path="res://scenes/actors/mario/nozzles/hover_frames.tres" type="SpriteFrames" id=23]
 [ext_resource path="res://scenes/actors/mario/nozzles/water_frames.tres" type="SpriteFrames" id=24]
+[ext_resource path="res://scenes/actors/mario/nozzles/spray.wav" type="AudioStream" id=25]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -254,3 +255,7 @@ animation_water_positions = {
 }
 fallback_water_pos_left = Vector2( -3, -2 )
 fallback_water_pos_right = Vector2( -18, -2 )
+
+[node name="FluddSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 25 )
+volume_db = -10.0

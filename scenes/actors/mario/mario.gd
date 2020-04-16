@@ -136,6 +136,7 @@ onready var player_collision_shape = $PlayerCollision/CollisionShape2D
 onready var sprite = $Sprite
 onready var fludd_sprite = $Sprite/Fludd
 onready var water_sprite = $Sprite/Water
+onready var fludd_sound = $FluddSound
 
 var level_size = Vector2(80, 30)
 var number_of_players = 2

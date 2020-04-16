@@ -3,7 +3,7 @@ extends Nozzle
 class_name HoverNozzle
 
 export var boost_power := 40
-export var depletion := 0.3
+export var depletion := 0.35
 var last_activated = false
 
 var accel = 15
@@ -54,8 +54,10 @@ func _update(_delta):
 	if activated and !last_activated:
 		character.water_sprite.animation = "out"
 		character.water_sprite.frame = 0
+		character.fludd_sound.play(((100 - character.stamina) / 100) * 2.79)
 	elif !activated and last_activated:
 		character.water_sprite.animation = "in"
 		character.water_sprite.frame = 0
+		character.fludd_sound.stop()
 
 	last_activated = activated
