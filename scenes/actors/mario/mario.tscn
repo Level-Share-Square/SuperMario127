@@ -247,6 +247,7 @@ animation_water_positions = {
 "fallRight": Vector2( -20, -4 ),
 "jumpLeft": Vector2( -1, -4 ),
 "jumpRight": Vector2( -20, -4 ),
+"shineFall": Vector2( 0, 1e+06 ),
 "spinning": Vector2( 0, 1e+06 ),
 "tripleJumpLeft": Vector2( 0, 1e+06 ),
 "tripleJumpRight": Vector2( 0, 1e+06 ),
@@ -258,4 +259,4 @@ fallback_water_pos_right = Vector2( -18, -2 )
 
 [node name="FluddSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 25 )
-volume_db = -10.0
+volume_db = -15.0

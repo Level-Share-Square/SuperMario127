@@ -31,6 +31,8 @@ func handle_update(delta: float):
 					activated = false
 			else:
 				activated = false
+		else:
+			activated = false
 	_general_update(delta)
 	
 func _activate_check(_delta: float):
