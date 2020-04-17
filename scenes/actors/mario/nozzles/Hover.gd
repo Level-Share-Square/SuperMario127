@@ -52,6 +52,14 @@ func _update(_delta):
 	if !activated:
 		override_rotation = false
 
+func _process(delta):
+	if character.nozzle == self:
+		if character.water_sprite.flip_h:
+			character.water_sprite.flip_h = false
+		else:
+			character.water_sprite.flip_h = true
+
+func _general_update(_delta):
 	if activated and !last_activated:
 		character.water_sprite.animation = "out"
 		character.water_sprite.frame = 0
@@ -63,10 +71,3 @@ func _update(_delta):
 		character.fludd_sound.stop()
 
 	last_activated = activated
-
-func _process(delta):
-	if character.nozzle == self:
-		if character.water_sprite.flip_h:
-			character.water_sprite.flip_h = false
-		else:
-			character.water_sprite.flip_h = true

@@ -208,9 +208,9 @@ __meta__ = {
 [node name="FluddDisplay" parent="UI" instance=ExtResource( 30 )]
 
 [node name="CoinCounter" type="Control" parent="UI"]
-margin_left = 5.0
+margin_left = 25.0
 margin_top = 15.0
-margin_right = 45.0
+margin_right = 65.0
 margin_bottom = 55.0
 rect_rotation = -0.0704831
 script = ExtResource( 32 )
@@ -219,9 +219,9 @@ __meta__ = {
 }
 
 [node name="LabelShadow" type="Label" parent="UI/CoinCounter"]
-margin_left = 44.0
+margin_left = 20.0
 margin_top = 3.0
-margin_right = 189.0
+margin_right = 165.0
 margin_bottom = 78.0
 rect_rotation = 0.0366689
 custom_fonts/font = SubResource( 3 )
@@ -233,8 +233,8 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="UI/CoinCounter"]
-margin_left = 44.0
-margin_right = 189.0
+margin_left = 20.0
+margin_right = 165.0
 margin_bottom = 48.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 1, 0.898039, 0, 1 )
@@ -244,7 +244,7 @@ __meta__ = {
 }
 
 [node name="Coin" type="Sprite" parent="UI/CoinCounter"]
-position = Vector2( 22, 11 )
+position = Vector2( 0, 11 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 31 )
 
@@ -457,6 +457,7 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="IpAddress" type="LineEdit" parent="UI/PauseScreen/MultiplayerOptions"]
+visible = false
 margin_left = 79.8377
 margin_top = 93.2382
 margin_right = 292.838
@@ -473,6 +474,7 @@ __meta__ = {
 }
 
 [node name="ConnectButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
+visible = false
 margin_left = 79.8377
 margin_top = 148.406
 margin_right = 292.838
@@ -498,6 +500,7 @@ stream = ExtResource( 11 )
 volume_db = -10.0
 
 [node name="DisconnectButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
+visible = false
 margin_left = 79.8377
 margin_top = 258.731
 margin_right = 292.838
@@ -553,6 +556,7 @@ stream = ExtResource( 11 )
 volume_db = -10.0
 
 [node name="HostButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
+visible = false
 margin_left = 79.8377
 margin_top = 204.342
 margin_right = 292.838

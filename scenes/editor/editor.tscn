@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=2]
+[gd_scene load_steps=139 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -96,6 +96,9 @@
 [ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=94]
 [ext_resource path="res://scenes/actors/objects/green_demon/green_demon.png" type="Texture" id=95]
 [ext_resource path="res://scenes/actors/objects/green_demon/icon.png" type="Texture" id=96]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_top/twisted_tree_top.png" type="Texture" id=97]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/twisted_tree_body.png" type="Texture" id=98]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_angle/twisted_tree_angle.png" type="Texture" id=99]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -1817,6 +1820,40 @@ z_index = -1
 change_to = "GreenDemon"
 icon = ExtResource( 96 )
 preview = ExtResource( 95 )
+
+[node name="TwistedTreeTop" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 16
+is_object = true
+object_center = Vector2( 32, 32 )
+tile_mode_step = 64
+z_index = -7
+change_to = "TwistedTreeBody"
+icon = ExtResource( 97 )
+preview = ExtResource( 97 )
+
+[node name="TwistedTreeBody" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 17
+is_object = true
+object_center = Vector2( 32, 32 )
+tile_mode_step = 64
+z_index = -7
+change_to = "TwistedTreeAngle"
+icon = ExtResource( 98 )
+preview = ExtResource( 98 )
+
+[node name="TwistedTreeAngle" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 18
+is_object = true
+object_center = Vector2( 68, 42 )
+tile_mode_offset = Vector2( 36, 10 )
+tile_mode_step = 64
+z_index = -7
+change_to = "TwistedTreeTop"
+icon = ExtResource( 99 )
+preview = ExtResource( 99 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
