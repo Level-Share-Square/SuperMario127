@@ -81,17 +81,18 @@ func _physics_process(_delta):
 
 func _init_signals():
 	var index = 0
-	for signal_name in (base_connectable_signals + connectable_signals):
-		var _connect = connect(signal_name, self, "on_signal_fire", [index])
-		index += 1
-		if index < level_object.player_signal_connections.size():
-			if signal_name == "physics_process":
-				if level_object.player_signal_connections[index].size() > 0:
-					has_physics_connection = true
-					print("A")
-			elif signal_name == "process":
-				if level_object.player_signal_connections[index].size() > 0:
-					has_process_connection = true
+	if level_object.player_signal_connections[index].size() > 0:
+		for signal_name in (base_connectable_signals + connectable_signals):
+			var _connect = connect(signal_name, self, "on_signal_fire", [index])
+			index += 1
+			if index < level_object.player_signal_connections.size():
+				if signal_name == "physics_process":
+					if level_object.player_signal_connections[index].size() > 0:
+						has_physics_connection = true
+						print("A")
+				elif signal_name == "process":
+					if level_object.player_signal_connections[index].size() > 0:
+						has_process_connection = true
 
 
 func on_signal_fire(index):

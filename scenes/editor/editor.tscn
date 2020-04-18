@@ -1,4 +1,4 @@
-[gd_scene load_steps=139 format=2]
+[gd_scene load_steps=141 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -99,6 +99,8 @@
 [ext_resource path="res://scenes/actors/objects/twisted_tree_top/twisted_tree_top.png" type="Texture" id=97]
 [ext_resource path="res://scenes/actors/objects/twisted_tree_body/twisted_tree_body.png" type="Texture" id=98]
 [ext_resource path="res://scenes/actors/objects/twisted_tree_angle/twisted_tree_angle.png" type="Texture" id=99]
+[ext_resource path="res://scenes/actors/objects/hover_box/hover_box.png" type="Texture" id=100]
+[ext_resource path="res://scenes/actors/objects/hover_box/icon.png" type="Texture" id=101]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -1854,6 +1856,16 @@ z_index = -7
 change_to = "TwistedTreeTop"
 icon = ExtResource( 99 )
 preview = ExtResource( 99 )
+
+[node name="HoverBox" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 19
+is_object = true
+object_center = Vector2( 16, 16 )
+z_index = -1
+change_to = "HoverBox"
+icon = ExtResource( 101 )
+preview = ExtResource( 100 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100

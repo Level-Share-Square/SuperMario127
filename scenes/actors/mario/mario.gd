@@ -170,14 +170,6 @@ puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_a
 	controllable = is_controllable
 
 func load_in(level_data : LevelData, level_area : LevelArea):
-	nozzle = $Nozzles/HoverNozzle
-	var nozzle_found
-	for collected_nozzle in level_data.vars.nozzles_collected:
-		if collected_nozzle == nozzle:
-			nozzle_found = true
-	if !nozzle_found:
-		level_data.vars.nozzles_collected.append(nozzle)
-	
 	level_size = level_area.settings.size
 	for exception in collision_exceptions:
 		add_collision_exception_with(get_node(exception))
@@ -265,6 +257,20 @@ func get_state_node(name: String):
 func set_state_by_name(name: String, delta: float):
 	if get_state_node(name) != null:
 		set_state(get_state_node(name), delta)
+		
+func add_nozzle(new_nozzle):
+	if !new_nozzle in CurrentLevelData.level_data.vars.nozzles_collected:
+		CurrentLevelData.level_data.vars.nozzles_collected.append(new_nozzle)
+		
+func get_nozzle_node(name: String):
+	if nozzles_node.has_node(name):
+		return nozzles_node.get_node(name)
+		
+func set_nozzle(new_nozzle, change_index = true):
+	fludd_sound.stop()
+	nozzle = get_nozzle_node(str(new_nozzle))
+	if change_index:
+		nozzles_list_index = CurrentLevelData.level_data.vars.nozzles_collected.count(str(new_nozzle))
 		
 func player_hit(body):
 	if body.name.begins_with("Character"):
@@ -453,15 +459,16 @@ func _physics_process(delta: float):
 		else:
 			snap = Vector2()
 			
-	if inputs[8][1]:
+	if inputs[8][1] and CurrentLevelData.level_data.vars.nozzles_collected.size() > 1:
 		nozzles_list_index += 1
 		if nozzles_list_index >= CurrentLevelData.level_data.vars.nozzles_collected.size():
 			nozzles_list_index = 0
 		
-		var new_nozzle = CurrentLevelData.level_data.vars.nozzles_collected[nozzles_list_index]
-		nozzle = new_nozzle
+		var new_nozzle = str(CurrentLevelData.level_data.vars.nozzles_collected[nozzles_list_index])
+		set_nozzle(new_nozzle, false)
 		
 		nozzle_switch_sound.play()
+		print(CurrentLevelData.level_data.vars.nozzles_collected)
 		
 	if is_instance_valid(nozzle):
 		fludd_sprite.visible = true
