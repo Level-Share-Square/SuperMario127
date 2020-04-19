@@ -126,7 +126,7 @@ func _process(delta):
 			
 		if hovered_object and time_clicked > 0 and left_held:
 			time_clicked += delta
-			if time_clicked > 0.1:
+			if time_clicked > 0.2:
 				var obj_position = mouse_pos
 				if Input.is_action_pressed("8_pixel_lock"):
 					obj_position = Vector2(stepify(obj_position.x, 8), stepify(obj_position.y, 8))
@@ -137,7 +137,7 @@ func _process(delta):
 			if Input.is_action_pressed("8_pixel_lock"):
 				hovered_object.rotation_degrees = stepify(hovered_object.rotation_degrees, 15)
 				
-		if hovered_object and Input.is_action_just_released("place") and time_clicked > 0 and time_clicked < 0.1:
+		if hovered_object and Input.is_action_just_released("place") and time_clicked > 0 and time_clicked < 0.2:
 			if !rotating:
 				object_settings_node.open_object(hovered_object)
 				
