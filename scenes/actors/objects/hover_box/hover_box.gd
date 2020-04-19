@@ -13,7 +13,6 @@ var respawn_timer = 0.0
 
 func _ready():
 	rotation_degrees = 0
-	preview_position = Vector2(0, 92)
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "enter_area")
 		var _connect2 = area.connect("body_exited", self, "exit_area")
@@ -29,7 +28,7 @@ func exit_area(body):
 		character = null
 		
 func enter_detector(body):
-	if body.name.begins_with("Character") and respawn_timer == 0:
+	if body.name.begins_with("Character") and respawn_timer == 0 and enabled:
 		if body.state != body.get_state_node("GroundPoundState"):
 			body.velocity.y = -230
 			body.set_state_by_name("BounceState", 0)

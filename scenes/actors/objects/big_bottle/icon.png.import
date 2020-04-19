@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/space.png-20366d812e403ef94ae197b0303f7397.stex"
+path="res://.import/icon.png-1f1a9a07b982689e61c1119a683d1d7f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/shared/background/backgrounds/space/space.png"
-dest_files=[ "res://.import/space.png-20366d812e403ef94ae197b0303f7397.stex" ]
+source_file="res://scenes/actors/objects/big_bottle/icon.png"
+dest_files=[ "res://.import/icon.png-1f1a9a07b982689e61c1119a683d1d7f.stex" ]
 
 [params]
 

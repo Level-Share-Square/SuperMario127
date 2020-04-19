@@ -30,7 +30,6 @@ func _start(_delta):
 	old_gravity_scale = character.gravity_scale
 	character.gravity_scale = gravity_scale
 	character.attacking = true
-	spin_timer = 0.15
 	
 func _update(_delta):
 	var sprite = character.animated_sprite
@@ -67,8 +66,11 @@ func _general_update(delta):
 		spin_timer -= delta
 		if spin_timer <= 0:
 			spin_timer = 0
-	if character.inputs[4][0] or character.inputs[4][1]:
-		spin_timer = 0.15	
+	if character.inputs[4][1]:
+		if character.is_grounded():
+			spin_timer = 0.15
+		else:
+			spin_timer = 0.65
 	if character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0)):
 		spin_timer = 0
 	if character.is_grounded():

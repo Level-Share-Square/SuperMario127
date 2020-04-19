@@ -1,4 +1,4 @@
-[gd_scene load_steps=141 format=2]
+[gd_scene load_steps=145 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -101,6 +101,10 @@
 [ext_resource path="res://scenes/actors/objects/twisted_tree_angle/twisted_tree_angle.png" type="Texture" id=99]
 [ext_resource path="res://scenes/actors/objects/hover_box/hover_box.png" type="Texture" id=100]
 [ext_resource path="res://scenes/actors/objects/hover_box/icon.png" type="Texture" id=101]
+[ext_resource path="res://scenes/actors/objects/small_bottle/small_bottle.png" type="Texture" id=102]
+[ext_resource path="res://scenes/actors/objects/small_bottle/icon.png" type="Texture" id=103]
+[ext_resource path="res://scenes/actors/objects/big_bottle/icon.png" type="Texture" id=104]
+[ext_resource path="res://scenes/actors/objects/big_bottle/big_bottle.png" type="Texture" id=105]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -1866,6 +1870,30 @@ z_index = -1
 change_to = "HoverBox"
 icon = ExtResource( 101 )
 preview = ExtResource( 100 )
+
+[node name="SmallBottle" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 21
+is_object = true
+object_center = Vector2( 8, 0 )
+tile_mode_offset = Vector2( 0, -8 )
+tile_mode_step = 16
+z_index = 1
+change_to = "BigBottle"
+icon = ExtResource( 103 )
+preview = ExtResource( 102 )
+
+[node name="BigBottle" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 22
+is_object = true
+object_center = Vector2( 8, 0 )
+tile_mode_offset = Vector2( 0, -8 )
+tile_mode_step = 16
+z_index = 1
+change_to = "SmallBottle"
+icon = ExtResource( 104 )
+preview = ExtResource( 105 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
