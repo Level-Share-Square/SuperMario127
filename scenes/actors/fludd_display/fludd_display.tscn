@@ -1,31 +1,126 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/actors/fludd_display/fludd_display.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scenes/actors/fludd_display/ui/progress_filled.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/fludd_display/ui/water_frame.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/fludd_display/ui/progress.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/fludd_display/ui/water_mask.png" type="Texture" id=7]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 1, 0, 0, 1 )
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.360784, 0, 0, 1 )
+const vec4 WATER_COLOR = vec4(0.19, 0.26, 0.79, 1);
+const vec4 WATER_MIDDLE_TOP_COLOR = vec4(0.5, 0.67, 1, 1);
+const vec4 WATER_TOP_COLOR = vec4(0.725, 0.89, 1, 1);
+const vec4 WATER_BOTTOM_TOP_COLOR = vec4(0.26, 0.45, 0.88, 1);
+
+uniform float water_height : hint_range(0f, 1f);
+
+void fragment() {
+	if (texture(TEXTURE, UV) == vec4(1, 1, 1, 1)) {
+		float sine_height = (sin((UV.x * 7.5f) + TIME * 5.5f) / 60.5f) + ((water_height + 0.125f) / 1.25f);
+		if (UV.y > sine_height) {
+			if (UV.y < sine_height + 0.015f) {
+				COLOR = WATER_TOP_COLOR;
+			} else if (UV.y < sine_height + 0.035f) {
+				COLOR = WATER_MIDDLE_TOP_COLOR;
+			} else if (UV.y < sine_height + 0.075f) {
+				COLOR = WATER_BOTTOM_TOP_COLOR;
+			} else {
+				COLOR = WATER_COLOR;
+			}
+		} else {
+			COLOR = vec4(1, 1, 1 ,0);
+		}
+	} else {
+		COLOR = vec4(0, 0, 0, 0)
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/water_height = 0.0
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 1 )
+shader_param/water_height = 0.0
+
+[sub_resource type="DynamicFont" id=3]
+size = 72
+font_data = ExtResource( 2 )
 
 [node name="FluddDisplay" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 1 )
+material_0 = SubResource( 2 )
+material_1 = SubResource( 4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 25
 
-[node name="Stamina" type="ProgressBar" parent="CanvasLayer"]
-margin_left = 738.0
-margin_top = 327.0
-margin_right = 788.0
-margin_bottom = 342.0
-rect_rotation = -90.0
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
-value = 75.0
-rounded = true
-percent_visible = false
+[node name="FluddUI" type="TextureRect" parent="CanvasLayer"]
+margin_left = 683.0
+margin_top = 10.0
+margin_right = 939.0
+margin_bottom = 278.0
+rect_scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/FluddUI"]
+modulate = Color( 0.0235294, 0, 0.231373, 1 )
+show_behind_parent = true
+margin_right = 256.0
+margin_bottom = 268.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WaterTexture" type="TextureRect" parent="CanvasLayer/FluddUI"]
+show_behind_parent = true
+material = SubResource( 2 )
+margin_right = 256.0
+margin_bottom = 268.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelShadow" type="Label" parent="CanvasLayer/FluddUI"]
+margin_top = 4.0
+margin_right = 256.0
+margin_bottom = 260.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.623529, 0.623529, 0.623529, 1 )
+text = "100%"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/FluddUI"]
+margin_right = 256.0
+margin_bottom = 256.0
+custom_fonts/font = SubResource( 3 )
+text = "100%"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stamina" type="TextureProgress" parent="CanvasLayer/FluddUI"]
+margin_right = 40.0
+margin_bottom = 40.0
+value = 100.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 3 )
+fill_mode = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-2f7996d42f2cb278ea1c7da3bda68d02.stex"
+path="res://.import/water_mask.png-8e198622c55206086f2a9d64c58538ab.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/hover_box/icon.png"
-dest_files=[ "res://.import/icon.png-2f7996d42f2cb278ea1c7da3bda68d02.stex" ]
+source_file="res://scenes/actors/fludd_display/ui/water_mask.png"
+dest_files=[ "res://.import/water_mask.png-8e198622c55206086f2a9d64c58538ab.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

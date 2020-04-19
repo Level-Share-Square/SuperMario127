@@ -205,8 +205,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FluddDisplay" parent="UI" instance=ExtResource( 30 )]
-
 [node name="CoinCounter" type="Control" parent="UI"]
 margin_left = 25.0
 margin_top = 15.0
@@ -888,6 +886,9 @@ character = 1
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
+[node name="FluddDisplay" parent="Viewports/ViewportContainer" instance=ExtResource( 30 )]
+char_path = NodePath("../Viewport/World/Character")
+
 [node name="ViewportContainer2" type="ViewportContainer" parent="Viewports"]
 margin_left = 388.0
 margin_right = 772.0
@@ -924,3 +925,7 @@ script = ExtResource( 4 )
 character = NodePath("../../../ViewportContainer/Viewport/World/Character2")
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer2/Viewport" instance=ExtResource( 13 )]
+
+[node name="FluddDisplay2" parent="Viewports/ViewportContainer2" instance=ExtResource( 30 )]
+position = Vector2( -388, 0 )
+char_path = NodePath("../../ViewportContainer/Viewport/World/Character2")

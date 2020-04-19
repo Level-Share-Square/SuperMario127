@@ -4,6 +4,7 @@ class_name HoverNozzle
 
 export var boost_power := 40
 export var depletion := 0.35
+export var fuel_depletion := 0.0175
 var last_activated = false
 
 var accel = 15
@@ -44,6 +45,11 @@ func _activated_update(delta):
 		character.velocity.y -= accel * normal.y
 	character.stamina -= depletion
 	character.attacking = true
+	
+	if character.fuel > 0:
+		character.fuel -= fuel_depletion
+		if character.fuel <= 0:
+			character.fuel = 0
 	
 func _update(_delta):
 	if character.is_grounded():

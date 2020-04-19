@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-2f7996d42f2cb278ea1c7da3bda68d02.stex"
+path="res://.import/progress.png-fc2f68db587136d8bd9d8da3102173fe.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/hover_box/icon.png"
-dest_files=[ "res://.import/icon.png-2f7996d42f2cb278ea1c7da3bda68d02.stex" ]
+source_file="res://scenes/actors/fludd_display/ui/progress.png"
+dest_files=[ "res://.import/progress.png-fc2f68db587136d8bd9d8da3102173fe.stex" ]
 
 [params]
 

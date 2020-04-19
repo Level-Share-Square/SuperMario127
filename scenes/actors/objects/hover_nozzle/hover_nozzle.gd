@@ -29,6 +29,7 @@ func collect(body):
 		destroy_timer = 2
 		body.fuel = 100
 		collected = true
+		body.add_nozzle("HoverNozzle")
 		body.set_nozzle("HoverNozzle")
 
 func _ready():

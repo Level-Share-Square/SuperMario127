@@ -17,6 +17,9 @@ var last_photo_mode := false
 export var texture_play : StreamTexture
 export var texture_stop : StreamTexture
 
+export var edit_pos : Vector2
+export var play_pos : Vector2
+
 func _ready():
 	start_pos = self.rect_position
 
