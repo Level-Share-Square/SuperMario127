@@ -31,7 +31,9 @@ func enter_detector(body):
 	if body.name.begins_with("Character") and respawn_timer == 0 and enabled:
 		if body.state != body.get_state_node("GroundPoundState"):
 			body.velocity.y = -230
-			body.set_state_by_name("BounceState", 0)
+			body.position.y -= 4
+			if body.state != null and body.state.name != "DiveState":
+				body.set_state_by_name("BounceState", 0)
 		body.add_nozzle("HoverNozzle")
 		respawn_timer = 10.0
 		sprite.visible = false

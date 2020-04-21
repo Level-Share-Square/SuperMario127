@@ -215,6 +215,7 @@ script = ExtResource( 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+collected_height = -4.0
 
 [node name="LabelShadow" type="Label" parent="UI/CoinCounter"]
 margin_left = 20.0
@@ -245,6 +246,8 @@ __meta__ = {
 position = Vector2( 0, 11 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 31 )
+
+[node name="Tween" type="Tween" parent="UI/CoinCounter"]
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2

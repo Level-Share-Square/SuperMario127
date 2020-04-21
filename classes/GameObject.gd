@@ -31,6 +31,13 @@ var physics_frame_counter = 0
 var has_process_connection = false
 var has_physics_connection = false
 
+func _ready():
+	if visible == false and mode == 1:
+		visible = true
+		var color = modulate
+		color.a = 0.5
+		modulate = color
+
 func is_savable_property(key) -> bool:
 	for savable_property in (base_savable_properties + savable_properties):
 		if key == savable_property:
@@ -54,6 +61,14 @@ func set_property(key, value, change_level_object):
 			level_object.properties.append(value)
 		else:
 			level_object.properties[index] = value
+			
+		if key == "visible":
+			if mode == 1:
+				visible = true
+				var color = modulate
+				color.a = 0.5 if value == false else 1
+				modulate = color
+				
 
 func set_property_by_index(index, value, change_level_object):
 	var key = (base_savable_properties + savable_properties)[index]

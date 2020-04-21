@@ -8,11 +8,15 @@ onready var stamina_display = $CanvasLayer/FluddUI/Stamina
 onready var label = $CanvasLayer/FluddUI/Label
 onready var label_shadow = $CanvasLayer/FluddUI/LabelShadow
 onready var water_texture = $CanvasLayer/FluddUI/WaterTexture
+onready var tween = $CanvasLayer/FluddUI/Tween
 
 var interpolation_speed = 15
 
 export var material_0 : ShaderMaterial
 export var material_1 : ShaderMaterial
+
+var shown = false
+var last_shown = false
 
 func _ready():
 	character = get_node(char_path)
@@ -35,6 +39,19 @@ func _process(delta):
 		var water_height = water_texture.material.get_shader_param("water_height")
 		water_height = lerp(water_height, 1.0 - (character.fuel / 100), delta * interpolation_speed)
 		water_texture.material.set_shader_param("water_height", water_height)
-		ui.visible = character.nozzle != null and !PhotoMode.enabled
+		shown = character.nozzle != null and !PhotoMode.enabled
 	else:
-		ui.visible = false
+		shown = false
+		
+	if shown and !last_shown:
+		tween.interpolate_property(ui, "rect_position",
+			ui.rect_position, Vector2(ui.rect_position.x, 10), 0.50,
+			Tween.TRANS_BACK, Tween.EASE_OUT)
+		tween.start()
+	elif !shown and last_shown:
+		tween.interpolate_property(ui, "rect_position",
+			ui.rect_position, Vector2(ui.rect_position.x, -80), 0.50,
+			Tween.TRANS_BACK, Tween.EASE_IN)
+		tween.start()
+	
+	last_shown = shown

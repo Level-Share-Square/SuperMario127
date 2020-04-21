@@ -83,21 +83,18 @@ luigi_fric = 13.5
 luigi_speed = 216.0
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0.5, -4 )
 z_index = 2
 shape = SubResource( 1 )
 
 [node name="CollisionDive" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, -7 )
 z_index = 2
 shape = SubResource( 4 )
 disabled = true
 
 [node name="GroundCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, 0 )
 z_index = 1
 shape = SubResource( 5 )
@@ -105,7 +102,6 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="LeftCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, 8 )
 rotation = -1.5708
 shape = SubResource( 6 )
@@ -113,7 +109,6 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="RightCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, 8 )
 rotation = 1.5708
 shape = SubResource( 6 )
@@ -121,7 +116,6 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="GroundCollisionDive" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, -6 )
 z_index = 2
 shape = SubResource( 7 )
@@ -211,28 +205,24 @@ range_item_cull_mask = 524288
 shadow_item_cull_mask = 524288
 
 [node name="GroundCheck" type="RayCast2D" parent="."]
-visible = false
 position = Vector2( 0.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 26 )
 collision_mask = 2
 
 [node name="GroundCheckDive" type="RayCast2D" parent="."]
-visible = false
 position = Vector2( 0.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 7.5 )
 collision_mask = 2
 
 [node name="LeftCheck" type="RayCast2D" parent="."]
-visible = false
 position = Vector2( -8, 0 )
 enabled = true
 cast_to = Vector2( 0, 32 )
 collision_mask = 2
 
 [node name="RightCheck" type="RayCast2D" parent="."]
-visible = false
 position = Vector2( 8.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 32 )

@@ -42,11 +42,11 @@ void fragment() {
 shader = SubResource( 1 )
 shader_param/water_height = 0.0
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 1 )
 shader_param/water_height = 0.0
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 72
 font_data = ExtResource( 2 )
 
@@ -54,16 +54,16 @@ font_data = ExtResource( 2 )
 pause_mode = 2
 script = ExtResource( 1 )
 material_0 = SubResource( 2 )
-material_1 = SubResource( 4 )
+material_1 = SubResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 25
 
 [node name="FluddUI" type="TextureRect" parent="CanvasLayer"]
 margin_left = 683.0
-margin_top = 10.0
+margin_top = -80.0
 margin_right = 939.0
-margin_bottom = 278.0
+margin_bottom = 188.0
 rect_scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 4 )
 __meta__ = {
@@ -94,7 +94,7 @@ __meta__ = {
 margin_top = 4.0
 margin_right = 256.0
 margin_bottom = 260.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.623529, 0.623529, 0.623529, 1 )
 text = "100%"
 align = 1
@@ -106,7 +106,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="CanvasLayer/FluddUI"]
 margin_right = 256.0
 margin_bottom = 256.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "100%"
 align = 1
 valign = 1
@@ -124,3 +124,5 @@ fill_mode = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Tween" type="Tween" parent="CanvasLayer/FluddUI"]

@@ -12,7 +12,7 @@ onready var fader_tween = get_node("../Fader/Tween")
 var switching_disabled = false
 var start_pos
 var last_hovered = false
-var last_photo_mode := false
+var last_paused = false
 
 export var texture_play : StreamTexture
 export var texture_stop : StreamTexture
@@ -24,31 +24,33 @@ func _ready():
 	start_pos = self.rect_position
 
 func _physics_process(_delta):
-	if pressed:
-		self.modulate = Color(0.65, 0.65, 0.65)
-	elif is_hovered():
-		self.modulate = Color(0.85, 0.85, 0.85)
-	else:
-		self.modulate = Color(1, 1, 1)
+	if !get_tree().paused:
+		if last_paused:
+			visible = true
 		
-	if is_hovered() and !last_hovered:
-		hover_sound.play()
-		tween_hover.interpolate_property(self, "rect_pivot_offset",
-			Vector2(60, 300), Vector2(60, 290), 0.075,
-			Tween.TRANS_CIRC, Tween.EASE_OUT)
-		tween_hover.start()
-	if !is_hovered() and last_hovered:
-		tween_hover.interpolate_property(self, "rect_pivot_offset",
-			Vector2(60, 290), Vector2(60, 300), 0.075,
-			Tween.TRANS_CIRC, Tween.EASE_OUT)
-		tween_hover.start()
-	last_hovered = is_hovered()
-	
-	if PhotoMode.enabled and !last_photo_mode:
+		if pressed:
+			self.modulate = Color(0.65, 0.65, 0.65)
+		elif is_hovered():
+			self.modulate = Color(0.85, 0.85, 0.85)
+		else:
+			self.modulate = Color(1, 1, 1)
+			
+		if is_hovered() and !last_hovered:
+			hover_sound.play()
+			tween_hover.interpolate_property(self, "rect_pivot_offset",
+				Vector2(60, 300), Vector2(60, 290), 0.075,
+				Tween.TRANS_CIRC, Tween.EASE_OUT)
+			tween_hover.start()
+		if !is_hovered() and last_hovered:
+			tween_hover.interpolate_property(self, "rect_pivot_offset",
+				Vector2(60, 290), Vector2(60, 300), 0.075,
+				Tween.TRANS_CIRC, Tween.EASE_OUT)
+			tween_hover.start()
+		last_hovered = is_hovered()
+		last_paused = false
+	else:
 		visible = false
-	elif !PhotoMode.enabled and last_photo_mode:
-		visible = true
-	last_photo_mode = PhotoMode.enabled
+		last_paused = true
 		
 func _unhandled_input(event):
 	if event.is_action_pressed("switch_modes"):
@@ -61,7 +63,7 @@ func change_visuals(new_scene):
 	self.texture_normal = texture_play if new_scene == 0 else texture_stop
 
 func switch():
-	if !switching_disabled and !PhotoMode.enabled:
+	if !switching_disabled and !get_tree().paused:
 		var new_scene = get_tree().get_current_scene().mode
 		if new_scene == 0:
 			Networking.disconnect_from_peers()

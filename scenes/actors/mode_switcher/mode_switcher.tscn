@@ -8,7 +8,7 @@
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=6]
 
 [node name="CanvasLayer" type="CanvasLayer"]
-layer = 101
+layer = 127
 
 [node name="Fader" type="ColorRect" parent="."]
 visible = false
