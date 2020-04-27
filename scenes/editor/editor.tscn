@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=2]
+[gd_scene load_steps=148 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -107,6 +107,7 @@
 [ext_resource path="res://scenes/actors/objects/big_bottle/big_bottle.png" type="Texture" id=105]
 [ext_resource path="res://scenes/editor/level_code_contents.gd" type="Script" id=106]
 [ext_resource path="res://assets/tiles/boo_block/icon.png" type="Texture" id=107]
+[ext_resource path="res://scenes/actors/objects/pipe/pipe.png" type="Texture" id=108]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -1903,6 +1904,14 @@ tileset_id = 6
 change_to = "BooBlock"
 icon = ExtResource( 107 )
 preview = ExtResource( 107 )
+
+[node name="Pipe" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 23
+is_object = true
+change_to = "Pipe"
+icon = ExtResource( 108 )
+preview = ExtResource( 108 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100

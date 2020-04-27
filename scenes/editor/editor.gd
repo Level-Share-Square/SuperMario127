@@ -69,7 +69,7 @@ func _unhandled_input(event):
 
 func _ready():
 	var data = CurrentLevelData.level_data
-	load_in(data, data.areas[0])
+	load_in(data, data.areas[CurrentLevelData.area])
 	
 func set_selected_box(new_selected_box: Node):
 	item_preview_node.update_preview(new_selected_box.item)

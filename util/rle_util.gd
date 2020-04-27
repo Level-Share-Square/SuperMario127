@@ -97,46 +97,52 @@ static func decode(code: String):
 	for function in func_array:
 		if function != "":
 			print("B")
-		
-	var area_array = code_array[2 + add_amount].split("~")
+			
+	var areas = code_array.size() - (2 + add_amount)
 	
-	var area_settings_array = area_array[0].split(",")
 	result.areas = []
-	result.areas.append({})
-	result.areas[0].settings = {}
-	result.areas[0].settings.size = decode_value(area_settings_array[0])
-	result.areas[0].settings.sky = decode_value(area_settings_array[1])
-	result.areas[0].settings.background = decode_value(area_settings_array[2])
-	result.areas[0].settings.music = decode_value(area_settings_array[3])
 	
-	var area_tiles_array = area_array[1].split(",")
-	result.areas[0].foreground_tiles = []
-	for tile in area_tiles_array:
-		result.areas[0].foreground_tiles.append(tile)
+	for area_id in range(areas):
+		var area_index = (2 + add_amount) + area_id
 		
-	var area_background_tiles_array = area_array[2].split(",")
-	result.areas[0].background_tiles = []
-	for tile in area_background_tiles_array:
-		result.areas[0].background_tiles.append(tile)
+		var area_array = code_array[area_index].split("~")
+	
+		var area_settings_array = area_array[0].split(",")
+		result.areas.append({})
+		result.areas[area_id].settings = {}
+		result.areas[area_id].settings.size = decode_value(area_settings_array[0])
+		result.areas[area_id].settings.sky = decode_value(area_settings_array[1])
+		result.areas[area_id].settings.background = decode_value(area_settings_array[2])
+		result.areas[area_id].settings.music = decode_value(area_settings_array[3])
 		
-	var area_foreground_tiles_array = area_array[3].split(",")
-	result.areas[0].very_foreground_tiles = []
-	for tile in area_foreground_tiles_array:
-		result.areas[0].very_foreground_tiles.append(tile)
-		
-	result.areas[0].objects = []
-	if area_array.size() > 4:
-		var objects_array = area_array[4].split("|")
-		for object in objects_array:
-			var object_array = object.split(",")
-			var decoded_object = {}
-			decoded_object.properties = []
-			decoded_object.type_id = int(object_array[0])
-			var index = 0
-			for value in object_array:
-				if index > 0:
-					decoded_object.properties.append(decode_value(value))
-				index += 1
-			result.areas[0].objects.append(decoded_object)
+		var area_tiles_array = area_array[1].split(",")
+		result.areas[area_id].foreground_tiles = []
+		for tile in area_tiles_array:
+			result.areas[area_id].foreground_tiles.append(tile)
+			
+		var area_background_tiles_array = area_array[2].split(",")
+		result.areas[area_id].background_tiles = []
+		for tile in area_background_tiles_array:
+			result.areas[area_id].background_tiles.append(tile)
+			
+		var area_foreground_tiles_array = area_array[3].split(",")
+		result.areas[area_id].very_foreground_tiles = []
+		for tile in area_foreground_tiles_array:
+			result.areas[area_id].very_foreground_tiles.append(tile)
+			
+		result.areas[area_id].objects = []
+		if area_array.size() > 4:
+			var objects_array = area_array[4].split("|")
+			for object in objects_array:
+				var object_array = object.split(",")
+				var decoded_object = {}
+				decoded_object.properties = []
+				decoded_object.type_id = int(object_array[0])
+				var index = 0
+				for value in object_array:
+					if index > 0:
+						decoded_object.properties.append(decode_value(value))
+					index += 1
+				result.areas[area_id].objects.append(decoded_object)
 	
 	return result

@@ -9,7 +9,7 @@ var mode = 0
 
 func _ready():
 	var data = CurrentLevelData.level_data
-	load_in(data, data.areas[0])
+	load_in(data, data.areas[CurrentLevelData.area])
 	if PlayerSettings.other_player_id != -1:
 		if PlayerSettings.my_player_index == 0:
 			get_node(character).set_network_master(get_tree().get_network_unique_id())
