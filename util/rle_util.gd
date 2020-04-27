@@ -1,5 +1,16 @@
 class_name rle_util
 
+static func is_valid(value : String):
+	value = value.strip_edges(true, true)
+	
+	var re = RegEx.new()
+	re.compile("^[0-9, {]")
+
+	if not re.search_all(value): # Checks if the url is valid
+		return false
+	else:
+		return true
+
 static func encode(data):
 	var new_data = []
 	var last_index = ""

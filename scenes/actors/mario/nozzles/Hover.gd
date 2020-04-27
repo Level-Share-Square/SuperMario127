@@ -6,6 +6,7 @@ export var boost_power := 50
 export var depletion := 0.35
 export var fuel_depletion := 0.0175
 var last_activated = false
+var last_state = null
 
 var accel = 15
 var rotation_interpolation_speed = 35
@@ -57,6 +58,13 @@ func _update(_delta):
 		
 	if !activated:
 		override_rotation = false
+		
+	if character.state != last_state:
+		if character.state == character.get_state_node("SpinningState"):
+			character.stamina -= 15
+			if character.stamina < 0:
+				character.stamina = 0
+	last_state = character.state
 
 func _process(delta):
 	if character.nozzle == self:

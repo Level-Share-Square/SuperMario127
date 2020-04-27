@@ -14,12 +14,14 @@ var last_hovered = false
 func _pressed():
 	click_sound.play()
 	focus_mode = 0
-	var level_data = LevelData.new()
-	level_data.load_in(text_edit_node.text)
-	CurrentLevelData.level_data = level_data
-	music.loading = true
-	yield(get_tree().create_timer(0.1), "timeout")
-	var _reload = get_tree().reload_current_scene()
+	print(rle_util.is_valid(text_edit_node.text))
+	if rle_util.is_valid(text_edit_node.text):
+		var level_data = LevelData.new()
+		level_data.load_in(text_edit_node.text)
+		CurrentLevelData.level_data = level_data
+		music.loading = true
+		yield(get_tree().create_timer(0.1), "timeout")
+		var _reload = get_tree().reload_current_scene()
 
 func update_text():
 	music.loading = true

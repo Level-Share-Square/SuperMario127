@@ -66,11 +66,8 @@ func _general_update(delta):
 		spin_timer -= delta
 		if spin_timer <= 0:
 			spin_timer = 0
-	if character.inputs[4][1]:
-		if character.is_grounded():
-			spin_timer = 0.15
-		else:
-			spin_timer = 0.65
+	if character.inputs[4][0]:
+		spin_timer = 0.15
 	if character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0)):
 		spin_timer = 0
 	if character.is_grounded():

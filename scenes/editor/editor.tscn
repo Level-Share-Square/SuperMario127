@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=2]
+[gd_scene load_steps=147 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -105,6 +105,8 @@
 [ext_resource path="res://scenes/actors/objects/small_bottle/icon.png" type="Texture" id=103]
 [ext_resource path="res://scenes/actors/objects/big_bottle/icon.png" type="Texture" id=104]
 [ext_resource path="res://scenes/actors/objects/big_bottle/big_bottle.png" type="Texture" id=105]
+[ext_resource path="res://scenes/editor/level_code_contents.gd" type="Script" id=106]
+[ext_resource path="res://assets/tiles/boo_block/icon.png" type="Texture" id=107]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -1878,7 +1880,7 @@ is_object = true
 object_center = Vector2( 8, 0 )
 tile_mode_offset = Vector2( 0, -8 )
 tile_mode_step = 16
-z_index = 1
+z_index = -1
 change_to = "BigBottle"
 icon = ExtResource( 103 )
 preview = ExtResource( 102 )
@@ -1890,10 +1892,17 @@ is_object = true
 object_center = Vector2( 8, 0 )
 tile_mode_offset = Vector2( 0, -8 )
 tile_mode_step = 16
-z_index = 1
+z_index = -1
 change_to = "SmallBottle"
 icon = ExtResource( 104 )
 preview = ExtResource( 105 )
+
+[node name="BooBlock" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 6
+change_to = "BooBlock"
+icon = ExtResource( 107 )
+preview = ExtResource( 107 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
@@ -2668,6 +2677,7 @@ custom_colors/completion_font_color = Color( 0, 0, 0, 1 )
 context_menu_enabled = false
 v_scroll_speed = 0.0
 wrap_enabled = true
+script = ExtResource( 106 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -2,9 +2,17 @@ extends LevelDataLoader
 
 export var tilemaps : NodePath
 export var objects : NodePath
+export var boo_block_texture = "res://assets/tiles/boo_block/boo_block.png"
+export var boo_block_texture_invis = "res://assets/tiles/boo_block/boo_block_invis.png"
 
 onready var tilemaps_node = get_node(tilemaps)
 onready var objects_node = get_node(objects)
+
+func _ready():
+	var tex = load(boo_block_texture)
+	if get_tree().get_current_scene().mode == 0:
+		tex = load(boo_block_texture_invis)
+	tilemaps_node.middle_tilemap_node.tile_set.tile_set_texture(18, tex)
 
 func get_objects_node():
 	return objects_node

@@ -16,6 +16,7 @@ export var cutout_circle : StreamTexture
 
 # Basic Physics
 export var initial_position := Vector2(0, 0)
+export var bottom_pos := Vector2(0, 0)
 export var velocity := Vector2(0, 0)
 var last_velocity := Vector2(0, 0)
 
@@ -227,10 +228,10 @@ func is_walled():
 	return (is_walled_left() or is_walled_right()) and collided_last_frame
 
 func is_walled_left():
-	return test_move(self.transform, Vector2(-0.5, 1)) and collided_last_frame
+	return test_move(self.transform, Vector2(-0.5, 1)) and test_move(self.transform, Vector2(-0.5, -1)) and collided_last_frame
 
 func is_walled_right():
-	return test_move(self.transform, Vector2(0.5, 1)) and collided_last_frame
+	return test_move(self.transform, Vector2(0.5, 1)) and test_move(self.transform, Vector2(0.5, -1)) and collided_last_frame
 
 func hide():
 	visible = false
