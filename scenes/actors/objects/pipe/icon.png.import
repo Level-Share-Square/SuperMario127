@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pipe.png-d6cef3c6067ce807ddb8134337f097f6.stex"
+path="res://.import/icon.png-edd994a5e2e7a4708a4abb798c0a91a7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/pipe/pipe.png"
-dest_files=[ "res://.import/pipe.png-d6cef3c6067ce807ddb8134337f097f6.stex" ]
+source_file="res://scenes/actors/objects/pipe/icon.png"
+dest_files=[ "res://.import/icon.png-edd994a5e2e7a4708a4abb798c0a91a7.stex" ]
 
 [params]
 

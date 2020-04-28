@@ -1,4 +1,4 @@
-[gd_scene load_steps=148 format=2]
+[gd_scene load_steps=150 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -108,6 +108,8 @@
 [ext_resource path="res://scenes/editor/level_code_contents.gd" type="Script" id=106]
 [ext_resource path="res://assets/tiles/boo_block/icon.png" type="Texture" id=107]
 [ext_resource path="res://scenes/actors/objects/pipe/pipe.png" type="Texture" id=108]
+[ext_resource path="res://scenes/editor/area_switcher.gd" type="Script" id=109]
+[ext_resource path="res://scenes/actors/objects/pipe/icon.png" type="Texture" id=110]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -1909,8 +1911,10 @@ preview = ExtResource( 107 )
 script = ExtResource( 3 )
 object_id = 23
 is_object = true
+object_center = Vector2( 16, 16 )
+z_index = -1
 change_to = "Pipe"
-icon = ExtResource( 108 )
+icon = ExtResource( 110 )
 preview = ExtResource( 108 )
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -2944,6 +2948,17 @@ volume_db = -10.0
 modulate = Color( 1, 1, 1, 0.501961 )
 position = Vector2( -26.9707, 159.734 )
 script = ExtResource( 65 )
+
+[node name="Button" type="Button" parent="UI"]
+margin_left = 562.0
+margin_top = 372.0
+margin_right = 673.0
+margin_bottom = 422.0
+text = "switch areas lol"
+script = ExtResource( 109 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Grid" type="ParallaxBackground" parent="."]
 layer = 99

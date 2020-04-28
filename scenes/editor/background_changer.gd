@@ -20,7 +20,7 @@ onready var foreground_id_mapper = preload("res://scenes/shared/background/foreg
 
 func update_preview():
 	var data = CurrentLevelData.level_data
-	var area = data.areas[0]
+	var area = data.areas[CurrentLevelData.area]
 
 	var background_mapped_id = background_id_mapper.ids[area.settings.sky]
 	var background_resource = load("res://scenes/shared/background/backgrounds/" + background_mapped_id + "/resource.tres")
@@ -54,7 +54,7 @@ func button_hovered():
 	
 func button_press():
 	var data = CurrentLevelData.level_data
-	var area = data.areas[0]
+	var area = data.areas[CurrentLevelData.area]
 	if background_button_left.pressed:
 		area.settings.sky -= 1
 		if area.settings.sky < 0:

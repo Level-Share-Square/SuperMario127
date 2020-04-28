@@ -38,7 +38,7 @@ func load_ogg():
 	print("Audio Loaded!")
 	
 func change_song(old_setting):
-	var music_setting = CurrentLevelData.level_data.areas[0].settings.music
+	var music_setting = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
 	var song
 	
 	if typeof(music_setting) == TYPE_INT:
@@ -58,7 +58,7 @@ func change_song(old_setting):
 		bus = edit_bus
 
 func _process(_delta):
-	var current_song = CurrentLevelData.level_data.areas[0].settings.music
+	var current_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
 	if loading and OS.has_feature("JavaScript"):
 		AudioServer.set_bus_mute(0, true)
 		AudioServer.set_bus_mute(1, true)
@@ -71,7 +71,7 @@ func _process(_delta):
 		change_song(last_song)
 	volume_db = linear2db(db2linear(orig_volume) * volume_multiplier)
 	last_mode = get_tree().get_current_scene().mode
-	last_song = CurrentLevelData.level_data.areas[0].settings.music
+	last_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
 
 func _unhandled_input(event):
 	if event.is_action_pressed("mute"):

@@ -13,8 +13,7 @@ func _set_property_values():
 	set_property("area_id", area_id, true)
 
 func enter(body):
-	print(body)
-	if enabled and !activated and body.name.begins_with("Character") and body.controllable:
+	if CurrentLevelData.level_data.areas.size() > area_id and enabled and !activated and body.name.begins_with("Character") and body.controllable:
 		var player = get_tree().get_current_scene()
 		CurrentLevelData.area = area_id
 		player.reload_scene()

@@ -63,6 +63,9 @@ func get_vector2(result) -> Vector2:
 func get_area(result) -> LevelArea:
 	var area = LevelArea.new()
 	area.settings = get_settings(result.settings)
+	area.very_foreground_tiles.clear()
+	area.foreground_tiles.clear()
+	area.background_tiles.clear()
 	for very_foreground_tiles_result in result.very_foreground_tiles:
 		var tiles = get_tiles(very_foreground_tiles_result)
 		for tile in tiles:

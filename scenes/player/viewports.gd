@@ -45,7 +45,7 @@ func add_player(): # boy do i love hacks
 		player2.number_of_players = PlayerSettings.number_of_players
 		viewport1.add_child(player2)
 		player2._ready()
-		player2.load_in(CurrentLevelData.level_data, CurrentLevelData.level_data.areas[0])
+		player2.load_in(CurrentLevelData.level_data, CurrentLevelData.level_data.areas[CurrentLevelData.area])
 		camera2.character_node = player2
 		player2.position = player2_spawn
 		player2.spawn_pos = player2_spawn
@@ -69,7 +69,7 @@ func _ready():
 	viewport2.world_2d = viewport1.world_2d
 	player1.number_of_players = PlayerSettings.number_of_players
 	player2.number_of_players = PlayerSettings.number_of_players
-	for object in CurrentLevelData.level_data.areas[0].objects:
+	for object in CurrentLevelData.level_data.areas[CurrentLevelData.area].objects:
 		if object.type_id == 0:
 			player1_spawn = object.properties[0]
 		elif object.type_id == 5:

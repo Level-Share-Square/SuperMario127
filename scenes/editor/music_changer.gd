@@ -13,7 +13,7 @@ onready var music_id_mapper = preload("res://assets/music/ids.tres")
 
 func update_display():
 	var data = CurrentLevelData.level_data
-	var area = data.areas[0]
+	var area = data.areas[CurrentLevelData.area]
 	
 	if typeof(area.settings.music) == TYPE_INT:
 		var mapped_id = music_id_mapper.ids[area.settings.music]
@@ -32,7 +32,7 @@ func text_entered(text):
 	if not re.search_all(text):
 		music_note.text = "Invalid URL"
 	else:
-		CurrentLevelData.level_data.areas[0].settings.music = text
+		CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music = text
 		update_display()
 
 func _ready():
@@ -50,7 +50,7 @@ func button_hovered():
 	
 func button_press():
 	var data = CurrentLevelData.level_data
-	var area = data.areas[0]
+	var area = data.areas[CurrentLevelData.area]
 	
 	area.settings.music = int(area.settings.music)
 	

@@ -558,7 +558,6 @@ func kill(cause):
 				set_state_by_name("FallState", 0)
 		elif cause == "reload":
 			transition_time = 0.4
-			CurrentLevelData.level_data.vars = LevelVars.new()
 		elif cause == "green_demon":
 			controllable = false
 			cutout_in = cutout_death
