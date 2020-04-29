@@ -10,3 +10,4 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 z_index = -9
 texture = ExtResource( 1 )
+offset = Vector2( 0, -36 )
