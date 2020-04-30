@@ -40,6 +40,11 @@ _global_script_classes=[ {
 "path": "res://scenes/actors/mario/mario.gd"
 }, {
 "base": "Reference",
+"class": "Decoration",
+"language": "GDScript",
+"path": "res://generation/decorations/decoration.gd"
+}, {
+"base": "Reference",
 "class": "DefineVarInstruction",
 "language": "GDScript",
 "path": "res://interpreter/instructions/DefineVarInstruction.gd"
@@ -305,6 +310,11 @@ _global_script_classes=[ {
 "path": "res://util/rle_util.gd"
 }, {
 "base": "Reference",
+"class": "terrain_generator",
+"language": "GDScript",
+"path": "res://generation/generator.gd"
+}, {
+"base": "Reference",
 "class": "tile_util",
 "language": "GDScript",
 "path": "res://util/tile_util.gd"
@@ -326,6 +336,7 @@ _global_script_class_icons={
 "BounceState": "",
 "CallMethodInstruction": "",
 "Character": "",
+"Decoration": "",
 "DefineVarInstruction": "",
 "DiveState": "",
 "Downloader": "",
@@ -379,6 +390,7 @@ _global_script_class_icons={
 "conversion_util": "",
 "interpreter_util": "",
 "rle_util": "",
+"terrain_generator": "",
 "tile_util": "",
 "uuid_util": "",
 "value_util": ""

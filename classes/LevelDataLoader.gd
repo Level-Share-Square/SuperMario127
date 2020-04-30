@@ -7,6 +7,8 @@ export(Array, NodePath) var nodes_to_load = []
 var level_data : LevelData
 var level_area : LevelArea
 
+signal loaded
+
 func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
 	level_data = loaded_level_data
 	level_area = loaded_level_area
@@ -19,3 +21,4 @@ func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
 				print("Node \"" + node.name + "\" doesn't have a load_in method")
 		else:
 			print("There is no node with path \"" + node_path + "\"")
+	emit_signal("loaded")

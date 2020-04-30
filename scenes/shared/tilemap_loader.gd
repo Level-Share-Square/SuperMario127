@@ -91,56 +91,6 @@ func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
 	level_area = loaded_level_area
 	
 	update_tilemaps()
-	
-	# comments: small brain
-	# if false: big brain
-	if false:
-		noise.seed = randi()
-		noise.octaves = 8
-		noise.period = 20
-		noise.persistence = 0.2
-		
-		var set = false
-		var set2 = false
-		for x in range(level_area.settings.size.x):
-			for y in range(level_area.settings.size.y):
-				
-				var tile = 0
-				if noise.get_noise_2d(x, y) > 0:
-					tile = 2
-				set_tile((y * level_area.settings.size.x) + x, 1, tile, 0)
-				
-				if rand_range(0.01, 1) > 0.75:
-					if tile == 2 and noise.get_noise_2d(x, y - 1) <= 0 and noise.get_noise_2d(x, y - 2) <= 0:
-						var object = LevelObject.new()
-						object.type_id = 4
-						object.properties = []
-						object.properties.append(Vector2((x * 32) + 16, (y * 32) + 3))
-						object.properties.append(Vector2(1, 1))
-						object.properties.append(0)
-						object.properties.append(true)
-						object.properties.append(true)
-						get_parent().create_object(object, false)
-						
-				if rand_range(0.01, 1) > 0.95 and y > 3 and !set:
-					if tile == 2 and noise.get_noise_2d(x, y - 1) <= 0 and noise.get_noise_2d(x, y - 2) <= 0:
-						set = true
-						level_area.objects[0].properties[0] = Vector2((x * 32) + 16, (y * 32) + 3)
-				elif rand_range(0.01, 1) > 0.75 and y > 3 and !set2:
-					if tile == 2 and noise.get_noise_2d(x, y - 1) <= 0 and noise.get_noise_2d(x, y - 2) <= 0:
-						set2 = true
-						level_area.objects[1].properties[0] = Vector2((x * 32) + 16, (y * 32) + 3)
-						
-		noise.seed = randi()
-		noise.octaves = 8
-		noise.period = 20
-		noise.persistence = 0.2
-		for x in range(level_area.settings.size.x):
-			for y in range(level_area.settings.size.y):
-				var tile = 0
-				if noise.get_noise_2d(x, y) > 0:
-					tile = 2
-				set_tile((y * level_area.settings.size.x) + x, 0, tile, 0)
 
 func update_tilemaps():
 	var settings = level_area.settings

@@ -13,6 +13,8 @@ func _ready():
 	if get_tree().get_current_scene().mode == 0:
 		tex = load(boo_block_texture_invis)
 	tilemaps_node.middle_tilemap_node.tile_set.tile_set_texture(18, tex)
+	#yield(self, "loaded")
+	#terrain_generator.generate(randi(), self)
 
 func get_objects_node():
 	return objects_node
