@@ -122,8 +122,9 @@ shape = SubResource( 7 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 21 )
-animation = "diveRight"
+frames = ExtResource( 1 )
+animation = "pipeLeft"
+frame = 1
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]

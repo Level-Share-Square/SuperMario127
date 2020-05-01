@@ -58,6 +58,8 @@ export var player_id = 0
 var state = null
 var last_state = null
 export var controllable = true
+export var invulnerable = false
+export var movable = true
 export var dead = false
 export var dive_cooldown = 0
 
@@ -117,7 +119,11 @@ export var inputs = [
 	[false, false, "ground_pound_cancel_"], # Index 6
 	[false, false, "use_fludd_"], # Index 7
 	[false, false, "switch_nozzles_"], # Index 8
-	[false, false, "crouch_"] # Index 9
+	[false, false, "crouch_"], # Index 9
+	[false, false, "pipe_down_"], # Index 10
+	[false, false, "pipe_up_"], # Index 11
+	[false, false, "pipe_left_"], # Index 12
+	[false, false, "pipe_right_"], # Index 13
 ]
 
 export var controlled_locally = true
@@ -326,7 +332,7 @@ func _physics_process(delta: float):
 	# Gravity
 	velocity += gravity * Vector2(0, gravity_scale)
 	
-	if (state == null or !state.override_rotation) and (!is_instance_valid(nozzle) or !nozzle.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
+	if movable and (state == null or !state.override_rotation) and (!is_instance_valid(nozzle) or !nozzle.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
 		
 		var sprite_rotation = 0
 		
@@ -336,7 +342,6 @@ func _physics_process(delta: float):
 			
 		if is_grounded():
 			velocity.y += abs(sprite_rotation) * 100 # this is required to keep mario from falling off slopes
-		
 		sprite.rotation = lerp(sprite.rotation, sprite_rotation, delta * rotation_interpolation_speed)
 			
 	# Inputs
@@ -387,7 +392,7 @@ func _physics_process(delta: float):
 				velocity.x -= 3.5 * move_direction
 			facing_direction = move_direction
 
-			if !disable_animation and controlled_locally:
+			if !disable_animation and movable and controlled_locally:
 				if !test_move(transform, Vector2(velocity.x * delta, 0)):
 					var animation_frame = sprite.frame
 					if move_direction == 1:
@@ -432,7 +437,7 @@ func _physics_process(delta: float):
 			else:
 				velocity.x = 0
 
-		if !disable_animation and controlled_locally:
+		if !disable_animation and movable and controlled_locally:
 			if is_grounded():
 				if facing_direction == 1:
 					sprite.animation = "idleRight"
@@ -502,10 +507,13 @@ func _physics_process(delta: float):
 		water_sprite.visible = false
 
 	# Move by velocity
-	velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
-	var slide_count = get_slide_count()
-	if slide_count > 0:
-		collided_last_frame = true
+	if movable:
+		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
+		var slide_count = get_slide_count()
+		if slide_count > 0:
+			collided_last_frame = true
+		else:
+			collided_last_frame = false
 	else:
 		collided_last_frame = false
 
@@ -516,7 +524,7 @@ func _physics_process(delta: float):
 	if position.x < 0:
 		position.x = 0
 		velocity.x = 0
-		if is_grounded() and move_direction != 0 and !disable_animation and controlled_locally:
+		if is_grounded() and move_direction != 0 and !disable_animation and movable and controlled_locally:
 			if facing_direction == 1:
 				sprite.animation = "idleRight"
 			else:
@@ -524,7 +532,7 @@ func _physics_process(delta: float):
 	if position.x > level_size.x * 32:
 		position.x = level_size.x * 32
 		velocity.x = 0
-		if is_grounded() and move_direction != 0 and !disable_animation and controlled_locally:
+		if is_grounded() and move_direction != 0 and !disable_animation and movable and controlled_locally:
 			if facing_direction == 1:
 				sprite.animation = "idleRight"
 			else:
@@ -535,6 +543,9 @@ func _physics_process(delta: float):
 	if PlayerSettings.other_player_id != -1:
 		if player_id == PlayerSettings.my_player_index and is_network_master():
 			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
+	
+func switch_areas(area_id, transition_time):
+	scene_transitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id)
 	
 func kill(cause):
 	if !dead:
@@ -562,7 +573,7 @@ func kill(cause):
 			controllable = false
 			cutout_in = cutout_death
 		if reload:
-			scene_transitions.reload_scene(cutout_in, cutout_out, transition_time)
+			scene_transitions.reload_scene(cutout_in, cutout_out, transition_time, 0)
 
 func exit():
 	mode_switcher.get_node("ModeSwitcherButton").switch()

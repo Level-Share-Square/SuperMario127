@@ -7,7 +7,7 @@ onready var music_tween = $MusicTween
 
 var can_load = true
 
-func reload_scene(transition_in_tex, transition_out_tex, transition_time):
+func reload_scene(transition_in_tex, transition_out_tex, transition_time, new_area):
 	var music_node = get_node("/root/music")
 	var old_multiplier = music_node.volume_multiplier
 	
@@ -33,7 +33,7 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time):
 	music.loading = true
 	yield(get_tree().create_timer(0.1), "timeout")
 	
-	CurrentLevelData.area = 0
+	CurrentLevelData.area = new_area
 	var _reload = get_tree().reload_current_scene()
 	
 	yield(get_tree().create_timer(0.1), "timeout")
