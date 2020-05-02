@@ -120,10 +120,7 @@ export var inputs = [
 	[false, false, "use_fludd_"], # Index 7
 	[false, false, "switch_nozzles_"], # Index 8
 	[false, false, "crouch_"], # Index 9
-	[false, false, "pipe_down_"], # Index 10
-	[false, false, "pipe_up_"], # Index 11
-	[false, false, "pipe_left_"], # Index 12
-	[false, false, "pipe_right_"], # Index 13
+	[false, false, "pipe_down_"] # Index 10
 ]
 
 export var controlled_locally = true
@@ -573,6 +570,7 @@ func kill(cause):
 			controllable = false
 			cutout_in = cutout_death
 		if reload:
+			CurrentLevelData.level_data.vars.transition_data = []
 			scene_transitions.reload_scene(cutout_in, cutout_out, transition_time, 0)
 
 func exit():

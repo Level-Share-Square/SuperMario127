@@ -38,6 +38,8 @@ func create_object(object, add_to_data):
 		add_child(object_node)
 		if add_to_data:
 			level_area.objects.append(object)
+			if object_node.has_method("on_place"):
+				object_node.on_place()
 		return object_node
 	else:
 		print("Object type " + object_name + " doesn't exist.")

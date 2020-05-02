@@ -37,6 +37,9 @@ shape = SubResource( 2 )
 [node name="MoveToPoint" type="Node2D" parent="."]
 position = Vector2( 0, 20 )
 
+[node name="ExitToPoint" type="Node2D" parent="."]
+position = Vector2( 0, -43 )
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -2.5

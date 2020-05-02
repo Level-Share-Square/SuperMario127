@@ -2,6 +2,15 @@ extends GameObject
 
 var show_behind_layer := false
 
+var exit_timer = 0.0
+var exit_pos
+var tween_to
+var character
+
+var wait_timer = 0.0
+
+onready var sound = $AudioStreamPlayer
+
 func _set_properties():
 	savable_properties = ["show_behind_layer"]
 	editable_properties = ["show_behind_layer"]
@@ -10,9 +19,55 @@ func _ready():
 	if mode == 0:
 		if enabled:
 			var player = get_tree().get_current_scene()
-			var character = player.get_node(player.character)
-			character.position = position
+			character = player.get_node(player.character)
+			var transition_data = CurrentLevelData.level_data.vars.transition_data
+			if transition_data.size() == 0:
+				character.position = position
+			else:
+				if transition_data[2] == false:
+					character.position = transition_data[1]
+				else:
+					character.position = transition_data[3]
+					tween_to = Vector2(character.position.x, transition_data[4])
+					character.controllable = false
+					character.invulnerable = true
+					character.movable = false
+					character.visible = false
+					if character.facing_direction == 1:
+						character.sprite.animation = "pipeRight"
+					else:
+						character.sprite.animation = "pipeLeft"
+					wait_timer = 0.75
+					
 			character.spawn_pos = position
 			character.get_node("Spotlight").enabled = show_behind_layer
 			character.scale = scale
 			character.visible = visible
+
+func _physics_process(delta):
+	if wait_timer > 0:
+		wait_timer -= delta
+		character.visible = false
+		if wait_timer <= 0:
+			wait_timer = 0
+			exit_timer = 0.85
+			sound.play()
+			
+	if exit_timer > 0:
+		character.position = character.position.linear_interpolate(tween_to, delta * 5)
+		exit_timer -= delta
+		if exit_timer <= 0.725:
+			character.visible = true
+		else:
+			character.visible = false
+		if exit_timer <= 0.15 and character.sprite.animation != "pipeExitRight" and character.sprite.animation != "pipeExitLeft":
+			if character.facing_direction == 1:
+				character.sprite.animation = "pipeExitRight"
+			else:
+				character.sprite.animation = "pipeExitLeft"
+		if exit_timer <= 0:
+			exit_timer = 0
+			character.controllable = true
+			character.invulnerable = false
+			character.movable = true
+			character.velocity = Vector2()

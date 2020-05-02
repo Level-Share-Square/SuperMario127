@@ -2,10 +2,13 @@ extends GameObject
 
 onready var area = $Area2D
 onready var move_to_point = $MoveToPoint
+onready var exit_to_point = $ExitToPoint
 onready var sound = $AudioStreamPlayer
 var activated = false
 
 var area_id := 0
+var exit_from : Vector2
+var exit_animation := true
 
 var character = null
 var entering_pipe = false
@@ -17,14 +20,16 @@ var align_pos
 var enter_pos
 
 func _set_properties():
-	savable_properties = ["area_id"]
-	editable_properties = ["area_id"]
+	savable_properties = ["area_id", "exit_from", "exit_animation"]
+	editable_properties = ["area_id", "exit_from", "exit_animation"]
 	
 func _set_property_values():
 	set_property("area_id", area_id, true)
-
+	set_property("exit_from", exit_from, true)
+	set_property("exit_animation", exit_animation, true)
+	
 func enter(body):
-	if CurrentLevelData.level_data.areas.size() > area_id and enabled and !activated and body.name.begins_with("Character") and body.controllable:
+	if CurrentLevelData.level_data.areas.size() > area_id and enabled and !activated and body.name.begins_with("Character"):
 		character = body
 		
 func exit(body):
@@ -33,6 +38,7 @@ func exit(body):
 
 func _physics_process(delta):
 	rotation_degrees = 0
+	scale = Vector2(1, 1)
 	if character != null:
 		var directional_condition
 		directional_condition = character.inputs[10][0] and character.is_grounded() and character.move_direction == 0
@@ -46,8 +52,6 @@ func _physics_process(delta):
 				character.sprite.animation = "pipeRight"
 			else:
 				character.sprite.animation = "pipeLeft"
-			character.collision_layer = 10
-			character.collision_mask = 10
 			entering_pipe = true
 			align_timer = 0.65
 			align_pos = Vector2(position.x + move_to_point.position.x, character.position.y)
@@ -64,8 +68,16 @@ func _physics_process(delta):
 		if enter_timer > 0:
 			character.position = character.position.linear_interpolate(enter_pos, delta * 1)
 			enter_timer -= delta
-			if enter_timer <= 0.5 and character.visible and visible:
-				character.visible = false
+			if enter_timer <= 0.525 and character.visible or !visible:
+				if visible:
+					character.visible = false
+				CurrentLevelData.level_data.vars.transition_data = [
+					"pipe", 
+					exit_from, 
+					exit_animation, 
+					Vector2(exit_from.x + move_to_point.position.x, exit_from.y + move_to_point.position.y), 
+					exit_from.y + exit_to_point.position.y
+				]
 				character.switch_areas(area_id, 0.5)
 			if enter_timer <= 0:
 				enter_timer = 0
@@ -75,3 +87,6 @@ func _ready():
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "enter")
 		var _connect2 = area.connect("body_exited", self, "exit")
+		
+func on_place():
+	set_property("exit_from", position, true)
