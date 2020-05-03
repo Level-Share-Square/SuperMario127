@@ -21,9 +21,9 @@ var last_shown = false
 func _ready():
 	character = get_node(char_path)
 	if (character.player_id == 0) and PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
-		ui.rect_position.x = 291
+		ui.rect_position.x = 276
 	else:
-		ui.rect_position.x = 683
+		ui.rect_position.x = 668
 		
 	if character.player_id == 0:
 		water_texture.material = material_0
@@ -50,7 +50,7 @@ func _process(delta):
 		tween.start()
 	elif !shown and last_shown:
 		tween.interpolate_property(ui, "rect_position",
-			ui.rect_position, Vector2(ui.rect_position.x, -80), 0.50,
+			ui.rect_position, Vector2(ui.rect_position.x, -110), 0.50,
 			Tween.TRANS_BACK, Tween.EASE_IN)
 		tween.start()
 	

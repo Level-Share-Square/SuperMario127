@@ -27,7 +27,7 @@ func _process(delta):
 		time_until_fall = 0.1
 	last_coin_amount = coin_amount
 	
-	label_shadow.rect_position = label.rect_position + Vector2(0, 3)
+	label_shadow.rect_position = label.rect_position + Vector2(3, 4)
 
 	if time_until_fall > 0:
 		time_until_fall -= delta

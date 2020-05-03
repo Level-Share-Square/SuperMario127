@@ -50,7 +50,7 @@ corner_radius_bottom_left = 8
 [sub_resource type="DynamicFont" id=3]
 size = 24
 outline_size = 3
-outline_color = Color( 0.756863, 0.388235, 0, 1 )
+outline_color = Color( 0, 0, 0, 0.25098 )
 extra_spacing_char = 1
 extra_spacing_space = -8
 font_data = ExtResource( 7 )
@@ -218,13 +218,13 @@ __meta__ = {
 collected_height = -4.0
 
 [node name="LabelShadow" type="Label" parent="UI/CoinCounter"]
-margin_left = 20.0
-margin_top = 3.0
-margin_right = 165.0
-margin_bottom = 78.0
+margin_left = 23.0
+margin_top = 4.0
+margin_right = 168.0
+margin_bottom = 79.0
 rect_rotation = 0.0366689
 custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 0.756863, 0.388235, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 0.25098 )
 text = "00
 "
 __meta__ = {
@@ -243,7 +243,7 @@ __meta__ = {
 }
 
 [node name="Coin" type="Sprite" parent="UI/CoinCounter"]
-position = Vector2( 0, 11 )
+position = Vector2( 0, 12.5 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 31 )
 
