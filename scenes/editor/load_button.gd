@@ -14,8 +14,8 @@ var last_hovered = false
 func _pressed():
 	click_sound.play()
 	focus_mode = 0
-	print(rle_util.is_valid(text_edit_node.text))
-	if rle_util.is_valid(text_edit_node.text):
+	print(level_code_util.is_valid(text_edit_node.text))
+	if level_code_util.is_valid(text_edit_node.text):
 		var level_data = LevelData.new()
 		level_data.load_in(text_edit_node.text)
 		CurrentLevelData.level_data = level_data

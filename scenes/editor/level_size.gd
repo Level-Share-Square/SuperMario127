@@ -75,7 +75,7 @@ func button_press():
 	click_sound.play()
 	
 	for _integer in range(amount):
-		if button_left_out.pressed:
+		if button_left_out.pressed and area.settings.size.x < 1500:
 			shared_node.move_all_objects_by(Vector2(32, 0))
 			area.background_tiles = tile_util.expand_left(area, area.background_tiles)
 			area.foreground_tiles = tile_util.expand_left(area, area.foreground_tiles)
@@ -96,7 +96,7 @@ func button_press():
 			camera_node.position.x -= 32
 			update_label()
 	
-		if button_right_out.pressed:
+		if button_right_out.pressed and area.settings.size.x < 1500:
 			area.background_tiles = tile_util.expand_right(area, area.background_tiles)
 			area.foreground_tiles = tile_util.expand_right(area, area.foreground_tiles)
 			area.very_foreground_tiles = tile_util.expand_right(area, area.very_foreground_tiles)
@@ -114,7 +114,7 @@ func button_press():
 			camera_node.update_limits(area)
 			update_label()
 	
-		if button_down_out.pressed:
+		if button_down_out.pressed and area.settings.size.y < 1500:
 			area.background_tiles = tile_util.expand_down(area, area.background_tiles)
 			area.foreground_tiles = tile_util.expand_down(area, area.foreground_tiles)
 			area.very_foreground_tiles = tile_util.expand_down(area, area.very_foreground_tiles)
@@ -135,7 +135,7 @@ func button_press():
 			camera_node.update_limits(area)
 			update_label()
 	
-		if button_up_out.pressed:
+		if button_up_out.pressed and area.settings.size.y < 1500:
 			shared_node.move_all_objects_by(Vector2(0, 32))
 			area.background_tiles = tile_util.expand_up(area, area.background_tiles)
 			area.foreground_tiles = tile_util.expand_up(area, area.foreground_tiles)

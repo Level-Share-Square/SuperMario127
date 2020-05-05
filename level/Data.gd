@@ -88,7 +88,8 @@ func get_settings(result) -> LevelAreaSettings:
 	settings.sky = result.sky
 	settings.background = result.background
 	settings.music = result.music
-	settings.size = get_vector2(result.size)
+	var size_vec2 = get_vector2(result.size)
+	settings.size = Vector2(clamp(size_vec2.x, 24, 1500), clamp(size_vec2.y, 14, 1500))
 	return settings
 	
 func get_tiles(result) -> Array:
@@ -120,13 +121,8 @@ func get_object(result) -> LevelObject:
 
 func load_in(code):
 	var result
-	if code[0] == "{":
-		result = JSON.parse(code).result
-	else:
-		result = rle_util.decode(code)
+	result = level_code_util.decode(code)
 
-	if result.format_version == "0.3.3":
-		result = conversion_util.convert_033_to_040(result)
 	if result.format_version == "0.4.0":
 		result = conversion_util.convert_040_to_041(result)
 	if result.format_version == "0.4.1":
@@ -212,23 +208,35 @@ func get_encoded_level_data():
 		level_string += value_util.encode_value(settings.music) + "~"
 		
 		# Tiles
-		for index in range(settings.size.x * settings.size.y):
-			var encoded_tile = area.foreground_tiles[index]
-			var appended_tile = str(encoded_tile[0]).pad_zeros(2) + str(encoded_tile[1])
+		for index in range((settings.size.x * settings.size.y) - 1):
+			var appended_tile
+			if index < area.foreground_tiles.size():
+				var encoded_tile = area.foreground_tiles[index]
+				appended_tile = str(encoded_tile[0]).pad_zeros(2) + str(encoded_tile[1])
+			else:
+				appended_tile = "000"
 			saved_tiles.append(appended_tile)	
 			
-		for index in range(settings.size.x * settings.size.y):
-			var encoded_tile_background = area.background_tiles[index]
-			var appended_tile_background = str(encoded_tile_background[0]).pad_zeros(2) + str(encoded_tile_background[1])
-			saved_background_tiles.append(appended_tile_background)	
+		for index in range((settings.size.x * settings.size.y) - 1):
+			var appended_tile
+			if index < area.background_tiles.size():
+				var encoded_tile = area.background_tiles[index]
+				appended_tile = str(encoded_tile[0]).pad_zeros(2) + str(encoded_tile[1])
+			else:
+				appended_tile = "000"
+			saved_background_tiles.append(appended_tile)	
 	
-		for index in range(settings.size.x * settings.size.y):
-			var encoded_tile_very_foreground = area.very_foreground_tiles[index]
-			var appended_tile_very_foreground = str(encoded_tile_very_foreground[0]).pad_zeros(2) + str(encoded_tile_very_foreground[1])
-			saved_foreground_tiles.append(appended_tile_very_foreground)	
-		saved_tiles = rle_util.encode(saved_tiles)
-		saved_background_tiles = rle_util.encode(saved_background_tiles)
-		saved_foreground_tiles = rle_util.encode(saved_foreground_tiles)
+		for index in range((settings.size.x * settings.size.y) - 1):
+			var appended_tile
+			if index < area.very_foreground_tiles.size():
+				var encoded_tile = area.very_foreground_tiles[index]
+				appended_tile = str(encoded_tile[0]).pad_zeros(2) + str(encoded_tile[1])
+			else:
+				appended_tile = "000"
+			saved_foreground_tiles.append(appended_tile)	
+		saved_tiles = level_code_util.encode(saved_tiles)
+		saved_background_tiles = level_code_util.encode(saved_background_tiles)
+		saved_foreground_tiles = level_code_util.encode(saved_foreground_tiles)
 		
 		for tile in saved_tiles:
 			level_string += tile + ","

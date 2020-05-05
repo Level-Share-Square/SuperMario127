@@ -305,9 +305,9 @@ _global_script_classes=[ {
 "path": "res://interpreter/interpreter_util.gd"
 }, {
 "base": "Reference",
-"class": "rle_util",
+"class": "level_code_util",
 "language": "GDScript",
-"path": "res://util/rle_util.gd"
+"path": "res://util/level_code_util.gd"
 }, {
 "base": "Reference",
 "class": "terrain_generator",
@@ -389,7 +389,7 @@ _global_script_class_icons={
 "clipboard_util": "",
 "conversion_util": "",
 "interpreter_util": "",
-"rle_util": "",
+"level_code_util": "",
 "terrain_generator": "",
 "tile_util": "",
 "uuid_util": "",

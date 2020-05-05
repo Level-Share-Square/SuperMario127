@@ -1,15 +1,23 @@
-class_name rle_util
+class_name level_code_util
 
 static func is_valid(value : String):
 	value = value.strip_edges(true, true)
 	
 	var re = RegEx.new()
-	re.compile("^[0-9, {]")
+	re.compile("^[0-9]")
 
-	if not re.search_all(value): # Checks if the url is valid
+	if not re.search_all(value): # Sorry for the endless if statements
 		return false
 	else:
-		return true
+		if (
+			value.count(",", 0, value.length()) > 2 
+			and value.count("[", 0, value.length()) > 0
+			and value.count("]", 0, value.length()) > 0
+			and value.split(",").size() > 2
+		):
+			return true
+		else:
+			return false
 
 static func encode(data):
 	var new_data = []
