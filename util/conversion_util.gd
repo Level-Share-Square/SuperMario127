@@ -26,3 +26,16 @@ static func convert_040_to_041(result):
 				new_objects.append(object)
 			area_result.objects = new_objects
 	return result
+
+static func convert_042_to_043(result):
+	result.format_version = "0.4.3"
+	for area_result in result.areas:
+		if typeof(area_result) == TYPE_DICTIONARY:
+			var new_objects = []
+			for object_result in area_result.objects:
+				var object = object_result
+				if object.type_id == 4: #epic hardcoding
+					object.properties[0].y += 36
+				new_objects.append(object)
+			area_result.objects = new_objects
+	return result
