@@ -1,4 +1,4 @@
-[gd_scene load_steps=150 format=2]
+[gd_scene load_steps=154 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -110,6 +110,10 @@
 [ext_resource path="res://scenes/actors/objects/pipe/pipe.png" type="Texture" id=108]
 [ext_resource path="res://scenes/editor/area_switcher.gd" type="Script" id=109]
 [ext_resource path="res://scenes/actors/objects/pipe/icon.png" type="Texture" id=110]
+[ext_resource path="res://assets/tiles/snow/slab_icon.png" type="Texture" id=111]
+[ext_resource path="res://assets/tiles/snow/left_slope_icon.png" type="Texture" id=112]
+[ext_resource path="res://assets/tiles/snow/icon.png" type="Texture" id=113]
+[ext_resource path="res://assets/tiles/snow/right_slope_icon.png" type="Texture" id=114]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -1916,6 +1920,37 @@ z_index = -1
 change_to = "Pipe"
 icon = ExtResource( 110 )
 preview = ExtResource( 108 )
+
+[node name="Snow" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 7
+change_to = "SnowSlab"
+icon = ExtResource( 113 )
+preview = ExtResource( 113 )
+
+[node name="SnowSlopeRight" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 7
+tile_id = 3
+change_to = "Snow"
+icon = ExtResource( 114 )
+preview = ExtResource( 114 )
+
+[node name="SnowSlopeLeft" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 7
+tile_id = 2
+change_to = "SnowSlopeRight"
+icon = ExtResource( 112 )
+preview = ExtResource( 112 )
+
+[node name="SnowSlab" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 7
+tile_id = 1
+change_to = "SnowSlopeLeft"
+icon = ExtResource( 111 )
+preview = ExtResource( 111 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100

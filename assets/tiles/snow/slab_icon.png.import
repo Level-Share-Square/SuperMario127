@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/snow.png-13d96ba00f8f74b3031a53cf75b9345d.stex"
+path="res://.import/slab_icon.png-50077e4979cebe79b6cbdde91c26c25a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/snow/snow.png"
-dest_files=[ "res://.import/snow.png-13d96ba00f8f74b3031a53cf75b9345d.stex" ]
+source_file="res://assets/tiles/snow/slab_icon.png"
+dest_files=[ "res://.import/slab_icon.png-50077e4979cebe79b6cbdde91c26c25a.stex" ]
 
 [params]
 
