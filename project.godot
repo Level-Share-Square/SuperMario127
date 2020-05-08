@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "Action",
+"language": "GDScript",
+"path": "res://scenes/editor/action.gd"
+}, {
+"base": "Reference",
 "class": "AdditionOperation",
 "language": "GDScript",
 "path": "res://interpreter/math_operations/AdditionOperation.gd"
@@ -330,6 +335,7 @@ _global_script_classes=[ {
 "path": "res://util/value_util.gd"
 } ]
 _global_script_class_icons={
+"Action": "",
 "AdditionOperation": "",
 "AndCondition": "",
 "BonkedState": "",
@@ -416,6 +422,7 @@ Networking="*res://scenes/shared/networking.tscn"
 FocusCheck="*res://scenes/player/focus_check.gd"
 ToolbarLayout="*res://scenes/editor/layout.gd"
 PhotoMode="*res://scenes/actors/photo_mode/photo_mode.gd"
+ActionManager="*res://scenes/editor/action_manager.gd"
 
 [debug]
 
@@ -831,6 +838,16 @@ pipe_down_1={
 pipe_down_2={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+ ]
+}
+undo={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
+ ]
+}
+redo={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":true,"meta":false,"command":true,"pressed":false,"scancode":89,"unicode":0,"echo":false,"script":null)
  ]
 }
 

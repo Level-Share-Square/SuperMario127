@@ -5,8 +5,6 @@
 [ext_resource path="res://scenes/actors/objects/yellow_coin/yellow/frame3.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/yellow/frame4.png" type="Texture" id=4]
 
-
-
 [resource]
 frames = 4
 fps = 12.0

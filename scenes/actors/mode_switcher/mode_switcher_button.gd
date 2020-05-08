@@ -64,6 +64,7 @@ func change_visuals(new_scene):
 
 func switch():
 	if !switching_disabled and !get_tree().paused:
+		ActionManager.clear_history()
 		var new_scene = get_tree().get_current_scene().mode
 		if new_scene == 0:
 			Networking.disconnect_from_peers()

@@ -50,6 +50,23 @@ func place_edges(pos, placing_tile, bounds, tilemap_node):
 		tilemap_node.set_cell(bounds.x, bounds.y, placing_tile)
 	if pos.x == bounds.x - 1 and pos.y == 0:
 		tilemap_node.set_cell(bounds.x, -1, placing_tile)
+	
+func get_tile_in_data(index: int, layer: int):
+	var tiles_array
+	var tile
+	if layer == 0:
+		tiles_array = level_area.background_tiles
+	elif layer == 1:
+		tiles_array = level_area.foreground_tiles
+	elif layer == 2:
+		tiles_array = level_area.very_foreground_tiles
+		
+	if index >= tiles_array.size():
+		tile = [0, 0]
+	else:
+		tile = tiles_array[index]
+	
+	return tile
 		
 func set_tile(index: int, layer: int, tileset_id: int, tile_id: int):
 	var tiles_array

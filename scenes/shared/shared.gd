@@ -13,6 +13,7 @@ func _ready():
 	if get_tree().get_current_scene().mode == 0:
 		tex = load(boo_block_texture_invis)
 	tilemaps_node.middle_tilemap_node.tile_set.tile_set_texture(18, tex)
+	ActionManager.shared_node = self
 	#yield(self, "loaded")
 	#terrain_generator.generate(randi(), self)
 
@@ -21,6 +22,9 @@ func get_objects_node():
 
 func set_tile(index: int, layer: int, tileset_id: int, tile_id: int):
 	tilemaps_node.set_tile(index, layer, tileset_id, tile_id)
+	
+func get_tile(index: int, layer: int):
+	return tilemaps_node.get_tile_in_data(index, layer)
 
 func create_object(object, add_to_data):
 	return objects_node.create_object(object, add_to_data)

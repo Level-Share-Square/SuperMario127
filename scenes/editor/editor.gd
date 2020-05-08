@@ -27,6 +27,9 @@ var last_mouse_pos = Vector2(0, 0)
 var left_held = false
 var right_held = false
 
+var last_left_held = false
+var last_right_held = false
+
 var hovered_object
 var rotating = false
 
@@ -34,6 +37,8 @@ var time_clicked = 0.0
 
 export var layer = 1
 export var layers_transparent = false
+
+var tiles_stack = []
 
 func get_shared_node():
 	return shared_node
@@ -60,6 +65,10 @@ func _unhandled_input(event):
 		right_held = true
 	elif event.is_action_released("erase"):
 		right_held = false
+	elif event.is_action_pressed("undo"):
+		ActionManager.undo()
+	elif event.is_action_pressed("redo"):
+		ActionManager.redo()
 		
 	if event.is_action_pressed("switch_layers"):
 		switch_layers()
@@ -147,6 +156,14 @@ func _process(delta):
 
 		if !left_held:
 			time_clicked = 0
+			
+		if !left_held and last_left_held or !right_held and last_right_held:
+			var action = Action.new()
+			action.type = "place_tile"
+			for element in tiles_stack:
+				action.data.append(element)
+			tiles_stack.clear()
+			ActionManager.add_action(action)
 		
 		if left_held and selected_box and selected_box.item:
 			var item = selected_box.item
@@ -154,6 +171,12 @@ func _process(delta):
 			if !item.is_object:
 				if item.on_place(mouse_tile_pos, level_data, level_area):
 					if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:
+						var last_tile = null
+						last_tile = shared_node.get_tile(tile_index, layer)
+						
+						if !(last_tile[0] == item.tileset_id and last_tile[1] == item.tile_id):
+							tiles_stack.append([tile_index, layer, last_tile, [item.tileset_id, item.tile_id]])
+						
 						shared_node.set_tile(tile_index, layer, item.tileset_id, item.tile_id)
 			elif hovered_object == null:
 				var object_pos
@@ -194,5 +217,13 @@ func _process(delta):
 			else:
 				if item.on_erase(mouse_tile_pos, level_data, level_area):
 					if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:
+						var last_tile = null
+						last_tile = shared_node.get_tile(tile_index, layer)
+						
+						if !(last_tile[0] == 0 and last_tile[1] == 0):
+							tiles_stack.append([tile_index, layer, last_tile, [0, 0]])
+									
 						shared_node.set_tile(tile_index, layer, 0, 0)
 		last_mouse_pos = mouse_pos
+		last_left_held = left_held
+		last_right_held = right_held
