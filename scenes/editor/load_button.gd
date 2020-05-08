@@ -12,6 +12,7 @@ onready var click_sound = $ClickSound
 var last_hovered = false
 
 func _pressed():
+	ActionManager.clear_history()
 	click_sound.play()
 	focus_mode = 0
 	print(level_code_util.is_valid(text_edit_node.text))

@@ -57,11 +57,11 @@ func _unhandled_input(event):
 		placement_mode = "Tile" if placement_mode == "Drag" else "Drag"
 	elif event.is_action_pressed("toggle_surface_snap"):
 		surface_snap = !surface_snap
-	elif event.is_action_pressed("place"):
+	elif event.is_action_pressed("place") and !Input.is_action_pressed("erase"):
 		left_held = true
 	elif event.is_action_released("place"):
 		left_held = false
-	elif event.is_action_pressed("erase"):
+	elif event.is_action_pressed("erase") and !Input.is_action_pressed("place"):
 		right_held = true
 	elif event.is_action_released("erase"):
 		right_held = false
