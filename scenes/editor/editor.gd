@@ -13,6 +13,7 @@ var selected_box : Node
 var selected_object : Node
 
 var dragging_item : Node
+var display_preview_item = true
 
 onready var placeable_items_node = get_node(placeable_items)
 onready var placeable_items_button_container_node = get_node(placeable_items_button_container)
@@ -37,6 +38,9 @@ var time_clicked = 0.0
 
 export var layer = 1
 export var layers_transparent = false
+
+export var selected_tool = 0
+export var zoom_level = 1.0
 
 var tiles_stack = []
 
@@ -69,6 +73,20 @@ func _unhandled_input(event):
 		ActionManager.undo()
 	elif event.is_action_pressed("redo"):
 		ActionManager.redo()
+	elif event.is_action_pressed("pencil_tool"):
+		selected_tool = 0
+	elif event.is_action_pressed("eraser_tool"):
+		selected_tool = 1
+	elif event.is_action_pressed("selection_tool"):
+		selected_tool = 2
+	elif event.is_action_pressed("zoom_out"):
+		if zoom_level < 1.75:
+			zoom_level += 0.25
+			EditorSavedSettings.zoom_level = zoom_level
+	elif event.is_action_pressed("zoom_in"):
+		if zoom_level > 0.25:
+			zoom_level -= 0.25
+			EditorSavedSettings.zoom_level = zoom_level
 		
 	if event.is_action_pressed("switch_layers"):
 		switch_layers()
@@ -79,8 +97,10 @@ func _unhandled_input(event):
 func _ready():
 	var data = CurrentLevelData.level_data
 	load_in(data, data.areas[CurrentLevelData.area])
+	zoom_level = EditorSavedSettings.zoom_level
 	
 func set_selected_box(new_selected_box: Node):
+	EditorSavedSettings.selected_box = new_selected_box.box_index
 	item_preview_node.update_preview(new_selected_box.item)
 	selected_box = new_selected_box
 	for placeable_item_button in placeable_items_button_container_node.get_children():
@@ -90,6 +110,17 @@ func switch_scenes():
 	var _change_scene = get_tree().change_scene("res://scenes/player/player.tscn")
 
 func _process(delta):
+	var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
+	if (level_size.x < 42 or level_size.y < 22) and zoom_level == 1.75:
+		zoom_level = 1.5
+		EditorSavedSettings.zoom_level = zoom_level
+	if (level_size.x < 36 or level_size.y < 19) and zoom_level == 1.5:
+		zoom_level = 1.25
+		EditorSavedSettings.zoom_level = zoom_level
+	if (level_size.x < 30 or level_size.y < 15) and zoom_level == 1.25:
+		zoom_level = 1
+		EditorSavedSettings.zoom_level = zoom_level
+	
 	if get_viewport().get_mouse_position().y > 70:
 		var mouse_pos = get_global_mouse_position()
 		if Input.is_action_pressed("lock_tile_axis") and (Input.is_action_pressed("place") or Input.is_action_pressed("erase")):
@@ -130,7 +161,7 @@ func _process(delta):
 		if hovered_object and Input.is_action_just_pressed("rotate"):
 			rotating = true
 			
-		if hovered_object and left_held and Input.is_action_just_pressed("place") and !rotating:
+		if hovered_object and left_held and selected_tool == 0 and Input.is_action_just_pressed("place") and !rotating:
 			time_clicked += delta
 			
 		if hovered_object and time_clicked > 0 and left_held:
@@ -165,7 +196,7 @@ func _process(delta):
 			tiles_stack.clear()
 			ActionManager.add_action(action)
 		
-		if left_held and selected_box and selected_box.item:
+		if (left_held and selected_tool == 0) and selected_box and selected_box.item:
 			var item = selected_box.item
 			
 			if !item.is_object:
@@ -202,14 +233,14 @@ func _process(delta):
 					object.properties.append(true)
 					object.properties.append(true)
 					shared_node.create_object(object, true)
-		if right_held and selected_box and selected_box.item:
+		if (right_held and selected_tool < 2) or (left_held and selected_tool == 1) and selected_box and selected_box.item:
 			var item = selected_box.item
 			if item.is_object:
 				if placement_mode == "Tile":
 					var object_pos = (mouse_tile_pos * item.tile_mode_step) + item.object_center
 					if item.on_erase(object_pos, level_data, level_area):
 						shared_node.destroy_object_at_position(object_pos, true)
-				elif Input.is_action_just_pressed("erase") and hovered_object and !rotating:
+				elif (Input.is_action_just_pressed("erase") or Input.is_action_just_pressed("place") and selected_tool == 1) and hovered_object and !rotating:
 					if item.on_erase(mouse_pos, level_data, level_area):
 						shared_node.destroy_object(hovered_object, true)
 						hovered_object = null

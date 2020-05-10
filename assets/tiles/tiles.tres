@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=338 format=2]
+[gd_resource type="TileSet" load_steps=339 format=2]
 
 [ext_resource path="res://assets/tiles/bricks/bricks.png" type="Texture" id=1]
 [ext_resource path="res://assets/tiles/grass/grass.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/tiles/bricks_yellow/bricks.png" type="Texture" id=6]
 [ext_resource path="res://assets/tiles/boo_block/boo_block.png" type="Texture" id=7]
 [ext_resource path="res://assets/tiles/snow/snow.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/cave/cave.png" type="Texture" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -5553,4 +5554,23 @@ points = PoolVector2Array( 28, 32, 4, 32, 4, 0, 28, 0 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 22/z_index = 0
+23/name = "cave.png 23"
+23/texture = ExtResource( 9 )
+23/tex_offset = Vector2( 0, 0 )
+23/modulate = Color( 1, 1, 1, 1 )
+23/region = Rect2( 0, 0, 32, 32 )
+23/tile_mode = 1
+23/autotile/bitmask_mode = 2
+23/autotile/bitmask_flags = [ Vector2( 0, 0 ), 32440336, Vector2( 13, 2 ), 64, Vector2( 13, 3 ), 65, Vector2( 13, 4 ), 64, Vector2( 14, 8 ), 4, Vector2( 15, 9 ), 1, Vector2( 15, 10 ), 260, Vector2( 15, 11 ), 260, Vector2( 15, 12 ), 256, Vector2( 16, 13 ), 64 ]
+23/autotile/icon_coordinate = Vector2( 0, 0 )
+23/autotile/tile_size = Vector2( 32, 32 )
+23/autotile/spacing = 0
+23/autotile/occluder_map = [  ]
+23/autotile/navpoly_map = [  ]
+23/autotile/priority_map = [  ]
+23/autotile/z_index_map = [  ]
+23/occluder_offset = Vector2( 0, 0 )
+23/navigation_offset = Vector2( 0, 0 )
+23/shapes = [  ]
+23/z_index = 0
 script = ExtResource( 3 )

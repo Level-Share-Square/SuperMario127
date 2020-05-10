@@ -39,7 +39,7 @@ func _process(delta):
 		var water_height = water_texture.material.get_shader_param("water_height")
 		water_height = lerp(water_height, 1.0 - (character.fuel / 100), delta * interpolation_speed)
 		water_texture.material.set_shader_param("water_height", water_height)
-		shown = character.nozzle != null and !PhotoMode.enabled
+		shown = character.nozzle != null
 	else:
 		shown = false
 		
@@ -55,3 +55,8 @@ func _process(delta):
 		tween.start()
 	
 	last_shown = shown
+	
+	if PhotoMode.enabled:
+		ui.visible = false
+	else:
+		ui.visible = true

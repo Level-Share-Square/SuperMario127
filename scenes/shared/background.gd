@@ -30,12 +30,14 @@ func update_background(area):
 		var parallax_layer = ParallaxLayer.new()
 		parallax_layer.motion_scale = layer.scale
 		parallax_layer.motion_offset = layer.offset
-		parallax_layer.motion_mirroring = layer.mirroring
+		parallax_layer.motion_mirroring = Vector2(layer.mirroring.x * 2, layer.mirroring.y)
 		
-		var sprite_instance = Sprite.new()
+		var sprite_instance = TextureRect.new()
 		sprite_instance.texture = layer.texture
-		sprite_instance.centered = false
+		sprite_instance.rect_size.x = layer.mirroring.x * 2
+		sprite_instance.set_stretch_mode(sprite_instance.STRETCH_TILE)
 		sprite_instance.modulate = background_resource.parallax_modulate
+		sprite_instance.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		
 		parallax_layer.add_child(sprite_instance)
 		parallax_node.add_child(parallax_layer)

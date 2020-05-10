@@ -63,7 +63,7 @@ func change_visuals(new_scene):
 	self.texture_normal = texture_play if new_scene == 0 else texture_stop
 
 func switch():
-	if !switching_disabled and !get_tree().paused:
+	if !switching_disabled and !get_tree().paused and !scene_transitions.transitioning:
 		ActionManager.clear_history()
 		var new_scene = get_tree().get_current_scene().mode
 		if new_scene == 0:

@@ -11,7 +11,7 @@ export var editor : NodePath
 func _ready():
 	var editor = get_tree().get_current_scene()
 	var placeable_items = editor.get_node(editor.placeable_items)
-	var starting_toolbar = ToolbarLayout.ids
+	var starting_toolbar = EditorSavedSettings.layout_ids
 	for index in range(number_of_boxes):
 		var item
 		if index < starting_toolbar.size():
@@ -28,5 +28,7 @@ func _ready():
 		placeable_item_button.normal_color = normal_color
 		placeable_item_button.selected_color = selected_color
 		placeable_item_button.box_index = index
+		if index == EditorSavedSettings.selected_box:
+			editor.selected_box = placeable_item_button
 		add_child(placeable_item_button)
 		

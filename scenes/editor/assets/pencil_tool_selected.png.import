@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grid.png-a06269e362f4669be4a3ced12bcbf850.stex"
+path="res://.import/pencil_tool_selected.png-595b1caa2f64bebd5c0a942a2e789cae.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/editor/assets/grid.png"
-dest_files=[ "res://.import/grid.png-a06269e362f4669be4a3ced12bcbf850.stex" ]
+source_file="res://scenes/editor/assets/pencil_tool_selected.png"
+dest_files=[ "res://.import/pencil_tool_selected.png-595b1caa2f64bebd5c0a942a2e789cae.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

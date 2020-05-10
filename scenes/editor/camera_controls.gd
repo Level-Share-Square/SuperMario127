@@ -6,6 +6,8 @@ var down_held = false
 var left_held = false
 var right_held = false
 
+var lerp_speed = 15
+
 func _unhandled_input(event):
 	if event.is_action_pressed("editor_up"):
 		up_held = true
@@ -28,30 +30,32 @@ func _unhandled_input(event):
 		right_held = false
 
 func load_in(_level_data : LevelData, level_area : LevelArea):
-	position.x = get_viewport_rect().size.x / 2
-	position.y = (level_area.settings.size.y * 32) - (get_viewport_rect().size.y / 2)
+	var zoom_level = EditorSavedSettings.zoom_level
+	position.x = (get_viewport_rect().size.x / 2) * zoom_level
+	position.y = (level_area.settings.size.y * 32) - ((get_viewport_rect().size.y / 2) * zoom_level)
 	update_limits(level_area)
+	force_update_scroll()
 	
 func update_limits(level_area : LevelArea):	
 	limit_right = int(level_area.settings.size.x * 32)
 	limit_bottom = int(level_area.settings.size.y * 32)
 	
 func check_borders():
-	var camera_left = position.x - (get_viewport_rect().size.x / 2)
-	var camera_right = position.x + (get_viewport_rect().size.x / 2)
-	var camera_up = position.y - (get_viewport_rect().size.y / 2)
-	var camera_down = position.y + (get_viewport_rect().size.y / 2)
+	var camera_left = position.x - ((get_viewport_rect().size.x / 2) * zoom.x)
+	var camera_right = position.x + ((get_viewport_rect().size.x / 2) * zoom.x)
+	var camera_up = position.y - ((get_viewport_rect().size.y / 2) * zoom.y)
+	var camera_down = position.y + ((get_viewport_rect().size.y / 2) * zoom.y)
 	
 	if camera_left < limit_left:
-		position.x = limit_left + (get_viewport_rect().size.x / 2)
+		position.x = limit_left + ((get_viewport_rect().size.x / 2) * zoom.x)
 	if camera_right > limit_right:
-		position.x = limit_right - (get_viewport_rect().size.x / 2)
+		position.x = limit_right - ((get_viewport_rect().size.x / 2) * zoom.x)
 	if camera_up < limit_top:
-		position.y = limit_top + (get_viewport_rect().size.y / 2)
+		position.y = limit_top + ((get_viewport_rect().size.y / 2) * zoom.y)
 	if camera_down > limit_bottom:
-		position.y = limit_bottom - (get_viewport_rect().size.y / 2)
+		position.y = limit_bottom - ((get_viewport_rect().size.y / 2) * zoom.y)
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if up_held:
 		position.y -= speed
 		check_borders()
@@ -64,3 +68,8 @@ func _physics_process(_delta):
 	elif right_held:
 		position.x += speed
 		check_borders()
+
+	var editor = get_tree().get_current_scene()
+	var zoom_level = editor.zoom_level
+	zoom = zoom.linear_interpolate(Vector2(zoom_level, zoom_level), delta * lerp_speed)
+	limit_top = -70 * zoom_level
