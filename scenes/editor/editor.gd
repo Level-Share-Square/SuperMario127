@@ -54,6 +54,7 @@ func switch_layers():
 		layer = 2
 	else:
 		layer = 0
+	EditorSavedSettings.layer = layer
 	shared_node.toggle_layer_transparency(layer, layers_transparent)
 
 func _unhandled_input(event):
@@ -92,12 +93,16 @@ func _unhandled_input(event):
 		switch_layers()
 	if event.is_action_pressed("toggle_transparency"):
 		layers_transparent = !layers_transparent
+		EditorSavedSettings.layers_transparent = layers_transparent
 		shared_node.toggle_layer_transparency(layer, layers_transparent)
 
 func _ready():
 	var data = CurrentLevelData.level_data
 	load_in(data, data.areas[CurrentLevelData.area])
 	zoom_level = EditorSavedSettings.zoom_level
+	layer = EditorSavedSettings.layer
+	layers_transparent = EditorSavedSettings.layers_transparent
+	shared_node.toggle_layer_transparency(layer, layers_transparent)
 	
 func set_selected_box(new_selected_box: Node):
 	EditorSavedSettings.selected_box = new_selected_box.box_index

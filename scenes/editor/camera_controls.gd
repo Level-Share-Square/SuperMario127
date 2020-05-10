@@ -1,6 +1,6 @@
 extends Camera2D
 
-export var speed = 5
+export var speed = 6.0
 var up_held = false
 var down_held = false
 var left_held = false
@@ -35,6 +35,9 @@ func load_in(_level_data : LevelData, level_area : LevelArea):
 	position.y = (level_area.settings.size.y * 32) - ((get_viewport_rect().size.y / 2) * zoom_level)
 	update_limits(level_area)
 	force_update_scroll()
+	
+	zoom = Vector2(zoom_level, zoom_level)
+	limit_top = -70 * zoom_level
 	
 func update_limits(level_area : LevelArea):	
 	limit_right = int(level_area.settings.size.x * 32)

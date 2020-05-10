@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://interpreter/conditions/AndCondition.gd"
 }, {
 "base": "State",
+"class": "BackflipState",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/states/Backflip.gd"
+}, {
+"base": "State",
 "class": "BonkedState",
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Bonked.gd"
@@ -260,6 +265,11 @@ _global_script_classes=[ {
 "path": "res://scenes/actors/mario/states/Slide.gd"
 }, {
 "base": "State",
+"class": "SlideStopState",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/states/SlideStop.gd"
+}, {
+"base": "State",
 "class": "SpinningState",
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Spinning.gd"
@@ -338,6 +348,7 @@ _global_script_class_icons={
 "Action": "",
 "AdditionOperation": "",
 "AndCondition": "",
+"BackflipState": "",
 "BonkedState": "",
 "BounceState": "",
 "CallMethodInstruction": "",
@@ -385,6 +396,7 @@ _global_script_class_icons={
 "SetValueInstruction": "",
 "SkyResource": "",
 "SlideState": "",
+"SlideStopState": "",
 "SpinningState": "",
 "State": "",
 "SubtractionOperation": "",

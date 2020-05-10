@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -27,6 +27,8 @@
 [ext_resource path="res://scenes/actors/mario/nozzles/spray.wav" type="AudioStream" id=25]
 [ext_resource path="res://scenes/actors/mario/nozzles/hover_frames_luigi.tres" type="SpriteFrames" id=26]
 [ext_resource path="res://scenes/actors/mario/nozzles/switch.wav" type="AudioStream" id=27]
+[ext_resource path="res://scenes/actors/mario/states/SlideStop.gd" type="Script" id=28]
+[ext_resource path="res://scenes/actors/mario/states/Backflip.gd" type="Script" id=29]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -165,6 +167,12 @@ dive_power_luigi = Vector2( 1350, 175 )
 
 [node name="SlideState" type="Node" parent="States"]
 script = ExtResource( 11 )
+
+[node name="SlideStopState" type="Node" parent="States"]
+script = ExtResource( 28 )
+
+[node name="BackflipState" type="Node" parent="States"]
+script = ExtResource( 29 )
 
 [node name="BonkedState" type="Node" parent="States"]
 script = ExtResource( 12 )

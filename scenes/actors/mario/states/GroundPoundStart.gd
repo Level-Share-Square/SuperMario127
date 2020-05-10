@@ -10,7 +10,7 @@ func _ready():
 	disable_movement = true
 	disable_animation = true
 	override_rotation = true
-	blacklisted_states = ["DiveState", "GroundPoundState", "GroundPoundEndState"]
+	blacklisted_states = ["DiveState", "SlideState", "SlideStopState", "GroundPoundState", "GroundPoundEndState", "BackflipState"]
 
 func _start_check(_delta):
 	return character.inputs[5][1] and !character.is_grounded()

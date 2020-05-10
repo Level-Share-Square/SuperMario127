@@ -2,21 +2,45 @@ extends State
 
 class_name SlideState
 
+var is_crouch = false
 var stop = false
+var crouch_buffer = 0
 var getup_buffer = 0
 var ledge_buffer = 0
 
 func _ready():
 	priority = 4
+	disable_turning = true
 	disable_movement = true
 	disable_animation = true
 	disable_snap = false
 	override_rotation = true
+	blacklisted_states = ["SlideStopState"]
+	
+func _start_check(_delta):
+	return crouch_buffer > 0 and character.is_grounded()
 
-func _start(_delta):
+func _start(delta):
+	var collision = character.get_node("Collision")
+	var dive_collision = character.get_node("CollisionDive")
+	var ground_collision = character.get_node("GroundCollision")
+	var left_collision = character.get_node("LeftCollision")
+	var right_collision = character.get_node("RightCollision")
+	var dive_ground_collision = character.get_node("GroundCollisionDive")
 	if character.state != character.get_state_node("Jump"):
 		character.friction = 4
-	
+	collision.disabled = true
+	ground_collision.disabled = true
+	dive_collision.disabled = false
+	dive_ground_collision.disabled = false
+	left_collision.disabled = true
+	right_collision.disabled = true
+	if crouch_buffer > 0:
+		is_crouch = true
+		character.velocity.y = 120
+	else:
+		is_crouch = false
+
 func _update(delta):
 	var sprite = character.animated_sprite
 	if (character.facing_direction == 1):
@@ -25,16 +49,21 @@ func _update(delta):
 		sprite.animation = "diveLeft"
 		
 	if character.is_grounded():
+		var lerp_speed = character.rotation_interpolation_speed
+		if is_crouch:
+			lerp_speed = 7.5
 		var normal = character.ground_check.get_collision_normal()
 		var sprite_rotation = atan2(normal.y, normal.x) + (PI/2)
 		sprite_rotation += PI/2 * character.facing_direction
 		
-		sprite.rotation = lerp(sprite.rotation, sprite_rotation, delta * character.rotation_interpolation_speed)
-		
+		sprite.rotation = lerp(sprite.rotation, sprite_rotation, delta * lerp_speed)
+	#elif is_crouch:
+		#character.position.y += 2.5	
+
 func _stop(delta):
 	character.friction = character.real_friction
-	if character.is_grounded() and getup_buffer <= 0:
-		change_to_getup(delta)
+	if character.is_grounded() and character.velocity.x < 5 and character.velocity.x > -5:
+		character.set_state_by_name("SlideStopState", delta)
 	else:
 		character.position.y -= 5
 		character.set_state_by_name("DiveState", delta)
@@ -66,17 +95,30 @@ func _stop_check(_delta):
 func _general_update(delta):
 	if character.inputs[2][1]:
 		getup_buffer = 0.075
+	if character.inputs[9][1]:
+		crouch_buffer = 0.15
 	if getup_buffer > 0:
 		getup_buffer -= delta
 		if getup_buffer < 0:
 			getup_buffer = 0
+	if crouch_buffer > 0:
+		crouch_buffer -= delta
+		if crouch_buffer < 0:
+			crouch_buffer = 0
 			
 	if character.is_grounded() and character.state == self:
 		ledge_buffer = 0.125
 		
 	if ledge_buffer > 0:
 		if getup_buffer > 0:
-			change_to_getup(delta)
+			getup_buffer = 0
+			ledge_buffer = 0
+			if !is_crouch:
+				change_to_getup(delta)
+			else:
+				character.position.y -= 16
+				character.get_state_node("JumpState").jump_buffer = 0
+				character.set_state_by_name("BackflipState", delta)
 			
 		ledge_buffer -= delta
 		if ledge_buffer < 0:

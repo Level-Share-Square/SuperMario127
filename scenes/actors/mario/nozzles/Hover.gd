@@ -75,6 +75,11 @@ func _process(delta):
 
 func _general_update(_delta):
 	if activated and !last_activated:
+		var normal = character.sprite.transform.y.normalized()
+		var power = -boost_power * 4
+		if abs(character.velocity.x) < abs(power * normal.x) * 8:
+			character.velocity.x -= accel * normal.x
+
 		character.water_sprite.animation = "out"
 		character.water_sprite.frame = 0
 		character.fludd_sound.play(((100 - character.stamina) / 100) * 2.79)

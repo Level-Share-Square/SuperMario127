@@ -20,7 +20,7 @@ var direction_on_tj = 1
 
 func _ready():
 	priority = 1
-	blacklisted_states = ["DiveState", "SlideState", "GetupState"]
+	blacklisted_states = ["DiveState", "SlideState", "GetupState", "BackflipState"]
 	
 func lerp(a, b, t):
 	return (1 - t) * a + t * b

@@ -9,10 +9,13 @@ onready var tween = $Tween
 onready var close_button = $CloseButton
 
 var hovered = false
+var last_layer
 
 func open():
 	if !visible:
 		visible = true
+		last_layer = mode_switcher.layer
+		mode_switcher.layer = 99
 		tween.interpolate_property(self, "rect_position",
 			Vector2(773, 542), Vector2(773, 372), 0.25,
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
@@ -26,6 +29,7 @@ func close():
 	tween.start()
 	yield(tween, "tween_completed")
 	visible = false
+	mode_switcher.layer = last_layer
 	
 func mouse_entered():
 	hovered = true

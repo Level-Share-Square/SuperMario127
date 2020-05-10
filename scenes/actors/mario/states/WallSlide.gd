@@ -9,11 +9,12 @@ var wall_buffer = 0.0
 func _ready():
 	priority = 1
 
-func _start_check(_delta):
-	return ((character.is_walled_right() and (character.move_direction == 1 or character.is_wj_chained)) or (character.is_walled_left() and (character.move_direction == -1 or character.is_wj_chained))) and !character.is_grounded() and (character.velocity.y > 0 or character.is_wj_chained) and character.jump_animation != 2
+func _start_check(delta):
+	return ((character.is_walled_right() and (character.move_direction == 1 or character.is_wj_chained)) or (character.is_walled_left() and (character.move_direction == -1 or character.is_wj_chained))) and !character.is_grounded() and (!character.test_move(character.transform, Vector2(0, 16)) or character.velocity.y < 0 or character.is_wj_chained) and character.jump_animation != 2 and (!character.nozzle or !character.nozzle.activated) and !character.test_move(character.transform, Vector2(0, (character.velocity.y * delta) * 3))
 
 func _start(_delta):
-	character.velocity.y = character.velocity.y/3
+	if character.velocity.y > 0:
+		character.velocity.y = character.velocity.y/3
 	if character.is_walled_right():
 		character.direction_on_stick = 1
 	else:

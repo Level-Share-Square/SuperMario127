@@ -57,6 +57,7 @@ export var player_id = 0
 # States
 var state = null
 var last_state = null
+var switching_state = false
 export var controllable = true
 export var invulnerable = false
 export var movable = true

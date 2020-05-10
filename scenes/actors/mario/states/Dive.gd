@@ -8,6 +8,7 @@ export var bonk_power: float = 150
 export var maxVelocityX: float = 700
 var last_above_rot_limit = false
 var dive_buffer = 0
+var start_facing = 1
 
 func _ready():
 	priority = 3
@@ -19,6 +20,7 @@ func _start_check(_delta):
 	return dive_buffer > 0 and character.dive_cooldown <= 0 and !(abs(character.velocity.x) <= 150 and character.is_grounded()) and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0)) and !character.is_walled()
 
 func _start(_delta):
+	start_facing = character.facing_direction
 	var sound_player = character.get_node("Sounds")
 	var collision = character.get_node("Collision")
 	var dive_collision = character.get_node("CollisionDive")

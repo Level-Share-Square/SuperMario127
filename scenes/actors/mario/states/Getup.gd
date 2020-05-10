@@ -14,10 +14,7 @@ func _start(_delta):
 	var sprite = character.animated_sprite
 	var sound_player = character.get_node("Sounds")
 	sound_player.play_dive_sound()
-	if character.character == 0:
-		character.velocity.y = -get_up_power
-	else:
-		character.velocity.y = -get_up_power_luigi
+	character.velocity.y = -get_up_power
 	character.position.y -= 7
 	character.friction = character.real_friction
 	sprite.rotation_degrees = 90 * character.facing_direction

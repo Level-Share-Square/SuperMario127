@@ -13,6 +13,7 @@ var switching_disabled = false
 var start_pos
 var last_hovered = false
 var last_paused = false
+var invisible = false
 
 export var texture_play : StreamTexture
 export var texture_stop : StreamTexture
@@ -24,7 +25,7 @@ func _ready():
 	start_pos = self.rect_position
 
 func _physics_process(_delta):
-	if !get_tree().paused:
+	if !get_tree().paused and !invisible:
 		if last_paused:
 			visible = true
 		

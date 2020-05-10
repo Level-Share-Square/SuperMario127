@@ -17,7 +17,7 @@ func _ready():
 
 func handle_update(delta: float):
 	if character.controllable:
-		if character.state != self and _start_check(delta):
+		if character.state != self and _start_check(delta) and !character.switching_state:
 			var old_priority = -1 if character.state == null else character.state.priority
 			var blacklisted = false
 			for state_name in blacklisted_states:

@@ -3112,6 +3112,17 @@ volume_db = -10.0
 stream = ExtResource( 36 )
 volume_db = -10.0
 
+[node name="Button" type="Button" parent="UI"]
+margin_left = 562.0
+margin_top = 372.0
+margin_right = 673.0
+margin_bottom = 422.0
+text = "switch areas lol"
+script = ExtResource( 109 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ItemPicker" type="TextureRect" parent="UI"]
 visible = false
 margin_left = 773.0
@@ -3199,17 +3210,6 @@ modulate = Color( 1, 1, 1, 0.501961 )
 position = Vector2( -26.9707, 159.734 )
 script = ExtResource( 65 )
 
-[node name="Button" type="Button" parent="UI"]
-margin_left = 562.0
-margin_top = 372.0
-margin_right = 673.0
-margin_bottom = 422.0
-text = "switch areas lol"
-script = ExtResource( 109 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Grid" type="ParallaxBackground" parent="."]
 layer = 99
 script = ExtResource( 123 )
@@ -3233,10 +3233,9 @@ limit_left = 0
 limit_top = -70
 limit_smoothed = true
 smoothing_enabled = true
-smoothing_speed = 15.0
+smoothing_speed = 12.5
 editor_draw_screen = false
 script = ExtResource( 7 )
-speed = 7
 
 [node name="ItemPreview" type="Sprite" parent="."]
 visible = false

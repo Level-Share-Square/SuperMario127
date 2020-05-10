@@ -18,7 +18,8 @@ func _ready():
 	disable_turning = true
 
 func _start_check(_delta):
-	return character.state == character.get_state_node("WallSlideState") and press_buffer > 0
+	var slide_check = ((character.is_walled_right() and (character.move_direction == 1 or character.is_wj_chained)) or (character.is_walled_left() and (character.move_direction == -1 or character.is_wj_chained))) and !character.is_grounded() and (!character.test_move(character.transform, Vector2(0, 16)) or character.velocity.y < 0 or character.is_wj_chained)
+	return (character.state == character.get_state_node("WallSlideState") or slide_check) and press_buffer > 0
 
 func _start(_delta):
 	var sound_player = character.get_node("Sounds")
