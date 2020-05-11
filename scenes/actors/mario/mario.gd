@@ -334,7 +334,7 @@ func _physics_process(delta: float):
 		
 		var sprite_rotation = 0
 		
-		if is_grounded():
+		if is_grounded() and (test_move(transform, Vector2(-10, 12)) or test_move(transform, Vector2(10, 12))):
 			var normal = ground_check.get_collision_normal()
 			sprite_rotation = atan2(normal.y, normal.x) + (PI/2)
 			
