@@ -157,7 +157,7 @@ func _process(delta):
 					hovered_object.hovered = true
 					hovered_object.modulate = Color(0.65, 0.65, 1)
 					item_preview_node.visible = false
-			elif hovered_object != null and !rotating and time_clicked <= 0:
+			elif hovered_object != null and is_instance_valid(hovered_object) and !rotating and time_clicked <= 0:
 				hovered_object.modulate = Color(1, 1, 1)
 				hovered_object.hovered = false
 				hovered_object = null
