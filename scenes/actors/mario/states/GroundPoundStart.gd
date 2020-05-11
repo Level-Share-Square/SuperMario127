@@ -13,7 +13,7 @@ func _ready():
 	blacklisted_states = ["DiveState", "SlideState", "SlideStopState", "GroundPoundState", "GroundPoundEndState", "BackflipState"]
 
 func _start_check(_delta):
-	return character.inputs[5][1] and !character.is_grounded()
+	return character.inputs[5][1] and !character.is_grounded() and !character.test_move(character.transform, Vector2(0, 24))
 
 func _start(_delta):
 	wait_timer = 0.35

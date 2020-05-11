@@ -15,7 +15,7 @@ func _ready():
 	disable_animation = true
 	disable_snap = false
 	override_rotation = true
-	blacklisted_states = ["SlideStopState"]
+	blacklisted_states = ["SlideStopState", "GroundPoundEndState"]
 	
 func _start_check(_delta):
 	return crouch_buffer > 0 and character.is_grounded()
@@ -113,7 +113,7 @@ func _general_update(delta):
 		if getup_buffer > 0:
 			getup_buffer = 0
 			ledge_buffer = 0
-			if !is_crouch:
+			if !is_crouch or abs(character.velocity.x) > 50:
 				change_to_getup(delta)
 			else:
 				character.position.y -= 16

@@ -136,7 +136,7 @@ func _general_update(delta):
 			jump_buffer = 0
 	if character.inputs[2][1]:
 		jump_buffer = 0.075
-	if character.inputs[3][1]:
+	if character.inputs[3][1] and !(character.inputs[9][0] and character.is_grounded()):
 		dive_buffer = 0.075
 	if dive_buffer > 0:
 		dive_buffer -= delta

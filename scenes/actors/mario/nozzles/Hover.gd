@@ -15,7 +15,7 @@ func _init():
 	blacklisted_states = ["WallSlideState", "GroundPoundStartState", "GroundPoundState", "GroundPoundEndState", "GetupState", "BonkedState", "SpinningState"]
 
 func _activate_check(_delta):
-	return true
+	return !(character.state == character.get_state_node("BackflipState") and character.state.disable_turning == true)
 	
 func is_state(state):
 	return character.state == character.get_state_node(state)
