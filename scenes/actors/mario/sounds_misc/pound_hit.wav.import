@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pound_hit.wav-51ae345d652afb602780f41d6b2ada97.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_misc/pound_hit.wav"
+dest_files=[ "res://.import/pound_hit.wav-51ae345d652afb602780f41d6b2ada97.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

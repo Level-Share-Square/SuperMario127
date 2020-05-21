@@ -36,6 +36,7 @@ func _start(delta):
 	character.position.x -= 2 * character.facing_direction
 	character.position.y -= 3
 	disable_turning = true
+	sound_player.play_double_jump_sound()
 
 func _update(delta):
 	var sprite = character.animated_sprite

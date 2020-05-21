@@ -34,6 +34,7 @@ export var aerial_friction = 1.15
 
 # Sounds
 var sound_player
+var footstep_interval = 0
 
 # Extra
 export var is_wj_chained = false
@@ -146,6 +147,7 @@ onready var fludd_sprite = $Sprite/Fludd
 onready var water_sprite = $Sprite/Water
 onready var fludd_sound = $FluddSound
 onready var nozzle_switch_sound = $NozzleSwitchSound
+onready var particles = $Particles2D
 
 var level_size = Vector2(80, 30)
 var number_of_players = 2
@@ -410,6 +412,10 @@ func _physics_process(delta: float):
 					sprite.speed_scale = abs(velocity.x) / move_speed
 				else:
 					sprite.speed_scale = 1
+				if footstep_interval <= 0:
+					sound_player.play_footsteps()
+					footstep_interval = clamp(0.8 - (sprite.speed_scale / 2.5), 0.1, 1)
+				footstep_interval -= delta
 		else:
 			if ((velocity.x < move_speed and move_direction == 1) or (velocity.x > -move_speed and move_direction == -1)):
 				velocity.x += aerial_acceleration * move_direction

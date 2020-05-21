@@ -48,7 +48,7 @@ func _packet_recieved(_id, packet_ascii):
 		var level_data = LevelData.new()
 		level_data.load_in(packet[1])
 		CurrentLevelData.level_data = level_data
-		music.loading = true
+		
 		yield(get_tree().create_timer(0.1), "timeout")
 		var _reload = get_tree().reload_current_scene()
 		var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["level loaded"]).to_ascii())

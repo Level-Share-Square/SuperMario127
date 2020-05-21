@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://scenes/actors/mario/nozzles/switch.wav" type="AudioStream" id=27]
 [ext_resource path="res://scenes/actors/mario/states/SlideStop.gd" type="Script" id=28]
 [ext_resource path="res://scenes/actors/mario/states/Backflip.gd" type="Script" id=29]
+[ext_resource path="res://scenes/actors/mario/particles/dust.png" type="Texture" id=30]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -54,6 +55,21 @@ length = 13.0
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 8.5, 20 )
+
+[sub_resource type="CanvasItemMaterial" id=9]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=10]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+anim_speed = 0.8
 
 [node name="Character" type="KinematicBody2D"]
 position = Vector2( -1000, -1000 )
@@ -85,18 +101,21 @@ luigi_fric = 13.5
 luigi_speed = 216.0
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0.5, -4 )
 z_index = 2
 shape = SubResource( 1 )
 
 [node name="CollisionDive" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.5, -7 )
 z_index = 2
 shape = SubResource( 4 )
 disabled = true
 
 [node name="GroundCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.5, 0 )
 z_index = 1
 shape = SubResource( 5 )
@@ -104,6 +123,7 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="LeftCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.5, 8 )
 rotation = -1.5708
 shape = SubResource( 6 )
@@ -111,6 +131,7 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="RightCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.5, 8 )
 rotation = 1.5708
 shape = SubResource( 6 )
@@ -118,6 +139,7 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="GroundCollisionDive" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.5, -6 )
 z_index = 2
 shape = SubResource( 7 )
@@ -125,13 +147,12 @@ disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "pipeLeft"
-frame = 1
+animation = "groundPoundEndRight"
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
-frames = ExtResource( 26 )
-animation = "diveRight"
+frames = ExtResource( 23 )
+animation = "groundPoundEndRight"
 playing = true
 
 [node name="Water" type="AnimatedSprite" parent="Sprite"]
@@ -214,24 +235,28 @@ range_item_cull_mask = 524288
 shadow_item_cull_mask = 524288
 
 [node name="GroundCheck" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( 0.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 26 )
 collision_mask = 2
 
 [node name="GroundCheckDive" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( 0.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 7.5 )
 collision_mask = 2
 
 [node name="LeftCheck" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( -8, 0 )
 enabled = true
 cast_to = Vector2( 0, 32 )
 collision_mask = 2
 
 [node name="RightCheck" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( 8.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 32 )
@@ -283,3 +308,12 @@ volume_db = -15.0
 [node name="NozzleSwitchSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 27 )
 volume_db = -5.0
+
+[node name="Particles2D" type="Particles2D" parent="."]
+material = SubResource( 9 )
+z_index = -2
+emitting = false
+amount = 14
+local_coords = false
+process_material = SubResource( 10 )
+texture = ExtResource( 30 )

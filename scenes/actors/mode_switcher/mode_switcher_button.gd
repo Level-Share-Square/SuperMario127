@@ -96,7 +96,7 @@ func switch():
 		fader_tween.start()
 		
 		yield(tween, "tween_completed")
-		music.loading = true
+		
 		yield(get_tree().create_timer(0.3), "timeout")
 		get_tree().paused = false
 		CurrentLevelData.level_data.vars = LevelVars.new() # Reset vars
@@ -105,7 +105,7 @@ func switch():
 		change_visuals(new_scene)
 		
 		yield(get_tree().create_timer(0.1), "timeout")
-		music.loading = false
+		
 		
 		tween.interpolate_property(self, "rect_position",
 			start_pos + Vector2(0, -15), start_pos, 0.25,

@@ -1,39 +1,36 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://scenes/actors/objects/shine/frames/1.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/shine/texture.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/shine/shine_effects.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/actors/objects/shine/shine.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/shine/collect.wav" type="AudioStream" id=4]
-[ext_resource path="res://scenes/actors/objects/shine/frames/6.png" type="Texture" id=5]
-[ext_resource path="res://scenes/actors/objects/shine/frames/7.png" type="Texture" id=6]
-[ext_resource path="res://scenes/actors/objects/shine/frames/8.png" type="Texture" id=7]
-[ext_resource path="res://scenes/actors/objects/shine/frames/2.png" type="Texture" id=8]
-[ext_resource path="res://scenes/actors/objects/shine/frames/3.png" type="Texture" id=9]
-[ext_resource path="res://scenes/actors/objects/shine/frames/5.png" type="Texture" id=10]
-[ext_resource path="res://scenes/actors/objects/shine/frames/4.png" type="Texture" id=11]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 6, 6 )
 
-[sub_resource type="AnimatedTexture" id=2]
-frames = 8
-fps = 24.0
-frame_0/texture = ExtResource( 1 )
-frame_0/delay_sec = 3.0
-frame_1/texture = ExtResource( 8 )
-frame_1/delay_sec = 0.04
-frame_2/texture = ExtResource( 9 )
-frame_2/delay_sec = 0.04
-frame_3/texture = ExtResource( 11 )
-frame_3/delay_sec = 0.04
-frame_4/texture = ExtResource( 10 )
-frame_4/delay_sec = 0.04
-frame_5/texture = ExtResource( 5 )
-frame_5/delay_sec = 0.04
-frame_6/texture = ExtResource( 6 )
-frame_6/delay_sec = 0.04
-frame_7/texture = ExtResource( 7 )
-frame_7/delay_sec = 0.04
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 144, 0, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 6.0
+} ]
 
 [node name="Shine" type="Node2D"]
 script = ExtResource( 3 )
@@ -46,7 +43,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
+shape = SubResource( 5 )
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
@@ -55,5 +52,6 @@ stream = ExtResource( 4 )
 process_parent = true
 physics_process_parent = true
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = SubResource( 2 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 7 )
+playing = true

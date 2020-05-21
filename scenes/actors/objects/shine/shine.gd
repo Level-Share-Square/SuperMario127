@@ -35,7 +35,7 @@ func _ready():
 		var _connect = area.connect("body_entered", self, "collect")
 
 func _physics_process(_delta):
-	effects.rotation_degrees += 0.5
+	effects.rotation_degrees = (OS.get_ticks_msec()/16) % 360
 	if collected:
 		var sprite = character.get_node("Sprite")
 		sprite.animation = "shineFall"

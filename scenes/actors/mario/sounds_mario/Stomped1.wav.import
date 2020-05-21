@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Stomped1.wav-d6b0a4eddca1542b629eef129c359756.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_mario/Stomped1.wav"
+dest_files=[ "res://.import/Stomped1.wav-d6b0a4eddca1542b629eef129c359756.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

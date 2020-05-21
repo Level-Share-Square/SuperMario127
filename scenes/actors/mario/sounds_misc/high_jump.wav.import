@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/high_jump.wav-289aa0660aa5c7e86607f9d693fb86f4.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_misc/high_jump.wav"
+dest_files=[ "res://.import/high_jump.wav-289aa0660aa5c7e86607f9d693fb86f4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

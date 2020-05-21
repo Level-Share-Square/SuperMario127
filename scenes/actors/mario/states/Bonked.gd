@@ -17,6 +17,7 @@ func _start_check(_delta):
 func _start(_delta):
 	bonk_direction = character.facing_direction
 	character.current_jump = 0
+	character.sound_player.play_bonk_sound()
 
 func _update(delta):
 	var sprite = character.animated_sprite

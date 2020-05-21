@@ -40,6 +40,11 @@ func _start(delta):
 		character.velocity.y = 120
 	else:
 		is_crouch = false
+	if !is_crouch:
+		character.sound_player.set_skid_playing(true)
+		character.particles.emitting = true
+	else:
+		character.sound_player.play_duck_sound()
 
 func _update(delta):
 	var sprite = character.animated_sprite
@@ -48,10 +53,10 @@ func _update(delta):
 	else:
 		sprite.animation = "diveLeft"
 		
-	if character.is_grounded():
+	if character.is_grounded() or is_crouch:
 		var lerp_speed = character.rotation_interpolation_speed
 		if is_crouch:
-			lerp_speed = 7.5
+			lerp_speed = 15
 		var normal = character.ground_check.get_collision_normal()
 		var sprite_rotation = atan2(normal.y, normal.x) + (PI/2)
 		sprite_rotation += PI/2 * character.facing_direction
@@ -61,6 +66,8 @@ func _update(delta):
 		#character.position.y += 2.5	
 
 func _stop(delta):
+	character.sound_player.set_skid_playing(false)
+	character.particles.emitting = false
 	character.friction = character.real_friction
 	if character.is_grounded() and character.velocity.x < 5 and character.velocity.x > -5:
 		character.set_state_by_name("SlideStopState", delta)
@@ -70,6 +77,8 @@ func _stop(delta):
 	stop = false
 	
 func change_to_getup(delta):
+	character.sound_player.set_skid_playing(false)
+	character.particles.emitting = false
 	var collision = character.get_node("Collision")
 	var dive_collision = character.get_node("CollisionDive")
 	var ground_collision = character.get_node("GroundCollision")
@@ -90,7 +99,7 @@ func change_to_getup(delta):
 	ledge_buffer = 0
 
 func _stop_check(_delta):
-	return (abs(character.velocity.x) < 5 and !character.inputs[9][0]) or stop or !character.is_grounded()
+	return (abs(character.velocity.x) < 5 and !character.inputs[9][0]) or stop or (!character.is_grounded() and !is_crouch)
 
 func _general_update(delta):
 	if character.inputs[2][1]:
@@ -108,6 +117,10 @@ func _general_update(delta):
 			
 	if character.is_grounded() and character.state == self:
 		ledge_buffer = 0.125
+		
+	if character.state != self and character.state != character.get_state_node("WallSlideState"):
+		character.sound_player.set_skid_playing(false)
+		character.particles.emitting = false
 		
 	if ledge_buffer > 0:
 		if getup_buffer > 0:

@@ -17,6 +17,7 @@ func _start_check(_delta):
 
 func _start(_delta):
 	wait_timer = 0.35
+	character.sound_player.play_gp_windup_sound()
 
 func _update(delta):
 	var sprite = character.sprite

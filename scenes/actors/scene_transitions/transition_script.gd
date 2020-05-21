@@ -33,7 +33,7 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time, new_ar
 			music_tween.start()
 		
 		yield(canvas_tween, "tween_completed")
-		music.loading = true
+		
 		yield(get_tree().create_timer(0.1), "timeout")
 		
 		CurrentLevelData.area = new_area
@@ -41,7 +41,7 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time, new_ar
 		
 		yield(get_tree().create_timer(0.1), "timeout")
 		get_tree().paused = false
-		music.loading = false
+		
 		
 		canvas_mask.texture = transition_out_tex
 		

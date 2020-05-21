@@ -24,6 +24,7 @@ func _start(_delta):
 		sprite.animation = "groundPoundEndRight"
 	else:
 		sprite.animation = "groundPoundEndLeft"
+	character.sound_player.play_gp_hit_sound()
 
 func _stop(delta):
 	character.attacking = false

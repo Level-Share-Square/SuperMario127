@@ -38,7 +38,7 @@ func _start(_delta):
 	character.position.y -= 2
 	direction_on_wj = character.facing_direction
 	wall_jump_timer = 0.45
-	sound_player.play_jump_sound()
+	sound_player.play_wall_jump_sound()
 	character.jump_animation = 0
 	character.is_wj_chained = true
 

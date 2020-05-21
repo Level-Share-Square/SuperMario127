@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Damage3.wav-fecafac3aaeac505f7c0d475f6380b9c.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_mario/Damage3.wav"
+dest_files=[ "res://.import/Damage3.wav-fecafac3aaeac505f7c0d475f6380b9c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
