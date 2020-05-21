@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Curve" id=1]
+max_value = 6.0
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 6 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.302469 )
+colors = PoolColorArray( 0.541176, 1, 0.54902, 0.25098, 0, 1, 0.298039, 0 )
+
+[node name="DemonEffects" type="Node2D"]
+position = Vector2( 0, 2 )
+
+[node name="LeftBeam" type="Line2D" parent="."]
+z_index = -1
+points = PoolVector2Array( 0, 0, -35, 0 )
+width = 4.0
+width_curve = SubResource( 1 )
+default_color = Color( 0.0313726, 1, 0, 1 )
+gradient = SubResource( 2 )
+
+[node name="RightBeam" type="Line2D" parent="."]
+z_index = -1
+points = PoolVector2Array( 0, 0, 35, 0 )
+width = 4.0
+width_curve = SubResource( 1 )
+default_color = Color( 0.0313726, 1, 0, 1 )
+gradient = SubResource( 2 )
+
+[node name="TopBeam" type="Line2D" parent="."]
+z_index = -1
+points = PoolVector2Array( 0, 0, 0, -32 )
+width = 4.0
+width_curve = SubResource( 1 )
+default_color = Color( 0.0313726, 1, 0, 1 )
+gradient = SubResource( 2 )
+
+[node name="BottomBeam" type="Line2D" parent="."]
+z_index = -1
+points = PoolVector2Array( 0, 0, 0, 35 )
+width = 4.0
+width_curve = SubResource( 1 )
+default_color = Color( 0.0313726, 1, 0, 1 )
+gradient = SubResource( 2 )

@@ -1,10 +1,13 @@
 extends GameObject
 
 onready var effects = $ShineEffects
+onready var animated_sprite = $AnimatedSprite
 onready var area = $Area2D
 onready var sound = $CollectSound
 var collected = false
 var character
+
+var anim_damp = 160
 
 var title := "Unnamed Shine"
 var description := "This is a shine! Collect it to win the level."
@@ -35,6 +38,7 @@ func _ready():
 		var _connect = area.connect("body_entered", self, "collect")
 
 func _physics_process(_delta):
+	animated_sprite.frame = (OS.get_ticks_msec() / anim_damp) % 4
 	effects.rotation_degrees = (OS.get_ticks_msec()/16) % 360
 	if collected:
 		var sprite = character.get_node("Sprite")

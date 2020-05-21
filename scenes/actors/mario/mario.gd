@@ -393,7 +393,11 @@ func _physics_process(delta: float):
 			facing_direction = move_direction
 
 			if !disable_animation and movable and controlled_locally:
-				if !test_move(transform, Vector2(velocity.x * delta, 0)):
+				if !is_walled():
+					if (abs(velocity.x) > move_speed):
+						sprite.speed_scale = abs(velocity.x) / move_speed
+					else:
+						sprite.speed_scale = 1
 					var animation_frame = sprite.frame
 					if move_direction == 1:
 						sprite.animation = "movingRight"
@@ -408,11 +412,8 @@ func _physics_process(delta: float):
 						sprite.animation = "idleRight"
 					else:
 						sprite.animation = "idleLeft"
-				if (abs(velocity.x) > move_speed):
-					sprite.speed_scale = abs(velocity.x) / move_speed
-				else:
-					sprite.speed_scale = 1
-				if footstep_interval <= 0:
+					sprite.speed_scale = 0
+				if footstep_interval <= 0 and sprite.speed_scale > 0:
 					sound_player.play_footsteps()
 					footstep_interval = clamp(0.8 - (sprite.speed_scale / 2.5), 0.1, 1)
 				footstep_interval -= delta
@@ -528,19 +529,9 @@ func _physics_process(delta: float):
 	if position.x < 0:
 		position.x = 0
 		velocity.x = 0
-		if is_grounded() and move_direction != 0 and !disable_animation and movable and controlled_locally:
-			if facing_direction == 1:
-				sprite.animation = "idleRight"
-			else:
-				sprite.animation = "idleLeft"
 	if position.x > level_size.x * 32:
 		position.x = level_size.x * 32
 		velocity.x = 0
-		if is_grounded() and move_direction != 0 and !disable_animation and movable and controlled_locally:
-			if facing_direction == 1:
-				sprite.animation = "idleRight"
-			else:
-				sprite.animation = "idleLeft"
 	last_velocity = velocity
 	last_move_direction = move_direction
 	

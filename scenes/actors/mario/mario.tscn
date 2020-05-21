@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -62,6 +62,12 @@ particles_anim_h_frames = 10
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
+[sub_resource type="Gradient" id=13]
+colors = PoolColorArray( 0, 1, 0.145098, 0.25098, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=14]
+gradient = SubResource( 13 )
+
 [sub_resource type="ParticlesMaterial" id=10]
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
@@ -69,6 +75,7 @@ spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+color_ramp = SubResource( 14 )
 anim_speed = 0.8
 
 [node name="Character" type="KinematicBody2D"]

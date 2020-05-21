@@ -54,4 +54,5 @@ physics_process_parent = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 7 )
+frame = 1
 playing = true
