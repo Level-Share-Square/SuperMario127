@@ -22,6 +22,8 @@ onready var footsteps_default = $Footsteps/Default
 
 var ready = false
 
+# This code just plain sucks
+
 func _ready():
 	yield(get_tree().create_timer(0.1), "timeout")
 	ready = true

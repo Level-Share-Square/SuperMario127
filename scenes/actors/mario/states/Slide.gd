@@ -42,7 +42,6 @@ func _start(delta):
 		is_crouch = false
 	if !is_crouch:
 		character.sound_player.set_skid_playing(true)
-		character.particles.emitting = true
 	else:
 		character.sound_player.play_duck_sound()
 
@@ -52,6 +51,11 @@ func _update(delta):
 		sprite.animation = "diveRight"
 	else:
 		sprite.animation = "diveLeft"
+		
+	if abs(character.velocity.x) > 50 and character.is_grounded():
+		character.particles.emitting = true
+	else:
+		character.particles.emitting = false
 		
 	if character.is_grounded() or is_crouch:
 		var lerp_speed = character.rotation_interpolation_speed

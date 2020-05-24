@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://scenes/actors/mario/sounds_misc/duck.wav" type="AudioStream" id=27]
 [ext_resource path="res://scenes/actors/mario/sounds_misc/spin.wav" type="AudioStream" id=28]
 [ext_resource path="res://scenes/actors/mario/sounds_misc/wall_jump.wav" type="AudioStream" id=29]
+[ext_resource path="res://scenes/actors/mario/sounds_misc/footsteps/default2.wav" type="AudioStream" id=30]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 2 )
@@ -140,7 +141,7 @@ stream = ExtResource( 26 )
 volume_db = -7.5
 
 [node name="Step2" type="AudioStreamPlayer" parent="Footsteps/Default"]
-stream = ExtResource( 8 )
+stream = ExtResource( 30 )
 volume_db = -7.5
 
 [node name="OtherSounds" type="Node" parent="."]

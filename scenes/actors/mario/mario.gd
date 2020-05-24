@@ -148,6 +148,8 @@ onready var water_sprite = $Sprite/Water
 onready var fludd_sound = $FluddSound
 onready var nozzle_switch_sound = $NozzleSwitchSound
 onready var particles = $Particles2D
+onready var gp_particles1 = $GPParticles1
+onready var gp_particles2 = $GPParticles2
 
 var level_size = Vector2(80, 30)
 var number_of_players = 2

@@ -48,7 +48,7 @@ func _update(delta):
 			sprite.animation = "tripleJumpLeft"
 	else:
 		disable_turning = false
-		priority = 3
+		priority = 0
 		if (character.facing_direction == 1):
 			sprite.animation = "fallRight"
 		else:
