@@ -40,7 +40,7 @@ func _start(delta):
 
 func _update(delta):
 	var sprite = character.animated_sprite
-	if character.velocity.y < 0 and disable_turning:
+	if character.velocity.y <= 0 and disable_turning:
 		priority = 4
 		if (character.facing_direction == 1):
 			sprite.animation = "tripleJumpRight"

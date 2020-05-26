@@ -1,7 +1,7 @@
 class_name LevelData
 
-var current_format_version := "0.4.3"
-var format_version := "0.4.3"
+var current_format_version := "0.4.4"
+var format_version := "0.4.4"
 var name := "My Level"
 var areas = []
 var functions = {}
@@ -88,6 +88,7 @@ func get_settings(result) -> LevelAreaSettings:
 	settings.sky = result.sky
 	settings.background = result.background
 	settings.music = result.music
+	settings.gravity = abs(result.gravity)
 	var size_vec2 = get_vector2(result.size)
 	settings.size = Vector2(clamp(size_vec2.x, 24, 1500), clamp(size_vec2.y, 14, 1500))
 	return settings
@@ -129,6 +130,8 @@ func load_in(code):
 		result.format_version = "0.4.2"
 	if result.format_version == "0.4.2":
 		result = conversion_util.convert_042_to_043(result)
+	if result.format_version == "0.4.3":
+		result.format_version = "0.4.4"
 
 	assert(result.format_version)
 	assert(result.name)
@@ -146,7 +149,7 @@ func load_in(code):
 func get_encoded_level_data():
 	
 	var level_string = ""
-	var data_format_version = "0.4.3"
+	var data_format_version = "0.4.4"
 	var level_name = name
 	
 	
@@ -207,7 +210,8 @@ func get_encoded_level_data():
 		level_string += value_util.encode_value(settings.size) + ","
 		level_string += value_util.encode_value(settings.sky) + ","
 		level_string += value_util.encode_value(settings.background) + ","
-		level_string += value_util.encode_value(settings.music) + "~"
+		level_string += value_util.encode_value(settings.music) + ","
+		level_string += value_util.encode_value(settings.gravity) + "~"
 		
 		# Tiles
 		for index in range((settings.size.x * settings.size.y) - 1):

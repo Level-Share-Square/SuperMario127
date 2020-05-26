@@ -28,7 +28,7 @@ func create_object(object, add_to_data):
 		object_node.level_area = level_area
 		object_node.level_object = object
 		#object_node._init_signals() - Disabled because it's not needed atm
-		#object_node._set_properties()
+		object_node._set_properties()
 		var index = 0
 		for value in object.properties:
 			var true_value = value_util.get_true_value(value)

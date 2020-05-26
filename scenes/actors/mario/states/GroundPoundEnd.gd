@@ -29,12 +29,12 @@ func _start(_delta):
 	else:
 		sprite.animation = "groundPoundEndLeft"
 	character.sound_player.play_gp_hit_sound()
-
-func _stop(delta):
-	particle_timer = 0
 	character.attacking = false
 	character.big_attack = false
 	character.heavy = false
+
+func _stop(delta):
+	particle_timer = 0
 	if jump_timer > 0:
 		character.current_jump = 1
 		character.set_state_by_name("JumpState", delta)

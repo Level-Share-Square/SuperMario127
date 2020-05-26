@@ -44,6 +44,7 @@ export var jump_animation = 0
 export var direction_on_stick = 1
 export var rotating = true
 export var spawn_pos = Vector2(0, 0)
+export var gravity : float
 
 export var disable_movement = false
 export var disable_turning = false
@@ -221,6 +222,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	collision_raycast.disabled = false
 	left_collision.disabled = false
 	right_collision.disabled = false
+	gravity = level_area.settings.gravity
 
 func is_grounded():
 	var raycast_node = ground_check
@@ -330,7 +332,6 @@ func _process(delta: float):
 		position = position.linear_interpolate(next_position, delta * sync_interpolation_speed)
 
 func _physics_process(delta: float):
-	var gravity = 7.82 #global_vars_node.gravity
 	# Gravity
 	velocity += gravity * Vector2(0, gravity_scale)
 	

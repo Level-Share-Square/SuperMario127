@@ -2,6 +2,7 @@ extends Node
 
 var level_data : LevelData
 var area := 0
+var area_plr_2 := 0
 
 func _ready():
 	level_data = LevelData.new()

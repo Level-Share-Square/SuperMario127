@@ -57,7 +57,7 @@ func _physics_process(delta):
 		if exit_timer > 0:
 			character.position = character.position.linear_interpolate(tween_to, delta * 5)
 			exit_timer -= delta
-			if exit_timer <= 0.725:
+			if exit_timer <= 0.825:
 				character.visible = true
 			else:
 				character.visible = false

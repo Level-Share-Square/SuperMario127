@@ -136,7 +136,7 @@ font_data = ExtResource( 7 )
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
-nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"), NodePath("Viewports/ViewportContainer/Viewport/World/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/World/Character2"), NodePath("Viewports/ViewportContainer2/Viewport/CameraP2"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds"), NodePath("Viewports/ViewportContainer2/Viewport/Backgrounds") ]
+nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"), NodePath("Viewports/ViewportContainer/Viewport/World/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/World/Character2"), NodePath("Viewports/ViewportContainer2/Viewport/CameraP2"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds"), NodePath("Viewports/ViewportContainer2/Viewport/Backgrounds"), NodePath("Viewports/ViewportContainer2/Viewport/World/Shared") ]
 character = NodePath("Viewports/ViewportContainer/Viewport/World/Character")
 character2 = NodePath("Viewports/ViewportContainer/Viewport/World/Character2")
 camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
@@ -928,6 +928,10 @@ script = ExtResource( 4 )
 character = NodePath("../../../ViewportContainer/Viewport/World/Character2")
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer2/Viewport" instance=ExtResource( 13 )]
+
+[node name="World" type="Node2D" parent="Viewports/ViewportContainer2/Viewport"]
+
+[node name="Shared" parent="Viewports/ViewportContainer2/Viewport/World" instance=ExtResource( 2 )]
 
 [node name="FluddDisplay2" parent="Viewports/ViewportContainer2" instance=ExtResource( 30 )]
 position = Vector2( -388, 0 )

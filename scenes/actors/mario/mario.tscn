@@ -62,13 +62,13 @@ particles_anim_h_frames = 10
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=13]
+[sub_resource type="Gradient" id=10]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=14]
-gradient = SubResource( 13 )
+[sub_resource type="GradientTexture" id=11]
+gradient = SubResource( 10 )
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticlesMaterial" id=12]
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 0.0
@@ -76,10 +76,10 @@ gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.75
-color_ramp = SubResource( 14 )
+color_ramp = SubResource( 11 )
 anim_speed = 0.8
 
-[sub_resource type="ParticlesMaterial" id=11]
+[sub_resource type="ParticlesMaterial" id=13]
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, -27, 0 )
@@ -88,10 +88,10 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 100.0
 scale = 0.75
-color_ramp = SubResource( 14 )
+color_ramp = SubResource( 11 )
 anim_speed = 0.8
 
-[sub_resource type="ParticlesMaterial" id=12]
+[sub_resource type="ParticlesMaterial" id=14]
 flag_disable_z = true
 direction = Vector3( -1, 0, 0 )
 spread = 0.0
@@ -101,7 +101,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 100.0
 scale = 0.75
-color_ramp = SubResource( 14 )
+color_ramp = SubResource( 11 )
 anim_speed = 0.8
 
 [node name="Character" type="KinematicBody2D"]
@@ -181,13 +181,13 @@ disabled = true
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "spinning"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 frames = ExtResource( 23 )
 animation = "spinning"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Water" type="AnimatedSprite" parent="Sprite"]
@@ -350,7 +350,7 @@ z_index = -2
 emitting = false
 amount = 24
 local_coords = false
-process_material = SubResource( 10 )
+process_material = SubResource( 12 )
 texture = ExtResource( 30 )
 
 [node name="GPParticles1" type="Particles2D" parent="."]
@@ -360,7 +360,7 @@ z_index = 2
 emitting = false
 amount = 14
 local_coords = false
-process_material = SubResource( 11 )
+process_material = SubResource( 13 )
 texture = ExtResource( 30 )
 
 [node name="GPParticles2" type="Particles2D" parent="."]
@@ -370,5 +370,5 @@ z_index = 2
 emitting = false
 amount = 14
 local_coords = false
-process_material = SubResource( 12 )
+process_material = SubResource( 14 )
 texture = ExtResource( 30 )

@@ -122,6 +122,10 @@ static func decode(code: String):
 		result.areas[area_id].settings.sky = decode_value(area_settings_array[1])
 		result.areas[area_id].settings.background = decode_value(area_settings_array[2])
 		result.areas[area_id].settings.music = decode_value(area_settings_array[3])
+		if area_settings_array.size() > 4:
+			result.areas[area_id].settings.gravity = decode_value(area_settings_array[4])
+		else:
+			result.areas[area_id].settings.gravity = 7.82
 		
 		var area_tiles_array = area_array[1].split(",")
 		result.areas[area_id].foreground_tiles = []
