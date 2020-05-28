@@ -44,6 +44,7 @@ func _start(delta):
 		character.sound_player.set_skid_playing(true)
 	else:
 		character.sound_player.play_duck_sound()
+	print(character.ground_check.get_collision_normal())
 
 func _update(delta):
 	var sprite = character.animated_sprite
@@ -106,9 +107,10 @@ func _stop_check(_delta):
 	return (abs(character.velocity.x) < 5 and !character.inputs[9][0]) or stop or (!character.is_grounded() and !is_crouch)
 
 func _general_update(delta):
+	var normal = character.ground_check.get_collision_normal()
 	if character.inputs[2][1]:
 		getup_buffer = 0.075
-	if character.inputs[9][1]:
+	if character.inputs[9][1] and normal.x == 0:
 		crouch_buffer = 0.15
 	if getup_buffer > 0:
 		getup_buffer -= delta
