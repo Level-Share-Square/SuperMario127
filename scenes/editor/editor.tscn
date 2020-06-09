@@ -1986,6 +1986,17 @@ change_to = "SnowTree"
 icon = ExtResource( 125 )
 preview = ExtResource( 124 )
 
+[node name="BulletBill" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 25
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+z_index = -1
+change_to = "BulletBill"
+icon = ExtResource( 96 )
+preview = ExtResource( 95 )
+
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
 

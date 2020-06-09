@@ -15,12 +15,10 @@ func update_background(area):
 	if !ready:
 		yield(self,"ready")
 	var background_id_mapper = preload("res://scenes/shared/background/backgrounds/ids.tres")
-	var background_mapped_id = background_id_mapper.ids[area.settings.sky]
-	var background_resource = load("res://scenes/shared/background/backgrounds/" + background_mapped_id + "/resource.tres")
+	var background_resource = CurrentLevelData.background_cache[area.settings.sky]
 	
 	var foreground_id_mapper = preload("res://scenes/shared/background/foregrounds/ids.tres")
-	var foreground_mapped_id = foreground_id_mapper.ids[area.settings.background]
-	var foreground_resource = load("res://scenes/shared/background/foregrounds/" + foreground_mapped_id + "/resource.tres")
+	var foreground_resource = CurrentLevelData.foreground_cache[area.settings.background]
 	
 	background_node.texture = background_resource.texture
 	

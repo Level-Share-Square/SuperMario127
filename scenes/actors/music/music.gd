@@ -13,14 +13,17 @@ var last_song = 0
 var dl_ready = false
 var downloader = Downloader.new()
 
+var song_cache = []
+
 func get_song(song_id: int):
-	var level_songs : IdMap  = preload("res://assets/music/ids.tres")
-	var song : LevelSong = load("res://assets/music/resources/" + level_songs.ids[song_id] + ".tres")
-	return song
+	return song_cache[song_id]
 
 func _ready():
 	orig_volume = volume_db
 	var _connect = downloader.connect("request_completed", self, "load_ogg")
+	var level_songs : IdMap  = preload("res://assets/music/ids.tres")
+	for id in level_songs.ids:
+		song_cache.append(load("res://assets/music/resources/" + id + ".tres"))
 	
 func load_ogg():
 	var path = "user://bg_music.ogg"

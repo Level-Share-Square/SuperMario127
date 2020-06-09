@@ -5,7 +5,7 @@ extends Node
 var level_data : LevelData
 var level_area : LevelArea
 
-var object_id_map : IdMap = load("res://scenes/actors/objects/ids.tres")
+var object_cache = []
 
 func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
 	level_data = loaded_level_data
@@ -19,8 +19,7 @@ func set_property(object_node : GameObject, property, value):
 
 func create_object(object, add_to_data):
 	var mode = get_tree().get_current_scene().mode
-	var object_name = object_id_map.ids[object.type_id]
-	var object_scene = load("res://scenes/actors/objects/" + object_name + "/" + object_name + ".tscn")
+	var object_scene = CurrentLevelData.object_cache[object.type_id]
 	if object_scene != null:
 		var object_node = object_scene.instance()
 		object_node.mode = mode
@@ -42,7 +41,7 @@ func create_object(object, add_to_data):
 				object_node.on_place()
 		return object_node
 	else:
-		print("Object type " + object_name + " doesn't exist.")
+		print("Object type doesn't exist.")
 		
 func get_object_at_position(position: Vector2):
 	for object in self.get_children():
