@@ -3,12 +3,16 @@ extends GameObject
 onready var area = $Area2D
 onready var stomp_detector = $StompDetector
 onready var sprite = $Sprite
+onready var colored_sprite = $Sprite/Colored
+onready var visibility_notifer = $VisibilityNotifier2D
 onready var sound = $AudioStreamPlayer
 var collected = false
 var character
 
 var speed := 0.75
 var chase := false
+var color := Color(0, 1, 0)
+var facing_direction := 1
 
 var update_timer = 0.0
 var char_find_timer = 0.0
@@ -20,12 +24,14 @@ var dead = false
 var velocity := Vector2()
 
 func _set_properties():
-	savable_properties = ["chase", "speed"]
-	editable_properties = ["chase", "speed"]
+	savable_properties = ["chase", "speed", "color", "facing_direction"]
+	editable_properties = ["chase", "speed", "color", "facing_direction"]
 	
 func _set_property_values():
 	set_property("chase", chase, true)
 	set_property("speed", speed, true)
+	set_property("color", color, true)
+	set_property("facing_direction", facing_direction, true)
 
 func kill(body):
 	if enabled and body.name.begins_with("Character") and !body.dead and !dead and body.controllable:
@@ -50,11 +56,15 @@ func detect_stomp(body):
 			sound.play()
 
 func _ready():
+	sprite.flip_h = true if facing_direction == 1 else false
+	colored_sprite.flip_h = true if facing_direction == 1 else false
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "kill")
 		var _connect2 = stomp_detector.connect("body_entered", self, "detect_stomp")
 
 func _physics_process(delta):
+	colored_sprite.modulate = color
+	
 	if cached_pos != Vector2() and character != null:
 		move_to = move_to.linear_interpolate((cached_pos - global_position).normalized(), delta * 2)
 		global_position += move_to * speed
@@ -85,13 +95,16 @@ func _physics_process(delta):
 			cached_pos = character.global_position
 			char_find_timer = 3.5
 			
-	if mode != 1:
+	if mode != 1 and enabled:
 		if dead:
 			velocity.y += 5
 			sprite.rotation_degrees += 2.5
 			position += velocity * delta
 		else:
-			position.x += speed
+			position.x += speed * facing_direction
+		
+		if !visibility_notifer.is_on_screen():
+			queue_free()
 			
 	if char_find_timer > 0:
 		char_find_timer -= delta

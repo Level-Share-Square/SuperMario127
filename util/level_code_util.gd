@@ -51,6 +51,10 @@ static func decode_value(value: String):
 		value = value.trim_prefix("V2")
 		var array_value = value.split("x")
 		return Vector2(array_value[0], array_value[1])
+	elif value.begins_with("CL"):
+		value = value.trim_prefix("CL")
+		var array_value = value.split("x")
+		return Color(array_value[0], array_value[1], array_value[2])
 	elif value.begins_with("BL"):
 		value = value.trim_prefix("BL")
 		return true if value == "1" else false

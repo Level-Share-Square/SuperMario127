@@ -20,6 +20,8 @@ static func encode_value(value):
 	var type = typeof(value)
 	if type == TYPE_VECTOR2:
 		return "V2" + str(stepify(value.x,0.1)) + "x" + str(stepify(value.y, 0.1))
+	elif type == TYPE_COLOR:
+		return "CL" + str(stepify(value.r,0.01)) + "x" + str(stepify(value.g,0.01)) + "x" + str(stepify(value.b,0.01))
 	elif type == TYPE_BOOL:
 		return "BL" + str(0 if value == false else 1)
 	elif type == TYPE_INT:

@@ -1986,14 +1986,14 @@ change_to = "SnowTree"
 icon = ExtResource( 125 )
 preview = ExtResource( 124 )
 
-[node name="BulletBill" type="Node" parent="PlaceableItems"]
+[node name="BillBlaster" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
-object_id = 25
+object_id = 26
 is_object = true
 object_center = Vector2( 8, 8 )
 tile_mode_step = 16
 z_index = -1
-change_to = "BulletBill"
+change_to = "BillBlaster"
 icon = ExtResource( 96 )
 preview = ExtResource( 95 )
 

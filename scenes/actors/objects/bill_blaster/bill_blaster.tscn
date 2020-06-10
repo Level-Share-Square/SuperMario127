@@ -1,0 +1,81 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scenes/actors/objects/bill_blaster/bill_blaster.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/bill_blaster/top_colored.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/hover_box/sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/bill_blaster/top.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/bill_blaster/bottom.png" type="Texture" id=5]
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 4 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 9 ), SubResource( 10 ), SubResource( 10 ), SubResource( 8 ) ],
+"loop": false,
+"name": "blast",
+"speed": 10.0
+} ]
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=12]
+animations = [ {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 6 ), SubResource( 7 ), SubResource( 7 ), SubResource( 5 ) ],
+"loop": false,
+"name": "blast",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 8, 12 )
+
+[node name="BillBlaster" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+
+[node name="Top" type="AnimatedSprite" parent="."]
+frames = SubResource( 11 )
+animation = "blast"
+frame = 5
+playing = true
+
+[node name="Color" type="AnimatedSprite" parent="Top"]
+frames = SubResource( 12 )
+animation = "blast"
+frame = 5
+playing = true
+
+[node name="Bottom" type="Sprite" parent="."]
+position = Vector2( 0, 8 )
+texture = ExtResource( 5 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 0, 4 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 13 )
