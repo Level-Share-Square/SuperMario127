@@ -31,7 +31,8 @@ func _update(delta):
 func _stop(delta):
 	var sprite = character.sprite
 	sprite.rotation_degrees = 0
-	character.set_state_by_name("GroundPoundState", delta)
+	if wait_timer <= 0:
+		character.set_state_by_name("GroundPoundState", delta)
 
 func _stop_check(_delta):
 	return wait_timer <= 0

@@ -62,10 +62,13 @@ var last_state = null
 var switching_state = false
 export var controllable = true
 export var invulnerable = false
+export var invulnerable_frames = 0
 export var movable = true
 export var dead = false
 export var dive_cooldown = 0
 
+export var health := 8
+export var health_shards := 0
 var nozzle = null
 var fuel := 100.0
 var stamina := 100.0
@@ -299,7 +302,6 @@ func player_hit(body):
 					velocity.y = -175
 					body.velocity.x = 250
 					set_state_by_name("BonkedState", 0)
-					sound_player.play_hit_sound()
 				elif !attacking or (body.attacking and attacking):
 					velocity.x = -250
 					body.velocity.x = 250
@@ -309,7 +311,6 @@ func player_hit(body):
 					velocity.y = -175
 					body.velocity.x = -250
 					set_state_by_name("BonkedState", 0)
-					sound_player.play_hit_sound()
 				elif !attacking or (body.attacking and attacking):
 					velocity.x = 250
 					body.velocity.x = -250
@@ -319,19 +320,43 @@ func player_hit(body):
 				velocity.y = -175
 				body.velocity.x = 250
 				set_state_by_name("BonkedState", 0)
-				sound_player.play_hit_sound()
 			else:
 				velocity.x = 205
 				velocity.y = -175
 				body.velocity.x = -250
 				set_state_by_name("BonkedState", 0)
-				sound_player.play_hit_sound()
 
 func _process(delta: float):
+	if invulnerable_frames > 0:
+		visible = !visible
+	elif invulnerable_frames == 0:
+		visible = true
 	if next_position:
 		position = position.linear_interpolate(next_position, delta * sync_interpolation_speed)
 
+func damage(amount : int = 1, cause : String = "hit", frames : int = 180):
+	if !dead:
+		invulnerable = true if frames != 0 else false
+		invulnerable_frames = frames
+		health -= 1
+		if health <= 0:
+			kill(cause)
+		else:
+			sound_player.play_hit_sound()
+			
+func heal(shards : int = 1):
+	if !dead and health != 8:
+		health_shards += shards
+		health += floor(health_shards / 5)
+		health_shards = health_shards % 5
+
 func _physics_process(delta: float):
+	if invulnerable_frames > 0:
+		invulnerable_frames -= 1
+		invulnerable = true
+	elif invulnerable_frames == 0:
+		invulnerable = false
+	
 	# Gravity
 	velocity += gravity * Vector2(0, gravity_scale)
 	
@@ -570,6 +595,12 @@ func kill(cause):
 		elif cause == "green_demon":
 			controllable = false
 			cutout_in = cutout_death
+		elif cause == "hit":
+			controllable = false
+			cutout_in = cutout_death
+			sound_player.play_death_sound()
+			transition_time = 1.6
+			
 		if reload:
 			CurrentLevelData.level_data.vars.transition_data = []
 			scene_transitions.reload_scene(cutout_in, cutout_out, transition_time, 0)

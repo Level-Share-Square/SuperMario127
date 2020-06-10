@@ -3,6 +3,7 @@ extends GameObject
 onready var area = $Area2D
 onready var stomp_detector = $StompDetector
 onready var sprite = $Sprite
+onready var sound = $AudioStreamPlayer
 var collected = false
 var character
 
@@ -28,19 +29,25 @@ func _set_property_values():
 
 func kill(body):
 	if enabled and body.name.begins_with("Character") and !body.dead and !dead and body.controllable:
-		if !body.attacking:
-			body.kill("green_demon")
-			enabled = false
-			sprite.visible = false
+		if !body.attacking and !body.invulnerable:
+			body.velocity.x = (body.global_position - global_position).normalized().x * 205
+			body.velocity.y = -175
+			body.set_state_by_name("BonkedState", 0)
+			body.damage()
+		elif body.attacking:
+			velocity = ((body.global_position - global_position).normalized() * -90)
+			dead = true
+			sound.play()
 			
 func detect_stomp(body):
 	if enabled and body.name.begins_with("Character") and !body.dead and !dead:
-		if body.position.y > stomp_detector.position.y:
-			body.set_state_by_name("BounceState", 0)
-			body.velocity.y = -330
+		if body.velocity.y > 0:
+			if body.state != body.get_state_node("GroundPoundState"):
+				body.set_state_by_name("BounceState", 0)
+				body.velocity.y = -330
 			velocity.y = 60
-			print("B")
 			dead = true
+			sound.play()
 
 func _ready():
 	if mode != 1:
@@ -78,10 +85,13 @@ func _physics_process(delta):
 			cached_pos = character.global_position
 			char_find_timer = 3.5
 			
-	if dead:
-		velocity.y += 3
-		sprite.rotation_degrees += 1.5
-		position += velocity * delta
+	if mode != 1:
+		if dead:
+			velocity.y += 5
+			sprite.rotation_degrees += 2.5
+			position += velocity * delta
+		else:
+			position.x += speed
 			
 	if char_find_timer > 0:
 		char_find_timer -= delta

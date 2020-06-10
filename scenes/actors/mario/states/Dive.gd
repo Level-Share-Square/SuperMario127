@@ -82,6 +82,7 @@ func _stop(delta):
 		character.position.x -= 2 * character.facing_direction
 		character.position.y -= 16
 		character.set_state_by_name("BonkedState", delta)
+		character.sound_player.play_bonk_sound()
 		character.attacking = false
 		sprite.rotation_degrees = 0
 	if character.is_grounded():

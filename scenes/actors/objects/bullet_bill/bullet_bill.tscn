@@ -1,10 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/actors/objects/bullet_bill/bullet_bill.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/bullet_bill/texture.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12, 6 )
+extents = Vector2( 15, 9 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 1 )
@@ -33,3 +34,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector"]
 shape = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0

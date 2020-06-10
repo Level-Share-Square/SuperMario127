@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://scenes/player/ui/coin.png" type="Texture" id=31]
 [ext_resource path="res://scenes/player/coin_counter.gd" type="Script" id=32]
 [ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
+[ext_resource path="res://scenes/actors/health_display/health_display.tscn" type="PackedScene" id=34]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 7 )
@@ -892,6 +893,9 @@ character = 1
 [node name="FluddDisplay" parent="Viewports/ViewportContainer" instance=ExtResource( 30 )]
 char_path = NodePath("../Viewport/World/Character")
 
+[node name="HealthDisplay" parent="Viewports/ViewportContainer" instance=ExtResource( 34 )]
+char_path = NodePath("../Viewport/World/Character")
+
 [node name="ViewportContainer2" type="ViewportContainer" parent="Viewports"]
 margin_left = 388.0
 margin_right = 772.0
@@ -931,8 +935,9 @@ character = NodePath("../../../ViewportContainer/Viewport/World/Character2")
 
 [node name="World" type="Node2D" parent="Viewports/ViewportContainer2/Viewport"]
 
-[node name="Shared" parent="Viewports/ViewportContainer2/Viewport/World" instance=ExtResource( 2 )]
-
 [node name="FluddDisplay2" parent="Viewports/ViewportContainer2" instance=ExtResource( 30 )]
 position = Vector2( -388, 0 )
+char_path = NodePath("../../ViewportContainer/Viewport/World/Character2")
+
+[node name="HealthDisplay" parent="Viewports/ViewportContainer2" instance=ExtResource( 34 )]
 char_path = NodePath("../../ViewportContainer/Viewport/World/Character2")
