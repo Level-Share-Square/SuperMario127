@@ -23,19 +23,28 @@ func _set_property_values():
 	set_property("wait_time", wait_time, true)
 	set_property("invincible", invincible, true)
 	spawn_timer = wait_time
+	
+func _process(delta):
+	if sprite.frame == 1 or sprite.frame == 2:
+		sprite.scale = sprite.scale.linear_interpolate(Vector2(1.75, 1.75), delta * 12)
+	else:
+		sprite.scale = sprite.scale.linear_interpolate(Vector2(1, 1), delta * 7)
 
 func _physics_process(delta):
 	if invincible:
 		color.h = float(wrapi(OS.get_ticks_msec(), 0, 500)) / 500
 	rotation_degrees = 0
 	color_sprite.modulate = color
+		
 	if mode != 1:
 		spawn_timer -= delta
-		if spawn_timer <= 0:
-			spawn_timer = wait_time
+		if spawn_timer <= 0.35 and sprite.frame == 3 and CurrentLevelData.enemies_instanced < 50:
 			sprite.frame = 0
 			color_sprite.frame = 0
-			
+
+		if spawn_timer <= 0 and CurrentLevelData.enemies_instanced < 55:
+			spawn_timer = wait_time
+
 			var facing_direction = 1
 			
 			var current_scene = get_tree().get_current_scene()
@@ -60,7 +69,7 @@ func _physics_process(delta):
 			var object = LevelObject.new()
 			object.type_id = 25
 			object.properties = []
-			object.properties.append(position + Vector2(4 * facing_direction, 0))
+			object.properties.append(position + Vector2(16 * facing_direction, 0))
 			object.properties.append(Vector2(1, 1))
 			object.properties.append(0)
 			object.properties.append(true)
@@ -71,3 +80,5 @@ func _physics_process(delta):
 			object.properties.append(facing_direction)
 			object.properties.append(invincible)
 			get_parent().create_object(object, false)
+		elif spawn_timer <= 0:
+			spawn_timer = wait_time

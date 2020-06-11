@@ -63,9 +63,9 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HealthUI"]
-margin_left = 4.0
+margin_left = 12.0
 margin_top = -40.0
-margin_right = 260.0
+margin_right = 268.0
 margin_bottom = 56.0
 texture = SubResource( 3 )
 __meta__ = {

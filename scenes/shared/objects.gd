@@ -11,6 +11,7 @@ func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
 	level_data = loaded_level_data
 	level_area = loaded_level_area
 	
+	CurrentLevelData.enemies_instanced = 0
 	for object in loaded_level_area.objects:
 		create_object(object, false)
 		

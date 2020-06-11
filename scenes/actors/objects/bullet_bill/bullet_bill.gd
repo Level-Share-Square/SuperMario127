@@ -62,6 +62,7 @@ func detect_stomp(body):
 			sound.play()
 
 func _ready():
+	CurrentLevelData.enemies_instanced += 1
 	if invincible:
 		chase = true
 	sprite.rotation = PI if chase and facing_direction == -1 else 0
@@ -127,12 +128,14 @@ func _physics_process(delta):
 				if invincible:
 					dead = false
 				else:
+					CurrentLevelData.enemies_instanced -= 1
 					queue_free()
 		elif !chase:
 			sprite.frame = 0
 			position.x += speed * facing_direction
 		
 		if !visibility_notifer.is_on_screen():
+			CurrentLevelData.enemies_instanced -= 1
 			queue_free()
 			
 	if char_find_timer > 0:

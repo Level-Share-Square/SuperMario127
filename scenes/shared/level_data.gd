@@ -8,6 +8,8 @@ var object_cache = []
 var background_cache = []
 var foreground_cache = []
 
+var enemies_instanced = 0
+
 func _ready():
 	level_data = LevelData.new()
 	level_data.load_in(load("res://assets/level_data/template_level.tres").contents)

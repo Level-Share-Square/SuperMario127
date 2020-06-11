@@ -44,6 +44,7 @@ extents = Vector2( 14.5, 9 )
 extents = Vector2( 16, 1 )
 
 [node name="BulletBill" type="Node2D"]
+z_index = -2
 script = ExtResource( 1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
