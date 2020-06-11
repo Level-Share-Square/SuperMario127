@@ -19,7 +19,7 @@ func _ready():
 	
 func _start_check(_delta):
 	var normal = character.ground_check.get_collision_normal()
-	return character.inputs[9][1] and character.is_grounded() and normal.x != 0
+	return character.inputs[9][1] and character.is_grounded() and normal.x != 0 and false
 
 func _start(delta):
 	temp_accel = 0

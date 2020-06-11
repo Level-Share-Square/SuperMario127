@@ -30,7 +30,7 @@
 [ext_resource path="res://scenes/actors/mario/states/SlideStop.gd" type="Script" id=28]
 [ext_resource path="res://scenes/actors/mario/states/Backflip.gd" type="Script" id=29]
 [ext_resource path="res://scenes/actors/mario/particles/dust.png" type="Texture" id=30]
-[ext_resource path="res://scenes/actors/mario/states/ButtSlide.gd" type="Script" id=31]
+[ext_resource path="res://scenes/actors/mario/states/Knockback.gd" type="Script" id=31]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -182,13 +182,13 @@ disabled = true
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "spinning"
-frame = 6
+frame = 1
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 frames = ExtResource( 23 )
 animation = "spinning"
-frame = 7
+frame = 1
 playing = true
 
 [node name="Water" type="AnimatedSprite" parent="Sprite"]
@@ -234,6 +234,9 @@ script = ExtResource( 29 )
 [node name="BonkedState" type="Node" parent="States"]
 script = ExtResource( 12 )
 
+[node name="KnockbackState" type="Node" parent="States"]
+script = ExtResource( 31 )
+
 [node name="GetupState" type="Node" parent="States"]
 script = ExtResource( 14 )
 get_up_power = 230
@@ -250,9 +253,6 @@ script = ExtResource( 19 )
 
 [node name="GroundPoundEndState" type="Node" parent="States"]
 script = ExtResource( 20 )
-
-[node name="ButtSlideState" type="Node" parent="States"]
-script = ExtResource( 31 )
 
 [node name="PlayerCollision" type="Area2D" parent="."]
 collision_layer = 2

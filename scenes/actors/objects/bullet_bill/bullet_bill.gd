@@ -42,7 +42,7 @@ func kill(body):
 		if !body.attacking and !body.invulnerable:
 			body.velocity.x = (body.global_position - global_position).normalized().x * 205
 			body.velocity.y = -175
-			body.set_state_by_name("BonkedState", 0)
+			body.set_state_by_name("KnockbackState", 0)
 			body.damage()
 		elif body.attacking:
 			velocity = ((body.global_position - global_position).normalized() * -90)

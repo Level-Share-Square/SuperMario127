@@ -301,7 +301,7 @@ func player_hit(body):
 					velocity.x = -205
 					velocity.y = -175
 					body.velocity.x = 250
-					set_state_by_name("BonkedState", 0)
+					set_state_by_name("KnockbackState", 0)
 				elif !attacking or (body.attacking and attacking):
 					velocity.x = -250
 					body.velocity.x = 250
@@ -310,7 +310,7 @@ func player_hit(body):
 					velocity.x = 205
 					velocity.y = -175
 					body.velocity.x = -250
-					set_state_by_name("BonkedState", 0)
+					set_state_by_name("KnockbackState", 0)
 				elif !attacking or (body.attacking and attacking):
 					velocity.x = 250
 					body.velocity.x = -250
@@ -319,12 +319,12 @@ func player_hit(body):
 				velocity.x = -205
 				velocity.y = -175
 				body.velocity.x = 250
-				set_state_by_name("BonkedState", 0)
+				set_state_by_name("KnockbackState", 0)
 			else:
 				velocity.x = 205
 				velocity.y = -175
 				body.velocity.x = -250
-				set_state_by_name("BonkedState", 0)
+				set_state_by_name("KnockbackState", 0)
 
 func _process(delta: float):
 	if invulnerable_frames > 0:
