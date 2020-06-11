@@ -45,4 +45,4 @@ func _stop(_delta):
 	character.friction = character.real_friction
 
 func _stop_check(_delta):
-	return abs(character.velocity.x) < 10 and character.is_grounded() and character.health > 0
+	return abs(character.velocity.x) < 10 and character.is_grounded()

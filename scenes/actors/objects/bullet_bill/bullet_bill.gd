@@ -13,6 +13,7 @@ var speed := 0.75
 var chase := false
 var color := Color(0, 1, 0)
 var facing_direction := 1
+var invincible := false
 
 var update_timer = 0.0
 var char_find_timer = 0.0
@@ -23,15 +24,18 @@ var move_to := Vector2()
 var dead = false
 var velocity := Vector2()
 
+var delete_timer = 0.0
+
 func _set_properties():
-	savable_properties = ["chase", "speed", "color", "facing_direction"]
-	editable_properties = ["chase", "speed", "color", "facing_direction"]
+	savable_properties = ["chase", "speed", "color", "facing_direction", "invincible"]
+	editable_properties = ["chase", "speed", "color", "facing_direction", "invincible"]
 	
 func _set_property_values():
 	set_property("chase", chase, true)
 	set_property("speed", speed, true)
 	set_property("color", color, true)
 	set_property("facing_direction", facing_direction, true)
+	set_property("invincible", invincible, true)
 
 func kill(body):
 	if enabled and body.name.begins_with("Character") and !body.dead and !dead and body.controllable:
@@ -43,6 +47,7 @@ func kill(body):
 		elif body.attacking:
 			velocity = ((body.global_position - global_position).normalized() * -90)
 			dead = true
+			delete_timer = 3.0 if !invincible else 0.25
 			sound.play()
 			
 func detect_stomp(body):
@@ -53,24 +58,40 @@ func detect_stomp(body):
 				body.velocity.y = -330
 			velocity.y = 60
 			dead = true
+			delete_timer = 3.0 if !invincible else 0.25
 			sound.play()
 
 func _ready():
-	sprite.flip_h = true if facing_direction == 1 else false
-	colored_sprite.flip_h = true if facing_direction == 1 else false
+	if invincible:
+		chase = true
+	sprite.rotation = PI if chase and facing_direction == -1 else 0
+	sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
+	colored_sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "kill")
 		var _connect2 = stomp_detector.connect("body_entered", self, "detect_stomp")
+		
+func _process(delta):
+	colored_sprite.modulate = color
+	colored_sprite.frame = sprite.frame
 
 func _physics_process(delta):
-	colored_sprite.modulate = color
+	if invincible:
+		chase = true
+		color.h = float(wrapi(OS.get_ticks_msec(), 0, 500)) / 500
+	sprite.playing = chase
 	
-	if cached_pos != Vector2() and character != null:
+	if cached_pos != Vector2() and character != null and !dead:
 		move_to = move_to.linear_interpolate((cached_pos - global_position).normalized(), delta * 2)
-		global_position += move_to * speed
-		rotation = lerp_angle(rotation, (move_to.angle()), delta * 2)
+		sprite.rotation = lerp_angle(sprite.rotation, (move_to.angle()), delta * 3)
+		global_position += Vector2(cos(sprite.rotation), sin(sprite.rotation)) * speed
 		
 	if mode != 1 and chase:
+		if facing_direction == -1:
+			sprite.flip_h = true
+			colored_sprite.flip_h = true
+			sprite.flip_v = true
+			colored_sprite.flip_v = true
 		if update_timer <= 0:
 			if character != null:
 				if !character.dead:
@@ -100,7 +121,15 @@ func _physics_process(delta):
 			velocity.y += 5
 			sprite.rotation_degrees += 2.5
 			position += velocity * delta
-		else:
+			delete_timer -= delta
+			if delete_timer <= 0:
+				delete_timer = 0
+				if invincible:
+					dead = false
+				else:
+					queue_free()
+		elif !chase:
+			sprite.frame = 0
 			position.x += speed * facing_direction
 		
 		if !visibility_notifer.is_on_screen():

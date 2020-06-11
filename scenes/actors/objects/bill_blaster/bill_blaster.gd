@@ -10,19 +10,24 @@ var spawn_timer = 3.0
 var chase := false
 var speed := 0.75
 var color := Color(0, 1, 0)
+var invincible := false
 
 func _set_properties():
-	savable_properties = ["chase", "speed", "color", "wait_time"]
-	editable_properties = ["chase", "speed", "color", "wait_time"]
+	savable_properties = ["chase", "speed", "color", "wait_time", "invincible"]
+	editable_properties = ["chase", "speed", "color", "wait_time", "invincible"]
 	
 func _set_property_values():
 	set_property("chase", chase, true)
 	set_property("speed", speed, true)
 	set_property("color", color, true)
 	set_property("wait_time", wait_time, true)
+	set_property("invincible", invincible, true)
 	spawn_timer = wait_time
 
 func _physics_process(delta):
+	if invincible:
+		color.h = float(wrapi(OS.get_ticks_msec(), 0, 500)) / 500
+	rotation_degrees = 0
 	color_sprite.modulate = color
 	if mode != 1:
 		spawn_timer -= delta
@@ -55,7 +60,7 @@ func _physics_process(delta):
 			var object = LevelObject.new()
 			object.type_id = 25
 			object.properties = []
-			object.properties.append(position + Vector2(4, 0))
+			object.properties.append(position + Vector2(4 * facing_direction, 0))
 			object.properties.append(Vector2(1, 1))
 			object.properties.append(0)
 			object.properties.append(true)
@@ -64,4 +69,5 @@ func _physics_process(delta):
 			object.properties.append(speed)
 			object.properties.append(color)
 			object.properties.append(facing_direction)
+			object.properties.append(invincible)
 			get_parent().create_object(object, false)
