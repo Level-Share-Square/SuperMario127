@@ -6,7 +6,6 @@ onready var sprite = $Sprite
 onready var colored_sprite = $Sprite/Colored
 onready var visibility_notifer = $VisibilityNotifier2D
 onready var sound = $AudioStreamPlayer
-var collected = false
 var character
 
 var speed := 0.75

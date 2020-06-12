@@ -1,4 +1,4 @@
-[gd_scene load_steps=168 format=2]
+[gd_scene load_steps=170 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -127,6 +127,8 @@
 [ext_resource path="res://scenes/actors/objects/snow_tree/snow_tree.png" type="Texture" id=125]
 [ext_resource path="res://scenes/actors/objects/bill_blaster/preview.png" type="Texture" id=126]
 [ext_resource path="res://scenes/actors/objects/bill_blaster/icon.png" type="Texture" id=127]
+[ext_resource path="res://scenes/actors/objects/bob_omb/preview.png" type="Texture" id=128]
+[ext_resource path="res://scenes/actors/objects/bob_omb/icon.png" type="Texture" id=129]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 0.501961 )
@@ -1998,6 +2000,17 @@ z_index = -1
 change_to = "BillBlaster"
 icon = ExtResource( 127 )
 preview = ExtResource( 126 )
+
+[node name="BobOmb" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 27
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+z_index = -1
+change_to = "BobOmb"
+icon = ExtResource( 129 )
+preview = ExtResource( 128 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100

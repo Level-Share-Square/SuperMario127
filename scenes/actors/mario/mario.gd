@@ -338,7 +338,7 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180):
 	if !dead:
 		invulnerable = true if frames != 0 else false
 		invulnerable_frames = frames
-		health -= 1
+		health -= amount
 		if health <= 0:
 			kill(cause)
 		else:

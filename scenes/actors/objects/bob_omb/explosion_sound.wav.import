@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/explosion_sound.wav-e9a3da4aabfc10b7345457d0d4394aab.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/bob_omb/explosion_sound.wav"
+dest_files=[ "res://.import/explosion_sound.wav-e9a3da4aabfc10b7345457d0d4394aab.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -182,13 +182,13 @@ disabled = true
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "spinning"
-frame = 1
+frame = 4
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 frames = ExtResource( 23 )
 animation = "spinning"
-frame = 1
+frame = 4
 playing = true
 
 [node name="Water" type="AnimatedSprite" parent="Sprite"]

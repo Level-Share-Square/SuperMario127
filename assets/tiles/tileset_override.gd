@@ -66,6 +66,7 @@ func _is_tile_bound(id, nid):
 	return nid in binds[id]
 
 func _init():
+	rand_seed(0)
 	for id in ids:
 		var id_array = []
 		for id2 in ids:
