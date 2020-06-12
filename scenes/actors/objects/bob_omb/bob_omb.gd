@@ -116,13 +116,16 @@ func _physics_process(delta):
 				velocity.y = -225
 				position.y -= 12
 			else:
+				var distance_normal = (body.global_position - character_attack.global_position).normalized().x
 				if (
-					(body.global_position - character_attack.global_position).normalized().x > 0 or 
-					(body.global_position - character_attack.global_position).normalized().x <= 0
+					distance_normal > 0 or 
+					distance_normal <= 0
 				):
 					if character_attack.state != character_attack.get_state_node("KnockbackState"):
-						velocity.x = 50 * (body.global_position - character_attack.global_position).normalized().x
-						character_attack.velocity.x = -100 * (body.global_position - character_attack.global_position).normalized().x
+						if distance_normal == 0:
+							distance_normal = -1
+						velocity.x = 50 * distance_normal
+						character_attack.velocity.x = -100 * distance_normal
 				
 		sprite.flip_h = true if facing_direction == 1 else false
 		velocity.y += gravity
@@ -158,7 +161,7 @@ func _physics_process(delta):
 					sprite.visible = false
 					fuse.visible = false
 					dead = true
-					damage_timer = 0.75
+					damage_timer = 0.35
 					delete_timer = 3.0
 			if !dead and !hit:
 				facing_direction = 1 if (character.global_position.x > body.global_position.x) else -1
