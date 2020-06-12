@@ -64,9 +64,6 @@ func attack_exited(body):
 		character_attack = null
 
 func _ready():
-	if !enabled:
-		body.collision_layer = 10
-		body.collision_mask = 10
 	player_detector.connect("body_entered", self, "player_entered")
 	damage_area.connect("body_entered", self, "explosion_entered")
 	damage_area.connect("body_exited", self, "explosion_exited")
@@ -118,6 +115,14 @@ func _physics_process(delta):
 				velocity.x = (body.global_position - character_attack.global_position).normalized().x * 275
 				velocity.y = -225
 				position.y -= 12
+			else:
+				if (
+					(body.global_position - character_attack.global_position).normalized().x > 0 or 
+					(body.global_position - character_attack.global_position).normalized().x <= 0
+				):
+					if character_attack.state != character_attack.get_state_node("KnockbackState"):
+						velocity.x = 50 * (body.global_position - character_attack.global_position).normalized().x
+						character_attack.velocity.x = -100 * (body.global_position - character_attack.global_position).normalized().x
 				
 		sprite.flip_h = true if facing_direction == 1 else false
 		velocity.y += gravity
@@ -152,8 +157,6 @@ func _physics_process(delta):
 					particles.emitting = true
 					sprite.visible = false
 					fuse.visible = false
-					body.set_collision_layer_bit(1, false)
-					body.set_collision_mask_bit(1, false)
 					dead = true
 					damage_timer = 0.75
 					delete_timer = 3.0

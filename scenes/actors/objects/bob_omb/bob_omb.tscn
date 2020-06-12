@@ -42,20 +42,19 @@ script = ExtResource( 2 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 position = Vector2( 0, -4 )
-collision_layer = 2
-collision_mask = 2
+collision_mask = 4
 
 [node name="Sprites" type="Node2D" parent="KinematicBody2D"]
 
 [node name="Sprite" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
 frames = ExtResource( 1 )
-frame = 3
+frame = 5
 playing = true
 
 [node name="Fuse" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
 visible = false
 frames = ExtResource( 4 )
-frame = 3
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
@@ -85,7 +84,7 @@ volume_db = -5.0
 [node name="PlayerDetector" type="Area2D" parent="KinematicBody2D"]
 visible = false
 collision_layer = 2
-collision_mask = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/PlayerDetector"]
 shape = SubResource( 3 )
@@ -101,14 +100,14 @@ texture = ExtResource( 6 )
 [node name="DamageArea" type="Area2D" parent="KinematicBody2D"]
 visible = false
 collision_layer = 2
-collision_mask = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/DamageArea"]
 shape = SubResource( 6 )
 
 [node name="AttackArea" type="Area2D" parent="KinematicBody2D"]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/AttackArea"]
 position = Vector2( 0, 4 )
@@ -117,4 +116,3 @@ shape = SubResource( 7 )
 [node name="RayCast2D" type="RayCast2D" parent="KinematicBody2D"]
 enabled = true
 cast_to = Vector2( 0, 12 )
-collision_mask = 2

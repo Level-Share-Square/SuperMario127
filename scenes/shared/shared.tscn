@@ -22,13 +22,13 @@ modulate = Color( 0.545098, 0.545098, 0.545098, 1 )
 z_index = -10
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
+collision_layer = 262144
+collision_mask = 262144
 format = 1
 
 [node name="Middle" type="TileMap" parent="Tilemaps"]
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
-collision_layer = 2
-collision_mask = 2
 format = 1
 
 [node name="Front" type="TileMap" parent="Tilemaps"]
@@ -36,8 +36,8 @@ light_mask = 524288
 z_index = 10
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
-collision_layer = 4
-collision_mask = 4
+collision_layer = 262144
+collision_mask = 262144
 format = 1
 
 [node name="Objects" type="Node" parent="."]

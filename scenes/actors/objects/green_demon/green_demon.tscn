@@ -4,23 +4,23 @@
 [ext_resource path="res://scenes/actors/objects/green_demon/green_demon.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/green_demon/demon_effects.tscn" type="PackedScene" id=3]
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 6 )
 
-[sub_resource type="Gradient" id=13]
+[sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 0, 1, 0.145098, 0.25098, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=14]
-gradient = SubResource( 13 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticlesMaterial" id=4]
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-color_ramp = SubResource( 14 )
+color_ramp = SubResource( 3 )
 anim_speed = 0.8
 
 [node name="GreenDemon" type="Node2D"]
@@ -28,10 +28,10 @@ script = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
-collision_mask = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 11 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 rotation = 0.00648441
@@ -42,7 +42,7 @@ z_index = -1
 emitting = false
 amount = 6
 local_coords = false
-process_material = SubResource( 10 )
+process_material = SubResource( 4 )
 texture = ExtResource( 1 )
 
 [node name="DemonEffects" parent="." instance=ExtResource( 3 )]
