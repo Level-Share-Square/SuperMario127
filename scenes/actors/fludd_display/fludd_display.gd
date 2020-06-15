@@ -32,14 +32,15 @@ func _ready():
 
 func _process(delta):
 	if is_instance_valid(character):
-		stamina_display.value = character.stamina
-		label.text = str(int(character.fuel)) + "%"
-		label_shadow.text = label.text
-		
-		var water_height = water_texture.material.get_shader_param("water_height")
-		water_height = lerp(water_height, 1.0 - (character.fuel / 100), delta * interpolation_speed)
-		water_texture.material.set_shader_param("water_height", water_height)
-		shown = character.nozzle != null
+		if character.has_method("is_character"): # hackerman
+			stamina_display.value = character.stamina
+			label.text = str(int(character.fuel)) + "%"
+			label_shadow.text = label.text
+			
+			var water_height = water_texture.material.get_shader_param("water_height")
+			water_height = lerp(water_height, 1.0 - (character.fuel / 100), delta * interpolation_speed)
+			water_texture.material.set_shader_param("water_height", water_height)
+			shown = character.nozzle != null
 	else:
 		shown = false
 		

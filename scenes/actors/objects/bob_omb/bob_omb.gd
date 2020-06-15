@@ -33,6 +33,7 @@ var facing_direction := -1
 var time_alive = 0.0
 
 var hit = false
+var snap := Vector2(0, 12)
 
 func _set_properties():
 	savable_properties = []
@@ -46,29 +47,9 @@ func player_entered(body):
 		character = body
 		explode_timer = 4
 		fuse_sound.play()
-		
-func explosion_entered(body):
-	if enabled and body.name.begins_with("Character") and character_damage == null:
-		character_damage = body
-
-func explosion_exited(body):
-	if body == character_damage:
-		character_damage = null
-
-func attack_entered(body):
-	if enabled and !dead and body.name.begins_with("Character") and character_attack == null:
-		character_attack = body
-	
-func attack_exited(body):
-	if body == character_attack:
-		character_attack = null
 
 func _ready():
 	player_detector.connect("body_entered", self, "player_entered")
-	damage_area.connect("body_entered", self, "explosion_entered")
-	damage_area.connect("body_exited", self, "explosion_exited")
-	attack_area.connect("body_entered", self, "attack_entered")
-	attack_area.connect("body_exited", self, "attack_exited")
 	CurrentLevelData.enemies_instanced += 1
 	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
 	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
@@ -77,6 +58,23 @@ func _process(delta):
 	fuse.frame = sprite.frame
 	if mode == 1:
 		sprite.frame = wrapi(OS.get_ticks_msec() / 166, 0, 8)
+		
+func exploded(explosion_pos : Vector2):
+	hit = true
+	snap = Vector2(0, 0)
+	velocity.x = (body.global_position - explosion_pos).normalized().x * 275
+	velocity.y = -275
+	explode_timer = 4
+	character = 0 # hacks are fun
+	
+func shell_hit(shell_pos : Vector2):
+	hit = true
+	snap = Vector2(0, 0)
+	body.set_collision_mask_bit(2, false)
+	explode_timer = 4
+	velocity.x = (body.global_position - shell_pos).normalized().x * 275
+	velocity.y = -275
+	character = 0 # hacker chungus
 
 func _physics_process(delta):
 	time_alive += delta
@@ -87,49 +85,48 @@ func _physics_process(delta):
 			queue_free()
 			
 	var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
-	if body.position.y > (level_size.y * 32) + 128:
+	if body.global_position.y > (level_size.y * 32) + 128:
 		queue_free()
 			
 	if damage_timer > 0:
 		damage_timer -= delta
 		fuse_sound_2.playing = false
-		if is_instance_valid(character_damage):
-			if !character_damage.invulnerable:
-				character_damage.velocity.x = (character_damage.global_position - body.global_position).normalized().x * 205
-				character_damage.velocity.y = -175
-				character_damage.set_state_by_name("KnockbackState", 0)
-				character_damage.damage(2)
+		for hit_body in damage_area.get_overlapping_bodies():
+			if hit_body.has_method("exploded"):
+				hit_body.exploded(body.global_position)
+			elif hit_body.get_parent().has_method("exploded"):
+				hit_body.get_parent().exploded(body.global_position)
 		if damage_timer < 0:
 			damage_timer = 0
 	
 	if mode != 1 and enabled and !dead:
 		if hit:
 			sprite_container.rotation_degrees += -facing_direction * 5
-			if grounded_check.is_colliding() or body.test_move(body.transform, Vector2(1, 0)) or body.test_move(body.transform, Vector2(-1, 0)):
+			if grounded_check.is_colliding():
 				explode_timer = 0.001
 				hit = false
 				
-		if is_instance_valid(character_attack) and !hit:
-			if character_attack.attacking:
-				hit = true
-				velocity.x = (body.global_position - character_attack.global_position).normalized().x * 275
-				velocity.y = -225
-				position.y -= 12
-			else:
-				var distance_normal = (body.global_position - character_attack.global_position).normalized().x
-				if (
-					distance_normal > 0 or 
-					distance_normal <= 0
-				):
-					if character_attack.state != character_attack.get_state_node("KnockbackState"):
-						if distance_normal == 0:
-							distance_normal = -1
-						velocity.x = 50 * distance_normal
-						character_attack.velocity.x = -100 * distance_normal
+		if !hit:
+			for hit_body in attack_area.get_overlapping_bodies():
+				if hit_body.name.begins_with("Character"):
+					var character_attack = hit_body
+					if character_attack.attacking:
+						hit = true
+						snap = Vector2(0, 0)
+						velocity.x = (body.global_position - character_attack.global_position).normalized().x * 275
+						velocity.y = -275
+					else:
+						var distance_normal = (body.global_position - character_attack.global_position).normalized().x
+						if character_attack.state != character_attack.get_state_node("KnockbackState"):
+							if distance_normal == 0:
+								distance_normal = -1
+							
+							velocity.x = 50 * distance_normal
+							character_attack.velocity.x = 50 * -distance_normal
 				
 		sprite.flip_h = true if facing_direction == 1 else false
 		velocity.y += gravity
-		velocity = body.move_and_slide_with_snap(velocity, Vector2(0, 12), Vector2.UP.normalized(), true, 4, deg2rad(46))
+		velocity = body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
 		if character == null:
 			if walk_wait > 0:
 				sprite.animation = "default"
@@ -146,6 +143,11 @@ func _physics_process(delta):
 				if walk_timer <= 0:
 					walk_timer = 0
 					walk_wait = 3.0
+			if (
+				body.global_position.x < -64 or 
+				body.global_position.x > (level_size.x * 32) + 64
+			):
+				queue_free()
 		else:
 			if explode_timer > 0:
 				explode_timer -= delta

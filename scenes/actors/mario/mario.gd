@@ -149,6 +149,7 @@ onready var player_collision_shape = $PlayerCollision/CollisionShape2D
 onready var sprite = $Sprite
 onready var fludd_sprite = $Sprite/Fludd
 onready var water_sprite = $Sprite/Water
+onready var water_sprite_2 = $Sprite/Water2
 onready var fludd_sound = $FluddSound
 onready var nozzle_switch_sound = $NozzleSwitchSound
 onready var particles = $Particles2D
@@ -181,6 +182,19 @@ puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_a
 	heavy = is_heavy
 	dead = is_dead
 	controllable = is_controllable
+	
+func is_character():
+	return true
+	
+func exploded(explosion_pos : Vector2):
+	damage_with_knockback(explosion_pos, 2)
+		
+func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String = "hit", frames : int = 180):
+	if !invulnerable:
+		velocity.x = (global_position - hit_pos).normalized().x * 205
+		velocity.y = -175
+		set_state_by_name("KnockbackState", 0)
+		damage(amount, cause, frames)
 
 func load_in(level_data : LevelData, level_area : LevelArea):
 	level_size = level_area.settings.size
@@ -302,6 +316,7 @@ func player_hit(body):
 					velocity.y = -175
 					body.velocity.x = 250
 					set_state_by_name("KnockbackState", 0)
+					sound_player.play_hit_sound()
 				elif !attacking or (body.attacking and attacking):
 					velocity.x = -250
 					body.velocity.x = 250
@@ -311,6 +326,7 @@ func player_hit(body):
 					velocity.y = -175
 					body.velocity.x = -250
 					set_state_by_name("KnockbackState", 0)
+					sound_player.play_hit_sound()
 				elif !attacking or (body.attacking and attacking):
 					velocity.x = 250
 					body.velocity.x = -250
@@ -320,11 +336,13 @@ func player_hit(body):
 				velocity.y = -175
 				body.velocity.x = 250
 				set_state_by_name("KnockbackState", 0)
+				sound_player.play_hit_sound()
 			else:
 				velocity.x = 205
 				velocity.y = -175
 				body.velocity.x = -250
 				set_state_by_name("KnockbackState", 0)
+				sound_player.play_hit_sound()
 
 func _process(delta: float):
 	if invulnerable_frames > 0:
@@ -512,6 +530,10 @@ func _physics_process(delta: float):
 	if is_instance_valid(nozzle):
 		fludd_sprite.visible = true
 		water_sprite.visible = true
+		water_sprite_2.visible = true
+		water_sprite_2.flip_h = water_sprite.flip_h
+		water_sprite_2.animation = water_sprite.animation
+		water_sprite_2.frame = water_sprite_2.frame
 		if character == 0:
 			fludd_sprite.frames = nozzle.frames
 		else:
@@ -535,9 +557,12 @@ func _physics_process(delta: float):
 					water_sprite.position = nozzle.fallback_water_pos_right_luigi
 				else:
 					water_sprite.position = nozzle.fallback_water_pos_left_luigi
+					
+		water_sprite_2.position = water_sprite.position - Vector2(-5 * facing_direction, 2)
 	else:
 		fludd_sprite.visible = false
 		water_sprite.visible = false
+		water_sprite_2.visible = false
 
 	# Move by velocity
 	if movable:

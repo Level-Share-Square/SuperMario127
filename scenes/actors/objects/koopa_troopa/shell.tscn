@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/actors/objects/koopa_troopa/shell_frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=2]
+
+[sub_resource type="RayShape2D" id=1]
+length = 9.0
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 3 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 9.5, 5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 12, 2 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 13.5, 9 )
+
+[node name="Shell" type="KinematicBody2D"]
+position = Vector2( 0, -4 )
+collision_layer = 5
+collision_mask = 4
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "spinning"
+frame = 3
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -6.5, 3 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 6.5, 3 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 2 )
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2( 0.5, 7 )
+shape = SubResource( 3 )
+
+[node name="StompArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompArea"]
+position = Vector2( 0, -1 )
+shape = SubResource( 4 )
+
+[node name="DestroyArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea"]
+position = Vector2( 0, 3 )
+shape = SubResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -10.0

@@ -85,7 +85,7 @@ volume_db = -5.0
 [node name="PlayerDetector" type="Area2D" parent="KinematicBody2D"]
 visible = false
 collision_layer = 2
-collision_mask = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/PlayerDetector"]
 shape = SubResource( 3 )
@@ -100,14 +100,14 @@ texture = ExtResource( 6 )
 
 [node name="DamageArea" type="Area2D" parent="KinematicBody2D"]
 visible = false
-collision_layer = 2
-collision_mask = 4
+collision_layer = 6
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/DamageArea"]
 shape = SubResource( 6 )
 
 [node name="AttackArea" type="Area2D" parent="KinematicBody2D"]
-collision_layer = 2
+collision_layer = 6
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/AttackArea"]

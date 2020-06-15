@@ -1,4 +1,4 @@
-[gd_scene load_steps=170 format=2]
+[gd_scene load_steps=172 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -129,6 +129,8 @@
 [ext_resource path="res://scenes/actors/objects/bill_blaster/icon.png" type="Texture" id=127]
 [ext_resource path="res://scenes/actors/objects/bob_omb/preview.png" type="Texture" id=128]
 [ext_resource path="res://scenes/actors/objects/bob_omb/icon.png" type="Texture" id=129]
+[ext_resource path="res://scenes/actors/objects/koopa_troopa/preview.png" type="Texture" id=130]
+[ext_resource path="res://scenes/actors/objects/koopa_troopa/icon.png" type="Texture" id=131]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 0.501961 )
@@ -2012,6 +2014,17 @@ change_to = "BobOmb"
 icon = ExtResource( 129 )
 preview = ExtResource( 128 )
 
+[node name="KoopaTroopa" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 28
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+z_index = -1
+change_to = "KoopaTroopa"
+icon = ExtResource( 131 )
+preview = ExtResource( 130 )
+
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
 
@@ -3283,3 +3296,4 @@ z_index = -1
 script = ExtResource( 8 )
 
 [node name="Backgrounds" parent="." instance=ExtResource( 52 )]
+position = Vector2( 0.614685, 0.614746 )

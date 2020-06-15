@@ -180,18 +180,29 @@ disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "spinning"
-frame = 1
+animation = "jumpLeft"
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 frames = ExtResource( 23 )
-animation = "spinning"
-frame = 1
+animation = "jumpLeft"
 playing = true
 
+[node name="Water2" type="AnimatedSprite" parent="Sprite"]
+visible = false
+show_behind_parent = true
+position = Vector2( -7, -6 )
+rotation = -0.00178115
+scale = Vector2( 1, 1 )
+frames = ExtResource( 24 )
+animation = "in"
+frame = 6
+playing = true
+centered = false
+
 [node name="Water" type="AnimatedSprite" parent="Sprite"]
-position = Vector2( -7, -11 )
+visible = false
+position = Vector2( -2, -4 )
 rotation = -0.00178115
 frames = ExtResource( 24 )
 animation = "in"
@@ -218,8 +229,8 @@ script = ExtResource( 8 )
 
 [node name="DiveState" type="Node" parent="States"]
 script = ExtResource( 13 )
-dive_power = Vector2( 1350, 175 )
-dive_power_luigi = Vector2( 1350, 175 )
+dive_power = Vector2( 1350, 125 )
+dive_power_luigi = Vector2( 1350, 125 )
 
 [node name="SlideState" type="Node" parent="States"]
 script = ExtResource( 11 )

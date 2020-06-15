@@ -38,11 +38,8 @@ func _set_property_values():
 
 func kill(body):
 	if enabled and body.name.begins_with("Character") and !body.dead and !dead and body.controllable:
-		if !body.attacking and !body.invulnerable:
-			body.velocity.x = (body.global_position - global_position).normalized().x * 205
-			body.velocity.y = -175
-			body.set_state_by_name("KnockbackState", 0)
-			body.damage()
+		if !body.attacking:
+			body.damage_with_knockback(global_position)
 		elif body.attacking:
 			velocity = ((body.global_position - global_position).normalized() * -90)
 			dead = true
@@ -53,7 +50,8 @@ func detect_stomp(body):
 	if enabled and body.name.begins_with("Character") and !body.dead and !dead:
 		if body.velocity.y > 0:
 			if body.state != body.get_state_node("GroundPoundState"):
-				body.set_state_by_name("BounceState", 0)
+				if body.state != body.get_state_node("DiveState"):
+					body.set_state_by_name("BounceState", 0)
 				body.velocity.y = -330
 			velocity.y = 60
 			dead = true
