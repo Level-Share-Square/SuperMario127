@@ -47,6 +47,20 @@ func player_entered(body):
 		character = body
 		explode_timer = 4
 		fuse_sound.play()
+		
+func create_coin():
+	var object = LevelObject.new()
+	object.type_id = 1
+	object.properties = []
+	object.properties.append(body.global_position)
+	object.properties.append(Vector2(1, 1))
+	object.properties.append(0)
+	object.properties.append(true)
+	object.properties.append(true)
+	object.properties.append(true)
+	var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
+	object.properties.append(Vector2(velocity_x, -300))
+	get_parent().create_object(object, false)
 
 func _ready():
 	player_detector.connect("body_entered", self, "player_entered")
@@ -165,6 +179,7 @@ func _physics_process(delta):
 					dead = true
 					damage_timer = 0.35
 					delete_timer = 3.0
+					create_coin()
 			if !dead and !hit:
 				facing_direction = 1 if (character.global_position.x > body.global_position.x) else -1
 				velocity.x = lerp(velocity.x, facing_direction * run_speed, delta * accel)

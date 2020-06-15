@@ -11,7 +11,6 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
-frame = 2
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -28,3 +27,6 @@ volume_db = -9.0
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 process_parent = true
 physics_process_parent = true
+
+[node name="GroundDetector" type="RayCast2D" parent="."]
+cast_to = Vector2( 0, 10 )
