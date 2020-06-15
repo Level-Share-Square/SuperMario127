@@ -17,19 +17,20 @@ onready var shared_node = get_node(shared)
 func _ready():
 	var _connect = delete_button_node.connect("pressed", self, "delete_pressed")
 	
-func _process(_delta):
-	if object != null and object.get_ref() and preview_object:
-		var obj_node = object.get_ref()
-		preview_object.scale = Vector2(2.5, 2.5) * obj_node.scale
-		preview_object.rotation_degrees = obj_node.rotation_degrees
-		preview_object.visible = obj_node.visible
-	
 func delete_pressed():
 	close()
 	shared_node.destroy_object(object.get_ref(), true)
 	object = null
 	preview_object.queue_free()
 	preview_object = null
+	
+func edit_preview_object(key, value):
+	if object != null and object.get_ref() and is_instance_valid(preview_object):
+		if key != "position" and key != "enabled":
+			if key != "scale":
+				preview_object[key] = value
+			else:
+				preview_object[key] = Vector2(2.5, 2.5) * value
 
 func open_object(object_to_open: GameObject):
 	for property in grid_container_node.get_children():
@@ -37,6 +38,8 @@ func open_object(object_to_open: GameObject):
 
 	for child in preview_node.get_children():
 		child.queue_free()
+		
+	object_to_open.connect("property_changed", self, "edit_preview_object")
 		
 	preview_object = object_to_open.duplicate()
 	preview_object.mode = 1

@@ -1,6 +1,7 @@
 extends GameObject
 
 onready var sprite = $Koopa/Sprite
+onready var sprite_color = $Koopa/Sprite/Color
 onready var body = $Koopa
 onready var attack_area = $Koopa/AttackArea
 onready var stomp_area = $Koopa/StompArea
@@ -25,18 +26,23 @@ var snap := Vector2(0, 12)
 
 var shell
 var shell_sprite
+var shell_sprite_color
 var shell_attack_area
 var shell_stomp_area
 var shell_destroy_area
 var shell_sound
 onready var shell_scene = load("res://scenes/actors/objects/koopa_troopa/shell.tscn")
 
+var color := Color(0, 1, 0)
+var rainbow := false
+
 func _set_properties():
-	savable_properties = []
-	editable_properties = []
+	savable_properties = ["color", "rainbow"]
+	editable_properties = ["color", "rainbow"]
 	
 func _set_property_values():
-	pass
+	set_property("color", color, true)
+	set_property("rainbow", rainbow, true)
 
 func _ready():
 	CurrentLevelData.enemies_instanced += 1
@@ -46,6 +52,7 @@ func _ready():
 func retract_into_shell():
 	shell = shell_scene.instance()
 	shell_sprite = shell.get_node("Sprite")
+	shell_sprite_color = shell.get_node("Sprite/Color")
 	shell_stomp_area = shell.get_node("StompArea")
 	shell_destroy_area = shell.get_node("DestroyArea")
 	shell_attack_area = shell.get_node("AttackArea")
@@ -84,6 +91,17 @@ func kill(hit_pos : Vector2):
 			z_index = 10
 			koopa_sound.play()
 			delete_timer = 3.0
+			
+func _process(delta):
+	if rainbow:
+		color.h = float(wrapi(OS.get_ticks_msec(), 0, 500)) / 500
+	if is_instance_valid(body):
+		sprite_color.animation = sprite.animation
+		sprite_color.frame = sprite.frame
+		sprite_color.modulate = color
+	elif is_instance_valid(shell):
+		shell_sprite_color.frame = shell_sprite.frame
+		shell_sprite_color.modulate = color
 
 func _physics_process(delta):
 	time_alive += delta

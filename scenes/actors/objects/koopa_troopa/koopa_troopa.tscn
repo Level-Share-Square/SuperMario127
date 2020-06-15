@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/koopa_troopa.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/regular_frames.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/koopa_troopa/color_frames.tres" type="SpriteFrames" id=4]
 
 [sub_resource type="RayShape2D" id=1]
 length = 16.0
@@ -29,6 +30,11 @@ collision_mask = 4
 
 [node name="Sprite" type="AnimatedSprite" parent="Koopa"]
 frames = ExtResource( 2 )
+playing = true
+
+[node name="Color" type="AnimatedSprite" parent="Koopa/Sprite"]
+modulate = Color( 0, 1, 0, 1 )
+frames = ExtResource( 4 )
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Koopa"]
@@ -65,6 +71,7 @@ position = Vector2( 0, -4 )
 shape = SubResource( 4 )
 
 [node name="ShellDetector" type="Area2D" parent="Koopa"]
+visible = false
 collision_layer = 4
 collision_mask = 4
 

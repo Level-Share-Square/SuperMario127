@@ -24,6 +24,7 @@ var connectable_signals : PoolStringArray = []
 
 signal process
 signal physics_process
+signal property_changed(key, value)
 
 var process_frame_counter = 0
 var physics_frame_counter = 0
@@ -68,6 +69,8 @@ func set_property(key, value, change_level_object):
 				var color = modulate
 				color.a = 0.5 if value == false else 1
 				modulate = color
+	if mode == 1:
+		emit_signal("property_changed", key, value)
 				
 
 func set_property_by_index(index, value, change_level_object):
