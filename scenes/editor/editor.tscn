@@ -2025,6 +2025,17 @@ change_to = "KoopaTroopa"
 icon = ExtResource( 131 )
 preview = ExtResource( 130 )
 
+[node name="Goomba" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 29
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+z_index = -1
+change_to = "Goomba"
+icon = ExtResource( 131 )
+preview = ExtResource( 130 )
+
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
 
@@ -3218,7 +3229,6 @@ __meta__ = {
 [node name="GridContainer" type="GridContainer" parent="UI/ItemPicker/ScrollContainer"]
 custom_constants/vseparation = 12
 custom_constants/hseparation = 12
-columns = 500
 
 [node name="CloseButton" type="Button" parent="UI/ItemPicker"]
 show_behind_parent = true

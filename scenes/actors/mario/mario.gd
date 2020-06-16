@@ -65,6 +65,7 @@ export var invulnerable = false
 export var invulnerable_frames = 0
 export var movable = true
 export var dead = false
+export var stomping = false
 export var dive_cooldown = 0
 
 export var health := 8
@@ -246,7 +247,13 @@ func is_grounded():
 	if !dive_collision_shape.disabled:
 		raycast_node = ground_check_dive
 	raycast_node.force_raycast_update()
-	return raycast_node.is_colliding() and velocity.y >= 0
+	if is_instance_valid(raycast_node.get_collider()):
+		if raycast_node.get_collider().get_collision_mask_bit(0) == true:
+			return raycast_node.is_colliding() and velocity.y >= 0
+		else:
+			return false
+	else:
+		return false
 
 func is_ceiling():
 	return test_move(self.transform, Vector2(0, -0.1)) and collided_last_frame

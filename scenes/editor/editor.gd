@@ -176,23 +176,23 @@ func _process(delta):
 				if Input.is_action_pressed("8_pixel_lock"):
 					obj_position = Vector2(stepify(obj_position.x, 8), stepify(obj_position.y, 8))
 				hovered_object.set_property("position", obj_position, true)
-		
+
 		if hovered_object and rotating:
 			hovered_object.rotation = -90 + hovered_object.position.angle_to_point(mouse_pos)
 			if Input.is_action_pressed("8_pixel_lock"):
 				hovered_object.rotation_degrees = stepify(hovered_object.rotation_degrees, 15)
-				
+
 		if hovered_object and Input.is_action_just_released("place") and time_clicked > 0 and time_clicked < 0.2:
 			if !rotating:
 				object_settings_node.open_object(hovered_object)
-				
+
 		if hovered_object and Input.is_action_just_pressed("place") and rotating:
 			rotating = false
 			hovered_object.set_property("rotation_degrees", fmod(hovered_object.rotation_degrees, 360), true)
 
 		if !left_held:
 			time_clicked = 0
-			
+
 		if !left_held and last_left_held or !right_held and last_right_held:
 			var action = Action.new()
 			action.type = "place_tile"
@@ -200,7 +200,7 @@ func _process(delta):
 				action.data.append(element)
 			tiles_stack.clear()
 			ActionManager.add_action(action)
-		
+
 		if (left_held and selected_tool == 0) and selected_box and selected_box.item:
 			var item = selected_box.item
 			

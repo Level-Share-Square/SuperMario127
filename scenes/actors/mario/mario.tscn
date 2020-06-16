@@ -193,7 +193,6 @@ visible = false
 show_behind_parent = true
 position = Vector2( -7, -6 )
 rotation = -0.00178115
-scale = Vector2( 1, 1 )
 frames = ExtResource( 24 )
 animation = "in"
 frame = 6

@@ -22,6 +22,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 134.0
+margin_bottom = 142.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Icon" type="Sprite" parent="."]
 material = ExtResource( 3 )
 scale = Vector2( 3, 3 )
