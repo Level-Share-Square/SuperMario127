@@ -139,6 +139,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/GroundPound.gd"
 }, {
+"base": "Resource",
+"class": "Group",
+"language": "GDScript",
+"path": "res://scenes/editor/group.gd"
+}, {
 "base": "Nozzle",
 "class": "HoverNozzle",
 "language": "GDScript",
@@ -381,6 +386,7 @@ _global_script_class_icons={
 "GroundPoundEndState": "",
 "GroundPoundStartState": "",
 "GroundPoundState": "",
+"Group": "",
 "HoverNozzle": "",
 "IdMap": "",
 "IfStatementInstruction": "",

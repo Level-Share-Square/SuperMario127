@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://scenes/editor/group.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+ids = PoolStringArray( "Entrance", "EntranceLuigi", "Coin", "Shine", "Pipe", "HoverBox", "SmallBottle", "BigBottle", "BooBlock" )
+color = Color( 0.440288, 0.121569, 0.517647, 1 )
+name = "Special"
+id = "special"

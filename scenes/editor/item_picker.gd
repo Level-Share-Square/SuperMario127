@@ -1,8 +1,9 @@
 extends TextureRect
 
-export var group := "all"
+export var group := "special"
 export var item_dragger_path : String 
 export var placeable_items : NodePath
+onready var grid_container_groups = $Groups/GridContainer
 onready var scroll_container = $ScrollContainer
 onready var grid_container = $ScrollContainer/GridContainer
 onready var tween = $Tween
@@ -45,13 +46,25 @@ func _physics_process(_delta):
 		scroll_container.scroll_horizontal += 5
 	if Input.is_action_pressed("ui_left") and visible and hovered:
 		scroll_container.scroll_horizontal -= 5
-
+		
 func _ready():
 	var _connect = close_button.connect("pressed", self, "pressed")
 	var _connect2 = connect("mouse_entered", self, "mouse_entered")
 	var _connect3 = connect("mouse_exited", self, "mouse_exited")
 	
+	for group_id in load("res://scenes/editor/groups/list.tres").ids:
+		var group_resource = load("res://scenes/editor/groups/" + group_id + ".tres")
+		var group_button = load("res://scenes/editor/group_switcher.tscn").instance()
+		group_button.group_picker = self
+		group_button.switch_to_group = group_resource
+		grid_container_groups.add_child(group_button)
+	change_group()
+
+func change_group():
 	var group_resource = load("res://scenes/editor/groups/" + group + ".tres")
+	
+	for child in grid_container.get_children():
+		child.queue_free() # haha i'm destroying a child isnt that funny
 	
 	var columns_split = group_resource.ids.size()
 	if columns_split % 2 > 0:
