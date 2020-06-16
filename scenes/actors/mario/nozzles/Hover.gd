@@ -51,6 +51,12 @@ func _activated_update(delta):
 		character.fuel -= fuel_depletion
 		if character.fuel <= 0:
 			character.fuel = 0
+			
+	if character.move_direction == 0 and !character.is_grounded():
+		if (character.velocity.x > 0):
+			character.velocity.x -= 1
+		elif (character.velocity.x < 0):
+			character.velocity.x += 1
 	
 func _update(_delta):
 	if character.is_grounded():

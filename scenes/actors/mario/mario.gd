@@ -483,7 +483,10 @@ func _physics_process(delta: float):
 				if (is_grounded()):
 					velocity.x -= friction
 				else:
-					velocity.x -= aerial_friction
+					if abs(velocity.x) > move_speed:
+						velocity.x -= aerial_friction*2
+					else:
+						velocity.x -= aerial_friction
 			else:
 				velocity.x = 0
 		elif (velocity.x < 0):
@@ -491,7 +494,10 @@ func _physics_process(delta: float):
 				if (is_grounded()):
 					velocity.x += friction
 				else:
-					velocity.x += aerial_friction
+					if abs(velocity.x) > move_speed:
+						velocity.x += aerial_friction*2
+					else:
+						velocity.x += aerial_friction
 			else:
 				velocity.x = 0
 
