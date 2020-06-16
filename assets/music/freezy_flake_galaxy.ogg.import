@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/freezy_flake_galaxy.ogg-b5661aed80106f7f82da0d8e5318d377.oggstr"
+
+[deps]
+
+source_file="res://assets/music/freezy_flake_galaxy.ogg"
+dest_files=[ "res://.import/freezy_flake_galaxy.ogg-b5661aed80106f7f82da0d8e5318d377.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=28.224
