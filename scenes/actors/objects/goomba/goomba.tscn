@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/actors/objects/goomba/goomba.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/goomba/frames.tres" type="SpriteFrames" id=2]
@@ -19,35 +19,102 @@ extents = Vector2( 9, 8 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 14, 2 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 14, 7 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 208.896, 69.015 )
 
-[sub_resource type="CanvasItemMaterial" id=6]
+[sub_resource type="CanvasItemMaterial" id=7]
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=8]
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 anim_speed = 1.0
 
+[sub_resource type="Animation" id=9]
+resource_name = "Stomped"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 2.92817, 1 ),
+"update": 1,
+"values": [ "default", "stomped", "stomped", "default" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.11, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 8.95777e-12, 1, 2.82843, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 0.5 ), Vector2( 1, 1 ), Vector2( 1, 0.1 ), Vector2( 0, 1.5 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("..:top_point")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 2.92817, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ), Vector2( 0, 11 ), Vector2( 0, 14 ), Vector2( 0, -8 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.11, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 8.595e-07, 1, 2.92817, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 8 ), Vector2( 0, 0 ), Vector2( 0, 14 ), Vector2( 0, -8 ) ]
+}
+
 [node name="Goomba" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
+top_point = Vector2( 0, -2 )
 
 [node name="Goomba" type="KinematicBody2D" parent="."]
+position = Vector2( 0, -7 )
 collision_layer = 5
 collision_mask = 4
 
 [node name="Sprite" type="AnimatedSprite" parent="Goomba"]
 frames = ExtResource( 2 )
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba"]
@@ -84,12 +151,13 @@ position = Vector2( 0, -2 )
 shape = SubResource( 4 )
 
 [node name="BounceArea" type="Area2D" parent="Goomba"]
+visible = false
 collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba/BounceArea"]
 position = Vector2( 0, 9 )
-shape = SubResource( 8 )
+shape = SubResource( 5 )
 
 [node name="PlayerDetector" type="Area2D" parent="Goomba"]
 visible = false
@@ -97,7 +165,7 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba/PlayerDetector"]
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="Stomp" type="AudioStreamPlayer" parent="Goomba"]
 stream = ExtResource( 6 )
@@ -142,11 +210,14 @@ enabled = true
 cast_to = Vector2( 0, 40 )
 
 [node name="Poof" type="Particles2D" parent="Goomba"]
-material = SubResource( 6 )
+material = SubResource( 7 )
 position = Vector2( 0, 12 )
 emitting = false
 amount = 1
 lifetime = 0.35
 one_shot = true
-process_material = SubResource( 7 )
+process_material = SubResource( 8 )
 texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Goomba"]
+anims/Stomped = SubResource( 9 )

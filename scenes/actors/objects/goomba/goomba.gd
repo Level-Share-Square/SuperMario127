@@ -15,6 +15,7 @@ onready var player_detector = $Goomba/PlayerDetector
 onready var stomp_sound = $Goomba/Stomp
 onready var poof_sound = $Goomba/Disappear
 onready var hit_sound = $Goomba/Hit
+onready var anim_player = $Goomba/AnimationPlayer
 var dead = false
 
 var gravity : float
@@ -40,6 +41,8 @@ var squash_amount = 1
 var bounced = false
 
 var character
+
+export var top_point : Vector2
 
 func jump():
 	velocity.x = facing_direction * run_speed
@@ -78,6 +81,7 @@ func kill(hit_pos : Vector2):
 			if was_stomped:
 				stomp_sound.play()
 				velocity = Vector2()
+				anim_player.play("Stomped")
 			else:
 				var normal = (body.global_position - hit_pos).normalized().x
 				facing_direction = int(-normal)
@@ -181,19 +185,7 @@ func _physics_process(delta):
 					delete_timer = 0
 					queue_free()
 			if was_stomped:
-				var is_overlapping = false
-				for body in bounce_area.get_overlapping_bodies():
-					if body == character:
-						is_overlapping = true
-				
-				if !is_overlapping:
-					sprite.scale = sprite.scale.linear_interpolate(Vector2(0, 1.5), delta * 25)
-					sprite.offset = sprite.offset.linear_interpolate(Vector2(0, -8), delta * 25)
-				else:
-					if character.velocity.y >= 0:
-						character.velocity.y -= (character.velocity.y/5)
-						if character.velocity.y <= -15:
-							character.velocity.y = -275
+				print("stomp code goes here")
 					
 			elif sprite.visible:
 				sprite.rotation_degrees = lerp_angle(sprite.rotation_degrees, velocity.y / 15, delta * 200) * -facing_direction
