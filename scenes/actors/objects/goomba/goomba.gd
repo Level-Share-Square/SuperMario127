@@ -23,6 +23,7 @@ var velocity := Vector2()
 
 var walk_timer = 0.0
 var walk_wait = 3.0
+var boost_timer = 0.0
 var hide_timer = 0.0
 var delete_timer = 0.0
 var speed = 30
@@ -37,6 +38,7 @@ var hit = false
 var snap := Vector2(0, 12)
 
 var was_stomped = false
+var rolling = false
 var squash_amount = 1
 var bounced = false
 
@@ -64,16 +66,36 @@ func _ready():
 	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
 
 func shell_hit(shell_pos : Vector2):
-	if is_instance_valid(body):
+	if !hit:
+		rolling = true
 		kill(shell_pos)
 		
 func exploded(explosion_pos : Vector2):
-	kill(explosion_pos)
+	if !hit:
+		rolling = true # temp
+		kill(explosion_pos)
+	
+func create_coin():
+	var object = LevelObject.new()
+	object.type_id = 1
+	object.properties = []
+	object.properties.append(body.global_position)
+	object.properties.append(Vector2(1, 1))
+	object.properties.append(0)
+	object.properties.append(true)
+	object.properties.append(true)
+	object.properties.append(true)
+	var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
+	object.properties.append(Vector2(velocity_x, -300))
+	get_parent().create_object(object, false)
 		
 func kill(hit_pos : Vector2):
 	if !hit:
 		if is_instance_valid(body):
 			hit = true
+			body.set_collision_layer_bit(2, false)
+			attack_area.set_collision_layer_bit(2, false)
+			stomp_area.set_collision_layer_bit(2, false)
 			body.set_collision_mask_bit(2, false)
 			attack_area.set_collision_mask_bit(2, false)
 			stomp_area.set_collision_mask_bit(2, false)
@@ -81,16 +103,16 @@ func kill(hit_pos : Vector2):
 			if was_stomped:
 				stomp_sound.play()
 				velocity = Vector2()
-				anim_player.play("Stomped")
-			else:
-				var normal = (body.global_position - hit_pos).normalized().x
-				facing_direction = int(-normal)
+				anim_player.play("Stomped", -1, 2.0)
+				boost_timer = 0.175
+			elif rolling:
+				hit = true
 				hit_sound.play()
-				velocity = Vector2(normal * 225, -275)
-				position.y -= 2
-				particles.position = Vector2(0, 6)
 				sprite.playing = false
-				hide_timer = 0.5
+				var normal = (body.global_position - hit_pos).normalized().x
+				velocity = Vector2(normal * 225, -225)
+				position.y -= 2
+				snap = Vector2(0, 0)
 
 func _physics_process(delta):
 	time_alive += delta
@@ -153,17 +175,18 @@ func _physics_process(delta):
 						if !pit_check.is_colliding():
 							jump()
 							velocity.x *= 1.5
-				
+
 				velocity.y += gravity
 				velocity = body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
 
 				for hit_body in attack_area.get_overlapping_bodies():
 					if hit_body.name.begins_with("Character"):
 						if hit_body.attacking:
+							rolling = true
 							kill(hit_body.global_position)
 						else:
 							hit_body.damage_with_knockback(body.global_position)
-			
+
 				for hit_body in stomp_area.get_overlapping_bodies():
 					if hit_body.name.begins_with("Character"):
 						if hit_body.velocity.y > 0:
@@ -179,15 +202,59 @@ func _physics_process(delta):
 					delete_timer = 1.25
 					poof_sound.play()
 					velocity = Vector2()
+					create_coin()
 			if delete_timer > 0:
 				delete_timer -= delta
 				if delete_timer <= 0:
 					delete_timer = 0
 					queue_free()
 			if was_stomped:
-				print("stomp code goes here")
+				if boost_timer > 0:
+					character.velocity.y = 0
+					character.velocity.x = 0
+					if character.move_direction != 0:
+						character.global_position.x += character.move_direction * 2
+					character.global_position.y = lerp(character.global_position.y, (body.global_position.y + top_point.y) - 25, delta * 6)
 					
-			elif sprite.visible:
-				sprite.rotation_degrees = lerp_angle(sprite.rotation_degrees, velocity.y / 15, delta * 200) * -facing_direction
+					var lerp_strength = 15
+					lerp_strength = clamp(abs(character.global_position.x - body.global_position.x), 0, 15)
+					character.global_position.x = lerp(character.global_position.x, body.global_position.x, delta * lerp_strength)
+					boost_timer -= delta
+					if boost_timer <= 0:
+						boost_timer = 0
+						character.velocity.y = -325
+						hide_timer = 0.01
+						character.set_state_by_name("BounceState", delta)
+						
+			elif rolling:
+				sprite.rotation_degrees += (velocity.x / 15)
+				var check = grounded_check
+				if !grounded_check.is_colliding():
+					check = grounded_check_2
+				if abs(velocity.x) < 50 and check.get_collision_normal().y == -1:
+					rolling = false
+					hide_timer = 0.45
+					velocity.x = 0
+					sprite.rotation_degrees = 0
+					anim_player.play("Stomped")
+					
+			if sprite.visible:
 				velocity.y += gravity
-				position += velocity * delta
+				velocity = body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
+				if grounded_check.is_colliding() or grounded_check_2.is_colliding():
+					var check = grounded_check
+					if !grounded_check.is_colliding():
+						check = grounded_check_2
+					if check.get_collision_normal().y == -1:
+						velocity.x = lerp(velocity.x, 0, delta * 2.5)
+					else:
+						var normal = 0
+						if (check.get_collision_normal().x) < 0:
+							normal = -1
+						else:
+							normal = 1
+						velocity.x = lerp(velocity.x, 225 * normal, delta)
+					
+					snap = Vector2(0, 12)
+				else:
+					snap = Vector2(0, 0)

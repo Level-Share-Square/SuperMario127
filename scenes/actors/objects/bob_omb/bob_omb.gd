@@ -78,16 +78,18 @@ func exploded(explosion_pos : Vector2):
 	snap = Vector2(0, 0)
 	velocity.x = (body.global_position - explosion_pos).normalized().x * 275
 	velocity.y = -275
+	position.y -= 4
 	explode_timer = 4
 	character = 0 # hacks are fun
 	
 func shell_hit(shell_pos : Vector2):
 	hit = true
 	snap = Vector2(0, 0)
-	body.set_collision_mask_bit(2, false)
+	body.set_collision_layer_bit(2, false)
 	explode_timer = 4
 	velocity.x = (body.global_position - shell_pos).normalized().x * 275
 	velocity.y = -275
+	position.y -= 4
 	character = 0 # hacker chungus
 
 func _physics_process(delta):
@@ -126,9 +128,11 @@ func _physics_process(delta):
 					var character_attack = hit_body
 					if character_attack.attacking:
 						hit = true
+						body.set_collision_layer_bit(2, false)
 						snap = Vector2(0, 0)
 						velocity.x = (body.global_position - character_attack.global_position).normalized().x * 275
 						velocity.y = -275
+						position.y -= 4
 					else:
 						var distance_normal = (body.global_position - character_attack.global_position).normalized().x
 						if character_attack.state != character_attack.get_state_node("KnockbackState"):

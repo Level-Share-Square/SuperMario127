@@ -31,6 +31,7 @@ var shell_attack_area
 var shell_stomp_area
 var shell_destroy_area
 var shell_sound
+var shell_grounded_check
 onready var shell_scene = load("res://scenes/actors/objects/koopa_troopa/shell.tscn")
 
 var color := Color(0, 1, 0)
@@ -57,6 +58,7 @@ func retract_into_shell():
 	shell_destroy_area = shell.get_node("DestroyArea")
 	shell_attack_area = shell.get_node("AttackArea")
 	shell_sound = shell.get_node("AudioStreamPlayer")
+	shell_grounded_check = shell.get_node("GroundedCheck")
 	add_child(shell)
 	shell.global_position = body.global_position
 	velocity = Vector2()
@@ -96,10 +98,12 @@ func _process(delta):
 	if rainbow:
 		color.h = float(wrapi(OS.get_ticks_msec(), 0, 500)) / 500
 	if is_instance_valid(body):
+		sprite_color.flip_h = sprite.flip_h
 		sprite_color.animation = sprite.animation
 		sprite_color.frame = sprite.frame
 		sprite_color.modulate = color
 	elif is_instance_valid(shell):
+		shell_sprite_color.flip_h = shell_sprite.flip_h
 		shell_sprite_color.frame = shell_sprite.frame
 		shell_sprite_color.modulate = color
 
@@ -166,7 +170,7 @@ func _physics_process(delta):
 						shell_sound.play()
 					
 				for hit_area in shell_destroy_area.get_overlapping_areas():
-					if hit_area.get_parent().get_parent().has_method("shell_hit") and hit_area.get_parent().get_parent() != self:
+					if hit_area.get_collision_layer_bit(2) == true and hit_area.get_parent().get_parent().has_method("shell_hit") and hit_area.get_parent().get_parent() != self and abs(velocity.x) > 15:
 						hit_area.get_parent().get_parent().shell_hit(shell.global_position)
 			
 				for hit_body in shell_stomp_area.get_overlapping_bodies():
@@ -191,8 +195,23 @@ func _physics_process(delta):
 					shell.global_position.x > (level_size.x * 32) + 64
 				):
 					queue_free()
-	
-				velocity.x = lerp(velocity.x, 0, delta / 2.5)
+					
+				if abs(velocity.x) > 15:
+					shell.set_collision_layer_bit(2, false)
+				else:
+					shell.set_collision_layer_bit(2, true)
+				
+				if shell_grounded_check.is_colliding():
+					var check = shell_grounded_check
+					if check.get_collision_normal().y == -1:
+						velocity.x = lerp(velocity.x, 0, delta / 2.5)
+					else:
+						var normal = 0
+						if (check.get_collision_normal().x) < 0:
+							normal = -1
+						else:
+							normal = 1
+						velocity.x = lerp(velocity.x, 275 * normal, delta)
 				shell_sprite.speed_scale = abs(velocity.x) / shell_max_speed
 				shell_sprite.flip_h = true if velocity.x < 0 else false
 				velocity.y += gravity

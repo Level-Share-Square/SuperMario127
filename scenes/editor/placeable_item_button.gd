@@ -4,6 +4,8 @@ onready var icon = $Icon
 onready var tween = $Tween
 onready var sound = $Sound
 onready var click_sound = $ClickSound
+onready var grid = $Grid
+onready var h_box_container = $HBoxContainer
 var normal_texture : StreamTexture
 var margin := 0
 var base_margin := 0
@@ -13,6 +15,8 @@ var selected_color : Color
 var item : PlaceableItem
 var placeable_items_path : String = ""
 var box_index = 1
+
+var squares = []
 
 var last_hovered = false
 var last_clicking = false
@@ -36,6 +40,7 @@ func is_hovered():
 		return false
 	
 func _process(_delta):
+	grid.visible = true if !item.is_object else false
 	if is_hovered() and !last_hovered:
 		sound.play()
 		tween.interpolate_property(icon, "offset",
@@ -91,3 +96,13 @@ func update_selection():
 		self_modulate = selected_color
 	else:
 		self_modulate = normal_color
+		
+	for child in h_box_container.get_children():
+		child.queue_free() # releasing children from prison
+		
+	for index in range(item.items_in_sequence):
+		var box = ColorRect.new()
+		box.rect_min_size = Vector2(8, 8)
+		box.rect_size = Vector2(8, 8)
+		box.color = Color(0.75, 0.75, 0.75) if item.index_in_sequence != index else Color(0, 0.75, 0.75)
+		h_box_container.add_child(box)

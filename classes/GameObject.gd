@@ -107,7 +107,6 @@ func _init_signals():
 				if signal_name == "physics_process":
 					if level_object.player_signal_connections[index].size() > 0:
 						has_physics_connection = true
-						print("A")
 				elif signal_name == "process":
 					if level_object.player_signal_connections[index].size() > 0:
 						has_process_connection = true

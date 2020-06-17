@@ -57,8 +57,8 @@ flip_h = true
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( 0, 1 )
-collision_layer = 2
-collision_mask = 4
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -0.5, 0 )
@@ -66,8 +66,8 @@ shape = SubResource( 7 )
 
 [node name="StompDetector" type="Area2D" parent="."]
 position = Vector2( 0, -10 )
-collision_layer = 2
-collision_mask = 4
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector"]
 shape = SubResource( 8 )

@@ -247,13 +247,7 @@ func is_grounded():
 	if !dive_collision_shape.disabled:
 		raycast_node = ground_check_dive
 	raycast_node.force_raycast_update()
-	if is_instance_valid(raycast_node.get_collider()):
-		if raycast_node.get_collider().get_collision_mask_bit(0) == true:
-			return raycast_node.is_colliding() and velocity.y >= 0
-		else:
-			return false
-	else:
-		return false
+	return raycast_node.is_colliding() and velocity.y >= 0
 
 func is_ceiling():
 	return test_move(self.transform, Vector2(0, -0.1)) and collided_last_frame

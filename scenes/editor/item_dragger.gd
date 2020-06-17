@@ -4,6 +4,7 @@ onready var icon = $Icon
 onready var tween = $Tween
 onready var sound = $Sound
 onready var click_sound = $ClickSound
+onready var grid = $Grid
 var item : PlaceableItem
 var placeable_items_path : String = ""
 
@@ -14,6 +15,8 @@ func _ready():
 	icon.texture = item.icon
 	
 func _process(_delta):
+	var editor = get_tree().get_current_scene()
+	grid.visible = true if !item.is_object else false
 	if is_hovered() and !last_hovered:
 		sound.play()
 	last_hovered = is_hovered()

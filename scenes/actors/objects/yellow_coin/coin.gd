@@ -9,6 +9,7 @@ onready var ground_detector = $GroundDetector
 var collected = false
 var physics = false
 var destroy_timer = 0.0
+var despawn_timer = 0.0
 var gravity : float
 var velocity : Vector2
 
@@ -38,6 +39,7 @@ func collect(body):
 		
 func _ready():
 	if physics:
+		despawn_timer = 10.0
 		gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
 		ground_detector.enabled = true
 	var _connect = area.connect("body_entered", self, "collect")
@@ -47,6 +49,13 @@ func _process(delta):
 		destroy_timer -= delta
 		if destroy_timer <= 0:
 			destroy_timer = 0
+			queue_free()
+	if despawn_timer > 0:
+		despawn_timer -= delta
+		if despawn_timer <= 1:
+			visible = !visible
+		if despawn_timer <= 0:
+			despawn_timer = 0
 			queue_free()
 	if !collected:
 		animated_sprite.frame = (OS.get_ticks_msec() / anim_damp) % 4

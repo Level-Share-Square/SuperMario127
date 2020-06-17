@@ -14,7 +14,7 @@ length = 10.0
 extents = Vector2( 8, 4 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 9, 8 )
+extents = Vector2( 11, 8 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 14, 2 )
@@ -75,7 +75,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.11, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 8.95777e-12, 1, 2.82843, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1, 0.5 ), Vector2( 1, 1 ), Vector2( 1, 0.1 ), Vector2( 0, 1.5 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1, 0.5 ), Vector2( 1, 1 ), Vector2( 1, 0.1 ), Vector2( 0.1, 1.5 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("..:top_point")
@@ -87,7 +87,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 2.92817, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -2 ), Vector2( 0, 11 ), Vector2( 0, 14 ), Vector2( 0, -8 ) ]
+"values": [ Vector2( 0, -9 ), Vector2( 0, 4 ), Vector2( 0, 9 ), Vector2( 0, -15 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Sprite:position")
@@ -99,18 +99,17 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.1, 0.11, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 8.595e-07, 1, 2.92817, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 8 ), Vector2( 0, 0 ), Vector2( 0, 14 ), Vector2( 0, -8 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 5 ), Vector2( 0, 0 ), Vector2( 0, 7 ), Vector2( 0, -8 ) ]
 }
 
 [node name="Goomba" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
-top_point = Vector2( 0, -2 )
+top_point = Vector2( 0, -9 )
 
 [node name="Goomba" type="KinematicBody2D" parent="."]
-position = Vector2( 0, -7 )
-collision_layer = 5
-collision_mask = 4
+collision_layer = 4
+collision_mask = 5
 
 [node name="Sprite" type="AnimatedSprite" parent="Goomba"]
 frames = ExtResource( 2 )
@@ -118,24 +117,21 @@ frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba"]
-visible = false
-position = Vector2( -6.5, 6 )
+position = Vector2( -6.5, -1 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Goomba"]
-visible = false
-position = Vector2( 6.5, 6 )
+position = Vector2( 6.5, -1 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Goomba"]
-visible = false
-position = Vector2( 0, 2 )
+position = Vector2( 0, -5 )
 shape = SubResource( 2 )
 
 [node name="AttackArea" type="Area2D" parent="Goomba"]
-visible = false
-collision_layer = 2
-collision_mask = 4
+position = Vector2( 0, -7 )
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba/AttackArea"]
 position = Vector2( 0, 8 )
@@ -143,8 +139,9 @@ shape = SubResource( 3 )
 
 [node name="StompArea" type="Area2D" parent="Goomba"]
 visible = false
-collision_layer = 2
-collision_mask = 4
+position = Vector2( 0, -7 )
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba/StompArea"]
 position = Vector2( 0, -2 )
@@ -152,8 +149,9 @@ shape = SubResource( 4 )
 
 [node name="BounceArea" type="Area2D" parent="Goomba"]
 visible = false
-collision_layer = 2
-collision_mask = 4
+position = Vector2( 0, -7 )
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba/BounceArea"]
 position = Vector2( 0, 9 )
@@ -161,8 +159,9 @@ shape = SubResource( 5 )
 
 [node name="PlayerDetector" type="Area2D" parent="Goomba"]
 visible = false
-collision_layer = 2
-collision_mask = 0
+position = Vector2( 0, -7 )
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba/PlayerDetector"]
 shape = SubResource( 6 )
@@ -180,38 +179,32 @@ stream = ExtResource( 5 )
 volume_db = -3.0
 
 [node name="GroundedCheck" type="RayCast2D" parent="Goomba"]
-visible = false
-position = Vector2( -8, 10 )
+position = Vector2( -8, 3 )
 enabled = true
 cast_to = Vector2( 0, 6 )
 
 [node name="GroundedCheck2" type="RayCast2D" parent="Goomba"]
-visible = false
-position = Vector2( 8, 10 )
+position = Vector2( 8, 3 )
 enabled = true
 cast_to = Vector2( 0, 6 )
 
 [node name="WallCheck" type="RayCast2D" parent="Goomba"]
-visible = false
-position = Vector2( 0, 4 )
+position = Vector2( 0, -3 )
 enabled = true
 cast_to = Vector2( -32, 0 )
 
 [node name="WallVacantCheck" type="RayCast2D" parent="Goomba"]
-visible = false
-position = Vector2( 0, -32 )
+position = Vector2( 0, -39 )
 enabled = true
 cast_to = Vector2( -64, 0 )
 
 [node name="PitCheck" type="RayCast2D" parent="Goomba"]
-visible = false
-position = Vector2( -32, 10 )
+position = Vector2( -32, 3 )
 enabled = true
 cast_to = Vector2( 0, 40 )
 
 [node name="Poof" type="Particles2D" parent="Goomba"]
 material = SubResource( 7 )
-position = Vector2( 0, 12 )
 emitting = false
 amount = 1
 lifetime = 0.35

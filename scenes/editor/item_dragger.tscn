@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/editor/item_dragger.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/editor/assets/item_box.png" type="Texture" id=5]
 [ext_resource path="res://scenes/editor/sounds/click.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/editor/assets/item_box_press.png" type="Texture" id=7]
+[ext_resource path="res://scenes/editor/assets/grid.png" type="Texture" id=8]
 
 [node name="TextureButton" type="TextureButton"]
 margin_right = 40.0
@@ -48,3 +49,15 @@ volume_db = -10.0
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -10.0
+
+[node name="Grid" type="TextureRect" parent="."]
+margin_left = -72.0
+margin_top = -64.0
+margin_right = 24.0
+margin_bottom = 32.0
+rect_scale = Vector2( 3, 3 )
+texture = ExtResource( 8 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

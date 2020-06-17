@@ -1571,6 +1571,7 @@ position = Vector2( 0.198608, -0.468788 )
 script = ExtResource( 3 )
 tileset_id = 2
 change_to = "GrassSlab"
+items_in_sequence = 4
 icon = ExtResource( 10 )
 preview = ExtResource( 10 )
 
@@ -1579,6 +1580,8 @@ script = ExtResource( 3 )
 tileset_id = 2
 tile_id = 3
 change_to = "Grass"
+items_in_sequence = 4
+index_in_sequence = 3
 icon = ExtResource( 13 )
 preview = ExtResource( 13 )
 
@@ -1587,6 +1590,8 @@ script = ExtResource( 3 )
 tileset_id = 2
 tile_id = 2
 change_to = "GrassSlopeRight"
+items_in_sequence = 4
+index_in_sequence = 2
 icon = ExtResource( 14 )
 preview = ExtResource( 14 )
 
@@ -1595,6 +1600,8 @@ script = ExtResource( 3 )
 tileset_id = 2
 tile_id = 1
 change_to = "GrassSlopeLeft"
+items_in_sequence = 4
+index_in_sequence = 1
 icon = ExtResource( 63 )
 preview = ExtResource( 63 )
 
@@ -1602,6 +1609,7 @@ preview = ExtResource( 63 )
 script = ExtResource( 3 )
 tileset_id = 1
 change_to = "BrickSlopeLeft"
+items_in_sequence = 3
 icon = ExtResource( 5 )
 preview = ExtResource( 5 )
 
@@ -1610,6 +1618,8 @@ script = ExtResource( 3 )
 tileset_id = 1
 tile_id = 3
 change_to = "Brick"
+items_in_sequence = 3
+index_in_sequence = 2
 icon = ExtResource( 62 )
 preview = ExtResource( 62 )
 
@@ -1618,6 +1628,8 @@ script = ExtResource( 3 )
 tileset_id = 1
 tile_id = 2
 change_to = "BrickSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
 icon = ExtResource( 61 )
 preview = ExtResource( 61 )
 
@@ -1625,6 +1637,7 @@ preview = ExtResource( 61 )
 script = ExtResource( 3 )
 tileset_id = 3
 change_to = "GreenBrickSlopeLeft"
+items_in_sequence = 3
 icon = ExtResource( 86 )
 preview = ExtResource( 86 )
 
@@ -1633,6 +1646,8 @@ script = ExtResource( 3 )
 tileset_id = 3
 tile_id = 3
 change_to = "GreenBrick"
+items_in_sequence = 3
+index_in_sequence = 2
 icon = ExtResource( 93 )
 preview = ExtResource( 93 )
 
@@ -1641,6 +1656,8 @@ script = ExtResource( 3 )
 tileset_id = 3
 tile_id = 2
 change_to = "GreenBrickSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
 icon = ExtResource( 88 )
 preview = ExtResource( 88 )
 
@@ -1648,6 +1665,7 @@ preview = ExtResource( 88 )
 script = ExtResource( 3 )
 tileset_id = 4
 change_to = "RedBrickSlopeLeft"
+items_in_sequence = 3
 icon = ExtResource( 89 )
 preview = ExtResource( 89 )
 
@@ -1656,6 +1674,8 @@ script = ExtResource( 3 )
 tileset_id = 4
 tile_id = 3
 change_to = "RedBrick"
+items_in_sequence = 3
+index_in_sequence = 2
 icon = ExtResource( 85 )
 preview = ExtResource( 85 )
 
@@ -1664,6 +1684,8 @@ script = ExtResource( 3 )
 tileset_id = 4
 tile_id = 2
 change_to = "RedBrickSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
 icon = ExtResource( 92 )
 preview = ExtResource( 92 )
 
@@ -1671,6 +1693,7 @@ preview = ExtResource( 92 )
 script = ExtResource( 3 )
 tileset_id = 5
 change_to = "YellowBrickSlopeLeft"
+items_in_sequence = 3
 icon = ExtResource( 90 )
 preview = ExtResource( 90 )
 
@@ -1679,6 +1702,8 @@ script = ExtResource( 3 )
 tileset_id = 5
 tile_id = 3
 change_to = "YellowBrick"
+items_in_sequence = 3
+index_in_sequence = 2
 icon = ExtResource( 91 )
 preview = ExtResource( 91 )
 
@@ -1687,6 +1712,8 @@ script = ExtResource( 3 )
 tileset_id = 5
 tile_id = 2
 change_to = "YellowBrickSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
 icon = ExtResource( 87 )
 preview = ExtResource( 87 )
 
@@ -1696,6 +1723,7 @@ is_object = true
 object_center = Vector2( 15, 16 )
 z_index = -1
 change_to = "EntranceLuigi"
+items_in_sequence = 2
 icon = ExtResource( 12 )
 preview = ExtResource( 12 )
 has_placement_action = true
@@ -1710,6 +1738,8 @@ is_object = true
 object_center = Vector2( 15, 16 )
 z_index = -1
 change_to = "Entrance"
+items_in_sequence = 2
+index_in_sequence = 1
 icon = ExtResource( 55 )
 preview = ExtResource( 55 )
 has_placement_action = true
@@ -1765,6 +1795,7 @@ object_center = Vector2( 16, 17 )
 tile_mode_offset = Vector2( 0, 1 )
 z_index = -1
 change_to = "MushroomBody"
+items_in_sequence = 3
 icon = ExtResource( 72 )
 preview = ExtResource( 71 )
 
@@ -1776,6 +1807,8 @@ object_center = Vector2( 16, 0 )
 tile_mode_offset = Vector2( 0, -16 )
 z_index = -1
 change_to = "MushroomCurve"
+items_in_sequence = 3
+index_in_sequence = 1
 icon = ExtResource( 73 )
 preview = ExtResource( 69 )
 
@@ -1787,6 +1820,8 @@ object_center = Vector2( 30, 18 )
 tile_mode_offset = Vector2( 14, 2 )
 z_index = -1
 change_to = "MushroomTop"
+items_in_sequence = 3
+index_in_sequence = 2
 icon = ExtResource( 74 )
 preview = ExtResource( 70 )
 
@@ -1820,6 +1855,8 @@ object_center = Vector2( 32, 20 )
 tile_mode_offset = Vector2( 16, 4 )
 z_index = -9
 change_to = "SmallBush"
+items_in_sequence = 2
+index_in_sequence = 1
 icon = ExtResource( 82 )
 preview = ExtResource( 79 )
 
@@ -1831,6 +1868,7 @@ object_center = Vector2( 32, 12 )
 tile_mode_offset = Vector2( 16, -4 )
 z_index = -9
 change_to = "BigBush"
+items_in_sequence = 2
 icon = ExtResource( 81 )
 preview = ExtResource( 80 )
 
@@ -1875,6 +1913,7 @@ object_center = Vector2( 32, 32 )
 tile_mode_step = 64
 z_index = -7
 change_to = "TwistedTreeBody"
+items_in_sequence = 3
 icon = ExtResource( 97 )
 preview = ExtResource( 97 )
 
@@ -1886,6 +1925,8 @@ object_center = Vector2( 32, 32 )
 tile_mode_step = 64
 z_index = -7
 change_to = "TwistedTreeAngle"
+items_in_sequence = 3
+index_in_sequence = 1
 icon = ExtResource( 98 )
 preview = ExtResource( 98 )
 
@@ -1898,6 +1939,8 @@ tile_mode_offset = Vector2( 36, 10 )
 tile_mode_step = 64
 z_index = -7
 change_to = "TwistedTreeTop"
+items_in_sequence = 3
+index_in_sequence = 2
 icon = ExtResource( 99 )
 preview = ExtResource( 99 )
 
@@ -1920,6 +1963,7 @@ tile_mode_offset = Vector2( 0, -8 )
 tile_mode_step = 16
 z_index = -1
 change_to = "BigBottle"
+items_in_sequence = 2
 icon = ExtResource( 103 )
 preview = ExtResource( 102 )
 
@@ -1932,6 +1976,8 @@ tile_mode_offset = Vector2( 0, -8 )
 tile_mode_step = 16
 z_index = -1
 change_to = "SmallBottle"
+items_in_sequence = 2
+index_in_sequence = 1
 icon = ExtResource( 104 )
 preview = ExtResource( 105 )
 
@@ -1956,6 +2002,7 @@ preview = ExtResource( 108 )
 script = ExtResource( 3 )
 tileset_id = 7
 change_to = "SnowSlab"
+items_in_sequence = 4
 icon = ExtResource( 113 )
 preview = ExtResource( 113 )
 
@@ -1964,6 +2011,8 @@ script = ExtResource( 3 )
 tileset_id = 7
 tile_id = 3
 change_to = "Snow"
+items_in_sequence = 4
+index_in_sequence = 3
 icon = ExtResource( 114 )
 preview = ExtResource( 114 )
 
@@ -1972,6 +2021,8 @@ script = ExtResource( 3 )
 tileset_id = 7
 tile_id = 2
 change_to = "SnowSlopeRight"
+items_in_sequence = 4
+index_in_sequence = 2
 icon = ExtResource( 112 )
 preview = ExtResource( 112 )
 
@@ -1980,6 +2031,8 @@ script = ExtResource( 3 )
 tileset_id = 7
 tile_id = 1
 change_to = "SnowSlopeLeft"
+items_in_sequence = 4
+index_in_sequence = 1
 icon = ExtResource( 111 )
 preview = ExtResource( 111 )
 

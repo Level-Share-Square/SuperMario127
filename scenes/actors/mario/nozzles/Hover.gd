@@ -61,10 +61,10 @@ func _activated_update(delta):
 func _update(_delta):
 	if character.is_grounded():
 		character.stamina = 100
-		
+
 	if !activated:
 		override_rotation = false
-		
+
 	if character.state != last_state:
 		if character.state == character.get_state_node("SpinningState"):
 			character.stamina -= 15

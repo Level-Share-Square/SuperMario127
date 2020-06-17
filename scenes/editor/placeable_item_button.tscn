@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/editor/placeable_item_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/assets/shadow_shader.material" type="Material" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://scenes/editor/assets/item_box_press.png" type="Texture" id=5]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/editor/sounds/click.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/editor/assets/grid.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/grass/icon.png" type="Texture" id=9]
 
 [node name="PlaceableItemButton" type="TextureButton"]
 margin_left = 12.0
@@ -26,6 +28,7 @@ __meta__ = {
 [node name="Icon" type="Sprite" parent="."]
 material = ExtResource( 2 )
 scale = Vector2( 3, 3 )
+texture = ExtResource( 9 )
 centered = false
 offset = Vector2( 0, 3 )
 
@@ -38,3 +41,25 @@ volume_db = -10.0
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = -10.0
+
+[node name="Grid" type="TextureRect" parent="."]
+margin_left = -72.0
+margin_top = -64.0
+margin_right = 24.0
+margin_bottom = 32.0
+rect_scale = Vector2( 3, 3 )
+texture = ExtResource( 8 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 15.0
+margin_top = 12.0
+margin_right = 129.0
+margin_bottom = 20.0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

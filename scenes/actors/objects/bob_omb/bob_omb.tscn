@@ -34,40 +34,43 @@ anim_speed = 2.0
 extents = Vector2( 24, 24 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 10, 12 )
+extents = Vector2( 9, 12 )
 
 [node name="BobOmb" type="Node2D"]
 z_index = -2
 script = ExtResource( 2 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( 0, -4 )
-collision_layer = 5
-collision_mask = 4
+collision_layer = 4
+collision_mask = 5
 
 [node name="Sprites" type="Node2D" parent="KinematicBody2D"]
 
 [node name="Sprite" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
 frames = ExtResource( 1 )
-frame = 7
+frame = 1
 playing = true
 
 [node name="Fuse" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
 visible = false
+position = Vector2( 0, -4 )
 frames = ExtResource( 4 )
-frame = 7
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-position = Vector2( -4.5, 2 )
+visible = false
+position = Vector2( -4.5, -1 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="KinematicBody2D"]
-position = Vector2( 4.5, 2 )
+visible = false
+position = Vector2( 4.5, -1 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="KinematicBody2D"]
-position = Vector2( 0, -1 )
+visible = false
+position = Vector2( 0, -4 )
 shape = SubResource( 2 )
 
 [node name="FuseSound" type="AudioStreamPlayer" parent="KinematicBody2D"]
@@ -84,8 +87,9 @@ volume_db = -5.0
 
 [node name="PlayerDetector" type="Area2D" parent="KinematicBody2D"]
 visible = false
-collision_layer = 2
-collision_mask = 0
+position = Vector2( 0, -3 )
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/PlayerDetector"]
 shape = SubResource( 3 )
@@ -100,20 +104,24 @@ texture = ExtResource( 6 )
 
 [node name="DamageArea" type="Area2D" parent="KinematicBody2D"]
 visible = false
-collision_layer = 6
-collision_mask = 0
+position = Vector2( 0, -3 )
+collision_layer = 0
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/DamageArea"]
 shape = SubResource( 6 )
 
 [node name="AttackArea" type="Area2D" parent="KinematicBody2D"]
-collision_layer = 6
-collision_mask = 4
+visible = false
+position = Vector2( 0, -3 )
+collision_layer = 4
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/AttackArea"]
 position = Vector2( 0, 4 )
 shape = SubResource( 7 )
 
 [node name="RayCast2D" type="RayCast2D" parent="KinematicBody2D"]
+position = Vector2( 0, -3 )
 enabled = true
-cast_to = Vector2( 0, 12 )
+cast_to = Vector2( 0, 16 )

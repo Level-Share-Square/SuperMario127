@@ -18,16 +18,16 @@ z_index = -1
 texture = ExtResource( 2 )
 
 [node name="StompDetector" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 8
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector"]
 position = Vector2( 0, -13 )
 shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 8
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, -13 )

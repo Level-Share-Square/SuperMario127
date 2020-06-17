@@ -13,6 +13,9 @@ export var object_size := Vector2(0, 0)
 export var z_index := 0
 export var change_to : String = self.name
 
+export var items_in_sequence := 0
+export var index_in_sequence := 0
+
 export var icon : Texture = null
 export var preview : Texture = null
 
