@@ -31,3 +31,9 @@ physics_process_parent = true
 
 [node name="GroundDetector" type="RayCast2D" parent="."]
 cast_to = Vector2( 0, 10 )
+
+[node name="CeilingDetector" type="RayCast2D" parent="."]
+cast_to = Vector2( 0, -10 )
+
+[node name="WallDetector" type="RayCast2D" parent="."]
+cast_to = Vector2( 10, 0 )

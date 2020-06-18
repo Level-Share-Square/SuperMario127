@@ -214,3 +214,6 @@ texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Goomba"]
 anims/Stomped = SubResource( 9 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Goomba"]
+rect = Rect2( -300, -300, 600, 600 )

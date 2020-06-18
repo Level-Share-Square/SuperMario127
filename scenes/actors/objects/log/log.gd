@@ -47,18 +47,9 @@ func fall_detector(body):
 			can_fall = true
 			
 		if body.name.begins_with("Character") and fall_on_touch and !falling and can_fall and !shaking:
-			if !character.heavy:
-				shaking = true
-				time_shaking = 0.0
-				fall_speed = 1.0
-			else:
-				fall_speed = 7.5
-				falling = true
-				time_falling = 0.0
-				tween.interpolate_property(sprite, "modulate",
-				Color(1, 1, 1, 1), Color(1, 1, 1, 0), 2.5,
-				Tween.TRANS_QUART, Tween.EASE_IN)
-				tween.start()
+			shaking = true
+			time_shaking = 0.0
+			fall_speed = 1.0
 
 func enter_area(body):
 	if body.name.begins_with("Character"):

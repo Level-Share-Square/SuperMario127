@@ -7,11 +7,12 @@ var stop = false
 var getup_buffer = 0
 var ledge_buffer = 0
 var direction_on_start = 1
+var spins = 0
 
-export var backflip_power := Vector2(180, 420) #nice
+export var backflip_power := Vector2(280, 360) # no longer nice
 
 func _ready():
-	priority = 4
+	priority = 2
 	disable_animation = true
 	override_rotation = true
 	disable_turning = true
@@ -31,34 +32,28 @@ func _start(delta):
 	right_collision.disabled = false
 	dive_collision.disabled = true
 	dive_ground_collision.disabled = true
-	character.velocity.x = backflip_power.x * -character.facing_direction
+	character.velocity.x /= 2
+	character.velocity.x += backflip_power.x * -character.facing_direction
 	character.velocity.y = -backflip_power.y
 	character.position.x -= 2 * character.facing_direction
 	character.position.y -= 3
 	disable_turning = true
 	sound_player.play_double_jump_sound()
+	if character.facing_direction == -1:
+		character.anim_player.play("backflip")
+	else:
+		character.anim_player.play("backflip_right")
+	spins = 0
 
 func _update(delta):
 	var sprite = character.animated_sprite
-	if character.velocity.y <= 0 and disable_turning:
-		priority = 4
-		if (character.facing_direction == 1):
-			sprite.animation = "tripleJumpRight"
-		else:
-			sprite.animation = "tripleJumpLeft"
+	if (character.facing_direction == 1):
+		sprite.animation = "jumpRight"
 	else:
-		disable_turning = false
-		priority = 0
-		if (character.facing_direction == 1):
-			sprite.animation = "fallRight"
-		else:
-			sprite.animation = "fallLeft"
-	
-	sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 370, 4 * delta) * direction_on_start
+		sprite.animation = "jumpLeft"
 		
 func _stop(_delta):
-	var sprite = character.animated_sprite
-	sprite.rotation_degrees = 0
+	character.anim_player.stop()
 	
 func _stop_check(_delta):
 	var sprite = character.animated_sprite

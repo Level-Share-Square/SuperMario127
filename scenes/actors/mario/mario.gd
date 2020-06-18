@@ -7,6 +7,7 @@ signal state_changed
 onready var states_node = $States
 onready var nozzles_node = $Nozzles
 onready var animated_sprite = $Sprite
+onready var anim_player = $AnimationPlayer
 
 onready var spotlight = $Spotlight
 
@@ -389,7 +390,8 @@ func _physics_process(delta: float):
 			
 		if is_grounded():
 			velocity.y += abs(sprite_rotation) * 100 # this is required to keep mario from falling off slopes
-		sprite.rotation = lerp(sprite.rotation, sprite_rotation, delta * rotation_interpolation_speed)
+		sprite.rotation = lerp_angle(sprite.rotation, sprite_rotation, delta * rotation_interpolation_speed)
+		sprite.rotation_degrees = wrapf(sprite.rotation_degrees, -180, 180)
 			
 	# Inputs
 	if controlled_locally:
@@ -513,12 +515,12 @@ func _physics_process(delta: float):
 	if state != null:
 		if state.disable_snap:
 			snap = Vector2()
-		elif !left_check.is_colliding() and !right_check.is_colliding() and velocity.y > 0:
+		elif (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
 			snap = Vector2(0, 32)
 		else:
 			snap = Vector2()
 	else:
-		if !left_check.is_colliding() and !right_check.is_colliding() and velocity.y > 0:
+		if (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
 			snap = Vector2(0, 32)
 		else:
 			snap = Vector2()

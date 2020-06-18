@@ -8,7 +8,9 @@ onready var stomp_area = $Koopa/StompArea
 onready var left_check = $Koopa/Left
 onready var right_check = $Koopa/Right
 onready var koopa_sound = $Koopa/AudioStreamPlayer
+onready var visibility_notifier = $Koopa/VisibilityNotifier2D
 var dead = false
+var loaded = false
 
 var gravity : float
 var velocity := Vector2()
@@ -114,8 +116,11 @@ func _physics_process(delta):
 		if delete_timer <= 0:
 			delete_timer = 0
 			queue_free()
+
+	if !loaded and visibility_notifier.is_on_screen():
+		loaded = true
 	
-	if mode != 1 and enabled and !dead:
+	if mode != 1 and enabled and !dead and loaded:
 		if !hit:
 			if is_instance_valid(body):
 				var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size

@@ -2,7 +2,7 @@ extends State
 
 class_name SpinningState
 
-export var boost_power: float = 150
+export var boost_power: float = 175
 export var gravity_scale: float = 0.5
 var old_gravity_scale = 1
 var can_boost = true

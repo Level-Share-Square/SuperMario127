@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource( 1 )
 ids = PoolStringArray( "Grass", "GrassSlab", "GrassSlopeLeft", "GrassSlopeRight", "BigTree", "BigBush", "SmallBush", "Log", "MetalPlatform", "BonePlatform", "CloudPlatform", "MushroomTop", "MushroomBody", "MushroomCurve", "TwistedTreeTop", "TwistedTreeBody", "TwistedTreeAngle" )
-color = Color( 0.121569, 0.517647, 0.183456, 1 )
+color = Color( 0.121569, 0.517647, 0.184314, 1 )
 name = "Grass"
 id = "grass"

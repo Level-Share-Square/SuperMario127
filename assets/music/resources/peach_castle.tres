@@ -3,8 +3,6 @@
 [ext_resource path="res://level/Song.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/peach_castle.ogg" type="AudioStream" id=2]
 
-
-
 [resource]
 script = ExtResource( 1 )
 stream = ExtResource( 2 )

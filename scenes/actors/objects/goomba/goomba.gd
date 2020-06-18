@@ -16,6 +16,7 @@ onready var stomp_sound = $Goomba/Stomp
 onready var poof_sound = $Goomba/Disappear
 onready var hit_sound = $Goomba/Hit
 onready var anim_player = $Goomba/AnimationPlayer
+onready var visibility_notifier = $Goomba/VisibilityNotifier2D
 var dead = false
 
 var gravity : float
@@ -38,9 +39,10 @@ var hit = false
 var snap := Vector2(0, 12)
 
 var was_stomped = false
-var rolling = false
-var squash_amount = 1
+var was_ground_pound = false
 var bounced = false
+
+var loaded = false
 
 var character
 
@@ -67,12 +69,10 @@ func _ready():
 
 func shell_hit(shell_pos : Vector2):
 	if !hit:
-		rolling = true
 		kill(shell_pos)
 		
 func exploded(explosion_pos : Vector2):
 	if !hit:
-		rolling = true # temp
 		kill(explosion_pos)
 	
 func create_coin():
@@ -90,7 +90,7 @@ func create_coin():
 	get_parent().create_object(object, false)
 		
 func kill(hit_pos : Vector2):
-	if !hit:
+	if !hit and !dead:
 		if is_instance_valid(body):
 			hit = true
 			body.set_collision_layer_bit(2, false)
@@ -105,24 +105,26 @@ func kill(hit_pos : Vector2):
 				velocity = Vector2()
 				anim_player.play("Stomped", -1, 2.0)
 				boost_timer = 0.175
-			elif rolling:
+			else:
 				hit = true
 				hit_sound.play()
 				sprite.playing = false
 				var normal = (body.global_position - hit_pos).normalized().x
+				if normal > 0 and normal < 1:
+					normal = 1
+				if normal <= 0 and normal > -1:
+					normal = -1
 				velocity = Vector2(normal * 225, -225)
 				position.y -= 2
 				snap = Vector2(0, 0)
 
 func _physics_process(delta):
 	time_alive += delta
-	if delete_timer > 0 and dead:
-		delete_timer -= delta
-		if delete_timer <= 0:
-			delete_timer = 0
-			queue_free()
 	
-	if mode != 1 and enabled and !dead:
+	if !loaded and visibility_notifier.is_on_screen():
+		loaded = true
+	
+	if mode != 1 and enabled and loaded:
 		if !hit:
 			if is_instance_valid(body):
 				var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
@@ -162,8 +164,11 @@ func _physics_process(delta):
 						sprite.animation = "fall"
 					else:
 						sprite.animation = "jump"
+					snap = Vector2(0, 0)
 				else:
-					snap = Vector2(0, 20)
+					snap = Vector2(0, 12)
+
+					velocity.y = 0
 					if is_instance_valid(character):
 						grounded_check.position.x = 8 * facing_direction
 						grounded_check_2.position.x = -8 * facing_direction
@@ -182,7 +187,6 @@ func _physics_process(delta):
 				for hit_body in attack_area.get_overlapping_bodies():
 					if hit_body.name.begins_with("Character"):
 						if hit_body.attacking:
-							rolling = true
 							kill(hit_body.global_position)
 						else:
 							hit_body.damage_with_knockback(body.global_position)
@@ -191,8 +195,14 @@ func _physics_process(delta):
 					if hit_body.name.begins_with("Character"):
 						if hit_body.velocity.y > 0:
 							was_stomped = true
+							if character.big_attack:
+								was_ground_pound = true
 							kill(hit_body.global_position)
 		else:
+			var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
+			if body.global_position.y > (level_size.y * 32) + 128:
+				queue_free()
+					
 			if hide_timer > 0:
 				hide_timer -= delta
 				if hide_timer <= 0:
@@ -210,29 +220,32 @@ func _physics_process(delta):
 					queue_free()
 			if was_stomped:
 				if boost_timer > 0:
-					character.velocity.y = 0
-					character.velocity.x = 0
-					if character.move_direction != 0:
-						character.global_position.x += character.move_direction * 2
-					character.global_position.y = lerp(character.global_position.y, (body.global_position.y + top_point.y) - 25, delta * 6)
-					
-					var lerp_strength = 15
-					lerp_strength = clamp(abs(character.global_position.x - body.global_position.x), 0, 15)
-					character.global_position.x = lerp(character.global_position.x, body.global_position.x, delta * lerp_strength)
+					if !was_ground_pound:
+						character.velocity.y = 0
+						character.velocity.x = 0
+						if character.move_direction != 0:
+							character.global_position.x += character.move_direction * 2
+						character.global_position.y = lerp(character.global_position.y, (body.global_position.y + top_point.y) - 25, delta * 6)
+						
+						var lerp_strength = 15
+						lerp_strength = clamp(abs(character.global_position.x - body.global_position.x), 0, 15)
+						character.global_position.x = lerp(character.global_position.x, body.global_position.x, delta * lerp_strength)
 					boost_timer -= delta
+					
 					if boost_timer <= 0:
 						boost_timer = 0
-						character.velocity.y = -325
 						hide_timer = 0.01
-						character.set_state_by_name("BounceState", delta)
+						if !was_ground_pound:
+							character.velocity.y = -325
+							character.set_state_by_name("BounceState", delta)
 						
-			elif rolling:
+			elif !dead:
 				sprite.rotation_degrees += (velocity.x / 15)
 				var check = grounded_check
 				if !grounded_check.is_colliding():
 					check = grounded_check_2
 				if abs(velocity.x) < 50 and check.get_collision_normal().y == -1:
-					rolling = false
+					dead = true
 					hide_timer = 0.45
 					velocity.x = 0
 					sprite.rotation_degrees = 0

@@ -91,3 +91,6 @@ cast_to = Vector2( 0, 32 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Koopa"]
 stream = ExtResource( 3 )
 volume_db = -10.0
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Koopa"]
+rect = Rect2( -300, -300, 600, 600 )

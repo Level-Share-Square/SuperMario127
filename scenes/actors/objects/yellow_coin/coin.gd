@@ -5,6 +5,8 @@ onready var sound = $AudioStreamPlayer
 onready var area = $Area2D
 onready var visibility_enabler = $VisibilityEnabler2D
 onready var ground_detector = $GroundDetector
+onready var ceiling_detector = $CeilingDetector
+onready var wall_detector = $WallDetector
 
 var collected = false
 var physics = false
@@ -42,6 +44,8 @@ func _ready():
 		despawn_timer = 10.0
 		gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
 		ground_detector.enabled = true
+		wall_detector.enabled = true
+		ceiling_detector.enabled = true
 	var _connect = area.connect("body_entered", self, "collect")
 
 func _process(delta):
@@ -55,8 +59,11 @@ func _process(delta):
 		if despawn_timer <= 1:
 			visible = !visible
 		if despawn_timer <= 0:
-			despawn_timer = 0
-			queue_free()
+			if !sound.playing:
+				despawn_timer = 0
+				queue_free()
+			else:
+				despawn_timer = 0.3
 	if !collected:
 		animated_sprite.frame = (OS.get_ticks_msec() / anim_damp) % 4
 
@@ -64,7 +71,19 @@ func _physics_process(delta):
 	if physics and mode != 1:
 		velocity.y += gravity
 		position += velocity * delta
+		var x_cast = 1
+		if velocity.x <= 0:
+			x_cast = -1
+		wall_detector.cast_to = Vector2(x_cast, 0)
 		if ground_detector.is_colliding() and velocity.y > 0:
 			velocity.x = lerp(velocity.x, 0, delta)
 			velocity.y = 0
 			position.y = ground_detector.get_collision_point().y - 10
+			
+		if ceiling_detector.is_colliding():
+			velocity.y = 30
+			position.y += 2
+			
+		if wall_detector.is_colliding():
+			velocity.x = 0
+			position.x = wall_detector.get_collision_point().x - (5*x_cast)

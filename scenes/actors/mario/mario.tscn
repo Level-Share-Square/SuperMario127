@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://scenes/actors/mario/states/Backflip.gd" type="Script" id=29]
 [ext_resource path="res://scenes/actors/mario/particles/dust.png" type="Texture" id=30]
 [ext_resource path="res://scenes/actors/mario/states/Knockback.gd" type="Script" id=31]
+[ext_resource path="res://scenes/actors/mario/mario_anim_player.tres" type="Animation" id=32]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -104,6 +105,22 @@ damping = 100.0
 scale = 0.75
 color_ramp = SubResource( 11 )
 anim_speed = 0.8
+
+[sub_resource type="Animation" id=15]
+resource_name = "backflip_right"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 0.594603, 0.965936 ),
+"update": 0,
+"values": [ 0.0, -360.0 ]
+}
 
 [node name="Character" type="KinematicBody2D"]
 position = Vector2( -1000, -1000 )
@@ -381,3 +398,7 @@ amount = 14
 local_coords = false
 process_material = SubResource( 14 )
 texture = ExtResource( 30 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/backflip = ExtResource( 32 )
+anims/backflip_right = SubResource( 15 )

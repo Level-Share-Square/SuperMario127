@@ -48,14 +48,14 @@ collision_mask = 5
 
 [node name="Sprite" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
 frames = ExtResource( 1 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="Fuse" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
 visible = false
 position = Vector2( 0, -4 )
 frames = ExtResource( 4 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
@@ -125,3 +125,6 @@ shape = SubResource( 7 )
 position = Vector2( 0, -3 )
 enabled = true
 cast_to = Vector2( 0, 16 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="KinematicBody2D"]
+rect = Rect2( -300, -300, 600, 600 )

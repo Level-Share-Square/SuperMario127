@@ -13,7 +13,7 @@ var start_facing = 1
 func _ready():
 	priority = 3
 	disable_turning = true
-	blacklisted_states = ["SlideState", "GetupState"]
+	blacklisted_states = ["SlideState", "GetupState", "BackflipState"]
 	override_rotation = true
 
 func _start_check(_delta):
