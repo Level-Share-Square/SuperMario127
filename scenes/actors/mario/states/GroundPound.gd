@@ -30,7 +30,15 @@ func _update(_delta):
 
 func _stop(delta):
 	if character.is_grounded():
-		character.set_state_by_name("GroundPoundEndState", delta)
+		var normal = character.ground_check.get_collision_normal()
+		if normal.x == 0:
+			character.set_state_by_name("GroundPoundEndState", delta)
+		else:
+			var move_direction = stepify(normal.x, 1)
+			character.velocity.x = 376 * move_direction
+			character.velocity.y = 150
+			character.position.y += 6
+			character.set_state_by_name("ButtSlideState", delta)
 	else:
 		character.jump_animation = 0
 		character.velocity.y = character.velocity.y / 4

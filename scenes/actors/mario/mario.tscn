@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://scenes/actors/mario/particles/dust.png" type="Texture" id=30]
 [ext_resource path="res://scenes/actors/mario/states/Knockback.gd" type="Script" id=31]
 [ext_resource path="res://scenes/actors/mario/mario_anim_player.tres" type="Animation" id=32]
+[ext_resource path="res://scenes/actors/mario/states/ButtSlide.gd" type="Script" id=33]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -280,6 +281,9 @@ script = ExtResource( 19 )
 [node name="GroundPoundEndState" type="Node" parent="States"]
 script = ExtResource( 20 )
 
+[node name="ButtSlideState" type="Node" parent="States"]
+script = ExtResource( 33 )
+
 [node name="PlayerCollision" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
@@ -372,6 +376,16 @@ volume_db = -5.0
 
 [node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 9 )
+z_index = -2
+emitting = false
+amount = 24
+local_coords = false
+process_material = SubResource( 12 )
+texture = ExtResource( 30 )
+
+[node name="SlideParticles" type="Particles2D" parent="."]
+material = SubResource( 9 )
+position = Vector2( 0, 14 )
 z_index = -2
 emitting = false
 amount = 24

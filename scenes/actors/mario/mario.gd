@@ -49,6 +49,7 @@ export var gravity : float
 
 export var disable_movement = false
 export var disable_turning = false
+export var disable_friction = false
 export var disable_animation = false
 
 export var attacking = false
@@ -155,6 +156,7 @@ onready var water_sprite_2 = $Sprite/Water2
 onready var fludd_sound = $FluddSound
 onready var nozzle_switch_sound = $NozzleSwitchSound
 onready var particles = $Particles2D
+onready var slide_particles = $SlideParticles
 onready var gp_particles1 = $GPParticles1
 onready var gp_particles2 = $GPParticles2
 
@@ -420,10 +422,12 @@ func _physics_process(delta: float):
 		disable_movement = state.disable_movement
 		disable_turning = state.disable_turning
 		disable_animation = state.disable_animation
+		disable_friction = state.disable_friction
 	else:
 		disable_movement = false
 		disable_turning = false
 		disable_animation = false
+		disable_friction = false
 	# Movement
 	move_direction = 0
 	if inputs[0][0] and !inputs[1][0] and disable_movement == false:
@@ -473,7 +477,7 @@ func _physics_process(delta: float):
 				velocity.x -= 0.25 * move_direction
 			if !disable_turning:
 				facing_direction = move_direction
-	else:
+	elif !disable_friction:
 		if (velocity.x > 0):
 			if (velocity.x > 15):
 				if (is_grounded()):

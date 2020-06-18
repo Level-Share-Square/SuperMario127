@@ -9,6 +9,7 @@ export var disable_movement = false
 export var disable_animation = false
 export var disable_turning = false
 export var disable_snap = true
+export var disable_friction = false
 export var override_rotation = false
 export var blacklisted_states = []
 

@@ -15,7 +15,7 @@ func _ready():
 	disable_animation = true
 	disable_snap = false
 	override_rotation = true
-	blacklisted_states = ["SlideStopState", "GroundPoundEndState"]
+	blacklisted_states = ["SlideStopState", "GroundPoundEndState", "ButtSlideState"]
 	
 func _start_check(_delta):
 	return crouch_buffer > 0 and character.is_grounded()
@@ -110,7 +110,7 @@ func _general_update(delta):
 	var normal = character.ground_check.get_collision_normal()
 	if character.inputs[2][1]:
 		getup_buffer = 0.075
-	if character.inputs[9][1]:#and normal.x == 0:
+	if character.inputs[9][1] and normal.x == 0:
 		crouch_buffer = 0.15
 	if getup_buffer > 0:
 		getup_buffer -= delta
@@ -124,7 +124,7 @@ func _general_update(delta):
 	if character.is_grounded() and character.state == self:
 		ledge_buffer = 0.125
 		
-	if character.state != self and character.state != character.get_state_node("WallSlideState"):
+	if character.state != self and character.state != character.get_state_node("WallSlideState") and character.state != character.get_state_node("ButtSlideState"):
 		character.sound_player.set_skid_playing(false)
 		character.particles.emitting = false
 		
