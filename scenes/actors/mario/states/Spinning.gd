@@ -17,6 +17,7 @@ func _start_check(_delta):
 	return spin_timer > 0 and (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2 and !character.test_move(character.transform, Vector2(8, 0)) and !character.test_move(character.transform, Vector2(-8, 0))
 
 func _start(_delta):
+	character.sprite.speed_scale = 1
 	character.sound_player.play_spin_sound()
 	if can_boost == true and !character.is_grounded() and (character.state != character.get_state_node("Jump") or character.current_jump == 1):
 		can_boost = false

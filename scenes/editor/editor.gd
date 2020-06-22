@@ -166,6 +166,12 @@ func _process(delta):
 		if hovered_object and Input.is_action_just_pressed("rotate"):
 			rotating = true
 			
+		if hovered_object and Input.is_action_just_pressed("flip_object"):
+			hovered_object.set_property("scale", Vector2(-hovered_object.scale.x, hovered_object.scale.y), true)
+		
+		if hovered_object and Input.is_action_just_pressed("flip_object_v"):
+			hovered_object.set_property("scale", Vector2(hovered_object.scale.x, -hovered_object.scale.y), true)
+			
 		if hovered_object and left_held and selected_tool == 0 and Input.is_action_just_pressed("place") and !rotating:
 			time_clicked += delta
 			

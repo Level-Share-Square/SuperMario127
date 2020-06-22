@@ -20,7 +20,7 @@ func _ready():
 	
 func _start_check(_delta):
 	var normal = character.ground_check.get_collision_normal()
-	return character.inputs[9][1] and character.is_grounded() and normal.x != 0
+	return (character.nozzle == null or !character.nozzle.activated) and character.inputs[9][1] and character.is_grounded() and normal.x != 0
 
 func _start(delta):
 	temp_speed = move_speed
@@ -41,7 +41,12 @@ func _update(delta):
 		character.slide_particles.emitting = false
 		
 	var normal = character.ground_check.get_collision_normal()
-	var move_direction = stepify(normal.x, 1)
+	var move_direction = 0
+	if normal.x != 0:
+		if normal.x > 0:
+			move_direction = 1
+		else:
+			move_direction = -1
 	
 	character.velocity.y = 350
 	if character.is_grounded() and move_direction != 0:

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sound.wav-ddcc63028e43917e0d7c1ddaf523d2be.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/green_demon/sound.wav"
+dest_files=[ "res://.import/sound.wav-ddcc63028e43917e0d7c1ddaf523d2be.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

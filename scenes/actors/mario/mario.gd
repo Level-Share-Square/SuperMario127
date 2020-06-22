@@ -520,12 +520,12 @@ func _physics_process(delta: float):
 		if state.disable_snap:
 			snap = Vector2()
 		elif (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
-			snap = Vector2(0, 32)
+			snap = Vector2(0, 12)
 		else:
 			snap = Vector2()
 	else:
 		if (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
-			snap = Vector2(0, 32)
+			snap = Vector2(0, 12)
 		else:
 			snap = Vector2()
 			

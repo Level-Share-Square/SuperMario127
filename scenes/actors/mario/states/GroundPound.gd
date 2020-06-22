@@ -34,7 +34,9 @@ func _stop(delta):
 		if normal.x == 0:
 			character.set_state_by_name("GroundPoundEndState", delta)
 		else:
-			var move_direction = stepify(normal.x, 1)
+			var move_direction = 1
+			if normal.x < 0:
+				move_direction = -1
 			character.velocity.x = 376 * move_direction
 			character.velocity.y = 150
 			character.position.y += 6

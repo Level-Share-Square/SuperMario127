@@ -7,7 +7,7 @@ var frames_bonked = 0
 var bounces_left = 0
 
 func _ready():
-	priority = 5
+	priority = 4
 	disable_turning = true
 	disable_movement = true
 	override_rotation = true

@@ -41,7 +41,9 @@ func _ready():
 					
 			character.spawn_pos = position
 			character.get_node("Spotlight").enabled = show_behind_layer
-			character.scale = scale
+			character.scale = Vector2(abs(scale.x), scale.y)
+			if scale.x < 0:
+				character.facing_direction = -character.facing_direction
 			character.visible = visible
 
 func _physics_process(delta):

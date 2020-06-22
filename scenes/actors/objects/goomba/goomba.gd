@@ -5,6 +5,13 @@ onready var body = $Goomba
 onready var attack_area = $Goomba/AttackArea
 onready var stomp_area = $Goomba/StompArea
 onready var bounce_area = $Goomba/BounceArea
+onready var collision1 = $Goomba/CollisionShape2D
+onready var collision2 = $Goomba/CollisionShape2D2
+onready var collision3 = $Goomba/CollisionShape2D3
+onready var collision4 = $Goomba/AttackArea/CollisionShape2D
+onready var collision5 = $Goomba/BounceArea/CollisionShape2D
+onready var collision6 = $Goomba/StompArea/CollisionShape2D
+onready var collision7 = $Goomba/PlayerDetector/CollisionShape2D
 onready var grounded_check = $Goomba/GroundedCheck
 onready var grounded_check_2 = $Goomba/GroundedCheck2
 onready var wall_check = $Goomba/WallCheck
@@ -237,7 +244,8 @@ func _physics_process(delta):
 						hide_timer = 0.01
 						if !was_ground_pound:
 							character.velocity.y = -325
-							character.set_state_by_name("BounceState", delta)
+							if character.state != character.get_state_node("DiveState"):
+								character.set_state_by_name("BounceState", delta)
 						
 			elif !dead:
 				sprite.rotation_degrees += (velocity.x / 15)

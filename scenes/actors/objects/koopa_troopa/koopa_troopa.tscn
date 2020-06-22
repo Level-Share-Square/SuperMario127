@@ -94,3 +94,6 @@ volume_db = -10.0
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Koopa"]
 rect = Rect2( -300, -300, 600, 600 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -300, -300, 600, 600 )
