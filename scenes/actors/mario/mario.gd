@@ -141,6 +141,7 @@ export var rotating_jump = false
 onready var collision_shape = $Collision
 onready var collision_raycast = $GroundCollision
 onready var ground_check = $GroundCheck
+onready var slope_stop_check = $SlopeStopCheck
 onready var ground_check_dive = $GroundCheckDive
 onready var left_check = $LeftCheck
 onready var right_check = $RightCheck
@@ -385,10 +386,11 @@ func _physics_process(delta: float):
 	if movable and (state == null or !state.override_rotation) and (!is_instance_valid(nozzle) or !nozzle.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
 		
 		var sprite_rotation = 0
-		
-		if is_grounded() and (test_move(transform, Vector2(-10, 12)) or test_move(transform, Vector2(10, 12))):
-			var normal = ground_check.get_collision_normal()
-			sprite_rotation = atan2(normal.y, normal.x) + (PI/2)
+		if is_grounded():
+			var normal = ground_check.get_collision_normal()	
+			slope_stop_check.cast_to = Vector2(40 if normal.x < 0 else -40, slope_stop_check.cast_to.y)	
+			if slope_stop_check.is_colliding():
+				sprite_rotation = atan2(normal.y, normal.x) + (PI/2)
 			
 		if is_grounded():
 			velocity.y += abs(sprite_rotation) * 100 # this is required to keep mario from falling off slopes
@@ -520,12 +522,20 @@ func _physics_process(delta: float):
 		if state.disable_snap:
 			snap = Vector2()
 		elif (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
-			snap = Vector2(0, 12)
+			var normal = ground_check.get_collision_normal()
+			if normal.x == 0:
+				snap = Vector2(0, 12)
+			else:
+				snap = Vector2(0, 20)
 		else:
 			snap = Vector2()
 	else:
 		if (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
-			snap = Vector2(0, 12)
+			var normal = ground_check.get_collision_normal()
+			if normal.x == 0:
+				snap = Vector2(0, 12)
+			else:
+				snap = Vector2(0, 20)
 		else:
 			snap = Vector2()
 			

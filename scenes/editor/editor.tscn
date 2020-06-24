@@ -1,4 +1,4 @@
-[gd_scene load_steps=175 format=2]
+[gd_scene load_steps=176 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -134,6 +134,7 @@
 [ext_resource path="res://scenes/actors/objects/goomba/preview.png" type="Texture" id=132]
 [ext_resource path="res://scenes/actors/objects/goomba/icon.png" type="Texture" id=133]
 [ext_resource path="res://assets/tiles/cave/icon.png" type="Texture" id=134]
+[ext_resource path="res://assets/tiles/cave/icon_slab.png" type="Texture" id=135]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 0.501961 )
@@ -2095,9 +2096,20 @@ preview = ExtResource( 132 )
 [node name="Cave" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 tileset_id = 8
-change_to = "Cave"
+change_to = "CaveSlab"
+items_in_sequence = 2
 icon = ExtResource( 134 )
 preview = ExtResource( 134 )
+
+[node name="CaveSlab" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+tileset_id = 8
+tile_id = 1
+change_to = "Cave"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 135 )
+preview = ExtResource( 135 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100

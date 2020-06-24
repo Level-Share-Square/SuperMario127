@@ -30,6 +30,7 @@ const SNOW_SLOPE_RIGHT = 20
 const SNOW_SLOPE_LEFT = 21
 
 const CAVE = 23
+const CAVE_SLAB = 24
 
 var ids = [
 	GRASS_BLOCK,
@@ -60,7 +61,8 @@ var ids = [
 	SNOW_SLOPE_RIGHT,
 	SNOW_SLOPE_LEFT,
 	
-	CAVE
+	CAVE,
+	CAVE_SLAB
 ]
 
 var binds = {

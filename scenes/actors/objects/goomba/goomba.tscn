@@ -113,7 +113,7 @@ collision_mask = 5
 
 [node name="Sprite" type="AnimatedSprite" parent="Goomba"]
 frames = ExtResource( 2 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba"]
@@ -216,7 +216,8 @@ texture = ExtResource( 4 )
 anims/Stomped = SubResource( 9 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Goomba"]
-rect = Rect2( -300, -300, 600, 600 )
+rect = Rect2( -200, -200, 400, 400 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-rect = Rect2( -300, -300, 600, 600 )
+rect = Rect2( -200, -200, 400, 400 )
+pause_particles = false

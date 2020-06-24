@@ -124,6 +124,10 @@ func kill(hit_pos : Vector2):
 				velocity = Vector2(normal * 225, -225)
 				position.y -= 2
 				snap = Vector2(0, 0)
+				
+func _process(delta):
+	if mode == 1:
+		sprite.frame = wrapi(OS.get_ticks_msec() / 166, 0, 4)
 
 func _physics_process(delta):
 	time_alive += delta

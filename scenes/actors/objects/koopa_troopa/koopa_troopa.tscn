@@ -93,7 +93,8 @@ stream = ExtResource( 3 )
 volume_db = -10.0
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Koopa"]
-rect = Rect2( -300, -300, 600, 600 )
+rect = Rect2( -200, -200, 400, 400 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-rect = Rect2( -300, -300, 600, 600 )
+rect = Rect2( -200, -200, 400, 400 )
+pause_particles = false

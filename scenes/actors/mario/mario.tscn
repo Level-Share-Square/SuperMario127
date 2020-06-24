@@ -327,6 +327,11 @@ position = Vector2( 8.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 32 )
 
+[node name="SlopeStopCheck" type="RayCast2D" parent="."]
+position = Vector2( 0, 6 )
+enabled = true
+cast_to = Vector2( 36, 0 )
+
 [node name="Nozzles" type="Node" parent="."]
 
 [node name="HoverNozzle" type="Node" parent="Nozzles"]
