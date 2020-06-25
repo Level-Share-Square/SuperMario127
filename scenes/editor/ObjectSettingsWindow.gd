@@ -8,7 +8,7 @@ export var shared : NodePath
 var object
 var preview_object
 
-onready var property_scene = load("res://scenes/editor/property.tscn")
+onready var property_scene = preload("res://scenes/editor/property.tscn")
 onready var grid_container_node = get_node(grid_container)
 onready var preview_node = get_node(preview)
 onready var delete_button_node = get_node(delete_button)

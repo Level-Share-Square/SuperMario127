@@ -54,7 +54,7 @@ func _ready():
 	
 	for group_id in load("res://scenes/editor/groups/list.tres").ids:
 		var group_resource = load("res://scenes/editor/groups/" + group_id + ".tres")
-		var group_button = load("res://scenes/editor/group_switcher.tscn").instance()
+		var group_button = preload("res://scenes/editor/group_switcher.tscn").instance()
 		group_button.group_picker = self
 		group_button.switch_to_group = group_resource
 		grid_container_groups.add_child(group_button)

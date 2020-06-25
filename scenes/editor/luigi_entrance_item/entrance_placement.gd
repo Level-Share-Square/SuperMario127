@@ -5,7 +5,8 @@ func act(editor, position: Vector2, _level_data: LevelData, _level_area: LevelAr
 	var found_entrance = false
 
 	for object in objects.get_children():
-		if object.level_object.type_id == 5:
+		var level_object = object.level_object.get_ref()
+		if level_object.type_id == 5:
 			found_entrance = true
 			objects.set_property(object, "position", position)
 			break

@@ -12,10 +12,10 @@ var last_hovered = false
 var last_clicking = false
 
 func _ready():
-	icon.texture = item.icon
+	grid.texture = load(grid.texture.load_path)
+	icon.texture = load(item.icon.load_path)
 	
 func _process(_delta):
-	var editor = get_tree().get_current_scene()
 	grid.visible = true if !item.is_object else false
 	if is_hovered() and !last_hovered:
 		sound.play()

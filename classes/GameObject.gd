@@ -57,11 +57,12 @@ func get_property_index(key) -> int:
 func set_property(key, value, change_level_object):
 	self[key] = value
 	if change_level_object and is_savable_property(key):
+		var level_object_ref = level_object.get_ref()
 		var index = get_property_index(key)
-		if index == level_object.properties.size():
-			level_object.properties.append(value)
+		if index == level_object_ref.properties.size():
+			level_object_ref.properties.append(value)
 		else:
-			level_object.properties[index] = value
+			level_object_ref.properties[index] = value
 			
 		if key == "visible":
 			if mode == 1:
@@ -99,28 +100,30 @@ func _physics_process(_delta):
 
 func _init_signals():
 	var index = 0
-	if level_object.player_signal_connections[index].size() > 0:
+	var level_object_ref = level_object.get_ref()
+	if level_object_ref.player_signal_connections[index].size() > 0:
 		for signal_name in (base_connectable_signals + connectable_signals):
 			var _connect = connect(signal_name, self, "on_signal_fire", [index])
 			index += 1
-			if index < level_object.player_signal_connections.size():
+			if index < level_object_ref.player_signal_connections.size():
 				if signal_name == "physics_process":
-					if level_object.player_signal_connections[index].size() > 0:
+					if level_object_ref.player_signal_connections[index].size() > 0:
 						has_physics_connection = true
 				elif signal_name == "process":
-					if level_object.player_signal_connections[index].size() > 0:
+					if level_object_ref.player_signal_connections[index].size() > 0:
 						has_process_connection = true
 
 
 func on_signal_fire(index):
 	var current_mode = get_tree().get_current_scene().mode
+	var level_object_ref = level_object.get_ref()
 	if current_mode == 0:
-		var functions = level_object.player_signal_connections[index]
+		var functions = level_object_ref.player_signal_connections[index]
 		for function_name in functions:
 			var function_struct = level_data.functions[function_name]
 			interpreter_util.run_function(function_struct, self)
 	elif current_mode == 1:
-		var functions = level_object.editor_signal_connections[index]
+		var functions = level_object_ref.editor_signal_connections[index]
 		for function_name in functions:
 			var function_struct = level_data.functions[function_name]
 			interpreter_util.run_function(function_struct, self)

@@ -27,8 +27,7 @@ func _ready():
 		type_scene_name = "Color"
 	
 	if type_scene_name != "None":
-		var property_type_scene = load("res://scenes/editor/property_type_scenes/" + type_scene_name + "/" + type_scene_name + ".tscn")
-		property_type = property_type_scene.instance()
+		property_type = MiscCache.property_scenes[type_scene_name].instance()
 		add_child(property_type)
 		property_type.set_value(value)
 

@@ -16,8 +16,7 @@ func update_display():
 	var area = data.areas[CurrentLevelData.area]
 	
 	if typeof(area.settings.music) == TYPE_INT:
-		var mapped_id = music_id_mapper.ids[area.settings.music]
-		var resource = load("res://assets/music/resources/" + mapped_id + ".tres")
+		var resource = MiscCache.music_nodes[area.settings.music]
 		
 		music_title.text = resource.title
 		music_note.text = resource.note

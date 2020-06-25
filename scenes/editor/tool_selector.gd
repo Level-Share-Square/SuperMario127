@@ -18,7 +18,7 @@ func _pressed():
 		editor_node.selected_tool = tool_index
 		click_sound.play()
 		
-func _process(delta):
+func _process(_delta):
 	var selected_tool = editor_node.selected_tool
 	var hovered = is_hovered()
 	

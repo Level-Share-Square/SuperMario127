@@ -454,6 +454,8 @@ EditorSavedSettings="*res://scenes/editor/editor_saved_settings.gd"
 PhotoMode="*res://scenes/actors/photo_mode/photo_mode.gd"
 ActionManager="*res://scenes/editor/action_manager.gd"
 WindowSize="*res://scenes/shared/window_size.gd"
+SceneManager="*res://scenes/shared/scene_manager.gd"
+MiscCache="*res://scenes/shared/misc_cache.gd"
 
 [debug]
 
@@ -935,6 +937,10 @@ toggle_show={
 2d_physics/layer_3="enemies"
 2d_physics/layer_4="collectables"
 
+[memory]
+
+limits/multithreaded_server/rid_pool_prealloc=120
+
 [network]
 
 ssl/certificates="res://youtube-dl/ca-certificates.crt"
@@ -945,7 +951,8 @@ common/physics_fps=120
 
 [rendering]
 
+quality/intended_usage/framebuffer_allocation=0
+quality/intended_usage/framebuffer_allocation.mobile=0
 quality/2d/use_pixel_snap=true
-vram_compression/import_etc=true
-vram_compression/import_etc2=false
+vram_compression/import_bptc=true
 environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )

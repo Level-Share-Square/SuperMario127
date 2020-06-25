@@ -15,6 +15,8 @@ var shown = false
 var last_shown = false
 
 func _ready():
+	ui.texture.atlas = load(ui.texture.atlas.load_path)
+	shards.texture.atlas = load(shards.texture.atlas.load_path)
 	character = get_node(char_path)
 	if (character.player_id == 0) and PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
 		ui.rect_position.x = 160

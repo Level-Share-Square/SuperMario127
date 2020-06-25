@@ -1,11 +1,10 @@
-[gd_scene load_steps=176 format=2]
+[gd_scene load_steps=175 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/editor/PlaceableItem.gd" type="Script" id=3]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/tiles/bricks/icon.png" type="Texture" id=5]
-[ext_resource path="res://scenes/editor/assets/grid.png" type="Texture" id=6]
 [ext_resource path="res://scenes/editor/camera_controls.gd" type="Script" id=7]
 [ext_resource path="res://scenes/editor/item_preview.gd" type="Script" id=8]
 [ext_resource path="res://scenes/editor/placeable_items_container.gd" type="Script" id=9]
@@ -3377,24 +3376,6 @@ modulate = Color( 1, 1, 1, 0.501961 )
 position = Vector2( -26.9707, 159.734 )
 script = ExtResource( 65 )
 
-[node name="Grid" type="ParallaxBackground" parent="."]
-layer = 99
-script = ExtResource( 123 )
-
-[node name="Layer" type="ParallaxLayer" parent="Grid"]
-motion_mirroring = Vector2( 2048, 1024 )
-
-[node name="TextureRect" type="TextureRect" parent="Grid/Layer"]
-margin_right = 2048.0
-margin_bottom = 1024.0
-mouse_filter = 2
-texture = ExtResource( 6 )
-stretch_mode = 2
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 limit_left = 0
@@ -3412,3 +3393,21 @@ z_index = -1
 script = ExtResource( 8 )
 
 [node name="Backgrounds" parent="." instance=ExtResource( 52 )]
+position = Vector2( 0.644974, 10.2275 )
+
+[node name="Grid" type="ParallaxBackground" parent="."]
+layer = 99
+script = ExtResource( 123 )
+
+[node name="Layer" type="ParallaxLayer" parent="Grid"]
+motion_mirroring = Vector2( 2048, 1024 )
+
+[node name="TextureRect" type="TextureRect" parent="Grid/Layer"]
+margin_right = 2048.0
+margin_bottom = 1024.0
+mouse_filter = 2
+stretch_mode = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}

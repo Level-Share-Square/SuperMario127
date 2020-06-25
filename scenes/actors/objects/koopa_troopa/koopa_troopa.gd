@@ -34,7 +34,6 @@ var shell_stomp_area
 var shell_destroy_area
 var shell_sound
 var shell_grounded_check
-onready var shell_scene = load("res://scenes/actors/objects/koopa_troopa/shell.tscn")
 
 var color := Color(0, 1, 0)
 var rainbow := false
@@ -53,6 +52,7 @@ func _ready():
 	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
 
 func retract_into_shell():
+	var shell_scene = MiscCache.shell_scene
 	shell = shell_scene.instance()
 	shell_sprite = shell.get_node("Sprite")
 	shell_sprite_color = shell.get_node("Sprite/Color")

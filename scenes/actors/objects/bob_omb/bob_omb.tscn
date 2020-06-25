@@ -25,6 +25,8 @@ particles_anim_loop = false
 
 [sub_resource type="ParticlesMaterial" id=5]
 flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
@@ -99,6 +101,7 @@ material = SubResource( 4 )
 emitting = false
 amount = 1
 one_shot = true
+local_coords = false
 process_material = SubResource( 5 )
 texture = ExtResource( 6 )
 

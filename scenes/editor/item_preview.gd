@@ -6,7 +6,7 @@ func _ready():
 
 func update_preview(item: Node):
 	if item:
-		texture = item.preview
+		texture = load(item.preview.load_path)
 
 func _process(_delta):
 	var editor = get_parent()

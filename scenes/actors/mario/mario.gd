@@ -107,9 +107,6 @@ export var luigi_collision_offset : Vector2
 export var luigi_dive_collision : RectangleShape2D
 export var luigi_dive_collision_offset : Vector2
 
-export var mario_sounds : String
-export var luigi_sounds : String
-
 export var luigi_accel : float
 export var luigi_fric : float
 export var luigi_speed : float
@@ -208,7 +205,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	var _connect = player_collision.connect("body_entered", self, "player_hit")
 		
 	if character == 0:
-		var sound_scene = load(mario_sounds)
+		var sound_scene = MiscCache.mario_sounds
 		sound_player = sound_scene.instance()
 		add_child(sound_player)
 		if PlayerSettings.player1_character != PlayerSettings.player2_character or player_id == 0:
@@ -223,7 +220,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		#dive_collision_shape.position = mario_dive_collision_offset
 		real_friction = friction
 	else:
-		var sound_scene = load(luigi_sounds)
+		var sound_scene = MiscCache.luigi_sounds
 		sound_player = sound_scene.instance()
 		add_child(sound_player)
 		if PlayerSettings.player1_character != PlayerSettings.player2_character or player_id == 0:

@@ -26,7 +26,7 @@ func create_object(object, add_to_data):
 		object_node.mode = mode
 		object_node.level_data = level_data
 		object_node.level_area = level_area
-		object_node.level_object = object
+		object_node.level_object = weakref(object)
 		#object_node._init_signals() - Disabled because it's not needed atm
 		object_node._set_properties()
 		var index = 0
@@ -51,5 +51,6 @@ func get_object_at_position(position: Vector2):
 			
 func destroy_object(object_node, remove_from_data):
 	if remove_from_data:
-		level_area.objects.erase(object_node.level_object)
+		var level_object = object_node.level_object.get_ref()
+		level_area.objects.erase(level_object)
 	object_node.queue_free()
