@@ -41,7 +41,7 @@ animations = [ {
 extents = Vector2( 14.5, 9 )
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 16, 1 )
+extents = Vector2( 22, 1 )
 
 [node name="BulletBill" type="Node2D"]
 z_index = -2

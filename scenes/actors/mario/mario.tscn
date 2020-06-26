@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -59,19 +59,22 @@ length = 13.0
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 8.5, 20 )
 
-[sub_resource type="CanvasItemMaterial" id=9]
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 8.5, 20 )
+
+[sub_resource type="CanvasItemMaterial" id=10]
 particles_animation = true
 particles_anim_h_frames = 10
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=10]
+[sub_resource type="Gradient" id=11]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=11]
-gradient = SubResource( 10 )
+[sub_resource type="GradientTexture" id=12]
+gradient = SubResource( 11 )
 
-[sub_resource type="ParticlesMaterial" id=12]
+[sub_resource type="ParticlesMaterial" id=13]
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 0.0
@@ -79,10 +82,10 @@ gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.75
-color_ramp = SubResource( 11 )
+color_ramp = SubResource( 12 )
 anim_speed = 0.8
 
-[sub_resource type="ParticlesMaterial" id=13]
+[sub_resource type="ParticlesMaterial" id=14]
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, -27, 0 )
@@ -91,10 +94,10 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 100.0
 scale = 0.75
-color_ramp = SubResource( 11 )
+color_ramp = SubResource( 12 )
 anim_speed = 0.8
 
-[sub_resource type="ParticlesMaterial" id=14]
+[sub_resource type="ParticlesMaterial" id=15]
 flag_disable_z = true
 direction = Vector3( -1, 0, 0 )
 spread = 0.0
@@ -104,11 +107,10 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 100.0
 scale = 0.75
-color_ramp = SubResource( 11 )
+color_ramp = SubResource( 12 )
 anim_speed = 0.8
 
-[sub_resource type="Animation" id=15]
-resource_name = "backflip_right"
+[sub_resource type="Animation" id=16]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:rotation_degrees")
@@ -145,11 +147,11 @@ luigi_collision = SubResource( 1 )
 luigi_collision_offset = Vector2( 0.5, 7 )
 luigi_dive_collision = SubResource( 3 )
 luigi_dive_collision_offset = Vector2( -4, 4 )
-mario_sounds = "res://scenes/actors/mario/mario_sounds.tscn"
-luigi_sounds = "res://scenes/actors/mario/luigi_sounds.tscn"
 luigi_accel = 10.5
 luigi_fric = 13.5
 luigi_speed = 216.0
+bottom_pos_offset = Vector2( 0, 20 )
+bottom_pos_dive_offset = Vector2( 0, 3 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
@@ -294,6 +296,15 @@ modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0.5, 4 )
 shape = SubResource( 8 )
 
+[node name="PlatformDetector" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformDetector"]
+visible = false
+modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
+position = Vector2( 0.5, 4 )
+shape = SubResource( 9 )
+
 [node name="Bubble" type="Sprite" parent="."]
 
 [node name="Spotlight" type="Light2D" parent="."]
@@ -380,36 +391,26 @@ stream = ExtResource( 27 )
 volume_db = -5.0
 
 [node name="Particles2D" type="Particles2D" parent="."]
-material = SubResource( 9 )
+material = SubResource( 10 )
 z_index = -2
 emitting = false
 amount = 24
 local_coords = false
-process_material = SubResource( 12 )
+process_material = SubResource( 13 )
 texture = ExtResource( 30 )
 
 [node name="SlideParticles" type="Particles2D" parent="."]
-material = SubResource( 9 )
+material = SubResource( 10 )
 position = Vector2( 0, 14 )
 z_index = -2
 emitting = false
 amount = 24
 local_coords = false
-process_material = SubResource( 12 )
-texture = ExtResource( 30 )
-
-[node name="GPParticles1" type="Particles2D" parent="."]
-material = SubResource( 9 )
-position = Vector2( 0, 18 )
-z_index = 2
-emitting = false
-amount = 14
-local_coords = false
 process_material = SubResource( 13 )
 texture = ExtResource( 30 )
 
-[node name="GPParticles2" type="Particles2D" parent="."]
-material = SubResource( 9 )
+[node name="GPParticles1" type="Particles2D" parent="."]
+material = SubResource( 10 )
 position = Vector2( 0, 18 )
 z_index = 2
 emitting = false
@@ -418,6 +419,19 @@ local_coords = false
 process_material = SubResource( 14 )
 texture = ExtResource( 30 )
 
+[node name="GPParticles2" type="Particles2D" parent="."]
+material = SubResource( 10 )
+position = Vector2( 0, 18 )
+z_index = 2
+emitting = false
+amount = 14
+local_coords = false
+process_material = SubResource( 15 )
+texture = ExtResource( 30 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/backflip = ExtResource( 32 )
-anims/backflip_right = SubResource( 15 )
+anims/backflip_right = SubResource( 16 )
+
+[node name="BottomPos" type="Node2D" parent="."]
+position = Vector2( 0, 20 )

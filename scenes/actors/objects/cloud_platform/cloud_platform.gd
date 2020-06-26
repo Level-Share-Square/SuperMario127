@@ -3,6 +3,7 @@ extends Node2D
 onready var area = $Area2D
 onready var area_collision_shape = $Area2D/CollisionShape2D
 onready var collision_shape = $StaticBody2D/CollisionShape2D
+onready var body = $StaticBody2D
 
 onready var parts_holder = $Parts
 onready var left = $LeftSprite
@@ -46,7 +47,7 @@ func update_parts():
 	
 	var rect_shape = RectangleShape2D.new()
 	rect_shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
-	rect_shape.extents.y = 1
+	rect_shape.extents.y = 5
 	collision_shape.position.x = (left_width + (part_width * parts) + right_width) / 2
 	collision_shape.shape = rect_shape
 	
@@ -61,22 +62,20 @@ func exit_area(body):
 	if body == character:
 		character = null
 		
-
-func _physics_process(delta):
-	if character != null and get_parent().enabled:
-		var direction = transform.y.normalized()
-		var line_center = get_parent().position + (direction * buffer)
-		var line_direction = Vector2(-direction.y, direction.x)
-		var p1 = line_center + line_direction
-		var p2 = line_center - line_direction
-		var p = character.position
-		var diff = p2 - p1
-		var perp = Vector2(-diff.y, diff.x)
-		var d = (p - p1).dot(perp)
+func _process(_delta):
+	if character != null:
+		var direction = body.global_transform.y.normalized()
 		
-		collision_shape.disabled = sign(d) == 1 or character.velocity.y < 0
-		
-		if character.velocity.y < -10 and direction.y > 0.5:
-			collision_shape.disabled = true
-		if character.velocity.y > 10 and direction.y < -0.5:
-			collision_shape.disabled = true
+		if direction.y > 0.5:
+			var line_center = body.global_position + (direction * buffer)
+			var line_direction = Vector2(-direction.y, direction.x)
+			var p1 = line_center + line_direction
+			var p2 = line_center - line_direction
+			var p = character.bottom_pos.global_position
+			var diff = p2 - p1
+			var perp = Vector2(-diff.y, diff.x)
+			var d = (p - p1).dot(perp)
+			
+			collision_shape.disabled = sign(d) == 1
+		else:
+			collision_shape.disabled = false

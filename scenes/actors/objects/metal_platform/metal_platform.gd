@@ -1,6 +1,7 @@
 extends GameObject
 
 onready var area = $Area2D
+onready var body = $StaticBody2D
 onready var collision_shape = $StaticBody2D/CollisionShape2D
 
 var buffer := -5
@@ -23,19 +24,18 @@ func exit_area(body):
 
 func _process(_delta):
 	if character != null:
-		var direction = transform.y.normalized()
-		var line_center = position + (direction * buffer)
-		var line_direction = Vector2(-direction.y, direction.x)
-		var p1 = line_center + line_direction
-		var p2 = line_center - line_direction
-		var p = character.position
-		var diff = p2 - p1
-		var perp = Vector2(-diff.y, diff.x)
-		var d = (p - p1).dot(perp)
+		var direction = body.global_transform.y.normalized()
 		
-		collision_shape.disabled = sign(d) == 1
-		
-		if character.velocity.y < -10 and direction.y > 0.5:
-			collision_shape.disabled = true
-		if character.velocity.y > 10 and direction.y < -0.5:
-			collision_shape.disabled = true
+		if direction.y > 0.5:
+			var line_center = body.global_position + (direction * buffer)
+			var line_direction = Vector2(-direction.y, direction.x)
+			var p1 = line_center + line_direction
+			var p2 = line_center - line_direction
+			var p = character.bottom_pos.global_position
+			var diff = p2 - p1
+			var perp = Vector2(-diff.y, diff.x)
+			var d = (p - p1).dot(perp)
+			
+			collision_shape.disabled = sign(d) == 1
+		else:
+			collision_shape.disabled = false

@@ -48,7 +48,8 @@ func _update(delta):
 		else:
 			move_direction = -1
 	
-	character.velocity.y = 350
+	if character.left_check.is_colliding() and character.right_check.is_colliding():
+		character.velocity.y = 550
 	if character.is_grounded() and move_direction != 0:
 		temp_speed += 2
 		stop_buffer = 0.5

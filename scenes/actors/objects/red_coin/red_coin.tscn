@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/actors/objects/red_coin/red.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/actors/objects/red_coin/sound.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/actors/objects/red_coin/red_coin.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/red_coin/sound_last.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://scenes/actors/objects/red_coin/glow_effects.tscn" type="PackedScene" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="DynamicFont" id=2]
+outline_size = 2
+font_data = ExtResource( 5 )
+
+[node name="Coin" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+frame = 2
+playing = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = 5.5
+
+[node name="LastCollect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -9.0
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+process_parent = true
+physics_process_parent = true
+
+[node name="Label" type="Label" parent="."]
+visible = false
+margin_left = -12.0
+margin_top = -12.0
+margin_right = 12.0
+margin_bottom = 12.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GlowEffects" parent="." instance=ExtResource( 6 )]

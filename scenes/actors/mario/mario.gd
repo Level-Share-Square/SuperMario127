@@ -17,7 +17,6 @@ export var cutout_circle : StreamTexture
 
 # Basic Physics
 export var initial_position := Vector2(0, 0)
-export var bottom_pos := Vector2(0, 0)
 export var velocity := Vector2(0, 0)
 var last_velocity := Vector2(0, 0)
 
@@ -157,6 +156,10 @@ onready var particles = $Particles2D
 onready var slide_particles = $SlideParticles
 onready var gp_particles1 = $GPParticles1
 onready var gp_particles2 = $GPParticles2
+onready var platform_detector = $PlatformDetector
+onready var bottom_pos = $BottomPos
+export var bottom_pos_offset : Vector2
+export var bottom_pos_dive_offset : Vector2
 
 var level_size = Vector2(80, 30)
 var number_of_players = 2
@@ -193,8 +196,11 @@ func exploded(explosion_pos : Vector2):
 		
 func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String = "hit", frames : int = 180):
 	if !invulnerable:
-		velocity.x = (global_position - hit_pos).normalized().x * 205
-		velocity.y = -175
+		var direction = 1
+		if (global_position - hit_pos).normalized().x < 0:
+			direction = -1
+		velocity.x = direction * 235
+		velocity.y = -225
 		set_state_by_name("KnockbackState", 0)
 		damage(amount, cause, frames)
 
@@ -371,6 +377,14 @@ func heal(shards : int = 1):
 		health_shards = health_shards % 5
 
 func _physics_process(delta: float):
+	bottom_pos.position = bottom_pos_offset
+	if !dive_collision_shape.disabled:
+		bottom_pos.position = bottom_pos_dive_offset
+	var is_in_platform = false
+	for body in platform_detector.get_overlapping_areas():
+		if body.has_method("is_platform_area"):
+			is_in_platform = body.is_platform_area()
+	
 	if invulnerable_frames > 0:
 		invulnerable_frames -= 1
 		invulnerable = true
@@ -383,14 +397,15 @@ func _physics_process(delta: float):
 	if movable and (state == null or !state.override_rotation) and (!is_instance_valid(nozzle) or !nozzle.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
 		
 		var sprite_rotation = 0
+		var sprite_offset = Vector2()
 		if is_grounded():
 			var normal = ground_check.get_collision_normal()	
-			slope_stop_check.cast_to = Vector2(40 if normal.x < 0 else -40, slope_stop_check.cast_to.y)	
-			if slope_stop_check.is_colliding():
-				sprite_rotation = atan2(normal.y, normal.x) + (PI/2)
+			sprite_rotation = atan2(normal.y, normal.x) + (PI/2)
+			sprite_offset = Vector2(rad2deg(sprite_rotation) / 10, -abs(rad2deg(sprite_rotation) / 10))
 			
 		if is_grounded():
 			velocity.y += abs(sprite_rotation) * 100 # this is required to keep mario from falling off slopes
+		sprite.offset = sprite.offset.linear_interpolate(sprite_offset, delta * rotation_interpolation_speed)
 		sprite.rotation = lerp_angle(sprite.rotation, sprite_rotation, delta * rotation_interpolation_speed)
 		sprite.rotation_degrees = wrapf(sprite.rotation_degrees, -180, 180)
 			
@@ -535,6 +550,8 @@ func _physics_process(delta: float):
 				snap = Vector2(0, 20)
 		else:
 			snap = Vector2()
+	if is_in_platform:
+		snap = Vector2()
 			
 	if inputs[8][1] and CurrentLevelData.level_data.vars.nozzles_collected.size() > 1:
 		nozzles_list_index += 1

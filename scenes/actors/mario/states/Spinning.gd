@@ -8,17 +8,18 @@ var old_gravity_scale = 1
 var can_boost = true
 var cooldown_timer = 0
 var spin_timer = 0
+var attack_timer = 0
 
 func _ready():
 	priority = 2
 	disable_animation = true
+	blacklisted_states = ["GetupState"]
 
 func _start_check(_delta):
 	return spin_timer > 0 and (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2 and !character.test_move(character.transform, Vector2(8, 0)) and !character.test_move(character.transform, Vector2(-8, 0))
 
 func _start(_delta):
 	character.sprite.speed_scale = 1
-	character.sound_player.play_spin_sound()
 	if can_boost == true and !character.is_grounded() and (character.state != character.get_state_node("Jump") or character.current_jump == 1):
 		can_boost = false
 		cooldown_timer = 0.5
@@ -31,7 +32,6 @@ func _start(_delta):
 				character.velocity.y -= boost_power/2
 	old_gravity_scale = character.gravity_scale
 	character.gravity_scale = gravity_scale
-	character.attacking = true
 	
 func _update(_delta):
 	var sprite = character.animated_sprite
@@ -70,7 +70,18 @@ func _general_update(delta):
 			spin_timer = 0
 	if character.inputs[4][0]:
 		spin_timer = 0.15
+		
+		if character.inputs[4][1] and !is_in_blacklisted_state() and (character.state == null or character.state.priority <= priority):
+			attack_timer = 0.75
+			character.attacking = true
+			character.sound_player.play_spin_sound()
 	if character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0)):
 		spin_timer = 0
 	if character.is_grounded():
 		can_boost = true
+		
+	if attack_timer > 0:
+		attack_timer -= delta
+		if attack_timer <= 0:
+			attack_timer = 0
+			character.attacking = false

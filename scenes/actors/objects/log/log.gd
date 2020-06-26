@@ -2,6 +2,7 @@ extends GameObject
 
 onready var area = $Area2D
 onready var fall_detector = $FallDetector
+onready var static_body = $StaticBody2D
 onready var collision_shape = $StaticBody2D/CollisionShape2D
 onready var tween = $Tween
 onready var sprite = $Sprite
@@ -35,15 +36,11 @@ func _ready():
 		var _connect = area.connect("body_entered", self, "enter_area")
 		var _connect2 = area.connect("body_exited", self, "exit_area")
 		
-		var _connect3 = fall_detector.connect("body_entered", self, "fall_detector")
-		
 func fall_detector(body):
 	if character and enabled:
 		var can_fall = false
-		var direction = transform.y.normalized()
-		if character.velocity.y > -10 and direction.y > 0:
-			can_fall = true
-		if character.velocity.y < 10 and direction.y < 0:
+		var direction = static_body.global_transform.y.normalized()
+		if character.velocity.y >= -10:
 			can_fall = true
 			
 		if body.name.begins_with("Character") and fall_on_touch and !falling and can_fall and !shaking:
@@ -60,6 +57,9 @@ func exit_area(body):
 		character = null
 
 func _physics_process(delta):
+	for body in fall_detector.get_overlapping_bodies():
+		fall_detector(body)
+	
 	if shaking:
 		time_shaking += delta
 		sprite.offset = Vector2(
@@ -89,21 +89,18 @@ func _physics_process(delta):
 			tween.start()
 		
 	if character != null and !falling and enabled:
-		var direction = transform.y.normalized()
-		var line_center = position + (direction * buffer)
-		var line_direction = Vector2(-direction.y, direction.x)
-		var p1 = line_center + line_direction
-		var p2 = line_center - line_direction
-		var p = character.position
-		var diff = p2 - p1
-		var perp = Vector2(-diff.y, diff.x)
-		var d = (p - p1).dot(perp)
+		var direction = static_body.global_transform.y.normalized()
 		
-		collision_shape.disabled = sign(d) == 1
-		
-		if character.velocity.y < -10 and direction.y > 0.5:
-			collision_shape.disabled = true
-		if character.velocity.y > 10 and direction.y < -0.5:
-			collision_shape.disabled = true
-		if character.heavy:
-			collision_shape.disabled = true
+		if direction.y > 0.5:
+			var line_center = static_body.global_position + (direction * buffer)
+			var line_direction = Vector2(-direction.y, direction.x)
+			var p1 = line_center + line_direction
+			var p2 = line_center - line_direction
+			var p = character.bottom_pos.global_position
+			var diff = p2 - p1
+			var perp = Vector2(-diff.y, diff.x)
+			var d = (p - p1).dot(perp)
+			
+			collision_shape.disabled = sign(d) == 1
+		else:
+			collision_shape.disabled = false

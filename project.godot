@@ -453,7 +453,6 @@ FocusCheck="*res://scenes/player/focus_check.gd"
 EditorSavedSettings="*res://scenes/editor/editor_saved_settings.gd"
 PhotoMode="*res://scenes/actors/photo_mode/photo_mode.gd"
 ActionManager="*res://scenes/editor/action_manager.gd"
-WindowSize="*res://scenes/shared/window_size.gd"
 SceneManager="*res://scenes/shared/scene_manager.gd"
 MiscCache="*res://scenes/shared/misc_cache.gd"
 

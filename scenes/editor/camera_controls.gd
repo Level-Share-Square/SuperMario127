@@ -75,13 +75,9 @@ func _physics_process(delta):
 
 	var editor = get_tree().get_current_scene()
 	var zoom_level = editor.zoom_level
-	#zoom = zoom.linear_interpolate(Vector2(zoom_level, zoom_level), delta * lerp_speed)
+	zoom = zoom.linear_interpolate(Vector2(zoom_level, zoom_level), delta * lerp_speed)
 	limit_top = -70 * zoom_level
 
 func _ready():
 	get_tree().get_root().connect("size_changed", self, "resize")
 	default_height = get_viewport_rect().size.y
-	
-func resize():
-	var new_zoom = default_height/get_viewport_rect().size.y
-	set_zoom(Vector2(new_zoom, new_zoom))

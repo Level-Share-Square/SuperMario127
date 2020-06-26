@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sound_last.wav-50fe1b9552e8f8108f739ed372330e1a.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/red_coin/sound_last.wav"
+dest_files=[ "res://.import/sound_last.wav-50fe1b9552e8f8108f739ed372330e1a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
