@@ -2601,7 +2601,7 @@ preview = ExtResource( 6 )
 
 [node name="SampleObject" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
-object_id = 30
+object_id = 31
 is_object = true
 object_center = Vector2( 16, 16 )
 change_to = "SampleObject"

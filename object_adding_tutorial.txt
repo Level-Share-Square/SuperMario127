@@ -1,0 +1,85 @@
+How to Add an Object
+
+This tutorial will walk you through on how to create a sample object.
+
+First of all, create a folder with the name of your object in scenes/actors/objects. 
+This is where all data related to your object will be stored.
+
+Create a new scene with the root as a Node2D, and save it in your object's folder.
+The filename of this scene needs to be the same as the folder.
+
+Add all the nodes you'll be needing for your object into this scene, then create a script and attach it to the root node of the scene.
+
+Change the "extends Node2D" at the top, so it says "extends GameObject". 
+This will give your object all the default properties needed for an object, so you don't have to rewrite them every time.
+
+ADDING EXTRA PROPERTIES
+---------------------------------------------------------------------------------------------
+For each extra editable property you want to add, initialize variables with the same name as the property. (These should be in snake_case)
+Then, add 2 functions: "_set_properties()", and "_set_property_values()". These are going to be used for making your property editable in the editor.
+
+In "_set_properties()", add
+{
+savable_properties = ["property1", "property2"]
+editable_properties = ["property1", "property2"]
+}
+For each property, the variable name should be added in both the arrays as a string value.
+
+In "_set_property_values()", add
+{
+set_property("property1", property1)
+set_property("property2", property2)
+}
+Each property should be a new line of code.
+---------------------------------------------------------------------------------------------
+
+Once you are done coding your object, you'll need to add it ingame.
+First off, go to scenes/actors/objects/ids.tres and add the name of your object folder at the end of the array. (Remember the ID here)
+Then, go to scenes/editor/editor.tscn and find the node "PlaceableItems". This is where you will configure your item.
+
+Duplicate a node inside "PlaceableItems", this will be used as a template. Rename this to the name of your object, in PascalCase.
+Change "Object ID" to the ID of your object, and make sure "Is Object" is checked.
+
+Set the icon and preview to whatever you want to use, icon is what shows up in the box, preview is what shows up when placing.
+Set "Change To" to the object you'd like it to change to when double clicked. If there is more than 1 item in this sequence, 
+set "Items In Sequence" to the amount of objects, and set "Index In Sequence" to the place your object is in the sequence.
+
+Now you're almost done, last thing you need to do is make the object placeable in the editor.
+Go to scenes/editor/groups and pick a group you think will be fitting for the object. 
+At the end of the group's array, add your object's name (the one in PascalCase)
+And you're done! Test out the game and try placing your object.
+
+
+GAMEOBJECT CLASS
+---------------------------------------------------------------------------------------------
+Here are some simple explanations of some of the properties and functions in this class:
+
+"mode": This variable is set based on whether or not you are in the editor. 
+If you are currently in play mode, this value will be 0. If you are in edit mode, this value will be 1.
+
+"level_object": This is the object data that will be stored in the level code. 
+Generally, you do not need to edit this, as properties will be set automatically.
+
+"enabled": This is a base property that determines whether or not your object has functionality.
+Generally, this should make an object behave like it's in the editor.
+
+"preview_position": This determines the position your object will be at in the properties window.
+
+"savable_properties": These determine the properties that get saved to the level code.
+This list is appended on top of "base_savable_properties".
+
+"editable_properties": These determine the properties that can be edited in the properties window. 
+Generally, this should be the same as savable_properties.
+
+"set_property(key, value)": Use this function to change properties in the level data.
+"key" is the name of the property you want to change. "value" is the value you want to set it to.
+
+"_set_properties()": If you want to add new properties, 
+overwrite this function to set "savable_properties" and "editable_properties"
+
+"_set_property_values()" Again, if you want to add new properties,
+this function should be overwritten to call "set_property(k, v)" for every new property you want to add.
+//
+Generally, the structure should be "set_property("property_name", property_variable)". 
+Also, the name of the variable should be the same as the property name.
+--------------------------------------------------------------------------------------------
