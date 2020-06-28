@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/shine/shine_effects.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/actors/objects/shine/collect.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/actors/objects/shine/ghost.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/shine/appear.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/actors/objects/shine/ambient.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 6 )
@@ -83,6 +84,10 @@ stream = ExtResource( 4 )
 [node name="AppearSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -8.0
+
+[node name="AmbientSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -16.0
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 process_parent = true

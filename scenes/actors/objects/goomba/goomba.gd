@@ -24,6 +24,9 @@ onready var poof_sound = $Goomba/Disappear
 onready var hit_sound = $Goomba/Hit
 onready var anim_player = $Goomba/AnimationPlayer
 onready var visibility_notifier = $Goomba/VisibilityNotifier2D
+onready var platform_detector = $Goomba/PlatformDetector
+onready var bottom_pos = $Goomba/BottomPos
+onready var raycasts = [grounded_check, grounded_check_2, wall_check, wall_vacant_check, pit_check]
 var dead = false
 
 var gravity : float
@@ -69,6 +72,7 @@ func detect_player(body):
 			jump()
 
 func _ready():
+	sprite.playing = true
 	player_detector.connect("body_entered", self, "detect_player")
 	CurrentLevelData.enemies_instanced += 1
 	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
@@ -136,6 +140,17 @@ func _physics_process(delta):
 		loaded = true
 	
 	if mode != 1 and enabled and loaded:
+		var is_in_platform = false
+		var platform_collision_enabled = false
+		for platform_body in platform_detector.get_overlapping_areas():
+			if platform_body.has_method("is_platform_area"):
+				if platform_body.is_platform_area():
+					is_in_platform = true
+				if platform_body.get_parent().can_collide_with(body):
+					platform_collision_enabled = true
+		body.set_collision_mask_bit(4, platform_collision_enabled)
+		for raycast in raycasts:
+			raycast.set_collision_mask_bit(4, platform_collision_enabled)
 		if !hit:
 			if is_instance_valid(body):
 				var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
@@ -177,7 +192,10 @@ func _physics_process(delta):
 						sprite.animation = "jump"
 					snap = Vector2(0, 0)
 				else:
-					snap = Vector2(0, 12)
+					if !is_in_platform:
+						snap = Vector2(0, 12)
+					else:
+						snap = Vector2(0, 0)
 
 					velocity.y = 0
 					if is_instance_valid(character):
@@ -280,6 +298,9 @@ func _physics_process(delta):
 							normal = 1
 						velocity.x = lerp(velocity.x, 225 * normal, delta)
 					
-					snap = Vector2(0, 12)
+					if is_in_platform:
+						snap = Vector2(0, 0)
+					else:
+						snap = Vector2(0, 12)
 				else:
 					snap = Vector2(0, 0)

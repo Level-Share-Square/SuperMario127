@@ -5,6 +5,7 @@ onready var animated_sprite = $AnimatedSprite
 onready var ghost = $Ghost
 onready var area = $Area2D
 onready var sound = $CollectSound
+onready var ambient_sound = $AmbientSound
 onready var animation_player = $AnimationPlayer
 var collected = false
 var character
@@ -48,27 +49,32 @@ func _ready():
 		var _connect = area.connect("body_entered", self, "collect")
 
 func _physics_process(delta):
-	if activate_on == 1 and !activated:
-		if CurrentLevelData.level_data.vars.red_coins_collected == CurrentLevelData.level_data.vars.max_red_coins:
-			activated = true
-			animation_player.play("appear")
-			var camera = get_tree().get_current_scene().get_node(get_tree().get_current_scene().camera)
-			camera.focus_on = self
-			pause_mode = PAUSE_MODE_PROCESS
-			get_tree().paused = true
-			unpause_timer = 3.5
-	
-	if !animated_sprite.playing:
-		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
-	if !collected:
-		if !activated:
-			ghost.visible = true
-			animated_sprite.visible = false
-			effects.visible = false
-		else:
-			ghost.visible = false
-			animated_sprite.visible = true
-			effects.visible = true
+	if mode != 1:
+		var camera = get_tree().get_current_scene().get_node(get_tree().get_current_scene().camera)
+		if activate_on == 1 and !activated:
+			if CurrentLevelData.level_data.vars.red_coins_collected == CurrentLevelData.level_data.vars.max_red_coins:
+				activated = true
+				animation_player.play("appear")
+				camera.focus_on = self
+				pause_mode = PAUSE_MODE_PROCESS
+				get_tree().paused = true
+				unpause_timer = 3.5
+		
+		if !animated_sprite.playing:
+			animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
+		if !collected:
+			if !activated:
+				ambient_sound.playing = false
+				ghost.visible = true
+				animated_sprite.visible = false
+				effects.visible = false
+			else:
+				if !ambient_sound.playing:
+					ambient_sound.playing = true
+				ghost.visible = false
+				animated_sprite.visible = true
+				effects.visible = true
+		ambient_sound.volume_db = -16 + -abs(camera.global_position.distance_to(global_position)/25)
 	effects.rotation_degrees = (OS.get_ticks_msec()/16) % 360
 	effects.position = animated_sprite.offset + Vector2(0, 2)
 	if collected:
