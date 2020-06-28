@@ -6,7 +6,7 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 6 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.302469 )
-colors = PoolColorArray( 1, 0.862745, 0.541176, 0.25098, 1, 0.796078, 0, 0 )
+colors = PoolColorArray( 1, 0.647059, 0.231373, 0.25098, 1, 0.796078, 0, 0 )
 
 [node name="ShineEffects" type="Node2D"]
 position = Vector2( 0, 2 )

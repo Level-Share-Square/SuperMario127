@@ -912,6 +912,7 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="CameraP1" type="Camera2D" parent="Viewports/ViewportContainer/Viewport"]
+pause_mode = 2
 position = Vector2( 0, -80 )
 rotating = true
 current = true
@@ -968,6 +969,7 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="CameraP2" type="Camera2D" parent="Viewports/ViewportContainer2/Viewport"]
+pause_mode = 2
 position = Vector2( 0, -80 )
 rotating = true
 current = true
