@@ -13,7 +13,7 @@ func _physics_process(delta):
 		zoom = zoom.linear_interpolate(Vector2(focus_zoom, focus_zoom), delta * 3)
 		unfocusing = true
 	elif character_node != null:
-		if !character_node.dead:
+		if !character_node.dead and !get_tree().paused:
 			if unfocusing:
 				position = position.linear_interpolate(character_node.global_position, delta * 3)
 				if abs(position.distance_to(character_node.global_position)) < 15:
