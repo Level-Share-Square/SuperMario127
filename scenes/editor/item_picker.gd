@@ -40,12 +40,6 @@ func mouse_exited():
 	
 func pressed():
 	close()
-	
-func _physics_process(_delta):
-	if Input.is_action_pressed("ui_right") and visible and hovered:
-		scroll_container.scroll_horizontal += 5
-	if Input.is_action_pressed("ui_left") and visible and hovered:
-		scroll_container.scroll_horizontal -= 5
 		
 func _ready():
 	var _connect = close_button.connect("pressed", self, "pressed")

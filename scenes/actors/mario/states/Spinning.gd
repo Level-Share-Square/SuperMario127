@@ -32,6 +32,7 @@ func _start(_delta):
 				character.velocity.y -= boost_power/2
 	old_gravity_scale = character.gravity_scale
 	character.gravity_scale = gravity_scale
+	character.attacking = true
 	
 func _update(_delta):
 	var sprite = character.animated_sprite
@@ -72,8 +73,6 @@ func _general_update(delta):
 		spin_timer = 0.15
 		
 		if character.inputs[4][1] and !is_in_blacklisted_state() and (character.state == null or character.state.priority <= priority):
-			attack_timer = 0.75
-			character.attacking = true
 			character.sound_player.play_spin_sound()
 	if character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0)):
 		spin_timer = 0

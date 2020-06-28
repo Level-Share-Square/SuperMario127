@@ -54,7 +54,7 @@ func get_property_index(key) -> int:
 		index += 1
 	return index
 
-func set_property(key, value, change_level_object):
+func set_property(key, value, change_level_object = true):
 	self[key] = value
 	if change_level_object and is_savable_property(key):
 		var level_object_ref = level_object.get_ref()
