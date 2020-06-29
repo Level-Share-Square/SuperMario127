@@ -158,7 +158,6 @@ onready var gp_particles1 = $GPParticles1
 onready var gp_particles2 = $GPParticles2
 onready var platform_detector = $PlatformDetector
 onready var bottom_pos = $BottomPos
-onready var raycasts = [ground_check, ground_check_dive, left_check, right_check, slope_stop_check]
 export var bottom_pos_offset : Vector2
 export var bottom_pos_dive_offset : Vector2
 
@@ -382,16 +381,9 @@ func _physics_process(delta: float):
 	if !dive_collision_shape.disabled:
 		bottom_pos.position = bottom_pos_dive_offset
 	var is_in_platform = false
-	var platform_collision_enabled = false
 	for body in platform_detector.get_overlapping_areas():
 		if body.has_method("is_platform_area"):
-			if body.is_platform_area():
-				is_in_platform = true
-			if body.get_parent().can_collide_with(self):
-				platform_collision_enabled = true
-	set_collision_mask_bit(4, platform_collision_enabled)
-	for raycast in raycasts:
-		raycast.set_collision_mask_bit(4, platform_collision_enabled)
+			is_in_platform = body.is_platform_area()
 	
 	if invulnerable_frames > 0:
 		invulnerable_frames -= 1

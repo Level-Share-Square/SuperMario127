@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sm64_breaking_box.wav-35b1759035c56b10d25992c3b624a12b.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/breakable_block/sm64_breaking_box.wav"
+dest_files=[ "res://.import/sm64_breaking_box.wav-35b1759035c56b10d25992c3b624a12b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

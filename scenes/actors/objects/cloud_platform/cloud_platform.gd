@@ -53,19 +53,29 @@ func update_parts():
 	
 	position.x = -(left_width + (part_width * parts) + right_width) / 2
 	
-func can_collide_with(character):
-	var direction = body.global_transform.y.normalized()
-	
-	if direction.y > 0.5:
-		var line_center = body.global_position + (direction * buffer)
-		var line_direction = Vector2(-direction.y, direction.x)
-		var p1 = line_center + line_direction
-		var p2 = line_center - line_direction
-		var p = character.bottom_pos.global_position
-		var diff = p2 - p1
-		var perp = Vector2(-diff.y, diff.x)
-		var d = (p - p1).dot(perp)
+
+func enter_area(body):
+	if body.name.begins_with("Character"):
+		character = body
 		
-		return sign(d) != 1
-	else:
-		return true
+func exit_area(body):
+	if body == character:
+		character = null
+		
+func _process(_delta):
+	if character != null:
+		var direction = body.global_transform.y.normalized()
+		
+		if direction.y > 0.5:
+			var line_center = body.global_position + (direction * buffer)
+			var line_direction = Vector2(-direction.y, direction.x)
+			var p1 = line_center + line_direction
+			var p2 = line_center - line_direction
+			var p = character.bottom_pos.global_position
+			var diff = p2 - p1
+			var perp = Vector2(-diff.y, diff.x)
+			var d = (p - p1).dot(perp)
+			
+			collision_shape.disabled = sign(d) == 1
+		else:
+			collision_shape.disabled = false

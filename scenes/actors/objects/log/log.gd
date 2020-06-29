@@ -27,9 +27,6 @@ func _set_properties():
 	
 func _set_property_values():
 	set_property("fall_on_touch", fall_on_touch, true)
-	
-func can_collide_with(character):
-	return true
 
 func _ready():
 	if !enabled:
@@ -43,7 +40,7 @@ func fall_detector(body):
 	if character and enabled:
 		var can_fall = false
 		var direction = static_body.global_transform.y.normalized()
-		if character.velocity.y >= 0 and character.is_grounded():
+		if character.velocity.y >= -10:
 			can_fall = true
 			
 		if body.name.begins_with("Character") and fall_on_touch and !falling and can_fall and !shaking:

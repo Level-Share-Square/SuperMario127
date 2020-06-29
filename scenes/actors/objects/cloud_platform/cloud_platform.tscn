@@ -38,7 +38,6 @@ centered = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="CloudPlatform"]
 position = Vector2( 0, 3 )
-collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CloudPlatform/StaticBody2D"]
 position = Vector2( 32, 0 )
@@ -46,7 +45,6 @@ shape = SubResource( 1 )
 one_way_collision = true
 
 [node name="Area2D" type="Area2D" parent="CloudPlatform"]
-collision_layer = 16
 collision_mask = 2
 script = ExtResource( 6 )
 

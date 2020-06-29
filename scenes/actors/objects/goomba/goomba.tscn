@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/actors/objects/goomba/goomba.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/goomba/frames.tres" type="SpriteFrames" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://scenes/actors/objects/goomba/poof.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/goomba/poof.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/actors/objects/goomba/stomp.wav" type="AudioStream" id=6]
-[ext_resource path="res://scenes/actors/objects/goomba/body.gd" type="Script" id=7]
 
 [sub_resource type="RayShape2D" id=1]
 length = 10.0
@@ -26,23 +25,21 @@ extents = Vector2( 14, 7 )
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 208.896, 69.015 )
 
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 32, 32 )
-
-[sub_resource type="CanvasItemMaterial" id=8]
+[sub_resource type="CanvasItemMaterial" id=7]
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="ParticlesMaterial" id=9]
+[sub_resource type="ParticlesMaterial" id=8]
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 anim_speed = 1.0
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
+resource_name = "Stomped"
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:animation")
@@ -112,11 +109,11 @@ top_point = Vector2( 0, -9 )
 
 [node name="Goomba" type="KinematicBody2D" parent="."]
 collision_layer = 4
-collision_mask = 21
-script = ExtResource( 7 )
+collision_mask = 5
 
 [node name="Sprite" type="AnimatedSprite" parent="Goomba"]
 frames = ExtResource( 2 )
+playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba"]
 visible = false
@@ -140,11 +137,11 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba/AttackArea"]
+visible = false
 position = Vector2( 0, 8 )
 shape = SubResource( 3 )
 
 [node name="StompArea" type="Area2D" parent="Goomba"]
-visible = false
 position = Vector2( 0, -7 )
 collision_layer = 4
 collision_mask = 2
@@ -172,14 +169,6 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba/PlayerDetector"]
 shape = SubResource( 6 )
 
-[node name="PlatformDetector" type="Area2D" parent="Goomba"]
-visible = false
-collision_layer = 4
-collision_mask = 17
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba/PlatformDetector"]
-shape = SubResource( 7 )
-
 [node name="Stomp" type="AudioStreamPlayer" parent="Goomba"]
 stream = ExtResource( 6 )
 volume_db = -3.0
@@ -197,50 +186,49 @@ visible = false
 position = Vector2( -8, 3 )
 enabled = true
 cast_to = Vector2( 0, 6 )
-collision_mask = 17
 
 [node name="GroundedCheck2" type="RayCast2D" parent="Goomba"]
 visible = false
 position = Vector2( 8, 3 )
 enabled = true
 cast_to = Vector2( 0, 6 )
-collision_mask = 17
 
 [node name="WallCheck" type="RayCast2D" parent="Goomba"]
 visible = false
 position = Vector2( 0, -3 )
 enabled = true
 cast_to = Vector2( -32, 0 )
-collision_mask = 17
 
 [node name="WallVacantCheck" type="RayCast2D" parent="Goomba"]
 visible = false
 position = Vector2( 0, -39 )
 enabled = true
 cast_to = Vector2( -64, 0 )
-collision_mask = 17
 
 [node name="PitCheck" type="RayCast2D" parent="Goomba"]
 visible = false
 position = Vector2( -32, 3 )
 enabled = true
 cast_to = Vector2( 0, 40 )
-collision_mask = 17
 
 [node name="Poof" type="Particles2D" parent="Goomba"]
-material = SubResource( 8 )
+visible = false
+material = SubResource( 7 )
 emitting = false
 amount = 1
 lifetime = 0.35
 one_shot = true
-process_material = SubResource( 9 )
+process_material = SubResource( 8 )
 texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Goomba"]
-anims/Stomped = SubResource( 10 )
+anims/Stomped = SubResource( 9 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Goomba"]
+visible = false
 rect = Rect2( -200, -200, 400, 400 )
 
-[node name="BottomPos" type="Node2D" parent="Goomba"]
-position = Vector2( 0, 5 )
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+rect = Rect2( -200, -200, 400, 400 )
+pause_particles = false

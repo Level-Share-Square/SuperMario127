@@ -155,21 +155,18 @@ bottom_pos_offset = Vector2( 0, 20 )
 bottom_pos_dive_offset = Vector2( 0, 3 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0.5, -4 )
 z_index = 2
 shape = SubResource( 1 )
 
 [node name="CollisionDive" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, -7 )
 z_index = 2
 shape = SubResource( 4 )
 disabled = true
 
 [node name="GroundCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, 0 )
 z_index = 1
 shape = SubResource( 5 )
@@ -177,7 +174,6 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="LeftCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, 8 )
 rotation = -1.5708
 shape = SubResource( 6 )
@@ -185,7 +181,6 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="RightCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, 8 )
 rotation = 1.5708
 shape = SubResource( 6 )
@@ -193,7 +188,6 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="GroundCollisionDive" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, -6 )
 z_index = 2
 shape = SubResource( 7 )
@@ -210,7 +204,6 @@ animation = "jumpLeft"
 playing = true
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]
-visible = false
 show_behind_parent = true
 position = Vector2( -7, -6 )
 rotation = -0.00178115
@@ -221,7 +214,6 @@ playing = true
 centered = false
 
 [node name="Water" type="AnimatedSprite" parent="Sprite"]
-visible = false
 position = Vector2( -2, -4 )
 rotation = -0.00178115
 frames = ExtResource( 24 )
@@ -299,9 +291,9 @@ shape = SubResource( 8 )
 
 [node name="PlatformDetector" type="Area2D" parent="."]
 collision_layer = 2
-collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformDetector"]
+visible = false
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0.5, 4 )
 shape = SubResource( 9 )
@@ -316,38 +308,29 @@ range_item_cull_mask = 524288
 shadow_item_cull_mask = 524288
 
 [node name="GroundCheck" type="RayCast2D" parent="."]
-visible = false
 position = Vector2( 0.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 26 )
-collision_mask = 17
 
 [node name="GroundCheckDive" type="RayCast2D" parent="."]
-visible = false
 position = Vector2( 0.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 7.5 )
-collision_mask = 17
 
 [node name="LeftCheck" type="RayCast2D" parent="."]
-visible = false
 position = Vector2( -8, 0 )
 enabled = true
 cast_to = Vector2( 0, 32 )
-collision_mask = 17
 
 [node name="RightCheck" type="RayCast2D" parent="."]
-visible = false
 position = Vector2( 8.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 32 )
-collision_mask = 17
 
 [node name="SlopeStopCheck" type="RayCast2D" parent="."]
 position = Vector2( 0, 6 )
 enabled = true
 cast_to = Vector2( 36, 0 )
-collision_mask = 17
 
 [node name="Nozzles" type="Node" parent="."]
 

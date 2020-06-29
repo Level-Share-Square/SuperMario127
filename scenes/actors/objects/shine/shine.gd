@@ -2,11 +2,8 @@ extends GameObject
 
 onready var effects = $ShineEffects
 onready var animated_sprite = $AnimatedSprite
-onready var ghost = $Ghost
 onready var area = $Area2D
 onready var sound = $CollectSound
-onready var ambient_sound = $AmbientSound
-onready var animation_player = $AnimationPlayer
 var collected = false
 var character
 
@@ -18,7 +15,8 @@ var show_in_menu := false
 var activated := true
 var activate_on := 0
 
-var unpause_timer = 0.0
+onready var normal_frames = preload("res://scenes/actors/objects/shine/frames_normal.tres")
+onready var deactivated_frames = preload("res://scenes/actors/objects/shine/frames_deactivated.tres")
 
 func _set_properties():
 	savable_properties = ["title", "description", "show_in_menu", "activated", "activate_on"]
@@ -48,46 +46,23 @@ func _ready():
 			activated = false
 		var _connect = area.connect("body_entered", self, "collect")
 
-func _physics_process(delta):
-	if mode != 1:
-		var camera = get_tree().get_current_scene().get_node(get_tree().get_current_scene().camera)
-		if activate_on == 1 and !activated:
-			if CurrentLevelData.level_data.vars.red_coins_collected == CurrentLevelData.level_data.vars.max_red_coins:
-				activated = true
-				animation_player.play("appear")
-				camera.focus_on = self
-				pause_mode = PAUSE_MODE_PROCESS
-				get_tree().paused = true
-				unpause_timer = 3.5
-		
-		if !animated_sprite.playing:
-			animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
-		if !collected:
-			if !activated:
-				ambient_sound.playing = false
-				ghost.visible = true
-				animated_sprite.visible = false
-				effects.visible = false
-			else:
-				if !ambient_sound.playing:
-					ambient_sound.playing = true
-				ghost.visible = false
-				animated_sprite.visible = true
-				effects.visible = true
-		ambient_sound.volume_db = -16 + -abs(camera.global_position.distance_to(global_position)/25)
+func _physics_process(_delta):
+	if activate_on == 1 and !activated:
+		if CurrentLevelData.level_data.vars.red_coins_collected == CurrentLevelData.level_data.vars.max_red_coins:
+			activated = true
+	
+	animated_sprite.frame = (OS.get_ticks_msec() / anim_damp) % 4
+	if !collected:
+		if !activated:
+			animated_sprite.frame = 0
+			animated_sprite.frames = deactivated_frames
+			effects.visible = false
+		else:
+			animated_sprite.frames = normal_frames
+			effects.visible = true
 	effects.rotation_degrees = (OS.get_ticks_msec()/16) % 360
-	effects.position = animated_sprite.offset + Vector2(0, 2)
 	if collected:
 		var sprite = character.get_node("Sprite")
 		sprite.animation = "shineFall"
 		if character.is_grounded():
 			character.exit()
-			
-	if unpause_timer > 0:
-		unpause_timer -= delta
-		if unpause_timer <= 0:
-			unpause_timer = 0
-			var camera = get_tree().get_current_scene().get_node(get_tree().get_current_scene().camera)
-			camera.focus_on = null
-			get_tree().paused = false
-			pause_mode = PAUSE_MODE_INHERIT

@@ -1,69 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/shine/shine_effects.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/actors/objects/shine/shine.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/shine/collect.wav" type="AudioStream" id=4]
-[ext_resource path="res://scenes/actors/objects/shine/ghost.png" type="Texture" id=5]
-[ext_resource path="res://scenes/actors/objects/shine/appear.wav" type="AudioStream" id=6]
-[ext_resource path="res://scenes/actors/objects/shine/ambient.wav" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 6 )
-
-[sub_resource type="Animation" id=2]
-resource_name = "appear"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:speed_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.7, 1.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 1.0, 6.0, 6.0, 1.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedSprite:offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.7, 1.3, 1.9 ),
-"transitions": PoolRealArray( 1, 0.5, 2, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -64 ), Vector2( 0, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("AnimatedSprite:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 1.9 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-tracks/3/type = "audio"
-tracks/3/path = NodePath("AppearSound")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource( 6 )
-} ],
-"times": PoolRealArray( 0.6 )
-}
 
 [node name="Shine" type="Node2D"]
 script = ExtResource( 3 )
@@ -81,24 +24,10 @@ shape = SubResource( 1 )
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 
-[node name="AppearSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
-volume_db = -8.0
-
-[node name="AmbientSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-volume_db = -16.0
-
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 process_parent = true
+physics_process_parent = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-frame = 1
-
-[node name="Ghost" type="Sprite" parent="."]
-visible = false
-texture = ExtResource( 5 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/appear = SubResource( 2 )
+playing = true
