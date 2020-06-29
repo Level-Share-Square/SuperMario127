@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/break.wav-b61f61e65313e4884791a3b6f241f508.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/breakable_block/break.wav"
+dest_files=[ "res://.import/break.wav-b61f61e65313e4884791a3b6f241f508.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

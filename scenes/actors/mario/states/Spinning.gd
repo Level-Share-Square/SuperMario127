@@ -17,7 +17,7 @@ func _ready():
 	attack_tier = 1
 
 func _start_check(_delta):
-	return spin_timer > 0 and (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2 and !character.test_move(character.transform, Vector2(8, 0)) and !character.test_move(character.transform, Vector2(-8, 0))
+	return spin_timer > 0 and (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2
 
 func _start(_delta):
 	character.sprite.speed_scale = 1
@@ -54,7 +54,7 @@ func _stop(_delta):
 	priority = 2
 
 func _stop_check(_delta):
-	return spin_timer == 0 or character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0))
+	return spin_timer == 0
 	
 func _general_update(delta):
 	if cooldown_timer > 0:
@@ -73,8 +73,6 @@ func _general_update(delta):
 		
 		if character.inputs[4][1] and !is_in_blacklisted_state() and (character.state == null or character.state.priority <= priority):
 			character.sound_player.play_spin_sound()
-	if character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0)):
-		spin_timer = 0
 	if character.is_grounded():
 		can_boost = true
 		

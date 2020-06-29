@@ -1,4 +1,4 @@
-[gd_scene load_steps=188 format=2]
+[gd_scene load_steps=190 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -139,6 +139,8 @@
 [ext_resource path="res://assets/misc/icon.png" type="Texture" id=137]
 [ext_resource path="res://scenes/actors/objects/snow_platform/icon.png" type="Texture" id=138]
 [ext_resource path="res://scenes/actors/objects/snow_platform/2_wide.png" type="Texture" id=139]
+[ext_resource path="res://scenes/actors/objects/breakable_block/icon.png" type="Texture" id=140]
+[ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block.png" type="Texture" id=141]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 0.501961 )
@@ -2620,6 +2622,15 @@ object_center = Vector2( 16, 16 )
 change_to = "SampleObject"
 icon = ExtResource( 137 )
 preview = ExtResource( 137 )
+
+[node name="BreakableBlock" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 33
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "SampleObject"
+icon = ExtResource( 140 )
+preview = ExtResource( 141 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
