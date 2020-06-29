@@ -52,14 +52,14 @@ script = ExtResource( 8 )
 
 [node name="Sprite" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
 frames = ExtResource( 1 )
-frame = 6
+frame = 1
 playing = true
 
 [node name="Fuse" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
 visible = false
 position = Vector2( 0, -4 )
 frames = ExtResource( 4 )
-frame = 6
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
