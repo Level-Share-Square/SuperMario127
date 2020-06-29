@@ -12,6 +12,7 @@ onready var particles = $KinematicBody2D/Particles2D
 onready var damage_area = $KinematicBody2D/DamageArea
 onready var attack_area = $KinematicBody2D/AttackArea
 onready var grounded_check = $KinematicBody2D/RayCast2D
+onready var visibility_notifier = $KinematicBody2D/VisibilityNotifier2D
 onready var platform_detector = $KinematicBody2D/PlatformDetector
 onready var raycasts = [grounded_check]
 var dead = false
@@ -35,7 +36,7 @@ var facing_direction := -1
 var time_alive = 0.0
 
 var hit = false
-var loaded = true
+var loaded = false
 var snap := Vector2(0, 12)
 
 func _set_properties():
@@ -129,6 +130,9 @@ func _physics_process(delta):
 				hit_body.get_parent().exploded(body.global_position)
 		if damage_timer < 0:
 			damage_timer = 0
+			
+	if !loaded and visibility_notifier.is_on_screen():
+		loaded = true
 	
 	if mode != 1 and enabled and !dead and loaded:
 		if hit:

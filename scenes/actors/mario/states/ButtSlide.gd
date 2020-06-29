@@ -11,7 +11,6 @@ var temp_speed = move_speed
 
 func _ready():
 	priority = 4
-	attack_tier = 1
 	disable_turning = true
 	disable_movement = true
 	disable_animation = true
@@ -25,6 +24,7 @@ func _start_check(_delta):
 
 func _start(delta):
 	temp_speed = move_speed
+	character.attacking = true
 	character.sound_player.set_skid_playing(true)
 	stop_buffer = 0.5
 
@@ -71,6 +71,7 @@ func _update(delta):
 func _stop(delta):
 	character.sound_player.set_skid_playing(false)
 	character.slide_particles.emitting = false
+	character.attacking = false
 	
 func _stop_check(_delta):
 	return stop_buffer == 0
