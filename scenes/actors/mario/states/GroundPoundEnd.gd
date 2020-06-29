@@ -8,7 +8,6 @@ var particle_timer = 0
 
 func _ready():
 	priority = 4
-	attack_tier = 1
 	disable_turning = true
 	disable_animation = true
 	disable_movement = true
@@ -33,6 +32,7 @@ func _start(_delta):
 
 func _stop(delta):
 	particle_timer = 0
+	character.attacking = false
 	character.big_attack = false
 	character.heavy = false
 	if jump_timer > 0:

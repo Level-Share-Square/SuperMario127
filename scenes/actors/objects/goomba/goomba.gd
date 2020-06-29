@@ -23,6 +23,7 @@ onready var stomp_sound = $Goomba/Stomp
 onready var poof_sound = $Goomba/Disappear
 onready var hit_sound = $Goomba/Hit
 onready var anim_player = $Goomba/AnimationPlayer
+onready var visibility_notifier = $Goomba/VisibilityNotifier2D
 onready var platform_detector = $Goomba/PlatformDetector
 onready var bottom_pos = $Goomba/BottomPos
 onready var raycasts = [grounded_check, grounded_check_2, wall_check, wall_vacant_check, pit_check]
@@ -51,7 +52,7 @@ var was_stomped = false
 var was_ground_pound = false
 var bounced = false
 
-var loaded = true
+var loaded = false
 
 var character
 
@@ -134,6 +135,9 @@ func _process(delta):
 
 func _physics_process(delta):
 	time_alive += delta
+	
+	if !loaded and visibility_notifier.is_on_screen():
+		loaded = true
 	
 	if mode != 1 and enabled and loaded:
 		var is_in_platform = false

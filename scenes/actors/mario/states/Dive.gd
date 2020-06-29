@@ -12,7 +12,6 @@ var start_facing = 1
 
 func _ready():
 	priority = 3
-	attack_tier = 1
 	disable_turning = true
 	blacklisted_states = ["SlideState", "GetupState", "BackflipState"]
 	override_rotation = true
@@ -49,6 +48,7 @@ func _start(_delta):
 		character.velocity.x = maxVelocityX * character.facing_direction
 	character.jump_animation = 0
 	character.current_jump = 0
+	character.attacking = true
 
 func _update(delta):
 	var sprite = character.animated_sprite
@@ -83,6 +83,7 @@ func _stop(delta):
 		character.position.y -= 16
 		character.set_state_by_name("BonkedState", delta)
 		character.sound_player.play_bonk_sound()
+		character.attacking = false
 		sprite.rotation_degrees = 0
 	if character.is_grounded():
 		character.set_state_by_name("SlideState", delta)
@@ -93,6 +94,7 @@ func _stop(delta):
 		right_collision.disabled = false
 		dive_collision.disabled = true
 		dive_ground_collision.disabled = true
+		character.attacking = false
 		sprite.rotation_degrees = 0
 
 func _stop_check(_delta):

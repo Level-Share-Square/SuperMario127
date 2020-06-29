@@ -13,8 +13,6 @@ onready var damage_area = $KinematicBody2D/DamageArea
 onready var attack_area = $KinematicBody2D/AttackArea
 onready var grounded_check = $KinematicBody2D/RayCast2D
 onready var visibility_notifier = $KinematicBody2D/VisibilityNotifier2D
-onready var platform_detector = $KinematicBody2D/PlatformDetector
-onready var raycasts = [grounded_check]
 var dead = false
 var character
 var character_damage
@@ -97,18 +95,6 @@ func shell_hit(shell_pos : Vector2):
 	character = 0 # hacker chungus
 
 func _physics_process(delta):
-	var is_in_platform = false
-	var platform_collision_enabled = false
-	for platform_body in platform_detector.get_overlapping_areas():
-		if platform_body.has_method("is_platform_area"):
-			if platform_body.is_platform_area():
-				is_in_platform = true
-			if platform_body.get_parent().can_collide_with(body):
-				platform_collision_enabled = true
-	body.set_collision_mask_bit(4, platform_collision_enabled)
-	for raycast in raycasts:
-		raycast.set_collision_mask_bit(4, platform_collision_enabled)
-	
 	time_alive += delta
 	if delete_timer > 0 and dead:
 		delete_timer -= delta
@@ -142,7 +128,6 @@ func _physics_process(delta):
 				hit = false
 				
 		if !hit:
-			snap = Vector2(0, 12) if !is_in_platform else Vector2(0, 0)
 			for hit_body in attack_area.get_overlapping_bodies():
 				if hit_body.name.begins_with("Character"):
 					var character_attack = hit_body
