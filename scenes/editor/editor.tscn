@@ -1,4 +1,4 @@
-[gd_scene load_steps=186 format=2]
+[gd_scene load_steps=188 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -137,6 +137,8 @@
 [ext_resource path="res://assets/tiles/cave/icon_slab.png" type="Texture" id=135]
 [ext_resource path="res://scenes/actors/objects/red_coin/icon.png" type="Texture" id=136]
 [ext_resource path="res://assets/misc/icon.png" type="Texture" id=137]
+[ext_resource path="res://scenes/actors/objects/snow_platform/icon.png" type="Texture" id=138]
+[ext_resource path="res://scenes/actors/objects/snow_platform/2_wide.png" type="Texture" id=139]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 0.501961 )
@@ -2525,6 +2527,17 @@ z_index = -9
 change_to = "SnowTree"
 icon = ExtResource( 125 )
 preview = ExtResource( 124 )
+
+[node name="SnowPlatform" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 32
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+change_to = "SnowPlatform"
+icon = ExtResource( 138 )
+preview = ExtResource( 139 )
 
 [node name="BillBlaster" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
