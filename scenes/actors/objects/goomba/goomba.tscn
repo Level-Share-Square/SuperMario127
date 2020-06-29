@@ -239,8 +239,11 @@ texture = ExtResource( 4 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Goomba"]
 anims/Stomped = SubResource( 10 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Goomba"]
-rect = Rect2( -200, -200, 400, 400 )
-
 [node name="BottomPos" type="Node2D" parent="Goomba"]
 position = Vector2( 0, 5 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -300, -300, 600, 600 )
+pause_particles = false
+process_parent = true
+physics_process_parent = true

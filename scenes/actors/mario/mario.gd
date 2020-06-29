@@ -539,6 +539,16 @@ func _physics_process(delta: float):
 			nozzle_node.handle_update(delta)
 
 	if state != null:
+		if state.attack_tier > 1:
+			big_attack = true
+		else:
+			big_attack = false
+
+		if state.attack_tier > 0:
+			attacking = true
+		else:
+			attacking = false
+				
 		if state.disable_snap:
 			snap = Vector2()
 		elif (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
@@ -579,6 +589,8 @@ func _physics_process(delta: float):
 		water_sprite_2.flip_h = water_sprite.flip_h
 		water_sprite_2.animation = water_sprite.animation
 		water_sprite_2.frame = water_sprite_2.frame
+		if nozzle.activated:
+			attacking = true
 		if character == 0:
 			fludd_sprite.frames = nozzle.frames
 		else:
