@@ -10,6 +10,7 @@ var ledge_buffer = 0
 
 func _ready():
 	priority = 4
+	attack_tier = 1
 	disable_turning = true
 	disable_movement = true
 	disable_animation = true
@@ -58,6 +59,11 @@ func _update(delta):
 	else:
 		character.particles.emitting = false
 		
+	if abs(character.velocity.x) > 50:
+		attack_tier = 1
+	else:
+		attack_tier = 0
+		
 	if character.is_grounded() or is_crouch:
 		var lerp_speed = character.rotation_interpolation_speed
 		if is_crouch:
@@ -99,7 +105,6 @@ func change_to_getup(delta):
 	right_collision.disabled = false
 	dive_collision.disabled = true
 	dive_ground_collision.disabled = true
-	character.attacking = false
 	getup_buffer = 0
 	ledge_buffer = 0
 

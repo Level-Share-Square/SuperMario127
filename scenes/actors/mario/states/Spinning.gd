@@ -14,6 +14,7 @@ func _ready():
 	priority = 2
 	disable_animation = true
 	blacklisted_states = ["GetupState"]
+	attack_tier = 1
 
 func _start_check(_delta):
 	return spin_timer > 0 and (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2 and !character.test_move(character.transform, Vector2(8, 0)) and !character.test_move(character.transform, Vector2(-8, 0))
@@ -32,7 +33,6 @@ func _start(_delta):
 				character.velocity.y -= boost_power/2
 	old_gravity_scale = character.gravity_scale
 	character.gravity_scale = gravity_scale
-	character.attacking = true
 	
 func _update(_delta):
 	var sprite = character.animated_sprite
@@ -52,7 +52,6 @@ func _update(_delta):
 func _stop(_delta):
 	character.gravity_scale = old_gravity_scale
 	priority = 2
-	character.attacking = false
 
 func _stop_check(_delta):
 	return spin_timer == 0 or character.test_move(character.transform, Vector2(8, 0)) or character.test_move(character.transform, Vector2(-8, 0))

@@ -38,7 +38,6 @@ func _stop(_delta):
 	right_collision.disabled = false
 	dive_collision.disabled = true
 	dive_ground_collision.disabled = true
-	character.attacking = false
 	
 func _stop_check(_delta):
 	var sprite = character.animated_sprite

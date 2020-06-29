@@ -49,6 +49,8 @@ func _ready():
 		var _connect = area.connect("body_entered", self, "collect")
 
 func _physics_process(delta):
+	if !animated_sprite.playing:
+		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
 	if mode != 1:
 		var camera = get_tree().get_current_scene().get_node(get_tree().get_current_scene().camera)
 		if activate_on == 1 and !activated:
@@ -58,10 +60,7 @@ func _physics_process(delta):
 				camera.focus_on = self
 				pause_mode = PAUSE_MODE_PROCESS
 				get_tree().paused = true
-				unpause_timer = 3.5
-		
-		if !animated_sprite.playing:
-			animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
+				unpause_timer = 4
 		if !collected:
 			if !activated:
 				ambient_sound.playing = false

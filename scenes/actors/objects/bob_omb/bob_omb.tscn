@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/actors/objects/bob_omb/regular_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/bob_omb/bob_omb.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/actors/objects/bob_omb/fuse2.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/actors/objects/bob_omb/explosion.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/bob_omb/explosion_sound.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/actors/objects/goomba/body.gd" type="Script" id=8]
 
 [sub_resource type="RayShape2D" id=1]
 length = 9.0
@@ -44,20 +45,21 @@ script = ExtResource( 2 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 collision_layer = 4
-collision_mask = 5
+collision_mask = 21
+script = ExtResource( 8 )
 
 [node name="Sprites" type="Node2D" parent="KinematicBody2D"]
 
 [node name="Sprite" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
 frames = ExtResource( 1 )
-frame = 3
+frame = 6
 playing = true
 
 [node name="Fuse" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
 visible = false
 position = Vector2( 0, -4 )
 frames = ExtResource( 4 )
-frame = 3
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
@@ -96,6 +98,15 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/PlayerDetector"]
 shape = SubResource( 3 )
 
+[node name="PlatformDetector" type="Area2D" parent="KinematicBody2D"]
+visible = false
+position = Vector2( 0, -3 )
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/PlatformDetector"]
+shape = SubResource( 3 )
+
 [node name="Particles2D" type="Particles2D" parent="KinematicBody2D"]
 material = SubResource( 4 )
 emitting = false
@@ -128,10 +139,11 @@ shape = SubResource( 7 )
 position = Vector2( 0, -3 )
 enabled = true
 cast_to = Vector2( 0, 16 )
+collision_mask = 17
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="KinematicBody2D"]
-rect = Rect2( -200, -200, 400, 400 )
+[node name="BottomPos" type="Node2D" parent="KinematicBody2D"]
+position = Vector2( 0, 4 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-rect = Rect2( -200, -200, 400, 400 )
+rect = Rect2( -300, -300, 600, 600 )
 pause_particles = false
