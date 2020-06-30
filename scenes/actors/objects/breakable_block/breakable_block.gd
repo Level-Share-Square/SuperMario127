@@ -17,6 +17,9 @@ var buffer := -5
 var character = null
 
 var coins = 0
+var delete_timer = 0.0
+
+var time_alive = 0.0
 
 func _set_properties():
 	savable_properties = ["coins"]
@@ -24,8 +27,7 @@ func _set_properties():
 
 func _set_property_values(): set_property("coins", coins, true)
 
-func _ready(): 
-	randomize() #randomizes seed
+func _ready():
 	player_detector.connect("body_entered", self, "detect_player")
 	break_particle.hide()
 	dust_particle.hide()
@@ -36,6 +38,14 @@ func detect_player(body):
 
 func _physics_process(delta):
 	if mode != 1: 
+		time_alive += delta
+		
+		if delete_timer > 0:
+			delete_timer -= delta
+			if delete_timer <= 0:
+				delete_timer = 0
+				queue_free()
+		
 		for hit_body in stomp_area.get_overlapping_bodies():
 			if !broken and hit_body.name.begins_with("Character"): if hit_body.velocity.y > 0: if hit_body.big_attack:
 				broken = true
@@ -46,8 +56,7 @@ func _physics_process(delta):
 					break_particle.set_emitting(true)
 					dust_particle.set_emitting(true)
 					broken_sound.play()
-				yield($Broken, "finished") 
-				broken()
+					delete_timer = 3.0
 		for hit_body in spin_area.get_overlapping_bodies():
 			if !broken and hit_body.name.begins_with("Character"): if hit_body.attacking:
 				broken = true
@@ -58,8 +67,7 @@ func _physics_process(delta):
 					break_particle.set_emitting(true)
 					dust_particle.set_emitting(true)
 					broken_sound.play()
-				yield($Broken, "finished") 
-				broken()
+					delete_timer = 3.0
 		for hit_body in player_detector.get_overlapping_bodies():
 			if hit_body.name.begins_with("Character") and hit_body.velocity.y > 0: 
 				if hit_body.big_attack:
@@ -83,10 +91,9 @@ func _physics_process(delta):
 			body.set_collision_mask_bit(1, false)
 			stomp_area.set_collision_layer_bit(0, false)
 
-func broken():
-	queue_free() #end
-
 func create_coin(): #creates a coin
+	time_alive += 1
+	time_alive += (time_alive/3*5/10)
 	var object = LevelObject.new()
 	object.type_id = 1
 	object.properties = []
@@ -96,7 +103,7 @@ func create_coin(): #creates a coin
 	object.properties.append(true)
 	object.properties.append(true)
 	object.properties.append(true)
-	var velocity_x = randi() % 160 #makes the coin randomly disperse around the map
-	velocity_x -= 80 #allows the coins to disperse leftwards
+	var power = int(time_alive*100) % 80
+	var velocity_x = -power if int(time_alive * 10) % 2 == 0 else power
 	object.properties.append(Vector2(velocity_x, -300)) #makes the coin move around and fly in the air when the block breaks
 	get_parent().create_object(object, false) #finishes the object creation

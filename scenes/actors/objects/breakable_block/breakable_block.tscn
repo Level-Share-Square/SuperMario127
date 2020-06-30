@@ -1,12 +1,14 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/breakable_block/break.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/mario/particles/dust.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/breakable_block/particles.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/breakable_block/block_material.tres" type="Material" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15, 15 )
+extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 12, 7 )
@@ -42,14 +44,18 @@ colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 gradient = SubResource( 9 )
 
 [sub_resource type="ParticlesMaterial" id=11]
+emission_shape = 1
+emission_sphere_radius = 2.0
 flag_disable_z = true
-direction = Vector3( 0, -1, 0 )
-spread = 0.0
-gravity = Vector3( 0, 0, 0 )
+direction = Vector3( 1, -1, 0 )
+spread = 180.0
+gravity = Vector3( 0, 50, 0 )
+initial_velocity = 16.67
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.75
 color_ramp = SubResource( 10 )
+anim_speed = 1.0
 
 [node name="BreakableBlock" type="Node2D"]
 z_index = -1
@@ -59,13 +65,13 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource( 1 )
 
 [node name="StompArea" type="Area2D" parent="."]
+visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StompArea"]
@@ -73,6 +79,7 @@ position = Vector2( 0, -21 )
 shape = SubResource( 2 )
 
 [node name="SpinArea" type="Area2D" parent="."]
+visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpinArea"]
@@ -85,6 +92,7 @@ visible = false
 shape = SubResource( 4 )
 
 [node name="PlayerStompDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -92,6 +100,7 @@ collision_mask = 2
 shape = SubResource( 5 )
 
 [node name="PlayerSpinDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -109,15 +118,20 @@ volume_db = -10.0
 
 [node name="BreakParticle" type="Particles2D" parent="."]
 material = SubResource( 7 )
+z_index = -1
 emitting = false
-amount = 10
+amount = 12
 one_shot = true
 explosiveness = 1.0
+process_material = ExtResource( 6 )
+texture = ExtResource( 5 )
 
 [node name="DustParticle" type="Particles2D" parent="."]
 material = SubResource( 8 )
+z_index = -1
 emitting = false
-amount = 1
+amount = 3
 one_shot = true
+explosiveness = 1.0
 process_material = SubResource( 11 )
 texture = ExtResource( 4 )
