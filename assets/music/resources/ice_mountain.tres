@@ -1,12 +1,12 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://level/Song.gd" type="Script" id=1]
-[ext_resource path="res://assets/music/slider.ogg" type="AudioStream" id=2]
+[ext_resource path="res://assets/music/ice_mountain.ogg" type="AudioStream" id=2]
 
 [resource]
 script = ExtResource( 1 )
 stream = ExtResource( 2 )
 volume_db = 0
 pitch_scale = 1
-title = "Mario's Pwnd Slide"
-note = "Remix by m477zorz"
+title = "Ice Mountain"
+note = "From Super Mario Galaxy"

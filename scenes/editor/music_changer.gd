@@ -10,6 +10,7 @@ onready var hover_sound = $HoverSound
 onready var click_sound = $ClickSound
 
 onready var music_id_mapper = preload("res://assets/music/ids.tres")
+onready var sorted_list = preload("res://assets/music/sort_order.tres")
 
 func update_display():
 	var data = CurrentLevelData.level_data
@@ -28,7 +29,7 @@ func text_entered(text):
 	var re = RegEx.new()
 	re.compile("(https:\\/\\/[^\\/]*)(.*)")
 
-	if not re.search_all(text):
+	if not re.search_all(text) or !text.ends_with(".ogg"):
 		music_note.text = "Invalid URL"
 	else:
 		CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music = text
@@ -47,22 +48,30 @@ func _ready():
 func button_hovered():
 	hover_sound.play()
 	
+func get_index_in_array(value, array):
+	var index = 0
+	for found_value in array:
+		if value == found_value:
+			return index
+		index += 1
+	return -1
+	
 func button_press():
 	var data = CurrentLevelData.level_data
 	var area = data.areas[CurrentLevelData.area]
 	
 	area.settings.music = int(area.settings.music)
+	var music_name = music_id_mapper.ids[area.settings.music]
+	var index = get_index_in_array(music_name, sorted_list.ids)
 	
 	if button_left.pressed:
 		click_sound.play()
-		area.settings.music -= 1
-		if area.settings.music < 0:
-			area.settings.music = music_id_mapper.ids.size() - 1
+		index = wrapi(index - 1, 0, sorted_list.ids.size())
+		area.settings.music = get_index_in_array(sorted_list.ids[index], music_id_mapper.ids)
 		update_display()
 		
 	if button_right.pressed:
 		click_sound.play()
-		area.settings.music += 1
-		if area.settings.music >= music_id_mapper.ids.size():
-			area.settings.music = 0
+		index = wrapi(index + 1, 0, sorted_list.ids.size())
+		area.settings.music = get_index_in_array(sorted_list.ids[index], music_id_mapper.ids)
 		update_display()

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ice_mountain.ogg-42d307e142532ec3f6281f5b36b5f175.oggstr"
+
+[deps]
+
+source_file="res://assets/music/ice_mountain.ogg"
+dest_files=[ "res://.import/ice_mountain.ogg-42d307e142532ec3f6281f5b36b5f175.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=5.824
