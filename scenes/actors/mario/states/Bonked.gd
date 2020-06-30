@@ -18,6 +18,7 @@ func _start_check(_delta):
 	
 func _start(_delta):
 	bonk_direction = character.facing_direction
+	character.sprite.rotation_degrees = 0
 	character.current_jump = 0
 	character.friction = 4
 	bounces_left = 2

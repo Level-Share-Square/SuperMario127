@@ -16,26 +16,15 @@ func _ready():
 	disable_animation = true
 	disable_snap = false
 	override_rotation = true
+	use_dive_collision = true
 	blacklisted_states = ["SlideStopState", "GroundPoundEndState", "ButtSlideState"]
 	
 func _start_check(_delta):
 	return crouch_buffer > 0 and character.is_grounded()
 
 func _start(delta):
-	var collision = character.get_node("Collision")
-	var dive_collision = character.get_node("CollisionDive")
-	var ground_collision = character.get_node("GroundCollision")
-	var left_collision = character.get_node("LeftCollision")
-	var right_collision = character.get_node("RightCollision")
-	var dive_ground_collision = character.get_node("GroundCollisionDive")
 	if character.state != character.get_state_node("Jump"):
 		character.friction = 4
-	collision.disabled = true
-	ground_collision.disabled = true
-	dive_collision.disabled = false
-	dive_ground_collision.disabled = false
-	left_collision.disabled = true
-	right_collision.disabled = true
 	if crouch_buffer > 0:
 		is_crouch = true
 		character.velocity.y = 120
@@ -90,21 +79,9 @@ func _stop(delta):
 func change_to_getup(delta):
 	character.sound_player.set_skid_playing(false)
 	character.particles.emitting = false
-	var collision = character.get_node("Collision")
-	var dive_collision = character.get_node("CollisionDive")
-	var ground_collision = character.get_node("GroundCollision")
-	var left_collision = character.get_node("LeftCollision")
-	var right_collision = character.get_node("RightCollision")
-	var dive_ground_collision = character.get_node("GroundCollisionDive")
 	character.set_state_by_name("GetupState", delta)
 	if !character.test_move(character.transform, Vector2(0, -16)):
 		character.position.y -= 16
-	collision.disabled = false
-	ground_collision.disabled = false
-	left_collision.disabled = false
-	right_collision.disabled = false
-	dive_collision.disabled = true
-	dive_ground_collision.disabled = true
 	getup_buffer = 0
 	ledge_buffer = 0
 

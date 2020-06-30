@@ -16,6 +16,7 @@ func _ready():
 	disable_turning = true
 	blacklisted_states = ["SlideState", "GetupState", "BackflipState"]
 	override_rotation = true
+	use_dive_collision = true
 
 func _start_check(_delta):
 	return dive_buffer > 0 and character.dive_cooldown <= 0 and !(character.inputs[9][0] and character.is_grounded()) and !(abs(character.velocity.x) <= 150 and character.is_grounded()) and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0)) and !character.is_walled()
@@ -23,12 +24,6 @@ func _start_check(_delta):
 func _start(_delta):
 	start_facing = character.facing_direction
 	var sound_player = character.get_node("Sounds")
-	var collision = character.get_node("Collision")
-	var dive_collision = character.get_node("CollisionDive")
-	var ground_collision = character.get_node("GroundCollision")
-	var left_collision = character.get_node("LeftCollision")
-	var right_collision = character.get_node("RightCollision")
-	var dive_ground_collision = character.get_node("GroundCollisionDive")
 	if dive_buffer > 0:
 		if character.character == 0:
 			character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
@@ -38,12 +33,6 @@ func _start(_delta):
 			character.velocity.y += dive_power_luigi.y
 		sound_player.play_dive_sound()
 	character.position.y += 4
-	collision.disabled = true
-	ground_collision.disabled = true
-	dive_collision.disabled = false
-	dive_ground_collision.disabled = false
-	left_collision.disabled = true
-	right_collision.disabled = true
 	character.rotating = true
 	if abs(character.velocity.x) > maxVelocityX:
 		character.velocity.x = maxVelocityX * character.facing_direction
@@ -69,12 +58,6 @@ func _update(delta):
 		last_above_rot_limit = true
 		
 func _stop(delta):
-	var collision = character.get_node("Collision")
-	var dive_collision = character.get_node("CollisionDive")
-	var ground_collision = character.get_node("GroundCollision")
-	var left_collision = character.get_node("LeftCollision")
-	var right_collision = character.get_node("RightCollision")
-	var dive_ground_collision = character.get_node("GroundCollisionDive")
 	var sprite = character.animated_sprite
 	if !character.test_move(character.transform, Vector2(0, 8)) and character.test_move(character.transform, Vector2(0.1 * character.facing_direction, -15)) and !character.test_move(character.transform, Vector2(0, -16)) and !character.is_grounded():
 		character.velocity.x = bonk_power * -character.facing_direction
@@ -87,12 +70,6 @@ func _stop(delta):
 	if character.is_grounded():
 		character.set_state_by_name("SlideState", delta)
 	else:
-		collision.disabled = false
-		ground_collision.disabled = false
-		left_collision.disabled = false
-		right_collision.disabled = false
-		dive_collision.disabled = true
-		dive_ground_collision.disabled = true
 		sprite.rotation_degrees = 0
 
 func _stop_check(_delta):

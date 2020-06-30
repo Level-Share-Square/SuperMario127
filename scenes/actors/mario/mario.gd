@@ -82,6 +82,7 @@ var collision_up
 var collision_left
 var collision_right
 var collided_last_frame = false
+var using_dive_collision = false
 
 export var snap := Vector2(0, 32)
 
@@ -136,6 +137,7 @@ export var rotating_jump = false
 #onready var level_settings_node = get_node("../LevelSettings")
 onready var collision_shape = $Collision
 onready var collision_raycast = $GroundCollision
+onready var dive_collision_shape = $CollisionDive
 onready var ground_check = $GroundCheck
 onready var slope_stop_check = $SlopeStopCheck
 onready var ground_check_dive = $GroundCheckDive
@@ -143,7 +145,7 @@ onready var left_check = $LeftCheck
 onready var right_check = $RightCheck
 onready var left_collision = $LeftCollision
 onready var right_collision = $RightCollision
-onready var dive_collision_shape = $GroundCollisionDive
+onready var ground_collision_dive = $GroundCollisionDive
 onready var player_collision = $PlayerCollision
 onready var player_collision_shape = $PlayerCollision/CollisionShape2D
 onready var sprite = $Sprite
@@ -223,8 +225,8 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		#collision_shape.shape = mario_collision
 		#player_collision_shape.position = mario_collision_offset
 		#player_collision_shape.shape = mario_collision
-		#dive_collision_shape.shape = mario_dive_collision
-		#dive_collision_shape.position = mario_dive_collision_offset
+		#ground_collision_dive.shape = mario_dive_collision
+		#ground_collision_dive.position = mario_dive_collision_offset
 		real_friction = friction
 	else:
 		var sound_scene = MiscCache.luigi_sounds
@@ -238,8 +240,8 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		#collision_shape.shape = luigi_collision
 		#player_collision_shape.position = luigi_collision_offset
 		#player_collision_shape.shape = luigi_collision
-		#dive_collision_shape.shape = luigi_dive_collision
-		#dive_collision_shape.position = luigi_dive_collision_offset
+		#ground_collision_dive.shape = luigi_dive_collision
+		#ground_collision_dive.position = luigi_dive_collision_offset
 		move_speed = luigi_speed
 		acceleration = luigi_accel
 		friction = luigi_fric
@@ -252,7 +254,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 
 func is_grounded():
 	var raycast_node = ground_check
-	if !dive_collision_shape.disabled:
+	if !ground_collision_dive.disabled:
 		raycast_node = ground_check_dive
 	raycast_node.force_raycast_update()
 	return raycast_node.is_colliding() and velocity.y >= 0
@@ -379,7 +381,7 @@ func heal(shards : int = 1):
 
 func _physics_process(delta: float):
 	bottom_pos.position = bottom_pos_offset
-	if !dive_collision_shape.disabled:
+	if !ground_collision_dive.disabled:
 		bottom_pos.position = bottom_pos_dive_offset
 	var is_in_platform = false
 	var platform_collision_enabled = false
@@ -548,6 +550,25 @@ func _physics_process(delta: float):
 			attacking = true
 		else:
 			attacking = false
+			
+		if state.use_dive_collision and !using_dive_collision:
+			using_dive_collision = true
+
+			collision_shape.disabled = true
+			collision_raycast.disabled = true
+			dive_collision_shape.disabled = false
+			ground_collision_dive.disabled = false
+			left_collision.disabled = true
+			right_collision.disabled = true
+		if !state.use_dive_collision and using_dive_collision:
+			using_dive_collision = false
+
+			collision_shape.disabled = false
+			collision_raycast.disabled = false
+			dive_collision_shape.disabled = true
+			ground_collision_dive.disabled = true
+			left_collision.disabled = false
+			right_collision.disabled = false
 				
 		if state.disable_snap:
 			snap = Vector2()
