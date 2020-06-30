@@ -25,7 +25,7 @@ func _set_properties():
 func _set_property_values(): set_property("coins", coins, true)
 
 func _ready(): 
-	randomize()
+	randomize() #randomizes seed
 	player_detector.connect("body_entered", self, "detect_player")
 	break_particle.hide()
 	dust_particle.hide()
@@ -87,9 +87,15 @@ func broken():
 	queue_free() #end
 
 func create_coin(): #creates a coin
-	var object = LevelObject.new() #makes an object variable
-	object.type_id = 1 #assigns it as a coin
-	object.properties = [body.global_position, Vector2(1, 1), 0, false, true, true] #assigns the properties
+	var object = LevelObject.new()
+	object.type_id = 1
+	object.properties = []
+	object.properties.append(body.global_position)
+	object.properties.append(Vector2(1, 1))
+	object.properties.append(0)
+	object.properties.append(true)
+	object.properties.append(true)
+	object.properties.append(true)
 	var velocity_x = randi() % 160 #makes the coin randomly disperse around the map
 	velocity_x -= 80 #allows the coins to disperse leftwards
 	object.properties.append(Vector2(velocity_x, -300)) #makes the coin move around and fly in the air when the block breaks

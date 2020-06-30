@@ -46,6 +46,7 @@ func _ready():
 		ground_detector.enabled = true
 		wall_detector.enabled = true
 		ceiling_detector.enabled = true
+	yield(get_tree().create_timer(0.2), "timeout")
 	var _connect = area.connect("body_entered", self, "collect")
 
 func _process(delta):
