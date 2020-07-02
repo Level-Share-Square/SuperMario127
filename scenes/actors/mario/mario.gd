@@ -575,18 +575,18 @@ func _physics_process(delta: float):
 		elif (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
 			var normal = ground_check.get_collision_normal()
 			if normal.x == 0:
-				snap = Vector2(0, 12)
+				snap = Vector2(0, 6)
 			else:
-				snap = Vector2(0, 20)
+				snap = Vector2(0, 12)
 		else:
 			snap = Vector2()
 	else:
 		if (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
 			var normal = ground_check.get_collision_normal()
 			if normal.x == 0:
-				snap = Vector2(0, 12)
+				snap = Vector2(0, 6)
 			else:
-				snap = Vector2(0, 20)
+				snap = Vector2(0, 12)
 		else:
 			snap = Vector2()
 	if is_in_platform:

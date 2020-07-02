@@ -53,6 +53,7 @@ func detect_stomp(body):
 				if body.state != body.get_state_node("DiveState"):
 					body.set_state_by_name("BounceState", 0)
 				body.velocity.y = -330
+			body.stamina = clamp(body.stamina + 10, 0, 100)
 			velocity.y = 60
 			dead = true
 			delete_timer = 3.0 if !invincible else 0.25

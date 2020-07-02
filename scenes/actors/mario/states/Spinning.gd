@@ -11,9 +11,9 @@ var spin_timer = 0
 var attack_timer = 0
 
 func _ready():
-	priority = 2
+	priority = 1
 	disable_animation = true
-	blacklisted_states = ["GetupState"]
+	blacklisted_states = ["GetupState", "WallSlideState"]
 	attack_tier = 1
 
 func _start_check(_delta):

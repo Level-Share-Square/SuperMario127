@@ -60,7 +60,7 @@ func button_press():
 	var data = CurrentLevelData.level_data
 	var area = data.areas[CurrentLevelData.area]
 	
-	area.settings.music = int(area.settings.music)
+	area.settings.music = area.settings.music if typeof(area.settings.music) == TYPE_INT else 0
 	var music_name = music_id_mapper.ids[area.settings.music]
 	var index = get_index_in_array(music_name, sorted_list.ids)
 	

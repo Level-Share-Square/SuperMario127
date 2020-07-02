@@ -64,11 +64,6 @@ func _update(_delta):
 	if !activated:
 		override_rotation = false
 
-	if character.state != last_state:
-		if character.state == character.get_state_node("SpinningState"):
-			character.stamina -= 15
-			if character.stamina < 0:
-				character.stamina = 0
 	last_state = character.state
 
 func _process(delta):

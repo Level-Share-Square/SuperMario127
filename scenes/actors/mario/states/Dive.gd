@@ -9,6 +9,7 @@ export var maxVelocityX: float = 700
 var last_above_rot_limit = false
 var dive_buffer = 0
 var start_facing = 1
+var speed_cooldown = 0.0
 
 func _ready():
 	priority = 3
@@ -24,7 +25,7 @@ func _start_check(_delta):
 func _start(_delta):
 	start_facing = character.facing_direction
 	var sound_player = character.get_node("Sounds")
-	if dive_buffer > 0:
+	if dive_buffer > 0 and character.dive_cooldown == 0:
 		if character.character == 0:
 			character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5
 			character.velocity.y += dive_power.y
@@ -38,6 +39,7 @@ func _start(_delta):
 		character.velocity.x = maxVelocityX * character.facing_direction
 	character.jump_animation = 0
 	character.current_jump = 0
+	character.dive_cooldown = 0.15
 
 func _update(delta):
 	var sprite = character.animated_sprite
@@ -76,9 +78,13 @@ func _stop_check(_delta):
 	return character.is_grounded() or (character.is_walled_right() and character.facing_direction == 1) or (character.is_walled_left() and character.facing_direction == -1)
 
 func _general_update(delta):
-	if character.inputs[3][1] and !(character.inputs[9][0] and character.is_grounded()):
+	if character.inputs[3][1] and !(character.inputs[9][0] and character.is_grounded()) and character.dive_cooldown == 0:
 		dive_buffer = 0.075
 	if dive_buffer > 0:
 		dive_buffer -= delta
 		if dive_buffer < 0:
 			dive_buffer = 0
+	if speed_cooldown > 0:
+		speed_cooldown -= delta
+		if speed_cooldown < 0:
+			speed_cooldown = 0

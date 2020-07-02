@@ -14,6 +14,7 @@ var dl_ready = false
 var downloader = Downloader.new()
 
 var song_cache = []
+var loop = 0.0
 
 func get_song(song_id: int):
 	return song_cache[song_id]
@@ -33,6 +34,7 @@ func load_ogg():
 	var stream = AudioStreamOGGVorbis.new()
 	stream.data = bytes
 	stream.loop = true
+	stream.loop_offset = loop
 	if stream.data == null:
 		return
 	ogg_file.close()
@@ -48,6 +50,10 @@ func change_song(old_setting):
 		song = get_song(music_setting)
 	elif typeof(music_setting) == TYPE_STRING:
 		if typeof(music_setting) != typeof(old_setting) or music_setting != old_setting:
+			loop = 0.0
+			if music_setting.begins_with("LP"):
+				loop = float(music_setting.trim_prefix("LP").split("=")[0])
+				print(str(loop))
 			stop()
 			downloader.download(music_setting, "user://", "bg_music.ogg")
 	
