@@ -32,8 +32,6 @@ texture = ExtResource( 9 )
 centered = false
 offset = Vector2( 0, 3 )
 
-[node name="Tween" type="Tween" parent="."]
-
 [node name="Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -10.0
@@ -63,3 +61,5 @@ alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Tween" type="Tween" parent="."]

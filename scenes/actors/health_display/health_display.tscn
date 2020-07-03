@@ -1,16 +1,31 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/actors/health_display/health_display.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/actors/health_display/textures.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/health_display/life.png" type="Texture" id=4]
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=6]
 flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 256, 268 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 256, 268 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 256, 96 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 256, 96 )
+
+[sub_resource type="DynamicFont" id=5]
 size = 128
 font_data = ExtResource( 2 )
 
@@ -22,6 +37,10 @@ region = Rect2( 0, 0, 256, 96 )
 [node name="HealthDisplay" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 1 )
+atlas_0 = SubResource( 6 )
+atlas_1 = SubResource( 7 )
+shard_atlas_0 = SubResource( 8 )
+shard_atlas_1 = SubResource( 9 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 25
@@ -32,7 +51,7 @@ margin_top = -80.0
 margin_right = 608.0
 margin_bottom = 188.0
 rect_scale = Vector2( 0.25, 0.25 )
-texture = SubResource( 1 )
+texture = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -44,7 +63,7 @@ margin_left = 94.0
 margin_top = 60.0
 margin_right = 169.0
 margin_bottom = 204.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0, 0, 0.25098 )
 text = "8"
 __meta__ = {
@@ -56,7 +75,7 @@ margin_left = 86.0
 margin_top = 52.0
 margin_right = 161.0
 margin_bottom = 196.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 5 )
 text = "8"
 __meta__ = {
 "_edit_use_anchors_": false

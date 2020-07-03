@@ -27,14 +27,14 @@ collision_mask = 21
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "spinning"
-frame = 4
+frame = 7
 playing = true
 
 [node name="Color" type="AnimatedSprite" parent="Sprite"]
 modulate = Color( 0, 1, 0, 1 )
 frames = ExtResource( 3 )
 animation = "spinning"
-frame = 4
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

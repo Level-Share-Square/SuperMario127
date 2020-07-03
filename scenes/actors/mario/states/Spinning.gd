@@ -80,4 +80,3 @@ func _general_update(delta):
 		attack_timer -= delta
 		if attack_timer <= 0:
 			attack_timer = 0
-			character.attacking = false

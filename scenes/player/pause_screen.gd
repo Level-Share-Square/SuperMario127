@@ -30,11 +30,11 @@ var can_pause := true
 var paused := false
 
 func _unhandled_input(event):
-	if can_pause and event.is_action_pressed("pause") and !(character_node.dead and (PlayerSettings.number_of_players != 1 and character2_node.dead)):
+	if can_pause and event.is_action_pressed("pause") and !(character_node.dead or (PlayerSettings.number_of_players != 1 and character2_node.dead)):
 		toggle_pause()
 
 func toggle_pause():
-	if !PhotoMode.enabled and ((paused and get_tree().paused) or (!paused and !get_tree().paused)):
+	if !scene_transitions.transitioning and !mode_switcher.get_node("ModeSwitcherButton").switching_disabled and !PhotoMode.enabled and ((paused and get_tree().paused) or (!paused and !get_tree().paused)):
 		if !shine_info.visible:
 			multiplayer_options.visible = false
 			shine_info.visible = true

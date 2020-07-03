@@ -449,7 +449,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "death"
-frame = 3
+frame = 2
 playing = true
 script = ExtResource( 34 )
 

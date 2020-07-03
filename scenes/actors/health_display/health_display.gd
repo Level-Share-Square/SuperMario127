@@ -14,9 +14,13 @@ var interpolation_speed = 15
 var shown = false
 var last_shown = false
 
+export var atlas_0 : AtlasTexture
+export var atlas_1 : AtlasTexture
+
+export var shard_atlas_0 : AtlasTexture
+export var shard_atlas_1 : AtlasTexture
+
 func _ready():
-	ui.texture.atlas = load(ui.texture.atlas.load_path)
-	shards.texture.atlas = load(shards.texture.atlas.load_path)
 	character = get_node(char_path)
 	if (character.player_id == 0) and PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
 		ui.rect_position.x = 160
@@ -24,6 +28,14 @@ func _ready():
 		ui.rect_position.x = 544
 	else:
 		ui.rect_position.x = 352
+		
+	if character.player_id == 0:
+		ui.texture = atlas_0
+		shards.texture = shard_atlas_0
+	else:
+		ui.texture = atlas_1
+		shards.texture = shard_atlas_1
+		
 
 func _process(delta):
 	if is_instance_valid(character):

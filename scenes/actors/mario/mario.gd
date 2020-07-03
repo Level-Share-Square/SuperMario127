@@ -588,6 +588,8 @@ func _physics_process(delta: float):
 		else:
 			snap = Vector2()
 	else:
+		attacking = false
+		big_attack = false
 		if (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
 			var normal = ground_check.get_collision_normal()
 			if normal.x == 0:
@@ -710,6 +712,7 @@ func kill(cause):
 			death_sprite.set_as_toplevel(true)
 			death_sprite.global_position = sprite.global_position
 			death_sprite.play_anim()
+			position = Vector2(0, 100000000000000000)
 			yield(get_tree().create_timer(0.55), "timeout")
 			sound_player.play_death_sound()
 			yield(get_tree().create_timer(0.75), "timeout")
@@ -721,6 +724,7 @@ func kill(cause):
 			death_sprite.set_as_toplevel(true)
 			death_sprite.global_position = sprite.global_position
 			death_sprite.play_anim()
+			position = Vector2(0, 100000000000000000)
 			yield(get_tree().create_timer(0.55), "timeout")
 			sound_player.play_death_sound()
 			yield(get_tree().create_timer(0.75), "timeout")

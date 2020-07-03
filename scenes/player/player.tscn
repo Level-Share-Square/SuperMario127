@@ -378,7 +378,7 @@ __meta__ = {
 [node name="ResumeButton" type="Button" parent="UI/PauseScreen/Bottom"]
 margin_left = 2245.0
 margin_top = 129.0
-margin_right = 2840.0
+margin_right = 2954.0
 margin_bottom = 311.0
 rect_rotation = 180.0
 custom_styles/hover = SubResource( 7 )
@@ -401,9 +401,9 @@ stream = ExtResource( 11 )
 volume_db = -10.0
 
 [node name="RetryButton" type="Button" parent="UI/PauseScreen/Bottom"]
-margin_left = 1559.45
+margin_left = 1506.0
 margin_top = 129.0
-margin_right = 2268.45
+margin_right = 2215.0
 margin_bottom = 311.0
 rect_rotation = 180.0
 custom_styles/hover = SubResource( 7 )

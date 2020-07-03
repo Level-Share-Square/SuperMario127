@@ -22,6 +22,9 @@ var last_hovered = false
 var last_clicking = false
 
 func _ready():
+	texture_normal = load(texture_normal.load_path)
+	texture_hover = load(texture_hover.load_path)
+	texture_pressed = load(texture_pressed.load_path)
 	grid.texture = load(grid.texture.load_path) # modern problems require modern solutions
 	margin_left = base_margin + (margin * button_placement)
 	normal_texture = texture_normal
