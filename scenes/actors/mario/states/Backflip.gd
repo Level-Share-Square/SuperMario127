@@ -8,16 +8,19 @@ var getup_buffer = 0
 var ledge_buffer = 0
 var direction_on_start = 1
 var spins = 0
+var unlock_timer = 0.0
 
 export var backflip_power := Vector2(280, 360) # no longer nice
 
 func _ready():
-	priority = 2
+	priority = 4
 	disable_animation = true
 	override_rotation = true
 	disable_turning = true
 
 func _start(delta):
+	priority = 4
+	unlock_timer = 0.4
 	direction_on_start = character.facing_direction
 	var sound_player = character.get_node("Sounds")
 	var collision = character.get_node("Collision")
@@ -58,3 +61,10 @@ func _stop(_delta):
 func _stop_check(_delta):
 	var sprite = character.animated_sprite
 	return character.is_grounded()
+
+func _general_update(delta):
+	if unlock_timer > 0:
+		unlock_timer -= delta
+		if unlock_timer <= 0:
+			unlock_timer = 0
+			priority = 1

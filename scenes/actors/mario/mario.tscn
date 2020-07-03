@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://scenes/actors/mario/states/Knockback.gd" type="Script" id=31]
 [ext_resource path="res://scenes/actors/mario/mario_anim_player.tres" type="Animation" id=32]
 [ext_resource path="res://scenes/actors/mario/states/ButtSlide.gd" type="Script" id=33]
+[ext_resource path="res://scenes/actors/mario/death_animation.gd" type="Script" id=34]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -201,12 +202,12 @@ disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "jumpLeft"
+animation = "deathFall"
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 frames = ExtResource( 23 )
-animation = "jumpLeft"
+animation = "deathFall"
 playing = true
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]
@@ -441,3 +442,19 @@ anims/backflip_right = SubResource( 16 )
 
 [node name="BottomPos" type="Node2D" parent="."]
 position = Vector2( 0, 20 )
+
+[node name="DeathSprite" type="AnimatedSprite" parent="."]
+visible = false
+z_index = 20
+z_as_relative = false
+frames = ExtResource( 1 )
+animation = "death"
+frame = 3
+playing = true
+script = ExtResource( 34 )
+
+[node name="Fludd" type="AnimatedSprite" parent="DeathSprite"]
+visible = false
+frames = ExtResource( 23 )
+animation = "deathFall"
+playing = true

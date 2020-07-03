@@ -15,7 +15,7 @@ func _ready():
 	priority = 3
 	attack_tier = 1
 	disable_turning = true
-	blacklisted_states = ["SlideState", "GetupState", "BackflipState"]
+	blacklisted_states = ["SlideState", "GetupState"]
 	override_rotation = true
 	use_dive_collision = true
 

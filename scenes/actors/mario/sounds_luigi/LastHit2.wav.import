@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/LastHit2.wav-9a1d932fe5481201ea89ec3bf1602d6d.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_luigi/LastHit2.wav"
+dest_files=[ "res://.import/LastHit2.wav-9a1d932fe5481201ea89ec3bf1602d6d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

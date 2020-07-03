@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://scenes/actors/mario/sounds_misc/wall_jump.wav" type="AudioStream" id=29]
 [ext_resource path="res://scenes/actors/mario/sounds_misc/footsteps/default2.wav" type="AudioStream" id=30]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Death1.wav" type="AudioStream" id=31]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/LastHit1.wav" type="AudioStream" id=33]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 2 )
@@ -113,6 +114,15 @@ bus = "Voices"
 
 [node name="Hit2" type="AudioStreamPlayer" parent="HitSounds"]
 stream = ExtResource( 7 )
+bus = "Voices"
+
+[node name="LastHitSounds" type="Node" parent="."]
+script = ExtResource( 1 )
+sound_number = 1
+
+[node name="LastHit1" type="AudioStreamPlayer" parent="LastHitSounds"]
+stream = ExtResource( 33 )
+volume_db = -2.0
 bus = "Voices"
 
 [node name="StompedSounds" type="Node" parent="."]

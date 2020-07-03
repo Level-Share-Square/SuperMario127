@@ -160,6 +160,8 @@ onready var gp_particles1 = $GPParticles1
 onready var gp_particles2 = $GPParticles2
 onready var platform_detector = $PlatformDetector
 onready var bottom_pos = $BottomPos
+onready var death_sprite = $DeathSprite
+onready var death_fludd_sprite = $DeathSprite/Fludd
 onready var raycasts = [ground_check, ground_check_dive, left_check, right_check, slope_stop_check]
 export var bottom_pos_offset : Vector2
 export var bottom_pos_dive_offset : Vector2
@@ -219,8 +221,10 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		add_child(sound_player)
 		if PlayerSettings.player1_character != PlayerSettings.player2_character or player_id == 0:
 			sprite.frames = mario_frames
+			death_sprite.frames = mario_frames
 		else:
 			sprite.frames = mario_alt_frames
+			death_sprite.frames = mario_alt_frames
 		#collision_shape.position = mario_collision_offset
 		#collision_shape.shape = mario_collision
 		#player_collision_shape.position = mario_collision_offset
@@ -234,8 +238,10 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		add_child(sound_player)
 		if PlayerSettings.player1_character != PlayerSettings.player2_character or player_id == 0:
 			sprite.frames = luigi_frames
+			death_sprite.frames = luigi_frames
 		else:
 			sprite.frames = luigi_alt_frames
+			death_sprite.frames = luigi_alt_frames
 		#collision_shape.position = luigi_collision_offset
 		#collision_shape.shape = luigi_collision
 		#player_collision_shape.position = luigi_collision_offset
@@ -369,6 +375,7 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180):
 		invulnerable_frames = frames
 		health -= amount
 		if health <= 0:
+			sound_player.play_last_hit_sound()
 			kill(cause)
 		else:
 			sound_player.play_hit_sound()
@@ -614,8 +621,10 @@ func _physics_process(delta: float):
 			attacking = true
 		if character == 0:
 			fludd_sprite.frames = nozzle.frames
+			death_fludd_sprite.frames = fludd_sprite.frames
 		else:
 			fludd_sprite.frames = nozzle.frames_luigi
+			death_fludd_sprite.frames = fludd_sprite.frames
 		fludd_sprite.animation = sprite.animation
 		fludd_sprite.frame = sprite.frame
 		
@@ -641,6 +650,8 @@ func _physics_process(delta: float):
 		fludd_sprite.visible = false
 		water_sprite.visible = false
 		water_sprite_2.visible = false
+
+	death_fludd_sprite.visible = fludd_sprite.visible
 
 	# Move by velocity
 	if movable:
@@ -687,26 +698,48 @@ func kill(cause):
 				cutout_in = cutout_death
 				yield(get_tree().create_timer(1), "timeout")
 			else:
-				yield(get_tree().create_timer(3), "timeout")
-				position = spawn_pos - Vector2(0, 16)
-				dead = false
 				reload = false
-				controllable = true
-				set_state_by_name("FallState", 0)
 		elif cause == "reload":
 			transition_time = 0.4
 		elif cause == "green_demon":
+			sound_player.play_last_hit_sound()
 			controllable = false
+			movable = false
 			cutout_in = cutout_death
+			sprite.visible = false
+			death_sprite.set_as_toplevel(true)
+			death_sprite.global_position = sprite.global_position
+			death_sprite.play_anim()
+			yield(get_tree().create_timer(0.55), "timeout")
+			sound_player.play_death_sound()
+			yield(get_tree().create_timer(0.75), "timeout")
 		elif cause == "hit":
 			controllable = false
+			movable = false
 			cutout_in = cutout_death
+			sprite.visible = false
+			death_sprite.set_as_toplevel(true)
+			death_sprite.global_position = sprite.global_position
+			death_sprite.play_anim()
+			yield(get_tree().create_timer(0.55), "timeout")
 			sound_player.play_death_sound()
-			transition_time = 1.6
+			yield(get_tree().create_timer(0.75), "timeout")
+			if number_of_players != 1:
+				reload = false
 			
 		if reload:
 			CurrentLevelData.level_data.vars.transition_data = []
 			scene_transitions.reload_scene(cutout_in, cutout_out, transition_time, 0)
+		else:
+			yield(get_tree().create_timer(3), "timeout")
+			health = 8
+			position = spawn_pos - Vector2(0, 16)
+			dead = false
+			movable = true
+			sprite.visible = true
+			death_sprite.visible = false
+			controllable = true
+			set_state_by_name("FallState", 0)
 
 func exit():
 	mode_switcher.get_node("ModeSwitcherButton").switch()

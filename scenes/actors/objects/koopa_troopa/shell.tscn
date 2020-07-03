@@ -22,19 +22,19 @@ extents = Vector2( 13.5, 9 )
 [node name="Shell" type="KinematicBody2D"]
 position = Vector2( 0, -4 )
 collision_layer = 4
-collision_mask = 5
+collision_mask = 21
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "spinning"
-frame = 6
+frame = 4
 playing = true
 
 [node name="Color" type="AnimatedSprite" parent="Sprite"]
 modulate = Color( 0, 1, 0, 1 )
 frames = ExtResource( 3 )
 animation = "spinning"
-frame = 6
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -85,3 +85,4 @@ volume_db = -10.0
 [node name="GroundedCheck" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 0, 20 )
+collision_mask = 17

@@ -6,6 +6,7 @@ onready var triple_jump_sounds = $TripleJumpSounds
 onready var dive_sounds = $DiveSounds
 onready var fall_sounds = $FallSounds
 onready var hit_sounds = $HitSounds
+onready var last_hit_sounds = $LastHitSounds
 onready var death_sounds = $DeathSounds
 onready var stomped_sounds = $StompedSounds
 
@@ -60,6 +61,10 @@ func play_dive_sound():
 func play_fall_sound():
 	if ready:
 		fall_sounds.play()
+		
+func play_last_hit_sound():
+	if ready:
+		last_hit_sounds.play()
 	
 func play_hit_sound():
 	if ready:
