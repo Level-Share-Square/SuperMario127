@@ -9,9 +9,10 @@ var can_boost = true
 var cooldown_timer = 0
 var spin_timer = 0
 var attack_timer = 0
+var sound_buffer = 0
 
 func _ready():
-	priority = 1
+	priority = 2
 	disable_animation = true
 	blacklisted_states = ["GetupState", "WallSlideState"]
 	attack_tier = 1
@@ -20,6 +21,9 @@ func _start_check(_delta):
 	return spin_timer > 0 and (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2
 
 func _start(_delta):
+	if sound_buffer > 0:
+		character.sound_player.play_spin_sound()
+	sound_buffer = 0
 	character.sprite.speed_scale = 1
 	if can_boost == true and !character.is_grounded() and (character.state != character.get_state_node("Jump") or character.current_jump == 1):
 		can_boost = false
@@ -70,9 +74,8 @@ func _general_update(delta):
 			spin_timer = 0
 	if character.inputs[4][0]:
 		spin_timer = 0.15
-		
-		if character.inputs[4][1] and !is_in_blacklisted_state() and (character.state == null or character.state.priority <= priority):
-			character.sound_player.play_spin_sound()
+	if character.inputs[4][1]:
+		sound_buffer = 0.15
 	if character.is_grounded():
 		can_boost = true
 		
@@ -80,3 +83,8 @@ func _general_update(delta):
 		attack_timer -= delta
 		if attack_timer <= 0:
 			attack_timer = 0
+		
+	if sound_buffer > 0:
+		sound_buffer -= delta
+		if sound_buffer <= 0:
+			sound_buffer = 0

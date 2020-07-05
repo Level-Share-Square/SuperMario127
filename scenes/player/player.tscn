@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -36,6 +36,7 @@
 [ext_resource path="res://scenes/actors/health_display/health_display.tscn" type="PackedScene" id=34]
 [ext_resource path="res://scenes/player/ui/red_coin.png" type="Texture" id=35]
 [ext_resource path="res://scenes/player/red_coin_counter.gd" type="Script" id=36]
+[ext_resource path="res://scenes/player/window_scale.gd" type="Script" id=37]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 7 )
@@ -146,7 +147,7 @@ font_data = ExtResource( 7 )
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
-nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"), NodePath("Viewports/ViewportContainer/Viewport/World/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/World/Character2"), NodePath("Viewports/ViewportContainer2/Viewport/CameraP2"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds"), NodePath("Viewports/ViewportContainer2/Viewport/Backgrounds"), NodePath("Viewports/ViewportContainer2/Viewport/World/Shared") ]
+nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"), NodePath("Viewports/ViewportContainer/Viewport/World/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/World/Character2"), NodePath("Viewports/ViewportContainer2/Viewport/CameraP2"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds"), NodePath("Viewports/ViewportContainer2/Viewport/Backgrounds") ]
 character = NodePath("Viewports/ViewportContainer/Viewport/World/Character")
 character2 = NodePath("Viewports/ViewportContainer/Viewport/World/Character2")
 camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
@@ -325,6 +326,7 @@ margin_right = 767.559
 margin_bottom = 432.441
 color = Color( 0.121569, 0.137255, 0.184314, 0.501961 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -436,7 +438,7 @@ custom_styles/pressed = SubResource( 8 )
 custom_styles/normal = SubResource( 8 )
 custom_fonts/font = SubResource( 9 )
 action_mode = 0
-text = "Multiplayer"
+text = "Options"
 script = ExtResource( 22 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -583,10 +585,10 @@ stream = ExtResource( 11 )
 volume_db = -10.0
 
 [node name="ConfirmButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
-margin_left = 370.0
-margin_top = 259.0
-margin_right = 699.0
-margin_bottom = 303.0
+margin_left = 419.0
+margin_top = 236.405
+margin_right = 748.0
+margin_bottom = 280.405
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/disabled = SubResource( 15 )
@@ -646,10 +648,10 @@ __meta__ = {
 }
 
 [node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
-margin_left = 673.654
-margin_top = 104.791
-margin_right = 801.654
-margin_bottom = 232.791
+margin_left = 271.654
+margin_top = 159.587
+margin_right = 399.654
+margin_bottom = 287.587
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 25 )
 texture_pressed = ExtResource( 25 )
@@ -659,10 +661,10 @@ __meta__ = {
 }
 
 [node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
-margin_left = 635.0
-margin_top = 130.5
-margin_right = 763.0
-margin_bottom = 258.5
+margin_left = 233.0
+margin_top = 185.296
+margin_right = 361.0
+margin_bottom = 313.296
 rect_rotation = 180.0
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 25 )
@@ -673,10 +675,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
-margin_left = 442.0
-margin_top = 103.0
-margin_right = 604.0
-margin_bottom = 135.0
+margin_left = 40.0
+margin_top = 157.796
+margin_right = 202.0
+margin_bottom = 189.796
 custom_fonts/font = SubResource( 17 )
 text = "Control Mode:"
 align = 1
@@ -686,10 +688,72 @@ __meta__ = {
 }
 
 [node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
-margin_left = 636.0
-margin_top = 103.0
-margin_right = 674.0
-margin_bottom = 135.0
+margin_left = 234.0
+margin_top = 157.796
+margin_right = 272.0
+margin_bottom = 189.796
+custom_fonts/font = SubResource( 17 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WindowScale" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_top = 35.0
+margin_right = 40.0
+margin_bottom = 75.0
+script = ExtResource( 37 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/WindowScale"]
+margin_left = 271.654
+margin_top = 159.587
+margin_right = 399.654
+margin_bottom = 287.587
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/WindowScale"]
+margin_left = 233.0
+margin_top = 185.296
+margin_right = 361.0
+margin_bottom = 313.296
+rect_rotation = 180.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/WindowScale"]
+margin_left = 40.0
+margin_top = 157.796
+margin_right = 202.0
+margin_bottom = 189.796
+custom_fonts/font = SubResource( 17 )
+text = "Window Scale:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/WindowScale"]
+margin_left = 234.0
+margin_top = 157.796
+margin_right = 272.0
+margin_bottom = 189.796
 custom_fonts/font = SubResource( 17 )
 text = "1"
 align = 1
@@ -708,10 +772,10 @@ __meta__ = {
 }
 
 [node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
-margin_left = 673.654
-margin_top = 104.791
-margin_right = 801.654
-margin_bottom = 232.791
+margin_left = 722.654
+margin_top = 82.196
+margin_right = 850.654
+margin_bottom = 210.196
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 25 )
 texture_pressed = ExtResource( 25 )
@@ -721,10 +785,10 @@ __meta__ = {
 }
 
 [node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
-margin_left = 635.0
-margin_top = 130.5
-margin_right = 763.0
-margin_bottom = 258.5
+margin_left = 684.0
+margin_top = 107.905
+margin_right = 812.0
+margin_bottom = 235.905
 rect_rotation = 180.0
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 25 )
@@ -735,10 +799,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
-margin_left = 498.359
-margin_top = 102.986
-margin_right = 604.359
-margin_bottom = 134.986
+margin_left = 547.359
+margin_top = 80.391
+margin_right = 653.359
+margin_bottom = 112.391
 custom_fonts/font = SubResource( 17 )
 text = "Players:"
 align = 1
@@ -748,10 +812,10 @@ __meta__ = {
 }
 
 [node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
-margin_left = 636.0
-margin_top = 103.0
-margin_right = 674.0
-margin_bottom = 135.0
+margin_left = 685.0
+margin_top = 80.405
+margin_right = 723.0
+margin_bottom = 112.405
 custom_fonts/font = SubResource( 17 )
 text = "1"
 align = 1
@@ -770,10 +834,10 @@ __meta__ = {
 }
 
 [node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
-margin_left = 673.654
-margin_top = 104.791
-margin_right = 801.654
-margin_bottom = 232.791
+margin_left = 722.654
+margin_top = 82.196
+margin_right = 850.654
+margin_bottom = 210.196
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 25 )
 texture_pressed = ExtResource( 25 )
@@ -783,10 +847,10 @@ __meta__ = {
 }
 
 [node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
-margin_left = 635.0
-margin_top = 130.5
-margin_right = 763.0
-margin_bottom = 258.5
+margin_left = 684.0
+margin_top = 107.905
+margin_right = 812.0
+margin_bottom = 235.905
 rect_rotation = 180.0
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 25 )
@@ -797,10 +861,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
-margin_left = 373.359
-margin_top = 102.0
-margin_right = 597.359
-margin_bottom = 134.0
+margin_left = 422.359
+margin_top = 79.405
+margin_right = 646.359
+margin_bottom = 111.405
 custom_fonts/font = SubResource( 17 )
 text = "Player 1 Character:"
 align = 1
@@ -810,10 +874,10 @@ __meta__ = {
 }
 
 [node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
-margin_left = 636.0
-margin_top = 103.0
-margin_right = 674.0
-margin_bottom = 134.0
+margin_left = 685.0
+margin_top = 80.405
+margin_right = 723.0
+margin_bottom = 111.405
 custom_fonts/font = SubResource( 17 )
 text = "M"
 align = 1
@@ -832,10 +896,10 @@ __meta__ = {
 }
 
 [node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
-margin_left = 673.654
-margin_top = 104.791
-margin_right = 801.654
-margin_bottom = 232.791
+margin_left = 722.654
+margin_top = 82.196
+margin_right = 850.654
+margin_bottom = 210.196
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 25 )
 texture_pressed = ExtResource( 25 )
@@ -845,10 +909,10 @@ __meta__ = {
 }
 
 [node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
-margin_left = 635.0
-margin_top = 130.5
-margin_right = 763.0
-margin_bottom = 258.5
+margin_left = 684.0
+margin_top = 107.905
+margin_right = 812.0
+margin_bottom = 235.905
 rect_rotation = 180.0
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 25 )
@@ -859,10 +923,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
-margin_left = 370.0
-margin_top = 101.184
-margin_right = 597.0
-margin_bottom = 133.184
+margin_left = 419.0
+margin_top = 78.589
+margin_right = 646.0
+margin_bottom = 110.589
 custom_fonts/font = SubResource( 17 )
 text = "Player 2 Character:"
 align = 1
@@ -872,10 +936,10 @@ __meta__ = {
 }
 
 [node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
-margin_left = 636.0
-margin_top = 103.0
-margin_right = 674.0
-margin_bottom = 134.0
+margin_left = 685.0
+margin_top = 80.405
+margin_right = 723.0
+margin_bottom = 111.405
 custom_fonts/font = SubResource( 17 )
 text = "L"
 align = 1
@@ -891,6 +955,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource( 12 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 divider_path = NodePath("../UI/Divider")
@@ -903,6 +968,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -960,6 +1026,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 

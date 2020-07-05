@@ -233,8 +233,6 @@ func _process(delta):
 						bitmask.append(shared_node.get_tile(tile_util.get_tile_index_from_position(mouse_tile_pos + Vector2(-1, 1), level_area.settings.size), layer))
 						bitmask.append(shared_node.get_tile(tile_util.get_tile_index_from_position(mouse_tile_pos + Vector2(0, 1), level_area.settings.size), layer))
 						bitmask.append(shared_node.get_tile(tile_util.get_tile_index_from_position(mouse_tile_pos + Vector2(1, 1), level_area.settings.size), layer))
-						
-						shared_node.tilemaps_node.tileset_cache[item.tileset_id].override_tiles(mouse_tile_pos, item.tileset_id, layer, shared_node, bitmask, level_area.settings.size)
 			elif hovered_object == null:
 				var object_pos
 				if placement_mode == "Tile":

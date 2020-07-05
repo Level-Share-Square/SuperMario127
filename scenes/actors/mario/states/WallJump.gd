@@ -11,10 +11,11 @@ var wall_jump_timer = 0.0
 var direction_on_wj = 1
 var position_on_wj = Vector2(0, 0)
 var character_in_range = false
+var correcting_frames = 0
 
 func _ready():
 	actual_power = walljump_power
-	priority = 1
+	priority = 2
 	disable_turning = true
 
 func _start_check(_delta):
@@ -36,7 +37,7 @@ func _start(_delta):
 	character.velocity.y = -actual_power.y
 	character.position.x += 2 * character.facing_direction
 	character.position.y -= 2
-	direction_on_wj = character.facing_direction
+	direction_on_wj = -character.direction_on_stick
 	wall_jump_timer = 0.45
 	sound_player.play_wall_jump_sound()
 	character.jump_animation = 0

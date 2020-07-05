@@ -28,9 +28,8 @@ func exit_area(body):
 		character = null
 		
 func enter_detector(body):
-	if body.name.begins_with("Character") and respawn_timer == 0 and enabled:
+	if body.name.begins_with("Character") and respawn_timer == 0 and enabled and body.velocity.y > 0:
 		respawn_timer = 10.0
-		print("B")
 		if body.state != body.get_state_node("GroundPoundState"):
 			body.velocity.y = -230
 			body.position.y -= 4
