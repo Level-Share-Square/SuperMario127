@@ -35,7 +35,7 @@ func _start(_delta):
 	character.facing_direction = -character.direction_on_stick
 	character.velocity.x = actual_power.x * character.facing_direction
 	character.velocity.y = -actual_power.y
-	character.position.x += 2 * character.facing_direction
+	character.position.x += 2 * -character.direction_on_stick
 	character.position.y -= 2
 	direction_on_wj = -character.direction_on_stick
 	wall_jump_timer = 0.45

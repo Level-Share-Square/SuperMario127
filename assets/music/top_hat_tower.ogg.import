@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/top_hat_tower.ogg-5d75f850268a6a55bd52cc0c978f19dd.oggstr"
+
+[deps]
+
+source_file="res://assets/music/top_hat_tower.ogg"
+dest_files=[ "res://.import/top_hat_tower.ogg-5d75f850268a6a55bd52cc0c978f19dd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

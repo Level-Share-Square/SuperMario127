@@ -3921,7 +3921,7 @@ script = ExtResource( 8 )
 position = Vector2( 0.644974, 10.2275 )
 
 [node name="Grid" type="ParallaxBackground" parent="."]
-layer = 99
+layer = -1
 script = ExtResource( 123 )
 
 [node name="Layer" type="ParallaxLayer" parent="Grid"]

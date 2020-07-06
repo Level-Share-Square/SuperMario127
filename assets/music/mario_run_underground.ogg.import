@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mario_run_underground.ogg-489cf337bb4e4477a17a25822b4c3b17.oggstr"
+
+[deps]
+
+source_file="res://assets/music/mario_run_underground.ogg"
+dest_files=[ "res://.import/mario_run_underground.ogg-489cf337bb4e4477a17a25822b4c3b17.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=3.9

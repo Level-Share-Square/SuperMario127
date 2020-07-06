@@ -22,6 +22,7 @@ func _start(_delta):
 		character.direction_on_stick = 1
 	else:
 		character.direction_on_stick = -1
+	character.velocity.x = character.direction_on_stick * 5
 	wall_buffer = 0.075
 	old_gravity_scale = character.gravity_scale
 	character.gravity_scale = gravity_scale
@@ -31,7 +32,7 @@ func _update(delta):
 		sound_playing = true
 		character.sound_player.set_skid_playing(true)
 		character.particles.emitting = true
-		
+
 	character.velocity.x += character.direction_on_stick * 5
 	if !(character.is_walled()):
 		wall_buffer -= delta
