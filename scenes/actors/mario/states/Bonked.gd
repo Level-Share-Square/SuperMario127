@@ -5,9 +5,10 @@ class_name BonkedState
 export var bonk_direction: int = 1
 var frames_bonked = 0
 var bounces_left = 0
+var time_until_cancel = 0.0
 
 func _ready():
-	priority = 4
+	priority = 5
 	disable_turning = true
 	disable_movement = true
 	override_rotation = true
@@ -22,8 +23,16 @@ func _start(_delta):
 	character.current_jump = 0
 	character.friction = 4
 	bounces_left = 2
+	frames_bonked = 0
+	priority = 5
+	time_until_cancel = 0.65
 
 func _update(delta):
+	if time_until_cancel > 0:
+		time_until_cancel -= delta
+		if time_until_cancel <= 0:
+			time_until_cancel = 0
+			priority = 1
 	var sprite = character.animated_sprite
 	frames_bonked += 1
 	if (bonk_direction == 1):
