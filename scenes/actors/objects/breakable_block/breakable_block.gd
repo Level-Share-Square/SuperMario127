@@ -58,7 +58,7 @@ func _physics_process(delta):
 					broken_sound.play()
 					delete_timer = 3.0
 		for hit_body in spin_area.get_overlapping_bodies():
-			if !broken and hit_body.name.begins_with("Character"): if hit_body.attacking:
+			if !broken and hit_body.name.begins_with("Character"): if hit_body.attacking and !hit_body.big_attack:
 				broken = true
 				if not broken_sound.is_playing(): 
 					for i in(coins): create_coin()

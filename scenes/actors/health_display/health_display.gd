@@ -28,7 +28,10 @@ func _ready():
 		ui.position.x = 544
 	else:
 		ui.position.x = 352
-		
+	
+	yield(get_tree().create_timer(1), "timeout")
+	ui.texture = load(ui.texture.load_path)
+	shards.texture = load(shards.texture.load_path)
 
 func _process(delta):
 	if is_instance_valid(character):

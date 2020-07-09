@@ -11,10 +11,6 @@ var wait_timer = 0.0
 
 onready var sound = $AudioStreamPlayer
 
-func _set_properties():
-	savable_properties = ["show_behind_layer"]
-	editable_properties = ["show_behind_layer"]
-
 func _ready():
 	if mode == 0:
 		if enabled:
@@ -40,7 +36,7 @@ func _ready():
 					wait_timer = 0.75
 					
 			character.spawn_pos = position
-			character.get_node("Spotlight").enabled = show_behind_layer
+			character.get_node("Spotlight").enabled = false
 			character.scale = Vector2(abs(scale.x), scale.y)
 			if scale.x < 0:
 				character.facing_direction = -character.facing_direction

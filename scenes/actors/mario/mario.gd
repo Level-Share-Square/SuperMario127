@@ -383,7 +383,7 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180):
 func heal(shards : int = 1):
 	if !dead and health != 8:
 		health_shards += shards
-		health += floor(health_shards / 5)
+		health = int(health + floor(health_shards / 5))
 		health_shards = health_shards % 5
 
 func _physics_process(delta: float):
