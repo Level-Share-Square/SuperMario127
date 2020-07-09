@@ -16,20 +16,20 @@ var title := "Unnamed Shine"
 var description := "This is a shine! Collect it to win the level."
 var show_in_menu := false
 var activated := true
-var activate_on := 0
+var red_coins_activate := false
 
 var unpause_timer = 0.0
 
 func _set_properties():
-	savable_properties = ["title", "description", "show_in_menu", "activated", "activate_on"]
-	editable_properties = ["title", "description", "show_in_menu", "activated", "activate_on"]
+	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate"]
+	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate"]
 	
 func _set_property_values():
 	set_property("title", title, true)
 	set_property("description", description, true)
 	set_property("show_in_menu", show_in_menu, true)
 	set_property("activated", activated, true)
-	set_property("activate_on", activate_on, true)
+	set_property("red_coins_activate", red_coins_activate, true)
 
 func collect(body):
 	if activated and enabled and !collected and body.name.begins_with("Character") and body.controllable:
@@ -44,7 +44,7 @@ func collect(body):
 
 func _ready():
 	if mode != 1:
-		if activate_on != 0:
+		if red_coins_activate:
 			activated = false
 		var _connect = area.connect("body_entered", self, "collect")
 
@@ -53,7 +53,7 @@ func _physics_process(delta):
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
 	if mode != 1:
 		var camera = get_tree().get_current_scene().get_node(get_tree().get_current_scene().camera)
-		if activate_on == 1 and !activated:
+		if red_coins_activate and !activated:
 			if CurrentLevelData.level_data.vars.red_coins_collected == CurrentLevelData.level_data.vars.max_red_coins:
 				activated = true
 				animation_player.play("appear")

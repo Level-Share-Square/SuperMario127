@@ -961,4 +961,6 @@ quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 quality/2d/use_pixel_snap=true
 vram_compression/import_bptc=true
+limits/buffers/canvas_polygon_buffer_size_kb=1024
+limits/buffers/canvas_polygon_index_buffer_size_kb=1024
 environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )

@@ -8,9 +8,16 @@ onready var scroll_container = $ScrollContainer
 onready var grid_container = $ScrollContainer/GridContainer
 onready var tween = $Tween
 onready var close_button = $CloseButton
+onready var close_button_rect = $CloseButton/TextureRect
 
 var hovered = false
 var last_layer
+
+func _process(delta):
+	if close_button.is_hovered() and !close_button.pressed:
+		close_button_rect.modulate = Color(0.8, 0.8, 0.8)
+	else:
+		close_button_rect.modulate = Color(1, 1, 1)
 
 func open():
 	if !visible:

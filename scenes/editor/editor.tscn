@@ -1,4 +1,4 @@
-[gd_scene load_steps=190 format=2]
+[gd_scene load_steps=188 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -2021,16 +2021,6 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
-[sub_resource type="StyleBoxFlat" id=46]
-bg_color = Color( 0, 0.033, 0.22, 1 )
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
-[sub_resource type="StyleBoxFlat" id=47]
-bg_color = Color( 0, 0.0470588, 0.317647, 1 )
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
 [sub_resource type="DynamicFont" id=48]
 size = 128
 font_data = ExtResource( 4 )
@@ -3865,11 +3855,18 @@ margin_left = 13.0
 margin_top = 175.0
 margin_right = 403.0
 margin_bottom = 320.0
-custom_styles/hover = SubResource( 46 )
-custom_styles/pressed = SubResource( 47 )
-custom_styles/normal = SubResource( 47 )
 custom_fonts/font = SubResource( 48 )
+flat = true
 script = ExtResource( 60 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI/ItemPicker/CloseButton"]
+margin_right = 658.0
+margin_bottom = 477.0
+rect_scale = Vector2( 0.6, 0.333 )
+texture = ExtResource( 23 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
