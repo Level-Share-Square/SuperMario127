@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/metal_mario.ogg-475452b189304fc08ac723f5401e9114.oggstr"
+
+[deps]
+
+source_file="res://assets/music/metal_mario.ogg"
+dest_files=[ "res://.import/metal_mario.ogg-475452b189304fc08ac723f5401e9114.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=4.95

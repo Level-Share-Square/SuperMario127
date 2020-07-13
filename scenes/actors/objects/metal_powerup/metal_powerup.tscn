@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=1]
+[ext_resource path="res://scenes/actors/objects/yellow_coin/yellow.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/actors/objects/metal_powerup/metal_powerup.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="MetalPowerup" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 0.0862745, 0, 0.584314, 1 )
+frames = ExtResource( 2 )
+frame = 3
+playing = true
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -9.0
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+process_parent = true
+physics_process_parent = true

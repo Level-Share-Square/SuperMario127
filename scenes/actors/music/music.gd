@@ -3,6 +3,9 @@ extends AudioStreamPlayer
 export var play_bus: String
 export var edit_bus: String
 
+var character = null
+var character2 = null
+
 export var volume_multiplier : float = 1
 export var loading = false
 var orig_volume = 0
@@ -15,6 +18,8 @@ var downloader = Downloader.new()
 
 var song_cache = []
 var loop = 0.0
+
+var is_powerup = false
 
 func get_song(song_id: int):
 	return song_cache[song_id]
@@ -42,8 +47,7 @@ func load_ogg():
 	play()
 	print("Audio Loaded!")
 	
-func change_song(old_setting):
-	var music_setting = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
+func change_song(old_setting, music_setting):
 	var song
 	
 	if typeof(music_setting) == TYPE_INT:
@@ -67,20 +71,37 @@ func change_song(old_setting):
 		bus = edit_bus
 
 func _process(_delta):
+	var current_scene = get_tree().get_current_scene()
 	var current_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
-	if loading and OS.has_feature("JavaScript"):
-		AudioServer.set_bus_mute(0, true)
-		AudioServer.set_bus_mute(1, true)
-	else:
-		AudioServer.set_bus_mute(0, false)
-		AudioServer.set_bus_mute(1, false)
-	if get_tree().get_current_scene().mode != last_mode or typeof(last_song) != typeof(current_song):
-		change_song(last_song)
-	elif last_song != current_song:
-		change_song(last_song)
+	
+	if !is_powerup:
+		var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
+		if current_scene.mode != last_mode or typeof(last_song) != typeof(level_song):
+			change_song(last_song, level_song)
+		elif last_song != current_song:
+			change_song(last_song, level_song)
+		last_mode = current_scene.mode
+		last_song = level_song
+
 	volume_db = linear2db(db2linear(orig_volume) * volume_multiplier)
-	last_mode = get_tree().get_current_scene().mode
-	last_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
+
+	if current_scene.mode == 0 and is_instance_valid(character):
+		if character.powerup != null:
+			if character.powerup.music_id != current_song:
+				last_song = current_song
+				current_song = character.powerup.music_id
+				change_song(last_song, current_song)
+				is_powerup = true
+		else:
+			if is_powerup:
+				var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
+				change_song(last_song, level_song)
+			is_powerup = false
+	else:
+		if is_powerup:
+			var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
+			change_song(last_song, level_song)
+		is_powerup = false
 
 func _unhandled_input(event):
 	if event.is_action_pressed("mute"):

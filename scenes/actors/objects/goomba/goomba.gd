@@ -211,7 +211,7 @@ func _physics_process(delta):
 
 				for hit_body in attack_area.get_overlapping_bodies():
 					if hit_body.name.begins_with("Character"):
-						if hit_body.attacking:
+						if hit_body.attacking or hit_body.invincible:
 							kill(hit_body.global_position)
 						else:
 							hit_body.damage_with_knockback(body.global_position)

@@ -9,6 +9,7 @@ export var autoplay : bool
 export var volume_range : float
 export var pitch_range : float
 export var sound_number : int
+export var bus : String
 
 func _ready():
 	for i in get_children():
@@ -52,6 +53,7 @@ func play(num=0, ran=true):
 func _get_ransnd(ran=true):
 	var chance = randi() % soundlist.size()
 	var ransnd = soundlist[chance]
+	ransnd.bus = bus if bus != null else ransnd.bus
 	if ran:
 		_randomise_pitch_and_vol(ransnd)
 	return ransnd

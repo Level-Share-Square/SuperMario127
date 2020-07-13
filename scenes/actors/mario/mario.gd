@@ -6,6 +6,7 @@ signal state_changed
 
 onready var states_node = $States
 onready var nozzles_node = $Nozzles
+onready var powerups_node = $Powerups
 onready var animated_sprite = $Sprite
 onready var anim_player = $AnimationPlayer
 
@@ -53,6 +54,7 @@ export var disable_animation = false
 
 export var attacking = false
 export var big_attack = false
+export var invincible = false
 export var heavy = false
 
 export var player_id = 0
@@ -75,6 +77,10 @@ var nozzle = null
 var fuel := 100.0
 var stamina := 100.0
 var nozzles_list_index := 0
+var powerup = null
+var next_flash = 0.0
+var frames_until_flash = 3
+var metal_voice = false
 
 # Collision vars
 var collision_down
@@ -197,7 +203,8 @@ func is_character():
 	return true
 	
 func exploded(explosion_pos : Vector2):
-	damage_with_knockback(explosion_pos, 2)
+	if !invincible:
+		damage_with_knockback(explosion_pos, 2)
 		
 func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String = "hit", frames : int = 180):
 	if !invulnerable:
@@ -298,6 +305,10 @@ func set_state(new_state, delta: float):
 func get_state_node(name: String):
 	if states_node.has_node(name):
 		return states_node.get_node(name)
+		
+func get_powerup_node(name: String):
+	if powerups_node.has_node(name):
+		return powerups_node.get_node(name)
 
 func set_state_by_name(name: String, delta: float):
 	if get_state_node(name) != null:
@@ -362,6 +373,15 @@ func player_hit(body):
 				sound_player.play_hit_sound()
 
 func _process(delta: float):
+	if powerup != null:
+		if powerup.time_left <= 2.5:
+			frames_until_flash -= 1
+			if frames_until_flash <= 0:
+				frames_until_flash = 3
+				sprite.material = null if sprite.material != null else powerup.material
+		else:
+			sprite.material = powerup.material
+			
 	if invulnerable_frames > 0:
 		visible = !visible
 	elif invulnerable_frames == 0:
@@ -371,9 +391,12 @@ func _process(delta: float):
 
 func damage(amount : int = 1, cause : String = "hit", frames : int = 180):
 	if !dead:
+		if invincible:
+			frames = 4
+		else:
+			health -= amount
 		invulnerable = true if frames != 0 else false
 		invulnerable_frames = frames
-		health -= amount
 		if health <= 0:
 			sound_player.play_last_hit_sound()
 			kill(cause)
@@ -383,8 +406,10 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180):
 func heal(shards : int = 1):
 	if !dead and health != 8:
 		health_shards += shards
-		health = int(health + floor(health_shards / 5))
+		health = clamp(int(health + floor(health_shards / 5)), 0, 8)
 		health_shards = health_shards % 5
+		if health == 8:
+			health_shards = 0
 
 func _physics_process(delta: float):
 	bottom_pos.position = bottom_pos_offset
@@ -422,7 +447,7 @@ func _physics_process(delta: float):
 			
 		if is_grounded():
 			velocity.y += abs(sprite_rotation) * 100 # this is required to keep mario from falling off slopes
-		sprite.offset = sprite.offset.linear_interpolate(sprite_offset, delta * rotation_interpolation_speed)
+		sprite.position = sprite.position.linear_interpolate(sprite_offset, delta * rotation_interpolation_speed)
 		sprite.rotation = lerp_angle(sprite.rotation, sprite_rotation, delta * rotation_interpolation_speed)
 		sprite.rotation_degrees = wrapf(sprite.rotation_degrees, -180, 180)
 			
@@ -546,6 +571,20 @@ func _physics_process(delta: float):
 			
 		for nozzle_node in nozzles_node.get_children():
 			nozzle_node.handle_update(delta)
+
+	if powerup != null:
+		metal_voice = powerup.metal_voice
+		invincible = powerup.is_invincible
+
+		powerup.time_left -= delta
+
+		if powerup.time_left <= 0:
+			powerup.time_left = 0
+			powerup = null
+	else:
+		metal_voice = false
+		sprite.material = null
+		invincible = false
 
 	if state != null:
 		if state.attack_tier > 1:
@@ -732,7 +771,7 @@ func kill(cause):
 				reload = false
 			
 		if reload:
-			CurrentLevelData.level_data.vars.transition_data = []
+			CurrentLevelData.level_data.vars = LevelVars.new()
 			scene_transitions.reload_scene(cutout_in, cutout_out, transition_time, 0)
 		else:
 			yield(get_tree().create_timer(3), "timeout")

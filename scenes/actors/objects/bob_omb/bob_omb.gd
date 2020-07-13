@@ -142,7 +142,7 @@ func _physics_process(delta):
 			for hit_body in attack_area.get_overlapping_bodies():
 				if hit_body.name.begins_with("Character"):
 					var character_attack = hit_body
-					if character_attack.attacking:
+					if character_attack.attacking or character_attack.invincible:
 						hit = true
 						body.set_collision_layer_bit(2, false)
 						snap = Vector2(0, 0)

@@ -1,8 +1,31 @@
-[gd_resource type="AudioBusLayout" load_steps=2 format=2]
+[gd_resource type="AudioBusLayout" load_steps=4 format=2]
 
 [sub_resource type="AudioEffectFilter" id=1]
 resource_name = "Filter"
 cutoff_hz = 3000.0
+
+[sub_resource type="AudioEffectReverb" id=2]
+resource_name = "Reverb"
+room_size = 0.35
+damping = 0.8
+spread = 0.56
+wet = 0.1
+
+[sub_resource type="AudioEffectChorus" id=3]
+resource_name = "Chorus"
+voice_count = 4
+voice/3/delay_ms = 12.0
+voice/3/rate_hz = 1.0
+voice/3/depth_ms = 0.0
+voice/3/level_db = 0.0
+voice/3/cutoff_hz = 16000.0
+voice/3/pan = 0.0
+voice/4/delay_ms = 12.0
+voice/4/rate_hz = 1.0
+voice/4/depth_ms = 0.0
+voice/4/level_db = 0.0
+voice/4/cutoff_hz = 16000.0
+voice/4/pan = 0.0
 
 [resource]
 bus/1/name = "Editor"
@@ -17,5 +40,15 @@ bus/2/name = "Voices"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = -5.32668
+bus/2/volume_db = -5.47449
 bus/2/send = "Master"
+bus/3/name = "VoicesMetal"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = -10.7507
+bus/3/send = "Master"
+bus/3/effect/0/effect = SubResource( 2 )
+bus/3/effect/0/enabled = true
+bus/3/effect/1/effect = SubResource( 3 )
+bus/3/effect/1/enabled = true

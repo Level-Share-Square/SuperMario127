@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -37,6 +37,7 @@
 [ext_resource path="res://scenes/player/ui/red_coin.png" type="Texture" id=35]
 [ext_resource path="res://scenes/player/red_coin_counter.gd" type="Script" id=36]
 [ext_resource path="res://scenes/player/window_scale.gd" type="Script" id=37]
+[ext_resource path="res://scenes/player/fps_cap.gd" type="Script" id=38]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 7 )
@@ -640,8 +641,9 @@ stream = ExtResource( 11 )
 volume_db = -10.0
 
 [node name="ControlMode" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_top = -13.0
 margin_right = 40.0
-margin_bottom = 40.0
+margin_bottom = 27.0
 script = ExtResource( 23 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -701,9 +703,9 @@ __meta__ = {
 }
 
 [node name="WindowScale" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
-margin_top = 35.0
+margin_top = 22.0
 margin_right = 40.0
-margin_bottom = 75.0
+margin_bottom = 62.0
 script = ExtResource( 37 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -756,6 +758,68 @@ margin_right = 272.0
 margin_bottom = 189.796
 custom_fonts/font = SubResource( 17 )
 text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FPSLock" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_top = 57.0
+margin_right = 40.0
+margin_bottom = 97.0
+script = ExtResource( 38 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/FPSLock"]
+margin_left = 271.654
+margin_top = 159.587
+margin_right = 399.654
+margin_bottom = 287.587
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/FPSLock"]
+margin_left = 233.0
+margin_top = 185.296
+margin_right = 361.0
+margin_bottom = 313.296
+rect_rotation = 180.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 25 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/FPSLock"]
+margin_left = 40.0
+margin_top = 158.0
+margin_right = 202.0
+margin_bottom = 186.0
+custom_fonts/font = SubResource( 17 )
+text = "FPS Cap:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/FPSLock"]
+margin_left = 234.0
+margin_top = 157.796
+margin_right = 272.0
+margin_bottom = 189.796
+custom_fonts/font = SubResource( 17 )
+text = "60"
 align = 1
 valign = 1
 __meta__ = {

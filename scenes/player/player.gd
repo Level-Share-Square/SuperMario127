@@ -10,6 +10,8 @@ var mode = 0
 func _ready():
 	var data = CurrentLevelData.level_data
 	load_in(data, data.areas[CurrentLevelData.area])
+	music.character = get_node(character)
+	music.character2 = get_node(character2)
 	if PlayerSettings.other_player_id != -1:
 		if PlayerSettings.my_player_index == 0:
 			get_node(character).set_network_master(get_tree().get_network_unique_id())

@@ -19,16 +19,50 @@ onready var triple_jump_voiceless = $OtherSounds/TripleJump
 onready var wall_jump_voiceless = $OtherSounds/WallJump
 onready var spin_sound = $OtherSounds/Spin
 onready var duck_sound = $OtherSounds/Duck
+onready var last_hit_8bit_sound = $OtherSounds/LastHit8Bit
 
 onready var footsteps_default = $Footsteps/Default
 
+export var voices_bus : String
+export var metal_bus : String
 var ready = false
+var last_metal_filter = true
+var character = null
 
 # This code just plain sucks
 
 func _ready():
 	yield(get_tree().create_timer(0.1), "timeout")
 	ready = true
+	character = get_parent()
+	
+func switch_bus(node, bus):
+	node.bus = bus
+	
+func _physics_process(delta):
+	if is_instance_valid(character):
+		if character.metal_voice and !last_metal_filter: #peak of coding right here
+			switch_bus(jump_sounds, metal_bus)
+			switch_bus(double_jump_sounds, metal_bus)
+			switch_bus(triple_jump_sounds, metal_bus)
+			switch_bus(dive_sounds, metal_bus)
+			switch_bus(fall_sounds, metal_bus)
+			switch_bus(hit_sounds, metal_bus)
+			switch_bus(last_hit_sounds, metal_bus)
+			switch_bus(death_sounds, metal_bus)
+			switch_bus(stomped_sounds, metal_bus)
+		elif !character.metal_voice and last_metal_filter:
+			switch_bus(jump_sounds, voices_bus)
+			switch_bus(double_jump_sounds, voices_bus)
+			switch_bus(triple_jump_sounds, voices_bus)
+			switch_bus(dive_sounds, voices_bus)
+			switch_bus(fall_sounds, voices_bus)
+			switch_bus(hit_sounds, voices_bus)
+			switch_bus(last_hit_sounds, voices_bus)
+			switch_bus(death_sounds, voices_bus)
+			switch_bus(stomped_sounds, voices_bus)
+			
+		last_metal_filter = character.metal_voice
 
 func play_footsteps():
 	if ready:
@@ -64,7 +98,7 @@ func play_fall_sound():
 		
 func play_last_hit_sound():
 	if ready:
-		last_hit_sounds.play()
+		last_hit_8bit_sound.play()
 	
 func play_hit_sound():
 	if ready:

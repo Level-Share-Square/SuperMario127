@@ -38,9 +38,9 @@ func _set_property_values():
 
 func kill(body):
 	if enabled and body.name.begins_with("Character") and !body.dead and !dead and body.controllable:
-		if !body.attacking:
+		if !body.attacking and !body.invincible:
 			body.damage_with_knockback(global_position)
-		elif body.attacking:
+		elif body.attacking or body.invincible:
 			velocity = ((body.global_position - global_position).normalized() * -90)
 			dead = true
 			delete_timer = 3.0 if !invincible else 0.25

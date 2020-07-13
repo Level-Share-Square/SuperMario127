@@ -129,7 +129,7 @@ func _physics_process(delta):
 					
 				for hit_body in attack_area.get_overlapping_bodies():
 					if hit_body.name.begins_with("Character"):
-						if hit_body.attacking:
+						if hit_body.attacking or hit_body.invincible:
 							retract_into_shell()
 							shell_sound.play()
 							velocity.x = (shell.global_position - hit_body.global_position).normalized().x * (shell_max_speed)
@@ -167,7 +167,7 @@ func _physics_process(delta):
 				for hit_body in shell_attack_area.get_overlapping_bodies():
 					if hit_body.name.begins_with("Character"):
 						var hit_speed = shell_max_speed
-						if hit_body.attacking:
+						if hit_body.attacking or hit_body.invincible:
 							velocity.x = (shell.global_position - hit_body.global_position).normalized().x * (shell_max_speed)
 							velocity.y = -275
 						else:
