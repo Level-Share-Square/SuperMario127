@@ -771,8 +771,7 @@ func kill(cause):
 				reload = false
 			
 		if reload:
-			CurrentLevelData.level_data.vars = LevelVars.new()
-			scene_transitions.reload_scene(cutout_in, cutout_out, transition_time, 0)
+			scene_transitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
 		else:
 			yield(get_tree().create_timer(3), "timeout")
 			health = 8
