@@ -25,7 +25,7 @@ func handle_update(delta: float):
 	if character.nozzle == self:
 		_update(delta)
 		if character.controllable:
-			if character.inputs[7][0] and _activate_check(delta) and character.fuel > 0 and character.stamina > 0:
+			if character.inputs[7][0] and !character.inputs[4][0] and _activate_check(delta) and character.fuel > 0 and character.stamina > 0:
 				var can_activate = true
 				for state in blacklisted_states:
 					if character.state == character.get_state_node(state):
