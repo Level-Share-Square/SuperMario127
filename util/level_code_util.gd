@@ -19,27 +19,31 @@ static func is_valid(value : String):
 		else:
 			return false
 
-static func encode(data):
+static func encode(tiles, settings):
 	var new_data = []
-	var last_index = ""
+	var last_index = -1
 	var count = 1
+	var append_string = ""
 	
-	for index in data:
-		if index != last_index:
-			if last_index:
-				var append_string = "*" + str(count)
-				if count == 1:
-					append_string = ""
-				new_data.append(last_index + append_string)
+	for index in range(settings.size.x * settings.size.y):
+		var appended_tile
+		if index < tiles.size():
+			var encoded_tile = tiles[index]
+			appended_tile = encoded_tile[0] * 10 + encoded_tile[1]
+		else:
+			appended_tile = 0
+		
+		if appended_tile != last_index:
+			if last_index != -1:
+				append_string = "" if count == 1 else ("*" + str(count))
+				new_data.append(str(last_index).pad_zeros(3) + append_string)
 			count = 1
-			last_index = index
+			last_index = appended_tile
 		else:
 			count += 1
-			
-	var append_string_last = "*" + str(count)
-	if count == 1:
-		append_string_last = ""
-	new_data.append(last_index + append_string_last)
+	
+	append_string = "" if count == 1 else ("*" + str(count))
+	new_data.append(str(last_index).pad_zeros(3) + append_string)
 	
 	return new_data
 	
