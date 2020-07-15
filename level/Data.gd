@@ -214,7 +214,7 @@ func get_encoded_level_data():
 		level_string += value_util.encode_value(settings.gravity) + "~"
 		
 		# Tiles
-		for index in range((settings.size.x * settings.size.y) - 1):
+		for index in range(settings.size.x * settings.size.y):
 			var appended_tile
 			if index < area.foreground_tiles.size():
 				var encoded_tile = area.foreground_tiles[index]
@@ -223,7 +223,7 @@ func get_encoded_level_data():
 				appended_tile = "000"
 			saved_tiles.append(appended_tile)	
 			
-		for index in range((settings.size.x * settings.size.y) - 1):
+		for index in range(settings.size.x * settings.size.y):
 			var appended_tile
 			if index < area.background_tiles.size():
 				var encoded_tile = area.background_tiles[index]
@@ -232,7 +232,7 @@ func get_encoded_level_data():
 				appended_tile = "000"
 			saved_background_tiles.append(appended_tile)	
 	
-		for index in range((settings.size.x * settings.size.y) - 1):
+		for index in range(settings.size.x * settings.size.y):
 			var appended_tile
 			if index < area.very_foreground_tiles.size():
 				var encoded_tile = area.very_foreground_tiles[index]
