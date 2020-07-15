@@ -21,7 +21,7 @@ func _ready():
 	
 func _start_check(_delta):
 	var normal = character.ground_check.get_collision_normal()
-	return (character.nozzle == null or !character.nozzle.activated) and character.inputs[9][1] and character.is_grounded() and normal.x != 0
+	return (character.nozzle == null or !character.nozzle.activated) and character.inputs[9][1] and character.is_grounded() and abs(normal.x) > 0.2
 
 func _start(delta):
 	temp_speed = move_speed
@@ -42,7 +42,7 @@ func _update(delta):
 		
 	var normal = character.ground_check.get_collision_normal()
 	var move_direction = 0
-	if normal.x != 0:
+	if abs(normal.x) > 0.2:
 		if normal.x > 0:
 			move_direction = 1
 		else:
@@ -59,7 +59,7 @@ func _update(delta):
 		temp_speed = clamp(temp_speed - 2, move_speed, move_speed * 10)
 		character.velocity.x = lerp(character.velocity.x, 0, delta * 2)
 		
-	if abs(character.velocity.x) < 20 and normal.x == 0:
+	if abs(character.velocity.x) < 20 and abs(normal.x) <= 0.2:
 		stop_buffer = 0
 		character.set_state_by_name("BounceState", delta)
 		character.position.y -= 1
