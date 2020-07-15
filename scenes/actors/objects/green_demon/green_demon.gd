@@ -34,6 +34,7 @@ func kill(body):
 		effects.visible = false
 
 func _ready():
+	particles.process_material.scale = (scale.x + scale.y) / 2
 	particles.amount = 6 * chase_speed
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "kill")
