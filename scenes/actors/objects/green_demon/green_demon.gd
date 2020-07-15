@@ -64,7 +64,7 @@ func _physics_process(delta):
 				var character_2 = current_scene.get_node(current_scene.character2)
 				var char1_distance = global_position.distance_to(character_1.global_position)
 				var char2_distance = global_position.distance_to(character_2.global_position)
-	
+				
 				if (char1_distance < char2_distance or character_2.dead) and !character_1.dead:
 					character = character_1
 				else:
