@@ -10,7 +10,7 @@ var property_type
 func _ready():
 	label.text = key.capitalize()
 	
-	var value = object[key]
+	var value = object[key] if key != "visible" else object.modulate.a == 1
 	var type = typeof(value)
 	var type_scene_name := "None"
 	if type == TYPE_VECTOR2:

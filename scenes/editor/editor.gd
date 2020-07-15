@@ -152,13 +152,13 @@ func _process(delta):
 			if objects.size() > 0 and placement_mode != "Tile" and !rotating and time_clicked <= 0:
 				if hovered_object != objects[0]:
 					if hovered_object != null:
-						hovered_object.modulate = Color(1, 1, 1)
+						hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
 					hovered_object = objects[0]
 					hovered_object.hovered = true
-					hovered_object.modulate = Color(0.65, 0.65, 1)
+					hovered_object.modulate = Color(0.65, 0.65, 1, hovered_object.modulate.a)
 					item_preview_node.visible = false
 			elif hovered_object != null and is_instance_valid(hovered_object) and !rotating and time_clicked <= 0:
-				hovered_object.modulate = Color(1, 1, 1)
+				hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
 				hovered_object.hovered = false
 				hovered_object = null
 				item_preview_node.visible = true
