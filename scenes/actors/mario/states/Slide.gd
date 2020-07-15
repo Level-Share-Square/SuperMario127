@@ -92,7 +92,7 @@ func _general_update(delta):
 	var normal = character.ground_check.get_collision_normal()
 	if character.inputs[2][1]:
 		getup_buffer = 0.075
-	if character.inputs[9][1] and normal.x == 0:
+	if character.inputs[9][1] and abs(normal.x) <= 0.2:
 		crouch_buffer = 0.15
 	if getup_buffer > 0:
 		getup_buffer -= delta
