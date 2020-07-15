@@ -179,13 +179,13 @@ func _process(delta):
 			time_clicked += delta
 			if time_clicked > 0.2:
 				var obj_position = mouse_pos
-				if Input.is_action_pressed("8_pixel_lock"):
+				if !Input.is_action_pressed("8_pixel_lock"):
 					obj_position = Vector2(stepify(obj_position.x, 8), stepify(obj_position.y, 8))
 				hovered_object.set_property("position", obj_position, true)
 
 		if hovered_object and rotating:
 			hovered_object.rotation = -90 + hovered_object.position.angle_to_point(mouse_pos)
-			if Input.is_action_pressed("8_pixel_lock"):
+			if !Input.is_action_pressed("8_pixel_lock"):
 				hovered_object.rotation_degrees = stepify(hovered_object.rotation_degrees, 15)
 
 		if hovered_object and Input.is_action_just_released("place") and time_clicked > 0 and time_clicked < 0.2:
@@ -239,7 +239,7 @@ func _process(delta):
 					object_pos = (mouse_tile_pos * item.tile_mode_step) + item.object_center
 				elif Input.is_action_just_pressed("place"):
 					object_pos = mouse_pos
-					if Input.is_action_pressed("8_pixel_lock"):
+					if !Input.is_action_pressed("8_pixel_lock"):
 						object_pos = Vector2(stepify(object_pos.x, 8), stepify(object_pos.y, 8))
 					if surface_snap:
 						var object_bottom = object_pos + Vector2(0, item.object_size.y)
