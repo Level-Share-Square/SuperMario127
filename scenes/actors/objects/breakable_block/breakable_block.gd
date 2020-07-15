@@ -40,7 +40,7 @@ func top_breakable(hit_body):
 	return hit_body.name.begins_with("Character") and hit_body.velocity.y > 0 and hit_body.big_attack
 
 func side_breakable(hit_body):
-	return hit_body.name.begins_with("Character") and (hit_body.attacking and !hit_body.big_attack) or hit_body.invincible
+	return hit_body.name.begins_with("Character") and ((hit_body.attacking and !hit_body.big_attack) or hit_body.invincible)
 	
 func _physics_process(delta):
 	if mode != 1: 
