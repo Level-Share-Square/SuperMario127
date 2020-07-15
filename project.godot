@@ -466,6 +466,7 @@ EditorSavedSettings="*res://scenes/editor/editor_saved_settings.gd"
 PhotoMode="*res://scenes/actors/photo_mode/photo_mode.gd"
 ActionManager="*res://scenes/editor/action_manager.gd"
 MiscCache="*res://scenes/shared/misc_cache.gd"
+Autosave="*res://scenes/editor/autosave.gd"
 
 [debug]
 

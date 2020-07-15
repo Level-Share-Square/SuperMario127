@@ -36,6 +36,12 @@ func detect_player(body):
 	if enabled and body.name.begins_with("Character") and !broken and character == null:
 		character = body
 
+func top_breakable(hit_body):
+	return hit_body.name.begins_with("Character") and hit_body.velocity.y > 0 and hit_body.big_attack
+
+func side_breakable(hit_body):
+	return hit_body.name.begins_with("Character") and (hit_body.attacking and !hit_body.big_attack) or hit_body.invincible
+	
 func _physics_process(delta):
 	if mode != 1: 
 		time_alive += delta
@@ -47,7 +53,7 @@ func _physics_process(delta):
 				queue_free()
 		
 		for hit_body in stomp_area.get_overlapping_bodies():
-			if !broken and hit_body.name.begins_with("Character"): if hit_body.velocity.y > 0: if hit_body.big_attack:
+			if !broken and top_breakable(hit_body):
 				broken = true
 				if not broken_sound.is_playing(): 
 					for i in(coins): create_coin()
@@ -58,7 +64,7 @@ func _physics_process(delta):
 					broken_sound.play()
 					delete_timer = 3.0
 		for hit_body in spin_area.get_overlapping_bodies():
-			if !broken and hit_body.name.begins_with("Character"): if hit_body.attacking and !hit_body.big_attack:
+			if !broken and side_breakable(hit_body):
 				broken = true
 				if not broken_sound.is_playing(): 
 					for i in(coins): create_coin()

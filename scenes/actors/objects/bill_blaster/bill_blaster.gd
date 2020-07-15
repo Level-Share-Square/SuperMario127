@@ -75,7 +75,7 @@ func _physics_process(delta):
 			object.type_id = 25
 			object.properties = []
 			object.properties.append(position + Vector2(16 * facing_direction, 0))
-			object.properties.append(Vector2(1, 1))
+			object.properties.append(scale)
 			object.properties.append(0)
 			object.properties.append(true)
 			object.properties.append(true)

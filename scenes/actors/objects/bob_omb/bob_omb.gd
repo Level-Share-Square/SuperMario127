@@ -85,6 +85,15 @@ func exploded(explosion_pos : Vector2):
 	explode_timer = 4
 	character = 0 # hacks are fun
 	
+func steely_hit(hit_pos : Vector2):
+	hit = true
+	snap = Vector2(0, 0)
+	velocity.x = (body.global_position - hit_pos).normalized().x * 275
+	velocity.y = -275
+	position.y -= 4
+	explode_timer = 4
+	character = 0
+	
 func shell_hit(shell_pos : Vector2):
 	hit = true
 	snap = Vector2(0, 0)

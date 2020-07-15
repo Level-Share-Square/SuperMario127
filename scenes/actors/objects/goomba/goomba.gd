@@ -84,6 +84,11 @@ func shell_hit(shell_pos : Vector2):
 func exploded(explosion_pos : Vector2):
 	if !hit:
 		kill(explosion_pos)
+
+func steely_hit(hit_pos : Vector2):
+	print("A")
+	if !hit:
+		kill(hit_pos)
 	
 func create_coin():
 	var object = LevelObject.new()
@@ -276,7 +281,7 @@ func _physics_process(delta):
 					velocity.x = 0
 					sprite.rotation_degrees = 0
 					anim_player.play("Stomped")
-					
+
 			if sprite.visible:
 				velocity.y += gravity
 				velocity = body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
@@ -293,7 +298,7 @@ func _physics_process(delta):
 						else:
 							normal = 1
 						velocity.x = lerp(velocity.x, 225 * normal, delta)
-					
+
 					if is_in_platform:
 						snap = Vector2(0, 0)
 					else:

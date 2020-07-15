@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-ids = PoolStringArray( "GreenDemon", "Goomba", "KoopaTroopa", "BobOmb", "BillBlaster" )
+ids = PoolStringArray( "GreenDemon", "Goomba", "KoopaTroopa", "BobOmb", "BillBlaster", "BigSteely" )
 color = Color( 0.517647, 0.121569, 0.121569, 1 )
 name = "Enemies"
 id = "enemies"

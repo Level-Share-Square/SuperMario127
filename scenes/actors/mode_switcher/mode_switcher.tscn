@@ -29,6 +29,7 @@ margin_right = 877.0
 margin_bottom = 379.903
 rect_scale = Vector2( 0.333, 0.333 )
 rect_pivot_offset = Vector2( 60, 300 )
+focus_mode = 0
 action_mode = 0
 texture_normal = ExtResource( 1 )
 script = ExtResource( 5 )

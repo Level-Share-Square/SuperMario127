@@ -99,7 +99,7 @@ func _physics_process(delta):
 			var line_direction = Vector2(-direction.y, direction.x)
 			var p1 = line_center + line_direction
 			var p2 = line_center - line_direction
-			var p = character.bottom_pos.global_position
+			var p = character.bottom_pos.global_position if (character.has_method("is_grounded") and !character.is_grounded()) else character.global_position
 			var diff = p2 - p1
 			var perp = Vector2(-diff.y, diff.x)
 			var d = (p - p1).dot(perp)

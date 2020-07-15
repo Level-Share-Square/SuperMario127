@@ -206,6 +206,10 @@ func exploded(explosion_pos : Vector2):
 	if !invincible:
 		damage_with_knockback(explosion_pos, 2)
 		
+func steely_hit(steely_pos : Vector2):
+	if !invincible:
+		damage_with_knockback(steely_pos, 2)
+		
 func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String = "hit", frames : int = 180):
 	if !invulnerable:
 		var direction = 1

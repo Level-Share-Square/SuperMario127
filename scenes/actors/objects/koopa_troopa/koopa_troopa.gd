@@ -73,6 +73,9 @@ func shell_hit(shell_pos : Vector2):
 		
 func exploded(explosion_pos : Vector2):
 	kill(explosion_pos)
+	
+func steely_hit(hit_pos : Vector2):
+	kill(hit_pos)
 		
 func kill(hit_pos : Vector2):
 	if !hit:
