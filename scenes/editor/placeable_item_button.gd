@@ -64,11 +64,6 @@ func _process(_delta):
 		texture_normal = texture_hover
 	else:
 		texture_normal = normal_texture
-		
-	if !clicking and last_clicking and editor.dragging_item != null and is_hovered():
-		item = editor.dragging_item
-		item_changed()
-		get_parent().get_node(get_parent().editor).set_selected_box(self)
 	
 	last_hovered = is_hovered()
 	last_clicking = clicking

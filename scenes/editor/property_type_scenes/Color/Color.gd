@@ -14,12 +14,12 @@ func _ready():
 	var _connect3 = v_edit_node.connect("focus_exited", self, "update_value")
 
 func set_value(value: Color):
-	h_edit_node.text = str(int(value.h * 255))
-	s_edit_node.text = str(int(value.s * 255))
-	v_edit_node.text = str(int(value.v * 255))
+	h_edit_node.text = str(int(value.r * 255))
+	s_edit_node.text = str(int(value.g * 255))
+	v_edit_node.text = str(int(value.b * 255))
 
 func get_value() -> Color:
-	return Color().from_hsv(float(h_edit_node.text) / 255, float(s_edit_node.text) / 255, float(v_edit_node.text) / 255)
+	return Color(float(h_edit_node.text) / 255, float(s_edit_node.text) / 255, float(v_edit_node.text) / 255)
 
 func update_value():
 	get_node("../").update_value(get_value())

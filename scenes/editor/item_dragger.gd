@@ -28,9 +28,14 @@ func _gui_input(event):
 	var editor = get_tree().get_current_scene()
 	if event is InputEventMouseButton:
 		if event.pressed and item != null:
-			icon.texture = null
-			editor.dragging_item = item
-		else:
-			icon.texture = item.icon
-			yield(VisualServer, "frame_post_draw")
-			editor.dragging_item = null
+			var button_container = editor.placeable_items_button_container_node
+			var boxes = button_container.get_children()
+			var index_size = (button_container.number_of_boxes-1)
+			for index in range(button_container.number_of_boxes):
+				if index != index_size:
+					var box = boxes[index_size - index]
+					box.item = boxes[(index_size - index) - 1].item
+					box.item_changed()
+			boxes[0].item = item
+			boxes[0].item_changed()
+			editor.set_selected_box(editor.selected_box)
