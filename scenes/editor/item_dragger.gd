@@ -38,4 +38,4 @@ func _gui_input(event):
 					box.item_changed()
 			boxes[0].item = item
 			boxes[0].item_changed()
-			editor.set_selected_box(editor.selected_box)
+			editor.set_selected_box(boxes[0])
