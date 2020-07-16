@@ -7,8 +7,8 @@ onready var value_text = $Value
 var window_scale = 1
 
 func _ready():
-	window_scale = OS.window_size.x / 768
-	value_text.text = str(PlayerSettings.control_mode + 1)
+	window_scale = 5 if OS.window_fullscreen else (OS.window_size.x / 768)
+	value_text.text = str(window_scale) if window_scale != 5 else "F"
 	var _connect = left.connect("pressed", self, "decrease_value")
 	var _connect2 = right.connect("pressed", self, "increase_value")
 
