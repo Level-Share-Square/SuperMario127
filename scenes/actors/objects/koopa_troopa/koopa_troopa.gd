@@ -188,7 +188,7 @@ func _physics_process(delta):
 								if hit_body.state != hit_body.get_state_node("DiveState"):
 									hit_body.set_state_by_name("BounceState", 0)
 								hit_body.velocity.y = -330
-								velocity.x = 0
+								velocity.x = (shell.global_position - hit_body.global_position).normalized().x * shell_max_speed
 								shell_sound.play()
 							else:
 								shell_hit(hit_body.global_position)
