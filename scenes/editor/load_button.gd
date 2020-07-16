@@ -21,6 +21,7 @@ func _pressed():
 		level_data.load_in(text_edit_node.text)
 		CurrentLevelData.level_data = level_data
 		var _reload = get_tree().reload_current_scene()
+		get_tree().root.get_node("mode_switcher").layer = 127
 		
 func update_text():
 	text_edit_node.text = CurrentLevelData.level_data.get_encoded_level_data()
