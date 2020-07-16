@@ -363,6 +363,7 @@ shape = SubResource( 9 )
 
 [node name="Spotlight" type="Light2D" parent="."]
 light_mask = 0
+enabled = false
 texture = ExtResource( 17 )
 mode = 3
 range_item_cull_mask = 524288
@@ -462,6 +463,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "death"
+frame = 1
 playing = true
 script = ExtResource( 34 )
 
