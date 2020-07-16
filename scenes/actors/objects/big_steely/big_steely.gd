@@ -31,8 +31,8 @@ func _physics_process(delta):
 	prev_pos = new_pos
 	
 	var should_hit = actual_velocity.length_squared() > 0.09
-	if should_hit:
-		print(str(actual_velocity.length_squared()))
+	#if should_hit:
+	#	print(str(actual_velocity.length_squared()))
 	
 	var platform_collision_enabled = false
 	for platform_body in platform_detector.get_overlapping_areas():
