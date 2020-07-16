@@ -956,6 +956,11 @@ toggle_show={
 2d_physics/layer_4="collectables"
 2d_physics/layer_5="platforms"
 
+[logging]
+
+file_logging/enable_file_logging=true
+file_logging/max_log_files=1
+
 [memory]
 
 limits/multithreaded_server/rid_pool_prealloc=120
@@ -974,6 +979,8 @@ quality/driver/fallback_to_gles2=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 quality/2d/use_pixel_snap=true
+threads/thread_model=0
+quality/filters/anisotropic_filter_level=1
 vram_compression/import_bptc=true
 limits/buffers/canvas_polygon_buffer_size_kb=1024
 limits/buffers/canvas_polygon_index_buffer_size_kb=1024
