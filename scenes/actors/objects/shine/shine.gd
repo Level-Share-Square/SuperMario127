@@ -60,7 +60,7 @@ func _physics_process(delta):
 				camera.focus_on = self
 				pause_mode = PAUSE_MODE_PROCESS
 				get_tree().paused = true
-				unpause_timer = 4
+				unpause_timer = 3.35
 		if !collected:
 			if !activated:
 				ambient_sound.playing = false
