@@ -9,6 +9,9 @@ var buffer := -5
 func _ready():
 	preview_position = Vector2(0, 92)
 	collision_shape.one_way_collision = true
+	# Fix for rotated platforms (Godot physics are weird)
+	body.rotation_degrees = rotation_degrees
+	collision_shape.rotation_degrees = -rotation_degrees
 
 func can_collide_with(character):
 	var direction = body.global_transform.y.normalized()
