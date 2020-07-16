@@ -65,9 +65,16 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_mask = 2
+collision_mask = 2147483650
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="BreakDetector" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2147483648
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BreakDetector"]
 shape = SubResource( 1 )
 
 [node name="StompArea" type="Area2D" parent="."]
@@ -94,7 +101,7 @@ shape = SubResource( 4 )
 [node name="PlayerStompDetector" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
-collision_mask = 2
+collision_mask = 35
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStompDetector"]
 shape = SubResource( 5 )
@@ -102,7 +109,7 @@ shape = SubResource( 5 )
 [node name="PlayerSpinDetector" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
-collision_mask = 2
+collision_mask = 35
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSpinDetector"]
 shape = SubResource( 6 )

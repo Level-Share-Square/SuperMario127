@@ -8,6 +8,7 @@ onready var stomp_area = $StompArea
 onready var spin_area = $SpinArea
 onready var player_detector = $PlayerStompDetector
 onready var player_spin_detector = $PlayerSpinDetector
+onready var break_detector = $BreakDetector
 onready var broken_sound = $Broken
 onready var break_particle = $BreakParticle
 onready var dust_particle = $DustParticle
@@ -31,6 +32,26 @@ func _ready():
 	player_detector.connect("body_entered", self, "detect_player")
 	break_particle.hide()
 	dust_particle.hide()
+	
+func exploded(hit_pos):
+	if !broken:
+		break_box()
+
+func steely_hit(hit_pos):
+	if !broken:
+		break_box()
+
+func break_box():
+	broken = true
+	if not broken_sound.is_playing(): 
+		break_detector.set_collision_layer_bit(2, false)
+		for i in(coins): create_coin()
+		break_particle.show()
+		dust_particle.show()
+		break_particle.set_emitting(true)
+		dust_particle.set_emitting(true)
+		broken_sound.play()
+		delete_timer = 3.0
 
 func detect_player(body):
 	if enabled and body.name.begins_with("Character") and !broken and character == null:
@@ -54,26 +75,10 @@ func _physics_process(delta):
 		
 		for hit_body in stomp_area.get_overlapping_bodies():
 			if !broken and top_breakable(hit_body):
-				broken = true
-				if not broken_sound.is_playing(): 
-					for i in(coins): create_coin()
-					break_particle.show()
-					dust_particle.show()
-					break_particle.set_emitting(true)
-					dust_particle.set_emitting(true)
-					broken_sound.play()
-					delete_timer = 3.0
+				break_box()
 		for hit_body in spin_area.get_overlapping_bodies():
 			if !broken and side_breakable(hit_body):
-				broken = true
-				if not broken_sound.is_playing(): 
-					for i in(coins): create_coin()
-					break_particle.show()
-					dust_particle.show()
-					break_particle.set_emitting(true)
-					dust_particle.set_emitting(true)
-					broken_sound.play()
-					delete_timer = 3.0
+				break_box()
 		for hit_body in player_detector.get_overlapping_bodies():
 			if hit_body.name.begins_with("Character") and hit_body.velocity.y > 0: 
 				if hit_body.big_attack:
@@ -82,6 +87,9 @@ func _physics_process(delta):
 				else:
 					body.set_collision_layer_bit(0, true)
 					body.set_collision_mask_bit(1, true)
+			elif hit_body.name == "Steely":
+					body.set_collision_layer_bit(0, false)
+					body.set_collision_mask_bit(1, false)
 		for hit_body in player_spin_detector.get_overlapping_bodies():
 			if hit_body.name.begins_with("Character"): 
 				if hit_body.attacking:
@@ -90,6 +98,9 @@ func _physics_process(delta):
 				else:
 					body.set_collision_layer_bit(0, true)
 					body.set_collision_mask_bit(1, true)
+			elif hit_body.name == "Steely":
+					body.set_collision_layer_bit(0, false)
+					body.set_collision_mask_bit(1, false)
 		
 		if broken == true:
 			sprite.visible = false
