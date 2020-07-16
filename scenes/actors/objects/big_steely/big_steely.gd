@@ -1,16 +1,16 @@
 extends GameObject
 
-onready var area = $KinematicBody2D/Area2D
-onready var platform_detector = $KinematicBody2D/PlatformDetector
-onready var body = $KinematicBody2D
+onready var area = $Steely/Area2D
+onready var platform_detector = $Steely/PlatformDetector
+onready var body = $Steely
 
-onready var grounded_check = $KinematicBody2D/Check1
-onready var grounded_check_2 = $KinematicBody2D/Check2
+onready var grounded_check = $Steely/Check1
+onready var grounded_check_2 = $Steely/Check2
 
-onready var collider = $KinematicBody2D/CollisionShape2D
-onready var collider_stopped = $KinematicBody2D/CollisionShapeStopped
+onready var collider = $Steely/CollisionShape2D
+onready var collider_stopped = $Steely/CollisionShapeStopped
 
-onready var visiblity_notifier = $KinematicBody2D/VisibilityNotifier2D
+onready var visiblity_notifier = $Steely/VisibilityNotifier2D
 
 var velocity := Vector2(0, 0)
 var prev_pos := Vector2(0, 0)

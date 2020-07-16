@@ -2637,8 +2637,7 @@ script = ExtResource( 3 )
 object_id = 33
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "MetalBreakableBlock"
-items_in_sequence = 2
+change_to = "BreakableBlock"
 icon = ExtResource( 140 )
 preview = ExtResource( 141 )
 
