@@ -31,8 +31,6 @@ func _physics_process(delta):
 	prev_pos = new_pos
 	
 	var should_hit = actual_velocity.length_squared() > 0.09
-	#if should_hit:
-	#	print(str(actual_velocity.length_squared()))
 	
 	var platform_collision_enabled = false
 	for platform_body in platform_detector.get_overlapping_areas():
@@ -67,15 +65,7 @@ func _physics_process(delta):
 		collider_stopped.disabled = true
 		
 	if check.is_colliding():
-		if check.get_collision_normal().y == -1:
-			velocity.x = lerp(velocity.x, 0, delta)
-		else:
-			var normal = 1
-			if (check.get_collision_normal().x) < 0:
-				normal = -1 + check.get_collision_normal().x
-			else:
-				normal = 1 - check.get_collision_normal().x
-			velocity.x = lerp(velocity.x, 225 * normal, delta / 1.5)
+		velocity.x = lerp(velocity.x, 0, delta / 4)
 
 	rotation = 0
 	velocity = body.move_and_slide(velocity)

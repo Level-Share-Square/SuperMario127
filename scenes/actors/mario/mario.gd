@@ -446,7 +446,7 @@ func _physics_process(delta: float):
 		var sprite_offset = Vector2()
 		if is_grounded():
 			var normal = ground_check.get_collision_normal()	
-			sprite_rotation = atan2(normal.y, normal.x) + (PI/2)
+			sprite_rotation = (atan2(normal.y, normal.x) + (PI/2)) / 2
 			sprite_offset = Vector2(rad2deg(sprite_rotation) / 10, -abs(rad2deg(sprite_rotation) / 10))
 			
 		if is_grounded():
