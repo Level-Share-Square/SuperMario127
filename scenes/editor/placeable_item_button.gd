@@ -45,6 +45,7 @@ func is_hovered():
 	
 func _process(_delta):
 	grid.visible = true if !item.is_object else false
+	grid.mouse_filter = 2 # ignore
 	if is_hovered() and !last_hovered:
 		sound.play()
 		tween.interpolate_property(icon, "offset",
