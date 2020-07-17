@@ -16,21 +16,14 @@ func _set_property_values():
 	set_property("spawn_interval", spawn_interval, 1)
 
 func _ready():
-	cleanout_timer = 20.0
+	cleanout_timer = 10.0
 	
 func _process(delta):
 	if mode != 1:
-		cleanout_timer -= delta
-		if cleanout_timer <= 0:
-			cleanout_timer = 20.0
-			for steely in steely_objects:
-				if !is_instance_valid(steely):
-					steely_objects.erase(steely)
-	
 		spawn_timer -= delta
 		if spawn_timer <= 0:
 			spawn_timer = spawn_interval
-			if steely_objects.size() <= 16:
+			if true: #steely_objects.size() <= 16:
 				var object = LevelObject.new()
 				object.type_id = 37
 				object.properties = []

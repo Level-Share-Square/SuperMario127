@@ -16,13 +16,36 @@ var velocity := Vector2(0, 0)
 var prev_pos := Vector2(0, 0)
 var gravity : float
 
+var fade_time = 0.0
+var alpha = 0.0
+var initial_scale
+var actual_scale
+
 func is_grounded():
 	var check = grounded_check
 	if !grounded_check.is_colliding():
 		check = grounded_check_2
 	return check.is_colliding()
+	
+func _ready():
+	initial_scale = scale / 1.5
+	actual_scale = scale
+	scale = initial_scale
+	fade_time = 0.5
+	modulate = Color(1, 1, 1, 0)
 
 func _physics_process(delta):
+	if fade_time != 0:
+		alpha = lerp(alpha, 1.0, delta * 3.333)
+		scale = scale.linear_interpolate(actual_scale, delta * 3.333)
+		modulate = Color(1, 1, 1, alpha)
+		fade_time -= delta
+		if fade_time <= 0:
+			fade_time = 0
+			alpha = 1.0
+			scale = actual_scale
+			modulate = Color(1, 1, 1, alpha)
+		return
 	# Use the position difference to calculate velocity
 	# (the one in the physics body isn't accurate
 	# for hitting Mario)
@@ -71,5 +94,5 @@ func _physics_process(delta):
 	rotation = 0
 	velocity = body.move_and_slide(velocity)
 	
-	if !visiblity_notifier.is_on_screen():
+	if !visiblity_notifier.is_on_screen() or global_position.y > (level_area.settings.size.y * 32) + 96:
 		queue_free()
