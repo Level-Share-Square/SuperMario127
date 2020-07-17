@@ -16,12 +16,14 @@ func decrease_value():
 	fps_cap -= 1
 	if fps_cap < 0:
 		fps_cap = 3
-	Engine.target_fps = 10 * (fps_cap + 3)
-	value_text.text = str(Engine.target_fps)
+	process()
 
 func increase_value():
 	fps_cap += 1
 	if fps_cap > 3:
 		fps_cap = 0
+	process()
+
+func process():
 	Engine.target_fps = 10 * (fps_cap + 3)
 	value_text.text = str(Engine.target_fps)

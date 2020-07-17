@@ -14,10 +14,13 @@ func decrease_value():
 	PlayerSettings.control_mode -= 1
 	if PlayerSettings.control_mode < 0:
 		PlayerSettings.control_mode = 2
-	value_text.text = str(PlayerSettings.control_mode + 1)
+	process()
 	
 func increase_value():
 	PlayerSettings.control_mode += 1
 	if PlayerSettings.control_mode > 2:
 		PlayerSettings.control_mode = 0
+	process()
+
+func process():
 	value_text.text = str(PlayerSettings.control_mode + 1)
