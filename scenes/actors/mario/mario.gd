@@ -269,12 +269,16 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	right_collision.disabled = false
 	gravity = level_area.settings.gravity
 
+var prev_is_grounded = false
+var recalculate = false
 func is_grounded():
-	var raycast_node = ground_check
-	if !ground_collision_dive.disabled:
-		raycast_node = ground_check_dive
-	raycast_node.force_raycast_update()
-	return raycast_node.is_colliding() and velocity.y >= 0
+	if recalculate:
+		var raycast_node = ground_check
+		if !ground_collision_dive.disabled:
+			raycast_node = ground_check_dive
+		raycast_node.force_raycast_update()
+		prev_is_grounded = raycast_node.is_colliding() and velocity.y >= 0
+	return prev_is_grounded
 
 func is_ceiling():
 	return test_move(self.transform, Vector2(0, -0.1)) and collided_last_frame
@@ -416,6 +420,9 @@ func heal(shards : int = 1):
 			health_shards = 0
 
 func _physics_process(delta: float):
+	recalculate = true
+	is_grounded()
+	
 	bottom_pos.position = bottom_pos_offset
 	if !ground_collision_dive.disabled:
 		bottom_pos.position = bottom_pos_dive_offset
@@ -503,6 +510,14 @@ func _physics_process(delta: float):
 				velocity.x += acceleration * move_direction
 			elif ((velocity.x > move_speed and move_direction == 1) or (velocity.x < -move_speed and move_direction == -1)):
 				velocity.x -= 3.5 * move_direction
+			
+			# Translate velocity X to Y
+			var normal = ground_check.get_collision_normal()
+			velocity.y = (velocity.x * normal.x / normal.y) * -1
+			velocity += gravity * Vector2(0, gravity_scale)
+			if velocity.y < 0: # upwards velocity, don't allow that
+				velocity.y = 0
+			
 			facing_direction = move_direction
 
 			if !disable_animation and movable and controlled_locally:
