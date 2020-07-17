@@ -8,6 +8,8 @@ onready var hover_sound = $HoverSound
 onready var click_sound = $ClickSound
 var last_hovered = false
 
+const layerNames = ["BG", "G", "FG"]
+
 func _process(_delta):
 	if pressed:
 		label.rect_position.y = 43
@@ -16,7 +18,7 @@ func _process(_delta):
 	if is_hovered() and !last_hovered:
 		hover_sound.play()
 	last_hovered = is_hovered()
-	label.text = str(editor_node.layer)
+	label.text = layerNames[editor_node.layer]
 
 func _pressed():
 	click_sound.play()
