@@ -16,14 +16,15 @@ func decrease_value():
 	window_scale -= 1
 	if window_scale < 1:
 		window_scale = 5
-	OS.window_fullscreen = window_scale == 5
-	OS.window_size = Vector2(768, 432) * window_scale
-	value_text.text = str(window_scale) if window_scale != 5 else "F"
+	process()
 
 func increase_value():
 	window_scale += 1
 	if window_scale > 5:
 		window_scale = 1
+	process()
+
+func process():
 	OS.window_fullscreen = window_scale == 5
 	OS.window_size = Vector2(768, 432) * window_scale
 	value_text.text = str(window_scale) if window_scale != 5 else "F"
