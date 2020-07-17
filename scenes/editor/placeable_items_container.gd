@@ -17,9 +17,7 @@ func _ready():
 		if index < starting_toolbar.size():
 			item = placeable_items.get_node(starting_toolbar[index])
 
-		var placeable_item_button = PLACEABLE_ITEM_BUTTON.instance()		
-		if index == 0:
-			editor.selected_box = placeable_item_button
+		var placeable_item_button = PLACEABLE_ITEM_BUTTON.instance()
 		placeable_item_button.item = item
 		placeable_item_button.margin = margin
 		placeable_item_button.base_margin = base_margin
