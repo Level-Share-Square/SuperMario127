@@ -45,6 +45,7 @@ margin_top = -64.0
 margin_right = 24.0
 margin_bottom = 32.0
 rect_scale = Vector2( 3, 3 )
+mouse_filter = 2
 texture = ExtResource( 8 )
 stretch_mode = 2
 __meta__ = {
