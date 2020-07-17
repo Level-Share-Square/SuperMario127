@@ -25,7 +25,7 @@ func can_collide_with(character):
 	var diff = p2 - p1
 	var perp = Vector2(-diff.y, diff.x)
 	# A threshold that should prevent clips
-	if character.velocity != null and !is_grounded:
+	if character.get("velocity") != null and !is_grounded:
 		var d = character.velocity.dot(perp)
 		if d < 0:
 			return false
