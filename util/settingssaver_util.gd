@@ -24,6 +24,9 @@ static func save(multiplayerOptions : Node):
 	var windowScale = int(windowScaleLabel.text)
 	var fpsLock = int(fpsLockLabel.text) / 10 - 3
 	
+	if windowScale == 0:
+		windowScale = 5
+	
 	var data = {
 		"controlMode": controlMode,
 		"windowScale": windowScale,
