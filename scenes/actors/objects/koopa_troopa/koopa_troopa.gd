@@ -79,24 +79,22 @@ func steely_hit(hit_pos : Vector2):
 		
 func kill(hit_pos : Vector2):
 	if !hit:
+		if is_instance_valid(body):
+			retract_into_shell()
 		if is_instance_valid(shell):
 			hit = true
 			shell.set_collision_layer_bit(2, false)
 			shell.set_collision_mask_bit(2, false)
-			velocity.x = int((shell.global_position - hit_pos).normalized().x) * 50
-			velocity.y = -120
+			var normal = (shell.global_position - hit_pos).normalized().x
+			if normal > 0:
+				normal = 1
+			else:
+				normal = -1
+			velocity.x = normal * 220
+			velocity.y = -220
 			z_index = 10
 			shell_sound.play()
 			shell_sprite.playing = false
-			delete_timer = 3.0
-		elif is_instance_valid(body):
-			hit = true
-			body.set_collision_layer_bit(2, false)
-			body.set_collision_mask_bit(2, false)
-			velocity.x = int((body.global_position - hit_pos).normalized().x) * 50
-			velocity.y = -120
-			z_index = 10
-			koopa_sound.play()
 			delete_timer = 3.0
 			
 func _process(delta):
@@ -229,6 +227,3 @@ func _physics_process(delta):
 				shell_sprite.rotation_degrees += 2
 				velocity.y += gravity
 				shell.position += velocity * delta
-			elif is_instance_valid(body):
-				velocity.y += gravity
-				body.position += velocity * delta
