@@ -448,16 +448,21 @@ func _physics_process(delta: float):
 	velocity += gravity * Vector2(0, gravity_scale)
 	
 	if movable and (state == null or !state.override_rotation) and (!is_instance_valid(nozzle) or !nozzle.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
-		
 		var sprite_rotation = 0
 		var sprite_offset = Vector2()
 		if is_grounded():
-			var normal = ground_check.get_collision_normal()	
+			var normal = ground_check.get_collision_normal()
 			sprite_rotation = (atan2(normal.y, normal.x) + (PI/2)) / 2
 			sprite_offset = Vector2(rad2deg(sprite_rotation) / 10, -abs(rad2deg(sprite_rotation) / 10))
 			
-		if is_grounded():
-			velocity.y += abs(sprite_rotation) * 100 # this is required to keep mario from falling off slopes
+			# Translate velocity X to Y
+			velocity.y += (velocity.x * normal.x / normal.y) * -1
+			if velocity.y < 0: # upwards velocity, don't allow that
+				velocity.y = 0
+			
+			# this is required to keep mario from falling off slopes
+			velocity.y += (abs(sprite_rotation) + 1) * 100
+		
 		sprite.position = sprite.position.linear_interpolate(sprite_offset, delta * rotation_interpolation_speed)
 		sprite.rotation = lerp_angle(sprite.rotation, sprite_rotation, delta * rotation_interpolation_speed)
 		sprite.rotation_degrees = wrapf(sprite.rotation_degrees, -180, 180)
@@ -510,13 +515,6 @@ func _physics_process(delta: float):
 				velocity.x += acceleration * move_direction
 			elif ((velocity.x > move_speed and move_direction == 1) or (velocity.x < -move_speed and move_direction == -1)):
 				velocity.x -= 3.5 * move_direction
-			
-			# Translate velocity X to Y
-			var normal = ground_check.get_collision_normal()
-			velocity.y = (velocity.x * normal.x / normal.y) * -1
-			velocity += gravity * Vector2(0, gravity_scale)
-			if velocity.y < 0: # upwards velocity, don't allow that
-				velocity.y = 0
 			
 			facing_direction = move_direction
 
