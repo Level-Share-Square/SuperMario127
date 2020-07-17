@@ -7,8 +7,8 @@ onready var body = $Steely
 onready var grounded_check = $Steely/Check1
 onready var grounded_check_2 = $Steely/Check2
 
-onready var collider = $Steely/CollisionShape2D
-onready var collider_stopped = $Steely/CollisionShapeStopped
+#onready var collider = $Steely/SteelieCollider/CollisionShapeSteelie
+#onready var collider_stopped = $Steely/CollisionShapeStopped
 
 onready var visiblity_notifier = $Steely/VisibilityNotifier2D
 
@@ -30,7 +30,7 @@ func _physics_process(delta):
 	var actual_velocity = (new_pos - prev_pos) / delta / 120
 	prev_pos = new_pos
 	
-	var should_hit = actual_velocity.length_squared() > 0.09
+	var should_hit = actual_velocity.length_squared() > 0.25
 	
 	var platform_collision_enabled = false
 	for platform_body in platform_detector.get_overlapping_areas():
@@ -49,6 +49,7 @@ func _physics_process(delta):
 				hit_body.get_parent().steely_hit(global_position)
 
 	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
+	#body.apply_central_impulse(Vector2(0, gravity))
 	velocity.y += gravity
 
 	var check = grounded_check
@@ -57,12 +58,12 @@ func _physics_process(delta):
 	
 	if !should_hit:# and abs(check.get_collision_normal().y) > 0.75:
 		body.set_collision_layer_bit(0, true)
-		collider.disabled = true
-		collider_stopped.disabled = false
+		#collider.disabled = true
+		#collider_stopped.disabled = false
 	else:
 		body.set_collision_layer_bit(0, false)
-		collider.disabled = false
-		collider_stopped.disabled = true
+		#collider.disabled = false
+		#collider_stopped.disabled = true
 		
 	if check.is_colliding():
 		velocity.x = lerp(velocity.x, 0, delta / 4)
