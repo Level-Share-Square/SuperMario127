@@ -33,3 +33,8 @@ func increase_value():
 		window_scale = 1
 	ScreenSizeUtil.set_screen_size(window_scale)
 	value_text.text = str(window_scale) if window_scale != 5 else "F"
+
+func _input(_event):
+    if Input.is_action_just_pressed("fullscreen"):
+        window_scale = 5 if !OS.window_fullscreen else 1
+        ScreenSizeUtil.set_screen_size(window_scale)
