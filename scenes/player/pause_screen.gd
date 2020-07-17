@@ -36,6 +36,7 @@ func _unhandled_input(event):
 func toggle_pause():
 	if !scene_transitions.transitioning and !mode_switcher.get_node("ModeSwitcherButton").switching_disabled and !PhotoMode.enabled and ((paused and get_tree().paused) or (!paused and !get_tree().paused)):
 		if !shine_info.visible:
+			SettingsSaver.save($MultiplayerOptions)
 			multiplayer_options.visible = false
 			shine_info.visible = true
 		resume_button.focus_mode = 0
@@ -99,6 +100,7 @@ func toggle_pause():
 			can_pause = true
 	
 func retry():
+	SettingsSaver.save($MultiplayerOptions)
 	retry_button.focus_mode = 0
 	if !character_node.dead:
 		character_node.kill("reload")

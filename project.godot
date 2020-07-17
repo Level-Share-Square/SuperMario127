@@ -279,6 +279,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://interpreter/instructions/SetValueInstruction.gd"
 }, {
+"base": "Reference",
+"class": "SettingsSaver",
+"language": "GDScript",
+"path": "res://util/settingssaver_util.gd"
+}, {
 "base": "Resource",
 "class": "SkyResource",
 "language": "GDScript",
@@ -424,6 +429,7 @@ _global_script_class_icons={
 "PlaceableItem": "",
 "Powerup": "",
 "SetValueInstruction": "",
+"SettingsSaver": "",
 "SkyResource": "",
 "SlideState": "",
 "SlideStopState": "",

@@ -18,6 +18,7 @@ func _pressed():
 		multiplayer_options_node.visible = true
 		shine_info_node.visible = false
 	else:
+		SettingsSaver.save(multiplayer_options_node)
 		multiplayer_options_node.visible = false
 		shine_info_node.visible = true
 
