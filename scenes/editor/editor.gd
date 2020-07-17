@@ -155,6 +155,7 @@ func _process(delta):
 				if hovered_object != objects[0]:
 					if hovered_object != null:
 						hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
+						hovered_object.hovered = false
 					hovered_object = objects[0]
 					hovered_object.hovered = true
 					hovered_object.modulate = Color(0.65, 0.65, 1, hovered_object.modulate.a)
