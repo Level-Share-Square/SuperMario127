@@ -8,7 +8,13 @@ onready var hover_sound = $HoverSound
 onready var click_sound = $ClickSound
 var last_hovered = false
 
-const layerNames = ["BG", "G", "FG"]
+#fontsize, text
+const layerNames = [
+	[50,"BG1"], 
+	[64,"G"], 
+	[64,"FG"], 
+	[50,"BG0"]
+]
 
 func _process(_delta):
 	if pressed:
@@ -18,7 +24,8 @@ func _process(_delta):
 	if is_hovered() and !last_hovered:
 		hover_sound.play()
 	last_hovered = is_hovered()
-	label.text = layerNames[editor_node.layer]
+	label.get("custom_fonts/font").size = layerNames[editor_node.layer][0]
+	label.text = layerNames[editor_node.layer][1]
 
 func _pressed():
 	click_sound.play()

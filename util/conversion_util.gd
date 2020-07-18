@@ -39,3 +39,17 @@ static func convert_042_to_043(result):
 				new_objects.append(object)
 			area_result.objects = new_objects
 	return result
+
+static func compareVersions(version, other) -> int:
+	var v = version.split(".")
+	var o = other.split(".")
+
+	for i in range(3):
+		var nv = int(v[i])
+		var no = int(o[i])
+		if(nv<no):
+			return -1 #smaller version
+		if(nv<no):
+			return 1 #bigger version
+
+	return 0 #same version

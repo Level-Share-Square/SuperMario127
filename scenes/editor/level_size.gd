@@ -77,6 +77,7 @@ func button_press():
 	for _integer in range(amount):
 		if button_left_out.pressed and area.settings.size.x < 1500:
 			shared_node.move_all_objects_by(Vector2(32, 0))
+			area.very_background_tiles = tile_util.expand_left(area, area.very_background_tiles)
 			area.background_tiles = tile_util.expand_left(area, area.background_tiles)
 			area.foreground_tiles = tile_util.expand_left(area, area.foreground_tiles)
 			area.very_foreground_tiles = tile_util.expand_left(area, area.very_foreground_tiles)
@@ -87,6 +88,7 @@ func button_press():
 			
 		if button_left_in.pressed and area.settings.size.x > 24:
 			shared_node.move_all_objects_by(Vector2(-32, 0))
+			area.very_background_tiles = tile_util.shrink_left(area, area.very_background_tiles)
 			area.background_tiles = tile_util.shrink_left(area, area.background_tiles)
 			area.foreground_tiles = tile_util.shrink_left(area, area.foreground_tiles)
 			area.very_foreground_tiles = tile_util.shrink_left(area, area.very_foreground_tiles)
@@ -97,6 +99,7 @@ func button_press():
 			update_label()
 	
 		if button_right_out.pressed and area.settings.size.x < 1500:
+			area.very_background_tiles = tile_util.expand_right(area, area.very_background_tiles)
 			area.background_tiles = tile_util.expand_right(area, area.background_tiles)
 			area.foreground_tiles = tile_util.expand_right(area, area.foreground_tiles)
 			area.very_foreground_tiles = tile_util.expand_right(area, area.very_foreground_tiles)
@@ -106,6 +109,7 @@ func button_press():
 			update_label()
 			
 		if button_right_in.pressed and area.settings.size.x > 24:
+			area.very_background_tiles = tile_util.shrink_right(area, area.very_background_tiles)
 			area.background_tiles = tile_util.shrink_right(area, area.background_tiles)
 			area.foreground_tiles = tile_util.shrink_right(area, area.foreground_tiles)
 			area.very_foreground_tiles = tile_util.shrink_right(area, area.very_foreground_tiles)
@@ -115,6 +119,7 @@ func button_press():
 			update_label()
 	
 		if button_down_out.pressed and area.settings.size.y < 1500:
+			area.very_background_tiles = tile_util.expand_down(area, area.very_background_tiles)
 			area.background_tiles = tile_util.expand_down(area, area.background_tiles)
 			area.foreground_tiles = tile_util.expand_down(area, area.foreground_tiles)
 			area.very_foreground_tiles = tile_util.expand_down(area, area.very_foreground_tiles)
@@ -126,6 +131,7 @@ func button_press():
 			update_label()
 			
 		if button_down_in.pressed and area.settings.size.y > 14:
+			area.very_background_tiles = tile_util.shrink_down(area, area.very_background_tiles)
 			area.background_tiles = tile_util.shrink_down(area, area.background_tiles)
 			area.foreground_tiles = tile_util.shrink_down(area, area.foreground_tiles)
 			area.very_foreground_tiles = tile_util.shrink_down(area, area.very_foreground_tiles)
@@ -137,6 +143,7 @@ func button_press():
 	
 		if button_up_out.pressed and area.settings.size.y < 1500:
 			shared_node.move_all_objects_by(Vector2(0, 32))
+			area.very_background_tiles = tile_util.expand_up(area, area.very_background_tiles)
 			area.background_tiles = tile_util.expand_up(area, area.background_tiles)
 			area.foreground_tiles = tile_util.expand_up(area, area.foreground_tiles)
 			area.very_foreground_tiles = tile_util.expand_up(area, area.very_foreground_tiles)
@@ -149,6 +156,7 @@ func button_press():
 			
 		if button_up_in.pressed and area.settings.size.y > 14:
 			shared_node.move_all_objects_by(Vector2(0, -32))
+			area.very_background_tiles = tile_util.shrink_up(area, area.very_background_tiles)
 			area.background_tiles = tile_util.shrink_up(area, area.background_tiles)
 			area.foreground_tiles = tile_util.shrink_up(area, area.foreground_tiles)
 			area.very_foreground_tiles = tile_util.shrink_up(area, area.very_foreground_tiles)
