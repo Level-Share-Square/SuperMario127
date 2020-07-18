@@ -117,9 +117,9 @@ func _physics_process(delta):
 				velocity.y = 0
 				position.y = result.position.y - 10
 		
-		if velocity.x != 0:
+		if abs(velocity.x) > 0.00001:
 			result = horizontal_cast()
 			if result:
-				velocity.x = 0
 				var x_cast = 5 if velocity.x > 0 else -5
+				velocity.x = 0
 				position.x = result.position.x - x_cast
