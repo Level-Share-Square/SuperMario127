@@ -6,6 +6,8 @@ onready var area = $Area2D
 onready var shape = $Area2D/CollisionShape2D
 onready var visibility_enabler = $VisibilityEnabler2D
 
+export var coins : int = 1
+
 var collected = false
 var physics = false
 var despawn_timer = 0.0
@@ -24,7 +26,7 @@ func _set_property_values():
 
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
-		CurrentLevelData.level_data.vars.coins_collected += 1
+		CurrentLevelData.level_data.vars.coins_collected += coins
 		body.heal()
 		var player_id = 1
 		if body.name == "Character":
