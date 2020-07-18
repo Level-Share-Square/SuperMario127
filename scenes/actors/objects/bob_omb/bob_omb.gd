@@ -135,7 +135,7 @@ func _physics_process(delta):
 			if hit_body.has_method("exploded"):
 				hit_body.exploded(kinematic_body.global_position)
 			elif hit_body.get_parent().has_method("exploded"):
-				hit_body.get_parent().exploded(kinematic_body.body.global_position)
+				hit_body.get_parent().exploded(kinematic_body.global_position)
 		if damage_timer < 0:
 			damage_timer = 0
 	
@@ -153,13 +153,13 @@ func _physics_process(delta):
 					var character_attack = hit_body
 					if character_attack.attacking or character_attack.invincible:
 						hit = true
-						kinematic_body.body.set_collision_layer_bit(2, false)
+						kinematic_body.set_collision_layer_bit(2, false)
 						snap = Vector2(0, 0)
-						velocity.x = (kinematic_body.body.global_position - character_attack.global_position).normalized().x * 275
+						velocity.x = (kinematic_body.global_position - character_attack.global_position).normalized().x * 275
 						velocity.y = -275
 						position.y -= 4
 					else:
-						var distance_normal = (kinematic_body.body.global_position - character_attack.global_position).normalized().x
+						var distance_normal = (kinematic_body.global_position - character_attack.global_position).normalized().x
 						if character_attack.state != character_attack.get_state_node("KnockbackState"):
 							if distance_normal == 0:
 								distance_normal = -1
@@ -169,7 +169,7 @@ func _physics_process(delta):
 				
 		sprite.flip_h = true if facing_direction == 1 else false
 		velocity.y += gravity
-		velocity = kinematic_body.body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
+		velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
 		if character == null:
 			if walk_wait > 0:
 				sprite.animation = "default"
@@ -187,8 +187,8 @@ func _physics_process(delta):
 					walk_timer = 0
 					walk_wait = 3.0
 			if (
-				kinematic_body.body.global_position.x < -64 or 
-				kinematic_body.body.global_position.x > (level_size.x * 32) + 64
+				kinematic_body.global_position.x < -64 or 
+				kinematic_body.global_position.x > (level_size.x * 32) + 64
 			):
 				queue_free()
 		else:
@@ -210,7 +210,7 @@ func _physics_process(delta):
 					delete_timer = 3.0
 					create_coin()
 			if !dead and !hit:
-				facing_direction = 1 if (character.global_position.x > kinematic_body.body.global_position.x) else -1
+				facing_direction = 1 if (character.global_position.x > kinematic_body.global_position.x) else -1
 				velocity.x = lerp(velocity.x, facing_direction * run_speed, delta * accel)
 				fuse.visible = true
 				sprite.animation = "walking"
