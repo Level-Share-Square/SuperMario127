@@ -60,7 +60,7 @@ func detect_player(body):
 		character = body
 
 func top_breakable(hit_body):
-	return hit_body.name.begins_with("Character") and hit_body.velocity.y > 0 and hit_body.big_attack
+	return hit_body.name.begins_with("Character") and (hit_body.velocity.y > 0 and !hit_body.is_grounded()) and (hit_body.big_attack or hit_body.invincible)
 
 func side_breakable(hit_body):
 	return hit_body.name.begins_with("Character") and ((hit_body.attacking and !hit_body.big_attack) or hit_body.invincible)
@@ -82,27 +82,25 @@ func _physics_process(delta):
 			if !broken and side_breakable(hit_body):
 				break_box()
 		for hit_body in player_detector.get_overlapping_bodies():
-			if hit_body.name.begins_with("Character") and hit_body.velocity.y > 0: 
-				if hit_body.big_attack:
-					static_body.set_collision_layer_bit(0, false)
-					static_body.set_collision_mask_bit(1, false)
-				else:
-					static_body.set_collision_layer_bit(0, true)
-					static_body.set_collision_mask_bit(1, true)
+			if hit_body.name.begins_with("Character") and top_breakable(hit_body): 
+				static_body.set_collision_layer_bit(0, false)
+				static_body.set_collision_mask_bit(1, false)
 			elif hit_body.name == "Steely":
-					static_body.set_collision_layer_bit(0, false)
-					static_body.set_collision_mask_bit(1, false)
+				static_body.set_collision_layer_bit(0, false)
+				static_body.set_collision_mask_bit(1, false)
+			else:
+				static_body.set_collision_layer_bit(0, true)
+				static_body.set_collision_mask_bit(1, true)
 		for hit_body in player_spin_detector.get_overlapping_bodies():
-			if hit_body.name.begins_with("Character"): 
-				if hit_body.attacking:
-					static_body.set_collision_layer_bit(0, false)
-					static_body.set_collision_mask_bit(1, false)
-				else:
-					static_body.set_collision_layer_bit(0, true)
-					static_body.set_collision_mask_bit(1, true)
+			if hit_body.name.begins_with("Character") and side_breakable(hit_body): 
+				static_body.set_collision_layer_bit(0, false)
+				static_body.set_collision_mask_bit(1, false)
 			elif hit_body.name == "Steely":
-					static_body.set_collision_layer_bit(0, false)
-					static_body.set_collision_mask_bit(1, false)
+				static_body.set_collision_layer_bit(0, false)
+				static_body.set_collision_mask_bit(1, false)
+			else:
+				static_body.set_collision_layer_bit(0, true)
+				static_body.set_collision_mask_bit(1, true)
 		
 		if broken == true:
 			sprite.visible = false

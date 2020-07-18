@@ -21,7 +21,7 @@ func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
 		CurrentLevelData.level_data.vars.coins_collected += 2
 		CurrentLevelData.level_data.vars.red_coins_collected += 1
-		body.heal(2)
+		body.heal(5)
 		var player_id = 1
 		if body.name == "Character":
 			player_id = 0
