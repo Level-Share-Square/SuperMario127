@@ -11,7 +11,7 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -20,6 +20,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
+disabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
@@ -28,15 +29,3 @@ volume_db = -9.0
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 process_parent = true
 physics_process_parent = true
-
-[node name="GroundDetector" type="RayCast2D" parent="."]
-cast_to = Vector2( 0, 10 )
-collision_mask = 17
-
-[node name="CeilingDetector" type="RayCast2D" parent="."]
-cast_to = Vector2( 0, -10 )
-collision_mask = 17
-
-[node name="WallDetector" type="RayCast2D" parent="."]
-cast_to = Vector2( 10, 0 )
-collision_mask = 17
