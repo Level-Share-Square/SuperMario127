@@ -118,6 +118,7 @@ static func decode(code: String):
 	
 	result.areas = []
 	
+	
 	for area_id in range(areas):
 		var area_index = (2 + add_amount) + area_id
 		
@@ -135,24 +136,33 @@ static func decode(code: String):
 		else:
 			result.areas[area_id].settings.gravity = 7.82
 		
+		
+		#todo REMOVE (temp way for backwards compatibilty)
+		area_array.insert(2,"0x0")
+		
 		var area_tiles_array = area_array[1].split(",")
 		result.areas[area_id].foreground_tiles = []
 		for tile in area_tiles_array:
 			result.areas[area_id].foreground_tiles.append(tile)
 			
-		var area_background_tiles_array = area_array[2].split(",")
+		var area_very_background_tiles_array = area_array[2].split(",")
+		result.areas[area_id].very_background_tiles = []
+		for tile in area_very_background_tiles_array:
+			result.areas[area_id].very_background_tiles.append(tile)
+
+		var area_background_tiles_array = area_array[3].split(",")
 		result.areas[area_id].background_tiles = []
 		for tile in area_background_tiles_array:
 			result.areas[area_id].background_tiles.append(tile)
 			
-		var area_foreground_tiles_array = area_array[3].split(",")
+		var area_foreground_tiles_array = area_array[4].split(",")
 		result.areas[area_id].very_foreground_tiles = []
 		for tile in area_foreground_tiles_array:
 			result.areas[area_id].very_foreground_tiles.append(tile)
 			
 		result.areas[area_id].objects = []
-		if area_array.size() > 4:
-			var objects_array = area_array[4].split("|")
+		if area_array.size() > 5:
+			var objects_array = area_array[5].split("|")
 			for object in objects_array:
 				var object_array = object.split(",")
 				var decoded_object = {}

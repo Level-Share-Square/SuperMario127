@@ -66,6 +66,7 @@ func get_area(result) -> LevelArea:
 	area.very_foreground_tiles.clear()
 	area.foreground_tiles.clear()
 	area.background_tiles.clear()
+	area.very_background_tiles.clear()
 	for very_foreground_tiles_result in result.very_foreground_tiles:
 		var tiles = get_tiles(very_foreground_tiles_result)
 		for tile in tiles:
@@ -78,6 +79,10 @@ func get_area(result) -> LevelArea:
 		var tiles = get_tiles(background_tiles_result)
 		for tile in tiles:
 			area.background_tiles.append(tile)
+	for background_tiles_result in result.very_background_tiles:
+		var tiles = get_tiles(background_tiles_result)
+		for tile in tiles:
+			area.very_background_tiles.append(tile)
 	for object_result in result.objects:
 		var object = get_object(object_result)
 		area.objects.append(object)
@@ -211,6 +216,7 @@ func get_encoded_level_data():
 		
 		# Tiles
 		var saved_tiles = level_code_util.encode(area.foreground_tiles, settings)
+		var saved_very_background_tiles = level_code_util.encode(area.very_background_tiles, settings)
 		var saved_background_tiles = level_code_util.encode(area.background_tiles, settings)
 		var saved_foreground_tiles = level_code_util.encode(area.very_foreground_tiles, settings)
 		
@@ -225,6 +231,11 @@ func get_encoded_level_data():
 		level_string += "~"
 		
 		for tile in saved_foreground_tiles:
+			level_string += tile + ","
+		level_string.erase(level_string.length() - 1, 1)
+		level_string += "~"
+
+		for tile in saved_very_background_tiles:
 			level_string += tile + ","
 		level_string.erase(level_string.length() - 1, 1)
 		level_string += "~"
