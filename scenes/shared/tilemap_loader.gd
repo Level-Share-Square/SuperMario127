@@ -1,9 +1,11 @@
 extends Node2D
 
+export var very_back_tilemap: NodePath
 export var back_tilemap: NodePath
 export var middle_tilemap: NodePath
 export var front_tilemap: NodePath
 
+onready var very_back_tilemap_node = get_node(very_back_tilemap)
 onready var back_tilemap_node = get_node(back_tilemap)
 onready var middle_tilemap_node = get_node(middle_tilemap)
 onready var front_tilemap_node = get_node(front_tilemap)
@@ -60,6 +62,8 @@ func get_tile_in_data(index: int, layer: int):
 		tiles_array = level_area.foreground_tiles
 	elif layer == 2:
 		tiles_array = level_area.very_foreground_tiles
+	elif layer == 3:
+		tiles_array = level_area.very_background_tiles
 		
 	if index >= tiles_array.size():
 		tile = [0, 0]
@@ -76,6 +80,8 @@ func set_tile(index: int, layer: int, tileset_id: int, tile_id: int):
 		tiles_array = level_area.foreground_tiles
 	elif layer == 2:
 		tiles_array = level_area.very_foreground_tiles
+	elif layer == 3:
+		tiles_array = level_area.very_background_tiles
 		
 	if index + 1 >= tiles_array.size():
 		for _new_index in range(tiles_array.size(), index + 1):
@@ -91,8 +97,8 @@ func set_tile_visual(index: int, layer: int, tileset_id: int, tile_id: int):
 	var position = tile_util.get_position_from_tile_index(index, level_area.settings.size)
 	var cache_tile = get_tile(tileset_id, tile_id)
 	var layer_tilemap_node = back_tilemap_node
-	if layer == 0:
-		layer_tilemap_node = back_tilemap_node	
+	if layer == 3:
+		layer_tilemap_node = very_back_tilemap_node	
 	elif layer == 1:
 		layer_tilemap_node = middle_tilemap_node	
 	elif layer == 2:
@@ -116,6 +122,11 @@ func update_tilemaps():
 	middle_tilemap_node.clear()
 	front_tilemap_node.clear()
 	
+	for index in range(level_area.very_background_tiles.size()):
+		var tile = level_area.very_background_tiles[index]
+		if tile[0] != 0:
+			set_tile_visual(index, 3, tile[0], tile[1])
+
 	for index in range(level_area.background_tiles.size()):
 		var tile = level_area.background_tiles[index]
 		if tile[0] != 0:

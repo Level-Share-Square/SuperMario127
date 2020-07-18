@@ -77,7 +77,7 @@ func toggle_layer_transparency(current_layer, is_transparent):
 	var index = 0 
 	for tilemap in tilemaps_node.get_children():
 		var tilemap_color = Color(1, 1, 1, 1)
-		if tilemap.name == "Back":
+		if tilemap.name == "Back" || tilemap.name == "VeryBack":
 			tilemap_color = Color(0.54, 0.54, 0.54, 1)
 		if index == current_layer:
 			tilemap.modulate = tilemap_color

@@ -52,6 +52,8 @@ func switch_layers():
 		layer = 1
 	elif layer == 1:
 		layer = 2
+	elif layer == 2:
+		layer = 3
 	else:
 		layer = 0
 	EditorSavedSettings.layer = layer

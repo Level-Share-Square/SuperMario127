@@ -1,7 +1,6 @@
 class_name LevelData
 
-var current_format_version := "0.4.4"
-var format_version := "0.4.4"
+var current_format_version := "0.4.5"
 var name := "My Level"
 var areas = []
 var functions = {}
@@ -66,6 +65,7 @@ func get_area(result) -> LevelArea:
 	area.very_foreground_tiles.clear()
 	area.foreground_tiles.clear()
 	area.background_tiles.clear()
+	area.very_background_tiles.clear()
 	for very_foreground_tiles_result in result.very_foreground_tiles:
 		var tiles = get_tiles(very_foreground_tiles_result)
 		for tile in tiles:
@@ -78,6 +78,10 @@ func get_area(result) -> LevelArea:
 		var tiles = get_tiles(background_tiles_result)
 		for tile in tiles:
 			area.background_tiles.append(tile)
+	for background_tiles_result in result.very_background_tiles:
+		var tiles = get_tiles(background_tiles_result)
+		for tile in tiles:
+			area.very_background_tiles.append(tile)
 	for object_result in result.objects:
 		var object = get_object(object_result)
 		area.objects.append(object)
@@ -126,16 +130,22 @@ func load_in(code):
 
 	if result.format_version == "0.4.0":
 		result = conversion_util.convert_040_to_041(result)
+
 	if result.format_version == "0.4.1":
 		result.format_version = "0.4.2"
+
 	if result.format_version == "0.4.2":
 		result = conversion_util.convert_042_to_043(result)
+
 	if result.format_version == "0.4.3":
 		result.format_version = "0.4.4"
+		
+	if result.format_version == "0.4.4":
+		result.format_version = "0.4.5"
 
 	assert(result.format_version)
 	assert(result.name)
-	format_version = result.format_version
+	var format_version = result.format_version
 	name = result.name
 	
 	if format_version == current_format_version:
@@ -149,11 +159,10 @@ func load_in(code):
 func get_encoded_level_data():
 	
 	var level_string = ""
-	var data_format_version = "0.4.4"
 	var level_name = name
 	
 	
-	level_string += data_format_version + ","
+	level_string += current_format_version + ","
 	level_string += level_name.percent_encode() + ","
 	
 	level_string += "["
@@ -211,10 +220,16 @@ func get_encoded_level_data():
 		
 		# Tiles
 		var saved_tiles = level_code_util.encode(area.foreground_tiles, settings)
+		var saved_very_background_tiles = level_code_util.encode(area.very_background_tiles, settings)
 		var saved_background_tiles = level_code_util.encode(area.background_tiles, settings)
 		var saved_foreground_tiles = level_code_util.encode(area.very_foreground_tiles, settings)
 		
 		for tile in saved_tiles:
+			level_string += tile + ","
+		level_string.erase(level_string.length() - 1, 1)
+		level_string += "~"
+
+		for tile in saved_very_background_tiles:
 			level_string += tile + ","
 		level_string.erase(level_string.length() - 1, 1)
 		level_string += "~"

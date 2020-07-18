@@ -1,17 +1,18 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=1]
-[ext_resource path="res://scenes/actors/objects/yellow_coin/yellow.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/actors/objects/blue_coin/blue.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/coin.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="Coin" type="Node2D"]
 script = ExtResource( 3 )
+coins = 5
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
