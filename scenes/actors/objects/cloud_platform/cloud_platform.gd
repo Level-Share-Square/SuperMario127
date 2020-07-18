@@ -56,16 +56,23 @@ func update_parts():
 func can_collide_with(character):
 	var direction = body.global_transform.y.normalized()
 	
-	if direction.y > 0.5:
-		var line_center = body.global_position + (direction * buffer)
-		var line_direction = Vector2(-direction.y, direction.x)
-		var p1 = line_center + line_direction
-		var p2 = line_center - line_direction
-		var p = character.bottom_pos.global_position if (character.has_method("is_grounded") and !character.is_grounded()) else character.global_position
-		var diff = p2 - p1
-		var perp = Vector2(-diff.y, diff.x)
-		var d = (p - p1).dot(perp)
+	var is_grounded = character.is_grounded() if character.has_method("is_grounded") else true
+	var line_center = body.global_position + (direction * buffer)
+	var line_direction = Vector2(-direction.y, direction.x)
+	var p1 = line_center + line_direction
+	var p2 = line_center - line_direction
+	var p = character.bottom_pos.global_position if is_grounded else character.global_position
+	var diff = p2 - p1
+	var perp = Vector2(-diff.y, diff.x)
+	# A threshold that should prevent clips
+	if character.get("velocity") != null and !is_grounded:
+		var d = character.velocity.dot(perp)
+		if d < 0:
+			return false
 		
-		return sign(d) != 1
+		p -= character.velocity.normalized()
 	else:
-		return true
+		p -= perp
+	
+	var d = (p - p1).dot(perp)
+	return sign(d) != 1

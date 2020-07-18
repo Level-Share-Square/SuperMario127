@@ -7,6 +7,8 @@ onready var collision_shape = $StaticBody2D/CollisionShape2D
 var buffer := -5
 
 func _ready():
+	if !enabled:
+		collision_shape.disabled = true
 	preview_position = Vector2(0, 92)
 	collision_shape.one_way_collision = true
 	# Fix for rotated platforms (Godot physics are weird)

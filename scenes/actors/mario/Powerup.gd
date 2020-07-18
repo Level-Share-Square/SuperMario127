@@ -10,3 +10,9 @@ export var material : ShaderMaterial
 export var metal_voice : bool
 export var time_left : float
 export var id: int
+
+func apply_visuals():
+	pass
+
+func remove_visuals():
+	pass

@@ -462,11 +462,14 @@ func _physics_process(delta: float):
 			
 			# this is required to keep mario from falling off slopes
 			velocity.y += (abs(sprite_rotation) + 1) * 100
-		
+			
+			if !abs(normal.x) > 0.2:
+				velocity.y = 0
+
 		sprite.position = sprite.position.linear_interpolate(sprite_offset, delta * rotation_interpolation_speed)
 		sprite.rotation = lerp_angle(sprite.rotation, sprite_rotation, delta * rotation_interpolation_speed)
 		sprite.rotation_degrees = wrapf(sprite.rotation_degrees, -180, 180)
-			
+
 	# Inputs
 	if controlled_locally:
 		if controllable and !FocusCheck.is_ui_focused:
