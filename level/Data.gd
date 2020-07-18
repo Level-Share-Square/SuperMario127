@@ -1,7 +1,6 @@
 class_name LevelData
 
-var current_format_version := "0.4.4"
-var format_version := "0.4.4"
+var current_format_version := "0.4.5"
 var name := "My Level"
 var areas = []
 var functions = {}
@@ -131,16 +130,22 @@ func load_in(code):
 
 	if result.format_version == "0.4.0":
 		result = conversion_util.convert_040_to_041(result)
+
 	if result.format_version == "0.4.1":
 		result.format_version = "0.4.2"
+
 	if result.format_version == "0.4.2":
 		result = conversion_util.convert_042_to_043(result)
+
 	if result.format_version == "0.4.3":
 		result.format_version = "0.4.4"
+		
+	if result.format_version == "0.4.4":
+		result.format_version = "0.4.5"
 
 	assert(result.format_version)
 	assert(result.name)
-	format_version = result.format_version
+	var format_version = result.format_version
 	name = result.name
 	
 	if format_version == current_format_version:
@@ -154,11 +159,10 @@ func load_in(code):
 func get_encoded_level_data():
 	
 	var level_string = ""
-	var data_format_version = "0.4.4"
 	var level_name = name
 	
 	
-	level_string += data_format_version + ","
+	level_string += current_format_version + ","
 	level_string += level_name.percent_encode() + ","
 	
 	level_string += "["
@@ -224,6 +228,11 @@ func get_encoded_level_data():
 			level_string += tile + ","
 		level_string.erase(level_string.length() - 1, 1)
 		level_string += "~"
+
+		for tile in saved_very_background_tiles:
+			level_string += tile + ","
+		level_string.erase(level_string.length() - 1, 1)
+		level_string += "~"
 		
 		for tile in saved_background_tiles:
 			level_string += tile + ","
@@ -231,11 +240,6 @@ func get_encoded_level_data():
 		level_string += "~"
 		
 		for tile in saved_foreground_tiles:
-			level_string += tile + ","
-		level_string.erase(level_string.length() - 1, 1)
-		level_string += "~"
-
-		for tile in saved_very_background_tiles:
 			level_string += tile + ","
 		level_string.erase(level_string.length() - 1, 1)
 		level_string += "~"

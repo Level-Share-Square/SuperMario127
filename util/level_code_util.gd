@@ -137,8 +137,8 @@ static func decode(code: String):
 			result.areas[area_id].settings.gravity = 7.82
 		
 		
-		#todo REMOVE (temp way for backwards compatibilty)
-		area_array.insert(2,"0x0")
+		if(conversion_util.compareVersions(result.format_version, "0.4.5") == -1):
+			area_array.insert(2,"0*0")
 		
 		var area_tiles_array = area_array[1].split(",")
 		result.areas[area_id].foreground_tiles = []
