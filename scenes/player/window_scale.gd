@@ -40,6 +40,7 @@ func _input(_event):
 		window_scale = FULLSCREEN_SCALE_VALUE if !OS.window_fullscreen else 1
 		ScreenSizeUtil.set_screen_size(window_scale)
 		update_value_text(window_scale)
+		SettingsSaver.save(get_parent()) #has to be called manually here since normally settings are saved via the settings menu
 		
 func update_value_text(new_window_scale):
 	value_text.text = str(new_window_scale) if new_window_scale != FULLSCREEN_SCALE_VALUE else "F"
