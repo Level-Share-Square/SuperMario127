@@ -68,7 +68,7 @@ func set_property(key, value, change_level_object = true):
 			if mode == 1:
 				visible = true
 				var color = modulate
-				color.a = 0.5 if value == false else 1
+				color.a = 0.5 if value == false else 1.0
 				modulate = color
 	if mode == 1:
 		emit_signal("property_changed", key, value)

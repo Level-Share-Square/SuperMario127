@@ -28,6 +28,7 @@ func exit_area(body):
 	if body == character:
 		character = null
 		
+# warning-ignore: unused_argument
 func enter_detector(body):
 	pass
 	#if body.name.begins_with("Character") and respawn_timer == 0 and enabled and body.velocity.y > 0:

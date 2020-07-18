@@ -13,7 +13,7 @@ onready var close_button_rect = $CloseButton/TextureRect
 var hovered = false
 var last_layer
 
-func _process(delta):
+func _process(_delta):
 	if close_button.is_hovered() and !close_button.pressed:
 		close_button_rect.modulate = Color(0.8, 0.8, 0.8)
 	else:

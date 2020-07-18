@@ -14,9 +14,11 @@ func load_in(_level_data : LevelData, level_area : LevelArea):
 func update_background(area):
 	if !ready:
 		yield(self,"ready")
+    #warning-ignore:unused_variable
 	var background_id_mapper = preload("res://scenes/shared/background/backgrounds/ids.tres")
 	var background_resource = CurrentLevelData.background_cache[area.settings.sky]
 	
+    #warning-ignore:unused_variable
 	var foreground_id_mapper = preload("res://scenes/shared/background/foregrounds/ids.tres")
 	var foreground_resource = CurrentLevelData.foreground_cache[area.settings.background]
 	

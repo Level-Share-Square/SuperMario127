@@ -32,14 +32,14 @@ var character = null
 # This code just plain sucks
 
 func _ready():
-	yield(get_tree().create_timer(0.1), "timeout")
+	#yield(get_tree().create_timer(0.1), "timeout") #this doesn't seem to do anything except cause an error? this is why you comment code
 	ready = true
 	character = get_parent()
 	
 func switch_bus(node, bus):
 	node.bus = bus
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if is_instance_valid(character):
 		if character.metal_voice and !last_metal_filter: #peak of coding right here
 			switch_bus(jump_sounds, metal_bus)

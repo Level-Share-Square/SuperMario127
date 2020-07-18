@@ -1,7 +1,7 @@
 extends GameObject
 
 onready var sprite = $Goomba/Sprite
-onready var body = $Goomba
+onready var kinematic_body = $Goomba
 onready var attack_area = $Goomba/AttackArea
 onready var stomp_area = $Goomba/StompArea
 onready var bounce_area = $Goomba/BounceArea
@@ -94,7 +94,7 @@ func create_coin():
 	var object = LevelObject.new()
 	object.type_id = 1
 	object.properties = []
-	object.properties.append(body.global_position)
+	object.properties.append(kinematic_body.global_position)
 	object.properties.append(Vector2(1, 1))
 	object.properties.append(0)
 	object.properties.append(true)
@@ -106,12 +106,12 @@ func create_coin():
 		
 func kill(hit_pos : Vector2):
 	if !hit and !dead:
-		if is_instance_valid(body):
+		if is_instance_valid(kinematic_body):
 			hit = true
-			body.set_collision_layer_bit(2, false)
+			kinematic_body.set_collision_layer_bit(2, false)
 			attack_area.set_collision_layer_bit(2, false)
 			stomp_area.set_collision_layer_bit(2, false)
-			body.set_collision_mask_bit(2, false)
+			kinematic_body.set_collision_mask_bit(2, false)
 			attack_area.set_collision_mask_bit(2, false)
 			stomp_area.set_collision_mask_bit(2, false)
 			sprite.animation = "default"
@@ -124,7 +124,7 @@ func kill(hit_pos : Vector2):
 				hit = true
 				hit_sound.play()
 				sprite.playing = false
-				var normal = (body.global_position - hit_pos).normalized().x
+				var normal = (kinematic_body.global_position - hit_pos).normalized().x
 				if normal > 0 and normal < 1:
 					normal = 1
 				if normal <= 0 and normal > -1:
@@ -133,8 +133,9 @@ func kill(hit_pos : Vector2):
 				position.y -= 2
 				snap = Vector2(0, 0)
 				
-func _process(delta):
+func _process(_delta):
 	if mode == 1:
+		# warning-ignore: integer_division
 		sprite.frame = wrapi(OS.get_ticks_msec() / 166, 0, 4)
 
 func _physics_process(delta):
@@ -147,15 +148,15 @@ func _physics_process(delta):
 			if platform_body.has_method("is_platform_area"):
 				if platform_body.is_platform_area():
 					is_in_platform = true
-				if platform_body.get_parent().can_collide_with(body):
+				if platform_body.get_parent().can_collide_with(kinematic_body):
 					platform_collision_enabled = true
-		body.set_collision_mask_bit(4, platform_collision_enabled)
+		kinematic_body.set_collision_mask_bit(4, platform_collision_enabled)
 		for raycast in raycasts:
 			raycast.set_collision_mask_bit(4, platform_collision_enabled)
 		if !hit:
-			if is_instance_valid(body):
+			if is_instance_valid(kinematic_body):
 				var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
-				if body.global_position.y > (level_size.y * 32) + 128:
+				if kinematic_body.global_position.y > (level_size.y * 32) + 128:
 					queue_free()
 						
 				if !is_instance_valid(character):
@@ -177,11 +178,11 @@ func _physics_process(delta):
 				else:
 					sprite.animation = "walking"
 					sprite.speed_scale = lerp(sprite.speed_scale, run_speed / speed, delta * accel)
-					facing_direction = 1 if (character.global_position.x > body.global_position.x) else -1
+					facing_direction = 1 if (character.global_position.x > kinematic_body.global_position.x) else -1
 					velocity.x = lerp(velocity.x, facing_direction * run_speed, delta * accel)
 				if (
-					body.global_position.x < -64 or 
-					body.global_position.x > (level_size.x * 32) + 64
+					kinematic_body.global_position.x < -64 or 
+					kinematic_body.global_position.x > (level_size.x * 32) + 64
 				):
 					queue_free()
 				sprite.flip_h = true if facing_direction == 1 else false
@@ -212,14 +213,14 @@ func _physics_process(delta):
 							velocity.x *= 1.5
 
 				velocity.y += gravity
-				velocity = body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
+				velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
 
 				for hit_body in attack_area.get_overlapping_bodies():
 					if hit_body.name.begins_with("Character"):
 						if hit_body.attacking or hit_body.invincible:
 							kill(hit_body.global_position)
 						else:
-							hit_body.damage_with_knockback(body.global_position)
+							hit_body.damage_with_knockback(kinematic_body.global_position)
 
 				for hit_body in stomp_area.get_overlapping_bodies():
 					if hit_body.name.begins_with("Character"):
@@ -230,7 +231,7 @@ func _physics_process(delta):
 							kill(hit_body.global_position)
 		else:
 			var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
-			if body.global_position.y > (level_size.y * 32) + 128:
+			if kinematic_body.global_position.y > (level_size.y * 32) + 128:
 				queue_free()
 					
 			if hide_timer > 0:
@@ -255,11 +256,11 @@ func _physics_process(delta):
 						character.velocity.x = 0
 						if character.move_direction != 0:
 							character.global_position.x += character.move_direction * 2
-						character.global_position.y = lerp(character.global_position.y, (body.global_position.y + top_point.y) - 25, delta * 6)
+						character.global_position.y = lerp(character.global_position.y, (kinematic_body.global_position.y + top_point.y) - 25, delta * 6)
 						
 						var lerp_strength = 15
-						lerp_strength = clamp(abs(character.global_position.x - body.global_position.x), 0, 15)
-						character.global_position.x = lerp(character.global_position.x, body.global_position.x, delta * lerp_strength)
+						lerp_strength = clamp(abs(character.global_position.x - kinematic_body.global_position.x), 0, 15)
+						character.global_position.x = lerp(character.global_position.x, kinematic_body.global_position.x, delta * lerp_strength)
 					boost_timer -= delta
 					
 					if boost_timer <= 0:
@@ -284,7 +285,7 @@ func _physics_process(delta):
 
 			if sprite.visible:
 				velocity.y += gravity
-				velocity = body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
+				velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
 				if grounded_check.is_colliding() or grounded_check_2.is_colliding():
 					var check = grounded_check
 					if !grounded_check.is_colliding():

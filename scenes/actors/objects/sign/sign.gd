@@ -24,7 +24,7 @@ func exit_area(body):
 	if body == character:
 		character = null
 		
-func _physics_process(delta):
+func _physics_process(_delta):
 	if character != null:
 		if character.interact_just_pressed:
 			print("A")

@@ -22,7 +22,7 @@ func _ready():
 func _start_check(_delta):
 	return crouch_buffer > 0 and character.is_grounded()
 
-func _start(delta):
+func _start(_delta):
 	if character.state != character.get_state_node("Jump"):
 		character.friction = 4
 	if crouch_buffer > 0:

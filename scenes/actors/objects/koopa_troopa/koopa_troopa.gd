@@ -97,7 +97,7 @@ func kill(hit_pos : Vector2):
 			shell_sprite.playing = false
 			delete_timer = 3.0
 			
-func _process(delta):
+func _process(_delta):
 	if rainbow:
 		color.h = float(wrapi(OS.get_ticks_msec(), 0, 500)) / 500
 	if is_instance_valid(body):

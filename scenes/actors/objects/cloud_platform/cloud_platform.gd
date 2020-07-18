@@ -13,7 +13,6 @@ export var middle_texture : StreamTexture
 
 export var parts := 1
 var buffer := -5
-var character = null
 export var left_width = 22
 export var right_width = 24
 export var base_collision_width = 13

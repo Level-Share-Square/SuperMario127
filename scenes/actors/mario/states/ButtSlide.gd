@@ -23,7 +23,7 @@ func _start_check(_delta):
 	var normal = character.ground_check.get_collision_normal()
 	return (character.nozzle == null or !character.nozzle.activated) and character.inputs[9][1] and character.is_grounded() and abs(normal.x) > 0.2
 
-func _start(delta):
+func _start(_delta):
 	temp_speed = move_speed
 	character.sound_player.set_skid_playing(true)
 	stop_buffer = 0.5
@@ -68,7 +68,7 @@ func _update(delta):
 	if character.inputs[2][0]:
 		character.set_state_by_name("JumpState", 0)
 
-func _stop(delta):
+func _stop(_delta):
 	character.sound_player.set_skid_playing(false)
 	character.slide_particles.emitting = false
 	

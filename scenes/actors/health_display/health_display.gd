@@ -33,7 +33,7 @@ func _ready():
 	ui.texture = load(ui.texture.load_path)
 	shards.texture = load(shards.texture.load_path)
 
-func _process(delta):
+func _process(_delta):
 	if is_instance_valid(character):
 		if character.has_method("is_character"): # pro gamer move
 			if character.health < 8:
@@ -44,7 +44,7 @@ func _process(delta):
 			label.text = str(character.health)
 			label_shadow.text = label.text
 			var pos_x = ((8 - character.health) % 2) * 256
-			var pos_y = 268 * floor((8 - character.health) / 2)
+			var pos_y = 268 * floor((8 - character.health) / 2.0)
 			ui.region_rect = Rect2(Vector2(pos_x, pos_y), Vector2(256, 268))
 			shards.region_rect = Rect2(Vector2(character.health_shards * 256, 0), Vector2(256, 96))
 	else:

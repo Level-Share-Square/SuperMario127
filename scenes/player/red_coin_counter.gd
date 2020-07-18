@@ -14,6 +14,7 @@ var max_coin_amount = 0
 
 func _ready():
 	normal_height = label.rect_position.y
+	# warning-ignore: unused_variable
 	for index in range(5):
 		yield(get_tree(), "idle_frame")
 	max_coin_amount = CurrentLevelData.level_data.vars.max_red_coins

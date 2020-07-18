@@ -7,7 +7,7 @@ onready var value_text = $Value
 var fps_cap = 3
 
 func _ready():
-	fps_cap = (Engine.target_fps / 10) - 3
+	fps_cap = (Engine.target_fps / 10.0) - 3
 	value_text.text = str(Engine.target_fps)
 	var _connect = left.connect("pressed", self, "decrease_value")
 	var _connect2 = right.connect("pressed", self, "increase_value")

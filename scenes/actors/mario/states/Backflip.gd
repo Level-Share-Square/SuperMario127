@@ -18,7 +18,7 @@ func _ready():
 	override_rotation = true
 	disable_turning = true
 
-func _start(delta):
+func _start(_delta):
 	priority = 4
 	unlock_timer = 0.4
 	direction_on_start = character.facing_direction
@@ -48,7 +48,7 @@ func _start(delta):
 		character.anim_player.play("backflip_right")
 	spins = 0
 
-func _update(delta):
+func _update(_delta):
 	var sprite = character.animated_sprite
 	if (character.facing_direction == 1):
 		sprite.animation = "jumpRight"
@@ -59,6 +59,7 @@ func _stop(_delta):
 	character.anim_player.stop()
 	
 func _stop_check(_delta):
+	# warning-ignore: unused_variable
 	var sprite = character.animated_sprite
 	return character.is_grounded()
 

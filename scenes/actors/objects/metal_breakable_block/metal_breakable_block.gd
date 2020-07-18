@@ -2,7 +2,7 @@ extends GameObject
 
 onready var sprite = $Sprite
 onready var area = $Area2D
-onready var body = $StaticBody2D
+onready var static_body = $StaticBody2D
 onready var collision_shape = $StaticBody2D/CollisionShape2D
 onready var stomp_area = $StompArea
 onready var spin_area = $SpinArea
@@ -78,24 +78,24 @@ func _physics_process(delta):
 		for hit_body in player_detector.get_overlapping_bodies():
 			if hit_body.name.begins_with("Character") and hit_body.velocity.y > 0: 
 				if hit_body.big_attack and is_metal(hit_body):
-					body.set_collision_layer_bit(0, false)
-					body.set_collision_mask_bit(1, false)
+					static_body.set_collision_layer_bit(0, false)
+					static_body.set_collision_mask_bit(1, false)
 				else:
-					body.set_collision_layer_bit(0, true)
-					body.set_collision_mask_bit(1, true)
+					static_body.set_collision_layer_bit(0, true)
+					static_body.set_collision_mask_bit(1, true)
 		for hit_body in player_spin_detector.get_overlapping_bodies():
 			if hit_body.name.begins_with("Character"): 
 				if hit_body.attacking and is_metal(hit_body):
-					body.set_collision_layer_bit(0, false)
-					body.set_collision_mask_bit(1, false)
+					static_body.set_collision_layer_bit(0, false)
+					static_body.set_collision_mask_bit(1, false)
 				else:
-					body.set_collision_layer_bit(0, true)
-					body.set_collision_mask_bit(1, true)
+					static_body.set_collision_layer_bit(0, true)
+					static_body.set_collision_mask_bit(1, true)
 		
 		if broken == true:
 			sprite.visible = false
-			body.set_collision_layer_bit(0, false)
-			body.set_collision_mask_bit(1, false)
+			static_body.set_collision_layer_bit(0, false)
+			static_body.set_collision_mask_bit(1, false)
 			stomp_area.set_collision_layer_bit(0, false)
 
 func create_coin(): #creates a coin
@@ -104,7 +104,7 @@ func create_coin(): #creates a coin
 	var object = LevelObject.new()
 	object.type_id = 1
 	object.properties = []
-	object.properties.append(body.global_position)
+	object.properties.append(static_body.global_position)
 	object.properties.append(Vector2(1, 1))
 	object.properties.append(0)
 	object.properties.append(true)

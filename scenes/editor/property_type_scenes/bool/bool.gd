@@ -17,6 +17,7 @@ func pressed():
 	set_value(!value)
 	update_value()
 
+# warning-ignore: shadowed_variable
 func set_value(value: bool):
 	self.value = value
 	button_node.text = "True" if value else "False"
@@ -27,7 +28,7 @@ func get_value() -> bool:
 func update_value():
 	get_node("../").update_value(get_value())
 
-func _process(delta):
+func _process(_delta):
 	if button_node.is_hovered() and !last_hovered:
 		hover_sound.play()	
 	last_hovered = button_node.is_hovered()

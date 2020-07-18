@@ -33,7 +33,7 @@ func _input(event):
 			parts += 1
 			set_property("parts", parts, true)
 
-func _process(delta):
+func _process(_delta):
 	if parts != last_parts:
 		platform.parts = parts
 		platform.update_parts()

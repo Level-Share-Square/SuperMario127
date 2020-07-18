@@ -10,6 +10,7 @@ func update_preview(item: Node):
 
 func _process(_delta):
 	var editor = get_parent()
+	# warning-ignore: unused_variable
 	var selected_box = editor.selected_box
 
 	if editor.dragging_item != null or editor.display_preview_item == false or editor.selected_tool != 0:

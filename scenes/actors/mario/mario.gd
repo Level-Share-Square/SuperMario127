@@ -220,6 +220,7 @@ func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String =
 		set_state_by_name("KnockbackState", 0)
 		damage(amount, cause, frames)
 
+# warning-ignore: unused_argument
 func load_in(level_data : LevelData, level_area : LevelArea):
 	level_size = level_area.settings.size
 	for exception in collision_exceptions:
@@ -414,7 +415,8 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180):
 func heal(shards : int = 1):
 	if !dead and health != 8:
 		health_shards += shards
-		health = clamp(int(health + floor(health_shards / 5)), 0, 8)
+		# warning-ignore: narrowing_conversion
+		health = clamp(int(health + floor(health_shards / 5.0)), 0, 8)
 		health_shards = health_shards % 5
 		if health == 8:
 			health_shards = 0

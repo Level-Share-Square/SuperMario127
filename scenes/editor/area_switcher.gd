@@ -5,6 +5,7 @@ func on_pressed():
 		var area = LevelArea.new()
 		CurrentLevelData.level_data.areas.append(area)
 	CurrentLevelData.area = 1 if CurrentLevelData.area == 0 else 0
+	# warning-ignore:return_value_discarded
 	get_tree().reload_current_scene()
 
 func _unhandled_key_input(event):

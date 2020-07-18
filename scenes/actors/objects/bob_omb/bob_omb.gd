@@ -6,7 +6,7 @@ onready var fuse = $KinematicBody2D/Sprites/Fuse
 onready var fuse_sound = $KinematicBody2D/FuseSound
 onready var fuse_sound_2 = $KinematicBody2D/FuseSound2
 onready var explosion_sound = $KinematicBody2D/ExplosionSound
-onready var body = $KinematicBody2D
+onready var kinematic_body = $KinematicBody2D
 onready var player_detector = $KinematicBody2D/PlayerDetector
 onready var particles = $KinematicBody2D/Particles2D
 onready var damage_area = $KinematicBody2D/DamageArea
@@ -17,7 +17,6 @@ onready var raycasts = [grounded_check]
 var dead = false
 var character
 var character_damage
-var character_attack
 
 var gravity : float
 var velocity := Vector2()
@@ -55,7 +54,7 @@ func create_coin():
 	var object = LevelObject.new()
 	object.type_id = 1
 	object.properties = []
-	object.properties.append(body.global_position)
+	object.properties.append(kinematic_body.global_position)
 	object.properties.append(Vector2(1, 1))
 	object.properties.append(0)
 	object.properties.append(true)
@@ -71,15 +70,16 @@ func _ready():
 	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
 	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
 	
-func _process(delta):
+func _process(_delta):
 	fuse.frame = sprite.frame
 	if mode == 1:
+		# warning-ignore:integer_division
 		sprite.frame = wrapi(OS.get_ticks_msec() / 166, 0, 8)
 		
 func exploded(explosion_pos : Vector2):
 	hit = true
 	snap = Vector2(0, 0)
-	velocity.x = (body.global_position - explosion_pos).normalized().x * 275
+	velocity.x = (kinematic_body.global_position - explosion_pos).normalized().x * 275
 	velocity.y = -275
 	position.y -= 4
 	explode_timer = 4
@@ -88,7 +88,7 @@ func exploded(explosion_pos : Vector2):
 func steely_hit(hit_pos : Vector2):
 	hit = true
 	snap = Vector2(0, 0)
-	velocity.x = (body.global_position - hit_pos).normalized().x * 275
+	velocity.x = (kinematic_body.global_position - hit_pos).normalized().x * 275
 	velocity.y = -275
 	position.y -= 4
 	explode_timer = 4
@@ -97,9 +97,9 @@ func steely_hit(hit_pos : Vector2):
 func shell_hit(shell_pos : Vector2):
 	hit = true
 	snap = Vector2(0, 0)
-	body.set_collision_layer_bit(2, false)
+	kinematic_body.set_collision_layer_bit(2, false)
 	explode_timer = 4
-	velocity.x = (body.global_position - shell_pos).normalized().x * 275
+	velocity.x = (kinematic_body.global_position - shell_pos).normalized().x * 275
 	velocity.y = -275
 	position.y -= 4
 	character = 0 # hacker chungus
@@ -111,9 +111,9 @@ func _physics_process(delta):
 		if platform_body.has_method("is_platform_area"):
 			if platform_body.is_platform_area():
 				is_in_platform = true
-			if platform_body.get_parent().can_collide_with(body):
+			if platform_body.get_parent().can_collide_with(kinematic_body):
 				platform_collision_enabled = true
-	body.set_collision_mask_bit(4, platform_collision_enabled)
+	kinematic_body.set_collision_mask_bit(4, platform_collision_enabled)
 	for raycast in raycasts:
 		raycast.set_collision_mask_bit(4, platform_collision_enabled)
 	
@@ -125,7 +125,7 @@ func _physics_process(delta):
 			queue_free()
 			
 	var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
-	if body.global_position.y > (level_size.y * 32) + 128:
+	if kinematic_body.global_position.y > (level_size.y * 32) + 128:
 		queue_free()
 			
 	if damage_timer > 0:
@@ -133,9 +133,9 @@ func _physics_process(delta):
 		fuse_sound_2.playing = false
 		for hit_body in damage_area.get_overlapping_bodies():
 			if hit_body.has_method("exploded"):
-				hit_body.exploded(body.global_position)
+				hit_body.exploded(kinematic_body.global_position)
 			elif hit_body.get_parent().has_method("exploded"):
-				hit_body.get_parent().exploded(body.global_position)
+				hit_body.get_parent().exploded(kinematic_body.body.global_position)
 		if damage_timer < 0:
 			damage_timer = 0
 	
@@ -153,13 +153,13 @@ func _physics_process(delta):
 					var character_attack = hit_body
 					if character_attack.attacking or character_attack.invincible:
 						hit = true
-						body.set_collision_layer_bit(2, false)
+						kinematic_body.body.set_collision_layer_bit(2, false)
 						snap = Vector2(0, 0)
-						velocity.x = (body.global_position - character_attack.global_position).normalized().x * 275
+						velocity.x = (kinematic_body.body.global_position - character_attack.global_position).normalized().x * 275
 						velocity.y = -275
 						position.y -= 4
 					else:
-						var distance_normal = (body.global_position - character_attack.global_position).normalized().x
+						var distance_normal = (kinematic_body.body.global_position - character_attack.global_position).normalized().x
 						if character_attack.state != character_attack.get_state_node("KnockbackState"):
 							if distance_normal == 0:
 								distance_normal = -1
@@ -169,7 +169,7 @@ func _physics_process(delta):
 				
 		sprite.flip_h = true if facing_direction == 1 else false
 		velocity.y += gravity
-		velocity = body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
+		velocity = kinematic_body.body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
 		if character == null:
 			if walk_wait > 0:
 				sprite.animation = "default"
@@ -187,8 +187,8 @@ func _physics_process(delta):
 					walk_timer = 0
 					walk_wait = 3.0
 			if (
-				body.global_position.x < -64 or 
-				body.global_position.x > (level_size.x * 32) + 64
+				kinematic_body.body.global_position.x < -64 or 
+				kinematic_body.body.global_position.x > (level_size.x * 32) + 64
 			):
 				queue_free()
 		else:
@@ -210,7 +210,7 @@ func _physics_process(delta):
 					delete_timer = 3.0
 					create_coin()
 			if !dead and !hit:
-				facing_direction = 1 if (character.global_position.x > body.global_position.x) else -1
+				facing_direction = 1 if (character.global_position.x > kinematic_body.body.global_position.x) else -1
 				velocity.x = lerp(velocity.x, facing_direction * run_speed, delta * accel)
 				fuse.visible = true
 				sprite.animation = "walking"

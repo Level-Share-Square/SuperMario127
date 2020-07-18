@@ -22,7 +22,7 @@ func play_anim():
 	anim_playing = true
 	time_until_fall = 0.55
 	
-func _process(delta):
+func _process(_delta):
 	fludd_sprite.frame = frame
 	fludd_sprite.animation = animation
 	

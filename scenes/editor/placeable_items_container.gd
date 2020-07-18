@@ -6,11 +6,11 @@ export var margin := 156
 export var base_margin := 12
 export var normal_color : Color
 export var selected_color : Color
-export var editor : NodePath
+export var editor_node_path : NodePath 
+onready var editor_node = get_node(editor_node_path)
 
 func _ready():
-	var editor = get_tree().get_current_scene()
-	var placeable_items = editor.get_node(editor.placeable_items)
+	var placeable_items = editor_node.get_node(editor_node.placeable_items)
 	var starting_toolbar = EditorSavedSettings.layout_ids
 	for index in range(number_of_boxes):
 		var item
@@ -27,6 +27,6 @@ func _ready():
 		placeable_item_button.selected_color = selected_color
 		placeable_item_button.box_index = index
 		if index == EditorSavedSettings.selected_box:
-			editor.selected_box = placeable_item_button
+			editor_node.selected_box = placeable_item_button
 		add_child(placeable_item_button)
 		

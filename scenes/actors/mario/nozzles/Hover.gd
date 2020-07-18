@@ -66,7 +66,7 @@ func _update(_delta):
 
 	last_state = character.state
 
-func _process(delta):
+func _process(_delta):
 	if character.nozzle == self:
 		if character.water_sprite.flip_h:
 			character.water_sprite.flip_h = false

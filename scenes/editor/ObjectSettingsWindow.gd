@@ -39,6 +39,7 @@ func open_object(object_to_open: GameObject):
 	for child in preview_node.get_children():
 		child.queue_free()
 		
+	# warning-ignore:return_value_discarded
 	object_to_open.connect("property_changed", self, "edit_preview_object")
 		
 	preview_object = object_to_open.duplicate()

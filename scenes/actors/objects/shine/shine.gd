@@ -50,6 +50,7 @@ func _ready():
 
 func _physics_process(delta):
 	if !animated_sprite.playing:
+		#warning-ignore:integer_division
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
 	if mode != 1:
 		var camera = get_tree().get_current_scene().get_node(get_tree().get_current_scene().camera)
@@ -74,6 +75,7 @@ func _physics_process(delta):
 				animated_sprite.visible = true
 				effects.visible = true
 		ambient_sound.volume_db = -16 + -abs(camera.global_position.distance_to(global_position)/25)
+	#warning-ignore:integer_division
 	effects.rotation_degrees = (OS.get_ticks_msec()/16) % 360
 	effects.position = animated_sprite.offset + Vector2(0, 2)
 	if collected:

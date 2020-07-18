@@ -40,6 +40,7 @@ func _ready():
 		var _connect = area.connect("body_entered", self, "kill")
 
 func _physics_process(delta):
+	# warning-ignore: integer_division
 	effects.rotation_degrees = (OS.get_ticks_msec()/16) % 360
 	
 	if cached_pos != Vector2() and chase and character != null:
