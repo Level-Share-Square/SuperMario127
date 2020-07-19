@@ -456,7 +456,7 @@ func _physics_process(delta: float):
 		invulnerable = false
 	
 	# Gravity
-	velocity += gravity * Vector2(0, gravity_scale)
+	velocity.y = lerp(velocity.y, (gravity * Vector2(0, gravity_scale) * 240).y, delta / 2)
 
 	# Inputs
 	if controlled_locally:
