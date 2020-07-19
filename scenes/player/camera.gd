@@ -7,6 +7,7 @@ var focus_zoom := 1.0
 
 onready var character_node = get_node(character)
 
+var character_vel = Vector2(0, 0)
 func _physics_process(delta):
 	if focus_on != null:
 		position = position.linear_interpolate(focus_on.global_position, delta * 3)
@@ -19,7 +20,8 @@ func _physics_process(delta):
 				if abs(position.distance_to(character_node.global_position)) < 15:
 					unfocusing = false
 			else:
-				position = character_node.global_position
+				character_vel = character_vel.linear_interpolate(character_node.velocity * 15 * delta, delta * 2)
+				position = character_node.global_position + character_vel
 
 func load_in(_level_data : LevelData, level_area : LevelArea):
 	var level_size = level_area.settings.size
