@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/front.png-bd010172a7a0b17237965b42f1505c97.stex"
+path="res://.import/middle.png-5808ed0915ba04e065f3f7be2466599a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/shared/background/foregrounds/cave/front.png"
-dest_files=[ "res://.import/front.png-bd010172a7a0b17237965b42f1505c97.stex" ]
+source_file="res://scenes/shared/background/foregrounds/cave/middle.png"
+dest_files=[ "res://.import/middle.png-5808ed0915ba04e065f3f7be2466599a.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

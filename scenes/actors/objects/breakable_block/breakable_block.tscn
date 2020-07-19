@@ -7,43 +7,43 @@
 [ext_resource path="res://scenes/actors/objects/breakable_block/particles.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/breakable_block/block_material.tres" type="Material" id=6]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 16, 16 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 12, 12 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 26, 10 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 24, 24 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 10, 100.541 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 100, 10 )
 
-[sub_resource type="CanvasItemMaterial" id=7]
+[sub_resource type="CanvasItemMaterial" id=19]
 particles_animation = true
 particles_anim_h_frames = 3
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="CanvasItemMaterial" id=8]
+[sub_resource type="CanvasItemMaterial" id=20]
 particles_animation = true
 particles_anim_h_frames = 10
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=9]
+[sub_resource type="Gradient" id=10]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=10]
-gradient = SubResource( 9 )
+[sub_resource type="GradientTexture" id=11]
+gradient = SubResource( 10 )
 
-[sub_resource type="ParticlesMaterial" id=11]
+[sub_resource type="ParticlesMaterial" id=12]
 emission_shape = 1
 emission_sphere_radius = 2.0
 flag_disable_z = true
@@ -54,7 +54,7 @@ initial_velocity = 16.67
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.75
-color_ramp = SubResource( 10 )
+color_ramp = SubResource( 11 )
 anim_speed = 1.0
 
 [node name="BreakableBlock" type="Node2D"]
@@ -68,33 +68,33 @@ texture = ExtResource( 2 )
 collision_mask = 2147483650
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource( 1 )
+shape = SubResource( 13 )
 
 [node name="BreakDetector" type="StaticBody2D" parent="."]
 collision_layer = 4
 collision_mask = 2147483648
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BreakDetector"]
-shape = SubResource( 1 )
+shape = SubResource( 13 )
 
 [node name="StompArea" type="Area2D" parent="."]
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StompArea"]
 position = Vector2( 0, -23 )
-shape = SubResource( 2 )
+shape = SubResource( 14 )
 
 [node name="SpinArea" type="Area2D" parent="."]
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpinArea"]
-shape = SubResource( 3 )
+shape = SubResource( 15 )
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 4 )
+shape = SubResource( 16 )
 
 [node name="PlayerStompDetector" type="Area2D" parent="."]
 visible = false
@@ -102,7 +102,7 @@ collision_layer = 0
 collision_mask = 35
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStompDetector"]
-shape = SubResource( 5 )
+shape = SubResource( 17 )
 
 [node name="PlayerSpinDetector" type="Area2D" parent="."]
 visible = false
@@ -110,7 +110,7 @@ collision_layer = 0
 collision_mask = 35
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSpinDetector"]
-shape = SubResource( 6 )
+shape = SubResource( 18 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false
@@ -122,7 +122,7 @@ stream = ExtResource( 3 )
 volume_db = -10.0
 
 [node name="BreakParticle" type="Particles2D" parent="."]
-material = SubResource( 7 )
+material = SubResource( 19 )
 z_index = -1
 emitting = false
 amount = 12
@@ -132,11 +132,11 @@ process_material = ExtResource( 6 )
 texture = ExtResource( 5 )
 
 [node name="DustParticle" type="Particles2D" parent="."]
-material = SubResource( 8 )
+material = SubResource( 20 )
 z_index = -1
 emitting = false
 amount = 3
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 11 )
+process_material = SubResource( 12 )
 texture = ExtResource( 4 )

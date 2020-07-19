@@ -15,7 +15,7 @@ func _physics_process(delta):
 	elif character_node != null:
 		if !character_node.dead and !get_tree().paused:
 			if unfocusing:
-				position = position.linear_interpolate(character_node.global_position, delta * 3)
+				position = position.linear_interpolate(character_node.global_position, delta * 9)
 				if abs(position.distance_to(character_node.global_position)) < 15:
 					unfocusing = false
 			else:
