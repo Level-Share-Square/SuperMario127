@@ -1,5 +1,8 @@
 extends LevelDataLoader
 
+export var coin_frame : int
+const coin_anim_fps = 12
+
 var mode = 1
 
 export var placement_mode := "Drag"
@@ -119,6 +122,8 @@ func switch_scenes():
 	var _change_scene = get_tree().change_scene("res://scenes/player/player.tscn")
 
 func _process(delta):
+	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
+	
 	var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
 	if (level_size.x < 42 or level_size.y < 22) and zoom_level == 1.75:
 		zoom_level = 1.5
