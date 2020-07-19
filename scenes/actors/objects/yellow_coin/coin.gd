@@ -27,7 +27,7 @@ func _set_property_values():
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
 		CurrentLevelData.level_data.vars.coins_collected += coins
-		body.heal()
+		body.heal(1 if coins == 1 else 15)
 		var player_id = 1
 		if body.name == "Character":
 			player_id = 0
@@ -40,6 +40,7 @@ func collect(body):
 		despawn_timer = 1
 
 func _ready():
+	physics = false
 	if physics:
 		despawn_timer = 10.0
 		gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
