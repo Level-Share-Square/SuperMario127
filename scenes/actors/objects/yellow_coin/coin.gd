@@ -32,7 +32,7 @@ func collect(body):
 		if body.name == "Character":
 			player_id = 0
 		if PlayerSettings.other_player_id == -1 or PlayerSettings.my_player_index == player_id:
-			sound.play()
+			get_tree().current_scene.get_node("SharedSounds").PlaySound("CoinSound")
 		collected = true
 		physics = false
 		animated_sprite.animation = "collect"
@@ -48,6 +48,10 @@ func _ready():
 
 # Sprite frame assignments seem to be expensive
 var previous_frame = 0
+# Additional cache variables
+var prev_activate_shape = false
+var char1 = null
+var char2 = null
 func _process(delta):
 	if !collected:
 		var new_frame = get_tree().current_scene.coin_frame
@@ -85,11 +89,8 @@ func _process(delta):
 		if despawn_timer <= 1:
 			visible = !visible
 		if despawn_timer <= 0:
-			if !sound.playing:
-				despawn_timer = 0
-				queue_free()
-			else:
-				despawn_timer = 0.3
+			despawn_timer = 0
+			queue_free()
 
 func horizontal_cast():
 	var pos_new = transform.xform(Vector2(5 if velocity.x > 0 else -5, 0))
@@ -101,10 +102,6 @@ func vertical_cast():
 	return get_world_2d().direct_space_state.intersect_ray(
 		position, pos_new, [self], 17)
 
-# More cached lookup-like things
-var prev_activate_shape = false
-var char1 = null
-var char2 = null
 func _physics_process(delta):
 	# Everything else here is irrelevant for edit mode
 	if mode == 1:
