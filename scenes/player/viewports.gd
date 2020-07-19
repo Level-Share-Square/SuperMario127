@@ -17,9 +17,6 @@ onready var divider = get_node(divider_path)
 
 export var character_scene_path : String
 
-var last_player1_dead = false
-var last_player2_dead = false
-
 var player1_spawn = Vector2(0, 0)
 var player2_spawn = Vector2(0, 0)
 
@@ -82,52 +79,7 @@ func _process(_delta):
 	if PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
 		if Input.is_action_just_pressed("(disabled)copy_level"):
 			remove_player()
-		if player2.dead:
-			viewport_container2.visible = false
-			viewport_container1.visible = true
-			viewport1.size.x = 768
-			viewport_container1.rect_size.x = 768
-			viewport2.size.x = 0
-			viewport_container2.rect_size.x = 0
-			if !last_player2_dead:
-				camera1.smoothing_enabled = false
-				yield(get_tree(),"idle_frame")
-				camera1.smoothing_enabled = true
 			
-		if player1.dead:
-			viewport_container1.visible = false
-			viewport_container2.visible = true
-			viewport2.size.x = 768
-			viewport_container2.rect_size.x = 768
-			viewport1.size.x = 0
-			viewport_container1.rect_size.x = 0
-			if !last_player1_dead:
-				camera2.smoothing_enabled = false
-				yield(get_tree(),"idle_frame")
-				camera2.smoothing_enabled = true
-			
-		if !player2.dead and !player1.dead:
-			viewport_container1.visible = true
-			viewport_container2.visible = true
-			viewport2.size.x = 384
-			viewport_container2.rect_size.x = 384
-			viewport1.size.x = 384
-			viewport_container1.rect_size.x = 384
-			if last_player1_dead or last_player2_dead:
-				camera1.smoothing_enabled = false
-				camera2.smoothing_enabled = false
-				yield(get_tree(),"idle_frame")
-				camera1.smoothing_enabled = true
-				camera2.smoothing_enabled = true
-
-		if player1.dead or player2.dead:
-			divider.visible = false
-		else:
-			divider.visible = true
-			
-		last_player1_dead = player1.dead
-		last_player2_dead = player2.dead
-		
 		player1.controlled_locally = true
 		player2.controlled_locally = true
 	else:
