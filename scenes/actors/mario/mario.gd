@@ -271,9 +271,9 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	gravity = level_area.settings.gravity
 
 var prev_is_grounded = false
-var recalculate = false
+var recalculate_grounded = false
 func is_grounded():
-	if recalculate:
+	if recalculate_grounded:
 		var raycast_node = ground_check
 		raycast_node.cast_to = Vector2(0, 26)
 		if !ground_collision_dive.disabled:
@@ -284,9 +284,10 @@ func is_grounded():
 		var new_is_grounded = raycast_node.is_colliding() and velocity.y >= 0
 		if !new_is_grounded and prev_is_grounded and velocity.y > 0:
 			velocity.y = 0
+		
 		prev_is_grounded = new_is_grounded
 		
-		#recalculate = false
+		#recalculate_grounded = false
 	return prev_is_grounded
 
 func is_ceiling():
@@ -310,6 +311,7 @@ func show():
 	visible = true
 
 func set_state(new_state, delta: float):
+	recalculate_grounded = true
 	last_state = state
 	state = null
 	if last_state != null:
@@ -430,7 +432,8 @@ func heal(shards : int = 1):
 			health_shards = 0
 
 func _physics_process(delta: float):
-	recalculate = true
+	recalculate_grounded = true
+	
 	bottom_pos.position = bottom_pos_offset
 	if !ground_collision_dive.disabled:
 		bottom_pos.position = bottom_pos_dive_offset
