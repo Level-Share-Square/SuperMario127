@@ -110,8 +110,9 @@ func _ready():
 	layer = EditorSavedSettings.layer
 	layers_transparent = EditorSavedSettings.layers_transparent
 	shared_node.toggle_layer_transparency(layer, layers_transparent)
-	
-	get_node("/root/music").play() #needed because the music no longer plays by default
+
+	if !get_node("/root/music").is_playing():
+		get_node("/root/music").play() #needed because the music no longer plays by default
 	get_node("/root/mode_switcher/ModeSwitcherButton").change_button_state(true) #enable the mode switching button since we're using the editor
 	
 func set_selected_box(new_selected_box: Node):
