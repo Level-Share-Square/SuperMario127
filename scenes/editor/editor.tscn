@@ -2653,7 +2653,8 @@ script = ExtResource( 3 )
 object_id = 34
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "MetalPowerup"
+change_to = "RainbowPowerup"
+items_in_sequence = 2
 icon = ExtResource( 17 )
 preview = ExtResource( 16 )
 
@@ -2667,6 +2668,17 @@ items_in_sequence = 2
 index_in_sequence = 1
 icon = ExtResource( 143 )
 preview = ExtResource( 142 )
+
+[node name="RainbowPowerup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 41
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "MetalPowerup"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 17 )
+preview = ExtResource( 16 )
 
 [node name="BigSteely" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )

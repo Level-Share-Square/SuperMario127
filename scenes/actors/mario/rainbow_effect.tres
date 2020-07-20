@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=2]
 
-[sub_resource type="Shader" id=17]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 render_mode unshaded;
  
@@ -19,13 +19,13 @@ void fragment()
 }"
 custom_defines = ""
 
-[sub_resource type="Gradient" id=18]
+[sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 1, 0, 0, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=19]
-gradient = SubResource( 18 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
 [resource]
-shader = SubResource( 17 )
+shader = SubResource( 1 )
 shader_param/mix_amount = 1.0
-shader_param/gradient = SubResource( 19 )
+shader_param/gradient = SubResource( 3 )

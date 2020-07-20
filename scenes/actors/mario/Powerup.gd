@@ -14,7 +14,7 @@ func _ready():
 	character = get_parent().get_parent()
 
 func handle_update(delta: float):
-	if character.state == self:
+	if character.powerup == self:
 		_update(delta)
 	_general_update(delta)
 
