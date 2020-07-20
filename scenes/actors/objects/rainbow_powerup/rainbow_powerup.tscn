@@ -1,0 +1,104 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=1]
+[ext_resource path="res://scenes/actors/objects/rainbow_powerup/star.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/rainbow_powerup/rainbow_powerup.gd" type="Script" id=3]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode unshaded;
+ 
+uniform sampler2D gradient : hint_black;
+uniform float mix_amount = 1.0;
+
+void fragment()
+{
+	vec4 input_color = texture(TEXTURE, UV);
+
+	float grayscale_value = dot(input_color.rgb, vec3(0.299, 0.587, 0.114));
+	vec3 sampled_color = texture(gradient, vec2(grayscale_value, 0.0)).rgb;
+
+	COLOR.rgb = mix(input_color.rgb, sampled_color, mix_amount);
+	COLOR.a = input_color.a;
+}"
+custom_defines = ""
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 1, 0, 0, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 1 )
+shader_param/mix_amount = 1.0
+shader_param/gradient = SubResource( 3 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 64, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=13]
+animations = [ {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "default",
+"speed": 9.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 20, 20 )
+
+[node name="RainbowPowerup" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 4 )
+frames = SubResource( 13 )
+playing = true
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 14 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -9.0
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+rect = Rect2( -24, -24, 48, 48 )
+process_parent = true
+physics_process_parent = true

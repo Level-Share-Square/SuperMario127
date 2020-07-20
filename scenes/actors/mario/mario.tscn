@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -37,6 +37,8 @@
 [ext_resource path="res://scenes/actors/mario/powerups/Metal.gd" type="Script" id=35]
 [ext_resource path="res://scenes/actors/mario/metal_material.tres" type="Material" id=36]
 [ext_resource path="res://scenes/actors/mario/states/RainbowStar.gd" type="Script" id=37]
+[ext_resource path="res://scenes/actors/mario/rainbow_effect.tres" type="Material" id=38]
+[ext_resource path="res://scenes/actors/mario/powerups/Rainbow.gd" type="Script" id=39]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -340,6 +342,14 @@ script = ExtResource( 35 )
 material = ExtResource( 36 )
 time_left = 30.0
 
+[node name="RainbowPowerup" type="Node" parent="Powerups"]
+script = ExtResource( 39 )
+music_id = 25
+is_invincible = true
+material = ExtResource( 38 )
+time_left = 30.0
+id = 1
+
 [node name="PlayerCollision" type="Area2D" parent="."]
 visible = false
 collision_layer = 2
@@ -465,7 +475,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "death"
-frame = 3
+frame = 1
 playing = true
 script = ExtResource( 34 )
 
@@ -474,3 +484,5 @@ visible = false
 frames = ExtResource( 23 )
 animation = "deathFall"
 playing = true
+
+[node name="RainbowParticles" type="Node2D" parent="."]

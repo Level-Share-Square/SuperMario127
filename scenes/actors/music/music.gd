@@ -88,19 +88,23 @@ func _process(_delta):
 	
 		if current_scene.mode == 0 and is_instance_valid(character):
 			if character.powerup != null:
-				if character.powerup.music_id != current_song:
+				if (typeof(current_song) == TYPE_INT and character.powerup.music_id != current_song) or typeof(current_song) != TYPE_INT:
 					last_song = current_song
 					current_song = character.powerup.music_id
 					change_song(last_song, current_song)
 					is_powerup = true
 			else:
 				if is_powerup:
+					last_song = current_song
 					var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
+					current_song = level_song
 					change_song(last_song, level_song)
 				is_powerup = false
 		else:
 			if is_powerup:
+				last_song = current_song
 				var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
+				current_song = level_song
 				change_song(last_song, level_song)
 			is_powerup = false
 

@@ -410,7 +410,7 @@ func _process(delta: float):
 			if frames_until_flash <= 0:
 				frames_until_flash = 3
 				powerup.toggle_visuals()
-			
+
 	if invulnerable_frames > 0:
 		visible = !visible
 	elif invulnerable_frames == 0:
@@ -612,10 +612,12 @@ func _physics_process(delta: float):
 			
 		for nozzle_node in nozzles_node.get_children():
 			nozzle_node.handle_update(delta)
+		
+		for powerup_node in powerups_node.get_children():
+			powerup_node.handle_update(delta)
 
 	if powerup != null:
 		invincible = powerup.is_invincible
-		powerup.handle_update(delta)
 		powerup.time_left -= delta
 
 		if powerup.time_left <= 0:
