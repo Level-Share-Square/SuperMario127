@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -36,6 +36,7 @@
 [ext_resource path="res://scenes/actors/mario/death_animation.gd" type="Script" id=34]
 [ext_resource path="res://scenes/actors/mario/powerups/Metal.gd" type="Script" id=35]
 [ext_resource path="res://scenes/actors/mario/metal_material.tres" type="Material" id=36]
+[ext_resource path="res://scenes/actors/mario/states/RainbowStar.gd" type="Script" id=37]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -203,7 +204,6 @@ shape = SubResource( 7 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-material = ExtResource( 36 )
 frames = ExtResource( 1 )
 animation = "idleRight"
 playing = true
@@ -291,6 +291,9 @@ script = ExtResource( 20 )
 [node name="ButtSlideState" type="Node" parent="States"]
 script = ExtResource( 33 )
 
+[node name="RainbowStarState" type="Node" parent="States"]
+script = ExtResource( 37 )
+
 [node name="Nozzles" type="Node" parent="."]
 
 [node name="HoverNozzle" type="Node" parent="Nozzles"]
@@ -335,7 +338,6 @@ fallback_water_pos_right_luigi = Vector2( -19, -2 )
 [node name="MetalPowerup" type="Node" parent="Powerups"]
 script = ExtResource( 35 )
 material = ExtResource( 36 )
-metal_voice = true
 time_left = 30.0
 
 [node name="PlayerCollision" type="Area2D" parent="."]
@@ -463,7 +465,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "death"
-frame = 1
+frame = 3
 playing = true
 script = ExtResource( 34 )
 

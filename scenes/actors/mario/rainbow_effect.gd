@@ -3,7 +3,7 @@ extends AnimatedSprite
 var hue = 0
 
 func _process(delta):
-	hue += 0.035
+	hue += 0.015
 	var gradient_texture = GradientTexture.new()
 	var gradient = Gradient.new()
 	gradient.offsets = PoolRealArray([0.15, 1])

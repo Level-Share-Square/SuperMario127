@@ -319,6 +319,18 @@ func get_powerup_node(name: String):
 	if powerups_node.has_node(name):
 		return powerups_node.get_node(name)
 
+func set_powerup(powerup_node):
+	if powerup != null:
+		powerup._stop(0)
+		powerup.remove_visuals()
+
+	if powerup_node != null:
+		powerup = powerup_node
+		powerup_node._start(0)
+		powerup_node.apply_visuals()
+	else:
+		powerup = null
+
 func set_state_by_name(name: String, delta: float):
 	if get_state_node(name) != null:
 		set_state(get_state_node(name), delta)
@@ -387,9 +399,7 @@ func _process(delta: float):
 			frames_until_flash -= 1
 			if frames_until_flash <= 0:
 				frames_until_flash = 3
-				sprite.material = null if sprite.material != null else powerup.material
-		else:
-			sprite.material = powerup.material
+				powerup.toggle_visuals()
 			
 	if invulnerable_frames > 0:
 		visible = !visible
@@ -595,17 +605,14 @@ func _physics_process(delta: float):
 			nozzle_node.handle_update(delta)
 
 	if powerup != null:
-		metal_voice = powerup.metal_voice
 		invincible = powerup.is_invincible
-
+		powerup.handle_update(delta)
 		powerup.time_left -= delta
 
 		if powerup.time_left <= 0:
 			powerup.time_left = 0
-			powerup = null
+			set_powerup(null)
 	else:
-		metal_voice = false
-		sprite.material = null
 		invincible = false
 
 	if state != null:

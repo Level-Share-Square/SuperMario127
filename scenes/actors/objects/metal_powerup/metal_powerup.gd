@@ -23,7 +23,7 @@ func collect(body):
 		body.heal(5 * 8)
 		var powerup_node = body.get_powerup_node("MetalPowerup")
 		powerup_node.time_left = duration
-		body.powerup = powerup_node
+		body.set_powerup(powerup_node)
 		respawn_timer = 10.0
 		animated_sprite.visible = false
 		
