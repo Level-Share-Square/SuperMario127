@@ -111,6 +111,9 @@ func _ready():
 	layers_transparent = EditorSavedSettings.layers_transparent
 	shared_node.toggle_layer_transparency(layer, layers_transparent)
 	
+	get_node("/root/music").play() #needed because the music no longer plays by default
+	get_node("/root/mode_switcher/ModeSwitcherButton").change_button_state(true) #enable the mode switching button since we're using the editor
+	
 func set_selected_box(new_selected_box: Node):
 	EditorSavedSettings.selected_box = new_selected_box.box_index
 	item_preview_node.update_preview(new_selected_box.item)
@@ -122,6 +125,7 @@ func switch_scenes():
 	var _change_scene = get_tree().change_scene("res://scenes/player/player.tscn")
 
 func _process(delta):
+	# warning-ignore: integer_division
 	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
 	
 	var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
