@@ -274,6 +274,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/Powerup.gd"
 }, {
+"base": "State",
+"class": "RainbowStarState",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/states/RainbowStar.gd"
+}, {
 "base": "Reference",
 "class": "ScreenSizeUtil",
 "language": "GDScript",
@@ -433,6 +438,7 @@ _global_script_class_icons={
 "ParallaxLayerResource": "",
 "PlaceableItem": "",
 "Powerup": "",
+"RainbowStarState": "",
 "ScreenSizeUtil": "",
 "SetValueInstruction": "",
 "SettingsSaver": "",
@@ -659,8 +665,7 @@ toggle_transparency={
 }
 fullscreen={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777254,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"unicode":0,"echo":false,"script":null)
  ]
 }
 reload={
