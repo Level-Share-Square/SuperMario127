@@ -111,9 +111,9 @@ func _ready():
 	layers_transparent = EditorSavedSettings.layers_transparent
 	shared_node.toggle_layer_transparency(layer, layers_transparent)
 
-	if !get_node("/root/music").is_playing():
+	if get_node("/root/mode_switcher/ModeSwitcherButton").invisible: #so basically, if the mode switch button is invisible then the editor hasn't been initialized for the first time yet, since it isn't made invisible between mode switches for edit and play, hopefully this doesn't cause issues later on
+		get_node("/root/mode_switcher/ModeSwitcherButton").change_button_state(true) #enable the mode switching button since we're using the editor
 		get_node("/root/music").play() #needed because the music no longer plays by default
-	get_node("/root/mode_switcher/ModeSwitcherButton").change_button_state(true) #enable the mode switching button since we're using the editor
 	
 func set_selected_box(new_selected_box: Node):
 	EditorSavedSettings.selected_box = new_selected_box.box_index
