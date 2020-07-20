@@ -74,34 +74,35 @@ func _process(_delta):
 	var current_scene = get_tree().get_current_scene()
 	var current_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
 	
-	if !is_powerup:
-		var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
-		if current_scene.mode != last_mode or typeof(last_song) != typeof(level_song):
-			change_song(last_song, level_song)
-		elif last_song != current_song:
-			change_song(last_song, level_song)
-		last_mode = current_scene.mode
-		last_song = level_song
-
-	volume_db = linear2db(db2linear(orig_volume) * volume_multiplier)
-
-	if current_scene.mode == 0 and is_instance_valid(character):
-		if character.powerup != null:
-			if character.powerup.music_id != current_song:
-				last_song = current_song
-				current_song = character.powerup.music_id
-				change_song(last_song, current_song)
-				is_powerup = true
+	if "mode" in current_scene: #script will crash if the scene root doesn't have this property defined
+		if !is_powerup:
+			var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
+			if current_scene.mode != last_mode or typeof(last_song) != typeof(level_song):
+				change_song(last_song, level_song)
+			elif last_song != current_song:
+				change_song(last_song, level_song)
+			last_mode = current_scene.mode
+			last_song = level_song
+	
+		volume_db = linear2db(db2linear(orig_volume) * volume_multiplier)
+	
+		if current_scene.mode == 0 and is_instance_valid(character):
+			if character.powerup != null:
+				if character.powerup.music_id != current_song:
+					last_song = current_song
+					current_song = character.powerup.music_id
+					change_song(last_song, current_song)
+					is_powerup = true
+			else:
+				if is_powerup:
+					var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
+					change_song(last_song, level_song)
+				is_powerup = false
 		else:
 			if is_powerup:
 				var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
 				change_song(last_song, level_song)
 			is_powerup = false
-	else:
-		if is_powerup:
-			var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
-			change_song(last_song, level_song)
-		is_powerup = false
 
 func _unhandled_input(event):
 	if event.is_action_pressed("mute"):

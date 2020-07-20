@@ -5,7 +5,6 @@
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer"]
 stream = ExtResource( 1 )
-autoplay = true
 bus = "Editor"
 script = ExtResource( 2 )
 play_bus = "Master"

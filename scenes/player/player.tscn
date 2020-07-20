@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -38,6 +38,8 @@
 [ext_resource path="res://scenes/player/red_coin_counter.gd" type="Script" id=36]
 [ext_resource path="res://scenes/player/window_scale.gd" type="Script" id=37]
 [ext_resource path="res://scenes/player/fps_cap.gd" type="Script" id=38]
+[ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=39]
+[ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 7 )
@@ -1130,3 +1132,10 @@ char_path = NodePath("../../ViewportContainer/Viewport/World/Character2")
 
 [node name="HealthDisplay" parent="Viewports/ViewportContainer2" instance=ExtResource( 34 )]
 char_path = NodePath("../../ViewportContainer/Viewport/World/Character2")
+
+[node name="SharedSounds" type="Node" parent="."]
+script = ExtResource( 40 )
+
+[node name="CoinSound" type="AudioStreamPlayer" parent="SharedSounds"]
+stream = ExtResource( 39 )
+volume_db = -9.0

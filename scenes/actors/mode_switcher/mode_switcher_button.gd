@@ -9,11 +9,11 @@ onready var sound = $Sound
 onready var hover_sound = $HoverSound
 onready var fader = get_node("../Fader")
 onready var fader_tween = get_node("../Fader/Tween")
-var switching_disabled = false
+var switching_disabled = true
 var start_pos
 var last_hovered = false
 var last_paused = false
-var invisible = false
+var invisible = true
 
 export var texture_play : StreamTexture
 export var texture_stop : StreamTexture
@@ -122,3 +122,7 @@ func switch():
 		fader.visible = false
 		rect_position = start_pos
 		switching_disabled = false
+
+func change_button_state(is_enabled : bool):
+	invisible = !is_enabled
+	switching_disabled = !is_enabled
