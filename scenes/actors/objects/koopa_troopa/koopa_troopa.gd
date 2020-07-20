@@ -124,7 +124,7 @@ func _physics_process(delta):
 	if mode != 1 and enabled and !dead and loaded:
 		if !hit:
 			if is_instance_valid(body):
-				var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
+				var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds.size
 				if body.global_position.y > (level_size.y * 32) + 128:
 					queue_free()
 					
@@ -161,7 +161,7 @@ func _physics_process(delta):
 				if !right_check.is_colliding() or body.global_position.x > (level_size.x * 32) or body.test_move(body.global_transform, Vector2(0.1, 0)):
 					facing_direction = -1
 			elif is_instance_valid(shell):
-				var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
+				var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds.size
 				if shell.global_position.y > (level_size.y * 32) + 128:
 					queue_free()
 	

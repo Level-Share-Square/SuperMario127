@@ -222,7 +222,7 @@ func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String =
 
 # warning-ignore: unused_argument
 func load_in(level_data : LevelData, level_area : LevelArea):
-	level_size = level_area.settings.size
+	level_size = level_area.settings.bounds.size
 	for exception in collision_exceptions:
 		add_collision_exception_with(get_node(exception))
 	var _connect = player_collision.connect("body_entered", self, "player_hit")

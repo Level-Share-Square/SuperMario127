@@ -34,67 +34,61 @@ func get_tile(tileset_id, tile_id):
 	else:
 		return tileset.right_slope_tile_id
 
-func place_edges(pos, placing_tile, bounds, tilemap_node):
-	if pos.x == 0:
-		tilemap_node.set_cell(-1, pos.y, placing_tile)
-	if pos.y == 0:
-		tilemap_node.set_cell(pos.x, -1, placing_tile)
-	if pos.x == 0 and pos.y == 0:
-		tilemap_node.set_cell(-1, -1, placing_tile)
-	if pos.x == 0 and pos.y == bounds.y - 1:
-		tilemap_node.set_cell(-1, bounds.y, placing_tile)
-		
-	if pos.x == bounds.x - 1:
-		tilemap_node.set_cell(bounds.x, pos.y, placing_tile)
-	if pos.y == bounds.y - 1:
-		tilemap_node.set_cell(pos.x, bounds.y, placing_tile)
-	if pos.x == bounds.x - 1 and pos.y == bounds.y - 1:
-		tilemap_node.set_cell(bounds.x, bounds.y, placing_tile)
-	if pos.x == bounds.x - 1 and pos.y == 0:
-		tilemap_node.set_cell(bounds.x, -1, placing_tile)
+# func place_edges(pos, placing_tile, bounds, tilemap_node):
+# 	var top :    bool = pos.x == bounds.position.x
+# 	var left :   bool = pos.x == bounds.position.y
+# 	var bottom : bool = pos.x == bounds.end.x - 1
+# 	var right :  bool = pos.x == bounds.end.y - 1
 	
-func get_tile_in_data(index: int, layer: int):
-	var tiles_array
-	var tile
-	if layer == 0:
-		tiles_array = level_area.background_tiles
-	elif layer == 1:
-		tiles_array = level_area.foreground_tiles
-	elif layer == 2:
-		tiles_array = level_area.very_foreground_tiles
-	elif layer == 3:
-		tiles_array = level_area.very_background_tiles
+# 	if left:
+# 		tilemap_node.set_cell(-1, pos.y, placing_tile)
+# 	if top:
+# 		tilemap_node.set_cell(pos.x, -1, placing_tile)
+# 	if left and top:
+# 		tilemap_node.set_cell(-1, -1, placing_tile)
+# 	if left and bottom:
+# 		tilemap_node.set_cell(-1, bounds.y, placing_tile)
 		
-	if index >= tiles_array.size():
-		tile = [0, 0]
+# 	if pos.x == bounds.x - 1:
+# 		tilemap_node.set_cell(bounds.x, pos.y, placing_tile)
+# 	if pos.y == bounds.y - 1:
+# 		tilemap_node.set_cell(pos.x, bounds.y, placing_tile)
+# 	if pos.x == bounds.x - 1 and pos.y == bounds.y - 1:
+# 		tilemap_node.set_cell(bounds.x, bounds.y, placing_tile)
+# 	if pos.x == bounds.x - 1 and pos.y == 0:
+# 		tilemap_node.set_cell(bounds.x, -1, placing_tile)
+	
+const emptyTile = [0,0]
+func get_tile_in_data(x: int, y: int, layer: int):
+
+	#warning-ignore:integer_division
+	var chunk_key = str(x/16,":",y/16,":",layer)
+
+	
+	if level_area.tile_chunks.has(chunk_key):
+		var tile = level_area.tile_chunks[chunk_key][x%16+(y%16)*16]
+		return tile if tile else emptyTile
 	else:
-		tile = tiles_array[index]
+		return emptyTile
+
+var numChunks : int = 0
+func set_tile(x: int, y: int, layer: int, tileset_id: int, tile_id: int):
+	#warning-ignore:integer_division
+	var chunk_key = str(x/16,":",y/16,":",layer)
+
+	var chunk: Array
+	if level_area.tile_chunks.has(chunk_key):
+		chunk = level_area.tile_chunks[chunk_key]
+	else:
+		chunk = []
+		chunk.resize(16*16)
+		level_area.tile_chunks[chunk_key] = chunk
 	
-	return tile
-		
-func set_tile(index: int, layer: int, tileset_id: int, tile_id: int):
-	var tiles_array
-	if layer == 0:
-		tiles_array = level_area.background_tiles
-	elif layer == 1:
-		tiles_array = level_area.foreground_tiles
-	elif layer == 2:
-		tiles_array = level_area.very_foreground_tiles
-	elif layer == 3:
-		tiles_array = level_area.very_background_tiles
-		
-	if index + 1 >= tiles_array.size():
-		for _new_index in range(tiles_array.size(), index + 1):
-			tiles_array.append([0, 0])
-	var size = level_area.settings.size
-	if position.x > size.x or position.y > size.y:
-		level_area.settings.size = position
-	tiles_array[index] = [tileset_id, tile_id]
+	chunk[x%16+(y%16)*16] = [tileset_id, tile_id]
 	
-	set_tile_visual(index, layer, tileset_id, tile_id)
+	set_tile_visual(x, y, layer, tileset_id, tile_id)
 		
-func set_tile_visual(index: int, layer: int, tileset_id: int, tile_id: int):
-	var position = tile_util.get_position_from_tile_index(index, level_area.settings.size)
+func set_tile_visual(x: int, y: int, layer: int, tileset_id: int, tile_id: int, update_bitmask: bool = true):
 	var cache_tile = get_tile(tileset_id, tile_id)
 	var layer_tilemap_node = back_tilemap_node
 	if layer == 3:
@@ -103,10 +97,10 @@ func set_tile_visual(index: int, layer: int, tileset_id: int, tile_id: int):
 		layer_tilemap_node = middle_tilemap_node	
 	elif layer == 2:
 		layer_tilemap_node = front_tilemap_node	
-	if layer_tilemap_node.get_cell(position.x, position.y) != cache_tile:
-		layer_tilemap_node.set_cell(position.x, position.y, cache_tile)
-		place_edges(Vector2(position.x, position.y), cache_tile, level_area.settings.size, layer_tilemap_node)
-		layer_tilemap_node.update_bitmask_area(Vector2(position.x, position.y))
+	if layer_tilemap_node.get_cell(x, y) != cache_tile:
+		layer_tilemap_node.set_cell(x, y, cache_tile)
+		if(update_bitmask):
+			layer_tilemap_node.update_bitmask_area(Vector2(x, y))
 
 func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
 	
@@ -116,32 +110,66 @@ func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
 	update_tilemaps()
 
 func update_tilemaps():
-	var settings = level_area.settings
+	var bounds = level_area.settings.bounds
 	
+	very_back_tilemap_node.clear()
 	back_tilemap_node.clear()
 	middle_tilemap_node.clear()
 	front_tilemap_node.clear()
 	
-	for index in range(level_area.very_background_tiles.size()):
-		var tile = level_area.very_background_tiles[index]
-		if tile[0] != 0:
-			set_tile_visual(index, 3, tile[0], tile[1])
+	for key in level_area.tile_chunks:
+		var chunk : Array = level_area.tile_chunks[key]
 
-	for index in range(level_area.background_tiles.size()):
-		var tile = level_area.background_tiles[index]
-		if tile[0] != 0:
-			set_tile_visual(index, 0, tile[0], tile[1])
-			
-	for index in range(level_area.foreground_tiles.size()):
-		var tile = level_area.foreground_tiles[index]
-		if tile[0] != 0:
-			set_tile_visual(index, 1, tile[0], tile[1])
-			
-	for index in range(level_area.very_foreground_tiles.size()):
-		var tile = level_area.very_foreground_tiles[index]
-		if tile[0] != 0:
-			set_tile_visual(index, 2, tile[0], tile[1])
+		var _key : Array = key.split(":")
+		var chunk_x := int(_key[0])
+		var chunk_y := int(_key[1])
+		var layer 	:= int(_key[2])
+
+		print(_key)
+
+		for x in range(16):
+			for y in range(16):
+				var tile = chunk[x + y*16] #get tile from chunk
+				if tile and bounds.has_point(Vector2(chunk_x*16 + x + 0.5, chunk_y*16 + y + 0.5)):
+					set_tile_visual(chunk_x*16 + x, chunk_y*16 + y, layer, tile[0], tile[1], false) #no need to update bitmask individually
+
 	
-	back_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
-	middle_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
-	front_tilemap_node.update_bitmask_region(Vector2(0, 0), Vector2(settings.size.x, settings.size.y))
+	var tile : int = middle_tilemap_node.tile_set.find_tile_by_name("LevelMargin")
+
+
+	var left: int = bounds.position.x-1
+	var top: int = bounds.position.y-1
+	var right: int = bounds.end.x
+	var bottom: int = bounds.end.y
+
+	for tilemap in [very_back_tilemap_node, back_tilemap_node, middle_tilemap_node, front_tilemap_node]:
+		for x in range(left, right):
+			tilemap.set_cell(x,top, tile)
+			tilemap.set_cell(x,bottom, tile)
+
+		for y in range(top, bottom):
+			tilemap.set_cell(left, y, tile)
+			tilemap.set_cell(right, y, tile)
+
+		tilemap.update_bitmask_region(bounds.position, bounds.end)
+	
+	tile = middle_tilemap_node.tile_set.find_tile_by_name("OutOfBounds")
+	
+	
+	for x in range(left-2, right+2):
+		very_back_tilemap_node.set_cell(x,top, tile)
+		very_back_tilemap_node.set_cell(x,top-1, tile)
+		very_back_tilemap_node.set_cell(x,top-2, tile)
+		
+		very_back_tilemap_node.set_cell(x,bottom, tile)
+		very_back_tilemap_node.set_cell(x,bottom+1, tile)
+		very_back_tilemap_node.set_cell(x,bottom+2, tile)
+
+	for y in range(top, bottom):
+		very_back_tilemap_node.set_cell(left, y, tile)
+		very_back_tilemap_node.set_cell(left-1, y, tile)
+		very_back_tilemap_node.set_cell(left-2, y, tile)
+		
+		very_back_tilemap_node.set_cell(right, y, tile)
+		very_back_tilemap_node.set_cell(right+1, y, tile)
+		very_back_tilemap_node.set_cell(right+2, y, tile)

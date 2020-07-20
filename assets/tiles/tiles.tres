@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=347 format=2]
+[gd_resource type="TileSet" load_steps=349 format=2]
 
 [ext_resource path="res://assets/tiles/bricks/bricks.png" type="Texture" id=1]
 [ext_resource path="res://assets/tiles/grass/grass.png" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://assets/tiles/boo_block/boo_block.png" type="Texture" id=7]
 [ext_resource path="res://assets/tiles/snow/snow.png" type="Texture" id=8]
 [ext_resource path="res://assets/tiles/cave/cave.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/boo_block/boo_block_invis.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/out_of_bounds.png" type="Texture" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -6799,4 +6801,32 @@ points = PoolVector2Array( 32, 29, 17, 17, 0, 17, 0, 0, 29, 0, 32, 4 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 24/z_index = 0
+26/name = "OutOfBounds"
+26/texture = ExtResource( 11 )
+26/tex_offset = Vector2( 0, 0 )
+26/modulate = Color( 1, 1, 1, 1 )
+26/region = Rect2( 0, 0, 32, 32 )
+26/tile_mode = 0
+26/occluder_offset = Vector2( 0, 0 )
+26/navigation_offset = Vector2( 0, 0 )
+26/shape_offset = Vector2( 0, 0 )
+26/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+26/shape_one_way = false
+26/shape_one_way_margin = 0.0
+26/shapes = [  ]
+26/z_index = 0
+27/name = "LevelMargin"
+27/texture = ExtResource( 10 )
+27/tex_offset = Vector2( 0, 0 )
+27/modulate = Color( 1, 1, 1, 1 )
+27/region = Rect2( 0, 0, 32, 32 )
+27/tile_mode = 0
+27/occluder_offset = Vector2( 0, 0 )
+27/navigation_offset = Vector2( 0, 0 )
+27/shape_offset = Vector2( 0, 0 )
+27/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+27/shape_one_way = false
+27/shape_one_way_margin = 0.0
+27/shapes = [  ]
+27/z_index = 0
 script = ExtResource( 3 )

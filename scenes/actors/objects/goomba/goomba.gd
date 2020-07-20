@@ -155,7 +155,7 @@ func _physics_process(delta):
 			raycast.set_collision_mask_bit(4, platform_collision_enabled)
 		if !hit:
 			if is_instance_valid(kinematic_body):
-				var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
+				var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds.size
 				if kinematic_body.global_position.y > (level_size.y * 32) + 128:
 					queue_free()
 						
@@ -230,7 +230,7 @@ func _physics_process(delta):
 								was_ground_pound = true
 							kill(hit_body.global_position)
 		else:
-			var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
+			var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds.size
 			if kinematic_body.global_position.y > (level_size.y * 32) + 128:
 				queue_free()
 					

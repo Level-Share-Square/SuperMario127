@@ -62,26 +62,37 @@ func get_vector2(result) -> Vector2:
 func get_area(result) -> LevelArea:
 	var area = LevelArea.new()
 	area.settings = get_settings(result.settings)
+	area.tile_chunks.clear()
 	area.very_foreground_tiles.clear()
 	area.foreground_tiles.clear()
 	area.background_tiles.clear()
 	area.very_background_tiles.clear()
-	for very_foreground_tiles_result in result.very_foreground_tiles:
-		var tiles = get_tiles(very_foreground_tiles_result)
-		for tile in tiles:
-			area.very_foreground_tiles.append(tile)
-	for tiles_result in result.foreground_tiles:
-		var tiles = get_tiles(tiles_result)
-		for tile in tiles:
-			area.foreground_tiles.append(tile)
-	for background_tiles_result in result.background_tiles:
-		var tiles = get_tiles(background_tiles_result)
-		for tile in tiles:
-			area.background_tiles.append(tile)
-	for background_tiles_result in result.very_background_tiles:
-		var tiles = get_tiles(background_tiles_result)
-		for tile in tiles:
-			area.very_background_tiles.append(tile)
+
+	area.tile_chunks = get_chunks([
+		result.background_tiles, 
+		result.foreground_tiles, 
+		result.very_foreground_tiles, 
+		result.very_background_tiles], 
+
+		area.settings.bounds.size)
+
+	# for very_foreground_tiles_result in result.very_foreground_tiles:
+	# 	var tiles = get_tiles(very_foreground_tiles_result)
+	# 	for tile in tiles:
+	# 		area.very_foreground_tiles.append(tile)
+	# for tiles_result in result.foreground_tiles:
+	# 	var tiles = get_tiles(tiles_result)
+	# 	for tile in tiles:
+	# 		area.foreground_tiles.append(tile)
+	# for background_tiles_result in result.background_tiles:
+	# 	var tiles = get_tiles(background_tiles_result)
+	# 	for tile in tiles:
+	# 		area.background_tiles.append(tile)
+	# for background_tiles_result in result.very_background_tiles:
+	# 	var tiles = get_tiles(background_tiles_result)
+	# 	for tile in tiles:
+	# 		area.very_background_tiles.append(tile)
+
 	for object_result in result.objects:
 		var object = get_object(object_result)
 		area.objects.append(object)
@@ -94,28 +105,73 @@ func get_settings(result) -> LevelAreaSettings:
 	settings.music = result.music
 	settings.gravity = abs(result.gravity)
 	var size_vec2 = get_vector2(result.size)
-	settings.size = Vector2(clamp(size_vec2.x, 24, 1500), clamp(size_vec2.y, 14, 1500))
+	settings.bounds.size = Vector2(clamp(size_vec2.x, 24, 1500), clamp(size_vec2.y, 14, 1500))
 	return settings
 	
-func get_tiles(result) -> Array:
+func get_chunks(resultLayers: Array, size: Vector2) -> Dictionary:
+	var level_width := int(size.x)
+	var chunks: Dictionary = {}
 	var tileset_id_string
 	var tile_id_string
-	tileset_id_string = "0x" + result[0] + result[1]
-	tile_id_string = "0x" + result[2]
-	var tile_repeat_string = ""
-	if result.length() > 3:
-		for index in range(4, result.length()):
-			tile_repeat_string += result[index]
+	var current_chunk = null
+	var layer_index: int = 0
+	for resultLayer in resultLayers:
+		var tile_index: int = 0
+		for result in resultLayer:
+			#decode tile
+			tileset_id_string = "0x" + result[0] + result[1]
+			tile_id_string = "0x" + result[2]
+			var tile_repeat_string = ""
+			if result.length() > 3:
+				for index in range(4, result.length()):
+					tile_repeat_string += result[index]
+			else:
+				tile_repeat_string += "1"
+			var tileset_id = tileset_id_string.hex_to_int()
+			var tile_repeat = int(tile_repeat_string)
+
+			if(tileset_id==0): #air can we skipped since it won't get written to the chunks
+				tile_index += tile_repeat
+				continue
+			
+			#finish decoding
+			var tile_id = tile_id_string.hex_to_int()
+			var tile = [tileset_id, tile_id]
+
+
+			var x: int = tile_index%level_width
+			var y: int = tile_index/level_width
+
+			current_chunk = get_chunk_for_position(x, y, layer_index, chunks)
+
+			for _i in range(tile_repeat):
+				if(x%16==0): #beginning of new chunk
+					current_chunk = get_chunk_for_position(x, y, layer_index, chunks)
+
+				current_chunk[x%16 + (y%16)*16] = tile
+				tile_index+=1
+
+				x = tile_index%level_width
+				y = tile_index/level_width
+
+		layer_index+=1
+			
+			
+			
+
+	return chunks
+
+func get_chunk_for_position(x: int, y: int, layer: int, chunks: Dictionary) -> Array:
+	var chunk_x: int = x / 16
+	var chunk_y: int = y / 16
+	var key := str(chunk_x,":",chunk_y,":",layer)
+	if(chunks.has(key)):
+		return chunks[key]
 	else:
-		tile_repeat_string += "1"
-	var tileset_id = tileset_id_string.hex_to_int()
-	var tile_id = tile_id_string.hex_to_int()
-	var tile_repeat = int(tile_repeat_string)
-	var tile = [tileset_id, tile_id]
-	var tiles = []
-	for _iterator in range(tile_repeat):
-		tiles.append(tile)
-	return tiles
+		var chunk := []
+		chunk.resize(16*16)
+		chunks[key] = chunk
+		return chunk
 
 func get_object(result) -> LevelObject:
 	var object
@@ -212,17 +268,25 @@ func get_encoded_level_data():
 		level_string += "["
 		
 		# Settings
-		level_string += value_util.encode_value(settings.size) + ","
+		level_string += value_util.encode_value(settings.bounds.size) + ","
+		
 		level_string += value_util.encode_value(settings.sky) + ","
 		level_string += value_util.encode_value(settings.background) + ","
 		level_string += value_util.encode_value(settings.music) + ","
 		level_string += value_util.encode_value(settings.gravity) + "~"
 		
+		var tiles := []
+		var very_background_tiles := []
+		var background_tiles := []
+		var foreground_tiles := []
+
+		
+		level_code_util.generate_from_chunks(area.tile_chunks, [background_tiles, tiles, foreground_tiles, very_background_tiles], settings.bounds)
 		# Tiles
-		var saved_tiles = level_code_util.encode(area.foreground_tiles, settings)
-		var saved_very_background_tiles = level_code_util.encode(area.very_background_tiles, settings)
-		var saved_background_tiles = level_code_util.encode(area.background_tiles, settings)
-		var saved_foreground_tiles = level_code_util.encode(area.very_foreground_tiles, settings)
+		var saved_tiles = level_code_util.encode(tiles, settings)
+		var saved_very_background_tiles = level_code_util.encode(very_background_tiles, settings)
+		var saved_background_tiles = level_code_util.encode(background_tiles, settings)
+		var saved_foreground_tiles = level_code_util.encode(foreground_tiles, settings)
 		
 		for tile in saved_tiles:
 			level_string += tile + ","
@@ -247,8 +311,10 @@ func get_encoded_level_data():
 		for object in area.objects:
 			var added_object = ""
 			added_object += str(object.type_id) + ","
-			for value in object.properties:
-				added_object += value_util.encode_value(value_util.get_true_value(value)) + ","
+			
+			added_object += value_util.encode_value(value_util.get_true_value(object.properties[0]-settings.bounds.position*32)) + ","
+			for i in range(1,object.properties.size()):
+				added_object += value_util.encode_value(value_util.get_true_value(object.properties[i])) + ","
 			added_object.erase(added_object.length() - 1, 1)
 			level_string += added_object + "|"
 		level_string.erase(level_string.length() - 1, 1)
