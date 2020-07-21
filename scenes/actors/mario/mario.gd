@@ -601,9 +601,10 @@ func _physics_process(delta: float):
 			sprite_offset = Vector2(rad2deg(sprite_rotation) / 10, -abs(rad2deg(sprite_rotation) / 10))
 			
 			# Translate velocity X to Y
-			velocity.y += (velocity.x * normal.x / normal.y) * -1
-			if velocity.y < 0: # upwards velocity, don't allow that
-				velocity.y = 0
+			if normal.y != 0: # Avoid division by zero (what)
+				velocity.y += (velocity.x * normal.x / normal.y) * -1
+				if velocity.y < 0: # upwards velocity, don't allow that
+					velocity.y = 0
 			
 			# this is required to keep mario from falling off slopes
 			#velocity.y += (abs(sprite_rotation) + 1) * 100
@@ -703,10 +704,13 @@ func _physics_process(delta: float):
 	if is_instance_valid(nozzle):
 		fludd_sprite.visible = true
 		water_sprite.visible = true
-		water_sprite_2.visible = true
-		water_sprite_2.flip_h = water_sprite.flip_h
-		water_sprite_2.animation = water_sprite.animation
-		water_sprite_2.frame = water_sprite_2.frame
+		if nozzle.get_name() == "HoverNozzle":
+			water_sprite_2.visible = true
+			water_sprite_2.flip_h = water_sprite.flip_h
+			water_sprite_2.animation = water_sprite.animation
+			water_sprite_2.frame = water_sprite_2.frame
+		else:
+			water_sprite_2.visible = false
 		if nozzle.activated:
 			attacking = true
 		if character == 0:
@@ -830,4 +834,8 @@ func kill(cause):
 			set_state_by_name("FallState", 0)
 
 func exit():
-	mode_switcher.get_node("ModeSwitcherButton").switch()
+	#if the mode switcher button is not invisible, we're in edit mode, switch back to that, but if we're in play mode then for now just reload the scene
+	if !mode_switcher.get_node("ModeSwitcherButton").invisible:
+		mode_switcher.get_node("ModeSwitcherButton").switch()
+	else: 
+		get_tree().reload_current_scene()

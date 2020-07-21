@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/CrappyMainMenuEditorButton.gd" type="Script" id=1]
+[ext_resource path="res://scenes/CrappyMainMenuPlayerButton.gd" type="Script" id=2]
+
+[node name="CrappyMainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Editor" type="Button" parent="."]
+margin_left = 200.453
+margin_top = 98.89
+margin_right = 212.453
+margin_bottom = 118.89
+text = "eedtor"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" type="Button" parent="."]
+margin_left = 117.599
+margin_top = 164.817
+margin_right = 129.599
+margin_bottom = 184.817
+text = "Playar"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Editor" to="Editor" method="_on_button_pressed"]
+[connection signal="pressed" from="Player" to="Player" method="_on_button_pressed"]
