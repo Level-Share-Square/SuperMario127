@@ -34,7 +34,8 @@ func _unhandled_input(event):
 		toggle_pause()
 
 func toggle_pause():
-	if !scene_transitions.transitioning and !mode_switcher.get_node("ModeSwitcherButton").switching_disabled and !PhotoMode.enabled and ((paused and get_tree().paused) or (!paused and !get_tree().paused)):
+	#mode switcher part is because if the button is invisible you can assume it's not edit mode, and if it's visible then you dont wanna be able to pause while it's switching
+	if !scene_transitions.transitioning and (mode_switcher.get_node("ModeSwitcherButton").invisible or !mode_switcher.get_node("ModeSwitcherButton").switching_disabled) and !PhotoMode.enabled and ((paused and get_tree().paused) or (!paused and !get_tree().paused)):
 		if !shine_info.visible:
 			SettingsSaver.save($MultiplayerOptions)
 			multiplayer_options.visible = false
