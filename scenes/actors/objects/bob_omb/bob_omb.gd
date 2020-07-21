@@ -127,8 +127,8 @@ func _physics_process(delta):
 			delete_timer = 0
 			queue_free()
 			
-	var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds.size
-	if kinematic_body.global_position.y > (level_size.y * 32) + 128:
+	var level_bounds = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds
+	if kinematic_body.global_position.y > (level_bounds.end.y * 32) + 128:
 		queue_free()
 			
 	if damage_timer > 0:
@@ -190,8 +190,8 @@ func _physics_process(delta):
 					walk_timer = 0
 					walk_wait = 3.0
 			if (
-				kinematic_body.global_position.x < -64 or 
-				kinematic_body.global_position.x > (level_size.x * 32) + 64
+				kinematic_body.global_position.x < (level_bounds.position.x * 32)-64 or 
+				kinematic_body.global_position.x > (level_bounds.end.x * 32) + 64
 			):
 				queue_free()
 		else:

@@ -24,9 +24,12 @@ func _physics_process(delta):
 				position = character_node.global_position + character_vel
 
 func load_in(_level_data : LevelData, level_area : LevelArea):
-	var level_size = level_area.settings.bounds.size
-	limit_right = level_size.x * 32
-	limit_bottom = level_size.y * 32
+	var level_bounds = level_area.settings.bounds
+	limit_left = level_bounds.position.x * 32
+	limit_top = level_bounds.position.y * 32
+	limit_right = level_bounds.end.x * 32
+	limit_bottom = level_bounds.end.y * 32
+	
 	if focus_on != null:
 		position = focus_on.global_position
 	elif character_node != null:

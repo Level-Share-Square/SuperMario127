@@ -155,8 +155,8 @@ func _physics_process(delta):
 			raycast.set_collision_mask_bit(4, platform_collision_enabled)
 		if !hit:
 			if is_instance_valid(kinematic_body):
-				var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds.size
-				if kinematic_body.global_position.y > (level_size.y * 32) + 128:
+				var level_bounds = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds
+				if kinematic_body.global_position.y > (level_bounds.end.y * 32) + 128:
 					queue_free()
 						
 				if !is_instance_valid(character):
@@ -181,8 +181,8 @@ func _physics_process(delta):
 					facing_direction = 1 if (character.global_position.x > kinematic_body.global_position.x) else -1
 					velocity.x = lerp(velocity.x, facing_direction * run_speed, delta * accel)
 				if (
-					kinematic_body.global_position.x < -64 or 
-					kinematic_body.global_position.x > (level_size.x * 32) + 64
+					kinematic_body.global_position.x < (level_bounds.position.x * 32) -64 or 
+					kinematic_body.global_position.x > (level_bounds.end.x * 32) + 64
 				):
 					queue_free()
 				sprite.flip_h = true if facing_direction == 1 else false
@@ -230,8 +230,8 @@ func _physics_process(delta):
 								was_ground_pound = true
 							kill(hit_body.global_position)
 		else:
-			var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds.size
-			if kinematic_body.global_position.y > (level_size.y * 32) + 128:
+			var level_bounds = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds
+			if kinematic_body.global_position.y > (level_bounds.end.y * 32) + 128:
 				queue_free()
 					
 			if hide_timer > 0:

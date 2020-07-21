@@ -51,7 +51,7 @@ func _update(delta):
 		pass
 	
 	character.velocity.x = character.facing_direction * current_speed
-	if character.is_walled() or (character.position.x <= 0 or character.position.x >= character.level_size.x * 32):
+	if character.is_walled() or (character.position.x <= character.level_bounds.position.x * 32 or character.position.x >= character.level_bounds.end.x * 32 -1):
 		character.velocity.x = -character.velocity.x
 		character.position.x -= character.facing_direction * 3
 		character.facing_direction = -character.facing_direction

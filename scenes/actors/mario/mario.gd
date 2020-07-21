@@ -175,7 +175,7 @@ onready var raycasts = [ground_check, ground_check_dive, left_check, right_check
 export var bottom_pos_offset : Vector2
 export var bottom_pos_dive_offset : Vector2
 
-var level_size = Vector2(80, 30)
+var level_bounds = Rect2(0, 0, 80, 30)
 var number_of_players = 2
 
 var next_position : Vector2
@@ -225,7 +225,7 @@ func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String =
 
 # warning-ignore: unused_argument
 func load_in(level_data : LevelData, level_area : LevelArea):
-	level_size = level_area.settings.bounds.size
+	level_bounds = level_area.settings.bounds
 	for exception in collision_exceptions:
 		add_collision_exception_with(get_node(exception))
 	var _connect = player_collision.connect("body_entered", self, "player_hit")
@@ -752,14 +752,14 @@ func _physics_process(delta: float):
 		collided_last_frame = false
 
 	# Boundaries
-	if position.y > (level_size.y * 32) + 128:
+	if position.y > (level_bounds.end.y * 32) + 128:
 		if PlayerSettings.other_player_id == -1 or PlayerSettings.my_player_index == player_id:
 			kill("fall")
-	if position.x < 0:
-		position.x = 0
+	if position.x < level_bounds.position.x * 32:
+		position.x = level_bounds.position.x * 32
 		velocity.x = 0
-	if position.x > level_size.x * 32:
-		position.x = level_size.x * 32
+	if position.x > level_bounds.end.x * 32 -1:
+		position.x = level_bounds.end.x * 32 -1
 		velocity.x = 0
 	last_velocity = velocity
 	last_move_direction = move_direction
