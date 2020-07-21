@@ -1,7 +1,5 @@
 extends GameObject
 
-onready var steely_scene = load("res://scenes/actors/objects/big_steely/big_steely_ball.tscn")
-
 var steely_objects = []
 var spawn_timer = 0.0
 var cleanout_timer = 0.0
