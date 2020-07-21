@@ -503,6 +503,7 @@ PhotoMode="*res://scenes/actors/photo_mode/photo_mode.gd"
 ActionManager="*res://scenes/editor/action_manager.gd"
 MiscCache="*res://scenes/shared/misc_cache.gd"
 Autosave="*res://scenes/editor/autosave.gd"
+LoadSettings="*res://scenes/shared/load_settings.gd"
 
 [debug]
 
