@@ -92,12 +92,12 @@ func _process(delta):
 			queue_free()
 
 func horizontal_cast():
-	var pos_new = transform.xform(Vector2(5 if velocity.x > 0 else -5, 0))
+	var pos_new = position + Vector2(5 if velocity.x > 0 else -5, 0)
 	return get_world_2d().direct_space_state.intersect_ray(
 		position, pos_new, [self], 17)
 
 func vertical_cast():
-	var pos_new = transform.xform(Vector2(0, -10 if velocity.y < 0 else 10))
+	var pos_new = position + Vector2(0, -10 if velocity.y < 0 else 10)
 	return get_world_2d().direct_space_state.intersect_ray(
 		position, pos_new, [self], 17)
 
@@ -107,7 +107,7 @@ func _physics_process(delta):
 		return
 	
 	if physics:
-		velocity.y += gravity
+		velocity.y += gravity * delta * 120
 		position += velocity * delta
 		
 		var up = velocity.y < 0
