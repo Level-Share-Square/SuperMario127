@@ -19,19 +19,20 @@ static func is_valid(value : String):
 		else:
 			return false
 
+const empty_tile := [0,0]
 static func encode(tiles, settings):
+	print(settings.bounds)
 	var new_data = []
 	var last_index = -1
 	var count = 1
 	var append_string = ""
 	
-	for index in range(settings.size.x * settings.size.y):
-		var appended_tile
-		if index < tiles.size():
-			var encoded_tile = tiles[index]
-			appended_tile = encoded_tile[0] * 10 + encoded_tile[1]
-		else:
-			appended_tile = 0
+	for index in range(settings.bounds.size.x * settings.bounds.size.y):
+		var encoded_tile = tiles[index]
+		if not encoded_tile:
+			encoded_tile = empty_tile
+
+		var appended_tile = encoded_tile[0] * 10 + encoded_tile[1]
 		
 		if appended_tile != last_index:
 			if last_index != -1:
@@ -41,11 +42,31 @@ static func encode(tiles, settings):
 			last_index = appended_tile
 		else:
 			count += 1
-	
+
 	append_string = "" if count == 1 else ("*" + str(count))
 	new_data.append(str(last_index).pad_zeros(3) + append_string)
-	
+	print(new_data)
 	return new_data
+
+static func generate_from_chunks(tile_chunks: Dictionary, layers: Array, bounds: Rect2):
+	for layer in layers:
+		layer.clear()
+		layer.resize(bounds.size.x*bounds.size.y)
+
+	for key in tile_chunks:
+		var chunk : Array = tile_chunks[key]
+
+		var _key : Array = key.split(":")
+		var chunk_x := int(_key[0])
+		var chunk_y := int(_key[1])
+		var layer 	:= int(_key[2])
+
+		for x in range(16):
+			for y in range(16):
+				var tile = chunk[x + y*16] #get tile from chunk
+				if tile and bounds.has_point(Vector2(chunk_x*16 + x + 0.5, chunk_y*16 + y + 0.5)):
+					#write tile in the tile array for this layer
+					layers[layer][(chunk_x*16 + x-bounds.position.x) + (chunk_y*16 + y-bounds.position.y) * bounds.size.x] = tile
 	
 static func decode_value(value: String):
 	if value.ends_with("]"):

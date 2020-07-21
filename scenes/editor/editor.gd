@@ -129,7 +129,7 @@ func _process(delta):
 	# warning-ignore: integer_division
 	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
 	
-	var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
+	var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds.size
 	if (level_size.x < 42 or level_size.y < 22) and zoom_level == 1.75:
 		zoom_level = 1.5
 		EditorSavedSettings.zoom_level = zoom_level
@@ -159,7 +159,6 @@ func _process(delta):
 			lock_pos = 0
 		
 		var mouse_tile_pos = Vector2(floor(mouse_pos.x / selected_box.item.tile_mode_step), floor(mouse_pos.y / selected_box.item.tile_mode_step))
-		var tile_index = tile_util.get_tile_index_from_position(mouse_tile_pos, level_area.settings.size)
 		
 		if selected_box and selected_box.item and selected_box.item.is_object:
 			var objects = shared_node.get_objects_overlapping_position(mouse_pos)
@@ -227,27 +226,14 @@ func _process(delta):
 			
 			if !item.is_object:
 				if item.on_place(mouse_tile_pos, level_data, level_area):
-					if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:
+					if level_area.settings.bounds.has_point(mouse_tile_pos+Vector2(0.5,0.5)):
 						var last_tile = null
-						last_tile = shared_node.get_tile(tile_index, layer)
+						last_tile = shared_node.get_tile(mouse_tile_pos.x, mouse_tile_pos.y, layer)
 						
 						if !(last_tile[0] == item.tileset_id and last_tile[1] == item.tile_id):
-							tiles_stack.append([tile_index, layer, last_tile, [item.tileset_id, item.tile_id]])
+							tiles_stack.append([mouse_tile_pos.x, mouse_tile_pos.y, layer, last_tile, [item.tileset_id, item.tile_id]])
 						
-						shared_node.set_tile(tile_index, layer, item.tileset_id, item.tile_id)
-						
-						var bitmask = []
-						bitmask.append(shared_node.get_tile(tile_util.get_tile_index_from_position(mouse_tile_pos + Vector2(-1, -1), level_area.settings.size), layer))
-						bitmask.append(shared_node.get_tile(tile_util.get_tile_index_from_position(mouse_tile_pos + Vector2(0, -1), level_area.settings.size), layer))
-						bitmask.append(shared_node.get_tile(tile_util.get_tile_index_from_position(mouse_tile_pos + Vector2(1, -1), level_area.settings.size), layer))
-			
-						bitmask.append(shared_node.get_tile(tile_util.get_tile_index_from_position(mouse_tile_pos + Vector2(-1, 0), level_area.settings.size), layer))
-						bitmask.append(shared_node.get_tile(tile_util.get_tile_index_from_position(mouse_tile_pos + Vector2(0, 0), level_area.settings.size), layer))
-						bitmask.append(shared_node.get_tile(tile_util.get_tile_index_from_position(mouse_tile_pos + Vector2(1, 0), level_area.settings.size), layer))
-						
-						bitmask.append(shared_node.get_tile(tile_util.get_tile_index_from_position(mouse_tile_pos + Vector2(-1, 1), level_area.settings.size), layer))
-						bitmask.append(shared_node.get_tile(tile_util.get_tile_index_from_position(mouse_tile_pos + Vector2(0, 1), level_area.settings.size), layer))
-						bitmask.append(shared_node.get_tile(tile_util.get_tile_index_from_position(mouse_tile_pos + Vector2(1, 1), level_area.settings.size), layer))
+						shared_node.set_tile(mouse_tile_pos.x, mouse_tile_pos.y, layer, item.tileset_id, item.tile_id)
 			elif hovered_object == null:
 				var object_pos
 				if placement_mode == "Tile":
@@ -286,14 +272,14 @@ func _process(delta):
 						item_preview_node.visible = true
 			else:
 				if item.on_erase(mouse_tile_pos, level_data, level_area):
-					if mouse_tile_pos.x > -1 and mouse_tile_pos.y > -1 and mouse_tile_pos.x < level_area.settings.size.x and mouse_tile_pos.y < level_area.settings.size.y:
+					if level_area.settings.bounds.has_point(mouse_tile_pos+Vector2(0.5,0.5)):
 						var last_tile = null
-						last_tile = shared_node.get_tile(tile_index, layer)
+						last_tile = shared_node.get_tile(mouse_tile_pos.x, mouse_tile_pos.y, layer)
 						
 						if !(last_tile[0] == 0 and last_tile[1] == 0):
-							tiles_stack.append([tile_index, layer, last_tile, [0, 0]])
+							tiles_stack.append([mouse_tile_pos.x, mouse_tile_pos.y, layer, last_tile, [0, 0]])
 									
-						shared_node.set_tile(tile_index, layer, 0, 0)
+						shared_node.set_tile(mouse_tile_pos.x, mouse_tile_pos.y, layer, 0, 0)
 		last_mouse_pos = mouse_pos
 		last_left_held = left_held
 		last_right_held = right_held

@@ -33,18 +33,26 @@ func _unhandled_input(event):
 func load_in(_level_data : LevelData, level_area : LevelArea):
 	var zoom_level = EditorSavedSettings.zoom_level
 	position.x = (get_viewport_rect().size.x / 2) * zoom_level
-	position.y = (level_area.settings.size.y * 32) - ((get_viewport_rect().size.y / 2) * zoom_level)
+	position.y = (level_area.settings.bounds.end.y * 32) - ((get_viewport_rect().size.y / 2) * zoom_level)
 	update_limits(level_area)
 	force_update_scroll()
 	
 	zoom = Vector2(zoom_level, zoom_level)
-	limit_top = -70 * zoom_level
 	
+
+
 func update_limits(level_area : LevelArea):	
-	limit_right = int(level_area.settings.size.x * 32)
-	limit_bottom = int(level_area.settings.size.y * 32)
+	var area_bounds = level_area.settings.bounds.grow(3)
+
+	limit_left  = int(area_bounds.position.x * 32)
+	limit_top   = int(area_bounds.position.y * 32 - 70) #needs to include the toolbar
+
+	limit_right  = int(area_bounds.end.x * 32)
+	limit_bottom = int(area_bounds.end.y * 32)
+
+	resolve_limit_collisions()
 	
-func check_borders():
+func resolve_limit_collisions():
 	var camera_left = position.x - ((get_viewport_rect().size.x / 2) * zoom.x)
 	var camera_right = position.x + ((get_viewport_rect().size.x / 2) * zoom.x)
 	var camera_up = position.y - ((get_viewport_rect().size.y / 2) * zoom.y)
@@ -62,21 +70,22 @@ func check_borders():
 func _physics_process(delta):
 	if up_held:
 		position.y -= speed
-		check_borders()
+		resolve_limit_collisions()
 	elif down_held:
 		position.y += speed
-		check_borders()
+		resolve_limit_collisions()
 	if left_held:
 		position.x -= speed
-		check_borders()
+		resolve_limit_collisions()
 	elif right_held:
 		position.x += speed
-		check_borders()
-
+		resolve_limit_collisions()
+		
 	var editor = get_tree().get_current_scene()
-	var zoom_level = editor.zoom_level
-	zoom = zoom.linear_interpolate(Vector2(zoom_level, zoom_level), delta * lerp_speed)
-	limit_top = -70 * zoom_level
+	if(zoom.x != editor.zoom_level):
+		var zoom_level = editor.zoom_level
+		zoom = zoom.linear_interpolate(Vector2(zoom_level, zoom_level), delta * lerp_speed)
+		limit_top = -70 * zoom_level
 
 func _ready():
 	# warning-ignore:return_value_discarded

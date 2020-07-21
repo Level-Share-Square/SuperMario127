@@ -105,6 +105,9 @@ func shell_hit(shell_pos : Vector2):
 	character = 0 # hacker chungus
 
 func _physics_process(delta):
+	if(mode==1):
+		return
+		
 	var is_in_platform = false
 	var platform_collision_enabled = false
 	for platform_body in platform_detector.get_overlapping_areas():
@@ -124,7 +127,7 @@ func _physics_process(delta):
 			delete_timer = 0
 			queue_free()
 			
-	var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size
+	var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds.size
 	if kinematic_body.global_position.y > (level_size.y * 32) + 128:
 		queue_free()
 			

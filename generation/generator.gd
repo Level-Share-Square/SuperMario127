@@ -17,13 +17,13 @@ static func generate(noise_seed, shared_node):
 	var level_area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
 	for object in shared_node.get_objects_node().get_children():
 		shared_node.destroy_object(object, true)
-	for x in range(level_area.settings.size.x):
-		for y in range(level_area.settings.size.y):
+	for x in range(level_area.settings.bounds.size.x):
+		for y in range(level_area.settings.bounds.size.y):
 			
 			var tile = 0
 			if noise.get_noise_2d(x, y) > 0:
 				tile = 2
-			shared_node.set_tile((y * level_area.settings.size.x) + x, 1, tile, 0)
+			shared_node.set_tile(x, y, 1, tile, 0)
 			
 			for decoration in decor_array:
 				if rand_range(0, 100) < decoration.chance_percentage:
@@ -69,9 +69,9 @@ static func generate(noise_seed, shared_node):
 	noise.octaves = 8
 	noise.period = 20
 	noise.persistence = 0.2
-	for x in range(level_area.settings.size.x):
-		for y in range(level_area.settings.size.y):
+	for x in range(level_area.settings.bounds.size.x):
+		for y in range(level_area.settings.bounds.size.y):
 			var tile = 0
 			if noise.get_noise_2d(x, y) > 0:
 				tile = 2
-			shared_node.set_tile((y * level_area.settings.size.x) + x, 0, tile, 0)
+			shared_node.set_tile(x, y, 0, tile, 0)

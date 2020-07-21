@@ -32,7 +32,7 @@ func update_label():
 	var data = CurrentLevelData.level_data
 	var area = data.areas[CurrentLevelData.area]
 	
-	size_label.text = "x: " + str(area.settings.size.x) + "\ny: " + str(area.settings.size.y)
+	size_label.text = "x: " + str(area.settings.bounds.size.x) + "\ny: " + str(area.settings.bounds.size.y)
 	
 func _ready():
 	var _connect = button_left_out.connect("pressed", self, "button_press")
@@ -75,92 +75,56 @@ func button_press():
 	click_sound.play()
 	
 	for _integer in range(amount):
-		if button_left_out.pressed and area.settings.size.x < 1500:
-			shared_node.move_all_objects_by(Vector2(32, 0))
-			area.very_background_tiles = tile_util.expand_left(area, area.very_background_tiles)
-			area.background_tiles = tile_util.expand_left(area, area.background_tiles)
-			area.foreground_tiles = tile_util.expand_left(area, area.foreground_tiles)
-			area.very_foreground_tiles = tile_util.expand_left(area, area.very_foreground_tiles)
-			area.settings.size.x += 1
+		if button_left_out.pressed and area.settings.bounds.size.x < 1500:
+			area.settings.bounds = area.settings.bounds.grow_individual(1,0,0,0)
 			shared_node.update_tilemaps()
 			camera_node.update_limits(area)
 			update_label()
 			
-		if button_left_in.pressed and area.settings.size.x > 24:
-			shared_node.move_all_objects_by(Vector2(-32, 0))
-			area.very_background_tiles = tile_util.shrink_left(area, area.very_background_tiles)
-			area.background_tiles = tile_util.shrink_left(area, area.background_tiles)
-			area.foreground_tiles = tile_util.shrink_left(area, area.foreground_tiles)
-			area.very_foreground_tiles = tile_util.shrink_left(area, area.very_foreground_tiles)
-			area.settings.size.x -= 1
+		if button_left_in.pressed and area.settings.bounds.size.x > 24:
+			area.settings.bounds = area.settings.bounds.grow_individual(-1,0,0,0)
 			shared_node.update_tilemaps()
 			camera_node.update_limits(area)
 			camera_node.position.x -= 32
 			update_label()
 	
-		if button_right_out.pressed and area.settings.size.x < 1500:
-			area.very_background_tiles = tile_util.expand_right(area, area.very_background_tiles)
-			area.background_tiles = tile_util.expand_right(area, area.background_tiles)
-			area.foreground_tiles = tile_util.expand_right(area, area.foreground_tiles)
-			area.very_foreground_tiles = tile_util.expand_right(area, area.very_foreground_tiles)
-			area.settings.size.x += 1
+		if button_right_out.pressed and area.settings.bounds.size.x < 1500:
+			area.settings.bounds = area.settings.bounds.grow_individual(0,0,1,0)
 			shared_node.update_tilemaps()
 			camera_node.update_limits(area)
 			update_label()
 			
-		if button_right_in.pressed and area.settings.size.x > 24:
-			area.very_background_tiles = tile_util.shrink_right(area, area.very_background_tiles)
-			area.background_tiles = tile_util.shrink_right(area, area.background_tiles)
-			area.foreground_tiles = tile_util.shrink_right(area, area.foreground_tiles)
-			area.very_foreground_tiles = tile_util.shrink_right(area, area.very_foreground_tiles)
-			area.settings.size.x -= 1
+		if button_right_in.pressed and area.settings.bounds.size.x > 24:
+			area.settings.bounds = area.settings.bounds.grow_individual(0,0,-1,0)
 			shared_node.update_tilemaps()
 			camera_node.update_limits(area)
 			update_label()
 	
-		if button_down_out.pressed and area.settings.size.y < 1500:
-			area.very_background_tiles = tile_util.expand_down(area, area.very_background_tiles)
-			area.background_tiles = tile_util.expand_down(area, area.background_tiles)
-			area.foreground_tiles = tile_util.expand_down(area, area.foreground_tiles)
-			area.very_foreground_tiles = tile_util.expand_down(area, area.very_foreground_tiles)
-			area.settings.size.y += 1
+		if button_down_out.pressed and area.settings.bounds.size.y < 1500:
+			area.settings.bounds = area.settings.bounds.grow_individual(0,0,0,1)
 			shared_node.update_tilemaps()
 			backgrounds_node.update_background(area)
 			camera_node.update_limits(area)
 			camera_node.position.y += 32
 			update_label()
 			
-		if button_down_in.pressed and area.settings.size.y > 14:
-			area.very_background_tiles = tile_util.shrink_down(area, area.very_background_tiles)
-			area.background_tiles = tile_util.shrink_down(area, area.background_tiles)
-			area.foreground_tiles = tile_util.shrink_down(area, area.foreground_tiles)
-			area.very_foreground_tiles = tile_util.shrink_down(area, area.very_foreground_tiles)
-			area.settings.size.y -= 1
+		if button_down_in.pressed and area.settings.bounds.size.y > 14:
+			area.settings.bounds = area.settings.bounds.grow_individual(0,0,0,-1)
 			shared_node.update_tilemaps()
 			backgrounds_node.update_background(area)
 			camera_node.update_limits(area)
 			update_label()
 	
-		if button_up_out.pressed and area.settings.size.y < 1500:
-			shared_node.move_all_objects_by(Vector2(0, 32))
-			area.very_background_tiles = tile_util.expand_up(area, area.very_background_tiles)
-			area.background_tiles = tile_util.expand_up(area, area.background_tiles)
-			area.foreground_tiles = tile_util.expand_up(area, area.foreground_tiles)
-			area.very_foreground_tiles = tile_util.expand_up(area, area.very_foreground_tiles)
-			area.settings.size.y += 1
+		if button_up_out.pressed and area.settings.bounds.size.y < 1500:
+			area.settings.bounds = area.settings.bounds.grow_individual(0,1,0,0)
 			shared_node.update_tilemaps()
 			backgrounds_node.update_background(area)
 			camera_node.update_limits(area)
 			camera_node.position.y += 32
 			update_label()
 			
-		if button_up_in.pressed and area.settings.size.y > 14:
-			shared_node.move_all_objects_by(Vector2(0, -32))
-			area.very_background_tiles = tile_util.shrink_up(area, area.very_background_tiles)
-			area.background_tiles = tile_util.shrink_up(area, area.background_tiles)
-			area.foreground_tiles = tile_util.shrink_up(area, area.foreground_tiles)
-			area.very_foreground_tiles = tile_util.shrink_up(area, area.very_foreground_tiles)
-			area.settings.size.y -= 1
+		if button_up_in.pressed and area.settings.bounds.size.y > 14:
+			area.settings.bounds = area.settings.bounds.grow_individual(0,-1,0,0)
 			shared_node.update_tilemaps()
 			backgrounds_node.update_background(area)
 			camera_node.update_limits(area)

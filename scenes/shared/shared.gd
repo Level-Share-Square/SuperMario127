@@ -23,11 +23,12 @@ func _ready():
 func get_objects_node():
 	return objects_node
 
-func set_tile(index: int, layer: int, tileset_id: int, tile_id: int):
-	tilemaps_node.set_tile(index, layer, tileset_id, tile_id)
+func set_tile(x: int, y:int, layer: int, tileset_id: int, tile_id: int):
+	print("set ",x," ",y)
+	tilemaps_node.set_tile(x, y, layer, tileset_id, tile_id)
 	
-func get_tile(index: int, layer: int):
-	return tilemaps_node.get_tile_in_data(index, layer)
+func get_tile(x: int, y:int, layer: int):
+	return tilemaps_node.get_tile_in_data(x, y, layer)
 
 func create_object(object, add_to_data):
 	return objects_node.create_object(object, add_to_data)
@@ -60,15 +61,6 @@ func destroy_objects_overlapping_position(_position, remove_from_data):
 			level_area.objects.erase(object_node.level_object)
 		object_node.queue_free()
 	pass
-	
-func move_all_objects_by(offset):
-	for object_node in objects_node.get_children():
-		var level_object = object_node.level_object.get_ref()
-		object_node.position += offset
-		level_object.properties[0] += offset
-		if object_node.position.x < -32 or object_node.position.x > (CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size.x * 32) + 32 or object_node.position.y < -32 or object_node.position.y > (CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.size.y * 32) + 32:
-			level_area.objects.erase(level_object)
-			object_node.queue_free()
 		
 func update_tilemaps():
 	tilemaps_node.update_tilemaps()
