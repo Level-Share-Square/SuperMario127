@@ -1,6 +1,6 @@
 extends Nozzle
 
-class_name RocketNozzle
+class_name TurboNozzle
 
 export var boost_power := 5000
 export var depletion := 100

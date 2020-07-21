@@ -7,12 +7,13 @@ onready var area_collision = $RigidBody2D/Area2D/CollisionShape2D
 onready var sound = $AudioStreamPlayer
 
 var velocity := Vector2(0, 0)
+var nozzle_type = "HoverNozzle"
 var collected = false
 var destroy_timer = 0.0
 
 func _set_properties():
-	savable_properties = ["velocity"]
-	editable_properties = ["velocity"]
+	savable_properties = ["velocity", "nozzle_type"]
+	editable_properties = ["velocity", "nozzle_type"]
 	
 func _set_property_values():
 	set_property("velocity", velocity, 1)
@@ -29,8 +30,8 @@ func collect(body):
 		destroy_timer = 2
 		body.fuel = 100
 		collected = true
-		body.add_nozzle("HoverNozzle")
-		body.set_nozzle("HoverNozzle")
+		body.add_nozzle(nozzle_type)
+		body.set_nozzle(nozzle_type)
 
 func _ready():
 	var _connect = area.connect("body_entered", self, "collect")
