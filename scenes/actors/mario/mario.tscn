@@ -239,6 +239,7 @@ animation = "idleRight"
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
+visible = false
 frames = ExtResource( 23 )
 animation = "deathFall"
 playing = true
@@ -537,7 +538,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "death"
-frame = 2
+frame = 1
 playing = true
 script = ExtResource( 34 )
 
