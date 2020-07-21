@@ -9,7 +9,8 @@ var can_load = true
 var transitioning = false
 
 func reload_scene(transition_in_tex, transition_out_tex, transition_time, new_area, clear_vars = false):
-	if !mode_switcher.get_node("ModeSwitcherButton").switching_disabled:
+	#if the button is invisible, then we're probably not in editing mode, but if it's visible make sure we don't reload the scene while it's switching
+	if mode_switcher.get_node("ModeSwitcherButton").invisible or !mode_switcher.get_node("ModeSwitcherButton").switching_disabled:
 		var music_node = get_node("/root/music")
 		var old_multiplier = music_node.volume_multiplier
 		
