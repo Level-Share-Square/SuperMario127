@@ -160,6 +160,7 @@ onready var fludd_sprite = $Sprite/Fludd
 onready var water_sprite = $Sprite/Water
 onready var water_sprite_2 = $Sprite/Water2
 onready var fludd_sound = $FluddSound
+onready var fludd_charge_sound = $FluddChargeSound
 onready var nozzle_switch_sound = $NozzleSwitchSound
 onready var particles = $Particles2D
 onready var slide_particles = $SlideParticles
@@ -357,9 +358,15 @@ func get_nozzle_node(name: String):
 		
 func set_nozzle(new_nozzle, change_index = true):
 	fludd_sound.stop()
+	fludd_charge_sound.stop()
+	if nozzle != null:
+		nozzle.activated = false
+		nozzle.last_activated = false
 	nozzle = get_nozzle_node(str(new_nozzle))
+	water_sprite.animation = "in"
+	water_sprite.frame = 6
 	if change_index:
-		nozzles_list_index = CurrentLevelData.level_data.vars.nozzles_collected.count(str(new_nozzle))
+		nozzles_list_index = CurrentLevelData.level_data.vars.nozzles_collected.find(str(new_nozzle))
 		
 func player_hit(body):
 	if body.name.begins_with("Character"):

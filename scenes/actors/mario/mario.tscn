@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -41,6 +41,13 @@
 [ext_resource path="res://scenes/actors/mario/powerups/Rainbow.gd" type="Script" id=39]
 [ext_resource path="res://scenes/actors/mario/states/RainbowStarWindup.gd" type="Script" id=40]
 [ext_resource path="res://scenes/actors/mario/particles/sparkles.png" type="Texture" id=41]
+[ext_resource path="res://scenes/actors/mario/nozzles/fludd_charge.wav" type="AudioStream" id=42]
+[ext_resource path="res://scenes/actors/mario/nozzles/rocket_frames_luigi.tres" type="SpriteFrames" id=43]
+[ext_resource path="res://scenes/actors/mario/nozzles/rocket_frames.tres" type="SpriteFrames" id=44]
+[ext_resource path="res://scenes/actors/mario/nozzles/Rocket.gd" type="Script" id=45]
+[ext_resource path="res://scenes/actors/mario/nozzles/Turbo.gd" type="Script" id=46]
+[ext_resource path="res://scenes/actors/mario/nozzles/turbo_frames_luigi.tres" type="SpriteFrames" id=47]
+[ext_resource path="res://scenes/actors/mario/nozzles/turbo_frames.tres" type="SpriteFrames" id=48]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -118,13 +125,13 @@ scale = 0.75
 color_ramp = SubResource( 12 )
 anim_speed = 0.8
 
-[sub_resource type="CanvasItemMaterial" id=19]
+[sub_resource type="CanvasItemMaterial" id=16]
 particles_animation = true
 particles_anim_h_frames = 4
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="ParticlesMaterial" id=18]
+[sub_resource type="ParticlesMaterial" id=17]
 emission_shape = 1
 emission_sphere_radius = 24.0
 flag_disable_z = true
@@ -137,7 +144,7 @@ damping = 100.0
 color_ramp = SubResource( 12 )
 anim_speed = 1.3
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=18]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:rotation_degrees")
@@ -359,6 +366,24 @@ animation_water_positions_luigi = {
 fallback_water_pos_left_luigi = Vector2( -5, -2 )
 fallback_water_pos_right_luigi = Vector2( -19, -2 )
 
+[node name="RocketNozzle" type="Node" parent="Nozzles"]
+script = ExtResource( 45 )
+frames = ExtResource( 44 )
+frames_luigi = ExtResource( 43 )
+fallback_water_pos_left = Vector2( -5, -2 )
+fallback_water_pos_right = Vector2( -20, -2 )
+fallback_water_pos_left_luigi = Vector2( -5, -2 )
+fallback_water_pos_right_luigi = Vector2( -19, -2 )
+
+[node name="TurboNozzle" type="Node" parent="Nozzles"]
+script = ExtResource( 46 )
+frames = ExtResource( 48 )
+frames_luigi = ExtResource( 47 )
+fallback_water_pos_left = Vector2( -5, -2 )
+fallback_water_pos_right = Vector2( -20, -2 )
+fallback_water_pos_left_luigi = Vector2( -5, -2 )
+fallback_water_pos_right_luigi = Vector2( -19, -2 )
+
 [node name="Powerups" type="Node" parent="."]
 
 [node name="MetalPowerup" type="Node" parent="Powerups"]
@@ -443,6 +468,9 @@ collision_mask = 17
 stream = ExtResource( 25 )
 volume_db = -15.0
 
+[node name="FluddChargeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 42 )
+
 [node name="NozzleSwitchSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 27 )
 volume_db = -5.0
@@ -487,18 +515,18 @@ process_material = SubResource( 15 )
 texture = ExtResource( 30 )
 
 [node name="RainbowSparkles" type="Particles2D" parent="."]
-material = SubResource( 19 )
+material = SubResource( 16 )
 position = Vector2( 0, 5 )
 z_index = 2
 emitting = false
 amount = 14
 local_coords = false
-process_material = SubResource( 18 )
+process_material = SubResource( 17 )
 texture = ExtResource( 41 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/backflip = ExtResource( 32 )
-anims/backflip_right = SubResource( 16 )
+anims/backflip_right = SubResource( 18 )
 
 [node name="BottomPos" type="Node2D" parent="."]
 position = Vector2( 0, 20 )
