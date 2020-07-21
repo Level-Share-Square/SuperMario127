@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Powerup2.wav-c19ed31b3f728a1341036b1cd03ed34f.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_mario/Powerup2.wav"
+dest_files=[ "res://.import/Powerup2.wav-c19ed31b3f728a1341036b1cd03ed34f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

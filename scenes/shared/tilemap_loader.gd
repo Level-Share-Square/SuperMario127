@@ -125,7 +125,7 @@ func update_tilemaps():
 		var chunk_y := int(_key[1])
 		var layer 	:= int(_key[2])
 
-		print(_key)
+		#print(_key)
 
 		for x in range(16):
 			for y in range(16):

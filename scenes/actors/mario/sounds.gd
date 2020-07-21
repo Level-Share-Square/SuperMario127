@@ -9,6 +9,7 @@ onready var hit_sounds = $HitSounds
 onready var last_hit_sounds = $LastHitSounds
 onready var death_sounds = $DeathSounds
 onready var stomped_sounds = $StompedSounds
+onready var powerup_sounds = $PowerupSounds
 
 onready var gp_hit = $OtherSounds/GPHit
 onready var gp_windup = $OtherSounds/GPWindup
@@ -20,6 +21,7 @@ onready var wall_jump_voiceless = $OtherSounds/WallJump
 onready var spin_sound = $OtherSounds/Spin
 onready var duck_sound = $OtherSounds/Duck
 onready var last_hit_8bit_sound = $OtherSounds/LastHit8Bit
+onready var powerup_sound_voiceless = $OtherSounds/Powerup
 
 onready var footsteps_default = $Footsteps/Default
 
@@ -51,6 +53,7 @@ func _physics_process(_delta):
 			switch_bus(last_hit_sounds, metal_bus)
 			switch_bus(death_sounds, metal_bus)
 			switch_bus(stomped_sounds, metal_bus)
+			switch_bus(powerup_sounds, metal_bus)
 		elif !character.metal_voice and last_metal_filter:
 			switch_bus(jump_sounds, voices_bus)
 			switch_bus(double_jump_sounds, voices_bus)
@@ -61,6 +64,7 @@ func _physics_process(_delta):
 			switch_bus(last_hit_sounds, voices_bus)
 			switch_bus(death_sounds, voices_bus)
 			switch_bus(stomped_sounds, voices_bus)
+			switch_bus(powerup_sounds, voices_bus)
 			
 		last_metal_filter = character.metal_voice
 
@@ -115,6 +119,14 @@ func play_hit_sound():
 func play_death_sound():
 	if ready:
 		death_sounds.play()
+
+func play_powerup_sound():
+	if ready:
+		powerup_sounds.play()
+
+func play_powerup_jingle():
+	if ready:
+		powerup_sound_voiceless.play()
 	
 func play_bonk_sound():
 	if ready:

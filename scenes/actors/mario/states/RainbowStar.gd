@@ -3,7 +3,7 @@ extends State
 class_name RainbowStarState
 
 export var run_speed = 425
-export var jump_power = 450
+export var jump_power = 495
 export var wall_jump_power = 350
 export var fall_multiplier = 0.55
 
@@ -50,11 +50,10 @@ func _update(delta):
 	if character.velocity.x:
 		pass
 	
-	character.velocity.x = character.facing_direction * current_speed
-	if character.is_walled() or (character.position.x <= character.level_bounds.position.x * 32 or character.position.x >= character.level_bounds.end.x * 32 -1):
-		character.velocity.x = -character.velocity.x
-		character.position.x -= character.facing_direction * 3
+	if character.velocity.x == 0:
 		character.facing_direction = -character.facing_direction
+		character.velocity.x = current_speed * character.facing_direction
+		character.position.x += character.facing_direction * 3
 		if !character.is_grounded() and had_jumped:
 			character.sound_player.play_wall_jump_sound_voiceless()
 			character.position.y -= 3
@@ -76,6 +75,7 @@ func _update(delta):
 			character.sound_player.play_footsteps()
 			footstep_interval = clamp(0.8 - (character.sprite.speed_scale / 2.5), 0.1, 1)
 		footstep_interval -= delta
+	character.velocity.x = character.facing_direction * current_speed
 	
 	if (character.is_grounded() and had_jumped) or (character.powerup == null or character.powerup.id != 1):
 		had_jumped = false
