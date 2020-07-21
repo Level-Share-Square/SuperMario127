@@ -29,6 +29,8 @@ func _start_check(_delta):
 
 func _start(delta):
 	current_speed = run_speed
+	character.sound_player.play_powerup_sound()
+	character.sound_player.play_powerup_jingle()
 
 func _update(delta):
 	if character.is_grounded():

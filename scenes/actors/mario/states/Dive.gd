@@ -2,8 +2,8 @@ extends State
 
 class_name DiveState
 
-export var dive_power: Vector2 = Vector2(1350, 75)
-export var dive_power_luigi: Vector2 = Vector2(1350, 75)
+export var dive_power: Vector2 = Vector2(1200, 75)
+export var dive_power_luigi: Vector2 = Vector2(1200, 75)
 export var bonk_power: float = 150
 export var maxVelocityX: float = 700
 var last_above_rot_limit = false

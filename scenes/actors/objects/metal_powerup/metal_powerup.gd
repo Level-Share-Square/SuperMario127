@@ -8,15 +8,17 @@ onready var visibility_enabler = $VisibilityEnabler2D
 var collected = false
 var respawn_timer = 0.0
 var duration = 30.0
+var can_respawn = true
 
 export var anim_damp = 80
 
 func _set_properties():
-	savable_properties = ["duration"]
-	editable_properties = ["duration"]
+	savable_properties = ["duration", "can_respawn"]
+	editable_properties = ["duration", "can_respawn"]
 	
 func _set_property_values():
 	set_property("duration", duration, true)
+	set_property("can_respawn", can_respawn, true)
 
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
@@ -33,7 +35,7 @@ func _ready():
 
 func _process(delta):
 	animated_sprite.visible = !collected
-	if respawn_timer > 0:
+	if respawn_timer > 0 and can_respawn:
 		respawn_timer -= delta
 		if respawn_timer <= 0:
 			respawn_timer = 0

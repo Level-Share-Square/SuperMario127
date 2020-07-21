@@ -1,4 +1,4 @@
-[gd_scene load_steps=198 format=2]
+[gd_scene load_steps=200 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -100,6 +100,7 @@
 [ext_resource path="res://scenes/actors/objects/twisted_tree_body/twisted_tree_body.png" type="Texture" id=98]
 [ext_resource path="res://scenes/actors/objects/twisted_tree_angle/twisted_tree_angle.png" type="Texture" id=99]
 [ext_resource path="res://scenes/actors/objects/hover_box/hover_box.png" type="Texture" id=100]
+[ext_resource path="res://scenes/actors/objects/rainbow_powerup/preview.png" type="Texture" id=101]
 [ext_resource path="res://scenes/actors/objects/small_bottle/small_bottle.png" type="Texture" id=102]
 [ext_resource path="res://scenes/actors/objects/small_bottle/icon.png" type="Texture" id=103]
 [ext_resource path="res://scenes/actors/objects/big_bottle/icon.png" type="Texture" id=104]
@@ -144,6 +145,7 @@
 [ext_resource path="res://scenes/actors/objects/metal_breakable_block/icon.png" type="Texture" id=143]
 [ext_resource path="res://scenes/actors/objects/big_steely_entrance/icon.png" type="Texture" id=144]
 [ext_resource path="res://scenes/actors/objects/big_steely_entrance/preview.png" type="Texture" id=145]
+[ext_resource path="res://scenes/actors/objects/rainbow_powerup/icon.png" type="Texture" id=146]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-2f7996d42f2cb278ea1c7da3bda68d02.stex"
@@ -2677,8 +2679,8 @@ object_center = Vector2( 16, 16 )
 change_to = "MetalPowerup"
 items_in_sequence = 2
 index_in_sequence = 1
-icon = ExtResource( 17 )
-preview = ExtResource( 16 )
+icon = ExtResource( 146 )
+preview = ExtResource( 101 )
 
 [node name="BigSteely" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
