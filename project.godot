@@ -380,11 +380,6 @@ _global_script_classes=[ {
 "path": "res://generation/generator.gd"
 }, {
 "base": "Reference",
-"class": "tile_util",
-"language": "GDScript",
-"path": "res://util/tile_util.gd"
-}, {
-"base": "Reference",
 "class": "uuid_util",
 "language": "GDScript",
 "path": "res://util/uuid_util.gd"
@@ -469,7 +464,6 @@ _global_script_class_icons={
 "interpreter_util": "",
 "level_code_util": "",
 "terrain_generator": "",
-"tile_util": "",
 "uuid_util": "",
 "value_util": ""
 }
