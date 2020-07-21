@@ -24,7 +24,7 @@ func get_objects_node():
 	return objects_node
 
 func set_tile(x: int, y:int, layer: int, tileset_id: int, tile_id: int):
-	print("set ",x," ",y)
+	#print("set ",x," ",y)
 	tilemaps_node.set_tile(x, y, layer, tileset_id, tile_id)
 	
 func get_tile(x: int, y:int, layer: int):

@@ -15,7 +15,6 @@ func _pressed():
 	ActionManager.clear_history()
 	click_sound.play()
 	focus_mode = 0
-	print(level_code_util.is_valid(text_edit_node.text))
 	if level_code_util.is_valid(text_edit_node.text):
 		var level_data = LevelData.new()
 		level_data.load_in(text_edit_node.text)
