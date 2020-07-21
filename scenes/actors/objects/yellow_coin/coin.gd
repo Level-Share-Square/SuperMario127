@@ -1,7 +1,6 @@
 extends GameObject
 
 onready var animated_sprite = $AnimatedSprite
-onready var sound = $AudioStreamPlayer
 onready var area = $Area2D
 onready var shape = $Area2D/CollisionShape2D
 onready var visibility_enabler = $VisibilityEnabler2D
