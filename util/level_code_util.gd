@@ -21,7 +21,7 @@ static func is_valid(value : String):
 
 const empty_tile := [0,0]
 static func encode(tiles, settings):
-	print(settings.bounds)
+	#print(settings.bounds)
 	var new_data = []
 	var last_index = -1
 	var count = 1
@@ -45,7 +45,7 @@ static func encode(tiles, settings):
 
 	append_string = "" if count == 1 else ("*" + str(count))
 	new_data.append(str(last_index).pad_zeros(3) + append_string)
-	print(new_data)
+	#print(new_data)
 	return new_data
 
 static func generate_from_chunks(tile_chunks: Dictionary, layers: Array, bounds: Rect2):
