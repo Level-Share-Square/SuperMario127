@@ -18,7 +18,7 @@ func _ready():
 	attack_tier = 1
 
 func _start_check(_delta):
-	return spin_timer > 0 and (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2
+	return !(character.is_grounded() and character.rainbow_stored) and spin_timer > 0 and (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2
 
 func _start(_delta):
 	if sound_buffer > 0:

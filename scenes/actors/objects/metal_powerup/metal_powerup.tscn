@@ -12,7 +12,7 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 modulate = Color( 0.0862745, 0, 0.584314, 1 )
 frames = ExtResource( 2 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -28,6 +28,3 @@ stream = ExtResource( 1 )
 volume_db = -9.0
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-visible = false
-process_parent = true
-physics_process_parent = true

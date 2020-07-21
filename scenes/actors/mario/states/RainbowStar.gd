@@ -11,6 +11,10 @@ var current_speed = 0
 var jumping = false
 var had_jumped = false
 
+var jump_buffer = 0.0
+var ledge_buffer = 0.0
+var footstep_interval = 0.0
+
 func _ready():
 	priority = 11
 	blacklisted_states = []
@@ -41,7 +45,10 @@ func _update(delta):
 		else:
 			character.sprite.animation = "tripleJumpLeft"
 		character.sprite.rotation_degrees += 12 * character.facing_direction
-	character.sprite.speed_scale = (character.velocity.x / run_speed) * 3.5
+	character.sprite.speed_scale = (abs(character.velocity.x) / run_speed) * 3.5
+	
+	if character.velocity.x:
+		pass
 	
 	character.velocity.x = character.facing_direction * current_speed
 	if character.is_walled() or (character.position.x <= 0 or character.position.x >= character.level_size.x * 32):
@@ -49,16 +56,26 @@ func _update(delta):
 		character.position.x -= character.facing_direction * 3
 		character.facing_direction = -character.facing_direction
 		if !character.is_grounded() and had_jumped:
+			character.sound_player.play_wall_jump_sound_voiceless()
 			character.position.y -= 3
 			character.velocity.y = -wall_jump_power
 			jumping = false
 			current_speed = run_speed * 1.3
 	
-	if character.inputs[2][1] and character.is_grounded():
+	if jump_buffer > 0 and ledge_buffer > 0:
+		character.sound_player.play_dive_sound()
+		jump_buffer = 0
 		character.velocity.y = -jump_power
 		character.position.y -= 3
 		jumping = true
 		had_jumped = true
+		
+	if character.is_grounded():
+		current_speed = lerp(current_speed, run_speed, delta)
+		if footstep_interval <= 0 and character.sprite.speed_scale > 0:
+			character.sound_player.play_footsteps()
+			footstep_interval = clamp(0.8 - (character.sprite.speed_scale / 2.5), 0.1, 1)
+		footstep_interval -= delta
 	
 	if (character.is_grounded() and had_jumped) or (character.powerup == null or character.powerup.id != 1):
 		had_jumped = false
@@ -69,24 +86,24 @@ func _update(delta):
 			jumping = false
 		if character.velocity.y >= 0:
 			jumping = false
-	
-	if character.facing_direction == 1:
-		if character.inputs[1][0] and character.is_grounded():
-			current_speed = lerp(current_speed, run_speed * 1.25, delta * 3)
-		elif character.inputs[0][0] and character.is_grounded():
-			current_speed = lerp(current_speed, run_speed * 0.75, delta * 3)
-		else:
-			current_speed = lerp(current_speed, run_speed, delta * 3)
-	else:
-		if character.inputs[2][0] and character.is_grounded():
-			current_speed = lerp(current_speed, run_speed * 1.25, delta * 3)
-		elif character.inputs[1][0] and character.is_grounded():
-			current_speed = lerp(current_speed, run_speed * 0.75, delta * 3)
-		else:
-			current_speed = lerp(current_speed, run_speed, delta * 3)
 			
 	if had_jumped and character.inputs[5][1]:
 		had_jumped = false
+
+func _general_update(delta):
+	if jump_buffer > 0:
+		jump_buffer -= delta
+		if jump_buffer < 0:
+			jump_buffer = 0
+	if character.inputs[2][1]:
+		jump_buffer = 0.075
+	if character.is_grounded():
+		ledge_buffer = 0.125
+
+	if ledge_buffer > 0 and !character.is_grounded():
+		ledge_buffer -= delta
+		if ledge_buffer < 0:
+			ledge_buffer = 0
 
 func _stop_check(delta):
 	return (character.powerup == null or character.powerup.id != 1) and character.is_grounded()

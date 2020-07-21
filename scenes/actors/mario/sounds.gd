@@ -73,6 +73,10 @@ func play_jump_sound():
 		jump_sounds.play()
 		jump_voiceless.play()
 
+func play_jump_sound_voiceless():
+	if ready:
+		jump_voiceless.play()
+
 func play_double_jump_sound():
 	if ready:
 		double_jump_sounds.play()
@@ -86,6 +90,10 @@ func play_triple_jump_sound():
 func play_wall_jump_sound():
 	if ready:
 		jump_sounds.play()
+		wall_jump_voiceless.play()
+
+func play_wall_jump_sound_voiceless():
+	if ready:
 		wall_jump_voiceless.play()
 	
 func play_dive_sound():

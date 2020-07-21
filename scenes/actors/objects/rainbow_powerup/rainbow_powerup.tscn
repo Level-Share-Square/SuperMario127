@@ -83,6 +83,7 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 4 )
 frames = SubResource( 13 )
+frame = 2
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -98,7 +99,4 @@ stream = ExtResource( 1 )
 volume_db = -9.0
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-visible = false
 rect = Rect2( -24, -24, 48, 48 )
-process_parent = true
-physics_process_parent = true
