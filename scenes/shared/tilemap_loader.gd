@@ -141,13 +141,13 @@ func update_tilemaps():
 	var top: int = bounds.position.y-1
 	var right: int = bounds.end.x
 	var bottom: int = bounds.end.y
-
+	
 	for tilemap in [very_back_tilemap_node, back_tilemap_node, middle_tilemap_node, front_tilemap_node]:
-		for x in range(left, right):
+		for x in range(left, (right)+1): #range end needs +1 to to actually reach the end
 			tilemap.set_cell(x,top, tile)
 			tilemap.set_cell(x,bottom, tile)
 
-		for y in range(top, bottom):
+		for y in range(top+1, (bottom-1)+1): #range end needs +1 to to actually reach the end
 			tilemap.set_cell(left, y, tile)
 			tilemap.set_cell(right, y, tile)
 
@@ -156,7 +156,7 @@ func update_tilemaps():
 	tile = middle_tilemap_node.tile_set.find_tile_by_name("OutOfBounds")
 	
 	
-	for x in range(left-2, right+3):
+	for x in range(left-2, (right+2)+1): #range end needs +1 to to actually reach the end
 		very_back_tilemap_node.set_cell(x,top, tile)
 		very_back_tilemap_node.set_cell(x,top-1, tile)
 		very_back_tilemap_node.set_cell(x,top-2, tile)
@@ -165,7 +165,7 @@ func update_tilemaps():
 		very_back_tilemap_node.set_cell(x,bottom+1, tile)
 		very_back_tilemap_node.set_cell(x,bottom+2, tile)
 
-	for y in range(top+1, bottom):
+	for y in range(top+1, (bottom-1)+1): #range end needs +1 to to actually reach the end
 		very_back_tilemap_node.set_cell(left, y, tile)
 		very_back_tilemap_node.set_cell(left-1, y, tile)
 		very_back_tilemap_node.set_cell(left-2, y, tile)
