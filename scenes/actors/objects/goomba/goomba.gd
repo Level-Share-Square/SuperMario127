@@ -253,7 +253,6 @@ func _physics_process(delta):
 				if boost_timer > 0:
 					if !was_ground_pound:
 						character.velocity.y = 0
-						character.velocity.x = 0
 						if character.move_direction != 0:
 							character.global_position.x += character.move_direction * 2
 						character.global_position.y = lerp(character.global_position.y, (kinematic_body.global_position.y + top_point.y) - 25, delta * 6)
