@@ -226,7 +226,7 @@ func _physics_process(delta):
 					if hit_body.name.begins_with("Character"):
 						if hit_body.velocity.y > 0:
 							was_stomped = true
-							if character.big_attack:
+							if character.big_attack or character.invincible:
 								was_ground_pound = true
 							kill(hit_body.global_position)
 		else:

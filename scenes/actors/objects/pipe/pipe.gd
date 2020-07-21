@@ -78,10 +78,10 @@ func _physics_process(delta):
 					Vector2(exit_from.x + move_to_point.position.x, exit_from.y + move_to_point.position.y), 
 					exit_from.y + exit_to_point.position.y
 				]
-				character.switch_areas(area_id, 0.5)
 			if enter_timer <= 0:
 				enter_timer = 0
 				entering_pipe = false
+				character.switch_areas(area_id, 0.5)
 
 func _ready():
 	if mode != 1:

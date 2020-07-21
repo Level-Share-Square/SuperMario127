@@ -36,6 +36,8 @@ func _stop(delta):
 		character.rainbow_stored = false
 		character.set_powerup(character.get_powerup_node("RainbowPowerup"))
 		character.set_state_by_name("RainbowStarState", delta)
+		character.sound_player.play_powerup_sound()
+		character.sound_player.play_powerup_jingle()
 
 func _stop_check(delta):
 	return !character.inputs[4][0]
