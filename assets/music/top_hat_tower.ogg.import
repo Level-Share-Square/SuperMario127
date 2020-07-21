@@ -12,4 +12,4 @@ dest_files=[ "res://.import/top_hat_tower.ogg-5d75f850268a6a55bd52cc0c978f19dd.o
 [params]
 
 loop=true
-loop_offset=0
+loop_offset=3.0

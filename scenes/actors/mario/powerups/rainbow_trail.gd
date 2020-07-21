@@ -3,6 +3,8 @@ extends AnimatedSprite
 var alpha = 0.5
 
 func _ready():
+	for child in get_children():
+		child.queue_free()
 	if material != null:
 		material = material.duplicate()
 
