@@ -37,7 +37,7 @@ func create_object(object, add_to_data):
 			object_node.set_property_by_index(index, true_value, false)
 			index += 1
 		object_node._set_property_values()
-		add_child(object_node)
+		call_deferred("add_child", object_node)
 		if add_to_data:
 			level_area.objects.append(object)
 			if object_node.has_method("on_place"):

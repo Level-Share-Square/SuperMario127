@@ -830,4 +830,8 @@ func kill(cause):
 			set_state_by_name("FallState", 0)
 
 func exit():
-	mode_switcher.get_node("ModeSwitcherButton").switch()
+	#if the mode switcher button is not invisible, we're in edit mode, switch back to that, but if we're in play mode then for now just reload the scene
+	if !mode_switcher.get_node("ModeSwitcherButton").invisible:
+		mode_switcher.get_node("ModeSwitcherButton").switch()
+	else: 
+		get_tree().reload_current_scene()
