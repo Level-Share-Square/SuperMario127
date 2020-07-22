@@ -1,0 +1,25 @@
+extends Button
+
+onready var hover_sound = $HoverSound
+onready var click_sound = $ClickSound
+
+var last_hovered
+	
+func _pressed():
+	click_sound.play()
+	
+	var selector = get_parent().get_node("Selector")
+	PlayerSettings.keybindings = ControlPresets.presets[selector.text]
+	
+	SettingsSaver.save(get_parent().get_parent().get_parent().multiplayer_options)
+	for children in get_parent().get_parent().get_children():
+		if children != get_parent():
+			var button : Button = children.get_node("KeyButton")
+			var keybindings = PlayerSettings.keybindings[button.id]
+			
+			button.text = str(OS.get_scancode_string(keybindings[0] if typeof(keybindings) == TYPE_ARRAY else keybindings))
+	
+func _process(_delta):
+	if is_hovered() and !last_hovered:
+		hover_sound.play()	
+	last_hovered = is_hovered()

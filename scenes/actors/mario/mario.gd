@@ -483,12 +483,23 @@ func _physics_process(delta: float):
 			for input in inputs:
 				var input_id = input[2]
 				
-				if Input.is_key_pressed(PlayerSettings.keybindings[input_id]):
-					input[1] = !input[0]
-					input[0] = true
+				var keybindings = PlayerSettings.keybindings[input_id]
+				if typeof(keybindings) == TYPE_ARRAY:
+					for keybinding in keybindings:
+						if Input.is_key_pressed(keybinding):
+							input[1] = !input[0]
+							input[0] = true
+							break
+						else:
+							input[0] = false
+							input[1] = false
 				else:
-					input[0] = false
-					input[1] = false
+					if Input.is_key_pressed(keybindings):
+						input[1] = !input[0]
+						input[0] = true
+					else:
+						input[0] = false
+						input[1] = false
 		else:
 			for input in inputs:
 				input[0] = false

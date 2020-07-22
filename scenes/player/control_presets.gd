@@ -23,9 +23,9 @@ const presets = {
 		"gpcancel": KEY_W,
 		"fludd": KEY_SEMICOLON,
 		"nozzles": KEY_Y,
-		"crouch": KEY_DOWN
+		"crouch": KEY_S
 	},
-	"Super Mario 63": {
+	"Legacy": {
 		"left": KEY_LEFT,
 		"right": KEY_RIGHT,
 		"jump": KEY_UP,

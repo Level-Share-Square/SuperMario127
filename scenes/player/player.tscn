@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -42,6 +42,7 @@
 [ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
 [ext_resource path="res://scenes/player/controlbinding_button.gd" type="Script" id=41]
 [ext_resource path="res://scenes/player/controls_options.gd" type="Script" id=42]
+[ext_resource path="res://scenes/player/presetloader_button.gd" type="Script" id=43]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 7 )
@@ -171,6 +172,7 @@ layer = 63
 script = ExtResource( 33 )
 
 [node name="Divider" type="ColorRect" parent="UI"]
+visible = false
 margin_left = 384.0
 margin_right = 388.0
 margin_bottom = 432.0
@@ -320,7 +322,6 @@ texture = ExtResource( 35 )
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
@@ -477,6 +478,7 @@ volume_db = -10.0
 [node name="TweenShineInfo" type="Tween" parent="UI/PauseScreen"]
 
 [node name="ShineInfo" type="Control" parent="UI/PauseScreen"]
+visible = false
 margin_right = 768.0
 margin_bottom = 332.0
 rect_pivot_offset = Vector2( 384, 166 )
@@ -987,7 +989,6 @@ __meta__ = {
 }
 
 [node name="ControlsOptions" type="Control" parent="UI/PauseScreen"]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 42 )
@@ -1005,9 +1006,9 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Move Left"]
 margin_left = 10.0
-margin_top = 114.796
+margin_top = 154.796
 margin_right = 172.0
-margin_bottom = 146.796
+margin_bottom = 186.796
 custom_fonts/font = SubResource( 18 )
 text = "Move Left:"
 align = 1
@@ -1018,9 +1019,9 @@ __meta__ = {
 
 [node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Move Left"]
 margin_left = 179.0
-margin_top = 109.0
+margin_top = 149.0
 margin_right = 259.0
-margin_bottom = 154.0
+margin_bottom = 194.0
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/disabled = SubResource( 15 )
@@ -1051,9 +1052,9 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Move Right"]
 margin_left = 10.0
-margin_top = 162.796
+margin_top = 202.796
 margin_right = 172.0
-margin_bottom = 194.796
+margin_bottom = 234.796
 custom_fonts/font = SubResource( 18 )
 text = "Move Right:"
 align = 1
@@ -1064,9 +1065,9 @@ __meta__ = {
 
 [node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Move Right"]
 margin_left = 179.0
-margin_top = 157.0
+margin_top = 197.0
 margin_right = 259.0
-margin_bottom = 202.0
+margin_bottom = 242.0
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/disabled = SubResource( 15 )
@@ -1097,9 +1098,9 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Jump"]
 margin_left = 10.0
-margin_top = 210.796
+margin_top = 250.796
 margin_right = 172.0
-margin_bottom = 242.796
+margin_bottom = 282.796
 custom_fonts/font = SubResource( 18 )
 text = "Jump:"
 align = 1
@@ -1110,9 +1111,9 @@ __meta__ = {
 
 [node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Jump"]
 margin_left = 179.0
-margin_top = 205.0
+margin_top = 245.0
 margin_right = 259.0
-margin_bottom = 250.0
+margin_bottom = 290.0
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/disabled = SubResource( 15 )
@@ -1143,9 +1144,9 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Dive"]
 margin_left = 10.0
-margin_top = 258.796
+margin_top = 298.796
 margin_right = 172.0
-margin_bottom = 290.796
+margin_bottom = 330.796
 custom_fonts/font = SubResource( 18 )
 text = "Dive:"
 align = 1
@@ -1156,9 +1157,9 @@ __meta__ = {
 
 [node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Dive"]
 margin_left = 179.0
-margin_top = 253.0
+margin_top = 293.0
 margin_right = 259.0
-margin_bottom = 298.0
+margin_bottom = 338.0
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/disabled = SubResource( 15 )
@@ -1190,9 +1191,9 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Spin"]
 margin_left = 34.0
-margin_top = 114.796
+margin_top = 154.796
 margin_right = 196.0
-margin_bottom = 146.796
+margin_bottom = 186.796
 custom_fonts/font = SubResource( 18 )
 text = "Spin:"
 align = 1
@@ -1203,9 +1204,9 @@ __meta__ = {
 
 [node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Spin"]
 margin_left = 203.0
-margin_top = 109.0
+margin_top = 149.0
 margin_right = 283.0
-margin_bottom = 154.0
+margin_bottom = 194.0
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/disabled = SubResource( 15 )
@@ -1237,9 +1238,9 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Ground Pound"]
 margin_left = 34.0
-margin_top = 162.796
+margin_top = 202.796
 margin_right = 196.0
-margin_bottom = 194.796
+margin_bottom = 234.796
 custom_fonts/font = SubResource( 18 )
 text = "Ground Pound:"
 align = 1
@@ -1250,9 +1251,9 @@ __meta__ = {
 
 [node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Ground Pound"]
 margin_left = 203.0
-margin_top = 157.0
+margin_top = 197.0
 margin_right = 283.0
-margin_bottom = 202.0
+margin_bottom = 242.0
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/disabled = SubResource( 15 )
@@ -1284,9 +1285,9 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Ground Pound Cancel"]
 margin_left = 10.0
-margin_top = 210.796
+margin_top = 250.796
 margin_right = 217.0
-margin_bottom = 242.796
+margin_bottom = 282.796
 custom_fonts/font = SubResource( 18 )
 text = "GP Cancel:"
 align = 1
@@ -1297,9 +1298,9 @@ __meta__ = {
 
 [node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Ground Pound Cancel"]
 margin_left = 203.0
-margin_top = 205.0
+margin_top = 245.0
 margin_right = 283.0
-margin_bottom = 250.0
+margin_bottom = 290.0
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/disabled = SubResource( 15 )
@@ -1331,9 +1332,9 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Use Fludd"]
 margin_left = 34.0
-margin_top = 258.796
+margin_top = 298.796
 margin_right = 196.0
-margin_bottom = 290.796
+margin_bottom = 330.796
 custom_fonts/font = SubResource( 18 )
 text = "Use Fludd:"
 align = 1
@@ -1344,9 +1345,9 @@ __meta__ = {
 
 [node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Use Fludd"]
 margin_left = 203.0
-margin_top = 253.0
+margin_top = 293.0
 margin_right = 283.0
-margin_bottom = 298.0
+margin_bottom = 338.0
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/disabled = SubResource( 15 )
@@ -1378,9 +1379,9 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Switch Nozzles"]
 margin_left = 34.0
-margin_top = 114.796
+margin_top = 154.796
 margin_right = 196.0
-margin_bottom = 146.796
+margin_bottom = 186.796
 custom_fonts/font = SubResource( 18 )
 text = "Switch Nozzles"
 align = 1
@@ -1391,9 +1392,9 @@ __meta__ = {
 
 [node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Switch Nozzles"]
 margin_left = 203.0
-margin_top = 109.0
+margin_top = 149.0
 margin_right = 283.0
-margin_bottom = 154.0
+margin_bottom = 194.0
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/disabled = SubResource( 15 )
@@ -1425,9 +1426,9 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Crouch"]
 margin_left = 34.0
-margin_top = 162.796
+margin_top = 202.796
 margin_right = 196.0
-margin_bottom = 194.796
+margin_bottom = 234.796
 custom_fonts/font = SubResource( 18 )
 text = "Crouch:"
 align = 1
@@ -1438,9 +1439,9 @@ __meta__ = {
 
 [node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Crouch"]
 margin_left = 203.0
-margin_top = 157.0
+margin_top = 197.0
 margin_right = 283.0
-margin_bottom = 202.0
+margin_bottom = 242.0
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/disabled = SubResource( 15 )
@@ -1458,6 +1459,62 @@ stream = ExtResource( 9 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Crouch/KeyButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="Preset Selection" type="Control" parent="UI/PauseScreen/ControlsOptions"]
+margin_left = 480.0
+margin_top = -13.0
+margin_right = 520.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Preset Selection"]
+margin_left = -446.0
+margin_top = 99.0
+margin_right = -327.0
+margin_bottom = 131.0
+custom_fonts/font = SubResource( 18 )
+text = "Preset:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Selector" type="OptionButton" parent="UI/PauseScreen/ControlsOptions/Preset Selection"]
+margin_left = -298.0
+margin_top = 98.0
+margin_right = -138.0
+margin_bottom = 132.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoadButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Preset Selection"]
+margin_left = -121.0
+margin_top = 92.0
+margin_right = -41.0
+margin_bottom = 137.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
+action_mode = 0
+text = "Load"
+script = ExtResource( 43 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Preset Selection/LoadButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Preset Selection/LoadButton"]
 stream = ExtResource( 11 )
 volume_db = -10.0
 

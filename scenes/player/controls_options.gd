@@ -4,11 +4,19 @@ var currentButton : Button
 var oldText : String
 
 func _ready():
-	var keybindings = PlayerSettings.keybindings
+	# Prepare Keybindings
 	for children in get_children():
-		var button : Button = children.get_node("KeyButton")
-		button.text = str(OS.get_scancode_string(keybindings[button.id]))
-		button.connect("pressed", self, "button_pressed", [button])
+		if children != $"Preset Selection":
+			var button : Button = children.get_node("KeyButton")
+			var keybindings = PlayerSettings.keybindings[button.id]
+			
+			button.text = str(OS.get_scancode_string(keybindings[0] if typeof(keybindings) == TYPE_ARRAY else keybindings))
+			button.connect("pressed", self, "button_pressed", [button])
+		
+	# Prepare Presets
+	var presetSelector = $"Preset Selection/Selector"
+	for preset in ControlPresets.presets:
+		presetSelector.add_item(preset)
 		
 func _input(event):
 	if event is InputEventKey && event.pressed && currentButton != null:
