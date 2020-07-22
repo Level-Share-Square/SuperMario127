@@ -1283,12 +1283,12 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Ground Pound Cancel"]
-margin_left = 34.0
+margin_left = 10.0
 margin_top = 210.796
-margin_right = 241.0
+margin_right = 217.0
 margin_bottom = 242.796
 custom_fonts/font = SubResource( 18 )
-text = "Ground Pound Cancel:"
+text = "GP Cancel:"
 align = 1
 valign = 1
 __meta__ = {
