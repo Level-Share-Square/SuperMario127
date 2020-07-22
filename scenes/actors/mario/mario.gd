@@ -484,8 +484,8 @@ func _physics_process(delta: float):
 				var input_id = input[2]
 				
 				if Input.is_key_pressed(PlayerSettings.keybindings[input_id]):
+					input[1] = true if input[0] == false else false
 					input[0] = true
-					input[1] = true
 				else:
 					input[0] = false
 					input[1] = false
@@ -493,7 +493,7 @@ func _physics_process(delta: float):
 			for input in inputs:
 				input[0] = false
 				input[1] = false
-	
+
 	if state != null:
 		disable_movement = state.disable_movement
 		disable_turning = state.disable_turning
