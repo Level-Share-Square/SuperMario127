@@ -322,6 +322,7 @@ texture = ExtResource( 35 )
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
@@ -478,7 +479,6 @@ volume_db = -10.0
 [node name="TweenShineInfo" type="Tween" parent="UI/PauseScreen"]
 
 [node name="ShineInfo" type="Control" parent="UI/PauseScreen"]
-visible = false
 margin_right = 768.0
 margin_bottom = 332.0
 rect_pivot_offset = Vector2( 384, 166 )
@@ -989,6 +989,7 @@ __meta__ = {
 }
 
 [node name="ControlsOptions" type="Control" parent="UI/PauseScreen"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 42 )
