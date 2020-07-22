@@ -484,7 +484,7 @@ func _physics_process(delta: float):
 				var input_id = input[2]
 				
 				if Input.is_key_pressed(PlayerSettings.keybindings[input_id]):
-					input[1] = true if input[0] == false else false
+					input[1] = !input[0]
 					input[0] = true
 				else:
 					input[0] = false
