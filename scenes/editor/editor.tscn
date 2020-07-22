@@ -1,4 +1,4 @@
-[gd_scene load_steps=200 format=2]
+[gd_scene load_steps=201 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -146,6 +146,7 @@
 [ext_resource path="res://scenes/actors/objects/big_steely_entrance/icon.png" type="Texture" id=144]
 [ext_resource path="res://scenes/actors/objects/big_steely_entrance/preview.png" type="Texture" id=145]
 [ext_resource path="res://scenes/actors/objects/rainbow_powerup/icon.png" type="Texture" id=146]
+[ext_resource path="res://scenes/editor/ResetLevelButton.gd" type="Script" id=147]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-2f7996d42f2cb278ea1c7da3bda68d02.stex"
@@ -217,6 +218,24 @@ corner_radius_bottom_left = 24
 
 [sub_resource type="DynamicFont" id=15]
 size = 32
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=37]
+bg_color = Color( 0.0705882, 0, 0.231373, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=38]
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="DynamicFont" id=39]
+size = 48
 font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxFlat" id=16]
@@ -1143,24 +1162,6 @@ corner_radius_bottom_left = 20
 [sub_resource type="DynamicFont" id=36]
 size = 32
 outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 4 )
-
-[sub_resource type="StyleBoxFlat" id=37]
-bg_color = Color( 0.0705882, 0, 0.231373, 1 )
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-
-[sub_resource type="StyleBoxFlat" id=38]
-bg_color = Color( 0, 0.0470588, 0.317647, 1 )
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-
-[sub_resource type="DynamicFont" id=39]
-size = 48
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=40]
@@ -2867,7 +2868,7 @@ visible = false
 margin_left = 165.0
 margin_top = 130.0
 margin_right = 1218.0
-margin_bottom = 680.0
+margin_bottom = 764.0
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 0
 texture = ExtResource( 18 )
@@ -3373,6 +3374,38 @@ placeholder_alpha = 0.35
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ResetLevel" type="Control" parent="UI/LevelSettingsWindow/Contents"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResetLevelButton" type="Button" parent="UI/LevelSettingsWindow/Contents/ResetLevel"]
+margin_left = 317.654
+margin_top = 402.567
+margin_right = 717.654
+margin_bottom = 492.567
+custom_styles/hover = SubResource( 37 )
+custom_styles/pressed = SubResource( 38 )
+custom_styles/normal = SubResource( 38 )
+custom_fonts/font = SubResource( 39 )
+shortcut_in_tooltip = false
+action_mode = 0
+text = "Reset Level"
+script = ExtResource( 147 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/Contents/ResetLevel/ResetLevelButton"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsWindow/Contents/ResetLevel/ResetLevelButton"]
+stream = ExtResource( 36 )
+volume_db = -10.0
 
 [node name="Tween" type="Tween" parent="UI/LevelSettingsWindow"]
 
@@ -4021,3 +4054,4 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+[connection signal="pressed" from="UI/LevelSettingsWindow/Contents/ResetLevel/ResetLevelButton" to="UI/LevelSettingsWindow/Contents/ResetLevel/ResetLevelButton" method="_on_ResetLevelButton_pressed"]
