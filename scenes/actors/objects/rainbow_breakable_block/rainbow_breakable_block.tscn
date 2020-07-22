@@ -1,0 +1,169 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/rainbow_breakable_block.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/metal_breakable_block/metal_breakable_block.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/breakable_block/break.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/mario/particles/dust.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/breakable_block/particles.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/metal_breakable_block/block_material.tres" type="Material" id=6]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode unshaded;
+ 
+uniform sampler2D gradient : hint_black;
+uniform float mix_amount = 1.0;
+
+void fragment()
+{
+	vec4 input_color = texture(TEXTURE, UV);
+
+	float grayscale_value = dot(input_color.rgb, vec3(0.299, 0.587, 0.114));
+	vec3 sampled_color = texture(gradient, vec2(grayscale_value, 0.0)).rgb;
+
+	COLOR.rgb = mix(input_color.rgb, sampled_color, mix_amount);
+	COLOR.a = input_color.a;
+}"
+custom_defines = ""
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 1, 0, 0, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 1 )
+shader_param/mix_amount = 1.0
+shader_param/gradient = SubResource( 3 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 12, 7 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 18, 10 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 24, 24 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 10, 100.541 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 100, 10 )
+
+[sub_resource type="CanvasItemMaterial" id=11]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="CanvasItemMaterial" id=12]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=13]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=14]
+gradient = SubResource( 13 )
+
+[sub_resource type="ParticlesMaterial" id=15]
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+direction = Vector3( 1, -1, 0 )
+spread = 180.0
+gravity = Vector3( 0, 50, 0 )
+initial_velocity = 16.67
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.75
+color_ramp = SubResource( 14 )
+anim_speed = 1.0
+
+[node name="BreakableBlock" type="Node2D"]
+z_index = -1
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 4 )
+texture = ExtResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 5 )
+
+[node name="StompArea" type="Area2D" parent="."]
+visible = false
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompArea"]
+position = Vector2( 0, -21 )
+shape = SubResource( 6 )
+
+[node name="SpinArea" type="Area2D" parent="."]
+visible = false
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpinArea"]
+shape = SubResource( 7 )
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 8 )
+
+[node name="PlayerStompDetector" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStompDetector"]
+shape = SubResource( 9 )
+
+[node name="PlayerSpinDetector" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSpinDetector"]
+shape = SubResource( 10 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+process_parent = true
+physics_process_parent = true
+
+[node name="Broken" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+
+[node name="BreakParticle" type="Particles2D" parent="."]
+material = SubResource( 11 )
+z_index = -1
+emitting = false
+amount = 12
+one_shot = true
+explosiveness = 1.0
+process_material = ExtResource( 6 )
+texture = ExtResource( 5 )
+
+[node name="DustParticle" type="Particles2D" parent="."]
+material = SubResource( 12 )
+z_index = -1
+emitting = false
+amount = 3
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 15 )
+texture = ExtResource( 4 )

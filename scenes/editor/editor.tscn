@@ -2646,7 +2646,7 @@ object_id = 33
 is_object = true
 object_center = Vector2( 16, 16 )
 change_to = "MetalBreakableBlock"
-items_in_sequence = 2
+items_in_sequence = 3
 icon = ExtResource( 140 )
 preview = ExtResource( 141 )
 
@@ -2665,8 +2665,8 @@ script = ExtResource( 3 )
 object_id = 35
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "BreakableBlock"
-items_in_sequence = 2
+change_to = "RainbowBreakableBlock"
+items_in_sequence = 3
 index_in_sequence = 1
 icon = ExtResource( 143 )
 preview = ExtResource( 142 )
@@ -2681,6 +2681,17 @@ items_in_sequence = 2
 index_in_sequence = 1
 icon = ExtResource( 146 )
 preview = ExtResource( 101 )
+
+[node name="RainbowBreakableBlock" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 42
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "BreakableBlock"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 143 )
+preview = ExtResource( 142 )
 
 [node name="BigSteely" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )

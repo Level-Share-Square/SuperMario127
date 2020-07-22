@@ -6,7 +6,7 @@ var time_charging = 0.0
 
 func _ready():
 	priority = 10
-	blacklisted_states = []
+	blacklisted_states = ["SlideState", "GroundPoundEndState"]
 	disable_movement = true
 	disable_turning = true
 	disable_friction = true
@@ -17,6 +17,7 @@ func _start_check(_delta):
 	return character.inputs[4][1] and (character.is_grounded() and character.rainbow_stored)
 
 func _start(delta):
+	character.sprite.rotation_degrees = 0
 	time_charging = 0.0
 	if character.facing_direction == 1:
 		character.sprite.play("movingRight", true)
@@ -33,6 +34,7 @@ func _update(delta):
 
 func _stop(delta):
 	if time_charging > 0.75:
+		character.velocity.x = character.facing_direction * 5
 		character.rainbow_stored = false
 		character.set_powerup(character.get_powerup_node("RainbowPowerup"))
 		character.set_state_by_name("RainbowStarState", delta)
