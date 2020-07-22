@@ -123,17 +123,16 @@ export var luigi_speed : float
 # second parameter is "just_pressed", 
 # and third parameter is the input name.
 export var inputs = [
-	[false, false, "move_left_"], # Index 0
-	[false, false, "move_right_"], # Index 1
-	[false, false, "jump_"], # Index 2
-	[false, false, "dive_"], # Index 3
-	[false, false, "spin_"], # Index 4
-	[false, false, "ground_pound_"], # Index 5
-	[false, false, "ground_pound_cancel_"], # Index 6
-	[false, false, "use_fludd_"], # Index 7
-	[false, false, "switch_nozzles_"], # Index 8
-	[false, false, "crouch_"], # Index 9
-	[false, false, "pipe_down_"] # Index 10
+	[false, false, "left"], # Index 0
+	[false, false, "right"], # Index 1
+	[false, false, "jump"], # Index 2
+	[false, false, "dive"], # Index 3
+	[false, false, "spin"], # Index 4
+	[false, false, "gp"], # Index 5
+	[false, false, "gpcancel"], # Index 6
+	[false, false, "fludd"], # Index 7
+	[false, false, "nozzles"], # Index 8
+	[false, false, "crouch"] # Index 9
 ]
 
 export var controlled_locally = true
@@ -481,19 +480,14 @@ func _physics_process(delta: float):
 	if controlled_locally:
 		if controllable and !FocusCheck.is_ui_focused:
 			var control_id = player_id
-			if PlayerSettings.other_player_id != -1 or number_of_players == 1:
-				control_id = PlayerSettings.control_mode
 			for input in inputs:
 				var input_id = input[2]
 				
-				if Input.is_action_pressed(input_id + str(control_id)):
+				if Input.is_key_pressed(PlayerSettings.keybindings[input_id]):
 					input[0] = true
-				else:
-					input[0] = false
-				
-				if Input.is_action_just_pressed(input_id + str(control_id)):
 					input[1] = true
 				else:
+					input[0] = false
 					input[1] = false
 		else:
 			for input in inputs:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -22,7 +22,7 @@
 [ext_resource path="res://scenes/player/chat.gd" type="Script" id=20]
 [ext_resource path="res://scenes/player/disconnect_button.gd" type="Script" id=21]
 [ext_resource path="res://scenes/player/multiplayer_menu_button.gd" type="Script" id=22]
-[ext_resource path="res://scenes/player/control_changer.gd" type="Script" id=23]
+[ext_resource path="res://scenes/player/controls_button.gd" type="Script" id=23]
 [ext_resource path="res://scenes/editor/assets/clickable_arrow_hover.png" type="Texture" id=24]
 [ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=25]
 [ext_resource path="res://scenes/player/num_of_plrs.gd" type="Script" id=26]
@@ -40,6 +40,8 @@
 [ext_resource path="res://scenes/player/fps_cap.gd" type="Script" id=38]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=39]
 [ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
+[ext_resource path="res://scenes/player/controlbinding_button.gd" type="Script" id=41]
+[ext_resource path="res://scenes/player/controls_options.gd" type="Script" id=42]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 7 )
@@ -148,6 +150,14 @@ font_data = ExtResource( 7 )
 size = 24
 font_data = ExtResource( 7 )
 
+[sub_resource type="DynamicFont" id=18]
+size = 20
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=19]
+size = 18
+font_data = ExtResource( 7 )
+
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
 nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"), NodePath("Viewports/ViewportContainer/Viewport/World/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/World/Character2"), NodePath("Viewports/ViewportContainer2/Viewport/CameraP2"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds"), NodePath("Viewports/ViewportContainer2/Viewport/Backgrounds") ]
@@ -161,7 +171,6 @@ layer = 63
 script = ExtResource( 33 )
 
 [node name="Divider" type="ColorRect" parent="UI"]
-visible = false
 margin_left = 384.0
 margin_right = 388.0
 margin_bottom = 432.0
@@ -449,6 +458,7 @@ __meta__ = {
 }
 shine_info = NodePath("../../ShineInfo")
 multiplayer_options = NodePath("../../MultiplayerOptions")
+control_options = NodePath("../../ControlsOptions")
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/MultiplayerButton"]
 stream = ExtResource( 9 )
@@ -617,6 +627,31 @@ volume_db = -10.0
 stream = ExtResource( 11 )
 volume_db = -10.0
 
+[node name="ControlsButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
+margin_left = 27.0
+margin_top = 236.405
+margin_right = 356.0
+margin_bottom = 280.405
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 16 )
+action_mode = 0
+text = "Controls"
+script = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/ControlsButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/ControlsButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
 [node name="HostButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
 visible = false
 margin_left = 79.8377
@@ -643,72 +678,10 @@ volume_db = -10.0
 stream = ExtResource( 11 )
 volume_db = -10.0
 
-[node name="ControlMode" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
+[node name="WindowScale" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
 margin_top = -13.0
 margin_right = 40.0
 margin_bottom = 27.0
-script = ExtResource( 23 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
-margin_left = 271.654
-margin_top = 159.587
-margin_right = 399.654
-margin_bottom = 287.587
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 25 )
-texture_pressed = ExtResource( 25 )
-texture_hover = ExtResource( 24 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
-margin_left = 233.0
-margin_top = 185.296
-margin_right = 361.0
-margin_bottom = 313.296
-rect_rotation = 180.0
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 25 )
-texture_pressed = ExtResource( 25 )
-texture_hover = ExtResource( 24 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
-margin_left = 40.0
-margin_top = 157.796
-margin_right = 202.0
-margin_bottom = 189.796
-custom_fonts/font = SubResource( 17 )
-text = "Control Mode:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/ControlMode"]
-margin_left = 234.0
-margin_top = 157.796
-margin_right = 272.0
-margin_bottom = 189.796
-custom_fonts/font = SubResource( 17 )
-text = "1"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="WindowScale" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
-margin_top = 22.0
-margin_right = 40.0
-margin_bottom = 62.0
 script = ExtResource( 37 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -760,7 +733,6 @@ margin_top = 157.796
 margin_right = 272.0
 margin_bottom = 189.796
 custom_fonts/font = SubResource( 17 )
-text = "1"
 align = 1
 valign = 1
 __meta__ = {
@@ -768,9 +740,9 @@ __meta__ = {
 }
 
 [node name="FPSLock" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
-margin_top = 57.0
+margin_top = 22.0
 margin_right = 40.0
-margin_bottom = 97.0
+margin_bottom = 62.0
 script = ExtResource( 38 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -805,9 +777,9 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/FPSLock"]
 margin_left = 40.0
-margin_top = 158.0
+margin_top = 157.796
 margin_right = 202.0
-margin_bottom = 186.0
+margin_bottom = 189.796
 custom_fonts/font = SubResource( 17 )
 text = "FPS Cap:"
 align = 1
@@ -822,7 +794,6 @@ margin_top = 157.796
 margin_right = 272.0
 margin_bottom = 189.796
 custom_fonts/font = SubResource( 17 )
-text = "60"
 align = 1
 valign = 1
 __meta__ = {
@@ -1014,6 +985,481 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ControlsOptions" type="Control" parent="UI/PauseScreen"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 42 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Left" type="Control" parent="UI/PauseScreen/ControlsOptions"]
+margin_top = -13.0
+margin_right = 40.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Move Left"]
+margin_left = 10.0
+margin_top = 114.796
+margin_right = 172.0
+margin_bottom = 146.796
+custom_fonts/font = SubResource( 18 )
+text = "Move Left:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Move Left"]
+margin_left = 179.0
+margin_top = 109.0
+margin_right = 259.0
+margin_bottom = 154.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
+action_mode = 0
+script = ExtResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+id = "left"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Move Left/KeyButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Move Left/KeyButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="Move Right" type="Control" parent="UI/PauseScreen/ControlsOptions"]
+margin_top = -13.0
+margin_right = 40.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Move Right"]
+margin_left = 10.0
+margin_top = 162.796
+margin_right = 172.0
+margin_bottom = 194.796
+custom_fonts/font = SubResource( 18 )
+text = "Move Right:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Move Right"]
+margin_left = 179.0
+margin_top = 157.0
+margin_right = 259.0
+margin_bottom = 202.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
+action_mode = 0
+script = ExtResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+id = "right"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Move Right/KeyButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Move Right/KeyButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="Jump" type="Control" parent="UI/PauseScreen/ControlsOptions"]
+margin_top = -13.0
+margin_right = 40.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Jump"]
+margin_left = 10.0
+margin_top = 210.796
+margin_right = 172.0
+margin_bottom = 242.796
+custom_fonts/font = SubResource( 18 )
+text = "Jump:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Jump"]
+margin_left = 179.0
+margin_top = 205.0
+margin_right = 259.0
+margin_bottom = 250.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
+action_mode = 0
+script = ExtResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+id = "jump"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Jump/KeyButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Jump/KeyButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="Dive" type="Control" parent="UI/PauseScreen/ControlsOptions"]
+margin_top = -13.0
+margin_right = 40.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Dive"]
+margin_left = 10.0
+margin_top = 258.796
+margin_right = 172.0
+margin_bottom = 290.796
+custom_fonts/font = SubResource( 18 )
+text = "Dive:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Dive"]
+margin_left = 179.0
+margin_top = 253.0
+margin_right = 259.0
+margin_bottom = 298.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
+action_mode = 0
+script = ExtResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+id = "dive"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Dive/KeyButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Dive/KeyButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="Spin" type="Control" parent="UI/PauseScreen/ControlsOptions"]
+margin_left = 232.0
+margin_top = -13.0
+margin_right = 272.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Spin"]
+margin_left = 34.0
+margin_top = 114.796
+margin_right = 196.0
+margin_bottom = 146.796
+custom_fonts/font = SubResource( 18 )
+text = "Spin:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Spin"]
+margin_left = 203.0
+margin_top = 109.0
+margin_right = 283.0
+margin_bottom = 154.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
+action_mode = 0
+script = ExtResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+id = "spin"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Spin/KeyButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Spin/KeyButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="Ground Pound" type="Control" parent="UI/PauseScreen/ControlsOptions"]
+margin_left = 232.0
+margin_top = -13.0
+margin_right = 272.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Ground Pound"]
+margin_left = 34.0
+margin_top = 162.796
+margin_right = 196.0
+margin_bottom = 194.796
+custom_fonts/font = SubResource( 18 )
+text = "Ground Pound:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Ground Pound"]
+margin_left = 203.0
+margin_top = 157.0
+margin_right = 283.0
+margin_bottom = 202.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
+action_mode = 0
+script = ExtResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+id = "gp"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Ground Pound/KeyButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Ground Pound/KeyButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="Ground Pound Cancel" type="Control" parent="UI/PauseScreen/ControlsOptions"]
+margin_left = 232.0
+margin_top = -13.0
+margin_right = 272.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Ground Pound Cancel"]
+margin_left = 34.0
+margin_top = 210.796
+margin_right = 241.0
+margin_bottom = 242.796
+custom_fonts/font = SubResource( 18 )
+text = "Ground Pound Cancel:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Ground Pound Cancel"]
+margin_left = 203.0
+margin_top = 205.0
+margin_right = 283.0
+margin_bottom = 250.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
+action_mode = 0
+script = ExtResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+id = "gpcancel"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Ground Pound Cancel/KeyButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Ground Pound Cancel/KeyButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="Use Fludd" type="Control" parent="UI/PauseScreen/ControlsOptions"]
+margin_left = 232.0
+margin_top = -13.0
+margin_right = 272.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Use Fludd"]
+margin_left = 34.0
+margin_top = 258.796
+margin_right = 196.0
+margin_bottom = 290.796
+custom_fonts/font = SubResource( 18 )
+text = "Use Fludd:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Use Fludd"]
+margin_left = 203.0
+margin_top = 253.0
+margin_right = 283.0
+margin_bottom = 298.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
+action_mode = 0
+script = ExtResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+id = "fludd"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Use Fludd/KeyButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Use Fludd/KeyButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="Switch Nozzles" type="Control" parent="UI/PauseScreen/ControlsOptions"]
+margin_left = 480.0
+margin_top = -13.0
+margin_right = 520.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Switch Nozzles"]
+margin_left = 34.0
+margin_top = 114.796
+margin_right = 196.0
+margin_bottom = 146.796
+custom_fonts/font = SubResource( 18 )
+text = "Switch Nozzles"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Switch Nozzles"]
+margin_left = 203.0
+margin_top = 109.0
+margin_right = 283.0
+margin_bottom = 154.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
+action_mode = 0
+script = ExtResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+id = "nozzles"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Switch Nozzles/KeyButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Switch Nozzles/KeyButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="Crouch" type="Control" parent="UI/PauseScreen/ControlsOptions"]
+margin_left = 480.0
+margin_top = -13.0
+margin_right = 520.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Crouch"]
+margin_left = 34.0
+margin_top = 162.796
+margin_right = 196.0
+margin_bottom = 194.796
+custom_fonts/font = SubResource( 18 )
+text = "Crouch:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Crouch"]
+margin_left = 203.0
+margin_top = 157.0
+margin_right = 283.0
+margin_bottom = 202.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
+action_mode = 0
+script = ExtResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+id = "crouch"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Crouch/KeyButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Crouch/KeyButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
 
 [node name="Viewports" type="HBoxContainer" parent="."]
 margin_right = 772.0

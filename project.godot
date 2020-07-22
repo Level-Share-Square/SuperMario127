@@ -55,6 +55,11 @@ _global_script_classes=[ {
 "path": "res://scenes/actors/mario/mario.gd"
 }, {
 "base": "Reference",
+"class": "ControlPresets",
+"language": "GDScript",
+"path": "res://scenes/player/control_presets.gd"
+}, {
+"base": "Reference",
 "class": "Decoration",
 "language": "GDScript",
 "path": "res://generation/decorations/decoration.gd"
@@ -409,6 +414,7 @@ _global_script_class_icons={
 "ButtSlideState": "",
 "CallMethodInstruction": "",
 "Character": "",
+"ControlPresets": "",
 "Decoration": "",
 "DefineVarInstruction": "",
 "DiveState": "",
