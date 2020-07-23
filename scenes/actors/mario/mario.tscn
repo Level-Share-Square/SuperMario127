@@ -168,7 +168,7 @@ tracks/0/keys = {
 position = Vector2( -1000, -1000 )
 z_index = -1
 collision_layer = 2
-collision_mask = 17
+collision_mask = 81
 collision/safe_margin = 0.01
 script = ExtResource( 3 )
 cutout_death = ExtResource( 10 )
@@ -395,12 +395,8 @@ fallback_water_pos_right_luigi = Vector2( -19, -2 )
 
 [node name="MetalPowerup" type="Node" parent="Powerups"]
 script = ExtResource( 35 )
+is_invincible = true
 material = ExtResource( 36 )
-time_left = 30.0
-
-[node name="VanishPowerup" type="Node" parent="Powerups"]
-script = ExtResource( 50 )
-material = ExtResource( 49 )
 time_left = 30.0
 
 [node name="RainbowPowerup" type="Node" parent="Powerups"]
@@ -410,6 +406,12 @@ is_invincible = true
 material = ExtResource( 38 )
 time_left = 30.0
 id = 1
+
+[node name="VanishPowerup" type="Node" parent="Powerups"]
+script = ExtResource( 50 )
+material = ExtResource( 49 )
+time_left = 30.0
+id = 2
 
 [node name="PlayerCollision" type="Area2D" parent="."]
 visible = false
@@ -447,34 +449,34 @@ visible = false
 position = Vector2( 0.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 26 )
-collision_mask = 17
+collision_mask = 81
 
 [node name="GroundCheckDive" type="RayCast2D" parent="."]
 visible = false
 position = Vector2( 0.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 7.5 )
-collision_mask = 17
+collision_mask = 81
 
 [node name="LeftCheck" type="RayCast2D" parent="."]
 visible = false
 position = Vector2( -8, 0 )
 enabled = true
 cast_to = Vector2( 0, 32 )
-collision_mask = 17
+collision_mask = 81
 
 [node name="RightCheck" type="RayCast2D" parent="."]
 visible = false
 position = Vector2( 8.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 32 )
-collision_mask = 17
+collision_mask = 81
 
 [node name="SlopeStopCheck" type="RayCast2D" parent="."]
 position = Vector2( 0, 6 )
 enabled = true
 cast_to = Vector2( 36, 0 )
-collision_mask = 17
+collision_mask = 81
 
 [node name="FluddSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 25 )

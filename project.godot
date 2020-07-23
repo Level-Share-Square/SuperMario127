@@ -354,6 +354,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://interpreter/environments/UtilEnvironment.gd"
 }, {
+"base": "Powerup",
+"class": "VanishPowerup",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/powerups/Vanish.gd"
+}, {
 "base": "State",
 "class": "WallJumpState",
 "language": "GDScript",
@@ -474,6 +479,7 @@ _global_script_class_icons={
 "SubtractionOperation": "",
 "TurboNozzle": "",
 "UtilEnvironment": "",
+"VanishPowerup": "",
 "WallJumpState": "",
 "WallSlideState": "",
 "YouTubeDl": "",
@@ -1001,6 +1007,7 @@ jump_1={
 2d_physics/layer_4="collectables"
 2d_physics/layer_5="platforms"
 2d_physics/layer_6="steelies"
+2d_physics/layer_7="vanish powerup"
 
 [logging]
 

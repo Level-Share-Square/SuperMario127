@@ -2683,6 +2683,14 @@ index_in_sequence = 1
 icon = ExtResource( 17 )
 preview = ExtResource( 16 )
 
+[node name="VanishPassthroughBlock" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 44
+is_object = true
+object_center = Vector2( 16, 16 )
+icon = ExtResource( 140 )
+preview = ExtResource( 141 )
+
 [node name="RainbowPowerup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 object_id = 41

@@ -845,3 +845,12 @@ func exit():
 	else: 
 		# warning-ignore: return_value_discarded
 		get_tree().reload_current_scene()
+
+func set_all_collision_masks(bit, value):
+	set_collision_mask_bit(bit, value)
+	$GroundCheck.set_collision_mask_bit(bit, value)
+	$GroundCheckDive.set_collision_mask_bit(bit, value)
+	$LeftCheck.set_collision_mask_bit(bit, value)
+	$RightCheck.set_collision_mask_bit(bit, value)
+	$SlopeStopCheck.set_collision_mask_bit(bit, value)
+
