@@ -8,7 +8,7 @@ func _ready():
 	if material != null:
 		material = material.duplicate()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	alpha -= 0.005
 	modulate = Color(1, 1, 1, alpha)
 	if alpha <= 0:

@@ -11,7 +11,7 @@ func PlaySound(sound_name):
 			break
 
 
-func _process(delta):
+func _process(_delta):
 	for array in play_sounds:
 		if array[2]:
 			array[1].play()

@@ -10,7 +10,7 @@ var mode = 0
 export var coin_frame : int
 const coin_anim_fps = 12
 
-func _process(delta):
+func _process(_delta):
 	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
 
 

@@ -59,9 +59,11 @@ func _dl_thread(arguments):
 			AUDIO_WAV:format = "wav"
 
 		if current_os == "X11" or current_os == "OSX":
+			# warning-ignore: return_value_discarded
 			OS.execute(str(user_directory) + "/youtube-dl",  PoolStringArray(["-x", "--audio-format", format, "--no-continue", "-o", destination_path+filename+".%(ext)s", url, "-4", "-q"]), true)
 		elif current_os == "Windows":
 			var time_start : float = OS.get_ticks_msec()
+			# warning-ignore: return_value_discarded
 			OS.execute(str(user_directory) + "/youtube-dl.exe",  PoolStringArray(["-x", "--audio-format", format, "--no-continue", "-o", destination_path+filename+".%(ext)s", url, "-4", "-q"]), true)
 			print(str((OS.get_ticks_msec() - time_start) / 1000.0))
 
@@ -80,8 +82,10 @@ func _dl_thread(arguments):
 				dir.remove(destination_path+filename+".mp4")
 	
 		if current_os == "X11" or current_os == "OSX":
+			# warning-ignore: return_value_discarded
 			OS.execute(str(user_directory) + "/youtube-dl",  PoolStringArray(["-f", format, "--no-continue", "-o", destination_path+filename+".%(ext)s",url]), true)
 		elif current_os == "Windows":
+			# warning-ignore: return_value_discarded
 			OS.execute(str(user_directory) + "/youtube-dl.exe",  PoolStringArray(["-f", format, "--no-continue", "-o", destination_path+filename+".%(ext)s",url]), true)
 	
 	emit_signal("download_complete")

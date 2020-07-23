@@ -27,14 +27,14 @@ func remove_visuals():
 func toggle_visuals():
 	pass
 
-func _start(delta):
+func _start(_delta):
 	pass
 
-func _update(delta):
+func _update(_delta):
 	pass
 
-func _general_update(delta):
+func _general_update(_delta):
 	pass
 
-func _stop(delta):
+func _stop(_delta):
 	pass

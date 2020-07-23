@@ -479,7 +479,7 @@ func _physics_process(delta: float):
 	# Inputs
 	if controlled_locally:
 		if controllable and !FocusCheck.is_ui_focused:
-			var control_id = player_id
+			#var control_id = player_id seemingly unused variable, uncomment if needed
 			for input in inputs:
 				var input_id = input[2]
 				
@@ -843,4 +843,5 @@ func exit():
 	if !mode_switcher.get_node("ModeSwitcherButton").invisible:
 		mode_switcher.get_node("ModeSwitcherButton").switch()
 	else: 
+		# warning-ignore: return_value_discarded
 		get_tree().reload_current_scene()

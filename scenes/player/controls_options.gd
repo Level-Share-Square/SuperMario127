@@ -11,6 +11,7 @@ func _ready():
 			var keybindings = PlayerSettings.keybindings[button.id]
 			
 			button.text = str(OS.get_scancode_string(keybindings[0] if typeof(keybindings) == TYPE_ARRAY else keybindings))
+			# warning-ignore: return_value_discarded
 			button.connect("pressed", self, "button_pressed", [button])
 		
 	# Prepare Presets

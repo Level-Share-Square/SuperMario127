@@ -5,6 +5,7 @@
 *.tres text eol=lf
 *.import text eol=lf
 *.shader text eol=lf
+*.godot text eol=lf
 
 *.png binary
 *.ttf binary
