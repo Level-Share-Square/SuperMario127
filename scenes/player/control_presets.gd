@@ -25,18 +25,6 @@ const presets = {
 		"nozzles": KEY_Y,
 		"crouch": KEY_S
 	},
-	"KB+M": {
-		"left": KEY_A,
-		"right": KEY_D,
-		"jump": KEY_SPACE,
-		"dive": KEY_SHIFT,
-		"spin": BUTTON_LEFT,
-		"gp": KEY_S,
-		"gpcancel": KEY_W,
-		"fludd": BUTTON_RIGHT,
-		"nozzles": KEY_Y,
-		"crouch": KEY_S
-	},
 	"Legacy": {
 		"left": KEY_LEFT,
 		"right": KEY_RIGHT,
