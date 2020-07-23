@@ -11,10 +11,10 @@ func _ready():
 	is_invincible = true
 	music_id = 26
 
-func _start(delta):
+func _start(_delta):
 	pass
 
-func _stop(delta):
+func _stop(_delta):
 	pass
 
 func create_trail():

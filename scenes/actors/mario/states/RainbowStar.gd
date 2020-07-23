@@ -27,7 +27,7 @@ func _ready():
 func _start_check(_delta):
 	return false
 
-func _start(delta):
+func _start(_delta):
 	current_speed = run_speed
 
 func _update(delta):
@@ -105,5 +105,5 @@ func _general_update(delta):
 		if ledge_buffer < 0:
 			ledge_buffer = 0
 
-func _stop_check(delta):
+func _stop_check(_delta):
 	return (character.powerup == null or character.powerup.id != 1) and character.is_grounded()

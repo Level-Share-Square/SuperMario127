@@ -16,7 +16,7 @@ func _ready():
 func _start_check(_delta):
 	return character.inputs[4][1] and (character.is_grounded() and character.rainbow_stored)
 
-func _start(delta):
+func _start(_delta):
 	character.sprite.rotation_degrees = 0
 	time_charging = 0.0
 	if character.facing_direction == 1:
@@ -41,5 +41,5 @@ func _stop(delta):
 		character.sound_player.play_powerup_sound()
 		character.sound_player.play_powerup_jingle()
 
-func _stop_check(delta):
+func _stop_check(_delta):
 	return !character.inputs[4][0]

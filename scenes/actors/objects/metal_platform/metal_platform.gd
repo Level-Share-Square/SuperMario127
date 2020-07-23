@@ -23,7 +23,7 @@ func can_collide_with(character):
 	var p1 = line_center + line_direction
 	var p2 = line_center - line_direction
 	var p = character.bottom_pos.global_position #if is_grounded else character.global_position
-	var velocity = character.velocity if character.get("velocity") != null else Vector2(0, 0)
+	#var velocity = character.velocity if character.get("velocity") != null else Vector2(0, 0) seems to be unused, uncomment if needed
 	var diff = p2 - p1
 	var perp = Vector2(-diff.y, diff.x)
 	

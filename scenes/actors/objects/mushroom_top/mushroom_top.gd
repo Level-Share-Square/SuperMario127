@@ -5,7 +5,6 @@ onready var body = $StaticBody2D
 onready var collision_shape = $CollisionShape2D
 
 var buffer := -5
-var character = null
 
 func _ready():
 	if get_parent().mode != 1:

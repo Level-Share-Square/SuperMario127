@@ -2656,8 +2656,8 @@ script = ExtResource( 3 )
 object_id = 34
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "RainbowPowerup"
-items_in_sequence = 2
+change_to = "VanishPowerup"
+items_in_sequence = 3
 icon = ExtResource( 17 )
 preview = ExtResource( 16 )
 
@@ -2672,14 +2672,33 @@ index_in_sequence = 1
 icon = ExtResource( 143 )
 preview = ExtResource( 142 )
 
+[node name="VanishPowerup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 43
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "RainbowPowerup"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 17 )
+preview = ExtResource( 16 )
+
+[node name="VanishPassthroughBlock" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 44
+is_object = true
+object_center = Vector2( 16, 16 )
+icon = ExtResource( 140 )
+preview = ExtResource( 141 )
+
 [node name="RainbowPowerup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 object_id = 41
 is_object = true
 object_center = Vector2( 16, 16 )
 change_to = "MetalPowerup"
-items_in_sequence = 2
-index_in_sequence = 1
+items_in_sequence = 3
+index_in_sequence = 2
 icon = ExtResource( 146 )
 preview = ExtResource( 101 )
 

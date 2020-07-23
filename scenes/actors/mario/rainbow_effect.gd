@@ -2,7 +2,7 @@ extends AnimatedSprite
 
 var hue = 0
 
-func _process(delta):
+func _process(_delta):
 	hue += 0.015
 	var gradient_texture = GradientTexture.new()
 	var gradient = Gradient.new()

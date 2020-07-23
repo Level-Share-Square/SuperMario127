@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	COLOR.a = COLOR.a / 2.0;
+}"
+custom_defines = ""
+
+[resource]
+shader = SubResource( 7 )

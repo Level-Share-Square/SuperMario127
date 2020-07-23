@@ -13,15 +13,15 @@ const presets = {
 		"nozzles": KEY_CONTROL,
 		"crouch": KEY_DOWN
 	},
-	"2P": {
+	"WASD": {
 		"left": KEY_A,
 		"right": KEY_D,
 		"jump": KEY_K,
 		"dive": KEY_E,
-		"spin": KEY_L,
+		"spin": KEY_J,
 		"gp": KEY_S,
 		"gpcancel": KEY_W,
-		"fludd": KEY_SEMICOLON,
+		"fludd": KEY_L,
 		"nozzles": KEY_Y,
 		"crouch": KEY_S
 	},
