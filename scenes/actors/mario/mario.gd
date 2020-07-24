@@ -166,6 +166,7 @@ onready var slide_particles = $SlideParticles
 onready var gp_particles1 = $GPParticles1
 onready var gp_particles2 = $GPParticles2
 onready var rainbow_particles = $RainbowSparkles
+onready var metal_particles = $MetalSparkles
 onready var platform_detector = $PlatformDetector
 onready var bottom_pos = $BottomPos
 onready var death_sprite = $DeathSprite
@@ -845,3 +846,12 @@ func exit():
 	else: 
 		# warning-ignore: return_value_discarded
 		get_tree().reload_current_scene()
+
+func set_all_collision_masks(bit, value):
+	set_collision_mask_bit(bit, value)
+	$GroundCheck.set_collision_mask_bit(bit, value)
+	$GroundCheckDive.set_collision_mask_bit(bit, value)
+	$LeftCheck.set_collision_mask_bit(bit, value)
+	$RightCheck.set_collision_mask_bit(bit, value)
+	$SlopeStopCheck.set_collision_mask_bit(bit, value)
+

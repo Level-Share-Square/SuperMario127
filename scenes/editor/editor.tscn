@@ -1,4 +1,4 @@
-[gd_scene load_steps=201 format=2]
+[gd_scene load_steps=202 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -147,6 +147,7 @@
 [ext_resource path="res://scenes/actors/objects/big_steely_entrance/preview.png" type="Texture" id=145]
 [ext_resource path="res://scenes/actors/objects/rainbow_powerup/icon.png" type="Texture" id=146]
 [ext_resource path="res://scenes/editor/ResetLevelButton.gd" type="Script" id=147]
+[ext_resource path="res://scenes/actors/objects/shine_shard/icon.png" type="Texture" id=148]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-2f7996d42f2cb278ea1c7da3bda68d02.stex"
@@ -2251,7 +2252,8 @@ script = ExtResource( 3 )
 object_id = 2
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "Shine"
+change_to = "ShineShard"
+items_in_sequence = 2
 icon = ExtResource( 15 )
 preview = ExtResource( 15 )
 
@@ -2683,6 +2685,14 @@ index_in_sequence = 1
 icon = ExtResource( 17 )
 preview = ExtResource( 16 )
 
+[node name="VanishPassthroughBlock" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 44
+is_object = true
+object_center = Vector2( 16, 16 )
+icon = ExtResource( 140 )
+preview = ExtResource( 141 )
+
 [node name="RainbowPowerup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 object_id = 41
@@ -2748,6 +2758,17 @@ items_in_sequence = 3
 index_in_sequence = 2
 icon = SubResource( 6 )
 preview = SubResource( 7 )
+
+[node name="ShineShard" type="Node" parent="PlaceableItems"]
+script = ExtResource( 3 )
+object_id = 45
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "Shine"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 148 )
+preview = ExtResource( 148 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
