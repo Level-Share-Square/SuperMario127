@@ -166,6 +166,7 @@ onready var slide_particles = $SlideParticles
 onready var gp_particles1 = $GPParticles1
 onready var gp_particles2 = $GPParticles2
 onready var rainbow_particles = $RainbowSparkles
+onready var metal_particles = $MetalSparkles
 onready var platform_detector = $PlatformDetector
 onready var bottom_pos = $BottomPos
 onready var death_sprite = $DeathSprite

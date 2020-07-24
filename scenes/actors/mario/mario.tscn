@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -48,8 +48,9 @@
 [ext_resource path="res://scenes/actors/mario/nozzles/Turbo.gd" type="Script" id=46]
 [ext_resource path="res://scenes/actors/mario/nozzles/turbo_frames_luigi.tres" type="SpriteFrames" id=47]
 [ext_resource path="res://scenes/actors/mario/nozzles/turbo_frames.tres" type="SpriteFrames" id=48]
-[ext_resource path="res://shaders/vanish_powerup.tres" type="Shader" id=49]
+[ext_resource path="res://shaders/vanish_powerup.tres" type="Material" id=49]
 [ext_resource path="res://scenes/actors/mario/powerups/Vanish.gd" type="Script" id=50]
+[ext_resource path="res://scenes/actors/mario/particles/metal_sparkles.png" type="Texture" id=51]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -74,7 +75,6 @@ custom_solver_bias = 0.5
 length = 13.0
 
 [sub_resource type="ShaderMaterial" id=8]
-shader = ExtResource( 49 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 8.5, 20 )
@@ -132,7 +132,7 @@ anim_speed = 0.8
 
 [sub_resource type="CanvasItemMaterial" id=17]
 particles_animation = true
-particles_anim_h_frames = 4
+particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
@@ -146,7 +146,6 @@ gravity = Vector3( 0, -27, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 100.0
-color_ramp = SubResource( 13 )
 anim_speed = 1.3
 
 [sub_resource type="Animation" id=19]
@@ -538,6 +537,16 @@ local_coords = false
 process_material = SubResource( 18 )
 texture = ExtResource( 41 )
 
+[node name="MetalSparkles" type="Particles2D" parent="."]
+material = SubResource( 17 )
+position = Vector2( 0, 5 )
+z_index = 2
+emitting = false
+amount = 6
+local_coords = false
+process_material = SubResource( 18 )
+texture = ExtResource( 51 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/backflip = ExtResource( 32 )
 anims/backflip_right = SubResource( 19 )
@@ -551,7 +560,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "death"
-frame = 3
+frame = 2
 playing = true
 script = ExtResource( 34 )
 

@@ -5,6 +5,7 @@ onready var sound = $AudioStreamPlayer
 onready var area = $Area2D
 onready var visibility_enabler = $VisibilityEnabler2D
 onready var animation_player = $AnimationPlayer
+onready var particles = $Particles2D
 
 var collected = false
 var respawn_timer = 0.0
@@ -38,6 +39,7 @@ func collect(body):
 		animation_player.play("collect", -1, 2)
 		respawn_timer = 10.0
 		collected = true
+		particles.emitting = false
 		
 func _ready():
 	yield(get_tree().create_timer(0.2), "timeout")
@@ -49,6 +51,7 @@ func _process(delta):
 		if respawn_timer <= 0:
 			respawn_timer = 0
 			collected = false
+			particles.emitting = true
 			animated_sprite.modulate = Color(1, 1, 1, 1)
 
 	hue += 0.015

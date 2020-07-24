@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource( 1 )
-ids = PoolStringArray( "nothing", "peach_castle", "bob_omb_battlefield", "super_bell_hill", "cloudy_court_galaxy", "yoshi_star_galaxy", "double_cherry_pass", "chainlink_charge", "mushroom_gorge", "snowball_park", "freezy_flake_galaxy", "ice_mountain", "cool_cool_mountain", "over_shiver_mountain", "snow_rise", "cave_dungeon", "sm3dw_underground", "top_hat_tower", "mario_run_underground", "ssbb_underground", "purple_coins", "slider", "champions_road", "speedy_comet", "buoy_base_galaxy", "metal_mario", "rainbow_mario" )
+ids = PoolStringArray( "nothing", "peach_castle", "bob_omb_battlefield", "super_bell_hill", "cloudy_court_galaxy", "yoshi_star_galaxy", "double_cherry_pass", "chainlink_charge", "mushroom_gorge", "snowball_park", "freezy_flake_galaxy", "ice_mountain", "cool_cool_mountain", "over_shiver_mountain", "snow_rise", "cave_dungeon", "sm3dw_underground", "top_hat_tower", "mario_run_underground", "ssbb_underground", "purple_coins", "slider", "champions_road", "speedy_comet", "buoy_base_galaxy", "metal_mario", "rainbow_mario", "wing_mario" )
