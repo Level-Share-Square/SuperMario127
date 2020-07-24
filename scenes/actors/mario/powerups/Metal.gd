@@ -12,9 +12,11 @@ func _stop(_delta):
 
 func apply_visuals():
 	character.sprite.material = material
+	character.metal_particles.emitting = true
 
 func remove_visuals():
 	character.sprite.material = null
+	character.metal_particles.emitting = false
 
 func toggle_visuals():
 	if character.sprite.material == null:
