@@ -26,7 +26,7 @@ func _physics_process(delta):
 			var shape_query_parameters = Physics2DShapeQueryParameters.new()
 			shape_query_parameters.set_shape($CollisionShape2D.shape)
 			shape_query_parameters.transform = transform
-			shape_query_parameters.collision_layer = 32
+			shape_query_parameters.collision_layer = 1 + 2 + 32 #layers for terrain, players, and big steelies
 			var no_steelies_in_front = get_world_2d().direct_space_state.intersect_shape(shape_query_parameters).empty()
 			if no_steelies_in_front: #steely_objects.size() <= 16: this is some old code, was commented out before adding the no_steelies_in_front stuff
 				var object = LevelObject.new()
