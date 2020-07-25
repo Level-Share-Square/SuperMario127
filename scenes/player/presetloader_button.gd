@@ -3,6 +3,8 @@ extends Button
 onready var hover_sound = $HoverSound
 onready var click_sound = $ClickSound
 
+onready var controls_options = get_parent().get_parent()
+
 var last_hovered
 	
 func _pressed():
@@ -11,7 +13,8 @@ func _pressed():
 	var selector = get_parent().get_node("Selector")
 	PlayerSettings.keybindings = ControlPresets.presets[selector.text]
 	
-	SettingsSaver.save(get_parent().get_parent().get_parent().multiplayer_options)
+	controls_options.currentButton = null
+	
 	for children in get_parent().get_parent().get_children():
 		if children != get_parent():
 			var button : Button = children.get_node("KeyButton")
