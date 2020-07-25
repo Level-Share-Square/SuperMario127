@@ -86,7 +86,7 @@ func exploded(explosion_pos : Vector2):
 		kill(explosion_pos)
 
 func steely_hit(hit_pos : Vector2):
-	print("A")
+	#print("A")
 	if !hit:
 		kill(hit_pos)
 	

@@ -27,14 +27,14 @@ collision_mask = 21
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "spinning"
-frame = 1
+frame = 6
 playing = true
 
 [node name="Color" type="AnimatedSprite" parent="Sprite"]
 modulate = Color( 0, 1, 0, 1 )
 frames = ExtResource( 3 )
 animation = "spinning"
-frame = 1
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -86,3 +86,9 @@ volume_db = -10.0
 enabled = true
 cast_to = Vector2( 0, 20 )
 collision_mask = 17
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -200, -200, 400, 400 )
+__meta__ = {
+"_editor_description_": ""
+}

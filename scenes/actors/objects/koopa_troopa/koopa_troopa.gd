@@ -61,6 +61,7 @@ func retract_into_shell():
 	shell_attack_area = shell.get_node("AttackArea")
 	shell_sound = shell.get_node("AudioStreamPlayer")
 	shell_grounded_check = shell.get_node("GroundedCheck")
+	visibility_notifier = shell.get_node("VisibilityNotifier2D")
 	add_child(shell)
 	shell.global_position = body.global_position
 	velocity = Vector2()
@@ -118,7 +119,7 @@ func _physics_process(delta):
 			delete_timer = 0
 			queue_free()
 
-	if !loaded and visibility_notifier.is_on_screen():
+	if !loaded and visibility_notifier and visibility_notifier.is_on_screen():
 		loaded = true
 	
 	if mode != 1 and enabled and !dead and loaded:

@@ -21,9 +21,9 @@ export var part_width = 19
 func _ready():
 	if !get_parent().enabled:
 		collision_shape.disabled = true
-	if get_parent().mode != 1:
-		var _connect = area.connect("body_entered", self, "enter_area")
-		var _connect2 = area.connect("body_exited", self, "exit_area")
+#	if get_parent().mode != 1:   this seems to be unused
+#		var _connect = area.connect("body_entered", self, "enter_area")
+#		var _connect2 = area.connect("body_exited", self, "exit_area")
 		
 func update_parts():
 	for part_sprite in parts_holder.get_children():
