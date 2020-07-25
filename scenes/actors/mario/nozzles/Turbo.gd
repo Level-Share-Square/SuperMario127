@@ -40,17 +40,17 @@ func _activated_update(delta):
 	
 	character.fludd_charge_sound.stop()
 	
-	var normal = character.sprite.transform.y.normalized()
+	var normal = character.sprite.transform.x.normalized()
 	character.jump_animation = 0
 	
 	if !boosted:
 		accel *= 1 + charge * 2
 		attack_frames = charge * 60
 	
-	var dest_x = lerp(character.velocity.x, accel * normal.y * character.facing_direction, delta * (5 if boosted else 60))
+	var dest_x = lerp(character.velocity.x, accel * normal.x * character.facing_direction, delta * (5 if boosted else 60))
 	if abs(dest_x) > abs(character.velocity.x) or !boosted:
 		character.velocity.x = dest_x
-	var dest_y = lerp(character.velocity.y, accel * normal.x * character.facing_direction, delta * (5 if boosted else 60))
+	var dest_y = lerp(character.velocity.y, accel * normal.y * character.facing_direction, delta * (5 if boosted else 60))
 	if abs(dest_y) > abs(character.velocity.y) or !boosted:
 		character.velocity.y = dest_y
 	

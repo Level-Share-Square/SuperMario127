@@ -64,10 +64,10 @@ func top_breakable(hit_body):
 	return hit_body.name.begins_with("Character") and (hit_body.velocity.y > 0 and !hit_body.is_grounded()) and (hit_body.big_attack or hit_body.invincible)
 
 func side_breakable(hit_body):
-	return hit_body.name.begins_with("Character") and ((hit_body.attacking and !hit_body.big_attack and !hit_body.turbo_nerf) or hit_body.invincible)
+	return hit_body.name.begins_with("Character") and ((hit_body.attacking and !hit_body.big_attack) or hit_body.invincible)
 
 func turbo_breakable(hit_body):
-	return hit_body.name.begins_with("Character") and (hit_body.using_turbo and !hit_body.turbo_nerf)
+	return hit_body.name.begins_with("Character") and hit_body.using_turbo
 
 func _physics_process(delta):
 	if mode != 1: 
