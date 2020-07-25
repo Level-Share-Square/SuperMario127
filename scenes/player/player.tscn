@@ -171,6 +171,8 @@ corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
+expand_margin_left = 11.0
+expand_margin_right = 11.0
 
 [sub_resource type="DynamicFont" id=21]
 font_data = ExtResource( 7 )
