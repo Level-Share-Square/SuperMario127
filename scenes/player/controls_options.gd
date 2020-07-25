@@ -1,12 +1,14 @@
 extends Node
 
+export (Array, NodePath) var ignore_children
+
 var currentButton : Button
 var oldText : String
 
 func _ready():
 	# Prepare Keybindings
 	for children in get_children():
-		if children != $"Preset Selection":
+		if !(children.get_name() in ignore_children):
 			var button : Button = children.get_node("KeyButton")
 			var keybindings = PlayerSettings.keybindings[button.id]
 			

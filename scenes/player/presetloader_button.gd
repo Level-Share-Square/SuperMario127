@@ -16,7 +16,7 @@ func _pressed():
 	controls_options.currentButton = null
 	
 	for children in get_parent().get_parent().get_children():
-		if children != get_parent():
+		if !(children.get_name() in controls_options.ignore_children):
 			var button : Button = children.get_node("KeyButton")
 			var keybindings = PlayerSettings.keybindings[button.id]
 			
