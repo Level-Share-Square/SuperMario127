@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -43,6 +43,8 @@
 [ext_resource path="res://scenes/player/controlbinding_button.gd" type="Script" id=41]
 [ext_resource path="res://scenes/player/controls_options.gd" type="Script" id=42]
 [ext_resource path="res://scenes/player/presetloader_button.gd" type="Script" id=43]
+[ext_resource path="res://scenes/player/shine_shard_counter.gd" type="Script" id=44]
+[ext_resource path="res://scenes/actors/objects/shine_shard/icon.png" type="Texture" id=45]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 7 )
@@ -319,6 +321,50 @@ scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 35 )
 
 [node name="Tween" type="Tween" parent="UI/RedCoinCounter"]
+
+[node name="ShineShardCounter" type="Control" parent="UI"]
+visible = false
+margin_left = 25.0
+margin_top = 95.0
+margin_right = 65.0
+margin_bottom = 135.0
+rect_rotation = -0.0704831
+script = ExtResource( 44 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelShadow" type="Label" parent="UI/ShineShardCounter"]
+margin_left = 23.0
+margin_top = 4.0
+margin_right = 168.0
+margin_bottom = 79.0
+rect_rotation = 0.0366689
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 0 )
+text = "0/8"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/ShineShardCounter"]
+margin_left = 20.0
+margin_right = 165.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.596078, 0.596078, 0.596078, 1 )
+text = "0/8"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShineShard" type="Sprite" parent="UI/ShineShardCounter"]
+position = Vector2( -1.6805, 11.4468 )
+scale = Vector2( 1.25, 1.25 )
+texture = ExtResource( 45 )
+
+[node name="Tween" type="Tween" parent="UI/ShineShardCounter"]
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2

@@ -7,6 +7,7 @@ onready var area = $Area2D
 onready var sound = $CollectSound
 onready var ambient_sound = $AmbientSound
 onready var animation_player = $AnimationPlayer
+onready var current_scene = get_tree().current_scene
 var collected = false
 var character
 
@@ -17,12 +18,13 @@ var description := "This is a shine! Collect it to win the level."
 var show_in_menu := false
 var activated := true
 var red_coins_activate := false
+var shine_shards_activate := false
 
 var unpause_timer = 0.0
 
 func _set_properties():
-	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate"]
-	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate"]
+	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate"]
+	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate"]
 	
 func _set_property_values():
 	set_property("title", title, true)
@@ -30,6 +32,7 @@ func _set_property_values():
 	set_property("show_in_menu", show_in_menu, true)
 	set_property("activated", activated, true)
 	set_property("red_coins_activate", red_coins_activate, true)
+	set_property("shine_shards_activate", shine_shards_activate, true)
 
 func collect(body):
 	if activated and enabled and !collected and body.name.begins_with("Character") and body.controllable:
@@ -44,7 +47,7 @@ func collect(body):
 
 func _ready():
 	if mode != 1:
-		if red_coins_activate:
+		if red_coins_activate or shine_shards_activate:
 			activated = false
 		var _connect = area.connect("body_entered", self, "collect")
 
@@ -53,15 +56,13 @@ func _physics_process(delta):
 		#warning-ignore:integer_division
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
 	if mode != 1:
-		var camera = get_tree().get_current_scene().get_node(get_tree().get_current_scene().camera)
+		var camera = current_scene.get_node(current_scene.camera)
 		if red_coins_activate and !activated:
 			if CurrentLevelData.level_data.vars.red_coins_collected == CurrentLevelData.level_data.vars.max_red_coins:
-				activated = true
-				animation_player.play("appear")
-				camera.focus_on = self
-				pause_mode = PAUSE_MODE_PROCESS
-				get_tree().paused = true
-				unpause_timer = 3.35
+				activate_shine()
+		if shine_shards_activate and !activated:
+			if CurrentLevelData.level_data.vars.shine_shards_collected == CurrentLevelData.level_data.vars.max_shine_shards:
+				activate_shine()
 		if !collected:
 			if !activated:
 				ambient_sound.playing = false
@@ -88,7 +89,16 @@ func _physics_process(delta):
 		unpause_timer -= delta
 		if unpause_timer <= 0:
 			unpause_timer = 0
-			var camera = get_tree().get_current_scene().get_node(get_tree().get_current_scene().camera)
+			var camera = current_scene.get_node(current_scene.camera)
 			camera.focus_on = null
 			get_tree().paused = false
 			pause_mode = PAUSE_MODE_INHERIT
+
+func activate_shine():
+	activated = true
+	animation_player.play("appear")
+	var camera = current_scene.get_node(current_scene.camera)
+	camera.focus_on = self
+	pause_mode = PAUSE_MODE_PROCESS
+	get_tree().paused = true
+	unpause_timer = 3.35
