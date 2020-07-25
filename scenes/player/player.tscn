@@ -176,6 +176,8 @@ corner_radius_bottom_left = 64
 font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=22]
+outline_size = 2
+outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 7 )
 
 [node name="Player" type="Node2D"]
