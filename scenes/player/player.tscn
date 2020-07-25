@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -159,6 +159,16 @@ font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=19]
 size = 18
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="DynamicFont" id=21]
 font_data = ExtResource( 7 )
 
 [node name="Player" type="Node2D"]
@@ -1536,6 +1546,12 @@ margin_left = -298.0
 margin_top = 98.0
 margin_right = -138.0
 margin_bottom = 132.0
+custom_styles/hover = SubResource( 20 )
+custom_styles/pressed = SubResource( 20 )
+custom_styles/focus = SubResource( 20 )
+custom_styles/disabled = SubResource( 20 )
+custom_styles/normal = SubResource( 20 )
+custom_fonts/font = SubResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
