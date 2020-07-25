@@ -8,11 +8,11 @@ var last_hovered = false
 var group_picker : Object
 
 func _pressed():
-	group_picker.group = switch_to_group.id
+	group_picker.group = switch_to_group.name
 	group_picker.change_group()
 	
 func _ready():
-	$Label.text = switch_to_group.name
+	$Label.text = switch_to_group.group_name
 	self_modulate = switch_to_group.color
 
 func _process(_delta):

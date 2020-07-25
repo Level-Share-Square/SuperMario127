@@ -1,8 +1,6 @@
-extends Resource
+extends Node
 
 class_name Group
 
-export var ids : PoolStringArray
 export var color : Color
-export var name : String
-export var id : String
+export var group_name : String

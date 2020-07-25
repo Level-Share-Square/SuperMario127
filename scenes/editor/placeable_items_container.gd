@@ -15,7 +15,7 @@ func _ready():
 	for index in range(number_of_boxes):
 		var item
 		if index < starting_toolbar.size():
-			item = placeable_items.get_node(starting_toolbar[index])
+			item = placeable_items.find_node(starting_toolbar[index])
 
 		var placeable_item_button = PLACEABLE_ITEM_BUTTON.instance()
 		placeable_item_button.item = item

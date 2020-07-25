@@ -14,6 +14,7 @@ var normal_color : Color
 var selected_color : Color
 var item : PlaceableItem
 var placeable_items_path : String = ""
+onready var placeable_items_node = get_node(placeable_items_path)
 var box_index = 1
 
 var squares = []
@@ -75,7 +76,7 @@ func _gui_input(event):
 		if event.is_pressed():
 			if item != null:
 				if editor.selected_box == self:
-					item = get_node(placeable_items_path + "/" + item.change_to)
+					item = placeable_items_node.find_node(item.change_to)
 					item_changed()
 				
 				click_sound.play()

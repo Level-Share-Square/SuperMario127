@@ -1,4 +1,4 @@
-[gd_scene load_steps=202 format=2]
+[gd_scene load_steps=203 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -148,27 +148,28 @@
 [ext_resource path="res://scenes/actors/objects/rainbow_powerup/icon.png" type="Texture" id=146]
 [ext_resource path="res://scenes/editor/ResetLevelButton.gd" type="Script" id=147]
 [ext_resource path="res://scenes/actors/objects/shine_shard/icon.png" type="Texture" id=148]
+[ext_resource path="res://scenes/editor/group.gd" type="Script" id=149]
 
 [sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/icon.png-2f7996d42f2cb278ea1c7da3bda68d02.stex"
-
-[sub_resource type="StreamTexture" id=2]
 load_path = "res://.import/icon.png-dd51669c0e57c36afe4a2289110ba43a.stex"
 
-[sub_resource type="StreamTexture" id=3]
+[sub_resource type="StreamTexture" id=2]
 load_path = "res://.import/rocket_box.png-ec204761d41d07c85beacca4836ca4eb.stex"
 
-[sub_resource type="StreamTexture" id=4]
+[sub_resource type="StreamTexture" id=3]
 load_path = "res://.import/icon.png-f8b0399d9244d4055e92dc67242cc371.stex"
 
-[sub_resource type="StreamTexture" id=5]
+[sub_resource type="StreamTexture" id=4]
 load_path = "res://.import/turbo_box.png-6f28657900f6cb6391239052bd625eb4.stex"
 
-[sub_resource type="StreamTexture" id=6]
+[sub_resource type="StreamTexture" id=5]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
 
-[sub_resource type="StreamTexture" id=7]
+[sub_resource type="StreamTexture" id=6]
 load_path = "res://.import/preview.png-b5e1f057c76348c498eb58977a6fa3d8.stex"
+
+[sub_resource type="StreamTexture" id=7]
+load_path = "res://.import/icon.png-2f7996d42f2cb278ea1c7da3bda68d02.stex"
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 1, 1, 1, 0.501961 )
@@ -2067,157 +2068,77 @@ position = Vector2( 0.198608, -0.468788 )
 
 [node name="PlaceableItems" type="Node" parent="."]
 
-[node name="Grass" type="Node" parent="PlaceableItems"]
+[node name="Sign" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
-tileset_id = 2
-change_to = "GrassSlab"
-items_in_sequence = 4
-icon = ExtResource( 10 )
-preview = ExtResource( 10 )
+object_id = 14
+is_object = true
+object_center = Vector2( 16, 12 )
+tile_mode_offset = Vector2( 0, -4 )
+z_index = -1
+change_to = "Sign"
+icon = ExtResource( 94 )
+preview = ExtResource( 94 )
 
-[node name="GrassSlopeRight" type="Node" parent="PlaceableItems"]
+[node name="Pipe" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
-tileset_id = 2
-tile_id = 3
-change_to = "Grass"
-items_in_sequence = 4
-index_in_sequence = 3
-icon = ExtResource( 13 )
-preview = ExtResource( 13 )
+object_id = 23
+is_object = true
+object_center = Vector2( 16, 16 )
+z_index = -1
+change_to = "Pipe"
+icon = ExtResource( 110 )
+preview = ExtResource( 108 )
 
-[node name="GrassSlopeLeft" type="Node" parent="PlaceableItems"]
+[node name="SampleObject" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
-tileset_id = 2
-tile_id = 2
-change_to = "GrassSlopeRight"
-items_in_sequence = 4
-index_in_sequence = 2
-icon = ExtResource( 14 )
-preview = ExtResource( 14 )
+object_id = 31
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "SampleObject"
+icon = ExtResource( 137 )
+preview = ExtResource( 137 )
 
-[node name="GrassSlab" type="Node" parent="PlaceableItems"]
+[node name="RocketBox" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
-tileset_id = 2
-tile_id = 1
-change_to = "GrassSlopeLeft"
-items_in_sequence = 4
-index_in_sequence = 1
-icon = ExtResource( 63 )
-preview = ExtResource( 63 )
-
-[node name="Brick" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 1
-change_to = "BrickSlopeLeft"
-items_in_sequence = 3
-icon = ExtResource( 5 )
-preview = ExtResource( 5 )
-
-[node name="BrickSlopeRight" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 1
-tile_id = 3
-change_to = "Brick"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 62 )
-preview = ExtResource( 62 )
-
-[node name="BrickSlopeLeft" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 1
-tile_id = 2
-change_to = "BrickSlopeRight"
+object_id = 38
+is_object = true
+object_center = Vector2( 16, 16 )
+z_index = -1
+change_to = "TurboBox"
 items_in_sequence = 3
 index_in_sequence = 1
-icon = ExtResource( 61 )
-preview = ExtResource( 61 )
+icon = SubResource( 1 )
+preview = SubResource( 2 )
 
-[node name="GreenBrick" type="Node" parent="PlaceableItems"]
+[node name="TurboBox" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
-tileset_id = 3
-change_to = "GreenBrickSlopeLeft"
-items_in_sequence = 3
-icon = ExtResource( 86 )
-preview = ExtResource( 86 )
-
-[node name="GreenBrickSlopeRight" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 3
-tile_id = 3
-change_to = "GreenBrick"
+object_id = 39
+is_object = true
+object_center = Vector2( 16, 16 )
+z_index = -1
+change_to = "HoverBox"
 items_in_sequence = 3
 index_in_sequence = 2
-icon = ExtResource( 93 )
-preview = ExtResource( 93 )
+icon = SubResource( 3 )
+preview = SubResource( 4 )
 
-[node name="GreenBrickSlopeLeft" type="Node" parent="PlaceableItems"]
+[node name="ShineShard" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
-tileset_id = 3
-tile_id = 2
-change_to = "GreenBrickSlopeRight"
-items_in_sequence = 3
+object_id = 45
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "Shine"
+items_in_sequence = 2
 index_in_sequence = 1
-icon = ExtResource( 88 )
-preview = ExtResource( 88 )
+icon = ExtResource( 148 )
+preview = ExtResource( 148 )
 
-[node name="RedBrick" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 4
-change_to = "RedBrickSlopeLeft"
-items_in_sequence = 3
-icon = ExtResource( 89 )
-preview = ExtResource( 89 )
+[node name="SpecialGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 149 )
+color = Color( 0.439216, 0.121569, 0.517647, 1 )
+group_name = "Special"
 
-[node name="RedBrickSlopeRight" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 4
-tile_id = 3
-change_to = "RedBrick"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 85 )
-preview = ExtResource( 85 )
-
-[node name="RedBrickSlopeLeft" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 4
-tile_id = 2
-change_to = "RedBrickSlopeRight"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 92 )
-preview = ExtResource( 92 )
-
-[node name="YellowBrick" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 5
-change_to = "YellowBrickSlopeLeft"
-items_in_sequence = 3
-icon = ExtResource( 90 )
-preview = ExtResource( 90 )
-
-[node name="YellowBrickSlopeRight" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 5
-tile_id = 3
-change_to = "YellowBrick"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 91 )
-preview = ExtResource( 91 )
-
-[node name="YellowBrickSlopeLeft" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 5
-tile_id = 2
-change_to = "YellowBrickSlopeRight"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 87 )
-preview = ExtResource( 87 )
-
-[node name="Entrance" type="Node" parent="PlaceableItems"]
+[node name="Entrance" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 is_object = true
 object_center = Vector2( 15, 16 )
@@ -2231,7 +2152,7 @@ placement_action = ExtResource( 54 )
 has_removal_action = true
 removal_action = ExtResource( 53 )
 
-[node name="EntranceLuigi" type="Node" parent="PlaceableItems"]
+[node name="EntranceLuigi" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 object_id = 5
 is_object = true
@@ -2247,17 +2168,7 @@ placement_action = ExtResource( 56 )
 has_removal_action = true
 removal_action = ExtResource( 57 )
 
-[node name="Shine" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 2
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "ShineShard"
-items_in_sequence = 2
-icon = ExtResource( 15 )
-preview = ExtResource( 15 )
-
-[node name="Coin" type="Node" parent="PlaceableItems"]
+[node name="Coin" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 object_id = 1
 is_object = true
@@ -2267,186 +2178,46 @@ items_in_sequence = 3
 icon = ExtResource( 17 )
 preview = ExtResource( 16 )
 
-[node name="MetalPlatform" type="Node" parent="PlaceableItems"]
+[node name="RedCoin" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
-object_id = 3
+object_id = 30
 is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-change_to = "MetalPlatform"
-icon = ExtResource( 42 )
-preview = ExtResource( 43 )
-
-[node name="BigTree" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 4
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 16, -16 )
-z_index = -9
-change_to = "BigTree"
-icon = ExtResource( 51 )
-preview = ExtResource( 50 )
-
-[node name="MushroomTop" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 6
-is_object = true
-object_center = Vector2( 16, 17 )
-tile_mode_offset = Vector2( 0, 1 )
-z_index = -1
-change_to = "MushroomBody"
-items_in_sequence = 3
-icon = ExtResource( 72 )
-preview = ExtResource( 71 )
-
-[node name="MushroomBody" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 7
-is_object = true
-object_center = Vector2( 16, 0 )
-tile_mode_offset = Vector2( 0, -16 )
-z_index = -1
-change_to = "MushroomCurve"
+object_center = Vector2( 16, 16 )
+change_to = "BlueCoin"
 items_in_sequence = 3
 index_in_sequence = 1
-icon = ExtResource( 73 )
-preview = ExtResource( 69 )
+icon = ExtResource( 136 )
+preview = ExtResource( 6 )
 
-[node name="MushroomCurve" type="Node" parent="PlaceableItems"]
+[node name="BlueCoin" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
-object_id = 8
+object_id = 40
 is_object = true
-object_center = Vector2( 30, 18 )
-tile_mode_offset = Vector2( 14, 2 )
-z_index = -1
-change_to = "MushroomTop"
+object_center = Vector2( 16, 16 )
+change_to = "Coin"
 items_in_sequence = 3
 index_in_sequence = 2
-icon = ExtResource( 74 )
-preview = ExtResource( 70 )
+icon = SubResource( 5 )
+preview = SubResource( 6 )
 
-[node name="CloudPlatform" type="Node" parent="PlaceableItems"]
+[node name="Shine" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
-object_id = 9
+object_id = 2
 is_object = true
-object_center = Vector2( 64, 0 )
-tile_mode_offset = Vector2( 32, -32 )
-tile_mode_step = 64
-change_to = "CloudPlatform"
-icon = ExtResource( 75 )
-preview = ExtResource( 76 )
-
-[node name="Log" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 10
-is_object = true
-object_center = Vector2( 8, 8 )
-tile_mode_step = 16
-z_index = -1
-change_to = "Log"
-icon = ExtResource( 78 )
-preview = ExtResource( 77 )
-
-[node name="BigBush" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 11
-is_object = true
-object_center = Vector2( 32, 20 )
-tile_mode_offset = Vector2( 16, 4 )
-z_index = -9
-change_to = "SmallBush"
+object_center = Vector2( 16, 16 )
+change_to = "ShineShard"
 items_in_sequence = 2
-index_in_sequence = 1
-icon = ExtResource( 82 )
-preview = ExtResource( 79 )
+icon = ExtResource( 15 )
+preview = ExtResource( 15 )
 
-[node name="SmallBush" type="Node" parent="PlaceableItems"]
+[node name="BooBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
-object_id = 12
-is_object = true
-object_center = Vector2( 32, 12 )
-tile_mode_offset = Vector2( 16, -4 )
-z_index = -9
-change_to = "BigBush"
-items_in_sequence = 2
-icon = ExtResource( 81 )
-preview = ExtResource( 80 )
+tileset_id = 6
+change_to = "BooBlock"
+icon = ExtResource( 107 )
+preview = ExtResource( 107 )
 
-[node name="BonePlatform" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 13
-is_object = true
-object_center = Vector2( 16, 0 )
-tile_mode_offset = Vector2( 0, -16 )
-z_index = -1
-change_to = "BonePlatform"
-icon = ExtResource( 84 )
-preview = ExtResource( 83 )
-
-[node name="Sign" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 14
-is_object = true
-object_center = Vector2( 16, 12 )
-tile_mode_offset = Vector2( 0, -4 )
-z_index = -1
-change_to = "Sign"
-icon = ExtResource( 94 )
-preview = ExtResource( 94 )
-
-[node name="GreenDemon" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 15
-is_object = true
-object_center = Vector2( 8, 8 )
-tile_mode_step = 16
-z_index = -1
-change_to = "GreenDemon"
-icon = ExtResource( 96 )
-preview = ExtResource( 95 )
-
-[node name="TwistedTreeTop" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 16
-is_object = true
-object_center = Vector2( 32, 32 )
-tile_mode_step = 64
-z_index = -7
-change_to = "TwistedTreeBody"
-items_in_sequence = 3
-icon = ExtResource( 97 )
-preview = ExtResource( 97 )
-
-[node name="TwistedTreeBody" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 17
-is_object = true
-object_center = Vector2( 32, 32 )
-tile_mode_step = 64
-z_index = -7
-change_to = "TwistedTreeAngle"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 98 )
-preview = ExtResource( 98 )
-
-[node name="TwistedTreeAngle" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 18
-is_object = true
-object_center = Vector2( 68, 42 )
-tile_mode_offset = Vector2( 36, 10 )
-tile_mode_step = 64
-z_index = -7
-change_to = "TwistedTreeTop"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 99 )
-preview = ExtResource( 99 )
-
-[node name="HoverBox" type="Node" parent="PlaceableItems"]
+[node name="HoverBox" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 object_id = 19
 is_object = true
@@ -2454,10 +2225,10 @@ object_center = Vector2( 16, 16 )
 z_index = -1
 change_to = "RocketBox"
 items_in_sequence = 3
-icon = SubResource( 1 )
+icon = SubResource( 7 )
 preview = ExtResource( 100 )
 
-[node name="SmallBottle" type="Node" parent="PlaceableItems"]
+[node name="SmallBottle" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 object_id = 21
 is_object = true
@@ -2470,7 +2241,7 @@ items_in_sequence = 2
 icon = ExtResource( 103 )
 preview = ExtResource( 102 )
 
-[node name="BigBottle" type="Node" parent="PlaceableItems"]
+[node name="BigBottle" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 object_id = 22
 is_object = true
@@ -2484,166 +2255,7 @@ index_in_sequence = 1
 icon = ExtResource( 104 )
 preview = ExtResource( 105 )
 
-[node name="BooBlock" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 6
-change_to = "BooBlock"
-icon = ExtResource( 107 )
-preview = ExtResource( 107 )
-
-[node name="Pipe" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 23
-is_object = true
-object_center = Vector2( 16, 16 )
-z_index = -1
-change_to = "Pipe"
-icon = ExtResource( 110 )
-preview = ExtResource( 108 )
-
-[node name="Snow" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 7
-change_to = "SnowSlab"
-items_in_sequence = 4
-icon = ExtResource( 113 )
-preview = ExtResource( 113 )
-
-[node name="SnowSlopeRight" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 7
-tile_id = 3
-change_to = "Snow"
-items_in_sequence = 4
-index_in_sequence = 3
-icon = ExtResource( 114 )
-preview = ExtResource( 114 )
-
-[node name="SnowSlopeLeft" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 7
-tile_id = 2
-change_to = "SnowSlopeRight"
-items_in_sequence = 4
-index_in_sequence = 2
-icon = ExtResource( 112 )
-preview = ExtResource( 112 )
-
-[node name="SnowSlab" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 7
-tile_id = 1
-change_to = "SnowSlopeLeft"
-items_in_sequence = 4
-index_in_sequence = 1
-icon = ExtResource( 111 )
-preview = ExtResource( 111 )
-
-[node name="SnowTree" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 24
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 16, -16 )
-z_index = -9
-change_to = "SnowTree"
-icon = ExtResource( 125 )
-preview = ExtResource( 124 )
-
-[node name="SnowPlatform" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 32
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-change_to = "SnowPlatform"
-icon = ExtResource( 138 )
-preview = ExtResource( 139 )
-
-[node name="BillBlaster" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 26
-is_object = true
-object_center = Vector2( 8, 8 )
-tile_mode_step = 16
-z_index = -1
-change_to = "BillBlaster"
-icon = ExtResource( 127 )
-preview = ExtResource( 126 )
-
-[node name="BobOmb" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 27
-is_object = true
-object_center = Vector2( 8, 8 )
-tile_mode_step = 16
-z_index = -1
-change_to = "BobOmb"
-icon = ExtResource( 129 )
-preview = ExtResource( 128 )
-
-[node name="KoopaTroopa" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 28
-is_object = true
-object_center = Vector2( 8, 8 )
-tile_mode_step = 16
-z_index = -1
-change_to = "KoopaTroopa"
-icon = ExtResource( 131 )
-preview = ExtResource( 130 )
-
-[node name="Goomba" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 29
-is_object = true
-object_center = Vector2( 8, 8 )
-tile_mode_step = 16
-z_index = -1
-change_to = "Goomba"
-icon = ExtResource( 133 )
-preview = ExtResource( 132 )
-
-[node name="Cave" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 8
-change_to = "CaveSlab"
-items_in_sequence = 2
-icon = ExtResource( 134 )
-preview = ExtResource( 134 )
-
-[node name="CaveSlab" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-tileset_id = 8
-tile_id = 1
-change_to = "Cave"
-items_in_sequence = 2
-index_in_sequence = 1
-icon = ExtResource( 135 )
-preview = ExtResource( 135 )
-
-[node name="RedCoin" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 30
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "BlueCoin"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 136 )
-preview = ExtResource( 6 )
-
-[node name="SampleObject" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 31
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "SampleObject"
-icon = ExtResource( 137 )
-preview = ExtResource( 137 )
-
-[node name="BreakableBlock" type="Node" parent="PlaceableItems"]
+[node name="BreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 object_id = 33
 is_object = true
@@ -2653,17 +2265,7 @@ items_in_sequence = 3
 icon = ExtResource( 140 )
 preview = ExtResource( 141 )
 
-[node name="MetalPowerup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 34
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "VanishPowerup"
-items_in_sequence = 3
-icon = ExtResource( 17 )
-preview = ExtResource( 16 )
-
-[node name="MetalBreakableBlock" type="Node" parent="PlaceableItems"]
+[node name="MetalBreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 object_id = 35
 is_object = true
@@ -2674,18 +2276,7 @@ index_in_sequence = 1
 icon = ExtResource( 143 )
 preview = ExtResource( 142 )
 
-[node name="VanishPowerup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 43
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "RainbowPowerup"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 17 )
-preview = ExtResource( 16 )
-
-[node name="VanishPassthroughBlock" type="Node" parent="PlaceableItems"]
+[node name="VanishPassthroughBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 object_id = 44
 is_object = true
@@ -2693,18 +2284,7 @@ object_center = Vector2( 16, 16 )
 icon = ExtResource( 140 )
 preview = ExtResource( 141 )
 
-[node name="RainbowPowerup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 41
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "MetalPowerup"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 146 )
-preview = ExtResource( 101 )
-
-[node name="RainbowBreakableBlock" type="Node" parent="PlaceableItems"]
+[node name="RainbowBreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 object_id = 42
 is_object = true
@@ -2715,7 +2295,239 @@ index_in_sequence = 2
 icon = ExtResource( 143 )
 preview = ExtResource( 142 )
 
-[node name="BigSteely" type="Node" parent="PlaceableItems"]
+[node name="MetalPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 34
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "VanishPowerup"
+items_in_sequence = 3
+icon = ExtResource( 17 )
+preview = ExtResource( 16 )
+
+[node name="VanishPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 43
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "RainbowPowerup"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 17 )
+preview = ExtResource( 16 )
+
+[node name="RainbowPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 41
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "MetalPowerup"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 146 )
+preview = ExtResource( 101 )
+
+[node name="BricksGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 149 )
+color = Color( 0.121569, 0.180392, 0.517647, 1 )
+group_name = "Bricks"
+
+[node name="Brick" type="Node" parent="PlaceableItems/BricksGroup"]
+script = ExtResource( 3 )
+tileset_id = 1
+change_to = "BrickSlopeLeft"
+items_in_sequence = 3
+icon = ExtResource( 5 )
+preview = ExtResource( 5 )
+
+[node name="BrickSlopeRight" type="Node" parent="PlaceableItems/BricksGroup"]
+script = ExtResource( 3 )
+tileset_id = 1
+tile_id = 3
+change_to = "Brick"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 62 )
+preview = ExtResource( 62 )
+
+[node name="BrickSlopeLeft" type="Node" parent="PlaceableItems/BricksGroup"]
+script = ExtResource( 3 )
+tileset_id = 1
+tile_id = 2
+change_to = "BrickSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 61 )
+preview = ExtResource( 61 )
+
+[node name="GreenBrick" type="Node" parent="PlaceableItems/BricksGroup"]
+script = ExtResource( 3 )
+tileset_id = 3
+change_to = "GreenBrickSlopeLeft"
+items_in_sequence = 3
+icon = ExtResource( 86 )
+preview = ExtResource( 86 )
+
+[node name="GreenBrickSlopeRight" type="Node" parent="PlaceableItems/BricksGroup"]
+script = ExtResource( 3 )
+tileset_id = 3
+tile_id = 3
+change_to = "GreenBrick"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 93 )
+preview = ExtResource( 93 )
+
+[node name="GreenBrickSlopeLeft" type="Node" parent="PlaceableItems/BricksGroup"]
+script = ExtResource( 3 )
+tileset_id = 3
+tile_id = 2
+change_to = "GreenBrickSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 88 )
+preview = ExtResource( 88 )
+
+[node name="RedBrick" type="Node" parent="PlaceableItems/BricksGroup"]
+script = ExtResource( 3 )
+tileset_id = 4
+change_to = "RedBrickSlopeLeft"
+items_in_sequence = 3
+icon = ExtResource( 89 )
+preview = ExtResource( 89 )
+
+[node name="RedBrickSlopeRight" type="Node" parent="PlaceableItems/BricksGroup"]
+script = ExtResource( 3 )
+tileset_id = 4
+tile_id = 3
+change_to = "RedBrick"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 85 )
+preview = ExtResource( 85 )
+
+[node name="RedBrickSlopeLeft" type="Node" parent="PlaceableItems/BricksGroup"]
+script = ExtResource( 3 )
+tileset_id = 4
+tile_id = 2
+change_to = "RedBrickSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 92 )
+preview = ExtResource( 92 )
+
+[node name="YellowBrick" type="Node" parent="PlaceableItems/BricksGroup"]
+script = ExtResource( 3 )
+tileset_id = 5
+change_to = "YellowBrickSlopeLeft"
+items_in_sequence = 3
+icon = ExtResource( 90 )
+preview = ExtResource( 90 )
+
+[node name="YellowBrickSlopeRight" type="Node" parent="PlaceableItems/BricksGroup"]
+script = ExtResource( 3 )
+tileset_id = 5
+tile_id = 3
+change_to = "YellowBrick"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 91 )
+preview = ExtResource( 91 )
+
+[node name="YellowBrickSlopeLeft" type="Node" parent="PlaceableItems/BricksGroup"]
+script = ExtResource( 3 )
+tileset_id = 5
+tile_id = 2
+change_to = "YellowBrickSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 87 )
+preview = ExtResource( 87 )
+
+[node name="CaveGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 149 )
+color = Color( 0.254902, 0.121569, 0.517647, 1 )
+group_name = "Cave"
+
+[node name="Cave" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 3 )
+tileset_id = 8
+change_to = "CaveSlab"
+items_in_sequence = 2
+icon = ExtResource( 134 )
+preview = ExtResource( 134 )
+
+[node name="CaveSlab" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 3 )
+tileset_id = 8
+tile_id = 1
+change_to = "Cave"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 135 )
+preview = ExtResource( 135 )
+
+[node name="EnemiesGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 149 )
+color = Color( 0.517647, 0.121569, 0.121569, 1 )
+group_name = "Enemies"
+
+[node name="GreenDemon" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 3 )
+object_id = 15
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+z_index = -1
+change_to = "GreenDemon"
+icon = ExtResource( 96 )
+preview = ExtResource( 95 )
+
+[node name="Goomba" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 3 )
+object_id = 29
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+z_index = -1
+change_to = "Goomba"
+icon = ExtResource( 133 )
+preview = ExtResource( 132 )
+
+[node name="KoopaTroopa" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 3 )
+object_id = 28
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+z_index = -1
+change_to = "KoopaTroopa"
+icon = ExtResource( 131 )
+preview = ExtResource( 130 )
+
+[node name="BobOmb" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 3 )
+object_id = 27
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+z_index = -1
+change_to = "BobOmb"
+icon = ExtResource( 129 )
+preview = ExtResource( 128 )
+
+[node name="BillBlaster" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 3 )
+object_id = 26
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+z_index = -1
+change_to = "BillBlaster"
+icon = ExtResource( 127 )
+preview = ExtResource( 126 )
+
+[node name="BigSteely" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 3 )
 object_id = 36
 is_object = true
@@ -2724,51 +2536,270 @@ change_to = "BigSteely"
 icon = ExtResource( 144 )
 preview = ExtResource( 145 )
 
-[node name="RocketBox" type="Node" parent="PlaceableItems"]
+[node name="GrassGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 149 )
+color = Color( 0.121569, 0.517647, 0.184314, 1 )
+group_name = "Grass"
+
+[node name="Grass" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 3 )
-object_id = 38
-is_object = true
-object_center = Vector2( 16, 16 )
-z_index = -1
-change_to = "TurboBox"
-items_in_sequence = 3
+tileset_id = 2
+change_to = "GrassSlab"
+items_in_sequence = 4
+icon = ExtResource( 10 )
+preview = ExtResource( 10 )
+
+[node name="GrassSlab" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+tileset_id = 2
+tile_id = 1
+change_to = "GrassSlopeLeft"
+items_in_sequence = 4
 index_in_sequence = 1
-icon = SubResource( 2 )
-preview = SubResource( 3 )
+icon = ExtResource( 63 )
+preview = ExtResource( 63 )
 
-[node name="TurboBox" type="Node" parent="PlaceableItems"]
+[node name="GrassSlopeLeft" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 3 )
-object_id = 39
-is_object = true
-object_center = Vector2( 16, 16 )
-z_index = -1
-change_to = "HoverBox"
-items_in_sequence = 3
+tileset_id = 2
+tile_id = 2
+change_to = "GrassSlopeRight"
+items_in_sequence = 4
 index_in_sequence = 2
-icon = SubResource( 4 )
-preview = SubResource( 5 )
+icon = ExtResource( 14 )
+preview = ExtResource( 14 )
 
-[node name="BlueCoin" type="Node" parent="PlaceableItems"]
+[node name="GrassSlopeRight" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 3 )
-object_id = 40
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "Coin"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = SubResource( 6 )
-preview = SubResource( 7 )
+tileset_id = 2
+tile_id = 3
+change_to = "Grass"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 13 )
+preview = ExtResource( 13 )
 
-[node name="ShineShard" type="Node" parent="PlaceableItems"]
+[node name="BigTree" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 3 )
-object_id = 45
+object_id = 4
 is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "Shine"
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+z_index = -9
+change_to = "BigTree"
+icon = ExtResource( 51 )
+preview = ExtResource( 50 )
+
+[node name="BigBush" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 11
+is_object = true
+object_center = Vector2( 32, 20 )
+tile_mode_offset = Vector2( 16, 4 )
+z_index = -9
+change_to = "SmallBush"
 items_in_sequence = 2
 index_in_sequence = 1
-icon = ExtResource( 148 )
-preview = ExtResource( 148 )
+icon = ExtResource( 82 )
+preview = ExtResource( 79 )
+
+[node name="SmallBush" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 12
+is_object = true
+object_center = Vector2( 32, 12 )
+tile_mode_offset = Vector2( 16, -4 )
+z_index = -9
+change_to = "BigBush"
+items_in_sequence = 2
+icon = ExtResource( 81 )
+preview = ExtResource( 80 )
+
+[node name="Log" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 10
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+z_index = -1
+change_to = "Log"
+icon = ExtResource( 78 )
+preview = ExtResource( 77 )
+
+[node name="MetalPlatform" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 3
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+change_to = "MetalPlatform"
+icon = ExtResource( 42 )
+preview = ExtResource( 43 )
+
+[node name="BonePlatform" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 13
+is_object = true
+object_center = Vector2( 16, 0 )
+tile_mode_offset = Vector2( 0, -16 )
+z_index = -1
+change_to = "BonePlatform"
+icon = ExtResource( 84 )
+preview = ExtResource( 83 )
+
+[node name="CloudPlatform" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 9
+is_object = true
+object_center = Vector2( 64, 0 )
+tile_mode_offset = Vector2( 32, -32 )
+tile_mode_step = 64
+change_to = "CloudPlatform"
+icon = ExtResource( 75 )
+preview = ExtResource( 76 )
+
+[node name="MushroomTop" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 6
+is_object = true
+object_center = Vector2( 16, 17 )
+tile_mode_offset = Vector2( 0, 1 )
+z_index = -1
+change_to = "MushroomBody"
+items_in_sequence = 3
+icon = ExtResource( 72 )
+preview = ExtResource( 71 )
+
+[node name="MushroomBody" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 7
+is_object = true
+object_center = Vector2( 16, 0 )
+tile_mode_offset = Vector2( 0, -16 )
+z_index = -1
+change_to = "MushroomCurve"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 73 )
+preview = ExtResource( 69 )
+
+[node name="MushroomCurve" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 8
+is_object = true
+object_center = Vector2( 30, 18 )
+tile_mode_offset = Vector2( 14, 2 )
+z_index = -1
+change_to = "MushroomTop"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 74 )
+preview = ExtResource( 70 )
+
+[node name="TwistedTreeTop" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 16
+is_object = true
+object_center = Vector2( 32, 32 )
+tile_mode_step = 64
+z_index = -7
+change_to = "TwistedTreeBody"
+items_in_sequence = 3
+icon = ExtResource( 97 )
+preview = ExtResource( 97 )
+
+[node name="TwistedTreeBody" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 17
+is_object = true
+object_center = Vector2( 32, 32 )
+tile_mode_step = 64
+z_index = -7
+change_to = "TwistedTreeAngle"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 98 )
+preview = ExtResource( 98 )
+
+[node name="TwistedTreeAngle" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 18
+is_object = true
+object_center = Vector2( 68, 42 )
+tile_mode_offset = Vector2( 36, 10 )
+tile_mode_step = 64
+z_index = -7
+change_to = "TwistedTreeTop"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 99 )
+preview = ExtResource( 99 )
+
+[node name="SnowGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 149 )
+color = Color( 0.121569, 0.322702, 0.517647, 1 )
+group_name = "Snow"
+
+[node name="Snow" type="Node" parent="PlaceableItems/SnowGroup"]
+script = ExtResource( 3 )
+tileset_id = 7
+change_to = "SnowSlab"
+items_in_sequence = 4
+icon = ExtResource( 113 )
+preview = ExtResource( 113 )
+
+[node name="SnowSlopeRight" type="Node" parent="PlaceableItems/SnowGroup"]
+script = ExtResource( 3 )
+tileset_id = 7
+tile_id = 3
+change_to = "Snow"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 114 )
+preview = ExtResource( 114 )
+
+[node name="SnowSlopeLeft" type="Node" parent="PlaceableItems/SnowGroup"]
+script = ExtResource( 3 )
+tileset_id = 7
+tile_id = 2
+change_to = "SnowSlopeRight"
+items_in_sequence = 4
+index_in_sequence = 2
+icon = ExtResource( 112 )
+preview = ExtResource( 112 )
+
+[node name="SnowSlab" type="Node" parent="PlaceableItems/SnowGroup"]
+script = ExtResource( 3 )
+tileset_id = 7
+tile_id = 1
+change_to = "SnowSlopeLeft"
+items_in_sequence = 4
+index_in_sequence = 1
+icon = ExtResource( 111 )
+preview = ExtResource( 111 )
+
+[node name="SnowTree" type="Node" parent="PlaceableItems/SnowGroup"]
+script = ExtResource( 3 )
+object_id = 24
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+z_index = -9
+change_to = "SnowTree"
+icon = ExtResource( 125 )
+preview = ExtResource( 124 )
+
+[node name="SnowPlatform" type="Node" parent="PlaceableItems/SnowGroup"]
+script = ExtResource( 3 )
+object_id = 32
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+change_to = "SnowPlatform"
+icon = ExtResource( 138 )
+preview = ExtResource( 139 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
