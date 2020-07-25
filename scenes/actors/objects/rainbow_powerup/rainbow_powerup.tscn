@@ -5,13 +5,13 @@
 [ext_resource path="res://scenes/actors/objects/rainbow_powerup/rainbow_powerup.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/mario/particles/sparkles.png" type="Texture" id=4]
 
-[sub_resource type="CanvasItemMaterial" id=17]
+[sub_resource type="CanvasItemMaterial" id=1]
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="ParticlesMaterial" id=18]
+[sub_resource type="ParticlesMaterial" id=2]
 emission_shape = 1
 emission_sphere_radius = 24.0
 flag_disable_z = true
@@ -23,7 +23,7 @@ orbit_velocity_random = 0.0
 damping = 100.0
 anim_speed = 1.3
 
-[sub_resource type="Shader" id=19]
+[sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 render_mode unshaded;
  
@@ -42,61 +42,61 @@ void fragment()
 }"
 custom_defines = ""
 
-[sub_resource type="Gradient" id=20]
+[sub_resource type="Gradient" id=4]
 colors = PoolColorArray( 1, 0, 0, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=21]
-gradient = SubResource( 20 )
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
 
-[sub_resource type="ShaderMaterial" id=22]
-shader = SubResource( 19 )
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 3 )
 shader_param/mix_amount = 1.0
-shader_param/gradient = SubResource( 21 )
+shader_param/gradient = SubResource( 5 )
 
-[sub_resource type="AtlasTexture" id=23]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=24]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=25]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
 region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=26]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=27]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 2 )
 region = Rect2( 32, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=28]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 2 )
 region = Rect2( 64, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=29]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 64, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=30]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 2 )
 region = Rect2( 32, 64, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=31]
+[sub_resource type="SpriteFrames" id=15]
 animations = [ {
-"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ) ],
+"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
 "name": "default",
 "speed": 9.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=32]
+[sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 20, 20 )
 
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=17]
 resource_name = "collect"
 length = 2.0
 tracks/0/type = "value"
@@ -140,15 +140,15 @@ tracks/2/keys = {
 script = ExtResource( 3 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-material = SubResource( 17 )
+material = SubResource( 1 )
 amount = 14
-process_material = SubResource( 18 )
+process_material = SubResource( 2 )
 texture = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 22 )
-frames = SubResource( 31 )
-frame = 1
+material = SubResource( 6 )
+frames = SubResource( 15 )
+frame = 4
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -157,7 +157,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 32 )
+shape = SubResource( 16 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
@@ -165,6 +165,7 @@ volume_db = -7.0
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 rect = Rect2( -24, -24, 48, 48 )
+pause_particles = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/collect = SubResource( 33 )
+anims/collect = SubResource( 17 )

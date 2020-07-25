@@ -14,7 +14,7 @@ func _ready():
 	override_rotation = true
 
 func _start_check(_delta):
-	return character.inputs[4][1] and (character.is_grounded() and character.rainbow_stored)
+	return false
 
 func _start(_delta):
 	character.sprite.rotation_degrees = 0

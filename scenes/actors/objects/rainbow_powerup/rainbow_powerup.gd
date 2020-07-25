@@ -29,13 +29,9 @@ func collect(body):
 		body.heal(5 * 8)
 		var powerup_node = body.get_powerup_node("RainbowPowerup")
 		powerup_node.time_left = duration
-		if body.powerup != powerup_node:
-			body.rainbow_stored = true
-			body.rainbow_particles.emitting = true
-			sound.play()
-		else:
-			body.sound_player.play_powerup_sound()
-			body.sound_player.play_powerup_jingle()
+		body.set_powerup(powerup_node)
+		body.sound_player.play_powerup_sound()
+		body.sound_player.play_powerup_jingle()
 		animation_player.play("collect", -1, 2)
 		respawn_timer = 10.0
 		collected = true

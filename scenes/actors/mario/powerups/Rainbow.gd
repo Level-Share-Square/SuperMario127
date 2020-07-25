@@ -4,6 +4,7 @@ class_name RainbowPowerup
 var hue = 0
 var rainbow_trails = []
 var trail_timer = 0.075
+var has_landed = false
 
 onready var trail_script = load("res://scenes/actors/mario/powerups/rainbow_trail.gd")
 
@@ -12,7 +13,7 @@ func _ready():
 	music_id = 26
 
 func _start(_delta):
-	pass
+	has_landed = false
 
 func _stop(_delta):
 	pass
@@ -26,13 +27,17 @@ func create_trail():
 	add_child(trail)
 
 func _update(delta):
+	if !has_landed: #and character.is_grounded():
+		has_landed = true
+	if has_landed and character.state != character.get_state_node("RainbowStarState"):
+		character.velocity.x *= 1.5
+		character.set_state_by_name("RainbowStarState", delta)
+	
 	trail_timer -= delta
 	if trail_timer <= 0:
 		trail_timer = 0.075
 		create_trail()
 		
-	if character.state != character.get_state_node("RainbowStarState"):
-		character.set_state_by_name("RainbowStarState", delta)
 	if character.sprite.material != null:
 		hue += 0.015
 		var gradient_texture = GradientTexture.new()

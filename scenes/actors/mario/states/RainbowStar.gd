@@ -2,7 +2,7 @@ extends State
 
 class_name RainbowStarState
 
-export var run_speed = 425
+export var run_speed = 465
 export var jump_power = 495
 export var wall_jump_power = 350
 export var fall_multiplier = 0.55
@@ -28,7 +28,9 @@ func _start_check(_delta):
 	return false
 
 func _start(_delta):
-	current_speed = run_speed
+	if abs(character.velocity.x) < 15:
+		character.velocity.x = character.facing_direction * 15
+	current_speed = abs(character.velocity.x)
 
 func _update(delta):
 	if character.is_grounded():
@@ -46,9 +48,6 @@ func _update(delta):
 			character.sprite.animation = "tripleJumpLeft"
 		character.sprite.rotation_degrees += 12 * character.facing_direction
 	character.sprite.speed_scale = (abs(character.velocity.x) / run_speed) * 3.5
-	
-	if character.velocity.x:
-		pass
 	
 	if character.velocity.x == 0:
 		character.facing_direction = -character.facing_direction
@@ -70,7 +69,7 @@ func _update(delta):
 		had_jumped = true
 		
 	if character.is_grounded():
-		current_speed = lerp(current_speed, run_speed, delta)
+		current_speed = lerp(current_speed, run_speed, delta * 4.5)
 		if footstep_interval <= 0 and character.sprite.speed_scale > 0:
 			character.sound_player.play_footsteps()
 			footstep_interval = clamp(0.8 - (character.sprite.speed_scale / 2.5), 0.1, 1)
