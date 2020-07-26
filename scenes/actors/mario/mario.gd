@@ -137,6 +137,9 @@ export var inputs = [
 	[false, false, "crouch"] # Index 9
 ]
 
+enum input_names {left, right, jump, dive, spin, gp, gpcancel, fludd, nozzles, crouch}
+enum input_params {pressed, just_pressed, input_name}
+
 export var controlled_locally = true
 
 export var rotating_jump = false
@@ -217,6 +220,9 @@ func steely_hit(steely_pos : Vector2):
 
 func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String = "hit", frames : int = 180):
 	if !invulnerable:
+		if powerup != null and amount > 0:
+			if powerup.get_name() == "VanishPowerup":
+				return
 		var direction = 1
 		if (global_position - hit_pos).normalized().x < 0:
 			direction = -1

@@ -61,8 +61,6 @@ func detect_stomp(body):
 
 func _ready():
 	CurrentLevelData.enemies_instanced += 1
-	if invincible:
-		chase = true
 	sprite.rotation = PI if chase and facing_direction == -1 else 0.0
 	sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
 	colored_sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
@@ -75,8 +73,10 @@ func _process(_delta):
 	colored_sprite.frame = sprite.frame
 
 func _physics_process(delta):
+	sprite.rotation += rotation
+	rotation = 0
+	
 	if invincible:
-		chase = true
 		color.h = float(wrapi(OS.get_ticks_msec(), 0, 500)) / 500
 	sprite.playing = chase
 	
@@ -130,7 +130,7 @@ func _physics_process(delta):
 					queue_free()
 		elif !chase:
 			sprite.frame = 0
-			position.x += speed * facing_direction
+			position += Vector2(cos(sprite.rotation), sin(sprite.rotation)) * speed * facing_direction
 		
 		if !visibility_notifer.is_on_screen():
 			CurrentLevelData.enemies_instanced -= 1

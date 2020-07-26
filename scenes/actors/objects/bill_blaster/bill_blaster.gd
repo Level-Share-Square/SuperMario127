@@ -35,7 +35,7 @@ func _process(delta):
 func _physics_process(delta):
 	if invincible:
 		color.h = float(wrapi(OS.get_ticks_msec(), 0, 500)) / 500
-	rotation_degrees = 0
+	#rotation_degrees = 0
 	color_sprite.modulate = color
 		
 	if mode != 1:
@@ -71,12 +71,15 @@ func _physics_process(delta):
 			if force_direction != 0:
 				facing_direction = force_direction
 			
+			var prev_scale_x = scale.x
+			scale.x = scale.y
+			
 			var object = LevelObject.new()
 			object.type_id = 25
 			object.properties = []
-			object.properties.append(position + Vector2(16 * facing_direction, 0))
+			object.properties.append(transform.xform(Vector2(16 * facing_direction, 0)))
 			object.properties.append(scale)
-			object.properties.append(0)
+			object.properties.append(rotation_degrees)
 			object.properties.append(true)
 			object.properties.append(true)
 			object.properties.append(chase)
@@ -85,5 +88,7 @@ func _physics_process(delta):
 			object.properties.append(facing_direction)
 			object.properties.append(invincible)
 			get_parent().create_object(object, false)
+			
+			scale.x = prev_scale_x
 		elif spawn_timer <= 0:
 			spawn_timer = wait_time
