@@ -23,15 +23,12 @@ func _set_property_values():
 	set_property("physics", physics, true)
 	set_property("velocity", velocity, true)
 
-func collect(body):
-	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
+func collect(body, is_shell = false):
+	if enabled and !collected and (body and body.name.begins_with("Character") and !body.dead) or is_shell:
 		CurrentLevelData.level_data.vars.coins_collected += coins
-		body.heal(1 if coins == 1 else 15)
-		var player_id = 1
-		if body.name == "Character":
-			player_id = 0
-		if PlayerSettings.other_player_id == -1 or PlayerSettings.my_player_index == player_id:
-			get_tree().current_scene.get_node("SharedSounds").PlaySound("CoinSound")
+		if body:
+			body.heal(1 if coins == 1 else 15)
+		get_tree().current_scene.get_node("SharedSounds").PlaySound("CoinSound")
 		collected = true
 		physics = false
 		animated_sprite.animation = "collect"
@@ -49,8 +46,6 @@ func _ready():
 var previous_frame = 0
 # Additional cache variables
 var prev_activate_shape = false
-var char1 = null
-var char2 = null
 func _process(delta):
 	if !collected:
 		var new_frame = get_tree().current_scene.coin_frame
@@ -63,20 +58,14 @@ func _process(delta):
 		var root = get_tree().current_scene
 		var activate_shape = false
 		if !collected:
-			if char1 == null:
-				if root.has_node(root.character):
-					char1 = root.get_node(root.character)
-			if char2 == null:
-				if root.has_node(root.character2):
-					char2 = root.get_node(root.character2)
-			
-			if char1 != null:
-				var new_pos = char1.position
-				if (new_pos - position).length_squared() <= 200 + 472.25:
-					activate_shape = true
-			if char2 != null and !activate_shape:
-				var new_pos = char2.position
-				if (new_pos - position).length_squared() <= 200 + 472.25:
+			var can_collect_coins = root.can_collect_coins
+			for entity in can_collect_coins:
+				if entity == null:
+					can_collect_coins.erase(entity)
+					continue
+				
+				var entity_global_position = entity.global_transform.get_origin()
+				if (entity_global_position - position).length_squared() <= 200 + 472.25:
 					activate_shape = true
 		
 		if activate_shape != prev_activate_shape:
@@ -103,7 +92,7 @@ func vertical_cast():
 
 func _physics_process(delta):
 	# Everything else here is irrelevant for edit mode
-	if mode == 1:
+	if mode == 1 or !visibility_enabler.is_on_screen():
 		return
 	
 	if physics:
@@ -127,3 +116,9 @@ func _physics_process(delta):
 				var x_cast = 5 if velocity.x > 0 else -5
 				velocity.x = 0
 				position.x = result.position.x - x_cast
+
+func shell_hit():
+	collect(null, true)
+
+func is_coin():
+	return true

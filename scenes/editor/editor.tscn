@@ -1,4 +1,4 @@
-[gd_scene load_steps=203 format=2]
+[gd_scene load_steps=204 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -149,6 +149,7 @@
 [ext_resource path="res://scenes/editor/ResetLevelButton.gd" type="Script" id=147]
 [ext_resource path="res://scenes/actors/objects/shine_shard/icon.png" type="Texture" id=148]
 [ext_resource path="res://scenes/editor/group.gd" type="Script" id=149]
+[ext_resource path="res://scenes/actors/objects/shine_shard/shard.png" type="Texture" id=150]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-dd51669c0e57c36afe4a2289110ba43a.stex"
@@ -2131,7 +2132,7 @@ change_to = "Shine"
 items_in_sequence = 2
 index_in_sequence = 1
 icon = ExtResource( 148 )
-preview = ExtResource( 148 )
+preview = ExtResource( 150 )
 
 [node name="SpecialGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )

@@ -34,6 +34,7 @@ var shell_stomp_area
 var shell_destroy_area
 var shell_sound
 var shell_grounded_check
+var shell_in_can_collect_coins := false
 
 var color := Color(0, 1, 0)
 var rainbow := false
@@ -111,6 +112,14 @@ func _process(_delta):
 		shell_sprite_color.frame = shell_sprite.frame
 		shell_sprite_color.modulate = color
 
+		var on_screen = visibility_notifier.is_on_screen()
+		if on_screen and !shell_in_can_collect_coins:
+			shell_in_can_collect_coins = true
+			get_tree().current_scene.can_collect_coins.append(shell)
+		elif !on_screen and shell_in_can_collect_coins:
+			shell_in_can_collect_coins = false
+			get_tree().current_scene.can_collect_coins.erase(shell)
+
 func _physics_process(delta):
 	time_alive += delta
 	if delete_timer > 0 and dead:
@@ -179,7 +188,9 @@ func _physics_process(delta):
 				for hit_area in shell_destroy_area.get_overlapping_areas():
 					if hit_area.get_collision_layer_bit(2) == true and hit_area.get_parent().get_parent().has_method("shell_hit") and hit_area.get_parent().get_parent() != self and abs(velocity.x) > 15:
 						hit_area.get_parent().get_parent().shell_hit(shell.global_position)
-			
+					elif hit_area.get_parent().has_method("is_coin"):
+						hit_area.get_parent().shell_hit()
+				
 				for hit_body in shell_stomp_area.get_overlapping_bodies():
 					if hit_body.name.begins_with("Character"):
 						if hit_body.velocity.y > 0:

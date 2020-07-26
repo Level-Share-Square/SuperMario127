@@ -27,14 +27,14 @@ collision_mask = 21
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "spinning"
-frame = 6
+frame = 3
 playing = true
 
 [node name="Color" type="AnimatedSprite" parent="Sprite"]
 modulate = Color( 0, 1, 0, 1 )
 frames = ExtResource( 3 )
 animation = "spinning"
-frame = 6
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -72,7 +72,7 @@ shape = SubResource( 4 )
 [node name="DestroyArea" type="Area2D" parent="."]
 visible = false
 collision_layer = 2
-collision_mask = 2
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea"]
 position = Vector2( 0, 3 )

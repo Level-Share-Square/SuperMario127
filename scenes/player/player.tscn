@@ -44,12 +44,12 @@
 [ext_resource path="res://scenes/player/controls_options.gd" type="Script" id=42]
 [ext_resource path="res://scenes/player/presetloader_button.gd" type="Script" id=43]
 [ext_resource path="res://scenes/player/shine_shard_counter.gd" type="Script" id=44]
-[ext_resource path="res://scenes/actors/objects/shine_shard/icon.png" type="Texture" id=45]
+[ext_resource path="res://scenes/actors/objects/shine_shard/shard.png" type="Texture" id=45]
 
-[sub_resource type="DynamicFont" id=21]
+[sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 7 )
 
-[sub_resource type="StyleBoxFlat" id=22]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 0.12549 )
 border_width_left = 5
 border_width_right = 5
@@ -59,7 +59,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="DynamicFont" id=23]
+[sub_resource type="DynamicFont" id=3]
 size = 24
 outline_size = 3
 outline_color = Color( 0, 0, 0, 0.25098 )
@@ -67,7 +67,7 @@ extra_spacing_char = 1
 extra_spacing_space = -8
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=24]
+[sub_resource type="DynamicFont" id=4]
 size = 24
 outline_size = 3
 outline_color = Color( 1, 0.627451, 0, 1 )
@@ -75,56 +75,56 @@ extra_spacing_char = 1
 extra_spacing_space = -8
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=25]
+[sub_resource type="DynamicFont" id=5]
 size = 24
 outline_size = 3
 extra_spacing_char = 1
 extra_spacing_space = -8
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=26]
+[sub_resource type="DynamicFont" id=6]
 size = 100
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
-[sub_resource type="StyleBoxFlat" id=27]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.0705882, 0, 0.231373, 1 )
 corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[sub_resource type="StyleBoxFlat" id=28]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0, 0.0470588, 0.317647, 1 )
 corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[sub_resource type="DynamicFont" id=29]
+[sub_resource type="DynamicFont" id=9]
 size = 76
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=30]
+[sub_resource type="DynamicFont" id=10]
 size = 32
 outline_size = 4
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=31]
+[sub_resource type="DynamicFont" id=11]
 size = 32
 outline_size = 4
 outline_color = Color( 0.0392157, 0, 0.188235, 1 )
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=32]
+[sub_resource type="DynamicFont" id=12]
 size = 20
 outline_size = 2
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 use_mipmaps = true
 font_data = ExtResource( 7 )
 
-[sub_resource type="StyleBoxFlat" id=33]
+[sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 5
 border_width_right = 5
@@ -134,49 +134,49 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="DynamicFont" id=34]
+[sub_resource type="DynamicFont" id=14]
 size = 20
 font_data = ExtResource( 7 )
 
-[sub_resource type="StyleBoxFlat" id=35]
+[sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0.15, 0.15, 0.15, 1 )
 corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[sub_resource type="DynamicFont" id=36]
+[sub_resource type="DynamicFont" id=16]
 size = 27
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=37]
+[sub_resource type="DynamicFont" id=17]
 size = 24
 outline_size = 2
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=38]
+[sub_resource type="DynamicFont" id=18]
 size = 20
 outline_size = 2
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=39]
+[sub_resource type="DynamicFont" id=19]
 size = 18
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=42]
+[sub_resource type="DynamicFont" id=20]
 size = 14
 font_data = ExtResource( 7 )
 
-[sub_resource type="Theme" id=43]
+[sub_resource type="Theme" id=21]
 PopupMenu/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
 PopupMenu/colors/font_color_accel = Color( 0.7, 0.7, 0.7, 0.8 )
 PopupMenu/colors/font_color_disabled = Color( 0.4, 0.4, 0.4, 0.8 )
 PopupMenu/colors/font_color_hover = Color( 0.88, 0.88, 0.88, 1 )
 PopupMenu/constants/hseparation = 4
 PopupMenu/constants/vseparation = 4
-PopupMenu/fonts/font = SubResource( 42 )
+PopupMenu/fonts/font = SubResource( 20 )
 PopupMenu/icons/checked = null
 PopupMenu/icons/radio_checked = null
 PopupMenu/icons/radio_unchecked = null
@@ -189,7 +189,7 @@ PopupMenu/styles/panel = null
 PopupMenu/styles/panel_disabled = null
 PopupMenu/styles/separator = null
 
-[sub_resource type="StyleBoxFlat" id=20]
+[sub_resource type="StyleBoxFlat" id=22]
 content_margin_left = 11.0
 content_margin_right = 11.0
 bg_color = Color( 0, 0.0470588, 0.317647, 1 )
@@ -198,10 +198,10 @@ corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[sub_resource type="DynamicFont" id=40]
+[sub_resource type="DynamicFont" id=23]
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=41]
+[sub_resource type="DynamicFont" id=24]
 outline_size = 2
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 7 )
@@ -254,11 +254,11 @@ margin_right = 283.0
 margin_bottom = 141.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/mono_font = SubResource( 21 )
-custom_fonts/bold_italics_font = SubResource( 21 )
-custom_fonts/italics_font = SubResource( 21 )
-custom_fonts/bold_font = SubResource( 21 )
-custom_fonts/normal_font = SubResource( 21 )
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 scroll_active = false
 scroll_following = true
@@ -268,8 +268,8 @@ custom_effects = [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ]
 margin_top = 145.0
 margin_right = 283.0
 margin_bottom = 164.0
-custom_styles/normal = SubResource( 22 )
-custom_fonts/font = SubResource( 21 )
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.0901961, 0.196078, 0.458824, 1 )
 context_menu_enabled = false
 placeholder_text = "Enter text here."
@@ -296,7 +296,7 @@ margin_top = 4.0
 margin_right = 168.0
 margin_bottom = 79.0
 rect_rotation = 0.0366689
-custom_fonts/font = SubResource( 23 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 0 )
 text = "00
 "
@@ -308,7 +308,7 @@ __meta__ = {
 margin_left = 20.0
 margin_right = 165.0
 margin_bottom = 48.0
-custom_fonts/font = SubResource( 24 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 1, 0.898039, 0, 1 )
 text = "00"
 __meta__ = {
@@ -341,7 +341,7 @@ margin_top = 4.0
 margin_right = 168.0
 margin_bottom = 79.0
 rect_rotation = 0.0366689
-custom_fonts/font = SubResource( 23 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 0 )
 text = "0/8"
 __meta__ = {
@@ -352,7 +352,7 @@ __meta__ = {
 margin_left = 20.0
 margin_right = 165.0
 margin_bottom = 48.0
-custom_fonts/font = SubResource( 25 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 1, 0.27451, 0.133333, 1 )
 custom_colors/font_outline_modulate = Color( 0.647059, 0, 0.0745098, 1 )
 text = "0/8"
@@ -368,7 +368,6 @@ texture = ExtResource( 35 )
 [node name="Tween" type="Tween" parent="UI/RedCoinCounter"]
 
 [node name="ShineShardCounter" type="Control" parent="UI"]
-visible = false
 margin_left = 25.0
 margin_top = 95.0
 margin_right = 65.0
@@ -385,7 +384,7 @@ margin_top = 4.0
 margin_right = 168.0
 margin_bottom = 79.0
 rect_rotation = 0.0366689
-custom_fonts/font = SubResource( 23 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 0 )
 text = "0/8"
 __meta__ = {
@@ -396,17 +395,17 @@ __meta__ = {
 margin_left = 20.0
 margin_right = 165.0
 margin_bottom = 48.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0.596078, 0.596078, 0.596078, 1 )
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 1, 0.717647, 0.176471, 1 )
+custom_colors/font_outline_modulate = Color( 0.866667, 0.427451, 0, 1 )
 text = "0/8"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ShineShard" type="Sprite" parent="UI/ShineShardCounter"]
-position = Vector2( -1.6805, 11.4468 )
-scale = Vector2( 1.25, 1.25 )
+position = Vector2( -1.05397, 14.8112 )
+scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 45 )
 
 [node name="Tween" type="Tween" parent="UI/ShineShardCounter"]
@@ -451,7 +450,7 @@ margin_top = 48.048
 margin_right = 1317.96
 margin_bottom = 148.048
 rect_pivot_offset = Vector2( 72, 0 )
-custom_fonts/font = SubResource( 26 )
+custom_fonts/font = SubResource( 6 )
 text = "PAUSED"
 align = 1
 valign = 1
@@ -489,10 +488,10 @@ margin_top = 129.0
 margin_right = 2954.0
 margin_bottom = 311.0
 rect_rotation = 180.0
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 29 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 action_mode = 0
 text = "Resume"
 script = ExtResource( 10 )
@@ -514,10 +513,10 @@ margin_top = 129.0
 margin_right = 2215.0
 margin_bottom = 311.0
 rect_rotation = 180.0
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 29 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 action_mode = 0
 text = "Retry"
 script = ExtResource( 10 )
@@ -539,10 +538,10 @@ margin_top = 129.0
 margin_right = 1477.0
 margin_bottom = 311.0
 rect_rotation = 180.0
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 29 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 action_mode = 0
 text = "Options"
 script = ExtResource( 22 )
@@ -579,7 +578,7 @@ margin_top = 143.986
 margin_right = 768.0
 margin_bottom = 182.986
 rect_pivot_offset = Vector2( 72, 0 )
-custom_fonts/font = SubResource( 30 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "No Shine Selected"
 align = 1
@@ -594,7 +593,7 @@ margin_top = -17.0
 margin_right = 768.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( 72, 0 )
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 11 )
 custom_colors/font_color = Color( 0.0392157, 0, 0.188235, 1 )
 text = "No Shine Selected"
 align = 1
@@ -608,7 +607,7 @@ margin_left = 0.375946
 margin_top = 194.168
 margin_right = 768.376
 margin_bottom = 275.168
-custom_fonts/normal_font = SubResource( 32 )
+custom_fonts/normal_font = SubResource( 12 )
 bbcode_enabled = true
 bbcode_text = "[center]You are in a custom level.[/center]"
 text = "You are in a custom level."
@@ -627,8 +626,8 @@ margin_left = 79.8377
 margin_top = 93.2382
 margin_right = 292.838
 margin_bottom = 135.238
-custom_styles/normal = SubResource( 33 )
-custom_fonts/font = SubResource( 34 )
+custom_styles/normal = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
 context_menu_enabled = false
 placeholder_text = "IP Address"
@@ -644,11 +643,11 @@ margin_left = 79.8377
 margin_top = 148.406
 margin_right = 292.838
 margin_bottom = 192.406
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 36 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 16 )
 action_mode = 0
 text = "Connect"
 script = ExtResource( 14 )
@@ -670,11 +669,11 @@ margin_left = 79.8377
 margin_top = 258.731
 margin_right = 292.838
 margin_bottom = 302.731
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 36 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 16 )
 action_mode = 0
 text = "Disconnect"
 script = ExtResource( 21 )
@@ -696,11 +695,11 @@ margin_left = 419.0
 margin_top = 236.405
 margin_right = 748.0
 margin_bottom = 280.405
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 36 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 16 )
 action_mode = 0
 text = "Confirm"
 script = ExtResource( 29 )
@@ -725,11 +724,11 @@ margin_left = 27.0
 margin_top = 236.405
 margin_right = 356.0
 margin_bottom = 280.405
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 36 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 16 )
 action_mode = 0
 text = "Controls"
 script = ExtResource( 23 )
@@ -751,11 +750,11 @@ margin_left = 79.8377
 margin_top = 204.342
 margin_right = 292.838
 margin_bottom = 248.342
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 36 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 16 )
 action_mode = 0
 text = "Host"
 script = ExtResource( 15 )
@@ -812,7 +811,7 @@ margin_left = 40.0
 margin_top = 157.796
 margin_right = 202.0
 margin_bottom = 189.796
-custom_fonts/font = SubResource( 37 )
+custom_fonts/font = SubResource( 17 )
 text = "Window Scale:"
 align = 1
 valign = 1
@@ -825,7 +824,7 @@ margin_left = 234.0
 margin_top = 157.796
 margin_right = 272.0
 margin_bottom = 189.796
-custom_fonts/font = SubResource( 37 )
+custom_fonts/font = SubResource( 17 )
 align = 1
 valign = 1
 __meta__ = {
@@ -873,7 +872,7 @@ margin_left = 40.0
 margin_top = 157.796
 margin_right = 202.0
 margin_bottom = 189.796
-custom_fonts/font = SubResource( 37 )
+custom_fonts/font = SubResource( 17 )
 text = "FPS Cap:"
 align = 1
 valign = 1
@@ -886,7 +885,7 @@ margin_left = 234.0
 margin_top = 157.796
 margin_right = 272.0
 margin_bottom = 189.796
-custom_fonts/font = SubResource( 37 )
+custom_fonts/font = SubResource( 17 )
 align = 1
 valign = 1
 __meta__ = {
@@ -934,7 +933,7 @@ margin_left = 547.359
 margin_top = 80.391
 margin_right = 653.359
 margin_bottom = 112.391
-custom_fonts/font = SubResource( 37 )
+custom_fonts/font = SubResource( 17 )
 text = "Players:"
 align = 1
 valign = 1
@@ -947,7 +946,7 @@ margin_left = 685.0
 margin_top = 80.405
 margin_right = 723.0
 margin_bottom = 112.405
-custom_fonts/font = SubResource( 37 )
+custom_fonts/font = SubResource( 17 )
 text = "1"
 align = 1
 valign = 1
@@ -996,7 +995,7 @@ margin_left = 422.359
 margin_top = 79.405
 margin_right = 646.359
 margin_bottom = 111.405
-custom_fonts/font = SubResource( 37 )
+custom_fonts/font = SubResource( 17 )
 text = "Player 1 Character:"
 align = 1
 valign = 1
@@ -1009,7 +1008,7 @@ margin_left = 685.0
 margin_top = 80.405
 margin_right = 723.0
 margin_bottom = 111.405
-custom_fonts/font = SubResource( 37 )
+custom_fonts/font = SubResource( 17 )
 text = "M"
 align = 1
 valign = 1
@@ -1058,7 +1057,7 @@ margin_left = 419.0
 margin_top = 78.589
 margin_right = 646.0
 margin_bottom = 110.589
-custom_fonts/font = SubResource( 37 )
+custom_fonts/font = SubResource( 17 )
 text = "Player 2 Character:"
 align = 1
 valign = 1
@@ -1071,7 +1070,7 @@ margin_left = 685.0
 margin_top = 80.405
 margin_right = 723.0
 margin_bottom = 111.405
-custom_fonts/font = SubResource( 37 )
+custom_fonts/font = SubResource( 17 )
 text = "L"
 align = 1
 valign = 1
@@ -1102,7 +1101,7 @@ margin_left = 10.0
 margin_top = 154.796
 margin_right = 172.0
 margin_bottom = 186.796
-custom_fonts/font = SubResource( 38 )
+custom_fonts/font = SubResource( 18 )
 text = "Move Left:"
 align = 1
 valign = 1
@@ -1115,11 +1114,11 @@ margin_left = 179.0
 margin_top = 149.0
 margin_right = 259.0
 margin_bottom = 194.0
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 39 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
 action_mode = 0
 script = ExtResource( 41 )
 __meta__ = {
@@ -1148,7 +1147,7 @@ margin_left = 10.0
 margin_top = 202.796
 margin_right = 172.0
 margin_bottom = 234.796
-custom_fonts/font = SubResource( 38 )
+custom_fonts/font = SubResource( 18 )
 text = "Move Right:"
 align = 1
 valign = 1
@@ -1161,11 +1160,11 @@ margin_left = 179.0
 margin_top = 197.0
 margin_right = 259.0
 margin_bottom = 242.0
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 39 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
 action_mode = 0
 script = ExtResource( 41 )
 __meta__ = {
@@ -1194,7 +1193,7 @@ margin_left = 10.0
 margin_top = 250.796
 margin_right = 172.0
 margin_bottom = 282.796
-custom_fonts/font = SubResource( 38 )
+custom_fonts/font = SubResource( 18 )
 text = "Jump:"
 align = 1
 valign = 1
@@ -1207,11 +1206,11 @@ margin_left = 179.0
 margin_top = 245.0
 margin_right = 259.0
 margin_bottom = 290.0
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 39 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
 action_mode = 0
 script = ExtResource( 41 )
 __meta__ = {
@@ -1240,7 +1239,7 @@ margin_left = 10.0
 margin_top = 298.796
 margin_right = 172.0
 margin_bottom = 330.796
-custom_fonts/font = SubResource( 38 )
+custom_fonts/font = SubResource( 18 )
 text = "Dive:"
 align = 1
 valign = 1
@@ -1253,11 +1252,11 @@ margin_left = 179.0
 margin_top = 293.0
 margin_right = 259.0
 margin_bottom = 338.0
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 39 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
 action_mode = 0
 script = ExtResource( 41 )
 __meta__ = {
@@ -1287,7 +1286,7 @@ margin_left = 34.0
 margin_top = 154.796
 margin_right = 196.0
 margin_bottom = 186.796
-custom_fonts/font = SubResource( 38 )
+custom_fonts/font = SubResource( 18 )
 text = "Spin:"
 align = 1
 valign = 1
@@ -1300,11 +1299,11 @@ margin_left = 203.0
 margin_top = 149.0
 margin_right = 283.0
 margin_bottom = 194.0
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 39 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
 action_mode = 0
 script = ExtResource( 41 )
 __meta__ = {
@@ -1334,7 +1333,7 @@ margin_left = 34.0
 margin_top = 202.796
 margin_right = 196.0
 margin_bottom = 234.796
-custom_fonts/font = SubResource( 38 )
+custom_fonts/font = SubResource( 18 )
 text = "Ground Pound:"
 align = 1
 valign = 1
@@ -1347,11 +1346,11 @@ margin_left = 203.0
 margin_top = 197.0
 margin_right = 283.0
 margin_bottom = 242.0
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 39 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
 action_mode = 0
 script = ExtResource( 41 )
 __meta__ = {
@@ -1381,7 +1380,7 @@ margin_left = 10.0
 margin_top = 250.796
 margin_right = 217.0
 margin_bottom = 282.796
-custom_fonts/font = SubResource( 38 )
+custom_fonts/font = SubResource( 18 )
 text = "GP Cancel:"
 align = 1
 valign = 1
@@ -1394,11 +1393,11 @@ margin_left = 203.0
 margin_top = 245.0
 margin_right = 283.0
 margin_bottom = 290.0
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 39 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
 action_mode = 0
 script = ExtResource( 41 )
 __meta__ = {
@@ -1428,7 +1427,7 @@ margin_left = 34.0
 margin_top = 298.796
 margin_right = 196.0
 margin_bottom = 330.796
-custom_fonts/font = SubResource( 38 )
+custom_fonts/font = SubResource( 18 )
 text = "Use Fludd:"
 align = 1
 valign = 1
@@ -1441,11 +1440,11 @@ margin_left = 203.0
 margin_top = 293.0
 margin_right = 283.0
 margin_bottom = 338.0
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 39 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
 action_mode = 0
 script = ExtResource( 41 )
 __meta__ = {
@@ -1475,7 +1474,7 @@ margin_left = 34.0
 margin_top = 154.796
 margin_right = 196.0
 margin_bottom = 186.796
-custom_fonts/font = SubResource( 38 )
+custom_fonts/font = SubResource( 18 )
 text = "Switch Nozzles"
 align = 1
 valign = 1
@@ -1488,11 +1487,11 @@ margin_left = 203.0
 margin_top = 149.0
 margin_right = 283.0
 margin_bottom = 194.0
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 39 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
 action_mode = 0
 script = ExtResource( 41 )
 __meta__ = {
@@ -1522,7 +1521,7 @@ margin_left = 34.0
 margin_top = 202.796
 margin_right = 196.0
 margin_bottom = 234.796
-custom_fonts/font = SubResource( 38 )
+custom_fonts/font = SubResource( 18 )
 text = "Crouch:"
 align = 1
 valign = 1
@@ -1535,11 +1534,11 @@ margin_left = 203.0
 margin_top = 197.0
 margin_right = 283.0
 margin_bottom = 242.0
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 39 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
 action_mode = 0
 script = ExtResource( 41 )
 __meta__ = {
@@ -1569,7 +1568,7 @@ margin_left = -446.0
 margin_top = 99.0
 margin_right = -327.0
 margin_bottom = 131.0
-custom_fonts/font = SubResource( 38 )
+custom_fonts/font = SubResource( 18 )
 text = "Preset:"
 align = 1
 valign = 1
@@ -1582,13 +1581,13 @@ margin_left = -298.0
 margin_top = 98.0
 margin_right = -138.0
 margin_bottom = 132.0
-theme = SubResource( 43 )
-custom_styles/hover = SubResource( 20 )
-custom_styles/pressed = SubResource( 20 )
-custom_styles/focus = SubResource( 20 )
-custom_styles/disabled = SubResource( 20 )
-custom_styles/normal = SubResource( 20 )
-custom_fonts/font = SubResource( 40 )
+theme = SubResource( 21 )
+custom_styles/hover = SubResource( 22 )
+custom_styles/pressed = SubResource( 22 )
+custom_styles/focus = SubResource( 22 )
+custom_styles/disabled = SubResource( 22 )
+custom_styles/normal = SubResource( 22 )
+custom_fonts/font = SubResource( 23 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1598,11 +1597,11 @@ margin_left = -121.0
 margin_top = 92.0
 margin_right = -41.0
 margin_bottom = 137.0
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 35 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 39 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
 action_mode = 0
 text = "Load"
 script = ExtResource( 43 )
@@ -1623,7 +1622,7 @@ margin_left = 518.188
 margin_top = 283.163
 margin_right = 766.188
 margin_bottom = 324.163
-custom_fonts/font = SubResource( 41 )
+custom_fonts/font = SubResource( 24 )
 text = "Left Click: Override binding
 Right Click: Open binding options"
 __meta__ = {
