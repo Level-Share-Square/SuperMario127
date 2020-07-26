@@ -144,7 +144,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/GroundPound.gd"
 }, {
-"base": "Resource",
+"base": "Node",
 "class": "Group",
 "language": "GDScript",
 "path": "res://scenes/editor/group.gd"

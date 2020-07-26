@@ -368,6 +368,7 @@ texture = ExtResource( 35 )
 [node name="Tween" type="Tween" parent="UI/RedCoinCounter"]
 
 [node name="ShineShardCounter" type="Control" parent="UI"]
+visible = false
 margin_left = 25.0
 margin_top = 95.0
 margin_right = 65.0

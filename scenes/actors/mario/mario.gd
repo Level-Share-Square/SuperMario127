@@ -137,6 +137,9 @@ export var inputs = [
 	[false, false, "crouch"] # Index 9
 ]
 
+enum input_names {left, right, jump, dive, spin, gp, gpcancel, fludd, nozzles, crouch}
+enum input_params {pressed, just_pressed, input_name}
+
 export var controlled_locally = true
 
 export var rotating_jump = false
