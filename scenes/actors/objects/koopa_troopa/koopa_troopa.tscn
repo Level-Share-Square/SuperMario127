@@ -8,11 +8,11 @@
 [sub_resource type="RayShape2D" id=1]
 length = 16.0
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 6 )
-
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 8.5, 9 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 6 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 14, 2 )
@@ -47,11 +47,6 @@ visible = false
 position = Vector2( 6.5, 0 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Koopa"]
-visible = false
-position = Vector2( 0, -6 )
-shape = SubResource( 2 )
-
 [node name="AttackArea" type="Area2D" parent="Koopa"]
 visible = false
 collision_layer = 4
@@ -60,6 +55,11 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Koopa/AttackArea"]
 position = Vector2( 0, 7 )
 shape = SubResource( 3 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Koopa/AttackArea"]
+visible = false
+position = Vector2( 0, -6 )
+shape = SubResource( 2 )
 
 [node name="StompArea" type="Area2D" parent="Koopa"]
 visible = false

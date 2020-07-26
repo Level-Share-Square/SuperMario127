@@ -9,6 +9,7 @@ var mode = 0
 
 export var coin_frame : int
 const coin_anim_fps = 12
+var can_collect_coins : Array
 
 func _process(_delta):
 	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
@@ -19,6 +20,11 @@ func _ready():
 	load_in(data, data.areas[CurrentLevelData.area])
 	music.character = get_node(character)
 	music.character2 = get_node(character2)
+
+	can_collect_coins.append(get_node(character))
+	if PlayerSettings.number_of_players == 2:
+		can_collect_coins.append(get_node(character2))
+
 	if PlayerSettings.other_player_id != -1:
 		if PlayerSettings.my_player_index == 0:
 			get_node(character).set_network_master(get_tree().get_network_unique_id())
