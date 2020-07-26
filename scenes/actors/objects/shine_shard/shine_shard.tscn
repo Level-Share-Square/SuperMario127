@@ -1,27 +1,19 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/actors/objects/shine_shard/glow_effects.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://scenes/actors/objects/shine_shard/shard.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/red_coin/sound_last.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/actors/objects/red_coin/sound.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/actors/objects/shine_shard/shine_shard.gd" type="Script" id=6]
 
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-
-void fragment()
-{
-	COLOR = texture(TEXTURE, UV);
-	float newColor = 0.21f * COLOR.r + 0.72f * COLOR.g + 0.07f * COLOR.b; 
-	COLOR.r = newColor;
-	COLOR.b = newColor;
-	COLOR.g = newColor;
-}"
-custom_defines = ""
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=3]
 
@@ -33,8 +25,7 @@ font_data = ExtResource( 1 )
 script = ExtResource( 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 2 )
-frames = ExtResource( 3 )
+frames = SubResource( 5 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
@@ -64,8 +55,8 @@ margin_top = -12.0
 margin_right = 12.0
 margin_bottom = 12.0
 custom_fonts/font = SubResource( 4 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 1, 0.717647, 0.176471, 1 )
+custom_colors/font_outline_modulate = Color( 0.866667, 0.427451, 0, 1 )
 text = "1"
 align = 1
 valign = 1
@@ -74,3 +65,4 @@ __meta__ = {
 }
 
 [node name="GlowEffects" parent="." instance=ExtResource( 2 )]
+position = Vector2( -0.5, 0 )
