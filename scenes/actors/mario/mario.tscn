@@ -385,10 +385,10 @@ fallback_water_pos_right_luigi = Vector2( -19, -2 )
 script = ExtResource( 46 )
 frames = ExtResource( 48 )
 frames_luigi = ExtResource( 47 )
-fallback_water_pos_left = Vector2( -5, -2 )
-fallback_water_pos_right = Vector2( -20, -2 )
-fallback_water_pos_left_luigi = Vector2( -5, -2 )
-fallback_water_pos_right_luigi = Vector2( -19, -2 )
+fallback_water_pos_left = Vector2( 16, 0 )
+fallback_water_pos_right = Vector2( -16, -24 )
+fallback_water_pos_left_luigi = Vector2( 15, 0 )
+fallback_water_pos_right_luigi = Vector2( -15, -24 )
 
 [node name="Powerups" type="Node" parent="."]
 
@@ -560,7 +560,6 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "death"
-frame = 2
 playing = true
 script = ExtResource( 34 )
 

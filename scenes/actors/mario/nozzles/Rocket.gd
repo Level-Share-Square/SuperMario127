@@ -25,9 +25,6 @@ func is_state(state):
 	
 func _activated_update(delta):
 	if charge < 1.5:
-		if !character.fludd_charge_sound.is_playing():
-			character.fludd_charge_sound.play()
-		charge += delta
 		return
 	
 	charge = 0
@@ -87,7 +84,10 @@ func _process(_delta):
 		else:
 			character.water_sprite.flip_h = true
 
-func _general_update(_delta):
+func _general_update(delta):
+	if character.nozzle != self:
+		return
+	
 	if activated and !last_activated and character.stamina == 0:
 		var normal = character.sprite.transform.y.normalized()
 		var power = -boost_power * 4
@@ -108,10 +108,9 @@ func _general_update(_delta):
 			character.fludd_sound.stop()
 			last_activated = false
 	
-	if !activated:
-		if last_charged:
+	if charge < 1.5:
+		if !character.fludd_charge_sound.is_playing():
+			character.fludd_charge_sound.play()
+		charge += delta
+		if charge >= 1.5:
 			character.fludd_charge_sound.stop()
-		charge -= _delta * 2
-		if charge < 0:
-			charge = 0
-	last_charged = activated

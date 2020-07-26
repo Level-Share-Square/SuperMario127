@@ -74,6 +74,8 @@ export var dive_cooldown = 0
 export var health := 8
 export var health_shards := 0
 var nozzle = null
+var using_turbo = false
+var turbo_nerf = false
 var fuel := 100.0
 var stamina := 100.0
 var nozzles_list_index := 0
@@ -201,18 +203,18 @@ puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_a
 	heavy = is_heavy
 	dead = is_dead
 	controllable = is_controllable
-	
+
 func is_character():
 	return true
-	
+
 func exploded(explosion_pos : Vector2):
 	if !invincible:
 		damage_with_knockback(explosion_pos, 2)
-		
+
 func steely_hit(steely_pos : Vector2):
 	if !invincible:
 		damage_with_knockback(steely_pos, 2)
-		
+
 func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String = "hit", frames : int = 180):
 	if !invulnerable:
 		var direction = 1
@@ -365,6 +367,9 @@ func set_nozzle(new_nozzle, change_index = true):
 	nozzle = get_nozzle_node(str(new_nozzle))
 	water_sprite.animation = "in"
 	water_sprite.frame = 6
+	water_sprite.rotation_degrees = 0
+	using_turbo = false
+	turbo_nerf = false
 	if change_index:
 		nozzles_list_index = CurrentLevelData.level_data.vars.nozzles_collected.find(str(new_nozzle))
 		
@@ -517,12 +522,15 @@ func _physics_process(delta: float):
 		disable_animation = false
 		disable_friction = false
 	# Movement
-	move_direction = 0
-	if inputs[0][0] and !inputs[1][0] and disable_movement == false:
-		move_direction = -1
-	elif inputs[1][0] and !inputs[0][0] and disable_movement == false:
-		move_direction = 1
-		
+	if using_turbo and nozzle.boosted:
+		move_direction = facing_direction # Can't turn and forced to move forward
+	else:
+		move_direction = 0
+		if inputs[0][0] and !inputs[1][0] and disable_movement == false:
+			move_direction = -1
+		elif inputs[1][0] and !inputs[0][0] and disable_movement == false:
+			move_direction = 1
+	
 	if move_direction != 0:
 		if is_grounded():
 			if ((velocity.x > 0 and move_direction == -1) or (velocity.x < 0 and move_direction == 1)):

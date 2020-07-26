@@ -6,6 +6,7 @@ onready var static_body = $StaticBody2D
 onready var collision_shape = $StaticBody2D/CollisionShape2D
 onready var stomp_area = $StompArea
 onready var spin_area = $SpinArea
+onready var turbo_spin_area = $TurboSpinArea
 onready var player_detector = $PlayerStompDetector
 onready var player_spin_detector = $PlayerSpinDetector
 onready var break_detector = $BreakDetector
@@ -64,7 +65,10 @@ func top_breakable(hit_body):
 
 func side_breakable(hit_body):
 	return hit_body.name.begins_with("Character") and ((hit_body.attacking and !hit_body.big_attack) or hit_body.invincible)
-	
+
+func turbo_breakable(hit_body):
+	return hit_body.name.begins_with("Character") and hit_body.using_turbo
+
 func _physics_process(delta):
 	if mode != 1: 
 		time_alive += delta
@@ -81,26 +85,9 @@ func _physics_process(delta):
 		for hit_body in spin_area.get_overlapping_bodies():
 			if !broken and side_breakable(hit_body):
 				break_box()
-		for hit_body in player_detector.get_overlapping_bodies():
-			if hit_body.name.begins_with("Character") and top_breakable(hit_body): 
-				static_body.set_collision_layer_bit(0, false)
-				static_body.set_collision_mask_bit(1, false)
-			elif hit_body.name == "Steely":
-				static_body.set_collision_layer_bit(0, false)
-				static_body.set_collision_mask_bit(1, false)
-			else:
-				static_body.set_collision_layer_bit(0, true)
-				static_body.set_collision_mask_bit(1, true)
-		for hit_body in player_spin_detector.get_overlapping_bodies():
-			if hit_body.name.begins_with("Character") and side_breakable(hit_body): 
-				static_body.set_collision_layer_bit(0, false)
-				static_body.set_collision_mask_bit(1, false)
-			elif hit_body.name == "Steely":
-				static_body.set_collision_layer_bit(0, false)
-				static_body.set_collision_mask_bit(1, false)
-			else:
-				static_body.set_collision_layer_bit(0, true)
-				static_body.set_collision_mask_bit(1, true)
+		for hit_body in turbo_spin_area.get_overlapping_bodies():
+			if !broken and turbo_breakable(hit_body):
+				break_box()
 		
 		if broken == true:
 			sprite.visible = false
