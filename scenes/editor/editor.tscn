@@ -1,4 +1,4 @@
-[gd_scene load_steps=204 format=2]
+[gd_scene load_steps=206 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -150,6 +150,8 @@
 [ext_resource path="res://scenes/actors/objects/shine_shard/icon.png" type="Texture" id=148]
 [ext_resource path="res://scenes/editor/group.gd" type="Script" id=149]
 [ext_resource path="res://scenes/actors/objects/shine_shard/shard.png" type="Texture" id=150]
+[ext_resource path="res://scenes/actors/objects/cannon/preview.png" type="Texture" id=151]
+[ext_resource path="res://scenes/actors/objects/cannon/icon.png" type="Texture" id=152]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-dd51669c0e57c36afe4a2289110ba43a.stex"
@@ -2327,6 +2329,14 @@ items_in_sequence = 3
 index_in_sequence = 2
 icon = ExtResource( 146 )
 preview = ExtResource( 101 )
+
+[node name="Cannon" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 46
+is_object = true
+object_center = Vector2( 16, 16 )
+icon = ExtResource( 152 )
+preview = ExtResource( 151 )
 
 [node name="BricksGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
