@@ -1,0 +1,216 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scenes/actors/objects/pipe/pipe_enter_logic/pipe_enter_logic.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/actors/objects/cannon/cannon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/cannon/SpriteBody.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/cannon/cannon.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=9]
+resource_name = "cannon_retract"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("CannonMoveable:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 30 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("CannonMoveable/SpriteBody")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_process"
+}, {
+"args": [ false ],
+"method": "set_process"
+} ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "cannon_startup"
+length = 1.55
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("CannonMoveable:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 30 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CannonMoveable/SpriteBody:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.05, 1.45, 1.55 ),
+"transitions": PoolRealArray( 1e-05, 2, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 40.0, 45.0 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("CannonMoveable/SpriteBody")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_process"
+}, {
+"args": [ false ],
+"method": "set_process"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CannonMoveable/SpriteBody:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = false
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.65, 0.75, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -22 ), Vector2( 0, -19 ), Vector2( 0, -22 ) ]
+}
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+varying float vertexY;
+uniform int hidePosition;
+
+void vertex()
+{
+	vertexY = VERTEX.y;
+}
+
+void fragment()
+{
+	COLOR = texture(TEXTURE, UV);
+	
+	if (vertexY > float(hidePosition))
+	{
+		COLOR.a = 0f;
+	}
+}"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/hidePosition = -15
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 32, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 16, 11 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 24, 4 )
+
+[node name="Cannon" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="PipeEnterLogic" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -31 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+method_call_mode = 1
+anims/cannon_retract = SubResource( 9 )
+anims/cannon_startup = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="CannonMoveable" type="Node2D" parent="."]
+position = Vector2( 0, 30 )
+
+[node name="SpriteBody" type="Sprite" parent="CannonMoveable"]
+material = SubResource( 3 )
+position = Vector2( 0, -22 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, -6.301 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 48, 64 )
+script = ExtResource( 3 )
+
+[node name="CannonExitPosition" type="Position2D" parent="CannonMoveable/SpriteBody"]
+position = Vector2( 0, -33 )
+
+[node name="SpriteFuse" type="AnimatedSprite" parent="CannonMoveable/SpriteBody"]
+visible = false
+position = Vector2( -0.583315, 23.0744 )
+frames = SubResource( 6 )
+frame = 1
+playing = true
+
+[node name="SpriteHinge" type="Sprite" parent="CannonMoveable"]
+position = Vector2( 0, -19 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 97, 40, 32, 24 )
+
+[node name="SpriteRing" type="Sprite" parent="."]
+position = Vector2( 0, -4 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 48, 56, 48, 8 )
+
+[node name="SpritePanel" type="Sprite" parent="."]
+position = Vector2( 0, 16 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 64, 16, 32, 32 )
+
+[node name="EntranceCollision" type="StaticBody2D" parent="."]
+position = Vector2( 0, -15 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EntranceCollision"]
+position = Vector2( 0, -4 )
+shape = SubResource( 7 )
+
+[node name="RingCollision" type="StaticBody2D" parent="."]
+position = Vector2( 0, -4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RingCollision"]
+shape = SubResource( 8 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_tween_all_completed"]
+
+[editable path="PipeEnterLogic"]

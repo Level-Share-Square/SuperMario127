@@ -31,13 +31,15 @@ func start_pipe_enter_animation(character):
 
 	character.invulnerable = true 
 	character.controllable = false
+	character.movable = false
+	character.sprite.animation = "pipe" + ("Right" if character.facing_direction == 1 else "Left")
 
 	var slide_length = slide_to_center_length
 
 	#calculate the amount of time it should take based on the players distance from the center
-	var distance_from_center_normalized = abs((character.position.x - global_position.x) / collision_width) 
-	if distance_from_center_normalized != 0: #prevent division by 0
-		slide_length = slide_to_center_length / distance_from_center_normalized
+	var distance_from_center_normalized = abs((character.position.x - global_position.x)) / collision_width 
+	distance_from_center_normalized = clamp(distance_from_center_normalized, 0.1, 1)
+	slide_length = slide_to_center_length * distance_from_center_normalized
 
 	tween.interpolate_property(character, "position:x", null, global_position.x, slide_length)
 	tween.interpolate_property(character, "position:y", null, global_position.y + PIPE_BOTTOM_DISTANCE, entering_pipe_length, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, slide_length)
@@ -51,8 +53,11 @@ func start_pipe_exit_animation(character):
 
 	character.invulnerable = true 
 	character.controllable = false
+	character.movable = false
 
-	tween.interpolate_property(character, "position:y", global_position.y + PIPE_BOTTOM_DISTANCE, global_position.y)
+	tween.interpolate_property(character, "position:y", global_position.y + PIPE_BOTTOM_DISTANCE, global_position.y, exiting_pipe_length)
+	#this next line is kinda janky but hopefully it should set the animation after the above property finishes animating, basically it has duration 0 and a delay the same length as the duration of the above line
+	tween.interpolate_property(character.sprite, "animation", null, "pipeExit" + ("Right" if character.facing_direction == 1 else "Left"), 0, 0, 2, exiting_pipe_length)
 
 	tween.start()
 
