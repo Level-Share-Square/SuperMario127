@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/actors/objects/big_steely/texture.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/big_steely/big_steely.gd" type="Script" id=2]
-[ext_resource path="res://scenes/actors/objects/goomba/body.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/big_steely/heavy_body.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/big_steely/break.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/actors/objects/big_steely/particles.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/mario/particles/dust.png" type="Texture" id=6]
