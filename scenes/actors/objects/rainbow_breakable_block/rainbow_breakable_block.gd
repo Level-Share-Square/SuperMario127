@@ -33,26 +33,16 @@ func _ready():
 	player_detector.connect("body_entered", self, "detect_player")
 	break_particle.hide()
 	dust_particle.hide()
+	sprite.material.set_shader_param("gradient", get_tree().current_scene.rainbow_gradient_texture)
 
 func detect_player(body):
 	if enabled and body.name.begins_with("Character") and !broken and character == null:
 		character = body
 		
 func is_rainbow(body):
-	if body.powerup != null and body.powerup.id == 1:
-		return true
-	else:
-		return false
+	return body.powerup != null and body.powerup.id == 1
 
 func _physics_process(delta):
-	hue += 0.0075
-	var gradient_texture = GradientTexture.new()
-	var gradient = Gradient.new()
-	gradient.offsets = PoolRealArray([0.15, 1])
-	gradient.colors = PoolColorArray([Color.from_hsv(hue, 1, 1), Color(1, 1, 1)])
-	gradient_texture.gradient = gradient
-	sprite.material.set_shader_param("gradient", gradient_texture)
-	
 	if mode != 1: 
 		time_alive += delta
 		

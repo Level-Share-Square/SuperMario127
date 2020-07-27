@@ -47,6 +47,17 @@ export var zoom_level = 1.0
 
 var tiles_stack = []
 
+var rainbow_gradient_texture = GradientTexture.new()
+var rainbow_gradient = Gradient.new()
+var rainbow_hue = 0
+
+func _physics_process(delta):
+	rainbow_hue += 0.0075 * delta * 120
+	rainbow_gradient.offsets = PoolRealArray([0.15, 1])
+	rainbow_gradient.colors = PoolColorArray([Color.from_hsv(rainbow_hue, 1, 1), Color(1, 1, 1)])
+	rainbow_gradient_texture.gradient = rainbow_gradient
+
+
 func get_shared_node():
 	return shared_node
 
