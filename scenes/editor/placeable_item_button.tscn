@@ -63,3 +63,5 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="."]
+[connection signal="button_down" from="." to="." method="button_down"]
+[connection signal="button_up" from="." to="." method="button_up"]

@@ -24,18 +24,17 @@ func _process(_delta):
 		sound.play()
 	last_hovered = is_hovered()
 
-func _gui_input(event):
+func button_pressed():
 	var editor = get_tree().get_current_scene()
-	if event is InputEventMouseButton:
-		if event.pressed and item != null:
-			var button_container = editor.placeable_items_button_container_node
-			var boxes = button_container.get_children()
-			var index_size = (button_container.number_of_boxes-1)
-			for index in range(button_container.number_of_boxes):
-				if index != index_size:
-					var box = boxes[index_size - index]
-					box.item = boxes[(index_size - index) - 1].item
-					box.item_changed()
-			boxes[0].item = item
-			boxes[0].item_changed()
-			editor.set_selected_box(boxes[0])
+	if item != null:
+		var button_container = editor.placeable_items_button_container_node
+		var boxes = button_container.get_children()
+		var index_size = (button_container.number_of_boxes-1)
+		for index in range(button_container.number_of_boxes):
+			if index != index_size:
+				var box = boxes[index_size - index]
+				box.item = boxes[(index_size - index) - 1].item
+				box.item_changed()
+		boxes[0].item = item
+		boxes[0].item_changed()
+		editor.set_selected_box(boxes[0])
