@@ -461,6 +461,10 @@ func heal(shards : int = 1):
 		if health == 8:
 			health_shards = 0
 
+
+func get_weight():
+	return 2 if metal_voice else 1
+
 func _physics_process(delta: float):
 	recalculate_grounded = true
 	
