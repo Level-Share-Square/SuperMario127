@@ -66,6 +66,8 @@ static func get_keybindings() -> Dictionary:
 			return ControlPresets.presets.Default.duplicate()
 		if ControlPresets.presets.has(controlPreset):
 			return ControlPresets.presets[controlPreset].duplicate()
+		else:
+			return ControlPresets.presets.Default.duplicate()
 	else:
 		return data["controls"]
 		
