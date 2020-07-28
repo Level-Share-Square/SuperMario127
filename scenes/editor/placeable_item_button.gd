@@ -69,27 +69,6 @@ func _process(_delta):
 	
 	last_hovered = is_hovered()
 	last_clicking = clicking
-	
-func _gui_input(event):
-	if event is InputEventMouseButton:
-		var editor = get_tree().get_current_scene()
-		if event.is_pressed():
-			if item != null:
-				if editor.selected_box == self:
-					item = placeable_items_node.find_node(item.change_to)
-					item_changed()
-				
-				click_sound.play()
-				tween.interpolate_property(icon, "position",
-					Vector2(0, 0), Vector2(0, -18), 0.075,
-					Tween.TRANS_CIRC, Tween.EASE_OUT)
-				tween.start()
-			editor.set_selected_box(self)
-		elif item != null:
-			tween.interpolate_property(icon, "position",
-				Vector2(0, -18), Vector2(0, 0), 0.15,
-				Tween.TRANS_BOUNCE, Tween.EASE_IN)
-			tween.start()
 			
 func update_selection():
 	var editor = get_tree().get_current_scene()
@@ -107,3 +86,26 @@ func update_selection():
 		box.rect_size = Vector2(8, 8)
 		box.color = Color(0.75, 0.75, 0.75) if item.index_in_sequence != index else Color(0, 0.75, 0.75)
 		h_box_container.add_child(box)
+
+
+func button_down():
+	var editor = get_tree().get_current_scene()
+	if item != null:
+		if editor.selected_box == self:
+			item = placeable_items_node.find_node(item.change_to)
+			item_changed()
+		
+		click_sound.play()
+		tween.interpolate_property(icon, "position",
+			Vector2(0, 0), Vector2(0, -18), 0.075,
+			Tween.TRANS_CIRC, Tween.EASE_OUT)
+		tween.start()
+	editor.set_selected_box(self)
+
+
+func button_up():
+	if item != null:
+		tween.interpolate_property(icon, "position",
+			Vector2(0, -18), Vector2(0, 0), 0.15,
+			Tween.TRANS_BOUNCE, Tween.EASE_IN)
+		tween.start()

@@ -5,6 +5,7 @@ signal pipe_animation_finished
 
 onready var area2d = $Area2D
 onready var tween = $Tween
+onready var audio_player = $AudioStreamPlayer
 
 onready var collision_width = $Area2D/CollisionShape2D.shape.extents.x
 
@@ -21,7 +22,7 @@ var stored_character
 func _physics_process(_delta):
 	if is_idle:
 		for body in area2d.get_overlapping_bodies(): #the area2d is set to only collide with characters, so we can (hopefullY) safely assume if there is a collision it's with a character
-			if body.is_grounded() and body.inputs[body.input_names.crouch][body.input_params.just_pressed]:
+			if body.is_grounded() and body.get_input(Character.input_names.crouch, true):
 				start_pipe_enter_animation(body)
 
 func start_pipe_enter_animation(character):
@@ -43,6 +44,7 @@ func start_pipe_enter_animation(character):
 
 	tween.interpolate_property(character, "position:x", null, global_position.x, slide_length)
 	tween.interpolate_property(character, "position:y", null, global_position.y + PIPE_BOTTOM_DISTANCE, entering_pipe_length, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, slide_length)
+	tween.interpolate_callback(audio_player, slide_length, "play")
 
 	tween.start()
 

@@ -138,7 +138,6 @@ export var inputs = [
 ]
 
 enum input_names {left, right, jump, dive, spin, gp, gpcancel, fludd, nozzles, crouch}
-enum input_params {pressed, just_pressed, input_name}
 
 export var controlled_locally = true
 
@@ -460,6 +459,10 @@ func heal(shards : int = 1):
 		health_shards = health_shards % 5
 		if health == 8:
 			health_shards = 0
+
+
+func get_weight():
+	return 2 if metal_voice else 1
 
 func _physics_process(delta: float):
 	recalculate_grounded = true
@@ -869,3 +872,5 @@ func set_all_collision_masks(bit, value):
 	$RightCheck.set_collision_mask_bit(bit, value)
 	$SlopeStopCheck.set_collision_mask_bit(bit, value)
 
+func get_input(input_id : int, is_just_pressed : bool) -> bool:
+	return inputs[input_id][int(is_just_pressed)]
