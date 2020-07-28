@@ -57,11 +57,15 @@ static func get_keybindings() -> Dictionary:
 		return ControlPresets.presets.Default.duplicate()
 	
 	if !data.has("controls"):
+		var controlPreset
 		if data.has("controlPreset"):
-			var controlPreset = data["controlPreset"]
-			if ControlPresets.presets.has(controlPreset):
-				return ControlPresets.presets[controlPreset].duplicate()
-		return ControlPresets.presets.Default.duplicate()
+			controlPreset = data["controlPreset"]
+		elif data.has("controlMode"): # for backwards compatibility
+			controlPreset = data["controlMode"]
+		else:
+			return ControlPresets.presets.Default.duplicate()
+		if ControlPresets.presets.has(controlPreset):
+			return ControlPresets.presets[controlPreset].duplicate()
 	else:
 		return data["controls"]
 		
