@@ -446,6 +446,7 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180):
 		invulnerable = true if frames != 0 else false
 		invulnerable_frames = frames
 		if health <= 0:
+			health = 0 # Fix -1 bug
 			sound_player.play_last_hit_sound()
 			kill(cause)
 		else:
