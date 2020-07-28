@@ -1,11 +1,13 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/actors/objects/pipe/pipe_enter_logic/pipe_enter_logic.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/cannon/cannon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/cannon/SpriteBody.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/cannon/cannon.gd" type="Script" id=4]
+[ext_resource path="res://scenes/actors/objects/cannon/nsmbwiiCannon2.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/actors/objects/cannon/dust.png" type="Texture" id=6]
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=1]
 resource_name = "cannon_retract"
 length = 0.6
 step = 0.05
@@ -39,10 +41,9 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "cannon_startup"
-length = 1.55
-step = 0.05
+[sub_resource type="Animation" id=2]
+length = 1.67
+step = 0.025
 tracks/0/type = "value"
 tracks/0/path = NodePath("CannonMoveable:position")
 tracks/0/interp = 2
@@ -96,8 +97,58 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Vector2( 0, -22 ), Vector2( 0, -19 ), Vector2( 0, -22 ) ]
 }
+tracks/4/type = "audio"
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.59,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+}, {
+"end_offset": 0.0,
+"start_offset": 1.1,
+"stream": ExtResource( 5 )
+}, {
+"end_offset": 0.653511,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+}, {
+"end_offset": 0.0,
+"start_offset": 1.13,
+"stream": ExtResource( 5 )
+} ],
+"times": PoolRealArray( 0, 0.65, 1.05, 1.675 )
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AudioStreamPlayer:pitch_scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1, 1.725 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 1.0, 0.8, 1.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.475, 1.66 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -30.0 ]
+}
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 
 varying float vertexY;
@@ -119,30 +170,59 @@ void fragment()
 }"
 custom_defines = ""
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
 shader_param/hidePosition = -15
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 48, 16, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
+region = Rect2( 48, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
 region = Rect2( 48, 32, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
 "name": "default",
 "speed": 12.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 16, 11 )
+[sub_resource type="Curve" id=15]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0.00704225, 116.364 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=16]
+curve = SubResource( 15 )
+
+[sub_resource type="Curve" id=13]
+_data = [ Vector2( 0, 0.118182 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=14]
+curve = SubResource( 13 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+emission_shape = 2
+emission_box_extents = Vector3( 5, 1, 1 )
+flag_rotate_y = true
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 34.2
+gravity = Vector3( 0, 30, 0 )
+initial_velocity = 143.34
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel_curve = SubResource( 16 )
+scale_curve = SubResource( 14 )
+color = Color( 0.87451, 0.819608, 0.74902, 1 )
 
 [sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 16, 11 )
+
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 24, 4 )
 
 [node name="Cannon" type="Node2D"]
@@ -153,8 +233,8 @@ position = Vector2( 0, -31 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1
-anims/cannon_retract = SubResource( 9 )
-anims/cannon_startup = SubResource( 1 )
+anims/cannon_retract = SubResource( 1 )
+anims/cannon_startup = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -162,7 +242,7 @@ anims/cannon_startup = SubResource( 1 )
 position = Vector2( 0, 30 )
 
 [node name="SpriteBody" type="Sprite" parent="CannonMoveable"]
-material = SubResource( 3 )
+material = SubResource( 4 )
 position = Vector2( 0, -22 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -6.301 )
@@ -176,9 +256,21 @@ position = Vector2( 0, -33 )
 [node name="SpriteFuse" type="AnimatedSprite" parent="CannonMoveable/SpriteBody"]
 visible = false
 position = Vector2( -0.583315, 23.0744 )
-frames = SubResource( 6 )
-frame = 1
+frames = SubResource( 7 )
 playing = true
+
+[node name="Particles2D" type="Particles2D" parent="CannonMoveable/SpriteBody"]
+position = Vector2( 0, -33 )
+emitting = false
+amount = 9
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.6
+randomness = 1.0
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+process_material = SubResource( 12 )
+texture = ExtResource( 6 )
 
 [node name="SpriteHinge" type="Sprite" parent="CannonMoveable"]
 position = Vector2( 0, -19 )
@@ -203,13 +295,16 @@ position = Vector2( 0, -15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EntranceCollision"]
 position = Vector2( 0, -4 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="RingCollision" type="StaticBody2D" parent="."]
 position = Vector2( 0, -4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RingCollision"]
-shape = SubResource( 8 )
+shape = SubResource( 9 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="tween_all_completed" from="Tween" to="." method="_on_tween_all_completed"]
 

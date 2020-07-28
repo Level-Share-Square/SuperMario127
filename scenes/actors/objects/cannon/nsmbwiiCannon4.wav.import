@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/nsmbwiiCannon4.wav-281085e7e25ee539bf43be08a7a2201a.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/cannon/nsmbwiiCannon4.wav"
+dest_files=[ "res://.import/nsmbwiiCannon4.wav-281085e7e25ee539bf43be08a7a2201a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
