@@ -1899,8 +1899,7 @@ stream = ExtResource( 36 )
 volume_db = -10.0
 
 [node name="PlaceableItemsContainer" type="Sprite" parent="UI"]
-position = Vector2( 0, 0.397257 )
-scale = Vector2( 0.333, 0.333 )
+scale = Vector2( 0.334, 0.333 )
 texture = ExtResource( 11 )
 centered = false
 script = ExtResource( 9 )
