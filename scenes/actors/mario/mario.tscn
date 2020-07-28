@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -51,6 +51,7 @@
 [ext_resource path="res://shaders/vanish_powerup.tres" type="Material" id=49]
 [ext_resource path="res://scenes/actors/mario/powerups/Vanish.gd" type="Script" id=50]
 [ext_resource path="res://scenes/actors/mario/particles/metal_sparkles.png" type="Texture" id=51]
+[ext_resource path="res://scenes/actors/mario/states/WingMario.gd" type="Script" id=52]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -333,6 +334,9 @@ script = ExtResource( 37 )
 [node name="RainbowStarWindupState" type="Node" parent="States"]
 script = ExtResource( 40 )
 
+[node name="WingMarioState" type="Node" parent="States"]
+script = ExtResource( 52 )
+
 [node name="Nozzles" type="Node" parent="."]
 
 [node name="HoverNozzle" type="Node" parent="Nozzles"]
@@ -560,6 +564,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "death"
+frame = 1
 playing = true
 script = ExtResource( 34 )
 
