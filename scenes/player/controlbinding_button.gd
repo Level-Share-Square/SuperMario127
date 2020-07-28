@@ -4,7 +4,7 @@ onready var hover_sound = $HoverSound
 onready var click_sound = $ClickSound
 
 onready var controls_options = get_parent().get_parent()
-onready var binding_options = controls_options.get_node("ControlBindingSettings")
+onready var binding_options = controls_options.get_node("ControlBindingWindow")
 
 export var id : String
 
@@ -12,7 +12,7 @@ var last_hovered
 
 func _ready():
 	var keybindings = PlayerSettings.keybindings[id]
-	text = str(OS.get_scancode_string(keybindings[0] if typeof(keybindings) == TYPE_ARRAY else keybindings))
+	text = ControlUtil.get_formatted_string(id)
 
 func _gui_input(event):
 	if event is InputEventMouseButton && event.pressed:

@@ -496,25 +496,15 @@ func _physics_process(delta: float):
 		if controllable and !FocusCheck.is_ui_focused:
 			#var control_id = player_id seemingly unused variable, uncomment if needed
 			for input in inputs:
-				var input_id = input[2]
-				
-				var keybindings = PlayerSettings.keybindings[input_id]
-				if typeof(keybindings) == TYPE_ARRAY:
-					for keybinding in keybindings:
-						if Input.is_key_pressed(keybinding):
-							input[1] = !input[0]
-							input[0] = true
-							break
-						else:
-							input[0] = false
-							input[1] = false
+				if Input.is_action_pressed(input[2]):
+					input[0] = true
 				else:
-					if Input.is_key_pressed(keybindings):
-						input[1] = !input[0]
-						input[0] = true
-					else:
-						input[0] = false
-						input[1] = false
+					input[0] = false
+					
+				if Input.is_action_just_pressed(input[2]):
+					input[1] = true
+				else:
+					input[1] = false
 		else:
 			for input in inputs:
 				input[0] = false

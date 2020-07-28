@@ -113,6 +113,8 @@ func _unhandled_input(event):
 		shared_node.toggle_layer_transparency(layer, layers_transparent)
 
 func _ready():
+	SettingsSaver.load_keybindings_into_actions()
+	
 	var data = CurrentLevelData.level_data
 	load_in(data, data.areas[CurrentLevelData.area])
 	zoom_level = EditorSavedSettings.zoom_level

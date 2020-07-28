@@ -18,7 +18,7 @@ func _ready():
 	file.close()
 	
 	# warning-ignore: incompatible_ternary
-	window_scale = FULLSCREEN_SCALE_VALUE if OS.window_fullscreen else (OS.window_size.x / ScreenSizeUtil.DEFAULT_SIZE.x) if data["windowScale"] == null else data["windowScale"]
+	window_scale = FULLSCREEN_SCALE_VALUE if OS.window_fullscreen else (OS.window_size.x / ScreenSizeUtil.DEFAULT_SIZE.x) if data == null || data["windowScale"] == null else data["windowScale"]
 	value_text.text = str(window_scale) if window_scale != FULLSCREEN_SCALE_VALUE else "F"
 	var _connect = left.connect("pressed", self, "decrease_value")
 	var _connect2 = right.connect("pressed", self, "increase_value")

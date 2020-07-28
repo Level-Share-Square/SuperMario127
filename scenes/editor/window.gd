@@ -24,7 +24,6 @@ func open():
 	emit_signal("window_opened")
 	if !visible:
 		visible = true
-		rect_scale = Vector2(0, 0)
 		tween.interpolate_property(self, "rect_scale",
 			Vector2(0, 0), Vector2(0.4, 0.4), 0.15,
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
