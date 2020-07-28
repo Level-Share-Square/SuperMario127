@@ -18,7 +18,7 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -31,12 +31,12 @@ shape = SubResource( 1 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 2 )
-volume_db = 5.5
+volume_db = -9.25
 
 [node name="LastCollect" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 4 )
-volume_db = -9.0
+volume_db = -9.25
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 process_parent = true

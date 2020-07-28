@@ -26,7 +26,10 @@ func collect(body):
 		if body.name == "Character":
 			player_id = 0
 		if PlayerSettings.other_player_id == -1 or PlayerSettings.my_player_index == player_id:
-			sound.play()
+			if CurrentLevelData.level_data.vars.red_coins_collected != CurrentLevelData.level_data.vars.max_red_coins:
+				sound.play()
+			else:
+				last_sound.play()
 		collected = true
 		label.text = str(CurrentLevelData.level_data.vars.red_coins_collected)
 		label.visible = true
