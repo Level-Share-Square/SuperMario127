@@ -2,39 +2,39 @@ class_name ControlPresets
 
 const presets = {
 	"Default": {
-		"left": KEY_LEFT,
-		"right": KEY_RIGHT,
-		"jump": KEY_Z,
-		"dive": KEY_SHIFT,
-		"spin": KEY_X,
-		"gp": KEY_DOWN,
-		"gpcancel": KEY_UP,
-		"fludd": KEY_C,
-		"nozzles": KEY_CONTROL,
-		"crouch": KEY_DOWN
+		"left": {ControlUtil.KEYBOARD: KEY_LEFT},
+		"right": {ControlUtil.KEYBOARD: KEY_RIGHT},
+		"jump": {ControlUtil.KEYBOARD: KEY_Z},
+		"dive": {ControlUtil.KEYBOARD: KEY_SHIFT},
+		"spin": {ControlUtil.KEYBOARD: KEY_X},
+		"gp": {ControlUtil.KEYBOARD: KEY_DOWN},
+		"gpcancel": {ControlUtil.KEYBOARD: KEY_UP},
+		"fludd": {ControlUtil.KEYBOARD: KEY_C},
+		"nozzles": {ControlUtil.KEYBOARD: KEY_CONTROL},
+		"crouch": {ControlUtil.KEYBOARD: KEY_DOWN}
 	},
 	"WASD": {
-		"left": KEY_A,
-		"right": KEY_D,
-		"jump": KEY_K,
-		"dive": KEY_E,
-		"spin": KEY_J,
-		"gp": KEY_S,
-		"gpcancel": KEY_W,
-		"fludd": KEY_L,
-		"nozzles": KEY_Y,
-		"crouch": KEY_S
+		"left": {ControlUtil.KEYBOARD: KEY_A},
+		"right": {ControlUtil.KEYBOARD: KEY_D},
+		"jump": {ControlUtil.KEYBOARD: KEY_K},
+		"dive": {ControlUtil.KEYBOARD: KEY_E},
+		"spin": {ControlUtil.KEYBOARD: KEY_J},
+		"gp": {ControlUtil.KEYBOARD: KEY_S},
+		"gpcancel": {ControlUtil.KEYBOARD: KEY_W},
+		"fludd": {ControlUtil.KEYBOARD: KEY_L},
+		"nozzles": {ControlUtil.KEYBOARD: KEY_Y},
+		"crouch": {ControlUtil.KEYBOARD: KEY_S}
 	},
 	"Legacy": {
-		"left": KEY_LEFT,
-		"right": KEY_RIGHT,
-		"jump": KEY_UP,
-		"dive": KEY_DOWN,
-		"spin": KEY_X,
-		"gp": KEY_Z,
-		"gpcancel": KEY_UP,
-		"fludd": [KEY_C, KEY_SPACE],
-		"nozzles": KEY_SHIFT,
-		"crouch": KEY_DOWN
+		"left": {ControlUtil.KEYBOARD: KEY_LEFT},
+		"right": {ControlUtil.KEYBOARD: KEY_RIGHT},
+		"jump": {ControlUtil.KEYBOARD: KEY_UP},
+		"dive": {ControlUtil.KEYBOARD: KEY_DOWN},
+		"spin": {ControlUtil.KEYBOARD: KEY_X},
+		"gp": {ControlUtil.KEYBOARD: KEY_Z},
+		"gpcancel": {ControlUtil.KEYBOARD: KEY_UP},
+		"fludd": [{ControlUtil.KEYBOARD: KEY_C}, {ControlUtil.KEYBOARD: KEY_SPACE}],
+		"nozzles": {ControlUtil.KEYBOARD: KEY_SHIFT},
+		"crouch": {ControlUtil.KEYBOARD: KEY_DOWN}
 	}
 }

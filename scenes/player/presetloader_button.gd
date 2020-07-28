@@ -21,6 +21,7 @@ func _pressed():
 			var keybindings = PlayerSettings.keybindings[button.id]
 			
 			button.text = str(OS.get_scancode_string(keybindings[0] if typeof(keybindings) == TYPE_ARRAY else keybindings))
+			SettingsSaver.override_keybindings(button.id)
 	
 func _process(_delta):
 	if is_hovered() and !last_hovered:
