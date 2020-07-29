@@ -1,13 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/actors/objects/hover_nozzle/hover_nozzle.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/hover_nozzle/hover_nozzle.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/hover_nozzle/sound.wav" type="AudioStream" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/turbo_nozzle.png-e4fdae774c5fa77bc2ebfcd9ed684d54.stex"
+
+[sub_resource type="StreamTexture" id=2]
+load_path = "res://.import/rocket_nozzle.png-bae079954bd945a067547ca0519dc638.stex"
+
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 12, 7 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 16, 10 )
 
 [node name="HoverNozzle" type="Node2D"]
@@ -18,19 +24,31 @@ collision_layer = 8
 collision_mask = 25
 gravity_scale = 5.0
 
-[node name="Sprite" type="Sprite" parent="RigidBody2D"]
+[node name="Sprite_HoverNozzle" type="Sprite" parent="RigidBody2D"]
+visible = false
 z_index = -1
 texture = ExtResource( 2 )
 
+[node name="Sprite_TurboNozzle" type="Sprite" parent="RigidBody2D"]
+visible = false
+position = Vector2( 0, 3 )
+z_index = -1
+texture = SubResource( 1 )
+
+[node name="Sprite_RocketNozzle" type="Sprite" parent="RigidBody2D"]
+visible = false
+z_index = -1
+texture = SubResource( 2 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="RigidBody2D"]
 collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/Area2D"]
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
