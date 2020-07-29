@@ -35,6 +35,7 @@ func collect(body):
 
 func _ready():
 	var _connect = area.connect("body_entered", self, "collect")
+	rigid_body.get_node("Sprite_" + nozzle_type).visible = true
 	
 func _process(delta):
 	if destroy_timer > 0:
