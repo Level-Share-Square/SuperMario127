@@ -10,7 +10,7 @@ const UNKNOWN = "Unknown"
 static func get_formatted_string(action) -> String:
 	var keybinding : Dictionary = PlayerSettings.keybindings[action]
 	var mode = keybinding.keys()[0]
-	
+
 	match int(mode):
 		KEYBOARD:
 			return OS.get_scancode_string(keybinding[mode])
@@ -24,7 +24,7 @@ static func get_formatted_string(action) -> String:
 	return UNKNOWN
 
 static func convert_button_index_to_string(button_index):
-	match button_index:
+	match int(button_index):
 		BUTTON_LEFT:
 			return "LMB"
 		BUTTON_RIGHT:
@@ -43,5 +43,5 @@ static func convert_button_index_to_string(button_index):
 			return "XB1"
 		BUTTON_XBUTTON2:
 			return "XB2"
-	
-	return UNKNOWN
+		_:
+			return UNKNOWN
