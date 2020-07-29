@@ -22,9 +22,12 @@ var stored_character
 func _physics_process(_delta):
 	if is_idle:
 		for body in area2d.get_overlapping_bodies(): #the area2d is set to only collide with characters, so we can (hopefullY) safely assume if there is a collision it's with a character
-			if body.is_grounded() and body.get_input(Character.input_names.crouch, true):
+			if global_rotation == 0 and body.is_grounded() and body.get_input(Character.input_names.crouch, true):
 				start_pipe_enter_animation(body)
 
+func start_pipe_ground_pound_animation(character):
+	pass #to be implemented
+	
 func start_pipe_enter_animation(character):
 	stored_character = character 
 
@@ -33,6 +36,9 @@ func start_pipe_enter_animation(character):
 	character.invulnerable = true 
 	character.controllable = false
 	character.movable = false
+	character.sprite.rotation = 0
+	character.global_position.y = global_position.y + -22
+	
 	character.sprite.animation = "pipe" + ("Right" if character.facing_direction == 1 else "Left")
 
 	var slide_length = slide_to_center_length
