@@ -53,7 +53,6 @@ var faces_right := true
 # the audio files used in the code for some of the cannons movements
 onready var cannon_move_noise = preload("res://scenes/actors/objects/cannon/crank.tres")
 onready var cannon_fire_noise = preload("res://scenes/actors/objects/cannon/nsmbwiiBobombCannon.wav")
-onready var rotation_return_noise = preload("res://scenes/actors/objects/cannon/nsmbwiiCannon2.wav") # unused atm, but it'd be nice to get it working
 
 func _set_properties():
 	savable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right"]
@@ -81,6 +80,8 @@ func _physics_process(delta):
 	if stored_character.get_input(Character.input_names.fludd, true):
 		set_physics_process(false)
 
+		audio_player.set_process(true)
+
 		fire_cannon()
 
 		#cannon recoil animation so the shot has more power
@@ -90,8 +91,8 @@ func _physics_process(delta):
 
 		#return cannon to pointing straight up
 		tween.interpolate_property(sprite_body, "rotation_degrees", null, 0, ROTATION_RETURN_TIME, \
-				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, FIRE_STRETCH_TIME + ROTATION_RETURN_DELAY) 
-
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, FIRE_STRETCH_TIME + FIRE_UNSTRETCH_TIME + ROTATION_RETURN_DELAY) 
+		
 		tween.start()
 		
 		return
@@ -104,7 +105,8 @@ func _physics_process(delta):
 		sprite_body.rotation += horizontal_input * delta
 		sprite_body.rotation = clamp(sprite_body.rotation, deg2rad(min_rotation), deg2rad(max_rotation))
 
-	audio_player.stream_paused = !horizontal_input != 0 #the stream used for the cannon move sound is set in the cannon startup animation finish function
+	audio_player.stream_paused = horizontal_input == 0 or sprite_body.rotation_degrees == min_rotation \
+			or sprite_body.rotation_degrees == max_rotation #the stream used for the cannon move sound is set in the cannon startup animation finish function
 
 # called by a signal when the pipe enter animation finished
 func _start_cannon_animation(character):
@@ -124,7 +126,8 @@ func _on_animation_finished(anim_name):
 		
 		sprite_fuse.visible = true
 
-		audio_player.current_volume = -10 #needs to be a bit quieter to sound right
+		#normally we would change current volume, but process for the audio stream player is disabled until the cannon fires
+		audio_player.volume_db = -10 #needs to be a bit quieter to sound right
 		audio_player.stream = cannon_move_noise
 		audio_player.play()
 		audio_player.stream_paused = true #pause it so we can unpause it when the cannon is moving
@@ -132,6 +135,8 @@ func _on_animation_finished(anim_name):
 		set_physics_process(true)
 	else: #right now the only other animation is the retract, if this changes, change this to an elif
 		attempt_enable_collision()
+		
+		audio_player.set_process(false)
 
 #after the tween is done, the cannon is pointing straight up and needs to retract so it can be used again
 func _on_tween_all_completed():
@@ -152,23 +157,12 @@ func fire_cannon():
 
 	#play cannon fire sound
 	audio_player.stream = cannon_fire_noise
-	audio_player.current_volume = 0 #make sure the volume for the sound effect is correct
+	audio_player.current_volume = 10 # use current_volume since the audio_players process will be enabled now
 	audio_player.stream_paused = false #the cannon aiming sfx uses the pause feature to play it properly, so no audio will play unless we set this
 	audio_player.play()
 	
-	# unable to get this to play after the cannon fire noise, look into this further later
-	#tween.interpolate_callback(self, rotation_return_noise.get_length() + 0.05, "play_rotation_return_sound")
-
 	#cannon fire particles 
 	particles.emitting = true
-
-func play_rotation_return_sound():
-	audio_player.stop()
-	audio_player.stream = rotation_return_noise
-	audio_player.current_volume = 0 
-	audio_player.stream_paused = false 
-	audio_player.pitch_scale = 0.8 #same as the rotation noise in the animation for readying the cannon
-	audio_player.play()
 
 #used to re-enable the entrance collision only when a player exits the vicinity
 func _on_NearbyCharacterDetection_body_exited(body):

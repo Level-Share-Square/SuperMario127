@@ -25,7 +25,7 @@ func _physics_process(_delta):
 			if global_rotation == 0 and body.is_grounded() and body.get_input(Character.input_names.crouch, true):
 				start_pipe_enter_animation(body)
 
-func start_pipe_ground_pound_animation(character):
+func start_pipe_ground_pound_animation(_character):
 	pass #to be implemented
 	
 func start_pipe_enter_animation(character):
