@@ -40,6 +40,7 @@ func start_pipe_enter_animation(character):
 	character.global_position.y = global_position.y + -22
 	
 	character.sprite.animation = "pipe" + ("Right" if character.facing_direction == 1 else "Left")
+	character.sprite.playing = true
 
 	var slide_length = slide_to_center_length
 

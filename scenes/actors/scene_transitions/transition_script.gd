@@ -4,8 +4,11 @@ onready var canvas_background = $Background
 onready var canvas_mask = $Light2D
 onready var tween = $Tween
 
+onready var cutout_circle = preload("res://scenes/actors/mario/misc/cutout_circle.png") #at some point move the rest of the cutouts here
+
 onready var music_node = get_node("/root/music")
 
+const DEFAULT_TRANSITION_TIME = 0.75
 const TRANSITION_SCALE_UNCOVER = 11
 const TRANSITION_SCALE_COVERED = 0
 
@@ -33,7 +36,7 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time, new_ar
 		canvas_background.visible = false
 		transitioning = false
 
-func do_transition_animation(transition_texture, transition_time, texture_scale_start, texture_scale_end, volume_start, volume_end):
+func do_transition_animation(transition_texture, transition_time, texture_scale_start, texture_scale_end, volume_start, volume_end, reverse_after = false):
 	tween.stop_all()
 		
 	canvas_background.visible = true
@@ -50,3 +53,6 @@ func do_transition_animation(transition_texture, transition_time, texture_scale_
 	#wait for the tween to finish before returning, and then a little extra time
 	yield(tween, "tween_all_completed")
 	yield(get_tree().create_timer(0.1), "timeout")
+
+	if reverse_after:
+		do_transition_animation(cutout_circle, transition_time, texture_scale_end, texture_scale_start, volume_end, volume_start)

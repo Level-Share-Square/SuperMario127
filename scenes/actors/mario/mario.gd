@@ -15,6 +15,7 @@ onready var spotlight = $Spotlight
 # Cutout
 export var cutout_death : StreamTexture
 export var cutout_circle : StreamTexture
+export var cutout_shine : StreamTexture
 
 # Basic Physics
 export var initial_position := Vector2(0, 0)
