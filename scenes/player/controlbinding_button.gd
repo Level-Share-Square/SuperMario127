@@ -26,6 +26,7 @@ func _gui_input(event):
 			controls_options.oldText = text
 			text = "Wait..."
 		elif event.button_index == BUTTON_RIGHT:
+			controls_options.reset()
 			click_sound.play()
 			binding_options.open()
 	
