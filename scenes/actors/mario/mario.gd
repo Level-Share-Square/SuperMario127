@@ -280,6 +280,8 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	left_collision.disabled = false
 	right_collision.disabled = false
 	gravity = level_area.settings.gravity
+	
+	sprite.playing = true
 
 var prev_is_grounded = false
 var recalculate_grounded = false
