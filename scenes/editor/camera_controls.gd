@@ -45,7 +45,7 @@ func update_limits(level_area : LevelArea):
 	var area_bounds = level_area.settings.bounds.grow(3)
 
 	limit_left  = int(area_bounds.position.x * 32)
-	limit_top   = int(area_bounds.position.y * 32 - 70) #needs to include the toolbar
+	limit_top   = int(area_bounds.position.y * 32 - 70 * zoom.x) #needs to include the toolbar
 
 	limit_right  = int(area_bounds.end.x * 32)
 	limit_bottom = int(area_bounds.end.y * 32)
@@ -85,7 +85,7 @@ func _physics_process(delta):
 	if(zoom.x != editor.zoom_level):
 		var zoom_level = editor.zoom_level
 		zoom = zoom.linear_interpolate(Vector2(zoom_level, zoom_level), delta * lerp_speed)
-		limit_top = -70 * zoom_level
+		update_limits(CurrentLevelData.level_data.areas[CurrentLevelData.area])
 
 func _ready():
 	# warning-ignore:return_value_discarded

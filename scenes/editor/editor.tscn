@@ -1,4 +1,4 @@
-[gd_scene load_steps=161 format=2]
+[gd_scene load_steps=166 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -21,12 +21,17 @@
 [ext_resource path="res://scenes/editor/window/ObjectSettingsWindow.tscn" type="PackedScene" id=19]
 [ext_resource path="res://scenes/editor/window/LevelCodeWindow.tscn" type="PackedScene" id=20]
 [ext_resource path="res://scenes/editor/window/AreasWindow.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/editor/assets/clickable_shadow_arrow_hover.png" type="Texture" id=22]
 [ext_resource path="res://scenes/editor/assets/outline.png" type="Texture" id=23]
+[ext_resource path="res://scenes/editor/bounds_control.gd" type="Script" id=24]
+[ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=25]
 [ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=26]
+[ext_resource path="res://scenes/editor/assets/clickable_shadow_arrow.png" type="Texture" id=27]
 [ext_resource path="res://scenes/editor/assets/level_settings.png" type="Texture" id=28]
 [ext_resource path="res://scenes/editor/assets/level_settings_hover.png" type="Texture" id=29]
 [ext_resource path="res://scenes/editor/assets/level_settings_press.png" type="Texture" id=30]
 [ext_resource path="res://scenes/editor/window_open_button.gd" type="Script" id=31]
+[ext_resource path="res://scenes/editor/toggle_button.gd" type="Script" id=32]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=35]
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=36]
 [ext_resource path="res://scenes/editor/assets/layer_icon.png" type="Texture" id=38]
@@ -1899,7 +1904,8 @@ stream = ExtResource( 36 )
 volume_db = -10.0
 
 [node name="PlaceableItemsContainer" type="Sprite" parent="UI"]
-scale = Vector2( 0.334, 0.333 )
+position = Vector2( 0, 0.397257 )
+scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 11 )
 centered = false
 script = ExtResource( 9 )
@@ -2042,6 +2048,30 @@ stream = ExtResource( 35 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/SearchButton"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="BoundsControlToggle" type="TextureButton" parent="UI"]
+margin_left = 518.0
+margin_top = 9.0
+margin_right = 678.0
+margin_bottom = 169.0
+rect_scale = Vector2( 0.333, 0.333 )
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource( 66 )
+texture_pressed = ExtResource( 68 )
+texture_hover = ExtResource( 67 )
+script = ExtResource( 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/BoundsControlToggle"]
+stream = ExtResource( 35 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/BoundsControlToggle"]
 stream = ExtResource( 36 )
 volume_db = -10.0
 
@@ -2242,3 +2272,140 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="BoundsControl" type="Node2D" parent="."]
+script = ExtResource( 24 )
+
+[node name="Left" type="Node2D" parent="BoundsControl"]
+
+[node name="In" type="TextureButton" parent="BoundsControl/Left"]
+anchor_bottom = 0.933
+margin_left = 8.0
+margin_top = -16.0
+margin_right = 29.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 16 )
+texture_normal = ExtResource( 27 )
+texture_hover = ExtResource( 22 )
+expand = true
+script = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Out" type="TextureButton" parent="BoundsControl/Left"]
+margin_left = -8.0
+margin_top = -16.0
+margin_right = 13.0
+margin_bottom = 16.0
+rect_rotation = 180.0
+rect_pivot_offset = Vector2( 0, 16 )
+texture_normal = ExtResource( 27 )
+texture_hover = ExtResource( 22 )
+expand = true
+script = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Top" type="Node2D" parent="BoundsControl"]
+rotation = 1.5708
+
+[node name="In" type="TextureButton" parent="BoundsControl/Top"]
+anchor_bottom = 0.933
+margin_left = 8.0
+margin_top = -16.0
+margin_right = 29.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 16 )
+texture_normal = ExtResource( 27 )
+texture_hover = ExtResource( 22 )
+expand = true
+script = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Out" type="TextureButton" parent="BoundsControl/Top"]
+margin_left = -8.0
+margin_top = -16.0
+margin_right = 13.0
+margin_bottom = 16.0
+rect_rotation = 180.0
+rect_pivot_offset = Vector2( 0, 16 )
+texture_normal = ExtResource( 27 )
+texture_hover = ExtResource( 22 )
+expand = true
+script = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="Node2D" parent="BoundsControl"]
+rotation = 3.14159
+
+[node name="In" type="TextureButton" parent="BoundsControl/Right"]
+anchor_bottom = 0.933
+margin_left = 8.0
+margin_top = -16.0
+margin_right = 29.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 16 )
+texture_normal = ExtResource( 27 )
+texture_hover = ExtResource( 22 )
+expand = true
+script = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Out" type="TextureButton" parent="BoundsControl/Right"]
+margin_left = -8.0
+margin_top = -16.0
+margin_right = 13.0
+margin_bottom = 16.0
+rect_rotation = 180.0
+rect_pivot_offset = Vector2( 0, 16 )
+texture_normal = ExtResource( 27 )
+texture_hover = ExtResource( 22 )
+expand = true
+script = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bottom" type="Node2D" parent="BoundsControl"]
+rotation = -1.5708
+
+[node name="In" type="TextureButton" parent="BoundsControl/Bottom"]
+anchor_bottom = 0.933
+margin_left = 8.0
+margin_top = -16.0
+margin_right = 29.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 16 )
+texture_normal = ExtResource( 27 )
+texture_hover = ExtResource( 22 )
+expand = true
+script = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Out" type="TextureButton" parent="BoundsControl/Bottom"]
+margin_left = -8.0
+margin_top = -16.0
+margin_right = 13.0
+margin_bottom = 16.0
+rect_rotation = 180.0
+rect_pivot_offset = Vector2( 0, 16 )
+texture_normal = ExtResource( 27 )
+texture_hover = ExtResource( 22 )
+expand = true
+script = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="BoundsControl"]
+stream = ExtResource( 36 )

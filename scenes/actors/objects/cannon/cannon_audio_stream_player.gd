@@ -13,8 +13,7 @@ func _ready():
 		if current_scene.mode == 0: #player
 			character = current_scene.get_node(current_scene.character)
 			character2 = current_scene.get_node(current_scene.character2)
-		elif current_scene.mode == 1: #editor
-			set_process(false)
+		set_process(false)
 
 func _process(_delta):
 	var closest_character_position = character.global_position
@@ -22,3 +21,6 @@ func _process(_delta):
 		closest_character_position = character2.global_position
 	
 	volume_db = current_volume + -abs(closest_character_position.distance_to(get_parent().global_position) / 25)
+
+func set_current_volume(new_value : float):
+	current_volume = new_value

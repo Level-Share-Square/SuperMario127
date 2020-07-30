@@ -71,6 +71,20 @@ tracks/3/keys = {
 "update": 0,
 "values": [ 1.0 ]
 }
+tracks/4/type = "method"
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "set_current_volume"
+} ]
+}
 
 [sub_resource type="Animation" id=2]
 length = 1.67
@@ -283,13 +297,12 @@ region_rect = Rect2( 0, 0, 48, 64 )
 script = ExtResource( 3 )
 
 [node name="CannonExitPosition" type="Position2D" parent="CannonMoveable/SpriteBodyReverser/SpriteBody"]
-position = Vector2( 0, -33 )
+position = Vector2( 0, -39 )
 
 [node name="SpriteFuse" type="AnimatedSprite" parent="CannonMoveable/SpriteBodyReverser/SpriteBody"]
 visible = false
 position = Vector2( -0.583315, 23.0744 )
 frames = SubResource( 7 )
-frame = 1
 playing = true
 
 [node name="Particles2D" type="Particles2D" parent="CannonMoveable/SpriteBodyReverser/SpriteBody"]
