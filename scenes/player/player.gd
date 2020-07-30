@@ -24,7 +24,6 @@ func _physics_process(delta):
 	rainbow_gradient.colors = PoolColorArray([Color.from_hsv(rainbow_hue, 1, 1), Color(1, 1, 1)])
 	rainbow_gradient_texture.gradient = rainbow_gradient
 
-
 func _ready():
 	var data = CurrentLevelData.level_data
 	load_in(data, data.areas[CurrentLevelData.area])

@@ -19,6 +19,14 @@ func _input(event):
 		if event is InputEventKey:
 			PlayerSettings.keybindings[currentButton.id] = {0: event.scancode}
 		elif event is InputEventMouseButton:
+			for children in get_children():
+				if !children.get_name() in ignore_children:
+					var button : Button = children.get_node("KeyButton")
+					var viewport_size = button.get_viewport_rect().size
+					var delta = viewport_size - button.get_local_mouse_position()
+					if delta.x >= 0 && delta.y >= 0 && delta.x <= viewport_size.x && delta.y <= viewport_size.y:
+						return
+					
 			PlayerSettings.keybindings[currentButton.id] = {ControlUtil.MOUSE: event.button_index}
 		elif event is InputEventJoypadButton:
 			PlayerSettings.keybindings[currentButton.id] = {
