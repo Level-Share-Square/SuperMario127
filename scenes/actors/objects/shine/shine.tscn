@@ -71,8 +71,6 @@ tracks/3/keys = {
 [node name="Shine" type="Node2D"]
 script = ExtResource( 3 )
 
-[node name="ShineEffects" parent="." instance=ExtResource( 2 )]
-
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( 0, 2 )
 collision_layer = 8
@@ -98,6 +96,8 @@ process_parent = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 frame = 1
+
+[node name="ShineEffects" parent="AnimatedSprite" instance=ExtResource( 2 )]
 
 [node name="Ghost" type="Sprite" parent="."]
 visible = false

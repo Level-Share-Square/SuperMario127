@@ -176,6 +176,7 @@ onready var platform_detector = $PlatformDetector
 onready var bottom_pos = $BottomPos
 onready var death_sprite = $DeathSprite
 onready var death_fludd_sprite = $DeathSprite/Fludd
+onready var collected_shine = $CollectedShine # used for the shine dance animation, can be edited to reflect different shine colours or sprites or something
 onready var raycasts = [ground_check, ground_check_dive, left_check, right_check, slope_stop_check]
 export var bottom_pos_offset : Vector2
 export var bottom_pos_dive_offset : Vector2
@@ -281,7 +282,10 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	right_collision.disabled = false
 	gravity = level_area.settings.gravity
 	
+	# reset some stuff that can be changed by accident when using the editor
 	sprite.playing = true
+	collected_shine.visible = false
+	collected_shine.get_node("ShineParticles").emitting = false
 
 var prev_is_grounded = false
 var recalculate_grounded = false

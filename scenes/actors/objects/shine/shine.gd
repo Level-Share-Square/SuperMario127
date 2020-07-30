@@ -5,7 +5,7 @@
 # Perhaps reset mario's velocity on collection, or retain previous vertical momentum (sm64 does the latter)
 extends GameObject
 
-onready var effects = $ShineEffects
+onready var effects = $AnimatedSprite/ShineEffects
 onready var animated_sprite = $AnimatedSprite
 onready var ghost = $Ghost
 onready var area = $Area2D
@@ -98,6 +98,7 @@ func _physics_process(delta):
 		if character.is_grounded():
 			character.set_state_by_name("NoActionState", delta)
 
+			character.collected_shine.modulate = animated_sprite.modulate
 			character.sprite.animation = "shineDance"
 			character.anim_player.play("shine_dance")
 			
