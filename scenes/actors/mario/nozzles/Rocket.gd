@@ -32,6 +32,7 @@ func _activated_update(delta):
 	
 	charge = 0
 	character.stamina = 0
+	character.get_state_node("JumpState").ledge_buffer = 0 # Disable coyote time, which allowed for a "double jump" that was weaker than the actual blast
 	deactivate_frames = 5
 	
 	if !is_state("DiveState") and !is_state("SlideState"):

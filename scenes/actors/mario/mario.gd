@@ -15,6 +15,7 @@ onready var spotlight = $Spotlight
 # Cutout
 export var cutout_death : StreamTexture
 export var cutout_circle : StreamTexture
+export var cutout_shine : StreamTexture
 
 # Basic Physics
 export var initial_position := Vector2(0, 0)
@@ -423,6 +424,9 @@ func player_hit(body):
 				sound_player.play_hit_sound()
 
 func _process(delta: float):
+	if state and state.name == "NoActionState":
+		return
+		
 	if powerup != null:
 		if powerup.time_left <= 2.5:
 			frames_until_flash -= 1
@@ -466,6 +470,11 @@ func get_weight():
 	return 2 if metal_voice else 1
 
 func _physics_process(delta: float):
+	update_inputs()
+	
+	if state and state.name == "NoActionState":
+		return
+	
 	recalculate_grounded = true
 	
 	bottom_pos.position = bottom_pos_offset
@@ -491,25 +500,6 @@ func _physics_process(delta: float):
 	
 	# Gravity
 	velocity.y = lerp(velocity.y, (gravity * Vector2(0, gravity_scale) * 240).y, delta / 2)
-
-	# Inputs
-	if controlled_locally:
-		if controllable and !FocusCheck.is_ui_focused:
-			#var control_id = player_id seemingly unused variable, uncomment if needed
-			for input in inputs:
-				if Input.is_action_pressed(input[2]):
-					input[0] = true
-				else:
-					input[0] = false
-					
-				if Input.is_action_just_pressed(input[2]):
-					input[1] = true
-				else:
-					input[1] = false
-		else:
-			for input in inputs:
-				input[0] = false
-				input[1] = false
 
 	if state != null:
 		disable_movement = state.disable_movement
@@ -865,3 +855,22 @@ func set_all_collision_masks(bit, value):
 
 func get_input(input_id : int, is_just_pressed : bool) -> bool:
 	return inputs[input_id][int(is_just_pressed)]
+
+func update_inputs():
+	if controlled_locally:
+		if controllable and !FocusCheck.is_ui_focused:
+			#var control_id = player_id seemingly unused variable, uncomment if needed
+			for input in inputs:
+				if Input.is_action_pressed(input[2]):
+					input[0] = true
+				else:
+					input[0] = false
+					
+				if Input.is_action_just_pressed(input[2]):
+					input[1] = true
+				else:
+					input[1] = false
+		else:
+			for input in inputs:
+				input[0] = false
+				input[1] = false

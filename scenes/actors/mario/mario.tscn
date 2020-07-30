@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -24,7 +24,7 @@
 [ext_resource path="res://scenes/actors/mario/nozzles/Hover.gd" type="Script" id=22]
 [ext_resource path="res://scenes/actors/mario/nozzles/hover_frames.tres" type="SpriteFrames" id=23]
 [ext_resource path="res://scenes/actors/mario/nozzles/water_frames.tres" type="SpriteFrames" id=24]
-[ext_resource path="res://scenes/actors/mario/nozzles/spray.wav" type="AudioStream" id=25]
+[ext_resource path="res://assets/music/course_clear.ogg" type="AudioStream" id=25]
 [ext_resource path="res://scenes/actors/mario/nozzles/hover_frames_luigi.tres" type="SpriteFrames" id=26]
 [ext_resource path="res://scenes/actors/mario/nozzles/switch.wav" type="AudioStream" id=27]
 [ext_resource path="res://scenes/actors/mario/states/SlideStop.gd" type="Script" id=28]
@@ -52,6 +52,8 @@
 [ext_resource path="res://scenes/actors/mario/powerups/Vanish.gd" type="Script" id=50]
 [ext_resource path="res://scenes/actors/mario/particles/metal_sparkles.png" type="Texture" id=51]
 [ext_resource path="res://scenes/actors/mario/states/WingMario.gd" type="Script" id=52]
+[ext_resource path="res://scenes/actors/mario/states/NoAction.gd" type="Script" id=53]
+[ext_resource path="res://scenes/actors/mario/misc/cutout_shine.png" type="Texture" id=54]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -164,6 +166,58 @@ tracks/0/keys = {
 "values": [ 0.0, -360.0 ]
 }
 
+[sub_resource type="Animation" id=20]
+resource_name = "shine_dance"
+length = 2.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "shineDance" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.26 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.23 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 21 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.45, 2.24 ),
+"transitions": PoolRealArray( 1.27765e-07, 0.125, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -40 ) ]
+}
+
 [node name="Character" type="KinematicBody2D"]
 position = Vector2( -1000, -1000 )
 z_index = -1
@@ -173,6 +227,7 @@ collision/safe_margin = 0.01
 script = ExtResource( 3 )
 cutout_death = ExtResource( 10 )
 cutout_circle = ExtResource( 9 )
+cutout_shine = ExtResource( 54 )
 acceleration = 10.5
 friction = 13.5
 mario_frames = ExtResource( 1 )
@@ -241,13 +296,12 @@ disabled = true
 [node name="Sprite" type="AnimatedSprite" parent="."]
 material = SubResource( 8 )
 frames = ExtResource( 1 )
-animation = "idleRight"
-playing = true
+animation = "shineDance"
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 23 )
-animation = "deathFall"
+animation = "shineDance"
 playing = true
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]
@@ -336,6 +390,14 @@ script = ExtResource( 40 )
 
 [node name="WingMarioState" type="Node" parent="States"]
 script = ExtResource( 52 )
+
+[node name="NoActionState" type="Node" parent="States"]
+script = ExtResource( 53 )
+disable_movement = true
+disable_animation = true
+disable_turning = true
+disable_friction = true
+override_rotation = true
 
 [node name="Nozzles" type="Node" parent="."]
 
@@ -554,6 +616,7 @@ texture = ExtResource( 51 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/backflip = ExtResource( 32 )
 anims/backflip_right = SubResource( 19 )
+anims/shine_dance = SubResource( 20 )
 
 [node name="BottomPos" type="Node2D" parent="."]
 position = Vector2( 0, 20 )
@@ -563,13 +626,13 @@ visible = false
 z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
-animation = "death"
-frame = 1
+animation = "shineDance"
+frame = 22
 playing = true
 script = ExtResource( 34 )
 
 [node name="Fludd" type="AnimatedSprite" parent="DeathSprite"]
 visible = false
 frames = ExtResource( 23 )
-animation = "deathFall"
+animation = "shineDance"
 playing = true
