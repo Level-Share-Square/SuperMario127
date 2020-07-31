@@ -47,8 +47,8 @@ func collect(body):
 	if activated and enabled and !collected and body.name.begins_with("Character") and body.controllable:
 		character = body
 		character.set_state_by_name("Fall", 0)
-		character.velocity = Vector2(0, 0)
-		character.get_node("Sprite").rotation_degrees = 0
+		character.velocity.x = 0
+		character.sprite.rotation_degrees = 0
 		character.controllable = false
 		collect_sound.play() 
 		collected = true
@@ -91,6 +91,7 @@ func _physics_process(delta):
 	if collected:
 		var sprite = character.get_node("Sprite")
 		sprite.animation = "shineFall"
+		character.sprite.rotation_degrees = 0
 		
 		ambient_sound.playing = false 
 		music.playing = false
@@ -103,7 +104,7 @@ func _physics_process(delta):
 			character.anim_player.play("shine_dance")
 			
 			music.stream = course_clear_music
-			music.orig_volume = -10
+			music.orig_volume = -7.5
 			music.play()
 			
 			character.anim_player.connect("animation_finished", self, "character_shine_dance_finished")
@@ -129,7 +130,7 @@ func activate_shine():
 	unpause_timer = 3.35
 
 func character_shine_dance_finished(_animation):
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(get_tree().create_timer(1.25), "timeout")
 	
 	if mode_switcher.get_node("ModeSwitcherButton").invisible: #if not running through the editor, play the fancy transition
 		transitions.reload_scene(character.cutout_shine, character.cutout_circle, transitions.DEFAULT_TRANSITION_TIME, 0, true)
