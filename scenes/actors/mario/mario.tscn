@@ -429,7 +429,6 @@ frame = 21
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 23 )
-animation = "shineDance"
 playing = true
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]
@@ -773,7 +772,6 @@ script = ExtResource( 34 )
 [node name="Fludd" type="AnimatedSprite" parent="DeathSprite"]
 visible = false
 frames = ExtResource( 23 )
-animation = "shineDance"
 playing = true
 
 [node name="MyShitCoding" type="Node2D" parent="."]
