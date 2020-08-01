@@ -112,6 +112,13 @@ func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
 func update_tilemaps():
 	var bounds = level_area.settings.bounds
 	
+	var tile_set = very_back_tilemap_node.tile_set
+	
+	very_back_tilemap_node.tile_set = null
+	back_tilemap_node.tile_set = null
+	middle_tilemap_node.tile_set = null
+	front_tilemap_node.tile_set = null
+	
 	very_back_tilemap_node.clear()
 	back_tilemap_node.clear()
 	middle_tilemap_node.clear()
@@ -124,15 +131,28 @@ func update_tilemaps():
 		var chunk_x := int(_key[0])
 		var chunk_y := int(_key[1])
 		var layer 	:= int(_key[2])
-
+		
+		
+		var layer_tilemap_node = back_tilemap_node
+		if layer == 3:
+			layer_tilemap_node = very_back_tilemap_node	
+		elif layer == 1:
+			layer_tilemap_node = middle_tilemap_node	
+		elif layer == 2:
+			layer_tilemap_node = front_tilemap_node	
 		#print(_key)
 
 		for x in range(16):
 			for y in range(16):
 				var tile = chunk[x + y*16] #get tile from chunk
 				if tile and bounds.has_point(Vector2(chunk_x*16 + x + 0.5, chunk_y*16 + y + 0.5)):
-					set_tile_visual(chunk_x*16 + x, chunk_y*16 + y, layer, tile[0], tile[1], false) #no need to update bitmask individually
-
+					layer_tilemap_node.set_cell(chunk_x*16 + x, chunk_y*16 + y, get_tile(tile[0],tile[1]))
+	
+	very_back_tilemap_node.tile_set = tile_set
+	back_tilemap_node.tile_set = tile_set
+	middle_tilemap_node.tile_set = tile_set
+	front_tilemap_node.tile_set = tile_set
+	
 	
 	var tile : int = middle_tilemap_node.tile_set.find_tile_by_name("LevelMargin")
 
@@ -142,7 +162,7 @@ func update_tilemaps():
 	var right: int = bounds.end.x
 	var bottom: int = bounds.end.y
 	
-	for tilemap in [very_back_tilemap_node, back_tilemap_node, middle_tilemap_node, front_tilemap_node]:
+	for tilemap in [back_tilemap_node, middle_tilemap_node, front_tilemap_node]:
 		for x in range(left, (right)+1): #range end needs +1 to to actually reach the end
 			tilemap.set_cell(x,top, tile)
 			tilemap.set_cell(x,bottom, tile)
@@ -151,8 +171,10 @@ func update_tilemaps():
 			tilemap.set_cell(left, y, tile)
 			tilemap.set_cell(right, y, tile)
 
-		tilemap.update_bitmask_region(bounds.position, bounds.end)
 	
+	for tilemap in [very_back_tilemap_node, back_tilemap_node, middle_tilemap_node, front_tilemap_node]:
+		tilemap.update_bitmask_region(bounds.position, bounds.end)
+		
 	tile = middle_tilemap_node.tile_set.find_tile_by_name("OutOfBounds")
 	
 	
