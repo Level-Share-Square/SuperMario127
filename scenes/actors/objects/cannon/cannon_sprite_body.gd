@@ -7,6 +7,7 @@ const INITIAL_CANNON_MOVABLE_POSITION_Y = 37
 
 func _ready():
 	set_process(false)
+	material.set_shader_param("hidePosition", INITIAL_HIDE_POSITION)
 
 func _process(_delta):
 	material.set_shader_param("hidePosition", INITIAL_HIDE_POSITION + (INITIAL_CANNON_MOVABLE_POSITION_Y - cannon_moveable.position.y))
