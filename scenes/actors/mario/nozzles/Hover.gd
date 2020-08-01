@@ -39,8 +39,8 @@ func _activated_update(delta):
 	character.jump_animation = 0
 	
 	var power = -boost_power * (character.stamina / 100)
-	if abs(character.velocity.x) < abs(power * normal.x) * 8:
-		character.velocity.x -= accel * normal.x
+	if abs(character.velocity.x) < abs(power * normal.x) * 6:
+		character.velocity.x -= accel * 0.5 * normal.x
 		
 	if (character.velocity.y > power * normal.y and normal.y > 0) or (character.velocity.y < power * normal.y and normal.y < 0):
 		character.velocity.y -= accel * normal.y

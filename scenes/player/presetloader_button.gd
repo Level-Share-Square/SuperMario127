@@ -18,9 +18,8 @@ func _pressed():
 	for children in get_parent().get_parent().get_children():
 		if !(children.get_name() in controls_options.ignore_children):
 			var button : Button = children.get_node("KeyButton")
-			var keybindings = PlayerSettings.keybindings[button.id]
 			
-			button.text = str(OS.get_scancode_string(keybindings[0] if typeof(keybindings) == TYPE_ARRAY else keybindings))
+			button.text = ControlUtil.get_formatted_string(button.id)
 			SettingsSaver.override_keybindings(button.id)
 	
 func _process(_delta):

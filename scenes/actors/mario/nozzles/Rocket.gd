@@ -24,16 +24,19 @@ func is_state(state):
 	return character.state == character.get_state_node(state)
 	
 func _activated_update(delta):
-	if charge < 1.5:
+	if deactivate_frames > 0:
+		return
+	if charge < 1:
 		if !character.fludd_charge_sound.is_playing():
 			character.fludd_charge_sound.play()
 		charge += delta
 		return
 	
+	character.fludd_charge_sound.stop()
 	charge = 0
 	character.stamina = 0
 	character.get_state_node("JumpState").ledge_buffer = 0 # Disable coyote time, which allowed for a "double jump" that was weaker than the actual blast
-	deactivate_frames = 5
+	deactivate_frames = 30
 	
 	if !is_state("DiveState") and !is_state("SlideState"):
 		if character.facing_direction == 1:
@@ -54,9 +57,9 @@ func _activated_update(delta):
 	
 	var power = -boost_power
 	if abs(character.velocity.x) < abs(power * normal.x) * 8:
-		character.velocity.x = sqrt(abs(character.velocity.x)) * sign(character.velocity.x)
+		#character.velocity.x = sqrt(abs(character.velocity.x)) * sign(character.velocity.x)
 		character.velocity.x -= accel * normal.x
-		
+	
 	if (character.velocity.y > power * normal.y and normal.y > 0) or (character.velocity.y < power * normal.y and normal.y < 0):
 		character.velocity.y = sqrt(abs(character.velocity.y)) * sign(character.velocity.y)
 		character.velocity.y -= accel * normal.y
@@ -90,17 +93,11 @@ func _process(_delta):
 
 func _general_update(_delta):
 	if activated and !last_activated and character.stamina == 0:
-		var normal = character.sprite.transform.y.normalized()
-		var power = -boost_power * 4
-		if abs(character.velocity.x) < abs(power * normal.x) * 8:
-			character.velocity.x -= accel * normal.x
-
 		character.water_sprite.animation = "out"
 		character.water_sprite.frame = 0
-		character.fludd_charge_sound.stop()
 		character.fludd_sound.play(((100 - character.stamina) / 100) * 2.79)
 		last_activated = true
-	elif !activated and last_activated:
+	elif last_activated:
 		if deactivate_frames > 0:
 			deactivate_frames -= 1
 		else:
