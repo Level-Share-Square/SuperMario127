@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://scenes/actors/objects/shine/shine_effects.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/particles/shiny_particle_material.tres" type="Material" id=2]
 [ext_resource path="res://scenes/actors/objects/shine/shine.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/mario/particles/shine_sparkles.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/shine/ghost.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/shine/appear.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/actors/objects/shine/ambient.wav" type="AudioStream" id=7]
@@ -97,7 +98,14 @@ process_parent = true
 frames = ExtResource( 1 )
 frame = 1
 
-[node name="ShineEffects" parent="AnimatedSprite" instance=ExtResource( 2 )]
+[node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]
+show_behind_parent = true
+local_coords = false
+process_material = ExtResource( 2 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Ghost" type="Sprite" parent="."]
 visible = false

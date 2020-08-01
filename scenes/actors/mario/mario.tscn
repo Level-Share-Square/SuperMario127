@@ -748,7 +748,7 @@ anims/shine_dance = SubResource( 20 )
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 position = Vector2( -0.985381, -69.232 )
 frames = ExtResource( 55 )
-frame = 9
+frame = 1
 speed_scale = 4.69231
 playing = true
 

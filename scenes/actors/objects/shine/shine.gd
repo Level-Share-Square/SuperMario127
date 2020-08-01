@@ -1,11 +1,8 @@
 # TODO: 
-# Polish 
-# Shine circling mario animation 
 # Shine Dance frames for fludd 
-# Perhaps reset mario's velocity on collection, or retain previous vertical momentum (sm64 does the latter)
+# Update ambient sound volume to consider both players (check cannon audio source script)
 extends GameObject
 
-onready var effects = $AnimatedSprite/ShineEffects
 onready var animated_sprite = $AnimatedSprite
 onready var ghost = $Ghost
 onready var area = $Area2D
@@ -77,17 +74,12 @@ func _physics_process(delta):
 				ambient_sound.playing = false
 				ghost.visible = true
 				animated_sprite.visible = false
-				effects.visible = false
 			else:
 				if !ambient_sound.playing:
 					ambient_sound.playing = true
 				ghost.visible = false
 				animated_sprite.visible = true
-				effects.visible = true
 		ambient_sound.volume_db = -16 + -abs(camera.global_position.distance_to(global_position)/25)
-	#warning-ignore:integer_division
-	effects.rotation_degrees = (OS.get_ticks_msec()/16) % 360
-	effects.position = animated_sprite.offset + Vector2(0, 2)
 	if collected:
 		var sprite = character.get_node("Sprite")
 		sprite.animation = "shineFall"
