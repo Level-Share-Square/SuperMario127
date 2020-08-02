@@ -1,0 +1,151 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/player/window/controlbindingwindow/extra_controlbinding_button.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/shared/button_sound_player.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.0705882, 0, 0.231373, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.15, 0.15, 0.15, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="DynamicFont" id=5]
+size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.631373, 0.156863, 0.156863, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.305882, 0.117647, 0.117647, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.317647, 0, 0, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[node name="BindingBox" type="Control"]
+margin_right = 1000.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 1000, 100 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyLabel" type="Label" parent="."]
+margin_left = 58.0
+margin_top = 23.0
+margin_right = 167.0
+margin_bottom = 87.0
+custom_fonts/font = SubResource( 1 )
+text = "Key:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyButton" type="Button" parent="."]
+margin_left = 190.0
+margin_top = 10.0
+margin_right = 340.0
+margin_bottom = 95.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
+action_mode = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="KeyButton"]
+stream = ExtResource( 3 )
+volume_db = -10.0
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="KeyButton"]
+stream = ExtResource( 4 )
+volume_db = -10.0
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="DeviceInfoLabel" type="Label" parent="."]
+margin_left = 388.0
+margin_top = 23.0
+margin_right = 854.0
+margin_bottom = 78.0
+custom_fonts/font = SubResource( 1 )
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeleteButton" type="Button" parent="."]
+visible = false
+margin_left = 902.0
+margin_top = 10.0
+margin_right = 987.0
+margin_bottom = 95.0
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 5 )
+action_mode = 0
+text = "X"
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="DeleteButton"]
+stream = ExtResource( 3 )
+volume_db = -10.0
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="DeleteButton"]
+stream = ExtResource( 4 )
+volume_db = -10.0
+__meta__ = {
+"_editor_description_": ""
+}

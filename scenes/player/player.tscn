@@ -517,7 +517,7 @@ __meta__ = {
 }
 shine_info = NodePath("../../ShineInfo")
 multiplayer_options = NodePath("../../MultiplayerOptions")
-control_options = NodePath("../../ControlsOptions")
+controls_options = NodePath("../../ControlsOptions")
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/MultiplayerButton"]
 stream = ExtResource( 9 )
@@ -1054,6 +1054,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 ignore_children = [ NodePath("Preset Selection"), NodePath("Description"), NodePath("ControlBindingWindow") ]
+menu_buttons = [ NodePath("../Bottom/ResumeButton"), NodePath("../Bottom/RetryButton"), NodePath("../Bottom/MultiplayerButton") ]
 
 [node name="Move Left" type="Control" parent="UI/PauseScreen/ControlsOptions"]
 margin_top = -13.0

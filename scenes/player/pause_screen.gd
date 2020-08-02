@@ -35,9 +35,11 @@ func _unhandled_input(event):
 		toggle_pause()
 
 func toggle_pause():
-	if !scene_transitions.transitioning and !mode_switcher.get_node("ModeSwitcherButton").switching_disabled and !PhotoMode.enabled and ((paused and get_tree().paused) or (!paused and !get_tree().paused)):
+	if !scene_transitions.transitioning and !mode_switcher.get_node("ModeSwitcherButton").switching_disabled and !PhotoMode.enabled and paused == get_tree().paused:
 		if !shine_info.visible:
 			$ControlsOptions.reset() # for resetting the Wait... state
+			$ControlsOptions/ControlBindingWindow/Contents/ScrollContainer/BindingBoxContainer.reset()
+			$ControlsOptions/ControlBindingWindow.close()
 			SettingsSaver.save($MultiplayerOptions)
 			if controls_options.visible:
 				controls_options.visible = false

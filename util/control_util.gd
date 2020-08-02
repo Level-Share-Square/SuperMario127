@@ -7,21 +7,24 @@ const JOYPAD_MOTION = 3
 
 const UNKNOWN = "Unknown"
 
-static func get_formatted_string(action) -> String:
-	var keybinding : Dictionary = PlayerSettings.keybindings[action]
-	var mode = keybinding.keys()[0]
+static func get_formatted_string_by_index(action, index) -> String:
+	var keybinding = PlayerSettings.keybindings[action]
+	var mode = keybinding[index][0]
 
 	match int(mode):
 		KEYBOARD:
-			return OS.get_scancode_string(keybinding[mode])
+			return OS.get_scancode_string(keybinding[index][1])
 		MOUSE:
-			return convert_button_index_to_string(keybinding[mode])
+			return convert_button_index_to_string(keybinding[index][1])
 		JOYPAD_BUTTON:
-			return "JB" + str(keybinding[mode][1])
+			return "JB" + str(keybinding[index][2])
 		JOYPAD_MOTION:
-			return "Axis " + str(keybinding[mode][1]) + ("+" if keybinding[mode][2] == 1 else "-")
+			return "Axis " + str(keybinding[index][2]) + ("+" if keybinding[index][3] == 1 else "-")
 	
 	return UNKNOWN
+	
+static func get_formatted_string(action) -> String:
+	return get_formatted_string_by_index(action, 0)
 
 static func convert_button_index_to_string(button_index):
 	match int(button_index):
@@ -45,3 +48,40 @@ static func convert_button_index_to_string(button_index):
 			return "XB2"
 		_:
 			return UNKNOWN
+			
+static func get_device_info(id, index):
+	var result = "Device: "
+	var keybindings = PlayerSettings.keybindings[id][index]
+	var mode : int = keybindings[0]
+	
+	match(mode):
+		KEYBOARD:
+			return result + "Keyboard"
+		MOUSE:
+			return result + "Mouse"
+		_:
+			return result + str(keybindings[1]) + "-Joystick"
+
+static func binding_alias_already_exists(id : String, index : int, data : Array):
+	var keybindings = PlayerSettings.keybindings[id]
+	for i in range(0, keybindings.size()):
+		if index == i:
+			continue
+		
+		if keybindings[i] == null:
+			return false
+			
+		if _arrays_equal(keybindings[i], data):
+			return true
+	
+	return false
+
+static func _arrays_equal(a, b):
+	if a.size() != b.size():
+		return false
+	for i in range(a.size()):
+		var val_a = a[i]
+		var val_b = b[i]
+		if val_a != val_b:
+			return false
+	return true

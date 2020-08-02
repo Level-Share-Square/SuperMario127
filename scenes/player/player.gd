@@ -6,7 +6,6 @@ export var camera : NodePath
 
 var mode = 0
 
-
 export var coin_frame : int
 const coin_anim_fps = 12
 var can_collect_coins : Array

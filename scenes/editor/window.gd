@@ -31,13 +31,14 @@ func open():
 		yield(tween, "tween_completed")
 	
 func close():
-	rect_scale = Vector2(0.4, 0.4)
-	tween.interpolate_property(self, "rect_scale",
-		Vector2(0.4, 0.4), Vector2(0, 0), 0.15,
-		Tween.TRANS_CIRC, Tween.EASE_IN)
-	tween.start()
-	yield(tween, "tween_completed")
-	visible = false
+	if visible:
+		rect_scale = Vector2(0.4, 0.4)
+		tween.interpolate_property(self, "rect_scale",
+			Vector2(0.4, 0.4), Vector2(0, 0), 0.15,
+			Tween.TRANS_CIRC, Tween.EASE_IN)
+		tween.start()
+		yield(tween, "tween_completed")
+		visible = false
 
 func _ready():
 	close_button.texture_normal = load(close_button.texture_normal.load_path)
@@ -52,3 +53,6 @@ func hovered():
 func pressed():
 	close()
 	click_sound.play()
+	
+func is_open():
+	return visible

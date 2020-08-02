@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/window.gd" type="Script" id=2]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=4]
+[ext_resource path="res://scenes/player/window/controlbindingwindow/extra_controls_options.gd" type="Script" id=6]
 [ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=7]
 [ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=11]
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=12]
@@ -11,24 +12,6 @@
 [sub_resource type="DynamicFont" id=1]
 size = 56
 use_filter = true
-font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.0705882, 0, 0.231373, 1 )
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0, 0.0470588, 0.317647, 1 )
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-
-[sub_resource type="DynamicFont" id=4]
-size = 48
 font_data = ExtResource( 1 )
 
 [node name="ControlBindingWindow" type="NinePatchRect"]
@@ -88,51 +71,25 @@ volume_db = -10.0
 anchor_bottom = 0.06
 margin_left = 17.4044
 margin_top = 104.0
-margin_right = 1036.4
-margin_bottom = 498.0
+margin_right = 1035.4
+margin_bottom = 497.96
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InputDeviceSelector" type="Control" parent="Contents"]
-margin_left = -17.0
-margin_top = -104.0
-margin_right = 23.0
-margin_bottom = -64.0
+[node name="ScrollContainer" type="ScrollContainer" parent="Contents"]
+margin_right = 1019.0
+margin_bottom = 380.0
+follow_focus = true
+scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ResetLevel" type="Control" parent="Contents"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ResetLevelButton" type="Button" parent="Contents/ResetLevel"]
-margin_left = 317.654
-margin_top = 402.567
-margin_right = 717.654
-margin_bottom = 492.567
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 4 )
-shortcut_in_tooltip = false
-action_mode = 0
-text = "Apply"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HoverSound" type="AudioStreamPlayer" parent="Contents/ResetLevel/ResetLevelButton"]
-stream = ExtResource( 3 )
-volume_db = -10.0
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="Contents/ResetLevel/ResetLevelButton"]
-stream = ExtResource( 12 )
-volume_db = -10.0
+[node name="BindingBoxContainer" type="VBoxContainer" parent="Contents/ScrollContainer"]
+margin_right = 1019.0
+margin_bottom = 380.0
+rect_min_size = Vector2( 1019, 380 )
+script = ExtResource( 6 )
 
 [node name="Tween" type="Tween" parent="."]
-[connection signal="pressed" from="Contents/ResetLevel/ResetLevelButton" to="Contents/ResetLevel/ResetLevelButton" method="_on_ResetLevelButton_pressed"]

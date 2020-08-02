@@ -11,11 +11,10 @@ export var id : String
 var last_hovered
 
 func _ready():
-	var keybindings = PlayerSettings.keybindings[id]
 	text = ControlUtil.get_formatted_string(id)
 
 func _gui_input(event):
-	if event is InputEventMouseButton && event.pressed:
+	if event is InputEventMouseButton && event.pressed && !binding_options.is_open():
 		if event.button_index == BUTTON_LEFT:		
 			if controls_options.currentButton != null:
 				controls_options.currentButton.text = controls_options.oldText
@@ -28,6 +27,24 @@ func _gui_input(event):
 		elif event.button_index == BUTTON_RIGHT:
 			controls_options.reset()
 			click_sound.play()
+			
+			var extra_bindings_container = binding_options.get_node("Contents").get_node("ScrollContainer").get_node("BindingBoxContainer")
+			
+			# Set key id
+			extra_bindings_container.id = id
+			
+			# Clear old key bindings
+			for children in extra_bindings_container.get_children():
+				children.queue_free()
+				
+			# Instantiate new ones
+			var extra_keybinding = load("res://scenes/player/window/controlbindingwindow/ControlBinding.tscn")
+			
+			for index in range(0, PlayerSettings.keybindings[id].size() + 1): # +1 for new binding option
+				var extra_keybinding_instance = extra_keybinding.instance()
+				extra_keybinding_instance.get_node("KeyButton").index = index
+				extra_bindings_container.add_child(extra_keybinding_instance)
+			
 			binding_options.open()
 	
 func _process(_delta):

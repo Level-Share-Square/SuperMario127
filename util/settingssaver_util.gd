@@ -63,11 +63,11 @@ static func get_keybindings() -> Dictionary:
 		elif data.has("controlMode"): # for backwards compatibility
 			controlPreset = data["controlMode"]
 		else:
-			return ControlPresets.presets.Default.duplicate()
+			return ControlPresets.presets.Default.duplicate(true)
 		if ControlPresets.presets.has(controlPreset):
-			return ControlPresets.presets[controlPreset].duplicate()
+			return ControlPresets.presets[controlPreset].duplicate(true)
 		else:
-			return ControlPresets.presets.Default.duplicate()
+			return ControlPresets.presets.Default.duplicate(true)
 	else:
 		return data["controls"]
 		
@@ -79,27 +79,26 @@ static func load_keybindings_into_actions():
 				
 static func set_keybindings(action):
 	var keybindings = PlayerSettings.keybindings
-	var binding = keybindings[action] if typeof(keybindings[action]) == TYPE_ARRAY else [keybindings[action]] # Make it an array containing itself for easier processing
+	var binding = keybindings[action]
 	for temp in binding:
-		var strmode = temp.keys()[0]
-		var mode = int(strmode)
+		var mode = temp[0]
 		var ev : InputEvent
 		
-		if mode == ControlUtil.KEYBOARD: # Have to use str() cuz dic key numbers get saved as strings
+		if mode == ControlUtil.KEYBOARD:
 			ev = InputEventKey.new()
-			ev.scancode = temp[strmode]
+			ev.scancode = temp[1]
 		elif mode == ControlUtil.MOUSE:
 			ev = InputEventMouseButton.new()
-			ev.button_index = temp[strmode]
+			ev.button_index = temp[1]
 		elif mode == ControlUtil.JOYPAD_BUTTON:
 			ev = InputEventJoypadButton.new()
-			ev.device = temp[strmode][0]
-			ev.button_index = temp[strmode][1]
+			ev.device = temp[1]
+			ev.button_index = temp[2]
 		elif mode == ControlUtil.JOYPAD_MOTION:
 			ev = InputEventJoypadMotion.new()
-			ev.device = temp[strmode][0]
-			ev.axis = temp[strmode][1]
-			ev.axis_value = temp[strmode][2]
+			ev.device = temp[1]
+			ev.axis = temp[2]
+			ev.axis_value = temp[3]
 			InputMap.action_set_deadzone(action, 0.5)
 		InputMap.action_add_event(action, ev)
 	
