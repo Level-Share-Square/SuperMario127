@@ -1904,7 +1904,6 @@ stream = ExtResource( 36 )
 volume_db = -10.0
 
 [node name="PlaceableItemsContainer" type="Sprite" parent="UI"]
-position = Vector2( 0, 0.397257 )
 scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 11 )
 centered = false
@@ -2254,7 +2253,7 @@ z_index = -1
 script = ExtResource( 8 )
 
 [node name="Backgrounds" parent="." instance=ExtResource( 52 )]
-position = Vector2( 0.644974, 11.5623 )
+position = Vector2( 1, 12 )
 
 [node name="Grid" type="ParallaxBackground" parent="."]
 layer = -1
