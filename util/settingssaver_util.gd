@@ -54,7 +54,7 @@ static func get_keybindings() -> Dictionary:
 	var data = get_data_or_null()
 	
 	if data == null:
-		return ControlPresets.presets.Default.duplicate()
+		return ControlPresets.presets.Default.duplicate(true)
 	
 	if !data.has("controls"):
 		var controlPreset
