@@ -18,9 +18,11 @@ func _ready():
 	else:
 		device_info_label.text = "Add new binding"
 	
+	if index != 0 && index != PlayerSettings.keybindings[binding_manager.id].size():
+		deleteButton.visible = true
+	
 	if index != 0:
 		var deleteButton : Button = get_parent().get_node("DeleteButton")
-		deleteButton.visible = true
 		deleteButton.connect("pressed", self, "deleteButtonPressed")
 
 func _pressed():
