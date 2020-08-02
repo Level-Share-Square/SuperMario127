@@ -48,3 +48,10 @@ func deleteButtonPressed():
 		if children == get_parent():
 			children.queue_free()
 			break
+			
+	var temp_index = 0
+	for children in binding_manager.get_children():
+		if children == get_parent():
+			continue
+		children.get_node("KeyButton").index = temp_index
+		temp_index+=1
