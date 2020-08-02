@@ -26,15 +26,16 @@ func _ready():
 	if index != 0:
 		deleteButton.connect("pressed", self, "deleteButtonPressed")
 
-func _pressed():
-	if binding_manager.currentButton != null:
-		binding_manager.currentButton.text = binding_manager.oldText
-		binding_manager.currentButton = null
-		return
-	
-	binding_manager.currentButton = self
-	binding_manager.oldText = text
-	text = "Wait..."
+func _gui_input(event):
+	if event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_LEFT:
+		if binding_manager.currentButton != null:
+			binding_manager.currentButton.text = binding_manager.oldText
+			binding_manager.currentButton = null
+			return
+		
+		binding_manager.currentButton = self
+		binding_manager.oldText = text
+		text = "Wait..."
 	
 func _process(_delta):
 	if is_hovered() and !last_hovered:
