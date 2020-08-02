@@ -1,0 +1,23 @@
+extends Sprite
+
+var editor : Node
+var editor_camera : Camera2D
+var dragging = false
+
+func _ready():
+	editor = get_tree().get_current_scene()
+	editor_camera = editor.get_node("Camera2D")
+	
+func _process(_delta):
+	var item = editor.dragging_item
+	if item != null and !dragging:
+		texture = item.preview
+		dragging = true
+	elif item == null and dragging:
+		texture = null
+		dragging = false
+	
+	if dragging:
+		#var mouse_pos = editor.get_local_mouse_position() + editor_camera
+		var mouse_pos = Vector2(100, 100)
+		position = mouse_pos
