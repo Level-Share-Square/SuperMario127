@@ -1,24 +1,20 @@
-extends GameObject
+extends PhysicsBody2D
 
 onready var area = $Area2D
-onready var body = $StaticBody2D
-onready var collision_shape = $StaticBody2D/CollisionShape2D
+onready var collision_shape = $CollisionShape2D
 
 var buffer := -5
 
 func _ready():
-	if !enabled:
-		collision_shape.disabled = true
-	preview_position = Vector2(0, 92)
 	collision_shape.one_way_collision = false
 
 func can_collide_with(character):
-	var direction = body.global_transform.y.normalized()
+	var direction = global_transform.y.normalized()
 	
 	# Use prev_is_grounded because calling is_grounded() is broken
 	var is_grounded = character.prev_is_grounded if character.get("prev_is_grounded") != null else true
 	# Some math that gives us useful vectors
-	var line_center = body.global_position + (direction * buffer)
+	var line_center = global_position + (direction * buffer)
 	var line_direction = Vector2(-direction.y, direction.x)
 	var p1 = line_center + line_direction
 	var p2 = line_center - line_direction
