@@ -1,51 +1,51 @@
 extends GameObject
 
-onready var sprite = $Goomba/Sprite
-onready var kinematic_body = $Goomba
-onready var attack_area = $Goomba/AttackArea
-onready var stomp_area = $Goomba/StompArea
-onready var grounded_check = $Goomba/GroundedCheck
-onready var grounded_check_2 = $Goomba/GroundedCheck2
-onready var wall_check = $Goomba/WallCheck
-onready var wall_vacant_check = $Goomba/WallVacantCheck
-onready var pit_check = $Goomba/PitCheck
-onready var particles = $Goomba/Poof
-onready var player_detector = $Goomba/PlayerDetector
-onready var stomp_sound = $Goomba/Stomp
-onready var poof_sound = $Goomba/Disappear
-onready var hit_sound = $Goomba/Hit
-onready var anim_player = $Goomba/AnimationPlayer
-onready var platform_detector = $Goomba/PlatformDetector
-onready var bottom_pos = $Goomba/BottomPos
-onready var raycasts = [grounded_check, grounded_check_2, wall_check, wall_vacant_check, pit_check]
-var dead = false
+onready var sprite : AnimatedSprite = $Goomba/Sprite
+onready var kinematic_body : KinematicBody2D = $Goomba
+onready var attack_area : Area2D = $Goomba/AttackArea
+onready var stomp_area : Area2D = $Goomba/StompArea
+onready var player_detector : Area2D = $Goomba/PlayerDetector
+onready var platform_detector : Area2D = $Goomba/PlatformDetector
+onready var grounded_check : RayCast2D = $Goomba/GroundedCheck
+onready var grounded_check_2 : RayCast2D = $Goomba/GroundedCheck2
+onready var wall_check : RayCast2D = $Goomba/WallCheck
+onready var wall_vacant_check : RayCast2D = $Goomba/WallVacantCheck
+onready var pit_check : RayCast2D = $Goomba/PitCheck
+onready var particles : Particles2D = $Goomba/Poof
+onready var stomp_sound : AudioStreamPlayer = $Goomba/Stomp
+onready var poof_sound : AudioStreamPlayer = $Goomba/Disappear
+onready var hit_sound : AudioStreamPlayer = $Goomba/Hit
+onready var anim_player : AnimationPlayer = $Goomba/AnimationPlayer
+onready var bottom_pos : Node2D = $Goomba/BottomPos
+onready var raycasts := [grounded_check, grounded_check_2, wall_check, wall_vacant_check, pit_check]
+var dead := false
 
 var gravity : float
 var velocity := Vector2()
 
-var walk_timer = 0.0
-var walk_wait = 3.0
-var boost_timer = 0.0
-var hide_timer = 0.0
-var delete_timer = 0.0
-var speed = 30
-var run_speed = 90
-var shell_max_speed = 560
-var accel = 5
+var walk_timer := 0.0
+var walk_wait := 3.0
+var boost_timer := 0.0
+var hide_timer := 0.0
+var delete_timer := 0.0
+var speed := 30
+var run_speed := 90
+var shell_max_speed := 560
+var accel := 5
 
 var facing_direction := -1
-var time_alive = 0.0
+var time_alive := 0.0
 
-var hit = false
+var hit := false
 var snap := Vector2(0, 12)
 
-var was_stomped = false
-var was_ground_pound = false
-var bounced = false
+var was_stomped := false
+var was_ground_pound := false
+var bounced := false
 
-var loaded = true
+var loaded := true
 
-var character
+var character : Character
 
 export var top_point : Vector2
 
@@ -55,7 +55,7 @@ func jump():
 	snap = Vector2(0, 0)
 	position.y -= 2
 
-func detect_player(body):
+func detect_player(body : Character):
 	if enabled and body.name.begins_with("Character") and !dead and character == null:
 		character = body
 		facing_direction = sign(character.global_position.x - body.global_position.x)
@@ -79,9 +79,9 @@ func exploded(explosion_pos : Vector2):
 func steely_hit(hit_pos : Vector2):
 	if !hit:
 		kill(hit_pos)
-	
+
 func create_coin():
-	var object = LevelObject.new()
+	var object := LevelObject.new()
 	object.type_id = 1
 	object.properties = []
 	object.properties.append(kinematic_body.global_position)
@@ -93,7 +93,7 @@ func create_coin():
 	var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
 	object.properties.append(Vector2(velocity_x, -300))
 	get_parent().create_object(object, false)
-		
+
 func kill(hit_pos : Vector2):
 	if !hit and !dead:
 		if is_instance_valid(kinematic_body):
@@ -114,22 +114,22 @@ func kill(hit_pos : Vector2):
 				hit = true
 				hit_sound.play()
 				sprite.playing = false
-				var normal = sign((kinematic_body.global_position - hit_pos).x)
+				var normal := sign((kinematic_body.global_position - hit_pos).x)
 				velocity = Vector2(normal * 225, -225)
 				position.y -= 2
 				snap = Vector2(0, 0)
-				
+
 func _process(_delta):
 	if mode == 1:
 		# warning-ignore: integer_division
 		sprite.frame = wrapi(OS.get_ticks_msec() / 166, 0, 4)
 
-func _physics_process(delta):
+func _physics_process(delta : float):
 	time_alive += delta
 	
 	if mode != 1 and enabled and loaded:
-		var is_in_platform = false
-		var platform_collision_enabled = false
+		var is_in_platform := false
+		var platform_collision_enabled := false
 		for platform_body in platform_detector.get_overlapping_areas():
 			if platform_body.has_method("is_platform_area"):
 				if platform_body.is_platform_area():
@@ -141,13 +141,13 @@ func _physics_process(delta):
 			raycast.set_collision_mask_bit(4, platform_collision_enabled)
 		
 		if is_instance_valid(kinematic_body):
-			var level_bounds = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds
+			var level_bounds : Rect2 = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds
 			if !hit:
 				physics_process_normal(delta, level_bounds, is_in_platform)
 			else:
 				physics_process_hit(delta, level_bounds, is_in_platform)
 
-func physics_process_normal(delta, level_bounds, is_in_platform):
+func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform : bool):
 	if kinematic_body.global_position.y > (level_bounds.end.y * 32) + 128:
 		queue_free()
 	
@@ -172,7 +172,7 @@ func physics_process_normal(delta, level_bounds, is_in_platform):
 		# Go towards the player
 		sprite.animation = "walking"
 		sprite.speed_scale = lerp(sprite.speed_scale, run_speed / speed, delta * accel)
-		facing_direction = 1 if (character.global_position.x > kinematic_body.global_position.x) else -1
+		facing_direction = sign(character.global_position.x - kinematic_body.global_position.x)
 		velocity.x = lerp(velocity.x, facing_direction * run_speed, delta * accel)
 	
 	# Die when out of bounds
@@ -214,7 +214,7 @@ func physics_process_normal(delta, level_bounds, is_in_platform):
 		if hit_body.name.begins_with("Character"):
 			if hit_body.velocity.y > 0:
 				was_stomped = true
-				if character.big_attack or character.invincible:
+				if hit_body.big_attack or hit_body.invincible:
 					was_ground_pound = true
 				kill(hit_body.global_position)
 	
@@ -222,7 +222,7 @@ func physics_process_normal(delta, level_bounds, is_in_platform):
 	velocity.y += gravity
 	velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
 
-func physics_process_hit(delta, level_bounds, is_in_platform):
+func physics_process_hit(delta : float, level_bounds : Rect2, is_in_platform : bool):
 	if kinematic_body.global_position.y > (level_bounds.end.y * 32) + 128:
 		queue_free()
 	
@@ -268,7 +268,7 @@ func physics_process_hit(delta, level_bounds, is_in_platform):
 	elif !dead:
 		# The goomba is rolling around (from spin or off-center ground pound)
 		sprite.rotation_degrees += (velocity.x / 15)
-		var check = grounded_check
+		var check := grounded_check
 		if !grounded_check.is_colliding():
 			check = grounded_check_2
 		#  velocity.length()         <   50
@@ -282,13 +282,13 @@ func physics_process_hit(delta, level_bounds, is_in_platform):
 	if sprite.visible:
 		# Ground collision
 		if grounded_check.is_colliding() or grounded_check_2.is_colliding():
-			var check = grounded_check
+			var check := grounded_check
 			if !grounded_check.is_colliding():
 				check = grounded_check_2
 			if check.get_collision_normal().y == -1:
 				velocity.x = lerp(velocity.x, 0, delta * 2.5)
 			else:
-				var normal = sign(check.get_collision_normal().x)
+				var normal := sign(check.get_collision_normal().x)
 				velocity.x = lerp(velocity.x, 225 * normal, delta)
 			
 			snap = Vector2(0, 0 if is_in_platform else 12)

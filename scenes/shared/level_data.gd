@@ -8,7 +8,7 @@ var object_cache = []
 var background_cache = []
 var foreground_cache = []
 
-var enemies_instanced = 0
+var enemies_instanced := 0
 
 func _ready():
 	level_data = LevelData.new()
