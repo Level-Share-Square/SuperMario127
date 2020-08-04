@@ -44,7 +44,7 @@ func _stop(_delta):
 	sprite.rotation_degrees = 0
 
 func _stop_check(_delta):
-	return character.velocity.y > 0 or character.is_grounded()
+	return character.velocity.y > 0
 
 func _general_update(delta):
 	if character.dive_cooldown > 0:

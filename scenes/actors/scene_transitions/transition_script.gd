@@ -46,10 +46,10 @@ func do_transition_animation(transition_texture, transition_time, texture_scale_
 	# if the start scale is greater, then the screen is transitioning to black
 	var to_black = texture_scale_start > texture_scale_end
 	tween.interpolate_property(canvas_mask, "texture_scale", texture_scale_start, texture_scale_end, transition_time, Tween.TRANS_CIRC, Tween.EASE_OUT if to_black else Tween.EASE_IN)
-	if music_node.volume_multiplier != 0:
+	if !music_node.is_tween_active(): #this is so it doesn't interfere with any temp music fade out, like the shine
 		tween.interpolate_property(music_node, "volume_multiplier", volume_start, volume_end, transition_time, Tween.TRANS_CIRC, Tween.EASE_OUT)
 	tween.start()
-		
+
 	#wait for the tween to finish before returning, and then a little extra time
 	yield(tween, "tween_all_completed")
 	yield(get_tree().create_timer(0.1), "timeout")
