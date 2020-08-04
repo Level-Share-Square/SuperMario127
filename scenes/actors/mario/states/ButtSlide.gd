@@ -23,10 +23,12 @@ func _start_check(_delta):
 	var normal = character.ground_check.get_collision_normal()
 	return (character.nozzle == null or !character.nozzle.activated) and character.inputs[9][1] and character.is_grounded() and abs(normal.x) > 0.2
 
+var starting_slide_sign = 1
 func _start(_delta):
 	temp_speed = move_speed
 	character.sound_player.set_skid_playing(true)
 	stop_buffer = 0.5
+	starting_slide_sign = sign(character.velocity.x)
 
 func _update(delta):
 	var sprite = character.animated_sprite
@@ -67,6 +69,13 @@ func _update(delta):
 		
 	if character.inputs[2][0]:
 		character.set_state_by_name("JumpState", 0)
+	
+	# Prevent infinite slides between 2 slopes
+	if sign(character.velocity.x) != starting_slide_sign:
+		stop_buffer = 0
+		character.set_state_by_name("BounceState", delta)
+		character.position.y -= 1
+		character.velocity.y = -150
 
 func _stop(_delta):
 	character.sound_player.set_skid_playing(false)
