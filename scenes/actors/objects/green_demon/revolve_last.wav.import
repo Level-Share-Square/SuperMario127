@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/revolve_last.wav-43d11b479cc496f5c23d1fd066f206ab.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/green_demon/revolve_last.wav"
+dest_files=[ "res://.import/revolve_last.wav-43d11b479cc496f5c23d1fd066f206ab.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
