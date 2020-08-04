@@ -96,12 +96,12 @@ func _unhandled_input(event):
 		volume_multiplier = 0 if volume_multiplier == 1 else 1
 
 # the plan for this is to mute the current bgm, play the temp song, and then fade the current bgm back in
-func play_temporary_music(temp_song_id):
+func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0):
 	volume_multiplier = 0
 
 	tween.stop_all()
 	temporary_music_player.stream = get_song(temp_song_id).stream
-	temporary_music_player.volume_db = 0
+	temporary_music_player.volume_db = temp_song_volume
 	temporary_music_player.play()
 
 # returns the id of the temporary song

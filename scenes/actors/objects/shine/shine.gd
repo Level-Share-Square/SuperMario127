@@ -12,6 +12,7 @@ onready var animation_player = $AnimationPlayer
 onready var transitions = get_node("/root/scene_transitions")
 
 const COURSE_CLEAR_MUSIC_ID = 28
+const COURSE_CLEAR_MUSIC_VOLUME = -7.5
 const SHINE_DANCE_END_DELAY = 1.25
 
 onready var current_scene = get_tree().current_scene
@@ -96,7 +97,7 @@ func _physics_process(delta):
 			character.sprite.animation = "shineDance"
 			character.anim_player.play("shine_dance")
 			
-			music.play_temporary_music(COURSE_CLEAR_MUSIC_ID)
+			music.play_temporary_music(COURSE_CLEAR_MUSIC_ID, COURSE_CLEAR_MUSIC_VOLUME)
 			
 			character.anim_player.connect("animation_finished", self, "character_shine_dance_finished")
 			
