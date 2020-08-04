@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/actors/objects/goomba/goomba.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/goomba/frames.tres" type="SpriteFrames" id=2]
@@ -21,28 +21,25 @@ extents = Vector2( 11, 8 )
 extents = Vector2( 14, 2 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 14, 7 )
-
-[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 208.896, 69.015 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 32, 32 )
 
-[sub_resource type="CanvasItemMaterial" id=8]
+[sub_resource type="CanvasItemMaterial" id=7]
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="ParticlesMaterial" id=9]
+[sub_resource type="ParticlesMaterial" id=8]
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 anim_speed = 1.0
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:animation")
@@ -117,24 +114,22 @@ script = ExtResource( 7 )
 
 [node name="Sprite" type="AnimatedSprite" parent="Goomba"]
 frames = ExtResource( 2 )
+frame = 3
+playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba"]
-visible = false
 position = Vector2( -6.5, -1 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Goomba"]
-visible = false
 position = Vector2( 6.5, -1 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Goomba"]
-visible = false
 position = Vector2( 0, -5 )
 shape = SubResource( 2 )
 
 [node name="AttackArea" type="Area2D" parent="Goomba"]
-visible = false
 position = Vector2( 0, -7 )
 collision_layer = 4
 collision_mask = 2
@@ -144,7 +139,6 @@ position = Vector2( 0, 8 )
 shape = SubResource( 3 )
 
 [node name="StompArea" type="Area2D" parent="Goomba"]
-visible = false
 position = Vector2( 0, -7 )
 collision_layer = 4
 collision_mask = 2
@@ -153,16 +147,6 @@ collision_mask = 2
 position = Vector2( 0, -2 )
 shape = SubResource( 4 )
 
-[node name="BounceArea" type="Area2D" parent="Goomba"]
-visible = false
-position = Vector2( 0, -7 )
-collision_layer = 4
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba/BounceArea"]
-position = Vector2( 0, 9 )
-shape = SubResource( 5 )
-
 [node name="PlayerDetector" type="Area2D" parent="Goomba"]
 visible = false
 position = Vector2( 0, -7 )
@@ -170,7 +154,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba/PlayerDetector"]
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="PlatformDetector" type="Area2D" parent="Goomba"]
 visible = false
@@ -178,7 +162,7 @@ collision_layer = 4
 collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Goomba/PlatformDetector"]
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 
 [node name="Stomp" type="AudioStreamPlayer" parent="Goomba"]
 stream = ExtResource( 6 )
@@ -228,16 +212,16 @@ cast_to = Vector2( 0, 40 )
 collision_mask = 17
 
 [node name="Poof" type="Particles2D" parent="Goomba"]
-material = SubResource( 8 )
+material = SubResource( 7 )
 emitting = false
 amount = 1
 lifetime = 0.35
 one_shot = true
-process_material = SubResource( 9 )
+process_material = SubResource( 8 )
 texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Goomba"]
-anims/Stomped = SubResource( 10 )
+anims/Stomped = SubResource( 9 )
 
 [node name="BottomPos" type="Node2D" parent="Goomba"]
 position = Vector2( 0, 5 )
