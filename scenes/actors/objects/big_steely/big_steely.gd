@@ -13,6 +13,8 @@ onready var dust_particle = $Steely/DustParticle
 onready var grounded_check = $Steely/Check1
 onready var grounded_check_2 = $Steely/Check2
 
+onready var despawn_timer = $DespawnTimer 
+
 #onready var collider = $Steely/SteelieCollider/CollisionShapeSteelie
 #onready var collider_stopped = $Steely/CollisionShapeStopped
 
@@ -43,6 +45,8 @@ func _ready():
 	scale = initial_scale
 	fade_time = 0.5
 	modulate = Color(1, 1, 1, 0)
+
+	despawn_timer.connect("timeout", self, "_on_despawn_timer_timeout")
 	
 func disable_all_descendants(node):
 	for child in node.get_children():
@@ -154,3 +158,11 @@ func _physics_process(delta):
 		if break_timer <= 0:
 			break_timer = 0
 			queue_free()
+
+func setup_despawn_timer(wait_time): #for now, this is only called by the steely spawner
+	despawn_timer.wait_time = wait_time 
+	despawn_timer.start()
+	
+func _on_despawn_timer_timeout():
+	if !visiblity_notifier.is_on_screen():
+		queue_free()
