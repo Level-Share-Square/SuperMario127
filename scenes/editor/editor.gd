@@ -14,6 +14,8 @@ export var shared : NodePath
 export var object_settings : NodePath
 var selected_box : Node
 var selected_object : Node
+# Placed objects can use this variable when set in the placement action
+var placed_item_property = null
 
 var dragging_item : Node
 var display_preview_item = true
@@ -137,6 +139,10 @@ func switch_scenes():
 func _process(delta):
 	# warning-ignore: integer_division
 	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
+	
+	# For some strange reason, setting it to null right after the object is created causes issues,
+	# so wait a frame instead by placing the assignment over here
+	placed_item_property = null
 	
 	var level_size = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds.size
 	if (level_size.x < 42 or level_size.y < 22) and zoom_level == 1.75:
