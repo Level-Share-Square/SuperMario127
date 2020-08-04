@@ -49,7 +49,7 @@ var attack_cooldown := 0.0 # Prevents the player from getting hurt right after s
 
 func _set_properties():
 	savable_properties = ["color", "rainbow", "winged"]
-	editable_properties = ["color", "rainbow", "winged"] # TODO: remove from editable properties
+	editable_properties = ["color", "rainbow"]
 	
 func _set_property_values():
 	set_property("color", color, true)
@@ -60,6 +60,12 @@ func _ready():
 	CurrentLevelData.enemies_instanced += 1
 	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
 	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
+	
+	var scene = get_tree().current_scene
+	if scene.mode == 1:
+		if scene.placed_item_property == "Para":
+			set_property("winged", true)
+	
 	sprite.frames = para_sprite if winged else normal_sprite
 	sprite_color.frames = para_color_sprite if winged else normal_color_sprite
 
@@ -128,10 +134,11 @@ func _process(_delta):
 		
 		var on_screen = visibility_notifier.is_on_screen()
 		if shell_in_can_collect_coins != on_screen:
+			var can_collect_coins = get_tree().current_scene.can_collect_coins
 			if on_screen:
-				get_tree().current_scene.can_collect_coins.append(shell)
+				can_collect_coins.append(shell)
 			else:
-				get_tree().current_scene.can_collect_coins.erase(shell)
+				can_collect_coins.erase(shell)
 			shell_in_can_collect_coins = on_screen
 		
 	elif is_instance_valid(body) and !is_body_queued_free:

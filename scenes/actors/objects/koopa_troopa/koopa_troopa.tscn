@@ -13,10 +13,10 @@ length = 16.0
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8.5, 9 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 14, 2 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 18, 16 )
 
 [node name="KoopaTroopa" type="Node2D"]
@@ -64,7 +64,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Koopa/StompArea"]
 position = Vector2( 0, -4 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="ShellDetector" type="Area2D" parent="Koopa"]
 visible = false
@@ -72,7 +72,7 @@ collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Koopa/ShellDetector"]
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="Left" type="RayCast2D" parent="Koopa"]
 position = Vector2( -14, 14 )
