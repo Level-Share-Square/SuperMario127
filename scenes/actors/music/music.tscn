@@ -7,3 +7,7 @@ bus = "Editor"
 script = ExtResource( 2 )
 play_bus = "Master"
 edit_bus = "Editor"
+
+[node name="TemporaryMusicPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Tween" type="Tween" parent="."]

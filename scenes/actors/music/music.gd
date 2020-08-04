@@ -6,9 +6,13 @@ export var edit_bus: String
 var character = null
 var character2 = null
 
+onready var temporary_music_player = $TemporaryMusicPlayer
+onready var tween = $Tween
+
 export var volume_multiplier : float = 1
 export var loading = false
-var orig_volume = 0
+var base_volume = 0
+var stored_volume #used when playing temporary music to return the volume afterwards
 
 var last_mode = 3
 var last_song = 0
@@ -19,17 +23,19 @@ var downloader = Downloader.new()
 var song_cache = []
 var loop = 0.0
 
-var is_powerup = false
+const MUSIC_FADE_LENGTH = 0.75
 
 func get_song(song_id: int):
 	return song_cache[song_id]
 
 func _ready():
-	orig_volume = volume_db
+	base_volume = volume_db
 	var _connect = downloader.connect("request_completed", self, "load_ogg")
 	var level_songs : IdMap  = preload("res://assets/music/ids.tres")
 	for id in level_songs.ids:
 		song_cache.append(load("res://assets/music/resources/" + id + ".tres"))
+
+	temporary_music_player.connect("finished", self, "stop_temporary_music")
 	
 func load_ogg():
 	var path = "user://bg_music.ogg"
@@ -75,39 +81,38 @@ func _process(_delta):
 	var current_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
 	
 	if "mode" in current_scene: #script will crash if the scene root doesn't have this property defined
-		if !is_powerup:
-			var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
-			if current_scene.mode != last_mode or typeof(last_song) != typeof(level_song):
-				change_song(last_song, level_song)
-			elif last_song != current_song:
-				change_song(last_song, level_song)
-			last_mode = current_scene.mode
-			last_song = level_song
+		var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
+		if current_scene.mode != last_mode or typeof(last_song) != typeof(level_song):
+			change_song(last_song, level_song)
+		elif last_song != current_song:
+			change_song(last_song, level_song)
+		last_mode = current_scene.mode
+		last_song = level_song
 	
-		volume_db = linear2db(db2linear(orig_volume) * volume_multiplier)
-	
-		if current_scene.mode == 0 and is_instance_valid(character):
-			if character.powerup != null:
-				if (typeof(current_song) == TYPE_INT and character.powerup.music_id != current_song) or typeof(current_song) != TYPE_INT:
-					last_song = current_song
-					current_song = character.powerup.music_id
-					change_song(last_song, current_song)
-					is_powerup = true
-			else:
-				if is_powerup:
-					last_song = current_song
-					var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
-					current_song = level_song
-					change_song(last_song, level_song)
-				is_powerup = false
-		else:
-			if is_powerup:
-				last_song = current_song
-				var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
-				current_song = level_song
-				change_song(last_song, level_song)
-			is_powerup = false
+		volume_db = linear2db(db2linear(base_volume) * volume_multiplier)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("mute"):
 		volume_multiplier = 0 if volume_multiplier == 1 else 1
+
+# the plan for this is to mute the current bgm, play the temp song, and then fade the current bgm back in
+func play_temporary_music(temp_song_id):
+	volume_multiplier = 0
+
+	tween.stop_all()
+	temporary_music_player.stream = get_song(temp_song_id).stream
+	temporary_music_player.volume_db = 0
+	temporary_music_player.play()
+
+# returns the id of the temporary song
+func is_temporary_music_playing():
+	return temporary_music_player.playing
+
+#can be called manually, also automatically called if the temporary music ends
+func stop_temporary_music(volume_multipler_target = 1):
+	tween.interpolate_property(temporary_music_player, "volume_db", null, -80, MUSIC_FADE_LENGTH, \
+			Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.interpolate_callback(temporary_music_player, MUSIC_FADE_LENGTH, "stop")
+	tween.interpolate_property(self, "volume_multiplier", null, volume_multipler_target, MUSIC_FADE_LENGTH, \
+			Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.start()
