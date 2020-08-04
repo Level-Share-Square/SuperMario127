@@ -256,12 +256,12 @@ sound_number = 1
 
 [node name="Shine1" type="AudioStreamPlayer" parent="ShineSounds"]
 stream = ExtResource( 30 )
-volume_db = 1.0
+volume_db = 2.5
 bus = "Voices"
 
 [node name="Shine2" type="AudioStreamPlayer" parent="ShineSounds"]
 stream = ExtResource( 29 )
-volume_db = 1.0
+volume_db = 2.5
 bus = "Voices"
 
 [node name="OtherSounds" type="Node" parent="."]

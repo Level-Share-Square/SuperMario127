@@ -12,8 +12,9 @@ onready var animation_player = $AnimationPlayer
 onready var transitions = get_node("/root/scene_transitions")
 
 const COURSE_CLEAR_MUSIC_ID = 28
-const COURSE_CLEAR_MUSIC_VOLUME = -7.5
+const COURSE_CLEAR_MUSIC_VOLUME = -2.25
 const SHINE_DANCE_END_DELAY = 1.25
+const MUSIC_TRANSITION_TIME_PLAY_MODE = 0.5
 
 onready var current_scene = get_tree().current_scene
 var collected = false
@@ -125,10 +126,13 @@ func character_shine_dance_finished(_animation):
 	yield(get_tree().create_timer(SHINE_DANCE_END_DELAY), "timeout") # delay a bit once the animation is done before starting the fadeout/transition back to the editor
 	
 	music.playing = true #we set it to false so it'd stop while falling with the shine, but now we need it to fade back in
-	music.bus = music.edit_bus #change the bus now so the music fades in to the right volume level
-	music.stop_temporary_music()
-
+	
+	#bus is changed based on whether or not you are in the player, or editor, this makes sure music fades to the correct volume in both situations
 	if mode_switcher.get_node("ModeSwitcherButton").invisible: #if not running through the editor, play the fancy transition
+		music.bus = music.play_bus 
+		music.stop_temporary_music(MUSIC_TRANSITION_TIME_PLAY_MODE)
 		transitions.reload_scene(character.cutout_shine, character.cutout_circle, transitions.DEFAULT_TRANSITION_TIME, 0, true)
 	else:
+		music.bus = music.edit_bus
+		music.stop_temporary_music()
 		mode_switcher.get_node("ModeSwitcherButton")._pressed()

@@ -37,6 +37,9 @@ func _ready():
 
 	temporary_music_player.connect("finished", self, "stop_temporary_music")
 	
+func is_tween_active():
+	return tween.is_active()
+	
 func load_ogg():
 	var path = "user://bg_music.ogg"
 	var ogg_file = File.new()
@@ -109,10 +112,10 @@ func is_temporary_music_playing():
 	return temporary_music_player.playing
 
 #can be called manually, also automatically called if the temporary music ends
-func stop_temporary_music(volume_multipler_target = 1):
-	tween.interpolate_property(temporary_music_player, "volume_db", null, -80, MUSIC_FADE_LENGTH, \
+func stop_temporary_music(volume_multipler_target = 1, music_fade_length = MUSIC_FADE_LENGTH):
+	tween.interpolate_property(temporary_music_player, "volume_db", null, -80, music_fade_length, \
 			Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.interpolate_callback(temporary_music_player, MUSIC_FADE_LENGTH, "stop")
-	tween.interpolate_property(self, "volume_multiplier", null, volume_multipler_target, MUSIC_FADE_LENGTH, \
+	tween.interpolate_property(self, "volume_multiplier", null, volume_multipler_target, music_fade_length, \
 			Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.start()
