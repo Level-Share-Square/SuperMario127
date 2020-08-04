@@ -1,48 +1,36 @@
 # TODO:
-# sounds [DONE]
-# player state that disables all but input polling [DONE]
-# player into dive state after cannon shot [DONE]
-# general polish (maybe some particles?) [DONE]
-# change fire key to fludd [DONE]
-# change all the nodes to use variables instead [DONE]
-# change properties in editor (the export variables) [DONE]
-# make the cannon able to face the other way [DONE]
 # disable rotations in the editor 
-# disable cannon hitbox while active, don't re-enable it unless no players are inside the area of the hitbox [DONE]
-# change cannon animation to fire instantly and then have a small recoil [DONE]
-# make the pipe animation only activate when the player is in stand or walk states [DONE (hopefully)]
-# z-index stuff [DONE]
 extends GameObject
 
-onready var pipe_enter_logic = $PipeEnterLogic
-onready var cannon_exit_position = $CannonMoveable/SpriteBodyReverser/SpriteBody/CannonExitPosition
-onready var entrance_collision = $EntranceCollision
-onready var cannon_moveable = $CannonMoveable
-onready var sprite_body = $CannonMoveable/SpriteBodyReverser/SpriteBody
-onready var sprite_body_reverser = $CannonMoveable/SpriteBodyReverser
-onready var sprite_fuse = $CannonMoveable/SpriteBodyReverser/SpriteBody/SpriteFuse
-onready var animation_player = $AnimationPlayer
-onready var tween = $Tween 
-onready var audio_player = $AudioStreamPlayer
-onready var particles = $CannonMoveable/SpriteBodyReverser/SpriteBody/Particles2D
-onready var nearby_character_detection = $NearbyCharacterDetection
+onready var pipe_enter_logic : Node2D = $PipeEnterLogic
+onready var cannon_exit_position : Position2D = $CannonMoveable/SpriteBodyReverser/SpriteBody/CannonExitPosition
+onready var entrance_collision : StaticBody2D = $EntranceCollision
+onready var cannon_moveable : Node2D = $CannonMoveable
+onready var sprite_body : Sprite = $CannonMoveable/SpriteBodyReverser/SpriteBody
+onready var sprite_body_reverser : Node2D = $CannonMoveable/SpriteBodyReverser
+onready var sprite_fuse : AnimatedSprite = $CannonMoveable/SpriteBodyReverser/SpriteBody/SpriteFuse
+onready var animation_player : AnimationPlayer = $AnimationPlayer
+onready var tween : Tween = $Tween 
+onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
+onready var particles : Particles2D = $CannonMoveable/SpriteBodyReverser/SpriteBody/Particles2D
+onready var nearby_character_detection : Area2D = $NearbyCharacterDetection
 
 # the character using the cannon
-var stored_character
+var stored_character : Character
 
 # when the cannon faces left, this is -1, so it's used for ensuring everything is properly flipped when facing left
 var cannon_direction_multiplier := 1
 
 # constants used for the animations immediately after firing the cannon
-const ROTATION_RETURN_DELAY = 0.3
-const ROTATION_RETURN_TIME = 0.3
-const FIRE_STRETCH_TIME = 0.1 #the stretching animation that happens just after firing mario out 
-const FIRE_UNSTRETCH_TIME = 0.05
-const FIRE_STRETCH_MULTIPLIER = 1.2
+const ROTATION_RETURN_DELAY := 0.3
+const ROTATION_RETURN_TIME := 0.3
+const FIRE_STRETCH_TIME := 0.1 #the stretching animation that happens just after firing mario out 
+const FIRE_UNSTRETCH_TIME := 0.05
+const FIRE_STRETCH_MULTIPLIER := 1.2
 
 # cannon moves to the background while in use so other characters walk in front of it, but if it's not in the foreground as well when entering it you'll appear on top
-const Z_INDEX_FOREGROUND = 0
-const Z_INDEX_BACKGROUND = -5 
+const Z_INDEX_FOREGROUND := 0
+const Z_INDEX_BACKGROUND := -5 
 
 # properties that can be changed in the editor
 var launch_power := 1200
@@ -51,20 +39,20 @@ var max_rotation := 90
 var faces_right := true
 	
 # the audio files used in the code for some of the cannons movements
-onready var cannon_move_noise = preload("res://scenes/actors/objects/cannon/crank.tres")
-onready var cannon_fire_noise = preload("res://scenes/actors/objects/cannon/nsmbwiiBobombCannon.wav")
+onready var cannon_move_noise : AudioStream = preload("res://scenes/actors/objects/cannon/crank.tres")
+onready var cannon_fire_noise : AudioStream = preload("res://scenes/actors/objects/cannon/nsmbwiiBobombCannon.wav")
 
-func _set_properties():
+func _set_properties() -> void:
 	savable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right"]
 	editable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right"]
 	
-func _set_property_values():
+func _set_property_values() -> void:
 	set_property("launch_power", launch_power)
 	set_property("min_rotation", min_rotation)
 	set_property("max_rotation", max_rotation)
 	set_property("faces_right", faces_right)
 
-func _ready():
+func _ready() -> void:
 	set_physics_process(false)
 
 	if !faces_right:
@@ -75,7 +63,7 @@ func _ready():
 	pipe_enter_logic.connect("pipe_animation_finished", self, "_start_cannon_animation")
 
 #disabled by default until process is enabled, so this can assume the cannon is already in an active state
-func _physics_process(delta):
+func _physics_process(delta : float) -> void:
 	#if the jump button is pressed, fire the cannon
 	if stored_character.get_input(Character.input_names.fludd, true):
 		set_physics_process(false)
@@ -86,8 +74,8 @@ func _physics_process(delta):
 
 		#cannon recoil animation so the shot has more power
 		tween.interpolate_property(sprite_body, "scale:y", null, scale.y * FIRE_STRETCH_MULTIPLIER, FIRE_STRETCH_TIME)
-		tween.interpolate_property(sprite_body, "scale:y", scale.y * FIRE_STRETCH_MULTIPLIER, scale.y, FIRE_UNSTRETCH_TIME, Tween.TRANS_LINEAR, \
-				Tween.EASE_IN_OUT, FIRE_STRETCH_TIME) 
+		tween.interpolate_property(sprite_body, "scale:y", scale.y * FIRE_STRETCH_MULTIPLIER, scale.y, FIRE_UNSTRETCH_TIME, \
+				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, FIRE_STRETCH_TIME) 
 
 		#return cannon to pointing straight up
 		tween.interpolate_property(sprite_body, "rotation_degrees", null, 0, ROTATION_RETURN_TIME, \
@@ -97,8 +85,10 @@ func _physics_process(delta):
 		
 		return
 
-	#booleans when converting to integer are 0 or 1, so doing right - left means when right is pressed, it'll be 1, when left is pressed it'll be -1, and when both/neither are pressed it'll be 0
-	var horizontal_input = int(stored_character.get_input(Character.input_names.right, false)) - int(stored_character.get_input(Character.input_names.left, false))
+	#booleans when converting to integer are 0 or 1, so doing right - left means when right is pressed, it'll be 1, 
+	#when left is pressed it'll be -1, and when both/neither are pressed it'll be 0
+	var horizontal_input : int = int(stored_character.get_input(Character.input_names.right, false)) \
+			- int(stored_character.get_input(Character.input_names.left, false))
 	horizontal_input *= cannon_direction_multiplier
 
 	if horizontal_input != 0:
@@ -109,7 +99,7 @@ func _physics_process(delta):
 			or sprite_body.rotation_degrees == max_rotation #the stream used for the cannon move sound is set in the cannon startup animation finish function
 
 # called by a signal when the pipe enter animation finished
-func _start_cannon_animation(character):
+func _start_cannon_animation(character : Character) -> void:
 	stored_character = character 
 
 	cannon_moveable.z_index = Z_INDEX_BACKGROUND
@@ -119,7 +109,7 @@ func _start_cannon_animation(character):
 
 	animation_player.play("cannon_startup")
 
-func _on_animation_finished(anim_name):
+func _on_animation_finished(anim_name : String) -> void:
 	if anim_name == "cannon_startup":
 		stored_character.controllable = true
 		stored_character.set_state_by_name("NoActionState", get_physics_process_delta_time())
@@ -139,11 +129,11 @@ func _on_animation_finished(anim_name):
 		audio_player.set_process(false)
 
 #after the tween is done, the cannon is pointing straight up and needs to retract so it can be used again
-func _on_tween_all_completed():
+func _on_tween_all_completed() -> void:
 	animation_player.play("cannon_retract")
 	sprite_fuse.visible = false
 
-func fire_cannon():
+func fire_cannon() -> void:
 	#return the player control and such to normal 
 	stored_character.invulnerable = false
 	stored_character.controllable = true
@@ -165,20 +155,24 @@ func fire_cannon():
 	particles.emitting = true
 
 #used to re-enable the entrance collision only when a player exits the vicinity
-func _on_NearbyCharacterDetection_body_exited(body):
+func _on_NearbyCharacterDetection_body_exited(body : PhysicsBody2D) -> void:
 	attempt_enable_collision(body)
 
-func attempt_enable_collision(body = null):
+func attempt_enable_collision(body : PhysicsBody2D = null) -> void:
 	var overlapping_bodies = nearby_character_detection.get_overlapping_bodies()
 
-	if body: #body is passed to this by the body exited call, if body isn't provided then this is the call from after the cannon finishes retracting
+	#body is passed to this by the body exited call, if body isn't provided then this is the call from 
+	#after the cannon finishes retracting
+	if body: 
 		overlapping_bodies.erase(body) #we know this body isn't in anymore, since the method was called after all
 	
-	#physics process being enabled for the cannon only happens when the player is controlling it, and we don't want the cannon to have a hitbox during that
-	var can_enable_collision = (overlapping_bodies.size() == 0 and !is_physics_processing())
+	#physics process being enabled for the cannon only happens when the player is controlling it, and we don't 
+	#want the cannon to have a hitbox during that
+	var can_enable_collision : bool = (overlapping_bodies.size() == 0 and !is_physics_processing())
 
 	entrance_collision.set_collision_layer_bit(0, can_enable_collision)
 	pipe_enter_logic.is_idle = can_enable_collision
 	
-	# simple little math thing, if can_enable_collision is true, it'll be a 1, if false it'll be a 0, so one of the values will be multiplied by 0 and therefore impact anything
+	# simple little math thing, if can_enable_collision is true, it'll be a 1, if false it'll be a 0, 
+	#so one of the values will be multiplied by 0 and therefore impact anything
 	cannon_moveable.z_index = Z_INDEX_FOREGROUND * int(can_enable_collision) + Z_INDEX_BACKGROUND * int(!can_enable_collision)
