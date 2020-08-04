@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=349 format=2]
+[gd_resource type="TileSet" load_steps=350 format=2]
 
 [ext_resource path="res://assets/tiles/bricks/bricks.png" type="Texture" id=1]
 [ext_resource path="res://assets/tiles/grass/grass.png" type="Texture" id=2]
@@ -1022,6 +1022,9 @@ points = PoolVector2Array( 32, 17, 15, 17, 0, 29, 0, 4, 4, 0, 32, 0 )
 [sub_resource type="ConvexPolygonShape2D" id=337]
 points = PoolVector2Array( 32, 29, 17, 17, 0, 17, 0, 0, 29, 0, 32, 4 )
 
+[sub_resource type="ConvexPolygonShape2D" id=338]
+points = PoolVector2Array( 0, 5, 28, 18, 28, 31, 0, 31 )
+
 [resource]
 2/name = "Grass"
 2/texture = ExtResource( 2 )
@@ -1830,6 +1833,12 @@ points = PoolVector2Array( 32, 29, 17, 17, 0, 17, 0, 0, 29, 0, 32, 4 )
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 181 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 3, 3 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 338 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 4/z_index = 0
