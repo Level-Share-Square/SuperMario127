@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://scenes/actors/objects/red_coin/glow_effects.tscn" type="PackedScene" id=6]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=1]
 
 [sub_resource type="DynamicFont" id=2]
 outline_size = 2
@@ -18,7 +18,7 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]

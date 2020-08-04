@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/actors/objects/yellow_coin/yellow.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/coin.gd" type="Script" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=1]
 
 [node name="Coin" type="Node2D"]
 script = ExtResource( 3 )
