@@ -147,3 +147,5 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 12 )
 texture = ExtResource( 6 )
+
+[node name="DespawnTimer" type="Timer" parent="."]
