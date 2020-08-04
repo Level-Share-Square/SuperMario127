@@ -11,7 +11,7 @@ func _pressed():
 	click_sound.play()
 	
 	var selector = get_parent().get_node("Selector")
-	PlayerSettings.keybindings = ControlPresets.presets[selector.text].duplicate()
+	PlayerSettings.keybindings = ControlPresets.presets[selector.text].duplicate(true)
 	
 	controls_options.currentButton = null
 	

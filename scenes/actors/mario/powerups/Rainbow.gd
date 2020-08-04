@@ -13,10 +13,11 @@ func _ready():
 	music_id = 26
 
 func _start(_delta):
+	music.play_temporary_music(music_id)
 	has_landed = false
 
 func _stop(_delta):
-	pass
+	music.stop_temporary_music()
 
 func create_trail():
 	var trail = character.sprite.duplicate()

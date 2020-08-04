@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/actors/objects/mushroom_top/mushroom_top.png" type="Texture" id=1]
-[ext_resource path="res://scenes/actors/objects/metal_platform/metal_platform.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/metal_platform/semi_solid_platform.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/metal_platform/is_platform_area.gd" type="Script" id=3]
+[ext_resource path="res://classes/GameObject.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 28, 3 )
@@ -12,7 +13,7 @@ extents = Vector2( 48, 32 )
 
 [node name="MushroomTop" type="Node2D"]
 z_index = -1
-script = ExtResource( 2 )
+script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
 z_index = -8
@@ -22,18 +23,19 @@ texture = ExtResource( 1 )
 position = Vector2( 0, -8 )
 collision_layer = 16
 collision_mask = 2147483649
+script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource( 1 )
 one_way_collision = true
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2( 0, -7 )
+[node name="Area2D" type="Area2D" parent="StaticBody2D"]
+position = Vector2( 0, 1 )
 collision_layer = 16
 collision_mask = 2
 script = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Area2D"]
 shape = SubResource( 2 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]

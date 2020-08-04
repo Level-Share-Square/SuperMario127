@@ -65,6 +65,8 @@ func change_visuals(new_scene):
 
 func switch():
 	if get_parent().layer != 99 and !switching_disabled and !get_tree().paused and !scene_transitions.transitioning:
+		music.stop_temporary_music() #we don't want powerup music going into the editor
+
 		ActionManager.clear_history()
 		var new_scene = get_tree().get_current_scene().mode
 		if new_scene == 0:

@@ -6,9 +6,11 @@ func _ready():
 	set_physics_process(false)
 
 func _start(_delta):
+	music.play_temporary_music(music_id)
 	character.set_all_collision_masks(6, false)
 
 func _stop(_delta):
+	music.stop_temporary_music()
 	character.set_all_collision_masks(6, true)
 	#if the player is colliding with a 0,0 velocity, that means they are inside a vanish cap passthrough block
 	if character.test_move(character.transform, Vector2(0,0)):

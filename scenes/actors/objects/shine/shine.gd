@@ -11,7 +11,9 @@ onready var ambient_sound = $AmbientSound
 onready var animation_player = $AnimationPlayer
 onready var transitions = get_node("/root/scene_transitions")
 
-onready var course_clear_music = preload("res://assets/music/course_clear.ogg")
+const COURSE_CLEAR_MUSIC_ID = 28
+const COURSE_CLEAR_MUSIC_VOLUME = -7.5
+const SHINE_DANCE_END_DELAY = 1.25
 
 onready var current_scene = get_tree().current_scene
 var collected = false
@@ -95,9 +97,7 @@ func _physics_process(delta):
 			character.sprite.animation = "shineDance"
 			character.anim_player.play("shine_dance")
 			
-			music.stream = course_clear_music
-			music.orig_volume = -7.5
-			music.play()
+			music.play_temporary_music(COURSE_CLEAR_MUSIC_ID, COURSE_CLEAR_MUSIC_VOLUME)
 			
 			character.anim_player.connect("animation_finished", self, "character_shine_dance_finished")
 			
@@ -122,8 +122,12 @@ func activate_shine():
 	unpause_timer = 3.35
 
 func character_shine_dance_finished(_animation):
-	yield(get_tree().create_timer(1.25), "timeout")
+	yield(get_tree().create_timer(SHINE_DANCE_END_DELAY), "timeout") # delay a bit once the animation is done before starting the fadeout/transition back to the editor
 	
+	music.playing = true #we set it to false so it'd stop while falling with the shine, but now we need it to fade back in
+	music.bus = music.edit_bus #change the bus now so the music fades in to the right volume level
+	music.stop_temporary_music()
+
 	if mode_switcher.get_node("ModeSwitcherButton").invisible: #if not running through the editor, play the fancy transition
 		transitions.reload_scene(character.cutout_shine, character.cutout_circle, transitions.DEFAULT_TRANSITION_TIME, 0, true)
 	else:
