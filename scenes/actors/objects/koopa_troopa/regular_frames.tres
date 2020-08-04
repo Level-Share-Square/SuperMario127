@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/texture.png" type="Texture" id=1]
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 34, 32 )
 
@@ -36,7 +36,7 @@ region = Rect2( 32, 0, 32, 32 )
 
 [resource]
 animations = [ {
-"frames": [ SubResource( 9 ) ],
+"frames": [ SubResource( 1 ) ],
 "loop": true,
 "name": "default",
 "speed": 6.0

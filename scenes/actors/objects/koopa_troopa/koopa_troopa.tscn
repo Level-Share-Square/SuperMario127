@@ -1,18 +1,17 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/koopa_troopa.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/regular_frames.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/color_frames.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://scenes/actors/objects/koopa_troopa/para_color_frames.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://scenes/actors/objects/koopa_troopa/para_regular_frames.tres" type="SpriteFrames" id=6]
 
 [sub_resource type="RayShape2D" id=1]
 length = 16.0
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8.5, 9 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 8, 6 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 14, 2 )
@@ -23,6 +22,10 @@ extents = Vector2( 18, 16 )
 [node name="KoopaTroopa" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
+normal_sprite = ExtResource( 2 )
+normal_color_sprite = ExtResource( 4 )
+para_sprite = ExtResource( 6 )
+para_color_sprite = ExtResource( 5 )
 
 [node name="Koopa" type="KinematicBody2D" parent="."]
 collision_layer = 4
@@ -48,7 +51,6 @@ position = Vector2( 6.5, 0 )
 shape = SubResource( 1 )
 
 [node name="AttackArea" type="Area2D" parent="Koopa"]
-visible = false
 collision_layer = 4
 collision_mask = 2
 
@@ -56,13 +58,7 @@ collision_mask = 2
 position = Vector2( 0, 7 )
 shape = SubResource( 2 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Koopa/AttackArea"]
-visible = false
-position = Vector2( 0, -6 )
-shape = SubResource( 3 )
-
 [node name="StompArea" type="Area2D" parent="Koopa"]
-visible = false
 collision_layer = 4
 collision_mask = 2
 
