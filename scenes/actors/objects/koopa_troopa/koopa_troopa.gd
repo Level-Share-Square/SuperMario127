@@ -2,14 +2,18 @@ extends GameObject
 
 onready var sprite = $Koopa/Sprite
 onready var sprite_color = $Koopa/Sprite/Color
-onready var body = $Koopa
-var is_body_queued_free := false
 onready var attack_area = $Koopa/AttackArea
 onready var stomp_area = $Koopa/StompArea
 onready var left_check = $Koopa/Left
 onready var right_check = $Koopa/Right
 onready var koopa_sound = $Koopa/AudioStreamPlayer
 onready var visibility_notifier = $Koopa/VisibilityNotifier2D
+
+onready var body = $Koopa
+var is_body_queued_free := false
+func body_exists():
+	return !is_body_queued_free and is_instance_valid(body)
+
 export var normal_sprite : SpriteFrames
 export var normal_color_sprite : SpriteFrames
 export var para_sprite : SpriteFrames
@@ -50,7 +54,7 @@ var attack_cooldown := 0.0 # Prevents the player from getting hurt right after s
 func _set_properties():
 	savable_properties = ["color", "rainbow", "winged"]
 	editable_properties = ["color", "rainbow"]
-	
+
 func _set_property_values():
 	set_property("color", color, true)
 	set_property("rainbow", rainbow, true)
@@ -62,9 +66,8 @@ func _ready():
 	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
 	
 	var scene = get_tree().current_scene
-	if scene.mode == 1:
-		if scene.placed_item_property == "Para":
-			set_property("winged", true)
+	if scene.mode == 1 and scene.placed_item_property == "Para":
+		set_property("winged", true)
 	
 	sprite.frames = para_sprite if winged else normal_sprite
 	sprite_color.frames = para_color_sprite if winged else normal_color_sprite
@@ -75,8 +78,7 @@ func delete_wings():
 	sprite_color.frames = normal_color_sprite
 
 func retract_into_shell():
-	var shell_scene = MiscCache.shell_scene
-	shell = shell_scene.instance()
+	shell = MiscCache.shell_scene.instance()
 	shell_sprite = shell.get_node("Sprite")
 	shell_sprite_color = shell_sprite.get_node("Color")
 	shell_stomp_area = shell.get_node("StompArea")
@@ -93,18 +95,18 @@ func retract_into_shell():
 	delete_wings()
 
 func shell_hit(shell_pos : Vector2):
-	if is_instance_valid(body):
+	if body_exists():
 		kill(shell_pos)
-		
+
 func exploded(explosion_pos : Vector2):
 	kill(explosion_pos)
-	
+
 func steely_hit(hit_pos : Vector2):
 	kill(hit_pos)
-		
+
 func kill(hit_pos : Vector2):
 	if !hit:
-		if is_instance_valid(body):
+		if body_exists():
 			retract_into_shell()
 		if is_instance_valid(shell):
 			hit = true
@@ -141,7 +143,7 @@ func _process(_delta):
 				can_collect_coins.erase(shell)
 			shell_in_can_collect_coins = on_screen
 		
-	elif is_instance_valid(body) and !is_body_queued_free:
+	elif body_exists():
 		sprite_color.flip_h = sprite.flip_h
 		sprite_color.animation = sprite.animation
 		sprite_color.frame = sprite.frame
@@ -158,7 +160,7 @@ func _physics_process(delta):
 			delete_timer = 0
 			self_queue_free()
 			return # Technically don't need to do anything else. Might prevent crashes too
-
+	
 	if !loaded and visibility_notifier and visibility_notifier.is_on_screen():
 		loaded = true
 	
@@ -224,7 +226,7 @@ func _physics_process(delta):
 				shell_sprite.flip_h = velocity.x < 0
 				velocity.y += gravity
 				velocity = shell.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
-			elif !is_body_queued_free and is_instance_valid(body):
+			elif body_exists():
 				if body.global_position.y > (level_bounds.end.y * 32) + 128:
 					self_queue_free()
 					return # Might prevent crashes
