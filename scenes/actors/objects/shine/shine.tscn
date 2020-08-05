@@ -113,3 +113,6 @@ texture = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/appear = SubResource( 3 )
+
+[node name="UnpauseTimer" type="Timer" parent="."]
+one_shot = true
