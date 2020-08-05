@@ -24,10 +24,6 @@ func _physics_process(delta):
 	rainbow_gradient_texture.gradient = rainbow_gradient
 
 func _ready():
-	NotificationHandler.success("Game loaded", "I eat raw steak")
-	NotificationHandler.warning("Game loaded", "Yeah, I already know...")
-	NotificationHandler.warning("Game loaded... again", "Yeah, we did it, bois!")
-	
 	var data = CurrentLevelData.level_data
 	load_in(data, data.areas[CurrentLevelData.area])
 	music.character = get_node(character)
