@@ -159,12 +159,6 @@ load_path = "res://.import/icon.png-f8b0399d9244d4055e92dc67242cc371.stex"
 [sub_resource type="StreamTexture" id=4]
 load_path = "res://.import/turbo_box.png-6f28657900f6cb6391239052bd625eb4.stex"
 
-[sub_resource type="StreamTexture" id=5]
-load_path = "res://.import/para_icon.png-8aeadaf4263a669c7f336ac385709817.stex"
-
-[sub_resource type="StreamTexture" id=6]
-load_path = "res://.import/para_preview.png-0e3469addce65f08caeb730d898460dc.stex"
-
 [sub_resource type="StreamTexture" id=7]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
 
@@ -173,6 +167,12 @@ load_path = "res://.import/preview.png-b5e1f057c76348c498eb58977a6fa3d8.stex"
 
 [sub_resource type="StreamTexture" id=9]
 load_path = "res://.import/icon.png-2f7996d42f2cb278ea1c7da3bda68d02.stex"
+
+[sub_resource type="StreamTexture" id=5]
+load_path = "res://.import/para_icon.png-8aeadaf4263a669c7f336ac385709817.stex"
+
+[sub_resource type="StreamTexture" id=6]
+load_path = "res://.import/para_preview.png-0e3469addce65f08caeb730d898460dc.stex"
 
 [sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 1, 1, 1, 0.501961 )
@@ -1153,20 +1153,6 @@ index_in_sequence = 1
 icon = ExtResource( 148 )
 preview = ExtResource( 150 )
 
-[node name="ParaTroopa" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 28
-is_object = true
-object_center = Vector2( 8, 8 )
-tile_mode_step = 16
-z_index = -1
-change_to = "KoopaTroopa"
-items_in_sequence = 2
-index_in_sequence = 1
-icon = SubResource( 5 )
-preview = SubResource( 6 )
-placement_action = ExtResource( 33 )
-
 [node name="SpecialGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
 color = Color( 0.439216, 0.121569, 0.517647, 1 )
@@ -1554,6 +1540,20 @@ change_to = "ParaTroopa"
 items_in_sequence = 2
 icon = ExtResource( 131 )
 preview = ExtResource( 130 )
+
+[node name="ParaTroopa" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 3 )
+object_id = 28
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+z_index = -1
+change_to = "KoopaTroopa"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = SubResource( 5 )
+preview = SubResource( 6 )
+placement_action = ExtResource( 33 )
 
 [node name="BobOmb" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 3 )
