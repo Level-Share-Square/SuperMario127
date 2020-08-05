@@ -9,7 +9,6 @@ onready var spin_area = $SpinArea
 onready var turbo_spin_area = $TurboSpinArea
 onready var player_detector = $PlayerStompDetector
 onready var player_spin_detector = $PlayerSpinDetector
-onready var break_detector = $BreakDetector
 onready var broken_sound = $Broken
 onready var break_particle = $BreakParticle
 onready var dust_particle = $DustParticle
@@ -45,16 +44,20 @@ func steely_hit(hit_pos):
 		break_box()
 
 func break_box():
-	broken = true
-	if not broken_sound.is_playing(): 
-		break_detector.set_collision_layer_bit(2, false)
-		for i in(coins): create_coin()
-		break_particle.show()
-		dust_particle.show()
-		break_particle.set_emitting(true)
-		dust_particle.set_emitting(true)
-		broken_sound.play()
-		delete_timer = 3.0
+	if !broken:
+		broken = true
+		if !broken_sound.is_playing(): 
+			for i in(coins): create_coin()
+			break_particle.show()
+			dust_particle.show()
+			break_particle.set_emitting(true)
+			dust_particle.set_emitting(true)
+			broken_sound.play()
+			sprite.visible = false
+			static_body.set_collision_layer_bit(0, false)
+			static_body.set_collision_mask_bit(1, false)
+			stomp_area.set_collision_layer_bit(0, false)
+			delete_timer = 3.0
 
 func detect_player(body):
 	if enabled and body.name.begins_with("Character") and !broken and character == null:
@@ -64,6 +67,8 @@ func top_breakable(hit_body):
 	return hit_body.name.begins_with("Character") and (hit_body.velocity.y > 0 and !hit_body.is_grounded()) and (hit_body.big_attack or hit_body.invincible)
 
 func side_breakable(hit_body):
+	if hit_body.name == "Steely" and hit_body.get_parent().should_hit:
+		return true
 	return hit_body.name.begins_with("Character") and ((hit_body.attacking and !hit_body.big_attack) or hit_body.invincible)
 
 func turbo_breakable(hit_body):
@@ -88,12 +93,6 @@ func _physics_process(delta):
 		for hit_body in turbo_spin_area.get_overlapping_bodies():
 			if !broken and turbo_breakable(hit_body):
 				break_box()
-		
-		if broken == true:
-			sprite.visible = false
-			static_body.set_collision_layer_bit(0, false)
-			static_body.set_collision_mask_bit(1, false)
-			stomp_area.set_collision_layer_bit(0, false)
 
 func create_coin(): #creates a coin
 	time_alive += 1

@@ -23,6 +23,7 @@ onready var visiblity_notifier = $Steely/VisibilityNotifier2D
 var velocity := Vector2(0, 0)
 var prev_pos := Vector2(0, 0)
 var gravity : float
+var should_hit := false
 
 var fade_time = 0.0
 var alpha = 0.0
@@ -102,7 +103,7 @@ func _physics_process(delta):
 		var actual_velocity = (new_pos - prev_pos) / delta / 120
 		prev_pos = new_pos
 		
-		var should_hit = actual_velocity.length_squared() > 0.25
+		should_hit = actual_velocity.length_squared() > 0.25
 		
 		var platform_collision_enabled = false
 		for platform_body in platform_detector.get_overlapping_areas():
