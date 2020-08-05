@@ -29,7 +29,7 @@ var anim_damp := 160
 
 var title := "Unnamed Shine"
 var description := "This is a shine! Collect it to win the level."
-var show_in_menu := false
+var show_in_menu := true
 var activated := true
 var red_coins_activate := false
 var shine_shards_activate := false

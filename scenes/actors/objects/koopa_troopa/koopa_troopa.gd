@@ -25,6 +25,7 @@ var loaded = false
 
 var gravity : float
 var velocity := Vector2()
+var original_position
 
 var delete_timer = 0.0
 var speed = 30
@@ -46,6 +47,9 @@ var shell_destroy_area
 var shell_grounded_check
 var shell_in_can_collect_coins := false
 
+const PARA_SIN_SPEED = 5.5
+const PARA_SIN_AMOUNT = 3
+
 var color := Color(0, 1, 0)
 var rainbow := false
 var winged := false
@@ -61,6 +65,7 @@ func _set_property_values():
 	set_property("winged", winged, true)
 
 func _ready():
+	original_position = global_position
 	CurrentLevelData.enemies_instanced += 1
 	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
 	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
@@ -293,8 +298,9 @@ func physics_process_koopa(delta, level_bounds):
 			velocity.x = lerp(velocity.x, facing_direction * speed, delta * accel)
 			velocity.y += gravity
 		else:
-			# Paratroopas are static
+			# Paratroopas go up and down very slightly
 			velocity = Vector2(0, 0)
+			global_position.y = original_position.y + (sin(time_alive * PARA_SIN_SPEED) * PARA_SIN_AMOUNT)
 		
 		velocity = body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
 		
