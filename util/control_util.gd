@@ -72,6 +72,7 @@ static func binding_alias_already_exists(id : String, index : int, data : Array)
 			return false
 			
 		if _arrays_equal(keybindings[i], data):
+			NotificationHandler.error("Binding error", "The binding you've set already exists for this action!")
 			return true
 	
 	return false
