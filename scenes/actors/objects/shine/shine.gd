@@ -114,7 +114,7 @@ func collect(body : PhysicsBody2D) -> void:
 		character = body
 
 		# hacky fix for the player being stuck in the ground during the shine dance if diving into a very low shine
-		if character.state.name == "SlideState" and character.is_grounded():
+		if character.state != null and character.state.name == "SlideState" and character.is_grounded():
 			character.position.y -= 16
 
 		character.set_state_by_name("FallState", get_physics_process_delta_time())

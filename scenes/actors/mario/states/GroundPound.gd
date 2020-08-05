@@ -3,6 +3,8 @@ extends State
 class_name GroundPoundState
 
 export var ground_pound_power := 550
+export var dive_vertical_power = 350
+var can_dive = true
 
 func _ready():
 	priority = 4
@@ -14,13 +16,18 @@ func _ready():
 func _start_check(_delta):
 	return false
 
-func _start(_delta):
+func _start(delta):
 	var sprite = character.sprite
 	if character.facing_direction == 1:
 		sprite.animation = "groundPoundRight"
 	else:
 		sprite.animation = "groundPoundLeft"
 	character.velocity.y = ground_pound_power
+
+func _update(delta):
+	if character.inputs[character.input_names.dive][1] and can_dive:
+		character.velocity.y = -dive_vertical_power
+		character.set_state_by_name("DiveState", delta)
 
 func _stop(delta):
 	if character.is_grounded():
