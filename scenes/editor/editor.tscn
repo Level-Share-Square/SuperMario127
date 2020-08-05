@@ -157,19 +157,19 @@ load_path = "res://.import/icon.png-f8b0399d9244d4055e92dc67242cc371.stex"
 [sub_resource type="StreamTexture" id=4]
 load_path = "res://.import/turbo_box.png-6f28657900f6cb6391239052bd625eb4.stex"
 
-[sub_resource type="StreamTexture" id=8]
+[sub_resource type="StreamTexture" id=5]
 load_path = "res://.import/para_icon.png-8aeadaf4263a669c7f336ac385709817.stex"
 
-[sub_resource type="StreamTexture" id=9]
+[sub_resource type="StreamTexture" id=6]
 load_path = "res://.import/para_preview.png-0e3469addce65f08caeb730d898460dc.stex"
 
-[sub_resource type="StreamTexture" id=5]
+[sub_resource type="StreamTexture" id=7]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
 
-[sub_resource type="StreamTexture" id=6]
+[sub_resource type="StreamTexture" id=8]
 load_path = "res://.import/preview.png-b5e1f057c76348c498eb58977a6fa3d8.stex"
 
-[sub_resource type="StreamTexture" id=7]
+[sub_resource type="StreamTexture" id=9]
 load_path = "res://.import/icon.png-2f7996d42f2cb278ea1c7da3bda68d02.stex"
 
 [sub_resource type="StyleBoxFlat" id=10]
@@ -1161,8 +1161,8 @@ z_index = -1
 change_to = "KoopaTroopa"
 items_in_sequence = 2
 index_in_sequence = 1
-icon = SubResource( 8 )
-preview = SubResource( 9 )
+icon = SubResource( 5 )
+preview = SubResource( 6 )
 placement_action = ExtResource( 33 )
 
 [node name="SpecialGroup" type="Node" parent="PlaceableItems"]
@@ -1225,8 +1225,8 @@ object_center = Vector2( 16, 16 )
 change_to = "Coin"
 items_in_sequence = 3
 index_in_sequence = 2
-icon = SubResource( 5 )
-preview = SubResource( 6 )
+icon = SubResource( 7 )
+preview = SubResource( 8 )
 
 [node name="Shine" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
@@ -1253,7 +1253,7 @@ object_center = Vector2( 16, 16 )
 z_index = -1
 change_to = "RocketBox"
 items_in_sequence = 3
-icon = SubResource( 7 )
+icon = SubResource( 9 )
 preview = ExtResource( 100 )
 
 [node name="SmallBottle" type="Node" parent="PlaceableItems/SpecialGroup"]
