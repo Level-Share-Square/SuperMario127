@@ -327,6 +327,7 @@ func hide():
 func show():
 	visible = true
 
+# new_state is of type State, however adding static typing would cause a cyclic dependency
 func set_state(new_state, delta: float):
 	recalculate_grounded = true
 	last_state = state
@@ -656,25 +657,11 @@ func _physics_process(delta: float):
 			attacking = true
 		else:
 			attacking = false
-			
+
 		if state.use_dive_collision and !using_dive_collision:
-			using_dive_collision = true
-
-			collision_shape.disabled = true
-			collision_raycast.disabled = true
-			dive_collision_shape.disabled = false
-			ground_collision_dive.disabled = false
-			left_collision.disabled = true
-			right_collision.disabled = true
-		if !state.use_dive_collision and using_dive_collision:
-			using_dive_collision = false
-
-			collision_shape.disabled = false
-			collision_raycast.disabled = false
-			dive_collision_shape.disabled = true
-			ground_collision_dive.disabled = true
-			left_collision.disabled = false
-			right_collision.disabled = false
+			set_dive_collision(true)
+		elif !state.use_dive_collision and using_dive_collision:
+			set_dive_collision(false)
 				
 		if state.disable_snap:
 			snap = Vector2()
@@ -880,3 +867,17 @@ func update_inputs():
 			for input in inputs:
 				input[0] = false
 				input[1] = false
+
+func set_inter_player_collision(can_collide : bool) -> void:
+	player_collision.set_collision_mask_bit(1, can_collide)
+	player_collision.set_collision_layer_bit(1, can_collide)
+
+func set_dive_collision(is_enabled : bool) -> void:
+	using_dive_collision = is_enabled
+
+	collision_shape.disabled = is_enabled
+	collision_raycast.disabled = is_enabled
+	dive_collision_shape.disabled = !is_enabled
+	ground_collision_dive.disabled = !is_enabled
+	left_collision.disabled = is_enabled
+	right_collision.disabled = is_enabled

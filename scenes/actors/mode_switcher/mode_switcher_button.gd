@@ -1,19 +1,19 @@
 extends TextureButton
 
-onready var tween = $Tween
-onready var tween_hover = $TweenHover
-onready var tween_coin = $TweenCoin
-onready var tween_disappear = $TweenDisappear
-onready var coin = $Coin
-onready var sound = $Sound
-onready var hover_sound = $HoverSound
-onready var fader = get_node("../Fader")
-onready var fader_tween = get_node("../Fader/Tween")
-var switching_disabled = true
-var start_pos
-var last_hovered = false
-var last_paused = false
-var invisible = true
+onready var tween : Tween = $Tween
+onready var tween_hover : Tween = $TweenHover
+onready var tween_coin : Tween = $TweenCoin
+onready var tween_disappear : Tween = $TweenDisappear
+onready var coin : Sprite = $Coin
+onready var sound : AudioStreamPlayer = $Sound
+onready var hover_sound : AudioStreamPlayer = $HoverSound
+onready var fader : ColorRect = get_node("../Fader")
+onready var fader_tween : Tween = get_node("../Fader/Tween")
+var switching_disabled := true
+var start_pos : Vector2
+var last_hovered := false
+var last_paused := false
+var invisible := true
 
 export var texture_play : StreamTexture
 export var texture_stop : StreamTexture
@@ -21,10 +21,10 @@ export var texture_stop : StreamTexture
 export var edit_pos : Vector2
 export var play_pos : Vector2
 
-func _ready():
+func _ready() -> void:
 	start_pos = self.rect_position
 
-func _physics_process(_delta):
+func _physics_process(_delta : float) -> void:
 	if !get_tree().paused and !invisible:
 		if last_paused:
 			visible = true
@@ -53,23 +53,23 @@ func _physics_process(_delta):
 		visible = false
 		last_paused = true
 		
-func _unhandled_input(event):
+func _unhandled_input(event : InputEvent) -> void:
 	if event.is_action_pressed("switch_modes"):
 		_pressed()
 
-func _pressed():
+func _pressed() -> void:
 	switch()
 		
-func change_visuals(new_scene):
-	self.texture_normal = texture_play if new_scene == 0 else texture_stop
+func change_visuals(new_scene_mode : int) -> void:
+	self.texture_normal = texture_play if new_scene_mode == 0 else texture_stop
 
-func switch():
+func switch() -> void:
 	if get_parent().layer != 99 and !switching_disabled and !get_tree().paused and !scene_transitions.transitioning:
 		music.stop_temporary_music() #we don't want powerup music going into the editor
 
 		ActionManager.clear_history()
-		var new_scene = get_tree().get_current_scene().mode
-		if new_scene == 0:
+		var new_scene_mode = get_tree().get_current_scene().mode
+		if new_scene_mode == 0:
 			Networking.disconnect_from_peers()
 		
 		sound.play()
@@ -104,7 +104,7 @@ func switch():
 		CurrentLevelData.level_data.vars = LevelVars.new() # Reset vars
 		
 		get_tree().get_current_scene().switch_scenes()
-		change_visuals(new_scene)
+		change_visuals(new_scene_mode)
 		
 		yield(get_tree().create_timer(0.1), "timeout")
 		
@@ -125,6 +125,6 @@ func switch():
 		rect_position = start_pos
 		switching_disabled = false
 
-func change_button_state(is_enabled : bool):
+func change_button_state(is_enabled : bool) -> void:
 	invisible = !is_enabled
 	switching_disabled = !is_enabled

@@ -2,7 +2,7 @@ extends Node
 
 class_name State
 
-var character: Character
+var character : Character
 
 export var priority = 0
 export var disable_movement = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=169 format=2]
+[gd_scene load_steps=166 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -32,7 +32,6 @@
 [ext_resource path="res://scenes/editor/assets/level_settings_press.png" type="Texture" id=30]
 [ext_resource path="res://scenes/editor/window_open_button.gd" type="Script" id=31]
 [ext_resource path="res://scenes/editor/toggle_button.gd" type="Script" id=32]
-[ext_resource path="res://scenes/actors/objects/koopa_troopa/paratroopa_placement.gd" type="Script" id=33]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=35]
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=36]
 [ext_resource path="res://scenes/editor/assets/layer_icon.png" type="Texture" id=38]
@@ -157,12 +156,6 @@ load_path = "res://.import/icon.png-f8b0399d9244d4055e92dc67242cc371.stex"
 [sub_resource type="StreamTexture" id=4]
 load_path = "res://.import/turbo_box.png-6f28657900f6cb6391239052bd625eb4.stex"
 
-[sub_resource type="StreamTexture" id=8]
-load_path = "res://.import/para_icon.png-8aeadaf4263a669c7f336ac385709817.stex"
-
-[sub_resource type="StreamTexture" id=9]
-load_path = "res://.import/para_preview.png-0e3469addce65f08caeb730d898460dc.stex"
-
 [sub_resource type="StreamTexture" id=5]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
 
@@ -172,7 +165,7 @@ load_path = "res://.import/preview.png-b5e1f057c76348c498eb58977a6fa3d8.stex"
 [sub_resource type="StreamTexture" id=7]
 load_path = "res://.import/icon.png-2f7996d42f2cb278ea1c7da3bda68d02.stex"
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 1, 1, 1, 0.501961 )
 border_width_left = 3
 border_width_top = 3
@@ -184,26 +177,26 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=9]
 size = 64
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=12]
+[sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.615686, 0.615686, 0.615686, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 
-[sub_resource type="StyleBoxFlat" id=13]
+[sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.905882, 0.905882, 0.905882, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 
-[sub_resource type="StyleBoxFlat" id=14]
+[sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0.439216, 0.439216, 0.439216, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 
-[sub_resource type="StyleBoxFlat" id=15]
+[sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.254902, 0.254902, 0.254902, 1 )
 border_width_top = 12
 corner_radius_top_left = 8
@@ -211,10 +204,10 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id=16]
+[sub_resource type="StyleBoxFlat" id=14]
 bg_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 
-[sub_resource type="Theme" id=17]
+[sub_resource type="Theme" id=15]
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -337,11 +330,11 @@ HScrollBar/icons/decrement = null
 HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
 HScrollBar/icons/increment_highlight = null
-HScrollBar/styles/grabber = SubResource( 12 )
-HScrollBar/styles/grabber_highlight = SubResource( 13 )
-HScrollBar/styles/grabber_pressed = SubResource( 14 )
-HScrollBar/styles/scroll = SubResource( 15 )
-HScrollBar/styles/scroll_focus = SubResource( 16 )
+HScrollBar/styles/grabber = SubResource( 10 )
+HScrollBar/styles/grabber_highlight = SubResource( 11 )
+HScrollBar/styles/grabber_pressed = SubResource( 12 )
+HScrollBar/styles/scroll = SubResource( 13 )
+HScrollBar/styles/scroll_focus = SubResource( 14 )
 HSeparator/constants/separation = 4
 HSeparator/styles/separator = null
 HSlider/icons/grabber = null
@@ -635,17 +628,17 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
+[sub_resource type="StyleBoxFlat" id=16]
+
+[sub_resource type="StyleBoxFlat" id=17]
+
 [sub_resource type="StyleBoxFlat" id=18]
 
 [sub_resource type="StyleBoxFlat" id=19]
 
 [sub_resource type="StyleBoxFlat" id=20]
 
-[sub_resource type="StyleBoxFlat" id=21]
-
-[sub_resource type="StyleBoxFlat" id=22]
-
-[sub_resource type="Theme" id=23]
+[sub_resource type="Theme" id=21]
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -768,11 +761,11 @@ HScrollBar/icons/decrement = null
 HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
 HScrollBar/icons/increment_highlight = null
-HScrollBar/styles/grabber = SubResource( 18 )
-HScrollBar/styles/grabber_highlight = SubResource( 19 )
-HScrollBar/styles/grabber_pressed = SubResource( 20 )
-HScrollBar/styles/scroll = SubResource( 21 )
-HScrollBar/styles/scroll_focus = SubResource( 22 )
+HScrollBar/styles/grabber = SubResource( 16 )
+HScrollBar/styles/grabber_highlight = SubResource( 17 )
+HScrollBar/styles/grabber_pressed = SubResource( 18 )
+HScrollBar/styles/scroll = SubResource( 19 )
+HScrollBar/styles/scroll_focus = SubResource( 20 )
 HSeparator/constants/separation = 4
 HSeparator/styles/separator = null
 HSlider/icons/grabber = null
@@ -1068,7 +1061,7 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
-[sub_resource type="DynamicFont" id=24]
+[sub_resource type="DynamicFont" id=22]
 size = 128
 font_data = ExtResource( 4 )
 
@@ -1150,20 +1143,6 @@ items_in_sequence = 2
 index_in_sequence = 1
 icon = ExtResource( 148 )
 preview = ExtResource( 150 )
-
-[node name="ParaTroopa" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 28
-is_object = true
-object_center = Vector2( 8, 8 )
-tile_mode_step = 16
-z_index = -1
-change_to = "KoopaTroopa"
-items_in_sequence = 2
-index_in_sequence = 1
-icon = SubResource( 8 )
-preview = SubResource( 9 )
-placement_action = ExtResource( 33 )
 
 [node name="SpecialGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
@@ -1548,8 +1527,7 @@ is_object = true
 object_center = Vector2( 8, 8 )
 tile_mode_step = 16
 z_index = -1
-change_to = "ParaTroopa"
-items_in_sequence = 2
+change_to = "KoopaTroopa"
 icon = ExtResource( 131 )
 preview = ExtResource( 130 )
 
@@ -1858,7 +1836,7 @@ margin_left = 720.0
 margin_top = 64.0
 margin_right = 768.0
 margin_bottom = 198.0
-custom_styles/panel = SubResource( 10 )
+custom_styles/panel = SubResource( 8 )
 script = ExtResource( 119 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -2027,7 +2005,7 @@ margin_left = 22.0
 margin_top = 40.0
 margin_right = 136.0
 margin_bottom = 155.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 0.258824, 0.270588, 0.658824, 1 )
 text = "1"
 align = 1
@@ -2176,7 +2154,7 @@ margin_top = 166.0
 margin_right = 3707.0
 margin_bottom = 512.0
 rect_rotation = -180.0
-theme = SubResource( 17 )
+theme = SubResource( 15 )
 scroll_vertical_enabled = false
 __meta__ = {
 "_edit_lock_": true,
@@ -2194,7 +2172,7 @@ margin_top = 166.0
 margin_right = 1679.0
 margin_bottom = 512.0
 rect_rotation = -180.0
-theme = SubResource( 23 )
+theme = SubResource( 21 )
 scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -2211,7 +2189,7 @@ margin_left = 13.0
 margin_top = 175.0
 margin_right = 403.0
 margin_bottom = 320.0
-custom_fonts/font = SubResource( 24 )
+custom_fonts/font = SubResource( 22 )
 flat = true
 script = ExtResource( 60 )
 __meta__ = {
