@@ -1,4 +1,4 @@
-[gd_scene load_steps=169 format=2]
+[gd_scene load_steps=171 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -33,8 +33,10 @@
 [ext_resource path="res://scenes/editor/window_open_button.gd" type="Script" id=31]
 [ext_resource path="res://scenes/editor/toggle_button.gd" type="Script" id=32]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/paratroopa_placement.gd" type="Script" id=33]
+[ext_resource path="res://scenes/actors/objects/seesaw/texture.png" type="Texture" id=34]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=35]
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=36]
+[ext_resource path="res://scenes/actors/objects/seesaw/icon.png" type="Texture" id=37]
 [ext_resource path="res://scenes/editor/assets/layer_icon.png" type="Texture" id=38]
 [ext_resource path="res://scenes/editor/assets/layer_icon_hover.png" type="Texture" id=39]
 [ext_resource path="res://scenes/editor/assets/layer_icon_press.png" type="Texture" id=40]
@@ -1371,8 +1373,8 @@ object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
 change_to = "Seesaw"
-icon = ExtResource( 42 )
-preview = ExtResource( 43 )
+icon = ExtResource( 37 )
+preview = ExtResource( 34 )
 
 [node name="BricksGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
