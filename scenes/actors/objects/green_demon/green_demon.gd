@@ -18,6 +18,7 @@ var original_position
 
 var chase := false
 var chase_speed := 1.0
+var current_speed = 2.5
 
 var update_timer = 0.0
 var char_find_timer = 0.0
@@ -44,7 +45,7 @@ func kill(body):
 func _ready():
 	original_position = position
 	particles.process_material.scale = (scale.x + scale.y) / 2 # Average works well enough
-	particles.amount = 6 * chase_speed
+	particles.amount = 6 * current_speed
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "kill")
 		if chase:
@@ -56,10 +57,11 @@ func _physics_process(delta):
 	
 	if cached_pos != Vector2() and chase and character != null:
 		var move_to = (cached_pos - global_position).normalized()
-		global_position += move_to * chase_speed
+		global_position += move_to * current_speed
 		
 	if mode != 1 and chase:
 		if chase_anim_finished:
+			current_speed = lerp(current_speed, chase_speed, delta * 2) #this will make the transition from animation to movement not so jarring
 			particles.emitting = true
 			if update_timer <= 0:
 				if character != null:
@@ -87,7 +89,7 @@ func _physics_process(delta):
 		else:
 			particles.emitting = true #normally the trail only appears when the demon has a target, but we want it to appear here, too
 			
-			chase_start_anim_angle += delta * (chase_speed*5) #multiplied to speed it up to a normal amount
+			chase_start_anim_angle += delta * (current_speed*5) #multiplied to speed it up to a normal amount
 			
 			if chase_start_anim_angle > PI * 2: #if the demon reaches the bottom of the rotation circle, add to the variable
 				chase_start_anim_angle = 0
@@ -101,6 +103,7 @@ func _physics_process(delta):
 			
 			if chase_start_anim_angle > PI and chase_start_rotations >= 3: #if the demon is at the top of the rotation circle, and it's already rotated three times, stop the animation and go chase after mario
 				chase_anim_finished = true
+				particles.amount = 6 * abs(chase_speed)
 			
 			#this calculates the position offset using the current angle, and then sets the position accordingly
 			var offset = Vector2(sin(chase_start_anim_angle), cos(chase_start_anim_angle)) * CHASE_ANIM_ROTATION_RADIUS
