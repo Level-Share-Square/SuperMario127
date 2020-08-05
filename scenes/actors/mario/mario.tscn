@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=104 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -57,6 +57,9 @@
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=55]
 [ext_resource path="res://scenes/actors/mario/particles/shine_sparkles.png" type="Texture" id=56]
 [ext_resource path="res://scenes/actors/mario/my_shit_coding.gd" type="Script" id=57]
+[ext_resource path="res://scenes/actors/mario/is_hurt_area.gd" type="Script" id=58]
+[ext_resource path="res://scenes/actors/mario/particles/area_of_attack_ring.png" type="Texture" id=59]
+[ext_resource path="res://scenes/actors/mario/particles/area_of_attack_ring_back.png" type="Texture" id=60]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -88,19 +91,22 @@ extents = Vector2( 8.5, 20 )
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 8.5, 20 )
 
-[sub_resource type="CanvasItemMaterial" id=11]
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 24, 16 )
+
+[sub_resource type="CanvasItemMaterial" id=12]
 particles_animation = true
 particles_anim_h_frames = 10
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=12]
+[sub_resource type="Gradient" id=13]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=13]
-gradient = SubResource( 12 )
+[sub_resource type="GradientTexture" id=14]
+gradient = SubResource( 13 )
 
-[sub_resource type="ParticlesMaterial" id=14]
+[sub_resource type="ParticlesMaterial" id=15]
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 0.0
@@ -108,10 +114,10 @@ gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.75
-color_ramp = SubResource( 13 )
+color_ramp = SubResource( 14 )
 anim_speed = 0.8
 
-[sub_resource type="ParticlesMaterial" id=15]
+[sub_resource type="ParticlesMaterial" id=16]
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, -27, 0 )
@@ -120,10 +126,10 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 100.0
 scale = 0.75
-color_ramp = SubResource( 13 )
+color_ramp = SubResource( 14 )
 anim_speed = 0.8
 
-[sub_resource type="ParticlesMaterial" id=16]
+[sub_resource type="ParticlesMaterial" id=17]
 flag_disable_z = true
 direction = Vector3( -1, 0, 0 )
 spread = 0.0
@@ -133,16 +139,16 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 100.0
 scale = 0.75
-color_ramp = SubResource( 13 )
+color_ramp = SubResource( 14 )
 anim_speed = 0.8
 
-[sub_resource type="CanvasItemMaterial" id=17]
+[sub_resource type="CanvasItemMaterial" id=18]
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="ParticlesMaterial" id=18]
+[sub_resource type="ParticlesMaterial" id=19]
 emission_shape = 1
 emission_sphere_radius = 24.0
 flag_disable_z = true
@@ -154,7 +160,98 @@ orbit_velocity_random = 0.0
 damping = 100.0
 anim_speed = 1.3
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="CanvasItemMaterial" id=23]
+blend_mode = 1
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 59 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 59 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 59 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 59 )
+region = Rect2( 0, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 59 )
+region = Rect2( 48, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 59 )
+region = Rect2( 96, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 59 )
+region = Rect2( 0, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 59 )
+region = Rect2( 48, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 59 )
+region = Rect2( 96, 96, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=33]
+animations = [ {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
+"loop": false,
+"name": "default",
+"speed": 24.0
+} ]
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 60 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 60 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 60 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 60 )
+region = Rect2( 0, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 60 )
+region = Rect2( 48, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 60 )
+region = Rect2( 96, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 60 )
+region = Rect2( 0, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 60 )
+region = Rect2( 48, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 60 )
+region = Rect2( 96, 96, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=43]
+animations = [ {
+"frames": [ SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ) ],
+"loop": false,
+"name": "default",
+"speed": 24.0
+} ]
+
+[sub_resource type="Animation" id=20]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:rotation_degrees")
@@ -169,8 +266,7 @@ tracks/0/keys = {
 "values": [ 0.0, -360.0 ]
 }
 
-[sub_resource type="Animation" id=20]
-resource_name = "shine_dance"
+[sub_resource type="Animation" id=21]
 length = 2.25
 step = 0.025
 tracks/0/type = "value"
@@ -332,7 +428,7 @@ tracks/12/keys = {
 } ]
 }
 
-[sub_resource type="ParticlesMaterial" id=21]
+[sub_resource type="ParticlesMaterial" id=22]
 emission_shape = 1
 emission_sphere_radius = 24.0
 flag_disable_z = true
@@ -421,10 +517,8 @@ disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 material = SubResource( 8 )
-position = Vector2( 0, -39.3155 )
 frames = ExtResource( 1 )
-animation = "shineDance"
-frame = 21
+animation = "spinning"
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
@@ -626,6 +720,17 @@ modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0.5, 4 )
 shape = SubResource( 10 )
 
+[node name="SpinArea" type="Area2D" parent="."]
+position = Vector2( 0, 6 )
+collision_layer = 2
+collision_mask = 17
+script = ExtResource( 58 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpinArea"]
+modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
+shape = SubResource( 11 )
+disabled = true
+
 [node name="Bubble" type="Sprite" parent="."]
 
 [node name="Spotlight" type="Light2D" parent="."]
@@ -682,36 +787,26 @@ stream = ExtResource( 27 )
 volume_db = -5.0
 
 [node name="Particles2D" type="Particles2D" parent="."]
-material = SubResource( 11 )
+material = SubResource( 12 )
 z_index = -2
 emitting = false
 amount = 24
 local_coords = false
-process_material = SubResource( 14 )
+process_material = SubResource( 15 )
 texture = ExtResource( 30 )
 
 [node name="SlideParticles" type="Particles2D" parent="."]
-material = SubResource( 11 )
+material = SubResource( 12 )
 position = Vector2( 0, 14 )
 z_index = -2
 emitting = false
 amount = 24
 local_coords = false
-process_material = SubResource( 14 )
-texture = ExtResource( 30 )
-
-[node name="GPParticles1" type="Particles2D" parent="."]
-material = SubResource( 11 )
-position = Vector2( 0, 18 )
-z_index = 2
-emitting = false
-amount = 14
-local_coords = false
 process_material = SubResource( 15 )
 texture = ExtResource( 30 )
 
-[node name="GPParticles2" type="Particles2D" parent="."]
-material = SubResource( 11 )
+[node name="GPParticles1" type="Particles2D" parent="."]
+material = SubResource( 12 )
 position = Vector2( 0, 18 )
 z_index = 2
 emitting = false
@@ -720,41 +815,67 @@ local_coords = false
 process_material = SubResource( 16 )
 texture = ExtResource( 30 )
 
+[node name="GPParticles2" type="Particles2D" parent="."]
+material = SubResource( 12 )
+position = Vector2( 0, 18 )
+z_index = 2
+emitting = false
+amount = 14
+local_coords = false
+process_material = SubResource( 17 )
+texture = ExtResource( 30 )
+
 [node name="RainbowSparkles" type="Particles2D" parent="."]
-material = SubResource( 17 )
+material = SubResource( 18 )
 position = Vector2( 0, 5 )
 z_index = 2
 emitting = false
 amount = 14
 local_coords = false
-process_material = SubResource( 18 )
+process_material = SubResource( 19 )
 texture = ExtResource( 41 )
 
 [node name="MetalSparkles" type="Particles2D" parent="."]
-material = SubResource( 17 )
+material = SubResource( 18 )
 position = Vector2( 0, 5 )
 z_index = 2
 emitting = false
 amount = 6
 local_coords = false
-process_material = SubResource( 18 )
+process_material = SubResource( 19 )
 texture = ExtResource( 51 )
+
+[node name="RingParticles" type="AnimatedSprite" parent="."]
+visible = false
+material = SubResource( 23 )
+frames = SubResource( 33 )
+frame = 8
+playing = true
+
+[node name="RingParticlesBack" type="AnimatedSprite" parent="."]
+visible = false
+show_behind_parent = true
+material = SubResource( 23 )
+frames = SubResource( 43 )
+frame = 8
+playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/backflip = ExtResource( 32 )
-anims/backflip_right = SubResource( 19 )
-anims/shine_dance = SubResource( 20 )
+anims/backflip_right = SubResource( 20 )
+anims/shine_dance = SubResource( 21 )
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
-position = Vector2( -0.985381, -69.232 )
+position = Vector2( -1, 20 )
+scale = Vector2( 0.1, 0.1 )
+z_index = -5
 frames = ExtResource( 55 )
-speed_scale = 4.69231
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
 show_behind_parent = true
 local_coords = false
-process_material = SubResource( 21 )
+process_material = SubResource( 22 )
 texture = ExtResource( 56 )
 
 [node name="BottomPos" type="Node2D" parent="."]

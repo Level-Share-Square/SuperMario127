@@ -208,6 +208,10 @@ func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform 
 				kill(hit_body.global_position)
 			else:
 				hit_body.damage_with_knockback(kinematic_body.global_position)
+	# Same thing as above, but to check the spin attack area
+	for hit_area in attack_area.get_overlapping_areas():
+		if hit_area.has_method("is_hurt_area"):
+			kill(hit_area.global_position)
 	
 	# Check the stomp hitbox
 	for hit_body in stomp_area.get_overlapping_bodies():

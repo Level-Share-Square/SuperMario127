@@ -203,6 +203,12 @@ func physics_process_shell(delta, level_bounds):
 			else:
 				velocity.x *= hit_speed
 			koopa_sound.play()
+	for hit_area in shell_attack_area.get_overlapping_areas():
+		if hit_area.has_method("is_hurt_area"):
+			velocity.x = (shell.global_position - hit_area.global_position).normalized().x
+			velocity.x *= shell_max_speed
+			velocity.y = -275
+			koopa_sound.play()
 	
 	# The shell attacks this time
 	for hit_area in shell_destroy_area.get_overlapping_areas():
@@ -287,6 +293,11 @@ func physics_process_koopa(delta, level_bounds):
 					velocity.y = -275
 				else:
 					hit_body.damage_with_knockback(body.global_position)
+		for hit_area in attack_area.get_overlapping_areas():
+			if hit_area.has_method("is_hurt_area"):
+				retract_into_shell()
+				velocity.x = (shell.global_position - hit_area.global_position).normalized().x * (shell_max_speed)
+				velocity.y = -275
 	else:
 		attack_cooldown -= delta
 	

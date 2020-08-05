@@ -72,6 +72,17 @@ func _physics_process(delta):
 					dust_particle.set_emitting(true)
 					broken_sound.play()
 					delete_timer = 3.0
+		for hit_area in spin_area.get_overlapping_areas():
+			if !broken and hit_area.has_method("is_hurt_area") and is_metal(hit_area.get_parent()):
+				broken = true
+				if not broken_sound.is_playing(): 
+					for i in(coins): create_coin()
+					break_particle.show()
+					dust_particle.show()
+					break_particle.set_emitting(true)
+					dust_particle.set_emitting(true)
+					broken_sound.play()
+					delete_timer = 3.0
 		for hit_body in player_detector.get_overlapping_bodies():
 			if hit_body.name.begins_with("Character") and hit_body.velocity.y > 0: 
 				if hit_body.big_attack and is_metal(hit_body):

@@ -169,6 +169,15 @@ func _physics_process(delta):
 							
 							velocity.x = 50 * distance_normal
 							character_attack.velocity.x = 50 * -distance_normal
+			for hit_area in attack_area.get_overlapping_areas():
+				var character_attack = hit_area
+				if hit_area.has_method("is_hurt_area"):
+					hit = true
+					kinematic_body.set_collision_layer_bit(2, false)
+					snap = Vector2(0, 0)
+					velocity.x = (kinematic_body.global_position - character_attack.global_position).normalized().x * 275
+					velocity.y = -275
+					position.y -= 4
 				
 		sprite.flip_h = true if facing_direction == 1 else false
 		velocity.y += gravity

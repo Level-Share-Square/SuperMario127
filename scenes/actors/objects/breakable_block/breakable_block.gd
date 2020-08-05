@@ -69,6 +69,8 @@ func top_breakable(hit_body):
 func side_breakable(hit_body):
 	if hit_body.name == "Steely" and hit_body.get_parent().should_hit:
 		return true
+	elif hit_body.has_method("is_hurt_area"):
+		return true
 	return hit_body.name.begins_with("Character") and ((hit_body.attacking and !hit_body.big_attack) or hit_body.invincible)
 
 func turbo_breakable(hit_body):
@@ -89,6 +91,9 @@ func _physics_process(delta):
 				break_box()
 		for hit_body in spin_area.get_overlapping_bodies():
 			if !broken and side_breakable(hit_body):
+				break_box()
+		for hit_area in spin_area.get_overlapping_areas():
+			if !broken and side_breakable(hit_area):
 				break_box()
 		for hit_body in turbo_spin_area.get_overlapping_bodies():
 			if !broken and turbo_breakable(hit_body):

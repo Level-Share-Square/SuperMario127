@@ -35,19 +35,14 @@ func _set_property_values():
 	set_property("color", color, true)
 	set_property("facing_direction", facing_direction, true)
 	set_property("invincible", invincible, true)
-
-func kill(body):
-	if enabled and body.name.begins_with("Character") and !body.dead and !dead and body.controllable:
-		if !body.attacking and !body.invincible:
-			body.damage_with_knockback(global_position)
-		elif body.attacking or body.invincible:
-			velocity = ((body.global_position - global_position).normalized() * -90)
-			dead = true
-			delete_timer = 3.0 if !invincible else 0.25
-			sound.play()
-			
-func detect_stomp(body):
-	if enabled and body.name.begins_with("Character") and !body.dead and !dead:
+	
+func kill(body, attack_type):
+	if attack_type == "spin":
+		velocity = ((body.global_position - global_position).normalized() * -90)
+		dead = true
+		delete_timer = 3.0 if !invincible else 0.25
+		sound.play()
+	elif attack_type == "stomp":
 		if body.velocity.y > 0:
 			if body.state != body.get_state_node("GroundPoundState"):
 				if body.state != body.get_state_node("DiveState"):
@@ -59,14 +54,28 @@ func detect_stomp(body):
 			delete_timer = 3.0 if !invincible else 0.25
 			sound.play()
 
+func detect_spin(body):
+	if enabled and body.name.begins_with("Character") and !body.dead and !dead and body.controllable:
+		if !body.attacking and !body.invincible:
+			body.damage_with_knockback(global_position)
+		elif body.attacking or body.invincible:
+			kill(body, "spin")
+	elif enabled and body.has_method("is_hurt_area"):
+		kill(body, "spin")
+			
+func detect_stomp(body):
+	if enabled and body.name.begins_with("Character") and !body.dead and !dead:
+		kill(body, "stomp")
+
 func _ready():
 	CurrentLevelData.enemies_instanced += 1
 	sprite.rotation = PI if chase and facing_direction == -1 else 0.0
 	sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
 	colored_sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
 	if mode != 1:
-		var _connect = area.connect("body_entered", self, "kill")
-		var _connect2 = stomp_detector.connect("body_entered", self, "detect_stomp")
+		var _connect = area.connect("body_entered", self, "detect_spin")
+		var _connect2 = area.connect("area_entered", self, "detect_spin")
+		var _connect3 = stomp_detector.connect("body_entered", self, "detect_stomp")
 		
 func _process(_delta):
 	colored_sprite.modulate = color

@@ -172,10 +172,13 @@ onready var gp_particles1 = $GPParticles1
 onready var gp_particles2 = $GPParticles2
 onready var rainbow_particles = $RainbowSparkles
 onready var metal_particles = $MetalSparkles
+onready var ring_particles = $RingParticles # ring used for spinning
+onready var ring_particles_back = $RingParticlesBack # same as above, but renders behind the character
 onready var platform_detector = $PlatformDetector
 onready var bottom_pos = $BottomPos
 onready var death_sprite = $DeathSprite
 onready var death_fludd_sprite = $DeathSprite/Fludd
+onready var spin_area_shape = $SpinArea/CollisionShape2D # dynamically enabled and disabled when you do a spin attack
 onready var collected_shine = $CollectedShine # used for the shine dance animation, can be edited to reflect different shine colours or sprites or something
 onready var raycasts = [ground_check, ground_check_dive, left_check, right_check, slope_stop_check]
 export var bottom_pos_offset : Vector2
