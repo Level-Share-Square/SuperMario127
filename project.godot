@@ -534,6 +534,7 @@ ActionManager="*res://scenes/editor/action_manager.gd"
 MiscCache="*res://scenes/shared/misc_cache.gd"
 Autosave="*res://scenes/editor/autosave.gd"
 LoadSettings="*res://scenes/shared/load_settings.gd"
+NotificationHandler="*res://scenes/shared/notification/notification_handler.gd"
 
 [debug]
 
