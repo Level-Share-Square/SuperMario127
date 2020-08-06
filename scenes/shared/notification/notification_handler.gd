@@ -20,7 +20,7 @@ func error(title : String, content : String):
 	_instantiate(title, content, error)
 
 func _instantiate(title : String, content : String, type : String):
-	var ui = get_tree().get_current_scene()
+	var ui = get_tree().get_current_scene().get_node("UI")
 	
 	var notification = load("res://scenes/shared/notification/notification.tscn")
 	var notification_instance : Control = notification.instance()
