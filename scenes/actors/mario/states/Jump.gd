@@ -29,7 +29,7 @@ func _start_check(_delta):
 	return ledge_buffer > 0 and (jump_buffer > 0 or (dive_buffer > 0 and abs(character.velocity.x) > 50 and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0))))
 
 func _start(delta):
-	var sprite = character.animated_sprite
+	var sprite = character.sprite
 	var sound_player = character.get_node("Sounds")
 	jump_buffer = 0
 	ground_buffer = 0
@@ -76,7 +76,7 @@ func _start(delta):
 	ledge_buffer = 0
 
 func _update(_delta):
-	var sprite = character.animated_sprite
+	var sprite = character.sprite
 	if jump_playing and character.velocity.y < 0 and !character.is_grounded():
 		if character.facing_direction == 1:
 			if character.jump_animation == 0:
@@ -107,7 +107,7 @@ func _stop_check(_delta):
 	return character.velocity.y > 0
 
 func _general_update(delta):
-	var sprite = character.animated_sprite
+	var sprite = character.sprite
 	if character.rotating_jump:
 		if character.velocity.y > 0:
 			character.jump_animation = 0

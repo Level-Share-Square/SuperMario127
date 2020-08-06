@@ -49,7 +49,7 @@ func _start(_delta):
 	spins = 0
 
 func _update(_delta):
-	var sprite = character.animated_sprite
+	var sprite = character.sprite
 	if (character.facing_direction == 1):
 		sprite.animation = "jumpRight"
 	else:
@@ -60,7 +60,7 @@ func _stop(_delta):
 	
 func _stop_check(_delta):
 	# warning-ignore: unused_variable
-	var sprite = character.animated_sprite
+	var sprite = character.sprite
 	return character.is_grounded()
 
 func _general_update(delta):

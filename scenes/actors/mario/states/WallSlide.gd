@@ -38,13 +38,13 @@ func _update(delta):
 		wall_buffer -= delta
 		if wall_buffer <= 0:
 			wall_buffer = 0
-		var sprite = character.animated_sprite
+		var sprite = character.sprite
 		if character.direction_on_stick == 1:
 			sprite.animation = "jumpRight"
 		else:
 			sprite.animation = "jumpLeft"
 	else:
-		var sprite = character.animated_sprite
+		var sprite = character.sprite
 		if character.direction_on_stick == 1:
 			sprite.animation = "wallSlideRight"
 		else:
