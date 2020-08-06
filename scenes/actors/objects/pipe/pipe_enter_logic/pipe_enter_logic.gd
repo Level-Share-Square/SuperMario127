@@ -24,7 +24,7 @@ func _physics_process(_delta : float) -> void:
 		#the area2d is set to only collide with characters, so we can (hopefullY) safely assume if there 
 		#is a collision it's with a character
 		for body in area2d.get_overlapping_bodies(): 
-			if global_rotation == 0 and body.is_grounded() and body.get_input(Character.input_names.crouch, true):
+			if global_rotation == 0 and body.is_grounded() and body.get_input(Character.input_names.crouch, true) and get_parent().enabled:
 				start_pipe_enter_animation(body)
 
 func start_pipe_ground_pound_animation(_character : Character) -> void:

@@ -180,6 +180,8 @@ var next_position : Vector2
 var sync_interpolation_speed = 20
 export var rotation_interpolation_speed = 15
 
+var camera : Camera2D
+
 #rpc_unreliable("update_inputs", 
 #left, left_just_pressed,
 #right, right_just_pressed,

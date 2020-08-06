@@ -20,8 +20,6 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time, new_ar
 	#if the button is invisible, then we're probably not in editing mode, but if it's visible make sure we don't reload the scene while it's switching
 	if mode_switcher.get_node("ModeSwitcherButton").invisible or !mode_switcher.get_node("ModeSwitcherButton").switching_disabled:
 		var volume_multiplier = music_node.volume_multiplier
-		
-		transitioning = true
 
 		yield(do_transition_animation(transition_in_tex, transition_time, TRANSITION_SCALE_UNCOVER, TRANSITION_SCALE_COVERED, volume_multiplier, volume_multiplier / 4, false), "completed")
 
@@ -36,9 +34,10 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time, new_ar
 		yield(do_transition_animation(transition_out_tex, transition_time, TRANSITION_SCALE_COVERED, TRANSITION_SCALE_UNCOVER, volume_multiplier / 4, volume_multiplier, false), "completed")
 		
 		canvas_background.visible = false
-		transitioning = false
 
 func do_transition_animation(transition_texture : StreamTexture = cutout_circle, transition_time : float = DEFAULT_TRANSITION_TIME, texture_scale_start : float = TRANSITION_SCALE_UNCOVER, texture_scale_end : float = TRANSITION_SCALE_COVERED, volume_start : float = -1, volume_end : float = -1, reverse_after : bool = true):
+	transitioning = true
+	
 	if volume_start == -1:
 		volume_start = music.volume_multiplier
 	if volume_end == -1:
@@ -64,3 +63,5 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 
 	if reverse_after:
 		do_transition_animation(cutout_circle, transition_time, texture_scale_end, texture_scale_start, volume_end, volume_start, false)
+	else:
+		transitioning = false
