@@ -56,3 +56,5 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorTouchArea"]
 position = Vector2( 0, -12 )
 shape = SubResource( 3 )
+[connection signal="body_entered" from="FloorTouchArea" to="." method="_on_FloorTouchArea_body_entered"]
+[connection signal="body_exited" from="FloorTouchArea" to="." method="_on_FloorTouchArea_body_exited"]
