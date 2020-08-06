@@ -44,7 +44,7 @@ func _start(_delta : float) -> void:
 	character.dive_cooldown = 0.15
 
 func _update(delta : float) -> void:
-	var sprite : AnimatedSprite = character.animated_sprite
+	var sprite : AnimatedSprite = character.sprite
 	if (!character.is_grounded()):
 		character.friction = character.real_friction
 	if (character.facing_direction == 1):
@@ -62,7 +62,7 @@ func _update(delta : float) -> void:
 		last_above_rot_limit = true
 		
 func _stop(delta : float) -> void:
-	var sprite : AnimatedSprite = character.animated_sprite
+	var sprite : AnimatedSprite = character.sprite
 	if !character.test_move(character.transform, Vector2(0, 8)) and character.test_move(character.transform, Vector2(0.1 * character.facing_direction, -15)) and !character.test_move(character.transform, Vector2(0, -16)) and !character.is_grounded():
 		character.velocity.x = bonk_power * -character.facing_direction
 		character.velocity.y = -65

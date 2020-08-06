@@ -557,6 +557,8 @@ collision_layer = 2
 collision_mask = 81
 collision/safe_margin = 0.01
 script = ExtResource( 3 )
+bottom_pos_offset = Vector2( 0, 20 )
+bottom_pos_dive_offset = Vector2( 0, 3 )
 cutout_death = ExtResource( 10 )
 cutout_circle = ExtResource( 9 )
 cutout_shine = ExtResource( 54 )
@@ -577,8 +579,6 @@ luigi_dive_collision_offset = Vector2( -4, 4 )
 luigi_accel = 10.5
 luigi_fric = 13.5
 luigi_speed = 216.0
-bottom_pos_offset = Vector2( 0, 20 )
-bottom_pos_dive_offset = Vector2( 0, 3 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
@@ -629,7 +629,7 @@ disabled = true
 material = SubResource( 8 )
 frames = ExtResource( 1 )
 animation = "movingIn"
-frame = 11
+frame = 8
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
@@ -986,7 +986,7 @@ position = Vector2( -1, 20 )
 scale = Vector2( 0.1, 0.1 )
 z_index = -5
 frames = ExtResource( 55 )
-frame = 14
+frame = 12
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
@@ -1005,7 +1005,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "movingOut"
-frame = 8
+frame = 5
 playing = true
 script = ExtResource( 34 )
 

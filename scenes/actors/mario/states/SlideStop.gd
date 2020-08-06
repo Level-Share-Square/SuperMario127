@@ -10,7 +10,7 @@ func _ready():
 	use_dive_collision = true
 
 func _update(delta):
-	var sprite = character.animated_sprite
+	var sprite = character.sprite
 	if abs(sprite.rotation_degrees) < 45:
 		if (character.facing_direction == 1):
 			sprite.animation = "idleRight"
@@ -27,7 +27,7 @@ func _update(delta):
 	character.velocity.y = 0
 	
 func _stop_check(_delta):
-	var sprite = character.animated_sprite
+	var sprite = character.sprite
 	return sprite.rotation_degrees < 5 and sprite.rotation_degrees > -5
 
 func _general_update(_delta):
