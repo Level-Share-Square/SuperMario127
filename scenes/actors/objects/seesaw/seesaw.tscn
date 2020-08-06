@@ -50,9 +50,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Screw" type="Sprite" parent="."]
-texture = ExtResource( 5 )
-
 [node name="FloorTouchArea" type="Area2D" parent="."]
 visible = false
 monitorable = false
@@ -60,5 +57,8 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorTouchArea"]
 position = Vector2( 0, -12 )
 shape = SubResource( 3 )
+
+[node name="Screw" type="Sprite" parent="."]
+texture = ExtResource( 5 )
 [connection signal="body_entered" from="FloorTouchArea" to="." method="_on_FloorTouchArea_body_entered"]
 [connection signal="body_exited" from="FloorTouchArea" to="." method="_on_FloorTouchArea_body_exited"]

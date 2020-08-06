@@ -93,7 +93,7 @@ func _physics_process(delta):
 	var weight_distribution := 0
 	for _body in current_weights:
 		var bottom_pos = _body.bottom_pos #we know it has this property because otherwise it won't be in the array
-		var relative_position_x : Vector2 = bottom_pos.global_position-body.global_position
+		var relative_position_x : float = bottom_pos.global_position.x-body.global_position.x
 		
 		
 		var weight := 1.0
@@ -131,7 +131,7 @@ func _physics_process(delta):
 	
 	body.rotation = 0 #necessary because godot
 	
-	screw.global_rotation = 0
+	screw.global_rotation = 0.0
 	
 	#-----act on other bodies-----
 	
