@@ -58,5 +58,5 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="NinePatchRect"]
-wait_time = 5.0
+wait_time = 2.0
 autostart = true
