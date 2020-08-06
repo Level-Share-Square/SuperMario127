@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=2]
+[gd_scene load_steps=106 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -266,6 +266,57 @@ tracks/0/keys = {
 "values": [ 0.0, -360.0 ]
 }
 
+[sub_resource type="Animation" id=47]
+resource_name = "enter_door"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "movingIn" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.7, 0.7 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 4 ) ]
+}
+
 [sub_resource type="Animation" id=45]
 length = 2.25
 step = 0.025
@@ -524,7 +575,9 @@ disabled = true
 [node name="Sprite" type="AnimatedSprite" parent="."]
 material = SubResource( 11 )
 frames = ExtResource( 1 )
-animation = "spinning"
+animation = "movingIn"
+frame = 10
+playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
@@ -869,6 +922,7 @@ playing = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/backflip = ExtResource( 32 )
 anims/backflip_right = SubResource( 44 )
+anims/enter_door = SubResource( 47 )
 anims/shine_dance = SubResource( 45 )
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
@@ -876,7 +930,7 @@ position = Vector2( -1, 20 )
 scale = Vector2( 0.1, 0.1 )
 z_index = -5
 frames = ExtResource( 55 )
-frame = 11
+frame = 15
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
@@ -894,6 +948,8 @@ visible = false
 z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
+animation = "movingIn"
+frame = 5
 playing = true
 script = ExtResource( 34 )
 

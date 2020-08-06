@@ -1522,6 +1522,53 @@ volume_db = -10.0
 stream = ExtResource( 11 )
 volume_db = -10.0
 
+[node name="Interact" type="Control" parent="UI/PauseScreen/ControlsOptions"]
+margin_left = 480.0
+margin_top = 35.0
+margin_right = 520.0
+margin_bottom = 75.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Interact"]
+margin_left = 34.0
+margin_top = 202.796
+margin_right = 196.0
+margin_bottom = 234.796
+custom_fonts/font = SubResource( 18 )
+text = "Interact:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Interact"]
+margin_left = 203.0
+margin_top = 197.0
+margin_right = 283.0
+margin_bottom = 242.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/disabled = SubResource( 15 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
+action_mode = 0
+script = ExtResource( 41 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+id = "interact"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Interact/KeyButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Interact/KeyButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
 [node name="Preset Selection" type="Control" parent="UI/PauseScreen/ControlsOptions"]
 margin_left = 480.0
 margin_top = -13.0

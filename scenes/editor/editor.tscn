@@ -1,4 +1,4 @@
-[gd_scene load_steps=171 format=2]
+[gd_scene load_steps=173 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -43,10 +43,12 @@
 [ext_resource path="res://scenes/editor/layer_switcher_button.gd" type="Script" id=41]
 [ext_resource path="res://scenes/actors/objects/metal_platform/icon.png" type="Texture" id=42]
 [ext_resource path="res://scenes/actors/objects/metal_platform/2_wide.png" type="Texture" id=43]
+[ext_resource path="res://scenes/actors/objects/door/icon.png" type="Texture" id=44]
 [ext_resource path="res://scenes/editor/assets/save_icon.png" type="Texture" id=45]
 [ext_resource path="res://scenes/editor/assets/save_icon_press.png" type="Texture" id=46]
 [ext_resource path="res://scenes/editor/assets/save_icon_hover.png" type="Texture" id=47]
 [ext_resource path="res://scenes/editor/save_button.gd" type="Script" id=48]
+[ext_resource path="res://scenes/actors/objects/door/preview.png" type="Texture" id=49]
 [ext_resource path="res://scenes/actors/objects/big_tree/preview.png" type="Texture" id=50]
 [ext_resource path="res://scenes/actors/objects/big_tree/icon.png" type="Texture" id=51]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=52]
@@ -1142,17 +1144,6 @@ index_in_sequence = 2
 icon = SubResource( 3 )
 preview = SubResource( 4 )
 
-[node name="ShineShard" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 45
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "Shine"
-items_in_sequence = 2
-index_in_sequence = 1
-icon = ExtResource( 148 )
-preview = ExtResource( 150 )
-
 [node name="SpecialGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
 color = Color( 0.439216, 0.121569, 0.517647, 1 )
@@ -1225,6 +1216,17 @@ change_to = "ShineShard"
 items_in_sequence = 2
 icon = ExtResource( 15 )
 preview = ExtResource( 15 )
+
+[node name="ShineShard" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 45
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "Shine"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 148 )
+preview = ExtResource( 150 )
 
 [node name="BooBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
@@ -1361,6 +1363,18 @@ tile_mode_step = 64
 change_to = "Seesaw"
 icon = ExtResource( 37 )
 preview = ExtResource( 34 )
+
+[node name="Door" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 48
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+z_index = -8
+change_to = "Door"
+icon = ExtResource( 44 )
+preview = ExtResource( 49 )
 
 [node name="BricksGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )

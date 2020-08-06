@@ -11,7 +11,8 @@ const presets = {
 		"gpcancel": [[ControlUtil.KEYBOARD, KEY_UP]],
 		"fludd": [[ControlUtil.KEYBOARD, KEY_C]],
 		"nozzles": [[ControlUtil.KEYBOARD, KEY_CONTROL]],
-		"crouch": [[ControlUtil.KEYBOARD, KEY_DOWN]]
+		"crouch": [[ControlUtil.KEYBOARD, KEY_DOWN]],
+		"interact":[[ControlUtil.KEYBOARD, KEY_UP]]
 	},
 	"WASD": {
 		"left": [[ControlUtil.KEYBOARD, KEY_A]],
@@ -23,7 +24,8 @@ const presets = {
 		"gpcancel": [[ControlUtil.KEYBOARD, KEY_W]],
 		"fludd": [[ControlUtil.KEYBOARD, KEY_L]],
 		"nozzles": [[ControlUtil.KEYBOARD, KEY_Y]],
-		"crouch": [[ControlUtil.KEYBOARD, KEY_S]]
+		"crouch": [[ControlUtil.KEYBOARD, KEY_S]],
+		"interact":[[ControlUtil.KEYBOARD, KEY_W]]
 	},
 	"Legacy": {
 		"left": [[ControlUtil.KEYBOARD, KEY_LEFT]],
@@ -35,6 +37,7 @@ const presets = {
 		"gpcancel": [[ControlUtil.KEYBOARD, KEY_UP]],
 		"fludd": [[ControlUtil.KEYBOARD, KEY_C], [ControlUtil.KEYBOARD, KEY_SPACE]],
 		"nozzles": [[ControlUtil.KEYBOARD, KEY_SHIFT]],
-		"crouch": [[ControlUtil.KEYBOARD, KEY_DOWN]]
+		"crouch": [[ControlUtil.KEYBOARD, KEY_DOWN]],
+		"interact":[[ControlUtil.KEYBOARD, KEY_UP]]
 	}
 }

@@ -1,0 +1,99 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scenes/actors/objects/door/door.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/door/door.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/door/door_enter_logic.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/door/nsmbwiiDoor1.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/actors/objects/door/nsmbwiiDoor2.wav" type="AudioStream" id=5]
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 20, 20 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 72, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 24, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 24, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 24, 40 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 72, 0, 24, 40 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": false,
+"name": "close",
+"speed": 24.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": false,
+"name": "open",
+"speed": 24.0
+} ]
+
+[node name="Door" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="DoorEnterLogic" type="Node2D" parent="."]
+script = ExtResource( 3 )
+open_audio = ExtResource( 4 )
+close_audio = ExtResource( 5 )
+
+[node name="Tween" type="Tween" parent="DoorEnterLogic"]
+
+[node name="Area2D" type="Area2D" parent="DoorEnterLogic"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorEnterLogic/Area2D"]
+shape = SubResource( 10 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DoorEnterLogic"]
+stream = ExtResource( 4 )
+volume_db = -8.0
+
+[node name="ZIndex" type="Node2D" parent="DoorEnterLogic"]
+z_index = -10
+z_as_relative = false
+
+[node name="DoorBackground" type="ColorRect" parent="DoorEnterLogic/ZIndex"]
+margin_left = -12.0
+margin_top = -20.0
+margin_right = 12.0
+margin_bottom = 20.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DoorSprite" type="AnimatedSprite" parent="DoorEnterLogic"]
+z_index = -8
+frames = SubResource( 5 )
+animation = "close"
+frame = 3
+playing = true
+
+[node name="Timer" type="Timer" parent="DoorEnterLogic"]

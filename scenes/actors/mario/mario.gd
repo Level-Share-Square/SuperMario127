@@ -135,10 +135,11 @@ export var inputs = [
 	[false, false, "gpcancel"], # Index 6
 	[false, false, "fludd"], # Index 7
 	[false, false, "nozzles"], # Index 8
-	[false, false, "crouch"] # Index 9
+	[false, false, "crouch"], # Index 9
+	[false, false, "interact"] # Index 10
 ]
 
-enum input_names {left, right, jump, dive, spin, gp, gpcancel, fludd, nozzles, crouch}
+enum input_names {left, right, jump, dive, spin, gp, gpcancel, fludd, nozzles, crouch, interact}
 
 export var controlled_locally = true
 
