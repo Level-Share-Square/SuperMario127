@@ -4,6 +4,8 @@ onready var canvas_background = $Background
 onready var canvas_mask = $Light2D
 onready var tween = $Tween
 
+signal transition_finished
+
 onready var cutout_circle = preload("res://scenes/actors/mario/misc/cutout_circle.png") #at some point move the rest of the cutouts here
 
 onready var music_node = get_node("/root/music")
@@ -21,7 +23,7 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time, new_ar
 		
 		transitioning = true
 
-		yield(do_transition_animation(transition_in_tex, transition_time, TRANSITION_SCALE_UNCOVER, TRANSITION_SCALE_COVERED, volume_multiplier, volume_multiplier / 4), "completed")
+		yield(do_transition_animation(transition_in_tex, transition_time, TRANSITION_SCALE_UNCOVER, TRANSITION_SCALE_COVERED, volume_multiplier, volume_multiplier / 4, false), "completed")
 
 		if clear_vars:
 			CurrentLevelData.level_data.vars = LevelVars.new()
@@ -31,13 +33,17 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time, new_ar
 		yield(get_tree().create_timer(0.1), "timeout")
 		get_tree().paused = false
 		
-		yield(do_transition_animation(transition_out_tex, transition_time, TRANSITION_SCALE_COVERED, TRANSITION_SCALE_UNCOVER, volume_multiplier / 4, volume_multiplier), "completed")
+		yield(do_transition_animation(transition_out_tex, transition_time, TRANSITION_SCALE_COVERED, TRANSITION_SCALE_UNCOVER, volume_multiplier / 4, volume_multiplier, false), "completed")
 		
 		canvas_background.visible = false
 		transitioning = false
 
-func do_transition_animation(transition_texture, transition_time, texture_scale_start, texture_scale_end, volume_start, volume_end, reverse_after = false):
-	tween.stop_all()
+func do_transition_animation(transition_texture : StreamTexture = cutout_circle, transition_time : float = DEFAULT_TRANSITION_TIME, texture_scale_start : float = TRANSITION_SCALE_UNCOVER, texture_scale_end : float = TRANSITION_SCALE_COVERED, volume_start : float = -1, volume_end : float = -1, reverse_after : bool = true):
+	if volume_start == -1:
+		volume_start = music.volume_multiplier
+	if volume_end == -1:
+		volume_end = music.volume_multiplier
+
 	music.stop_temporary_music()
 		
 	canvas_background.visible = true
@@ -54,6 +60,7 @@ func do_transition_animation(transition_texture, transition_time, texture_scale_
 	#wait for the tween to finish before returning, and then a little extra time
 	yield(tween, "tween_all_completed")
 	yield(get_tree().create_timer(0.1), "timeout")
+	emit_signal("transition_finished")
 
 	if reverse_after:
-		do_transition_animation(cutout_circle, transition_time, texture_scale_end, texture_scale_start, volume_end, volume_start)
+		do_transition_animation(cutout_circle, transition_time, texture_scale_end, texture_scale_start, volume_end, volume_start, false)

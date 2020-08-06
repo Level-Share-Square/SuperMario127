@@ -7,7 +7,6 @@ onready var area2d : Area2D = $Area2D
 onready var tween : Tween = $Tween
 onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
 onready var door_sprite : AnimatedSprite = $DoorSprite
-onready var timer : Timer = $Timer
 
 onready var collision_width : float = $Area2D/CollisionShape2D.shape.extents.x
 
@@ -29,7 +28,9 @@ func _physics_process(_delta : float) -> void:
 		#the area2d is set to only collide with characters, so we can (hopefullY) safely assume if there 
 		#is a collision it's with a character
 		for body in area2d.get_overlapping_bodies(): 
-			if body.name.begins_with("Character") and global_rotation == 0 and body.is_grounded() and body.get_input(Character.input_names.interact, true):
+			if (body.name.begins_with("Character") and global_rotation == 0 
+			and body.is_grounded() and body.get_input(Character.input_names.interact, true)
+			and !body.get_input(Character.input_names.crouch, false) and body.controllable):
 				start_door_enter_animation(body)
 
 func start_door_ground_pound_animation(_character : Character) -> void:
@@ -68,10 +69,6 @@ func start_door_enter_animation(character : Character) -> void:
 func character_animation_finished(animation : String, character : Character):
 	# this is so the door closes after mario enters
 	animate_door("close")
-	door_sprite.connect("animation_finished", self, "start_door_logic", [character], CONNECT_ONESHOT)
-
-func start_door_logic(character : Character):
-	# this is to make the door do stuff while mario is hidden
 	emit_signal("start_door_logic", character)
 	
 func animate_door(animation : String = "close"):
