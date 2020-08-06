@@ -121,25 +121,13 @@ export var luigi_accel : float
 export var luigi_fric : float
 export var luigi_speed : float
 
+enum input_names {left, right, jump, dive, spin, gp, gpcancel, fludd, nozzles, crouch, interact}
+
 # Inputs 
 # First parameter is "pressed",
 # second parameter is "just_pressed", 
 # and third parameter is the input name.
-export var inputs = [
-	[false, false, "left"], # Index 0
-	[false, false, "right"], # Index 1
-	[false, false, "jump"], # Index 2
-	[false, false, "dive"], # Index 3
-	[false, false, "spin"], # Index 4
-	[false, false, "gp"], # Index 5
-	[false, false, "gpcancel"], # Index 6
-	[false, false, "fludd"], # Index 7
-	[false, false, "nozzles"], # Index 8
-	[false, false, "crouch"], # Index 9
-	[false, false, "interact"] # Index 10
-]
-
-enum input_names {left, right, jump, dive, spin, gp, gpcancel, fludd, nozzles, crouch, interact}
+export var inputs : Array
 
 export var controlled_locally = true
 
@@ -199,6 +187,10 @@ export var rotation_interpolation_speed = 15
 #dive, dive_just_pressed,
 #spin, spin_just_pressed
 #)
+
+func _ready():
+	for input in input_names.keys():
+		inputs.append([false, false, str(input)])
 
 puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_big_attacking, is_heavy, is_dead, is_controllable): # Ok slave
 	next_position = pos
