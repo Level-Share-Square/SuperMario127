@@ -8,11 +8,11 @@
 [ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=11]
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=12]
 
-[sub_resource type="StreamTexture" id=2]
+[sub_resource type="StreamTexture" id=1]
 flags = 4
 load_path = "res://.import/window.png-70f8a0c1f0411efce833bd946d8ccc07.stex"
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 56
 use_filter = true
 font_data = ExtResource( 1 )
@@ -25,7 +25,7 @@ margin_right = 1218.0
 margin_bottom = 764.0
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 0
-texture = SubResource( 2 )
+texture = SubResource( 1 )
 region_rect = Rect2( 0, 0, 660, 610 )
 patch_margin_left = 40
 patch_margin_top = 110
@@ -42,7 +42,7 @@ margin_top = 24.0
 margin_right = 704.0
 margin_bottom = 102.0
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 2 )
 bbcode_text = "Control Binding Settings"
 text = "Control Binding Settings"
 __meta__ = {
