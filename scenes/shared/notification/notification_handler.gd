@@ -30,7 +30,7 @@ func _instantiate(title : String, content : String, type : String):
 	var result_x = ProjectSettings.get_setting("display/window/size/width") - notification_instance.get_rect().size.x
 	
 	notification_instance.set_position(Vector2(result_x - offset, biggest_y))
-	biggest_y += notification_instance.rect_size.y
+	biggest_y += notification_instance.rect_size.y + offset
 	
 	notification_instance.set_title(title)
 	notification_instance.set_content(content)

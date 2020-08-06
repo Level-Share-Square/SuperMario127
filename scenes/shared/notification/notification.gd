@@ -38,7 +38,7 @@ func start_timer():
 func self_destruct():
 	for notification in NotificationHandler.notifications:
 		if notification.get_rect().position.y > get_rect().position.y:
-			notification.rect_position -= Vector2(0, rect_size.y)
+			notification.rect_position -= Vector2(0, rect_size.y + NotificationHandler.offset)
 	NotificationHandler.notifications.erase(self)
-	NotificationHandler.biggest_y -= rect_size.y
+	NotificationHandler.biggest_y -= rect_size.y + NotificationHandler.offset
 	queue_free()
