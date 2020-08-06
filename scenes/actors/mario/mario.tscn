@@ -317,6 +317,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 2 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:velocity")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
 
 [sub_resource type="Animation" id=43]
 resource_name = "exit_door"
@@ -368,6 +380,18 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 2 ), Vector2( 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:velocity")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=44]
@@ -629,7 +653,7 @@ disabled = true
 material = SubResource( 8 )
 frames = ExtResource( 1 )
 animation = "movingIn"
-frame = 8
+frame = 7
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
@@ -986,7 +1010,7 @@ position = Vector2( -1, 20 )
 scale = Vector2( 0.1, 0.1 )
 z_index = -5
 frames = ExtResource( 55 )
-frame = 12
+frame = 11
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
@@ -1005,7 +1029,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "movingOut"
-frame = 5
+frame = 2
 playing = true
 script = ExtResource( 34 )
 

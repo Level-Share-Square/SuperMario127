@@ -1,4 +1,4 @@
-[gd_scene load_steps=173 format=2]
+[gd_scene load_steps=174 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -57,6 +57,7 @@
 [ext_resource path="res://scenes/actors/objects/entrance_luigi/sprite.png" type="Texture" id=55]
 [ext_resource path="res://scenes/editor/luigi_entrance_item/entrance_placement.gd" type="Script" id=56]
 [ext_resource path="res://scenes/editor/luigi_entrance_item/entrance_removal.gd" type="Script" id=57]
+[ext_resource path="res://assets/tiles/glass/icon.png" type="Texture" id=58]
 [ext_resource path="res://scenes/shared/button_sound_player.gd" type="Script" id=60]
 [ext_resource path="res://assets/tiles/bricks/icon_slope_left.png" type="Texture" id=61]
 [ext_resource path="res://assets/tiles/bricks/icon_slope_right.png" type="Texture" id=62]
@@ -1234,6 +1235,13 @@ tileset_id = 6
 change_to = "BooBlock"
 icon = ExtResource( 107 )
 preview = ExtResource( 107 )
+
+[node name="Glass" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+tileset_id = 9
+change_to = "Glass"
+icon = ExtResource( 58 )
+preview = ExtResource( 58 )
 
 [node name="HoverBox" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )

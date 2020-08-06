@@ -31,8 +31,10 @@ const SNOW_SLOPE_LEFT = 21
 
 const CAVE = 23
 const CAVE_SLAB = 24
+
 const OUT_OF_BOUNDS = 26
 const LEVEL_MARGIN = 27
+const GLASS = 28
 
 var ids = [
 	GRASS_BLOCK,
@@ -67,7 +69,8 @@ var ids = [
 	CAVE_SLAB,
 	
 	OUT_OF_BOUNDS,
-	LEVEL_MARGIN
+	LEVEL_MARGIN,
+	GLASS
 ]
 
 var binds = {
