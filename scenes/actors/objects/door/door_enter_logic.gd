@@ -1,7 +1,7 @@
 #Note: when the enter or exit animation starts, it sets the characters controllable and invulnerable variables, make sure to set them back in the parent code
 extends Node2D
 
-signal door_animation_finished
+signal start_door_logic
 
 onready var area2d : Area2D = $Area2D
 onready var tween : Tween = $Tween
@@ -17,8 +17,8 @@ export var close_audio : AudioStream
 const DOOR_BOTTOM_DISTANCE := 35
 
 export (float) var slide_to_center_length := 0.5
-export (float) var entering_door_length := 1.0 
-export (float) var exiting_door_length := 1.0
+export (float) var entering_door_length := 0.75 
+export (float) var exiting_door_length := 0.75
 
 var is_idle := true
 
@@ -62,11 +62,17 @@ func start_door_enter_animation(character : Character) -> void:
 
 	tween.start()
 	
-	character.anim_player.connect("animation_finished", self, "character_animation_finished")
+	# when mario finishes entering the door, trigger a function (one shot)
+	character.anim_player.connect("animation_finished", self, "character_animation_finished", [character], CONNECT_ONESHOT)
 	
-func character_animation_finished(animation : String):
+func character_animation_finished(animation : String, character : Character):
 	# this is so the door closes after mario enters
 	animate_door("close")
+	door_sprite.connect("animation_finished", self, "start_door_logic", [character], CONNECT_ONESHOT)
+
+func start_door_logic(character : Character):
+	# this is to make the door do stuff while mario is hidden
+	emit_signal("start_door_logic", character)
 	
 func animate_door(animation : String = "close"):
 	# this function just plays the door animation, so code doesn't have to repeat
@@ -76,20 +82,33 @@ func animate_door(animation : String = "close"):
 	audio_player.play()
 
 func start_door_exit_animation(character : Character) -> void:
+	# just plays a few animations
 	stored_character = character
-
+	
 	is_idle = false	
 
 	character.invulnerable = true 
 	character.controllable = false
 	character.movable = false
-
-	#this next line is kinda janky but hopefully it should set the animation after the above property
-	#finishes animating, basically it has duration 0 and a delay the same length as the duration of the above line
-	tween.interpolate_property(character.sprite, "animation", null, "doorExit" + \
-			("Right" if character.facing_direction == 1 else "Left"), 0, 0, 2, exiting_door_length)
+	
+	animate_door("open")
+	character.anim_player.play("exit_door")
+	# when mario finishes exiting, run a function (one shot)
+	character.anim_player.connect("animation_finished", self, "door_exit_anim_finished", [character], CONNECT_ONESHOT)
 
 	tween.start()
+
+func door_exit_anim_finished(animation : String, character : Character):
+	# closes the door and gives back control to mario
+	is_idle = true
+	
+	character.invulnerable = false 
+	character.controllable = true
+	character.movable = true
+
+	character.sprite.animation = "exitDoor" + ("Right" if character.facing_direction == 1 else "Left")
+	character.sprite.playing = true
+	animate_door("close")
 
 func _tween_all_completed() -> void:
 	emit_signal("door_animation_finished", stored_character)	
