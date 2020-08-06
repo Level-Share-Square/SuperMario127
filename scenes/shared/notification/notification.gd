@@ -1,6 +1,6 @@
 extends Control
 
-var pressed = false
+var hiding = false
 
 func init():
 	$NinePatchRect/Tween.interpolate_property($NinePatchRect, "rect_scale",
@@ -11,15 +11,16 @@ func init():
 	$NinePatchRect.connect("gui_input", self, "press")
 
 func hide():
-	$NinePatchRect/Tween.interpolate_property($NinePatchRect, "rect_scale",
-			Vector2(1, 1), Vector2(0, 0), 0.5,
-			Tween.TRANS_CIRC, Tween.EASE_OUT)
-	$NinePatchRect/Tween.start()
-	$NinePatchRect/Tween.connect("tween_all_completed", self, "self_destruct")
+	if !hiding:
+		hiding = true
+		$NinePatchRect/Tween.interpolate_property($NinePatchRect, "rect_scale",
+				Vector2(1, 1), Vector2(0, 0), 0.5,
+				Tween.TRANS_CIRC, Tween.EASE_OUT)
+		$NinePatchRect/Tween.start()
+		$NinePatchRect/Tween.connect("tween_all_completed", self, "self_destruct")
 
 func press(event):
-	if event is InputEventMouseButton && !pressed:
-		pressed = true
+	if event is InputEventMouseButton && !hiding:
 		$NinePatchRect/Timer.stop()
 		hide()
 
@@ -38,7 +39,7 @@ func start_timer():
 func self_destruct():
 	for notification in NotificationHandler.notifications:
 		if notification.get_rect().position.y > get_rect().position.y:
-			notification.rect_position -= Vector2(0, rect_size.y)
+			notification.rect_position -= Vector2(0, rect_size.y + NotificationHandler.offset)
 	NotificationHandler.notifications.erase(self)
-	NotificationHandler.biggest_y -= rect_size.y
+	NotificationHandler.biggest_y -= rect_size.y + NotificationHandler.offset
 	queue_free()
