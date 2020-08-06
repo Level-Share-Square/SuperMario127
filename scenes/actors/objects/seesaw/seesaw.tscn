@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/actors/objects/seesaw/texture.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/seesaw/seesaw.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/metal_platform/is_platform_area.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/metal_platform/semi_solid_platform.gd" type="Script" id=4]
+[ext_resource path="res://scenes/actors/objects/seesaw/screw.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 48, 8 )
@@ -48,6 +49,9 @@ axis_stretch_vertical = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Screw" type="Sprite" parent="."]
+texture = ExtResource( 5 )
 
 [node name="FloorTouchArea" type="Area2D" parent="."]
 visible = false

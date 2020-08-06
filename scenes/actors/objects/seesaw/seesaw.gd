@@ -38,6 +38,7 @@ func _process(_delta):
 
 onready var body = $KinematicBody2D
 onready var sprite = $Sprite
+onready var screw = $Screw
 onready var area = $FloorTouchArea
 
 onready var platform_area_collision_shape = $KinematicBody2D/Area2D/CollisionShape2D
@@ -106,3 +107,4 @@ func _physics_process(delta):
 	
 	rotation = tilt
 	body.rotation = 0 #necessary because godot
+	screw.global_rotation = 0
