@@ -6,7 +6,8 @@ var currentButton : Button
 var oldText : String
 var shouldCreateNewBindingOption = false
 
-onready var controls_options = get_parent().get_parent().get_parent().get_parent()
+onready var window = get_parent().get_parent().get_parent()
+onready var controls_options = window.get_parent()
 onready var close_button = get_parent().get_parent().get_parent().get_node("CloseButton")
 
 func _input(event):
@@ -28,6 +29,9 @@ func _input(event):
 				
 				if close_button.is_hovered():
 					reset()
+					return
+				
+				if !window.get_rect().has_point(event.position):
 					return
 
 			result = [
