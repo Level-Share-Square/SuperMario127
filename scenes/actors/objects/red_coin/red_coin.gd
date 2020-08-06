@@ -6,7 +6,7 @@ onready var last_sound = $LastCollect
 onready var area = $Area2D
 onready var visibility_enabler = $VisibilityEnabler2D
 onready var label = $Label
-onready var effects = $GlowEffects
+onready var sparkles = $Sparkles
 
 var collected = false
 var physics = false
@@ -35,7 +35,7 @@ func collect(body):
 		label.visible = true
 		animated_sprite.animation = "collect"
 		animated_sprite.frame = 0
-		effects.visible = false
+		sparkles.emitting = false
 		destroy_timer = 2
 		
 func _ready():
@@ -43,9 +43,6 @@ func _ready():
 	var _connect = area.connect("body_entered", self, "collect")
 
 func _process(delta):
-	# warning-ignore: integer_division
-	effects.rotation_degrees = (OS.get_ticks_msec()/16) % 360	
-
 	if destroy_timer > 0:
 		destroy_timer -= delta
 		if destroy_timer <= 0:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=2]
+[gd_scene load_steps=105 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -61,52 +61,52 @@
 [ext_resource path="res://scenes/actors/mario/particles/area_of_attack_ring.png" type="Texture" id=59]
 [ext_resource path="res://scenes/actors/mario/particles/area_of_attack_ring_back.png" type="Texture" id=60]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5.5, 4 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 15, 5 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 17, 5 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 5.5, 1 )
 
-[sub_resource type="RayShape2D" id=5]
+[sub_resource type="RayShape2D" id=8]
 length = 23.0
 
-[sub_resource type="RayShape2D" id=6]
+[sub_resource type="RayShape2D" id=9]
 length = 6.0
 
-[sub_resource type="RayShape2D" id=7]
+[sub_resource type="RayShape2D" id=10]
 custom_solver_bias = 0.5
 length = 13.0
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=11]
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 8.5, 20 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 8.5, 20 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 24, 16 )
 
-[sub_resource type="CanvasItemMaterial" id=12]
+[sub_resource type="CanvasItemMaterial" id=15]
 particles_animation = true
 particles_anim_h_frames = 10
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=13]
+[sub_resource type="Gradient" id=16]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=14]
-gradient = SubResource( 13 )
+[sub_resource type="GradientTexture" id=17]
+gradient = SubResource( 16 )
 
-[sub_resource type="ParticlesMaterial" id=15]
+[sub_resource type="ParticlesMaterial" id=18]
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 0.0
@@ -114,10 +114,10 @@ gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.75
-color_ramp = SubResource( 14 )
+color_ramp = SubResource( 17 )
 anim_speed = 0.8
 
-[sub_resource type="ParticlesMaterial" id=16]
+[sub_resource type="ParticlesMaterial" id=19]
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, -27, 0 )
@@ -126,10 +126,10 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 100.0
 scale = 0.75
-color_ramp = SubResource( 14 )
+color_ramp = SubResource( 17 )
 anim_speed = 0.8
 
-[sub_resource type="ParticlesMaterial" id=17]
+[sub_resource type="ParticlesMaterial" id=20]
 flag_disable_z = true
 direction = Vector3( -1, 0, 0 )
 spread = 0.0
@@ -139,16 +139,16 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 100.0
 scale = 0.75
-color_ramp = SubResource( 14 )
+color_ramp = SubResource( 17 )
 anim_speed = 0.8
 
-[sub_resource type="CanvasItemMaterial" id=18]
+[sub_resource type="CanvasItemMaterial" id=21]
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="ParticlesMaterial" id=19]
+[sub_resource type="ParticlesMaterial" id=22]
 emission_shape = 1
 emission_sphere_radius = 24.0
 flag_disable_z = true
@@ -251,7 +251,7 @@ animations = [ {
 "speed": 24.0
 } ]
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=44]
 length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:rotation_degrees")
@@ -266,7 +266,7 @@ tracks/0/keys = {
 "values": [ 0.0, -360.0 ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=45]
 length = 2.25
 step = 0.025
 tracks/0/type = "value"
@@ -428,7 +428,13 @@ tracks/12/keys = {
 } ]
 }
 
-[sub_resource type="ParticlesMaterial" id=22]
+[sub_resource type="CanvasItemMaterial" id=3]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=46]
 emission_shape = 1
 emission_sphere_radius = 24.0
 flag_disable_z = true
@@ -456,13 +462,13 @@ mario_frames = ExtResource( 1 )
 luigi_frames = ExtResource( 21 )
 mario_alt_frames = ExtResource( 15 )
 luigi_alt_frames = ExtResource( 16 )
-mario_collision = SubResource( 1 )
+mario_collision = SubResource( 4 )
 mario_collision_offset = Vector2( 0.5, -4 )
-mario_dive_collision = SubResource( 2 )
+mario_dive_collision = SubResource( 5 )
 mario_dive_collision_offset = Vector2( 0, 4 )
-luigi_collision = SubResource( 1 )
+luigi_collision = SubResource( 4 )
 luigi_collision_offset = Vector2( 0.5, 7 )
-luigi_dive_collision = SubResource( 3 )
+luigi_dive_collision = SubResource( 6 )
 luigi_dive_collision_offset = Vector2( -4, 4 )
 luigi_accel = 10.5
 luigi_fric = 13.5
@@ -475,20 +481,20 @@ visible = false
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0.5, -4 )
 z_index = 2
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="CollisionDive" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0.5, -7 )
 z_index = 2
-shape = SubResource( 4 )
+shape = SubResource( 7 )
 disabled = true
 
 [node name="GroundCollision" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0.5, 0 )
 z_index = 1
-shape = SubResource( 5 )
+shape = SubResource( 8 )
 disabled = true
 one_way_collision_margin = 0.0
 
@@ -496,7 +502,7 @@ one_way_collision_margin = 0.0
 visible = false
 position = Vector2( 0.5, 8 )
 rotation = -1.5708
-shape = SubResource( 6 )
+shape = SubResource( 9 )
 disabled = true
 one_way_collision_margin = 0.0
 
@@ -504,7 +510,7 @@ one_way_collision_margin = 0.0
 visible = false
 position = Vector2( 0.5, 8 )
 rotation = 1.5708
-shape = SubResource( 6 )
+shape = SubResource( 9 )
 disabled = true
 one_way_collision_margin = 0.0
 
@@ -512,11 +518,11 @@ one_way_collision_margin = 0.0
 visible = false
 position = Vector2( 0.5, -6 )
 z_index = 2
-shape = SubResource( 7 )
+shape = SubResource( 10 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-material = SubResource( 8 )
+material = SubResource( 11 )
 frames = ExtResource( 1 )
 animation = "spinning"
 
@@ -708,7 +714,7 @@ collision_mask = 2
 visible = false
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0.5, 4 )
-shape = SubResource( 9 )
+shape = SubResource( 12 )
 
 [node name="PlatformDetector" type="Area2D" parent="."]
 visible = false
@@ -718,7 +724,7 @@ collision_mask = 17
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformDetector"]
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0.5, 4 )
-shape = SubResource( 10 )
+shape = SubResource( 13 )
 
 [node name="SpinArea" type="Area2D" parent="."]
 position = Vector2( 0, 6 )
@@ -728,7 +734,7 @@ script = ExtResource( 58 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpinArea"]
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
-shape = SubResource( 11 )
+shape = SubResource( 14 )
 disabled = true
 
 [node name="Bubble" type="Sprite" parent="."]
@@ -787,62 +793,62 @@ stream = ExtResource( 27 )
 volume_db = -5.0
 
 [node name="Particles2D" type="Particles2D" parent="."]
-material = SubResource( 12 )
+material = SubResource( 15 )
 z_index = -2
 emitting = false
 amount = 24
 local_coords = false
-process_material = SubResource( 15 )
+process_material = SubResource( 18 )
 texture = ExtResource( 30 )
 
 [node name="SlideParticles" type="Particles2D" parent="."]
-material = SubResource( 12 )
+material = SubResource( 15 )
 position = Vector2( 0, 14 )
 z_index = -2
 emitting = false
 amount = 24
 local_coords = false
-process_material = SubResource( 15 )
+process_material = SubResource( 18 )
 texture = ExtResource( 30 )
 
 [node name="GPParticles1" type="Particles2D" parent="."]
-material = SubResource( 12 )
+material = SubResource( 15 )
 position = Vector2( 0, 18 )
-z_index = 2
-emitting = false
-amount = 14
-local_coords = false
-process_material = SubResource( 16 )
-texture = ExtResource( 30 )
-
-[node name="GPParticles2" type="Particles2D" parent="."]
-material = SubResource( 12 )
-position = Vector2( 0, 18 )
-z_index = 2
-emitting = false
-amount = 14
-local_coords = false
-process_material = SubResource( 17 )
-texture = ExtResource( 30 )
-
-[node name="RainbowSparkles" type="Particles2D" parent="."]
-material = SubResource( 18 )
-position = Vector2( 0, 5 )
 z_index = 2
 emitting = false
 amount = 14
 local_coords = false
 process_material = SubResource( 19 )
+texture = ExtResource( 30 )
+
+[node name="GPParticles2" type="Particles2D" parent="."]
+material = SubResource( 15 )
+position = Vector2( 0, 18 )
+z_index = 2
+emitting = false
+amount = 14
+local_coords = false
+process_material = SubResource( 20 )
+texture = ExtResource( 30 )
+
+[node name="RainbowSparkles" type="Particles2D" parent="."]
+material = SubResource( 21 )
+position = Vector2( 0, 5 )
+z_index = 2
+emitting = false
+amount = 14
+local_coords = false
+process_material = SubResource( 22 )
 texture = ExtResource( 41 )
 
 [node name="MetalSparkles" type="Particles2D" parent="."]
-material = SubResource( 18 )
+material = SubResource( 21 )
 position = Vector2( 0, 5 )
 z_index = 2
 emitting = false
 amount = 6
 local_coords = false
-process_material = SubResource( 19 )
+process_material = SubResource( 22 )
 texture = ExtResource( 51 )
 
 [node name="RingParticles" type="AnimatedSprite" parent="."]
@@ -862,21 +868,22 @@ playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/backflip = ExtResource( 32 )
-anims/backflip_right = SubResource( 20 )
-anims/shine_dance = SubResource( 21 )
+anims/backflip_right = SubResource( 44 )
+anims/shine_dance = SubResource( 45 )
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 position = Vector2( -1, 20 )
 scale = Vector2( 0.1, 0.1 )
 z_index = -5
 frames = ExtResource( 55 )
-frame = 10
+frame = 11
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
 show_behind_parent = true
+material = SubResource( 3 )
 local_coords = false
-process_material = SubResource( 22 )
+process_material = SubResource( 46 )
 texture = ExtResource( 56 )
 
 [node name="BottomPos" type="Node2D" parent="."]

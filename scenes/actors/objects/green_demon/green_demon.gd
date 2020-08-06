@@ -3,8 +3,8 @@ extends GameObject
 onready var area = $Area2D
 onready var sprite = $Sprite
 onready var particles = $Particles2D
+onready var particles2 = $Sparkles
 onready var anim_player = $AnimationPlayer
-onready var effects = $DemonEffects
 onready var revolve_sound = $Revolve
 onready var revolve_last_sound = $RevolveLast
 var collected = false
@@ -40,7 +40,7 @@ func kill(body):
 		chase = false
 		sprite.visible = false
 		particles.emitting = false
-		effects.visible = false
+		particles2.emitting = false
 
 func _ready():
 	original_position = position
@@ -52,9 +52,6 @@ func _ready():
 			revolve_sound.play() #since the game doesn't detect a rotation at the start, we play the sound manually
 
 func _physics_process(delta):
-	# warning-ignore: integer_division
-	effects.rotation_degrees = (OS.get_ticks_msec()/16) % 360
-	
 	if cached_pos != Vector2() and chase and character != null:
 		var move_to = (cached_pos - global_position).normalized()
 		global_position += move_to * current_speed

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://assets/particles/shiny_particle_material.tres" type="Material" id=2]
@@ -16,7 +16,13 @@ data = PoolByteArray( 183, 255, 182, 255, 174, 255, 188, 255, 171, 255, 164, 255
 format = 1
 mix_rate = 26415
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="CanvasItemMaterial" id=3]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Animation" id=4]
 length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:speed_scale")
@@ -100,6 +106,7 @@ frame = 1
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]
 show_behind_parent = true
+material = SubResource( 3 )
 local_coords = false
 process_material = ExtResource( 2 )
 texture = ExtResource( 4 )
@@ -112,7 +119,7 @@ visible = false
 texture = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/appear = SubResource( 3 )
+anims/appear = SubResource( 4 )
 
 [node name="UnpauseTimer" type="Timer" parent="."]
 one_shot = true

@@ -1,24 +1,31 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/actors/objects/red_coin/red.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/red_coin/sound.wav" type="AudioStream" id=2]
 [ext_resource path="res://scenes/actors/objects/red_coin/red_coin.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/red_coin/sound_last.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://scenes/actors/objects/red_coin/glow_effects.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/particles/shiny_particle_material.tres" type="Material" id=6]
+[ext_resource path="res://scenes/actors/mario/particles/red_sparkles.png" type="Texture" id=7]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=4]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=5]
 outline_size = 2
 font_data = ExtResource( 5 )
+
+[sub_resource type="CanvasItemMaterial" id=3]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [node name="Coin" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -26,7 +33,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
@@ -48,7 +55,7 @@ margin_left = -12.0
 margin_top = -12.0
 margin_right = 12.0
 margin_bottom = 12.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "1"
 align = 1
@@ -57,4 +64,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GlowEffects" parent="." instance=ExtResource( 6 )]
+[node name="Sparkles" type="Particles2D" parent="."]
+material = SubResource( 3 )
+process_material = ExtResource( 6 )
+texture = ExtResource( 7 )

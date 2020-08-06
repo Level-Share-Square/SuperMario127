@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://scenes/actors/objects/shine_shard/glow_effects.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/particles/shiny_particle_material.tres" type="Material" id=2]
 [ext_resource path="res://scenes/actors/objects/shine_shard/shard.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/red_coin/sound_last.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/actors/objects/red_coin/sound.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/actors/objects/shine_shard/shine_shard.gd" type="Script" id=6]
+[ext_resource path="res://scenes/actors/mario/particles/shine_sparkles.png" type="Texture" id=7]
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
@@ -15,24 +16,31 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=5]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=6]
 outline_size = 2
 font_data = ExtResource( 1 )
+
+[sub_resource type="CanvasItemMaterial" id=3]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [node name="ShineShard" type="Node2D"]
 script = ExtResource( 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 5 )
+frames = SubResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
@@ -45,6 +53,7 @@ stream = ExtResource( 4 )
 volume_db = -9.0
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
 process_parent = true
 physics_process_parent = true
 
@@ -54,7 +63,7 @@ margin_left = -12.0
 margin_top = -12.0
 margin_right = 12.0
 margin_bottom = 12.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 0.717647, 0.176471, 1 )
 custom_colors/font_outline_modulate = Color( 0.866667, 0.427451, 0, 1 )
 text = "1"
@@ -64,5 +73,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GlowEffects" parent="." instance=ExtResource( 2 )]
-position = Vector2( -0.5, 0 )
+[node name="Sparkles" type="Particles2D" parent="."]
+material = SubResource( 3 )
+process_material = ExtResource( 2 )
+texture = ExtResource( 7 )
