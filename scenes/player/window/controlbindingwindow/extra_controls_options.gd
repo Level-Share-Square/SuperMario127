@@ -31,7 +31,9 @@ func _input(event):
 					reset()
 					return
 				
-				if !window.get_rect().has_point(event.position):
+				var real_rect = Rect2(window.get_rect().position, window.get_rect().size * window.rect_scale)
+				
+				if !real_rect.has_point(event.position):
 					return
 
 			result = [
