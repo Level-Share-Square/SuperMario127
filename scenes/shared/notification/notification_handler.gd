@@ -10,16 +10,16 @@ const offset = 5
 var biggest_y = offset
 var notifications : Array
 
-func success(title : String, content : String):
-	_instantiate(title, content, success)
+func success(title : String, content : String, duration : int = 2):
+	_instantiate(title, content, success, duration)
 
-func warning(title : String, content : String):
-	_instantiate(title, content, warning)
+func warning(title : String, content : String, duration : int = 2):
+	_instantiate(title, content, warning, duration)
 	
-func error(title : String, content : String):
-	_instantiate(title, content, error)
+func error(title : String, content : String, duration : int = 2):
+	_instantiate(title, content, error, duration)
 
-func _instantiate(title : String, content : String, type : String):
+func _instantiate(title : String, content : String, type : String, duration : int):
 	var ui = get_tree().get_current_scene().get_node("UI")
 	
 	var notification = load("res://scenes/shared/notification/notification.tscn")
@@ -35,5 +35,7 @@ func _instantiate(title : String, content : String, type : String):
 	notification_instance.set_title(title)
 	notification_instance.set_content(content)
 	notification_instance.set_texture(type)
+	notification_instance.set_duration(duration)
+	
 	ui.add_child(notification_instance)
 	notification_instance.init()

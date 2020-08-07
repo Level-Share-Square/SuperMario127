@@ -33,6 +33,9 @@ func set_content(content : String):
 func set_texture(type : String):
 	$NinePatchRect.texture = load(type)
 
+func set_duration(duration : int):
+	$NinePatchRect/Timer.wait_time = duration
+
 func start_timer():
 	$NinePatchRect/Timer.connect("timeout", self, "hide")
 	

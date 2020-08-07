@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/shared/notification/notification.gd" type="Script" id=3]
 
-[sub_resource type="StreamTexture" id=4]
+[sub_resource type="StreamTexture" id=1]
 
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 2 )
@@ -24,7 +24,7 @@ __meta__ = {
 margin_right = 147.0
 margin_bottom = 113.0
 mouse_filter = 0
-texture = SubResource( 4 )
+texture = SubResource( 1 )
 region_rect = Rect2( 0, 0, 660, 610 )
 patch_margin_left = 40
 patch_margin_top = 83
