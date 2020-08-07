@@ -45,6 +45,8 @@ func _ready():
 			get_node(character).set_network_master(PlayerSettings.other_player_id)
 			get_node(character).controlled_locally = false
 			get_node(camera).character_node = get_node(character2)
+	
+	DiscordUtil.update_play_mode()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("reload") and !scene_transitions.transitioning and !mode_switcher.get_node("ModeSwitcherButton").switching_disabled:

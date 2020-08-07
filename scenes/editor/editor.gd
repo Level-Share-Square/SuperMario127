@@ -126,6 +126,8 @@ func _ready():
 		get_node("/root/mode_switcher/ModeSwitcherButton").change_button_state(true) #enable the mode switching button since we're using the editor
 		get_node("/root/music").play() #needed because the music no longer plays by default
 	
+	DiscordUtil.update_editor()
+	
 func set_selected_box(new_selected_box: Node):
 	EditorSavedSettings.selected_box = new_selected_box.box_index
 	item_preview_node.update_preview(new_selected_box.item)

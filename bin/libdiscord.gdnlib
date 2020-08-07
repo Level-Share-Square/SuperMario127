@@ -1,0 +1,16 @@
+[entry]
+
+Windows.64="res://bin/win64/libdiscord.dll"
+X11.64="res://bin/x11/libdiscord.so"
+
+[dependencies]
+
+Windows.64=[ "res://bin/win64/discord-rpc.dll" ]
+X11.64=[ "res://bin/x11/discord-rpc.so" ]
+
+[general]
+
+singleton=false
+load_once=true
+symbol_prefix="godot_"
+reloadable=true
