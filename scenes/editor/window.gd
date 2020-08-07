@@ -54,5 +54,5 @@ func pressed():
 	close()
 	click_sound.play()
 	
-func is_open():
+func is_open() -> bool:
 	return visible
