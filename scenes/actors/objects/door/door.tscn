@@ -95,5 +95,3 @@ frames = SubResource( 10 )
 animation = "close"
 frame = 3
 playing = true
-
-[node name="Timer" type="Timer" parent="DoorEnterLogic"]

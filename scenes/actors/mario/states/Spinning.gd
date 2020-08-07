@@ -47,7 +47,7 @@ func _start(_delta):
 	character.gravity_scale = gravity_scale
 	
 func _update(_delta):
-	var sprite = character.animated_sprite
+	var sprite = character.sprite
 	if character.is_grounded():
 		priority = 0
 		disable_snap = false

@@ -23,6 +23,8 @@ var downloader = Downloader.new()
 var song_cache = []
 var loop = 0.0
 
+var muted = false
+
 const MUSIC_FADE_LENGTH = 0.75
 
 func get_song(song_id: int):
@@ -92,11 +94,11 @@ func _process(_delta):
 		last_mode = current_scene.mode
 		last_song = level_song
 	
-		volume_db = linear2db(db2linear(base_volume) * volume_multiplier)
+		volume_db = linear2db(db2linear(base_volume) * volume_multiplier) if !muted else -80
 
 func _unhandled_input(event):
 	if event.is_action_pressed("mute"):
-		volume_multiplier = 0 if volume_multiplier == 1 else 1
+		muted = !muted
 
 # the plan for this is to mute the current bgm, play the temp song, and then fade the current bgm back in
 func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0):

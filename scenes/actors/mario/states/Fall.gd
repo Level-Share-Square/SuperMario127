@@ -9,7 +9,7 @@ func _start(_delta):
 	pass
 
 func _update(_delta):
-	var sprite = character.animated_sprite
+	var sprite = character.sprite
 	if character.facing_direction == 1:
 		if character.jump_animation == 0:
 			sprite.animation = "fallRight"

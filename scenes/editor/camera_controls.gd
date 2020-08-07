@@ -35,7 +35,7 @@ func load_in(_level_data : LevelData, level_area : LevelArea):
 	position.x = (get_viewport_rect().size.x / 2) * zoom_level
 	position.y = (level_area.settings.bounds.end.y * 32) - ((get_viewport_rect().size.y / 2) * zoom_level)
 	update_limits(level_area)
-	force_update_scroll()
+	reset_smoothing()
 	
 	zoom = Vector2(zoom_level, zoom_level)
 	

@@ -48,7 +48,7 @@ func _start(_delta):
 	character.is_wj_chained = true
 
 func _update(_delta):
-	var sprite = character.animated_sprite
+	var sprite = character.sprite
 	if (direction_on_wj == 1):
 		sprite.animation = "jumpRight"
 	else:

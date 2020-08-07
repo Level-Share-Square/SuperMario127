@@ -37,7 +37,7 @@ func _start(_delta):
 	#print(character.ground_check.get_collision_normal())
 
 func _update(delta):
-	var sprite = character.animated_sprite
+	var sprite = character.sprite
 	if (character.facing_direction == 1):
 		sprite.animation = "diveRight"
 	else:

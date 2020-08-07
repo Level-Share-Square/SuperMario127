@@ -140,7 +140,7 @@ func _physics_process(delta):
 	for _body in current_weights:
 		var bottom_pos = _body.bottom_pos #we know it has this property because otherwise it won't be in the array
 		var relative_position : Vector2 = bottom_pos.global_position-body.global_position
-		_body.position = position + (relative_position+Vector2(delta*rotation*200,0)).rotated(rotation-last_rotation)-bottom_pos.position
+		_body.global_position = position + (relative_position+Vector2(delta*rotation*200,0)).rotated(rotation-last_rotation)-bottom_pos.position
 	
 	
 

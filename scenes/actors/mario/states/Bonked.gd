@@ -33,7 +33,7 @@ func _update(delta):
 		if time_until_cancel <= 0:
 			time_until_cancel = 0
 			priority = 1
-	var sprite = character.animated_sprite
+	var sprite = character.sprite
 	frames_bonked += 1
 	if (bonk_direction == 1):
 		sprite.animation = "bonkedRight"
@@ -49,7 +49,7 @@ func _update(delta):
 	sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), target_rotation, lerp_speed * delta) * -character.facing_direction
 	
 func _stop(_delta):
-	var sprite = character.animated_sprite
+	var sprite = character.sprite
 	frames_bonked = 0
 	sprite.offset.y = 0
 	character.friction = character.real_friction

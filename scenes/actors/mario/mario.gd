@@ -4,13 +4,53 @@ class_name Character
 
 signal state_changed
 
+# Child nodes
 onready var states_node = $States
 onready var nozzles_node = $Nozzles
 onready var powerups_node = $Powerups
-onready var animated_sprite = $Sprite
-onready var anim_player = $AnimationPlayer
+onready var anim_player : AnimationPlayer = $AnimationPlayer
 
-onready var spotlight = $Spotlight
+onready var sprite : AnimatedSprite = $Sprite
+onready var fludd_sprite : AnimatedSprite = $Sprite/Fludd
+onready var water_sprite : AnimatedSprite = $Sprite/Water
+onready var water_sprite_2 : AnimatedSprite = $Sprite/Water2
+
+onready var collision_shape : CollisionShape2D = $Collision
+onready var dive_collision_shape : CollisionShape2D = $CollisionDive
+onready var collision_raycast : CollisionShape2D = $GroundCollision
+onready var left_collision : CollisionShape2D = $LeftCollision
+onready var right_collision : CollisionShape2D = $RightCollision
+onready var ground_collision_dive : CollisionShape2D = $GroundCollisionDive
+onready var ground_check : RayCast2D = $GroundCheck
+onready var ground_check_dive : RayCast2D = $GroundCheckDive
+onready var left_check : RayCast2D = $LeftCheck
+onready var right_check : RayCast2D = $RightCheck
+onready var slope_stop_check : RayCast2D = $SlopeStopCheck
+onready var player_collision : Area2D = $PlayerCollision
+onready var platform_detector : Area2D = $PlatformDetector
+onready var spin_area : Area2D = $SpinArea
+onready var player_collision_shape : CollisionShape2D = $PlayerCollision/CollisionShape2D
+onready var spin_area_shape : CollisionShape2D = $SpinArea/CollisionShape2D
+onready var fludd_sound : AudioStreamPlayer = $FluddSound
+onready var fludd_charge_sound : AudioStreamPlayer = $FluddChargeSound
+onready var nozzle_switch_sound : AudioStreamPlayer = $NozzleSwitchSound
+onready var particles : Particles2D = $Particles2D
+onready var slide_particles : Particles2D = $SlideParticles
+onready var gp_particles1 : Particles2D = $GPParticles1
+onready var gp_particles2 : Particles2D = $GPParticles2
+onready var rainbow_particles : Particles2D = $RainbowSparkles
+onready var metal_particles : Particles2D = $MetalSparkles
+onready var bottom_pos : Node2D = $BottomPos
+onready var ring_particles : AnimatedSprite = $RingParticles
+onready var ring_particles_back : AnimatedSprite = $RingParticlesBack
+onready var collected_shine : AnimatedSprite = $CollectedShine # used for the shine dance animation, can be edited to reflect different shine colours or sprites or something
+onready var death_sprite : AnimatedSprite = $DeathSprite
+onready var death_fludd_sprite : AnimatedSprite = $DeathSprite/Fludd
+onready var raycasts = [ground_check, ground_check_dive, left_check, right_check, slope_stop_check]
+export var bottom_pos_offset : Vector2
+export var bottom_pos_dive_offset : Vector2
+
+onready var spotlight : Light2D = $Spotlight
 
 # Cutout
 export var cutout_death : StreamTexture
@@ -22,77 +62,77 @@ export var initial_position := Vector2(0, 0)
 export var velocity := Vector2(0, 0)
 var last_velocity := Vector2(0, 0)
 
-export var gravity_scale = 1
-export var facing_direction = 1
-export var move_direction = 0
-export var last_move_direction = 0
+export var gravity_scale := 1.0
+export var facing_direction := 1
+export var move_direction := 0
+export var last_move_direction := 0
 
-export var move_speed = 216.0
-export var acceleration = 7.5
-export var deceleration = 15.0
-export var aerial_acceleration = 7.5
-export var friction = 10.5
-export var aerial_friction = 1.15
+export var move_speed := 216.0
+export var acceleration := 7.5
+export var deceleration := 15.0
+export var aerial_acceleration := 7.5
+export var friction := 10.5
+export var aerial_friction := 1.15
 
 # Sounds
 var sound_player
-var footstep_interval = 0
+var footstep_interval := 0.0
 
 # Extra
-export var is_wj_chained = false
-export var real_friction = 0
-export var current_jump = 0
-export var jump_animation = 0
-export var direction_on_stick = 1
-export var rotating = true
-export var spawn_pos = Vector2(0, 0)
+export var is_wj_chained := false
+export var real_friction := 0.0
+export var current_jump := 0
+export var jump_animation := 0
+export var direction_on_stick := 1
+export var rotating := true
+export var spawn_pos := Vector2(0, 0)
 export var gravity : float
 
-export var disable_movement = false
-export var disable_turning = false
-export var disable_friction = false
-export var disable_animation = false
+export var disable_movement := false
+export var disable_turning := false
+export var disable_friction := false
+export var disable_animation := false
 
-export var attacking = false
-export var big_attack = false
-export var invincible = false
-export var heavy = false
+export var attacking := false
+export var big_attack := false
+export var invincible := false
+export var heavy := false
 
-export var player_id = 0
+export var player_id := 0
 
-# States
-var state = null
-var last_state = null
-var switching_state = false
-export var controllable = true
-export var invulnerable = false
-export var invulnerable_frames = 0
-export var movable = true
-export var dead = false
-export var stomping = false
-export var dive_cooldown = 0
+# States. Couldn't set static type due to circle reference
+var state : Node = null
+var last_state : Node = null
+var switching_state := false
+export var controllable := true
+export var invulnerable := false
+export var invulnerable_frames := 0
+export var movable := true
+export var dead := false
+export var stomping := false
+export var dive_cooldown := 0.0
 
 export var health := 8
 export var health_shards := 0
-var nozzle = null
-var using_turbo = false
-var turbo_nerf = false
+var nozzle : Node = null # Couldn't set static type due to circle reference
+var using_turbo := false
+var turbo_nerf := false
 var fuel := 100.0
 var stamina := 100.0
 var nozzles_list_index := 0
-var powerup = null
-var rainbow_stored = false
-var next_flash = 0.0
-var frames_until_flash = 3
-var metal_voice = false
+var powerup : Node = null # Couldn't set static type due to circle reference
+var rainbow_stored := false
+var next_flash := 0.0
+var frames_until_flash := 3
+var metal_voice := false
 
 # Collision vars
 var collision_down
 var collision_up
 var collision_left
 var collision_right
-var collided_last_frame = false
-var using_dive_collision = false
+var collided_last_frame := false
+var using_dive_collision := false
 
 export var snap := Vector2(0, 32)
 
@@ -128,50 +168,8 @@ enum input_names {left, right, jump, dive, spin, gp, gpcancel, fludd, nozzles, c
 # second parameter is "just_pressed", 
 # and third parameter is the input name.
 export var inputs : Array
-
 export var controlled_locally = true
-
 export var rotating_jump = false
-
-#onready var global_vars_node = get_node("../GlobalVars")
-#onready var level_settings_node = get_node("../LevelSettings")
-onready var collision_shape = $Collision
-onready var collision_raycast = $GroundCollision
-onready var dive_collision_shape = $CollisionDive
-onready var ground_check = $GroundCheck
-onready var slope_stop_check = $SlopeStopCheck
-onready var ground_check_dive = $GroundCheckDive
-onready var left_check = $LeftCheck
-onready var right_check = $RightCheck
-onready var left_collision = $LeftCollision
-onready var right_collision = $RightCollision
-onready var ground_collision_dive = $GroundCollisionDive
-onready var player_collision = $PlayerCollision
-onready var player_collision_shape = $PlayerCollision/CollisionShape2D
-onready var sprite = $Sprite
-onready var fludd_sprite = $Sprite/Fludd
-onready var water_sprite = $Sprite/Water
-onready var water_sprite_2 = $Sprite/Water2
-onready var fludd_sound = $FluddSound
-onready var fludd_charge_sound = $FluddChargeSound
-onready var nozzle_switch_sound = $NozzleSwitchSound
-onready var particles = $Particles2D
-onready var slide_particles = $SlideParticles
-onready var gp_particles1 = $GPParticles1
-onready var gp_particles2 = $GPParticles2
-onready var rainbow_particles = $RainbowSparkles
-onready var metal_particles = $MetalSparkles
-onready var ring_particles = $RingParticles # ring used for spinning
-onready var ring_particles_back = $RingParticlesBack # same as above, but renders behind the character
-onready var platform_detector = $PlatformDetector
-onready var bottom_pos = $BottomPos
-onready var death_sprite = $DeathSprite
-onready var death_fludd_sprite = $DeathSprite/Fludd
-onready var spin_area_shape = $SpinArea/CollisionShape2D # dynamically enabled and disabled when you do a spin attack
-onready var collected_shine = $CollectedShine # used for the shine dance animation, can be edited to reflect different shine colours or sprites or something
-onready var raycasts = [ground_check, ground_check_dive, left_check, right_check, slope_stop_check]
-export var bottom_pos_offset : Vector2
-export var bottom_pos_dive_offset : Vector2
 
 var level_bounds = Rect2(0, 0, 80, 30)
 var number_of_players = 2
@@ -179,6 +177,8 @@ var number_of_players = 2
 var next_position : Vector2
 var sync_interpolation_speed = 20
 export var rotation_interpolation_speed = 15
+
+var camera : Camera2D
 
 #rpc_unreliable("update_inputs", 
 #left, left_just_pressed,
@@ -204,25 +204,20 @@ puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_a
 	dead = is_dead
 	controllable = is_controllable
 
-func is_character():
-	return true
-
-func exploded(explosion_pos : Vector2):
+func exploded(explosion_pos : Vector2) -> void:
 	if !invincible:
 		damage_with_knockback(explosion_pos, 2)
 
-func steely_hit(steely_pos : Vector2):
+func steely_hit(steely_pos : Vector2) -> void:
 	if !invincible:
 		damage_with_knockback(steely_pos, 2)
 
-func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String = "hit", frames : int = 180):
+func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String = "hit", frames : int = 180) -> void:
 	if !invulnerable:
-		if powerup != null and amount > 0:
-			if powerup.get_name() == "VanishPowerup":
-				return
-		var direction = 1
-		if (global_position - hit_pos).normalized().x < 0:
-			direction = -1
+		# Mario shouldn't take damage with the vanish cap
+		if amount > 0 and powerup != null and powerup.get_name() == "VanishPowerup":
+			return
+		var direction := sign((global_position - hit_pos).normalized().x)
 		velocity.x = direction * 235
 		velocity.y = -225
 		set_state_by_name("KnockbackState", 0)
@@ -234,44 +229,28 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	for exception in collision_exceptions:
 		add_collision_exception_with(get_node(exception))
 	var _connect = player_collision.connect("body_entered", self, "player_hit")
-		
-	if character == 0:
-		var sound_scene = MiscCache.mario_sounds
-		sound_player = sound_scene.instance()
-		add_child(sound_player)
-		if PlayerSettings.player1_character != PlayerSettings.player2_character or player_id == 0:
-			sprite.frames = mario_frames
-			death_sprite.frames = mario_frames
-		else:
-			sprite.frames = mario_alt_frames
-			death_sprite.frames = mario_alt_frames
-		#collision_shape.position = mario_collision_offset
-		#collision_shape.shape = mario_collision
-		#player_collision_shape.position = mario_collision_offset
-		#player_collision_shape.shape = mario_collision
-		#ground_collision_dive.shape = mario_dive_collision
-		#ground_collision_dive.position = mario_dive_collision_offset
-		real_friction = friction
-	else:
-		var sound_scene = MiscCache.luigi_sounds
-		sound_player = sound_scene.instance()
-		add_child(sound_player)
-		if PlayerSettings.player1_character != PlayerSettings.player2_character or player_id == 0:
-			sprite.frames = luigi_frames
-			death_sprite.frames = luigi_frames
-		else:
-			sprite.frames = luigi_alt_frames
-			death_sprite.frames = luigi_alt_frames
-		#collision_shape.position = luigi_collision_offset
-		#collision_shape.shape = luigi_collision
-		#player_collision_shape.position = luigi_collision_offset
-		#player_collision_shape.shape = luigi_collision
-		#ground_collision_dive.shape = luigi_dive_collision
-		#ground_collision_dive.position = luigi_dive_collision_offset
-		move_speed = luigi_speed
-		acceleration = luigi_accel
-		friction = luigi_fric
-		real_friction = luigi_fric
+	
+	# Whether or not the alt character (e.g. Wario for Mario) should be loaded instead
+	var use_alt_character : bool = PlayerSettings.player1_character == PlayerSettings.player2_character and player_id != 0
+	match character:
+		0: # Mario
+			sound_player = MiscCache.mario_sounds.instance()
+			sprite.frames = mario_alt_frames if use_alt_character else mario_frames
+			real_friction = friction
+		1: # Luigi
+			sound_player = MiscCache.luigi_sounds.instance()
+			sprite.frames = luigi_alt_frames if use_alt_character else luigi_frames
+			move_speed = luigi_speed
+			acceleration = luigi_accel
+			friction = luigi_fric
+			real_friction = luigi_fric
+		_:
+			push_error("Illegal character loaded: " + str(character) + " REEEEEE")
+	
+	add_child(sound_player)
+	# Death sprites are shared
+	death_sprite.frames = sprite.frames
+	
 	collision_shape.disabled = false
 	collision_raycast.disabled = false
 	left_collision.disabled = false
@@ -283,18 +262,18 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	collected_shine.visible = false
 	collected_shine.get_node("ShineParticles").emitting = false
 
-var prev_is_grounded = false
-var recalculate_grounded = false
-func is_grounded():
+var prev_is_grounded := false
+var recalculate_grounded := false
+func is_grounded() -> bool:
 	if recalculate_grounded:
-		var raycast_node = ground_check
+		var raycast_node := ground_check
 		raycast_node.cast_to = Vector2(0, 26)
 		if !ground_collision_dive.disabled:
 			raycast_node = ground_check_dive
 			raycast_node.cast_to = Vector2(0, 7.5)
 		
 		raycast_node.force_raycast_update()
-		var new_is_grounded = raycast_node.is_colliding() and velocity.y >= 0
+		var new_is_grounded := raycast_node.is_colliding() and velocity.y >= 0
 		if !new_is_grounded and prev_is_grounded and velocity.y > 0:
 			velocity.y = 0
 		
@@ -303,28 +282,28 @@ func is_grounded():
 		#recalculate_grounded = false
 	return prev_is_grounded
 
-func is_ceiling():
+func is_ceiling() -> bool:
 	return test_move(self.transform, Vector2(0, -0.1)) and collided_last_frame
 
-func is_walled():
+func is_walled() -> bool:
 	return (is_walled_left() or is_walled_right()) and collided_last_frame
 
-func is_walled_left():
+func is_walled_left() -> bool:
 	return test_move(self.transform, Vector2(-0.5, 1)) and test_move(self.transform, Vector2(-0.5, -1)) and collided_last_frame
 
-func is_walled_right():
+func is_walled_right() -> bool:
 	return test_move(self.transform, Vector2(0.5, 1)) and test_move(self.transform, Vector2(0.5, -1)) and collided_last_frame
 
-func hide():
+func hide() -> void:
 	visible = false
 	velocity = Vector2(0, 0)
 	position = initial_position
 
-func show():
+func show() -> void:
 	visible = true
 
 # new_state is of type State, however adding static typing would cause a cyclic dependency
-func set_state(new_state, delta: float):
+func set_state(new_state: Node, delta: float) -> void:
 	recalculate_grounded = true
 	last_state = state
 	state = null
@@ -335,39 +314,40 @@ func set_state(new_state, delta: float):
 		new_state._start(delta)
 	emit_signal("state_changed", new_state, last_state)
 
-func get_state_node(name: String):
+func get_state_node(name: String) -> Node:
 	if states_node.has_node(name):
 		return states_node.get_node(name)
-		
-func get_powerup_node(name: String):
+	return null
+
+func get_powerup_node(name: String) -> Node:
 	if powerups_node.has_node(name):
 		return powerups_node.get_node(name)
+	return null
 
-func set_powerup(powerup_node):
+func set_powerup(powerup_node: Node) -> void:
 	if powerup != null:
 		powerup._stop(0)
 		powerup.remove_visuals()
+	
+	powerup = powerup_node
+	if powerup != null:
+		powerup._start(0)
+		powerup.apply_visuals()
 
-	if powerup_node != null:
-		powerup = powerup_node
-		powerup_node._start(0)
-		powerup_node.apply_visuals()
-	else:
-		powerup = null
-
-func set_state_by_name(name: String, delta: float):
+func set_state_by_name(name: String, delta: float) -> void:
 	if get_state_node(name) != null:
 		set_state(get_state_node(name), delta)
 		
-func add_nozzle(new_nozzle):
+func add_nozzle(new_nozzle: Node) -> void:
 	if !new_nozzle in CurrentLevelData.level_data.vars.nozzles_collected:
 		CurrentLevelData.level_data.vars.nozzles_collected.append(new_nozzle)
-		
-func get_nozzle_node(name: String):
+
+func get_nozzle_node(name: String) -> Node:
 	if nozzles_node.has_node(name):
 		return nozzles_node.get_node(name)
-		
-func set_nozzle(new_nozzle, change_index = true):
+	return null
+
+func set_nozzle(new_nozzle, change_index = true) -> void:
 	fludd_sound.stop()
 	fludd_charge_sound.stop()
 	if nozzle != null:
@@ -381,10 +361,12 @@ func set_nozzle(new_nozzle, change_index = true):
 	turbo_nerf = false
 	if change_index:
 		nozzles_list_index = CurrentLevelData.level_data.vars.nozzles_collected.find(str(new_nozzle))
-		
-func player_hit(body):
-	if body.name.begins_with("Character"):
-		if !body.big_attack and !big_attack:
+
+# Handles getting hit by another player
+func player_hit(body : Node) -> void:
+	if body.name.begins_with("Character") and !big_attack:
+		var mul_sign := sign(global_position.x - body.global_position.x)
+		if !body.big_attack:
 			if global_position.y + 8 < body.global_position.y:
 				velocity.y = -230
 				#body.stomped_sound_player.play() -Felt weird without animations
@@ -392,59 +374,38 @@ func player_hit(body):
 					set_state_by_name("BounceState", 0)
 			elif global_position.y - 8 > body.global_position.y:
 				velocity.y = 150
-			elif global_position.x < body.global_position.x:
-				if body.attacking == true and !attacking:
-					velocity.x = -205
-					velocity.y = -175
-					body.velocity.x = 250
-					set_state_by_name("KnockbackState", 0)
-					sound_player.play_hit_sound()
-				elif !attacking or (body.attacking and attacking):
-					velocity.x = -250
-					body.velocity.x = 250
-			elif global_position.x > body.global_position.x:
-				if body.attacking == true and !attacking:
-					velocity.x = 205
-					velocity.y = -175
-					body.velocity.x = -250
-					set_state_by_name("KnockbackState", 0)
-					sound_player.play_hit_sound()
-				elif !attacking or (body.attacking and attacking):
-					velocity.x = 250
-					body.velocity.x = -250
-		elif !big_attack:
-			if global_position.x < body.global_position.x:
-				velocity.x = -205
-				velocity.y = -175
-				body.velocity.x = 250
-				set_state_by_name("KnockbackState", 0)
-				sound_player.play_hit_sound()
 			else:
-				velocity.x = 205
-				velocity.y = -175
-				body.velocity.x = -250
-				set_state_by_name("KnockbackState", 0)
-				sound_player.play_hit_sound()
+				body.velocity.x = -250 * mul_sign
+				if body.attacking and !attacking:
+					velocity.x = 205 * mul_sign
+					velocity.y = -175
+					set_state_by_name("KnockbackState", 0)
+					sound_player.play_hit_sound()
+				elif !attacking or (body.attacking and attacking):
+					velocity.x = 250 * mul_sign
+		else:
+			velocity.x = 205 * mul_sign
+			velocity.y = -175
+			body.velocity.x = -250 * mul_sign
+			set_state_by_name("KnockbackState", 0)
+			sound_player.play_hit_sound()
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if state and state.name == "NoActionState":
 		return
-		
+	
 	if powerup != null:
 		if powerup.time_left <= 2.5:
 			frames_until_flash -= 1
 			if frames_until_flash <= 0:
 				frames_until_flash = 3
 				powerup.toggle_visuals()
-
-	if invulnerable_frames > 0:
-		visible = !visible
-	elif invulnerable_frames == 0:
-		visible = true
+	
+	visible = !visible if invulnerable_frames > 0 else true
 	if next_position:
 		position = position.linear_interpolate(next_position, delta * sync_interpolation_speed)
 
-func damage(amount : int = 1, cause : String = "hit", frames : int = 180):
+func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> void:
 	if !dead:
 		if invincible:
 			frames = 4
@@ -458,8 +419,8 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180):
 			kill(cause)
 		else:
 			sound_player.play_hit_sound()
-			
-func heal(shards : int = 1):
+
+func heal(shards : int = 1) -> void:
 	if !dead and health != 8:
 		health_shards += shards
 		# warning-ignore: narrowing_conversion
@@ -469,10 +430,10 @@ func heal(shards : int = 1):
 			health_shards = 0
 
 
-func get_weight():
+func get_weight() -> int:
 	return 2 if metal_voice else 1
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	update_inputs()
 	
 	if state and state.name == "NoActionState":
@@ -480,11 +441,9 @@ func _physics_process(delta: float):
 	
 	recalculate_grounded = true
 	
-	bottom_pos.position = bottom_pos_offset
-	if !ground_collision_dive.disabled:
-		bottom_pos.position = bottom_pos_dive_offset
-	var is_in_platform = false
-	var platform_collision_enabled = false
+	bottom_pos.position = bottom_pos_offset if ground_collision_dive.disabled else bottom_pos_dive_offset
+	var is_in_platform := false
+	var platform_collision_enabled := false
 	for body in platform_detector.get_overlapping_areas():
 		if body.has_method("is_platform_area"):
 			if body.is_platform_area():
@@ -495,11 +454,9 @@ func _physics_process(delta: float):
 	for raycast in raycasts:
 		raycast.set_collision_mask_bit(4, platform_collision_enabled)
 	
+	invulnerable = invulnerable_frames > 0
 	if invulnerable_frames > 0:
 		invulnerable_frames -= 1
-		invulnerable = true
-	elif invulnerable_frames == 0:
-		invulnerable = false
 	
 	# Gravity
 	velocity.y = lerp(velocity.y, (gravity * Vector2(0, gravity_scale) * 240).y, delta / 2)
@@ -514,6 +471,7 @@ func _physics_process(delta: float):
 		disable_turning = false
 		disable_animation = false
 		disable_friction = false
+	
 	# Movement
 	if using_turbo and nozzle.boosted:
 		move_direction = facing_direction # Can't turn and forced to move forward
@@ -524,81 +482,54 @@ func _physics_process(delta: float):
 		elif inputs[1][0] and !inputs[0][0] and disable_movement == false:
 			move_direction = 1
 	
+	# Horizontal physics
 	if move_direction != 0:
 		if is_grounded():
-			if ((velocity.x > 0 and move_direction == -1) or (velocity.x < 0 and move_direction == 1)):
+			# Accelerate/decelerate
+			if velocity.x * move_direction < 0:
 				velocity.x += deceleration * move_direction
-			elif ((velocity.x < move_speed and move_direction == 1) or (velocity.x > -move_speed and move_direction == -1)):
+			elif velocity.x * move_direction < move_speed:
 				velocity.x += acceleration * move_direction
-			elif ((velocity.x > move_speed and move_direction == 1) or (velocity.x < -move_speed and move_direction == -1)):
+			elif velocity.x * move_direction > move_speed:
 				velocity.x -= 3.5 * move_direction
 			
 			facing_direction = move_direction
-
+			
 			if !disable_animation and movable and controlled_locally:
 				if !is_walled():
-					if (abs(velocity.x) > move_speed):
-						sprite.speed_scale = abs(velocity.x) / move_speed
-					else:
-						sprite.speed_scale = 1
-					var animation_frame = sprite.frame
-					if move_direction == 1:
-						sprite.animation = "movingRight"
-						if last_move_direction != move_direction:
-							sprite.frame = animation_frame + 1
-					else:
-						sprite.animation = "movingLeft"
-						if last_move_direction != move_direction:
-							sprite.frame = animation_frame + 1
+					sprite.speed_scale = abs(velocity.x) / move_speed if abs(velocity.x) > move_speed else 1
+					sprite.animation = "movingRight" if move_direction == 1 else "movingLeft"
+					if last_move_direction != move_direction:
+						sprite.frame = sprite.frame + 1
 				else:
-					if facing_direction == 1:
-						sprite.animation = "idleRight"
-					else:
-						sprite.animation = "idleLeft"
 					sprite.speed_scale = 0
+					sprite.animation = "idleRight" if facing_direction == 1 else "idleLeft"
 				if footstep_interval <= 0 and sprite.speed_scale > 0:
 					sound_player.play_footsteps()
 					footstep_interval = clamp(0.8 - (sprite.speed_scale / 2.5), 0.1, 1)
 				footstep_interval -= delta
 		else:
-			if ((velocity.x < move_speed and move_direction == 1) or (velocity.x > -move_speed and move_direction == -1)):
+			if velocity.x * move_direction < move_speed:
 				velocity.x += aerial_acceleration * move_direction
-			elif ((velocity.x > move_speed and move_direction == 1) or (velocity.x < -move_speed and move_direction == -1)):
+			elif velocity.x * move_direction > move_speed:
 				velocity.x -= 0.25 * move_direction
 			if !disable_turning:
 				facing_direction = move_direction
 	elif !disable_friction:
-		if (velocity.x > 0):
-			if (velocity.x > 15):
-				if (is_grounded()):
-					velocity.x -= friction
+		if abs(velocity.x) > 0:
+			if abs(velocity.x) > 15:
+				if is_grounded():
+					velocity.x -= sign(velocity.x) * friction
 				else:
-					if abs(velocity.x) > move_speed:
-						velocity.x -= aerial_friction*2
-					else:
-						velocity.x -= aerial_friction
+					velocity.x -= sign(velocity.x) * aerial_friction * (2 if abs(velocity.x) > move_speed else 1)
 			else:
 				velocity.x = 0
-		elif (velocity.x < 0):
-			if (velocity.x < -15):
-				if (is_grounded()):
-					velocity.x += friction
-				else:
-					if abs(velocity.x) > move_speed:
-						velocity.x += aerial_friction*2
-					else:
-						velocity.x += aerial_friction
-			else:
-				velocity.x = 0
-
-		if !disable_animation and movable and controlled_locally:
-			if is_grounded():
-				if facing_direction == 1:
-					sprite.animation = "idleRight"
-				else:
-					sprite.animation = "idleLeft"
-				sprite.speed_scale = 1
+		
+		if !disable_animation and movable and controlled_locally and is_grounded():
+			sprite.speed_scale = 1
+			sprite.animation = "idleRight" if facing_direction == 1 else "idleLeft"
 	
+	# Handle sprite offset
 	if movable and (state == null or !state.override_rotation) and (!is_instance_valid(nozzle) or !nozzle.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
 		var sprite_rotation = 0
 		var sprite_offset = Vector2()
@@ -618,71 +549,54 @@ func _physics_process(delta: float):
 			
 			#if !abs(normal.x) > 0.2:
 			#	velocity.y = 0
-
+		
 		sprite.position = sprite.position.linear_interpolate(sprite_offset, delta * rotation_interpolation_speed)
 		sprite.rotation = lerp_angle(sprite.rotation, sprite_rotation, delta * rotation_interpolation_speed)
 		sprite.rotation_degrees = wrapf(sprite.rotation_degrees, -180, 180)
-
+	
+	# Update all states, nozzles and powerups
 	if PlayerSettings.other_player_id == -1 or PlayerSettings.my_player_index == player_id:
 		for state_node in states_node.get_children():
 			state_node.handle_update(delta)
-			
 		for nozzle_node in nozzles_node.get_children():
 			nozzle_node.handle_update(delta)
-		
 		for powerup_node in powerups_node.get_children():
 			powerup_node.handle_update(delta)
-
+	
+	# Handle powerup
 	if powerup != null:
 		invincible = powerup.is_invincible
 		powerup.time_left -= delta
-
+		
 		if powerup.time_left <= 0:
 			powerup.time_left = 0
 			set_powerup(null)
 	else:
 		invincible = false
-
+	
+	# Handle state
 	if state != null:
-		if state.attack_tier > 1:
-			big_attack = true
-		else:
-			big_attack = false
-
-		if state.attack_tier > 0:
-			attacking = true
-		else:
-			attacking = false
-
-		if state.use_dive_collision and !using_dive_collision:
-			set_dive_collision(true)
-		elif !state.use_dive_collision and using_dive_collision:
-			set_dive_collision(false)
-				
-		if state.disable_snap:
-			snap = Vector2()
-		elif (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
-			var normal = ground_check.get_collision_normal()
-			if normal.x == 0:
-				snap = Vector2(0, 6)
-			else:
-				snap = Vector2(0, 12)
-		else:
-			snap = Vector2()
+		big_attack = state.attack_tier > 1
+		attacking = state.attack_tier > 0
+		
+		if state.use_dive_collision != using_dive_collision:
+			set_dive_collision(state.use_dive_collision)
 	else:
 		attacking = false
 		big_attack = false
-		if (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
-			var normal = ground_check.get_collision_normal()
-			if normal.x == 0:
-				snap = Vector2(0, 6)
-			else:
-				snap = Vector2(0, 12)
-		else:
-			snap = Vector2()
+	
+	# Set up snap
 	if is_in_platform:
 		snap = Vector2()
-			
+	elif state != null and state.disable_snap:
+		snap = Vector2()
+	elif (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
+		var normal = ground_check.get_collision_normal()
+		snap = Vector2(0, 6 if normal.x == 0 else 12)
+	else:
+		snap = Vector2()
+	
+	# Switch nozzle
 	if inputs[8][1] and CurrentLevelData.level_data.vars.nozzles_collected.size() > 1:
 		nozzles_list_index += 1
 		if nozzles_list_index >= CurrentLevelData.level_data.vars.nozzles_collected.size():
@@ -692,8 +606,9 @@ func _physics_process(delta: float):
 		set_nozzle(new_nozzle, false)
 		
 		nozzle_switch_sound.play()
-		print(CurrentLevelData.level_data.vars.nozzles_collected)
-		
+		#print(CurrentLevelData.level_data.vars.nozzles_collected)
+	
+	# Handle nozzle
 	if is_instance_valid(nozzle):
 		fludd_sprite.visible = true
 		water_sprite.visible = true
@@ -706,6 +621,7 @@ func _physics_process(delta: float):
 			water_sprite_2.visible = false
 		if nozzle.activated:
 			attacking = true
+		# TODO: match... or array
 		if character == 0:
 			fludd_sprite.frames = nozzle.frames
 			death_fludd_sprite.frames = fludd_sprite.frames
@@ -715,31 +631,26 @@ func _physics_process(delta: float):
 		fludd_sprite.animation = sprite.animation
 		fludd_sprite.frame = sprite.frame
 		
+		# TODO: match... or array
 		if character == 0:
 			if sprite.animation in nozzle.animation_water_positions:
 				water_sprite.position = nozzle.animation_water_positions[sprite.animation]
 			else:
-				if facing_direction == 1:
-					water_sprite.position = nozzle.fallback_water_pos_right
-				else:
-					water_sprite.position = nozzle.fallback_water_pos_left
+				water_sprite.position = nozzle.fallback_water_pos_right if facing_direction == 1 else nozzle.fallback_water_pos_left
 		else:
 			if sprite.animation in nozzle.animation_water_positions_luigi:
 				water_sprite.position = nozzle.animation_water_positions_luigi[sprite.animation]
 			else:
-				if facing_direction == 1:
-					water_sprite.position = nozzle.fallback_water_pos_right_luigi
-				else:
-					water_sprite.position = nozzle.fallback_water_pos_left_luigi
-					
+				water_sprite.position = nozzle.fallback_water_pos_right_luigi if facing_direction == 1 else nozzle.fallback_water_pos_left_luigi
+		
 		water_sprite_2.position = water_sprite.position - Vector2(-5 * facing_direction, 2)
 	else:
 		fludd_sprite.visible = false
 		water_sprite.visible = false
 		water_sprite_2.visible = false
-
+	
 	death_fludd_sprite.visible = fludd_sprite.visible
-
+	
 	# Move by velocity
 	if movable:
 		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
@@ -761,20 +672,21 @@ func _physics_process(delta: float):
 	last_velocity = velocity
 	last_move_direction = move_direction
 	
-	if PlayerSettings.other_player_id != -1:
-		if player_id == PlayerSettings.my_player_index and is_network_master():
-			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
+	# Send network message (unused)
+	#if PlayerSettings.other_player_id != -1:
+	#	if player_id == PlayerSettings.my_player_index and is_network_master():
+	#		rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
 	
 func switch_areas(area_id, transition_time):
 	scene_transitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id)
 	
-func kill(cause):
+func kill(cause: String) -> void:
 	if !dead:
 		dead = true
-		var reload = true
-		var cutout_in = cutout_circle
-		var cutout_out = cutout_circle
-		var transition_time = 0.75
+		var reload := true
+		var cutout_in := cutout_circle
+		var cutout_out := cutout_circle
+		var transition_time := 0.75
 		if cause == "fall":
 			controllable = false
 			sound_player.play_fall_sound()
@@ -812,7 +724,7 @@ func kill(cause):
 			yield(get_tree().create_timer(0.75), "timeout")
 			if number_of_players != 1:
 				reload = false
-			
+		
 		if reload:
 			scene_transitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
 		else:
@@ -826,7 +738,7 @@ func kill(cause):
 			controllable = true
 			set_state_by_name("FallState", 0)
 
-func exit():
+func exit() -> void:
 	#if the mode switcher button is not invisible, we're in edit mode, switch back to that, but if we're in play mode then for now just reload the scene
 	if !mode_switcher.get_node("ModeSwitcherButton").invisible:
 		mode_switcher.get_node("ModeSwitcherButton").switch()
@@ -834,31 +746,24 @@ func exit():
 		# warning-ignore: return_value_discarded
 		get_tree().reload_current_scene()
 
-func set_all_collision_masks(bit, value):
+func set_all_collision_masks(bit, value) -> void:
 	set_collision_mask_bit(bit, value)
-	$GroundCheck.set_collision_mask_bit(bit, value)
-	$GroundCheckDive.set_collision_mask_bit(bit, value)
-	$LeftCheck.set_collision_mask_bit(bit, value)
-	$RightCheck.set_collision_mask_bit(bit, value)
-	$SlopeStopCheck.set_collision_mask_bit(bit, value)
+	ground_check.set_collision_mask_bit(bit, value)
+	ground_check_dive.set_collision_mask_bit(bit, value)
+	left_check.set_collision_mask_bit(bit, value)
+	right_check.set_collision_mask_bit(bit, value)
+	slope_stop_check.set_collision_mask_bit(bit, value)
 
 func get_input(input_id : int, is_just_pressed : bool) -> bool:
 	return inputs[input_id][int(is_just_pressed)]
 
-func update_inputs():
+func update_inputs() -> void:
 	if controlled_locally:
 		if controllable and !FocusCheck.is_ui_focused:
 			#var control_id = player_id seemingly unused variable, uncomment if needed
 			for input in inputs:
-				if Input.is_action_pressed(input[2]):
-					input[0] = true
-				else:
-					input[0] = false
-					
-				if Input.is_action_just_pressed(input[2]):
-					input[1] = true
-				else:
-					input[1] = false
+				input[0] = Input.is_action_pressed(input[2])
+				input[1] = Input.is_action_just_pressed(input[2])
 		else:
 			for input in inputs:
 				input[0] = false
@@ -870,7 +775,7 @@ func set_inter_player_collision(can_collide : bool) -> void:
 
 func set_dive_collision(is_enabled : bool) -> void:
 	using_dive_collision = is_enabled
-
+	
 	collision_shape.disabled = is_enabled
 	collision_raycast.disabled = is_enabled
 	dive_collision_shape.disabled = !is_enabled

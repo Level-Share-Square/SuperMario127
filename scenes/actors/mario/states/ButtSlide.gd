@@ -31,7 +31,7 @@ func _start(_delta):
 	starting_slide_sign = sign(character.velocity.x)
 
 func _update(delta):
-	var sprite = character.animated_sprite
+	var sprite = character.sprite
 	if (character.facing_direction == 1):
 		sprite.animation = "groundPoundEndRight"
 	else:

@@ -34,3 +34,4 @@ func load_in(_level_data : LevelData, level_area : LevelArea):
 		position = focus_on.global_position
 	elif character_node != null:
 		position = character_node.global_position
+		character_node.camera = self
