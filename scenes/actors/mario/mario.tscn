@@ -291,7 +291,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:scale")
@@ -355,7 +355,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.75 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:scale")
@@ -653,7 +653,7 @@ disabled = true
 material = SubResource( 8 )
 frames = ExtResource( 1 )
 animation = "movingIn"
-frame = 7
+frame = 4
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
@@ -1010,7 +1010,7 @@ position = Vector2( -1, 20 )
 scale = Vector2( 0.1, 0.1 )
 z_index = -5
 frames = ExtResource( 55 )
-frame = 11
+frame = 3
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
@@ -1029,7 +1029,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "movingOut"
-frame = 2
+frame = 10
 playing = true
 script = ExtResource( 34 )
 
