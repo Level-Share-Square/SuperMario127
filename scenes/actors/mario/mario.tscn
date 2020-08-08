@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=2]
+[gd_scene load_steps=125 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -60,6 +60,7 @@
 [ext_resource path="res://scenes/actors/mario/is_hurt_area.gd" type="Script" id=58]
 [ext_resource path="res://scenes/actors/mario/particles/area_of_attack_ring.png" type="Texture" id=59]
 [ext_resource path="res://scenes/actors/mario/particles/area_of_attack_ring_back.png" type="Texture" id=60]
+[ext_resource path="res://scenes/actors/objects/shine/texture_outline.png" type="Texture" id=61]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -556,13 +557,85 @@ tracks/12/keys = {
 } ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=45]
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 61 )
+region = Rect2( 0, 0, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 61 )
+region = Rect2( 27, 0, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 61 )
+region = Rect2( 54, 0, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 61 )
+region = Rect2( 81, 0, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 61 )
+region = Rect2( 108, 0, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 61 )
+region = Rect2( 135, 0, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 61 )
+region = Rect2( 162, 0, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 61 )
+region = Rect2( 189, 0, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 61 )
+region = Rect2( 0, 31, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 61 )
+region = Rect2( 27, 31, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 61 )
+region = Rect2( 54, 31, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 61 )
+region = Rect2( 81, 31, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 61 )
+region = Rect2( 108, 31, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 61 )
+region = Rect2( 135, 31, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 61 )
+region = Rect2( 162, 31, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 61 )
+region = Rect2( 189, 31, 27, 31 )
+
+[sub_resource type="SpriteFrames" id=61]
+animations = [ {
+"frames": [ SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[sub_resource type="CanvasItemMaterial" id=62]
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="ParticlesMaterial" id=46]
+[sub_resource type="ParticlesMaterial" id=63]
 emission_shape = 1
 emission_sphere_radius = 24.0
 flag_disable_z = true
@@ -653,13 +726,12 @@ disabled = true
 material = SubResource( 8 )
 frames = ExtResource( 1 )
 animation = "movingIn"
-frame = 3
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 23 )
-animation = "enterDoorLeft"
+animation = "movingOut"
 playing = true
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]
@@ -1005,19 +1077,27 @@ anims/enter_door = SubResource( 42 )
 anims/exit_door = SubResource( 43 )
 anims/shine_dance = SubResource( 44 )
 
+[node name="CollectedShineOutline" type="AnimatedSprite" parent="."]
+position = Vector2( -1, 20 )
+scale = Vector2( 0.1, 0.1 )
+z_index = -5
+frames = SubResource( 61 )
+frame = 5
+playing = true
+
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 position = Vector2( -1, 20 )
 scale = Vector2( 0.1, 0.1 )
 z_index = -5
 frames = ExtResource( 55 )
-frame = 8
+frame = 6
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
 show_behind_parent = true
-material = SubResource( 45 )
+material = SubResource( 62 )
 local_coords = false
-process_material = SubResource( 46 )
+process_material = SubResource( 63 )
 texture = ExtResource( 56 )
 
 [node name="BottomPos" type="Node2D" parent="."]
@@ -1029,14 +1109,14 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "movingOut"
-frame = 9
+frame = 6
 playing = true
 script = ExtResource( 34 )
 
 [node name="Fludd" type="AnimatedSprite" parent="DeathSprite"]
 visible = false
 frames = ExtResource( 23 )
-animation = "enterDoorLeft"
+animation = "movingOut"
 playing = true
 
 [node name="MyShitCoding" type="Node2D" parent="."]

@@ -27,7 +27,7 @@ func _ready():
 func _on_spawn_timer_timeout():
 	var no_steelies_in_front = check_for_blocking_elements()
 
-	if no_steelies_in_front and steely_nodes.size() < STEELY_SPAWN_LIMIT: 
+	if no_steelies_in_front and steely_nodes.size() < STEELY_SPAWN_LIMIT and enabled: 
 		var steely_node = create_new_steely_object()
 
 		if steely_despawn_timer > 0:

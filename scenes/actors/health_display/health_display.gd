@@ -35,7 +35,7 @@ func _ready():
 
 func _process(_delta):
 	if is_instance_valid(character):
-		if character.has_method("is_character"): # pro gamer move
+		if character is Character:
 			if character.health < 8:
 				shown = true
 			else:

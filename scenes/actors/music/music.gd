@@ -106,7 +106,7 @@ func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0):
 
 	tween.stop_all()
 	temporary_music_player.stream = get_song(temp_song_id).stream
-	temporary_music_player.volume_db = temp_song_volume
+	temporary_music_player.volume_db = temp_song_volume if !muted else -80
 	temporary_music_player.play()
 
 # returns the id of the temporary song

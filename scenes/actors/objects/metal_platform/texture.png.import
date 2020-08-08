@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/texture_collected.png-b9cd769ff74c880ce862753256b7c4a1.stex"
+path="res://.import/texture.png-99d2086d06ae3c36447a3542fecfdfc8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/shine/texture_collected.png"
-dest_files=[ "res://.import/texture_collected.png-b9cd769ff74c880ce862753256b7c4a1.stex" ]
+source_file="res://scenes/actors/objects/metal_platform/texture.png"
+dest_files=[ "res://.import/texture.png-99d2086d06ae3c36447a3542fecfdfc8.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

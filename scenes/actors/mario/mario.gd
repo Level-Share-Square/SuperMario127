@@ -44,6 +44,8 @@ onready var bottom_pos : Node2D = $BottomPos
 onready var ring_particles : AnimatedSprite = $RingParticles
 onready var ring_particles_back : AnimatedSprite = $RingParticlesBack
 onready var collected_shine : AnimatedSprite = $CollectedShine # used for the shine dance animation, can be edited to reflect different shine colours or sprites or something
+onready var collected_shine_outine : AnimatedSprite = $CollectedShineOutline # this is separate from the recolorable part
+onready var collected_shine_particles : Particles2D = $CollectedShine/ShineParticles # same as above
 onready var death_sprite : AnimatedSprite = $DeathSprite
 onready var death_fludd_sprite : AnimatedSprite = $DeathSprite/Fludd
 onready var raycasts = [ground_check, ground_check_dive, left_check, right_check, slope_stop_check]
@@ -391,6 +393,10 @@ func player_hit(body : Node) -> void:
 			sound_player.play_hit_sound()
 
 func _process(delta: float) -> void:
+	collected_shine_outine.frame = collected_shine.frame
+	collected_shine_outine.global_position = collected_shine.global_position
+	collected_shine_outine.scale = collected_shine.scale
+	
 	if state and state.name == "NoActionState":
 		return
 	
