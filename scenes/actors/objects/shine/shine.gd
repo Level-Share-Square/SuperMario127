@@ -4,7 +4,15 @@
 # Prevent pausing after collecting a star
 extends GameObject
 
+export var normal_frames : SpriteFrames
+export var recolorable_frames : SpriteFrames
+
+export var normal_particles : StreamTexture
+export var recolorable_particles : StreamTexture
+
 onready var animated_sprite : AnimatedSprite = $AnimatedSprite
+onready var outline_sprite : AnimatedSprite = $AnimatedSpriteOutline
+onready var particles : Particles2D = $AnimatedSprite/Particles2D
 onready var ghost : Sprite = $Ghost
 onready var area : Area2D = $Area2D
 onready var unpause_timer : Timer = $UnpauseTimer
@@ -26,6 +34,7 @@ var collected := false
 var character : Character
 
 var anim_damp := 160
+var normal_color := Color(1, 1, 0)
 
 var title := "Unnamed Shine"
 var description := "This is a shine! Collect it to win the level."
@@ -33,10 +42,11 @@ var show_in_menu := true
 var activated := true
 var red_coins_activate := false
 var shine_shards_activate := false
+var color := Color(1, 1, 0)
 
 func _set_properties() -> void:
-	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate"]
-	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate"]
+	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color"]
+	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color"]
 	
 func _set_property_values() -> void:
 	set_property("title", title, true)
@@ -45,6 +55,7 @@ func _set_property_values() -> void:
 	set_property("activated", activated, true)
 	set_property("red_coins_activate", red_coins_activate, true)
 	set_property("shine_shards_activate", shine_shards_activate, true)
+	set_property("color", color, true)
 
 func _ready() -> void:
 	if mode != 1: # not in edit mode
@@ -54,9 +65,21 @@ func _ready() -> void:
 		unpause_timer.wait_time = UNPAUSE_TIMER_LENGTH
 		
 func _physics_process(_delta : float) -> void:
+	if color != normal_color:
+		animated_sprite.self_modulate = color
+		
+		animated_sprite.frames = recolorable_frames
+		particles.texture = recolorable_particles
+	else:
+		animated_sprite.self_modulate = Color(1, 1, 1)
+		
+		animated_sprite.frames = normal_frames
+		particles.texture = normal_particles
+	
 	if !animated_sprite.playing: #looks like if it is not set to playing, some manual animation is done instead
 		#warning-ignore:integer_division
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
+		outline_sprite.frame = animated_sprite.frame
 		
 	if mode != 1:
 		var camera : Camera2D = current_scene.get_node(current_scene.camera)
@@ -117,6 +140,7 @@ func collect(body : PhysicsBody2D) -> void:
 		if character.state != null and character.state.name == "SlideState" and character.is_grounded():
 			character.position.y -= 16
 
+		character.anim_player.stop()
 		character.set_state_by_name("FallState", get_physics_process_delta_time())
 		character.velocity.x = 0
 		character.sprite.rotation_degrees = 0
@@ -138,7 +162,11 @@ func collect(body : PhysicsBody2D) -> void:
 func start_shine_dance() -> void:
 	character.set_state_by_name("NoActionState", get_physics_process_delta_time())
 
-	character.collected_shine.modulate = animated_sprite.modulate
+	# make the character's victory shine sprite match this one
+	character.collected_shine.self_modulate = animated_sprite.self_modulate
+	character.collected_shine.frames = animated_sprite.frames
+	character.collected_shine_particles.texture = particles.texture
+	
 	character.sprite.animation = "shineDance"
 	character.anim_player.play("shine_dance")
 	

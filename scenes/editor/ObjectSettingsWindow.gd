@@ -41,7 +41,7 @@ func open_object(object_to_open: GameObject):
 		
 	# warning-ignore:return_value_discarded
 	object_to_open.connect("property_changed", self, "edit_preview_object")
-		
+
 	preview_object = object_to_open.duplicate()
 	preview_object.mode = 1
 	for child in object_to_open.get_children():
@@ -60,6 +60,7 @@ func open_object(object_to_open: GameObject):
 		var property = property_scene.instance()
 		property.object = object_to_open
 		property.key = key
+		edit_preview_object(key, object_to_open[key])
 		grid_container_node.add_child(property)
 	for _index in range(2): # this is so scrolling actually works properly
 		var blank_property = property_scene.instance()

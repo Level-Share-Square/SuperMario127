@@ -653,7 +653,7 @@ disabled = true
 material = SubResource( 8 )
 frames = ExtResource( 1 )
 animation = "movingIn"
-frame = 4
+frame = 8
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
@@ -1010,7 +1010,7 @@ position = Vector2( -1, 20 )
 scale = Vector2( 0.1, 0.1 )
 z_index = -5
 frames = ExtResource( 55 )
-frame = 3
+frame = 5
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
@@ -1029,7 +1029,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "movingOut"
-frame = 10
+frame = 2
 playing = true
 script = ExtResource( 34 )
 

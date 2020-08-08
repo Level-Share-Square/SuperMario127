@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/texture_deactivated.png-28897e268d4dc758d4df698c957afae0.stex"
+path="res://.import/recolorable_sparkles.png-1d74efab10d7c7126d8ce02d299f062f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/shine/texture_deactivated.png"
-dest_files=[ "res://.import/texture_deactivated.png-28897e268d4dc758d4df698c957afae0.stex" ]
+source_file="res://scenes/actors/mario/particles/recolorable_sparkles.png"
+dest_files=[ "res://.import/recolorable_sparkles.png-1d74efab10d7c7126d8ce02d299f062f.stex" ]
 
 [params]
 
