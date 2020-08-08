@@ -3,8 +3,8 @@ extends GameObject
 
 #-------------------------------- GameObject logic -----------------------
 
-var parts := 9
-var last_parts := 9
+export var parts := 9
+var last_parts := 1
 
 func _set_properties():
 	savable_properties = ["parts"]
@@ -42,8 +42,12 @@ onready var right_width = sprite.patch_margin_right
 onready var part_width = sprite.texture.get_width() - left_width - right_width
 
 var scale_x : float
+export var override_part_width := 0 # If this value is not equal to 0, this'll replace part_width with it's value
 
 func _ready():
+	if override_part_width != 0:
+		part_width = override_part_width
+
 	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate(true)
 	collision_shape.shape = collision_shape.shape.duplicate(true)
 	
