@@ -32,7 +32,7 @@ func _ready():
 
 func _process(delta):
 	if is_instance_valid(character):
-		if character.has_method("is_character"): # hackerman
+		if character is Character:
 			stamina_display.value = character.stamina
 			label.text = str(int(character.fuel)) + "%"
 			label_shadow.text = label.text
