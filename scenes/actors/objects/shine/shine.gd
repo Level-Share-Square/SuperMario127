@@ -50,6 +50,7 @@ func _ready() -> void:
 	if mode != 1: # not in edit mode
 		if red_coins_activate or shine_shards_activate:
 			activated = false
+		# warning-ignore: return_value_discarded
 		area.connect("body_entered", self, "collect")
 		unpause_timer.wait_time = UNPAUSE_TIMER_LENGTH
 		
@@ -100,6 +101,7 @@ func activate_shine() -> void:
 	get_tree().paused = true
 
 	unpause_timer.start()
+	# warning-ignore: return_value_discarded
 	unpause_timer.connect("timeout", self, "unpause_game")
 
 # unpauses the game after the activate shine cutscene is done
@@ -124,7 +126,7 @@ func collect(body : PhysicsBody2D) -> void:
 
 		# fixes the player being in the ground if they dive into a shine in the air
 		#character.set_state(null, get_physics_process_delta_time())
-		character.set_dive_collision(false)
+		character.call_deferred("set_dive_collision", false)
 
 		character.set_collision_layer_bit(1, false) # disable collisions w/ most things
 		character.set_inter_player_collision(false)
@@ -144,6 +146,7 @@ func start_shine_dance() -> void:
 	
 	music.play_temporary_music(COURSE_CLEAR_MUSIC_ID, COURSE_CLEAR_MUSIC_VOLUME)
 	
+	# warning-ignore: return_value_discarded
 	character.anim_player.connect("animation_finished", self, "character_shine_dance_finished")
 	
 	set_physics_process(false)

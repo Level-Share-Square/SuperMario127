@@ -24,6 +24,7 @@ func _ready():
 		deleteButton.visible = true
 	
 	if index != 0:
+		# warning-ignore: return_value_discarded
 		deleteButton.connect("pressed", self, "deleteButtonPressed")
 
 func _gui_input(event):

@@ -2295,7 +2295,7 @@ z_index = -1
 script = ExtResource( 8 )
 
 [node name="Backgrounds" parent="." instance=ExtResource( 52 )]
-position = Vector2( 1, 12 )
+position = Vector2( 5, 13 )
 
 [node name="Grid" type="ParallaxBackground" parent="."]
 layer = -1

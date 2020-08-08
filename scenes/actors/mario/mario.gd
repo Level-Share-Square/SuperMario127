@@ -497,7 +497,7 @@ func _physics_process(delta: float) -> void:
 			
 			if !disable_animation and movable and controlled_locally:
 				if !is_walled():
-					sprite.speed_scale = abs(velocity.x) / move_speed if abs(velocity.x) > move_speed else 1
+					sprite.speed_scale = abs(velocity.x) / move_speed if abs(velocity.x) > move_speed else 1.0
 					sprite.animation = "movingRight" if move_direction == 1 else "movingLeft"
 					if last_move_direction != move_direction:
 						sprite.frame = sprite.frame + 1
@@ -580,7 +580,7 @@ func _physics_process(delta: float) -> void:
 		attacking = state.attack_tier > 0
 		
 		if state.use_dive_collision != using_dive_collision:
-			set_dive_collision(state.use_dive_collision)
+			call_deferred("set_dive_collision", state.use_dive_collision)
 	else:
 		attacking = false
 		big_attack = false

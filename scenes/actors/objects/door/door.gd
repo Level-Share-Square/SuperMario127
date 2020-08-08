@@ -24,6 +24,7 @@ func _ready():
 func _start_transition(character : Character):
 	# this starts a scene transition, then connects a function (one shot) to start as it finishes
 	scene_transitions.do_transition_animation()
+	# warning-ignore: return_value_discarded
 	scene_transitions.connect("transition_finished", self, "_start_teleport", [character], CONNECT_ONESHOT)
 
 func _start_teleport(character : Character):

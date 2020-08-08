@@ -38,14 +38,18 @@ func _physics_process(_delta : float) -> void:
 			
 		if is_hovered() and !last_hovered:
 			hover_sound.play()
+			# warning-ignore: return_value_discarded
 			tween_hover.interpolate_property(self, "rect_pivot_offset",
 				Vector2(60, 300), Vector2(60, 290), 0.075,
 				Tween.TRANS_CIRC, Tween.EASE_OUT)
+			# warning-ignore: return_value_discarded
 			tween_hover.start()
 		if !is_hovered() and last_hovered:
+			# warning-ignore: return_value_discarded
 			tween_hover.interpolate_property(self, "rect_pivot_offset",
 				Vector2(60, 290), Vector2(60, 300), 0.075,
 				Tween.TRANS_CIRC, Tween.EASE_OUT)
+			# warning-ignore: return_value_discarded
 			tween_hover.start()
 		last_hovered = is_hovered()
 		last_paused = false
@@ -76,25 +80,33 @@ func switch() -> void:
 		switching_disabled = true
 		rect_position = start_pos
 		
+		# warning-ignore: return_value_discarded
 		tween.interpolate_property(self, "rect_position",
 			start_pos, start_pos + Vector2(0, -15), 0.25,
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
+		# warning-ignore: return_value_discarded
 		tween.start()
 		
+		# warning-ignore: return_value_discarded
 		tween_coin.interpolate_property(coin, "position",
 			Vector2(0, 0), Vector2(0, -200), 0.25,
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
+		# warning-ignore: return_value_discarded
 		tween_coin.start()
 		
+		# warning-ignore: return_value_discarded
 		tween_disappear.interpolate_property(coin, "modulate",
 			Color(1, 1, 1, 1), Color(1, 1, 1, 0), 0.23,
 			Tween.TRANS_CIRC, Tween.EASE_IN)
+		# warning-ignore: return_value_discarded
 		tween_disappear.start()
 		
 		fader.visible = true
+		# warning-ignore: return_value_discarded
 		fader_tween.interpolate_property(fader, "modulate",
 			Color(1, 1, 1, 0), Color(1, 1, 1, 1), 0.20,
 			Tween.TRANS_LINEAR, Tween.EASE_OUT)
+		# warning-ignore: return_value_discarded
 		fader_tween.start()
 		
 		yield(tween, "tween_completed")
@@ -108,15 +120,18 @@ func switch() -> void:
 		
 		yield(get_tree().create_timer(0.1), "timeout")
 		
-		
+		# warning-ignore: return_value_discarded
 		tween.interpolate_property(self, "rect_position",
 			start_pos + Vector2(0, -15), start_pos, 0.25,
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
+		# warning-ignore: return_value_discarded
 		tween.start()
 		
+		# warning-ignore: return_value_discarded
 		fader_tween.interpolate_property(fader, "modulate",
 			Color(1, 1, 1, 1), Color(1, 1, 1, 0), 0.20,
 			Tween.TRANS_LINEAR, Tween.EASE_OUT)
+		# warning-ignore: return_value_discarded
 		fader_tween.start()
 		
 		yield(tween, "tween_completed")
