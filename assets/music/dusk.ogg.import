@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/dusk.ogg-6ed44c1456db450287ff734e6d152b5d.oggstr"
+
+[deps]
+
+source_file="res://assets/music/dusk.ogg"
+dest_files=[ "res://.import/dusk.ogg-6ed44c1456db450287ff734e6d152b5d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0.448
