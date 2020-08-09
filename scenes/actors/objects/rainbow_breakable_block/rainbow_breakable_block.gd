@@ -10,7 +10,6 @@ onready var player_detector = $PlayerStompDetector
 onready var player_spin_detector = $PlayerSpinDetector
 onready var broken_sound = $Broken
 onready var break_particle = $BreakParticle
-onready var dust_particle = $DustParticle
 var broken = false
 
 var buffer := -5
@@ -32,7 +31,6 @@ func _set_property_values():
 func _ready():
 	player_detector.connect("body_entered", self, "detect_player")
 	break_particle.hide()
-	dust_particle.hide()
 	sprite.material.set_shader_param("gradient", get_tree().current_scene.rainbow_gradient_texture)
 
 func detect_player(body):
@@ -58,9 +56,7 @@ func _physics_process(delta):
 				if not broken_sound.is_playing(): 
 					for i in(coins): create_coin()
 					break_particle.show()
-					dust_particle.show()
 					break_particle.set_emitting(true)
-					dust_particle.set_emitting(true)
 					broken_sound.play()
 					delete_timer = 3.0
 		for hit_body in spin_area.get_overlapping_bodies():
@@ -69,9 +65,7 @@ func _physics_process(delta):
 				if not broken_sound.is_playing(): 
 					for i in(coins): create_coin()
 					break_particle.show()
-					dust_particle.show()
 					break_particle.set_emitting(true)
-					dust_particle.set_emitting(true)
 					broken_sound.play()
 					delete_timer = 3.0
 		for hit_body in player_detector.get_overlapping_bodies():

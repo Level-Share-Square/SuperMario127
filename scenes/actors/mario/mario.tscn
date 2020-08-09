@@ -1107,6 +1107,7 @@ position = Vector2( -1, 20 )
 scale = Vector2( 0.1, 0.1 )
 z_index = -5
 frames = SubResource( 61 )
+frame = 6
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
@@ -1114,7 +1115,7 @@ position = Vector2( -1, 20 )
 scale = Vector2( 0.1, 0.1 )
 z_index = -5
 frames = ExtResource( 55 )
-frame = 1
+frame = 7
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

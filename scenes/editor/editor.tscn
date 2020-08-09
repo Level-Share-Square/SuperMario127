@@ -1,4 +1,4 @@
-[gd_scene load_steps=174 format=2]
+[gd_scene load_steps=177 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -58,6 +58,7 @@
 [ext_resource path="res://scenes/editor/luigi_entrance_item/entrance_placement.gd" type="Script" id=56]
 [ext_resource path="res://scenes/editor/luigi_entrance_item/entrance_removal.gd" type="Script" id=57]
 [ext_resource path="res://assets/tiles/glass/icon.png" type="Texture" id=58]
+[ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/preview.png" type="Texture" id=59]
 [ext_resource path="res://scenes/shared/button_sound_player.gd" type="Script" id=60]
 [ext_resource path="res://assets/tiles/bricks/icon_slope_left.png" type="Texture" id=61]
 [ext_resource path="res://assets/tiles/bricks/icon_slope_right.png" type="Texture" id=62]
@@ -104,6 +105,7 @@
 [ext_resource path="res://scenes/actors/objects/small_bottle/icon.png" type="Texture" id=103]
 [ext_resource path="res://scenes/actors/objects/big_bottle/icon.png" type="Texture" id=104]
 [ext_resource path="res://scenes/actors/objects/big_bottle/big_bottle.png" type="Texture" id=105]
+[ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/icon.png" type="Texture" id=106]
 [ext_resource path="res://assets/tiles/boo_block/icon.png" type="Texture" id=107]
 [ext_resource path="res://scenes/actors/objects/pipe/pipe.png" type="Texture" id=108]
 [ext_resource path="res://scenes/editor/area_switcher.gd" type="Script" id=109]
@@ -144,6 +146,7 @@
 [ext_resource path="res://scenes/actors/objects/big_steely_entrance/icon.png" type="Texture" id=144]
 [ext_resource path="res://scenes/actors/objects/big_steely_entrance/preview.png" type="Texture" id=145]
 [ext_resource path="res://scenes/actors/objects/rainbow_powerup/icon.png" type="Texture" id=146]
+[ext_resource path="res://scenes/actors/objects/vanish_powerup/icon.png" type="Texture" id=147]
 [ext_resource path="res://scenes/actors/objects/shine_shard/icon.png" type="Texture" id=148]
 [ext_resource path="res://scenes/editor/group.gd" type="Script" id=149]
 [ext_resource path="res://scenes/actors/objects/shine_shard/shard.png" type="Texture" id=150]
@@ -1302,14 +1305,6 @@ index_in_sequence = 1
 icon = ExtResource( 143 )
 preview = ExtResource( 142 )
 
-[node name="VanishPassthroughBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
-object_id = 44
-is_object = true
-object_center = Vector2( 16, 16 )
-icon = ExtResource( 140 )
-preview = ExtResource( 141 )
-
 [node name="RainbowBreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 object_id = 42
@@ -1318,8 +1313,17 @@ object_center = Vector2( 16, 16 )
 change_to = "BreakableBlock"
 items_in_sequence = 3
 index_in_sequence = 2
-icon = ExtResource( 143 )
-preview = ExtResource( 142 )
+icon = ExtResource( 106 )
+preview = ExtResource( 59 )
+
+[node name="VanishPassthroughBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 44
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "VanishPassthroughBlock"
+icon = ExtResource( 140 )
+preview = ExtResource( 141 )
 
 [node name="MetalPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
@@ -1339,8 +1343,8 @@ object_center = Vector2( 16, 16 )
 change_to = "RainbowPowerup"
 items_in_sequence = 3
 index_in_sequence = 1
-icon = ExtResource( 17 )
-preview = ExtResource( 16 )
+icon = ExtResource( 147 )
+preview = ExtResource( 147 )
 
 [node name="RainbowPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )

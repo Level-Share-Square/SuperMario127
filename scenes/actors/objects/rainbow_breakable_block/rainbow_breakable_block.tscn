@@ -1,10 +1,9 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/rainbow_breakable_block.gd" type="Script" id=1]
-[ext_resource path="res://scenes/actors/objects/metal_breakable_block/metal_breakable_block.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/breakable_block/break.wav" type="AudioStream" id=3]
-[ext_resource path="res://scenes/actors/mario/particles/dust.png" type="Texture" id=4]
-[ext_resource path="res://scenes/actors/objects/breakable_block/particles.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/rainbow_breakable_block.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/break.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/particles.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/metal_breakable_block/block_material.tres" type="Material" id=6]
 
 [sub_resource type="Shader" id=1]
@@ -27,6 +26,7 @@ void fragment()
 custom_defines = ""
 
 [sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.15, 1 )
 colors = PoolColorArray( 1, 0, 0, 1, 1, 1, 1, 1 )
 
 [sub_resource type="GradientTexture" id=3]
@@ -54,38 +54,6 @@ extents = Vector2( 10, 100.541 )
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 100, 10 )
-
-[sub_resource type="CanvasItemMaterial" id=11]
-particles_animation = true
-particles_anim_h_frames = 3
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="CanvasItemMaterial" id=12]
-particles_animation = true
-particles_anim_h_frames = 10
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="Gradient" id=13]
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
-
-[sub_resource type="GradientTexture" id=14]
-gradient = SubResource( 13 )
-
-[sub_resource type="ParticlesMaterial" id=15]
-emission_shape = 1
-emission_sphere_radius = 2.0
-flag_disable_z = true
-direction = Vector3( 1, -1, 0 )
-spread = 180.0
-gravity = Vector3( 0, 50, 0 )
-initial_velocity = 16.67
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 0.75
-color_ramp = SubResource( 14 )
-anim_speed = 1.0
 
 [node name="BreakableBlock" type="Node2D"]
 z_index = -1
@@ -146,24 +114,13 @@ physics_process_parent = true
 
 [node name="Broken" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -10.0
 
 [node name="BreakParticle" type="Particles2D" parent="."]
-material = SubResource( 11 )
+material = SubResource( 4 )
 z_index = -1
 emitting = false
-amount = 12
+amount = 2
 one_shot = true
 explosiveness = 1.0
 process_material = ExtResource( 6 )
-texture = ExtResource( 5 )
-
-[node name="DustParticle" type="Particles2D" parent="."]
-material = SubResource( 12 )
-z_index = -1
-emitting = false
-amount = 3
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource( 15 )
 texture = ExtResource( 4 )
