@@ -27,7 +27,7 @@ func _process(_delta):
 func button_pressed():
 	var editor = get_tree().get_current_scene()
 	if item != null:
-		var button_container = editor.placeable_items_button_container_node
+		var button_container = editor.placeable_items_button_container
 		var boxes = button_container.get_children()
 		var index_size = (button_container.number_of_boxes-1)
 		for index in range(button_container.number_of_boxes):
