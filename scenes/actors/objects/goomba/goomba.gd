@@ -58,11 +58,14 @@ func jump():
 func detect_player(body : Character):
 	if enabled and body.name.begins_with("Character") and !dead and character == null:
 		character = body
+
+		# warning-ignore: narrowing_conversion
 		facing_direction = sign(character.global_position.x - body.global_position.x)
 		if grounded_check.is_colliding() or grounded_check_2.is_colliding():
 			jump()
 
 func _ready():
+	# warning-ignore: return_value_discarded
 	player_detector.connect("body_entered", self, "detect_player")
 	CurrentLevelData.enemies_instanced += 1
 	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
@@ -172,6 +175,8 @@ func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform 
 		# Go towards the player
 		sprite.animation = "walking"
 		sprite.speed_scale = lerp(sprite.speed_scale, run_speed / speed, delta * accel)
+
+		# warning-ignore: narrowing_conversion
 		facing_direction = sign(character.global_position.x - kinematic_body.global_position.x)
 		velocity.x = lerp(velocity.x, facing_direction * run_speed, delta * accel)
 	

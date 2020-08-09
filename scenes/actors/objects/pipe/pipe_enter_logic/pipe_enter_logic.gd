@@ -51,11 +51,15 @@ func start_pipe_enter_animation(character : Character) -> void:
 	distance_from_center_normalized = clamp(distance_from_center_normalized, 0.1, 1)
 	slide_length = slide_to_center_length * distance_from_center_normalized
 
+	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character, "position:x", null, global_position.x, slide_length)
+	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character, "position:y", null, global_position.y + PIPE_BOTTOM_DISTANCE, \
 			entering_pipe_length, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, slide_length)
+	# warning-ignore: return_value_discarded
 	tween.interpolate_callback(audio_player, slide_length, "play")
 
+	# warning-ignore: return_value_discarded
 	tween.start()
 
 func start_pipe_exit_animation(character : Character) -> void:
@@ -67,13 +71,16 @@ func start_pipe_exit_animation(character : Character) -> void:
 	character.controllable = false
 	character.movable = false
 
+	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character, "position:y", global_position.y + PIPE_BOTTOM_DISTANCE, \
 			global_position.y, exiting_pipe_length)
 	#this next line is kinda janky but hopefully it should set the animation after the above property
 	#finishes animating, basically it has duration 0 and a delay the same length as the duration of the above line
+	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character.sprite, "animation", null, "pipeExit" + \
 			("Right" if character.facing_direction == 1 else "Left"), 0, 0, 2, exiting_pipe_length)
 
+	# warning-ignore: return_value_discarded
 	tween.start()
 
 func _tween_all_completed() -> void:

@@ -28,7 +28,7 @@ func _start(_delta):
 	character.velocity.y /= 5
 	rotation_down = 90
 
-func _update(delta):
+func _update(_delta):
 	if character.facing_direction == 1:
 		character.sprite.animation = "idleRight"
 	else:
@@ -48,8 +48,9 @@ func _update(delta):
 	
 	accel = rotation_down - 90
 
-func _stop(delta):
+func _stop(_delta):
 	character.gravity_scale = old_gravity_scale
 
 func _stop_check(_delta):
 	return character.is_grounded()
+

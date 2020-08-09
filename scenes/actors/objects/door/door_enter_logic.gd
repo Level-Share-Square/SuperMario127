@@ -64,20 +64,24 @@ func start_door_enter_animation(character : Character) -> void:
 	distance_from_center_normalized = clamp(distance_from_center_normalized, 0.1, 1)
 	slide_length = slide_to_center_length * distance_from_center_normalized
 
+	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character, "position:x", null, global_position.x, slide_length)
+	# warning-ignore: return_value_discarded
 	tween.interpolate_callback(character.anim_player, slide_length, "play", "enter_door")
 
+	# warning-ignore: return_value_discarded
 	tween.start()
 	
 	# when mario finishes entering the door, trigger a function (one shot)
+	# warning-ignore: return_value_discarded
 	character.anim_player.connect("animation_finished", self, "character_animation_finished", [character], CONNECT_ONESHOT)
 	
-func character_animation_finished(animation : String, character : Character):
+func character_animation_finished(_animation : String, character : Character) -> void:
 	# this is so the door closes after mario enters
 	animate_door("close")
 	emit_signal("start_door_logic", character)
 	
-func animate_door(animation : String = "close"):
+func animate_door(animation : String = "close") -> void:
 	# this function just plays the door animation, so code doesn't have to repeat
 	door_sprite.animation = animation
 	door_sprite.playing = true
@@ -97,11 +101,13 @@ func start_door_exit_animation(character : Character) -> void:
 	animate_door("open")
 	character.anim_player.play("exit_door")
 	# when mario finishes exiting, run a function (one shot)
+	# warning-ignore: return_value_discarded
 	character.anim_player.connect("animation_finished", self, "door_exit_anim_finished", [character], CONNECT_ONESHOT)
 
+	# warning-ignore: return_value_discarded
 	tween.start()
 
-func door_exit_anim_finished(animation : String, character : Character):
+func door_exit_anim_finished(_animation : String, character : Character) -> void:
 	# closes the door and gives back control to mario
 	is_idle = true
 	

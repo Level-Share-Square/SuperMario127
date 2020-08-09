@@ -94,7 +94,7 @@ func _process(_delta):
 		last_mode = current_scene.mode
 		last_song = level_song
 	
-		volume_db = linear2db(db2linear(base_volume) * volume_multiplier) if !muted else -80
+		volume_db = linear2db(db2linear(base_volume) * volume_multiplier) if !muted else -80.0
 
 func _unhandled_input(event):
 	if event.is_action_pressed("mute"):

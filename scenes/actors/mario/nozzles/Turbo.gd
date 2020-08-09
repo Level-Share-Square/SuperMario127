@@ -89,7 +89,7 @@ func _process(_delta):
 		else:
 			character.water_sprite.flip_h = true
 
-func _general_update(delta):
+func _general_update(_delta):
 	if character.nozzle != self:
 		return
 	

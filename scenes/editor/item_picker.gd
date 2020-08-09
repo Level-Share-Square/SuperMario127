@@ -54,7 +54,9 @@ func _ready():
 	var _connect = close_button.connect("pressed", self, "pressed")
 	var _connect2 = connect("mouse_entered", self, "mouse_entered")
 	var _connect3 = connect("mouse_exited", self, "mouse_exited")
-	
+
+	# not a fan of this warning-ignore, but not not sure what a better name for it would be
+	# warning-ignore: shadowed_variable  
 	for group in placeable_items_node.get_children():
 		if !(group is Group):
 			continue #loose uncategorized items will be ignored

@@ -16,7 +16,7 @@ func _ready():
 func _start_check(_delta):
 	return false
 
-func _start(delta):
+func _start(_delta):
 	var sprite = character.sprite
 	if character.facing_direction == 1:
 		sprite.animation = "groundPoundRight"

@@ -1,8 +1,8 @@
 extends Node
 
-var success = "res://scenes/shared/notification/assets/success.png"
-var warning = "res://scenes/shared/notification/assets/warning.png"
-var error = "res://scenes/shared/notification/assets/error.png"
+var success_img = "res://scenes/shared/notification/assets/success.png"
+var warning_img = "res://scenes/shared/notification/assets/warning.png"
+var error_img = "res://scenes/shared/notification/assets/error.png"
 
 # PROTOTYPE
 
@@ -11,13 +11,13 @@ var biggest_y = offset
 var notifications : Array
 
 func success(title : String, content : String, duration : int = 2):
-	_instantiate(title, content, success, duration)
+	_instantiate(title, content, success_img, duration)
 
 func warning(title : String, content : String, duration : int = 2):
-	_instantiate(title, content, warning, duration)
+	_instantiate(title, content, warning_img, duration)
 	
 func error(title : String, content : String, duration : int = 2):
-	_instantiate(title, content, error, duration)
+	_instantiate(title, content, error_img, duration)
 
 func _instantiate(title : String, content : String, type : String, duration : int):
 	var ui = get_tree().get_current_scene().get_node("UI")

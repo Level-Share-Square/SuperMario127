@@ -73,14 +73,18 @@ func _physics_process(delta : float) -> void:
 		fire_cannon()
 
 		#cannon recoil animation so the shot has more power
+		# warning-ignore: return_value_discarded
 		tween.interpolate_property(sprite_body, "scale:y", null, scale.y * FIRE_STRETCH_MULTIPLIER, FIRE_STRETCH_TIME)
+		# warning-ignore: return_value_discarded
 		tween.interpolate_property(sprite_body, "scale:y", scale.y * FIRE_STRETCH_MULTIPLIER, scale.y, FIRE_UNSTRETCH_TIME, \
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, FIRE_STRETCH_TIME) 
 
 		#return cannon to pointing straight up
+		# warning-ignore: return_value_discarded
 		tween.interpolate_property(sprite_body, "rotation_degrees", null, 0, ROTATION_RETURN_TIME, \
 				Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, FIRE_STRETCH_TIME + FIRE_UNSTRETCH_TIME + ROTATION_RETURN_DELAY) 
 		
+		# warning-ignore: return_value_discarded
 		tween.start()
 		
 		return
