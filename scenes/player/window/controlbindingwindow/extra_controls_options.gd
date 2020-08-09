@@ -8,6 +8,7 @@ var shouldCreateNewBindingOption = false
 
 onready var window = get_parent().get_parent().get_parent()
 onready var controls_options = window.get_parent()
+onready var player_selector_manager = controls_options.get_node("PlayerSelectors")
 onready var close_button = get_parent().get_parent().get_parent().get_node("CloseButton")
 
 func _input(event):
@@ -58,14 +59,14 @@ func _input(event):
 		else:
 			return
 		
-		if ControlUtil.binding_alias_already_exists(id, currentButton.index, result):
+		if ControlUtil.binding_alias_already_exists(id, player_selector_manager.player_id(), currentButton.index, result):
 			return
-		if currentButton.index == PlayerSettings.keybindings[id].size():
-			PlayerSettings.keybindings[id].resize(PlayerSettings.keybindings[id].size()+1)
+		if currentButton.index == PlayerSettings.keybindings[player_selector_manager.player_id()][id].size():
+			PlayerSettings.keybindings[player_selector_manager.player_id()][id].resize(PlayerSettings.keybindings[player_selector_manager.player_id()][id].size()+1)
 			shouldCreateNewBindingOption = true
 			currentButton.get_parent().get_node("DeleteButton").visible = true
 		
-		PlayerSettings.keybindings[id][currentButton.index] = result
+		PlayerSettings.keybindings[player_selector_manager.player_id()][id][currentButton.index] = result
 		setNewTextAndReset()
 	
 func reset():
@@ -74,8 +75,8 @@ func reset():
 		currentButton = null
 
 func setNewTextAndReset():
-	currentButton.get_parent().get_node("DeviceInfoLabel").text = ControlUtil.get_device_info(id, currentButton.index)
-	currentButton.text = ControlUtil.get_formatted_string_by_index(id, currentButton.index)
+	currentButton.get_parent().get_node("DeviceInfoLabel").text = ControlUtil.get_device_info(id, player_selector_manager.player_id(), currentButton.index)
+	currentButton.text = ControlUtil.get_formatted_string_by_index(id, player_selector_manager.player_id(), currentButton.index)
 	if currentButton.index == 0:
 		for children in controls_options.get_children():
 				if !children.get_name() in controls_options.ignore_children:
@@ -84,7 +85,7 @@ func setNewTextAndReset():
 						button.text = currentButton.text
 						break			
 		
-	SettingsSaver.override_keybindings(id)
+	SettingsSaver.override_keybindings(id, player_selector_manager.player_id())
 	currentButton = null
 	
 	if shouldCreateNewBindingOption:
@@ -92,5 +93,5 @@ func setNewTextAndReset():
 		
 		var extra_keybinding = load("res://scenes/player/window/controlbindingwindow/ControlBinding.tscn")
 		var extra_keybinding_instance = extra_keybinding.instance()
-		extra_keybinding_instance.get_node("KeyButton").index = PlayerSettings.keybindings[id].size()
+		extra_keybinding_instance.get_node("KeyButton").index = PlayerSettings.keybindings[player_selector_manager.player_id()][id].size()
 		add_child(extra_keybinding_instance)

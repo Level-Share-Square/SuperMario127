@@ -86,7 +86,6 @@ func set_zoom_level(level : float) -> void:
 func add_zoom_level(level : float) -> void:
 	set_zoom_level(zoom_level + level)
 
-
 func get_shared_node() -> Node:
 	return shared
 

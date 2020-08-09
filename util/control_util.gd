@@ -7,8 +7,8 @@ const JOYPAD_MOTION = 3
 
 const UNKNOWN = "Unknown"
 
-static func get_formatted_string_by_index(action, index) -> String:
-	var keybinding = PlayerSettings.keybindings[action]
+static func get_formatted_string_by_index(action : String, player_id : int, index : int) -> String:
+	var keybinding = PlayerSettings.keybindings[player_id][action]
 	var mode = keybinding[index][0]
 
 	match int(mode):
@@ -23,8 +23,8 @@ static func get_formatted_string_by_index(action, index) -> String:
 	
 	return UNKNOWN
 	
-static func get_formatted_string(action) -> String:
-	return get_formatted_string_by_index(action, 0)
+static func get_formatted_string(action : String, player_id : int) -> String:
+	return get_formatted_string_by_index(action, player_id, 0)
 
 static func convert_button_index_to_string(button_index):
 	match int(button_index):
@@ -49,9 +49,9 @@ static func convert_button_index_to_string(button_index):
 		_:
 			return UNKNOWN
 			
-static func get_device_info(id, index):
+static func get_device_info(id, player_id, index):
 	var result = "Device: "
-	var keybindings = PlayerSettings.keybindings[id][index]
+	var keybindings = PlayerSettings.keybindings[player_id][id][index]
 	var mode : int = keybindings[0]
 	
 	match(mode):
@@ -62,8 +62,8 @@ static func get_device_info(id, index):
 		_:
 			return result + str(keybindings[1]) + "-Joystick"
 
-static func binding_alias_already_exists(id : String, index : int, data : Array):
-	var keybindings = PlayerSettings.keybindings[id]
+static func binding_alias_already_exists(id : String, player_id : int, index : int, data : Array):
+	var keybindings = PlayerSettings.keybindings[player_id][id]
 	for i in range(0, keybindings.size()):
 		if index == i:
 			continue

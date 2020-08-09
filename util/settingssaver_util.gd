@@ -35,51 +35,36 @@ static func save(multiplayerOptions : Node):
 		"fpsLock": fpsLock
 	}
 	
-	var savedPreset : String = ""
-	for preset_name in ControlPresets.presets:
-		if savedPreset.empty() && PlayerSettings.keybindings.hash() == ControlPresets.presets[preset_name].hash():
-			savedPreset = preset_name
-	
-	if savedPreset.empty():
-		data["controls"] = PlayerSettings.keybindings
-	else:
-		data["controlPreset"] = savedPreset
+	data["controls"] = PlayerSettings.keybindings
 	
 	var file = File.new()
 	file.open(PATH, File.WRITE)
 	file.store_string(to_json(data))
 	file.close()
 
-static func get_keybindings() -> Dictionary:
+static func get_keybindings() -> Array:
 	var data = get_data_or_null()
 	
-	if data == null:
-		return ControlPresets.presets.Default.duplicate(true)
-	
-	if !data.has("controls"):
-		var controlPreset
-		if data.has("controlPreset"):
-			controlPreset = data["controlPreset"]
-		elif data.has("controlMode"): # for backwards compatibility
-			controlPreset = data["controlMode"]
-		else:
-			return ControlPresets.presets.Default.duplicate(true)
-		if ControlPresets.presets.has(controlPreset):
-			return ControlPresets.presets[controlPreset].duplicate(true)
-		else:
-			return ControlPresets.presets.Default.duplicate(true)
+	if data == null || !data.has("controls"):
+		return [
+			ControlPresets.presets.Default.duplicate(true),
+			ControlPresets.presets.WASD.duplicate(true)
+		]
 	else:
 		return data["controls"]
 		
 static func load_keybindings_into_actions():
-	for key in PlayerSettings.keybindings:
-		if not InputMap.has_action(key):
-			InputMap.add_action(key)
-			set_keybindings(key)
+	var actualName
+	for i in range(0, PlayerSettings.keybindings.size()):
+		for key in PlayerSettings.keybindings[i]:
+			var input_name = key + str(i)
+			if not InputMap.has_action(key + input_name):
+				InputMap.add_action(input_name)
+				set_keybindings(key, i)
 				
-static func set_keybindings(action):
-	var keybindings = PlayerSettings.keybindings
-	var binding = keybindings[action]
+static func set_keybindings(action : String, player_id : int):
+	var binding = PlayerSettings.keybindings[player_id][action]
+	var input_name = action + str(player_id)
 	for temp in binding:
 		var mode = temp[0]
 		var ev : InputEvent
@@ -99,9 +84,9 @@ static func set_keybindings(action):
 			ev.device = temp[1]
 			ev.axis = temp[2]
 			ev.axis_value = temp[3]
-			InputMap.action_set_deadzone(action, 0.5)
-		InputMap.action_add_event(action, ev)
+			InputMap.action_set_deadzone(input_name, 0.5)
+		InputMap.action_add_event(input_name, ev)
 	
-static func override_keybindings(action):
-	InputMap.action_erase_events(action)
-	set_keybindings(action)
+static func override_keybindings(action : String, player_id : int):
+	InputMap.action_erase_events(action + str(player_id))
+	set_keybindings(action, player_id)
