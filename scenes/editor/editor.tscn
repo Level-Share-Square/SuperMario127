@@ -1,4 +1,4 @@
-[gd_scene load_steps=176 format=2]
+[gd_scene load_steps=174 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -58,7 +58,6 @@
 [ext_resource path="res://scenes/editor/luigi_entrance_item/entrance_placement.gd" type="Script" id=56]
 [ext_resource path="res://scenes/editor/luigi_entrance_item/entrance_removal.gd" type="Script" id=57]
 [ext_resource path="res://assets/tiles/glass/icon.png" type="Texture" id=58]
-[ext_resource path="res://scenes/actors/objects/touch_lift_platform/icon.png" type="Texture" id=59]
 [ext_resource path="res://scenes/shared/button_sound_player.gd" type="Script" id=60]
 [ext_resource path="res://assets/tiles/bricks/icon_slope_left.png" type="Texture" id=61]
 [ext_resource path="res://assets/tiles/bricks/icon_slope_right.png" type="Texture" id=62]
@@ -75,7 +74,7 @@
 [ext_resource path="res://scenes/actors/objects/mushroom_body/icon.png" type="Texture" id=73]
 [ext_resource path="res://scenes/actors/objects/mushroom_curve/icon.png" type="Texture" id=74]
 [ext_resource path="res://scenes/actors/objects/cloud_platform/icon.png" type="Texture" id=75]
-[ext_resource path="res://scenes/actors/objects/cloud_platform/preview.png" type="Texture" id=76]
+[ext_resource path="res://scenes/actors/objects/cloud_platform/texture.png" type="Texture" id=76]
 [ext_resource path="res://scenes/actors/objects/log/log.png" type="Texture" id=77]
 [ext_resource path="res://scenes/actors/objects/log/icon.png" type="Texture" id=78]
 [ext_resource path="res://scenes/actors/objects/big_bush/big_bush.png" type="Texture" id=79]
@@ -105,7 +104,6 @@
 [ext_resource path="res://scenes/actors/objects/small_bottle/icon.png" type="Texture" id=103]
 [ext_resource path="res://scenes/actors/objects/big_bottle/icon.png" type="Texture" id=104]
 [ext_resource path="res://scenes/actors/objects/big_bottle/big_bottle.png" type="Texture" id=105]
-[ext_resource path="res://scenes/actors/objects/touch_lift_platform/2_wide.png" type="Texture" id=106]
 [ext_resource path="res://assets/tiles/boo_block/icon.png" type="Texture" id=107]
 [ext_resource path="res://scenes/actors/objects/pipe/pipe.png" type="Texture" id=108]
 [ext_resource path="res://scenes/editor/area_switcher.gd" type="Script" id=109]
@@ -138,7 +136,7 @@
 [ext_resource path="res://scenes/actors/objects/red_coin/icon.png" type="Texture" id=136]
 [ext_resource path="res://assets/misc/icon.png" type="Texture" id=137]
 [ext_resource path="res://scenes/actors/objects/snow_platform/icon.png" type="Texture" id=138]
-[ext_resource path="res://scenes/actors/objects/snow_platform/2_wide.png" type="Texture" id=139]
+[ext_resource path="res://scenes/actors/objects/snow_platform/texture.png" type="Texture" id=139]
 [ext_resource path="res://scenes/actors/objects/breakable_block/icon.png" type="Texture" id=140]
 [ext_resource path="res://scenes/actors/objects/breakable_block/breakable_block.png" type="Texture" id=141]
 [ext_resource path="res://scenes/actors/objects/metal_breakable_block/metal_breakable_block.png" type="Texture" id=142]
@@ -1385,18 +1383,6 @@ z_index = -8
 change_to = "Door"
 icon = ExtResource( 44 )
 preview = ExtResource( 49 )
-
-[node name="TouchLift" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
-object_id = 49
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-z_index = -8
-change_to = "TouchLift"
-icon = ExtResource( 59 )
-preview = ExtResource( 106 )
 
 [node name="BricksGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
