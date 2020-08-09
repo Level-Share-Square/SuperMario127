@@ -32,7 +32,7 @@ func _draw():
 	if(mode==1):
 		draw_polyline(path.curve.get_baked_points(), line_color, 2.0)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	virtual_offset += speed
 	path_follower.offset = path_follower.offset * 0.95 + clamp(virtual_offset, 0.0, path.curve.get_baked_length())*0.05
 

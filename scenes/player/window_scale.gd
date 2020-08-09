@@ -1,41 +1,50 @@
 extends Control
 
-onready var left = $Left
-onready var right = $Right
+onready var left : TextureButton = $Left
+onready var right : TextureButton = $Right
 
-onready var value_text = $Value
-var window_scale = 1
-var previous_scale = window_scale
-const FULLSCREEN_SCALE_VALUE = 5
-const PATH = "user://settings.json"
+onready var value_text : Label = $Value
+var window_scale := 1
+var previous_scale : int = window_scale
+const FULLSCREEN_SCALE_VALUE := 5
+const PATH : String = "user://settings.json"
 
-func _ready():
-	var file = File.new()
+func _ready() -> void:
+	var file : File = File.new()
+	# warning-ignore: return_value_discarded
 	file.open(PATH, File.READ)
 	
 	var data = parse_json(file.get_as_text())
 	
 	file.close()
 	
-	# warning-ignore: incompatible_ternary
-	window_scale = FULLSCREEN_SCALE_VALUE if OS.window_fullscreen else (OS.window_size.x / ScreenSizeUtil.DEFAULT_SIZE.x) if data == null || data["windowScale"] == null else data["windowScale"]
+	if OS.window_fullscreen:
+		window_scale = FULLSCREEN_SCALE_VALUE 
+	else: 
+		# warning-ignore: narrowing_conversion 
+		window_scale = OS.window_size.x / ScreenSizeUtil.DEFAULT_SIZE.x # if no valid window size can be loaded, default to this
+		if not (data == null or data["windowScale"] == null):
+			window_scale = data["windowScale"]
+	
 	value_text.text = str(window_scale) if window_scale != FULLSCREEN_SCALE_VALUE else "F"
-	var _connect = left.connect("pressed", self, "decrease_value")
-	var _connect2 = right.connect("pressed", self, "increase_value")
+	# warning-ignore: return_value_discarded
+	left.connect("pressed", self, "decrease_value")
+	# warning-ignore: return_value_discarded
+	right.connect("pressed", self, "increase_value")
 
-func decrease_value():
-	var new_window_scale = window_scale - 1
+func decrease_value() -> void:
+	var new_window_scale : int = window_scale - 1
 	if new_window_scale < 1:
 		new_window_scale = FULLSCREEN_SCALE_VALUE
 	update_window_scale(new_window_scale)
 
-func increase_value():
-	var new_window_scale = window_scale + 1
+func increase_value() -> void:
+	var new_window_scale : int = window_scale + 1
 	if new_window_scale > FULLSCREEN_SCALE_VALUE:
 		new_window_scale = 1
 	update_window_scale(new_window_scale)
 
-func _input(_event):
+func _input(_event) -> void:
 	if Input.is_action_just_pressed("fullscreen"):
 		if !OS.window_fullscreen:
 			update_window_scale(FULLSCREEN_SCALE_VALUE)
@@ -45,7 +54,7 @@ func _input(_event):
 			update_window_scale(1)
 		SettingsSaver.save(get_parent()) #has to be called manually here since normally settings are saved via the settings menu
 
-func update_window_scale(new_window_scale):
+func update_window_scale(new_window_scale) -> void:
 	ScreenSizeUtil.set_screen_size(new_window_scale)
 	value_text.text = str(new_window_scale) if new_window_scale != FULLSCREEN_SCALE_VALUE else "F"
 	previous_scale = window_scale
