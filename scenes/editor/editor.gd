@@ -21,13 +21,14 @@ var display_preview_item = true
 
 onready var placeable_items : Node = get_node(placeable_items_path)
 onready var placeable_items_button_container : Sprite = get_node(placeable_items_button_container_path)
-onready var item_preview = get_node(item_preview_path)
-onready var shared = get_node(shared_path)
-onready var object_settings = get_node(object_settings_path)
+onready var item_preview : Sprite = get_node(item_preview_path)
+onready var shared : Node2D = get_node(shared_path)
+onready var object_settings : NinePatchRect = get_node(object_settings_path)
 
 var lock_axis := "none"
 var lock_pos := 0
 var last_mouse_pos := Vector2(0, 0)
+var last_mouse_tile_pos := Vector2(0, 0)
 
 var left_held := false
 var right_held := false
@@ -155,6 +156,26 @@ func set_selected_box(new_selected_box: Node) -> void:
 func switch_scenes() -> void:
 	var _change_scene = get_tree().change_scene("res://scenes/player/player.tscn")
 
+func update_selected_object(mouse_pos : Vector2) -> void:
+	if selected_box.item.is_object and !rotating and time_clicked <= 0:
+		var objects = shared.get_objects_overlapping_position(mouse_pos)
+		if objects.size() > 0 and placement_mode != "Tile":
+			if hovered_object != objects[0]:
+				# If something was already hovered, mark it as not
+				if hovered_object != null:
+					hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
+					hovered_object.hovered = false
+				
+				hovered_object = objects[0]
+				hovered_object.hovered = true
+				hovered_object.modulate = Color(0.65, 0.65, 1, hovered_object.modulate.a)
+				item_preview.visible = false
+		elif hovered_object != null and is_instance_valid(hovered_object):
+			hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
+			hovered_object.hovered = false
+			hovered_object = null
+			item_preview.visible = true
+
 func _process(delta : float) -> void:
 	# warning-ignore: integer_division
 	coin_frame = (OS.get_ticks_msec() * COIN_ANIM_FPS / 1000) % 4
@@ -199,6 +220,14 @@ func _process(delta : float) -> void:
 				hovered_object.set_property("scale", Vector2(hovered_object.scale.x, -hovered_object.scale.y), true)
 			
 			if left_held and selected_tool == 0 and Input.is_action_just_pressed("place") and !rotating:
+				if Input.is_action_pressed("duplicate"):
+					var object := LevelObject.new()
+					var original_object : LevelObject = hovered_object.level_object.get_ref()
+					object.type_id = original_object.type_id
+					for prop in original_object.properties:
+						object.properties.append(prop)
+					shared.create_object(object, true)
+					update_selected_object(mouse_pos) # Switch to the new object
 				time_clicked += delta
 			
 			if time_clicked > 0 and left_held:
@@ -228,9 +257,10 @@ func _process(delta : float) -> void:
 				var item = selected_box.item
 				
 				if !item.is_object: # Place tile
-					if item.on_place(mouse_tile_pos, level_data, level_area) and level_area.settings.bounds.has_point(mouse_tile_pos+Vector2(0.5,0.5)):
-						var last_tile = null
-						last_tile = shared.get_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer)
+					# Don't spam place tiles into the same spot
+					if ((mouse_tile_pos != last_mouse_tile_pos or Input.is_action_just_pressed("place"))
+						and item.on_place(mouse_tile_pos, level_data, level_area) and level_area.settings.bounds.has_point(mouse_tile_pos+Vector2(0.5,0.5))):
+						var last_tile = shared.get_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer)
 						
 						if !(last_tile[0] == item.tileset_id and last_tile[1] == item.tile_id):
 							tiles_stack.append([mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, last_tile, [item.tileset_id, item.tile_id]])
@@ -283,25 +313,8 @@ func _process(delta : float) -> void:
 							
 							shared.set_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, 0, 0)
 			
-			# Handle selected objects
 			if selected_box.item.is_object and !rotating and time_clicked <= 0:
-				var objects = shared.get_objects_overlapping_position(mouse_pos)
-				if objects.size() > 0 and placement_mode != "Tile":
-					if hovered_object != objects[0]:
-						# If something was already hovered, mark it as not
-						if hovered_object != null:
-							hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
-							hovered_object.hovered = false
-						
-						hovered_object = objects[0]
-						hovered_object.hovered = true
-						hovered_object.modulate = Color(0.65, 0.65, 1, hovered_object.modulate.a)
-						item_preview.visible = false
-				elif hovered_object != null and is_instance_valid(hovered_object):
-					hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
-					hovered_object.hovered = false
-					hovered_object = null
-					item_preview.visible = true
+				update_selected_object(mouse_pos)
 		
 		# Finalise tile placement action (for potential future undo)
 		if !left_held:
@@ -316,5 +329,6 @@ func _process(delta : float) -> void:
 		
 		
 		last_mouse_pos = mouse_pos
+		last_mouse_tile_pos = mouse_tile_pos
 		last_left_held = left_held
 		last_right_held = right_held
