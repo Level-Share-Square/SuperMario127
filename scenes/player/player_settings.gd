@@ -9,4 +9,4 @@ export var other_player_id = -1
 export var my_player_index = 0
 export var connect_to_ip = "127.0.0.1"
 
-export var keybindings : Dictionary = SettingsSaver.get_keybindings()
+export var keybindings : Array = SettingsSaver.get_keybindings()

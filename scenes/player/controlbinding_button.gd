@@ -4,6 +4,7 @@ onready var hover_sound = $HoverSound
 onready var click_sound = $ClickSound
 
 onready var controls_options = get_parent().get_parent()
+onready var player_selector_manager = controls_options.get_node("PlayerSelectors")
 onready var binding_options = controls_options.get_node("ControlBindingWindow")
 
 export var id : String
@@ -11,7 +12,7 @@ export var id : String
 var last_hovered
 
 func _ready():
-	text = ControlUtil.get_formatted_string(id)
+	text = ControlUtil.get_formatted_string(id, 0)
 
 func _gui_input(event):
 	if event is InputEventMouseButton && event.pressed && !binding_options.is_open():
@@ -40,7 +41,7 @@ func _gui_input(event):
 			# Instantiate new ones
 			var extra_keybinding = load("res://scenes/player/window/controlbindingwindow/ControlBinding.tscn")
 			
-			for index in range(0, PlayerSettings.keybindings[id].size() + 1): # +1 for new binding option
+			for index in range(0, PlayerSettings.keybindings[player_selector_manager.player_id()][id].size() + 1): # +1 for new binding option
 				var extra_keybinding_instance = extra_keybinding.instance()
 				extra_keybinding_instance.get_node("KeyButton").index = index
 				extra_bindings_container.add_child(extra_keybinding_instance)

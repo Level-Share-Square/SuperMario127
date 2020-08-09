@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -47,6 +47,8 @@
 [ext_resource path="res://scenes/actors/objects/shine_shard/shard.png" type="Texture" id=45]
 [ext_resource path="res://scenes/shared/ui/selector.tscn" type="PackedScene" id=46]
 [ext_resource path="res://scenes/player/window/ControlBindingWindow.tscn" type="PackedScene" id=47]
+[ext_resource path="res://scenes/shared/control/player_selection.tscn" type="PackedScene" id=48]
+[ext_resource path="res://scenes/shared/control/player_selector_system.gd" type="Script" id=49]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 7 )
@@ -1053,7 +1055,7 @@ script = ExtResource( 42 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-ignore_children = [ NodePath("Preset Selection"), NodePath("Description"), NodePath("ControlBindingWindow") ]
+ignore_children = [ NodePath("Preset Selection"), NodePath("Description"), NodePath("ControlBindingWindow"), NodePath("PlayerSelectors") ]
 menu_buttons = [ NodePath("../Bottom/ResumeButton"), NodePath("../Bottom/RetryButton"), NodePath("../Bottom/MultiplayerButton") ]
 
 [node name="Move Left" type="Control" parent="UI/PauseScreen/ControlsOptions"]
@@ -1634,6 +1636,27 @@ __meta__ = {
 }
 
 [node name="ControlBindingWindow" parent="UI/PauseScreen/ControlsOptions" instance=ExtResource( 47 )]
+
+[node name="PlayerSelectors" type="Control" parent="UI/PauseScreen/ControlsOptions"]
+margin_left = 59.0
+margin_top = 16.0
+margin_right = 59.0
+margin_bottom = 16.0
+script = ExtResource( 49 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P1" parent="UI/PauseScreen/ControlsOptions/PlayerSelectors" instance=ExtResource( 48 )]
+margin_top = 0.0
+margin_bottom = 44.0
+
+[node name="P2" parent="UI/PauseScreen/ControlsOptions/PlayerSelectors" instance=ExtResource( 48 )]
+margin_left = 76.0
+margin_top = 0.0
+margin_right = 151.0
+margin_bottom = 44.0
+text = "P2"
 
 [node name="Viewports" type="HBoxContainer" parent="."]
 margin_right = 772.0
