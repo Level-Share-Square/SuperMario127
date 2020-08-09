@@ -199,9 +199,6 @@ shape = SubResource( 13 )
 stream = ExtResource( 1 )
 volume_db = -9.0
 
-[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-visible = false
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/collect = SubResource( 14 )
 anims/respawn = SubResource( 15 )

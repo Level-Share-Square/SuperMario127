@@ -212,7 +212,7 @@ texture = ExtResource( 4 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 6 )
 frames = SubResource( 15 )
-frame = 7
+frame = 4
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -226,10 +226,6 @@ shape = SubResource( 16 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 volume_db = -7.0
-
-[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-rect = Rect2( -24, -24, 48, 48 )
-pause_particles = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/collect = SubResource( 17 )
