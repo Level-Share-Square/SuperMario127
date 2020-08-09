@@ -90,7 +90,7 @@ func get_shared_node() -> Node:
 	return shared
 
 func switch_layers() -> void:
-	editing_layer = 0 if editing_layer == LAYER_COUNT - 1 else editing_layer + 1
+	editing_layer = wrapi(editing_layer + 1, 0, LAYER_COUNT)
 	EditorSavedSettings.layer = editing_layer
 	
 	shared.toggle_layer_transparency(editing_layer, layers_transparent)
