@@ -35,7 +35,6 @@ func collect(body):
 		animation_player.play("collect", -1, 2)
 		respawn_timer = 10.0
 		collected = true
-		particles.emitting = false
 		
 func _ready():
 	yield(get_tree().create_timer(0.2), "timeout")
@@ -47,8 +46,7 @@ func _process(delta):
 		if respawn_timer <= 0:
 			respawn_timer = 0
 			collected = false
-			particles.emitting = true
-			animated_sprite.modulate = Color(1, 1, 1, 1)
+			animation_player.play("respawn")
 
 	hue += 0.015
 	var gradient_texture = GradientTexture.new()

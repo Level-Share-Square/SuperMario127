@@ -31,7 +31,6 @@ func collect(body):
 		animation_player.play("collect")
 		respawn_timer = 10.0
 		collected = true
-		particles.emitting = false
 		
 func _ready():
 	yield(get_tree().create_timer(0.2), "timeout")
@@ -43,7 +42,4 @@ func _process(delta):
 		if respawn_timer <= 0:
 			respawn_timer = 0
 			collected = false
-			particles.emitting = true
-			animated_sprite.position = Vector2()
-			animated_sprite.scale = Vector2(1, 1)
-			animated_sprite.modulate = Color(1, 1, 1, 1)
+			animation_player.play("respawn")

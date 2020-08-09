@@ -34,7 +34,8 @@ var collected := false
 var character : Character
 
 var anim_damp := 160
-var normal_color := Color(1, 1, 0)
+const NORMAL_COLOR := Color(1, 1, 0)
+const WHITE_COLOR := Color(1, 1, 1)
 
 var title := "Unnamed Shine"
 var description := "This is a shine! Collect it to win the level."
@@ -43,6 +44,7 @@ var activated := true
 var red_coins_activate := false
 var shine_shards_activate := false
 var color := Color(1, 1, 0)
+var last_color : Color
 
 func _set_properties() -> void:
 	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color"]
@@ -64,19 +66,25 @@ func _ready() -> void:
 		# warning-ignore: return_value_discarded
 		area.connect("body_entered", self, "collect")
 		unpause_timer.wait_time = UNPAUSE_TIMER_LENGTH
+	connect("property_changed", self, "update_color")
+	update_color("color", color)
+
+#TODO: Make this work with the window preview
+func update_color(key, value):
+	if key == "color" and value != last_color:
+		if color != NORMAL_COLOR:
+			animated_sprite.self_modulate = color
+			
+			animated_sprite.frames = recolorable_frames
+			particles.texture = recolorable_particles
+		else:
+			animated_sprite.self_modulate = WHITE_COLOR
+			
+			animated_sprite.frames = normal_frames
+			particles.texture = normal_particles
+		last_color = color
 		
 func _physics_process(_delta : float) -> void:
-	if color != normal_color:
-		animated_sprite.self_modulate = color
-		
-		animated_sprite.frames = recolorable_frames
-		particles.texture = recolorable_particles
-	else:
-		animated_sprite.self_modulate = Color(1, 1, 1)
-		
-		animated_sprite.frames = normal_frames
-		particles.texture = normal_particles
-	
 	if !animated_sprite.playing: #looks like if it is not set to playing, some manual animation is done instead
 		#warning-ignore:integer_division
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)

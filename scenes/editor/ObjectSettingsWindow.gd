@@ -44,9 +44,6 @@ func open_object(object_to_open: GameObject):
 
 	preview_object = object_to_open.duplicate()
 	preview_object.mode = 1
-	for child in object_to_open.get_children():
-		preview_object.z_index += 10
-		preview_object.add_child(child)
 	preview_object.set_property("enabled", false, false)
 	preview_object.position = object_to_open.preview_position
 	preview_object.z_index += 10
