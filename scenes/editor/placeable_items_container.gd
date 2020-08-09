@@ -10,7 +10,7 @@ export var editor_node_path : NodePath
 onready var editor_node = get_node(editor_node_path)
 
 func _ready():
-	var placeable_items = editor_node.get_node(editor_node.placeable_items)
+	var placeable_items = editor_node.get_node(editor_node.placeable_items_path)
 	var starting_toolbar = EditorSavedSettings.layout_ids
 	for index in range(number_of_boxes):
 		var item

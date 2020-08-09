@@ -1083,11 +1083,11 @@ font_data = ExtResource( 4 )
 [node name="Editor" type="Node2D"]
 script = ExtResource( 1 )
 nodes_to_load = [ NodePath("Shared"), NodePath("Camera2D"), NodePath("Backgrounds") ]
-placeable_items = NodePath("PlaceableItems")
-placeable_items_button_container = NodePath("UI/PlaceableItemsContainer")
-item_preview = NodePath("ItemPreview")
-shared = NodePath("Shared")
-object_settings = NodePath("UI/ObjectSettingsWindow")
+placeable_items_path = NodePath("PlaceableItems")
+placeable_items_button_container_path = NodePath("UI/PlaceableItemsContainer")
+item_preview_path = NodePath("ItemPreview")
+shared_path = NodePath("Shared")
+object_settings_path = NodePath("UI/ObjectSettingsWindow")
 
 [node name="Shared" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0.198608, -0.468788 )
