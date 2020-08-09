@@ -40,6 +40,7 @@ onready var gp_particles1 : Particles2D = $GPParticles1
 onready var gp_particles2 : Particles2D = $GPParticles2
 onready var rainbow_particles : Particles2D = $RainbowSparkles
 onready var metal_particles : Particles2D = $MetalSparkles
+onready var vanish_particles : Particles2D = $VanishSparkles
 onready var bottom_pos : Node2D = $BottomPos
 onready var ring_particles : AnimatedSprite = $RingParticles
 onready var ring_particles_back : AnimatedSprite = $RingParticlesBack

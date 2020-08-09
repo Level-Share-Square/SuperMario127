@@ -2,7 +2,7 @@ extends Powerup
 class_name VanishPowerup 
 
 func _ready():
-	music_id = 27 #temporary, replace with proper vanish cap music later
+	music_id = 29
 	set_physics_process(false)
 
 func _start(_delta):
@@ -31,9 +31,11 @@ func _physics_process(_delta):
 
 func apply_visuals():
 	character.sprite.material = material 
+	character.vanish_particles.emitting = true
 
 func remove_visuals():
 	character.sprite.material = null 
+	character.vanish_particles.emitting = false
 
 func toggle_visuals():
 	if character.sprite.material == null:
