@@ -155,10 +155,7 @@ func get_chunks(resultLayers: Array, size: Vector2) -> Dictionary:
 				y = tile_index/level_width
 
 		layer_index+=1
-			
-			
-			
-
+		
 	return chunks
 
 func get_chunk_for_position(x: int, y: int, layer: int, chunks: Dictionary) -> Array:

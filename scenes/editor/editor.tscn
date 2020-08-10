@@ -1402,6 +1402,18 @@ change_to = "TouchLift"
 icon = ExtResource( 153 )
 preview = ExtResource( 154 )
 
+[node name="PlatformWheel" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 50
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+z_index = -8
+change_to = "PlatformWheel"
+icon = ExtResource( 153 )
+preview = ExtResource( 154 )
+
 [node name="BricksGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
 color = Color( 0.121569, 0.180392, 0.517647, 1 )
