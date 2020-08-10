@@ -66,7 +66,7 @@ func _ready() -> void:
 		# warning-ignore: return_value_discarded
 		area.connect("body_entered", self, "collect")
 		unpause_timer.wait_time = UNPAUSE_TIMER_LENGTH
-	connect("property_changed", self, "update_color")
+	var _connect = connect("property_changed", self, "update_color")
 	update_color("color", color)
 
 #TODO: Make this work with the window preview

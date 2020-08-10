@@ -36,7 +36,7 @@ static func encode_value(value):
 		for index in range(0,curve.get_point_count()):
 			var point = curve.get_point_position(index)
 			var point_in = curve.get_point_in(index)
-			var point_out = curve.get_point_out(index)
+			var _point_out = curve.get_point_out(index)
 			curve_string += str(stepify(point.x,0.1)) + "x" + str(stepify(point.y, 0.1))
 			curve_string += "X"
 			

@@ -54,7 +54,7 @@ static func get_keybindings() -> Array:
 		return data["controls"]
 		
 static func load_keybindings_into_actions():
-	var actualName
+	var _actualName
 	for i in range(0, PlayerSettings.keybindings.size()):
 		for key in PlayerSettings.keybindings[i]:
 			var input_name = key + str(i)

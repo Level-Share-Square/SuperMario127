@@ -40,7 +40,7 @@ func _process(_delta):
 func _ready():
 	var scene := load("res://scenes/actors/objects/touch_lift_platform/touch_lift_platform.tscn")
 	
-	for i in range(4):
+	for _i in range(4):
 		var instance = scene.instance()
 		platforms.append(instance)
 		add_child(instance)

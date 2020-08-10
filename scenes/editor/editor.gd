@@ -196,10 +196,10 @@ func _process(delta : float) -> void:
 				if Input.is_action_just_pressed("place") or Input.is_action_just_pressed("erase"):
 					if abs(mouse_pos.x) - abs(last_mouse_pos.x) > abs(mouse_pos.y) - abs(last_mouse_pos.y):
 						lock_axis = "x"
-						lock_pos = mouse_pos.x
+						lock_pos = int(mouse_pos.x)
 					else:
 						lock_axis = "y"
-						lock_pos = mouse_pos.y
+						lock_pos = int(mouse_pos.y)
 				if lock_axis == "x":
 					mouse_pos.x = lock_pos
 				elif lock_axis == "y":
