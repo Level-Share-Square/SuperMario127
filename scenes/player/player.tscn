@@ -386,7 +386,7 @@ script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-darken_color = Color( 0.121569, 0.137255, 0.184314, 0.501961 )
+darken_color = Color( 0.121569, 0.137255, 0.184314, 0.705882 )
 character_node_path = NodePath("../../Viewports/ViewportContainer/Viewport/World/Character")
 character2_node_path = NodePath("../../Viewports/ViewportContainer/Viewport/World/Character2")
 chat_path = NodePath("../ChatBox")
@@ -396,7 +396,7 @@ margin_left = -0.440735
 margin_top = 0.440735
 margin_right = 767.559
 margin_bottom = 432.441
-color = Color( 0.121569, 0.137255, 0.184314, 0.501961 )
+color = Color( 0.121569, 0.137255, 0.184314, 0.705882 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false

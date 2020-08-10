@@ -52,11 +52,12 @@ func toggle_pause():
 		can_pause = false
 		get_tree().paused = true if !self.visible and PlayerSettings.other_player_id == -1 else false
 		paused = get_tree().paused
+		# if we're visible and toggling pause, that means we need to fade out back to gameplay
 		if self.visible:
 			FocusCheck.is_ui_focused = false
 			chat_node.visible = true
 			fade_tween.interpolate_property(darken, "modulate",
-			darken.modulate, Color(0, 0, 0, 0), 0.20,
+			null, Color(0, 0, 0, 0), 0.20,
 			Tween.TRANS_LINEAR, Tween.EASE_OUT)
 			fade_tween.start()
 			
@@ -84,7 +85,7 @@ func toggle_pause():
 			self.visible = true
 			chat_node.visible = false
 			fade_tween.interpolate_property(darken, "modulate",
-			darken.modulate, darken_color, 0.20,
+			null, darken_color, 0.20,
 			Tween.TRANS_LINEAR, Tween.EASE_OUT)
 			fade_tween.start()
 			
