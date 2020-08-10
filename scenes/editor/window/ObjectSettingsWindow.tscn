@@ -9,66 +9,54 @@
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/editor/ObjectSettingsWindow.gd" type="Script" id=8]
 [ext_resource path="res://scenes/shared/button_sound_player.gd" type="Script" id=9]
+[ext_resource path="res://assets/styles/RedButtonStyleNormal.tres" type="StyleBox" id=10]
+[ext_resource path="res://assets/styles/RedButtonStyleHover.tres" type="StyleBox" id=11]
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=1]
 size = 56
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=19]
-bg_color = Color( 0.513726, 0.0156863, 0.0156863, 1 )
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
-[sub_resource type="StyleBoxFlat" id=20]
-bg_color = Color( 0.698039, 0.2, 0.2, 1 )
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
-[sub_resource type="DynamicFont" id=21]
+[sub_resource type="DynamicFont" id=2]
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=22]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.596078, 0.596078, 0.596078, 1 )
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id=23]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.882353, 0.882353, 0.882353, 1 )
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id=24]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.486275, 0.486275, 0.486275, 1 )
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id=25]
+[sub_resource type="StyleBoxFlat" id=6]
 border_width_left = 24
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id=26]
+[sub_resource type="StyleBoxFlat" id=7]
 border_width_left = 24
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="Theme" id=27]
+[sub_resource type="Theme" id=8]
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -460,11 +448,11 @@ VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/increment = null
 VScrollBar/icons/increment_highlight = null
-VScrollBar/styles/grabber = SubResource( 22 )
-VScrollBar/styles/grabber_highlight = SubResource( 23 )
-VScrollBar/styles/grabber_pressed = SubResource( 24 )
-VScrollBar/styles/scroll = SubResource( 25 )
-VScrollBar/styles/scroll_focus = SubResource( 26 )
+VScrollBar/styles/grabber = SubResource( 3 )
+VScrollBar/styles/grabber_highlight = SubResource( 4 )
+VScrollBar/styles/grabber_pressed = SubResource( 5 )
+VScrollBar/styles/scroll = SubResource( 6 )
+VScrollBar/styles/scroll_focus = SubResource( 7 )
 VSeparator/constants/separation = 4
 VSeparator/styles/separator = null
 VSlider/icons/grabber = null
@@ -516,7 +504,7 @@ margin_top = 24.2632
 margin_right = 456.0
 margin_bottom = 102.263
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 9 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_text = "Object Settings"
 text = "Object Settings"
 __meta__ = {
@@ -572,10 +560,10 @@ margin_left = 32.0
 margin_top = 336.0
 margin_right = 320.0
 margin_bottom = 415.0
-custom_styles/hover = SubResource( 19 )
-custom_styles/pressed = SubResource( 20 )
-custom_styles/normal = SubResource( 20 )
-custom_fonts/font = SubResource( 21 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+custom_fonts/font = SubResource( 2 )
 text = "Delete"
 script = ExtResource( 9 )
 __meta__ = {
@@ -595,7 +583,7 @@ margin_left = 360.0
 margin_right = 1021.0
 margin_bottom = 420.0
 rect_clip_content = false
-theme = SubResource( 27 )
+theme = SubResource( 8 )
 scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false

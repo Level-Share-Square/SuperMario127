@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=5]
+[ext_resource path="res://scenes/127Button.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 2 )
+
+[node name="127Button" type="Button"]
+margin_right = 103.0
+margin_bottom = 55.0
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
+custom_fonts/font = SubResource( 1 )
+shortcut_in_tooltip = false
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0

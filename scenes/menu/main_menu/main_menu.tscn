@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/menu/main_menu/main_menu.gd" type="Script" id=1]
+[ext_resource path="res://scenes/127Button.tscn" type="PackedScene" id=2]
+
+[node name="MainMenuScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 278.0
+margin_top = 86.0
+margin_right = 489.0
+margin_bottom = 345.0
+custom_constants/separation = 23
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonPlay" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_right = 211.0
+margin_bottom = 71.0
+text = "Play"
+
+[node name="ButtonOptions" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 94.0
+margin_right = 211.0
+margin_bottom = 165.0
+text = "Options"
+
+[node name="ButtonQuit" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 188.0
+margin_right = 211.0
+margin_bottom = 259.0
+text = "Quit"

@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/menu/title_screen/title_screen.gd" type="Script" id=1]
+[ext_resource path="res://scenes/menu/title_screen/transparentSM127logo.png" type="Texture" id=2]
+[ext_resource path="res://scenes/127Button.tscn" type="PackedScene" id=3]
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Logo" type="TextureRect" parent="."]
+margin_left = 201.0
+margin_top = 10.0
+margin_right = 567.0
+margin_bottom = 243.0
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonStart" parent="." instance=ExtResource( 3 )]
+margin_left = 266.0
+margin_top = 305.0
+margin_right = 502.0
+margin_bottom = 376.0
+text = "Start"

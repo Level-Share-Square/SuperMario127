@@ -309,6 +309,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/nozzles/Rocket.gd"
 }, {
+"base": "Control",
+"class": "Screen",
+"language": "GDScript",
+"path": "res://classes/Screen.gd"
+}, {
 "base": "Reference",
 "class": "ScreenSizeUtil",
 "language": "GDScript",
@@ -485,6 +490,7 @@ _global_script_class_icons={
 "RainbowStarState": "",
 "RainbowStarWindupState": "",
 "RocketNozzle": "",
+"Screen": "",
 "ScreenSizeUtil": "",
 "SetValueInstruction": "",
 "SettingsSaver": "",
