@@ -44,9 +44,6 @@ func open_object(object_to_open: GameObject):
 
 	preview_object = object_to_open.duplicate()
 	preview_object.mode = 1
-	for child in object_to_open.get_children():
-		preview_object.z_index += 10
-		preview_object.add_child(child)
 	preview_object.set_property("enabled", false, false)
 	preview_object.position = object_to_open.preview_position
 	preview_object.z_index += 10
@@ -62,12 +59,14 @@ func open_object(object_to_open: GameObject):
 		property.key = key
 		edit_preview_object(key, object_to_open[key])
 		grid_container_node.add_child(property)
-	for _index in range(2): # this is so scrolling actually works properly
-		var blank_property = property_scene.instance()
-		blank_property.modulate.a = 0
-		blank_property.set_process(false)
-		blank_property.object = object_to_open
-		blank_property.key = "position"
-		grid_container_node.add_child(blank_property)
+		
+#	Uncomment when necessary =>		
+#	for _index in range(2): # this is so scrolling actually works properly
+#		var blank_property = property_scene.instance()
+#		blank_property.modulate.a = 0
+#		blank_property.set_process(false)
+#		blank_property.object = object_to_open
+#		blank_property.key = "position"
+#		grid_container_node.add_child(blank_property)
 	open()
 	

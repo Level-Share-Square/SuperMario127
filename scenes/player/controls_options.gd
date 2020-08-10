@@ -3,6 +3,8 @@ extends Node
 export (Array, NodePath) var ignore_children
 export (Array, NodePath) var menu_buttons
 
+onready var player_selector_manager = get_node("PlayerSelectors")
+
 var currentButton : Button
 var oldText : String
 
@@ -57,17 +59,17 @@ func _input(event):
 		else:
 			return
 
-		if ControlUtil.binding_alias_already_exists(currentButton.id, 0, result):
+		if ControlUtil.binding_alias_already_exists(currentButton.id, player_selector_manager.player_id(), 0, result):
 			return
-		PlayerSettings.keybindings[currentButton.id][0] = result
-		setNewTextAndReset()
+		PlayerSettings.keybindings[player_selector_manager.player_id()][currentButton.id][0] = result
+		set_new_text_and_reset()
 	
 func reset():
 	if currentButton != null:
 		currentButton.text = oldText
 		currentButton = null
 
-func setNewTextAndReset():
-	currentButton.text = ControlUtil.get_formatted_string(currentButton.id)
-	SettingsSaver.override_keybindings(currentButton.id)
+func set_new_text_and_reset():
+	currentButton.text = ControlUtil.get_formatted_string(currentButton.id, player_selector_manager.player_id())
+	SettingsSaver.override_keybindings(currentButton.id, player_selector_manager.player_id())
 	currentButton = null

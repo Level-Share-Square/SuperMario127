@@ -43,3 +43,6 @@ func _start_teleport(character : Character):
 	character.camera.reset_smoothing()
 	tween.interpolate_callback(teleport_door.door_enter_logic, OPEN_DOOR_WAIT, "start_door_exit_animation", character)
 	tween.start()
+	
+	if teleport_door != self:
+		door_enter_logic.is_idle = true

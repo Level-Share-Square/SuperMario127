@@ -68,33 +68,6 @@ static func generate_from_chunks(tile_chunks: Dictionary, layers: Array, bounds:
 					#write tile in the tile array for this layer
 					layers[layer][(chunk_x*16 + x-bounds.position.x) + (chunk_y*16 + y-bounds.position.y) * bounds.size.x] = tile
 	
-static func decode_value(value: String):
-	if value.ends_with("]"):
-		value = value.rstrip("]")
-		
-	if value.begins_with("V2"):
-		value = value.trim_prefix("V2")
-		var array_value = value.split("x")
-		return Vector2(array_value[0], array_value[1])
-	elif value.begins_with("CL"):
-		value = value.trim_prefix("CL")
-		var array_value = value.split("x")
-		return Color(array_value[0], array_value[1], array_value[2])
-	elif value.begins_with("BL"):
-		value = value.trim_prefix("BL")
-		return true if value == "1" else false
-	elif value.begins_with("IT"):
-		value = value.trim_prefix("IT")
-		return int(value)
-	elif value.begins_with("FL"):
-		value = value.trim_prefix("FL")
-		return float(value)
-	elif value.begins_with("ST"):
-		value = value.trim_prefix("ST")
-		return str(value).percent_decode()
-	else:
-		return str(value)
-	
 static func split_code_top_level(string):
 	var parts = []
 	var start_from = 0
@@ -148,12 +121,12 @@ static func decode(code: String):
 		var area_settings_array = area_array[0].split(",")
 		result.areas.append({})
 		result.areas[area_id].settings = {}
-		result.areas[area_id].settings.size = decode_value(area_settings_array[0])
-		result.areas[area_id].settings.sky = decode_value(area_settings_array[1])
-		result.areas[area_id].settings.background = decode_value(area_settings_array[2])
-		result.areas[area_id].settings.music = decode_value(area_settings_array[3])
+		result.areas[area_id].settings.size = value_util.decode_value(area_settings_array[0])
+		result.areas[area_id].settings.sky = value_util.decode_value(area_settings_array[1])
+		result.areas[area_id].settings.background = value_util.decode_value(area_settings_array[2])
+		result.areas[area_id].settings.music = value_util.decode_value(area_settings_array[3])
 		if area_settings_array.size() > 4:
-			result.areas[area_id].settings.gravity = decode_value(area_settings_array[4])
+			result.areas[area_id].settings.gravity = value_util.decode_value(area_settings_array[4])
 		else:
 			result.areas[area_id].settings.gravity = 7.82
 		
@@ -192,7 +165,7 @@ static func decode(code: String):
 				var index = 0
 				for value in object_array:
 					if index > 0:
-						decoded_object.properties.append(decode_value(value))
+						decoded_object.properties.append(value_util.decode_value(value))
 					index += 1
 				result.areas[area_id].objects.append(decoded_object)
 	

@@ -40,6 +40,7 @@ onready var gp_particles1 : Particles2D = $GPParticles1
 onready var gp_particles2 : Particles2D = $GPParticles2
 onready var rainbow_particles : Particles2D = $RainbowSparkles
 onready var metal_particles : Particles2D = $MetalSparkles
+onready var vanish_particles : Particles2D = $VanishSparkles
 onready var bottom_pos : Node2D = $BottomPos
 onready var ring_particles : AnimatedSprite = $RingParticles
 onready var ring_particles_back : AnimatedSprite = $RingParticlesBack
@@ -768,8 +769,8 @@ func update_inputs() -> void:
 		if controllable and !FocusCheck.is_ui_focused:
 			#var control_id = player_id seemingly unused variable, uncomment if needed
 			for input in inputs:
-				input[0] = Input.is_action_pressed(input[2])
-				input[1] = Input.is_action_just_pressed(input[2])
+				input[0] = Input.is_action_pressed(input[2] + str(character))
+				input[1] = Input.is_action_just_pressed(input[2] + str(character))
 		else:
 			for input in inputs:
 				input[0] = false

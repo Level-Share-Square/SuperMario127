@@ -1,18 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/actors/objects/touch_lift_platform/touch_lift_platform.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/touch_lift/touch_lift.gd" type="Script" id=2]
-
-[sub_resource type="Curve2D" id=1]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0.833878, 0.541641, 0, 0, 0, 0, 238.15, -230.822 )
-}
 
 [node name="TouchLift" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Path2D" type="Path2D" parent="."]
-curve = SubResource( 1 )
+curve = null
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2( 0.833878, 0.541641 )
