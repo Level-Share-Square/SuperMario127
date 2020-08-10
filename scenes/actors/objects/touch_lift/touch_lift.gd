@@ -57,10 +57,10 @@ func _process(_delta):
 
 #-------------------------------- platform logic -----------------------
 
-onready var platform = $Path2D/PathFollow2D/TouchLiftPlatform
+onready var platform = $TouchLiftPlatform
 onready var path_follower = $Path2D/PathFollow2D
 onready var path = $Path2D
-onready var platform_sprite = $Path2D/PathFollow2D/TouchLiftPlatform/Sprite
+onready var platform_sprite = $TouchLiftPlatform/Sprite
 
 var speed := 1.0
 var virtual_offset := 0.0
@@ -125,3 +125,8 @@ func _physics_process(_delta):
 	elif(path_follower.offset>=path.curve.get_baked_length()-2.0 and speed>0.0):
 		speed = -speed
 		virtual_offset = path.curve.get_baked_length()
+		
+	if(mode!=1):
+		platform.set_position(path_follower.position)
+	else:
+		platform.position = path_follower.position

@@ -16,6 +16,5 @@ rotate = false
 loop = false
 lookahead = 0.001
 
-[node name="TouchLiftPlatform" parent="Path2D/PathFollow2D" instance=ExtResource( 1 )]
-position = Vector2( -0.610942, -0.784524 )
-rotation = 0.333097
+[node name="TouchLiftPlatform" parent="." instance=ExtResource( 1 )]
+position = Vector2( -5.96046e-08, -5.36442e-07 )

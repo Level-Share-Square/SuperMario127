@@ -49,5 +49,8 @@ func _physics_process(delta):
 	time_alive += delta * speed
 	var angle := fmod(time_alive, (2*PI))
 	for platform in platforms:
-		platform.position = Vector2(radius * 32, 0).rotated(angle)
+		if(mode!=1):
+			platform.set_position(Vector2(radius * 32, 0).rotated(angle))
+		else:
+			platform.position = Vector2(radius * 32, 0).rotated(angle)
 		angle += delta_angle
