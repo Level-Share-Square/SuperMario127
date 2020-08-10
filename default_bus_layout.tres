@@ -28,6 +28,7 @@ voice/4/cutoff_hz = 16000.0
 voice/4/pan = 0.0
 
 [resource]
+bus/0/volume_db = -15.1981
 bus/1/name = "Editor"
 bus/1/solo = false
 bus/1/mute = false
