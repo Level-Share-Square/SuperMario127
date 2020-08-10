@@ -41,11 +41,11 @@ static func encode_value(value):
 			curve_string += "X"
 			
 			if(point_in!=Vector2()):
-				curve_string += str(stepify(point.x,0.1)) + "x" + str(stepify(point.y, 0.1))
+				curve_string += str(stepify(point_in.x,0.1)) + "x" + str(stepify(point_in.y, 0.1))
 			curve_string += "X"
 			
-			if(point_in!=Vector2()):
-				curve_string += str(stepify(point.x,0.1)) + "x" + str(stepify(point.y, 0.1))
+			if(point_out!=Vector2()):
+				curve_string += str(stepify(point_out.x,0.1)) + "x" + str(stepify(point_out.y, 0.1))
 				
 			curve_string += ":"
 			

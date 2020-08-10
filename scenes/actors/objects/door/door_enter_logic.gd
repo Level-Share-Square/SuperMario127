@@ -28,9 +28,9 @@ func _physics_process(_delta : float) -> void:
 		#the area2d is set to only collide with characters, so we can (hopefullY) safely assume if there 
 		#is a collision it's with a character
 		
-		# you're not able to enter a door if you're in the air, aren't controllable, 
+		# you're not able to enter a door if you're in the air, aren't controllable,
 		# have dive collision enabled, or are pressing a movement direction (helps with the Legacy control preset)
-		for body in area2d.get_overlapping_bodies(): 
+		for body in area2d.get_overlapping_bodies():
 			if (body.name.begins_with("Character") and global_rotation == 0 
 			and body.is_grounded() and body.get_input(Character.input_names.interact, true)
 			and !body.get_input(Character.input_names.left, false) and !body.get_input(Character.input_names.right, false)
@@ -39,31 +39,32 @@ func _physics_process(_delta : float) -> void:
 				start_door_enter_animation(body)
 
 func start_door_ground_pound_animation(_character : Character) -> void:
-	pass #to be implemented
+	pass # to be implemented
 
 func start_door_enter_animation(character : Character) -> void:
-	stored_character = character 
-
+	stored_character = character
+	
 	is_idle = false
-
+	
 	character.set_dive_collision(false)
 	character.invulnerable = true 
 	character.controllable = false
 	character.movable = false
 	character.sprite.rotation = 0
+	character.camera.smoothing_enabled = true # Re-enable camera smoothing
 	
 	character.sprite.animation = "enterDoor" + ("Right" if character.facing_direction == 1 else "Left")
 	character.sprite.playing = true
 	
 	animate_door("open")
-
+	
 	var slide_length : float = slide_to_center_length
-
+	
 	#calculate the amount of time it should take based on the players distance from the center
 	var distance_from_center_normalized : float = abs((character.position.x - global_position.x)) / collision_width 
 	distance_from_center_normalized = clamp(distance_from_center_normalized, 0.1, 1)
 	slide_length = slide_to_center_length * distance_from_center_normalized
-
+	
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character, "position:x", null, global_position.x, slide_length)
 	# warning-ignore: return_value_discarded
@@ -89,11 +90,12 @@ func animate_door(animation : String = "close") -> void:
 	audio_player.play()
 
 func start_door_exit_animation(character : Character) -> void:
+	print("Exit animation happening")
 	# just plays a few animations
 	stored_character = character
 	
-	is_idle = false	
-
+	is_idle = false
+	
 	character.invulnerable = true 
 	character.controllable = false
 	character.movable = false
@@ -115,12 +117,11 @@ func door_exit_anim_finished(_animation : String, character : Character) -> void
 	character.invulnerable = false 
 	character.controllable = true
 	character.movable = true
-
+	
 	character.sprite.animation = "exitDoor" + ("Right" if character.facing_direction == 1 else "Left")
 	character.sprite.playing = true
 	animate_door("close")
 
 func _tween_all_completed() -> void:
-	emit_signal("door_animation_finished", stored_character)	
-
+	emit_signal("door_animation_finished", stored_character)
 	stored_character = null
