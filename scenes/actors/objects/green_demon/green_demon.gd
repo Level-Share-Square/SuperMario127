@@ -4,7 +4,6 @@ onready var area = $Area2D
 onready var sprite = $Sprite
 onready var particles = $Particles2D
 onready var particles2 = $Sparkles
-onready var anim_player = $AnimationPlayer
 onready var revolve_sound = $Revolve
 onready var revolve_last_sound = $RevolveLast
 var collected = false
