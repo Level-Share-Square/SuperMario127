@@ -105,7 +105,7 @@ func _unhandled_input(event) -> void:
 func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0) -> void:
 	volume_multiplier = 0
 
-	tween.stop_all()
+	var _tween = tween.stop_all()
 	var stream = get_song(temp_song_id).stream
 	if temporary_music_player.stream != stream or !is_temporary_music_playing():
 		temporary_music_player.stream = stream
@@ -118,9 +118,10 @@ func is_temporary_music_playing() -> bool:
 
 # can be called manually, also automatically called if the temporary music ends
 func stop_temporary_music(volume_multiplier_target = 1, music_fade_length = MUSIC_FADE_LENGTH) -> void:
-	tween.interpolate_property(temporary_music_player, "volume_db", null, -80, music_fade_length, \
+	var _tween
+	_tween = tween.interpolate_property(temporary_music_player, "volume_db", null, -80, music_fade_length, \
 			Tween.TRANS_LINEAR, Tween.EASE_IN)
-	tween.interpolate_callback(temporary_music_player, MUSIC_FADE_LENGTH, "stop")
-	tween.interpolate_property(self, "volume_multiplier", null, volume_multiplier_target, music_fade_length, \
+	_tween = tween.interpolate_callback(temporary_music_player, MUSIC_FADE_LENGTH, "stop")
+	_tween = tween.interpolate_property(self, "volume_multiplier", null, volume_multiplier_target, music_fade_length, \
 			Tween.TRANS_LINEAR, Tween.EASE_IN)
-	tween.start()
+	_tween = tween.start()
