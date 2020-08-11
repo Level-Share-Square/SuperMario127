@@ -11,11 +11,11 @@ onready var tween : Tween = $Tween
 
 export var volume_multiplier := 1.0
 export var loading := false
-var base_volume := 0
+var base_volume : float = 0
 var stored_volume : float # used when playing temporary music to return the volume afterwards
 
 var last_mode := 3
-var last_song := 0
+var last_song = 0 # this can't be static typed, can be either an int or a string
 
 var dl_ready := false
 var downloader := Downloader.new()
@@ -37,23 +37,27 @@ func _ready() -> void:
 	for id in level_songs.ids:
 		song_cache.append(load("res://assets/music/resources/" + id + ".tres"))
 	
-	temporary_music_player.connect("finished", self, "stop_temporary_music")
+	_connect = temporary_music_player.connect("finished", self, "stop_temporary_music")
 
 func is_tween_active() -> bool:
 	return tween.is_active()
 	
 func load_ogg() -> void:
 	var path := "user://bg_music.ogg"
+
 	var ogg_file := File.new()
-	ogg_file.open(path, File.READ)
+	var _open = ogg_file.open(path, File.READ)
 	var bytes := ogg_file.get_buffer(ogg_file.get_len())
+
 	var stream := AudioStreamOGGVorbis.new()
 	stream.data = bytes
 	stream.loop = true
 	stream.loop_offset = loop
 	if stream.data == null:
 		return
+
 	ogg_file.close()
+
 	self.stream = stream
 	play()
 	print("Audio Loaded!")
