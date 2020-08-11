@@ -1,6 +1,6 @@
 extends GameObject
 
-var platforms := []
+var platforms : Array = []
 var delta_angle := PI/2
 var time_alive := 0.0
 
@@ -11,14 +11,17 @@ var radius : float = 2
 
 var speed : float = 2
 
+var platform_count := 4
+
 func _set_properties():
-	savable_properties = ["parts", "speed", "radius"]
-	editable_properties = ["parts", "speed", "radius"]
+	savable_properties = ["parts", "speed", "radius", "platform_count"]
+	editable_properties = ["parts", "speed", "radius", "platform_count"]
 	
 func _set_property_values():
 	set_property("parts", parts)
 	set_property("speed", speed)
 	set_property("radius", radius)
+	set_property("platform_count", platform_count)
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
@@ -35,12 +38,30 @@ func _process(_delta):
 	if parts != last_parts:
 		for platform in platforms:
 			platform.set_parts(parts)
+		last_parts = parts
+	
+	if platform_count!=platforms.size():
+		if platform_count>platforms.size():
+			var scene := load("res://scenes/actors/objects/touch_lift_platform/touch_lift_platform.tscn")
+			
+			var delta_count = platform_count-platforms.size()
+			for _i in range(delta_count):
+				var instance = scene.instance()
+				platforms.append(instance)
+				add_child(instance)
+				
+		elif platform_count<platforms.size():
+			var delta_count = platforms.size() - platform_count
+			for _i in range(delta_count):
+				remove_child(platforms.pop_back())
+				
+		delta_angle = (PI * 2) / platform_count
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var scene := load("res://scenes/actors/objects/touch_lift_platform/touch_lift_platform.tscn")
 	
-	for _i in range(4):
+	for _i in range(platform_count):
 		var instance = scene.instance()
 		platforms.append(instance)
 		add_child(instance)

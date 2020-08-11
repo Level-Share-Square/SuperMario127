@@ -266,23 +266,18 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	collected_shine.get_node("ShineParticles").emitting = false
 
 var prev_is_grounded := false
-var recalculate_grounded := false
 func is_grounded() -> bool:
-	if recalculate_grounded:
-		var raycast_node := ground_check
-		raycast_node.cast_to = Vector2(0, 26)
-		if !ground_collision_dive.disabled:
-			raycast_node = ground_check_dive
-			raycast_node.cast_to = Vector2(0, 7.5)
-		
-		raycast_node.force_raycast_update()
-		var new_is_grounded := raycast_node.is_colliding() and velocity.y >= 0
-		if !new_is_grounded and prev_is_grounded and velocity.y > 0:
-			velocity.y = 0
-		
-		prev_is_grounded = new_is_grounded
-		
-		#recalculate_grounded = false
+	var raycast_node := ground_check
+	raycast_node.cast_to = Vector2(0, 26)
+	if !ground_collision_dive.disabled:
+		raycast_node = ground_check_dive
+		raycast_node.cast_to = Vector2(0, 7.5)
+	
+	var new_is_grounded := raycast_node.is_colliding() and velocity.y >= 0
+	if !new_is_grounded and prev_is_grounded and velocity.y > 0:
+		velocity.y = 0
+	
+	prev_is_grounded = new_is_grounded
 	return prev_is_grounded
 
 func is_ceiling() -> bool:
@@ -307,7 +302,6 @@ func show() -> void:
 
 # new_state is of type State, however adding static typing would cause a cyclic dependency
 func set_state(new_state: Node, delta: float) -> void:
-	recalculate_grounded = true
 	last_state = state
 	state = null
 	if last_state != null:
@@ -445,8 +439,6 @@ func _physics_process(delta: float) -> void:
 	
 	if state and state.name == "NoActionState":
 		return
-	
-	recalculate_grounded = true
 	
 	bottom_pos.position = bottom_pos_offset if ground_collision_dive.disabled else bottom_pos_dive_offset
 	var is_in_platform := false
