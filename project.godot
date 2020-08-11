@@ -222,7 +222,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "LevelInfo",
 "language": "GDScript",
-"path": "res://classes/Levelinfo.gd"
+"path": "res://classes/LevelInfo.gd"
 }, {
 "base": "Reference",
 "class": "LevelObject",

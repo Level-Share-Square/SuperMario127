@@ -22,28 +22,28 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id=15]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id=16]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.75, 0.75, 0.75, 1 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id=17]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.61, 0.61, 0.61, 1 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id=14]
+[sub_resource type="StyleBoxFlat" id=5]
 content_margin_right = 8.0
 bg_color = Color( 0.121569, 0.180392, 0.517647, 1 )
 corner_radius_top_left = 16
@@ -51,18 +51,18 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="Theme" id=18]
+[sub_resource type="Theme" id=6]
 VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/increment = null
 VScrollBar/icons/increment_highlight = null
-VScrollBar/styles/grabber = SubResource( 15 )
-VScrollBar/styles/grabber_highlight = SubResource( 16 )
-VScrollBar/styles/grabber_pressed = SubResource( 17 )
-VScrollBar/styles/scroll = SubResource( 14 )
-VScrollBar/styles/scroll_focus = SubResource( 14 )
+VScrollBar/styles/grabber = SubResource( 2 )
+VScrollBar/styles/grabber_highlight = SubResource( 3 )
+VScrollBar/styles/grabber_pressed = SubResource( 4 )
+VScrollBar/styles/scroll = SubResource( 5 )
+VScrollBar/styles/scroll_focus = SubResource( 5 )
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.0805, 0.120925, 0.35, 1 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
@@ -71,7 +71,7 @@ corner_radius_bottom_left = 16
 expand_margin_left = 4.0
 expand_margin_right = 4.0
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=8]
 content_margin_left = 16.0
 content_margin_right = 16.0
 content_margin_top = 8.0
@@ -82,21 +82,37 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=9]
 size = 20
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=4]
-size = 24
+[sub_resource type="StyleBoxFlat" id=12]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 1, 1, 1, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="DynamicFont" id=18]
+size = 20
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=11]
+size = 20
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=17]
 size = 24
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=13]
 content_margin_left = 16.0
 content_margin_right = 16.0
 content_margin_top = 2.0
@@ -107,15 +123,7 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="DynamicFont" id=7]
-size = 24
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=8]
-size = 24
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=14]
 size = 24
 font_data = ExtResource( 3 )
 
@@ -143,137 +151,202 @@ margin_left = 32.0
 margin_top = 32.0
 margin_right = 736.0
 margin_bottom = 400.0
+custom_constants/separation = 17
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-margin_right = 286.0
+margin_right = 339.0
 margin_bottom = 368.0
 size_flags_horizontal = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-margin_right = 286.0
-margin_bottom = 320.0
+[node name="LevelListPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 339.0
+margin_bottom = 324.0
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 1 )
 
-[node name="LevelList" type="ItemList" parent="MarginContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+[node name="LevelList" type="ItemList" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 278.0
-margin_bottom = 312.0
+margin_right = 331.0
+margin_bottom = 316.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = SubResource( 18 )
-custom_styles/selected_focus = SubResource( 10 )
-custom_styles/bg_focus = SubResource( 2 )
-custom_styles/selected = SubResource( 10 )
-custom_styles/bg = SubResource( 2 )
-custom_fonts/font = SubResource( 3 )
+theme = SubResource( 6 )
+custom_styles/selected_focus = SubResource( 7 )
+custom_styles/bg_focus = SubResource( 8 )
+custom_styles/selected = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="LevelCodePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+visible = false
+margin_top = 164.0
+margin_right = 339.0
+margin_bottom = 324.0
+size_flags_vertical = 11
+custom_styles/panel = SubResource( 1 )
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 331.0
+margin_bottom = 152.0
+custom_styles/panel = SubResource( 8 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer"]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 307.0
+margin_bottom = 136.0
+custom_constants/separation = 7
+
+[node name="TextEdit" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer"]
+margin_right = 291.0
+margin_bottom = 34.0
+size_flags_vertical = 3
+custom_styles/normal = SubResource( 12 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+wrap_enabled = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer"]
+margin_top = 41.0
+margin_right = 291.0
+margin_bottom = 81.0
+
+[node name="ButtonNew" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_right = 143.0
+margin_bottom = 40.0
+size_flags_horizontal = 7
+custom_fonts/font = SubResource( 18 )
+text = "New"
+
+[node name="ButtonImport" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 147.0
+margin_right = 291.0
+margin_bottom = 40.0
+size_flags_horizontal = 7
+size_flags_vertical = 9
+custom_fonts/font = SubResource( 18 )
+text = "Import"
+
+[node name="ButtonCancel" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 88.0
+margin_right = 291.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 9
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
+custom_fonts/font = SubResource( 18 )
+text = "Cancel"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-margin_top = 324.0
-margin_right = 286.0
+margin_top = 328.0
+margin_right = 339.0
 margin_bottom = 368.0
 
 [node name="ButtonBack" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
-margin_right = 87.0
-margin_bottom = 44.0
+margin_right = 77.0
+margin_bottom = 40.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/normal = ExtResource( 5 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 11 )
 text = "Back"
 
 [node name="ButtonAdd" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
-margin_left = 91.0
-margin_right = 168.0
-margin_bottom = 44.0
+margin_left = 81.0
+margin_right = 154.0
+margin_bottom = 40.0
 size_flags_horizontal = 8
-custom_fonts/font = ExtResource( 9 )
+custom_fonts/font = SubResource( 11 )
 text = "Add"
 
-[node name="LevelInfo" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
-margin_left = 290.0
-margin_right = 704.0
-margin_bottom = 368.0
-size_flags_horizontal = 3
-custom_constants/margin_right = 16
-custom_constants/margin_left = 16
+[node name="ButtonCopyCode" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 158.0
+margin_right = 339.0
+margin_bottom = 40.0
+size_flags_horizontal = 11
+custom_fonts/font = SubResource( 11 )
+text = "Copy Code"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
-margin_left = 16.0
-margin_right = 398.0
+[node name="LevelInfo" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 356.0
+margin_right = 704.0
 margin_bottom = 368.0
 custom_constants/separation = 11
 
-[node name="LevelThumbnail" type="MarginContainer" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer"]
-margin_right = 382.0
-margin_bottom = 122.0
+[node name="LevelThumbnail" type="MarginContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
+margin_right = 348.0
+margin_bottom = 124.0
 size_flags_vertical = 3
 custom_constants/margin_right = 60
 custom_constants/margin_top = 0
 custom_constants/margin_left = 60
 custom_constants/margin_bottom = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelThumbnail"]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail"]
 margin_left = 60.0
-margin_right = 322.0
-margin_bottom = 122.0
+margin_right = 288.0
+margin_bottom = 124.0
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 1 )
 
-[node name="ThumbnailImage" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelThumbnail/PanelContainer"]
+[node name="ThumbnailImage" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 254.0
-margin_bottom = 114.0
+margin_right = 220.0
+margin_bottom = 116.0
 size_flags_vertical = 3
 texture = ExtResource( 6 )
 expand = true
 
-[node name="LevelName" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer"]
-margin_top = 133.0
-margin_right = 382.0
-margin_bottom = 194.0
+[node name="LevelName" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo"]
+margin_top = 135.0
+margin_right = 348.0
+margin_bottom = 197.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
-custom_fonts/font = SubResource( 5 )
-text = "Level Name Really Really Long Long"
+custom_fonts/font = SubResource( 17 )
+text = "Really Super Duper Long Level Name Test"
 align = 1
 autowrap = true
 clip_text = true
 max_lines_visible = 2
 
-[node name="LevelScore" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer"]
-margin_top = 205.0
-margin_right = 382.0
-margin_bottom = 313.0
+[node name="LevelScore" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
+margin_top = 208.0
+margin_right = 348.0
+margin_bottom = 316.0
 size_flags_vertical = 4
 
-[node name="ShinesAndStarCoins" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore"]
-margin_right = 382.0
+[node name="ShinesAndStarCoins" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
+margin_right = 348.0
 margin_bottom = 52.0
 size_flags_vertical = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/ShinesAndStarCoins"]
-margin_right = 189.0
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins"]
+margin_right = 172.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 13 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/ShinesAndStarCoins/PanelContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins/PanelContainer"]
 margin_left = 16.0
 margin_top = 2.0
-margin_right = 173.0
+margin_right = 156.0
 margin_bottom = 50.0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/ShinesAndStarCoins/PanelContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins/PanelContainer/HBoxContainer2"]
 margin_right = 48.0
 margin_bottom = 48.0
 texture = ExtResource( 7 )
@@ -281,32 +354,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/ShinesAndStarCoins/PanelContainer/HBoxContainer2"]
-margin_left = 118.0
+[node name="ShineProgressLabel" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins/PanelContainer/HBoxContainer2"]
+margin_left = 101.0
 margin_top = 10.0
-margin_right = 157.0
+margin_right = 140.0
 margin_bottom = 38.0
 size_flags_horizontal = 10
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 14 )
 text = "0/0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/ShinesAndStarCoins"]
-margin_left = 193.0
-margin_right = 382.0
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins"]
+margin_left = 176.0
+margin_right = 348.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 13 )
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/ShinesAndStarCoins/PanelContainer2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins/PanelContainer2"]
 margin_left = 16.0
 margin_top = 2.0
-margin_right = 173.0
+margin_right = 156.0
 margin_bottom = 50.0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/ShinesAndStarCoins/PanelContainer2/HBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins/PanelContainer2/HBoxContainer3"]
 margin_right = 48.0
 margin_bottom = 48.0
 texture = ExtResource( 8 )
@@ -314,37 +387,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/ShinesAndStarCoins/PanelContainer2/HBoxContainer3"]
-margin_left = 118.0
+[node name="StarCoinProgressLabel" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins/PanelContainer2/HBoxContainer3"]
+margin_left = 101.0
 margin_top = 10.0
-margin_right = 157.0
+margin_right = 140.0
 margin_bottom = 38.0
 size_flags_horizontal = 10
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 14 )
 text = "0/0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CoinsAndTime" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore"]
+[node name="CoinsAndTime" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
 margin_top = 56.0
-margin_right = 382.0
+margin_right = 348.0
 margin_bottom = 108.0
 size_flags_horizontal = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/CoinsAndTime"]
-margin_right = 189.0
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime"]
+margin_right = 172.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 13 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/CoinsAndTime/PanelContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime/PanelContainer"]
 margin_left = 16.0
 margin_top = 2.0
-margin_right = 173.0
+margin_right = 156.0
 margin_bottom = 50.0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/CoinsAndTime/PanelContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime/PanelContainer/HBoxContainer2"]
 margin_right = 48.0
 margin_bottom = 48.0
 texture = ExtResource( 8 )
@@ -352,32 +425,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/CoinsAndTime/PanelContainer/HBoxContainer2"]
-margin_left = 142.0
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime/PanelContainer/HBoxContainer2"]
+margin_left = 125.0
 margin_top = 10.0
-margin_right = 157.0
+margin_right = 140.0
 margin_bottom = 38.0
 size_flags_horizontal = 10
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 14 )
 text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/CoinsAndTime"]
-margin_left = 193.0
-margin_right = 382.0
+[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime"]
+margin_left = 176.0
+margin_right = 348.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 13 )
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/CoinsAndTime/PanelContainer2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime/PanelContainer2"]
 margin_left = 16.0
 margin_top = 2.0
-margin_right = 173.0
+margin_right = 156.0
 margin_bottom = 50.0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/CoinsAndTime/PanelContainer2/HBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime/PanelContainer2/HBoxContainer3"]
 margin_right = 48.0
 margin_bottom = 48.0
 texture = ExtResource( 10 )
@@ -385,19 +458,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/CoinsAndTime/PanelContainer2/HBoxContainer3"]
-margin_left = 55.0
-margin_top = 10.0
-margin_right = 157.0
-margin_bottom = 38.0
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime/PanelContainer2/HBoxContainer3"]
+margin_left = 52.0
+margin_top = 12.0
+margin_right = 140.0
+margin_bottom = 36.0
 size_flags_horizontal = 10
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 11 )
 text = "99:99.99"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonTimeScores" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/LevelScore/CoinsAndTime" instance=ExtResource( 2 )]
+[node name="ButtonTimeScores" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime" instance=ExtResource( 2 )]
 visible = false
 margin_left = 293.0
 margin_right = 460.0
@@ -406,50 +479,58 @@ size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 9 )
 text = "Time Scores"
 
-[node name="ControlButtons" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer"]
-margin_top = 324.0
-margin_right = 382.0
-margin_bottom = 368.0
+[node name="ControlButtons" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
+margin_top = 327.0
+margin_right = 348.0
+margin_bottom = 367.0
 size_flags_horizontal = 6
 size_flags_vertical = 8
 
-[node name="ButtonPlay" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/ControlButtons" instance=ExtResource( 2 )]
-margin_right = 84.0
-margin_bottom = 44.0
+[node name="ButtonPlay" parent="MarginContainer/HBoxContainer/LevelInfo/ControlButtons" instance=ExtResource( 2 )]
+margin_right = 74.0
+margin_bottom = 40.0
 size_flags_horizontal = 10
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 11 )
 text = "Play"
 
-[node name="ButtonEdit" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/ControlButtons" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_right = 167.0
-margin_bottom = 44.0
+[node name="ButtonEdit" parent="MarginContainer/HBoxContainer/LevelInfo/ControlButtons" instance=ExtResource( 2 )]
+margin_left = 78.0
+margin_right = 152.0
+margin_bottom = 40.0
 size_flags_horizontal = 0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 11 )
 text = "Edit"
 
-[node name="ButtonDelete" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/ControlButtons" instance=ExtResource( 2 )]
-margin_left = 171.0
-margin_right = 280.0
-margin_bottom = 44.0
+[node name="ButtonDelete" parent="MarginContainer/HBoxContainer/LevelInfo/ControlButtons" instance=ExtResource( 2 )]
+margin_left = 156.0
+margin_right = 254.0
+margin_bottom = 40.0
 size_flags_horizontal = 2
 size_flags_vertical = 8
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/normal = ExtResource( 5 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 11 )
 text = "Delete"
 
-[node name="ButtonReset" parent="MarginContainer/HBoxContainer/LevelInfo/VBoxContainer/ControlButtons" instance=ExtResource( 2 )]
-margin_left = 284.0
-margin_right = 382.0
-margin_bottom = 44.0
+[node name="ButtonReset" parent="MarginContainer/HBoxContainer/LevelInfo/ControlButtons" instance=ExtResource( 2 )]
+margin_left = 258.0
+margin_right = 348.0
+margin_bottom = 40.0
 size_flags_horizontal = 2
 size_flags_vertical = 8
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/normal = ExtResource( 5 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 11 )
 text = "Reset"
+
+[node name="SpeedrunTimesPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+visible = false
+margin_left = 357.0
+margin_right = 704.0
+margin_bottom = 368.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.02

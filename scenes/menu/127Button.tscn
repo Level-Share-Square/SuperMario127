@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=4]
 [ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=5]
 [ext_resource path="res://scenes/menu/127Button.gd" type="Script" id=6]
-
+[ext_resource path="res://assets/styles/ButtonStyleDisabled.tres" type="StyleBox" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -18,6 +18,7 @@ margin_bottom = 55.0
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 7 )
 custom_styles/normal = ExtResource( 5 )
 custom_fonts/font = SubResource( 1 )
 shortcut_in_tooltip = false
