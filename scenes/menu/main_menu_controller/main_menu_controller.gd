@@ -18,11 +18,11 @@ func _ready() -> void:
 		# warning-ignore: return_value_discarded
 		screen.connect("screen_change", self, "change_screen")
 
-	# for now, the title screen will be the default active screen, a way of loading a specific default should be added later
-	inactive_screens.remove_child(title_screen)
-	active_screen.add_child(title_screen)
+	# for now, the main menu will be the default active screen, a way of loading a specific default should be added later
+	inactive_screens.remove_child(main_menu_screen)
+	active_screen.add_child(main_menu_screen)
 
-func change_screen(current_screen_name : String, new_screen_name : String, transition_id : int = 0):
+func change_screen(current_screen_name : String, new_screen_name : String, _transition_id : int = 0):
 	var current_screen = get(current_screen_name)
 	var new_screen = get(new_screen_name)
 

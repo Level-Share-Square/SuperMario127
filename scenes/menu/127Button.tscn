@@ -5,7 +5,8 @@
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=4]
 [ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=5]
-[ext_resource path="res://scenes/127Button.gd" type="Script" id=6]
+[ext_resource path="res://scenes/menu/127Button.gd" type="Script" id=6]
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
