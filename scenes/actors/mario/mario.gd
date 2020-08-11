@@ -335,7 +335,7 @@ func set_state_by_name(name: String, delta: float) -> void:
 	if get_state_node(name) != null:
 		set_state(get_state_node(name), delta)
 		
-func add_nozzle(new_nozzle: Node) -> void:
+func add_nozzle(new_nozzle: String) -> void:
 	if !new_nozzle in CurrentLevelData.level_data.vars.nozzles_collected:
 		CurrentLevelData.level_data.vars.nozzles_collected.append(new_nozzle)
 
@@ -344,7 +344,7 @@ func get_nozzle_node(name: String) -> Node:
 		return nozzles_node.get_node(name)
 	return null
 
-func set_nozzle(new_nozzle, change_index = true) -> void:
+func set_nozzle(new_nozzle: String, change_index := true) -> void:
 	fludd_sound.stop()
 	fludd_charge_sound.stop()
 	if nozzle != null:
