@@ -267,6 +267,10 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 
 var prev_is_grounded := false
 func is_grounded() -> bool:
+	# "Death barrier", can only be reached by collecting a shine sprite
+	if position.y > (level_bounds.end.y * 32) + 256:
+		return true
+	
 	var raycast_node := ground_check
 	raycast_node.cast_to = Vector2(0, 26)
 	if !ground_collision_dive.disabled:
@@ -660,7 +664,8 @@ func _physics_process(delta: float) -> void:
 
 	# Boundaries
 	if position.y > (level_bounds.end.y * 32) + 128:
-		if PlayerSettings.other_player_id == -1 or PlayerSettings.my_player_index == player_id:
+		if (PlayerSettings.other_player_id == -1 or PlayerSettings.my_player_index == player_id)\
+		and controllable: # If not controllable, the player is (likely) collecting a shine
 			kill("fall")
 	if position.x < level_bounds.position.x * 32:
 		position.x = level_bounds.position.x * 32
