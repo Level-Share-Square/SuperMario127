@@ -479,7 +479,7 @@ WindowDialog/styles/panel = null
 visible = false
 margin_left = 165.0
 margin_top = 130.0
-margin_right = 1218.0
+margin_right = 1267.0
 margin_bottom = 680.0
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 0
@@ -512,9 +512,9 @@ __meta__ = {
 }
 
 [node name="CloseButton" type="TextureButton" parent="."]
-margin_left = 888.65
+margin_left = 937.65
 margin_top = 12.953
-margin_right = 1043.65
+margin_right = 1092.65
 margin_bottom = 93.953
 rect_scale = Vector2( 0.95, 0.95 )
 texture_normal = ExtResource( 5 )
@@ -536,7 +536,7 @@ volume_db = -10.0
 anchor_bottom = 0.06
 margin_left = 17.4044
 margin_top = 104.0
-margin_right = 1037.4
+margin_right = 1087.4
 margin_bottom = 491.0
 rect_clip_content = true
 __meta__ = {
@@ -580,7 +580,7 @@ volume_db = -10.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Contents"]
 margin_left = 360.0
-margin_right = 1021.0
+margin_right = 1070.0
 margin_bottom = 420.0
 rect_clip_content = false
 theme = SubResource( 8 )
@@ -590,7 +590,7 @@ __meta__ = {
 }
 
 [node name="GridContainer" type="GridContainer" parent="Contents/ScrollContainer"]
-margin_right = 661.0
+margin_right = 710.0
 margin_bottom = 420.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
