@@ -7,21 +7,26 @@ var time_alive := 0.0
 var parts := 4
 var last_parts := 4
 
+var color := Color.green
+var last_color := Color.green
+
 var radius : float = 2
+var last_radius : float = 2
 
 var speed : float = 2
 
 var platform_count := 4
 
 func _set_properties():
-	savable_properties = ["parts", "speed", "radius", "platform_count"]
-	editable_properties = ["parts", "speed", "radius", "platform_count"]
+	savable_properties = ["parts", "speed", "radius", "platform_count", "color"]
+	editable_properties = ["parts", "speed", "radius", "platform_count", "color"]
 	
 func _set_property_values():
 	set_property("parts", parts)
 	set_property("speed", speed)
 	set_property("radius", radius)
 	set_property("platform_count", platform_count)
+	set_property("color", color)
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
@@ -56,6 +61,27 @@ func _process(_delta):
 				remove_child(platforms.pop_back())
 				
 		delta_angle = (PI * 2) / platform_count
+		
+	if radius != last_radius:
+		update() #redraw points
+		last_radius = radius
+		
+	if color != last_color:
+		for platform in platforms:
+			platform.recolor_sprite.self_modulate = color
+			#end_sprite_node.get_child(1).self_modulate = color
+		last_color = color
+
+func _draw():
+	if(radius == 0):
+		return
+	var radius_vector = Vector2(radius*32, 0.0)
+	
+	var delta_rad = 2*PI/ceil(radius*32*2*PI/20.0) #so the points are at most 20 curve pixels appart
+	var rad := 0.0
+	while rad < 2.0 * PI:
+		draw_circle(radius_vector.rotated(rad), 2, Color.darkgray)
+		rad += delta_rad
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -75,3 +101,5 @@ func _physics_process(delta):
 		else:
 			platform.position = Vector2(radius * 32, 0).rotated(angle)
 		angle += delta_angle
+		
+		delta_angle = (PI * 2) / platform_count

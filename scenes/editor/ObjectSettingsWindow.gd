@@ -60,13 +60,12 @@ func open_object(object_to_open: GameObject):
 		edit_preview_object(key, object_to_open[key])
 		grid_container_node.add_child(property)
 		
-#	Uncomment when necessary =>		
-#	for _index in range(2): # this is so scrolling actually works properly
-#		var blank_property = property_scene.instance()
-#		blank_property.modulate.a = 0
-#		blank_property.set_process(false)
-#		blank_property.object = object_to_open
-#		blank_property.key = "position"
-#		grid_container_node.add_child(blank_property)
+	for _index in range(2): # this is so scrolling actually works properly
+		var blank_property = property_scene.instance()
+		blank_property.modulate.a = 0
+		blank_property.set_process(false)
+		blank_property.object = object_to_open
+		blank_property.key = "position"
+		grid_container_node.add_child(blank_property)
 	open()
 	

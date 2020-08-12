@@ -45,6 +45,7 @@ tracks/2/keys = {
 }
 
 [node name="TouchLift" type="Node2D"]
+z_index = -2
 script = ExtResource( 2 )
 
 [node name="Path2D" type="Path2D" parent="."]

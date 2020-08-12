@@ -6,6 +6,9 @@ extends GameObject
 var parts := 4
 var last_parts := 4
 
+var color := Color.green
+var last_color := Color.green
+
 const MT_BACK_FORTH = 0
 const MT_RESET = 1
 const MT_ONCE = 2
@@ -23,8 +26,8 @@ var max_speed := 1.0
 var curve = null
 
 func _set_properties():
-	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start"]
-	editable_properties = ["parts", "max_speed", "end_position", "move_type", "touch_start"]
+	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color"]
+	editable_properties = ["parts", "max_speed", "end_position", "move_type", "touch_start", "color"]
 	
 func _set_property_values():
 	set_property("parts", parts)
@@ -33,6 +36,7 @@ func _set_property_values():
 	set_property("end_position", end_position)
 	set_property("move_type", move_type)
 	set_property("touch_start", touch_start)
+	set_property("color", color)
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
@@ -50,7 +54,9 @@ func _process(_delta):
 		platform.set_parts(parts)
 		if(mode==1):
 			set_sprite_parts(start_sprite_node.get_child(0))
+			set_sprite_parts(start_sprite_node.get_child(1))
 			set_sprite_parts(end_sprite_node.get_child(0))
+			set_sprite_parts(end_sprite_node.get_child(1))
 		last_parts = parts
 	if curve != path.curve:
 		path.curve = curve
@@ -63,6 +69,13 @@ func _process(_delta):
 		end_sprite_node.position = path.curve.get_point_position(last_index)
 		
 		last_end_position = end_position
+		
+	if color != last_color:
+		platform_sprite_recolor.self_modulate = color
+		if(mode==1):
+			start_sprite_node.get_child(1).self_modulate = color
+			end_sprite_node.get_child(1).self_modulate = color
+		last_color = color
 
 
 #-------------------------------- platform logic -----------------------
@@ -72,6 +85,7 @@ onready var platform_touch_area = $TouchLiftPlatform/FloorTouchArea
 onready var path_follower = $Path2D/PathFollow2D
 onready var path = $Path2D
 onready var platform_sprite = $TouchLiftPlatform/Sprite
+onready var platform_sprite_recolor = $TouchLiftPlatform/SpriteRecolor
 
 var speed := 1.0
 var loop_offset := 0.0
@@ -84,7 +98,7 @@ onready var start_sprite_node : Node2D
 onready var end_sprite_node : Node2D
 
 const line_color = Color(1, 1, 1, 0.5)
-const modulate_color : Color = Color(1, 1, 1, 0.5)
+const transparent_color : Color = Color(1, 1, 1, 0.5)
 
 onready var left_width = platform_sprite.patch_margin_left
 onready var right_width = platform_sprite.patch_margin_right
@@ -109,16 +123,18 @@ func _ready():
 	platform.set_parts(parts)
 	
 	if(mode==1):
-		platform.modulate = modulate_color
+		platform.modulate = transparent_color
 		
 		start_sprite_node = Node2D.new()
 		start_sprite_node.add_child(platform_sprite.duplicate())
+		start_sprite_node.add_child(platform_sprite_recolor.duplicate())
 		#end_sprite.add_child(platform_sprite)
 		add_child(start_sprite_node)
 		
 		end_sprite_node = Node2D.new()
 		end_sprite_node.add_child(platform_sprite.duplicate())
-		end_sprite_node.modulate = modulate_color
+		end_sprite_node.add_child(platform_sprite_recolor.duplicate())
+		end_sprite_node.modulate = transparent_color
 		add_child(end_sprite_node)
 		
 		set_property("end_position", path.curve.get_point_position(path.curve.get_point_count()-1)/32)
@@ -130,6 +146,9 @@ func set_sprite_parts(sprite):
 func _draw():
 	if(mode==1):
 		draw_polyline(path.curve.get_baked_points(), line_color, 2.0)
+	else:
+		for offset in range(0,path.curve.get_baked_length(), 10.0):
+			draw_circle(path.curve.interpolate_baked(offset), 2, Color.darkgray)
 
 func _physics_process(delta):
 	if(!activated):
