@@ -207,12 +207,13 @@ margin_right = 307.0
 margin_bottom = 136.0
 custom_constants/separation = 7
 
-[node name="TextEdit" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer"]
+[node name="LevelCodeEntry" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer"]
 margin_right = 291.0
 margin_bottom = 34.0
 size_flags_vertical = 3
 custom_styles/normal = SubResource( 12 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+context_menu_enabled = false
 wrap_enabled = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer"]
@@ -220,14 +221,14 @@ margin_top = 41.0
 margin_right = 291.0
 margin_bottom = 81.0
 
-[node name="ButtonNew" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+[node name="ButtonNewLevel" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
 margin_right = 143.0
 margin_bottom = 40.0
 size_flags_horizontal = 7
 custom_fonts/font = SubResource( 18 )
 text = "New"
 
-[node name="ButtonImport" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+[node name="ButtonCodeImport" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
 margin_left = 147.0
 margin_right = 291.0
 margin_bottom = 40.0
@@ -236,7 +237,7 @@ size_flags_vertical = 9
 custom_fonts/font = SubResource( 18 )
 text = "Import"
 
-[node name="ButtonCancel" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer" instance=ExtResource( 2 )]
+[node name="ButtonCodeCancel" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 88.0
 margin_right = 291.0
 margin_bottom = 128.0

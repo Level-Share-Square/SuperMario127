@@ -6,6 +6,8 @@ const INT_MAX = 9223372036854775807
 const ID_SHINE = 2 
 const ID_STAR_COIN = -1 #get the correct id later
 
+const VERSION : String = "0.0.1"
+
 # this class stores all the info and savedata relating to a level that can be played from the level list 
 
 var level_code : String # used for saving the level to disk
@@ -17,12 +19,14 @@ var level_data : LevelData setget set_level_data, get_level_data
 # level info
 var level_name : String = ""
 var level_background : int = 0 
-var shine_count : int = 0 
+var shine_count : int = 0 #might change these to properties that return shine_details.size() and such
+var shine_details : Array = []
 var star_coin_count : int = 0
+var star_coin_details : Array = []
 
 # save data 
-var collected_shines : int = 0 # just realised these need to be Arrays or something, oops
-var collected_star_coins : int = 0
+var collected_shines : Array = [] # int array (int is the shine number)
+var collected_star_coins : Array = [] # int array
 var coin_score : int = 0
 var time_scores : Array = [] # time_scores should probably be stored as the sum of delta while playing
 
@@ -72,6 +76,7 @@ static func reset_save_data(level_info) -> void:
 func get_saveable_dictionary() -> Dictionary:
 	var save_dictionary : Dictionary = \
 	{
+		"VERSION": VERSION,
 		"level_code": level_code,
 		"level_name": level_name,
 		"level_background": level_background,
