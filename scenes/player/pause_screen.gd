@@ -11,8 +11,9 @@ onready var character2_node = get_node(character2_node_path)
 onready var topbar = $Top
 
 onready var bottombar = $Bottom
-onready var resume_button = $Bottom/ResumeButton
-onready var retry_button = $Bottom/RetryButton
+onready var resume_button = $Bottom/Buttons/ResumeButton
+onready var retry_button = $Bottom/Buttons/RetryButton
+onready var quit_button = $Bottom/Buttons/QuitButton
 onready var darken = $Darken
 
 onready var shine_info = $ShineInfo
@@ -29,6 +30,17 @@ onready var chat_node = get_node(chat_path)
 
 var can_pause := true
 var paused := false
+
+func _ready():
+	var _connect = resume_button.connect("pressed", self, "toggle_pause")
+	_connect = retry_button.connect("pressed", self, "retry")
+	_connect = quit_button.connect("pressed", self, "quit_to_menu")
+	FocusCheck.is_ui_focused = false
+	
+	darken.modulate = Color(0, 0, 0, 0)
+	topbar.rect_position = Vector2(0, -70)
+	bottombar.rect_position = Vector2(768, 500)
+	shine_info.rect_scale = Vector2(0, 0)
 
 func _unhandled_input(event):
 	if can_pause and event.is_action_pressed("pause") and !(character_node.dead or (PlayerSettings.number_of_players != 1 and character2_node.dead)):
@@ -119,12 +131,5 @@ func retry():
 	else:
 		character2_node.kill("reload")
 
-func _ready():
-	var _connect = resume_button.connect("pressed", self, "toggle_pause")
-	var _connect2 = retry_button.connect("pressed", self, "retry")
-	FocusCheck.is_ui_focused = false
-	
-	darken.modulate = Color(0, 0, 0, 0)
-	topbar.rect_position = Vector2(0, -70)
-	bottombar.rect_position = Vector2(768, 500)
-	shine_info.rect_scale = Vector2(0, 0)
+func quit_to_menu() -> void:
+	MenuVariables.quit_to_menu("levels_screen")

@@ -28,6 +28,8 @@ func _ready():
 	load_in(data, data.areas[CurrentLevelData.area])
 	music.character = get_node(character)
 	music.character2 = get_node(character2)
+	if !music.playing:
+		music.play() # make sure the music will play even if it's stopped prior to loading the player
 
 	can_collect_coins.append(get_node(character))
 	if PlayerSettings.number_of_players == 2:

@@ -1,7 +1,7 @@
 # TODO: 
 # Shine Dance frames for fludd 
 # Update ambient sound volume to consider both players (check cannon audio source script)
-# Prevent pausing after collecting a star
+# Prvent pausing after collecting a star
 extends GameObject
 
 export var normal_frames : SpriteFrames
@@ -198,7 +198,8 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 	if mode_switcher_button.invisible: #if not running through the editor, play the transition
 		music.bus = music.play_bus 
 		music.stop_temporary_music(MUSIC_TRANSITION_TIME_PLAY_MODE)
-		transitions.reload_scene(character.cutout_shine, character.cutout_circle, transitions.DEFAULT_TRANSITION_TIME, 0, true)
+		MenuVariables.quit_to_menu("levels_screen")
+		#transitions.reload_scene(character.cutout_shine, character.cutout_circle, transitions.DEFAULT_TRANSITION_TIME, 0, true)
 	else:
 		music.bus = music.edit_bus
 		music.stop_temporary_music()

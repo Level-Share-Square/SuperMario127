@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scenes/menu/levels_screen/levels_screen.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -106,6 +106,10 @@ font_data = ExtResource( 3 )
 size = 20
 font_data = ExtResource( 3 )
 
+[sub_resource type="DynamicFont" id=20]
+size = 19
+font_data = ExtResource( 3 )
+
 [sub_resource type="DynamicFont" id=17]
 size = 24
 outline_size = 4
@@ -127,13 +131,16 @@ corner_radius_bottom_left = 16
 size = 24
 font_data = ExtResource( 3 )
 
+[sub_resource type="DynamicFont" id=19]
+size = 19
+font_data = ExtResource( 3 )
+
 [node name="LevelsScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false,
-"_edit_vertical_guides_": [ 40.0, 350.0 ]
+"_edit_use_anchors_": false
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -155,12 +162,12 @@ margin_bottom = 400.0
 custom_constants/separation = 17
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-margin_right = 339.0
+margin_right = 343.0
 margin_bottom = 368.0
 size_flags_horizontal = 3
 
 [node name="LevelListPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-margin_right = 339.0
+margin_right = 343.0
 margin_bottom = 324.0
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 1 )
@@ -168,7 +175,7 @@ custom_styles/panel = SubResource( 1 )
 [node name="LevelList" type="ItemList" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 331.0
+margin_right = 335.0
 margin_bottom = 316.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -188,7 +195,7 @@ __meta__ = {
 [node name="LevelCodePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 visible = false
 margin_top = 164.0
-margin_right = 339.0
+margin_right = 340.0
 margin_bottom = 324.0
 size_flags_vertical = 11
 custom_styles/panel = SubResource( 1 )
@@ -196,19 +203,19 @@ custom_styles/panel = SubResource( 1 )
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 331.0
+margin_right = 332.0
 margin_bottom = 152.0
 custom_styles/panel = SubResource( 8 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer"]
 margin_left = 16.0
 margin_top = 8.0
-margin_right = 307.0
+margin_right = 308.0
 margin_bottom = 136.0
 custom_constants/separation = 7
 
 [node name="LevelCodeEntry" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer"]
-margin_right = 291.0
+margin_right = 292.0
 margin_bottom = 34.0
 size_flags_vertical = 3
 custom_styles/normal = SubResource( 12 )
@@ -218,19 +225,19 @@ wrap_enabled = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer"]
 margin_top = 41.0
-margin_right = 291.0
+margin_right = 292.0
 margin_bottom = 81.0
 
 [node name="ButtonNewLevel" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
-margin_right = 143.0
+margin_right = 144.0
 margin_bottom = 40.0
 size_flags_horizontal = 7
 custom_fonts/font = SubResource( 18 )
 text = "New"
 
 [node name="ButtonCodeImport" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
-margin_left = 147.0
-margin_right = 291.0
+margin_left = 148.0
+margin_right = 292.0
 margin_bottom = 40.0
 size_flags_horizontal = 7
 size_flags_vertical = 9
@@ -239,7 +246,7 @@ text = "Import"
 
 [node name="ButtonCodeCancel" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 88.0
-margin_right = 291.0
+margin_right = 292.0
 margin_bottom = 128.0
 size_flags_horizontal = 3
 size_flags_vertical = 9
@@ -252,7 +259,7 @@ text = "Cancel"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 margin_top = 328.0
-margin_right = 339.0
+margin_right = 343.0
 margin_bottom = 368.0
 
 [node name="ButtonBack" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
@@ -277,20 +284,21 @@ text = "Add"
 
 [node name="ButtonCopyCode" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
 margin_left = 158.0
-margin_right = 339.0
+margin_right = 343.0
 margin_bottom = 40.0
 size_flags_horizontal = 11
-custom_fonts/font = SubResource( 11 )
-text = "Copy Code"
+custom_fonts/font = SubResource( 20 )
+text = "Copy Level Code"
 
 [node name="LevelInfo" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-margin_left = 356.0
+margin_left = 360.0
 margin_right = 704.0
 margin_bottom = 368.0
+size_flags_horizontal = 3
 custom_constants/separation = 11
 
 [node name="LevelThumbnail" type="MarginContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
-margin_right = 348.0
+margin_right = 344.0
 margin_bottom = 124.0
 size_flags_vertical = 3
 custom_constants/margin_right = 60
@@ -300,7 +308,7 @@ custom_constants/margin_bottom = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail"]
 margin_left = 60.0
-margin_right = 288.0
+margin_right = 284.0
 margin_bottom = 124.0
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 1 )
@@ -308,7 +316,7 @@ custom_styles/panel = SubResource( 1 )
 [node name="ThumbnailImage" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 220.0
+margin_right = 216.0
 margin_bottom = 116.0
 size_flags_vertical = 3
 texture = ExtResource( 6 )
@@ -316,41 +324,38 @@ expand = true
 
 [node name="LevelName" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo"]
 margin_top = 135.0
-margin_right = 348.0
+margin_right = 344.0
 margin_bottom = 197.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 custom_fonts/font = SubResource( 17 )
-text = "Really Super Duper Long Level Name Test"
 align = 1
 autowrap = true
 clip_text = true
 max_lines_visible = 2
 
-[node name="LevelScore" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
+[node name="LevelScore" type="GridContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
 margin_top = 208.0
-margin_right = 348.0
+margin_right = 344.0
 margin_bottom = 316.0
-size_flags_vertical = 4
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="ShinesAndStarCoins" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
-margin_right = 348.0
-margin_bottom = 52.0
-size_flags_vertical = 5
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins"]
-margin_right = 172.0
+[node name="ShineProgressPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
+margin_right = 170.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 13 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins/PanelContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel"]
 margin_left = 16.0
 margin_top = 2.0
-margin_right = 156.0
+margin_right = 154.0
 margin_bottom = 50.0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins/PanelContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel/HBoxContainer2"]
 margin_right = 48.0
 margin_bottom = 48.0
 texture = ExtResource( 7 )
@@ -358,10 +363,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShineProgressLabel" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins/PanelContainer/HBoxContainer2"]
-margin_left = 101.0
+[node name="ShineProgressLabel" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel/HBoxContainer2"]
+margin_left = 99.0
 margin_top = 10.0
-margin_right = 140.0
+margin_right = 138.0
 margin_bottom = 38.0
 size_flags_horizontal = 10
 custom_fonts/font = SubResource( 14 )
@@ -370,20 +375,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins"]
-margin_left = 176.0
-margin_right = 348.0
+[node name="StarCoinProgressPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
+margin_left = 174.0
+margin_right = 344.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 13 )
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins/PanelContainer2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel"]
 margin_left = 16.0
 margin_top = 2.0
-margin_right = 156.0
+margin_right = 154.0
 margin_bottom = 50.0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins/PanelContainer2/HBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel/HBoxContainer3"]
 margin_right = 48.0
 margin_bottom = 48.0
 texture = ExtResource( 8 )
@@ -391,10 +396,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StarCoinProgressLabel" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShinesAndStarCoins/PanelContainer2/HBoxContainer3"]
-margin_left = 101.0
+[node name="StarCoinProgressLabel" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel/HBoxContainer3"]
+margin_left = 99.0
 margin_top = 10.0
-margin_right = 140.0
+margin_right = 138.0
 margin_bottom = 38.0
 size_flags_horizontal = 10
 custom_fonts/font = SubResource( 14 )
@@ -403,25 +408,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CoinsAndTime" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
+[node name="CoinScorePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
 margin_top = 56.0
-margin_right = 348.0
+margin_right = 170.0
 margin_bottom = 108.0
 size_flags_horizontal = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime"]
-margin_right = 172.0
-margin_bottom = 52.0
-size_flags_horizontal = 3
 custom_styles/panel = SubResource( 13 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime/PanelContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel"]
 margin_left = 16.0
 margin_top = 2.0
-margin_right = 156.0
+margin_right = 154.0
 margin_bottom = 50.0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime/PanelContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel/HBoxContainer2"]
 margin_right = 48.0
 margin_bottom = 48.0
 texture = ExtResource( 8 )
@@ -429,10 +429,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime/PanelContainer/HBoxContainer2"]
-margin_left = 125.0
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel/HBoxContainer2"]
+margin_left = 123.0
 margin_top = 10.0
-margin_right = 140.0
+margin_right = 138.0
 margin_bottom = 38.0
 size_flags_horizontal = 10
 custom_fonts/font = SubResource( 14 )
@@ -441,20 +441,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime"]
-margin_left = 176.0
-margin_right = 348.0
-margin_bottom = 52.0
+[node name="SingleTimeScorePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
+visible = false
+margin_left = 172.0
+margin_top = 56.0
+margin_right = 344.0
+margin_bottom = 108.0
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 13 )
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime/PanelContainer2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel"]
 margin_left = 16.0
 margin_top = 2.0
 margin_right = 156.0
 margin_bottom = 50.0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime/PanelContainer2/HBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel/HBoxContainer3"]
 margin_right = 48.0
 margin_bottom = 48.0
 texture = ExtResource( 10 )
@@ -462,7 +464,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime/PanelContainer2/HBoxContainer3"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel/HBoxContainer3"]
 margin_left = 52.0
 margin_top = 12.0
 margin_right = 140.0
@@ -474,18 +476,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonTimeScores" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinsAndTime" instance=ExtResource( 2 )]
-visible = false
-margin_left = 293.0
-margin_right = 460.0
-margin_bottom = 52.0
+[node name="ButtonTimeScores" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore" instance=ExtResource( 2 )]
+margin_left = 174.0
+margin_top = 56.0
+margin_right = 344.0
+margin_bottom = 108.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 9 )
 text = "Time Scores"
 
 [node name="ControlButtons" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
 margin_top = 327.0
-margin_right = 348.0
+margin_right = 343.0
 margin_bottom = 367.0
 size_flags_horizontal = 6
 size_flags_vertical = 8
@@ -505,22 +507,9 @@ size_flags_horizontal = 0
 custom_fonts/font = SubResource( 11 )
 text = "Edit"
 
-[node name="ButtonDelete" parent="MarginContainer/HBoxContainer/LevelInfo/ControlButtons" instance=ExtResource( 2 )]
-margin_left = 156.0
-margin_right = 254.0
-margin_bottom = 40.0
-size_flags_horizontal = 2
-size_flags_vertical = 8
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/normal = ExtResource( 5 )
-custom_fonts/font = SubResource( 11 )
-text = "Delete"
-
 [node name="ButtonReset" parent="MarginContainer/HBoxContainer/LevelInfo/ControlButtons" instance=ExtResource( 2 )]
-margin_left = 258.0
-margin_right = 348.0
+margin_left = 156.0
+margin_right = 246.0
 margin_bottom = 40.0
 size_flags_horizontal = 2
 size_flags_vertical = 8
@@ -531,10 +520,78 @@ custom_styles/normal = ExtResource( 5 )
 custom_fonts/font = SubResource( 11 )
 text = "Reset"
 
-[node name="SpeedrunTimesPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+[node name="ButtonDelete" parent="MarginContainer/HBoxContainer/LevelInfo/ControlButtons" instance=ExtResource( 2 )]
+margin_left = 250.0
+margin_top = 1.0
+margin_right = 343.0
+margin_bottom = 40.0
+size_flags_horizontal = 2
+size_flags_vertical = 8
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
+custom_fonts/font = SubResource( 19 )
+text = "Delete"
+
+[node name="TimeScorePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
 visible = false
-margin_left = 357.0
-margin_right = 704.0
+margin_left = 673.0
+margin_right = 807.0
 margin_bottom = 368.0
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.02
+size_flags_vertical = 11
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/TimeScorePanel"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 126.0
+margin_bottom = 360.0
+custom_styles/panel = SubResource( 8 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TimeScorePanel/PanelContainer"]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 102.0
+margin_bottom = 344.0
+custom_constants/separation = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemList" type="ItemList" parent="MarginContainer/HBoxContainer/TimeScorePanel/PanelContainer/VBoxContainer"]
+margin_right = 86.0
+margin_bottom = 288.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource( 6 )
+custom_styles/selected_focus = SubResource( 7 )
+custom_styles/bg_focus = SubResource( 8 )
+custom_styles/selected = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+same_column_width = true
+fixed_column_width = 290
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ButtonCloseTimeScore" parent="MarginContainer/HBoxContainer/TimeScorePanel/PanelContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 296.0
+margin_right = 86.0
+margin_bottom = 336.0
+size_flags_vertical = 8
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
+custom_fonts/font = SubResource( 11 )
+text = "Close"

@@ -2,9 +2,9 @@ extends Node
 
 class_name LevelInfo
 
-const INT_MAX = 9223372036854775807
-const ID_SHINE = 2 
-const ID_STAR_COIN = -1 #get the correct id later
+const EMPTY_TIME_SCORE = -1 # idea: what if level creators could manually set this per shine, so there was a preset time to beat?
+const OBJECT_ID_SHINE = 2 
+const OBJECT_ID_STAR_COIN = -1 #get the correct id later
 
 const VERSION : String = "0.0.1"
 
@@ -19,10 +19,15 @@ var level_data : LevelData setget set_level_data, get_level_data
 # level info
 var level_name : String = ""
 var level_background : int = 0 
+
 var shine_count : int = 0 #might change these to properties that return shine_details.size() and such
-var shine_details : Array = []
+var shine_details : Array = [] setget set_shine_details, get_shine_details
+var shine_details_value : Array = []
+
 var star_coin_count : int = 0
-var star_coin_details : Array = []
+# star coins need some sort of invisible property that will identify them uniquely
+var star_coin_details : Array = [] setget set_star_coin_details, get_star_coin_details
+var star_coin_details_value : Array = []
 
 # save data 
 var collected_shines : Array = [] # int array (int is the shine number)
@@ -46,16 +51,18 @@ func _init(passed_level_code : String = "") -> void:
 	for area in level_data.areas:
 		for object in area.objects:
 			match(object.type_id):
-				ID_SHINE:
+				OBJECT_ID_SHINE:
 					shine_count += 1
-				ID_STAR_COIN:
+				OBJECT_ID_STAR_COIN:
 					star_coin_count += 1
 
 	# initialize time scores for each shine
 	for _shine_number in range(shine_count):
-		time_scores.append(INT_MAX)
+		time_scores.append(EMPTY_TIME_SCORE)
 
+# copy the data to both so functions all definitiely work right, idk if this is necessary, idk how gdscript "properties" work 
 func set_level_data(new_value : LevelData):
+	level_data = new_value
 	level_data_value = new_value
 
 func get_level_data() -> LevelData:
@@ -64,6 +71,23 @@ func get_level_data() -> LevelData:
 		level_data_value.load_in(level_code)
 	return level_data_value
 
+func set_shine_details(new_value : Array) -> void:
+	shine_details = new_value 
+	shine_details_value = new_value
+
+func get_shine_details() -> Array:
+	if shine_details_value.size() == 0 and shine_count > 0:
+		shine_details_value = generate_shine_details()
+	return shine_details_value
+
+func set_star_coin_details(new_value : Array) -> void:
+	star_coin_details = new_value 
+	star_coin_details_value = new_value 
+
+func get_star_coin_details() -> Array:
+	if star_coin_details_value.size() == 0 and star_coin_count > 0:
+		star_coin_details_value = generate_star_coin_details()
+	return star_coin_details_value
 
 # level_info is a reference, so we can just edit it directly
 static func reset_save_data(level_info) -> void:
@@ -71,9 +95,10 @@ static func reset_save_data(level_info) -> void:
 	level_info.collected_star_coins = 0
 	level_info.coin_score = 0
 	for shine_number in range(level_info.shine_count):
-		level_info.time_scores[shine_number] = INT_MAX
+		level_info.time_scores[shine_number] = EMPTY_TIME_SCORE
 
 func get_saveable_dictionary() -> Dictionary:
+	# add saving shine details and star coin details
 	var save_dictionary : Dictionary = \
 	{
 		"VERSION": VERSION,
@@ -90,7 +115,7 @@ func get_saveable_dictionary() -> Dictionary:
 	}
 	return save_dictionary
 
-func load_from_dictionary(save_dictionary : Dictionary):
+func load_from_dictionary(save_dictionary : Dictionary) -> void:
 	level_code = save_dictionary["level_code"]
 	level_name = save_dictionary["level_name"]
 	level_background = save_dictionary["level_background"]
@@ -101,3 +126,28 @@ func load_from_dictionary(save_dictionary : Dictionary):
 	collected_star_coins = save_dictionary["collected_star_coins"]
 	coin_score = save_dictionary["coin_score"]
 	time_scores = save_dictionary["time_scores"]
+
+func generate_shine_details() -> Array:
+	var new_shine_details = []
+	if get_level_data() == null: 
+		return []
+
+	for area in get_level_data().areas:
+		for object in area.objects:
+			if object.type_id == OBJECT_ID_SHINE:
+				# these use weird indexed things because that's unfortunately just how stuff is stored before being loaded, this bit does what you'd expect, the values are the shines properties
+				var shine_dictionary : Dictionary = \
+				{
+					"title": object.properties[5],
+					"description": object.properties[6],
+					"show_in_menu": object.properties[7],
+				}
+				new_shine_details.append(shine_dictionary)
+	new_shine_details.sort_custom(self, "shine_details_sort")
+	return new_shine_details
+
+func shine_details_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
+	return item1["title"].casecmp_to(item2["title"]) < 0
+
+func generate_star_coin_details() -> Array:
+	return []

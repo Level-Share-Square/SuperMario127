@@ -13,14 +13,25 @@ onready var title_screen : Control = $InactiveScreens/TitleScreen
 onready var main_menu_screen : Control = $InactiveScreens/MainMenuScreen
 onready var levels_screen : Control = $InactiveScreens/LevelsScreen
 
+# this is basically a constant, except we can't store a reference to a child node in a constant, shame there's no readonly modifier
+onready var default_screen = main_menu_screen
+
 func _ready() -> void:
 	for screen in inactive_screens.get_children():
 		# warning-ignore: return_value_discarded
 		screen.connect("screen_change", self, "change_screen")
 
-	# for now, the main menu will be the default active screen, a way of loading a specific default should be added later
-	inactive_screens.remove_child(main_menu_screen)
-	active_screen.add_child(main_menu_screen)
+	var screen_to_load = default_screen
+
+	var custom_open_screen_name = MenuVariables.get("custom_open_screen_name")
+	var custom_open_screen = null
+	if custom_open_screen_name != null:
+		custom_open_screen = get(custom_open_screen_name)
+	if custom_open_screen != null:
+		screen_to_load = custom_open_screen
+
+	inactive_screens.remove_child(screen_to_load)
+	active_screen.add_child(screen_to_load)
 
 func change_screen(current_screen_name : String, new_screen_name : String, _transition_id : int = 0):
 	var current_screen = get(current_screen_name)

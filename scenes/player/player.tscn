@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -49,6 +49,7 @@
 [ext_resource path="res://scenes/player/window/ControlBindingWindow.tscn" type="PackedScene" id=47]
 [ext_resource path="res://scenes/shared/control/player_selection.tscn" type="PackedScene" id=48]
 [ext_resource path="res://scenes/shared/control/player_selector_system.gd" type="Script" id=49]
+[ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=50]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 7 )
@@ -381,7 +382,6 @@ texture = ExtResource( 45 )
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
@@ -451,12 +451,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ResumeButton" type="Button" parent="UI/PauseScreen/Bottom"]
-margin_left = 2245.0
-margin_top = 129.0
-margin_right = 2954.0
-margin_bottom = 311.0
+[node name="Buttons" type="HBoxContainer" parent="UI/PauseScreen/Bottom"]
+margin_left = 2250.0
+margin_top = 133.0
+margin_right = 4445.0
+margin_bottom = 309.0
 rect_rotation = 180.0
+custom_constants/separation = 18
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResumeButton" type="Button" parent="UI/PauseScreen/Bottom/Buttons"]
+margin_right = 535.0
+margin_bottom = 176.0
+size_flags_horizontal = 7
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/normal = SubResource( 8 )
@@ -468,20 +477,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/ResumeButton"]
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/Buttons/ResumeButton"]
 stream = ExtResource( 9 )
 volume_db = -10.0
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/ResumeButton"]
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/Buttons/ResumeButton"]
 stream = ExtResource( 11 )
 volume_db = -10.0
 
-[node name="RetryButton" type="Button" parent="UI/PauseScreen/Bottom"]
-margin_left = 1506.0
-margin_top = 129.0
-margin_right = 2215.0
-margin_bottom = 311.0
-rect_rotation = 180.0
+[node name="RetryButton" type="Button" parent="UI/PauseScreen/Bottom/Buttons"]
+margin_left = 553.0
+margin_right = 1088.0
+margin_bottom = 176.0
+size_flags_horizontal = 7
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/normal = SubResource( 8 )
@@ -493,20 +501,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/RetryButton"]
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/Buttons/RetryButton"]
 stream = ExtResource( 9 )
 volume_db = -10.0
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/RetryButton"]
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/Buttons/RetryButton"]
 stream = ExtResource( 11 )
 volume_db = -10.0
 
-[node name="MultiplayerButton" type="Button" parent="UI/PauseScreen/Bottom"]
-margin_left = 768.0
-margin_top = 129.0
-margin_right = 1477.0
-margin_bottom = 311.0
-rect_rotation = 180.0
+[node name="MultiplayerButton" type="Button" parent="UI/PauseScreen/Bottom/Buttons"]
+margin_left = 1106.0
+margin_right = 1641.0
+margin_bottom = 176.0
+size_flags_horizontal = 7
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/normal = SubResource( 8 )
@@ -517,17 +524,25 @@ script = ExtResource( 22 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-shine_info = NodePath("../../ShineInfo")
-multiplayer_options = NodePath("../../MultiplayerOptions")
-controls_options = NodePath("../../ControlsOptions")
+shine_info = NodePath("../../../ShineInfo")
+multiplayer_options = NodePath("../../../MultiplayerOptions")
+controls_options = NodePath("../../../ControlsOptions")
 
-[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/MultiplayerButton"]
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/Buttons/MultiplayerButton"]
 stream = ExtResource( 9 )
 volume_db = -10.0
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/MultiplayerButton"]
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/Buttons/MultiplayerButton"]
 stream = ExtResource( 11 )
 volume_db = -10.0
+
+[node name="QuitButton" parent="UI/PauseScreen/Bottom/Buttons" instance=ExtResource( 50 )]
+margin_left = 1659.0
+margin_right = 2195.0
+margin_bottom = 176.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 9 )
+text = "Quit"
 
 [node name="TweenTopbar" type="Tween" parent="UI/PauseScreen"]
 
