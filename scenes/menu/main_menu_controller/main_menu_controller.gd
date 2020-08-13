@@ -34,6 +34,7 @@ func _ready() -> void:
 	active_screen.add_child(screen_to_load)
 
 	music.change_song(music.last_song, 31) # temporary, should add a way for screens to define their own music setting later
+	music.last_song = 31
 
 func change_screen(current_screen_name : String, new_screen_name : String, _transition_id : int = 0):
 	var current_screen = get(current_screen_name)
