@@ -1,0 +1,23 @@
+Structure of the code:
+1. extends
+2. if used, class_name
+3. relevant child nodes loaded into a variable with an onready
+4. Class Members and constants, grouped together based on what they are related to
+5. _set_properties() and _set_property_values(), if it's a GameObject
+6. _ready()
+7. _process()
+8. _physics_process()
+9. Other functions in roughly the order they're needed 
+
+Code should be well-commented, better to err on the side of a few too many comments rather than too few.
+For example, complex blocks or just things that what they do isn't obvious at a glance should have some sort of quick comment.
+
+Code that's too long should be split onto a second line, using \ to escape the newline character, and then the code on the next line should have 2 indents. For example:
+variable = first_value + second_value + third_value * IMPORTANT_CONSTANT / ratio + some_other_value_that_is_important \
+	+ final value
+
+Use the Timer built-in node rather than creating and managing timers in code. Also a good idea to use the timeout signal of the Timer node so there aren't any unnecessary checks in gdscript.
+
+Use the GDScript static typing, with the := operator to infer types where it makes sense, just be careful you don't accidentally leave out the .0 when initializing a float with the := operator.
+
+Put spaces between operators, whether it be +, -, *, /, ==, :=, or whatever else you can think of. Only exception is for block defining structures like if statements and functions, the : at the end shouldn't have a space before it.
