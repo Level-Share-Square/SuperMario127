@@ -36,11 +36,6 @@ func save_level_to_disk(level_info : LevelInfo, level_path : String) -> int:
 	if !directory.dir_exists(LEVELS_DIRECTORY):
 		var _error_code = directory.make_dir_recursive(LEVELS_DIRECTORY)
 
-	# the odds of this happening (since the datetime is used in the calculation)
-	# should be next to impossible, but error checking doesn't hurt I guess 
-	if file.file_exists(level_path): 
-		return FAILED 
-
 	var error_code = file.open_encrypted_with_pass(level_path, File.WRITE, ENCRYPTION_PASSWORD)
 	if error_code == OK:
 		var level_save_dictionary = level_info.get_saveable_dictionary()
@@ -48,6 +43,11 @@ func save_level_to_disk(level_info : LevelInfo, level_path : String) -> int:
 		file.store_string(level_save_dictionary_json)
 		file.close()
 	return OK
+
+func save_level_by_index(level_index : int) -> int:
+	var level_info = levels[level_index]
+	var level_path = levels_disk_paths[level_index]
+	return save_level_to_disk(level_info, level_path)
 
 func delete_level_from_disk(level_path : String) -> void:
 	var _error_code = directory.remove(level_path)

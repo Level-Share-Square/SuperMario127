@@ -141,13 +141,24 @@ func generate_shine_details() -> Array:
 					"title": object.properties[5],
 					"description": object.properties[6],
 					"show_in_menu": object.properties[7],
+					"id": object.properties[12],
 				}
 				new_shine_details.append(shine_dictionary)
 	new_shine_details.sort_custom(self, "shine_details_sort")
 	return new_shine_details
 
 func shine_details_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
-	return item1["title"].casecmp_to(item2["title"]) < 0
+	return item1["id"] < item2["id"]
 
 func generate_star_coin_details() -> Array:
 	return []
+
+func set_shine_collected(shine_id : int) -> void:
+	if not shine_id in collected_shines:
+		collected_shines.append(shine_id)
+	var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
+
+func set_star_coin_collected(star_coin_id : int) -> void:
+	if !collected_star_coins.has(star_coin_id):
+		collected_star_coins.append(star_coin_id)
+	var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)

@@ -80,12 +80,17 @@ func change_song(old_setting, music_setting) -> void:
 		stream = song.stream
 		play()
 	
-	bus = play_bus if get_tree().get_current_scene().mode == 0 else edit_bus
+	if "mode" in get_tree().get_current_scene():
+		bus = play_bus if get_tree().get_current_scene().mode == 0 else edit_bus
+	else:
+		bus = play_bus # perhaps we should define a general bus or a menu bus later
 
 func _process(_delta) -> void:
 	var current_scene = get_tree().get_current_scene()
 	var current_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
 	
+	# change this script so this entire block ceases to exist because it is bad and it makes me simultaniously mad and sad
+	# scenes should ask the music singleton to change the music, the music singleton shouldn't check every frame for if it should change the music
 	if "mode" in current_scene: #script will crash if the scene root doesn't have this property defined
 		var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
 		if current_scene.mode != last_mode or typeof(last_song) != typeof(level_song):
@@ -95,7 +100,7 @@ func _process(_delta) -> void:
 		last_mode = current_scene.mode
 		last_song = level_song
 	
-		volume_db = linear2db(db2linear(base_volume) * volume_multiplier) if !muted else -80.0
+	volume_db = linear2db(db2linear(base_volume) * volume_multiplier) if !muted else -80.0
 
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("mute"):

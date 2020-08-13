@@ -37,6 +37,8 @@ var anim_damp := 160
 const NORMAL_COLOR := Color(1, 1, 0)
 const WHITE_COLOR := Color(1, 1, 1)
 
+var last_color : Color
+
 var title := "Unnamed Shine"
 var description := "This is a shine! Collect it to win the level."
 var show_in_menu := true
@@ -44,11 +46,11 @@ var activated := true
 var red_coins_activate := false
 var shine_shards_activate := false
 var color := Color(1, 1, 0)
-var last_color : Color
+var id := 0
 
 func _set_properties() -> void:
-	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color"]
-	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color"]
+	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id"]
+	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id"]
 	
 func _set_property_values() -> void:
 	set_property("title", title, true)
@@ -58,6 +60,7 @@ func _set_property_values() -> void:
 	set_property("red_coins_activate", red_coins_activate, true)
 	set_property("shine_shards_activate", shine_shards_activate, true)
 	set_property("color", color, true)
+	set_property("id", id)
 
 func _ready() -> void:
 	if mode != 1: # not in edit mode
@@ -169,6 +172,8 @@ func collect(body : PhysicsBody2D) -> void:
 		collected = true
 		visible = false
 
+		SavedLevels.levels[SavedLevels.selected_level].set_shine_collected(id)
+
 func start_shine_dance() -> void:
 	character.set_state_by_name("NoActionState", get_physics_process_delta_time())
 
@@ -197,7 +202,7 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 	#fades to the correct volume in both situations
 	if mode_switcher_button.invisible: #if not running through the editor, play the transition
 		music.bus = music.play_bus 
-		music.stop_temporary_music(MUSIC_TRANSITION_TIME_PLAY_MODE)
+		music.stop_temporary_music(1, MUSIC_TRANSITION_TIME_PLAY_MODE)
 		MenuVariables.quit_to_menu("levels_screen")
 		#transitions.reload_scene(character.cutout_shine, character.cutout_circle, transitions.DEFAULT_TRANSITION_TIME, 0, true)
 	else:

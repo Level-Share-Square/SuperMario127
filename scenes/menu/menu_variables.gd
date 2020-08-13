@@ -17,4 +17,4 @@ func quit_to_menu(screen_to_open : String = ""): #switch this to use the enum an
 	var _change_scene = get_tree().change_scene_to(MAIN_MENU_CONTROLLER_SCENE)
 
 	# add music switch and temporary music stopping
-	music.stop()
+	#music.stop()
