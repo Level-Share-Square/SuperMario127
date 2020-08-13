@@ -81,7 +81,6 @@ custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = SubResource( 5 )
-shader_param/Texture = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=7]
 size = 48
@@ -95,7 +94,7 @@ margin_bottom = 825.0
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 0
 texture = SubResource( 1 )
-region_rect = Rect2( 0, 0, 660, 610 )
+region_rect = Rect2( 0, 0, 108, 290 )
 patch_margin_left = 40
 patch_margin_top = 110
 patch_margin_right = 40
