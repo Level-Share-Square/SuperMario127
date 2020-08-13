@@ -35,4 +35,4 @@ func _input(event):
 
 func set_brightness(brightness):
 	gradient_selector.position.y = lerp(blackY, whiteY, brightness)
-	value = (gradient_selector.position.y - blackY) / (whiteY - blackY)
+	value = brightness
