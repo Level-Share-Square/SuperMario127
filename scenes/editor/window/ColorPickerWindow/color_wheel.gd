@@ -27,7 +27,7 @@ func _input(event):
 	
 	# Is in sprite - check if its in the circle
 	selector.position = mouse_pos
-	var color = Color.from_hsv(atan2(normal_coordinates.x, normal_coordinates.y) / (2*PI), normal_coordinates.length(), 1)
+	var color = Color.from_hsv(atan2(normal_coordinates.x, normal_coordinates.y) / (2*PI), normal_coordinates.length(), gradient_selector.value)
 	gradient_selector.modulate = color
 	new_color_preview.modulate = color
 	color_manager.set_value(color)

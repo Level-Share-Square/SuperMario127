@@ -9,6 +9,8 @@ onready var color_wheel = get_parent().get_node("Wheel")
 onready var new_color_preview = get_parent().get_node("ColorPreviews/NewColorPreview")
 onready var color_manager = color_wheel.get_node("Color")
 
+var value = 1
+
 func _input(event):
 	if !color_wheel.get_parent().get_parent().visible:
 		return
@@ -22,14 +24,15 @@ func _input(event):
 		return
 	
 	gradient_selector.position.y = clamp(get_local_mouse_position().y, whiteY, blackY)
-	var v = (gradient_selector.position.y - blackY) / (whiteY - blackY)
-	color_wheel.self_modulate = Color(v, v, v)
+	value = (gradient_selector.position.y - blackY) / (whiteY - blackY)
+	color_wheel.self_modulate = Color(value, value, value)
 	
 	var new_color = color_manager.get_value()
-	new_color.v = v
+	new_color.v = value
 	color_manager.set_value(new_color)
 	new_color_preview.modulate = new_color
 	color_wheel.notify_property_manager()
 
 func set_brightness(brightness):
 	gradient_selector.position.y = lerp(blackY, whiteY, brightness)
+	value = (gradient_selector.position.y - blackY) / (whiteY - blackY)
