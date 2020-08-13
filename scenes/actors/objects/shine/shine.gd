@@ -86,12 +86,16 @@ func update_color(key, value):
 			animated_sprite.frames = normal_frames
 			particles.texture = normal_particles
 		last_color = color
+
+func _process(delta):
+	outline_sprite.frame = animated_sprite.frame
+	outline_sprite.visible = animated_sprite.visible
+	outline_sprite.offset = animated_sprite.offset
 		
 func _physics_process(_delta : float) -> void:
 	if !animated_sprite.playing: #looks like if it is not set to playing, some manual animation is done instead
 		#warning-ignore:integer_division
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
-		outline_sprite.frame = animated_sprite.frame
 		
 	if mode != 1:
 		var camera : Camera2D = current_scene.get_node(current_scene.camera)
