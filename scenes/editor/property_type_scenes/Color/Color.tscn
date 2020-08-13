@@ -1,79 +1,78 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/editor/property_type_scenes/Color/Color.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://scenes/editor/property_type_scenes/float.gd" type="Script" id=3]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=1]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+export var button : NodePath
+
+onready var button_node : Button = get_node(button)
+onready var hover_sound = $HoverSound
+onready var click_sound = $ClickSound
+onready var color_picker_window = get_tree().get_current_scene().get_node(\"UI/ColorPickerWindow\")
+
+var last_hovered = false
+
+func _ready():
+	var _connect = button_node.connect(\"pressed\", self, \"pressed\")
+	
+func pressed():
+	click_sound.play()
+	color_picker_window.open()
+
+func _process(_delta):
+	if button_node.is_hovered() and !last_hovered:
+		hover_sound.play()	
+	last_hovered = button_node.is_hovered()
+
+func set_value(value: Color):
+	button_node.modulate = value
+	
+	var color_wheel = color_picker_window.get_node(\"Contents/Wheel\")
+
+	color_wheel.property_node = get_parent()
+	color_wheel.get_node(\"Color\").set_value(value)
+	color_wheel.update_value(value)
+	
+	color_picker_window.get_node(\"Contents/ColorPreviews/OldColorPreview\").modulate = value
+"
+
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 1, 1, 1 )
 border_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
-
-[sub_resource type="DynamicFont" id=2]
-size = 32
-font_data = ExtResource( 2 )
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 
 [node name="Color" type="Control"]
 margin_right = 320.0
 margin_bottom = 120.0
-script = ExtResource( 1 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-h_edit = NodePath("HEdit")
-s_edit = NodePath("SEdit")
-v_edit = NodePath("VEdit")
+button = NodePath("Button")
 
-[node name="HEdit" type="LineEdit" parent="."]
-margin_left = 7.0
-margin_top = 58.0
-margin_right = 103.0
-margin_bottom = 112.0
-custom_styles/normal = SubResource( 1 )
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
-align = 1
-context_menu_enabled = false
-placeholder_text = "R"
-placeholder_alpha = 0.35
-script = ExtResource( 3 )
+[node name="Button" type="Button" parent="."]
+margin_left = 39.6189
+margin_top = 60.2063
+margin_right = 280.619
+margin_bottom = 109.206
+rect_scale = Vector2( 0.997844, 1 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SEdit" type="LineEdit" parent="."]
-margin_left = 112.0
-margin_top = 58.0
-margin_right = 208.0
-margin_bottom = 112.0
-custom_styles/normal = SubResource( 1 )
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
-align = 1
-context_menu_enabled = false
-placeholder_text = "G"
-placeholder_alpha = 0.35
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="HoverSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+attenuation = 0.183011
 
-[node name="VEdit" type="LineEdit" parent="."]
-margin_left = 217.0
-margin_top = 58.0
-margin_right = 313.0
-margin_bottom = 112.0
-custom_styles/normal = SubResource( 1 )
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
-align = 1
-context_menu_enabled = false
-placeholder_text = "B"
-placeholder_alpha = 0.35
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="ClickSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+attenuation = 0.183011

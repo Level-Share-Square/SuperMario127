@@ -1,0 +1,229 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/editor/window.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/editor/window/ColorPickerWindow/Wheel.png" type="Texture" id=4]
+[ext_resource path="res://scenes/editor/window/ColorPickerWindow/color_wheel.gd" type="Script" id=5]
+[ext_resource path="res://scenes/editor/window/ColorPickerWindow/HSV Color Selector.png" type="Texture" id=6]
+[ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=7]
+[ext_resource path="res://scenes/editor/window/ColorPickerWindow/Color.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/editor/window/ColorPickerWindow/WhiteGradient.png" type="Texture" id=9]
+[ext_resource path="res://scenes/editor/window/ColorPickerWindow/Gradient Selector.png" type="Texture" id=10]
+[ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=11]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=12]
+[ext_resource path="res://scenes/editor/window/ColorPickerWindow/gradient.gd" type="Script" id=13]
+[ext_resource path="res://scenes/editor/window/ColorPickerWindow/ColorBorder.png" type="Texture" id=15]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/window.png-70f8a0c1f0411efce833bd946d8ccc07.stex"
+
+[sub_resource type="DynamicFont" id=2]
+size = 56
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:2
+	vec2 normal_UV = (UV - vec2(0.5,0.5)) * 2.0;
+	
+	float hue = atan(normal_UV.x, normal_UV.y) / 6.2;
+
+// VectorLen:4
+	float _length = length(normal_UV);
+
+	vec3 hsv = vec3(hue, _length, 1.0);
+
+// VectorFunc:3
+	vec3 n_out3p0;
+	{
+		vec3 c = hsv;
+		vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+		vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+		n_out3p0 = c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+	}
+
+// Output:0
+	COLOR.rgb = _length>0.98 ? vec3(0) : n_out3p0;
+	COLOR.a = _length<=1.0 ? 1.0 : 0.0;
+}
+
+void light() {
+// Output:0
+
+}
+"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+uniform sampler2D Texture;
+
+void fragment() {
+	vec3 black = vec3(0, 0, 0);
+	vec3 white = vec3(1, 1, 1);
+	COLOR.rgb = (UV.x>0.05 && UV.x<0.95 && UV.y>0.01 && UV.y<0.99) ? mix(white, black, UV.y): vec3(0);
+}
+"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/Texture = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 48
+font_data = ExtResource( 1 )
+
+[node name="ColorPickerWindow" type="NinePatchRect"]
+margin_left = 165.0
+margin_top = 66.0
+margin_right = 1218.0
+margin_bottom = 825.0
+rect_scale = Vector2( 0.4, 0.4 )
+mouse_filter = 0
+texture = SubResource( 1 )
+region_rect = Rect2( 0, 0, 660, 610 )
+patch_margin_left = 40
+patch_margin_top = 110
+patch_margin_right = 40
+patch_margin_bottom = 40
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="RichTextLabel" parent="."]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 704.0
+margin_bottom = 98.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_text = "Color Picker
+"
+text = "Color Picker
+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="TextureButton" parent="."]
+margin_left = 888.65
+margin_top = 12.953
+margin_right = 1043.65
+margin_bottom = 93.953
+rect_scale = Vector2( 0.95, 0.95 )
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
+stream = ExtResource( 3 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
+stream = ExtResource( 12 )
+volume_db = -10.0
+
+[node name="Contents" type="Control" parent="."]
+anchor_bottom = 0.06
+margin_left = 17.0
+margin_top = 104.0
+margin_right = 1035.0
+margin_bottom = 692.46
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wheel" type="Sprite" parent="Contents"]
+material = SubResource( 4 )
+position = Vector2( 625.64, 248 )
+texture = ExtResource( 4 )
+script = ExtResource( 5 )
+
+[node name="HSV Color Selector" type="Sprite" parent="Contents/Wheel"]
+position = Vector2( 2.35992, 0 )
+texture = ExtResource( 6 )
+
+[node name="Color" parent="Contents/Wheel" instance=ExtResource( 8 )]
+margin_left = -234.237
+margin_top = 187.181
+margin_right = 85.7629
+margin_bottom = 307.181
+rect_scale = Vector2( 1.5, 1.5 )
+
+[node name="Gradient" type="Sprite" parent="Contents"]
+material = SubResource( 6 )
+position = Vector2( 940.625, 319.632 )
+scale = Vector2( 1, 1.24358 )
+texture = ExtResource( 9 )
+script = ExtResource( 13 )
+
+[node name="Gradient Selector" type="Sprite" parent="Contents/Gradient"]
+position = Vector2( -0.452515, -229.516 )
+scale = Vector2( 1.5, 2.01033 )
+texture = ExtResource( 10 )
+
+[node name="ColorPreviews" type="Control" parent="Contents"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OldColorPreview" type="Sprite" parent="Contents/ColorPreviews"]
+position = Vector2( 153.64, 200.443 )
+texture = ExtResource( 15 )
+
+[node name="NewColorPreview" type="Sprite" parent="Contents/ColorPreviews"]
+position = Vector2( 153.64, 502.943 )
+texture = ExtResource( 15 )
+
+[node name="NewColorLabel" type="Label" parent="Contents/ColorPreviews"]
+margin_left = 92.0
+margin_top = 328.0
+margin_right = 213.0
+margin_bottom = 383.0
+custom_fonts/font = SubResource( 7 )
+text = "New:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OldColorLabel" type="Label" parent="Contents/ColorPreviews"]
+margin_left = 56.5
+margin_top = 28.0
+margin_right = 253.5
+margin_bottom = 83.0
+custom_fonts/font = SubResource( 7 )
+text = "Original:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="Contents/ColorPreviews"]
+position = Vector2( -39.5, -104 )
+points = PoolVector2Array( 368.534, 740, 368.534, 104 )
+width = 5.0
+default_color = Color( 0, 0, 0, 0.243137 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[editable path="Contents/Wheel/Color"]

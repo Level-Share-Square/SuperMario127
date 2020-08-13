@@ -23,6 +23,6 @@ func get_value() -> Color:
 	return Color(float(h_edit_node.text) / 255, float(s_edit_node.text) / 255, float(v_edit_node.text) / 255)
 
 func update_value(edit_node : LineEdit):
-	#if !edit_node.check():
-	#	return
+	if !edit_node.check():
+		return
 	get_node("../").update_value(get_value())
