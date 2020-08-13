@@ -15,7 +15,7 @@ size = 56
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 48
 font_data = ExtResource( 1 )
 
@@ -28,7 +28,7 @@ margin_bottom = 680.0
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 0
 texture = ExtResource( 4 )
-region_rect = Rect2( 0, 0, 660, 610 )
+region_rect = Rect2( 0, 0, 108, 290 )
 patch_margin_left = 40
 patch_margin_top = 110
 patch_margin_right = 40
@@ -90,7 +90,7 @@ margin_bottom = 410.0
 custom_styles/hover = ExtResource( 8 )
 custom_styles/pressed = ExtResource( 9 )
 custom_styles/normal = ExtResource( 9 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 shortcut_in_tooltip = false
 action_mode = 0
 text = "Add Area"
