@@ -176,7 +176,8 @@ func collect(body : PhysicsBody2D) -> void:
 		collected = true
 		visible = false
 
-		SavedLevels.levels[SavedLevels.selected_level].set_shine_collected(id)
+		if SavedLevels.selected_level != SavedLevels.NO_LEVEL:
+			SavedLevels.levels[SavedLevels.selected_level].set_shine_collected(id)
 
 func start_shine_dance() -> void:
 	character.set_state_by_name("NoActionState", get_physics_process_delta_time())
