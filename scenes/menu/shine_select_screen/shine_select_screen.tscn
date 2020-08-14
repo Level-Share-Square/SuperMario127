@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/menu/shine_select_screen/background.png" type="Texture" id=1]
-[ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=3]
+[ext_resource path="res://scenes/shared/background/backgrounds/night/night.png" type="Texture" id=2]
 [ext_resource path="res://scenes/menu/shine_select_screen/shine_select_screen.gd" type="Script" id=5]
 
 [node name="ShineSelectScreen" type="TextureRect"]
@@ -20,7 +20,7 @@ anchor_right = 0.947917
 anchor_bottom = 0.907407
 margin_right = 40.0
 margin_bottom = 40.0
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
