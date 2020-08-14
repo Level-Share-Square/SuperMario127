@@ -557,29 +557,28 @@ margin_right = 768.0
 margin_bottom = 332.0
 rect_pivot_offset = Vector2( 384, 166 )
 
-[node name="ShineName" type="Label" parent="UI/PauseScreen/ShineInfo"]
-margin_top = 143.986
+[node name="LevelName" type="Label" parent="UI/PauseScreen/ShineInfo"]
+margin_top = 111.0
 margin_right = 768.0
-margin_bottom = 182.986
+margin_bottom = 178.0
 rect_pivot_offset = Vector2( 72, 0 )
 custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "No Shine Selected"
+text = "Unknown Level"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShineNameBacking" type="Label" parent="UI/PauseScreen/ShineInfo/ShineName"]
+[node name="LevelNameBacking" type="Label" parent="UI/PauseScreen/ShineInfo/LevelName"]
 show_behind_parent = true
-margin_top = -17.0
 margin_right = 768.0
-margin_bottom = 64.0
+margin_bottom = 81.0
 rect_pivot_offset = Vector2( 72, 0 )
 custom_fonts/font = SubResource( 11 )
 custom_colors/font_color = Color( 0.0392157, 0, 0.188235, 1 )
-text = "No Shine Selected"
+text = "Unknown Level"
 align = 1
 valign = 1
 __meta__ = {
@@ -587,14 +586,26 @@ __meta__ = {
 }
 
 [node name="ShineDescription" type="RichTextLabel" parent="UI/PauseScreen/ShineInfo"]
-margin_left = 0.375946
-margin_top = 194.168
-margin_right = 768.376
-margin_bottom = 275.168
+margin_left = 116.0
+margin_top = 222.0
+margin_right = 653.0
+margin_bottom = 319.0
 custom_fonts/normal_font = SubResource( 12 )
 bbcode_enabled = true
-bbcode_text = "[center]You are in a custom level.[/center]"
-text = "You are in a custom level."
+bbcode_text = "[center]You can change this description in the Shine Sprite's properties menu.[/center]"
+text = "You can change this description in the Shine Sprite's properties menu."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShineName" type="RichTextLabel" parent="UI/PauseScreen/ShineInfo"]
+margin_top = 190.0
+margin_right = 768.0
+margin_bottom = 215.0
+custom_fonts/normal_font = SubResource( 12 )
+bbcode_enabled = true
+bbcode_text = "[center]Unnamed Shine[/center]"
+text = "Unnamed Shine"
 __meta__ = {
 "_edit_use_anchors_": false
 }
