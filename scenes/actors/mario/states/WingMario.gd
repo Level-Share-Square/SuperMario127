@@ -30,7 +30,7 @@ func _start(_delta):
 	character.velocity.y /= 5
 	rotation_down = 90
 
-func _update(delta):
+func _update(_delta):
 	# Here's my latest attempt at coding this thing, as you can see i kind of failed terribly.
 	# If you end up doing the code for this yourself, i'd recommend deleting most of this
 	# as it's not very useful for future attempts and hasn't been cleaned up or commented

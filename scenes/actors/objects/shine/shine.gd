@@ -87,7 +87,7 @@ func update_color(key, value):
 			particles.texture = normal_particles
 		last_color = color
 
-func _process(delta):
+func _process(_delta):
 	outline_sprite.frame = animated_sprite.frame
 	outline_sprite.visible = animated_sprite.visible
 	outline_sprite.offset = animated_sprite.offset

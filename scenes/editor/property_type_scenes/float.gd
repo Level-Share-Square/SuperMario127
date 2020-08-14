@@ -8,8 +8,8 @@ var cursor_pos : int = 0
 var _old_text := ""
 
 func _ready():
-	connect("focus_exited", self, "update")
-	connect("text_changed", self, "text_changed")
+	var _connect = connect("focus_exited", self, "update")
+	_connect = connect("text_changed", self, "text_changed")
 
 func _input(event):
 	if event.is_action_pressed("text_release_focus"): # this should already be a thing
