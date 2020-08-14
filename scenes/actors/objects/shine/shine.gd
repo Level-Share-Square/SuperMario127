@@ -6,9 +6,11 @@ extends GameObject
 
 export var normal_frames : SpriteFrames
 export var recolorable_frames : SpriteFrames
+export var collected_frames : SpriteFrames
 
 export var normal_particles : StreamTexture
 export var recolorable_particles : StreamTexture
+export var collected_particles : StreamTexture
 
 onready var animated_sprite : AnimatedSprite = $AnimatedSprite
 onready var outline_sprite : AnimatedSprite = $AnimatedSpriteOutline
@@ -38,6 +40,7 @@ const NORMAL_COLOR := Color(1, 1, 0)
 const WHITE_COLOR := Color(1, 1, 1)
 
 var last_color : Color
+var is_blue := false
 
 var title := "Unnamed Shine"
 var description := "You can change this description in the Shine Sprite's properties menu."
@@ -69,22 +72,35 @@ func _ready() -> void:
 		# warning-ignore: return_value_discarded
 		area.connect("body_entered", self, "collect")
 		unpause_timer.wait_time = UNPAUSE_TIMER_LENGTH
+		
+		# we loop through all the collected shines and if one of the IDs matches with ours, we break the loop and is_blue is set to true
+		var collected_shines = SavedLevels.levels[SavedLevels.selected_level].collected_shines
+		for collected_shine in collected_shines:
+			if collected_shine == id:
+				is_blue = true
+				break
 	var _connect = connect("property_changed", self, "update_color")
 	update_color("color", color)
 
 #TODO: Make this work with the window preview
 func update_color(key, value):
 	if key == "color" and value != last_color:
-		if color != NORMAL_COLOR:
-			animated_sprite.self_modulate = color
-			
-			animated_sprite.frames = recolorable_frames
-			particles.texture = recolorable_particles
+		if !is_blue:
+			if color != NORMAL_COLOR:
+				animated_sprite.self_modulate = color
+				
+				animated_sprite.frames = recolorable_frames
+				particles.texture = recolorable_particles
+			else:
+				animated_sprite.self_modulate = WHITE_COLOR
+				
+				animated_sprite.frames = normal_frames
+				particles.texture = normal_particles
 		else:
 			animated_sprite.self_modulate = WHITE_COLOR
 			
-			animated_sprite.frames = normal_frames
-			particles.texture = normal_particles
+			animated_sprite.frames = collected_frames
+			particles.texture = collected_particles
 		last_color = color
 
 func _process(_delta):
@@ -111,8 +127,8 @@ func _physics_process(_delta : float) -> void:
 				ghost.visible = true
 				animated_sprite.visible = false
 			else:
-				if !ambient_sound.playing:
-					ambient_sound.playing = true
+				if ambient_sound.playing == is_blue:
+					ambient_sound.playing = !is_blue
 				ghost.visible = false
 				animated_sprite.visible = true
 		# need to change this to also take into account player 2

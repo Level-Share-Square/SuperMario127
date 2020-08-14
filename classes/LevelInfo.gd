@@ -96,8 +96,8 @@ func get_star_coin_details() -> Array:
 
 # level_info is a reference, so we can just edit it directly
 static func reset_save_data(level_info) -> void:
-	level_info.collected_shines = 0
-	level_info.collected_star_coins = 0
+	level_info.collected_shines = []
+	level_info.collected_star_coins = []
 	level_info.coin_score = 0
 	for shine_number in range(level_info.shine_count):
 		level_info.time_scores[shine_number] = EMPTY_TIME_SCORE
