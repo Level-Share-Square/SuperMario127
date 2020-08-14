@@ -4,6 +4,7 @@ onready var tween = $Tween
 onready var shine_parent = $ShineParent
 
 onready var level_title = $Labels/LevelTitle
+onready var level_title_backing = $Labels/LevelTitleBacking
 onready var shine_title = $Labels/ShineTitle
 onready var shine_description = $Labels/ShineDescription
 
@@ -107,6 +108,7 @@ func move_shine_sprites() -> void:
 func update_labels() -> void:
 	# this will assume the selected shine and the selected level are valid
 	level_title.text = SavedLevels.levels[SavedLevels.selected_level].level_name
+	level_title_backing.text = level_title.text
 	shine_title.text = shine_details[selected_shine]["title"]
 	shine_description.text = shine_details[selected_shine]["description"]
 
