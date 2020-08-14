@@ -176,7 +176,8 @@ func collect(body : PhysicsBody2D) -> void:
 		collected = true
 		visible = false
 
-		if SavedLevels.selected_level != SavedLevels.NO_LEVEL:
+		# the constant for NO_LEVEL is declared in LevelsScreen and there's no clean way to get it atm
+		if SavedLevels.selected_level != -1:
 			SavedLevels.levels[SavedLevels.selected_level].set_shine_collected(id)
 
 func start_shine_dance() -> void:
