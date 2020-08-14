@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/textless.png-f96cbca4b6169575b24379d10ed6479b.stex"
+path="res://.import/back_button.png-17634e35335db9925c2a1744d6eb7024.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/menu/shine_select_screen/textless.png"
-dest_files=[ "res://.import/textless.png-f96cbca4b6169575b24379d10ed6479b.stex" ]
+source_file="res://scenes/shared/ui/back_button.png"
+dest_files=[ "res://.import/back_button.png-17634e35335db9925c2a1744d6eb7024.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
