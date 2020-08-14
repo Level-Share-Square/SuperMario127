@@ -19,85 +19,85 @@ data = PoolByteArray( 183, 255, 182, 255, 174, 255, 188, 255, 171, 255, 164, 255
 format = 1
 mix_rate = 26415
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 27, 31 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 8 )
 region = Rect2( 27, 0, 27, 31 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 8 )
 region = Rect2( 54, 0, 27, 31 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 8 )
 region = Rect2( 81, 0, 27, 31 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 8 )
 region = Rect2( 108, 0, 27, 31 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 8 )
 region = Rect2( 135, 0, 27, 31 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 8 )
 region = Rect2( 162, 0, 27, 31 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 8 )
 region = Rect2( 189, 0, 27, 31 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 8 )
 region = Rect2( 0, 31, 27, 31 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 8 )
 region = Rect2( 27, 31, 27, 31 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 8 )
 region = Rect2( 54, 31, 27, 31 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 8 )
 region = Rect2( 81, 31, 27, 31 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 8 )
 region = Rect2( 108, 31, 27, 31 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 8 )
 region = Rect2( 135, 31, 27, 31 )
 
-[sub_resource type="AtlasTexture" id=19]
+[sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 8 )
 region = Rect2( 162, 31, 27, 31 )
 
-[sub_resource type="AtlasTexture" id=20]
+[sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 8 )
 region = Rect2( 189, 31, 27, 31 )
 
-[sub_resource type="SpriteFrames" id=21]
+[sub_resource type="SpriteFrames" id=19]
 animations = [ {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
 } ]
 
-[sub_resource type="CanvasItemMaterial" id=3]
+[sub_resource type="CanvasItemMaterial" id=20]
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=21]
 length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:speed_scale")
@@ -183,14 +183,14 @@ pause_animated_sprites = false
 process_parent = true
 
 [node name="AnimatedSpriteOutline" type="AnimatedSprite" parent="."]
-frames = SubResource( 21 )
+frames = SubResource( 19 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]
 show_behind_parent = true
-material = SubResource( 3 )
+material = SubResource( 20 )
 local_coords = false
 process_material = ExtResource( 2 )
 texture = ExtResource( 4 )
@@ -203,7 +203,7 @@ visible = false
 texture = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/appear = SubResource( 4 )
+anims/appear = SubResource( 21 )
 
 [node name="UnpauseTimer" type="Timer" parent="."]
 one_shot = true

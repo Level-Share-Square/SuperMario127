@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/actors/objects/shine/frames_outline.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/menu/shine_select_screen/shine_sprite.gd" type="Script" id=3]
+
+[node name="ShineBody" type="AnimatedSprite"]
+frames = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="ShineOutline" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )

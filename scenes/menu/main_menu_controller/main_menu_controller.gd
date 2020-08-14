@@ -9,9 +9,10 @@ onready var active_screen : Control = $ActiveScreen
 onready var inactive_screens : Control = $InactiveScreens 
 
 # screens
-onready var title_screen : Control = $InactiveScreens/TitleScreen
-onready var main_menu_screen : Control = $InactiveScreens/MainMenuScreen
-onready var levels_screen : Control = $InactiveScreens/LevelsScreen
+onready var title_screen : Screen = $InactiveScreens/TitleScreen
+onready var main_menu_screen : Screen = $InactiveScreens/MainMenuScreen
+onready var levels_screen : Screen = $InactiveScreens/LevelsScreen
+onready var shine_select_screen : Screen = $InactiveScreens/ShineSelectScreen
 
 # this is basically a constant, except we can't store a reference to a child node in a constant, shame there's no readonly modifier
 onready var default_screen = main_menu_screen
@@ -40,8 +41,12 @@ func change_screen(current_screen_name : String, new_screen_name : String, _tran
 	var current_screen = get(current_screen_name)
 	var new_screen = get(new_screen_name)
 
+	current_screen._close_screen()
+
 	active_screen.remove_child(current_screen)
 	inactive_screens.add_child(current_screen)
 	
 	inactive_screens.remove_child(new_screen)
 	active_screen.add_child(new_screen)
+
+	new_screen._open_screen()
