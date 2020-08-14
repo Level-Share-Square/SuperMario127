@@ -24,6 +24,10 @@ var shine_count : int = 0 #might change these to properties that return shine_de
 var shine_details : Array = [] setget set_shine_details, get_shine_details
 var shine_details_value : Array = []
 
+# the currently selected shine, will be used as an index to shine_details to show the information in the pause screen
+# set by the shine_select screen, if it's a 0 or 1 star level it won't be set and will stay at -1
+var selected_shine = -1
+
 var star_coin_count : int = 0
 # star coins need some sort of invisible property that will identify them uniquely
 var star_coin_details : Array = [] setget set_star_coin_details, get_star_coin_details
