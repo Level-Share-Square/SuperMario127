@@ -13,6 +13,8 @@ onready var button_move_right = $Buttons/ButtonMoveRight
 onready var button_select_shine = $Buttons/ButtonSelectShine 
 onready var button_back = $Buttons/ButtonBack
 
+const PLAYER_SCENE : PackedScene = preload("res://scenes/player/player.tscn")
+
 const SHINE_SPRITE_SCENE = preload("res://scenes/menu/shine_select_screen/shine_sprite.tscn")
 const CHANGE_SELECTION_TIME : float = 0.35
 
@@ -48,20 +50,32 @@ func _open_screen() -> void:
 	for i in range(shine_details.size()):
 		var shine_sprite = SHINE_SPRITE_SCENE.instance()
 		shine_sprites.append(shine_sprite)
+		# TODO: Update this to properly place shines with maker's new positioning system
 		# if the first shine, this will be 0 (no offset), if the second shine it'll be the beside center position
 		# and if any shine after that (i > 1) it'll be the beside beside center position
 		shine_sprite.position.x = SHINE_BESIDE_CENTER_POSITION * int(i == 1) + SHINE_BESIDE_BESIDE_CENTER_POSITION * int(i > 1)
 
 		shine_parent.add_child(shine_sprite)
 
+	selected_shine = 0
 	move_shine_sprites() # make sure everything is in the right spot and size and such
 	update_labels()
+
+func _close_screen():
+	# get rid of these when closing so if you go back then select another level it generates properly
+	for shine_sprite in shine_sprites:
+		shine_sprite.queue_free()
+	shine_sprites = []
 		
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_right"):
 		attempt_increment_selected_shine(1)
 	elif Input.is_action_just_pressed("ui_left"):
 		attempt_increment_selected_shine(-1)
+	elif Input.is_action_just_pressed("ui_accept"):
+		start_level()
+	elif Input.is_action_just_pressed("ui_cancel"):
+		emit_signal("screen_change", "shine_select_screen", "levels_screen")
 
 # this will try to change the selected shine, but won't if you're already at the first or last shine
 func attempt_increment_selected_shine(increment : int) -> void:
@@ -112,6 +126,11 @@ func update_labels() -> void:
 	shine_title.text = shine_details[selected_shine]["title"]
 	shine_description.text = shine_details[selected_shine]["description"]
 
+func start_level() -> void:
+	# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
+	# so we'll assume it's safe to just go straight to the player scene 
+	var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)
+
 # signal responses start here 
 
 func on_button_move_left_pressed() -> void:
@@ -121,7 +140,7 @@ func on_button_move_right_pressed() -> void:
 	attempt_increment_selected_shine(1)
 
 func on_button_select_shine_pressed() -> void:
-	pass 
+	start_level()
 
 func on_button_back_pressed() -> void:
 	emit_signal("screen_change", "shine_select_screen", "levels_screen")

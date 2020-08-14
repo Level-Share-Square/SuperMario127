@@ -14,7 +14,7 @@ func on_button_levels_pressed() -> void:
 	emit_signal("screen_change", "main_menu_screen", "levels_screen")
 
 func on_button_options_pressed() -> void:
-	emit_signal("screen_change", "main_menu_screen", "shine_select_screen")
+	pass
 
 func on_button_quit_pressed() -> void:
 	get_tree().quit()
