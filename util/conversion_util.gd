@@ -51,7 +51,7 @@ static func convert_044_to_045(result):
 			var new_objects = []
 			for object_result in area_result.objects:
 				var object = object_result
-				if object.type_id == 2: #epicer hardcoding
+				if object.type_id == 2 and object.properties.size() == 10: #epicer hardcoding
 					# this code sucks but again we'll be changing the system later
 					object.properties.append(false)
 					object.properties.append(Color(1, 1, 0))
