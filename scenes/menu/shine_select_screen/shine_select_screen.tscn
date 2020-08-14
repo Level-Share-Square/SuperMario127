@@ -1,10 +1,8 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/menu/shine_select_screen/background.png" type="Texture" id=1]
-[ext_resource path="res://scenes/shared/background/backgrounds/night/night.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=3]
->>>>>>> cb65dd5... Shine select labels + basic mouse support
 [ext_resource path="res://scenes/menu/shine_select_screen/shine_select_screen.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFontData" id=3]
@@ -13,19 +11,17 @@ font_path = "res://assets/fonts/sm256.ttf"
 [sub_resource type="DynamicFont" id=4]
 size = 32
 outline_size = 5
-outline_color = Color( 0.054902, 0, 0.25098, 1 )
+outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_top = 8
 font_data = SubResource( 3 )
 
 [sub_resource type="DynamicFont" id=1]
-size = 32
-outline_size = 4
+size = 26
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 24
-outline_size = 3
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 extra_spacing_char = 1
 extra_spacing_space = 1
@@ -70,7 +66,7 @@ anchor_right = 0.947917
 anchor_bottom = 0.907407
 margin_right = 40.0
 margin_bottom = 40.0
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -89,7 +85,7 @@ __meta__ = {
 
 [node name="LevelTitle" type="Label" parent="Labels"]
 anchor_left = 0.2
-anchor_top = 0.079
+anchor_top = 0.05
 anchor_right = 0.8
 anchor_bottom = 0.183
 margin_bottom = 66.68
@@ -108,10 +104,11 @@ anchor_top = 0.234
 anchor_right = 0.9
 anchor_bottom = 0.329
 custom_fonts/font = SubResource( 1 )
-text = "Unnamed Shine"
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "The Rainbow Shine Sprite"
 align = 1
 clip_text = true
-percent_visible = 1.66667
+percent_visible = 1.90476
 
 [node name="ShineDescription" type="Label" parent="Labels"]
 anchor_left = 0.15
@@ -119,8 +116,9 @@ anchor_top = 0.768
 anchor_right = 0.85
 anchor_bottom = 1.0
 custom_fonts/font = SubResource( 2 )
-text = "You can change this description 
-in the shine sprite's properties menu
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "This is a description
+get stick bugged lol
 "
 align = 1
 autowrap = true
