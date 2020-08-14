@@ -2,19 +2,17 @@ extends State
 
 class_name WingMarioState
 
-export var gravity_modifier = 4
-export var max_speed = 560
-export var momentum = 1
-export var accel = 1
-export var turn_speed = 2.1
+export var gravity_modifier := 4.0
+export var max_speed := 560.0
+export var momentum := 1.0
+export var accel := 1.0
+export var turn_speed := 20
 
 var rotation_down = 0
 var old_gravity_scale = 0
 
-var current_speed = 0
-
 func _ready():
-	priority = 11
+	priority = 4
 	blacklisted_states = []
 	disable_movement = true
 	disable_turning = true
@@ -23,39 +21,48 @@ func _ready():
 	override_rotation = true
 
 func _start_check(_delta):
-	return false #character.state == character.get_state_node("DiveState")
+	#return character.state == character.get_state_node("DiveState")
+	return false
 
 func _start(_delta):
-	current_speed = 0
-	character.velocity.y /= 5
-	rotation_down = 90
+	# Don't even question it, it just works
+	rotation_down = clamp(90 + sqrt(0 if character.velocity.y < 0 else character.velocity.y), 90, 180)
+	momentum = sqrt(character.velocity.length()) * 10
 
-func _update(_delta):
-	# Here's my latest attempt at coding this thing, as you can see i kind of failed terribly.
-	# If you end up doing the code for this yourself, i'd recommend deleting most of this
-	# as it's not very useful for future attempts and hasn't been cleaned up or commented
-
-	if character.facing_direction == 1:
-		character.sprite.animation = "idleRight"
-	else:
-		character.sprite.animation = "idleLeft"
-	character.sprite.rotation_degrees = rotation_down
-	#rotation_down = lerp(abs(rotation_down), 180, 0)
-	rotation_down = clamp(abs(rotation_down), 0, 180)
+func _update(delta):
+	# Things can - and probably should - be tweaked here
 	
-	var rotation_normal = Vector2(cos(rotation_down), sin(rotation_down))
+	# Capping rotation
+	var clamp_max : float = lerp(rotation_down, 220 - momentum / 1.5, delta * 4)
+	clamp_max = clamp(clamp_max, 0, 180)
+	rotation_down = clamp(abs(rotation_down), clamp_max, 180)
+	var rotation_normal = Vector2(sin(deg2rad(rotation_down)), cos(deg2rad(rotation_down)))
 	
-	character.velocity.y += momentum / 80
-	character.velocity.x = (0.5 - abs(rotation_normal.x)) * 0
+	# acceleration
+	if rotation_normal.y < 0:
+		momentum += rotation_normal.y * rotation_normal.y * 410 * delta / pow(momentum, 0.01)
+	if momentum < 0: momentum = 0
+	# drag
+	momentum = lerp(momentum, 0, delta / 2.2)
 	
+	# velocity
+	character.velocity.y = lerp(character.velocity.y, -rotation_normal.y * momentum, delta * 20)
+	character.velocity.x = lerp(character.velocity.x, character.facing_direction * rotation_normal.x * momentum * 1.5, delta * 20)
+	
+	# Turning
+	var final_turn_speed : float = turn_speed * delta * sqrt(momentum)
 	if character.inputs[character.input_names.left][0]:
-		rotation_down -= turn_speed
-	elif character.inputs[character.input_names.right][0]:
-		rotation_down += turn_speed
+		rotation_down -= final_turn_speed * character.facing_direction
+	if character.inputs[character.input_names.right][0]:
+		rotation_down += final_turn_speed * character.facing_direction
 	
-	momentum = (rotation_down - 160) * 3
-	if momentum < 0:
-		momentum *= 1
+	# Turning around
+	if rotation_down > 180 or rotation_down < 0:
+		character.facing_direction *= -1
+	
+	# Sprite animation and rotation
+	character.sprite.animation = "doubleJumpRight" if character.facing_direction == 1 else "doubleJumpLeft"
+	character.sprite.rotation_degrees = rotation_down * character.facing_direction
 
 func _stop_check(_delta):
 	return character.is_grounded()
