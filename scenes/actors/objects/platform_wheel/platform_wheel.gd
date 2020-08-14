@@ -10,6 +10,9 @@ var last_parts := 4
 var color := Color.green
 var last_color := Color.green
 
+var start_angle := 0.0
+onready var angle_offset := deg2rad(start_angle)
+
 var radius : float = 2
 var last_radius : float = 2
 
@@ -18,8 +21,8 @@ var speed : float = 2
 var platform_count := 4
 
 func _set_properties():
-	savable_properties = ["parts", "speed", "radius", "platform_count", "color"]
-	editable_properties = ["parts", "speed", "radius", "platform_count", "color"]
+	savable_properties = ["parts", "speed", "radius", "platform_count", "color", "start_angle"]
+	editable_properties = ["parts", "speed", "radius", "platform_count", "color", "start_angle"]
 	
 func _set_property_values():
 	set_property("parts", parts)
@@ -27,6 +30,7 @@ func _set_property_values():
 	set_property("radius", radius)
 	set_property("platform_count", platform_count)
 	set_property("color", color)
+	set_property("start_angle", start_angle)
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
@@ -94,7 +98,7 @@ func _ready():
 
 func _physics_process(delta):
 	time_alive += delta * speed
-	var angle := fmod(time_alive, (2*PI))
+	var angle := fmod(time_alive + angle_offset, (2*PI))
 	for platform in platforms:
 		if(mode!=1):
 			platform.set_position(Vector2(radius * 32, 0).rotated(angle))

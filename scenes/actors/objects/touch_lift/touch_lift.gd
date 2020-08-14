@@ -9,6 +9,10 @@ var last_parts := 4
 var color := Color.green
 var last_color := Color.green
 
+var start_offset := 0
+var start_percentage := 0
+var last_start_percentage := 0
+
 const MT_BACK_FORTH = 0
 const MT_RESET = 1
 const MT_ONCE = 2
@@ -26,8 +30,8 @@ var max_speed := 1.0
 var curve = null
 
 func _set_properties():
-	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color"]
-	editable_properties = ["parts", "max_speed", "end_position", "move_type", "touch_start", "color"]
+	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset"]
+	editable_properties = ["parts", "max_speed", "end_position", "move_type", "touch_start", "color", "start_offset"]
 	
 func _set_property_values():
 	set_property("parts", parts)
@@ -37,6 +41,7 @@ func _set_property_values():
 	set_property("move_type", move_type)
 	set_property("touch_start", touch_start)
 	set_property("color", color)
+	set_property("start_offset", start_offset)
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
@@ -76,7 +81,6 @@ func _process(_delta):
 			start_sprite_node.get_child(1).self_modulate = color
 			end_sprite_node.get_child(1).self_modulate = color
 		last_color = color
-
 
 #-------------------------------- platform logic -----------------------
 
@@ -121,6 +125,10 @@ func _ready():
 		set_property("curve", path.curve)
 		
 	platform.set_parts(parts)
+	
+	linear_offset = start_offset
+	loop_offset = start_offset
+	path_follower.offset = start_offset
 	
 	if(mode==1):
 		platform.modulate = transparent_color
