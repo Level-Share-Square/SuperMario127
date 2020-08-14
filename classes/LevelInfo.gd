@@ -2,6 +2,7 @@ extends Node
 
 class_name LevelInfo
 
+
 const EMPTY_TIME_SCORE = -1 # idea: what if level creators could manually set this per shine, so there was a preset time to beat?
 const OBJECT_ID_SHINE = 2 
 const OBJECT_ID_STAR_COIN = -1 #get the correct id later
@@ -49,7 +50,7 @@ func _init(passed_level_code : String = "") -> void:
 	level_data.load_in(level_code)
 
 	level_name = level_data.name
-	#level_background = 
+	level_background = level_data.areas[0].settings.sky # change this later so the area picked is the one that the player spawns in
 
 	# loop through all objects in all areas to find the number of shines and star coins
 	for area in level_data.areas:
@@ -166,3 +167,9 @@ func set_star_coin_collected(star_coin_id : int) -> void:
 	if !collected_star_coins.has(star_coin_id):
 		collected_star_coins.append(star_coin_id)
 	var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
+
+func get_level_sky_png() -> StreamTexture:
+	var background_id_mapper = preload("res://scenes/shared/background/backgrounds/ids.tres")
+	var background_resource = CurrentLevelData.background_cache[level_background]
+	
+	return background_resource.texture
