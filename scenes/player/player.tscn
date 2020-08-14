@@ -1071,7 +1071,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 ignore_children = [ NodePath("Preset Selection"), NodePath("Description"), NodePath("ControlBindingWindow"), NodePath("PlayerSelectors") ]
-menu_buttons = [ NodePath("../Bottom/ResumeButton"), NodePath("../Bottom/RetryButton"), NodePath("../Bottom/MultiplayerButton") ]
+menu_buttons = [ NodePath("../Bottom/Buttons/ResumeButton"), NodePath("../Bottom/Buttons/RetryButton"), NodePath("../Bottom/Buttons/MultiplayerButton"), NodePath("../Bottom/Buttons/QuitButton") ]
 
 [node name="Move Left" type="Control" parent="UI/PauseScreen/ControlsOptions"]
 margin_top = -13.0
