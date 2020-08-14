@@ -31,8 +31,10 @@ func open():
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
 		tween.start()
 		yield(tween, "tween_completed")
+		mode_switcher.button.visible = false
 	
 func close():
+	mode_switcher.button.visible = true
 	tween.interpolate_property(self, "rect_position",
 		Vector2(773, 372), Vector2(773, 542), 0.25,
 		Tween.TRANS_CIRC, Tween.EASE_OUT)

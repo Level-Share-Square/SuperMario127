@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/actors/mode_switcher/ui/play_button.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/mode_switcher/ui/stop_button.png" type="Texture" id=2]
@@ -7,8 +7,15 @@
 [ext_resource path="res://scenes/actors/mode_switcher/mode_switcher_button.gd" type="Script" id=5]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=6]
 
+[sub_resource type="GDScript" id=1]
+script/source = "extends CanvasLayer
+
+onready var button: TextureButton = $ModeSwitcherButton
+"
+
 [node name="CanvasLayer" type="CanvasLayer"]
 layer = 127
+script = SubResource( 1 )
 
 [node name="Fader" type="ColorRect" parent="."]
 visible = false
