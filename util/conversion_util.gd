@@ -39,6 +39,27 @@ static func convert_042_to_043(result):
 				new_objects.append(object)
 			area_result.objects = new_objects
 	return result
+	
+static func convert_044_to_045(result):
+	# basically this function recreates the objects dictonary,
+	# but changes the shine sprites to have an automatic id
+	# it's hacky but we'll be changing this system later anyways
+	result.format_version = "0.4.5"
+	var current_id = 0
+	for area_result in result.areas:
+		if typeof(area_result) == TYPE_DICTIONARY:
+			var new_objects = []
+			for object_result in area_result.objects:
+				var object = object_result
+				if object.type_id == 2: #epicer hardcoding
+					# this code sucks but again we'll be changing the system later
+					object.properties.append(false)
+					object.properties.append(Color(1, 1, 0))
+					object.properties.append(current_id)
+					current_id += 1
+				new_objects.append(object)
+			area_result.objects = new_objects
+	return result
 
 static func compareVersions(version, other) -> int:
 	var v = version.split(".")

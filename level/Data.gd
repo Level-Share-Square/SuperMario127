@@ -194,7 +194,7 @@ func load_in(code):
 		result.format_version = "0.4.4"
 		
 	if result.format_version == "0.4.4":
-		result.format_version = "0.4.5"
+		result = conversion_util.convert_044_to_045(result)
 
 	assert(result.format_version)
 	assert(result.name)

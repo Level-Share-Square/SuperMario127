@@ -40,7 +40,7 @@ const WHITE_COLOR := Color(1, 1, 1)
 var last_color : Color
 
 var title := "Unnamed Shine"
-var description := "This is a shine! Collect it to win the level."
+var description := "You can change this description in the Shine Sprite's properties menu."
 var show_in_menu := true
 var activated := true
 var red_coins_activate := false
