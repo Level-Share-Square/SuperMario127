@@ -28,7 +28,7 @@ func _start_check(_delta):
 
 func _start(_delta):
 	# Don't even question it, it just works
-	rotation_down = clamp(90 + sqrt(0 if character.velocity.y < 0 else character.velocity.y), 90, 180)
+	rotation_down = clamp(90 + sqrt(0.0 if character.velocity.y < 0 else character.velocity.y), 90, 180)
 	momentum = sqrt(character.velocity.length()) * 10
 
 func _update(delta):
