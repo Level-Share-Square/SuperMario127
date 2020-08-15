@@ -106,6 +106,9 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 				single_time_score.text = generate_time_string(level_info.time_scores.values()[0])
 			else:
 				single_time_score.text = "--:--.--"
+		
+		set_control_buttons(true)
+		
 	else: # no level provided, set everything to empty level values
 		level_name_label.text = ""
 		shine_progress.text = "0/0"
@@ -116,6 +119,8 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 
 		single_time_score.text = "--:--.--"
 		set_time_score_button(false)
+
+		set_control_buttons(false)
 
 func add_level(level_info : LevelInfo):
 	# generate a (hopefully) unique name for each level
@@ -177,6 +182,12 @@ static func generate_time_string(time : float) -> String:
 
 	return "%s%s:%s%s.%s%s" % [minutes_pad, minutes, seconds_pad, seconds, centiseconds_pad, centiseconds]
 
+func set_control_buttons(is_enabled : bool) -> void:
+	button_play.disabled = !is_enabled
+	button_edit.disabled = !is_enabled
+	button_delete.disabled = !is_enabled
+	button_reset.disabled = !is_enabled
+
 # signal responses
 
 func on_level_selected(index : int) -> void:
@@ -213,7 +224,6 @@ func on_button_code_import_pressed() -> void:
 func on_button_code_cancel_pressed() -> void:
 	level_code_entry.text = ""
 	set_level_code_panel(false)
-	#print(SavedLevels.levels[0].shine_details)
 
 func on_button_copy_code_pressed() -> void:
 	var selected_level = SavedLevels.selected_level
