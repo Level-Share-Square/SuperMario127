@@ -156,11 +156,9 @@ func _draw():
 		draw_polyline(path.curve.get_baked_points(), line_color, 2.0)
 	else:
 		for offset in range(0,path.curve.get_baked_length(), 10.0):
-			draw_circle(path.curve.interpolate_baked(offset), sin(OS.get_ticks_msec() * 8) * 2, Color.darkgray)
+			draw_circle(path.curve.interpolate_baked(offset), 2, Color.darkgray)
 
 func _physics_process(delta):
-	update()
-
 	if(!activated):
 		return
 
