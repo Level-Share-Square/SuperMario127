@@ -157,6 +157,68 @@ func set_selected_box(new_selected_box: Node) -> void:
 	for placeable_item_button in placeable_items_button_container.get_children():
 		placeable_item_button.update_selection()
 
+# Recursive functions to find an item and a tile respectively within PlaceableItems
+func pick_item_recursive_find(id: int, group: Node) -> PlaceableItem:
+	if group is PlaceableItem:
+		return group as PlaceableItem if group.is_object and group.object_id == id else null
+	else:
+		for node in group.get_children():
+			var result := pick_item_recursive_find(id, node)
+			if result != null:
+				return result
+	return null
+
+func pick_tile_recursive_find(tileset_id: int, tile_id: int, group: Node) -> PlaceableItem:
+	if group is PlaceableItem:
+		return group as PlaceableItem if\
+		!group.is_object and group.tileset_id == tileset_id and group.tile_id == tile_id else null
+	else:
+		for node in group.get_children():
+			var result := pick_tile_recursive_find(tileset_id, tile_id, node)
+			if result != null:
+				return result
+	return null
+
+# Pick a GameObject as a PlaceableItem
+func pick_item(obj: GameObject) -> void:
+	var level_object = obj.level_object.get_ref()
+	var id : int = level_object.type_id
+	var placeable_item := pick_item_recursive_find(id, placeable_items)
+	if placeable_item == null: return # In case
+	
+	# Should probably go into a function
+	var button_container = placeable_items_button_container
+	var boxes = button_container.get_children()
+	var index_size = (button_container.number_of_boxes-1)
+	for index in range(button_container.number_of_boxes):
+		if index != index_size:
+			var box = boxes[index_size - index]
+			box.item = boxes[(index_size - index) - 1].item
+			box.item_changed()
+	boxes[0].item = placeable_item
+	boxes[0].item_changed()
+	set_selected_box(boxes[0])
+
+# Pick a tile as a PlaceableItem
+func pick_tile(tile) -> void:
+	var tileset_id = tile[0]
+	var tile_id = tile[1]
+	var placeable_item := pick_tile_recursive_find(tileset_id, tile_id, placeable_items)
+	if placeable_item == null: return # In case
+	
+	# Should probably go into a function
+	var button_container = placeable_items_button_container
+	var boxes = button_container.get_children()
+	var index_size = (button_container.number_of_boxes-1)
+	for index in range(button_container.number_of_boxes):
+		if index != index_size:
+			var box = boxes[index_size - index]
+			box.item = boxes[(index_size - index) - 1].item
+			box.item_changed()
+	boxes[0].item = placeable_item
+	boxes[0].item_changed()
+	set_selected_box(boxes[0])
+
 func switch_scenes() -> void:
 	var _change_scene = get_tree().change_scene("res://scenes/player/player.tscn")
 
@@ -222,6 +284,9 @@ func _process(delta : float) -> void:
 			
 			if Input.is_action_just_pressed("flip_object_v"):
 				hovered_object.set_property("scale", Vector2(hovered_object.scale.x, -hovered_object.scale.y), true)
+			
+			if Input.is_action_just_pressed("minecraft_pick_block"):
+				pick_item(hovered_object)
 			
 			if left_held and selected_tool == 0 and Input.is_action_just_pressed("place") and !rotating:
 				if Input.is_action_pressed("duplicate"):
@@ -316,6 +381,12 @@ func _process(delta : float) -> void:
 								tiles_stack.append([mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, last_tile, [0, 0]])
 							
 							shared.set_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, 0, 0)
+			
+			# Middle click tiles
+			var item = selected_box.item
+			if !item.is_object and Input.is_action_just_pressed("minecraft_pick_block"):
+				var tile = shared.get_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer)
+				pick_tile(tile)
 			
 			if selected_box.item.is_object and !rotating and time_clicked <= 0:
 				update_selected_object(mouse_pos)

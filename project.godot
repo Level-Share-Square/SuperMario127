@@ -776,6 +776,11 @@ erase={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+minecraft_pick_block={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":3,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
 lock_tile_axis={
 "deadzone": 0.5,
 "events": [  ]
@@ -932,6 +937,7 @@ quality/2d/use_pixel_snap=true
 threads/thread_model=0
 quality/filters/anisotropic_filter_level=1
 vram_compression/import_bptc=true
+vram_compression/import_etc=true
 limits/buffers/canvas_polygon_buffer_size_kb=1024
 limits/buffers/canvas_polygon_index_buffer_size_kb=1024
 environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
