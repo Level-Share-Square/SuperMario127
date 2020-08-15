@@ -6,7 +6,7 @@ const EMPTY_TIME_SCORE = -1 # idea: what if level creators could manually set th
 const OBJECT_ID_SHINE = 2 
 const OBJECT_ID_STAR_COIN = -1 #get the correct id later
 
-const VERSION : String = "0.0.1"
+const VERSION : String = "0.0.2"
 
 # this class stores all the info and savedata relating to a level that can be played from the level list 
 
@@ -123,17 +123,11 @@ func get_saveable_dictionary() -> Dictionary:
 	return save_dictionary
 
 func load_from_dictionary(save_dictionary : Dictionary) -> void:
-	level_code = save_dictionary["level_code"]
-	level_name = save_dictionary["level_name"]
-	level_background = save_dictionary["level_background"]
-	level_foreground = save_dictionary["level_foreground"]
-	shine_count = save_dictionary["shine_count"] 
-	star_coin_count = save_dictionary["star_coin_count"]
-
-	collected_shines = save_dictionary["collected_shines"]
-	collected_star_coins = save_dictionary["collected_star_coins"]
-	coin_score = save_dictionary["coin_score"]
-	time_scores = save_dictionary["time_scores"]
+	match save_dictionary["VERSION"]:
+		"0.0.1":
+			load_level_0_0_1(save_dictionary)
+		"0.0.2":
+			load_level_0_0_2(save_dictionary)
 
 func generate_shine_details() -> Array:
 	var new_shine_details = []
@@ -185,3 +179,29 @@ func get_level_foreground_texture() -> StreamTexture:
 	var foreground_resource = CurrentLevelData.foreground_cache[level_foreground]
 
 	return foreground_resource.preview
+
+# LevelInfo dictionary loading functions for different versions start here
+func load_level_0_0_1(save_dictionary : Dictionary):
+	level_code = save_dictionary["level_code"]
+	level_name = save_dictionary["level_name"]
+	level_background = save_dictionary["level_background"]
+	shine_count = save_dictionary["shine_count"] 
+	star_coin_count = save_dictionary["star_coin_count"]
+
+	collected_shines = save_dictionary["collected_shines"]
+	collected_star_coins = save_dictionary["collected_star_coins"]
+	coin_score = save_dictionary["coin_score"]
+	time_scores = save_dictionary["time_scores"]
+
+func load_level_0_0_2(save_dictionary : Dictionary):
+	level_code = save_dictionary["level_code"]
+	level_name = save_dictionary["level_name"]
+	level_background = save_dictionary["level_background"]
+	level_foreground = save_dictionary["level_foreground"]
+	shine_count = save_dictionary["shine_count"] 
+	star_coin_count = save_dictionary["star_coin_count"]
+
+	collected_shines = save_dictionary["collected_shines"]
+	collected_star_coins = save_dictionary["collected_star_coins"]
+	coin_score = save_dictionary["coin_score"]
+	time_scores = save_dictionary["time_scores"]
