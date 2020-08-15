@@ -171,9 +171,6 @@ func update_tilemaps():
 			tilemap.set_cell(left, y, tile)
 			tilemap.set_cell(right, y, tile)
 
-	
-	for tilemap in [very_back_tilemap_node, back_tilemap_node, middle_tilemap_node, front_tilemap_node]:
-		tilemap.update_bitmask_region(bounds.position, bounds.end)
 		
 	tile = middle_tilemap_node.tile_set.find_tile_by_name("OutOfBounds")
 	
@@ -195,3 +192,6 @@ func update_tilemaps():
 		very_back_tilemap_node.set_cell(right, y, tile)
 		very_back_tilemap_node.set_cell(right+1, y, tile)
 		very_back_tilemap_node.set_cell(right+2, y, tile)
+		
+	for tilemap in [very_back_tilemap_node, back_tilemap_node, middle_tilemap_node, front_tilemap_node]:
+		tilemap.update_bitmask_region(bounds.position, bounds.end)
