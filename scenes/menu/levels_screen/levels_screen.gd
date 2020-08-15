@@ -35,6 +35,7 @@ onready var shine_progress : Label = $MarginContainer/HBoxContainer/LevelInfo/Le
 onready var star_coin_progress : Label = $MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel/HBoxContainer3/StarCoinProgressLabel
 onready var coin_score : Label = $MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel/HBoxContainer2/Label
 onready var single_time_score : Label = $MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel/HBoxContainer3/Label
+onready var time_score_list : ItemList = $MarginContainer/HBoxContainer/TimeScorePanel/PanelContainer/VBoxContainer/TimeScoreList
 
 onready var level_code_entry : TextEdit = $MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/LevelCodeEntry
 
@@ -96,9 +97,23 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 		level_foreground_thumbnail.modulate = level_info.get_level_background_modulate()
 		level_foreground_thumbnail.texture = level_info.get_level_foreground_texture()
 
+		coin_score.text = str(level_info.coin_score)
+
+		# TODO: replace multi-shine time scores with some custom thing, ItemList is not a good fit
+		# displaying time scores
 		if level_info.shine_details.size() > 1:
 			set_time_score_button(true)
-			# add populating the time scores panel here later
+
+			time_score_list.clear()
+			
+			var list_position := 1
+			for time_score in level_info.time_scores.values():
+				if time_score != -1:
+					var time_score_string : String = generate_time_string(time_score)
+					time_score_list.add_item(str(list_position) + ". " + time_score_string)
+				else: 
+					time_score_list.add_item(str(list_position) + ". --:--.--")
+				list_position += 1
 		else: 
 			set_time_score_button(false)
 			# if there is at least one time, and that time isn't an empty time
@@ -113,9 +128,12 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 		level_name_label.text = ""
 		shine_progress.text = "0/0"
 		star_coin_progress.text = "0/0"
+
 		level_sky_thumbnail.texture = DEFAULT_SKY_THUMBNAIL
 		level_foreground_thumbnail.modulate = DEFAULT_FOREGROUND_MODULATE
 		level_foreground_thumbnail.texture = DEFAULT_FOREGROUND_THUMBNAIL
+
+		coin_score.text = str(0)
 
 		single_time_score.text = "--:--.--"
 		set_time_score_button(false)

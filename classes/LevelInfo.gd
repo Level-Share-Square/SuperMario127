@@ -112,13 +112,28 @@ func load_from_dictionary(save_dictionary : Dictionary) -> void:
 func collectible_with_id_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
 	return item1["id"] < item2["id"]
 
-func set_shine_collected(shine_id : int) -> void:
+func set_shine_collected(shine_id : int, save_to_disk : bool = true) -> void:
 	collected_shines[shine_id] = true
-	var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
+	if save_to_disk:
+		var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
 
-func set_star_coin_collected(star_coin_id : int) -> void:
+func set_star_coin_collected(star_coin_id : int, save_to_disk : bool = true) -> void:
 	collected_star_coins[star_coin_id] = true
-	var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
+	if save_to_disk:
+		var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
+
+func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
+	var new_coin_score = CurrentLevelData.level_data.vars.coins_collected
+	var new_time_score = CurrentLevelData.time_score
+
+	if new_coin_score > coin_score:
+		coin_score = new_coin_score 
+
+	if new_time_score < time_scores[shine_id] or time_scores[shine_id] == EMPTY_TIME_SCORE:
+		time_scores[shine_id] = new_time_score
+
+	if save_to_disk:
+		var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
 
 func get_level_background_texture() -> StreamTexture:
 	var level_background = get_level_data().areas[spawn_area].settings.sky 

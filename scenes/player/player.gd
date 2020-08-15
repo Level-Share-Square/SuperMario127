@@ -48,6 +48,9 @@ func _ready():
 			get_node(character).controlled_locally = false
 			get_node(camera).character_node = get_node(character2)
 
+	if mode_switcher.get_node("ModeSwitcherButton").invisible:
+		CurrentLevelData.start_tracking_time_score()
+
 func _unhandled_input(event):
 	if event.is_action_pressed("reload") and !scene_transitions.transitioning and (!mode_switcher.get_node("ModeSwitcherButton").switching_disabled or mode_switcher.get_node("ModeSwitcherButton").invisible):
 		if !get_node(character).dead:

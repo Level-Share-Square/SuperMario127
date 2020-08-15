@@ -13,6 +13,8 @@ var enemies_instanced := 0
 # The music IDs that can be randomly selected, can be found in the level code
 var random_music := [ 1, 3, 18, 16 ]
 
+var time_score : float = 0
+
 func pick_random_music() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
@@ -20,6 +22,8 @@ func pick_random_music() -> void:
 	CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music = random_music[array_index]
 
 func _ready() -> void:
+	set_process(false)
+
 	level_data = LevelData.new()
 	level_data.load_in(load("res://assets/level_data/template_level.tres").contents)
 	pick_random_music()
@@ -39,3 +43,14 @@ func _ready() -> void:
 		var foreground_id_mapper : IdMap = preload("res://scenes/shared/background/foregrounds/ids.tres")
 		for foreground_id in foreground_id_mapper.ids:
 			foreground_cache.append(load("res://scenes/shared/background/foregrounds/" + foreground_id + "/resource.tres"))
+
+# for now, process is disabled by default, so the timer needs to be started manually, if process here is ever needed for something else, create a bool for this
+func _process(delta):
+	time_score += delta
+
+func start_tracking_time_score():
+	set_process(true)
+	time_score = 0
+
+func stop_tracking_time_score():
+	set_process(false)

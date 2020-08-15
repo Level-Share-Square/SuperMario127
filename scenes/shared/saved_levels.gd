@@ -8,6 +8,8 @@ var levels : Array = [] # array of type LevelInfo
 var levels_disk_paths : Array = [] # array of type String
 var selected_level : int = -1 # -1 means no level is selected
 
+# var selected_level # this should be a property that returns the LevelInfo of the selected level, have to change the name of the current selected_level to selected_level_index first
+
 # we can just reuse these objects for everything involving files, nothing will happen in parallel atm anyway
 var file : File = File.new()
 var directory : Directory = Directory.new()
