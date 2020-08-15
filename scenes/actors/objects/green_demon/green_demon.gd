@@ -43,6 +43,7 @@ func kill(body):
 
 func _ready():
 	original_position = position
+	particles.process_material = particles.process_material.duplicate()
 	particles.process_material.scale = (scale.x + scale.y) / 2 # Average works well enough
 	particles.amount = 6 * current_speed
 	if mode != 1:
