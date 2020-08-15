@@ -13,6 +13,8 @@ onready var button_move_right = $Buttons/ButtonMoveRight
 onready var button_select_shine = $Buttons/ButtonSelectShine 
 onready var button_back = $Buttons/ButtonBack
 
+onready var background_image = $Background
+
 const PLAYER_SCENE : PackedScene = preload("res://scenes/player/player.tscn")
 
 const SHINE_SPRITE_SCENE = preload("res://scenes/menu/shine_select_screen/shine_sprite.tscn")
@@ -45,6 +47,7 @@ func _ready() -> void:
 
 func _open_screen() -> void:
 	shine_details = SavedLevels.levels[SavedLevels.selected_level].shine_details
+	background_image.texture = SavedLevels.levels[SavedLevels.selected_level].get_level_background_texture()
 
 	for i in range(shine_details.size()):
 		var shine_sprite = SHINE_SPRITE_SCENE.instance()

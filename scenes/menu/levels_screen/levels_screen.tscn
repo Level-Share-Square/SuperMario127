@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/menu/levels_screen/levels_screen.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/actors/objects/yellow_coin/preview.png" type="Texture" id=8]
 [ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=9]
 [ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=10]
+[ext_resource path="res://scenes/shared/background/foregrounds/hills/preview.png" type="Texture" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 8.0
@@ -320,6 +321,15 @@ margin_right = 216.0
 margin_bottom = 116.0
 size_flags_vertical = 3
 texture = ExtResource( 6 )
+expand = true
+
+[node name="ForegroundThumbnailImage" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 216.0
+margin_bottom = 116.0
+size_flags_vertical = 3
+texture = ExtResource( 11 )
 expand = true
 
 [node name="LevelName" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo"]

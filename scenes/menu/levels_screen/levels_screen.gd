@@ -29,6 +29,7 @@ onready var time_score_panel : PanelContainer = $MarginContainer/HBoxContainer/T
 
 # level info
 onready var level_thumbnail : TextureRect = $MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer/ThumbnailImage
+onready var level_foreground_thumbnail : TextureRect = $MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer/ForegroundThumbnailImage
 onready var level_name_label : Label = $MarginContainer/HBoxContainer/LevelInfo/LevelName
 onready var shine_progress : Label = $MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel/HBoxContainer2/ShineProgressLabel
 onready var star_coin_progress : Label = $MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel/HBoxContainer3/StarCoinProgressLabel
@@ -45,6 +46,8 @@ const TEMPLATE_LEVEL: String = preload("res://assets/level_data/template_level.t
 const NO_LEVEL : int = -1
 
 const DEFAULT_THUMBNAIL : StreamTexture = preload("res://scenes/shared/background/backgrounds/day/day.png")
+const DEFAULT_FOREGROUND_MODULATE : Color = Color(1, 1, 1)
+const DEFAULT_FOREGROUND_THUMBNAIL : StreamTexture = preload("res://scenes/shared/background/foregrounds/hills/preview.png")
 
 func _ready() -> void:
 	var _connect
@@ -85,7 +88,10 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 	if level_info != null:
 		level_name_label.text = level_info.level_name
 		shine_progress.text = "%s/%s" % [level_info.collected_shines.size(), level_info.shine_count]
-		level_thumbnail.texture = level_info.get_level_sky_texture()
+		
+		level_thumbnail.texture = level_info.get_level_background_texture()
+		level_foreground_thumbnail.modulate = level_info.get_level_background_modulate()
+		level_foreground_thumbnail.texture = level_info.get_level_foreground_texture()
 
 		if level_info.shine_count > 1:
 			set_time_score_button(true)
@@ -102,6 +108,8 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 		shine_progress.text = "0/0"
 		star_coin_progress.text = "0/0"
 		level_thumbnail.texture = DEFAULT_THUMBNAIL
+		level_foreground_thumbnail.modulate = DEFAULT_FOREGROUND_MODULATE
+		level_foreground_thumbnail.texture = DEFAULT_FOREGROUND_THUMBNAIL
 
 		single_time_score.text = "--:--.--"
 		set_time_score_button(false)
