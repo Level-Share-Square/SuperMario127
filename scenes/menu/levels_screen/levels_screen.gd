@@ -28,7 +28,7 @@ onready var level_info_panel : VBoxContainer = $MarginContainer/HBoxContainer/Le
 onready var time_score_panel : PanelContainer = $MarginContainer/HBoxContainer/TimeScorePanel
 
 # level info
-onready var level_thumbnail : TextureRect = $MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer/ThumbnailImage
+onready var level_sky_thumbnail : TextureRect = $MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer/ThumbnailImage
 onready var level_foreground_thumbnail : TextureRect = $MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer/ForegroundThumbnailImage
 onready var level_name_label : Label = $MarginContainer/HBoxContainer/LevelInfo/LevelName
 onready var shine_progress : Label = $MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel/HBoxContainer2/ShineProgressLabel
@@ -45,7 +45,7 @@ const TEMPLATE_LEVEL: String = preload("res://assets/level_data/template_level.t
 
 const NO_LEVEL : int = -1
 
-const DEFAULT_THUMBNAIL : StreamTexture = preload("res://scenes/shared/background/backgrounds/day/day.png")
+const DEFAULT_SKY_THUMBNAIL : StreamTexture = preload("res://scenes/shared/background/backgrounds/day/day.png")
 const DEFAULT_FOREGROUND_MODULATE : Color = Color(1, 1, 1)
 const DEFAULT_FOREGROUND_THUMBNAIL : StreamTexture = preload("res://scenes/shared/background/foregrounds/hills/preview.png")
 
@@ -87,27 +87,30 @@ func _ready() -> void:
 func populate_info_panel(level_info : LevelInfo = null) -> void:
 	if level_info != null:
 		level_name_label.text = level_info.level_name
-		shine_progress.text = "%s/%s" % [level_info.collected_shines.size(), level_info.shine_count]
+
+		var collected_shine_count = level_info.collected_shines.values().count(true)
+		shine_progress.text = "%s/%s" % [collected_shine_count, level_info.shine_details.size()]
 		
-		level_thumbnail.texture = level_info.get_level_background_texture()
+		# set the little thumbnail to look just like the actual level background
+		level_sky_thumbnail.texture = level_info.get_level_background_texture()
 		level_foreground_thumbnail.modulate = level_info.get_level_background_modulate()
 		level_foreground_thumbnail.texture = level_info.get_level_foreground_texture()
 
-		if level_info.shine_count > 1:
+		if level_info.shine_details.size() > 1:
 			set_time_score_button(true)
 			# add populating the time scores panel here later
 		else: 
 			set_time_score_button(false)
-			# if there is a first element (since there might not be) and that first element isn't an empty time
-			if level_info.time_scores.size() > 0 and level_info.time_scores.front() != LevelInfo.EMPTY_TIME_SCORE:
-				single_time_score.text = generate_time_string(level_info.time_scores[0])
+			# if there is at least one time, and that time isn't an empty time
+			if level_info.time_scores.size() > 0 and level_info.time_scores.values()[0] != LevelInfo.EMPTY_TIME_SCORE:
+				single_time_score.text = generate_time_string(level_info.time_scores.values()[0])
 			else:
 				single_time_score.text = "--:--.--"
 	else: # no level provided, set everything to empty level values
 		level_name_label.text = ""
 		shine_progress.text = "0/0"
 		star_coin_progress.text = "0/0"
-		level_thumbnail.texture = DEFAULT_THUMBNAIL
+		level_sky_thumbnail.texture = DEFAULT_SKY_THUMBNAIL
 		level_foreground_thumbnail.modulate = DEFAULT_FOREGROUND_MODULATE
 		level_foreground_thumbnail.texture = DEFAULT_FOREGROUND_THUMBNAIL
 
@@ -228,7 +231,7 @@ func on_button_play_pressed() -> void:
 
 	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
 	# TODO: additional checks for things like all shines set to not show in menu and such
-	if SavedLevels.levels[selected_level].shine_count > 1:
+	if SavedLevels.levels[selected_level].shine_details.size() > 1:
 		emit_signal("screen_change", "levels_screen", "shine_select_screen") 
 	else:
 		var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)
@@ -253,7 +256,7 @@ func on_button_reset_pressed() -> void:
 	if selected_level == NO_LEVEL:
 		return
 	var level_info = SavedLevels.levels[selected_level]
-	LevelInfo.reset_save_data(level_info)
+	level_info.reset()
 	populate_info_panel(level_info)
 
 # plan for populating the speedrun times panel is to give each time an icon to say if the shine is collected or not, and then use the text spot for the exact time (maybe add a suffix with the shine number?)

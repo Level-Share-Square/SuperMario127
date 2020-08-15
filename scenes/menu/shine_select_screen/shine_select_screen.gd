@@ -46,8 +46,9 @@ func _ready() -> void:
 	_connect = button_back.connect("pressed", self, "on_button_back_pressed")
 
 func _open_screen() -> void:
-	shine_details = SavedLevels.levels[SavedLevels.selected_level].shine_details
-	background_image.texture = SavedLevels.levels[SavedLevels.selected_level].get_level_background_texture()
+	var selected_level = SavedLevels.selected_level
+	shine_details = SavedLevels.levels[selected_level].shine_details
+	background_image.texture = SavedLevels.levels[selected_level].get_level_background_texture()
 
 	for i in range(shine_details.size()):
 		var shine_sprite = SHINE_SPRITE_SCENE.instance()

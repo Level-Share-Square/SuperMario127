@@ -73,13 +73,12 @@ func _ready() -> void:
 		area.connect("body_entered", self, "collect")
 		unpause_timer.wait_time = UNPAUSE_TIMER_LENGTH
 		
-		# we loop through all the collected shines and if one of the IDs matches with ours, we break the loop and is_blue is set to true
-		if SavedLevels.selected_level != -1:
-			var collected_shines = SavedLevels.levels[SavedLevels.selected_level].collected_shines
-			for collected_shine in collected_shines:
-				if collected_shine == id:
-					is_blue = true
-					break
+		# if the shine is collected, make it blue 
+		# (collected_shines is a Dictionary where the key is the shine id and the value is a bool)
+		var collected_shines = SavedLevels.levels[SavedLevels.selected_level].collected_shines
+		if collected_shines.has(id):
+			is_blue = collected_shines[id]
+
 	var _connect = connect("property_changed", self, "update_color")
 	update_color("color", color)
 
