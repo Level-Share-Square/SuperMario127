@@ -3,6 +3,8 @@ extends EditorWindow
 export var grid_container : NodePath
 export var preview : NodePath
 export var delete_button : NodePath
+export var to_back_button : NodePath
+export var to_front_button : NodePath
 export var shared : NodePath
 
 var object
@@ -12,10 +14,14 @@ onready var property_scene = preload("res://scenes/editor/property.tscn")
 onready var grid_container_node = get_node(grid_container)
 onready var preview_node = get_node(preview)
 onready var delete_button_node = get_node(delete_button)
+onready var to_back_button_node = get_node(to_back_button)
+onready var to_front_button_node = get_node(to_front_button)
 onready var shared_node = get_node(shared)
 
 func _ready():
 	var _connect = delete_button_node.connect("pressed", self, "delete_pressed")
+	var _connect2 = to_back_button_node.connect("pressed", self, "to_back_pressed")
+	var _connect3 = to_front_button_node.connect("pressed", self, "to_front_pressed")
 	
 func delete_pressed():
 	close()
@@ -23,6 +29,12 @@ func delete_pressed():
 	object = null
 	preview_object.queue_free()
 	preview_object = null
+	
+func to_back_pressed():
+	shared_node.move_object_to_back(object.get_ref())
+	
+func to_front_pressed():
+	shared_node.move_object_to_front(object.get_ref())
 	
 func edit_preview_object(key, value):
 	if object != null and object.get_ref() and is_instance_valid(preview_object):

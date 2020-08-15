@@ -64,6 +64,7 @@ func _start(delta):
 			sound_player.play_triple_jump_sound()
 			if character.character == 0:
 				character.velocity.y = -triple_jump_power
+				character.set_state_by_name("WingMarioState", delta)
 			else:
 				character.velocity.y = -triple_jump_power_luigi
 			character.position.y -= 3

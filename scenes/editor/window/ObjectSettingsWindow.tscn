@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://scenes/shared/button_sound_player.gd" type="Script" id=9]
 [ext_resource path="res://assets/styles/RedButtonStyleNormal.tres" type="StyleBox" id=10]
 [ext_resource path="res://assets/styles/RedButtonStyleHover.tres" type="StyleBox" id=11]
+[ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=12]
+[ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -21,29 +23,26 @@ font_data = ExtResource( 1 )
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="DynamicFont" id=3]
+size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.596078, 0.596078, 0.596078, 1 )
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.882353, 0.882353, 0.882353, 1 )
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.486275, 0.486275, 0.486275, 1 )
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
 [sub_resource type="StyleBoxFlat" id=6]
-border_width_left = 24
+bg_color = Color( 0.486275, 0.486275, 0.486275, 1 )
 corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
@@ -56,7 +55,14 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="Theme" id=8]
+[sub_resource type="StyleBoxFlat" id=8]
+border_width_left = 24
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="Theme" id=9]
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -448,11 +454,11 @@ VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/increment = null
 VScrollBar/icons/increment_highlight = null
-VScrollBar/styles/grabber = SubResource( 3 )
-VScrollBar/styles/grabber_highlight = SubResource( 4 )
-VScrollBar/styles/grabber_pressed = SubResource( 5 )
-VScrollBar/styles/scroll = SubResource( 6 )
-VScrollBar/styles/scroll_focus = SubResource( 7 )
+VScrollBar/styles/grabber = SubResource( 4 )
+VScrollBar/styles/grabber_highlight = SubResource( 5 )
+VScrollBar/styles/grabber_pressed = SubResource( 6 )
+VScrollBar/styles/scroll = SubResource( 7 )
+VScrollBar/styles/scroll_focus = SubResource( 8 )
 VSeparator/constants/separation = 4
 VSeparator/styles/separator = null
 VSlider/icons/grabber = null
@@ -480,7 +486,7 @@ visible = false
 margin_left = 165.0
 margin_top = 130.0
 margin_right = 1267.0
-margin_bottom = 680.0
+margin_bottom = 765.0
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 0
 texture = ExtResource( 4 )
@@ -496,6 +502,8 @@ __meta__ = {
 grid_container = NodePath("Contents/ScrollContainer/GridContainer")
 preview = NodePath("Contents/Preview")
 delete_button = NodePath("Contents/DeleteButton")
+to_back_button = NodePath("Contents/ToBackButton")
+to_front_button = NodePath("Contents/ToFrontButton")
 shared = NodePath("../../Shared")
 
 [node name="Title" type="RichTextLabel" parent="."]
@@ -534,10 +542,10 @@ volume_db = -10.0
 
 [node name="Contents" type="Control" parent="."]
 anchor_bottom = 0.06
-margin_left = 17.4044
+margin_left = 17.0
 margin_top = 104.0
-margin_right = 1087.4
-margin_bottom = 491.0
+margin_right = 1087.0
+margin_bottom = 574.5
 rect_clip_content = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -578,12 +586,58 @@ volume_db = -10.0
 stream = ExtResource( 7 )
 volume_db = -10.0
 
+[node name="ToBackButton" type="Button" parent="Contents"]
+margin_left = 31.0
+margin_top = 431.0
+margin_right = 171.0
+margin_bottom = 491.0
+custom_styles/hover = ExtResource( 12 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = ExtResource( 13 )
+custom_fonts/font = SubResource( 3 )
+text = "To Back"
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="Contents/ToBackButton"]
+stream = ExtResource( 2 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="Contents/ToBackButton"]
+stream = ExtResource( 7 )
+volume_db = -10.0
+
+[node name="ToFrontButton" type="Button" parent="Contents"]
+margin_left = 191.0
+margin_top = 431.0
+margin_right = 321.0
+margin_bottom = 491.0
+custom_styles/hover = ExtResource( 12 )
+custom_styles/pressed = ExtResource( 13 )
+custom_styles/normal = ExtResource( 13 )
+custom_fonts/font = SubResource( 3 )
+text = "To Front"
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="Contents/ToFrontButton"]
+stream = ExtResource( 2 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="Contents/ToFrontButton"]
+stream = ExtResource( 7 )
+volume_db = -10.0
+
 [node name="ScrollContainer" type="ScrollContainer" parent="Contents"]
 margin_left = 360.0
 margin_right = 1070.0
-margin_bottom = 420.0
+margin_bottom = 508.0
 rect_clip_content = false
-theme = SubResource( 8 )
+theme = SubResource( 9 )
 scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -591,7 +645,7 @@ __meta__ = {
 
 [node name="GridContainer" type="GridContainer" parent="Contents/ScrollContainer"]
 margin_right = 710.0
-margin_bottom = 420.0
+margin_bottom = 508.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 140
