@@ -11,7 +11,7 @@
 extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 12, 12 )
+extents = Vector2( 16, 12 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 26, 10 )
@@ -23,7 +23,7 @@ extents = Vector2( 36, 10 )
 extents = Vector2( 24, 24 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 10, 100.541 )
+extents = Vector2( 16, 100.541 )
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 100, 10 )
@@ -99,7 +99,6 @@ visible = false
 shape = SubResource( 5 )
 
 [node name="PlayerStompDetector" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 35
 
