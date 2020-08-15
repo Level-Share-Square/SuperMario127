@@ -1366,7 +1366,8 @@ preview = ExtResource( 101 )
 script = ExtResource( 3 )
 object_id = 46
 is_object = true
-object_center = Vector2( 16, 16 )
+object_center = Vector2( 16, 32 )
+tile_mode_offset = Vector2( 0, 16 )
 icon = ExtResource( 152 )
 preview = ExtResource( 151 )
 

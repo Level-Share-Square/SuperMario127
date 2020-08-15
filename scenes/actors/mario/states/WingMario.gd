@@ -20,9 +20,10 @@ func _ready():
 	disable_friction = true
 	disable_animation = true
 	override_rotation = true
+	use_dive_collision = true
 
 func _start_check(_delta):
-	#return character.state == character.get_state_node("DiveState")
+	#return character.state == character.get_state_node("DiveState") and character.velocity.y > 0
 	return false
 
 func _start(_delta):
@@ -78,6 +79,9 @@ func _update(delta):
 	or (character.facing_direction == -1 and character.is_walled_left())\
 	or (character.is_ceiling()):
 		character.damage_with_knockback(character.position + Vector2(character.facing_direction * 8, 0), 0, "Hit", 0)
+
+func _stop(delta):
+	character.set_state_by_name("SlideState", delta)
 
 func _stop_check(_delta):
 	return character.is_grounded()
