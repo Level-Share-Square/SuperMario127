@@ -76,6 +76,7 @@ export var deceleration := 15.0
 export var aerial_acceleration := 7.5
 export var friction := 10.5
 export var aerial_friction := 1.15
+export var max_aerial_velocity := 640
 
 # Sounds
 var sound_player
@@ -462,7 +463,9 @@ func _physics_process(delta: float) -> void:
 		invulnerable_frames -= 1
 	
 	# Gravity
-	velocity.y = lerp(velocity.y, (gravity * Vector2(0, gravity_scale) * 240).y, delta / 2)
+	velocity.y = clamp(lerp(
+		velocity.y, (gravity * Vector2(0, gravity_scale) * 240).y, delta / 2),
+		-max_aerial_velocity, max_aerial_velocity)
 
 	if state != null:
 		disable_movement = state.disable_movement

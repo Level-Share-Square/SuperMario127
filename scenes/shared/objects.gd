@@ -57,3 +57,15 @@ func destroy_object(object_node, remove_from_data):
 		var level_object = object_node.level_object.get_ref()
 		level_area.objects.erase(level_object)
 	object_node.queue_free()
+	
+func move_object_to_back(object_node):
+	var level_object = object_node.level_object.get_ref()
+	level_area.objects.erase(level_object)
+	level_area.objects.insert(0, level_object)
+	move_child(object_node, 0)
+	
+func move_object_to_front(object_node):
+	var level_object = object_node.level_object.get_ref()
+	level_area.objects.erase(level_object)
+	level_area.objects.append(level_object)
+	move_child(object_node, get_child_count()-1)

@@ -51,3 +51,5 @@ margin_top = 282.0
 margin_right = 249.0
 margin_bottom = 353.0
 text = "Quit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

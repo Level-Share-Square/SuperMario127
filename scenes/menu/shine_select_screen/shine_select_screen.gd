@@ -13,17 +13,18 @@ onready var button_move_right = $Buttons/ButtonMoveRight
 onready var button_select_shine = $Buttons/ButtonSelectShine 
 onready var button_back = $Buttons/ButtonBack
 
+onready var background_image = $Background
+
 const PLAYER_SCENE : PackedScene = preload("res://scenes/player/player.tscn")
 
 const SHINE_SPRITE_SCENE = preload("res://scenes/menu/shine_select_screen/shine_sprite.tscn")
 const CHANGE_SELECTION_TIME : float = 0.35
 
-# spacing between the shines at different points
-const SHINE_BESIDE_CENTER_POSITION : float = 125.0
-const SHINE_BESIDE_BESIDE_CENTER_POSITION : float = SHINE_BESIDE_CENTER_POSITION + 100.0
-# had to add two extra edge positions so it would look and feel right
-const SHINE_BESIDE_EDGES_POSITION : float = SHINE_BESIDE_BESIDE_CENTER_POSITION + 100.0
-const SHINE_AT_EDGES_POSITION : float = SHINE_BESIDE_EDGES_POSITION + 100.0
+# spacing between the shines at different points 
+# this should probably be an array now
+const SHINE_FIRST_POSITION_OFFSET : float = 125.0
+const SHINE_POSITION_INCREMENT : float = 100.0
+const SHINE_FIRST_OFFSET_DIFFERENCE = SHINE_FIRST_POSITION_OFFSET - SHINE_POSITION_INCREMENT
 
 # size of the shine at different points
 const SHINE_CENTER_SIZE : float = 4.0
@@ -46,14 +47,17 @@ func _ready() -> void:
 
 func _open_screen() -> void:
 	shine_details = SavedLevels.levels[SavedLevels.selected_level].shine_details
+	background_image.texture = SavedLevels.levels[SavedLevels.selected_level].get_level_background_texture()
 
 	for i in range(shine_details.size()):
 		var shine_sprite = SHINE_SPRITE_SCENE.instance()
 		shine_sprites.append(shine_sprite)
-		# TODO: Update this to properly place shines with maker's new positioning system
-		# if the first shine, this will be 0 (no offset), if the second shine it'll be the beside center position
-		# and if any shine after that (i > 1) it'll be the beside beside center position
-		shine_sprite.position.x = SHINE_BESIDE_CENTER_POSITION * int(i == 1) + SHINE_BESIDE_BESIDE_CENTER_POSITION * int(i > 1)
+		
+		# place all the shines the correct distance away from the center shine
+		if i > 1:
+			shine_sprite.position.x = SHINE_FIRST_POSITION_OFFSET + (SHINE_POSITION_INCREMENT * i)
+		elif i == 1:
+			shine_sprite.position.x = SHINE_FIRST_POSITION_OFFSET 
 
 		shine_parent.add_child(shine_sprite)
 
@@ -80,7 +84,7 @@ func _input(_event: InputEvent) -> void:
 # this will try to change the selected shine, but won't if you're already at the first or last shine
 func attempt_increment_selected_shine(increment : int) -> void:
 	var previous_selected_shine = selected_shine
-	# warning-ignore: narrowing_conversion
+	# warning-ignore:narrowing_conversion
 	selected_shine = clamp(selected_shine + increment, 0, shine_sprites.size() - 1)
 
 	# no point in doing anything if the value didn't actually change
@@ -93,23 +97,25 @@ func attempt_increment_selected_shine(increment : int) -> void:
 func move_shine_sprites() -> void:
 	for i in range(shine_sprites.size()):
 		var shine_size = SHINE_DEFAULT_SIZE
-		# middle shine is opaque, next is 0.75 alpha, after that is 0.5, etc
-		var shine_transparency = max(0, 1 - abs(0.25 * (selected_shine - i)))
 		var target_position_x : float
 
+		# middle shine is opaque, next is 0.75 alpha, after that is 0.5, etc
+		var shine_transparency = max(0, 1 - abs(0.25 * (selected_shine - i)))
+
+		# based on the position of the shine relative to the center, set the scale and position
 		if i == selected_shine:
 			shine_size = SHINE_CENTER_SIZE
 			target_position_x = 0 
 		elif abs(i - selected_shine) == 1:
 			shine_size = SHINE_BESIDE_CENTER_SIZE
-			target_position_x = SHINE_BESIDE_CENTER_POSITION * sign(i - selected_shine)
-		elif abs(i - selected_shine) == 2:
-			target_position_x = SHINE_BESIDE_BESIDE_CENTER_POSITION * sign(i - selected_shine)
-		elif abs(i - selected_shine) == 3:
-			target_position_x = SHINE_BESIDE_EDGES_POSITION * sign(i - selected_shine)
-		elif abs(i - selected_shine) > 3:
-			target_position_x = SHINE_AT_EDGES_POSITION * sign(i - selected_shine)
+			target_position_x = SHINE_FIRST_POSITION_OFFSET * sign(i - selected_shine)
+		elif abs(i - selected_shine) > 1:
+			# this comment won't make sense if the values change, current values are first offset 125 then increment 100
+			# shine 2 on the right would be at 225, shine 3 at 325, shine 2 on the left at 225, etc
+			target_position_x = (SHINE_FIRST_OFFSET_DIFFERENCE + (abs(i - selected_shine) * \
+					SHINE_POSITION_INCREMENT)) * sign(i - selected_shine)
 			
+		# smoothly interplate to the new scale, position, and alpha value
 		tween.interpolate_property(shine_sprites[i], "scale", null, Vector2(shine_size, shine_size), \
 				CHANGE_SELECTION_TIME, Tween.TRANS_CUBIC, Tween.EASE_OUT)
 		tween.interpolate_property(shine_sprites[i], "position:x", null, target_position_x, \

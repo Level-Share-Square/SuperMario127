@@ -2,7 +2,6 @@ extends Node
 
 class_name LevelInfo
 
-
 const EMPTY_TIME_SCORE = -1 # idea: what if level creators could manually set this per shine, so there was a preset time to beat?
 const OBJECT_ID_SHINE = 2 
 const OBJECT_ID_STAR_COIN = -1 #get the correct id later
@@ -20,6 +19,7 @@ var level_data : LevelData setget set_level_data, get_level_data
 # level info
 var level_name : String = ""
 var level_background : int = 0 
+var level_foreground : int = 0 
 
 var shine_count : int = 0 #might change these to properties that return shine_details.size() and such
 var shine_details : Array = [] setget set_shine_details, get_shine_details
@@ -51,6 +51,7 @@ func _init(passed_level_code : String = "") -> void:
 
 	level_name = level_data.name
 	level_background = level_data.areas[0].settings.sky # change this later so the area picked is the one that the player spawns in
+	level_foreground = level_data.areas[0].settings.background
 
 	# loop through all objects in all areas to find the number of shines and star coins
 	for area in level_data.areas:
@@ -110,6 +111,7 @@ func get_saveable_dictionary() -> Dictionary:
 		"level_code": level_code,
 		"level_name": level_name,
 		"level_background": level_background,
+		"level_foreground": level_foreground,
 		"shine_count": shine_count,
 		"star_coin_count": star_coin_count,
 
@@ -124,6 +126,7 @@ func load_from_dictionary(save_dictionary : Dictionary) -> void:
 	level_code = save_dictionary["level_code"]
 	level_name = save_dictionary["level_name"]
 	level_background = save_dictionary["level_background"]
+	level_foreground = save_dictionary["level_foreground"]
 	shine_count = save_dictionary["shine_count"] 
 	star_coin_count = save_dictionary["star_coin_count"]
 
@@ -168,8 +171,17 @@ func set_star_coin_collected(star_coin_id : int) -> void:
 		collected_star_coins.append(star_coin_id)
 	var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
 
-func get_level_sky_png() -> StreamTexture:
-	var background_id_mapper = preload("res://scenes/shared/background/backgrounds/ids.tres")
+func get_level_background_texture() -> StreamTexture:
 	var background_resource = CurrentLevelData.background_cache[level_background]
 	
 	return background_resource.texture
+	
+func get_level_background_modulate() -> Color:
+	var background_resource = CurrentLevelData.background_cache[level_background]
+	
+	return background_resource.parallax_modulate
+
+func get_level_foreground_texture() -> StreamTexture:
+	var foreground_resource = CurrentLevelData.foreground_cache[level_foreground]
+
+	return foreground_resource.preview

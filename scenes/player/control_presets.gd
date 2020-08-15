@@ -10,7 +10,7 @@ const presets = {
 		"gp": [[ControlUtil.KEYBOARD, KEY_DOWN]],
 		"gpcancel": [[ControlUtil.KEYBOARD, KEY_UP]],
 		"fludd": [[ControlUtil.KEYBOARD, KEY_C]],
-		"nozzles": [[ControlUtil.KEYBOARD, KEY_CONTROL]],
+		"nozzles": [[ControlUtil.KEYBOARD, KEY_V]],
 		"crouch": [[ControlUtil.KEYBOARD, KEY_DOWN]],
 		"interact":[[ControlUtil.KEYBOARD, KEY_UP]]
 	},

@@ -5,8 +5,8 @@ const MAIN_MENU_CONTROLLER_SCENE : PackedScene = preload("res://scenes/menu/main
 # used to open the main menu to a specific screen, if this is a valid screen name when the main menu starts, it'll open to that screen directly
 var custom_open_screen_name : String = "" 
 
-enum screen_names {title_screen, main_menu_screen, levels_screen}
-var screen_name_strings : Array = ["title_screen", "main_menu_screen", "levels_screen"]
+enum screen_names {title_screen, main_menu_screen, levels_screen, shine_select_screen}
+var screen_name_strings : Array = ["title_screen", "main_menu_screen", "levels_screen", "shine_select_screen"]
 
 func _ready() -> void:
 	pause_mode = PAUSE_MODE_PROCESS

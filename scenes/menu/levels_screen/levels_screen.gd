@@ -1,12 +1,5 @@
 extends Screen
 
-const PLAYER_SCENE : PackedScene = preload("res://scenes/player/player.tscn")
-const EDITOR_SCENE : PackedScene = preload("res://scenes/editor/editor.tscn")
-
-const TEMPLATE_LEVEL  : String = preload("res://assets/level_data/template_level.tres").contents
-
-const NO_LEVEL : int = -1
-
 # not really a fan of these giant node paths but it'll have to do for now, not sure what a better system would be just yet
 onready var level_list : ItemList = $MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel/LevelList
 
@@ -35,6 +28,8 @@ onready var level_info_panel : VBoxContainer = $MarginContainer/HBoxContainer/Le
 onready var time_score_panel : PanelContainer = $MarginContainer/HBoxContainer/TimeScorePanel
 
 # level info
+onready var level_thumbnail : TextureRect = $MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer/ThumbnailImage
+onready var level_foreground_thumbnail : TextureRect = $MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer/ForegroundThumbnailImage
 onready var level_name_label : Label = $MarginContainer/HBoxContainer/LevelInfo/LevelName
 onready var shine_progress : Label = $MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel/HBoxContainer2/ShineProgressLabel
 onready var star_coin_progress : Label = $MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel/HBoxContainer3/StarCoinProgressLabel
@@ -42,6 +37,17 @@ onready var coin_score : Label = $MarginContainer/HBoxContainer/LevelInfo/LevelS
 onready var single_time_score : Label = $MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel/HBoxContainer3/Label
 
 onready var level_code_entry : TextEdit = $MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/LevelCodeEntry
+
+const PLAYER_SCENE : PackedScene = preload("res://scenes/player/player.tscn")
+const EDITOR_SCENE : PackedScene = preload("res://scenes/editor/editor.tscn")
+
+const TEMPLATE_LEVEL: String = preload("res://assets/level_data/template_level.tres").contents
+
+const NO_LEVEL : int = -1
+
+const DEFAULT_THUMBNAIL : StreamTexture = preload("res://scenes/shared/background/backgrounds/day/day.png")
+const DEFAULT_FOREGROUND_MODULATE : Color = Color(1, 1, 1)
+const DEFAULT_FOREGROUND_THUMBNAIL : StreamTexture = preload("res://scenes/shared/background/foregrounds/hills/preview.png")
 
 func _ready() -> void:
 	var _connect
@@ -82,6 +88,10 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 	if level_info != null:
 		level_name_label.text = level_info.level_name
 		shine_progress.text = "%s/%s" % [level_info.collected_shines.size(), level_info.shine_count]
+		
+		level_thumbnail.texture = level_info.get_level_background_texture()
+		level_foreground_thumbnail.modulate = level_info.get_level_background_modulate()
+		level_foreground_thumbnail.texture = level_info.get_level_foreground_texture()
 
 		if level_info.shine_count > 1:
 			set_time_score_button(true)
@@ -97,6 +107,9 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 		level_name_label.text = ""
 		shine_progress.text = "0/0"
 		star_coin_progress.text = "0/0"
+		level_thumbnail.texture = DEFAULT_THUMBNAIL
+		level_foreground_thumbnail.modulate = DEFAULT_FOREGROUND_MODULATE
+		level_foreground_thumbnail.texture = DEFAULT_FOREGROUND_THUMBNAIL
 
 		single_time_score.text = "--:--.--"
 		set_time_score_button(false)

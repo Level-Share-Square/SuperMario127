@@ -79,5 +79,11 @@ func toggle_layer_transparency(current_layer, is_transparent):
 			tilemap.modulate = tilemap_color
 		index += 1
 
+func move_object_to_back(object):
+	objects_node.move_object_to_back(object)
+	
+func move_object_to_front(object):
+	objects_node.move_object_to_front(object)
+
 func _process(_delta):
 	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")
