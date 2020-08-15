@@ -3,6 +3,7 @@ extends Camera2D
 export var character : NodePath
 var focus_on : Node
 var unfocusing := false
+var skip_to_player := true
 var focus_zoom := 1.0
 
 onready var character_node = get_node(character)
@@ -22,6 +23,11 @@ func _physics_process(delta):
 			else:
 				character_vel = character_vel.linear_interpolate(character_node.velocity * 15 * delta, delta * 2)
 				position = character_node.global_position + character_vel
+				
+				# Force camera to Mario when the level starts
+				smoothing_enabled = !skip_to_player
+				if skip_to_player:
+					skip_to_player = false
 
 func load_in(_level_data : LevelData, level_area : LevelArea):
 	var level_bounds = level_area.settings.bounds
