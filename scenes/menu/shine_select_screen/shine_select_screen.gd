@@ -107,6 +107,8 @@ func move_shine_sprites() -> void:
 		if i == selected_shine:
 			shine_size = SHINE_CENTER_SIZE
 			target_position_x = 0 
+
+			shine_sprites[i].start_animation()
 		elif abs(i - selected_shine) == 1:
 			shine_size = SHINE_BESIDE_CENTER_SIZE
 			target_position_x = SHINE_FIRST_POSITION_OFFSET * sign(i - selected_shine)
@@ -115,6 +117,9 @@ func move_shine_sprites() -> void:
 			# shine 2 on the right would be at 225, shine 3 at 325, shine 2 on the left at 225, etc
 			target_position_x = (SHINE_FIRST_OFFSET_DIFFERENCE + (abs(i - selected_shine) * \
 					SHINE_POSITION_INCREMENT)) * sign(i - selected_shine)
+
+		if i != selected_shine and shine_sprites[i].is_playing():
+			shine_sprites[i].stop_animation_when_possible()
 			
 		# smoothly interplate to the new scale, position, and alpha value
 		tween.interpolate_property(shine_sprites[i], "scale", null, Vector2(shine_size, shine_size), \
