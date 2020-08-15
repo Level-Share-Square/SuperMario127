@@ -15,8 +15,10 @@ func quit_to_menu(screen_to_open : String = ""): #switch this to use the enum an
 	# if we quit from the pause menu, the tree will be paused, and that means the menu will also be paused and not work
 	get_tree().paused = false
 
-	# if the mode switcher button is visible (eg quitting from the editor), get rid of it
+	# if the mode switcher button is visible (eg quitting from the editor), hide and disable it
 	mode_switcher.get_node("ModeSwitcherButton").invisible = true
+	mode_switcher.get_node("ModeSwitcherButton").switching_disabled = true
+
 
 	# add music switch and temporary music stopping
 	#music.stop()
