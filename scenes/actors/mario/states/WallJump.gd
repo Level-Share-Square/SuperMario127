@@ -34,7 +34,7 @@ func _start(_delta):
 	position_on_wj = character.position
 	if character.is_walled_right():
 		character.direction_on_stick = 1
-	else:
+	elif character.is_walled_left():
 		character.direction_on_stick = -1
 	character.facing_direction = -character.direction_on_stick
 	character.velocity.x = actual_power.x * character.facing_direction
