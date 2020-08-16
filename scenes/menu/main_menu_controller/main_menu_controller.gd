@@ -73,7 +73,7 @@ func change_screen(this_screen_name : String, new_screen_name : String):
 			# stop mouse inputs from working (add in something for controller inputs too later)
 			previous_screen.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			yield(animation_player, "animation_finished")
-			#restore mouse filter now that the animation is over
+			# restore mouse filter now that the animation is over
 			previous_screen.mouse_filter = Control.MOUSE_FILTER_STOP
 
 	if current_screen.has_node("AnimationPlayer"):
@@ -81,11 +81,11 @@ func change_screen(this_screen_name : String, new_screen_name : String):
 		# try and play an animation specific to this transition, if it doesn't exist try a default one
 		if animation_player.has_animation("trans_in_" + previous_screen.name):
 			animation_player.play("trans_in_" + previous_screen.name)
+			# kinda a hacky fix, but this solves a little visual glitch where the first frame of the next screen is the default values
+			animation_player.seek(0, true)
 		elif animation_player.has_animation("trans_in_default"):
 			animation_player.play("trans_in_default")
-
-		# kinda a hacky fix, but this solves a little visual glitch where the first frame of the next screen is the default values
-		animation_player.seek(0, true)
+			animation_player.seek(0, true)
 
 	active_screens.remove_child(previous_screen)
 	inactive_screens.add_child(previous_screen)
