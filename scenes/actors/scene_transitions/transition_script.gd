@@ -35,7 +35,25 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time, new_ar
 		
 		canvas_background.visible = false
 
+func do_transition_fade(transition_time : float = DEFAULT_TRANSITION_TIME, start_color : Color = Color(0, 0, 0, 0), end_color : Color = Color(0, 0, 0, 1), reverse_after : bool = true):
+	canvas_mask.texture_scale = TRANSITION_SCALE_COVERED
+	var to_black = start_color.a > end_color.a
+	canvas_background.color = start_color
+	tween.interpolate_property(canvas_background, "color", start_color, end_color, transition_time, Tween.TRANS_LINEAR, Tween.EASE_OUT if to_black else Tween.EASE_IN)
+	tween.start()
+	
+	# wait for the tween to finish before returning, and then a little extra time
+	yield(tween, "tween_all_completed")
+	yield(get_tree().create_timer(0.1), "timeout")
+	emit_signal("transition_finished")
+	
+	if reverse_after:
+		do_transition_fade(transition_time, end_color, start_color, false)
+	else:
+		transitioning = false
+
 func do_transition_animation(transition_texture : StreamTexture = cutout_circle, transition_time : float = DEFAULT_TRANSITION_TIME, texture_scale_start : float = TRANSITION_SCALE_UNCOVER, texture_scale_end : float = TRANSITION_SCALE_COVERED, volume_start : float = -1, volume_end : float = -1, reverse_after : bool = true):
+	canvas_background.color = Color(0, 0, 0, 1)
 	transitioning = true
 	
 	if volume_start == -1:
