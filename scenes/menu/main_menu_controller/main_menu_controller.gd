@@ -93,4 +93,4 @@ func change_screen(this_screen_name : String, new_screen_name : String):
 	inactive_screens.remove_child(current_screen)
 	active_screens.add_child(current_screen)
 
-	previous_screen._open_screen()
+	current_screen._open_screen()
