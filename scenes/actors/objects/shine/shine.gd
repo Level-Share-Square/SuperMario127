@@ -77,10 +77,11 @@ func _ready() -> void:
 		
 		# if the shine is collected, make it blue 
 		# (collected_shines is a Dictionary where the key is the shine id and the value is a bool)
-		var collected_shines = SavedLevels.levels[SavedLevels.selected_level].collected_shines
-		if collected_shines.has(id):
-			is_blue = collected_shines[str(id)]
-
+		if SavedLevels.selected_level != -1:
+			var collected_shines = SavedLevels.levels[SavedLevels.selected_level].collected_shines
+			if collected_shines.has(id):
+				is_blue = collected_shines[str(id)]
+	
 	var _connect = connect("property_changed", self, "update_color")
 	update_color("color", color)
 
