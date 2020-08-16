@@ -61,8 +61,9 @@ func _init(passed_level_code : String = "") -> void:
 					shine_details.sort_custom(self, "collectible_with_id_sort")
 
 					# initialize collected_shines and time_scores
-					collected_shines[int(shine_dictionary["id"])] = false 
-					time_scores[int(shine_dictionary["id"])] = EMPTY_TIME_SCORE
+					collected_shines[str(shine_dictionary["id"])] = false 
+					time_scores[str(shine_dictionary["id"])] = EMPTY_TIME_SCORE
+					print(time_scores)
 				OBJECT_ID_STAR_COIN:
 					pass
 
@@ -113,12 +114,12 @@ func collectible_with_id_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
 	return item1["id"] < item2["id"]
 
 func set_shine_collected(shine_id : int, save_to_disk : bool = true) -> void:
-	collected_shines[shine_id] = true
+	collected_shines[str(shine_id)] = true
 	if save_to_disk:
 		var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
 
 func set_star_coin_collected(star_coin_id : int, save_to_disk : bool = true) -> void:
-	collected_star_coins[star_coin_id] = true
+	collected_star_coins[str(star_coin_id)] = true
 	if save_to_disk:
 		var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
 
@@ -129,8 +130,8 @@ func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
 	if new_coin_score > coin_score:
 		coin_score = new_coin_score 
 
-	if new_time_score < time_scores[shine_id] or time_scores[shine_id] == EMPTY_TIME_SCORE:
-		time_scores[shine_id] = new_time_score
+	if new_time_score < time_scores[str(shine_id)] or time_scores[str(shine_id)] == EMPTY_TIME_SCORE:
+		time_scores[str(shine_id)] = new_time_score
 
 	if save_to_disk:
 		var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
