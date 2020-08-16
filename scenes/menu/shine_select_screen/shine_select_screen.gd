@@ -14,6 +14,9 @@ onready var button_select_shine = $Buttons/ButtonSelectShine
 onready var button_back = $Buttons/ButtonBack
 
 onready var background_image = $Background
+onready var letsa_go_sfx = $LetsaGo
+onready var letsa_go_sfx_2 = $LetsaGo2
+onready var mission_select_sfx = $MissionSelect
 
 const PLAYER_SCENE : PackedScene = preload("res://scenes/player/player.tscn")
 
@@ -46,10 +49,13 @@ func _ready() -> void:
 	_connect = button_back.connect("pressed", self, "on_button_back_pressed")
 
 func _open_screen() -> void:
+	music.change_song(music.last_song, 0)
+	mission_select_sfx.play();
+	
 	var selected_level = SavedLevels.selected_level
 	shine_details = SavedLevels.levels[selected_level].shine_details
 	background_image.texture = SavedLevels.levels[selected_level].get_level_background_texture()
-
+	
 	for i in range(shine_details.size()):
 		var shine_sprite = SHINE_SPRITE_SCENE.instance()
 		shine_sprites.append(shine_sprite)
@@ -59,7 +65,7 @@ func _open_screen() -> void:
 			shine_sprite.position.x = SHINE_FIRST_POSITION_OFFSET + (SHINE_POSITION_INCREMENT * i)
 		elif i == 1:
 			shine_sprite.position.x = SHINE_FIRST_POSITION_OFFSET 
-
+		
 		shine_sprite.call_deferred("start_animation")
 		
 		# if the shine is collected, make it blue on the shine select screen
@@ -81,14 +87,17 @@ func _close_screen():
 	for shine_sprite in shine_sprites:
 		shine_sprite.queue_free()
 	shine_sprites = []
-		
+	# change music back
+	music.change_song(0, music.last_song)
+	mission_select_sfx.stop();
+
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_right"):
 		attempt_increment_selected_shine(1)
 	elif Input.is_action_just_pressed("ui_left"):
 		attempt_increment_selected_shine(-1)
 	elif Input.is_action_just_pressed("ui_accept"):
-		start_level()
+		on_button_select_shine_pressed()
 	elif Input.is_action_just_pressed("ui_cancel"):
 		emit_signal("screen_change", "shine_select_screen", "levels_screen")
 
@@ -157,7 +166,12 @@ func on_button_move_right_pressed() -> void:
 	attempt_increment_selected_shine(1)
 
 func on_button_select_shine_pressed() -> void:
-	start_level()
+	letsa_go_sfx.play()
+	if PlayerSettings.number_of_players > 1:
+		yield(get_tree().create_timer(0.666), "timeout")
+		letsa_go_sfx_2.play()
+	
+	#start_level()
 
 func on_button_back_pressed() -> void:
 	emit_signal("screen_change", "shine_select_screen", "levels_screen")

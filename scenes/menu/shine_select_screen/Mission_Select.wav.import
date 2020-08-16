@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Mission_Select.wav-d26cb3c13a60c777d79d1d5a0c6736ca.sample"
+
+[deps]
+
+source_file="res://scenes/menu/shine_select_screen/Mission_Select.wav"
+dest_files=[ "res://.import/Mission_Select.wav-d26cb3c13a60c777d79d1d5a0c6736ca.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
