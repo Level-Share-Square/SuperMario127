@@ -169,11 +169,19 @@ func on_button_move_right_pressed() -> void:
 
 func on_button_select_shine_pressed() -> void:
 	letsa_go_sfx.play()
+	
 	if PlayerSettings.number_of_players > 1:
-		yield(get_tree().create_timer(0.666), "timeout")
+		# quick wait before playing P2's voice clip, to make it sound more natural
+		yield(get_tree().create_timer(0.035), "timeout")
+		
+		# we set the array index so the same voice is played for both, and it syncs
+		letsa_go_sfx_2.array_index = letsa_go_sfx.array_index
 		letsa_go_sfx_2.play()
 	
-	#start_level()
+	# this is temporary, should be replaced with the transition stuff later
+	yield(get_tree().create_timer(1), "timeout")
+	
+	start_level()
 
 func on_button_back_pressed() -> void:
 	emit_signal("screen_change", "shine_select_screen", "levels_screen")

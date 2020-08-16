@@ -5,6 +5,7 @@ export var luigi_voices := []
 export var toad_voices := []
 export var koopa_voices := []
 export var is_p2 := false
+export var array_index : int
 
 onready var audio_player : AudioStreamPlayer = $LetsaGoPlayer
 
@@ -24,7 +25,8 @@ func play():
 			voices = koopa_voices
 	
 	if voices.size() > 0:
-		var array_index := rng.randi_range(0, voices.size() - 1)
+		if !is_p2:
+			array_index = rng.randi_range(0, voices.size() - 1)
 		audio_player.stream = voices[array_index]
 	
 	audio_player.play()

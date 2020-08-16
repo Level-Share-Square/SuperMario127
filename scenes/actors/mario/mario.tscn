@@ -912,13 +912,13 @@ disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, 3 )
-frames = ExtResource( 1 )
+frames = ExtResource( 21 )
 animation = "armsOut"
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 23 )
-animation = "movingOut"
+animation = "armsOut"
 playing = true
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]
@@ -1276,17 +1276,19 @@ anims/shine_dance = SubResource( 46 )
 anims/shine_dance_stop = SubResource( 47 )
 
 [node name="CollectedShineOutline" type="AnimatedSprite" parent="."]
+visible = false
 position = Vector2( -1, 20 )
 scale = Vector2( 0.1, 0.1 )
 z_index = -5
 frames = SubResource( 64 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
+visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 10
+frame = 14
 speed_scale = 3.0
 playing = true
 
@@ -1312,7 +1314,7 @@ script = ExtResource( 34 )
 [node name="Fludd" type="AnimatedSprite" parent="DeathSprite"]
 visible = false
 frames = ExtResource( 23 )
-animation = "movingOut"
+animation = "armsOut"
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
