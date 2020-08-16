@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=2]
+[gd_scene load_steps=128 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -56,7 +56,7 @@
 [ext_resource path="res://scenes/actors/mario/misc/cutout_shine.png" type="Texture" id=54]
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=55]
 [ext_resource path="res://scenes/actors/mario/particles/shine_sparkles.png" type="Texture" id=56]
-[ext_resource path="res://scenes/actors/mario/my_shit_coding.gd" type="Script" id=57]
+[ext_resource path="res://scenes/actors/mario/this_shouldnt_be_necessary.gd" type="Script" id=57]
 [ext_resource path="res://scenes/actors/mario/is_hurt_area.gd" type="Script" id=58]
 [ext_resource path="res://scenes/actors/mario/particles/area_of_attack_ring.png" type="Texture" id=59]
 [ext_resource path="res://scenes/actors/mario/particles/area_of_attack_ring_back.png" type="Texture" id=60]
@@ -582,7 +582,7 @@ tracks/11/keys = {
 "values": [ 0.0 ]
 }
 tracks/12/type = "method"
-tracks/12/path = NodePath("MyShitCoding")
+tracks/12/path = NodePath("ThisShouldntBeNecessary")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/imported = false
@@ -596,85 +596,234 @@ tracks/12/keys = {
 } ]
 }
 
-[sub_resource type="AtlasTexture" id=47]
-atlas = ExtResource( 61 )
-region = Rect2( 0, 0, 27, 31 )
+[sub_resource type="Animation" id=47]
+resource_name = "shine_dance_stop"
+length = 0.95
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.84, 0.85 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ "shineDance", "shineDance", "armsOut" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( -0.025 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( -0.025, 0.3, 0.4, 0.84, 0.85 ),
+"transitions": PoolRealArray( 1, 1, 1, 0, 1 ),
+"update": 0,
+"values": [ 22, 22, 16, 12, 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4, 0.84, 0.85 ),
+"transitions": PoolRealArray( 2, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -40 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 3 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CollectedShine:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CollectedShine:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("CollectedShine:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, -70 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("CollectedShine:z_index")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("CollectedShine/ShineParticles:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("CollectedShine:speed_scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0.025 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 3.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("CollectedShine:frame")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( -0.25 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Sprite:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( -0.025 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="AtlasTexture" id=48]
 atlas = ExtResource( 61 )
-region = Rect2( 27, 0, 27, 31 )
+region = Rect2( 0, 0, 27, 31 )
 
 [sub_resource type="AtlasTexture" id=49]
 atlas = ExtResource( 61 )
-region = Rect2( 54, 0, 27, 31 )
+region = Rect2( 27, 0, 27, 31 )
 
 [sub_resource type="AtlasTexture" id=50]
 atlas = ExtResource( 61 )
-region = Rect2( 81, 0, 27, 31 )
+region = Rect2( 54, 0, 27, 31 )
 
 [sub_resource type="AtlasTexture" id=51]
 atlas = ExtResource( 61 )
-region = Rect2( 108, 0, 27, 31 )
+region = Rect2( 81, 0, 27, 31 )
 
 [sub_resource type="AtlasTexture" id=52]
 atlas = ExtResource( 61 )
-region = Rect2( 135, 0, 27, 31 )
+region = Rect2( 108, 0, 27, 31 )
 
 [sub_resource type="AtlasTexture" id=53]
 atlas = ExtResource( 61 )
-region = Rect2( 162, 0, 27, 31 )
+region = Rect2( 135, 0, 27, 31 )
 
 [sub_resource type="AtlasTexture" id=54]
 atlas = ExtResource( 61 )
-region = Rect2( 189, 0, 27, 31 )
+region = Rect2( 162, 0, 27, 31 )
 
 [sub_resource type="AtlasTexture" id=55]
 atlas = ExtResource( 61 )
-region = Rect2( 0, 31, 27, 31 )
+region = Rect2( 189, 0, 27, 31 )
 
 [sub_resource type="AtlasTexture" id=56]
 atlas = ExtResource( 61 )
-region = Rect2( 27, 31, 27, 31 )
+region = Rect2( 0, 31, 27, 31 )
 
 [sub_resource type="AtlasTexture" id=57]
 atlas = ExtResource( 61 )
-region = Rect2( 54, 31, 27, 31 )
+region = Rect2( 27, 31, 27, 31 )
 
 [sub_resource type="AtlasTexture" id=58]
 atlas = ExtResource( 61 )
-region = Rect2( 81, 31, 27, 31 )
+region = Rect2( 54, 31, 27, 31 )
 
 [sub_resource type="AtlasTexture" id=59]
 atlas = ExtResource( 61 )
-region = Rect2( 108, 31, 27, 31 )
+region = Rect2( 81, 31, 27, 31 )
 
 [sub_resource type="AtlasTexture" id=60]
 atlas = ExtResource( 61 )
-region = Rect2( 135, 31, 27, 31 )
+region = Rect2( 108, 31, 27, 31 )
 
 [sub_resource type="AtlasTexture" id=61]
 atlas = ExtResource( 61 )
-region = Rect2( 162, 31, 27, 31 )
+region = Rect2( 135, 31, 27, 31 )
 
 [sub_resource type="AtlasTexture" id=62]
 atlas = ExtResource( 61 )
+region = Rect2( 162, 31, 27, 31 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 61 )
 region = Rect2( 189, 31, 27, 31 )
 
-[sub_resource type="SpriteFrames" id=63]
+[sub_resource type="SpriteFrames" id=64]
 animations = [ {
-"frames": [ SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ) ],
+"frames": [ SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
 } ]
 
-[sub_resource type="CanvasItemMaterial" id=64]
+[sub_resource type="CanvasItemMaterial" id=65]
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="ParticlesMaterial" id=65]
+[sub_resource type="ParticlesMaterial" id=66]
 emission_shape = 1
 emission_sphere_radius = 24.0
 flag_disable_z = true
@@ -762,10 +911,9 @@ shape = SubResource( 7 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 3 )
 frames = ExtResource( 1 )
-animation = "movingIn"
-frame = 10
-playing = true
+animation = "armsOut"
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
@@ -1125,28 +1273,28 @@ anims/backflip_right = SubResource( 43 )
 anims/enter_door = SubResource( 44 )
 anims/exit_door = SubResource( 45 )
 anims/shine_dance = SubResource( 46 )
+anims/shine_dance_stop = SubResource( 47 )
 
 [node name="CollectedShineOutline" type="AnimatedSprite" parent="."]
 position = Vector2( -1, 20 )
 scale = Vector2( 0.1, 0.1 )
 z_index = -5
-frames = SubResource( 63 )
-frame = 14
+frames = SubResource( 64 )
+frame = 3
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
-position = Vector2( -1, 20 )
-scale = Vector2( 0.1, 0.1 )
-z_index = -5
+position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 15
+frame = 10
+speed_scale = 3.0
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
 show_behind_parent = true
-material = SubResource( 64 )
+material = SubResource( 65 )
 local_coords = false
-process_material = SubResource( 65 )
+process_material = SubResource( 66 )
 texture = ExtResource( 56 )
 
 [node name="BottomPos" type="Node2D" parent="."]
@@ -1157,8 +1305,7 @@ visible = false
 z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
-animation = "movingOut"
-frame = 2
+animation = "armsOut"
 playing = true
 script = ExtResource( 34 )
 
@@ -1168,5 +1315,5 @@ frames = ExtResource( 23 )
 animation = "movingOut"
 playing = true
 
-[node name="MyShitCoding" type="Node2D" parent="."]
+[node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
 script = ExtResource( 57 )
