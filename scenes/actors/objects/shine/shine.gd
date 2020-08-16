@@ -239,6 +239,10 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 			mode_switcher_button.switching_disabled = false 
 			mode_switcher_button._pressed()
 	else: 
+		# re-enable mode switching if in the editor test mode
+		if !mode_switcher_button.invisible:
+			mode_switcher_button.switching_disabled = false 
+
 		# undo collision changes 
 		character.set_collision_layer_bit(1, true)
 		character.set_inter_player_collision(true) 
