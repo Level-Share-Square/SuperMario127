@@ -2,8 +2,6 @@ extends Node
 
 export var mario_voices := []
 export var luigi_voices := []
-export var toad_voices := []
-export var koopa_voices := []
 export var is_p2 := false
 export var array_index : int
 
@@ -19,10 +17,6 @@ func play():
 			voices = mario_voices
 		1:
 			voices = luigi_voices
-		2:
-			voices = toad_voices
-		3:
-			voices = koopa_voices
 	
 	if voices.size() > 0:
 		if !is_p2:

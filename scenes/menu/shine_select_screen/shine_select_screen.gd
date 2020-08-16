@@ -99,7 +99,7 @@ func _input(_event: InputEvent) -> void:
 	elif Input.is_action_just_pressed("ui_left"):
 		attempt_increment_selected_shine(-1)
 	elif Input.is_action_just_pressed("ui_accept"):
-		on_button_select_shine_pressed()
+		start_level()
 	elif Input.is_action_just_pressed("ui_cancel"):
 		emit_signal("screen_change", "shine_select_screen", "levels_screen")
 
@@ -129,7 +129,6 @@ func move_shine_sprites() -> void:
 			shine_size = SHINE_CENTER_SIZE
 			target_position_x = 0 
 		elif abs(i - selected_shine) == 1:
-			shine_size = SHINE_BESIDE_CENTER_SIZE
 			target_position_x = SHINE_FIRST_POSITION_OFFSET * sign(i - selected_shine)
 		elif abs(i - selected_shine) > 1:
 			# this comment won't make sense if the values change, current values are first offset 125 then increment 100
@@ -155,19 +154,6 @@ func update_labels() -> void:
 	shine_description.text = shine_details[selected_shine]["description"]
 
 func start_level() -> void:
-	# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
-	# so we'll assume it's safe to just go straight to the player scene 
-	var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)
-
-# signal responses start here 
-
-func on_button_move_left_pressed() -> void:
-	attempt_increment_selected_shine(-1)
-
-func on_button_move_right_pressed() -> void:
-	attempt_increment_selected_shine(1)
-
-func on_button_select_shine_pressed() -> void:
 	letsa_go_sfx.play()
 	
 	if PlayerSettings.number_of_players > 1:
@@ -181,6 +167,19 @@ func on_button_select_shine_pressed() -> void:
 	# this is temporary, should be replaced with the transition stuff later
 	yield(get_tree().create_timer(1), "timeout")
 	
+	# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
+	# so we'll assume it's safe to just go straight to the player scene 
+	var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)
+
+# signal responses start here 
+
+func on_button_move_left_pressed() -> void:
+	attempt_increment_selected_shine(-1)
+
+func on_button_move_right_pressed() -> void:
+	attempt_increment_selected_shine(1)
+
+func on_button_select_shine_pressed() -> void:
 	start_level()
 
 func on_button_back_pressed() -> void:
