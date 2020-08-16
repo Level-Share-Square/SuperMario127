@@ -65,11 +65,13 @@ func _open_screen() -> void:
 		# if the shine is collected, make it blue on the shine select screen
 		var collected_shines = SavedLevels.levels[selected_level].collected_shines
 		var is_collected = collected_shines[str(shine_details[i]["id"])]
-		if is_collected: 
+		if !is_collected: 
 			shine_sprite.make_blue()
-
+		else:
+			shine_sprite.set_color(shine_details[i]["color"])
+		
 		shine_parent.add_child(shine_sprite)
-
+	
 	selected_shine = 0
 	move_shine_sprites() # make sure everything is in the right spot and size and such
 	update_labels()
