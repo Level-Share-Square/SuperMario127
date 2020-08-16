@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/menu/shine_select_screen/background.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/menu/shine_select_screen/letsa go/Mario1.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/menu/shine_select_screen/letsa go/Mario2.wav" type="AudioStream" id=8]
 [ext_resource path="res://scenes/menu/shine_select_screen/letsa go/Luigi1.wav" type="AudioStream" id=9]
+[ext_resource path="res://scenes/menu/shine_select_screen/Mission_Select.wav" type="AudioStream" id=10]
 [ext_resource path="res://scenes/menu/shine_select_screen/letsa go/Luigi2.wav" type="AudioStream" id=12]
 
 [sub_resource type="DynamicFontData" id=1]
@@ -205,6 +206,7 @@ margin_right = 64.04
 margin_bottom = 64.04
 
 [node name="MissionSelect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
 
 [node name="LetsaGo" type="Node" parent="."]
 script = ExtResource( 6 )
