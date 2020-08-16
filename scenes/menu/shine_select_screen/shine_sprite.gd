@@ -10,14 +10,6 @@ func start_animation() -> void:
 	play()
 	shine_outline.play()
 
-func stop_animation_when_possible() -> void:
-	var _connect = connect("animation_finished", self, "on_animation_finished")
-
-func on_animation_finished() -> void:
-	frame = 0
-	shine_outline.frame = 0
-	stop()
-	shine_outline.stop()
-	
-	disconnect("animation_finished", self, "on_animation_finished")
+func make_blue() -> void:
+	frames = frames_collected
 
