@@ -789,3 +789,7 @@ func set_dive_collision(is_enabled : bool) -> void:
 	ground_collision_dive.disabled = !is_enabled
 	left_collision.disabled = is_enabled
 	right_collision.disabled = is_enabled
+
+func hide_shine_dance_shine():
+	$CollectedShine.visible = false
+	$CollectedShineOutline.visible = false

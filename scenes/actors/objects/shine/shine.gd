@@ -50,10 +50,11 @@ var red_coins_activate := false
 var shine_shards_activate := false
 var color := Color(1, 1, 0)
 var id := 0
+var do_kick_out := true
 
 func _set_properties() -> void:
-	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id"]
-	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id"]
+	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out"]
+	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out"]
 	
 func _set_property_values() -> void:
 	set_property("title", title, true)
@@ -64,6 +65,7 @@ func _set_property_values() -> void:
 	set_property("shine_shards_activate", shine_shards_activate, true)
 	set_property("color", color, true)
 	set_property("id", id)
+	set_property("do_kick_out", do_kick_out)
 
 func _ready() -> void:
 	if mode != 1: # not in edit mode
@@ -139,7 +141,6 @@ func _physics_process(_delta : float) -> void:
 		character.sprite.rotation_degrees = 0
 		
 		ambient_sound.playing = false 
-		music.playing = false
 		
 		if character.is_grounded():
 			start_shine_dance() #shine dance setup also disables physics process, so it's only called once
@@ -220,19 +221,36 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 	# delay a bit once the animation is done before starting the fadeout/transition back to the editor
 	yield(get_tree().create_timer(SHINE_DANCE_END_DELAY), "timeout") 
 	
-	music.playing = true #we set it to false so it'd stop while falling with the shine, but now we need it to fade back in
+	music.volume_multiplier = 1 #we set it to 0 so it'd be silent while falling with the shine
 	
 	#bus is changed based on whether or not you are in the player, or editor, this makes sure music 
 	#fades to the correct volume in both situations
-	if mode_switcher_button.invisible: #if not running through the editor, play the transition
-		music.bus = music.play_bus 
-		music.stop_temporary_music(1, MUSIC_TRANSITION_TIME_PLAY_MODE)
-		MenuVariables.quit_to_menu("levels_screen")
-		#transitions.reload_scene(character.cutout_shine, character.cutout_circle, transitions.DEFAULT_TRANSITION_TIME, 0, true)
-	else:
-		music.bus = music.edit_bus
-		music.stop_temporary_music()
+	if do_kick_out:
+		if mode_switcher_button.invisible: #if not running through the editor, play the transition
+			music.bus = music.play_bus 
+			music.stop_temporary_music(1, MUSIC_TRANSITION_TIME_PLAY_MODE)
+			MenuVariables.quit_to_menu("levels_screen")
+			#transitions.reload_scene(character.cutout_shine, character.cutout_circle, transitions.DEFAULT_TRANSITION_TIME, 0, true)
+		else:
+			music.bus = music.edit_bus
+			music.stop_temporary_music()
 
-		#mode switching is disabled on collecting the shine so the player can't cancel the animation (causes glitches)
-		mode_switcher_button.switching_disabled = false 
-		mode_switcher_button._pressed()
+			#mode switching is disabled on collecting the shine so the player can't cancel the animation (causes glitches)
+			mode_switcher_button.switching_disabled = false 
+			mode_switcher_button._pressed()
+	else: 
+		# undo collision changes 
+		character.set_collision_layer_bit(1, true)
+		character.set_inter_player_collision(true) 
+		character.call_deferred("set_dive_collision", true)
+
+		# return the character to a state they can actually move around in
+		character.set_state(null, get_physics_process_delta_time())
+		character.controllable = true
+
+		# hide the shine used for the shine dance animation
+		character.hide_shine_dance_shine()
+
+		# player animations won't play past frame 0 after the shine dance without this
+		character.sprite.playing = true
+
