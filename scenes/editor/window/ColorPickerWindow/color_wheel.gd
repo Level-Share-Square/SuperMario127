@@ -8,6 +8,7 @@ onready var new_color_preview = get_parent().get_node("ColorPreviews/NewColorPre
 onready var color_manager = $Color
 
 var property_node : Node
+var base_color : Color # color without transparency
 
 func _input(event):
 	if !get_parent().get_parent().visible:
@@ -27,10 +28,10 @@ func _input(event):
 	
 	# Is in sprite - check if its in the circle
 	selector.position = mouse_pos
-	var color = Color.from_hsv(atan2(normal_coordinates.x, normal_coordinates.y) / (2*PI), normal_coordinates.length(), gradient_selector.value)
-	gradient_selector.modulate = color
-	new_color_preview.modulate = color
-	color_manager.set_value(color)
+	base_color = Color.from_hsv(atan2(normal_coordinates.x, normal_coordinates.y) / (2*PI), normal_coordinates.length(), gradient_selector.value)
+	gradient_selector.modulate = base_color
+	new_color_preview.modulate = base_color
+	color_manager.set_value(base_color)
 	notify_property_manager()
 
 func update_value(color : Color):
@@ -41,6 +42,7 @@ func update_value(color : Color):
 	new_color_preview.modulate = color
 	self_modulate = Color(color.v, color.v, color.v)
 	gradient_selector.set_brightness(color.v)
+	base_color = color
 	notify_property_manager()
 
 func notify_property_manager():

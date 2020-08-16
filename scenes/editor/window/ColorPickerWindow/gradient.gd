@@ -27,7 +27,7 @@ func _input(event):
 	value = (gradient_selector.position.y - blackY) / (whiteY - blackY)
 	color_wheel.self_modulate = Color(value, value, value)
 	
-	var new_color = color_manager.get_value()
+	var new_color = color_wheel.base_color
 	new_color.v = value
 	color_manager.set_value(new_color)
 	new_color_preview.modulate = new_color
