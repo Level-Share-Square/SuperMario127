@@ -1,3 +1,5 @@
+#TODO: change this so the top and bottom of the frame can be moved around
+
 extends Screen
 
 onready var tween = $Tween
