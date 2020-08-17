@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/menu/shine_select_screen/frame_bottom.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/menu/shine_select_screen/letsa go/Mario2.wav" type="AudioStream" id=8]
 [ext_resource path="res://scenes/menu/shine_select_screen/letsa go/Luigi1.wav" type="AudioStream" id=9]
 [ext_resource path="res://scenes/menu/shine_select_screen/Mission_Select.wav" type="AudioStream" id=10]
+[ext_resource path="res://scenes/menu/shine_select_screen/letsa go/Luigi2.wav" type="AudioStream" id=11]
 [ext_resource path="res://scenes/menu/shine_select_screen/frame_top.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFontData" id=1]
@@ -61,6 +62,9 @@ Button/styles/pressed = SubResource( 9 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureFrameTop" type="TextureRect" parent="."]
 anchor_right = 1.0
@@ -185,10 +189,15 @@ anchor_left = 12.5
 anchor_top = 4.0
 anchor_right = 19.2
 anchor_bottom = 7.75
-margin_left = -3.05176e-05
-margin_bottom = -3.05176e-05
+margin_left = 14.2705
+margin_top = 0.594604
+margin_right = 14.2705
+margin_bottom = 0.594574
 theme = SubResource( 10 )
 flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ButtonSelectShine" type="Button" parent="Buttons"]
 anchor_left = 6.5
@@ -217,14 +226,16 @@ stream = ExtResource( 10 )
 [node name="LetsaGo" type="Node" parent="."]
 script = ExtResource( 6 )
 mario_voices = [ ExtResource( 7 ), ExtResource( 8 ) ]
-luigi_voices = [ ExtResource( 9 ), ExtResource( 12 ) ]
+luigi_voices = [ ExtResource( 9 ), ExtResource( 11 ) ]
 
 [node name="LetsaGoPlayer" type="AudioStreamPlayer" parent="LetsaGo"]
+volume_db = -2.0
 
 [node name="LetsaGo2" type="Node" parent="."]
 script = ExtResource( 6 )
 mario_voices = [ ExtResource( 7 ), ExtResource( 8 ) ]
-luigi_voices = [ ExtResource( 9 ), ExtResource( 12 ) ]
+luigi_voices = [ ExtResource( 9 ), ExtResource( 11 ) ]
 is_p2 = true
 
 [node name="LetsaGoPlayer" type="AudioStreamPlayer" parent="LetsaGo2"]
+volume_db = -2.0

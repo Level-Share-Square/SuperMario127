@@ -284,7 +284,7 @@ func on_button_reset_pressed() -> void:
 	if selected_level == NO_LEVEL:
 		return
 	var level_info = SavedLevels.levels[selected_level]
-	level_info.reset()
+	level_info.reset_save_data()
 	populate_info_panel(level_info)
 
 # plan for populating the speedrun times panel is to give each time an icon to say if the shine is collected or not, and then use the text spot for the exact time (maybe add a suffix with the shine number?)

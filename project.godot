@@ -531,7 +531,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Super Mario 127"
-run/main_scene="res://scenes/editor/editor.tscn"
+run/main_scene="res://scenes/menu/main_menu_controller/main_menu_controller.tscn"
 boot_splash/image="res://assets/misc/startup.png"
 boot_splash/bg_color=Color( 0.341176, 0, 0.498039, 1 )
 config/icon="res://assets/misc/icon.png"
