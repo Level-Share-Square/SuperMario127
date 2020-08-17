@@ -16,8 +16,12 @@ func quit_to_menu(screen_to_open : String = ""): #switch this to use the enum an
 	get_tree().paused = false
 
 	# clear out the level data of the current level, it has to be regenerated so there isn't leftover data 
-	SavedLevels.levels[SavedLevels.selected_level].level_data = null
-
+	if SavedLevels.selected_level != -1:
+		SavedLevels.levels[SavedLevels.selected_level].level_data = null
+	else:
+		# Go to the main menu instead of the level select
+		if screen_to_open == "levels_screen":
+			screen_to_open = "main_menu"
 	# if the mode switcher button is visible (eg quitting from the editor), hide and disable it
 	mode_switcher.get_node("ModeSwitcherButton").invisible = true
 	mode_switcher.get_node("ModeSwitcherButton").switching_disabled = true
