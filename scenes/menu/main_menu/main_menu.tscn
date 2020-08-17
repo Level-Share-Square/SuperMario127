@@ -1,39 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/menu/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 42
 font_data = ExtResource( 3 )
-
-[sub_resource type="Animation" id=1]
-resource_name = "default"
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
 
 [node name="MainMenuScreen" type="Control"]
 anchor_right = 1.0
@@ -65,7 +38,7 @@ __meta__ = {
 [node name="ButtonCampaign" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_right = 219.0
 margin_bottom = 64.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 disabled = true
 text = "Campaign"
 
@@ -73,29 +46,26 @@ text = "Campaign"
 margin_top = 87.0
 margin_right = 219.0
 margin_bottom = 151.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Levels"
 
 [node name="ButtonEditor" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 174.0
 margin_right = 219.0
 margin_bottom = 238.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Editor"
 
 [node name="ButtonOptions" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 261.0
 margin_right = 219.0
 margin_bottom = 325.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Options"
 
 [node name="ButtonQuit" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 348.0
 margin_right = 219.0
 margin_bottom = 412.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Quit"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/default = SubResource( 1 )
