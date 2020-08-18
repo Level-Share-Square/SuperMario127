@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://scenes/menu/levels_screen/levels_screen.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -199,31 +199,33 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=21]
-resource_name = "trans_in_ShineSelectScreen"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("TransitionRect:color")
+resource_name = "trans_play"
+length = 2.25
+tracks/0/type = "method"
+tracks/0/path = NodePath("TransitionAudio")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("TransitionRect:mouse_filter")
+tracks/1/path = NodePath("TransitionRect:color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 2 ]
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=23]
@@ -266,35 +268,6 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 2, 0 ]
-}
-
-[sub_resource type="Animation" id=22]
-length = 2.25
-tracks/0/type = "method"
-tracks/0/path = NodePath("TransitionAudio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ 0.0 ],
-"method": "play"
-} ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("TransitionRect:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="LevelsScreen" type="Control"]
@@ -531,14 +504,14 @@ margin_top = 2.0
 margin_right = 154.0
 margin_bottom = 52.0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel/HBoxContainer2"]
+[node name="ShineIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel/HBoxContainer2"]
 margin_right = 67.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 7 )
 expand = true
-stretch_mode = 6
+stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -576,7 +549,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 13 )
 expand = true
-stretch_mode = 6
+stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -607,14 +580,14 @@ margin_top = 2.0
 margin_right = 154.0
 margin_bottom = 52.0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel/HBoxContainer2"]
+[node name="CoinScoreIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel/HBoxContainer2"]
 margin_right = 67.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 12 )
 expand = true
-stretch_mode = 6
+stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -646,14 +619,14 @@ margin_top = 2.0
 margin_right = 154.0
 margin_bottom = 52.0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel/HBoxContainer3"]
+[node name="TimeScoreIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel/HBoxContainer3"]
 margin_right = 52.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 14 )
 expand = true
-stretch_mode = 6
+stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -793,7 +766,6 @@ anims/default = SubResource( 19 )
 anims/trans_edit = SubResource( 20 )
 anims/trans_in_ShineSelectScreen = SubResource( 21 )
 anims/trans_out_ShineSelectScreen = SubResource( 23 )
-anims/trans_play = SubResource( 22 )
 
 [node name="TransitionRect" type="ColorRect" parent="."]
 margin_right = 768.0
