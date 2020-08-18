@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scenes/menu/levels_screen/levels_screen.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -7,9 +7,7 @@
 [ext_resource path="res://assets/styles/RedButtonStyleNormal.tres" type="StyleBox" id=5]
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=6]
 [ext_resource path="res://scenes/menu/levels_screen/ui/shine_icon.png" type="Texture" id=7]
-[ext_resource path="res://scenes/actors/objects/yellow_coin/preview.png" type="Texture" id=8]
 [ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=9]
-[ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=10]
 [ext_resource path="res://scenes/shared/background/foregrounds/hills/preview.png" type="Texture" id=11]
 [ext_resource path="res://scenes/menu/levels_screen/ui/coin_icon.png" type="Texture" id=12]
 [ext_resource path="res://scenes/menu/levels_screen/ui/star_coin_icon.png" type="Texture" id=13]
@@ -114,6 +112,17 @@ font_data = ExtResource( 3 )
 [sub_resource type="DynamicFont" id=13]
 size = 19
 font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=22]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="DynamicFont" id=14]
 size = 24
@@ -453,54 +462,57 @@ custom_constants/separation = 11
 
 [node name="LevelThumbnail" type="MarginContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
 margin_right = 344.0
-margin_bottom = 124.0
+margin_bottom = 117.0
 size_flags_vertical = 3
-custom_constants/margin_right = 60
-custom_constants/margin_top = 0
-custom_constants/margin_left = 60
-custom_constants/margin_bottom = 0
+custom_constants/margin_right = 75
+custom_constants/margin_left = 75
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail"]
-margin_left = 60.0
-margin_right = 284.0
-margin_bottom = 124.0
+margin_left = 75.0
+margin_right = 269.0
+margin_bottom = 117.0
+size_flags_horizontal = 9
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 22 )
 
 [node name="ThumbnailImage" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 216.0
-margin_bottom = 116.0
+margin_right = 186.0
+margin_bottom = 109.0
 size_flags_vertical = 3
 texture = ExtResource( 6 )
 expand = true
+stretch_mode = 6
 
 [node name="ForegroundThumbnailImage" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 216.0
-margin_bottom = 116.0
+margin_right = 186.0
+margin_bottom = 109.0
 size_flags_vertical = 3
 texture = ExtResource( 11 )
 expand = true
+stretch_mode = 6
 
 [node name="LevelName" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo"]
-margin_top = 135.0
+margin_top = 128.0
 margin_right = 344.0
-margin_bottom = 197.0
+margin_bottom = 187.0
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
+size_flags_stretch_ratio = 0.51
 custom_fonts/font = SubResource( 14 )
+text = "Level Name"
 align = 1
 autowrap = true
 clip_text = true
 max_lines_visible = 2
 
 [node name="LevelScore" type="GridContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
-margin_top = 208.0
+margin_top = 198.0
 margin_right = 344.0
-margin_bottom = 316.0
+margin_bottom = 315.0
+size_flags_vertical = 3
 columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -508,34 +520,34 @@ __meta__ = {
 
 [node name="ShineProgressPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
 margin_right = 170.0
-margin_bottom = 52.0
+margin_bottom = 54.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/panel = SubResource( 15 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel"]
 margin_left = 16.0
 margin_top = 2.0
 margin_right = 154.0
+margin_bottom = 52.0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel/HBoxContainer2"]
+margin_right = 67.0
 margin_bottom = 50.0
-
-[node name="IconContainer" type="Control" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel/HBoxContainer2"]
-margin_bottom = 48.0
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel/HBoxContainer2/IconContainer"]
-margin_left = 4.0
-margin_right = 52.0
-margin_bottom = 48.0
-rect_scale = Vector2( 0.333, 0.333 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ShineProgressLabel" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel/HBoxContainer2"]
 margin_left = 99.0
-margin_top = 10.0
+margin_top = 11.0
 margin_right = 138.0
-margin_bottom = 38.0
+margin_bottom = 39.0
 size_flags_horizontal = 10
 custom_fonts/font = SubResource( 16 )
 text = "0/0"
@@ -546,43 +558,34 @@ __meta__ = {
 [node name="StarCoinProgressPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
 margin_left = 174.0
 margin_right = 344.0
-margin_bottom = 52.0
+margin_bottom = 54.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/panel = SubResource( 15 )
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel"]
 margin_left = 16.0
 margin_top = 2.0
 margin_right = 154.0
+margin_bottom = 52.0
+
+[node name="StarCoinIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel/HBoxContainer3"]
+margin_right = 67.0
 margin_bottom = 50.0
-
-[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel/HBoxContainer3"]
-margin_bottom = 48.0
-
-[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel/HBoxContainer3/Control"]
-margin_right = 144.0
-margin_bottom = 144.0
-rect_scale = Vector2( 0.333, 0.333 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource( 13 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="this is required to scale it right god knows why" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel/HBoxContainer3"]
-modulate = Color( 1, 1, 1, 0 )
-margin_left = 4.0
-margin_right = 52.0
-margin_bottom = 48.0
-texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StarCoinProgressLabel" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel/HBoxContainer3"]
 margin_left = 99.0
-margin_top = 10.0
+margin_top = 11.0
 margin_right = 138.0
-margin_bottom = 38.0
+margin_bottom = 39.0
 size_flags_horizontal = 10
 custom_fonts/font = SubResource( 16 )
 text = "0/0"
@@ -591,35 +594,36 @@ __meta__ = {
 }
 
 [node name="CoinScorePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
-margin_top = 56.0
+margin_top = 58.0
 margin_right = 170.0
-margin_bottom = 108.0
+margin_bottom = 112.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/panel = SubResource( 15 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel"]
 margin_left = 16.0
 margin_top = 2.0
 margin_right = 154.0
+margin_bottom = 52.0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel/HBoxContainer2"]
+margin_right = 67.0
 margin_bottom = 50.0
-
-[node name="IconContainer" type="Control" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel/HBoxContainer2"]
-margin_bottom = 48.0
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel/HBoxContainer2/IconContainer"]
-margin_right = 144.0
-margin_bottom = 144.0
-rect_scale = Vector2( 0.333, 0.33 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel/HBoxContainer2"]
 margin_left = 123.0
-margin_top = 10.0
+margin_top = 11.0
 margin_right = 138.0
-margin_bottom = 38.0
+margin_bottom = 39.0
 size_flags_horizontal = 10
 custom_fonts/font = SubResource( 16 )
 text = "0"
@@ -629,45 +633,36 @@ __meta__ = {
 
 [node name="SingleTimeScorePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
 margin_left = 174.0
-margin_top = 56.0
+margin_top = 58.0
 margin_right = 344.0
-margin_bottom = 108.0
+margin_bottom = 112.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/panel = SubResource( 15 )
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel"]
 margin_left = 16.0
 margin_top = 2.0
 margin_right = 154.0
-margin_bottom = 50.0
+margin_bottom = 52.0
 
-[node name="IconContainer2" type="Control" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel/HBoxContainer3"]
-margin_bottom = 48.0
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel/HBoxContainer3/IconContainer2"]
-margin_right = 144.0
-margin_bottom = 144.0
-rect_scale = Vector2( 0.333, 0.33 )
-texture = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="also required" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel/HBoxContainer3"]
-modulate = Color( 1, 1, 1, 0 )
-margin_left = 4.0
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel/HBoxContainer3"]
 margin_right = 52.0
-margin_bottom = 48.0
-texture = ExtResource( 10 )
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel/HBoxContainer3"]
 margin_left = 56.0
-margin_top = 13.0
+margin_top = 14.0
 margin_right = 138.0
-margin_bottom = 34.0
+margin_bottom = 35.0
 size_flags_horizontal = 10
 custom_fonts/font = SubResource( 17 )
 text = "99:99.99"
@@ -685,9 +680,9 @@ custom_fonts/font = ExtResource( 9 )
 text = "Time Scores"
 
 [node name="ControlButtons" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
-margin_top = 327.0
+margin_top = 326.0
 margin_right = 343.0
-margin_bottom = 367.0
+margin_bottom = 366.0
 size_flags_horizontal = 6
 size_flags_vertical = 8
 
