@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://scenes/menu/levels_screen/levels_screen.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -190,7 +190,76 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=21]
-resource_name = "trans_play"
+resource_name = "trans_in_ShineSelectScreen"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransitionRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TransitionRect:mouse_filter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "trans_out_ShineSelectScreen"
+length = 2.0
+tracks/0/type = "method"
+tracks/0/path = NodePath("TransitionAudio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TransitionRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TransitionRect:mouse_filter")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 0 ]
+}
+
+[sub_resource type="Animation" id=22]
 length = 2.25
 tracks/0/type = "method"
 tracks/0/path = NodePath("TransitionAudio")
@@ -727,7 +796,9 @@ text = "Close"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 19 )
 anims/trans_edit = SubResource( 20 )
-anims/trans_play = SubResource( 21 )
+anims/trans_in_ShineSelectScreen = SubResource( 21 )
+anims/trans_out_ShineSelectScreen = SubResource( 23 )
+anims/trans_play = SubResource( 22 )
 
 [node name="TransitionRect" type="ColorRect" parent="."]
 margin_right = 768.0
@@ -740,3 +811,4 @@ __meta__ = {
 
 [node name="TransitionAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
+volume_db = -6.0

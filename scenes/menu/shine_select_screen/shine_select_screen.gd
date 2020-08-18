@@ -5,20 +5,23 @@ extends Screen
 onready var tween = $Tween
 onready var shine_parent = $ShineParent
 
-onready var level_title = $Labels/LevelTitle
-onready var level_title_backing = $Labels/LevelTitleBacking
-onready var shine_title = $Labels/ShineTitle
-onready var shine_description = $Labels/ShineDescription
+onready var level_title = $TextureFrameTop/LevelTitle
+onready var level_title_backing = $TextureFrameTop/LevelTitleBacking
+onready var shine_title = $TextureFrameTop/ShineTitle
+onready var shine_description = $TextureFrameBottom/ShineDescription
 
 onready var button_move_left = $Buttons/ButtonMoveLeft 
 onready var button_move_right = $Buttons/ButtonMoveRight 
 onready var button_select_shine = $Buttons/ButtonSelectShine 
-onready var button_back = $Buttons/ButtonBack
+onready var button_back = $TextureFrameBottom/BackButtonContainer/ButtonBack
 
 onready var background_image = $Background
 onready var letsa_go_sfx = $LetsaGo
 onready var letsa_go_sfx_2 = $LetsaGo2
 onready var mission_select_sfx = $MissionSelect
+onready var mission_focus_sfx = $MissionFocus
+
+onready var animation_player = $AnimationPlayer
 
 const PLAYER_SCENE : PackedScene = preload("res://scenes/player/player.tscn")
 
@@ -37,6 +40,7 @@ const SHINE_BESIDE_CENTER_SIZE : float = 2.0
 const SHINE_DEFAULT_SIZE : float = 2.0
 
 var selected_shine : int = 0
+var can_interact : bool = false
 
 # array of all the ShineSprite scene instances used to make the shine select screen work
 var shine_sprites : Array = []
@@ -51,8 +55,8 @@ func _ready() -> void:
 	_connect = button_back.connect("pressed", self, "on_button_back_pressed")
 
 func _open_screen() -> void:
-	music.change_song(music.last_song, 0)
 	mission_select_sfx.play();
+	can_interact = true
 	
 	var selected_level = SavedLevels.selected_level
 	shine_details = SavedLevels.levels[selected_level].shine_details
@@ -91,6 +95,7 @@ func _close_screen():
 	shine_sprites = []
 	# change music back
 	music.change_song(0, music.last_song)
+	can_interact = false
 	mission_select_sfx.stop();
 
 func _input(_event: InputEvent) -> void:
@@ -105,16 +110,18 @@ func _input(_event: InputEvent) -> void:
 
 # this will try to change the selected shine, but won't if you're already at the first or last shine
 func attempt_increment_selected_shine(increment : int) -> void:
-	var previous_selected_shine = selected_shine
-	# warning-ignore:narrowing_conversion
-	selected_shine = clamp(selected_shine + increment, 0, shine_sprites.size() - 1)
-
-	# no point in doing anything if the value didn't actually change
-	if selected_shine == previous_selected_shine:
-		return
-
-	move_shine_sprites()
-	update_labels()
+	if can_interact:
+		var previous_selected_shine = selected_shine
+		# warning-ignore:narrowing_conversion
+		selected_shine = clamp(selected_shine + increment, 0, shine_sprites.size() - 1)
+	
+		# no point in doing anything if the value didn't actually change
+		if selected_shine == previous_selected_shine:
+			return
+		
+		mission_focus_sfx.play()
+		move_shine_sprites()
+		update_labels()
 
 func move_shine_sprites() -> void:
 	for i in range(shine_sprites.size()):
@@ -154,22 +161,32 @@ func update_labels() -> void:
 	shine_description.text = shine_details[selected_shine]["description"]
 
 func start_level() -> void:
-	letsa_go_sfx.play()
+	if can_interact:
+		letsa_go_sfx.play()
+		if PlayerSettings.number_of_players > 1:
+			# quick wait before playing P2's voice clip, to make it sound more natural
+			yield(get_tree().create_timer(0.035), "timeout")
+			
+			# we set the array index so the same voice is played for both, and it syncs
+			letsa_go_sfx_2.array_index = letsa_go_sfx.array_index
+			letsa_go_sfx_2.play()
 	
-	if PlayerSettings.number_of_players > 1:
-		# quick wait before playing P2's voice clip, to make it sound more natural
-		yield(get_tree().create_timer(0.035), "timeout")
+		can_interact = false
 		
-		# we set the array index so the same voice is played for both, and it syncs
-		letsa_go_sfx_2.array_index = letsa_go_sfx.array_index
-		letsa_go_sfx_2.play()
-	
-	# this is temporary, should be replaced with the transition stuff later
-	yield(get_tree().create_timer(1), "timeout")
-	
-	# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
-	# so we'll assume it's safe to just go straight to the player scene 
-	var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)
+		for index in range(shine_sprites.size()):
+			if index != selected_shine:
+				shine_sprites[index].start_disappear_animation()
+		
+		shine_sprites[selected_shine].start_selected_animation()
+		
+		# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
+		# so we'll assume it's safe to just go straight to the player scene 
+		animation_player.play("select_shine")
+		animation_player.connect("animation_finished", self, "change_to_player_scene")
+
+# eeeeee
+func change_to_player_scene(_animation : String):
+	get_tree().change_scene_to(PLAYER_SCENE)
 
 # signal responses start here 
 
