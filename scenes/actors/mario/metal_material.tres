@@ -6,39 +6,39 @@ render_mode unshaded;
  
 uniform sampler2D gradient : hint_black;
 uniform float mix_amount = 1.0;
-uniform vec2 bevel_offset = vec2(0.01);
+uniform vec2 sheet_size = vec2(576, 816);
+uniform vec2 bevel_offset = vec2(1, 2);
 
+// Vertex position thing used for gradient
 varying vec2 vertex_pos;
+// UV positions where pixels are read from to add the bevels
+varying vec2 uv_bevel_top_left;
+varying vec2 uv_bevel_bottom_right;
 
 void vertex()
 {
 	vertex_pos = vec2(VERTEX.x < 0.5 ? sqrt(0.5) : 0.0, VERTEX.y < 0.5 ? sqrt(0.5) : 0.0);
+	uv_bevel_top_left = UV - bevel_offset / sheet_size;
+	uv_bevel_bottom_right = UV + bevel_offset / sheet_size;
 }
 
 void fragment()
 {
 	vec4 input_color = texture(TEXTURE, UV);
-	vec4 bevel_tl = texture(TEXTURE, UV - bevel_offset);
-	vec4 bevel_br = texture(TEXTURE, UV + bevel_offset);
+	vec4 bevel_tl = texture(TEXTURE, uv_bevel_top_left);
+	vec4 bevel_br = texture(TEXTURE, uv_bevel_bottom_right);
 	
 	float grayscale_value = dot(input_color.rgb, vec3(0.299, 0.587, 0.114));
 	
+	// Add the bevels
 	if (bevel_tl.a < 0.5)
 		grayscale_value += 0.5;
-	
 	if (bevel_br.a < 0.5)
 		grayscale_value -= 0.5;
-	//float gradient_value = vertex_pos.x + vertex_pos.y;
-	//gradient_value = gradient_value * gradient_value;
-	//grayscale_value = gradient_value;
-	//grayscale_value = grayscale_value * grayscale_value;
-	//grayscale_value = grayscale_value * (gradient_value * 0.5 + 0.6);
-	//grayscale_value = grayscale_value < 0.2 ? (vertex_pos.x + vertex_pos.y) * 0.5 : grayscale_value;
-	//grayscale_value = grayscale_value * 0.6 + (vertex_pos.x + vertex_pos.y) * 0.2;
+	
+	// Sample the color from the gradient
 	vec3 sampled_color = texture(gradient, vec2(grayscale_value, 0.0)).rgb;
-
 	COLOR.rgb = mix(input_color.rgb, sampled_color, mix_amount);
-	//COLOR.rgb = COLOR.rgb * vec3(vertex_pos.x + vertex_pos.y) * 1.25;
 	COLOR.a = input_color.a;
 }"
 custom_defines = ""
@@ -52,5 +52,6 @@ gradient = SubResource( 2 )
 [resource]
 shader = SubResource( 1 )
 shader_param/mix_amount = 1.0
-shader_param/bevel_offset = Vector2( 0.002, 0.002 )
+shader_param/sheet_size = Vector2( 576, 816 )
+shader_param/bevel_offset = Vector2( 1, 2 )
 shader_param/gradient = SubResource( 3 )
