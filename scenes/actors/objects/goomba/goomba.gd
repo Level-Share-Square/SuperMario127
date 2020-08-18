@@ -6,8 +6,6 @@ onready var attack_area : Area2D = $Goomba/AttackArea
 onready var stomp_area : Area2D = $Goomba/StompArea
 onready var player_detector : Area2D = $Goomba/PlayerDetector
 onready var platform_detector : Area2D = $Goomba/PlatformDetector
-onready var grounded_check : RayCast2D = $Goomba/GroundedCheck
-onready var grounded_check_2 : RayCast2D = $Goomba/GroundedCheck2
 onready var wall_check : RayCast2D = $Goomba/WallCheck
 onready var wall_vacant_check : RayCast2D = $Goomba/WallVacantCheck
 onready var pit_check : RayCast2D = $Goomba/PitCheck
@@ -17,7 +15,7 @@ onready var poof_sound : AudioStreamPlayer = $Goomba/Disappear
 onready var hit_sound : AudioStreamPlayer = $Goomba/Hit
 onready var anim_player : AnimationPlayer = $Goomba/AnimationPlayer
 onready var bottom_pos : Node2D = $Goomba/BottomPos
-onready var raycasts := [grounded_check, grounded_check_2, wall_check, wall_vacant_check, pit_check]
+onready var raycasts := [wall_check, wall_vacant_check, pit_check]
 var dead := false
 
 var gravity : float
@@ -56,12 +54,12 @@ func jump():
 	position.y -= 2
 
 func detect_player(body : Character):
-	if enabled and body.name.begins_with("Character") and !dead and character == null:
+	if character == null and enabled and body != null and !dead:
 		character = body
-
+		
 		# warning-ignore: narrowing_conversion
 		facing_direction = sign(character.global_position.x - body.global_position.x)
-		if grounded_check.is_colliding() or grounded_check_2.is_colliding():
+		if kinematic_body.is_on_floor():
 			jump()
 
 func _ready():
@@ -163,7 +161,7 @@ func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform 
 			if walk_wait <= 0:
 				walk_wait = 0
 				walk_timer = float(int(time_alive * 10) % 3) + 1.0
-				facing_direction = -facing_direction if int(time_alive * 10) % 2 == 0 else facing_direction
+				facing_direction *= -1 if int(time_alive * 10) % 2 == 0 else 1
 		if walk_timer > 0:
 			sprite.animation = "walking"
 			velocity.x = lerp(velocity.x, facing_direction * speed, delta * accel)
@@ -175,7 +173,7 @@ func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform 
 		# Go towards the player
 		sprite.animation = "walking"
 		sprite.speed_scale = lerp(sprite.speed_scale, run_speed / speed, delta * accel)
-
+		
 		# warning-ignore: narrowing_conversion
 		facing_direction = sign(character.global_position.x - kinematic_body.global_position.x)
 		velocity.x = lerp(velocity.x, facing_direction * run_speed, delta * accel)
@@ -187,13 +185,11 @@ func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform 
 	sprite.flip_h = true if facing_direction == 1 else false
 	
 	# Ground collision
-	if grounded_check.is_colliding() or grounded_check_2.is_colliding():
+	if kinematic_body.is_on_floor():
 		snap = Vector2(0, 0 if is_in_platform else 12)
 		velocity.y = 0
 		
 		if is_instance_valid(character):
-			grounded_check.position.x = 8 * facing_direction
-			grounded_check_2.position.x = -8 * facing_direction
 			pit_check.position.x = 16 * facing_direction
 			wall_check.cast_to.x = 32 * facing_direction
 			wall_vacant_check.cast_to.x = 96 * facing_direction
@@ -219,17 +215,18 @@ func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform 
 			kill(hit_area.global_position)
 	
 	# Check the stomp hitbox
-	for hit_body in stomp_area.get_overlapping_bodies():
-		if hit_body.name.begins_with("Character"):
-			if hit_body.velocity.y > 0:
-				was_stomped = true
-				if hit_body.big_attack or hit_body.invincible:
-					was_ground_pound = true
-				kill(hit_body.global_position)
+	if !hit: # Prevent goombas from entering that weird zombie state
+		for hit_body in stomp_area.get_overlapping_bodies():
+			if hit_body.name.begins_with("Character"):
+				if hit_body.velocity.y > 0:
+					was_stomped = true
+					if hit_body.big_attack or hit_body.invincible:
+						was_ground_pound = true
+					kill(hit_body.global_position)
 	
 	# Run physics
 	velocity.y += gravity
-	velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
+	velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
 
 func physics_process_hit(delta : float, level_bounds : Rect2, is_in_platform : bool):
 	if kinematic_body.global_position.y > (level_bounds.end.y * 32) + 128:
@@ -277,11 +274,8 @@ func physics_process_hit(delta : float, level_bounds : Rect2, is_in_platform : b
 	elif !dead:
 		# The goomba is rolling around (from spin or off-center ground pound)
 		sprite.rotation_degrees += (velocity.x / 15)
-		var check := grounded_check
-		if !grounded_check.is_colliding():
-			check = grounded_check_2
 		#  velocity.length()         <   50
-		if velocity.length_squared() < 2500 and check.is_colliding():
+		if velocity.length_squared() < 2500 and kinematic_body.is_on_floor():
 			dead = true
 			hide_timer = 0.45
 			velocity.x = 0
@@ -290,14 +284,11 @@ func physics_process_hit(delta : float, level_bounds : Rect2, is_in_platform : b
 	
 	if sprite.visible:
 		# Ground collision
-		if grounded_check.is_colliding() or grounded_check_2.is_colliding():
-			var check := grounded_check
-			if !grounded_check.is_colliding():
-				check = grounded_check_2
-			if check.get_collision_normal().y == -1:
+		if kinematic_body.is_on_floor():
+			if kinematic_body.get_floor_normal().y == -1:
 				velocity.x = lerp(velocity.x, 0, delta * 2.5)
 			else:
-				var normal := sign(check.get_collision_normal().x)
+				var normal := sign(kinematic_body.get_floor_normal().x)
 				velocity.x = lerp(velocity.x, 225 * normal, delta)
 			
 			snap = Vector2(0, 0 if is_in_platform else 12)
@@ -306,4 +297,5 @@ func physics_process_hit(delta : float, level_bounds : Rect2, is_in_platform : b
 		
 		# Run physics
 		velocity.y += gravity
-		velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
+		#kinematic_body.get_floor_normal()
+		velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
