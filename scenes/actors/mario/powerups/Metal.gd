@@ -14,6 +14,11 @@ func _stop(_delta):
 	character.metal_voice = false
 	music.stop_temporary_music()
 
+func _process(_delta):
+	if character.sprite.material != null:
+		var bevel_offset := Vector2(1, 2).rotated(-character.sprite.rotation)
+		character.sprite.material.set_shader_param("bevel_offset", bevel_offset)
+
 func apply_visuals():
 	character.sprite.material = material
 	character.metal_particles.emitting = true
