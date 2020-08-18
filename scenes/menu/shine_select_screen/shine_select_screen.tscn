@@ -129,7 +129,7 @@ tracks/3/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, -162 ) ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=13]
 resource_name = "trans_in_default"
 length = 0.3
 tracks/0/type = "value"
@@ -145,8 +145,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=13]
-resource_name = "trans_out_default"
+[sub_resource type="Animation" id=14]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("TransitionRect:color")
@@ -375,8 +374,8 @@ volume_db = -6.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 11 )
 anims/select_shine = SubResource( 12 )
-anims/trans_in_default = SubResource( 14 )
-anims/trans_out_default = SubResource( 13 )
+anims/trans_in_default = SubResource( 13 )
+anims/trans_out_default = SubResource( 14 )
 
 [node name="TransitionRect" type="ColorRect" parent="."]
 margin_right = 768.0

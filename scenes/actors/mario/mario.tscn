@@ -911,9 +911,9 @@ shape = SubResource( 7 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, 3 )
-frames = ExtResource( 21 )
-animation = "armsOut"
+frames = ExtResource( 1 )
+animation = "shineDance"
+frame = 2
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
@@ -1278,18 +1278,17 @@ anims/shine_dance_stop = SubResource( 47 )
 [node name="CollectedShineOutline" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, 20 )
-scale = Vector2( 0.1, 0.1 )
 z_index = -5
 frames = SubResource( 64 )
-frame = 11
+frame = 1
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( -1, -70 )
+position = Vector2( -1, 20 )
+z_index = -5
 frames = ExtResource( 55 )
-frame = 3
-speed_scale = 3.0
+frame = 1
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

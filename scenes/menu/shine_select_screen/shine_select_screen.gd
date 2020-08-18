@@ -39,6 +39,8 @@ const SHINE_CENTER_SIZE : float = 4.0
 const SHINE_BESIDE_CENTER_SIZE : float = 2.0
 const SHINE_DEFAULT_SIZE : float = 2.0
 
+var mission_select_sfx_volume : float = 0
+
 var selected_shine : int = 0
 var can_interact : bool = false
 
@@ -48,6 +50,7 @@ var shine_sprites : Array = []
 var shine_details : Array
 
 func _ready() -> void:
+	mission_select_sfx_volume = mission_select_sfx.volume_db
 	var _connect 
 	_connect = button_move_left.connect("pressed", self, "on_button_move_left_pressed")
 	_connect = button_move_right.connect("pressed", self, "on_button_move_right_pressed")
@@ -55,6 +58,7 @@ func _ready() -> void:
 	_connect = button_back.connect("pressed", self, "on_button_back_pressed")
 
 func _open_screen() -> void:
+	mission_select_sfx.volume_db = -80 if music.muted else mission_select_sfx_volume
 	mission_select_sfx.play();
 	can_interact = true
 	
@@ -65,6 +69,7 @@ func _open_screen() -> void:
 	for i in range(shine_details.size()):
 		var shine_sprite = SHINE_SPRITE_SCENE.instance()
 		shine_sprites.append(shine_sprite)
+		
 		
 		# place all the shines the correct distance away from the center shine
 		if i > 1:
@@ -84,6 +89,10 @@ func _open_screen() -> void:
 			# Shine color is stored as rgba32 
 			shine_sprite.set_color(Color(int(shine_details[i]["color"])))
 		
+		if i == 0:
+			shine_sprite.selected = true
+			
+		shine_sprite.add_to_group("shine_sprites")
 		shine_parent.add_child(shine_sprite)
 	
 	selected_shine = 0
@@ -124,6 +133,9 @@ func attempt_increment_selected_shine(increment : int) -> void:
 		mission_focus_sfx.play()
 		move_shine_sprites()
 		update_labels()
+		
+		shine_sprites[previous_selected_shine].selected = false
+		shine_sprites[selected_shine].selected = true
 
 func move_shine_sprites() -> void:
 	for i in range(shine_sprites.size()):
@@ -175,11 +187,7 @@ func start_level() -> void:
 	
 		can_interact = false
 		
-		for index in range(shine_sprites.size()):
-			if index != selected_shine:
-				shine_sprites[index].start_disappear_animation()
-		
-		shine_sprites[selected_shine].start_selected_animation()
+		get_tree().call_group("shine_sprites", "start_pressed_animation")
 		
 		# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
 		# so we'll assume it's safe to just go straight to the player scene 
