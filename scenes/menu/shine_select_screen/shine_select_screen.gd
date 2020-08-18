@@ -74,13 +74,15 @@ func _open_screen() -> void:
 		
 		shine_sprite.call_deferred("start_animation")
 		
-		# if the shine is collected, make it blue on the shine select screen
+		# if the shine isn't collected, make it blue on the shine select scree
+		# if it is collected, show the correct colour of the shine
 		var collected_shines = SavedLevels.levels[selected_level].collected_shines
 		var is_collected = collected_shines[str(shine_details[i]["id"])]
 		if !is_collected: 
 			shine_sprite.make_blue()
 		else:
-			shine_sprite.set_color(shine_details[i]["color"])
+			# Shine color is stored as rgba32 
+			shine_sprite.set_color(Color(int(shine_details[i]["color"])))
 		
 		shine_parent.add_child(shine_sprite)
 	
