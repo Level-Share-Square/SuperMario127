@@ -46,6 +46,8 @@ var can_interact : bool = false
 
 # array of all the ShineSprite scene instances used to make the shine select screen work
 var shine_sprites : Array = []
+# updated with each shine id as it is used, so duplicate shine ids don't happen
+var used_shine_ids : Array = []
 # contains an array that stores dictionaries containing all the information needed to populate the shine select screen
 var shine_details : Array
 
@@ -67,9 +69,13 @@ func _open_screen() -> void:
 	background_image.texture = SavedLevels.levels[selected_level].get_level_background_texture()
 	
 	for i in range(shine_details.size()):
+		if used_shine_ids.has(shine_details[i]["id"]):
+			continue 
+
+		used_shine_ids.append(shine_details[i]["id"])
+
 		var shine_sprite = SHINE_SPRITE_SCENE.instance()
 		shine_sprites.append(shine_sprite)
-		
 		
 		# place all the shines the correct distance away from the center shine
 		if i > 1:
