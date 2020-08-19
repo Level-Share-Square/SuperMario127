@@ -67,6 +67,8 @@ func _open_screen() -> void:
 	var selected_level = SavedLevels.selected_level
 	shine_details = SavedLevels.levels[selected_level].shine_details
 	background_image.texture = SavedLevels.levels[selected_level].get_level_background_texture()
+
+	used_shine_ids = []
 	
 	for i in range(shine_details.size()):
 		if used_shine_ids.has(shine_details[i]["id"]):
