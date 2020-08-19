@@ -78,6 +78,12 @@ func change_screen(this_screen_name : String, new_screen_name : String):
 
 	if current_screen.has_node("AnimationPlayer"):
 		var animation_player : AnimationPlayer = current_screen.get_node("AnimationPlayer")
+
+		# play an animation named default that's meant to reset to sane values for usage
+		# even if no trans_in is found the screen should be usable via this
+		if animation_player.has_animation("default"):
+			animation_player.play("default")
+
 		# try and play an animation specific to this transition, if it doesn't exist try a default one
 		if animation_player.has_animation("trans_in_" + previous_screen.name):
 			animation_player.play("trans_in_" + previous_screen.name)

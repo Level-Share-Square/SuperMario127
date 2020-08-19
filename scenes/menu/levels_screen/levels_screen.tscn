@@ -167,6 +167,30 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("TransitionRect:mouse_filter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TransitionRect:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=21]
 length = 2.25
@@ -198,7 +222,8 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=22]
-length = 2.25
+resource_name = "trans_in_ShineSelectScreen"
+length = 1.2
 tracks/0/type = "method"
 tracks/0/path = NodePath("TransitionAudio")
 tracks/0/interp = 1
@@ -223,12 +248,23 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TransitionRect:mouse_filter")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
 }
 
 [sub_resource type="Animation" id=23]
 resource_name = "trans_out_ShineSelectScreen"
-length = 2.0
 tracks/0/type = "method"
 tracks/0/path = NodePath("TransitionAudio")
 tracks/0/interp = 1
@@ -262,10 +298,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 2, 0 ]
+"values": [ 0 ]
 }
 
 [node name="LevelsScreen" type="Control"]
@@ -643,9 +679,9 @@ __meta__ = {
 
 [node name="ButtonTimeScores" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore" instance=ExtResource( 2 )]
 visible = false
-margin_top = 112.0
-margin_right = 181.0
-margin_bottom = 156.0
+margin_top = 72.0
+margin_right = 170.0
+margin_bottom = 116.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 9 )
 text = "Time Scores"
@@ -701,8 +737,8 @@ text = "Delete"
 
 [node name="TimeScorePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
 visible = false
-margin_left = 360.0
-margin_right = 704.0
+margin_left = 719.0
+margin_right = 853.0
 margin_bottom = 368.0
 size_flags_horizontal = 3
 size_flags_vertical = 11
@@ -714,7 +750,7 @@ __meta__ = {
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/TimeScorePanel"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 336.0
+margin_right = 126.0
 margin_bottom = 360.0
 custom_styles/panel = SubResource( 8 )
 __meta__ = {
@@ -724,7 +760,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TimeScorePanel/PanelContainer"]
 margin_left = 16.0
 margin_top = 8.0
-margin_right = 312.0
+margin_right = 102.0
 margin_bottom = 344.0
 custom_constants/separation = 8
 __meta__ = {
@@ -732,7 +768,7 @@ __meta__ = {
 }
 
 [node name="TimeScoreList" type="ItemList" parent="MarginContainer/HBoxContainer/TimeScorePanel/PanelContainer/VBoxContainer"]
-margin_right = 296.0
+margin_right = 86.0
 margin_bottom = 288.0
 size_flags_vertical = 3
 theme = SubResource( 6 )
@@ -749,7 +785,7 @@ __meta__ = {
 
 [node name="ButtonCloseTimeScore" parent="MarginContainer/HBoxContainer/TimeScorePanel/PanelContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 296.0
-margin_right = 296.0
+margin_right = 86.0
 margin_bottom = 336.0
 size_flags_vertical = 8
 custom_styles/hover = ExtResource( 4 )
@@ -766,8 +802,8 @@ anims/trans_in_ShineSelectScreen = SubResource( 22 )
 anims/trans_out_ShineSelectScreen = SubResource( 23 )
 
 [node name="TransitionRect" type="ColorRect" parent="."]
-margin_right = 768.0
-margin_bottom = 432.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 mouse_filter = 2
 color = Color( 1, 1, 1, 0 )
 __meta__ = {
