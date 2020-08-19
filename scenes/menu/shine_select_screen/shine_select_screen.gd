@@ -192,7 +192,7 @@ func start_level() -> void:
 		# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
 		# so we'll assume it's safe to just go straight to the player scene 
 		animation_player.play("select_shine")
-		animation_player.connect("animation_finished", self, "change_to_player_scene")
+		animation_player.connect("animation_finished", self, "change_to_player_scene", [], CONNECT_ONESHOT)
 
 # eeeeee
 func change_to_player_scene(_animation : String):

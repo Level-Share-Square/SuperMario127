@@ -36,6 +36,8 @@ const OUT_OF_BOUNDS = 26
 const LEVEL_MARGIN = 27
 const GLASS = 28
 
+const WOOD = 29
+
 var ids = [
 	GRASS_BLOCK,
 	GRASS_SLOPE_RIGHT,
@@ -70,7 +72,9 @@ var ids = [
 	
 	OUT_OF_BOUNDS,
 	LEVEL_MARGIN,
-	GLASS
+	GLASS,
+	
+	WOOD
 ]
 
 var binds = {
