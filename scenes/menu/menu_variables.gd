@@ -16,7 +16,7 @@ func quit_to_menu(screen_to_open : String = ""): #switch this to use the enum an
 	get_tree().paused = false
 
 	# clear out the level data of the current level, it has to be regenerated so there isn't leftover data 
-	if SavedLevels.selected_level != -1:
+	if SavedLevels.selected_level != SavedLevels.NO_LEVEL:
 		SavedLevels.levels[SavedLevels.selected_level].level_data = null
 	else:
 		# Go to the main menu instead of the level select

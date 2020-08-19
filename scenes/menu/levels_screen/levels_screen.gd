@@ -44,7 +44,8 @@ const EDITOR_SCENE : PackedScene = preload("res://scenes/editor/editor.tscn")
 
 const TEMPLATE_LEVEL: String = preload("res://assets/level_data/template_level.tres").contents
 
-const NO_LEVEL : int = -1
+# technically a repeat constant, it's staying in here for convenience and compatibility reasons
+const NO_LEVEL : int = SAVED_LEVELS.NO_LEVEL
 
 const DEFAULT_SKY_THUMBNAIL : StreamTexture = preload("res://scenes/shared/background/backgrounds/day/day.png")
 const DEFAULT_FOREGROUND_MODULATE : Color = Color(1, 1, 1)
