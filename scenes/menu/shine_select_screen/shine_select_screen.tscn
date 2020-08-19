@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/menu/shine_select_screen/frame_bottom.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=3]
+[ext_resource path="res://scenes/shared/background/backgrounds/dusk/dusk.png" type="Texture" id=3]
 [ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/menu/shine_select_screen/shine_select_screen.gd" type="Script" id=5]
 [ext_resource path="res://scenes/menu/shine_select_screen/LetsaGo.gd" type="Script" id=6]
@@ -31,7 +31,7 @@ outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 24
+size = 20
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 extra_spacing_char = 1
 extra_spacing_space = 1
@@ -183,9 +183,9 @@ anchor_top = 0.05
 anchor_right = 0.8
 anchor_bottom = 0.183
 margin_left = -153.6
-margin_top = 4.4
+margin_top = 6.4
 margin_right = 153.6
-margin_bottom = 3.944
+margin_bottom = -11.056
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "My Level"
@@ -201,9 +201,9 @@ anchor_top = 0.05
 anchor_right = 0.8
 anchor_bottom = 0.183
 margin_left = -153.6
-margin_top = 0.4
+margin_top = 2.4
 margin_right = 153.6
-margin_bottom = -0.0559998
+margin_bottom = -15.056
 custom_fonts/font = SubResource( 2 )
 text = "My Level"
 align = 1
@@ -217,10 +217,15 @@ anchor_left = 0.1
 anchor_top = 0.234
 anchor_right = 0.9
 anchor_bottom = 0.329
+margin_left = 0.199997
+margin_top = -41.088
+margin_right = -0.199951
+margin_bottom = -0.127991
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "The Rainbow Shine Sprite"
 align = 1
+valign = 1
 clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -242,9 +247,9 @@ anchor_top = 0.768
 anchor_right = 0.85
 anchor_bottom = 1.0
 margin_left = -65.2
-margin_top = 0.223938
+margin_top = -26.7763
 margin_right = 65.2
-margin_bottom = -9.00006
+margin_bottom = -8.00037
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "This is a description get stick bugged lol"
@@ -285,7 +290,7 @@ __meta__ = {
 }
 
 [node name="ShineParent" type="Node2D" parent="."]
-position = Vector2( 384, 232 )
+position = Vector2( 384, 216 )
 
 [node name="Tween" type="Tween" parent="."]
 

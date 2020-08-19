@@ -43,7 +43,7 @@ var last_color : Color
 var is_blue := false
 
 var title := "Unnamed Shine"
-var description := "You can change this description in the Shine Sprite's properties menu."
+var description := ""
 var show_in_menu := true
 var activated := true
 var red_coins_activate := false
