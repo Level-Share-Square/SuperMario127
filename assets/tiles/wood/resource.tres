@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://level/Tileset.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/wood/wood.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+block_tile_id = 29
+slab_tile_id = 29
+left_slope_tile_id = 29
+right_slope_tile_id = 29
+placing_texture = ExtResource( 2 )

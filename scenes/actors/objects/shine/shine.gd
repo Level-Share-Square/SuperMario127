@@ -77,7 +77,7 @@ func _ready() -> void:
 		
 		# if the shine is collected, make it blue 
 		# (collected_shines is a Dictionary where the key is the shine id and the value is a bool)
-		if SavedLevels.selected_level != -1:
+		if SavedLevels.selected_level != SavedLevels.NO_LEVEL:
 			var collected_shines = SavedLevels.levels[SavedLevels.selected_level].collected_shines
 			if collected_shines.has(id):
 				is_blue = collected_shines[str(id)]
@@ -194,8 +194,7 @@ func collect(body : PhysicsBody2D) -> void:
 		collected = true
 		visible = false
 
-		# the constant for NO_LEVEL is declared in LevelsScreen and there's no clean way to get it atm, so magic number -1 it is
-		if SavedLevels.selected_level != -1:
+		if SavedLevels.selected_level != SavedLevels.NO_LEVEL:
 			SavedLevels.levels[SavedLevels.selected_level].set_shine_collected(id, false)
 			SavedLevels.levels[SavedLevels.selected_level].update_time_and_coin_score(id, true)
 			CurrentLevelData.stop_tracking_time_score() # time score is saved, and we don't want it continuing to update into the menu wasting resources

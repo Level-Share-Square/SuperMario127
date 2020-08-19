@@ -44,7 +44,8 @@ const EDITOR_SCENE : PackedScene = preload("res://scenes/editor/editor.tscn")
 
 const TEMPLATE_LEVEL: String = preload("res://assets/level_data/template_level.tres").contents
 
-const NO_LEVEL : int = -1
+# technically a repeat constant, it's staying in here for convenience and compatibility reasons
+const NO_LEVEL : int = SavedLevels.NO_LEVEL
 
 const DEFAULT_SKY_THUMBNAIL : StreamTexture = preload("res://scenes/shared/background/backgrounds/day/day.png")
 const DEFAULT_FOREGROUND_MODULATE : Color = Color(1, 1, 1)
@@ -89,8 +90,9 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 	if level_info != null:
 		level_name_label.text = level_info.level_name
 
+		# get the number of true values in the collected_shines Dictionary, aka get the number of collected shines
 		var collected_shine_count = level_info.collected_shines.values().count(true)
-		shine_progress.text = "%s/%s" % [collected_shine_count, level_info.shine_details.size()]
+		shine_progress.text = "%s/%s" % [collected_shine_count, level_info.collected_shines.size()]
 		
 		# set the little thumbnail to look just like the actual level background
 		level_sky_thumbnail.texture = level_info.get_level_background_texture()

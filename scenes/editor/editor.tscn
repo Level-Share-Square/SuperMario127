@@ -1,4 +1,4 @@
-[gd_scene load_steps=182 format=2]
+[gd_scene load_steps=183 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -157,6 +157,7 @@
 [ext_resource path="res://scenes/editor/window/ColorPickerWindow.tscn" type="PackedScene" id=155]
 [ext_resource path="res://scenes/actors/objects/platform_wheel/icon.png" type="Texture" id=156]
 [ext_resource path="res://scenes/actors/objects/platform_wheel/preview.png" type="Texture" id=157]
+[ext_resource path="res://assets/tiles/wood/icon.png" type="Texture" id=158]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1884,6 +1885,13 @@ items_in_sequence = 4
 index_in_sequence = 1
 icon = ExtResource( 111 )
 preview = ExtResource( 111 )
+
+[node name="Wood" type="Node" parent="PlaceableItems/SnowGroup"]
+script = ExtResource( 3 )
+tileset_id = 10
+change_to = "Wood"
+icon = ExtResource( 158 )
+preview = ExtResource( 158 )
 
 [node name="SnowTree" type="Node" parent="PlaceableItems/SnowGroup"]
 script = ExtResource( 3 )

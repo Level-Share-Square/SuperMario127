@@ -4,9 +4,11 @@ const LEVELS_DIRECTORY = "user://levels/"
 const LEVEL_DISK_PATHS_PATH = LEVELS_DIRECTORY + "paths.json"
 const ENCRYPTION_PASSWORD = "BadCode"
 
+const NO_LEVEL : int = -1
+
 var levels : Array = [] # array of type LevelInfo
 var levels_disk_paths : Array = [] # array of type String
-var selected_level : int = -1 # -1 means no level is selected
+var selected_level : int = NO_LEVEL
 
 # var selected_level # this should be a property that returns the LevelInfo of the selected level, have to change the name of the current selected_level to selected_level_index first
 

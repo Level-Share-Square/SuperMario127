@@ -17,7 +17,7 @@ func on_button_levels_pressed() -> void:
 	emit_signal("screen_change", "main_menu_screen", "levels_screen")
 
 func on_button_editor_pressed() -> void:
-	SavedLevels.selected_level = -1 # No level selected
+	SavedLevels.selected_level = SavedLevels.NO_LEVEL 
 	get_node("/root/CurrentLevelData")._ready() # Reset level
 	var _change_scene = get_tree().change_scene_to(EDITOR_SCENE)
 
