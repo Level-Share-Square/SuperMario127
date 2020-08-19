@@ -47,13 +47,13 @@ var character : Character
 
 export var top_point : Vector2
 
-func jump():
+func jump() -> void:
 	velocity.x = facing_direction * run_speed
 	velocity.y = -225
 	snap = Vector2(0, 0)
 	position.y -= 2
 
-func detect_player(body : Character):
+func detect_player(body : Character) -> void:
 	if character == null and enabled and body != null and !dead:
 		character = body
 		
@@ -62,26 +62,26 @@ func detect_player(body : Character):
 		if kinematic_body.is_on_floor():
 			jump()
 
-func _ready():
+func _ready() -> void:
 	# warning-ignore: return_value_discarded
 	player_detector.connect("body_entered", self, "detect_player")
 	CurrentLevelData.enemies_instanced += 1
 	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
 	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
 
-func shell_hit(shell_pos : Vector2):
+func shell_hit(shell_pos : Vector2) -> void:
 	if !hit:
 		kill(shell_pos)
 		
-func exploded(explosion_pos : Vector2):
+func exploded(explosion_pos : Vector2) -> void:
 	if !hit:
 		kill(explosion_pos)
 
-func steely_hit(hit_pos : Vector2):
+func steely_hit(hit_pos : Vector2) -> void:
 	if !hit:
 		kill(hit_pos)
 
-func create_coin():
+func create_coin() -> void:
 	var object := LevelObject.new()
 	object.type_id = 1
 	object.properties = []
@@ -95,7 +95,7 @@ func create_coin():
 	object.properties.append(Vector2(velocity_x, -300))
 	get_parent().create_object(object, false)
 
-func kill(hit_pos : Vector2):
+func kill(hit_pos : Vector2) -> void:
 	if !hit and !dead:
 		if is_instance_valid(kinematic_body):
 			hit = true
@@ -120,12 +120,12 @@ func kill(hit_pos : Vector2):
 				position.y -= 2
 				snap = Vector2(0, 0)
 
-func _process(_delta):
+func _process(_delta) -> void:
 	if mode == 1:
 		# warning-ignore: integer_division
 		sprite.frame = wrapi(OS.get_ticks_msec() / 166, 0, 4)
 
-func _physics_process(delta : float):
+func _physics_process(delta : float) -> void:
 	time_alive += delta
 	
 	if mode != 1 and enabled and loaded:
@@ -143,12 +143,13 @@ func _physics_process(delta : float):
 		
 		if is_instance_valid(kinematic_body):
 			var level_bounds : Rect2 = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds
+			
 			if !hit:
 				physics_process_normal(delta, level_bounds, is_in_platform)
 			else:
 				physics_process_hit(delta, level_bounds, is_in_platform)
 
-func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform : bool):
+func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform : bool) -> void:
 	if kinematic_body.global_position.y > (level_bounds.end.y * 32) + 128:
 		queue_free()
 	
@@ -187,7 +188,6 @@ func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform 
 	# Ground collision
 	if kinematic_body.is_on_floor():
 		snap = Vector2(0, 0 if is_in_platform else 12)
-		velocity.y = 0
 		
 		if is_instance_valid(character):
 			pit_check.position.x = 16 * facing_direction
@@ -228,7 +228,7 @@ func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform 
 	velocity.y += gravity
 	velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
 
-func physics_process_hit(delta : float, level_bounds : Rect2, is_in_platform : bool):
+func physics_process_hit(delta : float, level_bounds : Rect2, is_in_platform : bool) -> void:
 	if kinematic_body.global_position.y > (level_bounds.end.y * 32) + 128:
 		queue_free()
 	
