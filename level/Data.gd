@@ -127,7 +127,7 @@ func get_chunks(resultLayers: Array, size: Vector2) -> Dictionary:
 					tile_repeat_string += result[index]
 			else:
 				tile_repeat_string += "1"
-			var tileset_id = tileset_id_string.hex_to_int()
+			var tileset_id = int(tileset_id_string)
 			var tile_repeat = int(tile_repeat_string)
 
 			if(tileset_id==0): #air can we skipped since it won't get written to the chunks
@@ -135,7 +135,7 @@ func get_chunks(resultLayers: Array, size: Vector2) -> Dictionary:
 				continue
 			
 			#finish decoding
-			var tile_id = tile_id_string.hex_to_int()
+			var tile_id = int(tile_id_string)
 			var tile = [tileset_id, tile_id]
 
 
