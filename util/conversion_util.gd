@@ -57,6 +57,8 @@ static func convert_044_to_045(result):
 					object.properties.append(Color(1, 1, 0))
 					object.properties.append(current_id)
 					current_id += 1
+				elif object.type_id == 13:
+					object.type_id = 51
 				new_objects.append(object)
 			area_result.objects = new_objects
 	return result
