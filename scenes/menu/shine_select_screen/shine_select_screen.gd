@@ -60,7 +60,7 @@ func _ready() -> void:
 	_connect = button_back.connect("pressed", self, "on_button_back_pressed")
 
 func _open_screen() -> void:
-	mission_select_sfx.volume_db = -80 if music.muted else mission_select_sfx_volume
+	mission_select_sfx.volume_db = -80.0 if music.muted else mission_select_sfx_volume
 	mission_select_sfx.play();
 	can_interact = true
 	
@@ -204,7 +204,7 @@ func start_level() -> void:
 
 # eeeeee
 func change_to_player_scene(_animation : String):
-	get_tree().change_scene_to(PLAYER_SCENE)
+	var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)
 
 # signal responses start here 
 

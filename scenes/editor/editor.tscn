@@ -1,4 +1,4 @@
-[gd_scene load_steps=183 format=2]
+[gd_scene load_steps=185 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -158,6 +158,8 @@
 [ext_resource path="res://scenes/actors/objects/platform_wheel/icon.png" type="Texture" id=156]
 [ext_resource path="res://scenes/actors/objects/platform_wheel/preview.png" type="Texture" id=157]
 [ext_resource path="res://assets/tiles/wood/icon.png" type="Texture" id=158]
+[ext_resource path="res://scenes/actors/objects/pearl_platform/pearl_platform.png" type="Texture" id=159]
+[ext_resource path="res://scenes/actors/objects/pearl_platform/icon.png" type="Texture" id=160]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1735,6 +1737,17 @@ tile_mode_offset = Vector2( 0, -16 )
 z_index = -1
 icon = ExtResource( 84 )
 preview = ExtResource( 83 )
+
+[node name="PearlPlatform" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 51
+is_object = true
+object_center = Vector2( 16, 0 )
+tile_mode_offset = Vector2( 0, -16 )
+z_index = -1
+change_to = "PearlPlatform"
+icon = ExtResource( 160 )
+preview = ExtResource( 159 )
 
 [node name="CloudPlatform" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 3 )

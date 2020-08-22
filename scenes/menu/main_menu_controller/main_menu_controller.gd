@@ -9,13 +9,14 @@ onready var active_screens : Control = $ActiveScreens
 onready var inactive_screens : Control = $InactiveScreens 
 
 # screens
+onready var splash_screen : Screen = $InactiveScreens/SplashScreen
 onready var title_screen : Screen = $InactiveScreens/TitleScreen
 onready var main_menu_screen : Screen = $InactiveScreens/MainMenuScreen
 onready var levels_screen : Screen = $InactiveScreens/LevelsScreen
 onready var shine_select_screen : Screen = $InactiveScreens/ShineSelectScreen
 
 # this is basically a constant, except we can't store a reference to a child node in a constant, shame there's no readonly modifier
-onready var default_screen = main_menu_screen
+onready var default_screen = splash_screen
 
 var current_screen : Screen
 var previous_screen : Screen
@@ -39,8 +40,10 @@ func _ready() -> void:
 	if custom_open_screen != null:
 		screen_to_load = custom_open_screen
 
+	# properly load a default screen
 	inactive_screens.remove_child(screen_to_load)
 	active_screens.add_child(screen_to_load)
+	screen_to_load._open_screen()
 	current_screen = screen_to_load
 
 	music.change_song(music.last_song, 31) # temporary, should add a way for screens to define their own music setting later
@@ -53,8 +56,13 @@ func change_screen(this_screen_name : String, new_screen_name : String):
 
 	previous_screen._close_screen()
 
-	# this looks like a fair amount of copy pasted code, but honestly moving it to a function wouldn't really change much, 
-	# it's not that many lines and the argument requirements would be a bit awkward
+	# make the screen we're moving to visible during the transition 
+	# once simultanious transition animations are implemented an animatiion could be used to hide it if needed
+	inactive_screens.remove_child(current_screen)
+	active_screens.add_child(current_screen)
+	active_screens.move_child(current_screen, 0)
+
+	# this looks like a fair amount of copy pasted code, but moving it to a function would actually heavily complicate it with if statements, so it's better this way
 
 	if previous_screen.has_node("AnimationPlayer"):
 		var transition_started = false
@@ -93,10 +101,8 @@ func change_screen(this_screen_name : String, new_screen_name : String):
 			animation_player.play("trans_in_default")
 			animation_player.seek(0, true)
 
+	# make the screen we're leaving inactive
 	active_screens.remove_child(previous_screen)
 	inactive_screens.add_child(previous_screen)
 	
-	inactive_screens.remove_child(current_screen)
-	active_screens.add_child(current_screen)
-
 	current_screen._open_screen()
