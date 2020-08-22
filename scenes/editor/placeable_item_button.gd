@@ -91,7 +91,7 @@ func update_selection():
 func button_down():
 	var editor = get_tree().get_current_scene()
 	if item != null:
-		if editor.selected_box == self:
+		if editor.selected_box == self and !item.change_to.empty():
 			item = placeable_items_node.find_node(item.change_to)
 			item_changed()
 		

@@ -1107,7 +1107,6 @@ is_object = true
 object_center = Vector2( 16, 12 )
 tile_mode_offset = Vector2( 0, -4 )
 z_index = -1
-change_to = "Sign"
 icon = ExtResource( 94 )
 preview = ExtResource( 94 )
 
@@ -1117,7 +1116,6 @@ object_id = 23
 is_object = true
 object_center = Vector2( 16, 16 )
 z_index = -1
-change_to = "Pipe"
 icon = ExtResource( 110 )
 preview = ExtResource( 108 )
 
@@ -1126,7 +1124,6 @@ script = ExtResource( 3 )
 object_id = 31
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "SampleObject"
 icon = ExtResource( 137 )
 preview = ExtResource( 137 )
 
@@ -1217,14 +1214,12 @@ preview = ExtResource( 150 )
 [node name="BooBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 tileset_id = 6
-change_to = "BooBlock"
 icon = ExtResource( 107 )
 preview = ExtResource( 107 )
 
 [node name="Glass" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 tileset_id = 9
-change_to = "Glass"
 icon = ExtResource( 58 )
 preview = ExtResource( 58 )
 
@@ -1327,7 +1322,6 @@ script = ExtResource( 3 )
 object_id = 44
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "VanishPassthroughBlock"
 icon = ExtResource( 140 )
 preview = ExtResource( 141 )
 
@@ -1379,7 +1373,6 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
-change_to = "Seesaw"
 icon = ExtResource( 37 )
 preview = ExtResource( 34 )
 
@@ -1391,7 +1384,6 @@ object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
 z_index = -8
-change_to = "Door"
 icon = ExtResource( 44 )
 preview = ExtResource( 49 )
 
@@ -1403,7 +1395,6 @@ object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
 z_index = -8
-change_to = "TouchLift"
 icon = ExtResource( 153 )
 preview = ExtResource( 154 )
 
@@ -1415,7 +1406,6 @@ object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
 z_index = -8
-change_to = "PlatformWheel"
 icon = ExtResource( 156 )
 preview = ExtResource( 157 )
 
@@ -1571,7 +1561,6 @@ is_object = true
 object_center = Vector2( 8, 8 )
 tile_mode_step = 16
 z_index = -1
-change_to = "GreenDemon"
 icon = ExtResource( 96 )
 preview = ExtResource( 95 )
 
@@ -1582,7 +1571,6 @@ is_object = true
 object_center = Vector2( 8, 8 )
 tile_mode_step = 16
 z_index = -1
-change_to = "Goomba"
 icon = ExtResource( 133 )
 preview = ExtResource( 132 )
 
@@ -1619,7 +1607,6 @@ is_object = true
 object_center = Vector2( 8, 8 )
 tile_mode_step = 16
 z_index = -1
-change_to = "BobOmb"
 icon = ExtResource( 129 )
 preview = ExtResource( 128 )
 
@@ -1630,7 +1617,6 @@ is_object = true
 object_center = Vector2( 8, 8 )
 tile_mode_step = 16
 z_index = -1
-change_to = "BillBlaster"
 icon = ExtResource( 127 )
 preview = ExtResource( 126 )
 
@@ -1639,7 +1625,6 @@ script = ExtResource( 3 )
 object_id = 36
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "BigSteely"
 icon = ExtResource( 144 )
 preview = ExtResource( 145 )
 
@@ -1693,7 +1678,6 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
 z_index = -9
-change_to = "BigTree"
 icon = ExtResource( 51 )
 preview = ExtResource( 50 )
 
@@ -1729,7 +1713,6 @@ is_object = true
 object_center = Vector2( 8, 8 )
 tile_mode_step = 16
 z_index = -1
-change_to = "Log"
 icon = ExtResource( 78 )
 preview = ExtResource( 77 )
 
@@ -1740,7 +1723,6 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
-change_to = "MetalPlatform"
 icon = ExtResource( 42 )
 preview = ExtResource( 43 )
 
@@ -1751,7 +1733,6 @@ is_object = true
 object_center = Vector2( 16, 0 )
 tile_mode_offset = Vector2( 0, -16 )
 z_index = -1
-change_to = "BonePlatform"
 icon = ExtResource( 84 )
 preview = ExtResource( 83 )
 
@@ -1762,7 +1743,6 @@ is_object = true
 object_center = Vector2( 64, 0 )
 tile_mode_offset = Vector2( 32, -32 )
 tile_mode_step = 64
-change_to = "CloudPlatform"
 icon = ExtResource( 75 )
 preview = ExtResource( 76 )
 
@@ -1889,7 +1869,6 @@ preview = ExtResource( 111 )
 [node name="Wood" type="Node" parent="PlaceableItems/SnowGroup"]
 script = ExtResource( 3 )
 tileset_id = 10
-change_to = "Wood"
 icon = ExtResource( 158 )
 preview = ExtResource( 158 )
 
@@ -1900,7 +1879,6 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
 z_index = -9
-change_to = "SnowTree"
 icon = ExtResource( 125 )
 preview = ExtResource( 124 )
 
@@ -1911,7 +1889,6 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
-change_to = "SnowPlatform"
 icon = ExtResource( 138 )
 preview = ExtResource( 139 )
 
