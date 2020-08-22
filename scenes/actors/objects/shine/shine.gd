@@ -71,8 +71,7 @@ func _ready() -> void:
 	if mode != 1: # not in edit mode
 		if red_coins_activate or shine_shards_activate:
 			activated = false
-		# warning-ignore: return_value_discarded
-		area.connect("body_entered", self, "collect")
+		var _connect = area.connect("body_entered", self, "collect")
 		unpause_timer.wait_time = UNPAUSE_TIMER_LENGTH
 		
 		# if the shine is collected, make it blue 
