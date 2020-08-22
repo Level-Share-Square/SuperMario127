@@ -1745,7 +1745,6 @@ is_object = true
 object_center = Vector2( 16, 0 )
 tile_mode_offset = Vector2( 0, -16 )
 z_index = -1
-change_to = "PearlPlatform"
 icon = ExtResource( 160 )
 preview = ExtResource( 159 )
 
