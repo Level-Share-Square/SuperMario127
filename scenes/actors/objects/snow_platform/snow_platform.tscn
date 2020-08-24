@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/actors/objects/metal_platform/resizable_semisolid.gd" type="Script" id=4]
 
 [sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/2_wide.png-e1ebb231eeee00083b0cd37b97424e33.stex"
+load_path = "res://.import/texture.png-2a423e6905e2cd598f1759fdcf73a510.stex"
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32, 4 )
