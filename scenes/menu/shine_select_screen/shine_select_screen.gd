@@ -94,7 +94,7 @@ func _open_screen() -> void:
 		if !is_collected: 
 			shine_sprite.make_blue()
 		else:
-			# Shine color is stored as rgba32 
+			# Shine color is stored as rgba32 from a json, and json converts stuff to float so it has to be converted twice
 			shine_sprite.set_color(Color(int(shine_details[i]["color"])))
 		
 		if i == 0:
@@ -129,21 +129,23 @@ func _input(_event: InputEvent) -> void:
 
 # this will try to change the selected shine, but won't if you're already at the first or last shine
 func attempt_increment_selected_shine(increment : int) -> void:
-	if can_interact:
-		var previous_selected_shine = selected_shine
-		# warning-ignore:narrowing_conversion
-		selected_shine = clamp(selected_shine + increment, 0, shine_sprites.size() - 1)
+	if !can_interact:
+		return
+
+	var previous_selected_shine = selected_shine
+	# warning-ignore:narrowing_conversion
+	selected_shine = clamp(selected_shine + increment, 0, shine_sprites.size() - 1)
+
+	# no point in doing anything if the value didn't actually change
+	if selected_shine == previous_selected_shine:
+		return
 	
-		# no point in doing anything if the value didn't actually change
-		if selected_shine == previous_selected_shine:
-			return
-		
-		mission_focus_sfx.play()
-		move_shine_sprites()
-		update_labels()
-		
-		shine_sprites[previous_selected_shine].selected = false
-		shine_sprites[selected_shine].selected = true
+	mission_focus_sfx.play()
+	move_shine_sprites()
+	update_labels()
+	
+	shine_sprites[previous_selected_shine].selected = false
+	shine_sprites[selected_shine].selected = true
 
 func move_shine_sprites() -> void:
 	for i in range(shine_sprites.size()):
@@ -183,30 +185,31 @@ func update_labels() -> void:
 	shine_description.text = shine_details[selected_shine]["description"]
 
 func start_level() -> void:
-	if can_interact:
-		letsa_go_sfx.play()
-		if PlayerSettings.number_of_players > 1:
-			# quick wait before playing P2's voice clip, to make it sound more natural
-			yield(get_tree().create_timer(0.035), "timeout")
-			
-			# we set the array index so the same voice is played for both, and it syncs
-			letsa_go_sfx_2.array_index = letsa_go_sfx.array_index
-			letsa_go_sfx_2.play()
-	
-		can_interact = false
-		
-		get_tree().call_group("shine_sprites", "start_pressed_animation")
-		
-		# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
-		# so we'll assume it's safe to just go straight to the player scene 
-		animation_player.play("select_shine")
-		animation_player.connect("animation_finished", self, "change_to_player_scene", [], CONNECT_ONESHOT)
+	if !can_interact:
+		return
 
-# eeeeee
-func change_to_player_scene(_animation : String):
-	var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)
+	letsa_go_sfx.play()
+	if PlayerSettings.number_of_players > 1:
+		# quick wait before playing P2's voice clip, to make it sound more natural
+		yield(get_tree().create_timer(0.035), "timeout")
+		
+		# we set the array index so the same voice is played for both, and it syncs
+		letsa_go_sfx_2.array_index = letsa_go_sfx.array_index
+		letsa_go_sfx_2.play()
+
+	can_interact = false
+	
+	get_tree().call_group("shine_sprites", "start_pressed_animation")
+	
+	# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
+	# so we'll assume it's safe to just go straight to the player scene 
+	animation_player.play("select_shine")
+	animation_player.connect("animation_finished", self, "change_to_player_scene", [], CONNECT_ONESHOT)
 
 # signal responses start here 
+
+func change_to_player_scene(_animation : String):
+	var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)
 
 func on_button_move_left_pressed() -> void:
 	attempt_increment_selected_shine(-1)
