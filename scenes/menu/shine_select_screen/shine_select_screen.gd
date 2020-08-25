@@ -3,6 +3,7 @@
 extends Screen
 
 onready var tween = $Tween
+onready var anim_player = $AnimationPlayer
 onready var shine_parent = $ShineParent
 
 onready var level_title = $TextureFrameTop/LevelTitle
@@ -39,9 +40,10 @@ const SHINE_CENTER_SIZE : float = 4.0
 const SHINE_BESIDE_CENTER_SIZE : float = 2.0
 const SHINE_DEFAULT_SIZE : float = 2.0
 
+# this name is terrible (smh), but basically this variable stores the initial volume of the mission_select_sfx, so it can be muted and then restored to the proper volume
 var mission_select_sfx_volume : float = 0
 
-var selected_shine : int = 0
+var selected_shine_index : int = 0
 var can_interact : bool = false
 
 # array of all the ShineSprite scene instances used to make the shine select screen work
@@ -52,16 +54,22 @@ var used_shine_ids : Array = []
 var shine_details : Array
 
 func _ready() -> void:
+	# store the initial volume of the mission_select_sfx
 	mission_select_sfx_volume = mission_select_sfx.volume_db
+
 	var _connect 
 	_connect = button_move_left.connect("pressed", self, "on_button_move_left_pressed")
 	_connect = button_move_right.connect("pressed", self, "on_button_move_right_pressed")
 	_connect = button_select_shine.connect("pressed", self, "on_button_select_shine_pressed")
 	_connect = button_back.connect("pressed", self, "on_button_back_pressed")
 
+	# also connect to the signal for animations being finished, this will be used to restart the main menu music at the right part of the transition
+	_connect = anim_player.connect("animation_finished", self, "on_animation_finished")
+
 func _open_screen() -> void:
 	mission_select_sfx.volume_db = -80.0 if music.muted else mission_select_sfx_volume
 	mission_select_sfx.play();
+
 	can_interact = true
 	
 	var selected_level = SavedLevels.selected_level
@@ -79,12 +87,16 @@ func _open_screen() -> void:
 		var shine_sprite = SHINE_SPRITE_SCENE.instance()
 		shine_sprites.append(shine_sprite)
 		
+		# mark the selected shine and only that shine as selected
+		shine_sprite.selected = i == 0
+			
 		# place all the shines the correct distance away from the center shine
 		if i > 1:
 			shine_sprite.position.x = SHINE_FIRST_POSITION_OFFSET + (SHINE_POSITION_INCREMENT * i)
 		elif i == 1:
 			shine_sprite.position.x = SHINE_FIRST_POSITION_OFFSET 
 		
+		# has to be called deferred as we only *just* instanced these scenes, the method doesn't exist yet to be called
 		shine_sprite.call_deferred("start_animation")
 		
 		# if the shine isn't collected, make it blue on the shine select scree
@@ -97,13 +109,10 @@ func _open_screen() -> void:
 			# Shine color is stored as rgba32 from a json, and json converts stuff to float so it has to be converted twice
 			shine_sprite.set_color(Color(int(shine_details[i]["color"])))
 		
-		if i == 0:
-			shine_sprite.selected = true
-			
 		shine_sprite.add_to_group("shine_sprites")
 		shine_parent.add_child(shine_sprite)
 	
-	selected_shine = 0
+	selected_shine_index = 0
 	move_shine_sprites() # make sure everything is in the right spot and size and such
 	update_labels()
 
@@ -112,60 +121,58 @@ func _close_screen():
 	for shine_sprite in shine_sprites:
 		shine_sprite.queue_free()
 	shine_sprites = []
-	# change music back
-	music.change_song(0, music.last_song)
+
 	can_interact = false
-	mission_select_sfx.stop();
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_right"):
-		attempt_increment_selected_shine(1)
+		attempt_increment_selected_shine_index(1)
 	elif Input.is_action_just_pressed("ui_left"):
-		attempt_increment_selected_shine(-1)
+		attempt_increment_selected_shine_index(-1)
 	elif Input.is_action_just_pressed("ui_accept"):
 		start_level()
 	elif Input.is_action_just_pressed("ui_cancel"):
 		emit_signal("screen_change", "shine_select_screen", "levels_screen")
 
 # this will try to change the selected shine, but won't if you're already at the first or last shine
-func attempt_increment_selected_shine(increment : int) -> void:
+func attempt_increment_selected_shine_index(increment : int) -> void:
 	if !can_interact:
 		return
 
-	var previous_selected_shine = selected_shine
+	var previous_selected_shine_index = selected_shine_index
 	# warning-ignore:narrowing_conversion
-	selected_shine = clamp(selected_shine + increment, 0, shine_sprites.size() - 1)
+	selected_shine_index = clamp(selected_shine_index + increment, 0, shine_sprites.size() - 1)
 
 	# no point in doing anything if the value didn't actually change
-	if selected_shine == previous_selected_shine:
+	if selected_shine_index == previous_selected_shine_index:
 		return
-	
+
+	shine_sprites[previous_selected_shine_index].selected = false
+	shine_sprites[selected_shine_index].selected = true
+
 	mission_focus_sfx.play()
 	move_shine_sprites()
 	update_labels()
 	
-	shine_sprites[previous_selected_shine].selected = false
-	shine_sprites[selected_shine].selected = true
-
 func move_shine_sprites() -> void:
 	for i in range(shine_sprites.size()):
 		var shine_size = SHINE_DEFAULT_SIZE
 		var target_position_x : float
 
 		# middle shine is opaque, next is 0.75 alpha, after that is 0.5, etc
-		var shine_transparency = max(0, 1 - abs(0.25 * (selected_shine - i)))
+		var shine_transparency = max(0, 1 - abs(0.25 * (selected_shine_index - i)))
 
 		# based on the position of the shine relative to the center, set the scale and position
-		if i == selected_shine:
+		if i == selected_shine_index:
 			shine_size = SHINE_CENTER_SIZE
 			target_position_x = 0 
-		elif abs(i - selected_shine) == 1:
-			target_position_x = SHINE_FIRST_POSITION_OFFSET * sign(i - selected_shine)
-		elif abs(i - selected_shine) > 1:
+		elif abs(i - selected_shine_index) == 1:
+			target_position_x = SHINE_FIRST_POSITION_OFFSET * sign(i - selected_shine_index)
+		elif abs(i - selected_shine_index) > 1:
 			# this comment won't make sense if the values change, current values are first offset 125 then increment 100
 			# shine 2 on the right would be at 225, shine 3 at 325, shine 2 on the left at 225, etc
-			target_position_x = (SHINE_FIRST_OFFSET_DIFFERENCE + (abs(i - selected_shine) * \
-					SHINE_POSITION_INCREMENT)) * sign(i - selected_shine)
+			target_position_x = (SHINE_FIRST_OFFSET_DIFFERENCE + (abs(i - selected_shine_index) * \
+					SHINE_POSITION_INCREMENT)) * sign(i - selected_shine_index)
 			
 		# smoothly interplate to the new scale, position, and alpha value
 		tween.interpolate_property(shine_sprites[i], "scale", null, Vector2(shine_size, shine_size), \
@@ -181,8 +188,8 @@ func update_labels() -> void:
 	# this will assume the selected shine and the selected level are valid
 	level_title.text = SavedLevels.levels[SavedLevels.selected_level].level_name
 	level_title_backing.text = level_title.text
-	shine_title.text = shine_details[selected_shine]["title"]
-	shine_description.text = shine_details[selected_shine]["description"]
+	shine_title.text = shine_details[selected_shine_index]["title"]
+	shine_description.text = shine_details[selected_shine_index]["description"]
 
 func start_level() -> void:
 	if !can_interact:
@@ -208,18 +215,26 @@ func start_level() -> void:
 
 # signal responses start here 
 
-func change_to_player_scene(_animation : String):
-	var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)
-
 func on_button_move_left_pressed() -> void:
-	attempt_increment_selected_shine(-1)
+	attempt_increment_selected_shine_index(-1)
 
 func on_button_move_right_pressed() -> void:
-	attempt_increment_selected_shine(1)
+	attempt_increment_selected_shine_index(1)
 
 func on_button_select_shine_pressed() -> void:
 	start_level()
 
 func on_button_back_pressed() -> void:
 	emit_signal("screen_change", "shine_select_screen", "levels_screen")
+
+func on_animation_finished(anim_name : String) -> void:
+	# this string could be made into a constant, but it's only gonna be used once and it's so specific it'd only hurt readability
+	if anim_name == "trans_out_ShineSelectScreen_LevelsScreen":
+		# change music back
+		music.change_song(0, music.last_song)
+		mission_select_sfx.stop();
+
+# unlike the rest of the signals, this is connected in the start_level function
+func change_to_player_scene(_animation : String) -> void:
+	var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)
 

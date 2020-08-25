@@ -222,7 +222,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=22]
-resource_name = "trans_in_ShineSelectScreen"
+resource_name = "trans_in_ShineSelectScreen_LevelsScreen"
 length = 1.2
 tracks/0/type = "method"
 tracks/0/path = NodePath("TransitionAudio")
@@ -264,7 +264,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=23]
-resource_name = "trans_out_ShineSelectScreen"
+resource_name = "trans_out_LevelsScreen_ShineSelectScreen"
 tracks/0/type = "method"
 tracks/0/path = NodePath("TransitionAudio")
 tracks/0/interp = 1
@@ -798,14 +798,13 @@ text = "Close"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 20 )
 anims/trans_edit = SubResource( 21 )
-anims/trans_in_ShineSelectScreen = SubResource( 22 )
-anims/trans_out_ShineSelectScreen = SubResource( 23 )
+anims/trans_in_ShineSelectScreen_LevelsScreen = SubResource( 22 )
+anims/trans_out_LevelsScreen_ShineSelectScreen = SubResource( 23 )
 
 [node name="TransitionRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 1, 1, 1, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

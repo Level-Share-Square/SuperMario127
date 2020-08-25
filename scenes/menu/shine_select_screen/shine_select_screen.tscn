@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scenes/menu/shine_select_screen/frame_bottom.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -62,8 +62,9 @@ Button/styles/pressed = SubResource( 9 )
 
 [sub_resource type="Animation" id=11]
 resource_name = "default"
+length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("TransitionRect:color")
+tracks/0/path = NodePath("TransitionRect:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -74,24 +75,8 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
-
-[sub_resource type="Animation" id=12]
-resource_name = "select_shine"
-length = 2.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("TransitionRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("TransitionAudio")
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureFrameTop:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -99,10 +84,8 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ 0.0 ],
-"method": "play"
-} ]
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("TextureFrameBottom:rect_position")
@@ -111,29 +94,94 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( -2, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 128 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("TextureFrameTop:rect_position")
+tracks/3/path = NodePath(".:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "select_shine"
+length = 2.25
+tracks/0/type = "method"
+tracks/0/path = NodePath("TransitionAudio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureFrameBottom:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 128 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TextureFrameTop:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( -2, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, -162 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("TransitionRect:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=13]
-resource_name = "trans_in_default"
+resource_name = "trans_in_LevelsScreen_ShineSelectScreen"
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("TransitionRect:color")
+tracks/0/path = NodePath("TransitionRect:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -145,10 +193,39 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="Animation" id=15]
+resource_name = "trans_out_LevelsScreen_ShineSelectScreen"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransitionRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
 [sub_resource type="Animation" id=14]
+resource_name = "trans_out_ShineSelectScreen_LevelsScreen"
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("TransitionRect:color")
+tracks/0/path = NodePath("TransitionRect:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -294,30 +371,18 @@ position = Vector2( 384, 216 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="Labels" type="Control" parent="."]
+[node name="Buttons" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Buttons" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ButtonMoveLeft" type="Button" parent="Buttons"]
-anchor_top = 4.0
-anchor_right = 6.5
-anchor_bottom = 7.75
-margin_top = -0.279999
-margin_right = -0.399994
-margin_bottom = -0.200012
+anchor_top = 3.7
+anchor_right = 6.49
+anchor_bottom = 7.2
 theme = SubResource( 10 )
 flat = true
 __meta__ = {
@@ -326,13 +391,9 @@ __meta__ = {
 
 [node name="ButtonMoveRight" type="Button" parent="Buttons"]
 anchor_left = 12.5
-anchor_top = 4.0
+anchor_top = 3.7
 anchor_right = 19.2
-anchor_bottom = 7.75
-margin_left = 14.2705
-margin_top = 0.594604
-margin_right = 14.2705
-margin_bottom = 0.594574
+anchor_bottom = 7.2
 theme = SubResource( 10 )
 flat = true
 __meta__ = {
@@ -341,10 +402,9 @@ __meta__ = {
 
 [node name="ButtonSelectShine" type="Button" parent="Buttons"]
 anchor_left = 6.5
-anchor_top = 4.0
+anchor_top = 3.7
 anchor_right = 12.5
-anchor_bottom = 7.75
-margin_bottom = -0.200012
+anchor_bottom = 7.2
 theme = SubResource( 10 )
 flat = true
 __meta__ = {
@@ -379,14 +439,15 @@ volume_db = -6.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 11 )
 anims/select_shine = SubResource( 12 )
-anims/trans_in_default = SubResource( 13 )
-anims/trans_out_default = SubResource( 14 )
+anims/trans_in_LevelsScreen_ShineSelectScreen = SubResource( 13 )
+anims/trans_out_LevelsScreen_ShineSelectScreen = SubResource( 15 )
+anims/trans_out_ShineSelectScreen_LevelsScreen = SubResource( 14 )
 
 [node name="TransitionRect" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 margin_right = 768.0
 margin_bottom = 432.0
 mouse_filter = 2
-color = Color( 1, 1, 1, 0 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
