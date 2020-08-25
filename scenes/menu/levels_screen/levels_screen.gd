@@ -261,7 +261,8 @@ func on_button_play_pressed() -> void:
 
 	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
 	# TODO: additional checks for things like all shines set to not show in menu and such
-	if SavedLevels.levels[selected_level].shine_details.size() > 1:
+	# using collected_shines for the size check because there can only be one entry in collected shines per id, while shine_details can have multiple shines with the same id
+	if SavedLevels.levels[selected_level].collected_shines.size() > 1:
 		music.change_song(music.last_song, 0) # temp
 		emit_signal("screen_change", "levels_screen", "shine_select_screen") 
 	else:
