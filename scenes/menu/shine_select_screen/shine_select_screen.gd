@@ -14,7 +14,7 @@ onready var shine_description = $TextureFrameBottom/ShineDescription
 onready var button_move_left = $Buttons/ButtonMoveLeft 
 onready var button_move_right = $Buttons/ButtonMoveRight 
 onready var button_select_shine = $Buttons/ButtonSelectShine 
-onready var button_back = $TextureFrameBottom/BackButtonContainer/ButtonBack
+onready var button_back = $TextureFrameBottom/ButtonBack
 
 onready var background_image = $Background
 onready var letsa_go_sfx = $LetsaGo

@@ -193,7 +193,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=14]
 resource_name = "trans_out_LevelsScreen_ShineSelectScreen"
 length = 0.001
 tracks/0/type = "value"
@@ -221,8 +221,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=14]
-resource_name = "trans_out_ShineSelectScreen_LevelsScreen"
+[sub_resource type="Animation" id=15]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("TransitionRect:modulate")
@@ -336,22 +335,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackButtonContainer" type="Control" parent="TextureFrameBottom"]
-margin_right = 40.0
-margin_bottom = 40.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ButtonBack" parent="TextureFrameBottom/BackButtonContainer" instance=ExtResource( 4 )]
-anchor_left = 0.2
-anchor_top = 9.775
-anchor_right = 0.999
-anchor_bottom = 10.574
-margin_top = -3.05176e-05
-margin_right = 64.04
-margin_bottom = 64.0399
+[node name="ButtonBack" parent="TextureFrameBottom" instance=ExtResource( 4 )]
+margin_left = 7.0
+margin_top = 393.0
+margin_right = 6.744
+margin_bottom = 393.032
 
 [node name="Background" type="TextureRect" parent="."]
 show_behind_parent = true
@@ -440,8 +428,8 @@ volume_db = -6.0
 anims/default = SubResource( 11 )
 anims/select_shine = SubResource( 12 )
 anims/trans_in_LevelsScreen_ShineSelectScreen = SubResource( 13 )
-anims/trans_out_LevelsScreen_ShineSelectScreen = SubResource( 15 )
-anims/trans_out_ShineSelectScreen_LevelsScreen = SubResource( 14 )
+anims/trans_out_LevelsScreen_ShineSelectScreen = SubResource( 14 )
+anims/trans_out_ShineSelectScreen_LevelsScreen = SubResource( 15 )
 
 [node name="TransitionRect" type="ColorRect" parent="."]
 modulate = Color( 1, 1, 1, 0 )

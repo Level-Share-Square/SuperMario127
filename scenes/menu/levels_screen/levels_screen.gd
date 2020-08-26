@@ -224,6 +224,7 @@ func on_button_add_pressed() -> void:
 # note: random music selection doesn't currently work with this new method of making new levels, functionality needs to be added here for that
 func on_button_new_level_pressed() -> void:
 	# this way of doing it is a bit silly but should work fine unless the import button code massively changes
+	# should move the common code to a function instead of calling the import signal response
 	level_code_entry.text = TEMPLATE_LEVEL
 	on_button_code_import_pressed()
 
