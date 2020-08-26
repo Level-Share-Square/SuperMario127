@@ -2370,7 +2370,6 @@ margin_bottom = 425.905
 script = ExtResource( 167 )
 
 [node name="QuitWOSavingWindow" type="Popup" parent="UI/BackButton"]
-visible = true
 margin_right = 553.0
 margin_bottom = 130.0
 size_flags_horizontal = 0
