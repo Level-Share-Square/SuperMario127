@@ -86,6 +86,8 @@ func reset_save_data() -> void:
 	for key in time_scores.keys():
 		time_scores[key] = EMPTY_TIME_SCORE
 
+	var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
+
 func get_saveable_dictionary() -> Dictionary:
 	# add saving shine details and star coin details
 	var save_dictionary : Dictionary = \
