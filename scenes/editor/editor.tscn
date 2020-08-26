@@ -1,4 +1,4 @@
-[gd_scene load_steps=198 format=2]
+[gd_scene load_steps=196 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -164,12 +164,10 @@
 [ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=162]
 [ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=163]
 [ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=164]
-[ext_resource path="res://scenes/editor/assets/window_close0.4.png" type="Texture" id=165]
 [ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=166]
 [ext_resource path="res://scenes/editor/back_button.gd" type="Script" id=167]
 [ext_resource path="res://scenes/editor/quit_wo_saving_window.gd" type="Script" id=168]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=169]
-[ext_resource path="res://scenes/editor/assets/window_close_hover0.4.png" type="Texture" id=170]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1131,8 +1129,8 @@ WindowDialog/constants/close_v_ofs = 34
 WindowDialog/constants/scaleborder_size = 4
 WindowDialog/constants/title_height = 20
 WindowDialog/fonts/title_font = null
-WindowDialog/icons/close = ExtResource( 165 )
-WindowDialog/icons/close_highlight = ExtResource( 170 )
+WindowDialog/icons/close = null
+WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = SubResource( 25 )
 
 [sub_resource type="DynamicFont" id=27]
