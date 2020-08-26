@@ -149,6 +149,8 @@ func _ready() -> void:
 
 		# make sure the mode switcher button is set to have the play button as it's visual
 		mode_switcher.get_node("ModeSwitcherButton").change_visuals(0)
+
+		CurrentLevelData.unsaved_editor_changes = false
 	
 func set_selected_box(new_selected_box: Node) -> void:
 	EditorSavedSettings.selected_box = new_selected_box.box_index
@@ -401,6 +403,9 @@ func _process(delta : float) -> void:
 					action.data.append(element)
 				tiles_stack.clear()
 				ActionManager.add_action(action)
+
+				# if an action is being added, that means we should count the count the level data as modified and in need of a save
+				CurrentLevelData.unsaved_editor_changes = true
 		
 		
 		last_mouse_pos = mouse_pos
