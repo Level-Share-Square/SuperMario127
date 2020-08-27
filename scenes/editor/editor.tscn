@@ -1,4 +1,4 @@
-[gd_scene load_steps=196 format=2]
+[gd_scene load_steps=197 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -164,6 +164,7 @@
 [ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=162]
 [ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=163]
 [ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=164]
+[ext_resource path="res://scenes/actors/objects/star_coin/icon.png" type="Texture" id=165]
 [ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=166]
 [ext_resource path="res://scenes/editor/back_button.gd" type="Script" id=167]
 [ext_resource path="res://scenes/editor/quit_wo_saving_window.gd" type="Script" id=168]
@@ -1270,8 +1271,8 @@ object_center = Vector2( 16, 16 )
 change_to = "Shine"
 items_in_sequence = 3
 index_in_sequence = 2
-icon = ExtResource( 15 )
-preview = ExtResource( 15 )
+icon = ExtResource( 165 )
+preview = ExtResource( 165 )
 
 [node name="BooBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
