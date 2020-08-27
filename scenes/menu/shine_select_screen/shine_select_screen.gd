@@ -125,6 +125,9 @@ func _close_screen():
 	can_interact = false
 
 func _input(_event: InputEvent) -> void:
+	if !can_interact:
+		return
+
 	if Input.is_action_just_pressed("ui_right"):
 		attempt_increment_selected_shine_index(1)
 	elif Input.is_action_just_pressed("ui_left"):
@@ -192,9 +195,6 @@ func update_labels() -> void:
 	shine_description.text = shine_details[selected_shine_index]["description"]
 
 func start_level() -> void:
-	if !can_interact:
-		return
-
 	letsa_go_sfx.play()
 	if PlayerSettings.number_of_players > 1:
 		# quick wait before playing P2's voice clip, to make it sound more natural

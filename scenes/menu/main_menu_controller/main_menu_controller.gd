@@ -87,4 +87,3 @@ func finish_changing_screens(_anim_name : String = "") -> void:
 	inactive_screens.add_child(previous_screen)
 	
 	current_screen._open_screen()
-
