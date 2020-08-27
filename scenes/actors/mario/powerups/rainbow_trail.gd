@@ -10,6 +10,6 @@ func _ready():
 
 func _physics_process(_delta):
 	alpha -= 0.005
-	modulate = Color(1, 1, 1, alpha)
+	modulate = Color(2 - alpha, 2 - alpha, 2 - alpha, alpha)
 	if alpha <= 0:
 		queue_free()

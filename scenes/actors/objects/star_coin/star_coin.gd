@@ -3,6 +3,7 @@ extends GameObject
 onready var anim_sprite : AnimatedSprite = $AnimatedSprite
 onready var area : Area2D = $Area2D
 onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer 
+onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 var id : int = 0
 var collected : bool = false
@@ -26,8 +27,8 @@ func collect(body : PhysicsBody2D) -> void:
 
 		collected = true
 
-		anim_sprite.play("collected")
-		var _connect = anim_sprite.connect("animation_finished", self, "queue_free")
+		animation_player.play("collect")
+		var _connect = animation_player.connect("animation_finished", self, "queue_free")
 
 		audio_player.play()
 		

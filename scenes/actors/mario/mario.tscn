@@ -1280,7 +1280,7 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 64 )
-frame = 1
+frame = 14
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
@@ -1288,7 +1288,7 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = ExtResource( 55 )
-frame = 1
+frame = 14
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

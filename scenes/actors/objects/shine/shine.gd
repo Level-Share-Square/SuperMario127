@@ -79,6 +79,7 @@ func _ready() -> void:
 		if SavedLevels.selected_level != SavedLevels.NO_LEVEL:
 			var collected_shines = SavedLevels.levels[SavedLevels.selected_level].collected_shines
 			if collected_shines.has(id):
+				print("A")
 				is_blue = collected_shines[str(id)]
 	
 	var _connect = connect("property_changed", self, "update_color")

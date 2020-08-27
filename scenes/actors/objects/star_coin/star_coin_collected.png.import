@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/time_icon.png-8d6e459b71c5f23e4875d853ea07ccac.stex"
+path="res://.import/star_coin_collected.png-7ea950125bb7e46266d396e99928e009.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/menu/levels_screen/ui/time_icon.png"
-dest_files=[ "res://.import/time_icon.png-8d6e459b71c5f23e4875d853ea07ccac.stex" ]
+source_file="res://scenes/actors/objects/star_coin/star_coin_collected.png"
+dest_files=[ "res://.import/star_coin_collected.png-7ea950125bb7e46266d396e99928e009.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
