@@ -78,9 +78,8 @@ func _ready() -> void:
 		# (collected_shines is a Dictionary where the key is the shine id and the value is a bool)
 		if SavedLevels.selected_level != SavedLevels.NO_LEVEL:
 			var collected_shines = SavedLevels.levels[SavedLevels.selected_level].collected_shines
-			if collected_shines.has(id):
-				print("A")
-				is_blue = collected_shines[str(id)]
+			# Get the value, returning false if the key doesn't exist
+			is_blue = collected_shines.get(str(id), false)
 	
 	var _connect = connect("property_changed", self, "update_color")
 	update_color("color", color)
