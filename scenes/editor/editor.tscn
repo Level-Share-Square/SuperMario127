@@ -1247,7 +1247,7 @@ object_id = 2
 is_object = true
 object_center = Vector2( 16, 16 )
 change_to = "ShineShard"
-items_in_sequence = 2
+items_in_sequence = 3
 icon = ExtResource( 15 )
 preview = ExtResource( 15 )
 
@@ -1256,11 +1256,22 @@ script = ExtResource( 3 )
 object_id = 45
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "Shine"
-items_in_sequence = 2
+change_to = "StarCoin"
+items_in_sequence = 3
 index_in_sequence = 1
 icon = ExtResource( 148 )
 preview = ExtResource( 150 )
+
+[node name="StarCoin" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 52
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "Shine"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 15 )
+preview = ExtResource( 15 )
 
 [node name="BooBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )

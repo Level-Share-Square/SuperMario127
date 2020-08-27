@@ -106,6 +106,9 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 		# get the number of true values in the collected_shines Dictionary, aka get the number of collected shines
 		var collected_shine_count = level_info.collected_shines.values().count(true)
 		shine_progress.text = "%s/%s" % [collected_shine_count, level_info.collected_shines.size()]
+
+		var collected_star_coin_count = level_info.collected_star_coins.values().count(true)
+		star_coin_progress.text = "%s/%s" % [collected_star_coin_count, level_info.collected_star_coins.size()]
 		
 		# set the little thumbnail to look just like the actual level background
 		level_sky_thumbnail.texture = level_info.get_level_background_texture()
