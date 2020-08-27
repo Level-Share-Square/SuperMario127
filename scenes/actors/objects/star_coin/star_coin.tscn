@@ -1,21 +1,24 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/actors/objects/star_coin/regular_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/star_coin/collect.wav" type="AudioStream" id=2]
 [ext_resource path="res://scenes/actors/objects/star_coin/star_coin.gd" type="Script" id=3]
 [ext_resource path="res://assets/particles/shiny_particle_material.tres" type="Material" id=4]
 [ext_resource path="res://scenes/actors/mario/particles/shine_sparkles.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/star_coin/collected_frames.tres" type="SpriteFrames" id=6]
 
-[sub_resource type="CanvasItemMaterial" id=3]
+[sub_resource type="StreamTexture" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=2]
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 24.0
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=4]
 resource_name = "collect"
 length = 0.75
 tracks/0/type = "value"
@@ -69,15 +72,19 @@ tracks/3/keys = {
 
 [node name="StarCoin" type="Node2D"]
 script = ExtResource( 3 )
+normal_frames = ExtResource( 1 )
+collected_frames = ExtResource( 6 )
+normal_particles = ExtResource( 5 )
+collected_particles = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-frame = 2
+frame = 5
 playing = true
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]
 show_behind_parent = true
-material = SubResource( 3 )
+material = SubResource( 2 )
 local_coords = false
 process_material = ExtResource( 4 )
 texture = ExtResource( 5 )
@@ -86,7 +93,7 @@ texture = ExtResource( 5 )
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
@@ -97,4 +104,4 @@ visible = false
 rect = Rect2( -16, -16, 32, 32 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/collect = SubResource( 12 )
+anims/collect = SubResource( 4 )
