@@ -22,6 +22,9 @@ var unsaved_editor_changes : bool = false
 var next_shine_id : int = 0
 var next_star_coin_id : int = 0
 
+# can be used by anything that needs to disable pausing for some time
+var can_pause : bool = true
+
 func pick_random_music() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()

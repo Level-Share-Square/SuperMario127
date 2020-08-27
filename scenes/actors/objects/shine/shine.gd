@@ -195,6 +195,10 @@ func collect(body : PhysicsBody2D) -> void:
 		character.set_inter_player_collision(false)
 
 		mode_switcher_button.switching_disabled = true
+		CurrentLevelData.can_pause = false
+
+		# mute level music (gets un-muted after shine dance finishes)
+		music.volume_multiplier = 0
 
 		collect_sound.play() 
 		collected = true
@@ -244,6 +248,9 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 			#mode switching is disabled on collecting the shine so the player can't cancel the animation (causes glitches)
 			mode_switcher_button.switching_disabled = false 
 			mode_switcher_button._pressed()
+
+			# pausing disabled for same reasons as mode switcher button
+			CurrentLevelData.can_pause = true
 	else: 
 		# re-enable mode switching if in the editor test mode
 		if !mode_switcher_button.invisible:
