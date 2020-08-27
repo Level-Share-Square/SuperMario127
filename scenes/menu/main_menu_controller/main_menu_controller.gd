@@ -44,6 +44,7 @@ func _ready() -> void:
 	inactive_screens.remove_child(screen_to_load)
 	active_screens.add_child(screen_to_load)
 	screen_to_load._open_screen()
+	screen_to_load.can_interact = true
 
 	music.change_song(music.last_song, 31) # temporary, should add a way for screens to define their own music setting later
 	music.last_song = 31
@@ -51,8 +52,12 @@ func _ready() -> void:
 
 # change this to use an enum or something, store enum in menu_variables
 func start_changing_screens(this_screen_name : String, new_screen_name : String) -> void:
+	release_focus()
+
 	previous_screen = get(this_screen_name)
 	current_screen = get(new_screen_name)
+
+	previous_screen.can_interact = false
 
 	previous_screen._close_screen()
 
@@ -87,3 +92,4 @@ func finish_changing_screens(_anim_name : String = "") -> void:
 	inactive_screens.add_child(previous_screen)
 	
 	current_screen._open_screen()
+	current_screen.can_interact = true

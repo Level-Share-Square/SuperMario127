@@ -86,6 +86,19 @@ func _ready() -> void:
 	else: # no level selected and no level to select, so just empty out the info panel
 		populate_info_panel() 
 
+func _input(_event : InputEvent) -> void:
+	if !can_interact or get_focus_owner() != null:
+		return
+	
+	if Input.is_action_just_pressed("ui_up"):
+		button_play.grab_focus()
+	elif Input.is_action_just_pressed("ui_down"):
+		level_list.grab_focus()
+	elif Input.is_action_just_pressed("ui_left"):
+		button_reset.grab_focus()
+	elif Input.is_action_just_pressed("ui_right"):
+		button_back.grab_focus()
+
 func populate_info_panel(level_info : LevelInfo = null) -> void:
 	if level_info != null:
 		level_name_label.text = level_info.level_name
@@ -243,6 +256,8 @@ func on_button_back_pressed() -> void:
 func on_button_add_pressed() -> void:
 	set_level_code_panel(true)
 
+	button_code_cancel.grab_focus()
+
 # note: random music selection doesn't currently work with this new method of making new levels, functionality needs to be added here for that
 func on_button_new_level_pressed() -> void:
 	# this way of doing it is a bit silly but should work fine unless the import button code massively changes
@@ -297,6 +312,8 @@ func on_button_reset_pressed() -> void:
 # plan for populating the speedrun times panel is to give each time an icon to say if the shine is collected or not, and then use the text spot for the exact time (maybe add a suffix with the shine number?)
 func on_button_time_scores_pressed() -> void:
 	set_time_score_panel(true)
+
+	button_close_time_scores.grab_focus()
 
 func on_button_close_time_scores_pressed() -> void:
 	set_time_score_panel(false)
