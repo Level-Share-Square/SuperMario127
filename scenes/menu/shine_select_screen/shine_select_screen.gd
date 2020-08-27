@@ -14,7 +14,7 @@ onready var shine_description = $TextureFrameBottom/ShineDescription
 onready var button_move_left = $Buttons/ButtonMoveLeft 
 onready var button_move_right = $Buttons/ButtonMoveRight 
 onready var button_select_shine = $Buttons/ButtonSelectShine 
-onready var button_back = $TextureFrameBottom/BackButtonContainer/ButtonBack
+onready var button_back = $TextureFrameBottom/ButtonBack
 
 onready var background_image = $Background
 onready var letsa_go_sfx = $LetsaGo
@@ -44,7 +44,6 @@ const SHINE_DEFAULT_SIZE : float = 2.0
 var mission_select_sfx_volume : float = 0
 
 var selected_shine_index : int = 0
-var can_interact : bool = false
 
 # array of all the ShineSprite scene instances used to make the shine select screen work
 var shine_sprites : Array = []
@@ -69,8 +68,6 @@ func _ready() -> void:
 func _open_screen() -> void:
 	mission_select_sfx.volume_db = -80.0 if music.muted else mission_select_sfx_volume
 	mission_select_sfx.play();
-
-	can_interact = true
 	
 	var selected_level = SavedLevels.selected_level
 	shine_details = SavedLevels.levels[selected_level].shine_details
@@ -122,9 +119,10 @@ func _close_screen():
 		shine_sprite.queue_free()
 	shine_sprites = []
 
-	can_interact = false
-
 func _input(_event: InputEvent) -> void:
+	if !can_interact:
+		return
+
 	if Input.is_action_just_pressed("ui_right"):
 		attempt_increment_selected_shine_index(1)
 	elif Input.is_action_just_pressed("ui_left"):
@@ -192,9 +190,6 @@ func update_labels() -> void:
 	shine_description.text = shine_details[selected_shine_index]["description"]
 
 func start_level() -> void:
-	if !can_interact:
-		return
-
 	letsa_go_sfx.play()
 	if PlayerSettings.number_of_players > 1:
 		# quick wait before playing P2's voice clip, to make it sound more natural

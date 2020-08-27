@@ -4,7 +4,7 @@ class_name LevelInfo
 
 const EMPTY_TIME_SCORE = -1 # idea: what if level creators could manually set this per shine, so there was a preset time to beat?
 const OBJECT_ID_SHINE = 2 
-const OBJECT_ID_STAR_COIN = -1 #get the correct id later
+const OBJECT_ID_STAR_COIN = 52
 
 const VERSION : String = "0.0.2"
 
@@ -59,14 +59,19 @@ func _init(passed_level_code : String = "") -> void:
 						"id": object.properties[12],
 					}
 					shine_details.append(shine_dictionary)
-					shine_details.sort_custom(self, "collectible_with_id_sort")
 
 					# initialize collected_shines and time_scores
 					collected_shines[str(shine_dictionary["id"])] = false 
 					time_scores[str(shine_dictionary["id"])] = EMPTY_TIME_SCORE
-					print(time_scores)
 				OBJECT_ID_STAR_COIN:
-					pass
+					var star_coin_id = object.properties[5]
+					star_coin_details.append(star_coin_id)
+
+					# initialize collected star coins
+					collected_star_coins[str(star_coin_id)] = false
+
+			shine_details.sort_custom(self, "collectible_with_id_sort")
+			star_coin_details.sort()
 
 func set_level_data(new_value : LevelData):
 	level_data_value = new_value
@@ -85,6 +90,8 @@ func reset_save_data() -> void:
 	coin_score = 0
 	for key in time_scores.keys():
 		time_scores[key] = EMPTY_TIME_SCORE
+
+	var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
 
 func get_saveable_dictionary() -> Dictionary:
 	# add saving shine details and star coin details

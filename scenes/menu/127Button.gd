@@ -1,4 +1,4 @@
-extends Button
+extends BaseButton
 
 onready var hover_sound : AudioStreamPlayer = $HoverSound 
 onready var click_sound : AudioStreamPlayer = $ClickSound 

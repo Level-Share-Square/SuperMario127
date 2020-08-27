@@ -1,30 +1,43 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://assets/styles/ButtonStyleDisabled.tres" type="StyleBox" id=2]
 [ext_resource path="res://scenes/menu/127Button.gd" type="Script" id=3]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/shared/ui/back_button.png" type="Texture" id=6]
-[ext_resource path="res://assets/styles/RedButtonStyleNormal.tres" type="StyleBox" id=7]
-[ext_resource path="res://assets/styles/RedButtonStyleHover.tres" type="StyleBox" id=8]
 
-[sub_resource type="DynamicFont" id=1]
-size = 48
-font_data = ExtResource( 1 )
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.513726, 0.0156863, 0.0156863, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.698039, 0.2, 0.2, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="127BackButton" type="Button"]
-margin_right = 96.0
-margin_bottom = 96.0
-rect_scale = Vector2( 0.333, 0.333 )
+anchor_right = 0.042
+anchor_bottom = 0.074
+margin_right = -0.256004
+margin_bottom = 0.0319996
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_styles/hover = ExtResource( 8 )
-custom_styles/pressed = ExtResource( 7 )
-custom_styles/focus = ExtResource( 8 )
-custom_styles/disabled = ExtResource( 2 )
-custom_styles/normal = ExtResource( 7 )
-custom_fonts/font = SubResource( 1 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
 shortcut_in_tooltip = false
 script = ExtResource( 3 )
 __meta__ = {
@@ -39,20 +52,18 @@ volume_db = -10.0
 stream = ExtResource( 5 )
 volume_db = -10.0
 
-[node name="TextureButton" type="TextureButton" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -46.0
-margin_top = -30.0
-margin_right = 2.0
-margin_bottom = 18.0
-rect_rotation = -10.0
-rect_scale = Vector2( 1.5, 1.5 )
-mouse_filter = 2
-texture_normal = ExtResource( 6 )
-texture_pressed = ExtResource( 6 )
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.9
+anchor_bottom = 0.9
+margin_left = 0.4
+margin_top = 0.4
+margin_right = 0.199999
+margin_bottom = 0.199999
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }

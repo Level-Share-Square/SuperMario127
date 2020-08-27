@@ -15,6 +15,9 @@ var random_music := [ 1, 3, 18, 16 ]
 
 var time_score : float = 0
 
+# used to track if there's unsaved changes in the editor, specifically by the save and close buttons of the editor
+var unsaved_editor_changes : bool = false
+
 func pick_random_music() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()

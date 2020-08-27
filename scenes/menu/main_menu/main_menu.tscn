@@ -26,9 +26,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 274.0
-margin_top = 32.0
+margin_top = 70.0
 margin_right = 493.0
-margin_bottom = 400.0
+margin_bottom = 362.0
 custom_constants/separation = 12
 __meta__ = {
 "_edit_use_anchors_": false
@@ -49,6 +49,7 @@ custom_fonts/font = SubResource( 1 )
 text = "Levels"
 
 [node name="ButtonEditor" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
+visible = false
 margin_top = 152.0
 margin_right = 219.0
 margin_bottom = 216.0
@@ -56,15 +57,15 @@ custom_fonts/font = SubResource( 1 )
 text = "Editor"
 
 [node name="ButtonOptions" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 228.0
+margin_top = 152.0
 margin_right = 219.0
-margin_bottom = 292.0
+margin_bottom = 216.0
 custom_fonts/font = SubResource( 1 )
 text = "Options"
 
 [node name="ButtonQuit" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 304.0
+margin_top = 228.0
 margin_right = 219.0
-margin_bottom = 368.0
+margin_bottom = 292.0
 custom_fonts/font = SubResource( 1 )
 text = "Quit"

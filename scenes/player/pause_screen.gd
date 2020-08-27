@@ -132,4 +132,6 @@ func retry():
 		character2_node.kill("reload")
 
 func quit_to_menu() -> void:
-	MenuVariables.quit_to_menu("levels_screen")
+	# music is stopped while paused, but there's a frame where it starts playing again after the transition, just kill it here to stop that
+	music.change_song(music.last_song, 0)
+	MenuVariables.quit_to_menu_with_transition("levels_screen")

@@ -1,5 +1,6 @@
 extends Screen
 
+onready var button_campaign : Button = $CenterContainer/VBoxContainer/ButtonCampaign
 onready var button_levels : Button = $CenterContainer/VBoxContainer/ButtonLevels
 onready var button_editor : Button = $CenterContainer/VBoxContainer/ButtonEditor
 onready var button_options : Button = $CenterContainer/VBoxContainer/ButtonOptions
@@ -12,6 +13,19 @@ func _ready() -> void:
 	_connect = button_editor.connect("pressed", self, "on_button_editor_pressed")
 	_connect = button_options.connect("pressed", self, "on_button_options_pressed")
 	_connect = button_quit.connect("pressed", self, "on_button_quit_pressed")
+
+func _input(_event : InputEvent) -> void:
+	if !can_interact or get_focus_owner() != null:
+		return
+	
+	if Input.is_action_just_pressed("ui_up"):
+		button_quit.grab_focus()
+	elif Input.is_action_just_pressed("ui_down"):
+		button_campaign.grab_focus()
+	elif Input.is_action_just_pressed("ui_left"):
+		pass
+	elif Input.is_action_just_pressed("ui_right"):
+		pass
 
 func on_button_levels_pressed() -> void:
 	emit_signal("screen_change", "main_menu_screen", "levels_screen")

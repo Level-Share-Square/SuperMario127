@@ -1,4 +1,4 @@
-[gd_scene load_steps=185 format=2]
+[gd_scene load_steps=196 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -160,6 +160,14 @@
 [ext_resource path="res://assets/tiles/wood/icon.png" type="Texture" id=158]
 [ext_resource path="res://scenes/actors/objects/pearl_platform/pearl_platform.png" type="Texture" id=159]
 [ext_resource path="res://scenes/actors/objects/pearl_platform/icon.png" type="Texture" id=160]
+[ext_resource path="res://assets/styles/ButtonStyleDisabled.tres" type="StyleBox" id=161]
+[ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=162]
+[ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=163]
+[ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=164]
+[ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=166]
+[ext_resource path="res://scenes/editor/back_button.gd" type="Script" id=167]
+[ext_resource path="res://scenes/editor/quit_wo_saving_window.gd" type="Script" id=168]
+[ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=169]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1088,6 +1096,47 @@ WindowDialog/styles/panel = null
 size = 128
 font_data = ExtResource( 4 )
 
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0.121569, 0.180392, 0.517647, 1 )
+border_width_left = 4
+border_width_top = 38
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_top = 38.0
+
+[sub_resource type="Theme" id=26]
+default_font = ExtResource( 164 )
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = ExtResource( 161 )
+Button/styles/focus = ExtResource( 163 )
+Button/styles/hover = ExtResource( 163 )
+Button/styles/normal = ExtResource( 162 )
+Button/styles/pressed = ExtResource( 162 )
+Panel/styles/panel = SubResource( 25 )
+WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
+WindowDialog/constants/close_h_ofs = 72
+WindowDialog/constants/close_v_ofs = 34
+WindowDialog/constants/scaleborder_size = 4
+WindowDialog/constants/title_height = 20
+WindowDialog/fonts/title_font = null
+WindowDialog/icons/close = null
+WindowDialog/icons/close_highlight = null
+WindowDialog/styles/panel = SubResource( 25 )
+
+[sub_resource type="DynamicFont" id=27]
+size = 24
+font_data = ExtResource( 4 )
+
 [node name="Editor" type="Node2D"]
 script = ExtResource( 1 )
 nodes_to_load = [ NodePath("Shared"), NodePath("Camera2D"), NodePath("Backgrounds") ]
@@ -1198,7 +1247,7 @@ object_id = 2
 is_object = true
 object_center = Vector2( 16, 16 )
 change_to = "ShineShard"
-items_in_sequence = 2
+items_in_sequence = 3
 icon = ExtResource( 15 )
 preview = ExtResource( 15 )
 
@@ -1207,11 +1256,22 @@ script = ExtResource( 3 )
 object_id = 45
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "Shine"
-items_in_sequence = 2
+change_to = "StarCoin"
+items_in_sequence = 3
 index_in_sequence = 1
 icon = ExtResource( 148 )
 preview = ExtResource( 150 )
+
+[node name="StarCoin" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 52
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "Shine"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 15 )
+preview = ExtResource( 15 )
 
 [node name="BooBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
@@ -2165,7 +2225,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 window = NodePath("../LevelCodeWindow")
-starting_position = Vector2( 165, 130 )
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/SaveButton"]
 stream = ExtResource( 35 )
@@ -2312,7 +2371,92 @@ modulate = Color( 1, 1, 1, 0.501961 )
 position = Vector2( -26.9707, 159.734 )
 script = ExtResource( 65 )
 
+[node name="BackButton" parent="UI" instance=ExtResource( 166 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 5.66568
+margin_top = 395.905
+margin_right = 37.6657
+margin_bottom = 425.905
+script = ExtResource( 167 )
+
+[node name="QuitWOSavingWindow" type="Popup" parent="UI/BackButton"]
+margin_right = 553.0
+margin_bottom = 130.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = SubResource( 26 )
+popup_exclusive = true
+script = ExtResource( 168 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="UI/BackButton/QuitWOSavingWindow"]
+anchor_right = 1.0
+anchor_bottom = 0.972
+margin_bottom = 0.0399933
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/BackButton/QuitWOSavingWindow"]
+anchor_top = 0.169
+anchor_right = 1.0
+anchor_bottom = 0.383
+margin_top = 0.0299988
+text = "Are you sure you want to quit without saving?"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/BackButton/QuitWOSavingWindow"]
+anchor_left = 0.005
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.838
+margin_left = 0.235
+margin_bottom = 0.0599899
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="UI/BackButton/QuitWOSavingWindow/HBoxContainer"]
+margin_right = 106.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+
+[node name="OkButton" parent="UI/BackButton/QuitWOSavingWindow/HBoxContainer" instance=ExtResource( 169 )]
+margin_left = 110.0
+margin_right = 216.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 27 )
+text = "OK"
+
+[node name="Control2" type="Control" parent="UI/BackButton/QuitWOSavingWindow/HBoxContainer"]
+margin_left = 220.0
+margin_right = 326.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+
+[node name="CancelButton" parent="UI/BackButton/QuitWOSavingWindow/HBoxContainer" instance=ExtResource( 169 )]
+margin_left = 330.0
+margin_right = 438.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 27 )
+text = "Cancel"
+
+[node name="Control3" type="Control" parent="UI/BackButton/QuitWOSavingWindow/HBoxContainer"]
+margin_left = 442.0
+margin_right = 550.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( -7.56805, -12.6135 )
 current = true
 limit_left = 0
 limit_top = -70
@@ -2329,7 +2473,7 @@ z_index = -1
 script = ExtResource( 8 )
 
 [node name="Backgrounds" parent="." instance=ExtResource( 52 )]
-position = Vector2( 1, 12 )
+position = Vector2( 157.094, 37.4626 )
 
 [node name="Grid" type="ParallaxBackground" parent="."]
 layer = -1

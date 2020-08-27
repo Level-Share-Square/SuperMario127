@@ -193,7 +193,7 @@ func collect(body : PhysicsBody2D) -> void:
 		collected = true
 		visible = false
 
-		if SavedLevels.selected_level != SavedLevels.NO_LEVEL:
+		if mode_switcher.get_node("ModeSwitcherButton").invisible and SavedLevels.selected_level != SavedLevels.NO_LEVEL:
 			SavedLevels.levels[SavedLevels.selected_level].set_shine_collected(id, false)
 			SavedLevels.levels[SavedLevels.selected_level].update_time_and_coin_score(id, true)
 			CurrentLevelData.stop_tracking_time_score() # time score is saved, and we don't want it continuing to update into the menu wasting resources

@@ -86,6 +86,19 @@ func _ready() -> void:
 	else: # no level selected and no level to select, so just empty out the info panel
 		populate_info_panel() 
 
+func _input(_event : InputEvent) -> void:
+	if !can_interact or get_focus_owner() != null:
+		return
+	
+	if Input.is_action_just_pressed("ui_up"):
+		button_play.grab_focus()
+	elif Input.is_action_just_pressed("ui_down"):
+		level_list.grab_focus()
+	elif Input.is_action_just_pressed("ui_left"):
+		button_reset.grab_focus()
+	elif Input.is_action_just_pressed("ui_right"):
+		button_back.grab_focus()
+
 func populate_info_panel(level_info : LevelInfo = null) -> void:
 	if level_info != null:
 		level_name_label.text = level_info.level_name
@@ -93,6 +106,9 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 		# get the number of true values in the collected_shines Dictionary, aka get the number of collected shines
 		var collected_shine_count = level_info.collected_shines.values().count(true)
 		shine_progress.text = "%s/%s" % [collected_shine_count, level_info.collected_shines.size()]
+
+		var collected_star_coin_count = level_info.collected_star_coins.values().count(true)
+		star_coin_progress.text = "%s/%s" % [collected_star_coin_count, level_info.collected_star_coins.size()]
 		
 		# set the little thumbnail to look just like the actual level background
 		level_sky_thumbnail.texture = level_info.get_level_background_texture()
@@ -177,6 +193,28 @@ func delete_level(index : int) -> void:
 	# pass null to populate_info_panel if there's no levels left, so it can make the info panel empty
 	populate_info_panel(SavedLevels.levels[selected_level] if selected_level != NO_LEVEL else null)
 
+func start_level(start_in_edit_mode : bool):
+	var selected_level = SavedLevels.selected_level
+	if selected_level == NO_LEVEL:
+		return #at some point the buttons should be disabled when you don't have a level selected, keep this failsafe anyway though
+	
+	var level_info = SavedLevels.levels[selected_level]
+	CurrentLevelData.level_data = level_info.level_data
+
+	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
+	# TODO: additional checks for things like all shines set to not show in menu and such
+	# using collected_shines for the size check because there can only be one entry in collected shines per id, while shine_details can have multiple shines with the same id
+	if !start_in_edit_mode and SavedLevels.levels[selected_level].collected_shines.size() > 1:
+		music.change_song(music.last_song, 0) # temp
+		emit_signal("screen_change", "levels_screen", "shine_select_screen") 
+		return
+
+	# use the first fire of the transition_finished signal to change the scene when the screen finishes transitioning out
+	var goal_scene = EDITOR_SCENE if start_in_edit_mode else PLAYER_SCENE
+	var _connect = scene_transitions.connect("transition_finished", get_tree(), "change_scene_to", [goal_scene], CONNECT_ONESHOT)
+
+	scene_transitions.do_transition_fade(scene_transitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))
+
 func set_level_code_panel(new_value : bool):
 	level_list_panel.visible = !new_value 
 	level_code_panel.visible = new_value
@@ -221,9 +259,12 @@ func on_button_back_pressed() -> void:
 func on_button_add_pressed() -> void:
 	set_level_code_panel(true)
 
+	button_code_cancel.grab_focus()
+
 # note: random music selection doesn't currently work with this new method of making new levels, functionality needs to be added here for that
 func on_button_new_level_pressed() -> void:
 	# this way of doing it is a bit silly but should work fine unless the import button code massively changes
+	# should move the common code to a function instead of calling the import signal response
 	level_code_entry.text = TEMPLATE_LEVEL
 	on_button_code_import_pressed()
 
@@ -252,30 +293,10 @@ func on_button_copy_code_pressed() -> void:
 	OS.clipboard = SavedLevels.levels[selected_level].level_code
 		
 func on_button_play_pressed() -> void:
-	var selected_level = SavedLevels.selected_level
-	if selected_level == NO_LEVEL:
-		return #at some point the buttons should be disabled when you don't have a level selected, keep this failsafe anyway though
-
-	var level_info = SavedLevels.levels[selected_level]
-	CurrentLevelData.level_data = level_info.level_data
-
-	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
-	# TODO: additional checks for things like all shines set to not show in menu and such
-	# using collected_shines for the size check because there can only be one entry in collected shines per id, while shine_details can have multiple shines with the same id
-	if SavedLevels.levels[selected_level].collected_shines.size() > 1:
-		music.change_song(music.last_song, 0) # temp
-		emit_signal("screen_change", "levels_screen", "shine_select_screen") 
-	else:
-		var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)
+	start_level(false)
 
 func on_button_edit_pressed() -> void:
-	var selected_level = SavedLevels.selected_level
-	if selected_level == NO_LEVEL:
-		return
-	var level_info : LevelInfo = SavedLevels.levels[selected_level]
-	CurrentLevelData.level_data = level_info.level_data
-
-	var _change_scene = get_tree().change_scene_to(EDITOR_SCENE)
+	start_level(true)
 
 func on_button_delete_pressed() -> void:
 	var selected_level = SavedLevels.selected_level
@@ -294,6 +315,8 @@ func on_button_reset_pressed() -> void:
 # plan for populating the speedrun times panel is to give each time an icon to say if the shine is collected or not, and then use the text spot for the exact time (maybe add a suffix with the shine number?)
 func on_button_time_scores_pressed() -> void:
 	set_time_score_panel(true)
+
+	button_close_time_scores.grab_focus()
 
 func on_button_close_time_scores_pressed() -> void:
 	set_time_score_panel(false)
