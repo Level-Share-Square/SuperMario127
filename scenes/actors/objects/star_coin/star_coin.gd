@@ -25,7 +25,8 @@ func _set_property_values():
 func _ready() -> void:
 	var _connect = area.connect("body_entered", self, "collect")
 
-	if SavedLevels.selected_level != SavedLevels.NO_LEVEL:
+	if SavedLevels.selected_level != SavedLevels.NO_LEVEL && \
+	mode_switcher.get_node("ModeSwitcherButton").invisible:
 		var collected_star_coins = SavedLevels.levels[SavedLevels.selected_level].collected_star_coins
 		# Get the value, returning false if the key doesn't exist
 		is_blue = collected_star_coins.get(str(id), false)

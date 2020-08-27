@@ -76,7 +76,8 @@ func _ready() -> void:
 		
 		# if the shine is collected, make it blue 
 		# (collected_shines is a Dictionary where the key is the shine id and the value is a bool)
-		if SavedLevels.selected_level != SavedLevels.NO_LEVEL:
+		if SavedLevels.selected_level != SavedLevels.NO_LEVEL && \
+		mode_switcher.get_node("ModeSwitcherButton").invisible:
 			var collected_shines = SavedLevels.levels[SavedLevels.selected_level].collected_shines
 			# Get the value, returning false if the key doesn't exist
 			is_blue = collected_shines.get(str(id), false)
