@@ -132,4 +132,4 @@ func retry():
 		character2_node.kill("reload")
 
 func quit_to_menu() -> void:
-	MenuVariables.quit_to_menu("levels_screen")
+	MenuVariables.quit_to_menu_with_transition("levels_screen")

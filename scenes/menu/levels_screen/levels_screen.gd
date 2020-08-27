@@ -177,6 +177,28 @@ func delete_level(index : int) -> void:
 	# pass null to populate_info_panel if there's no levels left, so it can make the info panel empty
 	populate_info_panel(SavedLevels.levels[selected_level] if selected_level != NO_LEVEL else null)
 
+func start_level(start_in_edit_mode : bool):
+	var selected_level = SavedLevels.selected_level
+	if selected_level == NO_LEVEL:
+		return #at some point the buttons should be disabled when you don't have a level selected, keep this failsafe anyway though
+	
+	var level_info = SavedLevels.levels[selected_level]
+	CurrentLevelData.level_data = level_info.level_data
+
+	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
+	# TODO: additional checks for things like all shines set to not show in menu and such
+	# using collected_shines for the size check because there can only be one entry in collected shines per id, while shine_details can have multiple shines with the same id
+	if !start_in_edit_mode and SavedLevels.levels[selected_level].collected_shines.size() > 1:
+		music.change_song(music.last_song, 0) # temp
+		emit_signal("screen_change", "levels_screen", "shine_select_screen") 
+		return
+
+	# use the first fire of the transition_finished signal to change the scene when the screen finishes transitioning out
+	var goal_scene = EDITOR_SCENE if start_in_edit_mode else PLAYER_SCENE
+	var _connect = scene_transitions.connect("transition_finished", get_tree(), "change_scene_to", [goal_scene], CONNECT_ONESHOT)
+
+	scene_transitions.do_transition_fade(scene_transitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))
+
 func set_level_code_panel(new_value : bool):
 	level_list_panel.visible = !new_value 
 	level_code_panel.visible = new_value
@@ -253,30 +275,10 @@ func on_button_copy_code_pressed() -> void:
 	OS.clipboard = SavedLevels.levels[selected_level].level_code
 		
 func on_button_play_pressed() -> void:
-	var selected_level = SavedLevels.selected_level
-	if selected_level == NO_LEVEL:
-		return #at some point the buttons should be disabled when you don't have a level selected, keep this failsafe anyway though
-
-	var level_info = SavedLevels.levels[selected_level]
-	CurrentLevelData.level_data = level_info.level_data
-
-	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
-	# TODO: additional checks for things like all shines set to not show in menu and such
-	# using collected_shines for the size check because there can only be one entry in collected shines per id, while shine_details can have multiple shines with the same id
-	if SavedLevels.levels[selected_level].collected_shines.size() > 1:
-		music.change_song(music.last_song, 0) # temp
-		emit_signal("screen_change", "levels_screen", "shine_select_screen") 
-	else:
-		var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)
+	start_level(false)
 
 func on_button_edit_pressed() -> void:
-	var selected_level = SavedLevels.selected_level
-	if selected_level == NO_LEVEL:
-		return
-	var level_info : LevelInfo = SavedLevels.levels[selected_level]
-	CurrentLevelData.level_data = level_info.level_data
-
-	var _change_scene = get_tree().change_scene_to(EDITOR_SCENE)
+	start_level(true)
 
 func on_button_delete_pressed() -> void:
 	var selected_level = SavedLevels.selected_level

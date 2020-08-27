@@ -26,8 +26,10 @@ func quit_to_menu(screen_to_open : String = ""): #switch this to use the enum an
 	mode_switcher.get_node("ModeSwitcherButton").invisible = true
 	mode_switcher.get_node("ModeSwitcherButton").switching_disabled = true
 
-	# add music switch and temporary music stopping
-	#music.stop()
-
 	custom_open_screen_name = screen_to_open
 	var _change_scene = get_tree().change_scene_to(MAIN_MENU_CONTROLLER_SCENE)
+
+func quit_to_menu_with_transition(screen_to_open : String = ""):
+	# after the transition finishes fading out, switch to the menu before starting the fade in
+	var _connect = scene_transitions.connect("transition_finished", self, "quit_to_menu", [screen_to_open], CONNECT_ONESHOT)
+	scene_transitions.do_transition_fade(scene_transitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))
