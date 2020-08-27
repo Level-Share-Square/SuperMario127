@@ -98,6 +98,8 @@ func _input(_event : InputEvent) -> void:
 		button_reset.grab_focus()
 	elif Input.is_action_just_pressed("ui_right"):
 		button_back.grab_focus()
+	elif Input.is_action_just_pressed("switch_modes"):
+		start_level(false)
 
 func populate_info_panel(level_info : LevelInfo = null) -> void:
 	if level_info != null:
