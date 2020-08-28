@@ -43,6 +43,15 @@ func _ready():
 
 	CurrentLevelData.can_pause = true
 
+	set_process(false)
+
+	update_shine_info()
+	update_time_display()
+
+# process is only enabled while paused
+func _process(_delta):
+	update_time_display()
+
 func _unhandled_input(event):
 	if CurrentLevelData.can_pause and event.is_action_pressed("pause") and !(character_node.dead or (PlayerSettings.number_of_players != 1 and character2_node.dead)):
 		toggle_pause()
@@ -96,7 +105,13 @@ func toggle_pause():
 			
 			self.visible = false
 			CurrentLevelData.can_pause = true
+
+			# disable process at the end of the transition so the time score updates during it
+			set_process(false)
 		else:
+			# enable process before the transition starts so the time score updates during it
+			set_process(true)
+
 			FocusCheck.is_ui_focused = true
 			self.visible = true
 			chat_node.visible = false
@@ -136,3 +151,23 @@ func quit_to_menu() -> void:
 	# music is stopped while paused, but there's a frame where it starts playing again after the transition, just kill it here to stop that
 	music.change_song(music.last_song, 0)
 	MenuVariables.quit_to_menu_with_transition("levels_screen")
+
+func update_shine_info():
+	var level_info = SavedLevels.levels[SavedLevels.selected_level]
+	if level_info.selected_shine == -1:
+		return
+	var selected_shine_info = level_info.shine_details[level_info.selected_shine]
+
+	var level_name : Label = shine_info.get_node("LevelName")
+	var level_name_backing : Label = shine_info.get_node("LevelName/LevelNameBacking")
+	var shine_description : RichTextLabel = shine_info.get_node("ShineDescription")
+	var shine_name : RichTextLabel = shine_info.get_node("ShineName")
+
+	level_name.text = level_info.level_name 
+	level_name_backing.text = level_info.level_name
+	shine_description.bbcode_text = "[center]%s[/center]" % selected_shine_info["description"] 
+	shine_name.bbcode_text = "[center]%s[/center]" % selected_shine_info["title"]
+
+func update_time_display():
+	shine_info.get_node("TimeScore").text = LevelInfo.generate_time_string(CurrentLevelData.time_score)
+

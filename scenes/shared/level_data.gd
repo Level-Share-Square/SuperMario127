@@ -32,6 +32,8 @@ func pick_random_music() -> void:
 	CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music = random_music[array_index]
 
 func _ready() -> void:
+	# since the time score is incremented here, it must keep incrementing while paused
+	pause_mode = PAUSE_MODE_PROCESS
 	set_process(false)
 
 	level_data = LevelData.new()

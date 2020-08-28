@@ -202,6 +202,8 @@ func start_level() -> void:
 	can_interact = false
 	
 	get_tree().call_group("shine_sprites", "start_pressed_animation")
+
+	SavedLevels.levels[SavedLevels.selected_level].selected_shine = selected_shine_index
 	
 	# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
 	# so we'll assume it's safe to just go straight to the player scene 

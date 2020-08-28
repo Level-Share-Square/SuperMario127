@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -50,6 +50,8 @@
 [ext_resource path="res://scenes/shared/control/player_selection.tscn" type="PackedScene" id=48]
 [ext_resource path="res://scenes/shared/control/player_selector_system.gd" type="Script" id=49]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=50]
+[ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=51]
+[ext_resource path="res://scenes/menu/levels_screen/ui/time_icon.png" type="Texture" id=52]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 7 )
@@ -609,6 +611,44 @@ text = "Unnamed Shine"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TimeScore" type="Label" parent="UI/PauseScreen/ShineInfo"]
+anchor_left = 0.862
+anchor_top = 0.241
+anchor_right = 0.995
+anchor_bottom = 0.325
+margin_left = -0.0160522
+margin_top = -0.012001
+margin_right = -0.160034
+margin_bottom = 0.0999908
+custom_fonts/font = ExtResource( 51 )
+text = "00:00.00"
+
+[node name="TimeScoreIcon" type="TextureRect" parent="UI/PauseScreen/ShineInfo/TimeScore"]
+anchor_left = -0.402
+anchor_top = -0.321
+anchor_right = 0.02
+anchor_bottom = 1.143
+margin_left = 0.00400162
+margin_top = -0.0120001
+margin_right = -0.0400002
+margin_bottom = -0.00400162
+texture = ExtResource( 52 )
+expand = true
+stretch_mode = 5
+
+[node name="TimeScoreIcon2" type="TextureRect" parent="UI/PauseScreen/ShineInfo/TimeScore"]
+anchor_left = -0.402
+anchor_top = -0.321
+anchor_right = 0.02
+anchor_bottom = 1.143
+margin_left = 0.00400162
+margin_top = -0.0120001
+margin_right = -0.0400002
+margin_bottom = -0.00400162
+texture = ExtResource( 52 )
+expand = true
+stretch_mode = 5
 
 [node name="MultiplayerOptions" type="Control" parent="UI/PauseScreen"]
 visible = false
