@@ -57,6 +57,7 @@ func _init(passed_level_code : String = "") -> void:
 						"show_in_menu": object.properties[7],
 						"color": object.properties[11].to_rgba32(),
 						"id": object.properties[12],
+						"sort_order": object.properties[14],
 					}
 					shine_details.append(shine_dictionary)
 
@@ -70,7 +71,7 @@ func _init(passed_level_code : String = "") -> void:
 					# initialize collected star coins
 					collected_star_coins[str(star_coin_id)] = false
 
-			shine_details.sort_custom(self, "collectible_with_id_sort")
+			shine_details.sort_custom(self, "shine_sort")
 			star_coin_details.sort()
 
 func set_level_data(new_value : LevelData):
@@ -118,8 +119,8 @@ func load_from_dictionary(save_dictionary : Dictionary) -> void:
 		"0.0.2":
 			load_level_0_0_2(save_dictionary)
 
-func collectible_with_id_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
-	return item1["id"] < item2["id"]
+func shine_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
+	return item1["sort_order"] < item2["sort_order"]
 
 func set_shine_collected(shine_id : int, save_to_disk : bool = true) -> void:
 	collected_shines[str(shine_id)] = true

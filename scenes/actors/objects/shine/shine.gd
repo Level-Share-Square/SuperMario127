@@ -51,10 +51,11 @@ var shine_shards_activate := false
 var color := Color(1, 1, 0)
 var id := 0
 var do_kick_out := true
+var sort_position : int = 0
 
 func _set_properties() -> void:
-	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out"]
-	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "do_kick_out"]
+	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out", "sort_position"]
+	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "do_kick_out", "sort_position"]
 	
 func _set_property_values() -> void:
 	set_property("title", title, true)
@@ -66,6 +67,7 @@ func _set_property_values() -> void:
 	set_property("color", color, true)
 	set_property("id", id)
 	set_property("do_kick_out", do_kick_out)
+	set_property("sort_position", sort_position)
 
 func _ready() -> void:
 	if mode != 1: # not in edit mode
