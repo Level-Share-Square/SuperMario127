@@ -3,6 +3,7 @@ extends CanvasLayer
 onready var canvas_background = $Background
 onready var canvas_mask = $Light2D
 onready var tween = $Tween
+onready var transition_audio = $TransitionAudio
 
 signal transition_finished
 
@@ -84,3 +85,6 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 	else:
 		transitioning = false
 		canvas_mask.position = Vector2(384, 216) # Reset it, in case a script has modified it before playing the animation
+
+func play_transition_audio():
+	transition_audio.play()
