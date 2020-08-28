@@ -58,7 +58,7 @@ func open_object(object_to_open: GameObject):
 	preview_object.mode = 1
 	preview_object.set_property("enabled", false, false)
 	preview_object.position = object_to_open.preview_position
-	preview_object.z_index += 10
+	preview_object.z_index = 0
 	preview_object.visible = true
 	preview_object.modulate = Color(1, 1, 1)
 	preview_object.scale = Vector2(2.5, 2.5) * object_to_open.scale
