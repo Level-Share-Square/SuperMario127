@@ -366,6 +366,10 @@ func set_nozzle(new_nozzle: String, change_index := true) -> void:
 
 # Handles getting hit by another player
 func player_hit(body : Node) -> void:
+	# for some reason it's possible for the player to be hit by themselves when fired out of a cannon 
+	if body == self:
+		return
+
 	if body.name.begins_with("Character") and !big_attack:
 		var mul_sign := sign(global_position.x - body.global_position.x)
 		if !body.big_attack:
