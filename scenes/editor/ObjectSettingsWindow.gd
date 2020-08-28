@@ -62,6 +62,7 @@ func open_object(object_to_open: GameObject):
 	preview_object.visible = true
 	preview_object.modulate = Color(1, 1, 1)
 	preview_object.scale = Vector2(2.5, 2.5) * object_to_open.scale
+	preview_object.is_preview = true
 	preview_node.add_child(preview_object)
 
 	object = weakref(object_to_open)

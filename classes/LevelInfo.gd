@@ -28,10 +28,10 @@ var star_coin_details : Array = []
 var selected_shine = -1
 
 # save data 
-var collected_shines : Dictionary = {} # key is the shine id, value is a bool, either false or true
+var collected_shines : Dictionary = {} # key is the shine id (in a string, because json), value is a bool, either false or true
 var collected_star_coins : Dictionary = {} # same as collected_shines
 var coin_score : int = 0
-var time_scores : Dictionary = {} # time_scores should probably be stored as the sum of delta while playing
+var time_scores : Dictionary = {} # time_scores should probably be stored as the sum of delta while playing, keys are same as collected_shines
 
 func _init(passed_level_code : String = "") -> void:
 	if passed_level_code == "":
@@ -180,3 +180,4 @@ func load_level_0_0_2(save_dictionary : Dictionary):
 	collected_star_coins = save_dictionary["collected_star_coins"]
 	coin_score = save_dictionary["coin_score"]
 	time_scores = save_dictionary["time_scores"]
+

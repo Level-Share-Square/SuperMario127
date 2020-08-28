@@ -13,6 +13,9 @@ var hovered := false
 var enabled = true
 var preview_position := Vector2(72, 92)
 
+# true if creating a GameObject for the object settings preview
+var is_preview : bool = false
+
 var base_savable_properties : PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible"]
 var savable_properties : PoolStringArray = []
 

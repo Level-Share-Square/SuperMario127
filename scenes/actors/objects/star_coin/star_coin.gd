@@ -17,7 +17,7 @@ var is_blue := false
 
 func _set_properties():
 	savable_properties = ["id"]
-	editable_properties = ["id"]
+	editable_properties = []
 
 func _set_property_values():
 	set_property("id", id)
@@ -33,6 +33,11 @@ func _ready() -> void:
 
 	update_color()
 	anim_sprite.play("default")
+
+	if !is_preview and mode == 1:
+		id = CurrentLevelData.next_star_coin_id
+		CurrentLevelData.next_star_coin_id += 1
+		set_property("id", id)
 
 func update_color():
 	if !is_blue:

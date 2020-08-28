@@ -54,7 +54,7 @@ var do_kick_out := true
 
 func _set_properties() -> void:
 	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out"]
-	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out"]
+	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "do_kick_out"]
 	
 func _set_property_values() -> void:
 	set_property("title", title, true)
@@ -79,8 +79,14 @@ func _ready() -> void:
 		if SavedLevels.selected_level != SavedLevels.NO_LEVEL && \
 		mode_switcher.get_node("ModeSwitcherButton").invisible:
 			var collected_shines = SavedLevels.levels[SavedLevels.selected_level].collected_shines
+
 			# Get the value, returning false if the key doesn't exist
 			is_blue = collected_shines.get(str(id), false)
+
+	if !is_preview and mode == 1:
+		id = CurrentLevelData.next_shine_id
+		CurrentLevelData.next_shine_id += 1
+		set_property("id", id)
 	
 	var _connect = connect("property_changed", self, "update_color")
 	update_color("color", color)
