@@ -64,6 +64,8 @@ func detect_player(body):
 		character = body
 
 func top_breakable(hit_body):
+	if hit_body.name == "Steely" and hit_body.get_parent().should_hit:
+		return true
 	return hit_body.name.begins_with("Character") and (hit_body.velocity.y > 0 and !hit_body.is_grounded()) and (hit_body.big_attack or hit_body.invincible)
 
 func side_breakable(hit_body):
