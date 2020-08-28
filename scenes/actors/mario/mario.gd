@@ -328,6 +328,11 @@ func get_powerup_node(name: String) -> Node:
 
 func set_powerup(powerup_node: Node) -> void:
 	if powerup != null:
+		# Prevent switching away from rainbow star
+		if powerup.name == "RainbowPowerup" and powerup != powerup_node\
+		and is_instance_valid(powerup_node): # unless it's running out
+			return
+		
 		powerup._stop(0)
 		powerup.remove_visuals()
 	
