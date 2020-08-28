@@ -126,10 +126,10 @@ func _physics_process(_delta : float) -> void:
 		
 	if mode != 1:
 		var camera : Camera2D = current_scene.get_node(current_scene.camera)
-		if red_coins_activate and !activated:
+		if red_coins_activate and !activated and CurrentLevelData.level_data.vars.max_red_coins > 0:
 			if CurrentLevelData.level_data.vars.red_coins_collected == CurrentLevelData.level_data.vars.max_red_coins:
 				activate_shine()
-		if shine_shards_activate and !activated:
+		if shine_shards_activate and !activated and CurrentLevelData.level_data.vars.max_shine_shards > 0:
 			if CurrentLevelData.level_data.vars.shine_shards_collected == CurrentLevelData.level_data.vars.max_shine_shards:
 				activate_shine()
 		if !collected:
