@@ -98,6 +98,8 @@ func _input(_event : InputEvent) -> void:
 		button_reset.grab_focus()
 	elif Input.is_action_just_pressed("ui_right"):
 		button_back.grab_focus()
+	elif Input.is_action_just_pressed("switch_modes"):
+		start_level(false)
 
 func populate_info_panel(level_info : LevelInfo = null) -> void:
 	if level_info != null:
@@ -127,7 +129,7 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 			var list_position := 1
 			for time_score in level_info.time_scores.values():
 				if time_score != -1:
-					var time_score_string : String = generate_time_string(time_score)
+					var time_score_string : String = LevelInfo.generate_time_string(time_score)
 					time_score_list.add_item(str(list_position) + ". " + time_score_string)
 				else: 
 					time_score_list.add_item(str(list_position) + ". --:--.--")
@@ -136,7 +138,7 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 			set_time_score_button(false)
 			# if there is at least one time, and that time isn't an empty time
 			if level_info.time_scores.size() > 0 and level_info.time_scores.values()[0] != LevelInfo.EMPTY_TIME_SCORE:
-				single_time_score.text = generate_time_string(level_info.time_scores.values()[0])
+				single_time_score.text = LevelInfo.generate_time_string(level_info.time_scores.values()[0])
 			else:
 				single_time_score.text = "--:--.--"
 		
@@ -209,6 +211,12 @@ func start_level(start_in_edit_mode : bool):
 		emit_signal("screen_change", "levels_screen", "shine_select_screen") 
 		return
 
+	# if it's not a multishine level, play a transition and change to play/edit scene
+
+	# not a multishine level, but if there's 1 shine we should set it as selected 
+	if level_info.shine_details.size() == 1:
+		level_info.selected_shine = 0
+
 	# use the first fire of the transition_finished signal to change the scene when the screen finishes transitioning out
 	var goal_scene = EDITOR_SCENE if start_in_edit_mode else PLAYER_SCENE
 	var _connect = scene_transitions.connect("transition_finished", get_tree(), "change_scene_to", [goal_scene], CONNECT_ONESHOT)
@@ -226,19 +234,6 @@ func set_time_score_button(new_value : bool):
 func set_time_score_panel(new_value : bool):
 	level_info_panel.visible = !new_value 
 	time_score_panel.visible = new_value
-
-static func generate_time_string(time : float) -> String:
-	var time_calc = time # i'm not sure if it's safe to edit the time argument passed, if it's safe then this can be swapped out
-	# converting to int to use modulo, then doing abs to avoid problems with negative results, then back to int because that's the type
-	var minutes : int = int(abs(int(time_calc / 60) % 99)) # mod this by 99 so if you somehow take 100+ minutes at least the time will wrap around instead of breaking the display
-	var seconds : int = int(abs(int(time_calc) % 60))
-	var centiseconds : int = int(abs(int(time_calc * 100) % 100))
-
-	var minutes_pad : String = "0" if minutes < 10 else ""
-	var seconds_pad : String = "0" if seconds < 10 else ""
-	var centiseconds_pad : String = "0" if centiseconds < 10 else ""
-
-	return "%s%s:%s%s.%s%s" % [minutes_pad, minutes, seconds_pad, seconds, centiseconds_pad, centiseconds]
 
 func set_control_buttons(is_enabled : bool) -> void:
 	button_play.disabled = !is_enabled

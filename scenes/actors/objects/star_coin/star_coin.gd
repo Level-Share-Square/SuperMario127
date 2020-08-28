@@ -17,7 +17,7 @@ var is_blue := false
 
 func _set_properties():
 	savable_properties = ["id"]
-	editable_properties = ["id"]
+	editable_properties = []
 
 func _set_property_values():
 	set_property("id", id)
@@ -25,13 +25,19 @@ func _set_property_values():
 func _ready() -> void:
 	var _connect = area.connect("body_entered", self, "collect")
 
-	if SavedLevels.selected_level != SavedLevels.NO_LEVEL:
+	if SavedLevels.selected_level != SavedLevels.NO_LEVEL && \
+	mode_switcher.get_node("ModeSwitcherButton").invisible:
 		var collected_star_coins = SavedLevels.levels[SavedLevels.selected_level].collected_star_coins
 		# Get the value, returning false if the key doesn't exist
 		is_blue = collected_star_coins.get(str(id), false)
 
 	update_color()
 	anim_sprite.play("default")
+
+	if !is_preview and mode == 1:
+		id = CurrentLevelData.next_star_coin_id
+		CurrentLevelData.next_star_coin_id += 1
+		set_property("id", id)
 
 func update_color():
 	if !is_blue:

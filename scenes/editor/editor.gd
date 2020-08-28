@@ -132,6 +132,10 @@ func _unhandled_input(event) -> void:
 		shared.toggle_layer_transparency(editing_layer, layers_transparent)
 
 func _ready() -> void:
+	# reset these to 0 since they get incremented by the loading in process every time
+	CurrentLevelData.next_shine_id = 0
+	CurrentLevelData.next_star_coin_id = 0
+
 	var data = CurrentLevelData.level_data
 	load_in(data, data.areas[CurrentLevelData.area])
 	zoom_level = EditorSavedSettings.zoom_level

@@ -61,6 +61,7 @@ margin_top = 152.0
 margin_right = 219.0
 margin_bottom = 216.0
 custom_fonts/font = SubResource( 1 )
+disabled = true
 text = "Options"
 
 [node name="ButtonQuit" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]

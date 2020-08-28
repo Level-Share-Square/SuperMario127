@@ -18,6 +18,13 @@ var time_score : float = 0
 # used to track if there's unsaved changes in the editor, specifically by the save and close buttons of the editor
 var unsaved_editor_changes : bool = false
 
+# incremented and used by shines/star coins to make the newest shine/star coin have a unique id (aka previous id + 1) 
+var next_shine_id : int = 0
+var next_star_coin_id : int = 0
+
+# can be used by anything that needs to disable pausing for some time
+var can_pause : bool = true
+
 func pick_random_music() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
@@ -25,6 +32,8 @@ func pick_random_music() -> void:
 	CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music = random_music[array_index]
 
 func _ready() -> void:
+	# since the time score is incremented here, it must keep incrementing while paused
+	pause_mode = PAUSE_MODE_PROCESS
 	set_process(false)
 
 	level_data = LevelData.new()

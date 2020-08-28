@@ -202,6 +202,8 @@ func start_level() -> void:
 	can_interact = false
 	
 	get_tree().call_group("shine_sprites", "start_pressed_animation")
+
+	SavedLevels.levels[SavedLevels.selected_level].selected_shine = selected_shine_index
 	
 	# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
 	# so we'll assume it's safe to just go straight to the player scene 
@@ -231,5 +233,9 @@ func on_animation_finished(anim_name : String) -> void:
 
 # unlike the rest of the signals, this is connected in the start_level function
 func change_to_player_scene(_animation : String) -> void:
+	# Start fading out now; the transition has finished
+	scene_transitions.do_transition_fade(scene_transitions.DEFAULT_TRANSITION_TIME,\
+	Color(1, 1, 1, 1), Color(1, 1, 1, 0), false)
+
 	var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/actors/mario/misc/cutout_death.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/scene_transitions/transition_script.gd" type="Script" id=2]
+[ext_resource path="res://.import/transition_sound.wav-cadee45d90046db066c57d4e15337df1.sample" type="AudioStream" id=3]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 pause_mode = 2
@@ -28,3 +29,6 @@ range_layer_max = 512
 range_item_cull_mask = 2
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="TransitionAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )

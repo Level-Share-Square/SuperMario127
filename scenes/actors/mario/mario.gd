@@ -328,6 +328,11 @@ func get_powerup_node(name: String) -> Node:
 
 func set_powerup(powerup_node: Node) -> void:
 	if powerup != null:
+		# Prevent switching away from rainbow star
+		if powerup.name == "RainbowPowerup" and powerup != powerup_node\
+		and is_instance_valid(powerup_node): # unless it's running out
+			return
+		
 		powerup._stop(0)
 		powerup.remove_visuals()
 	
@@ -366,6 +371,10 @@ func set_nozzle(new_nozzle: String, change_index := true) -> void:
 
 # Handles getting hit by another player
 func player_hit(body : Node) -> void:
+	# for some reason it's possible for the player to be hit by themselves when fired out of a cannon 
+	if body == self:
+		return
+
 	if body.name.begins_with("Character") and !big_attack:
 		var mul_sign := sign(global_position.x - body.global_position.x)
 		if !body.big_attack:

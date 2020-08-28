@@ -51,10 +51,11 @@ var shine_shards_activate := false
 var color := Color(1, 1, 0)
 var id := 0
 var do_kick_out := true
+var sort_position : int = 0
 
 func _set_properties() -> void:
-	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out"]
-	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out"]
+	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out", "sort_position"]
+	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "do_kick_out", "sort_position"]
 	
 func _set_property_values() -> void:
 	set_property("title", title, true)
@@ -66,6 +67,7 @@ func _set_property_values() -> void:
 	set_property("color", color, true)
 	set_property("id", id)
 	set_property("do_kick_out", do_kick_out)
+	set_property("sort_position", sort_position)
 
 func _ready() -> void:
 	if mode != 1: # not in edit mode
@@ -76,10 +78,17 @@ func _ready() -> void:
 		
 		# if the shine is collected, make it blue 
 		# (collected_shines is a Dictionary where the key is the shine id and the value is a bool)
-		if SavedLevels.selected_level != SavedLevels.NO_LEVEL:
+		if SavedLevels.selected_level != SavedLevels.NO_LEVEL && \
+		mode_switcher.get_node("ModeSwitcherButton").invisible:
 			var collected_shines = SavedLevels.levels[SavedLevels.selected_level].collected_shines
+
 			# Get the value, returning false if the key doesn't exist
 			is_blue = collected_shines.get(str(id), false)
+
+	if !is_preview and mode == 1:
+		id = CurrentLevelData.next_shine_id
+		CurrentLevelData.next_shine_id += 1
+		set_property("id", id)
 	
 	var _connect = connect("property_changed", self, "update_color")
 	update_color("color", color)
@@ -117,10 +126,10 @@ func _physics_process(_delta : float) -> void:
 		
 	if mode != 1:
 		var camera : Camera2D = current_scene.get_node(current_scene.camera)
-		if red_coins_activate and !activated:
+		if red_coins_activate and !activated and CurrentLevelData.level_data.vars.max_red_coins > 0:
 			if CurrentLevelData.level_data.vars.red_coins_collected == CurrentLevelData.level_data.vars.max_red_coins:
 				activate_shine()
-		if shine_shards_activate and !activated:
+		if shine_shards_activate and !activated and CurrentLevelData.level_data.vars.max_shine_shards > 0:
 			if CurrentLevelData.level_data.vars.shine_shards_collected == CurrentLevelData.level_data.vars.max_shine_shards:
 				activate_shine()
 		if !collected:
@@ -188,6 +197,10 @@ func collect(body : PhysicsBody2D) -> void:
 		character.set_inter_player_collision(false)
 
 		mode_switcher_button.switching_disabled = true
+		CurrentLevelData.can_pause = false
+
+		# mute level music (gets un-muted after shine dance finishes)
+		music.volume_multiplier = 0
 
 		collect_sound.play() 
 		collected = true
@@ -237,6 +250,9 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 			#mode switching is disabled on collecting the shine so the player can't cancel the animation (causes glitches)
 			mode_switcher_button.switching_disabled = false 
 			mode_switcher_button._pressed()
+
+			# pausing disabled for same reasons as mode switcher button
+			CurrentLevelData.can_pause = true
 	else: 
 		# re-enable mode switching if in the editor test mode
 		if !mode_switcher_button.invisible:

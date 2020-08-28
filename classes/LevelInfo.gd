@@ -28,10 +28,10 @@ var star_coin_details : Array = []
 var selected_shine = -1
 
 # save data 
-var collected_shines : Dictionary = {} # key is the shine id, value is a bool, either false or true
+var collected_shines : Dictionary = {} # key is the shine id (in a string, because json), value is a bool, either false or true
 var collected_star_coins : Dictionary = {} # same as collected_shines
 var coin_score : int = 0
-var time_scores : Dictionary = {} # time_scores should probably be stored as the sum of delta while playing
+var time_scores : Dictionary = {} # time_scores should probably be stored as the sum of delta while playing, keys are same as collected_shines
 
 func _init(passed_level_code : String = "") -> void:
 	if passed_level_code == "":
@@ -57,6 +57,7 @@ func _init(passed_level_code : String = "") -> void:
 						"show_in_menu": object.properties[7],
 						"color": object.properties[11].to_rgba32(),
 						"id": object.properties[12],
+						"sort_order": object.properties[14],
 					}
 					shine_details.append(shine_dictionary)
 
@@ -70,7 +71,7 @@ func _init(passed_level_code : String = "") -> void:
 					# initialize collected star coins
 					collected_star_coins[str(star_coin_id)] = false
 
-			shine_details.sort_custom(self, "collectible_with_id_sort")
+			shine_details.sort_custom(self, "shine_sort")
 			star_coin_details.sort()
 
 func set_level_data(new_value : LevelData):
@@ -118,8 +119,8 @@ func load_from_dictionary(save_dictionary : Dictionary) -> void:
 		"0.0.2":
 			load_level_0_0_2(save_dictionary)
 
-func collectible_with_id_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
-	return item1["id"] < item2["id"]
+func shine_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
+	return item1["sort_order"] < item2["sort_order"]
 
 func set_shine_collected(shine_id : int, save_to_disk : bool = true) -> void:
 	collected_shines[str(shine_id)] = true
@@ -159,6 +160,19 @@ func get_level_foreground_texture() -> StreamTexture:
 	var foreground_resource = CurrentLevelData.foreground_cache[level_foreground]
 	return foreground_resource.preview
 
+static func generate_time_string(time : float) -> String:
+	var time_calc = time # i'm not sure if it's safe to edit the time argument passed, if it's safe then this can be swapped out
+	# converting to int to use modulo, then doing abs to avoid problems with negative results, then back to int because that's the type
+	var minutes : int = int(abs(int(time_calc / 60) % 99)) # mod this by 99 so if you somehow take 100+ minutes at least the time will wrap around instead of breaking the display
+	var seconds : int = int(abs(int(time_calc) % 60))
+	var centiseconds : int = int(abs(int(time_calc * 100) % 100))
+
+	var minutes_pad : String = "0" if minutes < 10 else ""
+	var seconds_pad : String = "0" if seconds < 10 else ""
+	var centiseconds_pad : String = "0" if centiseconds < 10 else ""
+
+	return "%s%s:%s%s.%s%s" % [minutes_pad, minutes, seconds_pad, seconds, centiseconds_pad, centiseconds]
+
 # LevelInfo dictionary loading functions for different versions start here
 func load_level_0_0_1(save_dictionary : Dictionary):
 	level_code = save_dictionary["level_code"]
@@ -180,3 +194,4 @@ func load_level_0_0_2(save_dictionary : Dictionary):
 	collected_star_coins = save_dictionary["collected_star_coins"]
 	coin_score = save_dictionary["coin_score"]
 	time_scores = save_dictionary["time_scores"]
+

@@ -52,14 +52,14 @@ script = ExtResource( 8 )
 
 [node name="Sprite" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
 frames = ExtResource( 1 )
-frame = 1
+frame = 5
 playing = true
 
 [node name="Fuse" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
 visible = false
 position = Vector2( 0, -4 )
 frames = ExtResource( 4 )
-frame = 1
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
@@ -117,9 +117,8 @@ process_material = SubResource( 5 )
 texture = ExtResource( 6 )
 
 [node name="DamageArea" type="Area2D" parent="KinematicBody2D"]
-visible = false
 position = Vector2( 0, -3 )
-collision_layer = 0
+collision_layer = 4
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/DamageArea"]

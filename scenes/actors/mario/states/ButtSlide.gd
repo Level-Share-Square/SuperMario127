@@ -71,7 +71,9 @@ func _update(delta):
 		character.set_state_by_name("JumpState", 0)
 	
 	# Prevent infinite slides between 2 slopes
-	if sign(character.velocity.x) != starting_slide_sign:
+	if starting_slide_sign == 0: # If Mario was stationary
+		starting_slide_sign = sign(character.velocity.x)
+	elif sign(character.velocity.x) != starting_slide_sign:
 		stop_buffer = 0
 		character.set_state_by_name("BounceState", delta)
 		character.position.y -= 1
