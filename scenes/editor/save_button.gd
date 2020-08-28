@@ -16,6 +16,7 @@ func _pressed():
 
 	if SavedLevels.selected_level != -1:
 		SavedLevels.levels[SavedLevels.selected_level] = LevelInfo.new(CurrentLevelData.level_data.get_encoded_level_data())
+		var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
 
 		CurrentLevelData.unsaved_editor_changes = false
 
