@@ -17,7 +17,7 @@ func _ready():
 func _process(delta):
 	var coin_amount = CurrentLevelData.level_data.vars.coins_collected
 	if coin_amount != last_coin_amount:
-		label.text = str(coin_amount).pad_zeros(2)
+		label.text = str(coin_amount).pad_zeros(4)
 		label_shadow.text = label.text
 		
 		tween.interpolate_property(label, "rect_position",
@@ -27,7 +27,7 @@ func _process(delta):
 		time_until_fall = 0.1
 	last_coin_amount = coin_amount
 	
-	label_shadow.rect_position = label.rect_position + Vector2(3, 4)
+	label_shadow.rect_position = label.rect_position + Vector2(2, 2)
 
 	if time_until_fall > 0:
 		time_until_fall -= delta

@@ -39,7 +39,7 @@ func _process(delta):
 	
 	max_coin_amount = CurrentLevelData.level_data.vars.max_red_coins
 	
-	label_shadow.rect_position = label.rect_position + Vector2(3, 4)
+	label_shadow.rect_position = label.rect_position + Vector2(2, 2)
 
 	if time_until_fall > 0:
 		time_until_fall -= delta
