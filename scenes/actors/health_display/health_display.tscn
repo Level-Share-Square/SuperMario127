@@ -1,81 +1,116 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/actors/health_display/health_display.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://scenes/actors/health_display/textures.png" type="Texture" id=3]
-[ext_resource path="res://scenes/actors/health_display/life.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/health_display/outline.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/health_display/heart.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/health_display/outline_progress.png" type="Texture" id=5]
 
-[sub_resource type="AtlasTexture" id=1]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 256, 268 )
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
 
-[sub_resource type="AtlasTexture" id=2]
-flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 256, 268 )
+uniform float water_height : hint_range(0f, 1f);
 
-[sub_resource type="AtlasTexture" id=3]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 256, 96 )
+void fragment() {
+	if (texture(TEXTURE, UV) == vec4(1, 1, 1, 1)) {
+		float sine_height = (sin((UV.x * 7.5f) + TIME * 8.5f) / 60.5f) + ((water_height * 1.3f) / 1.25f);
+		if (UV.y > sine_height) {
+			COLOR = vec4(1, 1, 1, 1)
+		} else {
+			COLOR = vec4(1, 1, 1, 0);
+		}
+	} else {
+		COLOR = vec4(1, 1, 1, 0)
+	}
+}"
+custom_defines = ""
 
-[sub_resource type="AtlasTexture" id=4]
-flags = 4
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 256, 96 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/water_height = 0.5
 
-[sub_resource type="DynamicFont" id=5]
-size = 128
+[sub_resource type="DynamicFont" id=3]
+size = 70
 font_data = ExtResource( 2 )
 
 [node name="HealthDisplay" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 1 )
-atlas_0 = SubResource( 1 )
-atlas_1 = SubResource( 2 )
-shard_atlas_0 = SubResource( 3 )
-shard_atlas_1 = SubResource( 4 )
+four_quarter_color = Color( 0.341176, 0.282353, 1, 1 )
+three_quarter_color = Color( 0.623529, 1, 0.282353, 1 )
+two_quarter_color = Color( 1, 0.839216, 0.282353, 1 )
+one_quarter_color = Color( 1, 0.282353, 0.282353, 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 25
 
-[node name="HealthUI" type="Sprite" parent="CanvasLayer"]
-position = Vector2( 352, -80 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 256, 268 )
+[node name="HealthUI" type="TextureProgress" parent="CanvasLayer"]
+margin_left = 693.0
+margin_top = -60.0
+margin_right = 893.0
+margin_bottom = 139.0
+rect_scale = Vector2( 0.3, 0.3 )
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 5 )
+fill_mode = 4
+tint_progress = Color( 0.341176, 0.282353, 1, 1 )
+stretch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shadow" type="TextureProgress" parent="CanvasLayer/HealthUI"]
+show_behind_parent = true
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 208.0
+margin_bottom = 207.0
+value = 100.0
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 3 )
+fill_mode = 4
+tint_under = Color( 0, 0, 0, 0.25098 )
+tint_over = Color( 1, 1, 1, 0 )
+tint_progress = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tween" type="Tween" parent="CanvasLayer/HealthUI"]
 
-[node name="LabelShadow" type="Label" parent="CanvasLayer/HealthUI"]
-margin_left = 93.9999
-margin_top = 60.0
-margin_right = 169.0
-margin_bottom = 204.0
-custom_fonts/font = SubResource( 5 )
-custom_colors/font_color = Color( 0, 0, 0, 0.25098 )
-text = "8"
+[node name="Heart" type="Sprite" parent="CanvasLayer/HealthUI"]
+position = Vector2( 52, 56 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Shadow" type="Sprite" parent="CanvasLayer/HealthUI/Heart"]
+self_modulate = Color( 0, 0, 0, 0.25098 )
+show_behind_parent = true
+position = Vector2( 8, 8 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Juice" type="TextureRect" parent="CanvasLayer/HealthUI/Heart"]
+modulate = Color( 0, 0.576471, 1, 1 )
+material = SubResource( 2 )
+margin_left = -4.80005
+margin_top = -4.8
+margin_right = 91.2
+margin_bottom = 91.2
+rect_scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="CanvasLayer/HealthUI"]
-margin_left = 85.9999
-margin_top = 52.0
-margin_right = 161.0
-margin_bottom = 196.0
-custom_fonts/font = SubResource( 5 )
+margin_left = 78.0
+margin_top = 64.0
+margin_right = 123.0
+margin_bottom = 147.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "8"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Shards" type="Sprite" parent="CanvasLayer/HealthUI"]
-position = Vector2( 12, -40 )
-texture = ExtResource( 4 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 256, 96 )
