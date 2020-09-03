@@ -43,6 +43,7 @@ func _start_check(_delta: float):
 func _start(_delta: float):
 	pass
 	
+# called every frame only when the state is active
 func _update(_delta: float):
 	pass
 	
@@ -52,5 +53,6 @@ func _stop_check(_delta: float):
 func _stop(_delta: float):
 	pass
 	
+# called every frame regardless of if the state is active
 func _general_update(_delta: float):
 	pass
