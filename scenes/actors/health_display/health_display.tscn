@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/actors/health_display/health_display.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/actors/health_display/heart.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/health_display/outline_progress.png" type="Texture" id=5]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=6]
 code = "shader_type canvas_item;
 
 uniform float water_height : hint_range(0f, 1f);
@@ -25,21 +25,27 @@ void fragment() {
 }"
 custom_defines = ""
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
 shader_param/water_height = 0.5
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 6 )
+shader_param/water_height = 0.5
+
+[sub_resource type="DynamicFont" id=8]
 size = 70
 font_data = ExtResource( 2 )
 
 [node name="HealthDisplay" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 1 )
+material_0 = SubResource( 7 )
+material_1 = SubResource( 9 )
 four_quarter_color = Color( 0.341176, 0.282353, 1, 1 )
-three_quarter_color = Color( 0.623529, 1, 0.282353, 1 )
-two_quarter_color = Color( 1, 0.839216, 0.282353, 1 )
-one_quarter_color = Color( 1, 0.282353, 0.282353, 1 )
+three_quarter_color = Color( 0.498039, 1, 0.494118, 1 )
+two_quarter_color = Color( 1, 0.898039, 0.431373, 1 )
+one_quarter_color = Color( 0.85098, 0.290196, 0.290196, 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 25
@@ -52,7 +58,7 @@ margin_bottom = 139.0
 rect_scale = Vector2( 0.3, 0.3 )
 texture_under = ExtResource( 3 )
 texture_progress = ExtResource( 5 )
-fill_mode = 4
+fill_mode = 5
 tint_progress = Color( 0.341176, 0.282353, 1, 1 )
 stretch_margin_bottom = 1
 __meta__ = {
@@ -61,10 +67,10 @@ __meta__ = {
 
 [node name="Shadow" type="TextureProgress" parent="CanvasLayer/HealthUI"]
 show_behind_parent = true
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 208.0
-margin_bottom = 207.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 206.0
+margin_bottom = 205.0
 value = 100.0
 texture_under = ExtResource( 3 )
 texture_progress = ExtResource( 3 )
@@ -86,13 +92,13 @@ centered = false
 [node name="Shadow" type="Sprite" parent="CanvasLayer/HealthUI/Heart"]
 self_modulate = Color( 0, 0, 0, 0.25098 )
 show_behind_parent = true
-position = Vector2( 8, 8 )
+position = Vector2( 6, 6 )
 texture = ExtResource( 4 )
 centered = false
 
 [node name="Juice" type="TextureRect" parent="CanvasLayer/HealthUI/Heart"]
-modulate = Color( 0, 0.576471, 1, 1 )
-material = SubResource( 2 )
+modulate = Color( 0.886275, 0.196078, 0.196078, 1 )
+material = SubResource( 7 )
 margin_left = -4.80005
 margin_top = -4.8
 margin_right = 91.2
@@ -108,7 +114,7 @@ margin_left = 78.0
 margin_top = 64.0
 margin_right = 123.0
 margin_bottom = 147.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "8"
 __meta__ = {

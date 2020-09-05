@@ -65,9 +65,9 @@ func _set_property_values() -> void:
 	set_property("red_coins_activate", red_coins_activate, true)
 	set_property("shine_shards_activate", shine_shards_activate, true)
 	set_property("color", color, true)
-	set_property("id", id)
-	set_property("do_kick_out", do_kick_out)
-	set_property("sort_position", sort_position)
+	set_property("id", id, true)
+	set_property("do_kick_out", do_kick_out, true)
+	set_property("sort_position", sort_position, true)
 
 func _ready() -> void:
 	if mode != 1: # not in edit mode

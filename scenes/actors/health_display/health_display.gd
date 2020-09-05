@@ -15,12 +15,23 @@ var shown = false
 var last_shown = false
 var water_height = 0
 
+export var material_0 : ShaderMaterial
+export var material_1 : ShaderMaterial
+
 export var four_quarter_color : Color
 export var three_quarter_color : Color
 export var two_quarter_color : Color
 export var one_quarter_color : Color
 
 var current_health = 8
+
+# The code I added to make the new UI work is not very well done, but
+# it would be a waste of time and effort to try to clean it up as I would 
+# have to rewrite the whole script, none of this is well made code.
+
+# And that wouldn't make much of a difference, the whole game is 
+# being rewritten already. I doubt anyone would need to work much
+# with this code between now, and after the rewrite is finished.
 
 func _ready():
 	character = get_node(char_path)
@@ -30,6 +41,11 @@ func _ready():
 		ui.rect_position.x = 693
 	else:
 		ui.rect_position.x = 693
+		
+	if character.player_id == 0:
+		juice.material = material_0
+	else:
+		juice.material = material_1
 	
 	yield(get_tree().create_timer(1), "timeout")
 
@@ -48,7 +64,8 @@ func _process(delta):
 			
 			if character.health != current_health:
 				var color_to_use
-				# replace this later
+				
+				# i would think up a better solution but again waste of effort
 				if character.health > 6:
 					color_to_use = four_quarter_color
 				elif character.health > 4:
