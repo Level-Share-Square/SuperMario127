@@ -5,7 +5,7 @@ var character : Character
 
 onready var ui = $CanvasLayer/HealthUI
 onready var ui_shadow = $CanvasLayer/HealthUI/Shadow
-onready var juice = $CanvasLayer/HealthUI/Heart/Juice
+onready var juice = $CanvasLayer/HealthUI/Juice
 onready var label = $CanvasLayer/HealthUI/Label
 onready var tween = $CanvasLayer/HealthUI/Tween
 

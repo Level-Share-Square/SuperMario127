@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/rainbow_breakable_block.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/rainbow_breakable_block.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/break.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/metal_breakable_block/break.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/particles.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/metal_breakable_block/block_material.tres" type="Material" id=6]
 
@@ -26,8 +26,8 @@ void fragment()
 custom_defines = ""
 
 [sub_resource type="Gradient" id=2]
-offsets = PoolRealArray( 0.15, 1 )
-colors = PoolColorArray( 1, 0, 0, 1, 1, 1, 1, 1 )
+offsets = PoolRealArray( 0, 0.5 )
+colors = PoolColorArray( 0.74, 0, 0, 1, 1, 1, 1, 1 )
 
 [sub_resource type="GradientTexture" id=3]
 gradient = SubResource( 2 )
@@ -114,6 +114,7 @@ physics_process_parent = true
 
 [node name="Broken" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -10.0
 
 [node name="BreakParticle" type="Particles2D" parent="."]
 material = SubResource( 4 )

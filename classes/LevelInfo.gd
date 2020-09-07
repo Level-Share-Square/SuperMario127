@@ -57,8 +57,12 @@ func _init(passed_level_code : String = "") -> void:
 						"show_in_menu": object.properties[7],
 						"color": object.properties[11].to_rgba32(),
 						"id": object.properties[12],
-						"sort_order": object.properties[14],
 					}
+					# Lol band aid
+					if object.properties.size() > 13:
+						shine_dictionary["sort_order"] = object.properties[14]
+					else:
+						shine_dictionary["sort_order"] = object.properties[12]
 					shine_details.append(shine_dictionary)
 
 					# initialize collected_shines and time_scores

@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/actors/health_display/heart.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/health_display/outline_progress.png" type="Texture" id=5]
 
-[sub_resource type="Shader" id=6]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform float water_height : hint_range(0f, 1f);
@@ -25,23 +25,23 @@ void fragment() {
 }"
 custom_defines = ""
 
-[sub_resource type="ShaderMaterial" id=7]
-shader = SubResource( 6 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/water_height = 0.5
 
-[sub_resource type="ShaderMaterial" id=9]
-shader = SubResource( 6 )
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 1 )
 shader_param/water_height = 0.5
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=4]
 size = 70
 font_data = ExtResource( 2 )
 
 [node name="HealthDisplay" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 1 )
-material_0 = SubResource( 7 )
-material_1 = SubResource( 9 )
+material_0 = SubResource( 2 )
+material_1 = SubResource( 3 )
 four_quarter_color = Color( 0.341176, 0.282353, 1, 1 )
 three_quarter_color = Color( 0.498039, 1, 0.494118, 1 )
 two_quarter_color = Color( 1, 0.898039, 0.431373, 1 )
@@ -89,20 +89,20 @@ position = Vector2( 52, 56 )
 texture = ExtResource( 4 )
 centered = false
 
-[node name="Shadow" type="Sprite" parent="CanvasLayer/HealthUI/Heart"]
+[node name="HeartShadow" type="Sprite" parent="CanvasLayer/HealthUI"]
 self_modulate = Color( 0, 0, 0, 0.25098 )
 show_behind_parent = true
-position = Vector2( 6, 6 )
+position = Vector2( 57.9998, 62 )
 texture = ExtResource( 4 )
 centered = false
 
-[node name="Juice" type="TextureRect" parent="CanvasLayer/HealthUI/Heart"]
+[node name="Juice" type="TextureRect" parent="CanvasLayer/HealthUI"]
 modulate = Color( 0.886275, 0.196078, 0.196078, 1 )
-material = SubResource( 7 )
-margin_left = -4.80005
-margin_top = -4.8
-margin_right = 91.2
-margin_bottom = 91.2
+material = SubResource( 2 )
+margin_left = 47.2
+margin_top = 51.2
+margin_right = 143.2
+margin_bottom = 147.2
 rect_scale = Vector2( 1.1, 1.1 )
 texture = ExtResource( 4 )
 __meta__ = {
@@ -114,7 +114,7 @@ margin_left = 78.0
 margin_top = 64.0
 margin_right = 123.0
 margin_bottom = 147.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "8"
 __meta__ = {
