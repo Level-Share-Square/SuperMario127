@@ -38,6 +38,11 @@ const GLASS = 28
 
 const WOOD = 29
 
+const RED_GEM_BLOCK = 31
+const YELLOW_GEM_BLOCK = 32
+const GREEN_GEM_BLOCK = 33
+const BLUE_GEM_BLOCK = 34
+
 var ids = [
 	GRASS_BLOCK,
 	GRASS_SLOPE_RIGHT,
@@ -74,7 +79,12 @@ var ids = [
 	LEVEL_MARGIN,
 	GLASS,
 	
-	WOOD
+	WOOD,
+	
+	RED_GEM_BLOCK,
+	YELLOW_GEM_BLOCK,
+	GREEN_GEM_BLOCK,
+	BLUE_GEM_BLOCK
 ]
 
 var binds = {

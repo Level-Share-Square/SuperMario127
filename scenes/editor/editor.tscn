@@ -1,4 +1,4 @@
-[gd_scene load_steps=197 format=2]
+[gd_scene load_steps=201 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -169,6 +169,10 @@
 [ext_resource path="res://scenes/editor/back_button.gd" type="Script" id=167]
 [ext_resource path="res://scenes/editor/quit_wo_saving_window.gd" type="Script" id=168]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=169]
+[ext_resource path="res://assets/tiles/red_gem_block/icon.png" type="Texture" id=170]
+[ext_resource path="res://assets/tiles/blue_gem_block/icon.png" type="Texture" id=171]
+[ext_resource path="res://assets/tiles/yellow_gem_block/icon.png" type="Texture" id=172]
+[ext_resource path="res://assets/tiles/green_gem_block/icon.png" type="Texture" id=173]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1472,12 +1476,12 @@ z_index = -8
 icon = ExtResource( 156 )
 preview = ExtResource( 157 )
 
-[node name="BricksGroup" type="Node" parent="PlaceableItems"]
+[node name="BuildingGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
 color = Color( 0.121569, 0.180392, 0.517647, 1 )
-group_name = "Bricks"
+group_name = "Building"
 
-[node name="Brick" type="Node" parent="PlaceableItems/BricksGroup"]
+[node name="Brick" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 3 )
 tileset_id = 1
 change_to = "BrickSlopeLeft"
@@ -1485,7 +1489,7 @@ items_in_sequence = 3
 icon = ExtResource( 5 )
 preview = ExtResource( 5 )
 
-[node name="BrickSlopeRight" type="Node" parent="PlaceableItems/BricksGroup"]
+[node name="BrickSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 3 )
 tileset_id = 1
 tile_id = 3
@@ -1495,7 +1499,7 @@ index_in_sequence = 2
 icon = ExtResource( 62 )
 preview = ExtResource( 62 )
 
-[node name="BrickSlopeLeft" type="Node" parent="PlaceableItems/BricksGroup"]
+[node name="BrickSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 3 )
 tileset_id = 1
 tile_id = 2
@@ -1505,7 +1509,7 @@ index_in_sequence = 1
 icon = ExtResource( 61 )
 preview = ExtResource( 61 )
 
-[node name="GreenBrick" type="Node" parent="PlaceableItems/BricksGroup"]
+[node name="GreenBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 3 )
 tileset_id = 3
 change_to = "GreenBrickSlopeLeft"
@@ -1513,7 +1517,7 @@ items_in_sequence = 3
 icon = ExtResource( 86 )
 preview = ExtResource( 86 )
 
-[node name="GreenBrickSlopeRight" type="Node" parent="PlaceableItems/BricksGroup"]
+[node name="GreenBrickSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 3 )
 tileset_id = 3
 tile_id = 3
@@ -1523,7 +1527,7 @@ index_in_sequence = 2
 icon = ExtResource( 93 )
 preview = ExtResource( 93 )
 
-[node name="GreenBrickSlopeLeft" type="Node" parent="PlaceableItems/BricksGroup"]
+[node name="GreenBrickSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 3 )
 tileset_id = 3
 tile_id = 2
@@ -1533,7 +1537,7 @@ index_in_sequence = 1
 icon = ExtResource( 88 )
 preview = ExtResource( 88 )
 
-[node name="RedBrick" type="Node" parent="PlaceableItems/BricksGroup"]
+[node name="RedBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 3 )
 tileset_id = 4
 change_to = "RedBrickSlopeLeft"
@@ -1541,7 +1545,7 @@ items_in_sequence = 3
 icon = ExtResource( 89 )
 preview = ExtResource( 89 )
 
-[node name="RedBrickSlopeRight" type="Node" parent="PlaceableItems/BricksGroup"]
+[node name="RedBrickSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 3 )
 tileset_id = 4
 tile_id = 3
@@ -1551,7 +1555,7 @@ index_in_sequence = 2
 icon = ExtResource( 85 )
 preview = ExtResource( 85 )
 
-[node name="RedBrickSlopeLeft" type="Node" parent="PlaceableItems/BricksGroup"]
+[node name="RedBrickSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 3 )
 tileset_id = 4
 tile_id = 2
@@ -1561,7 +1565,7 @@ index_in_sequence = 1
 icon = ExtResource( 92 )
 preview = ExtResource( 92 )
 
-[node name="YellowBrick" type="Node" parent="PlaceableItems/BricksGroup"]
+[node name="YellowBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 3 )
 tileset_id = 5
 change_to = "YellowBrickSlopeLeft"
@@ -1569,7 +1573,7 @@ items_in_sequence = 3
 icon = ExtResource( 90 )
 preview = ExtResource( 90 )
 
-[node name="YellowBrickSlopeRight" type="Node" parent="PlaceableItems/BricksGroup"]
+[node name="YellowBrickSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 3 )
 tileset_id = 5
 tile_id = 3
@@ -1579,7 +1583,7 @@ index_in_sequence = 2
 icon = ExtResource( 91 )
 preview = ExtResource( 91 )
 
-[node name="YellowBrickSlopeLeft" type="Node" parent="PlaceableItems/BricksGroup"]
+[node name="YellowBrickSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 3 )
 tileset_id = 5
 tile_id = 2
@@ -1588,6 +1592,41 @@ items_in_sequence = 3
 index_in_sequence = 1
 icon = ExtResource( 87 )
 preview = ExtResource( 87 )
+
+[node name="RedGemBlock" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 3 )
+tileset_id = 11
+change_to = "YellowGemBlock"
+items_in_sequence = 4
+icon = ExtResource( 170 )
+preview = ExtResource( 170 )
+
+[node name="YellowGemBlock" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 3 )
+tileset_id = 12
+change_to = "GreenGemBlock"
+items_in_sequence = 4
+index_in_sequence = 1
+icon = ExtResource( 172 )
+preview = ExtResource( 172 )
+
+[node name="GreenGemBlock" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 3 )
+tileset_id = 13
+change_to = "BlueGemBlock"
+items_in_sequence = 4
+index_in_sequence = 2
+icon = ExtResource( 173 )
+preview = ExtResource( 173 )
+
+[node name="BlueGemBlock" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 3 )
+tileset_id = 14
+change_to = "RedGemBlock"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 171 )
+preview = ExtResource( 171 )
 
 [node name="CaveGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
