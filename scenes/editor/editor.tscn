@@ -1,4 +1,4 @@
-[gd_scene load_steps=201 format=2]
+[gd_scene load_steps=207 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -173,6 +173,12 @@
 [ext_resource path="res://assets/tiles/blue_gem_block/icon.png" type="Texture" id=171]
 [ext_resource path="res://assets/tiles/yellow_gem_block/icon.png" type="Texture" id=172]
 [ext_resource path="res://assets/tiles/green_gem_block/icon.png" type="Texture" id=173]
+[ext_resource path="res://scenes/actors/objects/arrow/arrow.png" type="Texture" id=174]
+[ext_resource path="res://scenes/actors/objects/arrow/preview.png" type="Texture" id=175]
+[ext_resource path="res://scenes/actors/objects/cave_tree/preview.png" type="Texture" id=176]
+[ext_resource path="res://scenes/actors/objects/cave_tree/icon.png" type="Texture" id=177]
+[ext_resource path="res://scenes/actors/objects/vanish_passthrough_block/vanish_passthrough_block.png" type="Texture" id=178]
+[ext_resource path="res://scenes/actors/objects/vanish_passthrough_block/icon.png" type="Texture" id=179]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1389,8 +1395,8 @@ script = ExtResource( 3 )
 object_id = 44
 is_object = true
 object_center = Vector2( 16, 16 )
-icon = ExtResource( 140 )
-preview = ExtResource( 141 )
+icon = ExtResource( 179 )
+preview = ExtResource( 178 )
 
 [node name="MetalPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
@@ -1475,6 +1481,16 @@ tile_mode_step = 64
 z_index = -8
 icon = ExtResource( 156 )
 preview = ExtResource( 157 )
+
+[node name="Arrow" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 53
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+z_index = 2
+icon = ExtResource( 175 )
+preview = ExtResource( 174 )
 
 [node name="BuildingGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
@@ -1628,6 +1644,26 @@ index_in_sequence = 3
 icon = ExtResource( 171 )
 preview = ExtResource( 171 )
 
+[node name="MetalPlatform" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 3 )
+object_id = 3
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+icon = ExtResource( 42 )
+preview = ExtResource( 43 )
+
+[node name="PearlPlatform" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 3 )
+object_id = 51
+is_object = true
+object_center = Vector2( 16, 0 )
+tile_mode_offset = Vector2( 0, -16 )
+z_index = -1
+icon = ExtResource( 160 )
+preview = ExtResource( 159 )
+
 [node name="CaveGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
 color = Color( 0.254902, 0.121569, 0.517647, 1 )
@@ -1650,6 +1686,16 @@ items_in_sequence = 2
 index_in_sequence = 1
 icon = ExtResource( 135 )
 preview = ExtResource( 135 )
+
+[node name="CaveTree" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 3 )
+object_id = 54
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+z_index = -9
+icon = ExtResource( 177 )
+preview = ExtResource( 176 )
 
 [node name="EnemiesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
@@ -1818,16 +1864,6 @@ z_index = -1
 icon = ExtResource( 78 )
 preview = ExtResource( 77 )
 
-[node name="MetalPlatform" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
-object_id = 3
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-icon = ExtResource( 42 )
-preview = ExtResource( 43 )
-
 [node name="BonePlatform" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 3 )
 object_id = 13
@@ -1837,16 +1873,6 @@ tile_mode_offset = Vector2( 0, -16 )
 z_index = -1
 icon = ExtResource( 84 )
 preview = ExtResource( 83 )
-
-[node name="PearlPlatform" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
-object_id = 51
-is_object = true
-object_center = Vector2( 16, 0 )
-tile_mode_offset = Vector2( 0, -16 )
-z_index = -1
-icon = ExtResource( 160 )
-preview = ExtResource( 159 )
 
 [node name="CloudPlatform" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 3 )
