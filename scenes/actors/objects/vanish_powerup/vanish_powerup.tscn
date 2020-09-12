@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/actors/objects/vanish_powerup/texture.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/vanish_powerup/vanish_powerup.gd" type="Script" id=3]
-[ext_resource path="res://scenes/actors/mario/particles/recolorable_sparkles.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/mario/particles/metal_sparkles.png" type="Texture" id=4]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 particles_animation = true
@@ -176,7 +176,6 @@ tracks/3/keys = {
 script = ExtResource( 3 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-modulate = Color( 1, 0.984314, 0.870588, 1 )
 material = SubResource( 1 )
 amount = 14
 process_material = SubResource( 2 )
@@ -184,7 +183,7 @@ texture = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 12 )
-frame = 8
+frame = 7
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
