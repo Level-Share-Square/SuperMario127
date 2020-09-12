@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Shine2.wav-eb38c9e90e228f777df8acb374da789b.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_luigi/Shine2.wav"
+dest_files=[ "res://.import/Shine2.wav-eb38c9e90e228f777df8acb374da789b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
