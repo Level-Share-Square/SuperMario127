@@ -1,4 +1,4 @@
-[gd_scene load_steps=209 format=2]
+[gd_scene load_steps=210 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -181,6 +181,7 @@
 [ext_resource path="res://scenes/actors/objects/vanish_passthrough_block/icon.png" type="Texture" id=179]
 [ext_resource path="res://scenes/actors/objects/large_cave_tree/icon.png" type="Texture" id=180]
 [ext_resource path="res://scenes/actors/objects/large_cave_tree/preview.png" type="Texture" id=181]
+[ext_resource path="res://scenes/actors/objects/metal_powerup/icon.png" type="Texture" id=182]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1407,8 +1408,8 @@ is_object = true
 object_center = Vector2( 16, 16 )
 change_to = "VanishPowerup"
 items_in_sequence = 3
-icon = ExtResource( 17 )
-preview = ExtResource( 16 )
+icon = ExtResource( 182 )
+preview = ExtResource( 182 )
 
 [node name="VanishPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )

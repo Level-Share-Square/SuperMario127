@@ -32,7 +32,7 @@ func update_preview():
 	preview_foreground.texture = foreground_resource.preview
 	preview_foreground.modulate = background_resource.parallax_modulate
 	
-	backgrounds_node.update_background(area)
+	backgrounds_node.update_background(area.settings.sky, area.settings.background, area.settings.bounds)
 	pass
 
 func _ready():
