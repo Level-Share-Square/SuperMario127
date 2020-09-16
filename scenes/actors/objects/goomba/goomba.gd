@@ -144,14 +144,12 @@ func _physics_process(delta : float) -> void:
 			raycast.set_collision_mask_bit(4, platform_collision_enabled)
 		
 		if is_instance_valid(kinematic_body):
-			var level_bounds : Rect2 = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds
-			
 			if !hit:
-				physics_process_normal(delta, level_bounds, is_in_platform)
+				physics_process_normal(delta, is_in_platform)
 			else:
-				physics_process_hit(delta, level_bounds, is_in_platform)
+				physics_process_hit(delta, is_in_platform)
 
-func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform : bool) -> void:
+func physics_process_normal(delta: float, is_in_platform: bool) -> void:
 	if !is_instance_valid(character):
 		# Walk around randomly
 		if walk_wait > 0:
@@ -223,7 +221,7 @@ func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform 
 	velocity.y += gravity
 	velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
 
-func physics_process_hit(delta : float, level_bounds : Rect2, is_in_platform : bool) -> void:
+func physics_process_hit(delta: float, is_in_platform: bool) -> void:
 	# Super professional timer technology
 	if hide_timer > 0:
 		hide_timer -= delta

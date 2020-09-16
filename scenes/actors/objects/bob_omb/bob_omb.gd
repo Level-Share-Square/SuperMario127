@@ -127,8 +127,6 @@ func _physics_process(delta):
 			delete_timer = 0
 			queue_free()
 	
-	var level_bounds = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds
-	
 	if damage_timer > 0:
 		damage_timer -= delta
 		fuse_sound_2.playing = false
