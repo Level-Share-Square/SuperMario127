@@ -778,10 +778,10 @@ func get_input(input_id : int, is_just_pressed : bool) -> bool:
 func update_inputs() -> void:
 	if controlled_locally:
 		if controllable and !FocusCheck.is_ui_focused:
-			#var control_id = player_id seemingly unused variable, uncomment if needed
+			var control_id := player_id
 			for input in inputs:
-				input[0] = Input.is_action_pressed(input[2] + str(character))
-				input[1] = Input.is_action_just_pressed(input[2] + str(character))
+				input[0] = Input.is_action_pressed(input[2] + str(control_id))
+				input[1] = Input.is_action_just_pressed(input[2] + str(control_id))
 		else:
 			for input in inputs:
 				input[0] = false
