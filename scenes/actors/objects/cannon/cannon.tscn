@@ -282,6 +282,10 @@ anims/cannon_startup = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="Timer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.25
+
 [node name="CannonMoveable" type="Node2D" parent="."]
 position = Vector2( 0, 30 )
 
@@ -299,11 +303,13 @@ script = ExtResource( 3 )
 [node name="CannonExitPosition" type="Position2D" parent="CannonMoveable/SpriteBodyReverser/SpriteBody"]
 position = Vector2( 0, -39 )
 
+[node name="CameraFocus" type="Position2D" parent="CannonMoveable/SpriteBodyReverser/SpriteBody"]
+position = Vector2( 0, -180 )
+
 [node name="SpriteFuse" type="AnimatedSprite" parent="CannonMoveable/SpriteBodyReverser/SpriteBody"]
 visible = false
 position = Vector2( -0.583315, 23.0744 )
 frames = SubResource( 7 )
-frame = 1
 playing = true
 
 [node name="Particles2D" type="Particles2D" parent="CannonMoveable/SpriteBodyReverser/SpriteBody"]
@@ -323,6 +329,9 @@ position = Vector2( 0, -19 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 97, 40, 32, 24 )
+
+[node name="CameraFocusStartup" type="Position2D" parent="CannonMoveable"]
+position = Vector2( 0, -40 )
 
 [node name="SpriteRing" type="Sprite" parent="."]
 position = Vector2( 0, -4 )

@@ -4,23 +4,24 @@ onready var parallax_node = $Parallax
 onready var background_node = $Background/Sprite
 
 var ready = false
+var do_auto_scroll = false
 
 func _ready():
 	ready = true
 
 func load_in(_level_data : LevelData, level_area : LevelArea):
-	update_background(level_area)
+	update_background(level_area.settings.sky, level_area.settings.background, level_area.settings.bounds)
 
-func update_background(area):
+func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rect2(0, 0, 0, 0), extra_y_offset : float = 0):
 	if !ready:
 		yield(self,"ready")
 	#warning-ignore:unused_variable
 	var background_id_mapper = preload("res://scenes/shared/background/backgrounds/ids.tres")
-	var background_resource = CurrentLevelData.background_cache[area.settings.sky]
+	var background_resource = CurrentLevelData.background_cache[sky]
 	
 	#warning-ignore:unused_variable
 	var foreground_id_mapper = preload("res://scenes/shared/background/foregrounds/ids.tres")
-	var foreground_resource = CurrentLevelData.foreground_cache[area.settings.background]
+	var foreground_resource = CurrentLevelData.foreground_cache[background]
 	
 	background_node.texture = background_resource.texture
 	
@@ -41,4 +42,10 @@ func update_background(area):
 		
 		parallax_layer.add_child(sprite_instance)
 		parallax_node.add_child(parallax_layer)
-		parallax_node.scroll_base_offset.y = (area.settings.bounds.end.y * 32) - 640
+		parallax_node.scroll_base_offset.y = (bounds.end.y * 32) - 640
+		
+		parallax_node.offset.y += extra_y_offset
+
+func _physics_process(delta):
+	if do_auto_scroll:
+		parallax_node.scroll_offset.x += delta * 250

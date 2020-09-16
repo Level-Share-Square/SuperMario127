@@ -6,11 +6,14 @@ onready var pipe_enter_logic : Node2D = $PipeEnterLogic
 onready var cannon_exit_position : Position2D = $CannonMoveable/SpriteBodyReverser/SpriteBody/CannonExitPosition
 onready var entrance_collision : StaticBody2D = $EntranceCollision
 onready var cannon_moveable : Node2D = $CannonMoveable
+onready var cannon_camera_startup_focus = $CannonMoveable/CameraFocusStartup
+onready var cannon_camera_focus : Position2D = $CannonMoveable/SpriteBodyReverser/SpriteBody/CameraFocus
 onready var sprite_body : Sprite = $CannonMoveable/SpriteBodyReverser/SpriteBody
 onready var sprite_body_reverser : Node2D = $CannonMoveable/SpriteBodyReverser
 onready var sprite_fuse : AnimatedSprite = $CannonMoveable/SpriteBodyReverser/SpriteBody/SpriteFuse
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var tween : Tween = $Tween 
+onready var timer : Timer = $Timer
 onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
 onready var particles : Particles2D = $CannonMoveable/SpriteBodyReverser/SpriteBody/Particles2D
 onready var nearby_character_detection : Area2D = $NearbyCharacterDetection
@@ -105,6 +108,7 @@ func _physics_process(delta : float) -> void:
 # called by a signal when the pipe enter animation finished
 func _start_cannon_animation(character : Character) -> void:
 	stored_character = character 
+	stored_character.camera.focus_on = cannon_camera_startup_focus
 
 	cannon_moveable.z_index = Z_INDEX_BACKGROUND
 	
@@ -115,6 +119,7 @@ func _start_cannon_animation(character : Character) -> void:
 
 func _on_animation_finished(anim_name : String) -> void:
 	if anim_name == "cannon_startup":
+		stored_character.camera.focus_on = cannon_camera_focus
 		stored_character.controllable = true
 		stored_character.set_state_by_name("NoActionState", get_physics_process_delta_time())
 		
@@ -157,6 +162,16 @@ func fire_cannon() -> void:
 	
 	#cannon fire particles 
 	particles.emitting = true
+	
+	#start timer to return the camera
+	timer.start()
+	timer.connect("timeout", self, "return_camera_focus", [], CONNECT_ONESHOT)
+
+func return_camera_focus() -> void:
+	stored_character.camera.focus_on = null
+	# "unfocusing" is a property that makes the camera return to the player smoothly rather than using normal speed lerping
+	# we don't want that to happen here (too slow) so we set it to false
+	stored_character.camera.unfocusing = false
 
 #used to re-enable the entrance collision only when a player exits the vicinity
 func _on_NearbyCharacterDetection_body_exited(body : PhysicsBody2D) -> void:

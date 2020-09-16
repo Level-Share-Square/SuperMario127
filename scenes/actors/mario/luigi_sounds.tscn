@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -37,6 +37,8 @@
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Powerup1.wav" type="AudioStream" id=35]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Powerup3.wav" type="AudioStream" id=36]
 [ext_resource path="res://scenes/actors/mario/sounds_misc/powerup.wav" type="AudioStream" id=37]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Shine2.wav" type="AudioStream" id=38]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Shine1.wav" type="AudioStream" id=39]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 2 )
@@ -179,9 +181,13 @@ bus = "Voices"
 script = ExtResource( 1 )
 sound_number = 1
 
-[node name="Step3" type="AudioStreamPlayer" parent="ShineSounds"]
-stream = ExtResource( 26 )
-volume_db = -7.5
+[node name="Shine1" type="AudioStreamPlayer" parent="ShineSounds"]
+stream = ExtResource( 39 )
+volume_db = 3.5
+
+[node name="Shine2" type="AudioStreamPlayer" parent="ShineSounds"]
+stream = ExtResource( 38 )
+volume_db = 4.5
 
 [node name="Footsteps" type="Node" parent="."]
 

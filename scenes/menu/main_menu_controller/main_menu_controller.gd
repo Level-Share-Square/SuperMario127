@@ -15,13 +15,36 @@ onready var main_menu_screen : Screen = $InactiveScreens/MainMenuScreen
 onready var levels_screen : Screen = $InactiveScreens/LevelsScreen
 onready var shine_select_screen : Screen = $InactiveScreens/ShineSelectScreen
 
+# other
+onready var backgrounds : Node2D = $Background/Backgrounds
+
 # this is basically a constant, except we can't store a reference to a child node in a constant, shame there's no readonly modifier
 onready var default_screen = splash_screen
 
 var current_screen : Screen
 var previous_screen : Screen
 
+var possible_backgrounds = [
+	1,
+	2,
+	4
+]
+
+var possible_parallax = [
+	1,
+	2,
+	3
+]
+
 func _ready() -> void:
+	randomize()
+	
+	var picked_background = possible_backgrounds[randi() % possible_backgrounds.size()]
+	var picked_parallax = possible_parallax[randi() % possible_parallax.size()]
+	
+	backgrounds.update_background(picked_background, picked_parallax, Rect2(0, 0, 24, 14), 96)
+	backgrounds.do_auto_scroll = true
+	
 	for screen in inactive_screens.get_children():
 		var _connect = screen.connect("screen_change", self, "start_changing_screens")
 
