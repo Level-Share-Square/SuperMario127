@@ -10,6 +10,7 @@ onready var left_check = $Koopa/Left
 onready var right_check = $Koopa/Right
 onready var koopa_sound = $Koopa/AudioStreamPlayer
 onready var visibility_notifier = $Koopa/VisibilityNotifier2D
+var shared : Node2D
 
 onready var body = $Koopa
 func body_exists(): # Might as well be body.exists()
@@ -154,7 +155,9 @@ func _process(_delta):
 
 func _physics_process(delta):
 	if is_queued_for_deletion():
+		print("this has been hit??")
 		return # Prevent crashes
+	shared = get_parent().get_parent() # koopa -> objects -> shared
 	
 	time_alive += delta
 	
@@ -177,21 +180,13 @@ func _physics_process(delta):
 			shell_sprite.rotation_degrees += 2
 			velocity.y += gravity
 			shell.position += velocity * delta
-			# Delete if off screen
-			if shell.global_position.y > (level_bounds.end.y * 32) + 128:
-				queue_free()
-				return
 		
 		# Delete Koopa if the shell exists already
 		if is_instance_valid(shell) and body_exists():
 			body.queue_free()
+			body = null
 
 func physics_process_shell(delta, level_bounds):
-	# If off screen, delete & no need to do anything else
-	if shell.global_position.y > (level_bounds.end.y * 32) + 128:
-		queue_free()
-		return
-	
 	# Check the attack hitbox
 	for hit_body in shell_attack_area.get_overlapping_bodies():
 		if hit_body.name.begins_with("Character"):
@@ -237,12 +232,6 @@ func physics_process_shell(delta, level_bounds):
 	if shell.test_move(shell.global_transform, Vector2(velocity.x * delta, 0)):
 		velocity.x = -velocity.x
 	
-	# If it went off screen, delete
-	if (shell.global_position.x < (level_bounds.position.x * 32) - 64 or 
-		shell.global_position.x > (level_bounds.end.x * 32) + 64        ):
-		queue_free()
-		return
-	
 	shell.set_collision_layer_bit(2, abs(velocity.x) <= 15)
 	
 	# Sliding on the ground
@@ -261,11 +250,6 @@ func physics_process_shell(delta, level_bounds):
 	velocity = shell.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
 
 func physics_process_koopa(delta, level_bounds):
-	# If off screen, delete & no need to do anything else
-	if body.global_position.y > (level_bounds.end.y * 32) + 128:
-		queue_free()
-		return
-	
 	# Check the stomp hitbox first (to prevent overlaps from causing issues)
 	for hit_body in stomp_area.get_overlapping_bodies():
 		if hit_body.name.begins_with("Character"):

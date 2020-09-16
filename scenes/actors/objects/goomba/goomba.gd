@@ -16,6 +16,7 @@ onready var hit_sound : AudioStreamPlayer = $Goomba/Hit
 onready var anim_player : AnimationPlayer = $Goomba/AnimationPlayer
 onready var bottom_pos : Node2D = $Goomba/BottomPos
 onready var raycasts := [wall_check, wall_vacant_check, pit_check]
+var shared : Node2D
 var dead := false
 
 var gravity : float
@@ -126,6 +127,7 @@ func _process(_delta) -> void:
 		sprite.frame = wrapi(OS.get_ticks_msec() / 166, 0, 4)
 
 func _physics_process(delta : float) -> void:
+	shared = get_parent().get_parent() # goomba -> objects -> shared
 	time_alive += delta
 	
 	if mode != 1 and enabled and loaded:
@@ -150,9 +152,6 @@ func _physics_process(delta : float) -> void:
 				physics_process_hit(delta, level_bounds, is_in_platform)
 
 func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform : bool) -> void:
-	if kinematic_body.global_position.y > (level_bounds.end.y * 32) + 128:
-		queue_free()
-	
 	if !is_instance_valid(character):
 		# Walk around randomly
 		if walk_wait > 0:
@@ -179,10 +178,6 @@ func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform 
 		facing_direction = sign(character.global_position.x - kinematic_body.global_position.x)
 		velocity.x = lerp(velocity.x, facing_direction * run_speed, delta * accel)
 	
-	# Die when out of bounds
-	if (kinematic_body.global_position.x < (level_bounds.position.x * 32) -64 or 
-		kinematic_body.global_position.x > (level_bounds.end.x * 32) + 64):
-		queue_free()
 	sprite.flip_h = true if facing_direction == 1 else false
 	
 	# Ground collision
@@ -229,9 +224,6 @@ func physics_process_normal(delta : float, level_bounds : Rect2, is_in_platform 
 	velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
 
 func physics_process_hit(delta : float, level_bounds : Rect2, is_in_platform : bool) -> void:
-	if kinematic_body.global_position.y > (level_bounds.end.y * 32) + 128:
-		queue_free()
-	
 	# Super professional timer technology
 	if hide_timer > 0:
 		hide_timer -= delta
@@ -248,6 +240,7 @@ func physics_process_hit(delta : float, level_bounds : Rect2, is_in_platform : b
 		if delete_timer <= 0:
 			delete_timer = 0
 			queue_free()
+			return
 	
 	if was_stomped:
 		# Mario stomped on him
