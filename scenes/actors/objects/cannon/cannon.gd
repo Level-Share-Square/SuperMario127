@@ -165,7 +165,7 @@ func fire_cannon() -> void:
 	
 	#start timer to return the camera
 	timer.start()
-	timer.connect("timeout", self, "return_camera_focus", [], CONNECT_ONESHOT)
+	var _connect = timer.connect("timeout", self, "return_camera_focus", [], CONNECT_ONESHOT)
 
 func return_camera_focus() -> void:
 	stored_character.camera.focus_on = null
