@@ -84,6 +84,9 @@ func delete_wings():
 	sprite_color.frames = normal_color_sprite
 
 func retract_into_shell():
+	if is_instance_valid(shell):
+		return
+	
 	shell = MiscCache.shell_scene.instance()
 	shell_sprite = shell.get_node("Sprite")
 	shell_sprite_color = shell_sprite.get_node("Color")
@@ -186,7 +189,7 @@ func _physics_process(delta):
 			body.queue_free()
 			body = null
 
-func physics_process_shell(delta, level_bounds):
+func physics_process_shell(delta, _level_bounds):
 	# Check the attack hitbox
 	for hit_body in shell_attack_area.get_overlapping_bodies():
 		if hit_body.name.begins_with("Character"):
