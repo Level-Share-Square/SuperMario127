@@ -88,10 +88,4 @@ func _physics_process(delta):
 		update_limits(CurrentLevelData.level_data.areas[CurrentLevelData.area])
 
 func _ready():
-	# warning-ignore:return_value_discarded
-	get_tree().get_root().connect("size_changed", self, "resize")
 	default_height = get_viewport_rect().size.y
-
-#added since the method the signal is connected to didn't exist, either the signal should be removed or behavior should be added
-func resize():
-	pass
