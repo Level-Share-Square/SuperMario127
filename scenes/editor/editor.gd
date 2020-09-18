@@ -234,7 +234,7 @@ func update_selected_object(mouse_pos : Vector2) -> void:
 		if objects.size() > 0 and placement_mode != "Tile":
 			if hovered_object != objects[0]:
 				# If something was already hovered, mark it as not
-				if hovered_object != null:
+				if is_instance_valid(hovered_object):
 					hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
 					hovered_object.hovered = false
 				

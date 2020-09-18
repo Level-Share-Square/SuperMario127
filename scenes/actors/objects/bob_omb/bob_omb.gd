@@ -105,9 +105,9 @@ func shell_hit(shell_pos : Vector2):
 	character = 0 # hacker chungus
 
 func _physics_process(delta):
-	if(mode==1):
+	if mode == 1:
 		return
-		
+	
 	var is_in_platform = false
 	var platform_collision_enabled = false
 	for platform_body in platform_detector.get_overlapping_areas():
@@ -126,11 +126,7 @@ func _physics_process(delta):
 		if delete_timer <= 0:
 			delete_timer = 0
 			queue_free()
-			
-	var level_bounds = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds
-	if kinematic_body.global_position.y > (level_bounds.end.y * 32) + 128:
-		queue_free()
-			
+	
 	if damage_timer > 0:
 		damage_timer -= delta
 		fuse_sound_2.playing = false
@@ -198,11 +194,6 @@ func _physics_process(delta):
 				if walk_timer <= 0:
 					walk_timer = 0
 					walk_wait = 3.0
-			if (
-				kinematic_body.global_position.x < (level_bounds.position.x * 32)-64 or 
-				kinematic_body.global_position.x > (level_bounds.end.x * 32) + 64
-			):
-				queue_free()
 		else:
 			if explode_timer > 0:
 				explode_timer -= delta
