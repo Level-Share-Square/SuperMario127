@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scenes/menu/levels_screen/levels_screen.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -7,16 +7,13 @@
 [ext_resource path="res://assets/styles/RedButtonStyleNormal.tres" type="StyleBox" id=5]
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=6]
 [ext_resource path="res://scenes/menu/levels_screen/ui/shine_icon.png" type="Texture" id=7]
-[ext_resource path="res://assets/styles/BrightRedButtonStyleNormal.tres" type="StyleBox" id=8]
 [ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=9]
-[ext_resource path="res://assets/styles/BrightRedButtonStyleHover.tres" type="StyleBox" id=10]
 [ext_resource path="res://scenes/shared/background/foregrounds/hills/preview.png" type="Texture" id=11]
 [ext_resource path="res://scenes/menu/levels_screen/ui/coin_icon.png" type="Texture" id=12]
 [ext_resource path="res://scenes/menu/levels_screen/ui/star_coin_icon.png" type="Texture" id=13]
 [ext_resource path="res://scenes/menu/levels_screen/ui/time_icon.png" type="Texture" id=14]
 [ext_resource path="res://scenes/menu/levels_screen/transition_sound.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/styles/BrightButtonStyleNormal.tres" type="StyleBox" id=16]
-[ext_resource path="res://assets/styles/BrightButtonStyleHover.tres" type="StyleBox" id=17]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 8.0
@@ -441,10 +438,10 @@ margin_right = 77.0
 margin_bottom = 40.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 8 )
-custom_styles/focus = ExtResource( 10 )
-custom_styles/normal = ExtResource( 8 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
 custom_fonts/font = SubResource( 12 )
 text = "Back"
 
@@ -453,10 +450,6 @@ margin_left = 81.0
 margin_right = 154.0
 margin_bottom = 40.0
 size_flags_horizontal = 8
-custom_styles/hover = ExtResource( 17 )
-custom_styles/pressed = ExtResource( 16 )
-custom_styles/focus = ExtResource( 17 )
-custom_styles/normal = ExtResource( 16 )
 custom_fonts/font = SubResource( 12 )
 text = "Add"
 
@@ -465,10 +458,6 @@ margin_left = 158.0
 margin_right = 343.0
 margin_bottom = 40.0
 size_flags_horizontal = 11
-custom_styles/hover = ExtResource( 17 )
-custom_styles/pressed = ExtResource( 16 )
-custom_styles/focus = ExtResource( 17 )
-custom_styles/normal = ExtResource( 16 )
 custom_fonts/font = SubResource( 13 )
 text = "Copy Level Code"
 
@@ -709,10 +698,6 @@ size_flags_vertical = 8
 margin_right = 74.0
 margin_bottom = 40.0
 size_flags_horizontal = 10
-custom_styles/hover = ExtResource( 17 )
-custom_styles/pressed = ExtResource( 16 )
-custom_styles/focus = ExtResource( 17 )
-custom_styles/normal = ExtResource( 16 )
 custom_fonts/font = SubResource( 12 )
 text = "Play"
 
@@ -721,10 +706,7 @@ margin_left = 78.0
 margin_right = 152.0
 margin_bottom = 40.0
 size_flags_horizontal = 0
-custom_styles/hover = ExtResource( 17 )
 custom_styles/pressed = ExtResource( 16 )
-custom_styles/focus = ExtResource( 17 )
-custom_styles/normal = ExtResource( 16 )
 custom_fonts/font = SubResource( 12 )
 text = "Edit"
 
@@ -734,10 +716,10 @@ margin_right = 246.0
 margin_bottom = 40.0
 size_flags_horizontal = 2
 size_flags_vertical = 8
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 8 )
-custom_styles/focus = ExtResource( 10 )
-custom_styles/normal = ExtResource( 8 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
 custom_fonts/font = SubResource( 12 )
 text = "Reset"
 
@@ -748,10 +730,10 @@ margin_right = 343.0
 margin_bottom = 40.0
 size_flags_horizontal = 2
 size_flags_vertical = 8
-custom_styles/hover = ExtResource( 10 )
-custom_styles/pressed = ExtResource( 8 )
-custom_styles/focus = ExtResource( 10 )
-custom_styles/normal = ExtResource( 8 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
 custom_fonts/font = SubResource( 19 )
 text = "Delete"
 
