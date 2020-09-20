@@ -32,3 +32,4 @@ range_item_cull_mask = 2
 
 [node name="TransitionAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -6.0

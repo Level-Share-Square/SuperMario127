@@ -29,7 +29,7 @@ const UNPAUSE_TIMER_LENGTH = 3.35
 
 const COURSE_CLEAR_MUSIC_ID := 28
 const COURSE_CLEAR_MUSIC_VOLUME := -2.25
-const SHINE_DANCE_END_DELAY := 1.25
+const SHINE_DANCE_END_DELAY := 0.65
 const MUSIC_TRANSITION_TIME_PLAY_MODE := 0.5
 
 var collected := false
@@ -233,19 +233,21 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 	# delay a bit once the animation is done before starting the fadeout/transition back to the editor
 	yield(get_tree().create_timer(SHINE_DANCE_END_DELAY), "timeout") 
 	
-	music.volume_multiplier = 1 #we set it to 0 so it'd be silent while falling with the shine
-	
 	#bus is changed based on whether or not you are in the player, or editor, this makes sure music 
 	#fades to the correct volume in both situations
 	if do_kick_out:
 		if mode_switcher_button.invisible: #if not running through the editor, play the transition
-			music.bus = music.play_bus 
-			music.stop_temporary_music(1, MUSIC_TRANSITION_TIME_PLAY_MODE)
-			MenuVariables.quit_to_menu("levels_screen")
-			#transitions.reload_scene(character.cutout_shine, character.cutout_circle, transitions.DEFAULT_TRANSITION_TIME, 0, true)
-		else:
-			music.bus = music.edit_bus
-			music.stop_temporary_music()
+			var _connect = scene_transitions.connect("transition_finished", MenuVariables, "quit_to_menu", ["levels_screen"], CONNECT_ONESHOT)
+			scene_transitions.do_transition_animation(
+				character.cutout_shine, 
+				scene_transitions.DEFAULT_TRANSITION_TIME, 
+				scene_transitions.TRANSITION_SCALE_UNCOVER, 
+				scene_transitions.TRANSITION_SCALE_COVERED,
+				0,
+				0,
+				true,
+				false
+			)
 
 			#mode switching is disabled on collecting the shine so the player can't cancel the animation (causes glitches)
 			mode_switcher_button.switching_disabled = false 

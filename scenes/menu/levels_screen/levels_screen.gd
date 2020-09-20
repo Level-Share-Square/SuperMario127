@@ -200,6 +200,9 @@ func start_level(start_in_edit_mode : bool):
 	if selected_level == NO_LEVEL:
 		return #at some point the buttons should be disabled when you don't have a level selected, keep this failsafe anyway though
 	
+	# so you aren't able to press the button while it's transitioning
+	can_interact = false
+	
 	var level_info = SavedLevels.levels[selected_level]
 	CurrentLevelData.level_data = level_info.level_data
 
@@ -220,7 +223,8 @@ func start_level(start_in_edit_mode : bool):
 	# use the first fire of the transition_finished signal to change the scene when the screen finishes transitioning out
 	var goal_scene = EDITOR_SCENE if start_in_edit_mode else PLAYER_SCENE
 	var _connect = scene_transitions.connect("transition_finished", get_tree(), "change_scene_to", [goal_scene], CONNECT_ONESHOT)
-
+	
+	scene_transitions.play_transition_audio()
 	scene_transitions.do_transition_fade(scene_transitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))
 
 func set_level_code_panel(new_value : bool):
@@ -288,9 +292,13 @@ func on_button_copy_code_pressed() -> void:
 	OS.clipboard = SavedLevels.levels[selected_level].level_code
 		
 func on_button_play_pressed() -> void:
+	if !can_interact:
+		return
 	start_level(false)
 
 func on_button_edit_pressed() -> void:
+	if !can_interact:
+		return
 	start_level(true)
 
 func on_button_delete_pressed() -> void:

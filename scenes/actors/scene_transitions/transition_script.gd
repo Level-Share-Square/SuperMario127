@@ -53,7 +53,7 @@ func do_transition_fade(transition_time : float = DEFAULT_TRANSITION_TIME, start
 	else:
 		transitioning = false
 
-func do_transition_animation(transition_texture : StreamTexture = cutout_circle, transition_time : float = DEFAULT_TRANSITION_TIME, texture_scale_start : float = TRANSITION_SCALE_UNCOVER, texture_scale_end : float = TRANSITION_SCALE_COVERED, volume_start : float = -1, volume_end : float = -1, reverse_after : bool = true):
+func do_transition_animation(transition_texture : StreamTexture = cutout_circle, transition_time : float = DEFAULT_TRANSITION_TIME, texture_scale_start : float = TRANSITION_SCALE_UNCOVER, texture_scale_end : float = TRANSITION_SCALE_COVERED, volume_start : float = -1, volume_end : float = -1, reverse_after : bool = true, stop_temp_music : bool = true):
 	canvas_background.color = Color(0, 0, 0, 1)
 	transitioning = true
 	
@@ -62,11 +62,13 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 	if volume_end == -1:
 		volume_end = music.volume_multiplier
 	
-	music.stop_temporary_music()
+	if stop_temp_music:
+		music.stop_temporary_music()
 	
 	canvas_background.visible = true
 	
 	canvas_mask.texture = transition_texture
+	canvas_mask.texture_scale = texture_scale_start
 	
 	# if the start scale is greater, then the screen is transitioning to black
 	var to_black = texture_scale_start > texture_scale_end
@@ -81,7 +83,7 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 	emit_signal("transition_finished")
 	
 	if reverse_after:
-		do_transition_animation(cutout_circle, transition_time, texture_scale_end, texture_scale_start, volume_end, volume_start, false)
+		do_transition_animation(cutout_circle, transition_time, texture_scale_end, texture_scale_start, volume_end, volume_start, false, true)
 	else:
 		transitioning = false
 		canvas_mask.position = Vector2(384, 216) # Reset it, in case a script has modified it before playing the animation

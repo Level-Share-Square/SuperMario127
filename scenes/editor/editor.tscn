@@ -1,4 +1,4 @@
-[gd_scene load_steps=210 format=2]
+[gd_scene load_steps=212 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -182,6 +182,8 @@
 [ext_resource path="res://scenes/actors/objects/large_cave_tree/icon.png" type="Texture" id=180]
 [ext_resource path="res://scenes/actors/objects/large_cave_tree/preview.png" type="Texture" id=181]
 [ext_resource path="res://scenes/actors/objects/metal_powerup/icon.png" type="Texture" id=182]
+[ext_resource path="res://scenes/actors/objects/wood_platform/icon.png" type="Texture" id=183]
+[ext_resource path="res://scenes/actors/objects/wood_platform/preview.png" type="Texture" id=184]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1891,6 +1893,17 @@ tile_mode_offset = Vector2( 0, -16 )
 z_index = -1
 icon = ExtResource( 84 )
 preview = ExtResource( 83 )
+
+[node name="WoodPlatform" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 56
+is_object = true
+object_center = Vector2( 64, 0 )
+tile_mode_offset = Vector2( 32, -32 )
+tile_mode_step = 64
+z_index = -1
+icon = ExtResource( 183 )
+preview = ExtResource( 184 )
 
 [node name="CloudPlatform" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 3 )

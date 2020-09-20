@@ -193,7 +193,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=22]
 length = 2.25
 tracks/0/type = "method"
 tracks/0/path = NodePath("TransitionAudio")
@@ -222,50 +222,34 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=22]
-resource_name = "trans_in_ShineSelectScreen_LevelsScreen"
+[sub_resource type="Animation" id=23]
 length = 1.2
-tracks/0/type = "method"
-tracks/0/path = NodePath("TransitionAudio")
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransitionRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ 0.0 ],
-"method": "play"
-} ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("TransitionRect:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 1.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("TransitionRect:mouse_filter")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/path = NodePath("TransitionRect:mouse_filter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 2 ]
 }
 
-[sub_resource type="Animation" id=23]
-resource_name = "trans_out_LevelsScreen_ShineSelectScreen"
+[sub_resource type="Animation" id=24]
 tracks/0/type = "method"
 tracks/0/path = NodePath("TransitionAudio")
 tracks/0/interp = 1
@@ -287,7 +271,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 0.75 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
@@ -799,9 +783,9 @@ text = "Close"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 20 )
-anims/trans_edit = SubResource( 21 )
-anims/trans_in_ShineSelectScreen_LevelsScreen = SubResource( 22 )
-anims/trans_out_LevelsScreen_ShineSelectScreen = SubResource( 23 )
+anims/trans_edit = SubResource( 22 )
+anims/trans_in_ShineSelectScreen_LevelsScreen = SubResource( 23 )
+anims/trans_out_LevelsScreen_ShineSelectScreen = SubResource( 24 )
 
 [node name="TransitionRect" type="ColorRect" parent="."]
 anchor_right = 1.0
