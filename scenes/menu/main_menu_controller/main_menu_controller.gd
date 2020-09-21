@@ -32,7 +32,6 @@ var possible_backgrounds = [
 
 var possible_parallax = [
 	1,
-	2,
 	3
 ]
 

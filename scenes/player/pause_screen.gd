@@ -46,11 +46,6 @@ func _ready():
 	set_process(false)
 
 	update_shine_info()
-	update_time_display()
-
-# process is only enabled while paused
-func _process(_delta):
-	update_time_display()
 
 func _unhandled_input(event):
 	if CurrentLevelData.can_pause and event.is_action_pressed("pause") and !(character_node.dead or (PlayerSettings.number_of_players != 1 and character2_node.dead)):
@@ -167,7 +162,3 @@ func update_shine_info():
 	level_name_backing.text = level_info.level_name
 	shine_description.bbcode_text = "[center]%s[/center]" % selected_shine_info["description"] 
 	shine_name.bbcode_text = "[center]%s[/center]" % selected_shine_info["title"]
-
-func update_time_display():
-	shine_info.get_node("TimeScore").text = LevelInfo.generate_time_string(CurrentLevelData.time_score)
-

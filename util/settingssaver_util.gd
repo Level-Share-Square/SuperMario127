@@ -19,6 +19,8 @@ static func load():
 	if data != null:
 		Engine.target_fps = 10 * (data["fpsLock"] + 3)
 		ScreenSizeUtil.set_screen_size(data["windowScale"])
+		if data.size() > 3:
+			TimeScore.shown = data["showTimer"]
 
 static func save(multiplayerOptions : Node):
 	var windowScaleLabel : Label = multiplayerOptions.get_node("WindowScale/Value")
@@ -26,13 +28,15 @@ static func save(multiplayerOptions : Node):
 	
 	var windowScale = int(windowScaleLabel.text)
 	var fpsLock = int(fpsLockLabel.text) / 10.0 - 3
+	var showTimer = TimeScore.shown
 	
 	if windowScale == 0:
 		windowScale = 5
 	
 	var data = {
 		"windowScale": windowScale,
-		"fpsLock": fpsLock
+		"fpsLock": fpsLock,
+		"showTimer": showTimer
 	}
 	
 	data["controls"] = PlayerSettings.keybindings

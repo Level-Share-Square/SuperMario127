@@ -58,8 +58,7 @@ func _ready() -> void:
 
 # for now, process is disabled by default, so the timer needs to be started manually, if process here is ever needed for something else, create a bool for this
 func _process(delta):
-	if !get_tree().paused:
-		time_score += delta
+	time_score += delta
 
 func start_tracking_time_score():
 	set_process(true)
