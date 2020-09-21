@@ -6,8 +6,7 @@ var timer = 0.0
 func _ready():
 	# idk a better singleton to put this in so i'm putting it here
 	if !OS.has_feature("standalone"):
-		# window positioning only bugs out in the editor
-		print("A")
+		# window positioning only bugs out in the editor, so there's no reason to move the window if you're using an exported build
 		OS.window_position = (OS.get_screen_size() / 2) - (OS.get_real_window_size() / 2)
 		
 	timer = autosave_interval
