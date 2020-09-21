@@ -179,7 +179,7 @@ corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[sub_resource type="DynamicFont" id=22]
+[sub_resource type="DynamicFont" id=28]
 size = 24
 font_data = ExtResource( 7 )
 
@@ -966,7 +966,7 @@ custom_styles/pressed = SubResource( 27 )
 custom_styles/focus = SubResource( 23 )
 custom_styles/disabled = SubResource( 26 )
 custom_styles/normal = SubResource( 27 )
-custom_fonts/font = SubResource( 22 )
+custom_fonts/font = SubResource( 28 )
 action_mode = 0
 enabled_focus_mode = 0
 text = "False"

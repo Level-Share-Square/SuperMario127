@@ -90,8 +90,11 @@ func get_level_data() -> LevelData:
 	return level_data_value
 
 func reset_save_data() -> void:
-	collected_shines = {}
-	collected_star_coins = {}
+	for collected_shine in collected_shines:
+		collected_shines[collected_shine] = false
+	for collected_star_coin in collected_star_coins:
+		collected_star_coins[collected_star_coin] = false
+
 	coin_score = 0
 	for key in time_scores.keys():
 		time_scores[key] = EMPTY_TIME_SCORE
