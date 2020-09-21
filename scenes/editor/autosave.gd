@@ -5,7 +5,10 @@ var timer = 0.0
 
 func _ready():
 	# idk a better singleton to put this in so i'm putting it here
-	OS.window_position = (OS.get_screen_size() / 2) - (OS.get_real_window_size() / 2)
+	if !OS.has_feature("standalone"):
+		# window positioning only bugs out in the editor
+		print("A")
+		OS.window_position = (OS.get_screen_size() / 2) - (OS.get_real_window_size() / 2)
 		
 	timer = autosave_interval
 
