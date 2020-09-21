@@ -20,6 +20,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=2]
+resource_name = "trans_out_default"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -47,4 +48,4 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 1 )
-anims/trans_out_MainMenuScreen = SubResource( 2 )
+anims/trans_out_default = SubResource( 2 )

@@ -4,9 +4,15 @@ var autosave_interval = 60 * 5
 var timer = 0.0
 
 func _ready():
+	# idk a better singleton to put this in so i'm putting it here
+	OS.window_position = (OS.get_screen_size() / 2) - (OS.get_real_window_size() / 2)
+		
 	timer = autosave_interval
 
 func _physics_process(delta):
+	# again putting this here because dunno where else
+	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")
+
 	timer -= delta
 	if timer <= 0:
 		timer = autosave_interval

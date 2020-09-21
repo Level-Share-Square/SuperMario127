@@ -84,6 +84,3 @@ func move_object_to_back(object):
 	
 func move_object_to_front(object):
 	objects_node.move_object_to_front(object)
-
-func _process(_delta):
-	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")
