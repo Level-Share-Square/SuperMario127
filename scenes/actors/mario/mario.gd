@@ -474,9 +474,7 @@ func _physics_process(delta: float) -> void:
 		invulnerable_frames -= 1
 	
 	# Gravity
-	velocity.y = clamp(lerp(
-		velocity.y, (gravity * Vector2(0, gravity_scale) * 240).y, delta / 2),
-		-max_aerial_velocity, max_aerial_velocity)
+	velocity.y = clamp(velocity.y + (gravity * gravity_scale), -max_aerial_velocity, max_aerial_velocity)
 
 	if state != null:
 		disable_movement = state.disable_movement
