@@ -242,7 +242,7 @@ func update_selected_object(mouse_pos : Vector2) -> void:
 				hovered_object.hovered = true
 				hovered_object.modulate = Color(0.65, 0.65, 1, hovered_object.modulate.a)
 				item_preview.visible = false
-		elif hovered_object != null and is_instance_valid(hovered_object):
+		elif is_instance_valid(hovered_object):
 			hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
 			hovered_object.hovered = false
 			hovered_object = null
@@ -281,7 +281,7 @@ func _process(delta : float) -> void:
 				lock_pos = 0
 		
 		# Handle hovered objects
-		if hovered_object:
+		if is_instance_valid(hovered_object):
 			if Input.is_action_just_pressed("rotate"):
 				rotating = true
 			
@@ -341,7 +341,7 @@ func _process(delta : float) -> void:
 							tiles_stack.append([mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, last_tile, [item.tileset_id, item.tile_id]])
 						
 						shared.set_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, item.tileset_id, item.tile_id)
-				elif hovered_object == null: # Place object
+				elif !is_instance_valid(hovered_object): # Place object
 					var object_pos : Vector2
 					if placement_mode == "Tile":
 						object_pos = (mouse_tile_pos * item.tile_mode_step) + item.object_center
@@ -373,7 +373,7 @@ func _process(delta : float) -> void:
 						var object_pos : Vector2 = (mouse_tile_pos * item.tile_mode_step) + item.object_center
 						if item.on_erase(object_pos, level_data, level_area):
 							shared.destroy_object_at_position(object_pos, true)
-					elif (Input.is_action_just_pressed("erase") or Input.is_action_just_pressed("place") and selected_tool == 1) and hovered_object and !rotating:
+					elif (Input.is_action_just_pressed("erase") or Input.is_action_just_pressed("place") and selected_tool == 1) and is_instance_valid(hovered_object) and !rotating:
 						if item.on_erase(mouse_pos, level_data, level_area):
 							shared.destroy_object(hovered_object, true)
 							hovered_object = null
