@@ -248,11 +248,12 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 				true,
 				false
 			)
-
-			#mode switching is disabled on collecting the shine so the player can't cancel the animation (causes glitches)
+		else:
+			# yes, another band aid
+			yield(get_tree().create_timer(0.75), "timeout")
 			mode_switcher_button.switching_disabled = false 
 			mode_switcher_button._pressed()
-
+			
 			# pausing disabled for same reasons as mode switcher button
 			CurrentLevelData.can_pause = true
 	else: 
