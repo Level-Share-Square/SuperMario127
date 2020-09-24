@@ -14,6 +14,7 @@ var last_hovered
 
 func _pressed():
 	click_sound.play()
+	SettingsSaver.save(get_parent())
 	PlayerSettings.number_of_players = get_node(num_of_players).value
 	PlayerSettings.player1_character = get_node(player1_char).value
 	PlayerSettings.player2_character = get_node(player2_char).value
