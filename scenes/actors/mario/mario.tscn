@@ -655,10 +655,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.94 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ true, false ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("CollectedShine:scale")
@@ -667,10 +667,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.375 ),
+"transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 0, 0 ) ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("CollectedShine:position")
@@ -679,10 +679,10 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.425 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -1, -70 ) ]
+"values": [ Vector2( -1, -70 ), Vector2( 0, 0 ) ]
 }
 tracks/7/type = "value"
 tracks/7/path = NodePath("CollectedShine:z_index")
@@ -703,10 +703,10 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.325 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true ]
+"values": [ true, false ]
 }
 tracks/9/type = "value"
 tracks/9/path = NodePath("CollectedShine:speed_scale")
@@ -911,9 +911,10 @@ shape = SubResource( 7 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -40 )
 frames = ExtResource( 1 )
 animation = "shineDance"
-frame = 2
+frame = 22
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
@@ -1280,15 +1281,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 64 )
-frame = 14
+frame = 3
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
-visible = false
-position = Vector2( -1, 20 )
-z_index = -5
+position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 14
+frame = 2
+speed_scale = 3.0
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]

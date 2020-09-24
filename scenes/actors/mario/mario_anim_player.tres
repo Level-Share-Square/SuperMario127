@@ -3,6 +3,7 @@
 [resource]
 resource_name = "backflip"
 length = 0.8
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:rotation_degrees")
 tracks/0/interp = 1
