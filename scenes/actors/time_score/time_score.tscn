@@ -5,6 +5,7 @@
 [ext_resource path="res://scenes/actors/time_score/time_score.gd" type="Script" id=3]
 
 [node name="CanvasLayer" type="CanvasLayer"]
+pause_mode = 2
 layer = 20
 script = ExtResource( 3 )
 
