@@ -2,11 +2,11 @@ extends GameObject
 
 onready var animated_sprite = $AnimatedSprite
 onready var sound = $AudioStreamPlayer
-onready var last_sound = $LastCollect
 onready var area = $Area2D
 onready var visibility_enabler = $VisibilityEnabler2D
 onready var label = $Label
 onready var sparkles = $Sparkles
+onready var animation_player = $AnimationPlayer
 
 var collected = false
 var physics = false
@@ -37,6 +37,7 @@ func collect(body):
 func _ready():
 	CurrentLevelData.level_data.vars.max_shine_shards += 1
 	var _connect = area.connect("body_entered", self, "collect")
+	animation_player.play("default")
 
 func _process(delta):
 	if destroy_timer > 0:

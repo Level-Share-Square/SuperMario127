@@ -913,8 +913,9 @@ disabled = true
 [node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -40 )
 frames = ExtResource( 1 )
-animation = "shineDance"
-frame = 22
+animation = "starRunRight"
+frame = 7
+playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
@@ -1281,13 +1282,13 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 64 )
-frame = 3
+frame = 9
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 2
+frame = 4
 speed_scale = 3.0
 playing = true
 
@@ -1306,7 +1307,8 @@ visible = false
 z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
-animation = "armsOut"
+animation = "starRunRight"
+frame = 7
 playing = true
 script = ExtResource( 34 )
 

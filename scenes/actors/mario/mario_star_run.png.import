@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/2_wide.png-a517ed65dfcccf981d27a53a5c781918.stex"
+path="res://.import/mario_star_run.png-c11a7267be5f6d062967a37fdac93f36.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/touch_lift_platform/2_wide.png"
-dest_files=[ "res://.import/2_wide.png-a517ed65dfcccf981d27a53a5c781918.stex" ]
+source_file="res://scenes/actors/mario/mario_star_run.png"
+dest_files=[ "res://.import/mario_star_run.png-c11a7267be5f6d062967a37fdac93f36.stex" ]
 
 [params]
 

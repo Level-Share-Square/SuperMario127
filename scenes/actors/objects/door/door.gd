@@ -18,6 +18,9 @@ func _set_property_values() -> void:
 	set_property("teleport_to_tag", teleport_to_tag)
 
 func _ready() -> void:
+	if scale.x < 1:
+		scale.x = abs(scale.x)
+		sprite.flip_h = true
 	CurrentLevelData.level_data.vars.doors.append([tag.to_lower(), self])
 	door_enter_logic.connect("start_door_logic", self, "_start_transition")
 
