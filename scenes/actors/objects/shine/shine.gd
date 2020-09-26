@@ -225,7 +225,7 @@ func start_shine_dance() -> void:
 	music.play_temporary_music(COURSE_CLEAR_MUSIC_ID, COURSE_CLEAR_MUSIC_VOLUME)
 	
 	# warning-ignore: return_value_discarded
-	character.anim_player.connect("animation_finished", self, "character_shine_dance_finished")
+	character.anim_player.connect("animation_finished", self, "character_shine_dance_finished", [], CONNECT_ONESHOT)
 	
 	set_physics_process(false)
 
@@ -257,22 +257,37 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 			# pausing disabled for same reasons as mode switcher button
 			CurrentLevelData.can_pause = true
 	else: 
-		# re-enable mode switching if in the editor test mode
-		if !mode_switcher_button.invisible:
-			mode_switcher_button.switching_disabled = false 
+		# start playing the dance stop animation
+		character.anim_player.play("shine_dance_stop")
+		character.anim_player.connect("animation_finished", self, "restore_control", [character], CONNECT_ONESHOT)
 
-		# undo collision changes 
-		character.set_collision_layer_bit(1, true)
-		character.set_inter_player_collision(true) 
-		character.call_deferred("set_dive_collision", true)
+func restore_control(animation : String, character : Character) -> void:
+	# bad code sorry
+	yield(get_tree().create_timer(0.2), "timeout")
 
-		# return the character to a state they can actually move around in
-		character.set_state(null, get_physics_process_delta_time())
-		character.controllable = true
+	# re-enable mode switching if in the editor test mode
+	if !mode_switcher_button.invisible:
+		mode_switcher_button.switching_disabled = false 
 
-		# hide the shine used for the shine dance animation
-		character.hide_shine_dance_shine()
+	# pausing disabled for same reasons as mode switcher button
+	CurrentLevelData.can_pause = true
 
-		# player animations won't play past frame 0 after the shine dance without this
-		character.sprite.playing = true
+	# stop the animation
+	character.anim_player.stop()
+	
+	# hide the shine used for the shine dance animation
+	character.hide_shine_dance_shine()
+	
+	# player animations won't play past frame 0 after the shine dance without this
+	character.sprite.playing = true
+		
+	# undo collision changes 
+	character.set_collision_layer_bit(1, true)
+	character.set_inter_player_collision(true) 
+	character.call_deferred("set_dive_collision", true)
 
+	# return the character to a state they can actually move around in
+	character.set_state(null, get_physics_process_delta_time())
+	character.controllable = true
+	
+	music.stop_temporary_music()
