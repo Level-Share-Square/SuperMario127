@@ -34,6 +34,11 @@ func load_in(_level_data : LevelData, level_area : LevelArea):
 	var zoom_level = EditorSavedSettings.zoom_level
 	position.x = (get_viewport_rect().size.x / 2) * zoom_level
 	position.y = (level_area.settings.bounds.end.y * 32) - ((get_viewport_rect().size.y / 2) * zoom_level)
+	for object in level_area.objects:
+		if is_instance_valid(object) and object is LevelObject:
+			if object.type_id == 0:
+				position = object.properties[0] # properties[0] is always position, at least for spawners
+	
 	update_limits(level_area)
 	reset_smoothing()
 	
