@@ -60,9 +60,10 @@ func _ready() -> void:
 func _process(delta):
 	time_score += delta
 
-func start_tracking_time_score():
+func start_tracking_time_score(keep_time : bool = false):
 	set_process(true)
-	time_score = 0
+	if !keep_time:
+		time_score = 0
 
 func stop_tracking_time_score():
 	set_process(false)
