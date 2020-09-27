@@ -36,9 +36,9 @@ func _update(delta):
 	if character.is_grounded():
 		override_rotation = false
 		if character.facing_direction == 1:
-			character.sprite.animation = "movingRight"
+			character.sprite.animation = "starRunRight"
 		else:
-			character.sprite.animation = "movingLeft"
+			character.sprite.animation = "starRunLeft"
 		character.sprite.rotation_degrees = 0
 	else:
 		override_rotation = true
@@ -47,7 +47,7 @@ func _update(delta):
 		else:
 			character.sprite.animation = "tripleJumpLeft"
 		character.sprite.rotation_degrees += 12 * character.facing_direction
-	character.sprite.speed_scale = (abs(character.velocity.x) / run_speed) * 3.5
+	character.sprite.speed_scale = (abs(character.velocity.x) / run_speed)
 	
 	if character.velocity.x == 0:
 		character.facing_direction = -character.facing_direction

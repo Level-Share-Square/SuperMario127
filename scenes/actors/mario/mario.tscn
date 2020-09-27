@@ -913,14 +913,14 @@ disabled = true
 [node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -40 )
 frames = ExtResource( 1 )
-animation = "starRunRight"
+animation = "starRunLeft"
 frame = 7
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 23 )
-animation = "armsOut"
+animation = "starRunLeft"
 playing = true
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]
@@ -1282,7 +1282,7 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 64 )
-frame = 9
+frame = 3
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
@@ -1307,7 +1307,7 @@ visible = false
 z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
-animation = "starRunRight"
+animation = "starRunLeft"
 frame = 7
 playing = true
 script = ExtResource( 34 )
@@ -1315,7 +1315,7 @@ script = ExtResource( 34 )
 [node name="Fludd" type="AnimatedSprite" parent="DeathSprite"]
 visible = false
 frames = ExtResource( 23 )
-animation = "armsOut"
+animation = "starRunLeft"
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
