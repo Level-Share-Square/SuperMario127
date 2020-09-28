@@ -1,4 +1,4 @@
-[gd_scene load_steps=212 format=2]
+[gd_scene load_steps=213 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -184,6 +184,7 @@
 [ext_resource path="res://scenes/actors/objects/metal_powerup/icon.png" type="Texture" id=182]
 [ext_resource path="res://scenes/actors/objects/wood_platform/icon.png" type="Texture" id=183]
 [ext_resource path="res://scenes/actors/objects/wood_platform/preview.png" type="Texture" id=184]
+[ext_resource path="res://scenes/actors/objects/wing_powerup/icon.png" type="Texture" id=185]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1403,13 +1404,24 @@ object_center = Vector2( 16, 16 )
 icon = ExtResource( 179 )
 preview = ExtResource( 178 )
 
+[node name="WingPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 57
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "MetalPowerup"
+items_in_sequence = 4
+icon = ExtResource( 185 )
+preview = ExtResource( 185 )
+
 [node name="MetalPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 object_id = 34
 is_object = true
 object_center = Vector2( 16, 16 )
 change_to = "VanishPowerup"
-items_in_sequence = 3
+items_in_sequence = 4
+index_in_sequence = 1
 icon = ExtResource( 182 )
 preview = ExtResource( 182 )
 
@@ -1419,8 +1431,8 @@ object_id = 43
 is_object = true
 object_center = Vector2( 16, 16 )
 change_to = "RainbowPowerup"
-items_in_sequence = 3
-index_in_sequence = 1
+items_in_sequence = 4
+index_in_sequence = 2
 icon = ExtResource( 147 )
 preview = ExtResource( 147 )
 
@@ -1430,8 +1442,8 @@ object_id = 41
 is_object = true
 object_center = Vector2( 16, 16 )
 change_to = "MetalPowerup"
-items_in_sequence = 3
-index_in_sequence = 2
+items_in_sequence = 4
+index_in_sequence = 3
 icon = ExtResource( 146 )
 preview = ExtResource( 101 )
 
