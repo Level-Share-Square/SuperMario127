@@ -19,8 +19,10 @@ static func load():
 	if data != null:
 		Engine.target_fps = 10 * (data["fpsLock"] + 3)
 		ScreenSizeUtil.set_screen_size(data["windowScale"])
-		if data.size() > 3:
+		if data.has("showTimer"):
 			TimeScore.shown = data["showTimer"]
+		if data.has("volume"):
+			music.set_global_volume(data["volume"])
 
 static func save(multiplayerOptions : Node):
 	var windowScaleLabel : Label = multiplayerOptions.get_node("WindowScale/Value")
@@ -36,10 +38,29 @@ static func save(multiplayerOptions : Node):
 	var data = {
 		"windowScale": windowScale,
 		"fpsLock": fpsLock,
-		"showTimer": showTimer
+		"showTimer": showTimer,
+		"controls": PlayerSettings.keybindings,
+		"volume": music.global_volume
 	}
 	
-	data["controls"] = PlayerSettings.keybindings
+	var file = File.new()
+	file.open(PATH, File.WRITE)
+	file.store_string(to_json(data))
+	file.close()
+
+static func save_volume():
+	var data = get_data_or_null()
+	if data == null:
+		# Default config
+		data = {
+			"windowScale": 1,
+			"fpsLock": 3,
+			"showTimer": false,
+			"controls": PlayerSettings.keybindings,
+			"volume": music.global_volume
+		}
+	
+	data["volume"] = music.global_volume
 	
 	var file = File.new()
 	file.open(PATH, File.WRITE)
