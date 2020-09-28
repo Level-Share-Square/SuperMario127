@@ -86,8 +86,16 @@ func _update(delta):
 		character.damage_with_knockback(character.position + Vector2(character.facing_direction * 8, 0), 0, "Hit", 0)
 
 func _stop(delta):
-	character.set_state_by_name("SlideState", delta)
+	if character.inputs[5][0]:
+		character.set_state_by_name("GroundPoundStartState", delta)
+		yield(get_tree(), "idle_frame")
+		character.get_state_node("GroundPoundStartState").can_dive = false
+	else:
+		if character.is_grounded():
+			character.set_state_by_name("SlideState", delta)
+		else:
+			character.set_state_by_name("DiveState", delta)
 
 func _stop_check(_delta):
-	return character.is_grounded() or (character.powerup == null or character.powerup.id != 3)
+	return character.is_grounded() or (character.powerup == null or character.powerup.id != 3) or character.inputs[5][1]
 
