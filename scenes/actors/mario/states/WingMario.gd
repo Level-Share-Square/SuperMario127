@@ -23,8 +23,7 @@ func _ready():
 	use_dive_collision = true
 
 func _start_check(_delta):
-	#return character.state == character.get_state_node("DiveState") and character.velocity.y > 0
-	return false
+	return (character.rotating_jump or character.state == character.get_state_node("DiveState")) and character.velocity.y > 0 and (character.powerup != null and character.powerup.id == 3)
 
 func _start(_delta):
 	# Don't even question it, it just works
@@ -71,8 +70,14 @@ func _update(delta):
 		character.facing_direction *= -1
 	
 	# Sprite animation and rotation
-	character.sprite.animation = "doubleJumpRight" if character.facing_direction == 1 else "doubleJumpLeft"
-	character.sprite.rotation_degrees = rotation_down * character.facing_direction
+	character.sprite.animation = "flyRight" if character.facing_direction == 1 else "flyLeft"
+	character.sprite.rotation = lerp_angle(character.sprite.rotation, deg2rad(rotation_down * character.facing_direction), delta * 12)
+	if rotation_down > 110:
+		character.sprite.frame = 0
+	elif rotation_down < 50:
+		character.sprite.frame = 2
+	else:
+		character.sprite.frame = 1
 	
 	# Hit wall
 	if (character.facing_direction == 1 and character.is_walled_right())\
@@ -84,5 +89,5 @@ func _stop(delta):
 	character.set_state_by_name("SlideState", delta)
 
 func _stop_check(_delta):
-	return character.is_grounded()
+	return character.is_grounded() or (character.powerup == null or character.powerup.id != 3)
 

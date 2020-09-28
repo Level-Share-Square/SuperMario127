@@ -1,20 +1,16 @@
 extends GameObject
 
 onready var animated_sprite = $AnimatedSprite
+onready var particles = $Particles2D
 onready var sound = $AudioStreamPlayer
 onready var area = $Area2D
 onready var visibility_enabler = $VisibilityEnabler2D
 onready var animation_player = $AnimationPlayer
-onready var particles = $Particles2D
 
 var collected = false
 var respawn_timer = 0.0
 var duration = 30.0
 var can_respawn = true
-var hue = 0
-var alpha = 1
-
-export var anim_damp = 80
 
 func _set_properties():
 	savable_properties = ["duration", "can_respawn"]
@@ -27,12 +23,12 @@ func _set_property_values():
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
 		body.heal(5 * 8)
-		var powerup_node = body.get_powerup_node("MetalPowerup")
+		var powerup_node = body.get_powerup_node("WingPowerup")
 		powerup_node.time_left = duration
 		body.set_powerup(powerup_node)
 		body.sound_player.play_powerup_sound()
 		body.sound_player.play_powerup_jingle()
-		animation_player.play("collect", -1, 2)
+		animation_player.play("collect")
 		respawn_timer = 10.0
 		collected = true
 		
