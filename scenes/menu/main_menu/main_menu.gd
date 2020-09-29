@@ -1,10 +1,12 @@
 extends Screen
 
-onready var button_campaign : Button = $CenterContainer/VBoxContainer/ButtonCampaign
-onready var button_levels : Button = $CenterContainer/VBoxContainer/ButtonLevels
-onready var button_editor : Button = $CenterContainer/VBoxContainer/ButtonEditor
-onready var button_options : Button = $CenterContainer/VBoxContainer/ButtonOptions
-onready var button_quit : Button = $CenterContainer/VBoxContainer/ButtonQuit
+onready var button_campaign : Button = $Panel/VBoxContainer/ButtonCampaign
+onready var button_levels : Button = $Panel/VBoxContainer/ButtonLevels
+onready var button_editor : Button = $Panel/VBoxContainer/ButtonEditor
+onready var button_options : Button = $Panel/VBoxContainer/ButtonOptions
+onready var button_quit : Button = $Panel/VBoxContainer/ButtonQuit
+
+onready var timer = $CooldownTimer
 
 const EDITOR_SCENE : PackedScene = preload("res://scenes/editor/editor.tscn")
 
@@ -28,6 +30,9 @@ func _input(_event : InputEvent) -> void:
 		pass
 
 func on_button_levels_pressed() -> void:
+	if timer.time_left > 0:
+		return
+	timer.start()
 	emit_signal("screen_change", "main_menu_screen", "levels_screen")
 
 func on_button_editor_pressed() -> void:

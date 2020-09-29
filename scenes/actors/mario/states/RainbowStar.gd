@@ -86,7 +86,7 @@ func _update(delta):
 		if character.velocity.y >= 0:
 			jumping = false
 			
-	if had_jumped and character.inputs[5][1]:
+	if had_jumped and character.inputs[9][1]:
 		had_jumped = false
 
 func _general_update(delta):

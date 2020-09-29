@@ -24,15 +24,13 @@ onready var default_screen = splash_screen
 var current_screen : Screen
 var previous_screen : Screen
 
+# scrapped the variations because the current logo 
+# doesn't look good on any background except the night one
 var possible_backgrounds = [
-	1,
-	2,
-	4
+	2
 ]
-
 var possible_parallax = [
-	1,
-	3
+	1
 ]
 
 func _ready() -> void:

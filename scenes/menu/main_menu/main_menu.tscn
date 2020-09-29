@@ -1,12 +1,112 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/menu/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scenes/menu/main_menu/logo.png" type="Texture" id=4]
+[ext_resource path="res://scenes/menu/shine_select_screen/frame_top.png" type="Texture" id=5]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="DynamicFont" id=2]
 size = 42
 font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Logo:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 370, 106 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Logo:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.15, 0.15 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "trans_out_LevelsScreen_MainMenuScreen"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 0.5 ),
+"update": 0,
+"values": [ Vector2( -309, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Logo:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4, 0.6 ),
+"transitions": PoolRealArray( 0.5, 0.5, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 370, -210 ), Vector2( 370, -210 ), Vector2( 370, 121 ), Vector2( 370, 106 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "trans_out_MainMenuScreen_LevelsScreen"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -309, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Logo:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 370, 111 ), Vector2( 370, -210 ) ]
+}
 
 [node name="MainMenuScreen" type="Control"]
 anchor_right = 1.0
@@ -17,56 +117,99 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Panel" type="Panel" parent="."]
+margin_right = 300.0
+margin_bottom = 432.0
+custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 274.0
+[node name="Background" type="TextureRect" parent="Panel"]
+margin_top = 432.0
+margin_right = 768.0
+margin_bottom = 864.0
+rect_rotation = -90.0
+rect_scale = Vector2( 1, 2.1 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+margin_left = 41.0
 margin_top = 70.0
-margin_right = 493.0
+margin_right = 260.0
 margin_bottom = 362.0
 custom_constants/separation = 12
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonCampaign" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
+[node name="ButtonCampaign" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 margin_right = 219.0
 margin_bottom = 64.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 disabled = true
 text = "Campaign"
 
-[node name="ButtonLevels" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
+[node name="ButtonLevels" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 76.0
 margin_right = 219.0
 margin_bottom = 140.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Levels"
 
-[node name="ButtonEditor" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
+[node name="ButtonEditor" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 visible = false
 margin_top = 152.0
 margin_right = 219.0
 margin_bottom = 216.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Editor"
 
-[node name="ButtonOptions" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
+[node name="ButtonOptions" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 152.0
 margin_right = 219.0
 margin_bottom = 216.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 disabled = true
 text = "Options"
 
-[node name="ButtonQuit" parent="CenterContainer/VBoxContainer" instance=ExtResource( 2 )]
+[node name="ButtonQuit" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 228.0
 margin_right = 219.0
 margin_bottom = 292.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Quit"
+
+[node name="Logo" type="TextureRect" parent="."]
+margin_left = 370.0
+margin_top = 106.0
+margin_right = 2570.0
+margin_bottom = 1506.0
+rect_scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shadow" type="TextureRect" parent="Logo"]
+modulate = Color( 0, 0, 0, 0.501961 )
+show_behind_parent = true
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 2264.0
+margin_bottom = 1464.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/default = SubResource( 3 )
+anims/trans_out_LevelsScreen_MainMenuScreen = SubResource( 5 )
+anims/trans_out_MainMenuScreen_LevelsScreen = SubResource( 4 )
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true

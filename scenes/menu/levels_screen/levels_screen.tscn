@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scenes/menu/levels_screen/levels_screen.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -249,6 +249,34 @@ tracks/1/keys = {
 "values": [ 2 ]
 }
 
+[sub_resource type="Animation" id=25]
+resource_name = "trans_out_LevelsScreen_MainMenuScreen"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/HBoxContainer/LevelInfo:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
+"update": 0,
+"values": [ Vector2( 360, 0 ), Vector2( 360, 432 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/HBoxContainer/VBoxContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -432 ) ]
+}
+
 [sub_resource type="Animation" id=23]
 tracks/0/type = "method"
 tracks/0/path = NodePath("TransitionAudio")
@@ -289,9 +317,38 @@ tracks/2/keys = {
 "values": [ 0 ]
 }
 
+[sub_resource type="Animation" id=24]
+resource_name = "trans_out_MainMenuScreen_LevelsScreen"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/HBoxContainer/LevelInfo:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 0.5, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 360, 432 ), Vector2( 360, -20 ), Vector2( 360, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/HBoxContainer/VBoxContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5, 0.6 ),
+"transitions": PoolRealArray( 0.5, 0.5, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -432 ), Vector2( 0, -432 ), Vector2( 0, 15 ), Vector2( 0, 0 ) ]
+}
+
 [node name="LevelsScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -0.000793457
 rect_pivot_offset = Vector2( 384, 216 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -312,7 +369,7 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 margin_left = 32.0
 margin_top = 32.0
-margin_right = 736.0
+margin_right = 735.0
 margin_bottom = 400.0
 custom_constants/separation = 17
 
@@ -447,13 +504,13 @@ text = "Copy Level Code"
 
 [node name="LevelInfo" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 margin_left = 360.0
-margin_right = 704.0
+margin_right = 703.0
 margin_bottom = 368.0
 size_flags_horizontal = 3
 custom_constants/separation = 11
 
 [node name="LevelThumbnail" type="MarginContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
-margin_right = 344.0
+margin_right = 343.0
 margin_bottom = 117.0
 size_flags_vertical = 3
 custom_constants/margin_right = 75
@@ -461,7 +518,7 @@ custom_constants/margin_left = 75
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail"]
 margin_left = 75.0
-margin_right = 269.0
+margin_right = 268.0
 margin_bottom = 117.0
 size_flags_horizontal = 9
 size_flags_vertical = 3
@@ -470,7 +527,7 @@ custom_styles/panel = SubResource( 14 )
 [node name="ThumbnailImage" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 186.0
+margin_right = 185.0
 margin_bottom = 109.0
 size_flags_vertical = 3
 texture = ExtResource( 6 )
@@ -480,7 +537,7 @@ stretch_mode = 6
 [node name="ForegroundThumbnailImage" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 186.0
+margin_right = 185.0
 margin_bottom = 109.0
 size_flags_vertical = 3
 texture = ExtResource( 11 )
@@ -489,7 +546,7 @@ stretch_mode = 6
 
 [node name="LevelName" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo"]
 margin_top = 128.0
-margin_right = 344.0
+margin_right = 343.0
 margin_bottom = 187.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.51
@@ -502,7 +559,7 @@ max_lines_visible = 2
 
 [node name="LevelScore" type="GridContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
 margin_top = 198.0
-margin_right = 344.0
+margin_right = 343.0
 margin_bottom = 315.0
 size_flags_vertical = 3
 columns = 2
@@ -511,7 +568,7 @@ __meta__ = {
 }
 
 [node name="ShineProgressPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
-margin_right = 170.0
+margin_right = 169.0
 margin_bottom = 54.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -520,11 +577,11 @@ custom_styles/panel = SubResource( 16 )
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel"]
 margin_left = 16.0
 margin_top = 2.0
-margin_right = 154.0
+margin_right = 153.0
 margin_bottom = 52.0
 
 [node name="ShineIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel/HBoxContainer2"]
-margin_right = 67.0
+margin_right = 66.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -536,9 +593,9 @@ __meta__ = {
 }
 
 [node name="ShineProgressLabel" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel/HBoxContainer2"]
-margin_left = 99.0
+margin_left = 98.0
 margin_top = 11.0
-margin_right = 138.0
+margin_right = 137.0
 margin_bottom = 39.0
 size_flags_horizontal = 10
 custom_fonts/font = SubResource( 17 )
@@ -548,8 +605,8 @@ __meta__ = {
 }
 
 [node name="StarCoinProgressPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
-margin_left = 174.0
-margin_right = 344.0
+margin_left = 173.0
+margin_right = 342.0
 margin_bottom = 54.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -558,11 +615,11 @@ custom_styles/panel = SubResource( 16 )
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel"]
 margin_left = 16.0
 margin_top = 2.0
-margin_right = 154.0
+margin_right = 153.0
 margin_bottom = 52.0
 
 [node name="StarCoinIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel/HBoxContainer3"]
-margin_right = 67.0
+margin_right = 66.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -574,9 +631,9 @@ __meta__ = {
 }
 
 [node name="StarCoinProgressLabel" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel/HBoxContainer3"]
-margin_left = 99.0
+margin_left = 98.0
 margin_top = 11.0
-margin_right = 138.0
+margin_right = 137.0
 margin_bottom = 39.0
 size_flags_horizontal = 10
 custom_fonts/font = SubResource( 17 )
@@ -587,7 +644,7 @@ __meta__ = {
 
 [node name="CoinScorePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
 margin_top = 58.0
-margin_right = 170.0
+margin_right = 169.0
 margin_bottom = 112.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -596,11 +653,11 @@ custom_styles/panel = SubResource( 16 )
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel"]
 margin_left = 16.0
 margin_top = 2.0
-margin_right = 154.0
+margin_right = 153.0
 margin_bottom = 52.0
 
 [node name="CoinScoreIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel/HBoxContainer2"]
-margin_right = 67.0
+margin_right = 66.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -612,9 +669,9 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel/HBoxContainer2"]
-margin_left = 123.0
+margin_left = 122.0
 margin_top = 11.0
-margin_right = 138.0
+margin_right = 137.0
 margin_bottom = 39.0
 size_flags_horizontal = 10
 custom_fonts/font = SubResource( 17 )
@@ -624,9 +681,9 @@ __meta__ = {
 }
 
 [node name="SingleTimeScorePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
-margin_left = 174.0
+margin_left = 173.0
 margin_top = 58.0
-margin_right = 344.0
+margin_right = 342.0
 margin_bottom = 112.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -635,11 +692,11 @@ custom_styles/panel = SubResource( 16 )
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel"]
 margin_left = 16.0
 margin_top = 2.0
-margin_right = 154.0
+margin_right = 153.0
 margin_bottom = 52.0
 
 [node name="TimeScoreIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel/HBoxContainer3"]
-margin_right = 52.0
+margin_right = 51.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -651,9 +708,9 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel/HBoxContainer3"]
-margin_left = 56.0
+margin_left = 55.0
 margin_top = 14.0
-margin_right = 138.0
+margin_right = 137.0
 margin_bottom = 35.0
 size_flags_horizontal = 10
 custom_fonts/font = SubResource( 18 )
@@ -785,7 +842,9 @@ text = "Close"
 anims/default = SubResource( 20 )
 anims/trans_edit = SubResource( 21 )
 anims/trans_in_ShineSelectScreen_LevelsScreen = SubResource( 22 )
+anims/trans_out_LevelsScreen_MainMenuScreen = SubResource( 25 )
 anims/trans_out_LevelsScreen_ShineSelectScreen = SubResource( 23 )
+anims/trans_out_MainMenuScreen_LevelsScreen = SubResource( 24 )
 
 [node name="TransitionRect" type="ColorRect" parent="."]
 anchor_right = 1.0
