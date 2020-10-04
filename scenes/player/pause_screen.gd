@@ -31,6 +31,9 @@ onready var chat_node = get_node(chat_path)
 var paused := false
 
 func _ready():
+	# You want it to be visible for editing, but that causes a bug, which this fixes
+	visible = false
+
 	var _connect = resume_button.connect("pressed", self, "toggle_pause")
 	_connect = retry_button.connect("pressed", self, "retry")
 	_connect = quit_button.connect("pressed", self, "quit_to_menu")

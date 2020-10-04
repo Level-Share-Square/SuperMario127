@@ -474,8 +474,9 @@ func _physics_process(delta: float) -> void:
 		invulnerable_frames -= 1
 	
 	# Gravity
-	velocity.y = clamp(velocity.y + (gravity * gravity_scale), -max_aerial_velocity, max_aerial_velocity)
-
+	velocity.y += gravity * gravity_scale
+	velocity.y = clamp(velocity.y, velocity.y, max_aerial_velocity)
+	
 	if state != null:
 		disable_movement = state.disable_movement
 		disable_turning = state.disable_turning

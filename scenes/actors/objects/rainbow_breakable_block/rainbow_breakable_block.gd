@@ -6,14 +6,11 @@ onready var static_body = $StaticBody2D
 onready var collision_shape = $StaticBody2D/CollisionShape2D
 onready var stomp_area = $StompArea
 onready var spin_area = $SpinArea
-onready var player_detector = $PlayerStompDetector
-onready var player_spin_detector = $PlayerSpinDetector
 onready var broken_sound = $Broken
 onready var break_particle = $BreakParticle
 var broken = false
 
 var buffer := -5
-var character = null
 
 var coins = 0
 var delete_timer = 0.0
@@ -29,19 +26,22 @@ func _set_property_values():
 	set_property("coins", coins, true)
 
 func _ready():
-	player_detector.connect("body_entered", self, "detect_player")
 	break_particle.hide()
 	sprite.material.set_shader_param("gradient", get_tree().current_scene.rainbow_gradient_texture)
-
-func detect_player(body):
-	if enabled and body.name.begins_with("Character") and !broken and character == null:
-		character = body
 		
 func is_rainbow(body):
 	return body.powerup != null and body.powerup.id == 1
 
+func handle_character_exception(character: Character):
+	if !is_instance_valid(character): return
+	
+	if is_rainbow(character):
+		static_body.add_collision_exception_with(character)
+	else:
+		static_body.remove_collision_exception_with(character)
+
 func _physics_process(delta):
-	if mode != 1: 
+	if mode != 1:
 		time_alive += delta
 		
 		if delete_timer > 0:
@@ -68,24 +68,14 @@ func _physics_process(delta):
 					break_particle.set_emitting(true)
 					broken_sound.play()
 					delete_timer = 3.0
-		for hit_body in player_detector.get_overlapping_bodies():
-			if hit_body.name.begins_with("Character"): 
-				if is_rainbow(hit_body):
-					static_body.set_collision_layer_bit(0, false)
-					static_body.set_collision_mask_bit(1, false)
-				else:
-					static_body.set_collision_layer_bit(0, true)
-					static_body.set_collision_mask_bit(1, true)
-		for hit_body in player_spin_detector.get_overlapping_bodies():
-			if hit_body.name.begins_with("Character"): 
-				if is_rainbow(hit_body):
-					static_body.set_collision_layer_bit(0, false)
-					static_body.set_collision_mask_bit(1, false)
-				else:
-					static_body.set_collision_layer_bit(0, true)
-					static_body.set_collision_mask_bit(1, true)
 		
-		if broken == true:
+		var scene : Node = get_tree().current_scene
+		if scene.has_node(scene.character):
+			handle_character_exception(scene.get_node(scene.character))
+		if scene.has_node(scene.character2):
+			handle_character_exception(scene.get_node(scene.character2))
+		
+		if broken:
 			sprite.visible = false
 			static_body.set_collision_layer_bit(0, false)
 			static_body.set_collision_mask_bit(1, false)

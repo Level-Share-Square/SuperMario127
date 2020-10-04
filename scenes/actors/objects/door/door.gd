@@ -36,7 +36,7 @@ func _start_transition(character : Character) -> void:
 	# sets the transition center to Mario's position
 	scene_transitions.canvas_mask.position = get_character_screen_position(character)
 	# this starts an inner scene transition, then connects a function (one shot) to start as it finishes
-	scene_transitions.do_transition_animation(scene_transitions.cutout_circle, scene_transitions.DEFAULT_TRANSITION_TIME, scene_transitions.TRANSITION_SCALE_UNCOVER, scene_transitions.TRANSITION_SCALE_COVERED, -1, -1, false)
+	scene_transitions.do_transition_animation(scene_transitions.cutout_circle, scene_transitions.DEFAULT_TRANSITION_TIME, scene_transitions.TRANSITION_SCALE_UNCOVER, scene_transitions.TRANSITION_SCALE_COVERED, -1, -1, false, false)
 	# warning-ignore: return_value_discarded
 	scene_transitions.connect("transition_finished", self, "_start_teleport", [character], CONNECT_ONESHOT)
 
@@ -60,7 +60,7 @@ func _start_teleport(character : Character) -> void:
 	# sets the transition center to Mario's position
 	scene_transitions.canvas_mask.position = get_character_screen_position(character)
 	# start outer transition
-	scene_transitions.do_transition_animation(scene_transitions.cutout_circle, scene_transitions.DEFAULT_TRANSITION_TIME, scene_transitions.TRANSITION_SCALE_COVERED, scene_transitions.TRANSITION_SCALE_UNCOVER, -1, -1, false)
+	scene_transitions.do_transition_animation(scene_transitions.cutout_circle, scene_transitions.DEFAULT_TRANSITION_TIME, scene_transitions.TRANSITION_SCALE_COVERED, scene_transitions.TRANSITION_SCALE_UNCOVER, -1, -1, false, false)
 	
 	if teleport_door != self:
 		door_enter_logic.is_idle = true
