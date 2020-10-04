@@ -72,7 +72,7 @@ func _update(delta):
 		current_speed = lerp(current_speed, run_speed, delta * 4.5)
 		if footstep_interval <= 0 and character.sprite.speed_scale > 0:
 			character.sound_player.play_footsteps()
-			footstep_interval = clamp(0.8 - (character.sprite.speed_scale / 2.5), 0.1, 1)
+			footstep_interval = clamp(0.8 - (character.sprite.speed_scale / 1.25), 0.1, 1)
 		footstep_interval -= delta
 	character.velocity.x = character.facing_direction * current_speed
 	

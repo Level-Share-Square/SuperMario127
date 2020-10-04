@@ -43,7 +43,7 @@ func is_hovered():
 		return true
 	else:
 		return false
-	
+
 func _process(_delta):
 	grid.visible = true if !item.is_object else false
 	grid.mouse_filter = 2 # ignore
@@ -58,10 +58,10 @@ func _process(_delta):
 			Vector2(0, 0), Vector2(0, 3), 0.075,
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
 		tween.start()
-	
+
 	var clicking = Input.is_action_pressed("place")
 	var editor = get_tree().get_current_scene()
-	
+
 	if editor.dragging_item != null and is_hovered():
 		texture_normal = texture_hover
 	else:
