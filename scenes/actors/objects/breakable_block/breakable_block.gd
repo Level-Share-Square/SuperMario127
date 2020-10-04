@@ -78,6 +78,19 @@ func side_breakable(hit_body):
 func turbo_breakable(hit_body):
 	return hit_body.name.begins_with("Character") and hit_body.using_turbo
 
+func is_rainbow(body):
+	return body.powerup != null and body.powerup.id == 1
+
+func handle_character_exception(character: Character):
+	if !is_instance_valid(character): return
+	
+	if is_rainbow(character) or\
+	player_spin_detector.overlaps_body(character) and (side_breakable(character) or turbo_breakable(character))\
+	or player_detector.overlaps_body(character) and top_breakable(character):
+		static_body.add_collision_exception_with(character)
+	else:
+		static_body.remove_collision_exception_with(character)
+
 func _physics_process(delta):
 	if mode != 1: 
 		time_alive += delta
@@ -100,6 +113,12 @@ func _physics_process(delta):
 		for hit_body in turbo_spin_area.get_overlapping_bodies():
 			if !broken and turbo_breakable(hit_body):
 				break_box()
+		
+		var scene : Node = get_tree().current_scene
+		if scene.has_node(scene.character):
+			handle_character_exception(scene.get_node(scene.character))
+		if scene.has_node(scene.character2):
+			handle_character_exception(scene.get_node(scene.character2))
 
 func create_coin(): #creates a coin
 	time_alive += 1

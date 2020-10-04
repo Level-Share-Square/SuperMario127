@@ -83,24 +83,21 @@ func _physics_process(delta):
 					dust_particle.set_emitting(true)
 					broken_sound.play()
 					delete_timer = 3.0
+		
 		for hit_body in player_detector.get_overlapping_bodies():
 			if hit_body.name.begins_with("Character") and hit_body.velocity.y > 0: 
 				if hit_body.big_attack and is_metal(hit_body):
-					static_body.set_collision_layer_bit(0, false)
-					static_body.set_collision_mask_bit(1, false)
+					static_body.add_collision_exception_with(hit_body)
 				else:
-					static_body.set_collision_layer_bit(0, true)
-					static_body.set_collision_mask_bit(1, true)
+					static_body.remove_collision_exception_with(hit_body)
 		for hit_body in player_spin_detector.get_overlapping_bodies():
 			if hit_body.name.begins_with("Character"): 
 				if hit_body.attacking and is_metal(hit_body):
-					static_body.set_collision_layer_bit(0, false)
-					static_body.set_collision_mask_bit(1, false)
+					static_body.add_collision_exception_with(hit_body)
 				else:
-					static_body.set_collision_layer_bit(0, true)
-					static_body.set_collision_mask_bit(1, true)
+					static_body.remove_collision_exception_with(hit_body)
 		
-		if broken == true:
+		if broken:
 			sprite.visible = false
 			static_body.set_collision_layer_bit(0, false)
 			static_body.set_collision_mask_bit(1, false)
