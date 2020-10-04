@@ -38,6 +38,8 @@ func set_parts(parts: int):
 	
 func _ready():
 	last_position = global_position
+	area_collision_shape.shape = area_collision_shape.shape.duplicate()
+	collision_shape.shape = collision_shape.shape.duplicate()
 	
 func _physics_process(delta):
 	momentum = (global_position - last_position) / delta
