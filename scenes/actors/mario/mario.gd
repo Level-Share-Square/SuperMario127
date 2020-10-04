@@ -64,6 +64,7 @@ export var cutout_shine : StreamTexture
 export var initial_position := Vector2(0, 0)
 export var velocity := Vector2(0, 0)
 var last_velocity := Vector2(0, 0)
+var last_position := Vector2(0, 0)
 
 export var gravity_scale := 1.0
 export var facing_direction := 1
@@ -463,14 +464,15 @@ func _physics_process(delta: float) -> void:
 			if body.is_platform_area():
 				is_in_platform = true
 			
-			if body.get_parent().can_collide_with(self):
-				remove_collision_exception_with(body.get_parent())
-				for raycast in raycasts:
-					raycast.remove_exception(body.get_parent())
-			else:
-				add_collision_exception_with(body.get_parent())
-				for raycast in raycasts:
-					raycast.add_exception(body.get_parent())
+			if body.get_parent() is PhysicsBody2D:
+				if body.get_parent().can_collide_with(self):
+					remove_collision_exception_with(body.get_parent())
+					for raycast in raycasts:
+						raycast.remove_exception(body.get_parent())
+				else:
+					add_collision_exception_with(body.get_parent())
+					for raycast in raycasts:
+						raycast.add_exception(body.get_parent())
 	
 	invulnerable = invulnerable_frames > 0
 	if invulnerable_frames > 0:
@@ -673,8 +675,26 @@ func _physics_process(delta: float) -> void:
 	# Move by velocity
 	if movable:
 		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
-		var slide_count = get_slide_count()
-		collided_last_frame = slide_count > 0
+		if last_position != Vector2.ZERO:
+			if (last_position - global_position).length_squared() > 0:
+				var raycast_result = get_world_2d().direct_space_state.intersect_ray(
+					last_position, global_position, [self], 1)
+				if raycast_result.size() > 0:
+					print("Fixed by intersect ray")
+					position = last_position
+					velocity = last_velocity
+				else:
+					var slide_count = get_slide_count()
+					collided_last_frame = slide_count > 0
+			else:
+				if get_world_2d().direct_space_state.intersect_point(
+					global_position, 1, [self], 1):
+					print("Fixed by intersect point")
+					position = last_position
+					velocity = last_velocity
+				else:
+					var slide_count = get_slide_count()
+					collided_last_frame = slide_count > 0
 	else:
 		collided_last_frame = false
 
@@ -689,6 +709,7 @@ func _physics_process(delta: float) -> void:
 	if position.x > level_bounds.end.x * 32 -1:
 		position.x = level_bounds.end.x * 32 -1
 		velocity.x = 0
+	last_position = global_position
 	last_velocity = velocity
 	last_move_direction = move_direction
 	
