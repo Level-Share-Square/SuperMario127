@@ -458,16 +458,19 @@ func _physics_process(delta: float) -> void:
 	
 	bottom_pos.position = bottom_pos_offset if ground_collision_dive.disabled else bottom_pos_dive_offset
 	var is_in_platform := false
-	var platform_collision_enabled := false
 	for body in platform_detector.get_overlapping_areas():
 		if body.has_method("is_platform_area"):
 			if body.is_platform_area():
 				is_in_platform = true
+			
 			if body.get_parent().can_collide_with(self):
-				platform_collision_enabled = true
-	set_collision_mask_bit(4, platform_collision_enabled)
-	for raycast in raycasts:
-		raycast.set_collision_mask_bit(4, platform_collision_enabled)
+				remove_collision_exception_with(body.get_parent())
+				for raycast in raycasts:
+					raycast.remove_exception(body.get_parent())
+			else:
+				add_collision_exception_with(body.get_parent())
+				for raycast in raycasts:
+					raycast.add_exception(body.get_parent())
 	
 	invulnerable = invulnerable_frames > 0
 	if invulnerable_frames > 0:
