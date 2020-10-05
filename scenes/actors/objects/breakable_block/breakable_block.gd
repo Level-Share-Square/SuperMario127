@@ -29,7 +29,13 @@ func _set_properties():
 func _set_property_values(): set_property("coins", coins, true)
 
 func _ready():
-	player_detector.connect("body_entered", self, "detect_player")
+	if !enabled:
+		collision_shape.disabled = true
+		for _area in [area, stomp_area, spin_area, turbo_spin_area]:
+			_area.collision_layer = 0
+			_area.collision_mask = 0
+	else:
+		player_detector.connect("body_entered", self, "detect_player")
 	break_particle.hide()
 	dust_particle.hide()
 	
@@ -92,7 +98,7 @@ func handle_character_exception(character: Character):
 		static_body.remove_collision_exception_with(character)
 
 func _physics_process(delta):
-	if mode != 1: 
+	if mode != 1 and enabled: 
 		time_alive += delta
 		
 		if delete_timer > 0:

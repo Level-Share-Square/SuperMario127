@@ -26,9 +26,15 @@ func _set_property_values():
 	set_property("coins", coins, true)
 
 func _ready():
+	if !enabled:
+		collision_shape.disabled = true
+		for _area in [area, stomp_area, spin_area]:
+			_area.collision_layer = 0
+			_area.collision_mask = 0
+	
 	break_particle.hide()
 	sprite.material.set_shader_param("gradient", get_tree().current_scene.rainbow_gradient_texture)
-		
+
 func is_rainbow(body):
 	return body.powerup != null and body.powerup.id == 1
 
@@ -41,7 +47,7 @@ func handle_character_exception(character: Character):
 		static_body.remove_collision_exception_with(character)
 
 func _physics_process(delta):
-	if mode != 1:
+	if mode != 1 and enabled:
 		time_alive += delta
 		
 		if delete_timer > 0:
