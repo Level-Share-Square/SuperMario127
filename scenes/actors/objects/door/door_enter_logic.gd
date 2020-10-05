@@ -90,7 +90,6 @@ func animate_door(animation : String = "close") -> void:
 	audio_player.play()
 
 func start_door_exit_animation(character : Character) -> void:
-	print("Exit animation happening")
 	# just plays a few animations
 	stored_character = character
 	

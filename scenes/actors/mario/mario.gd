@@ -680,7 +680,6 @@ func _physics_process(delta: float) -> void:
 				var raycast_result = get_world_2d().direct_space_state.intersect_ray(
 					last_position, global_position, [self], 1)
 				if raycast_result.size() > 0:
-					print("Fixed by intersect ray")
 					position = last_position
 					velocity = last_velocity
 				else:
@@ -689,7 +688,6 @@ func _physics_process(delta: float) -> void:
 			else:
 				if get_world_2d().direct_space_state.intersect_point(
 					global_position, 1, [self], 1):
-					print("Fixed by intersect point")
 					position = last_position
 					velocity = last_velocity
 				else:
