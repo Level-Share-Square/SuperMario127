@@ -59,6 +59,11 @@ func _process(_delta):
 				platforms.append(instance)
 				add_child(instance)
 				
+				# Disable the collision if enabled = false
+				instance.collision_shape.disabled = !enabled
+				instance.area_collision_shape.disabled = !enabled
+				instance.platform_area_collision_shape.disabled = !enabled
+				
 		elif platform_count<platforms.size():
 			var delta_count = platforms.size() - platform_count
 			for _i in range(delta_count):
@@ -95,6 +100,11 @@ func _ready():
 		var instance = scene.instance()
 		platforms.append(instance)
 		add_child(instance)
+		
+		# Disable the collision if enabled = false
+		instance.collision_shape.disabled = !enabled
+		instance.area_collision_shape.disabled = !enabled
+		instance.platform_area_collision_shape.disabled = !enabled
 
 func _physics_process(delta):
 	time_alive += delta * speed

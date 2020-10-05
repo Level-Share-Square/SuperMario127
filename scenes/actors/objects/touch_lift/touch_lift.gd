@@ -111,6 +111,10 @@ onready var part_width = platform_sprite.texture.get_width() - left_width - righ
 func _ready():
 	activated = !touch_start
 	
+	platform.collision_shape.disabled = !enabled
+	platform.area_collision_shape.disabled = !enabled
+	platform.platform_area_collision_shape.disabled = !enabled
+	
 	platform_touch_area.connect("body_entered", self, "_on_touch_area_entered")
 	
 	if curve==null and path.curve==null:
