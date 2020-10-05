@@ -19,3 +19,5 @@ static func set_screen_size(window_scale):
 	
 	if !modified:
 		OS.window_size = window_size
+	
+	OS.window_position = Vector2((max_size.x - OS.window_size.x) / 2, (max_size.y - OS.window_size.y) / 2)
