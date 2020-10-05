@@ -93,7 +93,6 @@ func _ready() -> void:
 	var _connect = connect("property_changed", self, "update_color")
 	update_color("color", color)
 
-#TODO: Make this work with the window preview
 func update_color(key, value):
 	if key == "color" and value != last_color:
 		if !is_blue:
@@ -112,13 +111,13 @@ func update_color(key, value):
 			
 			animated_sprite.frames = collected_frames
 			particles.texture = collected_particles
-		last_color = color
+		last_color = value
 
 func _process(_delta):
 	outline_sprite.frame = animated_sprite.frame
 	outline_sprite.visible = animated_sprite.visible
 	outline_sprite.offset = animated_sprite.offset
-		
+
 func _physics_process(_delta : float) -> void:
 	if !animated_sprite.playing: #looks like if it is not set to playing, some manual animation is done instead
 		#warning-ignore:integer_division
