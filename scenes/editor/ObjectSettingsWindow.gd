@@ -41,6 +41,8 @@ func edit_preview_object(key, value):
 		if key != "position" and key != "enabled":
 			if key != "scale":
 				preview_object[key] = value
+				if key == "color" and preview_object.has_method("update_color"):
+					preview_object.update_color("color", value)
 			else:
 				preview_object[key] = Vector2(2.5, 2.5) * value
 
@@ -64,6 +66,8 @@ func open_object(object_to_open: GameObject):
 	preview_object.scale = Vector2(2.5, 2.5) * object_to_open.scale
 	preview_object.is_preview = true
 	preview_node.add_child(preview_object)
+	if preview_object.has_method("update_color"): # Is a shine?
+		preview_object.set_process(true) # so it can sync the outline
 
 	object = weakref(object_to_open)
 	for key in (object_to_open.editable_properties + object_to_open.base_editable_properties):
