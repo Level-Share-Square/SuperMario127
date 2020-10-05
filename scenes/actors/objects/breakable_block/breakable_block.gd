@@ -15,7 +15,6 @@ onready var dust_particle = $DustParticle
 var broken = false
 
 var buffer := -5
-var character = null
 
 var coins = 0
 var delete_timer = 0.0
@@ -34,8 +33,6 @@ func _ready():
 		for _area in [area, stomp_area, spin_area, turbo_spin_area]:
 			_area.collision_layer = 0
 			_area.collision_mask = 0
-	else:
-		player_detector.connect("body_entered", self, "detect_player")
 	break_particle.hide()
 	dust_particle.hide()
 	
@@ -64,10 +61,6 @@ func break_box():
 			static_body.set_collision_mask_bit(1, false)
 			stomp_area.set_collision_layer_bit(0, false)
 			delete_timer = 3.0
-
-func detect_player(body):
-	if enabled and body.name.begins_with("Character") and !broken and character == null:
-		character = body
 
 func top_breakable(hit_body):
 	if hit_body.name == "Steely" and hit_body.get_parent().should_hit:
