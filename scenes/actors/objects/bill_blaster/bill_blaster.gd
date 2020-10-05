@@ -3,6 +3,7 @@ extends GameObject
 onready var sprite = $Top
 onready var color_sprite = $Top/Color
 onready var sound = $AudioStreamPlayer
+onready var collision_shape = $StaticBody2D/CollisionShape2D
 
 var wait_time = 3.0
 
@@ -25,7 +26,10 @@ func _set_property_values():
 	set_property("invincible", invincible, true)
 	set_property("force_direction", force_direction, true)
 	spawn_timer = wait_time
-	
+
+func _ready():
+	collision_shape.disabled = !enabled
+
 func _process(delta):
 	if sprite.frame == 1 or sprite.frame == 2:
 		sprite.scale = sprite.scale.linear_interpolate(Vector2(1.75, 1.75), delta * 12)
@@ -80,7 +84,7 @@ func _physics_process(delta):
 			object.properties.append(transform.xform(Vector2(16 * facing_direction, 0)))
 			object.properties.append(scale)
 			object.properties.append(rotation_degrees)
-			object.properties.append(true)
+			object.properties.append(enabled)
 			object.properties.append(true)
 			object.properties.append(chase)
 			object.properties.append(speed)
