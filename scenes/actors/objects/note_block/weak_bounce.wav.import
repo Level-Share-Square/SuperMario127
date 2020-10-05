@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/weak_bounce.wav-b9f073bb0e4cb7288ec5a0da7ccf1813.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/note_block/weak_bounce.wav"
+dest_files=[ "res://.import/weak_bounce.wav-b9f073bb0e4cb7288ec5a0da7ccf1813.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

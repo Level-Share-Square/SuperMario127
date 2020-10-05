@@ -1,0 +1,138 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/actors/objects/note_block/block.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/note_block/note_block.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/note_block/strong_bounce.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/note_block/weak_bounce.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/actors/objects/note_block/note.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "bounce"
+tracks/0/type = "audio"
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 3 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visual:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.2, 0.8 ),
+"transitions": PoolRealArray( 0.5, 2, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -16 ), Vector2( 0, -28 ), Vector2( 0, -28 ), Vector2( 0, -16 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visual:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05, 0.8 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1.2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "bounce_weak"
+tracks/0/type = "audio"
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Visual:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.5, 2, 2 ),
+"update": 0,
+"values": [ Vector2( 0, -16 ), Vector2( 0, -20 ), Vector2( 0, -16 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Visual:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1.05 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 19, 16 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 15, 1 )
+
+[node name="NoteBlock" type="Node2D"]
+z_index = -1
+script = ExtResource( 2 )
+
+[node name="Visual" type="Node2D" parent="."]
+position = Vector2( 0, -16 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Visual"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 1 )
+patch_margin_left = 8
+patch_margin_right = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Note" type="Sprite" parent="Visual/NinePatchRect"]
+position = Vector2( 16, 16 )
+texture = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/bounce = SubResource( 1 )
+anims/bounce_weak = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 0, -16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, 14 )
+shape = SubResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 0, -16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 0, 32 )
+shape = SubResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -2.5
