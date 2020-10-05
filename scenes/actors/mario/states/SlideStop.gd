@@ -7,7 +7,9 @@ func _ready():
 	disable_movement = true
 	disable_animation = true
 	override_rotation = true
-	use_dive_collision = true
+
+func _start(_delta):
+	character.sprite.position.y = 6
 
 func _update(delta):
 	var sprite = character.sprite
@@ -21,11 +23,12 @@ func _update(delta):
 			sprite.animation = "diveRight"
 		else:
 			sprite.animation = "diveLeft"
-		
-	sprite.rotation = lerp(sprite.rotation, 0, delta * character.rotation_interpolation_speed)
-	character.position.y -= 0.8
-	character.velocity.y = 0
 	
+	sprite.rotation = lerp(sprite.rotation, 0, delta * character.rotation_interpolation_speed)
+	sprite.position.y -= 0.4
+	if sprite.position.y < 0:
+		sprite.position.y = 0
+
 func _stop_check(_delta):
 	var sprite = character.sprite
 	return sprite.rotation_degrees < 5 and sprite.rotation_degrees > -5
