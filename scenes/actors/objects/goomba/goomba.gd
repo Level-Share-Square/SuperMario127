@@ -16,7 +16,6 @@ onready var hit_sound : AudioStreamPlayer = $Goomba/Hit
 onready var anim_player : AnimationPlayer = $Goomba/AnimationPlayer
 onready var bottom_pos : Node2D = $Goomba/BottomPos
 onready var raycasts := [wall_check, wall_vacant_check, pit_check]
-var shared : Node2D
 var dead := false
 
 var gravity : float
@@ -127,7 +126,6 @@ func _process(_delta) -> void:
 		sprite.frame = wrapi(OS.get_ticks_msec() / 166, 0, 4)
 
 func _physics_process(delta : float) -> void:
-	shared = get_parent().get_parent() # goomba -> objects -> shared
 	time_alive += delta
 	
 	if mode != 1 and enabled and loaded:

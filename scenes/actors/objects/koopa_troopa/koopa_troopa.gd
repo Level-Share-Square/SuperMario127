@@ -10,7 +10,6 @@ onready var left_check = $Koopa/Left
 onready var right_check = $Koopa/Right
 onready var koopa_sound = $Koopa/AudioStreamPlayer
 onready var visibility_notifier = $Koopa/VisibilityNotifier2D
-var shared : Node2D
 
 onready var body = $Koopa
 func body_exists(): # Might as well be body.exists()
@@ -160,7 +159,6 @@ func _physics_process(delta):
 	if is_queued_for_deletion():
 		print("this has been hit??")
 		return # Prevent crashes
-	shared = get_parent().get_parent() # koopa -> objects -> shared
 	
 	time_alive += delta
 	
