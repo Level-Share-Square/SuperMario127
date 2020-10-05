@@ -32,7 +32,6 @@ func _start(_delta):
 	if sound_buffer > 0:
 		character.sound_player.play_spin_sound()
 	sound_buffer = 0
-	character.sprite.speed_scale = 1
 	if can_boost == true and !character.is_grounded() and (character.state != character.get_state_node("Jump") or character.current_jump == 1):
 		can_boost = false
 		cooldown_timer = 0.5
@@ -48,6 +47,7 @@ func _start(_delta):
 	
 func _update(_delta):
 	var sprite = character.sprite
+	sprite.speed_scale = 1 + (attack_timer*2)
 	if character.is_grounded():
 		priority = 0
 		disable_snap = false
