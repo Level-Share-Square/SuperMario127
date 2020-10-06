@@ -1,4 +1,4 @@
-[gd_scene load_steps=225 format=2]
+[gd_scene load_steps=227 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -197,6 +197,8 @@
 [ext_resource path="res://assets/tiles/stone_bricks/left_slope_icon.png" type="Texture" id=195]
 [ext_resource path="res://assets/tiles/negative_rock/slab_icon.png" type="Texture" id=196]
 [ext_resource path="res://assets/tiles/black_granite/icon.png" type="Texture" id=197]
+[ext_resource path="res://scenes/actors/objects/note_block/icon.png" type="Texture" id=198]
+[ext_resource path="res://scenes/actors/objects/note_block/preview.png" type="Texture" id=199]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1504,6 +1506,15 @@ tile_mode_step = 64
 z_index = -8
 icon = ExtResource( 156 )
 preview = ExtResource( 157 )
+
+[node name="NoteBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 58
+is_object = true
+object_center = Vector2( 16, 16 )
+z_index = -1
+icon = ExtResource( 198 )
+preview = ExtResource( 199 )
 
 [node name="EnemiesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
