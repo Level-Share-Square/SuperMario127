@@ -11,6 +11,8 @@ export var turn_speed := 20
 var accel_plus := 0.5
 var rotation_down = 0
 var old_gravity_scale = 0
+var turn_multiplier := 0.0
+var turn_multiplier_accel := 0.125 * 120 # 120 fps
 
 func _ready():
 	priority = 4
@@ -41,9 +43,9 @@ func _update(delta):
 	
 	# acceleration
 	if rotation_normal.y < 0:
-		momentum += (accel_plus + rotation_normal.y * rotation_normal.y) * 410 * delta / pow(momentum, 0.01)
+		momentum += (accel_plus + rotation_normal.y * rotation_normal.y) * 410 * delta / pow(max(1.0, momentum), 0.01)
 	else:
-		momentum -= accel_plus * (rotation_normal.y * rotation_normal.y * 410 * delta / pow(momentum, 0.01))
+		momentum -= accel_plus * (rotation_normal.y * rotation_normal.y * 410 * delta / pow(max(1.0, momentum), 0.01))
 	if momentum < 0: momentum = 0
 	
 	# fludd acceleration
@@ -59,11 +61,19 @@ func _update(delta):
 	character.velocity.x = lerp(character.velocity.x, character.facing_direction * rotation_normal.x * momentum * 1.5, delta * 20)
 	
 	# Turning
-	var final_turn_speed : float = turn_speed * delta * sqrt(momentum)
+	var final_turn_speed : float = turn_speed * delta * pow(momentum, 0.4)
 	if character.inputs[character.input_names.left][0]:
-		rotation_down -= final_turn_speed * character.facing_direction
-	if character.inputs[character.input_names.right][0]:
-		rotation_down += final_turn_speed * character.facing_direction
+		turn_multiplier -= turn_multiplier_accel * delta
+	elif character.inputs[character.input_names.right][0]:
+		turn_multiplier += turn_multiplier_accel * delta
+	elif abs(turn_multiplier) > 0.01: # Some margin of error
+		turn_multiplier -= turn_multiplier_accel * delta * sign(turn_multiplier)
+	else:
+		turn_multiplier = 0.0
+	
+	turn_multiplier = clamp(turn_multiplier, -1.0, 1.0)
+	
+	rotation_down += final_turn_speed * character.facing_direction * turn_multiplier
 	
 	# Turning around
 	if (rotation_down > 180 or rotation_down < 0) and character.inputs[character.input_names.spin][0]:
