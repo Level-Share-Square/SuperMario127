@@ -57,13 +57,13 @@ func get_tile(tileset_id, tile_id):
 # 		tilemap_node.set_cell(bounds.x, bounds.y, placing_tile)
 # 	if pos.x == bounds.x - 1 and pos.y == 0:
 # 		tilemap_node.set_cell(bounds.x, -1, placing_tile)
-	
+
+func get_chunk_key(x: int, y: int, layer: int) -> String:
+	return str(floor(x / 16.0), ":", floor(y / 16.0), ":", layer)
+
 const emptyTile = [0,0]
 func get_tile_in_data(x: int, y: int, layer: int):
-
-	#warning-ignore:integer_division
-	var chunk_key = str(x/16,":",y/16,":",layer)
-
+	var chunk_key = get_chunk_key(x, y, layer)
 	
 	if level_area.tile_chunks.has(chunk_key):
 		var tile = level_area.tile_chunks[chunk_key][x%16+(y%16)*16]
@@ -73,9 +73,8 @@ func get_tile_in_data(x: int, y: int, layer: int):
 
 var numChunks : int = 0
 func set_tile(x: int, y: int, layer: int, tileset_id: int, tile_id: int):
-	#warning-ignore:integer_division
-	var chunk_key = str(x/16,":",y/16,":",layer)
-
+	var chunk_key = get_chunk_key(x, y, layer)
+	
 	var chunk: Array
 	if level_area.tile_chunks.has(chunk_key):
 		chunk = level_area.tile_chunks[chunk_key]
@@ -87,7 +86,7 @@ func set_tile(x: int, y: int, layer: int, tileset_id: int, tile_id: int):
 	chunk[x%16+(y%16)*16] = [tileset_id, tile_id]
 	
 	set_tile_visual(x, y, layer, tileset_id, tile_id)
-		
+
 func set_tile_visual(x: int, y: int, layer: int, tileset_id: int, tile_id: int, update_bitmask: bool = true):
 	var cache_tile = get_tile(tileset_id, tile_id)
 	var layer_tilemap_node = back_tilemap_node
