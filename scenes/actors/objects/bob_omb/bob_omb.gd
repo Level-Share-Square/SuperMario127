@@ -64,7 +64,22 @@ func create_coin():
 	object.properties.append(Vector2(velocity_x, -300))
 	get_parent().create_object(object, false)
 
-func _ready():
+
+func on_visibility_changed(is_visible: bool) -> void:
+	for raycast in raycasts:
+		if is_instance_valid(raycast):
+			raycast.enabled = is_visible
+
+func on_hide() -> void:
+	on_visibility_changed(false)
+
+func on_show() -> void:
+	on_visibility_changed(true)
+
+func _ready() -> void:
+	$VisibilityEnabler2D.connect("screen_exited", self, "on_hide")
+	$VisibilityEnabler2D.connect("screen_entered", self, "on_show")
+	on_visibility_changed($VisibilityEnabler2D.is_on_screen())
 	player_detector.connect("body_entered", self, "player_entered")
 	CurrentLevelData.enemies_instanced += 1
 	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
