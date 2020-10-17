@@ -27,6 +27,16 @@ func create_trail():
 	trail.script = trail_script
 	add_child(trail)
 
+func _process(delta):
+	if character.sprite.material != null:
+		hue += 0.015
+		var gradient_texture = GradientTexture.new()
+		var gradient = Gradient.new()
+		gradient.offsets = PoolRealArray([0.15, 1])
+		gradient.colors = PoolColorArray([Color.from_hsv(hue, 1, 1), Color(1, 1, 1)])
+		gradient_texture.gradient = gradient
+		character.sprite.material.set_shader_param("gradient", gradient_texture)
+
 func _update(delta):
 	if !has_landed: #and character.is_grounded():
 		has_landed = true
@@ -38,15 +48,6 @@ func _update(delta):
 	if trail_timer <= 0:
 		trail_timer = 0.075
 		create_trail()
-		
-	if character.sprite.material != null:
-		hue += 0.015
-		var gradient_texture = GradientTexture.new()
-		var gradient = Gradient.new()
-		gradient.offsets = PoolRealArray([0.15, 1])
-		gradient.colors = PoolColorArray([Color.from_hsv(hue, 1, 1), Color(1, 1, 1)])
-		gradient_texture.gradient = gradient
-		character.sprite.material.set_shader_param("gradient", gradient_texture)
 
 func apply_visuals():
 	character.sprite.material = material
