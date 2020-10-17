@@ -103,7 +103,7 @@ func button_press():
 		if button_down_out.pressed and area.settings.bounds.size.y < 1500:
 			area.settings.bounds = area.settings.bounds.grow_individual(0,0,0,1)
 			shared_node.update_tilemaps()
-			backgrounds_node.update_background(area)
+			backgrounds_node.update_background_area(area)
 			camera_node.update_limits(area)
 			camera_node.position.y += 32
 			update_label()
@@ -111,14 +111,14 @@ func button_press():
 		if button_down_in.pressed and area.settings.bounds.size.y > 14:
 			area.settings.bounds = area.settings.bounds.grow_individual(0,0,0,-1)
 			shared_node.update_tilemaps()
-			backgrounds_node.update_background(area)
+			backgrounds_node.update_background_area(area)
 			camera_node.update_limits(area)
 			update_label()
 	
 		if button_up_out.pressed and area.settings.bounds.size.y < 1500:
 			area.settings.bounds = area.settings.bounds.grow_individual(0,1,0,0)
 			shared_node.update_tilemaps()
-			backgrounds_node.update_background(area)
+			backgrounds_node.update_background_area(area)
 			camera_node.update_limits(area)
 			camera_node.position.y += 32
 			update_label()
@@ -126,6 +126,6 @@ func button_press():
 		if button_up_in.pressed and area.settings.bounds.size.y > 14:
 			area.settings.bounds = area.settings.bounds.grow_individual(0,-1,0,0)
 			shared_node.update_tilemaps()
-			backgrounds_node.update_background(area)
+			backgrounds_node.update_background_area(area)
 			camera_node.update_limits(area)
 			update_label()

@@ -43,6 +43,7 @@ func extend_bounds_Left(amount: int):
 	amount = clamp(amount, 24-area.settings.bounds.size.x, 1500-area.settings.bounds.size.x)
 	area.settings.bounds = area.settings.bounds.grow_individual(amount,0,0,0)
 	shared.update_tilemaps()
+	backgrounds.update_background_area(area)
 	camera.smoothing_enabled = false #smoothing would mass up spam clicking the buttons
 	camera.position.x -= 32 * amount
 	camera.update_limits(area)
@@ -55,6 +56,7 @@ func extend_bounds_Top(amount: int):
 	amount = clamp(amount, 14-area.settings.bounds.size.y, 1500-area.settings.bounds.size.y)
 	area.settings.bounds = area.settings.bounds.grow_individual(0,amount,0,0)
 	shared.update_tilemaps()
+	backgrounds.update_background_area(area)
 	camera.smoothing_enabled = false #smoothing would mass up spam clicking the buttons
 	camera.position.y -= 32 * amount
 	camera.update_limits(area)
@@ -67,6 +69,7 @@ func extend_bounds_Right(amount: int):
 	amount = clamp(amount, 24-area.settings.bounds.size.x, 1500-area.settings.bounds.size.x)
 	area.settings.bounds = area.settings.bounds.grow_individual(0,0,amount,0)
 	shared.update_tilemaps()
+	backgrounds.update_background_area(area)
 	camera.smoothing_enabled = false #smoothing would mass up spam clicking the buttons
 	camera.position.x += 32 * amount
 	camera.update_limits(area)
@@ -79,7 +82,7 @@ func extend_bounds_Bottom(amount: int):
 	amount = clamp(amount, 14-area.settings.bounds.size.y, 1500-area.settings.bounds.size.y)
 	area.settings.bounds = area.settings.bounds.grow_individual(0,0,0,amount)
 	shared.update_tilemaps()
-	backgrounds.update_background(area)
+	backgrounds.update_background_area(area)
 	camera.smoothing_enabled = false #smoothing would mass up spam clicking the buttons
 	camera.position.y += 32 * amount
 	camera.update_limits(area)

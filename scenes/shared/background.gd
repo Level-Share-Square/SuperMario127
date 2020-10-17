@@ -12,6 +12,9 @@ func _ready():
 func load_in(_level_data : LevelData, level_area : LevelArea):
 	update_background(level_area.settings.sky, level_area.settings.background, level_area.settings.bounds)
 
+func update_background_area(area : LevelArea):
+	update_background(area.settings.sky, area.settings.background, area.settings.bounds)
+
 func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rect2(0, 0, 0, 0), extra_y_offset : float = 0):
 	if !ready:
 		yield(self,"ready")
