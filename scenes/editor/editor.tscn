@@ -1,4 +1,4 @@
-[gd_scene load_steps=227 format=2]
+[gd_scene load_steps=228 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -199,6 +199,7 @@
 [ext_resource path="res://assets/tiles/black_granite/icon.png" type="Texture" id=197]
 [ext_resource path="res://scenes/actors/objects/note_block/icon.png" type="Texture" id=198]
 [ext_resource path="res://scenes/actors/objects/note_block/preview.png" type="Texture" id=199]
+[ext_resource path="res://assets/tiles/cobblestone/icon.png" type="Texture" id=200]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2127,6 +2128,12 @@ items_in_sequence = 3
 index_in_sequence = 1
 icon = ExtResource( 192 )
 preview = ExtResource( 192 )
+
+[node name="Cobblestone" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 3 )
+tileset_id = 20
+icon = ExtResource( 200 )
+preview = ExtResource( 200 )
 
 [node name="MiscGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )

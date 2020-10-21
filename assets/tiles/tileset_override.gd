@@ -62,6 +62,8 @@ const NEGATIVE_ROCK_SLAB = 45
 
 const BLACK_GRANITE = 46
 
+const COBBLESTONE = 47
+
 var ids = [
 	GRASS_BLOCK,
 	GRASS_SLOPE_RIGHT,
@@ -122,7 +124,9 @@ var ids = [
 	
 	NEGATIVE_ROCK_SLAB,
 	
-	BLACK_GRANITE
+	BLACK_GRANITE,
+	
+	COBBLESTONE
 ]
 
 var binds = {
