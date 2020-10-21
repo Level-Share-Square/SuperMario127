@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://classes/ForegroundResource.gd" type="Script" id=1]
+[ext_resource path="res://scenes/shared/background/foregrounds/bowser/preview.png" type="Texture" id=2]
+[ext_resource path="res://scenes/shared/background/foregrounds/bowser/bowser1.tres" type="Resource" id=3]
+[ext_resource path="res://scenes/shared/background/foregrounds/bowser/bowser2.tres" type="Resource" id=4]
+[ext_resource path="res://scenes/shared/background/foregrounds/bowser/bowser3.tres" type="Resource" id=5]
+
+[resource]
+script = ExtResource( 1 )
+layers = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
+preview = ExtResource( 2 )
