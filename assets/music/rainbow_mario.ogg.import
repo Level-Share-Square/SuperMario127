@@ -12,4 +12,4 @@ dest_files=[ "res://.import/rainbow_mario.ogg-611e3ff0f8f0f6186516f9cac37bd9f5.o
 [params]
 
 loop=true
-loop_offset=6.73
+loop_offset=9.5
