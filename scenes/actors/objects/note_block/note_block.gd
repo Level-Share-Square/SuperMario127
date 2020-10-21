@@ -6,7 +6,7 @@ onready var sprite : NinePatchRect = $Visual/NinePatchRect
 onready var note : Sprite = $Visual/NinePatchRect/Note
 
 onready var bounce_collision_shape : CollisionShape2D = $Area2D/CollisionShape2D
-#onready var bottom_collision_shape : CollisionShape2D = $StaticBody2D/CollisionShape2D
+onready var bottom_collision_shape : CollisionShape2D = $StaticBody2D/CollisionShape2D
 
 onready var left_width = sprite.patch_margin_left
 onready var right_width = sprite.patch_margin_right
@@ -18,6 +18,8 @@ var strong_bounce_power = 650
 var parts := 1
 var last_parts := 1
 
+var cooldown = 0.0
+
 func _set_properties():
 	savable_properties = ["parts", "strong_bounce_power"]
 	editable_properties = ["parts", "strong_bounce_power"]
@@ -28,10 +30,10 @@ func _set_property_values():
 	
 func _ready():
 	bounce_collision_shape.shape = bounce_collision_shape.shape.duplicate(true)
-	#bottom_collision_shape.shape = bottom_collision_shape.shape.duplicate(true)
+	bottom_collision_shape.shape = bottom_collision_shape.shape.duplicate(true)
 	
 	if !enabled:
-		#bottom_collision_shape.disabled = true
+		bottom_collision_shape.disabled = true
 		bounce_collision_shape.disabled = true
 		
 	update_parts()
@@ -47,7 +49,12 @@ func _input(event):
 			parts += 1
 			set_property("parts", parts, true)
 
-func _process(_delta):
+func _process(delta):
+	if cooldown > 0:
+		cooldown -= delta
+		if cooldown <= 0:
+			cooldown = 0
+	
 	if parts != last_parts:
 		update_parts()
 	last_parts = parts
@@ -57,14 +64,13 @@ func _process(_delta):
 			bounce(body)
 
 func bounce(body):
+	if cooldown != 0:
+		return
+
+	cooldown = 0.1
 	var normal = transform.y
 	
 	if "velocity" in body:
-		if (normal.y < -0.1 and body.velocity.y > 0) or (normal.y > 0.1 and body.velocity.y < 0):
-			return
-		if (normal.x < -0.1 and body.velocity.x > 0) or (normal.x > 0.1 and body.velocity.x < 0):
-			return
-		
 		var is_weak_bounce = true
 		if body.has_method("set_state_by_name"):
 			body.set_state_by_name("BounceState", 0)
@@ -85,11 +91,7 @@ func bounce(body):
 		animation_player.play("bounce_weak" if is_weak_bounce else "bounce")
 	elif "velocity" in body.get_parent():
 		var body_parent = body.get_parent()
-		if (normal.y < -0.1 and body_parent.velocity.y > 0) or (normal.y > 0.1 and body_parent.velocity.y < 0):
-			return
-		if (normal.x < -0.1 and body_parent.velocity.x > 0) or (normal.x > 0.1 and body_parent.velocity.x < 0):
-			return
-		
+
 		animation_player.stop()
 		
 		var x_power = (-bounce_power) * normal.x
@@ -108,6 +110,6 @@ func update_parts():
 	sprite.rect_size.x = left_width + right_width + part_width * parts
 
 	bounce_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 + 1.5
-	#bottom_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 - 1
+	bottom_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 - 1
 
 	note.position.x = sprite.rect_size.x / 2
