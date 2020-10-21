@@ -44,7 +44,8 @@ func _stop(delta):
 			character.set_state_by_name("ButtSlideState", delta)
 	else:
 		character.jump_animation = 0
-		character.velocity.y = character.velocity.y / 4
+		if character.velocity.y > 0:
+			character.velocity.y = character.velocity.y / 4
 
 func _stop_check(_delta):
-	return character.is_grounded() or character.inputs[6][1]
+	return character.is_grounded() or (character.inputs[6][1] and can_dive)
