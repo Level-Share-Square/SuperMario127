@@ -28,7 +28,7 @@ func create_trail():
 	add_child(trail)
 
 func _process(delta):
-	if character.sprite.material != null:
+	if character.sprite.material == material:
 		hue += 0.015
 		var gradient_texture = GradientTexture.new()
 		var gradient = Gradient.new()

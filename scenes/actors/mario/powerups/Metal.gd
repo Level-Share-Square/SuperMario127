@@ -15,7 +15,7 @@ func _stop(_delta):
 	music.stop_temporary_music()
 
 func _process(_delta):
-	if character.sprite.material != null:
+	if character.sprite.material == material:
 		var bevel_offset := Vector2(1, 2).rotated(-character.sprite.rotation)
 		character.sprite.material.set_shader_param("bevel_offset", bevel_offset)
 
