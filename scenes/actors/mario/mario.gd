@@ -675,7 +675,7 @@ func _physics_process(delta: float) -> void:
 	# Move by velocity
 	if movable:
 		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
-		if last_position != Vector2.ZERO:
+		if last_position != Vector2.ZERO and (!is_instance_valid(state) or state.name != "DiveState"):
 			if (last_position - global_position).length_squared() > 0:
 				var raycast_result = get_world_2d().direct_space_state.intersect_ray(
 					last_position, global_position, [self], 1)
