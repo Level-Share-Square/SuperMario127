@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/snowless.png-6e23451ca0d5547b6b6bdc11c59f2f97.stex"
+path="res://.import/large_snow_pillar.png-0d657808b20d69cf6545b73beb9ada1f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/snow_tree/snowless.png"
-dest_files=[ "res://.import/snowless.png-6e23451ca0d5547b6b6bdc11c59f2f97.stex" ]
+source_file="res://scenes/actors/objects/large_snow_pillar/large_snow_pillar.png"
+dest_files=[ "res://.import/large_snow_pillar.png-0d657808b20d69cf6545b73beb9ada1f.stex" ]
 
 [params]
 

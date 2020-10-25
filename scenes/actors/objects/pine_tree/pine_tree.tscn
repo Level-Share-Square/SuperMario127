@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/actors/objects/snow_tree/snow_tree.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/pine_tree/pine_tree.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/big_tree/big_tree.gd" type="Script" id=2]
 
-[node name="SnowTree" type="Node2D"]
+[node name="PineTree" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

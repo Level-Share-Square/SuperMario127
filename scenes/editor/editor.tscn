@@ -1,4 +1,4 @@
-[gd_scene load_steps=228 format=2]
+[gd_scene load_steps=238 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -200,6 +200,16 @@
 [ext_resource path="res://scenes/actors/objects/note_block/icon.png" type="Texture" id=198]
 [ext_resource path="res://scenes/actors/objects/note_block/preview.png" type="Texture" id=199]
 [ext_resource path="res://assets/tiles/cobblestone/icon.png" type="Texture" id=200]
+[ext_resource path="res://scenes/actors/objects/snow_pillar/snow_pillar.png" type="Texture" id=201]
+[ext_resource path="res://scenes/actors/objects/large_snow_tree/preview.png" type="Texture" id=202]
+[ext_resource path="res://scenes/actors/objects/large_snow_pillar/large_snow_pillar.png" type="Texture" id=203]
+[ext_resource path="res://scenes/actors/objects/large_snow_tree/icon.png" type="Texture" id=204]
+[ext_resource path="res://scenes/actors/objects/snow_pillar/preview.png" type="Texture" id=205]
+[ext_resource path="res://scenes/actors/objects/large_snow_pillar/preview.png" type="Texture" id=206]
+[ext_resource path="res://scenes/actors/objects/pine_tree/preview.png" type="Texture" id=207]
+[ext_resource path="res://scenes/actors/objects/pine_tree/pine_tree.png" type="Texture" id=208]
+[ext_resource path="res://scenes/actors/objects/large_pine_tree/icon.png" type="Texture" id=209]
+[ext_resource path="res://scenes/actors/objects/large_pine_tree/preview.png" type="Texture" id=210]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1649,6 +1659,31 @@ z_index = -9
 icon = ExtResource( 51 )
 preview = ExtResource( 50 )
 
+[node name="PineTree" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 62
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+z_index = -9
+change_to = "LargePineTree"
+items_in_sequence = 2
+icon = ExtResource( 208 )
+preview = ExtResource( 207 )
+
+[node name="LargePineTree" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 63
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+z_index = -9
+change_to = "PineTree"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 209 )
+preview = ExtResource( 210 )
+
 [node name="BigBush" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 3 )
 object_id = 11
@@ -1800,8 +1835,48 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
 z_index = -9
+change_to = "LargeSnowTree"
+items_in_sequence = 2
 icon = ExtResource( 125 )
 preview = ExtResource( 124 )
+
+[node name="LargeSnowTree" type="Node" parent="PlaceableItems/SnowGroup"]
+script = ExtResource( 3 )
+object_id = 59
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+z_index = -9
+change_to = "SnowTree"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 204 )
+preview = ExtResource( 202 )
+
+[node name="SnowPillar" type="Node" parent="PlaceableItems/SnowGroup"]
+script = ExtResource( 3 )
+object_id = 60
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+z_index = -9
+change_to = "LargeSnowPillar"
+items_in_sequence = 2
+icon = ExtResource( 201 )
+preview = ExtResource( 205 )
+
+[node name="LargeSnowPillar" type="Node" parent="PlaceableItems/SnowGroup"]
+script = ExtResource( 3 )
+object_id = 61
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+z_index = -9
+change_to = "SnowPillar"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 203 )
+preview = ExtResource( 206 )
 
 [node name="SnowPlatform" type="Node" parent="PlaceableItems/SnowGroup"]
 script = ExtResource( 3 )
