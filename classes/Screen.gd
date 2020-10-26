@@ -8,6 +8,9 @@ var can_interact : bool = false
 # warning-ignore: unused_signal
 signal screen_change
 
+func _pre_open_screen() -> void:
+	pass 
+
 func _open_screen() -> void:
 	pass 
 

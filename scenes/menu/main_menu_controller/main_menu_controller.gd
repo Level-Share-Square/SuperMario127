@@ -81,6 +81,7 @@ func start_changing_screens(this_screen_name : String, new_screen_name : String)
 	previous_screen.can_interact = false
 
 	previous_screen._close_screen()
+	current_screen._pre_open_screen()
 
 	# make the screen we're moving to visible during the transition 
 	# once simultanious transition animations are implemented an animatiion could be used to hide it if needed
