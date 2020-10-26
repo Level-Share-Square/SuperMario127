@@ -33,8 +33,6 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time, new_ar
 		get_tree().paused = false
 		
 		yield(do_transition_animation(transition_out_tex, transition_time, TRANSITION_SCALE_COVERED, TRANSITION_SCALE_UNCOVER, volume_multiplier / 4, volume_multiplier, false), "completed")
-		
-		canvas_background.visible = false
 
 func do_transition_fade(transition_time : float = DEFAULT_TRANSITION_TIME, start_color : Color = Color(0, 0, 0, 0), end_color : Color = Color(0, 0, 0, 1), reverse_after : bool = true):
 	canvas_mask.texture_scale = TRANSITION_SCALE_COVERED
