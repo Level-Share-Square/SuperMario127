@@ -96,6 +96,7 @@ func _draw():
 func _ready():
 	var scene := load("res://scenes/actors/objects/touch_lift_platform/touch_lift_platform.tscn")
 	
+	delta_angle = (PI * 2) / platform_count
 	for _i in range(platform_count):
 		var instance = scene.instance()
 		platforms.append(instance)
@@ -115,5 +116,3 @@ func _physics_process(delta):
 		else:
 			platform.position = Vector2(radius * 32, 0).rotated(angle)
 		angle += delta_angle
-		
-		delta_angle = (PI * 2) / platform_count

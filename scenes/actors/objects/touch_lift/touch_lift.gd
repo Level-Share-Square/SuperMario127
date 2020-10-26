@@ -26,6 +26,7 @@ var end_position : Vector2
 var last_end_position : Vector2
 
 var max_speed := 1.0
+onready var blend := pow(0.95, 120 * get_physics_process_delta_time())
 
 var curve = null
 
@@ -150,7 +151,7 @@ func _ready():
 		add_child(end_sprite_node)
 		
 		set_property("end_position", path.curve.get_point_position(path.curve.get_point_count()-1)/32)
-		
+
 func set_sprite_parts(sprite):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts
@@ -168,42 +169,40 @@ func _physics_process(delta):
 
 	linear_offset += speed * max_speed * 120 * delta
 
-	if(move_type!=MT_LOOP):
+	if move_type != MT_LOOP:
 		linear_offset = clamp(linear_offset, 0.0, path.curve.get_baked_length()-0.01) #so the 
 
-	var blend = pow(0.95, 120*delta)
-
-	loop_offset = loop_offset * blend + linear_offset* (1-blend)
+	loop_offset = lerp(linear_offset, loop_offset, blend) #loop_offset * blend + linear_offset * (1 - blend)
 	
 	path_follower.offset = fmod(loop_offset, path.curve.get_baked_length())
 	
-	if speed<0.0 and path_follower.offset<=2.0:
+	if speed < 0.0 and path_follower.offset <= 2.0:
 		linear_offset = 0.0
 		speed = -speed
-
-	elif move_type!=MT_LOOP and speed>0.0 and path_follower.offset>=path.curve.get_baked_length()-2.0:
+	
+	elif move_type != MT_LOOP and speed > 0.0 and path_follower.offset >= path.curve.get_baked_length() - 2.0:
 		linear_offset = path.curve.get_baked_length()
 		reached_end()
-
-		if(!activated):
-			return
 		
-	if(mode!=1):
+		if !activated:
+			return
+	
+	if mode != 1:
 		platform.set_position(path_follower.position)
 	else:
 		platform.position = path_follower.position
-		
+
 func reached_end() -> void:
-	if(move_type==MT_BACK_FORTH):
-		speed = -speed
-		return
-	elif(move_type==MT_RESET):
-		$AnimationPlayer.play("Reset")
-	elif(move_type==MT_ONCE):
-		activated = false
-		
+	match move_type:
+		MT_BACK_FORTH:
+			speed = -speed
+		MT_RESET:
+			$AnimationPlayer.play("Reset")
+		MT_ONCE:
+			activated = false
+
 func _on_touch_area_entered(body):
-	if(body is Character):
+	if body is Character:
 		activated = true
 
 func reset_platform():
@@ -214,4 +213,3 @@ func reset_platform():
 	platform.position = path_follower.position
 	
 	activated = !touch_start
-	
