@@ -562,6 +562,7 @@ NotificationHandler="*res://scenes/shared/notification/notification_handler.gd"
 SavedLevels="*res://scenes/shared/saved_levels.gd"
 MenuVariables="*res://scenes/menu/menu_variables.gd"
 TimeScore="*res://scenes/actors/time_score/time_score.tscn"
+MiscShared="*res://scenes/shared/miscshared.gd"
 
 [debug]
 

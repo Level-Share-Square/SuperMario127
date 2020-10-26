@@ -13,15 +13,6 @@ var can_collect_coins : Array
 func _process(_delta):
 	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
 
-var rainbow_gradient_texture = GradientTexture.new()
-var rainbow_gradient = Gradient.new()
-var rainbow_hue = 0
-
-func _physics_process(delta):
-	rainbow_hue += 0.0075 * delta * 120
-	rainbow_gradient.offsets = PoolRealArray([0, 0.5])
-	rainbow_gradient.colors = PoolColorArray([Color.from_hsv(rainbow_hue, 1.35, 0.65), Color(1, 1, 1)])
-	rainbow_gradient_texture.gradient = rainbow_gradient
 
 func _ready():
 	var data = CurrentLevelData.level_data
