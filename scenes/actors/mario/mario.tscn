@@ -1250,13 +1250,13 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 56 )
-frame = 4
+frame = 13
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 10
+frame = 7
 speed_scale = 3.0
 playing = true
 

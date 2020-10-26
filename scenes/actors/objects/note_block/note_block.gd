@@ -62,8 +62,13 @@ func _process(delta):
 	if enabled and mode == 0:
 		for body in area_2d.get_overlapping_bodies():
 			bounce(body)
+		for area in area_2d.get_overlapping_areas():
+			if area.get_parent() is Character:
+				bounce(area)
 
 func bounce(body):
+	print("A")
+	
 	if cooldown != 0:
 		return
 
@@ -91,11 +96,18 @@ func bounce(body):
 		animation_player.play("bounce_weak" if is_weak_bounce else "bounce")
 	elif "velocity" in body.get_parent():
 		var body_parent = body.get_parent()
+		var is_weak_bounce = true
+		
+		if body_parent.has_method("set_state_by_name"):
+			body_parent.set_state_by_name("BounceState", 0)
+			if body_parent.inputs[2][0]:
+				is_weak_bounce = false
+				body_parent.sound_player.play_double_jump_sound()
 
 		animation_player.stop()
 		
-		var x_power = (-bounce_power) * normal.x
-		var y_power = (-bounce_power) * normal.y
+		var x_power = (-bounce_power if is_weak_bounce else -strong_bounce_power) * normal.x
+		var y_power = (-bounce_power if is_weak_bounce else -strong_bounce_power) * normal.y
 		
 		if abs(normal.x) > 0.1:
 			body_parent.velocity.x = x_power
@@ -103,7 +115,7 @@ func bounce(body):
 		if abs(normal.y) > 0.1:
 			body_parent.velocity.y = y_power
 			body_parent.position.y += 2 * sign(y_power)
-		animation_player.play("bounce_weak")
+		animation_player.play("bounce_weak" if is_weak_bounce else "bounce")
 
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
