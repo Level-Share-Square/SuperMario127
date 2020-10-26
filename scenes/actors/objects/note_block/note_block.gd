@@ -66,9 +66,7 @@ func _process(delta):
 			if area.get_parent() is Character:
 				bounce(area)
 
-func bounce(body):
-	print("A")
-	
+func bounce(body):	
 	if cooldown != 0:
 		return
 
