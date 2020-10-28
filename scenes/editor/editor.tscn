@@ -1,4 +1,4 @@
-[gd_scene load_steps=244 format=2]
+[gd_scene load_steps=247 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -216,26 +216,29 @@
 [ext_resource path="res://scenes/actors/objects/cave_spore/cave_spore.png" type="Texture" id=214]
 [ext_resource path="res://scenes/actors/objects/cave_spore_mini/cave_spore_mini.png" type="Texture" id=215]
 [ext_resource path="res://scenes/actors/objects/cave_spore_mini/icon.png" type="Texture" id=216]
-
-[sub_resource type="StreamTexture" id=6]
-load_path = "res://.import/icon.png-f8b0399d9244d4055e92dc67242cc371.stex"
-
-[sub_resource type="StreamTexture" id=7]
-load_path = "res://.import/turbo_box.png-6f28657900f6cb6391239052bd625eb4.stex"
+[ext_resource path="res://scenes/editor/assets/arrow_icon.png" type="Texture" id=217]
+[ext_resource path="res://scenes/editor/assets/arrow_icon_hover.png" type="Texture" id=218]
+[ext_resource path="res://scenes/editor/assets/arrow_icon_press.png" type="Texture" id=219]
 
 [sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
+load_path = "res://.import/icon.png-f8b0399d9244d4055e92dc67242cc371.stex"
 
 [sub_resource type="StreamTexture" id=2]
-load_path = "res://.import/preview.png-b5e1f057c76348c498eb58977a6fa3d8.stex"
+load_path = "res://.import/turbo_box.png-6f28657900f6cb6391239052bd625eb4.stex"
 
 [sub_resource type="StreamTexture" id=3]
-load_path = "res://.import/icon.png-2f7996d42f2cb278ea1c7da3bda68d02.stex"
+load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
 
 [sub_resource type="StreamTexture" id=4]
-load_path = "res://.import/icon.png-dd51669c0e57c36afe4a2289110ba43a.stex"
+load_path = "res://.import/preview.png-b5e1f057c76348c498eb58977a6fa3d8.stex"
 
 [sub_resource type="StreamTexture" id=5]
+load_path = "res://.import/icon.png-2f7996d42f2cb278ea1c7da3bda68d02.stex"
+
+[sub_resource type="StreamTexture" id=6]
+load_path = "res://.import/icon.png-dd51669c0e57c36afe4a2289110ba43a.stex"
+
+[sub_resource type="StreamTexture" id=7]
 load_path = "res://.import/rocket_box.png-ec204761d41d07c85beacca4836ca4eb.stex"
 
 [sub_resource type="StreamTexture" id=8]
@@ -1227,8 +1230,8 @@ z_index = -1
 change_to = "HoverBox"
 items_in_sequence = 3
 index_in_sequence = 2
-icon = SubResource( 6 )
-preview = SubResource( 7 )
+icon = SubResource( 1 )
+preview = SubResource( 2 )
 
 [node name="SampleObject" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
@@ -1298,8 +1301,8 @@ object_center = Vector2( 16, 16 )
 change_to = "Coin"
 items_in_sequence = 3
 index_in_sequence = 2
-icon = SubResource( 1 )
-preview = SubResource( 2 )
+icon = SubResource( 3 )
+preview = SubResource( 4 )
 
 [node name="Shine" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
@@ -1347,7 +1350,7 @@ object_center = Vector2( 16, 16 )
 z_index = -1
 change_to = "RocketBox"
 items_in_sequence = 2
-icon = SubResource( 3 )
+icon = SubResource( 5 )
 preview = ExtResource( 100 )
 
 [node name="RocketBox" type="Node" parent="PlaceableItems/SpecialGroup"]
@@ -1359,8 +1362,8 @@ z_index = -1
 change_to = "HoverBox"
 items_in_sequence = 2
 index_in_sequence = 1
-icon = SubResource( 4 )
-preview = SubResource( 5 )
+icon = SubResource( 6 )
+preview = SubResource( 7 )
 
 [node name="SmallBottle" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
@@ -2639,16 +2642,16 @@ stream = ExtResource( 36 )
 volume_db = -10.0
 
 [node name="BoundsControlToggle" type="TextureButton" parent="UI"]
-margin_left = 518.0
-margin_top = 9.0
-margin_right = 678.0
-margin_bottom = 169.0
+margin_left = 522.0
+margin_top = 3.0
+margin_right = 682.0
+margin_bottom = 163.0
 rect_scale = Vector2( 0.333, 0.333 )
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource( 66 )
-texture_pressed = ExtResource( 68 )
-texture_hover = ExtResource( 67 )
+texture_normal = ExtResource( 217 )
+texture_pressed = ExtResource( 219 )
+texture_hover = ExtResource( 218 )
 script = ExtResource( 32 )
 __meta__ = {
 "_edit_use_anchors_": false
