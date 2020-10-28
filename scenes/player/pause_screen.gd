@@ -151,7 +151,7 @@ func quit_to_menu() -> void:
 	MenuVariables.quit_to_menu_with_transition("levels_screen")
 
 func update_shine_info():
-	var level_info = SavedLevels.levels[SavedLevels.selected_level]
+	var level_info = SavedLevels.get_current_levels()[SavedLevels.selected_level]
 	if level_info.selected_shine == -1:
 		return
 	var selected_shine_info = level_info.shine_details[level_info.selected_shine]
