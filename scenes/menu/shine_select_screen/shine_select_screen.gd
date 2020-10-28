@@ -52,6 +52,9 @@ var used_shine_ids : Array = []
 # contains an array that stores dictionaries containing all the information needed to populate the shine select screen
 var shine_details : Array
 
+# An array for the shine indices into the shine_details array, since directly indexing shine_details is unreliable
+var shine_details_indices := []
+
 func _ready() -> void:
 	# store the initial volume of the mission_select_sfx
 	mission_select_sfx_volume = mission_select_sfx.volume_db
@@ -77,12 +80,15 @@ func _open_screen() -> void:
 	
 	for i in range(shine_details.size()):
 		if used_shine_ids.has(shine_details[i]["id"]):
-			continue 
+			continue
+		if !shine_details[i]["show_in_menu"]:
+			continue
 
 		used_shine_ids.append(shine_details[i]["id"])
 
 		var shine_sprite = SHINE_SPRITE_SCENE.instance()
 		shine_sprites.append(shine_sprite)
+		shine_details_indices.append(i)
 		
 		# mark the selected shine and only that shine as selected
 		shine_sprite.selected = i == 0
@@ -186,8 +192,8 @@ func update_labels() -> void:
 	# this will assume the selected shine and the selected level are valid
 	level_title.text = SavedLevels.get_current_levels()[SavedLevels.selected_level].level_name
 	level_title_backing.text = level_title.text
-	shine_title.text = shine_details[selected_shine_index]["title"]
-	shine_description.text = shine_details[selected_shine_index]["description"]
+	shine_title.text = shine_details[shine_details_indices[selected_shine_index]]["title"]
+	shine_description.text = shine_details[shine_details_indices[selected_shine_index]]["description"]
 
 func start_level() -> void:
 	letsa_go_sfx.play()
@@ -203,7 +209,7 @@ func start_level() -> void:
 	
 	get_tree().call_group("shine_sprites", "start_pressed_animation")
 
-	SavedLevels.get_current_levels()[SavedLevels.selected_level].selected_shine = selected_shine_index
+	SavedLevels.get_current_levels()[SavedLevels.selected_level].selected_shine = shine_details_indices[selected_shine_index]
 	
 	# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
 	# so we'll assume it's safe to just go straight to the player scene 

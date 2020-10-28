@@ -123,9 +123,17 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 	if level_info != null:
 		level_name_label.text = level_info.level_name
 
-		# get the number of true values in the collected_shines Dictionary, aka get the number of collected shines
-		var collected_shine_count = level_info.collected_shines.values().count(true)
-		shine_progress.text = "%s/%s" % [collected_shine_count, level_info.collected_shines.size()]
+		# Only count shine sprites that have show_in_menu on
+		var total_shine_count := 0
+		var collected_shine_count := 0
+
+		for shine_details in level_info.shine_details:
+			if shine_details["show_in_menu"]:
+				total_shine_count += 1
+				if level_info.collected_shines[str(shine_details["id"])]:
+					collected_shine_count += 1
+
+		shine_progress.text = "%s/%s" % [collected_shine_count, total_shine_count]
 
 		var collected_star_coin_count = level_info.collected_star_coins.values().count(true)
 		star_coin_progress.text = "%s/%s" % [collected_star_coin_count, level_info.collected_star_coins.size()]
