@@ -33,10 +33,6 @@ collision_mask = 2
 position = Vector2( 0, -13 )
 shape = SubResource( 2 )
 
-[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-process_parent = true
-physics_process_parent = true
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -10.0

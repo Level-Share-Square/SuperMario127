@@ -13,6 +13,7 @@ var accel = 750
 var charge = 0
 var rotation_interpolation_speed = 35
 var deactivate_frames = 0
+var cooldown_time = 2
 
 func _init():
 	blacklisted_states = ["ButtSlideState", "WallSlideState", "GroundPoundStartState", "GroundPoundState", "GroundPoundEndState", "GetupState", "KnockbackState", "BonkedState", "SpinningState"]
@@ -30,9 +31,14 @@ func _activated_update(delta):
 		if !character.fludd_charge_sound.is_playing():
 			character.fludd_charge_sound.play()
 		charge += delta
+		character.fludd_sprite.modulate = Color(1, 1 - charge, 1 - charge)
+		character.fludd_sprite.offset = Vector2(rand_range(-1, 1), rand_range(-1, 1)) * charge
 		return
-	
+		
+	character.fludd_sprite.offset = Vector2(0, 0)
+	character.fludd_sprite.modulate = Color(1, 1, 1)
 	character.fludd_charge_sound.stop()
+	character.fludd_boost_sound.play()
 	charge = 0
 	character.stamina = 0
 	character.get_state_node("JumpState").ledge_buffer = 0 # Disable coyote time, which allowed for a "double jump" that was weaker than the actual blast
@@ -110,6 +116,8 @@ func _general_update(_delta):
 		if last_charged:
 			character.fludd_charge_sound.stop()
 		charge -= _delta * 2
+		character.fludd_sprite.modulate = Color(1, 1 - charge, 1 - charge)
+		character.fludd_sprite.offset = Vector2(0, 0)
 		if charge < 0:
 			charge = 0
 	last_charged = activated

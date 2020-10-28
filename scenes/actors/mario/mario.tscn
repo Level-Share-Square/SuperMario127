@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=2]
+[gd_scene load_steps=121 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -59,6 +59,7 @@
 [ext_resource path="res://scenes/actors/mario/this_shouldnt_be_necessary.gd" type="Script" id=57]
 [ext_resource path="res://scenes/actors/mario/is_hurt_area.gd" type="Script" id=58]
 [ext_resource path="res://scenes/actors/mario/particles/area_of_attack_ring.png" type="Texture" id=59]
+[ext_resource path="res://scenes/actors/objects/cannon/nsmbwiiBobombCannon.wav" type="AudioStream" id=60]
 [ext_resource path="res://scenes/actors/objects/shine/texture_outline.png" type="Texture" id=61]
 [ext_resource path="res://scenes/actors/mario/powerups/Wing.gd" type="Script" id=62]
 
@@ -1148,8 +1149,14 @@ collision_mask = 81
 stream = ExtResource( 25 )
 volume_db = -15.0
 
+[node name="FluddBoostSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 60 )
+volume_db = 5.0
+pitch_scale = 1.15
+
 [node name="FluddChargeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 42 )
+pitch_scale = 1.1
 
 [node name="NozzleSwitchSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 27 )
@@ -1250,13 +1257,13 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 56 )
-frame = 13
+frame = 1
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 7
+frame = 2
 speed_scale = 3.0
 playing = true
 
