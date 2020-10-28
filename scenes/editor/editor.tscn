@@ -1,4 +1,4 @@
-[gd_scene load_steps=238 format=2]
+[gd_scene load_steps=240 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -210,6 +210,8 @@
 [ext_resource path="res://scenes/actors/objects/pine_tree/pine_tree.png" type="Texture" id=208]
 [ext_resource path="res://scenes/actors/objects/large_pine_tree/icon.png" type="Texture" id=209]
 [ext_resource path="res://scenes/actors/objects/large_pine_tree/preview.png" type="Texture" id=210]
+[ext_resource path="res://scenes/actors/objects/cave_plant/icon.png" type="Texture" id=211]
+[ext_resource path="res://scenes/actors/objects/cave_plant/preview.png" type="Texture" id=212]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1941,6 +1943,16 @@ items_in_sequence = 2
 index_in_sequence = 1
 icon = ExtResource( 180 )
 preview = ExtResource( 181 )
+
+[node name="CavePlant" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 3 )
+object_id = 64
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+z_index = -9
+icon = ExtResource( 211 )
+preview = ExtResource( 212 )
 
 [node name="BuildingGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
