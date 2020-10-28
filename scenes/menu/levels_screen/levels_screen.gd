@@ -21,6 +21,7 @@ onready var button_time_scores : Button = $MarginContainer/HBoxContainer/LevelIn
 onready var button_close_time_scores : Button = $MarginContainer/HBoxContainer/TimeScorePanel/PanelContainer/VBoxContainer/ButtonCloseTimeScore
 
 # toggleable panels 
+onready var template_level_info : PanelContainer = $MarginContainer/HBoxContainer/VBoxContainer/TemplateLevelInfo
 onready var level_list_panel : PanelContainer = $MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel
 onready var level_code_panel : PanelContainer = $MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel
 onready var single_time_score_panel : PanelContainer = $MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel 
@@ -51,6 +52,8 @@ const DEFAULT_SKY_THUMBNAIL : StreamTexture = preload("res://scenes/shared/backg
 const DEFAULT_FOREGROUND_MODULATE : Color = Color(1, 1, 1)
 const DEFAULT_FOREGROUND_THUMBNAIL : StreamTexture = preload("res://scenes/shared/background/foregrounds/hills/preview.png")
 
+var levels := SavedLevels.levels
+
 func _ready() -> void:
 	var _connect
 
@@ -72,19 +75,34 @@ func _ready() -> void:
 	_connect = button_time_scores.connect("pressed", self, "on_button_time_scores_pressed")
 	_connect = button_close_time_scores.connect("pressed", self, "on_button_close_time_scores_pressed")
 
-	for level_info in SavedLevels.levels:
-		level_list.add_item(level_info.level_name)
+	_pre_open_screen() # In case we're exiting a level
 
-	# if it's not NO_LEVEL, we're probably returning to the menu after leaving a stage
-	if SavedLevels.selected_level != NO_LEVEL: 
-		populate_info_panel(SavedLevels.levels[SavedLevels.selected_level])
+func _pre_open_screen() -> void:
+	levels = SavedLevels.template_levels if SavedLevels.is_template_list else SavedLevels.levels
+	print("Levels: ", levels.size())
+	
+	for button in [button_add]:
+		button.disabled = SavedLevels.is_template_list
+	template_level_info.visible = SavedLevels.is_template_list
+	button_copy_code.text = "Copy to Levels" if SavedLevels.is_template_list else "Copy Level Code"
+	
+	# TODO: replace this for the template list
+	level_list.clear()
+	for level_info in levels:
+		level_list.add_item(level_info.level_name)
+	
+	# Empty levels list, so just empty out the info panel
+	if levels.size() == 0:
+		SavedLevels.selected_level = NO_LEVEL
+		populate_info_panel()
+	elif SavedLevels.selected_level != NO_LEVEL:
+		# otherwise if it's not NO_LEVEL, we're probably returning to the menu after leaving a stage
+		populate_info_panel(levels[SavedLevels.selected_level])
 		level_list.select(SavedLevels.selected_level)
-	elif SavedLevels.levels.size() > 0: # no level selected, so select the first one if there is one
-		populate_info_panel(SavedLevels.levels[0])
+	else: # no level selected, but we have levels, so select the first one
+		populate_info_panel(levels[0])
 		SavedLevels.selected_level = 0
 		level_list.select(0)
-	else: # no level selected and no level to select, so just empty out the info panel
-		populate_info_panel() 
 
 func _input(_event : InputEvent) -> void:
 	if !can_interact or get_focus_owner() != null:
@@ -166,16 +184,17 @@ func add_level(level_info : LevelInfo):
 
 	var error_code = SavedLevels.save_level_to_disk(level_info, level_disk_path)
 	if error_code == OK:
-		SavedLevels.levels.append(level_info)
+		levels.append(level_info)
 		level_list.add_item(level_info.level_name)
 
 		SavedLevels.levels_disk_paths.append(level_disk_path)
 		SavedLevels.save_level_paths_to_disk()
 
 func delete_level(index : int) -> void:
+	if SavedLevels.is_template_list: return # The button shouldn't be clickable, but just in case
 	var level_disk_path = SavedLevels.levels_disk_paths[index]
 
-	SavedLevels.levels.remove(index)
+	levels.remove(index)
 	SavedLevels.levels_disk_paths.remove(index)
 	level_list.remove_item(index)
 
@@ -184,7 +203,7 @@ func delete_level(index : int) -> void:
 
 	# this block updates the selected level as levels are deleted:
 	# set selected level to NO_LEVEL if there's no levels 
-	var level_count = SavedLevels.levels.size()
+	var level_count = levels.size()
 	var selected_level = SavedLevels.selected_level * int(level_count > 0) + NO_LEVEL * int(not level_count > 0)
 	# decrement the selected level by 1 if we just deleted the last level
 	selected_level -= 1 * int(selected_level + 1 > level_count)
@@ -193,23 +212,25 @@ func delete_level(index : int) -> void:
 	SavedLevels.selected_level = selected_level
 
 	# pass null to populate_info_panel if there's no levels left, so it can make the info panel empty
-	populate_info_panel(SavedLevels.levels[selected_level] if selected_level != NO_LEVEL else null)
+	populate_info_panel(levels[selected_level] if selected_level != NO_LEVEL else null)
 
 func start_level(start_in_edit_mode : bool):
 	var selected_level = SavedLevels.selected_level
 	if selected_level == NO_LEVEL:
 		return #at some point the buttons should be disabled when you don't have a level selected, keep this failsafe anyway though
+	if start_in_edit_mode and SavedLevels.is_template_list: # Can't edit template levels
+		return
 	
 	# so you aren't able to press the button while it's transitioning
 	can_interact = false
 	
-	var level_info = SavedLevels.levels[selected_level]
+	var level_info = levels[selected_level]
 	CurrentLevelData.level_data = level_info.level_data
 
 	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
 	# TODO: additional checks for things like all shines set to not show in menu and such
 	# using collected_shines for the size check because there can only be one entry in collected shines per id, while shine_details can have multiple shines with the same id
-	if !start_in_edit_mode and SavedLevels.levels[selected_level].collected_shines.size() > 1:
+	if !start_in_edit_mode and levels[selected_level].collected_shines.size() > 1:
 		music.change_song(music.last_song, 0) # temp
 		emit_signal("screen_change", "levels_screen", "shine_select_screen") 
 		return
@@ -241,15 +262,15 @@ func set_time_score_panel(new_value : bool):
 
 func set_control_buttons(is_enabled : bool) -> void:
 	button_play.disabled = !is_enabled
-	button_edit.disabled = !is_enabled
-	button_delete.disabled = !is_enabled
+	button_edit.disabled = !is_enabled || SavedLevels.is_template_list
+	button_delete.disabled = !is_enabled || SavedLevels.is_template_list
 	button_reset.disabled = !is_enabled
 
 # signal responses
 
 func on_level_selected(index : int) -> void:
 	SavedLevels.selected_level = index
-	var level_info : LevelInfo = SavedLevels.levels[SavedLevels.selected_level]
+	var level_info : LevelInfo = levels[SavedLevels.selected_level]
 	populate_info_panel(level_info)
 
 func on_button_back_pressed() -> void:
@@ -288,9 +309,21 @@ func on_button_code_cancel_pressed() -> void:
 func on_button_copy_code_pressed() -> void:
 	var selected_level = SavedLevels.selected_level
 	if selected_level == NO_LEVEL:
-		return 
-	OS.clipboard = SavedLevels.levels[selected_level].level_code
+		return
+	
+	if SavedLevels.is_template_list: # Copy to Levels
+		# Hacky solution to import the level
+		SavedLevels.is_template_list = false
+		# level_code_entry.text is what is used by on_button_code_import_pressed()
+		var tmp := level_code_entry.text
+		level_code_entry.text = levels[selected_level].level_code
+		_pre_open_screen() # Switch to the levels screen first,
+		on_button_code_import_pressed() # then import the level
+		level_code_entry.text = tmp # I swear I did not touch it!
 		
+	else: # Copy Level Code
+		OS.clipboard = levels[selected_level].level_code
+
 func on_button_play_pressed() -> void:
 	if !can_interact:
 		return
@@ -311,7 +344,7 @@ func on_button_reset_pressed() -> void:
 	var selected_level = SavedLevels.selected_level
 	if selected_level == NO_LEVEL:
 		return
-	var level_info = SavedLevels.levels[selected_level]
+	var level_info = levels[selected_level]
 	level_info.reset_save_data()
 	populate_info_panel(level_info)
 

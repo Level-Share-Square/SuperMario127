@@ -80,7 +80,7 @@ func _ready() -> void:
 		# (collected_shines is a Dictionary where the key is the shine id and the value is a bool)
 		if SavedLevels.selected_level != SavedLevels.NO_LEVEL && \
 		mode_switcher.get_node("ModeSwitcherButton").invisible:
-			var collected_shines = SavedLevels.levels[SavedLevels.selected_level].collected_shines
+			var collected_shines = SavedLevels.get_current_levels()[SavedLevels.selected_level].collected_shines
 
 			# Get the value, returning false if the key doesn't exist
 			is_blue = collected_shines.get(str(id), false)
@@ -206,8 +206,8 @@ func collect(body : PhysicsBody2D) -> void:
 		visible = false
 
 		if mode_switcher.get_node("ModeSwitcherButton").invisible and SavedLevels.selected_level != SavedLevels.NO_LEVEL:
-			SavedLevels.levels[SavedLevels.selected_level].set_shine_collected(id, false)
-			SavedLevels.levels[SavedLevels.selected_level].update_time_and_coin_score(id, true)
+			SavedLevels.get_current_levels()[SavedLevels.selected_level].set_shine_collected(id, false)
+			SavedLevels.get_current_levels()[SavedLevels.selected_level].update_time_and_coin_score(id, true)
 			if do_kick_out: # keep tracking the time score if you continue the level, to prevent cheese on other shine time scores
 				CurrentLevelData.stop_tracking_time_score() # time score is saved, and we don't want it continuing to update into the menu wasting resources
 

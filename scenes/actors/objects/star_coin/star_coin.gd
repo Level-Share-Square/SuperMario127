@@ -27,7 +27,7 @@ func _ready() -> void:
 
 	if SavedLevels.selected_level != SavedLevels.NO_LEVEL && \
 	mode_switcher.get_node("ModeSwitcherButton").invisible:
-		var collected_star_coins = SavedLevels.levels[SavedLevels.selected_level].collected_star_coins
+		var collected_star_coins = SavedLevels.get_current_levels()[SavedLevels.selected_level].collected_star_coins
 		# Get the value, returning false if the key doesn't exist
 		is_blue = collected_star_coins.get(str(id), false)
 
@@ -50,7 +50,7 @@ func update_color():
 func collect(body : PhysicsBody2D) -> void:
 	if enabled and !collected and (body is Character):
 		if mode_switcher.get_node("ModeSwitcherButton").invisible:
-			SavedLevels.levels[SavedLevels.selected_level].set_star_coin_collected(id)
+			SavedLevels.get_current_levels()[SavedLevels.selected_level].set_star_coin_collected(id)
 
 		collected = true
 

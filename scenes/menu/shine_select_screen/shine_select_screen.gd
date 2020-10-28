@@ -68,10 +68,10 @@ func _ready() -> void:
 func _open_screen() -> void:
 	mission_select_sfx.volume_db = -80.0 if music.muted else mission_select_sfx_volume
 	mission_select_sfx.play();
-	
+
 	var selected_level = SavedLevels.selected_level
-	shine_details = SavedLevels.levels[selected_level].shine_details
-	background_image.texture = SavedLevels.levels[selected_level].get_level_background_texture()
+	shine_details = SavedLevels.get_current_levels()[selected_level].shine_details
+	background_image.texture = SavedLevels.get_current_levels()[selected_level].get_level_background_texture()
 
 	used_shine_ids = []
 	
@@ -98,7 +98,7 @@ func _open_screen() -> void:
 		
 		# if the shine isn't collected, make it blue on the shine select scree
 		# if it is collected, show the correct colour of the shine
-		var collected_shines = SavedLevels.levels[selected_level].collected_shines
+		var collected_shines = SavedLevels.get_current_levels()[selected_level].collected_shines
 		var is_collected = collected_shines[str(shine_details[i]["id"])]
 		if !is_collected: 
 			shine_sprite.make_blue()
@@ -184,7 +184,7 @@ func move_shine_sprites() -> void:
 
 func update_labels() -> void:
 	# this will assume the selected shine and the selected level are valid
-	level_title.text = SavedLevels.levels[SavedLevels.selected_level].level_name
+	level_title.text = SavedLevels.get_current_levels()[SavedLevels.selected_level].level_name
 	level_title_backing.text = level_title.text
 	shine_title.text = shine_details[selected_shine_index]["title"]
 	shine_description.text = shine_details[selected_shine_index]["description"]
@@ -203,7 +203,7 @@ func start_level() -> void:
 	
 	get_tree().call_group("shine_sprites", "start_pressed_animation")
 
-	SavedLevels.levels[SavedLevels.selected_level].selected_shine = selected_shine_index
+	SavedLevels.get_current_levels()[SavedLevels.selected_level].selected_shine = selected_shine_index
 	
 	# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
 	# so we'll assume it's safe to just go straight to the player scene 

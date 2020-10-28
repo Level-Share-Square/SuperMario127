@@ -52,7 +52,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0.15, 0.15 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "trans_out_LevelsScreen_MainMenuScreen"
 length = 0.6
 tracks/0/type = "value"
@@ -80,8 +80,7 @@ tracks/1/keys = {
 "values": [ Vector2( 370, -210 ), Vector2( 370, -210 ), Vector2( 370, 121 ), Vector2( 370, 106 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "trans_out_MainMenuScreen_LevelsScreen"
+[sub_resource type="Animation" id=5]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel:rect_position")
@@ -118,7 +117,6 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 300.0
 margin_bottom = 432.0
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
@@ -137,9 +135,9 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-margin_left = 41.0
+margin_left = 32.0
 margin_top = 70.0
-margin_right = 260.0
+margin_right = 270.0
 margin_bottom = 362.0
 custom_constants/separation = 12
 __meta__ = {
@@ -147,7 +145,7 @@ __meta__ = {
 }
 
 [node name="ButtonCampaign" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
-margin_right = 219.0
+margin_right = 238.0
 margin_bottom = 64.0
 custom_fonts/font = SubResource( 2 )
 disabled = true
@@ -155,7 +153,7 @@ text = "Campaign"
 
 [node name="ButtonLevels" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 76.0
-margin_right = 219.0
+margin_right = 238.0
 margin_bottom = 140.0
 custom_fonts/font = SubResource( 2 )
 text = "Levels"
@@ -168,17 +166,16 @@ margin_bottom = 216.0
 custom_fonts/font = SubResource( 2 )
 text = "Editor"
 
-[node name="ButtonOptions" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
+[node name="ButtonTemplates" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 152.0
-margin_right = 219.0
+margin_right = 238.0
 margin_bottom = 216.0
 custom_fonts/font = SubResource( 2 )
-disabled = true
-text = "Options"
+text = "Templates"
 
 [node name="ButtonQuit" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 228.0
-margin_right = 219.0
+margin_right = 238.0
 margin_bottom = 292.0
 custom_fonts/font = SubResource( 2 )
 text = "Quit"
@@ -208,8 +205,8 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 3 )
-anims/trans_out_LevelsScreen_MainMenuScreen = SubResource( 5 )
-anims/trans_out_MainMenuScreen_LevelsScreen = SubResource( 4 )
+anims/trans_out_LevelsScreen_MainMenuScreen = SubResource( 4 )
+anims/trans_out_MainMenuScreen_LevelsScreen = SubResource( 5 )
 
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
