@@ -15,6 +15,7 @@ func _ready():
 func _start(_delta):
 	music.play_temporary_music(music_id)
 	has_landed = false
+	character.set_nozzle("null", false) # Disable FLUDD, it's unusable anyway
 
 func _stop(_delta):
 	music.stop_temporary_music()

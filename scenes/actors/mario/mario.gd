@@ -369,6 +369,9 @@ func set_nozzle(new_nozzle: String, change_index := true) -> void:
 	turbo_nerf = false
 	if change_index:
 		nozzles_list_index = CurrentLevelData.level_data.vars.nozzles_collected.find(str(new_nozzle))
+	
+	if nozzle != null and (is_instance_valid(powerup) and powerup.name == "RainbowPowerup"):
+		set_nozzle("null", true) # Mario simply isn't allowed to have fludd
 
 # Handles getting hit by another player
 func player_hit(body : Node) -> void:
@@ -618,7 +621,9 @@ func _physics_process(delta: float) -> void:
 		snap = Vector2()
 	
 	# Switch nozzle
-	if inputs[8][1] and CurrentLevelData.level_data.vars.nozzles_collected.size() > 1:
+	if (inputs[8][1] and CurrentLevelData.level_data.vars.nozzles_collected.size() > 1
+	# Rainbow Mario can't use fludd, so no point in allowing switching nozzles
+	and (!is_instance_valid(powerup) or powerup.name != "RainbowPowerup")):
 		nozzles_list_index += 1
 		if nozzles_list_index >= CurrentLevelData.level_data.vars.nozzles_collected.size():
 			nozzles_list_index = 0
