@@ -10,6 +10,8 @@ func _process(_delta):
 	if is_hovered() and !last_hovered:
 		hover_sound.play()
 	last_hovered = is_hovered()
+	
+	self_modulate = Color(1.0, 0.6, 0.2) if CurrentLevelData.unsaved_editor_changes else Color(1.0, 1.0, 1.0)
 
 func _pressed():
 	click_sound.play()
