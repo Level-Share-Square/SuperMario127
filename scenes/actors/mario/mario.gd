@@ -693,6 +693,9 @@ func _physics_process(delta: float) -> void:
 				else:
 					var slide_count = get_slide_count()
 					collided_last_frame = slide_count > 0
+		else:
+			var slide_count = get_slide_count()
+			collided_last_frame = slide_count > 0
 	else:
 		collided_last_frame = false
 
