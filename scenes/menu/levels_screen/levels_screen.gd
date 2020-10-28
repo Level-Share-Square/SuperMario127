@@ -238,10 +238,17 @@ func start_level(start_in_edit_mode : bool):
 	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
 	# TODO: additional checks for things like all shines set to not show in menu and such
 	# using collected_shines for the size check because there can only be one entry in collected shines per id, while shine_details can have multiple shines with the same id
-	if !start_in_edit_mode and levels[selected_level].collected_shines.size() > 1:
-		music.change_song(music.last_song, 0) # temp
-		emit_signal("screen_change", "levels_screen", "shine_select_screen") 
-		return
+	if !start_in_edit_mode:
+		# Get the shine count, only count shine sprites that have show_in_menu on
+		var total_shine_count := 0
+		for shine_details in level_info.shine_details:
+			if shine_details["show_in_menu"]:
+				total_shine_count += 1
+		# If there is more than 1, go to shine select screen
+		if total_shine_count > 1:
+			music.change_song(music.last_song, 0) # temp
+			emit_signal("screen_change", "levels_screen", "shine_select_screen") 
+			return
 
 	# if it's not a multishine level, play a transition and change to play/edit scene
 
