@@ -1,4 +1,4 @@
-[gd_scene load_steps=240 format=2]
+[gd_scene load_steps=244 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -212,6 +212,10 @@
 [ext_resource path="res://scenes/actors/objects/large_pine_tree/preview.png" type="Texture" id=210]
 [ext_resource path="res://scenes/actors/objects/cave_plant/icon.png" type="Texture" id=211]
 [ext_resource path="res://scenes/actors/objects/cave_plant/preview.png" type="Texture" id=212]
+[ext_resource path="res://scenes/actors/objects/cave_spore/icon.png" type="Texture" id=213]
+[ext_resource path="res://scenes/actors/objects/cave_spore/cave_spore.png" type="Texture" id=214]
+[ext_resource path="res://scenes/actors/objects/cave_spore_mini/cave_spore_mini.png" type="Texture" id=215]
+[ext_resource path="res://scenes/actors/objects/cave_spore_mini/icon.png" type="Texture" id=216]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1953,6 +1957,31 @@ tile_mode_offset = Vector2( 16, -16 )
 z_index = -9
 icon = ExtResource( 211 )
 preview = ExtResource( 212 )
+
+[node name="CaveSpore" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 3 )
+object_id = 65
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+z_index = -9
+change_to = "CaveSporeMini"
+items_in_sequence = 2
+icon = ExtResource( 213 )
+preview = ExtResource( 214 )
+
+[node name="CaveSporeMini" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 3 )
+object_id = 66
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+z_index = -9
+change_to = "CaveSpore"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 216 )
+preview = ExtResource( 215 )
 
 [node name="BuildingGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )

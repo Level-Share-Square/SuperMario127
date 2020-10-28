@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cave_mushroom_top.png-2a93d39c2d400ca059d631016b559be5.stex"
+path="res://.import/cave_spore.png-ddc9d8d9a8bd84679d44bb0ed2a35333.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/mushroom_top/cave_mushroom_top.png"
-dest_files=[ "res://.import/cave_mushroom_top.png-2a93d39c2d400ca059d631016b559be5.stex" ]
+source_file="res://scenes/actors/objects/cave_spore/cave_spore.png"
+dest_files=[ "res://.import/cave_spore.png-ddc9d8d9a8bd84679d44bb0ed2a35333.stex" ]
 
 [params]
 
