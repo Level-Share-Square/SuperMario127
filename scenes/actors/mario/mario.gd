@@ -32,6 +32,7 @@ onready var spin_area : Area2D = $SpinArea
 onready var player_collision_shape : CollisionShape2D = $PlayerCollision/CollisionShape2D
 onready var spin_area_shape : CollisionShape2D = $SpinArea/CollisionShape2D
 onready var fludd_sound : AudioStreamPlayer = $FluddSound
+onready var fludd_boost_sound : AudioStreamPlayer = $FluddBoostSound
 onready var fludd_charge_sound : AudioStreamPlayer = $FluddChargeSound
 onready var nozzle_switch_sound : AudioStreamPlayer = $NozzleSwitchSound
 onready var particles : Particles2D = $Particles2D
