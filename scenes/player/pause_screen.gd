@@ -152,16 +152,19 @@ func quit_to_menu() -> void:
 
 func update_shine_info():
 	var level_info = SavedLevels.get_current_levels()[SavedLevels.selected_level]
-	if level_info.selected_shine == -1:
-		return
-	var selected_shine_info = level_info.shine_details[level_info.selected_shine]
-
+	
 	var level_name : Label = shine_info.get_node("LevelName")
 	var level_name_backing : Label = shine_info.get_node("LevelName/LevelNameBacking")
 	var shine_description : RichTextLabel = shine_info.get_node("ShineDescription")
 	var shine_name : RichTextLabel = shine_info.get_node("ShineName")
-
+	
 	level_name.text = level_info.level_name 
 	level_name_backing.text = level_info.level_name
-	shine_description.bbcode_text = "[center]%s[/center]" % selected_shine_info["description"] 
-	shine_name.bbcode_text = "[center]%s[/center]" % selected_shine_info["title"]
+	
+	if level_info.selected_shine == -1: # This can happen if there are no shine sprites in the level
+		shine_description.bbcode_text = "[center]There are no shine sprites in this level.[/center]"
+		shine_name.bbcode_text = "[center]No shine sprite selected[/center]"
+	else:
+		var selected_shine_info = level_info.shine_details[level_info.selected_shine]
+		shine_description.bbcode_text = "[center]%s[/center]" % selected_shine_info["description"] 
+		shine_name.bbcode_text = "[center]%s[/center]" % selected_shine_info["title"]

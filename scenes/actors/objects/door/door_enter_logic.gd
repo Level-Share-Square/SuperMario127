@@ -31,11 +31,13 @@ func _physics_process(_delta : float) -> void:
 		# you're not able to enter a door if you're in the air, aren't controllable,
 		# have dive collision enabled, or are pressing a movement direction (helps with the Legacy control preset)
 		for body in area2d.get_overlapping_bodies():
-			if (body.name.begins_with("Character") and global_rotation == 0 
-			and body.is_grounded() and body.get_input(Character.input_names.interact, true)
+			if (body is Character and global_rotation == 0 and body.is_grounded()
+			and body.get_input(Character.input_names.interact, true)
 			and !body.get_input(Character.input_names.left, false) and !body.get_input(Character.input_names.right, false)
 			and body.controllable and body.ground_collision_dive.disabled
-			and get_parent().enabled):
+			and get_parent().enabled
+			# Rainbow Mario can't enter doors
+			and !(is_instance_valid(body.powerup) and body.powerup.name == "RainbowPowerup")):
 				start_door_enter_animation(body)
 
 func start_door_ground_pound_animation(_character : Character) -> void:
