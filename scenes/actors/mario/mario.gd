@@ -465,7 +465,7 @@ func _physics_process(delta: float) -> void:
 				is_in_platform = true
 			
 			if body.get_parent() is PhysicsBody2D:
-				if body.get_parent().can_collide_with(self):
+				if state == $States/SlideStopState or body.get_parent().can_collide_with(self):
 					remove_collision_exception_with(body.get_parent())
 					for raycast in raycasts:
 						raycast.remove_exception(body.get_parent())
