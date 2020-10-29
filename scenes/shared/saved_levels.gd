@@ -15,7 +15,13 @@ var template_levels_disk_paths : Array = [] # array of type String
 var selected_level : int = NO_LEVEL
 
 # Resource paths to load level codes to create template_levels array from.
-var template_level_codes : Array = [ "res://level/template_levels/tutorial_hills.tres" ]
+var template_level_codes : Array = [ 
+	"res://level/template_levels/tutorial_hills.tres",  
+	"res://level/template_levels/prism_star_galaxy.tres",
+	"res://level/template_levels/ghost_pepper_challenge.tres",
+	"res://level/template_levels/snowside_resort.tres",
+	"res://level/template_levels/rocketside_plaza.tres"
+]
 # for the levels list and get_current_levels()
 var is_template_list : bool = false
 
