@@ -20,7 +20,8 @@ var template_level_codes : Array = [
 	"res://level/template_levels/prism_star_galaxy.tres",
 	"res://level/template_levels/ghost_pepper_challenge.tres",
 	"res://level/template_levels/snowside_resort.tres",
-	"res://level/template_levels/rocketside_plaza.tres"
+	"res://level/template_levels/rocketside_plaza.tres",
+	"res://level/template_levels/dungeon_of_4_kingdoms.tres"
 ]
 # for the levels list and get_current_levels()
 var is_template_list : bool = false
