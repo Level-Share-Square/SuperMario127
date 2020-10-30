@@ -369,9 +369,9 @@ __meta__ = {
 }
 
 [node name="ButtonMoveLeft" type="Button" parent="Buttons"]
-anchor_top = 3.7
-anchor_right = 6.49
-anchor_bottom = 7.2
+anchor_left = 0.1
+anchor_right = 0.4
+anchor_bottom = 1.0
 theme = SubResource( 10 )
 flat = true
 __meta__ = {
@@ -379,10 +379,9 @@ __meta__ = {
 }
 
 [node name="ButtonMoveRight" type="Button" parent="Buttons"]
-anchor_left = 12.5
-anchor_top = 3.7
-anchor_right = 19.2
-anchor_bottom = 7.2
+anchor_left = 0.6
+anchor_right = 0.9
+anchor_bottom = 1.0
 theme = SubResource( 10 )
 flat = true
 __meta__ = {
@@ -390,10 +389,9 @@ __meta__ = {
 }
 
 [node name="ButtonSelectShine" type="Button" parent="Buttons"]
-anchor_left = 6.5
-anchor_top = 3.7
-anchor_right = 12.5
-anchor_bottom = 7.2
+anchor_left = 0.4
+anchor_right = 0.6
+anchor_bottom = 1.0
 theme = SubResource( 10 )
 flat = true
 __meta__ = {
