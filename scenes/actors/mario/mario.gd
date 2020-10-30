@@ -637,6 +637,8 @@ func _physics_process(delta: float) -> void:
 	
 	# Handle nozzle
 	if is_instance_valid(nozzle):
+		if nozzle.activated:
+			attacking = true
 		fludd_sprite.visible = true
 		water_sprite.visible = true
 		if nozzle.get_name() == "HoverNozzle":
@@ -646,8 +648,7 @@ func _physics_process(delta: float) -> void:
 			water_sprite_2.frame = water_sprite_2.frame
 		else:
 			water_sprite_2.visible = false
-		if nozzle.activated:
-			attacking = true
+		
 		# TODO: match... or array
 		if character == 0:
 			fludd_sprite.frames = nozzle.frames
