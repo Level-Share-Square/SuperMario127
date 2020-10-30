@@ -79,9 +79,9 @@ font_data = ExtResource( 1 )
 [node name="LevelSettingsWindow" type="NinePatchRect"]
 visible = false
 margin_left = 165.0
-margin_top = 130.0
+margin_top = 129.921
 margin_right = 1218.0
-margin_bottom = 764.0
+margin_bottom = 763.921
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 0
 texture = ExtResource( 4 )
@@ -406,12 +406,12 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="Out" type="TextureButton" parent="Contents/LevelSize/Buttons/Left"]
-margin_left = 696.842
-margin_top = 248.5
-margin_right = 824.842
-margin_bottom = 376.5
+margin_left = 670.0
+margin_top = 219.0
+margin_right = 798.0
+margin_bottom = 347.0
 rect_rotation = 180.0
-rect_scale = Vector2( 0.25, 0.25 )
+rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
@@ -423,11 +423,11 @@ __meta__ = {
 }
 
 [node name="In" type="TextureButton" parent="Contents/LevelSize/Buttons/Left"]
-margin_left = 696.842
-margin_top = 188.0
-margin_right = 824.842
-margin_bottom = 316.0
-rect_scale = Vector2( 0.25, 0.25 )
+margin_left = 700.842
+margin_top = 219.0
+margin_right = 828.842
+margin_bottom = 347.0
+rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
@@ -444,11 +444,11 @@ margin_right = 240.0
 margin_bottom = 40.0
 
 [node name="Out" type="TextureButton" parent="Contents/LevelSize/Buttons/Right"]
-margin_left = 696.842
-margin_top = 248.5
-margin_right = 824.842
-margin_bottom = 376.5
-rect_scale = Vector2( 0.25, 0.25 )
+margin_left = 722.842
+margin_top = 219.0
+margin_right = 850.842
+margin_bottom = 347.0
+rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
@@ -460,12 +460,12 @@ __meta__ = {
 }
 
 [node name="In" type="TextureButton" parent="Contents/LevelSize/Buttons/Right"]
-margin_left = 696.842
-margin_top = 188.0
-margin_right = 824.842
-margin_bottom = 316.0
+margin_left = 690.842
+margin_top = 219.0
+margin_right = 818.842
+margin_bottom = 347.0
 rect_rotation = 180.0
-rect_scale = Vector2( 0.25, 0.25 )
+rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
@@ -482,12 +482,12 @@ margin_right = 255.0
 margin_bottom = 40.0
 
 [node name="Out" type="TextureButton" parent="Contents/LevelSize/Buttons/Up"]
-margin_left = 545.403
-margin_top = 119.6
-margin_right = 673.403
-margin_bottom = 247.6
+margin_left = 582.0
+margin_top = 98.0
+margin_right = 710.0
+margin_bottom = 226.0
 rect_rotation = -89.9999
-rect_scale = Vector2( 0.25, 0.25 )
+rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
@@ -499,12 +499,12 @@ __meta__ = {
 }
 
 [node name="In" type="TextureButton" parent="Contents/LevelSize/Buttons/Up"]
-margin_left = 614.42
-margin_top = 119.6
-margin_right = 742.42
-margin_bottom = 247.6
+margin_left = 582.0
+margin_top = 127.6
+margin_right = 710.0
+margin_bottom = 255.6
 rect_rotation = 90.0
-rect_scale = Vector2( 0.25, 0.25 )
+rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
@@ -522,12 +522,12 @@ margin_right = 255.0
 margin_bottom = 240.0
 
 [node name="Out" type="TextureButton" parent="Contents/LevelSize/Buttons/Down"]
-margin_left = 545.403
-margin_top = 119.6
-margin_right = 673.403
-margin_bottom = 247.6
+margin_left = 582.0
+margin_top = 142.0
+margin_right = 710.0
+margin_bottom = 270.0
 rect_rotation = 90.0
-rect_scale = Vector2( 0.25, 0.25 )
+rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
@@ -539,12 +539,12 @@ __meta__ = {
 }
 
 [node name="In" type="TextureButton" parent="Contents/LevelSize/Buttons/Down"]
-margin_left = 614.42
-margin_top = 119.6
-margin_right = 742.42
-margin_bottom = 247.6
+margin_left = 582.0
+margin_top = 111.0
+margin_right = 710.0
+margin_bottom = 239.0
 rect_rotation = -90.0
-rect_scale = Vector2( 0.25, 0.25 )
+rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
