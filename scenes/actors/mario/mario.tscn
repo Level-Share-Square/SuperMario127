@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=2]
+[gd_scene load_steps=124 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -63,6 +63,8 @@
 [ext_resource path="res://scenes/actors/objects/shine/texture_outline.png" type="Texture" id=61]
 [ext_resource path="res://scenes/actors/mario/powerups/Wing.gd" type="Script" id=62]
 [ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=63]
+[ext_resource path="res://scenes/actors/mario/wing_frames_luigi.tres" type="SpriteFrames" id=64]
+[ext_resource path="res://scenes/actors/mario/wing_frames.tres" type="SpriteFrames" id=65]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -562,6 +564,42 @@ tracks/12/keys = {
 "method": "play_voice"
 } ]
 }
+tracks/13/type = "value"
+tracks/13/path = NodePath("Sprite/Fludd:animation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "shineDance" ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("Sprite/Fludd:frame")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0.01, 0.9, 1.48 ),
+"transitions": PoolRealArray( 0.87, 2, 1 ),
+"update": 1,
+"values": [ 0, 14, 21 ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("Sprite/Fludd:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 2.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, false ]
+}
 
 [sub_resource type="Animation" id=39]
 length = 0.95
@@ -819,6 +857,8 @@ mario_frames = ExtResource( 1 )
 luigi_frames = ExtResource( 21 )
 mario_alt_frames = ExtResource( 15 )
 luigi_alt_frames = ExtResource( 16 )
+mario_wing_frames = ExtResource( 65 )
+luigi_wing_frames = ExtResource( 64 )
 mario_collision = SubResource( 1 )
 mario_collision_offset = Vector2( 0.5, -4 )
 mario_dive_collision = SubResource( 2 )
@@ -885,6 +925,13 @@ playing = true
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 23 )
+animation = "starRunLeft"
+frame = 6
+script = ExtResource( 63 )
+
+[node name="Wings" type="AnimatedSprite" parent="Sprite"]
+visible = false
+frames = ExtResource( 65 )
 animation = "starRunLeft"
 frame = 6
 script = ExtResource( 63 )
@@ -1259,13 +1306,13 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 56 )
-frame = 7
+frame = 2
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 5
+frame = 8
 speed_scale = 3.0
 playing = true
 
@@ -1292,7 +1339,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "starRunLeft"
-frame = 5
+frame = 7
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]

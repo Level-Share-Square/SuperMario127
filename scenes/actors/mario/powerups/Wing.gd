@@ -14,9 +14,11 @@ func _stop(_delta):
 
 func apply_visuals():
 	character.metal_particles.emitting = true
+	character.wing_sprite.visible = true
 
 func remove_visuals():
 	character.metal_particles.emitting = false
+	character.wing_sprite.visible = false
 
 func toggle_visuals():
 	if character.metal_particles.emitting:

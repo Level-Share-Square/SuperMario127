@@ -12,6 +12,7 @@ onready var anim_player : AnimationPlayer = $AnimationPlayer
 
 onready var sprite : AnimatedSprite = $Sprite
 onready var fludd_sprite : AnimatedSprite = $Sprite/Fludd
+onready var wing_sprite : AnimatedSprite = $Sprite/Wings
 onready var water_sprite : AnimatedSprite = $Sprite/Water
 onready var water_sprite_2 : AnimatedSprite = $Sprite/Water2
 
@@ -153,6 +154,9 @@ export var luigi_frames : SpriteFrames
 export var mario_alt_frames : SpriteFrames
 export var luigi_alt_frames : SpriteFrames
 
+export var mario_wing_frames : SpriteFrames
+export var luigi_wing_frames : SpriteFrames
+
 export var mario_collision : RectangleShape2D
 export var mario_collision_offset : Vector2
 export var mario_dive_collision : RectangleShape2D
@@ -250,13 +254,14 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 			acceleration = luigi_accel
 			friction = luigi_fric
 			real_friction = luigi_fric
+			wing_sprite.frames = luigi_wing_frames
 		_:
 			push_error("Illegal character loaded: " + str(character) + " REEEEEE")
 	
 	add_child(sound_player)
 	# Death sprites are shared
 	death_sprite.frames = sprite.frames
-	
+
 	collision_shape.disabled = false
 	collision_raycast.disabled = false
 	left_collision.disabled = false
