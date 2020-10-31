@@ -92,6 +92,9 @@ func bounce(body):
 			body.velocity.y = y_power
 			body.position.y += 2 * sign(y_power)
 		animation_player.play("bounce_weak" if is_weak_bounce else "bounce")
+		
+		if "stamina" in body:
+			body.stamina = 100
 	elif "velocity" in body.get_parent():
 		var body_parent = body.get_parent()
 		var is_weak_bounce = true
@@ -114,6 +117,8 @@ func bounce(body):
 			body_parent.velocity.y = y_power
 			body_parent.position.y += 2 * sign(y_power)
 		animation_player.play("bounce_weak" if is_weak_bounce else "bounce")
+		if "stamina" in body.get_parent():
+			body.get_parent().stamina = 100
 
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
