@@ -5,6 +5,29 @@ export (Array, NodePath) var menu_buttons
 
 onready var player_selector_manager = get_node("PlayerSelectors")
 
+var control_info := [
+	#   ID       label        
+	[ "left", "Move Left" ],
+	[ "right", "Move Right" ],
+	[ "up", "Move Up" ],
+	[ "down", "Move Down" ],
+	[ "jump", "Jump" ],
+	[ "dive", "Dive" ],
+	[ "spin", "Spin" ],
+	[ "gp", "Ground Pound" ],
+	[ "gpcancel", "GP Cancel" ],
+	[ "fludd", "Use Fludd" ],
+	[ "nozzles", "Switch Nozzles" ],
+	[ "crouch", "Crouch" ],
+	[ "interact", "Interact" ],
+]
+const ROW_COUNT := 5
+const X_START := 0
+const X_STEP := 244
+const Y_START := 140
+const Y_STEP := 38
+
+
 var currentButton : Button
 var oldText : String
 
@@ -13,6 +36,30 @@ func _ready():
 	var presetSelector = $"Preset Selection/Selector"
 	for preset in ControlPresets.presets:
 		presetSelector.add_item(preset)
+	
+	# Create control options
+	var template_scene := ResourceLoader.load("res://scenes/player/control_template.tscn")
+	var x := X_START
+	var y := Y_START
+	var y_index := 0
+	for info_array in control_info:
+		# Create an instance and set it up
+		var instance : Control = template_scene.instance()
+		instance.rect_position = Vector2(x, y)
+		instance.name = info_array[1]
+		instance.get_node("Label").text = info_array[1] + ":"
+		instance.get_node("KeyButton").id = info_array[0]
+		add_child(instance)
+		
+		# Increment position
+		y += Y_STEP
+		
+		y_index += 1
+		if y_index >= ROW_COUNT:
+			# go up and right
+			y_index = 0
+			y = Y_START
+			x += X_STEP
 
 func _input(event):
 	if event is InputEventMouseMotion:

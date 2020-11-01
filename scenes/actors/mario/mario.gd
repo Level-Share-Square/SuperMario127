@@ -171,7 +171,8 @@ export var luigi_accel : float
 export var luigi_fric : float
 export var luigi_speed : float
 
-enum input_names {left, right, jump, dive, spin, gp, gpcancel, fludd, nozzles, crouch, interact}
+# Had to add move up and move down to the end due to hardcoded input indices
+enum input_names {left, right, jump, dive, spin, gp, gpcancel, fludd, nozzles, crouch, interact, up, down }
 
 # Inputs 
 # First parameter is "pressed",

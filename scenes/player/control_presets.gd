@@ -4,6 +4,8 @@ const presets = {
 	"Default": {
 		"left": [[ControlUtil.KEYBOARD, KEY_LEFT]],
 		"right": [[ControlUtil.KEYBOARD, KEY_RIGHT]],
+		"up": [[ControlUtil.KEYBOARD, KEY_UP]],
+		"down": [[ControlUtil.KEYBOARD, KEY_DOWN]],
 		"jump": [[ControlUtil.KEYBOARD, KEY_Z]],
 		"dive": [[ControlUtil.KEYBOARD, KEY_SHIFT]],
 		"spin": [[ControlUtil.KEYBOARD, KEY_X]],
@@ -17,6 +19,8 @@ const presets = {
 	"WASD": {
 		"left": [[ControlUtil.KEYBOARD, KEY_A]],
 		"right": [[ControlUtil.KEYBOARD, KEY_D]],
+		"up": [[ControlUtil.KEYBOARD, KEY_W]],
+		"down": [[ControlUtil.KEYBOARD, KEY_S]],
 		"jump": [[ControlUtil.KEYBOARD, KEY_K]],
 		"dive": [[ControlUtil.KEYBOARD, KEY_E]],
 		"spin": [[ControlUtil.KEYBOARD, KEY_J]],
@@ -30,6 +34,8 @@ const presets = {
 	"Legacy": {
 		"left": [[ControlUtil.KEYBOARD, KEY_LEFT]],
 		"right": [[ControlUtil.KEYBOARD, KEY_RIGHT]],
+		"up": [[ControlUtil.KEYBOARD, KEY_UP]],
+		"down": [[ControlUtil.KEYBOARD, KEY_DOWN]],
 		"jump": [[ControlUtil.KEYBOARD, KEY_UP]],
 		"dive": [[ControlUtil.KEYBOARD, KEY_DOWN]],
 		"spin": [[ControlUtil.KEYBOARD, KEY_X]],

@@ -69,6 +69,7 @@ static func save_volume():
 
 static func get_keybindings() -> Array:
 	var data = get_data_or_null()
+	convert_old_controls(data)
 	
 	if data == null || !data.has("controls"):
 		return [
@@ -115,3 +116,32 @@ static func set_keybindings(action : String, player_id : int):
 static func override_keybindings(action : String, player_id : int):
 	InputMap.action_erase_events(action + str(player_id))
 	set_keybindings(action, player_id)
+
+
+
+# Converts 0.6.0 controls to 0.6.1 (adds Move Up/Move Down keys)
+# Assumes data is not null
+static func convert_controls_060_to_061(data):
+	if data.has("controls"):
+		# for each player
+		for i in range(data["controls"].size()):
+			var controls = data["controls"][i]
+			if !controls.has("up"):
+				# Set default values
+				controls["up"] = [[ControlUtil.KEYBOARD, KEY_UP]]
+				controls["down"] = [[ControlUtil.KEYBOARD, KEY_DOWN]]
+				
+				if controls["left"][0][0] == ControlUtil.KEYBOARD:
+					# Adapt for WASD
+					if controls["left"][0][1] == KEY_A:
+						controls["up"] = [[ControlUtil.KEYBOARD, KEY_W]]
+						controls["down"] = [[ControlUtil.KEYBOARD, KEY_S]]
+				elif controls["left"][0][0] == ControlUtil.JOYPAD_BUTTON:
+					# Adapt for controller d-pad
+					controls["up"] = [[ControlUtil.JOYPAD_BUTTON, JOY_DPAD_UP]]
+					controls["down"] = [[ControlUtil.JOYPAD_BUTTON, JOY_DPAD_DOWN]]
+
+static func convert_old_controls(data):
+	if data == null: return
+	
+	convert_controls_060_to_061(data)
