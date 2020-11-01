@@ -32,7 +32,7 @@ func _physics_process(_delta : float) -> void:
 		# have dive collision enabled, or are pressing a movement direction (helps with the Legacy control preset)
 		for body in area2d.get_overlapping_bodies():
 			if (body is Character and global_rotation == 0 and body.is_grounded()
-			and body.get_input(Character.input_names.interact, true)
+			and body.get_input(Character.input_names.interact, false)
 			and !body.get_input(Character.input_names.left, false) and !body.get_input(Character.input_names.right, false)
 			and body.controllable and body.ground_collision_dive.disabled
 			and get_parent().enabled
