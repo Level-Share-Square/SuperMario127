@@ -61,7 +61,6 @@ func _process(_delta):
 				
 				# Disable the collision if enabled = false
 				instance.collision_shape.disabled = !enabled
-				instance.area_collision_shape.disabled = !enabled
 				instance.platform_area_collision_shape.disabled = !enabled
 				
 		elif platform_count<platforms.size():
@@ -104,15 +103,15 @@ func _ready():
 		
 		# Disable the collision if enabled = false
 		instance.collision_shape.disabled = !enabled
-		instance.area_collision_shape.disabled = !enabled
 		instance.platform_area_collision_shape.disabled = !enabled
 
 func _physics_process(delta):
 	time_alive += delta * speed
 	var angle := fmod(time_alive + angle_offset, (2*PI))
 	for platform in platforms:
-		if(mode!=1):
-			platform.set_position(Vector2(radius * 32, 0).rotated(angle))
-		else:
-			platform.position = Vector2(radius * 32, 0).rotated(angle)
+		var new_pos := Vector2(radius * 32, 0).rotated(angle)
+		if mode != 1: # Player
+			platform.set_position(new_pos)
+		else: # Editor
+			platform.position = new_pos
 		angle += delta_angle

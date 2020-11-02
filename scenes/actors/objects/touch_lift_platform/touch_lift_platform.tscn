@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/actors/objects/touch_lift_platform/texture.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/metal_platform/semi_solid_platform.gd" type="Script" id=2]
@@ -10,10 +10,7 @@
 extents = Vector2( 23, 7 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 48, 28 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 23, 4 )
+extents = Vector2( 23, 8 )
 
 [node name="TouchLiftPlatform" type="Node2D"]
 z_index = 1
@@ -47,7 +44,6 @@ __meta__ = {
 }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
 collision_layer = 16
 collision_mask = 0
 script = ExtResource( 2 )
@@ -71,13 +67,4 @@ scale = Vector2( 0.65625, 1 )
 rect = Rect2( -32, -5, 64, 10 )
 process_parent = true
 physics_process_parent = true
-
-[node name="FloorTouchArea" type="Area2D" parent="."]
-visible = false
-collision_layer = 16
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorTouchArea"]
-position = Vector2( 0, -8 )
-shape = SubResource( 3 )
-[connection signal="body_exited" from="FloorTouchArea" to="." method="_on_FloorTouchArea_body_exited"]
+[connection signal="body_exited" from="StaticBody2D/Area2D" to="." method="_on_PlatformArea_body_exited"]

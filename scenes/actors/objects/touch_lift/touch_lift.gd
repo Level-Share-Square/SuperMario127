@@ -86,7 +86,6 @@ func _process(_delta):
 #-------------------------------- platform logic -----------------------
 
 onready var platform = $TouchLiftPlatform
-onready var platform_touch_area = $TouchLiftPlatform/FloorTouchArea
 onready var path_follower = $Path2D/PathFollow2D
 onready var path = $Path2D
 onready var platform_sprite = $TouchLiftPlatform/Sprite
@@ -113,22 +112,20 @@ func _ready():
 	activated = !touch_start
 	
 	platform.collision_shape.disabled = !enabled
-	platform.area_collision_shape.disabled = !enabled
 	platform.platform_area_collision_shape.disabled = !enabled
 	
-	platform_touch_area.connect("body_entered", self, "_on_touch_area_entered")
 	
-	if curve==null and path.curve==null:
+	if curve == null and path.curve == null:
 		path.curve = Curve2D.new()
 		path.curve.add_point(Vector2())
 		path.curve.add_point(Vector2(0,-64))
-	
+		
 		set_property("curve", path.curve)
 	elif path.curve == null:
 		path.curve = curve
 	elif curve == null:
 		set_property("curve", path.curve)
-		
+	
 	platform.set_parts(parts)
 	
 	linear_offset = start_offset
