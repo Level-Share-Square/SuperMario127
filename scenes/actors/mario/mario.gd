@@ -226,7 +226,7 @@ func steely_hit(steely_pos : Vector2) -> void:
 func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String = "hit", frames : int = 180) -> void:
 	if !invulnerable:
 		# Mario shouldn't take damage with the vanish cap
-		if amount > 0 and powerup != null and powerup.get_name() == "VanishPowerup":
+		if amount > 0 and is_instance_valid(powerup) and powerup.get_name() == "VanishPowerup":
 			return
 		var direction := sign((global_position - hit_pos).normalized().x)
 		velocity.x = direction * 235
@@ -317,9 +317,9 @@ func show() -> void:
 func set_state(new_state: Node, delta: float) -> void:
 	last_state = state
 	state = null
-	if last_state != null:
+	if is_instance_valid(last_state):
 		last_state._stop(delta)
-	if new_state != null:
+	if is_instance_valid(new_state):
 		state = new_state
 		new_state._start(delta)
 	emit_signal("state_changed", new_state, last_state)
@@ -335,7 +335,7 @@ func get_powerup_node(name: String) -> Node:
 	return null
 
 func set_powerup(powerup_node: Node) -> void:
-	if powerup != null:
+	if is_instance_valid(powerup):
 		# Prevent switching away from rainbow star
 		if powerup.name == "RainbowPowerup" and powerup != powerup_node\
 		and is_instance_valid(powerup_node): # unless it's running out
@@ -345,12 +345,12 @@ func set_powerup(powerup_node: Node) -> void:
 		powerup.remove_visuals()
 	
 	powerup = powerup_node
-	if powerup != null:
+	if is_instance_valid(powerup):
 		powerup._start(0)
 		powerup.apply_visuals()
 
 func set_state_by_name(name: String, delta: float) -> void:
-	if get_state_node(name) != null:
+	if is_instance_valid(get_state_node(name)):
 		set_state(get_state_node(name), delta)
 		
 func add_nozzle(new_nozzle: String) -> void:
@@ -365,7 +365,7 @@ func get_nozzle_node(name: String) -> Node:
 func set_nozzle(new_nozzle: String, change_index := true) -> void:
 	fludd_sound.stop()
 	fludd_charge_sound.stop()
-	if nozzle != null:
+	if is_instance_valid(nozzle):
 		nozzle.activated = false
 		nozzle.last_activated = false
 	nozzle = get_nozzle_node(str(new_nozzle))
@@ -377,7 +377,7 @@ func set_nozzle(new_nozzle: String, change_index := true) -> void:
 	if change_index:
 		nozzles_list_index = CurrentLevelData.level_data.vars.nozzles_collected.find(str(new_nozzle))
 	
-	if nozzle != null and (is_instance_valid(powerup) and powerup.name == "RainbowPowerup"):
+	if is_instance_valid(nozzle) and (is_instance_valid(powerup) and powerup.name == "RainbowPowerup"):
 		set_nozzle("null", true) # Mario simply isn't allowed to have fludd
 
 # Handles getting hit by another player
@@ -422,7 +422,7 @@ func _process(delta: float) -> void:
 	if state and state.name == "NoActionState":
 		return
 	
-	if powerup != null:
+	if is_instance_valid(powerup):
 		if powerup.time_left <= 2.5:
 			frames_until_flash -= 1
 			if frames_until_flash <= 0:
@@ -492,7 +492,7 @@ func _physics_process(delta: float) -> void:
 	velocity.y += gravity * gravity_scale
 	velocity.y = clamp(velocity.y, velocity.y, max_aerial_velocity)
 	
-	if state != null:
+	if is_instance_valid(state):
 		disable_movement = state.disable_movement
 		disable_turning = state.disable_turning
 		disable_animation = state.disable_animation
@@ -561,7 +561,7 @@ func _physics_process(delta: float) -> void:
 			sprite.animation = "idleRight" if facing_direction == 1 else "idleLeft"
 	
 	# Handle sprite offset
-	if movable and (state == null or !state.override_rotation) and (!is_instance_valid(nozzle) or !nozzle.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
+	if movable and (!is_instance_valid(state) or !state.override_rotation) and (!is_instance_valid(nozzle) or !nozzle.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
 		var sprite_rotation = 0
 		var sprite_offset = Vector2()
 		if is_grounded():
@@ -595,7 +595,7 @@ func _physics_process(delta: float) -> void:
 			powerup_node.handle_update(delta)
 	
 	# Handle powerup
-	if powerup != null:
+	if is_instance_valid(powerup):
 		invincible = powerup.is_invincible
 		powerup.time_left -= delta
 		
@@ -606,7 +606,7 @@ func _physics_process(delta: float) -> void:
 		invincible = false
 	
 	# Handle state
-	if state != null:
+	if is_instance_valid(state):
 		big_attack = state.attack_tier > 1
 		attacking = state.attack_tier > 0
 		
@@ -619,7 +619,7 @@ func _physics_process(delta: float) -> void:
 	# Set up snap
 	if is_in_platform:
 		snap = Vector2()
-	elif state != null and state.disable_snap:
+	elif is_instance_valid(state) and state.disable_snap:
 		snap = Vector2()
 	elif (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
 		var normal = ground_check.get_collision_normal()
