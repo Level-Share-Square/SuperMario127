@@ -32,7 +32,7 @@ para_color_sprite = ExtResource( 5 )
 
 [node name="Koopa" type="KinematicBody2D" parent="."]
 collision_layer = 4
-collision_mask = 2147483669
+collision_mask = 2147483733
 
 [node name="Sprite" type="AnimatedSprite" parent="Koopa"]
 frames = ExtResource( 2 )
@@ -83,13 +83,13 @@ shape = SubResource( 5 )
 position = Vector2( -14, 14 )
 enabled = true
 cast_to = Vector2( 0, 32 )
-collision_mask = 17
+collision_mask = 81
 
 [node name="Right" type="RayCast2D" parent="Koopa"]
 position = Vector2( 14, 14 )
 enabled = true
 cast_to = Vector2( 0, 32 )
-collision_mask = 17
+collision_mask = 2147483729
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Koopa"]
 stream = ExtResource( 3 )

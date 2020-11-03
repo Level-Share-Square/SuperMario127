@@ -109,7 +109,7 @@ top_point = Vector2( 0, -9 )
 
 [node name="Goomba" type="KinematicBody2D" parent="."]
 collision_layer = 4
-collision_mask = 21
+collision_mask = 85
 script = ExtResource( 7 )
 
 [node name="Sprite" type="AnimatedSprite" parent="Goomba"]
@@ -180,19 +180,19 @@ volume_db = -3.0
 position = Vector2( 0, -3 )
 enabled = true
 cast_to = Vector2( -32, 0 )
-collision_mask = 17
+collision_mask = 81
 
 [node name="WallVacantCheck" type="RayCast2D" parent="Goomba"]
 position = Vector2( 0, -39 )
 enabled = true
 cast_to = Vector2( -64, 0 )
-collision_mask = 17
+collision_mask = 81
 
 [node name="PitCheck" type="RayCast2D" parent="Goomba"]
 position = Vector2( -32, 3 )
 enabled = true
 cast_to = Vector2( 0, 40 )
-collision_mask = 17
+collision_mask = 81
 
 [node name="Poof" type="Particles2D" parent="Goomba"]
 material = SubResource( 7 )
