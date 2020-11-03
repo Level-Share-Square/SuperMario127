@@ -66,7 +66,7 @@ func update_tilemaps():
 	tilemaps_node.update_tilemaps()
 	
 func toggle_layer_transparency(current_layer, is_transparent):
-	var index = 0 
+	var index = 3 # has to be done because for some reason the indices are wrong for the layers
 	for tilemap in tilemaps_node.get_children():
 		var tilemap_color = Color(1, 1, 1, 1)
 		if tilemap.name == "Back" || tilemap.name == "VeryBack":
@@ -77,7 +77,7 @@ func toggle_layer_transparency(current_layer, is_transparent):
 			if is_transparent:
 				tilemap_color.a = 0.25
 			tilemap.modulate = tilemap_color
-		index += 1
+		index = (index + 1) % 4
 
 func move_object_to_back(object):
 	objects_node.move_object_to_back(object)
