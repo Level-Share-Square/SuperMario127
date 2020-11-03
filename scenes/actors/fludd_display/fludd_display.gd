@@ -56,7 +56,7 @@ func _process(delta):
 			label_shadow.text = label.text
 			
 			var water_height = water_texture.material.get_shader_param("water_height")
-			water_height = lerp(water_height, 1.0 - (character.fuel / 100), delta * interpolation_speed)
+			water_height = lerp(water_height, 1.0 - (character.fuel / 100.0), delta * interpolation_speed)
 			water_texture.material.set_shader_param("water_height", water_height)
 			shown = character.nozzle != null
 			
