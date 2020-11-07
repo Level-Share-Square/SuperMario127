@@ -41,7 +41,6 @@ void fragment()
 	COLOR.rgb = mix(input_color.rgb, sampled_color, mix_amount);
 	COLOR.a = input_color.a;
 }"
-custom_defines = ""
 
 [sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 0.0980392, 0.105882, 0.247059, 1, 0.941176, 0.937255, 1, 1 )

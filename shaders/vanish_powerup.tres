@@ -7,7 +7,6 @@ void fragment() {
 	COLOR = texture(TEXTURE, UV);
 	COLOR.a = COLOR.a / (sin(TIME) + 2.5f);
 }"
-custom_defines = ""
 
 [resource]
 shader = SubResource( 1 )
