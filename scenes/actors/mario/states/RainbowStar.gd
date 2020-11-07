@@ -88,6 +88,8 @@ func _update(delta):
 			
 	if had_jumped and character.inputs[9][1]:
 		had_jumped = false
+	
+	current_speed = clamp(current_speed, -run_speed * 2, run_speed * 2)
 
 func _general_update(delta):
 	if jump_buffer > 0:
