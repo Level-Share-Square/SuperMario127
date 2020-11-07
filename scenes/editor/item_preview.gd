@@ -36,7 +36,6 @@ func update_item_preview_position():
 			var mouse_tile_pos = Vector2(floor(mouse_pos.x / item.tile_mode_step), floor(mouse_pos.y / item.tile_mode_step))
 			var mouse_grid_pos = Vector2((mouse_tile_pos.x * item.tile_mode_step) + (item.tile_mode_step / 2), (mouse_tile_pos.y * item.tile_mode_step) + (item.tile_mode_step / 2))
 			
-			z_index = item.z_index
 			if editor.placement_mode == "Tile" or !item.is_object:
 				position = mouse_grid_pos + item.tile_mode_offset
 			else:

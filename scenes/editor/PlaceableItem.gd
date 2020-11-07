@@ -10,7 +10,6 @@ export var object_center := Vector2(0, 0)
 export var tile_mode_offset := Vector2(0, 0)
 export var tile_mode_step := 32
 export var object_size := Vector2(0, 0)
-export var z_index := 0
 export var change_to : String = self.name
 
 export var items_in_sequence := 0
