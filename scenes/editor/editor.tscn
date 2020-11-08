@@ -1722,42 +1722,6 @@ tile_mode_step = 64
 icon = ExtResource( 183 )
 preview = ExtResource( 184 )
 
-[node name="TwistedTreeTop" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
-object_id = 16
-is_object = true
-object_center = Vector2( 32, 32 )
-tile_mode_step = 64
-change_to = "TwistedTreeBody"
-items_in_sequence = 3
-icon = ExtResource( 97 )
-preview = ExtResource( 97 )
-
-[node name="TwistedTreeBody" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
-object_id = 17
-is_object = true
-object_center = Vector2( 32, 32 )
-tile_mode_step = 64
-change_to = "TwistedTreeAngle"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 98 )
-preview = ExtResource( 98 )
-
-[node name="TwistedTreeAngle" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
-object_id = 18
-is_object = true
-object_center = Vector2( 72, 40 )
-tile_mode_offset = Vector2( 40, 8 )
-tile_mode_step = 64
-change_to = "TwistedTreeTop"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 99 )
-preview = ExtResource( 99 )
-
 [node name="SnowGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
 color = Color( 0.121569, 0.322702, 0.517647, 1 )
@@ -2252,6 +2216,18 @@ script = ExtResource( 149 )
 color = Color( 0.466667, 0.34902, 0, 1 )
 group_name = "Misc"
 
+[node name="PitchBlack" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 3 )
+tileset_id = 21
+icon = ExtResource( 225 )
+preview = ExtResource( 225 )
+
+[node name="BooBlock" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 3 )
+tileset_id = 6
+icon = ExtResource( 107 )
+preview = ExtResource( 107 )
+
 [node name="NegativeRock" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 3 )
 tileset_id = 18
@@ -2278,16 +2254,6 @@ object_center = Vector2( 8, 8 )
 tile_mode_step = 16
 icon = ExtResource( 175 )
 preview = ExtResource( 174 )
-
-[node name="CloudPlatform" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
-object_id = 9
-is_object = true
-object_center = Vector2( 64, 0 )
-tile_mode_offset = Vector2( 32, -32 )
-tile_mode_step = 64
-icon = ExtResource( 75 )
-preview = ExtResource( 76 )
 
 [node name="MushroomTop" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 3 )
@@ -2324,17 +2290,51 @@ index_in_sequence = 2
 icon = ExtResource( 74 )
 preview = ExtResource( 70 )
 
-[node name="PitchBlack" type="Node" parent="PlaceableItems/MiscGroup"]
+[node name="TwistedTreeTop" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 3 )
-tileset_id = 21
-icon = ExtResource( 225 )
-preview = ExtResource( 225 )
+object_id = 16
+is_object = true
+object_center = Vector2( 32, 32 )
+tile_mode_step = 64
+change_to = "TwistedTreeBody"
+items_in_sequence = 3
+icon = ExtResource( 97 )
+preview = ExtResource( 97 )
 
-[node name="BooBlock" type="Node" parent="PlaceableItems/MiscGroup"]
+[node name="TwistedTreeBody" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 3 )
-tileset_id = 6
-icon = ExtResource( 107 )
-preview = ExtResource( 107 )
+object_id = 17
+is_object = true
+object_center = Vector2( 32, 32 )
+tile_mode_step = 64
+change_to = "TwistedTreeAngle"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 98 )
+preview = ExtResource( 98 )
+
+[node name="TwistedTreeAngle" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 3 )
+object_id = 18
+is_object = true
+object_center = Vector2( 72, 40 )
+tile_mode_offset = Vector2( 40, 8 )
+tile_mode_step = 64
+change_to = "TwistedTreeTop"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 99 )
+preview = ExtResource( 99 )
+
+[node name="CloudPlatform" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 3 )
+object_id = 9
+is_object = true
+object_center = Vector2( 64, 0 )
+tile_mode_offset = Vector2( 32, -32 )
+tile_mode_step = 64
+icon = ExtResource( 75 )
+preview = ExtResource( 76 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
