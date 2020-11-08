@@ -64,6 +64,12 @@ const BLACK_GRANITE = 46
 
 const COBBLESTONE = 47
 
+const TILED_FLOOR = 48
+const CARPET = 50
+const CASTLE_WOOD = 51
+
+const PITCH_BLACK = 49
+
 var ids = [
 	GRASS_BLOCK,
 	GRASS_SLOPE_RIGHT,
@@ -126,7 +132,13 @@ var ids = [
 	
 	BLACK_GRANITE,
 	
-	COBBLESTONE
+	COBBLESTONE,
+	
+	TILED_FLOOR,
+	CARPET,
+	CASTLE_WOOD,
+	
+	PITCH_BLACK
 ]
 
 var binds = {

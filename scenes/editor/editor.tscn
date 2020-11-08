@@ -1,4 +1,4 @@
-[gd_scene load_steps=249 format=2]
+[gd_scene load_steps=253 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -221,6 +221,10 @@
 [ext_resource path="res://scenes/editor/assets/arrow_icon_press.png" type="Texture" id=219]
 [ext_resource path="res://scenes/actors/objects/snow_log/snow_log.png" type="Texture" id=220]
 [ext_resource path="res://scenes/actors/objects/snow_log/icon.png" type="Texture" id=221]
+[ext_resource path="res://assets/tiles/tiled_floor/icon.png" type="Texture" id=222]
+[ext_resource path="res://assets/tiles/carpet/icon.png" type="Texture" id=223]
+[ext_resource path="res://assets/tiles/castle_wood/icon.png" type="Texture" id=224]
+[ext_resource path="res://assets/tiles/pitch_black/icon.png" type="Texture" id=225]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2226,6 +2230,29 @@ tileset_id = 20
 icon = ExtResource( 200 )
 preview = ExtResource( 200 )
 
+[node name="CastleGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 149 )
+color = Color( 0.423529, 0.176471, 0.309804, 1 )
+group_name = "Castle"
+
+[node name="TiledFloor" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 3 )
+tileset_id = 22
+icon = ExtResource( 222 )
+preview = ExtResource( 222 )
+
+[node name="Carpet" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 3 )
+tileset_id = 23
+icon = ExtResource( 223 )
+preview = ExtResource( 223 )
+
+[node name="CastleWood" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 3 )
+tileset_id = 24
+icon = ExtResource( 224 )
+preview = ExtResource( 224 )
+
 [node name="MiscGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
 color = Color( 0.466667, 0.34902, 0, 1 )
@@ -2302,6 +2329,12 @@ items_in_sequence = 3
 index_in_sequence = 2
 icon = ExtResource( 74 )
 preview = ExtResource( 70 )
+
+[node name="PitchBlack" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 3 )
+tileset_id = 21
+icon = ExtResource( 225 )
+preview = ExtResource( 225 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
