@@ -1326,12 +1326,6 @@ index_in_sequence = 2
 icon = ExtResource( 165 )
 preview = ExtResource( 165 )
 
-[node name="BooBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
-tileset_id = 6
-icon = ExtResource( 107 )
-preview = ExtResource( 107 )
-
 [node name="HoverBox" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 object_id = 19
@@ -2335,6 +2329,12 @@ script = ExtResource( 3 )
 tileset_id = 21
 icon = ExtResource( 225 )
 preview = ExtResource( 225 )
+
+[node name="BooBlock" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 3 )
+tileset_id = 6
+icon = ExtResource( 107 )
+preview = ExtResource( 107 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
