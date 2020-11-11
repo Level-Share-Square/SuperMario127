@@ -227,7 +227,7 @@
 [ext_resource path="res://assets/tiles/pitch_black/icon.png" type="Texture" id=225]
 [ext_resource path="res://assets/tiles/castle_wall/icon.png" type="Texture" id=226]
 [ext_resource path="res://scenes/actors/objects/castle_window/icon.png" type="Texture" id=227]
-[ext_resource path="res://scenes/actors/objects/jelectro/jelectro.png" type="Texture" id=228]
+[ext_resource path="res://scenes/actors/objects/jelectro/icon.png" type="Texture" id=228]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
