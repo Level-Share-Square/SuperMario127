@@ -228,11 +228,14 @@ func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String =
 		# Mario shouldn't take damage with the vanish cap
 		if amount > 0 and is_instance_valid(powerup) and powerup.get_name() == "VanishPowerup":
 			return
-		var direction := sign((global_position - hit_pos).normalized().x)
-		velocity.x = direction * 235
-		velocity.y = -225
-		set_state_by_name("KnockbackState", 0)
+		knockback(hit_pos)
 		damage(amount, cause, frames)
+
+func knockback(hit_pos: Vector2):
+	var direction := sign((global_position - hit_pos).normalized().x)
+	velocity.x = direction * 235
+	velocity.y = -225
+	set_state_by_name("KnockbackState", 0)
 
 # warning-ignore: unused_argument
 func load_in(level_data : LevelData, level_area : LevelArea):
