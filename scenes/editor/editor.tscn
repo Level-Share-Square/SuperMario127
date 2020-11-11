@@ -1,4 +1,4 @@
-[gd_scene load_steps=253 format=2]
+[gd_scene load_steps=255 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -225,6 +225,8 @@
 [ext_resource path="res://assets/tiles/carpet/icon.png" type="Texture" id=223]
 [ext_resource path="res://assets/tiles/castle_wood/icon.png" type="Texture" id=224]
 [ext_resource path="res://assets/tiles/pitch_black/icon.png" type="Texture" id=225]
+[ext_resource path="res://assets/tiles/castle_wall/icon.png" type="Texture" id=226]
+[ext_resource path="res://scenes/actors/objects/castle_window/icon.png" type="Texture" id=227]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2192,6 +2194,20 @@ preview = ExtResource( 200 )
 script = ExtResource( 149 )
 color = Color( 0.423529, 0.176471, 0.309804, 1 )
 group_name = "Castle"
+
+[node name="CastleWall" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 3 )
+tileset_id = 25
+icon = ExtResource( 226 )
+preview = ExtResource( 226 )
+
+[node name="CastleWindow" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 3 )
+object_id = 68
+is_object = true
+object_center = Vector2( 16, 16 )
+icon = ExtResource( 227 )
+preview = ExtResource( 227 )
 
 [node name="TiledFloor" type="Node" parent="PlaceableItems/CastleGroup"]
 script = ExtResource( 3 )

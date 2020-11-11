@@ -67,6 +67,7 @@ const COBBLESTONE = 47
 const TILED_FLOOR = 48
 const CARPET = 50
 const CASTLE_WOOD = 51
+const CASTLE_WALL = 52
 
 const PITCH_BLACK = 49
 
@@ -137,6 +138,7 @@ var ids = [
 	TILED_FLOOR,
 	CARPET,
 	CASTLE_WOOD,
+	CASTLE_WALL,
 	
 	PITCH_BLACK
 ]

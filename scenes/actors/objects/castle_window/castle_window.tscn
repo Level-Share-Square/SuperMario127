@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/actors/objects/castle_window/castle_window.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/castle_window/castle_window.gd" type="Script" id=2]
+
+[node name="CastleWindow" type="Node2D"]
+z_index = 1
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
