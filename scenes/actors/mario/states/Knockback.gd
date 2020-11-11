@@ -50,4 +50,4 @@ func _stop(_delta):
 	character.friction = character.real_friction
 
 func _stop_check(_delta):
-	return (abs(character.velocity.x) < 10 and character.is_grounded() and bounces_left == 0) or (bonked_time > 0.5 and !character.is_grounded())
+	return (abs(character.velocity.x) < 10 and character.is_grounded() and bounces_left == 0) or (bonked_time > 0.3 and !character.is_grounded())
