@@ -52,6 +52,7 @@ func start_door_enter_animation(character : Character) -> void:
 	character.invulnerable = true 
 	character.controllable = false
 	character.movable = false
+	character.velocity = Vector2.ZERO
 	character.sprite.rotation = 0
 	character.camera.smoothing_enabled = true # Re-enable camera smoothing
 	
@@ -114,7 +115,7 @@ func door_exit_anim_finished(_animation : String, character : Character) -> void
 	# closes the door and gives back control to mario
 	is_idle = true
 	
-	character.velocity = Vector2()
+	character.velocity = Vector2.ZERO
 	character.invulnerable = false 
 	character.controllable = true
 	character.movable = true
