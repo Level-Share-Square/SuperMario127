@@ -18,7 +18,7 @@ func _start_check(_delta):
 	return character.inputs[5][1] and !character.is_grounded() and !character.test_move(character.transform, Vector2(0, 24))
 
 func _start(_delta):
-	if character.last_state == character.get_state_node("DiveState") || character.last_state == character.get_state_node("WingMarioState"):
+	if character.last_state == character.get_state_node("DiveState") || character.last_state == character.get_state_node("WingMarioState") || character.is_walled():
 		can_dive = false
 	else:
 		can_dive = true
