@@ -114,6 +114,7 @@ func _ready():
 	platform.collision_shape.disabled = !enabled
 	platform.platform_area_collision_shape.disabled = !enabled
 	
+	platform.platform_area_collision_shape.get_parent().connect("body_entered", self, "_on_touch_area_entered")
 	
 	if curve == null and path.curve == null:
 		path.curve = Curve2D.new()
