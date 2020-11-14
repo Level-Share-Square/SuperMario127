@@ -25,7 +25,7 @@ func is_state(state):
 	return character.state == character.get_state_node(state)
 	
 func _activated_update(delta):
-	if deactivate_frames > 0:
+	if last_activated and deactivate_frames > 0:
 		return
 	if charge < 1:
 		if !character.fludd_charge_sound.is_playing():
