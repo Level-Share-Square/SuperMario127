@@ -9,7 +9,7 @@ var last_activated = false
 var last_charged = false
 var last_state = null
 
-var accel = 1000
+var accel = 750
 var charge = 0
 var rotation_interpolation_speed = 35
 var deactivate_frames = 0
