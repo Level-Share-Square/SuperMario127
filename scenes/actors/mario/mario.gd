@@ -365,7 +365,15 @@ func get_nozzle_node(name: String) -> Node:
 		return nozzles_node.get_node(name)
 	return null
 
+# jank af, don't question it, just accept that it does its job
+func nozzle_sort(a, b):
+	if b != "null" and (a == "null" or a[0] < b[0]):
+		return true
+	return false
+
 func set_nozzle(new_nozzle: String, change_index := true) -> void:
+	CurrentLevelData.level_data.vars.nozzles_collected.sort_custom(self, "nozzle_sort")
+	
 	fludd_sound.stop()
 	fludd_charge_sound.stop()
 	if is_instance_valid(nozzle):
