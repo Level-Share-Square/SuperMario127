@@ -1,4 +1,4 @@
-[gd_scene load_steps=256 format=2]
+[gd_scene load_steps=258 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -228,6 +228,8 @@
 [ext_resource path="res://assets/tiles/castle_wall/icon.png" type="Texture" id=226]
 [ext_resource path="res://scenes/actors/objects/castle_window/icon.png" type="Texture" id=227]
 [ext_resource path="res://scenes/actors/objects/jelectro/icon.png" type="Texture" id=228]
+[ext_resource path="res://assets/tiles/negative_rock/left_slope_icon.png" type="Texture" id=229]
+[ext_resource path="res://assets/tiles/negative_rock/right_slope_icon.png" type="Texture" id=230]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1746,15 +1748,15 @@ items_in_sequence = 4
 icon = ExtResource( 113 )
 preview = ExtResource( 113 )
 
-[node name="SnowSlopeRight" type="Node" parent="PlaceableItems/SnowGroup"]
+[node name="SnowSlab" type="Node" parent="PlaceableItems/SnowGroup"]
 script = ExtResource( 3 )
 tileset_id = 7
-tile_id = 3
-change_to = "Snow"
+tile_id = 1
+change_to = "SnowSlopeLeft"
 items_in_sequence = 4
-index_in_sequence = 3
-icon = ExtResource( 114 )
-preview = ExtResource( 114 )
+index_in_sequence = 1
+icon = ExtResource( 111 )
+preview = ExtResource( 111 )
 
 [node name="SnowSlopeLeft" type="Node" parent="PlaceableItems/SnowGroup"]
 script = ExtResource( 3 )
@@ -1766,15 +1768,15 @@ index_in_sequence = 2
 icon = ExtResource( 112 )
 preview = ExtResource( 112 )
 
-[node name="SnowSlab" type="Node" parent="PlaceableItems/SnowGroup"]
+[node name="SnowSlopeRight" type="Node" parent="PlaceableItems/SnowGroup"]
 script = ExtResource( 3 )
 tileset_id = 7
-tile_id = 1
-change_to = "SnowSlopeLeft"
+tile_id = 3
+change_to = "Snow"
 items_in_sequence = 4
-index_in_sequence = 1
-icon = ExtResource( 111 )
-preview = ExtResource( 111 )
+index_in_sequence = 3
+icon = ExtResource( 114 )
+preview = ExtResource( 114 )
 
 [node name="Wood" type="Node" parent="PlaceableItems/SnowGroup"]
 script = ExtResource( 3 )
@@ -2257,7 +2259,7 @@ preview = ExtResource( 107 )
 script = ExtResource( 3 )
 tileset_id = 18
 change_to = "NegativeRockSlab"
-items_in_sequence = 2
+items_in_sequence = 4
 icon = ExtResource( 189 )
 preview = ExtResource( 189 )
 
@@ -2265,11 +2267,31 @@ preview = ExtResource( 189 )
 script = ExtResource( 3 )
 tileset_id = 18
 tile_id = 1
-change_to = "NegativeRock"
-items_in_sequence = 2
+change_to = "NegativeRockSlopeLeft"
+items_in_sequence = 4
 index_in_sequence = 1
 icon = ExtResource( 196 )
 preview = ExtResource( 196 )
+
+[node name="NegativeRockSlopeLeft" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 3 )
+tileset_id = 18
+tile_id = 2
+change_to = "NegativeRockSlopeRight"
+items_in_sequence = 4
+index_in_sequence = 2
+icon = ExtResource( 229 )
+preview = ExtResource( 229 )
+
+[node name="NegativeRockSlopeRight" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 3 )
+tileset_id = 18
+tile_id = 3
+change_to = "NegativeRock"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 230 )
+preview = ExtResource( 230 )
 
 [node name="Arrow" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 3 )
