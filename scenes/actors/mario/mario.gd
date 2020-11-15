@@ -496,10 +496,10 @@ func _physics_process(delta: float) -> void:
 	velocity.y = clamp(velocity.y, velocity.y, max_aerial_velocity)
 	
 	if is_instance_valid(state):
-		disable_movement = state.disable_movement
-		disable_turning = state.disable_turning
+		disable_movement = state.disable_movement or (nozzle != null and (nozzle.name == "Turbo" and nozzle.activated))
+		disable_turning = state.disable_turning or (nozzle != null and (nozzle.name == "Turbo" and nozzle.activated))
 		disable_animation = state.disable_animation
-		disable_friction = state.disable_friction
+		disable_friction = state.disable_friction or (nozzle != null and (nozzle.name == "Turbo" and nozzle.activated))
 	else:
 		disable_movement = false
 		disable_turning = false
