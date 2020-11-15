@@ -9,7 +9,7 @@ var last_activated = false
 var last_charged = false
 var last_state = null
 
-var accel = 750
+var accel = 1000
 var charge = 0
 var rotation_interpolation_speed = 35
 var deactivate_frames = 0
@@ -27,11 +27,11 @@ func is_state(state):
 func _activated_update(delta):
 	if last_activated and deactivate_frames > 0:
 		return
-	if charge < 1:
+	if charge < 0.75:
 		if !character.fludd_charge_sound.is_playing():
 			character.fludd_charge_sound.play()
 		charge += delta
-		character.fludd_sprite.modulate = Color(1, 1 - charge, 1 - charge)
+		character.fludd_sprite.modulate = Color(1, 1 - (charge * 1.4), 1 - (charge * 1.4))
 		character.fludd_sprite.offset = Vector2(rand_range(-1, 1), rand_range(-1, 1)) * charge
 		return
 		
@@ -116,7 +116,7 @@ func _general_update(_delta):
 		if last_charged:
 			character.fludd_charge_sound.stop()
 		charge -= _delta * 2
-		character.fludd_sprite.modulate = Color(1, 1 - charge, 1 - charge)
+		character.fludd_sprite.modulate = Color(1, 1 - (charge * 1.4), 1 - (charge * 1.4))
 		character.fludd_sprite.offset = Vector2(0, 0)
 		if charge < 0:
 			charge = 0
