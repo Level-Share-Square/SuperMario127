@@ -20,6 +20,7 @@ func _start(_delta):
 	sprite.rotation_degrees = 90 * character.facing_direction
 	sprite.rotation_degrees = 1
 	character.dive_cooldown = 0.15
+	character.stamina = 100
 	
 func _update(delta):
 	var sprite = character.sprite

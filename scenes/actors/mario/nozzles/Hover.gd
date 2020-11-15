@@ -2,14 +2,15 @@ extends Nozzle
 
 class_name HoverNozzle
 
-export var boost_power := 255
+export var boost_power := 170
 export var depletion := 0.55
-export var fuel_depletion := 0.025
+export var fuel_depletion := 0.035
 var last_activated = false
 var last_state = null
 
 var accel = 15
 var rotation_interpolation_speed = 35
+var preservation_factor = 0
 
 func _init():
 	blacklisted_states = ["WingMarioState", "RainbowStarState", "ButtSlideState", "WallSlideState", "GroundPoundStartState", "GroundPoundState", "GroundPoundEndState", "GetupState", "KnockbackState", "BonkedState", "SpinningState"]
@@ -45,6 +46,8 @@ func _activated_update(delta):
 	if (character.velocity.y > power * normal.y and normal.y > 0) or (character.velocity.y < power * normal.y and normal.y < 0):
 		character.velocity.y -= accel * normal.y
 	character.stamina -= depletion
+	
+	character.velocity.y += preservation_factor * (character.stamina / 100)
 	
 	if character.fuel > 0:
 		character.fuel -= fuel_depletion
@@ -83,6 +86,11 @@ func _general_update(_delta):
 		character.water_sprite.animation = "out"
 		character.water_sprite.frame = 0
 		character.fludd_sound.play(((100 - character.stamina) / 100) * 2.79)
+		
+		if character.velocity.y < 0:
+			preservation_factor = character.velocity.y / 96
+		else:
+			preservation_factor = 0
 	elif !activated and last_activated:
 		character.water_sprite.animation = "in"
 		character.water_sprite.frame = 0

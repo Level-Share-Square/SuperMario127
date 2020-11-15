@@ -21,7 +21,7 @@ func _physics_process(delta):
 				if abs(position.distance_to(character_node.global_position)) < 15:
 					unfocusing = false
 			else:
-				character_vel = character_vel.linear_interpolate(character_node.velocity * 15 * delta, delta * 2)
+				character_vel = character_vel.linear_interpolate(character_node.velocity * 30 * delta, delta * 2)
 				position = character_node.global_position + character_vel
 				
 				# Force camera to Mario when the level starts

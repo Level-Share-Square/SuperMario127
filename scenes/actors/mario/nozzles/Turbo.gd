@@ -2,9 +2,9 @@ extends Nozzle
 
 class_name TurboNozzle
 
-export var boost_power := 1150
+export var boost_power := 1000
 export var depletion := 100
-export var fuel_depletion := 0.035
+export var fuel_depletion := 0.025
 var last_activated = false
 var last_charged = false
 var last_state = null
@@ -22,17 +22,21 @@ func is_state(state):
 	return character.state == character.get_state_node(state)
 	
 func _activated_update(delta):
-	
 	var normal = character.sprite.transform.x.normalized()
 	var power = boost_power
 	character.velocity.x += (accel * normal.x) * character.facing_direction
 	character.velocity.y += (accel * 0.1 * normal.y) * character.facing_direction
 	
-	character.velocity.x = clamp(character.velocity.x, -boost_power, boost_power)
-	character.velocity.y = clamp(character.velocity.y, -boost_power, boost_power)
+	if character.velocity.x > boost_power and character.facing_direction == 1:
+		character.velocity.x -= accel
+	if character.velocity.x < -boost_power and character.facing_direction == -1:
+		character.velocity.x += accel
 
 	if character.is_walled():
-		character.damage_with_knockback(character.position + Vector2(character.facing_direction * 8, 0), 0, "Hit", 0)
+		var direction = -1
+		if character.is_walled_right():
+			direction = 1
+		character.damage_with_knockback(character.position + Vector2(direction * 8, 0), 0, "Hit", 0)
 	
 	if character.fuel > 0:
 		character.fuel -= fuel_depletion

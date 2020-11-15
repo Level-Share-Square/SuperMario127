@@ -9,14 +9,14 @@ var last_activated = false
 var last_charged = false
 var last_state = null
 
-var accel = 750
+var accel = 825
 var charge = 0
 var rotation_interpolation_speed = 35
 var deactivate_frames = 0
 var cooldown_time = 2
 
 func _init():
-	blacklisted_states = ["ButtSlideState", "WallSlideState", "GroundPoundStartState", "GroundPoundState", "GroundPoundEndState", "GetupState", "KnockbackState", "BonkedState", "SpinningState"]
+	blacklisted_states = ["GroundPoundStartState", "GroundPoundState", "GroundPoundEndState","KnockbackState", "BonkedState"]
 
 func _activate_check(_delta):
 	return !(character.state == character.get_state_node("BackflipState") and character.state.disable_turning == true) and character.get_state_node("SlideState").crouch_buffer == 0
