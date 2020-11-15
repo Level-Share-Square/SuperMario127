@@ -2,9 +2,9 @@ extends Nozzle
 
 class_name HoverNozzle
 
-export var boost_power := 105
+export var boost_power := 255
 export var depletion := 0.55
-export var fuel_depletion := 0.0175
+export var fuel_depletion := 0.025
 var last_activated = false
 var last_state = null
 
@@ -30,7 +30,7 @@ func _activated_update(delta):
 	if (character.state == null or !character.state.override_rotation) and !character.rotating_jump:
 		override_rotation = true
 		var sprite = character.sprite
-		var sprite_rotation = (character.velocity.x / character.move_speed) * 8
+		var sprite_rotation = (character.velocity.x / character.move_speed) * 6
 		sprite.rotation_degrees = lerp(sprite.rotation_degrees, sprite_rotation, delta * rotation_interpolation_speed)
 	else:
 		override_rotation = false
@@ -38,7 +38,7 @@ func _activated_update(delta):
 	var normal = character.sprite.transform.y.normalized()
 	character.jump_animation = 0
 	
-	var power = -boost_power * (character.stamina / 100)
+	var power = -boost_power * clamp(character.stamina / 100, 0.5, 1)
 	if abs(character.velocity.x) < abs(power * normal.x) * 6:
 		character.velocity.x -= accel * 0.5 * normal.x
 		
