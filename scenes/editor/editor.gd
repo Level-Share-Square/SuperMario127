@@ -364,7 +364,8 @@ func _process(delta : float) -> void:
 						if item.on_erase(object_pos, level_data, level_area):
 							shared.destroy_object_at_position(object_pos, true)
 					elif (Input.is_action_just_pressed("erase") or Input.is_action_just_pressed("place") and selected_tool == 1) and is_instance_valid(hovered_object) and !rotating:
-						if item.on_erase(mouse_pos, level_data, level_area):
+						var item_of_erased_object := pick_item_recursive_find(hovered_object.level_object.get_ref().type_id, placeable_items)
+						if item_of_erased_object.on_erase(mouse_pos, level_data, level_area):
 							shared.destroy_object(hovered_object, true)
 							hovered_object = null
 							item_preview.visible = true
