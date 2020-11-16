@@ -12,7 +12,7 @@ onready var player_selector_manager = controls_options.get_node("PlayerSelectors
 onready var close_button = get_parent().get_parent().get_parent().get_node("CloseButton")
 
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion || event is InputEventScreenDrag:
 		return
 		
 	if (event is InputEventJoypadMotion || event.pressed) && currentButton != null:
