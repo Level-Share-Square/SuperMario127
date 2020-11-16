@@ -87,7 +87,7 @@ func _general_update(_delta):
 		character.water_sprite.frame = 0
 		character.fludd_sound.play(((100 - character.stamina) / 100) * 2.79)
 		
-		if character.velocity.y < 0:
+		if character.velocity.y < 0 and character.stamina == 100:
 			preservation_factor = character.velocity.y / 96
 		else:
 			preservation_factor = 0
