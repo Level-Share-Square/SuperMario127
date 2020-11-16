@@ -67,22 +67,3 @@ func start_tracking_time_score(keep_time : bool = false):
 
 func stop_tracking_time_score():
 	set_process(false)
-
-# hack fix idgaf its gd
-
-var is_controlling = false
-
-func get_can_control():
-	if is_controlling:
-		return false
-	else:
-		is_controlling = true
-		return true
-
-func play_green_demon_audio(audio, can_control):
-	if can_control:
-		audio.play()
-
-
-func stop_green_demon_audio(audio):
-	audio.stop()

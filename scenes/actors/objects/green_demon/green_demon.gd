@@ -47,14 +47,14 @@ func kill(body):
 		particles2.emitting = false
 
 func _ready():
-	cc = CurrentLevelData.get_can_control()
+	cc = MiscShared.get_can_control()
 	original_position = position
 	particles.process_material.scale = (scale.x + scale.y) / 2 # Average works well enough
 	particles.amount = 6 * current_speed
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "kill")
 		if chase:
-			CurrentLevelData.play_green_demon_audio(revolve_sound, cc) #since the game doesn't detect a rotation at the start, we play the sound manually
+			MiscShared.play_green_demon_audio(revolve_sound, cc) #since the game doesn't detect a rotation at the start, we play the sound manually
 
 func _physics_process(delta):
 	if cached_pos != Vector2() and chase and character != null:
@@ -98,10 +98,10 @@ func _physics_process(delta):
 				chase_start_rotations += 1
 				#plays a sound after each rotation
 				if chase_start_rotations >= 3:
-					CurrentLevelData.play_green_demon_audio(revolve_last_sound, cc)
-					CurrentLevelData.stop_green_demon_audio(revolve_sound) #to keep it consistent with the other sounds cutting off
+					MiscShared.play_green_demon_audio(revolve_last_sound, cc)
+					MiscShared.stop_green_demon_audio(revolve_sound) #to keep it consistent with the other sounds cutting off
 				else:
-					CurrentLevelData.play_green_demon_audio(revolve_sound, cc)
+					MiscShared.play_green_demon_audio(revolve_sound, cc)
 					pass
 			
 			if chase_start_anim_angle > PI and chase_start_rotations >= 3: #if the demon is at the top of the rotation circle, and it's already rotated three times, stop the animation and go chase after mario
