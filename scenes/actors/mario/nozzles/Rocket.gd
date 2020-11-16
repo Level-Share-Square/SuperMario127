@@ -13,13 +13,13 @@ var accel = 825
 var charge = 0
 var rotation_interpolation_speed = 35
 var deactivate_frames = 0
-var cooldown_time = 2
+var cooldown_time = 0
 
 func _init():
 	blacklisted_states = ["GroundPoundStartState", "GroundPoundState", "GroundPoundEndState","KnockbackState", "BonkedState"]
 
 func _activate_check(_delta):
-	return !(character.state == character.get_state_node("BackflipState") and character.state.disable_turning == true) and character.get_state_node("SlideState").crouch_buffer == 0
+	return cooldown_time <= 0 and character.stamina >= 50 and !(character.state == character.get_state_node("BackflipState") and character.state.disable_turning == true) and character.get_state_node("SlideState").crouch_buffer == 0
 	
 func is_state(state):
 	return character.state == character.get_state_node(state)
@@ -40,7 +40,8 @@ func _activated_update(delta):
 	character.fludd_charge_sound.stop()
 	character.fludd_boost_sound.play()
 	charge = 0
-	character.stamina = 0
+	character.stamina -= 50
+	cooldown_time = 1.25
 	character.get_state_node("JumpState").ledge_buffer = 0 # Disable coyote time, which allowed for a "double jump" that was weaker than the actual blast
 	deactivate_frames = 30
 	
@@ -57,7 +58,7 @@ func _activated_update(delta):
 		sprite.rotation_degrees = lerp(sprite.rotation_degrees, sprite_rotation, delta * rotation_interpolation_speed)
 	else:
 		override_rotation = false
-			
+	
 	var normal = character.sprite.transform.y.normalized()
 	character.jump_animation = 0
 	
@@ -97,7 +98,7 @@ func _process(_delta):
 		else:
 			character.water_sprite.flip_h = true
 
-func _general_update(_delta):
+func _general_update(delta):
 	if activated and !last_activated and character.stamina == 0:
 		character.water_sprite.animation = "out"
 		character.water_sprite.frame = 0
@@ -115,9 +116,17 @@ func _general_update(_delta):
 	if !activated:
 		if last_charged:
 			character.fludd_charge_sound.stop()
-		charge -= _delta * 2
+		charge -= delta * 2
 		character.fludd_sprite.modulate = Color(1, 1 - (charge * 1.4), 1 - (charge * 1.4))
 		character.fludd_sprite.offset = Vector2(0, 0)
 		if charge < 0:
 			charge = 0
 	last_charged = activated
+
+	if cooldown_time > 0:
+		if character.is_grounded():
+			cooldown_time = 0
+			return
+		cooldown_time -= delta
+		if cooldown_time <= 0:
+			cooldown_time = 0
