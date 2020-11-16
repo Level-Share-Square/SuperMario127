@@ -797,6 +797,7 @@ func kill(cause: String) -> void:
 			yield(get_tree().create_timer(3), "timeout")
 			health = 8
 			position = spawn_pos - Vector2(0, 16)
+			last_position = position # fixes infinite death bug
 			dead = false
 			movable = true
 			sprite.visible = true
