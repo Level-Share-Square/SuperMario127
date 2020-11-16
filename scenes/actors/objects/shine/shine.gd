@@ -210,6 +210,12 @@ func collect(body : PhysicsBody2D) -> void:
 			SavedLevels.get_current_levels()[SavedLevels.selected_level].update_time_and_coin_score(id, true)
 			if do_kick_out: # keep tracking the time score if you continue the level, to prevent cheese on other shine time scores
 				CurrentLevelData.stop_tracking_time_score() # time score is saved, and we don't want it continuing to update into the menu wasting resources
+			else:
+				var level_info = SavedLevels.get_current_levels()[SavedLevels.selected_level]
+				var new_shine_id = level_info.selected_shine + 1
+				if new_shine_id < level_info.shine_details.size():
+					level_info.selected_shine = new_shine_id
+				get_tree().get_current_scene().get_node("UI/PauseScreen").update_shine_info()
 
 func start_shine_dance() -> void:
 	character.set_state_by_name("NoActionState", get_physics_process_delta_time())
