@@ -22,6 +22,8 @@ func is_state(state):
 	return character.state == character.get_state_node(state)
 	
 func _activated_update(delta):
+	character.turbo_particles.process_material.initial_velocity = 1000 - abs(character.velocity.x)
+	
 	var normal = character.sprite.transform.x.normalized()
 	var power = boost_power
 	character.velocity.x += (accel * normal.x) * character.facing_direction
@@ -70,12 +72,12 @@ func _general_update(_delta):
 	
 	character.water_sprite.rotation_degrees = 90 * character.facing_direction
 	if activated and !last_activated:
-		character.water_sprite.animation = "out"
+		character.turbo_particles.emitting = true
 		character.water_sprite.frame = 0
 		character.fludd_sound.play(((100 - character.stamina) / 100) * 2.79)
 		last_activated = true
 	elif !activated and last_activated:
-		character.water_sprite.animation = "in"
+		character.turbo_particles.emitting = false
 		character.water_sprite.frame = 0
 		character.fludd_sound.stop()
 		last_activated = false

@@ -23,7 +23,7 @@ func _activate_check(_delta):
 	
 func is_state(state):
 	return character.state == character.get_state_node(state)
-	
+		
 func _activated_update(delta):
 	if last_activated and deactivate_frames > 0:
 		return
@@ -44,13 +44,13 @@ func _activated_update(delta):
 	cooldown_time = 1.25
 	character.get_state_node("JumpState").ledge_buffer = 0 # Disable coyote time, which allowed for a "double jump" that was weaker than the actual blast
 	deactivate_frames = 30
-	
+		
 	if !is_state("DiveState") and !is_state("SlideState"):
 		if character.facing_direction == 1:
 			character.sprite.animation = "jumpRight"
 		else:
 			character.sprite.animation = "jumpLeft"
-
+		
 	if (character.state == null or !character.state.override_rotation) and !character.rotating_jump:
 		override_rotation = true
 		var sprite = character.sprite
@@ -88,6 +88,9 @@ func _update(_delta):
 
 	if !activated:
 		override_rotation = false
+	
+	if !activated:
+		character.fludd_sprite.modulate = Color(1, 1 - (charge * 1.4), 1 - (charge * 1.4))
 
 	last_state = character.state
 
@@ -111,14 +114,13 @@ func _general_update(delta):
 			character.water_sprite.animation = "in"
 			character.water_sprite.frame = 0
 			character.fludd_sound.stop()
+			character.fludd_sprite.offset = Vector2(0, 0)
 			last_activated = false
 	
 	if !activated:
 		if last_charged:
 			character.fludd_charge_sound.stop()
 		charge -= delta * 2
-		character.fludd_sprite.modulate = Color(1, 1 - (charge * 1.4), 1 - (charge * 1.4))
-		character.fludd_sprite.offset = Vector2(0, 0)
 		if charge < 0:
 			charge = 0
 	last_charged = activated

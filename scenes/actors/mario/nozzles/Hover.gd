@@ -83,7 +83,9 @@ func _general_update(_delta):
 		if abs(character.velocity.x) < abs(power * normal.x) * 8:
 			character.velocity.x -= accel * normal.x
 
-		character.water_sprite.animation = "out"
+		character.water_particles.emitting = true
+		character.water_particles_2.emitting = true
+		#character.water_sprite.animation = "out"
 		character.water_sprite.frame = 0
 		character.fludd_sound.play(((100 - character.stamina) / 100) * 2.79)
 		
@@ -92,7 +94,9 @@ func _general_update(_delta):
 		else:
 			preservation_factor = 0
 	elif !activated and last_activated:
-		character.water_sprite.animation = "in"
+		character.water_particles.emitting = false
+		character.water_particles_2.emitting = false
+		#character.water_sprite.animation = "in"
 		character.water_sprite.frame = 0
 		character.fludd_sound.stop()
 	elif !activated and !last_activated and character.fludd_sound.playing:

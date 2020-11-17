@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=2]
+[gd_scene load_steps=132 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -65,6 +65,7 @@
 [ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=63]
 [ext_resource path="res://scenes/actors/mario/wing_frames_luigi.tres" type="SpriteFrames" id=64]
 [ext_resource path="res://scenes/actors/mario/wing_frames.tres" type="SpriteFrames" id=65]
+[ext_resource path="res://scenes/actors/mario/nozzles/water_particle.png" type="Texture" id=66]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -87,6 +88,64 @@ length = 6.0
 [sub_resource type="RayShape2D" id=7]
 custom_solver_bias = 0.5
 length = 13.0
+
+[sub_resource type="CanvasItemMaterial" id=64]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=59]
+offsets = PoolRealArray( 0, 0.75, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.45098, 0.898039, 0.996078, 1, 0.133333, 0.552941, 0.882353, 0 )
+
+[sub_resource type="GradientTexture" id=60]
+gradient = SubResource( 59 )
+
+[sub_resource type="Curve" id=62]
+max_value = 1.25
+_data = [ Vector2( 0, 0.815315 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.25 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=63]
+curve = SubResource( 62 )
+
+[sub_resource type="ParticlesMaterial" id=61]
+lifetime_randomness = 0.79
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 15.0
+gravity = Vector3( 0, 96, 0 )
+initial_velocity = 100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 400.0
+scale_random = 1.0
+scale_curve = SubResource( 63 )
+color_ramp = SubResource( 60 )
+hue_variation_random = 0.15
+anim_offset = 1.0
+anim_offset_random = 1.0
+
+[sub_resource type="ParticlesMaterial" id=65]
+lifetime_randomness = 0.79
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+spread = 20.0
+gravity = Vector3( 0, 96, 0 )
+initial_velocity = 1000.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 1600.0
+scale_random = 1.0
+scale_curve = SubResource( 63 )
+color_ramp = SubResource( 60 )
+hue_variation_random = 0.15
+anim_offset = 1.0
+anim_offset_random = 1.0
 
 [sub_resource type="Shader" id=8]
 
@@ -919,14 +978,12 @@ disabled = true
 [node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -40 )
 frames = ExtResource( 1 )
-animation = "flyRight"
+animation = "jumpRight"
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
-visible = false
-frames = ExtResource( 23 )
-animation = "starRunLeft"
-frame = 6
+frames = ExtResource( 48 )
+animation = "jumpRight"
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
@@ -949,13 +1006,48 @@ centered = false
 
 [node name="Water" type="AnimatedSprite" parent="Sprite"]
 visible = false
-position = Vector2( -2, -4 )
-rotation = -0.00178115
+position = Vector2( -16, -24 )
+rotation = 1.5708
 frames = ExtResource( 24 )
-animation = "in"
+animation = "out"
 frame = 6
 playing = true
 centered = false
+
+[node name="Particles2DBack" type="Particles2D" parent="Sprite"]
+show_behind_parent = true
+material = SubResource( 64 )
+emitting = false
+amount = 192
+lifetime = 0.5
+fixed_fps = 60
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+process_material = SubResource( 61 )
+texture = ExtResource( 66 )
+
+[node name="Particles2D" type="Particles2D" parent="Sprite"]
+material = SubResource( 64 )
+position = Vector2( -9.5, -2 )
+emitting = false
+amount = 192
+lifetime = 0.5
+fixed_fps = 60
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+process_material = SubResource( 61 )
+texture = ExtResource( 66 )
+
+[node name="TurboParticles" type="Particles2D" parent="Sprite"]
+material = SubResource( 64 )
+position = Vector2( -19, -12.5 )
+amount = 256
+lifetime = 0.25
+fixed_fps = 60
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = false
+process_material = SubResource( 65 )
+texture = ExtResource( 66 )
 
 [node name="States" type="Node" parent="."]
 
@@ -1043,13 +1135,7 @@ animation_water_positions = {
 "fallLeft": Vector2( -3, -4 ),
 "fallRight": Vector2( -22, -4 ),
 "jumpLeft": Vector2( -3, -4 ),
-"jumpRight": Vector2( -22, -4 ),
-"shineFall": Vector2( 0, 1e+06 ),
-"spinning": Vector2( 0, 1e+06 ),
-"tripleJumpLeft": Vector2( 0, 1e+06 ),
-"tripleJumpRight": Vector2( 0, 1e+06 ),
-"wallSlideLeft": Vector2( 0, 1e+06 ),
-"wallSlideRight": Vector2( 0, 1e+06 )
+"jumpRight": Vector2( -22, -4 )
 }
 fallback_water_pos_left = Vector2( -5, -2 )
 fallback_water_pos_right = Vector2( -20, -2 )
@@ -1059,13 +1145,7 @@ animation_water_positions_luigi = {
 "fallLeft": Vector2( -7, -5 ),
 "fallRight": Vector2( -19, -5 ),
 "jumpLeft": Vector2( -4, -6 ),
-"jumpRight": Vector2( -21, -6 ),
-"shineFall": Vector2( 0, 1e+06 ),
-"spinning": Vector2( 0, 1e+06 ),
-"tripleJumpLeft": Vector2( 0, 1e+06 ),
-"tripleJumpRight": Vector2( 0, 1e+06 ),
-"wallSlideLeft": Vector2( 0, 1e+06 ),
-"wallSlideRight": Vector2( 0, 1e+06 )
+"jumpRight": Vector2( -21, -6 )
 }
 fallback_water_pos_left_luigi = Vector2( -5, -2 )
 fallback_water_pos_right_luigi = Vector2( -19, -2 )
@@ -1153,7 +1233,7 @@ disabled = true
 
 [node name="Spotlight" type="Light2D" parent="."]
 light_mask = 0
-position = Vector2( -0.0524902, 0 )
+position = Vector2( 0.058899, 0.111328 )
 enabled = false
 texture = ExtResource( 17 )
 mode = 3
@@ -1306,13 +1386,13 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 56 )
-frame = 2
+frame = 15
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 8
+frame = 1
 speed_scale = 3.0
 playing = true
 
@@ -1339,7 +1419,6 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "starRunLeft"
-frame = 7
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
