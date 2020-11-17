@@ -97,7 +97,7 @@ func _pre_open_screen() -> void:
 		populate_info_panel()
 	elif SavedLevels.selected_level != NO_LEVEL:
 		# otherwise if it's not NO_LEVEL, we're probably returning to the menu after leaving a stage
-		populate_info_panel(levels[SavedLevels.selected_level])
+		# populate_info_panel(levels[SavedLevels.selected_level])
 		level_list.select(SavedLevels.selected_level)
 	else: # no level selected, but we have levels, so select the first one
 		populate_info_panel(levels[0])
