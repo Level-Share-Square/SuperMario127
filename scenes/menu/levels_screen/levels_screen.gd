@@ -153,22 +153,19 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 
 			time_score_list.clear()
 			
-			var time_scores_unsorted = level_info.time_scores.values()
+			var time_scores = level_info.time_scores.values()
 
-			var last_order = 0
-			var time_scores = []
-			for shine in level_info.shine_details:
-				if shine.sort_order >= last_order:
-					time_scores.append(time_scores_unsorted[shine.id])
-					last_order = shine.sort_order
-			var index = 0
-			for time_score in time_scores:
+			var shine_details_sorted = ([] + level_info.shine_details)
+			shine_details_sorted.sort_custom(LevelInfo, "shine_sort")
+			
+			for shine_detail in shine_details_sorted:
+				var index = level_info.shine_details.bsearch(shine_detail)
+				var time_score = time_scores[index]
 				if time_score != -1:
 					var time_score_string : String = LevelInfo.generate_time_string(time_score)
-					time_score_list.add_item(level_info.shine_details[index].title + ":\n" + time_score_string)
+					time_score_list.add_item(shine_detail.title + ":\n" + time_score_string)
 				else: 
-					time_score_list.add_item(level_info.shine_details[index].title + ":\n--:--.--")
-				index += 1
+					time_score_list.add_item(shine_detail.title + ":\n--:--.--")
 		else: 
 			set_time_score_button(false)
 			# if there is at least one time, and that time isn't an empty time
