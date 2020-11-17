@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://classes/ForegroundResource.gd" type="Script" id=1]
+[ext_resource path="res://scenes/shared/background/foregrounds/ice_spikes/front.tres" type="Resource" id=2]
+[ext_resource path="res://scenes/shared/background/foregrounds/ice_spikes/back.tres" type="Resource" id=3]
+[ext_resource path="res://scenes/shared/background/foregrounds/ice_spikes/preview.png" type="Texture" id=4]
+
+[resource]
+script = ExtResource( 1 )
+layers = [ ExtResource( 3 ), ExtResource( 2 ) ]
+preview = ExtResource( 4 )
