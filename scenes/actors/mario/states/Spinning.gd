@@ -94,6 +94,9 @@ func _general_update(delta):
 		sound_buffer -= delta
 		if sound_buffer <= 0:
 			sound_buffer = 0
+			
+	if !character.is_grounded():
+		next_direction_timer = 0
 	
 	if character.state != character.get_state_node("WallSlideState"):
 		if character.inputs[character.input_names.left][1]:
