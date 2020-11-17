@@ -62,7 +62,7 @@ func _ready():
 			x += X_STEP
 
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion or event is InputEventScreenDrag:
 		return
 		
 	if (event is InputEventJoypadMotion || event.pressed) && currentButton != null:

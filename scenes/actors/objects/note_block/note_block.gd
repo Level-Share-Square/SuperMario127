@@ -99,6 +99,10 @@ func bounce(body):
 		var body_parent = body.get_parent()
 		var is_weak_bounce = true
 		
+		if "controllable" in body_parent:
+			if !body_parent.controllable:
+				return # Don't gbj players
+		
 		if body_parent.has_method("set_state_by_name"):
 			body_parent.set_state_by_name("BounceState", 0)
 			if body_parent.inputs[2][0]:
@@ -117,8 +121,8 @@ func bounce(body):
 			body_parent.velocity.y = y_power
 			body_parent.position.y += 2 * sign(y_power)
 		animation_player.play("bounce_weak" if is_weak_bounce else "bounce")
-		if "stamina" in body.get_parent():
-			body.get_parent().stamina = 100
+		if "stamina" in body_parent:
+			body_parent.stamina = 100
 
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2

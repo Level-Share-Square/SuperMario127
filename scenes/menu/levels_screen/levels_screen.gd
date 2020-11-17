@@ -97,7 +97,8 @@ func _pre_open_screen() -> void:
 		populate_info_panel()
 	elif SavedLevels.selected_level != NO_LEVEL:
 		# otherwise if it's not NO_LEVEL, we're probably returning to the menu after leaving a stage
-		populate_info_panel(levels[SavedLevels.selected_level])
+		if SavedLevels.selected_level < levels.size():
+			populate_info_panel(levels[SavedLevels.selected_level])
 		level_list.select(SavedLevels.selected_level)
 	else: # no level selected, but we have levels, so select the first one
 		populate_info_panel(levels[0])
@@ -152,14 +153,19 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 
 			time_score_list.clear()
 			
-			var list_position := 1
-			for time_score in level_info.time_scores.values():
+			var time_scores = level_info.time_scores.values()
+
+			var shine_details_sorted = ([] + level_info.shine_details)
+			shine_details_sorted.sort_custom(LevelInfo, "shine_sort")
+			
+			for shine_detail in shine_details_sorted:
+				var index = level_info.shine_details.bsearch(shine_detail)
+				var time_score = time_scores[index]
 				if time_score != -1:
 					var time_score_string : String = LevelInfo.generate_time_string(time_score)
-					time_score_list.add_item(str(list_position) + ". " + time_score_string)
+					time_score_list.add_item(shine_detail.title + ":\n" + time_score_string)
 				else: 
-					time_score_list.add_item(str(list_position) + ". --:--.--")
-				list_position += 1
+					time_score_list.add_item(shine_detail.title + ":\n--:--.--")
 		else: 
 			set_time_score_button(false)
 			# if there is at least one time, and that time isn't an empty time
