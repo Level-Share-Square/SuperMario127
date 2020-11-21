@@ -54,6 +54,8 @@ const DEFAULT_FOREGROUND_THUMBNAIL : StreamTexture = preload("res://scenes/share
 
 var levels := SavedLevels.levels
 
+var double_click := false
+
 func _ready() -> void:
 	var _connect
 
@@ -105,7 +107,11 @@ func _pre_open_screen() -> void:
 		SavedLevels.selected_level = 0
 		level_list.select(0)
 
-func _input(_event : InputEvent) -> void:
+func _input(event : InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.is_pressed() and event.button_index == BUTTON_LEFT:
+			double_click = event.doubleclick
+	
 	if !can_interact or get_focus_owner() != null:
 		return
 	
@@ -293,6 +299,10 @@ func on_level_selected(index : int) -> void:
 	SavedLevels.selected_level = index
 	var level_info : LevelInfo = levels[SavedLevels.selected_level]
 	populate_info_panel(level_info)
+	
+	print(double_click)
+	if double_click:
+		start_level(false)
 
 func on_button_back_pressed() -> void:
 	emit_signal("screen_change", "levels_screen", "main_menu_screen")

@@ -418,6 +418,7 @@ custom_styles/selected = SubResource( 7 )
 custom_styles/bg = SubResource( 8 )
 custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+allow_reselect = true
 same_column_width = true
 fixed_column_width = 290
 __meta__ = {
