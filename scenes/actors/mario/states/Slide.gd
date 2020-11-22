@@ -114,7 +114,12 @@ func _general_update(delta):
 		if getup_buffer > 0:
 			getup_buffer = 0
 			ledge_buffer = 0
-			if !is_crouch or ((character.move_direction == 0 or character.move_direction == character.facing_direction) and abs(character.velocity.x) > 50):
+			var move_direction = 0
+			if character.inputs[0][0]:
+				move_direction -= 1
+			if character.inputs[1][0]:
+				move_direction += 1
+			if (move_direction == 0 and !is_crouch) or move_direction == character.facing_direction:
 				change_to_getup(delta)
 			else:
 				character.position.y -= 16
