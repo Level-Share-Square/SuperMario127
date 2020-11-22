@@ -36,7 +36,7 @@ func _start(_delta):
 	dive_collision.disabled = true
 	dive_ground_collision.disabled = true
 	character.velocity.x /= 2
-	character.velocity.x += backflip_power.x * -character.facing_direction
+	character.velocity.x += (backflip_power.x / 1.5) * -character.facing_direction
 	character.velocity.y = -backflip_power.y
 	character.position.x -= 2 * character.facing_direction
 	character.position.y -= 3
@@ -49,6 +49,11 @@ func _start(_delta):
 	spins = 0
 
 func _update(_delta):
+	# if 127cs wasnt a thing this code would get me cancelled lol
+	var division_amount = unlock_timer * 2.5
+	if division_amount == 0:
+		division_amount = 0.05
+	character.velocity.x += (backflip_power.x / (65/division_amount)) * -character.facing_direction
 	var sprite = character.sprite
 	if (character.facing_direction == 1):
 		sprite.animation = "jumpRight"
