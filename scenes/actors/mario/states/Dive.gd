@@ -75,6 +75,11 @@ func _stop(delta : float) -> void:
 		character.set_state_by_name("SlideState", delta)
 	else:
 		sprite.rotation_degrees = 0
+	character.facing_direction = start_facing
+	var normal = character.ground_check.get_collision_normal()
+	var sprite_rotation = atan2(normal.y, normal.x) + (PI/2)
+	sprite_rotation += PI/2 * start_facing
+	character.sprite.rotation = sprite_rotation
 
 func _stop_check(_delta : float) -> bool:
 	return character.is_grounded() or (character.is_walled_right() and character.facing_direction == 1) or (character.is_walled_left() and character.facing_direction == -1)
