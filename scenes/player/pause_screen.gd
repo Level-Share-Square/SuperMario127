@@ -50,6 +50,15 @@ func _ready():
 
 	update_shine_info()
 
+func _process(_delta: float) -> void:
+	if !get_tree().paused:
+		if visible:
+			paused = true
+		
+		if paused:
+			paused = false # so toggle_pause() works
+			toggle_pause()
+
 func _unhandled_input(event):
 	if CurrentLevelData.can_pause and event.is_action_pressed("pause") and !(character_node.dead or (PlayerSettings.number_of_players != 1 and character2_node.dead)):
 		toggle_pause()
