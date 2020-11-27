@@ -11,8 +11,8 @@ func _set_property_values():
 
 func _process(delta):
 	if is_background:
-		$Sprite.self_modulate = Color(0.55, 0.55, 0.55) 
+		self_modulate = Color(0.55, 0.55, 0.55) 
 		z_index = -2
 	else:
-		$Sprite.self_modulate = Color(1, 1, 1) 
-		z_index = 2
+		self_modulate = Color(1, 1, 1) 
+		z_index = 10
