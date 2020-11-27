@@ -37,13 +37,14 @@ func collect(body, is_shell = false):
 		queue_free() # die
 
 func _ready():
+	if physics:
+		gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
+	
 	yield(get_tree().create_timer(0.2), "timeout")
 	var _connect = area.connect("body_entered", self, "collect")
 	
 	if physics:
-		gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
-		
-		yield(get_tree().create_timer(9.0), "timeout")
+		yield(get_tree().create_timer(9.0 - 0.2), "timeout")
 		blink = true # Make the coin flash before disappearing
 		yield(get_tree().create_timer(1.0), "timeout")
 		queue_free() # die
