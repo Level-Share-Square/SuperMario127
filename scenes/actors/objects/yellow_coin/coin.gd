@@ -7,9 +7,9 @@ onready var visibility_enabler = $VisibilityEnabler2D
 
 export var coins : int = 1
 
-var collected = false
-var physics = false
-var despawn_timer = 0.0
+var collected := false
+var physics := false
+var blink := false
 var gravity : float
 var velocity : Vector2
 
@@ -33,12 +33,20 @@ func collect(body, is_shell = false):
 		physics = false
 		animated_sprite.animation = "collect"
 		animated_sprite.frame = 0
-		despawn_timer = 1
+		yield(get_tree().create_timer(1.0), "timeout")
+		queue_free() # die
 
 func _ready():
 	if physics:
-		despawn_timer = 10.0
 		gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
+		
+		yield(get_tree().create_timer(9.0), "timeout")
+		blink = true # Make the coin flash before disappearing
+		yield(get_tree().create_timer(10.0), "timeout")
+		queue_free() # die
+		# Might take a while for it to despawn though
+		blink = false
+		visible = false
 	yield(get_tree().create_timer(0.2), "timeout")
 	var _connect = area.connect("body_entered", self, "collect")
 
@@ -72,13 +80,8 @@ func _process(delta):
 			shape.disabled = !activate_shape
 			prev_activate_shape = activate_shape
 	
-	if despawn_timer > 0:
-		despawn_timer -= delta
-		if despawn_timer <= 1:
-			visible = !visible
-		if despawn_timer <= 0:
-			despawn_timer = 0
-			queue_free()
+	if blink:
+		visible = !visible
 
 func horizontal_cast():
 	var pos_new = position + Vector2(5 if velocity.x > 0 else -5, 0)

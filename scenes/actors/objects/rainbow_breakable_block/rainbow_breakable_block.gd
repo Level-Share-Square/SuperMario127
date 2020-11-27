@@ -10,11 +10,7 @@ onready var broken_sound = $Broken
 onready var break_particle = $BreakParticle
 var broken = false
 
-var buffer := -5
-
 var coins = 0
-var delete_timer = 0.0
-
 var time_alive = 0.0
 var hue = 0
 
@@ -50,12 +46,6 @@ func _physics_process(delta):
 	if mode != 1 and enabled:
 		time_alive += delta
 		
-		if delete_timer > 0:
-			delete_timer -= delta
-			if delete_timer <= 0:
-				delete_timer = 0
-				queue_free()
-		
 		for hit_body in stomp_area.get_overlapping_bodies():
 			if !broken and hit_body.name.begins_with("Character"): if is_rainbow(hit_body):
 				broken = true
@@ -64,7 +54,8 @@ func _physics_process(delta):
 					break_particle.show()
 					break_particle.set_emitting(true)
 					broken_sound.play()
-					delete_timer = 3.0
+					yield(get_tree().create_timer(3.0), "timeout")
+					queue_free() # die
 		for hit_body in spin_area.get_overlapping_bodies():
 			if !broken and hit_body.name.begins_with("Character"): if is_rainbow(hit_body):
 				broken = true
@@ -73,7 +64,8 @@ func _physics_process(delta):
 					break_particle.show()
 					break_particle.set_emitting(true)
 					broken_sound.play()
-					delete_timer = 3.0
+					yield(get_tree().create_timer(3.0), "timeout")
+					queue_free() # die
 		
 		var scene : Node = get_tree().current_scene
 		if scene.has_node(scene.character):

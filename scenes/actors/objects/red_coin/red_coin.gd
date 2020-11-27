@@ -10,8 +10,6 @@ onready var sparkles = $Sparkles
 
 var collected = false
 var physics = false
-var destroy_timer = 0.0
-var despawn_timer = 0.0
 var gravity : float
 var velocity : Vector2
 
@@ -36,28 +34,14 @@ func collect(body):
 		animated_sprite.animation = "collect"
 		animated_sprite.frame = 0
 		sparkles.emitting = false
-		destroy_timer = 2
+		yield(get_tree().create_timer(2.0), "timeout")
+		queue_free() # die
 		
 func _ready():
 	CurrentLevelData.level_data.vars.max_red_coins += 1
 	var _connect = area.connect("body_entered", self, "collect")
 
 func _process(delta):
-	if destroy_timer > 0:
-		destroy_timer -= delta
-		if destroy_timer <= 0:
-			destroy_timer = 0
-			queue_free()
-	if despawn_timer > 0:
-		despawn_timer -= delta
-		if despawn_timer <= 1:
-			visible = !visible
-		if despawn_timer <= 0:
-			if !sound.playing:
-				despawn_timer = 0
-				queue_free()
-			else:
-				despawn_timer = 0.3
 	if !collected:
 		animated_sprite.frame = (OS.get_ticks_msec() / anim_damp) % 4
 	else:

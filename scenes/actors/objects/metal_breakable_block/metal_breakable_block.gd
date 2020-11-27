@@ -13,12 +13,8 @@ onready var break_particle = $BreakParticle
 onready var dust_particle = $DustParticle
 var broken = false
 
-var buffer := -5
 var character = null
-
 var coins = 0
-var delete_timer = 0.0
-
 var time_alive = 0.0
 
 func _set_properties():
@@ -50,12 +46,6 @@ func _physics_process(delta):
 	if mode != 1 and enabled:
 		time_alive += delta
 		
-		if delete_timer > 0:
-			delete_timer -= delta
-			if delete_timer <= 0:
-				delete_timer = 0
-				queue_free()
-		
 		for hit_body in stomp_area.get_overlapping_bodies():
 			if !broken and hit_body.name.begins_with("Character"): if hit_body.velocity.y > 0 and hit_body.big_attack and is_metal(hit_body):
 				broken = true
@@ -66,7 +56,8 @@ func _physics_process(delta):
 					break_particle.set_emitting(true)
 					dust_particle.set_emitting(true)
 					broken_sound.play()
-					delete_timer = 3.0
+					yield(get_tree().create_timer(3.0), "timeout")
+					queue_free() # die
 		for hit_body in spin_area.get_overlapping_bodies():
 			if !broken and hit_body.name.begins_with("Character"): if hit_body.attacking and !hit_body.big_attack and is_metal(hit_body):
 				broken = true
@@ -77,7 +68,8 @@ func _physics_process(delta):
 					break_particle.set_emitting(true)
 					dust_particle.set_emitting(true)
 					broken_sound.play()
-					delete_timer = 3.0
+					yield(get_tree().create_timer(3.0), "timeout")
+					queue_free() # die
 		for hit_area in spin_area.get_overlapping_areas():
 			if !broken and hit_area.has_method("is_hurt_area") and is_metal(hit_area.get_parent()):
 				broken = true
@@ -88,7 +80,8 @@ func _physics_process(delta):
 					break_particle.set_emitting(true)
 					dust_particle.set_emitting(true)
 					broken_sound.play()
-					delete_timer = 3.0
+					yield(get_tree().create_timer(3.0), "timeout")
+					queue_free() # die
 		
 		for hit_body in player_detector.get_overlapping_bodies():
 			if hit_body.name.begins_with("Character") and hit_body.velocity.y > 0: 

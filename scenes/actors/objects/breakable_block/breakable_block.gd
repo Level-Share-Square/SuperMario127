@@ -14,12 +14,8 @@ onready var break_particle = $BreakParticle
 onready var dust_particle = $DustParticle
 var broken = false
 
-var buffer := -5
-
-var coins = 0
-var delete_timer = 0.0
-
-var time_alive = 0.0
+var coins := 0
+var time_alive := 0.0
 
 func _set_properties():
 	savable_properties = ["coins"]
@@ -60,7 +56,8 @@ func break_box():
 			static_body.set_collision_layer_bit(0, false)
 			static_body.set_collision_mask_bit(1, false)
 			stomp_area.set_collision_layer_bit(0, false)
-			delete_timer = 3.0
+			yield(get_tree().create_timer(3.0), "timeout")
+			queue_free() # die
 
 func top_breakable(hit_body):
 	if hit_body.name == "Steely" and hit_body.get_parent().should_hit:
@@ -93,12 +90,6 @@ func handle_character_exception(character: Character):
 func _physics_process(delta):
 	if mode != 1 and enabled: 
 		time_alive += delta
-		
-		if delete_timer > 0:
-			delete_timer -= delta
-			if delete_timer <= 0:
-				delete_timer = 0
-				queue_free()
 		
 		for hit_body in stomp_area.get_overlapping_bodies():
 			if !broken and top_breakable(hit_body):
