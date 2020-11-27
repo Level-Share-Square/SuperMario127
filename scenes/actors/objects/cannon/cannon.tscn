@@ -209,7 +209,6 @@ void fragment()
 		COLOR.a = 0f;
 	}
 }"
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 3 )
@@ -310,6 +309,7 @@ position = Vector2( 0, -180 )
 visible = false
 position = Vector2( -0.583315, 23.0744 )
 frames = SubResource( 7 )
+frame = 1
 playing = true
 
 [node name="Particles2D" type="Particles2D" parent="CannonMoveable/SpriteBodyReverser/SpriteBody"]

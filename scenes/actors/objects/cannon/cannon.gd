@@ -37,6 +37,7 @@ const Z_INDEX_BACKGROUND := -5
 
 # properties that can be changed in the editor
 var launch_power := 1200
+const MAX_LAUNCH_POWER := 10000 
 var min_rotation := 0
 var max_rotation := 90
 var faces_right := true
@@ -67,6 +68,9 @@ func _ready() -> void:
 
 #disabled by default until process is enabled, so this can assume the cannon is already in an active state
 func _physics_process(delta : float) -> void:
+	if launch_power > MAX_LAUNCH_POWER:
+		launch_power = MAX_LAUNCH_POWER
+
 	#if the jump button is pressed, fire the cannon
 	if stored_character.get_input(Character.input_names.fludd, true):
 		set_physics_process(false)
@@ -107,7 +111,8 @@ func _physics_process(delta : float) -> void:
 
 # called by a signal when the pipe enter animation finished
 func _start_cannon_animation(character : Character) -> void:
-	stored_character = character 
+	stored_character = character
+	stored_character.modulate.a = 0
 	stored_character.camera.focus_on = cannon_camera_startup_focus
 
 	cannon_moveable.z_index = Z_INDEX_BACKGROUND
@@ -147,6 +152,7 @@ func fire_cannon() -> void:
 	stored_character.invulnerable = false
 	stored_character.controllable = true
 	stored_character.movable = true
+	stored_character.modulate.a = 1
 
 	#set the player so they will fire out of the cannon properly with velocity and such
 	stored_character.position = cannon_exit_position.global_position
