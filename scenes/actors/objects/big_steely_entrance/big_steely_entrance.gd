@@ -2,8 +2,8 @@ extends GameObject
 
 var steely_nodes = []
 
-var spawn_interval = 7.5
-var steely_despawn_timer = 20
+var spawn_interval := 7.5
+var steely_despawn_timer := 20.0
 
 const STEELY_SPAWN_LIMIT = 16
 
