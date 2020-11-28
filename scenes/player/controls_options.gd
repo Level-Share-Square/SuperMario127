@@ -60,6 +60,9 @@ func _ready():
 			y_index = 0
 			y = Y_START
 			x += X_STEP
+	
+	# Fix z index of the control binding window
+	move_child($ControlBindingWindow, get_child_count() - 1)
 
 func _input(event):
 	if event is InputEventMouseMotion or event is InputEventScreenDrag:
