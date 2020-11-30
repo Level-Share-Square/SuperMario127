@@ -21,7 +21,7 @@ func _ready() -> void:
 
 # this is the worst thing i've ever seen in my life
 func _start_check(_delta : float) -> bool:
-	return dive_buffer > 0 and character.dive_cooldown <= 0 and !(character.inputs[9][0] and character.is_grounded()) and !(abs(character.velocity.x) <= 150 and character.is_grounded()) and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0)) and !character.is_walled()
+	return dive_buffer > 0 and character.dive_cooldown <= 0 and !(abs(character.velocity.x) <= 150 and character.is_grounded()) and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0)) and !character.is_walled()
 
 func _start(_delta : float) -> void:
 	start_facing = character.facing_direction
@@ -87,7 +87,7 @@ func _stop_check(_delta : float) -> bool:
 	return character.is_grounded() or (character.is_walled_right() and character.facing_direction == 1) or (character.is_walled_left() and character.facing_direction == -1)
 
 func _general_update(delta : float) -> void:
-	if character.inputs[3][1] and !(character.inputs[9][0] and character.is_grounded()) and character.dive_cooldown == 0:
+	if character.inputs[3][1] and character.dive_cooldown == 0:
 		dive_buffer = 0.075
 	if dive_buffer > 0:
 		dive_buffer -= delta
