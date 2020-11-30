@@ -21,6 +21,8 @@ func kill(body):
 	
 	if !is_vanish(body):
 		body.knockback(global_position)
+		if body.global_position.y > (global_position.y - 4):
+			body.velocity.y = 55
 		if !body.invulnerable:
 			body.damage()
 		else:
