@@ -46,7 +46,6 @@ func _start(_delta):
 	sound_player.play_wall_jump_sound()
 	character.jump_animation = 0
 	character.is_wj_chained = true
-	character.get_state_node("SpinningState").next_direction_timer = 0.01
 
 func _update(_delta):
 	var sprite = character.sprite

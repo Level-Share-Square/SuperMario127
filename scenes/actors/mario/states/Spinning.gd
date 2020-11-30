@@ -11,10 +11,6 @@ var spin_timer = 0
 var attack_timer = 0
 var sound_buffer = 0
 
-var next_direction_timer = 0
-var next_direction = 1
-var directional_presses_left = 4
-
 func _ready():
 	priority = 2
 	disable_animation = true
@@ -94,32 +90,3 @@ func _general_update(delta):
 		sound_buffer -= delta
 		if sound_buffer <= 0:
 			sound_buffer = 0
-			
-	if !character.is_grounded():
-		next_direction_timer = 0
-	
-	if character.state != character.get_state_node("WallSlideState"):
-		if character.inputs[character.input_names.left][1]:
-			if directional_presses_left == 4 or (next_direction == -1 and next_direction_timer > 0):
-				directional_presses_left -= 1
-				next_direction = 1
-				next_direction_timer = 0.25
-				if directional_presses_left == 0:
-					directional_presses_left = 4
-					next_direction_timer = 0
-					spin_timer = 1
-		elif character.inputs[character.input_names.right][1]:
-			if directional_presses_left == 4 or (next_direction == 1 and next_direction_timer > 0):
-				directional_presses_left -= 1
-				next_direction = -1
-				next_direction_timer = 0.25
-				if directional_presses_left == 0:
-					directional_presses_left = 4
-					next_direction_timer = 0
-					spin_timer = 1
-	
-	if next_direction_timer > 0:
-		next_direction_timer -= delta
-		if next_direction_timer <= 0:
-			next_direction_timer = 0
-			directional_presses_left = 4
