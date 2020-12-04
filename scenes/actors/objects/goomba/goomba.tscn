@@ -211,5 +211,6 @@ position = Vector2( 0, 5 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 rect = Rect2( -300, -300, 600, 600 )
+pause_particles = false
 process_parent = true
 physics_process_parent = true
