@@ -44,20 +44,15 @@ func _ready():
 	bottombar.rect_position = Vector2(768, 500)
 	shine_info.rect_scale = Vector2(0, 0)
 
-	CurrentLevelData.can_pause = true
+	CurrentLevelData.can_pause = false
 
 	set_process(false)
 
 	update_shine_info()
 
-func _process(_delta: float) -> void:
-	if !get_tree().paused:
-		if visible:
-			paused = true
-		
-		if paused:
-			paused = false # so toggle_pause() works
-			toggle_pause()
+	# Wait before enabling pausing, so that the game can't enter the strangest pause state
+	yield(get_tree().create_timer(0.2), "timeout")
+	CurrentLevelData.can_pause = true
 
 func _unhandled_input(event):
 	if CurrentLevelData.can_pause and event.is_action_pressed("pause") and !(character_node.dead or (PlayerSettings.number_of_players != 1 and character2_node.dead)):
