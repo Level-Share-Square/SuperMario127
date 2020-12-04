@@ -54,6 +54,8 @@ func start_door_enter_animation(character : Character) -> void:
 	character.movable = false
 	character.velocity = Vector2.ZERO
 	character.sprite.rotation = 0
+	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
+	character.set_inter_player_collision(false)
 	character.camera.smoothing_enabled = true # Re-enable camera smoothing
 	
 	character.sprite.animation = "enterDoor" + ("Right" if character.facing_direction == 1 else "Left")
@@ -119,6 +121,9 @@ func door_exit_anim_finished(_animation : String, character : Character) -> void
 	character.invulnerable = false 
 	character.controllable = true
 	character.movable = true
+	# undo collision changes 
+	character.set_collision_layer_bit(1, true)
+	character.set_inter_player_collision(true) 
 	
 	character.sprite.animation = "exitDoor" + ("Right" if character.facing_direction == 1 else "Left")
 	character.sprite.playing = true
