@@ -54,6 +54,7 @@ onready var collected_shine_outline : AnimatedSprite = $CollectedShineOutline # 
 onready var collected_shine_particles : Particles2D = $CollectedShine/ShineParticles # same as above
 onready var death_sprite : AnimatedSprite = $DeathSprite
 onready var death_fludd_sprite : AnimatedSprite = $DeathSprite/Fludd
+onready var vanish_detector : Area2D = $VanishDetector
 onready var raycasts = [ground_check, ground_check_dive, left_check, right_check, slope_stop_check]
 export var bottom_pos_offset : Vector2
 export var bottom_pos_dive_offset : Vector2
@@ -427,6 +428,9 @@ func player_hit(body : Node) -> void:
 			sound_player.play_hit_sound()
 
 func _process(delta: float) -> void:
+	if next_position:
+		position = position.linear_interpolate(next_position, delta * sync_interpolation_speed)
+
 	collected_shine_outline.frame = collected_shine.frame
 	collected_shine_outline.position = collected_shine.position
 	collected_shine_outline.scale = collected_shine.scale
@@ -438,14 +442,15 @@ func _process(delta: float) -> void:
 	
 	if is_instance_valid(powerup):
 		if powerup.time_left <= 2.5:
+			for overlap in vanish_detector.get_overlapping_bodies():
+				if is_instance_valid(overlap) and powerup.time_left <= 1.0 and powerup.id == 2:
+					powerup.time_left = 1
 			frames_until_flash -= 1
 			if frames_until_flash <= 0:
 				frames_until_flash = 3
 				powerup.toggle_visuals()
 	
 	visible = !visible if invulnerable_frames > 0 else true
-	if next_position:
-		position = position.linear_interpolate(next_position, delta * sync_interpolation_speed)
 
 func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> void:
 	if !dead:
