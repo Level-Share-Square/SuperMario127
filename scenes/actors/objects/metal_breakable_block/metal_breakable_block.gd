@@ -24,7 +24,7 @@ func _set_properties():
 func _set_property_values(): 
 	set_property("coins", coins, true)
 
-func _ready():
+func _ready():	
 	if !enabled:
 		collision_shape.disabled = true
 		for _area in [area, stomp_area, spin_area]:
@@ -32,6 +32,17 @@ func _ready():
 			_area.collision_mask = 0
 	else:
 		player_detector.connect("body_entered", self, "detect_player")
+		
+		if scale != Vector2.ONE: # Nothing to do on default scale
+			# Set inverse scale on the body so its overall scale is identity.
+			# For whatever reason, division doesn't work on vectors, soo
+			static_body.scale = Vector2(1.0 / scale.x, 1.0 / scale.y)
+			# So it doesn't modify all other boxes
+			collision_shape.shape = collision_shape.shape.duplicate()
+			# Modify the extents by the scale to get the desired collision shape
+			collision_shape.shape.extents = Vector2(collision_shape.shape.extents.x * scale.x,\
+													collision_shape.shape.extents.y * scale.y)
+	
 	break_particle.hide()
 	dust_particle.hide()
 
