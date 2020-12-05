@@ -72,7 +72,7 @@ func _physics_process(delta : float) -> void:
 		launch_power = MAX_LAUNCH_POWER
 
 	#if the jump button is pressed, fire the cannon
-	if stored_character.get_input(Character.input_names.fludd, true):
+	if stored_character.get_input(Character.input_names.fludd, true) or (stored_character.get_input(Character.input_names.jump, true) and !stored_character.get_input(Character.input_names.up, true)):
 		set_physics_process(false)
 
 		audio_player.set_process(true)
