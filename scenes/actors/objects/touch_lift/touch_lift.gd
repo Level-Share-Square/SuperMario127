@@ -91,6 +91,8 @@ onready var path = $Path2D
 onready var platform_sprite = $TouchLiftPlatform/Sprite
 onready var platform_sprite_recolor = $TouchLiftPlatform/SpriteRecolor
 
+export var circle_texture : Texture
+
 var speed := 1.0
 var loop_offset := 0.0
 var linear_offset := 0.0
@@ -154,12 +156,33 @@ func set_sprite_parts(sprite):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts
 
+func draw_circle_custom(position, radius, color, maxerror = 0.25):
+	if radius <= 0.0:
+		return
+
+	var maxpoints = 1024 # I think this is renderer limit
+
+	var numpoints = ceil(PI / acos(1.0 - maxerror / radius))
+	numpoints = clamp(numpoints, 3, maxpoints)
+
+	var points = PoolVector2Array([])
+
+	for i in numpoints:
+		var phi = i * PI * 2.0 / numpoints
+		var v = position + Vector2(sin(phi), cos(phi))
+		points.push_back(v * radius)
+
+	draw_colored_polygon(points, color)
+
 func _draw():
 	if(mode==1):
+		print("drawing polyline")
 		draw_polyline(path.curve.get_baked_points(), line_color, 2.0)
 	else:
+		print("drawing circles")
 		for offset in range(0,path.curve.get_baked_length(), 10.0):
-			draw_circle(path.curve.interpolate_baked(offset), 2, Color.darkgray)
+			var pos : Vector2 = path.curve.interpolate_baked(offset)
+			draw_texture_rect(circle_texture, Rect2(pos - Vector2(2.0, 2.0), Vector2(4.0, 4.0)), false, Color.darkgray)
 
 func _physics_process(delta):
 	if(!activated):

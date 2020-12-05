@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/actors/objects/touch_lift_platform/touch_lift_platform.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/touch_lift/touch_lift.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/touch_lift/circle.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Reset"
@@ -47,6 +48,7 @@ tracks/2/keys = {
 [node name="TouchLift" type="Node2D"]
 z_index = -2
 script = ExtResource( 2 )
+circle_texture = ExtResource( 3 )
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = null
