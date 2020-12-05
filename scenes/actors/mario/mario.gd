@@ -18,6 +18,7 @@ onready var water_sprite_2 : AnimatedSprite = $Sprite/Water2
 onready var water_particles : Particles2D = $Sprite/Particles2D
 onready var water_particles_2 : Particles2D = $Sprite/Particles2DBack
 onready var turbo_particles : Particles2D = $Sprite/TurboParticles
+onready var rocket_particles : Particles2D = $Sprite/RocketParticles
 
 onready var collision_shape : CollisionShape2D = $Collision
 onready var dive_collision_shape : CollisionShape2D = $CollisionDive
@@ -677,6 +678,9 @@ func _physics_process(delta: float) -> void:
 		if nozzle.get_name() != "TurboNozzle":
 			turbo_particles.emitting = false
 		
+		if nozzle.get_name() != "RocketNozzle":
+			rocket_particles.emitting = false
+		
 		# TODO: match... or array
 		if character == 0:
 			fludd_sprite.frames = nozzle.frames
@@ -701,14 +705,16 @@ func _physics_process(delta: float) -> void:
 		
 		water_sprite_2.position = water_sprite.position - Vector2(-5 * facing_direction, 2)
 		water_particles.position = water_sprite.position + Vector2(12, 3)
-		water_particles_2.position = water_particles.position + (Vector2(9.5, 2) * facing_direction)
+		water_particles_2.position = water_particles.position + (Vector2(9.5 * facing_direction, 2))
 		turbo_particles.process_material.direction = Vector3(-facing_direction, 0, 0)
 		turbo_particles.position = water_sprite.position + Vector2(-3 * facing_direction, -11.5 if facing_direction == -1 else 11.5)
+		rocket_particles.position = water_sprite.position + Vector2(8 if facing_direction == 1 else 10, 1.5)
 	else:
 		fludd_sprite.visible = false
 		water_sprite.visible = false
 		water_sprite_2.visible = false
 		turbo_particles.emitting = false
+		rocket_particles.emitting = false
 	
 	death_fludd_sprite.visible = fludd_sprite.visible
 	

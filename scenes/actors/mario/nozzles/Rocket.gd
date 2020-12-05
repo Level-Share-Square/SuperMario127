@@ -93,25 +93,16 @@ func _update(_delta):
 
 	last_state = character.state
 
-func _process(_delta):
-	if character.nozzle == self:
-		if character.water_sprite.flip_h:
-			character.water_sprite.flip_h = false
-		else:
-			character.water_sprite.flip_h = true
-
 func _general_update(_delta):
 	if activated and !last_activated and character.stamina == 0:
-		character.water_sprite.animation = "out"
-		character.water_sprite.frame = 0
+		character.rocket_particles.emitting = true
 		character.fludd_sound.play(((100 - character.stamina) / 100) * 2.79)
 		last_activated = true
 	elif last_activated:
 		if deactivate_frames > 0:
 			deactivate_frames -= 1
 		else:
-			character.water_sprite.animation = "in"
-			character.water_sprite.frame = 0
+			character.rocket_particles.emitting = false
 			character.fludd_sound.stop()
 			character.fludd_sprite.offset = Vector2(0, 0)
 			last_activated = false
