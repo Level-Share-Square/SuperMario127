@@ -76,7 +76,7 @@ func _update(delta):
 	rotation_down += final_turn_speed * character.facing_direction * turn_multiplier
 	
 	# Turning around
-	if (rotation_down > 180 or rotation_down < 0) and character.inputs[character.input_names.spin][0]:
+	if (rotation_down > 180 or rotation_down < 0): # and character.inputs[character.input_names.spin][0]:
 		character.facing_direction *= -1
 	
 	# Sprite animation and rotation
