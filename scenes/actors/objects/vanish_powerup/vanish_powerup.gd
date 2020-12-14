@@ -10,21 +10,23 @@ var collected = false
 var respawn_timer = 0.0
 var duration = 30.0
 var can_respawn = true
+var powerup_music = true
 
 func _set_properties():
-	savable_properties = ["duration", "can_respawn"]
-	editable_properties = ["duration", "can_respawn"]
-	
+	savable_properties = ["duration", "can_respawn", "powerup_music"]
+	editable_properties = ["duration", "can_respawn", "powerup_music"]
+
 func _set_property_values():
 	set_property("duration", duration, true)
 	set_property("can_respawn", can_respawn, true)
+	set_property("powerup_music", powerup_music, true)
 
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
 		body.heal(5 * 8)
 		var powerup_node = body.get_powerup_node("VanishPowerup")
 		powerup_node.time_left = duration
-		body.set_powerup(powerup_node)
+		body.set_powerup(powerup_node, powerup_music)
 		body.sound_player.play_powerup_sound()
 		body.sound_player.play_powerup_jingle()
 		animation_player.play("collect")

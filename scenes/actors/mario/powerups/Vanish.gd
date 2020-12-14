@@ -5,8 +5,9 @@ func _ready():
 	music_id = 29
 	set_physics_process(false)
 
-func _start(_delta):
-	music.play_temporary_music(music_id)
+func _start(_delta, play_temp_music: bool):
+	if play_temp_music:
+		music.play_temporary_music(music_id)
 	character.set_all_collision_masks(6, false)
 
 func _stop(_delta):

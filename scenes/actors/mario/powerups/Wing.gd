@@ -6,8 +6,9 @@ onready var music = get_node("/root/music")
 func _ready():
 	music_id = 27
 
-func _start(_delta):
-	music.play_temporary_music(music_id)
+func _start(_delta, play_temp_music: bool):
+	if play_temp_music:
+		music.play_temporary_music(music_id)
 
 func _stop(_delta):
 	music.stop_temporary_music()

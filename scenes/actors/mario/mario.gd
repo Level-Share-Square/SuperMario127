@@ -342,7 +342,7 @@ func get_powerup_node(name: String) -> Node:
 		return powerups_node.get_node(name)
 	return null
 
-func set_powerup(powerup_node: Node) -> void:
+func set_powerup(powerup_node: Node, set_temporary_music: bool) -> void:
 	if is_instance_valid(powerup):
 		# Prevent switching away from rainbow star
 		if powerup.name == "RainbowPowerup" and powerup != powerup_node\
@@ -354,7 +354,7 @@ func set_powerup(powerup_node: Node) -> void:
 	
 	powerup = powerup_node
 	if is_instance_valid(powerup):
-		powerup._start(0)
+		powerup._start(0, set_temporary_music)
 		powerup.apply_visuals()
 
 func set_state_by_name(name: String, delta: float) -> void:
@@ -621,7 +621,7 @@ func _physics_process(delta: float) -> void:
 		
 		if powerup.time_left <= 0:
 			powerup.time_left = 0
-			set_powerup(null)
+			set_powerup(null, true)
 	else:
 		invincible = false
 	

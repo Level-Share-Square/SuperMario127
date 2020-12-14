@@ -27,7 +27,7 @@ func remove_visuals():
 func toggle_visuals():
 	pass
 
-func _start(_delta):
+func _start(_delta, _play_temp_music: bool):
 	pass
 
 func _update(_delta):

@@ -12,8 +12,9 @@ func _ready():
 	is_invincible = true
 	music_id = 26
 
-func _start(_delta):
-	music.play_temporary_music(music_id)
+func _start(_delta, play_temp_music: bool):
+	if play_temp_music:
+		music.play_temporary_music(music_id)
 	has_landed = false
 	character.set_nozzle("null", true) # Disable FLUDD, it's unusable anyway
 

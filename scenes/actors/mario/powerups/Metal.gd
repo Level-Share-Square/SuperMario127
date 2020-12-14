@@ -6,9 +6,10 @@ func _ready():
 	music_id = 25
 	time_left = 3
 
-func _start(_delta):
+func _start(_delta, play_temp_music: bool):
 	character.metal_voice = true
-	music.play_temporary_music(music_id)
+	if play_temp_music:
+		music.play_temporary_music(music_id)
 
 func _stop(_delta):
 	character.metal_voice = false
