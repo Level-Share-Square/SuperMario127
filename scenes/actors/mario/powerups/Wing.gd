@@ -22,6 +22,6 @@ func remove_visuals():
 
 func toggle_visuals():
 	if character.metal_particles.emitting:
-		apply_visuals()
-	else:
 		remove_visuals()
+	else:
+		apply_visuals()
