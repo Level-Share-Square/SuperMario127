@@ -175,11 +175,9 @@ func draw_circle_custom(position, radius, color, maxerror = 0.25):
 	draw_colored_polygon(points, color)
 
 func _draw():
-	if(mode==1):
-		print("drawing polyline")
+	if mode == 1:
 		draw_polyline(path.curve.get_baked_points(), line_color, 2.0)
 	else:
-		print("drawing circles")
 		for offset in range(0,path.curve.get_baked_length(), 10.0):
 			var pos : Vector2 = path.curve.interpolate_baked(offset)
 			draw_texture_rect(circle_texture, Rect2(pos - Vector2(2.0, 2.0), Vector2(4.0, 4.0)), false, Color.darkgray)
