@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -52,6 +52,7 @@
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=50]
 [ext_resource path="res://scenes/player/fonts/level_name_font.tres" type="DynamicFont" id=51]
 [ext_resource path="res://scenes/player/fonts/level_name_backing_font.tres" type="DynamicFont" id=52]
+[ext_resource path="res://scenes/player/wing_toggle_button.gd" type="Script" id=53]
 [ext_resource path="res://scenes/player/show_timer.gd" type="Script" id=54]
 
 [sub_resource type="DynamicFont" id=1]
@@ -659,6 +660,9 @@ __meta__ = {
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="IpAddress" type="LineEdit" parent="UI/PauseScreen/MultiplayerOptions"]
 visible = false
@@ -1167,7 +1171,7 @@ script = ExtResource( 42 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-ignore_children = [ NodePath("Preset Selection"), NodePath("Description"), NodePath("ControlBindingWindow"), NodePath("PlayerSelectors") ]
+ignore_children = [ NodePath("Preset Selection"), NodePath("Description"), NodePath("ControlBindingWindow"), NodePath("PlayerSelectors"), NodePath("Legacy Wing Cap") ]
 menu_buttons = [ NodePath("../Bottom/Buttons/ResumeButton"), NodePath("../Bottom/Buttons/RetryButton"), NodePath("../Bottom/Buttons/MultiplayerButton"), NodePath("../Bottom/Buttons/QuitButton") ]
 
 [node name="Preset Selection" type="Control" parent="UI/PauseScreen/ControlsOptions"]
@@ -1219,6 +1223,53 @@ stream = ExtResource( 9 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Preset Selection/LoadButton"]
+stream = ExtResource( 11 )
+volume_db = -10.0
+
+[node name="Legacy Wing Cap" type="Control" parent="UI/PauseScreen/ControlsOptions"]
+margin_left = 932.5
+margin_top = -13.0
+margin_right = 972.5
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Legacy Wing Cap"]
+margin_left = -446.0
+margin_top = 99.0
+margin_right = -327.0
+margin_bottom = 131.0
+custom_fonts/font = SubResource( 20 )
+text = "Legacy Wing Cap:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToggleButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Legacy Wing Cap"]
+margin_left = -265.0
+margin_top = 92.0
+margin_right = -185.0
+margin_bottom = 137.0
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/disabled = SubResource( 13 )
+custom_styles/normal = SubResource( 9 )
+custom_fonts/font = SubResource( 21 )
+action_mode = 0
+text = "On"
+script = ExtResource( 53 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Legacy Wing Cap/ToggleButton"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Legacy Wing Cap/ToggleButton"]
 stream = ExtResource( 11 )
 volume_db = -10.0
 

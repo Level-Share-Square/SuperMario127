@@ -14,6 +14,8 @@ var old_gravity_scale = 0
 var turn_multiplier := 0.0
 var turn_multiplier_accel := 0.125 * 120 # 120 fps
 
+var up_down_controls = false # for the legacy wing cap control option
+
 func _ready():
 	priority = 4
 	blacklisted_states = []
@@ -34,6 +36,9 @@ func _start(_delta):
 
 func _update(delta):
 	# Things can - and probably should - be tweaked here
+	
+	# Set control mode
+	up_down_controls = PlayerSettings.legacy_wing_cap
 	
 	# Capping rotation
 	var clamp_max : float = lerp(rotation_down, 220 - momentum / 1.5, delta * 4)
@@ -60,11 +65,31 @@ func _update(delta):
 	character.velocity.y = lerp(character.velocity.y, -rotation_normal.y * momentum, delta * 20)
 	character.velocity.x = lerp(character.velocity.x, character.facing_direction * rotation_normal.x * momentum * 1.5, delta * 20)
 	
+	# Calculating inputs
+	var subtract_input = false
+	var add_input = false
+	if up_down_controls:
+		# Basically, this automatically sets the inputs to work with the current code
+		# This is just for 127gd, this should be implemented cleaner in 127cs ideally
+		if character.inputs[character.input_names.up][0]:
+			if character.facing_direction == 1:
+				subtract_input = true
+			else:
+				add_input = true
+		elif character.inputs[character.input_names.down][0]:
+			if character.facing_direction == -1:
+				subtract_input = true
+			else:
+				add_input = true
+	else:
+		subtract_input = character.inputs[character.input_names.left][0]
+		add_input = character.inputs[character.input_names.right][0]
+	
 	# Turning
 	var final_turn_speed : float = turn_speed * delta * pow(momentum, 0.4)
-	if character.inputs[character.input_names.left][0]:
+	if subtract_input:
 		turn_multiplier -= turn_multiplier_accel * delta
-	elif character.inputs[character.input_names.right][0]:
+	elif add_input:
 		turn_multiplier += turn_multiplier_accel * delta
 	elif abs(turn_multiplier) > 0.01: # Some margin of error
 		turn_multiplier -= turn_multiplier_accel * delta * sign(turn_multiplier)
@@ -76,7 +101,7 @@ func _update(delta):
 	rotation_down += final_turn_speed * character.facing_direction * turn_multiplier
 	
 	# Turning around
-	if (rotation_down > 180 or rotation_down < 0): # and character.inputs[character.input_names.spin][0]:
+	if turn_conditions_met():
 		character.facing_direction *= -1
 	
 	# Sprite animation and rotation
@@ -94,6 +119,15 @@ func _update(delta):
 	or (character.facing_direction == -1 and character.is_walled_left())\
 	or (character.is_ceiling()):
 		character.damage_with_knockback(character.position + Vector2(character.facing_direction * 8, 0), 0, "Hit", 0)
+
+func turn_conditions_met():
+	return (rotation_down > 180 or rotation_down < 0) and (!up_down_controls or 
+		(up_down_controls and (
+			character.facing_direction == 1 and character.inputs[character.input_names.left][0]
+			or character.facing_direction == -1 and character.inputs[character.input_names.right][0]
+			)
+		)
+	)
 
 func _stop(delta):
 	if character.inputs[5][0]:

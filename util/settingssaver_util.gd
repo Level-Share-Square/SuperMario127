@@ -23,6 +23,9 @@ static func load():
 			TimeScore.shown = data["showTimer"]
 		if data.has("volume"):
 			music.set_global_volume(data["volume"])
+		if data.has("legacyWingCap"):
+			# imo this is cleaner than putting it in presets atm
+			PlayerSettings.legacy_wing_cap = data["legacyWingCap"]
 
 static func save(multiplayerOptions : Node):
 	var windowScaleLabel : Label = multiplayerOptions.get_node("WindowScale/Value")
@@ -31,6 +34,7 @@ static func save(multiplayerOptions : Node):
 	var windowScale = int(windowScaleLabel.text)
 	var fpsLock = int(fpsLockLabel.text) / 10.0 - 3
 	var showTimer = TimeScore.shown
+	var legacyCap = PlayerSettings.legacy_wing_cap
 	
 	if windowScale == 0:
 		windowScale = 5
@@ -40,7 +44,8 @@ static func save(multiplayerOptions : Node):
 		"fpsLock": fpsLock,
 		"showTimer": showTimer,
 		"controls": PlayerSettings.keybindings,
-		"volume": music.global_volume
+		"volume": music.global_volume,
+		"legacyWingCap": legacyCap
 	}
 	
 	var file = File.new()
@@ -57,7 +62,8 @@ static func save_volume():
 			"fpsLock": 3,
 			"showTimer": false,
 			"controls": PlayerSettings.keybindings,
-			"volume": music.global_volume
+			"volume": music.global_volume,
+			"legacyWingCap": PlayerSettings.legacy_wing_cap
 		}
 	
 	data["volume"] = music.global_volume
