@@ -74,12 +74,12 @@ func _general_update(_delta):
 	if activated and !last_activated:
 		character.turbo_particles.emitting = true
 		character.water_sprite.frame = 0
-		character.fludd_sound.play(((100 - character.stamina) / 100) * 2.79)
+		character.turbo_sound.play()
 		last_activated = true
 	elif !activated and last_activated:
 		character.turbo_particles.emitting = false
 		character.water_sprite.frame = 0
-		character.fludd_sound.stop()
+		character.turbo_sound.stop()
 		last_activated = false
 	
 	if !activated:

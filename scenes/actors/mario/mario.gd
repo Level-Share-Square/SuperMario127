@@ -37,6 +37,7 @@ onready var spin_area : Area2D = $SpinArea
 onready var player_collision_shape : CollisionShape2D = $PlayerCollision/CollisionShape2D
 onready var spin_area_shape : CollisionShape2D = $SpinArea/CollisionShape2D
 onready var fludd_sound : AudioStreamPlayer = $FluddSound
+onready var turbo_sound : AudioStreamPlayer = $TurboFluddSound
 onready var fludd_boost_sound : AudioStreamPlayer = $FluddBoostSound
 onready var fludd_charge_sound : AudioStreamPlayer = $FluddChargeSound
 onready var nozzle_switch_sound : AudioStreamPlayer = $NozzleSwitchSound
@@ -380,6 +381,7 @@ func set_nozzle(new_nozzle: String, change_index := true) -> void:
 	CurrentLevelData.level_data.vars.nozzles_collected.sort_custom(self, "nozzle_sort")
 	
 	fludd_sound.stop()
+	turbo_sound.stop()
 	fludd_charge_sound.stop()
 	if is_instance_valid(nozzle):
 		nozzle.activated = false
@@ -545,20 +547,6 @@ func _physics_process(delta: float) -> void:
 				velocity.x -= 3.5 * move_direction
 			
 			facing_direction = move_direction
-			
-			if !disable_animation and movable and controlled_locally:
-				if !is_walled():
-					sprite.speed_scale = abs(velocity.x) / move_speed if abs(velocity.x) > move_speed else 1.0
-					sprite.animation = "movingRight" if move_direction == 1 else "movingLeft"
-					if last_move_direction != move_direction:
-						sprite.frame = sprite.frame + 1
-				else:
-					sprite.speed_scale = 0
-					sprite.animation = "idleRight" if facing_direction == 1 else "idleLeft"
-				if footstep_interval <= 0 and sprite.speed_scale > 0:
-					sound_player.play_footsteps()
-					footstep_interval = clamp(0.8 - (sprite.speed_scale / 2.5), 0.1, 1)
-				footstep_interval -= delta
 		else:
 			if velocity.x * move_direction < move_speed:
 				velocity.x += aerial_acceleration * move_direction
@@ -575,7 +563,19 @@ func _physics_process(delta: float) -> void:
 					velocity.x -= sign(velocity.x) * aerial_friction * (2 if abs(velocity.x) > move_speed else 1)
 			else:
 				velocity.x = 0
-		
+	
+	if !disable_animation and movable and controlled_locally and abs(velocity.x) > 15:
+		if !is_walled():
+			sprite.speed_scale = abs(velocity.x) / move_speed if abs(velocity.x) > move_speed else 1.0
+			sprite.animation = "movingRight" if facing_direction == 1 else "movingLeft"
+		else:
+			sprite.speed_scale = 0
+			sprite.animation = "idleRight" if facing_direction == 1 else "idleLeft"
+		if footstep_interval <= 0 and sprite.speed_scale > 0 and is_grounded():
+			sound_player.play_footsteps()
+			footstep_interval = clamp(0.8 - (sprite.speed_scale / 2.5), 0.1, 1)
+		footstep_interval -= delta
+	else:
 		if !disable_animation and movable and controlled_locally and is_grounded():
 			sprite.speed_scale = 1
 			sprite.animation = "idleRight" if facing_direction == 1 else "idleLeft"
