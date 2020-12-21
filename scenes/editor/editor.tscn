@@ -284,6 +284,7 @@ Button/styles/focus = ExtResource( 163 )
 Button/styles/hover = ExtResource( 163 )
 Button/styles/normal = ExtResource( 162 )
 Button/styles/pressed = ExtResource( 162 )
+Panel/styles/PopupPanel = SubResource( 10 )
 Panel/styles/panel = SubResource( 10 )
 WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
 WindowDialog/constants/close_h_ofs = 72
@@ -293,6 +294,7 @@ WindowDialog/constants/title_height = 20
 WindowDialog/fonts/title_font = null
 WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
+WindowDialog/styles/PopupPanel = null
 WindowDialog/styles/panel = SubResource( 10 )
 
 [sub_resource type="DynamicFont" id=12]
@@ -2396,6 +2398,7 @@ margin_bottom = 425.905
 script = ExtResource( 167 )
 
 [node name="QuitWOSavingWindow" type="Popup" parent="UI/BackButton"]
+visible = true
 margin_right = 553.0
 margin_bottom = 130.0
 size_flags_horizontal = 0
@@ -2426,6 +2429,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Title" type="Label" parent="UI/BackButton/QuitWOSavingWindow"]
+anchor_top = 0.169
+anchor_right = 1.0
+anchor_bottom = 0.383
+margin_left = 15.0
+margin_top = -53.97
+margin_right = 15.0
+margin_bottom = -53.79
+text = "Unsaved Changes"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/BackButton/QuitWOSavingWindow"]
 anchor_left = 0.005
 anchor_top = 0.5
@@ -2444,28 +2460,28 @@ size_flags_horizontal = 3
 
 [node name="OkButton" parent="UI/BackButton/QuitWOSavingWindow/HBoxContainer" instance=ExtResource( 169 )]
 margin_left = 110.0
-margin_right = 216.0
+margin_right = 217.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 12 )
 text = "OK"
 
 [node name="Control2" type="Control" parent="UI/BackButton/QuitWOSavingWindow/HBoxContainer"]
-margin_left = 220.0
-margin_right = 326.0
+margin_left = 221.0
+margin_right = 327.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
 
 [node name="CancelButton" parent="UI/BackButton/QuitWOSavingWindow/HBoxContainer" instance=ExtResource( 169 )]
-margin_left = 330.0
-margin_right = 438.0
+margin_left = 331.0
+margin_right = 439.0
 margin_bottom = 44.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 12 )
 text = "Cancel"
 
 [node name="Control3" type="Control" parent="UI/BackButton/QuitWOSavingWindow/HBoxContainer"]
-margin_left = 442.0
+margin_left = 443.0
 margin_right = 550.0
 margin_bottom = 44.0
 size_flags_horizontal = 3

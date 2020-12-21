@@ -1,5 +1,8 @@
 extends Screen
 
+# for the level delete confirmation window
+signal open_delete_confirmation_popup
+
 # not really a fan of these giant node paths but it'll have to do for now, not sure what a better system would be just yet
 onready var level_list : ItemList = $MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel/LevelList
 
@@ -40,6 +43,9 @@ onready var time_score_list : ItemList = $MarginContainer/HBoxContainer/TimeScor
 
 onready var level_code_entry : TextEdit = $MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/LevelCodeEntry
 
+onready var pop_up_container = $PopupContainer
+onready var confirm_delete_window = $PopupContainer/ConfirmDelete
+
 const PLAYER_SCENE : PackedScene = preload("res://scenes/player/player.tscn")
 const EDITOR_SCENE : PackedScene = preload("res://scenes/editor/editor.tscn")
 
@@ -76,6 +82,9 @@ func _ready() -> void:
 
 	_connect = button_time_scores.connect("pressed", self, "on_button_time_scores_pressed")
 	_connect = button_close_time_scores.connect("pressed", self, "on_button_close_time_scores_pressed")
+	
+	_connect = confirm_delete_window.connect("confirmed", self, "delete_level")
+	_connect = connect("open_delete_confirmation_popup", confirm_delete_window, "popup_centered")
 
 	_pre_open_screen() # In case we're exiting a level
 
@@ -369,7 +378,14 @@ func on_button_delete_pressed() -> void:
 	var selected_level = SavedLevels.selected_level
 	if selected_level == NO_LEVEL:
 		return
-	delete_level(selected_level) 
+	
+	var level_code = levels[selected_level].level_code
+	var level_info : LevelInfo = LevelInfo.new(level_code)
+	
+	pop_up_container.visible = true
+	confirm_delete_window.set_level_name(level_info.level_name)
+	confirm_delete_window.index_to_send = selected_level
+	emit_signal("open_delete_confirmation_popup")
 
 func on_button_reset_pressed() -> void:
 	var selected_level = SavedLevels.selected_level

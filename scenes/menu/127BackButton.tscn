@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/shared/ui/back_button.png" type="Texture" id=6]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 16.0
 content_margin_right = 16.0
 content_margin_top = 8.0
@@ -16,7 +16,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 16.0
 content_margin_right = 16.0
 content_margin_top = 8.0
@@ -34,10 +34,10 @@ margin_right = -0.256004
 margin_bottom = 0.0319996
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
 shortcut_in_tooltip = false
 script = ExtResource( 3 )
 __meta__ = {
