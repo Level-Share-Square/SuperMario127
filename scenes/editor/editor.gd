@@ -281,6 +281,9 @@ func _process(delta : float) -> void:
 			if Input.is_action_just_pressed("flip_object_v"):
 				hovered_object.set_property("scale", Vector2(hovered_object.scale.x, -hovered_object.scale.y), true)
 			
+			if Input.is_action_just_pressed("toggle_enabled"):
+				hovered_object.set_property("enabled", !hovered_object.enabled, true)
+			
 			if Input.is_action_just_pressed("minecraft_pick_block"):
 				pick_item(hovered_object)
 			
