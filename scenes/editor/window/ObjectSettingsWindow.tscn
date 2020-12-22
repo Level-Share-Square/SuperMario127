@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
@@ -14,55 +14,67 @@
 [ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=12]
 [ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=13]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=34]
 size = 56
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=35]
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=36]
 size = 24
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.596078, 0.596078, 0.596078, 1 )
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+[sub_resource type="StyleBoxFlat" id=25]
+bg_color = Color( 0.615686, 0.615686, 0.615686, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
 
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.882353, 0.882353, 0.882353, 1 )
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+[sub_resource type="StyleBoxFlat" id=26]
+bg_color = Color( 0.905882, 0.905882, 0.905882, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
 
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.486275, 0.486275, 0.486275, 1 )
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+[sub_resource type="StyleBoxFlat" id=27]
+bg_color = Color( 0.439216, 0.439216, 0.439216, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
 
-[sub_resource type="StyleBoxFlat" id=7]
-border_width_left = 24
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+[sub_resource type="StyleBoxFlat" id=28]
+content_margin_top = 12.0
+bg_color = Color( 0.254902, 0.254902, 0.254902, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id=8]
-border_width_left = 24
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
+[sub_resource type="StyleBoxFlat" id=29]
+content_margin_left = 12.0
+bg_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 
-[sub_resource type="Theme" id=9]
+[sub_resource type="StyleBoxFlat" id=30]
+bg_color = Color( 0.615686, 0.615686, 0.615686, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.905882, 0.905882, 0.905882, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
+[sub_resource type="StyleBoxFlat" id=32]
+
+[sub_resource type="StyleBoxFlat" id=33]
+content_margin_left = 12.0
+bg_color = Color( 0.254902, 0.254902, 0.254902, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Theme" id=23]
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -135,8 +147,10 @@ ColorPickerButton/styles/normal = null
 ColorPickerButton/styles/pressed = null
 Dialogs/constants/button_margin = 32
 Dialogs/constants/margin = 8
+FileDialog/colors/file_icon_modulate = Color( 0, 0, 0, 1 )
 FileDialog/colors/files_disabled = Color( 0, 0, 0, 1 )
 FileDialog/colors/folder_icon_modulate = Color( 0, 0, 0, 1 )
+FileDialog/icons/file = null
 FileDialog/icons/folder = null
 FileDialog/icons/parent_folder = null
 FileDialog/icons/reload = null
@@ -183,11 +197,11 @@ HScrollBar/icons/decrement = null
 HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
 HScrollBar/icons/increment_highlight = null
-HScrollBar/styles/grabber = null
-HScrollBar/styles/grabber_highlight = null
-HScrollBar/styles/grabber_pressed = null
-HScrollBar/styles/scroll = null
-HScrollBar/styles/scroll_focus = null
+HScrollBar/styles/grabber = SubResource( 25 )
+HScrollBar/styles/grabber_highlight = SubResource( 26 )
+HScrollBar/styles/grabber_pressed = SubResource( 27 )
+HScrollBar/styles/scroll = SubResource( 28 )
+HScrollBar/styles/scroll_focus = SubResource( 29 )
 HSeparator/constants/separation = 4
 HSeparator/styles/separator = null
 HSlider/icons/grabber = null
@@ -195,6 +209,7 @@ HSlider/icons/grabber_disabled = null
 HSlider/icons/grabber_highlight = null
 HSlider/icons/tick = null
 HSlider/styles/grabber_area = null
+HSlider/styles/grabber_area_highlight = null
 HSlider/styles/slider = null
 HSplitContainer/constants/autohide = 1
 HSplitContainer/constants/separation = 12
@@ -411,14 +426,12 @@ TooltipLabel/constants/shadow_offset_x = 1
 TooltipLabel/constants/shadow_offset_y = 1
 TooltipLabel/fonts/font = null
 TooltipPanel/styles/panel = null
-Tree/colors/cursor_color = Color( 0, 0, 0, 1 )
 Tree/colors/custom_button_font_highlight = Color( 0, 0, 0, 1 )
 Tree/colors/drop_position_color = Color( 0, 0, 0, 1 )
 Tree/colors/font_color = Color( 0, 0, 0, 1 )
 Tree/colors/font_color_selected = Color( 0, 0, 0, 1 )
 Tree/colors/guide_color = Color( 0, 0, 0, 1 )
 Tree/colors/relationship_line_color = Color( 0, 0, 0, 1 )
-Tree/colors/selection_color = Color( 0, 0, 0, 1 )
 Tree/colors/title_button_color = Color( 0, 0, 0, 1 )
 Tree/constants/button_margin = 4
 Tree/constants/draw_guides = 1
@@ -454,11 +467,11 @@ VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/increment = null
 VScrollBar/icons/increment_highlight = null
-VScrollBar/styles/grabber = SubResource( 4 )
-VScrollBar/styles/grabber_highlight = SubResource( 5 )
-VScrollBar/styles/grabber_pressed = SubResource( 6 )
-VScrollBar/styles/scroll = SubResource( 7 )
-VScrollBar/styles/scroll_focus = SubResource( 8 )
+VScrollBar/styles/grabber = SubResource( 30 )
+VScrollBar/styles/grabber_highlight = SubResource( 31 )
+VScrollBar/styles/grabber_pressed = SubResource( 32 )
+VScrollBar/styles/scroll = SubResource( 33 )
+VScrollBar/styles/scroll_focus = SubResource( 29 )
 VSeparator/constants/separation = 4
 VSeparator/styles/separator = null
 VSlider/icons/grabber = null
@@ -466,6 +479,7 @@ VSlider/icons/grabber_disabled = null
 VSlider/icons/grabber_highlight = null
 VSlider/icons/tick = null
 VSlider/styles/grabber_area = null
+VSlider/styles/grabber_area_highlight = null
 VSlider/styles/slider = null
 VSplitContainer/constants/autohide = 1
 VSplitContainer/constants/separation = 12
@@ -512,7 +526,7 @@ margin_top = 24.2632
 margin_right = 456.0
 margin_bottom = 102.263
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 34 )
 bbcode_text = "Object Settings"
 text = "Object Settings"
 __meta__ = {
@@ -571,7 +585,7 @@ margin_bottom = 415.0
 custom_styles/hover = ExtResource( 11 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 35 )
 text = "Delete"
 script = ExtResource( 9 )
 __meta__ = {
@@ -594,7 +608,7 @@ margin_bottom = 491.0
 custom_styles/hover = ExtResource( 12 )
 custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 13 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 36 )
 text = "To Back"
 script = ExtResource( 9 )
 __meta__ = {
@@ -617,7 +631,7 @@ margin_bottom = 491.0
 custom_styles/hover = ExtResource( 12 )
 custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 13 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 36 )
 text = "To Front"
 script = ExtResource( 9 )
 __meta__ = {
@@ -637,7 +651,7 @@ margin_left = 360.0
 margin_right = 1070.0
 margin_bottom = 508.0
 rect_clip_content = false
-theme = SubResource( 9 )
+theme = SubResource( 23 )
 scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
