@@ -93,12 +93,13 @@ func _ready() -> void:
 	sprite_color.frames = para_color_sprite if winged else normal_color_sprite
 
 func delete_wings():
-	winged = false
-	sprite.frames = normal_sprite
-	sprite_color.frames = normal_color_sprite
+	if !rainbow:
+		winged = false
+		sprite.frames = normal_sprite
+		sprite_color.frames = normal_color_sprite
 
 func retract_into_shell():
-	if is_instance_valid(shell):
+	if is_instance_valid(shell) or (rainbow and winged):
 		return
 	
 	shell = MiscCache.shell_scene.instance()
