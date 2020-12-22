@@ -817,6 +817,7 @@ func kill(cause: String) -> void:
 			scene_transitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
 		else:
 			yield(get_tree().create_timer(3), "timeout")
+			set_powerup(null, false)
 			health = 8
 			position = spawn_pos - Vector2(0, 16)
 			last_position = position # fixes infinite death bug
