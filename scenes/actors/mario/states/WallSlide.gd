@@ -22,7 +22,7 @@ func _start(_delta):
 		character.direction_on_stick = 1
 	else:
 		character.direction_on_stick = -1
-	character.velocity.x = character.direction_on_stick * 5
+	character.velocity.x = character.direction_on_stick * 20
 	wall_buffer = 0.075
 	old_gravity_scale = character.gravity_scale
 	character.gravity_scale = gravity_scale

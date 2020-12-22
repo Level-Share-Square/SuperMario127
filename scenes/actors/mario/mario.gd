@@ -309,10 +309,10 @@ func is_walled() -> bool:
 	return (is_walled_left() or is_walled_right()) and collided_last_frame
 
 func is_walled_left() -> bool:
-	return test_move(self.transform, Vector2(-0.5, 1)) and test_move(self.transform, Vector2(-0.5, -1)) and collided_last_frame
+	return test_move(self.transform, Vector2(-2, 1)) and test_move(self.transform, Vector2(-2, -1)) and collided_last_frame
 
 func is_walled_right() -> bool:
-	return test_move(self.transform, Vector2(0.5, 1)) and test_move(self.transform, Vector2(0.5, -1)) and collided_last_frame
+	return test_move(self.transform, Vector2(2, 1)) and test_move(self.transform, Vector2(2, -1)) and collided_last_frame
 
 func hide() -> void:
 	visible = false

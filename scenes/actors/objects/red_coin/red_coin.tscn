@@ -8,9 +8,10 @@
 [ext_resource path="res://assets/particles/shiny_particle_material.tres" type="Material" id=6]
 [ext_resource path="res://scenes/actors/mario/particles/red_sparkles.png" type="Texture" id=7]
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=1]
+radius = 15.0
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=2]
 outline_size = 2
 font_data = ExtResource( 5 )
 
@@ -25,7 +26,7 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -33,7 +34,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
@@ -55,7 +56,7 @@ margin_left = -12.0
 margin_top = -12.0
 margin_right = 12.0
 margin_bottom = 12.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "1"
 align = 1
