@@ -52,7 +52,7 @@ func _input(_event) -> void:
 			update_window_scale(previous_scale)
 		else:
 			update_window_scale(1)
-		SettingsSaver.save(get_parent()) #has to be called manually here since normally settings are saved via the settings menu
+		SettingsSaver.save() #has to be called manually here since normally settings are saved via the settings menu
 
 func update_window_scale(new_window_scale) -> void:
 	ScreenSizeUtil.set_screen_size(new_window_scale)

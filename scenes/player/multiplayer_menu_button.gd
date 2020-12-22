@@ -28,7 +28,7 @@ func _pressed():
 			control_binding_window.close()
 			multiplayer_options_node.visible = true
 		else:
-			SettingsSaver.save(multiplayer_options_node)
+			SettingsSaver.save()
 			multiplayer_options_node.visible = false
 			shine_info_node.visible = true
 

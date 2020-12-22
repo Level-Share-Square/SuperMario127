@@ -26,13 +26,17 @@ static func load():
 		if data.has("legacyWingCap"):
 			# imo this is cleaner than putting it in presets atm
 			PlayerSettings.legacy_wing_cap = data["legacyWingCap"]
+		if data.has("gameVersion"):
+			if data["gameVersion"] != PlayerSettings.game_version:
+				SavedLevels.wipe_template_levels()
+				save()
+		else:
+			SavedLevels.wipe_template_levels()
+			save()
 
-static func save(multiplayerOptions : Node):
-	var windowScaleLabel : Label = multiplayerOptions.get_node("WindowScale/Value")
-	var fpsLockLabel : Label = multiplayerOptions.get_node("FPSLock/Value")
-	
-	var windowScale = int(windowScaleLabel.text)
-	var fpsLock = int(fpsLockLabel.text) / 10.0 - 3
+static func save():
+	var windowScale = OS.window_size.x / ScreenSizeUtil.DEFAULT_SIZE.x
+	var fpsLock = (Engine.target_fps / 10.0) - 3
 	var showTimer = TimeScore.shown
 	var legacyCap = PlayerSettings.legacy_wing_cap
 	
@@ -45,7 +49,8 @@ static func save(multiplayerOptions : Node):
 		"showTimer": showTimer,
 		"controls": PlayerSettings.keybindings,
 		"volume": music.global_volume,
-		"legacyWingCap": legacyCap
+		"legacyWingCap": legacyCap,
+		"gameVersion": PlayerSettings.game_version
 	}
 	
 	var file = File.new()
@@ -63,7 +68,8 @@ static func save_volume():
 			"showTimer": false,
 			"controls": PlayerSettings.keybindings,
 			"volume": music.global_volume,
-			"legacyWingCap": PlayerSettings.legacy_wing_cap
+			"legacyWingCap": PlayerSettings.legacy_wing_cap,
+			"gameVersion": PlayerSettings.game_version
 		}
 	
 	data["volume"] = music.global_volume

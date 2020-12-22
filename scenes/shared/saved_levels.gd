@@ -35,8 +35,16 @@ func _ready() -> void:
 	load_level_paths_from_disk()
 	for level_path in levels_disk_paths:
 		load_level_from_disk(level_path)
-
 	prepare_template_levels()
+
+func wipe_template_levels():
+	var dir = Directory.new()
+	dir.open("user://template_levels")
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		dir.remove(file_name)
+		file_name = dir.get_next()
 
 func load_template_levels_from_resources():
 	for i in range(template_level_codes.size()):

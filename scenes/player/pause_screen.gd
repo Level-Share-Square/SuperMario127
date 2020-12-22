@@ -67,7 +67,7 @@ func toggle_pause():
 			$ControlsOptions.reset() # for resetting the Wait... state
 			$ControlsOptions/ControlBindingWindow/Contents/ScrollContainer/BindingBoxContainer.reset()
 			$ControlsOptions/ControlBindingWindow.close()
-			SettingsSaver.save($MultiplayerOptions)
+			SettingsSaver.save()
 			if controls_options.visible:
 				controls_options.visible = false
 				shine_info.visible = true
@@ -142,7 +142,7 @@ func toggle_pause():
 			CurrentLevelData.can_pause = true
 	
 func retry():
-	SettingsSaver.save($MultiplayerOptions)
+	SettingsSaver.save()
 	retry_button.focus_mode = 0
 	if !character_node.dead:
 		character_node.kill("reload")
