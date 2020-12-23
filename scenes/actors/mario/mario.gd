@@ -309,10 +309,10 @@ func is_walled() -> bool:
 	return (is_walled_left() or is_walled_right()) and collided_last_frame
 
 func is_walled_left() -> bool:
-	return test_move(self.transform, Vector2(-2, 1)) and test_move(self.transform, Vector2(-2, -1)) and collided_last_frame
+	return test_move(self.transform, Vector2(-0.5, 1)) and test_move(self.transform, Vector2(-0.5, -1)) and collided_last_frame
 
 func is_walled_right() -> bool:
-	return test_move(self.transform, Vector2(2, 1)) and test_move(self.transform, Vector2(2, -1)) and collided_last_frame
+	return test_move(self.transform, Vector2(0.5, 1)) and test_move(self.transform, Vector2(0.5, -1)) and collided_last_frame
 
 func hide() -> void:
 	visible = false
@@ -564,19 +564,19 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x = 0
 	
-	if !disable_animation and movable and controlled_locally and abs(velocity.x) > 15:
+	if is_grounded() and !disable_animation and movable and controlled_locally and abs(velocity.x) > 15:
 		if !is_walled():
 			sprite.speed_scale = abs(velocity.x) / move_speed if abs(velocity.x) > move_speed else 1.0
 			sprite.animation = "movingRight" if facing_direction == 1 else "movingLeft"
 		else:
 			sprite.speed_scale = 0
 			sprite.animation = "idleRight" if facing_direction == 1 else "idleLeft"
-		if footstep_interval <= 0 and sprite.speed_scale > 0 and is_grounded():
+		if footstep_interval <= 0 and sprite.speed_scale > 0:
 			sound_player.play_footsteps()
 			footstep_interval = clamp(0.8 - (sprite.speed_scale / 2.5), 0.1, 1)
 		footstep_interval -= delta
-	else:
-		if !disable_animation and movable and controlled_locally and is_grounded():
+	elif is_grounded():
+		if !disable_animation and movable and controlled_locally:
 			sprite.speed_scale = 1
 			sprite.animation = "idleRight" if facing_direction == 1 else "idleLeft"
 	
