@@ -174,7 +174,12 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 			shine_details_sorted.sort_custom(LevelInfo, "shine_sort")
 			
 			for shine_detail in shine_details_sorted:
-				var index = level_info.shine_details.bsearch(shine_detail)
+				var index = 0
+				for shine_detail_2 in level_info.shine_details: # had to do this instead because bug
+					if shine_detail["id"] == shine_detail_2["id"]:
+						break
+					index += 1
+				#var index = level_info.shine_details.bsearch(shine_detail) - doesn't work ae
 				var time_score = time_scores[index]
 				if time_score != -1:
 					var time_score_string : String = LevelInfo.generate_time_string(time_score)
