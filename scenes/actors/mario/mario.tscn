@@ -136,12 +136,13 @@ emission_shape = 2
 emission_box_extents = Vector3( 2, 2, 2 )
 flag_disable_z = true
 direction = Vector3( -1, 0, 0 )
-spread = 20.0
-gravity = Vector3( 0, 96, 0 )
+spread = 75.0
+gravity = Vector3( 0, 0, 0 )
 initial_velocity = 1000.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = 1600.0
+damping = 100.0
 scale_random = 1.0
 scale_curve = SubResource( 12 )
 color_ramp = SubResource( 10 )
@@ -1447,14 +1448,13 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 69 )
-frame = 11
+frame = 2
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 9
 speed_scale = 3.0
 playing = true
 
@@ -1482,6 +1482,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "starRunLeft"
+frame = 5
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
