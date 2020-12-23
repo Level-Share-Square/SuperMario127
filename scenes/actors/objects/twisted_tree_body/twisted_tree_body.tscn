@@ -6,6 +6,7 @@
 [node name="TwistedTreeBody" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+custom_preview_position = Vector2( 70, 110 )
 
 [node name="Sprite" type="Sprite" parent="."]
 z_index = -7

@@ -6,6 +6,7 @@
 [node name="BigBush" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
+custom_preview_position = Vector2( 75, 145 )
 
 [node name="Sprite" type="Sprite" parent="."]
 z_index = -9

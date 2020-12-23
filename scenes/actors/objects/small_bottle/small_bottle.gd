@@ -18,6 +18,9 @@ func collect(body):
 		collected = true
 
 func _ready():
+	if is_preview:
+		z_index = 0
+		sprite.z_index = 0
 	var _connect = area.connect("body_entered", self, "collect")
 	
 func _process(delta):

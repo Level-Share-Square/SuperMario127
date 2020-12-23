@@ -12,7 +12,7 @@ func _set_property_values():
 func _process(delta):
 	if is_background:
 		self_modulate = Color(0.55, 0.55, 0.55) 
-		z_index = -2
+		z_index = -2 if !is_preview else 0
 	else:
 		self_modulate = Color(1, 1, 1) 
-		z_index = 10
+		z_index = 10 if !is_preview else 0

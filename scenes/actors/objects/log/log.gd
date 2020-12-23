@@ -32,6 +32,9 @@ func can_collide_with(_character):
 	return true
 
 func _ready():
+	if is_preview:
+		z_index = 0
+		sprite.z_index = 0
 	if !enabled:
 		collision_shape.disabled = true
 	orig_pos = position

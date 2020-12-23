@@ -18,6 +18,10 @@ func _set_property_values() -> void:
 	set_property("teleport_to_tag", teleport_to_tag)
 
 func _ready() -> void:
+	if is_preview:
+		z_index = 0
+		sprite.z_index = 0
+
 	if scale.x < 1:
 		scale.x = abs(scale.x)
 		sprite.flip_h = true
