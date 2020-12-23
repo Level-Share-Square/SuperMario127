@@ -7,5 +7,5 @@
 script = ExtResource( 2 )
 texture = ExtResource( 1 )
 scale = Vector2( 0.007, 0.003 )
-offset = Vector2( 0, -185 )
+offset = Vector2( 0, -225 )
 mirroring = Vector2( 768, 0 )
