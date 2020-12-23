@@ -53,6 +53,8 @@ var id := 0
 var do_kick_out := true
 var sort_position : int = 0
 
+var score_from_before = 0 # haha that rhymes
+
 func _set_properties() -> void:
 	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out", "sort_position"]
 	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "do_kick_out", "sort_position"]
@@ -206,11 +208,11 @@ func collect(body : PhysicsBody2D) -> void:
 		visible = false
 
 		if mode_switcher.get_node("ModeSwitcherButton").invisible and SavedLevels.selected_level != SavedLevels.NO_LEVEL:
+			score_from_before = CurrentLevelData.time_score
 			SavedLevels.get_current_levels()[SavedLevels.selected_level].set_shine_collected(id, false)
 			SavedLevels.get_current_levels()[SavedLevels.selected_level].update_time_and_coin_score(id, true)
-			if do_kick_out: # keep tracking the time score if you continue the level, to prevent cheese on other shine time scores
-				CurrentLevelData.stop_tracking_time_score() # time score is saved, and we don't want it continuing to update into the menu wasting resources
-			else:
+			CurrentLevelData.stop_tracking_time_score()
+			if !do_kick_out:
 				var level_info = SavedLevels.get_current_levels()[SavedLevels.selected_level]
 				var new_shine_id = level_info.selected_shine + 1
 				if new_shine_id < level_info.shine_details.size():
@@ -295,5 +297,9 @@ func restore_control(animation : String, character : Character) -> void:
 	# return the character to a state they can actually move around in
 	character.set_state(null, get_physics_process_delta_time())
 	character.controllable = true
+	
+	# to prevent cheese on other shine time scores
+	CurrentLevelData.start_tracking_time_score()
+	CurrentLevelData.time_score = score_from_before
 	
 	music.stop_temporary_music()
