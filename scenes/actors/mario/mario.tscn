@@ -1,4 +1,4 @@
-[gd_scene load_steps=140 format=2]
+[gd_scene load_steps=141 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -67,6 +67,7 @@
 [ext_resource path="res://scenes/actors/mario/wing_frames.tres" type="SpriteFrames" id=65]
 [ext_resource path="res://scenes/actors/mario/nozzles/water_particle.png" type="Texture" id=66]
 [ext_resource path="res://scenes/actors/mario/nozzles/turbo_spray.wav" type="AudioStream" id=67]
+[ext_resource path="res://scenes/actors/mario/TurboParticles.gd" type="Script" id=68]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -131,8 +132,8 @@ anim_offset_random = 1.0
 
 [sub_resource type="ParticlesMaterial" id=14]
 lifetime_randomness = 0.79
-emission_shape = 1
-emission_sphere_radius = 2.0
+emission_shape = 2
+emission_box_extents = Vector3( 2, 2, 2 )
 flag_disable_z = true
 direction = Vector3( -1, 0, 0 )
 spread = 20.0
@@ -1085,6 +1086,7 @@ fixed_fps = 60
 local_coords = false
 process_material = SubResource( 14 )
 texture = ExtResource( 66 )
+script = ExtResource( 68 )
 
 [node name="RocketParticles" type="Particles2D" parent="Sprite"]
 material = SubResource( 15 )
@@ -1445,7 +1447,7 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 69 )
-frame = 1
+frame = 11
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
@@ -1480,7 +1482,6 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "starRunLeft"
-frame = 1
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
