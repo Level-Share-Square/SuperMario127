@@ -89,7 +89,7 @@ corner_radius_bottom_left = 16
 size = 20
 font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxFlat" id=29]
+[sub_resource type="StyleBoxFlat" id=10]
 content_margin_left = 8.0
 content_margin_right = 8.0
 content_margin_top = 8.0
@@ -101,11 +101,11 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="DynamicFont" id=30]
+[sub_resource type="DynamicFont" id=11]
 size = 20
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=31]
+[sub_resource type="DynamicFont" id=12]
 size = 20
 font_data = ExtResource( 3 )
 
@@ -432,7 +432,7 @@ margin_bottom = 85.0
 margin_right = 327.0
 margin_bottom = 28.0
 custom_fonts/font = ExtResource( 9 )
-text = "Template levels"
+text = "Sample levels"
 align = 1
 autowrap = true
 
@@ -498,7 +498,7 @@ custom_constants/separation = 7
 margin_right = 295.0
 margin_bottom = 34.0
 size_flags_vertical = 3
-custom_styles/normal = SubResource( 29 )
+custom_styles/normal = SubResource( 10 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 context_menu_enabled = false
 wrap_enabled = true
@@ -512,7 +512,7 @@ margin_bottom = 81.0
 margin_right = 145.0
 margin_bottom = 40.0
 size_flags_horizontal = 7
-custom_fonts/font = SubResource( 30 )
+custom_fonts/font = SubResource( 11 )
 text = "New"
 
 [node name="ButtonCodeImport" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
@@ -521,7 +521,7 @@ margin_right = 295.0
 margin_bottom = 40.0
 size_flags_horizontal = 7
 size_flags_vertical = 9
-custom_fonts/font = SubResource( 30 )
+custom_fonts/font = SubResource( 11 )
 text = "Import"
 
 [node name="ButtonCodeCancel" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer" instance=ExtResource( 2 )]
@@ -534,7 +534,7 @@ custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/normal = ExtResource( 5 )
-custom_fonts/font = SubResource( 30 )
+custom_fonts/font = SubResource( 11 )
 text = "Cancel"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
@@ -551,7 +551,7 @@ custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/normal = ExtResource( 5 )
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 12 )
 text = "Back"
 
 [node name="ButtonAdd" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
@@ -559,7 +559,7 @@ margin_left = 81.0
 margin_right = 154.0
 margin_bottom = 40.0
 size_flags_horizontal = 8
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 12 )
 text = "Add"
 
 [node name="ButtonCopyCode" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
@@ -807,7 +807,7 @@ size_flags_vertical = 8
 margin_right = 74.0
 margin_bottom = 40.0
 size_flags_horizontal = 10
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 12 )
 text = "Play"
 
 [node name="ButtonEdit" parent="MarginContainer/HBoxContainer/LevelInfo/ControlButtons" instance=ExtResource( 2 )]
@@ -816,7 +816,7 @@ margin_right = 152.0
 margin_bottom = 40.0
 size_flags_horizontal = 0
 custom_styles/pressed = ExtResource( 16 )
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 12 )
 text = "Edit"
 
 [node name="ButtonReset" parent="MarginContainer/HBoxContainer/LevelInfo/ControlButtons" instance=ExtResource( 2 )]
@@ -830,7 +830,7 @@ custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 8 )
 custom_styles/normal = ExtResource( 5 )
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 12 )
 text = "Reset"
 
 [node name="ButtonDelete" parent="MarginContainer/HBoxContainer/LevelInfo/ControlButtons" instance=ExtResource( 2 )]
@@ -904,7 +904,7 @@ custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/normal = ExtResource( 5 )
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 12 )
 text = "Close"
 
 [node name="PopupContainer" type="ColorRect" parent="."]

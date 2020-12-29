@@ -145,7 +145,7 @@ __meta__ = {
 }
 
 [node name="ButtonCampaign" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
-margin_right = 238.0
+margin_right = 248.0
 margin_bottom = 64.0
 custom_fonts/font = SubResource( 2 )
 disabled = true
@@ -153,7 +153,7 @@ text = "Campaign"
 
 [node name="ButtonLevels" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 76.0
-margin_right = 238.0
+margin_right = 248.0
 margin_bottom = 140.0
 custom_fonts/font = SubResource( 2 )
 text = "Levels"
@@ -168,14 +168,14 @@ text = "Editor"
 
 [node name="ButtonTemplates" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 152.0
-margin_right = 238.0
+margin_right = 248.0
 margin_bottom = 216.0
 custom_fonts/font = SubResource( 2 )
-text = "Templates"
+text = "Samples"
 
 [node name="ButtonQuit" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 228.0
-margin_right = 238.0
+margin_right = 248.0
 margin_bottom = 292.0
 custom_fonts/font = SubResource( 2 )
 text = "Quit"
