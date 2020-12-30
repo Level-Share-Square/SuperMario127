@@ -1,4 +1,4 @@
-[gd_scene load_steps=258 format=2]
+[gd_scene load_steps=260 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -232,6 +232,8 @@
 [ext_resource path="res://assets/tiles/negative_rock/right_slope_icon.png" type="Texture" id=230]
 [ext_resource path="res://scenes/actors/objects/goonie/icon.png" type="Texture" id=231]
 [ext_resource path="res://scenes/actors/objects/goonie/preview.png" type="Texture" id=232]
+[ext_resource path="res://scenes/actors/objects/butterfly/preview.png" type="Texture" id=233]
+[ext_resource path="res://scenes/actors/objects/butterfly/icon.png" type="Texture" id=234]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1336,6 +1338,15 @@ tile_mode_offset = Vector2( 32, -32 )
 tile_mode_step = 64
 icon = ExtResource( 183 )
 preview = ExtResource( 184 )
+
+[node name="Butterfly" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 71
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+icon = ExtResource( 234 )
+preview = ExtResource( 233 )
 
 [node name="SnowGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
