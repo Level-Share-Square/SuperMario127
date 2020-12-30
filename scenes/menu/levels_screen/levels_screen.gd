@@ -215,6 +215,7 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 		set_control_buttons(false)
 
 func add_level(level_info : LevelInfo):
+	if SavedLevels.is_template_list: return # The button shouldn't be clickable, but just in case
 	# generate a (hopefully) unique name for each level
 	var level_disk_path = SavedLevels.generate_level_disk_path(level_info)
 
