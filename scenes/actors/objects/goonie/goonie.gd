@@ -77,7 +77,7 @@ func _physics_process(delta):
 				spread_timer = (3 + add_amount) / speed
 
 		var y_pos
-		if platform_area.get_overlapping_bodies().size() > 0 and platform_area.get_overlapping_bodies()[0].is_grounded():
+		if platform_area.get_overlapping_bodies().size() > 0 and platform_area.get_overlapping_bodies()[0].get_collision_layer_bit(1) == true and platform_area.get_overlapping_bodies()[0].is_grounded():
 			sprite.speed_scale = clamp(speed * 2, 1, 6)
 			wings_spread = false
 			y_pos = global_position.y + (speed * 15 * delta)
