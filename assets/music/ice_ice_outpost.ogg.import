@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ice_ice_outpost.ogg-7854e43e0606dacf90e59a5ee060d7f6.oggstr"
+
+[deps]
+
+source_file="res://assets/music/ice_ice_outpost.ogg"
+dest_files=[ "res://.import/ice_ice_outpost.ogg-7854e43e0606dacf90e59a5ee060d7f6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=11.648
