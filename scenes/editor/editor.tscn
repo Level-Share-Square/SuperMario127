@@ -1,4 +1,4 @@
-[gd_scene load_steps=256 format=2]
+[gd_scene load_steps=258 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -230,6 +230,8 @@
 [ext_resource path="res://scenes/actors/objects/jelectro/icon.png" type="Texture" id=228]
 [ext_resource path="res://assets/tiles/negative_rock/left_slope_icon.png" type="Texture" id=229]
 [ext_resource path="res://assets/tiles/negative_rock/right_slope_icon.png" type="Texture" id=230]
+[ext_resource path="res://scenes/actors/objects/goonie/icon.png" type="Texture" id=231]
+[ext_resource path="res://scenes/actors/objects/goonie/preview.png" type="Texture" id=232]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1181,6 +1183,16 @@ object_center = Vector2( 8, 8 )
 tile_mode_step = 16
 icon = ExtResource( 129 )
 preview = ExtResource( 128 )
+
+[node name="Goonie" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 3 )
+object_id = 70
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+icon = ExtResource( 231 )
+preview = ExtResource( 232 )
 
 [node name="BillBlaster" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 3 )

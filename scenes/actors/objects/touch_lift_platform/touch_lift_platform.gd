@@ -2,7 +2,6 @@ extends Node2D
 
 onready var sprite = $Sprite
 onready var recolor_sprite = $SpriteRecolor
-onready var floor_touch_area = $FloorTouchArea
 
 onready var platform_area_collision_shape = $StaticBody2D/Area2D/CollisionShape2D
 onready var collision_shape = $StaticBody2D/CollisionShape2D
