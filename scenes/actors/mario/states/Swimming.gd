@@ -16,6 +16,7 @@ var boost_disable_time = 0.0
 var fuel_increment = 0.05
 
 var max_enter_fall_speed = 160
+var ground_pound_enter_speed = 450
 var old_gravity_scale = 1
 
 func _ready():
@@ -32,8 +33,12 @@ func _start_check(_delta):
 	return character.water_detector.get_overlapping_areas().size() > 0 and !(character.powerup != null and character.powerup.id == 0)
 
 func _start(_delta):
+	character.jump_animation = 0
+	
 	old_gravity_scale = character.gravity_scale
 	character.velocity.y = clamp(character.velocity.y, -max_enter_fall_speed, max_enter_fall_speed)
+	if character.last_state == character.get_state_node("GroundPoundState"):
+		character.velocity.y = ground_pound_enter_speed
 	
 	character.swimming = true
 	character.gravity_scale = 0
