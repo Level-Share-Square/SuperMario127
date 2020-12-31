@@ -107,7 +107,6 @@ func _update(delta):
 
 func _stop(delta):
 	if boost_time_left == 0 and (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed):
-		print ("a")
 		character.velocity.x *= 1.5
 		character.velocity.y *= 1.75
 
