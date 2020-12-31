@@ -30,6 +30,7 @@ func _update(delta):
 		character.set_state_by_name("DiveState", delta)
 
 func _stop(delta):
+	if character.swimming: return
 	if character.is_grounded():
 		var normal = character.ground_check.get_collision_normal()
 		if normal.x == 0:
@@ -44,7 +45,7 @@ func _stop(delta):
 			character.set_state_by_name("ButtSlideState", delta)
 	else:
 		character.jump_animation = 0
-		if character.velocity.y > 0 and !character.swimming:
+		if character.velocity.y > 0:
 			character.velocity.y = character.velocity.y / 4
 
 func _stop_check(_delta):

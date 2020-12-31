@@ -15,6 +15,8 @@ var boost_disable_time = 0.0
 
 var fuel_increment = 0.05
 
+var max_enter_fall_speed = 160
+
 func _ready():
 	priority = 6
 	blacklisted_states = []
@@ -29,6 +31,8 @@ func _start_check(_delta):
 	return character.water_detector.get_overlapping_areas().size() > 0
 
 func _start(_delta):
+	character.velocity.y = clamp(character.velocity.y, -max_enter_fall_speed, max_enter_fall_speed)
+	
 	character.swimming = true
 	character.gravity_scale = 0
 	char_rotation = 90 * character.facing_direction
@@ -90,9 +94,9 @@ func _update(delta):
 		char_rotation = Vector2().angle_to_point(move_vector) - (PI/2)
 		character.velocity = character.velocity.move_toward(Vector2.RIGHT.rotated(sprite.rotation - (PI/2)) * swim_speed, delta * lerp_speed)
 	else:
-		character.velocity = character.velocity.move_toward(Vector2(), delta * (120 if (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed) else 480))
+		character.velocity = character.velocity.move_toward(Vector2(), delta * (240 if (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed) else 480))
 
-	sprite.rotation = fmod(lerp_angle(sprite.rotation, char_rotation, delta * 5), 360)
+	sprite.rotation = fmod(lerp_angle(sprite.rotation, char_rotation, delta * (6 if boost_time_left == 0 else 1)), 360)
 	if abs(sprite.rotation) > PI:
 		sprite.rotation = -sprite.rotation
 
