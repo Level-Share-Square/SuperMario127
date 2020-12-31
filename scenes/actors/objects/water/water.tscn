@@ -2,10 +2,10 @@
 
 [ext_resource path="res://scenes/actors/objects/water/water.gd" type="Script" id=1]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 900, 300 )
 
-[sub_resource type="Shader" id=4]
+[sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
 
 uniform vec4 color_tint : hint_color;
@@ -19,11 +19,11 @@ void fragment() {
 	COLOR = color;
 }"
 
-[sub_resource type="ShaderMaterial" id=5]
-shader = SubResource( 4 )
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
 shader_param/color_tint = Color( 0.278431, 0.662745, 0.85098, 1 )
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
 
 uniform vec4 color_tint : hint_color;
@@ -56,8 +56,8 @@ void fragment() {
 	COLOR = color;
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 2 )
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
 shader_param/color_tint = Color( 0.278431, 0.662745, 0.85098, 1 )
 shader_param/x_size = 1800.0
 
@@ -72,10 +72,10 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 900, 300 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource( 5 )
+material = SubResource( 3 )
 margin_right = 1800.0
 margin_bottom = 600.0
 mouse_filter = 2
@@ -85,7 +85,7 @@ __meta__ = {
 }
 
 [node name="Waves" type="ColorRect" parent="."]
-material = SubResource( 6 )
+material = SubResource( 5 )
 margin_top = -15.0
 margin_right = 1800.0
 margin_bottom = 15.0
