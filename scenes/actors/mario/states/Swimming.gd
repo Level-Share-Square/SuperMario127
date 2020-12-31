@@ -16,7 +16,7 @@ var boost_disable_time = 0.0
 var fuel_increment = 0.05
 
 var max_enter_fall_speed = 160
-var ground_pound_enter_speed = 450
+var ground_pound_enter_speed = 350
 var old_gravity_scale = 1
 
 func _ready():
@@ -103,7 +103,7 @@ func _update(delta):
 	else:
 		character.velocity = character.velocity.move_toward(Vector2(), delta * (240 if (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed) else 480))
 
-	sprite.rotation = fmod(lerp_angle(sprite.rotation, char_rotation, delta * (7 if boost_time_left == 0 else 1)), 360)
+	sprite.rotation = fmod(lerp_angle(sprite.rotation, char_rotation, delta * (7 if boost_time_left == 0 else 2)), 360)
 	if abs(sprite.rotation) > PI:
 		sprite.rotation = -sprite.rotation
 
