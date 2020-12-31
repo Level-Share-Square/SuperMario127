@@ -22,6 +22,9 @@ onready var wall_jump_voiceless = $OtherSounds/WallJump
 onready var spin_sound = $OtherSounds/Spin
 onready var duck_sound = $OtherSounds/Duck
 onready var last_hit_8bit_sound = $OtherSounds/LastHit8Bit
+onready var splash_sound = $OtherSounds/WaterSplash
+onready var swim_sound = $OtherSounds/Swim
+onready var spin_water_sound = $OtherSounds/SpinWater
 onready var powerup_sound_voiceless = $OtherSounds/Powerup
 
 onready var footsteps_default = $Footsteps/Default
@@ -158,3 +161,15 @@ func play_duck_sound():
 func play_spin_sound():
 	if ready:
 		spin_sound.play()
+
+func play_spin_water_sound():
+	if ready:
+		spin_water_sound.play()
+
+func play_splash_sound():
+	if ready:
+		splash_sound.play()
+
+func set_swim_playing(value):
+	if ready:
+		swim_sound.playing = value

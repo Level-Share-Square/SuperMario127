@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -39,6 +39,9 @@
 [ext_resource path="res://scenes/actors/mario/sounds_misc/powerup.wav" type="AudioStream" id=37]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Shine2.wav" type="AudioStream" id=38]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Shine1.wav" type="AudioStream" id=39]
+[ext_resource path="res://scenes/actors/mario/sounds_misc/water_splash.wav" type="AudioStream" id=40]
+[ext_resource path="res://scenes/actors/mario/sounds_misc/swim.ogg" type="AudioStream" id=41]
+[ext_resource path="res://scenes/actors/mario/sounds_misc/spin_water.wav" type="AudioStream" id=42]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 2 )
@@ -197,11 +200,11 @@ sound_number = 1
 
 [node name="Step1" type="AudioStreamPlayer" parent="Footsteps/Default"]
 stream = ExtResource( 26 )
-volume_db = -7.5
+volume_db = -2.5
 
 [node name="Step2" type="AudioStreamPlayer" parent="Footsteps/Default"]
 stream = ExtResource( 30 )
-volume_db = -7.5
+volume_db = -2.5
 
 [node name="OtherSounds" type="Node" parent="."]
 
@@ -251,3 +254,15 @@ volume_db = -0.75
 [node name="Powerup" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 37 )
 volume_db = -6.0
+
+[node name="WaterSplash" type="AudioStreamPlayer" parent="OtherSounds"]
+stream = ExtResource( 40 )
+volume_db = -14.0
+
+[node name="Swim" type="AudioStreamPlayer" parent="OtherSounds"]
+stream = ExtResource( 41 )
+volume_db = -15.0
+
+[node name="SpinWater" type="AudioStreamPlayer" parent="OtherSounds"]
+stream = ExtResource( 42 )
+volume_db = 5.0

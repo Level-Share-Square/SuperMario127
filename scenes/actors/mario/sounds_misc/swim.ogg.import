@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/swim.ogg-b6d06f5655c05a003f36843b3573c015.oggstr"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_misc/swim.ogg"
+dest_files=[ "res://.import/swim.ogg-b6d06f5655c05a003f36843b3573c015.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -33,6 +33,7 @@ func _start_check(_delta):
 	return character.water_detector.get_overlapping_areas().size() > 0 and !(character.powerup != null and character.powerup.id == 0)
 
 func _start(_delta):
+	character.sound_player.play_splash_sound()
 	character.jump_animation = 0
 	
 	old_gravity_scale = character.gravity_scale
@@ -72,6 +73,8 @@ func _update(delta):
 		boost_buffer = 0
 		boost_time_left = 0.75
 		character.spin_area_shape.disabled = false
+		character.sound_player.set_swim_playing(false)
+		character.sound_player.play_spin_water_sound()
 	
 	if boost_time_left > 0:
 		boost_time_left -= delta
@@ -80,6 +83,7 @@ func _update(delta):
 			boost_time_left = 0
 			sprite.speed_scale = 0
 			character.spin_area_shape.disabled = true
+			character.sound_player.set_swim_playing(true)
 			swim_speed = base_swim_speed
 
 	if boost_buffer > 0:
@@ -91,6 +95,7 @@ func _update(delta):
 		boost_disable_time -= delta
 		if boost_disable_time <= 0:
 			boost_disable_time = 0
+			character.sound_player.set_swim_playing(true)
 			
 	var lerp_speed = 480
 	if boost_time_left > 0:
@@ -119,6 +124,8 @@ func _stop(delta):
 	character.sprite.rotation = 0
 	character.gravity_scale = 1
 	character.swimming = false
+	character.sound_player.play_splash_sound()
+	character.sound_player.set_swim_playing(false)
 	character.get_state_node("SpinningState").spin_timer = 0
 	character.get_state_node("SpinningState").spin_disable_time = 0.25
 	character.set_state_by_name("BounceState", delta)
