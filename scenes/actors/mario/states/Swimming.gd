@@ -13,6 +13,8 @@ var boost_buffer = 0.0
 
 var boost_disable_time = 0.0
 
+var fuel_increment = 0.05
+
 func _ready():
 	priority = 6
 	blacklisted_states = []
@@ -36,7 +38,10 @@ func _start(_delta):
 func _update(delta):
 	var move_vector = Vector2()
 	var sprite = character.sprite
-
+	
+	character.fuel = clamp(character.fuel + fuel_increment, 0, 100)
+	character.stamina = 100
+	
 	if character.inputs[character.input_names.left][0]:
 		move_vector.x -= 1
 	if character.inputs[character.input_names.right][0]:
@@ -85,7 +90,7 @@ func _update(delta):
 		char_rotation = Vector2().angle_to_point(move_vector) - (PI/2)
 		character.velocity = character.velocity.move_toward(Vector2.RIGHT.rotated(sprite.rotation - (PI/2)) * swim_speed, delta * lerp_speed)
 	else:
-		character.velocity = character.velocity.move_toward(Vector2(), delta * 120)
+		character.velocity = character.velocity.move_toward(Vector2(), delta * (120 if (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed) else 480))
 
 	sprite.rotation = fmod(lerp_angle(sprite.rotation, char_rotation, delta * 5), 360)
 	if abs(sprite.rotation) > PI:
@@ -95,7 +100,8 @@ func _update(delta):
 	sprite.animation = ("diveRight" if character.facing_direction == 1 else "diveLeft") if boost_time_left <= 0 else "spinning"
 
 func _stop(delta):
-	if boost_time_left == 0:
+	if boost_time_left == 0 and (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed):
+		print ("a")
 		character.velocity.x *= 1.5
 		character.velocity.y *= 1.75
 

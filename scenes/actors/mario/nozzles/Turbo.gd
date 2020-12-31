@@ -40,7 +40,7 @@ func _activated_update(delta):
 			direction = 1
 		character.damage_with_knockback(character.position + Vector2(direction * 8, 0), 0, "Hit", 0)
 	
-	if character.fuel > 0:
+	if character.fuel > 0 and !character.swimming:
 		character.fuel -= fuel_depletion
 		if character.fuel <= 0:
 			character.fuel = 0

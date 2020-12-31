@@ -16,13 +16,13 @@ func _init():
 	blacklisted_states = ["WingMarioState", "RainbowStarState", "ButtSlideState", "WallSlideState", "GroundPoundStartState", "GroundPoundState", "GroundPoundEndState", "GetupState", "KnockbackState", "BonkedState", "SpinningState"]
 
 func _activate_check(_delta):
-	return !(character.state == character.get_state_node("BackflipState") and character.state.disable_turning == true) and character.get_state_node("SlideState").crouch_buffer == 0
+	return !(character.state == character.get_state_node("SwimmingState") and character.state.boost_time_left > 0) and !(character.state == character.get_state_node("BackflipState") and character.state.disable_turning == true) and (character.get_state_node("SlideState").crouch_buffer == 0 or character.swimming)
 	
 func is_state(state):
 	return character.state == character.get_state_node(state)
 	
 func _activated_update(delta):
-	if !is_state("DiveState") and !is_state("SlideState"):
+	if !is_state("DiveState") and !is_state("SlideState") and !character.swimming:
 		if character.facing_direction == 1:
 			character.sprite.animation = "jumpRight"
 		else:
@@ -40,16 +40,22 @@ func _activated_update(delta):
 	character.jump_animation = 0
 	
 	var power = -boost_power * clamp(character.stamina / 100, 0.5, 1)
-	if abs(character.velocity.x) < abs(power * normal.x) * 6:
-		character.velocity.x -= accel * 0.5 * normal.x
+	
+	if character.swimming:
+		power *= 2
+	
+	if abs(character.velocity.x) < abs(power * normal.x) * (6 if !character.swimming else 1):
+		character.velocity.x -= accel * (0.5 if character.swimming else 0.75) * normal.x
 		
 	if (character.velocity.y > power * normal.y and normal.y > 0) or (character.velocity.y < power * normal.y and normal.y < 0):
-		character.velocity.y -= accel * normal.y
-	character.stamina -= depletion
+		character.velocity.y -= accel * (1 if !character.swimming else 0.75) * normal.y
+
+	if !character.swimming:
+		character.stamina -= depletion
 	
 	character.velocity.y += preservation_factor * (character.stamina / 100)
 	
-	if character.fuel > 0:
+	if character.fuel > 0 and !character.swimming:
 		character.fuel -= fuel_depletion
 		if character.fuel <= 0:
 			character.fuel = 0

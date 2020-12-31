@@ -13,13 +13,13 @@ var accel = 825
 var charge = 0
 var rotation_interpolation_speed = 35
 var deactivate_frames = 0
-var cooldown_time = 2
+var cooldown_time := 0.0
 
 func _init():
 	blacklisted_states = ["GroundPoundStartState", "GroundPoundState", "GroundPoundEndState","KnockbackState", "BonkedState"]
 
 func _activate_check(_delta):
-	return !(character.state == character.get_state_node("BackflipState") and character.state.disable_turning == true) and character.get_state_node("SlideState").crouch_buffer == 0
+	return cooldown_time == 0 and !(character.state == character.get_state_node("BackflipState") and character.state.disable_turning == true) and character.get_state_node("SlideState").crouch_buffer == 0
 	
 func is_state(state):
 	return character.state == character.get_state_node(state)
@@ -35,12 +35,14 @@ func _activated_update(delta):
 		character.fludd_sprite.offset = Vector2(rand_range(-1, 1), rand_range(-1, 1)) * charge
 		return
 		
+	cooldown_time = 1
 	character.fludd_sprite.offset = Vector2(0, 0)
 	character.fludd_sprite.modulate = Color(1, 1, 1)
 	character.fludd_charge_sound.stop()
 	character.fludd_boost_sound.play()
 	charge = 0
-	character.stamina = 0
+	if !character.swimming:
+		character.stamina = 0
 	character.get_state_node("JumpState").ledge_buffer = 0 # Disable coyote time, which allowed for a "double jump" that was weaker than the actual blast
 	deactivate_frames = 30
 		
@@ -70,7 +72,7 @@ func _activated_update(delta):
 		character.velocity.y = sqrt(abs(character.velocity.y)) * sign(character.velocity.y)
 		character.velocity.y -= accel * normal.y
 	
-	if character.fuel > 0:
+	if character.fuel > 0 and !character.swimming:
 		character.fuel -= fuel_depletion
 		if character.fuel <= 0:
 			character.fuel = 0
@@ -82,6 +84,9 @@ func _activated_update(delta):
 			character.velocity.x += 1
 	
 func _update(_delta):
+	if cooldown_time > 0:
+		character.fludd_charge_sound.stop()
+	
 	if character.is_grounded():
 		character.stamina = 100
 
@@ -93,7 +98,15 @@ func _update(_delta):
 
 	last_state = character.state
 
-func _general_update(_delta):
+func _general_update(delta):
+	if character.is_grounded():
+		cooldown_time = 0
+	
+	if cooldown_time > 0:
+		cooldown_time -= delta
+		if cooldown_time <= 0:
+			cooldown_time = 0
+	
 	if activated and !last_activated and character.stamina == 0:
 		character.rocket_particles.emitting = true
 		character.fludd_sound.play(((100 - character.stamina) / 100) * 2.79)
@@ -111,7 +124,7 @@ func _general_update(_delta):
 		if last_charged:
 			character.fludd_charge_sound.stop()
 		
-		charge -= _delta * 2
+		charge -= delta * 2
 		character.fludd_sprite.modulate = Color(1, 1 - (charge * 1.4), 1 - (charge * 1.4))
 		character.fludd_sprite.offset = Vector2(0, 0)
 		
