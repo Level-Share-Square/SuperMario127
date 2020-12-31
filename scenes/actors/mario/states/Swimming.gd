@@ -16,6 +16,7 @@ var boost_disable_time = 0.0
 var fuel_increment = 0.05
 
 var max_enter_fall_speed = 160
+var old_gravity_scale = 1
 
 func _ready():
 	priority = 6
@@ -28,9 +29,10 @@ func _ready():
 	use_dive_collision = true
 
 func _start_check(_delta):
-	return character.water_detector.get_overlapping_areas().size() > 0
+	return character.water_detector.get_overlapping_areas().size() > 0 and !(character.powerup != null and character.powerup.id == 0)
 
 func _start(_delta):
+	old_gravity_scale = character.gravity_scale
 	character.velocity.y = clamp(character.velocity.y, -max_enter_fall_speed, max_enter_fall_speed)
 	
 	character.swimming = true
@@ -96,7 +98,7 @@ func _update(delta):
 	else:
 		character.velocity = character.velocity.move_toward(Vector2(), delta * (240 if (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed) else 480))
 
-	sprite.rotation = fmod(lerp_angle(sprite.rotation, char_rotation, delta * (6 if boost_time_left == 0 else 1)), 360)
+	sprite.rotation = fmod(lerp_angle(sprite.rotation, char_rotation, delta * (7 if boost_time_left == 0 else 1)), 360)
 	if abs(sprite.rotation) > PI:
 		sprite.rotation = -sprite.rotation
 
@@ -111,7 +113,7 @@ func _stop(delta):
 
 	boost_time_left = 0
 	character.sprite.rotation = 0
-	character.gravity_scale = 1
+	character.gravity_scale = old_gravity_scale
 	character.swimming = false
 	character.get_state_node("SpinningState").spin_timer = 0
 	character.get_state_node("SpinningState").spin_disable_time = 0.25
