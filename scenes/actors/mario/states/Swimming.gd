@@ -117,7 +117,7 @@ func _stop(delta):
 
 	boost_time_left = 0
 	character.sprite.rotation = 0
-	character.gravity_scale = old_gravity_scale
+	character.gravity_scale = 1
 	character.swimming = false
 	character.get_state_node("SpinningState").spin_timer = 0
 	character.get_state_node("SpinningState").spin_disable_time = 0.25

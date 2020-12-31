@@ -513,10 +513,10 @@ func _physics_process(delta: float) -> void:
 		invulnerable_frames -= 1
 	
 	var is_in_water = water_detector.get_overlapping_areas().size() > 0
-	if is_in_water and gravity_scale == 1:
+	if is_in_water and max_aerial_velocity == 640:
 		gravity_scale = 0.75
 		max_aerial_velocity = 200
-	elif !is_in_water and gravity_scale == 0.75:
+	elif !is_in_water and max_aerial_velocity == 200:
 		gravity_scale = 1
 		max_aerial_velocity = 640
 	
