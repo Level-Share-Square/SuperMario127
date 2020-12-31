@@ -32,6 +32,7 @@ onready var left_check : RayCast2D = $LeftCheck
 onready var right_check : RayCast2D = $RightCheck
 onready var slope_stop_check : RayCast2D = $SlopeStopCheck
 onready var player_collision : Area2D = $PlayerCollision
+onready var water_detector : Area2D = $WaterDetector
 onready var platform_detector : Area2D = $PlatformDetector
 onready var spin_area : Area2D = $SpinArea
 onready var player_collision_shape : CollisionShape2D = $PlayerCollision/CollisionShape2D
@@ -98,6 +99,7 @@ export var current_jump := 0
 export var jump_animation := 0
 export var direction_on_stick := 1
 export var rotating := true
+export var swimming := false
 export var spawn_pos := Vector2(0, 0)
 export var gravity : float
 

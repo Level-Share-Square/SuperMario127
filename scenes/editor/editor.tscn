@@ -1,4 +1,4 @@
-[gd_scene load_steps=260 format=2]
+[gd_scene load_steps=262 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -234,6 +234,8 @@
 [ext_resource path="res://scenes/actors/objects/goonie/preview.png" type="Texture" id=232]
 [ext_resource path="res://scenes/actors/objects/butterfly/preview.png" type="Texture" id=233]
 [ext_resource path="res://scenes/actors/objects/butterfly/icon.png" type="Texture" id=234]
+[ext_resource path="res://scenes/actors/objects/water/icon.png" type="Texture" id=235]
+[ext_resource path="res://scenes/actors/objects/water/preview.png" type="Texture" id=236]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1121,6 +1123,16 @@ is_object = true
 object_center = Vector2( 16, 16 )
 icon = ExtResource( 198 )
 preview = ExtResource( 199 )
+
+[node name="Water" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 72
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+icon = ExtResource( 235 )
+preview = ExtResource( 236 )
 
 [node name="EnemiesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )

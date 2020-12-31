@@ -44,7 +44,7 @@ func _stop(delta):
 			character.set_state_by_name("ButtSlideState", delta)
 	else:
 		character.jump_animation = 0
-		if character.velocity.y > 0:
+		if character.velocity.y > 0 and !character.swimming:
 			character.velocity.y = character.velocity.y / 4
 
 func _stop_check(_delta):

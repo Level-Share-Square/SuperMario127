@@ -369,6 +369,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://interpreter/math_operations/SubtractionOperation.gd"
 }, {
+"base": "State",
+"class": "SwimmingState",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/states/Swimming.gd"
+}, {
 "base": "Nozzle",
 "class": "TurboNozzle",
 "language": "GDScript",
@@ -517,6 +522,7 @@ _global_script_class_icons={
 "SpinningState": "",
 "State": "",
 "SubtractionOperation": "",
+"SwimmingState": "",
 "TurboNozzle": "",
 "UtilEnvironment": "",
 "VanishPowerup": "",
@@ -971,6 +977,7 @@ toggle_enabled={
 2d_physics/layer_5="platforms"
 2d_physics/layer_6="steelies"
 2d_physics/layer_7="vanish powerup"
+2d_physics/layer_8="water"
 
 [logging]
 

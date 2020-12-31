@@ -6,10 +6,10 @@ export var boost_power: float = 175
 export var gravity_scale: float = 0.5
 export var attack_time: float = 0.5
 var old_gravity_scale = 1
-var boost_cooldown_timer = 0
-var spin_timer = 0
-var attack_timer = 0
-var sound_buffer = 0
+var spin_timer := 0.0
+var spin_disable_time := 0.0
+var attack_timer := 0.0
+var sound_buffer := 0.0
 
 func _ready():
 	priority = 2
@@ -27,8 +27,7 @@ func _start(_delta):
 	if sound_buffer > 0:
 		character.sound_player.play_spin_sound()
 	sound_buffer = 0
-	if boost_cooldown_timer <= 0.05 and !character.is_grounded() and (character.state != character.get_state_node("Jump") or character.current_jump == 1):
-		boost_cooldown_timer += 0.49
+	if !character.is_grounded() and (character.state != character.get_state_node("Jump") or character.current_jump == 1):
 		if character.velocity.y > -boost_power:
 			if character.velocity.y > 100:
 				character.velocity.y /= 1.5
@@ -63,22 +62,22 @@ func _stop_check(_delta):
 	return spin_timer == 0
 
 func _general_update(delta):
-	if boost_cooldown_timer > 0:
-		boost_cooldown_timer -= delta
-		if boost_cooldown_timer <= 0:
-			boost_cooldown_timer = 0
+	if spin_disable_time > 0:
+		spin_disable_time -= delta
+		if spin_disable_time <= 0:
+			spin_disable_time = 0
 	if spin_timer > 0 and !character.inputs[4][0]:
 		if character.jump_animation == 2 and character.state == character.get_state_node("JumpState"):
 			spin_timer = 0.2
 		spin_timer -= delta
 		if spin_timer <= 0:
 			spin_timer = 0
-	if character.inputs[4][0] and spin_timer == 0.0:
+	if character.inputs[4][0] and spin_timer == 0.0 and spin_disable_time == 0:
 		spin_timer = 0.2
 	if character.inputs[4][1]:
 		sound_buffer = 0.2
 	if character.is_grounded():
-		boost_cooldown_timer = 0
+		spin_disable_time = 0
 	
 	if attack_timer > 0:
 		attack_timer -= delta
