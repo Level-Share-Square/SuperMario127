@@ -1,9 +1,65 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/actors/objects/water/water.gd" type="Script" id=1]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 900, 300 )
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform vec4 color_tint : hint_color;
+
+void fragment() {
+	vec4 color = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
+	
+	color = mix(color, color_tint, 0.4);
+	color.rgb = mix(vec3(0.5), color.rgb, 1.4);
+	
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+shader_param/color_tint = Color( 0.278431, 0.662745, 0.85098, 1 )
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform vec4 color_tint : hint_color;
+uniform float x_size;
+
+float rand(vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+float sine(vec2 uv_coords, float time, float arg1, float arg2) {
+	return sin((uv_coords.x * arg1 * (x_size / 1500.0f)) + time * arg2);
+}
+
+void fragment() {
+	vec4 color = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
+	
+	color = mix(color, color_tint, 0.4);
+	color.rgb = mix(vec3(0.5), color.rgb, 1.4);
+	
+	float final_sine = sine(UV, TIME / 2f, 20.5f, 5.5f) * sine(UV, TIME / 2f, 15.5f, 5.5f) * sine(UV, TIME / 2f, 30.5f, 5.5f);
+	float sine_height = (final_sine / 5f) + 0.25f;
+	if (UV.y < sine_height) {
+		color.a = 0.0;
+	} else {
+		float gradient_pos = round(((UV.y * 2.0) - (sine_height * 2.0)) * 3.0) / 3.0;
+		float mix_amount = clamp(1.0 - gradient_pos, 0.0, 1.0);
+		color.rgb = mix(color.rgb, vec3(1), mix_amount);
+	}
+	
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 2 )
+shader_param/color_tint = Color( 0.278431, 0.662745, 0.85098, 1 )
+shader_param/x_size = 1800.0
 
 [node name="Water" type="Node2D"]
 z_index = -1
@@ -16,11 +72,23 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 900, 300 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 5 )
 margin_right = 1800.0
 margin_bottom = 600.0
+mouse_filter = 2
+color = Color( 0.192157, 0.52549, 1, 0.47451 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Waves" type="ColorRect" parent="."]
+material = SubResource( 6 )
+margin_top = -15.0
+margin_right = 1800.0
+margin_bottom = 15.0
 mouse_filter = 2
 color = Color( 0.192157, 0.52549, 1, 0.47451 )
 __meta__ = {
