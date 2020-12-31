@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/lake_lamode_underwater_passage.ogg-245f8b62ecc370187db8208dd0b89eeb.oggstr"
+
+[deps]
+
+source_file="res://assets/music/lake_lamode_underwater_passage.ogg"
+dest_files=[ "res://.import/lake_lamode_underwater_passage.ogg-245f8b62ecc370187db8208dd0b89eeb.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=18.218

@@ -514,9 +514,9 @@ func _physics_process(delta: float) -> void:
 	
 	var is_in_water = water_detector.get_overlapping_areas().size() > 0
 	if is_in_water and max_aerial_velocity == 640:
-		gravity_scale = 0.75
-		max_aerial_velocity = 200
-	elif !is_in_water and max_aerial_velocity == 200:
+		gravity_scale = 0.5
+		max_aerial_velocity = 320
+	elif !is_in_water and max_aerial_velocity == 320:
 		gravity_scale = 1
 		max_aerial_velocity = 640
 	

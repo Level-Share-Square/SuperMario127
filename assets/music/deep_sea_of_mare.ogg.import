@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/deep_sea_of_mare.ogg-05de80eed38c50781b42b66aeb753367.oggstr"
+
+[deps]
+
+source_file="res://assets/music/deep_sea_of_mare.ogg"
+dest_files=[ "res://.import/deep_sea_of_mare.ogg-05de80eed38c50781b42b66aeb753367.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=16.576
