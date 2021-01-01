@@ -9,6 +9,8 @@ onready var viewport2 = $ViewportContainer2/Viewport
 onready var camera1 = $ViewportContainer/Viewport/CameraP1
 onready var camera2 = $ViewportContainer2/Viewport/CameraP2
 
+onready var world = $ViewportContainer/Viewport/World
+
 onready var player1 = $ViewportContainer/Viewport/World/Character
 onready var player2 = $ViewportContainer/Viewport/World/Character2
 
@@ -28,6 +30,27 @@ func remove_player():
 		player2.queue_free()
 		PlayerSettings.number_of_players = 1
 		player1.number_of_players = PlayerSettings.number_of_players
+		
+		yield(get_tree(), "idle_frame")
+		yield(get_tree(), "idle_frame")
+		yield(get_tree(), "idle_frame")
+		
+		for child in world.get_children():
+			child.get_parent().remove_child(child)
+			get_parent().add_child(child)
+			
+			if child is Character:
+				get_parent().character = get_parent().get_path_to(child)
+			
+		for child in viewport1.get_children():
+			child.get_parent().remove_child(child)
+			get_parent().add_child(child)
+			
+		for child in viewport_container1.get_children():
+			child.get_parent().remove_child(child)
+			get_parent().add_child(child)
+		
+		queue_free()
 
 func add_player(): # boy do i love hacks
 	if PlayerSettings.number_of_players == 1:
