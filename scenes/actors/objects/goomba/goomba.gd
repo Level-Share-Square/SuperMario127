@@ -15,10 +15,12 @@ onready var poof_sound : AudioStreamPlayer = $Goomba/Disappear
 onready var hit_sound : AudioStreamPlayer = $Goomba/Hit
 onready var anim_player : AnimationPlayer = $Goomba/AnimationPlayer
 onready var bottom_pos : Node2D = $Goomba/BottomPos
+onready var water_detector : Node2D = $Goomba/WaterDetector
 onready var raycasts := [wall_check, wall_vacant_check, pit_check]
 var dead := false
 
 var gravity : float
+var gravity_scale : float
 var velocity := Vector2()
 
 var walk_timer := 0.0
@@ -162,6 +164,11 @@ func _physics_process(delta : float) -> void:
 				physics_process_hit(delta, is_in_platform)
 
 func physics_process_normal(delta: float, is_in_platform: bool) -> void:
+	if water_detector.get_overlapping_areas().size() > 0:
+		gravity_scale = 0.3
+	else:
+		gravity_scale = 1
+	
 	if !is_instance_valid(character):
 		# Walk around randomly
 		if walk_wait > 0:
@@ -223,14 +230,14 @@ func physics_process_normal(delta: float, is_in_platform: bool) -> void:
 	if !hit: # Prevent goombas from entering that weird zombie state
 		for hit_body in stomp_area.get_overlapping_bodies():
 			if hit_body.name.begins_with("Character"):
-				if hit_body.velocity.y > 0:
+				if hit_body.velocity.y > 0 and !hit_body.swimming:
 					was_stomped = true
 					if hit_body.big_attack or hit_body.invincible:
 						was_ground_pound = true
 					kill(hit_body.global_position)
 	
 	# Run physics
-	velocity.y += gravity
+	velocity.y += gravity * gravity_scale
 	velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
 
 func physics_process_hit(delta: float, is_in_platform: bool) -> void:

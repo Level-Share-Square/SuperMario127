@@ -126,6 +126,7 @@ func _stop(delta):
 	character.swimming = false
 	character.sound_player.play_splash_sound()
 	character.sound_player.set_swim_playing(false)
+	character.spin_area_shape.disabled = true
 	character.get_state_node("SpinningState").spin_timer = 0
 	character.get_state_node("SpinningState").spin_disable_time = 0.25
 	character.set_state_by_name("BounceState", delta)

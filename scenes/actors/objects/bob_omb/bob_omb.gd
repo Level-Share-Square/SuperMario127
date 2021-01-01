@@ -13,12 +13,14 @@ onready var damage_area = $KinematicBody2D/DamageArea
 onready var attack_area = $KinematicBody2D/AttackArea
 onready var grounded_check = $KinematicBody2D/RayCast2D
 onready var platform_detector = $KinematicBody2D/PlatformDetector
+onready var water_detector = $KinematicBody2D/WaterDetector
 onready var raycasts = [grounded_check]
 var dead = false
 var character
 var character_damage
 
 var gravity : float
+var gravity_scale : float
 var velocity := Vector2()
 
 var walk_timer = 0.0
@@ -154,6 +156,11 @@ func _physics_process(delta):
 			damage_timer = 0
 	
 	if mode != 1 and enabled and !dead and loaded:
+		if water_detector.get_overlapping_areas().size() > 0:
+			gravity_scale = 0.3
+		else:
+			gravity_scale = 1
+		
 		if hit:
 			sprite_container.rotation_degrees += -facing_direction * 5
 			if grounded_check.is_colliding():
@@ -191,7 +198,7 @@ func _physics_process(delta):
 					position.y -= 4
 				
 		sprite.flip_h = true if facing_direction == 1 else false
-		velocity.y += gravity
+		velocity.y += gravity * gravity_scale
 		velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
 		if character == null:
 			if walk_wait > 0:

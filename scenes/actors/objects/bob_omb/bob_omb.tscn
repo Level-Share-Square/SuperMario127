@@ -52,14 +52,12 @@ script = ExtResource( 8 )
 
 [node name="Sprite" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
 frames = ExtResource( 1 )
-frame = 4
 playing = true
 
 [node name="Fuse" type="AnimatedSprite" parent="KinematicBody2D/Sprites"]
 visible = false
 position = Vector2( 0, -4 )
 frames = ExtResource( 4 )
-frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
@@ -131,6 +129,16 @@ collision_layer = 4
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/AttackArea"]
+position = Vector2( 0, 4 )
+shape = SubResource( 7 )
+
+[node name="WaterDetector" type="Area2D" parent="KinematicBody2D"]
+visible = false
+position = Vector2( 0, -3 )
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/WaterDetector"]
 position = Vector2( 0, 4 )
 shape = SubResource( 7 )
 

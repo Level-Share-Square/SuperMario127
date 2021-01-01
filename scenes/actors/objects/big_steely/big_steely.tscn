@@ -107,6 +107,13 @@ collision_mask = 2147483664
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Steely/PlatformDetector"]
 shape = SubResource( 4 )
 
+[node name="WaterDetector" type="Area2D" parent="Steely"]
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Steely/WaterDetector"]
+shape = SubResource( 2 )
+
 [node name="Sprite" type="Sprite" parent="Steely"]
 texture = ExtResource( 1 )
 

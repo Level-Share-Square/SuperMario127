@@ -9,6 +9,7 @@ onready var stomp_area = $Koopa/StompArea
 onready var left_check = $Koopa/Left
 onready var right_check = $Koopa/Right
 onready var koopa_sound = $Koopa/AudioStreamPlayer
+onready var water_detector = $Koopa/WaterDetector
 onready var visibility_notifier = $Koopa/VisibilityNotifier2D
 
 onready var body = $Koopa
@@ -24,6 +25,7 @@ var dead = false
 var loaded = false
 
 var gravity : float
+var gravity_scale : float
 var velocity := Vector2()
 var original_position
 
@@ -237,7 +239,7 @@ func physics_process_shell(delta, _level_bounds):
 	# Check the stomp hitbox
 	for hit_body in shell_stomp_area.get_overlapping_bodies():
 		if hit_body.name.begins_with("Character"):
-			if hit_body.velocity.y > 0:
+			if hit_body.velocity.y > 0 and !hit_body.swimming:
 				if !hit_body.big_attack:
 					if hit_body.state != hit_body.get_state_node("DiveState"):
 						hit_body.set_state_by_name("BounceState", 0)
@@ -265,14 +267,18 @@ func physics_process_shell(delta, _level_bounds):
 	# Sprite handling & physics
 	shell_sprite.speed_scale = abs(velocity.x) / shell_max_speed
 	shell_sprite.flip_h = velocity.x < 0
-	velocity.y += gravity
+	if shell.get_node("WaterDetector").get_overlapping_areas().size() > 0:
+		gravity_scale = 0.3
+	else:
+		gravity_scale = 1
+	velocity.y += gravity * gravity_scale
 	velocity = shell.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
 
 func physics_process_koopa(delta, level_bounds):
 	# Check the stomp hitbox first (to prevent overlaps from causing issues)
 	for hit_body in stomp_area.get_overlapping_bodies():
 		if hit_body.name.begins_with("Character"):
-			if hit_body.velocity.y > 0:
+			if hit_body.velocity.y > 0 and !hit_body.swimming:
 				if !hit_body.big_attack:
 					if hit_body.state != hit_body.get_state_node("DiveState"):
 						hit_body.set_state_by_name("BounceState", 0)
@@ -310,7 +316,11 @@ func physics_process_koopa(delta, level_bounds):
 			# Walk and be affected by gravity
 			sprite.animation = "walking"
 			velocity.x = lerp(velocity.x, facing_direction * speed, delta * accel)
-			velocity.y += gravity
+			if water_detector.get_overlapping_areas().size() > 0:
+				gravity_scale = 0.3
+			else:
+				gravity_scale = 1
+			velocity.y += gravity * gravity_scale
 		else:
 			# Paratroopas go up and down very slightly
 			velocity = Vector2(0, 0)

@@ -42,7 +42,7 @@ func kill(body, attack_type):
 		dead = true
 		delete_timer = 3.0 if !invincible else 0.25
 		sound.play()
-	elif attack_type == "stomp":
+	elif attack_type == "stomp" and !body.swimming:
 		if body.velocity.y > 0:
 			if body.state != body.get_state_node("GroundPoundState"):
 				if body.state != body.get_state_node("DiveState"):

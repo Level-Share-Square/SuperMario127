@@ -3,6 +3,7 @@ extends GameObject
 onready var area = $Steely/Area2D
 onready var break_detector = $Steely/BreakDetector
 onready var platform_detector = $Steely/PlatformDetector
+onready var water_detector = $Steely/WaterDetector
 onready var body = $Steely
 onready var sound = $Steely/AudioStreamPlayer
 onready var sprite = $Steely/Sprite
@@ -23,6 +24,7 @@ onready var visiblity_notifier = $Steely/VisibilityNotifier2D
 var velocity := Vector2(0, 0)
 var prev_pos := Vector2(0, 0)
 var gravity : float
+var gravity_scale : float
 var should_hit := false
 
 var fade_time = 0.0
@@ -85,6 +87,13 @@ func create_coin(): #creates a coin
 func _physics_process(delta):
 	time_alive += delta
 	if !broken:
+		if water_detector.get_overlapping_areas().size() > 0:
+			if gravity_scale == 1:
+				velocity.y /= 4
+			gravity_scale = 0.3
+		else:
+			gravity_scale = 1
+		
 		if fade_time != 0:
 			alpha = lerp(alpha, 1.0, delta * 3.333)
 			scale = scale.linear_interpolate(actual_scale, delta * 3.333)
@@ -124,7 +133,7 @@ func _physics_process(delta):
 	
 		gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
 		#body.apply_central_impulse(Vector2(0, gravity))
-		velocity.y += gravity
+		velocity.y += gravity * gravity_scale
 	
 		var check = grounded_check
 		if !grounded_check.is_colliding():

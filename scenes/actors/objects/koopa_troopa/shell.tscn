@@ -27,14 +27,14 @@ collision_mask = 21
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "spinning"
-frame = 2
+frame = 6
 playing = true
 
 [node name="Color" type="AnimatedSprite" parent="Sprite"]
 modulate = Color( 0, 1, 0, 1 )
 frames = ExtResource( 3 )
 animation = "spinning"
-frame = 2
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -77,6 +77,15 @@ collision_mask = 10
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea"]
 position = Vector2( 0, 3 )
 shape = SubResource( 5 )
+
+[node name="WaterDetector" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterDetector"]
+position = Vector2( 0.5, 7 )
+shape = SubResource( 3 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
