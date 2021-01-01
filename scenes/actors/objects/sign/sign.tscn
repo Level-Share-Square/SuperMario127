@@ -57,6 +57,7 @@ margin_left = -46.875
 margin_top = -19.375
 margin_right = 178.125
 margin_bottom = 46.25
+mouse_filter = 2
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -68,6 +69,7 @@ margin_top = -14.375
 margin_right = 390.0
 margin_bottom = 98.375
 rect_scale = Vector2( 0.5, 0.5 )
+mouse_filter = 2
 custom_fonts/normal_font = SubResource( 8 )
 bbcode_enabled = true
 bbcode_text = "[center]L is real 2401, Mario Peach and Bowser, (not) By Runouw[/center]"
@@ -83,6 +85,7 @@ margin_right = 200.0
 margin_bottom = 174.875
 rect_rotation = 90.0
 rect_scale = Vector2( 0.1, 0.1 )
+mouse_filter = 2
 texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false

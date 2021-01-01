@@ -3,6 +3,7 @@ extends GameObject
 onready var area = $MessageArea
 onready var animation_player = $AnimationPlayer
 onready var pop_up = $Message
+onready var sprite = $Sprite
 var text := "This is a sign. Click on it in the editor to edit this text!"
 var character
 
@@ -17,6 +18,13 @@ func _set_property_values():
 	set_property("text", text, true)
 
 func _ready():
+	if !visible and mode != 1:
+		visible = true
+		sprite.visible = false
+	
+	if !enabled:
+		pop_up.visible = false
+	
 	normal_pos = pop_up.position
 	pop_up.position = Vector2(normal_pos.x * 0.8, normal_pos.y * 0.7)
 	pop_up.scale = Vector2(0.8, 0.8)
