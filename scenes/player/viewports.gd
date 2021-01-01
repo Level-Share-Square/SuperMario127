@@ -46,6 +46,9 @@ func remove_player():
 			child.get_parent().remove_child(child)
 			get_parent().add_child(child)
 			
+			if child is Camera2D:
+				get_parent().camera = get_parent().get_path_to(child)
+			
 		for child in viewport_container1.get_children():
 			child.get_parent().remove_child(child)
 			get_parent().add_child(child)
