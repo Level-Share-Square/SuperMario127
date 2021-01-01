@@ -79,6 +79,23 @@ func _update(delta):
 	if boost_time_left > 0:
 		boost_time_left -= delta
 		sprite.speed_scale = (boost_time_left / 0.375)
+		
+		if character.is_grounded() and character.velocity.y >= -200: 
+			character.velocity.y = -200
+			boost_time_left = 0
+			
+		if character.is_ceiling() and character.velocity.y <= 200:
+			character.velocity.y = 200
+			boost_time_left = 0
+		
+		if character.is_walled_right() and character.velocity.x >= -200:
+			character.velocity.x = -200
+			boost_time_left = 0
+		
+		if character.is_walled_left() and character.velocity.x <= 200:
+			character.velocity.x = 200
+			boost_time_left = 0
+		
 		if boost_time_left <= 0:
 			boost_time_left = 0
 			sprite.speed_scale = 0
