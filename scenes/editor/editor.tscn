@@ -809,15 +809,6 @@ position = Vector2( 0.198608, -0.468788 )
 
 [node name="PlaceableItems" type="Node" parent="."]
 
-[node name="Sign" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
-object_id = 14
-is_object = true
-object_center = Vector2( 16, 12 )
-tile_mode_offset = Vector2( 0, -4 )
-icon = ExtResource( 94 )
-preview = ExtResource( 94 )
-
 [node name="Pipe" type="Node" parent="PlaceableItems"]
 script = ExtResource( 3 )
 object_id = 23
@@ -1123,6 +1114,15 @@ is_object = true
 object_center = Vector2( 16, 16 )
 icon = ExtResource( 198 )
 preview = ExtResource( 199 )
+
+[node name="Sign" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 14
+is_object = true
+object_center = Vector2( 16, 12 )
+tile_mode_offset = Vector2( 0, -4 )
+icon = ExtResource( 94 )
+preview = ExtResource( 94 )
 
 [node name="Water" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )

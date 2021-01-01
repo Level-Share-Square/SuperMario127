@@ -3,20 +3,17 @@ tool extends RichTextEffect
 var bbcode = "matrix"
 
 func _process_custom_fx(char_fx):
-	var clear_time = char_fx.get_or("clean", 2.0)
-	var dirty_time = char_fx.get_or("dirty", 1.0)
-	var text_span = char_fx.get_or("span", 50)
-#	var clear_time = char_fx.env["clean"] if char_fx.env.has("clean") \
-#											and typeof(char_fx.env["clean"]) == TYPE_REAL \
-#											else 2.0
-#
-#	var dirty_time = char_fx.env["dirty"] if char_fx.env.has("dirty") \
-#											and typeof(char_fx.env["dirty"]) == TYPE_REAL \
-#											else 1.0
-#
-#	var text_span = char_fx.env["span"] if char_fx.env.has("span") \
-#											and typeof(char_fx.env["span"]) == TYPE_INT \
-#											else 50
+	var clear_time = char_fx.env["clean"] if char_fx.env.has("clean") \
+											and typeof(char_fx.env["clean"]) == TYPE_REAL \
+											else 2.0
+
+	var dirty_time = char_fx.env["dirty"] if char_fx.env.has("dirty") \
+											and typeof(char_fx.env["dirty"]) == TYPE_REAL \
+											else 1.0
+
+	var text_span = char_fx.env["span"] if char_fx.env.has("span") \
+											and typeof(char_fx.env["span"]) == TYPE_INT \
+											else 50
 	
 	var value = char_fx.character
 	
