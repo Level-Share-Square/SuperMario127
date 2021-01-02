@@ -523,7 +523,9 @@ func _physics_process(delta: float) -> void:
 	# Gravity
 	velocity.y += gravity * gravity_scale
 	if !swimming:
-		velocity.y = clamp(velocity.y, velocity.y, max_aerial_velocity)
+		velocity.y = clamp(velocity.y, velocity.y, max_aerial_velocity)	
+	if is_grounded():
+		velocity.y = 0 # so velocity doesn't become incredibly high when not controllable
 	
 	if is_instance_valid(state):
 		disable_movement = state.disable_movement or (nozzle != null and (nozzle.name == "Turbo" and nozzle.activated))
