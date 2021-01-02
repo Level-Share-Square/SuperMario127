@@ -14,6 +14,8 @@ onready var attack_area = $KinematicBody2D/AttackArea
 onready var grounded_check = $KinematicBody2D/RayCast2D
 onready var platform_detector = $KinematicBody2D/PlatformDetector
 onready var water_detector = $KinematicBody2D/WaterDetector
+
+onready var visibility_enabler = $VisibilityEnabler2D
 onready var raycasts = [grounded_check]
 var dead = false
 var character
@@ -156,6 +158,8 @@ func _physics_process(delta):
 			damage_timer = 0
 	
 	if mode != 1 and enabled and !dead and loaded:
+		visibility_enabler.global_position = kinematic_body.global_position
+		
 		if water_detector.get_overlapping_areas().size() > 0:
 			gravity_scale = 0.3
 		else:

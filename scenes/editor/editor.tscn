@@ -1,4 +1,4 @@
-[gd_scene load_steps=264 format=2]
+[gd_scene load_steps=266 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -238,6 +238,8 @@
 [ext_resource path="res://scenes/actors/objects/water/preview.png" type="Texture" id=236]
 [ext_resource path="res://scenes/actors/objects/rock/rock.png" type="Texture" id=237]
 [ext_resource path="res://scenes/actors/objects/rock/icon.png" type="Texture" id=238]
+[ext_resource path="res://scenes/actors/objects/cheep_cheep/preview.png" type="Texture" id=239]
+[ext_resource path="res://scenes/actors/objects/cheep_cheep/icon.png" type="Texture" id=240]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1199,6 +1201,15 @@ object_center = Vector2( 8, 8 )
 tile_mode_step = 16
 icon = ExtResource( 129 )
 preview = ExtResource( 128 )
+
+[node name="CheepCheep" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 3 )
+object_id = 74
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+icon = ExtResource( 240 )
+preview = ExtResource( 239 )
 
 [node name="Goonie" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 3 )

@@ -16,6 +16,8 @@ onready var hit_sound : AudioStreamPlayer = $Goomba/Hit
 onready var anim_player : AnimationPlayer = $Goomba/AnimationPlayer
 onready var bottom_pos : Node2D = $Goomba/BottomPos
 onready var water_detector : Node2D = $Goomba/WaterDetector
+
+onready var visibility_enabler : Node2D = $VisibilityEnabler2D
 onready var raycasts := [wall_check, wall_vacant_check, pit_check]
 var dead := false
 
@@ -158,6 +160,7 @@ func _physics_process(delta : float) -> void:
 			raycast.set_collision_mask_bit(4, platform_collision_enabled)
 		
 		if is_instance_valid(kinematic_body):
+			visibility_enabler.global_position = kinematic_body.global_position
 			if !hit:
 				physics_process_normal(delta, is_in_platform)
 			else:

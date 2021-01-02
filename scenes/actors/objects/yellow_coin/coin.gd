@@ -2,7 +2,9 @@ extends GameObject
 
 onready var animated_sprite = $AnimatedSprite
 onready var area = $Area2D
+onready var water_detector = $WaterDetector
 onready var shape = $Area2D/CollisionShape2D
+onready var water_shape = $WaterDetector/CollisionShape2D
 onready var visibility_enabler = $VisibilityEnabler2D
 
 export var coins : int = 1
@@ -11,6 +13,7 @@ var collected := false
 var physics := false
 var blink := false
 var gravity : float
+var gravity_scale := 1.0
 var velocity : Vector2
 
 export var anim_fps = 12
@@ -59,6 +62,8 @@ func _process(delta):
 		if new_frame != previous_frame:
 			animated_sprite.frame = new_frame
 			previous_frame = new_frame
+	if physics:
+		water_shape.disabled = false
 	
 	# Toggle the collection shape (perf)
 	if mode != 1:
@@ -98,7 +103,13 @@ func _physics_process(delta):
 		return
 	
 	if physics:
-		velocity.y += gravity * delta * 120
+		if water_detector.get_overlapping_areas().size() > 0:
+			gravity_scale = 0
+			velocity = velocity.move_toward(Vector2.ZERO, delta * 120)
+		else:
+			gravity_scale = 1
+		
+		velocity.y += gravity * delta * 120 * gravity_scale
 		position += velocity * delta
 		
 		var up = velocity.y < 0

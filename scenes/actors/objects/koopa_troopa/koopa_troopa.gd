@@ -12,6 +12,8 @@ onready var koopa_sound = $Koopa/AudioStreamPlayer
 onready var water_detector = $Koopa/WaterDetector
 onready var visibility_notifier = $Koopa/VisibilityNotifier2D
 
+onready var visibility_enabler = $VisibilityEnabler2D
+
 onready var body = $Koopa
 func body_exists(): # Might as well be body.exists()
 	return is_instance_valid(body) and !body.is_queued_for_deletion()
@@ -190,14 +192,17 @@ func _physics_process(delta):
 		if !hit:
 			# Run the appropriate physics process function
 			if is_instance_valid(shell):
+				visibility_enabler.global_position = shell.global_position
 				physics_process_shell(delta, level_bounds)
 			elif body_exists():
+				visibility_enabler.global_position = body.global_position
 				physics_process_koopa(delta, level_bounds)
 		elif !is_instance_valid(shell):
 			# This shouldn't happen, but just in case
 			hit = false
 		else:
 			# The shell is in the "hit" state where it falls off the screen
+			visibility_enabler.global_position = shell.global_position
 			shell_sprite.rotation_degrees += 2
 			velocity.y += gravity
 			shell.position += velocity * delta
