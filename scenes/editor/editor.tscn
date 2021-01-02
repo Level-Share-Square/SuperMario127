@@ -1,4 +1,4 @@
-[gd_scene load_steps=262 format=2]
+[gd_scene load_steps=264 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -236,6 +236,8 @@
 [ext_resource path="res://scenes/actors/objects/butterfly/icon.png" type="Texture" id=234]
 [ext_resource path="res://scenes/actors/objects/water/icon.png" type="Texture" id=235]
 [ext_resource path="res://scenes/actors/objects/water/preview.png" type="Texture" id=236]
+[ext_resource path="res://scenes/actors/objects/rock/rock.png" type="Texture" id=237]
+[ext_resource path="res://scenes/actors/objects/rock/icon.png" type="Texture" id=238]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2007,6 +2009,16 @@ tile_mode_offset = Vector2( 32, -32 )
 tile_mode_step = 64
 icon = ExtResource( 75 )
 preview = ExtResource( 76 )
+
+[node name="Rock" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 3 )
+object_id = 73
+is_object = true
+object_center = Vector2( 64, 0 )
+tile_mode_offset = Vector2( 32, -32 )
+tile_mode_step = 64
+icon = ExtResource( 238 )
+preview = ExtResource( 237 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
