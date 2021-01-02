@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/message_disappear.wav-67c1ae133ad622e3d563980f0eccf9db.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/sign/message_disappear.wav"
+dest_files=[ "res://.import/message_disappear.wav-67c1ae133ad622e3d563980f0eccf9db.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

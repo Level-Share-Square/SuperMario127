@@ -62,7 +62,7 @@ func toggle_pause():
 	var is_not_transitioning : bool = !scene_transitions.transitioning
 	# if the mode switcher button is invisible, then we're not in the editor at all
 	var is_not_switching_modes : bool = !mode_switcher.get_node("ModeSwitcherButton").switching_disabled or mode_switcher.get_node("ModeSwitcherButton").invisible
-	if is_not_transitioning and is_not_switching_modes and !PhotoMode.enabled and paused == get_tree().paused:
+	if is_not_transitioning and is_not_switching_modes and !PhotoMode.enabled and paused == get_tree().paused and get_parent().get_node("SignText").modulate.a <= 0.005:
 		if !shine_info.visible:
 			$ControlsOptions.reset() # for resetting the Wait... state
 			$ControlsOptions/ControlBindingWindow/Contents/ScrollContainer/BindingBoxContainer.reset()

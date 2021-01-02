@@ -1,14 +1,36 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/actors/objects/sign/sign.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/sign/exclamation_mark.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/sign/message_disappear.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/actors/objects/sign/message_appear.wav" type="AudioStream" id=7]
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 80, 60 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 25, 20 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "bobbin"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Message/ExclamationMark:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 53, 23 ), Vector2( 53, 30 ), Vector2( 53, 23 ) ]
+}
+
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.133333, 0.145098, 0.196078, 0.835294 )
 border_width_left = 2
 border_width_top = 2
@@ -24,7 +46,7 @@ expand_margin_right = 1.0
 expand_margin_top = 1.0
 expand_margin_bottom = 1.0
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=5]
 size = 25
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 3 )
@@ -38,14 +60,25 @@ z_index = -9
 texture = ExtResource( 2 )
 
 [node name="MessageArea" type="Area2D" parent="."]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MessageArea"]
 position = Vector2( 0, -35 )
-shape = SubResource( 7 )
+shape = SubResource( 1 )
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+position = Vector2( 0, 5 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/bobbin = SubResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
 
 [node name="Message" type="Node2D" parent="."]
 position = Vector2( -65.625, -90 )
@@ -58,7 +91,7 @@ margin_top = -19.375
 margin_right = 178.125
 margin_bottom = 46.25
 mouse_filter = 2
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -70,10 +103,11 @@ margin_right = 390.0
 margin_bottom = 98.375
 rect_scale = Vector2( 0.5, 0.5 )
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 8 )
+custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
 bbcode_text = "[center]L is real 2401, Mario Peach and Bowser, (not) By Runouw[/center]"
 text = "L is real 2401, Mario Peach and Bowser, (not) By Runouw"
+scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -90,3 +124,24 @@ texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ExclamationMark" type="TextureRect" parent="Message"]
+visible = false
+margin_left = 53.0
+margin_top = 29.8337
+margin_right = 203.0
+margin_bottom = 179.834
+rect_scale = Vector2( 0.2, 0.2 )
+mouse_filter = 2
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MessageAppear" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -10.0
+
+[node name="MessageDisappear" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -10.0

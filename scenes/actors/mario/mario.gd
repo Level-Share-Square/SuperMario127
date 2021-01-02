@@ -547,7 +547,7 @@ func _physics_process(delta: float) -> void:
 			move_direction = 1
 	
 	# Horizontal physics
-	if move_direction != 0:
+	if move_direction != 0 and controllable:
 		if is_grounded():
 			# Accelerate/decelerate
 			if velocity.x * move_direction < 0:
@@ -860,7 +860,7 @@ func get_input(input_id : int, is_just_pressed : bool) -> bool:
 
 func update_inputs() -> void:
 	if controlled_locally:
-		if controllable and !FocusCheck.is_ui_focused:
+		if !FocusCheck.is_ui_focused:
 			var control_id := player_id
 			for input in inputs:
 				input[0] = Input.is_action_pressed(input[2] + str(control_id))
