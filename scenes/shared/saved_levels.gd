@@ -17,6 +17,7 @@ var selected_level : int = NO_LEVEL
 # Resource paths to load level codes to create template_levels array from.
 var template_level_codes : Array = [ 
 	"res://level/template_levels/tutorial_hills.tres",  
+	"res://level/template_levels/waterfloat_galaxy.tres",
 	"res://level/template_levels/prism_star_galaxy.tres",
 	"res://level/template_levels/ghost_pepper_challenge.tres",
 	"res://level/template_levels/snowside_resort.tres",
