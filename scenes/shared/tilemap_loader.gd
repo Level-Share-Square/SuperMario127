@@ -33,6 +33,8 @@ func _ready():
 			tileset.right_slope_tile_id
 		]
 		
+		if EditorSavedSettings.tileset_palettes != []:
+			tileset_palettes = EditorSavedSettings.tileset_palettes
 		var palette_ids = []
 		for palette in tileset.palettes:
 			var tile_variation_ids = []
@@ -59,7 +61,10 @@ func _ready():
 				tile_variation_ids.append(new_tile_id)
 			palette_ids.append(tile_variation_ids)
 		tileset_palettes.append(palette_ids)
-	middle_tilemap_node.tile_set._init()
+	if EditorSavedSettings.tileset_palettes == []:
+		print("A")
+		middle_tilemap_node.tile_set._init()
+		EditorSavedSettings.tileset_palettes = tileset_palettes
 	
 func get_tile(tileset_id, tile_id, palette_id = 0):
 	if palette_id == 0:

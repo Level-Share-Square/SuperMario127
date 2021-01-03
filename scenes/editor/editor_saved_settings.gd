@@ -7,6 +7,8 @@ var layer := 1
 var layers_transparent := false
 var show_grid := true
 
+var tileset_palettes = []
+
 var layout_ids = [
 ]
 
