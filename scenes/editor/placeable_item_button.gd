@@ -6,6 +6,7 @@ onready var sound = $Sound
 onready var click_sound = $ClickSound
 onready var grid = $Grid
 onready var h_box_container = $HBoxContainer
+onready var h_box_container_2 = $HBoxContainer2
 var normal_texture : StreamTexture
 var margin := 0
 var base_margin := 0
@@ -80,20 +81,36 @@ func update_selection():
 	for child in h_box_container.get_children():
 		child.queue_free() # releasing children from prison
 		
+	for child in h_box_container_2.get_children():
+		child.queue_free() # releasing children from prison: the sequel
+		
 	for index in range(item.items_in_sequence):
 		var box = ColorRect.new()
 		box.rect_min_size = Vector2(8, 8)
 		box.rect_size = Vector2(8, 8)
 		box.color = Color(0.75, 0.75, 0.75) if item.index_in_sequence != index else Color(0, 0.75, 0.75)
 		h_box_container.add_child(box)
+	
+	for index in range(item.palette_icons.size()):
+		var box = ColorRect.new()
+		box.rect_min_size = Vector2(8, 8)
+		box.rect_size = Vector2(8, 8)
+		box.color = Color(0.75, 0.75, 0.75) if item.palette_index != index else Color(0, 0.75, 0.75)
+		h_box_container_2.add_child(box)
 
 
 func button_down():
 	var editor = get_tree().get_current_scene()
 	if item != null:
 		if editor.selected_box == self and !item.change_to.empty():
-			item = placeable_items_node.find_node(item.change_to)
-			item_changed()
+			if Input.is_action_just_pressed("change_palette"):
+				item.update_palette(item.palette_index + 1)
+				item_changed()
+			else:
+				var old_palette_index = item.palette_index
+				item = placeable_items_node.find_node(item.change_to)
+				item.update_palette(old_palette_index)
+				item_changed()
 		
 		click_sound.play()
 		tween.interpolate_property(icon, "position",

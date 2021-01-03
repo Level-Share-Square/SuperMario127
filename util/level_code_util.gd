@@ -19,13 +19,15 @@ static func is_valid(value : String):
 		else:
 			return false
 
-const empty_tile := [0,0]
+const empty_tile := [0,0,0]
 static func encode(tiles, settings):
 	#print(settings.bounds)
 	var new_data = []
 	var last_index = -1
+	var last_palette = 0
 	var count = 1
 	var append_string = ""
+	var prepend_string = ""
 	
 	for index in range(settings.bounds.size.x * settings.bounds.size.y):
 		var encoded_tile = tiles[index]
@@ -34,15 +36,18 @@ static func encode(tiles, settings):
 
 		var appended_tile = encoded_tile[0] * 10 + encoded_tile[1]
 		
-		if appended_tile != last_index:
+		if appended_tile != last_index or encoded_tile[2] != last_palette:
 			if last_index != -1:
+				prepend_string = "" if last_palette == 0 else str(last_palette) + ":"
 				append_string = "" if count == 1 else ("*" + str(count))
-				new_data.append(str(last_index).pad_zeros(3) + append_string)
+				new_data.append(prepend_string + str(last_index).pad_zeros(3) + append_string)
 			count = 1
 			last_index = appended_tile
+			last_palette = encoded_tile[2]
 		else:
 			count += 1
 
+	prepend_string = ""
 	append_string = "" if count == 1 else ("*" + str(count))
 	new_data.append(str(last_index).pad_zeros(3) + append_string)
 	#print(new_data)

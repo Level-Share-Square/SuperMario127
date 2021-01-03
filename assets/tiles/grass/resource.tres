@@ -1,7 +1,10 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=6 format=2]
 
 [ext_resource path="res://level/Tileset.gd" type="Script" id=1]
-[ext_resource path="res://assets/tiles/grass/grass.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/grass/grass_2.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/grass/grass_3.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/grass/grass_4.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/grass/grass_1.png" type="Texture" id=5]
 
 [resource]
 script = ExtResource( 1 )
@@ -9,4 +12,4 @@ block_tile_id = 2
 slab_tile_id = 8
 left_slope_tile_id = 5
 right_slope_tile_id = 4
-placing_texture = ExtResource( 2 )
+palettes = [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ]

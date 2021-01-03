@@ -14,6 +14,7 @@ var level_data : LevelData
 var level_area : LevelArea
 
 var tileset_cache := []
+var tileset_palettes := []
 
 var noise := OpenSimplexNoise.new()
 
@@ -22,17 +23,58 @@ func _ready():
 	for tileset_id in level_tilesets.ids:
 		var tileset : LevelTileset = load("res://assets/tiles/" + tileset_id + "/resource.tres")
 		tileset_cache.append(tileset)
+		
+		var tileset_resource = middle_tilemap_node.tile_set
+		
+		var tile_variations = [
+			tileset.block_tile_id,
+			tileset.slab_tile_id,
+			tileset.left_slope_tile_id,
+			tileset.right_slope_tile_id
+		]
+		
+		var palette_ids = []
+		for palette in tileset.palettes:
+			var tile_variation_ids = []
+			for base_tile_id in tile_variations:
+				var new_tile_id = tileset_resource.get_last_unused_tile_id()
+				tileset_resource.create_tile(new_tile_id)
+				
+				tileset_resource.autotile_set_bitmask_mode(new_tile_id, tileset_resource.autotile_get_bitmask_mode(base_tile_id))
+				tileset_resource.autotile_set_size(new_tile_id, tileset_resource.autotile_get_size(base_tile_id))
+				tileset_resource.tile_set_tile_mode(new_tile_id, tileset_resource.tile_get_tile_mode(base_tile_id))
+				
+				var region =  tileset_resource.tile_get_region(base_tile_id)
+				for coord_x in range(region.size.x):
+					for coord_y in range(region.size.y):
+						var coord = Vector2(coord_x, coord_y)
+						tileset_resource.autotile_set_bitmask(new_tile_id, coord, tileset_resource.autotile_get_bitmask(base_tile_id, coord))
+						
+				
+				tileset_resource.tile_set_region(new_tile_id, region)
+				tileset_resource.tile_set_texture(new_tile_id, palette)
+				tileset_resource.tile_set_texture_offset(new_tile_id, tileset_resource.tile_get_texture_offset(base_tile_id))
+				tileset_resource.tile_set_shapes(new_tile_id, tileset_resource.tile_get_shapes(base_tile_id))
+				
+				tile_variation_ids.append(new_tile_id)
+			palette_ids.append(tile_variation_ids)
+		tileset_palettes.append(palette_ids)
+	middle_tilemap_node.tile_set._init()
 	
-func get_tile(tileset_id, tile_id):
-	var tileset = tileset_cache[tileset_id]
-	if tile_id == 0:
-		return tileset.block_tile_id
-	elif tile_id == 1:
-		return tileset.slab_tile_id
-	elif tile_id == 2:
-		return tileset.left_slope_tile_id
+func get_tile(tileset_id, tile_id, palette_id = 0):
+	if palette_id == 0:
+		var tileset = tileset_cache[tileset_id]
+		if tile_id == 0:
+			return tileset.block_tile_id
+		elif tile_id == 1:
+			return tileset.slab_tile_id
+		elif tile_id == 2:
+			return tileset.left_slope_tile_id
+		else:
+			return tileset.right_slope_tile_id
 	else:
-		return tileset.right_slope_tile_id
+		var tileset = tileset_palettes[tileset_id]
+		return tileset[palette_id - 1][tile_id]
 
 # func place_edges(pos, placing_tile, bounds, tilemap_node):
 # 	var top :    bool = pos.x == bounds.position.x
@@ -72,7 +114,7 @@ func get_tile_in_data(x: int, y: int, layer: int):
 		return emptyTile
 
 var numChunks : int = 0
-func set_tile(x: int, y: int, layer: int, tileset_id: int, tile_id: int):
+func set_tile(x: int, y: int, layer: int, tileset_id: int, tile_id: int, palette_id: int = 0):
 	var chunk_key = get_chunk_key(x, y, layer)
 	
 	var chunk: Array
@@ -83,12 +125,12 @@ func set_tile(x: int, y: int, layer: int, tileset_id: int, tile_id: int):
 		chunk.resize(16*16)
 		level_area.tile_chunks[chunk_key] = chunk
 	
-	chunk[x%16+(y%16)*16] = [tileset_id, tile_id]
+	chunk[x%16+(y%16)*16] = [tileset_id, tile_id, palette_id]
 	
-	set_tile_visual(x, y, layer, tileset_id, tile_id)
+	set_tile_visual(x, y, layer, tileset_id, tile_id, true, palette_id)
 
-func set_tile_visual(x: int, y: int, layer: int, tileset_id: int, tile_id: int, update_bitmask: bool = true):
-	var cache_tile = get_tile(tileset_id, tile_id)
+func set_tile_visual(x: int, y: int, layer: int, tileset_id: int, tile_id: int, update_bitmask: bool = true, palette_id : int = 0):
+	var cache_tile = get_tile(tileset_id, tile_id, palette_id)
 	var layer_tilemap_node = back_tilemap_node
 	if layer == 3:
 		layer_tilemap_node = very_back_tilemap_node	
@@ -145,7 +187,7 @@ func update_tilemaps():
 			for y in range(16):
 				var tile = chunk[x + y*16] #get tile from chunk
 				if tile and bounds.has_point(Vector2(chunk_x*16 + x + 0.5, chunk_y*16 + y + 0.5)):
-					layer_tilemap_node.set_cell(chunk_x*16 + x, chunk_y*16 + y, get_tile(tile[0],tile[1]))
+					layer_tilemap_node.set_cell(chunk_x*16 + x, chunk_y*16 + y, get_tile(tile[0],tile[1],tile[2]))
 	
 	very_back_tilemap_node.tile_set = tile_set
 	back_tilemap_node.tile_set = tile_set

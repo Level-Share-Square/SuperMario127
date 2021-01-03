@@ -1,158 +1,18 @@
 tool
 extends TileSet
 
-const GRASS_BLOCK = 2
-const GRASS_SLOPE_RIGHT = 4
-const GRASS_SLOPE_LEFT = 5
-const GRASS_SLAB = 8
-
-const BRICK = 3
-const BRICK_SLOPE_RIGHT = 6
-const BRICK_SLOPE_LEFT = 7
-
-const GREEN_BRICK = 9
-const GREEN_BRICK_SLOPE_RIGHT = 10
-const GREEN_BRICK_SLOPE_LEFT = 11
-
-const RED_BRICK = 12
-const RED_BRICK_SLOPE_RIGHT = 13
-const RED_BRICK_SLOPE_LEFT = 14
-
-const YELLOW_BRICK = 15
-const YELLOW_BRICK_SLOPE_RIGHT = 16
-const YELLOW_BRICK_SLOPE_LEFT = 17
-
-const BOO_BLOCK = 18
-
-const SNOW = 19
-const SNOW_SLAB = 22
-const SNOW_SLOPE_RIGHT = 20
-const SNOW_SLOPE_LEFT = 21
-
-const CAVE = 23
-const CAVE_SLAB = 24
-
-const OUT_OF_BOUNDS = 26
-const LEVEL_MARGIN = 27
-const GLASS = 28
-
-const WOOD = 29
-
-const RED_GEM_BLOCK = 31
-const YELLOW_GEM_BLOCK = 32
-const GREEN_GEM_BLOCK = 33
-const BLUE_GEM_BLOCK = 34
-
-const MARBLE_BRICK_BLOCK = 35
-const MARBLE_BRICK_SLOPE_RIGHT = 41
-const MARBLE_BRICK_SLOPE_LEFT = 42
-
-const STONE_BRICK_BLOCK = 36
-const STONE_BRICK_SLOPE_RIGHT = 39
-const STONE_BRICK_SLOPE_LEFT = 40
-
-const TOY_BLOCK = 37
-const TOY_BLOCK_SLOPE_RIGHT = 43
-const TOY_BLOCK_SLOPE_LEFT = 44
-
-const NEGATIVE_ROCK_BLOCK = 38
-const NEGATIVE_ROCK_SLOPE_RIGHT = 54
-const NEGATIVE_ROCK_SLOPE_LEFT = 53
-const NEGATIVE_ROCK_SLAB = 45
-
-const BLACK_GRANITE = 46
-
-const COBBLESTONE = 47
-
-const TILED_FLOOR = 48
-const CARPET = 50
-const CASTLE_WOOD = 51
-const CASTLE_WALL = 52
-
-const PITCH_BLACK = 49
-
-var ids = [
-	GRASS_BLOCK,
-	GRASS_SLOPE_RIGHT,
-	GRASS_SLOPE_LEFT,
-	GRASS_SLAB,
-	
-	BRICK,
-	BRICK_SLOPE_RIGHT,
-	BRICK_SLOPE_LEFT,
-	
-	GREEN_BRICK,
-	GREEN_BRICK_SLOPE_RIGHT,
-	GREEN_BRICK_SLOPE_LEFT,
-	
-	RED_BRICK,
-	RED_BRICK_SLOPE_RIGHT,
-	RED_BRICK_SLOPE_LEFT,
-	
-	YELLOW_BRICK,
-	YELLOW_BRICK_SLOPE_RIGHT,
-	YELLOW_BRICK_SLOPE_LEFT,
-	
-	BOO_BLOCK,
-	
-	SNOW,
-	SNOW_SLAB,
-	SNOW_SLOPE_RIGHT,
-	SNOW_SLOPE_LEFT,
-	
-	CAVE,
-	CAVE_SLAB,
-	
-	OUT_OF_BOUNDS,
-	LEVEL_MARGIN,
-	GLASS,
-	
-	WOOD,
-	
-	RED_GEM_BLOCK,
-	YELLOW_GEM_BLOCK,
-	GREEN_GEM_BLOCK,
-	BLUE_GEM_BLOCK,
-	
-	MARBLE_BRICK_BLOCK,
-	MARBLE_BRICK_SLOPE_LEFT,
-	MARBLE_BRICK_SLOPE_RIGHT,
-	
-	STONE_BRICK_BLOCK,
-	STONE_BRICK_SLOPE_LEFT,
-	STONE_BRICK_SLOPE_RIGHT,
-	
-	TOY_BLOCK,
-	TOY_BLOCK_SLOPE_LEFT,
-	TOY_BLOCK_SLOPE_RIGHT,
-	
-	NEGATIVE_ROCK_BLOCK,
-	NEGATIVE_ROCK_SLOPE_RIGHT,
-	NEGATIVE_ROCK_SLOPE_LEFT,
-	NEGATIVE_ROCK_SLAB,
-	
-	BLACK_GRANITE,
-	
-	COBBLESTONE,
-	
-	TILED_FLOOR,
-	CARPET,
-	CASTLE_WOOD,
-	CASTLE_WALL,
-	
-	PITCH_BLACK
-]
-
 var binds = {
 }
 
 func _is_tile_bound(id, nid):
-	return nid in binds[id]
+	if id > binds.size(): return
+	return nid in binds[id] 
 
 func _init():
-	for id in ids:
+	var amount_of_ids = get_last_unused_tile_id()
+	for id in range(amount_of_ids):
 		var id_array = []
-		for id2 in ids:
+		for id2 in range(amount_of_ids):
 			if id2 != id:
 				id_array.append(id2)
 		binds[id] = id_array

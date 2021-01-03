@@ -111,6 +111,7 @@ func get_settings(result) -> LevelAreaSettings:
 func get_chunks(resultLayers: Array, size: Vector2) -> Dictionary:
 	var level_width := int(size.x)
 	var chunks: Dictionary = {}
+	var palette_string = "0"
 	var tileset_id_string
 	var tile_id_string
 	var current_chunk = null
@@ -119,6 +120,10 @@ func get_chunks(resultLayers: Array, size: Vector2) -> Dictionary:
 		var tile_index: int = 0
 		for result in resultLayer:
 			#decode tile
+			if result[1] == ":":
+				palette_string = result[0]
+				result.erase(0, 2)
+			
 			tileset_id_string = "0x" + result[0] + result[1]
 			tile_id_string = "0x" + result[2]
 			var tile_repeat_string = ""
@@ -128,6 +133,7 @@ func get_chunks(resultLayers: Array, size: Vector2) -> Dictionary:
 			else:
 				tile_repeat_string += "1"
 			var tileset_id = int(tileset_id_string)
+			var palette_id = int(palette_string)
 			var tile_repeat = int(tile_repeat_string)
 
 			if(tileset_id==0): #air can we skipped since it won't get written to the chunks
@@ -136,7 +142,8 @@ func get_chunks(resultLayers: Array, size: Vector2) -> Dictionary:
 			
 			#finish decoding
 			var tile_id = int(tile_id_string)
-			var tile = [tileset_id, tile_id]
+			var tile = [tileset_id, tile_id, palette_id]
+			palette_string = "0"
 
 
 			var x: int = tile_index%level_width

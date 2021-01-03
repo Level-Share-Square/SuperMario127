@@ -333,7 +333,7 @@ func _process(delta : float) -> void:
 						if !(last_tile[0] == item.tileset_id and last_tile[1] == item.tile_id):
 							tiles_stack.append([mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, last_tile, [item.tileset_id, item.tile_id]])
 						
-						shared.set_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, item.tileset_id, item.tile_id)
+						shared.set_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, item.tileset_id, item.tile_id, item.palette_index)
 				elif !is_instance_valid(hovered_object): # Place object
 					var object_pos : Vector2
 					if placement_mode == "Tile":
