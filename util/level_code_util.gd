@@ -47,7 +47,6 @@ static func encode(tiles, settings):
 		else:
 			count += 1
 
-	prepend_string = ""
 	append_string = "" if count == 1 else ("*" + str(count))
 	new_data.append(str(last_index).pad_zeros(3) + append_string)
 	#print(new_data)

@@ -120,9 +120,11 @@ func get_chunks(resultLayers: Array, size: Vector2) -> Dictionary:
 		var tile_index: int = 0
 		for result in resultLayer:
 			#decode tile
-			if result[1] == ":":
-				palette_string = result[0]
-				result.erase(0, 2)
+			
+			var result_split = result.split(":")
+			if result_split.size() > 1:
+				palette_string = result_split[0]
+				result = result_split[1]
 			
 			tileset_id_string = "0x" + result[0] + result[1]
 			tile_id_string = "0x" + result[2]

@@ -62,7 +62,6 @@ func _ready():
 			palette_ids.append(tile_variation_ids)
 		tileset_palettes.append(palette_ids)
 	if EditorSavedSettings.tileset_palettes == []:
-		print("A")
 		middle_tilemap_node.tile_set._init()
 		EditorSavedSettings.tileset_palettes = tileset_palettes
 	
