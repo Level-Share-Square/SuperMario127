@@ -35,32 +35,32 @@ func _ready():
 		
 		if EditorSavedSettings.tileset_palettes != []:
 			tileset_palettes = EditorSavedSettings.tileset_palettes
-		var palette_ids = []
-		for palette in tileset.palettes:
-			var tile_variation_ids = []
-			for base_tile_id in tile_variations:
-				var new_tile_id = tileset_resource.get_last_unused_tile_id()
-				tileset_resource.create_tile(new_tile_id)
-				
-				tileset_resource.autotile_set_bitmask_mode(new_tile_id, tileset_resource.autotile_get_bitmask_mode(base_tile_id))
-				tileset_resource.autotile_set_size(new_tile_id, tileset_resource.autotile_get_size(base_tile_id))
-				tileset_resource.tile_set_tile_mode(new_tile_id, tileset_resource.tile_get_tile_mode(base_tile_id))
-				
-				var region =  tileset_resource.tile_get_region(base_tile_id)
-				for coord_x in range(region.size.x):
-					for coord_y in range(region.size.y):
-						var coord = Vector2(coord_x, coord_y)
-						tileset_resource.autotile_set_bitmask(new_tile_id, coord, tileset_resource.autotile_get_bitmask(base_tile_id, coord))
-						
-				
-				tileset_resource.tile_set_region(new_tile_id, region)
-				tileset_resource.tile_set_texture(new_tile_id, palette)
-				tileset_resource.tile_set_texture_offset(new_tile_id, tileset_resource.tile_get_texture_offset(base_tile_id))
-				tileset_resource.tile_set_shapes(new_tile_id, tileset_resource.tile_get_shapes(base_tile_id))
-				
-				tile_variation_ids.append(new_tile_id)
-			palette_ids.append(tile_variation_ids)
-		tileset_palettes.append(palette_ids)
+		else:
+			var palette_ids = []
+			for palette in tileset.palettes:
+				var tile_variation_ids = []
+				for base_tile_id in tile_variations:
+					var new_tile_id = tileset_resource.get_last_unused_tile_id()
+					tileset_resource.create_tile(new_tile_id)
+					
+					tileset_resource.autotile_set_bitmask_mode(new_tile_id, tileset_resource.autotile_get_bitmask_mode(base_tile_id))
+					tileset_resource.autotile_set_size(new_tile_id, tileset_resource.autotile_get_size(base_tile_id))
+					tileset_resource.tile_set_tile_mode(new_tile_id, tileset_resource.tile_get_tile_mode(base_tile_id))
+					
+					var region =  tileset_resource.tile_get_region(base_tile_id)
+					for coord_x in range(region.size.x):
+						for coord_y in range(region.size.y):
+							var coord = Vector2(coord_x, coord_y)
+							tileset_resource.autotile_set_bitmask(new_tile_id, coord, tileset_resource.autotile_get_bitmask(base_tile_id, coord))
+					
+					tileset_resource.tile_set_region(new_tile_id, region)
+					tileset_resource.tile_set_texture(new_tile_id, palette)
+					tileset_resource.tile_set_texture_offset(new_tile_id, tileset_resource.tile_get_texture_offset(base_tile_id))
+					tileset_resource.tile_set_shapes(new_tile_id, tileset_resource.tile_get_shapes(base_tile_id))
+					
+					tile_variation_ids.append(new_tile_id)
+				palette_ids.append(tile_variation_ids)
+			tileset_palettes.append(palette_ids)
 	if EditorSavedSettings.tileset_palettes == []:
 		middle_tilemap_node.tile_set._init()
 		EditorSavedSettings.tileset_palettes = tileset_palettes
