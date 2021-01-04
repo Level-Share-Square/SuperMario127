@@ -1,6 +1,9 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=5 format=2]
 
 [ext_resource path="res://level/Tileset.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/negative_rock/negative_rock_2.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/negative_rock/negative_rock_1.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/negative_rock/negative_rock_3.png" type="Texture" id=4]
 
 [resource]
 script = ExtResource( 1 )
@@ -8,3 +11,4 @@ block_tile_id = 38
 slab_tile_id = 45
 left_slope_tile_id = 53
 right_slope_tile_id = 54
+palettes = [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ]

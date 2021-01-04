@@ -102,16 +102,15 @@ func update_selection():
 func button_down():
 	var editor = get_tree().get_current_scene()
 	if item != null:
-		if editor.selected_box == self and !item.change_to.empty():
-			if Input.is_action_just_pressed("change_palette"):
-				item.update_palette(item.palette_index + 1)
-				item_changed()
-			else:
-				var old_palette_index = item.palette_index
-				item = placeable_items_node.find_node(item.change_to)
-				item.update_palette(old_palette_index)
-				item_changed()
-		
+		if Input.is_action_just_pressed("change_palette"):
+			item.update_palette(item.palette_index + 1)
+			item_changed()
+		elif editor.selected_box == self and !item.change_to.empty():
+			var old_palette_index = item.palette_index
+			item = placeable_items_node.find_node(item.change_to)
+			item.update_palette(old_palette_index)
+			item_changed()
+	
 		click_sound.play()
 		tween.interpolate_property(icon, "position",
 			Vector2(0, 0), Vector2(0, -18), 0.075,

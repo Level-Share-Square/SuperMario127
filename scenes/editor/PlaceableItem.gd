@@ -25,6 +25,7 @@ export var placement_action : Script
 export var removal_action : Script
 
 func update_palette(new_index : int):
+	print(palette_icons.size())
 	if palette_icons.size() == 0: return
 	palette_index = wrapi(new_index, 0, palette_icons.size())
 	icon = palette_icons[palette_index]
