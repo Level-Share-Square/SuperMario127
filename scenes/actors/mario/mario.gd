@@ -687,8 +687,10 @@ func _physics_process(delta: float) -> void:
 	
 	# Handle nozzle
 	if is_instance_valid(nozzle):
-		if nozzle.activated:
+		if nozzle.activated and nozzle.name == "TurboNozzle":
 			attacking = true
+		elif !(is_instance_valid(state) and state.attack_tier != 0):
+			attacking = false
 		fludd_sprite.visible = true
 		water_sprite.visible = false
 		if nozzle.get_name() == "HoverNozzle" and false:

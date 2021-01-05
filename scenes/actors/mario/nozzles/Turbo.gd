@@ -13,7 +13,7 @@ var attack_frames = 0
 var accel = 25
 
 func _init():
-	blacklisted_states = ["ButtSlideState", "WallSlideState", "GroundPoundStartState", "GroundPoundState", "GroundPoundEndState", "GetupState", "KnockbackState", "BonkedState", "SpinningState"]
+	blacklisted_states = ["ButtSlideState", "LavaBoostState", "WallSlideState", "GroundPoundStartState", "GroundPoundState", "GroundPoundEndState", "GetupState", "KnockbackState", "BonkedState", "SpinningState"]
 
 func _activate_check(_delta):
 	return !(character.state == character.get_state_node("SwimmingState") and character.state.boost_time_left > 0) and !(character.state == character.get_state_node("BackflipState") and character.state.disable_turning == true) and character.get_state_node("SlideState").crouch_buffer == 0

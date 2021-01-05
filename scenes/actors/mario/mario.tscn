@@ -1058,7 +1058,7 @@ disabled = true
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "lavaBoost"
-frame = 5
+frame = 11
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
@@ -1093,6 +1093,17 @@ animation = "out"
 frame = 6
 playing = true
 centered = false
+
+[node name="Particles2D" type="Particles2D" parent="Sprite"]
+show_behind_parent = true
+material = SubResource( 8 )
+emitting = false
+amount = 192
+lifetime = 0.5
+fixed_fps = 60
+local_coords = false
+process_material = SubResource( 13 )
+texture = ExtResource( 66 )
 
 [node name="Particles2DBack" type="Particles2D" parent="Sprite"]
 show_behind_parent = true
@@ -1522,14 +1533,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 120 )
-frame = 6
+frame = 14
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 1
+frame = 7
 speed_scale = 3.0
 playing = true
 
@@ -1550,7 +1561,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "lavaBoost"
-frame = 10
+frame = 4
 playing = true
 script = ExtResource( 34 )
 

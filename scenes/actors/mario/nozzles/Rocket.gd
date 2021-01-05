@@ -16,7 +16,7 @@ var deactivate_frames = 0
 var cooldown_time := 0.0
 
 func _init():
-	blacklisted_states = ["GroundPoundStartState", "GroundPoundState", "GroundPoundEndState","KnockbackState", "BonkedState"]
+	blacklisted_states = ["GroundPoundStartState", "LavaBoostState", "GroundPoundState", "GroundPoundEndState","KnockbackState", "BonkedState"]
 
 func _activate_check(_delta):
 	return !(character.state == character.get_state_node("SwimmingState") and character.state.boost_time_left > 0) and cooldown_time == 0 and !(character.state == character.get_state_node("BackflipState") and character.state.disable_turning == true) and character.get_state_node("SlideState").crouch_buffer == 0
