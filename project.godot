@@ -189,6 +189,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Knockback.gd"
 }, {
+"base": "State",
+"class": "LavaBoostState",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/states/LavaBoost.gd"
+}, {
 "base": "Reference",
 "class": "LessThanCondition",
 "language": "GDScript",
@@ -491,6 +496,7 @@ _global_script_class_icons={
 "InterpreterVar": "",
 "JumpState": "",
 "KnockbackState": "",
+"LavaBoostState": "",
 "LessThanCondition": "",
 "LessThanOrEqualToCondition": "",
 "LevelArea": "",
@@ -989,6 +995,7 @@ change_palette={
 2d_physics/layer_6="steelies"
 2d_physics/layer_7="vanish powerup"
 2d_physics/layer_8="water"
+2d_physics/layer_9="lava"
 
 [logging]
 

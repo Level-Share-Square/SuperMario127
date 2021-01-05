@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Lava2.wav-a80bdf21f3f2e44a9b2ed482e9fdf838.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_mario/Lava2.wav"
+dest_files=[ "res://.import/Lava2.wav-a80bdf21f3f2e44a9b2ed482e9fdf838.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

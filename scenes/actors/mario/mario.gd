@@ -33,6 +33,9 @@ onready var right_check : RayCast2D = $RightCheck
 onready var slope_stop_check : RayCast2D = $SlopeStopCheck
 onready var player_collision : Area2D = $PlayerCollision
 onready var water_detector : Area2D = $WaterDetector
+onready var lava_detector : Area2D = $LavaDetector
+onready var burn_particles : Particles2D = $BurnParticles
+onready var terrain_detector : Area2D = $TerrainDetector
 onready var platform_detector : Area2D = $PlatformDetector
 onready var spin_area : Area2D = $SpinArea
 onready var player_collision_shape : CollisionShape2D = $PlayerCollision/CollisionShape2D
@@ -470,7 +473,8 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 			sound_player.play_last_hit_sound()
 			kill(cause)
 		else:
-			sound_player.play_hit_sound()
+			if cause != "lava":
+				sound_player.play_hit_sound()
 
 func heal(shards : int = 1) -> void:
 	if !dead and health != 8:
@@ -647,9 +651,14 @@ func _physics_process(delta: float) -> void:
 		
 		if state.use_dive_collision != using_dive_collision:
 			call_deferred("set_dive_collision", state.use_dive_collision)
+		if state.auto_flip == true:
+			sprite.flip_h = false if facing_direction == 1 else true
+		else:
+			sprite.flip_h = false
 	else:
 		attacking = false
 		big_attack = false
+		sprite.flip_h = false
 	
 	# Set up snap
 	if is_in_platform:
@@ -813,7 +822,7 @@ func kill(cause: String) -> void:
 			yield(get_tree().create_timer(0.55), "timeout")
 			sound_player.play_death_sound()
 			yield(get_tree().create_timer(0.75), "timeout")
-		elif cause == "hit":
+		elif cause == "hit" or cause == "lava":
 			controllable = false
 			movable = false
 			cutout_in = cutout_death

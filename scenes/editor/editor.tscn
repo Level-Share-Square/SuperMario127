@@ -289,8 +289,6 @@
 [ext_resource path="res://assets/tiles/carpet/palette_icons/3.png" type="Texture" id=287]
 [ext_resource path="res://assets/tiles/carpet/palette_icons/4.png" type="Texture" id=288]
 
-
-
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
 
@@ -1181,6 +1179,16 @@ preview = ExtResource( 94 )
 [node name="Water" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 object_id = 72
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+icon = ExtResource( 235 )
+preview = ExtResource( 236 )
+
+[node name="Lava" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 75
 is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )

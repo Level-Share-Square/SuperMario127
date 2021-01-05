@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/burn.wav-d48fd9171781b20769030be828f99c47.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_misc/burn.wav"
+dest_files=[ "res://.import/burn.wav-d48fd9171781b20769030be828f99c47.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

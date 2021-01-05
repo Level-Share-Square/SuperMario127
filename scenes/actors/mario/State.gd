@@ -13,6 +13,7 @@ export var disable_friction = false
 export var override_rotation = false
 export var attack_tier = 0
 export var use_dive_collision = false
+export var auto_flip = false
 export var blacklisted_states = []
 
 func _ready():

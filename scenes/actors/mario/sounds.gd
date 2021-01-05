@@ -10,6 +10,7 @@ onready var last_hit_sounds = $LastHitSounds
 onready var death_sounds = $DeathSounds
 onready var stomped_sounds = $StompedSounds
 onready var powerup_sounds = $PowerupSounds
+onready var lava_hurt_sounds = $LavaHurtSounds
 onready var shine_sounds = $ShineSounds
 
 onready var gp_hit = $OtherSounds/GPHit
@@ -26,6 +27,7 @@ onready var splash_sound = $OtherSounds/WaterSplash
 onready var swim_sound = $OtherSounds/Swim
 onready var spin_water_sound = $OtherSounds/SpinWater
 onready var powerup_sound_voiceless = $OtherSounds/Powerup
+onready var burn_sound = $OtherSounds/Burn
 
 onready var footsteps_default = $Footsteps/Default
 
@@ -77,6 +79,15 @@ func _physics_process(_delta):
 func play_footsteps():
 	if ready:
 		footsteps_default.play()
+
+func play_lava_hurt_sound():
+	if ready:
+		yield(get_tree().create_timer(0.04), "timeout")
+		lava_hurt_sounds.play()
+
+func play_burn_sound():
+	if ready:
+		burn_sound.play()
 
 func play_jump_sound():
 	if ready:

@@ -1,0 +1,64 @@
+extends State
+
+class_name LavaBoostState
+
+export var boost_velocity = 650
+export var bounce_velocity = 140
+export var extra_velocity = 80
+var bounces_left = 0
+var burn_cooldown = 0.0
+
+func _ready():
+	priority = 5
+	auto_flip = true
+	override_rotation = true
+
+func _start_check(_delta):
+	return (character.lava_detector.get_overlapping_areas().size() > 0 and character.terrain_detector.get_overlapping_bodies().size() == 0) and !(character.powerup != null and character.powerup.id == 0)
+	
+func _start(_delta):
+	character.sprite.rotation_degrees = 0
+	character.current_jump = 0
+	character.friction = 4
+	character.velocity.y = -boost_velocity
+	bounces_left = 3
+	priority = 5
+	character.burn_particles.emitting = true
+	character.damage(3, "lava", 0)
+	burn_cooldown = 0.5
+	
+	character.sound_player.play_burn_sound()
+	if character.health > 0:
+		character.sound_player.play_lava_hurt_sound()
+
+func _update(delta):
+	var sprite = character.sprite
+	sprite.animation = "lavaBoost"
+	
+	var offset_x = (randi() % 2) - 1
+	var offset_y = (randi() % 2) - 1
+	sprite.offset = Vector2(offset_x, offset_y)
+	
+	character.burn_particles.position.x = -2.5 * character.facing_direction
+	
+	if burn_cooldown > 0:
+		burn_cooldown -= delta
+		if burn_cooldown <= 0:
+			burn_cooldown = 0
+
+	if character.is_grounded() and bounces_left > 0:
+		character.velocity.y = -(bounce_velocity + (extra_velocity * bounces_left))
+		bounces_left -= 1
+	
+	if _start_check(delta) and burn_cooldown <= 0:
+		_start(delta)
+
+func _stop(delta):
+	character.burn_particles.emitting = false
+	var sprite = character.sprite
+	sprite.offset.y = 0
+	character.friction = character.real_friction
+	character.set_state_by_name("BounceState", delta)
+
+func _stop_check(_delta):
+	return bounces_left <= 0

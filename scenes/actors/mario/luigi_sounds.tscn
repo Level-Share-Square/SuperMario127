@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -42,6 +42,9 @@
 [ext_resource path="res://scenes/actors/mario/sounds_misc/water_splash.wav" type="AudioStream" id=40]
 [ext_resource path="res://scenes/actors/mario/sounds_misc/swim.ogg" type="AudioStream" id=41]
 [ext_resource path="res://scenes/actors/mario/sounds_misc/spin_water.wav" type="AudioStream" id=42]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Lava2.wav" type="AudioStream" id=43]
+[ext_resource path="res://scenes/actors/mario/sounds_misc/burn.wav" type="AudioStream" id=44]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Lava1.wav" type="AudioStream" id=45]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 2 )
@@ -180,6 +183,20 @@ stream = ExtResource( 36 )
 volume_db = 2.0
 bus = "Voices"
 
+[node name="LavaHurtSounds" type="Node" parent="."]
+script = ExtResource( 1 )
+sound_number = 1
+
+[node name="Lava1" type="AudioStreamPlayer" parent="LavaHurtSounds"]
+stream = ExtResource( 45 )
+volume_db = -9.5
+bus = "Voices"
+
+[node name="Lava2" type="AudioStreamPlayer" parent="LavaHurtSounds"]
+stream = ExtResource( 43 )
+volume_db = -3.5
+bus = "Voices"
+
 [node name="ShineSounds" type="Node" parent="."]
 script = ExtResource( 1 )
 sound_number = 1
@@ -266,3 +283,7 @@ volume_db = -15.0
 [node name="SpinWater" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 42 )
 volume_db = 5.0
+
+[node name="Burn" type="AudioStreamPlayer" parent="OtherSounds"]
+stream = ExtResource( 44 )
+volume_db = -7.0
