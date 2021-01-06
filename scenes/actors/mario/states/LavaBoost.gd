@@ -7,6 +7,7 @@ export var bounce_velocity = 140
 export var extra_velocity = 80
 var bounces_left = 0
 var burn_cooldown = 0.0
+var burn_sound_cooldown = 0.0
 
 func _ready():
 	priority = 5
@@ -24,12 +25,17 @@ func _start(_delta):
 	bounces_left = 3
 	priority = 5
 	character.burn_particles.emitting = true
-	character.damage(3, "lava", 0)
-	burn_cooldown = 0.5
 	
-	character.sound_player.play_burn_sound()
-	if character.health > 0:
-		character.sound_player.play_lava_hurt_sound()
+	if burn_sound_cooldown <= 0:
+		character.sound_player.play_burn_sound()
+		burn_sound_cooldown = 0.15
+	
+	if burn_cooldown <= 0:
+		character.damage(3, "lava", 0)
+		if character.health > 0:
+			character.sound_player.play_lava_hurt_sound()
+		burn_cooldown = 1
+		
 
 func _update(delta):
 	var sprite = character.sprite
@@ -40,17 +46,12 @@ func _update(delta):
 	sprite.offset = Vector2(offset_x, offset_y)
 	
 	character.burn_particles.position.x = -2.5 * character.facing_direction
-	
-	if burn_cooldown > 0:
-		burn_cooldown -= delta
-		if burn_cooldown <= 0:
-			burn_cooldown = 0
 
 	if character.is_grounded() and bounces_left > 0:
 		character.velocity.y = -(bounce_velocity + (extra_velocity * bounces_left))
 		bounces_left -= 1
 	
-	if _start_check(delta) and burn_cooldown <= 0:
+	if _start_check(delta):
 		_start(delta)
 
 func _stop(delta):
@@ -62,3 +63,13 @@ func _stop(delta):
 
 func _stop_check(_delta):
 	return bounces_left <= 0
+
+func _general_update(delta):
+	if burn_sound_cooldown > 0:
+		burn_sound_cooldown -= delta
+		if burn_sound_cooldown <= 0:
+			burn_sound_cooldown = 0
+	if burn_cooldown > 0:
+		burn_cooldown -= delta
+		if burn_cooldown <= 0:
+			burn_cooldown = 0

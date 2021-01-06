@@ -2,13 +2,16 @@ extends GameObject
 
 var width := 600.0
 var height := 300.0
-var color := Color(0.513726, 0, 0)
+var color := Color(1, 0, 0)
 
 var last_size : Vector2
 var last_color : Color
 
 onready var area_collision = $Area2D/CollisionShape2D
+onready var body_collision = $StaticBody2D/CollisionShape2D
 onready var sprite = $ColorRect
+onready var waves = $TextureRect
+onready var color_sprite = $TextureRect/Recolorable
 
 func _set_properties():
 	savable_properties = ["width", "height", "color"]
@@ -24,12 +27,35 @@ func _ready():
 	change_size()
 	last_size = Vector2(width, height)
 
+	area_collision.disabled = !enabled
+	body_collision.disabled = !enabled
+
 func change_size():
 	preview_position = Vector2(-width / 2, height / 2)
 	sprite.rect_size = Vector2(width, height)
-	sprite.color = color
+	waves.rect_size.x = sprite.rect_size.x
+	color_sprite.rect_size.x = sprite.rect_size.x
 	area_collision.position = Vector2(width / 2, height / 2)
 	area_collision.shape.extents = area_collision.position
+	
+	body_collision.position = area_collision.position
+	body_collision.shape = area_collision.shape
+	
+	var rounded_color = Color(stepify(color.r, 0.05), stepify(color.g, 0.05), stepify(color.b, 0.05))
+	if rounded_color == Color(0.5, 0, 0) or rounded_color == Color(1, 0, 0):
+		color_sprite.visible = false
+		sprite.color = Color(0.431373, 0, 0.14902)
+		sprite.modulate = Color(1, 1, 1)
+		waves.self_modulate = Color(1, 1, 1)
+	else:
+		color_sprite.visible = true
+		color_sprite.modulate = color
+		sprite.color = Color(0.282353, 0.282353, 0.282353)
+		sprite.modulate = color
+		var desat_color = color
+		desat_color.s /= 2
+		waves.self_modulate = desat_color
+	#sprite.color = color
 
 func _process(delta):
 	if Vector2(width, height) != last_size:

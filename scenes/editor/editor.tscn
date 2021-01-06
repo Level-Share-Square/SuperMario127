@@ -1,4 +1,4 @@
-[gd_scene load_steps=314 format=2]
+[gd_scene load_steps=316 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -288,6 +288,8 @@
 [ext_resource path="res://assets/tiles/carpet/palette_icons/1.png" type="Texture" id=286]
 [ext_resource path="res://assets/tiles/carpet/palette_icons/3.png" type="Texture" id=287]
 [ext_resource path="res://assets/tiles/carpet/palette_icons/4.png" type="Texture" id=288]
+[ext_resource path="res://scenes/actors/objects/lava/icon.png" type="Texture" id=289]
+[ext_resource path="res://scenes/actors/objects/lava/lava.png" type="Texture" id=290]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1193,8 +1195,8 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
-icon = ExtResource( 235 )
-preview = ExtResource( 236 )
+icon = ExtResource( 289 )
+preview = ExtResource( 290 )
 
 [node name="EnemiesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )

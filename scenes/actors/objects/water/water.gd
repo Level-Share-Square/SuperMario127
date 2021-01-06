@@ -25,6 +25,8 @@ func _ready():
 	area_collision.shape = area_collision.shape.duplicate()
 	change_size()
 	last_size = Vector2(width, height)
+	
+	area_collision.disabled = !enabled
 
 func change_size():
 	preview_position = Vector2(-width / 2, -height / 2)
