@@ -1,4 +1,4 @@
-[gd_scene load_steps=316 format=2]
+[gd_scene load_steps=328 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -290,6 +290,18 @@
 [ext_resource path="res://assets/tiles/carpet/palette_icons/4.png" type="Texture" id=288]
 [ext_resource path="res://scenes/actors/objects/lava/icon.png" type="Texture" id=289]
 [ext_resource path="res://scenes/actors/objects/lava/lava.png" type="Texture" id=290]
+[ext_resource path="res://assets/tiles/roof/icon.png" type="Texture" id=291]
+[ext_resource path="res://assets/tiles/roof/left_slope_icon.png" type="Texture" id=292]
+[ext_resource path="res://assets/tiles/roof/right_slope_icon.png" type="Texture" id=293]
+[ext_resource path="res://assets/tiles/roof/palette_icons/1_slopeR.png" type="Texture" id=294]
+[ext_resource path="res://assets/tiles/roof/palette_icons/0_slopeL.png" type="Texture" id=295]
+[ext_resource path="res://assets/tiles/roof/palette_icons/2_slopeL.png" type="Texture" id=296]
+[ext_resource path="res://assets/tiles/roof/palette_icons/0_slopeR.png" type="Texture" id=297]
+[ext_resource path="res://assets/tiles/roof/palette_icons/0_block.png" type="Texture" id=298]
+[ext_resource path="res://assets/tiles/roof/palette_icons/1_slopeL.png" type="Texture" id=299]
+[ext_resource path="res://assets/tiles/roof/palette_icons/2_block.png" type="Texture" id=300]
+[ext_resource path="res://assets/tiles/roof/palette_icons/1_block.png" type="Texture" id=301]
+[ext_resource path="res://assets/tiles/roof/palette_icons/2_slopeR.png" type="Texture" id=302]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1949,6 +1961,40 @@ script = ExtResource( 3 )
 tileset_id = 24
 icon = ExtResource( 224 )
 preview = ExtResource( 224 )
+
+[node name="Roof" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 3 )
+tileset_id = 26
+palette_icons = [ ExtResource( 291 ), ExtResource( 298 ), ExtResource( 301 ), ExtResource( 300 ) ]
+palette_previews = [ ExtResource( 291 ), ExtResource( 298 ), ExtResource( 301 ), ExtResource( 300 ) ]
+change_to = "RoofSlopeLeft"
+items_in_sequence = 3
+icon = ExtResource( 291 )
+preview = ExtResource( 291 )
+
+[node name="RoofSlopeLeft" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 3 )
+tileset_id = 26
+tile_id = 2
+palette_icons = [ ExtResource( 292 ), ExtResource( 295 ), ExtResource( 299 ), ExtResource( 296 ) ]
+palette_previews = [ ExtResource( 292 ), ExtResource( 295 ), ExtResource( 299 ), ExtResource( 296 ) ]
+change_to = "RoofSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 292 )
+preview = ExtResource( 292 )
+
+[node name="RoofSlopeRight" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 3 )
+tileset_id = 26
+tile_id = 3
+palette_icons = [ ExtResource( 293 ), ExtResource( 297 ), ExtResource( 294 ), ExtResource( 302 ) ]
+palette_previews = [ ExtResource( 293 ), ExtResource( 297 ), ExtResource( 294 ), ExtResource( 302 ) ]
+change_to = "Roof"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 293 )
+preview = ExtResource( 293 )
 
 [node name="MiscGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
