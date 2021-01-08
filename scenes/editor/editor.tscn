@@ -1,4 +1,4 @@
-[gd_scene load_steps=328 format=2]
+[gd_scene load_steps=329 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -302,6 +302,7 @@
 [ext_resource path="res://assets/tiles/roof/palette_icons/2_block.png" type="Texture" id=300]
 [ext_resource path="res://assets/tiles/roof/palette_icons/1_block.png" type="Texture" id=301]
 [ext_resource path="res://assets/tiles/roof/palette_icons/2_slopeR.png" type="Texture" id=302]
+[ext_resource path="res://assets/tiles/sand/icon.png" type="Texture" id=303]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1452,6 +1453,17 @@ object_center = Vector2( 8, 8 )
 tile_mode_step = 16
 icon = ExtResource( 234 )
 preview = ExtResource( 233 )
+
+[node name="SandGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 149 )
+color = Color( 0.552941, 0.533333, 0.0862745, 1 )
+group_name = "Sand"
+
+[node name="Sand" type="Node" parent="PlaceableItems/SandGroup"]
+script = ExtResource( 3 )
+tileset_id = 27
+icon = ExtResource( 303 )
+preview = ExtResource( 303 )
 
 [node name="SnowGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
