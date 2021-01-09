@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource( 2 )
 texture = ExtResource( 1 )
-scale = Vector2( 0.15, 0.3 )
-offset = Vector2( 0, -60 )
+scale = Vector2( 0.15, 0 )
+offset = Vector2( 0, -160 )
 mirroring = Vector2( 1024, 0 )
