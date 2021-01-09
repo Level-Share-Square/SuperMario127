@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-c8bfbcebb152be329f55e063e7f9782a.stex"
+path="res://.import/palm_tree.png-972e94e2deb52f1a3ec2e6c51f6c8260.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/big_bush/icon.png"
-dest_files=[ "res://.import/icon.png-c8bfbcebb152be329f55e063e7f9782a.stex" ]
+source_file="res://scenes/actors/objects/palm_tree/palm_tree.png"
+dest_files=[ "res://.import/palm_tree.png-972e94e2deb52f1a3ec2e6c51f6c8260.stex" ]
 
 [params]
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/walleye_tumble_temple.ogg-706f566e9ceb6b916d998414cc05df95.oggstr"
+
+[deps]
+
+source_file="res://assets/music/walleye_tumble_temple.ogg"
+dest_files=[ "res://.import/walleye_tumble_temple.ogg-706f566e9ceb6b916d998414cc05df95.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=6.72

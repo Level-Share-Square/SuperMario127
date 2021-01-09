@@ -1,4 +1,4 @@
-[gd_scene load_steps=329 format=2]
+[gd_scene load_steps=348 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -303,6 +303,25 @@
 [ext_resource path="res://assets/tiles/roof/palette_icons/1_block.png" type="Texture" id=301]
 [ext_resource path="res://assets/tiles/roof/palette_icons/2_slopeR.png" type="Texture" id=302]
 [ext_resource path="res://assets/tiles/sand/icon.png" type="Texture" id=303]
+[ext_resource path="res://assets/tiles/sand/icon_slab.png" type="Texture" id=304]
+[ext_resource path="res://scenes/actors/objects/palm_tree/icon.png" type="Texture" id=305]
+[ext_resource path="res://scenes/actors/objects/palm_tree/preview.png" type="Texture" id=306]
+[ext_resource path="res://scenes/actors/objects/barrel_cactus/barrel_cactus.png" type="Texture" id=307]
+[ext_resource path="res://scenes/actors/objects/barrel_cactus/icon.png" type="Texture" id=308]
+[ext_resource path="res://assets/tiles/sand/icon_slope_left.png" type="Texture" id=309]
+[ext_resource path="res://assets/tiles/sand/icon_slope_right.png" type="Texture" id=310]
+[ext_resource path="res://assets/tiles/sand/palette_icons/0_block.png" type="Texture" id=311]
+[ext_resource path="res://assets/tiles/sand/palette_icons/2_block.png" type="Texture" id=312]
+[ext_resource path="res://assets/tiles/sand/palette_icons/1_block.png" type="Texture" id=313]
+[ext_resource path="res://assets/tiles/sand/palette_icons/2_slopeL.png" type="Texture" id=314]
+[ext_resource path="res://assets/tiles/sand/palette_icons/0_slopeL.png" type="Texture" id=315]
+[ext_resource path="res://assets/tiles/sand/palette_icons/1_slab.png" type="Texture" id=316]
+[ext_resource path="res://assets/tiles/sand/palette_icons/0_slab.png" type="Texture" id=317]
+[ext_resource path="res://assets/tiles/sand/palette_icons/2_slab.png" type="Texture" id=318]
+[ext_resource path="res://assets/tiles/sand/palette_icons/1_slopeL.png" type="Texture" id=319]
+[ext_resource path="res://assets/tiles/sand/palette_icons/1_slopeR.png" type="Texture" id=320]
+[ext_resource path="res://assets/tiles/sand/palette_icons/2_slopeR.png" type="Texture" id=321]
+[ext_resource path="res://assets/tiles/sand/palette_icons/0_slopeR.png" type="Texture" id=322]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1462,8 +1481,66 @@ group_name = "Sand"
 [node name="Sand" type="Node" parent="PlaceableItems/SandGroup"]
 script = ExtResource( 3 )
 tileset_id = 27
+palette_icons = [ ExtResource( 303 ), ExtResource( 311 ), ExtResource( 313 ), ExtResource( 312 ) ]
+palette_previews = [ ExtResource( 303 ), ExtResource( 311 ), ExtResource( 313 ), ExtResource( 312 ) ]
+change_to = "SandSlab"
+items_in_sequence = 4
 icon = ExtResource( 303 )
 preview = ExtResource( 303 )
+
+[node name="SandSlab" type="Node" parent="PlaceableItems/SandGroup"]
+script = ExtResource( 3 )
+tileset_id = 27
+tile_id = 1
+palette_icons = [ ExtResource( 304 ), ExtResource( 317 ), ExtResource( 316 ), ExtResource( 318 ) ]
+palette_previews = [ ExtResource( 304 ), ExtResource( 317 ), ExtResource( 316 ), ExtResource( 318 ) ]
+change_to = "SandSlopeLeft"
+items_in_sequence = 4
+index_in_sequence = 1
+icon = ExtResource( 304 )
+preview = ExtResource( 304 )
+
+[node name="SandSlopeLeft" type="Node" parent="PlaceableItems/SandGroup"]
+script = ExtResource( 3 )
+tileset_id = 27
+tile_id = 2
+palette_icons = [ ExtResource( 309 ), ExtResource( 315 ), ExtResource( 319 ), ExtResource( 314 ) ]
+palette_previews = [ ExtResource( 309 ), ExtResource( 315 ), ExtResource( 319 ), ExtResource( 314 ) ]
+change_to = "SandSlopeRight"
+items_in_sequence = 4
+index_in_sequence = 2
+icon = ExtResource( 309 )
+preview = ExtResource( 309 )
+
+[node name="SandSlopeRight" type="Node" parent="PlaceableItems/SandGroup"]
+script = ExtResource( 3 )
+tileset_id = 27
+tile_id = 3
+palette_icons = [ ExtResource( 310 ), ExtResource( 322 ), ExtResource( 320 ), ExtResource( 321 ) ]
+palette_previews = [ ExtResource( 310 ), ExtResource( 322 ), ExtResource( 320 ), ExtResource( 321 ) ]
+change_to = "Sand"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 310 )
+preview = ExtResource( 310 )
+
+[node name="PalmTree" type="Node" parent="PlaceableItems/SandGroup"]
+script = ExtResource( 3 )
+object_id = 76
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+icon = ExtResource( 305 )
+preview = ExtResource( 306 )
+
+[node name="BarrelCactus" type="Node" parent="PlaceableItems/SandGroup"]
+script = ExtResource( 3 )
+object_id = 77
+is_object = true
+object_center = Vector2( 32, 12 )
+tile_mode_offset = Vector2( 16, -4 )
+icon = ExtResource( 308 )
+preview = ExtResource( 307 )
 
 [node name="SnowGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )

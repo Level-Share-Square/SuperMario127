@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-c8bfbcebb152be329f55e063e7f9782a.stex"
+path="res://.import/barrel_cactus.png-1b3da6ce3870ba3987ed542f9d0317df.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/big_bush/icon.png"
-dest_files=[ "res://.import/icon.png-c8bfbcebb152be329f55e063e7f9782a.stex" ]
+source_file="res://scenes/actors/objects/barrel_cactus/barrel_cactus.png"
+dest_files=[ "res://.import/barrel_cactus.png-1b3da6ce3870ba3987ed542f9d0317df.stex" ]
 
 [params]
 

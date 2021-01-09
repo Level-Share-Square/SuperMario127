@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-c8bfbcebb152be329f55e063e7f9782a.stex"
+path="res://.import/2_slopeL.png-66450d6fdc6ae15bb1be2686991b8d8f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/big_bush/icon.png"
-dest_files=[ "res://.import/icon.png-c8bfbcebb152be329f55e063e7f9782a.stex" ]
+source_file="res://assets/tiles/sand/palette_icons/2_slopeL.png"
+dest_files=[ "res://.import/2_slopeL.png-66450d6fdc6ae15bb1be2686991b8d8f.stex" ]
 
 [params]
 
