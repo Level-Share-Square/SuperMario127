@@ -1,4 +1,4 @@
-[gd_scene load_steps=348 format=2]
+[gd_scene load_steps=361 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -322,6 +322,19 @@
 [ext_resource path="res://assets/tiles/sand/palette_icons/1_slopeR.png" type="Texture" id=320]
 [ext_resource path="res://assets/tiles/sand/palette_icons/2_slopeR.png" type="Texture" id=321]
 [ext_resource path="res://assets/tiles/sand/palette_icons/0_slopeR.png" type="Texture" id=322]
+[ext_resource path="res://assets/tiles/pyramid_bricks/icon.png" type="Texture" id=323]
+[ext_resource path="res://assets/tiles/pyramid_bricks/icon_slope_right.png" type="Texture" id=324]
+[ext_resource path="res://assets/tiles/pyramid_bricks/icon_slope_left.png" type="Texture" id=325]
+[ext_resource path="res://assets/tiles/pyramid_bricks/palette_icons/2_block.png" type="Texture" id=326]
+[ext_resource path="res://assets/tiles/pyramid_bricks/palette_icons/1_block.png" type="Texture" id=327]
+[ext_resource path="res://assets/tiles/pyramid_bricks/palette_icons/0_slopeL.png" type="Texture" id=328]
+[ext_resource path="res://assets/tiles/pyramid_bricks/palette_icons/1_slopeR.png" type="Texture" id=329]
+[ext_resource path="res://assets/tiles/pyramid_bricks/palette_icons/1_slopeL.png" type="Texture" id=330]
+[ext_resource path="res://assets/tiles/pyramid_bricks/palette_icons/2_slopeR.png" type="Texture" id=331]
+[ext_resource path="res://assets/tiles/pyramid_bricks/palette_icons/0_slopeR.png" type="Texture" id=332]
+[ext_resource path="res://assets/tiles/pyramid_bricks/palette_icons/2_slopeL.png" type="Texture" id=333]
+[ext_resource path="res://assets/tiles/pyramid_bricks/palette_icons/0_block.png" type="Texture" id=334]
+[ext_resource path="res://scenes/actors/objects/flower_bush/icon.png" type="Texture" id=335]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1436,6 +1449,15 @@ items_in_sequence = 2
 icon = ExtResource( 81 )
 preview = ExtResource( 80 )
 
+[node name="FlowerBush" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 3 )
+object_id = 78
+is_object = true
+object_center = Vector2( 32, 12 )
+tile_mode_offset = Vector2( 16, -4 )
+icon = ExtResource( 335 )
+preview = ExtResource( 335 )
+
 [node name="Log" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 3 )
 object_id = 10
@@ -1541,6 +1563,40 @@ object_center = Vector2( 32, 12 )
 tile_mode_offset = Vector2( 16, -4 )
 icon = ExtResource( 308 )
 preview = ExtResource( 307 )
+
+[node name="PyramidBrick" type="Node" parent="PlaceableItems/SandGroup"]
+script = ExtResource( 3 )
+tileset_id = 28
+palette_icons = [ ExtResource( 323 ), ExtResource( 334 ), ExtResource( 327 ), ExtResource( 326 ) ]
+palette_previews = [ ExtResource( 323 ), ExtResource( 334 ), ExtResource( 327 ), ExtResource( 326 ) ]
+change_to = "PyramidBrickSlopeLeft"
+items_in_sequence = 3
+icon = ExtResource( 323 )
+preview = ExtResource( 323 )
+
+[node name="PyramidBrickSlopeLeft" type="Node" parent="PlaceableItems/SandGroup"]
+script = ExtResource( 3 )
+tileset_id = 28
+tile_id = 2
+palette_icons = [ ExtResource( 325 ), ExtResource( 328 ), ExtResource( 330 ), ExtResource( 333 ) ]
+palette_previews = [ ExtResource( 325 ), ExtResource( 328 ), ExtResource( 330 ), ExtResource( 333 ) ]
+change_to = "PyramidBrickSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 325 )
+preview = ExtResource( 325 )
+
+[node name="PyramidBrickSlopeRight" type="Node" parent="PlaceableItems/SandGroup"]
+script = ExtResource( 3 )
+tileset_id = 28
+tile_id = 3
+palette_icons = [ ExtResource( 324 ), ExtResource( 332 ), ExtResource( 329 ), ExtResource( 331 ) ]
+palette_previews = [ ExtResource( 324 ), ExtResource( 332 ), ExtResource( 329 ), ExtResource( 331 ) ]
+change_to = "PyramidBrick"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 324 )
+preview = ExtResource( 324 )
 
 [node name="SnowGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
