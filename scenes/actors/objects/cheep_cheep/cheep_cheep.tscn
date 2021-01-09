@@ -9,81 +9,81 @@
 [ext_resource path="res://scenes/actors/objects/goomba/body.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/objects/cheep_cheep/recolorable.png" type="Texture" id=8]
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
 region = Rect2( 24, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
 region = Rect2( 48, 0, 24, 24 )
 
-[sub_resource type="SpriteFrames" id=19]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 17 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 10.0
 } ]
 
-[sub_resource type="AtlasTexture" id=20]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 8 )
 region = Rect2( 0, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=21]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 8 )
 region = Rect2( 24, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=22]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 8 )
 region = Rect2( 48, 0, 24, 24 )
 
-[sub_resource type="SpriteFrames" id=23]
+[sub_resource type="SpriteFrames" id=8]
 animations = [ {
-"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 21 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 6 ) ],
 "loop": true,
 "name": "default",
 "speed": 10.0
 } ]
 
-[sub_resource type="RayShape2D" id=5]
+[sub_resource type="RayShape2D" id=9]
 length = 10.0
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 8, 6 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 7, 7 )
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 150, 150 )
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 400, 400 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 32, 32 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 11, 8 )
 
-[sub_resource type="CanvasItemMaterial" id=11]
+[sub_resource type="CanvasItemMaterial" id=16]
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="ParticlesMaterial" id=12]
+[sub_resource type="ParticlesMaterial" id=17]
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 anim_speed = 1.0
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=18]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:animation")
@@ -157,21 +157,21 @@ collision_mask = 85
 script = ExtResource( 7 )
 
 [node name="Sprite" type="AnimatedSprite" parent="CheepCheep"]
-frames = SubResource( 19 )
+frames = SubResource( 4 )
 
 [node name="ColorSprite" type="AnimatedSprite" parent="CheepCheep"]
 modulate = Color( 1, 0, 0, 1 )
-frames = SubResource( 23 )
+frames = SubResource( 8 )
 
 [node name="GroundCollision" type="CollisionShape2D" parent="CheepCheep"]
 visible = false
 position = Vector2( 0, -1 )
-shape = SubResource( 5 )
+shape = SubResource( 9 )
 
 [node name="BoxCollision" type="CollisionShape2D" parent="CheepCheep"]
 visible = false
 position = Vector2( 0, -2 )
-shape = SubResource( 6 )
+shape = SubResource( 10 )
 
 [node name="AttackArea" type="Area2D" parent="CheepCheep"]
 visible = false
@@ -181,7 +181,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheepCheep/AttackArea"]
 position = Vector2( 0, 8 )
-shape = SubResource( 7 )
+shape = SubResource( 11 )
 
 [node name="PlayerDetector" type="Area2D" parent="CheepCheep"]
 visible = false
@@ -190,7 +190,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheepCheep/PlayerDetector"]
-shape = SubResource( 14 )
+shape = SubResource( 12 )
 
 [node name="PlayerExitDetector" type="Area2D" parent="CheepCheep"]
 visible = false
@@ -199,7 +199,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheepCheep/PlayerExitDetector"]
-shape = SubResource( 15 )
+shape = SubResource( 13 )
 
 [node name="PlatformDetector" type="Area2D" parent="CheepCheep"]
 visible = false
@@ -207,7 +207,7 @@ collision_layer = 4
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheepCheep/PlatformDetector"]
-shape = SubResource( 9 )
+shape = SubResource( 14 )
 
 [node name="WaterDetector" type="Area2D" parent="CheepCheep"]
 visible = false
@@ -217,7 +217,7 @@ collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheepCheep/WaterDetector"]
 position = Vector2( 0, 8 )
-shape = SubResource( 10 )
+shape = SubResource( 15 )
 
 [node name="Stomp" type="AudioStreamPlayer" parent="CheepCheep"]
 stream = ExtResource( 6 )
@@ -232,16 +232,16 @@ stream = ExtResource( 5 )
 volume_db = -3.0
 
 [node name="Poof" type="Particles2D" parent="CheepCheep"]
-material = SubResource( 11 )
+material = SubResource( 16 )
 emitting = false
 amount = 1
 lifetime = 0.35
 one_shot = true
-process_material = SubResource( 12 )
+process_material = SubResource( 17 )
 texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CheepCheep"]
-anims/Stomped = SubResource( 13 )
+anims/Stomped = SubResource( 18 )
 
 [node name="BottomPos" type="Node2D" parent="CheepCheep"]
 position = Vector2( 0, 5 )
