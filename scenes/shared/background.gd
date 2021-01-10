@@ -40,7 +40,8 @@ func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rec
 		sprite_instance.texture = layer.texture
 		sprite_instance.rect_size.x = layer.mirroring.x * 2
 		sprite_instance.set_stretch_mode(sprite_instance.STRETCH_TILE)
-		sprite_instance.modulate = background_resource.parallax_modulate
+		if !(sky in foreground_resource.immune_to):
+			sprite_instance.modulate = background_resource.parallax_modulate
 		sprite_instance.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		
 		parallax_layer.add_child(sprite_instance)

@@ -6,4 +6,4 @@
 [resource]
 script = ExtResource( 1 )
 texture = ExtResource( 2 )
-parallax_modulate = Color( 1, 0.552941, 0.552941, 1 )
+parallax_modulate = Color( 0.831373, 0.623529, 0.521569, 1 )

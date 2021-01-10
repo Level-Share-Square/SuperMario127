@@ -8,6 +8,8 @@ var layers_transparent := false
 var show_grid := true
 
 var tileset_palettes = []
+var data_tiles = 0
+var tiles_resource : TileSet
 
 var layout_ids = [
 ]

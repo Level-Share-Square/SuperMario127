@@ -33,6 +33,12 @@ static func load():
 		else:
 			SavedLevels.wipe_template_levels()
 			save()
+	
+		if data.has("numberOfTiles"):
+			EditorSavedSettings.data_tiles = data["numberOfTiles"]
+			
+		if data.has("savedPalettes"):
+			EditorSavedSettings.tileset_palettes = data["savedPalettes"]
 
 static func save():
 	var windowScale = OS.window_size.x / ScreenSizeUtil.DEFAULT_SIZE.x
@@ -50,7 +56,9 @@ static func save():
 		"controls": PlayerSettings.keybindings,
 		"volume": music.global_volume,
 		"legacyWingCap": legacyCap,
-		"gameVersion": PlayerSettings.game_version
+		"gameVersion": PlayerSettings.game_version,
+		"numberOfTiles": EditorSavedSettings.data_tiles,
+		"savedPalettes": EditorSavedSettings.tileset_palettes
 	}
 	
 	var file = File.new()
@@ -69,7 +77,9 @@ static func save_volume():
 			"controls": PlayerSettings.keybindings,
 			"volume": music.global_volume,
 			"legacyWingCap": PlayerSettings.legacy_wing_cap,
-			"gameVersion": PlayerSettings.game_version
+			"gameVersion": PlayerSettings.game_version,
+			"numberOfTiles": EditorSavedSettings.data_tiles,
+			"savedPalettes": EditorSavedSettings.tileset_palettes
 		}
 	
 	data["volume"] = music.global_volume

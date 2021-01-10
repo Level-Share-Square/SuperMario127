@@ -8,3 +8,4 @@ var max_shine_shards := 0
 var nozzles_collected = ["null"]
 var doors = []
 var transition_data = []
+var liquids = []
