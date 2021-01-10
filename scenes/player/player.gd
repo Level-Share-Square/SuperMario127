@@ -10,9 +10,16 @@ export var coin_frame : int
 const coin_anim_fps = 12
 var can_collect_coins : Array
 
+export var switch_timer : float = 0.0
+
 func _process(_delta):
 	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
 
+func _physics_process(delta):
+	if switch_timer > 0:
+		switch_timer -= delta
+		if switch_timer <= 0:
+			switch_timer = 0
 
 func _ready():
 	var data = CurrentLevelData.level_data

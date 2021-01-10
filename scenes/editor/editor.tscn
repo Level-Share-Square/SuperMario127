@@ -1,4 +1,4 @@
-[gd_scene load_steps=361 format=2]
+[gd_scene load_steps=366 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -335,6 +335,11 @@
 [ext_resource path="res://assets/tiles/pyramid_bricks/palette_icons/2_slopeL.png" type="Texture" id=333]
 [ext_resource path="res://assets/tiles/pyramid_bricks/palette_icons/0_block.png" type="Texture" id=334]
 [ext_resource path="res://scenes/actors/objects/flower_bush/icon.png" type="Texture" id=335]
+[ext_resource path="res://scenes/actors/objects/switch_block/preview.png" type="Texture" id=336]
+[ext_resource path="res://scenes/actors/objects/switch_block/icon.png" type="Texture" id=337]
+[ext_resource path="res://assets/tiles/lava_rock/icon.png" type="Texture" id=338]
+[ext_resource path="res://scenes/actors/objects/switch/preview.png" type="Texture" id=339]
+[ext_resource path="res://scenes/actors/objects/switch/icon.png" type="Texture" id=340]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1166,6 +1171,22 @@ tile_mode_offset = Vector2( 0, 16 )
 icon = ExtResource( 152 )
 preview = ExtResource( 151 )
 
+[node name="Switch" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 80
+is_object = true
+object_center = Vector2( 16, 16 )
+icon = ExtResource( 340 )
+preview = ExtResource( 339 )
+
+[node name="SwitchBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 79
+is_object = true
+object_center = Vector2( 16, 16 )
+icon = ExtResource( 337 )
+preview = ExtResource( 336 )
+
 [node name="Seesaw" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )
 object_id = 47
@@ -1798,6 +1819,17 @@ items_in_sequence = 2
 index_in_sequence = 1
 icon = ExtResource( 216 )
 preview = ExtResource( 215 )
+
+[node name="VolcanoGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 149 )
+color = Color( 0.552941, 0.239216, 0.0862745, 1 )
+group_name = "Volcano"
+
+[node name="LavaRock" type="Node" parent="PlaceableItems/VolcanoGroup"]
+script = ExtResource( 3 )
+tileset_id = 29
+icon = ExtResource( 338 )
+preview = ExtResource( 338 )
 
 [node name="BuildingGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )

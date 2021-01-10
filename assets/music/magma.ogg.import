@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/magma.ogg-712ca4037ae0f7b5b8e0e5df2889887c.oggstr"
+
+[deps]
+
+source_file="res://assets/music/magma.ogg"
+dest_files=[ "res://.import/magma.ogg-712ca4037ae0f7b5b8e0e5df2889887c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=2.688

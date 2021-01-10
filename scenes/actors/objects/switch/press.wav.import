@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/press.wav-a1f3a9f25d4d44d150f77d4338dbc5b4.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/switch/press.wav"
+dest_files=[ "res://.import/press.wav-a1f3a9f25d4d44d150f77d4338dbc5b4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
