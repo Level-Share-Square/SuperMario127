@@ -21,7 +21,10 @@ func _physics_process(delta):
 				if abs(position.distance_to(character_node.global_position)) < 15:
 					unfocusing = false
 			else:
-				character_vel = character_vel.linear_interpolate(character_node.velocity * 30 * delta, delta * 2)
+				if character_node.controllable:
+					character_vel = character_vel.linear_interpolate(character_node.velocity * 30 * delta, delta * 2)
+				else:
+					character_vel = Vector2()
 				
 				position = character_node.global_position + character_vel
 				

@@ -24,13 +24,11 @@ onready var default_screen = splash_screen
 var current_screen : Screen
 var previous_screen : Screen
 
-# scrapped the variations because the current logo 
-# doesn't look good on any background except the night one
 var possible_backgrounds = [
-	2
+	4
 ]
 var possible_parallax = [
-	1
+	8
 ]
 
 func _ready() -> void:
@@ -39,7 +37,7 @@ func _ready() -> void:
 	var picked_background = possible_backgrounds[randi() % possible_backgrounds.size()]
 	var picked_parallax = possible_parallax[randi() % possible_parallax.size()]
 	
-	backgrounds.update_background(picked_background, picked_parallax, Rect2(0, 0, 24, 14), 96)
+	backgrounds.update_background(picked_background, picked_parallax, Rect2(0, 0, 24, 14), 128)
 	backgrounds.do_auto_scroll = true
 	
 	for screen in inactive_screens.get_children():
