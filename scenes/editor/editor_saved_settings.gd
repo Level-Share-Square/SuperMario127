@@ -11,6 +11,8 @@ var tileset_palettes = []
 var data_tiles = 0
 var tiles_resource : TileSet
 
+var tileset_loaded = false
+
 var layout_ids = [
 ]
 
