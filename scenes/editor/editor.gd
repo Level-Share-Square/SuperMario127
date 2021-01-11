@@ -125,6 +125,7 @@ func _ready() -> void:
 	# reset these to 0 since they get incremented by the loading in process every time
 	CurrentLevelData.next_shine_id = 0
 	CurrentLevelData.next_star_coin_id = 0
+	CheckpointSaved.reset()
 
 	var data = CurrentLevelData.level_data
 	load_in(data, data.areas[CurrentLevelData.area])

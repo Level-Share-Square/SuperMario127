@@ -187,6 +187,8 @@ func get_object(result) -> LevelObject:
 	return object
 
 func load_in(code):
+	vars = LevelVars.new()
+	
 	var result
 	result = level_code_util.decode(code)
 
@@ -217,7 +219,6 @@ func load_in(code):
 		for area_result in result.areas:
 			var area = get_area(area_result)
 			areas.append(area)
-		vars = LevelVars.new()
 	else:
 		print("Outdated format version. Current version is " + current_format_version + ", but course uses version " + format_version + ".")
 

@@ -287,6 +287,9 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	sprite.playing = true
 	collected_shine.visible = false
 	collected_shine.get_node("ShineParticles").emitting = false
+	
+	if CheckpointSaved.current_checkpoint_id != -1:
+		position = CheckpointSaved.current_spawn_pos
 
 var prev_is_grounded := false
 func is_grounded() -> bool:

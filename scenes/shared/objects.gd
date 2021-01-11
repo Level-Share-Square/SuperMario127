@@ -11,12 +11,6 @@ func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
 	level_data = loaded_level_data
 	level_area = loaded_level_area
 	
-	CurrentLevelData.level_data.vars.max_red_coins = 0
-	CurrentLevelData.level_data.vars.red_coins_collected = 0
-	CurrentLevelData.level_data.vars.max_shine_shards = 0
-	CurrentLevelData.level_data.vars.shine_shards_collected = 0
-	CurrentLevelData.enemies_instanced = 0
-	CurrentLevelData.level_data.vars.doors = []
 	for object in loaded_level_area.objects:
 		create_object(object, false)
 		

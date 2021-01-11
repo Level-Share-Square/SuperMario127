@@ -14,6 +14,8 @@ var moving : bool = false
 var match_level : float = 0.0
 var move_speed : float = 1.0
 
+var save_pos : Vector2
+
 onready var area_collision = $Area2D/CollisionShape2D
 onready var sprite = $ColorRect
 onready var waves = $Waves
@@ -30,6 +32,13 @@ func _set_property_values():
 	set_property("tag", tag, true)
 
 func _ready():
+	var id = CurrentLevelData.level_data.vars.current_liquid_id
+	if CheckpointSaved.current_checkpoint_id != -1 and CheckpointSaved.liquid_positions.size() >= id:
+		var set_position = CheckpointSaved.liquid_positions[id]
+		if set_position != Vector2():
+			global_position = set_position
+	CurrentLevelData.level_data.vars.current_liquid_id += 1
+	
 	color.a = 0.5
 	area_collision.shape = area_collision.shape.duplicate()
 	change_size()

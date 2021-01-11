@@ -44,11 +44,10 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 16, 16 )
 
-[sub_resource type="Animation" id=11]
-resource_name = "touch"
+[sub_resource type="Animation" id=12]
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:offset")
@@ -95,7 +94,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 10 )
-frame = 6
+frame = 4
 playing = true
 
 [node name="UseArea" type="Area2D" parent="."]
@@ -104,11 +103,11 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UseArea"]
-shape = SubResource( 1 )
+shape = SubResource( 11 )
 
 [node name="Use" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = 6.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/touch = SubResource( 11 )
+anims/touch = SubResource( 12 )

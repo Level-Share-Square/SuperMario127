@@ -68,6 +68,7 @@ func _ready() -> void:
 	music.change_song(music.last_song, 31) # temporary, should add a way for screens to define their own music setting later
 	music.last_song = 31
 
+	CheckpointSaved.reset()
 
 # change this to use an enum or something, store enum in menu_variables
 func start_changing_screens(this_screen_name : String, new_screen_name : String) -> void:

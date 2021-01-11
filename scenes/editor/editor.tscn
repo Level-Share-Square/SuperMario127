@@ -1,4 +1,4 @@
-[gd_scene load_steps=368 format=2]
+[gd_scene load_steps=369 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -342,6 +342,7 @@
 [ext_resource path="res://scenes/actors/objects/switch/icon.png" type="Texture" id=340]
 [ext_resource path="res://scenes/actors/objects/crystal_tap/icon.png" type="Texture" id=341]
 [ext_resource path="res://scenes/actors/objects/crystal_tap/preview.png" type="Texture" id=342]
+[ext_resource path="res://scenes/actors/objects/checkpoint/icon.png" type="Texture" id=343]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -959,6 +960,14 @@ icon = ExtResource( 55 )
 preview = ExtResource( 55 )
 placement_action = ExtResource( 56 )
 removal_action = ExtResource( 57 )
+
+[node name="Checkpoint" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 3 )
+object_id = 82
+is_object = true
+object_center = Vector2( 16, 16 )
+icon = ExtResource( 343 )
+preview = ExtResource( 343 )
 
 [node name="Coin" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 3 )

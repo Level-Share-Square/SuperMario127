@@ -18,14 +18,14 @@ func _ready():
 	for index in range(5):
 		yield(get_tree(), "idle_frame")
 	max_coin_amount = CurrentLevelData.level_data.vars.max_red_coins
-	var coin_amount = CurrentLevelData.level_data.vars.red_coins_collected
+	var coin_amount = CurrentLevelData.level_data.vars.red_coins_collected[0]
 	label.text = str(coin_amount) + "/" + str(max_coin_amount)
 	label_shadow.text = label.text
 	if max_coin_amount != 0:
 		visible = true
 
 func _process(delta):
-	var coin_amount = CurrentLevelData.level_data.vars.red_coins_collected
+	var coin_amount = CurrentLevelData.level_data.vars.red_coins_collected[0]
 	if coin_amount != last_coin_amount:
 		label.text = str(coin_amount) + "/" + str(max_coin_amount)
 		label_shadow.text = label.text

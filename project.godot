@@ -581,6 +581,7 @@ SavedLevels="*res://scenes/shared/saved_levels.gd"
 MenuVariables="*res://scenes/menu/menu_variables.gd"
 TimeScore="*res://scenes/actors/time_score/time_score.tscn"
 MiscShared="*res://scenes/shared/miscshared.gd"
+CheckpointSaved="*res://classes/CheckpointSaved.gd"
 
 [debug]
 
@@ -980,6 +981,11 @@ toggle_enabled={
 change_palette={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+reload_from_start={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":79,"unicode":0,"echo":false,"script":null)
  ]
 }
 
