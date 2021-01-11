@@ -24,7 +24,8 @@ func _ready():
 	if !EditorSavedSettings.tileset_loaded:
 		var number_of_tiles = load("res://assets/tiles/tiles.tres").get_last_unused_tile_id()
 		if number_of_tiles == EditorSavedSettings.data_tiles and ResourceLoader.exists("user://tiles.res", "TileSet"):
-			var tile_set = ResourceLoader.load("user://tiles.res", "TileSet")
+			EditorSavedSettings.tiles_resource = ResourceLoader.load("user://tiles.res", "TileSet")
+			var tile_set = EditorSavedSettings.tiles_resource
 			very_back_tilemap_node.tile_set = tile_set
 			back_tilemap_node.tile_set = tile_set
 			middle_tilemap_node.tile_set = tile_set
@@ -33,6 +34,12 @@ func _ready():
 			EditorSavedSettings.tileset_palettes = []
 		EditorSavedSettings.data_tiles = number_of_tiles
 		EditorSavedSettings.tileset_loaded = true
+	else:
+		var tile_set = EditorSavedSettings.tiles_resource
+		very_back_tilemap_node.tile_set = tile_set
+		back_tilemap_node.tile_set = tile_set
+		middle_tilemap_node.tile_set = tile_set
+		front_tilemap_node.tile_set = tile_set
 	
 	for tileset_id in level_tilesets.ids:
 		var tileset : LevelTileset = load("res://assets/tiles/" + tileset_id + "/resource.tres")
