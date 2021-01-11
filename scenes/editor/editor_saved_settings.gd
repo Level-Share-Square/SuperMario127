@@ -17,6 +17,7 @@ var layout_ids = [
 ]
 
 func _init():
+	tiles_resource = ResourceLoader.load("user://tiles.res", "TileSet")
 	var starting_toolbar = load("res://scenes/editor/starting_toolbar.tres")
 	for index in range(number_of_boxes):
 		layout_ids.append(starting_toolbar.ids[index])

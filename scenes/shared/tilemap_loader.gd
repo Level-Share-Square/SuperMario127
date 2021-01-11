@@ -21,25 +21,19 @@ var noise := OpenSimplexNoise.new()
 func _ready():
 	var level_tilesets := preload("res://assets/tiles/ids.tres")
 	
+	var number_of_tiles = EditorSavedSettings.data_tiles
 	if !EditorSavedSettings.tileset_loaded:
-		var number_of_tiles = load("res://assets/tiles/tiles.tres").get_last_unused_tile_id()
-		if number_of_tiles == EditorSavedSettings.data_tiles and ResourceLoader.exists("user://tiles.res", "TileSet"):
-			EditorSavedSettings.tiles_resource = ResourceLoader.load("user://tiles.res", "TileSet")
-			var tile_set = EditorSavedSettings.tiles_resource
-			very_back_tilemap_node.tile_set = tile_set
-			back_tilemap_node.tile_set = tile_set
-			middle_tilemap_node.tile_set = tile_set
-			front_tilemap_node.tile_set = tile_set
-		else:
-			EditorSavedSettings.tileset_palettes = []
-		EditorSavedSettings.data_tiles = number_of_tiles
-		EditorSavedSettings.tileset_loaded = true
-	else:
+		number_of_tiles = load("res://assets/tiles/tiles.tres").get_last_unused_tile_id()
+	if EditorSavedSettings.tileset_loaded or (number_of_tiles == EditorSavedSettings.data_tiles and ResourceLoader.exists("user://tiles.res", "TileSet")):
 		var tile_set = EditorSavedSettings.tiles_resource
 		very_back_tilemap_node.tile_set = tile_set
 		back_tilemap_node.tile_set = tile_set
 		middle_tilemap_node.tile_set = tile_set
 		front_tilemap_node.tile_set = tile_set
+	else:
+		EditorSavedSettings.tileset_palettes = []
+	EditorSavedSettings.data_tiles = number_of_tiles
+	EditorSavedSettings.tileset_loaded = true
 	
 	for tileset_id in level_tilesets.ids:
 		var tileset : LevelTileset = load("res://assets/tiles/" + tileset_id + "/resource.tres")
@@ -86,6 +80,7 @@ func _ready():
 		middle_tilemap_node.tile_set._init()
 		EditorSavedSettings.tileset_palettes = tileset_palettes
 		ResourceSaver.save("user://tiles.res", middle_tilemap_node.tile_set)
+		EditorSavedSettings.tiles_resource = middle_tilemap_node.tile_set
 		SettingsSaver.save()
 	
 func get_tile(tileset_id, tile_id, palette_id = 0):
