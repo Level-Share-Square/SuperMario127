@@ -1,5 +1,8 @@
 extends GameObject
 
+export var normal_sparkles : Texture
+export var used_sparkles : Texture
+
 onready var use_area = $UseArea
 onready var sound = $Use
 
@@ -26,13 +29,22 @@ func _ready():
 	var _connect = use_area.connect("body_entered", self, "set_checkpoint")
 
 func _physics_process(delta):
-	var sprite = $Rotation/Rotation2
-	sprite.modulate = lerp(sprite.modulate, Color(1, 0, 0), delta * 32) if is_used else lerp(sprite.modulate, Color(1, 1, 1), delta * 4)
+	var sprite = $Rotation/RotationRight
+	var particles = $Rotation/RotationRight/Particles
+	
+	particles.texture = used_sparkles if is_used else normal_sparkles
 	sprite.rotation_degrees += 4
 	sprite.scale = sprite.scale.move_toward(Vector2(1, 1), delta * 4) if !is_used else sprite.scale.move_toward(Vector2(1.15, 1.15), delta * 8)
 
+	var sprite2 = $Rotation/RotationLeft
+	var particles2 = $Rotation/RotationLeft/Particles
+	
+	particles2.texture = used_sparkles if is_used else normal_sparkles
+	sprite2.rotation_degrees -= 4
+	sprite2.scale = sprite2.scale.move_toward(Vector2(1, 1), delta * 4) if !is_used else sprite2.scale.move_toward(Vector2(1.15, 1.15), delta * 8)
+
 func set_checkpoint(body):
-	if is_used:
+	if is_used or !enabled:
 		return
 	
 	is_used = true

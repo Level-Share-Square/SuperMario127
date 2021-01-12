@@ -21,7 +21,18 @@ func _start(_delta):
 	character.sprite.rotation_degrees = 0
 	character.current_jump = 0
 	character.friction = 4
-	character.velocity.y = -boost_velocity
+	var multiply = -1
+	var lava = character.lava_detector.get_overlapping_areas()[0].get_parent()
+	
+	var threshold = -999
+	if stepify(lava.rotation_degrees, 10) == 0:
+		threshold = lava.position.y + (lava.height - 16)
+	elif stepify(lava.rotation_degrees, 10) == 180:
+		threshold = lava.position.y - 16
+	
+	if character.position.y > threshold:
+		multiply = 0.5
+	character.velocity.y = boost_velocity * multiply
 	bounces_left = 3
 	priority = 5
 	character.burn_particles.emitting = true

@@ -24,7 +24,8 @@ var template_level_codes : Array = [
 	"res://level/template_levels/rocketside_plaza.tres",
 	"res://level/template_levels/dungeon_of_4_kingdoms.tres",
 	"res://level/template_levels/glide_feather_challenge.tres",
-	"res://level/template_levels/green_demon_cave.tres"
+	"res://level/template_levels/green_demon_cave.tres",
+	"res://level/template_levels/eruptive_crater.tres"
 ]
 # for the levels list and get_current_levels()
 var is_template_list : bool = false

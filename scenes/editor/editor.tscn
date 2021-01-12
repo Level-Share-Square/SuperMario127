@@ -1,4 +1,4 @@
-[gd_scene load_steps=369 format=2]
+[gd_scene load_steps=388 format=2]
 
 [ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -343,6 +343,25 @@
 [ext_resource path="res://scenes/actors/objects/crystal_tap/icon.png" type="Texture" id=341]
 [ext_resource path="res://scenes/actors/objects/crystal_tap/preview.png" type="Texture" id=342]
 [ext_resource path="res://scenes/actors/objects/checkpoint/icon.png" type="Texture" id=343]
+[ext_resource path="res://assets/tiles/lava_rock/slab_icon.png" type="Texture" id=344]
+[ext_resource path="res://assets/tiles/lava_rock/left_slope_icon.png" type="Texture" id=345]
+[ext_resource path="res://assets/tiles/lava_rock/right_slope_icon.png" type="Texture" id=346]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/2_slopeR.png" type="Texture" id=347]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/4_slopeR.png" type="Texture" id=348]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/3_slopeR.png" type="Texture" id=349]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/3_slab.png" type="Texture" id=350]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/1_slopeL.png" type="Texture" id=351]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/2_slab.png" type="Texture" id=352]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/2_slopeL.png" type="Texture" id=353]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/3_slopeL.png" type="Texture" id=354]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/4_slopeL.png" type="Texture" id=355]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/1_slopeR.png" type="Texture" id=356]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/4_slab.png" type="Texture" id=357]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/3_block.png" type="Texture" id=358]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/4_block.png" type="Texture" id=359]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/1_slab.png" type="Texture" id=360]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/1_block.png" type="Texture" id=361]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/2_block.png" type="Texture" id=362]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1847,8 +1866,48 @@ group_name = "Volcano"
 [node name="LavaRock" type="Node" parent="PlaceableItems/VolcanoGroup"]
 script = ExtResource( 3 )
 tileset_id = 29
+palette_icons = [ ExtResource( 338 ), ExtResource( 361 ), ExtResource( 362 ), ExtResource( 358 ), ExtResource( 359 ) ]
+palette_previews = [ ExtResource( 338 ), ExtResource( 361 ), ExtResource( 362 ), ExtResource( 358 ), ExtResource( 359 ) ]
+change_to = "LavaRockSlab"
+items_in_sequence = 4
 icon = ExtResource( 338 )
 preview = ExtResource( 338 )
+
+[node name="LavaRockSlab" type="Node" parent="PlaceableItems/VolcanoGroup"]
+script = ExtResource( 3 )
+tileset_id = 29
+tile_id = 1
+palette_icons = [ ExtResource( 344 ), ExtResource( 360 ), ExtResource( 352 ), ExtResource( 350 ), ExtResource( 357 ) ]
+palette_previews = [ ExtResource( 344 ), ExtResource( 360 ), ExtResource( 352 ), ExtResource( 350 ), ExtResource( 357 ) ]
+change_to = "LavaRockSlopeLeft"
+items_in_sequence = 4
+index_in_sequence = 1
+icon = ExtResource( 344 )
+preview = ExtResource( 344 )
+
+[node name="LavaRockSlopeLeft" type="Node" parent="PlaceableItems/VolcanoGroup"]
+script = ExtResource( 3 )
+tileset_id = 29
+tile_id = 2
+palette_icons = [ ExtResource( 345 ), ExtResource( 351 ), ExtResource( 353 ), ExtResource( 354 ), ExtResource( 355 ) ]
+palette_previews = [ ExtResource( 345 ), ExtResource( 351 ), ExtResource( 353 ), ExtResource( 354 ), ExtResource( 355 ) ]
+change_to = "LavaRockSlopeRight"
+items_in_sequence = 4
+index_in_sequence = 2
+icon = ExtResource( 345 )
+preview = ExtResource( 345 )
+
+[node name="LavaRockSlopeRight" type="Node" parent="PlaceableItems/VolcanoGroup"]
+script = ExtResource( 3 )
+tileset_id = 29
+tile_id = 3
+palette_icons = [ ExtResource( 346 ), ExtResource( 356 ), ExtResource( 347 ), ExtResource( 349 ), ExtResource( 348 ) ]
+palette_previews = [ ExtResource( 346 ), ExtResource( 356 ), ExtResource( 347 ), ExtResource( 349 ), ExtResource( 348 ) ]
+change_to = "LavaRock"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 346 )
+preview = ExtResource( 346 )
 
 [node name="BuildingGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 149 )
