@@ -1,73 +1,73 @@
 [gd_scene load_steps=388 format=2]
 
-[ext_resource path="res://scenes/editor/editor.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/editor/PlaceableItem.gd" type="Script" id=3]
+[ext_resource path="res://scenes/editor/toggle_button.gd" type="Script" id=3]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/tiles/bricks/icon.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/red_coin/preview.png" type="Texture" id=6]
-[ext_resource path="res://scenes/editor/camera_controls.gd" type="Script" id=7]
-[ext_resource path="res://scenes/editor/item_preview.gd" type="Script" id=8]
-[ext_resource path="res://scenes/editor/placeable_items_container.gd" type="Script" id=9]
+[ext_resource path="res://scenes/editor/window_open_button.gd" type="Script" id=7]
+[ext_resource path="res://scenes/editor/dragged_item.gd" type="Script" id=8]
+[ext_resource path="res://scenes/editor/luigi_entrance_item/entrance_removal.gd" type="Script" id=9]
 [ext_resource path="res://assets/tiles/grass/icon.png" type="Texture" id=10]
-[ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=11]
+[ext_resource path="res://scenes/editor/area_switcher.gd" type="Script" id=11]
 [ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=12]
 [ext_resource path="res://assets/tiles/grass/right_slope_icon.png" type="Texture" id=13]
 [ext_resource path="res://assets/tiles/grass/left_slope_icon.png" type="Texture" id=14]
 [ext_resource path="res://scenes/actors/objects/shine/icon.png" type="Texture" id=15]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/preview.png" type="Texture" id=16]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/icon.png" type="Texture" id=17]
-[ext_resource path="res://scenes/editor/window/LevelSettingsWindow.tscn" type="PackedScene" id=18]
-[ext_resource path="res://scenes/editor/window/ObjectSettingsWindow.tscn" type="PackedScene" id=19]
-[ext_resource path="res://scenes/editor/window/LevelCodeWindow.tscn" type="PackedScene" id=20]
-[ext_resource path="res://scenes/editor/window/AreasWindow.tscn" type="PackedScene" id=21]
-[ext_resource path="res://scenes/editor/assets/clickable_shadow_arrow_hover.png" type="Texture" id=22]
-[ext_resource path="res://scenes/editor/assets/outline.png" type="Texture" id=23]
-[ext_resource path="res://scenes/editor/bounds_control.gd" type="Script" id=24]
-[ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=25]
-[ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=26]
-[ext_resource path="res://scenes/editor/assets/clickable_shadow_arrow.png" type="Texture" id=27]
-[ext_resource path="res://scenes/editor/assets/level_settings.png" type="Texture" id=28]
-[ext_resource path="res://scenes/editor/assets/level_settings_hover.png" type="Texture" id=29]
-[ext_resource path="res://scenes/editor/assets/level_settings_press.png" type="Texture" id=30]
-[ext_resource path="res://scenes/editor/window_open_button.gd" type="Script" id=31]
-[ext_resource path="res://scenes/editor/toggle_button.gd" type="Script" id=32]
+[ext_resource path="res://scenes/editor/tools_panel.gd" type="Script" id=18]
+[ext_resource path="res://scenes/editor/bounds_control.gd" type="Script" id=19]
+[ext_resource path="res://scenes/editor/save_button.gd" type="Script" id=20]
+[ext_resource path="res://scenes/editor/item_picker.gd" type="Script" id=21]
+[ext_resource path="res://scenes/editor/item_preview.gd" type="Script" id=22]
+[ext_resource path="res://scenes/editor/layer_switcher_button.gd" type="Script" id=23]
+[ext_resource path="res://scenes/editor/PlaceableItem.gd" type="Script" id=24]
+[ext_resource path="res://scenes/editor/group.gd" type="Script" id=25]
+[ext_resource path="res://scenes/editor/luigi_entrance_item/entrance_placement.gd" type="Script" id=26]
+[ext_resource path="res://scenes/editor/camera_controls.gd" type="Script" id=27]
+[ext_resource path="res://scenes/editor/tool_selector.gd" type="Script" id=28]
+[ext_resource path="res://scenes/editor/editor.gd" type="Script" id=29]
+[ext_resource path="res://scenes/editor/grid_toggle.gd" type="Script" id=30]
+[ext_resource path="res://scenes/editor/placeable_items_container.gd" type="Script" id=31]
+[ext_resource path="res://scenes/editor/back_button.gd" type="Script" id=32]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/paratroopa_placement.gd" type="Script" id=33]
 [ext_resource path="res://scenes/actors/objects/seesaw/preview.png" type="Texture" id=34]
-[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=35]
-[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=36]
+[ext_resource path="res://scenes/editor/assets/clickable_shadow_arrow_hover.png" type="Texture" id=35]
+[ext_resource path="res://scenes/editor/assets/level_settings_press.png" type="Texture" id=36]
 [ext_resource path="res://scenes/actors/objects/seesaw/icon.png" type="Texture" id=37]
-[ext_resource path="res://scenes/editor/assets/layer_icon.png" type="Texture" id=38]
-[ext_resource path="res://scenes/editor/assets/layer_icon_hover.png" type="Texture" id=39]
-[ext_resource path="res://scenes/editor/assets/layer_icon_press.png" type="Texture" id=40]
-[ext_resource path="res://scenes/editor/layer_switcher_button.gd" type="Script" id=41]
+[ext_resource path="res://scenes/editor/assets/search_icon.png" type="Texture" id=38]
+[ext_resource path="res://scenes/editor/assets/eraser_tool_hover.png" type="Texture" id=39]
+[ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=40]
+[ext_resource path="res://scenes/editor/assets/pencil_tool_selected.png" type="Texture" id=41]
 [ext_resource path="res://scenes/actors/objects/metal_platform/icon.png" type="Texture" id=42]
 [ext_resource path="res://scenes/actors/objects/metal_platform/preview.png" type="Texture" id=43]
 [ext_resource path="res://scenes/actors/objects/door/icon.png" type="Texture" id=44]
-[ext_resource path="res://scenes/editor/assets/save_icon.png" type="Texture" id=45]
-[ext_resource path="res://scenes/editor/assets/save_icon_press.png" type="Texture" id=46]
-[ext_resource path="res://scenes/editor/assets/save_icon_hover.png" type="Texture" id=47]
-[ext_resource path="res://scenes/editor/save_button.gd" type="Script" id=48]
+[ext_resource path="res://scenes/editor/assets/save_icon_hover.png" type="Texture" id=45]
+[ext_resource path="res://scenes/editor/assets/layer_icon.png" type="Texture" id=46]
+[ext_resource path="res://scenes/editor/assets/level_settings_hover.png" type="Texture" id=47]
+[ext_resource path="res://scenes/editor/assets/eraser_tool.png" type="Texture" id=48]
 [ext_resource path="res://scenes/actors/objects/door/preview.png" type="Texture" id=49]
 [ext_resource path="res://scenes/actors/objects/big_tree/preview.png" type="Texture" id=50]
 [ext_resource path="res://scenes/actors/objects/big_tree/icon.png" type="Texture" id=51]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=52]
-[ext_resource path="res://scenes/editor/entrance_item/entrance_removal.gd" type="Script" id=53]
-[ext_resource path="res://scenes/editor/entrance_item/entrance_placement.gd" type="Script" id=54]
+[ext_resource path="res://scenes/editor/assets/layer_icon_press.png" type="Texture" id=53]
+[ext_resource path="res://scenes/editor/assets/search_icon_hover.png" type="Texture" id=54]
 [ext_resource path="res://scenes/actors/objects/entrance_luigi/sprite.png" type="Texture" id=55]
-[ext_resource path="res://scenes/editor/luigi_entrance_item/entrance_placement.gd" type="Script" id=56]
-[ext_resource path="res://scenes/editor/luigi_entrance_item/entrance_removal.gd" type="Script" id=57]
+[ext_resource path="res://scenes/editor/assets/clickable_shadow_arrow.png" type="Texture" id=56]
+[ext_resource path="res://scenes/editor/assets/pencil_tool_hover.png" type="Texture" id=57]
 [ext_resource path="res://assets/tiles/glass/icon.png" type="Texture" id=58]
 [ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/preview.png" type="Texture" id=59]
 [ext_resource path="res://scenes/shared/button_sound_player.gd" type="Script" id=60]
 [ext_resource path="res://assets/tiles/bricks/icon_slope_left.png" type="Texture" id=61]
 [ext_resource path="res://assets/tiles/bricks/icon_slope_right.png" type="Texture" id=62]
 [ext_resource path="res://assets/tiles/grass/slab_icon.png" type="Texture" id=63]
-[ext_resource path="res://scenes/editor/item_picker.gd" type="Script" id=64]
-[ext_resource path="res://scenes/editor/dragged_item.gd" type="Script" id=65]
-[ext_resource path="res://scenes/editor/assets/search_icon.png" type="Texture" id=66]
-[ext_resource path="res://scenes/editor/assets/search_icon_hover.png" type="Texture" id=67]
-[ext_resource path="res://scenes/editor/assets/search_icon_press.png" type="Texture" id=68]
+[ext_resource path="res://scenes/editor/assets/level_settings.png" type="Texture" id=64]
+[ext_resource path="res://scenes/editor/assets/eraser_tool_selected.png" type="Texture" id=65]
+[ext_resource path="res://scenes/editor/assets/search_icon_press.png" type="Texture" id=66]
+[ext_resource path="res://scenes/editor/assets/pencil_tool.png" type="Texture" id=67]
+[ext_resource path="res://scenes/editor/assets/save_icon_press.png" type="Texture" id=68]
 [ext_resource path="res://scenes/actors/objects/mushroom_body/mushroom_body.png" type="Texture" id=69]
 [ext_resource path="res://scenes/actors/objects/mushroom_curve/mushroom_curve.png" type="Texture" id=70]
 [ext_resource path="res://scenes/actors/objects/mushroom_top/mushroom_top.png" type="Texture" id=71]
@@ -108,21 +108,21 @@
 [ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/icon.png" type="Texture" id=106]
 [ext_resource path="res://assets/tiles/boo_block/icon.png" type="Texture" id=107]
 [ext_resource path="res://scenes/actors/objects/pipe/pipe.png" type="Texture" id=108]
-[ext_resource path="res://scenes/editor/area_switcher.gd" type="Script" id=109]
+[ext_resource path="res://scenes/editor/assets/save_icon.png" type="Texture" id=109]
 [ext_resource path="res://scenes/actors/objects/pipe/icon.png" type="Texture" id=110]
 [ext_resource path="res://assets/tiles/snow/slab_icon.png" type="Texture" id=111]
 [ext_resource path="res://assets/tiles/snow/left_slope_icon.png" type="Texture" id=112]
 [ext_resource path="res://assets/tiles/snow/icon.png" type="Texture" id=113]
 [ext_resource path="res://assets/tiles/snow/right_slope_icon.png" type="Texture" id=114]
-[ext_resource path="res://scenes/editor/tool_selector.gd" type="Script" id=115]
-[ext_resource path="res://scenes/editor/assets/pencil_tool.png" type="Texture" id=116]
-[ext_resource path="res://scenes/editor/assets/pencil_tool_selected.png" type="Texture" id=117]
-[ext_resource path="res://scenes/editor/assets/pencil_tool_hover.png" type="Texture" id=118]
-[ext_resource path="res://scenes/editor/tools_panel.gd" type="Script" id=119]
-[ext_resource path="res://scenes/editor/assets/eraser_tool.png" type="Texture" id=120]
-[ext_resource path="res://scenes/editor/assets/eraser_tool_hover.png" type="Texture" id=121]
-[ext_resource path="res://scenes/editor/assets/eraser_tool_selected.png" type="Texture" id=122]
-[ext_resource path="res://scenes/editor/grid_toggle.gd" type="Script" id=123]
+[ext_resource path="res://scenes/editor/assets/layer_icon_hover.png" type="Texture" id=115]
+[ext_resource path="res://scenes/editor/assets/arrow_icon.png" type="Texture" id=116]
+[ext_resource path="res://scenes/editor/assets/arrow_icon_hover.png" type="Texture" id=117]
+[ext_resource path="res://scenes/editor/assets/arrow_icon_press.png" type="Texture" id=118]
+[ext_resource path="res://scenes/editor/assets/outline.png" type="Texture" id=119]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=120]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=121]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=122]
+[ext_resource path="res://scenes/editor/quit_wo_saving_window.gd" type="Script" id=123]
 [ext_resource path="res://scenes/actors/objects/snow_tree/preview.png" type="Texture" id=124]
 [ext_resource path="res://scenes/actors/objects/snow_tree/snow_tree.png" type="Texture" id=125]
 [ext_resource path="res://scenes/actors/objects/bill_blaster/preview.png" type="Texture" id=126]
@@ -148,13 +148,13 @@
 [ext_resource path="res://scenes/actors/objects/rainbow_powerup/icon.png" type="Texture" id=146]
 [ext_resource path="res://scenes/actors/objects/vanish_powerup/icon.png" type="Texture" id=147]
 [ext_resource path="res://scenes/actors/objects/shine_shard/icon.png" type="Texture" id=148]
-[ext_resource path="res://scenes/editor/group.gd" type="Script" id=149]
+[ext_resource path="res://scenes/editor/entrance_item/entrance_removal.gd" type="Script" id=149]
 [ext_resource path="res://scenes/actors/objects/shine_shard/shard.png" type="Texture" id=150]
 [ext_resource path="res://scenes/actors/objects/cannon/preview.png" type="Texture" id=151]
 [ext_resource path="res://scenes/actors/objects/cannon/icon.png" type="Texture" id=152]
 [ext_resource path="res://scenes/actors/objects/touch_lift/icon.png" type="Texture" id=153]
 [ext_resource path="res://scenes/actors/objects/touch_lift_platform/preview.png" type="Texture" id=154]
-[ext_resource path="res://scenes/editor/window/ColorPickerWindow.tscn" type="PackedScene" id=155]
+[ext_resource path="res://scenes/editor/entrance_item/entrance_placement.gd" type="Script" id=155]
 [ext_resource path="res://scenes/actors/objects/platform_wheel/icon.png" type="Texture" id=156]
 [ext_resource path="res://scenes/actors/objects/platform_wheel/preview.png" type="Texture" id=157]
 [ext_resource path="res://assets/tiles/wood/icon.png" type="Texture" id=158]
@@ -166,8 +166,8 @@
 [ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=164]
 [ext_resource path="res://scenes/actors/objects/star_coin/icon.png" type="Texture" id=165]
 [ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=166]
-[ext_resource path="res://scenes/editor/back_button.gd" type="Script" id=167]
-[ext_resource path="res://scenes/editor/quit_wo_saving_window.gd" type="Script" id=168]
+[ext_resource path="res://scenes/editor/window/AreasWindow.tscn" type="PackedScene" id=167]
+[ext_resource path="res://scenes/editor/window/LevelSettingsWindow.tscn" type="PackedScene" id=168]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=169]
 [ext_resource path="res://assets/tiles/red_gem_block/icon.png" type="Texture" id=170]
 [ext_resource path="res://assets/tiles/blue_gem_block/icon.png" type="Texture" id=171]
@@ -216,9 +216,9 @@
 [ext_resource path="res://scenes/actors/objects/cave_spore/cave_spore.png" type="Texture" id=214]
 [ext_resource path="res://scenes/actors/objects/cave_spore_mini/cave_spore_mini.png" type="Texture" id=215]
 [ext_resource path="res://scenes/actors/objects/cave_spore_mini/icon.png" type="Texture" id=216]
-[ext_resource path="res://scenes/editor/assets/arrow_icon.png" type="Texture" id=217]
-[ext_resource path="res://scenes/editor/assets/arrow_icon_hover.png" type="Texture" id=218]
-[ext_resource path="res://scenes/editor/assets/arrow_icon_press.png" type="Texture" id=219]
+[ext_resource path="res://scenes/editor/window/ObjectSettingsWindow.tscn" type="PackedScene" id=217]
+[ext_resource path="res://scenes/editor/window/LevelCodeWindow.tscn" type="PackedScene" id=218]
+[ext_resource path="res://scenes/editor/window/ColorPickerWindow.tscn" type="PackedScene" id=219]
 [ext_resource path="res://scenes/actors/objects/snow_log/snow_log.png" type="Texture" id=220]
 [ext_resource path="res://scenes/actors/objects/snow_log/icon.png" type="Texture" id=221]
 [ext_resource path="res://assets/tiles/tiled_floor/icon.png" type="Texture" id=222]
@@ -922,7 +922,7 @@ size = 128
 font_data = ExtResource( 4 )
 
 [node name="Editor" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource( 29 )
 nodes_to_load = [ NodePath("Shared"), NodePath("Camera2D"), NodePath("Backgrounds") ]
 placeable_items_path = NodePath("PlaceableItems")
 placeable_items_button_container_path = NodePath("UI/PlaceableItemsContainer")
@@ -936,7 +936,7 @@ position = Vector2( 0.198608, -0.468788 )
 [node name="PlaceableItems" type="Node" parent="."]
 
 [node name="SampleObject" type="Node" parent="PlaceableItems"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 31
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -944,23 +944,23 @@ icon = ExtResource( 137 )
 preview = ExtResource( 137 )
 
 [node name="SpecialGroup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 149 )
+script = ExtResource( 25 )
 color = Color( 0.439216, 0.121569, 0.517647, 1 )
 group_name = "Special"
 
 [node name="Entrance" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 is_object = true
 object_center = Vector2( 15, 16 )
 change_to = "EntranceLuigi"
 items_in_sequence = 2
 icon = ExtResource( 12 )
 preview = ExtResource( 12 )
-placement_action = ExtResource( 54 )
-removal_action = ExtResource( 53 )
+placement_action = ExtResource( 155 )
+removal_action = ExtResource( 149 )
 
 [node name="EntranceLuigi" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 5
 is_object = true
 object_center = Vector2( 15, 16 )
@@ -969,11 +969,11 @@ items_in_sequence = 2
 index_in_sequence = 1
 icon = ExtResource( 55 )
 preview = ExtResource( 55 )
-placement_action = ExtResource( 56 )
-removal_action = ExtResource( 57 )
+placement_action = ExtResource( 26 )
+removal_action = ExtResource( 9 )
 
 [node name="Checkpoint" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 82
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -981,7 +981,7 @@ icon = ExtResource( 343 )
 preview = ExtResource( 343 )
 
 [node name="Coin" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 1
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -991,7 +991,7 @@ icon = ExtResource( 17 )
 preview = ExtResource( 16 )
 
 [node name="RedCoin" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 30
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1002,7 +1002,7 @@ icon = ExtResource( 136 )
 preview = ExtResource( 6 )
 
 [node name="BlueCoin" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 40
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1013,7 +1013,7 @@ icon = SubResource( 1 )
 preview = SubResource( 2 )
 
 [node name="Shine" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 2
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1023,7 +1023,7 @@ icon = ExtResource( 15 )
 preview = ExtResource( 15 )
 
 [node name="ShineShard" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 45
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1034,7 +1034,7 @@ icon = ExtResource( 148 )
 preview = ExtResource( 150 )
 
 [node name="StarCoin" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 52
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1045,7 +1045,7 @@ icon = ExtResource( 165 )
 preview = ExtResource( 165 )
 
 [node name="HoverBox" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 19
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1055,7 +1055,7 @@ icon = SubResource( 3 )
 preview = ExtResource( 100 )
 
 [node name="RocketBox" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 38
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1066,7 +1066,7 @@ icon = SubResource( 4 )
 preview = SubResource( 5 )
 
 [node name="TurboBox" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 39
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1077,7 +1077,7 @@ icon = SubResource( 6 )
 preview = SubResource( 7 )
 
 [node name="SmallBottle" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 21
 is_object = true
 object_center = Vector2( 8, 0 )
@@ -1089,7 +1089,7 @@ icon = ExtResource( 103 )
 preview = ExtResource( 102 )
 
 [node name="BigBottle" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 22
 is_object = true
 object_center = Vector2( 8, 0 )
@@ -1102,7 +1102,7 @@ icon = ExtResource( 104 )
 preview = ExtResource( 105 )
 
 [node name="BreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 33
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1112,7 +1112,7 @@ icon = ExtResource( 140 )
 preview = ExtResource( 141 )
 
 [node name="MetalBreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 35
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1123,7 +1123,7 @@ icon = ExtResource( 143 )
 preview = ExtResource( 142 )
 
 [node name="RainbowBreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 42
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1134,7 +1134,7 @@ icon = ExtResource( 106 )
 preview = ExtResource( 59 )
 
 [node name="VanishPassthroughBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 44
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1142,7 +1142,7 @@ icon = ExtResource( 179 )
 preview = ExtResource( 178 )
 
 [node name="WingPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 57
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1152,7 +1152,7 @@ icon = ExtResource( 185 )
 preview = ExtResource( 185 )
 
 [node name="MetalPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 34
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1163,7 +1163,7 @@ icon = ExtResource( 182 )
 preview = ExtResource( 182 )
 
 [node name="VanishPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 43
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1174,7 +1174,7 @@ icon = ExtResource( 147 )
 preview = ExtResource( 147 )
 
 [node name="RainbowPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 41
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1185,7 +1185,7 @@ icon = ExtResource( 146 )
 preview = ExtResource( 101 )
 
 [node name="Cannon" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 46
 is_object = true
 object_center = Vector2( 16, 32 )
@@ -1194,7 +1194,7 @@ icon = ExtResource( 152 )
 preview = ExtResource( 151 )
 
 [node name="Switch" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 80
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1202,7 +1202,7 @@ icon = ExtResource( 340 )
 preview = ExtResource( 339 )
 
 [node name="SwitchBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 79
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1210,7 +1210,7 @@ icon = ExtResource( 337 )
 preview = ExtResource( 336 )
 
 [node name="CrystalTap" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 81
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1218,7 +1218,7 @@ icon = ExtResource( 341 )
 preview = ExtResource( 342 )
 
 [node name="Seesaw" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 47
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1228,7 +1228,7 @@ icon = ExtResource( 37 )
 preview = ExtResource( 34 )
 
 [node name="Door" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 48
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1238,7 +1238,7 @@ icon = ExtResource( 44 )
 preview = ExtResource( 49 )
 
 [node name="TouchLift" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 49
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1248,7 +1248,7 @@ icon = ExtResource( 153 )
 preview = ExtResource( 154 )
 
 [node name="PlatformWheel" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 50
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1258,7 +1258,7 @@ icon = ExtResource( 156 )
 preview = ExtResource( 157 )
 
 [node name="NoteBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 58
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1266,7 +1266,7 @@ icon = ExtResource( 198 )
 preview = ExtResource( 199 )
 
 [node name="Sign" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 14
 is_object = true
 object_center = Vector2( 16, 12 )
@@ -1275,7 +1275,7 @@ icon = ExtResource( 94 )
 preview = ExtResource( 94 )
 
 [node name="Water" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 72
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1285,7 +1285,7 @@ icon = ExtResource( 235 )
 preview = ExtResource( 236 )
 
 [node name="Lava" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 75
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1295,7 +1295,7 @@ icon = ExtResource( 289 )
 preview = ExtResource( 290 )
 
 [node name="Pipe" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 23
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1303,12 +1303,12 @@ icon = ExtResource( 110 )
 preview = ExtResource( 108 )
 
 [node name="EnemiesGroup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 149 )
+script = ExtResource( 25 )
 color = Color( 0.517647, 0.121569, 0.121569, 1 )
 group_name = "Enemies"
 
 [node name="GreenDemon" type="Node" parent="PlaceableItems/EnemiesGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 15
 is_object = true
 object_center = Vector2( 8, 8 )
@@ -1317,7 +1317,7 @@ icon = ExtResource( 96 )
 preview = ExtResource( 95 )
 
 [node name="Jelectro" type="Node" parent="PlaceableItems/EnemiesGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 69
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1325,7 +1325,7 @@ icon = ExtResource( 228 )
 preview = ExtResource( 228 )
 
 [node name="Goomba" type="Node" parent="PlaceableItems/EnemiesGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 29
 is_object = true
 object_center = Vector2( 8, 8 )
@@ -1334,7 +1334,7 @@ icon = ExtResource( 133 )
 preview = ExtResource( 132 )
 
 [node name="KoopaTroopa" type="Node" parent="PlaceableItems/EnemiesGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 28
 is_object = true
 object_center = Vector2( 8, 8 )
@@ -1345,7 +1345,7 @@ icon = ExtResource( 131 )
 preview = ExtResource( 130 )
 
 [node name="ParaTroopa" type="Node" parent="PlaceableItems/EnemiesGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 28
 is_object = true
 object_center = Vector2( 8, 8 )
@@ -1358,7 +1358,7 @@ preview = SubResource( 9 )
 placement_action = ExtResource( 33 )
 
 [node name="BobOmb" type="Node" parent="PlaceableItems/EnemiesGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 27
 is_object = true
 object_center = Vector2( 8, 8 )
@@ -1367,7 +1367,7 @@ icon = ExtResource( 129 )
 preview = ExtResource( 128 )
 
 [node name="CheepCheep" type="Node" parent="PlaceableItems/EnemiesGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 74
 is_object = true
 object_center = Vector2( 8, 8 )
@@ -1376,7 +1376,7 @@ icon = ExtResource( 240 )
 preview = ExtResource( 239 )
 
 [node name="Goonie" type="Node" parent="PlaceableItems/EnemiesGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 70
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1386,7 +1386,7 @@ icon = ExtResource( 231 )
 preview = ExtResource( 232 )
 
 [node name="BillBlaster" type="Node" parent="PlaceableItems/EnemiesGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 26
 is_object = true
 object_center = Vector2( 8, 8 )
@@ -1395,7 +1395,7 @@ icon = ExtResource( 127 )
 preview = ExtResource( 126 )
 
 [node name="BigSteely" type="Node" parent="PlaceableItems/EnemiesGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 36
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -1403,12 +1403,12 @@ icon = ExtResource( 144 )
 preview = ExtResource( 145 )
 
 [node name="GrassGroup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 149 )
+script = ExtResource( 25 )
 color = Color( 0.121569, 0.517647, 0.184314, 1 )
 group_name = "Grass"
 
 [node name="Grass" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 2
 palette_icons = [ ExtResource( 10 ), ExtResource( 243 ), ExtResource( 242 ), ExtResource( 244 ), ExtResource( 241 ) ]
 palette_previews = [ ExtResource( 10 ), ExtResource( 243 ), ExtResource( 242 ), ExtResource( 244 ), ExtResource( 241 ) ]
@@ -1418,7 +1418,7 @@ icon = ExtResource( 10 )
 preview = ExtResource( 10 )
 
 [node name="GrassSlab" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 2
 tile_id = 1
 palette_icons = [ ExtResource( 63 ), ExtResource( 251 ), ExtResource( 247 ), ExtResource( 246 ), ExtResource( 249 ) ]
@@ -1430,7 +1430,7 @@ icon = ExtResource( 63 )
 preview = ExtResource( 63 )
 
 [node name="GrassSlopeLeft" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 2
 tile_id = 2
 palette_icons = [ ExtResource( 14 ), ExtResource( 248 ), ExtResource( 255 ), ExtResource( 254 ), ExtResource( 252 ) ]
@@ -1442,7 +1442,7 @@ icon = ExtResource( 14 )
 preview = ExtResource( 14 )
 
 [node name="GrassSlopeRight" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 2
 tile_id = 3
 palette_icons = [ ExtResource( 13 ), ExtResource( 245 ), ExtResource( 253 ), ExtResource( 256 ), ExtResource( 250 ) ]
@@ -1454,7 +1454,7 @@ icon = ExtResource( 13 )
 preview = ExtResource( 13 )
 
 [node name="BigTree" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 4
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1463,7 +1463,7 @@ icon = ExtResource( 51 )
 preview = ExtResource( 50 )
 
 [node name="PineTree" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 62
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1474,7 +1474,7 @@ icon = ExtResource( 208 )
 preview = ExtResource( 207 )
 
 [node name="LargePineTree" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 63
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1486,7 +1486,7 @@ icon = ExtResource( 209 )
 preview = ExtResource( 210 )
 
 [node name="BigBush" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 11
 is_object = true
 object_center = Vector2( 32, 20 )
@@ -1498,7 +1498,7 @@ icon = ExtResource( 82 )
 preview = ExtResource( 79 )
 
 [node name="SmallBush" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 12
 is_object = true
 object_center = Vector2( 32, 12 )
@@ -1509,7 +1509,7 @@ icon = ExtResource( 81 )
 preview = ExtResource( 80 )
 
 [node name="FlowerBush" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 78
 is_object = true
 object_center = Vector2( 32, 12 )
@@ -1518,7 +1518,7 @@ icon = ExtResource( 335 )
 preview = ExtResource( 335 )
 
 [node name="Log" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 10
 is_object = true
 object_center = Vector2( 8, 8 )
@@ -1527,7 +1527,7 @@ icon = ExtResource( 78 )
 preview = ExtResource( 77 )
 
 [node name="BonePlatform" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 13
 is_object = true
 object_center = Vector2( 16, 0 )
@@ -1536,7 +1536,7 @@ icon = ExtResource( 84 )
 preview = ExtResource( 83 )
 
 [node name="WoodPlatform" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 56
 is_object = true
 object_center = Vector2( 64, 0 )
@@ -1546,7 +1546,7 @@ icon = ExtResource( 183 )
 preview = ExtResource( 184 )
 
 [node name="Butterfly" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 71
 is_object = true
 object_center = Vector2( 8, 8 )
@@ -1555,12 +1555,12 @@ icon = ExtResource( 234 )
 preview = ExtResource( 233 )
 
 [node name="SandGroup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 149 )
+script = ExtResource( 25 )
 color = Color( 0.552941, 0.533333, 0.0862745, 1 )
 group_name = "Sand"
 
 [node name="Sand" type="Node" parent="PlaceableItems/SandGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 27
 palette_icons = [ ExtResource( 303 ), ExtResource( 311 ), ExtResource( 313 ), ExtResource( 312 ) ]
 palette_previews = [ ExtResource( 303 ), ExtResource( 311 ), ExtResource( 313 ), ExtResource( 312 ) ]
@@ -1570,7 +1570,7 @@ icon = ExtResource( 303 )
 preview = ExtResource( 303 )
 
 [node name="SandSlab" type="Node" parent="PlaceableItems/SandGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 27
 tile_id = 1
 palette_icons = [ ExtResource( 304 ), ExtResource( 317 ), ExtResource( 316 ), ExtResource( 318 ) ]
@@ -1582,7 +1582,7 @@ icon = ExtResource( 304 )
 preview = ExtResource( 304 )
 
 [node name="SandSlopeLeft" type="Node" parent="PlaceableItems/SandGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 27
 tile_id = 2
 palette_icons = [ ExtResource( 309 ), ExtResource( 315 ), ExtResource( 319 ), ExtResource( 314 ) ]
@@ -1594,7 +1594,7 @@ icon = ExtResource( 309 )
 preview = ExtResource( 309 )
 
 [node name="SandSlopeRight" type="Node" parent="PlaceableItems/SandGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 27
 tile_id = 3
 palette_icons = [ ExtResource( 310 ), ExtResource( 322 ), ExtResource( 320 ), ExtResource( 321 ) ]
@@ -1606,7 +1606,7 @@ icon = ExtResource( 310 )
 preview = ExtResource( 310 )
 
 [node name="PalmTree" type="Node" parent="PlaceableItems/SandGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 76
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1615,7 +1615,7 @@ icon = ExtResource( 305 )
 preview = ExtResource( 306 )
 
 [node name="BarrelCactus" type="Node" parent="PlaceableItems/SandGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 77
 is_object = true
 object_center = Vector2( 32, 12 )
@@ -1624,7 +1624,7 @@ icon = ExtResource( 308 )
 preview = ExtResource( 307 )
 
 [node name="PyramidBrick" type="Node" parent="PlaceableItems/SandGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 28
 palette_icons = [ ExtResource( 323 ), ExtResource( 334 ), ExtResource( 327 ), ExtResource( 326 ) ]
 palette_previews = [ ExtResource( 323 ), ExtResource( 334 ), ExtResource( 327 ), ExtResource( 326 ) ]
@@ -1634,7 +1634,7 @@ icon = ExtResource( 323 )
 preview = ExtResource( 323 )
 
 [node name="PyramidBrickSlopeLeft" type="Node" parent="PlaceableItems/SandGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 28
 tile_id = 2
 palette_icons = [ ExtResource( 325 ), ExtResource( 328 ), ExtResource( 330 ), ExtResource( 333 ) ]
@@ -1646,7 +1646,7 @@ icon = ExtResource( 325 )
 preview = ExtResource( 325 )
 
 [node name="PyramidBrickSlopeRight" type="Node" parent="PlaceableItems/SandGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 28
 tile_id = 3
 palette_icons = [ ExtResource( 324 ), ExtResource( 332 ), ExtResource( 329 ), ExtResource( 331 ) ]
@@ -1658,12 +1658,12 @@ icon = ExtResource( 324 )
 preview = ExtResource( 324 )
 
 [node name="SnowGroup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 149 )
+script = ExtResource( 25 )
 color = Color( 0.121569, 0.322702, 0.517647, 1 )
 group_name = "Snow"
 
 [node name="Snow" type="Node" parent="PlaceableItems/SnowGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 7
 change_to = "SnowSlab"
 items_in_sequence = 4
@@ -1671,7 +1671,7 @@ icon = ExtResource( 113 )
 preview = ExtResource( 113 )
 
 [node name="SnowSlab" type="Node" parent="PlaceableItems/SnowGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 7
 tile_id = 1
 change_to = "SnowSlopeLeft"
@@ -1681,7 +1681,7 @@ icon = ExtResource( 111 )
 preview = ExtResource( 111 )
 
 [node name="SnowSlopeLeft" type="Node" parent="PlaceableItems/SnowGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 7
 tile_id = 2
 change_to = "SnowSlopeRight"
@@ -1691,7 +1691,7 @@ icon = ExtResource( 112 )
 preview = ExtResource( 112 )
 
 [node name="SnowSlopeRight" type="Node" parent="PlaceableItems/SnowGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 7
 tile_id = 3
 change_to = "Snow"
@@ -1701,7 +1701,7 @@ icon = ExtResource( 114 )
 preview = ExtResource( 114 )
 
 [node name="Wood" type="Node" parent="PlaceableItems/SnowGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 10
 palette_icons = [ ExtResource( 158 ), ExtResource( 284 ), ExtResource( 283 ) ]
 palette_previews = [ ExtResource( 158 ), ExtResource( 284 ), ExtResource( 283 ) ]
@@ -1709,7 +1709,7 @@ icon = ExtResource( 158 )
 preview = ExtResource( 158 )
 
 [node name="SnowTree" type="Node" parent="PlaceableItems/SnowGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 24
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1720,7 +1720,7 @@ icon = ExtResource( 125 )
 preview = ExtResource( 124 )
 
 [node name="LargeSnowTree" type="Node" parent="PlaceableItems/SnowGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 59
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1732,7 +1732,7 @@ icon = ExtResource( 204 )
 preview = ExtResource( 202 )
 
 [node name="SnowPillar" type="Node" parent="PlaceableItems/SnowGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 60
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1743,7 +1743,7 @@ icon = ExtResource( 201 )
 preview = ExtResource( 205 )
 
 [node name="LargeSnowPillar" type="Node" parent="PlaceableItems/SnowGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 61
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1755,7 +1755,7 @@ icon = ExtResource( 203 )
 preview = ExtResource( 206 )
 
 [node name="SnowLog" type="Node" parent="PlaceableItems/SnowGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 67
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1765,7 +1765,7 @@ icon = ExtResource( 221 )
 preview = ExtResource( 220 )
 
 [node name="SnowPlatform" type="Node" parent="PlaceableItems/SnowGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 32
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1775,12 +1775,12 @@ icon = ExtResource( 138 )
 preview = ExtResource( 139 )
 
 [node name="CaveGroup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 149 )
+script = ExtResource( 25 )
 color = Color( 0.254902, 0.121569, 0.517647, 1 )
 group_name = "Cave"
 
 [node name="Cave" type="Node" parent="PlaceableItems/CaveGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 8
 change_to = "CaveSlab"
 items_in_sequence = 2
@@ -1788,7 +1788,7 @@ icon = ExtResource( 134 )
 preview = ExtResource( 134 )
 
 [node name="CaveSlab" type="Node" parent="PlaceableItems/CaveGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 8
 tile_id = 1
 change_to = "Cave"
@@ -1798,13 +1798,13 @@ icon = ExtResource( 135 )
 preview = ExtResource( 135 )
 
 [node name="BlackGranite" type="Node" parent="PlaceableItems/CaveGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 19
 icon = ExtResource( 197 )
 preview = ExtResource( 197 )
 
 [node name="CaveTree" type="Node" parent="PlaceableItems/CaveGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 54
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1815,7 +1815,7 @@ icon = ExtResource( 177 )
 preview = ExtResource( 176 )
 
 [node name="LargeCaveTree" type="Node" parent="PlaceableItems/CaveGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 55
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1827,7 +1827,7 @@ icon = ExtResource( 180 )
 preview = ExtResource( 181 )
 
 [node name="CavePlant" type="Node" parent="PlaceableItems/CaveGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 64
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1836,7 +1836,7 @@ icon = ExtResource( 211 )
 preview = ExtResource( 212 )
 
 [node name="CaveSpore" type="Node" parent="PlaceableItems/CaveGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 65
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1847,7 +1847,7 @@ icon = ExtResource( 213 )
 preview = ExtResource( 214 )
 
 [node name="CaveSporeMini" type="Node" parent="PlaceableItems/CaveGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 66
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -1859,12 +1859,12 @@ icon = ExtResource( 216 )
 preview = ExtResource( 215 )
 
 [node name="VolcanoGroup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 149 )
+script = ExtResource( 25 )
 color = Color( 0.552941, 0.239216, 0.0862745, 1 )
 group_name = "Volcano"
 
 [node name="LavaRock" type="Node" parent="PlaceableItems/VolcanoGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 29
 palette_icons = [ ExtResource( 338 ), ExtResource( 361 ), ExtResource( 362 ), ExtResource( 358 ), ExtResource( 359 ) ]
 palette_previews = [ ExtResource( 338 ), ExtResource( 361 ), ExtResource( 362 ), ExtResource( 358 ), ExtResource( 359 ) ]
@@ -1874,7 +1874,7 @@ icon = ExtResource( 338 )
 preview = ExtResource( 338 )
 
 [node name="LavaRockSlab" type="Node" parent="PlaceableItems/VolcanoGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 29
 tile_id = 1
 palette_icons = [ ExtResource( 344 ), ExtResource( 360 ), ExtResource( 352 ), ExtResource( 350 ), ExtResource( 357 ) ]
@@ -1886,7 +1886,7 @@ icon = ExtResource( 344 )
 preview = ExtResource( 344 )
 
 [node name="LavaRockSlopeLeft" type="Node" parent="PlaceableItems/VolcanoGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 29
 tile_id = 2
 palette_icons = [ ExtResource( 345 ), ExtResource( 351 ), ExtResource( 353 ), ExtResource( 354 ), ExtResource( 355 ) ]
@@ -1898,7 +1898,7 @@ icon = ExtResource( 345 )
 preview = ExtResource( 345 )
 
 [node name="LavaRockSlopeRight" type="Node" parent="PlaceableItems/VolcanoGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 29
 tile_id = 3
 palette_icons = [ ExtResource( 346 ), ExtResource( 356 ), ExtResource( 347 ), ExtResource( 349 ), ExtResource( 348 ) ]
@@ -1910,12 +1910,12 @@ icon = ExtResource( 346 )
 preview = ExtResource( 346 )
 
 [node name="BuildingGroup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 149 )
+script = ExtResource( 25 )
 color = Color( 0.121569, 0.180392, 0.517647, 1 )
 group_name = "Building"
 
 [node name="Brick" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 1
 change_to = "BrickSlopeLeft"
 items_in_sequence = 3
@@ -1923,7 +1923,7 @@ icon = ExtResource( 5 )
 preview = ExtResource( 5 )
 
 [node name="BrickSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 1
 tile_id = 3
 change_to = "Brick"
@@ -1933,7 +1933,7 @@ icon = ExtResource( 62 )
 preview = ExtResource( 62 )
 
 [node name="BrickSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 1
 tile_id = 2
 change_to = "BrickSlopeRight"
@@ -1943,7 +1943,7 @@ icon = ExtResource( 61 )
 preview = ExtResource( 61 )
 
 [node name="GreenBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 3
 change_to = "GreenBrickSlopeLeft"
 items_in_sequence = 3
@@ -1951,7 +1951,7 @@ icon = ExtResource( 86 )
 preview = ExtResource( 86 )
 
 [node name="GreenBrickSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 3
 tile_id = 3
 change_to = "GreenBrick"
@@ -1961,7 +1961,7 @@ icon = ExtResource( 93 )
 preview = ExtResource( 93 )
 
 [node name="GreenBrickSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 3
 tile_id = 2
 change_to = "GreenBrickSlopeRight"
@@ -1971,7 +1971,7 @@ icon = ExtResource( 88 )
 preview = ExtResource( 88 )
 
 [node name="RedBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 4
 change_to = "RedBrickSlopeLeft"
 items_in_sequence = 3
@@ -1979,7 +1979,7 @@ icon = ExtResource( 89 )
 preview = ExtResource( 89 )
 
 [node name="RedBrickSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 4
 tile_id = 3
 change_to = "RedBrick"
@@ -1989,7 +1989,7 @@ icon = ExtResource( 85 )
 preview = ExtResource( 85 )
 
 [node name="RedBrickSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 4
 tile_id = 2
 change_to = "RedBrickSlopeRight"
@@ -1999,7 +1999,7 @@ icon = ExtResource( 92 )
 preview = ExtResource( 92 )
 
 [node name="YellowBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 5
 change_to = "YellowBrickSlopeLeft"
 items_in_sequence = 3
@@ -2007,7 +2007,7 @@ icon = ExtResource( 90 )
 preview = ExtResource( 90 )
 
 [node name="YellowBrickSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 5
 tile_id = 3
 change_to = "YellowBrick"
@@ -2017,7 +2017,7 @@ icon = ExtResource( 91 )
 preview = ExtResource( 91 )
 
 [node name="YellowBrickSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 5
 tile_id = 2
 change_to = "YellowBrickSlopeRight"
@@ -2027,7 +2027,7 @@ icon = ExtResource( 87 )
 preview = ExtResource( 87 )
 
 [node name="RedGemBlock" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 11
 change_to = "YellowGemBlock"
 items_in_sequence = 4
@@ -2035,7 +2035,7 @@ icon = ExtResource( 170 )
 preview = ExtResource( 170 )
 
 [node name="YellowGemBlock" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 12
 change_to = "GreenGemBlock"
 items_in_sequence = 4
@@ -2044,7 +2044,7 @@ icon = ExtResource( 172 )
 preview = ExtResource( 172 )
 
 [node name="GreenGemBlock" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 13
 change_to = "BlueGemBlock"
 items_in_sequence = 4
@@ -2053,7 +2053,7 @@ icon = ExtResource( 173 )
 preview = ExtResource( 173 )
 
 [node name="BlueGemBlock" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 14
 change_to = "RedGemBlock"
 items_in_sequence = 4
@@ -2062,7 +2062,7 @@ icon = ExtResource( 171 )
 preview = ExtResource( 171 )
 
 [node name="Glass" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 9
 palette_icons = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
 palette_previews = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
@@ -2070,7 +2070,7 @@ icon = ExtResource( 58 )
 preview = ExtResource( 58 )
 
 [node name="MetalPlatform" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 3
 is_object = true
 object_center = Vector2( 32, 0 )
@@ -2080,7 +2080,7 @@ icon = ExtResource( 42 )
 preview = ExtResource( 43 )
 
 [node name="PearlPlatform" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 51
 is_object = true
 object_center = Vector2( 16, 0 )
@@ -2089,7 +2089,7 @@ icon = ExtResource( 160 )
 preview = ExtResource( 159 )
 
 [node name="MarbleBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 15
 change_to = "MarbleBrickSlopeLeft"
 items_in_sequence = 3
@@ -2097,7 +2097,7 @@ icon = ExtResource( 188 )
 preview = ExtResource( 188 )
 
 [node name="MarbleBrickSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 15
 tile_id = 3
 change_to = "MarbleBrick"
@@ -2107,7 +2107,7 @@ icon = ExtResource( 191 )
 preview = ExtResource( 191 )
 
 [node name="MarbleBrickSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 15
 tile_id = 2
 change_to = "MarbleBrickSlopeRight"
@@ -2117,7 +2117,7 @@ icon = ExtResource( 190 )
 preview = ExtResource( 190 )
 
 [node name="StoneBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 16
 change_to = "StoneBrickSlopeLeft"
 items_in_sequence = 3
@@ -2125,7 +2125,7 @@ icon = ExtResource( 187 )
 preview = ExtResource( 187 )
 
 [node name="StoneBrickSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 16
 tile_id = 3
 change_to = "StoneBrick"
@@ -2135,7 +2135,7 @@ icon = ExtResource( 194 )
 preview = ExtResource( 194 )
 
 [node name="StoneBrickSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 16
 tile_id = 2
 change_to = "StoneBrickSlopeRight"
@@ -2145,7 +2145,7 @@ icon = ExtResource( 195 )
 preview = ExtResource( 195 )
 
 [node name="ToyBlock" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 17
 change_to = "ToyBlockSlopeLeft"
 items_in_sequence = 3
@@ -2153,7 +2153,7 @@ icon = ExtResource( 186 )
 preview = ExtResource( 186 )
 
 [node name="ToyBlockSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 17
 tile_id = 3
 change_to = "ToyBlock"
@@ -2163,7 +2163,7 @@ icon = ExtResource( 193 )
 preview = ExtResource( 193 )
 
 [node name="ToyBlockSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 17
 tile_id = 2
 change_to = "ToyBlockSlopeRight"
@@ -2173,24 +2173,24 @@ icon = ExtResource( 192 )
 preview = ExtResource( 192 )
 
 [node name="Cobblestone" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 20
 icon = ExtResource( 200 )
 preview = ExtResource( 200 )
 
 [node name="CastleGroup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 149 )
+script = ExtResource( 25 )
 color = Color( 0.423529, 0.176471, 0.309804, 1 )
 group_name = "Castle"
 
 [node name="CastleWall" type="Node" parent="PlaceableItems/CastleGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 25
 icon = ExtResource( 226 )
 preview = ExtResource( 226 )
 
 [node name="CastleWindow" type="Node" parent="PlaceableItems/CastleGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 68
 is_object = true
 object_center = Vector2( 16, 16 )
@@ -2198,13 +2198,13 @@ icon = ExtResource( 227 )
 preview = ExtResource( 227 )
 
 [node name="TiledFloor" type="Node" parent="PlaceableItems/CastleGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 22
 icon = ExtResource( 222 )
 preview = ExtResource( 222 )
 
 [node name="Carpet" type="Node" parent="PlaceableItems/CastleGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 23
 palette_icons = [ ExtResource( 223 ), ExtResource( 286 ), ExtResource( 285 ), ExtResource( 287 ), ExtResource( 288 ) ]
 palette_previews = [ ExtResource( 223 ), ExtResource( 286 ), ExtResource( 285 ), ExtResource( 287 ), ExtResource( 288 ) ]
@@ -2212,13 +2212,13 @@ icon = ExtResource( 223 )
 preview = ExtResource( 223 )
 
 [node name="CastleWood" type="Node" parent="PlaceableItems/CastleGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 24
 icon = ExtResource( 224 )
 preview = ExtResource( 224 )
 
 [node name="Roof" type="Node" parent="PlaceableItems/CastleGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 26
 palette_icons = [ ExtResource( 291 ), ExtResource( 298 ), ExtResource( 301 ), ExtResource( 300 ) ]
 palette_previews = [ ExtResource( 291 ), ExtResource( 298 ), ExtResource( 301 ), ExtResource( 300 ) ]
@@ -2228,7 +2228,7 @@ icon = ExtResource( 291 )
 preview = ExtResource( 291 )
 
 [node name="RoofSlopeLeft" type="Node" parent="PlaceableItems/CastleGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 26
 tile_id = 2
 palette_icons = [ ExtResource( 292 ), ExtResource( 295 ), ExtResource( 299 ), ExtResource( 296 ) ]
@@ -2240,7 +2240,7 @@ icon = ExtResource( 292 )
 preview = ExtResource( 292 )
 
 [node name="RoofSlopeRight" type="Node" parent="PlaceableItems/CastleGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 26
 tile_id = 3
 palette_icons = [ ExtResource( 293 ), ExtResource( 297 ), ExtResource( 294 ), ExtResource( 302 ) ]
@@ -2252,12 +2252,12 @@ icon = ExtResource( 293 )
 preview = ExtResource( 293 )
 
 [node name="MiscGroup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 149 )
+script = ExtResource( 25 )
 color = Color( 0.466667, 0.34902, 0, 1 )
 group_name = "Misc"
 
 [node name="PitchBlack" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 21
 palette_icons = [ ExtResource( 225 ), ExtResource( 273 ), ExtResource( 274 ), ExtResource( 275 ), ExtResource( 271 ), ExtResource( 272 ), ExtResource( 270 ), ExtResource( 269 ) ]
 palette_previews = [ ExtResource( 225 ), ExtResource( 273 ), ExtResource( 274 ), ExtResource( 275 ), ExtResource( 271 ), ExtResource( 272 ), ExtResource( 270 ), ExtResource( 269 ) ]
@@ -2265,13 +2265,13 @@ icon = ExtResource( 225 )
 preview = ExtResource( 225 )
 
 [node name="BooBlock" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 6
 icon = ExtResource( 107 )
 preview = ExtResource( 107 )
 
 [node name="NegativeRock" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 18
 palette_icons = [ ExtResource( 189 ), ExtResource( 262 ), ExtResource( 260 ), ExtResource( 263 ) ]
 palette_previews = [ ExtResource( 189 ), ExtResource( 262 ), ExtResource( 260 ), ExtResource( 263 ) ]
@@ -2281,7 +2281,7 @@ icon = ExtResource( 189 )
 preview = ExtResource( 189 )
 
 [node name="NegativeRockSlab" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 18
 tile_id = 1
 palette_icons = [ ExtResource( 196 ), ExtResource( 261 ), ExtResource( 268 ), ExtResource( 266 ) ]
@@ -2293,7 +2293,7 @@ icon = ExtResource( 196 )
 preview = ExtResource( 196 )
 
 [node name="NegativeRockSlopeLeft" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 18
 tile_id = 2
 palette_icons = [ ExtResource( 229 ), ExtResource( 258 ), ExtResource( 257 ), ExtResource( 264 ) ]
@@ -2305,7 +2305,7 @@ icon = ExtResource( 229 )
 preview = ExtResource( 229 )
 
 [node name="NegativeRockSlopeRight" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 tileset_id = 18
 tile_id = 3
 palette_icons = [ ExtResource( 230 ), ExtResource( 265 ), ExtResource( 259 ), ExtResource( 267 ) ]
@@ -2317,7 +2317,7 @@ icon = ExtResource( 230 )
 preview = ExtResource( 230 )
 
 [node name="Arrow" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 53
 is_object = true
 object_center = Vector2( 8, 8 )
@@ -2326,7 +2326,7 @@ icon = ExtResource( 175 )
 preview = ExtResource( 174 )
 
 [node name="MushroomTop" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 6
 is_object = true
 object_center = Vector2( 16, 17 )
@@ -2337,7 +2337,7 @@ icon = ExtResource( 72 )
 preview = ExtResource( 71 )
 
 [node name="MushroomBody" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 7
 is_object = true
 object_center = Vector2( 16, 0 )
@@ -2349,7 +2349,7 @@ icon = ExtResource( 73 )
 preview = ExtResource( 69 )
 
 [node name="MushroomCurve" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 8
 is_object = true
 object_center = Vector2( 30, 18 )
@@ -2361,7 +2361,7 @@ icon = ExtResource( 74 )
 preview = ExtResource( 70 )
 
 [node name="TwistedTreeTop" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 16
 is_object = true
 object_center = Vector2( 32, 32 )
@@ -2372,7 +2372,7 @@ icon = ExtResource( 97 )
 preview = ExtResource( 97 )
 
 [node name="TwistedTreeBody" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 17
 is_object = true
 object_center = Vector2( 32, 32 )
@@ -2384,7 +2384,7 @@ icon = ExtResource( 98 )
 preview = ExtResource( 98 )
 
 [node name="TwistedTreeAngle" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 18
 is_object = true
 object_center = Vector2( 72, 40 )
@@ -2397,7 +2397,7 @@ icon = ExtResource( 99 )
 preview = ExtResource( 99 )
 
 [node name="CloudPlatform" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 9
 is_object = true
 object_center = Vector2( 64, 0 )
@@ -2407,7 +2407,7 @@ icon = ExtResource( 75 )
 preview = ExtResource( 76 )
 
 [node name="Rock" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 3 )
+script = ExtResource( 24 )
 object_id = 73
 is_object = true
 object_center = Vector2( 64, 0 )
@@ -2426,7 +2426,7 @@ margin_left = 5.66568
 margin_top = 395.905
 margin_right = 37.6657
 margin_bottom = 425.905
-script = ExtResource( 167 )
+script = ExtResource( 32 )
 
 [node name="QuitWOSavingWindow" type="Popup" parent="UI/BackButton"]
 margin_right = 553.0
@@ -2435,7 +2435,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = SubResource( 11 )
 popup_exclusive = true
-script = ExtResource( 168 )
+script = ExtResource( 123 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -2523,7 +2523,7 @@ margin_top = 64.0
 margin_right = 768.0
 margin_bottom = 198.0
 custom_styles/panel = SubResource( 13 )
-script = ExtResource( 119 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -2536,25 +2536,25 @@ margin_right = 124.0
 margin_bottom = 168.0
 rect_scale = Vector2( 0.333, 0.333 )
 focus_mode = 0
-texture_normal = ExtResource( 120 )
-texture_pressed = ExtResource( 122 )
-texture_hover = ExtResource( 121 )
-script = ExtResource( 115 )
+texture_normal = ExtResource( 48 )
+texture_pressed = ExtResource( 65 )
+texture_hover = ExtResource( 39 )
+script = ExtResource( 28 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 editor = NodePath("../../..")
 tool_index = 1
-normal_tex = ExtResource( 120 )
-hover_tex = ExtResource( 121 )
-selected_tex = ExtResource( 122 )
+normal_tex = ExtResource( 48 )
+hover_tex = ExtResource( 39 )
+selected_tex = ExtResource( 65 )
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/EraserTool"]
-stream = ExtResource( 35 )
+stream = ExtResource( 121 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/EraserTool"]
-stream = ExtResource( 36 )
+stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="SelectionTool" type="TextureButton" parent="UI/Tools"]
@@ -2564,32 +2564,32 @@ margin_right = 124.0
 margin_bottom = 208.0
 rect_scale = Vector2( 0.333, 0.333 )
 focus_mode = 0
-texture_normal = ExtResource( 116 )
-texture_pressed = ExtResource( 117 )
-texture_hover = ExtResource( 118 )
-script = ExtResource( 115 )
+texture_normal = ExtResource( 67 )
+texture_pressed = ExtResource( 41 )
+texture_hover = ExtResource( 57 )
+script = ExtResource( 28 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 editor = NodePath("../../..")
 tool_index = 2
-normal_tex = ExtResource( 116 )
-hover_tex = ExtResource( 118 )
-selected_tex = ExtResource( 117 )
+normal_tex = ExtResource( 67 )
+hover_tex = ExtResource( 57 )
+selected_tex = ExtResource( 41 )
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/SelectionTool"]
-stream = ExtResource( 35 )
+stream = ExtResource( 121 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/SelectionTool"]
-stream = ExtResource( 36 )
+stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="PlaceableItemsContainer" type="Sprite" parent="UI"]
 scale = Vector2( 0.333, 0.333 )
-texture = ExtResource( 11 )
+texture = ExtResource( 40 )
 centered = false
-script = ExtResource( 9 )
+script = ExtResource( 31 )
 normal_color = Color( 1, 1, 1, 1 )
 selected_color = Color( 0.313726, 0.309804, 0.882353, 1 )
 editor_node_path = NodePath("../..")
@@ -2637,15 +2637,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelSettingsWindow" parent="UI" instance=ExtResource( 18 )]
+[node name="LevelSettingsWindow" parent="UI" instance=ExtResource( 168 )]
 
-[node name="ObjectSettingsWindow" parent="UI" instance=ExtResource( 19 )]
+[node name="ObjectSettingsWindow" parent="UI" instance=ExtResource( 217 )]
 
-[node name="LevelCodeWindow" parent="UI" instance=ExtResource( 20 )]
+[node name="LevelCodeWindow" parent="UI" instance=ExtResource( 218 )]
 
-[node name="AreasWindow" parent="UI" instance=ExtResource( 21 )]
+[node name="AreasWindow" parent="UI" instance=ExtResource( 167 )]
 
-[node name="ColorPickerWindow" parent="UI" instance=ExtResource( 155 )]
+[node name="ColorPickerWindow" parent="UI" instance=ExtResource( 219 )]
 visible = false
 
 [node name="LevelSettingsButton" type="TextureButton" parent="UI"]
@@ -2655,10 +2655,10 @@ margin_right = 852.0
 margin_bottom = 156.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
-texture_normal = ExtResource( 28 )
-texture_pressed = ExtResource( 30 )
-texture_hover = ExtResource( 29 )
-script = ExtResource( 31 )
+texture_normal = ExtResource( 64 )
+texture_pressed = ExtResource( 36 )
+texture_hover = ExtResource( 47 )
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -2666,11 +2666,11 @@ window = NodePath("../LevelSettingsWindow")
 starting_position = Vector2( 165, 130 )
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelSettingsButton"]
-stream = ExtResource( 35 )
+stream = ExtResource( 121 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsButton"]
-stream = ExtResource( 36 )
+stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="LayerSwitcher" type="TextureButton" parent="UI"]
@@ -2680,10 +2680,10 @@ margin_right = 740.0
 margin_bottom = 163.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
-texture_normal = ExtResource( 38 )
-texture_pressed = ExtResource( 40 )
-texture_hover = ExtResource( 39 )
-script = ExtResource( 41 )
+texture_normal = ExtResource( 46 )
+texture_pressed = ExtResource( 53 )
+texture_hover = ExtResource( 115 )
+script = ExtResource( 23 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -2704,11 +2704,11 @@ __meta__ = {
 }
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/LayerSwitcher"]
-stream = ExtResource( 35 )
+stream = ExtResource( 121 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/LayerSwitcher"]
-stream = ExtResource( 36 )
+stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="SearchButton" type="TextureButton" parent="UI"]
@@ -2718,21 +2718,21 @@ margin_right = 524.0
 margin_bottom = 163.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
-texture_normal = ExtResource( 66 )
-texture_pressed = ExtResource( 68 )
-texture_hover = ExtResource( 67 )
-script = ExtResource( 31 )
+texture_normal = ExtResource( 38 )
+texture_pressed = ExtResource( 66 )
+texture_hover = ExtResource( 54 )
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 window = NodePath("../ItemPicker")
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/SearchButton"]
-stream = ExtResource( 35 )
+stream = ExtResource( 121 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/SearchButton"]
-stream = ExtResource( 36 )
+stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="BoundsControlToggle" type="TextureButton" parent="UI"]
@@ -2743,20 +2743,20 @@ margin_bottom = 163.0
 rect_scale = Vector2( 0.333, 0.333 )
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource( 217 )
-texture_pressed = ExtResource( 219 )
-texture_hover = ExtResource( 218 )
-script = ExtResource( 32 )
+texture_normal = ExtResource( 116 )
+texture_pressed = ExtResource( 118 )
+texture_hover = ExtResource( 117 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/BoundsControlToggle"]
-stream = ExtResource( 35 )
+stream = ExtResource( 121 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/BoundsControlToggle"]
-stream = ExtResource( 36 )
+stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="SaveButton" type="TextureButton" parent="UI"]
@@ -2766,30 +2766,31 @@ margin_right = 789.0
 margin_bottom = 158.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
-texture_normal = ExtResource( 45 )
-texture_pressed = ExtResource( 46 )
-texture_hover = ExtResource( 47 )
-script = ExtResource( 48 )
+texture_normal = ExtResource( 109 )
+texture_pressed = ExtResource( 68 )
+texture_hover = ExtResource( 45 )
+script = ExtResource( 20 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 window = NodePath("../LevelCodeWindow")
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/SaveButton"]
-stream = ExtResource( 35 )
+stream = ExtResource( 121 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/SaveButton"]
-stream = ExtResource( 36 )
+stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="Button" type="Button" parent="UI"]
+visible = false
 margin_left = 562.0
 margin_top = 372.0
 margin_right = 673.0
 margin_bottom = 422.0
 text = "switch areas lol"
-script = ExtResource( 109 )
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -2803,9 +2804,9 @@ margin_bottom = 752.0
 rect_rotation = 180.0
 rect_scale = Vector2( 0.333, 0.333 )
 mouse_filter = 0
-texture = ExtResource( 11 )
+texture = ExtResource( 40 )
 stretch_mode = 1
-script = ExtResource( 64 )
+script = ExtResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -2818,7 +2819,7 @@ margin_right = 4783.0
 margin_bottom = 210.0
 rect_rotation = -180.0
 mouse_filter = 0
-texture = ExtResource( 11 )
+texture = ExtResource( 40 )
 stretch_mode = 1
 __meta__ = {
 "_edit_lock_": true,
@@ -2887,7 +2888,7 @@ __meta__ = {
 margin_right = 658.0
 margin_bottom = 477.0
 rect_scale = Vector2( 0.6, 0.333 )
-texture = ExtResource( 23 )
+texture = ExtResource( 119 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -2899,17 +2900,17 @@ margin_right = 288.0
 margin_bottom = 243.0
 rect_rotation = -90.0
 rect_scale = Vector2( 0.55, 0.55 )
-texture = ExtResource( 26 )
+texture = ExtResource( 122 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/ItemPicker/CloseButton"]
-stream = ExtResource( 35 )
+stream = ExtResource( 121 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/ItemPicker/CloseButton"]
-stream = ExtResource( 36 )
+stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="Tween" type="Tween" parent="UI/ItemPicker"]
@@ -2917,7 +2918,7 @@ volume_db = -10.0
 [node name="DraggedItem" type="Sprite" parent="UI"]
 modulate = Color( 1, 1, 1, 0.501961 )
 position = Vector2( -26.9707, 159.734 )
-script = ExtResource( 65 )
+script = ExtResource( 8 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -7.56805, -12.6135 )
@@ -2928,20 +2929,20 @@ limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 12.5
 editor_draw_screen = false
-script = ExtResource( 7 )
+script = ExtResource( 27 )
 
 [node name="ItemPreview" type="Sprite" parent="."]
 visible = false
 modulate = Color( 1, 1, 1, 0.501961 )
 z_index = 25
-script = ExtResource( 8 )
+script = ExtResource( 22 )
 
 [node name="Backgrounds" parent="." instance=ExtResource( 52 )]
 position = Vector2( 157.094, 37.4626 )
 
 [node name="Grid" type="ParallaxBackground" parent="."]
 layer = -1
-script = ExtResource( 123 )
+script = ExtResource( 30 )
 
 [node name="Layer" type="ParallaxLayer" parent="Grid"]
 motion_mirroring = Vector2( 2048, 1024 )
@@ -2957,7 +2958,7 @@ __meta__ = {
 }
 
 [node name="BoundsControl" type="Node2D" parent="."]
-script = ExtResource( 24 )
+script = ExtResource( 19 )
 
 [node name="Left" type="Node2D" parent="BoundsControl"]
 
@@ -2968,10 +2969,10 @@ margin_top = -16.0
 margin_right = 29.0
 margin_bottom = 16.0
 rect_pivot_offset = Vector2( 0, 16 )
-texture_normal = ExtResource( 27 )
-texture_hover = ExtResource( 22 )
+texture_normal = ExtResource( 56 )
+texture_hover = ExtResource( 35 )
 expand = true
-script = ExtResource( 25 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -2983,10 +2984,10 @@ margin_right = 13.0
 margin_bottom = 16.0
 rect_rotation = 180.0
 rect_pivot_offset = Vector2( 0, 16 )
-texture_normal = ExtResource( 27 )
-texture_hover = ExtResource( 22 )
+texture_normal = ExtResource( 56 )
+texture_hover = ExtResource( 35 )
 expand = true
-script = ExtResource( 25 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -3001,10 +3002,10 @@ margin_top = -16.0
 margin_right = 29.0
 margin_bottom = 16.0
 rect_pivot_offset = Vector2( 0, 16 )
-texture_normal = ExtResource( 27 )
-texture_hover = ExtResource( 22 )
+texture_normal = ExtResource( 56 )
+texture_hover = ExtResource( 35 )
 expand = true
-script = ExtResource( 25 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -3016,10 +3017,10 @@ margin_right = 13.0
 margin_bottom = 16.0
 rect_rotation = 180.0
 rect_pivot_offset = Vector2( 0, 16 )
-texture_normal = ExtResource( 27 )
-texture_hover = ExtResource( 22 )
+texture_normal = ExtResource( 56 )
+texture_hover = ExtResource( 35 )
 expand = true
-script = ExtResource( 25 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -3034,10 +3035,10 @@ margin_top = -16.0
 margin_right = 29.0
 margin_bottom = 16.0
 rect_pivot_offset = Vector2( 0, 16 )
-texture_normal = ExtResource( 27 )
-texture_hover = ExtResource( 22 )
+texture_normal = ExtResource( 56 )
+texture_hover = ExtResource( 35 )
 expand = true
-script = ExtResource( 25 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -3049,10 +3050,10 @@ margin_right = 13.0
 margin_bottom = 16.0
 rect_rotation = 180.0
 rect_pivot_offset = Vector2( 0, 16 )
-texture_normal = ExtResource( 27 )
-texture_hover = ExtResource( 22 )
+texture_normal = ExtResource( 56 )
+texture_hover = ExtResource( 35 )
 expand = true
-script = ExtResource( 25 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -3067,10 +3068,10 @@ margin_top = -16.0
 margin_right = 29.0
 margin_bottom = 16.0
 rect_pivot_offset = Vector2( 0, 16 )
-texture_normal = ExtResource( 27 )
-texture_hover = ExtResource( 22 )
+texture_normal = ExtResource( 56 )
+texture_hover = ExtResource( 35 )
 expand = true
-script = ExtResource( 25 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -3082,13 +3083,13 @@ margin_right = 13.0
 margin_bottom = 16.0
 rect_rotation = 180.0
 rect_pivot_offset = Vector2( 0, 16 )
-texture_normal = ExtResource( 27 )
-texture_hover = ExtResource( 22 )
+texture_normal = ExtResource( 56 )
+texture_hover = ExtResource( 35 )
 expand = true
-script = ExtResource( 25 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="BoundsControl"]
-stream = ExtResource( 36 )
+stream = ExtResource( 120 )

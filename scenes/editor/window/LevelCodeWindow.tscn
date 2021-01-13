@@ -11,6 +11,8 @@
 [ext_resource path="res://scenes/editor/load_button.gd" type="Script" id=9]
 [ext_resource path="res://scenes/editor/level_code_contents.gd" type="Script" id=10]
 
+
+
 [sub_resource type="DynamicFont" id=1]
 size = 56
 use_filter = true

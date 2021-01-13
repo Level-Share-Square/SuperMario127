@@ -6,6 +6,8 @@
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/shared/button_sound_player.gd" type="Script" id=5]
 
+
+
 [sub_resource type="DynamicFont" id=1]
 size = 48
 font_data = ExtResource( 1 )

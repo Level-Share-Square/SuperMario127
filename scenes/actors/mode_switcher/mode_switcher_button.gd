@@ -74,6 +74,7 @@ func switch() -> void:
 		ActionManager.clear_history()
 		
 		CurrentLevelData.area = 0
+		MiscShared.is_play_reload = false
 		var new_scene_mode = get_tree().get_current_scene().mode
 		if new_scene_mode == 0:
 			Networking.disconnect_from_peers()
@@ -142,7 +143,6 @@ func switch() -> void:
 		fader.visible = false
 		rect_position = start_pos
 		switching_disabled = false
-		MiscShared.is_play_reload = false
 
 func change_button_state(is_enabled : bool) -> void:
 	invisible = !is_enabled

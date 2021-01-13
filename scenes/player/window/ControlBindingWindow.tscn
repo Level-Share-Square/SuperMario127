@@ -8,6 +8,8 @@
 [ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=11]
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=12]
 
+
+
 [sub_resource type="StreamTexture" id=1]
 flags = 4
 load_path = "res://.import/window.png-70f8a0c1f0411efce833bd946d8ccc07.stex"

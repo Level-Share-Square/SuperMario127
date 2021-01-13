@@ -5,6 +5,8 @@
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/player/controlbinding_button.gd" type="Script" id=4]
 
+
+
 [sub_resource type="DynamicFont" id=1]
 size = 20
 outline_size = 2

@@ -1,23 +1,26 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://scenes/editor/window.gd" type="Script" id=2]
-[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=3]
-[ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=4]
-[ext_resource path="res://scenes/editor/assets/outline.png" type="Texture" id=5]
+[ext_resource path="res://scenes/editor/music_changer.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/level_size.gd" type="Script" id=3]
+[ext_resource path="res://scenes/editor/background_changer.gd" type="Script" id=4]
+[ext_resource path="res://scenes/editor/ResetLevelButton.gd" type="Script" id=5]
 [ext_resource path="res://scenes/shared/background/foregrounds/none/preview.png" type="Texture" id=6]
-[ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=7]
-[ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=8]
+[ext_resource path="res://scenes/editor/window.gd" type="Script" id=7]
+[ext_resource path="res://scenes/editor/level_name_editor.gd" type="Script" id=8]
 [ext_resource path="res://scenes/shared/background/backgrounds/night/night.png" type="Texture" id=9]
-[ext_resource path="res://scenes/editor/assets/music_background.png" type="Texture" id=10]
-[ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=11]
-[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=12]
-[ext_resource path="res://scenes/editor/assets/clickable_arrow_hover.png" type="Texture" id=13]
-[ext_resource path="res://scenes/editor/level_size.gd" type="Script" id=14]
-[ext_resource path="res://scenes/editor/level_name_editor.gd" type="Script" id=15]
-[ext_resource path="res://scenes/editor/background_changer.gd" type="Script" id=16]
-[ext_resource path="res://scenes/editor/music_changer.gd" type="Script" id=17]
-[ext_resource path="res://scenes/editor/ResetLevelButton.gd" type="Script" id=18]
+[ext_resource path="res://scenes/editor/Areas.gd" type="Script" id=10]
+[ext_resource path="res://scenes/editor/assets/outline.png" type="Texture" id=11]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow_hover.png" type="Texture" id=12]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=13]
+[ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=14]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=15]
+[ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=16]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=17]
+[ext_resource path="res://scenes/editor/assets/music_background.png" type="Texture" id=18]
+[ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=19]
+[ext_resource path="res://scenes/editor/areas_button.gd" type="Script" id=20]
+[ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -77,19 +80,20 @@ size = 48
 font_data = ExtResource( 1 )
 
 [node name="LevelSettingsWindow" type="NinePatchRect"]
+visible = false
 margin_left = 165.0
 margin_top = 129.921
 margin_right = 1218.0
 margin_bottom = 763.921
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 0
-texture = ExtResource( 4 )
+texture = ExtResource( 14 )
 region_rect = Rect2( 0, 0, 108, 290 )
 patch_margin_left = 40
 patch_margin_top = 110
 patch_margin_right = 40
 patch_margin_bottom = 40
-script = ExtResource( 2 )
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -101,8 +105,8 @@ margin_right = 456.0
 margin_bottom = 102.263
 mouse_filter = 2
 custom_fonts/normal_font = SubResource( 1 )
-bbcode_text = "Level Settings"
-text = "Level Settings"
+bbcode_text = "Settings"
+text = "Settings"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -113,19 +117,19 @@ margin_top = 12.953
 margin_right = 1043.65
 margin_bottom = 93.953
 rect_scale = Vector2( 0.95, 0.95 )
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 7 )
-texture_hover = ExtResource( 11 )
+texture_normal = ExtResource( 19 )
+texture_pressed = ExtResource( 19 )
+texture_hover = ExtResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
-stream = ExtResource( 3 )
+stream = ExtResource( 15 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
-stream = ExtResource( 12 )
+stream = ExtResource( 13 )
 volume_db = -10.0
 
 [node name="LevelSettings" type="Control" parent="."]
@@ -142,7 +146,7 @@ __meta__ = {
 margin_top = 30.0
 margin_right = 40.0
 margin_bottom = 70.0
-script = ExtResource( 16 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -162,7 +166,7 @@ margin_top = -10.0
 margin_right = 798.0
 margin_bottom = 467.0
 rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 5 )
+texture = ExtResource( 11 )
 stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -201,9 +205,9 @@ rect_rotation = 180.0
 rect_scale = Vector2( 0.4, 0.4 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 13 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -215,9 +219,9 @@ margin_bottom = 128.0
 rect_scale = Vector2( 0.4, 0.4 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 13 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -239,9 +243,9 @@ rect_rotation = 180.0
 rect_scale = Vector2( 0.4, 0.4 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 13 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -254,25 +258,25 @@ margin_bottom = 120.503
 rect_scale = Vector2( 0.4, 0.4 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 13 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/BackgroundEdit"]
-stream = ExtResource( 3 )
+stream = ExtResource( 15 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/BackgroundEdit"]
-stream = ExtResource( 12 )
+stream = ExtResource( 13 )
 volume_db = -10.0
 
 [node name="Music" type="Control" parent="LevelSettings"]
 margin_right = 40.0
 margin_bottom = 40.0
-script = ExtResource( 17 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -282,7 +286,7 @@ margin_left = 85.0
 margin_top = 270.0
 margin_right = 464.0
 margin_bottom = 380.0
-texture = ExtResource( 10 )
+texture = ExtResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -328,9 +332,9 @@ rect_rotation = 180.0
 rect_scale = Vector2( 0.3, 0.3 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 13 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -343,25 +347,26 @@ margin_bottom = 369.0
 rect_scale = Vector2( 0.3, 0.3 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 13 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/Music"]
-stream = ExtResource( 3 )
+stream = ExtResource( 15 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/Music"]
-stream = ExtResource( 12 )
+stream = ExtResource( 13 )
 volume_db = -10.0
 
 [node name="LevelSize" type="Control" parent="LevelSettings"]
+margin_top = -25.0
 margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 14 )
+margin_bottom = 15.0
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -375,7 +380,7 @@ margin_top = 212.103
 margin_right = 1445.28
 margin_bottom = 689.103
 rect_scale = Vector2( 0.22, 0.3 )
-texture = ExtResource( 5 )
+texture = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -414,9 +419,9 @@ rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 13 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -430,9 +435,9 @@ rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 13 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -451,9 +456,9 @@ rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 13 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -468,9 +473,9 @@ rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 13 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -490,9 +495,9 @@ rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 13 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -507,9 +512,9 @@ rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 13 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -530,9 +535,9 @@ rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 13 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -547,19 +552,19 @@ rect_scale = Vector2( 0.15, 0.25 )
 rect_pivot_offset = Vector2( 64, 64 )
 action_mode = 0
 button_mask = 3
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 13 )
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/LevelSize"]
-stream = ExtResource( 3 )
+stream = ExtResource( 15 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/LevelSize"]
-stream = ExtResource( 12 )
+stream = ExtResource( 13 )
 volume_db = -10.0
 
 [node name="LevelName" type="Control" parent="LevelSettings"]
@@ -567,7 +572,7 @@ margin_left = -17.0
 margin_top = -104.0
 margin_right = 23.0
 margin_bottom = -64.0
-script = ExtResource( 15 )
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -595,9 +600,9 @@ __meta__ = {
 }
 
 [node name="ResetLevelButton" type="Button" parent="LevelSettings/ResetLevel"]
-margin_left = 317.654
+margin_left = 510.0
 margin_top = 402.567
-margin_right = 717.654
+margin_right = 910.0
 margin_bottom = 492.567
 custom_styles/hover = SubResource( 8 )
 custom_styles/pressed = SubResource( 9 )
@@ -606,18 +611,70 @@ custom_fonts/font = SubResource( 10 )
 shortcut_in_tooltip = false
 action_mode = 0
 text = "Reset Level"
-script = ExtResource( 18 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/ResetLevel/ResetLevelButton"]
-stream = ExtResource( 3 )
+stream = ExtResource( 15 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/ResetLevel/ResetLevelButton"]
-stream = ExtResource( 12 )
+stream = ExtResource( 13 )
 volume_db = -10.0
+
+[node name="Areas" parent="LevelSettings" instance=ExtResource( 21 )]
+margin_left = 90.0
+margin_top = 402.56
+margin_right = 490.0
+margin_bottom = 492.56
+text = "Areas"
+script = ExtResource( 20 )
+
+[node name="Areas" type="Control" parent="."]
+visible = false
+anchor_bottom = 0.06
+margin_left = 17.4044
+margin_top = 104.0
+margin_right = 1036.4
+margin_bottom = 498.0
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Areas"]
+margin_right = 1013.0
+margin_bottom = 380.0
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Areas/ScrollContainer"]
+margin_right = 1013.0
+margin_bottom = 380.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 210
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" parent="Areas" instance=ExtResource( 21 )]
+margin_left = 90.0
+margin_top = 403.0
+margin_right = 490.0
+margin_bottom = 493.0
+text = "Level Settings"
+
+[node name="NewArea" parent="Areas" instance=ExtResource( 21 )]
+margin_left = 510.0
+margin_top = 403.0
+margin_right = 910.0
+margin_bottom = 493.0
+text = "New Area"
 
 [node name="Tween" type="Tween" parent="."]
 [connection signal="pressed" from="LevelSettings/ResetLevel/ResetLevelButton" to="LevelSettings/ResetLevel/ResetLevelButton" method="_on_ResetLevelButton_pressed"]

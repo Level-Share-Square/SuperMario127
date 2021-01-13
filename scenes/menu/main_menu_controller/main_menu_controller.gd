@@ -67,8 +67,9 @@ func _ready() -> void:
 	music.stop_temporary_music(1, 0)
 	music.change_song(music.last_song, 31) # temporary, should add a way for screens to define their own music setting later
 	music.last_song = 31
-
+	
 	CheckpointSaved.reset()
+	CurrentLevelData.area = 0
 	CurrentLevelData.level_data.vars.init()
 	MiscShared.is_play_reload = false
 

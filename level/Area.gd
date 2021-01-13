@@ -13,3 +13,7 @@ var settings := LevelAreaSettings.new()
 
 func _init():
 	pass
+
+func duplicate(base_area):
+	objects = base_area.objects.duplicate(true)
+	tile_chunks = base_area.tile_chunks.duplicate(true)

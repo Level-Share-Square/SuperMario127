@@ -9,6 +9,8 @@
 [ext_resource path="res://scenes/editor/assets/item_box_press.png" type="Texture" id=7]
 [ext_resource path="res://scenes/editor/assets/grid.png" type="Texture" id=8]
 
+
+
 [node name="TextureButton" type="TextureButton"]
 margin_right = 40.0
 margin_bottom = 40.0

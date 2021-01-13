@@ -25,6 +25,7 @@ func _ready():
 	CurrentLevelData.level_data.vars.reset_counters()
 	
 	if !MiscShared.is_play_reload:
+		CheckpointSaved.reset()
 		CurrentLevelData.level_data.vars.init()
 	
 	if CurrentLevelData.level_data.vars.transition_data == []:

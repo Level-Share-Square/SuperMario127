@@ -18,8 +18,8 @@ func reset():
 	current_shine_shards = []
 	liquid_positions = []
 	nozzles_collected = ["null"]
-
-	for index in CurrentLevelData.level_data.areas.size() + 1:
+	
+	for index in CurrentLevelData.level_data.areas.size():
 		current_red_coins.append([0, []])
 		current_shine_shards.append([0, []])
 		liquid_positions.append([])

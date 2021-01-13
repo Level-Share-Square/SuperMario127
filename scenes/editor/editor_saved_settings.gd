@@ -13,10 +13,17 @@ var tiles_resource : TileSet
 
 var tileset_loaded = false
 
+var default_area : LevelArea
+
 var layout_ids = [
 ]
 
 func _init():
+	var level_resource = LevelData.new()
+	var default_level = load("res://assets/level_data/template_level.tres").contents
+	level_resource.load_in(default_level)
+	default_area = level_resource.areas[0]
+	
 	tiles_resource = ResourceLoader.load("user://tiles.res", "TileSet")
 	var starting_toolbar = load("res://scenes/editor/starting_toolbar.tres")
 	for index in range(number_of_boxes):

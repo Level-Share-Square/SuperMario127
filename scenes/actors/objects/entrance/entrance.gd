@@ -23,15 +23,28 @@ func _ready():
 			if transition_data.size() == 0:
 				character.position = position
 			else:
-				character.controllable = false
+				var found_pipe = false
+				var pipe
+				
 				yield(get_tree(), "physics_frame")
-				for pipe in CurrentLevelData.level_data.vars.pipes:
-					if pipe[0] == transition_data[1].to_lower():
-						character.position = pipe[1].position + Vector2(0, pipe[1].get_bottom_distance())
-						yield(get_tree().create_timer(1.0), "timeout")
-						if character_string != "character":
-							yield(get_tree().create_timer(1.25), "timeout")
-						pipe[1].start_exit_anim(character)
+				for pipe_obj in CurrentLevelData.level_data.vars.pipes:
+					if pipe_obj[0] == transition_data[1].to_lower():
+						pipe = pipe_obj
+						found_pipe = true
+						break
+				
+				if found_pipe:
+					character.invulnerable = true
+					character.movable = false
+					character.controllable = false
+
+					character.position = pipe[1].position + Vector2(0, pipe[1].get_bottom_distance())
+					yield(get_tree().create_timer(0.5), "timeout")
+					if character_string != "character":
+						yield(get_tree().create_timer(1.25), "timeout")
+					pipe[1].start_exit_anim(character)
+				else:
+					character.position = position
 				CurrentLevelData.level_data.vars.transition_data = []
 					
 			character.spawn_pos = position

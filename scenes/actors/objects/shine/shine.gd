@@ -49,7 +49,7 @@ var activated := true
 var red_coins_activate := false
 var shine_shards_activate := false
 var color := Color(1, 1, 0)
-var id := 0.0
+var id := 0
 var do_kick_out := true
 var sort_position : int = 0
 
@@ -88,8 +88,7 @@ func _ready() -> void:
 			is_blue = collected_shines.get(str(id), false)
 
 	if !is_preview and mode == 1:
-		id = CurrentLevelData.next_shine_id
-		CurrentLevelData.next_shine_id += 1
+		id = CurrentLevelData.get_last_shine_id()
 		set_property("id", id)
 	
 	var _connect = connect("property_changed", self, "update_color")

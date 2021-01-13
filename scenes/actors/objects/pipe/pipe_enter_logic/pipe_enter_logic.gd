@@ -92,7 +92,7 @@ func start_pipe_exit_animation(character : Character) -> void:
 			("Right" if character.facing_direction == 1 else "Left"), 0, 0, 2, exiting_pipe_length)
 	
 	# warning-ignore: return_value_discarded
-	tween.interpolate_callback(audio_player, 0, "play")
+	tween.interpolate_callback(audio_player, 0.5, "play")
 			
 	# warning-ignore: return_value_discarded
 	tween.start()

@@ -17,15 +17,16 @@ const TRANSITION_SCALE_COVERED = 0
 
 var transitioning = false
 
-func reload_scene(transition_in_tex, transition_out_tex, transition_time, new_area, clear_vars = false):
+func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout_circle, transition_time = 0.5, new_area = -1, clear_vars = false):
 	#if the button is invisible, then we're probably not in editing mode, but if it's visible make sure we don't reload the scene while it's switching
 	if mode_switcher.get_node("ModeSwitcherButton").invisible or !mode_switcher.get_node("ModeSwitcherButton").switching_disabled:
 		var volume_multiplier = music_node.volume_multiplier
 
 		yield(do_transition_animation(transition_in_tex, transition_time, TRANSITION_SCALE_UNCOVER, TRANSITION_SCALE_COVERED, volume_multiplier, volume_multiplier / 4, false), "completed")
-
-		CurrentLevelData.area = new_area
+		
 		var _reload = get_tree().reload_current_scene()
+		if new_area != -1:
+			CurrentLevelData.area = new_area
 		
 		yield(get_tree().create_timer(0.1), "timeout")
 		get_tree().paused = false

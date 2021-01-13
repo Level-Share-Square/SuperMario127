@@ -66,3 +66,11 @@ func start_tracking_time_score(keep_time : bool = false):
 
 func stop_tracking_time_score():
 	set_process(false)
+
+func get_last_shine_id():
+	var last_shine_id = 0
+	for area in CurrentLevelData.level_data.areas:
+		for object in area.objects:
+			if object.type_id == 2:
+				last_shine_id += 1
+	return last_shine_id + 1

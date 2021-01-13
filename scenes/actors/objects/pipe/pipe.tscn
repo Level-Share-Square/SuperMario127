@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/actors/objects/pipe/pipe.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/pipe/pipe.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/pipe/pipe_enter_logic/pipe_enter_logic.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/actors/objects/pipe/recolorable_texture.png" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 17.5, 20 )
 
 [node name="Pipe" type="Node2D"]
 script = ExtResource( 1 )
+normal_texture = ExtResource( 2 )
+recolorable_texture = ExtResource( 4 )
 
 [node name="PipeEnterLogic" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -23 )
@@ -22,4 +25,4 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( -0.5, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )

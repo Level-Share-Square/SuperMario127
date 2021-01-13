@@ -58,6 +58,8 @@
 [ext_resource path="res://scenes/actors/objects/sign/menu_open.wav" type="AudioStream" id=56]
 [ext_resource path="res://scenes/actors/objects/sign/menu_close.wav" type="AudioStream" id=57]
 
+
+
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 7 )
 

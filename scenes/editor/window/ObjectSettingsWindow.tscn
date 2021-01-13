@@ -14,6 +14,8 @@
 [ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=12]
 [ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=13]
 
+
+
 [sub_resource type="DynamicFont" id=1]
 size = 56
 use_filter = true
