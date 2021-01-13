@@ -2,7 +2,6 @@ extends Node
 
 var level_data : LevelData
 var area := 0
-var area_plr_2 := 0
 
 var object_cache := []
 var background_cache := []

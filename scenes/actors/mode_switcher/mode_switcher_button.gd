@@ -72,6 +72,8 @@ func switch() -> void:
 		music.stop_temporary_music() #we don't want powerup music going into the editor
 
 		ActionManager.clear_history()
+		
+		CurrentLevelData.area = 0
 		var new_scene_mode = get_tree().get_current_scene().mode
 		if new_scene_mode == 0:
 			Networking.disconnect_from_peers()
@@ -114,6 +116,7 @@ func switch() -> void:
 		yield(get_tree().create_timer(0.3), "timeout")
 		get_tree().paused = false
 		CurrentLevelData.level_data.vars = LevelVars.new() # Reset vars
+		CurrentLevelData.level_data.vars.init()
 		
 		get_tree().get_current_scene().switch_scenes()
 		change_visuals(new_scene_mode)
@@ -139,6 +142,7 @@ func switch() -> void:
 		fader.visible = false
 		rect_position = start_pos
 		switching_disabled = false
+		MiscShared.is_play_reload = false
 
 func change_button_state(is_enabled : bool) -> void:
 	invisible = !is_enabled

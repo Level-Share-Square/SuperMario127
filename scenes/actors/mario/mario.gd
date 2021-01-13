@@ -288,7 +288,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	collected_shine.visible = false
 	collected_shine.get_node("ShineParticles").emitting = false
 	
-	if CheckpointSaved.current_checkpoint_id != -1:
+	if CheckpointSaved.current_checkpoint_id != -1 and CurrentLevelData.level_data.vars.transition_data == []:
 		position = CheckpointSaved.current_spawn_pos
 
 var prev_is_grounded := false

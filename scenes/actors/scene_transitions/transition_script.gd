@@ -24,8 +24,6 @@ func reload_scene(transition_in_tex, transition_out_tex, transition_time, new_ar
 
 		yield(do_transition_animation(transition_in_tex, transition_time, TRANSITION_SCALE_UNCOVER, TRANSITION_SCALE_COVERED, volume_multiplier, volume_multiplier / 4, false), "completed")
 
-		if clear_vars:
-			CurrentLevelData.level_data.vars = LevelVars.new()
 		CurrentLevelData.area = new_area
 		var _reload = get_tree().reload_current_scene()
 		

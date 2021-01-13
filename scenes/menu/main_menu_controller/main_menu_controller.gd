@@ -69,6 +69,8 @@ func _ready() -> void:
 	music.last_song = 31
 
 	CheckpointSaved.reset()
+	CurrentLevelData.level_data.vars.init()
+	MiscShared.is_play_reload = false
 
 # change this to use an enum or something, store enum in menu_variables
 func start_changing_screens(this_screen_name : String, new_screen_name : String) -> void:

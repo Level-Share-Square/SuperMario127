@@ -49,7 +49,7 @@ var activated := true
 var red_coins_activate := false
 var shine_shards_activate := false
 var color := Color(1, 1, 0)
-var id := 0
+var id := 0.0
 var do_kick_out := true
 var sort_position : int = 0
 
@@ -128,10 +128,10 @@ func _physics_process(_delta : float) -> void:
 	if mode != 1:
 		var camera : Camera2D = current_scene.get_node(current_scene.camera)
 		if red_coins_activate and !activated and CurrentLevelData.level_data.vars.max_red_coins > 0:
-			if CurrentLevelData.level_data.vars.red_coins_collected[0] == CurrentLevelData.level_data.vars.max_red_coins:
+			if CurrentLevelData.level_data.vars.red_coins_collected[CurrentLevelData.area][0] == CurrentLevelData.level_data.vars.max_red_coins:
 				activate_shine()
 		if shine_shards_activate and !activated and CurrentLevelData.level_data.vars.max_shine_shards > 0:
-			if CurrentLevelData.level_data.vars.shine_shards_collected[0] == CurrentLevelData.level_data.vars.max_shine_shards:
+			if CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][0] == CurrentLevelData.level_data.vars.max_shine_shards:
 				activate_shine()
 		if !collected:
 			if !activated:
@@ -157,17 +157,21 @@ func _physics_process(_delta : float) -> void:
 
 func activate_shine() -> void:
 	activated = true
-	animation_player.play("appear")
+	
+	if CurrentLevelData.level_data.vars.transition_data == []:
+		animation_player.play("appear")
 
-	var camera = current_scene.get_node(current_scene.camera)
-	camera.focus_on = self
+		var camera = current_scene.get_node(current_scene.camera)
+		camera.focus_on = self
 
-	pause_mode = PAUSE_MODE_PROCESS
-	get_tree().paused = true
+		pause_mode = PAUSE_MODE_PROCESS
+		get_tree().paused = true
 
-	unpause_timer.start()
-	# warning-ignore: return_value_discarded
-	unpause_timer.connect("timeout", self, "unpause_game")
+		unpause_timer.start()
+		# warning-ignore: return_value_discarded
+		unpause_timer.connect("timeout", self, "unpause_game")
+	else:
+		pass
 
 # unpauses the game after the activate shine cutscene is done
 func unpause_game() -> void:

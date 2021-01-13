@@ -6,18 +6,27 @@ onready var tween = $DoorEnterLogic/Tween
 var stored_character : Character
 
 const OPEN_DOOR_WAIT = 0.45
-var tag : String = "default"
-var teleport_to_tag : String = "default"
+## For older levels only
+var tag : String = "none"
+var teleport_to_tag : String = "none"
+###
+var door_tag : String = "default"
 
 func _set_properties() -> void:
-	savable_properties = ["tag", "teleport_to_tag"]
-	editable_properties = ["tag", "teleport_to_tag"]
+	savable_properties = ["tag", "teleport_to_tag", "door_tag"]
+	editable_properties = ["door_tag"]
 	
 func _set_property_values() -> void:
 	set_property("tag", tag)
 	set_property("teleport_to_tag", teleport_to_tag)
+	set_property("door_tag", door_tag)
 
 func _ready() -> void:
+	if mode == 1:
+		tag = "none"
+		teleport_to_tag = "none"
+		_set_property_values()
+		
 	if is_preview:
 		z_index = 0
 		sprite.z_index = 0
@@ -25,7 +34,10 @@ func _ready() -> void:
 	if scale.x < 1:
 		scale.x = abs(scale.x)
 		sprite.flip_h = true
-	CurrentLevelData.level_data.vars.doors.append([tag.to_lower(), self])
+	var append_tag = door_tag.to_lower()
+	if tag != "none":
+		append_tag = tag.to_lower()
+	CurrentLevelData.level_data.vars.doors.append([append_tag, self])
 	door_enter_logic.connect("start_door_logic", self, "_start_transition")
 
 func get_character_screen_position(character : Character) -> Vector2:
@@ -49,7 +61,10 @@ func _start_teleport(character : Character) -> void:
 	
 	# looks for all doors in the level, and if the tag matches, it sets the door to teleport to, then breaks the loop
 	for found_door in CurrentLevelData.level_data.vars.doors:
-		if found_door[0] == teleport_to_tag.to_lower():
+		var condition = found_door[0] == door_tag.to_lower() and found_door[1] != self
+		if teleport_to_tag != "none":
+			condition = found_door[0] == teleport_to_tag.to_lower()
+		if condition:
 			teleport_door = found_door[1]
 			break
 	

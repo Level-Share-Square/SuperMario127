@@ -13,6 +13,8 @@ func _physics_process(delta: float) -> void:
 	rainbow_gradient.colors = PoolColorArray([Color.from_hsv(rainbow_hue, 1.35, 0.65), Color(1, 1, 1)])
 	rainbow_gradient_texture.gradient = rainbow_gradient
 
+# so that vars only reset when loaded for the first time
+var is_play_reload = false
 
 # hack fix idgaf its gd
 

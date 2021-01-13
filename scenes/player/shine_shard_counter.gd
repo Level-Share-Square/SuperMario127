@@ -18,7 +18,7 @@ func _ready():
 	for index in range(5):
 		yield(get_tree(), "idle_frame")
 	max_shard_amount = CurrentLevelData.level_data.vars.max_shine_shards
-	var shard_amount = CurrentLevelData.level_data.vars.shine_shards_collected[0]
+	var shard_amount = CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][0]
 	label.text = str(shard_amount) + "/" + str(max_shard_amount)
 	label_shadow.text = label.text
 	if max_shard_amount != 0:
@@ -27,7 +27,7 @@ func _ready():
 		rect_position.y = get_node("../RedCoinCounter").rect_position.y
 
 func _process(delta):
-	var shard_amount = CurrentLevelData.level_data.vars.shine_shards_collected[0]
+	var shard_amount = CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][0]
 	if shard_amount != last_shard_amount:
 		label.text = str(shard_amount) + "/" + str(max_shard_amount)
 		label_shadow.text = label.text

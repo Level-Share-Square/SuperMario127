@@ -22,6 +22,15 @@ func _physics_process(delta):
 			switch_timer = 0
 
 func _ready():
+	CurrentLevelData.level_data.vars.reset_counters()
+	
+	if !MiscShared.is_play_reload:
+		CurrentLevelData.level_data.vars.init()
+	
+	if CurrentLevelData.level_data.vars.transition_data == []:
+		CurrentLevelData.area = CheckpointSaved.current_area
+		CurrentLevelData.level_data.vars.reload()
+	
 	var data = CurrentLevelData.level_data
 	load_in(data, data.areas[CurrentLevelData.area])
 	music.character = get_node(character)
@@ -45,9 +54,18 @@ func _ready():
 			get_node(character).set_network_master(PlayerSettings.other_player_id)
 			get_node(character).controlled_locally = false
 			get_node(camera).character_node = get_node(character2)
+		
+	CurrentLevelData.level_data.vars.max_red_coins = 0
+	CurrentLevelData.level_data.vars.max_shine_shards = 0
+	CurrentLevelData.level_data.vars.doors = []
+	CurrentLevelData.level_data.vars.pipes = []
+	CurrentLevelData.level_data.vars.liquids = []
+	CurrentLevelData.level_data.vars.checkpoints = []
 
 	if mode_switcher.get_node("ModeSwitcherButton").invisible and CheckpointSaved.current_checkpoint_id == -1:
 		CurrentLevelData.start_tracking_time_score()
+	
+	MiscShared.is_play_reload = true
 
 func _unhandled_input(event):
 	if event.is_action_pressed("reload") or event.is_action_pressed("reload_from_start") and !scene_transitions.transitioning and (!mode_switcher.get_node("ModeSwitcherButton").switching_disabled or mode_switcher.get_node("ModeSwitcherButton").invisible):

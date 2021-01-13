@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/actors/objects/entrance/entrance_sprite.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/entrance_luigi/sprite.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/entrance_luigi/entrance_luigi.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/entrance/entrance.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/pipe/sound.wav" type="AudioStream" id=4]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -16,6 +16,7 @@ animations = [ {
 [node name="EntranceLuigi" type="Node2D"]
 z_index = -1
 script = ExtResource( 3 )
+character_string = "character2"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )

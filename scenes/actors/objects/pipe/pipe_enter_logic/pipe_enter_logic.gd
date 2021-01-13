@@ -10,12 +10,14 @@ onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
 onready var collision_width : float = $Area2D/CollisionShape2D.shape.extents.x
 
 const PIPE_BOTTOM_DISTANCE := 35
+const PIPE_EXIT_DISTANCE := 20
 
-export (float) var slide_to_center_length := 1.0
+export (float) var slide_to_center_length := 0.4
 export (float) var entering_pipe_length := 1.0 
 export (float) var exiting_pipe_length := 1.0
 
 var is_idle := true
+var entering := false
 
 var stored_character : Character
 
@@ -37,6 +39,7 @@ func start_pipe_enter_animation(character : Character) -> void:
 	stored_character = character 
 
 	is_idle = false
+	entering = true
 
 	character.invulnerable = true 
 	character.controllable = false
@@ -68,25 +71,33 @@ func start_pipe_enter_animation(character : Character) -> void:
 func start_pipe_exit_animation(character : Character) -> void:
 	stored_character = character
 
-	is_idle = false	
+	is_idle = false
+	entering = false
 
 	character.invulnerable = true 
 	character.controllable = false
 	character.movable = false
+	
+	character.sprite.animation = "pipeRight"
+	character.sprite.playing = true
+	character.sprite.frame = 2
 
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character, "position:y", global_position.y + PIPE_BOTTOM_DISTANCE, \
-			global_position.y, exiting_pipe_length)
+			global_position.y - PIPE_EXIT_DISTANCE, exiting_pipe_length)
 	#this next line is kinda janky but hopefully it should set the animation after the above property
 	#finishes animating, basically it has duration 0 and a delay the same length as the duration of the above line
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character.sprite, "animation", null, "pipeExit" + \
 			("Right" if character.facing_direction == 1 else "Left"), 0, 0, 2, exiting_pipe_length)
-
+	
+	# warning-ignore: return_value_discarded
+	tween.interpolate_callback(audio_player, 0, "play")
+			
 	# warning-ignore: return_value_discarded
 	tween.start()
 
 func _tween_all_completed() -> void:
-	emit_signal("pipe_animation_finished", stored_character)	
+	emit_signal("pipe_animation_finished", stored_character, entering)
 
 	stored_character = null

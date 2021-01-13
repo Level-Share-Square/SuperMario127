@@ -8,6 +8,5 @@ func on_pressed():
 	# warning-ignore:return_value_discarded
 	get_tree().reload_current_scene()
 
-func _unhandled_key_input(event):
-	if event.is_action_pressed("switch_areas"):
-		on_pressed()
+func _ready():
+	var _area = connect("button_down", self, "on_pressed")

@@ -110,7 +110,7 @@ func _physics_process(delta : float) -> void:
 			or sprite_body.rotation_degrees == max_rotation #the stream used for the cannon move sound is set in the cannon startup animation finish function
 
 # called by a signal when the pipe enter animation finished
-func _start_cannon_animation(character : Character) -> void:
+func _start_cannon_animation(character : Character, entering : bool) -> void:
 	stored_character = character
 	stored_character.modulate.a = 0
 	stored_character.camera.focus_on = cannon_camera_startup_focus

@@ -33,8 +33,8 @@ func _set_property_values():
 
 func _ready():
 	var id = CurrentLevelData.level_data.vars.current_liquid_id
-	if CheckpointSaved.current_checkpoint_id != -1 and CheckpointSaved.liquid_positions.size() >= id:
-		var set_position = CheckpointSaved.liquid_positions[id]
+	if CheckpointSaved.current_checkpoint_id != -1 and CheckpointSaved.liquid_positions[CurrentLevelData.area].size() >= id:
+		var set_position = CheckpointSaved.liquid_positions[CurrentLevelData.area][id]
 		if set_position != Vector2():
 			global_position = set_position
 	CurrentLevelData.level_data.vars.current_liquid_id += 1

@@ -21,15 +21,15 @@ export var anim_damp = 80
 
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
-		CurrentLevelData.level_data.vars.shine_shards_collected[0] += 1
-		CurrentLevelData.level_data.vars.shine_shards_collected[1].append(id)
+		CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][0] += 1
+		CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][1].append(id)
 		var player_id = 1
 		if body.name == "Character":
 			player_id = 0
 		if PlayerSettings.other_player_id == -1 or PlayerSettings.my_player_index == player_id:
 			sound.play()
 		collected = true
-		label.text = str(CurrentLevelData.level_data.vars.shine_shards_collected[0])
+		label.text = str(CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][0])
 		label.visible = true
 		#animated_sprite.animation = "collect"
 		#animated_sprite.frame = 0
@@ -38,10 +38,11 @@ func collect(body):
 		destroy_timer = 2
 		
 func _ready():
+	if mode == 1: return
 	id = CurrentLevelData.level_data.vars.max_shine_shards
 	CurrentLevelData.level_data.vars.max_shine_shards += 1
 	
-	if id in CurrentLevelData.level_data.vars.shine_shards_collected[1]:
+	if id in CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][1]:
 		queue_free()
 	
 	var _connect = area.connect("body_entered", self, "collect")

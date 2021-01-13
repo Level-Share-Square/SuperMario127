@@ -187,8 +187,8 @@ func get_object(result) -> LevelObject:
 	return object
 
 func load_in(code):
-	vars = LevelVars.new()
-	
+	vars = LevelVars.new()	
+
 	var result
 	result = level_code_util.decode(code)
 

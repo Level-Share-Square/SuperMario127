@@ -50,20 +50,20 @@ func set_checkpoint(body):
 	is_used = true
 	CheckpointSaved.current_checkpoint_id = id
 	CheckpointSaved.current_spawn_pos = global_position + Vector2(0, spawn_y_offset)
+	CheckpointSaved.current_area = CurrentLevelData.area
 	CheckpointSaved.current_coins = CurrentLevelData.level_data.vars.coins_collected
-	CheckpointSaved.nozzles_collected = CurrentLevelData.level_data.vars.nozzles_collected.duplicate()
-	
-	var red_coins_array = CurrentLevelData.level_data.vars.red_coins_collected.duplicate()
-	CheckpointSaved.current_red_coins = [red_coins_array[0], red_coins_array[1].duplicate()]
-	
-	var shine_shards_array = CurrentLevelData.level_data.vars.shine_shards_collected.duplicate()
-	
-	CheckpointSaved.current_shine_shards = [shine_shards_array[0], shine_shards_array[1].duplicate()]
+	CheckpointSaved.nozzles_collected = CurrentLevelData.level_data.vars.nozzles_collected.duplicate(true)
+	CheckpointSaved.current_red_coins = CurrentLevelData.level_data.vars.red_coins_collected.duplicate(true)
+	CheckpointSaved.current_shine_shards = CurrentLevelData.level_data.vars.shine_shards_collected.duplicate(true)
 	
 	if save_water_level:
 		CheckpointSaved.liquid_positions = []
-		for liquid in CurrentLevelData.level_data.vars.liquids:
-			CheckpointSaved.liquid_positions.append(liquid[1].save_pos)
+		for area_index in CurrentLevelData.level_data.areas.size():
+			var area_array = []
+			if area_index == CurrentLevelData.area:
+				for liquid in CurrentLevelData.level_data.vars.liquids:
+					area_array.append(liquid[1].save_pos)
+			CheckpointSaved.liquid_positions.append(area_array)
 	
 	for checkpoint in CurrentLevelData.level_data.vars.checkpoints:
 		if checkpoint[1] != self:
