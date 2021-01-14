@@ -59,36 +59,28 @@ func _process(delta):
 			water_height = lerp(water_height, 1.0 - (character.fuel / 100.0), delta * interpolation_speed)
 			water_texture.material.set_shader_param("water_height", water_height)
 			shown = character.nozzle != null
-			
-			if character.health != current_health:
-				if character.health == 8:
-					var new_x_pos = default_x_pos
-					if (character.player_id == 0) and PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
-						new_x_pos = multiplayer_x_pos
-					tween.interpolate_property(ui, "rect_position",
-						ui.rect_position, Vector2(new_x_pos, ui.rect_position.y), 0.75,
-						Tween.TRANS_BACK, Tween.EASE_IN)
-					tween.start()
-				else:
-					var new_x_pos = default_x_pos - subtraction_amount
-					if (character.player_id == 0) and PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
-						new_x_pos = multiplayer_x_pos - subtraction_amount
-					tween.interpolate_property(ui, "rect_position",
-						ui.rect_position, Vector2(new_x_pos, ui.rect_position.y), 0.35,
-						Tween.TRANS_QUART, Tween.EASE_OUT)
-					tween.start()
-				current_health = character.health
+
+			if character.health == 8:
+				var new_x_pos = default_x_pos
+				if (character.player_id == 0) and PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
+					new_x_pos = multiplayer_x_pos
+				ui.rect_position.x = lerp(ui.rect_position.x, new_x_pos, delta * 7)
+			else:
+				var new_x_pos = default_x_pos - subtraction_amount
+				if (character.player_id == 0) and PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
+					new_x_pos = multiplayer_x_pos - subtraction_amount
+				ui.rect_position.x = lerp(ui.rect_position.x, new_x_pos, delta * 7)
 	else:
 		shown = false
 		
 	if shown and !last_shown:
-		tween.interpolate_property(ui, "rect_position",
-			ui.rect_position, Vector2(ui.rect_position.x, 15), 0.50,
+		tween.interpolate_property(ui, "rect_position:y",
+			ui.rect_position.y, 15, 0.50,
 			Tween.TRANS_BACK, Tween.EASE_OUT)
 		tween.start()
 	elif !shown and last_shown:
-		tween.interpolate_property(ui, "rect_position",
-			ui.rect_position, Vector2(ui.rect_position.x, -60), 0.50,
+		tween.interpolate_property(ui, "rect_position:y",
+			ui.rect_position.y, -60, 0.50,
 			Tween.TRANS_BACK, Tween.EASE_IN)
 		tween.start()
 	

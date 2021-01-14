@@ -24,7 +24,8 @@ func _ready():
 	CurrentLevelData.level_data.vars.pipes.append([pipe_tag.to_lower(), self])
 
 func _process(delta):
-	rotation = 0
+	if enabled:
+		rotation = 0
 	if color == Color(0, 1, 0):
 		sprite.texture = normal_texture
 		sprite.modulate = Color(1, 1, 1)
@@ -32,10 +33,32 @@ func _process(delta):
 		sprite.texture = recolorable_texture
 		sprite.modulate = color
 
-func change_areas(character, entering):
+func change_areas(character : Character, entering):
 	if area_id >= CurrentLevelData.level_data.areas.size():
 		area_id = CurrentLevelData.area
 	if entering:
+		CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area] = []
+		for liquid in CurrentLevelData.level_data.vars.liquids:
+			CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area].append(liquid[1].save_pos)
+		
+		var powerup_array = [null, null, null]
+		if is_instance_valid(character.powerup):
+			powerup_array[0] = character.powerup.name
+			powerup_array[1] = character.powerup.time_left
+			powerup_array[2] = character.powerup.play_temp_music
+		
+		var nozzle_name = null
+		if character.nozzle != null:
+			nozzle_name = character.nozzle.name
+		
+		CurrentLevelData.level_data.vars.transition_character_data = [
+			character.health,
+			character.health_shards,
+			nozzle_name,
+			character.fuel,
+			powerup_array,
+			get_tree().get_current_scene().switch_timer
+		]
 		CurrentLevelData.level_data.vars.transition_data = [
 			"pipe", 
 			pipe_tag

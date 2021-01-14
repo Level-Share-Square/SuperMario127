@@ -35,10 +35,11 @@ func _set_property_values():
 	
 func _ready():
 	var id = CurrentLevelData.level_data.vars.current_liquid_id
-	if CheckpointSaved.current_checkpoint_id != -1 and CheckpointSaved.liquid_positions[CurrentLevelData.area].size() >= id:
-		var set_position = CheckpointSaved.liquid_positions[CurrentLevelData.area][id]
+	if CurrentLevelData.level_data.vars.liquid_positions.size() > CurrentLevelData.area and CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area].size() > id:
+		var set_position = CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area][id]
 		if set_position != Vector2():
 			global_position = set_position
+			save_pos = set_position
 	CurrentLevelData.level_data.vars.current_liquid_id += 1
 
 	area_collision.shape = area_collision.shape.duplicate()

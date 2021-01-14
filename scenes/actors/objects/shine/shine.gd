@@ -127,7 +127,7 @@ func _physics_process(_delta : float) -> void:
 	if mode != 1:
 		var camera : Camera2D = current_scene.get_node(current_scene.camera)
 		if red_coins_activate and !activated and CurrentLevelData.level_data.vars.max_red_coins > 0:
-			if CurrentLevelData.level_data.vars.red_coins_collected[CurrentLevelData.area][0] == CurrentLevelData.level_data.vars.max_red_coins:
+			if CurrentLevelData.level_data.vars.red_coins_collected[0] == CurrentLevelData.level_data.vars.max_red_coins:
 				activate_shine()
 		if shine_shards_activate and !activated and CurrentLevelData.level_data.vars.max_shine_shards > 0:
 			if CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][0] == CurrentLevelData.level_data.vars.max_shine_shards:
@@ -157,20 +157,24 @@ func _physics_process(_delta : float) -> void:
 func activate_shine() -> void:
 	activated = true
 	
-	if CurrentLevelData.level_data.vars.transition_data == []:
-		animation_player.play("appear")
+	while current_scene.character == null:
+		yield(get_tree(), "idle_frame")
+	var character = current_scene.get_node(current_scene.character)
+	
+	while !character.movable or !character.controllable:
+		yield(get_tree(), "idle_frame")
+	
+	animation_player.play("appear")
 
-		var camera = current_scene.get_node(current_scene.camera)
-		camera.focus_on = self
+	var camera = current_scene.get_node(current_scene.camera)
+	camera.focus_on = self
 
-		pause_mode = PAUSE_MODE_PROCESS
-		get_tree().paused = true
+	pause_mode = PAUSE_MODE_PROCESS
+	get_tree().paused = true
 
-		unpause_timer.start()
-		# warning-ignore: return_value_discarded
-		unpause_timer.connect("timeout", self, "unpause_game")
-	else:
-		pass
+	unpause_timer.start()
+	# warning-ignore: return_value_discarded
+	unpause_timer.connect("timeout", self, "unpause_game")
 
 # unpauses the game after the activate shine cutscene is done
 func unpause_game() -> void:

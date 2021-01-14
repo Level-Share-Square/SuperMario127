@@ -74,3 +74,20 @@ func get_last_shine_id():
 			if object.type_id == 2:
 				last_shine_id += 1
 	return last_shine_id + 1
+
+func get_last_star_coin_id():
+	var last_star_coin_id = 0
+	for area in CurrentLevelData.level_data.areas:
+		for object in area.objects:
+			if object.type_id == 52:
+				last_star_coin_id += 1
+	return last_star_coin_id + 1
+
+func get_red_coins_before_area(area_id : int):
+	var last_red_coin_id = 0
+	for index in range(area_id):
+		var area = CurrentLevelData.level_data.areas[index]
+		for object in area.objects:
+			if object.type_id == 30:
+				last_red_coin_id += 1
+	return last_red_coin_id

@@ -57,13 +57,10 @@ func set_checkpoint(body):
 	CheckpointSaved.current_shine_shards = CurrentLevelData.level_data.vars.shine_shards_collected.duplicate(true)
 	
 	if save_water_level:
-		CheckpointSaved.liquid_positions = []
-		for area_index in CurrentLevelData.level_data.areas.size():
-			var area_array = []
-			if area_index == CurrentLevelData.area:
-				for liquid in CurrentLevelData.level_data.vars.liquids:
-					area_array.append(liquid[1].save_pos)
-			CheckpointSaved.liquid_positions.append(area_array)
+		CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area] = []
+		for liquid in CurrentLevelData.level_data.vars.liquids:
+			CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area].append(liquid[1].save_pos)
+	CheckpointSaved.liquid_positions = CurrentLevelData.level_data.vars.liquid_positions
 	
 	for checkpoint in CurrentLevelData.level_data.vars.checkpoints:
 		if checkpoint[1] != self:

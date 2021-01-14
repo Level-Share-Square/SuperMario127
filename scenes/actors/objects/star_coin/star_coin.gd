@@ -35,8 +35,7 @@ func _ready() -> void:
 	anim_sprite.play("default")
 
 	if !is_preview and mode == 1:
-		id = CurrentLevelData.next_star_coin_id
-		CurrentLevelData.next_star_coin_id += 1
+		id = CurrentLevelData.get_last_star_coin_id()
 		set_property("id", id)
 
 func update_color():

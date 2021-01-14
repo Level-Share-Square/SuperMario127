@@ -34,6 +34,7 @@ func _ready():
 	
 	var data = CurrentLevelData.level_data
 	load_in(data, data.areas[CurrentLevelData.area])
+	
 	music.character = get_node(character)
 	music.character2 = get_node(character2)
 	if !music.playing:
@@ -67,6 +68,9 @@ func _ready():
 		CurrentLevelData.start_tracking_time_score()
 	
 	MiscShared.is_play_reload = true
+
+	yield(get_tree(), "physics_frame")
+	CurrentLevelData.level_data.vars.max_red_coins = CurrentLevelData.get_red_coins_before_area(CurrentLevelData.level_data.areas.size())
 
 func _unhandled_input(event):
 	if event.is_action_pressed("reload") or event.is_action_pressed("reload_from_start") and !scene_transitions.transitioning and (!mode_switcher.get_node("ModeSwitcherButton").switching_disabled or mode_switcher.get_node("ModeSwitcherButton").invisible):

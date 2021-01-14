@@ -20,6 +20,7 @@ func _ready():
 			var player = get_tree().get_current_scene()
 			character = player.get_node(player[character_string])
 			var transition_data = CurrentLevelData.level_data.vars.transition_data
+			var transition_character_data = CurrentLevelData.level_data.vars.transition_character_data
 			if transition_data.size() == 0:
 				character.position = position
 			else:
@@ -46,6 +47,17 @@ func _ready():
 				else:
 					character.position = position
 				CurrentLevelData.level_data.vars.transition_data = []
+				
+				if transition_character_data.size() > 0:
+					character.health = transition_character_data[0]
+					character.health_shards = transition_character_data[1]
+					if transition_character_data[2] != null:
+						character.set_nozzle(transition_character_data[2])
+					character.fuel = transition_character_data[3]
+					if transition_character_data[4][0] != null:
+						character.set_powerup(character.get_powerup_node(transition_character_data[4][0]), transition_character_data[4][2])
+						character.powerup.time_left = transition_character_data[4][1]
+					get_tree().get_current_scene().switch_timer = transition_character_data[5]
 					
 			character.spawn_pos = position
 			character.get_node("Spotlight").enabled = false

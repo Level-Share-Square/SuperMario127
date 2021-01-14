@@ -363,6 +363,7 @@ func set_powerup(powerup_node: Node, set_temporary_music: bool) -> void:
 	
 	powerup = powerup_node
 	if is_instance_valid(powerup):
+		powerup.play_temp_music = set_temporary_music
 		powerup._start(0, set_temporary_music)
 		powerup.apply_visuals()
 

@@ -9,6 +9,7 @@ export var is_invincible : bool
 export var material : ShaderMaterial
 export var time_left : float
 export var id: int
+export var play_temp_music : bool
 
 func _ready():
 	character = get_parent().get_parent()
