@@ -22,6 +22,7 @@ func _physics_process(delta):
 			switch_timer = 0
 
 func _ready():
+	CurrentLevelData.enemies_instanced = 0
 	CurrentLevelData.level_data.vars.reset_counters()
 	
 	if !MiscShared.is_play_reload:

@@ -74,6 +74,7 @@ func switch() -> void:
 		ActionManager.clear_history()
 		
 		CurrentLevelData.area = 0
+		CurrentLevelData.enemies_instanced = 0
 		MiscShared.is_play_reload = false
 		var new_scene_mode = get_tree().get_current_scene().mode
 		if new_scene_mode == 0:

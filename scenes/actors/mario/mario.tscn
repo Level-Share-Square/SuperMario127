@@ -1,4 +1,4 @@
-[gd_scene load_steps=150 format=2]
+[gd_scene load_steps=155 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -70,6 +70,7 @@
 [ext_resource path="res://scenes/actors/mario/TurboParticles.gd" type="Script" id=68]
 [ext_resource path="res://scenes/actors/mario/states/Swimming.gd" type="Script" id=69]
 [ext_resource path="res://scenes/actors/mario/states/LavaBoost.gd" type="Script" id=70]
+[ext_resource path="res://scenes/actors/mario/particles/bubble.png" type="Texture" id=71]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -107,8 +108,9 @@ colors = PoolColorArray( 1, 1, 1, 1, 0.45098, 0.898039, 0.996078, 1, 0.133333, 0
 gradient = SubResource( 9 )
 
 [sub_resource type="Curve" id=11]
-max_value = 1.25
-_data = [ Vector2( 0, 0.815315 ), 0.0, 0.0, 0, 0, Vector2( 0.482233, 1.25 ), 0.0, 0.0, 0, 0 ]
+min_value = 1.0
+max_value = 1.5
+_data = [ Vector2( 0, 1.5 ), 0.0, -0.181566, 0, 0, Vector2( 0.550562, 1 ), -1.23892, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=12]
 curve = SubResource( 11 )
@@ -131,6 +133,28 @@ color_ramp = SubResource( 10 )
 hue_variation_random = 0.15
 anim_offset = 1.0
 anim_offset_random = 1.0
+
+[sub_resource type="Gradient" id=80]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=81]
+gradient = SubResource( 80 )
+
+[sub_resource type="CurveTexture" id=83]
+curve = SubResource( 11 )
+
+[sub_resource type="ParticlesMaterial" id=82]
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 50.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 400.0
+scale_curve = SubResource( 83 )
+color_ramp = SubResource( 81 )
+hue_variation_random = 0.15
 
 [sub_resource type="ParticlesMaterial" id=14]
 lifetime_randomness = 0.79
@@ -1057,8 +1081,8 @@ disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "lavaBoost"
-frame = 8
+animation = "spinning"
+frame = 1
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
@@ -1095,7 +1119,6 @@ playing = true
 centered = false
 
 [node name="Particles2D" type="Particles2D" parent="Sprite"]
-show_behind_parent = true
 material = SubResource( 8 )
 emitting = false
 amount = 192
@@ -1115,6 +1138,28 @@ fixed_fps = 60
 local_coords = false
 process_material = SubResource( 13 )
 texture = ExtResource( 66 )
+
+[node name="BubblesLeft" type="Particles2D" parent="Sprite"]
+material = SubResource( 8 )
+position = Vector2( -12, 6 )
+emitting = false
+amount = 16
+lifetime = 0.75
+fixed_fps = 60
+local_coords = false
+process_material = SubResource( 82 )
+texture = ExtResource( 71 )
+
+[node name="BubblesRight" type="Particles2D" parent="Sprite"]
+material = SubResource( 8 )
+position = Vector2( 12, 6 )
+emitting = false
+amount = 16
+lifetime = 0.75
+fixed_fps = 60
+local_coords = false
+process_material = SubResource( 82 )
+texture = ExtResource( 71 )
 
 [node name="TurboParticles" type="Particles2D" parent="Sprite"]
 material = SubResource( 8 )
@@ -1533,14 +1578,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 76 )
-frame = 3
+frame = 5
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 7
+frame = 15
 speed_scale = 3.0
 playing = true
 
@@ -1561,7 +1606,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "lavaBoost"
-frame = 1
+frame = 7
 playing = true
 script = ExtResource( 34 )
 

@@ -17,6 +17,8 @@ onready var water_sprite : AnimatedSprite = $Sprite/Water
 onready var water_sprite_2 : AnimatedSprite = $Sprite/Water2
 onready var water_particles : Particles2D = $Sprite/Particles2D
 onready var water_particles_2 : Particles2D = $Sprite/Particles2DBack
+onready var bubble_particles_left : Particles2D = $Sprite/BubblesLeft
+onready var bubble_particles_right : Particles2D = $Sprite/BubblesRight
 onready var turbo_particles : Particles2D = $Sprite/TurboParticles
 onready var rocket_particles : Particles2D = $Sprite/RocketParticles
 

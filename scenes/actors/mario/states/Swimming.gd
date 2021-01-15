@@ -74,6 +74,8 @@ func _update(delta):
 		boost_time_left = 0.75
 		character.spin_area_shape.disabled = false
 		character.sound_player.set_swim_playing(false)
+		character.bubble_particles_left.emitting = true
+		character.bubble_particles_right.emitting = true
 		character.sound_player.play_spin_water_sound()
 	
 	if boost_time_left > 0:
@@ -101,6 +103,8 @@ func _update(delta):
 			sprite.speed_scale = 0
 			character.spin_area_shape.disabled = true
 			character.sound_player.set_swim_playing(true)
+			character.bubble_particles_left.emitting = false
+			character.bubble_particles_right.emitting = false
 			swim_speed = base_swim_speed
 
 	if boost_buffer > 0:
@@ -144,6 +148,8 @@ func _stop(delta):
 	character.sound_player.play_splash_sound()
 	character.sound_player.set_swim_playing(false)
 	character.spin_area_shape.disabled = true
+	character.bubble_particles_left.emitting = false
+	character.bubble_particles_right.emitting = false
 	character.get_state_node("SpinningState").spin_timer = 0
 	character.get_state_node("SpinningState").spin_disable_time = 0.25
 	character.set_state_by_name("BounceState", delta)
