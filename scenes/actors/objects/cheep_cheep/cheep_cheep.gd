@@ -186,16 +186,16 @@ func physics_process_normal(delta: float, is_in_platform: bool) -> void:
 		
 		if is_instance_valid(character):
 			facing_direction = -1
-			sprite.rotation = lerp_angle(sprite.rotation, character.global_position.angle_to_point(kinematic_body.global_position), delta * 2)
-			velocity = velocity.move_toward(Vector2.RIGHT.rotated(sprite.rotation) * swim_speed, delta * 480)
+			sprite.rotation = lerp_angle(sprite.rotation, character.global_position.angle_to_point(kinematic_body.global_position), fps_util.PHYSICS_DELTA * 2)
+			velocity = velocity.move_toward(Vector2.RIGHT.rotated(sprite.rotation) * swim_speed, fps_util.PHYSICS_DELTA * 480)
 		else:
 			time_until_turn -= delta
 			if time_until_turn <= 0:
 				time_until_turn = 3.0
 				facing_direction = -facing_direction
 			
-			sprite.rotation = lerp_angle(sprite.rotation, 0, delta * 2)
-			velocity = velocity.move_toward(Vector2(-facing_direction * idle_swim_speed, 0), delta * 480)
+			sprite.rotation = lerp_angle(sprite.rotation, 0, fps_util.PHYSICS_DELTA * 2)
+			velocity = velocity.move_toward(Vector2(-facing_direction * idle_swim_speed, 0), fps_util.PHYSICS_DELTA * 480)
 	else:
 		gravity_scale = 1
 	
@@ -253,7 +253,7 @@ func physics_process_hit(delta: float, is_in_platform: bool) -> void:
 	if !dead:
 		if water_detector.get_overlapping_areas().size() > 0:
 			gravity_scale = 0
-			velocity = velocity.move_toward(Vector2.ZERO, delta * 240)
+			velocity = velocity.move_toward(Vector2.ZERO, fps_util.PHYSICS_DELTA * 240)
 		else:
 			gravity_scale = 1
 

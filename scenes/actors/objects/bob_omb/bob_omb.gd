@@ -209,7 +209,7 @@ func _physics_process(delta):
 		if character == null:
 			if walk_wait > 0:
 				sprite.animation = "default"
-				velocity.x = lerp(velocity.x, 0, delta * accel)
+				velocity.x = lerp(velocity.x, 0, fps_util.PHYSICS_DELTA * accel)
 				walk_wait -= delta
 				if walk_wait <= 0:
 					walk_wait = 0
@@ -217,7 +217,7 @@ func _physics_process(delta):
 					facing_direction = -facing_direction if int(time_alive * 10) % 2 == 0 else facing_direction
 			if walk_timer > 0:
 				sprite.animation = "walking"
-				velocity.x = lerp(velocity.x, facing_direction * passive_speed, delta * accel)
+				velocity.x = lerp(velocity.x, facing_direction * passive_speed, fps_util.PHYSICS_DELTA * accel)
 				walk_timer -= delta
 				if walk_timer <= 0:
 					walk_timer = 0
@@ -228,7 +228,7 @@ func _physics_process(delta):
 				if explode_timer <= 3.68 and !dead:
 					if !fuse_sound_2.playing:
 						fuse_sound_2.play()
-					sprite.modulate = lerp(sprite.modulate, Color(1, 0, 0), delta / 4.5)
+					sprite.modulate = lerp(sprite.modulate, Color(1, 0, 0), fps_util.PHYSICS_DELTA / 4.5)
 				if explode_timer <= 0:
 					fuse_sound.stop()
 					fuse_sound_2.stop()
@@ -242,8 +242,8 @@ func _physics_process(delta):
 					create_coin()
 			if !dead and !hit:
 				facing_direction = 1 if (character.global_position.x > kinematic_body.global_position.x) else -1
-				velocity.x = lerp(velocity.x, facing_direction * run_speed, delta * accel)
+				velocity.x = lerp(velocity.x, facing_direction * run_speed, fps_util.PHYSICS_DELTA * accel)
 				fuse.visible = true
 				sprite.animation = "walking"
-				sprite.speed_scale = lerp(sprite.speed_scale, run_speed / passive_speed, delta * accel)
-				fuse.speed_scale = lerp(fuse.speed_scale, run_speed / passive_speed, delta * accel)
+				sprite.speed_scale = lerp(sprite.speed_scale, run_speed / passive_speed, fps_util.PHYSICS_DELTA * accel)
+				fuse.speed_scale = lerp(fuse.speed_scale, run_speed / passive_speed, fps_util.PHYSICS_DELTA * accel)

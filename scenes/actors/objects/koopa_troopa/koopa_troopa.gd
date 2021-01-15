@@ -264,10 +264,10 @@ func physics_process_shell(delta, _level_bounds):
 	if shell_grounded_check.is_colliding():
 		var check = shell_grounded_check
 		if check.get_collision_normal().y == -1:
-			velocity.x = lerp(velocity.x, 0, delta / 2.5)
+			velocity.x = lerp(velocity.x, 0, fps_util.PHYSICS_DELTA / 2.5)
 		else:
 			var normal = sign(check.get_collision_normal().x)
-			velocity.x = lerp(velocity.x, 275 * normal, delta)
+			velocity.x = lerp(velocity.x, 275 * normal, fps_util.PHYSICS_DELTA)
 	
 	# Sprite handling & physics
 	shell_sprite.speed_scale = abs(velocity.x) / shell_max_speed
@@ -321,7 +321,7 @@ func physics_process_koopa(delta, level_bounds):
 		if !winged:
 			# Walk and be affected by gravity
 			sprite.animation = "walking"
-			velocity.x = lerp(velocity.x, facing_direction * speed, delta * accel)
+			velocity.x = lerp(velocity.x, facing_direction * speed, fps_util.PHYSICS_DELTA * accel)
 			if water_detector.get_overlapping_areas().size() > 0:
 				gravity_scale = 0.3
 			else:

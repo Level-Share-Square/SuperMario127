@@ -430,6 +430,11 @@ _global_script_classes=[ {
 "path": "res://util/conversion_util.gd"
 }, {
 "base": "Reference",
+"class": "fps_util",
+"language": "GDScript",
+"path": "res://util/fps_util.gd"
+}, {
+"base": "Reference",
 "class": "interpreter_util",
 "language": "GDScript",
 "path": "res://interpreter/interpreter_util.gd"
@@ -544,6 +549,7 @@ _global_script_class_icons={
 "YouTubeDl": "",
 "clipboard_util": "",
 "conversion_util": "",
+"fps_util": "",
 "interpreter_util": "",
 "level_code_util": "",
 "terrain_generator": "",

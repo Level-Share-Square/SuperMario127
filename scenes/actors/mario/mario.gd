@@ -443,7 +443,7 @@ func player_hit(body : Node) -> void:
 
 func _process(delta: float) -> void:
 	if next_position:
-		position = position.linear_interpolate(next_position, delta * sync_interpolation_speed)
+		position = position.linear_interpolate(next_position, fps_util.PHYSICS_DELTA * sync_interpolation_speed)
 
 	collected_shine_outline.frame = collected_shine.frame
 	collected_shine_outline.position = collected_shine.position
@@ -628,8 +628,8 @@ func _physics_process(delta: float) -> void:
 			#if !abs(normal.x) > 0.2:
 			#	velocity.y = 0
 		
-		sprite.position = sprite.position.linear_interpolate(sprite_offset, delta * rotation_interpolation_speed)
-		sprite.rotation = lerp_angle(sprite.rotation, sprite_rotation, delta * rotation_interpolation_speed)
+		sprite.position = sprite.position.linear_interpolate(sprite_offset, fps_util.PHYSICS_DELTA * rotation_interpolation_speed)
+		sprite.rotation = lerp_angle(sprite.rotation, sprite_rotation, fps_util.PHYSICS_DELTA * rotation_interpolation_speed)
 		sprite.rotation_degrees = wrapf(sprite.rotation_degrees, -180, 180)
 	
 	# Update all states, nozzles and powerups

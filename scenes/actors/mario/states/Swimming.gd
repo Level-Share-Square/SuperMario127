@@ -2,7 +2,7 @@ extends State
 
 class_name SwimmingState
 
-var base_swim_speed = 265
+var base_swim_speed = 285
 var boost_speed = 450
 
 var swim_speed = 255
@@ -118,18 +118,18 @@ func _update(delta):
 			boost_disable_time = 0
 			character.sound_player.set_swim_playing(true)
 			
-	var lerp_speed = 520
+	var lerp_speed = 480
 	if boost_time_left > 0:
-		lerp_speed = 1580
+		lerp_speed = 1440
 		swim_speed = base_swim_speed + ((boost_speed - base_swim_speed) * (boost_time_left / 0.375))
 
 	if abs(move_vector.x) + abs(move_vector.y) != 0:
 		char_rotation = Vector2().angle_to_point(move_vector) - (PI/2)
-		character.velocity = character.velocity.move_toward(Vector2.RIGHT.rotated(sprite.rotation - (PI/2)) * swim_speed, delta * lerp_speed)
+		character.velocity = character.velocity.move_toward(Vector2.RIGHT.rotated(sprite.rotation - (PI/2)) * swim_speed, fps_util.PHYSICS_DELTA * lerp_speed)
 	else:
-		character.velocity = character.velocity.move_toward(Vector2(), delta * (360 if (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed) else 480))
+		character.velocity = character.velocity.move_toward(Vector2(), fps_util.PHYSICS_DELTA * (240 if (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed) else 480))
 
-	sprite.rotation = fmod(lerp_angle(sprite.rotation, char_rotation, delta * (6.5 if boost_time_left == 0 else 1.75)), 360)
+	sprite.rotation = fmod(lerp_angle(sprite.rotation, char_rotation, fps_util.PHYSICS_DELTA * (7 if boost_time_left == 0 else 2)), 360)
 	if abs(sprite.rotation) > PI:
 		sprite.rotation = -sprite.rotation
 

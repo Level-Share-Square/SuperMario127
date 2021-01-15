@@ -29,7 +29,7 @@ func _update(delta):
 			sprite.animation = "tripleJumpRight"
 		else:
 			sprite.animation = "tripleJumpLeft"
-		sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 360, 12 * delta) * character.facing_direction
+		sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 360, 12 * fps_util.PHYSICS_DELTA) * character.facing_direction
 	else:
 		if (character.facing_direction == 1):
 			sprite.animation = "fallRight"
@@ -38,7 +38,7 @@ func _update(delta):
 		if abs(sprite.rotation_degrees) > 360:
 			sprite.rotation_degrees = 0
 		else:
-			sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 360, 12 * delta) * character.facing_direction
+			sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 360, 12 * fps_util.PHYSICS_DELTA) * character.facing_direction
 
 func _stop(_delta):
 	var sprite = character.sprite

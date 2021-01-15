@@ -11,18 +11,18 @@ onready var character_node = get_node(character)
 var character_vel = Vector2(0, 0)
 func _physics_process(delta):
 	if focus_on != null:
-		position = position.linear_interpolate(focus_on.global_position, delta * 3)
-		zoom = zoom.linear_interpolate(Vector2(focus_zoom, focus_zoom), delta * 3)
+		position = position.linear_interpolate(focus_on.global_position, fps_util.PHYSICS_DELTA * 3)
+		zoom = zoom.linear_interpolate(Vector2(focus_zoom, focus_zoom), fps_util.PHYSICS_DELTA * 3)
 		unfocusing = true
 	elif is_instance_valid(character_node):
 		if !character_node.dead and !get_tree().paused:
 			if unfocusing:
-				position = position.linear_interpolate(character_node.global_position, delta * 9)
+				position = position.linear_interpolate(character_node.global_position, fps_util.PHYSICS_DELTA * 9)
 				if abs(position.distance_to(character_node.global_position)) < 15:
 					unfocusing = false
 			else:
 				if character_node.controllable:
-					character_vel = character_vel.linear_interpolate(character_node.velocity * 15.5 * delta, delta * 2)
+					character_vel = character_vel.linear_interpolate(character_node.velocity * 15.5 * delta, fps_util.PHYSICS_DELTA * 2)
 				else:
 					character_vel = Vector2()
 				

@@ -177,7 +177,7 @@ func physics_process_normal(delta: float, is_in_platform: bool) -> void:
 		# Walk around randomly
 		if walk_wait > 0:
 			sprite.animation = "default"
-			velocity.x = lerp(velocity.x, 0, delta * accel)
+			velocity.x = lerp(velocity.x, 0, fps_util.PHYSICS_DELTA * accel)
 			walk_wait -= delta
 			if walk_wait <= 0:
 				walk_wait = 0
@@ -185,7 +185,7 @@ func physics_process_normal(delta: float, is_in_platform: bool) -> void:
 				facing_direction *= -1 if int(time_alive * 10) % 2 == 0 else 1
 		if walk_timer > 0:
 			sprite.animation = "walking"
-			velocity.x = lerp(velocity.x, facing_direction * speed, delta * accel)
+			velocity.x = lerp(velocity.x, facing_direction * speed, fps_util.PHYSICS_DELTA * accel)
 			walk_timer -= delta
 			if walk_timer <= 0:
 				walk_timer = 0
@@ -193,11 +193,11 @@ func physics_process_normal(delta: float, is_in_platform: bool) -> void:
 	else:
 		# Go towards the player
 		sprite.animation = "walking"
-		sprite.speed_scale = lerp(sprite.speed_scale, run_speed / speed, delta * accel)
+		sprite.speed_scale = lerp(sprite.speed_scale, run_speed / speed, fps_util.PHYSICS_DELTA * accel)
 		
 		# warning-ignore: narrowing_conversion
 		facing_direction = sign(character.global_position.x - kinematic_body.global_position.x)
-		velocity.x = lerp(velocity.x, facing_direction * run_speed, delta * accel)
+		velocity.x = lerp(velocity.x, facing_direction * run_speed, fps_util.PHYSICS_DELTA * accel)
 	
 	sprite.flip_h = true if facing_direction == 1 else false
 	
@@ -271,11 +271,11 @@ func physics_process_hit(delta: float, is_in_platform: bool) -> void:
 				character.velocity.y = 0
 				if character.move_direction != 0:
 					character.global_position.x += character.move_direction * 2
-				character.global_position.y = lerp(character.global_position.y, (kinematic_body.global_position.y + top_point.y) - 25, delta * 6)
+				character.global_position.y = lerp(character.global_position.y, (kinematic_body.global_position.y + top_point.y) - 25, fps_util.PHYSICS_DELTA * 6)
 				
 				var lerp_strength = 15
 				lerp_strength = clamp(abs(character.global_position.x - kinematic_body.global_position.x), 0, 15)
-				character.global_position.x = lerp(character.global_position.x, kinematic_body.global_position.x, delta * lerp_strength)
+				character.global_position.x = lerp(character.global_position.x, kinematic_body.global_position.x, fps_util.PHYSICS_DELTA * lerp_strength)
 			boost_timer -= delta
 			
 			if boost_timer <= 0:
@@ -301,10 +301,10 @@ func physics_process_hit(delta: float, is_in_platform: bool) -> void:
 		# Ground collision
 		if kinematic_body.is_on_floor():
 			if kinematic_body.get_floor_normal().y == -1:
-				velocity.x = lerp(velocity.x, 0, delta * 2.5)
+				velocity.x = lerp(velocity.x, 0, fps_util.PHYSICS_DELTA * 2.5)
 			else:
 				var normal := sign(kinematic_body.get_floor_normal().x)
-				velocity.x = lerp(velocity.x, 225 * normal, delta)
+				velocity.x = lerp(velocity.x, 225 * normal, fps_util.PHYSICS_DELTA)
 			
 			snap = Vector2(0, 0 if is_in_platform else 12)
 		else: # or not

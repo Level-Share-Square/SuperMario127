@@ -53,7 +53,7 @@ func _update(delta : float) -> void:
 		sprite.animation = "diveLeft"
 	var new_angle : float = (character.velocity.y / 15) + 90
 	if (abs(new_angle) < 185):
-		sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), new_angle, 20 * delta) * character.facing_direction
+		sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), new_angle, 20 * fps_util.PHYSICS_DELTA) * character.facing_direction
 		last_above_rot_limit = false
 	else:
 		if (!last_above_rot_limit):

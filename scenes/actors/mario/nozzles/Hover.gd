@@ -8,7 +8,7 @@ export var fuel_depletion := 0.035
 var last_activated = false
 var last_state = null
 
-var accel = 15
+var accel = 30
 var rotation_interpolation_speed = 35
 var preservation_factor = 0
 
@@ -32,7 +32,7 @@ func _activated_update(delta):
 		override_rotation = true
 		var sprite = character.sprite
 		var sprite_rotation = (character.velocity.x / character.move_speed) * 6
-		sprite.rotation_degrees = lerp(sprite.rotation_degrees, sprite_rotation, delta * rotation_interpolation_speed)
+		sprite.rotation_degrees = lerp(sprite.rotation_degrees, sprite_rotation, fps_util.PHYSICS_DELTA * rotation_interpolation_speed)
 	else:
 		override_rotation = false
 			
@@ -46,10 +46,8 @@ func _activated_update(delta):
 	
 	if abs(character.velocity.x) < abs(power * normal.x) * (6 if !character.swimming else 1):
 		character.velocity.x -= accel * (0.5 if character.swimming else 0.75) * normal.x
-		character.velocity.x -= accel * (0.5 if character.swimming else 0.75) * normal.x
 		
 	if (character.velocity.y > power * normal.y and normal.y > 0) or (character.velocity.y < power * normal.y and normal.y < 0):
-		character.velocity.y -= accel * (1 if !character.swimming else 0.75) * normal.y
 		character.velocity.y -= accel * (1 if !character.swimming else 0.75) * normal.y
 
 	if !character.swimming:
