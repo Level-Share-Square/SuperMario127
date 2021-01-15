@@ -86,11 +86,11 @@ export var move_direction := 0
 export var last_move_direction := 0
 
 export var move_speed := 216.0
-export var acceleration := 7.5
-export var deceleration := 15.0
-export var aerial_acceleration := 7.5
-export var friction := 10.5
-export var aerial_friction := 1.15
+export var acceleration := 16.0
+export var deceleration := 30.0
+export var aerial_acceleration := 16.0
+export var friction := 27.0
+export var aerial_friction := 2.3
 export var max_aerial_velocity := 640
 
 # Sounds
@@ -531,9 +531,11 @@ func _physics_process(delta: float) -> void:
 		max_aerial_velocity = 640
 	
 	# Gravity
+	# Twice to work the same as 120fps
+	velocity.y += gravity * gravity_scale
 	velocity.y += gravity * gravity_scale
 	if !swimming:
-		velocity.y = clamp(velocity.y, velocity.y, max_aerial_velocity)	
+		velocity.y = clamp(velocity.y, velocity.y, max_aerial_velocity)
 	
 	if is_instance_valid(state):
 		disable_movement = state.disable_movement or (nozzle != null and (nozzle.name == "Turbo" and nozzle.activated))

@@ -242,6 +242,7 @@ func physics_process_normal(delta: float, is_in_platform: bool) -> void:
 	
 	# Run physics
 	velocity.y += gravity * gravity_scale
+	velocity.y += gravity * gravity_scale
 	velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
 
 func physics_process_hit(delta: float, is_in_platform: bool) -> void:
@@ -310,6 +311,7 @@ func physics_process_hit(delta: float, is_in_platform: bool) -> void:
 			snap = Vector2(0, 0)
 		
 		# Run physics
-		velocity.y += gravity
+		velocity.y += gravity * gravity_scale
+		velocity.y += gravity * gravity_scale
 		#kinematic_body.get_floor_normal()
 		velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))

@@ -134,6 +134,7 @@ func _physics_process(delta):
 		gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
 		#body.apply_central_impulse(Vector2(0, gravity))
 		velocity.y += gravity * gravity_scale
+		velocity.y += gravity * gravity_scale
 	
 		var check = grounded_check
 		if !grounded_check.is_colliding():

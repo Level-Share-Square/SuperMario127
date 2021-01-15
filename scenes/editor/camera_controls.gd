@@ -1,12 +1,12 @@
 extends Camera2D
 
-export var speed = 6.0
+export var speed = 12.0
 var up_held = false
 var down_held = false
 var left_held = false
 var right_held = false
 
-var lerp_speed = 15
+var lerp_speed = 30.0
 var default_height
 
 func _unhandled_input(event):
@@ -73,17 +73,18 @@ func resolve_limit_collisions():
 		position.y = limit_bottom - ((get_viewport_rect().size.y / 2) * zoom.y)
 
 func _physics_process(delta):
+	var move_speed = speed * 2 if Input.is_action_pressed("speed_up_camera") else speed
 	if up_held:
-		position.y -= speed
+		position.y -= move_speed
 		resolve_limit_collisions()
 	elif down_held:
-		position.y += speed
+		position.y += move_speed
 		resolve_limit_collisions()
 	if left_held:
-		position.x -= speed
+		position.x -= move_speed
 		resolve_limit_collisions()
 	elif right_held:
-		position.x += speed
+		position.x += move_speed
 		resolve_limit_collisions()
 		
 	var editor = get_tree().get_current_scene()

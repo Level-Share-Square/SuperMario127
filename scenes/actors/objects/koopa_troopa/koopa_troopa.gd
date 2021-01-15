@@ -277,6 +277,7 @@ func physics_process_shell(delta, _level_bounds):
 	else:
 		gravity_scale = 1
 	velocity.y += gravity * gravity_scale
+	velocity.y += gravity * gravity_scale
 	velocity = shell.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
 
 func physics_process_koopa(delta, level_bounds):
@@ -325,6 +326,7 @@ func physics_process_koopa(delta, level_bounds):
 				gravity_scale = 0.3
 			else:
 				gravity_scale = 1
+			velocity.y += gravity * gravity_scale
 			velocity.y += gravity * gravity_scale
 		else:
 			# Paratroopas go up and down very slightly

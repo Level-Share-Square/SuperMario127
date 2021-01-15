@@ -3,7 +3,7 @@ extends Nozzle
 class_name HoverNozzle
 
 export var boost_power := 170
-export var depletion := 0.55
+export var depletion := 1.1
 export var fuel_depletion := 0.035
 var last_activated = false
 var last_state = null
@@ -46,8 +46,10 @@ func _activated_update(delta):
 	
 	if abs(character.velocity.x) < abs(power * normal.x) * (6 if !character.swimming else 1):
 		character.velocity.x -= accel * (0.5 if character.swimming else 0.75) * normal.x
+		character.velocity.x -= accel * (0.5 if character.swimming else 0.75) * normal.x
 		
 	if (character.velocity.y > power * normal.y and normal.y > 0) or (character.velocity.y < power * normal.y and normal.y < 0):
+		character.velocity.y -= accel * (1 if !character.swimming else 0.75) * normal.y
 		character.velocity.y -= accel * (1 if !character.swimming else 0.75) * normal.y
 
 	if !character.swimming:

@@ -22,7 +22,7 @@ func _physics_process(delta):
 					unfocusing = false
 			else:
 				if character_node.controllable:
-					character_vel = character_vel.linear_interpolate(character_node.velocity * 30 * delta, delta * 2)
+					character_vel = character_vel.linear_interpolate(character_node.velocity * 15.5 * delta, delta * 2)
 				else:
 					character_vel = Vector2()
 				

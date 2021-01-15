@@ -92,7 +92,7 @@ func _physics_process(delta):
 	if cached_pos != Vector2() and character != null and !dead:
 		move_to = move_to.linear_interpolate((cached_pos - global_position).normalized(), delta * 2)
 		sprite.rotation = lerp_angle(sprite.rotation, (move_to.angle()), delta * 3)
-		global_position += Vector2(cos(sprite.rotation), sin(sprite.rotation)) * speed
+		global_position += Vector2(cos(sprite.rotation), sin(sprite.rotation)) * (speed * 2)
 		
 	if mode != 1:
 		if chase:
@@ -139,7 +139,7 @@ func _physics_process(delta):
 					queue_free()
 		elif !chase:
 			sprite.frame = 0
-			position += Vector2(cos(sprite.rotation), sin(sprite.rotation)) * speed * facing_direction
+			position += Vector2(cos(sprite.rotation), sin(sprite.rotation)) * (speed * 2) * facing_direction
 		
 		if !visibility_notifer.is_on_screen():
 			CurrentLevelData.enemies_instanced -= 1
