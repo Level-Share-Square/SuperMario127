@@ -28,7 +28,7 @@ func set_position(new_position):
 	var movement = new_position - global_position
 	
 	#first move the bodies
-	$StaticBody2D.constant_linear_velocity = movement * 120
+	$StaticBody2D.constant_linear_velocity = movement * 60
 	
 	#then move self
 	position = new_position
@@ -53,7 +53,7 @@ func _ready():
 	rotation_degrees = 0
 
 func _physics_process(delta):
-	momentum = (global_position - last_position) / delta
+	momentum = (global_position - last_position) / fps_util.PHYSICS_DELTA
 	last_position = global_position
 	sprite.speed_scale = clamp(speed, 0.5, 3)
 	sprite.playing = true
@@ -80,17 +80,17 @@ func _physics_process(delta):
 		if platform_area.get_overlapping_bodies().size() > 0 and platform_area.get_overlapping_bodies()[0].get_collision_layer_bit(1) == true and platform_area.get_overlapping_bodies()[0].is_grounded():
 			sprite.speed_scale = clamp(speed * 2, 1, 6)
 			wings_spread = false
-			y_pos = global_position.y + (speed * 15 * delta)
+			y_pos = global_position.y + (speed * 15 * fps_util.PHYSICS_DELTA)
 		else:
-			y_pos = global_position.y - (speed * 25 * delta)
+			y_pos = global_position.y - (speed * 25 * fps_util.PHYSICS_DELTA)
 			
 		if wings_spread:
 			sprite.animation = "spreadWings"
-			y_pos = global_position.y + (speed * 15 * delta)
+			y_pos = global_position.y + (speed * 15 * fps_util.PHYSICS_DELTA)
 		else:
 			sprite.animation = "flying"
 			
-		set_position(Vector2(global_position.x + (speed * 60 * delta * facing_direction), y_pos))
+		set_position(Vector2(global_position.x + (speed * 60 * fps_util.PHYSICS_DELTA * facing_direction), y_pos))
 		
 		
 

@@ -292,7 +292,7 @@ position = Vector2( 0, 30 )
 
 [node name="SpriteBody" type="Sprite" parent="CannonMoveable/SpriteBodyReverser"]
 material = SubResource( 4 )
-position = Vector2( 0, -22 )
+position = Vector2( 0, -21.3203 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -6.301 )
 region_enabled = true
@@ -371,6 +371,7 @@ shape = SubResource( 15 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 script = ExtResource( 7 )
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="tween_all_completed" from="Tween" to="." method="_on_tween_all_completed"]
 [connection signal="body_exited" from="NearbyCharacterDetection" to="." method="_on_NearbyCharacterDetection_body_exited"]

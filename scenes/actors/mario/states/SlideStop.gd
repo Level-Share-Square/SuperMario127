@@ -24,7 +24,7 @@ func _update(delta):
 		else:
 			sprite.animation = "diveLeft"
 	
-	sprite.rotation = lerp(sprite.rotation, 0, delta * character.rotation_interpolation_speed)
+	sprite.rotation = lerp(sprite.rotation, 0, fps_util.PHYSICS_DELTA * character.rotation_interpolation_speed)
 	sprite.position.y -= 0.4
 	if sprite.position.y < 0:
 		sprite.position.y = 0

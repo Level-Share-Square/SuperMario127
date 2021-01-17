@@ -40,6 +40,7 @@ func _physics_process(delta):
 		
 		if falling:
 			velocity.y += gravity
+			velocity.y += gravity
 			position += velocity * delta
 			if velocity.y > 0:
-				rotation_degrees += 2.5 * rotate_direction
+				rotation_degrees += 5 * rotate_direction

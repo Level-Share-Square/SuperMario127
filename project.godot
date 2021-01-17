@@ -1013,6 +1013,7 @@ speed_up_camera={
 2d_physics/layer_7="vanish powerup"
 2d_physics/layer_8="water"
 2d_physics/layer_9="lava"
+2d_physics/layer_10="pipe"
 
 [logging]
 

@@ -105,8 +105,8 @@ func _ready():
 		instance.collision_shape.disabled = !enabled
 		instance.platform_area_collision_shape.disabled = !enabled
 
-func _physics_process(delta):
-	time_alive += delta * speed
+func _physics_process(_delta):
+	time_alive += fps_util.PHYSICS_DELTA * speed
 	var angle := fmod(time_alive + angle_offset, (2*PI))
 	for platform in platforms:
 		var new_pos := Vector2(radius * 32, 0).rotated(angle)

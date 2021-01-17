@@ -17,7 +17,7 @@ func set_position(new_position):
 	var movement = get_parent().to_global(new_position) - global_position
 	
 	#first move the bodies
-	$StaticBody2D.constant_linear_velocity = movement * 120
+	$StaticBody2D.constant_linear_velocity = movement * 60
 	
 	#then move self
 	position = new_position
@@ -38,7 +38,7 @@ func _ready():
 	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate()
 
 func _physics_process(delta):
-	momentum = (global_position - last_position) / delta
+	momentum = (global_position - last_position) / fps_util.PHYSICS_DELTA
 	
 	last_position = global_position
 

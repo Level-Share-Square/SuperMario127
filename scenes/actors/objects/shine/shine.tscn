@@ -189,12 +189,13 @@ process_parent = true
 
 [node name="AnimatedSpriteOutline" type="AnimatedSprite" parent="."]
 frames = SubResource( 20 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-frame = 11
+frame = 3
+playing = true
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]
 show_behind_parent = true

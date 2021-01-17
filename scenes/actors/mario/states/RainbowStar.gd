@@ -46,7 +46,7 @@ func _update(delta):
 			character.sprite.animation = "tripleJumpRight"
 		else:
 			character.sprite.animation = "tripleJumpLeft"
-		character.sprite.rotation_degrees += 12 * character.facing_direction
+		character.sprite.rotation_degrees += 24 * character.facing_direction
 	character.sprite.speed_scale = (abs(character.velocity.x) / run_speed)
 	
 	if character.velocity.x == 0:
@@ -69,7 +69,7 @@ func _update(delta):
 		had_jumped = true
 		
 	if character.is_grounded():
-		current_speed = lerp(current_speed, run_speed, delta * 4.5)
+		current_speed = lerp(current_speed, run_speed, fps_util.PHYSICS_DELTA * 4.5)
 		if footstep_interval <= 0 and character.sprite.speed_scale > 0:
 			character.sound_player.play_footsteps()
 			footstep_interval = clamp(0.8 - (character.sprite.speed_scale / 1.25), 0.1, 1)

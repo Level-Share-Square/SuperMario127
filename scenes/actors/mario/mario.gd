@@ -36,6 +36,7 @@ onready var slope_stop_check : RayCast2D = $SlopeStopCheck
 onready var player_collision : Area2D = $PlayerCollision
 onready var water_detector : Area2D = $WaterDetector
 onready var lava_detector : Area2D = $LavaDetector
+onready var pipe_detector : Area2D = $PipeDetector
 onready var burn_particles : Particles2D = $BurnParticles
 onready var terrain_detector : Area2D = $TerrainDetector
 onready var platform_detector : Area2D = $PlatformDetector

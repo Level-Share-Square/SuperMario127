@@ -68,13 +68,13 @@ func _physics_process(delta):
 	if !moving: return
 	
 	if global_position.y < match_level:
-		global_position.y += move_speed
+		global_position.y += move_speed * 2
 		if global_position.y >= match_level:
 			moving = false
 			global_position.y = match_level
 	
 	if global_position.y > match_level:
-		global_position.y -= move_speed
+		global_position.y -= move_speed * 2
 		if global_position.y <= match_level:
 			moving = false
 			global_position.y = match_level

@@ -33,14 +33,14 @@ func _physics_process(delta):
 	var particles = $Rotation/RotationRight/Particles
 	
 	particles.texture = used_sparkles if is_used else normal_sparkles
-	sprite.rotation_degrees += 4
+	sprite.rotation_degrees += 8
 	sprite.scale = sprite.scale.move_toward(Vector2(1, 1), delta * 4) if !is_used else sprite.scale.move_toward(Vector2(1.15, 1.15), delta * 8)
 
 	var sprite2 = $Rotation/RotationLeft
 	var particles2 = $Rotation/RotationLeft/Particles
 	
 	particles2.texture = used_sparkles if is_used else normal_sparkles
-	sprite2.rotation_degrees -= 4
+	sprite2.rotation_degrees -= 8
 	sprite2.scale = sprite2.scale.move_toward(Vector2(1, 1), delta * 4) if !is_used else sprite2.scale.move_toward(Vector2(1.15, 1.15), delta * 8)
 
 func set_checkpoint(body):

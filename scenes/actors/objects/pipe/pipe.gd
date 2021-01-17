@@ -2,6 +2,7 @@ extends GameObject
 
 onready var pipe_enter_logic = $PipeEnterLogic
 onready var sprite = $Sprite
+onready var sprite2 = $Sprite/Sprite2
 
 export var normal_texture : Texture
 export var recolorable_texture : Texture 
@@ -28,10 +29,15 @@ func _process(delta):
 		rotation = 0
 	if color == Color(0, 1, 0):
 		sprite.texture = normal_texture
-		sprite.modulate = Color(1, 1, 1)
+		sprite.self_modulate = Color(1, 1, 1)
 	else:
 		sprite.texture = recolorable_texture
-		sprite.modulate = color
+		sprite2.visible = true
+		sprite.self_modulate = color
+		var bright_color = color
+		bright_color.s /= 1.5
+		bright_color.v *= 1.15
+		sprite2.self_modulate = bright_color
 
 func change_areas(character : Character, entering):
 	if area_id >= CurrentLevelData.level_data.areas.size():

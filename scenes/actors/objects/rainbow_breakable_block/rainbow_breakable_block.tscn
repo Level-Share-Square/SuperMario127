@@ -40,19 +40,19 @@ shader_param/gradient = SubResource( 3 )
 extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 12, 7 )
+extents = Vector2( 16, 8 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 18, 16 )
+extents = Vector2( 26, 12 )
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 24, 24 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 10, 100.541 )
+extents = Vector2( 16, 100.541 )
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 100, 16 )
+extents = Vector2( 100, 12 )
 
 [sub_resource type="ShaderMaterial" id=11]
 shader = SubResource( 1 )
@@ -78,7 +78,7 @@ shape = SubResource( 5 )
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StompArea"]
-position = Vector2( 0, -21 )
+position = Vector2( 0, -16 )
 shape = SubResource( 6 )
 
 [node name="SpinArea" type="Area2D" parent="."]
@@ -94,7 +94,6 @@ visible = false
 shape = SubResource( 8 )
 
 [node name="PlayerStompDetector" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 

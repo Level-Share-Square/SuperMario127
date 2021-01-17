@@ -26,7 +26,7 @@ var end_position : Vector2
 var last_end_position : Vector2
 
 var max_speed := 1.0
-onready var blend := pow(0.95, 120 * get_physics_process_delta_time())
+onready var blend := pow(0.95, 120 * fps_util.PHYSICS_DELTA)
 
 var curve = null
 
@@ -186,7 +186,7 @@ func _physics_process(delta):
 	if(!activated):
 		return
 
-	linear_offset += speed * max_speed * 120 * delta
+	linear_offset += speed * max_speed * 120 * fps_util.PHYSICS_DELTA
 
 	if move_type != MT_LOOP:
 		linear_offset = clamp(linear_offset, 0.0, path.curve.get_baked_length()-0.01) #so the 

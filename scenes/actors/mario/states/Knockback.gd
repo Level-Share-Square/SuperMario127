@@ -21,7 +21,7 @@ func _start(_delta):
 	bonk_direction = character.facing_direction
 	character.sprite.rotation_degrees = 0
 	character.current_jump = 0
-	character.friction = 4
+	character.friction = 8
 	bounces_left = 2
 	bonked_time = 0
 
@@ -41,7 +41,7 @@ func _update(delta):
 		character.velocity.y = -50 * bounces_left
 	if bounces_left < 2:
 		target_rotation = 0
-	sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), target_rotation, lerp_speed * delta) * -character.facing_direction
+	sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), target_rotation, lerp_speed * fps_util.PHYSICS_DELTA) * -character.facing_direction
 	
 func _stop(_delta):
 	var sprite = character.sprite

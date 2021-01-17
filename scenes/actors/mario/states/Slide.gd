@@ -24,7 +24,7 @@ func _start_check(_delta):
 
 func _start(_delta):
 	if character.state != character.get_state_node("Jump"):
-		character.friction = 4
+		character.friction = 8
 	if crouch_buffer > 0:
 		is_crouch = true
 		character.velocity.y = 120
@@ -61,7 +61,7 @@ func _update(delta):
 		var sprite_rotation = atan2(normal.y, normal.x) + (PI/2)
 		sprite_rotation += PI/2 * character.facing_direction
 		
-		sprite.rotation = lerp(sprite.rotation, sprite_rotation, delta * lerp_speed)
+		sprite.rotation = lerp(sprite.rotation, sprite_rotation, fps_util.PHYSICS_DELTA * lerp_speed)
 	#elif is_crouch:
 		#character.position.y += 2.5	
 

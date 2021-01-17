@@ -103,7 +103,7 @@ func _physics_process(delta : float) -> void:
 	horizontal_input *= cannon_direction_multiplier
 
 	if horizontal_input != 0:
-		sprite_body.rotation += horizontal_input * delta
+		sprite_body.rotation += horizontal_input * fps_util.PHYSICS_DELTA
 		sprite_body.rotation = clamp(sprite_body.rotation, deg2rad(min_rotation), deg2rad(max_rotation))
 
 	audio_player.stream_paused = horizontal_input == 0 or sprite_body.rotation_degrees == min_rotation \

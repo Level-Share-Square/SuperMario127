@@ -49,4 +49,4 @@ func _stop(delta):
 			character.velocity.y = character.velocity.y / 4
 
 func _stop_check(_delta):
-	return character.is_grounded() or (character.inputs[6][1] and can_dive)
+	return (character.is_grounded() and (character.pipe_detector.get_overlapping_areas().size() == 0 or !character.get_input(Character.input_names.crouch, false))) or (character.inputs[6][1] and can_dive)

@@ -59,11 +59,11 @@ func _ready():
 func _physics_process(delta):
 	if cached_pos != Vector2() and chase and character != null:
 		var move_to = (cached_pos - global_position).normalized()
-		global_position += move_to * current_speed
+		global_position += move_to * current_speed * 2
 		
 	if mode != 1 and chase:
 		if chase_anim_finished:
-			current_speed = lerp(current_speed, chase_speed, delta * 2) #this will make the transition from animation to movement not so jarring
+			current_speed = lerp(current_speed, chase_speed, fps_util.PHYSICS_DELTA * 2) #this will make the transition from animation to movement not so jarring
 			particles.emitting = true
 			if update_timer <= 0:
 				if character != null:
@@ -91,7 +91,7 @@ func _physics_process(delta):
 		else:
 			particles.emitting = true #normally the trail only appears when the demon has a target, but we want it to appear here, too
 			
-			chase_start_anim_angle += delta * (current_speed*5) #multiplied to speed it up to a normal amount
+			chase_start_anim_angle += fps_util.PHYSICS_DELTA * (current_speed*5) #multiplied to speed it up to a normal amount
 			
 			if chase_start_anim_angle > PI * 2: #if the demon reaches the bottom of the rotation circle, add to the variable
 				chase_start_anim_angle = 0

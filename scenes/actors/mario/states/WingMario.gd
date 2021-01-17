@@ -41,7 +41,7 @@ func _update(delta):
 	up_down_controls = PlayerSettings.legacy_wing_cap
 	
 	# Capping rotation
-	var clamp_max : float = lerp(rotation_down, 220 - momentum / 1.5, delta * 4)
+	var clamp_max : float = lerp(rotation_down, 220 - momentum / 1.5, fps_util.PHYSICS_DELTA * 4)
 	clamp_max = clamp(clamp_max, 0, 180)
 	rotation_down = clamp(abs(rotation_down), clamp_max, 180)
 	var rotation_normal = Vector2(sin(deg2rad(rotation_down)), cos(deg2rad(rotation_down)))
@@ -59,11 +59,11 @@ func _update(delta):
 	#		momentum += character.nozzle.accel / 8
 	
 	# drag
-	momentum = lerp(momentum, 0, delta / 2.2)
+	momentum = lerp(momentum, 0, fps_util.PHYSICS_DELTA / 2.2)
 	
 	# apply bruh momentum
-	character.velocity.y = lerp(character.velocity.y, -rotation_normal.y * momentum, delta * 20)
-	character.velocity.x = lerp(character.velocity.x, character.facing_direction * rotation_normal.x * momentum * 1.5, delta * 20)
+	character.velocity.y = lerp(character.velocity.y, -rotation_normal.y * momentum, fps_util.PHYSICS_DELTA * 20)
+	character.velocity.x = lerp(character.velocity.x, character.facing_direction * rotation_normal.x * momentum * 1.5, fps_util.PHYSICS_DELTA * 20)
 	
 	# Calculating inputs
 	var subtract_input = false
@@ -106,7 +106,7 @@ func _update(delta):
 	
 	# Sprite animation and rotation
 	character.sprite.animation = "flyRight" if character.facing_direction == 1 else "flyLeft"
-	character.sprite.rotation = lerp_angle(character.sprite.rotation, deg2rad(rotation_down * character.facing_direction), delta * 12)
+	character.sprite.rotation = lerp_angle(character.sprite.rotation, deg2rad(rotation_down * character.facing_direction), fps_util.PHYSICS_DELTA * 12)
 	if rotation_down > 110:
 		character.sprite.frame = 0
 	elif rotation_down < 50:
