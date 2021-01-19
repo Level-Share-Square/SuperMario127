@@ -136,7 +136,7 @@ func _update(delta):
 		sprite.rotation = -sprite.rotation
 
 	character.facing_direction = sign(sprite.rotation)
-	sprite.animation = "swimming" if boost_time_left <= 0 else "spinning" 
+	sprite.animation = "diveRight" if boost_time_left <= 0 else "spinning" 
 
 func _stop(delta):
 	if boost_time_left == 0 and (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed):

@@ -7,6 +7,7 @@ var character : Character
 var character2 : Character
 
 onready var temporary_music_player : AudioStreamPlayer = $TemporaryMusicPlayer
+onready var water_music_player : AudioStreamPlayer = $WaterMusicPlayer
 onready var tween : Tween = $Tween
 
 export var volume_multiplier := 1.0
@@ -25,6 +26,8 @@ var loop := 1.0
 var global_volume := 1.0
 
 var muted := false
+var play_water := false
+var has_water := false
 
 const MUSIC_FADE_LENGTH = 0.75
 
@@ -69,9 +72,9 @@ func load_ogg() -> void:
 
 	ogg_file.close()
 
-	self.stream = stream
-	play()
-	print("Audio Loaded!")
+	if get_tree().get_current_scene().mode != 2:
+		self.stream = stream
+		play()
 
 func change_song(old_setting, music_setting) -> void:
 	var song
@@ -90,13 +93,30 @@ func change_song(old_setting, music_setting) -> void:
 	if song != null and stream != song.stream:
 		stream = song.stream
 		play()
+		
+		if song.underwater_stream != null:
+			water_music_player.stream = song.underwater_stream
+			water_music_player.play()
+			water_music_player.volume_db = -80
+			has_water = true
+			play_water = false
+		else:
+			water_music_player.stop()
+			has_water = false
+			play_water = false
 	
 	if "mode" in get_tree().get_current_scene():
 		bus = play_bus if get_tree().get_current_scene().mode == 0 else edit_bus
 	else:
 		bus = play_bus # perhaps we should define a general bus or a menu bus later
 
-func _process(_delta) -> void:
+func toggle_underwater_music(state):
+	if has_water:
+		play_water = state
+	else:
+		play_water = false
+
+func _process(delta) -> void:
 	if Input.is_action_just_pressed("volume_up"):
 		increment_global_volume(0.1)
 	if Input.is_action_just_pressed("volume_down"):
@@ -116,8 +136,10 @@ func _process(_delta) -> void:
 		last_mode = current_scene.mode
 		last_song = level_song
 	
-	volume_db = linear2db(db2linear(base_volume) * volume_multiplier) if !muted else -80.0
-
+	var target_volume = (db2linear(base_volume) * volume_multiplier) if !muted else -80.0
+	volume_db = linear2db(lerp(db2linear(volume_db), target_volume if !play_water else 0, delta * 3))
+	water_music_player.volume_db = linear2db(lerp(db2linear(water_music_player.volume_db), target_volume if play_water else 0, delta * 3))
+	
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("mute"):
 		muted = !muted

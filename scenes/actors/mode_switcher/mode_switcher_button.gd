@@ -70,6 +70,7 @@ func change_visuals(new_scene_mode : int) -> void:
 func switch() -> void:
 	if get_parent().layer != 99 and !switching_disabled and !get_tree().paused and !scene_transitions.transitioning:
 		music.stop_temporary_music() #we don't want powerup music going into the editor
+		music.toggle_underwater_music(false)
 
 		ActionManager.clear_history()
 		
