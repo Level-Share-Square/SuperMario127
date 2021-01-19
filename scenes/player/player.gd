@@ -1,5 +1,8 @@
 extends LevelDataLoader
 
+onready var tick_sound = $SharedSounds/TickSound
+onready var tick_end_sound = $SharedSounds/TickEndSound
+
 export var character : NodePath
 export var character2 : NodePath
 export var camera : NodePath
@@ -11,6 +14,7 @@ const coin_anim_fps = 12
 var can_collect_coins : Array
 
 export var switch_timer : float = 0.0
+export var sound_timer : float = 0.0
 
 func _process(_delta):
 	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
@@ -18,10 +22,20 @@ func _process(_delta):
 func _physics_process(delta):
 	if switch_timer > 0:
 		switch_timer -= delta
+		sound_timer -= delta
+		if sound_timer <= 0:
+			if switch_timer > 3:
+				tick_sound.play()
+			else:
+				tick_end_sound.play()
+			sound_timer = wrapf(switch_timer, 0, 1.1)
+			
 		if switch_timer <= 0:
 			switch_timer = 0
 
 func _ready():
+	sound_timer = wrapf(switch_timer, 0, 1.1)
+	
 	CurrentLevelData.enemies_instanced = 0
 	CurrentLevelData.level_data.vars.reset_counters()
 	

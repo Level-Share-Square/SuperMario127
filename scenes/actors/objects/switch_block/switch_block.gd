@@ -41,8 +41,8 @@ func _physics_process(delta):
 	var activated_color = Color(1, 1, 1, 1)
 	var deactivated_color = Color(1, 1, 1, 0)
 	if current_scene.switch_timer > 0:
-		if current_scene.switch_timer <= 2.5:
-			var alpha = current_scene.switch_timer / 2.5
+		if current_scene.switch_timer <= 1.0:
+			var alpha = current_scene.switch_timer / 1.0
 			if !activated:
 				sprite.modulate.a = alpha
 			elif current_scene.switch_timer <= 0.5:

@@ -28,6 +28,7 @@ func _ready():
 	disable_animation = true
 	override_rotation = true
 	use_dive_collision = true
+	auto_flip = true
 
 func _start_check(_delta):
 	return character.water_detector.get_overlapping_areas().size() > 0 and !(character.powerup != null and character.powerup.id == 0)
@@ -43,7 +44,8 @@ func _start(_delta):
 	
 	character.swimming = true
 	character.gravity_scale = 0
-	char_rotation = 90 * character.facing_direction
+	char_rotation = character.sprite.rotation_degrees
+	character.sprite.speed_scale = 1
 	swim_speed = base_swim_speed
 	boost_disable_time = 0.14
 
@@ -100,7 +102,7 @@ func _update(delta):
 		
 		if boost_time_left <= 0:
 			boost_time_left = 0
-			sprite.speed_scale = 0
+			sprite.speed_scale = 1
 			character.spin_area_shape.disabled = true
 			character.sound_player.set_swim_playing(true)
 			character.bubble_particles_left.emitting = false
@@ -134,7 +136,7 @@ func _update(delta):
 		sprite.rotation = -sprite.rotation
 
 	character.facing_direction = sign(sprite.rotation)
-	sprite.animation = ("diveRight" if character.facing_direction == 1 else "diveLeft") if boost_time_left <= 0 else "spinning"
+	sprite.animation = "swimming" if boost_time_left <= 0 else "spinning" 
 
 func _stop(delta):
 	if boost_time_left == 0 and (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed):

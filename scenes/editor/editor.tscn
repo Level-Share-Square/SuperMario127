@@ -1,4 +1,4 @@
-[gd_scene load_steps=388 format=2]
+[gd_scene load_steps=390 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -362,6 +362,8 @@
 [ext_resource path="res://assets/tiles/lava_rock/palette_icons/1_slab.png" type="Texture" id=360]
 [ext_resource path="res://assets/tiles/lava_rock/palette_icons/1_block.png" type="Texture" id=361]
 [ext_resource path="res://assets/tiles/lava_rock/palette_icons/2_block.png" type="Texture" id=362]
+[ext_resource path="res://scenes/actors/objects/fire/icon.png" type="Texture" id=363]
+[ext_resource path="res://scenes/actors/objects/fire/preview.png" type="Texture" id=364]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1193,6 +1195,24 @@ tile_mode_offset = Vector2( 0, 16 )
 icon = ExtResource( 152 )
 preview = ExtResource( 151 )
 
+[node name="Pipe" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 23
+is_object = true
+object_center = Vector2( 16, 16 )
+icon = ExtResource( 110 )
+preview = ExtResource( 108 )
+
+[node name="Door" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 48
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+icon = ExtResource( 44 )
+preview = ExtResource( 49 )
+
 [node name="Switch" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
 object_id = 80
@@ -1226,16 +1246,6 @@ tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
 icon = ExtResource( 37 )
 preview = ExtResource( 34 )
-
-[node name="Door" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 48
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-icon = ExtResource( 44 )
-preview = ExtResource( 49 )
 
 [node name="TouchLift" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
@@ -1283,24 +1293,6 @@ tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
 icon = ExtResource( 235 )
 preview = ExtResource( 236 )
-
-[node name="Lava" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 75
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-icon = ExtResource( 289 )
-preview = ExtResource( 290 )
-
-[node name="Pipe" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 23
-is_object = true
-object_center = Vector2( 16, 16 )
-icon = ExtResource( 110 )
-preview = ExtResource( 108 )
 
 [node name="EnemiesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
@@ -1908,6 +1900,26 @@ items_in_sequence = 4
 index_in_sequence = 3
 icon = ExtResource( 346 )
 preview = ExtResource( 346 )
+
+[node name="Lava" type="Node" parent="PlaceableItems/VolcanoGroup"]
+script = ExtResource( 24 )
+object_id = 75
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+icon = ExtResource( 289 )
+preview = ExtResource( 290 )
+
+[node name="Fire" type="Node" parent="PlaceableItems/VolcanoGroup"]
+script = ExtResource( 24 )
+object_id = 83
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+icon = ExtResource( 363 )
+preview = ExtResource( 364 )
 
 [node name="BuildingGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )

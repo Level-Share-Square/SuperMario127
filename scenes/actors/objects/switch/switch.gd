@@ -62,5 +62,7 @@ func _physics_process(delta):
 				if hit_body.velocity.y > 0 and !hit_body.swimming:
 					if hit_body.big_attack or hit_body.invincible:
 						was_ground_pound = true
+					else:
+						was_ground_pound = false
 					character = hit_body
 					press(hit_body.global_position)
