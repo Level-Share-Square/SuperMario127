@@ -140,6 +140,9 @@ func _process(delta) -> void:
 		last_mode = current_scene.mode
 		last_song = level_song
 	
+	if play_water and !is_instance_valid(character):
+		play_water = false
+	
 	var target_volume = (db2linear(base_volume) * volume_multiplier) if (!muted and !get_tree().paused) else 0
 	volume_db = linear2db(lerp(db2linear(volume_db), target_volume if !play_water else 0, delta * 3))
 	water_music_player.volume_db = linear2db(lerp(db2linear(water_music_player.volume_db), target_volume if play_water else 0, delta * 3))
