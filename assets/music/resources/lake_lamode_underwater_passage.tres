@@ -8,5 +8,5 @@ script = ExtResource( 1 )
 stream = ExtResource( 2 )
 volume_db = 0
 pitch_scale = 1
-title = "Lake Lamode: Underwater Passage"
+title = "Underwater Passage"
 note = "From Super Mario Odyssey"
