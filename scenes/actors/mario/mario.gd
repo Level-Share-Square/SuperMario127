@@ -214,6 +214,7 @@ var camera : Camera2D
 #)
 
 func _ready():
+	music.toggle_underwater_music(false)
 	for input in input_names.keys():
 		inputs.append([false, false, str(input)])
 
@@ -527,11 +528,14 @@ func _physics_process(delta: float) -> void:
 	if is_in_water and max_aerial_velocity == 640:
 		gravity_scale = 0.5
 		max_aerial_velocity = 320
-		if player_id == 0 and music.has_water and !music.play_water:
-			music.toggle_underwater_music(true)
 	elif !is_in_water and max_aerial_velocity == 320:
 		gravity_scale = 1
 		max_aerial_velocity = 640
+		
+	if is_in_water:
+		if player_id == 0 and music.has_water and !music.play_water:
+			music.toggle_underwater_music(true)
+	else:
 		if player_id == 0 and music.play_water:
 			music.toggle_underwater_music(false)
 	

@@ -52,7 +52,7 @@ func _ready():
 	
 	music.character = get_node(character)
 	music.character2 = get_node(character2)
-	music.reset_music()
+	#music.reset_music()
 	if !music.playing:
 		music.play() # make sure the music will play even if it's stopped prior to loading the player
 
