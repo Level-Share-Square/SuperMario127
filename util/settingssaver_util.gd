@@ -21,8 +21,8 @@ static func load():
 		ScreenSizeUtil.set_screen_size(data["windowScale"])
 		if data.has("showTimer"):
 			TimeScore.shown = data["showTimer"]
-		if data.has("volume"):
-			music.set_global_volume(data["volume"])
+		#if data.has("volume"):
+			#music.set_global_volume(data["volume"])
 		if data.has("legacyWingCap"):
 			# imo this is cleaner than putting it in presets atm
 			PlayerSettings.legacy_wing_cap = data["legacyWingCap"]

@@ -982,209 +982,24 @@ object_center = Vector2( 16, 16 )
 icon = ExtResource( 343 )
 preview = ExtResource( 343 )
 
-[node name="Coin" type="Node" parent="PlaceableItems/SpecialGroup"]
+[node name="Sign" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
-object_id = 1
+object_id = 14
 is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "RedCoin"
-items_in_sequence = 3
-icon = ExtResource( 17 )
-preview = ExtResource( 16 )
+object_center = Vector2( 16, 12 )
+tile_mode_offset = Vector2( 0, -4 )
+icon = ExtResource( 94 )
+preview = ExtResource( 94 )
 
-[node name="RedCoin" type="Node" parent="PlaceableItems/SpecialGroup"]
+[node name="Water" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
-object_id = 30
+object_id = 72
 is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "BlueCoin"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 136 )
-preview = ExtResource( 6 )
-
-[node name="BlueCoin" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 40
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "Coin"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = SubResource( 1 )
-preview = SubResource( 2 )
-
-[node name="Shine" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 2
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "ShineShard"
-items_in_sequence = 3
-icon = ExtResource( 15 )
-preview = ExtResource( 15 )
-
-[node name="ShineShard" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 45
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "StarCoin"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 148 )
-preview = ExtResource( 150 )
-
-[node name="StarCoin" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 52
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "Shine"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 165 )
-preview = ExtResource( 165 )
-
-[node name="HoverBox" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 19
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "RocketBox"
-items_in_sequence = 3
-icon = SubResource( 3 )
-preview = ExtResource( 100 )
-
-[node name="RocketBox" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 38
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "TurboBox"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = SubResource( 4 )
-preview = SubResource( 5 )
-
-[node name="TurboBox" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 39
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "HoverBox"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = SubResource( 6 )
-preview = SubResource( 7 )
-
-[node name="SmallBottle" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 21
-is_object = true
-object_center = Vector2( 8, 0 )
-tile_mode_offset = Vector2( 0, -8 )
-tile_mode_step = 16
-change_to = "BigBottle"
-items_in_sequence = 2
-icon = ExtResource( 103 )
-preview = ExtResource( 102 )
-
-[node name="BigBottle" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 22
-is_object = true
-object_center = Vector2( 8, 0 )
-tile_mode_offset = Vector2( 0, -8 )
-tile_mode_step = 16
-change_to = "SmallBottle"
-items_in_sequence = 2
-index_in_sequence = 1
-icon = ExtResource( 104 )
-preview = ExtResource( 105 )
-
-[node name="BreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 33
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "MetalBreakableBlock"
-items_in_sequence = 3
-icon = ExtResource( 140 )
-preview = ExtResource( 141 )
-
-[node name="MetalBreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 35
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "RainbowBreakableBlock"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 143 )
-preview = ExtResource( 142 )
-
-[node name="RainbowBreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 42
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "BreakableBlock"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 106 )
-preview = ExtResource( 59 )
-
-[node name="VanishPassthroughBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 44
-is_object = true
-object_center = Vector2( 16, 16 )
-icon = ExtResource( 179 )
-preview = ExtResource( 178 )
-
-[node name="WingPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 57
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "MetalPowerup"
-items_in_sequence = 4
-icon = ExtResource( 185 )
-preview = ExtResource( 185 )
-
-[node name="MetalPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 34
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "VanishPowerup"
-items_in_sequence = 4
-index_in_sequence = 1
-icon = ExtResource( 182 )
-preview = ExtResource( 182 )
-
-[node name="VanishPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 43
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "RainbowPowerup"
-items_in_sequence = 4
-index_in_sequence = 2
-icon = ExtResource( 147 )
-preview = ExtResource( 147 )
-
-[node name="RainbowPowerup" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 41
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "WingPowerup"
-items_in_sequence = 4
-index_in_sequence = 3
-icon = ExtResource( 146 )
-preview = ExtResource( 101 )
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+icon = ExtResource( 235 )
+preview = ExtResource( 236 )
 
 [node name="Cannon" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
@@ -1229,6 +1044,46 @@ object_center = Vector2( 16, 16 )
 icon = ExtResource( 337 )
 preview = ExtResource( 336 )
 
+[node name="BreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 33
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "MetalBreakableBlock"
+items_in_sequence = 3
+icon = ExtResource( 140 )
+preview = ExtResource( 141 )
+
+[node name="MetalBreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 35
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "RainbowBreakableBlock"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 143 )
+preview = ExtResource( 142 )
+
+[node name="RainbowBreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 42
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "BreakableBlock"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 106 )
+preview = ExtResource( 59 )
+
+[node name="VanishPassthroughBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 44
+is_object = true
+object_center = Vector2( 16, 16 )
+icon = ExtResource( 179 )
+preview = ExtResource( 178 )
+
 [node name="CrystalTap" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
 object_id = 81
@@ -1237,27 +1092,189 @@ object_center = Vector2( 16, 16 )
 icon = ExtResource( 341 )
 preview = ExtResource( 342 )
 
-[node name="Seesaw" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 47
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-icon = ExtResource( 37 )
-preview = ExtResource( 34 )
+[node name="CollectiblesGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 25 )
+color = Color( 0.121569, 0.129412, 0.517647, 1 )
+group_name = "Collectibles"
 
-[node name="TouchLift" type="Node" parent="PlaceableItems/SpecialGroup"]
+[node name="Coin" type="Node" parent="PlaceableItems/CollectiblesGroup"]
 script = ExtResource( 24 )
-object_id = 49
+object_id = 1
 is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-icon = ExtResource( 153 )
-preview = ExtResource( 154 )
+object_center = Vector2( 16, 16 )
+change_to = "RedCoin"
+items_in_sequence = 3
+icon = ExtResource( 17 )
+preview = ExtResource( 16 )
 
-[node name="PlatformWheel" type="Node" parent="PlaceableItems/SpecialGroup"]
+[node name="RedCoin" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 30
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "BlueCoin"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 136 )
+preview = ExtResource( 6 )
+
+[node name="BlueCoin" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 40
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "Coin"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = SubResource( 1 )
+preview = SubResource( 2 )
+
+[node name="ShineShard" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 45
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "StarCoin"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 148 )
+preview = ExtResource( 150 )
+
+[node name="Shine" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 2
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "ShineShard"
+items_in_sequence = 3
+icon = ExtResource( 15 )
+preview = ExtResource( 15 )
+
+[node name="StarCoin" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 52
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "Shine"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 165 )
+preview = ExtResource( 165 )
+
+[node name="SmallBottle" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 21
+is_object = true
+object_center = Vector2( 8, 0 )
+tile_mode_offset = Vector2( 0, -8 )
+tile_mode_step = 16
+change_to = "BigBottle"
+items_in_sequence = 2
+icon = ExtResource( 103 )
+preview = ExtResource( 102 )
+
+[node name="BigBottle" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 22
+is_object = true
+object_center = Vector2( 8, 0 )
+tile_mode_offset = Vector2( 0, -8 )
+tile_mode_step = 16
+change_to = "SmallBottle"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 104 )
+preview = ExtResource( 105 )
+
+[node name="HoverBox" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 19
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "RocketBox"
+items_in_sequence = 3
+icon = SubResource( 3 )
+preview = ExtResource( 100 )
+
+[node name="RocketBox" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 38
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "TurboBox"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = SubResource( 4 )
+preview = SubResource( 5 )
+
+[node name="TurboBox" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 39
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "HoverBox"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = SubResource( 6 )
+preview = SubResource( 7 )
+
+[node name="WingPowerup" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 57
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "MetalPowerup"
+items_in_sequence = 4
+icon = ExtResource( 185 )
+preview = ExtResource( 185 )
+
+[node name="MetalPowerup" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 34
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "VanishPowerup"
+items_in_sequence = 4
+index_in_sequence = 1
+icon = ExtResource( 182 )
+preview = ExtResource( 182 )
+
+[node name="VanishPowerup" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 43
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "RainbowPowerup"
+items_in_sequence = 4
+index_in_sequence = 2
+icon = ExtResource( 147 )
+preview = ExtResource( 147 )
+
+[node name="RainbowPowerup" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 41
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "WingPowerup"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 146 )
+preview = ExtResource( 101 )
+
+[node name="PlatformsGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 25 )
+color = Color( 0.517647, 0.121569, 0.364706, 1 )
+group_name = "Platforms"
+
+[node name="NoteBlock" type="Node" parent="PlaceableItems/PlatformsGroup"]
+script = ExtResource( 24 )
+object_id = 58
+is_object = true
+object_center = Vector2( 16, 16 )
+icon = ExtResource( 198 )
+preview = ExtResource( 199 )
+
+[node name="PlatformWheel" type="Node" parent="PlaceableItems/PlatformsGroup"]
 script = ExtResource( 24 )
 object_id = 50
 is_object = true
@@ -1267,32 +1284,92 @@ tile_mode_step = 64
 icon = ExtResource( 156 )
 preview = ExtResource( 157 )
 
-[node name="NoteBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
+[node name="TouchLift" type="Node" parent="PlaceableItems/PlatformsGroup"]
 script = ExtResource( 24 )
-object_id = 58
-is_object = true
-object_center = Vector2( 16, 16 )
-icon = ExtResource( 198 )
-preview = ExtResource( 199 )
-
-[node name="Sign" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 14
-is_object = true
-object_center = Vector2( 16, 12 )
-tile_mode_offset = Vector2( 0, -4 )
-icon = ExtResource( 94 )
-preview = ExtResource( 94 )
-
-[node name="Water" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 72
+object_id = 49
 is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
-icon = ExtResource( 235 )
-preview = ExtResource( 236 )
+icon = ExtResource( 153 )
+preview = ExtResource( 154 )
+
+[node name="Seesaw" type="Node" parent="PlaceableItems/PlatformsGroup"]
+script = ExtResource( 24 )
+object_id = 47
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+icon = ExtResource( 37 )
+preview = ExtResource( 34 )
+
+[node name="Log" type="Node" parent="PlaceableItems/PlatformsGroup"]
+script = ExtResource( 24 )
+object_id = 10
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+icon = ExtResource( 78 )
+preview = ExtResource( 77 )
+
+[node name="BonePlatform" type="Node" parent="PlaceableItems/PlatformsGroup"]
+script = ExtResource( 24 )
+object_id = 13
+is_object = true
+object_center = Vector2( 16, 0 )
+tile_mode_offset = Vector2( 0, -16 )
+icon = ExtResource( 84 )
+preview = ExtResource( 83 )
+
+[node name="WoodPlatform" type="Node" parent="PlaceableItems/PlatformsGroup"]
+script = ExtResource( 24 )
+object_id = 56
+is_object = true
+object_center = Vector2( 64, 0 )
+tile_mode_offset = Vector2( 32, -32 )
+tile_mode_step = 64
+icon = ExtResource( 183 )
+preview = ExtResource( 184 )
+
+[node name="MetalPlatform" type="Node" parent="PlaceableItems/PlatformsGroup"]
+script = ExtResource( 24 )
+object_id = 3
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+icon = ExtResource( 42 )
+preview = ExtResource( 43 )
+
+[node name="PearlPlatform" type="Node" parent="PlaceableItems/PlatformsGroup"]
+script = ExtResource( 24 )
+object_id = 51
+is_object = true
+object_center = Vector2( 16, 0 )
+tile_mode_offset = Vector2( 0, -16 )
+icon = ExtResource( 160 )
+preview = ExtResource( 159 )
+
+[node name="SnowPlatform" type="Node" parent="PlaceableItems/PlatformsGroup"]
+script = ExtResource( 24 )
+object_id = 32
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+icon = ExtResource( 138 )
+preview = ExtResource( 139 )
+
+[node name="CloudPlatform" type="Node" parent="PlaceableItems/PlatformsGroup"]
+script = ExtResource( 24 )
+object_id = 9
+is_object = true
+object_center = Vector2( 64, 0 )
+tile_mode_offset = Vector2( 32, -32 )
+tile_mode_step = 64
+icon = ExtResource( 75 )
+preview = ExtResource( 76 )
 
 [node name="EnemiesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
@@ -1508,34 +1585,6 @@ object_center = Vector2( 32, 12 )
 tile_mode_offset = Vector2( 16, -4 )
 icon = ExtResource( 335 )
 preview = ExtResource( 335 )
-
-[node name="Log" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 24 )
-object_id = 10
-is_object = true
-object_center = Vector2( 8, 8 )
-tile_mode_step = 16
-icon = ExtResource( 78 )
-preview = ExtResource( 77 )
-
-[node name="BonePlatform" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 24 )
-object_id = 13
-is_object = true
-object_center = Vector2( 16, 0 )
-tile_mode_offset = Vector2( 0, -16 )
-icon = ExtResource( 84 )
-preview = ExtResource( 83 )
-
-[node name="WoodPlatform" type="Node" parent="PlaceableItems/GrassGroup"]
-script = ExtResource( 24 )
-object_id = 56
-is_object = true
-object_center = Vector2( 64, 0 )
-tile_mode_offset = Vector2( 32, -32 )
-tile_mode_step = 64
-icon = ExtResource( 183 )
-preview = ExtResource( 184 )
 
 [node name="Butterfly" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 24 )
@@ -1755,16 +1804,6 @@ tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
 icon = ExtResource( 221 )
 preview = ExtResource( 220 )
-
-[node name="SnowPlatform" type="Node" parent="PlaceableItems/SnowGroup"]
-script = ExtResource( 24 )
-object_id = 32
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-icon = ExtResource( 138 )
-preview = ExtResource( 139 )
 
 [node name="CaveGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
@@ -2081,25 +2120,6 @@ palette_previews = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), 
 icon = ExtResource( 58 )
 preview = ExtResource( 58 )
 
-[node name="MetalPlatform" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 24 )
-object_id = 3
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-icon = ExtResource( 42 )
-preview = ExtResource( 43 )
-
-[node name="PearlPlatform" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 24 )
-object_id = 51
-is_object = true
-object_center = Vector2( 16, 0 )
-tile_mode_offset = Vector2( 0, -16 )
-icon = ExtResource( 160 )
-preview = ExtResource( 159 )
-
 [node name="MarbleBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
 tileset_id = 15
@@ -2407,16 +2427,6 @@ items_in_sequence = 3
 index_in_sequence = 2
 icon = ExtResource( 99 )
 preview = ExtResource( 99 )
-
-[node name="CloudPlatform" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 24 )
-object_id = 9
-is_object = true
-object_center = Vector2( 64, 0 )
-tile_mode_offset = Vector2( 32, -32 )
-tile_mode_step = 64
-icon = ExtResource( 75 )
-preview = ExtResource( 76 )
 
 [node name="Rock" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 24 )

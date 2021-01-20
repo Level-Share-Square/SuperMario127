@@ -191,6 +191,8 @@ func collect(body : PhysicsBody2D) -> void:
 		if character.state != null and character.state.name == "SlideState" and character.is_grounded():
 			character.position.y -= 16
 
+		music.stop_temporary_music()
+
 		character.anim_player.stop()
 		character.set_state_by_name("FallState", get_physics_process_delta_time())
 		character.velocity.x = 0
@@ -261,7 +263,7 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 				0,
 				0,
 				true,
-				false
+				true
 			)
 		else:
 			# yes, another band aid

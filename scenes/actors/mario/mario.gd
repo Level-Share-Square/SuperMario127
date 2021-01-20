@@ -824,6 +824,7 @@ func kill(cause: String) -> void:
 				reload = false
 		elif cause == "reload":
 			transition_time = 0.4
+			music.stop_temporary_music()
 		elif cause == "green_demon":
 			sound_player.play_last_hit_sound()
 			controllable = false

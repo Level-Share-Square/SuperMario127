@@ -64,7 +64,7 @@ func _ready() -> void:
 	screen_to_load._open_screen()
 	screen_to_load.can_interact = true
 
-	music.stop_temporary_music(1, 0)
+	music.stop_temporary_music()
 	music.change_song(music.last_song, 31) # temporary, should add a way for screens to define their own music setting later
 	music.last_song = 31
 	

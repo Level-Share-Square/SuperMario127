@@ -54,14 +54,6 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 	canvas_background.color = Color(0, 0, 0, 1)
 	transitioning = true
 	
-	if volume_start == -1:
-		volume_start = music.volume_multiplier
-	if volume_end == -1:
-		volume_end = music.volume_multiplier
-	
-	if stop_temp_music:
-		music.stop_temporary_music()
-	
 	canvas_background.visible = true
 	
 	canvas_mask.texture = transition_texture
@@ -70,8 +62,6 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 	# if the start scale is greater, then the screen is transitioning to black
 	var to_black = texture_scale_start > texture_scale_end
 	tween.interpolate_property(canvas_mask, "texture_scale", texture_scale_start, texture_scale_end, transition_time, Tween.TRANS_CIRC, Tween.EASE_OUT if to_black else Tween.EASE_IN)
-	if !music_node.is_tween_active() and music_node.volume_multiplier != 0: #this is so it doesn't interfere with any temp music fade out, like the shine
-		tween.interpolate_property(music_node, "volume_multiplier", volume_start, volume_end, transition_time, Tween.TRANS_CIRC, Tween.EASE_OUT)
 	tween.start()
 	
 	# wait for the tween to finish before returning, and then a little extra time
@@ -84,6 +74,11 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 	else:
 		transitioning = false
 		canvas_mask.position = Vector2(384, 216) # Reset it, in case a script has modified it before playing the animation
+
+	if stop_temp_music:
+		music.reset_music()
+		yield(get_tree().create_timer(0.1), "timeout")
+		music.volume_db = 0
 
 func play_transition_audio():
 	transition_audio.play()

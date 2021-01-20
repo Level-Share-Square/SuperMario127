@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wings_mario_shine_get.png-08f98e1949d4e38d1a0237af423fdb03.stex"
+path="res://.import/wings_mario_shine_get.png-735c64314bbc0a7696151dea787a4f38.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/mario/wings_mario_shine_get.png"
-dest_files=[ "res://.import/wings_mario_shine_get.png-08f98e1949d4e38d1a0237af423fdb03.stex" ]
+source_file="res://scenes/actors/objects/wings_mario_shine_get.png"
+dest_files=[ "res://.import/wings_mario_shine_get.png-735c64314bbc0a7696151dea787a4f38.stex" ]
 
 [params]
 

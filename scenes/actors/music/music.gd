@@ -28,6 +28,7 @@ var global_volume := 1.0
 var muted := false
 var play_water := false
 var has_water := false
+var temp_music := false
 
 const MUSIC_FADE_LENGTH = 0.75
 
@@ -116,11 +117,14 @@ func toggle_underwater_music(state):
 	else:
 		play_water = false
 
+func reset_music():
+	toggle_underwater_music(false)
+
 func _process(delta) -> void:
-	if Input.is_action_just_pressed("volume_up"):
-		increment_global_volume(0.1)
-	if Input.is_action_just_pressed("volume_down"):
-		increment_global_volume(-0.1)
+	#if Input.is_action_just_pressed("volume_up"):
+	#	increment_global_volume(0.1)
+	#if Input.is_action_just_pressed("volume_down"):
+	#	increment_global_volume(-0.1)
 	
 	var current_scene = get_tree().get_current_scene()
 	var current_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
@@ -136,9 +140,15 @@ func _process(delta) -> void:
 		last_mode = current_scene.mode
 		last_song = level_song
 	
-	var target_volume = (db2linear(base_volume) * volume_multiplier) if !muted else -80.0
+	var target_volume = (db2linear(base_volume) * volume_multiplier) if (!muted and !get_tree().paused) else 0
 	volume_db = linear2db(lerp(db2linear(volume_db), target_volume if !play_water else 0, delta * 3))
 	water_music_player.volume_db = linear2db(lerp(db2linear(water_music_player.volume_db), target_volume if play_water else 0, delta * 3))
+	if temp_music:
+		var target_temp_volume = db2linear(base_volume) if (!muted and !get_tree().paused) else 0
+		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), target_temp_volume, delta * 3))
+	else:
+		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), 0, delta * 3))
+		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), 0, delta * 3))
 	
 func _unhandled_input(event) -> void:
 	if event.is_action_pressed("mute"):
@@ -147,25 +157,24 @@ func _unhandled_input(event) -> void:
 # the plan for this is to mute the current bgm, play the temp song, and then fade the current bgm back in
 func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0) -> void:
 	volume_multiplier = 0
+	volume_db = -80.0
+	water_music_player.volume_db = -80.0
 
-	var _tween = tween.stop_all()
-	temporary_music_player.volume_db = temp_song_volume if !muted else -80.0
+	#var _tween = tween.stop_all()
+	#temporary_music_player.volume_db = temp_song_volume if !muted else -80.0
 
 	var stream = get_song(temp_song_id).stream
 	if temporary_music_player.stream != stream or !is_temporary_music_playing():
+		temporary_music_player.volume_db = 0
 		temporary_music_player.stream = stream
 		temporary_music_player.play()
+	temp_music = true
 
 # returns the id of the temporary song
 func is_temporary_music_playing() -> bool:
-	return temporary_music_player.playing
+	return temp_music
 
 # can be called manually, also automatically called if the temporary music ends
 func stop_temporary_music(volume_multiplier_target = 1, music_fade_length = MUSIC_FADE_LENGTH) -> void:
-	var _tween
-	_tween = tween.interpolate_property(temporary_music_player, "volume_db", null, -80, music_fade_length, \
-			Tween.TRANS_LINEAR, Tween.EASE_IN)
-	_tween = tween.interpolate_callback(temporary_music_player, MUSIC_FADE_LENGTH, "stop")
-	_tween = tween.interpolate_property(self, "volume_multiplier", null, volume_multiplier_target, music_fade_length, \
-			Tween.TRANS_LINEAR, Tween.EASE_IN)
-	_tween = tween.start()
+	volume_multiplier = 1
+	temp_music = false

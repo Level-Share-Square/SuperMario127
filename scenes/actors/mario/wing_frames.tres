@@ -1,8 +1,9 @@
 [gd_resource type="SpriteFrames" load_steps=145 format=2]
 
 [ext_resource path="res://scenes/actors/mario/wings_mario.png" type="Texture" id=1]
-[ext_resource path="res://scenes/actors/mario/wings_mario_shine_get.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/wings_mario_shine_get.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/mario/wings_mario_star_run.png" type="Texture" id=3]
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
