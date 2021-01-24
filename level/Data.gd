@@ -102,6 +102,7 @@ func get_settings(result) -> LevelAreaSettings:
 	var settings = LevelAreaSettings.new()
 	settings.sky = result.sky
 	settings.background = result.background
+	settings.background_palette = result.background_palette
 	settings.music = result.music
 	settings.gravity = abs(result.gravity)
 	var size_vec2 = get_vector2(result.size)
@@ -283,7 +284,8 @@ func get_encoded_level_data():
 		level_string += value_util.encode_value(settings.sky) + ","
 		level_string += value_util.encode_value(settings.background) + ","
 		level_string += value_util.encode_value(settings.music) + ","
-		level_string += value_util.encode_value(settings.gravity) + "~"
+		level_string += value_util.encode_value(settings.gravity) + ","
+		level_string += value_util.encode_value(settings.background_palette) + "~"
 		
 		var tiles := []
 		var very_background_tiles := []

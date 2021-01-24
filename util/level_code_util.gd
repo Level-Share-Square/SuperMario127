@@ -134,6 +134,11 @@ static func decode(code: String):
 		else:
 			result.areas[area_id].settings.gravity = 7.82
 		
+		if area_settings_array.size() > 5:
+			result.areas[area_id].settings.background_palette = value_util.decode_value(area_settings_array[5])
+		else:
+			result.areas[area_id].settings.background_palette = 0
+		
 		
 		if(conversion_util.compareVersions(result.format_version, "0.4.5") == -1):
 			area_array.insert(2,"0*0")

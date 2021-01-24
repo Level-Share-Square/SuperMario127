@@ -165,7 +165,12 @@ func get_level_background_modulate() -> Color:
 func get_level_foreground_texture() -> StreamTexture:
 	var level_foreground = get_level_data().areas[spawn_area].settings.background
 	var foreground_resource = CurrentLevelData.foreground_cache[level_foreground]
-	return foreground_resource.preview
+	var palette = get_level_data().areas[spawn_area].settings.background_palette
+	
+	if palette == 0:
+		return foreground_resource.preview
+	else:
+		return foreground_resource.palettes[palette - 1]
 
 static func generate_time_string(time : float) -> String:
 	var time_calc = time # i'm not sure if it's safe to edit the time argument passed, if it's safe then this can be swapped out

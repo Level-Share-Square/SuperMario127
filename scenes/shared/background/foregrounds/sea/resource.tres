@@ -1,11 +1,16 @@
-[gd_resource type="Resource" load_steps=5 format=2]
+[gd_resource type="Resource" load_steps=8 format=2]
 
 [ext_resource path="res://classes/ForegroundResource.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/background/foregrounds/sea/front.tres" type="Resource" id=2]
 [ext_resource path="res://scenes/shared/background/foregrounds/sea/back.tres" type="Resource" id=3]
 [ext_resource path="res://scenes/shared/background/foregrounds/sea/preview.png" type="Texture" id=4]
+[ext_resource path="res://scenes/shared/background/foregrounds/sea/palettes/1/preview.png" type="Texture" id=5]
+[ext_resource path="res://scenes/shared/background/foregrounds/sea/palettes/2/preview.png" type="Texture" id=6]
+[ext_resource path="res://scenes/shared/background/foregrounds/sea/palettes/3/preview.png" type="Texture" id=7]
 
 [resource]
 script = ExtResource( 1 )
 layers = [ ExtResource( 3 ), ExtResource( 2 ) ]
+immune_to = PoolIntArray(  )
 preview = ExtResource( 4 )
+palettes = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]

@@ -10,12 +10,12 @@ func _ready():
 	ready = true
 
 func load_in(_level_data : LevelData, level_area : LevelArea):
-	update_background(level_area.settings.sky, level_area.settings.background, level_area.settings.bounds)
+	update_background(level_area.settings.sky, level_area.settings.background, level_area.settings.bounds, 0, level_area.settings.background_palette)
 
 func update_background_area(area : LevelArea):
-	update_background(area.settings.sky, area.settings.background, area.settings.bounds)
+	update_background(area.settings.sky, area.settings.background, area.settings.bounds, 0, area.settings.background_palette)
 
-func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rect2(0, 0, 0, 0), extra_y_offset : float = 0):
+func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rect2(0, 0, 0, 0), extra_y_offset : float = 0, background_palette : int = 0):
 	if !ready:
 		yield(self,"ready")
 	#warning-ignore:unused_variable
@@ -37,7 +37,11 @@ func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rec
 		parallax_layer.motion_mirroring = Vector2(layer.mirroring.x * 2, layer.mirroring.y)
 		
 		var sprite_instance = TextureRect.new()
-		sprite_instance.texture = layer.texture
+		if background_palette == 0:
+			sprite_instance.texture = layer.texture
+		else:
+			sprite_instance.texture = layer.palettes[background_palette - 1]
+			
 		sprite_instance.rect_size.x = layer.mirroring.x * 2
 		sprite_instance.set_stretch_mode(sprite_instance.STRETCH_TILE)
 		if !(sky in foreground_resource.immune_to):

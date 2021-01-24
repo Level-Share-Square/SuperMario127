@@ -21,10 +21,19 @@ var dead
 var middle_pos
 var time_alive := 0.0
 var sine_amplitude := 4.0
-var sine_speed := 1.0
-var follow_speed := 20.0
+var sine_speed := 3.0
+var follow_speed := 0.0
+
+var speed := 1.0
 
 var knockback_velocity : Vector2
+
+func _set_properties():
+	savable_properties = ["speed"]
+	editable_properties = ["speed"]
+
+func _set_property_values():
+	set_property("speed", speed, true)
 
 func is_vanish(body):
 	return body.powerup != null and body.powerup.id == 2
@@ -46,11 +55,15 @@ func kill(body):
 			knockback(body.global_position)
 
 func attacked(area):
+	if !enabled: return
+
 	if area.has_method("is_hurt_area"):
 		knockback_velocity.y = -80
 		knockback(area.global_position)
 
 func stomp(body):
+	if !enabled: return
+
 	if body.invincible:
 		dead = true
 		animation_player.play("die")
@@ -78,10 +91,18 @@ func undetect_player(body):
 		character = null
 
 func _physics_process(delta):
-	if dead or !enabled or mode == 1:
+	if !enabled: 
+		sprite.frame = 3
+
+	if mode == 1 or dead:
 		return
 	
 	time_alive += delta * sine_speed
+	global_position.y = middle_pos.y + sin(time_alive) * sine_amplitude
+	global_position.x = middle_pos.x
+	
+	if !enabled:
+		return
 	
 	var active_frame = 3
 	
@@ -110,12 +131,10 @@ func _physics_process(delta):
 		frame = increment_towards(frame, active_frame, 0.5)
 		sprite.self_modulate = lerp(sprite.self_modulate, Color(1, 1, 1, 1), delta * 8)
 		sine_speed = lerp(sine_speed, 3.0, delta * 8)
-		follow_speed = lerp(follow_speed, 20.0, delta * 8)
+		follow_speed = lerp(follow_speed, 27.5 * speed, delta * 8)
 	
 	sprite.frame = frame
 	sprite.flip_h = (facing_direction != 1)
-	global_position.y = middle_pos.y + sin(time_alive) * sine_amplitude
-	global_position.x = middle_pos.x
 	
 	last_shy = shy
 
@@ -131,9 +150,10 @@ func _ready():
 	_connect = undetect_area.connect("body_exited", self, "undetect_player")
 	middle_pos = global_position
 	
-	if scale.x < 0:
+	if mode != 1 and scale.x < 0:
 		scale.x = abs(scale.x)
 		facing_direction = -1
+		sprite.flip_h = true
 
 func increment_towards(value, target, step):
 	if value > target:

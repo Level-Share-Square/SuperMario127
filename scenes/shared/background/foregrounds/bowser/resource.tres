@@ -1,12 +1,17 @@
-[gd_resource type="Resource" load_steps=6 format=2]
+[gd_resource type="Resource" load_steps=9 format=2]
 
 [ext_resource path="res://classes/ForegroundResource.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/background/foregrounds/bowser/preview.png" type="Texture" id=2]
 [ext_resource path="res://scenes/shared/background/foregrounds/bowser/bowser1.tres" type="Resource" id=3]
 [ext_resource path="res://scenes/shared/background/foregrounds/bowser/bowser2.tres" type="Resource" id=4]
 [ext_resource path="res://scenes/shared/background/foregrounds/bowser/bowser3.tres" type="Resource" id=5]
+[ext_resource path="res://scenes/shared/background/foregrounds/bowser/palettes/1/preview.png" type="Texture" id=6]
+[ext_resource path="res://scenes/shared/background/foregrounds/bowser/palettes/2/preview.png" type="Texture" id=7]
+[ext_resource path="res://scenes/shared/background/foregrounds/bowser/palettes/3/preview.png" type="Texture" id=8]
 
 [resource]
 script = ExtResource( 1 )
 layers = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
+immune_to = PoolIntArray(  )
 preview = ExtResource( 2 )
+palettes = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]

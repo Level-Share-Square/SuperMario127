@@ -8,7 +8,7 @@ const foreground_id_mapper = "res://scenes/shared/background/foregrounds/ids.tre
 
 var id
 
-func set_background(sky, background):
+func set_background(sky, background, palette):
 	var background_mapped_id = load(background_id_mapper).ids[sky]
 	var background_resource = load("res://scenes/shared/background/backgrounds/" + background_mapped_id + "/resource.tres")
 	
@@ -19,7 +19,10 @@ func set_background(sky, background):
 	var foreground_preview = get_node("Preview/ForegroundPreview")
 	
 	background_preview.texture = background_resource.texture
-	foreground_preview.texture = foreground_resource.preview
+	if palette == 0:
+		foreground_preview.texture = foreground_resource.preview
+	else:
+		foreground_preview.texture = foreground_resource.palettes[palette - 1]
 	foreground_preview.modulate = background_resource.parallax_modulate
 
 func set_id(new_id):
