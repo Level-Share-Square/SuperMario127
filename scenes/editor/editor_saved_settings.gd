@@ -18,6 +18,10 @@ var default_area : LevelArea
 var layout_ids = [
 ]
 
+var layout_palettes = [
+	
+]
+
 func _init():
 	var level_resource = LevelData.new()
 	var default_level = load("res://assets/level_data/template_level.tres").contents
@@ -28,3 +32,4 @@ func _init():
 	var starting_toolbar = load("res://scenes/editor/starting_toolbar.tres")
 	for index in range(number_of_boxes):
 		layout_ids.append(starting_toolbar.ids[index])
+		layout_palettes.append(0)

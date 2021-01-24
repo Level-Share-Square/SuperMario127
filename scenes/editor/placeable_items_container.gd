@@ -12,10 +12,12 @@ onready var editor_node = get_node(editor_node_path)
 func _ready():
 	var placeable_items = editor_node.get_node(editor_node.placeable_items_path)
 	var starting_toolbar = EditorSavedSettings.layout_ids
+	var starting_toolbar_palettes = EditorSavedSettings.layout_palettes
 	for index in range(number_of_boxes):
 		var item
 		if index < starting_toolbar.size():
 			item = placeable_items.find_node(starting_toolbar[index])
+			item.update_palette(starting_toolbar_palettes[index])
 
 		var placeable_item_button = PLACEABLE_ITEM_BUTTON.instance()
 		placeable_item_button.item = item

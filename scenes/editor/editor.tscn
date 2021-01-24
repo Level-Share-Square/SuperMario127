@@ -1,4 +1,4 @@
-[gd_scene load_steps=390 format=2]
+[gd_scene load_steps=468 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -364,6 +364,84 @@
 [ext_resource path="res://assets/tiles/lava_rock/palette_icons/2_block.png" type="Texture" id=362]
 [ext_resource path="res://scenes/actors/objects/fire/icon.png" type="Texture" id=363]
 [ext_resource path="res://scenes/actors/objects/fire/preview.png" type="Texture" id=364]
+[ext_resource path="res://assets/tiles/castle_pillar/icon.png" type="Texture" id=365]
+[ext_resource path="res://assets/tiles/grass/palette_icons/5_slopeR.png" type="Texture" id=366]
+[ext_resource path="res://assets/tiles/grass/palette_icons/5_slopeL.png" type="Texture" id=367]
+[ext_resource path="res://assets/tiles/grass/palette_icons/5_block.png" type="Texture" id=368]
+[ext_resource path="res://assets/tiles/grass/palette_icons/5_slab.png" type="Texture" id=369]
+[ext_resource path="res://scenes/actors/objects/dead_tree/preview.png" type="Texture" id=370]
+[ext_resource path="res://scenes/actors/objects/dead_tree/icon.png" type="Texture" id=371]
+[ext_resource path="res://assets/tiles/stone_bricks/palette_icons/2_slopeL.png" type="Texture" id=372]
+[ext_resource path="res://assets/tiles/stone_bricks/palette_icons/1_slopeL.png" type="Texture" id=373]
+[ext_resource path="res://assets/tiles/stone_bricks/palette_icons/2_slopeR.png" type="Texture" id=374]
+[ext_resource path="res://assets/tiles/cobblestone/palette_icons/1_block.png" type="Texture" id=375]
+[ext_resource path="res://assets/tiles/cobblestone/palette_icons/0_block.png" type="Texture" id=376]
+[ext_resource path="res://assets/tiles/stone_bricks/palette_icons/0_slopeL.png" type="Texture" id=377]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/0_block.png" type="Texture" id=378]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/1_block.png" type="Texture" id=379]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/3_slopeR.png" type="Texture" id=380]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/4_slopeR.png" type="Texture" id=381]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/4_block.png" type="Texture" id=382]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/3_slopeL.png" type="Texture" id=383]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/4_slopeL.png" type="Texture" id=384]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/1_block.png" type="Texture" id=385]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/1_slopeR.png" type="Texture" id=386]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/0_slopeR.png" type="Texture" id=387]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/2_slopeR.png" type="Texture" id=388]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/0_block.png" type="Texture" id=389]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/1_slopeL.png" type="Texture" id=390]
+[ext_resource path="res://assets/tiles/fire_bricks/icon_slopeR.png" type="Texture" id=391]
+[ext_resource path="res://assets/tiles/fire_bricks/icon.png" type="Texture" id=392]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/3_block.png" type="Texture" id=393]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/0_slopeL.png" type="Texture" id=394]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/2_block.png" type="Texture" id=395]
+[ext_resource path="res://assets/tiles/fire_bricks/palette_icons/2_slopeL.png" type="Texture" id=396]
+[ext_resource path="res://assets/tiles/fire_bricks/icon_slopeL.png" type="Texture" id=397]
+[ext_resource path="res://assets/tiles/stone_bricks/palette_icons/0_slopeR.png" type="Texture" id=398]
+[ext_resource path="res://assets/tiles/stone_bricks/palette_icons/0_block.png" type="Texture" id=399]
+[ext_resource path="res://assets/tiles/stone_bricks/palette_icons/1_block.png" type="Texture" id=400]
+[ext_resource path="res://assets/tiles/stone_bricks/palette_icons/2_block.png" type="Texture" id=401]
+[ext_resource path="res://assets/tiles/stone_bricks/palette_icons/1_slopeR.png" type="Texture" id=402]
+[ext_resource path="res://assets/tiles/red_gem_block/palette_icons/5_block.png" type="Texture" id=403]
+[ext_resource path="res://assets/tiles/red_gem_block/palette_icons/1_block.png" type="Texture" id=404]
+[ext_resource path="res://assets/tiles/red_gem_block/palette_icons/3_block.png" type="Texture" id=405]
+[ext_resource path="res://assets/tiles/red_gem_block/palette_icons/2_block.png" type="Texture" id=406]
+[ext_resource path="res://assets/tiles/red_gem_block/palette_icons/4_block.png" type="Texture" id=407]
+[ext_resource path="res://assets/tiles/red_gem_block/palette_icons/0_block.png" type="Texture" id=408]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/3_block.png" type="Texture" id=409]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/3_slopeL.png" type="Texture" id=410]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/2_slopeL.png" type="Texture" id=411]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/1_slopeL.png" type="Texture" id=412]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/2_slopeR.png" type="Texture" id=413]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/0_block.png" type="Texture" id=414]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/1_slopeR.png" type="Texture" id=415]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/4_block.png" type="Texture" id=416]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/2_block.png" type="Texture" id=417]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/3_slopeR.png" type="Texture" id=418]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/4_slopeL.png" type="Texture" id=419]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/0_slopeL.png" type="Texture" id=420]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/0_slopeR.png" type="Texture" id=421]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/1_block.png" type="Texture" id=422]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/4_slopeR.png" type="Texture" id=423]
+[ext_resource path="res://assets/tiles/dark_bricks/icon_slopeL.png" type="Texture" id=424]
+[ext_resource path="res://assets/tiles/dark_bricks/icon_slopeR.png" type="Texture" id=425]
+[ext_resource path="res://assets/tiles/dark_bricks/icon.png" type="Texture" id=426]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/4_block.png" type="Texture" id=427]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/1_block.png" type="Texture" id=428]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/1_slopeR.png" type="Texture" id=429]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/4_slopeL.png" type="Texture" id=430]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/4_slopeR.png" type="Texture" id=431]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/0_slopeL.png" type="Texture" id=432]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/0_block.png" type="Texture" id=433]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/3_block.png" type="Texture" id=434]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/2_block.png" type="Texture" id=435]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/2_slopeR.png" type="Texture" id=436]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/3_slopeR.png" type="Texture" id=437]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/0_slopeR.png" type="Texture" id=438]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/3_slopeL.png" type="Texture" id=439]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/2_slopeL.png" type="Texture" id=440]
+[ext_resource path="res://assets/tiles/dark_bricks/palette_icons/1_slopeL.png" type="Texture" id=441]
+[ext_resource path="res://scenes/actors/objects/boo/icon.png" type="Texture" id=442]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -945,6 +1023,117 @@ object_center = Vector2( 16, 16 )
 icon = ExtResource( 137 )
 preview = ExtResource( 137 )
 
+[node name="YellowGemBlock" type="Node" parent="PlaceableItems/SampleObject"]
+script = ExtResource( 24 )
+tileset_id = 12
+change_to = "GreenGemBlock"
+items_in_sequence = 4
+index_in_sequence = 1
+icon = ExtResource( 172 )
+preview = ExtResource( 172 )
+
+[node name="GreenGemBlock" type="Node" parent="PlaceableItems/SampleObject"]
+script = ExtResource( 24 )
+tileset_id = 13
+change_to = "BlueGemBlock"
+items_in_sequence = 4
+index_in_sequence = 2
+icon = ExtResource( 173 )
+preview = ExtResource( 173 )
+
+[node name="BlueGemBlock" type="Node" parent="PlaceableItems/SampleObject"]
+script = ExtResource( 24 )
+tileset_id = 14
+change_to = "RedGemBlock"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 171 )
+preview = ExtResource( 171 )
+
+[node name="GreenBrick" type="Node" parent="PlaceableItems/SampleObject"]
+script = ExtResource( 24 )
+tileset_id = 3
+change_to = "GreenBrickSlopeLeft"
+items_in_sequence = 3
+icon = ExtResource( 86 )
+preview = ExtResource( 86 )
+
+[node name="GreenBrickSlopeRight" type="Node" parent="PlaceableItems/SampleObject"]
+script = ExtResource( 24 )
+tileset_id = 3
+tile_id = 3
+change_to = "GreenBrick"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 93 )
+preview = ExtResource( 93 )
+
+[node name="GreenBrickSlopeLeft" type="Node" parent="PlaceableItems/SampleObject"]
+script = ExtResource( 24 )
+tileset_id = 3
+tile_id = 2
+change_to = "GreenBrickSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 88 )
+preview = ExtResource( 88 )
+
+[node name="RedBrick" type="Node" parent="PlaceableItems/SampleObject"]
+script = ExtResource( 24 )
+tileset_id = 4
+change_to = "RedBrickSlopeLeft"
+items_in_sequence = 3
+icon = ExtResource( 89 )
+preview = ExtResource( 89 )
+
+[node name="RedBrickSlopeRight" type="Node" parent="PlaceableItems/SampleObject"]
+script = ExtResource( 24 )
+tileset_id = 4
+tile_id = 3
+change_to = "RedBrick"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 85 )
+preview = ExtResource( 85 )
+
+[node name="RedBrickSlopeLeft" type="Node" parent="PlaceableItems/SampleObject"]
+script = ExtResource( 24 )
+tileset_id = 4
+tile_id = 2
+change_to = "RedBrickSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 92 )
+preview = ExtResource( 92 )
+
+[node name="YellowBrick" type="Node" parent="PlaceableItems/SampleObject"]
+script = ExtResource( 24 )
+tileset_id = 5
+change_to = "YellowBrickSlopeLeft"
+items_in_sequence = 3
+icon = ExtResource( 90 )
+preview = ExtResource( 90 )
+
+[node name="YellowBrickSlopeRight" type="Node" parent="PlaceableItems/SampleObject"]
+script = ExtResource( 24 )
+tileset_id = 5
+tile_id = 3
+change_to = "YellowBrick"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 91 )
+preview = ExtResource( 91 )
+
+[node name="YellowBrickSlopeLeft" type="Node" parent="PlaceableItems/SampleObject"]
+script = ExtResource( 24 )
+tileset_id = 5
+tile_id = 2
+change_to = "YellowBrickSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 87 )
+preview = ExtResource( 87 )
+
 [node name="SpecialGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
 color = Color( 0.439216, 0.121569, 0.517647, 1 )
@@ -1444,6 +1633,14 @@ tile_mode_step = 16
 icon = ExtResource( 240 )
 preview = ExtResource( 239 )
 
+[node name="Boo" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 24 )
+object_id = 85
+is_object = true
+object_center = Vector2( 16, 16 )
+icon = ExtResource( 442 )
+preview = ExtResource( 442 )
+
 [node name="Goonie" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 24 )
 object_id = 70
@@ -1479,8 +1676,8 @@ group_name = "Grass"
 [node name="Grass" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 24 )
 tileset_id = 2
-palette_icons = [ ExtResource( 10 ), ExtResource( 243 ), ExtResource( 242 ), ExtResource( 244 ), ExtResource( 241 ) ]
-palette_previews = [ ExtResource( 10 ), ExtResource( 243 ), ExtResource( 242 ), ExtResource( 244 ), ExtResource( 241 ) ]
+palette_icons = [ ExtResource( 10 ), ExtResource( 243 ), ExtResource( 242 ), ExtResource( 244 ), ExtResource( 241 ), ExtResource( 368 ) ]
+palette_previews = [ ExtResource( 10 ), ExtResource( 243 ), ExtResource( 242 ), ExtResource( 244 ), ExtResource( 241 ), ExtResource( 368 ) ]
 change_to = "GrassSlab"
 items_in_sequence = 4
 icon = ExtResource( 10 )
@@ -1490,8 +1687,8 @@ preview = ExtResource( 10 )
 script = ExtResource( 24 )
 tileset_id = 2
 tile_id = 1
-palette_icons = [ ExtResource( 63 ), ExtResource( 251 ), ExtResource( 247 ), ExtResource( 246 ), ExtResource( 249 ) ]
-palette_previews = [ ExtResource( 63 ), ExtResource( 251 ), ExtResource( 247 ), ExtResource( 246 ), ExtResource( 249 ) ]
+palette_icons = [ ExtResource( 63 ), ExtResource( 251 ), ExtResource( 247 ), ExtResource( 246 ), ExtResource( 249 ), ExtResource( 369 ) ]
+palette_previews = [ ExtResource( 63 ), ExtResource( 251 ), ExtResource( 247 ), ExtResource( 246 ), ExtResource( 249 ), ExtResource( 369 ) ]
 change_to = "GrassSlopeLeft"
 items_in_sequence = 4
 index_in_sequence = 1
@@ -1502,8 +1699,8 @@ preview = ExtResource( 63 )
 script = ExtResource( 24 )
 tileset_id = 2
 tile_id = 2
-palette_icons = [ ExtResource( 14 ), ExtResource( 248 ), ExtResource( 255 ), ExtResource( 254 ), ExtResource( 252 ) ]
-palette_previews = [ ExtResource( 14 ), ExtResource( 248 ), ExtResource( 255 ), ExtResource( 254 ), ExtResource( 252 ) ]
+palette_icons = [ ExtResource( 14 ), ExtResource( 248 ), ExtResource( 255 ), ExtResource( 254 ), ExtResource( 252 ), ExtResource( 367 ) ]
+palette_previews = [ ExtResource( 14 ), ExtResource( 248 ), ExtResource( 255 ), ExtResource( 254 ), ExtResource( 252 ), ExtResource( 367 ) ]
 change_to = "GrassSlopeRight"
 items_in_sequence = 4
 index_in_sequence = 2
@@ -1514,8 +1711,8 @@ preview = ExtResource( 14 )
 script = ExtResource( 24 )
 tileset_id = 2
 tile_id = 3
-palette_icons = [ ExtResource( 13 ), ExtResource( 245 ), ExtResource( 253 ), ExtResource( 256 ), ExtResource( 250 ) ]
-palette_previews = [ ExtResource( 13 ), ExtResource( 245 ), ExtResource( 253 ), ExtResource( 256 ), ExtResource( 250 ) ]
+palette_icons = [ ExtResource( 13 ), ExtResource( 245 ), ExtResource( 253 ), ExtResource( 256 ), ExtResource( 250 ), ExtResource( 366 ) ]
+palette_previews = [ ExtResource( 13 ), ExtResource( 245 ), ExtResource( 253 ), ExtResource( 256 ), ExtResource( 250 ), ExtResource( 366 ) ]
 change_to = "Grass"
 items_in_sequence = 4
 index_in_sequence = 3
@@ -1940,6 +2137,49 @@ index_in_sequence = 3
 icon = ExtResource( 346 )
 preview = ExtResource( 346 )
 
+[node name="FireBrick" type="Node" parent="PlaceableItems/VolcanoGroup"]
+script = ExtResource( 24 )
+tileset_id = 31
+palette_icons = [ ExtResource( 392 ), ExtResource( 389 ), ExtResource( 385 ), ExtResource( 395 ), ExtResource( 393 ), ExtResource( 382 ) ]
+palette_previews = [ ExtResource( 392 ), ExtResource( 389 ), ExtResource( 385 ), ExtResource( 395 ), ExtResource( 393 ), ExtResource( 382 ) ]
+change_to = "FireBrickSlopeLeft"
+items_in_sequence = 3
+icon = ExtResource( 392 )
+preview = ExtResource( 392 )
+
+[node name="FireBrickSlopeRight" type="Node" parent="PlaceableItems/VolcanoGroup"]
+script = ExtResource( 24 )
+tileset_id = 31
+tile_id = 3
+palette_icons = [ ExtResource( 391 ), ExtResource( 387 ), ExtResource( 386 ), ExtResource( 388 ), ExtResource( 380 ), ExtResource( 381 ) ]
+palette_previews = [ ExtResource( 391 ), ExtResource( 387 ), ExtResource( 386 ), ExtResource( 388 ), ExtResource( 380 ), ExtResource( 381 ) ]
+change_to = "FireBrick"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 391 )
+preview = ExtResource( 391 )
+
+[node name="FireBrickSlopeLeft" type="Node" parent="PlaceableItems/VolcanoGroup"]
+script = ExtResource( 24 )
+tileset_id = 31
+tile_id = 2
+palette_icons = [ ExtResource( 397 ), ExtResource( 394 ), ExtResource( 390 ), ExtResource( 396 ), ExtResource( 383 ), ExtResource( 384 ) ]
+palette_previews = [ ExtResource( 397 ), ExtResource( 394 ), ExtResource( 390 ), ExtResource( 396 ), ExtResource( 383 ), ExtResource( 384 ) ]
+change_to = "FireBrickSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 397 )
+preview = ExtResource( 397 )
+
+[node name="DeadTree" type="Node" parent="PlaceableItems/VolcanoGroup"]
+script = ExtResource( 24 )
+object_id = 84
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+icon = ExtResource( 371 )
+preview = ExtResource( 370 )
+
 [node name="Lava" type="Node" parent="PlaceableItems/VolcanoGroup"]
 script = ExtResource( 24 )
 object_id = 75
@@ -1968,6 +2208,8 @@ group_name = "Building"
 [node name="Brick" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
 tileset_id = 1
+palette_icons = [ ExtResource( 5 ), ExtResource( 414 ), ExtResource( 422 ), ExtResource( 417 ), ExtResource( 409 ), ExtResource( 416 ) ]
+palette_previews = [ ExtResource( 5 ), ExtResource( 414 ), ExtResource( 422 ), ExtResource( 417 ), ExtResource( 409 ), ExtResource( 416 ) ]
 change_to = "BrickSlopeLeft"
 items_in_sequence = 3
 icon = ExtResource( 5 )
@@ -1977,6 +2219,8 @@ preview = ExtResource( 5 )
 script = ExtResource( 24 )
 tileset_id = 1
 tile_id = 3
+palette_icons = [ ExtResource( 62 ), ExtResource( 421 ), ExtResource( 415 ), ExtResource( 413 ), ExtResource( 418 ), ExtResource( 423 ) ]
+palette_previews = [ ExtResource( 62 ), ExtResource( 421 ), ExtResource( 415 ), ExtResource( 413 ), ExtResource( 418 ), ExtResource( 423 ) ]
 change_to = "Brick"
 items_in_sequence = 3
 index_in_sequence = 2
@@ -1987,130 +2231,55 @@ preview = ExtResource( 62 )
 script = ExtResource( 24 )
 tileset_id = 1
 tile_id = 2
+palette_icons = [ ExtResource( 61 ), ExtResource( 420 ), ExtResource( 412 ), ExtResource( 411 ), ExtResource( 410 ), ExtResource( 419 ) ]
+palette_previews = [ ExtResource( 61 ), ExtResource( 420 ), ExtResource( 412 ), ExtResource( 411 ), ExtResource( 410 ), ExtResource( 419 ) ]
 change_to = "BrickSlopeRight"
 items_in_sequence = 3
 index_in_sequence = 1
 icon = ExtResource( 61 )
 preview = ExtResource( 61 )
 
-[node name="GreenBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
+[node name="DarkBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
-tileset_id = 3
-change_to = "GreenBrickSlopeLeft"
+tileset_id = 32
+palette_icons = [ ExtResource( 426 ), ExtResource( 433 ), ExtResource( 428 ), ExtResource( 435 ), ExtResource( 434 ), ExtResource( 427 ) ]
+palette_previews = [ ExtResource( 426 ), ExtResource( 433 ), ExtResource( 428 ), ExtResource( 435 ), ExtResource( 434 ), ExtResource( 427 ) ]
+change_to = "DarkBrickSlopeLeft"
 items_in_sequence = 3
-icon = ExtResource( 86 )
-preview = ExtResource( 86 )
+icon = ExtResource( 426 )
+preview = ExtResource( 426 )
 
-[node name="GreenBrickSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
+[node name="DarkBrickSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
-tileset_id = 3
+tileset_id = 32
 tile_id = 3
-change_to = "GreenBrick"
+palette_icons = [ ExtResource( 425 ), ExtResource( 438 ), ExtResource( 429 ), ExtResource( 436 ), ExtResource( 437 ), ExtResource( 431 ) ]
+palette_previews = [ ExtResource( 425 ), ExtResource( 438 ), ExtResource( 429 ), ExtResource( 436 ), ExtResource( 437 ), ExtResource( 431 ) ]
+change_to = "DarkBrick"
 items_in_sequence = 3
 index_in_sequence = 2
-icon = ExtResource( 93 )
-preview = ExtResource( 93 )
+icon = ExtResource( 425 )
+preview = ExtResource( 425 )
 
-[node name="GreenBrickSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
+[node name="DarkBrickSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
-tileset_id = 3
+tileset_id = 32
 tile_id = 2
-change_to = "GreenBrickSlopeRight"
+palette_icons = [ ExtResource( 424 ), ExtResource( 432 ), ExtResource( 441 ), ExtResource( 440 ), ExtResource( 439 ), ExtResource( 430 ) ]
+palette_previews = [ ExtResource( 424 ), ExtResource( 432 ), ExtResource( 441 ), ExtResource( 440 ), ExtResource( 439 ), ExtResource( 430 ) ]
+change_to = "DarkBrickSlopeRight"
 items_in_sequence = 3
 index_in_sequence = 1
-icon = ExtResource( 88 )
-preview = ExtResource( 88 )
-
-[node name="RedBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 24 )
-tileset_id = 4
-change_to = "RedBrickSlopeLeft"
-items_in_sequence = 3
-icon = ExtResource( 89 )
-preview = ExtResource( 89 )
-
-[node name="RedBrickSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 24 )
-tileset_id = 4
-tile_id = 3
-change_to = "RedBrick"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 85 )
-preview = ExtResource( 85 )
-
-[node name="RedBrickSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 24 )
-tileset_id = 4
-tile_id = 2
-change_to = "RedBrickSlopeRight"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 92 )
-preview = ExtResource( 92 )
-
-[node name="YellowBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 24 )
-tileset_id = 5
-change_to = "YellowBrickSlopeLeft"
-items_in_sequence = 3
-icon = ExtResource( 90 )
-preview = ExtResource( 90 )
-
-[node name="YellowBrickSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 24 )
-tileset_id = 5
-tile_id = 3
-change_to = "YellowBrick"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 91 )
-preview = ExtResource( 91 )
-
-[node name="YellowBrickSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 24 )
-tileset_id = 5
-tile_id = 2
-change_to = "YellowBrickSlopeRight"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 87 )
-preview = ExtResource( 87 )
+icon = ExtResource( 424 )
+preview = ExtResource( 424 )
 
 [node name="RedGemBlock" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
 tileset_id = 11
-change_to = "YellowGemBlock"
-items_in_sequence = 4
+palette_icons = [ ExtResource( 170 ), ExtResource( 408 ), ExtResource( 404 ), ExtResource( 406 ), ExtResource( 405 ), ExtResource( 407 ), ExtResource( 403 ) ]
+palette_previews = [ ExtResource( 170 ), ExtResource( 408 ), ExtResource( 404 ), ExtResource( 406 ), ExtResource( 405 ), ExtResource( 407 ), ExtResource( 403 ) ]
 icon = ExtResource( 170 )
 preview = ExtResource( 170 )
-
-[node name="YellowGemBlock" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 24 )
-tileset_id = 12
-change_to = "GreenGemBlock"
-items_in_sequence = 4
-index_in_sequence = 1
-icon = ExtResource( 172 )
-preview = ExtResource( 172 )
-
-[node name="GreenGemBlock" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 24 )
-tileset_id = 13
-change_to = "BlueGemBlock"
-items_in_sequence = 4
-index_in_sequence = 2
-icon = ExtResource( 173 )
-preview = ExtResource( 173 )
-
-[node name="BlueGemBlock" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 24 )
-tileset_id = 14
-change_to = "RedGemBlock"
-items_in_sequence = 4
-index_in_sequence = 3
-icon = ExtResource( 171 )
-preview = ExtResource( 171 )
 
 [node name="Glass" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
@@ -2151,6 +2320,8 @@ preview = ExtResource( 190 )
 [node name="StoneBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
 tileset_id = 16
+palette_icons = [ ExtResource( 187 ), ExtResource( 399 ), ExtResource( 400 ), ExtResource( 401 ) ]
+palette_previews = [ ExtResource( 187 ), ExtResource( 399 ), ExtResource( 400 ), ExtResource( 401 ) ]
 change_to = "StoneBrickSlopeLeft"
 items_in_sequence = 3
 icon = ExtResource( 187 )
@@ -2160,6 +2331,8 @@ preview = ExtResource( 187 )
 script = ExtResource( 24 )
 tileset_id = 16
 tile_id = 3
+palette_icons = [ ExtResource( 194 ), ExtResource( 398 ), ExtResource( 402 ), ExtResource( 374 ) ]
+palette_previews = [ ExtResource( 194 ), ExtResource( 398 ), ExtResource( 402 ), ExtResource( 374 ) ]
 change_to = "StoneBrick"
 items_in_sequence = 3
 index_in_sequence = 1
@@ -2170,6 +2343,8 @@ preview = ExtResource( 194 )
 script = ExtResource( 24 )
 tileset_id = 16
 tile_id = 2
+palette_icons = [ ExtResource( 195 ), ExtResource( 377 ), ExtResource( 373 ), ExtResource( 372 ) ]
+palette_previews = [ ExtResource( 195 ), ExtResource( 377 ), ExtResource( 373 ), ExtResource( 372 ) ]
 change_to = "StoneBrickSlopeRight"
 items_in_sequence = 3
 index_in_sequence = 2
@@ -2207,6 +2382,8 @@ preview = ExtResource( 192 )
 [node name="Cobblestone" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
 tileset_id = 20
+palette_icons = [ ExtResource( 200 ), ExtResource( 376 ), ExtResource( 375 ) ]
+palette_previews = [ ExtResource( 200 ), ExtResource( 376 ), ExtResource( 375 ) ]
 icon = ExtResource( 200 )
 preview = ExtResource( 200 )
 
@@ -2246,6 +2423,8 @@ preview = ExtResource( 223 )
 [node name="CastleWood" type="Node" parent="PlaceableItems/CastleGroup"]
 script = ExtResource( 24 )
 tileset_id = 24
+palette_icons = [ ExtResource( 224 ), ExtResource( 378 ), ExtResource( 379 ) ]
+palette_previews = [ ExtResource( 224 ), ExtResource( 378 ), ExtResource( 379 ) ]
 icon = ExtResource( 224 )
 preview = ExtResource( 224 )
 
@@ -2282,6 +2461,12 @@ items_in_sequence = 3
 index_in_sequence = 1
 icon = ExtResource( 293 )
 preview = ExtResource( 293 )
+
+[node name="CastlePillar" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 24 )
+tileset_id = 30
+icon = ExtResource( 365 )
+preview = ExtResource( 365 )
 
 [node name="MiscGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )

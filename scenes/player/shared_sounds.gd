@@ -1,7 +1,8 @@
 extends Node
 
 onready var play_sounds = [
-	["CoinSound", $CoinSound, false]
+	["CoinSound", $CoinSound, false],
+	["LaughSound", $LaughSound, false]
 ]
 
 func PlaySound(sound_name):

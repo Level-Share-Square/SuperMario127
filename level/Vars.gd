@@ -21,7 +21,7 @@ func reload():
 	red_coins_collected = CheckpointSaved.current_red_coins.duplicate(true)
 	shine_shards_collected = CheckpointSaved.current_shine_shards.duplicate(true)
 	nozzles_collected = CheckpointSaved.nozzles_collected.duplicate(true)
-	liquid_positions = CheckpointSaved.liquid_positions
+	liquid_positions = CheckpointSaved.liquid_positions.duplicate(true)
 
 func reset_counters():
 	max_red_coins = 0

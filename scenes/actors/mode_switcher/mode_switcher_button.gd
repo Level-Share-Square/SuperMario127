@@ -70,6 +70,7 @@ func change_visuals(new_scene_mode : int) -> void:
 func switch() -> void:
 	if get_parent().layer != 99 and !switching_disabled and !get_tree().paused and !scene_transitions.transitioning:
 		music.reset_music()
+		music.stop_temporary_music()
 
 		ActionManager.clear_history()
 		

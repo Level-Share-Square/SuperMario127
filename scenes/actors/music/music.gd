@@ -167,7 +167,7 @@ func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0) 
 	#temporary_music_player.volume_db = temp_song_volume if !muted else -80.0
 
 	var stream = get_song(temp_song_id).stream
-	if temporary_music_player.stream != stream or !is_temporary_music_playing():
+	if temporary_music_player.stream != stream or temporary_music_player.volume_db < -70:
 		temporary_music_player.volume_db = 0
 		temporary_music_player.stream = stream
 		temporary_music_player.play()

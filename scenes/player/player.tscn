@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -59,6 +59,7 @@
 [ext_resource path="res://scenes/actors/objects/sign/menu_close.wav" type="AudioStream" id=57]
 [ext_resource path="res://scenes/actors/objects/switch/tick.wav" type="AudioStream" id=58]
 [ext_resource path="res://scenes/actors/objects/switch/tick_end.wav" type="AudioStream" id=59]
+[ext_resource path="res://scenes/actors/objects/boo/laugh.wav" type="AudioStream" id=60]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 7 )
@@ -1524,6 +1525,10 @@ script = ExtResource( 40 )
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="SharedSounds"]
 stream = ExtResource( 39 )
+volume_db = -9.0
+
+[node name="LaughSound" type="AudioStreamPlayer" parent="SharedSounds"]
+stream = ExtResource( 60 )
 volume_db = -9.0
 
 [node name="TickSound" type="AudioStreamPlayer" parent="SharedSounds"]

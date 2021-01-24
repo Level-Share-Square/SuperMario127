@@ -7,4 +7,4 @@ export var slab_tile_id : int
 export var left_slope_tile_id : int
 export var right_slope_tile_id : int
 
-export var palettes : Array
+export(Array, Texture) var palettes

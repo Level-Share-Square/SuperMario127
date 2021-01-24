@@ -16,7 +16,11 @@ func _ready():
 	texture_hover = load(texture_hover.load_path)
 	texture_pressed = load(texture_pressed.load_path)
 	grid.texture = load(grid.texture.load_path)
-	icon.texture = load(item.icon.load_path)
+	
+	if item.palette_icons.size() == 0:
+		icon.texture = load(item.icon.load_path)
+	else:
+		icon.texture = load(item.palette_icons[0].load_path)
 	
 func _process(_delta):
 	grid.visible = true if !item.is_object else false
