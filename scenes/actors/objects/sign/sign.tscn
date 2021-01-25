@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/actors/objects/sign/sign.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=2]
@@ -7,8 +7,11 @@
 [ext_resource path="res://scenes/actors/objects/sign/exclamation_mark.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/sign/message_disappear.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/actors/objects/sign/message_appear.wav" type="AudioStream" id=7]
-
-
+[ext_resource path="res://scenes/actors/objects/sign/stick.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/2/sign.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/2/stick.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/1/sign.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/1/stick.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 80, 60 )
@@ -32,7 +35,7 @@ tracks/0/keys = {
 "values": [ Vector2( 53, 23 ), Vector2( 53, 30 ), Vector2( 53, 23 ) ]
 }
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.133333, 0.145098, 0.196078, 0.835294 )
 border_width_left = 2
 border_width_top = 2
@@ -56,10 +59,16 @@ font_data = ExtResource( 3 )
 [node name="Sign" type="Node2D"]
 z_index = -1
 script = ExtResource( 1 )
+palette_textures = [ ExtResource( 11 ), ExtResource( 9 ) ]
+palette_textures_2 = [ ExtResource( 12 ), ExtResource( 10 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 z_index = -9
 texture = ExtResource( 2 )
+
+[node name="Stick" type="Sprite" parent="."]
+z_index = -9
+texture = ExtResource( 8 )
 
 [node name="MessageArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -93,7 +102,7 @@ margin_top = -19.375
 margin_right = 178.125
 margin_bottom = 46.25
 mouse_filter = 2
-custom_styles/panel = SubResource( 6 )
+custom_styles/panel = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

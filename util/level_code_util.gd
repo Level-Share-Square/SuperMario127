@@ -171,9 +171,15 @@ static func decode(code: String):
 				var decoded_object = {}
 				decoded_object.properties = []
 				decoded_object.type_id = int(object_array[0])
+				var start_index = 1
+				if (conversion_util.compareVersions(result.format_version, "0.4.7") != -1):
+					decoded_object.palette = int(object_array[1])
+				else:
+					start_index = 0
+					decoded_object.palette = 0
 				var index = 0
 				for value in object_array:
-					if index > 0:
+					if index > start_index:
 						decoded_object.properties.append(value_util.decode_value(value))
 					index += 1
 				result.areas[area_id].objects.append(decoded_object)

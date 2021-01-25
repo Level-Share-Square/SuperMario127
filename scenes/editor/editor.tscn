@@ -1,4 +1,4 @@
-[gd_scene load_steps=468 format=2]
+[gd_scene load_steps=556 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -93,7 +93,7 @@
 [ext_resource path="res://assets/tiles/bricks_yellow/icon_slope_right.png" type="Texture" id=91]
 [ext_resource path="res://assets/tiles/bricks_red/icon_slope_left.png" type="Texture" id=92]
 [ext_resource path="res://assets/tiles/bricks_green/icon_slope_right.png" type="Texture" id=93]
-[ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=94]
+[ext_resource path="res://scenes/actors/objects/cave_spore_mini/palettes/3/cave_spore_mini.png" type="Texture" id=94]
 [ext_resource path="res://scenes/actors/objects/green_demon/green_demon.png" type="Texture" id=95]
 [ext_resource path="res://scenes/actors/objects/green_demon/icon.png" type="Texture" id=96]
 [ext_resource path="res://scenes/actors/objects/twisted_tree_top/twisted_tree_top.png" type="Texture" id=97]
@@ -442,6 +442,94 @@
 [ext_resource path="res://assets/tiles/dark_bricks/palette_icons/2_slopeL.png" type="Texture" id=440]
 [ext_resource path="res://assets/tiles/dark_bricks/palette_icons/1_slopeL.png" type="Texture" id=441]
 [ext_resource path="res://scenes/actors/objects/boo/icon.png" type="Texture" id=442]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/2/icon.png" type="Texture" id=443]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/1/icon.png" type="Texture" id=444]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/1/preview.png" type="Texture" id=445]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/2/preview.png" type="Texture" id=446]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/3/preview.png" type="Texture" id=447]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/3/icon.png" type="Texture" id=448]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/5/preview.png" type="Texture" id=449]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/5/icon.png" type="Texture" id=450]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/4/icon.png" type="Texture" id=451]
+[ext_resource path="res://scenes/actors/objects/big_tree/palettes/4/preview.png" type="Texture" id=452]
+[ext_resource path="res://scenes/actors/objects/large_pine_tree/palettes/1/icon.png" type="Texture" id=453]
+[ext_resource path="res://scenes/actors/objects/large_pine_tree/palettes/3/preview.png" type="Texture" id=454]
+[ext_resource path="res://scenes/actors/objects/large_pine_tree/palettes/4/preview.png" type="Texture" id=455]
+[ext_resource path="res://scenes/actors/objects/large_pine_tree/palettes/5/preview.png" type="Texture" id=456]
+[ext_resource path="res://scenes/actors/objects/large_pine_tree/palettes/5/icon.png" type="Texture" id=457]
+[ext_resource path="res://scenes/actors/objects/pine_tree/palettes/1/preview.png" type="Texture" id=458]
+[ext_resource path="res://scenes/actors/objects/pine_tree/palettes/2/preview.png" type="Texture" id=459]
+[ext_resource path="res://scenes/actors/objects/pine_tree/palettes/3/preview.png" type="Texture" id=460]
+[ext_resource path="res://scenes/actors/objects/pine_tree/palettes/4/preview.png" type="Texture" id=461]
+[ext_resource path="res://scenes/actors/objects/large_pine_tree/palettes/4/icon.png" type="Texture" id=462]
+[ext_resource path="res://scenes/actors/objects/pine_tree/palettes/2/pine_tree.png" type="Texture" id=463]
+[ext_resource path="res://scenes/actors/objects/pine_tree/palettes/3/pine_tree.png" type="Texture" id=464]
+[ext_resource path="res://scenes/actors/objects/large_pine_tree/palettes/2/icon.png" type="Texture" id=465]
+[ext_resource path="res://scenes/actors/objects/large_pine_tree/palettes/2/preview.png" type="Texture" id=466]
+[ext_resource path="res://scenes/actors/objects/pine_tree/palettes/1/pine_tree.png" type="Texture" id=467]
+[ext_resource path="res://scenes/actors/objects/pine_tree/palettes/4/pine_tree.png" type="Texture" id=468]
+[ext_resource path="res://scenes/actors/objects/pine_tree/palettes/5/pine_tree.png" type="Texture" id=469]
+[ext_resource path="res://scenes/actors/objects/large_pine_tree/palettes/1/preview.png" type="Texture" id=470]
+[ext_resource path="res://scenes/actors/objects/large_pine_tree/palettes/3/icon.png" type="Texture" id=471]
+[ext_resource path="res://scenes/actors/objects/pine_tree/palettes/5/preview.png" type="Texture" id=472]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/2/big_bush.png" type="Texture" id=473]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/2/small_bush.png" type="Texture" id=474]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/3/small_bush.png" type="Texture" id=475]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/5/big_bush.png" type="Texture" id=476]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/1/small_bush.png" type="Texture" id=477]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/3/big_bush.png" type="Texture" id=478]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/1/big_bush.png" type="Texture" id=479]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/4/big_bush.png" type="Texture" id=480]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/2/icon.png" type="Texture" id=481]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/5/icon.png" type="Texture" id=482]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/4/icon.png" type="Texture" id=483]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/2/icon.png" type="Texture" id=484]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/5/small_bush.png" type="Texture" id=485]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/1/icon.png" type="Texture" id=486]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/4/small_bush.png" type="Texture" id=487]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/3/icon.png" type="Texture" id=488]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/3/icon.png" type="Texture" id=489]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/5/icon.png" type="Texture" id=490]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/1/icon.png" type="Texture" id=491]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/4/icon.png" type="Texture" id=492]
+[ext_resource path="res://scenes/actors/objects/cave_plant/palettes/2/icon.png" type="Texture" id=493]
+[ext_resource path="res://scenes/actors/objects/cave_plant/palettes/1/icon.png" type="Texture" id=494]
+[ext_resource path="res://scenes/actors/objects/cave_plant/palettes/2/preview.png" type="Texture" id=495]
+[ext_resource path="res://scenes/actors/objects/cave_plant/palettes/1/preview.png" type="Texture" id=496]
+[ext_resource path="res://scenes/actors/objects/cave_plant/palettes/4/icon.png" type="Texture" id=497]
+[ext_resource path="res://scenes/actors/objects/cave_plant/palettes/5/icon.png" type="Texture" id=498]
+[ext_resource path="res://scenes/actors/objects/cave_plant/palettes/3/icon.png" type="Texture" id=499]
+[ext_resource path="res://scenes/actors/objects/cave_plant/palettes/3/preview.png" type="Texture" id=500]
+[ext_resource path="res://scenes/actors/objects/cave_plant/palettes/4/preview.png" type="Texture" id=501]
+[ext_resource path="res://scenes/actors/objects/cave_plant/palettes/5/preview.png" type="Texture" id=502]
+[ext_resource path="res://scenes/actors/objects/rock/palettes/2/rock.png" type="Texture" id=503]
+[ext_resource path="res://scenes/actors/objects/rock/palettes/1/rock.png" type="Texture" id=504]
+[ext_resource path="res://scenes/actors/objects/rock/palettes/1/icon.png" type="Texture" id=505]
+[ext_resource path="res://scenes/actors/objects/rock/palettes/2/icon.png" type="Texture" id=506]
+[ext_resource path="res://scenes/actors/objects/sign/icon.png" type="Texture" id=507]
+[ext_resource path="res://scenes/actors/objects/cave_spore_mini/palettes/2/cave_spore_mini.png" type="Texture" id=508]
+[ext_resource path="res://scenes/actors/objects/cave_spore/palettes/1/icon.png" type="Texture" id=509]
+[ext_resource path="res://scenes/actors/objects/cave_spore/palettes/1/cave_spore.png" type="Texture" id=510]
+[ext_resource path="res://scenes/actors/objects/cave_spore/palettes/2/cave_spore.png" type="Texture" id=511]
+[ext_resource path="res://scenes/actors/objects/cave_spore_mini/palettes/1/cave_spore_mini.png" type="Texture" id=512]
+[ext_resource path="res://scenes/actors/objects/cave_spore/palettes/3/icon.png" type="Texture" id=513]
+[ext_resource path="res://scenes/actors/objects/cave_spore/palettes/3/cave_spore.png" type="Texture" id=514]
+[ext_resource path="res://scenes/actors/objects/cave_spore_mini/palettes/2/icon.png" type="Texture" id=515]
+[ext_resource path="res://scenes/actors/objects/cave_spore_mini/palettes/3/icon.png" type="Texture" id=516]
+[ext_resource path="res://scenes/actors/objects/cave_spore/palettes/2/icon.png" type="Texture" id=517]
+[ext_resource path="res://scenes/actors/objects/cave_spore_mini/palettes/1/icon.png" type="Texture" id=518]
+[ext_resource path="res://scenes/actors/objects/palm_tree/palettes/3/icon.png" type="Texture" id=519]
+[ext_resource path="res://scenes/actors/objects/palm_tree/palettes/2/icon.png" type="Texture" id=520]
+[ext_resource path="res://scenes/actors/objects/palm_tree/palettes/3/preview.png" type="Texture" id=521]
+[ext_resource path="res://scenes/actors/objects/palm_tree/palettes/2/preview.png" type="Texture" id=522]
+[ext_resource path="res://scenes/actors/objects/palm_tree/palettes/1/preview.png" type="Texture" id=523]
+[ext_resource path="res://scenes/actors/objects/palm_tree/palettes/1/icon.png" type="Texture" id=524]
+[ext_resource path="res://scenes/actors/objects/barrel_cactus/palettes/1/icon.png" type="Texture" id=525]
+[ext_resource path="res://scenes/actors/objects/barrel_cactus/palettes/3/icon.png" type="Texture" id=526]
+[ext_resource path="res://scenes/actors/objects/barrel_cactus/palettes/2/barrel_cactus.png" type="Texture" id=527]
+[ext_resource path="res://scenes/actors/objects/barrel_cactus/palettes/1/barrel_cactus.png" type="Texture" id=528]
+[ext_resource path="res://scenes/actors/objects/barrel_cactus/palettes/2/icon.png" type="Texture" id=529]
+[ext_resource path="res://scenes/actors/objects/barrel_cactus/palettes/3/barrel_cactus.png" type="Texture" id=530]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1177,8 +1265,8 @@ object_id = 14
 is_object = true
 object_center = Vector2( 16, 12 )
 tile_mode_offset = Vector2( 0, -4 )
-icon = ExtResource( 94 )
-preview = ExtResource( 94 )
+icon = ExtResource( 507 )
+preview = ExtResource( 507 )
 
 [node name="Water" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
@@ -1725,6 +1813,8 @@ object_id = 4
 is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
+palette_icons = [ ExtResource( 51 ), ExtResource( 444 ), ExtResource( 443 ), ExtResource( 448 ), ExtResource( 451 ), ExtResource( 450 ) ]
+palette_previews = [ ExtResource( 50 ), ExtResource( 445 ), ExtResource( 446 ), ExtResource( 447 ), ExtResource( 452 ), ExtResource( 449 ) ]
 icon = ExtResource( 51 )
 preview = ExtResource( 50 )
 
@@ -1734,6 +1824,8 @@ object_id = 62
 is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
+palette_icons = [ ExtResource( 208 ), ExtResource( 467 ), ExtResource( 463 ), ExtResource( 464 ), ExtResource( 468 ), ExtResource( 469 ) ]
+palette_previews = [ ExtResource( 207 ), ExtResource( 458 ), ExtResource( 459 ), ExtResource( 460 ), ExtResource( 461 ), ExtResource( 472 ) ]
 change_to = "LargePineTree"
 items_in_sequence = 2
 icon = ExtResource( 208 )
@@ -1745,6 +1837,8 @@ object_id = 63
 is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
+palette_icons = [ ExtResource( 209 ), ExtResource( 453 ), ExtResource( 465 ), ExtResource( 471 ), ExtResource( 462 ), ExtResource( 457 ) ]
+palette_previews = [ ExtResource( 210 ), ExtResource( 470 ), ExtResource( 466 ), ExtResource( 454 ), ExtResource( 455 ), ExtResource( 456 ) ]
 change_to = "PineTree"
 items_in_sequence = 2
 index_in_sequence = 1
@@ -1757,6 +1851,8 @@ object_id = 11
 is_object = true
 object_center = Vector2( 32, 20 )
 tile_mode_offset = Vector2( 16, 4 )
+palette_icons = [ ExtResource( 82 ), ExtResource( 491 ), ExtResource( 484 ), ExtResource( 489 ), ExtResource( 483 ), ExtResource( 482 ) ]
+palette_previews = [ ExtResource( 79 ), ExtResource( 479 ), ExtResource( 473 ), ExtResource( 478 ), ExtResource( 480 ), ExtResource( 476 ) ]
 change_to = "SmallBush"
 items_in_sequence = 2
 index_in_sequence = 1
@@ -1769,6 +1865,8 @@ object_id = 12
 is_object = true
 object_center = Vector2( 32, 12 )
 tile_mode_offset = Vector2( 16, -4 )
+palette_icons = [ ExtResource( 81 ), ExtResource( 486 ), ExtResource( 481 ), ExtResource( 488 ), ExtResource( 492 ), ExtResource( 490 ) ]
+palette_previews = [ ExtResource( 80 ), ExtResource( 477 ), ExtResource( 474 ), ExtResource( 475 ), ExtResource( 487 ), ExtResource( 485 ) ]
 change_to = "BigBush"
 items_in_sequence = 2
 icon = ExtResource( 81 )
@@ -1849,6 +1947,8 @@ object_id = 76
 is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
+palette_icons = [ ExtResource( 305 ), ExtResource( 524 ), ExtResource( 520 ), ExtResource( 519 ) ]
+palette_previews = [ ExtResource( 306 ), ExtResource( 523 ), ExtResource( 522 ), ExtResource( 521 ) ]
 icon = ExtResource( 305 )
 preview = ExtResource( 306 )
 
@@ -1858,6 +1958,8 @@ object_id = 77
 is_object = true
 object_center = Vector2( 32, 12 )
 tile_mode_offset = Vector2( 16, -4 )
+palette_icons = [ ExtResource( 308 ), ExtResource( 525 ), ExtResource( 529 ), ExtResource( 526 ) ]
+palette_previews = [ ExtResource( 307 ), ExtResource( 528 ), ExtResource( 527 ), ExtResource( 530 ) ]
 icon = ExtResource( 308 )
 preview = ExtResource( 307 )
 
@@ -2060,6 +2162,8 @@ object_id = 64
 is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
+palette_icons = [ ExtResource( 211 ), ExtResource( 494 ), ExtResource( 493 ), ExtResource( 499 ), ExtResource( 497 ), ExtResource( 498 ) ]
+palette_previews = [ ExtResource( 212 ), ExtResource( 496 ), ExtResource( 495 ), ExtResource( 500 ), ExtResource( 501 ), ExtResource( 502 ) ]
 icon = ExtResource( 211 )
 preview = ExtResource( 212 )
 
@@ -2069,6 +2173,8 @@ object_id = 65
 is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
+palette_icons = [ ExtResource( 213 ), ExtResource( 509 ), ExtResource( 517 ), ExtResource( 513 ) ]
+palette_previews = [ ExtResource( 214 ), ExtResource( 510 ), ExtResource( 511 ), ExtResource( 514 ) ]
 change_to = "CaveSporeMini"
 items_in_sequence = 2
 icon = ExtResource( 213 )
@@ -2080,6 +2186,8 @@ object_id = 66
 is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
+palette_icons = [ ExtResource( 216 ), ExtResource( 518 ), ExtResource( 515 ), ExtResource( 516 ) ]
+palette_previews = [ ExtResource( 215 ), ExtResource( 512 ), ExtResource( 508 ), ExtResource( 94 ) ]
 change_to = "CaveSpore"
 items_in_sequence = 2
 index_in_sequence = 1
@@ -2620,6 +2728,8 @@ is_object = true
 object_center = Vector2( 64, 0 )
 tile_mode_offset = Vector2( 32, -32 )
 tile_mode_step = 64
+palette_icons = [ ExtResource( 238 ), ExtResource( 505 ), ExtResource( 506 ) ]
+palette_previews = [ ExtResource( 237 ), ExtResource( 504 ), ExtResource( 503 ) ]
 icon = ExtResource( 238 )
 preview = ExtResource( 237 )
 

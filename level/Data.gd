@@ -1,6 +1,6 @@
 class_name LevelData
 
-var current_format_version := "0.4.6"
+var current_format_version := "0.4.7"
 var name := "My Level"
 var areas = []
 var functions = {}
@@ -184,6 +184,7 @@ func get_object(result) -> LevelObject:
 	var object
 	object = LevelObject.new()
 	object.type_id = result.type_id
+	object.palette = result.palette
 	object.properties = result.properties
 	return object
 
@@ -210,6 +211,9 @@ func load_in(code):
 	
 	if result.format_version == "0.4.5":
 		result.format_version = "0.4.6"
+
+	if result.format_version == "0.4.6":
+		result.format_version = "0.4.7"
 
 	assert(result.format_version)
 	assert(result.name)
@@ -323,6 +327,7 @@ func get_encoded_level_data():
 		for object in area.objects:
 			var added_object = ""
 			added_object += str(object.type_id) + ","
+			added_object += str(object.palette) + ","
 			
 			added_object += value_util.encode_value(value_util.get_true_value(object.properties[0]-settings.bounds.position*32)) + ","
 			for i in range(1,object.properties.size()):

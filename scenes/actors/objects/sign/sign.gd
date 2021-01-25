@@ -4,6 +4,7 @@ onready var area = $MessageArea
 onready var animation_player = $AnimationPlayer
 onready var tween = $Tween
 onready var sprite = $Sprite
+onready var stick_sprite = $Stick
 
 onready var message_appear = $MessageAppear
 onready var message_disappear = $MessageDisappear
@@ -26,22 +27,33 @@ var normal_pos : Vector2
 var transition_speed := 10.0
 var reset_read_timer := 0.0
 
+var on_wall := false
+
+export(Array, Texture) var palette_textures
+export(Array, Texture) var palette_textures_2
+
 func _set_properties():
-	savable_properties = ["text", "open_menu"]
-	editable_properties = ["text", "open_menu"]
+	savable_properties = ["text", "open_menu", "on_wall"]
+	editable_properties = ["text", "open_menu", "on_wall"]
 	
 func _set_property_values():
 	set_property("text", text, true)
 	set_property("open_menu", open_menu, true)
+	set_property("on_wall", on_wall, true)
 
 func _ready():
 	if is_preview:
 		z_index = 0
-		$Sprite.z_index = 0
+		sprite.z_index = 0
+		stick_sprite.z_index = 0
 	
 	if !visible and mode != 1:
 		visible = true
 		sprite.visible = false
+	
+	if palette != 0:
+		sprite.texture = palette_textures[palette - 1]
+		stick_sprite.texture = palette_textures_2[palette - 1]
 	
 	if !enabled:
 		pop_up.visible = false
@@ -123,6 +135,12 @@ func open_menu_ui():
 	get_tree().get_current_scene().get_node("UI/SignText").open(text, self, character)
 
 func _physics_process(delta):
+	if !sprite.visible and mode != 1:
+		stick_sprite.visible = false
+	else:
+		stick_sprite.visible = !on_wall
+		sprite.modulate = Color(0.75, 0.75, 0.75) if on_wall else Color(1, 1, 1)
+	
 	if reset_read_timer > 0:
 		reset_read_timer -= delta
 		if reset_read_timer <= 0:

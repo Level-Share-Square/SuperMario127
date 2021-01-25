@@ -10,8 +10,9 @@ var level_area = null
 var level_object = null
 var hovered := false
 
-var enabled = true
+var enabled := true
 var preview_position := Vector2(72, 92)
+var palette := 0
 
 # true if creating a GameObject for the object settings preview
 var is_preview : bool = false

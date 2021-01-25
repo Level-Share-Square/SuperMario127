@@ -293,6 +293,7 @@ func _process(delta : float) -> void:
 					var object := LevelObject.new()
 					var original_object : LevelObject = hovered_object.level_object.get_ref()
 					object.type_id = original_object.type_id
+					object.palette = original_object.palette
 					for prop in original_object.properties:
 						object.properties.append(prop)
 					shared.create_object(object, true)
@@ -352,6 +353,7 @@ func _process(delta : float) -> void:
 					if object_pos and !shared.is_object_at_position(object_pos) and item.on_place(object_pos, level_data, level_area):
 						var object := LevelObject.new()
 						object.type_id = item.object_id
+						object.palette = item.palette_index
 						object.properties.append(object_pos)
 						object.properties.append(Vector2(1, 1))
 						object.properties.append(0)

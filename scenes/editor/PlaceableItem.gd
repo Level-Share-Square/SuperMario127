@@ -28,7 +28,7 @@ func update_palette(new_index : int):
 	if palette_icons.size() == 0: return
 	palette_index = wrapi(new_index, 0, palette_icons.size())
 	icon = palette_icons[palette_index]
-	preview = palette_icons[palette_index]
+	preview = palette_previews[palette_index]
 
 func on_place(position: Vector2, level_data: LevelData, level_area: LevelArea):
 	if is_instance_valid(placement_action):

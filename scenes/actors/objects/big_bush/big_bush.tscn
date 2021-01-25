@@ -1,12 +1,18 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/actors/objects/big_bush/big_bush.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/big_tree/big_tree.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/2/big_bush.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/5/big_bush.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/3/big_bush.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/1/big_bush.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/4/big_bush.png" type="Texture" id=7]
 
 [node name="BigBush" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
 custom_preview_position = Vector2( 75, 145 )
+palette_textures = [ ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 z_index = -9

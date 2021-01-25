@@ -26,6 +26,7 @@ func create_object(object, add_to_data):
 		object_node.level_data = level_data
 		object_node.level_area = level_area
 		object_node.level_object = weakref(object)
+		object_node.palette = object.palette
 		#object_node._init_signals() - Disabled because it's not needed atm
 		object_node._set_properties()
 		var index = 0

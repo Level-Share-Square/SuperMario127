@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/actors/objects/rock/rock.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/rock/rock.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/rock/palettes/2/rock.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/rock/palettes/1/rock.png" type="Texture" id=4]
 
 [node name="Rock" type="Node2D"]
 z_index = -2
 script = ExtResource( 2 )
+palette_textures = [ ExtResource( 4 ), ExtResource( 3 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
