@@ -77,8 +77,9 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 
 	if stop_temp_music:
 		music.reset_music()
-		yield(get_tree().create_timer(0.1), "timeout")
-		music.volume_db = 0
+		if !music.muted:
+			yield(get_tree().create_timer(0.1), "timeout")
+			music.volume_db = 0
 
 func play_transition_audio():
 	transition_audio.play()
