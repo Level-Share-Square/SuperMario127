@@ -588,6 +588,7 @@ MenuVariables="*res://scenes/menu/menu_variables.gd"
 TimeScore="*res://scenes/actors/time_score/time_score.tscn"
 MiscShared="*res://scenes/shared/miscshared.gd"
 CheckpointSaved="*res://classes/CheckpointSaved.gd"
+HideUI="*res://scenes/actors/hide_ui/hide_ui.gd"
 
 [debug]
 

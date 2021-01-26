@@ -1,5 +1,10 @@
 extends CanvasLayer
 
+func _ready():
+	if PhotoMode.enabled:
+		update_photo_mode(false)
+		update_photo_mode(false)
+
 func _input(event):
 	var player = get_tree().get_current_scene()
 	var character_node = player.get_node(player.character)
@@ -10,8 +15,13 @@ func _input(event):
 		if !(character_node.dead or (PlayerSettings.number_of_players != 1 and character2_node.dead)):
 			PhotoMode.enabled = !PhotoMode.enabled
 			update_photo_mode()
+	if !scene_transitions.transitioning and (!mode_switcher.get_node("ModeSwitcherButton").switching_disabled or mode_switcher.get_node("ModeSwitcherButton").invisible) and event.is_action_pressed("60_fps") and !(get_tree().paused and !PhotoMode.enabled):
+		if !(character_node.dead or (PlayerSettings.number_of_players != 1 and character2_node.dead)):
+			PhotoMode.enabled = !PhotoMode.enabled
+			update_photo_mode(false)
+		
 	
-func update_photo_mode():
+func update_photo_mode(do_pause = true):
 	var is_photo_mode = PhotoMode.enabled
 	offset.y = 1000000 if is_photo_mode else 0 # hax
-	get_tree().paused = is_photo_mode
+	get_tree().paused = is_photo_mode and do_pause

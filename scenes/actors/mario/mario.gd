@@ -818,6 +818,7 @@ func kill(cause: String) -> void:
 		var cutout_in := cutout_circle
 		var cutout_out := cutout_circle
 		var transition_time := 0.75
+		music.stop_temporary_music()
 		if cause == "fall":
 			controllable = false
 			sound_player.play_fall_sound()
@@ -828,7 +829,6 @@ func kill(cause: String) -> void:
 				reload = false
 		elif cause == "reload":
 			transition_time = 0.4
-			music.stop_temporary_music()
 		elif cause == "green_demon":
 			sound_player.play_last_hit_sound()
 			controllable = false
