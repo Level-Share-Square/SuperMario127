@@ -34,12 +34,13 @@ func _physics_process(_delta : float) -> void:
 			if (global_rotation == 0 and body.is_grounded()
 			and body.get_input(Character.input_names.crouch, true) and get_parent().enabled
 			# Rainbow Mario can't enter doors
-			and !(is_instance_valid(body.powerup) and body.powerup.name == "RainbowPowerup")):
+			and !(is_instance_valid(body.powerup) and body.powerup.name == "RainbowPowerup")
+			and !(is_instance_valid(body.state) and (body.state.name == "GroundPoundState" or body.state.name == "GroundPoundEndState"))):
 				start_pipe_enter_animation(body)
 		
 		for body in gp_area.get_overlapping_bodies(): 
 			if (global_rotation == 0 and body.is_grounded()
-			and body.get_input(Character.input_names.crouch, false) and get_parent().enabled
+			and body.get_input(Character.input_names.gp, false) and get_parent().enabled
 			# Rainbow Mario can't enter doors
 			and !(is_instance_valid(body.powerup) and body.powerup.name == "RainbowPowerup")
 			and is_instance_valid(body.state) and (body.state.name == "GroundPoundState" or body.state.name == "GroundPoundEndState")):
