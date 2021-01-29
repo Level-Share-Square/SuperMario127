@@ -21,7 +21,7 @@ func _activate_check(_delta):
 func is_state(state):
 	return character.state == character.get_state_node(state)
 	
-func _activated_update(delta):
+func _activated_update(delta):	
 	character.turbo_particles.process_material.initial_velocity = 1000 - abs(character.velocity.x)
 	
 	var normal = character.sprite.transform.x.normalized()
@@ -50,6 +50,11 @@ func _activated_update(delta):
 	elif character.inputs[1][0] and !character.inputs[0][0]:
 		character.facing_direction - 1
 	
+	if character.water_check.is_colliding() and !character.swimming:
+		if character.state == null:
+			character.velocity.y = 10
+		character.global_position.y = character.water_check.get_collision_point().y - 24
+
 func _update(_delta):
 	if character.is_grounded():
 		character.stamina = 100
@@ -76,11 +81,13 @@ func _general_update(_delta):
 		character.water_sprite.frame = 0
 		character.turbo_sound.play()
 		last_activated = true
+		character.water_check.enabled = true if !character.swimming else false
 	elif !activated and last_activated:
 		character.turbo_particles.emitting = false
 		character.water_sprite.frame = 0
 		character.turbo_sound.stop()
 		last_activated = false
+		character.water_check.enabled = false
 	
 	if !activated:
 		character.using_turbo = false

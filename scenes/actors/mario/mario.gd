@@ -29,6 +29,7 @@ onready var left_collision : CollisionShape2D = $LeftCollision
 onready var right_collision : CollisionShape2D = $RightCollision
 onready var ground_collision_dive : CollisionShape2D = $GroundCollisionDive
 onready var ground_check : RayCast2D = $GroundCheck
+onready var water_check : RayCast2D = $WaterGroundCheck
 onready var ground_check_dive : RayCast2D = $GroundCheckDive
 onready var left_check : RayCast2D = $LeftCheck
 onready var right_check : RayCast2D = $RightCheck
@@ -307,7 +308,7 @@ func is_grounded() -> bool:
 		raycast_node = ground_check_dive
 		raycast_node.cast_to = Vector2(0, 7.5)
 	
-	var new_is_grounded := raycast_node.is_colliding() and velocity.y >= 0
+	var new_is_grounded := (raycast_node.is_colliding() or water_check.is_colliding()) and velocity.y >= 0
 	if !new_is_grounded and prev_is_grounded and velocity.y > 0:
 		velocity.y = 0
 	

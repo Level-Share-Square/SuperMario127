@@ -31,6 +31,7 @@ func _start(_delta):
 	if abs(character.velocity.x) < 15:
 		character.velocity.x = character.facing_direction * 15
 	current_speed = abs(character.velocity.x)
+	character.water_check.enabled = true
 
 func _update(delta):
 	if character.is_grounded():
@@ -90,6 +91,11 @@ func _update(delta):
 		had_jumped = false
 	
 	current_speed = clamp(current_speed, -run_speed * 2, run_speed * 2)
+	
+	if character.water_check.is_colliding() and !character.swimming:
+		if !jumping:
+			character.velocity.y = 10
+		character.global_position.y = character.water_check.get_collision_point().y - 24
 
 func _general_update(delta):
 	if jump_buffer > 0:
@@ -105,6 +111,9 @@ func _general_update(delta):
 		ledge_buffer -= delta
 		if ledge_buffer < 0:
 			ledge_buffer = 0
+
+func _stop(_delta):
+	character.water_check.enabled = false
 
 func _stop_check(_delta):
 	return (character.powerup == null or character.powerup.id != 1) and character.is_grounded()
