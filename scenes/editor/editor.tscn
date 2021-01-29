@@ -1,4 +1,4 @@
-[gd_scene load_steps=556 format=2]
+[gd_scene load_steps=555 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -173,7 +173,6 @@
 [ext_resource path="res://assets/tiles/blue_gem_block/icon.png" type="Texture" id=171]
 [ext_resource path="res://assets/tiles/yellow_gem_block/icon.png" type="Texture" id=172]
 [ext_resource path="res://assets/tiles/green_gem_block/icon.png" type="Texture" id=173]
-[ext_resource path="res://scenes/actors/objects/arrow/arrow.png" type="Texture" id=174]
 [ext_resource path="res://scenes/actors/objects/arrow/preview.png" type="Texture" id=175]
 [ext_resource path="res://scenes/actors/objects/cave_tree/preview.png" type="Texture" id=176]
 [ext_resource path="res://scenes/actors/objects/cave_tree/icon.png" type="Texture" id=177]
@@ -2648,7 +2647,7 @@ is_object = true
 object_center = Vector2( 8, 8 )
 tile_mode_step = 16
 icon = ExtResource( 175 )
-preview = ExtResource( 174 )
+preview = ExtResource( 175 )
 
 [node name="MushroomTop" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 24 )
