@@ -6,15 +6,19 @@ onready var anim_player = $AnimationPlayer
 var tag := "default"
 var auto_activate := false
 var move_speed := 1.0
+var offset := 0.0
+var horizontal := false
 
 func _set_properties():
-	savable_properties = ["tag", "auto_activate", "move_speed"]
-	editable_properties = ["tag", "auto_activate", "move_speed"]
+	savable_properties = ["tag", "auto_activate", "move_speed", "offset", "horizontal"]
+	editable_properties = ["tag", "auto_activate", "move_speed", "offset", "horizontal"]
 
 func _set_property_values():
 	set_property("tag", tag)
 	set_property("auto_activate", auto_activate)
 	set_property("move_speed", move_speed)
+	set_property("offset", offset)
+	set_property("horizontal", horizontal)
 
 func _ready():
 	var _connect = use_area.connect("body_entered", self, "set_liquid_level")
@@ -28,6 +32,10 @@ func set_liquid_level(body):
 	for found_liquid in CurrentLevelData.level_data.vars.liquids:
 		if found_liquid[0] == tag.to_lower():
 			found_liquid[1].moving = true
-			found_liquid[1].match_level = global_position.y
+			var match_level = global_position.y
+			if horizontal:
+				match_level = global_position.x
+			found_liquid[1].match_level = match_level + offset
 			found_liquid[1].move_speed = move_speed
 			found_liquid[1].save_pos = Vector2(found_liquid[1].global_position.x, global_position.y) 
+			found_liquid[1].horizontal = horizontal

@@ -11,6 +11,7 @@ var last_color : Color
 var last_front : bool
 
 var moving : bool = false
+var horizontal : bool = false
 var match_level : float = 0.0
 var move_speed : float = 1.0
 
@@ -67,17 +68,25 @@ func change_size():
 func _physics_process(delta):
 	if !moving: return
 	
-	if global_position.y < match_level:
-		global_position.y += move_speed * 2
-		if global_position.y >= match_level:
-			moving = false
-			global_position.y = match_level
+	if !horizontal:
+		global_position.y = increment(global_position.y, match_level, move_speed * 2)
+	else:
+		global_position.x = increment(global_position.x, match_level, move_speed * 2)
 	
-	if global_position.y > match_level:
-		global_position.y -= move_speed * 2
-		if global_position.y <= match_level:
+func increment(value, target, speed):
+	if value < target:
+		value += speed
+		if value >= target:
 			moving = false
-			global_position.y = match_level
+			value = target
+	
+	if value > target:
+		value -= speed
+		if value <= target:
+			moving = false
+			value = target
+	
+	return value
 
 func _process(delta):
 	if Vector2(width, height) != last_size:
