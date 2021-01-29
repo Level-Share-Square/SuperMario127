@@ -20,7 +20,7 @@ var dragging_item : Node
 var display_preview_item = true
 
 onready var placeable_items : Node = get_node(placeable_items_path)
-onready var placeable_items_button_container : Sprite = get_node(placeable_items_button_container_path)
+onready var placeable_items_button_container : TextureRect = get_node(placeable_items_button_container_path)
 onready var item_preview : Sprite = get_node(item_preview_path)
 onready var shared : Node2D = get_node(shared_path)
 onready var object_settings : NinePatchRect = get_node(object_settings_path)

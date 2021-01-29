@@ -1,4 +1,4 @@
-extends Sprite
+extends TextureRect
 
 onready var PLACEABLE_ITEM_BUTTON = load("res://scenes/editor/placeable_item_button.tscn")
 export var number_of_boxes := 7
@@ -28,6 +28,7 @@ func _ready():
 		placeable_item_button.normal_color = normal_color
 		placeable_item_button.selected_color = selected_color
 		placeable_item_button.box_index = index
+		placeable_item_button.name = str(index)
 		if index == EditorSavedSettings.selected_box:
 			editor_node.selected_box = placeable_item_button
 		add_child(placeable_item_button)
