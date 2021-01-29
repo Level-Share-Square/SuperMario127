@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/menu/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -13,8 +13,11 @@ bg_color = Color( 0.6, 0.6, 0.6, 0 )
 size = 42
 font_data = ExtResource( 3 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "default"
+[sub_resource type="DynamicFont" id=3]
+size = 42
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel:rect_position")
 tracks/0/interp = 1
@@ -52,8 +55,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0.15, 0.15 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "trans_out_LevelsScreen_MainMenuScreen"
+[sub_resource type="Animation" id=5]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel:rect_position")
@@ -80,7 +82,7 @@ tracks/1/keys = {
 "values": [ Vector2( 370, -210 ), Vector2( 370, -210 ), Vector2( 370, 121 ), Vector2( 370, 106 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel:rect_position")
@@ -105,6 +107,62 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
 "values": [ Vector2( 370, 111 ), Vector2( 370, -210 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "trans_out_MainMenuScreen_MultiplayerOptions"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -309, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Logo:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.63728, 1 ),
+"update": 0,
+"values": [ Vector2( 370, 111 ), Vector2( 768, 111 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "trans_out_MultiplayerOptions_MainMenuScreen"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 0.5 ),
+"update": 0,
+"values": [ Vector2( -309, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Logo:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4, 0.6 ),
+"transitions": PoolRealArray( 0.5, 0.5, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 370, -210 ), Vector2( 370, -210 ), Vector2( 370, 121 ), Vector2( 370, 106 ) ]
 }
 
 [node name="MainMenuScreen" type="Control"]
@@ -136,25 +194,32 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 margin_left = 32.0
-margin_top = 70.0
-margin_right = 270.0
-margin_bottom = 362.0
+margin_top = 73.0
+margin_right = 277.0
+margin_bottom = 365.0
 custom_constants/separation = 12
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ButtonCampaign" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
-margin_right = 248.0
+margin_right = 245.0
 margin_bottom = 64.0
 custom_fonts/font = SubResource( 2 )
 disabled = true
 text = "Campaign"
 
-[node name="ButtonLevels" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
+[node name="ButtonTemplates" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 76.0
-margin_right = 248.0
+margin_right = 245.0
 margin_bottom = 140.0
+custom_fonts/font = SubResource( 3 )
+text = "Samples"
+
+[node name="ButtonLevels" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 152.0
+margin_right = 245.0
+margin_bottom = 216.0
 custom_fonts/font = SubResource( 2 )
 text = "Levels"
 
@@ -166,25 +231,26 @@ margin_bottom = 216.0
 custom_fonts/font = SubResource( 2 )
 text = "Editor"
 
-[node name="ButtonTemplates" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 152.0
-margin_right = 248.0
-margin_bottom = 216.0
+[node name="ButtonOptions" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 228.0
+margin_right = 245.0
+margin_bottom = 292.0
 custom_fonts/font = SubResource( 2 )
-text = "Samples"
+text = "Options"
 
 [node name="ButtonQuit" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 228.0
-margin_right = 248.0
-margin_bottom = 292.0
+visible = false
+margin_top = 304.0
+margin_right = 238.0
+margin_bottom = 368.0
 custom_fonts/font = SubResource( 2 )
 text = "Quit"
 
 [node name="Logo" type="TextureRect" parent="."]
 margin_left = 370.0
-margin_top = 106.0
+margin_top = 111.0
 margin_right = 2570.0
-margin_bottom = 1506.0
+margin_bottom = 1511.0
 rect_scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 4 )
 __meta__ = {
@@ -204,9 +270,11 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/default = SubResource( 3 )
-anims/trans_out_LevelsScreen_MainMenuScreen = SubResource( 4 )
-anims/trans_out_MainMenuScreen_LevelsScreen = SubResource( 5 )
+anims/default = SubResource( 4 )
+anims/trans_out_LevelsScreen_MainMenuScreen = SubResource( 5 )
+anims/trans_out_MainMenuScreen_LevelsScreen = SubResource( 6 )
+anims/trans_out_MainMenuScreen_MultiplayerOptions = SubResource( 7 )
+anims/trans_out_MultiplayerOptions_MainMenuScreen = SubResource( 8 )
 
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true

@@ -1,0 +1,334 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/player/controls_options.gd" type="Script" id=5]
+[ext_resource path="res://scenes/shared/control/player_selector_system.gd" type="Script" id=6]
+[ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=7]
+[ext_resource path="res://scenes/player/wing_toggle_button.gd" type="Script" id=8]
+[ext_resource path="res://scenes/player/presetloader_button.gd" type="Script" id=9]
+[ext_resource path="res://scenes/shared/ui/selector.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/shared/control/player_selection.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/player/window/ControlBindingWindow.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/fonts/sm256.ttf" type="DynamicFontData" id=13]
+
+[sub_resource type="DynamicFont" id=17]
+size = 28
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 13 )
+
+[sub_resource type="DynamicFont" id=18]
+size = 20
+outline_size = 2
+outline_color = Color( 0.054902, 0, 0.25098, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 14
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=3]
+PopupMenu/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+PopupMenu/colors/font_color_accel = Color( 0.7, 0.7, 0.7, 0.8 )
+PopupMenu/colors/font_color_disabled = Color( 0.4, 0.4, 0.4, 0.8 )
+PopupMenu/colors/font_color_hover = Color( 0.88, 0.88, 0.88, 1 )
+PopupMenu/constants/hseparation = 4
+PopupMenu/constants/vseparation = 4
+PopupMenu/fonts/font = SubResource( 2 )
+PopupMenu/icons/checked = null
+PopupMenu/icons/radio_checked = null
+PopupMenu/icons/radio_unchecked = null
+PopupMenu/icons/submenu = null
+PopupMenu/icons/unchecked = null
+PopupMenu/styles/hover = null
+PopupMenu/styles/labeled_separator_left = null
+PopupMenu/styles/labeled_separator_right = null
+PopupMenu/styles/panel = null
+PopupMenu/styles/panel_disabled = null
+PopupMenu/styles/separator = null
+
+[sub_resource type="StyleBoxFlat" id=4]
+content_margin_left = 11.0
+content_margin_right = 11.0
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.0705882, 0, 0.231373, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.15, 0.15, 0.15, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="DynamicFont" id=9]
+size = 18
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=10]
+outline_size = 2
+outline_color = Color( 0.054902, 0, 0.25098, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="StreamTexture" id=11]
+flags = 4
+load_path = "res://.import/window.png-70f8a0c1f0411efce833bd946d8ccc07.stex"
+
+[sub_resource type="StyleBoxFlat" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="DynamicFont" id=16]
+size = 24
+font_data = ExtResource( 1 )
+
+[node name="ControlsOptions" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+ignore_children = [ NodePath("Preset Selection"), NodePath("Description"), NodePath("ControlBindingWindow"), NodePath("PlayerSelectors"), NodePath("Legacy Wing Cap"), NodePath("TitleOnly") ]
+menu_buttons = [ NodePath("../Bottom/Buttons/ResumeButton"), NodePath("../Bottom/Buttons/RetryButton"), NodePath("../Bottom/Buttons/MultiplayerButton"), NodePath("../Bottom/Buttons/QuitButton") ]
+
+[node name="TitleOnly" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="TitleOnly"]
+margin_right = 768.0
+margin_bottom = 432.0
+color = Color( 0, 0, 0, 0.25098 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bottom" type="TextureRect" parent="TitleOnly"]
+margin_left = 770.0
+margin_top = 400.0
+margin_right = 3109.0
+margin_bottom = 610.0
+rect_rotation = 180.0
+rect_scale = Vector2( 0.335, 0.333 )
+texture = ExtResource( 7 )
+
+[node name="Bottom2" type="TextureRect" parent="TitleOnly/Bottom"]
+margin_left = 2311.0
+margin_top = 5.0
+margin_right = 4650.0
+margin_bottom = 215.0
+rect_rotation = 180.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" parent="TitleOnly/Bottom" instance=ExtResource( 3 )]
+margin_left = 2268.66
+margin_top = 120.12
+margin_right = 2396.66
+margin_bottom = 172.12
+rect_rotation = 180.0
+rect_scale = Vector2( 3, 3 )
+custom_fonts/font = SubResource( 17 )
+text = "Back"
+
+[node name="Top" type="TextureRect" parent="TitleOnly"]
+margin_right = 2305.0
+margin_bottom = 210.0
+rect_scale = Vector2( 0.335, 0.333 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Label" parent="TitleOnly/Top"]
+margin_left = 896.0
+margin_top = 56.0
+margin_right = 1370.0
+margin_bottom = 156.0
+custom_fonts/font = SubResource( 1 )
+text = "OPTIONS"
+
+[node name="Preset Selection" type="Control" parent="."]
+margin_left = 480.0
+margin_top = -13.0
+margin_right = 520.0
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Preset Selection"]
+margin_left = -446.0
+margin_top = 99.0
+margin_right = -327.0
+margin_bottom = 131.0
+custom_fonts/font = SubResource( 18 )
+text = "Preset:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Selector" parent="Preset Selection" instance=ExtResource( 10 )]
+margin_left = -301.0
+margin_right = -141.0
+margin_bottom = 134.0
+theme = SubResource( 3 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
+
+[node name="LoadButton" type="Button" parent="Preset Selection"]
+margin_left = -133.0
+margin_top = 92.0
+margin_right = -53.0
+margin_bottom = 137.0
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
+action_mode = 0
+text = "Load"
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="Preset Selection/LoadButton"]
+stream = ExtResource( 2 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="Preset Selection/LoadButton"]
+stream = ExtResource( 4 )
+volume_db = -10.0
+
+[node name="Legacy Wing Cap" type="Control" parent="."]
+margin_left = 932.5
+margin_top = -13.0
+margin_right = 972.5
+margin_bottom = 27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Legacy Wing Cap"]
+margin_left = -446.0
+margin_top = 99.0
+margin_right = -327.0
+margin_bottom = 131.0
+custom_fonts/font = SubResource( 18 )
+text = "Legacy Wing Cap:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToggleButton" type="Button" parent="Legacy Wing Cap"]
+margin_left = -265.0
+margin_top = 92.0
+margin_right = -185.0
+margin_bottom = 137.0
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
+action_mode = 0
+text = "On"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="Legacy Wing Cap/ToggleButton"]
+stream = ExtResource( 2 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="Legacy Wing Cap/ToggleButton"]
+stream = ExtResource( 4 )
+volume_db = -10.0
+
+[node name="Description" type="Label" parent="."]
+margin_left = 518.188
+margin_top = 283.163
+margin_right = 766.188
+margin_bottom = 324.163
+custom_fonts/font = SubResource( 10 )
+text = "Left Click: Override binding
+Right Click: Open binding options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ControlBindingWindow" parent="." instance=ExtResource( 12 )]
+texture = SubResource( 11 )
+
+[node name="PlayerSelectors" type="Control" parent="."]
+margin_left = 59.0
+margin_top = 16.0
+margin_right = 59.0
+margin_bottom = 16.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="P1" parent="PlayerSelectors" instance=ExtResource( 11 )]
+margin_bottom = 44.0
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 14 )
+custom_styles/disabled = SubResource( 15 )
+custom_fonts/font = SubResource( 16 )
+
+[node name="P2" parent="PlayerSelectors" instance=ExtResource( 11 )]
+margin_left = 76.0
+margin_right = 151.0
+margin_bottom = 44.0
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 14 )
+custom_styles/disabled = SubResource( 15 )
+custom_fonts/font = SubResource( 16 )
+text = "P2"

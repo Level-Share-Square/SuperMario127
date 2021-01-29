@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -13,22 +13,13 @@
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=11]
 [ext_resource path="res://scenes/player/viewports.gd" type="Script" id=12]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/player/connect_button.gd" type="Script" id=14]
-[ext_resource path="res://scenes/player/host_button.gd" type="Script" id=15]
-[ext_resource path="res://scenes/player/ip_address.gd" type="Script" id=16]
+[ext_resource path="res://scenes/shared/controls_options.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/shared/options.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/fonts/texteffect_number.tres" type="RichTextEffect" id=17]
 [ext_resource path="res://assets/fonts/texteffect_matrix.tres" type="RichTextEffect" id=18]
 [ext_resource path="res://assets/fonts/texteffect_pulse.tres" type="RichTextEffect" id=19]
 [ext_resource path="res://scenes/player/chat.gd" type="Script" id=20]
-[ext_resource path="res://scenes/player/disconnect_button.gd" type="Script" id=21]
 [ext_resource path="res://scenes/player/multiplayer_menu_button.gd" type="Script" id=22]
-[ext_resource path="res://scenes/player/controls_button.gd" type="Script" id=23]
-[ext_resource path="res://scenes/editor/assets/clickable_arrow_hover.png" type="Texture" id=24]
-[ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=25]
-[ext_resource path="res://scenes/player/num_of_plrs.gd" type="Script" id=26]
-[ext_resource path="res://scenes/player/player_1_char.gd" type="Script" id=27]
-[ext_resource path="res://scenes/player/player_2_char.gd" type="Script" id=28]
-[ext_resource path="res://scenes/player/confirm_button.gd" type="Script" id=29]
 [ext_resource path="res://scenes/actors/fludd_display/fludd_display.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/menu/levels_screen/ui/coin_icon.png" type="Texture" id=31]
 [ext_resource path="res://scenes/player/coin_counter.gd" type="Script" id=32]
@@ -36,24 +27,14 @@
 [ext_resource path="res://scenes/actors/health_display/health_display.tscn" type="PackedScene" id=34]
 [ext_resource path="res://scenes/menu/levels_screen/ui/red_coin_icon.png" type="Texture" id=35]
 [ext_resource path="res://scenes/player/red_coin_counter.gd" type="Script" id=36]
-[ext_resource path="res://scenes/player/window_scale.gd" type="Script" id=37]
-[ext_resource path="res://scenes/player/fps_cap.gd" type="Script" id=38]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=39]
 [ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
 [ext_resource path="res://scenes/player/fonts/shine_info_font.tres" type="DynamicFont" id=41]
-[ext_resource path="res://scenes/player/controls_options.gd" type="Script" id=42]
-[ext_resource path="res://scenes/player/presetloader_button.gd" type="Script" id=43]
 [ext_resource path="res://scenes/player/shine_shard_counter.gd" type="Script" id=44]
 [ext_resource path="res://scenes/menu/levels_screen/ui/shine_shard_icon.png" type="Texture" id=45]
-[ext_resource path="res://scenes/shared/ui/selector.tscn" type="PackedScene" id=46]
-[ext_resource path="res://scenes/player/window/ControlBindingWindow.tscn" type="PackedScene" id=47]
-[ext_resource path="res://scenes/shared/control/player_selection.tscn" type="PackedScene" id=48]
-[ext_resource path="res://scenes/shared/control/player_selector_system.gd" type="Script" id=49]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=50]
 [ext_resource path="res://scenes/player/fonts/level_name_font.tres" type="DynamicFont" id=51]
 [ext_resource path="res://scenes/player/fonts/level_name_backing_font.tres" type="DynamicFont" id=52]
-[ext_resource path="res://scenes/player/wing_toggle_button.gd" type="Script" id=53]
-[ext_resource path="res://scenes/player/show_timer.gd" type="Script" id=54]
 [ext_resource path="res://scenes/player/sign_text.gd" type="Script" id=55]
 [ext_resource path="res://scenes/actors/objects/sign/menu_open.wav" type="AudioStream" id=56]
 [ext_resource path="res://scenes/actors/objects/sign/menu_close.wav" type="AudioStream" id=57]
@@ -114,81 +95,6 @@ size = 76
 font_data = ExtResource( 7 )
 
 [sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 5
-border_width_right = 5
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
-[sub_resource type="DynamicFont" id=12]
-size = 20
-font_data = ExtResource( 7 )
-
-[sub_resource type="StyleBoxFlat" id=13]
-bg_color = Color( 0.15, 0.15, 0.15, 1 )
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-
-[sub_resource type="DynamicFont" id=14]
-size = 27
-font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=15]
-size = 24
-outline_size = 2
-outline_color = Color( 0.054902, 0, 0.25098, 1 )
-font_data = ExtResource( 7 )
-
-[sub_resource type="StyleBoxFlat" id=16]
-bg_color = Color( 0.0705882, 0, 0.231373, 1 )
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
-[sub_resource type="StyleBoxFlat" id=17]
-bg_color = Color( 0, 0.0470588, 0.317647, 1 )
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
-[sub_resource type="StyleBoxFlat" id=18]
-content_margin_left = 16.0
-content_margin_right = 16.0
-content_margin_top = 8.0
-content_margin_bottom = 8.0
-bg_color = Color( 0.112, 0.1432, 0.32, 1 )
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-
-[sub_resource type="DynamicFont" id=19]
-size = 24
-font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=20]
-size = 20
-outline_size = 2
-outline_color = Color( 0.054902, 0, 0.25098, 1 )
-font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=21]
-size = 18
-font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=22]
-outline_size = 2
-outline_color = Color( 0.054902, 0, 0.25098, 1 )
-font_data = ExtResource( 7 )
-
-[sub_resource type="StyleBoxFlat" id=23]
 bg_color = Color( 0.133333, 0.145098, 0.196078, 0.835294 )
 border_width_left = 4
 border_width_top = 4
@@ -204,12 +110,12 @@ expand_margin_right = 1.0
 expand_margin_top = 1.0
 expand_margin_bottom = 1.0
 
-[sub_resource type="DynamicFont" id=24]
+[sub_resource type="DynamicFont" id=12]
 size = 32
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=25]
+[sub_resource type="DynamicFont" id=13]
 size = 32
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 7 )
@@ -689,660 +595,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MultiplayerOptions" type="Control" parent="UI/PauseScreen"]
+[node name="MultiplayerOptions" parent="UI/PauseScreen" instance=ExtResource( 15 )]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="IpAddress" type="LineEdit" parent="UI/PauseScreen/MultiplayerOptions"]
+[node name="ControlsOptions" parent="UI/PauseScreen" instance=ExtResource( 14 )]
 visible = false
-margin_left = 79.8377
-margin_top = 93.2382
-margin_right = 292.838
-margin_bottom = 135.238
-custom_styles/normal = SubResource( 11 )
-custom_fonts/font = SubResource( 12 )
-custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
-context_menu_enabled = false
-placeholder_text = "IP Address"
-placeholder_alpha = 0.35
-script = ExtResource( 16 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ConnectButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
-visible = false
-margin_left = 79.8377
-margin_top = 148.406
-margin_right = 292.838
-margin_bottom = 192.406
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/disabled = SubResource( 13 )
-custom_styles/normal = SubResource( 9 )
-custom_fonts/font = SubResource( 14 )
-action_mode = 0
-text = "Connect"
-script = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/ConnectButton"]
-stream = ExtResource( 9 )
-volume_db = -10.0
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/ConnectButton"]
-stream = ExtResource( 11 )
-volume_db = -10.0
-
-[node name="DisconnectButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
-visible = false
-margin_left = 79.8377
-margin_top = 258.731
-margin_right = 292.838
-margin_bottom = 302.731
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/disabled = SubResource( 13 )
-custom_styles/normal = SubResource( 9 )
-custom_fonts/font = SubResource( 14 )
-action_mode = 0
-text = "Disconnect"
-script = ExtResource( 21 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-pause_screen = NodePath("../..")
-
-[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/DisconnectButton"]
-stream = ExtResource( 9 )
-volume_db = -10.0
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/DisconnectButton"]
-stream = ExtResource( 11 )
-volume_db = -10.0
-
-[node name="ConfirmButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
-margin_left = 419.0
-margin_top = 236.405
-margin_right = 748.0
-margin_bottom = 280.405
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/disabled = SubResource( 13 )
-custom_styles/normal = SubResource( 9 )
-custom_fonts/font = SubResource( 14 )
-action_mode = 0
-text = "Confirm"
-script = ExtResource( 29 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-num_of_players = NodePath("../NumberOfPlayers")
-player1_char = NodePath("../Player1Char")
-player2_char = NodePath("../Player2Char")
-character_node_path = NodePath("../../../../Viewports/ViewportContainer/Viewport/World/Character")
-
-[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/ConfirmButton"]
-stream = ExtResource( 9 )
-volume_db = -10.0
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/ConfirmButton"]
-stream = ExtResource( 11 )
-volume_db = -10.0
-
-[node name="ControlsButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
-margin_left = 27.0
-margin_top = 236.405
-margin_right = 356.0
-margin_bottom = 280.405
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/disabled = SubResource( 13 )
-custom_styles/normal = SubResource( 9 )
-custom_fonts/font = SubResource( 14 )
-action_mode = 0
-text = "Controls"
-script = ExtResource( 23 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/ControlsButton"]
-stream = ExtResource( 9 )
-volume_db = -10.0
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/ControlsButton"]
-stream = ExtResource( 11 )
-volume_db = -10.0
-
-[node name="HostButton" type="Button" parent="UI/PauseScreen/MultiplayerOptions"]
-visible = false
-margin_left = 79.8377
-margin_top = 204.342
-margin_right = 292.838
-margin_bottom = 248.342
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/disabled = SubResource( 13 )
-custom_styles/normal = SubResource( 9 )
-custom_fonts/font = SubResource( 14 )
-action_mode = 0
-text = "Host"
-script = ExtResource( 15 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/HostButton"]
-stream = ExtResource( 9 )
-volume_db = -10.0
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/MultiplayerOptions/HostButton"]
-stream = ExtResource( 11 )
-volume_db = -10.0
-
-[node name="WindowScale" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
-margin_top = -28.0
-margin_right = 40.0
-margin_bottom = 12.0
-script = ExtResource( 37 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/WindowScale"]
-margin_left = 271.654
-margin_top = 159.587
-margin_right = 399.654
-margin_bottom = 287.587
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 25 )
-texture_pressed = ExtResource( 25 )
-texture_hover = ExtResource( 24 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/WindowScale"]
-margin_left = 233.0
-margin_top = 185.296
-margin_right = 361.0
-margin_bottom = 313.296
-rect_rotation = 180.0
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 25 )
-texture_pressed = ExtResource( 25 )
-texture_hover = ExtResource( 24 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/WindowScale"]
-margin_left = 40.0
-margin_top = 157.796
-margin_right = 202.0
-margin_bottom = 189.796
-custom_fonts/font = SubResource( 15 )
-text = "Window Scale:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/WindowScale"]
-margin_left = 234.0
-margin_top = 157.796
-margin_right = 272.0
-margin_bottom = 189.796
-custom_fonts/font = SubResource( 15 )
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FPSLock" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
-margin_top = 7.0
-margin_right = 40.0
-margin_bottom = 47.0
-script = ExtResource( 38 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/FPSLock"]
-margin_left = 271.654
-margin_top = 159.587
-margin_right = 399.654
-margin_bottom = 287.587
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 25 )
-texture_pressed = ExtResource( 25 )
-texture_hover = ExtResource( 24 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/FPSLock"]
-margin_left = 233.0
-margin_top = 185.296
-margin_right = 361.0
-margin_bottom = 313.296
-rect_rotation = 180.0
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 25 )
-texture_pressed = ExtResource( 25 )
-texture_hover = ExtResource( 24 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/FPSLock"]
-margin_left = 40.0
-margin_top = 157.796
-margin_right = 202.0
-margin_bottom = 189.796
-custom_fonts/font = SubResource( 15 )
-text = "FPS Cap:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/FPSLock"]
-margin_left = 234.0
-margin_top = 157.796
-margin_right = 272.0
-margin_bottom = 189.796
-custom_fonts/font = SubResource( 15 )
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ShowTimer" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
-margin_top = 43.0
-margin_right = 40.0
-margin_bottom = 83.0
-script = ExtResource( 54 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Box" type="Button" parent="UI/PauseScreen/MultiplayerOptions/ShowTimer"]
-margin_left = 202.0
-margin_top = 159.0
-margin_right = 307.0
-margin_bottom = 189.0
-focus_mode = 0
-custom_styles/hover = SubResource( 16 )
-custom_styles/pressed = SubResource( 17 )
-custom_styles/focus = SubResource( 16 )
-custom_styles/disabled = SubResource( 18 )
-custom_styles/normal = SubResource( 17 )
-custom_fonts/font = SubResource( 19 )
-action_mode = 0
-enabled_focus_mode = 0
-text = "False"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/ShowTimer"]
-margin_left = 40.0
-margin_top = 157.796
-margin_right = 202.0
-margin_bottom = 189.796
-custom_fonts/font = SubResource( 15 )
-text = "Show Timer:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NumberOfPlayers" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
-margin_top = 50.0
-margin_right = 40.0
-margin_bottom = 90.0
-script = ExtResource( 26 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
-margin_left = 722.654
-margin_top = 82.196
-margin_right = 850.654
-margin_bottom = 210.196
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 25 )
-texture_pressed = ExtResource( 25 )
-texture_hover = ExtResource( 24 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
-margin_left = 684.0
-margin_top = 107.905
-margin_right = 812.0
-margin_bottom = 235.905
-rect_rotation = 180.0
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 25 )
-texture_pressed = ExtResource( 25 )
-texture_hover = ExtResource( 24 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
-margin_left = 547.359
-margin_top = 80.391
-margin_right = 653.359
-margin_bottom = 112.391
-custom_fonts/font = SubResource( 15 )
-text = "Players:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/NumberOfPlayers"]
-margin_left = 685.0
-margin_top = 80.405
-margin_right = 723.0
-margin_bottom = 112.405
-custom_fonts/font = SubResource( 15 )
-text = "1"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Player1Char" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
-margin_top = 85.0
-margin_right = 40.0
-margin_bottom = 125.0
-script = ExtResource( 27 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
-margin_left = 722.654
-margin_top = 82.196
-margin_right = 850.654
-margin_bottom = 210.196
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 25 )
-texture_pressed = ExtResource( 25 )
-texture_hover = ExtResource( 24 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
-margin_left = 684.0
-margin_top = 107.905
-margin_right = 812.0
-margin_bottom = 235.905
-rect_rotation = 180.0
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 25 )
-texture_pressed = ExtResource( 25 )
-texture_hover = ExtResource( 24 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
-margin_left = 422.359
-margin_top = 79.405
-margin_right = 646.359
-margin_bottom = 111.405
-custom_fonts/font = SubResource( 15 )
-text = "Player 1 Character:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player1Char"]
-margin_left = 685.0
-margin_top = 80.405
-margin_right = 723.0
-margin_bottom = 111.405
-custom_fonts/font = SubResource( 15 )
-text = "M"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Player2Char" type="Control" parent="UI/PauseScreen/MultiplayerOptions"]
-margin_top = 120.0
-margin_right = 40.0
-margin_bottom = 160.0
-script = ExtResource( 28 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Right" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
-margin_left = 722.654
-margin_top = 82.196
-margin_right = 850.654
-margin_bottom = 210.196
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 25 )
-texture_pressed = ExtResource( 25 )
-texture_hover = ExtResource( 24 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Left" type="TextureButton" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
-margin_left = 684.0
-margin_top = 107.905
-margin_right = 812.0
-margin_bottom = 235.905
-rect_rotation = 180.0
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 25 )
-texture_pressed = ExtResource( 25 )
-texture_hover = ExtResource( 24 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
-margin_left = 419.0
-margin_top = 78.589
-margin_right = 646.0
-margin_bottom = 110.589
-custom_fonts/font = SubResource( 15 )
-text = "Player 2 Character:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Value" type="Label" parent="UI/PauseScreen/MultiplayerOptions/Player2Char"]
-margin_left = 685.0
-margin_top = 80.405
-margin_right = 723.0
-margin_bottom = 111.405
-custom_fonts/font = SubResource( 15 )
-text = "L"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ControlsOptions" type="Control" parent="UI/PauseScreen"]
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 42 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-ignore_children = [ NodePath("Preset Selection"), NodePath("Description"), NodePath("ControlBindingWindow"), NodePath("PlayerSelectors"), NodePath("Legacy Wing Cap") ]
-menu_buttons = [ NodePath("../Bottom/Buttons/ResumeButton"), NodePath("../Bottom/Buttons/RetryButton"), NodePath("../Bottom/Buttons/MultiplayerButton"), NodePath("../Bottom/Buttons/QuitButton") ]
-
-[node name="Preset Selection" type="Control" parent="UI/PauseScreen/ControlsOptions"]
-margin_left = 480.0
-margin_top = -13.0
-margin_right = 520.0
-margin_bottom = 27.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Preset Selection"]
-margin_left = -446.0
-margin_top = 99.0
-margin_right = -327.0
-margin_bottom = 131.0
-custom_fonts/font = SubResource( 20 )
-text = "Preset:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Selector" parent="UI/PauseScreen/ControlsOptions/Preset Selection" instance=ExtResource( 46 )]
-margin_left = -301.0
-margin_right = -141.0
-margin_bottom = 134.0
-
-[node name="LoadButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Preset Selection"]
-margin_left = -133.0
-margin_top = 92.0
-margin_right = -53.0
-margin_bottom = 137.0
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/disabled = SubResource( 13 )
-custom_styles/normal = SubResource( 9 )
-custom_fonts/font = SubResource( 21 )
-action_mode = 0
-text = "Load"
-script = ExtResource( 43 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Preset Selection/LoadButton"]
-stream = ExtResource( 9 )
-volume_db = -10.0
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Preset Selection/LoadButton"]
-stream = ExtResource( 11 )
-volume_db = -10.0
-
-[node name="Legacy Wing Cap" type="Control" parent="UI/PauseScreen/ControlsOptions"]
-margin_left = 932.5
-margin_top = -13.0
-margin_right = 972.5
-margin_bottom = 27.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="UI/PauseScreen/ControlsOptions/Legacy Wing Cap"]
-margin_left = -446.0
-margin_top = 99.0
-margin_right = -327.0
-margin_bottom = 131.0
-custom_fonts/font = SubResource( 20 )
-text = "Legacy Wing Cap:"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ToggleButton" type="Button" parent="UI/PauseScreen/ControlsOptions/Legacy Wing Cap"]
-margin_left = -265.0
-margin_top = 92.0
-margin_right = -185.0
-margin_bottom = 137.0
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/disabled = SubResource( 13 )
-custom_styles/normal = SubResource( 9 )
-custom_fonts/font = SubResource( 21 )
-action_mode = 0
-text = "On"
-script = ExtResource( 53 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Legacy Wing Cap/ToggleButton"]
-stream = ExtResource( 9 )
-volume_db = -10.0
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/ControlsOptions/Legacy Wing Cap/ToggleButton"]
-stream = ExtResource( 11 )
-volume_db = -10.0
-
-[node name="Description" type="Label" parent="UI/PauseScreen/ControlsOptions"]
-margin_left = 518.188
-margin_top = 283.163
-margin_right = 766.188
-margin_bottom = 324.163
-custom_fonts/font = SubResource( 22 )
-text = "Left Click: Override binding
-Right Click: Open binding options"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ControlBindingWindow" parent="UI/PauseScreen/ControlsOptions" instance=ExtResource( 47 )]
-
-[node name="PlayerSelectors" type="Control" parent="UI/PauseScreen/ControlsOptions"]
-margin_left = 59.0
-margin_top = 16.0
-margin_right = 59.0
-margin_bottom = 16.0
-script = ExtResource( 49 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="P1" parent="UI/PauseScreen/ControlsOptions/PlayerSelectors" instance=ExtResource( 48 )]
-margin_top = 0.0
-margin_bottom = 44.0
-
-[node name="P2" parent="UI/PauseScreen/ControlsOptions/PlayerSelectors" instance=ExtResource( 48 )]
-margin_left = 76.0
-margin_top = 0.0
-margin_right = 151.0
-margin_bottom = 44.0
-text = "P2"
 
 [node name="SignText" type="Control" parent="UI"]
 pause_mode = 2
+visible = false
 margin_left = 161.0
 margin_top = 66.0
 margin_right = 611.0
@@ -1357,7 +618,7 @@ __meta__ = {
 margin_right = 450.0
 margin_bottom = 300.0
 mouse_filter = 2
-custom_styles/panel = SubResource( 23 )
+custom_styles/panel = SubResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1370,7 +631,7 @@ margin_bottom = 500.0
 rect_scale = Vector2( 0.5, 0.5 )
 rect_clip_content = false
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 24 )
+custom_fonts/normal_font = SubResource( 12 )
 bbcode_enabled = true
 bbcode_text = "[center]L is real 2401, Mario Peach and Bowser, (not) By Runouw[/center]"
 text = "L is real 2401, Mario Peach and Bowser, (not) By Runouw"
@@ -1387,7 +648,7 @@ margin_bottom = 315.0
 rect_scale = Vector2( 0.5, 0.5 )
 rect_clip_content = false
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 25 )
+custom_fonts/normal_font = SubResource( 13 )
 bbcode_enabled = true
 bbcode_text = "[center]Press :interactinput: to close[/center]"
 text = "Press :interactinput: to close"

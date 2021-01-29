@@ -54,10 +54,10 @@ func kill(body):
 			knockback_velocity.y = -80
 			knockback(body.global_position)
 
-func attacked(area):
+func attacked(new_area):
 	if !enabled: return
 
-	if area.has_method("is_hurt_area"):
+	if new_area.has_method("is_hurt_area"):
 		knockback_velocity.y = -80
 		knockback(area.global_position)
 

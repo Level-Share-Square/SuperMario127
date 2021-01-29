@@ -29,6 +29,8 @@ static func load():
 		if data.has("gameVersion"):
 			if data["gameVersion"] != PlayerSettings.game_version:
 				SavedLevels.wipe_template_levels()
+				if data.has("windowScale"):
+					data["windowScale"] = 1
 				save()
 		else:
 			SavedLevels.wipe_template_levels()

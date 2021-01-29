@@ -13,6 +13,8 @@ onready var splash_screen : Screen = $InactiveScreens/SplashScreen
 onready var title_screen : Screen = $InactiveScreens/TitleScreen
 onready var main_menu_screen : Screen = $InactiveScreens/MainMenuScreen
 onready var levels_screen : Screen = $InactiveScreens/LevelsScreen
+onready var options_screen : Screen = $InactiveScreens/MultiplayerOptions
+onready var controls_screen : Screen = $InactiveScreens/ControlsOptions
 onready var shine_select_screen : Screen = $InactiveScreens/ShineSelectScreen
 
 # other

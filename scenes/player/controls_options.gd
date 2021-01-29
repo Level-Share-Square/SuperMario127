@@ -1,9 +1,11 @@
-extends Node
+extends Screen
 
 export (Array, NodePath) var ignore_children
 export (Array, NodePath) var menu_buttons
 
 onready var player_selector_manager = get_node("PlayerSelectors")
+onready var title_only = get_node("TitleOnly")
+onready var back_button = get_node("TitleOnly/Bottom/BackButton")
 
 var control_info := [
 	#   ID       label        
@@ -63,6 +65,15 @@ func _ready():
 	
 	# Fix z index of the control binding window
 	move_child($ControlBindingWindow, get_child_count() - 1)
+	
+	# Title screen stuff
+	if "mode" in get_tree().get_current_scene():
+		title_only.queue_free()
+	else:
+		back_button.connect("pressed", self, "go_back")
+
+func go_back():
+	emit_signal("screen_change", "controls_screen", "options_screen")
 
 func _input(event):
 	if event is InputEventMouseMotion or event is InputEventScreenDrag:

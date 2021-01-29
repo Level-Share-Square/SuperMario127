@@ -19,7 +19,7 @@ func _pressed():
 	# Not a super elegant solution, but rn it doesn't really matter
 	PlayerSettings.legacy_wing_cap = (selector.text == "Legacy")
 	controls_options.get_node("Legacy Wing Cap").get_node("ToggleButton").update_text()
-	
+
 	for children in get_parent().get_parent().get_children():
 		if !(children.get_name() in controls_options.ignore_children):
 			var button : Button = children.get_node("KeyButton")
