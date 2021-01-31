@@ -1,0 +1,13 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/actors/objects/airship_window/airship_window.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/castle_window/castle_window.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/airship_window/palettes/2.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/airship_window/palettes/1.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/airship_window/palettes/0.png" type="Texture" id=5]
+
+[node name="AirshipWindow" type="Sprite"]
+z_index = 9
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+palette_textures = [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ]

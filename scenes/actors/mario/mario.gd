@@ -42,8 +42,10 @@ onready var burn_particles : Particles2D = $BurnParticles
 onready var terrain_detector : Area2D = $TerrainDetector
 onready var platform_detector : Area2D = $PlatformDetector
 onready var spin_area : Area2D = $SpinArea
+onready var spin_swim_area : Area2D = $SpinSwimArea
 onready var player_collision_shape : CollisionShape2D = $PlayerCollision/CollisionShape2D
 onready var spin_area_shape : CollisionShape2D = $SpinArea/CollisionShape2D
+onready var spin_swim_area_shape : CollisionShape2D = $SpinSwimArea/CollisionShape2D
 onready var fludd_sound : AudioStreamPlayer = $FluddSound
 onready var turbo_sound : AudioStreamPlayer = $TurboFluddSound
 onready var fludd_boost_sound : AudioStreamPlayer = $FluddBoostSound
@@ -526,14 +528,16 @@ func _physics_process(delta: float) -> void:
 		invulnerable_frames -= 1
 	
 	var is_in_water = water_detector.get_overlapping_areas().size() > 0
-	if is_in_water and max_aerial_velocity == 640:
+	if is_in_water and (max_aerial_velocity == 640 or gravity_scale == 1):
 		gravity_scale = 0.5
 		max_aerial_velocity = 320
-	elif !is_in_water and max_aerial_velocity == 320:
+	elif !is_in_water and (max_aerial_velocity == 320 or gravity_scale == 0.5):
 		gravity_scale = 1
 		max_aerial_velocity = 640
 		
 	if is_in_water:
+		var fuel_increment = 0.075
+		fuel = clamp(fuel + fuel_increment, 0, 100)
 		if player_id == 0 and music.has_water and !music.play_water:
 			music.toggle_underwater_music(true)
 	else:
@@ -621,7 +625,7 @@ func _physics_process(delta: float) -> void:
 	if movable and (!is_instance_valid(state) or !state.override_rotation) and (!is_instance_valid(nozzle) or !nozzle.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
 		var sprite_rotation = 0
 		var sprite_offset = Vector2()
-		if is_grounded():
+		if ground_check.is_colliding():
 			var normal = ground_check.get_collision_normal()
 			sprite_rotation = (atan2(normal.y, normal.x) + (PI/2)) / 2
 			sprite_offset = Vector2(rad2deg(sprite_rotation) / 10, -abs(rad2deg(sprite_rotation) / 10))

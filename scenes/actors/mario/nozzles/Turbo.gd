@@ -4,7 +4,7 @@ class_name TurboNozzle
 
 export var boost_power := 1000
 export var depletion := 100
-export var fuel_depletion := 0.025
+export var fuel_depletion := 0.037
 var last_activated = false
 var last_charged = false
 var last_state = null
@@ -40,7 +40,7 @@ func _activated_update(delta):
 			direction = 1
 		character.damage_with_knockback(character.position + Vector2(direction * 8, 0), 0, "Hit", 0)
 	
-	if character.fuel > 0 and !character.swimming:
+	if character.fuel > 0 and !character.water_detector.get_overlapping_areas().size() > 0:
 		character.fuel -= fuel_depletion
 		if character.fuel <= 0:
 			character.fuel = 0
@@ -50,7 +50,8 @@ func _activated_update(delta):
 	elif character.inputs[1][0] and !character.inputs[0][0]:
 		character.facing_direction - 1
 	
-	if character.water_check.is_colliding() and !character.swimming:
+	character.water_check.enabled = true if !character.water_detector.get_overlapping_areas().size() > 0 else false
+	if character.water_check.is_colliding() and !character.water_detector.get_overlapping_areas().size() > 0:
 		if character.state == null:
 			character.velocity.y = 10
 		character.global_position.y = character.water_check.get_collision_point().y - 24
@@ -81,7 +82,6 @@ func _general_update(_delta):
 		character.water_sprite.frame = 0
 		character.turbo_sound.play()
 		last_activated = true
-		character.water_check.enabled = true if !character.swimming else false
 	elif !activated and last_activated:
 		character.turbo_particles.emitting = false
 		character.water_sprite.frame = 0

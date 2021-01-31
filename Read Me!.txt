@@ -1,4 +1,4 @@
-Thank you for downloading the Super Mario 127 0.6.1 demo! 
+Thank you for downloading the Super Mario 127 0.7.0 demo! 
 This game is still in development, so expect bugs.
 
 Default controls:
@@ -14,27 +14,6 @@ Up - Ground Pound Cancel
 P - Pause
 M - Mute Music
 3 - Toggle Photo Mode
-Alt + Enter - Fullscreen
-
-Editor:
-WASD Keys - Move Editor Camera
-Left Click - Place Tiles/Objects
-Right Click - Delete Tiles/Objects
-
-T - Switch Between Play and Edit
-I - Switch Layer View Mode
-L - Switch Layers
-H - Switch Object Placement Mode
-Hold CTRL - Precise Object Placement
-R - Reload Current Level
-R (while hovering over object) - Rotate Object
-Y (while hovering over object) - Flip Object Vertically
-F (while hovering over object) - Flip Object Horizontally
-K (while hovering over object) - Enable/Disable Object
-Shift + Left Click (while hovering over object) Duplicate Object
-Mouse Wheel (while hovering over certain objects) - Change Special Property
-
-You can access in-game options using the pause menu (P).
 
 Credits:
 SuperMakerPlayer - Project Lead, Programmer
@@ -64,11 +43,13 @@ YoshiDev - Cool Person
 
 Template Levels:
 Tutorial Hills - NingiGamer64
+Waterfloat Galaxy - Blocko
 Prism Star Galaxy - Asterocrat
 Ghost Pepper Challenge - Tabs
 Snowside Resort - Blocko
 Rocketside Plaza - Blocko
 The Dungeon of 4 Kingdoms - Tabs
+Glide Feather Challenge - Tabs
 Green Demon Cave - NingiGamer64
 
 

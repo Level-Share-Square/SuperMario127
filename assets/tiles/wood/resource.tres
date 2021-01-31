@@ -8,6 +8,6 @@
 script = ExtResource( 1 )
 block_tile_id = 29
 slab_tile_id = 29
-left_slope_tile_id = 29
-right_slope_tile_id = 29
+left_slope_tile_id = 80
+right_slope_tile_id = 79
 palettes = [ ExtResource( 2 ), ExtResource( 3 ) ]

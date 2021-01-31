@@ -1,6 +1,7 @@
 extends GameObject
 
 var is_background = false
+export(Array, Texture) var palette_textures
 
 func _set_properties():
 	savable_properties = ["is_background"]
@@ -16,3 +17,6 @@ func _process(delta):
 	else:
 		self_modulate = Color(1, 1, 1) 
 		z_index = 10 if !is_preview else 0
+
+	if palette != 0:
+		self.texture = palette_textures[palette - 1]

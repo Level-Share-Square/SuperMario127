@@ -13,8 +13,6 @@ var boost_buffer = 0.0
 
 var boost_disable_time = 0.0
 
-var fuel_increment = 0.05
-
 var max_enter_fall_speed = 160
 var ground_pound_enter_speed = 350
 var old_gravity_scale = 1
@@ -53,7 +51,6 @@ func _update(delta):
 	var move_vector = Vector2()
 	var sprite = character.sprite
 	
-	character.fuel = clamp(character.fuel + fuel_increment, 0, 100)
 	character.stamina = 100
 	
 	if character.inputs[character.input_names.left][0]:
@@ -74,7 +71,7 @@ func _update(delta):
 		swim_speed = boost_speed
 		boost_buffer = 0
 		boost_time_left = 0.75
-		character.spin_area_shape.disabled = false
+		character.spin_swim_area_shape.disabled = false
 		character.sound_player.set_swim_playing(false)
 		character.bubble_particles_left.emitting = true
 		character.bubble_particles_right.emitting = true
@@ -157,5 +154,5 @@ func _stop(delta):
 	character.set_state_by_name("BounceState", delta)
 
 func _stop_check(_delta):
-	return character.water_detector.get_overlapping_areas().size() <= 0
+	return character.water_detector.get_overlapping_areas().size() <= 0 or (character.powerup != null and character.powerup.id == 0)
 

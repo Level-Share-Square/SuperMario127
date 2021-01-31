@@ -53,8 +53,9 @@ script = ExtResource( 8 )
 [node name="ControlsOptions" parent="InactiveScreens" instance=ExtResource( 10 )]
 
 [node name="ActiveScreens" type="Control" parent="."]
+anchor_top = -0.00103124
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.998969
 margin_top = -0.840912
 margin_bottom = -0.840912
 __meta__ = {

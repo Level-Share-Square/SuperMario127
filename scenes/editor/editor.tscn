@@ -1,4 +1,4 @@
-[gd_scene load_steps=558 format=2]
+[gd_scene load_steps=580 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -531,7 +531,29 @@
 [ext_resource path="res://scenes/actors/objects/barrel_cactus/palettes/2/icon.png" type="Texture" id=529]
 [ext_resource path="res://scenes/actors/objects/barrel_cactus/palettes/3/barrel_cactus.png" type="Texture" id=530]
 [ext_resource path="res://scenes/editor/window/HelpWindow.tscn" type="PackedScene" id=531]
+[ext_resource path="res://assets/tiles/cabin_window/3.png" type="Texture" id=532]
 [ext_resource path="res://scenes/editor/tools_panel.gd" type="Script" id=533]
+[ext_resource path="res://assets/tiles/cabin_window/1.png" type="Texture" id=534]
+[ext_resource path="res://assets/tiles/cabin_window/2.png" type="Texture" id=535]
+[ext_resource path="res://assets/tiles/cabin_window/cabin_window.png" type="Texture" id=536]
+[ext_resource path="res://scenes/actors/objects/large_palm_tree/palettes/2/icon.png" type="Texture" id=537]
+[ext_resource path="res://scenes/actors/objects/large_palm_tree/palettes/1/icon.png" type="Texture" id=538]
+[ext_resource path="res://scenes/actors/objects/large_palm_tree/preview.png" type="Texture" id=539]
+[ext_resource path="res://scenes/actors/objects/large_palm_tree/palettes/3/icon.png" type="Texture" id=540]
+[ext_resource path="res://scenes/actors/objects/large_palm_tree/icon.png" type="Texture" id=541]
+[ext_resource path="res://scenes/actors/objects/large_palm_tree/palettes/2/preview.png" type="Texture" id=542]
+[ext_resource path="res://scenes/actors/objects/large_palm_tree/palettes/1/preview.png" type="Texture" id=543]
+[ext_resource path="res://scenes/actors/objects/large_palm_tree/palettes/3/preview.png" type="Texture" id=544]
+[ext_resource path="res://assets/tiles/wood/icon_slopeR.png" type="Texture" id=545]
+[ext_resource path="res://assets/tiles/wood/icon_slopeL.png" type="Texture" id=546]
+[ext_resource path="res://assets/tiles/wood/palette_icons/1_slopeL.png" type="Texture" id=547]
+[ext_resource path="res://assets/tiles/wood/palette_icons/2_slopeL.png" type="Texture" id=548]
+[ext_resource path="res://assets/tiles/wood/palette_icons/1_slopeR.png" type="Texture" id=549]
+[ext_resource path="res://assets/tiles/wood/palette_icons/2_slopeR.png" type="Texture" id=550]
+[ext_resource path="res://scenes/actors/objects/airship_window/airship_window.png" type="Texture" id=551]
+[ext_resource path="res://scenes/actors/objects/airship_window/palettes/2.png" type="Texture" id=552]
+[ext_resource path="res://scenes/actors/objects/airship_window/palettes/1.png" type="Texture" id=553]
+[ext_resource path="res://scenes/actors/objects/airship_window/palettes/0.png" type="Texture" id=554]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -603,7 +625,7 @@ WindowDialog/styles/panel = SubResource( 10 )
 size = 24
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=17]
+[sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 1, 1, 1, 0.501961 )
 border_width_left = 3
 border_width_top = 3
@@ -615,26 +637,26 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="DynamicFont" id=18]
+[sub_resource type="DynamicFont" id=14]
 size = 64
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=19]
+[sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0.615686, 0.615686, 0.615686, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 
-[sub_resource type="StyleBoxFlat" id=20]
+[sub_resource type="StyleBoxFlat" id=16]
 bg_color = Color( 0.905882, 0.905882, 0.905882, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 
-[sub_resource type="StyleBoxFlat" id=21]
+[sub_resource type="StyleBoxFlat" id=17]
 bg_color = Color( 0.439216, 0.439216, 0.439216, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 
-[sub_resource type="StyleBoxFlat" id=22]
+[sub_resource type="StyleBoxFlat" id=18]
 content_margin_top = 12.0
 bg_color = Color( 0.254902, 0.254902, 0.254902, 1 )
 corner_radius_top_left = 8
@@ -642,23 +664,23 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id=23]
+[sub_resource type="StyleBoxFlat" id=19]
 content_margin_left = 12.0
 bg_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 
-[sub_resource type="StyleBoxFlat" id=24]
+[sub_resource type="StyleBoxFlat" id=20]
 bg_color = Color( 0.615686, 0.615686, 0.615686, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 
-[sub_resource type="StyleBoxFlat" id=25]
+[sub_resource type="StyleBoxFlat" id=21]
 bg_color = Color( 0.905882, 0.905882, 0.905882, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 
-[sub_resource type="StyleBoxFlat" id=26]
+[sub_resource type="StyleBoxFlat" id=22]
 
-[sub_resource type="StyleBoxFlat" id=27]
+[sub_resource type="StyleBoxFlat" id=23]
 content_margin_left = 12.0
 bg_color = Color( 0.254902, 0.254902, 0.254902, 1 )
 corner_radius_top_left = 8
@@ -666,7 +688,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="Theme" id=28]
+[sub_resource type="Theme" id=24]
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -789,11 +811,11 @@ HScrollBar/icons/decrement = null
 HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
 HScrollBar/icons/increment_highlight = null
-HScrollBar/styles/grabber = SubResource( 19 )
-HScrollBar/styles/grabber_highlight = SubResource( 20 )
-HScrollBar/styles/grabber_pressed = SubResource( 21 )
-HScrollBar/styles/scroll = SubResource( 22 )
-HScrollBar/styles/scroll_focus = SubResource( 23 )
+HScrollBar/styles/grabber = SubResource( 15 )
+HScrollBar/styles/grabber_highlight = SubResource( 16 )
+HScrollBar/styles/grabber_pressed = SubResource( 17 )
+HScrollBar/styles/scroll = SubResource( 18 )
+HScrollBar/styles/scroll_focus = SubResource( 19 )
 HSeparator/constants/separation = 4
 HSeparator/styles/separator = null
 HSlider/icons/grabber = null
@@ -1059,11 +1081,11 @@ VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/increment = null
 VScrollBar/icons/increment_highlight = null
-VScrollBar/styles/grabber = SubResource( 24 )
-VScrollBar/styles/grabber_highlight = SubResource( 25 )
-VScrollBar/styles/grabber_pressed = SubResource( 26 )
-VScrollBar/styles/scroll = SubResource( 27 )
-VScrollBar/styles/scroll_focus = SubResource( 23 )
+VScrollBar/styles/grabber = SubResource( 20 )
+VScrollBar/styles/grabber_highlight = SubResource( 21 )
+VScrollBar/styles/grabber_pressed = SubResource( 22 )
+VScrollBar/styles/scroll = SubResource( 23 )
+VScrollBar/styles/scroll_focus = SubResource( 19 )
 VSeparator/constants/separation = 4
 VSeparator/styles/separator = null
 VSlider/icons/grabber = null
@@ -1087,7 +1109,7 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
-[sub_resource type="DynamicFont" id=29]
+[sub_resource type="DynamicFont" id=25]
 size = 128
 font_data = ExtResource( 4 )
 
@@ -1951,8 +1973,24 @@ object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
 palette_icons = [ ExtResource( 305 ), ExtResource( 524 ), ExtResource( 520 ), ExtResource( 519 ) ]
 palette_previews = [ ExtResource( 306 ), ExtResource( 523 ), ExtResource( 522 ), ExtResource( 521 ) ]
+change_to = "LargePalmTree"
+items_in_sequence = 2
 icon = ExtResource( 305 )
 preview = ExtResource( 306 )
+
+[node name="LargePalmTree" type="Node" parent="PlaceableItems/SandGroup"]
+script = ExtResource( 24 )
+object_id = 86
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+palette_icons = [ ExtResource( 541 ), ExtResource( 538 ), ExtResource( 537 ), ExtResource( 540 ) ]
+palette_previews = [ ExtResource( 539 ), ExtResource( 543 ), ExtResource( 542 ), ExtResource( 544 ) ]
+change_to = "PalmTree"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 541 )
+preview = ExtResource( 539 )
 
 [node name="BarrelCactus" type="Node" parent="PlaceableItems/SandGroup"]
 script = ExtResource( 24 )
@@ -2047,8 +2085,42 @@ script = ExtResource( 24 )
 tileset_id = 10
 palette_icons = [ ExtResource( 158 ), ExtResource( 284 ), ExtResource( 283 ) ]
 palette_previews = [ ExtResource( 158 ), ExtResource( 284 ), ExtResource( 283 ) ]
+change_to = "WoodSlopeLeft"
+items_in_sequence = 3
 icon = ExtResource( 158 )
 preview = ExtResource( 158 )
+
+[node name="WoodSlopeLeft" type="Node" parent="PlaceableItems/SnowGroup"]
+script = ExtResource( 24 )
+tileset_id = 10
+tile_id = 2
+palette_icons = [ ExtResource( 546 ), ExtResource( 547 ), ExtResource( 548 ) ]
+palette_previews = [ ExtResource( 546 ), ExtResource( 547 ), ExtResource( 548 ) ]
+change_to = "WoodSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 546 )
+preview = ExtResource( 546 )
+
+[node name="WoodSlopeRight" type="Node" parent="PlaceableItems/SnowGroup"]
+script = ExtResource( 24 )
+tileset_id = 10
+tile_id = 3
+palette_icons = [ ExtResource( 545 ), ExtResource( 549 ), ExtResource( 550 ) ]
+palette_previews = [ ExtResource( 545 ), ExtResource( 549 ), ExtResource( 550 ) ]
+change_to = "Wood"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 545 )
+preview = ExtResource( 545 )
+
+[node name="CabinWindow" type="Node" parent="PlaceableItems/SnowGroup"]
+script = ExtResource( 24 )
+tileset_id = 33
+palette_icons = [ ExtResource( 536 ), ExtResource( 534 ), ExtResource( 535 ), ExtResource( 532 ) ]
+palette_previews = [ ExtResource( 536 ), ExtResource( 534 ), ExtResource( 535 ), ExtResource( 532 ) ]
+icon = ExtResource( 536 )
+preview = ExtResource( 536 )
 
 [node name="SnowTree" type="Node" parent="PlaceableItems/SnowGroup"]
 script = ExtResource( 24 )
@@ -2497,6 +2569,16 @@ palette_previews = [ ExtResource( 200 ), ExtResource( 376 ), ExtResource( 375 ) 
 icon = ExtResource( 200 )
 preview = ExtResource( 200 )
 
+[node name="AirshipWindow" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 24 )
+object_id = 87
+is_object = true
+object_center = Vector2( 16, 16 )
+palette_icons = [ ExtResource( 551 ), ExtResource( 554 ), ExtResource( 553 ), ExtResource( 552 ) ]
+palette_previews = [ ExtResource( 551 ), ExtResource( 554 ), ExtResource( 553 ), ExtResource( 552 ) ]
+icon = ExtResource( 551 )
+preview = ExtResource( 551 )
+
 [node name="CastleGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
 color = Color( 0.423529, 0.176471, 0.309804, 1 )
@@ -2843,7 +2925,7 @@ margin_left = 720.0
 margin_top = 64.0
 margin_right = 768.0
 margin_bottom = 198.0
-custom_styles/panel = SubResource( 17 )
+custom_styles/panel = SubResource( 13 )
 script = ExtResource( 533 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -3007,7 +3089,7 @@ margin_left = 22.0
 margin_top = 40.0
 margin_right = 136.0
 margin_bottom = 155.0
-custom_fonts/font = SubResource( 18 )
+custom_fonts/font = SubResource( 14 )
 custom_colors/font_color = Color( 0.258824, 0.270588, 0.658824, 1 )
 text = "1"
 align = 1
@@ -3143,7 +3225,7 @@ margin_top = 166.0
 margin_right = 3707.0
 margin_bottom = 511.0
 rect_rotation = -180.0
-theme = SubResource( 28 )
+theme = SubResource( 24 )
 scroll_vertical_enabled = false
 __meta__ = {
 "_edit_lock_": true,
@@ -3161,7 +3243,7 @@ margin_top = 166.0
 margin_right = 1679.0
 margin_bottom = 512.0
 rect_rotation = -180.0
-theme = SubResource( 28 )
+theme = SubResource( 24 )
 scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -3178,7 +3260,7 @@ margin_left = 13.0
 margin_top = 175.0
 margin_right = 403.0
 margin_bottom = 320.0
-custom_fonts/font = SubResource( 29 )
+custom_fonts/font = SubResource( 25 )
 flat = true
 script = ExtResource( 60 )
 __meta__ = {

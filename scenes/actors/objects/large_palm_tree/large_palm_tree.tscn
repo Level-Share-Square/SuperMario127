@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/actors/objects/large_palm_tree/palettes/1/palm_tree.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/large_palm_tree/palettes/3/palm_tree.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/large_palm_tree/palm_tree.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/large_palm_tree/palettes/2/palm_tree.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/big_tree/big_tree.gd" type="Script" id=5]
+
+[node name="DeadTree" type="Node2D"]
+script = ExtResource( 5 )
+palette_textures = [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 2 ) ]
+
+[node name="Sprite" type="Sprite" parent="."]
+z_index = -9
+texture = ExtResource( 3 )
+offset = Vector2( 0, -52 )
