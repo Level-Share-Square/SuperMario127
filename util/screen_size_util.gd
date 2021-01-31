@@ -20,3 +20,5 @@ static func set_screen_size(window_scale):
 		OS.window_position = Vector2((max_size.x - OS.window_size.x) / 2, (max_size.y - OS.window_size.y) / 2)
 	else:
 		OS.window_fullscreen = true
+	
+	EditorSavedSettings.stored_window_scale = window_scale

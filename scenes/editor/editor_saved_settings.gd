@@ -14,6 +14,7 @@ var tiles_resource : TileSet
 var tileset_loaded = false
 
 var default_area : LevelArea
+var stored_window_scale := 1
 
 var layout_ids = [
 ]

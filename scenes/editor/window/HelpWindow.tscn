@@ -484,7 +484,7 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
-[sub_resource type="GDScript" id=12]
+[sub_resource type="GDScript" id=14]
 script/source = "extends ScrollContainer
 
 onready var autotiling_container = get_node(\"../Autotiling\")
@@ -516,12 +516,12 @@ size = 32
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="Gradient" id=14]
+[sub_resource type="Gradient" id=15]
 offsets = PoolRealArray( 0, 0.8 )
 colors = PoolColorArray( 0, 0, 0, 0, 0.121569, 0.180392, 0.517647, 1 )
 
-[sub_resource type="GradientTexture" id=15]
-gradient = SubResource( 14 )
+[sub_resource type="GradientTexture" id=16]
+gradient = SubResource( 15 )
 width = 193
 
 [node name="HelpWindow" type="NinePatchRect"]
@@ -583,14 +583,14 @@ margin_right = 1014.0
 margin_bottom = 482.0
 theme = SubResource( 11 )
 scroll_horizontal_enabled = false
-script = SubResource( 12 )
+script = SubResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Hotkeys"]
 margin_right = 966.0
-margin_bottom = 999.0
+margin_bottom = 1036.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 13 )
@@ -604,6 +604,7 @@ bbcode_text = "[center][color=yellow]--Hotkeys--[/color]
 [color=yellow]T[/color] - Toggle Play/Edit
 [color=yellow]L[/color] - Switch Layers
 [color=yellow]I[/color] - Focus on Current Layer
+[color=yellow]G[/color] - Toggle Grid
 
 [color=yellow]H[/color] - Switch Object Placement Mode
 [color=yellow]Hold CTRL[/color] - Precise Object Placement
@@ -631,6 +632,7 @@ Right Click - Delete Tiles/Objects
 T - Toggle Play/Edit
 L - Switch Layers
 I - Focus on Current Layer
+G - Toggle Grid
 
 H - Switch Object Placement Mode
 Hold CTRL - Precise Object Placement
@@ -835,7 +837,7 @@ margin_top = 2016.0
 margin_right = 832.0
 margin_bottom = 2113.0
 size_flags_horizontal = 0
-texture = SubResource( 15 )
+texture = SubResource( 16 )
 stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false

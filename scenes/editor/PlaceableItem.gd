@@ -10,6 +10,9 @@ export var object_center := Vector2(0, 0)
 export var tile_mode_offset := Vector2(0, 0)
 export var tile_mode_step := 32
 export var palette_index := 0
+
+export var item_name : String
+
 export(Array, Texture) var palette_icons
 export(Array, Texture) var palette_previews
 export var object_size := Vector2(0, 0)

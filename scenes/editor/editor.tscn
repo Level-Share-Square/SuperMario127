@@ -1,4 +1,4 @@
-[gd_scene load_steps=580 format=2]
+[gd_scene load_steps=585 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -554,6 +554,11 @@
 [ext_resource path="res://scenes/actors/objects/airship_window/palettes/2.png" type="Texture" id=552]
 [ext_resource path="res://scenes/actors/objects/airship_window/palettes/1.png" type="Texture" id=553]
 [ext_resource path="res://scenes/actors/objects/airship_window/palettes/0.png" type="Texture" id=554]
+[ext_resource path="res://scenes/actors/objects/spike_trap/palettes/0.png" type="Texture" id=555]
+[ext_resource path="res://scenes/actors/objects/spike_trap/palettes/1.png" type="Texture" id=556]
+[ext_resource path="res://scenes/actors/objects/spike_trap/palettes/2.png" type="Texture" id=557]
+[ext_resource path="res://scenes/actors/objects/spike_trap/palettes/3.png" type="Texture" id=558]
+[ext_resource path="res://scenes/actors/objects/spike_trap/spike_trap.png" type="Texture" id=559]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1255,6 +1260,7 @@ group_name = "Special"
 script = ExtResource( 24 )
 is_object = true
 object_center = Vector2( 15, 16 )
+item_name = "Player 1 Entrance"
 change_to = "EntranceLuigi"
 items_in_sequence = 2
 icon = ExtResource( 12 )
@@ -1267,6 +1273,7 @@ script = ExtResource( 24 )
 object_id = 5
 is_object = true
 object_center = Vector2( 15, 16 )
+item_name = "Player 2 Entrance"
 change_to = "Entrance"
 items_in_sequence = 2
 index_in_sequence = 1
@@ -1334,6 +1341,7 @@ script = ExtResource( 24 )
 object_id = 80
 is_object = true
 object_center = Vector2( 16, 16 )
+item_name = "P Switch"
 icon = ExtResource( 340 )
 preview = ExtResource( 339 )
 
@@ -1342,6 +1350,7 @@ script = ExtResource( 24 )
 object_id = 79
 is_object = true
 object_center = Vector2( 16, 16 )
+item_name = "P Switch Block"
 icon = ExtResource( 337 )
 preview = ExtResource( 336 )
 
@@ -1350,6 +1359,7 @@ script = ExtResource( 24 )
 object_id = 33
 is_object = true
 object_center = Vector2( 16, 16 )
+item_name = "Cork Box"
 change_to = "MetalBreakableBlock"
 items_in_sequence = 3
 icon = ExtResource( 140 )
@@ -1360,6 +1370,7 @@ script = ExtResource( 24 )
 object_id = 35
 is_object = true
 object_center = Vector2( 16, 16 )
+item_name = "Metal Bricks"
 change_to = "RainbowBreakableBlock"
 items_in_sequence = 3
 index_in_sequence = 1
@@ -1371,6 +1382,7 @@ script = ExtResource( 24 )
 object_id = 42
 is_object = true
 object_center = Vector2( 16, 16 )
+item_name = "Rainbow Bricks"
 change_to = "BreakableBlock"
 items_in_sequence = 3
 index_in_sequence = 2
@@ -1382,6 +1394,7 @@ script = ExtResource( 24 )
 object_id = 44
 is_object = true
 object_center = Vector2( 16, 16 )
+item_name = "Iron Bars"
 icon = ExtResource( 179 )
 preview = ExtResource( 178 )
 
@@ -1446,6 +1459,7 @@ script = ExtResource( 24 )
 object_id = 2
 is_object = true
 object_center = Vector2( 16, 16 )
+item_name = "Shine Sprite"
 change_to = "ShineShard"
 items_in_sequence = 3
 icon = ExtResource( 15 )
@@ -1492,6 +1506,7 @@ script = ExtResource( 24 )
 object_id = 19
 is_object = true
 object_center = Vector2( 16, 16 )
+item_name = "Hover Nozzle Box"
 change_to = "RocketBox"
 items_in_sequence = 3
 icon = SubResource( 3 )
@@ -1502,6 +1517,7 @@ script = ExtResource( 24 )
 object_id = 38
 is_object = true
 object_center = Vector2( 16, 16 )
+item_name = "Rocket Nozzle Box"
 change_to = "TurboBox"
 items_in_sequence = 3
 index_in_sequence = 1
@@ -1513,6 +1529,7 @@ script = ExtResource( 24 )
 object_id = 39
 is_object = true
 object_center = Vector2( 16, 16 )
+item_name = "Turbo Nozzle Box"
 change_to = "HoverBox"
 items_in_sequence = 3
 index_in_sequence = 2
@@ -1524,6 +1541,7 @@ script = ExtResource( 24 )
 object_id = 57
 is_object = true
 object_center = Vector2( 16, 16 )
+item_name = "Super Feather"
 change_to = "MetalPowerup"
 items_in_sequence = 4
 icon = ExtResource( 185 )
@@ -1534,6 +1552,7 @@ script = ExtResource( 24 )
 object_id = 34
 is_object = true
 object_center = Vector2( 16, 16 )
+item_name = "Enchanted Gear"
 change_to = "VanishPowerup"
 items_in_sequence = 4
 index_in_sequence = 1
@@ -1545,6 +1564,7 @@ script = ExtResource( 24 )
 object_id = 43
 is_object = true
 object_center = Vector2( 16, 16 )
+item_name = "Ghost Pepper"
 change_to = "RainbowPowerup"
 items_in_sequence = 4
 index_in_sequence = 2
@@ -1556,6 +1576,7 @@ script = ExtResource( 24 )
 object_id = 41
 is_object = true
 object_center = Vector2( 16, 16 )
+item_name = "Rainbow Star"
 change_to = "WingPowerup"
 items_in_sequence = 4
 index_in_sequence = 3
@@ -1686,6 +1707,16 @@ tile_mode_step = 16
 icon = ExtResource( 96 )
 preview = ExtResource( 95 )
 
+[node name="SpikeTrap" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 24 )
+object_id = 88
+is_object = true
+object_center = Vector2( 16, 16 )
+palette_icons = [ ExtResource( 559 ), ExtResource( 555 ), ExtResource( 556 ), ExtResource( 557 ), ExtResource( 558 ) ]
+palette_previews = [ ExtResource( 559 ), ExtResource( 555 ), ExtResource( 556 ), ExtResource( 557 ), ExtResource( 558 ) ]
+icon = ExtResource( 559 )
+preview = ExtResource( 559 )
+
 [node name="Jelectro" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 24 )
 object_id = 69
@@ -1720,6 +1751,7 @@ object_id = 28
 is_object = true
 object_center = Vector2( 8, 8 )
 tile_mode_step = 16
+item_name = "Paratroopa"
 change_to = "KoopaTroopa"
 items_in_sequence = 2
 index_in_sequence = 1

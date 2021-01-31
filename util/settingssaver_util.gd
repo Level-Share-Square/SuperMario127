@@ -18,7 +18,6 @@ static func load():
 	var data = get_data_or_null()
 	if data != null:
 		Engine.target_fps = 10 * (data["fpsLock"] + 3)
-		ScreenSizeUtil.set_screen_size(data["windowScale"])
 		if data.has("showTimer"):
 			TimeScore.shown = data["showTimer"]
 		#if data.has("volume"):
@@ -41,15 +40,16 @@ static func load():
 			
 		if data.has("savedPalettes"):
 			EditorSavedSettings.tileset_palettes = data["savedPalettes"]
+	
+	yield(EditorSavedSettings.get_tree().create_timer(1), "timeout")
+	
+	ScreenSizeUtil.set_screen_size(data["windowScale"])
 
 static func save():
-	var windowScale = OS.window_size.x / ScreenSizeUtil.DEFAULT_SIZE.x
+	var windowScale = EditorSavedSettings.stored_window_scale
 	var fpsLock = (Engine.target_fps / 10.0) - 3
 	var showTimer = TimeScore.shown
 	var legacyCap = PlayerSettings.legacy_wing_cap
-	
-	if windowScale == 0:
-		windowScale = 5
 	
 	var data = {
 		"windowScale": windowScale,

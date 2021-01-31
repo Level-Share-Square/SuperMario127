@@ -43,12 +43,14 @@ self_modulate = Color( 0.0196078, 0.352941, 0, 1 )
 margin_right = 400.0
 margin_bottom = 75.0
 rect_min_size = Vector2( 400, 75 )
+focus_mode = 0
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/normal = SubResource( 3 )
 custom_fonts/font = SubResource( 4 )
 shortcut_in_tooltip = false
 action_mode = 0
+enabled_focus_mode = 0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
