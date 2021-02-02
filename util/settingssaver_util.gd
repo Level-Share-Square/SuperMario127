@@ -41,9 +41,10 @@ static func load():
 		if data.has("savedPalettes"):
 			EditorSavedSettings.tileset_palettes = data["savedPalettes"]
 	
-	yield(EditorSavedSettings.get_tree().create_timer(1), "timeout")
-	
-	ScreenSizeUtil.set_screen_size(data["windowScale"])
+		yield(EditorSavedSettings.get_tree().create_timer(1), "timeout")
+		
+		if data.has("windowScale"):
+			ScreenSizeUtil.set_screen_size(data["windowScale"])
 
 static func save():
 	var windowScale = EditorSavedSettings.stored_window_scale
