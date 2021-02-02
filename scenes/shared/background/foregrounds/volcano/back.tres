@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=17 format=2]
+[gd_resource type="Resource" load_steps=18 format=2]
 
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano/0.png" type="Texture" id=1]
 [ext_resource path="res://classes/ParallaxLayerResource.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano/palettes/2/0.png" type="Texture" id=11]
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano/palettes/2/1.png" type="Texture" id=12]
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano/palettes/1/0.png" type="Texture" id=13]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano/palettes/3/0.png" type="Texture" id=14]
 
 [sub_resource type="AnimatedTexture" id=1]
 frames = 4
@@ -53,4 +54,4 @@ texture = SubResource( 3 )
 scale = Vector2( 0.015, 0 )
 offset = Vector2( 0, -216 )
 mirroring = Vector2( 1024, 0 )
-palettes = [ SubResource( 1 ), SubResource( 2 ) ]
+palettes = [ SubResource( 1 ), SubResource( 2 ), ExtResource( 14 ) ]
