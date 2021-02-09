@@ -94,13 +94,14 @@ shape = SubResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 5 )
 
 [node name="PlayerStompDetector" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 35
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerStompDetector"]
 shape = SubResource( 6 )
@@ -108,7 +109,7 @@ shape = SubResource( 6 )
 [node name="PlayerSpinDetector" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
-collision_mask = 35
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSpinDetector"]
 shape = SubResource( 7 )
