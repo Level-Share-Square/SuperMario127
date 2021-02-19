@@ -484,7 +484,7 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
-[sub_resource type="GDScript" id=14]
+[sub_resource type="GDScript" id=12]
 script/source = "extends ScrollContainer
 
 onready var autotiling_container = get_node(\"../Autotiling\")
@@ -516,12 +516,12 @@ size = 32
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="Gradient" id=15]
+[sub_resource type="Gradient" id=14]
 offsets = PoolRealArray( 0, 0.8 )
 colors = PoolColorArray( 0, 0, 0, 0, 0.121569, 0.180392, 0.517647, 1 )
 
-[sub_resource type="GradientTexture" id=16]
-gradient = SubResource( 15 )
+[sub_resource type="GradientTexture" id=15]
+gradient = SubResource( 14 )
 width = 193
 
 [node name="HelpWindow" type="NinePatchRect"]
@@ -583,14 +583,14 @@ margin_right = 1014.0
 margin_bottom = 482.0
 theme = SubResource( 11 )
 scroll_horizontal_enabled = false
-script = SubResource( 14 )
+script = SubResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Hotkeys"]
 margin_right = 966.0
-margin_bottom = 1036.0
+margin_bottom = 1147.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 13 )
@@ -623,6 +623,9 @@ bbcode_text = "[center][color=yellow]--Hotkeys--[/color]
 [color=yellow]P[/color] - Open Pause Menu
 [color=yellow]R[/color] - Restart from Checkpoint
 [color=yellow]O[/color] - Restart from Beginning
+
+[color=yellow]--Other Hotkeys--[/color]
+[color=yellow]Tab[/color] - Toggle CRT Filter
 [/center]"
 text = "--Hotkeys--
 WASD Keys - Move Camera
@@ -651,6 +654,9 @@ Mouse Wheel - Change Platform Width
 P - Open Pause Menu
 R - Restart from Checkpoint
 O - Restart from Beginning
+
+--Other Hotkeys--
+Tab - Toggle CRT Filter
 "
 fit_content_height = true
 scroll_active = false
@@ -837,7 +843,7 @@ margin_top = 2016.0
 margin_right = 832.0
 margin_bottom = 2113.0
 size_flags_horizontal = 0
-texture = SubResource( 16 )
+texture = SubResource( 15 )
 stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
