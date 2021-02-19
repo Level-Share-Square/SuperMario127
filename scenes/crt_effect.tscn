@@ -80,7 +80,7 @@ shader_param/bleeding_range_x = 1.0
 shader_param/bleeding_range_y = 1.0
 shader_param/lines_distance = 4.0
 shader_param/scan_size = 2.0
-shader_param/scanline_alpha = 0.925
+shader_param/scanline_alpha = 0.975
 shader_param/lines_velocity = 30.0
 
 [node name="CRTEffect" type="Node2D"]
