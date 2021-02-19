@@ -86,13 +86,13 @@ func _ready() -> void:
 
 			# Get the value, returning false if the key doesn't exist
 			is_blue = collected_shines.get(str(id), false)
-
-	if !is_preview and mode == 1:
-		id = CurrentLevelData.get_last_shine_id()
-		set_property("id", id)
 	
 	var _connect = connect("property_changed", self, "update_color")
 	update_color("color", color)
+
+func on_place():
+	id = CurrentLevelData.get_last_shine_id()
+	set_property("id", id)
 
 func update_color(key, value):
 	if key == "color" and value != last_color:

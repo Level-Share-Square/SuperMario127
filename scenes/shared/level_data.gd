@@ -72,16 +72,18 @@ func get_last_shine_id():
 	for area in CurrentLevelData.level_data.areas:
 		for object in area.objects:
 			if object.type_id == 2:
+				object.properties[12] = last_shine_id
 				last_shine_id += 1
-	return last_shine_id + 1
+	return last_shine_id
 
 func get_last_star_coin_id():
 	var last_star_coin_id = 0
 	for area in CurrentLevelData.level_data.areas:
 		for object in area.objects:
 			if object.type_id == 52:
+				object.properties[5] = last_star_coin_id
 				last_star_coin_id += 1
-	return last_star_coin_id + 1
+	return last_star_coin_id
 
 func get_red_coins_before_area(area_id : int):
 	var last_red_coin_id = 0
