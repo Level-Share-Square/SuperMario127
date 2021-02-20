@@ -302,7 +302,7 @@ func physics_process_koopa(delta, level_bounds):
 	if attack_cooldown <= 0:
 		for hit_body in attack_area.get_overlapping_bodies():
 			if hit_body.name.begins_with("Character"):
-				if hit_body.attacking or hit_body.invincible and !rainbow:
+				if (hit_body.attacking or hit_body.invincible) and !rainbow:
 					retract_into_shell()
 					velocity.x = (shell.global_position - hit_body.global_position).normalized().x * (shell_max_speed)
 					velocity.y = -275
