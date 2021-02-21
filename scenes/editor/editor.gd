@@ -69,9 +69,8 @@ func set_zoom_level(level : float) -> void:
 	if level < 0.25: level = 0.25
 	if level > 1.75: level = 1.75
 	
-	cap_zoom_level(); # Make sure it's not too large
-	
 	zoom_level = level
+	cap_zoom_level(); # Make sure it's not too large
 	EditorSavedSettings.zoom_level = zoom_level
 
 func add_zoom_level(level : float) -> void:
