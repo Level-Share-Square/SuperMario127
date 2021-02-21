@@ -30,7 +30,7 @@ func press(hit_pos : Vector2) -> void:
 
 func _physics_process(delta):
 	if mode == 1: return
-	if pressed:
+	if pressed and is_instance_valid(character) and !character.dead:
 		# Mario stepped on the switch (it broke, how will he play vidya game now)
 		if boost_timer > 0:
 			if !was_ground_pound:
