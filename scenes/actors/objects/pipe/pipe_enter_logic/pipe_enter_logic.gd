@@ -16,7 +16,7 @@ const PIPE_EXIT_DISTANCE := 20
 
 export (float) var slide_to_center_length := 0.4
 export (float) var slide_to_center_fast_length := 0.05
-export (float) var entering_pipe_length := 1.0 
+export (float) var entering_pipe_length := 1.0
 export (float) var entering_pipe_fast_length := 0.2
 export (float) var exiting_pipe_length := 1.0
 
@@ -29,7 +29,7 @@ func _physics_process(_delta : float) -> void:
 	if is_idle:
 		#the area2d is set to only collide with characters, so we can (hopefullY) safely assume if there 
 		#is a collision it's with a character
-		for body in area2d.get_overlapping_bodies(): 
+		for body in area2d.get_overlapping_bodies():
 			
 			if (global_rotation == 0 and body.is_grounded()
 			and body.get_input(Character.input_names.crouch, true) and get_parent().enabled
@@ -38,7 +38,7 @@ func _physics_process(_delta : float) -> void:
 			and !(is_instance_valid(body.state) and (body.state.name == "GroundPoundState" or body.state.name == "GroundPoundEndState"))):
 				start_pipe_enter_animation(body)
 		
-		for body in gp_area.get_overlapping_bodies(): 
+		for body in gp_area.get_overlapping_bodies():
 			if (global_rotation == 0 and body.is_grounded()
 			and body.get_input(Character.input_names.gp, false) and get_parent().enabled
 			# Rainbow Mario can't enter doors
@@ -47,12 +47,12 @@ func _physics_process(_delta : float) -> void:
 				start_pipe_ground_pound_animation(body)
 
 func start_pipe_ground_pound_animation(character : Character) -> void:
-	stored_character = character 
+	stored_character = character
 
 	is_idle = false
 	entering = true
 
-	character.invulnerable = true 
+	character.invulnerable = true
 	character.controllable = false
 	character.movable = false
 	character.sprite.rotation = 0
@@ -74,12 +74,12 @@ func start_pipe_ground_pound_animation(character : Character) -> void:
 	tween.start()
 	
 func start_pipe_enter_animation(character : Character) -> void:
-	stored_character = character 
+	stored_character = character
 
 	is_idle = false
 	entering = true
 
-	character.invulnerable = true 
+	character.invulnerable = true
 	character.controllable = false
 	character.movable = false
 	character.sprite.rotation = 0
@@ -112,7 +112,7 @@ func start_pipe_exit_animation(character : Character) -> void:
 	is_idle = false
 	entering = false
 
-	character.invulnerable = true 
+	character.invulnerable = true
 	character.controllable = false
 	character.movable = false
 	

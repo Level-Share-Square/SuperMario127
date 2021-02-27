@@ -79,9 +79,6 @@ func _ready():
 	CurrentLevelData.level_data.vars.pipes = []
 	CurrentLevelData.level_data.vars.liquids = []
 	CurrentLevelData.level_data.vars.checkpoints = []
-
-	if mode_switcher.get_node("ModeSwitcherButton").invisible and CheckpointSaved.current_checkpoint_id == -1:
-		CurrentLevelData.start_tracking_time_score()
 	
 	MiscShared.is_play_reload = true
 
