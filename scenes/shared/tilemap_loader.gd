@@ -130,7 +130,7 @@ func get_tile_in_data(x: int, y: int, layer: int):
 	var chunk_key = get_chunk_key(x, y, layer)
 	
 	if level_area.tile_chunks.has(chunk_key):
-		var tile = level_area.tile_chunks[chunk_key][x%16+(y%16)*16]
+		var tile = level_area.tile_chunks[chunk_key][posmod(x, 16)+posmod(y, 16)*16]
 		return tile if tile else emptyTile
 	else:
 		return emptyTile
@@ -147,7 +147,7 @@ func set_tile(x: int, y: int, layer: int, tileset_id: int, tile_id: int, palette
 		chunk.resize(16*16)
 		level_area.tile_chunks[chunk_key] = chunk
 	
-	chunk[x%16+(y%16)*16] = [tileset_id, tile_id, palette_id]
+	chunk[posmod(x, 16)+posmod(y, 16)*16] = [tileset_id, tile_id, palette_id]
 	
 	set_tile_visual(x, y, layer, tileset_id, tile_id, true, palette_id)
 
