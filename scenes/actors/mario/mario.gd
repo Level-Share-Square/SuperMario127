@@ -121,6 +121,7 @@ export var attacking := false
 export var big_attack := false
 export var invincible := false
 export var heavy := false
+export var shine_kill := false
 
 export var player_id := 0
 

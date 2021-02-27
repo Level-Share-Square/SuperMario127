@@ -6,7 +6,9 @@ onready var particles = $Particles2D
 onready var particles2 = $Sparkles
 onready var revolve_sound = $Revolve
 onready var revolve_last_sound = $RevolveLast
+onready var animation_player = $AnimationPlayer
 var collected = false
+var poofed = false
 var character
 
 var chase_anim_finished = false
@@ -61,12 +63,15 @@ func _physics_process(delta):
 		var move_to = (cached_pos - global_position).normalized()
 		global_position += move_to * current_speed * 2
 		
-	if mode != 1 and chase:
+	if mode != 1 and chase and !poofed:
 		if chase_anim_finished:
 			current_speed = lerp(current_speed, chase_speed, fps_util.PHYSICS_DELTA * 2) #this will make the transition from animation to movement not so jarring
 			particles.emitting = true
 			if update_timer <= 0:
-				if character != null:
+				if is_instance_valid(character):
+					if !poofed and character.shine_kill:
+						poofed = true
+						animation_player.play("disappear")
 					if !character.dead:
 						cached_pos = character.global_position
 				update_timer = 0.15

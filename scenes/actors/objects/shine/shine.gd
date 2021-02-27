@@ -146,6 +146,7 @@ func _physics_process(_delta : float) -> void:
 		ambient_sound.volume_db = -16 + -abs(camera.global_position.distance_to(global_position)/25)
 
 	if collected:
+		character.shine_kill = true
 		character.sprite.animation = "shineFall"
 		character.sprite.rotation_degrees = 0
 		
@@ -275,6 +276,7 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 			CurrentLevelData.can_pause = true
 	else: 
 		# start playing the dance stop animation
+		character.shine_kill = false
 		character.anim_player.play("shine_dance_stop")
 		character.anim_player.connect("animation_finished", self, "restore_control", [character], CONNECT_ONESHOT)
 
