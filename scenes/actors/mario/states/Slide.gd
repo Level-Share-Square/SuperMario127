@@ -122,7 +122,8 @@ func _general_update(delta):
 			if (move_direction == 0 and !is_crouch) or move_direction == character.facing_direction:
 				change_to_getup(delta)
 			else:
-				character.position.y -= 16
+				if !character.test_move(character.transform, Vector2(0, -16)):
+					character.position.y -= 16
 				character.get_state_node("JumpState").jump_buffer = 0
 				character.set_state_by_name("BackflipState", delta)
 			
