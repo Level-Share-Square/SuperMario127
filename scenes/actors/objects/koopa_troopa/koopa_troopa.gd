@@ -2,19 +2,21 @@ extends GameObject
 
 const rainbow_animation_speed := 500
 
-onready var sprite = $Koopa/Sprite
-onready var sprite_color = $Koopa/Sprite/Color
-onready var attack_area = $Koopa/AttackArea
-onready var stomp_area = $Koopa/StompArea
-onready var left_check = $Koopa/Left
-onready var right_check = $Koopa/Right
-onready var koopa_sound = $Koopa/AudioStreamPlayer
-onready var water_detector = $Koopa/WaterDetector
-onready var visibility_notifier = $Koopa/VisibilityNotifier2D
+onready var sprite : AnimatedSprite = $Koopa/Sprite
+onready var sprite_color : AnimatedSprite = $Koopa/Sprite/Color
+onready var attack_area : Area2D = $Koopa/AttackArea
+onready var stomp_area : Area2D = $Koopa/StompArea
+onready var water_detector : Area2D = $Koopa/WaterDetector
+onready var left_check : RayCast2D = $Koopa/Left
+onready var right_check : RayCast2D = $Koopa/Right
+onready var koopa_sound : AudioStreamPlayer = $Koopa/AudioStreamPlayer
+onready var bottom_pos : Node2D = $Koopa/BottomPos
+onready var visibility_notifier : VisibilityNotifier2D = $Koopa/VisibilityNotifier2D
 
-onready var visibility_enabler = $VisibilityEnabler2D
+onready var visibility_enabler : VisibilityEnabler2D = $VisibilityEnabler2D
 
-onready var body = $Koopa
+onready var body : KinematicBody2D = $Koopa
+
 func body_exists(): # Might as well be body.exists()
 	return is_instance_valid(body) and !body.is_queued_for_deletion()
 

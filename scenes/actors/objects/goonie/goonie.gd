@@ -34,6 +34,7 @@ func set_position(new_position):
 	position = new_position
 
 func _ready():
+	$StaticBody2D/CollisionShape2D.disabled = !enabled
 	spreads_started += CurrentLevelData.enemies_instanced % 3
 	CurrentLevelData.enemies_instanced += 1
 	var add_amount = 0
@@ -57,7 +58,7 @@ func _physics_process(delta):
 	last_position = global_position
 	sprite.speed_scale = clamp(speed, 0.5, 3)
 	sprite.playing = true
-	if mode != 1:
+	if mode != 1 and enabled:
 		if spread_timer > 0:
 			spread_timer -= delta
 			if spread_timer <= 0:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/koopa_troopa.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/regular_frames.tres" type="SpriteFrames" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/color_frames.tres" type="SpriteFrames" id=4]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/para_color_frames.tres" type="SpriteFrames" id=5]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/para_regular_frames.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://scenes/actors/objects/koopa_troopa/body.gd" type="Script" id=7]
 
 [sub_resource type="RayShape2D" id=1]
 length = 16.0
@@ -33,6 +34,7 @@ para_color_sprite = ExtResource( 5 )
 [node name="Koopa" type="KinematicBody2D" parent="."]
 collision_layer = 4
 collision_mask = 2147483733
+script = ExtResource( 7 )
 
 [node name="Sprite" type="AnimatedSprite" parent="Koopa"]
 frames = ExtResource( 2 )
@@ -105,6 +107,9 @@ volume_db = -10.0
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Koopa"]
 rect = Rect2( -200, -200, 400, 400 )
+
+[node name="BottomPos" type="Node2D" parent="Koopa"]
+position = Vector2( 0, 12 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 rect = Rect2( -200, -200, 400, 400 )

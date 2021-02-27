@@ -298,6 +298,10 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	
 	if CheckpointSaved.current_checkpoint_id != -1 and CurrentLevelData.level_data.vars.transition_data == []:
 		position = CheckpointSaved.current_spawn_pos
+	else:
+		# start speedrun timer
+		if mode_switcher.get_node("ModeSwitcherButton").invisible and CheckpointSaved.current_checkpoint_id == -1:
+			CurrentLevelData.start_tracking_time_score()
 
 var prev_is_grounded := false
 func is_grounded() -> bool:
