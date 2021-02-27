@@ -769,24 +769,21 @@ func _physics_process(delta: float) -> void:
 	# Move by velocity
 	if movable:
 		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
-		if last_position != Vector2.ZERO and (!is_instance_valid(state) or state.name != "DiveState"):
-			if (last_position - global_position).length_squared() > 0:
-				var raycast_result = get_world_2d().direct_space_state.intersect_ray(
-					last_position, global_position, [self], 1)
-				if raycast_result.size() > 0:
-					position = last_position
-					velocity = last_velocity
-				else:
-					var slide_count = get_slide_count()
-					collided_last_frame = slide_count > 0
+		if (last_position != Vector2.ZERO and (last_position - global_position).length_squared() > 0
+			and get_world_2d().direct_space_state.intersect_ray(last_position, global_position, [self], 1).size() > 0):
+			position = last_position
+			
+			if velocity.length_squared() < 1:
+				# Clip attempt, just reset velocity
+				velocity = last_velocity * 0.95
 			else:
-				if get_world_2d().direct_space_state.intersect_point(
-					global_position, 1, [self], 1):
-					position = last_position
-					velocity = last_velocity
-				else:
-					var slide_count = get_slide_count()
-					collided_last_frame = slide_count > 0
+				# Going into a corner? Try to bonk.
+				# The squish state has us covered in case we get stuck even harder
+				velocity.x = 150 * -facing_direction
+				velocity.y = -65
+				position.x -= 2 * facing_direction
+				set_state_by_name("BonkedState", delta)
+				sound_player.play_bonk_sound()
 		else:
 			var slide_count = get_slide_count()
 			collided_last_frame = slide_count > 0
