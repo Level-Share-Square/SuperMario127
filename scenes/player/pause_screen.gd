@@ -146,7 +146,7 @@ func retry():
 	retry_button.focus_mode = 0
 	if !character_node.dead:
 		character_node.kill("reload")
-	else:
+	elif is_instance_valid(character2_node):
 		character2_node.kill("reload")
 
 func quit_to_menu() -> void:
