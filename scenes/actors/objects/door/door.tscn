@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/actors/objects/door/nsmbwiiDoor2.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 20, 20 )
+extents = Vector2( 14, 20 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -65,7 +65,6 @@ close_audio = ExtResource( 5 )
 [node name="Tween" type="Tween" parent="DoorEnterLogic"]
 
 [node name="Area2D" type="Area2D" parent="DoorEnterLogic"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorEnterLogic/Area2D"]
 shape = SubResource( 1 )
