@@ -81,4 +81,4 @@ func start_exit_anim(character):
 	pipe_enter_logic.start_pipe_exit_animation(character)
 
 func get_bottom_distance():
-	return pipe_enter_logic.PIPE_BOTTOM_DISTANCE
+	return pipe_enter_logic.PIPE_BOTTOM_DISTANCE - 30

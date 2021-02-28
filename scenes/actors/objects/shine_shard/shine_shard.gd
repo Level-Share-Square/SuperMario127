@@ -39,8 +39,9 @@ func collect(body):
 		
 func _ready():
 	if mode == 1: return
-	id = CurrentLevelData.level_data.vars.max_shine_shards
-	CurrentLevelData.level_data.vars.max_shine_shards += 1
+	if enabled:
+		id = CurrentLevelData.level_data.vars.max_shine_shards
+		CurrentLevelData.level_data.vars.max_shine_shards += 1
 	
 	if id in CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][1]:
 		queue_free()

@@ -76,13 +76,13 @@ func _ready():
 		var _connect2 = area.connect("body_exited", self, "exit_area")
 
 func enter_area(body):
-	if body.name.begins_with("Character") and character == null:
+	if body.name.begins_with("Character") and character == null and enabled:
 		character = body
 		label.bbcode_text = "[center]" + text_replace_util.parse_text(text, character) + "[/center]"
 		message_appear.play()
 		
 func exit_area(body):
-	if body == character and character.get_collision_layer_bit(1):
+	if body == character and character.get_collision_layer_bit(1) and enabled:
 		character = null
 		if reset_read_timer == 0:
 			message_disappear.play()

@@ -37,7 +37,7 @@ func _physics_process(delta):
 			next_state_timer = retracted_time if burning else burning_time
 			burning = !burning
 	
-	area_shape.disabled = !burning
+	area_shape.disabled = !burning or !enabled
 	
 	if burning:
 		sprite.position = lerp(sprite.position, Vector2(0, 0), delta * 8)

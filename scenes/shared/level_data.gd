@@ -90,6 +90,6 @@ func get_red_coins_before_area(area_id : int):
 	for index in range(area_id):
 		var area = CurrentLevelData.level_data.areas[index]
 		for object in area.objects:
-			if object.type_id == 30:
+			if object.type_id == 30 and object.properties[3]:
 				last_red_coin_id += 1
 	return last_red_coin_id
