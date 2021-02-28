@@ -66,7 +66,8 @@ func _process(delta):
 			if area.get_parent() is Character:
 				bounce(area)
 
-func bounce(body):	
+
+func bounce(body):
 	if cooldown != 0:
 		return
 
@@ -74,55 +75,48 @@ func bounce(body):
 	var normal = transform.y
 	
 	if "velocity" in body:
-		var is_weak_bounce = true
-		if body.has_method("set_state_by_name"):
-			body.set_state_by_name("BounceState", 0)
-			if body.inputs[2][0]:
-				is_weak_bounce = false
-				body.sound_player.play_double_jump_sound()
-		animation_player.stop()
-		
-		var x_power = (-bounce_power if is_weak_bounce else -strong_bounce_power) * normal.x
-		var y_power = (-bounce_power if is_weak_bounce else -strong_bounce_power) * normal.y
-		
-		if abs(normal.x) > 0.1:
-			body.velocity.x = x_power
-			body.position.x += 2 * sign(x_power)
-		if abs(normal.y) > 0.1:
-			body.velocity.y = y_power
-			body.position.y += 2 * sign(y_power)
-		animation_player.play("bounce_weak" if is_weak_bounce else "bounce")
-		
-		if "stamina" in body:
-			body.stamina = 100
+		actually_bounce(body)
 	elif "velocity" in body.get_parent():
-		var body_parent = body.get_parent()
-		var is_weak_bounce = true
-		
-		if "controllable" in body_parent:
-			if !body_parent.controllable:
-				return # Don't gbj players
-		
-		if body_parent.has_method("set_state_by_name"):
-			body_parent.set_state_by_name("BounceState", 0)
-			if body_parent.inputs[2][0]:
-				is_weak_bounce = false
-				body_parent.sound_player.play_double_jump_sound()
+		actually_bounce(body.get_parent())
 
-		animation_player.stop()
-		
-		var x_power = (-bounce_power if is_weak_bounce else -strong_bounce_power) * normal.x
-		var y_power = (-bounce_power if is_weak_bounce else -strong_bounce_power) * normal.y
-		
-		if abs(normal.x) > 0.1:
-			body_parent.velocity.x = x_power
-			body_parent.position.x += 2 * sign(x_power)
-		if abs(normal.y) > 0.1:
-			body_parent.velocity.y = y_power
-			body_parent.position.y += 2 * sign(y_power)
-		animation_player.play("bounce_weak" if is_weak_bounce else "bounce")
-		if "stamina" in body_parent:
-			body_parent.stamina = 100
+func actually_bounce(body):
+	var normal := transform.y
+	var is_weak_bounce := true
+	
+	if "controllable" in body:
+		if !body.controllable:
+			return # Don't gbj players
+	
+	if body.has_method("set_state_by_name"):
+		body.set_state_by_name("BounceState", 0)
+		if body.inputs[2][0]:
+			is_weak_bounce = false
+			body.sound_player.play_double_jump_sound()
+	animation_player.stop()
+	
+	var x_power = (-bounce_power if is_weak_bounce else -strong_bounce_power) * normal.x
+	var y_power = (-bounce_power if is_weak_bounce else -strong_bounce_power) * normal.y
+	
+	if abs(normal.x) > 0.1:
+		body.velocity.x = x_power
+		# Test move to ensure the player doesn't end up inside of a tile
+		if !body.test_move(body.transform, Vector2(2 * sign(x_power), 0)):
+			body.position.x += 2 * sign(x_power)
+	if abs(normal.y) > 0.1:
+		body.velocity.y = y_power
+		# Test move to ensure the player doesn't end up inside of a tile
+		if !body.test_move(body.transform, Vector2(0, 2 * sign(y_power))):
+			body.position.y += 2 * sign(y_power)
+			# Bounce the player off of the ground if necessary,
+			# if this wasn't done the player would stay on the ground, repeatedly bouncing
+			if y_power < 0 and body.prev_is_grounded\
+			and !body.test_move(body.transform, Vector2(0, 4 * sign(y_power))):
+				body.position.y += 4 * sign(y_power)
+	animation_player.play("bounce_weak" if is_weak_bounce else "bounce")
+	
+	if "stamina" in body:
+		body.stamina = 100
+
 
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2

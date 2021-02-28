@@ -99,7 +99,7 @@ func _general_update(_delta):
 			preservation_factor = character.velocity.y / 96
 		else:
 			preservation_factor = 0
-	elif !activated and last_activated:
+	elif !activated:
 		character.water_particles.emitting = false
 		character.water_particles_2.emitting = false
 		#character.water_sprite.animation = "in"
