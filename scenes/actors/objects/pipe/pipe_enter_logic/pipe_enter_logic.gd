@@ -11,7 +11,7 @@ onready var audio_fast : AudioStreamPlayer = $AudioFast
 
 onready var collision_width : float = $Area2D/CollisionShape2D.shape.extents.x
 
-const PIPE_BOTTOM_DISTANCE := 35
+const PIPE_BOTTOM_DISTANCE := 20
 const PIPE_EXIT_DISTANCE := 20
 
 export (float) var slide_to_center_length := 0.4
@@ -64,7 +64,7 @@ func start_pipe_ground_pound_animation(character : Character) -> void:
 	var slide_length : float = slide_to_center_fast_length
 
 	# warning-ignore: return_value_discarded
-	tween.interpolate_property(character, "position:x", null, global_position.x, slide_length)
+	tween.interpolate_property(character, "position:x", null, global_position.x - character.facing_direction, slide_length)
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character, "position:y", null, global_position.y + PIPE_BOTTOM_DISTANCE, entering_pipe_fast_length)
 	# warning-ignore: return_value_discarded
