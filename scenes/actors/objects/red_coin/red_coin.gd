@@ -42,8 +42,9 @@ func collect(body):
 		
 func _ready():
 	if mode == 1: return
-	id = CurrentLevelData.level_data.vars.last_red_coin_id + CurrentLevelData.get_red_coins_before_area(CurrentLevelData.area)
-	CurrentLevelData.level_data.vars.last_red_coin_id += 1
+	if enabled:
+		id = CurrentLevelData.level_data.vars.last_red_coin_id + CurrentLevelData.get_red_coins_before_area(CurrentLevelData.area)
+		CurrentLevelData.level_data.vars.last_red_coin_id += 1
 	
 	if id in CurrentLevelData.level_data.vars.red_coins_collected[1]:
 		queue_free()

@@ -16,7 +16,7 @@ func _ready():
 		sprite.z_index = 0
 	
 func _physics_process(delta):
-	if mode != 1:
+	if mode != 1 and enabled:
 		time += delta
 		sprite.position.x = sin(time * 2) * 30
 		sprite.position.y = sin(time * 1) * 30

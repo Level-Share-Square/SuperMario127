@@ -21,7 +21,8 @@ func _set_property_values():
 	set_property("horizontal", horizontal)
 
 func _ready():
-	var _connect = use_area.connect("body_entered", self, "set_liquid_level")
+	if enabled:
+		var _connect = use_area.connect("body_entered", self, "set_liquid_level")
 	yield(get_tree(), "physics_frame")
 	if auto_activate and mode != 1:
 		set_liquid_level(null)
