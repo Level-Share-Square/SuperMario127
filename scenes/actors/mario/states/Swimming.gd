@@ -124,7 +124,11 @@ func _update(delta):
 
 	if abs(move_vector.x) + abs(move_vector.y) != 0:
 		char_rotation = Vector2().angle_to_point(move_vector) - (PI/2)
-		character.velocity = character.velocity.move_toward(Vector2.RIGHT.rotated(sprite.rotation - (PI/2)) * swim_speed, fps_util.PHYSICS_DELTA * lerp_speed)
+		var target = Vector2.RIGHT.rotated(sprite.rotation - (PI/2))
+		if boost_time_left == 0:
+			move_vector = Vector2.RIGHT.rotated(char_rotation - (PI/2))
+			target = move_vector
+		character.velocity = character.velocity.move_toward(target * swim_speed, fps_util.PHYSICS_DELTA * lerp_speed)
 	else:
 		character.velocity = character.velocity.move_toward(Vector2(), fps_util.PHYSICS_DELTA * (240 if (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed) else 480))
 
