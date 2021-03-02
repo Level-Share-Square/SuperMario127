@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://level/Tileset.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+block_tile_id = 81
+slab_tile_id = 81
+left_slope_tile_id = 81
+right_slope_tile_id = 81
+palettes = [  ]

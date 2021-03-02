@@ -19,13 +19,9 @@ var template_level_codes : Array = [
 	"res://level/template_levels/tutorial_hills.tres",  
 	"res://level/template_levels/waterfloat_galaxy.tres",
 	"res://level/template_levels/prism_star_galaxy.tres",
-	"res://level/template_levels/ghost_pepper_challenge.tres",
-	"res://level/template_levels/snowside_resort.tres",
-	"res://level/template_levels/rocketside_plaza.tres",
-	"res://level/template_levels/dungeon_of_4_kingdoms.tres",
+	"res://level/template_levels/gold_rush_gulch.tres",
 	"res://level/template_levels/glide_feather_challenge.tres",
-	"res://level/template_levels/green_demon_cave.tres",
-	"res://level/template_levels/eruptive_crater.tres"
+	"res://level/template_levels/green_demon_cave.tres"
 ]
 # for the levels list and get_current_levels()
 var is_template_list : bool = false

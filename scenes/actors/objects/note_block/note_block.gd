@@ -105,7 +105,9 @@ func actually_bounce(body):
 	if abs(normal.y) > 0.1:
 		body.velocity.y = y_power
 		# Test move to ensure the player doesn't end up inside of a tile
-		if !body.test_move(body.transform, Vector2(0, 2 * sign(y_power))):
+		if !body.has_method("test_move"):
+			body.position.y += 2 * sign(y_power)
+		elif !body.test_move(body.transform, Vector2(0, 2 * sign(y_power))):
 			body.position.y += 2 * sign(y_power)
 			# Bounce the player off of the ground if necessary,
 			# if this wasn't done the player would stay on the ground, repeatedly bouncing
