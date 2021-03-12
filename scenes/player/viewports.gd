@@ -24,7 +24,7 @@ var player2_spawn = Vector2(0, 0)
 
 func remove_player():
 	if PlayerSettings.number_of_players == 2:
-		player2.position.y = 9999999999999
+		player2.position.y = -9999999999999
 		viewport_container2.visible = false
 		camera2.character_node = null
 		player2.queue_free()

@@ -1867,8 +1867,20 @@ preview = ExtResource( 13 )
 [node name="Garden" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 24 )
 tileset_id = 34
+change_to = "GardenSlab"
+items_in_sequence = 2
 icon = ExtResource( 560 )
 preview = ExtResource( 560 )
+
+[node name="GardenSlab" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 24 )
+tileset_id = 34
+tile_id = 1
+change_to = "Garden"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 63 )
+preview = ExtResource( 63 )
 
 [node name="BigTree" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 24 )
