@@ -11,7 +11,7 @@ func kill(body):
 	if !enabled or body.invincible or body.invulnerable:
 		return
 	
-	body.damage()
+	body.damage(1, "hit", 60)
 
 func _process(delta):
 	if is_instance_valid(stored_character):
