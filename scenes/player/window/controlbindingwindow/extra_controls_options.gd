@@ -61,12 +61,12 @@ func _input(event):
 		
 		if ControlUtil.binding_alias_already_exists(id, player_selector_manager.player_id(), currentButton.index, result):
 			return
-		if currentButton.index == PlayerSettings.keybindings[player_selector_manager.player_id()][id].size():
-			PlayerSettings.keybindings[player_selector_manager.player_id()][id].resize(PlayerSettings.keybindings[player_selector_manager.player_id()][id].size()+1)
+		if currentButton.index == Singleton.PlayerSettings.keybindings[player_selector_manager.player_id()][id].size():
+			Singleton.PlayerSettings.keybindings[player_selector_manager.player_id()][id].resize(Singleton.PlayerSettings.keybindings[player_selector_manager.player_id()][id].size()+1)
 			shouldCreateNewBindingOption = true
 			currentButton.get_parent().get_node("DeleteButton").visible = true
 		
-		PlayerSettings.keybindings[player_selector_manager.player_id()][id][currentButton.index] = result
+		Singleton.PlayerSettings.keybindings[player_selector_manager.player_id()][id][currentButton.index] = result
 		setNewTextAndReset()
 	
 func reset():
@@ -93,5 +93,5 @@ func setNewTextAndReset():
 		
 		var extra_keybinding = load("res://scenes/player/window/controlbindingwindow/ControlBinding.tscn")
 		var extra_keybinding_instance = extra_keybinding.instance()
-		extra_keybinding_instance.get_node("KeyButton").index = PlayerSettings.keybindings[player_selector_manager.player_id()][id].size()
+		extra_keybinding_instance.get_node("KeyButton").index = Singleton.PlayerSettings.keybindings[player_selector_manager.player_id()][id].size()
 		add_child(extra_keybinding_instance)

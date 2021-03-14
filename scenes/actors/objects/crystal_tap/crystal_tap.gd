@@ -30,7 +30,7 @@ func _ready():
 func set_liquid_level(body):
 	if body != null:
 		anim_player.play("touch")
-	for found_liquid in CurrentLevelData.level_data.vars.liquids:
+	for found_liquid in Singleton.CurrentLevelData.level_data.vars.liquids:
 		if found_liquid[0] == tag.to_lower():
 			found_liquid[1].moving = true
 			var match_level = global_position.y

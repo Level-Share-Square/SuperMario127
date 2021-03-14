@@ -24,30 +24,30 @@ func start_client(ip):
 	connected_type = "Client"
 	
 func _peer_connected(id):
-	PlayerSettings.number_of_players = 2
-	PlayerSettings.other_player_id = id
+	Singleton.PlayerSettings.number_of_players = 2
+	Singleton.PlayerSettings.other_player_id = id
 	if connected_type == "Server":
-		PlayerSettings.my_player_index = 0
+		Singleton.PlayerSettings.my_player_index = 0
 		print("Player connected! ID: " + str(id))
-		var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["load level", CurrentLevelData.level_data.get_encoded_level_data(), PlayerSettings.player1_character, PlayerSettings.player2_character]).to_ascii())
+		var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["load level", Singleton.CurrentLevelData.level_data.get_encoded_level_data(), Singleton.PlayerSettings.player1_character, Singleton.PlayerSettings.player2_character]).to_ascii())
 		var _reload = get_tree().reload_current_scene()
 	else:
-		PlayerSettings.my_player_index = 1
+		Singleton.PlayerSettings.my_player_index = 1
 
 func _peer_disconnected(id):
 	print("Player disconnected. ID: " + str(id))
 	connected_type = "None"
-	PlayerSettings.other_player_id = -1
-	PlayerSettings.my_player_index = 0
+	Singleton.PlayerSettings.other_player_id = -1
+	Singleton.PlayerSettings.my_player_index = 0
 
 func _packet_recieved(_id, packet_ascii):
 	var packet = JSON.parse(packet_ascii.get_string_from_ascii()).result
 	if packet[0] == "load level":
-		PlayerSettings.player1_character = packet[2]
-		PlayerSettings.player2_character = packet[3]
+		Singleton.PlayerSettings.player1_character = packet[2]
+		Singleton.PlayerSettings.player2_character = packet[3]
 		var level_data = LevelData.new()
 		level_data.load_in(packet[1])
-		CurrentLevelData.level_data = level_data
+		Singleton.CurrentLevelData.level_data = level_data
 		
 		yield(get_tree().create_timer(0.1), "timeout")
 		var _reload = get_tree().reload_current_scene()
@@ -65,5 +65,5 @@ func disconnect_from_peers():
 		var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["disconnect"]).to_ascii())
 		get_tree().multiplayer.set_network_peer(null)
 	connected_type = "None"
-	PlayerSettings.other_player_id = -1
-	PlayerSettings.my_player_index = 0
+	Singleton.PlayerSettings.other_player_id = -1
+	Singleton.PlayerSettings.my_player_index = 0

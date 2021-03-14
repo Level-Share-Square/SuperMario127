@@ -14,7 +14,7 @@ static func generate(noise_seed, shared_node):
 	
 	var set = false
 	var set2 = false
-	var level_area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
+	var level_area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
 	for object in shared_node.get_objects_node().get_children():
 		shared_node.destroy_object(object, true)
 	for x in range(level_area.settings.bounds.size.x):

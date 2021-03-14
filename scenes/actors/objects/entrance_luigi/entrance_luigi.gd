@@ -13,15 +13,15 @@ onready var sound = $AudioStreamPlayer
 
 func _ready():
 	if mode == 0:
-		if enabled and CheckpointSaved.current_checkpoint_id == -1:
+		if enabled and Singleton.CheckpointSaved.current_checkpoint_id == -1:
 			var player = get_tree().get_current_scene()
 			character = player.get_node(player.character2)
-			var transition_data = CurrentLevelData.level_data.vars.transition_data
+			var transition_data = Singleton.CurrentLevelData.level_data.vars.transition_data
 			if transition_data.size() == 0:
 				character.position = position
 			else:
 				yield(get_tree(), "physics_frame")
-				for pipe in CurrentLevelData.level_data.vars.pipes:
+				for pipe in Singleton.CurrentLevelData.level_data.vars.pipes:
 					if pipe[0] == transition_data[1].to_lower():
 						pipe[1].start_exit_anim(character)
 					

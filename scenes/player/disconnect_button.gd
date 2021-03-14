@@ -10,14 +10,14 @@ var last_hovered
 
 func _pressed():
 	click_sound.play()
-	Networking.disconnect_from_peers()
+	Singleton.Networking.disconnect_from_peers()
 	pause_screen_node.toggle_pause()
 	
 func _process(_delta):
 	if is_hovered() and !last_hovered:
 		hover_sound.play()	
 	last_hovered = is_hovered()
-	if Networking.connected_type == "None":
+	if Singleton.Networking.connected_type == "None":
 		disabled = true
 	else:
 		disabled = false

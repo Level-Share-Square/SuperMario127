@@ -54,7 +54,7 @@ var coin_frame : int
 func cap_zoom_level() -> void:
 	# Reduce the zoom level if the screen wouldn't fit within the level
 	# NOTE: all values are -6 since there are 3 tiles OOB in both directions for both axis
-	var level_size : Vector2 = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds.size
+	var level_size : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds.size
 	if (level_size.x < 36 or level_size.y < 16) and zoom_level > 1.5:
 		set_zoom_level(1.5)
 	# Level size Y is capped at 14. The Y check would be at 13 otherwise
@@ -71,7 +71,7 @@ func set_zoom_level(level : float) -> void:
 	
 	zoom_level = level
 	cap_zoom_level(); # Make sure it's not too large
-	EditorSavedSettings.zoom_level = zoom_level
+	Singleton.EditorSavedSettings.zoom_level = zoom_level
 
 func add_zoom_level(level : float) -> void:
 	set_zoom_level(zoom_level + level)
@@ -81,7 +81,7 @@ func get_shared_node() -> Node:
 
 func switch_layers() -> void:
 	editing_layer = wrapi(editing_layer + 1, 0, LAYER_COUNT)
-	EditorSavedSettings.layer = editing_layer
+	Singleton.EditorSavedSettings.layer = editing_layer
 	
 	shared.toggle_layer_transparency(editing_layer, layers_transparent)
 
@@ -99,9 +99,9 @@ func _unhandled_input(event) -> void:
 	elif event.is_action_released("erase"):
 		right_held = false
 	elif event.is_action_pressed("undo"):
-		ActionManager.undo()
+		Singleton.ActionManager.undo()
 	elif event.is_action_pressed("redo"):
-		ActionManager.redo()
+		Singleton.ActionManager.redo()
 	elif event.is_action_pressed("pencil_tool"):
 		selected_tool = 0
 	elif event.is_action_pressed("eraser_tool"):
@@ -117,37 +117,37 @@ func _unhandled_input(event) -> void:
 		switch_layers()
 	if event.is_action_pressed("toggle_transparency"):
 		layers_transparent = !layers_transparent
-		EditorSavedSettings.layers_transparent = layers_transparent
+		Singleton.EditorSavedSettings.layers_transparent = layers_transparent
 		shared.toggle_layer_transparency(editing_layer, layers_transparent)
 
 func _ready() -> void:
 	# reset these to 0 since they get incremented by the loading in process every time
-	CurrentLevelData.next_shine_id = 0
-	CurrentLevelData.next_star_coin_id = 0
-	CheckpointSaved.reset()
+	Singleton.CurrentLevelData.next_shine_id = 0
+	Singleton.CurrentLevelData.next_star_coin_id = 0
+	Singleton.CheckpointSaved.reset()
 
-	var data = CurrentLevelData.level_data
-	load_in(data, data.areas[CurrentLevelData.area])
-	zoom_level = EditorSavedSettings.zoom_level
-	editing_layer = EditorSavedSettings.layer
-	layers_transparent = EditorSavedSettings.layers_transparent
+	var data = Singleton.CurrentLevelData.level_data
+	load_in(data, data.areas[Singleton.CurrentLevelData.area])
+	zoom_level = Singleton.EditorSavedSettings.zoom_level
+	editing_layer = Singleton.EditorSavedSettings.layer
+	layers_transparent = Singleton.EditorSavedSettings.layers_transparent
 	shared.toggle_layer_transparency(editing_layer, layers_transparent)
 	
 	# if the mode switch button is invisible then the editor hasn't been readyed for the first time yet
 	# (editor _ready() gets called every time a mode switch happens)
 	# if the button is invisible and we're in the editor scene, we know it's time to setup the editor for the first time
-	if get_node("/root/mode_switcher/ModeSwitcherButton").invisible:
+	if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
 		# enable the mode switching button since we're using the editor
-		get_node("/root/mode_switcher/ModeSwitcherButton").change_button_state(true)
-		get_node("/root/music").play() # needed as the music no longer plays by default
+		Singleton.ModeSwitcher.get_node("ModeSwitcherButton").change_button_state(true)
+		Singleton.Music.play() # needed as the music no longer plays by default
 
 		# make sure the mode switcher button is set to have the play button as it's visual
-		mode_switcher.get_node("ModeSwitcherButton").change_visuals(0)
+		Singleton.ModeSwitcher.get_node("ModeSwitcherButton").change_visuals(0)
 
-		CurrentLevelData.unsaved_editor_changes = false
+		Singleton.CurrentLevelData.unsaved_editor_changes = false
 	
 func set_selected_box(new_selected_box: Node) -> void:
-	EditorSavedSettings.selected_box = new_selected_box.box_index
+	Singleton.EditorSavedSettings.selected_box = new_selected_box.box_index
 	item_preview.update_preview(new_selected_box.item)
 	selected_box = new_selected_box
 	for placeable_item_button in placeable_items_button_container.get_children():
@@ -402,10 +402,10 @@ func _process(delta : float) -> void:
 				for element in tiles_stack:
 					action.data.append(element)
 				tiles_stack.clear()
-				ActionManager.add_action(action)
+				Singleton.ActionManager.add_action(action)
 
 				# if an action is being added, that means we should count the count the level data as modified and in need of a save
-				CurrentLevelData.unsaved_editor_changes = true
+				Singleton.CurrentLevelData.unsaved_editor_changes = true
 		
 		
 		last_mouse_pos = mouse_pos

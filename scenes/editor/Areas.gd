@@ -10,7 +10,7 @@ func _ready():
 	var _connect = get_parent().connect("window_opened", self, "reload_areas")
 	_connect = settings_switch.connect("pressed", self, "switch_to_settings")
 	_connect = new_area.connect("pressed", self, "create_area")
-	if CurrentLevelData.level_data.areas.size() == 6:
+	if Singleton.CurrentLevelData.level_data.areas.size() == 6:
 		new_area.disabled = true
 
 func reload_areas():
@@ -19,7 +19,7 @@ func reload_areas():
 		child.queue_free()
 	
 	var index = 0
-	for area in CurrentLevelData.level_data.areas:
+	for area in Singleton.CurrentLevelData.level_data.areas:
 		var area_panel = load(AREA_PANEL_SCENE).instance()
 		area_panel.set_background(area.settings.sky, area.settings.background, area.settings.background_palette)
 		area_panel.set_id(index)
@@ -33,11 +33,11 @@ func switch_to_settings():
 	visible = false
 
 func create_area():
-	if CurrentLevelData.level_data.areas.size() < 6:
+	if Singleton.CurrentLevelData.level_data.areas.size() < 6:
 		var area = LevelArea.new()
-		area.duplicate(EditorSavedSettings.default_area)
-		CurrentLevelData.level_data.areas.append(area)
+		area.duplicate(Singleton.EditorSavedSettings.default_area)
+		Singleton.CurrentLevelData.level_data.areas.append(area)
 		reload_areas()
 
-	if CurrentLevelData.level_data.areas.size() == 6:
+	if Singleton.CurrentLevelData.level_data.areas.size() == 6:
 		new_area.disabled = true

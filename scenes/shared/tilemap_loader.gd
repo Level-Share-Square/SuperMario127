@@ -21,19 +21,12 @@ var noise := OpenSimplexNoise.new()
 func _ready():
 	var level_tilesets := preload("res://assets/tiles/ids.tres")
 	
-	var number_of_tiles = EditorSavedSettings.data_tiles
-	if !EditorSavedSettings.tileset_loaded:
-		number_of_tiles = load("res://assets/tiles/tiles.tres").get_last_unused_tile_id()
-	if EditorSavedSettings.tileset_loaded or (number_of_tiles == EditorSavedSettings.data_tiles and ResourceLoader.exists("user://tiles.res", "TileSet")):
-		var tile_set = EditorSavedSettings.tiles_resource
-		very_back_tilemap_node.tile_set = tile_set
-		back_tilemap_node.tile_set = tile_set
-		middle_tilemap_node.tile_set = tile_set
-		front_tilemap_node.tile_set = tile_set
-	else:
-		EditorSavedSettings.tileset_palettes = []
-	EditorSavedSettings.data_tiles = number_of_tiles
-	EditorSavedSettings.tileset_loaded = true
+	var number_of_tiles = Singleton.EditorSavedSettings.data_tiles
+	var tile_set = Singleton.EditorSavedSettings.tiles_resource
+	very_back_tilemap_node.tile_set = tile_set
+	back_tilemap_node.tile_set = tile_set
+	middle_tilemap_node.tile_set = tile_set
+	front_tilemap_node.tile_set = tile_set
 	
 	for tileset_id in level_tilesets.ids:
 		var tileset : LevelTileset = load("res://assets/tiles/" + tileset_id + "/resource.tres")
@@ -48,40 +41,7 @@ func _ready():
 			tileset.right_slope_tile_id
 		]
 		
-		if EditorSavedSettings.tileset_palettes != []:
-			tileset_palettes = EditorSavedSettings.tileset_palettes
-		else:
-			var palette_ids = []
-			for palette in tileset.palettes:
-				var tile_variation_ids = []
-				for base_tile_id in tile_variations:
-					var new_tile_id = tileset_resource.get_last_unused_tile_id()
-					tileset_resource.create_tile(new_tile_id)
-					
-					tileset_resource.autotile_set_bitmask_mode(new_tile_id, tileset_resource.autotile_get_bitmask_mode(base_tile_id))
-					tileset_resource.autotile_set_size(new_tile_id, tileset_resource.autotile_get_size(base_tile_id))
-					tileset_resource.tile_set_tile_mode(new_tile_id, tileset_resource.tile_get_tile_mode(base_tile_id))
-					
-					var region =  tileset_resource.tile_get_region(base_tile_id)
-					for coord_x in range(region.size.x):
-						for coord_y in range(region.size.y):
-							var coord = Vector2(coord_x, coord_y)
-							tileset_resource.autotile_set_bitmask(new_tile_id, coord, tileset_resource.autotile_get_bitmask(base_tile_id, coord))
-					
-					tileset_resource.tile_set_region(new_tile_id, region)
-					tileset_resource.tile_set_texture(new_tile_id, palette)
-					tileset_resource.tile_set_texture_offset(new_tile_id, tileset_resource.tile_get_texture_offset(base_tile_id))
-					tileset_resource.tile_set_shapes(new_tile_id, tileset_resource.tile_get_shapes(base_tile_id))
-					
-					tile_variation_ids.append(new_tile_id)
-				palette_ids.append(tile_variation_ids)
-			tileset_palettes.append(palette_ids)
-	if EditorSavedSettings.tileset_palettes == []:
-		middle_tilemap_node.tile_set._init()
-		EditorSavedSettings.tileset_palettes = tileset_palettes
-		ResourceSaver.save("user://tiles.res", middle_tilemap_node.tile_set)
-		EditorSavedSettings.tiles_resource = middle_tilemap_node.tile_set
-		SettingsSaver.save()
+		tileset_palettes = Singleton.EditorSavedSettings.tileset_palettes
 	
 func get_tile(tileset_id, tile_id, palette_id = 0):
 	if palette_id == 0:

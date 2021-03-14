@@ -84,9 +84,9 @@ func _ready() -> void:
 	# warning-ignore: return_value_discarded
 	player_detector.connect("body_entered", self, "detect_player")
 	player_detector.scale = Vector2(1, 1) / scale
-	CurrentLevelData.enemies_instanced += 1
-	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
-	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
+	Singleton.CurrentLevelData.enemies_instanced += 1
+	time_alive += float(Singleton.CurrentLevelData.enemies_instanced) / 2.0
+	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
 
 func shell_hit(shell_pos : Vector2) -> void:
 	if !hit:

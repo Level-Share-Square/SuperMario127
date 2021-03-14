@@ -9,6 +9,8 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/sea/palettes/3/front_2.png" type="Texture" id=7]
 [ext_resource path="res://scenes/shared/background/foregrounds/sea/palettes/3/front.png" type="Texture" id=8]
 
+
+
 [sub_resource type="AnimatedTexture" id=1]
 frames = 2
 fps = 6.0

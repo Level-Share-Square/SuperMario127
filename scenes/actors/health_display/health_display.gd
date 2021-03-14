@@ -35,9 +35,9 @@ var current_health = 8
 
 func _ready():
 	character = get_node(char_path)
-	if (character.player_id == 0) and PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
+	if (character.player_id == 0) and Singleton.PlayerSettings.number_of_players == 2 and Singleton.PlayerSettings.other_player_id == -1:
 		ui.rect_position.x = 309
-	elif (character.player_id == 1) and PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
+	elif (character.player_id == 1) and Singleton.PlayerSettings.number_of_players == 2 and Singleton.PlayerSettings.other_player_id == -1:
 		ui.rect_position.x = 693
 	else:
 		ui.rect_position.x = 693
@@ -102,7 +102,7 @@ func _process(delta):
 	
 	last_shown = shown
 	
-	if PhotoMode.enabled:
+	if Singleton.PhotoMode.enabled:
 		ui.visible = false
 	else:
 		ui.visible = true

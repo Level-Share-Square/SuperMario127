@@ -5,6 +5,8 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/castle/palettes/2/front.png" type="Texture" id=3]
 [ext_resource path="res://scenes/shared/background/foregrounds/castle/palettes/1/front.png" type="Texture" id=4]
 
+
+
 [resource]
 script = ExtResource( 2 )
 texture = ExtResource( 1 )

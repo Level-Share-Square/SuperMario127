@@ -19,8 +19,8 @@ func reset():
 	liquid_positions = []
 	nozzles_collected = ["null"]
 	
-	for index in CurrentLevelData.level_data.areas.size():
+	for index in Singleton.CurrentLevelData.level_data.areas.size():
 		current_shine_shards.append([0, []])
 		liquid_positions.append([])
 
-	CurrentLevelData.level_data.vars.init()
+	Singleton.CurrentLevelData.level_data.vars.init()

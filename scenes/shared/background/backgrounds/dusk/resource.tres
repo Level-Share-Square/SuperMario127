@@ -12,6 +12,8 @@
 [ext_resource path="res://scenes/shared/background/backgrounds/dusk/dusk1.png" type="Texture" id=10]
 [ext_resource path="res://scenes/shared/background/backgrounds/dusk/dusk3.png" type="Texture" id=11]
 
+
+
 [sub_resource type="AnimatedTexture" id=1]
 frames = 10
 fps = 5.0

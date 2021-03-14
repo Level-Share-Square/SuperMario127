@@ -31,6 +31,7 @@ var file : File = File.new()
 var directory : Directory = Directory.new()
 
 func _ready() -> void:
+	pass
 	load_level_paths_from_disk()
 	for level_path in levels_disk_paths:
 		load_level_from_disk(level_path)

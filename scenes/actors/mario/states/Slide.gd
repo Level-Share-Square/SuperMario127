@@ -107,7 +107,8 @@ func _general_update(delta):
 		ledge_buffer = 0.125
 		
 	if character.state != self and character.state != character.get_state_node("WallSlideState") and character.state != character.get_state_node("ButtSlideState"):
-		character.sound_player.set_skid_playing(false)
+		if is_instance_valid(character.sound_player):
+			character.sound_player.set_skid_playing(false)
 		character.particles.emitting = false
 		
 	if ledge_buffer > 0:

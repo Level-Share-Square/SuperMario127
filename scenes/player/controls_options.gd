@@ -122,7 +122,7 @@ func _input(event):
 
 		if ControlUtil.binding_alias_already_exists(currentButton.id, player_selector_manager.player_id(), 0, result):
 			return
-		PlayerSettings.keybindings[player_selector_manager.player_id()][currentButton.id][0] = result
+		Singleton.PlayerSettings.keybindings[player_selector_manager.player_id()][currentButton.id][0] = result
 		set_new_text_and_reset()
 	
 func reset():

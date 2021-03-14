@@ -68,18 +68,18 @@ func change_visuals(new_scene_mode : int) -> void:
 	self.texture_normal = texture_play if new_scene_mode == 0 else texture_stop
 
 func switch() -> void:
-	if get_parent().layer != 99 and !switching_disabled and !get_tree().paused and !scene_transitions.transitioning:
-		music.reset_music()
-		music.stop_temporary_music()
+	if get_parent().layer != 99 and !switching_disabled and !get_tree().paused and !Singleton.SceneTransitions.transitioning:
+		Singleton.Music.reset_music()
+		Singleton.Music.stop_temporary_music()
 
-		ActionManager.clear_history()
+		Singleton.ActionManager.clear_history()
 		
-		CurrentLevelData.area = 0
-		CurrentLevelData.enemies_instanced = 0
-		MiscShared.is_play_reload = false
+		Singleton.CurrentLevelData.area = 0
+		Singleton.CurrentLevelData.enemies_instanced = 0
+		Singleton.MiscShared.is_play_reload = false
 		var new_scene_mode = get_tree().get_current_scene().mode
 		if new_scene_mode == 0:
-			Networking.disconnect_from_peers()
+			Singleton.Networking.disconnect_from_peers()
 		
 		sound.play()
 		switching_disabled = true
@@ -118,8 +118,8 @@ func switch() -> void:
 		
 		yield(get_tree().create_timer(0.3), "timeout")
 		get_tree().paused = false
-		CurrentLevelData.level_data.vars = LevelVars.new() # Reset vars
-		CurrentLevelData.level_data.vars.init()
+		Singleton.CurrentLevelData.level_data.vars = LevelVars.new() # Reset vars
+		Singleton.CurrentLevelData.level_data.vars.init()
 		
 		get_tree().get_current_scene().switch_scenes()
 		change_visuals(new_scene_mode)

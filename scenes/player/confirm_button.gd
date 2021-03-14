@@ -19,9 +19,9 @@ func _ready():
 func _pressed():
 	click_sound.play()
 	SettingsSaver.save()
-	PlayerSettings.number_of_players = get_node(num_of_players).value
-	PlayerSettings.player1_character = get_node(player1_char).value
-	PlayerSettings.player2_character = get_node(player2_char).value
+	Singleton.PlayerSettings.number_of_players = get_node(num_of_players).value
+	Singleton.PlayerSettings.player1_character = get_node(player1_char).value
+	Singleton.PlayerSettings.player2_character = get_node(player2_char).value
 	
 	if "mode" in get_tree().get_current_scene():
 		character_node.dead = false
@@ -35,12 +35,12 @@ func _process(_delta):
 	last_hovered = is_hovered()
 	
 	var settings_match = (
-		PlayerSettings.number_of_players == get_node(num_of_players).value and
-		PlayerSettings.player1_character == get_node(player1_char).value and
-		PlayerSettings.player2_character == get_node(player2_char).value
+		Singleton.PlayerSettings.number_of_players == get_node(num_of_players).value and
+		Singleton.PlayerSettings.player1_character == get_node(player1_char).value and
+		Singleton.PlayerSettings.player2_character == get_node(player2_char).value
 	)
 	
-	if PlayerSettings.other_player_id != -1 or settings_match:
+	if Singleton.PlayerSettings.other_player_id != -1 or settings_match:
 		disabled = true
 	else:
 		disabled = false

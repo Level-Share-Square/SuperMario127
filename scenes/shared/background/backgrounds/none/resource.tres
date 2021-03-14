@@ -3,6 +3,8 @@
 [ext_resource path="res://classes/SkyResource.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/background/backgrounds/none/none.png" type="Texture" id=2]
 
+
+
 [resource]
 script = ExtResource( 1 )
 texture = ExtResource( 2 )

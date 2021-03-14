@@ -13,11 +13,11 @@ onready var music_id_mapper = preload("res://assets/music/ids.tres")
 onready var sorted_list = preload("res://assets/music/sort_order.tres")
 
 func update_display():
-	var data = CurrentLevelData.level_data
-	var area = data.areas[CurrentLevelData.area]
+	var data = Singleton.CurrentLevelData.level_data
+	var area = data.areas[Singleton.CurrentLevelData.area]
 	
 	if typeof(area.settings.music) == TYPE_INT:
-		var resource = MiscCache.music_nodes[area.settings.music]
+		var resource = Singleton.MiscCache.music_nodes[area.settings.music]
 		
 		music_title.text = resource.title
 		music_note.text = resource.note
@@ -32,7 +32,7 @@ func text_entered(text):
 	if not re.search_all(text) or !text.ends_with(".ogg"):
 		music_note.text = "Invalid URL"
 	else:
-		CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music = text
+		Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.music = text
 		update_display()
 
 func _ready():
@@ -57,8 +57,8 @@ func get_index_in_array(value, array):
 	return -1
 	
 func button_press():
-	var data = CurrentLevelData.level_data
-	var area = data.areas[CurrentLevelData.area]
+	var data = Singleton.CurrentLevelData.level_data
+	var area = data.areas[Singleton.CurrentLevelData.area]
 	
 	area.settings.music = area.settings.music if typeof(area.settings.music) == TYPE_INT else 0
 	var music_name = music_id_mapper.ids[area.settings.music]

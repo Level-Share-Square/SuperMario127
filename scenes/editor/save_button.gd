@@ -11,14 +11,14 @@ func _process(delta):
 		hover_sound.play()
 	last_hovered = is_hovered()
 	
-	self_modulate = lerp(self_modulate, Color(1.0, 0.4, 0.4) if CurrentLevelData.unsaved_editor_changes else Color(1.0, 1.0, 1.0), delta * 3 if CurrentLevelData.unsaved_editor_changes else delta * 10)
+	self_modulate = lerp(self_modulate, Color(1.0, 0.4, 0.4) if Singleton.CurrentLevelData.unsaved_editor_changes else Color(1.0, 1.0, 1.0), delta * 3 if Singleton.CurrentLevelData.unsaved_editor_changes else delta * 10)
 
 func _pressed():
 	click_sound.play()
 
-	if SavedLevels.selected_level != -1:
-		SavedLevels.levels[SavedLevels.selected_level] = LevelInfo.new(CurrentLevelData.level_data.get_encoded_level_data())
-		var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
+	if Singleton.SavedLevels.selected_level != -1:
+		Singleton.SavedLevels.levels[Singleton.SavedLevels.selected_level] = LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data())
+		var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
 
-		CurrentLevelData.unsaved_editor_changes = false
+		Singleton.CurrentLevelData.unsaved_editor_changes = false
 

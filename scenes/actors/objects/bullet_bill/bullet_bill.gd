@@ -68,7 +68,7 @@ func detect_stomp(body):
 		kill(body, "stomp")
 
 func _ready():
-	CurrentLevelData.enemies_instanced += 1
+	Singleton.CurrentLevelData.enemies_instanced += 1
 	sprite.rotation = PI if chase and facing_direction == -1 else 0.0
 	sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
 	colored_sprite.flip_h = true if facing_direction == 1 or (chase and facing_direction == -1) else false
@@ -111,7 +111,7 @@ func _physics_process(delta):
 				var current_scene = get_tree().get_current_scene()
 				var character_1 = current_scene.get_node(current_scene.character)
 				
-				if PlayerSettings.number_of_players == 1:
+				if Singleton.PlayerSettings.number_of_players == 1:
 					character = character_1
 				else:
 					var character_2 = current_scene.get_node(current_scene.character2)
@@ -135,14 +135,14 @@ func _physics_process(delta):
 				if invincible:
 					dead = false
 				else:
-					CurrentLevelData.enemies_instanced -= 1
+					Singleton.CurrentLevelData.enemies_instanced -= 1
 					queue_free()
 		elif !chase:
 			sprite.frame = 0
 			position += Vector2(cos(sprite.rotation), sin(sprite.rotation)) * (speed * 2) * facing_direction
 		
 		if !visibility_notifer.is_on_screen():
-			CurrentLevelData.enemies_instanced -= 1
+			Singleton.CurrentLevelData.enemies_instanced -= 1
 			queue_free()
 	
 	if char_find_timer > 0:

@@ -37,7 +37,7 @@ func _ready() -> void:
 	var append_tag = door_tag.to_lower()
 	if tag != "none":
 		append_tag = tag.to_lower()
-	CurrentLevelData.level_data.vars.doors.append([append_tag, self])
+	Singleton.CurrentLevelData.level_data.vars.doors.append([append_tag, self])
 	door_enter_logic.connect("start_door_logic", self, "_start_transition")
 
 func get_character_screen_position(character : Character) -> Vector2:
@@ -50,17 +50,17 @@ func get_character_screen_position(character : Character) -> Vector2:
 
 func _start_transition(character : Character) -> void:
 	# sets the transition center to Mario's position
-	scene_transitions.canvas_mask.position = get_character_screen_position(character)
+	Singleton.SceneTransitions.canvas_mask.position = get_character_screen_position(character)
 	# this starts an inner scene transition, then connects a function (one shot) to start as it finishes
-	scene_transitions.do_transition_animation(scene_transitions.cutout_circle, scene_transitions.DEFAULT_TRANSITION_TIME, scene_transitions.TRANSITION_SCALE_UNCOVER, scene_transitions.TRANSITION_SCALE_COVERED, -1, -1, false, false)
+	Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, -1, -1, false, false)
 	# warning-ignore: return_value_discarded
-	scene_transitions.connect("transition_finished", self, "_start_teleport", [character], CONNECT_ONESHOT)
+	Singleton.SceneTransitions.connect("transition_finished", self, "_start_teleport", [character], CONNECT_ONESHOT)
 
 func _start_teleport(character : Character) -> void:
 	var teleport_door = self
 	
 	# looks for all doors in the level, and if the tag matches, it sets the door to teleport to, then breaks the loop
-	for found_door in CurrentLevelData.level_data.vars.doors:
+	for found_door in Singleton.CurrentLevelData.level_data.vars.doors:
 		var condition = found_door[0] == door_tag.to_lower() and found_door[1] != self
 		if teleport_to_tag != "none":
 			condition = found_door[0] == teleport_to_tag.to_lower()
@@ -77,9 +77,9 @@ func _start_teleport(character : Character) -> void:
 	tween.start()
 	
 	# sets the transition center to Mario's position
-	scene_transitions.canvas_mask.position = get_character_screen_position(character)
+	Singleton.SceneTransitions.canvas_mask.position = get_character_screen_position(character)
 	# start outer transition
-	scene_transitions.do_transition_animation(scene_transitions.cutout_circle, scene_transitions.DEFAULT_TRANSITION_TIME, scene_transitions.TRANSITION_SCALE_COVERED, scene_transitions.TRANSITION_SCALE_UNCOVER, -1, -1, false, false)
+	Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, -1, -1, false, false)
 	
 	if teleport_door != self:
 		door_enter_logic.is_idle = true

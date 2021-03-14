@@ -23,22 +23,20 @@ var next_star_coin_id : int = 0
 
 # can be used by anything that needs to disable pausing for some time
 var can_pause : bool = true
+var thread
 
 func pick_random_music() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
 	var array_index = rng.randi_range(0, random_music.size() - 1)
-	CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music = random_music[array_index]
+	level_data.areas[area].settings.music = random_music[array_index]
 
-func _ready() -> void:
-	# since the time score is incremented here, it must keep incrementing while paused
-	pause_mode = PAUSE_MODE_PROCESS
-	set_process(false)
-
+func create_level_data(userdata):
 	level_data = LevelData.new()
 	level_data.load_in(load("res://assets/level_data/template_level.tres").contents)
 	pick_random_music()
-	
+
+func create_cache(userdata):
 	# These checks prevent memory leaks, and make it much quicker to reset the level
 	if object_cache.size() == 0:
 		var object_id_map : IdMap = preload("res://scenes/actors/objects/ids.tres")
@@ -54,7 +52,18 @@ func _ready() -> void:
 		var foreground_id_mapper : IdMap = preload("res://scenes/shared/background/foregrounds/ids.tres")
 		for foreground_id in foreground_id_mapper.ids:
 			foreground_cache.append(load("res://scenes/shared/background/foregrounds/" + foreground_id + "/resource.tres"))
+	
+	create_level_data(0)
 
+func _init() -> void:
+	thread = Thread.new()
+	
+	# since the time score is incremented here, it must keep incrementing while paused
+	pause_mode = PAUSE_MODE_PROCESS
+	set_process(false)
+	
+	thread.start(self, "create_cache")
+	
 # for now, process is disabled by default, so the timer needs to be started manually, if process here is ever needed for something else, create a bool for this
 func _process(delta):
 	time_score += delta
@@ -69,7 +78,7 @@ func stop_tracking_time_score():
 
 func get_last_shine_id():
 	var last_shine_id = 0
-	for area in CurrentLevelData.level_data.areas:
+	for area in Singleton.CurrentLevelData.level_data.areas:
 		for object in area.objects:
 			if object.type_id == 2:
 				object.properties[12] = last_shine_id
@@ -78,7 +87,7 @@ func get_last_shine_id():
 
 func get_last_star_coin_id():
 	var last_star_coin_id = 0
-	for area in CurrentLevelData.level_data.areas:
+	for area in Singleton.CurrentLevelData.level_data.areas:
 		for object in area.objects:
 			if object.type_id == 52:
 				object.properties[5] = last_star_coin_id
@@ -88,7 +97,7 @@ func get_last_star_coin_id():
 func get_red_coins_before_area(area_id : int):
 	var last_red_coin_id = 0
 	for index in range(area_id):
-		var area = CurrentLevelData.level_data.areas[index]
+		var area = Singleton.CurrentLevelData.level_data.areas[index]
 		for object in area.objects:
 			if object.type_id == 30 and object.properties[3]:
 				last_red_coin_id += 1

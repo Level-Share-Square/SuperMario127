@@ -38,7 +38,7 @@ func _ready():
 												collision_shape.shape.extents.y * scale.y)
 	
 	break_particle.hide()
-	sprite.material.set_shader_param("gradient", MiscShared.rainbow_gradient_texture)
+	sprite.material.set_shader_param("gradient", Singleton.MiscShared.rainbow_gradient_texture)
 
 func is_rainbow(body):
 	return body.powerup != null and body.powerup.id == 1

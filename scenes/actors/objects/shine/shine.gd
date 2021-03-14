@@ -22,8 +22,8 @@ onready var collect_sound : AudioStreamPlayer = $CollectSound
 onready var ambient_sound : AudioStreamPlayer = $AmbientSound
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var current_scene : Node = get_tree().current_scene
-onready var transitions : Node = get_node("/root/scene_transitions")
-onready var mode_switcher_button : Node = get_node("/root/mode_switcher/ModeSwitcherButton")
+onready var transitions : Node = Singleton.SceneTransitions
+onready var mode_switcher_button : Node = Singleton.ModeSwitcher.get_node("ModeSwitcherButton")
 
 const UNPAUSE_TIMER_LENGTH = 3.35
 
@@ -80,9 +80,9 @@ func _ready() -> void:
 		
 		# if the shine is collected, make it blue 
 		# (collected_shines is a Dictionary where the key is the shine id and the value is a bool)
-		if SavedLevels.selected_level != SavedLevels.NO_LEVEL && \
-		mode_switcher.get_node("ModeSwitcherButton").invisible:
-			var collected_shines = SavedLevels.get_current_levels()[SavedLevels.selected_level].collected_shines
+		if Singleton.SavedLevels.selected_level != Singleton.SavedLevels.NO_LEVEL && \
+		Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
+			var collected_shines = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level].collected_shines
 
 			# Get the value, returning false if the key doesn't exist
 			is_blue = collected_shines.get(str(id), false)
@@ -91,7 +91,7 @@ func _ready() -> void:
 	update_color("color", color)
 
 func on_place():
-	id = CurrentLevelData.get_last_shine_id()
+	id = Singleton.CurrentLevelData.get_last_shine_id()
 	set_property("id", id)
 
 func update_color(key, value):
@@ -126,11 +126,11 @@ func _physics_process(_delta : float) -> void:
 		
 	if mode != 1:
 		var camera : Camera2D = current_scene.get_node(current_scene.camera)
-		if red_coins_activate and !activated and CurrentLevelData.level_data.vars.max_red_coins > 0:
-			if CurrentLevelData.level_data.vars.red_coins_collected[0] == CurrentLevelData.level_data.vars.max_red_coins:
+		if red_coins_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_red_coins > 0:
+			if Singleton.CurrentLevelData.level_data.vars.red_coins_collected[0] == Singleton.CurrentLevelData.level_data.vars.max_red_coins:
 				activate_shine()
-		if shine_shards_activate and !activated and CurrentLevelData.level_data.vars.max_shine_shards > 0:
-			if CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][0] == CurrentLevelData.level_data.vars.max_shine_shards:
+		if shine_shards_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_shine_shards > 0:
+			if Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][0] == Singleton.CurrentLevelData.level_data.vars.max_shine_shards:
 				activate_shine()
 		if !collected:
 			if !activated:
@@ -192,7 +192,7 @@ func collect(body : PhysicsBody2D) -> void:
 		if character.state != null and character.state.name == "SlideState" and character.is_grounded():
 			character.position.y -= 16
 
-		music.stop_temporary_music()
+		Singleton.Music.stop_temporary_music()
 
 		character.anim_player.stop()
 		character.set_state_by_name("FallState", get_physics_process_delta_time())
@@ -207,23 +207,23 @@ func collect(body : PhysicsBody2D) -> void:
 		character.set_collision_layer_bit(1, false) # disable collisions w/ most things
 		character.set_inter_player_collision(false)
 
-		mode_switcher_button.switching_disabled = true
-		CurrentLevelData.can_pause = false
+		Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled = true
+		Singleton.CurrentLevelData.can_pause = false
 
 		# mute level music (gets un-muted after shine dance finishes)
-		music.volume_multiplier = 0
+		Singleton.Music.volume_multiplier = 0
 
 		collect_sound.play() 
 		collected = true
 		visible = false
 
-		if mode_switcher.get_node("ModeSwitcherButton").invisible and SavedLevels.selected_level != SavedLevels.NO_LEVEL:
-			score_from_before = CurrentLevelData.time_score
-			SavedLevels.get_current_levels()[SavedLevels.selected_level].set_shine_collected(id, false)
-			SavedLevels.get_current_levels()[SavedLevels.selected_level].update_time_and_coin_score(id, true)
-			CurrentLevelData.stop_tracking_time_score()
+		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and Singleton.SavedLevels.selected_level != Singleton.SavedLevels.NO_LEVEL:
+			score_from_before = Singleton.CurrentLevelData.time_score
+			Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level].set_shine_collected(id, false)
+			Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level].update_time_and_coin_score(id, true)
+			Singleton.CurrentLevelData.stop_tracking_time_score()
 			if !do_kick_out:
-				var level_info = SavedLevels.get_current_levels()[SavedLevels.selected_level]
+				var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
 				var new_shine_id = level_info.selected_shine + 1
 				if new_shine_id < level_info.shine_details.size():
 					level_info.selected_shine = new_shine_id
@@ -240,7 +240,7 @@ func start_shine_dance() -> void:
 	character.sprite.animation = "shineDance"
 	character.anim_player.play("shine_dance")
 	
-	music.play_temporary_music(COURSE_CLEAR_MUSIC_ID, COURSE_CLEAR_MUSIC_VOLUME)
+	Singleton.Music.play_temporary_music(COURSE_CLEAR_MUSIC_ID, COURSE_CLEAR_MUSIC_VOLUME)
 	
 	# warning-ignore: return_value_discarded
 	character.anim_player.connect("animation_finished", self, "character_shine_dance_finished", [], CONNECT_ONESHOT)
@@ -255,12 +255,12 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 	#fades to the correct volume in both situations
 	if do_kick_out:
 		if mode_switcher_button.invisible: #if not running through the editor, play the transition
-			var _connect = scene_transitions.connect("transition_finished", MenuVariables, "quit_to_menu", ["levels_screen"], CONNECT_ONESHOT)
-			scene_transitions.do_transition_animation(
+			var _connect = Singleton.SceneTransitions.connect("transition_finished", Singleton.MenuVariables, "quit_to_menu", ["levels_screen"], CONNECT_ONESHOT)
+			Singleton.SceneTransitions.do_transition_animation(
 				character.cutout_shine, 
-				scene_transitions.DEFAULT_TRANSITION_TIME, 
-				scene_transitions.TRANSITION_SCALE_UNCOVER, 
-				scene_transitions.TRANSITION_SCALE_COVERED,
+				Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, 
+				Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, 
+				Singleton.SceneTransitions.TRANSITION_SCALE_COVERED,
 				0,
 				0,
 				true,
@@ -273,7 +273,7 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 			mode_switcher_button._pressed()
 			
 			# pausing disabled for same reasons as mode switcher button
-			CurrentLevelData.can_pause = true
+			Singleton.CurrentLevelData.can_pause = true
 	else: 
 		# start playing the dance stop animation
 		character.shine_kill = false
@@ -289,7 +289,7 @@ func restore_control(animation : String, character : Character) -> void:
 		mode_switcher_button.switching_disabled = false 
 
 	# pausing disabled for same reasons as mode switcher button
-	CurrentLevelData.can_pause = true
+	Singleton.CurrentLevelData.can_pause = true
 
 	# stop the animation
 	character.anim_player.stop()
@@ -310,7 +310,7 @@ func restore_control(animation : String, character : Character) -> void:
 	character.controllable = true
 	
 	# to prevent cheese on other shine time scores
-	CurrentLevelData.start_tracking_time_score()
-	CurrentLevelData.time_score = score_from_before
+	Singleton.CurrentLevelData.start_tracking_time_score()
+	Singleton.CurrentLevelData.time_score = score_from_before
 	
-	music.stop_temporary_music()
+	Singleton.Music.stop_temporary_music()

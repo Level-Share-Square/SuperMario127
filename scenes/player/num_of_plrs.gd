@@ -8,7 +8,7 @@ onready var value_text = $Value
 export var value = 1
 
 func _ready():
-	value = PlayerSettings.number_of_players
+	value = Singleton.PlayerSettings.number_of_players
 	value_text.text = str(value)
 	var _connect = left.connect("pressed", self, "decrease_value")
 	var _connect2 = right.connect("pressed", self, "increase_value")

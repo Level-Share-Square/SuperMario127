@@ -25,9 +25,9 @@ func _set_property_values():
 func _ready() -> void:
 	var _connect = area.connect("body_entered", self, "collect")
 
-	if SavedLevels.selected_level != SavedLevels.NO_LEVEL && \
-	mode_switcher.get_node("ModeSwitcherButton").invisible:
-		var collected_star_coins = SavedLevels.get_current_levels()[SavedLevels.selected_level].collected_star_coins
+	if Singleton.SavedLevels.selected_level != Singleton.SavedLevels.NO_LEVEL && \
+	Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
+		var collected_star_coins = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level].collected_star_coins
 		# Get the value, returning false if the key doesn't exist
 		is_blue = collected_star_coins.get(str(id), false)
 
@@ -35,7 +35,7 @@ func _ready() -> void:
 	anim_sprite.play("default")
 
 func on_place():
-	id = CurrentLevelData.get_last_star_coin_id()
+	id = Singleton.CurrentLevelData.get_last_star_coin_id()
 	set_property("id", id)
 
 func update_color():
@@ -48,8 +48,8 @@ func update_color():
 
 func collect(body : PhysicsBody2D) -> void:
 	if enabled and !collected and (body is Character):
-		if mode_switcher.get_node("ModeSwitcherButton").invisible:
-			SavedLevels.get_current_levels()[SavedLevels.selected_level].set_star_coin_collected(id)
+		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
+			Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level].set_star_coin_collected(id)
 
 		collected = true
 

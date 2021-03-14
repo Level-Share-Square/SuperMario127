@@ -10,7 +10,7 @@ static func parse_text(text : String, character : Character):
 	text = text.replace(":Char:", character_names[character.character])
 	text = text.replace(":CHAR:", character_names[character.character].to_upper())
 	
-	text = text.replace(":winginputs:", ":leftinput: and :rightinput:" if !PlayerSettings.legacy_wing_cap else ":upinput: and :downinput:")
+	text = text.replace(":winginputs:", ":leftinput: and :rightinput:" if !Singleton.PlayerSettings.legacy_wing_cap else ":upinput: and :downinput:")
 	
 	text = text.replace(":leftinput:", 
 		"[color=#7dcbff]" + ControlUtil.get_formatted_string("left", character.player_id) + "[/color]"

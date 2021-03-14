@@ -12,12 +12,12 @@ func _pressed():
 	click_sound.play()
 	
 	var selector = get_parent().get_node("Selector")
-	PlayerSettings.keybindings[player_selector_manager.player_id()] = ControlPresets.presets[selector.text].duplicate(true)
+	Singleton.PlayerSettings.keybindings[player_selector_manager.player_id()] = ControlPresets.presets[selector.text].duplicate(true)
 	
 	controls_options.currentButton = null
 	
 	# Not a super elegant solution, but rn it doesn't really matter
-	PlayerSettings.legacy_wing_cap = (selector.text == "Legacy")
+	Singleton.PlayerSettings.legacy_wing_cap = (selector.text == "Legacy")
 	controls_options.get_node("Legacy Wing Cap").get_node("ToggleButton").update_text()
 
 	for children in get_parent().get_parent().get_children():

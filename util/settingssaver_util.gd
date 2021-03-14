@@ -19,49 +19,49 @@ static func load():
 	if data != null:
 		Engine.target_fps = 10 * (data["fpsLock"] + 3)
 		if data.has("showTimer"):
-			TimeScore.shown = data["showTimer"]
+			Singleton.TimeScore.shown = data["showTimer"]
 		#if data.has("volume"):
-			#music.set_global_volume(data["volume"])
+			#Singleton.Music.set_global_volume(data["volume"])
 		if data.has("legacyWingCap"):
 			# imo this is cleaner than putting it in presets atm
-			PlayerSettings.legacy_wing_cap = data["legacyWingCap"]
+			Singleton.PlayerSettings.legacy_wing_cap = data["legacyWingCap"]
 		if data.has("gameVersion"):
-			if data["gameVersion"] != PlayerSettings.game_version:
-				SavedLevels.wipe_template_levels()
+			if data["gameVersion"] != Singleton.PlayerSettings.game_version:
+				Singleton.SavedLevels.wipe_template_levels()
 				if data.has("windowScale"):
 					data["windowScale"] = 1
 				save()
 		else:
-			SavedLevels.wipe_template_levels()
+			Singleton.SavedLevels.wipe_template_levels()
 			save()
 	
 		if data.has("numberOfTiles"):
-			EditorSavedSettings.data_tiles = data["numberOfTiles"]
+			Singleton.EditorSavedSettings.data_tiles = data["numberOfTiles"]
 			
 		if data.has("savedPalettes"):
-			EditorSavedSettings.tileset_palettes = data["savedPalettes"]
+			Singleton.EditorSavedSettings.tileset_palettes = data["savedPalettes"]
 	
-		yield(EditorSavedSettings.get_tree().create_timer(1), "timeout")
+		yield(Singleton.EditorSavedSettings.get_tree().create_timer(1), "timeout")
 		
 		if data.has("windowScale"):
 			ScreenSizeUtil.set_screen_size(data["windowScale"])
 
 static func save():
-	var windowScale = EditorSavedSettings.stored_window_scale
+	var windowScale = Singleton.EditorSavedSettings.stored_window_scale
 	var fpsLock = (Engine.target_fps / 10.0) - 3
-	var showTimer = TimeScore.shown
-	var legacyCap = PlayerSettings.legacy_wing_cap
+	var showTimer = Singleton.TimeScore.shown
+	var legacyCap = Singleton.PlayerSettings.legacy_wing_cap
 	
 	var data = {
 		"windowScale": windowScale,
 		"fpsLock": fpsLock,
 		"showTimer": showTimer,
-		"controls": PlayerSettings.keybindings,
-		"volume": music.global_volume,
+		"controls": Singleton.PlayerSettings.keybindings,
+		"volume": Singleton.Music.global_volume,
 		"legacyWingCap": legacyCap,
-		"gameVersion": PlayerSettings.game_version,
-		"numberOfTiles": EditorSavedSettings.data_tiles,
-		"savedPalettes": EditorSavedSettings.tileset_palettes
+		"gameVersion": Singleton.PlayerSettings.game_version,
+		"numberOfTiles": Singleton.EditorSavedSettings.data_tiles,
+		"savedPalettes": Singleton.EditorSavedSettings.tileset_palettes
 	}
 	
 	var file = File.new()
@@ -77,15 +77,15 @@ static func save_volume():
 			"windowScale": 1,
 			"fpsLock": 3,
 			"showTimer": false,
-			"controls": PlayerSettings.keybindings,
-			"volume": music.global_volume,
-			"legacyWingCap": PlayerSettings.legacy_wing_cap,
-			"gameVersion": PlayerSettings.game_version,
-			"numberOfTiles": EditorSavedSettings.data_tiles,
-			"savedPalettes": EditorSavedSettings.tileset_palettes
+			"controls": Singleton.PlayerSettings.keybindings,
+			"volume": Singleton.Music.global_volume,
+			"legacyWingCap": Singleton.PlayerSettings.legacy_wing_cap,
+			"gameVersion": Singleton.PlayerSettings.game_version,
+			"numberOfTiles": Singleton.EditorSavedSettings.data_tiles,
+			"savedPalettes": Singleton.EditorSavedSettings.tileset_palettes
 		}
 	
-	data["volume"] = music.global_volume
+	data["volume"] = Singleton.Music.global_volume
 	
 	var file = File.new()
 	file.open(PATH, File.WRITE)
@@ -106,15 +106,15 @@ static func get_keybindings() -> Array:
 		
 static func load_keybindings_into_actions():
 	var _actualName
-	for i in range(0, PlayerSettings.keybindings.size()):
-		for key in PlayerSettings.keybindings[i]:
+	for i in range(0, Singleton.PlayerSettings.keybindings.size()):
+		for key in Singleton.PlayerSettings.keybindings[i]:
 			var input_name = key + str(i)
 			if not InputMap.has_action(key + input_name):
 				InputMap.add_action(input_name)
 				set_keybindings(key, i)
 				
 static func set_keybindings(action : String, player_id : int):
-	var binding = PlayerSettings.keybindings[player_id][action]
+	var binding = Singleton.PlayerSettings.keybindings[player_id][action]
 	var input_name = action + str(player_id)
 	for temp in binding:
 		var mode = temp[0]

@@ -1,7 +1,7 @@
 extends Powerup
 class_name MetalPowerup
 
-onready var music = get_node("/root/music")
+onready var music = Singleton.Music
 var last_active = false
 
 func _ready():
@@ -11,11 +11,11 @@ func _ready():
 func _start(_delta, play_temp_music: bool):
 	character.metal_voice = true
 	if play_temp_music:
-		music.play_temporary_music(music_id)
+		Singleton.Music.play_temporary_music(music_id)
 
 func _stop(_delta):
 	character.metal_voice = false
-	music.stop_temporary_music()
+	Singleton.Music.stop_temporary_music()
 
 func _process(_delta):
 	if character.powerup == self:

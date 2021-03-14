@@ -3,6 +3,8 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/ice_mountain/middle.png" type="Texture" id=1]
 [ext_resource path="res://classes/ParallaxLayerResource.gd" type="Script" id=2]
 
+
+
 [resource]
 script = ExtResource( 2 )
 texture = ExtResource( 1 )

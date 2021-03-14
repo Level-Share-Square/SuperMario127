@@ -6,21 +6,21 @@ onready var right = $Right
 onready var value_text = $Value
 
 func _ready():
-	value_text.text = str(PlayerSettings.control_mode + 1)
+	value_text.text = str(Singleton.PlayerSettings.control_mode + 1)
 	var _connect = left.connect("pressed", self, "decrease_value")
 	var _connect2 = right.connect("pressed", self, "increase_value")
 	
 func decrease_value():
-	PlayerSettings.control_mode -= 1
-	if PlayerSettings.control_mode < 0:
-		PlayerSettings.control_mode = 2
+	Singleton.PlayerSettings.control_mode -= 1
+	if Singleton.PlayerSettings.control_mode < 0:
+		Singleton.PlayerSettings.control_mode = 2
 	process()
 	
 func increase_value():
-	PlayerSettings.control_mode += 1
-	if PlayerSettings.control_mode > 2:
-		PlayerSettings.control_mode = 0
+	Singleton.PlayerSettings.control_mode += 1
+	if Singleton.PlayerSettings.control_mode > 2:
+		Singleton.PlayerSettings.control_mode = 0
 	process()
 
 func process():
-	value_text.text = str(PlayerSettings.control_mode + 1)
+	value_text.text = str(Singleton.PlayerSettings.control_mode + 1)

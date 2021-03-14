@@ -14,12 +14,12 @@ func _ready():
 
 func _start(_delta, play_temp_music: bool):
 	if play_temp_music:
-		music.play_temporary_music(music_id)
+		Singleton.Music.play_temporary_music(music_id)
 	has_landed = false
 	character.set_nozzle("null", true) # Disable FLUDD, it's unusable anyway
 
 func _stop(_delta):
-	music.stop_temporary_music()
+	Singleton.Music.stop_temporary_music()
 
 func create_trail():
 	var trail = character.sprite.duplicate()

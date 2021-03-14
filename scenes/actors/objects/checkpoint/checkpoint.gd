@@ -20,10 +20,10 @@ func _set_property_values():
 	set_property("spawn_y_offset", spawn_y_offset, true)
 
 func _ready():
-	id = CurrentLevelData.level_data.vars.checkpoints.size()
-	CurrentLevelData.level_data.vars.checkpoints.append([id, self])
+	id = Singleton.CurrentLevelData.level_data.vars.checkpoints.size()
+	Singleton.CurrentLevelData.level_data.vars.checkpoints.append([id, self])
 	
-	if CheckpointSaved.current_checkpoint_id == id:
+	if Singleton.CheckpointSaved.current_checkpoint_id == id:
 		is_used = true
 
 	var _connect = use_area.connect("body_entered", self, "set_checkpoint")
@@ -48,21 +48,21 @@ func set_checkpoint(body):
 		return
 	
 	is_used = true
-	CheckpointSaved.current_checkpoint_id = id
-	CheckpointSaved.current_spawn_pos = global_position + Vector2(0, spawn_y_offset)
-	CheckpointSaved.current_area = CurrentLevelData.area
-	CheckpointSaved.current_coins = CurrentLevelData.level_data.vars.coins_collected
-	CheckpointSaved.nozzles_collected = CurrentLevelData.level_data.vars.nozzles_collected.duplicate(true)
-	CheckpointSaved.current_red_coins = CurrentLevelData.level_data.vars.red_coins_collected.duplicate(true)
-	CheckpointSaved.current_shine_shards = CurrentLevelData.level_data.vars.shine_shards_collected.duplicate(true)
+	Singleton.CheckpointSaved.current_checkpoint_id = id
+	Singleton.CheckpointSaved.current_spawn_pos = global_position + Vector2(0, spawn_y_offset)
+	Singleton.CheckpointSaved.current_area = Singleton.CurrentLevelData.area
+	Singleton.CheckpointSaved.current_coins = Singleton.CurrentLevelData.level_data.vars.coins_collected
+	Singleton.CheckpointSaved.nozzles_collected = Singleton.CurrentLevelData.level_data.vars.nozzles_collected.duplicate(true)
+	Singleton.CheckpointSaved.current_red_coins = Singleton.CurrentLevelData.level_data.vars.red_coins_collected.duplicate(true)
+	Singleton.CheckpointSaved.current_shine_shards = Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.duplicate(true)
 	
 	if save_water_level:
-		CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area] = []
-		for liquid in CurrentLevelData.level_data.vars.liquids:
-			CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area].append(liquid[1].save_pos)
-	CheckpointSaved.liquid_positions = CurrentLevelData.level_data.vars.liquid_positions
+		Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area] = []
+		for liquid in Singleton.CurrentLevelData.level_data.vars.liquids:
+			Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].append(liquid[1].save_pos)
+	Singleton.CheckpointSaved.liquid_positions = Singleton.CurrentLevelData.level_data.vars.liquid_positions
 	
-	for checkpoint in CurrentLevelData.level_data.vars.checkpoints:
+	for checkpoint in Singleton.CurrentLevelData.level_data.vars.checkpoints:
 		if checkpoint[1] != self:
 			checkpoint[1].unset_checkpoint()
 	

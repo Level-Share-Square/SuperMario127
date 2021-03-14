@@ -21,4 +21,4 @@ static func set_screen_size(window_scale):
 	else:
 		OS.window_fullscreen = true
 	
-	EditorSavedSettings.stored_window_scale = window_scale
+	Singleton.EditorSavedSettings.stored_window_scale = window_scale

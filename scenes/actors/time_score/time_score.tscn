@@ -10,6 +10,7 @@ layer = 20
 script = ExtResource( 3 )
 
 [node name="TimeScore" type="Label" parent="."]
+visible = false
 margin_left = 657.0
 margin_top = 390.6
 margin_right = 759.0

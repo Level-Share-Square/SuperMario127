@@ -35,8 +35,8 @@ func _ready():
 
 func item_changed():
 	icon.texture = null if item == null else item.icon
-	EditorSavedSettings.layout_ids[box_index] = item.name
-	EditorSavedSettings.layout_palettes[box_index] = item.palette_index
+	Singleton.EditorSavedSettings.layout_ids[box_index] = item.name
+	Singleton.EditorSavedSettings.layout_palettes[box_index] = item.palette_index
 	
 func is_hovered():
 	var mouse_pos = get_global_mouse_position()

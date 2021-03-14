@@ -34,9 +34,9 @@ var current_health = 8
 
 func _ready():
 	character = get_node(char_path)
-	if (character.player_id == 0) and PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
+	if (character.player_id == 0) and Singleton.PlayerSettings.number_of_players == 2 and Singleton.PlayerSettings.other_player_id == -1:
 		ui.rect_position.x = multiplayer_x_pos
-	elif (character.player_id == 1) and PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
+	elif (character.player_id == 1) and Singleton.PlayerSettings.number_of_players == 2 and Singleton.PlayerSettings.other_player_id == -1:
 		ui.rect_position.x = default_x_pos
 	else:
 		ui.rect_position.x = default_x_pos
@@ -62,12 +62,12 @@ func _process(delta):
 
 			if character.health == 8:
 				var new_x_pos = default_x_pos
-				if (character.player_id == 0) and PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
+				if (character.player_id == 0) and Singleton.PlayerSettings.number_of_players == 2 and Singleton.PlayerSettings.other_player_id == -1:
 					new_x_pos = multiplayer_x_pos
 				ui.rect_position.x = lerp(ui.rect_position.x, new_x_pos, delta * 7)
 			else:
 				var new_x_pos = default_x_pos - subtraction_amount
-				if (character.player_id == 0) and PlayerSettings.number_of_players == 2 and PlayerSettings.other_player_id == -1:
+				if (character.player_id == 0) and Singleton.PlayerSettings.number_of_players == 2 and Singleton.PlayerSettings.other_player_id == -1:
 					new_x_pos = multiplayer_x_pos - subtraction_amount
 				ui.rect_position.x = lerp(ui.rect_position.x, new_x_pos, delta * 7)
 	else:
@@ -86,7 +86,7 @@ func _process(delta):
 	
 	last_shown = shown
 	
-	if PhotoMode.enabled:
+	if Singleton.PhotoMode.enabled:
 		ui.visible = false
 	else:
 		ui.visible = true

@@ -24,24 +24,24 @@ func _process(_delta):
 func open():
 	if !visible:
 		visible = true
-		last_layer = mode_switcher.layer
-		mode_switcher.layer = 99
+		last_layer = Singleton.ModeSwitcher.layer
+		Singleton.ModeSwitcher.layer = 99
 		tween.interpolate_property(self, "rect_position",
 			Vector2(773, 542), Vector2(773, 372), 0.25,
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
 		tween.start()
 		yield(tween, "tween_completed")
-		mode_switcher.button.visible = false
+		Singleton.ModeSwitcher.button.visible = false
 	
 func close():
-	mode_switcher.button.visible = true
+	Singleton.ModeSwitcher.button.visible = true
 	tween.interpolate_property(self, "rect_position",
 		Vector2(773, 372), Vector2(773, 542), 0.25,
 		Tween.TRANS_CIRC, Tween.EASE_OUT)
 	tween.start()
 	yield(tween, "tween_completed")
 	visible = false
-	mode_switcher.layer = last_layer
+	Singleton.ModeSwitcher.layer = last_layer
 	
 func mouse_entered():
 	hovered = true

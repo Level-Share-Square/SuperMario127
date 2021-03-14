@@ -12,18 +12,18 @@ onready var click_sound = $ClickSound
 var last_hovered = false
 
 func _pressed():
-	ActionManager.clear_history()
+	Singleton.ActionManager.clear_history()
 	click_sound.play()
 	focus_mode = 0
 	if level_code_util.is_valid(text_edit_node.text):
 		var level_data = LevelData.new()
 		level_data.load_in(text_edit_node.text)
-		CurrentLevelData.level_data = level_data
+		Singleton.CurrentLevelData.level_data = level_data
 		var _reload = get_tree().reload_current_scene()
 		get_tree().root.get_node("mode_switcher").layer = 127
 		
 func update_text():
-	text_edit_node.text = CurrentLevelData.level_data.get_encoded_level_data()
+	text_edit_node.text = Singleton.CurrentLevelData.level_data.get_encoded_level_data()
 	
 func _ready():
 	var _connect = window_node.connect("window_opened", self, "update_text")

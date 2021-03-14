@@ -10,7 +10,7 @@ onready var audio_player : AudioStreamPlayer = $LetsaGoPlayer
 func play():
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
-	var player : int = PlayerSettings.player2_character if is_p2 else PlayerSettings.player1_character 
+	var player : int = Singleton.PlayerSettings.player2_character if is_p2 else Singleton.PlayerSettings.player1_character 
 	var voices := []
 	match player:
 		0:

@@ -33,13 +33,13 @@ func _set_property_values():
 	set_property("tag", tag, true)
 
 func _ready():
-	var id = CurrentLevelData.level_data.vars.current_liquid_id
-	if CurrentLevelData.level_data.vars.liquid_positions.size() > CurrentLevelData.area and CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area].size() > id:
-		var set_position = CurrentLevelData.level_data.vars.liquid_positions[CurrentLevelData.area][id]
+	var id = Singleton.CurrentLevelData.level_data.vars.current_liquid_id
+	if Singleton.CurrentLevelData.level_data.vars.liquid_positions.size() > Singleton.CurrentLevelData.area and Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].size() > id:
+		var set_position = Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area][id]
 		if set_position != Vector2():
 			global_position = set_position
 			save_pos = set_position
-	CurrentLevelData.level_data.vars.current_liquid_id += 1
+	Singleton.CurrentLevelData.level_data.vars.current_liquid_id += 1
 	
 	color.a = 0.5
 	area_collision.shape = area_collision.shape.duplicate()
@@ -48,7 +48,7 @@ func _ready():
 	
 	area_collision.disabled = !enabled
 	
-	CurrentLevelData.level_data.vars.liquids.append([tag.to_lower(), self])
+	Singleton.CurrentLevelData.level_data.vars.liquids.append([tag.to_lower(), self])
 
 func change_size():
 	preview_position = Vector2(-width / 2, -height / 2)

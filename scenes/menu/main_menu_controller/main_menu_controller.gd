@@ -53,7 +53,7 @@ func _ready() -> void:
 
 	var screen_to_load = default_screen
 
-	var custom_open_screen_name = MenuVariables.get("custom_open_screen_name")
+	var custom_open_screen_name = Singleton.MenuVariables.get("custom_open_screen_name")
 	var custom_open_screen = null
 	if custom_open_screen_name != null:
 		custom_open_screen = get(custom_open_screen_name)
@@ -66,14 +66,14 @@ func _ready() -> void:
 	screen_to_load._open_screen()
 	screen_to_load.can_interact = true
 
-	music.stop_temporary_music()
-	music.change_song(music.last_song, 31) # temporary, should add a way for screens to define their own music setting later
-	music.last_song = 31
+	Singleton.Music.stop_temporary_music()
+	Singleton.Music.change_song(Singleton.Music.last_song, 31) # temporary, should add a way for screens to define their own music setting later
+	Singleton.Music.last_song = 31
 	
-	CheckpointSaved.reset()
-	CurrentLevelData.area = 0
-	CurrentLevelData.level_data.vars.init()
-	MiscShared.is_play_reload = false
+	Singleton.CheckpointSaved.reset()
+	Singleton.CurrentLevelData.area = 0
+	Singleton.CurrentLevelData.level_data.vars.init()
+	Singleton.MiscShared.is_play_reload = false
 
 # change this to use an enum or something, store enum in menu_variables
 func start_changing_screens(this_screen_name : String, new_screen_name : String) -> void:

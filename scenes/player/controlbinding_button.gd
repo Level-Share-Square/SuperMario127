@@ -41,7 +41,7 @@ func _gui_input(event):
 			# Instantiate new ones
 			var extra_keybinding = load("res://scenes/player/window/controlbindingwindow/ControlBinding.tscn")
 			
-			for index in range(0, PlayerSettings.keybindings[player_selector_manager.player_id()][id].size() + 1): # +1 for new binding option
+			for index in range(0, Singleton.PlayerSettings.keybindings[player_selector_manager.player_id()][id].size() + 1): # +1 for new binding option
 				var extra_keybinding_instance = extra_keybinding.instance()
 				extra_keybinding_instance.get_node("KeyButton").index = index
 				extra_bindings_container.add_child(extra_keybinding_instance)

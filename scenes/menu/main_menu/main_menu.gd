@@ -34,35 +34,35 @@ func _input(_event : InputEvent) -> void:
 func on_button_levels_pressed() -> void:
 	if timer.time_left > 0:
 		return
-	if SavedLevels.is_template_list:
-		SavedLevels.is_template_list = false
+	if Singleton.SavedLevels.is_template_list:
+		Singleton.SavedLevels.is_template_list = false
 		# Prevents errors when swapping between level lists
-		SavedLevels.selected_level = SavedLevels.NO_LEVEL
+		Singleton.SavedLevels.selected_level = Singleton.SavedLevels.NO_LEVEL
 	timer.start()
 	emit_signal("screen_change", "main_menu_screen", "levels_screen")
 
 func on_button_editor_pressed() -> void:
-	SavedLevels.selected_level = SavedLevels.NO_LEVEL
-	get_node("/root/CurrentLevelData")._ready() # Reset level
+	Singleton.SavedLevels.selected_level = Singleton.SavedLevels.NO_LEVEL
+	Singleton.CurrentLevelData._ready() # Reset level
 	var _change_scene = get_tree().change_scene_to(EDITOR_SCENE)
 
 func on_button_templates_pressed() -> void:
 	if timer.time_left > 0:
 		return
-	if !SavedLevels.is_template_list:
-		SavedLevels.is_template_list = true
+	if !Singleton.SavedLevels.is_template_list:
+		Singleton.SavedLevels.is_template_list = true
 		# Prevents errors when swapping between level lists
-		SavedLevels.selected_level = SavedLevels.NO_LEVEL
+		Singleton.SavedLevels.selected_level = Singleton.SavedLevels.NO_LEVEL
 	timer.start()
 	emit_signal("screen_change", "main_menu_screen", "levels_screen")
 
 func on_button_options_pressed() -> void:
 	if timer.time_left > 0:
 		return
-	if !SavedLevels.is_template_list:
-		SavedLevels.is_template_list = true
+	if !Singleton.SavedLevels.is_template_list:
+		Singleton.SavedLevels.is_template_list = true
 		# Prevents errors when swapping between level lists
-		SavedLevels.selected_level = SavedLevels.NO_LEVEL
+		Singleton.SavedLevels.selected_level = Singleton.SavedLevels.NO_LEVEL
 	timer.start()
 	emit_signal("screen_change", "main_menu_screen", "options_screen")
 

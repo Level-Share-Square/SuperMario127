@@ -12,7 +12,7 @@ var last_downwards := false
 onready var fludd_sprite = $Fludd
 
 func _ready():
-	var level_area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
+	var level_area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
 	gravity = level_area.settings.gravity
 
 func play_anim():

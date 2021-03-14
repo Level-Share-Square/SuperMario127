@@ -22,7 +22,7 @@ func _process(_delta):
 	if(!visible):
 		return
 	
-	var area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
+	var area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
 	var camera_position = camera.get_camera_screen_center()
 	
 	left_node.position = Vector2(area.settings.bounds.position.x*32,clamp(camera_position.y,area.settings.bounds.position.y*32,area.settings.bounds.end.y*32))
@@ -36,7 +36,7 @@ func _process(_delta):
 	
 #will be called from buttons using bounds_control.call("extend_bounds_"+get_parent().name)
 func extend_bounds_Left(amount: int):
-	var area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
+	var area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
 	click_sound.play()
 	
 	# warning-ignore: narrowing_conversion
@@ -49,7 +49,7 @@ func extend_bounds_Left(amount: int):
 	camera.update_limits(area)
 	
 func extend_bounds_Top(amount: int):
-	var area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
+	var area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
 	click_sound.play()
 	
 	# warning-ignore: narrowing_conversion
@@ -62,7 +62,7 @@ func extend_bounds_Top(amount: int):
 	camera.update_limits(area)
 	
 func extend_bounds_Right(amount: int):
-	var area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
+	var area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
 	click_sound.play()
 	
 	# warning-ignore: narrowing_conversion
@@ -75,7 +75,7 @@ func extend_bounds_Right(amount: int):
 	camera.update_limits(area)
 	
 func extend_bounds_Bottom(amount: int):
-	var area = CurrentLevelData.level_data.areas[CurrentLevelData.area]
+	var area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
 	click_sound.play()
 	
 	# warning-ignore: narrowing_conversion

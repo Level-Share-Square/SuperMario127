@@ -24,6 +24,6 @@ func save():
 	if "mode" in get_tree().current_scene and get_tree().current_scene.mode == 1:
 		var saved_file = File.new()
 		saved_file.open("user://autosave.txt", File.WRITE)
-		saved_file.store_line(CurrentLevelData.level_data.get_encoded_level_data())
+		saved_file.store_line(Singleton.CurrentLevelData.level_data.get_encoded_level_data())
 		saved_file.close()
 		print("Autosaved level")

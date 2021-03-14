@@ -7,6 +7,8 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/mountains/palettes/3/back.png" type="Texture" id=5]
 [ext_resource path="res://scenes/shared/background/foregrounds/mountains/palettes/4/back.png" type="Texture" id=6]
 
+
+
 [resource]
 script = ExtResource( 2 )
 texture = ExtResource( 1 )

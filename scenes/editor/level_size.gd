@@ -29,8 +29,8 @@ onready var hover_sound = $HoverSound
 onready var click_sound = $ClickSound
 
 func update_label():
-	var data = CurrentLevelData.level_data
-	var area = data.areas[CurrentLevelData.area]
+	var data = Singleton.CurrentLevelData.level_data
+	var area = data.areas[Singleton.CurrentLevelData.area]
 	
 	size_label.text = "x: " + str(area.settings.bounds.size.x) + "\ny: " + str(area.settings.bounds.size.y)
 	
@@ -64,8 +64,8 @@ func button_hovered():
 	hover_sound.play()
 
 func button_press():
-	var data = CurrentLevelData.level_data
-	var area = data.areas[CurrentLevelData.area]
+	var data = Singleton.CurrentLevelData.level_data
+	var area = data.areas[Singleton.CurrentLevelData.area]
 	
 	var amount = 1
 	

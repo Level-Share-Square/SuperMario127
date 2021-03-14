@@ -28,7 +28,7 @@ func _set_property_values():
 
 func collect(body, is_shell = false):
 	if enabled and !collected and (body and body.name.begins_with("Character") and !body.dead) or is_shell:
-		CurrentLevelData.level_data.vars.coins_collected += coins
+		Singleton.CurrentLevelData.level_data.vars.coins_collected += coins
 		if body:
 			body.heal(1 if coins == 1 else 15)
 		get_tree().current_scene.get_node("SharedSounds").PlaySound("CoinSound")
@@ -41,7 +41,7 @@ func collect(body, is_shell = false):
 
 func _ready():
 	if physics:
-		gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
+		gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
 	
 	yield(get_tree().create_timer(0.2), "timeout")
 	var _connect = area.connect("body_entered", self, "collect")

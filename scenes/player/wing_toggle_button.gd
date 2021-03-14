@@ -9,14 +9,14 @@ func _ready():
 	update_text()
 		
 func update_text():
-	if PlayerSettings.legacy_wing_cap:
+	if Singleton.PlayerSettings.legacy_wing_cap:
 		text = "On"
 	else:
 		text = "Off"
 
 func _pressed():
 	click_sound.play()
-	PlayerSettings.legacy_wing_cap = !PlayerSettings.legacy_wing_cap
+	Singleton.PlayerSettings.legacy_wing_cap = !Singleton.PlayerSettings.legacy_wing_cap
 	update_text()
 	
 func _process(_delta):

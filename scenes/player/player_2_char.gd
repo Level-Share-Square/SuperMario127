@@ -13,7 +13,7 @@ var value_to_names = [
 ]
 
 func _ready():
-	value = PlayerSettings.player2_character
+	value = Singleton.PlayerSettings.player2_character
 	value_text.text = value_to_names[value]
 	var _connect = left.connect("pressed", self, "decrease_value")
 	var _connect2 = right.connect("pressed", self, "increase_value")

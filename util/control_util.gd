@@ -8,7 +8,7 @@ const JOYPAD_MOTION = 3
 const UNKNOWN = "Unknown"
 
 static func get_formatted_string_by_index(action : String, player_id : int, index : int) -> String:
-	var keybinding = PlayerSettings.keybindings[player_id][action]
+	var keybinding = Singleton.PlayerSettings.keybindings[player_id][action]
 	var mode = keybinding[index][0]
 
 	match int(mode):
@@ -51,7 +51,7 @@ static func convert_button_index_to_string(button_index):
 			
 static func get_device_info(id, player_id, index):
 	var result = "Device: "
-	var keybindings = PlayerSettings.keybindings[player_id][id][index]
+	var keybindings = Singleton.PlayerSettings.keybindings[player_id][id][index]
 	var mode : int = keybindings[0]
 	
 	match(mode):
@@ -63,7 +63,7 @@ static func get_device_info(id, player_id, index):
 			return result + str(keybindings[1]) + "-Joystick"
 
 static func binding_alias_already_exists(id : String, player_id : int, index : int, data : Array):
-	var keybindings = PlayerSettings.keybindings[player_id][id]
+	var keybindings = Singleton.PlayerSettings.keybindings[player_id][id]
 	for i in range(0, keybindings.size()):
 		if index == i:
 			continue
@@ -72,7 +72,7 @@ static func binding_alias_already_exists(id : String, player_id : int, index : i
 			return false
 			
 		if _arrays_equal(keybindings[i], data):
-			NotificationHandler.error("Binding error", "The binding you've set already exists for this action!")
+			Singleton.NotificationHandler.error("Binding error", "The binding you've set already exists for this action!")
 			return true
 	
 	return false

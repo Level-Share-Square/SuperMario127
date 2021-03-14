@@ -29,6 +29,6 @@ func text_changed(new_text : String):
 func check() -> bool:
 	var val := float(text)
 	if val < min_value || val > max_value:
-		NotificationHandler.warning("Value of out range", "The value must be between " + str(min_value) + " and " + str(max_value))
+		Singleton.NotificationHandler.warning("Value of out range", "The value must be between " + str(min_value) + " and " + str(max_value))
 		return false
 	return true

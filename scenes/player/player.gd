@@ -36,64 +36,64 @@ func _physics_process(delta):
 func _ready():
 	sound_timer = wrapf(switch_timer, 0, 1.1)
 	
-	CurrentLevelData.enemies_instanced = 0
-	CurrentLevelData.level_data.vars.reset_counters()
+	Singleton.CurrentLevelData.enemies_instanced = 0
+	Singleton.CurrentLevelData.level_data.vars.reset_counters()
 	
-	if !MiscShared.is_play_reload:
-		CheckpointSaved.reset()
-		CurrentLevelData.level_data.vars.init()
+	if !Singleton.MiscShared.is_play_reload:
+		Singleton.CheckpointSaved.reset()
+		Singleton.CurrentLevelData.level_data.vars.init()
 	
-	if CurrentLevelData.level_data.vars.transition_data == []:
-		CurrentLevelData.area = CheckpointSaved.current_area
-		CurrentLevelData.level_data.vars.reload()
+	if Singleton.CurrentLevelData.level_data.vars.transition_data == []:
+		Singleton.CurrentLevelData.area = Singleton.CheckpointSaved.current_area
+		Singleton.CurrentLevelData.level_data.vars.reload()
 	
-	var data = CurrentLevelData.level_data
-	load_in(data, data.areas[CurrentLevelData.area])
+	var data = Singleton.CurrentLevelData.level_data
+	load_in(data, data.areas[Singleton.CurrentLevelData.area])
 	
-	music.character = get_node(character)
-	music.character2 = get_node(character2)
-	#music.reset_music()
-	if !music.playing:
-		music.play() # make sure the music will play even if it's stopped prior to loading the player
+	Singleton.Music.character = get_node(character)
+	Singleton.Music.character2 = get_node(character2)
+	#Singleton.Music.reset_music()
+	if !Singleton.Music.playing:
+		Singleton.Music.play() # make sure the music will play even if it's stopped prior to loading the player
 
 	can_collect_coins.append(get_node(character))
-	if PlayerSettings.number_of_players == 2:
+	if Singleton.PlayerSettings.number_of_players == 2:
 		can_collect_coins.append(get_node(character2))
 
-	if PlayerSettings.other_player_id != -1:
-		if PlayerSettings.my_player_index == 0:
+	if Singleton.PlayerSettings.other_player_id != -1:
+		if Singleton.PlayerSettings.my_player_index == 0:
 			get_node(character).set_network_master(get_tree().get_network_unique_id())
 			get_node(character).controlled_locally = true
-			get_node(character2).set_network_master(PlayerSettings.other_player_id)
+			get_node(character2).set_network_master(Singleton.PlayerSettings.other_player_id)
 			get_node(character2).controlled_locally = false
 		else:
 			get_node(character2).set_network_master(get_tree().get_network_unique_id())
 			get_node(character2).controlled_locally = true
-			get_node(character).set_network_master(PlayerSettings.other_player_id)
+			get_node(character).set_network_master(Singleton.PlayerSettings.other_player_id)
 			get_node(character).controlled_locally = false
 			get_node(camera).character_node = get_node(character2)
 		
-	CurrentLevelData.level_data.vars.max_red_coins = 0
-	CurrentLevelData.level_data.vars.max_shine_shards = 0
-	CurrentLevelData.level_data.vars.doors = []
-	CurrentLevelData.level_data.vars.pipes = []
-	CurrentLevelData.level_data.vars.liquids = []
-	CurrentLevelData.level_data.vars.checkpoints = []
+	Singleton.CurrentLevelData.level_data.vars.max_red_coins = 0
+	Singleton.CurrentLevelData.level_data.vars.max_shine_shards = 0
+	Singleton.CurrentLevelData.level_data.vars.doors = []
+	Singleton.CurrentLevelData.level_data.vars.pipes = []
+	Singleton.CurrentLevelData.level_data.vars.liquids = []
+	Singleton.CurrentLevelData.level_data.vars.checkpoints = []
 	
-	MiscShared.is_play_reload = true
+	Singleton.MiscShared.is_play_reload = true
 
 	yield(get_tree(), "physics_frame")
-	CurrentLevelData.level_data.vars.max_red_coins = CurrentLevelData.get_red_coins_before_area(CurrentLevelData.level_data.areas.size())
+	Singleton.CurrentLevelData.level_data.vars.max_red_coins = Singleton.CurrentLevelData.get_red_coins_before_area(Singleton.CurrentLevelData.level_data.areas.size())
 
 func _unhandled_input(event):
-	if event.is_action_pressed("reload") or event.is_action_pressed("reload_from_start") and !scene_transitions.transitioning and (!mode_switcher.get_node("ModeSwitcherButton").switching_disabled or mode_switcher.get_node("ModeSwitcherButton").invisible):
+	if event.is_action_pressed("reload") or event.is_action_pressed("reload_from_start") and !Singleton.SceneTransitions.transitioning and (!Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled or Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible):
 		if event.is_action_pressed("reload_from_start"):
-			CheckpointSaved.reset()
+			Singleton.CheckpointSaved.reset()
 		if !get_node(character).dead:
 			get_node(character).kill("reload")
-		elif PlayerSettings.number_of_players == 2:
+		elif Singleton.PlayerSettings.number_of_players == 2:
 			get_node(character2).kill("reload")
-		if PlayerSettings.other_player_id != -1:
+		if Singleton.PlayerSettings.other_player_id != -1:
 			var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())
 
 func switch_scenes():

@@ -33,18 +33,18 @@ func set_id(new_id):
 func _ready():
 	var _connect = switch_to_button.connect("pressed", self, "switch_to_area")
 	_connect = delete_button.connect("pressed", self, "delete_area")
-	if id == CurrentLevelData.area:
+	if id == Singleton.CurrentLevelData.area:
 		switch_to_button.disabled = true
 		delete_button.disabled = true
 
 func switch_to_area():
-	if id != CurrentLevelData.area:
-		CurrentLevelData.area = id
-		scene_transitions.reload_scene()
+	if id != Singleton.CurrentLevelData.area:
+		Singleton.CurrentLevelData.area = id
+		Singleton.SceneTransitions.reload_scene()
 
 func delete_area():
-	if id != CurrentLevelData.area:
-		CurrentLevelData.level_data.areas.remove(id)
-		if CurrentLevelData.area > id:
-			CurrentLevelData.area -= 1
+	if id != Singleton.CurrentLevelData.area:
+		Singleton.CurrentLevelData.level_data.areas.remove(id)
+		if Singleton.CurrentLevelData.area > id:
+			Singleton.CurrentLevelData.area -= 1
 		get_parent().get_parent().get_parent().reload_areas()

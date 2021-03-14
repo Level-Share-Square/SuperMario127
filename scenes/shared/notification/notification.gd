@@ -40,9 +40,9 @@ func start_timer():
 	$NinePatchRect/Timer.connect("timeout", self, "hide")
 	
 func self_destruct():
-	for notification in NotificationHandler.notifications:
+	for notification in Singleton.NotificationHandler.notifications:
 		if notification.get_rect().position.y > get_rect().position.y:
-			notification.rect_position -= Vector2(0, rect_size.y + NotificationHandler.offset)
-	NotificationHandler.notifications.erase(self)
-	NotificationHandler.biggest_y -= rect_size.y + NotificationHandler.offset
+			notification.rect_position -= Vector2(0, rect_size.y + Singleton.NotificationHandler.offset)
+	Singleton.NotificationHandler.notifications.erase(self)
+	Singleton.NotificationHandler.biggest_y -= rect_size.y + Singleton.NotificationHandler.offset
 	queue_free()

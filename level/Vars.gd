@@ -17,11 +17,11 @@ var current_liquid_id = 0
 var last_red_coin_id = 0
 
 func reload():
-	coins_collected = CheckpointSaved.current_coins
-	red_coins_collected = CheckpointSaved.current_red_coins.duplicate(true)
-	shine_shards_collected = CheckpointSaved.current_shine_shards.duplicate(true)
-	nozzles_collected = CheckpointSaved.nozzles_collected.duplicate(true)
-	liquid_positions = CheckpointSaved.liquid_positions.duplicate(true)
+	coins_collected = Singleton.CheckpointSaved.current_coins
+	red_coins_collected = Singleton.CheckpointSaved.current_red_coins.duplicate(true)
+	shine_shards_collected = Singleton.CheckpointSaved.current_shine_shards.duplicate(true)
+	nozzles_collected = Singleton.CheckpointSaved.nozzles_collected.duplicate(true)
+	liquid_positions = Singleton.CheckpointSaved.liquid_positions.duplicate(true)
 
 func reset_counters():
 	max_red_coins = 0

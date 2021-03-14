@@ -17,17 +17,17 @@ func _ready():
 	# warning-ignore: unused_variable
 	for index in range(5):
 		yield(get_tree(), "idle_frame")
-	max_shard_amount = CurrentLevelData.level_data.vars.max_shine_shards
-	var shard_amount = CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][0]
+	max_shard_amount = Singleton.CurrentLevelData.level_data.vars.max_shine_shards
+	var shard_amount = Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][0]
 	label.text = str(shard_amount) + "/" + str(max_shard_amount)
 	label_shadow.text = label.text
 	if max_shard_amount != 0:
 		visible = true
-	if CurrentLevelData.level_data.vars.max_red_coins == 0:
+	if Singleton.CurrentLevelData.level_data.vars.max_red_coins == 0:
 		rect_position.y = get_node("../RedCoinCounter").rect_position.y
 
 func _process(delta):
-	var shard_amount = CurrentLevelData.level_data.vars.shine_shards_collected[CurrentLevelData.area][0]
+	var shard_amount = Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][0]
 	if shard_amount != last_shard_amount:
 		label.text = str(shard_amount) + "/" + str(max_shard_amount)
 		label_shadow.text = label.text
@@ -39,7 +39,7 @@ func _process(delta):
 		time_until_fall = 0.1
 	last_shard_amount = shard_amount
 	
-	max_shard_amount = CurrentLevelData.level_data.vars.max_shine_shards
+	max_shard_amount = Singleton.CurrentLevelData.level_data.vars.max_shine_shards
 	
 	label_shadow.rect_position = label.rect_position + Vector2(2, 2)
 

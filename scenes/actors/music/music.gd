@@ -32,17 +32,18 @@ var temp_music := false
 
 const MUSIC_FADE_LENGTH = 0.75
 
+var level_songs : IdMap
+
 func get_song(song_id : int):
 	return song_cache[song_id]
 
-func _ready() -> void:
+func _init() -> void:
 	base_volume = volume_db
 	var _connect = downloader.connect("request_completed", self, "load_ogg")
-	var level_songs : IdMap  = preload("res://assets/music/ids.tres")
-	for id in level_songs.ids:
-		song_cache.append(load("res://assets/music/resources/" + id + ".tres"))
+	level_songs = preload("res://assets/music/ids.tres")
 	
-	_connect = temporary_music_player.connect("finished", self, "stop_temporary_music")
+func _ready() -> void:
+	var _connect = temporary_music_player.connect("finished", self, "stop_temporary_music")
 
 func set_global_volume(new_volume: float) -> void:
 	global_volume = clamp(new_volume, 0.0, 1.0)
@@ -121,18 +122,22 @@ func reset_music():
 	toggle_underwater_music(false)
 
 func _process(delta) -> void:
+	if song_cache.size() < level_songs.ids.size():
+		song_cache.append(load("res://assets/music/resources/" + level_songs.ids[song_cache.size()] + ".tres"))
+	
 	#if Input.is_action_just_pressed("volume_up"):
 	#	increment_global_volume(0.1)
 	#if Input.is_action_just_pressed("volume_down"):
 	#	increment_global_volume(-0.1)
 	
 	var current_scene = get_tree().get_current_scene()
-	var current_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
+	var current_song
 	
 	# change this script so this entire block ceases to exist because it is bad and it makes me simultaniously mad and sad
 	# scenes should ask the music singleton to change the music, the music singleton shouldn't check every frame for if it should change the music
 	if "mode" in current_scene: #script will crash if the scene root doesn't have this property defined
-		var level_song = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.music
+		var level_song = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.music
+		current_song = level_song
 		if current_scene.mode != last_mode or typeof(last_song) != typeof(level_song):
 			change_song(last_song, level_song)
 		elif last_song != current_song:

@@ -86,9 +86,9 @@ func _ready() -> void:
 	on_visibility_changed($VisibilityEnabler2D.is_on_screen())
 	player_detector.connect("body_entered", self, "player_entered")
 	player_detector.scale = Vector2(1, 1) / scale
-	CurrentLevelData.enemies_instanced += 1
-	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
-	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
+	Singleton.CurrentLevelData.enemies_instanced += 1
+	time_alive += float(Singleton.CurrentLevelData.enemies_instanced) / 2.0
+	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
 	
 func _process(_delta):
 	fuse.frame = sprite.frame

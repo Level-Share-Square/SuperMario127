@@ -23,21 +23,21 @@ func add_message(text, player_id):
 func text_entered(text):
 	text_enter.release_focus()
 	if text != "":
-		add_message(text, PlayerSettings.my_player_index)
+		add_message(text, Singleton.PlayerSettings.my_player_index)
 		text_enter.text = ""
 		var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["send message", text]).to_ascii())
 
 func _process(_delta):
-	if PlayerSettings.other_player_id != -1:
+	if Singleton.PlayerSettings.other_player_id != -1:
 		visible = true
 	else:
 		visible = false
 	
 func _focused():
-	FocusCheck.is_ui_focused = true
+	Singleton.FocusCheck.is_ui_focused = true
 
 func _unfocused():
-	FocusCheck.is_ui_focused = false
+	Singleton.FocusCheck.is_ui_focused = false
 		
 func _input(event):
 	if event.is_action_pressed("cancel_chat"):
@@ -46,4 +46,4 @@ func _input(event):
 func _packet_recieved(_id, packet_ascii):
 	var packet = JSON.parse(packet_ascii.get_string_from_ascii()).result
 	if packet[0] == "send message":
-		add_message(packet[1], 1 if PlayerSettings.my_player_index == 0 else 0)
+		add_message(packet[1], 1 if Singleton.PlayerSettings.my_player_index == 0 else 0)

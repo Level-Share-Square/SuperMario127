@@ -218,7 +218,7 @@ var camera : Camera2D
 #)
 
 func _ready():
-	music.toggle_underwater_music(false)
+	Singleton.Music.toggle_underwater_music(false)
 	for input in input_names.keys():
 		inputs.append([false, false, str(input)])
 
@@ -264,14 +264,22 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	var _connect = player_collision.connect("body_entered", self, "player_hit")
 	
 	# Whether or not the alt character (e.g. Wario for Mario) should be loaded instead
-	var use_alt_character : bool = PlayerSettings.player1_character == PlayerSettings.player2_character and player_id != 0
+	var use_alt_character : bool = Singleton.PlayerSettings.player1_character == Singleton.PlayerSettings.player2_character and player_id != 0
 	match character:
 		0: # Mario
-			sound_player = MiscCache.mario_sounds.instance()
+			if Singleton.MiscCache.mario_sounds != null:
+				sound_player = Singleton.MiscCache.mario_sounds.instance()
+			else:
+				sound_player = load("res://scenes/actors/mario/mario_sounds.tscn").instance()
+				Singleton.MiscCache.mario_sounds = sound_player
 			sprite.frames = mario_alt_frames if use_alt_character else mario_frames
 			real_friction = friction
 		1: # Luigi
-			sound_player = MiscCache.luigi_sounds.instance()
+			if Singleton.MiscCache.luigi_sounds != null:
+				sound_player = Singleton.MiscCache.luigi_sounds.instance()
+			else:
+				sound_player = load("res://scenes/actors/mario/luigi_sounds.tscn").instance()
+				Singleton.MiscCache.luigi_sounds = sound_player
 			sprite.frames = luigi_alt_frames if use_alt_character else luigi_frames
 			move_speed = luigi_speed
 			acceleration = luigi_accel
@@ -296,12 +304,12 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	collected_shine.visible = false
 	collected_shine.get_node("ShineParticles").emitting = false
 	
-	if CheckpointSaved.current_checkpoint_id != -1 and CurrentLevelData.level_data.vars.transition_data == []:
-		position = CheckpointSaved.current_spawn_pos
+	if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
+		position = Singleton.CheckpointSaved.current_spawn_pos
 	else:
 		# start speedrun timer
-		if mode_switcher.get_node("ModeSwitcherButton").invisible and CheckpointSaved.current_checkpoint_id == -1:
-			CurrentLevelData.start_tracking_time_score()
+		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and Singleton.CheckpointSaved.current_checkpoint_id == -1:
+			Singleton.CurrentLevelData.start_tracking_time_score()
 
 var prev_is_grounded := false
 func is_grounded() -> bool:
@@ -384,8 +392,8 @@ func set_state_by_name(name: String, delta: float) -> void:
 		set_state(get_state_node(name), delta)
 		
 func add_nozzle(new_nozzle: String) -> void:
-	if !new_nozzle in CurrentLevelData.level_data.vars.nozzles_collected:
-		CurrentLevelData.level_data.vars.nozzles_collected.append(new_nozzle)
+	if !new_nozzle in Singleton.CurrentLevelData.level_data.vars.nozzles_collected:
+		Singleton.CurrentLevelData.level_data.vars.nozzles_collected.append(new_nozzle)
 
 func get_nozzle_node(name: String) -> Node:
 	if nozzles_node.has_node(name):
@@ -399,7 +407,7 @@ func nozzle_sort(a, b):
 	return false
 
 func set_nozzle(new_nozzle: String, change_index := true) -> void:
-	CurrentLevelData.level_data.vars.nozzles_collected.sort_custom(self, "nozzle_sort")
+	Singleton.CurrentLevelData.level_data.vars.nozzles_collected.sort_custom(self, "nozzle_sort")
 	
 	fludd_sound.stop()
 	turbo_sound.stop()
@@ -414,7 +422,7 @@ func set_nozzle(new_nozzle: String, change_index := true) -> void:
 	using_turbo = false
 	turbo_nerf = false
 	if change_index:
-		nozzles_list_index = CurrentLevelData.level_data.vars.nozzles_collected.find(str(new_nozzle))
+		nozzles_list_index = Singleton.CurrentLevelData.level_data.vars.nozzles_collected.find(str(new_nozzle))
 	
 	if is_instance_valid(nozzle) and (is_instance_valid(powerup) and powerup.name == "RainbowPowerup"):
 		set_nozzle("null", true) # Mario simply isn't allowed to have fludd
@@ -543,11 +551,11 @@ func _physics_process(delta: float) -> void:
 	if is_in_water:
 		var fuel_increment = 0.075
 		fuel = clamp(fuel + fuel_increment, 0, 100)
-		if player_id == 0 and music.has_water and !music.play_water:
-			music.toggle_underwater_music(true)
+		if player_id == 0 and Singleton.Music.has_water and !Singleton.Music.play_water:
+			Singleton.Music.toggle_underwater_music(true)
 	else:
-		if player_id == 0 and music.play_water:
-			music.toggle_underwater_music(false)
+		if player_id == 0 and Singleton.Music.play_water:
+			Singleton.Music.toggle_underwater_music(false)
 	
 	# Gravity
 	# Twice to work the same as 120fps
@@ -652,7 +660,7 @@ func _physics_process(delta: float) -> void:
 		sprite.rotation_degrees = wrapf(sprite.rotation_degrees, -180, 180)
 	
 	# Update all states, nozzles and powerups
-	if PlayerSettings.other_player_id == -1 or PlayerSettings.my_player_index == player_id:
+	if Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id:
 		for state_node in states_node.get_children():
 			state_node.handle_update(delta)
 		for nozzle_node in nozzles_node.get_children():
@@ -699,18 +707,18 @@ func _physics_process(delta: float) -> void:
 		snap = Vector2()
 	
 	# Switch nozzle
-	if (inputs[8][1] and CurrentLevelData.level_data.vars.nozzles_collected.size() > 1
+	if (inputs[8][1] and Singleton.CurrentLevelData.level_data.vars.nozzles_collected.size() > 1
 	# Rainbow Mario can't use fludd, so no point in allowing switching nozzles
 	and (!is_instance_valid(powerup) or powerup.name != "RainbowPowerup")):
 		nozzles_list_index += 1
-		if nozzles_list_index >= CurrentLevelData.level_data.vars.nozzles_collected.size():
+		if nozzles_list_index >= Singleton.CurrentLevelData.level_data.vars.nozzles_collected.size():
 			nozzles_list_index = 0
 		
-		var new_nozzle = str(CurrentLevelData.level_data.vars.nozzles_collected[nozzles_list_index])
+		var new_nozzle = str(Singleton.CurrentLevelData.level_data.vars.nozzles_collected[nozzles_list_index])
 		set_nozzle(new_nozzle, false)
 		
 		nozzle_switch_sound.play()
-		#print(CurrentLevelData.level_data.vars.nozzles_collected)
+		#print(Singleton.CurrentLevelData.level_data.vars.nozzles_collected)
 	
 	# Handle nozzle
 	if is_instance_valid(nozzle):
@@ -797,7 +805,7 @@ func _physics_process(delta: float) -> void:
 
 	# Boundaries
 	if position.y > (level_bounds.end.y * 32) + 128:
-		if (PlayerSettings.other_player_id == -1 or PlayerSettings.my_player_index == player_id)\
+		if (Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id)\
 		and controllable: # If not controllable, the player is (likely) collecting a shine
 			kill("fall")
 	if position.x < level_bounds.position.x * 32:
@@ -811,12 +819,12 @@ func _physics_process(delta: float) -> void:
 	last_move_direction = move_direction
 	
 	# Send network message (unused)
-	#if PlayerSettings.other_player_id != -1:
-	#	if player_id == PlayerSettings.my_player_index and is_network_master():
+	#if Singleton.PlayerSettings.other_player_id != -1:
+	#	if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
 	#		rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
 	
 func switch_areas(area_id, transition_time):
-	scene_transitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id)
+	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id)
 	
 func kill(cause: String) -> void:
 	if !dead:
@@ -825,7 +833,7 @@ func kill(cause: String) -> void:
 		var cutout_in := cutout_circle
 		var cutout_out := cutout_circle
 		var transition_time := 0.75
-		music.stop_temporary_music()
+		Singleton.Music.stop_temporary_music()
 		if cause == "fall":
 			controllable = false
 			sound_player.play_fall_sound()
@@ -865,7 +873,7 @@ func kill(cause: String) -> void:
 				reload = false
 		
 		if reload:
-			scene_transitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
+			Singleton.SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
 		else:
 			yield(get_tree().create_timer(3), "timeout")
 			set_powerup(null, false)
@@ -881,8 +889,8 @@ func kill(cause: String) -> void:
 
 func exit() -> void:
 	#if the mode switcher button is not invisible, we're in edit mode, switch back to that, but if we're in play mode then for now just reload the scene
-	if !mode_switcher.get_node("ModeSwitcherButton").invisible:
-		mode_switcher.get_node("ModeSwitcherButton").switch()
+	if !Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
+		Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switch()
 	else: 
 		# warning-ignore: return_value_discarded
 		get_tree().reload_current_scene()
@@ -900,7 +908,7 @@ func get_input(input_id : int, is_just_pressed : bool) -> bool:
 
 func update_inputs() -> void:
 	if controlled_locally:
-		if !FocusCheck.is_ui_focused:
+		if !Singleton.FocusCheck.is_ui_focused:
 			var control_id := player_id
 			for input in inputs:
 				input[0] = Input.is_action_pressed(input[2] + str(control_id))

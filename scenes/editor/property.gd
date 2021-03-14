@@ -27,7 +27,7 @@ func _ready():
 		type_scene_name = "Color"
 	
 	if type_scene_name != "None":
-		property_type = MiscCache.property_scenes[type_scene_name].instance()
+		property_type = Singleton.MiscCache.property_scenes[type_scene_name].instance()
 		add_child(property_type)
 		property_type.set_value(value)
 

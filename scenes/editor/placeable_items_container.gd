@@ -11,8 +11,8 @@ onready var editor_node = get_node(editor_node_path)
 
 func _ready():
 	var placeable_items = editor_node.get_node(editor_node.placeable_items_path)
-	var starting_toolbar = EditorSavedSettings.layout_ids
-	var starting_toolbar_palettes = EditorSavedSettings.layout_palettes
+	var starting_toolbar = Singleton.EditorSavedSettings.layout_ids
+	var starting_toolbar_palettes = Singleton.EditorSavedSettings.layout_palettes
 	for index in range(number_of_boxes):
 		var item
 		if index < starting_toolbar.size():
@@ -29,7 +29,7 @@ func _ready():
 		placeable_item_button.selected_color = selected_color
 		placeable_item_button.box_index = index
 		placeable_item_button.name = str(index)
-		if index == EditorSavedSettings.selected_box:
+		if index == Singleton.EditorSavedSettings.selected_box:
 			editor_node.selected_box = placeable_item_button
 		add_child(placeable_item_button)
 		

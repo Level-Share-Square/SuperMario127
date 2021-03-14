@@ -87,9 +87,9 @@ func _ready() -> void:
 	$VisibilityEnabler2D.connect("screen_entered", self, "on_show")
 	on_visibility_changed($VisibilityEnabler2D.is_on_screen())
 	original_position = global_position
-	CurrentLevelData.enemies_instanced += 1
-	time_alive += float(CurrentLevelData.enemies_instanced) / 2.0
-	gravity = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.gravity
+	Singleton.CurrentLevelData.enemies_instanced += 1
+	time_alive += float(Singleton.CurrentLevelData.enemies_instanced) / 2.0
+	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
 	
 	var scene = get_tree().current_scene
 	if scene.mode == 1 and scene.placed_item_property == "Para":
@@ -110,7 +110,7 @@ func retract_into_shell():
 			koopa_sound.play()
 		return
 	
-	shell = MiscCache.shell_scene.instance()
+	shell = Singleton.MiscCache.shell_scene.instance()
 	shell_sprite = shell.get_node("Sprite")
 	shell_sprite_color = shell_sprite.get_node("Color")
 	shell_stomp_area = shell.get_node("StompArea")
@@ -190,7 +190,7 @@ func _physics_process(delta):
 		loaded = true
 	
 	if mode != 1 and enabled and !dead and loaded:
-		var level_bounds = CurrentLevelData.level_data.areas[CurrentLevelData.area].settings.bounds
+		var level_bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds
 		if !hit:
 			# Run the appropriate physics process function
 			if is_instance_valid(shell):

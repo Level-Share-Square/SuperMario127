@@ -9,6 +9,8 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/hills/palettes/3/preview.png" type="Texture" id=7]
 [ext_resource path="res://scenes/shared/background/foregrounds/hills/palettes/4/preview.png" type="Texture" id=8]
 
+
+
 [resource]
 script = ExtResource( 1 )
 layers = [ ExtResource( 2 ), ExtResource( 3 ) ]

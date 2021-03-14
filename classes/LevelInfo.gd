@@ -99,7 +99,7 @@ func reset_save_data() -> void:
 	for key in time_scores.keys():
 		time_scores[key] = EMPTY_TIME_SCORE
 
-	var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
+	var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
 
 func get_saveable_dictionary() -> Dictionary:
 	# add saving shine details and star coin details
@@ -132,16 +132,16 @@ func shine_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
 func set_shine_collected(shine_id : int, save_to_disk : bool = true) -> void:
 	collected_shines[str(shine_id)] = true
 	if save_to_disk:
-		var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
+		var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
 
 func set_star_coin_collected(star_coin_id : int, save_to_disk : bool = true) -> void:
 	collected_star_coins[str(star_coin_id)] = true
 	if save_to_disk:
-		var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
+		var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
 
 func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
-	var new_coin_score = CurrentLevelData.level_data.vars.coins_collected
-	var new_time_score = CurrentLevelData.time_score
+	var new_coin_score = Singleton.CurrentLevelData.level_data.vars.coins_collected
+	var new_time_score = Singleton.CurrentLevelData.time_score
 
 	if new_coin_score > coin_score:
 		coin_score = new_coin_score 
@@ -150,21 +150,21 @@ func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
 		time_scores[str(shine_id)] = new_time_score
 
 	if save_to_disk:
-		var _error_code = SavedLevels.save_level_by_index(SavedLevels.selected_level)
+		var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
 
 func get_level_background_texture() -> StreamTexture:
 	var level_background = get_level_data().areas[spawn_area].settings.sky 
-	var background_resource = CurrentLevelData.background_cache[level_background]
+	var background_resource = Singleton.CurrentLevelData.background_cache[level_background]
 	return background_resource.texture
 	
 func get_level_background_modulate() -> Color:
 	var level_background = get_level_data().areas[spawn_area].settings.sky
-	var background_resource = CurrentLevelData.background_cache[level_background]
+	var background_resource = Singleton.CurrentLevelData.background_cache[level_background]
 	return background_resource.parallax_modulate
 
 func get_level_foreground_texture() -> StreamTexture:
 	var level_foreground = get_level_data().areas[spawn_area].settings.background
-	var foreground_resource = CurrentLevelData.foreground_cache[level_foreground]
+	var foreground_resource = Singleton.CurrentLevelData.foreground_cache[level_foreground]
 	var palette = get_level_data().areas[spawn_area].settings.background_palette
 	
 	if palette == 0:

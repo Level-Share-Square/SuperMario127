@@ -31,7 +31,7 @@ func _unhandled_input(event):
 		right_held = false
 
 func load_in(_level_data : LevelData, level_area : LevelArea):
-	var zoom_level = EditorSavedSettings.zoom_level
+	var zoom_level = Singleton.EditorSavedSettings.zoom_level
 	position.x = (get_viewport_rect().size.x / 2) * zoom_level
 	position.y = (level_area.settings.bounds.end.y * 32) - ((get_viewport_rect().size.y / 2) * zoom_level)
 	for object in level_area.objects:
@@ -91,7 +91,7 @@ func _physics_process(delta):
 	if(zoom.x != editor.zoom_level):
 		var zoom_level = editor.zoom_level
 		zoom = zoom.linear_interpolate(Vector2(zoom_level, zoom_level), delta * lerp_speed)
-		update_limits(CurrentLevelData.level_data.areas[CurrentLevelData.area])
+		update_limits(Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area])
 
 func _ready():
 	default_height = get_viewport_rect().size.y

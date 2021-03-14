@@ -15,12 +15,12 @@ onready var sound = $AudioStreamPlayer
 
 func _ready():
 	if mode == 0:
-		if character_string != "character" and PlayerSettings.number_of_players == 1: return
-		if enabled and (CheckpointSaved.current_checkpoint_id == -1 or CurrentLevelData.level_data.vars.transition_data != []):
+		if character_string != "character" and Singleton.PlayerSettings.number_of_players == 1: return
+		if enabled and (Singleton.CheckpointSaved.current_checkpoint_id == -1 or Singleton.CurrentLevelData.level_data.vars.transition_data != []):
 			var player = get_tree().get_current_scene()
 			character = player.get_node(player[character_string])
-			var transition_data = CurrentLevelData.level_data.vars.transition_data
-			var transition_character_data = CurrentLevelData.level_data.vars.transition_character_data
+			var transition_data = Singleton.CurrentLevelData.level_data.vars.transition_data
+			var transition_character_data = Singleton.CurrentLevelData.level_data.vars.transition_character_data
 			if transition_data.size() == 0:
 				character.position = position
 			else:
@@ -28,7 +28,7 @@ func _ready():
 				var pipe
 				
 				yield(get_tree(), "physics_frame")
-				for pipe_obj in CurrentLevelData.level_data.vars.pipes:
+				for pipe_obj in Singleton.CurrentLevelData.level_data.vars.pipes:
 					if pipe_obj[0] == transition_data[1].to_lower():
 						pipe = pipe_obj
 						found_pipe = true
@@ -46,7 +46,7 @@ func _ready():
 					pipe[1].start_exit_anim(character)
 				else:
 					character.position = position
-				CurrentLevelData.level_data.vars.transition_data = []
+				Singleton.CurrentLevelData.level_data.vars.transition_data = []
 				
 				if transition_character_data.size() > 0:
 					character.health = transition_character_data[0]

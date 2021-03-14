@@ -5,6 +5,8 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/snow_hills/front.tres" type="Resource" id=3]
 [ext_resource path="res://scenes/shared/background/foregrounds/snow_hills/preview.png" type="Texture" id=4]
 
+
+
 [resource]
 script = ExtResource( 1 )
 layers = [ ExtResource( 2 ), ExtResource( 3 ) ]

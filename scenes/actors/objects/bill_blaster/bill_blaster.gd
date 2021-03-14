@@ -44,11 +44,11 @@ func _physics_process(delta):
 		
 	if mode != 1:
 		spawn_timer -= delta
-		if spawn_timer <= 0.35 and sprite.frame == 3 and CurrentLevelData.enemies_instanced < 50:
+		if spawn_timer <= 0.35 and sprite.frame == 3 and Singleton.CurrentLevelData.enemies_instanced < 50:
 			sprite.frame = 0
 			color_sprite.frame = 0
 
-		if spawn_timer <= 0 and CurrentLevelData.enemies_instanced < 55:
+		if spawn_timer <= 0 and Singleton.CurrentLevelData.enemies_instanced < 55:
 			spawn_timer = wait_time
 
 			var facing_direction = 1
@@ -57,7 +57,7 @@ func _physics_process(delta):
 			var character
 			var character_1 = current_scene.get_node(current_scene.character)
 			
-			if PlayerSettings.number_of_players == 1:
+			if Singleton.PlayerSettings.number_of_players == 1:
 				character = character_1
 			else:
 				var character_2 = current_scene.get_node(current_scene.character2)

@@ -12,7 +12,7 @@ var last_hovered
 func _ready():
 	var device_info_label = get_parent().get_node("DeviceInfoLabel")
 	
-	if index != PlayerSettings.keybindings[binding_manager.player_selector_manager.player_id()][binding_manager.id].size():
+	if index != Singleton.PlayerSettings.keybindings[binding_manager.player_selector_manager.player_id()][binding_manager.id].size():
 		text = ControlUtil.get_formatted_string_by_index(binding_manager.id, binding_manager.player_selector_manager.player_id(), index)
 		device_info_label.text = ControlUtil.get_device_info(binding_manager.id, binding_manager.player_selector_manager.player_id(), index)
 	else:
@@ -20,7 +20,7 @@ func _ready():
 	
 	var deleteButton : Button = get_parent().get_node("DeleteButton")
 	
-	if index != 0 && index != PlayerSettings.keybindings[binding_manager.player_selector_manager.player_id()][binding_manager.id].size():
+	if index != 0 && index != Singleton.PlayerSettings.keybindings[binding_manager.player_selector_manager.player_id()][binding_manager.id].size():
 		deleteButton.visible = true
 	
 	if index != 0:
@@ -44,7 +44,7 @@ func _process(_delta):
 	last_hovered = is_hovered()
 	
 func deleteButtonPressed():
-	PlayerSettings.keybindings[binding_manager.player_selector_manager.player_id()][binding_manager.id].remove(index)
+	Singleton.PlayerSettings.keybindings[binding_manager.player_selector_manager.player_id()][binding_manager.id].remove(index)
 	SettingsSaver.override_keybindings(binding_manager.id, binding_manager.player_selector_manager.player_id())
 	for children in binding_manager.get_children():
 		if children == get_parent():

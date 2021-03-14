@@ -7,9 +7,9 @@ var time := 0.0
 var last_position : Vector2
 
 func _ready():
-	CurrentLevelData.enemies_instanced += 1
-	time = (CurrentLevelData.enemies_instanced * 100) / 3
-	sprite.animation = "butterfly" + str((CurrentLevelData.enemies_instanced % 6) + 1)
+	Singleton.CurrentLevelData.enemies_instanced += 1
+	time = (Singleton.CurrentLevelData.enemies_instanced * 100) / 3
+	sprite.animation = "butterfly" + str((Singleton.CurrentLevelData.enemies_instanced % 6) + 1)
 	preview_position = custom_preview_position
 	if is_preview:
 		z_index = 0
