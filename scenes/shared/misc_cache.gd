@@ -7,9 +7,6 @@ var resource_loader2
 
 var shell_scene
 
-var mario_sounds
-var luigi_sounds
-
 var property_scenes = {
 	
 }
@@ -24,22 +21,6 @@ onready var property_type_ids = preload("res://scenes/editor/property_type_scene
 func _ready():
 	thread = Thread.new()
 	thread.start(self, "load_resources")
-	
-	#thread2 = Thread.new()
-	#thread2.start(self, "load_sounds", null, thread.PRIORITY_HIGH)
-
-#func load_sounds(userdata):
-#	resource_loader2 = ResourceLoader.load_interactive("res://scenes/actors/mario/mario_sounds.tscn")
-#	while mario_sounds == null:
-#		if resource_loader2.poll() == ERR_FILE_EOF:
-#			mario_sounds = resource_loader2.get_resource()
-#		yield(get_tree().create_timer(0.5), "timeout")
-#
-#	resource_loader2 = ResourceLoader.load_interactive("res://scenes/actors/mario/luigi_sounds.tscn")
-#	while luigi_sounds == null:
-#		if resource_loader2.poll() == ERR_FILE_EOF:
-#			luigi_sounds = resource_loader2.get_resource()
-#		yield(get_tree().create_timer(0.5), "timeout")
 
 func load_resources(userdata):
 	var loaded = false

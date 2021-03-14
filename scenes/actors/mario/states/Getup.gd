@@ -12,7 +12,7 @@ func _ready():
 	
 func _start(_delta):
 	var sprite = character.sprite
-	var sound_player = character.get_node("Sounds")
+	var sound_player = character.sound_player
 	sound_player.play_dive_sound()
 	character.velocity.y = -get_up_power
 	character.position.y -= 7

@@ -30,7 +30,7 @@ func _start_check(_delta):
 
 func _start(delta):
 	var sprite = character.sprite
-	var sound_player = character.get_node("Sounds")
+	var sound_player = character.sound_player
 	jump_buffer = 0
 	ground_buffer = 0
 	jump_playing = true

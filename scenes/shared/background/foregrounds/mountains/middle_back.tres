@@ -7,12 +7,10 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/mountains/palettes/3/middle_back.png" type="Texture" id=5]
 [ext_resource path="res://scenes/shared/background/foregrounds/mountains/palettes/4/middle_back.png" type="Texture" id=6]
 
-
-
 [resource]
 script = ExtResource( 2 )
 texture = ExtResource( 1 )
-scale = Vector2( 0.075, 0.2 )
-offset = Vector2( 0, -156 )
+scale = Vector2( 0.075, 0 )
+offset = Vector2( 0, -256 )
 mirroring = Vector2( 960, 0 )
 palettes = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ]

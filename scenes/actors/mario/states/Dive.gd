@@ -25,7 +25,7 @@ func _start_check(_delta : float) -> bool:
 
 func _start(_delta : float) -> void:
 	start_facing = character.facing_direction
-	var sound_player : Node = character.get_node("Sounds") # Sounds is apparently a node that gets added at runtime??
+	var sound_player : Node = character.sound_player # Sounds is apparently a node that gets added at runtime??
 	if dive_buffer > 0 and character.dive_cooldown == 0:
 		if character.character == 0:
 			character.velocity.x = character.velocity.x - (character.velocity.x - (dive_power.x * character.facing_direction)) / 5

@@ -267,19 +267,13 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	var use_alt_character : bool = Singleton.PlayerSettings.player1_character == Singleton.PlayerSettings.player2_character and player_id != 0
 	match character:
 		0: # Mario
-			if Singleton.MiscCache.mario_sounds != null:
-				sound_player = Singleton.MiscCache.mario_sounds.instance()
-			else:
-				sound_player = load("res://scenes/actors/mario/mario_sounds.tscn").instance()
-				Singleton.MiscCache.mario_sounds = sound_player
+			sound_player = $Sounds
+			$Sounds2.queue_free()
 			sprite.frames = mario_alt_frames if use_alt_character else mario_frames
 			real_friction = friction
 		1: # Luigi
-			if Singleton.MiscCache.luigi_sounds != null:
-				sound_player = Singleton.MiscCache.luigi_sounds.instance()
-			else:
-				sound_player = load("res://scenes/actors/mario/luigi_sounds.tscn").instance()
-				Singleton.MiscCache.luigi_sounds = sound_player
+			sound_player = $Sounds2
+			$Sounds.queue_free()
 			sprite.frames = luigi_alt_frames if use_alt_character else luigi_frames
 			move_speed = luigi_speed
 			acceleration = luigi_accel

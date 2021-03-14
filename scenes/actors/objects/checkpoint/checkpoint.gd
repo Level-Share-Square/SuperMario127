@@ -12,7 +12,7 @@ var spawn_y_offset := 0.0
 var id = 0
 
 func _set_properties():
-	savable_properties = ["save_water_level", "spawn_y_offset"]
+	savable_properties = ["save_water_level", "spawn_y_offset", "id"]
 	editable_properties = ["save_water_level", "spawn_y_offset"]
 	
 func _set_property_values():
@@ -20,9 +20,8 @@ func _set_property_values():
 	set_property("spawn_y_offset", spawn_y_offset, true)
 
 func _ready():
-	id = Singleton.CurrentLevelData.level_data.vars.checkpoints.size()
-	Singleton.CurrentLevelData.level_data.vars.checkpoints.append([id, self])
-	
+	Singleton.CurrentLevelData.set_checkpoint_ids()
+	id = level_object.get_ref().properties[6]
 	if Singleton.CheckpointSaved.current_checkpoint_id == id:
 		is_used = true
 

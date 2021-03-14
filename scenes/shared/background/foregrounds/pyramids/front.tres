@@ -3,11 +3,10 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/pyramids/front.png" type="Texture" id=1]
 [ext_resource path="res://classes/ParallaxLayerResource.gd" type="Script" id=2]
 
-
-
 [resource]
 script = ExtResource( 2 )
 texture = ExtResource( 1 )
-scale = Vector2( 0.15, 0.4 )
-offset = Vector2( 0, 0 )
+scale = Vector2( 0.15, 0 )
+offset = Vector2( 0, -184 )
 mirroring = Vector2( 512, 0 )
+palettes = [  ]

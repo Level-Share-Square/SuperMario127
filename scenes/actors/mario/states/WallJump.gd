@@ -23,7 +23,7 @@ func _start_check(_delta):
 	return (character.state == character.get_state_node("WallSlideState") or slide_check) and press_buffer > 0
 
 func _start(_delta):
-	var sound_player = character.get_node("Sounds")
+	var sound_player = character.sound_player
 	if character_in_range:
 		actual_power.y /= 1.15
 		if actual_power.y < minimum_power:

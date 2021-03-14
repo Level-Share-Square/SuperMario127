@@ -55,6 +55,9 @@ func create_cache(userdata):
 	
 	create_level_data(0)
 
+func reset():
+	create_level_data(0)
+
 func _init() -> void:
 	thread = Thread.new()
 	
@@ -93,6 +96,15 @@ func get_last_star_coin_id():
 				object.properties[5] = last_star_coin_id
 				last_star_coin_id += 1
 	return last_star_coin_id
+
+func set_checkpoint_ids():
+	var checkpoint_id = 0
+	for area in Singleton.CurrentLevelData.level_data.areas:
+		for object in area.objects:
+			if object.type_id == 82:
+				object.properties[6] = checkpoint_id
+				checkpoint_id += 1
+	return checkpoint_id
 
 func get_red_coins_before_area(area_id : int):
 	var last_red_coin_id = 0

@@ -11,45 +11,37 @@ Left/Right - Move
 Down - Ground Pound, Crouch, Butt Slide (on slopes)
 Up - Ground Pound Cancel
 
-P - Pause
-M - Mute Music
-3 - Toggle Photo Mode
-
 Credits:
-SuperMakerPlayer - Project Lead, Programmer
-NoThisIsStupider - Lead Programmer
-Benedani - Programmer
-Certi - Programmer
+SuperMakerPlayer - Project Lead, Programming
+NoThisIsStupider - Programming
+Benedani - Programming
+Certi - Programming
 
-TrafficConeGod - Programmer
-JuPaHe64 - Programmer
-FluentCoding - Programmer
+TrafficConeGod - Programming
+JuPaHe64 - Programming
+FluentCoding - Programming
 
-Roosara Ruwanga - Spriter
-PumpkinVolt - Spriter
-NanTheDark - Spriter
-Saneko - Spriter
+Roosara Ruwanga - Sprites
+PumpkinVolt - Sprites
+NanTheDark - Sprites
+Saneko - Sprites
 
-AstraSpec - Spriter
-Reshi - Spriter
-WoodBlocks - Spriter
-Doram - Spriter
-Nitro Fox - Spriter
+AstraSpec - Sprites
+Reshi - Sprites
+WoodBlocks - Sprites
+Doram - Sprites
+Nitro Fox - Sprites
+YoshiDev - Sprites
 
-JerryStuff - Musician
-AM4 - Musician
-
-YoshiDev - Cool Person
+JerryStuff - Music
+AM4 - Music
 
 Template Levels:
 Tutorial Hills - NingiGamer64
 Waterfloat Galaxy - Blocko
 Prism Star Galaxy - Asterocrat
-Ghost Pepper Challenge - Tabs
-Snowside Resort - Blocko
-Rocketside Plaza - Blocko
-The Dungeon of 4 Kingdoms - Tabs
-Glide Feather Challenge - Tabs
+Gold Rush Gulch - Asterocrat
+Super Feather Challenge - Tabs
 Green Demon Cave - NingiGamer64
 
 
@@ -69,6 +61,7 @@ AM4 - Mission Select Jingle (Remix)
 AM4 - Rainbow Mario (Remix)
 AM4 - Wing Mario (Remix)
 AM4 - Vanish Mario (Remix)
+AM4 - Secret Course (Remix)
 
 Other:
 PFRA - Delfino Font: https://mfgg.net/index.php?act=resdb&param=02&c=6&id=20041

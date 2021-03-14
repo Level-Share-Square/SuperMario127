@@ -43,7 +43,7 @@ func on_button_levels_pressed() -> void:
 
 func on_button_editor_pressed() -> void:
 	Singleton.SavedLevels.selected_level = Singleton.SavedLevels.NO_LEVEL
-	Singleton.CurrentLevelData._ready() # Reset level
+	Singleton.CurrentLevelData.reset() # Reset level
 	var _change_scene = get_tree().change_scene_to(EDITOR_SCENE)
 
 func on_button_templates_pressed() -> void:

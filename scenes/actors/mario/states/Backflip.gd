@@ -22,7 +22,7 @@ func _start(_delta):
 	priority = 4
 	unlock_timer = 0.4
 	direction_on_start = character.facing_direction
-	var sound_player = character.get_node("Sounds")
+	var sound_player = character.sound_player
 	var collision = character.get_node("Collision")
 	var dive_collision = character.get_node("CollisionDive")
 	var ground_collision = character.get_node("GroundCollision")

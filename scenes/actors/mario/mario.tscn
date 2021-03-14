@@ -1,4 +1,4 @@
-[gd_scene load_steps=158 format=2]
+[gd_scene load_steps=160 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -72,6 +72,8 @@
 [ext_resource path="res://scenes/actors/mario/states/LavaBoost.gd" type="Script" id=70]
 [ext_resource path="res://scenes/actors/mario/particles/bubble.png" type="Texture" id=71]
 [ext_resource path="res://scenes/actors/mario/states/Squished.gd" type="Script" id=72]
+[ext_resource path="res://scenes/actors/mario/mario_sounds.tscn" type="PackedScene" id=73]
+[ext_resource path="res://scenes/actors/mario/luigi_sounds.tscn" type="PackedScene" id=74]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -1087,7 +1089,7 @@ disabled = true
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 4
+frame = 5
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
@@ -1509,6 +1511,10 @@ pitch_scale = 1.1
 stream = ExtResource( 27 )
 volume_db = -5.0
 
+[node name="Sounds" parent="." instance=ExtResource( 73 )]
+
+[node name="Sounds2" parent="." instance=ExtResource( 74 )]
+
 [node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 34 )
 z_index = -2
@@ -1615,14 +1621,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 2
+frame = 9
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 12
+frame = 1
 speed_scale = 3.0
 playing = true
 
@@ -1643,7 +1649,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 4
+frame = 5
 playing = true
 script = ExtResource( 34 )
 
