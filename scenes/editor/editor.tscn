@@ -1,4 +1,4 @@
-[gd_scene load_steps=586 format=2]
+[gd_scene load_steps=587 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -560,6 +560,7 @@
 [ext_resource path="res://scenes/actors/objects/spike_trap/palettes/3.png" type="Texture" id=558]
 [ext_resource path="res://scenes/actors/objects/spike_trap/spike_trap.png" type="Texture" id=559]
 [ext_resource path="res://assets/tiles/garden/icon.png" type="Texture" id=560]
+[ext_resource path="res://assets/tiles/garden/icon_slab.png" type="Texture" id=561]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1879,8 +1880,8 @@ tile_id = 1
 change_to = "Garden"
 items_in_sequence = 2
 index_in_sequence = 1
-icon = ExtResource( 63 )
-preview = ExtResource( 63 )
+icon = ExtResource( 561 )
+preview = ExtResource( 561 )
 
 [node name="BigTree" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 24 )
