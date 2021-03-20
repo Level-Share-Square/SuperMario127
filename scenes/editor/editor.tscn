@@ -1,4 +1,4 @@
-[gd_scene load_steps=587 format=2]
+[gd_scene load_steps=609 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -561,6 +561,28 @@
 [ext_resource path="res://scenes/actors/objects/spike_trap/spike_trap.png" type="Texture" id=559]
 [ext_resource path="res://assets/tiles/garden/icon.png" type="Texture" id=560]
 [ext_resource path="res://assets/tiles/garden/icon_slab.png" type="Texture" id=561]
+[ext_resource path="res://assets/tiles/garden/icon_slope_right.png" type="Texture" id=562]
+[ext_resource path="res://assets/tiles/garden/icon_slope_left.png" type="Texture" id=563]
+[ext_resource path="res://assets/tiles/garden/palette_icons/1_block.png" type="Texture" id=564]
+[ext_resource path="res://assets/tiles/garden/palette_icons/0_block.png" type="Texture" id=565]
+[ext_resource path="res://assets/tiles/garden/palette_icons/2_block.png" type="Texture" id=566]
+[ext_resource path="res://assets/tiles/garden/palette_icons/4_block.png" type="Texture" id=567]
+[ext_resource path="res://assets/tiles/garden/palette_icons/3_block.png" type="Texture" id=568]
+[ext_resource path="res://assets/tiles/garden/palette_icons/0_slab.png" type="Texture" id=569]
+[ext_resource path="res://assets/tiles/garden/palette_icons/1_slab.png" type="Texture" id=570]
+[ext_resource path="res://assets/tiles/garden/palette_icons/2_slab.png" type="Texture" id=571]
+[ext_resource path="res://assets/tiles/garden/palette_icons/3_slab.png" type="Texture" id=572]
+[ext_resource path="res://assets/tiles/garden/palette_icons/4_slab.png" type="Texture" id=573]
+[ext_resource path="res://assets/tiles/garden/palette_icons/0_slopeL.png" type="Texture" id=574]
+[ext_resource path="res://assets/tiles/garden/palette_icons/1_slopeL.png" type="Texture" id=575]
+[ext_resource path="res://assets/tiles/garden/palette_icons/2_slopeL.png" type="Texture" id=576]
+[ext_resource path="res://assets/tiles/garden/palette_icons/4_slopeL.png" type="Texture" id=577]
+[ext_resource path="res://assets/tiles/garden/palette_icons/3_slopeR.png" type="Texture" id=578]
+[ext_resource path="res://assets/tiles/garden/palette_icons/2_slopeR.png" type="Texture" id=579]
+[ext_resource path="res://assets/tiles/garden/palette_icons/0_slopeR.png" type="Texture" id=580]
+[ext_resource path="res://assets/tiles/garden/palette_icons/4_slopeR.png" type="Texture" id=581]
+[ext_resource path="res://assets/tiles/garden/palette_icons/3_slopeL.png" type="Texture" id=582]
+[ext_resource path="res://assets/tiles/garden/palette_icons/1_slopeR.png" type="Texture" id=583]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1868,8 +1890,10 @@ preview = ExtResource( 13 )
 [node name="Garden" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 24 )
 tileset_id = 34
+palette_icons = [ ExtResource( 560 ), ExtResource( 565 ), ExtResource( 564 ), ExtResource( 566 ), ExtResource( 568 ), ExtResource( 567 ) ]
+palette_previews = [ ExtResource( 560 ), ExtResource( 565 ), ExtResource( 564 ), ExtResource( 566 ), ExtResource( 568 ), ExtResource( 567 ) ]
 change_to = "GardenSlab"
-items_in_sequence = 2
+items_in_sequence = 4
 icon = ExtResource( 560 )
 preview = ExtResource( 560 )
 
@@ -1877,11 +1901,37 @@ preview = ExtResource( 560 )
 script = ExtResource( 24 )
 tileset_id = 34
 tile_id = 1
-change_to = "Garden"
-items_in_sequence = 2
+palette_icons = [ ExtResource( 561 ), ExtResource( 569 ), ExtResource( 570 ), ExtResource( 571 ), ExtResource( 572 ), ExtResource( 573 ) ]
+palette_previews = [ ExtResource( 561 ), ExtResource( 569 ), ExtResource( 570 ), ExtResource( 571 ), ExtResource( 572 ), ExtResource( 573 ) ]
+change_to = "GardenSlopeLeft"
+items_in_sequence = 4
 index_in_sequence = 1
 icon = ExtResource( 561 )
 preview = ExtResource( 561 )
+
+[node name="GardenSlopeLeft" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 24 )
+tileset_id = 34
+tile_id = 2
+palette_icons = [ ExtResource( 563 ), ExtResource( 574 ), ExtResource( 575 ), ExtResource( 576 ), ExtResource( 582 ), ExtResource( 577 ) ]
+palette_previews = [ ExtResource( 563 ), ExtResource( 574 ), ExtResource( 575 ), ExtResource( 576 ), ExtResource( 582 ), ExtResource( 577 ) ]
+change_to = "GardenSlopeRight"
+items_in_sequence = 4
+index_in_sequence = 2
+icon = ExtResource( 563 )
+preview = ExtResource( 563 )
+
+[node name="GardenSlopeRight" type="Node" parent="PlaceableItems/GrassGroup"]
+script = ExtResource( 24 )
+tileset_id = 34
+tile_id = 3
+palette_icons = [ ExtResource( 562 ), ExtResource( 580 ), ExtResource( 583 ), ExtResource( 579 ), ExtResource( 578 ), ExtResource( 581 ) ]
+palette_previews = [ ExtResource( 562 ), ExtResource( 580 ), ExtResource( 583 ), ExtResource( 579 ), ExtResource( 578 ), ExtResource( 581 ) ]
+change_to = "Garden"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 562 )
+preview = ExtResource( 562 )
 
 [node name="BigTree" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 24 )

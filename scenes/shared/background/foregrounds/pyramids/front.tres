@@ -7,6 +7,6 @@
 script = ExtResource( 2 )
 texture = ExtResource( 1 )
 scale = Vector2( 0.15, 0 )
-offset = Vector2( 0, -184 )
-mirroring = Vector2( 512, 0 )
+offset = Vector2( 0, -216 )
+mirroring = Vector2( 768, 0 )
 palettes = [  ]

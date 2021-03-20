@@ -19,12 +19,9 @@ func _gui_input(event):
 	if event is InputEventKey || event is InputEventMouseButton:
 		cursor_pos = get_cursor_position()
 
-func text_changed(new_text : String):
-	if !new_text.is_valid_float() && !new_text.empty():
-		text = _old_text
-		set_cursor_position(cursor_pos)
-	else:
-		_old_text = new_text
+func update():
+	if !text.is_valid_float():
+		text = "0"
 
 func check() -> bool:
 	var val := float(text)

@@ -89,14 +89,14 @@ func button_press():
 		if foreground_button_left.pressed:
 			area.settings.background_palette = 0
 			
-			foreground_index = wrapi(foreground_index - 1, 0, foreground_id_mapper.ids.size() - 1)
+			foreground_index = wrapi(foreground_index - 1, 0, sorted_fg_list.ids.size())
 			area.settings.background = get_index_in_array(sorted_fg_list.ids[foreground_index], foreground_id_mapper.ids)
 			update_preview()
 			click_sound.play()
 		elif foreground_button_right.pressed:
 			area.settings.background_palette = 0
 			
-			foreground_index = wrapi(foreground_index + 1, 0, foreground_id_mapper.ids.size() - 1)
+			foreground_index = wrapi(foreground_index + 1, 0, sorted_fg_list.ids.size())
 			area.settings.background = get_index_in_array(sorted_fg_list.ids[foreground_index], foreground_id_mapper.ids)
 			update_preview()
 			click_sound.play()

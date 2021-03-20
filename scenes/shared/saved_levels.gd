@@ -19,8 +19,11 @@ var template_level_codes : Array = [
 	"res://level/template_levels/tutorial_hills.tres",  
 	"res://level/template_levels/waterfloat_galaxy.tres",
 	"res://level/template_levels/prism_star_galaxy.tres",
+	"res://level/template_levels/all_season_vacation.tres",
+	"res://level/template_levels/wet_freeze_cave.tres",
 	"res://level/template_levels/gold_rush_gulch.tres",
 	"res://level/template_levels/glide_feather_challenge.tres",
+	"res://level/template_levels/warp_palace.tres",
 	"res://level/template_levels/green_demon_cave.tres"
 ]
 # for the levels list and get_current_levels()

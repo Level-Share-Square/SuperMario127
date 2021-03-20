@@ -1,2 +1,8 @@
 .import/
 .mono/
+scenes/actors/mario/new_anims/mario.gd
+scenes/actors/mario/new_anims/animations/walking/mario.png.import
+scenes/actors/mario/new_anims/animations/walking/mario.png
+scenes/actors/mario/new_anims/animations/idle/mario.png.import
+scenes/actors/mario/new_anims/animations/idle/mario.png
+scenes/actors/mario/new_anims/animation_frames.tres

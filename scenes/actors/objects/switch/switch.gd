@@ -10,7 +10,7 @@ export var top_point : Vector2
 onready var anim_player = $AnimationPlayer
 onready var press_area = $PressArea
 
-var pressed_time = 20
+var pressed_time := 20.0
 
 func _set_properties():
 	savable_properties = ["pressed_time"]

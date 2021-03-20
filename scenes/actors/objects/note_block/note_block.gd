@@ -100,7 +100,9 @@ func actually_bounce(body):
 	if abs(normal.x) > 0.1:
 		body.velocity.x = x_power
 		# Test move to ensure the player doesn't end up inside of a tile
-		if !body.test_move(body.transform, Vector2(2 * sign(x_power), 0)):
+		if !body.has_method("test_move"):
+			body.position.x += 2 * sign(x_power)
+		elif !body.test_move(body.transform, Vector2(2 * sign(x_power), 0)):
 			body.position.x += 2 * sign(x_power)
 	if abs(normal.y) > 0.1:
 		body.velocity.y = y_power
