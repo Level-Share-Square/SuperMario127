@@ -303,7 +303,16 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	else:
 		# start speedrun timer
 		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and Singleton.CheckpointSaved.current_checkpoint_id == -1:
+			if Singleton.CurrentLevelData.level_data.vars.transition_data == []:
+				Singleton.CurrentLevelData.start_tracking_time_score()
+			else:
+				var score_from_before = Singleton.CurrentLevelData.time_score
+				Singleton.CurrentLevelData.start_tracking_time_score()
+				Singleton.CurrentLevelData.time_score = score_from_before
+		elif Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and Singleton.CurrentLevelData.level_data.vars.transition_data != []:
+			var score_from_before = Singleton.CurrentLevelData.time_score
 			Singleton.CurrentLevelData.start_tracking_time_score()
+			Singleton.CurrentLevelData.time_score = score_from_before
 
 var prev_is_grounded := false
 func is_grounded() -> bool:
@@ -636,13 +645,15 @@ func _physics_process(delta: float) -> void:
 			var normal = ground_check.get_collision_normal()
 			sprite_rotation = (atan2(normal.y, normal.x) + (PI/2)) / 2
 			sprite_offset = Vector2(rad2deg(sprite_rotation) / 10, -abs(rad2deg(sprite_rotation) / 10))
-			
+
 			# Translate velocity X to Y
 			if normal.y != 0: # Avoid division by zero (what)
 				velocity.y += (velocity.x * normal.x / normal.y) * -1
 				if velocity.y < 0: # upwards velocity, don't allow that
 					velocity.y = 0
 			
+			if abs(sprite_rotation) >= 80:
+				sprite_rotation = 0
 			# this is required to keep mario from falling off slopes
 			#velocity.y += (abs(sprite_rotation) + 1) * 100
 			

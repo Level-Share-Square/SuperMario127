@@ -18,7 +18,7 @@ func _ready():
 	blacklisted_states = ["GetupState", "WallSlideState"]
 
 func _start_check(_delta):
-	return !(character.is_grounded() and character.rainbow_stored) and spin_timer > 0 and (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2
+	return !(character.is_grounded() and character.rainbow_stored) and boost_cooldown_timer == 0 and spin_timer > 0 and (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2
 
 func _start(_delta):
 	character.ring_particles.frame = 0
@@ -31,12 +31,12 @@ func _start(_delta):
 	if !character.is_grounded() and (character.state != character.get_state_node("Jump") or character.current_jump == 1):
 		if character.velocity.y > -boost_power and boost_cooldown_timer <= 0:
 			if character.velocity.y > 100:
-				character.velocity.y /= 2.5
+				character.velocity.y /= 2
 			if character.velocity.y > 0:
 				character.velocity.y -= boost_power
 			else:
 				character.velocity.y -= boost_power/2
-	boost_cooldown_timer = 0.5
+	boost_cooldown_timer = 0.45
 	old_gravity_scale = character.gravity_scale
 	character.gravity_scale = gravity_scale
 
@@ -72,12 +72,10 @@ func _general_update(delta):
 		spin_disable_time -= delta
 		if spin_disable_time <= 0:
 			spin_disable_time = 0
-	if spin_timer > 0 and !character.inputs[4][0]:
-		if character.jump_animation == 2 and character.state == character.get_state_node("JumpState"):
-			spin_timer = 0.2
+	if spin_timer > 0:
 		spin_timer -= delta
 		if spin_timer <= 0:
-			spin_timer = 0
+			spin_timer = 0 if !character.inputs[4][0] else 0.05
 	if character.inputs[4][0] and spin_timer == 0.0 and spin_disable_time == 0:
 		spin_timer = 0.2
 	if character.inputs[4][1]:

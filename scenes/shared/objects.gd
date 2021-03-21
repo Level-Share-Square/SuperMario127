@@ -42,7 +42,7 @@ func create_object(object, add_to_data):
 				object_node.on_place()
 		return object_node
 	else:
-		print("Object type doesn't exist.")
+		print("Object type doesn't exist. [ID: " + str(object.type_id) + "]")
 		
 func get_object_at_position(position: Vector2):
 	for object in self.get_children():

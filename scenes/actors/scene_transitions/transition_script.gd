@@ -24,6 +24,7 @@ func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout
 
 		yield(do_transition_animation(transition_in_tex, transition_time, TRANSITION_SCALE_UNCOVER, TRANSITION_SCALE_COVERED, volume_multiplier, volume_multiplier / 4, false), "completed")
 		
+		Singleton.CurrentLevelData.stop_tracking_time_score()
 		var _reload = get_tree().reload_current_scene()
 		if new_area != -1:
 			Singleton.CurrentLevelData.area = new_area

@@ -7,6 +7,7 @@ onready var sprite_2 = $AnimatedSprite/Color2
 
 var retracted_time = 2.5
 var burning_time = 2.5
+var offset = 0.0
 var color = Color(1, 0, 0)
 
 var next_state_timer
@@ -14,18 +15,21 @@ var burning = true
 var reversed = false
 
 func _set_properties():
-	savable_properties = ["retracted_time", "burning_time", "color", "reversed"]
-	editable_properties = ["retracted_time", "burning_time", "color", "reversed"]
+	savable_properties = ["retracted_time", "burning_time", "color", "reversed", "offset"]
+	editable_properties = ["retracted_time", "burning_time", "color", "reversed", "offset"]
 
 func _set_property_values():
 	set_property("retracted_time", retracted_time, true)
 	set_property("burning_time", burning_time, true)
 	set_property("color", color, true)
 	set_property("reversed", reversed, true)
+	set_property("offset", offset, true)
 
 func _ready():
 	burning = !reversed
 	next_state_timer = burning_time if !reversed else retracted_time
+	
+	next_state_timer += offset
 
 func _physics_process(delta):
 	if mode == 1:
