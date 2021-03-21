@@ -144,6 +144,7 @@ var using_turbo := false
 var turbo_nerf := false
 var fuel := 100.0
 var stamina := 100.0
+var breath := 100.0
 var nozzles_list_index := 0
 var powerup : Node = null # Couldn't set static type due to circle reference
 var rainbow_stored := false
@@ -557,6 +558,7 @@ func _physics_process(delta: float) -> void:
 		if player_id == 0 and Singleton.Music.has_water and !Singleton.Music.play_water:
 			Singleton.Music.toggle_underwater_music(true)
 	else:
+		breath = clamp(breath + 1, 0, 100)
 		if player_id == 0 and Singleton.Music.play_water:
 			Singleton.Music.toggle_underwater_music(false)
 	
