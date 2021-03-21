@@ -21,14 +21,18 @@ func _set_property_values():
 	set_property("color", color, true)
 
 func _ready():
+	if rotation != 0 and enabled:
+		enabled = false
 	pipe_enter_logic.connect("pipe_animation_finished", self, "change_areas")
-	Singleton.CurrentLevelData.level_data.vars.pipes.append([pipe_tag.to_lower(), self])
+	if rotation == 0:
+		Singleton.CurrentLevelData.level_data.vars.pipes.append([pipe_tag.to_lower(), self])
 
 func _process(delta):
-	if enabled:
-		rotation = 0
+	if rotation != 0 and enabled:
+		enabled = false
 	if color == Color(0, 1, 0):
 		sprite.texture = normal_texture
+		sprite2.visible = false
 		sprite.self_modulate = Color(1, 1, 1)
 	else:
 		sprite.texture = recolorable_texture

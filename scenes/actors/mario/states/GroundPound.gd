@@ -33,7 +33,7 @@ func _stop(delta):
 	if character.swimming: return
 	if character.is_grounded():
 		var normal = character.ground_check.get_collision_normal()
-		if normal.x == 0:
+		if stepify(normal.x, 0.1) == 0:
 			character.set_state_by_name("GroundPoundEndState", delta)
 		else:
 			var move_direction = 1

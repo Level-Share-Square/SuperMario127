@@ -1,6 +1,6 @@
 class_name LevelData
 
-var current_format_version := "0.4.7"
+var current_format_version := "0.4.8"
 var name := "My Level"
 var areas = []
 var functions = {}
@@ -214,6 +214,9 @@ func load_in(code):
 
 	if result.format_version == "0.4.6":
 		result.format_version = "0.4.7"
+
+	if result.format_version == "0.4.7":
+		result = conversion_util.convert_047_to_048(result)
 
 	assert(result.format_version)
 	assert(result.name)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=609 format=2]
+[gd_scene load_steps=611 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -107,7 +107,7 @@
 [ext_resource path="res://scenes/actors/objects/big_bottle/big_bottle.png" type="Texture" id=105]
 [ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/icon.png" type="Texture" id=106]
 [ext_resource path="res://assets/tiles/boo_block/icon.png" type="Texture" id=107]
-[ext_resource path="res://scenes/actors/objects/pipe/pipe.png" type="Texture" id=108]
+[ext_resource path="res://scenes/actors/objects/pipe/preview.png" type="Texture" id=108]
 [ext_resource path="res://scenes/editor/assets/save_icon.png" type="Texture" id=109]
 [ext_resource path="res://scenes/actors/objects/pipe/icon.png" type="Texture" id=110]
 [ext_resource path="res://assets/tiles/snow/slab_icon.png" type="Texture" id=111]
@@ -583,6 +583,8 @@
 [ext_resource path="res://assets/tiles/garden/palette_icons/4_slopeR.png" type="Texture" id=581]
 [ext_resource path="res://assets/tiles/garden/palette_icons/3_slopeL.png" type="Texture" id=582]
 [ext_resource path="res://assets/tiles/garden/palette_icons/1_slopeR.png" type="Texture" id=583]
+[ext_resource path="res://scenes/actors/objects/pipe_body/icon.png" type="Texture" id=584]
+[ext_resource path="res://scenes/actors/objects/pipe_corner/icon.png" type="Texture" id=585]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1347,8 +1349,32 @@ script = ExtResource( 24 )
 object_id = 23
 is_object = true
 object_center = Vector2( 16, 16 )
+change_to = "PipeBody"
+items_in_sequence = 3
 icon = ExtResource( 110 )
 preview = ExtResource( 108 )
+
+[node name="PipeBody" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 89
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "PipeCorner"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 584 )
+preview = ExtResource( 584 )
+
+[node name="PipeCorner" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 90
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "Pipe"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 585 )
+preview = ExtResource( 585 )
 
 [node name="Door" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )

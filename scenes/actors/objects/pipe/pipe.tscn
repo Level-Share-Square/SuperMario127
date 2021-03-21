@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/actors/objects/pipe/recolorable_texture_2.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 17.5, 20 )
+extents = Vector2( 14.5, 20 )
 
 [node name="Pipe" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,9 +15,10 @@ normal_texture = ExtResource( 2 )
 recolorable_texture = ExtResource( 4 )
 
 [node name="PipeEnterLogic" parent="." instance=ExtResource( 3 )]
-position = Vector2( 0, -23 )
+position = Vector2( 0, -27 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -4 )
 z_index = -1
 texture = ExtResource( 2 )
 
@@ -28,6 +29,7 @@ texture = ExtResource( 5 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 visible = false
+position = Vector2( 0, -4 )
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]

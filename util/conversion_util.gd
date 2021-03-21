@@ -62,6 +62,20 @@ static func convert_044_to_045(result):
 				new_objects.append(object)
 			area_result.objects = new_objects
 	return result
+	
+static func convert_047_to_048(result):
+	result.format_version = "0.4.8"
+	var current_id = 0
+	for area_result in result.areas:
+		if typeof(area_result) == TYPE_DICTIONARY:
+			var new_objects = []
+			for object_result in area_result.objects:
+				var object = object_result
+				if object.type_id == 23: #chad hardcoding
+					object.properties[0].y += 4
+				new_objects.append(object)
+			area_result.objects = new_objects
+	return result
 
 static func compareVersions(version, other) -> int:
 	var v = version.split(".")

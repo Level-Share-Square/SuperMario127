@@ -31,7 +31,7 @@ func _start(_delta):
 	if !character.is_grounded() and (character.state != character.get_state_node("Jump") or character.current_jump == 1):
 		if character.velocity.y > -boost_power and boost_cooldown_timer <= 0:
 			if character.velocity.y > 100:
-				character.velocity.y /= 1.5
+				character.velocity.y /= 2.5
 			if character.velocity.y > 0:
 				character.velocity.y -= boost_power
 			else:

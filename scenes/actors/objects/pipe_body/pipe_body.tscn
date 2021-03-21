@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/actors/objects/pipe_body/pipe_body.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/pipe_body/pipe.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/pipe_body/recolorable_texture_2.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/pipe_body/recolorable_texture.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 14.5, 0.5 )
+
+[node name="PipeBody" type="Node2D"]
+script = ExtResource( 1 )
+normal_texture = ExtResource( 2 )
+recolorable_texture = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -18, -16 )
+scale = Vector2( 1, 32 )
+z_index = -1
+texture = ExtResource( 2 )
+centered = false
+region_rect = Rect2( 0, 20, 35, 20 )
+
+[node name="Sprite2" type="Sprite" parent="Sprite"]
+visible = false
+self_modulate = Color( 0.733333, 1, 0.694118, 1 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( -2, 0 )
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 1.5, 0 )
+scale = Vector2( 1, 32 )
+shape = SubResource( 1 )

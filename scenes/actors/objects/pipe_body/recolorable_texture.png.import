@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-2fe20a03aaad5b810d565c9672a0d357.stex"
+path="res://.import/recolorable_texture.png-87da86e7dd880c00e382ae1a7fc92c27.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/pipe_body/icon.png"
-dest_files=[ "res://.import/icon.png-2fe20a03aaad5b810d565c9672a0d357.stex" ]
+source_file="res://scenes/actors/objects/pipe_body/recolorable_texture.png"
+dest_files=[ "res://.import/recolorable_texture.png-87da86e7dd880c00e382ae1a7fc92c27.stex" ]
 
 [params]
 
