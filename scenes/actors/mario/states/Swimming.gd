@@ -42,7 +42,11 @@ func _start(_delta):
 	
 	character.swimming = true
 	character.gravity_scale = 0
-	char_rotation = character.sprite.rotation_degrees
+	
+	char_rotation = 90
+	if abs(character.sprite.rotation_degrees) > 90:
+		char_rotation = abs(character.sprite.rotation_degrees)
+	
 	character.sprite.speed_scale = 1
 	swim_speed = base_swim_speed
 	boost_disable_time = 0.14
@@ -129,10 +133,10 @@ func _update(delta):
 			move_vector = Vector2.RIGHT.rotated(char_rotation - (PI/2))
 			target = move_vector
 		character.velocity = character.velocity.move_toward(target * swim_speed, fps_util.PHYSICS_DELTA * lerp_speed)
+		sprite.rotation = fmod(lerp_angle(sprite.rotation, char_rotation, fps_util.PHYSICS_DELTA * (5.5 if boost_time_left == 0 else 2)), 360)
 	else:
 		character.velocity = character.velocity.move_toward(Vector2(), fps_util.PHYSICS_DELTA * (240 if (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed) else 480))
 
-	sprite.rotation = fmod(lerp_angle(sprite.rotation, char_rotation, fps_util.PHYSICS_DELTA * (7 if boost_time_left == 0 else 2)), 360)
 	if abs(sprite.rotation) > PI:
 		sprite.rotation = -sprite.rotation
 

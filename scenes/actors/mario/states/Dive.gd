@@ -73,7 +73,7 @@ func _stop(delta : float) -> void:
 		sprite.rotation_degrees = 0
 	if character.is_grounded():
 		character.set_state_by_name("SlideState", delta)
-	else:
+	elif character.water_detector.get_overlapping_areas().size() <= 0:
 		sprite.rotation_degrees = 0
 	
 	if character.is_grounded():
