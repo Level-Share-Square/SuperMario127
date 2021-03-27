@@ -20,12 +20,13 @@ func _set_property_values():
 	set_property("spawn_y_offset", spawn_y_offset, true)
 
 func _ready():
+	if is_preview: return
+	
+	var _connect = use_area.connect("body_entered", self, "set_checkpoint")
 	Singleton.CurrentLevelData.set_checkpoint_ids()
 	id = level_object.get_ref().properties[6]
 	if Singleton.CheckpointSaved.current_checkpoint_id == id:
 		is_used = true
-
-	var _connect = use_area.connect("body_entered", self, "set_checkpoint")
 
 func _physics_process(delta):
 	var sprite = $Rotation/RotationRight
