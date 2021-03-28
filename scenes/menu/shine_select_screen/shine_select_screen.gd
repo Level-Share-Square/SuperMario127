@@ -92,7 +92,10 @@ func _open_screen() -> void:
 		
 		# mark the selected shine and only that shine as selected
 		shine_sprite.selected = i == 0
-			
+		
+		# make non-kickout shines turn the other way
+		shine_sprite.is_flipped = !shine_details[i]["do_kick_out"]
+		
 		# place all the shines the correct distance away from the center shine
 		if i > 1:
 			shine_sprite.position.x = SHINE_FIRST_POSITION_OFFSET + (SHINE_POSITION_INCREMENT * i)
@@ -196,6 +199,8 @@ func update_labels() -> void:
 	shine_description.text = shine_details[shine_details_indices[selected_shine_index]]["description"]
 
 func start_level() -> void:
+	can_interact = false
+	
 	letsa_go_sfx.play()
 	if Singleton.PlayerSettings.number_of_players > 1:
 		# quick wait before playing P2's voice clip, to make it sound more natural
@@ -204,8 +209,6 @@ func start_level() -> void:
 		# we set the array index so the same voice is played for both, and it syncs
 		letsa_go_sfx_2.array_index = letsa_go_sfx.array_index
 		letsa_go_sfx_2.play()
-
-	can_interact = false
 	
 	get_tree().call_group("shine_sprites", "start_pressed_animation")
 
@@ -225,6 +228,7 @@ func on_button_move_right_pressed() -> void:
 	attempt_increment_selected_shine_index(1)
 
 func on_button_select_shine_pressed() -> void:
+	if !can_interact: return
 	start_level()
 
 func on_button_back_pressed() -> void:

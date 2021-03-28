@@ -35,7 +35,8 @@ func _ready() -> void:
 	anim_sprite.play("default")
 
 func on_place():
-	id = Singleton.CurrentLevelData.get_last_star_coin_id()
+	Singleton.CurrentLevelData.set_star_coin_ids()
+	id = level_object.get_ref().properties[5]
 	set_property("id", id)
 
 func update_color():

@@ -11,6 +11,7 @@ const NORMAL_COLOR := Color(1, 1, 0)
 const WHITE_COLOR := Color(1, 1, 1) # because apparently this needs to be const
 
 var selected : bool = false # this is for the animation, and other stuff that might need it
+var is_flipped : bool = false # for non-kickout shines
 
 func start_animation() -> void:
 	play()
@@ -30,3 +31,8 @@ func set_color(color : Color) -> void:
 	else:
 		self_modulate = WHITE_COLOR
 		frames = frames_normal
+
+func _ready():
+	if is_flipped:
+		flip_h = true
+		shine_outline.flip_h = true

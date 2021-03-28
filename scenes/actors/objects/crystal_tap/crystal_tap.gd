@@ -38,5 +38,5 @@ func set_liquid_level(body):
 				match_level = global_position.x
 			found_liquid[1].match_level = match_level + offset
 			found_liquid[1].move_speed = move_speed
-			found_liquid[1].save_pos = Vector2(found_liquid[1].global_position.x, global_position.y) 
+			found_liquid[1].save_pos = Vector2(found_liquid[1].global_position.x + (offset if horizontal else 0), global_position.y + (0 if horizontal else offset)) 
 			found_liquid[1].horizontal = horizontal

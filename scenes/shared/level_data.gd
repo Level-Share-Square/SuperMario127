@@ -79,7 +79,7 @@ func start_tracking_time_score(keep_time : bool = false):
 func stop_tracking_time_score():
 	set_process(false)
 
-func get_last_shine_id():
+func set_shine_ids():
 	var last_shine_id = 0
 	for area in Singleton.CurrentLevelData.level_data.areas:
 		for object in area.objects:
@@ -88,7 +88,7 @@ func get_last_shine_id():
 				last_shine_id += 1
 	return last_shine_id
 
-func get_last_star_coin_id():
+func set_star_coin_ids():
 	var last_star_coin_id = 0
 	for area in Singleton.CurrentLevelData.level_data.areas:
 		for object in area.objects:

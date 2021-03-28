@@ -179,7 +179,7 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 						break
 					index += 1
 				#var index = level_info.shine_details.bsearch(shine_detail) - doesn't work ae
-				var time_score = time_scores[index]
+				var time_score = time_scores[shine_detail.id if shine_detail.id < time_scores.size() else (time_scores.size() - 1)]
 				if time_score != -1:
 					var time_score_string : String = LevelInfo.generate_time_string(time_score)
 					time_score_list.add_item(shine_detail.title + ":")

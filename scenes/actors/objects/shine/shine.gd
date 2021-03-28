@@ -91,7 +91,8 @@ func _ready() -> void:
 	update_color("color", color)
 
 func on_place():
-	id = Singleton.CurrentLevelData.get_last_shine_id()
+	Singleton.CurrentLevelData.set_shine_ids()
+	id = level_object.get_ref().properties[12]
 	set_property("id", id)
 
 func update_color(key, value):
@@ -118,8 +119,10 @@ func _process(_delta):
 	outline_sprite.frame = animated_sprite.frame
 	outline_sprite.visible = animated_sprite.visible
 	outline_sprite.offset = animated_sprite.offset
+	outline_sprite.flip_h = animated_sprite.flip_h
 
 func _physics_process(_delta : float) -> void:
+	animated_sprite.flip_h = !do_kick_out
 	if !animated_sprite.playing: #looks like if it is not set to playing, some manual animation is done instead
 		#warning-ignore:integer_division
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)

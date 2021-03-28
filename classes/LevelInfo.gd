@@ -57,6 +57,7 @@ func _init(passed_level_code : String = "") -> void:
 						"show_in_menu": object.properties[7],
 						"color": object.properties[11].to_rgba32(),
 						"id": object.properties[12],
+						"do_kick_out": object.properties[13]
 					}
 					# Lol band aid
 					if object.properties.size() > 13:
