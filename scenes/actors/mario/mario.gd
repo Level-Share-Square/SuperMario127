@@ -301,6 +301,9 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	
 	if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
 		position = Singleton.CheckpointSaved.current_spawn_pos
+		var score_from_before = Singleton.CurrentLevelData.time_score
+		Singleton.CurrentLevelData.start_tracking_time_score()
+		Singleton.CurrentLevelData.time_score = score_from_before
 	else:
 		# start speedrun timer
 		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and Singleton.CheckpointSaved.current_checkpoint_id == -1:
