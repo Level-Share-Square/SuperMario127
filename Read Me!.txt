@@ -36,14 +36,17 @@ YoshiDev - Sprites
 JerryStuff - Music
 AM4 - Music
 
-Template Levels:
+Sample Levels:
 Tutorial Hills - NingiGamer64
 Waterfloat Galaxy - Blocko
 Prism Star Galaxy - Asterocrat
+All-Season Vacation - Link
+Wet Freeze Cave - SuperMakerPlayer
 Gold Rush Gulch - Asterocrat
 Super Feather Challenge - Tabs
+Coin Collection Temple - NingiGamer64 & Link
+Warp Palace - Tabs
 Green Demon Cave - NingiGamer64
-
 
 Music:
 Can Of Nothing - Bob Omb Battlefield (Remix)

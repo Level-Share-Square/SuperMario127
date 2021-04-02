@@ -10,6 +10,7 @@ var doors = []
 var pipes = []
 var transition_data = []
 var transition_character_data = []
+var transition_character_data_2 = []
 var liquids = []
 var liquid_positions = []
 var checkpoints = []
@@ -36,3 +37,4 @@ func reset_counters():
 func init():
 	transition_data = []
 	transition_character_data = []
+	transition_character_data_2 = []

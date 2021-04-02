@@ -125,6 +125,9 @@ func _update(delta):
 	if boost_time_left > 0:
 		lerp_speed = 1440
 		swim_speed = base_swim_speed + ((boost_speed - base_swim_speed) * (boost_time_left / 0.375))
+	else:
+		sprite.speed_scale = (abs(character.velocity.x) + abs(character.velocity.y)) / base_swim_speed
+		sprite.speed_scale = clamp(sprite.speed_scale, 0.65, 1)
 
 	if abs(move_vector.x) + abs(move_vector.y) != 0:
 		char_rotation = Vector2().angle_to_point(move_vector) - (PI/2)
@@ -141,7 +144,7 @@ func _update(delta):
 		sprite.rotation = -sprite.rotation
 
 	character.facing_direction = sign(sprite.rotation)
-	sprite.animation = "diveRight" if boost_time_left <= 0 else "spinning" 
+	sprite.animation = "swimming" if boost_time_left <= 0 else "spinning" 
 
 func _stop(delta):
 	if boost_time_left == 0 and (abs(character.velocity.x) <= base_swim_speed and abs(character.velocity.y) <= base_swim_speed):
@@ -150,6 +153,7 @@ func _stop(delta):
 
 	boost_time_left = 0
 	character.sprite.rotation = 0
+	character.sprite.speed_scale = 1
 	character.gravity_scale = 1
 	character.swimming = false
 	character.sound_player.play_splash_sound()

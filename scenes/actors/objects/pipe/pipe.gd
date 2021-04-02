@@ -43,7 +43,8 @@ func _process(delta):
 		bright_color.v *= 1.15
 		sprite2.self_modulate = bright_color
 
-func change_areas(character : Character, entering):
+func change_areas(entering_character : Character, entering):
+	var character = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character)
 	if area_id >= Singleton.CurrentLevelData.level_data.areas.size():
 		area_id = Singleton.CurrentLevelData.area
 	if entering:
@@ -69,15 +70,39 @@ func change_areas(character : Character, entering):
 			powerup_array,
 			get_tree().get_current_scene().switch_timer
 		]
+		
+		if is_instance_valid(get_tree().get_current_scene().character2):
+			var character2 = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character2)
+			var nozzle_name_2 = null
+			if character2.nozzle != null:
+				nozzle_name_2 = character2.nozzle.name
+			
+			var powerup_array2 = [null, null, null]
+			if is_instance_valid(character2.powerup):
+				powerup_array2[0] = character2.powerup.name
+				powerup_array2[1] = character2.powerup.time_left
+				powerup_array2[2] = character2.powerup.play_temp_music
+			
+			Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = [
+				character2.health,
+				character2.health_shards,
+				nozzle_name_2,
+				character2.fuel,
+				powerup_array2,
+				get_tree().get_current_scene().switch_timer
+			]
+		else:
+			Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
+
 		Singleton.CurrentLevelData.level_data.vars.transition_data = [
 			"pipe", 
 			pipe_tag
 		]
-		character.switch_areas(area_id, 0.5)
+		entering_character.switch_areas(area_id, 0.5)
 	else:
-		character.invulnerable = false
-		character.controllable = true
-		character.movable = true
+		entering_character.invulnerable = false
+		entering_character.controllable = true
+		entering_character.movable = true
 		
 		pipe_enter_logic.is_idle = true
 

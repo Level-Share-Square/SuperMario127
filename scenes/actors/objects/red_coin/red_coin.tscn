@@ -9,7 +9,7 @@
 [ext_resource path="res://scenes/actors/mario/particles/red_sparkles.png" type="Texture" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 15.0
+radius = 25.0
 
 [sub_resource type="DynamicFont" id=2]
 outline_size = 2
@@ -26,7 +26,7 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]

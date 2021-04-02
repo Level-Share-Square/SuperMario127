@@ -23,6 +23,7 @@ var template_level_codes : Array = [
 	"res://level/template_levels/wet_freeze_cave.tres",
 	"res://level/template_levels/gold_rush_gulch.tres",
 	"res://level/template_levels/glide_feather_challenge.tres",
+	"res://level/template_levels/coin_collection_temple.tres",
 	"res://level/template_levels/warp_palace.tres",
 	"res://level/template_levels/green_demon_cave.tres"
 ]

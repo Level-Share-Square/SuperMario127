@@ -27,6 +27,8 @@ func _ready():
 	id = level_object.get_ref().properties[6]
 	if Singleton.CheckpointSaved.current_checkpoint_id == id:
 		is_used = true
+	
+	Singleton.CurrentLevelData.level_data.vars.checkpoints.append([id, self])
 
 func _physics_process(delta):
 	var sprite = $Rotation/RotationRight

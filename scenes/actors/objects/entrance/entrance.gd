@@ -21,6 +21,9 @@ func _ready():
 			character = player.get_node(player[character_string])
 			var transition_data = Singleton.CurrentLevelData.level_data.vars.transition_data
 			var transition_character_data = Singleton.CurrentLevelData.level_data.vars.transition_character_data
+			if character_string != "character":
+				transition_character_data = Singleton.CurrentLevelData.level_data.vars.transition_character_data_2
+				
 			if transition_data.size() == 0:
 				character.position = position
 			else:

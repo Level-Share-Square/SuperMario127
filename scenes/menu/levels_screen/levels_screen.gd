@@ -143,10 +143,9 @@ func populate_info_panel(level_info : LevelInfo = null) -> void:
 		var collected_shine_count := 0
 
 		for shine_details in level_info.shine_details:
-			if shine_details["show_in_menu"]:
-				total_shine_count += 1
-				if level_info.collected_shines[str(shine_details["id"])]:
-					collected_shine_count += 1
+			total_shine_count += 1
+			if level_info.collected_shines[str(shine_details["id"])]:
+				collected_shine_count += 1
 
 		shine_progress.text = "%s/%s" % [collected_shine_count, total_shine_count]
 

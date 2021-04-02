@@ -27,6 +27,8 @@ func reload_areas():
 		index += 1
 	
 	v_box_container.add_child(Control.new()) # because godot :mov:
+	
+	new_area.disabled = (Singleton.CurrentLevelData.level_data.areas.size() == 6)
 		
 func switch_to_settings():
 	get_parent().get_node("LevelSettings").visible = true
@@ -39,5 +41,4 @@ func create_area():
 		Singleton.CurrentLevelData.level_data.areas.append(area)
 		reload_areas()
 
-	if Singleton.CurrentLevelData.level_data.areas.size() == 6:
-		new_area.disabled = true
+		new_area.disabled = (Singleton.CurrentLevelData.level_data.areas.size() == 6)

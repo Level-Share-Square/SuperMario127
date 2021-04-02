@@ -48,3 +48,4 @@ func delete_area():
 		if Singleton.CurrentLevelData.area > id:
 			Singleton.CurrentLevelData.area -= 1
 		get_parent().get_parent().get_parent().reload_areas()
+	
