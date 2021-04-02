@@ -87,6 +87,10 @@ func _ready() -> void:
 	Singleton.CurrentLevelData.enemies_instanced += 1
 	time_alive += float(Singleton.CurrentLevelData.enemies_instanced) / 2.0
 	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
+	
+	if scale.x < 0:
+		scale.x = abs(scale.x)
+		facing_direction = -facing_direction
 
 func shell_hit(shell_pos : Vector2) -> void:
 	if !hit:

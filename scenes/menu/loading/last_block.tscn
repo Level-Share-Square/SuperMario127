@@ -6,7 +6,7 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "Default"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:offset")
@@ -81,8 +81,7 @@ tracks/5/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Hit"
+[sub_resource type="Animation" id=3]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -189,5 +188,5 @@ position = Vector2( 38, 128 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Default = SubResource( 3 )
-anims/Hit = SubResource( 2 )
+anims/Default = SubResource( 2 )
+anims/Hit = SubResource( 3 )

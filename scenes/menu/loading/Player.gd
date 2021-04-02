@@ -35,7 +35,7 @@ func collect_coin(area):
 	coin.collect()
 
 func _physics_process(delta):
-	rect_position.x += move_speed * delta * 0.5
+	rect_position.x += move_speed * delta * 0.75
 	
 	if rect_position.x > 768:
 		rect_position.x = -48
