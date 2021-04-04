@@ -5,6 +5,7 @@ signal pipe_animation_finished
 
 onready var area2d : Area2D = $Area2D
 onready var gp_area : Area2D = $GPArea
+onready var gp_area_collision : CollisionShape2D = $GPArea/CollisionShape2D
 onready var tween : Tween = $Tween
 onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
 onready var audio_fast : AudioStreamPlayer = $AudioFast
@@ -25,23 +26,26 @@ var entering := false
 
 var stored_character : Character
 
+func _ready():
+	gp_area_collision.disabled = !get_parent().enabled
+
 func _physics_process(_delta : float) -> void:
 	if is_idle:
 		#the area2d is set to only collide with characters, so we can (hopefullY) safely assume if there 
 		#is a collision it's with a character
 		for body in area2d.get_overlapping_bodies():
-			
+				
 			if (global_rotation == 0 and body.is_grounded()
 			and body.get_input(Character.input_names.crouch, true) and get_parent().enabled
 			# Rainbow Mario can't enter doors
 			and !(is_instance_valid(body.powerup) and body.powerup.name == "RainbowPowerup")
 			and !(is_instance_valid(body.state) and (body.state.name == "GroundPoundState" or body.state.name == "GroundPoundEndState"))):
 				start_pipe_enter_animation(body)
-		
+				
 		for body in gp_area.get_overlapping_bodies():
 			if (global_rotation == 0 and body.is_grounded()
 			and body.get_input(Character.input_names.gp, false) and get_parent().enabled
-			# Rainbow Mario can't enter doors
+			# Rainbow Mario can't enter pipes
 			and !(is_instance_valid(body.powerup) and body.powerup.name == "RainbowPowerup")
 			and is_instance_valid(body.state) and (body.state.name == "GroundPoundState" or body.state.name == "GroundPoundEndState")):
 				start_pipe_ground_pound_animation(body)
