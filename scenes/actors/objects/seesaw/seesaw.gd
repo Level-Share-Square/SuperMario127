@@ -77,7 +77,7 @@ func update_parts():
 	sprite.rect_size.x = left_width + right_width + part_width * parts
 
 	platform_area_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 + 20
-	area_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
+	area_collision_shape.shape.extents.x = ((left_width + (part_width * parts) + right_width) / 2) - 6
 	collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
 	
 	#calculate the total platform scale
@@ -95,13 +95,17 @@ func _physics_process(delta):
 	
 	#-----calculate-----
 	
+	var weight := 1.0
+	
 	# calculate delta_rotation based on all weights on the seesaw
 	var weight_distribution := 0
 	for _body in current_weights:
-		var bottom_pos = _body.bottom_pos # all bodies in the array have this property
-		var relative_position_x : float = bottom_pos.global_position.x - body.global_position.x
+		if "velocity" in _body and _body.velocity.y < 0: return
 		
-		var weight := 1.0
+		var bottom_pos = _body.bottom_pos # all bodies in the array have this property
+		var relative_position_x : float = (bottom_pos.global_position.x - body.global_position.x)
+		relative_position_x -= sign(relative_position_x)
+		
 		if _body.has_method("get_weight"): # an object is only supposed to have this method if it has a different weight than 1
 			weight = _body.get_weight()
 		
@@ -111,20 +115,18 @@ func _physics_process(delta):
 		var factor = max(0,1-distance_to_floor/10) / scale_x
 		
 		weight_distribution += (relative_position_x * factor) * weight if distance_to_floor>0 else 0.0
-	
+		weight_distribution = clamp(weight_distribution, -70, 70)
 	
 	#-----act on self-----
 	
 	# apply clamped delta_rotation
-	tilt += clamp(weight_distribution, -70, 70) * delta * 0.2
+	tilt += weight_distribution * delta * 0.2
 	
 	rotation_speed -= tilt * delta * (0.1 if weight_distribution == 0 else 0.01)
 	rotation_speed *= pow(0.92,delta*60)
 	tilt = clamp(tilt + rotation_speed, -HALF_PI, HALF_PI)
-	
-	var last_rotation = rotation
-	
-	rotation = tilt
+
+	rotation = lerp_angle(rotation, tilt, delta * 30 * weight)
 	
 	body.rotation = 0 #necessary because godot
 	
@@ -134,10 +136,10 @@ func _physics_process(delta):
 	
 	# rotate every body by the difference in rotation and add a sliding vector based on the seesaws tilt
 	# basically emulating gravitational pull while on the floor
-	for _body in current_weights:
-		var bottom_pos = _body.bottom_pos # all bodies in the array have this property
-		var relative_position : Vector2 = bottom_pos.global_position - body.global_position
-		_body.global_position = position + (relative_position+Vector2(delta*rotation*200,0)).rotated(rotation-last_rotation)-bottom_pos.position
+	#for _body in current_weights:
+	#	var bottom_pos = _body.bottom_pos # all bodies in the array have this property
+	#	var relative_position : Vector2 = bottom_pos.global_position - body.global_position
+	#	_body.global_position = position + (relative_position+Vector2(delta*rotation*200,0)).rotated(rotation-last_rotation)-bottom_pos.position
 
 func _on_FloorTouchArea_body_entered(_body):
 	if _body.get("bottom_pos"): #body needs to have this property, it's a good indicator for a living actor

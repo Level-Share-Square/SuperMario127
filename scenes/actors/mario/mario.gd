@@ -34,6 +34,7 @@ onready var ground_check_dive : RayCast2D = $GroundCheckDive
 onready var left_check : RayCast2D = $LeftCheck
 onready var right_check : RayCast2D = $RightCheck
 onready var slope_stop_check : RayCast2D = $SlopeStopCheck
+onready var seesaw_tele : RayCast2D = $SeesawTele
 onready var player_collision : Area2D = $PlayerCollision
 onready var water_detector : Area2D = $WaterDetector
 onready var lava_detector : Area2D = $LavaDetector

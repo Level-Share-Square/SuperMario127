@@ -13,7 +13,7 @@ extents = Vector2( 48, 8 )
 extents = Vector2( 70, 28 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 48, 15 )
+extents = Vector2( 42, 15 )
 
 [node name="Seesaw" type="Node2D"]
 position = Vector2( -1, 0 )
@@ -51,7 +51,6 @@ __meta__ = {
 }
 
 [node name="FloorTouchArea" type="Area2D" parent="."]
-visible = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorTouchArea"]
