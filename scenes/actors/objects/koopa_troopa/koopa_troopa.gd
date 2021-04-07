@@ -9,7 +9,7 @@ onready var stomp_area : Area2D = $Koopa/StompArea
 onready var water_detector : Area2D = $Koopa/WaterDetector
 onready var left_check : RayCast2D = $Koopa/Left
 onready var right_check : RayCast2D = $Koopa/Right
-onready var koopa_sound : AudioStreamPlayer = $Koopa/AudioStreamPlayer
+onready var koopa_sound : AudioStreamPlayer2D = $Koopa/AudioStreamPlayer
 onready var bottom_pos : Node2D = $Koopa/BottomPos
 onready var visibility_notifier : VisibilityNotifier2D = $Koopa/VisibilityNotifier2D
 

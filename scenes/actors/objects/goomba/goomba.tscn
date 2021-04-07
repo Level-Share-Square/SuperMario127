@@ -173,17 +173,20 @@ collision_mask = 128
 position = Vector2( 0, 8 )
 shape = SubResource( 3 )
 
-[node name="Stomp" type="AudioStreamPlayer" parent="Goomba"]
+[node name="Stomp" type="AudioStreamPlayer2D" parent="Goomba"]
 stream = ExtResource( 6 )
 volume_db = -3.0
+max_distance = 1000.0
 
-[node name="Hit" type="AudioStreamPlayer" parent="Goomba"]
+[node name="Hit" type="AudioStreamPlayer2D" parent="Goomba"]
 stream = ExtResource( 3 )
 volume_db = -10.0
+max_distance = 1000.0
 
-[node name="Disappear" type="AudioStreamPlayer" parent="Goomba"]
+[node name="Disappear" type="AudioStreamPlayer2D" parent="Goomba"]
 stream = ExtResource( 5 )
 volume_db = -3.0
+max_distance = 1000.0
 
 [node name="WallCheck" type="RayCast2D" parent="Goomba"]
 position = Vector2( 0, -3 )
