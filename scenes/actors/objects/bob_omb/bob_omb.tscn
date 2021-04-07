@@ -77,17 +77,19 @@ visible = false
 position = Vector2( 0, -4 )
 shape = SubResource( 2 )
 
-[node name="FuseSound" type="AudioStreamPlayer" parent="KinematicBody2D"]
+[node name="FuseSound" type="AudioStreamPlayer2D" parent="KinematicBody2D"]
 stream = ExtResource( 3 )
 volume_db = -10.0
+max_distance = 1000.0
 
-[node name="FuseSound2" type="AudioStreamPlayer" parent="KinematicBody2D"]
+[node name="FuseSound2" type="AudioStreamPlayer2D" parent="KinematicBody2D"]
 stream = ExtResource( 5 )
 volume_db = -10.0
 
-[node name="ExplosionSound" type="AudioStreamPlayer" parent="KinematicBody2D"]
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="KinematicBody2D"]
 stream = ExtResource( 7 )
 volume_db = -5.0
+max_distance = 1000.0
 
 [node name="PlayerDetector" type="Area2D" parent="KinematicBody2D"]
 visible = false
