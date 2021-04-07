@@ -30,6 +30,7 @@ onready var powerup_sound_voiceless = $OtherSounds/Powerup
 onready var burn_sound = $OtherSounds/Burn
 
 onready var footsteps_default = $Footsteps/Default
+onready var footsteps_metal = $Footsteps/Metal
 
 export var voices_bus : String
 export var metal_bus : String
@@ -78,7 +79,10 @@ func _physics_process(_delta):
 
 func play_footsteps():
 	if ready:
-		footsteps_default.play()
+		if character.metal_voice:
+			footsteps_metal.play()
+		else:
+			footsteps_default.play()
 
 func play_lava_hurt_sound():
 	if ready:
