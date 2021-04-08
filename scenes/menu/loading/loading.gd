@@ -37,9 +37,9 @@ func go_to_menu():
 			Singleton.EditorSavedSettings.data_tiles = number_of_tiles
 			var _reload_scene = get_tree().reload_current_scene()
 		else:
-			var _change_scene = get_tree().change_scene("res://scenes/menu/main_menu_controller/main_menu_controller.tscn")
+			Singleton.MenuVariables.quit_to_menu()
 	else:
-		var _change_scene = get_tree().change_scene("res://scenes/menu/main_menu_controller/main_menu_controller.tscn")
+		Singleton.MenuVariables.quit_to_menu()
 
 func _ready():
 	animation_player.play("FadeIn")
@@ -133,6 +133,7 @@ func load_palettes(userdata):
 	print("Finished loading all " + str(level_tilesets.ids.size()) + " tilesets.")
 
 func load_singletons(userdata):
+	var scene_index := 1 # for printing
 	for scene in Singleton.load_paths:
 		var loaded = false
 		resource_loader = ResourceLoader.load_interactive(scene[1])
@@ -143,20 +144,21 @@ func load_singletons(userdata):
 				percentage = float(current_index) / float(amount_of_scenes)
 				current_index += 1
 				loaded = true
-				print("Loaded scene " + str(current_index))
+				print("Loaded scene " + str(scene_index))
 			else:
-				yield(get_tree().create_timer(0.35), "timeout")
-	
-	for scene in Singleton.load_paths:
+				yield(get_tree().create_timer(0.1), "timeout")
+		
 		var instanced_scene = Singleton[scene[0]].instance()
 		Singleton[scene[0]] = instanced_scene
+		yield(get_tree().create_timer(0.05), "timeout")
 		get_tree().root.add_child(Singleton[scene[0]])
 		
 		percentage = float(current_index) / float(amount_of_scenes)
 		current_index += 1
-		print("Instanced scene " + str(current_index - (amount_of_scenes/2)))
-		
-		yield(get_tree().create_timer(0.35), "timeout")
+		print("Instanced scene " + str(scene_index))
+		scene_index += 1
+	
+	#for scene in Singleton.load_paths:
 	
 	done = true
 	percentage = 1
