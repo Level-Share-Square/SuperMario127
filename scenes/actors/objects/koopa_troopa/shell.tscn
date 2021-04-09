@@ -87,9 +87,10 @@ collision_mask = 128
 position = Vector2( 0.5, 7 )
 shape = SubResource( 3 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
 volume_db = -10.0
+max_distance = 1000.0
 
 [node name="GroundedCheck" type="RayCast2D" parent="."]
 enabled = true
