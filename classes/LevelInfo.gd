@@ -195,14 +195,9 @@ func load_level_0_0_1(save_dictionary : Dictionary):
 	time_scores = save_dictionary["time_scores"]
 
 func load_level_0_0_2(save_dictionary : Dictionary):
-	level_code = save_dictionary["level_code"]
-	level_name = save_dictionary["level_name"]
+	load_level_0_0_1(save_dictionary)
+	
 	spawn_area = save_dictionary["spawn_area"]
 	shine_details = save_dictionary["shine_details"] 
 	star_coin_details = save_dictionary["star_coin_details"]
-
-	collected_shines = save_dictionary["collected_shines"]
-	collected_star_coins = save_dictionary["collected_star_coins"]
-	coin_score = save_dictionary["coin_score"]
-	time_scores = save_dictionary["time_scores"]
 
