@@ -1,8 +1,6 @@
 extends Node
 
-var thread 
 var main_menu_controller_scene
-var resource_interactive_loader = ResourceLoader.load_interactive("res://scenes/menu/main_menu_controller/main_menu_controller.tscn")
 
 # used to open the main menu to a specific screen, if this is a valid screen name when the main menu starts, it'll open to that screen directly
 var custom_open_screen_name : String = "" 
@@ -12,18 +10,6 @@ var screen_name_strings : Array = ["title_screen", "main_menu_screen", "levels_s
 
 func _ready() -> void:
 	pause_mode = PAUSE_MODE_PROCESS
-	thread = Thread.new()
-	thread.start(self, "load_main_menu")
-
-func load_main_menu(userdata):
-	var loaded = false
-	resource_interactive_loader = ResourceLoader.load_interactive("res://scenes/menu/main_menu_controller/main_menu_controller.tscn")
-	while !loaded:
-		if resource_interactive_loader.poll() == ERR_FILE_EOF:
-			main_menu_controller_scene = resource_interactive_loader.get_resource()
-			loaded = true
-		else:
-			yield(get_tree().create_timer(0.15), "timeout")
 
 func quit_to_menu(screen_to_open : String = ""): #switch this to use the enum and array
 	# if we quit from the pause menu, the tree will be paused, and that means the menu will also be paused and not work
@@ -41,6 +27,9 @@ func quit_to_menu(screen_to_open : String = ""): #switch this to use the enum an
 	Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled = true
 
 	custom_open_screen_name = screen_to_open
+
+	if !is_instance_valid(main_menu_controller_scene):
+		main_menu_controller_scene = ResourceLoader.load("res://scenes/menu/main_menu_controller/main_menu_controller.tscn")
 	var _change_scene = get_tree().change_scene_to(main_menu_controller_scene)
 
 func quit_to_menu_with_transition(screen_to_open : String = ""):

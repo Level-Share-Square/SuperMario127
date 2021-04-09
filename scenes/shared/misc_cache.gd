@@ -28,12 +28,12 @@ func load_resources(userdata):
 	while shell_scene == null:
 		if resource_loader.poll() == ERR_FILE_EOF:
 			shell_scene = resource_loader.get_resource()
-		yield(get_tree().create_timer(0.5), "timeout")
+		yield(get_tree().create_timer(0.1), "timeout")
 		
 	for music_name in music_ids:
 		music_nodes.append(load("res://assets/music/resources/" + music_name + ".tres"))
-		yield(get_tree().create_timer(0.15), "timeout")
+		yield(get_tree().create_timer(0.1), "timeout")
 	
 	for property in property_type_ids:
 		property_scenes[property] = load("res://scenes/editor/property_type_scenes/" + property + "/" + property + ".tscn")
-		yield(get_tree().create_timer(0.15), "timeout")
+		yield(get_tree().create_timer(0.1), "timeout")
