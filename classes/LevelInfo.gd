@@ -127,7 +127,7 @@ func load_from_dictionary(save_dictionary : Dictionary) -> void:
 		"0.0.2":
 			load_level_0_0_2(save_dictionary)
 
-func shine_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
+static func shine_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
 	return item1["sort_order"] < item2["sort_order"]
 
 func set_shine_collected(shine_id : int, save_to_disk : bool = true) -> void:
