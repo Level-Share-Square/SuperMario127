@@ -25,6 +25,9 @@ var next_star_coin_id : int = 0
 var can_pause : bool = true
 var thread
 
+var loaded_ids := 0
+var loaded_ids_max := 0
+
 func pick_random_music() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
@@ -37,22 +40,45 @@ func create_level_data(userdata):
 	pick_random_music()
 
 func create_cache(userdata):
+	var object_id_map : IdMap = preload("res://scenes/actors/objects/ids.tres")
+	var background_id_mapper : IdMap = preload("res://scenes/shared/background/backgrounds/ids.tres")
+	var foreground_id_mapper : IdMap = preload("res://scenes/shared/background/foregrounds/ids.tres")
+
+	loaded_ids_max = object_id_map.ids.size() + background_id_mapper.ids.size() + foreground_id_mapper.ids.size()
+	loaded_ids = 0
+	var resource_loader
+
 	# These checks prevent memory leaks, and make it much quicker to reset the level
-	if object_cache.size() == 0:
-		var object_id_map : IdMap = preload("res://scenes/actors/objects/ids.tres")
-		for object_id in object_id_map.ids:
-			object_cache.append(load("res://scenes/actors/objects/" + object_id + "/" + object_id + ".tscn"))
-	
-	if background_cache.size() == 0:
-		var background_id_mapper : IdMap = preload("res://scenes/shared/background/backgrounds/ids.tres")
-		for background_id in background_id_mapper.ids:
-			background_cache.append(load("res://scenes/shared/background/backgrounds/" + background_id + "/resource.tres"))
-	
-	if foreground_cache.size() == 0:
-		var foreground_id_mapper : IdMap = preload("res://scenes/shared/background/foregrounds/ids.tres")
-		for foreground_id in foreground_id_mapper.ids:
-			foreground_cache.append(load("res://scenes/shared/background/foregrounds/" + foreground_id + "/resource.tres"))
-	
+	for object_id in object_id_map.ids:
+		resource_loader = ResourceLoader.load_interactive("res://scenes/actors/objects/" + object_id + "/" + object_id + ".tscn")
+		while true:
+			OS.delay_msec(1)
+			
+			if resource_loader.poll() == ERR_FILE_EOF:
+				object_cache.append(resource_loader.get_resource())
+				loaded_ids += 1
+				break
+
+	for background_id in background_id_mapper.ids:
+		resource_loader = ResourceLoader.load_interactive("res://scenes/shared/background/backgrounds/" + background_id + "/resource.tres")
+		while true:
+			OS.delay_msec(1)
+			
+			if resource_loader.poll() == ERR_FILE_EOF:
+				background_cache.append(resource_loader.get_resource())
+				loaded_ids += 1
+				break
+
+	for foreground_id in foreground_id_mapper.ids:
+		resource_loader = ResourceLoader.load_interactive("res://scenes/shared/background/foregrounds/" + foreground_id + "/resource.tres")
+		while true:
+			OS.delay_msec(1)
+			
+			if resource_loader.poll() == ERR_FILE_EOF:
+				foreground_cache.append(resource_loader.get_resource())
+				loaded_ids += 1
+				break
+
 	create_level_data(0)
 
 func reset():
@@ -66,7 +92,7 @@ func _init() -> void:
 	set_process(false)
 	
 	thread.start(self, "create_cache")
-	
+
 # for now, process is disabled by default, so the timer needs to be started manually, if process here is ever needed for something else, create a bool for this
 func _process(delta):
 	time_score += delta
