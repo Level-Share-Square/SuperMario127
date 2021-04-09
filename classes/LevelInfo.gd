@@ -174,17 +174,15 @@ func get_level_foreground_texture() -> StreamTexture:
 		return foreground_resource.palettes[palette - 1]
 
 static func generate_time_string(time : float) -> String:
-	var time_calc = time # i'm not sure if it's safe to edit the time argument passed, if it's safe then this can be swapped out
 	# converting to int to use modulo, then doing abs to avoid problems with negative results, then back to int because that's the type
-	var minutes : int = int(abs(int(time_calc / 60) % 99)) # mod this by 99 so if you somehow take 100+ minutes at least the time will wrap around instead of breaking the display
-	var seconds : int = int(abs(int(time_calc) % 60))
-	var centiseconds : int = int(abs(int(time_calc * 100) % 100))
+	var minutes : int = int(abs(int(time / 60) % 99)) # mod this by 99 so if you somehow take 100+ minutes at least the time will wrap around instead of breaking the display
+	var seconds : int = int(abs(int(time) % 60))
+	var centiseconds : int = int(abs(int(time * 100) % 100))
 
-	var minutes_pad : String = "0" if minutes < 10 else ""
-	var seconds_pad : String = "0" if seconds < 10 else ""
-	var centiseconds_pad : String = "0" if centiseconds < 10 else ""
+	return "%s%s:%s%s.%s%s" % [pad_timevalue(minutes), minutes, pad_timevalue(seconds), seconds, pad_timevalue(centiseconds), centiseconds]
 
-	return "%s%s:%s%s.%s%s" % [minutes_pad, minutes, seconds_pad, seconds, centiseconds_pad, centiseconds]
+static func pad_timevalue(timevalue : int) -> String:
+	return "0" if timevalue < 10 else ""
 
 # LevelInfo dictionary loading functions for different versions start here
 func load_level_0_0_1(save_dictionary : Dictionary):
