@@ -55,7 +55,7 @@ func _ready():
 
 func change_size():
 	preview_position = Vector2(-width / 2, -height / 2)
-	sprite.rect_size = Vector2(width, height)
+	sprite.rect_size = Vector2(width, height - 15)
 	sprite.material = sprite.get_material().duplicate()
 	sprite.get_material().set_shader_param("color_tint", color)
 	area_collision.position = Vector2(width / 2, height / 2)

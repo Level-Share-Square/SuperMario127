@@ -4,6 +4,7 @@
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer"]
 pause_mode = 2
+process_priority = -1
 bus = "Editor"
 script = ExtResource( 2 )
 play_bus = "Master"

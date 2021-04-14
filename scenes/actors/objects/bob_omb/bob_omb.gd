@@ -207,7 +207,7 @@ func _physics_process(delta):
 					position.y -= 4
 				
 		sprite.flip_h = true if facing_direction == 1 else false
-		velocity = kinematic_body.move_and_slide_with_snap(Vector2(velocity.x, velocity.y + gravity * gravity_scale), snap, Vector2.UP, true, 4, deg2rad(46))
+		velocity = kinematic_body.move_and_slide_with_snap(Vector2(velocity.x, velocity.y + (gravity * 2) * gravity_scale), snap, Vector2.UP, true, 4, deg2rad(46))
 		if character == null:
 			if walk_wait > 0:
 				sprite.animation = "default"

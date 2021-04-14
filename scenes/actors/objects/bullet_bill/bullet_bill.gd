@@ -126,7 +126,7 @@ func _physics_process(delta):
 				char_find_timer = 3.5
 		
 		if dead:
-			velocity.y += 5
+			velocity.y += 10
 			sprite.rotation_degrees += 2.5
 			position += velocity * delta
 			delete_timer -= delta
