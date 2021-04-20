@@ -159,7 +159,7 @@ func load_singletons(userdata):
 		
 		var instanced_scene = Singleton[scene[0]].instance()
 		Singleton[scene[0]] = instanced_scene
-		get_tree().root.add_child(Singleton[scene[0]])
+		Singleton.add_child(Singleton[scene[0]])
 		
 		current_index += 1
 		percentage = float(current_index) / float(amount_of_scenes) * 0.25

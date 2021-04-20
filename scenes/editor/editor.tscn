@@ -1,4 +1,4 @@
-[gd_scene load_steps=611 format=2]
+[gd_scene load_steps=612 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -585,6 +585,7 @@
 [ext_resource path="res://assets/tiles/garden/palette_icons/1_slopeR.png" type="Texture" id=583]
 [ext_resource path="res://scenes/actors/objects/pipe_body/icon.png" type="Texture" id=584]
 [ext_resource path="res://scenes/actors/objects/pipe_corner/icon.png" type="Texture" id=585]
+[ext_resource path="res://assets/tiles/crystal/icon.png" type="Texture" id=586]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2310,6 +2311,12 @@ preview = ExtResource( 220 )
 script = ExtResource( 25 )
 color = Color( 0.254902, 0.121569, 0.517647, 1 )
 group_name = "Cave"
+
+[node name="Crystal" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 24 )
+tileset_id = 35
+icon = ExtResource( 586 )
+preview = ExtResource( 586 )
 
 [node name="Cave" type="Node" parent="PlaceableItems/CaveGroup"]
 script = ExtResource( 24 )

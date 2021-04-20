@@ -66,7 +66,6 @@ func _ready() -> void:
 	screen_to_load._open_screen()
 	screen_to_load.can_interact = true
 
-	print(Singleton.Music)
 	Singleton.Music.stop_temporary_music()
 	Singleton.Music.change_song(Singleton.Music.last_song, 31) # temporary, should add a way for screens to define their own music setting later
 	Singleton.Music.last_song = 31
