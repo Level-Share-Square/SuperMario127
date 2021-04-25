@@ -27,6 +27,8 @@ var normal_pos : Vector2
 var transition_speed := 10.0
 var reset_read_timer := 0.0
 
+var check_timer := 3.0
+
 var on_wall := false
 
 export(Array, Texture) var palette_textures
@@ -162,4 +164,15 @@ func _physics_process(delta):
 		and character.is_grounded() and !being_read):
 			being_read = true
 			setup_char()
+	
+	check_timer -= delta
+	if check_timer <= 0:
+		check_timer = 3.0
 		
+		var has_char = false
+		for body in area.get_overlapping_bodies():
+			if body is Character:
+				has_char = true
+		
+		if !has_char and is_instance_valid(character):
+			exit_area(character)
