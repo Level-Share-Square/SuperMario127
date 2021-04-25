@@ -574,10 +574,10 @@ func _physics_process(delta: float) -> void:
 		velocity.y = clamp(velocity.y, velocity.y, max_aerial_velocity)
 	
 	if is_instance_valid(state):
-		disable_movement = state.disable_movement or (nozzle != null and (nozzle.name == "Turbo" and nozzle.activated))
-		disable_turning = state.disable_turning or (nozzle != null and (nozzle.name == "Turbo" and nozzle.activated))
+		disable_movement = state.disable_movement or (nozzle != null and (nozzle.name == "TurboNozzle" and nozzle.activated))
+		disable_turning = state.disable_turning or (nozzle != null and (nozzle.name == "TurboNozzle" and nozzle.activated))
 		disable_animation = state.disable_animation
-		disable_friction = state.disable_friction or (nozzle != null and (nozzle.name == "Turbo" and nozzle.activated))
+		disable_friction = state.disable_friction or (nozzle != null and (nozzle.name == "TurboNozzle" and nozzle.activated))
 	else:
 		disable_movement = false
 		disable_turning = false
@@ -585,14 +585,14 @@ func _physics_process(delta: float) -> void:
 		disable_friction = false
 	
 	# Movement
-	if using_turbo and nozzle.boosted:
-		move_direction = facing_direction # Can't turn and forced to move forward
-	else:
-		move_direction = 0
-		if inputs[0][0] and !inputs[1][0] and disable_movement == false:
-			move_direction = -1
-		elif inputs[1][0] and !inputs[0][0] and disable_movement == false:
-			move_direction = 1
+	move_direction = 0
+	if inputs[0][0] and !inputs[1][0] and disable_movement == false:
+		move_direction = -1
+	elif inputs[1][0] and !inputs[0][0] and disable_movement == false:
+		move_direction = 1
+	
+	if move_direction == 0 and disable_movement == false and nozzle != null and nozzle.name == "TurboNozzle" and nozzle.activated:
+		move_direction = facing_direction
 			
 	if !controllable:
 		if is_grounded():
