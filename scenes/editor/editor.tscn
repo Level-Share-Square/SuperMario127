@@ -1,4 +1,4 @@
-[gd_scene load_steps=612 format=2]
+[gd_scene load_steps=639 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -586,6 +586,33 @@
 [ext_resource path="res://scenes/actors/objects/pipe_body/icon.png" type="Texture" id=584]
 [ext_resource path="res://scenes/actors/objects/pipe_corner/icon.png" type="Texture" id=585]
 [ext_resource path="res://assets/tiles/crystal/icon.png" type="Texture" id=586]
+[ext_resource path="res://assets/tiles/crystal/left_slope_icon.png" type="Texture" id=587]
+[ext_resource path="res://assets/tiles/crystal/right_slope_icon.png" type="Texture" id=588]
+[ext_resource path="res://assets/tiles/crystal/slab_icon.png" type="Texture" id=589]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/2_slab.png" type="Texture" id=590]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/3_slab.png" type="Texture" id=591]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/5_slopeL.png" type="Texture" id=592]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/1_slab.png" type="Texture" id=593]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/1_slopeL.png" type="Texture" id=594]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/2_slopeL.png" type="Texture" id=595]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/4_slopeL.png" type="Texture" id=596]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/4_slab.png" type="Texture" id=597]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/3_block.png" type="Texture" id=598]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/4_block.png" type="Texture" id=599]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/1_block.png" type="Texture" id=600]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/6_block.png" type="Texture" id=601]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/5_block.png" type="Texture" id=602]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/3_slopeL.png" type="Texture" id=603]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/2_block.png" type="Texture" id=604]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/5_slab.png" type="Texture" id=605]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/6_slopeL.png" type="Texture" id=606]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/6_slab.png" type="Texture" id=607]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/6_slopeR.png" type="Texture" id=608]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/1_slopeR.png" type="Texture" id=609]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/4_slopeR.png" type="Texture" id=610]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/2_slopeR.png" type="Texture" id=611]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/5_slopeR.png" type="Texture" id=612]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/3_slopeR.png" type="Texture" id=613]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2315,8 +2342,48 @@ group_name = "Cave"
 [node name="Crystal" type="Node" parent="PlaceableItems/CaveGroup"]
 script = ExtResource( 24 )
 tileset_id = 35
+palette_icons = [ ExtResource( 586 ), ExtResource( 600 ), ExtResource( 604 ), ExtResource( 598 ), ExtResource( 599 ), ExtResource( 602 ), ExtResource( 601 ) ]
+palette_previews = [ ExtResource( 586 ), ExtResource( 600 ), ExtResource( 604 ), ExtResource( 598 ), ExtResource( 599 ), ExtResource( 602 ), ExtResource( 601 ) ]
+change_to = "CrystalSlab"
+items_in_sequence = 4
 icon = ExtResource( 586 )
 preview = ExtResource( 586 )
+
+[node name="CrystalSlab" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 24 )
+tileset_id = 35
+tile_id = 1
+palette_icons = [ ExtResource( 589 ), ExtResource( 593 ), ExtResource( 590 ), ExtResource( 591 ), ExtResource( 597 ), ExtResource( 605 ), ExtResource( 607 ) ]
+palette_previews = [ ExtResource( 589 ), ExtResource( 593 ), ExtResource( 590 ), ExtResource( 591 ), ExtResource( 597 ), ExtResource( 605 ), ExtResource( 607 ) ]
+change_to = "CrystalSlopeLeft"
+items_in_sequence = 4
+index_in_sequence = 1
+icon = ExtResource( 589 )
+preview = ExtResource( 589 )
+
+[node name="CrystalSlopeLeft" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 24 )
+tileset_id = 35
+tile_id = 2
+palette_icons = [ ExtResource( 587 ), ExtResource( 594 ), ExtResource( 595 ), ExtResource( 603 ), ExtResource( 596 ), ExtResource( 592 ), ExtResource( 606 ) ]
+palette_previews = [ ExtResource( 587 ), ExtResource( 594 ), ExtResource( 595 ), ExtResource( 603 ), ExtResource( 596 ), ExtResource( 592 ), ExtResource( 606 ) ]
+change_to = "CrystalSlopeRight"
+items_in_sequence = 4
+index_in_sequence = 2
+icon = ExtResource( 587 )
+preview = ExtResource( 587 )
+
+[node name="CrystalSlopeRight" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 24 )
+tileset_id = 35
+tile_id = 3
+palette_icons = [ ExtResource( 588 ), ExtResource( 609 ), ExtResource( 611 ), ExtResource( 613 ), ExtResource( 610 ), ExtResource( 612 ), ExtResource( 608 ) ]
+palette_previews = [ ExtResource( 588 ), ExtResource( 609 ), ExtResource( 611 ), ExtResource( 613 ), ExtResource( 610 ), ExtResource( 612 ), ExtResource( 608 ) ]
+change_to = "Crystal"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 588 )
+preview = ExtResource( 588 )
 
 [node name="Cave" type="Node" parent="PlaceableItems/CaveGroup"]
 script = ExtResource( 24 )
