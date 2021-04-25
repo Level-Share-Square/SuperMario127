@@ -69,10 +69,9 @@ func _start_teleport(character : Character) -> void:
 			break
 	
 	# this changes mario's position, then waits a bit before starting the door exit animation
-	# it also tries to stop the camera from smoothing to the position, but that didn't work, for some reason
 	character.position = teleport_door.global_position
 	character.camera.position = character.position
-	character.camera.smoothing_enabled = false # Temporarily disable smoothing to let it snap to Mario
+	character.camera.skip_to_player = true
 	tween.interpolate_callback(teleport_door.door_enter_logic, OPEN_DOOR_WAIT, "start_door_exit_animation", character)
 	tween.start()
 	

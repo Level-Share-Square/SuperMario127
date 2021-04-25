@@ -22,7 +22,7 @@ func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout
 	if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible or !Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled:
 		var volume_multiplier = Singleton.Music.volume_multiplier
 
-		yield(do_transition_animation(transition_in_tex, transition_time, TRANSITION_SCALE_UNCOVER, TRANSITION_SCALE_COVERED, volume_multiplier, volume_multiplier / 4, false), "completed")
+		yield(do_transition_animation(transition_in_tex, transition_time, TRANSITION_SCALE_UNCOVER, TRANSITION_SCALE_COVERED, volume_multiplier, volume_multiplier / 4, false, true), "completed")
 		
 		Singleton.CurrentLevelData.stop_tracking_time_score()
 		var _reload = get_tree().reload_current_scene()
@@ -32,7 +32,7 @@ func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout
 		yield(get_tree().create_timer(0.1), "timeout")
 		get_tree().paused = false
 		
-		yield(do_transition_animation(transition_out_tex, transition_time, TRANSITION_SCALE_COVERED, TRANSITION_SCALE_UNCOVER, volume_multiplier / 4, volume_multiplier, false), "completed")
+		yield(do_transition_animation(transition_out_tex, transition_time, TRANSITION_SCALE_COVERED, TRANSITION_SCALE_UNCOVER, volume_multiplier / 4, volume_multiplier, false, true), "completed")
 
 func do_transition_fade(transition_time : float = DEFAULT_TRANSITION_TIME, start_color : Color = Color(0, 0, 0, 0), end_color : Color = Color(0, 0, 0, 1), reverse_after : bool = true):
 	canvas_background.mouse_filter = canvas_background.MOUSE_FILTER_STOP
@@ -56,7 +56,7 @@ func do_transition_fade(transition_time : float = DEFAULT_TRANSITION_TIME, start
 		transitioning = false
 		canvas_background.mouse_filter = canvas_background.MOUSE_FILTER_IGNORE
 
-func do_transition_animation(transition_texture : StreamTexture = cutout_circle, transition_time : float = DEFAULT_TRANSITION_TIME, texture_scale_start : float = TRANSITION_SCALE_UNCOVER, texture_scale_end : float = TRANSITION_SCALE_COVERED, volume_start : float = -1, volume_end : float = -1, reverse_after : bool = true, stop_temp_music : bool = true):
+func do_transition_animation(transition_texture : StreamTexture = cutout_circle, transition_time : float = DEFAULT_TRANSITION_TIME, texture_scale_start : float = TRANSITION_SCALE_UNCOVER, texture_scale_end : float = TRANSITION_SCALE_COVERED, volume_start : float = -1, volume_end : float = -1, reverse_after : bool = true, stop_temp_music : bool = false):
 	canvas_background.color = Color(0, 0, 0, 1)
 	transitioning = true
 	
@@ -76,7 +76,7 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 	emit_signal("transition_finished")
 	
 	if reverse_after:
-		do_transition_animation(cutout_circle, transition_time, texture_scale_end, texture_scale_start, volume_end, volume_start, false, true)
+		do_transition_animation(cutout_circle, transition_time, texture_scale_end, texture_scale_start, volume_end, volume_start, false, stop_temp_music)
 	else:
 		transitioning = false
 		canvas_mask.position = Vector2(384, 216) # Reset it, in case a script has modified it before playing the animation
