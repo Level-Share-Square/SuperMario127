@@ -171,11 +171,11 @@ func activate_shine() -> void:
 	animation_player.play("appear")
 
 	var camera = current_scene.get_node(current_scene.camera)
-	Singleton.SceneTransitions.do_transition_animation()
+	Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, 0.5)
 	pause_mode = PAUSE_MODE_PROCESS
 	get_tree().paused = true
 	
-	yield(get_tree().create_timer(0.75), "timeout")
+	yield(get_tree().create_timer(0.5), "timeout")
 	
 	camera.focus_on = self
 	camera.auto_move = false
@@ -188,8 +188,8 @@ func activate_shine() -> void:
 
 # unpauses the game after the activate shine cutscene is done
 func unpause_game() -> void:
-	Singleton.SceneTransitions.do_transition_animation()
-	yield(get_tree().create_timer(0.75), "timeout")
+	Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, 0.5)
+	yield(get_tree().create_timer(0.5), "timeout")
 	
 	var character = current_scene.get_node(current_scene.character)
 	var camera = current_scene.get_node(current_scene.camera)

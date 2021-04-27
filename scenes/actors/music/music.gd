@@ -3,8 +3,8 @@ extends AudioStreamPlayer
 export var play_bus : String
 export var edit_bus : String
 
-var character : Character
-var character2 : Character
+var character
+var character2
 
 onready var temporary_music_player : AudioStreamPlayer = $TemporaryMusicPlayer
 onready var water_music_player : AudioStreamPlayer = $WaterMusicPlayer
