@@ -1,6 +1,7 @@
 extends GameObject
 
 onready var static_body : StaticBody2D = $StaticBody2D
+onready var area_collision_shape : CollisionShape2D = $Area2D/CollisionShape2D2
 onready var collision_shape : CollisionShape2D = $StaticBody2D/CollisionShape2D
 onready var sprite : Sprite = $Sprite
 onready var p : Sprite = $Sprite/P
@@ -35,6 +36,7 @@ func _physics_process(delta):
 		sprite.modulate = Color(1, 1, 1)
 		
 	p.visible = enabled
+	area_collision_shape.disabled = !collision_shape.disabled
 	
 	if !is_instance_valid(current_scene) or mode == 1 or !enabled: return
 	

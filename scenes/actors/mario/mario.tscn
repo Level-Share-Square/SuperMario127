@@ -1086,13 +1086,13 @@ disabled = true
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 8
+frame = 2
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 frames = ExtResource( 44 )
 animation = "swimming"
-frame = 8
+frame = 2
 playing = true
 script = ExtResource( 63 )
 
@@ -1430,6 +1430,15 @@ modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 shape = SubResource( 32 )
 disabled = true
 
+[node name="PBlockDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PBlockDetector"]
+modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
+position = Vector2( 0.5, 5 )
+shape = SubResource( 30 )
+
 [node name="Bubble" type="Sprite" parent="."]
 
 [node name="Spotlight" type="Light2D" parent="."]
@@ -1619,14 +1628,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 81 )
-frame = 11
+frame = 10
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 4
+frame = 3
 speed_scale = 3.0
 playing = true
 
@@ -1647,7 +1656,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 8
+frame = 2
 playing = true
 script = ExtResource( 34 )
 
@@ -1655,7 +1664,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 10
+frame = 4
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]

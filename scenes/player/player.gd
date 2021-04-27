@@ -27,7 +27,8 @@ func _physics_process(delta):
 			if switch_timer > 3:
 				tick_sound.play()
 			else:
-				tick_end_sound.play()
+				if !tick_end_sound.playing:
+					tick_end_sound.play()
 			sound_timer = wrapf(switch_timer, 0, 1.1)
 			
 		if switch_timer <= 0:

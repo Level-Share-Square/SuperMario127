@@ -39,6 +39,7 @@ onready var player_collision : Area2D = $PlayerCollision
 onready var water_detector : Area2D = $WaterDetector
 onready var lava_detector : Area2D = $LavaDetector
 onready var pipe_detector : Area2D = $PipeDetector
+onready var p_block_detector : Area2D = $PBlockDetector
 onready var burn_particles : Particles2D = $BurnParticles
 onready var terrain_detector : Area2D = $TerrainDetector
 onready var platform_detector : Area2D = $PlatformDetector
@@ -828,6 +829,10 @@ func _physics_process(delta: float) -> void:
 	last_position = global_position
 	last_velocity = velocity
 	last_move_direction = move_direction
+	
+	if get_tree().get_current_scene().switch_timer < 0.2 and get_tree().get_current_scene().switch_timer > 0:
+		if p_block_detector.get_overlapping_areas().size() > 0:
+			get_tree().get_current_scene().switch_timer = 0.2
 	
 	# Send network message (unused)
 	#if Singleton.PlayerSettings.other_player_id != -1:

@@ -1009,6 +1009,7 @@ toggle_crt={
 2d_physics/layer_8="water"
 2d_physics/layer_9="lava"
 2d_physics/layer_10="pipe"
+2d_physics/layer_11="switch block"
 
 [logging]
 
