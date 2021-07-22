@@ -28,42 +28,20 @@ static func generate(noise_seed, shared_node):
 			for decoration in decor_array:
 				if rand_range(0, 100) < decoration.chance_percentage:
 					if decoration.placement_check(tile, Vector2(x, y), noise, shared_node):
-						var object := LevelObject.new()
 						if decoration.object_id != 4:
 							print("B")
-						object.type_id = decoration.object_id
-						object.properties = []
-						object.properties.append(decoration.get_placement_position(Vector2(x, y)))
-						object.properties.append(Vector2(1, 1))
-						object.properties.append(0)
-						object.properties.append(true)
-						object.properties.append(true)
-						shared_node.create_object(object, true)
-					
+						_spawn_object(shared_node, x, y, decoration.object_id)
+			
 			if rand_range(0.01, 1) > 0.95 and y > 3 and !set and level_area.objects.size() > 0:
 				if tile == 2 and noise.get_noise_2d(x, y - 1) <= 0 and noise.get_noise_2d(x, y - 2) <= 0:
 					set = true
-					var object := LevelObject.new()
-					object.type_id = 0
-					object.properties = []
-					object.properties.append(Vector2((x * 32) + 16, (y * 32) + 3))
-					object.properties.append(Vector2(1, 1))
-					object.properties.append(0)
-					object.properties.append(true)
-					object.properties.append(true)
-					shared_node.create_object(object, true)
+					_spawn_object(shared_node, x, y, 0)
+			
 			elif rand_range(0.01, 1) > 0.75 and y > 3 and !set2 and level_area.objects.size() > 1:
 				if tile == 2 and noise.get_noise_2d(x, y - 1) <= 0 and noise.get_noise_2d(x, y - 2) <= 0:
 					set2 = true
-					var object := LevelObject.new()
-					object.type_id = 5
-					object.properties = []
-					object.properties.append(Vector2((x * 32) + 16, (y * 32) + 3))
-					object.properties.append(Vector2(1, 1))
-					object.properties.append(0)
-					object.properties.append(true)
-					object.properties.append(true)
-					shared_node.create_object(object, true)
+					_spawn_object(shared_node, x, y, 5)
+					
 					
 	noise.seed = randi()
 	noise.octaves = 8
@@ -75,3 +53,14 @@ static func generate(noise_seed, shared_node):
 			if noise.get_noise_2d(x, y) > 0:
 				tile = 2
 			shared_node.set_tile(x, y, 0, tile, 0)
+													   # =========================================
+static func _spawn_object(shared_node, x, y, type_id): # | This was created to remove the      ▲ |
+	var object := LevelObject.new()                    # | redundancy in the `if` blocks above | |
+	object.type_id = type_id                           # =========================================
+	object.properties = []
+	object.properties.append(Vector2((x * 32) + 16, (y * 32) + 3))
+	object.properties.append(Vector2(1, 1))
+	object.properties.append(0)
+	object.properties.append(true)
+	object.properties.append(true)
+	shared_node.create_object(object, true)
