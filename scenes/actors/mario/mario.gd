@@ -34,7 +34,7 @@ onready var ground_check_dive : RayCast2D = $GroundCheckDive
 onready var left_check : RayCast2D = $LeftCheck
 onready var right_check : RayCast2D = $RightCheck
 onready var slope_stop_check : RayCast2D = $SlopeStopCheck
-onready var seesaw_tele : RayCast2D = $SeesawTele
+onready var seesaw_tele : RayCast2D = $SeesawTele 
 onready var player_collision : Area2D = $PlayerCollision
 onready var water_detector : Area2D = $WaterDetector
 onready var lava_detector : Area2D = $LavaDetector
@@ -247,7 +247,7 @@ func steely_hit(steely_pos : Vector2) -> void:
 
 func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String = "hit", frames : int = 180) -> void:
 	if !invulnerable:
-		# Mario shouldn't take damage with the vanish cap
+		# Mario shouldn't take damage with the vanish cap*
 		if amount > 0 and is_instance_valid(powerup) and powerup.get_name() == "VanishPowerup":
 			return
 		knockback(hit_pos)
@@ -286,7 +286,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		_:
 			push_error("Illegal character loaded: " + str(character) + " REEEEEE")
 	
-	add_child(sound_player)
+	add_child(sound_player) #Will throw an error if the level you're in is reset. Not that big of a deal.
 	# Death sprites are shared
 	death_sprite.frames = sprite.frames
 

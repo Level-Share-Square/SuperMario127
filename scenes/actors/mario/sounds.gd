@@ -1,17 +1,17 @@
 extends Node
-
-onready var jump_sounds = $JumpSounds
-onready var double_jump_sounds = $DoubleJumpSounds
-onready var triple_jump_sounds = $TripleJumpSounds
-onready var dive_sounds = $DiveSounds
-onready var fall_sounds = $FallSounds
-onready var hit_sounds = $HitSounds
-onready var last_hit_sounds = $LastHitSounds
-onready var death_sounds = $DeathSounds
-onready var stomped_sounds = $StompedSounds
-onready var powerup_sounds = $PowerupSounds
-onready var lava_hurt_sounds = $LavaHurtSounds
-onready var shine_sounds = $ShineSounds
+onready var voice_effects = $VoiceEffects
+onready var jump_sounds = $VoiceEffects/JumpSounds
+onready var double_jump_sounds = $VoiceEffects/DoubleJumpSounds
+onready var triple_jump_sounds = $VoiceEffects/TripleJumpSounds
+onready var dive_sounds = $VoiceEffects/DiveSounds
+onready var fall_sounds = $VoiceEffects/FallSounds
+onready var hit_sounds = $VoiceEffects/HitSounds
+onready var last_hit_sounds = $VoiceEffects/LastHitSounds
+onready var death_sounds = $VoiceEffects/DeathSounds
+onready var stomped_sounds = $VoiceEffects/StompedSounds
+onready var powerup_sounds = $VoiceEffects/PowerupSounds
+onready var lava_hurt_sounds = $VoiceEffects/LavaHurtSounds
+onready var shine_sounds = $VoiceEffects/ShineSounds
 
 onready var gp_hit = $OtherSounds/GPHit
 onready var gp_windup = $OtherSounds/GPWindup
@@ -32,48 +32,30 @@ onready var burn_sound = $OtherSounds/Burn
 onready var footsteps_default = $Footsteps/Default
 onready var footsteps_metal = $Footsteps/Metal
 
-export var voices_bus : String
+
+
+export var normal_bus : String
 export var metal_bus : String
 var ready = false
 var last_metal_filter = true
 var character = null
 
-# This code just plain sucks
+# This code used to suck. I doesn't anymore. I hope.
 
 func _ready():
 	#yield(get_tree().create_timer(0.1), "timeout") #this doesn't seem to do anything except cause an error? this is why you comment code
 	ready = true
 	character = get_parent()
-	
+
 func switch_bus(node, bus):
 	node.bus = bus
 	
 func _physics_process(_delta):
 	if is_instance_valid(character):
-		if character.metal_voice and !last_metal_filter: #peak of coding right here
-			switch_bus(jump_sounds, metal_bus)
-			switch_bus(double_jump_sounds, metal_bus)
-			switch_bus(triple_jump_sounds, metal_bus)
-			switch_bus(dive_sounds, metal_bus)
-			switch_bus(fall_sounds, metal_bus)
-			switch_bus(hit_sounds, metal_bus)
-			switch_bus(last_hit_sounds, metal_bus)
-			switch_bus(death_sounds, metal_bus)
-			switch_bus(stomped_sounds, metal_bus)
-			switch_bus(powerup_sounds, metal_bus)
-			switch_bus(shine_sounds, metal_bus)
+		if character.metal_voice and !last_metal_filter: #Is there more to change?
+			voice_effects.set_bus(metal_bus)
 		elif !character.metal_voice and last_metal_filter:
-			switch_bus(jump_sounds, voices_bus)
-			switch_bus(double_jump_sounds, voices_bus)
-			switch_bus(triple_jump_sounds, voices_bus)
-			switch_bus(dive_sounds, voices_bus)
-			switch_bus(fall_sounds, voices_bus)
-			switch_bus(hit_sounds, voices_bus)
-			switch_bus(last_hit_sounds, voices_bus)
-			switch_bus(death_sounds, voices_bus)
-			switch_bus(stomped_sounds, voices_bus)
-			switch_bus(powerup_sounds, voices_bus)
-			switch_bus(shine_sounds, voices_bus)
+			voice_effects.set_bus(normal_bus)
 			
 		last_metal_filter = character.metal_voice
 

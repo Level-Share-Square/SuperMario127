@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Bounce.gd"
 }, {
+"base": "Node",
+"class": "BusGroup",
+"language": "GDScript",
+"path": "res://classes/BusGroup.gd"
+}, {
 "base": "State",
 "class": "ButtSlideState",
 "language": "GDScript",
@@ -359,6 +364,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/SlideStop.gd"
 }, {
+"base": "Node",
+"class": "SoundGroup",
+"language": "GDScript",
+"path": "res://classes/SoundGroup.gd"
+}, {
 "base": "State",
 "class": "SpinningState",
 "language": "GDScript",
@@ -471,6 +481,7 @@ _global_script_class_icons={
 "BackflipState": "",
 "BonkedState": "",
 "BounceState": "",
+"BusGroup": "",
 "ButtSlideState": "",
 "CallMethodInstruction": "",
 "Character": "",
@@ -535,6 +546,7 @@ _global_script_class_icons={
 "SkyResource": "",
 "SlideState": "",
 "SlideStopState": "",
+"SoundGroup": "",
 "SpinningState": "",
 "SquishedState": "",
 "State": "",
