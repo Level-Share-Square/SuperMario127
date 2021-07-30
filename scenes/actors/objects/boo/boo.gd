@@ -36,7 +36,7 @@ func _set_property_values():
 	set_property("speed", speed, true)
 
 func is_vanish(body):
-	return body.powerup != null and body.powerup.id == 2
+	return body.powerup != null and body.powerup.id == "Vanish"
 
 func kill(body):
 	if dead or !(enabled and body.name.begins_with("Character") and !body.dead and body.controllable):
@@ -67,6 +67,8 @@ func stomp(body):
 	if body.invincible:
 		dead = true
 		animation_player.play("die")
+		return
+	elif is_vanish(body):
 		return
 	else:
 		if body.velocity.y > 0:

@@ -28,6 +28,7 @@ func _start_check(_delta):
 	return false
 
 func _start(_delta):
+
 	if abs(character.velocity.x) < 15:
 		character.velocity.x = character.facing_direction * 15
 	current_speed = abs(character.velocity.x)
@@ -77,7 +78,7 @@ func _update(delta):
 		footstep_interval -= delta
 	character.velocity.x = character.facing_direction * current_speed
 	
-	if (character.is_grounded() and had_jumped) or (character.powerup == null or character.powerup.id != 1):
+	if (character.is_grounded() and had_jumped) or (character.powerup == null or character.powerup.id != "Rainbow"):
 		had_jumped = false
 	
 	if jumping:
@@ -116,4 +117,4 @@ func _stop(_delta):
 	character.water_check.enabled = false
 
 func _stop_check(_delta):
-	return (character.powerup == null or character.powerup.id != 1) and character.is_grounded()
+	return (character.powerup == null or character.powerup.id != "Rainbow") and character.is_grounded()

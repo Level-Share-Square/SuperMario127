@@ -34,7 +34,7 @@ onready var ground_check_dive : RayCast2D = $GroundCheckDive
 onready var left_check : RayCast2D = $LeftCheck
 onready var right_check : RayCast2D = $RightCheck
 onready var slope_stop_check : RayCast2D = $SlopeStopCheck
-onready var seesaw_tele : RayCast2D = $SeesawTele
+onready var seesaw_tele : RayCast2D = $SeesawTele 
 onready var player_collision : Area2D = $PlayerCollision
 onready var water_detector : Area2D = $WaterDetector
 onready var lava_detector : Area2D = $LavaDetector
@@ -224,6 +224,8 @@ func _ready():
 	Singleton.Music.toggle_underwater_music(false)
 	for input in input_names.keys():
 		inputs.append([false, false, str(input)])
+	for i in $Powerups.get_children():
+		i.connect("powerup_state_changed", self, "_on_powerup_state_changed")
 
 puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_big_attacking, is_heavy, is_dead, is_controllable): # Ok slave
 	next_position = pos
@@ -247,7 +249,7 @@ func steely_hit(steely_pos : Vector2) -> void:
 
 func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String = "hit", frames : int = 180) -> void:
 	if !invulnerable:
-		# Mario shouldn't take damage with the vanish cap
+		# Mario shouldn't take damage with the vanish cap*
 		if amount > 0 and is_instance_valid(powerup) and powerup.get_name() == "VanishPowerup":
 			return
 		knockback(hit_pos)
@@ -286,7 +288,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		_:
 			push_error("Illegal character loaded: " + str(character) + " REEEEEE")
 	
-	add_child(sound_player)
+	add_child(sound_player) #Will throw an error if the level you're in is reset. Not that big of a deal.
 	# Death sprites are shared
 	death_sprite.frames = sprite.frames
 
@@ -484,7 +486,7 @@ func _process(delta: float) -> void:
 	if is_instance_valid(powerup):
 		if powerup.time_left <= 2.5:
 			for overlap in vanish_detector.get_overlapping_bodies():
-				if is_instance_valid(overlap) and powerup.time_left <= 1.0 and powerup.id == 2:
+				if is_instance_valid(overlap) and powerup.time_left <= 1.0 and powerup.id == "Vanish":
 					powerup.time_left = 1
 			frames_until_flash -= 1
 			if frames_until_flash <= 0:
@@ -951,3 +953,15 @@ func set_dive_collision(is_enabled : bool) -> void:
 func hide_shine_dance_shine():
 	$CollectedShine.visible = false
 	$CollectedShineOutline.visible = false
+
+func _on_powerup_state_changed(powerup_id: String): # ====================================================================
+	match powerup_id:                            # | This is here to keep sound.gd from polling every frame to see if | 
+												 # | the player gets a metal powerup so it can switch effects buses.  |
+		"Normal":                                # ====================================================================
+			sound_player.voice_effects.set_bus(sound_player.normal_bus)
+
+		"Metal":                                           
+			sound_player.voice_effects.set_bus(sound_player.metal_bus)
+
+		_:
+			pass

@@ -85,7 +85,7 @@ func turbo_breakable(hit_body):
 	return hit_body.name.begins_with("Character") and hit_body.using_turbo
 
 func is_rainbow(body):
-	return body.powerup != null and body.powerup.id == 1
+	return body.powerup != null and body.powerup.id == "Rainbow"
 
 func handle_character_exception(character: Character):
 	if !is_instance_valid(character): return

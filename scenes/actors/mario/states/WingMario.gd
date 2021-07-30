@@ -27,7 +27,7 @@ func _ready():
 	use_dive_collision = true
 
 func _start_check(_delta):
-	return (character.rotating_jump or character.state == character.get_state_node("DiveState")) and character.velocity.y > 0 and (character.powerup != null and character.powerup.id == 3)
+	return (character.rotating_jump or character.state == character.get_state_node("DiveState")) and character.velocity.y > 0 and (character.powerup != null and character.powerup.id == "Wing")
 
 func _start(_delta):
 	# Don't even question it, it just works

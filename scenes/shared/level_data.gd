@@ -50,36 +50,25 @@ func create_cache(userdata):
 
 	# These checks prevent memory leaks, and make it much quicker to reset the level
 	for object_id in object_id_map.ids:
-		resource_loader = ResourceLoader.load_interactive("res://scenes/actors/objects/" + object_id + "/" + object_id + ".tscn")
-		while true:
-			OS.delay_msec(1)
-			
-			if resource_loader.poll() == ERR_FILE_EOF:
-				object_cache.append(resource_loader.get_resource())
-				loaded_ids += 1
-				break
+		_load_with_eof_check("res://scenes/actors/objects/" + object_id + "/" + object_id + ".tscn", object_cache)
 
 	for background_id in background_id_mapper.ids:
-		resource_loader = ResourceLoader.load_interactive("res://scenes/shared/background/backgrounds/" + background_id + "/resource.tres")
-		while true:
-			OS.delay_msec(1)
-			
-			if resource_loader.poll() == ERR_FILE_EOF:
-				background_cache.append(resource_loader.get_resource())
-				loaded_ids += 1
-				break
+		_load_with_eof_check("res://scenes/shared/background/backgrounds/" + background_id + "/resource.tres", background_cache)
 
 	for foreground_id in foreground_id_mapper.ids:
-		resource_loader = ResourceLoader.load_interactive("res://scenes/shared/background/foregrounds/" + foreground_id + "/resource.tres")
-		while true:
-			OS.delay_msec(1)
-			
-			if resource_loader.poll() == ERR_FILE_EOF:
-				foreground_cache.append(resource_loader.get_resource())
-				loaded_ids += 1
-				break
-
+		_load_with_eof_check("res://scenes/shared/background/foregrounds/" + foreground_id + "/resource.tres", foreground_cache)
+	
 	create_level_data(0)
+
+func _load_with_eof_check(path : String, cache_array : Array):  # =========================================
+	var resource_loader = ResourceLoader.load_interactive(path) # | This was created to reduce redundancy |
+	while true:                                                 # =========================================
+		OS.delay_msec(1)
+			
+		if resource_loader.poll() == ERR_FILE_EOF:
+			cache_array.append(resource_loader.get_resource())
+			loaded_ids += 1
+			break
 
 func reset():
 	create_level_data(0)

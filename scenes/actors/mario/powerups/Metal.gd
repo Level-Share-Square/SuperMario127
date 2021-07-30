@@ -9,11 +9,13 @@ func _ready():
 	time_left = 3
 
 func _start(_delta, play_temp_music: bool):
+	emit_signal("powerup_state_changed", id)
 	character.metal_voice = true
 	if play_temp_music:
 		Singleton.Music.play_temporary_music(music_id)
 
 func _stop(_delta):
+	emit_signal("powerup_state_changed", "Normal")
 	character.metal_voice = false
 	Singleton.Music.stop_temporary_music()
 
