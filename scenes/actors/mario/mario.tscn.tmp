@@ -1086,13 +1086,13 @@ disabled = true
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 5
+frame = 6
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 frames = ExtResource( 44 )
 animation = "swimming"
-frame = 5
+frame = 6
 playing = true
 script = ExtResource( 63 )
 
@@ -1331,18 +1331,20 @@ music_id = 25
 is_invincible = true
 material = ExtResource( 38 )
 time_left = 30.0
-id = "Rainbow"
+#id = "Rainbow"
 
 [node name="VanishPowerup" type="Node" parent="Powerups"]
 script = ExtResource( 50 )
 material = ExtResource( 49 )
 time_left = 30.0
+#id = 2
 id = "Vanish"
 
 [node name="WingPowerup" type="Node" parent="Powerups"]
 script = ExtResource( 62 )
 music_id = 27
 material = SubResource( 26 )
+#id = 3
 id = "Wing"
 
 [node name="PlayerCollision" type="Area2D" parent="."]
@@ -1624,14 +1626,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 81 )
-frame = 13
+frame = 1
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 1
+frame = 15
 speed_scale = 3.0
 playing = true
 
@@ -1652,7 +1654,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 5
+frame = 6
 playing = true
 script = ExtResource( 34 )
 
@@ -1660,7 +1662,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 7
+frame = 8
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]

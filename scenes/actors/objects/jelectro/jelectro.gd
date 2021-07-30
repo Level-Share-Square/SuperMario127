@@ -8,7 +8,7 @@ onready var delete_timer = $DeleteTimer
 var dead
 	
 func is_vanish(body):
-	return body.powerup != null and body.powerup.id == 2
+	return body.powerup != null and body.powerup.id == "Vanish"
 
 func kill(body):
 	if dead or !(enabled and body.name.begins_with("Character") and !body.dead and body.controllable):

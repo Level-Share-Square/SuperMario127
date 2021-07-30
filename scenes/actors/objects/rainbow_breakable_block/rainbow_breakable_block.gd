@@ -41,7 +41,7 @@ func _ready():
 	sprite.material.set_shader_param("gradient", Singleton.MiscShared.rainbow_gradient_texture)
 
 func is_rainbow(body):
-	return body.powerup != null and body.powerup.id == 1
+	return body.powerup != null and body.powerup.id == "Rainbow"
 
 func handle_character_exception(character: Character):
 	if !is_instance_valid(character): return

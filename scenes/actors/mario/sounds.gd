@@ -44,20 +44,14 @@ var character = null
 
 func _ready():
 	#yield(get_tree().create_timer(0.1), "timeout") #this doesn't seem to do anything except cause an error? this is why you comment code
+	if is_instance_valid(character):
+		if character.metal_voice: #Is there more to change?
+			voice_effects.set_bus(metal_bus)
+		elif !character.metal_voice:
+			voice_effects.set_bus(normal_bus)
+
 	ready = true
 	character = get_parent()
-
-func switch_bus(node, bus):
-	node.bus = bus
-	
-func _physics_process(_delta):
-	if is_instance_valid(character):
-		if character.metal_voice and !last_metal_filter: #Is there more to change?
-			voice_effects.set_bus(metal_bus)
-		elif !character.metal_voice and last_metal_filter:
-			voice_effects.set_bus(normal_bus)
-			
-		last_metal_filter = character.metal_voice
 
 func play_footsteps():
 	if ready:

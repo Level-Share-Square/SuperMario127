@@ -29,7 +29,7 @@ func _ready():
 	auto_flip = true
 
 func _start_check(_delta):
-	return character.water_detector.get_overlapping_areas().size() > 0 and !(character.powerup != null and character.powerup.id == 0)
+	return character.water_detector.get_overlapping_areas().size() > 0 and !(character.powerup != null and character.powerup.id == "Metal")
 
 func _start(_delta):
 	character.sound_player.play_splash_sound()
@@ -166,5 +166,5 @@ func _stop(delta):
 	character.set_state_by_name("BounceState", delta)
 
 func _stop_check(_delta):
-	return character.water_detector.get_overlapping_areas().size() <= 0 or (character.powerup != null and character.powerup.id == 0)
+	return character.water_detector.get_overlapping_areas().size() <= 0 or (character.powerup != null and character.powerup.id == "Metal")
 

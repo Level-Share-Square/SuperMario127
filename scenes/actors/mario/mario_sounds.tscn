@@ -107,6 +107,7 @@ mix_rate = 28000
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 2 )
+normal_bus = "Voices"
 metal_bus = "VoicesMetal"
 
 [node name="VoiceEffects" type="Node" parent="."]
@@ -283,7 +284,6 @@ volume_db = 2.5
 bus = "Voices"
 
 [node name="OtherSounds" type="Node" parent="."]
-script = ExtResource( 39 )
 
 [node name="GPHit" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 9 )

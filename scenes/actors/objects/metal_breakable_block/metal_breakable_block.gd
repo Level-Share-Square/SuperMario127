@@ -51,7 +51,7 @@ func detect_player(body):
 		character = body
 
 func is_metal(body):
-	return body.powerup != null and body.powerup.id == 0
+	return body.powerup != null and body.powerup.id == "Metal"
 
 func _physics_process(delta):
 	if mode != 1 and enabled:

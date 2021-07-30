@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -45,167 +45,160 @@
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Lava2.wav" type="AudioStream" id=43]
 [ext_resource path="res://scenes/actors/mario/sounds_misc/burn.wav" type="AudioStream" id=44]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Lava1.wav" type="AudioStream" id=45]
+[ext_resource path="res://classes/BusGroup.gd" type="Script" id=46]
+[ext_resource path="res://classes/SoundGroup.gd" type="Script" id=47]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 2 )
-voices_bus = "Voices"
+normal_bus = "Voices"
 metal_bus = "VoicesMetal"
 
-[node name="JumpSounds" type="Node" parent="."]
-script = ExtResource( 1 )
-sound_number = 1
+[node name="VoiceEffects" type="Node" parent="."]
+script = ExtResource( 46 )
 
-[node name="Jump1" type="AudioStreamPlayer" parent="JumpSounds"]
+[node name="JumpSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
+
+[node name="Jump1" type="AudioStreamPlayer" parent="VoiceEffects/JumpSounds"]
 stream = ExtResource( 13 )
 bus = "Voices"
 
-[node name="Jump2" type="AudioStreamPlayer" parent="JumpSounds"]
+[node name="Jump2" type="AudioStreamPlayer" parent="VoiceEffects/JumpSounds"]
 stream = ExtResource( 16 )
 bus = "Voices"
 
-[node name="Jump3" type="AudioStreamPlayer" parent="JumpSounds"]
+[node name="Jump3" type="AudioStreamPlayer" parent="VoiceEffects/JumpSounds"]
 stream = ExtResource( 14 )
 bus = "Voices"
 
-[node name="Jump4" type="AudioStreamPlayer" parent="JumpSounds"]
+[node name="Jump4" type="AudioStreamPlayer" parent="VoiceEffects/JumpSounds"]
 stream = ExtResource( 15 )
 bus = "Voices"
 
-[node name="DoubleJumpSounds" type="Node" parent="."]
-script = ExtResource( 1 )
-sound_number = 1
+[node name="DoubleJumpSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
 
-[node name="DoubleJump1" type="AudioStreamPlayer" parent="DoubleJumpSounds"]
+[node name="DoubleJump1" type="AudioStreamPlayer" parent="VoiceEffects/DoubleJumpSounds"]
 stream = ExtResource( 17 )
 bus = "Voices"
 
-[node name="DoubleJump2" type="AudioStreamPlayer" parent="DoubleJumpSounds"]
+[node name="DoubleJump2" type="AudioStreamPlayer" parent="VoiceEffects/DoubleJumpSounds"]
 stream = ExtResource( 19 )
 bus = "Voices"
 
-[node name="TripleJumpSounds" type="Node" parent="."]
-script = ExtResource( 1 )
-sound_number = 1
+[node name="TripleJumpSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
 
-[node name="TripleJump1" type="AudioStreamPlayer" parent="TripleJumpSounds"]
+[node name="TripleJump1" type="AudioStreamPlayer" parent="VoiceEffects/TripleJumpSounds"]
 stream = ExtResource( 11 )
 bus = "Voices"
 
-[node name="TripleJump2" type="AudioStreamPlayer" parent="TripleJumpSounds"]
+[node name="TripleJump2" type="AudioStreamPlayer" parent="VoiceEffects/TripleJumpSounds"]
 stream = ExtResource( 12 )
 bus = "Voices"
 
-[node name="DiveSounds" type="Node" parent="."]
-script = ExtResource( 1 )
-sound_number = 1
+[node name="DiveSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
 
-[node name="Dive1" type="AudioStreamPlayer" parent="DiveSounds"]
+[node name="Dive1" type="AudioStreamPlayer" parent="VoiceEffects/DiveSounds"]
 stream = ExtResource( 3 )
 bus = "Voices"
 
-[node name="Dive2" type="AudioStreamPlayer" parent="DiveSounds"]
+[node name="Dive2" type="AudioStreamPlayer" parent="VoiceEffects/DiveSounds"]
 stream = ExtResource( 9 )
 bus = "Voices"
 
-[node name="Dive3" type="AudioStreamPlayer" parent="DiveSounds"]
+[node name="Dive3" type="AudioStreamPlayer" parent="VoiceEffects/DiveSounds"]
 stream = ExtResource( 18 )
 bus = "Voices"
 
-[node name="FallSounds" type="Node" parent="."]
-script = ExtResource( 1 )
-sound_number = 1
+[node name="FallSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
 
-[node name="Fall1" type="AudioStreamPlayer" parent="FallSounds"]
+[node name="Fall1" type="AudioStreamPlayer" parent="VoiceEffects/FallSounds"]
 stream = ExtResource( 10 )
 bus = "Voices"
 
-[node name="HitSounds" type="Node" parent="."]
-script = ExtResource( 1 )
-sound_number = 1
+[node name="HitSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
 
-[node name="Hit1" type="AudioStreamPlayer" parent="HitSounds"]
+[node name="Hit1" type="AudioStreamPlayer" parent="VoiceEffects/HitSounds"]
 stream = ExtResource( 5 )
 bus = "Voices"
 
-[node name="Hit2" type="AudioStreamPlayer" parent="HitSounds"]
+[node name="Hit2" type="AudioStreamPlayer" parent="VoiceEffects/HitSounds"]
 stream = ExtResource( 7 )
 bus = "Voices"
 
-[node name="LastHitSounds" type="Node" parent="."]
-script = ExtResource( 1 )
-sound_number = 1
+[node name="LastHitSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
 
-[node name="LastHit1" type="AudioStreamPlayer" parent="LastHitSounds"]
+[node name="LastHit1" type="AudioStreamPlayer" parent="VoiceEffects/LastHitSounds"]
 stream = ExtResource( 33 )
 volume_db = -2.0
 bus = "Voices"
 
-[node name="StompedSounds" type="Node" parent="."]
-script = ExtResource( 1 )
-sound_number = 1
+[node name="StompedSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
 
-[node name="Stomped1" type="AudioStreamPlayer" parent="StompedSounds"]
+[node name="Stomped1" type="AudioStreamPlayer" parent="VoiceEffects/StompedSounds"]
 stream = ExtResource( 6 )
 bus = "Voices"
 
-[node name="Stomped2" type="AudioStreamPlayer" parent="StompedSounds"]
+[node name="Stomped2" type="AudioStreamPlayer" parent="VoiceEffects/StompedSounds"]
 stream = ExtResource( 8 )
 bus = "Voices"
 
-[node name="Stomped3" type="AudioStreamPlayer" parent="StompedSounds"]
+[node name="Stomped3" type="AudioStreamPlayer" parent="VoiceEffects/StompedSounds"]
 stream = ExtResource( 4 )
 bus = "Voices"
 
-[node name="DeathSounds" type="Node" parent="."]
-script = ExtResource( 1 )
-sound_number = 1
+[node name="DeathSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
 
-[node name="Death1" type="AudioStreamPlayer" parent="DeathSounds"]
+[node name="Death1" type="AudioStreamPlayer" parent="VoiceEffects/DeathSounds"]
 stream = ExtResource( 31 )
 bus = "Voices"
 
-[node name="PowerupSounds" type="Node" parent="."]
-script = ExtResource( 1 )
-sound_number = 1
+[node name="PowerupSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
 
-[node name="Powerup1" type="AudioStreamPlayer" parent="PowerupSounds"]
+[node name="Powerup1" type="AudioStreamPlayer" parent="VoiceEffects/PowerupSounds"]
 stream = ExtResource( 35 )
 volume_db = 2.0
 bus = "Voices"
 
-[node name="Powerup2" type="AudioStreamPlayer" parent="PowerupSounds"]
+[node name="Powerup2" type="AudioStreamPlayer" parent="VoiceEffects/PowerupSounds"]
 stream = ExtResource( 34 )
 volume_db = 2.0
 bus = "Voices"
 
-[node name="Powerup3" type="AudioStreamPlayer" parent="PowerupSounds"]
+[node name="Powerup3" type="AudioStreamPlayer" parent="VoiceEffects/PowerupSounds"]
 stream = ExtResource( 36 )
 volume_db = 2.0
 bus = "Voices"
 
-[node name="LavaHurtSounds" type="Node" parent="."]
-script = ExtResource( 1 )
-sound_number = 1
+[node name="LavaHurtSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
 
-[node name="Lava1" type="AudioStreamPlayer" parent="LavaHurtSounds"]
+[node name="Lava1" type="AudioStreamPlayer" parent="VoiceEffects/LavaHurtSounds"]
 stream = ExtResource( 45 )
 volume_db = -9.5
 bus = "Voices"
 
-[node name="Lava2" type="AudioStreamPlayer" parent="LavaHurtSounds"]
+[node name="Lava2" type="AudioStreamPlayer" parent="VoiceEffects/LavaHurtSounds"]
 stream = ExtResource( 43 )
 volume_db = -3.5
 bus = "Voices"
 
-[node name="ShineSounds" type="Node" parent="."]
-script = ExtResource( 1 )
-sound_number = 1
+[node name="ShineSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
 
-[node name="Shine1" type="AudioStreamPlayer" parent="ShineSounds"]
+[node name="Shine1" type="AudioStreamPlayer" parent="VoiceEffects/ShineSounds"]
 stream = ExtResource( 39 )
 volume_db = 3.5
 
-[node name="Shine2" type="AudioStreamPlayer" parent="ShineSounds"]
+[node name="Shine2" type="AudioStreamPlayer" parent="VoiceEffects/ShineSounds"]
 stream = ExtResource( 38 )
 volume_db = 4.5
 

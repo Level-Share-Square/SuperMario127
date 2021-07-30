@@ -37,7 +37,7 @@ func _set_property_values():
 	set_property("chase_speed", chase_speed, true)
 	
 func is_vanish(body):
-	return body.powerup != null and body.powerup.id == 2
+	return body.powerup != null and body.powerup.id == "Vanish"
 
 func kill(body):
 	if enabled and body.name.begins_with("Character") and !body.dead and body.controllable and !is_vanish(body):
