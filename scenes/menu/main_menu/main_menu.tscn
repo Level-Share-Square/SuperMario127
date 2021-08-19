@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/menu/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://scenes/menu/main_menu/logo.png" type="Texture" id=4]
 [ext_resource path="res://scenes/menu/shine_select_screen/frame_top.png" type="Texture" id=5]
+[ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -17,7 +18,29 @@ font_data = ExtResource( 3 )
 size = 42
 font_data = ExtResource( 3 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="StyleBoxFlat" id=4]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.513726, 0.0156863, 0.0156863, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=5]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.698039, 0.2, 0.2, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel:rect_position")
 tracks/0/interp = 1
@@ -55,7 +78,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0.15, 0.15 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=10]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel:rect_position")
@@ -82,7 +105,7 @@ tracks/1/keys = {
 "values": [ Vector2( 370, -210 ), Vector2( 370, -210 ), Vector2( 370, 121 ), Vector2( 370, 106 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=11]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel:rect_position")
@@ -109,8 +132,7 @@ tracks/1/keys = {
 "values": [ Vector2( 370, 111 ), Vector2( 370, -210 ) ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "trans_out_MainMenuScreen_MultiplayerOptions"
+[sub_resource type="Animation" id=12]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel:rect_position")
@@ -137,8 +159,7 @@ tracks/1/keys = {
 "values": [ Vector2( 370, 111 ), Vector2( 768, 111 ) ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "trans_out_MultiplayerOptions_MainMenuScreen"
+[sub_resource type="Animation" id=13]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel:rect_position")
@@ -205,6 +226,8 @@ __meta__ = {
 [node name="ButtonCampaign" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 margin_right = 245.0
 margin_bottom = 64.0
+focus_neighbour_left = NodePath("../../ButtonQuit")
+focus_neighbour_top = NodePath("../../ButtonQuit")
 custom_fonts/font = SubResource( 2 )
 disabled = true
 text = "Campaign"
@@ -213,6 +236,7 @@ text = "Campaign"
 margin_top = 76.0
 margin_right = 245.0
 margin_bottom = 140.0
+focus_neighbour_left = NodePath("../../ButtonQuit")
 custom_fonts/font = SubResource( 3 )
 text = "Samples"
 
@@ -220,37 +244,39 @@ text = "Samples"
 margin_top = 152.0
 margin_right = 245.0
 margin_bottom = 216.0
+focus_neighbour_left = NodePath("../../ButtonQuit")
 custom_fonts/font = SubResource( 2 )
 text = "Levels"
-
-[node name="ButtonEditor" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
-visible = false
-margin_top = 152.0
-margin_right = 219.0
-margin_bottom = 216.0
-custom_fonts/font = SubResource( 2 )
-text = "Editor"
 
 [node name="ButtonOptions" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 228.0
 margin_right = 245.0
 margin_bottom = 292.0
+focus_neighbour_left = NodePath("../../ButtonQuit")
+focus_neighbour_bottom = NodePath("../../ButtonQuit")
 custom_fonts/font = SubResource( 2 )
 text = "Options"
 
-[node name="ButtonQuit" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
-visible = false
-margin_top = 304.0
-margin_right = 238.0
-margin_bottom = 368.0
-custom_fonts/font = SubResource( 2 )
-text = "Quit"
+[node name="ButtonQuit" parent="Panel" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 5.66568
+margin_top = 395.905
+margin_right = 37.6657
+margin_bottom = 425.905
+focus_neighbour_top = NodePath("../VBoxContainer/ButtonOptions")
+focus_neighbour_right = NodePath("../VBoxContainer/ButtonOptions")
+focus_neighbour_bottom = NodePath("../VBoxContainer/ButtonCampaign")
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
 
 [node name="Logo" type="TextureRect" parent="."]
 margin_left = 370.0
-margin_top = 111.0
+margin_top = 106.0
 margin_right = 2570.0
-margin_bottom = 1511.0
+margin_bottom = 1506.0
 rect_scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 4 )
 __meta__ = {
@@ -270,11 +296,11 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/default = SubResource( 4 )
-anims/trans_out_LevelsScreen_MainMenuScreen = SubResource( 5 )
-anims/trans_out_MainMenuScreen_LevelsScreen = SubResource( 6 )
-anims/trans_out_MainMenuScreen_MultiplayerOptions = SubResource( 7 )
-anims/trans_out_MultiplayerOptions_MainMenuScreen = SubResource( 8 )
+anims/default = SubResource( 9 )
+anims/trans_out_LevelsScreen_MainMenuScreen = SubResource( 10 )
+anims/trans_out_MainMenuScreen_LevelsScreen = SubResource( 11 )
+anims/trans_out_MainMenuScreen_MultiplayerOptions = SubResource( 12 )
+anims/trans_out_MultiplayerOptions_MainMenuScreen = SubResource( 13 )
 
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
