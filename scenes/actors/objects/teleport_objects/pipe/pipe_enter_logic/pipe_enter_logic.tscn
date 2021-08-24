@@ -1,8 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/actors/objects/pipe/pipe_enter_logic/pipe_enter_logic.gd" type="Script" id=1]
-[ext_resource path="res://scenes/actors/objects/pipe/sound.wav" type="AudioStream" id=2]
-[ext_resource path="res://scenes/actors/objects/pipe/fast_sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/teleport_objects/pipe/pipe_enter_logic/pipe_enter_logic.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/teleport_objects/pipe/sound.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/actors/objects/teleport_objects/pipe/fast_sound.wav" type="AudioStream" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 2 )
