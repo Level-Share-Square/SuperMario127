@@ -36,7 +36,7 @@ func _start(_delta):
 		character.sound_player.play_duck_sound()
 	#print(character.ground_check.get_collision_normal())
 
-func _update(delta):
+func _update(_delta):
 	var sprite = character.sprite
 	if (character.facing_direction == 1):
 		sprite.animation = "diveRight"

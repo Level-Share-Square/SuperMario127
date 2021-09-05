@@ -13,7 +13,7 @@ func kill(body):
 	
 	body.damage(1, "hit", 60)
 
-func _process(delta):
+func _process(_delta):
 	if is_instance_valid(stored_character):
 		kill(stored_character)
 

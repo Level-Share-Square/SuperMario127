@@ -12,5 +12,5 @@ func _set_properties():
 func _set_property_values():
 	set_property("color", color, true)
 
-func _process(delta):
+func _process(_delta):
 	sprite.self_modulate = color
