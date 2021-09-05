@@ -26,6 +26,8 @@ var editable_properties : PoolStringArray = []
 var base_connectable_signals : PoolStringArray = ["ready", "process", "physics_process"]
 var connectable_signals : PoolStringArray = []
 
+var property_value_to_name := {}
+
 signal process
 signal physics_process
 signal property_changed(key, value)
