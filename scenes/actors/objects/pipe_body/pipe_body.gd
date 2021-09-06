@@ -34,7 +34,7 @@ func update_parts():
 	
 	collision_shape.scale.y = sprite.scale.y
 
-func _process(delta):
+func _process(_delta):
 	if color == Color(0, 1, 0):
 		sprite.texture = normal_texture
 		sprite2.visible = false

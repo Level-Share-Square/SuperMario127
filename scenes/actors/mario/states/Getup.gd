@@ -22,7 +22,7 @@ func _start(_delta):
 	character.dive_cooldown = 0.15
 	character.stamina = 100
 	
-func _update(delta):
+func _update(_delta):
 	var sprite = character.sprite
 	if abs(sprite.rotation_degrees) < 320 and sprite.rotation_degrees != 0:
 		if (character.facing_direction == 1):
