@@ -19,13 +19,15 @@ func _set_property_values():
 	set_property("teleportation_mode", teleportation_mode, true, "Teleport Mode")
 	set_bool_alias("teleportation_mode", "Remote", "Local")
 
+
 func _ready():
+	object_type = "pipe"
 	.ready() #Calls parent class "TeleportObject"
 
 	if rotation != 0 and enabled: #TODO: Vertical & Lateral pipes
 		enabled = false
 	if rotation == 0:
-		Singleton.CurrentLevelData.level_data.vars.pipes.append([destination_tag.to_lower(), self])
+		Singleton.CurrentLevelData.level_data.vars.teleporters.append([destination_tag.to_lower(), self])
 	if color == Color(0, 1, 0):
 		sprite.texture = normal_texture
 		sprite2.visible = false

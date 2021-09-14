@@ -30,7 +30,8 @@ func local_tp(entering_character : Character, entering):
 			
 			Singleton.CurrentLevelData.level_data.vars.transition_data = [
 				object_type, 
-				destination_tag
+				destination_tag,
+				teleportation_mode
 			]
 
 		else:
@@ -94,7 +95,8 @@ func change_areas(entering_character : Character, entering):
 
 		Singleton.CurrentLevelData.level_data.vars.transition_data = [
 			object_type, 
-			destination_tag
+			destination_tag,
+			teleportation_mode
 		]
 		entering_character.switch_areas(area_id, 0.5)
 	else:

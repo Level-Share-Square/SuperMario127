@@ -1,12 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/actors/objects/entrance/entrance_sprite.gd" type="Script" id=1]
-[ext_resource path="res://scenes/actors/objects/entrance_luigi/sprite.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/entrance/entrance.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/tp_exit/tp_exit_sprite.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/tp_exit/tp_exit.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/pipe/sound.wav" type="AudioStream" id=4]
-
-
-
 
 
 
@@ -16,16 +13,15 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": false,
 "name": "default",
 "speed": 0.0
 } ]
 
-[node name="EntranceLuigi" type="Node2D"]
+[node name="Entrance" type="Node2D"]
 z_index = -1
-script = ExtResource( 3 )
-character_string = "character2"
+script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )

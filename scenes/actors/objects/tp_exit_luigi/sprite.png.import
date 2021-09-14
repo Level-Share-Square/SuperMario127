@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sprite.png-85982a9a51caf587a44735de93ab78ea.stex"
+path="res://.import/sprite.png-6cd29a9b7af239042ace0a155516cc4e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/entrance_luigi/sprite.png"
-dest_files=[ "res://.import/sprite.png-85982a9a51caf587a44735de93ab78ea.stex" ]
+source_file="res://scenes/actors/objects/tp_exit_luigi/sprite.png"
+dest_files=[ "res://.import/sprite.png-6cd29a9b7af239042ace0a155516cc4e.stex" ]
 
 [params]
 
