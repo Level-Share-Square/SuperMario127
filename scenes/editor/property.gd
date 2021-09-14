@@ -2,13 +2,17 @@ extends Control
 
 var object : GameObject
 var key : String
+var alias : String
 
 onready var label = $Label
 
 var property_type
 
 func _ready():
-	label.text = key.capitalize()
+	if object.has_editor_alias(key):
+		label.text = object.get_editor_alias(key)
+	else:
+		label.text = key.capitalize()
 	
 	var value = object[key] if key != "visible" else object.modulate.a == 1
 	var type = typeof(value)

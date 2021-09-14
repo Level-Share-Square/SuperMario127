@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/recolorable_texture.png-1b98d5bc2764ad183bd41fe0f7d9e965.stex"
+path="res://.import/door.png-03d5dcaf690838c3801aab5ff3d6dfbb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/teleport_objects/pipe/recolorable_texture.png"
-dest_files=[ "res://.import/recolorable_texture.png-1b98d5bc2764ad183bd41fe0f7d9e965.stex" ]
+source_file="res://scenes/actors/objects/door/door.png"
+dest_files=[ "res://.import/door.png-03d5dcaf690838c3801aab5ff3d6dfbb.stex" ]
 
 [params]
 

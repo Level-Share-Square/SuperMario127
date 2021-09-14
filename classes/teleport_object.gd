@@ -4,25 +4,45 @@ class_name TeleportObject
 
 # ============================================
 # | While I'm doing pipes, I might as well   |
-# | revampthe teleportation system so we can |
-# | consolidate some of this mess.           |
+# | revamp the teleportation system so we    |
+# | can consolidate some of this mess.       |
 # ============================================
 
-enum TELEPORT_MODE{LOCAL, REMOTE} #LOCAL = TP within the same level, REMOTE = TP to different level
+#LOCAL = TP within the same area, REMOTE = TP to different area
 
-var teleportation_mode = TELEPORT_MODE.LOCAL
+var teleportation_mode = true #true = remote, false = local
 var area_id := 0
-var destination_tags : PoolStringArray = []
+var object_type := "unknown"
+var destination_tag := "default_teleporter"
 
-func _ready():
-	match teleportation_mode:
-		TELEPORT_MODE.REMOTE:
-			connect_remote_members()
-		TELEPORT_MODE.LOCAL:
-			connect_local_members()
+func ready():
+	if teleportation_mode:
+		connect_remote_members()
+	else:
+		connect_local_members()
+
+func local_tp(entering_character : Character, entering):
+	#TODO: REMOVE UPWARD CALLS ASAP
+	var character = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character) #Holy crap this is bad
+	if Singleton.CurrentLevelData.level_data.tags:
+		
+		if entering:
+			
+			Singleton.CurrentLevelData.level_data.vars.transition_data = [
+				object_type, 
+				destination_tag
+			]
+
+		else:
+			entering_character.invulnerable = false
+			entering_character.controllable = true
+			entering_character.movable = true
+			
+			exit_remote_teleport()
 
 func change_areas(entering_character : Character, entering):
-	var character = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character)
+	#TODO: REMOVE UPWARD CALLS ASAP
+	var character = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character) #Holy crap this is bad
 	if area_id >= Singleton.CurrentLevelData.level_data.areas.size():
 		area_id = Singleton.CurrentLevelData.area
 	if entering:
@@ -73,8 +93,8 @@ func change_areas(entering_character : Character, entering):
 			Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
 
 		Singleton.CurrentLevelData.level_data.vars.transition_data = [
-			"pipe", 
-			pipe_tag
+			object_type, 
+			destination_tag
 		]
 		entering_character.switch_areas(area_id, 0.5)
 	else:
@@ -82,10 +102,16 @@ func change_areas(entering_character : Character, entering):
 		entering_character.controllable = true
 		entering_character.movable = true
 		
-		pipe_enter_logic.is_idle = true
+		exit_remote_teleport()
 
 func connect_local_members():
 	pass
 
 func connect_remote_members():
+	pass
+
+func exit_local_teleport():
+	pass
+
+func exit_remote_teleport():
 	pass

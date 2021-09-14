@@ -43,12 +43,12 @@
 [ext_resource path="res://scenes/editor/assets/pencil_tool_selected.png" type="Texture" id=41]
 [ext_resource path="res://scenes/actors/objects/metal_platform/icon.png" type="Texture" id=42]
 [ext_resource path="res://scenes/actors/objects/metal_platform/preview.png" type="Texture" id=43]
-[ext_resource path="res://scenes/actors/objects/teleport_objects/door/icon.png" type="Texture" id=44]
+[ext_resource path="res://scenes/actors/objects/door/icon.png" type="Texture" id=44]
 [ext_resource path="res://scenes/editor/assets/save_icon_hover.png" type="Texture" id=45]
 [ext_resource path="res://scenes/editor/assets/layer_icon.png" type="Texture" id=46]
 [ext_resource path="res://scenes/editor/assets/level_settings_hover.png" type="Texture" id=47]
 [ext_resource path="res://scenes/editor/assets/eraser_tool.png" type="Texture" id=48]
-[ext_resource path="res://scenes/actors/objects/teleport_objects/door/preview.png" type="Texture" id=49]
+[ext_resource path="res://scenes/actors/objects/door/preview.png" type="Texture" id=49]
 [ext_resource path="res://scenes/actors/objects/big_tree/preview.png" type="Texture" id=50]
 [ext_resource path="res://scenes/actors/objects/big_tree/icon.png" type="Texture" id=51]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=52]
@@ -107,9 +107,9 @@
 [ext_resource path="res://scenes/actors/objects/big_bottle/big_bottle.png" type="Texture" id=105]
 [ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/icon.png" type="Texture" id=106]
 [ext_resource path="res://assets/tiles/boo_block/icon.png" type="Texture" id=107]
-[ext_resource path="res://scenes/actors/objects/teleport_objects/pipe/preview.png" type="Texture" id=108]
+[ext_resource path="res://scenes/actors/objects/pipe/preview.png" type="Texture" id=108]
 [ext_resource path="res://scenes/editor/assets/save_icon.png" type="Texture" id=109]
-[ext_resource path="res://scenes/actors/objects/teleport_objects/pipe/icon.png" type="Texture" id=110]
+[ext_resource path="res://scenes/actors/objects/pipe/icon.png" type="Texture" id=110]
 [ext_resource path="res://assets/tiles/snow/slab_icon.png" type="Texture" id=111]
 [ext_resource path="res://assets/tiles/snow/left_slope_icon.png" type="Texture" id=112]
 [ext_resource path="res://assets/tiles/snow/icon.png" type="Texture" id=113]
@@ -613,6 +613,12 @@
 [ext_resource path="res://assets/tiles/crystal/palette_icons/2_slopeR.png" type="Texture" id=611]
 [ext_resource path="res://assets/tiles/crystal/palette_icons/5_slopeR.png" type="Texture" id=612]
 [ext_resource path="res://assets/tiles/crystal/palette_icons/3_slopeR.png" type="Texture" id=613]
+
+
+
+
+
+
 
 
 
