@@ -9,13 +9,22 @@ class_name TeleportObject
 # ============================================
 
 #LOCAL = TP within the same area, REMOTE = TP to different area
-
+const WAIT_TIME := 0.45
 var teleportation_mode = true #true = remote, false = local
 var area_id := 0
 var object_type := "unknown"
 var destination_tag := "default_teleporter"
+var tp_pair : TeleportObject
+
+## For older levels with doors only
+var tag : String = "none"
+var teleport_to_tag : String = "none"
+###
+
+var tween = Tween.new()
 
 func ready():
+	add_child(tween)
 	if teleportation_mode:
 		connect_remote_members()
 	else:
@@ -24,22 +33,44 @@ func ready():
 func local_tp(entering_character : Character, entering):
 	#TODO: REMOVE UPWARD CALLS ASAP
 	var character = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character) #Holy crap this is bad
-	if Singleton.CurrentLevelData.level_data.tags:
-		
-		if entering:
-			
-			Singleton.CurrentLevelData.level_data.vars.transition_data = [
-				object_type, 
-				destination_tag,
-				teleportation_mode
-			]
+	if entering:
+		tp_pair = find_local_pair()
 
-		else:
-			entering_character.invulnerable = false
-			entering_character.controllable = true
-			entering_character.movable = true
-			
-			exit_remote_teleport()
+		character.position = tp_pair.global_position
+		character.camera.position = character.position
+		character.camera.skip_to_player = true
+		tween.interpolate_callback(tp_pair.get("%s_enter_logic" % tp_pair.object_type), WAIT_TIME, "start_%s_exit_animation" % tp_pair.object_type, character)
+		tween.start()
+		
+		# sets the transition center to Mario's position
+		Singleton.SceneTransitions.canvas_mask.position = get_character_screen_position(character)
+		# start outer transition
+		Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, -1, -1, false, false)
+
+	else:
+		entering_character.invulnerable = false
+		entering_character.controllable = true
+		entering_character.movable = true
+
+	exit_local_teleport()
+
+func find_local_pair():
+	for i in Singleton.CurrentLevelData.level_data.vars.teleporters:
+		var condition = i[0] == destination_tag.to_lower() && i[1] != self
+		if teleport_to_tag != "none":
+			condition = i[0] == teleport_to_tag.to_lower() && i[1] != self
+		if condition:
+			return i[1]
+		print(i)
+	return self
+
+func get_character_screen_position(character : Character) -> Vector2:
+	# Find the camera pos, clamped to its limits
+	var camera_pos = character.camera.position
+	camera_pos.x = clamp(camera_pos.x, character.camera.limit_left + 384, character.camera.limit_right - 216)
+	camera_pos.y = clamp(camera_pos.y, character.camera.limit_top + 384, character.camera.limit_bottom - 216)
+	# Return relative screen position
+	return character.position - camera_pos + Vector2(384, 216)
 
 func change_areas(entering_character : Character, entering):
 	#TODO: REMOVE UPWARD CALLS ASAP

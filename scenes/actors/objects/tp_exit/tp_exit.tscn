@@ -5,26 +5,21 @@
 [ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/pipe/sound.wav" type="AudioStream" id=4]
 
-
-
-
-
-
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": false,
-"name": "default",
+"name": "pipe",
 "speed": 0.0
 } ]
 
-[node name="Entrance" type="Node2D"]
+[node name="tp_exit" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
+animation = "pipe"
 script = ExtResource( 1 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

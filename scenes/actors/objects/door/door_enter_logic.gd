@@ -20,6 +20,7 @@ export (float) var entering_door_length := 0.75
 export (float) var exiting_door_length := 0.75
 
 var is_idle := true
+var entering = false
 
 var stored_character : Character
 
@@ -47,6 +48,7 @@ func start_door_enter_animation(character : Character) -> void:
 	stored_character = character
 	
 	is_idle = false
+	entering = true
 	
 	character.set_dive_collision(false)
 	character.invulnerable = true 
@@ -98,6 +100,7 @@ func start_door_exit_animation(character : Character) -> void:
 	stored_character = character
 	
 	is_idle = false
+	entering = false
 	
 	character.invulnerable = true 
 	character.controllable = false
@@ -115,6 +118,7 @@ func start_door_exit_animation(character : Character) -> void:
 func door_exit_anim_finished(_animation : String, character : Character) -> void:
 	# closes the door and gives back control to mario
 	is_idle = true
+	entering = false
 	
 	character.velocity = Vector2.ZERO
 	character.invulnerable = false 
