@@ -2,6 +2,7 @@ extends GameObject
 
 class_name TeleportObject
 
+signal start_exit
 # ============================================
 # | While I'm doing pipes, I might as well   |
 # | revamp the teleportation system so we    |
@@ -21,10 +22,10 @@ var tag : String = "none"
 var teleport_to_tag : String = "none"
 ###
 
-var tween = Tween.new()
+var tp_tween = Tween.new()
 
 func ready():
-	add_child(tween)
+	add_child(tp_tween)
 	if teleportation_mode:
 		connect_remote_members()
 	else:
@@ -35,17 +36,15 @@ func local_tp(entering_character : Character, entering):
 	var character = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character) #Holy crap this is bad
 	if entering:
 		tp_pair = find_local_pair()
-
+		
+		character.modulate = Color(0.0, 0.0, 0.0, 0.0)
+		
 		character.position = tp_pair.global_position
 		character.camera.position = character.position
 		character.camera.skip_to_player = true
-		tween.interpolate_callback(tp_pair.get("%s_enter_logic" % tp_pair.object_type), WAIT_TIME, "start_%s_exit_animation" % tp_pair.object_type, character)
-		tween.start()
-		
-		# sets the transition center to Mario's position
-		Singleton.SceneTransitions.canvas_mask.position = get_character_screen_position(character)
-		# start outer transition
-		Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, -1, -1, false, false)
+		tp_tween.interpolate_callback(tp_pair.get("%s_enter_logic" % tp_pair.object_type), WAIT_TIME, "start_%s_exit_animation" % tp_pair.object_type, character)
+		tp_tween.start()
+		emit_signal("start_exit", character)
 
 	else:
 		entering_character.invulnerable = false
@@ -148,3 +147,19 @@ func exit_local_teleport():
 
 func exit_remote_teleport():
 	pass
+
+func _start_local_transition(character : Character, entering) -> void:
+	if entering:
+		# sets the transition center to Mario's position
+		Singleton.SceneTransitions.canvas_mask.position = get_character_screen_position(character)
+		# this starts an inner scene transition, then connects a function (one shot) to start as it finishes
+		Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, -1, -1, false, false)
+		# warning-ignore: return_value_discarded
+		Singleton.SceneTransitions.connect("transition_finished", self, "local_tp", [character, true], CONNECT_ONESHOT)
+
+func _exit_local_transition(character : Character, entering) -> void:
+	if entering:
+		# sets the transition center to Mario's position
+		Singleton.SceneTransitions.canvas_mask.position = get_character_screen_position(character)
+		# this starts an inner scene transition, then connects a function (one shot) to start as it finishes
+		Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, -1, -1, false, false)

@@ -496,6 +496,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id=62]
 length = 0.75
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:animation")
 tracks/0/interp = 1
@@ -1084,15 +1085,19 @@ shape = SubResource( 7 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
+modulate = Color( 0.933333, 0.933333, 0.933333, 0.933333 )
+position = Vector2( 0, 0.133333 )
+rotation = 6.28319
+scale = Vector2( 0.99, 0.99 )
 frames = ExtResource( 1 )
-animation = "swimming"
-frame = 5
+animation = "idleRight"
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
+visible = false
 frames = ExtResource( 44 )
 animation = "swimming"
-frame = 5
+frame = 6
 playing = true
 script = ExtResource( 63 )
 
@@ -1320,30 +1325,30 @@ fallback_water_pos_right_luigi = Vector2( -15, -24 )
 
 [node name="MetalPowerup" type="Node" parent="Powerups"]
 script = ExtResource( 35 )
+id = "Metal"
 is_invincible = true
 material = ExtResource( 36 )
 time_left = 30.0
-id = "Metal"
 
 [node name="RainbowPowerup" type="Node" parent="Powerups"]
 script = ExtResource( 39 )
+id = "Rainbow"
 music_id = 25
 is_invincible = true
 material = ExtResource( 38 )
 time_left = 30.0
-id = "Rainbow"
 
 [node name="VanishPowerup" type="Node" parent="Powerups"]
 script = ExtResource( 50 )
+id = "Vanish"
 material = ExtResource( 49 )
 time_left = 30.0
-id = "Vanish"
 
 [node name="WingPowerup" type="Node" parent="Powerups"]
 script = ExtResource( 62 )
+id = "Wing"
 music_id = 27
 material = SubResource( 26 )
-id = "Wing"
 
 [node name="PlayerCollision" type="Area2D" parent="."]
 visible = false
@@ -1624,14 +1629,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 81 )
-frame = 13
+frame = 3
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 1
+frame = 3
 speed_scale = 3.0
 playing = true
 
@@ -1652,7 +1657,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 5
+frame = 6
 playing = true
 script = ExtResource( 34 )
 
@@ -1660,7 +1665,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 7
+frame = 8
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]

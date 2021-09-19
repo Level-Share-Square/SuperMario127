@@ -16,6 +16,14 @@ export var character_string = "character"
 
 onready var sound = $AudioStreamPlayer
 
+# ==================================================================================
+# | As best as I can tell, this is a singleton called in whenever an area changes. |
+# | All remote teleporters in an area are listening to this singleton to see       |
+# | which teleporter Mario should exit from. When the time comes, this script      |
+# | should carry over all of Mario's data from the last area, and pass an instance |
+# | of Mario over to the teleporter he's supposed to exit from.                    |
+# ==================================================================================
+
 func _ready():
 	if mode == 0:
 		if character_string != "character" and Singleton.PlayerSettings.number_of_players == 1: return

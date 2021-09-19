@@ -27,6 +27,7 @@ var entering := false
 var stored_character : Character
 
 func _ready():
+	tween.connect("tween_all_completed", self, "_tween_all_completed")
 	gp_area_collision.disabled = !get_parent().enabled
 
 func _physics_process(_delta : float) -> void:
@@ -111,11 +112,16 @@ func start_pipe_enter_animation(character : Character) -> void:
 	tween.start()
 
 func start_pipe_exit_animation(character : Character) -> void:
+	if character.state.name == "GroundPoundState":          # =====================================================
+		character.set_state_by_name("GroundPoundEndState")  # | This is for local teleportation. If this wasn't   |
+															# | here, you would exit a door still ground pounding |
+	character.set_state_by_name("NoActionState")            # | if you entered a pipe with a ground pound.   |
+															# =====================================================
 	stored_character = character
 
 	is_idle = false
 	entering = false
-
+	
 	character.invulnerable = true
 	character.controllable = false
 	character.movable = false
@@ -123,7 +129,8 @@ func start_pipe_exit_animation(character : Character) -> void:
 	character.sprite.animation = "pipeRight"
 	character.sprite.playing = true
 	character.sprite.frame = 2
-
+	reset_sprite(character)
+	
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character, "position:y", global_position.y + PIPE_BOTTOM_DISTANCE, \
 			global_position.y - PIPE_EXIT_DISTANCE, exiting_pipe_length)
@@ -135,11 +142,27 @@ func start_pipe_exit_animation(character : Character) -> void:
 	
 	# warning-ignore: return_value_discarded
 	tween.interpolate_callback(audio_player, 0.5, "play")
-			
+
+	# when mario finishes exiting, run a function (one shot)
+	# warning-ignore: return_value_discarded
+	character.anim_player.connect("animation_finished", self, "pipe_exit_anim_finished", [character], CONNECT_ONESHOT)
+
 	# warning-ignore: return_value_discarded
 	tween.start()
+	
 
+func pipe_exit_anim_finished(_animation : String, character : Character):
+	# undo collision changes, if they were ever made.
+	character.set_collision_layer_bit(1, true)
+	character.set_inter_player_collision(true) 
+
+	
 func _tween_all_completed() -> void:
 	emit_signal("pipe_animation_finished", stored_character, entering)
-
 	stored_character = null
+
+func reset_sprite(character : Character): #This is here in case Mario came from a door to a pipe
+	character.z_index = -1
+	character.sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	character.sprite.scale = Vector2(1.0, 1.0)
+	character.sprite.position = Vector2.ZERO

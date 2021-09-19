@@ -24,6 +24,9 @@ var entering = false
 
 var stored_character : Character
 
+#func _ready():
+#	tween.connect("tween_all_completed", self, "_tween_all_completed")
+
 func _physics_process(_delta : float) -> void:
 	if is_idle:
 		#the area2d is set to only collide with characters, so we can (hopefullY) safely assume if there 
@@ -110,6 +113,7 @@ func start_door_exit_animation(character : Character) -> void:
 	character.anim_player.play("exit_door")
 	# when mario finishes exiting, run a function (one shot)
 	# warning-ignore: return_value_discarded
+
 	character.anim_player.connect("animation_finished", self, "door_exit_anim_finished", [character], CONNECT_ONESHOT)
 
 	# warning-ignore: return_value_discarded

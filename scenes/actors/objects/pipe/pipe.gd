@@ -43,7 +43,7 @@ func _ready():
 
 
 func connect_local_members():
-	pipe_enter_logic.connect("pipe_animation_finished", self, "local_tp")
+	pipe_enter_logic.connect("pipe_animation_finished", self, "_start_local_transition")
 
 func connect_remote_members():
 	pipe_enter_logic.connect("pipe_animation_finished", self, "change_areas")

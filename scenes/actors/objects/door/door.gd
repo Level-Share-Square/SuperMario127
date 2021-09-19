@@ -44,7 +44,7 @@ func _ready() -> void:
 
 
 func connect_local_members():
-	door_enter_logic.connect("start_door_logic", self, "_start_transition")
+	door_enter_logic.connect("start_door_logic", self, "_start_local_transition")
 
 func connect_remote_members():
 	pass
@@ -56,12 +56,4 @@ func exit_local_teleport():
 func exit_remote_teleport():
 	pass
 
-
-func _start_transition(character : Character) -> void:
-	# sets the transition center to Mario's position
-	Singleton.SceneTransitions.canvas_mask.position = get_character_screen_position(character)
-	# this starts an inner scene transition, then connects a function (one shot) to start as it finishes
-	Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, -1, -1, false, false)
-	# warning-ignore: return_value_discarded
-	Singleton.SceneTransitions.connect("transition_finished", self, "local_tp", [character, true], CONNECT_ONESHOT)
 
