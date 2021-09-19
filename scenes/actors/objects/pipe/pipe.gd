@@ -44,12 +44,14 @@ func _ready():
 
 func connect_local_members():
 	pipe_enter_logic.connect("pipe_animation_finished", self, "_start_local_transition")
+	pipe_enter_logic.connect("exit", self, "_start_local_transition")
 
 func connect_remote_members():
 	pipe_enter_logic.connect("pipe_animation_finished", self, "change_areas")
 
 func exit_local_teleport():
 	pipe_enter_logic.is_idle = true
+	
 
 func exit_remote_teleport():
 	pipe_enter_logic.is_idle = true

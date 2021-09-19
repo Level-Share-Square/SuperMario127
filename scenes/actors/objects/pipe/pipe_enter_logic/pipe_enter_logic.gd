@@ -2,6 +2,7 @@
 extends Node2D
 
 signal pipe_animation_finished
+signal exit
 
 onready var area2d : Area2D = $Area2D
 onready var gp_area : Area2D = $GPArea
@@ -111,14 +112,9 @@ func start_pipe_enter_animation(character : Character) -> void:
 	# warning-ignore: return_value_discarded
 	tween.start()
 
-func start_pipe_exit_animation(character : Character) -> void:
-	if character.state.name == "GroundPoundState":          # =====================================================
-		character.set_state_by_name("GroundPoundEndState")  # | This is for local teleportation. If this wasn't   |
-															# | here, you would exit a door still ground pounding |
-	character.set_state_by_name("NoActionState")            # | if you entered a pipe with a ground pound.   |
-															# =====================================================
-	stored_character = character
+func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 
+	stored_character = character
 	is_idle = false
 	entering = false
 	
@@ -130,6 +126,9 @@ func start_pipe_exit_animation(character : Character) -> void:
 	character.sprite.playing = true
 	character.sprite.frame = 2
 	reset_sprite(character)
+	
+	if !tp_mode:
+		emit_signal("exit", character, entering)
 	
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character, "position:y", global_position.y + PIPE_BOTTOM_DISTANCE, \
@@ -152,14 +151,25 @@ func start_pipe_exit_animation(character : Character) -> void:
 	
 
 func pipe_exit_anim_finished(_animation : String, character : Character):
-	# undo collision changes, if they were ever made.
+	# closes the door and gives back control to mario
+	is_idle = true
+	entering = false
+	
+	character.velocity = Vector2.ZERO
+	character.invulnerable = false 
+	character.controllable = true
+	character.movable = true
+	# undo collision changes 
 	character.set_collision_layer_bit(1, true)
 	character.set_inter_player_collision(true) 
+	
+	character.sprite.animation = "pipeExit" + ("Right" if character.facing_direction == 1 else "Left")
 
 	
 func _tween_all_completed() -> void:
-	emit_signal("pipe_animation_finished", stored_character, entering)
-	stored_character = null
+	if entering: #TODO: Make this work w/o if statement
+		emit_signal("pipe_animation_finished", stored_character, entering)
+		stored_character = null
 
 func reset_sprite(character : Character): #This is here in case Mario came from a door to a pipe
 	character.z_index = -1

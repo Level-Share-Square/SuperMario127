@@ -45,6 +45,7 @@ func _ready() -> void:
 
 func connect_local_members():
 	door_enter_logic.connect("start_door_logic", self, "_start_local_transition")
+	door_enter_logic.connect("exit", self, "_start_local_transition")
 
 func connect_remote_members():
 	pass

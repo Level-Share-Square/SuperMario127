@@ -2,7 +2,6 @@ extends GameObject
 
 class_name TeleportObject
 
-signal start_exit
 # ============================================
 # | While I'm doing pipes, I might as well   |
 # | revamp the teleportation system so we    |
@@ -37,20 +36,22 @@ func local_tp(entering_character : Character, entering):
 	if entering:
 		tp_pair = find_local_pair()
 		
-		character.modulate = Color(0.0, 0.0, 0.0, 0.0)
-		
 		character.position = tp_pair.global_position
 		character.camera.position = character.position
 		character.camera.skip_to_player = true
-		tp_tween.interpolate_callback(tp_pair.get("%s_enter_logic" % tp_pair.object_type), WAIT_TIME, "start_%s_exit_animation" % tp_pair.object_type, character)
+		tp_tween.interpolate_callback(tp_pair.get("%s_enter_logic" % tp_pair.object_type), WAIT_TIME, "start_%s_exit_animation" % tp_pair.object_type, character, teleportation_mode)
 		tp_tween.start()
-		emit_signal("start_exit", character)
 
 	else:
 		entering_character.invulnerable = false
 		entering_character.controllable = true
 		entering_character.movable = true
 
+	if character.state != null && character.state.name == "GroundPoundState":  # ====================================================
+		character.set_state_by_name("GroundPoundEndState")                     # | This is for local teleportation. If this wasn't  |
+																			   # | here, you would exit while still ground pounding |
+	character.state = null                                                     # | if you entered from a pipe with a ground pound.  |
+																			   # ====================================================
 	exit_local_teleport()
 
 func find_local_pair():
@@ -150,15 +151,13 @@ func exit_remote_teleport():
 
 func _start_local_transition(character : Character, entering) -> void:
 	if entering:
+		# warning-ignore: return_value_discarded
+		Singleton.SceneTransitions.connect("transition_finished", self, "local_tp", [character, true], CONNECT_ONESHOT)
 		# sets the transition center to Mario's position
 		Singleton.SceneTransitions.canvas_mask.position = get_character_screen_position(character)
 		# this starts an inner scene transition, then connects a function (one shot) to start as it finishes
 		Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, -1, -1, false, false)
-		# warning-ignore: return_value_discarded
-		Singleton.SceneTransitions.connect("transition_finished", self, "local_tp", [character, true], CONNECT_ONESHOT)
-
-func _exit_local_transition(character : Character, entering) -> void:
-	if entering:
+	else:
 		# sets the transition center to Mario's position
 		Singleton.SceneTransitions.canvas_mask.position = get_character_screen_position(character)
 		# this starts an inner scene transition, then connects a function (one shot) to start as it finishes

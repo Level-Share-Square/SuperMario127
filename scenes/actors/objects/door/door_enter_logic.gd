@@ -2,6 +2,7 @@
 extends Node2D
 
 signal start_door_logic
+signal exit
 
 onready var area2d : Area2D = $Area2D
 onready var tween : Tween = $Tween
@@ -89,7 +90,7 @@ func start_door_enter_animation(character : Character) -> void:
 func character_animation_finished(_animation : String, character : Character) -> void:
 	# this is so the door closes after mario enters
 	animate_door("close")
-	emit_signal("start_door_logic", character)
+	emit_signal("start_door_logic", character, entering)
 	
 func animate_door(animation : String = "close") -> void:
 	# this function just plays the door animation, so code doesn't have to repeat
@@ -98,7 +99,7 @@ func animate_door(animation : String = "close") -> void:
 	audio_player.stream = open_audio if animation == "open" else close_audio
 	audio_player.play()
 
-func start_door_exit_animation(character : Character) -> void:
+func start_door_exit_animation(character : Character, tp_mode : bool) -> void:
 	# just plays a few animations
 	stored_character = character
 	
@@ -108,6 +109,9 @@ func start_door_exit_animation(character : Character) -> void:
 	character.invulnerable = true 
 	character.controllable = false
 	character.movable = false
+	
+	if !tp_mode:
+		emit_signal("exit", character, entering)
 	
 	animate_door("open")
 	character.anim_player.play("exit_door")
