@@ -63,7 +63,13 @@ func start_pipe_ground_pound_animation(character : Character) -> void:
 	character.movable = false
 	character.sprite.rotation = 0
 	character.global_position.y = global_position.y + -22
-	
+
+	if character.state != null && character.state.name == "GroundPoundState":   # ====================================================
+		character.state = null													# | This is for local teleportation. If this wasn't  |
+																				# | here, you would exit while still ground pounding |
+																				# | if you entered from a pipe with a ground pound.  |
+																				# ====================================================
+
 	character.sprite.animation = "groundPound" + ("Right" if character.facing_direction == 1 else "Left")
 	character.sprite.playing = true
 
@@ -136,8 +142,8 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 	#this next line is kinda janky but hopefully it should set the animation after the above property
 	#finishes animating, basically it has duration 0 and a delay the same length as the duration of the above line
 	# warning-ignore: return_value_discarded
-	tween.interpolate_property(character.sprite, "animation", null, "pipeExit" + \
-			("Right" if character.facing_direction == 1 else "Left"), 0, 0, 2, exiting_pipe_length)
+	tween.interpolate_property(character.sprite, "animation", "", "pipeExit" + \
+			("Right" if character.facing_direction == 1 else "Left"), 0.01, 0, 2, exiting_pipe_length)
 	
 	# warning-ignore: return_value_discarded
 	tween.interpolate_callback(audio_player, 0.5, "play")
@@ -163,7 +169,7 @@ func pipe_exit_anim_finished(_animation : String, character : Character):
 	character.set_collision_layer_bit(1, true)
 	character.set_inter_player_collision(true) 
 	
-	character.sprite.animation = "pipeExit" + ("Right" if character.facing_direction == 1 else "Left")
+	stored_character = null
 
 	
 func _tween_all_completed() -> void:

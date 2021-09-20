@@ -46,12 +46,6 @@ func local_tp(entering_character : Character, entering):
 		entering_character.invulnerable = false
 		entering_character.controllable = true
 		entering_character.movable = true
-
-	if character.state != null && character.state.name == "GroundPoundState":  # ====================================================
-		character.set_state_by_name("GroundPoundEndState")                     # | This is for local teleportation. If this wasn't  |
-																			   # | here, you would exit while still ground pounding |
-	character.state = null                                                     # | if you entered from a pipe with a ground pound.  |
-																			   # ====================================================
 	exit_local_teleport()
 
 func find_local_pair():
