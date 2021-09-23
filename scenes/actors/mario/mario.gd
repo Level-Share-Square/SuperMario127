@@ -398,7 +398,7 @@ func set_powerup(powerup_node: Node, set_temporary_music: bool) -> void:
 		powerup._start(0, set_temporary_music)
 		powerup.apply_visuals()
 
-func set_state_by_name(name: String, delta: float) -> void:
+func set_state_by_name(name: String, delta: float = 0.0001) -> void:
 	if is_instance_valid(get_state_node(name)):
 		set_state(get_state_node(name), delta)
 		

@@ -54,7 +54,7 @@
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=52]
 [ext_resource path="res://scenes/editor/assets/layer_icon_press.png" type="Texture" id=53]
 [ext_resource path="res://scenes/editor/assets/search_icon_hover.png" type="Texture" id=54]
-[ext_resource path="res://scenes/actors/objects/entrance_luigi/sprite.png" type="Texture" id=55]
+[ext_resource path="res://scenes/actors/objects/level_entrance_luigi/sprite.png" type="Texture" id=55]
 [ext_resource path="res://scenes/editor/assets/clickable_shadow_arrow.png" type="Texture" id=56]
 [ext_resource path="res://scenes/editor/assets/pencil_tool_hover.png" type="Texture" id=57]
 [ext_resource path="res://assets/tiles/glass/icon.png" type="Texture" id=58]
@@ -613,6 +613,17 @@
 [ext_resource path="res://assets/tiles/crystal/palette_icons/2_slopeR.png" type="Texture" id=611]
 [ext_resource path="res://assets/tiles/crystal/palette_icons/5_slopeR.png" type="Texture" id=612]
 [ext_resource path="res://assets/tiles/crystal/palette_icons/3_slopeR.png" type="Texture" id=613]
+
+
+
+
+
+
+
+
+
+
+
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"

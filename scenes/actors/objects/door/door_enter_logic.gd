@@ -2,6 +2,7 @@
 extends Node2D
 
 signal start_door_logic
+signal exit
 
 onready var area2d : Area2D = $Area2D
 onready var tween : Tween = $Tween
@@ -20,8 +21,12 @@ export (float) var entering_door_length := 0.75
 export (float) var exiting_door_length := 0.75
 
 var is_idle := true
+var entering = false
 
 var stored_character : Character
+
+#func _ready():
+#	tween.connect("tween_all_completed", self, "_tween_all_completed")
 
 func _physics_process(_delta : float) -> void:
 	if is_idle:
@@ -40,13 +45,14 @@ func _physics_process(_delta : float) -> void:
 			and !(is_instance_valid(body.powerup) and body.powerup.name == "RainbowPowerup")):
 				start_door_enter_animation(body)
 
-func start_door_ground_pound_animation(_character : Character) -> void:
+func start_door_locked_animation(_character : Character) -> void:
 	pass # to be implemented
 
 func start_door_enter_animation(character : Character) -> void:
 	stored_character = character
 	
 	is_idle = false
+	entering = true
 	
 	character.set_dive_collision(false)
 	character.invulnerable = true 
@@ -84,7 +90,7 @@ func start_door_enter_animation(character : Character) -> void:
 func character_animation_finished(_animation : String, character : Character) -> void:
 	# this is so the door closes after mario enters
 	animate_door("close")
-	emit_signal("start_door_logic", character)
+	emit_signal("start_door_logic", character, entering)
 	
 func animate_door(animation : String = "close") -> void:
 	# this function just plays the door animation, so code doesn't have to repeat
@@ -93,20 +99,25 @@ func animate_door(animation : String = "close") -> void:
 	audio_player.stream = open_audio if animation == "open" else close_audio
 	audio_player.play()
 
-func start_door_exit_animation(character : Character) -> void:
+func start_door_exit_animation(character : Character, tp_mode : bool) -> void:
 	# just plays a few animations
 	stored_character = character
 	
 	is_idle = false
+	entering = false
 	
 	character.invulnerable = true 
 	character.controllable = false
 	character.movable = false
 	
+	if !tp_mode:
+		emit_signal("exit", character, entering)
+	
 	animate_door("open")
 	character.anim_player.play("exit_door")
 	# when mario finishes exiting, run a function (one shot)
 	# warning-ignore: return_value_discarded
+
 	character.anim_player.connect("animation_finished", self, "door_exit_anim_finished", [character], CONNECT_ONESHOT)
 
 	# warning-ignore: return_value_discarded
@@ -115,6 +126,7 @@ func start_door_exit_animation(character : Character) -> void:
 func door_exit_anim_finished(_animation : String, character : Character) -> void:
 	# closes the door and gives back control to mario
 	is_idle = true
+	entering = false
 	
 	character.velocity = Vector2.ZERO
 	character.invulnerable = false 

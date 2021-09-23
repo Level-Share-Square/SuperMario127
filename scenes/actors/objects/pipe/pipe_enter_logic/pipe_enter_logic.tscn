@@ -1,8 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/actors/objects/pipe/pipe_enter_logic/pipe_enter_logic.gd" type="Script" id=1]
-[ext_resource path="res://scenes/actors/objects/pipe/sound.wav" type="AudioStream" id=2]
-[ext_resource path="res://scenes/actors/objects/pipe/fast_sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/pipe/fast_sound.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/actors/objects/pipe/sound.wav" type="AudioStream" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 2 )
@@ -31,8 +32,8 @@ position = Vector2( 0, -6 )
 shape = SubResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
+stream = ExtResource( 3 )
 
 [node name="AudioFast" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 2 )
 [connection signal="tween_all_completed" from="Tween" to="." method="_tween_all_completed"]

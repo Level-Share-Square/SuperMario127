@@ -394,6 +394,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Swimming.gd"
 }, {
+"base": "GameObject",
+"class": "TeleportObject",
+"language": "GDScript",
+"path": "res://classes/teleport_object.gd"
+}, {
 "base": "Nozzle",
 "class": "TurboNozzle",
 "language": "GDScript",
@@ -552,6 +557,7 @@ _global_script_class_icons={
 "State": "",
 "SubtractionOperation": "",
 "SwimmingState": "",
+"TeleportObject": "",
 "TurboNozzle": "",
 "UtilEnvironment": "",
 "VanishPowerup": "",
@@ -1042,11 +1048,12 @@ ssl/certificates="res://ca-certificates.crt"
 quality/driver/fallback_to_gles2=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
-quality/2d/use_pixel_snap=true
-quality/filters/anisotropic_filter_level=1
+2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_bptc=true
 vram_compression/import_etc=true
+quality/filters/anisotropic_filter_level=1
 limits/buffers/canvas_polygon_buffer_size_kb=1024
 limits/buffers/canvas_polygon_index_buffer_size_kb=1024
 limits/rendering/max_renderable_elements=131072
 environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
+quality/2d/use_pixel_snap=true

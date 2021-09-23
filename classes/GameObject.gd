@@ -3,6 +3,7 @@ extends Node2D
 class_name GameObject
 
 var global := {}
+var editor_aliases := {}
 
 var mode := 0
 var level_data = null
@@ -60,8 +61,10 @@ func get_property_index(key) -> int:
 		index += 1
 	return index
 
-func set_property(key, value, change_level_object = true):
+func set_property(key, value, change_level_object = true, alias = null):
 	self[key] = value
+	if alias != null:
+		editor_aliases[key] = alias
 	if change_level_object and is_savable_property(key):
 		var level_object_ref = level_object.get_ref()
 		var index = get_property_index(key)
@@ -78,11 +81,19 @@ func set_property(key, value, change_level_object = true):
 				modulate = color
 	if mode == 1:
 		emit_signal("property_changed", key, value)
-				
 
-func set_property_by_index(index, value, change_level_object):
+func get_editor_alias(key):
+	return editor_aliases[key]
+
+func has_editor_alias(key):
+	for i in editor_aliases.keys():
+		if i == key:
+			return true
+	return false
+	
+func set_property_by_index(index, value, change_level_object, alias = null):
 	var key = (base_savable_properties + savable_properties)[index]
-	set_property(key, value, change_level_object)
+	set_property(key, value, change_level_object, alias)
 	
 func _set_properties():
 	pass
@@ -119,6 +130,11 @@ func _init_signals():
 					if level_object_ref.player_signal_connections[index].size() > 0:
 						has_process_connection = true
 
+func set_bool_alias(key, true_alias, false_alias):
+	if true_alias != null && false_alias != null:
+		property_value_to_name[key] = {true: true_alias, false: false_alias}
+	else:
+		push_error("Bool aliases for %s was not set!" % key)
 
 func on_signal_fire(index):
 	var current_mode = get_tree().get_current_scene().mode
