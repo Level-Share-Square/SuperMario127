@@ -56,15 +56,11 @@ func _ready():
 					match transition_data[0]:
 						"pipe":
 							exit_pipe(obj)
+							pass
 						_:
 							character.position = position
 							Singleton.CurrentLevelData.level_data.vars.transition_data = []
-					
-					character.position = obj[1].position + Vector2(0, obj[1].get_bottom_distance())
-					yield(get_tree().create_timer(0.5), "timeout")
-					if character_string != "character":
-						yield(get_tree().create_timer(1.25), "timeout")
-					obj[1].start_exit_anim(character)
+							pass
 				else:
 					character.position = position
 				Singleton.CurrentLevelData.level_data.vars.transition_data = []

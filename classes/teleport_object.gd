@@ -35,7 +35,12 @@ func local_tp(entering_character : Character, entering):
 	var character = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character) #Holy crap this is bad
 	if entering:
 		tp_pair = find_local_pair()
-		
+		#For now, you can't teleport to another object with the same tag but a different mode
+		if tp_pair.teleportation_mode && !teleportation_mode:
+			entering_character.invulnerable = false
+			entering_character.controllable = true
+			entering_character.movable = true
+			tp_pair = self
 		character.position = tp_pair.global_position
 		character.camera.position = character.position
 		character.camera.skip_to_player = true

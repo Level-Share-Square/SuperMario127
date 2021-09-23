@@ -100,6 +100,7 @@ func start_pipe_enter_animation(character : Character) -> void:
 	character.sprite.animation = "pipe" + ("Right" if character.facing_direction == 1 else "Left")
 	character.sprite.playing = true
 
+
 	var slide_length : float = slide_to_center_length
 
 	#calculate the amount of time it should take based on the players distance from the center
@@ -117,6 +118,8 @@ func start_pipe_enter_animation(character : Character) -> void:
 
 	# warning-ignore: return_value_discarded
 	tween.start()
+	
+	
 
 func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 
@@ -142,21 +145,21 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 	#this next line is kinda janky but hopefully it should set the animation after the above property
 	#finishes animating, basically it has duration 0 and a delay the same length as the duration of the above line
 	# warning-ignore: return_value_discarded
-	tween.interpolate_property(character.sprite, "animation", "", "pipeExit" + \
-			("Right" if character.facing_direction == 1 else "Left"), 0.01, 0, 2, exiting_pipe_length)
+	tween.interpolate_property(character.sprite, "animation", null, "pipeExit" + \
+			("Right" if character.facing_direction == 1 else "Left"), 0.0, 0, 2, exiting_pipe_length)
 	
 	# warning-ignore: return_value_discarded
 	tween.interpolate_callback(audio_player, 0.5, "play")
 
 	# when mario finishes exiting, run a function (one shot)
 	# warning-ignore: return_value_discarded
-	character.anim_player.connect("animation_finished", self, "pipe_exit_anim_finished", [character], CONNECT_ONESHOT)
+	tween.connect("tween_all_completed", self, "pipe_exit_anim_finished", [character], CONNECT_ONESHOT)
 
 	# warning-ignore: return_value_discarded
 	tween.start()
 	
 
-func pipe_exit_anim_finished(_animation : String, character : Character):
+func pipe_exit_anim_finished(character : Character):
 	# closes the door and gives back control to mario
 	is_idle = true
 	entering = false
@@ -176,6 +179,7 @@ func _tween_all_completed() -> void:
 	if entering: #TODO: Make this work w/o if statement
 		emit_signal("pipe_animation_finished", stored_character, entering)
 		stored_character = null
+
 
 func reset_sprite(character : Character): #This is here in case Mario came from a door to a pipe
 	character.z_index = -1

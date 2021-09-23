@@ -45,7 +45,7 @@ func _physics_process(_delta : float) -> void:
 			and !(is_instance_valid(body.powerup) and body.powerup.name == "RainbowPowerup")):
 				start_door_enter_animation(body)
 
-func start_door_ground_pound_animation(_character : Character) -> void:
+func start_door_locked_animation(_character : Character) -> void:
 	pass # to be implemented
 
 func start_door_enter_animation(character : Character) -> void:

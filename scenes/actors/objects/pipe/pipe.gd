@@ -48,6 +48,7 @@ func connect_local_members():
 
 func connect_remote_members():
 	pipe_enter_logic.connect("pipe_animation_finished", self, "change_areas")
+	
 
 func exit_local_teleport():
 	pipe_enter_logic.is_idle = true
@@ -57,7 +58,7 @@ func exit_remote_teleport():
 	pipe_enter_logic.is_idle = true
 
 func start_exit_anim(character):
-	pipe_enter_logic.start_pipe_exit_animation(character)
+	pipe_enter_logic.start_pipe_exit_animation(character, teleportation_mode)
 
 func get_bottom_distance():
 	return pipe_enter_logic.PIPE_BOTTOM_DISTANCE - 30
