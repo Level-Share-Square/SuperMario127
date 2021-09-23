@@ -134,7 +134,6 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 	character.sprite.animation = "pipeRight"
 	character.sprite.playing = true
 	character.sprite.frame = 2
-	reset_sprite(character)
 	
 	if !tp_mode:
 		emit_signal("exit", character, entering)
@@ -157,6 +156,8 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 
 	# warning-ignore: return_value_discarded
 	tween.start()
+	
+	reset_sprite(character)
 	
 
 func pipe_exit_anim_finished(character : Character):

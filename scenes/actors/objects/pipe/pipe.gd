@@ -19,9 +19,11 @@ func _set_property_values():
 	set_property("teleportation_mode", teleportation_mode, true, "Teleport Mode")
 	set_bool_alias("teleportation_mode", "Remote", "Local")
 
+func _init():
+	teleportation_mode = true
+	object_type = "pipe"
 
 func _ready():
-	object_type = "pipe"
 	.ready() #Calls parent class "TeleportObject"
 
 	if rotation != 0 and enabled: #TODO: Vertical & Lateral pipes

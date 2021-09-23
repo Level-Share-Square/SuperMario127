@@ -54,32 +54,33 @@ func _ready():
 					character.controllable = false
 					
 					match transition_data[0]:
-						"pipe":
-							exit_pipe(obj)
+						"pipe", "door":
+							exit_teleport(obj)
 							pass
 						_:
+							push_error("Remote teleport unsuccessful! %s has an invalid object type!" % transition_data[1])
 							character.position = position
 							Singleton.CurrentLevelData.level_data.vars.transition_data = []
 							pass
 				else:
 					character.position = position
-				Singleton.CurrentLevelData.level_data.vars.transition_data = []
+				_cleanup()
+
 
 func exit_teleport(obj : Array):
-	character.spawn_pos = position
-	character.get_node("Spotlight").enabled = false
-	character.scale = Vector2(abs(scale.x), scale.y)
-	if scale.x < 0:
-		character.facing_direction = -character.facing_direction
-	character.visible = visible
-
-func exit_pipe(obj : Array):
 	if transition_data[2] == true: #Remember, true = remote, false = local
-		character.position = obj[1].position + Vector2(0, obj[1].get_bottom_distance())
+		if obj[1].teleportation_mode != true:
+			character.position = position
+			_cleanup()
+			return
+		character.position = obj[1].position
+		character.sprite.modulate = Color(1.0, 1.0, 1.0, 0.0)
+		if obj[1].object_type == "pipe":
+			character.position = obj[1].position + Vector2(0, obj[1].get_bottom_distance())
 		yield(get_tree().create_timer(0.5), "timeout")
 		if character_string != "character":
 			yield(get_tree().create_timer(1.25), "timeout")
-			obj[1].start_exit_anim(character)
+		obj[1].start_exit_anim(character)
 
 		if transition_character_data.size() > 0:
 			character.health = transition_character_data[0]
@@ -91,6 +92,17 @@ func exit_pipe(obj : Array):
 				character.set_powerup(character.get_powerup_node(transition_character_data[4][0]), transition_character_data[4][2])
 				character.powerup.time_left = transition_character_data[4][1]
 			get_tree().get_current_scene().switch_timer = transition_character_data[5]
-	else:
-		pass
-	exit_teleport(obj)
+
+func _cleanup():
+	Singleton.CurrentLevelData.level_data.vars.transition_data = []
+	
+	character.velocity = Vector2.ZERO
+	character.invulnerable = false 
+	character.controllable = true
+	character.movable = true
+	character.spawn_pos = position
+	character.get_node("Spotlight").enabled = false
+	character.scale = Vector2(abs(scale.x), scale.y)
+	if scale.x < 0:
+		character.facing_direction = -character.facing_direction
+	character.visible = visible

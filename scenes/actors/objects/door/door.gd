@@ -12,6 +12,7 @@ func _set_properties() -> void:
 	editable_properties = ["area_id","destination_tag", "teleportation_mode"]
 	
 func _set_property_values() -> void:
+
 	set_property("area_id", area_id)
 	set_property("destination_tag", destination_tag)
 	set_property("tag", tag)
@@ -20,10 +21,11 @@ func _set_property_values() -> void:
 	set_bool_alias("teleportation_mode", "Remote", "Local")
 
 
+func _init():
+	teleportation_mode = false
+	object_type = "door"
 
 func _ready() -> void:
-	object_type = "door"
-	teleportation_mode = false
 	.ready() #calls parent class "TeleportObject"
 	if mode == 1:
 		tag = "none"
@@ -48,13 +50,16 @@ func connect_local_members():
 	door_enter_logic.connect("exit", self, "_start_local_transition")
 
 func connect_remote_members():
-	pass
+	door_enter_logic.connect("start_door_logic", self, "change_areas")
+
+func start_exit_anim(character):
+	door_enter_logic.start_door_exit_animation(character, teleportation_mode)
 
 func exit_local_teleport():
 	if tp_pair != self:
 		door_enter_logic.is_idle = true
 
 func exit_remote_teleport():
-	pass
+	door_enter_logic.is_idle = true
 
 

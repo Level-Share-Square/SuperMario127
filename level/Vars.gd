@@ -6,9 +6,7 @@ var max_red_coins := 0
 var shine_shards_collected := [[0, []]]
 var max_shine_shards := 0
 var nozzles_collected = ["null"]
-var teleporters = [] #Unused for now...
-var doors = [] #Soon becoming deprecated...
-var pipes = [] #Soon becoming deprecated...
+var teleporters = []
 var transition_data = []
 var transition_character_data = []
 var transition_character_data_2 = []
@@ -28,8 +26,7 @@ func reload():
 func reset_counters():
 	max_red_coins = 0
 	max_shine_shards = 0
-	doors = []
-	pipes = []
+	teleporters = []
 	liquids = []
 	checkpoints = []
 	current_liquid_id = 0

@@ -36,15 +36,12 @@ func local_tp(entering_character : Character, entering):
 	if entering:
 		tp_pair = find_local_pair()
 		#For now, you can't teleport to another object with the same tag but a different mode
-		if tp_pair.teleportation_mode && !teleportation_mode:
-			entering_character.invulnerable = false
-			entering_character.controllable = true
-			entering_character.movable = true
+		if tp_pair.teleportation_mode && teleportation_mode == false:
 			tp_pair = self
 		character.position = tp_pair.global_position
 		character.camera.position = character.position
 		character.camera.skip_to_player = true
-		tp_tween.interpolate_callback(tp_pair.get("%s_enter_logic" % tp_pair.object_type), WAIT_TIME, "start_%s_exit_animation" % tp_pair.object_type, character, teleportation_mode)
+		tp_tween.interpolate_callback(tp_pair, WAIT_TIME, "start_exit_anim", character)
 		tp_tween.start()
 
 	else:
