@@ -8,8 +8,8 @@ var stored_character : Character
 const OPEN_DOOR_WAIT = 0.45
 
 func _set_properties() -> void:
-	savable_properties = ["area_id", "destination_tag", "tag", "teleport_to_tag", "teleportation_mode"]
-	editable_properties = ["area_id","destination_tag", "teleportation_mode"]
+	savable_properties = ["tag", "teleport_to_tag", "door_tag", "area_id", "destination_tag", "teleportation_mode"]
+	editable_properties = ["area_id", "destination_tag", "teleportation_mode"]
 	
 func _set_property_values() -> void:
 
@@ -28,10 +28,14 @@ func _init():
 func _ready() -> void:
 	.ready() #calls parent class "TeleportObject"
 	if mode == 1:
+		if teleport_to_tag != null || teleport_to_tag != "none":
+			destination_tag = teleport_to_tag
+		if door_tag != null || door_tag != "none":
+			destination_tag = door_tag
+			door_tag = "none"
 		tag = "none"
 		teleport_to_tag = "none"
 		_set_property_values()
-		
 	if is_preview:
 		z_index = 0
 		sprite.z_index = 0
