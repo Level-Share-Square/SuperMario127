@@ -5,7 +5,7 @@ class_name GameObject
 var global := {}
 var editor_aliases := {}
 
-var mode := 0
+var mode : int = 0
 var level_data = null
 var level_area = null
 var level_object = null

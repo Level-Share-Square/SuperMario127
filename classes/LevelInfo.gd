@@ -154,6 +154,7 @@ func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
 		var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
 
 func get_level_background_texture() -> StreamTexture:
+	var temp = get_level_data()
 	var level_background = get_level_data().areas[spawn_area].settings.sky 
 	var background_resource = Singleton.CurrentLevelData.background_cache[level_background]
 	return background_resource.texture
