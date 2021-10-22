@@ -17,8 +17,10 @@ var destination_tag := "default_teleporter"
 var tp_pair : TeleportObject
 
 ## For older levels with doors only
-var tag : String = "none"
-var teleport_to_tag : String = "none"
+var tag : String
+var teleport_to_tag : String
+var door_tag : String
+var pipe_tag : String
 ###
 
 var tp_tween = Tween.new()

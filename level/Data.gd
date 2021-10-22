@@ -1,6 +1,6 @@
 class_name LevelData
 
-var current_format_version := "0.4.8"
+var current_format_version := "0.4.9"
 var name := "My Level"
 var areas = []
 var functions = {}
@@ -217,6 +217,9 @@ func load_in(code):
 
 	if result.format_version == "0.4.7":
 		result = conversion_util.convert_047_to_048(result)
+		
+	if result.format_version == "0.4.8":
+		result = conversion_util.convert_048_to_049(result)
 
 	assert(result.format_version)
 	assert(result.name)
@@ -341,3 +344,4 @@ func get_encoded_level_data():
 		level_string += "],"
 	level_string.erase(level_string.length() - 1, 1)
 	return level_string
+

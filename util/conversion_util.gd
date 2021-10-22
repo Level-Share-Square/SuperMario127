@@ -77,6 +77,16 @@ static func convert_047_to_048(result):
 			area_result.objects = new_objects
 	return result
 
+static func convert_048_to_049(result):
+	result.format_version = "0.4.9"
+	var current_id = 0
+	for area_result in result.areas.size():
+		for layer in ["foreground_tiles", "very_foreground_tiles", "background_tiles", "very_background_tiles"]:
+			for chunk in result.areas[area_result][layer].size():
+				if get_chunk_tile_id(result.areas[area_result][layer][chunk]) == "08":
+					result.areas[area_result][layer][chunk] = set_chunk_tile_id(result.areas[area_result][layer][chunk], "35") #gigachad hardcoding
+	return result
+
 static func compareVersions(version, other) -> int:
 	var v = version.split(".")
 	var o = other.split(".")
@@ -90,3 +100,28 @@ static func compareVersions(version, other) -> int:
 			return 1 #bigger version
 
 	return 0 #same version
+
+static func get_chunk_tile_id(chunk : String):
+	var chunk_parts = chunk.split("*")
+	if ":" in chunk_parts[0]:
+		chunk_parts[0] = chunk_parts[0].split(":")
+		return chunk_parts[0][1].left(2)
+	else:
+		return chunk_parts[0].left(2)
+	
+static func set_chunk_tile_id(chunk : String, new_id : String):
+	var chunk_parts
+	if "*" in chunk: 
+		chunk_parts = chunk.split("*")
+		chunk_parts.insert(1, "*")
+	else: 
+		chunk_parts = [chunk, ""]
+	if ":" in chunk_parts[0]:
+		chunk_parts[0] = chunk_parts[0].split(":")
+		chunk_parts[0][1] = new_id + chunk_parts[0][1].right(2)
+		chunk_parts[0] = chunk_parts[0][0] + ":" + chunk_parts[0][1]
+	chunk_parts[0] = new_id + chunk_parts[0].right(2)
+	var reconstituted = ""
+	for i in chunk_parts.size():
+		reconstituted += chunk_parts[i]
+	return reconstituted

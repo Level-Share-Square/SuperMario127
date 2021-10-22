@@ -27,7 +27,6 @@ onready var color_sprite = $TextureRect/Recolorable
 func _set_properties():
 	savable_properties = ["width", "height", "color", "render_in_front", "tag", "tap_mode"]
 	editable_properties = ["width", "height", "color", "render_in_front", "tag", "tap_mode"]
-	value_to_name = { "tap_mode": { false: "Move", true: "Scale" } }
 
 func _set_property_values():
 	set_property("width", width, true)
@@ -36,6 +35,7 @@ func _set_property_values():
 	set_property("render_in_front", render_in_front, true)
 	set_property("tag", tag, true)
 	set_property("tap_mode", tap_mode, true)
+	set_bool_alias("tap_mode", "Scale", "Move")
 
 func _ready():
 	var id = Singleton.CurrentLevelData.level_data.vars.current_liquid_id

@@ -1,4 +1,4 @@
-[gd_scene load_steps=639 format=2]
+[gd_scene load_steps=637 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -133,8 +133,6 @@
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/icon.png" type="Texture" id=131]
 [ext_resource path="res://scenes/actors/objects/goomba/preview.png" type="Texture" id=132]
 [ext_resource path="res://scenes/actors/objects/goomba/icon.png" type="Texture" id=133]
-[ext_resource path="res://assets/tiles/cave/icon.png" type="Texture" id=134]
-[ext_resource path="res://assets/tiles/cave/icon_slab.png" type="Texture" id=135]
 [ext_resource path="res://scenes/actors/objects/red_coin/icon.png" type="Texture" id=136]
 [ext_resource path="res://assets/misc/icon.png" type="Texture" id=137]
 [ext_resource path="res://scenes/actors/objects/snow_platform/icon.png" type="Texture" id=138]
@@ -613,17 +611,6 @@
 [ext_resource path="res://assets/tiles/crystal/palette_icons/2_slopeR.png" type="Texture" id=611]
 [ext_resource path="res://assets/tiles/crystal/palette_icons/5_slopeR.png" type="Texture" id=612]
 [ext_resource path="res://assets/tiles/crystal/palette_icons/3_slopeR.png" type="Texture" id=613]
-
-
-
-
-
-
-
-
-
-
-
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2395,24 +2382,6 @@ items_in_sequence = 4
 index_in_sequence = 3
 icon = ExtResource( 588 )
 preview = ExtResource( 588 )
-
-[node name="Cave" type="Node" parent="PlaceableItems/CaveGroup"]
-script = ExtResource( 24 )
-tileset_id = 8
-change_to = "CaveSlab"
-items_in_sequence = 2
-icon = ExtResource( 134 )
-preview = ExtResource( 134 )
-
-[node name="CaveSlab" type="Node" parent="PlaceableItems/CaveGroup"]
-script = ExtResource( 24 )
-tileset_id = 8
-tile_id = 1
-change_to = "Cave"
-items_in_sequence = 2
-index_in_sequence = 1
-icon = ExtResource( 135 )
-preview = ExtResource( 135 )
 
 [node name="BlackGranite" type="Node" parent="PlaceableItems/CaveGroup"]
 script = ExtResource( 24 )

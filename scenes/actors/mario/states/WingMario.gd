@@ -141,5 +141,5 @@ func _stop(delta):
 			character.set_state_by_name("DiveState", delta)
 
 func _stop_check(_delta):
-	return character.is_grounded() or (character.powerup == null or character.powerup.id != 3) or character.inputs[5][1]
+	return character.is_grounded() or (character.powerup == null or character.powerup.id != "Wing") or character.inputs[5][1]
 
