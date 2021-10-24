@@ -102,10 +102,16 @@ static func compareVersions(version, other) -> int:
 	return 0 #same version
 
 static func get_chunk_tile_id(chunk : String):
-	var chunk_parts = chunk.split("*")
+	var chunk_parts
+	if "*" in chunk: 
+		chunk_parts = chunk.split("*")
+	else: 
+		chunk_parts = [chunk, ""]
 	if ":" in chunk_parts[0]:
-		chunk_parts[0] = chunk_parts[0].split(":")
-		return chunk_parts[0][1].left(2)
+		var tile = chunk_parts[0].split(":")
+		tile[0] = str(tile[0])
+		tile[1] = str(tile[1]) #For some weird reason, .split() doesn't always carry over the agument's type
+		return tile[1].left(2)
 	else:
 		return chunk_parts[0].left(2)
 	
@@ -117,9 +123,11 @@ static func set_chunk_tile_id(chunk : String, new_id : String):
 	else: 
 		chunk_parts = [chunk, ""]
 	if ":" in chunk_parts[0]:
-		chunk_parts[0] = chunk_parts[0].split(":")
-		chunk_parts[0][1] = new_id + chunk_parts[0][1].right(2)
-		chunk_parts[0] = chunk_parts[0][0] + ":" + chunk_parts[0][1]
+		var tile = chunk_parts[0].split(":")
+		tile[0] = str(tile[0])
+		tile[1] = str(tile[1]) #For some weird reason, .split() doesn't always carry over the agument's type
+		tile[1] = new_id + chunk_parts[0][1].right(2)
+		chunk_parts[0] = tile[0] + ":" + tile[1]
 	chunk_parts[0] = new_id + chunk_parts[0].right(2)
 	var reconstituted = ""
 	for i in chunk_parts.size():

@@ -1,4 +1,4 @@
-Thank you for downloading the Super Mario 127 0.7.0 demo! 
+Thank you for downloading the Super Mario 127 0.7.1 demo! 
 This game is still in development, so expect bugs.
 
 Default controls:
@@ -16,6 +16,7 @@ SuperMakerPlayer - Project Lead, Programming
 NoThisIsStupider - Programming
 Benedani - Programming
 Certi - Programming
+PlugN'Play - Programming
 
 TrafficConeGod - Programming
 JuPaHe64 - Programming
@@ -36,6 +37,7 @@ YoshiDev - Sprites
 JerryStuff - Music
 AM4 - Music
 PlugN'Play - Music
+FastMario - Music
 
 Sample Levels:
 Tutorial Hills - NingiGamer64
@@ -66,7 +68,7 @@ AM4 - Rainbow Mario (Remix)
 AM4 - Wing Mario (Remix)
 AM4 - Vanish Mario (Remix)
 AM4 - Secret Course (Remix)
-PlugN'Play - SM63 Title Theme (Remix)
+FastMario - Waltz of the Boos (Remix)
 
 Other:
 PFRA - Delfino Font: https://mfgg.net/index.php?act=resdb&param=02&c=6&id=20041
