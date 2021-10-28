@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/actors/objects/goomba/goomba.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/goomba/frames.tres" type="SpriteFrames" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/actors/objects/goomba/poof.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/actors/objects/goomba/stomp.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/actors/objects/goomba/body.gd" type="Script" id=7]
+[ext_resource path="res://scenes/actors/objects/goomba/recolorable_frames.tres" type="SpriteFrames" id=8]
 
 [sub_resource type="RayShape2D" id=1]
 length = 10.0
@@ -114,6 +115,9 @@ script = ExtResource( 7 )
 
 [node name="Sprite" type="AnimatedSprite" parent="Goomba"]
 frames = ExtResource( 2 )
+
+[node name="Recolorable" type="AnimatedSprite" parent="Goomba"]
+frames = ExtResource( 8 )
 
 [node name="GroundCollisionL" type="CollisionShape2D" parent="Goomba"]
 position = Vector2( -6.5, -1 )

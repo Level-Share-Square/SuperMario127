@@ -10,6 +10,9 @@ onready var color_manager = $Color
 var property_node : Node
 var base_color : Color # color without transparency
 
+func _process(delta):
+	pass
+	
 func _input(event):
 	if !get_parent().get_parent().visible:
 		return
@@ -28,7 +31,7 @@ func _input(event):
 	
 	# Is in sprite - check if its in the circle
 	selector.position = mouse_pos
-	base_color = Color.from_hsv(atan2(normal_coordinates.x, normal_coordinates.y) / (2*PI), normal_coordinates.length(), gradient_selector.value)
+	base_color = Color.from_hsv((atan2(-normal_coordinates.x, -normal_coordinates.y) / (2*PI)) + 0.5, normal_coordinates.length(), gradient_selector.value)
 	gradient_selector.modulate = base_color
 	new_color_preview.modulate = base_color
 	color_manager.set_value(base_color)

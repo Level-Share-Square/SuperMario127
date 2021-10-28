@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/yi_underground_remix.ogg-6bf09e942ab56d808c662cd789216fd1.oggstr"
+
+[deps]
+
+source_file="res://assets/music/yi_underground_remix.ogg"
+dest_files=[ "res://.import/yi_underground_remix.ogg-6bf09e942ab56d808c662cd789216fd1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=12.0
