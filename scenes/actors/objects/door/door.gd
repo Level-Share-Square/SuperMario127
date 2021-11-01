@@ -28,11 +28,6 @@ func _init():
 func _ready() -> void:
 	.ready() #calls parent class "TeleportObject"
 	if mode == 1:
-		if teleport_to_tag != null || teleport_to_tag != "none":
-			destination_tag = teleport_to_tag
-		if door_tag != null || door_tag != "none":
-			destination_tag = door_tag
-			door_tag = "none"
 		tag = "none"
 		teleport_to_tag = "none"
 		_set_property_values()

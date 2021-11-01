@@ -130,6 +130,7 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 	character.invulnerable = true
 	character.controllable = false
 	character.movable = false
+	character.global_position = global_position
 	
 	character.sprite.animation = "pipeRight"
 	character.sprite.playing = true
