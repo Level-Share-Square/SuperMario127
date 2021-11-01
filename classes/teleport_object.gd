@@ -57,6 +57,8 @@ func find_local_pair():
 		var condition = i[0] == destination_tag.to_lower() && i[1] != self
 		if teleport_to_tag != "none":
 			condition = i[0] == teleport_to_tag.to_lower() && i[1] != self
+		if door_tag != "none" || door_tag != null:
+			condition = i[0] == door_tag.to_lower() && i[1] != self
 		if condition:
 			return i[1]
 		print(i)
