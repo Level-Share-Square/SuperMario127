@@ -38,11 +38,13 @@ func _ready() -> void:
 	if scale.x < 1:
 		scale.x = abs(scale.x)
 		sprite.flip_h = true
-	var append_tag = destination_tag.to_lower()
+	var append_tag 
 	if teleport_to_tag != "none" || teleport_to_tag != null:
 		append_tag = teleport_to_tag.to_lower()
 	if door_tag != "none" || door_tag != null:
 		append_tag = door_tag.to_lower()
+	if destination_tag != "default_teleporter" || destination_tag != null:
+		append_tag = destination_tag.to_lower()
 	Singleton.CurrentLevelData.level_data.vars.teleporters.append([append_tag, self])
 
 
