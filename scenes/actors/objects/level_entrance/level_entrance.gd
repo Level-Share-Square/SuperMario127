@@ -68,6 +68,7 @@ func _ready():
 
 
 func exit_teleport(obj : Array):
+	print(obj)
 	if transition_data[2] == true: #Remember, true = remote, false = local
 		if obj[1].teleportation_mode != true:
 			character.position = position
@@ -92,6 +93,7 @@ func exit_teleport(obj : Array):
 				character.set_powerup(character.get_powerup_node(transition_character_data[4][0]), transition_character_data[4][2])
 				character.powerup.time_left = transition_character_data[4][1]
 			get_tree().get_current_scene().switch_timer = transition_character_data[5]
+		_cleanup()
 
 func _cleanup():
 	Singleton.CurrentLevelData.level_data.vars.transition_data = []

@@ -27,7 +27,10 @@ func _init():
 
 func _ready() -> void:
 	.ready() #calls parent class "TeleportObject"
-	if mode == 1:
+	if mode == 0: convert_to_0_7_1()
+	elif mode == 1:
+		convert_to_0_7_1()
+		door_tag = "none"
 		tag = "none"
 		teleport_to_tag = "none"
 		_set_property_values()
@@ -65,4 +68,10 @@ func exit_local_teleport():
 func exit_remote_teleport():
 	door_enter_logic.is_idle = true
 
-
+func convert_to_0_7_1():
+	var true_tag = destination_tag
+	if teleport_to_tag != "none":
+		true_tag = teleport_to_tag
+	if door_tag != "none":
+		true_tag = door_tag
+	destination_tag = true_tag
