@@ -95,7 +95,7 @@ func _input(event):
 				
 			if event.button_index == BUTTON_LEFT:
 				for button in menu_buttons:
-					if get_node(button).is_hovered():
+					if get_node(button) and get_node(button).is_hovered():
 						return
 
 			result = [
