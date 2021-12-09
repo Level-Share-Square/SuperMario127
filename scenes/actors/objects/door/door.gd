@@ -8,15 +8,13 @@ var stored_character : Character
 const OPEN_DOOR_WAIT = 0.45
 
 func _set_properties() -> void:
-	savable_properties = ["tag", "teleport_to_tag", "door_tag", "area_id", "destination_tag", "teleportation_mode"]
+	savable_properties = ["area_id", "destination_tag", "teleportation_mode"]
 	editable_properties = ["area_id", "destination_tag", "teleportation_mode"]
 	
 func _set_property_values() -> void:
 
 	set_property("area_id", area_id)
 	set_property("destination_tag", destination_tag)
-	set_property("tag", tag)
-	set_property("teleport_to_tag", teleport_to_tag)
 	set_property("teleportation_mode", teleportation_mode, true, "Teleport Mode")
 	set_bool_alias("teleportation_mode", "Remote", "Local")
 
@@ -27,13 +25,6 @@ func _init():
 
 func _ready() -> void:
 	.ready() #calls parent class "TeleportObject"
-	if mode == 0: convert_to_0_7_1()
-	elif mode == 1:
-		convert_to_0_7_1()
-		door_tag = "none"
-		tag = "none"
-		teleport_to_tag = "none"
-		_set_property_values()
 	if is_preview:
 		z_index = 0
 		sprite.z_index = 0
@@ -42,10 +33,7 @@ func _ready() -> void:
 		scale.x = abs(scale.x)
 		sprite.flip_h = true
 	var append_tag 
-	if teleport_to_tag != "none" || teleport_to_tag != null:
-		append_tag = teleport_to_tag.to_lower()
-	if door_tag != "none" || door_tag != null:
-		append_tag = door_tag.to_lower()
+
 	if destination_tag != "default_teleporter" || destination_tag != null:
 		append_tag = destination_tag.to_lower()
 	Singleton.CurrentLevelData.level_data.vars.teleporters.append([append_tag, self])
@@ -67,11 +55,3 @@ func exit_local_teleport():
 
 func exit_remote_teleport():
 	door_enter_logic.is_idle = true
-
-func convert_to_0_7_1():
-	var true_tag = destination_tag
-	if teleport_to_tag != "none":
-		true_tag = teleport_to_tag
-	if door_tag != "none":
-		true_tag = door_tag
-	destination_tag = true_tag

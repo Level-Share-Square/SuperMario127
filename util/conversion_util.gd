@@ -80,11 +80,27 @@ static func convert_047_to_048(result):
 static func convert_048_to_049(result):
 	result.format_version = "0.4.9"
 	var current_id = 0
-	for area_result in result.areas.size():
+	for area_result in result.areas:
 		for layer in ["foreground_tiles", "very_foreground_tiles", "background_tiles", "very_background_tiles"]:
-			for chunk in result.areas[area_result][layer].size():
-				if get_chunk_tile_id(result.areas[area_result][layer][chunk]) == "08":
-					result.areas[area_result][layer][chunk] = set_chunk_tile_id(result.areas[area_result][layer][chunk], "35") #gigachad hardcoding
+			for chunk in area_result[layer].size():
+				if get_chunk_tile_id(area_result[layer][chunk]) == "08":
+					area_result[layer][chunk] = set_chunk_tile_id(area_result[layer][chunk], "35") #gigachad hardcoding
+		if typeof(area_result) == TYPE_DICTIONARY:
+			var new_objects = []
+			for object_result in area_result.objects:
+				var object = object_result
+				if object.type_id == 48: #chad hardcoding
+					var new_tag = "default_teleporter" #=================================
+					if object.properties[5] != "none":
+						new_tag = object.properties[6]
+					if object.properties[7] != "default":
+						new_tag = object.properties[7]  #This is why we need a rewrite
+					object.properties[5] = 0
+					object.properties[6] = new_tag
+					object.properties[7] = false
+					object.properties.resize(7)
+				new_objects.append(object)
+			area_result.objects = new_objects #==========================================
 	return result
 
 static func compareVersions(version, other) -> int:

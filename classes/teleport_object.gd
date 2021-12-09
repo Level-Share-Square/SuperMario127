@@ -16,10 +16,7 @@ var object_type := "unknown"
 var destination_tag := "default_teleporter"
 var tp_pair : TeleportObject
 
-## For older levels with doors only
-var tag : String = "none"
-var teleport_to_tag : String = "none"
-var door_tag : String = "none"
+## For older levels only
 var pipe_tag : String = "none"
 ###
 
@@ -54,12 +51,7 @@ func local_tp(entering_character : Character, entering):
 
 func find_local_pair():
 	for i in Singleton.CurrentLevelData.level_data.vars.teleporters:
-		var condition = i[0] == teleport_to_tag.to_lower() && i[1] != self
-		if door_tag != "none":
-			condition = i[0] == door_tag.to_lower() && i[1] != self #This really shouldn't have to exist...
-		if destination_tag != "default_teleporter" || door_tag != null:
-			condition = i[0] == destination_tag.to_lower() && i[1] != self
-		if condition:
+		if i[0] == destination_tag.to_lower() && i[1] != self:
 			return i[1]
 		print(i)
 	return self
