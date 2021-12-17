@@ -53,7 +53,6 @@ func find_local_pair():
 	for i in Singleton.CurrentLevelData.level_data.vars.teleporters:
 		if i[0] == destination_tag.to_lower() && i[1] != self:
 			return i[1]
-		print(i)
 	return self
 
 func get_character_screen_position(character : Character) -> Vector2:
