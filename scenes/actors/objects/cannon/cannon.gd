@@ -176,9 +176,7 @@ func fire_cannon() -> void:
 
 func return_camera_focus() -> void:
 	stored_character.camera.focus_on = null
-	# "unfocusing" is a property that makes the camera return to the player smoothly rather than using normal speed lerping
-	# we don't want that to happen here (too slow) so we set it to false
-	stored_character.camera.unfocusing = false
+
 
 #used to re-enable the entrance collision only when a player exits the vicinity
 func _on_NearbyCharacterDetection_body_exited(body : PhysicsBody2D) -> void:

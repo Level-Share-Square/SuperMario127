@@ -75,10 +75,9 @@ static func convert_047_to_048(result):
 				if object.type_id == 23: #chad hardcoding
 					object.properties[0].y += 4
 				elif object.type_id == 48:
-					print(object)
 					object.properties.resize(8)
 					door_container.append(object)
-					pass
+					continue
 				new_objects.append(object)
 			if door_container != null:
 				var door_pairs = []
@@ -86,7 +85,7 @@ static func convert_047_to_048(result):
 				for object in door_container:
 					var ref_tag = object.properties[5]
 					for obj in door_container:
-						if obj.properties[6] == ref_tag:
+						if obj.properties[6] == ref_tag && obj.properties[6] != "default":
 							var new_tag = "converted_door_pair" + str(pair_id)
 							obj.properties[7] = new_tag
 							object.properties[7] = new_tag
@@ -96,7 +95,6 @@ static func convert_047_to_048(result):
 							object.properties[6] = new_tag
 							object.properties[5] = new_tag
 				for j in door_container:
-					print(j)
 					new_objects.append(j)
 			area_result.objects = new_objects
 	return result
@@ -114,14 +112,15 @@ static func convert_048_to_049(result):
 			for object_result in area_result.objects:
 				var object = object_result
 				if object.type_id == 48: #===============================================
-					print(object.properties)
+					object.properties.resize(8)
 					var new_tag = "default_teleporter"
-					if object.properties[7] != "default":
+					if typeof(object.properties[7]) == TYPE_STRING:
 						new_tag = object.properties[7]  #This is why we need a rewrite
 					object.properties[5] = 0
-					object.properties[6] = new_tag
+					if object.properties[6] == "default_teleporter" || object.properties[6] == "none":
+						object.properties[6] = new_tag
 					object.properties[7] = false
-					object.properties.resize(7)
+					print(object)
 				new_objects.append(object)
 			area_result.objects = new_objects #==========================================
 	return result
