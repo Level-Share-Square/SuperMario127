@@ -16,11 +16,8 @@ var object_type := "unknown"
 var destination_tag := "default_teleporter"
 var tp_pair : TeleportObject
 
-## For older levels with doors only
-var tag : String
-var teleport_to_tag : String
-var door_tag : String
-var pipe_tag : String
+## For older levels only
+var pipe_tag : String = "none"
 ###
 
 var tp_tween = Tween.new()
@@ -54,12 +51,8 @@ func local_tp(entering_character : Character, entering):
 
 func find_local_pair():
 	for i in Singleton.CurrentLevelData.level_data.vars.teleporters:
-		var condition = i[0] == destination_tag.to_lower() && i[1] != self
-		if teleport_to_tag != "none":
-			condition = i[0] == teleport_to_tag.to_lower() && i[1] != self
-		if condition:
+		if i[0] == destination_tag.to_lower() && i[1] != self:
 			return i[1]
-		print(i)
 	return self
 
 func get_character_screen_position(character : Character) -> Vector2:
