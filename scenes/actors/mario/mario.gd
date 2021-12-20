@@ -956,11 +956,10 @@ func hide_shine_dance_shine():
 	$CollectedShineOutline.visible = false
 
 func _on_powerup_state_changed(powerup_id: String): # ====================================================================
-	match powerup_id:                            # | This is here to keep sound.gd from polling every frame to see if | 
-												 # | the player gets a metal powerup so it can switch effects buses.  |
-		"Normal":                                # ====================================================================
+	match powerup_id:                               # | This is here to keep sound.gd from polling every frame to see if | 
+													# | the player gets a metal powerup so it can switch effects buses.  |
+		"Normal":									# ====================================================================
 			sound_player.voice_effects.set_bus(sound_player.normal_bus)
-
 		"Metal":                                           
 			sound_player.voice_effects.set_bus(sound_player.metal_bus)
 

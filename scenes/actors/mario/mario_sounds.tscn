@@ -366,4 +366,4 @@ script = ExtResource( 39 )
 
 [node name="Step1" type="AudioStreamPlayer" parent="Footsteps/Metal"]
 stream = ExtResource( 38 )
-volume_db = -14.5
+volume_db = -7.0
