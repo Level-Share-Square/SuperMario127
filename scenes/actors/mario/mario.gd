@@ -3,7 +3,6 @@ extends KinematicBody2D
 class_name Character
 
 signal state_changed
-signal toggle_movement
 
 # Child nodes
 onready var states_node = $States
@@ -222,6 +221,13 @@ var camera : Camera2D
 #)
 
 func _ready():
+	print(Singleton.CurrentLevelData.level_data.vars.transition_data)
+	if Singleton.CurrentLevelData.level_data.vars.transition_data != []:
+		hide()
+		toggle_movement(false)
+	else:
+		show()
+		toggle_movement(true)
 	Singleton.Music.toggle_underwater_music(false)
 	for input in input_names.keys():
 		inputs.append([false, false, str(input)])

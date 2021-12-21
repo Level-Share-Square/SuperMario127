@@ -97,11 +97,7 @@ func exit_teleport(obj : Array):
 
 func _cleanup():
 	Singleton.CurrentLevelData.level_data.vars.transition_data = []
-	
-	character.velocity = Vector2.ZERO
-	character.invulnerable = false 
-	character.controllable = true
-	character.movable = true
+
 	character.spawn_pos = position
 	character.get_node("Spotlight").enabled = false
 	character.scale = Vector2(abs(scale.x), scale.y)

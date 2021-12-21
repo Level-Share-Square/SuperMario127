@@ -122,9 +122,7 @@ func change_areas(entering_character : Character, entering):
 		]
 		entering_character.switch_areas(area_id, 0.5)
 	else:
-		entering_character.invulnerable = false
-		entering_character.controllable = true
-		entering_character.movable = true
+		entering_character.toggle_movement(true)
 		
 		exit_remote_teleport()
 

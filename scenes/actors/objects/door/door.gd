@@ -54,4 +54,5 @@ func exit_local_teleport():
 		door_enter_logic.is_idle = true
 
 func exit_remote_teleport():
+	Singleton.CurrentLevelData.level_data.vars.transition_data = []
 	door_enter_logic.is_idle = true

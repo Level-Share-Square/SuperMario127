@@ -118,10 +118,12 @@ func start_pipe_enter_animation(character : Character) -> void:
 	
 
 func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
-
+	character.show()
 	stored_character = character
 	is_idle = false
 	entering = false
+	
+	character.toggle_movement(false)
 	
 	character.sprite.animation = "pipeRight"
 	character.sprite.playing = true
@@ -154,7 +156,7 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 
 func pipe_exit_anim_finished(character : Character):
 	# exits the pipe and gives back control to mario
-	Singleton.CurrentLevelData.level_data.init()
+	Singleton.CurrentLevelData.level_data.vars.transition_data = []
 	is_idle = true
 	entering = false
 	character.velocity = Vector2.ZERO
