@@ -55,9 +55,7 @@ func start_door_enter_animation(character : Character) -> void:
 	entering = true
 	
 	character.set_dive_collision(false)
-	character.invulnerable = true 
-	character.controllable = false
-	character.movable = false
+	character.toggle_movement(false)
 	character.velocity = Vector2.ZERO
 	character.sprite.rotation = 0
 	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
@@ -128,11 +126,8 @@ func door_exit_anim_finished(_animation : String, character : Character) -> void
 	Singleton.CurrentLevelData.level_data.init()
 	is_idle = true
 	entering = false
-	
 	character.velocity = Vector2.ZERO
-	character.invulnerable = false 
-	character.controllable = true
-	character.movable = true
+	character.toggle_movement(true)
 	# undo collision changes 
 	character.set_collision_layer_bit(1, true)
 	character.set_inter_player_collision(true) 

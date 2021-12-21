@@ -58,9 +58,7 @@ func start_pipe_ground_pound_animation(character : Character) -> void:
 	is_idle = false
 	entering = true
 
-	character.invulnerable = true
-	character.controllable = false
-	character.movable = false
+	character.toggle_movement(false)
 	character.sprite.rotation = 0
 	character.global_position.y = global_position.y + -22
 
@@ -91,9 +89,7 @@ func start_pipe_enter_animation(character : Character) -> void:
 	is_idle = false
 	entering = true
 
-	character.invulnerable = true
-	character.controllable = false
-	character.movable = false
+	character.toggle_movement(false)
 	character.sprite.rotation = 0
 	character.global_position.y = global_position.y + -22
 	
@@ -126,11 +122,6 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 	stored_character = character
 	is_idle = false
 	entering = false
-	
-	character.invulnerable = true
-	character.controllable = false
-	character.movable = false
-	character.global_position = global_position
 	
 	character.sprite.animation = "pipeRight"
 	character.sprite.playing = true
@@ -166,11 +157,8 @@ func pipe_exit_anim_finished(character : Character):
 	Singleton.CurrentLevelData.level_data.init()
 	is_idle = true
 	entering = false
-	
 	character.velocity = Vector2.ZERO
-	character.invulnerable = false 
-	character.controllable = true
-	character.movable = true
+	character.toggle_movement(true)
 	# undo collision changes 
 	character.set_collision_layer_bit(1, true)
 	character.set_inter_player_collision(true) 

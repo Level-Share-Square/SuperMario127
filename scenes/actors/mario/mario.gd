@@ -3,6 +3,7 @@ extends KinematicBody2D
 class_name Character
 
 signal state_changed
+signal toggle_movement
 
 # Child nodes
 onready var states_node = $States
@@ -968,3 +969,9 @@ func _on_powerup_state_changed(powerup_id: String): # ==========================
 
 		_:
 			pass
+
+func toggle_movement(var value : bool):
+	invulnerable = !value
+	controllable = value
+	movable = value
+	
