@@ -224,8 +224,7 @@ func _ready():
 	Singleton.Music.toggle_underwater_music(false)
 	for input in input_names.keys():
 		inputs.append([false, false, str(input)])
-	for i in $Powerups.get_children():
-		i.connect("powerup_state_changed", self, "_on_powerup_state_changed")
+
 
 puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_big_attacking, is_heavy, is_dead, is_controllable): # Ok slave
 	next_position = pos
@@ -238,7 +237,7 @@ puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_a
 	heavy = is_heavy
 	dead = is_dead
 	controllable = is_controllable
-
+		
 func exploded(explosion_pos : Vector2) -> void:
 	if !invincible:
 		damage_with_knockback(explosion_pos, 2)
@@ -954,6 +953,10 @@ func set_dive_collision(is_enabled : bool) -> void:
 func hide_shine_dance_shine():
 	$CollectedShine.visible = false
 	$CollectedShineOutline.visible = false
+	
+func _connect_signals():
+	for i in $Powerups.get_children():
+		i.connect("powerup_state_changed", self, "_on_powerup_state_changed")
 
 func _on_powerup_state_changed(powerup_id: String): # ====================================================================
 	match powerup_id:                               # | This is here to keep sound.gd from polling every frame to see if | 
