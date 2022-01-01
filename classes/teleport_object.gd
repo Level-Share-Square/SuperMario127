@@ -30,23 +30,22 @@ func ready():
 		connect_local_members()
 
 func local_tp(entering_character : Character, entering):
-	#TODO: REMOVE UPWARD CALLS ASAP
-	var character = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character) #Holy crap this is bad
 	if entering:
 		tp_pair = find_local_pair()
 		#For now, you can't teleport to another object with the same tag but a different mode
 		if tp_pair.teleportation_mode && teleportation_mode == false:
 			tp_pair = self
-		character.position = tp_pair.global_position
-		character.camera.position = character.position
-		character.camera.skip_to_player = true
-		tp_tween.interpolate_callback(tp_pair, WAIT_TIME, "start_exit_anim", character)
+		entering_character.position = tp_pair.global_position
+		entering_character.camera.position = entering_character.position
+		entering_character.camera.skip_to_player = true
+		tp_tween.interpolate_callback(tp_pair, WAIT_TIME, "start_exit_anim", entering_character)
 		tp_tween.start()
 
 	else:
 		entering_character.invulnerable = false
 		entering_character.controllable = true
 		entering_character.movable = true
+		
 	exit_local_teleport()
 
 func find_local_pair():
@@ -66,6 +65,14 @@ func get_character_screen_position(character : Character) -> Vector2:
 func change_areas(entering_character : Character, entering):
 	#TODO: REMOVE UPWARD CALLS ASAP
 	var character = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character) #Holy crap this is bad
+	var character2
+	if is_instance_valid(get_tree().get_current_scene().character2):
+			character2 = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character2)
+	var current_character
+	if entering_character == character:
+		current_character = character
+	elif entering_character == character2:
+		current_character == character2
 	if area_id >= Singleton.CurrentLevelData.level_data.areas.size():
 		area_id = Singleton.CurrentLevelData.area
 	if entering:
@@ -74,14 +81,14 @@ func change_areas(entering_character : Character, entering):
 			Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].append(liquid[1].save_pos)
 		
 		var powerup_array = [null, null, null]
-		if is_instance_valid(character.powerup):
-			powerup_array[0] = character.powerup.name
-			powerup_array[1] = character.powerup.time_left
-			powerup_array[2] = character.powerup.play_temp_music
+		if is_instance_valid(current_character.powerup):
+			powerup_array[0] = current_character.powerup.name
+			powerup_array[1] = current_character.powerup.time_left
+			powerup_array[2] = current_character.powerup.play_temp_music
 		
 		var nozzle_name = null
-		if character.nozzle != null:
-			nozzle_name = character.nozzle.name
+		if current_character.nozzle != null:
+			nozzle_name = current_character.nozzle.name
 		
 		Singleton.CurrentLevelData.level_data.vars.transition_character_data = [
 			character.health,
@@ -92,8 +99,7 @@ func change_areas(entering_character : Character, entering):
 			get_tree().get_current_scene().switch_timer
 		]
 		
-		if is_instance_valid(get_tree().get_current_scene().character2):
-			var character2 = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character2)
+		if character2 != null:
 			var nozzle_name_2 = null
 			if character2.nozzle != null:
 				nozzle_name_2 = character2.nozzle.name
