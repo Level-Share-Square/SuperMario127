@@ -6,3 +6,5 @@ scenes/actors/mario/new_anims/animations/walking/mario.png
 scenes/actors/mario/new_anims/animations/idle/mario.png.import
 scenes/actors/mario/new_anims/animations/idle/mario.png
 scenes/actors/mario/new_anims/animation_frames.tres
+bin/
+scenes/menu/loading/loading.tscn
