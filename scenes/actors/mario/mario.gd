@@ -233,6 +233,7 @@ func _ready():
 		inputs.append([false, false, str(input)])
 
 
+#slavery in super mario 127 :flushed:
 puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_big_attacking, is_heavy, is_dead, is_controllable): # Ok slave
 	next_position = pos
 	velocity = vel
@@ -964,6 +965,10 @@ func hide_shine_dance_shine():
 func _connect_signals():
 	for i in $Powerups.get_children():
 		i.connect("powerup_state_changed", self, "_on_powerup_state_changed")
+
+func set_collision(value : bool):
+	set_collision_layer_bit(1, false) # disable collisions w/ most things
+	set_inter_player_collision(false)
 
 func _on_powerup_state_changed(powerup_id: String): # ====================================================================
 	match powerup_id:                               # | This is here to keep sound.gd from polling every frame to see if | 
