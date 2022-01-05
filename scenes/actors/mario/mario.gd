@@ -70,6 +70,7 @@ onready var death_sprite : AnimatedSprite = $DeathSprite
 onready var death_fludd_sprite : AnimatedSprite = $DeathSprite/Fludd
 onready var vanish_detector : Area2D = $VanishDetector
 onready var raycasts = [ground_check, ground_check_dive, left_check, right_check, slope_stop_check]
+onready var heal_timer = $HealTimer
 export var bottom_pos_offset : Vector2
 export var bottom_pos_dive_offset : Vector2
 
@@ -154,6 +155,9 @@ var next_flash := 0.0
 var frames_until_flash := 3
 var metal_voice := false
 
+var can_heal : bool = true
+var lingering_hp_container : int = 0
+
 # Collision vars
 var collision_down
 var collision_up
@@ -221,6 +225,7 @@ var camera : Camera2D
 #)
 
 func _ready():
+	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	print(Singleton.CurrentLevelData.level_data.vars.transition_data)
 	if Singleton.CurrentLevelData.level_data.vars.transition_data != []:
 		hide()
@@ -478,6 +483,7 @@ func player_hit(body : Node) -> void:
 			sound_player.play_hit_sound()
 
 func _process(delta: float) -> void:
+	print(state)
 	if next_position:
 		position = position.linear_interpolate(next_position, fps_util.PHYSICS_DELTA * sync_interpolation_speed)
 
@@ -517,6 +523,14 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 		else:
 			if cause != "lava":
 				sound_player.play_hit_sound()
+
+func slow_heal(shards : int = 1, time : float = 1) -> void:
+	if can_heal:
+		lingering_hp_container = shards
+		heal_timer.wait_time = (time / float(shards))
+		heal_timer.start()
+		heal(shards)
+		lingering_hp_container -= 1
 
 func heal(shards : int = 1) -> void:
 	if !dead and health != 8:
@@ -980,6 +994,14 @@ func _on_powerup_state_changed(powerup_id: String): # ==========================
 
 		_:
 			pass
+
+func _on_heal_timer_timeout():
+	if lingering_hp_container == 0:
+		return
+	else:
+		heal(1)
+		lingering_hp_container -= 1
+		heal_timer.start()
 
 func toggle_movement(var value : bool):
 	invulnerable = !value

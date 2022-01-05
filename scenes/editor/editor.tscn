@@ -1,4 +1,4 @@
-[gd_scene load_steps=637 format=2]
+[gd_scene load_steps=638 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -133,6 +133,7 @@
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/icon.png" type="Texture" id=131]
 [ext_resource path="res://scenes/actors/objects/goomba/preview.png" type="Texture" id=132]
 [ext_resource path="res://scenes/actors/objects/goomba/icon.png" type="Texture" id=133]
+[ext_resource path="res://scenes/actors/objects/spinning_heart/icon.png" type="Texture" id=134]
 [ext_resource path="res://scenes/actors/objects/red_coin/icon.png" type="Texture" id=136]
 [ext_resource path="res://assets/misc/icon.png" type="Texture" id=137]
 [ext_resource path="res://scenes/actors/objects/snow_platform/icon.png" type="Texture" id=138]
@@ -1341,6 +1342,16 @@ is_object = true
 object_center = Vector2( 16, 16 )
 icon = ExtResource( 343 )
 preview = ExtResource( 343 )
+
+[node name="SpinningHeart" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 91
+is_object = true
+object_center = Vector2( 4, 4 )
+item_name = "Spinning Heart"
+object_size = Vector2( 16, 16 )
+icon = ExtResource( 134 )
+preview = ExtResource( 134 )
 
 [node name="Sign" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )

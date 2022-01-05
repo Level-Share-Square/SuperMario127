@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sm64_spinning_heart.wav-a39dba8ffe9a936070334ad5464b45ad.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/spinning_heart/sm64_spinning_heart.wav"
+dest_files=[ "res://.import/sm64_spinning_heart.wav-a39dba8ffe9a936070334ad5464b45ad.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
