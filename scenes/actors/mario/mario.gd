@@ -57,6 +57,7 @@ onready var particles : Particles2D = $Particles2D
 onready var slide_particles : Particles2D = $SlideParticles
 onready var gp_particles1 : Particles2D = $GPParticles1
 onready var gp_particles2 : Particles2D = $GPParticles2
+onready var regen_particles : Particles2D = $RegenParticles
 onready var rainbow_particles : Particles2D = $RainbowSparkles
 onready var metal_particles : Particles2D = $MetalSparkles
 onready var vanish_particles : Particles2D = $VanishSparkles
@@ -71,6 +72,7 @@ onready var death_fludd_sprite : AnimatedSprite = $DeathSprite/Fludd
 onready var vanish_detector : Area2D = $VanishDetector
 onready var raycasts = [ground_check, ground_check_dive, left_check, right_check, slope_stop_check]
 onready var heal_timer = $HealTimer
+onready var heal_tick_timer = $HealTickTimer
 export var bottom_pos_offset : Vector2
 export var bottom_pos_dive_offset : Vector2
 
@@ -210,6 +212,9 @@ export var rotating_jump = false
 var level_bounds = Rect2(0, 0, 80, 30)
 var number_of_players = 2
 
+var healing_timer_enabled := false
+var regen_timer_started := false
+
 var next_position : Vector2
 var sync_interpolation_speed = 20
 export var rotation_interpolation_speed = 15
@@ -226,6 +231,7 @@ var camera : Camera2D
 
 func _ready():
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
+	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
 	print(Singleton.CurrentLevelData.level_data.vars.transition_data)
 	if Singleton.CurrentLevelData.level_data.vars.transition_data != []:
 		hide()
@@ -483,7 +489,6 @@ func player_hit(body : Node) -> void:
 			sound_player.play_hit_sound()
 
 func _process(delta: float) -> void:
-	print(state)
 	if next_position:
 		position = position.linear_interpolate(next_position, fps_util.PHYSICS_DELTA * sync_interpolation_speed)
 
@@ -524,13 +529,17 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 			if cause != "lava":
 				sound_player.play_hit_sound()
 
-func slow_heal(shards : int = 1, time : float = 1) -> void:
+func slow_heal(shards : int = 1, tick : float = 1, time : float = 1) -> void:
 	if can_heal:
 		lingering_hp_container = shards
-		heal_timer.wait_time = (time / float(shards))
-		heal_timer.start()
-		heal(shards)
+		healing_timer_enabled = true
+		regen_timer_started = false
+		heal_tick_timer.wait_time = (tick / float(shards))
+		heal_timer.wait_time = time
+		heal_tick_timer.start()
+		regen_particles.emitting = true
 		lingering_hp_container -= 1
+		heal(1)
 
 func heal(shards : int = 1) -> void:
 	if !dead and health != 8:
@@ -996,12 +1005,24 @@ func _on_powerup_state_changed(powerup_id: String): # ==========================
 			pass
 
 func _on_heal_timer_timeout():
-	if lingering_hp_container == 0:
-		return
-	else:
+	regen_timer_started = false
+	healing_timer_enabled = false
+	regen_particles.emitting = false
+
+func _on_heal_tick_timer_timeout():
+	if healing_timer_enabled:
+		if health >= 8 && !regen_timer_started:
+			lingering_hp_container = 0
+#			if heal_timer.wait_time <= 0.01:
+#				return
+#				regen_particles.emitting = false
+		if lingering_hp_container == 0 && !regen_timer_started:
+			regen_timer_started = true
+			heal_timer.start()
+		else:
+			lingering_hp_container -= 1
 		heal(1)
-		lingering_hp_container -= 1
-		heal_timer.start()
+		heal_tick_timer.start()
 
 func toggle_movement(var value : bool):
 	invulnerable = !value
