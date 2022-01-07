@@ -158,7 +158,7 @@ var frames_until_flash := 3
 var metal_voice := false
 
 var can_heal : bool = true
-var lingering_hp_container : int = 0
+var healing_timer_enabled := false
 
 # Collision vars
 var collision_down
@@ -211,9 +211,6 @@ export var rotating_jump = false
 
 var level_bounds = Rect2(0, 0, 80, 30)
 var number_of_players = 2
-
-var healing_timer_enabled := false
-var regen_timer_started := false
 
 var next_position : Vector2
 var sync_interpolation_speed = 20
@@ -531,14 +528,12 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 
 func slow_heal(shards : int = 1, tick : float = 1, time : float = 1) -> void:
 	if can_heal:
-		lingering_hp_container = shards
 		healing_timer_enabled = true
-		regen_timer_started = false
 		heal_tick_timer.wait_time = (tick / float(shards))
 		heal_timer.wait_time = time
+		heal_timer.start()
 		heal_tick_timer.start()
 		regen_particles.emitting = true
-		lingering_hp_container -= 1
 		heal(1)
 
 func heal(shards : int = 1) -> void:
@@ -1005,22 +1000,11 @@ func _on_powerup_state_changed(powerup_id: String): # ==========================
 			pass
 
 func _on_heal_timer_timeout():
-	regen_timer_started = false
 	healing_timer_enabled = false
 	regen_particles.emitting = false
 
 func _on_heal_tick_timer_timeout():
 	if healing_timer_enabled:
-		if health >= 8 && !regen_timer_started:
-			lingering_hp_container = 0
-#			if heal_timer.wait_time <= 0.01:
-#				return
-#				regen_particles.emitting = false
-		if lingering_hp_container == 0 && !regen_timer_started:
-			regen_timer_started = true
-			heal_timer.start()
-		else:
-			lingering_hp_container -= 1
 		heal(1)
 		heal_tick_timer.start()
 
