@@ -35,7 +35,7 @@ func _set_property_values():
 	set_property("render_in_front", render_in_front, true)
 	set_property("tag", tag, true)
 	set_property("tap_mode", tap_mode, true)
-	set_bool_alias("tap_mode", "Scale", "Move")
+	set_bool_alias("tap_mode", "Move", "Scale")
 
 func _ready():
 	var id = Singleton.CurrentLevelData.level_data.vars.current_liquid_id
@@ -96,7 +96,7 @@ func _physics_process(_delta):
 		var speed_modifier : float = transform.basis_xform(Vector2(0.0, 1.0)).y
 		global_position.y = move_toward(global_position.y, match_level, move_speed * 2)
 		
-		if tap_mode:
+		if !tap_mode:
 			height += speed_modifier * ((end_pos - global_position.y) - height)
 			change_size() # Letting it happen in _process causes issues
 	else:
@@ -104,7 +104,7 @@ func _physics_process(_delta):
 		var speed_modifier : float = transform.basis_xform(Vector2(0.0, 1.0)).x
 		global_position.x = move_toward(global_position.x, match_level, move_speed * 2)
 		
-		if tap_mode:
+		if !tap_mode:
 			height += speed_modifier * ((end_pos - global_position.x) - height)
 			change_size() # Letting it happen in _process causes issues
 

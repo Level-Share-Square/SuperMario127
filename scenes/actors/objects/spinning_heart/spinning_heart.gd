@@ -24,7 +24,7 @@ func _set_properties():
 	
 func _set_property_values():
 	set_property("health_given", health_given, true, "Health Per Second")
-	set_property("spin_time", spin_time, true, "Full Spin Time")
+	set_property("spin_time", spin_time, true, "Maximum Heal Time")
 	set_property("cooldown", cooldown, true, "Has Cooldown?")
 	set_property("cooldown_time", cooldown_time, true, "Cooldown Time")
 

@@ -64,6 +64,7 @@ func _ready():
 							pass
 				else:
 					character.position = position
+					character.toggle_movement(true)
 				_cleanup()
 
 
@@ -72,6 +73,7 @@ func exit_teleport(obj : Array):
 	if transition_data[2] == true: #Remember, true = remote, false = local
 		if obj[1].teleportation_mode != true:
 			character.position = position
+			character.toggle_movement(true)
 			_cleanup()
 			return
 		character.position = obj[1].position
