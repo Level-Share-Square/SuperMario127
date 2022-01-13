@@ -23,7 +23,7 @@ var character_damage
 
 var gravity : float
 var gravity_scale : float
-var velocity := Vector2()
+var velocity := Vector2.ZERO
 
 var walk_timer = 0.0
 var walk_wait = 3.0

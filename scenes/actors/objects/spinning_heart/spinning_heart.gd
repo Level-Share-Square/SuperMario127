@@ -16,15 +16,15 @@ var cooldown_time := 0
 
 var on_cooldown := false
 var can_heal := true
-var player_speed_cap = 300
+var player_speed_cap = 250
 
 func _set_properties():
 	savable_properties = ["health_given", "spin_time", "cooldown", "cooldown_time"]
 	editable_properties = ["health_given", "spin_time", "cooldown", "cooldown_time"]
 	
 func _set_property_values():
-	set_property("health_given", health_given, true, "Health Per Second")
-	set_property("spin_time", spin_time, true, "Maximum Heal Time")
+	set_property("health_given", health_given, true, "Min Health / Second")
+	set_property("spin_time", spin_time, true, "Heal Duration")
 	set_property("cooldown", cooldown, true, "Has Cooldown?")
 	set_property("cooldown_time", cooldown_time, true, "Cooldown Time")
 
@@ -33,14 +33,15 @@ func collect(body):
 		if cooldown:
 			timer.start()
 			on_cooldown = true
-		var spin_scale = clamp(abs(body.velocity.x), 0.001, player_speed_cap) / 15
-		var time_scale = stepify(clamp(abs(body.velocity.x), 0.001, player_speed_cap), 50) / player_speed_cap
+		var heal_scale = 1 if body.velocity.x < player_speed_cap else clamp(body.velocity.x, player_speed_cap, player_speed_cap * 2) / player_speed_cap
+		var spin_scale = (clamp(abs(body.velocity.x), 0.001, player_speed_cap) / 15) * heal_scale
+		print(heal_scale)
 		if body.state != null && body.state.name == "SpinningState":
 			tween.interpolate_property(sprite, "speed_scale", 20, 1, (1 + spin_time)) #20 is 300 (player_speed_cap) divided by 15
-			body.slow_heal(int((health_given) * 5), 1, spin_time)
+			body.slow_heal(int((health_given * heal_scale) * 5), 1, spin_time, true)
 		else:
-			body.slow_heal(int(health_given * 5), 1, (spin_time * time_scale)) #Timers can't be set to zero
-			tween.interpolate_property(sprite, "speed_scale", spin_scale, 1, 1 + (spin_time * time_scale))
+			body.slow_heal(int((health_given * heal_scale) * 5), 1, spin_time, false) #Timers can't be set to zero
+			tween.interpolate_property(sprite, "speed_scale", spin_scale, 1, 1 + spin_time)
 		anim_player.play("hop")
 		sound.play()
 		tween.start()

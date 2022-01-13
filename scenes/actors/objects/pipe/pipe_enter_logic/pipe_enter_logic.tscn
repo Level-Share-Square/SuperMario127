@@ -4,7 +4,6 @@
 [ext_resource path="res://scenes/actors/objects/pipe/fast_sound.wav" type="AudioStream" id=2]
 [ext_resource path="res://scenes/actors/objects/pipe/sound.wav" type="AudioStream" id=3]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 2 )
 
@@ -36,4 +35,5 @@ stream = ExtResource( 3 )
 
 [node name="AudioFast" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+
 [connection signal="tween_all_completed" from="Tween" to="." method="_tween_all_completed"]

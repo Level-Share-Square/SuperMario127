@@ -14,6 +14,7 @@ onready var sprite_fuse : AnimatedSprite = $CannonMoveable/SpriteBodyReverser/Sp
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var tween : Tween = $Tween 
 onready var timer : Timer = $Timer
+onready var invuln_timer = $InvulnTimer
 onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
 onready var particles : Particles2D = $CannonMoveable/SpriteBodyReverser/SpriteBody/Particles2D
 onready var nearby_character_detection : Area2D = $NearbyCharacterDetection
@@ -153,7 +154,7 @@ func fire_cannon() -> void:
 	stored_character.controllable = true
 	stored_character.movable = true
 	stored_character.modulate.a = 1
-
+	invuln_timer.start()
 	#set the player so they will fire out of the cannon properly with velocity and such
 	stored_character.position = cannon_exit_position.global_position
 	stored_character.last_position = stored_character.position # Prevent the patch from triggering
@@ -169,7 +170,9 @@ func fire_cannon() -> void:
 	
 	#cannon fire particles 
 	particles.emitting = true
-	
+	#in case an enemy is too close, this timer keeps mario from getting damaged while being shot
+	invuln_timer.start()
+	var _invuln_connect = timer.connect("timeout", self, "_on_invuln_timeout", [], CONNECT_ONESHOT)
 	#start timer to return the camera
 	timer.start()
 	var _connect = timer.connect("timeout", self, "return_camera_focus", [], CONNECT_ONESHOT)
@@ -177,7 +180,8 @@ func fire_cannon() -> void:
 func return_camera_focus() -> void:
 	stored_character.camera.focus_on = null
 
-
+func _on_invuln_timeout():
+	stored_character.set_collision_layer_bit(1, true)
 #used to re-enable the entrance collision only when a player exits the vicinity
 func _on_NearbyCharacterDetection_body_exited(body : PhysicsBody2D) -> void:
 	attempt_enable_collision(body)

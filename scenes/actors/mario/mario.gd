@@ -159,6 +159,7 @@ var metal_voice := false
 
 var can_heal : bool = true
 var healing_timer_enabled := false
+var overheal_enabled := false
 
 # Collision vars
 var collision_down
@@ -526,8 +527,9 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 			if cause != "lava":
 				sound_player.play_hit_sound()
 
-func slow_heal(shards : int = 1, tick : float = 1, time : float = 1) -> void:
+func slow_heal(shards : int = 1, tick : float = 1, time : float = 1, can_overheal : bool = false) -> void:
 	if can_heal:
+		overheal_enabled = can_overheal
 		healing_timer_enabled = true
 		heal_tick_timer.wait_time = (tick / float(shards))
 		heal_timer.wait_time = time
@@ -1000,11 +1002,16 @@ func _on_powerup_state_changed(powerup_id: String): # ==========================
 			pass
 
 func _on_heal_timer_timeout():
+	overheal_enabled = false
 	healing_timer_enabled = false
 	regen_particles.emitting = false
 
 func _on_heal_tick_timer_timeout():
 	if healing_timer_enabled:
+		if health >= 8 && !overheal_enabled:
+			heal_timer.wait_time = 0.001
+			heal_timer.start()
+			return
 		heal(1)
 		heal_tick_timer.start()
 

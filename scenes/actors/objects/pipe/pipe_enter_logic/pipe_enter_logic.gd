@@ -61,7 +61,7 @@ func start_pipe_ground_pound_animation(character : Character) -> void:
 	character.toggle_movement(false)
 	character.sprite.rotation = 0
 	character.global_position.y = global_position.y + -22
-
+	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
 	if character.state != null && character.state.name == "GroundPoundState":   # ====================================================
 		character.state = null													# | This is for local teleportation. If this wasn't  |
 																				# | here, you would exit while still ground pounding |
