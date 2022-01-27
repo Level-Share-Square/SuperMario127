@@ -84,7 +84,7 @@ func update_parts():
 	scale_x = scale.x * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)
 
 func _physics_process(delta):
-	if mode == 1: # edit mode
+	if mode == 1 or !enabled: # dont do physics if in edit more or disabled
 		return
 	
 	# first, erase any potential null pointers
