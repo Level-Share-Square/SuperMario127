@@ -13,6 +13,8 @@ var boost_buffer = 0.0
 
 var boost_disable_time = 0.0
 
+var is_boosted := false
+
 var max_enter_fall_speed = 160
 var ground_pound_enter_speed = 350
 var old_gravity_scale = 1
@@ -75,6 +77,7 @@ func _update(delta):
 		swim_speed = boost_speed
 		boost_buffer = 0
 		boost_time_left = 0.75
+		is_boosted = true
 		character.spin_swim_area_shape.disabled = false
 		character.sound_player.set_swim_playing(false)
 		character.bubble_particles_left.emitting = true

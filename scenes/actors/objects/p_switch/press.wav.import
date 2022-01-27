@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/press.wav-a1f3a9f25d4d44d150f77d4338dbc5b4.sample"
+path="res://.import/press.wav-3800a7b28002fd989a44306c73efd8f8.sample"
 
 [deps]
 
-source_file="res://scenes/actors/objects/switch/press.wav"
-dest_files=[ "res://.import/press.wav-a1f3a9f25d4d44d150f77d4338dbc5b4.sample" ]
+source_file="res://scenes/actors/objects/p_switch/press.wav"
+dest_files=[ "res://.import/press.wav-3800a7b28002fd989a44306c73efd8f8.sample" ]
 
 [params]
 

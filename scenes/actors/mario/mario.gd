@@ -169,6 +169,7 @@ var collision_right
 var collided_last_frame := false
 var using_dive_collision := false
 
+
 export var snap := Vector2(0, 32)
 
 export(Array, NodePath) var collision_exceptions = []

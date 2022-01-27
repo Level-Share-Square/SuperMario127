@@ -1,4 +1,4 @@
-#Note: when the enter or exit animation starts, it sets the characters controllable and invulnerable variables, make sure to set them back in the parent code
+#Note: when the enter or exit animation starts, it sets the character's controllable and invulnerable variables, make sure to set them back in the parent code
 extends Node2D
 
 signal pipe_animation_finished
@@ -33,7 +33,7 @@ func _ready():
 
 func _physics_process(_delta : float) -> void:
 	if is_idle:
-		#the area2d is set to only collide with characters, so we can (hopefullY) safely assume if there 
+		#the area2d is set to only collide with characters, so we can (hopefully) safely assume if there 
 		#is a collision it's with a character
 		for body in area2d.get_overlapping_bodies():
 				

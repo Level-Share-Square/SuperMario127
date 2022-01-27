@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/switch.png-4bba9af6816eeac189f9f9e998cc0557.stex"
+path="res://.import/icon.png-49d3b447eaf5d4888118b17aaf528948.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/switch/switch.png"
-dest_files=[ "res://.import/switch.png-4bba9af6816eeac189f9f9e998cc0557.stex" ]
+source_file="res://scenes/actors/objects/on_off_switch/palettes/2/icon.png"
+dest_files=[ "res://.import/icon.png-49d3b447eaf5d4888118b17aaf528948.stex" ]
 
 [params]
 

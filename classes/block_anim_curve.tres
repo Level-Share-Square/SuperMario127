@@ -1,0 +1,4 @@
+[gd_resource type="Curve" format=2]
+
+[resource]
+_data = [ Vector2( 0, 0 ), 0.0, 3.87879, 0, 0, Vector2( 1, 0 ), -4.01983, 0.0, 0, 0 ]

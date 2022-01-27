@@ -38,8 +38,8 @@
 [ext_resource path="res://scenes/player/sign_text.gd" type="Script" id=55]
 [ext_resource path="res://scenes/actors/objects/sign/menu_open.wav" type="AudioStream" id=56]
 [ext_resource path="res://scenes/actors/objects/sign/menu_close.wav" type="AudioStream" id=57]
-[ext_resource path="res://scenes/actors/objects/switch/tick.wav" type="AudioStream" id=58]
-[ext_resource path="res://scenes/actors/objects/switch/tick_end.wav" type="AudioStream" id=59]
+[ext_resource path="res://scenes/actors/objects/p_switch/tick.wav" type="AudioStream" id=58]
+[ext_resource path="res://scenes/actors/objects/p_switch/tick_end.wav" type="AudioStream" id=59]
 [ext_resource path="res://scenes/actors/objects/boo/laugh.wav" type="AudioStream" id=60]
 
 [sub_resource type="DynamicFont" id=1]

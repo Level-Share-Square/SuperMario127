@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Backflip.gd"
 }, {
+"base": "GameObject",
+"class": "Block",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/block/block.gd"
+}, {
 "base": "State",
 "class": "BonkedState",
 "language": "GDScript",
@@ -68,6 +73,11 @@ _global_script_classes=[ {
 "class": "ControlUtil",
 "language": "GDScript",
 "path": "res://util/control_util.gd"
+}, {
+"base": "Tween",
+"class": "CurveTween",
+"language": "GDScript",
+"path": "res://classes/curve_tween.gd"
 }, {
 "base": "Reference",
 "class": "Decoration",
@@ -484,6 +494,7 @@ _global_script_class_icons={
 "AdditionOperation": "",
 "AndCondition": "",
 "BackflipState": "",
+"Block": "",
 "BonkedState": "",
 "BounceState": "",
 "BusGroup": "",
@@ -492,6 +503,7 @@ _global_script_class_icons={
 "Character": "",
 "ControlPresets": "",
 "ControlUtil": "",
+"CurveTween": "",
 "Decoration": "",
 "DefineVarInstruction": "",
 "DiveState": "",

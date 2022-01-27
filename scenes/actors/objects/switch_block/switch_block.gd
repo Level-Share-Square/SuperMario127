@@ -1,57 +1,36 @@
-extends GameObject
+extends Block
 
-onready var static_body : StaticBody2D = $StaticBody2D
-onready var area_collision_shape : CollisionShape2D = $Area2D/CollisionShape2D2
-onready var collision_shape : CollisionShape2D = $StaticBody2D/CollisionShape2D
-onready var sprite : Sprite = $Sprite
-onready var p : Sprite = $Sprite/P
-
-var current_scene
-
-var activated = false
+onready var sprite = $Sprite
+onready var animation_player = $AnimationPlayer
+onready var collider = $StaticBody2D/CollisionShape2D
+var inverted : bool = false
 
 func _set_properties():
-	savable_properties = ["activated"]
-	editable_properties = ["activated"]
+	savable_properties = ["inverted"]
+	editable_properties = ["inverted"]
 
 func _set_property_values():
-	set_property("activated", activated, true)
+	set_property("inverted", inverted, true)
 
-func _ready() -> void:
-	current_scene = get_tree().get_current_scene()
-	if scale != Vector2.ONE: # Nothing to do on default scale
-		# Set inverse scale on the body so its overall scale is identity.
-		# For whatever reason, division doesn't work on vectors, soo
-		static_body.scale = Vector2(1.0 / scale.x, 1.0 / scale.y)
-		# So it doesn't modify all other boxes
-		collision_shape.shape = collision_shape.shape.duplicate()
-		# Modify the extents by the scale to get the desired collision shape
-		collision_shape.shape.extents = Vector2(collision_shape.shape.extents.x * scale.x,\
-												collision_shape.shape.extents.y * scale.y)
+func _ready():
+	init()
+	if !enabled:
+		$StaticBody2D.set_collision_layer_bit(0, false)
 
-func _physics_process(delta):
-	if mode == 1 and activated and enabled:
-		sprite.modulate = Color(1, 0.5, 0.5)
-	elif mode == 1 or !enabled:
-		sprite.modulate = Color(1, 1, 1)
+	if palette != 0:
+		sprite.region_rect.y = palette * 32
 		
-	p.visible = enabled
-	area_collision_shape.disabled = !collision_shape.disabled
-	
-	if !is_instance_valid(current_scene) or mode == 1 or !enabled: return
-	
-	var activated_color = Color(1, 1, 1, 1)
-	var deactivated_color = Color(1, 1, 1, 0)
-	if current_scene.switch_timer > 0:
-		if current_scene.switch_timer <= 1.0:
-			var alpha = current_scene.switch_timer / 1.0
-			if !activated:
-				sprite.modulate.a = alpha
-			elif current_scene.switch_timer <= 0.5:
-				sprite.modulate = lerp(sprite.modulate, activated_color if activated else deactivated_color, delta * 4)
-		else:
-			sprite.modulate = lerp(sprite.modulate, deactivated_color if activated else activated_color, delta * 4)
-		collision_shape.disabled = activated
+	set_state(Singleton.CurrentLevelData.switch_state[palette])
+	Singleton.CurrentLevelData.connect("switch_state_changed", self, "_on_switch_state_changed")
+
+func set_state(state : bool):
+	if inverted:
+		collider.set_deferred("disabled", state)
+		animation_player.play(str(!state).to_lower())
 	else:
-		sprite.modulate = activated_color if activated else deactivated_color
-		collision_shape.disabled = !activated
+		collider.set_deferred("disabled", !state)
+		animation_player.play(str(state).to_lower())
+
+func _on_switch_state_changed(new_state, channel):
+	if palette == channel:
+		set_state(new_state)
