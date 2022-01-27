@@ -30,6 +30,9 @@ var lock_pos := 0
 var last_mouse_pos := Vector2(0, 0)
 var last_mouse_tile_pos := Vector2(0, 0)
 
+var object_pos : Vector2
+var last_object_pos : Vector2
+
 var left_held := false
 var right_held := false
 var last_left_held := false
@@ -322,6 +325,7 @@ func _process(delta : float) -> void:
 		
 		if selected_box and selected_box.item:
 			# Place items
+			
 			if left_held and selected_tool == 0:
 				var item = selected_box.item
 				
@@ -336,7 +340,9 @@ func _process(delta : float) -> void:
 						
 						shared.set_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, item.tileset_id, item.tile_id, item.palette_index)
 				elif !is_instance_valid(hovered_object): # Place object
-					var object_pos : Vector2
+					
+					
+						
 					if placement_mode == "Tile":
 						object_pos = (mouse_tile_pos * item.tile_mode_step) + item.object_center
 					elif Input.is_action_just_pressed("place"):
@@ -349,6 +355,18 @@ func _process(delta : float) -> void:
 							var result := space_state.intersect_ray(object_bottom, object_bottom + Vector2(0, 16))
 							if result:
 								object_pos = result.position - Vector2(0, item.object_size.y)
+					# I am truly sorry for writing this god forsaken code
+					last_object_pos = object_pos
+					
+					var length_difference = mouse_pos - last_object_pos
+					
+					if(abs(length_difference.x) >= 32):
+						object_pos.x = last_object_pos.x + 32 * (length_difference.x/abs(length_difference.x))
+						
+					elif(abs(length_difference.y) >= 32):
+						object_pos.y = last_object_pos.y + 32 * (length_difference.y/abs(length_difference.y))
+						
+					
 					if object_pos and !shared.is_object_at_position(object_pos) and item.on_place(object_pos, level_data, level_area):
 						var object := LevelObject.new()
 						object.type_id = item.object_id
@@ -359,6 +377,10 @@ func _process(delta : float) -> void:
 						object.properties.append(true)
 						object.properties.append(true)
 						shared.create_object(object, true)
+						last_object_pos = object_pos
+						
+					
+							
 			
 			# Delete items
 			if (right_held and selected_tool < 2) or (left_held and selected_tool == 1):
