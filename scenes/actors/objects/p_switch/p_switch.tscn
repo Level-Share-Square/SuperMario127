@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scenes/actors/objects/switch/switch.png" type="Texture" id=1]
-[ext_resource path="res://scenes/actors/objects/switch/base.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/switch/switch.gd" type="Script" id=3]
-[ext_resource path="res://scenes/actors/objects/switch/press.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/actors/objects/p_switch/p_switch.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/p_switch/base.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/p_switch/p_switch.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/p_switch/press.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 18, 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=638 format=2]
+[gd_scene load_steps=640 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -134,6 +134,7 @@
 [ext_resource path="res://scenes/actors/objects/goomba/preview.png" type="Texture" id=132]
 [ext_resource path="res://scenes/actors/objects/goomba/icon.png" type="Texture" id=133]
 [ext_resource path="res://scenes/actors/objects/spinning_heart/icon.png" type="Texture" id=134]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/switch.png" type="Texture" id=135]
 [ext_resource path="res://scenes/actors/objects/red_coin/icon.png" type="Texture" id=136]
 [ext_resource path="res://assets/misc/icon.png" type="Texture" id=137]
 [ext_resource path="res://scenes/actors/objects/snow_platform/icon.png" type="Texture" id=138]
@@ -334,11 +335,11 @@
 [ext_resource path="res://assets/tiles/pyramid_bricks/palette_icons/2_slopeL.png" type="Texture" id=333]
 [ext_resource path="res://assets/tiles/pyramid_bricks/palette_icons/0_block.png" type="Texture" id=334]
 [ext_resource path="res://scenes/actors/objects/flower_bush/icon.png" type="Texture" id=335]
-[ext_resource path="res://scenes/actors/objects/switch_block/preview.png" type="Texture" id=336]
-[ext_resource path="res://scenes/actors/objects/switch_block/icon.png" type="Texture" id=337]
+[ext_resource path="res://scenes/actors/objects/p_switch_block/preview.png" type="Texture" id=336]
+[ext_resource path="res://scenes/actors/objects/p_switch_block/icon.png" type="Texture" id=337]
 [ext_resource path="res://assets/tiles/lava_rock/icon.png" type="Texture" id=338]
-[ext_resource path="res://scenes/actors/objects/switch/preview.png" type="Texture" id=339]
-[ext_resource path="res://scenes/actors/objects/switch/icon.png" type="Texture" id=340]
+[ext_resource path="res://scenes/actors/objects/p_switch/preview.png" type="Texture" id=339]
+[ext_resource path="res://scenes/actors/objects/p_switch/icon.png" type="Texture" id=340]
 [ext_resource path="res://scenes/actors/objects/crystal_tap/icon.png" type="Texture" id=341]
 [ext_resource path="res://scenes/actors/objects/crystal_tap/preview.png" type="Texture" id=342]
 [ext_resource path="res://scenes/actors/objects/checkpoint/icon.png" type="Texture" id=343]
@@ -612,6 +613,7 @@
 [ext_resource path="res://assets/tiles/crystal/palette_icons/2_slopeR.png" type="Texture" id=611]
 [ext_resource path="res://assets/tiles/crystal/palette_icons/5_slopeR.png" type="Texture" id=612]
 [ext_resource path="res://assets/tiles/crystal/palette_icons/3_slopeR.png" type="Texture" id=613]
+[ext_resource path="res://scenes/actors/objects/switch_block/switch_block.png" type="Texture" id=614]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1423,7 +1425,7 @@ tile_mode_step = 64
 icon = ExtResource( 44 )
 preview = ExtResource( 49 )
 
-[node name="Switch" type="Node" parent="PlaceableItems/SpecialGroup"]
+[node name="PSwitch" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
 object_id = 80
 is_object = true
@@ -1432,7 +1434,7 @@ item_name = "P Switch"
 icon = ExtResource( 340 )
 preview = ExtResource( 339 )
 
-[node name="SwitchBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
+[node name="PSwitchBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
 object_id = 79
 is_object = true
@@ -1492,6 +1494,25 @@ is_object = true
 object_center = Vector2( 16, 16 )
 icon = ExtResource( 341 )
 preview = ExtResource( 342 )
+
+[node name="OnOffSwitch" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 92
+is_object = true
+object_center = Vector2( 16, 16 )
+item_name = "On/Off Switch"
+icon = ExtResource( 135 )
+preview = ExtResource( 135 )
+
+[node name="SwitchBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 93
+is_object = true
+object_center = Vector2( 16, 16 )
+item_name = "Switch Block"
+object_size = Vector2( 32, 32 )
+icon = ExtResource( 614 )
+preview = ExtResource( 614 )
 
 [node name="CollectiblesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )

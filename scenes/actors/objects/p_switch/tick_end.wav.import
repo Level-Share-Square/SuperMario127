@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/tick_end.wav-68c762900364eedcf339723f7a5d3f55.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/p_switch/tick_end.wav"
+dest_files=[ "res://.import/tick_end.wav-68c762900364eedcf339723f7a5d3f55.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

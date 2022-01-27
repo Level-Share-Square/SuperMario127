@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/tick.wav-e730634c651c123539a875809f07f463.sample"
+path="res://.import/tick.wav-8117009fd6122025f00335ece97b5879.sample"
 
 [deps]
 
-source_file="res://scenes/actors/objects/switch/tick.wav"
-dest_files=[ "res://.import/tick.wav-e730634c651c123539a875809f07f463.sample" ]
+source_file="res://scenes/actors/objects/p_switch/tick.wav"
+dest_files=[ "res://.import/tick.wav-8117009fd6122025f00335ece97b5879.sample" ]
 
 [params]
 

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/switchOn.wav-cd6de3a47866186676785b562dd441ab.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/on_off_switch/switchOn.wav"
+dest_files=[ "res://.import/switchOn.wav-cd6de3a47866186676785b562dd441ab.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

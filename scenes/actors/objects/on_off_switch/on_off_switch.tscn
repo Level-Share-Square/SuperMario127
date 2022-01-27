@@ -1,0 +1,43 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scenes/actors/objects/on_off_switch/0_frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/on_off_switch.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/Switch.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/1/1_frames.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/4/4_frames.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/2/2_frames.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/5/5_frames.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/3/3_frames.tres" type="SpriteFrames" id=8]
+[ext_resource path="res://classes/block_anim_curve.tres" type="Curve" id=9]
+[ext_resource path="res://classes/curve_tween.gd" type="Script" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 22, 17 )
+
+[node name="OnOffSwitch" type="Node2D"]
+script = ExtResource( 2 )
+palette_frames = [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 7 ) ]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "switch"
+
+[node name="CurveTween" type="Tween" parent="AnimatedSprite"]
+script = ExtResource( 10 )
+curve = ExtResource( 9 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="HitCollider" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitCollider"]
+shape = SubResource( 2 )
+
+[node name="SwitchSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
