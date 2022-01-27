@@ -1,4 +1,4 @@
-[gd_scene load_steps=640 format=2]
+[gd_scene load_steps=643 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -134,7 +134,7 @@
 [ext_resource path="res://scenes/actors/objects/goomba/preview.png" type="Texture" id=132]
 [ext_resource path="res://scenes/actors/objects/goomba/icon.png" type="Texture" id=133]
 [ext_resource path="res://scenes/actors/objects/spinning_heart/icon.png" type="Texture" id=134]
-[ext_resource path="res://scenes/actors/objects/on_off_switch/switch.png" type="Texture" id=135]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/preview.png" type="Texture" id=135]
 [ext_resource path="res://scenes/actors/objects/red_coin/icon.png" type="Texture" id=136]
 [ext_resource path="res://assets/misc/icon.png" type="Texture" id=137]
 [ext_resource path="res://scenes/actors/objects/snow_platform/icon.png" type="Texture" id=138]
@@ -614,6 +614,9 @@
 [ext_resource path="res://assets/tiles/crystal/palette_icons/5_slopeR.png" type="Texture" id=612]
 [ext_resource path="res://assets/tiles/crystal/palette_icons/3_slopeR.png" type="Texture" id=613]
 [ext_resource path="res://scenes/actors/objects/switch_block/switch_block.png" type="Texture" id=614]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/1/icon.png" type="Texture" id=615]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/icon.png" type="Texture" id=616]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/1/preview.png" type="Texture" id=617]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1500,8 +1503,11 @@ script = ExtResource( 24 )
 object_id = 92
 is_object = true
 object_center = Vector2( 16, 16 )
+palette_index = 1
 item_name = "On/Off Switch"
-icon = ExtResource( 135 )
+palette_icons = [ ExtResource( 616 ), ExtResource( 615 ) ]
+palette_previews = [ ExtResource( 135 ), ExtResource( 617 ) ]
+icon = ExtResource( 616 )
 preview = ExtResource( 135 )
 
 [node name="SwitchBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
@@ -1509,7 +1515,10 @@ script = ExtResource( 24 )
 object_id = 93
 is_object = true
 object_center = Vector2( 16, 16 )
+palette_index = 1
 item_name = "Switch Block"
+palette_icons = [ ExtResource( 614 ), ExtResource( 614 ) ]
+palette_previews = [ ExtResource( 614 ), ExtResource( 614 ) ]
 object_size = Vector2( 32, 32 )
 icon = ExtResource( 614 )
 preview = ExtResource( 614 )

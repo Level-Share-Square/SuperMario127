@@ -1,6 +1,7 @@
 extends Block
 
 onready var sprite = $Sprite
+onready var outline = $Outline
 onready var animation_player = $AnimationPlayer
 onready var collider = $StaticBody2D/CollisionShape2D
 var inverted : bool = false
@@ -18,7 +19,9 @@ func _ready():
 		$StaticBody2D.set_collision_layer_bit(0, false)
 
 	if palette != 0:
-		sprite.region_rect.y = palette * 32
+		print(sprite.region_rect)
+		sprite.region_rect.position.y = (float(palette) * 32)
+		outline.animation = str(palette) + "_outline"
 		
 	set_state(Singleton.CurrentLevelData.switch_state[palette])
 	Singleton.CurrentLevelData.connect("switch_state_changed", self, "_on_switch_state_changed")

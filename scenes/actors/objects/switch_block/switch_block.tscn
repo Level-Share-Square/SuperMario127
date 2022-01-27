@@ -1,25 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/actors/objects/switch_block/switch_block.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/switch_block/switch_block.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/switch_block/switch_block_outline_frames.tres" type="SpriteFrames" id=3]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 32, 32 )
-
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ) ],
-"loop": true,
-"name": "outline",
-"speed": 2.0
-} ]
-
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 resource_name = "false"
 length = 0.1
 step = 0.05
@@ -36,8 +21,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.75, 0.25 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "true"
+[sub_resource type="Animation" id=5]
 length = 0.1
 step = 0.05
 tracks/0/type = "value"
@@ -53,16 +37,15 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0.75, 0.25 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 16, 16 )
 
 [node name="SwitchBlock" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Outline" type="AnimatedSprite" parent="."]
-frames = SubResource( 3 )
-animation = "outline"
-frame = 1
+frames = ExtResource( 3 )
+animation = "0_outline"
 playing = true
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -72,10 +55,11 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 32, 32 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/false = SubResource( 6 )
-anims/true = SubResource( 4 )
+anims/false = SubResource( 4 )
+anims/true = SubResource( 5 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource( 5 )
+shape = SubResource( 6 )
