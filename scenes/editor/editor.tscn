@@ -1,4 +1,4 @@
-[gd_scene load_steps=643 format=2]
+[gd_scene load_steps=650 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -613,10 +613,17 @@
 [ext_resource path="res://assets/tiles/crystal/palette_icons/2_slopeR.png" type="Texture" id=611]
 [ext_resource path="res://assets/tiles/crystal/palette_icons/5_slopeR.png" type="Texture" id=612]
 [ext_resource path="res://assets/tiles/crystal/palette_icons/3_slopeR.png" type="Texture" id=613]
-[ext_resource path="res://scenes/actors/objects/switch_block/switch_block.png" type="Texture" id=614]
-[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/1/icon.png" type="Texture" id=615]
-[ext_resource path="res://scenes/actors/objects/on_off_switch/icon.png" type="Texture" id=616]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/4/preview.png" type="Texture" id=615]
+[ext_resource path="res://scenes/actors/objects/switch_block/palettes/3/preview.png" type="Texture" id=616]
 [ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/1/preview.png" type="Texture" id=617]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/2/preview.png" type="Texture" id=618]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/5/preview.png" type="Texture" id=619]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/3/preview.png" type="Texture" id=620]
+[ext_resource path="res://scenes/actors/objects/switch_block/preview.png" type="Texture" id=621]
+[ext_resource path="res://scenes/actors/objects/switch_block/palettes/1/preview.png" type="Texture" id=622]
+[ext_resource path="res://scenes/actors/objects/switch_block/palettes/4/preview.png" type="Texture" id=623]
+[ext_resource path="res://scenes/actors/objects/switch_block/palettes/2/preview.png" type="Texture" id=624]
+[ext_resource path="res://scenes/actors/objects/switch_block/palettes/5/preview.png" type="Texture" id=625]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1503,11 +1510,11 @@ script = ExtResource( 24 )
 object_id = 92
 is_object = true
 object_center = Vector2( 16, 16 )
-palette_index = 1
 item_name = "On/Off Switch"
-palette_icons = [ ExtResource( 616 ), ExtResource( 615 ) ]
-palette_previews = [ ExtResource( 135 ), ExtResource( 617 ) ]
-icon = ExtResource( 616 )
+palette_icons = [ ExtResource( 135 ), ExtResource( 617 ), ExtResource( 618 ), ExtResource( 620 ), ExtResource( 615 ), ExtResource( 619 ) ]
+palette_previews = [ ExtResource( 135 ), ExtResource( 617 ), ExtResource( 618 ), ExtResource( 620 ), ExtResource( 615 ), ExtResource( 619 ) ]
+object_size = Vector2( 32, 32 )
+icon = ExtResource( 135 )
 preview = ExtResource( 135 )
 
 [node name="SwitchBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
@@ -1515,13 +1522,12 @@ script = ExtResource( 24 )
 object_id = 93
 is_object = true
 object_center = Vector2( 16, 16 )
-palette_index = 1
 item_name = "Switch Block"
-palette_icons = [ ExtResource( 614 ), ExtResource( 614 ) ]
-palette_previews = [ ExtResource( 614 ), ExtResource( 614 ) ]
+palette_icons = [ ExtResource( 621 ), ExtResource( 622 ), ExtResource( 624 ), ExtResource( 616 ), ExtResource( 623 ), ExtResource( 625 ) ]
+palette_previews = [ ExtResource( 621 ), ExtResource( 622 ), ExtResource( 624 ), ExtResource( 616 ), ExtResource( 623 ), ExtResource( 625 ) ]
 object_size = Vector2( 32, 32 )
-icon = ExtResource( 614 )
-preview = ExtResource( 614 )
+icon = ExtResource( 621 )
+preview = ExtResource( 621 )
 
 [node name="CollectiblesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
