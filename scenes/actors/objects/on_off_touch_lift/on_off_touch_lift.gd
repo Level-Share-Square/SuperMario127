@@ -149,8 +149,8 @@ func _ready():
 		
 		set_property("end_position", path.curve.get_point_position(path.curve.get_point_count()-1)/32)
 	frozen = inverted
-	set_state(Singleton.CurrentLevelData.switch_state[palette])
-	Singleton.CurrentLevelData.connect("switch_state_changed", self, "_on_switch_state_changed")
+	set_state(Singleton.CurrentLevelData.level_data.vars.switch_state[palette])
+	Singleton.CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
 
 func set_state(state : bool):
 	if inverted:
