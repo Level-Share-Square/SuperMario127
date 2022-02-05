@@ -209,6 +209,7 @@ func _physics_process(delta):
 		platform.platform_area_collision_shape.disabled = frozen
 	if(!activated || frozen):
 		platform.momentum = Vector2(0,0)
+		platform.set_position(Vector2(stepify(position.x, 1), stepify(position.y, 1)))
 		return
 
 	
