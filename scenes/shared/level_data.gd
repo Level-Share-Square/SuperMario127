@@ -1,7 +1,5 @@
 extends Node
 
-signal switch_state_changed
-
 var level_data : LevelData
 var area := 0
 
@@ -11,7 +9,7 @@ var foreground_cache := []
 
 var enemies_instanced := 0
 
-var switch_state : Array = [true, true, true, true, true, true]
+
 # The music IDs that can be randomly selected, can be found in the level code
 var random_music := [ 1, 3, 18, 16 ]
 
@@ -74,7 +72,6 @@ func _load_with_eof_check(path : String, cache_array : Array):  # ==============
 			break
 
 func reset():
-	switch_state = [true, true, true, true, true, true]
 	create_level_data(0)
 
 func _init() -> void:
@@ -134,6 +131,3 @@ func get_red_coins_before_area(area_id : int):
 				last_red_coin_id += 1
 	return last_red_coin_id
 
-func toggle_switch_state(var channel : int):
-	switch_state[channel] = !switch_state[channel]
-	emit_signal("switch_state_changed", switch_state[channel], channel)
