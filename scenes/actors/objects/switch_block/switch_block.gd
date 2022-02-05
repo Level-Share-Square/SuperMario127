@@ -20,7 +20,7 @@ func _ready():
 
 	if palette != 0:
 		print(sprite.region_rect)
-		sprite.region_rect.position.y = (float(palette) * 32)
+		sprite.region_rect.position.y = (float(palette) * 32) # changes sprite to correct position on that grid of palettes
 		outline.animation = str(palette) + "_outline"
 		
 	set_state(Singleton.CurrentLevelData.switch_state[palette])

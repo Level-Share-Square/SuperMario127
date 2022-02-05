@@ -1739,6 +1739,16 @@ tile_mode_step = 64
 icon = ExtResource( 153 )
 preview = ExtResource( 154 )
 
+[node name="OnOffTouchLift" type="Node" parent="PlaceableItems/PlatformsGroup"]
+script = ExtResource( 24 )
+object_id = 94
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+icon = ExtResource( 153 )
+preview = ExtResource( 154 )
+
 [node name="Seesaw" type="Node" parent="PlaceableItems/PlatformsGroup"]
 script = ExtResource( 24 )
 object_id = 47

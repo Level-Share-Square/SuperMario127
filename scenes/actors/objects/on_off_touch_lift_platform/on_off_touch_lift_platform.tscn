@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/actors/objects/metal_platform/is_platform_area.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/touch_lift_platform/touch_lift_platform.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/metal_platform/semi_solid_platform.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift_platform/texture.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift_platform/grid.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 23, 7 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 23, 8 )
+
+[node name="OnOffTouchLiftPlatform" type="Node2D"]
+z_index = 1
+script = ExtResource( 2 )
+
+[node name="Sprite" type="NinePatchRect" parent="."]
+margin_left = -23.0
+margin_top = -7.0
+margin_right = 23.0
+margin_bottom = 7.0
+texture = ExtResource( 4 )
+patch_margin_left = 8
+patch_margin_right = 8
+axis_stretch_horizontal = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Grid" type="NinePatchRect" parent="."]
+margin_left = -23.1078
+margin_top = -7.16206
+margin_right = 22.8922
+margin_bottom = 6.83794
+texture = ExtResource( 5 )
+patch_margin_left = 8
+patch_margin_right = 8
+axis_stretch_horizontal = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="Area2D" type="Area2D" parent="StaticBody2D"]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Area2D"]
+shape = SubResource( 2 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+position = Vector2( 1.84774e-06, 0 )
+scale = Vector2( 0.65625, 1 )
+rect = Rect2( -32, -5, 64, 10 )
+process_parent = true
+physics_process_parent = true
+
+[connection signal="body_exited" from="StaticBody2D/Area2D" to="." method="_on_PlatformArea_body_exited"]

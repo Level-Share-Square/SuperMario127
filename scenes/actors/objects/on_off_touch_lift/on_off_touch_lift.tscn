@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/on_off_touch_lift.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift_platform/on_off_touch_lift_platform.tscn" type="PackedScene" id=2]
+
+[sub_resource type="Animation" id=1]
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reset_platform"
+} ]
+}
+
+[node name="OnOffTouchLift" type="Node2D"]
+z_index = -2
+script = ExtResource( 1 )
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = null
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 0.833878, 0.541641 )
+rotation = -0.333097
+rotate = false
+loop = false
+lookahead = 0.001
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Reset = SubResource( 1 )
+
+[node name="OnOffTouchLiftPlatform" parent="." instance=ExtResource( 2 )]
+position = Vector2( -5.96046e-08, -5.36442e-07 )
