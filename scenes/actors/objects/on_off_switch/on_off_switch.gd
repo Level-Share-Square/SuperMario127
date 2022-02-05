@@ -9,11 +9,17 @@ onready var curve_tween = $AnimatedSprite/CurveTween
 export(Array, SpriteFrames) var palette_frames
 
 func _ready():
+	
 	init()
 	if is_preview:
 		z_index = 0
 		sprite.z_index = 0
-
+		
+#	if mode == 1:
+#			set_property("default_state", default_state, true)
+#
+	sprite.frame = int(Singleton.CurrentLevelData.level_data.vars.switch_state[palette])
+	
 	if !enabled:
 		$StaticBody2D.set_collision_layer_bit(0, false)
 
@@ -22,11 +28,9 @@ func _ready():
 	
 	_connect()
 
-	sprite.frame = int(Singleton.CurrentLevelData.switch_state[palette])
-
 func _connect():
 	curve_tween.connect("curve_tween", self, "_on_curve_tween")
-	Singleton.CurrentLevelData.connect("switch_state_changed", self, "_on_switch_state_changed")
+	Singleton.CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
 	hit_collider.connect("body_entered", self, "_on_hit_body_entered")
 	hit_collider.connect("area_entered", self, "_on_hit_area_entered")
 
@@ -39,7 +43,9 @@ func _on_switch_state_changed(new_state, channel):
 
 func _on_hit():
 	switch_sound.play()
-	Singleton.CurrentLevelData.toggle_switch_state(palette)
+	Singleton.CurrentLevelData.level_data.vars.toggle_switch_state(palette)
 
 func _on_curve_tween(value):
 	sprite.position = value
+
+
