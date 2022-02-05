@@ -105,17 +105,15 @@ func _pre_open_screen() -> void:
 	if levels.size() == 0:
 		Singleton.SavedLevels.selected_level = NO_LEVEL
 		populate_info_panel()
-	else:
-		
-		if Singleton.SavedLevels.selected_level != NO_LEVEL:
-			# otherwise if it's not NO_LEVEL, we're probably returning to the menu after leaving a stage
-			if Singleton.SavedLevels.selected_level < levels.size():
-				populate_info_panel(levels[Singleton.SavedLevels.selected_level])
-			level_list.select(Singleton.SavedLevels.selected_level)
-		else: # no level selected, but we have levels, so select the first one
-			populate_info_panel(levels[0])
-			Singleton.SavedLevels.selected_level = 0
-			level_list.select(0)
+	elif Singleton.SavedLevels.selected_level != NO_LEVEL:
+		# otherwise if it's not NO_LEVEL, we're probably returning to the menu after leaving a stage
+		if Singleton.SavedLevels.selected_level < levels.size():
+			populate_info_panel(levels[Singleton.SavedLevels.selected_level])
+		level_list.select(Singleton.SavedLevels.selected_level)
+	else: # no level selected, but we have levels, so select the first one
+		populate_info_panel(levels[0])
+		Singleton.SavedLevels.selected_level = 0
+		level_list.select(0)
 
 func _input(event : InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -411,4 +409,3 @@ func on_button_time_scores_pressed() -> void:
 
 func on_button_close_time_scores_pressed() -> void:
 	set_time_score_panel(false)
-
