@@ -37,12 +37,8 @@ var directory : Directory = Directory.new()
 func _ready() -> void:
 	pass
 	load_level_paths_from_disk()
-	#for level_path in levels_disk_paths:
-	#	load_level_from_disk(level_path)
-	
-	# This will cause the levels array to sort newest to oldest
-	for n in range(levels_disk_paths.size() - 1, -1, -1):
-		load_level_from_disk(levels_disk_paths[n])
+	for level_path in levels_disk_paths:
+		load_level_from_disk(level_path)
 	prepare_template_levels()
 
 func wipe_template_levels():

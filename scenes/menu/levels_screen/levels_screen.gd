@@ -409,3 +409,4 @@ func on_button_time_scores_pressed() -> void:
 
 func on_button_close_time_scores_pressed() -> void:
 	set_time_score_panel(false)
+
