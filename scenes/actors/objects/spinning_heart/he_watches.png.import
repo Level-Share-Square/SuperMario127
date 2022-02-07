@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/small_bottle.png-7f43af9115551f54fc98337ed4f75792.stex"
+path="res://.import/he_watches.png-f02a2696ad9e42ab0274bec820fc6ff4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/spinning_heart/small_bottle.png"
-dest_files=[ "res://.import/small_bottle.png-7f43af9115551f54fc98337ed4f75792.stex" ]
+source_file="res://scenes/actors/objects/spinning_heart/he_watches.png"
+dest_files=[ "res://.import/he_watches.png-f02a2696ad9e42ab0274bec820fc6ff4.stex" ]
 
 [params]
 

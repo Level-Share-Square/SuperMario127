@@ -25,7 +25,7 @@ func _init():
 
 func _ready():
 	.ready() #Calls parent class "TeleportObject"
-
+	connect("property_changed", self, "_on_property_changed")
 	if rotation != 0 and enabled: #TODO: Vertical & Lateral pipes
 		enabled = false
 	if rotation == 0:
@@ -64,3 +64,18 @@ func start_exit_anim(character):
 
 func get_bottom_distance():
 	return pipe_enter_logic.PIPE_BOTTOM_DISTANCE - 30
+
+func _on_property_changed(key, value):
+	if key == "color":
+		if color == Color(0, 1, 0):
+			sprite.texture = normal_texture
+			sprite2.visible = false
+			sprite.self_modulate = Color(1, 1, 1)
+		else:
+			sprite.texture = recolorable_texture
+			sprite2.visible = true
+			sprite.self_modulate = value
+			var bright_color = value
+			bright_color.s /= 1.5
+			bright_color.v *= 1.15
+			sprite2.self_modulate = bright_color

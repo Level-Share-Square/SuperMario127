@@ -4,53 +4,48 @@
 [ext_resource path="res://scenes/actors/objects/spinning_heart/spinning_heart.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/spinning_heart/sm64_spinning_heart.ogg" type="AudioStream" id=3]
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 16, 16 )
+region = Rect2( 0, 0, 25, 25 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 2 )
-region = Rect2( 16, 0, 16, 16 )
+region = Rect2( 25, 0, 25, 25 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 2 )
-region = Rect2( 32, 0, 16, 16 )
+region = Rect2( 50, 0, 25, 25 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 2 )
-region = Rect2( 48, 0, 16, 16 )
+region = Rect2( 75, 0, 25, 25 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 16, 16 )
+region = Rect2( 100, 0, 25, 25 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 2 )
-region = Rect2( 80, 0, 16, 16 )
+region = Rect2( 125, 0, 25, 25 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 2 )
-region = Rect2( 96, 0, 16, 16 )
+region = Rect2( 150, 0, 25, 25 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 2 )
-region = Rect2( 112, 0, 16, 16 )
+region = Rect2( 175, 0, 25, 25 )
 
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
-"frames": [  ],
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
-}, {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
-"loop": true,
-"name": "New Anim",
-"speed": 4.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 16, 16 )
+extents = Vector2( 9, 9 )
 
 [sub_resource type="Animation" id=11]
 resource_name = "hop"
@@ -75,11 +70,9 @@ stream = ExtResource( 3 )
 volume_db = -3.0
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 2, 2 )
 z_index = -1
 frames = SubResource( 9 )
-animation = "New Anim"
-frame = 4
+frame = 7
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
