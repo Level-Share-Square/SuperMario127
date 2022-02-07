@@ -3,8 +3,8 @@ extends GameObject
 
 #-------------------------------- GameObject logic -----------------------
 
-var parts := 4
-var last_parts := 4
+var parts := 1
+var last_parts := 1
 
 var start_offset := 0
 var start_percentage := 0
@@ -57,8 +57,6 @@ func _input(event):
 			set_property("parts", parts)
 
 func _process(_delta):
-	if(!disappears):
-		grid_sprite.visible = false
 	if parts != last_parts:
 		platform.set_parts(parts)
 		if(mode==1):
@@ -86,7 +84,6 @@ onready var platform = $OnOffTouchLiftPlatform
 onready var path_follower = $Path2D/PathFollow2D
 onready var path = $Path2D
 onready var platform_sprite = $OnOffTouchLiftPlatform/Sprite
-onready var grid_sprite = $OnOffTouchLiftPlatform/Grid
 
 export var circle_texture : Texture
 
@@ -114,7 +111,7 @@ func _ready():
 	platform.platform_area_collision_shape.disabled = !enabled
 	
 	platform.platform_area_collision_shape.get_parent().connect("body_entered", self, "_on_touch_area_entered")
-	
+	platform_sprite.region_rect.position.y = palette * 14
 	if curve == null and path.curve == null:
 		path.curve = Curve2D.new()
 		path.curve.add_point(Vector2())
@@ -134,16 +131,13 @@ func _ready():
 	
 	if(mode==1):
 		platform.modulate = transparent_color
-		
 		start_sprite_node = Node2D.new()
 		start_sprite_node.add_child(platform_sprite.duplicate())
-		start_sprite_node.add_child(grid_sprite.duplicate())
 		#end_sprite.add_child(platform_sprite)
 		add_child(start_sprite_node)
 		
 		end_sprite_node = Node2D.new()
 		end_sprite_node.add_child(platform_sprite.duplicate())
-		end_sprite_node.add_child(grid_sprite.duplicate())
 		end_sprite_node.modulate = transparent_color
 		add_child(end_sprite_node)
 		
@@ -156,22 +150,18 @@ func set_state(state : bool):
 	if inverted:
 		frozen = state
 		if(disappears):
-			platform_sprite.visible = !state
-			grid_sprite.visible = state
+				platform_sprite.region_rect.position.x = int(state) * 22
 		platform.momentum = Vector2(0,0) 
-		#enabled = !enabled
 	else:
 		frozen = !state
 		if(disappears):
-			platform_sprite.visible = state
-			grid_sprite.visible = !state
+				platform_sprite.region_rect.position.x = int(!state) * 22
 		platform.momentum = Vector2(0,0) 
-		#enabled = !enabled
 
 func _on_switch_state_changed(new_state, channel):
-	#if palette == channel:
-	print("State changed")
-	set_state(new_state)
+	if palette == channel:
+		print("State changed")
+		set_state(new_state)
 
 func set_sprite_parts(sprite):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2

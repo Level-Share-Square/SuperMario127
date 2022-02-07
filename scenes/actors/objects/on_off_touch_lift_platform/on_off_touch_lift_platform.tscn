@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/actors/objects/metal_platform/is_platform_area.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/on_off_touch_lift_platform/on_off_touch_lift_platform.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/metal_platform/semi_solid_platform.gd" type="Script" id=3]
-[ext_resource path="res://scenes/actors/objects/on_off_touch_lift_platform/texture.png" type="Texture" id=4]
-[ext_resource path="res://scenes/actors/objects/on_off_touch_lift_platform/grid.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift_platform/platform.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23, 7 )
@@ -22,21 +21,9 @@ margin_top = -7.0
 margin_right = 23.0
 margin_bottom = 7.0
 texture = ExtResource( 4 )
-patch_margin_left = 8
-patch_margin_right = 8
-axis_stretch_horizontal = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Grid" type="NinePatchRect" parent="."]
-margin_left = -23.1078
-margin_top = -7.16206
-margin_right = 22.8922
-margin_bottom = 6.83794
-texture = ExtResource( 5 )
-patch_margin_left = 8
-patch_margin_right = 8
+region_rect = Rect2( 0, 0, 22, 14 )
+patch_margin_left = 15
+patch_margin_right = 15
 axis_stretch_horizontal = 1
 __meta__ = {
 "_edit_use_anchors_": false

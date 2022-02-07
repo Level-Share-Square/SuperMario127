@@ -1,5 +1,7 @@
 extends Node2D
 
+export (Array, Texture) var palette_texture = []
+
 onready var sprite = $Sprite
 onready var recolor_sprite = $SpriteRecolor
 
@@ -32,7 +34,7 @@ func set_position(new_position):
 func set_parts(parts: int):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts
-
+	
 	platform_area_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
 	collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
 

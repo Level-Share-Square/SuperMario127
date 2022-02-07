@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grid.png-c5cbbb3cb65f29b84777fd9e91011c42.stex"
+path="res://.import/icon.png-aa087edb967c5da9a8502d9ed49f716f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/on_off_touch_lift_platform/grid.png"
-dest_files=[ "res://.import/grid.png-c5cbbb3cb65f29b84777fd9e91011c42.stex" ]
+source_file="res://scenes/actors/objects/on_off_touch_lift_platform/palettes/1/icon.png"
+dest_files=[ "res://.import/icon.png-aa087edb967c5da9a8502d9ed49f716f.stex" ]
 
 [params]
 
