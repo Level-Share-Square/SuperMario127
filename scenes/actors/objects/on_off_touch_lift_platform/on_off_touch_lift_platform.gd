@@ -4,13 +4,14 @@ export (Array, Texture) var palette_texture = []
 
 onready var sprite = $Sprite
 onready var sprite2 = $Sprite2
+onready var animation_player = $AnimationPlayer
 
 onready var platform_area_collision_shape = $StaticBody2D/Area2D/CollisionShape2D
 onready var collision_shape = $StaticBody2D/CollisionShape2D
 
 onready var left_width = sprite.patch_margin_left
 onready var right_width = sprite.patch_margin_right
-onready var part_width = 15
+onready var part_width = 6
 
 onready var parent = get_parent()
 
@@ -34,12 +35,14 @@ func set_position(new_position):
 func set_parts(parts: int):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts
+	sprite.rect_pivot_offset = sprite.rect_size/2
 	
 	sprite2.rect_position.x = sprite.rect_position.x
 
 	sprite2.rect_size.x = sprite.rect_size.x
 
-	
+	sprite2.rect_pivot_offset = sprite2.rect_size/2
+
 	platform_area_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
 	collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
 
@@ -93,7 +96,7 @@ func _on_switch_state_changed(new_state, channel):
 			new_state = !new_state
 		if(parent.disappears):
 			$StaticBody2D.set_collision_layer_bit(4, new_state)
-			sprite.visible = new_state
+			animation_player.play(str(new_state).to_lower())
 			sprite2.visible = !new_state
 		else:
 			sprite.visible = true

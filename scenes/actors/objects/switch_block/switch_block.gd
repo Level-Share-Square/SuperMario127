@@ -19,6 +19,7 @@ func _set_property_values():
 func _ready():
 	init()
 	hit_bounce_enabled = false
+	connect("property_changed", self, "_on_property_changed")
 	if !enabled:
 		$StaticBody2D.set_collision_layer_bit(0, false)
 	if mode != 1:
@@ -46,3 +47,9 @@ func set_state(state : bool):
 func _on_switch_state_changed(new_state, channel):
 	if palette == channel:
 		set_state(new_state)
+
+func _on_property_changed(key, value):
+	if key == "inverted":
+		collider.set_deferred("disabled", !value)
+		hit_collider.set_deferred("disabled", !value)
+		animation_player.play(str(!value).to_lower())

@@ -31,8 +31,8 @@ var disappears = true
 var inverted = false
 
 func _set_properties():
-	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "start_offset", "disappears", "inverted"]
-	editable_properties = ["parts", "max_speed", "end_position", "move_type", "touch_start", "start_offset", "disappears", "inverted"]
+	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "start_offset", "inverted"]
+	editable_properties = ["parts", "max_speed", "end_position", "move_type", "touch_start", "start_offset", "inverted"]
 	
 func _set_property_values():
 	set_property("parts", parts)
@@ -42,7 +42,6 @@ func _set_property_values():
 	set_property("move_type", move_type)
 	set_property("touch_start", touch_start)
 	set_property("start_offset", start_offset)
-	set_property("disappears", disappears)
 	set_property("inverted", inverted)
 
 func _input(event):
