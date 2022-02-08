@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/actors/objects/on_off_platform_wheel/on_off_platform_wheel.gd" type="Script" id=1]
+
+[node name="OnOffPlatformWheel" type="Node2D"]
+z_index = -2
+script = ExtResource( 1 )

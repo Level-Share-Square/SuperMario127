@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/actors/objects/on_off_touch_lift/on_off_touch_lift.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/on_off_touch_lift_platform/on_off_touch_lift_platform.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/circle.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 tracks/0/type = "method"
@@ -22,6 +23,7 @@ tracks/0/keys = {
 [node name="OnOffTouchLift" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
+circle_texture = ExtResource( 3 )
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = null

@@ -1562,6 +1562,30 @@ item_name = "On/Off Floor Switch"
 icon = ExtResource( 632 )
 preview = ExtResource( 631 )
 
+[node name="OnOffTouchLift" type="Node" parent="PlaceableItems/SwitchesGroup"]
+script = ExtResource( 24 )
+object_id = 94
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+palette_icons = [ ExtResource( 154 ), ExtResource( 154 ), ExtResource( 154 ), ExtResource( 154 ), ExtResource( 154 ), ExtResource( 154 ) ]
+palette_previews = [ ExtResource( 153 ), ExtResource( 153 ), ExtResource( 153 ), ExtResource( 153 ), ExtResource( 153 ), ExtResource( 153 ) ]
+icon = ExtResource( 153 )
+preview = ExtResource( 154 )
+
+[node name="OnOffPlatformWheel" type="Node" parent="PlaceableItems/SwitchesGroup"]
+script = ExtResource( 24 )
+object_id = 96
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+palette_icons = [ ExtResource( 156 ), ExtResource( 156 ), ExtResource( 156 ), ExtResource( 156 ), ExtResource( 156 ), ExtResource( 156 ) ]
+palette_previews = [ ExtResource( 157 ), ExtResource( 157 ), ExtResource( 157 ), ExtResource( 157 ), ExtResource( 157 ), ExtResource( 157 ) ]
+icon = ExtResource( 156 )
+preview = ExtResource( 157 )
+
 [node name="CollectiblesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
 color = Color( 0.121569, 0.129412, 0.517647, 1 )
@@ -1769,18 +1793,6 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
-icon = ExtResource( 153 )
-preview = ExtResource( 154 )
-
-[node name="OnOffTouchLift" type="Node" parent="PlaceableItems/PlatformsGroup"]
-script = ExtResource( 24 )
-object_id = 94
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-palette_icons = [ ExtResource( 154 ), ExtResource( 154 ) ]
-palette_previews = [ ExtResource( 153 ), ExtResource( 153 ) ]
 icon = ExtResource( 153 )
 preview = ExtResource( 154 )
 

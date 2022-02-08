@@ -3,8 +3,8 @@ extends GameObject
 
 #-------------------------------- GameObject logic -----------------------
 
-var parts := 1
-var last_parts := 1
+var parts := 4
+var last_parts := 4
 
 var start_offset := 0
 var start_percentage := 0
@@ -27,13 +27,12 @@ onready var blend := pow(0.95, 120 * fps_util.PHYSICS_DELTA)
 
 var curve = null
 
-var inverted : bool = false
-var frozen = false
 var disappears = true
+var inverted = false
 
 func _set_properties():
-	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start",  "start_offset", "inverted", "disappears"]
-	editable_properties = ["parts", "max_speed", "end_position", "move_type", "touch_start",  "start_offset", "inverted", "disappears"]
+	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "start_offset", "disappears", "inverted"]
+	editable_properties = ["parts", "max_speed", "end_position", "move_type", "touch_start", "start_offset", "disappears", "inverted"]
 	
 func _set_property_values():
 	set_property("parts", parts)
@@ -43,7 +42,8 @@ func _set_property_values():
 	set_property("move_type", move_type)
 	set_property("touch_start", touch_start)
 	set_property("start_offset", start_offset)
-	set_property("inverted", inverted, true)
+	set_property("disappears", disappears)
+	set_property("inverted", inverted)
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
@@ -59,11 +59,11 @@ func _input(event):
 func _process(_delta):
 	if parts != last_parts:
 		platform.set_parts(parts)
-		if(mode==1):
-			set_sprite_parts(start_sprite_node.get_child(0))
-			set_sprite_parts(start_sprite_node.get_child(1))
-			set_sprite_parts(end_sprite_node.get_child(0))
-			set_sprite_parts(end_sprite_node.get_child(1))
+		#if(mode==1):
+			#set_sprite_parts(start_sprite_node.get_child(0))
+			#set_sprite_parts(start_sprite_node.get_child(1))
+			#set_sprite_parts(end_sprite_node.get_child(0))
+			#set_sprite_parts(end_sprite_node.get_child(1))
 		last_parts = parts
 	if curve != path.curve:
 		path.curve = curve
@@ -76,7 +76,7 @@ func _process(_delta):
 		end_sprite_node.position = path.curve.get_point_position(last_index)
 		
 		last_end_position = end_position
-
+	
 
 #-------------------------------- platform logic -----------------------
 
@@ -104,14 +104,19 @@ onready var left_width = platform_sprite.patch_margin_left
 onready var right_width = platform_sprite.patch_margin_right
 onready var part_width = platform_sprite.texture.get_width() - left_width - right_width
 
+onready var frozen = false
+
 func _ready():
 	activated = !touch_start
 	
+	if(!disappears && inverted):
+		frozen = true
+		
 	platform.collision_shape.disabled = !enabled
 	platform.platform_area_collision_shape.disabled = !enabled
 	
 	platform.platform_area_collision_shape.get_parent().connect("body_entered", self, "_on_touch_area_entered")
-	platform_sprite.region_rect.position.y = palette * 14
+	
 	if curve == null and path.curve == null:
 		path.curve = Curve2D.new()
 		path.curve.add_point(Vector2())
@@ -131,8 +136,10 @@ func _ready():
 	
 	if(mode==1):
 		platform.modulate = transparent_color
+		
 		start_sprite_node = Node2D.new()
 		start_sprite_node.add_child(platform_sprite.duplicate())
+
 		#end_sprite.add_child(platform_sprite)
 		add_child(start_sprite_node)
 		
@@ -142,29 +149,9 @@ func _ready():
 		add_child(end_sprite_node)
 		
 		set_property("end_position", path.curve.get_point_position(path.curve.get_point_count()-1)/32)
-	frozen = inverted
-	set_state(Singleton.CurrentLevelData.level_data.vars.switch_state[palette])
-	Singleton.CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
-
-func set_state(state : bool):
-	if inverted:
-		frozen = state
-		if(disappears):
-				platform_sprite.region_rect.position.x = int(state) * 22
-		platform.momentum = Vector2(0,0) 
-	else:
-		frozen = !state
-		if(disappears):
-				platform_sprite.region_rect.position.x = int(!state) * 22
-		platform.momentum = Vector2(0,0) 
-
-func _on_switch_state_changed(new_state, channel):
-	if palette == channel:
-		print("State changed")
-		set_state(new_state)
 
 func set_sprite_parts(sprite):
-	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
+	#sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts
 
 func draw_circle_custom(position, radius, color, maxerror = 0.25):
@@ -194,15 +181,9 @@ func _draw():
 			draw_texture_rect(circle_texture, Rect2(pos - Vector2(2.0, 2.0), Vector2(4.0, 4.0)), false, Color.darkgray)
 
 func _physics_process(delta):
-	if(disappears):
-		platform.collision_shape.disabled = frozen
-		platform.platform_area_collision_shape.disabled = frozen
 	if(!activated || frozen):
-		platform.momentum = Vector2(0,0)
-		platform.set_position(Vector2(stepify(position.x, 1), stepify(position.y, 1)))
 		return
 
-	
 	linear_offset += speed * max_speed * 120 * fps_util.PHYSICS_DELTA
 
 	if move_type != MT_LOOP:
@@ -229,8 +210,6 @@ func _physics_process(delta):
 		platform.position = path_follower.position
 
 func reached_end() -> void:
-	if(frozen):
-		return
 	match move_type:
 		MT_BACK_FORTH:
 			speed = -speed
@@ -244,8 +223,6 @@ func _on_touch_area_entered(body):
 		activated = true
 
 func reset_platform():
-	if(frozen):
-		return
 	linear_offset = 0.0
 	loop_offset = 0.0
 	path_follower.offset = 0.0

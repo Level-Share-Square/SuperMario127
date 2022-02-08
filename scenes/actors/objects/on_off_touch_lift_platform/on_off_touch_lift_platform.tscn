@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/actors/objects/metal_platform/is_platform_area.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/on_off_touch_lift_platform/on_off_touch_lift_platform.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/metal_platform/semi_solid_platform.gd" type="Script" id=3]
-[ext_resource path="res://scenes/actors/objects/on_off_touch_lift_platform/platform.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift_platform/onoffplatform.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23, 7 )
@@ -16,12 +16,28 @@ z_index = 1
 script = ExtResource( 2 )
 
 [node name="Sprite" type="NinePatchRect" parent="."]
+anchor_right = 0.375
 margin_left = -23.0
 margin_top = -7.0
 margin_right = 23.0
 margin_bottom = 7.0
 texture = ExtResource( 4 )
-region_rect = Rect2( 0, 0, 22, 14 )
+region_rect = Rect2( 0, 0, 23, 13 )
+patch_margin_left = 15
+patch_margin_right = 15
+axis_stretch_horizontal = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite2" type="NinePatchRect" parent="."]
+anchor_right = 0.375
+margin_left = -23.0
+margin_top = -7.0
+margin_right = 23.0
+margin_bottom = 7.0
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 23, 13 )
 patch_margin_left = 15
 patch_margin_right = 15
 axis_stretch_horizontal = 1
@@ -30,6 +46,7 @@ __meta__ = {
 }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 collision_layer = 16
 collision_mask = 0
 script = ExtResource( 3 )
