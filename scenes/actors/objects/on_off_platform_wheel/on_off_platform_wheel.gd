@@ -4,8 +4,8 @@ var platforms : Array = []
 var delta_angle := PI/2
 var time_alive := 0.0
 
-var parts := 4
-var last_parts := 4
+var parts := 2
+var last_parts := 2
 
 var start_angle := 0.0
 onready var angle_offset := deg2rad(start_angle)
@@ -17,14 +17,14 @@ var speed : float = 2
 
 var platform_count := 4
 
-onready var disappears = true
-onready var inverted = false
+var disappears : bool = true
+var inverted : bool = false
 
 onready var frozen = false
 
 func _set_properties():
 	savable_properties = ["parts", "speed", "radius", "platform_count",  "start_angle", "disappears", "inverted"]
-	editable_properties = ["parts", "speed", "radius", "platform_count",  "start_angle", "disappears", "inverted"]
+	editable_properties = ["parts", "speed", "radius", "platform_count",  "start_angle", "inverted"]
 	
 func _set_property_values():
 	set_property("parts", parts)
@@ -93,9 +93,6 @@ func _draw():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var scene := load("res://scenes/actors/objects/on_off_touch_lift_platform/on_off_touch_lift_platform.tscn")
-	
-	if(!disappears && inverted):
-		frozen = true
 
 	delta_angle = (PI * 2) / platform_count
 	for _i in range(platform_count):
@@ -106,10 +103,18 @@ func _ready():
 		# Disable the collision if enabled = false
 		instance.collision_shape.disabled = !enabled
 		instance.platform_area_collision_shape.disabled = !enabled
+	
+	#_set_platform_pos()
+	
+	if(!disappears && inverted):
+		frozen = true
+
 
 func _physics_process(_delta):
-	if(frozen):
-		return
+	if(!frozen):
+		_set_platform_pos()
+
+func _set_platform_pos():
 	time_alive += fps_util.PHYSICS_DELTA * speed
 	var angle := fmod(time_alive + angle_offset, (2*PI))
 	for platform in platforms:

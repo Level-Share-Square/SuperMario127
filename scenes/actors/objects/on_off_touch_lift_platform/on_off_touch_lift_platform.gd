@@ -22,6 +22,7 @@ func set_position(new_position):
 		momentum = Vector2(0,0)
 		last_position = momentum
 		$StaticBody2D.constant_linear_velocity = momentum
+		#set_position(Vector2(stepify(position.x, 1), stepify(position.y, 1)))
 		return
 	var movement = get_parent().to_global(new_position) - global_position
 	
@@ -61,6 +62,10 @@ func _ready():
 	Singleton.CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
 	
 	_on_switch_state_changed(true, parent.palette)
+	
+	#parent._ready()
+	#parent._set_platform_pos()
+		
 
 
 func _physics_process(delta):
@@ -69,7 +74,7 @@ func _physics_process(delta):
 	
 	if(parent.frozen == true):
 		momentum = Vector2(0,0)
-		last_position - momentum
+		$StaticBody2D.constant_linear_velocity = momentum
 		return
 	momentum = (global_position - last_position) / fps_util.PHYSICS_DELTA
 	

@@ -3,8 +3,8 @@ extends GameObject
 
 #-------------------------------- GameObject logic -----------------------
 
-var parts := 4
-var last_parts := 4
+var parts := 2
+var last_parts := 2
 
 var start_offset := 0
 var start_percentage := 0
@@ -27,12 +27,12 @@ onready var blend := pow(0.95, 120 * fps_util.PHYSICS_DELTA)
 
 var curve = null
 
-var disappears = true
-var inverted = false
+var disappears : bool = true
+var inverted : bool = false
 
 func _set_properties():
 	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "start_offset", "disappears", "inverted"]
-	editable_properties = ["parts", "max_speed", "end_position", "move_type", "touch_start", "start_offset", "disappears", "inverted"]
+	editable_properties = ["parts", "max_speed", "end_position", "move_type", "touch_start", "start_offset", "inverted"]
 	
 func _set_property_values():
 	set_property("parts", parts)
@@ -183,7 +183,9 @@ func _draw():
 func _physics_process(delta):
 	if(!activated || frozen):
 		return
+	_set_platform_pos()
 
+func _set_platform_pos():
 	linear_offset += speed * max_speed * 120 * fps_util.PHYSICS_DELTA
 
 	if move_type != MT_LOOP:
