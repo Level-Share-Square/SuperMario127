@@ -1,13 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scenes/actors/objects/on_off_switch/0_frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/switch.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/on_off_switch/on_off_switch.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/on_off_switch/Switch.wav" type="AudioStream" id=3]
-[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/1/1_frames.tres" type="SpriteFrames" id=4]
-[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/4/4_frames.tres" type="SpriteFrames" id=5]
-[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/2/2_frames.tres" type="SpriteFrames" id=6]
-[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/5/5_frames.tres" type="SpriteFrames" id=7]
-[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/3/3_frames.tres" type="SpriteFrames" id=8]
 [ext_resource path="res://classes/block_anim_curve.tres" type="Curve" id=9]
 [ext_resource path="res://classes/curve_tween.gd" type="Script" id=10]
 
@@ -19,13 +14,13 @@ extents = Vector2( 22, 17 )
 
 [node name="OnOffSwitch" type="Node2D"]
 script = ExtResource( 2 )
-palette_frames = [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 7 ) ]
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 1 )
-animation = "switch"
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
 
-[node name="CurveTween" type="Tween" parent="AnimatedSprite"]
+[node name="CurveTween" type="Tween" parent="Sprite"]
 script = ExtResource( 10 )
 curve = ExtResource( 9 )
 

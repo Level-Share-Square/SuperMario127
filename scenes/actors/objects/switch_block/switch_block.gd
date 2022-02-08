@@ -4,6 +4,9 @@ onready var sprite = $Sprite
 onready var outline = $Outline
 onready var animation_player = $AnimationPlayer
 onready var collider = $StaticBody2D/CollisionShape2D
+onready var hit_area = $HitCollider
+onready var hit_collider = $HitCollider/CollisionShape2D
+
 var inverted : bool = false
 
 func _set_properties():
@@ -15,8 +18,12 @@ func _set_property_values():
 
 func _ready():
 	init()
+	hit_bounce_enabled = false
 	if !enabled:
 		$StaticBody2D.set_collision_layer_bit(0, false)
+	if mode != 1:
+		hit_area.connect("body_entered", self, "_on_hit_body_entered")
+		hit_area.connect("area_entered", self, "_on_hit_area_entered")
 
 	if palette != 0:
 		print(sprite.region_rect)
@@ -29,9 +36,11 @@ func _ready():
 func set_state(state : bool):
 	if inverted:
 		collider.set_deferred("disabled", state)
+		hit_collider.set_deferred("disabled", state)
 		animation_player.play(str(!state).to_lower())
 	else:
 		collider.set_deferred("disabled", !state)
+		hit_collider.set_deferred("disabled", !state)
 		animation_player.play(str(state).to_lower())
 
 func _on_switch_state_changed(new_state, channel):

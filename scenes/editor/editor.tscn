@@ -1,4 +1,4 @@
-[gd_scene load_steps=658 format=2]
+[gd_scene load_steps=668 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -632,6 +632,16 @@
 [ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/2/icon.png" type="Texture" id=630]
 [ext_resource path="res://scenes/actors/objects/on_off_floor_switch/preview.png" type="Texture" id=631]
 [ext_resource path="res://scenes/actors/objects/on_off_floor_switch/icon.png" type="Texture" id=632]
+[ext_resource path="res://scenes/actors/objects/switch_block/palettes/2/icon.png" type="Texture" id=633]
+[ext_resource path="res://scenes/actors/objects/switch_block/palettes/6/preview.png" type="Texture" id=634]
+[ext_resource path="res://scenes/actors/objects/switch_block/palettes/5/icon.png" type="Texture" id=635]
+[ext_resource path="res://scenes/actors/objects/switch_block/palettes/4/icon.png" type="Texture" id=636]
+[ext_resource path="res://scenes/actors/objects/switch_block/icon.png" type="Texture" id=637]
+[ext_resource path="res://scenes/actors/objects/switch_block/palettes/1/icon.png" type="Texture" id=638]
+[ext_resource path="res://scenes/actors/objects/switch_block/palettes/3/icon.png" type="Texture" id=639]
+[ext_resource path="res://scenes/actors/objects/switch_block/palettes/6/icon.png" type="Texture" id=640]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/6/preview.png" type="Texture" id=641]
+[ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/6/icon.png" type="Texture" id=642]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1497,7 +1507,7 @@ preview = ExtResource( 342 )
 
 [node name="SwitchesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
-color = Color( 0, 0.529412, 1, 1 )
+color = Color( 0.0862745, 0.188235, 0.835294, 1 )
 group_name = "Switches"
 
 [node name="PSwitch" type="Node" parent="PlaceableItems/SwitchesGroup"]
@@ -1524,8 +1534,8 @@ object_id = 92
 is_object = true
 object_center = Vector2( 16, 16 )
 item_name = "On/Off Switch"
-palette_icons = [ ExtResource( 626 ), ExtResource( 614 ), ExtResource( 630 ), ExtResource( 629 ), ExtResource( 628 ), ExtResource( 627 ) ]
-palette_previews = [ ExtResource( 135 ), ExtResource( 617 ), ExtResource( 618 ), ExtResource( 620 ), ExtResource( 615 ), ExtResource( 619 ) ]
+palette_icons = [ ExtResource( 626 ), ExtResource( 614 ), ExtResource( 630 ), ExtResource( 629 ), ExtResource( 628 ), ExtResource( 627 ), ExtResource( 642 ) ]
+palette_previews = [ ExtResource( 135 ), ExtResource( 617 ), ExtResource( 618 ), ExtResource( 620 ), ExtResource( 615 ), ExtResource( 619 ), ExtResource( 641 ) ]
 object_size = Vector2( 32, 32 )
 icon = ExtResource( 626 )
 preview = ExtResource( 135 )
@@ -1536,10 +1546,10 @@ object_id = 93
 is_object = true
 object_center = Vector2( 16, 16 )
 item_name = "Switch Block"
-palette_icons = [ ExtResource( 621 ), ExtResource( 622 ), ExtResource( 624 ), ExtResource( 616 ), ExtResource( 623 ), ExtResource( 625 ) ]
-palette_previews = [ ExtResource( 621 ), ExtResource( 622 ), ExtResource( 624 ), ExtResource( 616 ), ExtResource( 623 ), ExtResource( 625 ) ]
+palette_icons = [ ExtResource( 637 ), ExtResource( 638 ), ExtResource( 633 ), ExtResource( 639 ), ExtResource( 636 ), ExtResource( 635 ), ExtResource( 640 ) ]
+palette_previews = [ ExtResource( 621 ), ExtResource( 622 ), ExtResource( 624 ), ExtResource( 616 ), ExtResource( 623 ), ExtResource( 625 ), ExtResource( 634 ) ]
 object_size = Vector2( 32, 32 )
-icon = ExtResource( 621 )
+icon = ExtResource( 637 )
 preview = ExtResource( 621 )
 
 [node name="OnOffFloorSwitch" type="Node" parent="PlaceableItems/SwitchesGroup"]

@@ -17,7 +17,7 @@ var liquid_positions = []
 var checkpoints = []
 var current_liquid_id = 0
 var last_red_coin_id = 0
-var switch_state : Array = [true, true, true, true, true, true]
+var switch_state : Array = [true, true, true, true, true, true, true]
 
 func reload():
 	coins_collected = Singleton.CheckpointSaved.current_coins
@@ -25,7 +25,7 @@ func reload():
 	shine_shards_collected = Singleton.CheckpointSaved.current_shine_shards.duplicate(true)
 	nozzles_collected = Singleton.CheckpointSaved.nozzles_collected.duplicate(true)
 	liquid_positions = Singleton.CheckpointSaved.liquid_positions.duplicate(true)
-	switch_state = [true, true, true, true, true, true]
+	switch_state = [true, true, true, true, true, true, true]
 
 func reset_counters():
 	max_red_coins = 0
