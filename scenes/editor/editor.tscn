@@ -1593,8 +1593,8 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
-palette_icons = [ ExtResource( 648 ), ExtResource( 647 ), ExtResource( 645 ), ExtResource( 644 ), ExtResource( 643 ), ExtResource( 646 ) ]
-palette_previews = [ ExtResource( 650 ), ExtResource( 652 ), ExtResource( 653 ), ExtResource( 651 ), ExtResource( 654 ), ExtResource( 649 ) ]
+palette_icons = [ ExtResource( 648 ), ExtResource( 647 ), ExtResource( 645 ), ExtResource( 644 ), ExtResource( 643 ), ExtResource( 646 ), ExtResource( 647 ) ]
+palette_previews = [ ExtResource( 650 ), ExtResource( 652 ), ExtResource( 653 ), ExtResource( 651 ), ExtResource( 654 ), ExtResource( 649 ), ExtResource( 652 ) ]
 icon = ExtResource( 648 )
 preview = ExtResource( 650 )
 
@@ -1605,8 +1605,8 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
-palette_icons = [ ExtResource( 662 ), ExtResource( 663 ), ExtResource( 661 ), ExtResource( 664 ), ExtResource( 666 ), ExtResource( 665 ) ]
-palette_previews = [ ExtResource( 660 ), ExtResource( 659 ), ExtResource( 655 ), ExtResource( 656 ), ExtResource( 657 ), ExtResource( 658 ) ]
+palette_icons = [ ExtResource( 662 ), ExtResource( 663 ), ExtResource( 661 ), ExtResource( 664 ), ExtResource( 666 ), ExtResource( 665 ), ExtResource( 663 ) ]
+palette_previews = [ ExtResource( 660 ), ExtResource( 659 ), ExtResource( 655 ), ExtResource( 656 ), ExtResource( 657 ), ExtResource( 658 ), ExtResource( 659 ) ]
 icon = ExtResource( 662 )
 preview = ExtResource( 660 )
 
