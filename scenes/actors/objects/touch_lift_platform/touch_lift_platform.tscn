@@ -67,4 +67,5 @@ scale = Vector2( 0.65625, 1 )
 rect = Rect2( -32, -5, 64, 10 )
 process_parent = true
 physics_process_parent = true
+
 [connection signal="body_exited" from="StaticBody2D/Area2D" to="." method="_on_PlatformArea_body_exited"]
