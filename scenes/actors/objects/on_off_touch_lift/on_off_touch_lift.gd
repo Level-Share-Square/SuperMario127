@@ -3,8 +3,8 @@ extends GameObject
 
 #-------------------------------- GameObject logic -----------------------
 
-var parts := 1
-var last_parts := 1
+var parts := 2
+var last_parts := 2
 
 var start_offset := 0
 var start_percentage := 0
