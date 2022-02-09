@@ -85,7 +85,7 @@ func _physics_process(delta):
 
 
 func _on_PlatformArea_body_exited(body):
-	if(parent.frozen == true):
+	if(parent.frozen == true || $StaticBody2D.get_collision_layer_bit(4) == false):
 		momentum = Vector2(0,0)
 		last_position = momentum
 		return

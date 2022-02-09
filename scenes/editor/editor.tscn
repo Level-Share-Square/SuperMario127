@@ -1,4 +1,4 @@
-[gd_scene load_steps=668 format=2]
+[gd_scene load_steps=692 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -642,6 +642,30 @@
 [ext_resource path="res://scenes/actors/objects/switch_block/palettes/6/icon.png" type="Texture" id=640]
 [ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/6/preview.png" type="Texture" id=641]
 [ext_resource path="res://scenes/actors/objects/on_off_switch/palettes/6/icon.png" type="Texture" id=642]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/5/icon.png" type="Texture" id=643]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/4/icon.png" type="Texture" id=644]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/3/icon.png" type="Texture" id=645]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/6/icon.png" type="Texture" id=646]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/2/icon.png" type="Texture" id=647]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/1/icon.png" type="Texture" id=648]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/6/preview.png" type="Texture" id=649]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/1/preview.png" type="Texture" id=650]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/4/preview.png" type="Texture" id=651]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/2/preview.png" type="Texture" id=652]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/3/preview.png" type="Texture" id=653]
+[ext_resource path="res://scenes/actors/objects/on_off_touch_lift/palettes/5/preview.png" type="Texture" id=654]
+[ext_resource path="res://scenes/actors/objects/on_off_platform_wheel/palettes/3/preview.png" type="Texture" id=655]
+[ext_resource path="res://scenes/actors/objects/on_off_platform_wheel/palettes/4/preview.png" type="Texture" id=656]
+[ext_resource path="res://scenes/actors/objects/on_off_platform_wheel/palettes/5/preview.png" type="Texture" id=657]
+[ext_resource path="res://scenes/actors/objects/on_off_platform_wheel/palettes/6/preview.png" type="Texture" id=658]
+[ext_resource path="res://scenes/actors/objects/on_off_platform_wheel/palettes/2/preview.png" type="Texture" id=659]
+[ext_resource path="res://scenes/actors/objects/on_off_platform_wheel/palettes/1/preview.png" type="Texture" id=660]
+[ext_resource path="res://scenes/actors/objects/on_off_platform_wheel/palettes/3/icon.png" type="Texture" id=661]
+[ext_resource path="res://scenes/actors/objects/on_off_platform_wheel/palettes/1/icon.png" type="Texture" id=662]
+[ext_resource path="res://scenes/actors/objects/on_off_platform_wheel/palettes/2/icon.png" type="Texture" id=663]
+[ext_resource path="res://scenes/actors/objects/on_off_platform_wheel/palettes/4/icon.png" type="Texture" id=664]
+[ext_resource path="res://scenes/actors/objects/on_off_platform_wheel/palettes/6/icon.png" type="Texture" id=665]
+[ext_resource path="res://scenes/actors/objects/on_off_platform_wheel/palettes/5/icon.png" type="Texture" id=666]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1569,10 +1593,10 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
-palette_icons = [ ExtResource( 154 ), ExtResource( 154 ), ExtResource( 154 ), ExtResource( 154 ), ExtResource( 154 ), ExtResource( 154 ) ]
-palette_previews = [ ExtResource( 153 ), ExtResource( 153 ), ExtResource( 153 ), ExtResource( 153 ), ExtResource( 153 ), ExtResource( 153 ) ]
-icon = ExtResource( 153 )
-preview = ExtResource( 154 )
+palette_icons = [ ExtResource( 648 ), ExtResource( 647 ), ExtResource( 645 ), ExtResource( 644 ), ExtResource( 643 ), ExtResource( 646 ) ]
+palette_previews = [ ExtResource( 650 ), ExtResource( 652 ), ExtResource( 653 ), ExtResource( 651 ), ExtResource( 654 ), ExtResource( 649 ) ]
+icon = ExtResource( 648 )
+preview = ExtResource( 650 )
 
 [node name="OnOffPlatformWheel" type="Node" parent="PlaceableItems/SwitchesGroup"]
 script = ExtResource( 24 )
@@ -1581,10 +1605,10 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
-palette_icons = [ ExtResource( 156 ), ExtResource( 156 ), ExtResource( 156 ), ExtResource( 156 ), ExtResource( 156 ), ExtResource( 156 ) ]
-palette_previews = [ ExtResource( 157 ), ExtResource( 157 ), ExtResource( 157 ), ExtResource( 157 ), ExtResource( 157 ), ExtResource( 157 ) ]
-icon = ExtResource( 156 )
-preview = ExtResource( 157 )
+palette_icons = [ ExtResource( 662 ), ExtResource( 663 ), ExtResource( 661 ), ExtResource( 664 ), ExtResource( 666 ), ExtResource( 665 ) ]
+palette_previews = [ ExtResource( 660 ), ExtResource( 659 ), ExtResource( 655 ), ExtResource( 656 ), ExtResource( 657 ), ExtResource( 658 ) ]
+icon = ExtResource( 662 )
+preview = ExtResource( 660 )
 
 [node name="CollectiblesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )

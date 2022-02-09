@@ -3,8 +3,8 @@ extends GameObject
 
 #-------------------------------- GameObject logic -----------------------
 
-var parts := 2
-var last_parts := 2
+var parts := 1
+var last_parts := 1
 
 var start_offset := 0
 var start_percentage := 0
@@ -59,11 +59,10 @@ func _input(event):
 func _process(_delta):
 	if parts != last_parts:
 		platform.set_parts(parts)
-		#if(mode==1):
-			#set_sprite_parts(start_sprite_node.get_child(0))
-			#set_sprite_parts(start_sprite_node.get_child(1))
-			#set_sprite_parts(end_sprite_node.get_child(0))
-			#set_sprite_parts(end_sprite_node.get_child(1))
+		if(mode==1):
+			set_sprite_parts(start_sprite_node.get_child(0))
+			set_sprite_parts(end_sprite_node.get_child(0))
+
 		last_parts = parts
 	if curve != path.curve:
 		path.curve = curve
@@ -102,7 +101,7 @@ const transparent_color : Color = Color(1, 1, 1, 0.5)
 
 onready var left_width = platform_sprite.patch_margin_left
 onready var right_width = platform_sprite.patch_margin_right
-onready var part_width = platform_sprite.texture.get_width() - left_width - right_width
+onready var part_width = 15
 
 onready var frozen = false
 
@@ -151,7 +150,7 @@ func _ready():
 		set_property("end_position", path.curve.get_point_position(path.curve.get_point_count()-1)/32)
 
 func set_sprite_parts(sprite):
-	#sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
+	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts
 
 func draw_circle_custom(position, radius, color, maxerror = 0.25):
