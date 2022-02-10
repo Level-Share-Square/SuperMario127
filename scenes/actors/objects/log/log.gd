@@ -9,7 +9,7 @@ onready var sprite = $Sprite
 
 var buffer := -5
 var character = null
-var fall_on_touch := true
+var fall_on_touch := false
 var falling := false
 var shaking := false
 
