@@ -31,7 +31,7 @@ var last_mouse_pos := Vector2(0, 0)
 var last_mouse_tile_pos := Vector2(0, 0)
 
 var object_pos : Vector2
-var last_object_pos : Vector2
+
 
 var left_held := false
 var right_held := false
@@ -319,11 +319,12 @@ func _process(delta : float) -> void:
 				if !rotating:
 					object_settings.open_object(hovered_object)
 			
-			if Input.is_action_just_pressed("place") and rotating:
+			if Input.is_action_just_released("place") and rotating:
 				rotating = false
 				hovered_object.set_property("rotation_degrees", fmod(hovered_object.rotation_degrees, 360), true)
 		
 		if selected_box and selected_box.item:
+			
 			# Place items
 			
 			if left_held and selected_tool == 0:
@@ -339,8 +340,8 @@ func _process(delta : float) -> void:
 							tiles_stack.append([mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, last_tile, [item.tileset_id, item.tile_id]])
 						
 						shared.set_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, item.tileset_id, item.tile_id, item.palette_index)
-				elif !is_instance_valid(hovered_object): # Place object
-					
+				elif !is_instance_valid(hovered_object) and !rotating: # Place object
+					var last_object_pos : Vector2
 					
 						
 					if placement_mode == "Tile":
@@ -356,15 +357,8 @@ func _process(delta : float) -> void:
 							if result:
 								object_pos = result.position - Vector2(0, item.object_size.y)
 					# I am truly sorry for writing this god forsaken code
-					last_object_pos = object_pos
 					
-					var length_difference = mouse_pos - last_object_pos
-					
-					if(abs(length_difference.x) >= 32):
-						object_pos.x = last_object_pos.x + 32 * (length_difference.x/abs(length_difference.x))
-						
-					elif(abs(length_difference.y) >= 32):
-						object_pos.y = last_object_pos.y + 32 * (length_difference.y/abs(length_difference.y))
+
 						
 					
 					if object_pos and !shared.is_object_at_position(object_pos) and item.on_place(object_pos, level_data, level_area):
@@ -379,7 +373,15 @@ func _process(delta : float) -> void:
 						shared.create_object(object, true)
 						last_object_pos = object_pos
 						
+					last_object_pos = object_pos
+					mouse_pos = get_global_mouse_position()
+					var length_difference = mouse_pos - last_object_pos
 					
+					if(abs(length_difference.x) >= item_preview.texture.get_width()):
+						object_pos.x = last_object_pos.x + item_preview.texture.get_width() * (length_difference.x/abs(length_difference.x))
+						
+					elif(abs(length_difference.y) >= item_preview.texture.get_height()):
+						object_pos.y = last_object_pos.y + item_preview.texture.get_height() * (length_difference.y/abs(length_difference.y))
 							
 			
 			# Delete items
