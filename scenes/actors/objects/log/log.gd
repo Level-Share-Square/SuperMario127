@@ -1,6 +1,6 @@
 extends GameObject
 
-onready var area = $Area2D
+onready var area = $StaticBody2D/Area2D
 onready var fall_detector_node = $FallDetector
 onready var static_body = $StaticBody2D
 onready var collision_shape = $StaticBody2D/CollisionShape2D
@@ -43,6 +43,7 @@ func _ready():
 		var _connect2 = area.connect("body_exited", self, "exit_area")
 		
 func fall_detector(body):
+
 	if character and enabled:
 		var can_fall = false
 		var _direction = static_body.global_transform.y.normalized()
@@ -55,14 +56,20 @@ func fall_detector(body):
 			fall_speed = 1.0
 
 func enter_area(body):
+	if(!fall_on_touch):
+		return
 	if body.name.begins_with("Character"):
 		character = body
 		
 func exit_area(body):
+	if(!fall_on_touch):
+		return
 	if body == character:
 		character = null
 
 func _physics_process(delta):
+	if(!fall_on_touch):
+		return
 	for body in fall_detector_node.get_overlapping_bodies():
 		fall_detector(body)
 	
