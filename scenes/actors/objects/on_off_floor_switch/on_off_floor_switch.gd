@@ -33,6 +33,7 @@ func _ready():
 		press_sound.volume_db = 0
 
 	rotation = 0
+	switch.region_rect.position.y = palette * 21
 	switch.region_rect.position.x = int(!switch_mode) * 20
 	connect("property_changed", self, "_on_property_changed")
 	Singleton.CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")

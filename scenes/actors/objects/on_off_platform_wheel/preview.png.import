@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/1.png-40e4c05c5eff306ff6f98c1036ad8332.stex"
+path="res://.import/preview.png-0abb88c685e49866f0e0523b3c23f1a4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/on_off_touch_lift/palettes/1.png"
-dest_files=[ "res://.import/1.png-40e4c05c5eff306ff6f98c1036ad8332.stex" ]
+source_file="res://scenes/actors/objects/on_off_platform_wheel/preview.png"
+dest_files=[ "res://.import/preview.png-0abb88c685e49866f0e0523b3c23f1a4.stex" ]
 
 [params]
 

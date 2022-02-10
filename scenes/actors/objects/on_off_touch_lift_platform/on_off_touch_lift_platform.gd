@@ -26,10 +26,10 @@ func set_position(new_position):
 		#set_position(Vector2(stepify(position.x, 1), stepify(position.y, 1)))
 		return
 	var movement = get_parent().to_global(new_position) - global_position
-	
+
 	#first move the bodies
 	$StaticBody2D.constant_linear_velocity = movement * 60
-	
+
 	#then move self
 	position = new_position
 
@@ -37,7 +37,7 @@ func set_parts(parts: int):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts
 	sprite.rect_pivot_offset = sprite.rect_size/2
-	
+
 	sprite2.rect_position.x = sprite.rect_position.x
 
 	sprite2.rect_size.x = sprite.rect_size.x
@@ -49,38 +49,37 @@ func set_parts(parts: int):
 
 func _ready():
 	parent = get_parent()
-	
+
 	sprite.region_rect.position.y = int(parent.palette) * 13
-	
+
 	sprite.region_rect.position.x = int(!parent.disappears) * 46
-	
+
 
 	sprite2.region_rect.position.y = sprite.region_rect.position.y
 	sprite2.region_rect.position.x = 23 + int(!parent.disappears) * 46
-	
+
 	last_position = global_position
 	collision_shape.shape = collision_shape.shape.duplicate()
 	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate()
-	
+
 	Singleton.CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
-	
+
 	_on_switch_state_changed(true, parent.palette)
-	
+
 	#parent._ready()
 	#parent._set_platform_pos()
-		
+
 
 
 func _physics_process(delta):
 
 
-	
 	if(parent.frozen == true):
 		momentum = Vector2(0,0)
 		$StaticBody2D.constant_linear_velocity = momentum
 		return
 	momentum = (global_position - last_position) / fps_util.PHYSICS_DELTA
-	
+
 	last_position = global_position
 	sprite.region_rect.position.x = int(!parent.disappears) * 46
 
@@ -107,8 +106,3 @@ func _on_switch_state_changed(new_state, channel):
 			sprite.visible = true
 			parent.frozen = !new_state
 			sprite2.region_rect.position.x = 69 + int(!new_state) * 23
-			
-			
-			
-
-	

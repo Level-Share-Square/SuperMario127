@@ -33,6 +33,7 @@ func collect(body):
 		if cooldown:
 			timer.start()
 			on_cooldown = true
+		var velocity = abs(body.velocity.x) if abs(body.velocity.x) > abs(body.velocity.y) else abs(body.velocity.y) 
 		var heal_scale = 1 if body.velocity.x < player_speed_cap else clamp(body.velocity.x, player_speed_cap, player_speed_cap * 2) / player_speed_cap
 		var spin_scale = (clamp(abs(body.velocity.x), 0.001, player_speed_cap) / 15) * heal_scale
 		print(heal_scale)

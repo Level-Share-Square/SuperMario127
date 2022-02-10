@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 18, 1 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "depress"
 length = 0.5
 tracks/0/type = "value"
@@ -37,8 +37,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, -3 ), Vector2( 0, 4.25 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "press"
+[sub_resource type="Animation" id=3]
 length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Switch:scale")
@@ -105,8 +104,7 @@ tracks/4/keys = {
 "values": [ -80.0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "unpress"
+[sub_resource type="Animation" id=4]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Switch:scale")
@@ -156,9 +154,9 @@ position = Vector2( 0, -15 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/depress = SubResource( 4 )
-anims/press = SubResource( 2 )
-anims/unpress = SubResource( 3 )
+anims/depress = SubResource( 2 )
+anims/press = SubResource( 3 )
+anims/unpress = SubResource( 4 )
 
 [node name="Beep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
