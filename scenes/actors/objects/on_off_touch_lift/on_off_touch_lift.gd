@@ -101,7 +101,7 @@ const transparent_color : Color = Color(1, 1, 1, 0.5)
 
 onready var left_width = platform_sprite.patch_margin_left
 onready var right_width = platform_sprite.patch_margin_right
-onready var part_width = 15
+onready var part_width = 6
 
 onready var frozen = false
 
