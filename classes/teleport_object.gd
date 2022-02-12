@@ -35,8 +35,8 @@ func local_tp(entering_character : Character, entering):
 		#For now, you can't teleport to another object with the same tag but a different mode
 		if tp_pair.teleportation_mode && teleportation_mode == false:
 			tp_pair = self
-		entering_character.position = tp_pair.global_position
-		entering_character.camera.position = entering_character.position
+		entering_character.global_position = tp_pair.global_position
+		entering_character.camera.global_position = entering_character.global_position
 		entering_character.camera.skip_to_player = true
 		tp_tween.interpolate_callback(tp_pair, WAIT_TIME, "start_exit_anim", entering_character)
 		tp_tween.start()
@@ -56,11 +56,11 @@ func find_local_pair():
 
 func get_character_screen_position(character : Character) -> Vector2:
 	# Find the camera pos, clamped to its limits
-	var camera_pos = character.camera.position
+	var camera_pos = character.camera.global_position
 	camera_pos.x = clamp(camera_pos.x, character.camera.limit_left + 384, character.camera.limit_right - 216)
 	camera_pos.y = clamp(camera_pos.y, character.camera.limit_top + 384, character.camera.limit_bottom - 216)
 	# Return relative screen position
-	return character.position - camera_pos + Vector2(384, 216)
+	return character.global_position - camera_pos + Vector2(384, 216)
 
 func change_areas(entering_character : Character, entering):
 	#TODO: REMOVE UPWARD CALLS ASAP
@@ -144,11 +144,11 @@ func _start_local_transition(character : Character, entering) -> void:
 		# warning-ignore: return_value_discarded
 		Singleton.SceneTransitions.connect("transition_finished", self, "local_tp", [character, true], CONNECT_ONESHOT)
 		# sets the transition center to Mario's position
-		Singleton.SceneTransitions.canvas_mask.position = get_character_screen_position(character)
+		Singleton.SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
 		# this starts an inner scene transition, then connects a function (one shot) to start as it finishes
 		Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, -1, -1, false, false)
 	else:
 		# sets the transition center to Mario's position
-		Singleton.SceneTransitions.canvas_mask.position = get_character_screen_position(character)
+		Singleton.SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
 		# this starts an inner scene transition, then connects a function (one shot) to start as it finishes
 		Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, -1, -1, false, false)

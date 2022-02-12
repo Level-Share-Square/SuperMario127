@@ -28,7 +28,7 @@ func _ready():
 		set_liquid_level(null)
 
 func set_liquid_level(body):
-	if body != null:
+	if body != null and visible:
 		anim_player.play("touch")
 	for found_liquid in Singleton.CurrentLevelData.level_data.vars.liquids:
 		if found_liquid[0] == tag.to_lower():

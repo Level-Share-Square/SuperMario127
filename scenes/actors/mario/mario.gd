@@ -823,7 +823,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Move by velocity
 	if movable:
-		velocity = move_and_slide_with_snap(Vector2(stepify(velocity.x, 0.001), stepify(velocity.y, 0.001)), snap, Vector2.UP, true, 4, deg2rad(46))
+		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
 		if (last_position != Vector2.ZERO and (last_position - global_position).length_squared() > 0
 			and get_world_2d().direct_space_state.intersect_ray(last_position, global_position, [self], 1).size() > 0):
 			position = last_position
