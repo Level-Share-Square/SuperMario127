@@ -101,7 +101,7 @@ const transparent_color : Color = Color(1, 1, 1, 0.5)
 
 onready var left_width = platform_sprite.patch_margin_left
 onready var right_width = platform_sprite.patch_margin_right
-onready var part_width = 15
+onready var part_width = 6
 
 onready var frozen = false
 
@@ -152,24 +152,6 @@ func _ready():
 func set_sprite_parts(sprite):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts
-
-func draw_circle_custom(position, radius, color, maxerror = 0.25):
-	if radius <= 0.0:
-		return
-
-	var maxpoints = 1024 # I think this is renderer limit
-
-	var numpoints = ceil(PI / acos(1.0 - maxerror / radius))
-	numpoints = clamp(numpoints, 3, maxpoints)
-
-	var points = PoolVector2Array([])
-
-	for i in numpoints:
-		var phi = i * PI * 2.0 / numpoints
-		var v = position + Vector2(sin(phi), cos(phi))
-		points.push_back(v * radius)
-
-	draw_colored_polygon(points, color)
 
 func _draw():
 	if mode == 1:

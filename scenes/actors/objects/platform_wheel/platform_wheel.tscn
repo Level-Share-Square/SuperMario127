@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/actors/objects/platform_wheel/platform_wheel.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/touch_lift/circle.png" type="Texture" id=2]
 
 [node name="PlatformWheel" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
+circle_texture = ExtResource( 2 )
