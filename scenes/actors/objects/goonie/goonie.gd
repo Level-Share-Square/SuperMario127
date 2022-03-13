@@ -34,6 +34,9 @@ func set_position(new_position):
 	position = new_position
 
 func _ready():
+	if speed == 0:
+		speed = 0.00001
+		set_property("speed", speed, true)
 	$StaticBody2D/CollisionShape2D.disabled = !enabled
 	spreads_started += Singleton.CurrentLevelData.enemies_instanced % 3
 	Singleton.CurrentLevelData.enemies_instanced += 1

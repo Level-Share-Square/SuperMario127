@@ -253,6 +253,7 @@ __meta__ = {
 frames = ExtResource( 2 )
 animation = "movingRight"
 frame = 4
+
 speed_scale = 1.25
 playing = true
 centered = false
@@ -264,6 +265,7 @@ scale = Vector2( 1, -0.75 )
 frames = ExtResource( 2 )
 animation = "movingRight"
 frame = 4
+
 speed_scale = 1.25
 playing = true
 centered = false

@@ -1110,7 +1110,7 @@ playing = true
 visible = false
 frames = ExtResource( 44 )
 animation = "swimming"
-frame = 4
+frame = 2
 playing = true
 script = ExtResource( 63 )
 
@@ -1656,7 +1656,7 @@ playing = true
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 2
+frame = 3
 speed_scale = 3.0
 playing = true
 
@@ -1677,7 +1677,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 4
+frame = 2
 playing = true
 script = ExtResource( 34 )
 
@@ -1685,7 +1685,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 6
+frame = 4
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
