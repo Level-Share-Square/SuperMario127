@@ -27,8 +27,10 @@ func _on_hit_body_entered(body):
 	hit_direction = Vector2(clamp(hit_direction.x, -1.0, 1.0), clamp(hit_direction.y, -1.0, 1.0))
 	print(Vector2(stepify(hit_direction.x, 1), stepify(hit_direction.y, 1)), body.name)
 	if body.name.begins_with("Character"):
-		if hit_direction.y <= 0 and (hit_direction.x <= 0.708 and hit_direction.x >= -0.708): #0.708 is the approximate value of a diagonal normal
+		print(body.velocity.y)
+		if hit_direction.y <= 0 and (hit_direction.x <= 0.670 and hit_direction.x >= -0.670) and body.velocity.y < 16: #0.708 is the approximate value of a diagonal normal
 			block_hit(Vector2.UP)
+			print(hit_direction)
 		elif body.state != null && body.state.name == "GroundPoundEndState" and hit_direction.y >= 0 and (hit_direction.x <= 0.708 and hit_direction.x >= -0.708):
 			block_hit(Vector2.DOWN)
 

@@ -1110,7 +1110,7 @@ playing = true
 visible = false
 frames = ExtResource( 44 )
 animation = "swimming"
-frame = 6
+frame = 4
 playing = true
 script = ExtResource( 63 )
 
@@ -1364,18 +1364,15 @@ music_id = 27
 material = SubResource( 26 )
 
 [node name="PlayerCollision" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollision"]
-visible = false
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0.5, 4 )
 shape = SubResource( 27 )
 
 [node name="PlatformDetector" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 17
 
@@ -1477,7 +1474,6 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="GroundCheck" type="RayCast2D" parent="."]
-visible = false
 position = Vector2( 0.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 26 )
@@ -1653,14 +1649,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 8
+frame = 5
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 11
+frame = 2
 speed_scale = 3.0
 playing = true
 
@@ -1681,7 +1677,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 6
+frame = 4
 playing = true
 script = ExtResource( 34 )
 
@@ -1689,7 +1685,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 8
+frame = 6
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]

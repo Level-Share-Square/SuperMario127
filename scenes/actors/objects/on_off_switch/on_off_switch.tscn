@@ -30,6 +30,7 @@ curve = ExtResource( 9 )
 shape = SubResource( 1 )
 
 [node name="HitCollider" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitCollider"]
 shape = SubResource( 2 )

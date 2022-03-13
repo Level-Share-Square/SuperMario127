@@ -351,8 +351,8 @@ func is_grounded() -> bool:
 		raycast_node = ground_check_dive
 		raycast_node.cast_to = Vector2(0, 7.5)
 	
-	var new_is_grounded := (raycast_node.is_colliding() or water_check.is_colliding()) and velocity.y >= 0
-	if !new_is_grounded and prev_is_grounded and velocity.y > 0:
+	var new_is_grounded := (raycast_node.is_colliding() or water_check.is_colliding()) and velocity.y >= 0 
+	if !new_is_grounded and prev_is_grounded and velocity.y > 0 and state != $States/JumpState:
 		velocity.y = 0
 	
 	prev_is_grounded = new_is_grounded
