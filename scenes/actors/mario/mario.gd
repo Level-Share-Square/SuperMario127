@@ -321,7 +321,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	collected_shine.get_node("ShineParticles").emitting = false
 	
 	if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
-		position = Singleton.CheckpointSaved.current_spawn_pos
+		Singleton.CheckpointSaved.current_spawn_pos
 		var score_from_before = Singleton.CurrentLevelData.time_score
 		Singleton.CurrentLevelData.start_tracking_time_score()
 		Singleton.CurrentLevelData.time_score = score_from_before
@@ -352,7 +352,7 @@ func is_grounded() -> bool:
 		raycast_node.cast_to = Vector2(0, 7.5)
 	
 	var new_is_grounded := (raycast_node.is_colliding() or water_check.is_colliding()) and velocity.y >= 0 
-	if !new_is_grounded and prev_is_grounded and velocity.y > 0 and state != $States/JumpState:
+	if !new_is_grounded and prev_is_grounded and velocity.y > 0:
 		velocity.y = 0
 	
 	prev_is_grounded = new_is_grounded

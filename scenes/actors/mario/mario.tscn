@@ -1027,7 +1027,7 @@ position = Vector2( -1000, -1000 )
 z_index = -1
 collision_layer = 2
 collision_mask = 81
-collision/safe_margin = 0.01
+collision/safe_margin = 0.5
 script = ExtResource( 3 )
 bottom_pos_offset = Vector2( 0, 20 )
 bottom_pos_dive_offset = Vector2( 0, 3 )
@@ -1067,7 +1067,6 @@ shape = SubResource( 4 )
 disabled = true
 
 [node name="GroundCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, 0 )
 z_index = 1
 shape = SubResource( 5 )
@@ -1075,7 +1074,6 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="LeftCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, 8 )
 rotation = -1.5708
 shape = SubResource( 6 )
@@ -1083,7 +1081,6 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="RightCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, 8 )
 rotation = 1.5708
 shape = SubResource( 6 )
@@ -1110,7 +1107,7 @@ playing = true
 visible = false
 frames = ExtResource( 44 )
 animation = "swimming"
-frame = 2
+frame = 4
 playing = true
 script = ExtResource( 63 )
 
@@ -1364,6 +1361,7 @@ music_id = 27
 material = SubResource( 26 )
 
 [node name="PlayerCollision" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 2
 
@@ -1373,6 +1371,7 @@ position = Vector2( 0.5, 4 )
 shape = SubResource( 27 )
 
 [node name="PlatformDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 17
 
@@ -1474,6 +1473,7 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="GroundCheck" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( 0.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 26 )
@@ -1656,7 +1656,7 @@ playing = true
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 3
+frame = 6
 speed_scale = 3.0
 playing = true
 
@@ -1677,7 +1677,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 2
+frame = 4
 playing = true
 script = ExtResource( 34 )
 
@@ -1685,7 +1685,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 4
+frame = 6
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
