@@ -321,7 +321,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	collected_shine.get_node("ShineParticles").emitting = false
 	
 	if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
-		Singleton.CheckpointSaved.current_spawn_pos
+		position = Singleton.CheckpointSaved.current_spawn_pos
 		var score_from_before = Singleton.CurrentLevelData.time_score
 		Singleton.CurrentLevelData.start_tracking_time_score()
 		Singleton.CurrentLevelData.time_score = score_from_before
