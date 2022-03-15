@@ -25,6 +25,7 @@ onready var rocket_particles : Particles2D = $Sprite/RocketParticles
 onready var collision_shape : CollisionShape2D = $Collision
 onready var dive_collision_shape : CollisionShape2D = $CollisionDive
 onready var collision_raycast : CollisionShape2D = $GroundCollision
+onready var ground_shape : CollisionPolygon2D = $GroundShape
 onready var left_collision : CollisionShape2D = $LeftCollision
 onready var right_collision : CollisionShape2D = $RightCollision
 onready var ground_collision_dive : CollisionShape2D = $GroundCollisionDive
@@ -311,6 +312,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 
 	collision_shape.disabled = false
 	collision_raycast.disabled = false
+	ground_shape.disabled = false
 	left_collision.disabled = false
 	right_collision.disabled = false
 	gravity = level_area.settings.gravity
@@ -974,6 +976,7 @@ func set_dive_collision(is_enabled : bool) -> void:
 	
 	collision_shape.disabled = is_enabled
 	collision_raycast.disabled = is_enabled
+	ground_shape.disabled = is_enabled
 	dive_collision_shape.disabled = !is_enabled
 	ground_collision_dive.disabled = !is_enabled
 	left_collision.disabled = is_enabled

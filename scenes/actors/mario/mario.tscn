@@ -88,7 +88,7 @@ extents = Vector2( 17, 5 )
 extents = Vector2( 5.5, 1 )
 
 [sub_resource type="RayShape2D" id=5]
-length = 23.0
+length = 24.0
 
 [sub_resource type="RayShape2D" id=6]
 length = 6.0
@@ -1073,6 +1073,10 @@ shape = SubResource( 5 )
 disabled = true
 one_way_collision_margin = 0.0
 
+[node name="GroundShape" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, 16 )
+polygon = PoolVector2Array( 0, 8, 1, 8, 6, -5, -5, -5 )
+
 [node name="LeftCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 8 )
 rotation = -1.5708
@@ -1107,7 +1111,7 @@ playing = true
 visible = false
 frames = ExtResource( 44 )
 animation = "swimming"
-frame = 9
+frame = 10
 playing = true
 script = ExtResource( 63 )
 
@@ -1649,14 +1653,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 7
+frame = 8
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 11
+frame = 1
 speed_scale = 3.0
 playing = true
 
@@ -1677,7 +1681,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 9
+frame = 10
 playing = true
 script = ExtResource( 34 )
 
@@ -1685,6 +1689,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
+frame = 1
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
