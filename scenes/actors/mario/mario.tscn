@@ -1075,7 +1075,7 @@ one_way_collision_margin = 0.0
 
 [node name="GroundShape" type="CollisionPolygon2D" parent="."]
 position = Vector2( 0, 16 )
-polygon = PoolVector2Array( 0, 8, 1, 8, 6, -5, -5, -5 )
+polygon = PoolVector2Array( -5, -5, -2, 3, -1, 5, 0.613075, 7, 2, 5, 3, 3, 6, -5 )
 
 [node name="LeftCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, 8 )
@@ -1111,7 +1111,7 @@ playing = true
 visible = false
 frames = ExtResource( 44 )
 animation = "swimming"
-frame = 10
+frame = 1
 playing = true
 script = ExtResource( 63 )
 
@@ -1653,14 +1653,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 8
+frame = 11
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 1
+frame = 13
 speed_scale = 3.0
 playing = true
 
@@ -1681,7 +1681,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 10
+frame = 1
 playing = true
 script = ExtResource( 34 )
 
@@ -1689,7 +1689,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 1
+frame = 3
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
