@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=2 format=2]
 
 [ext_resource path="res://level/Tileset.gd" type="Script" id=1]
-
+[ext_resource path="res://assets/tiles/green_gem_block/green_gem_block.png" type="Script" id=2]
 [resource]
 script = ExtResource( 1 )
 block_tile_id = 33
