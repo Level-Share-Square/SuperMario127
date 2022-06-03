@@ -9,6 +9,7 @@ func _ready():
 	override_rotation = true
 
 func _start(_delta):
+	character.ground_shape.disabled = true
 	character.sprite.position.y = 6
 
 func _update(delta):
@@ -32,6 +33,9 @@ func _update(delta):
 func _stop_check(_delta):
 	var sprite = character.sprite
 	return sprite.rotation_degrees < 5 and sprite.rotation_degrees > -5
+
+func _stop(_delta):
+	character.ground_collider_enable_timer.start()
 
 func _general_update(_delta):
 	pass

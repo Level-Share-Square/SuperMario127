@@ -74,6 +74,7 @@ onready var vanish_detector : Area2D = $VanishDetector
 onready var raycasts = [ground_check, ground_check_dive, left_check, right_check, slope_stop_check]
 onready var heal_timer = $HealTimer
 onready var heal_tick_timer = $HealTickTimer
+onready var ground_collider_enable_timer = $GroundColliderEnableTimer
 export var bottom_pos_offset : Vector2
 export var bottom_pos_dive_offset : Vector2
 
@@ -232,6 +233,7 @@ var camera : Camera2D
 func _ready():
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
+	ground_collider_enable_timer.connect("timeout", self, "_on_ground_collder_timer_timeout")
 	print(Singleton.CurrentLevelData.level_data.vars.transition_data)
 	if Singleton.CurrentLevelData.level_data.vars.transition_data != []:
 		hide()
@@ -1018,6 +1020,9 @@ func _on_heal_tick_timer_timeout():
 			return
 		heal(1)
 		heal_tick_timer.start()
+
+func _on_ground_collder_timer_timeout():
+	ground_shape.disabled = false
 
 func toggle_movement(var value : bool):
 	invulnerable = !value
