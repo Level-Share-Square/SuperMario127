@@ -41,6 +41,7 @@ func _update(_delta):
 			sprite.rotation_degrees = lerp(abs(sprite.rotation_degrees), 360, 12 * fps_util.PHYSICS_DELTA) * character.facing_direction
 
 func _stop(_delta):
+	character.ground_collider_enable_timer.start()
 	var sprite = character.sprite
 	sprite.rotation_degrees = 0
 

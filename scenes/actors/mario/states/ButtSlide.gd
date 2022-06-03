@@ -25,6 +25,7 @@ func _start_check(_delta):
 
 var starting_slide_sign = 1
 func _start(_delta):
+	character.ground_shape.disabled = true
 	temp_speed = move_speed
 	character.sound_player.set_skid_playing(true)
 	stop_buffer = 0.5
@@ -80,6 +81,7 @@ func _update(delta):
 		character.velocity.y = -150
 
 func _stop(_delta):
+	character.ground_collider_enable_timer.start()
 	character.sound_player.set_skid_playing(false)
 	character.slide_particles.emitting = false
 	
