@@ -606,6 +606,7 @@ Singleton="*res://scenes/actors/singleton/singleton.tscn"
 
 settings/fps/force_fps=60
 gdscript/warnings/integer_division=false
+shapes/collision/shape_color=Color( 0, 0.6, 0.701961, 0.419608 )
 
 [display]
 

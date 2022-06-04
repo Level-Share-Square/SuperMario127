@@ -23,7 +23,6 @@ func _start_check(_delta):
 	return crouch_buffer > 0 and character.is_grounded()
 
 func _start(_delta):
-	character.ground_shape.disabled = true
 	if character.state != character.get_state_node("Jump"):
 		character.friction = 8
 	if crouch_buffer > 0:
@@ -74,7 +73,6 @@ func _stop(delta):
 		character.set_state_by_name("SlideStopState", delta)
 	else:
 		character.position.y -= 5
-		character.ground_collider_enable_timer.start()
 		character.set_state_by_name("DiveState", delta)
 	stop = false
 	

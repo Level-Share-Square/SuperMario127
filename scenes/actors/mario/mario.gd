@@ -975,10 +975,11 @@ func set_inter_player_collision(can_collide : bool) -> void:
 
 func set_dive_collision(is_enabled : bool) -> void:
 	using_dive_collision = is_enabled
-	
-	collision_shape.disabled = is_enabled
+	if is_enabled:
+		ground_shape.disabled = is_enabled
+	else:
+		ground_collider_enable_timer.start()
 	collision_raycast.disabled = is_enabled
-	ground_shape.disabled = is_enabled
 	dive_collision_shape.disabled = !is_enabled
 	ground_collision_dive.disabled = !is_enabled
 	left_collision.disabled = is_enabled
