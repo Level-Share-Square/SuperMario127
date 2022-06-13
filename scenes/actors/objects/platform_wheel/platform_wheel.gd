@@ -1,7 +1,5 @@
 extends GameObject
 
-export var circle_texture : Texture
-
 var platforms : Array = []
 var delta_angle := PI/2
 var time_alive := 0.0
@@ -90,7 +88,7 @@ func _draw():
 	var delta_rad = 2*PI/ceil(radius*32*2*PI/20.0) #so the points are at most 20 curve pixels appart
 	var rad := 0.0
 	while rad < 2.0 * PI:
-		draw_texture_rect(circle_texture, Rect2(radius_vector.rotated(rad) - Vector2(2.0, 2.0), Vector2(4.0, 4.0)), false, Color.darkgray)
+		draw_circle(radius_vector.rotated(rad), 2, Color.darkgray)
 		rad += delta_rad
 
 # Called when the node enters the scene tree for the first time.
