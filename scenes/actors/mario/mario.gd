@@ -231,6 +231,7 @@ var camera : Camera2D
 #)
 
 func _ready():
+
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
 	ground_collider_enable_timer.connect("timeout", self, "_on_ground_collder_timer_timeout")

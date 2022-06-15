@@ -1,0 +1,16 @@
+Godot Engine v3.4.4.stable.arch_linux - https://godotengine.org
+OpenGL ES 3.0 Renderer: Mesa Intel(R) HD Graphics 520 (SKL GT2)
+OpenGL ES Batching: ON
+ 
+ERROR: Resource file not found: res://assets/tiles/bricks/bricks.png.
+   at: _load (core/io/resource_loader.cpp:275) - Condition "!file_check->file_exists(p_path)" is true. Returned: RES()
+ERROR: res://tiles.tres:3 - Parse Error: [ext_resource] referenced nonexistent resource at: res://assets/tiles/bricks/bricks.png
+   at: poll (scene/resources/resource_format_text.cpp:412) - res://tiles.tres:3 - Parse Error: [ext_resource] referenced nonexistent resource at: res://assets/tiles/bricks/bricks.png
+ERROR: Failed to load resource 'res://tiles.tres'.
+   at: load (core/io/resource_loader.cpp:206) - Condition "err != OK" is true. Returned: RES()
+ERROR: Failed loading resource: res://tiles.tres. Make sure resources have been imported by opening the project in the editor at least once.
+   at: _load (core/io/resource_loader.cpp:270) - Condition "found" is true. Returned: RES()
+ERROR: Failed loading scene: res://tiles.tres
+   at: start (main/main.cpp:2011) - Condition "!scene" is true. Returned: false
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+   at: cleanup (core/object.cpp:2064) - ObjectDB instances leaked at exit (run with --verbose for details).
