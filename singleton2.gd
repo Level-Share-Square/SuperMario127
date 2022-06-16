@@ -1,4 +1,4 @@
 extends Node2D
 
-var rp = true
+var rp : bool = true
 var dead = false
