@@ -42,6 +42,7 @@ func go_to_menu():
 		Singleton.MenuVariables.quit_to_menu()
 
 func _ready():
+	update_activity()
 	animation_player.play("FadeIn")
 #	yield(get_tree().create_timer(5), "timeout")
 	if !Singleton.loaded:
@@ -73,6 +74,25 @@ func _physics_process(delta):
 	
 	if spawn_timer > 0:
 		spawn_timer -= delta
+
+func update_activity() -> void:
+	var activity = Discord.Activity.new()
+	activity.set_type(Discord.ActivityType.Playing)
+	activity.set_state("Loading...")
+
+	var assets = activity.get_assets()
+	assets.set_large_image("sm127")
+	assets.set_large_text("0.7.2")
+	assets.set_small_image("capsule_main")
+	assets.set_small_text("ZONE 2 WOOO")
+	
+	var timestamps = activity.get_timestamps()
+	timestamps.set_start(OS.get_unix_time() + 1)
+
+	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
+	if result != Discord.Result.Ok:
+		push_error(str(result))
+		
 
 func load_palettes(userdata):
 	var level_tilesets := preload("res://assets/tiles/ids.tres")

@@ -31,6 +31,10 @@ size = 100
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 21 )
 
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 1 )
+
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 5
@@ -41,8 +45,8 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="DynamicFont" id=4]
-size = 20
+[sub_resource type="DynamicFont" id=8]
+size = 27
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=5]
@@ -66,14 +70,14 @@ corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[sub_resource type="DynamicFont" id=8]
-size = 27
-font_data = ExtResource( 1 )
-
 [sub_resource type="DynamicFont" id=9]
 size = 24
 outline_size = 2
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 24
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=10]
@@ -100,10 +104,6 @@ corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
-
-[sub_resource type="DynamicFont" id=13]
-size = 24
-font_data = ExtResource( 1 )
 
 [sub_resource type="Animation" id=14]
 resource_name = "default"
@@ -344,9 +344,9 @@ margin_left = 79.8377
 margin_top = 93.2382
 margin_right = 292.838
 margin_bottom = 135.238
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
+custom_fonts/font = SubResource( 4 )
+custom_styles/normal = SubResource( 3 )
 context_menu_enabled = false
 placeholder_text = "IP Address"
 placeholder_alpha = 0.35
@@ -361,11 +361,11 @@ margin_left = 79.8377
 margin_top = 148.406
 margin_right = 292.838
 margin_bottom = 192.406
+custom_fonts/font = SubResource( 8 )
 custom_styles/hover = SubResource( 5 )
 custom_styles/pressed = SubResource( 6 )
 custom_styles/disabled = SubResource( 7 )
 custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 8 )
 action_mode = 0
 text = "Connect"
 script = ExtResource( 6 )
@@ -387,11 +387,11 @@ margin_left = 79.8377
 margin_top = 258.731
 margin_right = 292.838
 margin_bottom = 302.731
+custom_fonts/font = SubResource( 8 )
 custom_styles/hover = SubResource( 5 )
 custom_styles/pressed = SubResource( 6 )
 custom_styles/disabled = SubResource( 7 )
 custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 8 )
 action_mode = 0
 text = "Disconnect"
 script = ExtResource( 12 )
@@ -413,11 +413,11 @@ margin_left = 419.0
 margin_top = 236.405
 margin_right = 748.0
 margin_bottom = 280.405
+custom_fonts/font = SubResource( 8 )
 custom_styles/hover = SubResource( 5 )
 custom_styles/pressed = SubResource( 6 )
 custom_styles/disabled = SubResource( 7 )
 custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 8 )
 action_mode = 0
 text = "Confirm"
 script = ExtResource( 14 )
@@ -442,11 +442,11 @@ margin_left = 27.0
 margin_top = 236.405
 margin_right = 356.0
 margin_bottom = 280.405
+custom_fonts/font = SubResource( 8 )
 custom_styles/hover = SubResource( 5 )
 custom_styles/pressed = SubResource( 6 )
 custom_styles/disabled = SubResource( 7 )
 custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 8 )
 action_mode = 0
 text = "Controls"
 script = ExtResource( 11 )
@@ -468,11 +468,11 @@ margin_left = 79.8377
 margin_top = 204.342
 margin_right = 292.838
 margin_bottom = 248.342
+custom_fonts/font = SubResource( 8 )
 custom_styles/hover = SubResource( 5 )
 custom_styles/pressed = SubResource( 6 )
 custom_styles/disabled = SubResource( 7 )
 custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 8 )
 action_mode = 0
 text = "Host"
 script = ExtResource( 8 )
@@ -625,12 +625,12 @@ margin_top = 159.0
 margin_right = 307.0
 margin_bottom = 189.0
 focus_mode = 0
+custom_fonts/font = SubResource( 13 )
 custom_styles/hover = SubResource( 10 )
 custom_styles/pressed = SubResource( 11 )
 custom_styles/focus = SubResource( 10 )
 custom_styles/disabled = SubResource( 12 )
 custom_styles/normal = SubResource( 11 )
-custom_fonts/font = SubResource( 13 )
 action_mode = 0
 enabled_focus_mode = 0
 text = "False"
