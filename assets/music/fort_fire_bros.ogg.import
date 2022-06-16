@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/fort_fire_bros.ogg-d667bb8bf8bd19c1f653725a10fca0c2.oggstr"
+
+[deps]
+
+source_file="res://assets/music/fort_fire_bros.ogg"
+dest_files=[ "res://.import/fort_fire_bros.ogg-d667bb8bf8bd19c1f653725a10fca0c2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=8.452

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/rainbow_mario.ogg-611e3ff0f8f0f6186516f9cac37bd9f5.oggstr"
+
+[deps]
+
+source_file="res://assets/music/rainbow_mario.ogg"
+dest_files=[ "res://.import/rainbow_mario.ogg-611e3ff0f8f0f6186516f9cac37bd9f5.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=9.5

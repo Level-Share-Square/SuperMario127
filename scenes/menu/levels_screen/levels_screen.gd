@@ -86,8 +86,6 @@ func _ready() -> void:
 	_connect = connect("open_delete_confirmation_popup", confirm_delete_window, "popup_centered")
 
 	_pre_open_screen() # In case we're exiting a level
-	
-
 
 func _pre_open_screen() -> void:
 	levels = Singleton.SavedLevels.template_levels if Singleton.SavedLevels.is_template_list else Singleton.SavedLevels.levels
@@ -134,7 +132,6 @@ func _input(event : InputEvent) -> void:
 	elif Input.is_action_just_pressed("ui_right"):
 		button_back.grab_focus()
 	elif Input.is_action_just_pressed("switch_modes"):
-		update_activity()
 		start_level(false)
 
 func populate_info_panel(level_info : LevelInfo = null) -> void:
@@ -374,13 +371,11 @@ func on_button_copy_code_pressed() -> void:
 		OS.clipboard = levels[selected_level].level_code
 
 func on_button_play_pressed() -> void:
-	update_activity()
 	if !can_interact:
 		return
 	start_level(false)
 
 func on_button_edit_pressed() -> void:
-	update_activity2()
 	if !can_interact:
 		return
 	start_level(true)
@@ -414,39 +409,4 @@ func on_button_time_scores_pressed() -> void:
 
 func on_button_close_time_scores_pressed() -> void:
 	set_time_score_panel(false)
-	
-func update_activity() -> void:
-	var activity = Discord.Activity.new()
-	activity.set_type(Discord.ActivityType.Playing)
-	activity.set_state("Playing " + level_name_label.text)
 
-	var assets = activity.get_assets()
-	assets.set_large_image("sm127")
-	assets.set_large_text("0.7.2")
-	assets.set_small_image("capsule_main")
-	assets.set_small_text("ZONE 2 WOOO")
-	
-	var timestamps = activity.get_timestamps()
-	timestamps.set_start(OS.get_unix_time() + 1)
-
-	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
-	if result != Discord.Result.Ok:
-		push_error(str(result))
-		
-func update_activity2() -> void:
-	var activity = Discord.Activity.new()
-	activity.set_type(Discord.ActivityType.Playing)
-	activity.set_state("Editing a level")
-
-	var assets = activity.get_assets()
-	assets.set_large_image("sm127")
-	assets.set_large_text("0.7.2")
-	assets.set_small_image("capsule_main")
-	assets.set_small_text("ZONE 2 WOOO")
-	
-	var timestamps = activity.get_timestamps()
-	timestamps.set_start(OS.get_unix_time() + 1)
-
-	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
-	if result != Discord.Result.Ok:
-		push_error(str(result))

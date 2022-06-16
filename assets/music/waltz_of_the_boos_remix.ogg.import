@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/waltz_of_the_boos_remix.ogg-ecbe886e39d689c0d45f0c6f6b6eb5d8.oggstr"
+
+[deps]
+
+source_file="res://assets/music/waltz_of_the_boos_remix.ogg"
+dest_files=[ "res://.import/waltz_of_the_boos_remix.ogg-ecbe886e39d689c0d45f0c6f6b6eb5d8.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=5.25

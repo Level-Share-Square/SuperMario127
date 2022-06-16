@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/buoy_base_galaxy.ogg-4174a777fc258e9a064283591efc7514.oggstr"
+
+[deps]
+
+source_file="res://assets/music/buoy_base_galaxy.ogg"
+dest_files=[ "res://.import/buoy_base_galaxy.ogg-4174a777fc258e9a064283591efc7514.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=27.328

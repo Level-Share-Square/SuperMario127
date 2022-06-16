@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cloudy_court_galaxy.ogg-a07f7e3cf7002dbd598afecfd05e464e.oggstr"
+
+[deps]
+
+source_file="res://assets/music/cloudy_court_galaxy.ogg"
+dest_files=[ "res://.import/cloudy_court_galaxy.ogg-a07f7e3cf7002dbd598afecfd05e464e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=10.3

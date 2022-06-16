@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/speedy_comet.ogg-962a1dd507e3e3d7531c3be79a05e116.oggstr"
+
+[deps]
+
+source_file="res://assets/music/speedy_comet.ogg"
+dest_files=[ "res://.import/speedy_comet.ogg-962a1dd507e3e3d7531c3be79a05e116.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=3.136

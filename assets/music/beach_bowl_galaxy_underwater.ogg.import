@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/beach_bowl_galaxy_underwater.ogg-dd5e3d001e8c33098037d4807d23f421.oggstr"
+
+[deps]
+
+source_file="res://assets/music/beach_bowl_galaxy_underwater.ogg"
+dest_files=[ "res://.import/beach_bowl_galaxy_underwater.ogg-dd5e3d001e8c33098037d4807d23f421.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=5.824

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cosmic_cove_galaxy.ogg-05871e25b51adc88c1c1cd02e9331861.oggstr"
+
+[deps]
+
+source_file="res://assets/music/cosmic_cove_galaxy.ogg"
+dest_files=[ "res://.import/cosmic_cove_galaxy.ogg-05871e25b51adc88c1c1cd02e9331861.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=17.92

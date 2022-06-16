@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/tostarena_ruins.ogg-30f870573f5aa539998677cab96a549b.oggstr"
+
+[deps]
+
+source_file="res://assets/music/tostarena_ruins.ogg"
+dest_files=[ "res://.import/tostarena_ruins.ogg-30f870573f5aa539998677cab96a549b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=8.362

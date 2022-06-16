@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/melty_monster_galaxy.ogg-f3cec233516a71e423be8850b1b1d9fa.oggstr"
+
+[deps]
+
+source_file="res://assets/music/melty_monster_galaxy.ogg"
+dest_files=[ "res://.import/melty_monster_galaxy.ogg-f3cec233516a71e423be8850b1b1d9fa.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=4.032

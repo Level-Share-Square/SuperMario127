@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/briny_bowl_swimming_hole.ogg-a98022096e076299650268e211f8b238.oggstr"
+
+[deps]
+
+source_file="res://assets/music/briny_bowl_swimming_hole.ogg"
+dest_files=[ "res://.import/briny_bowl_swimming_hole.ogg-a98022096e076299650268e211f8b238.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=8.512

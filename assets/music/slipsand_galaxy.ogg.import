@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/slipsand_galaxy.ogg-788df8fe26cda0c0dcb86d4446fe1862.oggstr"
+
+[deps]
+
+source_file="res://assets/music/slipsand_galaxy.ogg"
+dest_files=[ "res://.import/slipsand_galaxy.ogg-788df8fe26cda0c0dcb86d4446fe1862.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=14.784

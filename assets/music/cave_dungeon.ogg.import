@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cave_dungeon.ogg-e492c40e1ff0c4df5fa9430458db5000.oggstr"
+
+[deps]
+
+source_file="res://assets/music/cave_dungeon.ogg"
+dest_files=[ "res://.import/cave_dungeon.ogg-e492c40e1ff0c4df5fa9430458db5000.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=50.468

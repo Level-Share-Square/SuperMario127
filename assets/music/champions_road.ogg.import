@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/champions_road.ogg-5d412729b04bf9876015273351a5d141.oggstr"
+
+[deps]
+
+source_file="res://assets/music/champions_road.ogg"
+dest_files=[ "res://.import/champions_road.ogg-5d412729b04bf9876015273351a5d141.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=8.13

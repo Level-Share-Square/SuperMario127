@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cool_cool_mountain.ogg-68cc2a05697f28b0f9db76d053ec32ed.oggstr"
+
+[deps]
+
+source_file="res://assets/music/cool_cool_mountain.ogg"
+dest_files=[ "res://.import/cool_cool_mountain.ogg-68cc2a05697f28b0f9db76d053ec32ed.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=5.422
