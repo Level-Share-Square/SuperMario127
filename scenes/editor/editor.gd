@@ -219,7 +219,14 @@ func pick_tile(tile) -> void:
 	set_selected_box(boxes[0])
 
 func switch_scenes() -> void:
-	update_activity()
+	if Singleton2.rp == true:
+		update_activity()
+	elif Singleton2.rp == false:
+		if Singleton2.dead == false:
+			Discord.queue_free()
+			Singleton2.dead = true
+		elif Singleton2.dead == true:
+			pass
 	var _change_scene = get_tree().change_scene("res://scenes/player/player.tscn")
 	
 	

@@ -18,6 +18,8 @@ static func load():
 	var data = get_data_or_null()
 	if data != null:
 		Engine.target_fps = 10 * (data["fpsLock"] + 3)
+		if data.has("richpresence"):
+			Singleton2.rp = data["richpresence"]
 		if data.has("showTimer"):
 			Singleton.TimeScore.shown = data["showTimer"]
 		#if data.has("volume"):
@@ -50,12 +52,14 @@ static func save():
 	var windowScale = Singleton.EditorSavedSettings.stored_window_scale
 	var fpsLock = (Engine.target_fps / 10.0) - 3
 	var showTimer = Singleton.TimeScore.shown
+	var richpresence = Singleton2.rp
 	var legacyCap = Singleton.PlayerSettings.legacy_wing_cap
 	
 	var data = {
 		"windowScale": windowScale,
 		"fpsLock": fpsLock,
 		"showTimer": showTimer,
+		"richpresence": richpresence,
 		"controls": Singleton.PlayerSettings.keybindings,
 		"volume": Singleton.Music.global_volume,
 		"legacyWingCap": legacyCap,
@@ -77,6 +81,7 @@ static func save_volume():
 			"windowScale": 1,
 			"fpsLock": 3,
 			"showTimer": false,
+			"richpresence": true,
 			"controls": Singleton.PlayerSettings.keybindings,
 			"volume": Singleton.Music.global_volume,
 			"legacyWingCap": Singleton.PlayerSettings.legacy_wing_cap,

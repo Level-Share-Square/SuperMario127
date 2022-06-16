@@ -317,7 +317,14 @@ func on_level_selected(index : int) -> void:
 	
 	print(double_click)
 	if double_click:
-		update_activity()
+		if Singleton2.rp == true:
+			update_activity()
+		elif Singleton2.rp == false:
+			if Singleton2.dead == false:
+				Discord.queue_free()
+				Singleton2.dead = true
+			elif Singleton2.dead == true:
+				pass
 		start_level(false)
 
 func on_button_back_pressed() -> void:
@@ -372,13 +379,27 @@ func on_button_copy_code_pressed() -> void:
 		OS.clipboard = levels[selected_level].level_code
 
 func on_button_play_pressed() -> void:
-	update_activity()
+	if Singleton2.rp == true:
+		update_activity()
+	elif Singleton2.rp == false:
+		if Singleton2.dead == false:
+			Discord.queue_free()
+			Singleton2.dead = true
+		elif Singleton2.dead == true:
+			pass
 	if !can_interact:
 		return
 	start_level(false)
 
 func on_button_edit_pressed() -> void:
-	update_activity2()
+	if Singleton2.rp == true:
+		update_activity2()
+	elif Singleton2.rp == false:
+		if Singleton2.dead == false:
+			Discord.queue_free()
+			Singleton2.dead = true
+		elif Singleton2.dead == true:
+			pass
 	if !can_interact:
 		return
 	start_level(true)

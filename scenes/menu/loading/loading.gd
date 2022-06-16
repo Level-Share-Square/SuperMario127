@@ -42,7 +42,14 @@ func go_to_menu():
 		Singleton.MenuVariables.quit_to_menu()
 
 func _ready():
-	update_activity()
+	if Singleton2.rp == true:
+		update_activity()
+	elif Singleton2.rp == false:
+		if Singleton2.dead == false:
+			Discord.queue_free()
+			Singleton2.dead = true
+		elif Singleton2.dead == true:
+			pass
 	animation_player.play("FadeIn")
 #	yield(get_tree().create_timer(5), "timeout")
 	if !Singleton.loaded:

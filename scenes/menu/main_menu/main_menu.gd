@@ -13,6 +13,12 @@ const EDITOR_SCENE : PackedScene = preload("res://scenes/editor/editor.tscn")
 func _ready() -> void:
 	if Singleton2.rp == true:
 		update_activity()
+	elif Singleton2.rp == false:
+		if Singleton2.dead == false:
+			Discord.queue_free()
+			Singleton2.dead = true
+		elif Singleton2.dead == true:
+			pass
 	var _connect = button_levels.connect("pressed", self, "on_button_levels_pressed")
 	_connect = button_templates.connect("pressed", self, "on_button_templates_pressed")
 	_connect = button_options.connect("pressed", self, "on_button_options_pressed")
