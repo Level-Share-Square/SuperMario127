@@ -11,7 +11,8 @@ onready var timer = $CooldownTimer
 const EDITOR_SCENE : PackedScene = preload("res://scenes/editor/editor.tscn")
 
 func _ready() -> void:
-	update_activity()
+	if Singleton2.rp == true:
+		update_activity()
 	var _connect = button_levels.connect("pressed", self, "on_button_levels_pressed")
 	_connect = button_templates.connect("pressed", self, "on_button_templates_pressed")
 	_connect = button_options.connect("pressed", self, "on_button_options_pressed")

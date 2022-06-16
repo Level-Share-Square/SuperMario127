@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://scenes/shared/options.gd" type="Script" id=19]
 [ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=20]
 [ext_resource path="res://assets/fonts/sm256.ttf" type="DynamicFontData" id=21]
+[ext_resource path="res://assets/misc/ass.png" type="Texture" id=23]
 
 [sub_resource type="DynamicFont" id=2]
 size = 28
@@ -104,6 +105,27 @@ corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
+
+[sub_resource type="GDScript" id=17]
+script/source = "extends Control
+
+onready var button : Button = $Box
+
+var value : bool = false
+
+func _ready():
+	value = Singleton2.rp
+	_update_text()
+	var _connect = button.connect(\"pressed\", self, \"_update_value\")
+
+func _update_value():
+	value = !value
+	Singleton2.rp = value
+	_update_text()
+
+func _update_text():
+	button.text = \"True\" if value else \"False\"
+"
 
 [sub_resource type="Animation" id=14]
 resource_name = "default"
@@ -265,25 +287,18 @@ tracks/3/keys = {
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 19 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TitleOnly" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="TitleOnly"]
 use_parent_material = true
-margin_right = 768.0
-margin_bottom = 432.0
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 766.0
+margin_bottom = 430.0
 color = Color( 0, 0, 0, 0.25098 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Bottom" type="TextureRect" parent="TitleOnly"]
 margin_left = 770.0
@@ -450,9 +465,6 @@ custom_styles/normal = SubResource( 6 )
 action_mode = 0
 text = "Controls"
 script = ExtResource( 11 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="ControlsButton"]
 stream = ExtResource( 2 )
@@ -493,15 +505,12 @@ margin_top = -28.0
 margin_right = 40.0
 margin_bottom = 12.0
 script = ExtResource( 16 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Right" type="TextureButton" parent="WindowScale"]
 margin_left = 271.654
-margin_top = 159.587
+margin_top = 128.587
 margin_right = 399.654
-margin_bottom = 287.587
+margin_bottom = 256.587
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 5 )
@@ -512,9 +521,9 @@ __meta__ = {
 
 [node name="Left" type="TextureButton" parent="WindowScale"]
 margin_left = 233.0
-margin_top = 185.296
+margin_top = 154.296
 margin_right = 361.0
-margin_bottom = 313.296
+margin_bottom = 282.296
 rect_rotation = 180.0
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 5 )
@@ -526,22 +535,19 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="WindowScale"]
 margin_left = 40.0
-margin_top = 157.796
+margin_top = 126.796
 margin_right = 202.0
-margin_bottom = 189.796
+margin_bottom = 158.796
 custom_fonts/font = SubResource( 9 )
 text = "Window Scale:"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Value" type="Label" parent="WindowScale"]
 margin_left = 234.0
-margin_top = 157.796
+margin_top = 125.796
 margin_right = 272.0
-margin_bottom = 189.796
+margin_bottom = 157.796
 custom_fonts/font = SubResource( 9 )
 align = 1
 valign = 1
@@ -554,15 +560,12 @@ margin_top = 7.0
 margin_right = 40.0
 margin_bottom = 47.0
 script = ExtResource( 15 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Right" type="TextureButton" parent="FPSLock"]
 margin_left = 271.654
-margin_top = 159.587
+margin_top = 128.587
 margin_right = 399.654
-margin_bottom = 287.587
+margin_bottom = 256.587
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 5 )
@@ -573,9 +576,9 @@ __meta__ = {
 
 [node name="Left" type="TextureButton" parent="FPSLock"]
 margin_left = 233.0
-margin_top = 185.296
+margin_top = 154.296
 margin_right = 361.0
-margin_bottom = 313.296
+margin_bottom = 282.296
 rect_rotation = 180.0
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 5 )
@@ -587,43 +590,66 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="FPSLock"]
 margin_left = 40.0
-margin_top = 157.796
+margin_top = 126.796
 margin_right = 202.0
-margin_bottom = 189.796
+margin_bottom = 158.796
 custom_fonts/font = SubResource( 9 )
 text = "FPS Cap:"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Value" type="Label" parent="FPSLock"]
 margin_left = 234.0
-margin_top = 157.796
+margin_top = 126.796
 margin_right = 272.0
-margin_bottom = 189.796
+margin_bottom = 158.796
 custom_fonts/font = SubResource( 9 )
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ShowTimer" type="Control" parent="."]
 margin_top = 43.0
 margin_right = 40.0
 margin_bottom = 83.0
 script = ExtResource( 17 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Box" type="Button" parent="ShowTimer"]
 margin_left = 202.0
-margin_top = 159.0
+margin_top = 128.0
 margin_right = 307.0
-margin_bottom = 189.0
+margin_bottom = 158.0
+focus_mode = 0
+custom_fonts/font = SubResource( 13 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/focus = SubResource( 10 )
+custom_styles/disabled = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+action_mode = 0
+enabled_focus_mode = 0
+text = "True"
+
+[node name="Label" type="Label" parent="ShowTimer"]
+margin_left = 32.0
+margin_top = 157.796
+margin_right = 197.0
+margin_bottom = 189.796
+custom_fonts/font = SubResource( 9 )
+text = "Rich Presence:"
+align = 1
+valign = 1
+
+[node name="RichPresence" type="Control" parent="."]
+margin_top = 43.0
+margin_right = 40.0
+margin_bottom = 83.0
+script = SubResource( 17 )
+
+[node name="Box" type="Button" parent="RichPresence"]
+margin_left = 202.0
+margin_top = 160.0
+margin_right = 307.0
+margin_bottom = 190.0
 focus_mode = 0
 custom_fonts/font = SubResource( 13 )
 custom_styles/hover = SubResource( 10 )
@@ -638,27 +664,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="ShowTimer"]
+[node name="Label" type="Label" parent="RichPresence"]
 margin_left = 40.0
-margin_top = 157.796
+margin_top = 126.796
 margin_right = 202.0
-margin_bottom = 189.796
+margin_bottom = 158.796
 custom_fonts/font = SubResource( 9 )
 text = "Show Timer:"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="Sprite" type="Sprite" parent="RichPresence"]
+position = Vector2( 17, 174 )
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 23 )
 
 [node name="NumberOfPlayers" type="Control" parent="."]
 margin_top = 50.0
 margin_right = 40.0
 margin_bottom = 90.0
 script = ExtResource( 13 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Right" type="TextureButton" parent="NumberOfPlayers"]
 margin_left = 722.654
@@ -718,9 +743,6 @@ margin_top = 85.0
 margin_right = 40.0
 margin_bottom = 125.0
 script = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Right" type="TextureButton" parent="Player1Char"]
 margin_left = 722.654
@@ -780,9 +802,6 @@ margin_top = 120.0
 margin_right = 40.0
 margin_bottom = 160.0
 script = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Right" type="TextureButton" parent="Player2Char"]
 margin_left = 722.654
