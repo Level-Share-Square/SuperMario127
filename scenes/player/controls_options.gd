@@ -72,6 +72,8 @@ func _ready():
 	else:
 		back_button.connect("pressed", self, "go_back")
 
+
+
 func go_back():
 	emit_signal("screen_change", "controls_screen", "options_screen")
 

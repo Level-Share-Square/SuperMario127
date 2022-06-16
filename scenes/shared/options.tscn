@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://scenes/shared/options.gd" type="Script" id=19]
 [ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=20]
 [ext_resource path="res://assets/fonts/sm256.ttf" type="DynamicFontData" id=21]
+[ext_resource path="res://assets/misc/ass.png" type="Texture" id=23]
 
 [sub_resource type="DynamicFont" id=2]
 size = 28
@@ -30,6 +31,10 @@ font_data = ExtResource( 1 )
 size = 100
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 21 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 1, 1, 1, 1 )
@@ -41,8 +46,8 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="DynamicFont" id=4]
-size = 20
+[sub_resource type="DynamicFont" id=8]
+size = 27
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=5]
@@ -66,14 +71,14 @@ corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[sub_resource type="DynamicFont" id=8]
-size = 27
-font_data = ExtResource( 1 )
-
 [sub_resource type="DynamicFont" id=9]
 size = 24
 outline_size = 2
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 24
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=10]
@@ -100,10 +105,6 @@ corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
-
-[sub_resource type="DynamicFont" id=13]
-size = 24
-font_data = ExtResource( 1 )
 
 [sub_resource type="Animation" id=14]
 resource_name = "default"
@@ -265,25 +266,18 @@ tracks/3/keys = {
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 19 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TitleOnly" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="TitleOnly"]
 use_parent_material = true
-margin_right = 768.0
-margin_bottom = 432.0
+margin_left = 4.0
+margin_top = -5.0
+margin_right = 772.0
+margin_bottom = 427.0
 color = Color( 0, 0, 0, 0.25098 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Bottom" type="TextureRect" parent="TitleOnly"]
 margin_left = 770.0
@@ -293,9 +287,6 @@ margin_bottom = 610.0
 rect_rotation = 180.0
 rect_scale = Vector2( 0.335, 0.333 )
 texture = ExtResource( 20 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Bottom2" type="TextureRect" parent="TitleOnly/Bottom"]
 margin_left = 2311.0
@@ -344,9 +335,9 @@ margin_left = 79.8377
 margin_top = 93.2382
 margin_right = 292.838
 margin_bottom = 135.238
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
+custom_fonts/font = SubResource( 4 )
+custom_styles/normal = SubResource( 3 )
 context_menu_enabled = false
 placeholder_text = "IP Address"
 placeholder_alpha = 0.35
@@ -361,11 +352,11 @@ margin_left = 79.8377
 margin_top = 148.406
 margin_right = 292.838
 margin_bottom = 192.406
+custom_fonts/font = SubResource( 8 )
 custom_styles/hover = SubResource( 5 )
 custom_styles/pressed = SubResource( 6 )
 custom_styles/disabled = SubResource( 7 )
 custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 8 )
 action_mode = 0
 text = "Connect"
 script = ExtResource( 6 )
@@ -387,11 +378,11 @@ margin_left = 79.8377
 margin_top = 258.731
 margin_right = 292.838
 margin_bottom = 302.731
+custom_fonts/font = SubResource( 8 )
 custom_styles/hover = SubResource( 5 )
 custom_styles/pressed = SubResource( 6 )
 custom_styles/disabled = SubResource( 7 )
 custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 8 )
 action_mode = 0
 text = "Disconnect"
 script = ExtResource( 12 )
@@ -413,11 +404,11 @@ margin_left = 419.0
 margin_top = 236.405
 margin_right = 748.0
 margin_bottom = 280.405
+custom_fonts/font = SubResource( 8 )
 custom_styles/hover = SubResource( 5 )
 custom_styles/pressed = SubResource( 6 )
 custom_styles/disabled = SubResource( 7 )
 custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 8 )
 action_mode = 0
 text = "Confirm"
 script = ExtResource( 14 )
@@ -442,11 +433,11 @@ margin_left = 27.0
 margin_top = 236.405
 margin_right = 356.0
 margin_bottom = 280.405
+custom_fonts/font = SubResource( 8 )
 custom_styles/hover = SubResource( 5 )
 custom_styles/pressed = SubResource( 6 )
 custom_styles/disabled = SubResource( 7 )
 custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 8 )
 action_mode = 0
 text = "Controls"
 script = ExtResource( 11 )
@@ -468,11 +459,11 @@ margin_left = 79.8377
 margin_top = 204.342
 margin_right = 292.838
 margin_bottom = 248.342
+custom_fonts/font = SubResource( 8 )
 custom_styles/hover = SubResource( 5 )
 custom_styles/pressed = SubResource( 6 )
 custom_styles/disabled = SubResource( 7 )
 custom_styles/normal = SubResource( 6 )
-custom_fonts/font = SubResource( 8 )
 action_mode = 0
 text = "Host"
 script = ExtResource( 8 )
@@ -493,15 +484,12 @@ margin_top = -28.0
 margin_right = 40.0
 margin_bottom = 12.0
 script = ExtResource( 16 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Right" type="TextureButton" parent="WindowScale"]
-margin_left = 271.654
-margin_top = 159.587
-margin_right = 399.654
-margin_bottom = 287.587
+margin_left = 301.0
+margin_top = 138.0
+margin_right = 429.0
+margin_bottom = 266.0
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 5 )
@@ -511,37 +499,31 @@ __meta__ = {
 }
 
 [node name="Left" type="TextureButton" parent="WindowScale"]
-margin_left = 233.0
-margin_top = 185.296
-margin_right = 361.0
-margin_bottom = 313.296
+margin_left = 259.0
+margin_top = 163.0
+margin_right = 387.0
+margin_bottom = 291.0
 rect_rotation = 180.0
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="WindowScale"]
 margin_left = 40.0
-margin_top = 157.796
+margin_top = 130.0
 margin_right = 202.0
-margin_bottom = 189.796
+margin_bottom = 162.0
 custom_fonts/font = SubResource( 9 )
 text = "Window Scale:"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Value" type="Label" parent="WindowScale"]
-margin_left = 234.0
-margin_top = 157.796
-margin_right = 272.0
-margin_bottom = 189.796
+margin_left = 261.0
+margin_top = 133.796
+margin_right = 299.0
+margin_bottom = 165.796
 custom_fonts/font = SubResource( 9 )
 align = 1
 valign = 1
@@ -554,15 +536,12 @@ margin_top = 7.0
 margin_right = 40.0
 margin_bottom = 47.0
 script = ExtResource( 15 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Right" type="TextureButton" parent="FPSLock"]
-margin_left = 271.654
-margin_top = 159.587
-margin_right = 399.654
-margin_bottom = 287.587
+margin_left = 301.0
+margin_top = 135.0
+margin_right = 429.0
+margin_bottom = 263.0
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 5 )
@@ -572,93 +551,72 @@ __meta__ = {
 }
 
 [node name="Left" type="TextureButton" parent="FPSLock"]
-margin_left = 233.0
-margin_top = 185.296
-margin_right = 361.0
-margin_bottom = 313.296
+margin_left = 260.0
+margin_top = 160.0
+margin_right = 388.0
+margin_bottom = 288.0
 rect_rotation = 180.0
 rect_scale = Vector2( 0.2, 0.2 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="FPSLock"]
 margin_left = 40.0
-margin_top = 157.796
+margin_top = 129.0
 margin_right = 202.0
-margin_bottom = 189.796
+margin_bottom = 161.0
 custom_fonts/font = SubResource( 9 )
 text = "FPS Cap:"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Value" type="Label" parent="FPSLock"]
-margin_left = 234.0
-margin_top = 157.796
-margin_right = 272.0
-margin_bottom = 189.796
+margin_left = 261.0
+margin_top = 130.796
+margin_right = 299.0
+margin_bottom = 162.796
 custom_fonts/font = SubResource( 9 )
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ShowTimer" type="Control" parent="."]
 margin_top = 43.0
 margin_right = 40.0
 margin_bottom = 83.0
 script = ExtResource( 17 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Box" type="Button" parent="ShowTimer"]
-margin_left = 202.0
-margin_top = 159.0
-margin_right = 307.0
-margin_bottom = 189.0
+margin_left = 225.0
+margin_top = 128.0
+margin_right = 330.0
+margin_bottom = 158.0
 focus_mode = 0
+custom_fonts/font = SubResource( 13 )
 custom_styles/hover = SubResource( 10 )
 custom_styles/pressed = SubResource( 11 )
 custom_styles/focus = SubResource( 10 )
 custom_styles/disabled = SubResource( 12 )
 custom_styles/normal = SubResource( 11 )
-custom_fonts/font = SubResource( 13 )
 action_mode = 0
 enabled_focus_mode = 0
 text = "False"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="ShowTimer"]
 margin_left = 40.0
-margin_top = 157.796
+margin_top = 126.0
 margin_right = 202.0
-margin_bottom = 189.796
+margin_bottom = 158.0
 custom_fonts/font = SubResource( 9 )
 text = "Show Timer:"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="NumberOfPlayers" type="Control" parent="."]
 margin_top = 50.0
 margin_right = 40.0
 margin_bottom = 90.0
 script = ExtResource( 13 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Right" type="TextureButton" parent="NumberOfPlayers"]
 margin_left = 722.654
@@ -718,9 +676,6 @@ margin_top = 85.0
 margin_right = 40.0
 margin_bottom = 125.0
 script = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Right" type="TextureButton" parent="Player1Char"]
 margin_left = 722.654
@@ -780,9 +735,6 @@ margin_top = 120.0
 margin_right = 40.0
 margin_bottom = 160.0
 script = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Right" type="TextureButton" parent="Player2Char"]
 margin_left = 722.654
@@ -841,3 +793,8 @@ __meta__ = {
 anims/default = SubResource( 14 )
 anims/trans_out_MainMenuScreen_MultiplayerOptions = SubResource( 15 )
 anims/trans_out_MultiplayerOptions_MainMenuScreen = SubResource( 16 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 28, 216 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 23 )

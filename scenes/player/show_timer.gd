@@ -15,4 +15,4 @@ func _update_value():
 	_update_text()
 
 func _update_text():
-	button.text = "True" if value else "False"
+	button.text = "False" if value else "True"

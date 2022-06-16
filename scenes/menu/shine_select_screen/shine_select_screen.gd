@@ -190,6 +190,8 @@ func move_shine_sprites() -> void:
 				CHANGE_SELECTION_TIME, Tween.TRANS_CUBIC, Tween.EASE_OUT)
 
 	tween.start()
+	
+
 
 func update_labels() -> void:
 	# this will assume the selected shine and the selected level are valid
@@ -197,6 +199,7 @@ func update_labels() -> void:
 	level_title_backing.text = level_title.text
 	shine_title.text = shine_details[shine_details_indices[selected_shine_index]]["title"]
 	shine_description.text = shine_details[shine_details_indices[selected_shine_index]]["description"]
+	update_activity()
 
 func start_level() -> void:
 	can_interact = false
@@ -219,7 +222,25 @@ func start_level() -> void:
 	animation_player.play("select_shine")
 	animation_player.connect("animation_finished", self, "change_to_player_scene", [], CONNECT_ONESHOT)
 
+func update_activity() -> void:
+	var activity = Discord.Activity.new()
+	activity.set_type(Discord.ActivityType.Playing)
+	activity.set_state("Playing " + level_title.text)
+
+	var assets = activity.get_assets()
+	assets.set_large_image("sm127")
+	assets.set_large_text("0.7.2")
+	assets.set_small_image("capsule_main")
+	assets.set_small_text("ZONE 2 WOOO")
+	
+	var timestamps = activity.get_timestamps()
+	timestamps.set_start(OS.get_unix_time() + 1)
+
+	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
+	if result != Discord.Result.Ok:
+		push_error(str(result))
 # signal responses start here 
+
 
 func on_button_move_left_pressed() -> void:
 	attempt_increment_selected_shine_index(-1)

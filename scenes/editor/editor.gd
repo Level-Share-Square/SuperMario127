@@ -148,7 +148,9 @@ func _ready() -> void:
 		Singleton.ModeSwitcher.get_node("ModeSwitcherButton").change_visuals(0)
 
 		Singleton.CurrentLevelData.unsaved_editor_changes = false
-	
+
+
+
 func set_selected_box(new_selected_box: Node) -> void:
 	Singleton.EditorSavedSettings.selected_box = new_selected_box.box_index
 	item_preview.update_preview(new_selected_box.item)
@@ -219,7 +221,26 @@ func pick_tile(tile) -> void:
 	set_selected_box(boxes[0])
 
 func switch_scenes() -> void:
+	update_activity()
 	var _change_scene = get_tree().change_scene("res://scenes/player/player.tscn")
+	
+func update_activity() -> void:
+	var activity = Discord.Activity.new()
+	activity.set_type(Discord.ActivityType.Playing)
+	activity.set_state("Playtesting a level")
+
+	var assets = activity.get_assets()
+	assets.set_large_image("sm127")
+	assets.set_large_text("0.7.2")
+	assets.set_small_image("capsule_main")
+	assets.set_small_text("ZONE 2 WOOO")
+	
+	var timestamps = activity.get_timestamps()
+	timestamps.set_start(OS.get_unix_time() + 1)
+
+	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
+	if result != Discord.Result.Ok:
+		push_error(str(result))
 
 func update_selected_object(mouse_pos : Vector2) -> void:
 	if selected_box.item.is_object and !rotating and time_clicked <= 0:
