@@ -6,6 +6,7 @@ export var dive_power : Vector2 = Vector2(1200, 75)
 export var dive_power_luigi : Vector2 = Vector2(1200, 75)
 export var bonk_power : float = 150
 export var maxVelocityX : float = 700
+onready var sound_player = $"../Sounds"
 var last_above_rot_limit := false
 var dive_buffer := 0.0
 var start_facing := 1
@@ -71,6 +72,12 @@ func _stop(delta : float) -> void:
 		character.set_state_by_name("BonkedState", delta)
 		character.sound_player.play_bonk_sound()
 		sprite.rotation_degrees = 0
+	if character.is_on_wall():
+		character.velocity.x = 150 * -character.facing_direction
+		character.velocity.y = -65
+		character.position.x -= 2 * character.facing_direction
+		character.set_state_by_name("BonkedState", delta)
+		character.sound_player.play_bonk_sound()
 	if character.is_grounded():
 		character.set_state_by_name("SlideState", delta)
 	elif character.water_detector.get_overlapping_areas().size() <= 0:

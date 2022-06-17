@@ -1266,11 +1266,11 @@ script = ExtResource( 2 )
 [node name="GroundPoundStartState" type="Node" parent="States"]
 script = ExtResource( 18 )
 
-[node name="GroundPoundState" type="Node" parent="States"]
-script = ExtResource( 19 )
-
 [node name="GroundPoundEndState" type="Node" parent="States"]
 script = ExtResource( 20 )
+
+[node name="GroundPoundState" type="Node" parent="States"]
+script = ExtResource( 19 )
 
 [node name="ButtSlideState" type="Node" parent="States"]
 script = ExtResource( 33 )
@@ -1653,14 +1653,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 7
+frame = 14
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 4
+frame = 13
 speed_scale = 3.0
 playing = true
 
