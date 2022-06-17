@@ -315,7 +315,6 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 
 	collision_shape.disabled = false
 	collision_raycast.disabled = false
-	ground_shape.disabled = false
 	left_collision.disabled = false
 	right_collision.disabled = false
 	gravity = level_area.settings.gravity

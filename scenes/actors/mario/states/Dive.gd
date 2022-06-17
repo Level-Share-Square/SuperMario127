@@ -38,6 +38,7 @@ func _start(_delta : float) -> void:
 		sound_player.play_dive_sound()
 	character.position.y += 4
 	character.rotating = true
+	character.ground_shape.disabled = true
 	if abs(character.velocity.x) > maxVelocityX:
 		character.velocity.x = maxVelocityX * character.facing_direction
 	character.jump_animation = 0
@@ -82,6 +83,7 @@ func _stop(delta : float) -> void:
 		character.set_state_by_name("SlideState", delta)
 	elif character.water_detector.get_overlapping_areas().size() <= 0:
 		sprite.rotation_degrees = 0
+	character.ground_shape.disabled = true
 	
 	if character.is_grounded():
 		character.facing_direction = start_facing
@@ -104,3 +106,4 @@ func _general_update(delta : float) -> void:
 		speed_cooldown -= delta
 		if speed_cooldown < 0:
 			speed_cooldown = 0
+	character.ground_shape.disabled = true
