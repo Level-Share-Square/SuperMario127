@@ -1,4 +1,4 @@
-[gd_scene load_steps=708 format=2]
+[gd_scene load_steps=709 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -682,6 +682,7 @@
 [ext_resource path="res://scenes/actors/objects/on_off_floor_switch/palettes/3/preview.png" type="Texture" id=680]
 [ext_resource path="res://scenes/actors/objects/on_off_floor_switch/palettes/6/preview.png" type="Texture" id=681]
 [ext_resource path="res://scenes/actors/objects/on_off_floor_switch/palettes/1/preview.png" type="Texture" id=682]
+[ext_resource path="res://scenes/actors/objects/coral/Coral1.png" type="Texture" id=683]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3145,6 +3146,13 @@ palette_previews = [ ExtResource( 237 ), ExtResource( 504 ), ExtResource( 503 ) 
 icon = ExtResource( 238 )
 preview = ExtResource( 237 )
 
+[node name="Coral" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 24 )
+object_id = 97
+is_object = true
+icon = ExtResource( 683 )
+preview = ExtResource( 683 )
+
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
 
@@ -3417,8 +3425,8 @@ margin_left = 22.0
 margin_top = 40.0
 margin_right = 136.0
 margin_bottom = 155.0
-custom_fonts/font = SubResource( 14 )
 custom_colors/font_color = Color( 0.258824, 0.270588, 0.658824, 1 )
+custom_fonts/font = SubResource( 14 )
 text = "1"
 align = 1
 valign = 1
