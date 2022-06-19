@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://scenes/menu/levels_screen/levels_screen.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -195,6 +195,9 @@ WindowDialog/styles/panel = SubResource( 20 )
 [sub_resource type="DynamicFont" id=22]
 size = 24
 font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=29]
+length = 0.001
 
 [sub_resource type="Animation" id=23]
 length = 0.001
@@ -394,13 +397,11 @@ script = ExtResource( 1 )
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 712, 10 )
 custom_constants/margin_right = 32
 custom_constants/margin_top = 32
 custom_constants/margin_left = 32
 custom_constants/margin_bottom = 32
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 margin_left = 32.0
@@ -416,14 +417,14 @@ size_flags_horizontal = 3
 
 [node name="TemplateLevelInfo" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 margin_right = 343.0
-margin_bottom = 93.0
+margin_bottom = 117.0
 custom_styles/panel = ExtResource( 10 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/TemplateLevelInfo"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 335.0
-margin_bottom = 85.0
+margin_bottom = 109.0
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/TemplateLevelInfo/VBoxContainer"]
 margin_right = 327.0
@@ -436,13 +437,13 @@ autowrap = true
 [node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/TemplateLevelInfo/VBoxContainer"]
 margin_top = 32.0
 margin_right = 327.0
-margin_bottom = 77.0
+margin_bottom = 101.0
 custom_fonts/font = SubResource( 1 )
-text = "If you'd like to edit a level, select it, then click \"Copy to Levels\"."
+text = "These templates show what the Level Designer is capable of. They do not reflect the campaign in any way."
 autowrap = true
 
 [node name="LevelListPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-margin_top = 97.0
+margin_top = 121.0
 margin_right = 343.0
 margin_bottom = 324.0
 size_flags_vertical = 3
@@ -452,7 +453,7 @@ custom_styles/panel = ExtResource( 10 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 335.0
-margin_bottom = 219.0
+margin_bottom = 195.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 6 )
@@ -992,6 +993,7 @@ margin_bottom = 44.0
 size_flags_horizontal = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 29 )
 anims/default = SubResource( 23 )
 anims/trans_edit = SubResource( 24 )
 anims/trans_in_ShineSelectScreen_LevelsScreen = SubResource( 25 )

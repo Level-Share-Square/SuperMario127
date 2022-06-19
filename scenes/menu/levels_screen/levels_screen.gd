@@ -45,7 +45,6 @@ onready var level_code_entry : TextEdit = $MarginContainer/HBoxContainer/VBoxCon
 
 onready var pop_up_container = $PopupContainer
 onready var confirm_delete_window = $PopupContainer/ConfirmDelete
-
 const PLAYER_SCENE : PackedScene = preload("res://scenes/player/player.tscn")
 const EDITOR_SCENE : PackedScene = preload("res://scenes/editor/editor.tscn")
 

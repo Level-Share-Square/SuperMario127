@@ -1,0 +1,801 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/tiles/tiles.tres" type="TileSet" id=2]
+[ext_resource path="res://scenes/editor/window/tileset_scroll.gd" type="Script" id=3]
+[ext_resource path="res://scenes/editor/window.gd" type="Script" id=7]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=13]
+[ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=14]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=15]
+[ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=16]
+[ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=19]
+[ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=21]
+
+[sub_resource type="DynamicFont" id=1]
+size = 56
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.615686, 0.615686, 0.615686, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.905882, 0.905882, 0.905882, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.439216, 0.439216, 0.439216, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
+[sub_resource type="StyleBoxFlat" id=5]
+content_margin_top = 12.0
+bg_color = Color( 0.254902, 0.254902, 0.254902, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=6]
+content_margin_left = 12.0
+bg_color = Color( 0.266667, 0.266667, 0.266667, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.615686, 0.615686, 0.615686, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.905882, 0.905882, 0.905882, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
+[sub_resource type="StyleBoxFlat" id=9]
+
+[sub_resource type="StyleBoxFlat" id=10]
+content_margin_left = 12.0
+bg_color = Color( 0.254902, 0.254902, 0.254902, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Theme" id=11]
+Button/colors/font_color = Color( 0, 0, 0, 1 )
+Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
+Button/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/normal = null
+Button/styles/pressed = null
+CheckBox/colors/font_color = Color( 0, 0, 0, 1 )
+CheckBox/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+CheckBox/colors/font_color_hover = Color( 0, 0, 0, 1 )
+CheckBox/colors/font_color_hover_pressed = Color( 0, 0, 0, 1 )
+CheckBox/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+CheckBox/constants/check_vadjust = 0
+CheckBox/constants/hseparation = 4
+CheckBox/fonts/font = null
+CheckBox/icons/checked = null
+CheckBox/icons/radio_checked = null
+CheckBox/icons/radio_unchecked = null
+CheckBox/icons/unchecked = null
+CheckBox/styles/disabled = null
+CheckBox/styles/focus = null
+CheckBox/styles/hover = null
+CheckBox/styles/hover_pressed = null
+CheckBox/styles/normal = null
+CheckBox/styles/pressed = null
+CheckButton/colors/font_color = Color( 0, 0, 0, 1 )
+CheckButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+CheckButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
+CheckButton/colors/font_color_hover_pressed = Color( 0, 0, 0, 1 )
+CheckButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+CheckButton/constants/check_vadjust = 0
+CheckButton/constants/hseparation = 4
+CheckButton/fonts/font = null
+CheckButton/icons/off = null
+CheckButton/icons/off_disabled = null
+CheckButton/icons/on = null
+CheckButton/icons/on_disabled = null
+CheckButton/styles/disabled = null
+CheckButton/styles/focus = null
+CheckButton/styles/hover = null
+CheckButton/styles/hover_pressed = null
+CheckButton/styles/normal = null
+CheckButton/styles/pressed = null
+ColorPicker/constants/h_width = 30
+ColorPicker/constants/label_width = 10
+ColorPicker/constants/margin = 4
+ColorPicker/constants/sv_height = 256
+ColorPicker/constants/sv_width = 256
+ColorPicker/icons/add_preset = null
+ColorPicker/icons/color_hue = null
+ColorPicker/icons/color_sample = null
+ColorPicker/icons/overbright_indicator = null
+ColorPicker/icons/preset_bg = null
+ColorPicker/icons/screen_picker = null
+ColorPickerButton/colors/font_color = Color( 0, 0, 0, 1 )
+ColorPickerButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+ColorPickerButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
+ColorPickerButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+ColorPickerButton/constants/hseparation = 2
+ColorPickerButton/fonts/font = null
+ColorPickerButton/icons/bg = null
+ColorPickerButton/styles/disabled = null
+ColorPickerButton/styles/focus = null
+ColorPickerButton/styles/hover = null
+ColorPickerButton/styles/normal = null
+ColorPickerButton/styles/pressed = null
+Dialogs/constants/button_margin = 32
+Dialogs/constants/margin = 8
+FileDialog/colors/file_icon_modulate = Color( 0, 0, 0, 1 )
+FileDialog/colors/files_disabled = Color( 0, 0, 0, 1 )
+FileDialog/colors/folder_icon_modulate = Color( 0, 0, 0, 1 )
+FileDialog/icons/file = null
+FileDialog/icons/folder = null
+FileDialog/icons/parent_folder = null
+FileDialog/icons/reload = null
+FileDialog/icons/toggle_hidden = null
+Fonts/fonts/large = null
+Fonts/fonts/normal = null
+GraphEdit/colors/activity = Color( 0, 0, 0, 1 )
+GraphEdit/colors/grid_major = Color( 0, 0, 0, 1 )
+GraphEdit/colors/grid_minor = Color( 0, 0, 0, 1 )
+GraphEdit/colors/selection_fill = Color( 0, 0, 0, 1 )
+GraphEdit/colors/selection_stroke = Color( 0, 0, 0, 1 )
+GraphEdit/constants/bezier_len_neg = 160
+GraphEdit/constants/bezier_len_pos = 80
+GraphEdit/constants/port_grab_distance_horizontal = 48
+GraphEdit/constants/port_grab_distance_vertical = 6
+GraphEdit/icons/minus = null
+GraphEdit/icons/more = null
+GraphEdit/icons/reset = null
+GraphEdit/icons/snap = null
+GraphEdit/styles/bg = null
+GraphNode/colors/close_color = Color( 0, 0, 0, 1 )
+GraphNode/colors/resizer_color = Color( 0, 0, 0, 1 )
+GraphNode/colors/title_color = Color( 0, 0, 0, 1 )
+GraphNode/constants/close_offset = 18
+GraphNode/constants/port_offset = 3
+GraphNode/constants/separation = 1
+GraphNode/constants/title_offset = 20
+GraphNode/fonts/title_font = null
+GraphNode/icons/close = null
+GraphNode/icons/port = null
+GraphNode/icons/resizer = null
+GraphNode/styles/breakpoint = null
+GraphNode/styles/comment = null
+GraphNode/styles/commentfocus = null
+GraphNode/styles/defaultfocus = null
+GraphNode/styles/defaultframe = null
+GraphNode/styles/frame = null
+GraphNode/styles/position = null
+GraphNode/styles/selectedframe = null
+GridContainer/constants/hseparation = 4
+GridContainer/constants/vseparation = 4
+HBoxContainer/constants/separation = 4
+HScrollBar/icons/decrement = null
+HScrollBar/icons/decrement_highlight = null
+HScrollBar/icons/increment = null
+HScrollBar/icons/increment_highlight = null
+HScrollBar/styles/grabber = SubResource( 2 )
+HScrollBar/styles/grabber_highlight = SubResource( 3 )
+HScrollBar/styles/grabber_pressed = SubResource( 4 )
+HScrollBar/styles/scroll = SubResource( 5 )
+HScrollBar/styles/scroll_focus = SubResource( 6 )
+HSeparator/constants/separation = 4
+HSeparator/styles/separator = null
+HSlider/icons/grabber = null
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = null
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = null
+HSlider/styles/grabber_area_highlight = null
+HSlider/styles/slider = null
+HSplitContainer/constants/autohide = 1
+HSplitContainer/constants/separation = 12
+HSplitContainer/icons/grabber = null
+HSplitContainer/styles/bg = null
+Icons/icons/close = null
+ItemList/colors/font_color = Color( 0, 0, 0, 1 )
+ItemList/colors/font_color_selected = Color( 0, 0, 0, 1 )
+ItemList/colors/guide_color = Color( 0, 0, 0, 1 )
+ItemList/constants/hseparation = 4
+ItemList/constants/icon_margin = 4
+ItemList/constants/line_separation = 2
+ItemList/constants/vseparation = 2
+ItemList/fonts/font = null
+ItemList/styles/bg = null
+ItemList/styles/bg_focus = null
+ItemList/styles/cursor = null
+ItemList/styles/cursor_unfocused = null
+ItemList/styles/selected = null
+ItemList/styles/selected_focus = null
+Label/colors/font_color = Color( 0, 0, 0, 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+Label/colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/fonts/font = null
+Label/styles/normal = null
+LineEdit/colors/clear_button_color = Color( 0, 0, 0, 1 )
+LineEdit/colors/clear_button_color_pressed = Color( 0, 0, 0, 1 )
+LineEdit/colors/cursor_color = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0, 0, 0, 1 )
+LineEdit/colors/selection_color = Color( 0, 0, 0, 1 )
+LineEdit/constants/minimum_spaces = 12
+LineEdit/fonts/font = null
+LineEdit/icons/clear = null
+LineEdit/styles/focus = null
+LineEdit/styles/normal = null
+LineEdit/styles/read_only = null
+LinkButton/colors/font_color = Color( 0, 0, 0, 1 )
+LinkButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
+LinkButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+LinkButton/constants/underline_spacing = 2
+LinkButton/fonts/font = null
+LinkButton/styles/focus = null
+MarginContainer/constants/margin_bottom = 0
+MarginContainer/constants/margin_left = 0
+MarginContainer/constants/margin_right = 0
+MarginContainer/constants/margin_top = 0
+MenuButton/colors/font_color = Color( 0, 0, 0, 1 )
+MenuButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+MenuButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
+MenuButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+MenuButton/constants/hseparation = 3
+MenuButton/fonts/font = null
+MenuButton/styles/disabled = null
+MenuButton/styles/focus = null
+MenuButton/styles/hover = null
+MenuButton/styles/normal = null
+MenuButton/styles/pressed = null
+OptionButton/colors/font_color = Color( 0, 0, 0, 1 )
+OptionButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+OptionButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
+OptionButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+OptionButton/constants/arrow_margin = 2
+OptionButton/constants/hseparation = 2
+OptionButton/fonts/font = null
+OptionButton/icons/arrow = null
+OptionButton/styles/disabled = null
+OptionButton/styles/focus = null
+OptionButton/styles/hover = null
+OptionButton/styles/normal = null
+OptionButton/styles/pressed = null
+Panel/styles/panel = null
+PanelContainer/styles/panel = null
+PopupDialog/styles/panel = null
+PopupMenu/colors/font_color = Color( 0, 0, 0, 1 )
+PopupMenu/colors/font_color_accel = Color( 0, 0, 0, 1 )
+PopupMenu/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+PopupMenu/colors/font_color_hover = Color( 0, 0, 0, 1 )
+PopupMenu/constants/hseparation = 4
+PopupMenu/constants/vseparation = 4
+PopupMenu/fonts/font = null
+PopupMenu/icons/checked = null
+PopupMenu/icons/radio_checked = null
+PopupMenu/icons/radio_unchecked = null
+PopupMenu/icons/submenu = null
+PopupMenu/icons/unchecked = null
+PopupMenu/styles/hover = null
+PopupMenu/styles/labeled_separator_left = null
+PopupMenu/styles/labeled_separator_right = null
+PopupMenu/styles/panel = null
+PopupMenu/styles/panel_disabled = null
+PopupMenu/styles/separator = null
+PopupPanel/styles/panel = null
+ProgressBar/colors/font_color = Color( 0, 0, 0, 1 )
+ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+ProgressBar/fonts/font = null
+ProgressBar/styles/bg = null
+ProgressBar/styles/fg = null
+RichTextLabel/colors/default_color = Color( 0, 0, 0, 1 )
+RichTextLabel/colors/font_color_selected = Color( 0, 0, 0, 1 )
+RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+RichTextLabel/colors/selection_color = Color( 0, 0, 0, 1 )
+RichTextLabel/constants/line_separation = 1
+RichTextLabel/constants/shadow_as_outline = 0
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/table_hseparation = 3
+RichTextLabel/constants/table_vseparation = 3
+RichTextLabel/fonts/bold_font = null
+RichTextLabel/fonts/bold_italics_font = null
+RichTextLabel/fonts/italics_font = null
+RichTextLabel/fonts/mono_font = null
+RichTextLabel/fonts/normal_font = null
+RichTextLabel/styles/focus = null
+RichTextLabel/styles/normal = null
+ScrollContainer/styles/bg = null
+SpinBox/icons/updown = null
+TabContainer/colors/font_color_bg = Color( 0, 0, 0, 1 )
+TabContainer/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+TabContainer/colors/font_color_fg = Color( 0, 0, 0, 1 )
+TabContainer/constants/hseparation = 4
+TabContainer/constants/label_valign_bg = 2
+TabContainer/constants/label_valign_fg = 0
+TabContainer/constants/side_margin = 8
+TabContainer/constants/top_margin = 24
+TabContainer/fonts/font = null
+TabContainer/icons/decrement = null
+TabContainer/icons/decrement_highlight = null
+TabContainer/icons/increment = null
+TabContainer/icons/increment_highlight = null
+TabContainer/icons/menu = null
+TabContainer/icons/menu_highlight = null
+TabContainer/styles/panel = null
+TabContainer/styles/tab_bg = null
+TabContainer/styles/tab_disabled = null
+TabContainer/styles/tab_fg = null
+Tabs/colors/font_color_bg = Color( 0, 0, 0, 1 )
+Tabs/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+Tabs/colors/font_color_fg = Color( 0, 0, 0, 1 )
+Tabs/constants/hseparation = 4
+Tabs/constants/label_valign_bg = 2
+Tabs/constants/label_valign_fg = 0
+Tabs/constants/top_margin = 24
+Tabs/fonts/font = null
+Tabs/icons/close = null
+Tabs/icons/decrement = null
+Tabs/icons/decrement_highlight = null
+Tabs/icons/increment = null
+Tabs/icons/increment_highlight = null
+Tabs/styles/button = null
+Tabs/styles/button_pressed = null
+Tabs/styles/panel = null
+Tabs/styles/tab_bg = null
+Tabs/styles/tab_disabled = null
+Tabs/styles/tab_fg = null
+TextEdit/colors/background_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/bookmark_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/brace_mismatch_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/breakpoint_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/caret_background_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/caret_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/code_folding_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/completion_background_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/completion_existing_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/completion_font_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/completion_scroll_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/completion_selected_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/current_line_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/executing_line_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/font_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/font_color_readonly = Color( 0, 0, 0, 1 )
+TextEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
+TextEdit/colors/function_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/line_number_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/mark_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/member_variable_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/number_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/safe_line_number_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/selection_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/symbol_color = Color( 0, 0, 0, 1 )
+TextEdit/colors/word_highlighted_color = Color( 0, 0, 0, 1 )
+TextEdit/constants/completion_lines = 7
+TextEdit/constants/completion_max_width = 50
+TextEdit/constants/completion_scroll_width = 3
+TextEdit/constants/line_spacing = 4
+TextEdit/fonts/font = null
+TextEdit/icons/fold = null
+TextEdit/icons/folded = null
+TextEdit/icons/space = null
+TextEdit/icons/tab = null
+TextEdit/styles/completion = null
+TextEdit/styles/focus = null
+TextEdit/styles/normal = null
+TextEdit/styles/read_only = null
+ToolButton/colors/font_color = Color( 0, 0, 0, 1 )
+ToolButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
+ToolButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
+ToolButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
+ToolButton/constants/hseparation = 3
+ToolButton/fonts/font = null
+ToolButton/styles/disabled = null
+ToolButton/styles/focus = null
+ToolButton/styles/hover = null
+ToolButton/styles/normal = null
+ToolButton/styles/pressed = null
+TooltipLabel/colors/font_color = Color( 0, 0, 0, 1 )
+TooltipLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+TooltipLabel/constants/shadow_offset_x = 1
+TooltipLabel/constants/shadow_offset_y = 1
+TooltipLabel/fonts/font = null
+TooltipPanel/styles/panel = null
+Tree/colors/custom_button_font_highlight = Color( 0, 0, 0, 1 )
+Tree/colors/drop_position_color = Color( 0, 0, 0, 1 )
+Tree/colors/font_color = Color( 0, 0, 0, 1 )
+Tree/colors/font_color_selected = Color( 0, 0, 0, 1 )
+Tree/colors/guide_color = Color( 0, 0, 0, 1 )
+Tree/colors/relationship_line_color = Color( 0, 0, 0, 1 )
+Tree/colors/title_button_color = Color( 0, 0, 0, 1 )
+Tree/constants/button_margin = 4
+Tree/constants/draw_guides = 1
+Tree/constants/draw_relationship_lines = 0
+Tree/constants/hseparation = 4
+Tree/constants/item_margin = 12
+Tree/constants/scroll_border = 4
+Tree/constants/scroll_speed = 12
+Tree/constants/vseparation = 4
+Tree/fonts/font = null
+Tree/fonts/title_button_font = null
+Tree/icons/arrow = null
+Tree/icons/arrow_collapsed = null
+Tree/icons/checked = null
+Tree/icons/select_arrow = null
+Tree/icons/unchecked = null
+Tree/icons/updown = null
+Tree/styles/bg = null
+Tree/styles/bg_focus = null
+Tree/styles/button_pressed = null
+Tree/styles/cursor = null
+Tree/styles/cursor_unfocused = null
+Tree/styles/custom_button = null
+Tree/styles/custom_button_hover = null
+Tree/styles/custom_button_pressed = null
+Tree/styles/selected = null
+Tree/styles/selected_focus = null
+Tree/styles/title_button_hover = null
+Tree/styles/title_button_normal = null
+Tree/styles/title_button_pressed = null
+VBoxContainer/constants/separation = 4
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/styles/grabber = SubResource( 7 )
+VScrollBar/styles/grabber_highlight = SubResource( 8 )
+VScrollBar/styles/grabber_pressed = SubResource( 9 )
+VScrollBar/styles/scroll = SubResource( 10 )
+VScrollBar/styles/scroll_focus = SubResource( 6 )
+VSeparator/constants/separation = 4
+VSeparator/styles/separator = null
+VSlider/icons/grabber = null
+VSlider/icons/grabber_disabled = null
+VSlider/icons/grabber_highlight = null
+VSlider/icons/tick = null
+VSlider/styles/grabber_area = null
+VSlider/styles/grabber_area_highlight = null
+VSlider/styles/slider = null
+VSplitContainer/constants/autohide = 1
+VSplitContainer/constants/separation = 12
+VSplitContainer/icons/grabber = null
+VSplitContainer/styles/bg = null
+WindowDialog/colors/title_color = Color( 0, 0, 0, 1 )
+WindowDialog/constants/close_h_ofs = 18
+WindowDialog/constants/close_v_ofs = 18
+WindowDialog/constants/scaleborder_size = 4
+WindowDialog/constants/title_height = 20
+WindowDialog/fonts/title_font = null
+WindowDialog/icons/close = null
+WindowDialog/icons/close_highlight = null
+WindowDialog/styles/panel = null
+
+[sub_resource type="GDScript" id=12]
+script/source = "extends ScrollContainer
+
+onready var autotiling_container = get_node(\"../Autotiling\")
+
+onready var hotkeys_button = get_node(\"../HotkeysButton\")
+onready var autotiling_button = get_node(\"../AutotilingButton\")
+
+func _ready():
+	var _connect = hotkeys_button.connect(\"pressed\", self, \"switch_to_hotkeys\")
+	_connect = autotiling_button.connect(\"pressed\", self, \"switch_to_autotiling\")
+
+func switch_to_hotkeys():
+	autotiling_container.visible = false
+	autotiling_button.disabled = false
+	
+	hotkeys_button.disabled = true
+	visible = true
+
+func switch_to_autotiling():
+	autotiling_container.visible = true
+	autotiling_button.disabled = true
+	
+	hotkeys_button.disabled = false
+	visible = false
+"
+
+[sub_resource type="DynamicFont" id=13]
+size = 32
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Gradient" id=14]
+offsets = PoolRealArray( 0, 0.8 )
+colors = PoolColorArray( 0, 0, 0, 0, 0.121569, 0.180392, 0.517647, 1 )
+
+[sub_resource type="GradientTexture" id=15]
+gradient = SubResource( 14 )
+width = 193
+
+[node name="SampleInfo" type="NinePatchRect"]
+margin_left = 165.0
+margin_top = 129.921
+margin_right = 1218.0
+margin_bottom = 763.921
+rect_scale = Vector2( 0.4, 0.4 )
+mouse_filter = 0
+texture = ExtResource( 14 )
+region_rect = Rect2( 0, 0, 108, 290 )
+patch_margin_left = 40
+patch_margin_top = 110
+patch_margin_right = 40
+patch_margin_bottom = 40
+script = ExtResource( 7 )
+
+[node name="Title" type="RichTextLabel" parent="."]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 550.0
+margin_bottom = 102.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_text = "Sample Information"
+text = "Sample Information"
+
+[node name="CloseButton" type="TextureButton" parent="."]
+margin_left = 888.65
+margin_top = 12.953
+margin_right = 1043.65
+margin_bottom = 93.953
+rect_scale = Vector2( 0.95, 0.95 )
+texture_normal = ExtResource( 19 )
+texture_pressed = ExtResource( 19 )
+texture_hover = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
+stream = ExtResource( 15 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
+stream = ExtResource( 13 )
+volume_db = -10.0
+
+[node name="Hotkeys" type="ScrollContainer" parent="."]
+margin_left = 36.0
+margin_top = 216.0
+margin_right = 685.0
+margin_bottom = 439.0
+rect_scale = Vector2( 1.5, 1.5 )
+theme = SubResource( 11 )
+scroll_horizontal_enabled = false
+script = SubResource( 12 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Hotkeys"]
+margin_right = 649.0
+margin_bottom = 223.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_fonts/normal_font = SubResource( 13 )
+bbcode_enabled = true
+bbcode_text = "[color=#FF0000]These sample levels are examples of how the Level Designer can be used. Note that they do not reflect content that will be in the story mode in future releases.[/color] "
+text = "These sample levels are examples of how the Level Designer can be used. Note that they do not reflect content that will be in the story mode in future releases. "
+fit_content_height = true
+scroll_active = false
+
+[node name="Autotiling" type="ScrollContainer" parent="."]
+visible = false
+margin_left = 36.0
+margin_top = 126.0
+margin_right = 1014.0
+margin_bottom = 482.0
+theme = SubResource( 11 )
+scroll_horizontal_enabled = false
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Autotiling"]
+margin_right = 978.0
+margin_bottom = 2738.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_fonts/normal_font = SubResource( 13 )
+bbcode_enabled = true
+bbcode_text = "[center][color=yellow]--Guide to Autotiling--[/color][/center]
+Autotiling is a system that automatically
+connects tiles together, reducing the 
+amount of time and effort needed to create
+good-looking terrain.
+
+The two most common types of autotiling 
+used are Terrain Tiling, and Brick Tiling.
+
+First, let's cover Brick Tiling.
+
+[center][color=yellow]--Brick Tiling--[/color][/center]
+This tiling system is relatively simple.
+These tiles don't usually change much based 
+on their placement, and slopes are easy to understand.
+
+Slope tiles should be placed in a diagonal line, on tiles with
+empty space next to them. If a tile is above a slope tile,
+you'll get a ceiling tile instead.
+
+Next up is Terrain Tiling.
+
+[center][color=yellow]--Terrain Tiling--[/color][/center]
+In comparison to Brick Tiling, this tiling system is
+somewhat complex, and uses 4 different tile types to
+create terrain:
+
+
+Full tiles, left slopes, right slopes, and half tiles.
+
+Full tiles are useful for flat edges, or 
+making things look blocky.
+
+Left and right slopes are useful for making 
+precise angles, combined with full tiles.
+
+And half tiles are useful for making smooth 
+natural-looking terrain, 
+with round hills and bumps.
+
+Currently, these tiles don't always connect seamlessly
+with other types. This will likely be changed 
+in a future update.
+
+If you run into issues like this 
+when combining tile types,
+place the respective slope over the cutoff tiles.
+
+ 					-->
+
+
+Now it looks seamless!
+
+
+[center][color=yellow]--Boo Blocks--[/color][/center]
+The boo block is a unique kind of tile, 
+which turns invisible when you play
+the level. These tiles will still connect terrain/brick tiles,
+which makes them very useful when used in combination with 
+layers.
+
+
+[center][color=yellow]--Palettes--[/color][/center]
+Right clicking on a tile in the toolbar
+will change it's color, allowing for unique
+uses of existing tiles, sometimes in ways they weren't intended for! 
+This also works with objects, and backgrounds
+(right click the arrow in settings to change palette) 
+
+
+This should be everything you need to know about tiles.
+If you have further questions, ask in the discord server.
+"
+text = "--Guide to Autotiling--
+Autotiling is a system that automatically
+connects tiles together, reducing the 
+amount of time and effort needed to create
+good-looking terrain.
+
+The two most common types of autotiling 
+used are Terrain Tiling, and Brick Tiling.
+
+First, let's cover Brick Tiling.
+
+--Brick Tiling--
+This tiling system is relatively simple.
+These tiles don't usually change much based 
+on their placement, and slopes are easy to understand.
+
+Slope tiles should be placed in a diagonal line, on tiles with
+empty space next to them. If a tile is above a slope tile,
+you'll get a ceiling tile instead.
+
+Next up is Terrain Tiling.
+
+--Terrain Tiling--
+In comparison to Brick Tiling, this tiling system is
+somewhat complex, and uses 4 different tile types to
+create terrain:
+
+
+Full tiles, left slopes, right slopes, and half tiles.
+
+Full tiles are useful for flat edges, or 
+making things look blocky.
+
+Left and right slopes are useful for making 
+precise angles, combined with full tiles.
+
+And half tiles are useful for making smooth 
+natural-looking terrain, 
+with round hills and bumps.
+
+Currently, these tiles don't always connect seamlessly
+with other types. This will likely be changed 
+in a future update.
+
+If you run into issues like this 
+when combining tile types,
+place the respective slope over the cutoff tiles.
+
+ 					-->
+
+
+Now it looks seamless!
+
+
+--Boo Blocks--
+The boo block is a unique kind of tile, 
+which turns invisible when you play
+the level. These tiles will still connect terrain/brick tiles,
+which makes them very useful when used in combination with 
+layers.
+
+
+--Palettes--
+Right clicking on a tile in the toolbar
+will change it's color, allowing for unique
+uses of existing tiles, sometimes in ways they weren't intended for! 
+This also works with objects, and backgrounds
+(right click the arrow in settings to change palette) 
+
+
+This should be everything you need to know about tiles.
+If you have further questions, ask in the discord server.
+"
+fit_content_height = true
+scroll_active = false
+
+[node name="TileMap" type="TileMap" parent="Autotiling"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 65560, 8, 196621, 65561, 8, 131085, 65563, 5, 13, 65564, 4, 11, 131095, 8, 65549, 131096, 8, 65541, 131097, 8, 65542, 131098, 2, 13, 131099, 5, 65541, 131100, 2, 131083, 196631, 2, 65544, 196632, 2, 131081, 196633, 8, 131081, 196634, 2, 131081, 196635, 2, 131081, 196636, 2, 131083, 262167, 5, 196616, 262168, 8, 131077, 262169, 2, 131081, 262170, 2, 131081, 262171, 8, 131078, 262172, 8, 196619, 327704, 8, 196632, 327705, 8, 196617, 327706, 8, 196617, 327707, 8, 65560, 917527, 7, 7, 917528, 3, 1, 917529, 3, 1, 917530, 3, 1, 917531, 6, 6, 983063, 7, 9, 983064, 3, 1, 983065, 3, 1, 983066, 3, 1, 983067, 6, 8, 2031616, 2, 196608, 2031618, 5, 196608, 2031620, 4, 196608, 2031622, 8, 196608, 2228245, 2, 8, 2228246, 2, 11, 2293780, 2, 8, 2293781, 2, 65541, 2293782, 2, 131083, 2359315, 2, 196609, 2359316, 2, 196613, 2359317, 2, 196617, 2359318, 2, 196619, 2490391, 5, 13, 2490392, 4, 13, 2555926, 5, 13, 2555927, 5, 65541, 2555928, 4, 65542, 2555929, 4, 13, 2621461, 2, 196609, 2621462, 5, 196613, 2621463, 5, 196617, 2621464, 2, 196617, 2621465, 4, 196614, 2621466, 2, 196611, 2752534, 8, 196621, 2752535, 8, 10, 2752536, 8, 10, 2752537, 8, 131085, 2818064, 8, 196621, 2818065, 8, 131085, 2818068, 8, 196621, 2818069, 8, 65551, 2818070, 8, 65541, 2818071, 8, 131081, 2818072, 8, 65548, 2818073, 8, 65542, 2818074, 8, 16, 2883598, 8, 8, 2883599, 8, 65551, 2883600, 8, 65541, 2883601, 8, 65542, 2883602, 8, 15, 2883603, 8, 65551, 2883604, 8, 65541, 2883605, 2, 131081, 2883606, 2, 131081, 2883607, 2, 131081, 2883608, 2, 131081, 2883609, 2, 131081, 2883610, 4, 65542, 2883611, 8, 13, 2949134, 8, 196632, 2949135, 8, 196617, 2949136, 8, 196617, 2949137, 8, 196617, 2949138, 8, 196617, 2949139, 8, 196617, 2949140, 8, 196617, 2949141, 8, 196617, 2949142, 8, 196617, 2949143, 8, 196617, 2949144, 8, 196617, 2949145, 8, 196617, 2949146, 8, 196617, 2949147, 8, 65560, 3276817, 5, 15, 3342352, 5, 13, 3342353, 2, 65543, 3407887, 5, 196609, 3407888, 2, 196613, 3407889, 2, 196619, 3604483, 5, 15, 3604489, 5, 15, 3670018, 5, 13, 3670019, 2, 65543, 3670024, 5, 13, 3670025, 5, 65543, 3735553, 5, 196609, 3735554, 2, 196613, 3735555, 2, 196619, 3735559, 5, 196609, 3735560, 5, 196613, 3735561, 2, 196619, 4128788, 18, 8, 4128789, 18, 10, 4128790, 18, 10, 4128791, 18, 10, 4128792, 18, 10, 4128793, 18, 11, 4194324, 18, 65544, 4194325, 18, 131081, 4194326, 18, 131081, 4194327, 18, 131081, 4194328, 18, 131081, 4194329, 18, 131083, 4259860, 18, 196616, 4259861, 18, 196617, 4259862, 18, 196617, 4259863, 18, 196617, 4259864, 18, 196617, 4259865, 18, 196619, 4784148, 31, 0, 4784149, 33, 0, 4784150, 34, 0, 4784151, 32, 0, 4784153, 12, 0, 4784154, 9, 1, 4784155, 3, 1, 4784156, 15, 2 )
+
+[node name="TextureRect" type="TextureRect" parent="Autotiling/TileMap"]
+margin_left = 639.0
+margin_top = 2016.0
+margin_right = 832.0
+margin_bottom = 2113.0
+size_flags_horizontal = 0
+texture = SubResource( 15 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="HotkeysButton" parent="." instance=ExtResource( 21 )]
+visible = false
+margin_left = 107.404
+margin_top = 507.0
+margin_right = 507.404
+margin_bottom = 597.0
+disabled = true
+text = "Hotkeys"
+
+[node name="AutotilingButton" parent="." instance=ExtResource( 21 )]
+visible = false
+margin_left = 527.404
+margin_top = 507.0
+margin_right = 927.404
+margin_bottom = 597.0
+text = "Tiles"

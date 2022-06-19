@@ -3390,9 +3390,6 @@ texture_normal = ExtResource( 18 )
 texture_pressed = ExtResource( 11 )
 texture_hover = ExtResource( 174 )
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 window = NodePath("../HelpWindow")
 starting_position = Vector2( 165, 130 )
 
