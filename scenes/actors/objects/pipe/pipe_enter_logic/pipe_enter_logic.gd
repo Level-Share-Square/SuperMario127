@@ -82,6 +82,7 @@ func start_pipe_ground_pound_animation(character : Character) -> void:
 
 	# warning-ignore: return_value_discarded
 	tween.start()
+	audio_fast.play()
 	
 func start_pipe_enter_animation(character : Character) -> void:
 	stored_character = character

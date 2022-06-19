@@ -2,7 +2,7 @@ extends TextureButton
 
 export var window : NodePath
 export var starting_position : Vector2
-onready var window_node = $HelpWindow
+onready var window_node = get_node(window)
 onready var hover_sound = $HoverSound
 onready var click_sound = $ClickSound
 var last_hovered = false
