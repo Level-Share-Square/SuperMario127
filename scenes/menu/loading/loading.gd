@@ -19,12 +19,12 @@ var resource_loader
 
 onready var amount_of_scenes = Singleton.load_paths.size()
 onready var thread = Thread.new()
+onready var file = File.new()
 
 var current_index = 0
 var percentage = 0
 var coins = 0
 var coins_spawned = 0
-
 var spawn_timer = 0.0
 var done = false
 
@@ -61,6 +61,8 @@ func _ready():
 		mario_sprite.frames = luigi_frames
 		mario_reflection.frames = luigi_frames
 		thread.start(self, "load_palettes", null, thread.PRIORITY_HIGH)
+	file.open("user://072.json", File.WRITE)
+	file.close()
 
 func collect_coin(play_sound = true):
 	coins += 1
