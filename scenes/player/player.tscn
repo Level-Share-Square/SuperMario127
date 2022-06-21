@@ -76,6 +76,10 @@ size = 100
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
+[sub_resource type="DynamicFont" id=10]
+size = 76
+font_data = ExtResource( 7 )
+
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.0705882, 0, 0.231373, 1 )
 corner_radius_top_left = 64
@@ -89,10 +93,6 @@ corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
-
-[sub_resource type="DynamicFont" id=10]
-size = 76
-font_data = ExtResource( 7 )
 
 [sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.133333, 0.145098, 0.196078, 0.835294 )
@@ -143,11 +143,10 @@ __meta__ = {
 }
 
 [node name="ChatBox" type="Control" parent="UI"]
-visible = false
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 288.0
-margin_bottom = 169.0
+margin_left = 4.0
+margin_top = 265.0
+margin_right = 287.0
+margin_bottom = 429.0
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -182,9 +181,9 @@ custom_effects = [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ]
 margin_top = 145.0
 margin_right = 283.0
 margin_bottom = 164.0
-custom_styles/normal = SubResource( 2 )
-custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.0901961, 0.196078, 0.458824, 1 )
+custom_fonts/font = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
 context_menu_enabled = false
 placeholder_text = "Enter text here."
 placeholder_alpha = 0.35
@@ -229,8 +228,8 @@ margin_top = 2.0
 margin_right = 167.0
 margin_bottom = 77.0
 rect_rotation = 0.0366689
-custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 0.25098 )
+custom_fonts/font = SubResource( 3 )
 text = "0000"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -240,8 +239,8 @@ __meta__ = {
 margin_left = 20.0
 margin_right = 165.0
 margin_bottom = 48.0
-custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 4 )
 text = "0000"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -281,8 +280,8 @@ margin_top = 2.0
 margin_right = 171.0
 margin_bottom = 77.0
 rect_rotation = 0.0366689
-custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0, 0, 0.25098 )
+custom_fonts/font = SubResource( 5 )
 text = "0/8"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -292,8 +291,8 @@ __meta__ = {
 margin_left = 24.0
 margin_right = 169.0
 margin_bottom = 48.0
-custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 6 )
 text = "0/8"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -330,8 +329,8 @@ margin_top = 2.0
 margin_right = 171.046
 margin_bottom = 77.0
 rect_rotation = 0.0366689
-custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0, 0, 0.25098 )
+custom_fonts/font = SubResource( 5 )
 text = "0/8"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -341,8 +340,8 @@ __meta__ = {
 margin_left = 24.046
 margin_right = 169.046
 margin_bottom = 48.0
-custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 6 )
 text = "0/8"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -448,10 +447,10 @@ __meta__ = {
 margin_right = 535.0
 margin_bottom = 176.0
 size_flags_horizontal = 7
+custom_fonts/font = SubResource( 10 )
 custom_styles/hover = SubResource( 8 )
 custom_styles/pressed = SubResource( 9 )
 custom_styles/normal = SubResource( 9 )
-custom_fonts/font = SubResource( 10 )
 action_mode = 0
 text = "Resume"
 script = ExtResource( 10 )
@@ -472,10 +471,10 @@ margin_left = 553.0
 margin_right = 1088.0
 margin_bottom = 176.0
 size_flags_horizontal = 7
+custom_fonts/font = SubResource( 10 )
 custom_styles/hover = SubResource( 8 )
 custom_styles/pressed = SubResource( 9 )
 custom_styles/normal = SubResource( 9 )
-custom_fonts/font = SubResource( 10 )
 action_mode = 0
 text = "Retry"
 script = ExtResource( 10 )
@@ -496,10 +495,10 @@ margin_left = 1106.0
 margin_right = 1641.0
 margin_bottom = 176.0
 size_flags_horizontal = 7
+custom_fonts/font = SubResource( 10 )
 custom_styles/hover = SubResource( 8 )
 custom_styles/pressed = SubResource( 9 )
 custom_styles/normal = SubResource( 9 )
-custom_fonts/font = SubResource( 10 )
 action_mode = 0
 text = "Options"
 script = ExtResource( 22 )
@@ -547,8 +546,8 @@ margin_top = 111.0
 margin_right = 768.0
 margin_bottom = 178.0
 rect_pivot_offset = Vector2( 72, 0 )
-custom_fonts/font = ExtResource( 51 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 51 )
 text = "Unknown Level"
 align = 1
 valign = 1
@@ -561,8 +560,8 @@ show_behind_parent = true
 margin_right = 768.0
 margin_bottom = 81.0
 rect_pivot_offset = Vector2( 72, 0 )
-custom_fonts/font = ExtResource( 52 )
 custom_colors/font_color = Color( 0.0392157, 0, 0.188235, 1 )
+custom_fonts/font = ExtResource( 52 )
 text = "Unknown Level"
 align = 1
 valign = 1
