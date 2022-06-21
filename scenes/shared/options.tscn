@@ -293,7 +293,6 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="ColorRect" type="ColorRect" parent="TitleOnly"]
-visible = false
 use_parent_material = true
 margin_left = -2.0
 margin_top = -2.0
@@ -355,6 +354,7 @@ __meta__ = {
 }
 
 [node name="IpAddress" type="LineEdit" parent="."]
+visible = false
 margin_left = 79.8377
 margin_top = 93.2382
 margin_right = 292.838
@@ -366,11 +366,9 @@ context_menu_enabled = false
 placeholder_text = "IP Address"
 placeholder_alpha = 0.35
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ConnectButton" type="Button" parent="."]
+visible = false
 margin_left = 79.8377
 margin_top = 148.406
 margin_right = 292.838
@@ -396,6 +394,7 @@ stream = ExtResource( 4 )
 volume_db = -10.0
 
 [node name="DisconnectButton" type="Button" parent="."]
+visible = false
 margin_left = 79.8377
 margin_top = 258.731
 margin_right = 292.838
@@ -422,7 +421,6 @@ stream = ExtResource( 4 )
 volume_db = -10.0
 
 [node name="ConfirmButton" type="Button" parent="."]
-visible = false
 margin_left = 419.0
 margin_top = 236.405
 margin_right = 748.0
@@ -452,7 +450,6 @@ stream = ExtResource( 4 )
 volume_db = -10.0
 
 [node name="ControlsButton" type="Button" parent="."]
-visible = false
 margin_left = 27.0
 margin_top = 236.405
 margin_right = 356.0
@@ -475,6 +472,7 @@ stream = ExtResource( 4 )
 volume_db = -10.0
 
 [node name="HostButton" type="Button" parent="."]
+visible = false
 margin_left = 79.8377
 margin_top = 204.342
 margin_right = 292.838
@@ -500,7 +498,6 @@ stream = ExtResource( 4 )
 volume_db = -10.0
 
 [node name="WindowScale" type="Control" parent="."]
-visible = false
 margin_top = -28.0
 margin_right = 40.0
 margin_bottom = 12.0
@@ -556,7 +553,6 @@ __meta__ = {
 }
 
 [node name="FPSLock" type="Control" parent="."]
-visible = false
 margin_top = 7.0
 margin_right = 40.0
 margin_bottom = 47.0
@@ -609,7 +605,6 @@ align = 1
 valign = 1
 
 [node name="ShowTimer" type="Control" parent="."]
-visible = false
 margin_top = 43.0
 margin_right = 40.0
 margin_bottom = 83.0
@@ -642,7 +637,6 @@ align = 1
 valign = 1
 
 [node name="RichPresence" type="Control" parent="."]
-visible = false
 margin_top = 43.0
 margin_right = 40.0
 margin_bottom = 83.0
@@ -683,7 +677,6 @@ scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 23 )
 
 [node name="NumberOfPlayers" type="Control" parent="."]
-visible = false
 margin_top = 50.0
 margin_right = 40.0
 margin_bottom = 90.0
@@ -743,7 +736,6 @@ __meta__ = {
 }
 
 [node name="Player1Char" type="Control" parent="."]
-visible = false
 margin_top = 85.0
 margin_right = 40.0
 margin_bottom = 125.0
@@ -803,7 +795,6 @@ __meta__ = {
 }
 
 [node name="Player2Char" type="Control" parent="."]
-visible = false
 margin_top = 120.0
 margin_right = 40.0
 margin_bottom = 160.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://scenes/menu/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -6,6 +6,12 @@
 [ext_resource path="res://scenes/menu/main_menu/logo.png" type="Texture" id=4]
 [ext_resource path="res://scenes/menu/shine_select_screen/frame_top.png" type="Texture" id=5]
 [ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=8]
+[ext_resource path="res://scenes/player/host_button.gd" type="Script" id=9]
+[ext_resource path="res://scenes/player/disconnect_button.gd" type="Script" id=10]
+[ext_resource path="res://scenes/player/ip_address.gd" type="Script" id=11]
+[ext_resource path="res://scenes/player/connect_button.gd" type="Script" id=12]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -186,14 +192,75 @@ tracks/1/keys = {
 "values": [ Vector2( 370, -210 ), Vector2( 370, -210 ), Vector2( 370, 121 ), Vector2( 370, 106 ) ]
 }
 
+[sub_resource type="DynamicFont" id=14]
+size = 20
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 5
+border_width_right = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="DynamicFont" id=16]
+size = 27
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=17]
+bg_color = Color( 0.0705882, 0, 0.231373, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.15, 0.15, 0.15, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="DynamicFont" id=20]
+size = 27
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 0.0705882, 0, 0.231373, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=23]
+bg_color = Color( 0.15, 0.15, 0.15, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
 [node name="MainMenuScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 384, 216 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="."]
 margin_bottom = 432.0
@@ -304,3 +371,93 @@ anims/trans_out_MultiplayerOptions_MainMenuScreen = SubResource( 13 )
 
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="IpAddress" type="LineEdit" parent="."]
+margin_left = 521.0
+margin_top = 20.0
+margin_right = 734.0
+margin_bottom = 61.9998
+rect_pivot_offset = Vector2( -59, 83 )
+custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
+custom_fonts/font = SubResource( 14 )
+custom_styles/normal = SubResource( 15 )
+context_menu_enabled = false
+placeholder_text = "IP Address"
+placeholder_alpha = 0.35
+script = ExtResource( 11 )
+
+[node name="ConnectButton" type="Button" parent="."]
+margin_left = 521.0
+margin_top = 75.1678
+margin_right = 734.0
+margin_bottom = 119.168
+custom_fonts/font = SubResource( 16 )
+custom_styles/hover = SubResource( 17 )
+custom_styles/pressed = SubResource( 18 )
+custom_styles/disabled = SubResource( 19 )
+custom_styles/normal = SubResource( 18 )
+action_mode = 0
+text = "Connect"
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="ConnectButton"]
+stream = ExtResource( 7 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="ConnectButton"]
+stream = ExtResource( 8 )
+volume_db = -10.0
+
+[node name="DisconnectButton" type="Button" parent="."]
+margin_left = 521.0
+margin_top = 185.493
+margin_right = 734.0
+margin_bottom = 229.493
+custom_fonts/font = SubResource( 16 )
+custom_styles/hover = SubResource( 17 )
+custom_styles/pressed = SubResource( 18 )
+custom_styles/disabled = SubResource( 19 )
+custom_styles/normal = SubResource( 18 )
+action_mode = 0
+text = "Disconnect"
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+pause_screen = NodePath("../..")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="DisconnectButton"]
+stream = ExtResource( 7 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="DisconnectButton"]
+stream = ExtResource( 8 )
+volume_db = -10.0
+
+[node name="HostButton" type="Button" parent="."]
+margin_left = 522.0
+margin_top = 131.0
+margin_right = 735.0
+margin_bottom = 175.0
+custom_fonts/font = SubResource( 20 )
+custom_styles/hover = SubResource( 21 )
+custom_styles/pressed = SubResource( 22 )
+custom_styles/disabled = SubResource( 23 )
+custom_styles/normal = SubResource( 22 )
+action_mode = 0
+text = "Host"
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="HostButton"]
+stream = ExtResource( 7 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="HostButton"]
+stream = ExtResource( 8 )
+volume_db = -10.0
