@@ -869,9 +869,9 @@ func _physics_process(delta: float) -> void:
 			get_tree().get_current_scene().switch_timer = 0.2
 	
 	# Send network message (unused)
-	#if Singleton.PlayerSettings.other_player_id != -1:
-	#	if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
-	#		rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
+	if Singleton.PlayerSettings.other_player_id != -1:
+		if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
+			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
 	
 func switch_areas(area_id, transition_time):
 	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id)
