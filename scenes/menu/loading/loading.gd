@@ -219,6 +219,3 @@ func load_singletons(userdata):
 	done = true
 	percentage = 1
 	print("Finished loading all scenes within the singletons")
-	yield(get_tree().create_timer(10.0), "timeout")
-	Singleton.MenuVariables.quit_to_menu()
-	
