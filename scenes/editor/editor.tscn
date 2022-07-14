@@ -3345,14 +3345,13 @@ editor_node_path = NodePath("../..")
 [node name="ObjectSettingsWindow" parent="UI" instance=ExtResource( 217 )]
 
 [node name="LevelCodeWindow" parent="UI" instance=ExtResource( 218 )]
+visible = true
 
 [node name="AreasWindow" parent="UI" instance=ExtResource( 167 )]
 
 [node name="ColorPickerWindow" parent="UI" instance=ExtResource( 219 )]
-visible = false
 
 [node name="HelpWindow" parent="UI" instance=ExtResource( 531 )]
-visible = false
 
 [node name="LevelSettingsButton" type="TextureButton" parent="UI"]
 margin_left = 708.0

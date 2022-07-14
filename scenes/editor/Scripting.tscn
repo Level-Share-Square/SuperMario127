@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/editor/window/AddBlockWindow.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripting.gd" type="Script" id=2]
+
+[node name="Scripting" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+window = NodePath("AddBlockWindow")
+
+[node name="AddBlockWindow" parent="." instance=ExtResource( 1 )]
+margin_left = 473.0
+margin_top = 139.0
+margin_right = 810.0
+margin_bottom = 824.0

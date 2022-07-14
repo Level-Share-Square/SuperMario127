@@ -90,6 +90,4 @@ func on_button_options_pressed() -> void:
 func on_button_quit_pressed() -> void:
 	get_tree().quit()
 	
-func on_button_login_pressed():
-	
 

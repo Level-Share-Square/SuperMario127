@@ -12,6 +12,10 @@ func _ready():
 
 
 func _process(delta):
-	if get_text().length() > 20:
+	print(Singleton2.player_name)
+	if Input.is_action_pressed("backspace"):
+		readonly = false
+	if get_text().length() > 20 && !Input.is_action_pressed("backspace"):
+		readonly = true
 		return
 	Singleton2.player_name = text

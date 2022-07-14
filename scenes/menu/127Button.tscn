@@ -23,9 +23,6 @@ custom_styles/disabled = ExtResource( 7 )
 custom_styles/normal = ExtResource( 5 )
 shortcut_in_tooltip = false
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )

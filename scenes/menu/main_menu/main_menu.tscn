@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/menu/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/menu/shine_select_screen/frame_top.png" type="Texture" id=5]
 [ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/editor/window/LogInWindow.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/editor/window_open_button.gd" type="Script" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -312,6 +313,9 @@ focus_neighbour_left = NodePath("../../ButtonQuit")
 focus_neighbour_top = NodePath("../../ButtonQuit")
 custom_fonts/font = SubResource( 2 )
 text = "Log In"
+script = ExtResource( 8 )
+window = NodePath("../LogInWindow")
+starting_position = Vector2( 200, 100 )
 
 [node name="LogInWindow" parent="." instance=ExtResource( 7 )]
 margin_left = 197.0
