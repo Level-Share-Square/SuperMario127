@@ -15,8 +15,6 @@
 [ext_resource path="res://scenes/editor/window/ColorPickerWindow/gradient.gd" type="Script" id=13]
 [ext_resource path="res://scenes/editor/window/ColorPickerWindow/ColorBorder.png" type="Texture" id=15]
 
-
-
 [sub_resource type="StreamTexture" id=1]
 flags = 4
 load_path = "res://.import/window.png-70f8a0c1f0411efce833bd946d8ccc07.stex"
@@ -64,7 +62,6 @@ void light() {
 
 }
 "
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = SubResource( 3 )
@@ -79,7 +76,6 @@ void fragment() {
 	COLOR.rgb = (UV.x>0.05 && UV.x<0.95 && UV.y>0.01 && UV.y<0.99) ? mix(white, black, UV.y): vec3(0);
 }
 "
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = SubResource( 5 )
@@ -89,6 +85,7 @@ size = 48
 font_data = ExtResource( 1 )
 
 [node name="ColorPickerWindow" type="NinePatchRect"]
+visible = false
 margin_left = 165.0
 margin_top = 66.0
 margin_right = 1218.0
@@ -102,9 +99,6 @@ patch_margin_top = 110
 patch_margin_right = 40
 patch_margin_bottom = 40
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Title" type="RichTextLabel" parent="."]
 margin_left = 24.0

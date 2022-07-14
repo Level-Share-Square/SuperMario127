@@ -50,6 +50,16 @@ func _ready():
 			Singleton2.dead = true
 		elif Singleton2.dead == true:
 			pass
+	SilentWolf.configure({
+			  "api_key": "XGmpZlQHPs9ncnJ7etjW3J6fPuUV54uaE7swpLh0",
+			  "game_id": "SuperMario12712",
+			  "game_version": "0.7.3",
+			  "log_level": 1
+			})
+
+	SilentWolf.configure_scores({
+			  "open_scene_on_close": "res://scenes/MainPage.tscn"
+			})
 	animation_player.play("FadeIn")
 #	yield(get_tree().create_timer(5), "timeout")
 	if !Singleton.loaded:

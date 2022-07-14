@@ -5,6 +5,7 @@ onready var button_levels : Button = $Panel/VBoxContainer/ButtonLevels
 onready var button_templates : Button = $Panel/VBoxContainer/ButtonTemplates
 onready var button_options : Button = $Panel/VBoxContainer/ButtonOptions
 onready var button_quit : Button = $Panel/ButtonQuit
+onready var button_login : Button = $ButtonLogin
 
 onready var timer = $CooldownTimer
 
@@ -23,6 +24,7 @@ func _ready() -> void:
 	_connect = button_templates.connect("pressed", self, "on_button_templates_pressed")
 	_connect = button_options.connect("pressed", self, "on_button_options_pressed")
 	_connect = button_quit.connect("pressed", self, "on_button_quit_pressed")
+	_connect = button_login.connect("pressed", self, "on_button_login_pressed")
 func update_activity() -> void:
 	var activity = Discord.Activity.new()
 	activity.set_type(Discord.ActivityType.Playing)
@@ -87,4 +89,7 @@ func on_button_options_pressed() -> void:
 
 func on_button_quit_pressed() -> void:
 	get_tree().quit()
+	
+func on_button_login_pressed():
+	
 

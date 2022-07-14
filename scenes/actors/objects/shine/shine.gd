@@ -41,6 +41,7 @@ const WHITE_COLOR := Color(1, 1, 1)
 
 var last_color : Color
 var is_blue := false
+var send_score = false
 
 var title := "Unnamed Shine"
 var description := ""
@@ -72,6 +73,7 @@ func _set_property_values() -> void:
 	set_property("sort_position", sort_position, true)
 
 func _ready() -> void:
+	send_score = true
 	if mode != 1: # not in edit mode
 		if red_coins_activate or shine_shards_activate:
 			activated = false
@@ -149,11 +151,14 @@ func _physics_process(_delta : float) -> void:
 		ambient_sound.volume_db = -16 + -abs(camera.global_position.distance_to(global_position)/25)
 
 	if collected:
+		if send_score == true:
+			SilentWolf.Scores.persist_score("Dignity", Singleton.CurrentLevelData.time_score)
+			send_score = false
 		character.shine_kill = true
 		character.sprite.animation = "shineFall"
 		character.sprite.rotation_degrees = 0
 		
-		ambient_sound.playing = false 
+		ambient_sound.playing = false
 		
 		if character.is_grounded():
 			start_shine_dance() #shine dance setup also disables physics process, so it's only called once

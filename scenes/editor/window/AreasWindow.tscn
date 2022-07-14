@@ -10,8 +10,6 @@
 [ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=8]
 [ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=9]
 
-
-
 [sub_resource type="DynamicFont" id=1]
 size = 56
 use_filter = true
@@ -89,10 +87,10 @@ margin_left = 20.0
 margin_top = 320.0
 margin_right = 420.0
 margin_bottom = 410.0
+custom_fonts/font = SubResource( 2 )
 custom_styles/hover = ExtResource( 8 )
 custom_styles/pressed = ExtResource( 9 )
 custom_styles/normal = ExtResource( 9 )
-custom_fonts/font = SubResource( 2 )
 shortcut_in_tooltip = false
 action_mode = 0
 text = "Add Area"

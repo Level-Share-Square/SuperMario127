@@ -1,67 +1,36 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=22 format=2]
 
-[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://assets/tiles/tiles.tres" type="TileSet" id=2]
-[ext_resource path="res://scenes/editor/window/tileset_scroll.gd" type="Script" id=3]
-[ext_resource path="res://scenes/editor/window.gd" type="Script" id=7]
-[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=13]
-[ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=14]
-[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=15]
-[ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=16]
-[ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=19]
-[ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=1]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=4]
+[ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=5]
+[ext_resource path="res://scenes/editor/window/logincontnts.gd" type="Script" id=6]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/editor/window.gd" type="Script" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
 use_filter = true
-font_data = ExtResource( 1 )
+font_data = ExtResource( 7 )
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.615686, 0.615686, 0.615686, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
+[sub_resource type="StyleBoxEmpty" id=2]
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.905882, 0.905882, 0.905882, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
+[sub_resource type="StyleBoxEmpty" id=3]
 
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.439216, 0.439216, 0.439216, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
+[sub_resource type="StyleBoxEmpty" id=4]
 
-[sub_resource type="StyleBoxFlat" id=5]
-content_margin_top = 12.0
-bg_color = Color( 0.254902, 0.254902, 0.254902, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+[sub_resource type="StyleBoxEmpty" id=5]
 
-[sub_resource type="StyleBoxFlat" id=6]
-content_margin_left = 12.0
-bg_color = Color( 0.266667, 0.266667, 0.266667, 1 )
+[sub_resource type="StyleBoxEmpty" id=6]
 
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.615686, 0.615686, 0.615686, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
+[sub_resource type="StyleBoxEmpty" id=7]
 
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.905882, 0.905882, 0.905882, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
+[sub_resource type="StyleBoxEmpty" id=8]
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxEmpty" id=9]
 
-[sub_resource type="StyleBoxFlat" id=10]
-content_margin_left = 12.0
-bg_color = Color( 0.254902, 0.254902, 0.254902, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+[sub_resource type="StyleBoxEmpty" id=10]
 
 [sub_resource type="Theme" id=11]
 Button/colors/font_color = Color( 0, 0, 0, 1 )
@@ -136,10 +105,8 @@ ColorPickerButton/styles/normal = null
 ColorPickerButton/styles/pressed = null
 Dialogs/constants/button_margin = 32
 Dialogs/constants/margin = 8
-FileDialog/colors/file_icon_modulate = Color( 0, 0, 0, 1 )
 FileDialog/colors/files_disabled = Color( 0, 0, 0, 1 )
 FileDialog/colors/folder_icon_modulate = Color( 0, 0, 0, 1 )
-FileDialog/icons/file = null
 FileDialog/icons/folder = null
 FileDialog/icons/parent_folder = null
 FileDialog/icons/reload = null
@@ -198,7 +165,6 @@ HSlider/icons/grabber_disabled = null
 HSlider/icons/grabber_highlight = null
 HSlider/icons/tick = null
 HSlider/styles/grabber_area = null
-HSlider/styles/grabber_area_highlight = null
 HSlider/styles/slider = null
 HSplitContainer/constants/autohide = 1
 HSplitContainer/constants/separation = 12
@@ -415,12 +381,14 @@ TooltipLabel/constants/shadow_offset_x = 1
 TooltipLabel/constants/shadow_offset_y = 1
 TooltipLabel/fonts/font = null
 TooltipPanel/styles/panel = null
+Tree/colors/cursor_color = Color( 0, 0, 0, 1 )
 Tree/colors/custom_button_font_highlight = Color( 0, 0, 0, 1 )
 Tree/colors/drop_position_color = Color( 0, 0, 0, 1 )
 Tree/colors/font_color = Color( 0, 0, 0, 1 )
 Tree/colors/font_color_selected = Color( 0, 0, 0, 1 )
 Tree/colors/guide_color = Color( 0, 0, 0, 1 )
 Tree/colors/relationship_line_color = Color( 0, 0, 0, 1 )
+Tree/colors/selection_color = Color( 0, 0, 0, 1 )
 Tree/colors/title_button_color = Color( 0, 0, 0, 1 )
 Tree/constants/button_margin = 4
 Tree/constants/draw_guides = 1
@@ -458,9 +426,9 @@ VScrollBar/icons/increment = null
 VScrollBar/icons/increment_highlight = null
 VScrollBar/styles/grabber = SubResource( 7 )
 VScrollBar/styles/grabber_highlight = SubResource( 8 )
-VScrollBar/styles/grabber_pressed = SubResource( 9 )
-VScrollBar/styles/scroll = SubResource( 10 )
-VScrollBar/styles/scroll_focus = SubResource( 6 )
+VScrollBar/styles/grabber_pressed = SubResource( 8 )
+VScrollBar/styles/scroll = SubResource( 9 )
+VScrollBar/styles/scroll_focus = SubResource( 10 )
 VSeparator/constants/separation = 4
 VSeparator/styles/separator = null
 VSlider/icons/grabber = null
@@ -468,7 +436,6 @@ VSlider/icons/grabber_disabled = null
 VSlider/icons/grabber_highlight = null
 VSlider/icons/tick = null
 VSlider/styles/grabber_area = null
-VSlider/styles/grabber_area_highlight = null
 VSlider/styles/slider = null
 VSplitContainer/constants/autohide = 1
 VSplitContainer/constants/separation = 12
@@ -484,64 +451,37 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
-[sub_resource type="GDScript" id=12]
-script/source = "extends ScrollContainer
-
-onready var autotiling_container = get_node(\"../Autotiling\")
-
-onready var hotkeys_button = get_node(\"../HotkeysButton\")
-onready var autotiling_button = get_node(\"../AutotilingButton\")
-
-func _ready():
-	var _connect = hotkeys_button.connect(\"pressed\", self, \"switch_to_hotkeys\")
-	_connect = autotiling_button.connect(\"pressed\", self, \"switch_to_autotiling\")
-
-func switch_to_hotkeys():
-	autotiling_container.visible = false
-	autotiling_button.disabled = false
-	
-	hotkeys_button.disabled = true
-	visible = true
-
-func switch_to_autotiling():
-	autotiling_container.visible = true
-	autotiling_button.disabled = true
-	
-	hotkeys_button.disabled = false
-	visible = false
-"
-
 [sub_resource type="DynamicFont" id=13]
 size = 32
-use_filter = true
-font_data = ExtResource( 1 )
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 7 )
 
-[sub_resource type="Gradient" id=14]
-offsets = PoolRealArray( 0, 0.8 )
-colors = PoolColorArray( 0, 0, 0, 0, 0.121569, 0.180392, 0.517647, 1 )
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
-[sub_resource type="GradientTexture" id=15]
-gradient = SubResource( 14 )
-width = 193
-
-[node name="HelpWindow" type="NinePatchRect"]
-visible = false
+[node name="LogInWindow" type="NinePatchRect"]
 margin_left = 165.0
-margin_top = 129.921
+margin_top = 130.0
 margin_right = 1218.0
-margin_bottom = 763.921
+margin_bottom = 620.0
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 0
-texture = ExtResource( 14 )
+texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 108, 290 )
 patch_margin_left = 40
 patch_margin_top = 110
 patch_margin_right = 40
 patch_margin_bottom = 40
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource( 8 )
 
 [node name="Title" type="RichTextLabel" parent="."]
 margin_left = 24.0
@@ -550,11 +490,18 @@ margin_right = 456.0
 margin_bottom = 102.263
 mouse_filter = 2
 custom_fonts/normal_font = SubResource( 1 )
-bbcode_text = "Help"
-text = "Help"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+bbcode_text = "Log In"
+text = "Log In"
+
+[node name="Info" type="RichTextLabel" parent="."]
+margin_left = 30.0
+margin_top = 123.0
+margin_right = 1010.0
+margin_bottom = 353.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_text = "Insert the name you'd like to display on the online leaderboards."
+text = "Insert the name you'd like to display on the online leaderboards."
 
 [node name="CloseButton" type="TextureButton" parent="."]
 margin_left = 888.65
@@ -562,307 +509,44 @@ margin_top = 12.953
 margin_right = 1043.65
 margin_bottom = 93.953
 rect_scale = Vector2( 0.95, 0.95 )
-texture_normal = ExtResource( 19 )
-texture_pressed = ExtResource( 19 )
-texture_hover = ExtResource( 16 )
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
-stream = ExtResource( 15 )
+stream = ExtResource( 2 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
-stream = ExtResource( 13 )
+stream = ExtResource( 3 )
 volume_db = -10.0
 
-[node name="Hotkeys" type="ScrollContainer" parent="."]
-margin_left = 36.0
-margin_top = 126.0
-margin_right = 1014.0
-margin_bottom = 482.0
+[node name="Contents" type="Control" parent="."]
+anchor_bottom = 0.06
+margin_left = 17.4044
+margin_top = 104.0
+margin_right = 1036.4
+margin_bottom = 498.0
+
+[node name="TextEdit" type="TextEdit" parent="Contents"]
+margin_left = 17.5956
+margin_top = 168.5
+margin_right = 501.596
+margin_bottom = 251.5
+rect_rotation = 0.0197835
+rect_scale = Vector2( 2, 2 )
 theme = SubResource( 11 )
-scroll_horizontal_enabled = false
-script = SubResource( 12 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Hotkeys"]
-margin_right = 978.0
-margin_bottom = 1147.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_colors/default_color = Color( 1, 1, 1, 1 )
-custom_fonts/normal_font = SubResource( 13 )
-bbcode_enabled = true
-bbcode_text = "[center][color=yellow]--Hotkeys--[/color]
-[color=yellow]WASD Keys[/color] - Move Camera
-[color=yellow]Left Click[/color] - Place Tiles/Objects
-[color=yellow]Right Click[/color] - Delete Tiles/Objects
-
-[color=yellow]T[/color] - Toggle Play/Edit
-[color=yellow]L[/color] - Switch Layers
-[color=yellow]I[/color] - Focus on Current Layer
-[color=yellow]G[/color] - Toggle Grid
-
-[color=yellow]H[/color] - Switch Object Placement Mode
-[color=yellow]Hold CTRL[/color] - Precise Object Placement
-
-[color=yellow]--While Hovering Over Object--[/color]
-[color=yellow]Left Click[/color] - Open Properties
-[color=yellow]R[/color] - Rotate Object
-[color=yellow]K[/color] - Toggle Enabled
-[color=yellow]F[/color] - Flip Object Horizontally
-[color=yellow]Y[/color] - Flip Object Vertically
-
-[color=yellow]Shift[/color] - Duplicate Object
-[color=yellow]Mouse Wheel[/color] - Change Platform Width
-
-[color=yellow]--Gameplay Hotkeys--[/color]
-[color=yellow]P[/color] - Open Pause Menu
-[color=yellow]R[/color] - Restart from Checkpoint
-[color=yellow]O[/color] - Restart from Beginning
-
-[color=yellow]--Other Hotkeys--[/color]
-[color=yellow]Tab[/color] - Toggle CRT Filter
-[/center]"
-text = "--Hotkeys--
-WASD Keys - Move Camera
-Left Click - Place Tiles/Objects
-Right Click - Delete Tiles/Objects
-
-T - Toggle Play/Edit
-L - Switch Layers
-I - Focus on Current Layer
-G - Toggle Grid
-
-H - Switch Object Placement Mode
-Hold CTRL - Precise Object Placement
-
---While Hovering Over Object--
-Left Click - Open Properties
-R - Rotate Object
-K - Toggle Enabled
-F - Flip Object Horizontally
-Y - Flip Object Vertically
-
-Shift - Duplicate Object
-Mouse Wheel - Change Platform Width
-
---Gameplay Hotkeys--
-P - Open Pause Menu
-R - Restart from Checkpoint
-O - Restart from Beginning
-
---Other Hotkeys--
-Tab - Toggle CRT Filter
-"
-fit_content_height = true
-scroll_active = false
-
-[node name="Autotiling" type="ScrollContainer" parent="."]
-visible = false
-margin_left = 36.0
-margin_top = 126.0
-margin_right = 1014.0
-margin_bottom = 482.0
-theme = SubResource( 11 )
-scroll_horizontal_enabled = false
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Autotiling"]
-margin_right = 978.0
-margin_bottom = 2738.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_colors/default_color = Color( 1, 1, 1, 1 )
-custom_fonts/normal_font = SubResource( 13 )
-bbcode_enabled = true
-bbcode_text = "[center][color=yellow]--Guide to Autotiling--[/color][/center]
-Autotiling is a system that automatically
-connects tiles together, reducing the 
-amount of time and effort needed to create
-good-looking terrain.
-
-The two most common types of autotiling 
-used are Terrain Tiling, and Brick Tiling.
-
-First, let's cover Brick Tiling.
-
-[center][color=yellow]--Brick Tiling--[/color][/center]
-This tiling system is relatively simple.
-These tiles don't usually change much based 
-on their placement, and slopes are easy to understand.
-
-Slope tiles should be placed in a diagonal line, on tiles with
-empty space next to them. If a tile is above a slope tile,
-you'll get a ceiling tile instead.
-
-Next up is Terrain Tiling.
-
-[center][color=yellow]--Terrain Tiling--[/color][/center]
-In comparison to Brick Tiling, this tiling system is
-somewhat complex, and uses 4 different tile types to
-create terrain:
-
-
-Full tiles, left slopes, right slopes, and half tiles.
-
-Full tiles are useful for flat edges, or 
-making things look blocky.
-
-Left and right slopes are useful for making 
-precise angles, combined with full tiles.
-
-And half tiles are useful for making smooth 
-natural-looking terrain, 
-with round hills and bumps.
-
-Currently, these tiles don't always connect seamlessly
-with other types. This will likely be changed 
-in a future update.
-
-If you run into issues like this 
-when combining tile types,
-place the respective slope over the cutoff tiles.
-
- 					-->
-
-
-Now it looks seamless!
-
-
-[center][color=yellow]--Boo Blocks--[/color][/center]
-The boo block is a unique kind of tile, 
-which turns invisible when you play
-the level. These tiles will still connect terrain/brick tiles,
-which makes them very useful when used in combination with 
-layers.
-
-
-[center][color=yellow]--Palettes--[/color][/center]
-Right clicking on a tile in the toolbar
-will change it's color, allowing for unique
-uses of existing tiles, sometimes in ways they weren't intended for! 
-This also works with objects, and backgrounds
-(right click the arrow in settings to change palette) 
-
-
-This should be everything you need to know about tiles.
-If you have further questions, ask in the discord server.
-"
-text = "--Guide to Autotiling--
-Autotiling is a system that automatically
-connects tiles together, reducing the 
-amount of time and effort needed to create
-good-looking terrain.
-
-The two most common types of autotiling 
-used are Terrain Tiling, and Brick Tiling.
-
-First, let's cover Brick Tiling.
-
---Brick Tiling--
-This tiling system is relatively simple.
-These tiles don't usually change much based 
-on their placement, and slopes are easy to understand.
-
-Slope tiles should be placed in a diagonal line, on tiles with
-empty space next to them. If a tile is above a slope tile,
-you'll get a ceiling tile instead.
-
-Next up is Terrain Tiling.
-
---Terrain Tiling--
-In comparison to Brick Tiling, this tiling system is
-somewhat complex, and uses 4 different tile types to
-create terrain:
-
-
-Full tiles, left slopes, right slopes, and half tiles.
-
-Full tiles are useful for flat edges, or 
-making things look blocky.
-
-Left and right slopes are useful for making 
-precise angles, combined with full tiles.
-
-And half tiles are useful for making smooth 
-natural-looking terrain, 
-with round hills and bumps.
-
-Currently, these tiles don't always connect seamlessly
-with other types. This will likely be changed 
-in a future update.
-
-If you run into issues like this 
-when combining tile types,
-place the respective slope over the cutoff tiles.
-
- 					-->
-
-
-Now it looks seamless!
-
-
---Boo Blocks--
-The boo block is a unique kind of tile, 
-which turns invisible when you play
-the level. These tiles will still connect terrain/brick tiles,
-which makes them very useful when used in combination with 
-layers.
-
-
---Palettes--
-Right clicking on a tile in the toolbar
-will change it's color, allowing for unique
-uses of existing tiles, sometimes in ways they weren't intended for! 
-This also works with objects, and backgrounds
-(right click the arrow in settings to change palette) 
-
-
-This should be everything you need to know about tiles.
-If you have further questions, ask in the discord server.
-"
-fit_content_height = true
-scroll_active = false
-
-[node name="TileMap" type="TileMap" parent="Autotiling"]
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 32, 32 )
-format = 1
-tile_data = PoolIntArray( 65560, 8, 196621, 65561, 8, 131085, 65563, 5, 13, 65564, 4, 11, 131095, 8, 65549, 131096, 8, 65541, 131097, 8, 65542, 131098, 2, 13, 131099, 5, 65541, 131100, 2, 131083, 196631, 2, 65544, 196632, 2, 131081, 196633, 8, 131081, 196634, 2, 131081, 196635, 2, 131081, 196636, 2, 131083, 262167, 5, 196616, 262168, 8, 131077, 262169, 2, 131081, 262170, 2, 131081, 262171, 8, 131078, 262172, 8, 196619, 327704, 8, 196632, 327705, 8, 196617, 327706, 8, 196617, 327707, 8, 65560, 917527, 7, 7, 917528, 3, 1, 917529, 3, 1, 917530, 3, 1, 917531, 6, 6, 983063, 7, 9, 983064, 3, 1, 983065, 3, 1, 983066, 3, 1, 983067, 6, 8, 2031616, 2, 196608, 2031618, 5, 196608, 2031620, 4, 196608, 2031622, 8, 196608, 2228245, 2, 8, 2228246, 2, 11, 2293780, 2, 8, 2293781, 2, 65541, 2293782, 2, 131083, 2359315, 2, 196609, 2359316, 2, 196613, 2359317, 2, 196617, 2359318, 2, 196619, 2490391, 5, 13, 2490392, 4, 13, 2555926, 5, 13, 2555927, 5, 65541, 2555928, 4, 65542, 2555929, 4, 13, 2621461, 2, 196609, 2621462, 5, 196613, 2621463, 5, 196617, 2621464, 2, 196617, 2621465, 4, 196614, 2621466, 2, 196611, 2752534, 8, 196621, 2752535, 8, 10, 2752536, 8, 10, 2752537, 8, 131085, 2818064, 8, 196621, 2818065, 8, 131085, 2818068, 8, 196621, 2818069, 8, 65551, 2818070, 8, 65541, 2818071, 8, 131081, 2818072, 8, 65548, 2818073, 8, 65542, 2818074, 8, 16, 2883598, 8, 8, 2883599, 8, 65551, 2883600, 8, 65541, 2883601, 8, 65542, 2883602, 8, 15, 2883603, 8, 65551, 2883604, 8, 65541, 2883605, 2, 131081, 2883606, 2, 131081, 2883607, 2, 131081, 2883608, 2, 131081, 2883609, 2, 131081, 2883610, 4, 65542, 2883611, 8, 13, 2949134, 8, 196632, 2949135, 8, 196617, 2949136, 8, 196617, 2949137, 8, 196617, 2949138, 8, 196617, 2949139, 8, 196617, 2949140, 8, 196617, 2949141, 8, 196617, 2949142, 8, 196617, 2949143, 8, 196617, 2949144, 8, 196617, 2949145, 8, 196617, 2949146, 8, 196617, 2949147, 8, 65560, 3276817, 5, 15, 3342352, 5, 13, 3342353, 2, 65543, 3407887, 5, 196609, 3407888, 2, 196613, 3407889, 2, 196619, 3604483, 5, 15, 3604489, 5, 15, 3670018, 5, 13, 3670019, 2, 65543, 3670024, 5, 13, 3670025, 5, 65543, 3735553, 5, 196609, 3735554, 2, 196613, 3735555, 2, 196619, 3735559, 5, 196609, 3735560, 5, 196613, 3735561, 2, 196619, 4128788, 18, 8, 4128789, 18, 10, 4128790, 18, 10, 4128791, 18, 10, 4128792, 18, 10, 4128793, 18, 11, 4194324, 18, 65544, 4194325, 18, 131081, 4194326, 18, 131081, 4194327, 18, 131081, 4194328, 18, 131081, 4194329, 18, 131083, 4259860, 18, 196616, 4259861, 18, 196617, 4259862, 18, 196617, 4259863, 18, 196617, 4259864, 18, 196617, 4259865, 18, 196619, 4784148, 31, 0, 4784149, 33, 0, 4784150, 34, 0, 4784151, 32, 0, 4784153, 12, 0, 4784154, 9, 1, 4784155, 3, 1, 4784156, 15, 2 )
-
-[node name="TextureRect" type="TextureRect" parent="Autotiling/TileMap"]
-margin_left = 639.0
-margin_top = 2016.0
-margin_right = 832.0
-margin_bottom = 2113.0
-size_flags_horizontal = 0
-texture = SubResource( 15 )
-stretch_mode = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.188235, 0.258824, 0.494118, 1 )
+custom_colors/completion_font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 13 )
+custom_styles/normal = SubResource( 12 )
+context_menu_enabled = false
+v_scroll_speed = 0.0
+wrap_enabled = true
+script = ExtResource( 6 )
 
 [node name="Tween" type="Tween" parent="."]
-
-[node name="HotkeysButton" parent="." instance=ExtResource( 21 )]
-margin_left = 107.404
-margin_top = 507.0
-margin_right = 507.404
-margin_bottom = 597.0
-disabled = true
-text = "Hotkeys"
-
-[node name="AutotilingButton" parent="." instance=ExtResource( 21 )]
-margin_left = 527.404
-margin_top = 507.0
-margin_right = 927.404
-margin_bottom = 597.0
-text = "Tiles"

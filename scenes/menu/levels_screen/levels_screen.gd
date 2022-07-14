@@ -72,6 +72,7 @@ func _ready() -> void:
 	_connect = button_new_level.connect("pressed", self, "on_button_new_level_pressed")
 	_connect = button_code_import.connect("pressed", self, "on_button_code_import_pressed")
 	_connect = button_code_cancel.connect("pressed", self, "on_button_code_cancel_pressed")
+	_connect = level_code_entry.connect("pressed", self, "info_clicked")
 
 	_connect = button_play.connect("pressed", self, "on_button_play_pressed")
 	_connect = button_edit.connect("pressed", self, "on_button_edit_pressed")
@@ -345,9 +346,6 @@ func on_button_new_level_pressed() -> void:
 # keep that in mind when editing this
 func on_button_code_import_pressed() -> void:
 	var level_code = level_code_entry.text
-	# if the entry box is empty, then try using the clipboard value instead, neat little shortcut
-	if level_code == "":
-		level_code = OS.clipboard
 
 	if level_code_util.is_valid(level_code):
 		var level_info : LevelInfo = LevelInfo.new(level_code)
@@ -433,6 +431,9 @@ func on_button_time_scores_pressed() -> void:
 func on_button_close_time_scores_pressed() -> void:
 	set_time_score_panel(false)
 	
+func info_clicked() -> void:
+	if "0.4" in OS.clipboard:
+		level_code_entry.text = OS.clipboard
 	
 func update_activity() -> void:
 	var activity = Discord.Activity.new()
