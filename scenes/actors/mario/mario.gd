@@ -158,6 +158,8 @@ var rainbow_stored := false
 var next_flash := 0.0
 var frames_until_flash := 3
 var metal_voice := false
+var ghost_pos = []
+var ghost_anim = []
 
 var can_heal : bool = true
 var healing_timer_enabled := false
@@ -492,6 +494,8 @@ func player_hit(body : Node) -> void:
 			sound_player.play_hit_sound()
 
 func _process(delta: float) -> void:
+	
+	
 	if next_position:
 		position = position.linear_interpolate(next_position, fps_util.PHYSICS_DELTA * sync_interpolation_speed)
 
@@ -871,7 +875,8 @@ func _physics_process(delta: float) -> void:
 	# Send network message (unused)
 	#if Singleton.PlayerSettings.other_player_id != -1:
 	#	if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
-	#		rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
+#			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
+	
 	
 func switch_areas(area_id, transition_time):
 	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id)

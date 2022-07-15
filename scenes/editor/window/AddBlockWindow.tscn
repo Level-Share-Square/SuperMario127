@@ -53,9 +53,28 @@ margin_right = 310.0
 margin_bottom = 665.0
 rect_pivot_offset = Vector2( -1067.5, 137.5 )
 
-[node name="If" type="Button" parent="VBoxContainer"]
+[node name="NewVar" type="Button" parent="VBoxContainer"]
 margin_right = 290.0
 margin_bottom = 44.0
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "New Variable"
+script = ExtResource( 1 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="VBoxContainer/NewVar"]
+stream = ExtResource( 6 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="VBoxContainer/NewVar"]
+stream = ExtResource( 5 )
+volume_db = -10.0
+
+[node name="If" type="Button" parent="VBoxContainer"]
+margin_top = 48.0
+margin_right = 290.0
+margin_bottom = 92.0
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = ExtResource( 10 )
 custom_styles/pressed = ExtResource( 2 )
@@ -72,9 +91,9 @@ stream = ExtResource( 5 )
 volume_db = -10.0
 
 [node name="Scale" type="Button" parent="VBoxContainer"]
-margin_top = 48.0
+margin_top = 96.0
 margin_right = 290.0
-margin_bottom = 92.0
+margin_bottom = 140.0
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = ExtResource( 10 )
 custom_styles/pressed = ExtResource( 2 )
@@ -91,9 +110,9 @@ stream = ExtResource( 5 )
 volume_db = -10.0
 
 [node name="Position" type="Button" parent="VBoxContainer"]
-margin_top = 96.0
+margin_top = 144.0
 margin_right = 290.0
-margin_bottom = 140.0
+margin_bottom = 188.0
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = ExtResource( 10 )
 custom_styles/pressed = ExtResource( 2 )
@@ -110,9 +129,9 @@ stream = ExtResource( 5 )
 volume_db = -10.0
 
 [node name="Visibility" type="Button" parent="VBoxContainer"]
-margin_top = 144.0
+margin_top = 192.0
 margin_right = 290.0
-margin_bottom = 188.0
+margin_bottom = 236.0
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = ExtResource( 10 )
 custom_styles/pressed = ExtResource( 2 )
@@ -129,9 +148,9 @@ stream = ExtResource( 5 )
 volume_db = -10.0
 
 [node name="Collision" type="Button" parent="VBoxContainer"]
-margin_top = 192.0
+margin_top = 240.0
 margin_right = 290.0
-margin_bottom = 236.0
+margin_bottom = 284.0
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = ExtResource( 10 )
 custom_styles/pressed = ExtResource( 2 )

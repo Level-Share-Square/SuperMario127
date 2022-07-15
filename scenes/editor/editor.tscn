@@ -3345,7 +3345,6 @@ editor_node_path = NodePath("../..")
 [node name="ObjectSettingsWindow" parent="UI" instance=ExtResource( 217 )]
 
 [node name="LevelCodeWindow" parent="UI" instance=ExtResource( 218 )]
-visible = true
 
 [node name="AreasWindow" parent="UI" instance=ExtResource( 167 )]
 

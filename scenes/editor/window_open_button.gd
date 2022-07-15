@@ -1,4 +1,4 @@
-extends Button
+extends BaseButton
 
 export var window : NodePath
 export var starting_position : Vector2
