@@ -15,11 +15,10 @@ size = 24
 font_data = ExtResource( 3 )
 
 [node name="NewVar" type="WindowDialog"]
-visible = true
-margin_left = 17.0
-margin_top = 9.0
-margin_right = 338.0
-margin_bottom = 57.0
+margin_left = 135.0
+margin_top = 132.0
+margin_right = 456.0
+margin_bottom = 180.0
 custom_styles/panel = ExtResource( 1 )
 script = ExtResource( 5 )
 

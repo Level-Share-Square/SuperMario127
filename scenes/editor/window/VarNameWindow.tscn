@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/window.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=6]
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/editor/window/SaveButton.gd" type="Script" id=8]
+[ext_resource path="res://scenes/editor/window/CancelButton.gd" type="Script" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -592,9 +593,7 @@ custom_styles/normal = SubResource( 15 )
 shortcut_in_tooltip = false
 action_mode = 0
 text = "Cancel"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource( 9 )
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/CancelButton"]
 stream = ExtResource( 3 )
