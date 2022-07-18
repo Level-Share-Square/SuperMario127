@@ -59,3 +59,5 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "you mom"
+
+[connection signal="text_changed" from="Value" to="." method="_on_Value_text_changed"]

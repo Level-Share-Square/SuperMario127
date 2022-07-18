@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/editor/window/AddBlockWindow.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripting.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scenes/editor/scripting/PanningCamera2D.tscn" type="PackedScene" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -14,8 +15,8 @@ anchor_bottom = 1.0
 script = ExtResource( 2 )
 window = NodePath("AddBlockWindow")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 384, 217 )
+[node name="PanningCamera2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 383, 215 )
 current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -39,7 +40,6 @@ margin_bottom = 4552.0
 color = Color( 0.00784314, 0, 0.113725, 1 )
 
 [node name="AddBlockWindow" parent="." instance=ExtResource( 1 )]
-visible = false
 margin_left = 473.0
 margin_top = 139.0
 margin_right = 810.0

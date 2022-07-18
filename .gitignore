@@ -8,3 +8,27 @@ scenes/actors/mario/new_anims/animations/idle/mario.png
 scenes/actors/mario/new_anims/animation_frames.tres
 bin/
 scenes/menu/loading/loading.tscn
+addons/godot_editor_discord_presence/Discord RPC/DiscordRPC.gd
+addons/godot_editor_discord_presence/Discord RPC/DiscordRPCEnum.gd
+addons/godot_editor_discord_presence/Discord RPC/ipc/IPC.gd
+addons/godot_editor_discord_presence/Discord RPC/ipc/IPCPayload.gd
+addons/godot_editor_discord_presence/Discord RPC/ipc/module/IPCModule.gd
+addons/godot_editor_discord_presence/Discord RPC/ipc/module/rich presence/RichPresence.gd
+addons/godot_editor_discord_presence/Discord RPC/ipc/module/rich presence/RichPresenceButton.gd
+addons/godot_editor_discord_presence/Discord RPC/ipc/module/rich presence/RichPresenceModule.gd
+addons/godot_editor_discord_presence/Discord RPC/ipc/module/rich presence/UpdateRichPresencePayload.gd
+addons/godot_editor_discord_presence/Discord RPC/ipc/pipe/IPCPipe.gd
+addons/godot_editor_discord_presence/Discord RPC/ipc/pipe/UnixPipe.gd
+addons/godot_editor_discord_presence/Discord RPC/ipc/pipe/WindowsPipe.gd
+addons/godot_editor_discord_presence/Discord RPC/util/IPCUtil.gd
+addons/godot_editor_discord_presence/Discord RPC/util/URLUtil.gd
+addons/godot_editor_discord_presence/Discord RPC/util/UUID.gd
+addons/godot_editor_discord_presence/godot-unix-socket/native_script.gd
+addons/godot_editor_discord_presence/godot-unix-socket/osx/libunixsocket.dylib
+addons/godot_editor_discord_presence/godot-unix-socket/unix-socket.gdnlib
+addons/godot_editor_discord_presence/godot-unix-socket/unix-socket.gdns
+addons/godot_editor_discord_presence/godot-unix-socket/x11/libunixsocket.so
+addons/godot_editor_discord_presence/LICENSE.md
+addons/godot_editor_discord_presence/plugin.cfg
+addons/godot_editor_discord_presence/plugin.gd
+addons/godot_editor_discord_presence/README.md

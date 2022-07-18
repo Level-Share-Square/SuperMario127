@@ -1,8 +1,9 @@
 extends WindowDialog
 
-
+onready var scripting = $"../Scripting"
 onready var value = get_node("Value")
 onready var variable = $Var
+var text_change = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,7 +12,9 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 
+
+
+func _on_Value_text_changed(new_text):
+	text_change = true
