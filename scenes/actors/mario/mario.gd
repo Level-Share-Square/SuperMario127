@@ -641,7 +641,7 @@ func _physics_process(delta: float) -> void:
 	if move_direction != 0 and controllable:
 		if is_grounded():
 			# Accelerate/decelerate
-			if velocity.x * move_direction < 0:
+			if velocity.x * move_direction < 0: #why. just why. you already have the move direction, dingus.
 				velocity.x += deceleration * move_direction
 			elif velocity.x * move_direction < move_speed:
 				velocity.x += acceleration * move_direction
