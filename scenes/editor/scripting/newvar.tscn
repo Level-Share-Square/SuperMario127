@@ -40,7 +40,6 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 custom_styles/normal = ExtResource( 4 )
-text = "you mom"
 
 [node name="Button" type="Button" parent="."]
 margin_left = 55.0

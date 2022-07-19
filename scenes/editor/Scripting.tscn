@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/editor/window/AddBlockWindow.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripting.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://scenes/editor/scripting/PanningCamera2D.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/editor/scripting/newvar.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -13,7 +14,6 @@ font_data = ExtResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
-window = NodePath("AddBlockWindow")
 
 [node name="PanningCamera2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 383, 215 )
@@ -44,3 +44,9 @@ margin_left = 473.0
 margin_top = 139.0
 margin_right = 810.0
 margin_bottom = 824.0
+
+[node name="NewVar" parent="." instance=ExtResource( 5 )]
+margin_left = 87270.0
+margin_top = 21543.0
+margin_right = 87591.0
+margin_bottom = 21591.0
