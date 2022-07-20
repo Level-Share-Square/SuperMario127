@@ -75,6 +75,7 @@ onready var raycasts = [ground_check, ground_check_dive, left_check, right_check
 onready var heal_timer = $HealTimer
 onready var heal_tick_timer = $HealTickTimer
 onready var ground_collider_enable_timer = $GroundColliderEnableTimer
+onready var ghost = get_parent().ghost
 export var bottom_pos_offset : Vector2
 export var bottom_pos_dive_offset : Vector2
 
@@ -492,9 +493,9 @@ func player_hit(body : Node) -> void:
 			body.velocity.x = -250 * mul_sign
 			set_state_by_name("KnockbackState", 0)
 			sound_player.play_hit_sound()
+			
 
 func _process(delta: float) -> void:
-	
 	
 	if next_position:
 		position = position.linear_interpolate(next_position, fps_util.PHYSICS_DELTA * sync_interpolation_speed)
@@ -562,6 +563,7 @@ func get_weight() -> int:
 
 func _physics_process(delta: float) -> void:
 	update_inputs()
+	Ghost.ghost_pos.append(position)
 	
 	if state and state.name == "NoActionState":
 		return

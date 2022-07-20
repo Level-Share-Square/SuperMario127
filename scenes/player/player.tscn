@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://assets/fonts/texteffect_matrix.tres" type="RichTextEffect" id=18]
 [ext_resource path="res://assets/fonts/texteffect_pulse.tres" type="RichTextEffect" id=19]
 [ext_resource path="res://scenes/player/chat.gd" type="Script" id=20]
+[ext_resource path="res://scenes/player/World.gd" type="Script" id=21]
 [ext_resource path="res://scenes/player/multiplayer_menu_button.gd" type="Script" id=22]
 [ext_resource path="res://scenes/actors/fludd_display/fludd_display.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/menu/levels_screen/ui/coin_icon.png" type="Texture" id=31]
@@ -711,6 +712,7 @@ script = ExtResource( 4 )
 character = NodePath("../World/Character")
 
 [node name="World" type="Node2D" parent="Viewports/ViewportContainer/Viewport"]
+script = ExtResource( 21 )
 
 [node name="Shared" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 2 )]
 
@@ -723,7 +725,7 @@ collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 5
+frame = 0
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 

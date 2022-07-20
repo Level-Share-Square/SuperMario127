@@ -30,6 +30,7 @@ margin_bottom = 64.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 2 )
 text = "Var                 Value"
+clip_text = true
 
 [node name="Value" type="LineEdit" parent="."]
 margin_left = 220.0
@@ -58,5 +59,6 @@ rect_scale = Vector2( 0.5, 0.5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "you mom"
+clip_text = true
 
 [connection signal="text_changed" from="Value" to="." method="_on_Value_text_changed"]

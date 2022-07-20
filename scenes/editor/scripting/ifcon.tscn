@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=1]
+[ext_resource path="res://assets/fonts/DelfinoFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/styles/BrightButtonStyleNormal.tres" type="StyleBox" id=4]
+[ext_resource path="res://scenes/shared/ui/selector.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/editor/scripting/ifcon.gd" type="Script" id=6]
+[ext_resource path="res://assets/styles/BrightButtonStyleHover.tres" type="StyleBox" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+font_data = ExtResource( 3 )
+
+[node name="IfCondition" type="WindowDialog"]
+margin_left = 64.0
+margin_top = 243.0
+margin_right = 363.0
+margin_bottom = 291.0
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 6 )
+
+[node name="Text" type="Label" parent="."]
+margin_left = 6.0
+margin_top = 9.0
+margin_right = 432.0
+margin_bottom = 64.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 2 )
+text = "If"
+
+[node name="Value" type="LineEdit" parent="."]
+margin_left = 196.0
+margin_top = 6.0
+margin_right = 380.0
+margin_bottom = 77.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/selection_color = Color( 0, 0, 0, 1 )
+custom_colors/cursor_color = Color( 0, 0, 0, 1 )
+custom_colors/clear_button_color_pressed = Color( 0, 0, 0, 1 )
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/clear_button_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_uneditable = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+custom_styles/normal = ExtResource( 4 )
+
+[node name="Selector" parent="." instance=ExtResource( 5 )]
+margin_left = 126.0
+margin_top = 6.0
+margin_right = 193.0
+margin_bottom = 41.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+
+[node name="Var" parent="." instance=ExtResource( 5 )]
+margin_left = 28.0
+margin_top = 6.0
+margin_right = 122.0
+margin_bottom = 41.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+clip_text = true
