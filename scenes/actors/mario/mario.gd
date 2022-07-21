@@ -562,9 +562,7 @@ func get_weight() -> int:
 	return 2 if metal_voice else 1
 
 func _physics_process(delta: float) -> void:
-	update_inputs()
-	Ghost.ghost_pos.append(position)
-	
+	update_inputs()	
 	if state and state.name == "NoActionState":
 		return
 	

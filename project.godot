@@ -808,7 +808,6 @@ Discord="*res://addons/discord_game_sdk/discord.gd"
 Singleton="*res://scenes/actors/singleton/singleton.tscn"
 Singleton2="*res://singleton2.gd"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
-Ghost="*res://scenes/actors/mario/GhostMario.gd"
 
 [debug]
 

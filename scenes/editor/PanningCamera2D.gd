@@ -2,11 +2,12 @@ extends Camera2D
 class_name PanningCamera2D
 
 const MIN_ZOOM: float = 0.1
-const MAX_ZOOM: float = 1.0
+const MAX_ZOOM: float = 2.0
 const ZOOM_RATE: float = 8.0
 const ZOOM_INCREMENT: float = 0.1
 
 var _target_zoom: float = 1.0
+var can_drag = true
 
 onready var _tween: Tween = $Tween
 
@@ -16,7 +17,7 @@ func _physics_process(delta: float) -> void:
 	set_physics_process(not is_equal_approx(zoom.x, _target_zoom))
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			if event.button_index == BUTTON_WHEEL_UP:
@@ -25,9 +26,10 @@ func _unhandled_input(event: InputEvent) -> void:
 				zoom_out()
 			if event.doubleclick:
 				focus_position(get_global_mouse_position())
-	if event is InputEventMouseMotion:
-		if event.button_mask == BUTTON_MASK_MIDDLE:
-			position -= event.relative * zoom
+	if can_drag == true:
+		if event is InputEventMouseMotion:
+			if event.button_mask == BUTTON_LEFT:
+				position -= event.relative * zoom
 
 
 func zoom_in() -> void:

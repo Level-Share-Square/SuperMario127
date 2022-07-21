@@ -2,16 +2,23 @@ extends Control
 
 var use_n_o = false
 var variable_num = -1
-onready var camera = get_node("Camera2D")
+onready var camera = get_node("PanningCamera2D")
 onready var window_node = $AddBlockWindow
+onready var camera_pos = $CanvasLayer/Label2
 const var_name_popup = preload("res://scenes/editor/window/VarNameWindow.tscn")
 const new_var = preload("res://scenes/editor/scripting/newvar.tscn")
 const if_con = preload("res://scenes/editor/scripting/ifcon.tscn")
+const line = preload("res://scenes/editor/scripting/Line2D.tscn")
 var instances = []
 var variables : Dictionary = {}
 var variable_list #Gets a list of all the keys in the variables dictionary in an array to display in the variable window
+var can_create_line = false
+var line_created = false
+var can_connect = false
 
 func _process(_delta):
+	print(variables)
+	camera_pos.text = "(" + str(round(camera.position.x)) + "," + str(round(camera.position.y)) + ")"
 	if Input.is_action_just_pressed("RMB"):
 		if window_node.visible:
 			window_node.close()

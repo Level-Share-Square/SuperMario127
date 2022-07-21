@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=1]
 [ext_resource path="res://assets/fonts/DelfinoFont.tres" type="DynamicFont" id=2]
@@ -13,6 +13,9 @@ font_data = ExtResource( 3 )
 [sub_resource type="DynamicFont" id=2]
 size = 24
 font_data = ExtResource( 3 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 171.5, 38.5 )
 
 [node name="NewVar" type="WindowDialog"]
 margin_left = 135.0
@@ -61,4 +64,8 @@ custom_fonts/font = SubResource( 2 )
 text = "you mom"
 clip_text = true
 
-[connection signal="text_changed" from="Value" to="." method="_on_Value_text_changed"]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 158.5, 22.5 )
+shape = SubResource( 3 )
