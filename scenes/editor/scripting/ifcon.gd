@@ -16,6 +16,8 @@ func _ready():
 	operator.add_item(">=")
 	operator.add_item("<=")
 	operator.add_item("!=")
+	variables.add_item("variable 1")
+	variables.add_item("variable 2")
 	connect("mouse_entered", self, "_on_mouse_entered")
 	connect("mouse_exited", self, "_on_mouse_exited")
 	variables.connect("item_selected", self, "_on_item_selected")

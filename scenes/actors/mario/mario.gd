@@ -75,7 +75,6 @@ onready var raycasts = [ground_check, ground_check_dive, left_check, right_check
 onready var heal_timer = $HealTimer
 onready var heal_tick_timer = $HealTickTimer
 onready var ground_collider_enable_timer = $GroundColliderEnableTimer
-onready var ghost = get_parent().ghost
 export var bottom_pos_offset : Vector2
 export var bottom_pos_dive_offset : Vector2
 
@@ -159,8 +158,11 @@ var rainbow_stored := false
 var next_flash := 0.0
 var frames_until_flash := 3
 var metal_voice := false
+var file = File.new()
 var ghost_pos = []
 var ghost_anim = []
+var temp_gp = []
+var temp_ga = []
 
 var can_heal : bool = true
 var healing_timer_enabled := false
@@ -234,6 +236,8 @@ var camera : Camera2D
 #)
 
 func _ready():
+	temp_ga = []
+	temp_gp = []
 
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
@@ -876,7 +880,23 @@ func _physics_process(delta: float) -> void:
 	#if Singleton.PlayerSettings.other_player_id != -1:
 	#	if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
 #			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
+	if file.file_exists(str(LevelInfo.new().level_name) + "_" + str(LevelInfo.new().selected_shine) + "pos"):
+		ghost_pos = file.get_var(str(LevelInfo.new().level_name) + "_" + str(LevelInfo.new().selected_shine))
+		
+	if file.file_exists(str(LevelInfo.new().level_name) + "_" + str(LevelInfo.new().selected_shine) + "anim"):
+		ghost_anim = file.get_var(str(LevelInfo.new().level_name) + "_" + str(LevelInfo.new().selected_shine) + "anim")
+		
+	if !disable_movement:
+		temp_gp.append(position)
+		temp_gp.append(sprite.animation)
 	
+	if Singleton2.save_ghost == true:
+		file.open("user://" + str(LevelInfo.new().level_name) + "_" + str(LevelInfo.new().selected_shine) + "pos.127ghost", _File.WRITE)
+		file.store_var(temp_gp)
+		file.close()
+		file.open("user://" + str(LevelInfo.new().level_name) + "_" + str(LevelInfo.new().selected_shine) + "anim.127ghost", _File.WRITE)
+		file.store_var(temp_ga)
+		file.close()
 	
 func switch_areas(area_id, transition_time):
 	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id)

@@ -8,8 +8,10 @@ modulate = Color( 1, 1, 1, 0.317647 )
 position = Vector2( -1000, -1000 )
 frames = ExtResource( 1 )
 animation = "spinning"
-frame = 4
+frame = 5
 playing = true
 script = ExtResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Tween2" type="Tween" parent="."]
