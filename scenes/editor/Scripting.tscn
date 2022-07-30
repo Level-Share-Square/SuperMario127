@@ -41,10 +41,10 @@ margin_bottom = 60.0
 custom_fonts/font = SubResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -4748.0
-margin_top = -1829.0
-margin_right = 6776.0
-margin_bottom = 4577.0
+margin_left = -85772.0
+margin_top = -37157.0
+margin_right = 88440.0
+margin_bottom = 60257.0
 color = Color( 0.00784314, 0, 0.113725, 1 )
 
 [node name="AddBlockWindow" parent="." instance=ExtResource( 1 )]

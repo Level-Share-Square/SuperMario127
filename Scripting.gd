@@ -17,7 +17,6 @@ var line_created = false
 var can_connect = false
 
 func _process(_delta):
-	print(variables)
 	camera_pos.text = "(" + str(round(camera.position.x)) + "," + str(round(camera.position.y)) + ")"
 	if Input.is_action_just_pressed("RMB"):
 		if window_node.visible:

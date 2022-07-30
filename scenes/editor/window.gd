@@ -17,6 +17,7 @@ onready var variable_name = $Contents/TextEdit
 onready var newvar = $VBoxContainer/NewVar
 onready var position_edit = $VBoxContainer/Position
 onready var if_edit = $VBoxContainer/If
+onready var while_edit = $VBoxContainer/While
 onready var collision_edit = $VBoxContainer/Collision
 onready var scale_edit = $VBoxContainer/Scale
 onready var visibility_edit = $VBoxContainer/Visibility

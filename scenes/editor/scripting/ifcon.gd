@@ -2,7 +2,7 @@ extends WindowDialog
 
 onready var value = $Value
 onready var variables = $Var
-onready var condition_picker = $Selector
+onready var operator = $Selector
 onready var camera = $"../PanningCamera2D"
 onready var scripting = get_parent()
 var appended_variables = []
@@ -12,14 +12,13 @@ var can_drag = false
 func _ready():
 	get_close_button().visible = false
 	visible = true
-	condition_picker.add_item("=")
-	condition_picker.add_item(">=")
-	condition_picker.add_item("<=")
-	condition_picker.add_item("!=")
-	condition_picker.add_item("+")
-	condition_picker.add_item("-")
+	operator.add_item("=")
+	operator.add_item(">=")
+	operator.add_item("<=")
+	operator.add_item("!=")
 	connect("mouse_entered", self, "_on_mouse_entered")
 	connect("mouse_exited", self, "_on_mouse_exited")
+	variables.connect("item_selected", self, "_on_item_selected")
 
 
 func _process(delta):
@@ -34,18 +33,6 @@ func get_newest_var() -> String:
 	variable = scripting.variable_list[scripting.variable_num] #Gets the name of the variable from the variable_list array (holds all the keys in the variables dictionary)
 	return variable #Returns the value of variable to be used in the code in _process()
 	
-	
-	
-	connect("mouse_entered", self, "_on_mouse_entered")
-	connect("mouse_exited", self, "_on_mouse_exited")
-	value.connect("text_changed", self, "_on_Value_text_changed")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-
-
-
-
-
 func _input(event: InputEvent) -> void:
 	if can_drag == true:
 		if event is InputEventMouseMotion:
@@ -58,4 +45,26 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	can_drag = false
 	camera.can_drag = true
+
+
+
+	
+func _on_item_selected(index):
+	match operator.selected:
+		0:
+			var selected = variables.get_item_text(index)
+			if value.text == scripting.variables.get(str(selected)):
+				pass
+		1:	
+			var selected = variables.get_item_text(index)
+			if value.text >= scripting.variables.get(str(selected)):
+				pass
+		2:
+			var selected = variables.get_item_text(index)
+			if value.text <= scripting.variables.get(str(selected)):
+				pass
+		3:
+			var selected = variables.get_item_text(index)
+			if value.text != scripting.variables.get(str(selected)):
+				pass
 
