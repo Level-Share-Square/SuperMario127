@@ -305,6 +305,7 @@ anims/trans_out_MultiplayerOptions_MainMenuScreen = SubResource( 13 )
 one_shot = true
 
 [node name="ButtonLogin" parent="." instance=ExtResource( 2 )]
+visible = false
 margin_left = 644.0
 margin_right = 889.0
 margin_bottom = 64.0
@@ -318,6 +319,7 @@ window = NodePath("../LogInWindow")
 starting_position = Vector2( 200, 100 )
 
 [node name="LogInWindow" parent="." instance=ExtResource( 7 )]
+visible = false
 margin_left = 197.0
 margin_top = 95.0
 margin_right = 1250.0

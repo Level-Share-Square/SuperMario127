@@ -150,9 +150,6 @@ func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
 	if new_time_score < time_scores[str(shine_id)] or time_scores[str(shine_id)] == EMPTY_TIME_SCORE:
 		time_scores[str(shine_id)] = new_time_score
 		Singleton2.save_ghost = true
-		yield(get_tree().create_timer(0.05), "timeout")
-		Singleton.save_ghost = false
-
 	if save_to_disk:
 		var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
 

@@ -61,6 +61,8 @@ var levels = Singleton.SavedLevels.levels
 var double_click := false
 
 func _ready() -> void:
+	Singleton2.save_ghost = false
+
 	var _connect
 
 	_connect = level_list.connect("item_selected", self, "on_level_selected")
@@ -312,6 +314,7 @@ func set_control_buttons(is_enabled : bool) -> void:
 
 func on_level_selected(index : int) -> void:
 	Singleton.SavedLevels.selected_level = index
+	Singleton2.level = Singleton.SavedLevels.selected_level
 	var level_info : LevelInfo = levels[Singleton.SavedLevels.selected_level]
 	populate_info_panel(level_info)
 	

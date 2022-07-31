@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://scenes/player/chat.gd" type="Script" id=20]
 [ext_resource path="res://scenes/player/World.gd" type="Script" id=21]
 [ext_resource path="res://scenes/player/multiplayer_menu_button.gd" type="Script" id=22]
+[ext_resource path="res://scenes/menu/levels_screen/ui/star_coin_icon.png" type="Texture" id=23]
+[ext_resource path="res://scenes/menu/levels_screen/ui/shine_icon.png" type="Texture" id=24]
 [ext_resource path="res://scenes/actors/fludd_display/fludd_display.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/menu/levels_screen/ui/coin_icon.png" type="Texture" id=31]
 [ext_resource path="res://scenes/player/coin_counter.gd" type="Script" id=32]
@@ -95,6 +97,12 @@ corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
+
+[sub_resource type="DynamicFont" id=14]
+size = 32
+outline_size = 2
+outline_color = Color( 0.054902, 0, 0.25098, 1 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.133333, 0.145098, 0.196078, 0.835294 )
@@ -365,13 +373,9 @@ texture = ExtResource( 45 )
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 darken_color = Color( 0.121569, 0.137255, 0.184314, 0.705882 )
 character_node_path = NodePath("../../Viewports/ViewportContainer/Viewport/World/Character")
 character2_node_path = NodePath("../../Viewports/ViewportContainer/Viewport/World/Character2")
@@ -581,21 +585,45 @@ custom_fonts/normal_font = ExtResource( 41 )
 bbcode_enabled = true
 bbcode_text = "[center]You can change this description in the Shine Sprite's properties menu.[/center]"
 text = "You can change this description in the Shine Sprite's properties menu."
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ShineName" type="RichTextLabel" parent="UI/PauseScreen/ShineInfo"]
-margin_top = 190.0
+margin_top = 189.0
 margin_right = 768.0
-margin_bottom = 215.0
+margin_bottom = 214.0
 custom_fonts/normal_font = ExtResource( 41 )
 bbcode_enabled = true
 bbcode_text = "[center]Unnamed Shine[/center]"
 text = "Unnamed Shine"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="ShineCount" type="RichTextLabel" parent="UI/PauseScreen/ShineInfo"]
+margin_left = 50.0
+margin_top = 85.0
+margin_right = 640.0
+margin_bottom = 182.0
+custom_fonts/normal_font = SubResource( 14 )
+bbcode_enabled = true
+bbcode_text = "0/0"
+text = "0/0"
+
+[node name="SCCount" type="RichTextLabel" parent="UI/PauseScreen/ShineInfo"]
+margin_left = 50.0
+margin_top = 129.0
+margin_right = 640.0
+margin_bottom = 226.0
+custom_fonts/normal_font = SubResource( 14 )
+bbcode_enabled = true
+bbcode_text = "0/0"
+text = "0/0"
+
+[node name="Shine" type="Sprite" parent="UI/PauseScreen/ShineInfo"]
+position = Vector2( 25, 100 )
+scale = Vector2( 0.366319, 0.385599 )
+texture = ExtResource( 24 )
+
+[node name="SC" type="Sprite" parent="UI/PauseScreen/ShineInfo"]
+position = Vector2( 22.864, 145 )
+scale = Vector2( 0.366319, 0.385599 )
+texture = ExtResource( 23 )
 
 [node name="MultiplayerOptions" parent="UI/PauseScreen" instance=ExtResource( 15 )]
 visible = false
@@ -605,6 +633,7 @@ visible = false
 
 [node name="SignText" type="Control" parent="UI"]
 pause_mode = 2
+visible = false
 margin_left = 161.0
 margin_top = 66.0
 margin_right = 611.0
@@ -725,7 +754,7 @@ collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 4
+frame = 0
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 

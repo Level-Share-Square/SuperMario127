@@ -880,21 +880,15 @@ func _physics_process(delta: float) -> void:
 	#if Singleton.PlayerSettings.other_player_id != -1:
 	#	if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
 #			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
-	if file.file_exists(str(LevelInfo.new().level_name) + "_" + str(LevelInfo.new().selected_shine) + "pos"):
-		ghost_pos = file.get_var(str(LevelInfo.new().level_name) + "_" + str(LevelInfo.new().selected_shine))
-		
-	if file.file_exists(str(LevelInfo.new().level_name) + "_" + str(LevelInfo.new().selected_shine) + "anim"):
-		ghost_anim = file.get_var(str(LevelInfo.new().level_name) + "_" + str(LevelInfo.new().selected_shine) + "anim")
-		
 	if !disable_movement:
 		temp_gp.append(position)
-		temp_gp.append(sprite.animation)
-	
+		temp_ga.append(sprite.animation)
+	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
 	if Singleton2.save_ghost == true:
-		file.open("user://" + str(LevelInfo.new().level_name) + "_" + str(LevelInfo.new().selected_shine) + "pos.127ghost", _File.WRITE)
+		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + "_pos.127ghost", File.WRITE)
 		file.store_var(temp_gp)
 		file.close()
-		file.open("user://" + str(LevelInfo.new().level_name) + "_" + str(LevelInfo.new().selected_shine) + "anim.127ghost", _File.WRITE)
+		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + "_anim.127ghost", File.WRITE)
 		file.store_var(temp_ga)
 		file.close()
 	

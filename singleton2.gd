@@ -4,4 +4,5 @@ var rp : bool = true
 var dead = false
 var player_name
 var current_var
-var save_ghost
+var save_ghost = false
+var level

@@ -19,6 +19,8 @@ onready var darken = $Darken
 onready var shine_info = $ShineInfo
 onready var multiplayer_options = $MultiplayerOptions
 onready var controls_options = $ControlsOptions
+onready var shinecount = $ShineInfo/ShineCount
+onready var sccount = $ShineInfo/SCCount
 
 onready var fade_tween = $TweenFade
 onready var topbar_tween = $TweenTopbar
@@ -29,6 +31,7 @@ export var chat_path : NodePath
 onready var chat_node = get_node(chat_path)
 
 var paused := false
+var levels = Singleton.SavedLevels.levels
 
 func _ready():
 	# You want it to be visible for editing, but that causes a bug, which this fixes
@@ -54,6 +57,21 @@ func _ready():
 	yield(get_tree().create_timer(0.2), "timeout")
 	Singleton.CurrentLevelData.can_pause = true
 
+func populate_info_panel(level_info : LevelInfo = null) -> void:
+
+		# Only count shine sprites that have show_in_menu on
+		var total_shine_count := 0
+		var collected_shine_count := 0
+
+		for shine_details in level_info.shine_details:
+			total_shine_count += 1
+			if level_info.collected_shines[str(shine_details["id"])]:
+				collected_shine_count += 1
+
+		shinecount.text = "%s/%s" % [collected_shine_count, total_shine_count]
+
+		var collected_star_coin_count = level_info.collected_star_coins.values().count(true)
+		sccount.text = "%s/%s" % [collected_star_coin_count, level_info.collected_star_coins.size()]
 func _unhandled_input(event):
 	if Singleton.CurrentLevelData.can_pause and event.is_action_pressed("pause") and !(character_node.dead or (Singleton.PlayerSettings.number_of_players != 1 and character2_node.dead)):
 		toggle_pause()
@@ -172,3 +190,7 @@ func update_shine_info():
 		var selected_shine_info = level_info.shine_details[level_info.selected_shine]
 		shine_description.bbcode_text = "[center]%s[/center]" % selected_shine_info["description"] 
 		shine_name.bbcode_text = "[center]%s[/center]" % selected_shine_info["title"]
+		
+func _process(delta):
+	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+	populate_info_panel(level_info)

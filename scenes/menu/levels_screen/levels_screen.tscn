@@ -445,7 +445,7 @@ autowrap = true
 [node name="LevelListPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 margin_top = 121.0
 margin_right = 343.0
-margin_bottom = 178.0
+margin_bottom = 324.0
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 10 )
 
@@ -453,7 +453,7 @@ custom_styles/panel = ExtResource( 10 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 335.0
-margin_bottom = 49.0
+margin_bottom = 195.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 6 )
@@ -471,6 +471,7 @@ __meta__ = {
 }
 
 [node name="LevelCodePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+visible = false
 margin_top = 182.0
 margin_right = 343.0
 margin_bottom = 324.0

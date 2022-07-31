@@ -20,6 +20,7 @@ var resource_loader
 onready var amount_of_scenes = Singleton.load_paths.size()
 onready var thread = Thread.new()
 onready var file = File.new()
+onready var dir = Directory.new()
 
 var current_index = 0
 var percentage = 0
@@ -42,6 +43,17 @@ func go_to_menu():
 		Singleton.MenuVariables.quit_to_menu()
 
 func _ready():
+	dir.make_dir("user://replays")
+	if file.file_exists("user://072.json"):
+		dir.remove("user://tiles.res")
+		dir.remove("user://bg_music.ogg")
+		dir.remove("user://settings.json")
+		file.open("user://073.darius", File.WRITE)
+		file.close()
+		dir.remove("user://072.json")
+	else:
+		file.open("user://073.darius", File.WRITE)
+		file.close()
 	if Singleton2.rp == true:
 		update_activity()
 	elif Singleton2.rp == false:
@@ -71,8 +83,6 @@ func _ready():
 		mario_sprite.frames = luigi_frames
 		mario_reflection.frames = luigi_frames
 		thread.start(self, "load_palettes", null, thread.PRIORITY_HIGH)
-	file.open("user://072.json", File.WRITE)
-	file.close()
 
 func collect_coin(play_sound = true):
 	coins += 1
