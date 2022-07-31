@@ -373,6 +373,7 @@ texture = ExtResource( 45 )
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
@@ -633,7 +634,6 @@ visible = false
 
 [node name="SignText" type="Control" parent="UI"]
 pause_mode = 2
-visible = false
 margin_left = 161.0
 margin_top = 66.0
 margin_right = 611.0
@@ -754,7 +754,7 @@ collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 0
+frame = 4
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 

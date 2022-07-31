@@ -12,22 +12,19 @@ var play_ghost = false
 
 func _ready():
 	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
-	if file.file_exists("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + "_pos.127ghost"):
+	if file.file_exists("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost"):
 		play_ghost = true
 
 func _process(delta):
 	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
 	if play_ghost:
-		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + "_pos.127ghost", File.READ)
+		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.READ)
 		ghost_pos = file.get_var()
-		file.close()
-		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + "_anim.127ghost", File.READ)
 		ghost_anim = file.get_var()
 		file.close()
-		if ffc < ghost_pos.size() - 2:
+		if ffc < ghost_anim.size() - 2:
 			ffc += 1
-		if sfc < ghost_pos.size() - 1:
+		if sfc < ghost_anim.size() - 1:
 			sfc += 1
-		tween.interpolate_property(self, "position", ghost_pos[ffc], ghost_pos[sfc], delta)
-		tween.start()
-#this probably works???????
+		tween2.interpolate_property(self, "transform", ghost_pos[ffc], ghost_pos[sfc], delta)
+		tween2.start()
