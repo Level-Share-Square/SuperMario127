@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://assets/fonts/sm256.ttf" type="DynamicFontData" id=21]
 [ext_resource path="res://assets/styles/LevelListPanel.tres" type="StyleBox" id=22]
 [ext_resource path="res://assets/misc/ass.png" type="Texture" id=23]
+[ext_resource path="res://assets/fonts/delfino_dynamicfontdata.tres" type="DynamicFontData" id=24]
 
 [sub_resource type="DynamicFont" id=2]
 size = 28
@@ -72,62 +73,6 @@ corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[sub_resource type="DynamicFont" id=9]
-size = 24
-outline_size = 2
-outline_color = Color( 0.054902, 0, 0.25098, 1 )
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=13]
-size = 24
-font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxFlat" id=10]
-bg_color = Color( 0.0705882, 0, 0.231373, 1 )
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
-[sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 0, 0.0470588, 0.317647, 1 )
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
-[sub_resource type="StyleBoxFlat" id=12]
-content_margin_left = 16.0
-content_margin_right = 16.0
-content_margin_top = 8.0
-content_margin_bottom = 8.0
-bg_color = Color( 0.112, 0.1432, 0.32, 1 )
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-
-[sub_resource type="GDScript" id=17]
-script/source = "extends Control
-
-onready var button : Button = $Box
-
-var value : bool = false
-
-func _ready():
-	value = Singleton2.rp
-	_update_text()
-	var _connect = button.connect(\"pressed\", self, \"_update_value\")
-
-func _update_value():
-	value = !value
-	Singleton2.rp = value
-	_update_text()
-
-func _update_text():
-	button.text = \"True\" if value else \"False\"
-"
-
 [sub_resource type="Animation" id=14]
 resource_name = "default"
 length = 0.001
@@ -168,7 +113,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("ControlsButton:disabled")
+tracks/3/path = NodePath("Page1/ControlsButton:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -220,7 +165,7 @@ tracks/2/keys = {
 "values": [ Vector2( 770, 506 ), Vector2( 770, 390 ), Vector2( 770, 400 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("ControlsButton:disabled")
+tracks/3/path = NodePath("Page1/ControlsButton:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -272,7 +217,7 @@ tracks/2/keys = {
 "values": [ Vector2( 770, 400 ), Vector2( 770, 506 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("ControlsButton:disabled")
+tracks/3/path = NodePath("Page1/ControlsButton:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -284,25 +229,75 @@ tracks/3/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="StreamTexture" id=18]
-flags = 4
-load_path = "res://.import/clickable_arrow.png-83993ebf5b0800620a0b83f115e98f42.stex"
+[sub_resource type="DynamicFont" id=9]
+size = 24
+outline_size = 2
+outline_color = Color( 0.054902, 0, 0.25098, 1 )
+font_data = ExtResource( 1 )
 
-[sub_resource type="StreamTexture" id=19]
-flags = 4
-load_path = "res://.import/clickable_arrow.png-83993ebf5b0800620a0b83f115e98f42.stex"
+[sub_resource type="DynamicFont" id=18]
+resource_local_to_scene = true
+size = 24
+outline_size = 2
+outline_color = Color( 0.054902, 0, 0.25098, 1 )
+extra_spacing_char = 1
+font_data = ExtResource( 24 )
 
-[sub_resource type="StreamTexture" id=20]
-flags = 4
-load_path = "res://.import/clickable_arrow_hover.png-ee6c602ee3268ec2c2eb094ef664907a.stex"
+[sub_resource type="DynamicFont" id=13]
+size = 24
+font_data = ExtResource( 1 )
 
-[sub_resource type="StreamTexture" id=21]
-flags = 4
-load_path = "res://.import/clickable_arrow.png-83993ebf5b0800620a0b83f115e98f42.stex"
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.0705882, 0, 0.231373, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
-[sub_resource type="StreamTexture" id=22]
-flags = 4
-load_path = "res://.import/clickable_arrow.png-83993ebf5b0800620a0b83f115e98f42.stex"
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=12]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.112, 0.1432, 0.32, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="GDScript" id=17]
+script/source = "extends Control
+
+onready var button : Button = $Box
+
+var value : bool = false
+
+func _ready():
+	value = Singleton2.rp
+	_update_text()
+	var _connect = button.connect(\"pressed\", self, \"_update_value\")
+
+func _update_value():
+	value = !value
+	Singleton2.rp = value
+	_update_text()
+
+func _update_text():
+	button.text = \"True\" if value else \"False\"
+"
+
+[sub_resource type="DynamicFont" id=19]
+size = 24
+outline_size = 2
+outline_color = Color( 0.054902, 0, 0.25098, 1 )
+font_data = ExtResource( 1 )
 
 [node name="MultiplayerOptions" type="Control"]
 margin_right = 40.0
@@ -438,57 +433,6 @@ volume_db = -10.0
 stream = ExtResource( 4 )
 volume_db = -10.0
 
-[node name="ConfirmButton" type="Button" parent="."]
-margin_left = 419.0
-margin_top = 236.405
-margin_right = 748.0
-margin_bottom = 280.405
-custom_fonts/font = SubResource( 8 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/disabled = SubResource( 7 )
-custom_styles/normal = SubResource( 6 )
-action_mode = 0
-text = "Confirm"
-script = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-num_of_players = NodePath("../NumberOfPlayers")
-player1_char = NodePath("../Player1Char")
-player2_char = NodePath("../Player2Char")
-character_node_path = NodePath("../../../../Viewports/ViewportContainer/Viewport/World/Character")
-
-[node name="HoverSound" type="AudioStreamPlayer" parent="ConfirmButton"]
-stream = ExtResource( 2 )
-volume_db = -10.0
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="ConfirmButton"]
-stream = ExtResource( 4 )
-volume_db = -10.0
-
-[node name="ControlsButton" type="Button" parent="."]
-margin_left = 27.0
-margin_top = 236.405
-margin_right = 356.0
-margin_bottom = 280.405
-custom_fonts/font = SubResource( 8 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/disabled = SubResource( 7 )
-custom_styles/normal = SubResource( 6 )
-action_mode = 0
-text = "Controls"
-script = ExtResource( 11 )
-
-[node name="HoverSound" type="AudioStreamPlayer" parent="ControlsButton"]
-stream = ExtResource( 2 )
-volume_db = -10.0
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="ControlsButton"]
-stream = ExtResource( 4 )
-volume_db = -10.0
-
 [node name="HostButton" type="Button" parent="."]
 visible = false
 margin_left = 79.8377
@@ -515,13 +459,92 @@ volume_db = -10.0
 stream = ExtResource( 4 )
 volume_db = -10.0
 
-[node name="WindowScale" type="Control" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/default = SubResource( 14 )
+anims/trans_out_MainMenuScreen_MultiplayerOptions = SubResource( 15 )
+anims/trans_out_MultiplayerOptions_MainMenuScreen = SubResource( 16 )
+
+[node name="PageSelect" type="Control" parent="."]
+margin_top = -14.0
+margin_right = 40.0
+margin_bottom = 26.0
+
+[node name="Label" type="Label" parent="PageSelect"]
+show_behind_parent = true
+margin_left = 578.0
+margin_top = 88.0
+margin_right = 761.0
+margin_bottom = 132.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 9 )
+custom_styles/normal = ExtResource( 22 )
+text = "Page:"
+valign = 1
+
+[node name="Value" type="Label" parent="PageSelect"]
+margin_left = 685.0
+margin_top = 95.0
+margin_right = 723.0
+margin_bottom = 125.0
+custom_fonts/font = SubResource( 18 )
+text = "nill"
+align = 1
+valign = 1
+
+[node name="Right" type="TextureButton" parent="PageSelect"]
+margin_left = 723.0
+margin_top = 97.0
+margin_right = 749.0
+margin_bottom = 123.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 3 )
+expand = true
+
+[node name="Left" type="TextureButton" parent="PageSelect"]
+margin_left = 658.0
+margin_top = 97.0
+margin_right = 684.0
+margin_bottom = 123.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 3 )
+expand = true
+flip_h = true
+
+[node name="Page1" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ControlsButton" type="Button" parent="Page1"]
+margin_left = 27.0
+margin_top = 236.405
+margin_right = 356.0
+margin_bottom = 280.405
+custom_fonts/font = SubResource( 8 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 6 )
+action_mode = 0
+text = "Controls"
+script = ExtResource( 11 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="Page1/ControlsButton"]
+stream = ExtResource( 2 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="Page1/ControlsButton"]
+stream = ExtResource( 4 )
+volume_db = -10.0
+
+[node name="WindowScale" type="Control" parent="Page1"]
 margin_top = -28.0
 margin_right = 40.0
 margin_bottom = 12.0
 script = ExtResource( 16 )
 
-[node name="Right" type="TextureButton" parent="WindowScale"]
+[node name="Right" type="TextureButton" parent="Page1/WindowScale"]
 margin_left = 271.654
 margin_top = 128.587
 margin_right = 399.654
@@ -534,7 +557,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="TextureButton" parent="WindowScale"]
+[node name="Left" type="TextureButton" parent="Page1/WindowScale"]
 margin_left = 233.0
 margin_top = 154.296
 margin_right = 361.0
@@ -548,7 +571,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="WindowScale"]
+[node name="Label" type="Label" parent="Page1/WindowScale"]
 margin_left = 40.0
 margin_top = 126.796
 margin_right = 202.0
@@ -558,7 +581,7 @@ text = "Window Scale:"
 align = 1
 valign = 1
 
-[node name="Value" type="Label" parent="WindowScale"]
+[node name="Value" type="Label" parent="Page1/WindowScale"]
 margin_left = 234.0
 margin_top = 125.796
 margin_right = 272.0
@@ -570,13 +593,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FPSLock" type="Control" parent="."]
+[node name="FPSLock" type="Control" parent="Page1"]
 margin_top = 7.0
 margin_right = 40.0
 margin_bottom = 47.0
 script = ExtResource( 15 )
 
-[node name="Right" type="TextureButton" parent="FPSLock"]
+[node name="Right" type="TextureButton" parent="Page1/FPSLock"]
 margin_left = 271.654
 margin_top = 128.587
 margin_right = 399.654
@@ -589,7 +612,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="TextureButton" parent="FPSLock"]
+[node name="Left" type="TextureButton" parent="Page1/FPSLock"]
 margin_left = 233.0
 margin_top = 154.296
 margin_right = 361.0
@@ -603,7 +626,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="FPSLock"]
+[node name="Label" type="Label" parent="Page1/FPSLock"]
 margin_left = 40.0
 margin_top = 126.796
 margin_right = 202.0
@@ -613,7 +636,7 @@ text = "FPS Cap:"
 align = 1
 valign = 1
 
-[node name="Value" type="Label" parent="FPSLock"]
+[node name="Value" type="Label" parent="Page1/FPSLock"]
 margin_left = 234.0
 margin_top = 126.796
 margin_right = 272.0
@@ -622,13 +645,13 @@ custom_fonts/font = SubResource( 9 )
 align = 1
 valign = 1
 
-[node name="ShowTimer" type="Control" parent="."]
+[node name="ShowTimer" type="Control" parent="Page1"]
 margin_top = 43.0
 margin_right = 40.0
 margin_bottom = 83.0
 script = ExtResource( 17 )
 
-[node name="Box" type="Button" parent="ShowTimer"]
+[node name="Box" type="Button" parent="Page1/ShowTimer"]
 margin_left = 202.0
 margin_top = 128.0
 margin_right = 307.0
@@ -644,7 +667,7 @@ action_mode = 0
 enabled_focus_mode = 0
 text = "True"
 
-[node name="Label" type="Label" parent="ShowTimer"]
+[node name="Label" type="Label" parent="Page1/ShowTimer"]
 margin_left = 32.0
 margin_top = 157.796
 margin_right = 197.0
@@ -654,13 +677,13 @@ text = "Rich Presence:"
 align = 1
 valign = 1
 
-[node name="RichPresence" type="Control" parent="."]
+[node name="RichPresence" type="Control" parent="Page1"]
 margin_top = 43.0
 margin_right = 40.0
 margin_bottom = 83.0
 script = SubResource( 17 )
 
-[node name="Box" type="Button" parent="RichPresence"]
+[node name="Box" type="Button" parent="Page1/RichPresence"]
 margin_left = 202.0
 margin_top = 160.0
 margin_right = 307.0
@@ -679,7 +702,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="RichPresence"]
+[node name="Label" type="Label" parent="Page1/RichPresence"]
 margin_left = 40.0
 margin_top = 126.796
 margin_right = 202.0
@@ -689,18 +712,18 @@ text = "Show Timer:"
 align = 1
 valign = 1
 
-[node name="Sprite" type="Sprite" parent="RichPresence"]
+[node name="Sprite" type="Sprite" parent="Page1/RichPresence"]
 position = Vector2( 17, 174 )
 scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 23 )
 
-[node name="NumberOfPlayers" type="Control" parent="."]
+[node name="NumberOfPlayers" type="Control" parent="Page1"]
 margin_top = 50.0
 margin_right = 40.0
 margin_bottom = 90.0
 script = ExtResource( 13 )
 
-[node name="Right" type="TextureButton" parent="NumberOfPlayers"]
+[node name="Right" type="TextureButton" parent="Page1/NumberOfPlayers"]
 margin_left = 722.654
 margin_top = 82.196
 margin_right = 850.654
@@ -713,7 +736,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="TextureButton" parent="NumberOfPlayers"]
+[node name="Left" type="TextureButton" parent="Page1/NumberOfPlayers"]
 margin_left = 684.0
 margin_top = 107.905
 margin_right = 812.0
@@ -727,7 +750,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="NumberOfPlayers"]
+[node name="Label" type="Label" parent="Page1/NumberOfPlayers"]
 margin_left = 547.359
 margin_top = 80.391
 margin_right = 653.359
@@ -737,7 +760,7 @@ text = "Players:"
 align = 1
 valign = 1
 
-[node name="Value" type="Label" parent="NumberOfPlayers"]
+[node name="Value" type="Label" parent="Page1/NumberOfPlayers"]
 margin_left = 685.0
 margin_top = 80.405
 margin_right = 723.0
@@ -750,13 +773,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Player1Char" type="Control" parent="."]
+[node name="Player1Char" type="Control" parent="Page1"]
 margin_top = 85.0
 margin_right = 40.0
 margin_bottom = 125.0
 script = ExtResource( 9 )
 
-[node name="Right" type="TextureButton" parent="Player1Char"]
+[node name="Right" type="TextureButton" parent="Page1/Player1Char"]
 margin_left = 722.654
 margin_top = 82.196
 margin_right = 850.654
@@ -769,7 +792,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="TextureButton" parent="Player1Char"]
+[node name="Left" type="TextureButton" parent="Page1/Player1Char"]
 margin_left = 684.0
 margin_top = 107.905
 margin_right = 812.0
@@ -783,7 +806,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Player1Char"]
+[node name="Label" type="Label" parent="Page1/Player1Char"]
 margin_left = 422.359
 margin_top = 79.405
 margin_right = 646.359
@@ -796,7 +819,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Value" type="Label" parent="Player1Char"]
+[node name="Value" type="Label" parent="Page1/Player1Char"]
 margin_left = 685.0
 margin_top = 80.405
 margin_right = 723.0
@@ -809,13 +832,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Player2Char" type="Control" parent="."]
+[node name="Player2Char" type="Control" parent="Page1"]
 margin_top = 120.0
 margin_right = 40.0
 margin_bottom = 160.0
 script = ExtResource( 10 )
 
-[node name="Right" type="TextureButton" parent="Player2Char"]
+[node name="Right" type="TextureButton" parent="Page1/Player2Char"]
 margin_left = 722.654
 margin_top = 82.196
 margin_right = 850.654
@@ -828,7 +851,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Left" type="TextureButton" parent="Player2Char"]
+[node name="Left" type="TextureButton" parent="Page1/Player2Char"]
 margin_left = 684.0
 margin_top = 107.905
 margin_right = 812.0
@@ -842,7 +865,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Player2Char"]
+[node name="Label" type="Label" parent="Page1/Player2Char"]
 margin_left = 419.0
 margin_top = 78.589
 margin_right = 646.0
@@ -855,7 +878,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Value" type="Label" parent="Player2Char"]
+[node name="Value" type="Label" parent="Page1/Player2Char"]
 margin_left = 685.0
 margin_top = 80.405
 margin_right = 723.0
@@ -868,63 +891,66 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/default = SubResource( 14 )
-anims/trans_out_MainMenuScreen_MultiplayerOptions = SubResource( 15 )
-anims/trans_out_MultiplayerOptions_MainMenuScreen = SubResource( 16 )
+[node name="ConfirmButton" type="Button" parent="Page1"]
+margin_left = 419.0
+margin_top = 236.405
+margin_right = 748.0
+margin_bottom = 280.405
+custom_fonts/font = SubResource( 8 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 6 )
+action_mode = 0
+text = "Confirm"
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+num_of_players = NodePath("../NumberOfPlayers")
+player1_char = NodePath("../Player1Char")
+player2_char = NodePath("../Player2Char")
+character_node_path = NodePath("../../../../Viewports/ViewportContainer/Viewport/World/Character")
 
-[node name="PageSelect" type="Control" parent="."]
-margin_top = -14.0
+[node name="HoverSound" type="AudioStreamPlayer" parent="Page1/ConfirmButton"]
+stream = ExtResource( 2 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="Page1/ConfirmButton"]
+stream = ExtResource( 4 )
+volume_db = -10.0
+
+[node name="Page2" type="Control" parent="."]
+visible = false
 margin_right = 40.0
-margin_bottom = 26.0
+margin_bottom = 40.0
 
-[node name="Right" type="TextureButton" parent="PageSelect"]
-margin_left = 722.654
-margin_top = 97.196
-margin_right = 850.654
-margin_bottom = 225.196
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = SubResource( 18 )
-texture_pressed = SubResource( 19 )
-texture_hover = SubResource( 20 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="GhostToggle" type="Control" parent="Page2"]
+margin_left = 27.0
+margin_top = 101.0
+margin_right = 67.0
+margin_bottom = 141.0
 
-[node name="Left" type="TextureButton" parent="PageSelect"]
-margin_left = 684.0
-margin_top = 122.905
-margin_right = 812.0
-margin_bottom = 250.905
-rect_rotation = 180.0
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = SubResource( 21 )
-texture_pressed = SubResource( 22 )
-texture_hover = ExtResource( 3 )
+[node name="Label" type="Label" parent="Page2/GhostToggle"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 19 )
+text = "Ghost Enabled:"
 
-[node name="Label" type="Label" parent="PageSelect"]
-show_behind_parent = true
-margin_left = 578.0
-margin_top = 88.0
-margin_right = 761.0
-margin_bottom = 132.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 9 )
-custom_styles/normal = ExtResource( 22 )
-text = "Page:"
-valign = 1
-
-[node name="Value" type="Label" parent="PageSelect"]
-margin_left = 685.0
-margin_top = 95.405
-margin_right = 723.0
-margin_bottom = 127.405
-custom_fonts/font = SubResource( 9 )
-text = "1/2"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Box" type="Button" parent="Page2/GhostToggle"]
+margin_left = 175.0
+margin_right = 280.0
+margin_bottom = 30.0
+focus_mode = 0
+custom_fonts/font = SubResource( 13 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/focus = SubResource( 10 )
+custom_styles/disabled = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+action_mode = 0
+enabled_focus_mode = 0
+text = "True"
 
 [connection signal="pressed" from="PageSelect/Right" to="." method="_on_Right_pressed"]
+[connection signal="pressed" from="PageSelect/Left" to="." method="_on_Left_pressed"]

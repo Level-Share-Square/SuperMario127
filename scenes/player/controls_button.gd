@@ -7,6 +7,7 @@ onready var controls_options
 var last_hovered
 
 func _pressed():
+	get_parent().get_parent().visible = false
 	click_sound.play()
 	if is_instance_valid(controls_options):
 		get_parent().visible = false

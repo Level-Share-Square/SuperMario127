@@ -1,6 +1,6 @@
 extends Screen
 
-onready var controls_button = $ControlsButton
+onready var controls_button = $Page1/ControlsButton
 onready var back_button = $TitleOnly/Bottom/BackButton
 
 func _ready():

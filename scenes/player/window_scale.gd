@@ -2,10 +2,11 @@ extends Control
 
 onready var left : TextureButton = $Left
 onready var right : TextureButton = $Right
-
 onready var value_text : Label = $Value
+
 var window_scale := 1
 var previous_scale : int = window_scale
+
 const FULLSCREEN_SCALE_VALUE := 3
 const PATH : String = "user://settings.json"
 

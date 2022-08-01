@@ -110,7 +110,7 @@ func change_song(old_setting, music_setting) -> void:
 	if "mode" in get_tree().get_current_scene():
 		bus = play_bus if get_tree().get_current_scene().mode == 0 else edit_bus
 	else:
-		bus = play_bus # perhaps we should define a general bus or a menu bus later
+		bus = play_bus # perhaps we should define a general bus or a menu bus later # FUCKIGN YES WWE SHOULD
 
 func toggle_underwater_music(state):
 	if has_water:

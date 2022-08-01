@@ -2,8 +2,8 @@ extends Control
 
 onready var left = $Left
 onready var right = $Right
-
 onready var value_text = $Value
+
 var fps_cap = 3
 
 func _ready():

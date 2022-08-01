@@ -2,7 +2,6 @@ extends Control
 
 onready var left = $Left
 onready var right = $Right
-
 onready var value_text = $Value
 
 export var value = 1
