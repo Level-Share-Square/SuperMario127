@@ -930,9 +930,9 @@ func _physics_process(delta: float) -> void:
 	#	if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
 #			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
 	if !Singleton2.save_ghost:
-		temp_gp.append(encode_int_bytes(int(position.x), 24), encode_int_bytes(int(position.y), 24))
-		temp_ga.append(encode_int_bytes(ANIM_IDS[sprite.animation], 24))
-		temp_gsr.append(encode_int_bytes(int(sprite.rotation_degrees), 24))
+		temp_gp.append(position)
+		temp_ga.append(sprite.animation)
+		temp_gsr.append(sprite.rotation_degrees)
 	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
 	if Singleton2.save_ghost == true:
 		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.WRITE)
