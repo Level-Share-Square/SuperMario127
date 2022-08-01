@@ -11,8 +11,6 @@
 [ext_resource path="res://scenes/editor/load_button.gd" type="Script" id=9]
 [ext_resource path="res://scenes/editor/level_code_contents.gd" type="Script" id=10]
 
-
-
 [sub_resource type="DynamicFont" id=1]
 size = 56
 use_filter = true
@@ -455,6 +453,11 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
+[sub_resource type="DynamicFont" id=13]
+size = 32
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
 [sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 5
@@ -467,9 +470,8 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="DynamicFont" id=13]
-size = 32
-outline_color = Color( 0, 0, 0, 1 )
+[sub_resource type="DynamicFont" id=16]
+size = 48
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=14]
@@ -485,10 +487,6 @@ corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
-
-[sub_resource type="DynamicFont" id=16]
-size = 48
-font_data = ExtResource( 1 )
 
 [node name="LevelCodeWindow" type="NinePatchRect"]
 visible = false
@@ -560,11 +558,11 @@ margin_right = 1000.0
 margin_bottom = 405.0
 rect_rotation = 0.0197835
 theme = SubResource( 11 )
-custom_styles/normal = SubResource( 12 )
-custom_fonts/font = SubResource( 13 )
 custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0.188235, 0.258824, 0.494118, 1 )
 custom_colors/completion_font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 13 )
+custom_styles/normal = SubResource( 12 )
 context_menu_enabled = false
 v_scroll_speed = 0.0
 wrap_enabled = true
@@ -578,10 +576,10 @@ margin_left = 534.307
 margin_top = 6.79156
 margin_right = 934.307
 margin_bottom = 96.7916
+custom_fonts/font = SubResource( 16 )
 custom_styles/hover = SubResource( 14 )
 custom_styles/pressed = SubResource( 15 )
 custom_styles/normal = SubResource( 15 )
-custom_fonts/font = SubResource( 16 )
 shortcut_in_tooltip = false
 action_mode = 0
 text = "Load Level"
@@ -605,10 +603,10 @@ margin_left = 82.2546
 margin_top = 6.79156
 margin_right = 482.255
 margin_bottom = 96.7916
+custom_fonts/font = SubResource( 16 )
 custom_styles/hover = SubResource( 14 )
 custom_styles/pressed = SubResource( 15 )
 custom_styles/normal = SubResource( 15 )
-custom_fonts/font = SubResource( 16 )
 shortcut_in_tooltip = false
 action_mode = 0
 text = "Copy Text"

@@ -18,6 +18,7 @@ func _pressed():
 	focus_mode = 0
 	if shine_info_node.visible:
 		multiplayer_options_node.visible = true
+		multiplayer_options_node.page_select.visible = true
 		shine_info_node.visible = false
 	else:
 		if controls_options_node.visible == true:
