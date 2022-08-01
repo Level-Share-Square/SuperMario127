@@ -938,9 +938,9 @@ func _physics_process(delta: float) -> void:
 	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
 	if Singleton2.save_ghost == true:
 		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.WRITE)
-		file.store_16(temp_gp)
-		file.store_16(temp_ga)
-		file.store_16(temp_gsr)
+		file.store_var(temp_gp)
+		file.store_var(temp_ga)
+		file.store_var(temp_gsr)
 		file.close()
 		
 		
