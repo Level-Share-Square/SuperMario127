@@ -161,8 +161,9 @@ var metal_voice := false
 var file = File.new()
 var ghost_pos = []
 var ghost_anim = []
-var temp_gt = []
+var temp_gp = []
 var temp_ga = []
+var temp_gsr = []
 
 var can_heal : bool = true
 var healing_timer_enabled := false
@@ -237,7 +238,7 @@ var camera : Camera2D
 
 func _ready():
 	temp_ga = []
-	temp_gt = []
+	temp_gp = []
 
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
@@ -880,14 +881,16 @@ func _physics_process(delta: float) -> void:
 	#if Singleton.PlayerSettings.other_player_id != -1:
 	#	if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
 #			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
-	if !disable_movement:
-		temp_gt.append(transform)
+	if !Singleton2.save_ghost:
+		temp_gp.append(Vector2(int(position.x), int(position.y)))
 		temp_ga.append(sprite.animation)
+		temp_gsr.append(int(sprite.rotation_degrees))
 	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
 	if Singleton2.save_ghost == true:
 		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.WRITE)
-		file.store_var(temp_gt)
+		file.store_var(temp_gp)
 		file.store_var(temp_ga)
+		file.store_var(temp_gsr)
 		file.close()
 	
 func switch_areas(area_id, transition_time):

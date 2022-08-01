@@ -4,11 +4,11 @@
 [ext_resource path="res://scenes/actors/mario/GhostMario.gd" type="Script" id=2]
 
 [node name="GhostMario" type="AnimatedSprite"]
-modulate = Color( 1, 1, 1, 0.317647 )
+modulate = Color( 1, 1, 1, 0.462745 )
 position = Vector2( -1000, -1000 )
 frames = ExtResource( 1 )
 animation = "movingRight"
-frame = 6
+frame = 5
 playing = true
 script = ExtResource( 2 )
 
