@@ -236,6 +236,54 @@ var camera : Camera2D
 #spin, spin_just_pressed
 #)
 
+const ANIM_IDS : Dictionary = {
+	"armsOut" : 1,
+	"bonkedLeft" : 2,
+	"bonkedRight" : 3,
+	"death" : 4,
+	"deathFall" : 5,
+	"diveLeft" : 6,
+	"diveRight" : 7,
+	"doubleFallLeft" : 8,
+	"doubleFallRight" : 9,
+	"doubleJumpLeft" : 10,
+	"doubleJumpRight" : 11,
+	"enterDoorLeft" : 12,
+	"enterDoorRight" : 13,
+	"exitDoorLeft" : 14,
+	"exitDoorRight" : 15,
+	"fallLeft" : 16,
+	"fallRight" : 17,
+	"flyLeft" : 18,
+	"flyRight" : 19,
+	"groundPoundEndLeft" : 20,
+	"groundPoundEndRight" : 21,
+	"groundPoundLeft" : 22,
+	"groundPoundRight" : 23,
+	"idleLeft" : 24,
+	"idleRight" : 25,
+	"jumpLeft" : 26,
+	"jumpRight" : 27,
+	"lavaBoost" : 28,
+	"movingIn" : 29,
+	"movingLeft" : 30,
+	"movingOut" : 31,
+	"movingRight" : 32,
+	"pipeExitLeft" : 33,
+	"pipeExitRight" : 34,
+	"pipeLeft" : 45,
+	"pipeRight" : 46,
+	"shineDance" : 47,
+	"shineFall" : 48,
+	"spinning" : 49,
+	"starRunLeft" : 50,
+	"starRunRight" : 51,
+	"tripleJumpLeft" : 52,
+	"tripleJumpRight" : 53,
+	"wallSlideLeft" : 54,
+	"wallSlideRight" : 55,
+}
+
 func _ready():
 	temp_ga = []
 	temp_gp = []
@@ -882,9 +930,9 @@ func _physics_process(delta: float) -> void:
 	#	if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
 #			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
 	if !Singleton2.save_ghost:
-		temp_gp.append(Vector2(int(position.x), int(position.y)))
-		temp_ga.append(sprite.animation)
-		temp_gsr.append(int(sprite.rotation_degrees))
+		temp_gp.append(encode_int_bytes(int(position.x), 24), encode_int_bytes(int(position.y), 24))
+		temp_ga.append(encode_int_bytes(ANIM_IDS[sprite.animation], 24))
+		temp_gsr.append(encode_int_bytes(int(sprite.rotation_degrees), 24))
 	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
 	if Singleton2.save_ghost == true:
 		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.WRITE)
@@ -892,6 +940,21 @@ func _physics_process(delta: float) -> void:
 		file.store_var(temp_ga)
 		file.store_var(temp_gsr)
 		file.close()
+		
+		
+func encode_int_bytes(val: int, num: int) -> PoolByteArray:
+	var output = PoolByteArray([])
+	for i in range(num):
+		var byte = (
+		val >> (
+			(
+				num - i - 1
+			) << 3
+		) # cut off everything before this byte
+		& 255 # cut off everything after this byte
+	)
+		output.append(byte)
+	return output
 	
 func switch_areas(area_id, transition_time):
 	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id)
