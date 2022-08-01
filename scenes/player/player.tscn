@@ -410,9 +410,6 @@ custom_fonts/font = SubResource( 7 )
 text = "PAUSED"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Bottom" type="TextureRect" parent="UI/PauseScreen"]
 margin_left = 770.0
@@ -588,7 +585,7 @@ text = "You can change this description in the Shine Sprite's properties menu."
 [node name="ShineName" type="RichTextLabel" parent="UI/PauseScreen/ShineInfo"]
 margin_top = 189.0
 margin_right = 768.0
-margin_bottom = 214.0
+margin_bottom = 216.545
 custom_fonts/normal_font = ExtResource( 41 )
 bbcode_enabled = true
 bbcode_text = "[center]Unnamed Shine[/center]"

@@ -6,3 +6,4 @@ var player_name
 var current_var
 var save_ghost = false
 var level
+var ghost_enabled = true
