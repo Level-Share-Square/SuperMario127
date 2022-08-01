@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://scenes/shared/options.gd" type="Script" id=19]
 [ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=20]
 [ext_resource path="res://assets/fonts/sm256.ttf" type="DynamicFontData" id=21]
+[ext_resource path="res://assets/styles/LevelListPanel.tres" type="StyleBox" id=22]
 [ext_resource path="res://assets/misc/ass.png" type="Texture" id=23]
 
 [sub_resource type="DynamicFont" id=2]
@@ -283,6 +284,26 @@ tracks/3/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="StreamTexture" id=18]
+flags = 4
+load_path = "res://.import/clickable_arrow.png-83993ebf5b0800620a0b83f115e98f42.stex"
+
+[sub_resource type="StreamTexture" id=19]
+flags = 4
+load_path = "res://.import/clickable_arrow.png-83993ebf5b0800620a0b83f115e98f42.stex"
+
+[sub_resource type="StreamTexture" id=20]
+flags = 4
+load_path = "res://.import/clickable_arrow_hover.png-ee6c602ee3268ec2c2eb094ef664907a.stex"
+
+[sub_resource type="StreamTexture" id=21]
+flags = 4
+load_path = "res://.import/clickable_arrow.png-83993ebf5b0800620a0b83f115e98f42.stex"
+
+[sub_resource type="StreamTexture" id=22]
+flags = 4
+load_path = "res://.import/clickable_arrow.png-83993ebf5b0800620a0b83f115e98f42.stex"
+
 [node name="MultiplayerOptions" type="Control"]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -338,9 +359,6 @@ margin_right = 2305.0
 margin_bottom = 210.0
 rect_scale = Vector2( 0.335, 0.333 )
 texture = ExtResource( 20 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Text" type="Label" parent="TitleOnly/Top"]
 margin_left = 896.0
@@ -349,9 +367,6 @@ margin_right = 1370.0
 margin_bottom = 156.0
 custom_fonts/font = SubResource( 1 )
 text = "OPTIONS"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="IpAddress" type="LineEdit" parent="."]
 visible = false
@@ -721,9 +736,6 @@ custom_fonts/font = SubResource( 9 )
 text = "Players:"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Value" type="Label" parent="NumberOfPlayers"]
 margin_left = 685.0
@@ -860,3 +872,59 @@ __meta__ = {
 anims/default = SubResource( 14 )
 anims/trans_out_MainMenuScreen_MultiplayerOptions = SubResource( 15 )
 anims/trans_out_MultiplayerOptions_MainMenuScreen = SubResource( 16 )
+
+[node name="PageSelect" type="Control" parent="."]
+margin_top = -14.0
+margin_right = 40.0
+margin_bottom = 26.0
+
+[node name="Right" type="TextureButton" parent="PageSelect"]
+margin_left = 722.654
+margin_top = 97.196
+margin_right = 850.654
+margin_bottom = 225.196
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = SubResource( 18 )
+texture_pressed = SubResource( 19 )
+texture_hover = SubResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="TextureButton" parent="PageSelect"]
+margin_left = 684.0
+margin_top = 122.905
+margin_right = 812.0
+margin_bottom = 250.905
+rect_rotation = 180.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = SubResource( 21 )
+texture_pressed = SubResource( 22 )
+texture_hover = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="PageSelect"]
+show_behind_parent = true
+margin_left = 578.0
+margin_top = 88.0
+margin_right = 761.0
+margin_bottom = 132.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 9 )
+custom_styles/normal = ExtResource( 22 )
+text = "Page:"
+valign = 1
+
+[node name="Value" type="Label" parent="PageSelect"]
+margin_left = 685.0
+margin_top = 95.405
+margin_right = 723.0
+margin_bottom = 127.405
+custom_fonts/font = SubResource( 9 )
+text = "1/2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="PageSelect/Right" to="." method="_on_Right_pressed"]
