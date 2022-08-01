@@ -271,18 +271,17 @@ const ANIM_IDS : Dictionary = {
 	"movingRight" : 32,
 	"pipeExitLeft" : 33,
 	"pipeExitRight" : 34,
-	"pipeLeft" : 35,
-	"pipeRight" : 36,
-	"shineDance" : 37,
-	"shineFall" : 38,
-	"spinning" : 39,
-	"starRunLeft" : 40,
-	"starRunRight" : 41,
-	"swimming" : 42,
-	"tripleJumpLeft" : 43,
-	"tripleJumpRight" : 44,
-	"wallSlideLeft" : 45,
-	"wallSlideRight" : 46,
+	"pipeLeft" : 45,
+	"pipeRight" : 46,
+	"shineDance" : 47,
+	"shineFall" : 48,
+	"spinning" : 49,
+	"starRunLeft" : 50,
+	"starRunRight" : 51,
+	"tripleJumpLeft" : 52,
+	"tripleJumpRight" : 53,
+	"wallSlideLeft" : 54,
+	"wallSlideRight" : 55,
 }
 
 func _ready():
@@ -338,7 +337,6 @@ func knockback(hit_pos: Vector2):
 	velocity.x = direction * 235
 	velocity.y = -225
 	set_state_by_name("KnockbackState", 0)
-	
 
 # warning-ignore: unused_argument
 func load_in(level_data : LevelData, level_area : LevelArea):
@@ -932,15 +930,15 @@ func _physics_process(delta: float) -> void:
 	#	if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
 #			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
 	if !Singleton2.save_ghost:
-		temp_gp.append(Vector2(int(position.x), int(position.y)))
-		temp_ga.append(ANIM_IDS[sprite.animation])
-		temp_gsr.append(int(sprite.rotation_degrees))
+		temp_gp.append(position)
+		temp_ga.append(sprite.animation)
+		temp_gsr.append(sprite.rotation_degrees)
 	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
 	if Singleton2.save_ghost == true:
 		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.WRITE)
-		file.store_16(temp_gp)
-		file.store_16(temp_ga)
-		file.store_16(temp_gsr)
+		file.store_var(temp_gp)
+		file.store_var(temp_ga)
+		file.store_var(temp_gsr)
 		file.close()
 		
 		
