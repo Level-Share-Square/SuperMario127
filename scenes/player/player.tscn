@@ -373,6 +373,7 @@ texture = ExtResource( 45 )
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
@@ -586,7 +587,7 @@ text = "You can change this description in the Shine Sprite's properties menu."
 [node name="ShineName" type="RichTextLabel" parent="UI/PauseScreen/ShineInfo"]
 margin_top = 189.0
 margin_right = 768.0
-margin_bottom = 214.0
+margin_bottom = 216.545
 custom_fonts/normal_font = ExtResource( 41 )
 bbcode_enabled = true
 bbcode_text = "[center]Unnamed Shine[/center]"
@@ -750,7 +751,7 @@ collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 8
+frame = 6
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 

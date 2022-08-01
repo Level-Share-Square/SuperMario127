@@ -13,37 +13,38 @@ onready var page_select_value = $PageSelect/Value
 var page = 1
 
 func _ready():
+	page = 1
 	page_select_value.text = "1/2"
 	title_only.queue_free()
 	controls_button.controls_options = get_parent().get_node("ControlsOptions")
 	print(page_select_value)
 
 func _on_Right_pressed():
-	if page_select_value.text == "1/2":
+	if page == 1:
 		page = 2
 		page_select_value.text = "2/2"
 
-	elif page_select_value.text == "2/2":
+	elif page == 2:
 		page = 1
 		page_select_value.text = "1/2"
 
 	else:
-		page = "WHAT"
-		page_select_value.text = "nill"
+		page = 1
+		page_select_value.text = "1/2"
 
 
 func _on_Left_pressed():
-	if page_select_value.text == "1/2":
+	if page == 1:
 		page = 2
 		page_select_value.text = "2/2"
 
-	elif page_select_value.text == "2/2":
+	elif page == 2:
 		page = 1
 		page_select_value.text = "1/2"
 
 	else:
-		page = "WHAT"
-		page_select_value.text = "nill"
+		page = 1
+		page_select_value.text = "1/2"
 
 func _process(delta):
 	if page == 1:

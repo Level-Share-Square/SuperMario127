@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://assets/styles/LevelListPanel.tres" type="StyleBox" id=22]
 [ext_resource path="res://assets/misc/ass.png" type="Texture" id=23]
 [ext_resource path="res://assets/fonts/delfino_dynamicfontdata.tres" type="DynamicFontData" id=24]
+[ext_resource path="res://scenes/shared/ghosttoggle.gd" type="Script" id=25]
 
 [sub_resource type="DynamicFont" id=2]
 size = 28
@@ -930,6 +931,7 @@ margin_left = 27.0
 margin_top = 101.0
 margin_right = 67.0
 margin_bottom = 141.0
+script = ExtResource( 25 )
 
 [node name="Label" type="Label" parent="Page2/GhostToggle"]
 margin_right = 40.0
