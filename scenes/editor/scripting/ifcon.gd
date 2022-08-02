@@ -1,25 +1,23 @@
-extends WindowDialog
+extends NinePatchRect
 
 onready var value = $Value
 onready var variables = $Var
 onready var operator = $Selector
 onready var camera = $"../PanningCamera2D"
 onready var scripting = get_parent()
+onready var move = $Move
 var appended_variables = []
 var can_drag = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_close_button().visible = false
 	visible = true
 	operator.add_item("=")
 	operator.add_item(">=")
 	operator.add_item("<=")
 	operator.add_item("!=")
-	variables.add_item("variable 1")
-	variables.add_item("variable 2")
-	connect("mouse_entered", self, "_on_mouse_entered")
-	connect("mouse_exited", self, "_on_mouse_exited")
+	move.connect("area_entered", self, "_on_mouse_entered")
+	move.connect("area_exited", self, "_on_mouse_exited")
 	variables.connect("item_selected", self, "_on_item_selected")
 
 
@@ -41,12 +39,12 @@ func _input(event: InputEvent) -> void:
 			if event.button_mask == BUTTON_LEFT:
 				rect_position += event.relative * camera.zoom
 
-func _on_mouse_entered():
-	can_drag = true
-	camera.can_drag = false
-func _on_mouse_exited():
-	can_drag = false
-	camera.can_drag = true
+func _on_mouse_entered(area):
+		can_drag = true
+		camera.can_drag = false
+func _on_mouse_exited(area):
+		can_drag = false
+		camera.can_drag = true
 
 
 
@@ -69,4 +67,5 @@ func _on_item_selected(index):
 			var selected = variables.get_item_text(index)
 			if value.text != scripting.variables.get(str(selected)):
 				pass
+
 

@@ -109,10 +109,29 @@ volume_db = -10.0
 stream = ExtResource( 5 )
 volume_db = -10.0
 
-[node name="Scale" type="Button" parent="VBoxContainer"]
+[node name="Move" type="Button" parent="VBoxContainer"]
 margin_top = 144.0
 margin_right = 290.0
 margin_bottom = 188.0
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Move to"
+script = ExtResource( 1 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="VBoxContainer/Move"]
+stream = ExtResource( 6 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="VBoxContainer/Move"]
+stream = ExtResource( 5 )
+volume_db = -10.0
+
+[node name="Scale" type="Button" parent="VBoxContainer"]
+margin_top = 192.0
+margin_right = 290.0
+margin_bottom = 236.0
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = ExtResource( 10 )
 custom_styles/pressed = ExtResource( 2 )
@@ -129,9 +148,9 @@ stream = ExtResource( 5 )
 volume_db = -10.0
 
 [node name="Position" type="Button" parent="VBoxContainer"]
-margin_top = 192.0
+margin_top = 240.0
 margin_right = 290.0
-margin_bottom = 236.0
+margin_bottom = 284.0
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = ExtResource( 10 )
 custom_styles/pressed = ExtResource( 2 )
@@ -148,9 +167,9 @@ stream = ExtResource( 5 )
 volume_db = -10.0
 
 [node name="Visibility" type="Button" parent="VBoxContainer"]
-margin_top = 240.0
+margin_top = 288.0
 margin_right = 290.0
-margin_bottom = 284.0
+margin_bottom = 332.0
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = ExtResource( 10 )
 custom_styles/pressed = ExtResource( 2 )
@@ -167,9 +186,9 @@ stream = ExtResource( 5 )
 volume_db = -10.0
 
 [node name="Collision" type="Button" parent="VBoxContainer"]
-margin_top = 288.0
+margin_top = 336.0
 margin_right = 290.0
-margin_bottom = 332.0
+margin_bottom = 380.0
 custom_fonts/font = ExtResource( 3 )
 custom_styles/hover = ExtResource( 10 )
 custom_styles/pressed = ExtResource( 2 )

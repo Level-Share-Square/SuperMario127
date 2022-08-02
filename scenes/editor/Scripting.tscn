@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/window/AddBlockWindow.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/editor/scripting/PanningCamera2D.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/editor/scripting/ifcon.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripting.gd" type="Script" id=7]
+[ext_resource path="res://scenes/editor/scripting/moveto.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -15,6 +16,9 @@ font_data = ExtResource( 1 )
 [sub_resource type="DynamicFont" id=2]
 size = 24
 font_data = ExtResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 3, 3 )
 
 [node name="Scripting" type="Control"]
 anchor_right = 1.0
@@ -75,3 +79,18 @@ margin_left = 56057.0
 margin_top = 19931.0
 margin_right = 57110.0
 margin_bottom = 20333.0
+
+[node name="MoveTo" parent="." instance=ExtResource( 8 )]
+visible = false
+margin_left = 82943.0
+margin_top = 59797.0
+margin_right = 83067.0
+margin_bottom = 59845.0
+
+[node name="mouse" type="Area2D" parent="."]
+collision_layer = 49152
+collision_mask = 49152
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mouse"]
+position = Vector2( -4, -7 )
+shape = SubResource( 3 )

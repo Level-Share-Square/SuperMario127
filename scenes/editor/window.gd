@@ -21,6 +21,7 @@ onready var while_edit = $VBoxContainer/While
 onready var collision_edit = $VBoxContainer/Collision
 onready var scale_edit = $VBoxContainer/Scale
 onready var visibility_edit = $VBoxContainer/Visibility
+onready var move_to = $VBoxContainer/Move
 
 onready var tween = $Tween
 var drag_position = null

@@ -5,9 +5,11 @@ var variable_num = -1
 onready var camera = get_node("PanningCamera2D")
 onready var window_node = $AddBlockWindow
 onready var camera_pos = $CanvasLayer/Label2
+onready var mouse = $mouse
 const var_name_popup = preload("res://scenes/editor/window/VarNameWindow.tscn")
 const new_var = preload("res://scenes/editor/scripting/newvar.tscn")
 const if_con = preload("res://scenes/editor/scripting/ifcon.tscn")
+const move_to = preload("res://scenes/editor/scripting/moveto.tscn")
 const line = preload("res://scenes/editor/scripting/Line2D.tscn")
 var instances = []
 var variables : Dictionary = {}
@@ -17,6 +19,7 @@ var line_created = false
 var can_connect = false
 
 func _process(_delta):
+	mouse.position = get_global_mouse_position()
 	camera_pos.text = "(" + str(round(camera.position.x)) + "," + str(round(camera.position.y)) + ")"
 	if Input.is_action_just_pressed("RMB"):
 		if window_node.visible:
@@ -47,6 +50,13 @@ func _process(_delta):
 	#If Conditions
 	if window_node.if_edit.pressed == true && use_n_o == false: #If the If Condition button is pressed
 		instances.append(instance(if_con)) #Creates the if condition and adds it to the instances array
+		use_n_o = true #Sets this variable to true that makes this magically work somehow idk
+		yield(get_tree().create_timer(1), "timeout")
+		use_n_o = false
+		
+	#If Conditions
+	if window_node.move_to.pressed == true && use_n_o == false: #If the Move to button is pressed
+		instances.append(instance(move_to)) #Creates the move block and adds it to the instances array
 		use_n_o = true #Sets this variable to true that makes this magically work somehow idk
 		yield(get_tree().create_timer(1), "timeout")
 		use_n_o = false
