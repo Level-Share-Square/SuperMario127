@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -23,7 +23,8 @@
 [ext_resource path="res://scenes/player/World.gd" type="Script" id=21]
 [ext_resource path="res://scenes/player/multiplayer_menu_button.gd" type="Script" id=22]
 [ext_resource path="res://scenes/menu/levels_screen/ui/star_coin_icon.png" type="Texture" id=23]
-[ext_resource path="res://scenes/menu/levels_screen/ui/shine_icon.png" type="Texture" id=24]
+[ext_resource path="res://scenes/menu/levels_screen/shine_icon.png" type="Texture" id=24]
+[ext_resource path="res://scenes/player/shine_counter.gd" type="Script" id=25]
 [ext_resource path="res://scenes/actors/fludd_display/fludd_display.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/menu/levels_screen/ui/coin_icon.png" type="Texture" id=31]
 [ext_resource path="res://scenes/player/coin_counter.gd" type="Script" id=32]
@@ -129,6 +130,169 @@ size = 32
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 7 )
 
+[sub_resource type="Animation" id=15]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI/CoinCounter:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 29, 19 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UI/ShineCounter:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 29, -44.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("UI/SCCounter:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 120, -44.9 ) ]
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("UI/CoinCounter:rect_position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 29, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("UI/CoinCounter:rect_position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 19, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("UI/SCCounter:rect_position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 120, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("UI/SCCounter:rect_position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( -44.9, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("UI/ShineCounter:rect_position:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 29, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("UI/ShineCounter:rect_position:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( -44.9, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "shine_sc_in"
+length = 1.2
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("UI/CoinCounter:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 29, -0.25, 0, 0.25, 0, 220, -0.25, 0, 0.25, 0, 210, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("UI/CoinCounter:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 19, -0.25, 0, 0.25, 0, 19, -0.25, 0, 0.25, 0, 19, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.7 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("UI/SCCounter:rect_position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/keys = {
+"points": PoolRealArray( 120, -0.25, 0, 0.25, 0, 120, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.4, 1.2 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("UI/SCCounter:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -45, -0.25, 0, 0.25, 0, 19, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.4, 1.2 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("UI/ShineCounter:rect_position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/keys = {
+"points": PoolRealArray( 29, -0.25, 0, 0.25, 0, 29, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("UI/ShineCounter:rect_position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( -44.951, -0.25, 0, 0.25, 0, 19, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
 nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"), NodePath("Viewports/ViewportContainer/Viewport/World/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/World/Character2"), NodePath("Viewports/ViewportContainer2/Viewport/CameraP2"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds"), NodePath("Viewports/ViewportContainer2/Viewport/Backgrounds") ]
@@ -204,13 +368,10 @@ __meta__ = {
 [node name="CoinCounter" type="Control" parent="UI"]
 margin_left = 29.0
 margin_top = 19.0
-margin_right = 69.0
+margin_right = 69.0001
 margin_bottom = 59.0
 rect_rotation = -0.0704831
 script = ExtResource( 32 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 collected_height = -4.0
 
 [node name="ColorRect2" type="ColorRect" parent="UI/CoinCounter"]
@@ -219,9 +380,6 @@ margin_top = 31.0
 margin_right = 84.0
 margin_bottom = 34.0
 color = Color( 0, 0, 0, 0.25098 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="UI/CoinCounter"]
 margin_left = -14.0
@@ -252,9 +410,6 @@ margin_bottom = 48.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 4 )
 text = "0000"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CoinShadow" type="Sprite" parent="UI/CoinCounter"]
 modulate = Color( 0, 0, 0, 0.25098 )
@@ -271,8 +426,116 @@ texture = ExtResource( 31 )
 
 [node name="Tween" type="Tween" parent="UI/CoinCounter"]
 
+[node name="ShineCounter" type="Control" parent="UI"]
+margin_left = 29.0
+margin_top = -44.9
+margin_right = 68.9998
+margin_bottom = -4.9
+rect_rotation = -0.0704831
+script = ExtResource( 25 )
+
+[node name="ColorRect2" type="ColorRect" parent="UI/ShineCounter"]
+margin_left = -12.0
+margin_top = 31.0
+margin_right = 66.519
+margin_bottom = 34.0
+color = Color( 0, 0, 0, 0.25098 )
+
+[node name="ColorRect" type="ColorRect" parent="UI/ShineCounter"]
+margin_left = -14.0
+margin_top = 29.0
+margin_right = 64.519
+margin_bottom = 32.0
+
+[node name="LabelShadow" type="Label" parent="UI/ShineCounter"]
+margin_left = 25.993
+margin_top = 2.0
+margin_right = 170.993
+margin_bottom = 77.0
+rect_rotation = 0.0366689
+custom_colors/font_color = Color( 0, 0, 0, 0.25098 )
+custom_fonts/font = SubResource( 3 )
+text = "0/0"
+
+[node name="Label" type="Label" parent="UI/ShineCounter"]
+margin_left = 24.085
+margin_right = 169.085
+margin_bottom = 48.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "0/0"
+
+[node name="CoinShadow" type="Sprite" parent="UI/ShineCounter"]
+modulate = Color( 0, 0, 0, 0.25098 )
+position = Vector2( -1.191, 7.432 )
+rotation = -1.74798e-10
+scale = Vector2( 0.333, 0.333 )
+texture = ExtResource( 24 )
+offset = Vector2( 7, 7 )
+
+[node name="Coin" type="Sprite" parent="UI/ShineCounter"]
+position = Vector2( 0, 8.5 )
+scale = Vector2( 0.333, 0.333 )
+texture = ExtResource( 24 )
+
+[node name="Tween" type="Tween" parent="UI/ShineCounter"]
+
+[node name="SCCounter" type="Control" parent="UI"]
+margin_left = 120.0
+margin_top = -44.9
+margin_right = 160.0
+margin_bottom = -4.9
+rect_rotation = -0.0704831
+script = ExtResource( 32 )
+collected_height = -4.0
+
+[node name="ColorRect2" type="ColorRect" parent="UI/SCCounter"]
+margin_left = -12.0
+margin_top = 31.0
+margin_right = 66.519
+margin_bottom = 34.0
+color = Color( 0, 0, 0, 0.25098 )
+
+[node name="ColorRect" type="ColorRect" parent="UI/SCCounter"]
+margin_left = -14.0
+margin_top = 29.0
+margin_right = 64.519
+margin_bottom = 32.0
+
+[node name="LabelShadow" type="Label" parent="UI/SCCounter"]
+margin_left = 25.993
+margin_top = 2.0
+margin_right = 170.993
+margin_bottom = 77.0
+rect_rotation = 0.0366689
+custom_colors/font_color = Color( 0, 0, 0, 0.25098 )
+custom_fonts/font = SubResource( 3 )
+text = "0/0"
+
+[node name="Label" type="Label" parent="UI/SCCounter"]
+margin_left = 24.085
+margin_right = 169.085
+margin_bottom = 48.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "0/0"
+
+[node name="CoinShadow" type="Sprite" parent="UI/SCCounter"]
+modulate = Color( 0, 0, 0, 0.25098 )
+position = Vector2( -0.168, 7.432 )
+rotation = -1.74798e-10
+scale = Vector2( 0.333, 0.333 )
+texture = ExtResource( 23 )
+offset = Vector2( 7, 7 )
+
+[node name="Coin" type="Sprite" parent="UI/SCCounter"]
+position = Vector2( 0, 8.5 )
+scale = Vector2( 0.333, 0.333 )
+texture = ExtResource( 23 )
+
+[node name="Tween" type="Tween" parent="UI/SCCounter"]
+
 [node name="RedCoinCounter" type="Control" parent="UI"]
-visible = false
 margin_left = 20.0
 margin_top = 58.0
 margin_right = 60.0
@@ -322,7 +585,6 @@ texture = ExtResource( 35 )
 [node name="Tween" type="Tween" parent="UI/RedCoinCounter"]
 
 [node name="ShineShardCounter" type="Control" parent="UI"]
-visible = false
 margin_left = 20.0
 margin_top = 86.5
 margin_right = 60.0
@@ -372,6 +634,7 @@ texture = ExtResource( 45 )
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
@@ -701,7 +964,7 @@ divider_path = NodePath("../UI/Divider")
 character_scene_path = "res://scenes/actors/mario/mario.tscn"
 
 [node name="ViewportContainer" type="ViewportContainer" parent="Viewports"]
-margin_right = 384.0
+margin_right = 772.0
 margin_bottom = 432.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -711,7 +974,7 @@ __meta__ = {
 }
 
 [node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer"]
-size = Vector2( 384, 432 )
+size = Vector2( 772, 432 )
 handle_input_locally = false
 render_target_update_mode = 3
 
@@ -750,7 +1013,7 @@ collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 10
+frame = 6
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
@@ -761,6 +1024,7 @@ char_path = NodePath("../Viewport/World/Character")
 char_path = NodePath("../Viewport/World/Character")
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="Viewports"]
+visible = false
 margin_left = 388.0
 margin_right = 772.0
 margin_bottom = 432.0
@@ -774,7 +1038,7 @@ __meta__ = {
 [node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer2"]
 size = Vector2( 384, 432 )
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="CameraP2" type="Camera2D" parent="Viewports/ViewportContainer2/Viewport"]
 pause_mode = 2
@@ -824,3 +1088,7 @@ stream = ExtResource( 58 )
 
 [node name="TickEndSound" type="AudioStreamPlayer" parent="SharedSounds"]
 stream = ExtResource( 59 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 15 )
+anims/shine_sc_in = SubResource( 16 )
