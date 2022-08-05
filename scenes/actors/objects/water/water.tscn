@@ -43,8 +43,8 @@ void fragment() {
 	color = mix(color, color_tint, 0.4);
 	color.rgb = mix(vec3(0.5), color.rgb, 1.4);
 	
-	float final_sine = sine(UV, TIME / 2f, 20.5f, 5.5f) * sine(UV, TIME / 2f, 15.5f, 5.5f) * sine(UV, TIME / 2f, 30.5f, 5.5f);
-	float sine_height = (final_sine / 5f) + 0.25f;
+	float final_sine = sine(UV, TIME / 2.0f, 20.5f, 5.5f) * sine(UV, TIME / 2.0f, 15.5f, 5.5f) * sine(UV, TIME / 2.0f, 30.5f, 5.5f);
+	float sine_height = (final_sine / 5.0f) + 0.25f;
 	if (UV.y < sine_height) {
 		color.a = 0.0;
 	} else {
@@ -92,6 +92,3 @@ margin_right = 1800.0
 margin_bottom = 15.0
 mouse_filter = 2
 color = Color( 0.192157, 0.52549, 1, 0.47451 )
-__meta__ = {
-"_edit_use_anchors_": false
-}

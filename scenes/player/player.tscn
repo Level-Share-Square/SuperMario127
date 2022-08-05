@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://scenes/menu/levels_screen/ui/star_coin_icon.png" type="Texture" id=23]
 [ext_resource path="res://scenes/menu/levels_screen/shine_icon.png" type="Texture" id=24]
 [ext_resource path="res://scenes/player/shine_counter.gd" type="Script" id=25]
+[ext_resource path="res://scenes/player/sccounter.gd" type="Script" id=26]
 [ext_resource path="res://scenes/actors/fludd_display/fludd_display.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/menu/levels_screen/ui/coin_icon.png" type="Texture" id=31]
 [ext_resource path="res://scenes/player/coin_counter.gd" type="Script" id=32]
@@ -142,7 +143,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 29, 19 ) ]
+"values": [ Vector2( 210, 19 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("UI/ShineCounter:rect_position")
@@ -154,7 +155,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 29, -44.9 ) ]
+"values": [ Vector2( 29, 19 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("UI/SCCounter:rect_position")
@@ -166,7 +167,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 120, -44.9 ) ]
+"values": [ Vector2( 120, 19 ) ]
 }
 tracks/3/type = "bezier"
 tracks/3/path = NodePath("UI/CoinCounter:rect_position:x")
@@ -175,7 +176,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 29, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 210, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/4/type = "bezier"
@@ -205,7 +206,7 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"points": PoolRealArray( -44.9, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 19, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/7/type = "bezier"
@@ -225,13 +226,53 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"points": PoolRealArray( -44.9, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 19, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("UI/RedCoinCounter:rect_position:x")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 20, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("UI/RedCoinCounter:rect_position:y")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 60, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("UI/ShineShardCounter:rect_position:x")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 20, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/12/type = "bezier"
+tracks/12/path = NodePath("UI/ShineShardCounter:rect_position:y")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"points": PoolRealArray( 90, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=16]
 resource_name = "shine_sc_in"
-length = 1.2
+length = 1.5
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("UI/CoinCounter:rect_position:x")
 tracks/0/interp = 1
@@ -239,8 +280,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 29, -0.25, 0, 0.25, 0, 220, -0.25, 0, 0.25, 0, 210, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.7, 1.1 )
+"points": PoolRealArray( 210, -0.25, 0, 0.25, 0, 210, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.2, 0.8 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath("UI/CoinCounter:rect_position:y")
@@ -249,8 +290,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 19, -0.25, 0, 0.25, 0, 19, -0.25, 0, 0.25, 0, 19, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.3, 0.7 )
+"points": PoolRealArray( -44.951, -0.25, 0, 0.25, 0, 19, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.2, 0.8 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("UI/SCCounter:rect_position:x")
@@ -260,7 +301,7 @@ tracks/2/imported = false
 tracks/2/enabled = false
 tracks/2/keys = {
 "points": PoolRealArray( 120, -0.25, 0, 0.25, 0, 120, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.4, 1.2 )
+"times": PoolRealArray( 0.1, 0.7 )
 }
 tracks/3/type = "bezier"
 tracks/3/path = NodePath("UI/SCCounter:rect_position:y")
@@ -270,7 +311,7 @@ tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
 "points": PoolRealArray( -45, -0.25, 0, 0.25, 0, 19, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.4, 1.2 )
+"times": PoolRealArray( 0.1, 0.7 )
 }
 tracks/4/type = "bezier"
 tracks/4/path = NodePath("UI/ShineCounter:rect_position:x")
@@ -280,7 +321,7 @@ tracks/4/imported = false
 tracks/4/enabled = false
 tracks/4/keys = {
 "points": PoolRealArray( 29, -0.25, 0, 0.25, 0, 29, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.8 )
+"times": PoolRealArray( 0, 0.5 )
 }
 tracks/5/type = "bezier"
 tracks/5/path = NodePath("UI/ShineCounter:rect_position:y")
@@ -290,7 +331,151 @@ tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
 "points": PoolRealArray( -44.951, -0.25, 0, 0.25, 0, 19, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.8 )
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("UI/RedCoinCounter:rect_position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 20, -0.25, 0, 0.25, 0, 20, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("UI/RedCoinCounter:rect_position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 8, -0.25, 0, 0.25, 0, 60, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("UI/ShineShardCounter:rect_position:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 20, -0.25, 0, 0.25, 0, 20, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("UI/ShineShardCounter:rect_position:y")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 35, -0.25, 0, 0.25, 0, 90, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "shine_sc_out"
+length = 1.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("UI/CoinCounter:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 210, -0.25, 0, 0.25, 0, 210, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.2, 0.8 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("UI/CoinCounter:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 19, -0.25, 0, 0.25, 0, -44.951, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.2, 0.8 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("UI/SCCounter:rect_position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/keys = {
+"points": PoolRealArray( 120, -0.25, 0, 0.25, 0, 120, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.1, 0.7 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("UI/SCCounter:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 19, -0.25, 0, 0.25, 0, -45, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.1, 0.7 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("UI/ShineCounter:rect_position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/keys = {
+"points": PoolRealArray( 29, -0.25, 0, 0.25, 0, 29, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("UI/ShineCounter:rect_position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 19, -0.25, 0, 0.25, 0, -44.951, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("UI/RedCoinCounter:rect_position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 20, -0.25, 0, 0.25, 0, 20, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("UI/RedCoinCounter:rect_position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 60, -0.25, 0, 0.25, 0, 8, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("UI/ShineShardCounter:rect_position:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 20, -0.25, 0, 0.25, 0, 20, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("UI/ShineShardCounter:rect_position:y")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 90, -0.25, 0, 0.25, 0, 35, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
 }
 
 [node name="Player" type="Node2D"]
@@ -366,9 +551,9 @@ __meta__ = {
 }
 
 [node name="CoinCounter" type="Control" parent="UI"]
-margin_left = 29.0
+margin_left = 210.0
 margin_top = 19.0
-margin_right = 69.0001
+margin_right = 250.0
 margin_bottom = 59.0
 rect_rotation = -0.0704831
 script = ExtResource( 32 )
@@ -386,9 +571,6 @@ margin_left = -14.0
 margin_top = 29.0
 margin_right = 82.0
 margin_bottom = 32.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelShadow" type="Label" parent="UI/CoinCounter"]
 margin_left = 22.0
@@ -414,7 +596,6 @@ text = "0000"
 [node name="CoinShadow" type="Sprite" parent="UI/CoinCounter"]
 modulate = Color( 0, 0, 0, 0.25098 )
 position = Vector2( 0, 8.5 )
-rotation = -1.74798e-10
 scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 31 )
 offset = Vector2( 7, 7 )
@@ -428,9 +609,9 @@ texture = ExtResource( 31 )
 
 [node name="ShineCounter" type="Control" parent="UI"]
 margin_left = 29.0
-margin_top = -44.9
+margin_top = 19.0
 margin_right = 68.9998
-margin_bottom = -4.9
+margin_bottom = 59.0
 rect_rotation = -0.0704831
 script = ExtResource( 25 )
 
@@ -467,8 +648,7 @@ text = "0/0"
 
 [node name="CoinShadow" type="Sprite" parent="UI/ShineCounter"]
 modulate = Color( 0, 0, 0, 0.25098 )
-position = Vector2( -1.191, 7.432 )
-rotation = -1.74798e-10
+position = Vector2( -0.131, 7.432 )
 scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 24 )
 offset = Vector2( 7, 7 )
@@ -482,12 +662,11 @@ texture = ExtResource( 24 )
 
 [node name="SCCounter" type="Control" parent="UI"]
 margin_left = 120.0
-margin_top = -44.9
+margin_top = 19.0
 margin_right = 160.0
-margin_bottom = -4.9
+margin_bottom = 59.0
 rect_rotation = -0.0704831
-script = ExtResource( 32 )
-collected_height = -4.0
+script = ExtResource( 26 )
 
 [node name="ColorRect2" type="ColorRect" parent="UI/SCCounter"]
 margin_left = -12.0
@@ -522,8 +701,7 @@ text = "0/0"
 
 [node name="CoinShadow" type="Sprite" parent="UI/SCCounter"]
 modulate = Color( 0, 0, 0, 0.25098 )
-position = Vector2( -0.168, 7.432 )
-rotation = -1.74798e-10
+position = Vector2( 0.143, 7.432 )
 scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 23 )
 offset = Vector2( 7, 7 )
@@ -537,14 +715,11 @@ texture = ExtResource( 23 )
 
 [node name="RedCoinCounter" type="Control" parent="UI"]
 margin_left = 20.0
-margin_top = 58.0
+margin_top = 60.0
 margin_right = 60.0
-margin_bottom = 98.0
+margin_bottom = 100.0
 rect_rotation = -0.0704831
 script = ExtResource( 36 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 collected_height = -4.0
 
 [node name="LabelShadow" type="Label" parent="UI/RedCoinCounter"]
@@ -586,14 +761,11 @@ texture = ExtResource( 35 )
 
 [node name="ShineShardCounter" type="Control" parent="UI"]
 margin_left = 20.0
-margin_top = 86.5
+margin_top = 90.0
 margin_right = 60.0
-margin_bottom = 126.5
+margin_bottom = 130.0
 rect_rotation = -0.0704831
 script = ExtResource( 44 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LabelShadow" type="Label" parent="UI/ShineShardCounter"]
 margin_left = 26.046
@@ -634,7 +806,6 @@ texture = ExtResource( 45 )
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
@@ -855,6 +1026,7 @@ bbcode_text = "[center]Unnamed Shine[/center]"
 text = "Unnamed Shine"
 
 [node name="ShineCount" type="RichTextLabel" parent="UI/PauseScreen/ShineInfo"]
+visible = false
 margin_left = 50.0
 margin_top = 85.0
 margin_right = 640.0
@@ -865,6 +1037,7 @@ bbcode_text = "0/0"
 text = "0/0"
 
 [node name="SCCount" type="RichTextLabel" parent="UI/PauseScreen/ShineInfo"]
+visible = false
 margin_left = 50.0
 margin_top = 129.0
 margin_right = 640.0
@@ -875,11 +1048,13 @@ bbcode_text = "0/0"
 text = "0/0"
 
 [node name="Shine" type="Sprite" parent="UI/PauseScreen/ShineInfo"]
+visible = false
 position = Vector2( 25, 100 )
 scale = Vector2( 0.366319, 0.385599 )
 texture = ExtResource( 24 )
 
 [node name="SC" type="Sprite" parent="UI/PauseScreen/ShineInfo"]
+visible = false
 position = Vector2( 22.864, 145 )
 scale = Vector2( 0.366319, 0.385599 )
 texture = ExtResource( 23 )
@@ -1013,7 +1188,7 @@ collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 6
+frame = 0
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
@@ -1092,3 +1267,4 @@ stream = ExtResource( 59 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 15 )
 anims/shine_sc_in = SubResource( 16 )
+anims/shine_sc_out = SubResource( 17 )

@@ -9,7 +9,7 @@
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
-uniform float water_height : hint_range(0f, 1f);
+uniform float water_height : hint_range(0.0f, 1.0f);
 
 void fragment() {
 	if (texture(TEXTURE, UV) == vec4(1, 1, 1, 1)) {
@@ -23,7 +23,6 @@ void fragment() {
 		COLOR = vec4(1, 1, 1, 0)
 	}
 }"
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
@@ -105,17 +104,14 @@ margin_right = 143.2
 margin_bottom = 147.2
 rect_scale = Vector2( 1.1, 1.1 )
 texture = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="CanvasLayer/HealthUI"]
 margin_left = 78.0
 margin_top = 64.0
 margin_right = 123.0
 margin_bottom = 147.0
-custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
 text = "8"
 __meta__ = {
 "_edit_use_anchors_": false

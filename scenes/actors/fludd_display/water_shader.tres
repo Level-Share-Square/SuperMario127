@@ -8,7 +8,7 @@ const vec4 WATER_MIDDLE_TOP_COLOR = vec4(0.5, 0.67, 1, 1);
 const vec4 WATER_TOP_COLOR = vec4(0.725, 0.89, 1, 1);
 const vec4 WATER_BOTTOM_TOP_COLOR = vec4(0.26, 0.45, 0.88, 1);
 
-uniform float water_height : hint_range(0f, 1f);
+uniform float water_height : hint_range(0.0f, 1.0f);
 
 void fragment() {
 	if (texture(TEXTURE, UV) == vec4(1, 1, 1, 1)) {

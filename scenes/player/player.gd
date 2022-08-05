@@ -9,6 +9,7 @@ export var character2 : NodePath
 export var camera : NodePath
 
 var mode = 0
+var ssc_displayed = true
 
 export var coin_frame : int
 const coin_anim_fps = 12
@@ -18,10 +19,14 @@ export var switch_timer : float = 0.0
 export var sound_timer : float = 0.0
 
 func _process(_delta):
+	print(ssc_displayed)
 	if Input.is_action_just_pressed("1"):
-		anim_player.play("shine_sc_in")
-	else:
-		anim_player.play("RESET")
+		if ssc_displayed == true:
+			anim_player.play("shine_sc_out")
+			ssc_displayed = false
+		elif ssc_displayed == false:
+			anim_player.play("shine_sc_in")
+			ssc_displayed = true
 	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
 
 func _physics_process(delta):

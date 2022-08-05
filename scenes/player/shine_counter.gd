@@ -11,10 +11,11 @@ var normal_height : float
 
 var time_until_fall = 0.0
 
-func _ready():
-	normal_height = label.rect_position.y
-
-func populate_info_panel(level_info : LevelInfo = null) -> void:
+func _physics_process(delta):
+	populate_info_panel()
+	label_shadow.text = label.text
+func populate_info_panel() -> void:
+		var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
 
 		# Only count shine sprites that have show_in_menu on
 		var total_shine_count := 0
