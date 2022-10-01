@@ -26,13 +26,13 @@ func get_objects_node():
 func set_tile(x: int, y:int, layer: int, tileset_id: int, tile_id: int, palette_id : int = 0):
 	#print("set ",x," ",y)
 	tilemaps_node.set_tile(x, y, layer, tileset_id, tile_id, palette_id)
-	
+
 func get_tile(x: int, y:int, layer: int):
 	return tilemaps_node.get_tile_in_data(x, y, layer)
 
 func create_object(object, add_to_data):
 	return objects_node.create_object(object, add_to_data)
-	
+
 func destroy_object(object, remove_from_data):
 	objects_node.destroy_object(object, remove_from_data)
 
@@ -43,28 +43,76 @@ func destroy_object_at_position(position, remove_from_data):
 	var object_node = objects_node.get_object_at_position(position)
 	if object_node:
 		objects_node.destroy_object(object_node, remove_from_data)
-		
-func get_objects_overlapping_position(_position):
+
+func animated_sprite_get_rect(node: AnimatedSprite) -> Rect2:
+	# fuck oh god why fuck fuck
+	var anim_id : String = node.animation
+	var anim_frame : int = node.frame
+	
+	var texture : Texture = node.frames.get_frame(anim_id, anim_frame)
+	var rect := Rect2(0, 0, texture.get_width(), texture.get_height())
+	
+	if node.centered:
+		rect.position -= rect.size / 2
+	rect.position += node.offset
+	
+	return rect
+
+# -1 = can't do precise overlap (no sprites)
+# 0 = no overlap
+# 1 = overlap
+func precise_object_overlap(object_node: Node, point: Vector2) -> int:
+	var ret_value : int = -1
+	
+	if object_node is Sprite:
+		# Pixel perfect hitbox
+		#return 1 if object_node.is_pixel_opaque(object_node.to_local(point)) else 0
+		return 1 if object_node.get_rect().has_point(object_node.to_local(point)) else 0
+	if object_node is AnimatedSprite:
+		return 1 if animated_sprite_get_rect(object_node).has_point(object_node.to_local(point)) else 0
+	if object_node is NinePatchRect:
+		# grow by 10 to make it easier to select moving platforms
+		return 1 if object_node.get_global_rect().grow(10).has_point(point) else 0
+	
+	for child in object_node.get_children():
+		ret_value = max(ret_value, precise_object_overlap(child, point))
+		if ret_value == 1: break
+	
+	return ret_value
+
+
+var __sort_point := Vector2.ZERO
+func sort_by_dist_to_point(a: Node2D, b: Node2D) -> bool:
+	return a.position.distance_squared_to(__sort_point) < b.position.distance_squared_to(__sort_point)
+
+func get_objects_overlapping_position(point: Vector2):
 	var found_objects = []
 	for object_node in objects_node.get_children():
-		if (object_node.position - get_global_mouse_position()).length() <= 16:
-			found_objects.append(object_node)	
+		var overlap : int = precise_object_overlap(object_node, point)
+		
+		if overlap == -1:
+			overlap = 1 if (object_node.position - point).length() <= 20 else 0
+		
+		if overlap == 1:
+			found_objects.append(object_node)
+	
+	# Sorting from distance to point hopefully improves selecting overlapping objects
+	__sort_point = point
+	found_objects.sort_custom(self, "sort_by_dist_to_point")
+	
 	return found_objects
 
-func destroy_objects_overlapping_position(_position, remove_from_data):
-	var objectsToDelete = []
-	for object_node in objects_node.get_children():
-		if (object_node.position - get_global_mouse_position()).length() <= 16:
-			objectsToDelete.append(object_node)	
+func destroy_objects_overlapping_position(point: Vector2, remove_from_data):
+	var objectsToDelete = get_objects_overlapping_position(point)
+	
 	for object_node in objectsToDelete:
 		if remove_from_data:
 			level_area.objects.erase(object_node.level_object)
 		object_node.queue_free()
-	pass
-		
+
 func update_tilemaps():
 	tilemaps_node.update_tilemaps()
-	
+
 func toggle_layer_transparency(current_layer, is_transparent):
 	var index = 3 # has to be done because for some reason the indices are wrong for the layers
 	for tilemap in tilemaps_node.get_children():
@@ -81,6 +129,6 @@ func toggle_layer_transparency(current_layer, is_transparent):
 
 func move_object_to_back(object):
 	objects_node.move_object_to_back(object)
-	
+
 func move_object_to_front(object):
 	objects_node.move_object_to_front(object)
