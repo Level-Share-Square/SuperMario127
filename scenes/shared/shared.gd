@@ -58,6 +58,15 @@ func animated_sprite_get_rect(node: AnimatedSprite) -> Rect2:
 	
 	return rect
 
+func sprite_is_pixel_opaque_with_margin(sprite: Sprite, point: Vector2, margin: float) -> bool:
+	if sprite.is_pixel_opaque(point): return true
+	if sprite.is_pixel_opaque(point + Vector2(-margin, 0)): return true
+	if sprite.is_pixel_opaque(point + Vector2( margin, 0)): return true
+	if sprite.is_pixel_opaque(point + Vector2(0, -margin)): return true
+	if sprite.is_pixel_opaque(point + Vector2(0,  margin)): return true
+	
+	return false
+
 # -1 = can't do precise overlap (no sprites)
 # 0 = no overlap
 # 1 = overlap
@@ -66,8 +75,8 @@ func precise_object_overlap(object_node: Node, point: Vector2) -> int:
 	
 	if object_node is Sprite:
 		# Pixel perfect hitbox
-		#return 1 if object_node.is_pixel_opaque(object_node.to_local(point)) else 0
-		return 1 if object_node.get_rect().has_point(object_node.to_local(point)) else 0
+		# object_node.is_pixel_opaque(object_node.to_local(point))
+		return 1 if sprite_is_pixel_opaque_with_margin(object_node, object_node.to_local(point), 1.0) else 0
 	if object_node is AnimatedSprite:
 		return 1 if animated_sprite_get_rect(object_node).has_point(object_node.to_local(point)) else 0
 	if object_node is NinePatchRect:
