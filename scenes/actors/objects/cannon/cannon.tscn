@@ -206,7 +206,7 @@ void fragment()
 	
 	if (vertexY > float(hidePosition))
 	{
-		COLOR.a = 0f;
+		COLOR.a = 0.0;
 	}
 }"
 
@@ -364,9 +364,9 @@ position = Vector2( 0, -4 )
 shape = SubResource( 14 )
 
 [node name="NearbyCharacterDetection" type="Area2D" parent="."]
-monitorable = false
 collision_layer = 0
 collision_mask = 2147483650
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NearbyCharacterDetection"]
 position = Vector2( 0, -22 )
