@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/menu/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://scenes/menu/main_menu/logo.png" type="Texture" id=4]
+[ext_resource path="res://assets/misc/new127icon.png" type="Texture" id=4]
 [ext_resource path="res://scenes/menu/shine_select_screen/frame_top.png" type="Texture" id=5]
 [ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/editor/window/LogInWindow.tscn" type="PackedScene" id=7]
@@ -55,30 +55,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Logo:rect_position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 370, 106 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Logo:rect_scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0.15, 0.15 ) ]
-}
 
 [sub_resource type="Animation" id=10]
 length = 0.6
@@ -93,18 +69,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 2, 0.5 ),
 "update": 0,
 "values": [ Vector2( -309, 0 ), Vector2( 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Logo:rect_position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4, 0.6 ),
-"transitions": PoolRealArray( 0.5, 0.5, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 370, -210 ), Vector2( 370, -210 ), Vector2( 370, 121 ), Vector2( 370, 106 ) ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -121,18 +85,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( -309, 0 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Logo:rect_position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 0.5, 1 ),
-"update": 0,
-"values": [ Vector2( 370, 111 ), Vector2( 370, -210 ) ]
-}
 
 [sub_resource type="Animation" id=12]
 length = 0.4
@@ -148,18 +100,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( -309, 0 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Logo:rect_position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 0.63728, 1 ),
-"update": 0,
-"values": [ Vector2( 370, 111 ), Vector2( 768, 111 ) ]
-}
 
 [sub_resource type="Animation" id=13]
 length = 0.6
@@ -174,18 +114,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 2, 0.5 ),
 "update": 0,
 "values": [ Vector2( -309, 0 ), Vector2( 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Logo:rect_position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4, 0.6 ),
-"transitions": PoolRealArray( 0.5, 0.5, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 370, -210 ), Vector2( 370, -210 ), Vector2( 370, 121 ), Vector2( 370, 106 ) ]
 }
 
 [node name="MainMenuScreen" type="Control"]
@@ -208,9 +136,6 @@ margin_bottom = 864.0
 rect_rotation = -90.0
 rect_scale = Vector2( 1, 2.1 )
 texture = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 margin_left = 32.0
@@ -271,29 +196,6 @@ custom_styles/pressed = SubResource( 5 )
 custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 
-[node name="Logo" type="TextureRect" parent="."]
-margin_left = 370.0
-margin_top = 106.0
-margin_right = 2570.0
-margin_bottom = 1506.0
-rect_scale = Vector2( 0.15, 0.15 )
-texture = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Shadow" type="TextureRect" parent="Logo"]
-modulate = Color( 0, 0, 0, 0.501961 )
-show_behind_parent = true
-margin_left = 64.0
-margin_top = 64.0
-margin_right = 2264.0
-margin_bottom = 1464.0
-texture = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 9 )
 anims/trans_out_LevelsScreen_MainMenuScreen = SubResource( 10 )
@@ -324,3 +226,24 @@ margin_left = 197.0
 margin_top = 95.0
 margin_right = 1250.0
 margin_bottom = 585.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 318.0
+margin_top = 68.0
+margin_right = 2518.0
+margin_bottom = 1468.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 4 )
+stretch_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="TextureRect"]
+modulate = Color( 0.439216, 0.396078, 0.282353, 1 )
+self_modulate = Color( 0.466667, 0.403922, 0.239216, 0.294118 )
+show_behind_parent = true
+margin_left = 100.0
+margin_top = 95.0
+margin_right = 10590.0
+margin_bottom = 6770.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 4 )
+stretch_mode = 1

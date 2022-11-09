@@ -9,6 +9,7 @@ onready var states_node = $States
 onready var nozzles_node = $Nozzles
 onready var powerups_node = $Powerups
 onready var anim_player : AnimationPlayer = $AnimationPlayer
+onready var cloudcontain = $CloudContainer
 
 onready var sprite : AnimatedSprite = $Sprite
 onready var fludd_sprite : AnimatedSprite = $Sprite/Fludd
