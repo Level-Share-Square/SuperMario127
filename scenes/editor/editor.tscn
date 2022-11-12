@@ -731,7 +731,7 @@ Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
 Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
 Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 Button/constants/hseparation = 2
-Button/fonts/font = null
+Button/fonts/font = ExtResource( 164 )
 Button/styles/disabled = ExtResource( 161 )
 Button/styles/focus = ExtResource( 163 )
 Button/styles/hover = ExtResource( 163 )
@@ -744,7 +744,7 @@ WindowDialog/constants/close_h_ofs = 72
 WindowDialog/constants/close_v_ofs = 34
 WindowDialog/constants/scaleborder_size = 4
 WindowDialog/constants/title_height = 20
-WindowDialog/fonts/title_font = null
+WindowDialog/fonts/title_font = ExtResource( 164 )
 WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/PopupPanel = null
@@ -1723,6 +1723,16 @@ items_in_sequence = 2
 index_in_sequence = 1
 icon = ExtResource( 104 )
 preview = ExtResource( 105 )
+
+[node name="WaterBalloon" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 98
+is_object = true
+object_center = Vector2( 8, 0 )
+tile_mode_offset = Vector2( 0, -8 )
+tile_mode_step = 16
+icon = ExtResource( 137 )
+preview = ExtResource( 137 )
 
 [node name="HoverBox" type="Node" parent="PlaceableItems/CollectiblesGroup"]
 script = ExtResource( 24 )

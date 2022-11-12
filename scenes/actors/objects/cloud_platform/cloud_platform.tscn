@@ -27,9 +27,6 @@ patch_margin_left = 24
 patch_margin_right = 24
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 visible = false

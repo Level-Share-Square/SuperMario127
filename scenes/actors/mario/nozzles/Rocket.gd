@@ -2,21 +2,14 @@ extends Nozzle
 
 class_name RocketNozzle
 
-onready var cloud = preload("res://scenes/actors/objects/cloud_platform/cloud_platform.tscn")
-
-export var clouds = 2
-var cloud_index = "two"
-var can_cloud_2 = true
-var temp_pos_2_y = 0
-var temp_pos_2_x = 0
-var can_cloud_1 = true
-var temp_pos_1_y = 0
-var temp_pos_1_x = 0
+export var boost_power := 5000
+export var depletion := 100
+export var fuel_depletion := 5
 var last_activated = false
 var last_charged = false
 var last_state = null
 
-var accel = 0
+var accel = 825
 var charge = 0
 var rotation_interpolation_speed = 35
 var deactivate_frames = 0
@@ -32,39 +25,109 @@ func is_state(state):
 	return character.state == character.get_state_node(state)
 		
 func _activated_update(delta):
-	match cloud_index:
-		"two":
-			var cloud_2 = cloud.instance()
-			if can_cloud_2 == true:
-				character.cloudcontain.add_child(cloud_2)
-				if temp_pos_2_y == 0:
-					temp_pos_2_y = cloud_2.global_position.y + 30
-				if temp_pos_2_x == 0:
-					temp_pos_2_x = cloud_2.global_position.x
-				can_cloud_2 = false
-			cloud_2.set_as_toplevel(true)
-			cloud_2.global_position.y = temp_pos_2_y
-			cloud_2.global_position.x = temp_pos_2_x
-			yield(get_tree().create_timer(0.3), "timeout")
-			cloud_index = "one"
-			yield(get_tree().create_timer(4.7), "timeout")
-			cloud_2.queue_free()
-		"one":
-			var cloud_1 = cloud.instance()
-			if can_cloud_1 == true:
-				character.cloudcontain.add_child(cloud_1)
-				if temp_pos_1_y == 0:
-					temp_pos_1_y = cloud_1.global_position.y + 30
-				if temp_pos_1_x == 0:
-					temp_pos_1_x = cloud_1.global_position.x
-				can_cloud_1 = false
-			cloud_1.set_as_toplevel(true)
-			cloud_1.global_position.y = temp_pos_1_y
-			cloud_1.global_position.x = temp_pos_1_x
-			yield(get_tree().create_timer(0.3), "timeout")
-			cloud_index = "zero"
-			yield(get_tree().create_timer(4.7), "timeout")
-			cloud_1.queue_free()
+	if last_activated and deactivate_frames > 0:
+		return
+	if charge < 0.75:
+		if !character.fludd_charge_sound.is_playing():
+			character.fludd_charge_sound.play()
+		charge += delta
+		character.fludd_sprite.modulate = Color(1, 1 - (charge * 1.4), 1 - (charge * 1.4))
+		character.fludd_sprite.offset = Vector2(rand_range(-1, 1), rand_range(-1, 1)) * charge
+		return
 		
+	cooldown_time = 1
+	character.fludd_sprite.offset = Vector2(0, 0)
+	character.fludd_sprite.modulate = Color(1, 1, 1)
+	character.fludd_charge_sound.stop()
+	character.fludd_boost_sound.play()
+	charge = 0
+	if !character.swimming:
+		character.stamina = 0
+	character.get_state_node("JumpState").ledge_buffer = 0 # Disable coyote time, which allowed for a "double jump" that was weaker than the actual blast
+	deactivate_frames = 30
+		
+	if !is_state("DiveState") and !is_state("SlideState"):
+		if character.facing_direction == 1:
+			character.sprite.animation = "jumpRight"
+		else:
+			character.sprite.animation = "jumpLeft"
+		
+	if (character.state == null or !character.state.override_rotation) and !character.rotating_jump:
+		override_rotation = true
+		var sprite = character.sprite
+		var sprite_rotation = (character.velocity.x / character.move_speed) * 8
+		sprite.rotation_degrees = lerp(sprite.rotation_degrees, sprite_rotation, delta * rotation_interpolation_speed)
+	else:
+		override_rotation = false
+			
+	var normal = character.sprite.transform.y.normalized()
+	character.jump_animation = 0
+	
+	var power = -boost_power
+	if abs(character.velocity.x) < abs(power * normal.x) * 3.5:
+		#character.velocity.x = sqrt(abs(character.velocity.x)) * sign(character.velocity.x)
+		character.velocity.x -= accel * normal.x
+	
+	if (character.velocity.y > power * normal.y and normal.y > 0) or (character.velocity.y < power * normal.y and normal.y < 0):
+		character.velocity.y = sqrt(abs(character.velocity.y)) * sign(character.velocity.y)
+		character.velocity.y -= accel * normal.y
+	
+	if character.fuel > 0 and !character.swimming:
+		character.fuel -= fuel_depletion
+		if character.fuel <= 0:
+			character.fuel = 0
+			
+	if character.move_direction == 0 and !character.is_grounded():
+		if (character.velocity.x > 0):
+			character.velocity.x -= 1
+		elif (character.velocity.x < 0):
+			character.velocity.x += 1
+	
 func _update(_delta):
-	print(cloud_index)
+	if cooldown_time > 0:
+		character.fludd_charge_sound.stop()
+	
+	if character.is_grounded():
+		character.stamina = 100
+
+	if !activated:
+		override_rotation = false
+	
+	if !activated:
+		character.fludd_sprite.modulate = Color(1, 1 - (charge * 1.4), 1 - (charge * 1.4))
+
+	last_state = character.state
+
+func _general_update(delta):
+	if character.is_grounded():
+		cooldown_time = 0
+	
+	if cooldown_time > 0:
+		cooldown_time -= delta
+		if cooldown_time <= 0:
+			cooldown_time = 0
+	
+	if activated and !last_activated and character.stamina == 0:
+		character.rocket_particles.emitting = true
+		character.fludd_sound.play(((100 - character.stamina) / 100) * 2.79)
+		last_activated = true
+	elif last_activated:
+		if deactivate_frames > 0:
+			deactivate_frames -= 1
+		else:
+			character.rocket_particles.emitting = false
+			character.fludd_sound.stop()
+			character.fludd_sprite.offset = Vector2(0, 0)
+			last_activated = false
+	
+	if !activated:
+		if last_charged:
+			character.fludd_charge_sound.stop()
+		
+		charge -= delta * 2
+		character.fludd_sprite.modulate = Color(1, 1 - (charge * 1.4), 1 - (charge * 1.4))
+		character.fludd_sprite.offset = Vector2(0, 0)
+		
+		if charge < 0:
+			charge = 0
+	last_charged = activated
