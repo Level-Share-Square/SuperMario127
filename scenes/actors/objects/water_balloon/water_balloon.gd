@@ -20,6 +20,8 @@ func _set_property_values():
 
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
+		$Particles2D.emitting = false
+		$Particles2D2.emitting = true
 		sound.play()
 		sprite.visible = false
 		respawn_timer = 40.0
@@ -32,6 +34,7 @@ func collect(body):
 		collected = true
 
 func _ready():
+	$AnimationPlayer.play("bpb")
 	if is_preview:
 		z_index = 0
 		sprite.z_index = 0

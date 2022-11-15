@@ -201,6 +201,7 @@ texture = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 17 )
+frame = 3
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]

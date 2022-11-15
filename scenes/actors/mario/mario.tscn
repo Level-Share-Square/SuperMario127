@@ -1,4 +1,4 @@
-[gd_scene load_steps=160 format=2]
+[gd_scene load_steps=164 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -107,7 +107,7 @@ particles_anim_loop = false
 offsets = PoolRealArray( 0, 0.75, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.45098, 0.898039, 0.996078, 1, 0.133333, 0.552941, 0.882353, 0 )
 
-[sub_resource type="GradientTexture" id=10]
+[sub_resource type="GradientTexture" id=88]
 gradient = SubResource( 9 )
 
 [sub_resource type="Curve" id=11]
@@ -115,7 +115,7 @@ min_value = 0.75
 max_value = 1.5
 _data = [ Vector2( 0, 1.41441 ), 0.0, -0.181566, 0, 0, Vector2( 0.5, 0.75 ), -1.23892, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=12]
+[sub_resource type="CurveTexture" id=89]
 curve = SubResource( 11 )
 
 [sub_resource type="ParticlesMaterial" id=13]
@@ -131,8 +131,8 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = 400.0
 scale_random = 1.0
-scale_curve = SubResource( 12 )
-color_ramp = SubResource( 10 )
+scale_curve = SubResource( 89 )
+color_ramp = SubResource( 88 )
 hue_variation_random = 0.15
 anim_offset = 1.0
 anim_offset_random = 1.0
@@ -158,6 +158,21 @@ linear_accel = 400.0
 scale_curve = SubResource( 16 )
 color_ramp = SubResource( 15 )
 hue_variation_random = 0.15
+
+[sub_resource type="Gradient" id=90]
+offsets = PoolRealArray( 0, 0.75, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.45098, 0.898039, 0.996078, 1, 0.133333, 0.552941, 0.882353, 0 )
+
+[sub_resource type="GradientTexture" id=10]
+gradient = SubResource( 90 )
+
+[sub_resource type="Curve" id=91]
+min_value = 0.75
+max_value = 1.5
+_data = [ Vector2( 0, 1.41441 ), 0.0, -0.181566, 0, 0, Vector2( 0.5, 0.75 ), -1.23892, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=12]
+curve = SubResource( 91 )
 
 [sub_resource type="ParticlesMaterial" id=18]
 lifetime_randomness = 0.79
@@ -189,13 +204,13 @@ particles_anim_loop = false
 offsets = PoolRealArray( 0, 0.328859, 1 )
 colors = PoolColorArray( 1, 0.701961, 0.701961, 1, 0.996078, 0.858824, 1, 0.627451, 0.99, 0.996953, 1, 0.00392157 )
 
-[sub_resource type="GradientTexture" id=21]
+[sub_resource type="GradientTexture" id=86]
 gradient = SubResource( 20 )
 
 [sub_resource type="Curve" id=22]
 _data = [ Vector2( 0, 0.515766 ), 0.0, 0.0, 0, 0, Vector2( 0.380711, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=23]
+[sub_resource type="CurveTexture" id=87]
 curve = SubResource( 22 )
 
 [sub_resource type="ParticlesMaterial" id=24]
@@ -211,8 +226,8 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = -100.0
 damping = 100.0
-scale_curve = SubResource( 23 )
-color_ramp = SubResource( 21 )
+scale_curve = SubResource( 87 )
+color_ramp = SubResource( 86 )
 hue_variation = 1.0
 
 [sub_resource type="Shader" id=25]
@@ -1111,7 +1126,7 @@ playing = true
 visible = false
 frames = ExtResource( 44 )
 animation = "swimming"
-frame = 6
+frame = 3
 playing = true
 script = ExtResource( 63 )
 
@@ -1654,14 +1669,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 14
+frame = 9
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 10
+frame = 12
 speed_scale = 3.0
 playing = true
 
@@ -1682,7 +1697,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 6
+frame = 3
 playing = true
 script = ExtResource( 34 )
 
@@ -1690,7 +1705,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 8
+frame = 5
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]

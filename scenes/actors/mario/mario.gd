@@ -553,6 +553,9 @@ func player_hit(body : Node) -> void:
 
 func _process(delta: float) -> void:
 	
+	if fuel <= 0:
+		fuel = 0
+	
 	if next_position:
 		position = position.linear_interpolate(next_position, fps_util.PHYSICS_DELTA * sync_interpolation_speed)
 

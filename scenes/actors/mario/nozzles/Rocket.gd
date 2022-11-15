@@ -35,7 +35,7 @@ func _activated_update(delta):
 		character.fludd_sprite.offset = Vector2(rand_range(-1, 1), rand_range(-1, 1)) * charge
 		return
 		
-	cooldown_time = 1
+	cooldown_time = 0.2
 	character.fludd_sprite.offset = Vector2(0, 0)
 	character.fludd_sprite.modulate = Color(1, 1, 1)
 	character.fludd_charge_sound.stop()

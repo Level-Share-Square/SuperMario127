@@ -1,4 +1,4 @@
-[gd_scene load_steps=709 format=2]
+[gd_scene load_steps=711 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -683,6 +683,8 @@
 [ext_resource path="res://scenes/actors/objects/on_off_floor_switch/palettes/6/preview.png" type="Texture" id=681]
 [ext_resource path="res://scenes/actors/objects/on_off_floor_switch/palettes/1/preview.png" type="Texture" id=682]
 [ext_resource path="res://scenes/actors/objects/coral/Coral1.png" type="Texture" id=683]
+[ext_resource path="res://scenes/actors/objects/water_balloon/2.png" type="Texture" id=684]
+[ext_resource path="res://scenes/actors/objects/water_balloon/2small.png" type="Texture" id=685]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1731,8 +1733,8 @@ is_object = true
 object_center = Vector2( 8, 0 )
 tile_mode_offset = Vector2( 0, -8 )
 tile_mode_step = 16
-icon = ExtResource( 137 )
-preview = ExtResource( 137 )
+icon = ExtResource( 685 )
+preview = ExtResource( 684 )
 
 [node name="HoverBox" type="Node" parent="PlaceableItems/CollectiblesGroup"]
 script = ExtResource( 24 )
