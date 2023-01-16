@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/coral1.png-bd99c71f774b3345548dd058beb7a9b2.stex"
+path="res://.import/Coral1.png-7b689b0f68459cbd30a143b49c8e176f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/coral/coral1.png"
-dest_files=[ "res://.import/coral1.png-bd99c71f774b3345548dd058beb7a9b2.stex" ]
+source_file="res://scenes/actors/objects/coral/Coral1.png"
+dest_files=[ "res://.import/Coral1.png-7b689b0f68459cbd30a143b49c8e176f.stex" ]
 
 [params]
 
