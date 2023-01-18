@@ -227,5 +227,9 @@ func load_singletons(userdata):
 		#	print(loaded_ids_sum, " / ", loaded_max_sum, " loaded")
 	
 	done = true
+	
+	#used to display the skip button once all singletons have loaded
+	if(done == true):
+		get_node("SkipLoading").visible = true
 	percentage = 1
 	print("Finished loading all scenes within the singletons")
