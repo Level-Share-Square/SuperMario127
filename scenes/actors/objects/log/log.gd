@@ -89,8 +89,10 @@ func _physics_process(delta):
 			Tween.TRANS_QUART, Tween.EASE_IN)
 			tween.start()
 	if falling:
-		position.y += (0.4 + (time_falling * 2)) * fall_speed
-		$StaticBody2D.constant_linear_velocity.y = 500 * fall_speed
+		position.y += (0.4 + (clamp(time_falling, 0, 0.8) * 2)) * fall_speed
+		if character:
+			if character.velocity.y >= 0 and character.position.y < position.y:
+				character.position.y += (0.4 + (clamp(time_falling, 0, 0.8) * 2)) * fall_speed
 		time_falling += delta
 		
 		if time_falling > 2.5:
