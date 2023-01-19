@@ -95,8 +95,10 @@ func _ready():
 	for object in Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].objects:
 		if object.type_id == 0:
 			player1_spawn = object.properties[0]
+			player1.spawn_pos = player1_spawn
 		elif object.type_id == 5:
 			player2_spawn = object.properties[0]
+			player2.spawn_pos = player2_spawn
 	if Singleton.PlayerSettings.number_of_players == 1:
 		Singleton.PlayerSettings.number_of_players = 2
 		remove_player()
