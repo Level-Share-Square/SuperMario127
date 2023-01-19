@@ -240,9 +240,6 @@ tracks/0/keys = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureFrameTop" type="TextureRect" parent="."]
 anchor_right = 1.0
@@ -262,8 +259,8 @@ margin_left = -153.6
 margin_top = 6.4
 margin_right = 153.6
 margin_bottom = -11.056
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "My Level"
 align = 1
 clip_text = true
@@ -284,9 +281,6 @@ custom_fonts/font = SubResource( 2 )
 text = "My Level"
 align = 1
 clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ShineTitle" type="Label" parent="TextureFrameTop"]
 anchor_left = 0.1
@@ -297,8 +291,8 @@ margin_left = -76.8
 margin_top = -41.088
 margin_right = 76.8001
 margin_bottom = -0.127991
-custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 3 )
 text = "The Rainbow Shine Sprite"
 align = 1
 valign = 1
@@ -326,8 +320,8 @@ margin_left = -65.2
 margin_top = -26.7763
 margin_right = 65.2
 margin_bottom = -8.00037
-custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
 text = "This is a description get stick bugged lol"
 align = 1
 autowrap = true

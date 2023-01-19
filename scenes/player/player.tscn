@@ -806,7 +806,6 @@ texture = ExtResource( 45 )
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
@@ -877,9 +876,6 @@ margin_right = 4445.0
 margin_bottom = 309.0
 rect_rotation = 180.0
 custom_constants/separation = 18
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ResumeButton" type="Button" parent="UI/PauseScreen/Bottom/Buttons"]
 margin_right = 535.0
@@ -1066,6 +1062,18 @@ visible = false
 [node name="ControlsOptions" parent="UI/PauseScreen" instance=ExtResource( 14 )]
 visible = false
 
+[node name="PrevShine" type="Button" parent="UI/PauseScreen"]
+margin_left = 16.0
+margin_top = 200.0
+margin_right = 96.0
+margin_bottom = 280.0
+
+[node name="NextShine" type="Button" parent="UI/PauseScreen"]
+margin_left = 669.0
+margin_top = 200.0
+margin_right = 749.0
+margin_bottom = 280.0
+
 [node name="SignText" type="Control" parent="UI"]
 pause_mode = 2
 visible = false
@@ -1189,7 +1197,7 @@ collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 8
+frame = 1
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
@@ -1269,3 +1277,6 @@ stream = ExtResource( 59 )
 anims/RESET = SubResource( 15 )
 anims/shine_sc_in = SubResource( 16 )
 anims/shine_sc_out = SubResource( 17 )
+
+[connection signal="pressed" from="UI/PauseScreen/PrevShine" to="UI/PauseScreen" method="_on_PrevShine_pressed"]
+[connection signal="pressed" from="UI/PauseScreen/NextShine" to="UI/PauseScreen" method="_on_NextShine_pressed"]
