@@ -50,6 +50,8 @@ func set_checkpoint(body):
 		return
 	
 	is_used = true
+	if body.spawn_pos != null:
+		body.spawn_pos = global_position + Vector2(0, spawn_y_offset)
 	Singleton.CheckpointSaved.current_checkpoint_id = id
 	Singleton.CheckpointSaved.current_spawn_pos = global_position + Vector2(0, spawn_y_offset)
 	Singleton.CheckpointSaved.current_area = Singleton.CurrentLevelData.area
