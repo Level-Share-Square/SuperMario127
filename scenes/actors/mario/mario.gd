@@ -1018,7 +1018,10 @@ func kill(cause: String) -> void:
 			yield(get_tree().create_timer(3), "timeout")
 			set_powerup(null, false)
 			health = 8
-			position = spawn_pos - Vector2(0, 16)
+			if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
+				position = Singleton.CheckpointSaved.current_spawn_pos
+			else:
+				position = spawn_pos - Vector2(0, 16)
 			last_position = position # fixes infinite death bug
 			dead = false
 			movable = true
