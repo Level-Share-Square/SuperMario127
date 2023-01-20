@@ -33,6 +33,11 @@ onready var chat_node = get_node(chat_path)
 var paused := false
 var levels = Singleton.SavedLevels.levels
 
+#shine information variables
+var selected_shine_index = 0
+var selected_level = Singleton.SavedLevels.selected_level
+var shineDetails = Singleton.SavedLevels.get_current_levels()[selected_level].shine_details
+
 func _ready():
 	# You want it to be visible for editing, but that causes a bug, which this fixes
 	visible = false
@@ -194,3 +199,26 @@ func update_shine_info():
 func _process(delta):
 	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
 	populate_info_panel(level_info)
+
+#changes pause menu description to previous shine info
+func _on_PrevShine_pressed():
+	if selected_shine_index > 0:
+		selected_shine_index-=1
+	else:
+		selected_shine_index = 0
+	
+	updateShineInfo()
+
+#changes pause menu description to next shine info
+func _on_NextShine_pressed():	
+	if selected_shine_index < (shineDetails.size()-1):
+		selected_shine_index+=1
+	else:
+		selected_shine_index = selected_shine_index
+	
+	updateShineInfo()
+
+#updates shine information
+func updateShineInfo():
+	get_node("ShineInfo/ShineName").bbcode_text = "[center]" + shineDetails[selected_shine_index]["title"] + "[/center]"
+	get_node("ShineInfo/ShineDescription").bbcode_text = "[center]" + shineDetails[selected_shine_index]["description"] + "[/center]"
