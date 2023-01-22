@@ -409,7 +409,7 @@ func is_grounded() -> bool:
 		return true
 	
 	var raycast_node := ground_check
-	raycast_node.cast_to = Vector2(0, 26)
+	raycast_node.cast_to = Vector2(0, 30) #26
 	if !ground_collision_dive.disabled:
 		raycast_node = ground_check_dive
 		raycast_node.cast_to = Vector2(0, 7.5)

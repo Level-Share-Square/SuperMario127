@@ -1126,7 +1126,6 @@ playing = true
 visible = false
 frames = ExtResource( 44 )
 animation = "swimming"
-frame = 2
 playing = true
 script = ExtResource( 63 )
 
@@ -1669,14 +1668,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 6
+frame = 11
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 3
+frame = 2
 speed_scale = 3.0
 playing = true
 
@@ -1697,7 +1696,6 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 2
 playing = true
 script = ExtResource( 34 )
 
@@ -1705,7 +1703,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 4
+frame = 2
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
