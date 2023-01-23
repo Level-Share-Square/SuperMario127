@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/testsponge.png-07bfa3e0cfab769ab29ff2511206681b.stex"
+path="res://.import/testsponge.png-aaf10f099bd4e6184b80aa14e367b37e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/water_sponge/testsponge.png"
-dest_files=[ "res://.import/testsponge.png-07bfa3e0cfab769ab29ff2511206681b.stex" ]
+source_file="res://scenes/actors/objects/sponge/testsponge.png"
+dest_files=[ "res://.import/testsponge.png-aaf10f099bd4e6184b80aa14e367b37e.stex" ]
 
 [params]
 
