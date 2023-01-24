@@ -704,7 +704,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Super Mario 127 (MAIN)"
+config/name="Super Mario 127"
 run/main_scene="res://scenes/menu/loading/loading.tscn"
 boot_splash/image="res://assets/misc/white.png"
 boot_splash/use_filter=false

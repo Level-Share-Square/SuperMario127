@@ -98,15 +98,15 @@ __meta__ = {
 margin_right = 314.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
-custom_styles/hover = ExtResource( 1 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/disabled = ExtResource( 13 )
-custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = ExtResource( 1 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/disabled = ExtResource( 13 )
+custom_styles/normal = ExtResource( 10 )
 shortcut_in_tooltip = false
 action_mode = 0
 text = "Switch to Area"
@@ -128,11 +128,11 @@ margin_left = 330.0
 margin_right = 644.0
 margin_bottom = 60.0
 size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
 custom_styles/hover = ExtResource( 8 )
 custom_styles/pressed = ExtResource( 7 )
 custom_styles/disabled = ExtResource( 13 )
 custom_styles/normal = ExtResource( 7 )
-custom_fonts/font = SubResource( 2 )
 shortcut_in_tooltip = false
 action_mode = 0
 text = "Delete Area"
@@ -148,5 +148,6 @@ volume_db = -10.0
 [node name="ClickSound" type="AudioStreamPlayer" parent="HBoxContainer/DeleteButton"]
 stream = ExtResource( 6 )
 volume_db = -10.0
+
 [connection signal="pressed" from="HBoxContainer/SwitchToButton" to="HBoxContainer/SwitchToButton" method="_on_ResetLevelButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/DeleteButton" to="HBoxContainer/DeleteButton" method="_on_ResetLevelButton_pressed"]

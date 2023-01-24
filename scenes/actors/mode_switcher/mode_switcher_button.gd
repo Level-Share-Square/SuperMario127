@@ -74,9 +74,11 @@ func switch() -> void:
 
 		Singleton.ActionManager.clear_history()
 		
-		Singleton.CurrentLevelData.area = 0
+		#Singleton.CurrentLevelData.area = 0
+		Singleton.CheckpointSaved.current_area = Singleton.CurrentLevelData.area
+		Singleton.CurrentLevelData.level_data.vars.reload()
 		Singleton.CurrentLevelData.enemies_instanced = 0
-		Singleton.MiscShared.is_play_reload = false
+		Singleton.MiscShared.is_play_reload = true
 		var new_scene_mode = get_tree().get_current_scene().mode
 		if new_scene_mode == 0:
 			Singleton.Networking.disconnect_from_peers()
