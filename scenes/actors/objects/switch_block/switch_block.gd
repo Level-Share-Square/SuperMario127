@@ -10,11 +10,12 @@ onready var hit_collider = $HitCollider/CollisionShape2D
 var inverted : bool = false
 
 func _set_properties():
-	savable_properties = ["inverted"]
-	editable_properties = ["inverted"]
+	savable_properties = ["inverted", "palette"]
+	editable_properties = ["inverted", "palette"]
 
 func _set_property_values():
-	set_property("inverted", inverted, true)
+	set_property("inverted", inverted, false)
+	set_property("palette", palette, 0)
 
 func _ready():
 	init()
@@ -30,23 +31,24 @@ func _ready():
 		print(sprite.region_rect)
 		sprite.region_rect.position.y = (float(palette) * 32) # changes sprite to correct position on that grid of palettes
 		outline.animation = str(palette) + "_outline"
-		
-	set_state(Singleton.CurrentLevelData.level_data.vars.switch_state[palette])
+
+	switch_state(inverted)
+	if Singleton.CurrentLevelData.level_data.vars.switch_state.has(palette):
+		toggle_state()
 	Singleton.CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
 
-func set_state(state : bool):
-	if inverted:
-		collider.set_deferred("disabled", state)
-		hit_collider.set_deferred("disabled", state)
-		animation_player.play(str(!state).to_lower())
-	else:
-		collider.set_deferred("disabled", !state)
-		hit_collider.set_deferred("disabled", !state)
-		animation_player.play(str(state).to_lower())
+func toggle_state():
+	inverted = !inverted
+	switch_state(inverted)
 
-func _on_switch_state_changed(new_state, channel):
+func switch_state(state):
+	collider.set_deferred("disabled", state)
+	hit_collider.set_deferred("disabled", state)
+	animation_player.play(str(!state).to_lower())
+
+func _on_switch_state_changed(channel):
 	if palette == channel:
-		set_state(new_state)
+		toggle_state()
 
 func _on_property_changed(key, value):
 	if key == "inverted":

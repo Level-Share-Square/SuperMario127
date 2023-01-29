@@ -28,7 +28,7 @@ onready var blend := pow(0.95, 120 * fps_util.PHYSICS_DELTA)
 var curve = null
 
 var disappears : bool = true
-onready var inverted : bool = false
+var inverted : bool = false
 
 func _set_properties():
 	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "start_offset", "disappears", "inverted"]

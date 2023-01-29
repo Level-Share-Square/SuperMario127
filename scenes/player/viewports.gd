@@ -105,8 +105,8 @@ func _ready():
 
 func _process(_delta):
 	if Singleton.PlayerSettings.number_of_players == 2 and Singleton.PlayerSettings.other_player_id == -1:
-		if Input.is_action_just_pressed("(disabled)copy_level"):
-			remove_player()
+		#if Input.is_action_just_pressed("(disabled)copy_level"):
+		#	remove_player()
 			
 		player1.controlled_locally = true
 		player2.controlled_locally = true

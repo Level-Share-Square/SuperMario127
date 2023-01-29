@@ -13,6 +13,8 @@ onready var left_width = sprite.patch_margin_left
 onready var right_width = sprite.patch_margin_right
 onready var part_width = 6
 
+onready var inverted :bool= get_parent().inverted
+
 onready var parent = get_parent()
 
 var last_position : Vector2
@@ -62,9 +64,16 @@ func _ready():
 	collision_shape.shape = collision_shape.shape.duplicate()
 	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate()
 
+	inverted = parent.inverted
+	
+	switch_state(inverted)
+
+	if Singleton.CurrentLevelData.level_data.vars.switch_state.has(parent.palette):
+		toggle_state()
+
 	Singleton.CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
 
-	_on_switch_state_changed(true, parent.palette)
+	_on_switch_state_changed(parent.palette)
 
 	#parent._ready()
 	#parent._set_platform_pos()
@@ -94,10 +103,11 @@ func _on_PlatformArea_body_exited(body):
 	if body.get("velocity") != null:
 		body.velocity += Vector2(momentum.x, min(0, momentum.y))
 
-func _on_switch_state_changed(new_state, channel):
-	if parent.palette == channel:
-		if(parent.inverted):
-			new_state = !new_state
+func toggle_state():
+	inverted = !inverted
+	switch_state(inverted)
+
+func switch_state(new_state):
 		if(parent.disappears):
 			$StaticBody2D.set_collision_layer_bit(4, new_state)
 			animation_player.play(str(new_state).to_lower())
@@ -106,3 +116,7 @@ func _on_switch_state_changed(new_state, channel):
 			sprite.visible = true
 			parent.frozen = !new_state
 			sprite2.region_rect.position.x = 69 + int(!new_state) * 23
+
+func _on_switch_state_changed(channel):
+	if channel == parent.palette:
+		toggle_state()

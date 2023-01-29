@@ -13,7 +13,7 @@ onready var press_area = $PressArea
 onready var beep_sound = $Beep
 onready var press_sound = $Press
 
-var switch_mode = true
+var switch_mode : bool = true
 
 var self_activated : bool = false
 
@@ -39,13 +39,18 @@ func _ready():
 	Singleton.CurrentLevelData.level_data.vars.connect("switch_state_changed", self, "_on_switch_state_changed")
 	update_switch_state()
 
+	if Singleton.CurrentLevelData.level_data.vars.switch_state.has(palette):
+		switch_mode = !switch_mode
+		update_switch_state()
+
 func press(hit_pos : Vector2) -> void:
+	print("Current_Switch_Palette: ", palette)
 	if !pressed:
 		pressed = true
 		anim_player.play("press", -1, 2.0)
 		self_activated = true
 		beep_sound.volume_db = 0
-		Singleton.CurrentLevelData.level_data.vars.set_switch_state(palette, switch_mode)
+		Singleton.CurrentLevelData.level_data.vars.toggle_switch_state(palette)#set_switch_state(palette, switch_mode)
 		boost_timer = 0.175
 
 func _physics_process(delta):
@@ -86,17 +91,19 @@ func _physics_process(delta):
 
 func update_switch_state():
 	if !self_activated:
-		if Singleton.CurrentLevelData.level_data.vars.switch_state[palette] == switch_mode:
+		if switch_mode:
 			anim_player.play("depress")
 			pressed = true
 		else:
 			pressed = false
 			anim_player.play("unpress")
 	self_activated = false
-func _on_switch_state_changed(value, channel):
+
+func _on_switch_state_changed(channel):
 	if channel == palette:
+		switch_mode = !switch_mode
 		update_switch_state()
-			
+
 func _on_property_changed(key, value):
 	if key == "switch_mode":
 		switch.region_rect.position.x = int(!switch_mode) * 20
