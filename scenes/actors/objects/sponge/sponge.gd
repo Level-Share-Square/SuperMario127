@@ -1,6 +1,9 @@
 extends GameObject
 
 var _timer = null
+#onready var size = $Testsponge
+#onready var area = $Area2D
+#onready var coll = $StaticBody2D
 
 var water_drain_speed = 5
 var water_in_sponge = 0
@@ -34,7 +37,10 @@ func _on_Area2D_body_entered(body1):
 
 #triggers everytime the timer has ran
 func _on_Timer_timeout():
-	if player_in_area == true and body.name.begins_with("Character") and !body.dead:
+	if player_in_area == true and body.name.begins_with("Character") and !body.dead and body.fuel != 0:
 		if water_in_sponge < max_water:
 			body.fuel -= water_drain_speed
 			water_in_sponge += water_drain_speed
+			#size.scale += Vector2(0.25,0.25)
+			#area.scale += Vector2(0.25,0.25)
+			#coll.scale += Vector2(0.25,0.25)
