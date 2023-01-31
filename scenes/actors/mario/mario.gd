@@ -706,7 +706,6 @@ func _physics_process(delta: float) -> void:
 				velocity.x += acceleration * move_direction
 			elif velocity.x * move_direction > move_speed:
 				velocity.x -= 3.5 * move_direction
-			
 			facing_direction = move_direction
 		else:
 			if velocity.x * move_direction < move_speed:
@@ -715,6 +714,7 @@ func _physics_process(delta: float) -> void:
 				velocity.x -= 0.25 * move_direction
 			if !disable_turning:
 				facing_direction = move_direction
+				pass
 	elif !disable_friction:
 		if abs(velocity.x) > 0:
 			if abs(velocity.x) > 15:
@@ -799,6 +799,7 @@ func _physics_process(delta: float) -> void:
 			sprite.flip_h = false if facing_direction == 1 else true
 		else:
 			sprite.flip_h = false
+			pass
 	else:
 		attacking = false
 		big_attack = false
