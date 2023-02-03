@@ -41,7 +41,7 @@ func _ready():
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "enter_area")
 		var _connect2 = area.connect("body_exited", self, "exit_area")
-		
+
 func fall_detector(body):
 
 	if character and enabled:
@@ -65,9 +65,16 @@ func exit_area(body):
 	if(!fall_on_touch):
 		return
 	if body == character:
+		if !character.get("raycast_length") == null:
+			character.raycast_length = 26
 		character = null
 
 func _physics_process(delta):
+	
+	if character != null:
+		if !character.get("raycast_length") == null:
+			character.raycast_length = 30
+	
 	if(!fall_on_touch):
 		return
 	for body in fall_detector_node.get_overlapping_bodies():

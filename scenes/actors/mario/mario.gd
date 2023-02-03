@@ -104,6 +104,7 @@ export var aerial_acceleration := 16.0
 export var friction := 27.0
 export var aerial_friction := 2.3
 export var max_aerial_velocity := 640
+export var raycast_length := 26
 
 # Sounds
 var sound_player
@@ -409,7 +410,7 @@ func is_grounded() -> bool:
 		return true
 	
 	var raycast_node := ground_check
-	raycast_node.cast_to = Vector2(0, 30) #26
+	raycast_node.cast_to = Vector2(0, raycast_length) #26 or 30
 	if !ground_collision_dive.disabled:
 		raycast_node = ground_check_dive
 		raycast_node.cast_to = Vector2(0, 7.5)

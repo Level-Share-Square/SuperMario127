@@ -302,6 +302,7 @@ func physics_process_hit(delta:float, is_in_platform:bool)->void :
 				if character.move_direction != 0:
 					character.global_position.x += character.move_direction * 2
 				character.global_position.y = lerp(character.global_position.y, (kinematic_body.global_position.y + top_point.y) - 25, fps_util.PHYSICS_DELTA * 6)
+				print("JUUMP POPP")
 				
 				var lerp_strength = 15
 				lerp_strength = clamp(abs(character.global_position.x - kinematic_body.global_position.x), 0, 15)
@@ -312,7 +313,7 @@ func physics_process_hit(delta:float, is_in_platform:bool)->void :
 				boost_timer = 0
 				hide_timer = 0.01
 				if not was_ground_pound:
-					character.velocity.y = - 325
+					character.velocity.y = -325
 					if character.state != character.get_state_node("DiveState"):
 						character.set_state_by_name("BounceState", delta)
 			
