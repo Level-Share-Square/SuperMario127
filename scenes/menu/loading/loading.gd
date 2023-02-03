@@ -44,15 +44,16 @@ func go_to_menu():
 
 func _ready():
 	dir.make_dir("user://replays")
+	dir.make_dir("user://autosave")
 	if file.file_exists("user://072.json"):
 		dir.remove("user://tiles.res")
 		dir.remove("user://bg_music.ogg")
 		dir.remove("user://settings.json")
-		file.open("user://073.darius", File.WRITE)
+		file.open("user://080.darius", File.WRITE)
 		file.close()
 		dir.remove("user://072.json")
 	else:
-		file.open("user://073.darius", File.WRITE)
+		file.open("user://080.darius", File.WRITE)
 		file.close()
 	if Singleton2.rp == true:
 		update_activity()

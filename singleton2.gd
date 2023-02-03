@@ -22,6 +22,4 @@ func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		crash = false
 	
-func _process(delta):
-	print(crash)
-	print(crash_happened)
+

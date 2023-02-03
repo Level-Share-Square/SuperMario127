@@ -246,14 +246,11 @@ margin_top = 304.0
 margin_right = -8.0
 margin_bottom = 344.0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Sprites/Player"]
 frames = ExtResource( 2 )
 animation = "movingRight"
-frame = 10
+frame = 1
 speed_scale = 1.25
 playing = true
 centered = false
@@ -264,7 +261,7 @@ position = Vector2( 0, 80 )
 scale = Vector2( 1, -0.75 )
 frames = ExtResource( 2 )
 animation = "movingRight"
-frame = 10
+frame = 1
 speed_scale = 1.25
 playing = true
 centered = false
@@ -380,9 +377,6 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="Foreground"]
 margin_right = 768.0
 margin_bottom = 432.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
