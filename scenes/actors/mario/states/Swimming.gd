@@ -34,6 +34,10 @@ func _start_check(_delta):
 	return character.water_detector.get_overlapping_areas().size() > 0 and !(character.powerup != null and character.powerup.id == "Metal")
 
 func _start(_delta):
+	
+	if abs(character.sprite.rotation) > PI:
+		character.sprite.rotation = 0
+	
 	character.sound_player.play_splash_sound()
 	character.jump_animation = 0
 	
@@ -54,6 +58,7 @@ func _start(_delta):
 	boost_disable_time = 0.14
 
 func _update(delta):
+	
 	var move_vector = Vector2()
 	var sprite = character.sprite
 	

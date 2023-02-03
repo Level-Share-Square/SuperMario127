@@ -1076,7 +1076,6 @@ margin_bottom = 280.0
 
 [node name="SignText" type="Control" parent="UI"]
 pause_mode = 2
-visible = false
 margin_left = 161.0
 margin_top = 66.0
 margin_right = 611.0
@@ -1197,7 +1196,6 @@ collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 11
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 

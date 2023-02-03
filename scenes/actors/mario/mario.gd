@@ -104,6 +104,7 @@ export var aerial_acceleration := 16.0
 export var friction := 27.0
 export var aerial_friction := 2.3
 export var max_aerial_velocity := 640
+export var raycast_length := 26
 
 # Sounds
 var sound_player
@@ -409,7 +410,7 @@ func is_grounded() -> bool:
 		return true
 	
 	var raycast_node := ground_check
-	raycast_node.cast_to = Vector2(0, 30) #26
+	raycast_node.cast_to = Vector2(0, raycast_length) #26 or 30
 	if !ground_collision_dive.disabled:
 		raycast_node = ground_check_dive
 		raycast_node.cast_to = Vector2(0, 7.5)
@@ -706,7 +707,6 @@ func _physics_process(delta: float) -> void:
 				velocity.x += acceleration * move_direction
 			elif velocity.x * move_direction > move_speed:
 				velocity.x -= 3.5 * move_direction
-			
 			facing_direction = move_direction
 		else:
 			if velocity.x * move_direction < move_speed:
@@ -715,6 +715,7 @@ func _physics_process(delta: float) -> void:
 				velocity.x -= 0.25 * move_direction
 			if !disable_turning:
 				facing_direction = move_direction
+				pass
 	elif !disable_friction:
 		if abs(velocity.x) > 0:
 			if abs(velocity.x) > 15:
@@ -799,6 +800,7 @@ func _physics_process(delta: float) -> void:
 			sprite.flip_h = false if facing_direction == 1 else true
 		else:
 			sprite.flip_h = false
+			pass
 	else:
 		attacking = false
 		big_attack = false
