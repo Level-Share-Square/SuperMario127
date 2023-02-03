@@ -11,7 +11,9 @@ onready var timer = $CooldownTimer
 
 const EDITOR_SCENE : PackedScene = preload("res://scenes/editor/editor.tscn")
 
+
 func _ready() -> void:
+	Singleton2.crash = false
 	if Singleton2.rp == true:
 		update_activity()
 	elif Singleton2.rp == false:
