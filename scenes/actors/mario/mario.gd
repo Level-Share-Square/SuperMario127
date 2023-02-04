@@ -288,6 +288,10 @@ const ANIM_IDS : Dictionary = {
 }
 
 func _ready():
+	
+	if Singleton.PlayerSettings.number_of_players != 1:
+		Singleton.CheckpointSaved.current_checkpoint_id = -1
+	
 	temp_ga = []
 	temp_gp = []
 
