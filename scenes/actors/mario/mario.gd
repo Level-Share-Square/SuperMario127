@@ -289,9 +289,6 @@ const ANIM_IDS : Dictionary = {
 
 func _ready():
 	
-	if Singleton.PlayerSettings.number_of_players != 1:
-		Singleton.CheckpointSaved.current_checkpoint_id = -1
-	
 	temp_ga = []
 	temp_gp = []
 
@@ -1024,7 +1021,7 @@ func kill(cause: String) -> void:
 			yield(get_tree().create_timer(3), "timeout")
 			set_powerup(null, false)
 			health = 8
-			if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
+			if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CheckpointSaved.current_area == Singleton.CurrentLevelData.area and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
 				position = Singleton.CheckpointSaved.current_spawn_pos
 			else:
 				position = spawn_pos - Vector2(0, 16)

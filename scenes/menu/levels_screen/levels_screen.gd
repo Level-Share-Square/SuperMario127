@@ -349,10 +349,18 @@ func on_button_new_level_pressed() -> void:
 # keep that in mind when editing this
 func on_button_code_import_pressed() -> void:
 	var level_code = level_code_entry.text
+	
+	var arr_code = level_code.to_utf8()
+	print("NEW: ", arr_code)
+	arr_code = arr_code.decompress_dynamic(-1, 1)
+	print(arr_code)
+	var finished_code = arr_code.get_string_from_ascii()
+	
+	print("King of the Hill season 3 episode 1")
 
-	if level_code_util.is_valid(level_code):
-		var level_info : LevelInfo = LevelInfo.new(level_code)
-		add_level(level_info)
+	if level_code_util.is_valid(finished_code):
+		var level_info : LevelInfo = LevelInfo.new(finished_code)
+		add_level(finished_code)
 		level_code_entry.text = ""
 		set_level_code_panel(false)
 
@@ -376,7 +384,10 @@ func on_button_copy_code_pressed() -> void:
 		level_code_entry.text = tmp # I swear I did not touch it!
 		
 	else: # Copy Level Code
-		OS.clipboard = levels[selected_level].level_code
+		var bytearray_code = levels[selected_level].level_code.to_utf8()
+		bytearray_code = bytearray_code.compress(1)
+		var compressed_code = bytearray_code.get_string_from_ascii()
+		OS.clipboard = compressed_code #levels[selected_level].level_code
 
 func on_button_play_pressed() -> void:
 	if Singleton2.rp == true:

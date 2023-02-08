@@ -10,6 +10,7 @@ onready var left_width = sprite.patch_margin_left
 onready var right_width = sprite.patch_margin_right
 onready var part_width = sprite.texture.get_width() - left_width - right_width
 
+
 var last_position : Vector2
 var momentum : Vector2
 

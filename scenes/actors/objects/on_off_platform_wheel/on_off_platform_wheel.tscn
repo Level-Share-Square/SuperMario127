@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/actors/objects/on_off_platform_wheel/on_off_platform_wheel.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/touch_lift/circle.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
 
 [node name="OnOffPlatformWheel" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
 circle_texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2( 2.5, 2.5 )
+shape = SubResource( 1 )
