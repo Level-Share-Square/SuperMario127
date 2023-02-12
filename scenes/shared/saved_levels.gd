@@ -4,6 +4,8 @@ const LEVELS_DIRECTORY = "user://levels/"
 const LEVEL_DISK_PATHS_PATH = LEVELS_DIRECTORY + "paths.json"
 const TEMPLATE_LEVELS_DIRECTORY = "user://template_levels/"
 const TEMPLATE_LEVEL_DISK_PATHS_PATH = TEMPLATE_LEVELS_DIRECTORY + "paths.json"
+const COMMUNITY_LEVELS_DIRECTORY = TEMPLATE_LEVELS_DIRECTORY + "best_of_community/"
+const COMMUNITY_LEVEL_DISK_PATHS_PATH = COMMUNITY_LEVELS_DIRECTORY + "paths.json"
 const ENCRYPTION_PASSWORD = "BadCode"
 
 const NO_LEVEL : int = -1
@@ -12,6 +14,8 @@ var levels : Array = [] # array of type LevelInfo
 var levels_disk_paths : Array = [] # array of type String
 var template_levels : Array = [] # array of type LevelInfo
 var template_levels_disk_paths : Array = [] # array of type String
+var community_levels : Array = [] # array of type LevelInfo
+var community_levels_disk_paths : Array = [] # array of type String
 var selected_level : int = NO_LEVEL
 
 # Resource paths to load level codes to create template_levels array from.
@@ -28,6 +32,8 @@ var template_level_codes : Array = [
 	"res://level/template_levels/warp_palace.tres",
 	"res://level/template_levels/green_demon_cave.tres"
 ]
+
+
 # for the levels list and get_current_levels()
 var is_template_list : bool = false
 

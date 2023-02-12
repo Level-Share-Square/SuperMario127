@@ -4,12 +4,15 @@ extends Screen
 signal open_delete_confirmation_popup
 
 # not really a fan of these giant node paths but it'll have to do for now, not sure what a better system would be just yet
-onready var level_list : ItemList = $MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel/LevelList
+onready var level_list : ItemList = $MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel/VBoxContainer/LevelList
 
 # buttons
 onready var button_back : Button = $MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/ButtonBack
 onready var button_add : Button = $MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/ButtonAdd
 onready var button_copy_code : Button = $MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/ButtonCopyCode
+
+onready var button_community_levels = $MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel/VBoxContainer/CommunityLevelsButton
+onready var button_sample_levels = $MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel/VBoxContainer/SampleLevelsButton
 
 onready var button_new_level : Button = $MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/HBoxContainer/ButtonNewLevel
 onready var button_code_import : Button = $MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/HBoxContainer/ButtonCodeImport
@@ -60,6 +63,8 @@ var levels = Singleton.SavedLevels.levels
 
 var double_click := false
 
+var show_sample_levels := true
+
 func _ready() -> void:
 	Singleton2.save_ghost = false
 
@@ -76,6 +81,9 @@ func _ready() -> void:
 	_connect = button_code_cancel.connect("pressed", self, "on_button_code_cancel_pressed")
 	_connect = level_code_entry.connect("pressed", self, "info_clicked")
 
+	_connect = button_community_levels.connect("pressed", self, "on_button_community_levels_pressed")
+	_connect = button_sample_levels.connect("pressed", self, "on_button_sample_levels_pressed")
+	
 	_connect = button_play.connect("pressed", self, "on_button_play_pressed")
 	_connect = button_edit.connect("pressed", self, "on_button_edit_pressed")
 	_connect = button_delete.connect("pressed", self, "on_button_delete_pressed")
@@ -90,7 +98,20 @@ func _ready() -> void:
 	_pre_open_screen() # In case we're exiting a level
 
 func _pre_open_screen() -> void:
-	levels = Singleton.SavedLevels.template_levels if Singleton.SavedLevels.is_template_list else Singleton.SavedLevels.levels
+	if Singleton.SavedLevels.is_template_list:
+		if show_sample_levels:
+			button_community_levels.visible = true
+			button_sample_levels.visible = false
+			levels = Singleton.SavedLevels.template_levels 
+		else:
+			button_community_levels.visible = false
+			button_sample_levels.visible = true
+			levels = Singleton.SavedLevels.community_levels
+			pass #TODO HERE
+	else:
+		button_community_levels.visible = false
+		button_sample_levels.visible = false
+		levels = Singleton.SavedLevels.levels
 	print("Levels: ", levels.size())
 	
 	for button in [button_add]:
@@ -388,6 +409,15 @@ func on_button_copy_code_pressed() -> void:
 		bytearray_code = bytearray_code.compress(1)
 		var compressed_code = bytearray_code.get_string_from_ascii()
 		OS.clipboard = compressed_code #levels[selected_level].level_code
+
+func on_button_community_levels_pressed() -> void:
+	show_sample_levels = false
+	_pre_open_screen()
+
+func on_button_sample_levels_pressed() -> void:
+	show_sample_levels = true
+	_pre_open_screen()
+
 
 func on_button_play_pressed() -> void:
 	if Singleton2.rp == true:

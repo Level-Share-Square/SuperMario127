@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://scenes/menu/levels_screen/levels_screen.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -15,11 +15,16 @@
 [ext_resource path="res://scenes/menu/levels_screen/ui/star_coin_icon.png" type="Texture" id=13]
 [ext_resource path="res://scenes/menu/levels_screen/ui/time_icon.png" type="Texture" id=14]
 [ext_resource path="res://scenes/menu/levels_screen/transition_sound.wav" type="AudioStream" id=15]
-[ext_resource path="res://assets/styles/BrightButtonStyleNormal.tres" type="StyleBox" id=16]
+[ext_resource path="res://assets/styles/GoldButtonStyleNormal.tres" type="StyleBox" id=16]
 [ext_resource path="res://scenes/menu/levels_screen/delete_confirmation_window.gd" type="Script" id=17]
 [ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=18]
 [ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=19]
 [ext_resource path="res://assets/styles/ButtonStyleDisabled.tres" type="StyleBox" id=20]
+[ext_resource path="res://assets/styles/GoldButtonStyleHover.tres" type="StyleBox" id=21]
+[ext_resource path="res://assets/fonts/delfino_dynamicfontdata.tres" type="DynamicFontData" id=22]
+[ext_resource path="res://assets/styles/GoldButtonStylePressed.tres" type="StyleBox" id=23]
+[ext_resource path="res://assets/styles/BrightRedButtonStyleNormal.tres" type="StyleBox" id=24]
+[ext_resource path="res://assets/styles/BrightRedButtonStyleHover.tres" type="StyleBox" id=25]
 
 [sub_resource type="DynamicFont" id=1]
 size = 18
@@ -88,6 +93,12 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
+
+[sub_resource type="DynamicFont" id=30]
+size = 19
+extra_spacing_top = -2
+extra_spacing_bottom = -3
+font_data = ExtResource( 22 )
 
 [sub_resource type="StyleBoxFlat" id=10]
 content_margin_left = 8.0
@@ -449,11 +460,15 @@ margin_bottom = 324.0
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 10 )
 
-[node name="LevelList" type="ItemList" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel"]
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 335.0
 margin_bottom = 195.0
+
+[node name="LevelList" type="ItemList" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel/VBoxContainer"]
+margin_right = 327.0
+margin_bottom = 111.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 6 )
@@ -469,6 +484,28 @@ fixed_column_width = 290
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CommunityLevelsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel/VBoxContainer"]
+margin_top = 115.0
+margin_right = 327.0
+margin_bottom = 149.0
+custom_colors/font_color = Color( 0.682353, 0.439216, 0.176471, 1 )
+custom_colors/font_color_hover = Color( 1, 0.980392, 0.858824, 1 )
+custom_colors/font_color_pressed = Color( 0.494118, 0.239216, 0.180392, 1 )
+custom_fonts/font = SubResource( 30 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 23 )
+custom_styles/normal = ExtResource( 16 )
+text = "Best of the Community"
+
+[node name="SampleLevelsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel/VBoxContainer"]
+margin_top = 153.0
+margin_right = 327.0
+margin_bottom = 187.0
+custom_fonts/font = SubResource( 30 )
+custom_styles/hover = ExtResource( 25 )
+custom_styles/normal = ExtResource( 24 )
+text = "Sample Levels"
 
 [node name="LevelCodePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 visible = false
@@ -848,8 +885,8 @@ text = "Delete"
 
 [node name="TimeScorePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
 visible = false
-margin_left = 360.0
-margin_right = 704.0
+margin_left = 719.0
+margin_right = 853.0
 margin_bottom = 368.0
 size_flags_horizontal = 3
 size_flags_vertical = 11
@@ -861,7 +898,7 @@ __meta__ = {
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/TimeScorePanel"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 336.0
+margin_right = 126.0
 margin_bottom = 360.0
 custom_styles/panel = SubResource( 8 )
 __meta__ = {
@@ -871,7 +908,7 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TimeScorePanel/PanelContainer"]
 margin_left = 16.0
 margin_top = 8.0
-margin_right = 312.0
+margin_right = 102.0
 margin_bottom = 344.0
 custom_constants/separation = 8
 __meta__ = {
@@ -879,7 +916,7 @@ __meta__ = {
 }
 
 [node name="TimeScoreList" type="ItemList" parent="MarginContainer/HBoxContainer/TimeScorePanel/PanelContainer/VBoxContainer"]
-margin_right = 296.0
+margin_right = 86.0
 margin_bottom = 288.0
 size_flags_vertical = 3
 theme = SubResource( 6 )
@@ -895,7 +932,7 @@ __meta__ = {
 
 [node name="ButtonCloseTimeScore" parent="MarginContainer/HBoxContainer/TimeScorePanel/PanelContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 296.0
-margin_right = 296.0
+margin_right = 86.0
 margin_bottom = 336.0
 size_flags_vertical = 8
 custom_fonts/font = SubResource( 12 )
