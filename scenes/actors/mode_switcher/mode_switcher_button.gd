@@ -15,6 +15,8 @@ var last_hovered := false
 var last_paused := false
 var invisible := true
 
+var playtesting := false
+
 export var texture_play : StreamTexture
 export var texture_stop : StreamTexture
 
@@ -25,6 +27,7 @@ func _ready() -> void:
 	start_pos = self.rect_position
 
 func _physics_process(_delta : float) -> void:
+	
 	if !get_tree().paused and !invisible:
 		if last_paused:
 			visible = true
@@ -124,6 +127,10 @@ func switch() -> void:
 		Singleton.CurrentLevelData.level_data.vars.init()
 		
 		get_tree().get_current_scene().switch_scenes()
+		if new_scene_mode == 0:
+			playtesting = false
+		elif new_scene_mode == 1:
+			playtesting = true
 		change_visuals(new_scene_mode)
 		
 		yield(get_tree().create_timer(0.1), "timeout")

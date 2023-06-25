@@ -30,7 +30,6 @@ __meta__ = {
 
 [node name="ModeSwitcherButton" type="TextureButton" parent="."]
 pause_mode = 2
-visible = false
 margin_left = 652.0
 margin_top = 154.903
 margin_right = 877.0
@@ -41,9 +40,6 @@ focus_mode = 0
 action_mode = 0
 texture_normal = ExtResource( 1 )
 script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 texture_play = ExtResource( 1 )
 texture_stop = ExtResource( 2 )
 

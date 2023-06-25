@@ -41,7 +41,10 @@ var shineDetails = Singleton.SavedLevels.get_current_levels()[selected_level].sh
 func _ready():
 	# You want it to be visible for editing, but that causes a bug, which this fixes
 	visible = false
-
+	
+	if Singleton.ModeSwitcher.button.playtesting:
+		quit_button.disabled = true
+	
 	var _connect = resume_button.connect("pressed", self, "toggle_pause")
 	_connect = retry_button.connect("pressed", self, "retry")
 	_connect = quit_button.connect("pressed", self, "quit_to_menu")
