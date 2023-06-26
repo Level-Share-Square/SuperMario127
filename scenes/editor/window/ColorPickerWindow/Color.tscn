@@ -4,7 +4,9 @@
 [ext_resource path="res://scenes/editor/property_type_scenes/float.gd" type="Script" id=2]
 [ext_resource path="res://scenes/editor/window/ColorPickerWindow/Color.gd" type="Script" id=3]
 
-
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
@@ -14,17 +16,10 @@ corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
-[sub_resource type="DynamicFont" id=2]
-size = 32
-font_data = ExtResource( 1 )
-
 [node name="Color" type="Control"]
 margin_right = 320.0
 margin_bottom = 120.0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 h_edit = NodePath("HEdit")
 s_edit = NodePath("SEdit")
 v_edit = NodePath("VEdit")
@@ -34,33 +29,30 @@ margin_left = 7.0
 margin_top = 57.2063
 margin_right = 103.0
 margin_bottom = 111.206
-custom_styles/normal = SubResource( 1 )
-custom_fonts/font = SubResource( 2 )
 custom_colors/cursor_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 1 )
 align = 1
-max_length = 3
+max_length = 5
 context_menu_enabled = false
 placeholder_text = "R"
 placeholder_alpha = 0.35
 caret_blink = true
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 limit_range = true
-max_value = 255.0
+max_value = 65535.0
 
 [node name="SEdit" type="LineEdit" parent="."]
 margin_left = 112.0
 margin_top = 58.0
 margin_right = 208.0
 margin_bottom = 112.0
-custom_styles/normal = SubResource( 1 )
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 1 )
 align = 1
-max_length = 3
+max_length = 5
 context_menu_enabled = false
 placeholder_text = "G"
 placeholder_alpha = 0.35
@@ -68,18 +60,18 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-max_value = 255.0
+max_value = 65535.0
 
 [node name="VEdit" type="LineEdit" parent="."]
 margin_left = 217.0
 margin_top = 58.0
 margin_right = 313.0
 margin_bottom = 112.0
-custom_styles/normal = SubResource( 1 )
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 1 )
 align = 1
-max_length = 3
+max_length = 5
 context_menu_enabled = false
 placeholder_text = "B"
 placeholder_alpha = 0.35
@@ -87,4 +79,4 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-max_value = 255.0
+max_value = 65535.0
