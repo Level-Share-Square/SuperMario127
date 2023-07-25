@@ -55,6 +55,9 @@ var tiles_stack := []
 
 var coin_frame : int
 
+onready var normal_boo = preload("res://assets/tiles/boo_block/icon.png")
+onready var invis_boo = preload("res://assets/tiles/boo_block/boo_block_invis.png")
+
 # Functions to avoid copy pasted code
 func cap_zoom_level() -> void:
 	# Reduce the zoom level if the screen wouldn't fit within the level
@@ -322,6 +325,11 @@ func _process(delta : float) -> void:
 	placed_item_property = null
 	
 	cap_zoom_level(); # Make sure it didn't accidentally get larger somehow
+	
+	if Input.is_action_just_pressed("invis_ui"):
+		$"UI".visible = !$"UI".visible
+		$"Grid".visible = !$"Grid".visible
+		$"PlaceableItems/MiscGroup/BooBlock".preview = invis_boo
 	
 	if get_viewport().get_mouse_position().y > 70: # Mouse is below the toolbar
 		var mouse_pos := get_global_mouse_position()

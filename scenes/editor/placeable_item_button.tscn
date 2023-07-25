@@ -24,9 +24,6 @@ texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 4 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Icon" type="Sprite" parent="."]
 material = ExtResource( 2 )
@@ -61,9 +58,6 @@ margin_top = 12.0
 margin_right = 129.0
 margin_bottom = 20.0
 alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 margin_left = 15.0

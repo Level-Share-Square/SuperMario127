@@ -106,7 +106,6 @@
 [ext_resource path="res://scenes/actors/objects/big_bottle/icon.png" type="Texture" id=104]
 [ext_resource path="res://scenes/actors/objects/big_bottle/big_bottle.png" type="Texture" id=105]
 [ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/icon.png" type="Texture" id=106]
-[ext_resource path="res://assets/tiles/boo_block/icon.png" type="Texture" id=107]
 [ext_resource path="res://scenes/actors/objects/pipe/preview.png" type="Texture" id=108]
 [ext_resource path="res://scenes/editor/assets/save_icon.png" type="Texture" id=109]
 [ext_resource path="res://scenes/actors/objects/pipe/icon.png" type="Texture" id=110]
@@ -686,6 +685,7 @@
 [ext_resource path="res://scenes/actors/objects/water_balloon/2.png" type="Texture" id=684]
 [ext_resource path="res://scenes/actors/objects/water_balloon/2small.png" type="Texture" id=685]
 [ext_resource path="res://scenes/actors/objects/sponge/testsponge.png" type="Texture" id=686]
+[ext_resource path="res://assets/tiles/boo_block/boo_block_invis.png" type="Texture" id=687]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3018,8 +3018,8 @@ preview = ExtResource( 225 )
 [node name="BooBlock" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 24 )
 tileset_id = 6
-icon = ExtResource( 107 )
-preview = ExtResource( 107 )
+icon = ExtResource( 687 )
+preview = ExtResource( 687 )
 
 [node name="NegativeRock" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 24 )

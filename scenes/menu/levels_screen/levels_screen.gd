@@ -433,6 +433,7 @@ func on_button_play_pressed() -> void:
 	start_level(false)
 
 func on_button_edit_pressed() -> void:
+	toggle_dark_mode()
 	if Singleton2.rp == true:
 		update_activity2()
 	elif Singleton2.rp == false:
