@@ -10,7 +10,7 @@ var ghost_enabled = true
 var crash
 var crash_happened = "no"
 
-var dark_mode:bool = true
+var dark_mode : bool
 
 signal dark_mode_toggled
 

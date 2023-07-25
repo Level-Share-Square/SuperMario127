@@ -20,6 +20,8 @@ static func load():
 		Engine.target_fps = 10 * (data["fpsLock"] + 3)
 		if data.has("richpresence"):
 			Singleton2.rp = data["richpresence"]
+		if data.has("darkmode"):
+			Singleton2.dark_mode = data["darkmode"]
 		if data.has("crashdetect"):
 			Singleton2.crash = data["crashdetect"]
 		if data.has("showghost"):
@@ -57,6 +59,7 @@ static func save():
 	var fpsLock = (Engine.target_fps / 10.0) - 3
 	var showTimer = Singleton.TimeScore.shown
 	var richpresence = Singleton2.rp
+	var darkmode = Singleton2.dark_mode
 	var crashdetect = Singleton2.crash
 	var showghost = Singleton2.ghost_enabled
 	var legacyCap = Singleton.PlayerSettings.legacy_wing_cap
@@ -66,6 +69,7 @@ static func save():
 		"fpsLock": fpsLock,
 		"showTimer": showTimer,
 		"richpresence": richpresence,
+		"darkmode": darkmode,
 		"crashdetect": crashdetect,
 		"showghost": showghost,
 		"controls": Singleton.PlayerSettings.keybindings,
@@ -90,6 +94,7 @@ static func save_volume():
 			"fpsLock": 3,
 			"showTimer": false,
 			"richpresence": true,
+			"darkmode": true,
 			"crashdetect": false,
 			"showghost": true,
 			"controls": Singleton.PlayerSettings.keybindings,

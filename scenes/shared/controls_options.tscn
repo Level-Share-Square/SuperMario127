@@ -115,9 +115,6 @@ font_data = ExtResource( 1 )
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 ignore_children = [ NodePath("Preset Selection"), NodePath("Description"), NodePath("ControlBindingWindow"), NodePath("PlayerSelectors"), NodePath("Legacy Wing Cap"), NodePath("TitleOnly") ]
 menu_buttons = [ NodePath("../Bottom/Buttons/ResumeButton"), NodePath("../Bottom/Buttons/RetryButton"), NodePath("../Bottom/Buttons/MultiplayerButton"), NodePath("../Bottom/Buttons/QuitButton") ]
 

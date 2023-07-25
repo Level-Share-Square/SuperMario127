@@ -587,7 +587,6 @@ anims/trans_out_MainMenuScreen_MultiplayerOptions = SubResource( 15 )
 anims/trans_out_MultiplayerOptions_MainMenuScreen = SubResource( 16 )
 
 [node name="PageSelect" type="Control" parent="."]
-visible = false
 margin_top = -14.0
 margin_right = 40.0
 margin_bottom = 26.0
@@ -840,42 +839,6 @@ position = Vector2( 17, 174 )
 scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 23 )
 
-[node name="DarkMode" type="Control" parent="Page1"]
-margin_left = 440.0
-margin_top = -64.0
-margin_right = 480.0
-margin_bottom = -24.0
-script = ExtResource( 32 )
-
-[node name="Box" type="Button" parent="Page1/DarkMode"]
-margin_left = 202.0
-margin_top = 160.0
-margin_right = 307.0
-margin_bottom = 190.0
-focus_mode = 0
-custom_fonts/font = SubResource( 13 )
-custom_styles/hover = SubResource( 10 )
-custom_styles/pressed = SubResource( 11 )
-custom_styles/focus = SubResource( 10 )
-custom_styles/disabled = SubResource( 12 )
-custom_styles/normal = SubResource( 11 )
-action_mode = 0
-enabled_focus_mode = 0
-text = "False"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Page1/DarkMode"]
-margin_left = 49.0
-margin_top = 157.0
-margin_right = 211.0
-margin_bottom = 189.0
-custom_fonts/font = SubResource( 9 )
-text = "Dark Mode:"
-align = 1
-valign = 1
-
 [node name="NumberOfPlayers" type="Control" parent="Page1"]
 margin_top = 50.0
 margin_right = 40.0
@@ -1080,17 +1043,48 @@ stream = ExtResource( 4 )
 volume_db = -10.0
 
 [node name="Page2" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -40.0
 margin_bottom = -40.0
 
+[node name="DarkMode" type="Control" parent="Page2"]
+margin_left = 440.0
+margin_top = -40.0
+margin_right = 480.0
+script = ExtResource( 32 )
+
+[node name="Box" type="Button" parent="Page2/DarkMode"]
+margin_left = -14.0
+margin_top = 169.0
+margin_right = 91.0
+margin_bottom = 199.0
+focus_mode = 0
+custom_fonts/font = SubResource( 13 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/focus = SubResource( 10 )
+custom_styles/disabled = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+action_mode = 0
+enabled_focus_mode = 0
+text = "False"
+
+[node name="Label" type="Label" parent="Page2/DarkMode"]
+margin_left = -167.0
+margin_top = 165.0
+margin_right = -5.0
+margin_bottom = 197.0
+custom_fonts/font = SubResource( 9 )
+text = "Dark Mode:"
+align = 1
+valign = 1
+
 [node name="GhostToggle" type="Control" parent="Page2"]
 margin_left = 251.0
-margin_top = 152.0
+margin_top = 176.0
 margin_right = 251.0
-margin_bottom = 152.0
+margin_bottom = 176.0
 
 [node name="Label" type="Label" parent="Page2/GhostToggle"]
 margin_right = 40.0
@@ -1100,8 +1094,9 @@ text = "Ghost Enabled:"
 
 [node name="Box" type="Button" parent="Page2/GhostToggle"]
 margin_left = 175.0
+margin_top = -1.0
 margin_right = 280.0
-margin_bottom = 30.0
+margin_bottom = 29.0
 focus_mode = 0
 custom_fonts/font = SubResource( 13 )
 custom_styles/hover = SubResource( 10 )

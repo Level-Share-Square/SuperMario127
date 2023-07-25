@@ -41,8 +41,26 @@ func go_to_menu():
 			Singleton.MenuVariables.quit_to_menu()
 	else:
 		Singleton.MenuVariables.quit_to_menu()
-
+		
+static func get_data_or_null():
+	var file = File.new()
+	file.open("user://settings.json", File.READ)
+	
+	var data = parse_json(file.get_as_text())
+	
+	file.close()
+	if typeof(data) == TYPE_DICTIONARY:
+		return data
+	else:
+		return null
+		
 func _ready():
+	var data = get_data_or_null()
+	if data != null:
+		if data.has("richpresence"):
+			Singleton2.rp = data["richpresence"]
+		if data.has("darkmode"):
+			Singleton2.dark_mode = data["darkmode"]
 	if Singleton2.dark_mode:
 		$Background/ColorRect.visible = false
 		$Background/TextureRect.visible = false
