@@ -1,4 +1,4 @@
-[gd_scene load_steps=712 format=2]
+[gd_scene load_steps=720 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -106,6 +106,7 @@
 [ext_resource path="res://scenes/actors/objects/big_bottle/icon.png" type="Texture" id=104]
 [ext_resource path="res://scenes/actors/objects/big_bottle/big_bottle.png" type="Texture" id=105]
 [ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/icon.png" type="Texture" id=106]
+[ext_resource path="res://scenes/menu/levels_screen/ui/star_coin_icon.png" type="Texture" id=107]
 [ext_resource path="res://scenes/actors/objects/pipe/preview.png" type="Texture" id=108]
 [ext_resource path="res://scenes/editor/assets/save_icon.png" type="Texture" id=109]
 [ext_resource path="res://scenes/actors/objects/pipe/icon.png" type="Texture" id=110]
@@ -686,6 +687,8 @@
 [ext_resource path="res://scenes/actors/objects/water_balloon/2small.png" type="Texture" id=685]
 [ext_resource path="res://scenes/actors/objects/sponge/testsponge.png" type="Texture" id=686]
 [ext_resource path="res://assets/tiles/boo_block/boo_block_invis.png" type="Texture" id=687]
+[ext_resource path="res://assets/level_data/autosave_dropdown.png" type="Texture" id=688]
+[ext_resource path="res://scenes/editor/autosave_button.gd" type="Script" id=689]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -713,6 +716,15 @@ load_path = "res://.import/para_icon.png-8aeadaf4263a669c7f336ac385709817.stex"
 
 [sub_resource type="StreamTexture" id=9]
 load_path = "res://.import/para_preview.png-0e3469addce65f08caeb730d898460dc.stex"
+
+[sub_resource type="DynamicFontData" id=29]
+font_path = "res://assets/fonts/delfino.ttf"
+
+[sub_resource type="DynamicFont" id=30]
+size = 32
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = SubResource( 29 )
 
 [sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.121569, 0.180392, 0.517647, 1 )
@@ -1244,6 +1256,75 @@ WindowDialog/styles/panel = null
 [sub_resource type="DynamicFont" id=25]
 size = 128
 font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=26]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 243, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -574, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "autosave_in"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 243, -0.25, 0, 0.25, 0, 243, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -574, -0.25, 0, 0.2, 106.346, -273, -0.3, -12.5093, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+
+[sub_resource type="Animation" id=31]
+resource_name = "autosave_out"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 243, -0.25, 0, 0.25, 0, 243, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -273, -0.3, -12.5093, 0.2, -0.664917, -575.369, -0.4, 75.2469, 0.2, 106.346 ),
+"times": PoolRealArray( 0, 0.4 )
+}
 
 [node name="Editor" type="Node2D"]
 script = ExtResource( 29 )
@@ -3176,6 +3257,22 @@ preview = ExtResource( 686 )
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
 
+[node name="TextureRect" type="TextureRect" parent="UI"]
+margin_left = 243.0
+margin_top = -574.0
+margin_right = 629.0
+margin_bottom = 45.0
+texture = ExtResource( 688 )
+stretch_mode = 1
+
+[node name="Label" type="Label" parent="UI/TextureRect"]
+margin_left = 105.545
+margin_top = 352.0
+margin_right = 404.545
+margin_bottom = 421.0
+custom_fonts/font = SubResource( 30 )
+text = "Autosaves"
+
 [node name="BackButton" parent="UI" instance=ExtResource( 166 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -3371,9 +3468,9 @@ editor_node_path = NodePath("../..")
 visible = false
 
 [node name="LevelSettingsButton" type="TextureButton" parent="UI"]
-margin_left = 708.0
+margin_left = 713.0
 margin_top = 4.0
-margin_right = 852.0
+margin_right = 857.0
 margin_bottom = 156.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
@@ -3393,9 +3490,9 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="HelpButton" type="TextureButton" parent="UI"]
-margin_left = 522.0
+margin_left = 531.0
 margin_top = 6.0
-margin_right = 666.0
+margin_right = 675.0
 margin_bottom = 158.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
@@ -3415,9 +3512,9 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="LayerSwitcher" type="TextureButton" parent="UI"]
-margin_left = 580.0
+margin_left = 589.0
 margin_top = 3.0
-margin_right = 740.0
+margin_right = 749.0
 margin_bottom = 163.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
@@ -3425,9 +3522,6 @@ texture_normal = ExtResource( 46 )
 texture_pressed = ExtResource( 53 )
 texture_hover = ExtResource( 115 )
 script = ExtResource( 23 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 editor_node_path = NodePath("../..")
 
 [node name="Label" type="Label" parent="UI/LayerSwitcher"]
@@ -3449,6 +3543,26 @@ stream = ExtResource( 121 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/LayerSwitcher"]
+stream = ExtResource( 120 )
+volume_db = -10.0
+
+[node name="AutoSave" type="TextureButton" parent="UI"]
+margin_left = 419.0
+margin_top = 6.0
+margin_right = 579.0
+margin_bottom = 166.0
+rect_scale = Vector2( 0.333, 0.333 )
+action_mode = 0
+texture_normal = ExtResource( 107 )
+texture_pressed = ExtResource( 107 )
+texture_hover = ExtResource( 107 )
+script = ExtResource( 689 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/AutoSave"]
+stream = ExtResource( 121 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/AutoSave"]
 stream = ExtResource( 120 )
 volume_db = -10.0
 
@@ -3477,9 +3591,9 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="BoundsControlToggle" type="TextureButton" parent="UI"]
-margin_left = 459.0
+margin_left = 468.0
 margin_top = 3.0
-margin_right = 619.0
+margin_right = 628.0
 margin_bottom = 163.0
 rect_scale = Vector2( 0.333, 0.333 )
 toggle_mode = true
@@ -3501,9 +3615,9 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="SaveButton" type="TextureButton" parent="UI"]
-margin_left = 645.0
+margin_left = 654.0
 margin_top = 6.0
-margin_right = 789.0
+margin_right = 798.0
 margin_bottom = 158.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
@@ -3667,7 +3781,7 @@ z_index = 25
 script = ExtResource( 22 )
 
 [node name="Backgrounds" parent="." instance=ExtResource( 52 )]
-position = Vector2( -31.013, 142.231 )
+position = Vector2( -57, 139 )
 
 [node name="Grid" type="ParallaxBackground" parent="."]
 layer = -1
@@ -3822,3 +3936,10 @@ __meta__ = {
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="BoundsControl"]
 stream = ExtResource( 120 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("../UI/TextureRect")
+anims/RESET = SubResource( 26 )
+anims/autosave_in = SubResource( 27 )
+anims/autosave_out = SubResource( 31 )
