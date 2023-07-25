@@ -65,9 +65,19 @@ var double_click := false
 
 var show_sample_levels := true
 
-func _ready() -> void:
-	Singleton2.save_ghost = false
+func toggle_dark_mode():
+	if Singleton2.dark_mode:
+		$TransitionRect.modulate = Color(0,0,0)
+	else:
+		$TransitionRect.modulate = Color(1,1,1)
 
+func _ready() -> void:
+	
+	Singleton2.save_ghost = false
+	
+	toggle_dark_mode()
+	Singleton2.connect("dark_mode_toggled",self,"toggle_dark_mode")
+	
 	var _connect
 
 	_connect = level_list.connect("item_selected", self, "on_level_selected")
@@ -370,18 +380,10 @@ func on_button_new_level_pressed() -> void:
 # keep that in mind when editing this
 func on_button_code_import_pressed() -> void:
 	var level_code = level_code_entry.text
-	
-	var arr_code = level_code.to_utf8()
-	print("NEW: ", arr_code)
-	arr_code = arr_code.decompress_dynamic(-1, 1)
-	print(arr_code)
-	var finished_code = arr_code.get_string_from_ascii()
-	
-	print("King of the Hill season 3 episode 1")
 
-	if level_code_util.is_valid(finished_code):
-		var level_info : LevelInfo = LevelInfo.new(finished_code)
-		add_level(finished_code)
+	if level_code_util.is_valid(level_code):
+		var level_info : LevelInfo = LevelInfo.new(level_code)
+		add_level(level_info)
 		level_code_entry.text = ""
 		set_level_code_panel(false)
 
@@ -405,10 +407,8 @@ func on_button_copy_code_pressed() -> void:
 		level_code_entry.text = tmp # I swear I did not touch it!
 		
 	else: # Copy Level Code
-		var bytearray_code = levels[selected_level].level_code.to_utf8()
-		bytearray_code = bytearray_code.compress(1)
-		var compressed_code = bytearray_code.get_string_from_ascii()
-		OS.clipboard = compressed_code #levels[selected_level].level_code
+		var bytearray_code = levels[selected_level].level_code
+		OS.clipboard = bytearray_code #levels[selected_level].level_code
 
 func on_button_community_levels_pressed() -> void:
 	show_sample_levels = false

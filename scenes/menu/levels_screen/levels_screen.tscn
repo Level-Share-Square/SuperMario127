@@ -1041,7 +1041,6 @@ anims/trans_out_MainMenuScreen_LevelsScreen = SubResource( 28 )
 [node name="TransitionRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
 color = Color( 1, 1, 1, 0 )
 __meta__ = {
 "_edit_lock_": true,

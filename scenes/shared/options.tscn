@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://scenes/shared/volume_mixer_play.gd" type="Script" id=29]
 [ext_resource path="res://assets/misc/tick_box_checked.png" type="Texture" id=30]
 [ext_resource path="res://scenes/shared/vm_scroll.gd" type="Script" id=31]
+[ext_resource path="res://scenes/shared/dark_mode.gd" type="Script" id=32]
 [ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=35]
 [ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=36]
 [ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=37]
@@ -635,7 +636,6 @@ expand = true
 flip_h = true
 
 [node name="Page1" type="Control" parent="."]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -839,6 +839,42 @@ valign = 1
 position = Vector2( 17, 174 )
 scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 23 )
+
+[node name="DarkMode" type="Control" parent="Page1"]
+margin_left = 440.0
+margin_top = -64.0
+margin_right = 480.0
+margin_bottom = -24.0
+script = ExtResource( 32 )
+
+[node name="Box" type="Button" parent="Page1/DarkMode"]
+margin_left = 202.0
+margin_top = 160.0
+margin_right = 307.0
+margin_bottom = 190.0
+focus_mode = 0
+custom_fonts/font = SubResource( 13 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/focus = SubResource( 10 )
+custom_styles/disabled = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+action_mode = 0
+enabled_focus_mode = 0
+text = "False"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Page1/DarkMode"]
+margin_left = 49.0
+margin_top = 157.0
+margin_right = 211.0
+margin_bottom = 189.0
+custom_fonts/font = SubResource( 9 )
+text = "Dark Mode:"
+align = 1
+valign = 1
 
 [node name="NumberOfPlayers" type="Control" parent="Page1"]
 margin_top = 50.0

@@ -35,4 +35,7 @@ func quit_to_menu(screen_to_open : String = ""): #switch this to use the enum an
 func quit_to_menu_with_transition(screen_to_open : String = ""):
 	# after the transition finishes fading out, switch to the menu before starting the fade in
 	var _connect = Singleton.SceneTransitions.connect("transition_finished", self, "quit_to_menu", [screen_to_open], CONNECT_ONESHOT)
-	Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))
+	if Singleton2.dark_mode:
+		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Color(0, 0, 0, 0), Color(0, 0, 0, 1))
+	else:
+		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))

@@ -43,6 +43,12 @@ func go_to_menu():
 		Singleton.MenuVariables.quit_to_menu()
 
 func _ready():
+	if Singleton2.dark_mode:
+		$Background/ColorRect.visible = false
+		$Background/TextureRect.visible = false
+		$Text/Loading.modulate = Color(1,1,1)
+		$Text/Coins.modulate = Color(1,1,1)
+		$Foreground/ColorRect.color = Color(0,0,0,1)
 	dir.make_dir("user://replays")
 	dir.make_dir("user://autosave")
 	if file.file_exists("user://072.json"):

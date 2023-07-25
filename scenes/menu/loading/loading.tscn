@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/menu/loading/gradient.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=2]
@@ -9,6 +9,14 @@
 [ext_resource path="res://scenes/menu/loading/block.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/menu/loading/SkipLoading.gd" type="Script" id=8]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/fonts/DelfinoFont.tres" type="DynamicFont" id=10]
+
+[sub_resource type="Gradient" id=7]
+offsets = PoolRealArray( 0.787709, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.337255, 0.337255, 0.337255, 1 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 20 )
@@ -213,25 +221,25 @@ script = ExtResource( 6 )
 [node name="Background" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="DarkRect" type="TextureRect" parent="Background"]
+margin_left = 771.0
+margin_top = -2.0
+margin_right = 1209.0
+margin_bottom = 773.0
+rect_rotation = 89.9991
+texture = SubResource( 8 )
+expand = true
 
 [node name="ColorRect" type="ColorRect" parent="Background"]
 margin_right = 768.0
 margin_bottom = 432.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect" type="TextureRect" parent="Background"]
 margin_right = 768.0
 margin_bottom = 432.0
 texture = ExtResource( 1 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Sprites" type="Control" parent="."]
 margin_right = 40.0
@@ -250,7 +258,7 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Sprites/Player"]
 frames = ExtResource( 2 )
 animation = "movingRight"
-frame = 3
+frame = 2
 speed_scale = 1.25
 playing = true
 centered = false
@@ -261,7 +269,7 @@ position = Vector2( 0, 80 )
 scale = Vector2( 1, -0.75 )
 frames = ExtResource( 2 )
 animation = "movingRight"
-frame = 3
+frame = 2
 speed_scale = 1.25
 playing = true
 centered = false
@@ -317,18 +325,16 @@ __meta__ = {
 }
 
 [node name="Coins" type="Label" parent="Text"]
+modulate = Color( 0, 0, 0, 1 )
 margin_left = 620.0
 margin_top = 20.0
 margin_right = 748.0
 margin_bottom = 44.0
 size_flags_vertical = 1
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 10 )
 text = "000/100"
 align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Shadow" type="Label" parent="Text/Coins"]
 margin_left = 2.0
@@ -339,21 +345,16 @@ custom_colors/font_color = Color( 0, 0, 0, 0.156863 )
 custom_fonts/font = SubResource( 4 )
 text = "000/100"
 align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Loading" type="Label" parent="Text"]
+modulate = Color( 0, 0, 0, 1 )
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 164.0
 margin_bottom = 44.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 10 )
 text = "Loading game..."
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Shadow" type="Label" parent="Text/Loading"]
 margin_left = 2.0
@@ -363,9 +364,6 @@ margin_bottom = 26.0
 custom_colors/font_color = Color( 0, 0, 0, 0.156863 )
 custom_fonts/font = SubResource( 4 )
 text = "Loading game..."
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Foreground" type="Control" parent="."]
 margin_right = 40.0

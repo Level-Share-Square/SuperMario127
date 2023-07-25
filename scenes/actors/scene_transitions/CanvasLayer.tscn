@@ -15,9 +15,6 @@ margin_right = 768.0
 margin_bottom = 432.0
 mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 384, 216 )

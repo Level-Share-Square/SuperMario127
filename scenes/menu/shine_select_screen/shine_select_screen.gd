@@ -55,7 +55,17 @@ var shine_details : Array
 # An array for the shine indices into the shine_details array, since directly indexing shine_details is unreliable
 var shine_details_indices := []
 
+func toggle_dark_mode():
+	if Singleton2.dark_mode:
+		$TransitionRect.color = Color(0,0,0)
+	else:
+		$TransitionRect.color = Color(1,1,1)
+
 func _ready() -> void:
+	
+	toggle_dark_mode()
+	Singleton2.connect("dark_mode_toggled",self,"toggle_dark_mode")
+	
 	# store the initial volume of the mission_select_sfx
 	mission_select_sfx_volume = mission_select_sfx.volume_db
 
@@ -244,8 +254,12 @@ func on_animation_finished(anim_name : String) -> void:
 # unlike the rest of the signals, this is connected in the start_level function
 func change_to_player_scene(_animation : String) -> void:
 	# Start fading out now; the transition has finished
-	Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME,\
-	Color(1, 1, 1, 1), Color(1, 1, 1, 0), false)
+	if Singleton2.dark_mode:
+		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME,\
+		Color(0, 0, 0, 1), Color(0, 0, 0, 0), false)
+	else:
+		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME,\
+		Color(1, 1, 1, 1), Color(1, 1, 1, 0), false)
 
 	var _change_scene = get_tree().change_scene_to(PLAYER_SCENE)
 
