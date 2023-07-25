@@ -3353,9 +3353,6 @@ rect_scale = Vector2( 0.335, 0.335 )
 texture = ExtResource( 40 )
 stretch_mode = 3
 script = ExtResource( 31 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 normal_color = Color( 1, 1, 1, 1 )
 selected_color = Color( 0.313726, 0.309804, 0.882353, 1 )
 editor_node_path = NodePath("../..")
@@ -3371,6 +3368,7 @@ editor_node_path = NodePath("../..")
 [node name="ColorPickerWindow" parent="UI" instance=ExtResource( 219 )]
 
 [node name="HelpWindow" parent="UI" instance=ExtResource( 531 )]
+visible = false
 
 [node name="LevelSettingsButton" type="TextureButton" parent="UI"]
 margin_left = 708.0

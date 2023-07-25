@@ -525,7 +525,6 @@ gradient = SubResource( 14 )
 width = 193
 
 [node name="HelpWindow" type="NinePatchRect"]
-visible = false
 margin_left = 165.0
 margin_top = 129.921
 margin_right = 1218.0
@@ -539,9 +538,6 @@ patch_margin_top = 110
 patch_margin_right = 40
 patch_margin_bottom = 40
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Title" type="RichTextLabel" parent="."]
 margin_left = 24.0
@@ -552,9 +548,6 @@ mouse_filter = 2
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_text = "Help"
 text = "Help"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CloseButton" type="TextureButton" parent="."]
 margin_left = 888.65
@@ -585,12 +578,9 @@ margin_bottom = 482.0
 theme = SubResource( 11 )
 scroll_horizontal_enabled = false
 script = SubResource( 12 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Hotkeys"]
-margin_right = 978.0
+margin_right = 966.0
 margin_bottom = 1147.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

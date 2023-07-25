@@ -270,7 +270,30 @@ func update_selected_object(mouse_pos : Vector2) -> void:
 			hovered_object = null
 			item_preview.visible = true
 
+func is_platform():
+	if "Platform" in hovered_object.to_string():
+		return true
+	elif "TouchLift" in hovered_object.to_string():
+		return true
+	elif "Seesaw" in hovered_object.to_string():
+		return true
+	else:
+		return false
+
+func _input(event):
+	if is_instance_valid(hovered_object):
+		if event is InputEventMouseButton and event.is_pressed():
+			if hovered_object != null || hovered_object.to_string() != "[Deleted Object]":
+				if !is_platform():
+					if get_viewport().get_mouse_position().y > 70: # Mouse is below the toolbar
+							if event.button_index == 5: # Mouse wheel down
+								hovered_object.set_property("scale", Vector2(hovered_object.scale.x - 0.5, hovered_object.scale.x - 0.5), true)
+							elif event.button_index == 4: # Mouse wheel up
+								hovered_object.set_property("scale", Vector2(hovered_object.scale.x + 0.5, hovered_object.scale.x + 0.5), true)
+					
+
 func _process(delta : float) -> void:
+	print(hovered_object)
 	if autosave_timer > 0:
 		autosave_timer -= 1
 	if autosave_timer <= 0:
@@ -336,8 +359,14 @@ func _process(delta : float) -> void:
 			if Input.is_action_just_pressed("toggle_enabled"):
 				hovered_object.set_property("enabled", !hovered_object.enabled, true)
 			
-			if Input.is_action_just_pressed("minecraft_pick_block"):
-				pick_item(hovered_object)
+#			if Input.is_action_just_pressed("minecraft_pick_block"):
+#				pick_item(hovered_object)
+#
+			if Input.is_mouse_button_pressed(4):
+				hovered_object.set_property("scale", Vector2(10, 10), true)
+				
+				
+				
 			
 			if left_held and selected_tool == 0 and Input.is_action_just_pressed("place") and !rotating:
 				if Input.is_action_pressed("duplicate"):
