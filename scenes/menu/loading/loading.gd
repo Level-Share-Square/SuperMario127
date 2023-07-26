@@ -16,6 +16,7 @@ onready var coin_sound = $CoinSound
 onready var coin_scene = preload("res://scenes/menu/loading/coin.tscn")
 
 var resource_loader
+var button_pressed = false
 
 onready var amount_of_scenes = Singleton.load_paths.size()
 onready var thread = Thread.new()
@@ -255,6 +256,6 @@ func load_singletons(userdata):
 	
 	#used to display the skip button once all singletons have loaded
 	if(done == true):
-		get_node("SkipLoading").visible = true
+		animation_player.play("buttonIn")
 	percentage = 1
 	print("Finished loading all scenes within the singletons")

@@ -1,13 +1,12 @@
 extends Button
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 
 func _ready():
 	connect("pressed", self, "_button_pressed")
 
 func _button_pressed():
-	Singleton.MenuVariables.quit_to_menu()
+	var parent = get_parent()
+	parent.button_pressed = true
+	var animplayer = get_parent().get_node("AnimationPlayer")
+	animplayer.play("buttonFadeOut")

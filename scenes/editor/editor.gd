@@ -34,6 +34,8 @@ var autosave_timer = 45000
 
 var object_pos : Vector2
 
+var undo_array = []
+
 
 var left_held := false
 var right_held := false
@@ -296,7 +298,6 @@ func _input(event):
 					
 
 func _process(delta : float) -> void:
-	print(hovered_object)
 	if autosave_timer > 0:
 		autosave_timer -= 1
 	if autosave_timer <= 0:
@@ -416,6 +417,8 @@ func _process(delta : float) -> void:
 			if left_held and selected_tool == 0:
 				var item = selected_box.item
 				
+			
+				
 				if !item.is_object: # Place tile
 					# Don't spam place tiles into the same spot
 					if ((mouse_tile_pos != last_mouse_tile_pos or Input.is_action_just_pressed("place"))
@@ -513,6 +516,7 @@ func _process(delta : float) -> void:
 					action.data.append(element)
 				tiles_stack.clear()
 				Singleton.ActionManager.add_action(action)
+				print(action.data)
 
 				# if an action is being added, that means we should count the count the level data as modified and in need of a save
 				Singleton.CurrentLevelData.unsaved_editor_changes = true

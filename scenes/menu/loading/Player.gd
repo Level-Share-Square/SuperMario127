@@ -16,12 +16,14 @@ func _ready():
 	_connect = block_area.connect("area_entered", self, "hit_block")
 
 func hit_block(detected_area):
+	var parent = get_parent().get_parent()
 	if get_tree().get_current_scene().coins_spawned < detected_area.get_parent().coin_requirement: return
 	if blocks_hit < detected_area.get_parent().block_index: return
 	
 	if detected_area.get_parent().is_last:
 		move_speed = 0
-		get_tree().get_current_scene().get_node("AnimationPlayer").play("FadeOut")
+		if parent.button_pressed == false:
+			get_tree().get_current_scene().get_node("AnimationPlayer").play("FadeOut")
 		animation_player.play("JumpLast")
 		detected_area.get_parent().get_node("AnimationPlayer").play("Hit")
 	else:
