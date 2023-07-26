@@ -65,11 +65,15 @@ var double_click := false
 
 var show_sample_levels := true
 
+var is_dark:bool = false
+
 func toggle_dark_mode():
 	if Singleton2.dark_mode:
 		$TransitionRect.modulate = Color(0,0,0)
+		is_dark = true
 	else:
 		$TransitionRect.modulate = Color(1,1,1)
+		is_dark = false
 
 func _ready() -> void:
 	
@@ -321,7 +325,11 @@ func start_level(start_in_edit_mode : bool):
 	var _connect = Singleton.SceneTransitions.connect("transition_finished", get_tree(), "change_scene_to", [goal_scene], CONNECT_ONESHOT)
 	
 	Singleton.SceneTransitions.play_transition_audio()
-	Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))
+	
+	if is_dark:
+		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Color(0, 0, 0, 0), Color(0, 0, 0, 1))
+	else:
+		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Color(1, 1, 1, 1))
 
 func set_level_code_panel(new_value : bool):
 	level_list_panel.visible = !new_value 
