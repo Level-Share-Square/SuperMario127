@@ -5,6 +5,8 @@ const LAYER_COUNT = 4
 
 var mode = 1
 
+var soft_autosave_timer = 1800
+
 export var placement_mode := "Drag"
 export var surface_snap := false
 export var placeable_items_path : NodePath
@@ -298,6 +300,7 @@ func _input(event):
 					
 
 func _process(delta : float) -> void:
+
 	if autosave_timer > 0:
 		autosave_timer -= 1
 	if autosave_timer <= 0:
@@ -331,6 +334,18 @@ func _process(delta : float) -> void:
 		$"UI".visible = !$"UI".visible
 		$"Grid".visible = !$"Grid".visible
 		$"PlaceableItems/MiscGroup/BooBlock".preview = invis_boo
+		
+	
+	if soft_autosave_timer >= 0:
+		print(soft_autosave_timer)
+		soft_autosave_timer -= 1
+	else:
+		if Singleton.SavedLevels.selected_level != -1:
+			Singleton.SavedLevels.levels[Singleton.SavedLevels.selected_level] = LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data())
+			var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
+
+			Singleton.CurrentLevelData.unsaved_editor_changes = false
+			soft_autosave_timer = 30 / delta
 	
 	if get_viewport().get_mouse_position().y > 70: # Mouse is below the toolbar
 		var mouse_pos := get_global_mouse_position()
@@ -413,9 +428,11 @@ func _process(delta : float) -> void:
 		if selected_box and selected_box.item:
 			
 			# Place items
+		
 			
 			if left_held and selected_tool == 0:
 				var item = selected_box.item
+				
 				
 			
 				
@@ -516,8 +533,6 @@ func _process(delta : float) -> void:
 					action.data.append(element)
 				tiles_stack.clear()
 				Singleton.ActionManager.add_action(action)
-				print(action.data)
-
 				# if an action is being added, that means we should count the count the level data as modified and in need of a save
 				Singleton.CurrentLevelData.unsaved_editor_changes = true
 		

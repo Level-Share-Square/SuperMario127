@@ -496,7 +496,6 @@ WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
 [node name="ObjectSettingsWindow" type="NinePatchRect"]
-visible = false
 margin_left = 165.0
 margin_top = 130.0
 margin_right = 1267.0
@@ -510,9 +509,6 @@ patch_margin_top = 110
 patch_margin_right = 40
 patch_margin_bottom = 40
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 grid_container = NodePath("Contents/ScrollContainer/GridContainer")
 preview = NodePath("Contents/Preview")
 delete_button = NodePath("Contents/DeleteButton")
@@ -573,19 +569,16 @@ margin_bottom = 166.0
 rect_scale = Vector2( 2, 2 )
 rect_clip_content = true
 texture = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="DeleteButton" type="Button" parent="Contents"]
 margin_left = 32.0
 margin_top = 336.0
 margin_right = 320.0
 margin_bottom = 415.0
+custom_fonts/font = SubResource( 13 )
 custom_styles/hover = ExtResource( 11 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/normal = ExtResource( 10 )
-custom_fonts/font = SubResource( 13 )
 text = "Delete"
 script = ExtResource( 9 )
 __meta__ = {
@@ -605,10 +598,10 @@ margin_left = 31.0
 margin_top = 431.0
 margin_right = 171.0
 margin_bottom = 491.0
+custom_fonts/font = SubResource( 14 )
 custom_styles/hover = ExtResource( 12 )
 custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 13 )
-custom_fonts/font = SubResource( 14 )
 text = "To Back"
 script = ExtResource( 9 )
 __meta__ = {
@@ -628,10 +621,10 @@ margin_left = 191.0
 margin_top = 431.0
 margin_right = 321.0
 margin_bottom = 491.0
+custom_fonts/font = SubResource( 14 )
 custom_styles/hover = ExtResource( 12 )
 custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 13 )
-custom_fonts/font = SubResource( 14 )
 text = "To Front"
 script = ExtResource( 9 )
 __meta__ = {
@@ -653,9 +646,6 @@ margin_bottom = 508.0
 rect_clip_content = false
 theme = SubResource( 11 )
 scroll_horizontal_enabled = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GridContainer" type="GridContainer" parent="Contents/ScrollContainer"]
 margin_right = 710.0

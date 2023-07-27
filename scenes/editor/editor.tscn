@@ -1,4 +1,4 @@
-[gd_scene load_steps=720 format=2]
+[gd_scene load_steps=721 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -689,6 +689,7 @@
 [ext_resource path="res://assets/tiles/boo_block/boo_block_invis.png" type="Texture" id=687]
 [ext_resource path="res://assets/level_data/autosave_dropdown.png" type="Texture" id=688]
 [ext_resource path="res://scenes/editor/autosave_button.gd" type="Script" id=689]
+[ext_resource path="res://assets/level_data/autosave.png" type="Texture" id=690]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1266,7 +1267,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 243, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 327, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/1/type = "bezier"
@@ -1289,7 +1290,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 243, -0.25, 0, 0.25, 0, 243, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 327, -0.25, 0, 0.25, 0, 327, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 1 )
 }
 tracks/1/type = "bezier"
@@ -1312,7 +1313,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 243, -0.25, 0, 0.25, 0, 243, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 327, -0.25, 0, 0.25, 0, 327, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 1 )
 }
 tracks/1/type = "bezier"
@@ -3258,9 +3259,9 @@ preview = ExtResource( 686 )
 layer = 100
 
 [node name="TextureRect" type="TextureRect" parent="UI"]
-margin_left = 243.0
+margin_left = 327.0
 margin_top = -574.0
-margin_right = 629.0
+margin_right = 713.0
 margin_bottom = 45.0
 texture = ExtResource( 688 )
 stretch_mode = 1
@@ -3455,12 +3456,14 @@ selected_color = Color( 0.313726, 0.309804, 0.882353, 1 )
 editor_node_path = NodePath("../..")
 
 [node name="LevelSettingsWindow" parent="UI" instance=ExtResource( 168 )]
+visible = false
 
 [node name="ObjectSettingsWindow" parent="UI" instance=ExtResource( 217 )]
 
 [node name="LevelCodeWindow" parent="UI" instance=ExtResource( 218 )]
 
 [node name="AreasWindow" parent="UI" instance=ExtResource( 167 )]
+visible = false
 
 [node name="ColorPickerWindow" parent="UI" instance=ExtResource( 219 )]
 
@@ -3490,9 +3493,9 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="HelpButton" type="TextureButton" parent="UI"]
-margin_left = 531.0
+margin_left = 585.0
 margin_top = 6.0
-margin_right = 675.0
+margin_right = 729.0
 margin_bottom = 158.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
@@ -3512,10 +3515,11 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="LayerSwitcher" type="TextureButton" parent="UI"]
-margin_left = 589.0
-margin_top = 3.0
-margin_right = 749.0
-margin_bottom = 163.0
+self_modulate = Color( 1, 1, 1, 0.721569 )
+margin_left = 718.0
+margin_top = 71.0
+margin_right = 878.0
+margin_bottom = 231.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
 texture_normal = ExtResource( 46 )
@@ -3547,13 +3551,13 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="AutoSave" type="TextureButton" parent="UI"]
-margin_left = 419.0
-margin_top = 6.0
-margin_right = 579.0
-margin_bottom = 166.0
-rect_scale = Vector2( 0.333, 0.333 )
+margin_left = 492.0
+margin_top = 3.0
+margin_right = 673.078
+margin_bottom = 204.0
+rect_scale = Vector2( 0.4, 0.4 )
 action_mode = 0
-texture_normal = ExtResource( 107 )
+texture_normal = ExtResource( 690 )
 texture_pressed = ExtResource( 107 )
 texture_hover = ExtResource( 107 )
 script = ExtResource( 689 )
@@ -3591,9 +3595,9 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="BoundsControlToggle" type="TextureButton" parent="UI"]
-margin_left = 468.0
+margin_left = 412.0
 margin_top = 3.0
-margin_right = 628.0
+margin_right = 572.0
 margin_bottom = 163.0
 rect_scale = Vector2( 0.333, 0.333 )
 toggle_mode = true
@@ -3615,9 +3619,9 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="SaveButton" type="TextureButton" parent="UI"]
-margin_left = 654.0
+margin_left = 650.0
 margin_top = 6.0
-margin_right = 798.0
+margin_right = 794.0
 margin_bottom = 158.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
@@ -3781,7 +3785,7 @@ z_index = 25
 script = ExtResource( 22 )
 
 [node name="Backgrounds" parent="." instance=ExtResource( 52 )]
-position = Vector2( -57, 139 )
+position = Vector2( -51, 148 )
 
 [node name="Grid" type="ParallaxBackground" parent="."]
 layer = -1

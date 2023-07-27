@@ -80,7 +80,6 @@ corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
 [node name="LevelSettingsWindow" type="NinePatchRect"]
-visible = false
 margin_left = 165.0
 margin_top = 129.921
 margin_right = 1218.0
