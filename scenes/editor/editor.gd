@@ -5,8 +5,6 @@ const LAYER_COUNT = 4
 
 var mode = 1
 
-var soft_autosave_timer = 1800
-
 export var placement_mode := "Drag"
 export var surface_snap := false
 export var placeable_items_path : NodePath
@@ -36,8 +34,6 @@ var autosave_timer = 45000
 
 var object_pos : Vector2
 
-var undo_array = []
-
 
 var left_held := false
 var right_held := false
@@ -56,6 +52,7 @@ export var selected_tool := 0
 export var zoom_level := 1.0
 
 var tiles_stack := []
+var objects_stack := []
 
 var coin_frame : int
 
@@ -300,7 +297,7 @@ func _input(event):
 					
 
 func _process(delta : float) -> void:
-
+	print(hovered_object)
 	if autosave_timer > 0:
 		autosave_timer -= 1
 	if autosave_timer <= 0:
@@ -334,18 +331,6 @@ func _process(delta : float) -> void:
 		$"UI".visible = !$"UI".visible
 		$"Grid".visible = !$"Grid".visible
 		$"PlaceableItems/MiscGroup/BooBlock".preview = invis_boo
-		
-	
-	if soft_autosave_timer >= 0:
-		print(soft_autosave_timer)
-		soft_autosave_timer -= 1
-	else:
-		if Singleton.SavedLevels.selected_level != -1:
-			Singleton.SavedLevels.levels[Singleton.SavedLevels.selected_level] = LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data())
-			var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
-
-			Singleton.CurrentLevelData.unsaved_editor_changes = false
-			soft_autosave_timer = 30 / delta
 	
 	if get_viewport().get_mouse_position().y > 70: # Mouse is below the toolbar
 		var mouse_pos := get_global_mouse_position()
@@ -428,13 +413,9 @@ func _process(delta : float) -> void:
 		if selected_box and selected_box.item:
 			
 			# Place items
-		
 			
 			if left_held and selected_tool == 0:
 				var item = selected_box.item
-				
-				
-			
 				
 				if !item.is_object: # Place tile
 					# Don't spam place tiles into the same spot
@@ -476,7 +457,10 @@ func _process(delta : float) -> void:
 						object.properties.append(0)
 						object.properties.append(true)
 						object.properties.append(true)
-						shared.create_object(object, true)
+						var object_copy = object
+						objects_stack.append([shared.create_object(object, true),true,object_copy])
+						# Merciful Lord Jesus, please forgive me for 
+						# writing this abhorrent line of code. Amen.
 						last_object_pos = object_pos
 						
 					last_object_pos = object_pos
@@ -488,8 +472,9 @@ func _process(delta : float) -> void:
 						
 					elif(abs(length_difference.y) >= item_preview.texture.get_height()):
 						object_pos.y = last_object_pos.y + item_preview.texture.get_height() * (length_difference.y/abs(length_difference.y))
-							
-			
+						
+						
+						
 			# Delete items
 			if (right_held and selected_tool < 2) or (left_held and selected_tool == 1):
 				var item = selected_box.item
@@ -527,12 +512,23 @@ func _process(delta : float) -> void:
 		if !left_held:
 			time_clicked = 0
 			if last_left_held or !right_held and last_right_held:
-				var action = Action.new()
-				action.type = "place_tile"
-				for element in tiles_stack:
-					action.data.append(element)
-				tiles_stack.clear()
-				Singleton.ActionManager.add_action(action)
+				# This code is bad, should probably be fixed soon
+				var item = selected_box.item
+				if !item.is_object:
+					var action = Action.new()
+					action.type = "place_tile"
+					for element in tiles_stack:
+						action.data.append(element)
+					tiles_stack.clear()
+					Singleton.ActionManager.add_action(action)
+				else:
+					var action2 = Action.new()
+					action2.type = "place_object"
+					for element in objects_stack:
+						action2.data.append(element)
+					objects_stack.clear()
+					Singleton.ActionManager.add_action(action2)
+
 				# if an action is being added, that means we should count the count the level data as modified and in need of a save
 				Singleton.CurrentLevelData.unsaved_editor_changes = true
 		
