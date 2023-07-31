@@ -3446,7 +3446,7 @@ volume_db = -10.0
 margin_left = -1.0
 margin_top = -1.0
 margin_right = 2304.0
-margin_bottom = 209.0
+margin_bottom = 217.0
 rect_scale = Vector2( 0.335, 0.335 )
 texture = ExtResource( 40 )
 stretch_mode = 3
@@ -3493,6 +3493,7 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="HelpButton" type="TextureButton" parent="UI"]
+visible = false
 margin_left = 585.0
 margin_top = 6.0
 margin_right = 729.0
@@ -3551,6 +3552,7 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="AutoSave" type="TextureButton" parent="UI"]
+visible = false
 margin_left = 492.0
 margin_top = 3.0
 margin_right = 673.078
@@ -3571,9 +3573,9 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="SearchButton" type="TextureButton" parent="UI"]
-margin_left = 364.0
+margin_left = 533.0
 margin_top = 3.0
-margin_right = 524.0
+margin_right = 693.0
 margin_bottom = 163.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
@@ -3595,9 +3597,9 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="BoundsControlToggle" type="TextureButton" parent="UI"]
-margin_left = 412.0
+margin_left = 581.0
 margin_top = 3.0
-margin_right = 572.0
+margin_right = 741.0
 margin_bottom = 163.0
 rect_scale = Vector2( 0.333, 0.333 )
 toggle_mode = true
@@ -3606,9 +3608,6 @@ texture_normal = ExtResource( 116 )
 texture_pressed = ExtResource( 118 )
 texture_hover = ExtResource( 117 )
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/BoundsControlToggle"]
 stream = ExtResource( 121 )
@@ -3619,19 +3618,16 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="SaveButton" type="TextureButton" parent="UI"]
-margin_left = 650.0
-margin_top = 6.0
-margin_right = 794.0
-margin_bottom = 158.0
+margin_left = 646.0
+margin_top = 5.0
+margin_right = 790.0
+margin_bottom = 157.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
 texture_normal = ExtResource( 109 )
 texture_pressed = ExtResource( 68 )
 texture_hover = ExtResource( 45 )
 script = ExtResource( 20 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 window = NodePath("../LevelCodeWindow")
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/SaveButton"]

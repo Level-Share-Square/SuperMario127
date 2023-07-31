@@ -1,7 +1,7 @@
 extends TextureRect
 
 onready var PLACEABLE_ITEM_BUTTON = load("res://scenes/editor/placeable_item_button.tscn")
-export var number_of_boxes := 7
+export var number_of_boxes := 10
 export var margin := 156
 export var base_margin := 12
 export var normal_color : Color
