@@ -463,16 +463,18 @@ func _process(delta : float) -> void:
 						# writing this abhorrent line of code. Amen.
 						last_object_pos = object_pos
 						
-					last_object_pos = object_pos
-					mouse_pos = get_global_mouse_position()
-					var length_difference = mouse_pos - last_object_pos
-					
-					if(abs(length_difference.x) >= item_preview.texture.get_width()):
-						object_pos.x = last_object_pos.x + item_preview.texture.get_width() * (length_difference.x/abs(length_difference.x))
 						
-					elif(abs(length_difference.y) >= item_preview.texture.get_height()):
-						object_pos.y = last_object_pos.y + item_preview.texture.get_height() * (length_difference.y/abs(length_difference.y))
-						
+					if Input.is_action_pressed("clickdrag"):
+						last_object_pos = object_pos
+						mouse_pos = get_global_mouse_position()
+						var length_difference = mouse_pos - last_object_pos
+
+						if(abs(length_difference.x) >= item_preview.texture.get_width()):
+							object_pos.x = last_object_pos.x + item_preview.texture.get_width() * (length_difference.x/abs(length_difference.x))
+
+						elif(abs(length_difference.y) >= item_preview.texture.get_height()):
+							object_pos.y = last_object_pos.y + item_preview.texture.get_height() * (length_difference.y/abs(length_difference.y))
+
 						
 						
 			# Delete items
