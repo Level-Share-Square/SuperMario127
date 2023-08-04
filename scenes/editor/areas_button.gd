@@ -1,7 +1,7 @@
 extends BaseButton
 
 onready var hover_sound : AudioStreamPlayer = $HoverSound 
-onready var click_sound : AudioStreamPlayer = $ClickSound 
+onready var click_sound : AudioStreamPlayer = $ClickSound
 
 func _ready() -> void:
 	var _connect

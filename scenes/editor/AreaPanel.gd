@@ -2,6 +2,9 @@ extends Control
 
 onready var switch_to_button = $HBoxContainer/SwitchToButton
 onready var delete_button = $HBoxContainer/DeleteButton
+onready var duplicate_button = $HBoxContainer/DuplicateButton
+# Added for duplicate
+onready var new_area = $NewArea
 
 const background_id_mapper = "res://scenes/shared/background/backgrounds/ids.tres"
 const foreground_id_mapper = "res://scenes/shared/background/foregrounds/ids.tres"
@@ -33,9 +36,14 @@ func set_id(new_id):
 func _ready():
 	var _connect = switch_to_button.connect("pressed", self, "switch_to_area")
 	_connect = delete_button.connect("pressed", self, "delete_area")
+	_connect = duplicate_button.connect("pressed", self, "duplicate_area")
 	if id == Singleton.CurrentLevelData.area:
 		switch_to_button.disabled = true
 		delete_button.disabled = true
+		
+	#Duplicate
+	# if Singleton.CurrentLevelData.level_data.areas.size() == 6:
+	# 	new_area.disabled = true
 
 func switch_to_area():
 	if id != Singleton.CurrentLevelData.area:
@@ -48,4 +56,12 @@ func delete_area():
 		if Singleton.CurrentLevelData.area > id:
 			Singleton.CurrentLevelData.area -= 1
 		get_parent().get_parent().get_parent().reload_areas()
-	
+
+func duplicate_area():
+	if Singleton.CurrentLevelData.level_data.areas.size() < 16:
+		var area = LevelArea.new()
+		var dup = Singleton.CurrentLevelData.level_data.areas[id]
+		area.duplicate(dup)
+		Singleton.CurrentLevelData.level_data.areas.append(area)
+		get_parent().get_parent().get_parent().reload_areas()
+	# new_area.disabled = (Singleton.CurrentLevelData.level_data.areas.size() == 16)

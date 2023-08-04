@@ -40,5 +40,5 @@ func create_area():
 		area.duplicate(Singleton.EditorSavedSettings.default_area)
 		Singleton.CurrentLevelData.level_data.areas.append(area)
 		reload_areas()
-
+		
 		new_area.disabled = (Singleton.CurrentLevelData.level_data.areas.size() == 16)
