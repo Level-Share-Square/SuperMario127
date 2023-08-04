@@ -34,8 +34,6 @@ var autosave_timer = 45000
 
 var object_pos : Vector2
 
-var undo_array = []
-
 
 var left_held := false
 var right_held := false
@@ -54,6 +52,7 @@ export var selected_tool := 0
 export var zoom_level := 1.0
 
 var tiles_stack := []
+var objects_stack := []
 
 var coin_frame : int
 
@@ -298,6 +297,7 @@ func _input(event):
 					
 
 func _process(delta : float) -> void:
+	print(hovered_object)
 	if autosave_timer > 0:
 		autosave_timer -= 1
 	if autosave_timer <= 0:
@@ -417,8 +417,6 @@ func _process(delta : float) -> void:
 			if left_held and selected_tool == 0:
 				var item = selected_box.item
 				
-			
-				
 				if !item.is_object: # Place tile
 					# Don't spam place tiles into the same spot
 					if ((mouse_tile_pos != last_mouse_tile_pos or Input.is_action_just_pressed("place"))
@@ -459,20 +457,26 @@ func _process(delta : float) -> void:
 						object.properties.append(0)
 						object.properties.append(true)
 						object.properties.append(true)
-						shared.create_object(object, true)
+						var object_copy = object
+						objects_stack.append([shared.create_object(object, true),true,object_copy])
+						# Merciful Lord Jesus, please forgive me for 
+						# writing this abhorrent line of code. Amen.
 						last_object_pos = object_pos
 						
-					last_object_pos = object_pos
-					mouse_pos = get_global_mouse_position()
-					var length_difference = mouse_pos - last_object_pos
-					
-					if(abs(length_difference.x) >= item_preview.texture.get_width()):
-						object_pos.x = last_object_pos.x + item_preview.texture.get_width() * (length_difference.x/abs(length_difference.x))
 						
-					elif(abs(length_difference.y) >= item_preview.texture.get_height()):
-						object_pos.y = last_object_pos.y + item_preview.texture.get_height() * (length_difference.y/abs(length_difference.y))
-							
-			
+					if Input.is_action_pressed("clickdrag"):
+						last_object_pos = object_pos
+						mouse_pos = get_global_mouse_position()
+						var length_difference = mouse_pos - last_object_pos
+
+						if(abs(length_difference.x) >= item_preview.texture.get_width()):
+							object_pos.x = last_object_pos.x + item_preview.texture.get_width() * (length_difference.x/abs(length_difference.x))
+
+						elif(abs(length_difference.y) >= item_preview.texture.get_height()):
+							object_pos.y = last_object_pos.y + item_preview.texture.get_height() * (length_difference.y/abs(length_difference.y))
+
+						
+						
 			# Delete items
 			if (right_held and selected_tool < 2) or (left_held and selected_tool == 1):
 				var item = selected_box.item
@@ -510,13 +514,22 @@ func _process(delta : float) -> void:
 		if !left_held:
 			time_clicked = 0
 			if last_left_held or !right_held and last_right_held:
-				var action = Action.new()
-				action.type = "place_tile"
-				for element in tiles_stack:
-					action.data.append(element)
-				tiles_stack.clear()
-				Singleton.ActionManager.add_action(action)
-				print(action.data)
+				# This code is bad, should probably be fixed soon
+				var item = selected_box.item
+				if !item.is_object:
+					var action = Action.new()
+					action.type = "place_tile"
+					for element in tiles_stack:
+						action.data.append(element)
+					tiles_stack.clear()
+					Singleton.ActionManager.add_action(action)
+				else:
+					var action2 = Action.new()
+					action2.type = "place_object"
+					for element in objects_stack:
+						action2.data.append(element)
+					objects_stack.clear()
+					Singleton.ActionManager.add_action(action2)
 
 				# if an action is being added, that means we should count the count the level data as modified and in need of a save
 				Singleton.CurrentLevelData.unsaved_editor_changes = true

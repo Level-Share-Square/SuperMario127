@@ -20,7 +20,6 @@ size = 48
 font_data = ExtResource( 1 )
 
 [node name="AreasWindow" type="NinePatchRect"]
-visible = false
 margin_left = 165.0
 margin_top = 130.0
 margin_right = 1218.0
@@ -94,9 +93,6 @@ custom_styles/normal = ExtResource( 9 )
 shortcut_in_tooltip = false
 action_mode = 0
 text = "Add Area"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/AddButton"]
 stream = ExtResource( 3 )

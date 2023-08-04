@@ -17,7 +17,7 @@ const layerNames = [
 ]
 
 func _process(_delta):
-	label.rect_position.y = 43 if pressed else 40
+	label.rect_position.y = 2 if pressed else -1
 	if is_hovered() and !last_hovered:
 		hover_sound.play()
 	last_hovered = is_hovered()

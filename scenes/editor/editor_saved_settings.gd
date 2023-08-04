@@ -1,6 +1,6 @@
 extends Node
 
-var number_of_boxes := 7
+var number_of_boxes := 10
 var selected_box := 0
 var zoom_level := 1.0
 var layer := 1

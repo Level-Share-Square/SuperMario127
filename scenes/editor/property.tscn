@@ -26,15 +26,12 @@ __meta__ = {
 margin_right = 320.0
 margin_bottom = 120.0
 custom_styles/panel = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="."]
 margin_right = 321.0
 margin_bottom = 61.0
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Property"
 align = 1
 valign = 1

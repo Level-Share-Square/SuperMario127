@@ -496,7 +496,6 @@ WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
 [node name="ObjectSettingsWindow" type="NinePatchRect"]
-visible = false
 margin_left = 165.0
 margin_top = 130.0
 margin_right = 1267.0
@@ -510,9 +509,6 @@ patch_margin_top = 110
 patch_margin_right = 40
 patch_margin_bottom = 40
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 grid_container = NodePath("Contents/ScrollContainer/GridContainer")
 preview = NodePath("Contents/Preview")
 delete_button = NodePath("Contents/DeleteButton")
@@ -573,9 +569,6 @@ margin_bottom = 166.0
 rect_scale = Vector2( 2, 2 )
 rect_clip_content = true
 texture = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="DeleteButton" type="Button" parent="Contents"]
 margin_left = 32.0
@@ -653,9 +646,6 @@ margin_bottom = 508.0
 rect_clip_content = false
 theme = SubResource( 11 )
 scroll_horizontal_enabled = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GridContainer" type="GridContainer" parent="Contents/ScrollContainer"]
 margin_right = 710.0
