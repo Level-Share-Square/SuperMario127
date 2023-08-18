@@ -357,7 +357,6 @@ func on_level_selected(index : int) -> void:
 	var level_info : LevelInfo = levels[Singleton.SavedLevels.selected_level]
 	populate_info_panel(level_info)
 	
-	print(double_click)
 	if double_click:
 		if Singleton2.rp == true:
 			update_activity()
