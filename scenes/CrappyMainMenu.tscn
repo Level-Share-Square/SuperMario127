@@ -31,5 +31,6 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="Editor" to="Editor" method="_on_button_pressed"]
 [connection signal="pressed" from="Player" to="Player" method="_on_button_pressed"]
