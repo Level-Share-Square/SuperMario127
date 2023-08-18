@@ -162,10 +162,13 @@ texture = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 margin_left = 32.0
-margin_top = 27.0
+margin_top = 73.0
 margin_right = 277.0
 margin_bottom = 365.0
 custom_constants/separation = 12
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ButtonCampaign" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 margin_right = 245.0
@@ -184,26 +187,18 @@ focus_neighbour_left = NodePath("../../ButtonQuit")
 custom_fonts/font = SubResource( 3 )
 text = "Samples"
 
-[node name="ButtonSearch" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
+[node name="ButtonLevels" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 152.0
 margin_right = 245.0
 margin_bottom = 216.0
-focus_neighbour_left = NodePath("../../ButtonQuit")
-custom_fonts/font = SubResource( 3 )
-text = "Search"
-
-[node name="ButtonLevels" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 228.0
-margin_right = 245.0
-margin_bottom = 292.0
 focus_neighbour_left = NodePath("../../ButtonQuit")
 custom_fonts/font = SubResource( 2 )
 text = "Levels"
 
 [node name="ButtonOptions" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 304.0
+margin_top = 228.0
 margin_right = 245.0
-margin_bottom = 368.0
+margin_bottom = 292.0
 focus_neighbour_left = NodePath("../../ButtonQuit")
 focus_neighbour_bottom = NodePath("../../ButtonQuit")
 custom_fonts/font = SubResource( 2 )

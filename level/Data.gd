@@ -222,6 +222,7 @@ func load_in(code):
 		result = conversion_util.convert_048_to_049(result)
 
 	assert(result.format_version)
+	assert(result.name)
 	var format_version = result.format_version
 	name = result.name
 	

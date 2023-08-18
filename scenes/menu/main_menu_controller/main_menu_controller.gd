@@ -16,7 +16,6 @@ onready var levels_screen : Screen = $InactiveScreens/LevelsScreen
 onready var options_screen : Screen = $InactiveScreens/MultiplayerOptions
 onready var controls_screen : Screen = $InactiveScreens/ControlsOptions
 onready var shine_select_screen : Screen = $InactiveScreens/ShineSelectScreen
-onready var search_screen : Screen = $InactiveScreens/SearchScreen
 
 # other
 onready var backgrounds : Node2D = $Background/Backgrounds

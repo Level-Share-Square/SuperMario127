@@ -2,7 +2,6 @@ extends Screen
 
 onready var button_campaign : Button = $Panel/VBoxContainer/ButtonCampaign
 onready var button_levels : Button = $Panel/VBoxContainer/ButtonLevels
-onready var button_search : Button = $Panel/VBoxContainer/ButtonSearch
 onready var button_templates : Button = $Panel/VBoxContainer/ButtonTemplates
 onready var button_options : Button = $Panel/VBoxContainer/ButtonOptions
 onready var button_quit : Button = $Panel/ButtonQuit
@@ -26,7 +25,6 @@ func _ready() -> void:
 	var _connect = button_levels.connect("pressed", self, "on_button_levels_pressed")
 	_connect = button_templates.connect("pressed", self, "on_button_templates_pressed")
 	_connect = button_options.connect("pressed", self, "on_button_options_pressed")
-	_connect = button_search.connect("pressed", self, "on_button_search_pressed")
 	_connect = button_quit.connect("pressed", self, "on_button_quit_pressed")
 	_connect = button_login.connect("pressed", self, "on_button_login_pressed")
 func update_activity() -> void:
@@ -60,9 +58,6 @@ func _input(_event : InputEvent) -> void:
 		pass
 	elif Input.is_action_just_pressed("ui_right"):
 		pass
-
-func on_button_search_pressed() -> void:
-	emit_signal("screen_change", "main_menu_screen", "search_screen")
 
 func on_button_levels_pressed() -> void:
 	if timer.time_left > 0:
