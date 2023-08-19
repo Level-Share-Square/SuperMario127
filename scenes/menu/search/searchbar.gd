@@ -1,4 +1,4 @@
-extends TextEdit
+extends LineEdit
 
 
 # Declare member variables here. Examples:
@@ -8,8 +8,6 @@ extends TextEdit
 func _ready():
 	call_deferred("_hide_scrollbar")
 
-func _on_TextEdit_text_changed():
-	call_deferred("_hide_scrollbar")
   
 func _hide_scrollbar():
 	for child in get_children():
