@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://assets/fonts/delfino_dynamicfontdata.tres" type="DynamicFontData" id=11]
 [ext_resource path="res://scenes/editor/assets/clickable_arrow_hover.png" type="Texture" id=12]
 [ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=13]
-[ext_resource path="res://assets/misc/loading.png" type="Texture" id=14]
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=15]
 [ext_resource path="res://scenes/menu/levels_screen/ui/star_coin_icon.png" type="Texture" id=16]
 [ext_resource path="res://scenes/menu/levels_screen/shine_icon.png" type="Texture" id=17]
@@ -31,10 +30,6 @@ outline_size = 2
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 extra_spacing_char = 1
 font_data = ExtResource( 11 )
-
-[sub_resource type="DynamicFont" id=10]
-size = 20
-font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 1, 1, 1 )
@@ -100,65 +95,13 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
+[sub_resource type="DynamicFont" id=10]
+size = 20
+font_data = ExtResource( 2 )
+
 [sub_resource type="DynamicFont" id=11]
 size = 19
 font_data = ExtResource( 2 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 14 )
-region = Rect2( 0, 0, 475, 480 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 14 )
-region = Rect2( 475, 0, 475, 480 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 14 )
-region = Rect2( 950, 0, 475, 480 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 14 )
-region = Rect2( 1425, 0, 475, 480 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 14 )
-region = Rect2( 1900, 0, 475, 480 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 14 )
-region = Rect2( 2375, 0, 475, 480 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 14 )
-region = Rect2( 2850, 0, 475, 480 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 14 )
-region = Rect2( 3325, 0, 475, 480 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 14 )
-region = Rect2( 3800, 0, 475, 480 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 14 )
-region = Rect2( 4275, 0, 475, 480 )
-
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 14 )
-region = Rect2( 4750, 0, 475, 480 )
-
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 14 )
-region = Rect2( 5225, 0, 475, 480 )
-
-[sub_resource type="SpriteFrames" id=30]
-animations = [ {
-"frames": [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
-"loop": true,
-"name": "default",
-"speed": 15.0
-} ]
 
 [sub_resource type="StyleBoxFlat" id=31]
 content_margin_left = 16.0
@@ -192,21 +135,6 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="Animation" id=35]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, -2 ) ]
-}
-
 [sub_resource type="Animation" id=36]
 resource_name = "default"
 tracks/0/type = "value"
@@ -222,36 +150,320 @@ tracks/0/keys = {
 "values": [ Vector2( 1, -2 ) ]
 }
 
+[sub_resource type="Animation" id=37]
+resource_name = "trans_out_MainMenuScreen_SearchScreen"
+length = 0.6
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Control:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 66, -0.25, 0, 0.25, 0, 66, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Control:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 500, -0.25, 0, 0.25, 0, 22, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Control2:rect_position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Control2:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -350, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelContainer:rect_position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 56, -0.25, 0, 0.25, 0, 56, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("PanelContainer:rect_position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 541, -0.25, 0, 0.25, 0, 64, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("buttonX:rect_position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 293, -0.25, 0, 0.25, 0, 293, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("buttonX:rect_position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 549, -0.25, 0, 0.25, 0, 72, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("Loading:rect_position:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 110, -0.25, 0, 0.25, 0, 110, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("Loading:rect_position:y")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 657, -0.25, 0, 0.25, 0, 176, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+
+[sub_resource type="Animation" id=38]
+resource_name = "trans_out_SearchScreen_MainMenuScreen"
+length = 0.6
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Control:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 66, -0.25, 0, 0.25, 0, 66, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Control:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 22, -0.25, 0, 0.25, 0, 500, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Control2:rect_position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Control2:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -350, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelContainer:rect_position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 56, -0.25, 0, 0.25, 0, 56, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("PanelContainer:rect_position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 64, -0.25, 0, 0.25, 0, 541, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("buttonX:rect_position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 293, -0.25, 0, 0.25, 0, 293, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("buttonX:rect_position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 72, -0.25, 0, 0.25, 0, 549, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("Loading:rect_position:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 110, -0.25, 0, 0.25, 0, 110, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("Loading:rect_position:y")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 176, -0.25, 0, 0.25, 0, 657, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+
+[sub_resource type="Animation" id=41]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Loading:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Loading:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 110, 176 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Loading:rect_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 144, 144 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Loading:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Loading:rect_rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=40]
+resource_name = "spin"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Loading:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Loading:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="SearchScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
 margin_top = -2.0
-margin_right = 1537.0
-margin_bottom = 862.0
+margin_right = 3073.0
+margin_bottom = 1726.0
 rect_pivot_offset = Vector2( -343, -58 )
 script = ExtResource( 10 )
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-margin_left = 56.0
-margin_top = 64.0
-margin_right = 352.0
-margin_bottom = 124.0
-custom_styles/panel = ExtResource( 3 )
-
-[node name="TextEdit" type="LineEdit" parent="PanelContainer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 288.0
-margin_bottom = 52.0
-custom_fonts/font = ExtResource( 6 )
-custom_styles/normal = ExtResource( 7 )
-
 [node name="Control" type="Control" parent="."]
 margin_left = 66.0
-margin_top = 24.0
+margin_top = 22.0
 margin_right = 336.0
-margin_bottom = 163.0
+margin_bottom = 161.0
 
 [node name="PageSelect" type="Control" parent="Control"]
 margin_left = -556.0
@@ -301,16 +513,6 @@ texture_pressed = ExtResource( 13 )
 texture_hover = ExtResource( 12 )
 expand = true
 flip_h = true
-
-[node name="buttonX" parent="Control" instance=ExtResource( 1 )]
-margin_left = 232.0
-margin_top = 56.0
-margin_right = 278.0
-margin_bottom = 96.0
-rect_scale = Vector2( 0.7, 0.7 )
-size_flags_horizontal = 8
-custom_fonts/font = SubResource( 10 )
-text = "X"
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 margin_left = -51.0
@@ -392,12 +594,13 @@ size_flags_horizontal = 11
 custom_fonts/font = SubResource( 11 )
 text = "Copy Level Code"
 
-[node name="Loading" type="AnimatedSprite" parent="."]
-position = Vector2( 178, 250 )
-scale = Vector2( 0.217895, 0.217895 )
-frames = SubResource( 30 )
-frame = 7
-playing = true
+[node name="Loading" type="TextureRect" parent="."]
+margin_left = 110.0
+margin_top = 176.0
+margin_right = 254.0
+margin_bottom = 320.0
+rect_pivot_offset = Vector2( 72, 72 )
+texture = ExtResource( 17 )
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
@@ -556,13 +759,43 @@ size_flags_stretch_ratio = 0.51
 custom_fonts/font = SubResource( 33 )
 text = "Level Name"
 align = 1
+autowrap = true
 clip_text = true
 max_lines_visible = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 35 )
 anims/default = SubResource( 36 )
+anims/trans_out_MainMenuScreen_SearchScreen = SubResource( 37 )
+anims/trans_out_SearchScreen_MainMenuScreen = SubResource( 38 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 41 )
+anims/spin = SubResource( 40 )
 
 [node name="HTTPRequest2" type="HTTPRequest" parent="."]
 
 [node name="HTTPRequest3" type="HTTPRequest" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_left = 56.0
+margin_top = 64.0
+margin_right = 352.0
+margin_bottom = 124.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="TextEdit" type="LineEdit" parent="PanelContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 288.0
+margin_bottom = 52.0001
+custom_fonts/font = ExtResource( 6 )
+custom_styles/normal = ExtResource( 7 )
+
+[node name="buttonX" parent="." instance=ExtResource( 1 )]
+margin_left = 293.0
+margin_top = 72.0
+margin_right = 339.0
+margin_bottom = 116.0
+size_flags_horizontal = 8
+custom_fonts/font = SubResource( 10 )
+text = "X"

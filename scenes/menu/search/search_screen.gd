@@ -3,6 +3,7 @@ extends Screen
 var page = 1
 var total_pages = 333
 var level_codes = []
+var actual_codes = []
 var creators = []
 var search_cooldown = 5
 var searching = false
@@ -10,7 +11,7 @@ var searching = false
 var levels = Singleton.SavedLevels.levels
 
 onready var loading = $Loading
-onready var buttonx = $Control/buttonX
+onready var buttonx = $buttonX
 onready var level_name_label = $Control2/LevelInfo/LevelName
 onready var back_button = $Control/VBoxContainer/HBoxContainer/ButtonBack
 onready var add_button = $Control/VBoxContainer/HBoxContainer/ButtonAdd
@@ -32,6 +33,7 @@ onready var page_amt = 10
 # var b = "text"
 
 func _ready():
+	$AnimationPlayer2.play("spin")
 	level_list.connect("item_selected", self, "on_item_selected")
 	loading.show()
 	info.hide()
@@ -42,6 +44,7 @@ func _ready():
 	page_right.connect("button_down", self, "right_pressed")
 	buttonx.connect("button_down", self, "x_pressed")
 	page_left.connect("button_down", self, "left_pressed")
+	search.connect("text_changed", self, "on_text_changed")
 	http.connect("request_completed", self, "_on_request_completed")
 	http.request("https://levelsharesquare.com/api/levels?page=1&game=2")
 	
@@ -60,47 +63,45 @@ func x_pressed():
 	level_codes.clear()
 	search.set_text("")
 	creators.clear()
-
+	
+func on_text_changed(new_text):
+	if " " in new_text:
+		var text = search.text
+		text.replace(" ", "_")
+		search.text = text
+		pass
 
 func _process(delta):
-	print(search)
 	if Input.is_action_just_pressed("search") && get_focus_owner() == search:
+		load_page()
 		searching = true
-		http.cancel_request()
-		loading.show()
 		page = 0
-		page_label.text = str(page)
-		creators.clear()
-		level_list.clear()
-		level_codes.clear()
 		http3.connect("request_completed", self, "_on_request3_completed")
 		var request = "https://levelsharesquare.com/api/levels?page=1&game=2&searchQuery=" + search.get_text()
 		http3.request(request)
-		print(request)
-	
+		
 func left_pressed():
 	if page > 1 && searching == false:
-		http.cancel_request()
 		page -= 1
-		page_label.text = str(page)
+		load_page()
 		request(page)
-		loading.show()
-		level_list.clear()
-		level_codes.clear()
-		creators.clear()
+		
+func load_page():
+	http.cancel_request()
+	actual_codes.clear()
+	page_label.text = str(page)
+	loading.show()
+	level_list.clear()
+	level_codes.clear()
+	creators.clear()
 
 		
 func right_pressed():
 	if page < total_pages && searching == false:
-		http.cancel_request()
 		page += 1
-		page_label.text = str(page)
+		load_page()
 		request(page)
-		loading.show()
-		level_list.clear()
-		level_codes.clear()
-		creators.clear()
-
+		
 static func is_valid(value : String):
 	value = value.strip_edges(true, true)
 	
@@ -121,9 +122,9 @@ static func is_valid(value : String):
 			return false
 			
 func on_item_selected(index: int):
-	http2.connect("request_completed", self, "_on_request2_completed")
-	http2.request("https://levelsharesquare.com/api/users/" + str(creators[index]))
-	print(level_list.get_selected_items())
+	if !level_list.is_item_disabled(0):
+		http2.connect("request_completed", self, "_on_request2_completed")
+		http2.request("https://levelsharesquare.com/api/users/" + str(creators[index]))
 	
 func on_back():
 	emit_signal("screen_change", "search_screen", "main_menu_screen")
@@ -136,6 +137,10 @@ func on_add():
 			
 		Singleton.SavedLevels.levels_disk_paths.append(level_disk_path)
 		Singleton.SavedLevels.save_level_paths_to_disk()
+func on_copy():
+	if level_list.is_anything_selected():
+		var level_code = actual_codes[level_list.get_selected_items()[0]]
+		OS.clipboard = str(level_code)
 
 
 func _on_request3_completed(result, response_code, headers, body):
@@ -151,12 +156,11 @@ func _on_request3_completed(result, response_code, headers, body):
 			if is_valid(level_code):
 				var level_info : LevelInfo = LevelInfo.new(level_code)
 				level_codes.append(level_info)
+				actual_codes.append(level_code)
 				level_list.add_item(level_info.level_name)
-				print(i)
 		for i in page_amt:
 			creators.append(json.result["levels"][i]["author"])
 	loading.hide()
-	print(json.result)
 
 func _on_request_completed(result, response_code, headers, body):
 	if searching == false:
@@ -169,8 +173,8 @@ func _on_request_completed(result, response_code, headers, body):
 			if is_valid(level_code):
 				var level_info : LevelInfo = LevelInfo.new(level_code)
 				level_codes.append(level_info)
+				actual_codes.append(level_code)
 				level_list.add_item(level_info.level_name)
-				print(i)
 		for i in page_amt:
 			creators.append(json.result["levels"][i]["author"])
 		loading.hide()
