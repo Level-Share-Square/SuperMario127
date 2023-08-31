@@ -17,7 +17,10 @@ func _ready():
 func add_message(text, player_id):
 	text_label.bbcode_text += "\n"
 	text_label.bbcode_text += "[color=" + colors[player_id] + "]"
-	text_label.bbcode_text += "Player " + str(player_id + 1) + "[/color]: "
+	if UserInfo.username == "":
+		text_label.bbcode_text += "Player " + str(player_id + 1) + "[/color]: "
+	else:
+		text_label.bbcode_text += UserInfo.username + "[/color]: "
 	text_label.bbcode_text += text
 	
 func text_entered(text):

@@ -6,7 +6,6 @@
 [ext_resource path="res://assets/styles/RedButtonStyleNormal.tres" type="StyleBox" id=4]
 [ext_resource path="res://assets/styles/RedButtonStyleHover.tres" type="StyleBox" id=5]
 [ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=6]
-[ext_resource path="res://assets/styles/BrightButtonStyleHover.tres" type="StyleBox" id=7]
 [ext_resource path="res://scenes/editor/assets/search_icon.png" type="Texture" id=9]
 [ext_resource path="res://scenes/menu/search/search_screen.gd" type="Script" id=10]
 [ext_resource path="res://assets/fonts/delfino_dynamicfontdata.tres" type="DynamicFontData" id=11]
@@ -449,6 +448,17 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="StyleBoxFlat" id=42]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
 [node name="SearchScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -787,9 +797,9 @@ custom_styles/panel = ExtResource( 3 )
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 288.0
-margin_bottom = 52.0001
+margin_bottom = 52.0
 custom_fonts/font = ExtResource( 6 )
-custom_styles/normal = ExtResource( 7 )
+custom_styles/normal = SubResource( 42 )
 
 [node name="buttonX" parent="." instance=ExtResource( 1 )]
 margin_left = 293.0

@@ -1,5 +1,6 @@
 extends Button
 
+var string
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -8,6 +9,7 @@ extends Button
 
 func _pressed():
 	get_parent().get_parent().close()
+	string.pressed = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

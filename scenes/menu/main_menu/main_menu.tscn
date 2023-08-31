@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/menu/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/editor/window/LogInWindow.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/editor/window_open_button.gd" type="Script" id=8]
+[ext_resource path="res://scenes/editor/window/LSSHelpWindow.tscn" type="PackedScene" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -478,15 +479,16 @@ anims/trans_out_SearchScreen_MainMenuScreen = SubResource( 16 )
 one_shot = true
 
 [node name="ButtonLogin" parent="." instance=ExtResource( 2 )]
-visible = false
-margin_left = 644.0
-margin_right = 889.0
-margin_bottom = 64.0
+margin_left = 325.0
+margin_top = 11.0
+margin_right = 547.0
+margin_bottom = 75.0
 rect_scale = Vector2( 0.5, 0.5 )
 focus_neighbour_left = NodePath("../../ButtonQuit")
 focus_neighbour_top = NodePath("../../ButtonQuit")
 custom_fonts/font = SubResource( 2 )
-text = "Log In"
+text = "Log in"
+icon_align = 1
 script = ExtResource( 8 )
 window = NodePath("../LogInWindow")
 starting_position = Vector2( 200, 100 )
@@ -494,6 +496,13 @@ starting_position = Vector2( 200, 100 )
 [node name="LogInWindow" parent="." instance=ExtResource( 7 )]
 visible = false
 margin_left = 197.0
-margin_top = 95.0
+margin_top = 127.0
 margin_right = 1250.0
-margin_bottom = 585.0
+margin_bottom = 617.0
+
+[node name="HelpWindow" parent="." instance=ExtResource( 9 )]
+visible = false
+margin_left = 287.0
+margin_top = 261.0
+margin_right = 1340.0
+margin_bottom = 569.0

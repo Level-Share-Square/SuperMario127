@@ -486,7 +486,6 @@ custom_fonts/font = SubResource( 1 )
 text = "OPTIONS"
 
 [node name="IpAddress" type="LineEdit" parent="."]
-visible = false
 margin_left = 79.8377
 margin_top = 93.2382
 margin_right = 292.838
@@ -503,7 +502,6 @@ __meta__ = {
 }
 
 [node name="ConnectButton" type="Button" parent="."]
-visible = false
 margin_left = 79.8377
 margin_top = 148.406
 margin_right = 292.838
@@ -529,7 +527,6 @@ stream = ExtResource( 4 )
 volume_db = -10.0
 
 [node name="DisconnectButton" type="Button" parent="."]
-visible = false
 margin_left = 79.8377
 margin_top = 258.731
 margin_right = 292.838
@@ -556,7 +553,6 @@ stream = ExtResource( 4 )
 volume_db = -10.0
 
 [node name="HostButton" type="Button" parent="."]
-visible = false
 margin_left = 79.8377
 margin_top = 204.342
 margin_right = 292.838
@@ -587,6 +583,7 @@ anims/trans_out_MainMenuScreen_MultiplayerOptions = SubResource( 15 )
 anims/trans_out_MultiplayerOptions_MainMenuScreen = SubResource( 16 )
 
 [node name="PageSelect" type="Control" parent="."]
+visible = false
 margin_top = -14.0
 margin_right = 40.0
 margin_bottom = 26.0
@@ -635,6 +632,7 @@ expand = true
 flip_h = true
 
 [node name="Page1" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -1043,6 +1041,7 @@ stream = ExtResource( 4 )
 volume_db = -10.0
 
 [node name="Page2" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -40.0

@@ -933,11 +933,11 @@ func _physics_process(delta: float) -> void:
 	if get_tree().get_current_scene().switch_timer < 0.2 and get_tree().get_current_scene().switch_timer > 0:
 		if p_block_detector.get_overlapping_areas().size() > 0:
 			get_tree().get_current_scene().switch_timer = 0.2
-	
+
 	# Send network message (unused)
-	#if Singleton.PlayerSettings.other_player_id != -1:
-	#	if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
-#			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
+	if Singleton.PlayerSettings.other_player_id != -1:
+		if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
+			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
 	if !Singleton2.save_ghost:
 		temp_gp.append(Vector2(int(position.x), int(position.y)))
 		temp_ga.append(ANIM_IDS[sprite.animation])

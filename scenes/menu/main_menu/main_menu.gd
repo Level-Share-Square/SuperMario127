@@ -29,6 +29,10 @@ func _ready() -> void:
 	_connect = button_search.connect("pressed", self, "on_button_search_pressed")
 	_connect = button_quit.connect("pressed", self, "on_button_quit_pressed")
 	_connect = button_login.connect("pressed", self, "on_button_login_pressed")
+	
+#func _on_button_login_pressed():
+#	$LogInWindow.open()
+#
 func update_activity() -> void:
 	var activity = Discord.Activity.new()
 	activity.set_type(Discord.ActivityType.Playing)

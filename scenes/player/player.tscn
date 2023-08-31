@@ -501,7 +501,6 @@ __meta__ = {
 }
 
 [node name="ChatBox" type="Control" parent="UI"]
-visible = false
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 288.0
@@ -1196,7 +1195,7 @@ collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 11
+frame = 1
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 

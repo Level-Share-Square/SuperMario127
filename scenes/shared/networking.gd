@@ -11,7 +11,7 @@ func start_server():
 	var _connect2 = get_tree().multiplayer.connect("network_peer_disconnected", self, "_peer_disconnected")
 	var _connect3 = get_tree().multiplayer.connect("network_peer_packet", self, "_packet_recieved")
 	print("Hosting!")
-	connected_type = "Server"
+	connected_type = "Server"	
 	
 func start_client(ip):
 	network = NetworkedMultiplayerENet.new()
