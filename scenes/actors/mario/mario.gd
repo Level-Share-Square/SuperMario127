@@ -1017,6 +1017,8 @@ func kill(cause: String) -> void:
 		
 		if reload:
 			Singleton.SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
+			if Singleton.PlayerSettings.other_player_id != -1:
+				get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())
 		else:
 			yield(get_tree().create_timer(3), "timeout")
 			set_powerup(null, false)
