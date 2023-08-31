@@ -59,8 +59,6 @@ func _packet_recieved(_id, packet_ascii):
 		get_tree().get_current_scene().get_node(get_tree().get_current_scene().character).kill("reload")
 	elif packet[0] == "disconnect":
 		disconnect_from_peers()	
-	elif packet[0] == "area":
-		get_tree().get_current_scene().get_node(get_tree().get_current_scene().character).switch_areas(packet[1], packet[2])
 		
 func disconnect_from_peers():
 	if get_tree().multiplayer.network_peer != null:

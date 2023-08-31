@@ -967,8 +967,6 @@ func encode_int_bytes(val: int, num: int) -> PoolByteArray:
 	
 func switch_areas(area_id, transition_time):
 	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id)
-	if Singleton.PlayerSettings.other_player_id != -1:
-		get_tree().multiplayer.send_bytes(JSON.print(["area", area_id, transition_time]).to_ascii())
 
 	
 func kill(cause: String) -> void:
