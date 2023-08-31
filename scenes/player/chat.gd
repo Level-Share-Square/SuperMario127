@@ -31,10 +31,11 @@ func text_entered(text):
 		var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["send message", text]).to_ascii())
 
 func _process(_delta):
-	if Singleton.PlayerSettings.other_player_id != -1:
-		visible = true
-	else:
-		visible = false
+#	if Singleton.PlayerSettings.other_player_id != -1:
+#		visible = true
+#	else:
+#		visible = false
+	visible = true
 	
 func _focused():
 	Singleton.FocusCheck.is_ui_focused = true

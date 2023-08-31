@@ -46,7 +46,7 @@ func _ready():
 	page_left.connect("button_down", self, "left_pressed")
 	search.connect("text_changed", self, "on_text_changed")
 	http.connect("request_completed", self, "_on_request_completed")
-	http.request("https://levelsharesquare.com/api/levels?page=1&game=2")
+#	http.request("https://levelsharesquare.com/api/levels?page=1&game=2")
 	
 func request(pageno):
 	http.connect("request_completed", self, "_on_request_completed")
