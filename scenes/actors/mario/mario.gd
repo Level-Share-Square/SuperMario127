@@ -135,6 +135,7 @@ export var shine_kill := false
 export var player_id := 0
 
 # States. Couldn't set static type due to circle reference
+var switched = false
 var state : Node = null
 var last_state : Node = null
 var switching_state := false
@@ -966,9 +967,11 @@ func encode_int_bytes(val: int, num: int) -> PoolByteArray:
 	return output
 	
 func switch_areas(area_id, transition_time):
-	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id)
-	if Singleton.PlayerSettings.other_player_id != -1:
-		get_tree().multiplayer.send_bytes(JSON.print(["area", area_id, transition_time]).to_ascii())
+	if !switched:
+		Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id)
+		if Singleton.PlayerSettings.other_player_id != -1:
+			get_tree().multiplayer.send_bytes(JSON.print(["area", area_id, transition_time]).to_ascii())
+		switched = true
 
 	
 func kill(cause: String) -> void:
