@@ -1,0 +1,168 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=1]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/editor/window.gd" type="Script" id=3]
+[ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=4]
+[ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=5]
+[ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=6]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/editor/window/SaveButton.gd" type="Script" id=8]
+[ext_resource path="res://scenes/editor/window/CancelButton.gd" type="Script" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+size = 56
+use_filter = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 32
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="DynamicFont" id=16]
+size = 48
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.0705882, 0, 0.231373, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[node name="TextInput" type="NinePatchRect"]
+margin_left = 165.0
+margin_top = 130.0
+margin_right = 1218.0
+margin_bottom = 532.0
+rect_scale = Vector2( 0.4, 0.4 )
+mouse_filter = 0
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 108, 290 )
+patch_margin_left = 40
+patch_margin_top = 110
+patch_margin_right = 40
+patch_margin_bottom = 40
+script = ExtResource( 3 )
+
+[node name="Title" type="RichTextLabel" parent="."]
+margin_left = 24.0
+margin_top = 24.2632
+margin_right = 456.0
+margin_bottom = 102.263
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_text = "Text"
+text = "Text"
+
+[node name="CloseButton" type="TextureButton" parent="."]
+margin_left = 888.65
+margin_top = 12.953
+margin_right = 1043.65
+margin_bottom = 93.953
+rect_scale = Vector2( 0.95, 0.95 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
+stream = ExtResource( 2 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
+stream = ExtResource( 1 )
+volume_db = -10.0
+
+[node name="Contents" type="Control" parent="."]
+anchor_bottom = 0.06
+margin_left = 17.4044
+margin_top = 104.0
+margin_right = 1036.4
+margin_bottom = 498.0
+
+[node name="TextEdit" type="TextEdit" parent="Contents"]
+margin_left = 18.0
+margin_top = 17.0
+margin_right = 1008.0
+margin_bottom = 148.0
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.188235, 0.258824, 0.494118, 1 )
+custom_colors/completion_font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 13 )
+custom_styles/normal = SubResource( 12 )
+context_menu_enabled = false
+v_scroll_speed = 0.0
+wrap_enabled = true
+
+[node name="SaveButton" type="Button" parent="Contents"]
+margin_left = 534.307
+margin_top = 161.792
+margin_right = 934.307
+margin_bottom = 251.792
+custom_fonts/font = SubResource( 16 )
+custom_styles/hover = SubResource( 14 )
+custom_styles/pressed = SubResource( 15 )
+custom_styles/normal = SubResource( 15 )
+shortcut_in_tooltip = false
+action_mode = 0
+text = "Save"
+script = ExtResource( 8 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="Contents/SaveButton"]
+stream = ExtResource( 2 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="Contents/SaveButton"]
+stream = ExtResource( 1 )
+volume_db = -10.0
+
+[node name="CancelButton" type="Button" parent="Contents"]
+margin_left = 82.2546
+margin_top = 161.792
+margin_right = 482.255
+margin_bottom = 251.792
+custom_fonts/font = SubResource( 16 )
+custom_styles/hover = SubResource( 14 )
+custom_styles/pressed = SubResource( 15 )
+custom_styles/normal = SubResource( 15 )
+shortcut_in_tooltip = false
+action_mode = 0
+text = "Cancel"
+script = ExtResource( 9 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="Contents/CancelButton"]
+stream = ExtResource( 2 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="Contents/CancelButton"]
+stream = ExtResource( 1 )
+volume_db = -10.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Contents"]
+margin_right = 12.0
+margin_bottom = 12.0
+
+[node name="Tween" type="Tween" parent="."]

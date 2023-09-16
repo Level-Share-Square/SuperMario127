@@ -54,7 +54,6 @@ func _init(passed_level_code : String = "") -> void:
 					{
 						"title": object.properties[5],
 						"description": object.properties[6],
-						"enabled": object.properties[0],
 						"show_in_menu": object.properties[7],
 						"color": object.properties[11].to_rgba32(),
 						"id": object.properties[12],

@@ -1,7 +1,6 @@
 extends Button
 
-
-onready var var_name = get_node("../TextEdit")
+var string
 signal clicked
 
 func _ready():
@@ -9,4 +8,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _pressed():
+	string.text.text = get_parent().get_node("TextEdit").text
+	string.update_value()
 	get_parent().get_parent().close()

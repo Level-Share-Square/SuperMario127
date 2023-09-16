@@ -11,7 +11,7 @@ func start_server():
 	var _connect2 = get_tree().multiplayer.connect("network_peer_disconnected", self, "_peer_disconnected")
 	var _connect3 = get_tree().multiplayer.connect("network_peer_packet", self, "_packet_recieved")
 	print("Hosting!")
-	connected_type = "Server"
+	connected_type = "Server"	
 	
 func start_client(ip):
 	network = NetworkedMultiplayerENet.new()
@@ -59,6 +59,8 @@ func _packet_recieved(_id, packet_ascii):
 		get_tree().get_current_scene().get_node(get_tree().get_current_scene().character).kill("reload")
 	elif packet[0] == "disconnect":
 		disconnect_from_peers()	
+	elif packet[0] == "area":
+		get_tree().get_current_scene().get_node(get_tree().get_current_scene().character).switch_areas(packet[1], packet[2])
 		
 func disconnect_from_peers():
 	if get_tree().multiplayer.network_peer != null:

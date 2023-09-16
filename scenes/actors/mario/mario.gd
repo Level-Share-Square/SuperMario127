@@ -135,6 +135,7 @@ export var shine_kill := false
 export var player_id := 0
 
 # States. Couldn't set static type due to circle reference
+var switched = false
 var state : Node = null
 var last_state : Node = null
 var switching_state := false
@@ -933,11 +934,11 @@ func _physics_process(delta: float) -> void:
 	if get_tree().get_current_scene().switch_timer < 0.2 and get_tree().get_current_scene().switch_timer > 0:
 		if p_block_detector.get_overlapping_areas().size() > 0:
 			get_tree().get_current_scene().switch_timer = 0.2
-	
+
 	# Send network message (unused)
-	#if Singleton.PlayerSettings.other_player_id != -1:
-	#	if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
-#			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
+	if Singleton.PlayerSettings.other_player_id != -1:
+		if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
+			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
 	if !Singleton2.save_ghost:
 		temp_gp.append(Vector2(int(position.x), int(position.y)))
 		temp_ga.append(ANIM_IDS[sprite.animation])
@@ -967,10 +968,16 @@ func encode_int_bytes(val: int, num: int) -> PoolByteArray:
 	
 func switch_areas(area_id, transition_time):
 	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id)
+	if !switched:
+		if Singleton.PlayerSettings.other_player_id != -1:
+			get_tree().multiplayer.send_bytes(JSON.print(["area", area_id, transition_time]).to_ascii())
+		switched = true
 
 	
 func kill(cause: String) -> void:
 	if !dead:
+		if Singleton.PlayerSettings.other_player_id != -1:
+			get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())
 		dead = true
 		var reload := true
 		var cutout_in := cutout_circle

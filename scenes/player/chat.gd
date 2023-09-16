@@ -14,24 +14,34 @@ func _ready():
 	var _connect3 = text_enter.connect("text_entered", self, "text_entered")
 	var _connect4 = get_tree().multiplayer.connect("network_peer_packet", self, "_packet_recieved")
 
-func add_message(text, player_id):
+func add_message(text, player_id, username = ""):
 	text_label.bbcode_text += "\n"
 	text_label.bbcode_text += "[color=" + colors[player_id] + "]"
-	text_label.bbcode_text += "Player " + str(player_id + 1) + "[/color]: "
+	if username == "":
+		text_label.bbcode_text += "Player " + str(player_id + 1) + "[/color]: "
+	else:
+		text_label.bbcode_text += username + "[/color]: "
 	text_label.bbcode_text += text
 	
 func text_entered(text):
 	text_enter.release_focus()
 	if text != "":
-		add_message(text, Singleton.PlayerSettings.my_player_index)
+		if UserInfo.username == "":
+			add_message(text, Singleton.PlayerSettings.my_player_index)
+		else:
+			add_message(text, Singleton.PlayerSettings.my_player_index, UserInfo.username)
 		text_enter.text = ""
-		var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["send message", text]).to_ascii())
+		if UserInfo.username == "":
+			var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["send message", text]).to_ascii())
+		else:
+			var _send_bytes = get_tree().multiplayer.send_bytes(JSON.print(["send message", text, UserInfo.username]).to_ascii())
 
 func _process(_delta):
-	if Singleton.PlayerSettings.other_player_id != -1:
-		visible = true
-	else:
-		visible = false
+#	if Singleton.PlayerSettings.other_player_id != -1:
+#		visible = true
+#	else:
+#		visible = false
+	visible = true
 	
 func _focused():
 	Singleton.FocusCheck.is_ui_focused = true
@@ -46,4 +56,7 @@ func _input(event):
 func _packet_recieved(_id, packet_ascii):
 	var packet = JSON.parse(packet_ascii.get_string_from_ascii()).result
 	if packet[0] == "send message":
-		add_message(packet[1], 1 if Singleton.PlayerSettings.my_player_index == 0 else 0)
+		if UserInfo.username == "":
+			add_message(packet[1], 1 if Singleton.PlayerSettings.my_player_index == 0 else 0)
+		else:
+			add_message(packet[1], 1 if Singleton.PlayerSettings.my_player_index == 0 else 0, packet[2])
