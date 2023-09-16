@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/styles/BrightButtonStyleHover.tres" type="StyleBox" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=11]
 [ext_resource path="res://scenes/menu/127Button.gd" type="Script" id=12]
 [ext_resource path="res://assets/styles/ButtonStyleDisabled.tres" type="StyleBox" id=13]
+[ext_resource path="res://scenes/editor/assets/clickable_shadow_arrow.png" type="Texture" id=14]
+[ext_resource path="res://scenes/editor/assets/clickable_shadow_arrow_hover.png" type="Texture" id=15]
+[ext_resource path="res://scenes/editor/assets/clickable_shadow_arrow_disabled.png" type="Texture" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -154,6 +157,34 @@ volume_db = -10.0
 [node name="ClickSound" type="AudioStreamPlayer" parent="HBoxContainer/DuplicateButton"]
 stream = ExtResource( 6 )
 volume_db = -10.0
+
+[node name="MoveArea" type="Control" parent="."]
+margin_left = 738.0
+margin_top = 13.0
+margin_right = 1015.0
+margin_bottom = 111.0
+
+[node name="MoveUp" type="TextureButton" parent="MoveArea"]
+margin_left = 50.0
+margin_top = 85.0
+margin_right = 126.0
+margin_bottom = 161.0
+rect_rotation = -90.0
+texture_normal = ExtResource( 14 )
+texture_hover = ExtResource( 15 )
+texture_disabled = ExtResource( 16 )
+expand = true
+
+[node name="MoveDown" type="TextureButton" parent="MoveArea"]
+margin_left = 210.0
+margin_top = 9.0
+margin_right = 286.0
+margin_bottom = 85.0
+rect_rotation = 90.0
+texture_normal = ExtResource( 14 )
+texture_hover = ExtResource( 15 )
+texture_disabled = ExtResource( 16 )
+expand = true
 
 [connection signal="pressed" from="HBoxContainer/SwitchToButton" to="HBoxContainer/SwitchToButton" method="_on_ResetLevelButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/DeleteButton" to="HBoxContainer/DeleteButton" method="_on_ResetLevelButton_pressed"]

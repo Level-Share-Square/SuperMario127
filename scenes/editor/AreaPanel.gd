@@ -3,8 +3,9 @@ extends Control
 onready var switch_to_button = $HBoxContainer/SwitchToButton
 onready var delete_button = $HBoxContainer/DeleteButton
 onready var duplicate_button = $HBoxContainer/DuplicateButton
-# Added for duplicate
 onready var new_area = $NewArea
+onready var move_up_button = $MoveArea/MoveUp
+onready var move_down_button = $MoveArea/MoveDown
 
 const background_id_mapper = "res://scenes/shared/background/backgrounds/ids.tres"
 const foreground_id_mapper = "res://scenes/shared/background/foregrounds/ids.tres"
@@ -33,17 +34,30 @@ func set_id(new_id):
 	id = new_id
 	id_text.text = "ID: " + str(id)
 
+func swap(areaA : LevelArea, areaB : LevelArea, areasArray : Array) -> Array:
+  var area1 = areasArray.find(areaA)
+  var area2 = areasArray.find(areaB)
+  var temp = areasArray[area1]
+  areasArray[area1] = areasArray[area2]
+  areasArray[area2] = temp
+  return areasArray
+
 func _ready():
 	var _connect = switch_to_button.connect("pressed", self, "switch_to_area")
 	_connect = delete_button.connect("pressed", self, "delete_area")
 	_connect = duplicate_button.connect("pressed", self, "duplicate_area")
+	_connect = move_down_button.connect("pressed", self, "move_area_down")
+	_connect = move_up_button.connect("pressed", self, "move_area_up")
 	if id == Singleton.CurrentLevelData.area:
 		switch_to_button.disabled = true
 		delete_button.disabled = true
-		
-	#Duplicate
-	# if Singleton.CurrentLevelData.level_data.areas.size() == 6:
-	# 	new_area.disabled = true
+	if id == Singleton.CurrentLevelData.area:
+		move_down_button.disabled = true
+		move_up_button.disabled = true
+	if id == Singleton.CurrentLevelData.area + 1:
+		move_up_button.disabled = true
+	if id == Singleton.CurrentLevelData.area - 1:
+		move_down_button.disabled = true
 
 func switch_to_area():
 	if id != Singleton.CurrentLevelData.area:
@@ -62,6 +76,29 @@ func duplicate_area():
 		var area = LevelArea.new()
 		var dup = Singleton.CurrentLevelData.level_data.areas[id]
 		area.duplicate(dup)
+		area.settings.background = Singleton.CurrentLevelData.level_data.areas[id].settings.background
 		Singleton.CurrentLevelData.level_data.areas.append(area)
 		get_parent().get_parent().get_parent().reload_areas()
-	# new_area.disabled = (Singleton.CurrentLevelData.level_data.areas.size() == 16)
+#		new_area.disabled = (Singleton.CurrentLevelData.level_data.areas.size() == 16)
+	
+func move_area_down():
+	if id < Singleton.CurrentLevelData.level_data.areas.size() - 1 && Singleton.CurrentLevelData.level_data.areas.size() > 1:
+		var area1 = LevelArea.new()
+		area1.duplicate(Singleton.CurrentLevelData.level_data.areas[id])
+		area1.settings.background = Singleton.CurrentLevelData.level_data.areas[id].settings.background
+		Singleton.CurrentLevelData.level_data.areas.remove(id)
+		if Singleton.CurrentLevelData.area > id:
+			Singleton.CurrentLevelData.area -= 1
+		Singleton.CurrentLevelData.level_data.areas.insert(id+1, area1)
+		get_parent().get_parent().get_parent().reload_areas()
+
+func move_area_up():
+	if id > 0 && Singleton.CurrentLevelData.level_data.areas.size() > 1:
+		var area1 = LevelArea.new()
+		area1.duplicate(Singleton.CurrentLevelData.level_data.areas[id])
+		area1.settings.background = Singleton.CurrentLevelData.level_data.areas[id].settings.background
+		Singleton.CurrentLevelData.level_data.areas.remove(id)
+		if Singleton.CurrentLevelData.area > id:
+			Singleton.CurrentLevelData.area -= 1
+		Singleton.CurrentLevelData.level_data.areas.insert(id-1, area1)
+		get_parent().get_parent().get_parent().reload_areas()
