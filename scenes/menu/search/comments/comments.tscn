@@ -1,0 +1,212 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://scenes/menu/search/comments/comments.gd" type="Script" id=1]
+[ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=2]
+[ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/styles/LevelListPanel.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/fonts/DelfinoFont.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=7]
+[ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=8]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxFlat" id=8]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.211765, 0.243137, 0.435294, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 268, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "in"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 268.302, -0.25, 0, 0.1, -119.435, 0, -0.3, -0.803757, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "out"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.3, -0.803757, 0.1, 107.509, 268.302, -0.25, 0, 0.1, -119.435 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+
+[node name="Comments" type="Control"]
+margin_left = 268.0
+margin_right = 268.0
+rect_pivot_offset = Vector2( 34, -11 )
+script = ExtResource( 1 )
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+margin_left = 502.0
+margin_top = 1.0
+margin_right = 768.0
+margin_bottom = 61.0
+custom_styles/panel = ExtResource( 5 )
+
+[node name="TextEdit" type="LineEdit" parent="PanelContainer2"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 258.0
+margin_bottom = 52.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 7 )
+custom_styles/normal = SubResource( 1 )
+placeholder_text = "Comment"
+placeholder_alpha = 0.422
+
+[node name="buttonX" parent="PanelContainer2" instance=ExtResource( 3 )]
+margin_left = 244.0
+margin_top = 8.0
+margin_right = 258.0
+margin_bottom = 52.0
+size_flags_horizontal = 8
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+text = "X"
+
+[node name="LevelListPanel" type="PanelContainer" parent="."]
+margin_left = 502.0
+margin_top = 65.0
+margin_right = 768.0
+margin_bottom = 431.0
+size_flags_vertical = 3
+custom_styles/panel = ExtResource( 5 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_left = 509.0
+margin_top = 74.0
+margin_right = 760.0
+margin_bottom = 423.0
+custom_styles/panel = ExtResource( 2 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 514.0
+margin_top = 81.0
+margin_right = 752.0
+margin_bottom = 376.0
+follow_focus = true
+scroll_deadzone = 10
+
+[node name="Label" type="Label" parent="ScrollContainer"]
+margin_right = 238.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 98, 31 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 6 )
+autowrap = true
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="127BackButton" parent="." instance=ExtResource( 8 )]
+margin_left = 719.0
+margin_top = 385.0
+margin_right = 751.0
+margin_bottom = 415.0
+
+[node name="127Button2" parent="." instance=ExtResource( 3 )]
+margin_left = 520.0
+margin_top = 382.0
+margin_right = 662.0
+margin_bottom = 453.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_styles/hover = SubResource( 8 )
+text = "Post"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 9 )
+anims/in = SubResource( 10 )
+anims/out = SubResource( 11 )

@@ -4,6 +4,7 @@ var page = 1
 var total_pages = 333
 var level_codes = []
 var actual_codes = []
+var level_ids = []
 var creators = []
 var search_cooldown = 5
 var searching = false
@@ -28,7 +29,9 @@ onready var level_list = $Control/VBoxContainer/LevelListPanel/VBoxContainer/Lev
 onready var http = $HTTPRequest
 onready var http2 = $HTTPRequest2
 onready var http3 = $HTTPRequest3
+onready var comments = $Comments
 onready var page_amt = 10
+onready var comment_button = $Control2/ButtonComm
 # var a = 2
 # var b = "text"
 
@@ -44,10 +47,14 @@ func _ready():
 	page_right.connect("button_down", self, "right_pressed")
 	buttonx.connect("button_down", self, "x_pressed")
 	page_left.connect("button_down", self, "left_pressed")
+	comment_button.connect("button_down", self, "comment_pressed")
 	search.connect("text_changed", self, "on_text_changed")
 	http.connect("request_completed", self, "_on_request_completed")
 	request(1)
 #	http.request("https://levelsharesquare.com/api/levels?page=1&game=2")
+	
+func comment_pressed():
+	comments.anim_in()
 	
 func request(pageno):
 	http.connect("request_completed", self, "_on_request_completed")
@@ -60,6 +67,7 @@ func x_pressed():
 	page_label.text = "Page: " + str(page)
 	request(page)
 	loading.show()
+	level_ids.clear()
 	level_list.clear()
 	level_codes.clear()
 	search.set_text("")
@@ -98,6 +106,7 @@ func load_page():
 	page_label.text = "Page: " + str(page)
 	loading.show()
 	level_list.clear()
+	level_ids.clear()
 	level_codes.clear()
 	creators.clear()
 
@@ -131,6 +140,9 @@ func on_item_selected(index: int):
 	if !level_list.is_item_disabled(0):
 		http2.connect("request_completed", self, "_on_request2_completed")
 		http2.request("https://levelsharesquare.com/api/users/" + str(creators[index]))
+		print(level_ids[index])
+		comments.load_comments(level_ids[index])
+		
 	
 func on_back():
 	emit_signal("screen_change", "search_screen", "main_menu_screen")
@@ -159,9 +171,11 @@ func _on_request3_completed(result, response_code, headers, body):
 	else:
 		for i in page_amt:
 			var level_code = json.result["levels"][i]["code"]
+			var level_id = json.result["levels"][i]["_id"]
 			if is_valid(level_code):
 				var level_info : LevelInfo = LevelInfo.new(level_code)
 				level_codes.append(level_info)
+				level_ids.append(level_id)
 				actual_codes.append(level_code)
 				level_list.add_item(level_info.level_name)
 		for i in page_amt:
@@ -176,10 +190,11 @@ func _on_request_completed(result, response_code, headers, body):
 		page_amt = json.result["levels"].size() - 1
 		for i in page_amt:
 			var level_code = json.result["levels"][i]["code"]
+			var level_id = json.result["levels"][i]["_id"]
 			if is_valid(level_code):
 				var level_info : LevelInfo = LevelInfo.new(level_code)
 				level_codes.append(level_info)
-				actual_codes.append(level_code)
+				level_ids.append(level_id)
 				level_list.add_item(level_info.level_name)
 		for i in page_amt:
 			creators.append(json.result["levels"][i]["author"])

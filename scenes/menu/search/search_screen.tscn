@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/styles/RedButtonStyleNormal.tres" type="StyleBox" id=4]
 [ext_resource path="res://assets/styles/RedButtonStyleHover.tres" type="StyleBox" id=5]
 [ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=6]
+[ext_resource path="res://scenes/menu/search/comments/comments.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/editor/assets/search_icon.png" type="Texture" id=9]
 [ext_resource path="res://scenes/menu/search/search_screen.gd" type="Script" id=10]
 [ext_resource path="res://assets/fonts/delfino_dynamicfontdata.tres" type="DynamicFontData" id=11]
@@ -45,28 +46,28 @@ corner_radius_bottom_left = 64
 
 [sub_resource type="StyleBoxEmpty" id=47]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=48]
 bg_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=49]
 bg_color = Color( 0.75, 0.75, 0.75, 1 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=50]
 bg_color = Color( 0.61, 0.61, 0.61, 1 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=51]
 content_margin_right = 8.0
 bg_color = Color( 0.121569, 0.180392, 0.517647, 1 )
 corner_radius_top_left = 16
@@ -79,11 +80,11 @@ VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/increment = null
 VScrollBar/icons/increment_highlight = null
-VScrollBar/styles/grabber = SubResource( 2 )
-VScrollBar/styles/grabber_highlight = SubResource( 3 )
-VScrollBar/styles/grabber_pressed = SubResource( 4 )
-VScrollBar/styles/scroll = SubResource( 5 )
-VScrollBar/styles/scroll_focus = SubResource( 5 )
+VScrollBar/styles/grabber = SubResource( 48 )
+VScrollBar/styles/grabber_highlight = SubResource( 49 )
+VScrollBar/styles/grabber_pressed = SubResource( 50 )
+VScrollBar/styles/scroll = SubResource( 51 )
+VScrollBar/styles/scroll_focus = SubResource( 51 )
 
 [sub_resource type="DynamicFont" id=7]
 size = 20
@@ -614,7 +615,6 @@ expand = true
 flip_h = true
 
 [node name="Loading" type="TextureRect" parent="."]
-anchor_bottom = 0.123
 margin_left = 110.0
 margin_top = 176.0
 margin_right = 254.0
@@ -782,6 +782,15 @@ align = 1
 clip_text = true
 max_lines_visible = 2
 
+[node name="ButtonComm" parent="Control2" instance=ExtResource( 1 )]
+margin_left = 614.0
+margin_top = 357.0
+margin_right = 743.0
+margin_bottom = 397.0
+size_flags_horizontal = 8
+custom_fonts/font = SubResource( 10 )
+text = "Comments"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 36 )
 anims/trans_out_MainMenuScreen_SearchScreen = SubResource( 37 )
@@ -794,3 +803,5 @@ anims/spin = SubResource( 40 )
 [node name="HTTPRequest2" type="HTTPRequest" parent="."]
 
 [node name="HTTPRequest3" type="HTTPRequest" parent="."]
+
+[node name="Comments" parent="." instance=ExtResource( 7 )]
