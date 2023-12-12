@@ -11,17 +11,17 @@ var searching = false
 var levels = Singleton.SavedLevels.levels
 
 onready var loading = $Loading
-onready var buttonx = $buttonX
+onready var buttonx = $Control/VBoxContainer/PanelContainer/buttonX
 onready var level_name_label = $Control2/LevelInfo/LevelName
-onready var back_button = $Control/VBoxContainer/HBoxContainer/ButtonBack
-onready var add_button = $Control/VBoxContainer/HBoxContainer/ButtonAdd
-onready var copy_button = $Control/VBoxContainer/HBoxContainer/ButtonCopyCode
+onready var back_button = $Control/HBoxContainer/ButtonBack
+onready var add_button = $Control/HBoxContainer/ButtonAdd
+onready var copy_button = $Control/HBoxContainer/ButtonCopyCode
 onready var level_creator = $Control2/LevelCreator
 onready var level_sky_thumbnail = $Control2/LevelInfo/LevelThumbnail/PanelContainer/ThumbnailImage
 onready var level_foreground_thumbnail = $Control2/LevelInfo/LevelThumbnail/PanelContainer/ForegroundThumbnailImage
 onready var info = $Control2
-onready var search = $PanelContainer/TextEdit
-onready var page_label = $Control/PageSelect/Value
+onready var search = $Control/VBoxContainer/PanelContainer/TextEdit
+onready var page_label = $Control/PageSelect/Label
 onready var page_right = $Control/PageSelect/Right
 onready var page_left = $Control/PageSelect/Left
 onready var level_list = $Control/VBoxContainer/LevelListPanel/VBoxContainer/LevelList
@@ -37,7 +37,7 @@ func _ready():
 	level_list.connect("item_selected", self, "on_item_selected")
 	loading.show()
 	info.hide()
-	page_label.text = str(page)
+	page_label.text = "Page: " + str(page)
 	back_button.connect("button_down", self, "on_back")
 	add_button.connect("button_down", self, "on_add")
 	copy_button.connect("button_down", self, "on_copy")
@@ -46,17 +46,18 @@ func _ready():
 	page_left.connect("button_down", self, "left_pressed")
 	search.connect("text_changed", self, "on_text_changed")
 	http.connect("request_completed", self, "_on_request_completed")
+	request(1)
 #	http.request("https://levelsharesquare.com/api/levels?page=1&game=2")
 	
 func request(pageno):
 	http.connect("request_completed", self, "_on_request_completed")
-	http.request("https://levelsharesquare.com/api/levels?page=" + str(pageno) + "&game=2")
+	http.request("https://levelsharesquare.com/api/levels?page=" + str(pageno) + "&game=2&keep=true")
 	
 func x_pressed():
 	searching = false
 	http.cancel_request()
 	page = 1
-	page_label.text = str(page)
+	page_label.text = "Page: " + str(page)
 	request(page)
 	loading.show()
 	level_list.clear()
@@ -72,12 +73,17 @@ func on_text_changed(new_text):
 		pass
 
 func _process(delta):
+	level_list.margin_bottom = 236
+	buttonx.margin_left = 303
+	buttonx.margin_top = -53
+	buttonx.margin_right = 307
+	buttonx.margin_bottom = 116
 	if Input.is_action_just_pressed("search") && get_focus_owner() == search:
 		load_page()
 		searching = true
 		page = 0
 		http3.connect("request_completed", self, "_on_request3_completed")
-		var request = "https://levelsharesquare.com/api/levels?page=1&game=2&searchQuery=" + search.get_text()
+		var request = "https://levelsharesquare.com/api/levels?page=1&game=2&searchQuery=" + search.get_text() + "&keep=true"
 		http3.request(request)
 		
 func left_pressed():
@@ -89,7 +95,7 @@ func left_pressed():
 func load_page():
 	http.cancel_request()
 	actual_codes.clear()
-	page_label.text = str(page)
+	page_label.text = "Page: " + str(page)
 	loading.show()
 	level_list.clear()
 	level_codes.clear()
