@@ -33,6 +33,10 @@ var template_level_codes : Array = [
 	"res://level/template_levels/green_demon_cave.tres"
 ]
 
+var community_level_codes : Array = [
+	"res://level/community_levels/ruins_of_the_misty_peaks.tres",
+	"res://level/community_levels/yume_mario.tres"
+]
 
 # for the levels list and get_current_levels()
 var is_template_list : bool = false
@@ -42,11 +46,11 @@ var file : File = File.new()
 var directory : Directory = Directory.new()
 
 func _ready() -> void:
-	pass
 	load_level_paths_from_disk()
 	for level_path in levels_disk_paths:
 		load_level_from_disk(level_path)
 	prepare_template_levels()
+	prepare_community_levels()
 
 func wipe_template_levels():
 	var dir = Directory.new()
@@ -57,19 +61,19 @@ func wipe_template_levels():
 		dir.remove(file_name)
 		file_name = dir.get_next()
 
-func load_template_levels_from_resources():
-	for i in range(template_level_codes.size()):
-		var path : String = template_level_codes[i]
+func load_levels_from_resources(list: Array):
+	for i in range(list.size()):
+		var path : String = list[i]
 
 		var f = File.new()
 		var err = f.open(path, File.READ)
 		if err == OK:
-			template_level_codes[i] = f.get_as_text()
-
+			list[i] = f.get_as_text()
+			
 		f.close()
 
 func prepare_template_levels() -> void:
-	load_template_levels_from_resources()
+	load_levels_from_resources(template_level_codes)
 
 	for level_path in template_levels_disk_paths:
 		load_template_level_from_disk(level_path)
@@ -85,6 +89,24 @@ func prepare_template_levels() -> void:
 			var level_info := LevelInfo.new(level_code)
 			add_template_level(level_info)
 
+func prepare_community_levels() -> void:
+	load_levels_from_resources(community_level_codes)
+
+	for level_path in community_levels_disk_paths:
+		load_community_level_from_disk(level_path)
+
+	for level_code in community_level_codes:
+		var level_exists := false
+		for level in community_levels:
+			if level.level_code == level_code:
+				level_exists = true
+				break
+
+		if !level_exists:
+			var level_info := LevelInfo.new(level_code)
+			add_community_level(level_info)
+
+
 func add_template_level(level_info : LevelInfo):
 	# Failsafe, prevents illegal levels from being added
 	if !template_level_codes.has(level_info.level_code):
@@ -99,6 +121,19 @@ func add_template_level(level_info : LevelInfo):
 		template_levels_disk_paths.append(level_disk_path)
 		save_level_paths_to_disk()
 
+func add_community_level(level_info : LevelInfo):
+	# Failsafe, prevents illegal levels from being added
+	if !community_level_codes.has(level_info.level_code):
+		return
+
+	# generate a (hopefully) unique name for each level
+	var level_disk_path = generate_community_level_disk_path(level_info)
+
+	var error_code = save_community_level_to_disk(level_info, level_disk_path)
+	if error_code == OK:
+		community_levels.append(level_info)
+		community_levels_disk_paths.append(level_disk_path)
+		save_level_paths_to_disk()
 
 func get_current_levels() -> Array:
 	return template_levels if is_template_list else levels
@@ -112,6 +147,9 @@ func generate_level_disk_path(level_info : LevelInfo) -> String:
 
 func generate_template_level_disk_path(level_info : LevelInfo) -> String:
 	return TEMPLATE_LEVELS_DIRECTORY + "%s_%s.level" % [hash(level_info), hash(OS.get_datetime())]
+
+func generate_community_level_disk_path(level_info : LevelInfo) -> String:
+	return COMMUNITY_LEVELS_DIRECTORY + "%s_%s.level" % [hash(level_info), hash(OS.get_datetime())]
 
 
 func save_level_paths_to_disk_of(levels_directory: String, level_paths_path: String, levels_disk_paths: Array) -> void:
@@ -128,7 +166,7 @@ func save_level_paths_to_disk_of(levels_directory: String, level_paths_path: Str
 func save_level_paths_to_disk() -> void:
 	save_level_paths_to_disk_of(LEVELS_DIRECTORY, LEVEL_DISK_PATHS_PATH, levels_disk_paths) # User levels
 	save_level_paths_to_disk_of(TEMPLATE_LEVELS_DIRECTORY, TEMPLATE_LEVEL_DISK_PATHS_PATH, template_levels_disk_paths) # Template levels
-
+	save_level_paths_to_disk_of(COMMUNITY_LEVELS_DIRECTORY, COMMUNITY_LEVEL_DISK_PATHS_PATH, community_levels_disk_paths) # Community level pack
 
 func load_level_paths_from_disk_for(level_disk_paths_path: String, array_to: Array) -> void:
 	var error_code = file.open(level_disk_paths_path, File.READ)
@@ -146,6 +184,7 @@ func load_level_paths_from_disk_for(level_disk_paths_path: String, array_to: Arr
 func load_level_paths_from_disk() -> void:
 	load_level_paths_from_disk_for(LEVEL_DISK_PATHS_PATH, levels_disk_paths)
 	load_level_paths_from_disk_for(TEMPLATE_LEVEL_DISK_PATHS_PATH, template_levels_disk_paths)
+	load_level_paths_from_disk_for(COMMUNITY_LEVEL_DISK_PATHS_PATH, community_levels_disk_paths)
 
 
 
@@ -212,6 +251,21 @@ func load_template_level_from_disk(level_path : String) -> void:
 
 		file.close()
 
+func load_community_level_from_disk(level_path : String) -> void:
+	var error_code = file.open_encrypted_with_pass(level_path, File.READ, ENCRYPTION_PASSWORD)
+	if error_code == OK:
+		var level_save_dictionary_json = file.get_line()
+		var level_save_dictionary = parse_json(level_save_dictionary_json)
+
+		var level_info = LevelInfo.new()
+		level_info.load_from_dictionary(level_save_dictionary)
+
+		# Failsafe, prevents illegal levels from being loaded
+		if community_level_codes.has(level_info.level_code):
+			community_levels.append(level_info)
+
+		file.close()
+
 # returns an error code
 func save_template_level_to_disk(level_info : LevelInfo, level_path : String) -> int:
 	if !directory.dir_exists(TEMPLATE_LEVELS_DIRECTORY):
@@ -219,6 +273,21 @@ func save_template_level_to_disk(level_info : LevelInfo, level_path : String) ->
 
 	# Failsafe, prevents illegal levels from being saved
 	if template_level_codes.has(level_info.level_code):
+		var error_code = file.open_encrypted_with_pass(level_path, File.WRITE, ENCRYPTION_PASSWORD)
+		if error_code == OK:
+			var level_save_dictionary = level_info.get_saveable_dictionary()
+			var level_save_dictionary_json = to_json(level_save_dictionary)
+			file.store_string(level_save_dictionary_json)
+			file.close()
+	return OK
+
+# returns an error code
+func save_community_level_to_disk(level_info : LevelInfo, level_path : String) -> int:
+	if !directory.dir_exists(COMMUNITY_LEVELS_DIRECTORY):
+		var _error_code = directory.make_dir_recursive(COMMUNITY_LEVELS_DIRECTORY)
+
+	# Failsafe, prevents illegal levels from being saved
+	if community_level_codes.has(level_info.level_code):
 		var error_code = file.open_encrypted_with_pass(level_path, File.WRITE, ENCRYPTION_PASSWORD)
 		if error_code == OK:
 			var level_save_dictionary = level_info.get_saveable_dictionary()

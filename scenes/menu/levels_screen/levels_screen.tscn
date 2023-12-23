@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://scenes/menu/levels_screen/levels_screen.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -93,6 +93,14 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
+
+[sub_resource type="DynamicFont" id=35]
+size = 19
+outline_size = 1
+outline_color = Color( 0.85098, 0.780392, 0.494118, 1 )
+extra_spacing_top = -2
+extra_spacing_bottom = -3
+font_data = ExtResource( 22 )
 
 [sub_resource type="DynamicFont" id=30]
 size = 19
@@ -440,6 +448,7 @@ margin_bottom = 109.0
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/TemplateLevelInfo/VBoxContainer"]
 margin_right = 327.0
 margin_bottom = 28.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 9 )
 text = "Sample levels"
 align = 1
@@ -492,7 +501,7 @@ margin_bottom = 149.0
 custom_colors/font_color = Color( 0.682353, 0.439216, 0.176471, 1 )
 custom_colors/font_color_hover = Color( 1, 0.980392, 0.858824, 1 )
 custom_colors/font_color_pressed = Color( 0.494118, 0.239216, 0.180392, 1 )
-custom_fonts/font = SubResource( 30 )
+custom_fonts/font = SubResource( 35 )
 custom_styles/hover = ExtResource( 21 )
 custom_styles/pressed = ExtResource( 23 )
 custom_styles/normal = ExtResource( 16 )
@@ -509,9 +518,9 @@ text = "Sample Levels"
 
 [node name="LevelCodePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 visible = false
-margin_top = 182.0
+margin_top = 217.0
 margin_right = 343.0
-margin_bottom = 324.0
+margin_bottom = 359.0
 size_flags_vertical = 11
 custom_styles/panel = ExtResource( 10 )
 
@@ -824,9 +833,9 @@ __meta__ = {
 
 [node name="ButtonTimeScores" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore" instance=ExtResource( 2 )]
 visible = false
-margin_top = 72.0
+margin_top = 74.0
 margin_right = 170.0
-margin_bottom = 116.0
+margin_bottom = 118.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 9 )
 text = "Time Scores"
