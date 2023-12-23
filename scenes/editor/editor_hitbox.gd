@@ -1,12 +1,10 @@
 extends Area2D
 class_name EditorHitbox
 
-var is_in_mouse: bool = false
 
-func _ready():
-	if get_tree().current_scene.name != "Editor":
-		print("bye bi")
-		queue_free()
-		return
-	connect("mouse_entered", self, "set", ["is_in_mouse", true])
-	connect("mouse_exited", self, "set", ["is_in_mouse", false])
+func is_in_point(point: Vector2) -> bool:
+	for polygon in get_children():
+		if Geometry.is_point_in_polygon(point, polygon.get_global_transform().xform(polygon.get_polygon())):
+			return true
+	
+	return false

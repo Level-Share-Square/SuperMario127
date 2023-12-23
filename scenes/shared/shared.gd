@@ -102,7 +102,7 @@ func get_objects_overlapping_position(point: Vector2):
 	for object_node in objects_node.get_children():
 		var editor_hitbox: Area2D = object_node.get_node_or_null("EditorHitbox")
 		if is_instance_valid(editor_hitbox):
-			if editor_hitbox.is_in_mouse:
+			if editor_hitbox.is_in_point(point):
 				found_objects.append(object_node)
 		else:
 			var overlap : int = precise_object_overlap(object_node, point)
