@@ -100,13 +100,10 @@ func get_objects_overlapping_position(point: Vector2):
 	
 	var found_objects = []
 	for object_node in objects_node.get_children():
-		if is_instance_valid(object_node.get_node("CollisionPolygon2D")):
-			
-			
-			if Geometry.is_point_in_polygon(point, object_node.get_global_transform().xform(object_node.get_node("CollisionPolygon2D").get_polygon()) ):
-				
-				found_objects.append(object_node) 
-			
+		var editor_hitbox: Area2D = object_node.get_node_or_null("EditorHitbox")
+		if is_instance_valid(editor_hitbox):
+			if editor_hitbox.is_in_mouse:
+				found_objects.append(object_node)
 		else:
 			var overlap : int = precise_object_overlap(object_node, point)
 			
