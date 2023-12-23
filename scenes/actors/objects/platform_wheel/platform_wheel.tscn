@@ -6,6 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="PlatformWheel" type="Node2D"]
+scale = Vector2( 0.01, 0.01 )
 z_index = -2
 script = ExtResource( 1 )
 circle_texture = ExtResource( 2 )
@@ -15,3 +16,6 @@ circle_texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2( 2.5, 2.5 )
 shape = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 10.1563, -63.2813, 25, -56.25, 40.625, -48.4375, 55.4688, -29.6875, 63.2813, -6.25, 61.7188, 17.1875, 51.5625, 38.2813, 35.1563, 53.125, 12.5, 62.5, -10.9375, 64.0625, -33.5938, 53.9063, -49.2188, 39.8438, -62.5, 18.75, -64.0625, -5.46875, -57.0313, -29.6875, -38.2813, -50, -22.6563, -58.5938 )

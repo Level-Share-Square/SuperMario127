@@ -25,3 +25,6 @@ shape = SubResource( 1 )
 visible = false
 process_parent = true
 physics_process_parent = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 16, -8, 12, -8, 12, 0, 16, 0, 16, 8, 12, 8, 12, 16, 3, 16, 3, 8, -4, 8, -4, 16, -13, 16, -13, 8, -16, 8, -16, 0, -13, 0, -13, -8, -16, -8, -16, -16, 16, -16 )

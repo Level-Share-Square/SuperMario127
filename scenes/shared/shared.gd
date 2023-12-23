@@ -59,6 +59,7 @@ func animated_sprite_get_rect(node: AnimatedSprite) -> Rect2:
 	return rect
 
 func sprite_is_pixel_opaque_with_margin(sprite: Sprite, point: Vector2, margin: float) -> bool:
+	
 	if sprite.is_pixel_opaque(point): return true
 	if sprite.is_pixel_opaque(point + Vector2(-margin, 0)): return true
 	if sprite.is_pixel_opaque(point + Vector2( margin, 0)): return true
@@ -95,15 +96,25 @@ func sort_by_dist_to_point(a: Node2D, b: Node2D) -> bool:
 	return a.position.distance_squared_to(__sort_point) < b.position.distance_squared_to(__sort_point)
 
 func get_objects_overlapping_position(point: Vector2):
+	
+	
 	var found_objects = []
 	for object_node in objects_node.get_children():
-		var overlap : int = precise_object_overlap(object_node, point)
-		
-		if overlap == -1:
-			overlap = 1 if (object_node.position - point).length() <= 20 else 0
-		
-		if overlap == 1:
-			found_objects.append(object_node)
+		if is_instance_valid(object_node.get_node("CollisionPolygon2D")):
+			
+			
+			if Geometry.is_point_in_polygon(point, object_node.get_global_transform().xform(object_node.get_node("CollisionPolygon2D").get_polygon()) ):
+				
+				found_objects.append(object_node) 
+			
+		else:
+			var overlap : int = precise_object_overlap(object_node, point)
+			
+			if overlap == -1:
+				overlap = 1 if (object_node.position - point).length() <= 20 else 0
+			
+			if overlap == 1:
+				found_objects.append(object_node)
 	
 	# Sorting from distance to point hopefully improves selecting overlapping objects
 	__sort_point = point
