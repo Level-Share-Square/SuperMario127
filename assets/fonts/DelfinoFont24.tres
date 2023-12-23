@@ -4,5 +4,4 @@
 
 [resource]
 size = 24
-outline_size = 2
 font_data = ExtResource( 1 )
