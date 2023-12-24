@@ -242,6 +242,18 @@ func pin_item(placeable_item):
 	boxes[0].item_changed()
 	set_selected_box(boxes[0])
 	
+func unpin_item(unpin_index):
+	var button_container = placeable_items_button_container
+	var boxes = button_container.get_children()
+	var temp_box = boxes[unpin_index]
+	
+	for index in range(unpin_index, pinned_items.size()):
+		var box = boxes[index]
+		box.item = boxes[index + 1].item
+		box.item_changed()
+	boxes[pinned_items.size()].item = temp_box.item
+	boxes[pinned_items.size()].item_changed()
+	pinned_items.remove(unpin_index)
 
 func switch_scenes() -> void:
 	if Singleton2.rp == true:
