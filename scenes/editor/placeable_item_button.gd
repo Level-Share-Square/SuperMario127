@@ -1,6 +1,7 @@
 extends TextureButton
 
 onready var icon = $Icon
+onready var pin = $Pin
 onready var tween = $Tween
 onready var sound = $Sound
 onready var click_sound = $ClickSound
@@ -34,9 +35,14 @@ func _ready():
 	update_selection()
 
 func item_changed():
+	var editor = get_tree().get_current_scene()
 	icon.texture = null if item == null else item.icon
 	Singleton.EditorSavedSettings.layout_ids[box_index] = item.name
 	Singleton.EditorSavedSettings.layout_palettes[box_index] = item.palette_index
+	if(box_index < editor.pinned_items.size()):
+		pin.visible = true
+	else:
+		pin.visible = false
 	
 func is_hovered():
 	var mouse_pos = get_global_mouse_position()
