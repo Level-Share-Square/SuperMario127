@@ -69,8 +69,8 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Pin" type="Sprite" parent="."]
-visible = false
-position = Vector2( 115.203, 32.3745 )
+position = Vector2( 29.88, 29.9934 )
+scale = Vector2( -1, 1 )
 texture = ExtResource( 10 )
 
 [connection signal="button_down" from="." to="." method="button_down"]
