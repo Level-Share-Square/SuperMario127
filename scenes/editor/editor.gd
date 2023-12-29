@@ -142,6 +142,7 @@ func _ready() -> void:
 	zoom_level = Singleton.EditorSavedSettings.zoom_level
 	editing_layer = Singleton.EditorSavedSettings.layer
 	layers_transparent = Singleton.EditorSavedSettings.layers_transparent
+	pinned_items = Singleton.EditorSavedSettings.pinned_items
 	shared.toggle_layer_transparency(editing_layer, layers_transparent)
 	
 	# if the mode switch button is invisible then the editor hasn't been readyed for the first time yet
@@ -256,6 +257,7 @@ func unpin_item(unpin_index):
 	pinned_items.remove(unpin_index)
 
 func switch_scenes() -> void:
+	Singleton.EditorSavedSettings.pinned_items = get_tree().get_current_scene().pinned_items
 	if Singleton2.rp == true:
 		update_activity()
 	elif Singleton2.rp == false:
