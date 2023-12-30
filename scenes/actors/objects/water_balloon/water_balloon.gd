@@ -8,6 +8,7 @@ var added_stamina = 100
 var added_water = 50
 var collected = false
 var respawn_timer = 0.0
+
 		
 		
 func _set_properties():
@@ -24,7 +25,7 @@ func collect(body):
 		$Particles2D2.emitting = true
 		sound.play()
 		sprite.visible = false
-		respawn_timer = 40.0
+		respawn_timer = 10.0
 		body.fuel += added_water
 		body.stamina += added_stamina
 		if body.fuel > 100:
@@ -32,6 +33,8 @@ func collect(body):
 		if body.stamina > 100:
 			body.stamina = 100
 		collected = true
+		if !body.big_attack and !body.invincible:
+			body.velocity.y = -325
 
 func _ready():
 	$AnimationPlayer.play("bpb")
