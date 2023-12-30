@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/actors/objects/water_balloon/water_balloon.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/water_balloon/2.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/hover_nozzle/sound.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/mario/particles/metal_sparkles.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/mario/nozzles/water_particle.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/water_balloon/1.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 16 )
@@ -31,9 +32,46 @@ tracks/1/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/Sprite2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "bpb"
+length = 4.6
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.2, 2.16802, 4.26388, -0.2, 1.31313, 0.3, 1.12533, -5.00116, -0.3, -0.862922, 0.2, -0.907995, 0, 0, -0.469497, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.3, 3.3, 4.6 )
+}
+
+[sub_resource type="Animation" id=92]
+resource_name = "bpb 2"
 length = 4.6
 loop = true
 tracks/0/type = "bezier"
@@ -128,6 +166,9 @@ volume_db = -10.0
 z_index = -1
 texture = ExtResource( 2 )
 
+[node name="Sprite2" type="Sprite" parent="Sprite"]
+texture = ExtResource( 6 )
+
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
 collision_layer = 8
@@ -139,6 +180,7 @@ shape = SubResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
 anims/bpb = SubResource( 3 )
+"anims/bpb 2" = SubResource( 92 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 4 )

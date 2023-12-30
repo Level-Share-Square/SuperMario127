@@ -4,6 +4,7 @@ extends GameObject
 onready var sprite = $Sprite
 onready var area = $Area2D
 onready var area_collision = $Area2D/CollisionShape2D
+onready var collision_shape = $StaticBody2D/CollisionShape2D
 onready var sponge_range_sprite = $Area2D/ColorRect
 
 
@@ -32,12 +33,16 @@ func change_size():
 func _ready():
 	if get_tree().get_current_scene().mode == 0:
 		sponge_range_sprite.visible = false
+	if !enabled:
+		area_collision.disabled = true
+		collision_shape.disabled = true
 		
 
 func _physics_process(delta):
-	for body in area.get_overlapping_bodies():
-		if body is Character:
-			body.fuel -= water_drain_speed * delta
+	if enabled:
+		for body in area.get_overlapping_bodies():
+			if body is Character:
+				body.fuel -= water_drain_speed * delta
 			
 func _process(_delta):
 	if (water_drain_range != last_range):
