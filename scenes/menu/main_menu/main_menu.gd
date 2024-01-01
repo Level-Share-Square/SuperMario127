@@ -6,7 +6,7 @@ onready var button_search : Button = $Panel/VBoxContainer/ButtonSearch
 onready var button_templates : Button = $Panel/VBoxContainer/ButtonTemplates
 onready var button_options : Button = $Panel/VBoxContainer/ButtonOptions
 onready var button_quit : Button = $Panel/ButtonQuit
-onready var button_login : Button = $ButtonLogin
+onready var button_login : Button = $Panel/ButtonLogin
 
 onready var timer = $CooldownTimer
 

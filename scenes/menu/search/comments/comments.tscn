@@ -1,24 +1,13 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/menu/search/comments/comments.gd" type="Script" id=1]
-[ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=2]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/styles/LevelListPanel.tres" type="StyleBox" id=5]
 [ext_resource path="res://assets/fonts/DelfinoFont.tres" type="DynamicFont" id=6]
 [ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=7]
 [ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=8]
-
-[sub_resource type="StyleBoxFlat" id=1]
-content_margin_left = 16.0
-content_margin_right = 16.0
-content_margin_top = 8.0
-content_margin_bottom = 8.0
-bg_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
+[ext_resource path="res://assets/styles/whitecurved.tres" type="StyleBox" id=9]
 
 [sub_resource type="DynamicFont" id=2]
 size = 20
@@ -33,6 +22,17 @@ font_data = ExtResource( 4 )
 [sub_resource type="StyleBoxEmpty" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxFlat" id=12]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.141176, 0.207843, 0.588235, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id=8]
 content_margin_left = 16.0
@@ -124,9 +124,9 @@ script = ExtResource( 1 )
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 margin_left = 502.0
-margin_top = 1.0
+margin_top = 5.0
 margin_right = 768.0
-margin_bottom = 61.0
+margin_bottom = 65.0
 custom_styles/panel = ExtResource( 5 )
 
 [node name="TextEdit" type="LineEdit" parent="PanelContainer2"]
@@ -136,7 +136,7 @@ margin_right = 258.0
 margin_bottom = 52.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 7 )
-custom_styles/normal = SubResource( 1 )
+custom_styles/normal = ExtResource( 9 )
 placeholder_text = "Comment"
 placeholder_alpha = 0.422
 
@@ -160,24 +160,24 @@ text = "X"
 
 [node name="LevelListPanel" type="PanelContainer" parent="."]
 margin_left = 502.0
-margin_top = 65.0
+margin_top = 70.0
 margin_right = 768.0
-margin_bottom = 431.0
+margin_bottom = 436.0
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 5 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 margin_left = 509.0
-margin_top = 74.0
+margin_top = 79.0
 margin_right = 760.0
-margin_bottom = 423.0
-custom_styles/panel = ExtResource( 2 )
+margin_bottom = 428.0
+custom_styles/panel = SubResource( 12 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 margin_left = 514.0
-margin_top = 81.0
+margin_top = 86.0
 margin_right = 752.0
-margin_bottom = 376.0
+margin_bottom = 381.0
 follow_focus = true
 scroll_deadzone = 10
 

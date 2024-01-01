@@ -5,12 +5,14 @@ var total_pages = 333
 var level_codes = []
 var actual_codes = []
 var level_ids = []
+var level_ratings = []
 var creators = []
 var search_cooldown = 5
 var searching = false
 
 var levels = Singleton.SavedLevels.levels
 
+onready var rating = $Control2/Rating
 onready var loading = $Loading
 onready var buttonx = $Control/VBoxContainer/PanelContainer/buttonX
 onready var level_name_label = $Control2/LevelInfo/LevelName
@@ -68,6 +70,7 @@ func x_pressed():
 	request(page)
 	loading.show()
 	level_ids.clear()
+	level_ratings.clear()
 	level_list.clear()
 	level_codes.clear()
 	search.set_text("")
@@ -103,6 +106,7 @@ func left_pressed():
 func load_page():
 	http.cancel_request()
 	actual_codes.clear()
+	level_ratings.clear()
 	page_label.text = "Page: " + str(page)
 	loading.show()
 	level_list.clear()
@@ -142,6 +146,8 @@ func on_item_selected(index: int):
 		http2.request("https://levelsharesquare.com/api/users/" + str(creators[index]))
 		print(level_ids[index])
 		comments.load_comments(level_ids[index])
+		yield(get_tree().create_timer(0.6), "timeout")
+		rating.set_rating(level_ratings[index])
 		
 	
 func on_back():
@@ -172,10 +178,12 @@ func _on_request3_completed(result, response_code, headers, body):
 		for i in page_amt:
 			var level_code = json.result["levels"][i]["code"]
 			var level_id = json.result["levels"][i]["_id"]
+			var level_rating = json.result["levels"][i]["rating"]
 			if is_valid(level_code):
 				var level_info : LevelInfo = LevelInfo.new(level_code)
 				level_codes.append(level_info)
 				level_ids.append(level_id)
+				level_ratings.append(level_rating)
 				actual_codes.append(level_code)
 				level_list.add_item(level_info.level_name)
 		for i in page_amt:
@@ -191,10 +199,12 @@ func _on_request_completed(result, response_code, headers, body):
 		for i in page_amt:
 			var level_code = json.result["levels"][i]["code"]
 			var level_id = json.result["levels"][i]["_id"]
+			var level_rating = json.result["levels"][i]["rating"]
 			if is_valid(level_code):
 				var level_info : LevelInfo = LevelInfo.new(level_code)
 				level_codes.append(level_info)
 				level_ids.append(level_id)
+				level_ratings.append(level_rating)
 				level_list.add_item(level_info.level_name)
 		for i in page_amt:
 			creators.append(json.result["levels"][i]["author"])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -7,11 +7,13 @@
 [ext_resource path="res://assets/styles/RedButtonStyleHover.tres" type="StyleBox" id=5]
 [ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=6]
 [ext_resource path="res://scenes/menu/search/comments/comments.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/menu/search/rating/rating.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/editor/assets/search_icon.png" type="Texture" id=9]
 [ext_resource path="res://scenes/menu/search/search_screen.gd" type="Script" id=10]
 [ext_resource path="res://assets/fonts/delfino_dynamicfontdata.tres" type="DynamicFontData" id=11]
 [ext_resource path="res://scenes/editor/assets/clickable_arrow_hover.png" type="Texture" id=12]
 [ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=13]
+[ext_resource path="res://assets/styles/whitecurved.tres" type="StyleBox" id=14]
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=15]
 [ext_resource path="res://scenes/menu/levels_screen/ui/star_coin_icon.png" type="Texture" id=16]
 [ext_resource path="res://scenes/menu/levels_screen/shine_icon.png" type="Texture" id=17]
@@ -24,17 +26,6 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=11]
 size = 19
 font_data = ExtResource( 2 )
-
-[sub_resource type="StyleBoxFlat" id=42]
-content_margin_left = 16.0
-content_margin_right = 16.0
-content_margin_top = 8.0
-content_margin_bottom = 8.0
-bg_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
 
 [sub_resource type="StyleBoxEmpty" id=43]
 
@@ -211,7 +202,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( -350, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( -400, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.6 )
 }
 tracks/4/type = "bezier"
@@ -295,7 +286,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -350, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -400, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.6 )
 }
 tracks/4/type = "bezier"
@@ -442,9 +433,9 @@ script = ExtResource( 10 )
 
 [node name="Control" type="Control" parent="."]
 margin_left = 66.0
-margin_top = 22.0
+margin_top = 500.0
 margin_right = 336.0
-margin_bottom = 161.0
+margin_bottom = 639.0
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 visible = false
@@ -509,15 +500,15 @@ margin_right = 334.0
 margin_bottom = 52.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 6 )
-custom_styles/normal = SubResource( 42 )
+custom_styles/normal = ExtResource( 14 )
 placeholder_text = "Search"
 placeholder_alpha = 0.422
 
 [node name="buttonX" parent="Control/VBoxContainer/PanelContainer" instance=ExtResource( 1 )]
-margin_left = 320.0
-margin_top = 8.0
-margin_right = 334.0
-margin_bottom = 52.0
+margin_left = 293.0
+margin_top = 549.0
+margin_right = 307.0
+margin_bottom = 593.0
 size_flags_horizontal = 8
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
@@ -616,17 +607,18 @@ flip_h = true
 
 [node name="Loading" type="TextureRect" parent="."]
 margin_left = 110.0
-margin_top = 176.0
+margin_top = 657.0
 margin_right = 254.0
-margin_bottom = 320.0
+margin_bottom = 801.0
 rect_pivot_offset = Vector2( 72, 72 )
 texture = ExtResource( 17 )
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
 [node name="Control2" type="Control" parent="."]
+margin_top = -350.0
 margin_right = 40.0
-margin_bottom = 40.0
+margin_bottom = -310.0
 
 [node name="LevelScore" type="GridContainer" parent="Control2"]
 margin_left = 377.0
@@ -790,6 +782,13 @@ margin_bottom = 397.0
 size_flags_horizontal = 8
 custom_fonts/font = SubResource( 10 )
 text = "Comments"
+
+[node name="Rating" parent="Control2" instance=ExtResource( 8 )]
+margin_left = 556.0
+margin_top = 89.0
+margin_right = 556.0
+margin_bottom = 89.0
+rect_scale = Vector2( 0.05, 0.05 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 36 )
