@@ -19,9 +19,6 @@ texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 7 )
 texture_hover = ExtResource( 4 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Icon" type="Sprite" parent="."]
 material = ExtResource( 3 )
@@ -51,4 +48,5 @@ stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="." to="." method="button_pressed"]

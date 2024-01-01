@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/editor/placeable_item_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/assets/shadow_shader.material" type="Material" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/editor/sounds/click.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/editor/assets/grid.png" type="Texture" id=8]
 [ext_resource path="res://assets/tiles/grass/icon.png" type="Texture" id=9]
+[ext_resource path="res://assets/misc/pin.png" type="Texture" id=10]
 
 [node name="PlaceableItemButton" type="TextureButton"]
 margin_left = 12.0
@@ -48,9 +49,6 @@ margin_bottom = 32.0
 rect_scale = Vector2( 3, 3 )
 texture = ExtResource( 8 )
 stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 15.0
@@ -69,6 +67,11 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Pin" type="Sprite" parent="."]
+position = Vector2( 29.88, 29.9934 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 10 )
 
 [connection signal="button_down" from="." to="." method="button_down"]
 [connection signal="button_up" from="." to="." method="button_up"]

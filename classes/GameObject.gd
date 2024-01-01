@@ -45,6 +45,55 @@ func _ready():
 		var color = modulate
 		color.a = 0.5
 		modulate = color
+	
+	if get_tree().current_scene.name == "Editor":
+		var polygons: Array = []
+		create_collision_polygons_from_tree(self, Transform2D.IDENTITY, polygons)
+		
+		if polygons.size() > 0:
+			var hitbox := EditorHitbox.new()
+			hitbox.name = "EditorHitbox"
+			
+			for polygon in polygons:
+				hitbox.add_child(polygon)
+			
+			add_child(hitbox)
+
+func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D, array: Array) -> void:
+	if node is Sprite:
+		var bitmap := BitMap.new()
+		bitmap.create_from_image_alpha(node.texture.get_data())
+		
+		var rect : Rect2
+		if node.region_enabled:
+			rect = node.region_rect
+		else:
+			rect.size = node.texture.get_size()
+		
+		var polygons: Array = bitmap.opaque_to_polygons(rect)
+		for polygon in polygons:
+			for i in range(polygon.size()):
+				var point: Vector2 = polygon[i]
+				point -= rect.position
+				
+				if node.flip_h:
+					point.x = rect.size.x - point.x - 1.0
+				if node.flip_v:
+					point.y = rect.size.y - point.y - 1.0
+				
+				if node.centered:
+					point -= rect.size / 2.0
+				
+				polygon[i] = point
+			
+			var collision_polygon := CollisionPolygon2D.new()
+			collision_polygon.transform = node_transform
+			collision_polygon.polygon = polygon
+			array.append(collision_polygon)
+	
+	for child in node.get_children():
+		if child is Node2D:
+			create_collision_polygons_from_tree(child, node_transform * child.transform, array)
 
 func is_savable_property(key) -> bool:
 	for savable_property in (base_savable_properties + savable_properties):

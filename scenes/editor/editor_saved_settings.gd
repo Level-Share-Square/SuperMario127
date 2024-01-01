@@ -10,6 +10,7 @@ var show_grid := true
 var tileset_palettes = []
 var data_tiles = 0
 var tiles_resource : TileSet
+var pinned_items : Array 
 
 var tileset_loaded = false
 

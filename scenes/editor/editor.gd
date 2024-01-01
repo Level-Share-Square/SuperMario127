@@ -21,6 +21,8 @@ var display_preview_item = true
 
 onready var placeable_items : Node = get_node(placeable_items_path)
 onready var placeable_items_button_container : TextureRect = get_node(placeable_items_button_container_path)
+onready var pinned_items : Array 
+onready var max_pins = 5
 onready var item_preview : Sprite = get_node(item_preview_path)
 onready var shared : Node2D = get_node(shared_path)
 onready var object_settings : NinePatchRect = get_node(object_settings_path)
@@ -140,6 +142,7 @@ func _ready() -> void:
 	zoom_level = Singleton.EditorSavedSettings.zoom_level
 	editing_layer = Singleton.EditorSavedSettings.layer
 	layers_transparent = Singleton.EditorSavedSettings.layers_transparent
+	pinned_items = Singleton.EditorSavedSettings.pinned_items
 	shared.toggle_layer_transparency(editing_layer, layers_transparent)
 	
 	# if the mode switch button is invisible then the editor hasn't been readyed for the first time yet
@@ -192,17 +195,9 @@ func pick_item(obj: GameObject) -> void:
 	if placeable_item == null: return # In case
 	
 	# Should probably go into a function
-	var button_container = placeable_items_button_container
-	var boxes = button_container.get_children()
-	var index_size = (button_container.number_of_boxes-1)
-	for index in range(button_container.number_of_boxes):
-		if index != index_size:
-			var box = boxes[index_size - index]
-			box.item = boxes[(index_size - index) - 1].item
-			box.item_changed()
-	boxes[0].item = placeable_item
-	boxes[0].item_changed()
-	set_selected_box(boxes[0])
+	# yeah i agree
+	update_button_container(placeable_item)
+	
 
 # Pick a tile as a PlaceableItem
 func pick_tile(tile) -> void:
@@ -212,19 +207,57 @@ func pick_tile(tile) -> void:
 	if placeable_item == null: return # In case
 	
 	# Should probably go into a function
+	update_button_container(placeable_item)
+	
+# Updates the item hotbar after selecting a new item from the menu
+func update_button_container(placeable_item):
 	var button_container = placeable_items_button_container
 	var boxes = button_container.get_children()
-	var index_size = (button_container.number_of_boxes-1)
-	for index in range(button_container.number_of_boxes):
-		if index != index_size:
-			var box = boxes[index_size - index]
-			box.item = boxes[(index_size - index) - 1].item
-			box.item_changed()
+	for index in range(button_container.number_of_boxes - 1, pinned_items.size(), -1):
+		var box = boxes[index]
+		box.item = boxes[index -1].item
+		box.item_changed()
+	boxes[pinned_items.size()].item = placeable_item
+	boxes[pinned_items.size()].item_changed()
+	set_selected_box(boxes[pinned_items.size()])
+	
+# Same as update_button_container but specifically for pinning
+func pin_item(placeable_item):
+	var max_index
+	var button_container = placeable_items_button_container
+	var boxes = button_container.get_children()
+	
+	#update pinned items array
+	if pinned_items.size() >= max_pins:
+		pinned_items.pop_back()
+		max_index = max_pins - 1
+	else:
+		max_index = button_container.number_of_boxes - 1
+	pinned_items.push_front(placeable_item)
+	
+	for index in range(max_index, 0, -1):
+		var box = boxes[index]
+		box.item = boxes[index - 1].item
+		box.item_changed()
 	boxes[0].item = placeable_item
 	boxes[0].item_changed()
 	set_selected_box(boxes[0])
+	
+func unpin_item(unpin_index):
+	var button_container = placeable_items_button_container
+	var boxes = button_container.get_children()
+	var temp_box = boxes[unpin_index]
+	
+	for index in range(unpin_index, pinned_items.size()):
+		var box = boxes[index]
+		box.item = boxes[index + 1].item
+		box.item_changed()
+	boxes[pinned_items.size()].item = temp_box.item
+	boxes[pinned_items.size()].item_changed()
+	pinned_items.remove(unpin_index)
 
 func switch_scenes() -> void:
+	Singleton.EditorSavedSettings.pinned_items = get_tree().get_current_scene().pinned_items
 	if Singleton2.rp == true:
 		update_activity()
 	elif Singleton2.rp == false:
@@ -297,7 +330,7 @@ func _input(event):
 					
 
 func _process(delta : float) -> void:
-	print(hovered_object)
+	
 	if autosave_timer > 0:
 		autosave_timer -= 1
 	if autosave_timer <= 0:

@@ -1,46 +1,49 @@
 extends GameObject
 
-var _timer = null
-#onready var size = $Testsponge
-#onready var area = $Area2D
-#onready var coll = $StaticBody2D
 
-var water_drain_speed = 5
-var water_in_sponge = 0
-var max_water = 50
-var player_in_area = false
-var body
+onready var sprite = $Sprite
+onready var area = $Area2D
+onready var area_collision = $Area2D/CollisionShape2D
+onready var collision_shape = $StaticBody2D/CollisionShape2D
+onready var sponge_range_sprite = $Area2D/ColorRect
 
-#applies the timer
+
+var water_drain_speed : float = 15
+var water_drain_range : int = 64
+var last_range : int
+
+func _set_properties():
+	savable_properties = ["water_drain_speed", "water_drain_range"]
+	editable_properties = ["water_drain_speed", "water_drain_range"]
+
+func _set_property_values():
+	set_property("water_drain_speed", water_drain_speed, true)
+	set_property("water_drain_range", water_drain_range, true)
+	
+func change_size():
+	var area_shape = area_collision.get_shape()
+	area_shape.extents.x = (16 * sprite.scale.x) + water_drain_range
+	area_shape.extents.y = area_shape.extents.x
+	sponge_range_sprite.rect_size.x = area_shape.extents.x * 2
+	sponge_range_sprite.rect_size.y = sponge_range_sprite.rect_size.x
+	sponge_range_sprite.rect_position.x = -area_shape.extents.x
+	sponge_range_sprite.rect_position.y = -area_shape.extents.y
+	last_range = water_drain_range
+
 func _ready():
-	_timer = Timer.new()
-	add_child(_timer)
-	_timer.connect("timeout", self, "_on_Timer_timeout")
-	_timer.set_wait_time(1.0)
-	_timer.set_one_shot(false) # Make sure it loops
+	if get_tree().get_current_scene().mode == 0:
+		sponge_range_sprite.visible = false
+	if !enabled:
+		area_collision.disabled = true
+		collision_shape.disabled = true
+		
 
-#the opposite of body_entered and stops the timer
-func _on_Area2D_body_exited(body1):
-	if player_in_area == true and body1.name.begins_with("Character") and !body1.dead:
-		player_in_area = false
-		_timer.stop()
-		print("Body exited")
-
-#checks if the player has entered the area2D and starts the timer
-func _on_Area2D_body_entered(body1):
-	if player_in_area == false and body1.name.begins_with("Character") and !body1.dead:
-		print("Body Entered")
-		player_in_area = true
-		body = body1
-		_timer.start()
-		print("Timer started")
-
-#triggers everytime the timer has ran
-func _on_Timer_timeout():
-	if player_in_area == true and body.name.begins_with("Character") and !body.dead and body.fuel != 0:
-		if water_in_sponge < max_water:
-			body.fuel -= water_drain_speed
-			water_in_sponge += water_drain_speed
-			#size.scale += Vector2(0.25,0.25)
-			#area.scale += Vector2(0.25,0.25)
-			#coll.scale += Vector2(0.25,0.25)
+func _physics_process(delta):
+	if enabled:
+		for body in area.get_overlapping_bodies():
+			if body is Character:
+				body.fuel -= water_drain_speed * delta
+			
+func _process(_delta):
+	if (water_drain_range != last_range):
+		change_size()

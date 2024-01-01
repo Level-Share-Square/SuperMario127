@@ -93,7 +93,7 @@ func _ready() -> void:
 	_connect = button_new_level.connect("pressed", self, "on_button_new_level_pressed")
 	_connect = button_code_import.connect("pressed", self, "on_button_code_import_pressed")
 	_connect = button_code_cancel.connect("pressed", self, "on_button_code_cancel_pressed")
-	_connect = level_code_entry.connect("pressed", self, "info_clicked")
+	_connect = level_code_entry.connect("focus_entered", self, "info_clicked")
 
 	_connect = button_community_levels.connect("pressed", self, "on_button_community_levels_pressed")
 	_connect = button_sample_levels.connect("pressed", self, "on_button_sample_levels_pressed")
@@ -121,7 +121,7 @@ func _pre_open_screen() -> void:
 			button_community_levels.visible = false
 			button_sample_levels.visible = true
 			levels = Singleton.SavedLevels.community_levels
-			pass #TODO HERE
+			pass
 	else:
 		button_community_levels.visible = false
 		button_sample_levels.visible = false

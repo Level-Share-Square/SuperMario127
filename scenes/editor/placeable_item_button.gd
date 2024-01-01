@@ -1,6 +1,7 @@
 extends TextureButton
 
 onready var icon = $Icon
+onready var pin = $Pin
 onready var tween = $Tween
 onready var sound = $Sound
 onready var click_sound = $ClickSound
@@ -17,6 +18,7 @@ var item : PlaceableItem
 var placeable_items_path : String = ""
 onready var placeable_items_node = get_node(placeable_items_path)
 var box_index = 1
+var editor
 
 var squares = []
 
@@ -24,6 +26,7 @@ var last_hovered = false
 var last_clicking = false
 
 func _ready():
+	editor = get_tree().get_current_scene()
 	texture_normal = load(texture_normal.load_path)
 	texture_hover = load(texture_hover.load_path)
 	texture_pressed = load(texture_pressed.load_path)
@@ -34,9 +37,11 @@ func _ready():
 	update_selection()
 
 func item_changed():
+	
 	icon.texture = null if item == null else item.icon
 	Singleton.EditorSavedSettings.layout_ids[box_index] = item.name
 	Singleton.EditorSavedSettings.layout_palettes[box_index] = item.palette_index
+	
 	
 func is_hovered():
 	var mouse_pos = get_global_mouse_position()
@@ -47,29 +52,41 @@ func is_hovered():
 		return false
 
 func _process(_delta):
+	var hovered = is_hovered()
 	grid.visible = true if !item.is_object else false
 	grid.mouse_filter = 2 # ignore
-	if is_hovered() and !last_hovered:
+	if hovered and !last_hovered:
+		
 		sound.play()
 		tween.interpolate_property(icon, "offset",
 			Vector2(0, 3), Vector2(0, 0), 0.075,
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
 		tween.start()
-	if !is_hovered() and last_hovered:
+	if !hovered and last_hovered:
 		tween.interpolate_property(icon, "offset",
 			Vector2(0, 0), Vector2(0, 3), 0.075,
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
 		tween.start()
+	if(box_index < editor.pinned_items.size()):
+		pin.visible = true
+	else:
+		pin.visible = false
 
 	var clicking = Input.is_action_pressed("place")
 	var editor = get_tree().get_current_scene()
 
-	if editor.dragging_item != null and is_hovered():
+	if hovered and Input.is_action_just_pressed("pin_item"):
+		if(box_index < editor.pinned_items.size()):
+			editor.unpin_item(box_index)
+		else:
+			editor.pin_item(item)
+	if editor.dragging_item != null and hovered:
 		texture_normal = texture_hover
+		
 	else:
 		texture_normal = normal_texture
 	
-	last_hovered = is_hovered()
+	last_hovered = hovered
 	last_clicking = clicking
 			
 func update_selection():
@@ -102,8 +119,10 @@ func update_selection():
 
 func button_down():
 	var editor = get_tree().get_current_scene()
+	
 	if item != null:
 		if Input.is_action_just_pressed("change_palette"):
+			
 			item.update_palette(item.palette_index + 1)
 			item_changed()
 		elif editor.selected_box == self and !item.change_to.empty():
@@ -111,7 +130,7 @@ func button_down():
 			item = placeable_items_node.find_node(item.change_to)
 			item.update_palette(old_palette_index)
 			item_changed()
-	
+		
 		click_sound.play()
 		tween.interpolate_property(icon, "position",
 			Vector2(0, 0), Vector2(0, -18), 0.075,

@@ -6,47 +6,47 @@
 [ext_resource path="res://scenes/actors/mario/particles/shine_sparkles.png" type="Texture" id=4]
 [ext_resource path="res://assets/sounds/bump.wav" type="AudioStream" id=5]
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12, 8 )
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 22, 4 )
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 256, 128 )
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 448, 224 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
-region = Rect2( 192, 0, 64, 64 )
+region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
 region = Rect2( 256, 0, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": false,
 "name": "default",
 "speed": 12.0
 } ]
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=11]
 tracks/0/type = "method"
 tracks/0/path = NodePath("DeleteTimer")
 tracks/0/interp = 1
@@ -100,19 +100,19 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="CanvasItemMaterial" id=9]
+[sub_resource type="CanvasItemMaterial" id=12]
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=10]
+[sub_resource type="Gradient" id=13]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=11]
-gradient = SubResource( 10 )
+[sub_resource type="GradientTexture" id=14]
+gradient = SubResource( 13 )
 
-[sub_resource type="ParticlesMaterial" id=12]
+[sub_resource type="ParticlesMaterial" id=15]
 emission_shape = 1
 emission_sphere_radius = 8.86
 flag_disable_z = true
@@ -122,7 +122,7 @@ gravity = Vector3( 0, 98, 0 )
 initial_velocity = 100.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-color_ramp = SubResource( 11 )
+color_ramp = SubResource( 14 )
 anim_speed = 6.0
 anim_speed_random = 0.59
 anim_offset_random = 0.27
@@ -137,7 +137,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2( 0, 5 )
-shape = SubResource( 15 )
+shape = SubResource( 1 )
 
 [node name="StompArea" type="Area2D" parent="."]
 collision_layer = 4
@@ -145,7 +145,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StompArea"]
 position = Vector2( 0, -8 )
-shape = SubResource( 16 )
+shape = SubResource( 2 )
 
 [node name="PlayerDetectArea" type="Area2D" parent="."]
 visible = false
@@ -153,7 +153,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectArea"]
-shape = SubResource( 13 )
+shape = SubResource( 3 )
 
 [node name="PlayerUndetectArea" type="Area2D" parent="."]
 visible = false
@@ -161,14 +161,14 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerUndetectArea"]
-shape = SubResource( 14 )
+shape = SubResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 7 )
-frame = 4
+frames = SubResource( 10 )
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/die = SubResource( 8 )
+anims/die = SubResource( 11 )
 
 [node name="Knockback" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
@@ -182,13 +182,13 @@ volume_db = -10.0
 wait_time = 3.0
 
 [node name="Particles2D" type="Particles2D" parent="."]
-material = SubResource( 9 )
+material = SubResource( 12 )
 emitting = false
 amount = 16
 lifetime = 3.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 12 )
+process_material = SubResource( 15 )
 texture = ExtResource( 4 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]

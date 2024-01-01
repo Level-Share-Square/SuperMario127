@@ -6,6 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="PlatformWheel" type="Node2D"]
+scale = Vector2( 0.01, 0.01 )
 z_index = -2
 script = ExtResource( 1 )
 circle_texture = ExtResource( 2 )
