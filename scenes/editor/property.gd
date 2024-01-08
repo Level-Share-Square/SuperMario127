@@ -17,6 +17,7 @@ func _ready():
 	var value = object[key] if key != "visible" else object.modulate.a == 1
 	var type = typeof(value)
 	var type_scene_name := "None"
+	print(value)
 	if type == TYPE_VECTOR2:
 		type_scene_name = "Vector2"
 	elif type == TYPE_INT:
@@ -29,6 +30,9 @@ func _ready():
 		type_scene_name = "bool"
 	elif type == TYPE_COLOR:
 		type_scene_name = "Color"
+	elif value is Curve2D:
+		type_scene_name = "Path"
+	
 	
 	if type_scene_name != "None":
 		property_type = Singleton.MiscCache.property_scenes[type_scene_name].instance()

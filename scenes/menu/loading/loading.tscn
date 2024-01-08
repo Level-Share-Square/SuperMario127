@@ -344,6 +344,7 @@ tracks/1/keys = {
 }
 
 [node name="Loading" type="Node2D"]
+position = Vector2( 1, 0 )
 script = ExtResource( 6 )
 
 [node name="Background" type="Control" parent="."]
@@ -386,7 +387,7 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Sprites/Player"]
 frames = ExtResource( 2 )
 animation = "movingRight"
-frame = 2
+frame = 9
 speed_scale = 1.25
 playing = true
 centered = false
@@ -397,7 +398,7 @@ position = Vector2( 0, 80 )
 scale = Vector2( 1, -0.75 )
 frames = ExtResource( 2 )
 animation = "movingRight"
-frame = 2
+frame = 9
 speed_scale = 1.25
 playing = true
 centered = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scenes/menu/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/editor/window/LogInWindow.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/editor/window_open_button.gd" type="Script" id=8]
 [ext_resource path="res://scenes/editor/window/LSSHelpWindow.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/misc/LSS.svg" type="Texture" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -19,6 +20,10 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 42
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=20]
+size = 28
 font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=4]
@@ -452,13 +457,29 @@ focus_neighbour_bottom = NodePath("../../ButtonQuit")
 custom_fonts/font = SubResource( 2 )
 text = "Options"
 
+[node name="ButtonLogin" parent="Panel" instance=ExtResource( 2 )]
+margin_left = 40.0
+margin_top = 399.0
+margin_right = 198.0
+margin_bottom = 447.0
+rect_scale = Vector2( 0.62, 0.62 )
+focus_neighbour_left = NodePath("../ButtonQuit")
+focus_neighbour_top = NodePath("../ButtonQuit")
+custom_fonts/font = SubResource( 20 )
+text = "Log in"
+icon = ExtResource( 10 )
+expand_icon = true
+script = ExtResource( 8 )
+window = NodePath("../../LogInWindow")
+starting_position = Vector2( 0, 0 )
+
 [node name="ButtonQuit" parent="Panel" instance=ExtResource( 6 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 5.66568
-margin_top = 395.905
-margin_right = 37.6657
-margin_bottom = 425.905
+margin_left = 4.0
+margin_top = 399.0
+margin_right = 36.0
+margin_bottom = 429.0
 focus_neighbour_top = NodePath("../VBoxContainer/ButtonOptions")
 focus_neighbour_right = NodePath("../VBoxContainer/ButtonOptions")
 focus_neighbour_bottom = NodePath("../VBoxContainer/ButtonCampaign")
@@ -466,21 +487,7 @@ custom_styles/hover = SubResource( 4 )
 custom_styles/pressed = SubResource( 5 )
 custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-
-[node name="ButtonLogin" parent="Panel" instance=ExtResource( 2 )]
-margin_left = 43.0
-margin_top = 398.0
-margin_right = 194.0
-margin_bottom = 462.0
-rect_scale = Vector2( 0.5, 0.5 )
-focus_neighbour_left = NodePath("../ButtonQuit")
-focus_neighbour_top = NodePath("../ButtonQuit")
-custom_fonts/font = SubResource( 2 )
-text = "Log in"
 icon_align = 1
-script = ExtResource( 8 )
-window = NodePath("../../LogInWindow")
-starting_position = Vector2( 200, 100 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 17 )

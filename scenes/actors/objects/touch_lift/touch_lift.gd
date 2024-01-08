@@ -29,10 +29,11 @@ var max_speed := 1.0
 onready var blend := pow(0.95, 120 * fps_util.PHYSICS_DELTA)
 
 var curve = null
+var custom_path = Curve2D.new()
 
 func _set_properties():
-	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset", "path" ]
-	editable_properties = ["parts", "max_speed", "end_position", "move_type", "touch_start", "color", "start_offset", "path"]
+	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset", "custom_path" ]
+	editable_properties = ["parts", "max_speed", "end_position", "move_type", "touch_start", "color", "start_offset", "custom_path"]
 	
 func _set_property_values():
 	set_property("parts", parts)
@@ -43,7 +44,8 @@ func _set_property_values():
 	set_property("touch_start", touch_start)
 	set_property("color", color)
 	set_property("start_offset", start_offset)
-
+	set_property("custom_path", custom_path)
+	
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
 		if event.button_index == 5: # Mouse wheel down
