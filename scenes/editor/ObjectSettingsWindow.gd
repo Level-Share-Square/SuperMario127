@@ -71,7 +71,10 @@ func open_object(object_to_open: GameObject):
 
 	object = weakref(object_to_open)
 	for key in (object_to_open.editable_properties + object_to_open.base_editable_properties):
+		print("creating property:")
+		print(key)
 		var property = property_scene.instance()
+		print(property)
 		property.object = object_to_open
 		property.key = key
 		edit_preview_object(key, object_to_open[key])

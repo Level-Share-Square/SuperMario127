@@ -31,8 +31,8 @@ onready var blend := pow(0.95, 120 * fps_util.PHYSICS_DELTA)
 var curve = null
 
 func _set_properties():
-	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset"]
-	editable_properties = ["parts", "max_speed", "end_position", "move_type", "touch_start", "color", "start_offset"]
+	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset", "path" ]
+	editable_properties = ["parts", "max_speed", "end_position", "move_type", "touch_start", "color", "start_offset", "path"]
 	
 func _set_property_values():
 	set_property("parts", parts)
