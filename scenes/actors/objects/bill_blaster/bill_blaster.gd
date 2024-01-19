@@ -44,11 +44,11 @@ func _physics_process(delta):
 		
 	if mode != 1:
 		spawn_timer -= delta
-		if spawn_timer <= 0.35 and sprite.frame == 3 and Singleton.CurrentLevelData.enemies_instanced < 50:
+		if spawn_timer <= 0.35 and sprite.frame == 3:
 			sprite.frame = 0
 			color_sprite.frame = 0
 
-		if spawn_timer <= 0 and Singleton.CurrentLevelData.enemies_instanced < 55:
+		if spawn_timer <= 0:
 			spawn_timer = wait_time
 
 			var facing_direction = 1
