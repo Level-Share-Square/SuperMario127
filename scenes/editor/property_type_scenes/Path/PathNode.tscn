@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/editor/property_type_scenes/Path/PathNode.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/touch_lift/circle.png" type="Texture" id=2]
+
+[node name="Sprite" type="Sprite"]
+texture = ExtResource( 2 )
+script = ExtResource( 1 )

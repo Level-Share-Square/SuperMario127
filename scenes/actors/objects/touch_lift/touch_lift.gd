@@ -28,7 +28,7 @@ var last_end_position : Vector2
 var max_speed := 1.0
 onready var blend := pow(0.95, 120 * fps_util.PHYSICS_DELTA)
 
-var curve = null
+var curve = Curve2D.new()
 var custom_path = Curve2D.new()
 
 func _set_properties():
@@ -44,7 +44,7 @@ func _set_property_values():
 	set_property("touch_start", touch_start)
 	set_property("color", color)
 	set_property("start_offset", start_offset)
-	set_property("custom_path", custom_path)
+	set_property("custom_path", curve)
 	
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:

@@ -5,7 +5,7 @@ export var button : NodePath
 onready var button_node : Button = get_node(button)
 onready var hover_sound = $HoverSound
 onready var click_sound = $ClickSound
-
+onready var path_editor_scene
 var value: Curve2D
 var last_hovered = false
 
@@ -15,6 +15,10 @@ func _ready():
 func pressed():
 	click_sound.play()
 	update_value()
+	path_editor_scene = ResourceLoader.load("res://scenes/editor/property_type_scenes/Path/PathEditorUI.tscn").instance()
+
+	get_tree().get_current_scene().get_node("UI").add_child(path_editor_scene)
+	path_editor_scene.set_object_property_button(self)
 
 func set_value(_value: Curve2D):
 	value = _value

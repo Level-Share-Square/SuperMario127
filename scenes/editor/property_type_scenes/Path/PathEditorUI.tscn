@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=1]
+[ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=2]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=5]
+[ext_resource path="res://scenes/editor/property_type_scenes/Path/PathEditorUI.gd" type="Script" id=6]
+
+[node name="PathEditorUI" type="NinePatchRect"]
+margin_left = -1.0
+margin_top = 2.0
+margin_right = 764.0
+margin_bottom = 434.0
+rect_pivot_offset = Vector2( -196.524, -9 )
+mouse_filter = 0
+region_rect = Rect2( 0, 0, 108, 290 )
+patch_margin_left = 40
+patch_margin_top = 110
+patch_margin_right = 40
+patch_margin_bottom = 40
+script = ExtResource( 6 )
+close_button = NodePath("CloseButton")
+
+[node name="CloseButton" type="TextureButton" parent="."]
+margin_left = 293.999
+margin_top = 14.977
+margin_right = 448.999
+margin_bottom = 95.977
+rect_scale = Vector2( 0.5, 0.5 )
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 2 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
+stream = ExtResource( 1 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
+stream = ExtResource( 4 )
+volume_db = -10.0
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[connection signal="pressed" from="CloseButton" to="." method="close_pressed"]

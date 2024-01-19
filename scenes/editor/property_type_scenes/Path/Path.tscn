@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/property_type_scenes/Path/Path.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -44,3 +46,11 @@ custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
 text = "True"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.0
