@@ -18,7 +18,7 @@ func pressed():
 	path_editor_scene = ResourceLoader.load("res://scenes/editor/property_type_scenes/Path/PathEditorUI.tscn").instance()
 
 	get_tree().get_current_scene().get_node("UI").add_child(path_editor_scene)
-	path_editor_scene.set_object_property_button(self)
+	path_editor_scene.initialize(self)
 
 func set_value(_value: Curve2D):
 	value = _value

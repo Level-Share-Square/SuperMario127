@@ -1,10 +1,11 @@
 extends NinePatchRect
 
+var path_node = preload("res://scenes/editor/property_type_scenes/Path/PathNode.tscn")
+
 export var close_button : NodePath
 onready var object_property_button = $Control
 onready var curve_points
 onready var global_position
-onready var path_node = load("res://scenes/editor/property_type_scenes/Path/PathNode.tscn")
 onready var first_node : Node2D
 onready var last_placed_node : Node2D
 onready var editor = get_tree().get_current_scene()
@@ -13,8 +14,8 @@ func _ready():
 	grab_focus()
 	#draw the object's current curve2D
 	
-	print("loaded")
-
+func initialize(object_ref):
+	set_object_property_button(object_ref)
 
 func _process(delta):
 	pass
@@ -48,6 +49,9 @@ func close():
 func set_object_property_button(button: Control):
 	object_property_button = button
 	#object settings window lol
+	#TODO: Make this use a reference to the object rather than a reference to the property button.
+	#TODO: Make a hide function for the editor window.
+	#TODO: Add an object reference to the property button.
 	object_property_button.get_parent().get_parent().get_parent().get_parent().get_parent().visible = false
 	curve_points = button.get_value().get_baked_points()
 	global_position = object_property_button.get_parent().get_parent().get_parent().get_parent().get_parent().object.get_ref().path.global_position
