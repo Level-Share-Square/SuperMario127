@@ -16,12 +16,14 @@ func pressed():
 	click_sound.play()
 	update_value()
 	path_editor_scene = ResourceLoader.load("res://scenes/editor/property_type_scenes/Path/PathEditorUI.tscn").instance()
-
+	path_editor_scene.editing_object = get_parent().object
 	get_tree().get_current_scene().get_node("UI").add_child(path_editor_scene)
 	path_editor_scene.initialize(self)
 
 func set_value(_value: Curve2D):
 	value = _value
+	if value.get_point_count() == 0:
+		value.add_point(get_parent().object.global_position)
 	
 	# Does object have a name for the value?
 	var p := get_parent()

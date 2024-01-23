@@ -4,6 +4,7 @@ var object : GameObject
 var key : String
 var alias : String
 
+
 onready var label = $Label
 
 var property_type

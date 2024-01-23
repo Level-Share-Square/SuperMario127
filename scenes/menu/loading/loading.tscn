@@ -387,7 +387,7 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Sprites/Player"]
 frames = ExtResource( 2 )
 animation = "movingRight"
-frame = 10
+frame = 4
 speed_scale = 1.25
 playing = true
 centered = false
@@ -398,7 +398,7 @@ position = Vector2( 0, 80 )
 scale = Vector2( 1, -0.75 )
 frames = ExtResource( 2 )
 animation = "movingRight"
-frame = 10
+frame = 4
 speed_scale = 1.25
 playing = true
 centered = false

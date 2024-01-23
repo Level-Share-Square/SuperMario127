@@ -18,9 +18,6 @@ font_data = ExtResource( 1 )
 margin_right = 320.0
 margin_bottom = 140.0
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="."]
 margin_right = 320.0

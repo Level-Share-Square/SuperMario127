@@ -525,15 +525,14 @@ mouse_filter = 2
 custom_fonts/normal_font = SubResource( 12 )
 bbcode_text = "Object Settings"
 text = "Object Settings"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CloseButton" type="TextureButton" parent="."]
-margin_left = 937.65
-margin_top = 12.953
-margin_right = 1092.65
-margin_bottom = 93.953
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -165.0
+margin_top = 15.0
+margin_right = -10.0
+margin_bottom = 96.0
 rect_scale = Vector2( 0.95, 0.95 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 5 )
