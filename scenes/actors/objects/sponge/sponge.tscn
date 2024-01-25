@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/actors/objects/sponge/sponge.gd" type="Script" id=1]
-[ext_resource path="res://scenes/actors/objects/sponge/testsponge.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/sponge/sponge.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 16, 16 )
+extents = Vector2( 12, 12 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 16 )
@@ -22,10 +22,10 @@ show_behind_parent = true
 shape = SubResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="Area2D"]
-margin_left = -16.0
-margin_top = -16.0
-margin_right = 16.0
-margin_bottom = 16.0
+margin_left = -13.0
+margin_top = -13.0
+margin_right = 13.0
+margin_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_pivot_offset = Vector2( 16, 16 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=724 format=2]
+[gd_scene load_steps=742 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -682,7 +682,7 @@
 [ext_resource path="res://scenes/actors/objects/on_off_floor_switch/palettes/3/preview.png" type="Texture" id=680]
 [ext_resource path="res://scenes/actors/objects/on_off_floor_switch/palettes/6/preview.png" type="Texture" id=681]
 [ext_resource path="res://scenes/actors/objects/on_off_floor_switch/palettes/1/preview.png" type="Texture" id=682]
-[ext_resource path="res://scenes/actors/objects/coral/Coral1.png" type="Texture" id=683]
+[ext_resource path="res://scenes/actors/objects/coral/coral.png" type="Texture" id=683]
 [ext_resource path="res://scenes/actors/objects/water_balloon/2.png" type="Texture" id=684]
 [ext_resource path="res://scenes/actors/objects/water_balloon/2small.png" type="Texture" id=685]
 [ext_resource path="res://scenes/actors/objects/sponge/testsponge.png" type="Texture" id=686]
@@ -691,6 +691,23 @@
 [ext_resource path="res://scenes/editor/autosave_button.gd" type="Script" id=689]
 [ext_resource path="res://assets/level_data/autosave.png" type="Texture" id=690]
 [ext_resource path="res://scenes/editor/tools_button.gd" type="Script" id=691]
+[ext_resource path="res://scenes/actors/objects/torch/icon.png" type="Texture" id=692]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/3/MCoralR.png" type="Texture" id=693]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/1/MCoralB.png" type="Texture" id=694]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/2/MCoralG.png" type="Texture" id=695]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/4/MCoralY.png" type="Texture" id=696]
+[ext_resource path="res://scenes/actors/objects/coral_large/palettes/3/LCoralR.png" type="Texture" id=697]
+[ext_resource path="res://scenes/actors/objects/coral_large/palettes/1/LCoralB.png" type="Texture" id=698]
+[ext_resource path="res://scenes/actors/objects/coral_large/coral_large.png" type="Texture" id=699]
+[ext_resource path="res://scenes/actors/objects/coral_large/palettes/2/LCoralG.png" type="Texture" id=700]
+[ext_resource path="res://scenes/actors/objects/coral_large/palettes/4/LCoralY.png" type="Texture" id=701]
+[ext_resource path="res://scenes/actors/objects/coral_small/palettes/1/SCoralB.png" type="Texture" id=702]
+[ext_resource path="res://scenes/actors/objects/coral_small/SCoralP.png" type="Texture" id=703]
+[ext_resource path="res://scenes/actors/objects/coral_small/palettes/3/SCoralR.png" type="Texture" id=704]
+[ext_resource path="res://scenes/actors/objects/coral_small/palettes/4/SCoralY.png" type="Texture" id=705]
+[ext_resource path="res://scenes/actors/objects/coral_small/palettes/2/SCoralG.png" type="Texture" id=706]
+[ext_resource path="res://scenes/actors/objects/door/palettes/2/2.png" type="Texture" id=707]
+[ext_resource path="res://scenes/actors/objects/door/palettes/1/1.png" type="Texture" id=708]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -718,6 +735,9 @@ load_path = "res://.import/para_icon.png-8aeadaf4263a669c7f336ac385709817.stex"
 
 [sub_resource type="StreamTexture" id=9]
 load_path = "res://.import/para_preview.png-0e3469addce65f08caeb730d898460dc.stex"
+
+[sub_resource type="StreamTexture" id=34]
+load_path = "res://.import/preview.png-584db9af5d40df5a45a1c65bf93d4d3b.stex"
 
 [sub_resource type="DynamicFontData" id=29]
 font_path = "res://assets/fonts/delfino.ttf"
@@ -1673,6 +1693,8 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
+palette_icons = [ ExtResource( 44 ), ExtResource( 708 ), ExtResource( 707 ) ]
+palette_previews = [ ExtResource( 49 ), ExtResource( 708 ), ExtResource( 707 ) ]
 icon = ExtResource( 44 )
 preview = ExtResource( 49 )
 
@@ -3181,6 +3203,14 @@ tileset_id = 30
 icon = ExtResource( 365 )
 preview = ExtResource( 365 )
 
+[node name="Torch" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 24 )
+object_id = 100
+is_object = true
+object_center = Vector2( 32, 32 )
+icon = ExtResource( 692 )
+preview = SubResource( 34 )
+
 [node name="MiscGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
 color = Color( 0.466667, 0.34902, 0, 1 )
@@ -3342,8 +3372,35 @@ preview = ExtResource( 237 )
 script = ExtResource( 24 )
 object_id = 97
 is_object = true
+object_center = Vector2( 32, 24 )
+palette_icons = [ ExtResource( 683 ), ExtResource( 694 ), ExtResource( 695 ), ExtResource( 693 ), ExtResource( 696 ) ]
+palette_previews = [ ExtResource( 683 ), ExtResource( 694 ), ExtResource( 695 ), ExtResource( 693 ), ExtResource( 696 ) ]
+change_to = "CoralLarge"
+items_in_sequence = 3
+index_in_sequence = 1
 icon = ExtResource( 683 )
 preview = ExtResource( 683 )
+
+[node name="CoralLarge" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 24 )
+object_id = 101
+is_object = true
+palette_icons = [ ExtResource( 699 ), ExtResource( 698 ), ExtResource( 700 ), ExtResource( 697 ), ExtResource( 701 ) ]
+palette_previews = [ ExtResource( 699 ), ExtResource( 698 ), ExtResource( 700 ), ExtResource( 697 ), ExtResource( 701 ) ]
+change_to = "CoralSmall"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 699 )
+preview = ExtResource( 699 )
+
+[node name="CoralSmall" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 24 )
+object_id = 102
+is_object = true
+palette_icons = [ ExtResource( 703 ), ExtResource( 702 ), ExtResource( 706 ), ExtResource( 704 ), ExtResource( 705 ) ]
+palette_previews = [ ExtResource( 703 ), ExtResource( 702 ), ExtResource( 706 ), ExtResource( 704 ), ExtResource( 705 ) ]
+change_to = "Coral"
+items_in_sequence = 3
 
 [node name="Sponge" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 24 )

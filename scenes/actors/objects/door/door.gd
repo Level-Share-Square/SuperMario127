@@ -3,6 +3,9 @@ extends TeleportObject
 onready var sprite = $DoorEnterLogic/DoorSprite
 onready var door_enter_logic = $DoorEnterLogic
 
+export(Array, Texture) var palette_textures
+export(Array, SpriteFrames) var palette_frames
+
 var stored_character : Character
 
 const OPEN_DOOR_WAIT = 0.45
@@ -29,10 +32,14 @@ func _ready() -> void:
 		z_index = 0
 		sprite.z_index = 0
 
+	if palette != 0:
+		sprite.set_sprite_frames(palette_frames[palette - 1])
 	if scale.x < 1:
 		scale.x = abs(scale.x)
 		sprite.flip_h = true
 	var append_tag 
+	
+	
 
 	if destination_tag != "default_teleporter" || destination_tag != null:
 		append_tag = destination_tag.to_lower()
