@@ -1,17 +1,25 @@
 extends GameObject
 
 var is_background = true
+var color = Color(1, 1, 0)
+const light_color = Color(0.87, 0.65, 0.05)
 export(Array, Texture) var palette_textures
 
+
 onready var light : Light2D = $Light2D
+onready var sprite : AnimatedSprite = $AnimatedSprite
+onready var sprite2 : AnimatedSprite = $AnimatedSprite/RecolorableSprite
+
 var sinx : float
 export var steps = 1
+
 func _set_properties():
-	savable_properties = ["is_background"]
-	editable_properties = ["is_background"]
+	savable_properties = ["is_background", "color"]
+	editable_properties = ["is_background", "color"]
 
 func _set_property_values(): 
 	set_property("is_background", is_background, true)
+	set_property("color", color, true)
 	
 func _ready():
 	if(!visible):
@@ -20,6 +28,7 @@ func _ready():
 	
 
 func _process(delta):
+	sprite2.set_frame(sprite.get_frame())
 	
 	if is_background:
 		z_index = -2 if !is_preview else 0
@@ -30,6 +39,22 @@ func _process(delta):
 		light.range_z_min = 0
 		light.range_z_max = 10
 		light.energy = 1
+		
+	if color == Color(1, 1, 0):
+		sprite.self_modulate = Color(1, 1, 1)
+		sprite2.visible = false
+		light.color = light_color
+	else:
+		var color_0 = color
+		var color_1 = color
+		
+		color_0.v *= 1.5
+		color_1.s /= 2
+		
+		sprite2.self_modulate = color_0
+		sprite2.visible = true
+		
+		light.color = color
 	#control light flicker
 	light.texture_scale = (round(steps*max(-abs(tan(sin(sinx/steps)))+1, -(abs(tan(sin((sinx/steps)+(1/2)*PI)))-1))-steps)) /6 + 1
 	sinx += 0.12
