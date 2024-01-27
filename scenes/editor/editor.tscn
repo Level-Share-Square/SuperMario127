@@ -1,4 +1,4 @@
-[gd_scene load_steps=748 format=2]
+[gd_scene load_steps=774 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -712,8 +712,34 @@
 [ext_resource path="res://assets/tiles/lava_rock/palette_icons/5_slopeR.png" type="Texture" id=710]
 [ext_resource path="res://assets/tiles/lava_rock/palette_icons/5_block.png" type="Texture" id=711]
 [ext_resource path="res://assets/tiles/lava_rock/palette_icons/5_slab.png" type="Texture" id=712]
-[ext_resource path="res://scenes/actors/objects/bowser_banner/bowser_banner.png" type="Texture" id=713]
-[ext_resource path="res://scenes/actors/objects/cobweb/cobweb.png" type="Texture" id=714]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/7_block.png" type="Texture" id=713]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/2_slopeL.png" type="Texture" id=714]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/6_slopeL.png" type="Texture" id=715]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/1_block.png" type="Texture" id=716]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/4_slopeR.png" type="Texture" id=717]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/0_slopeR.png" type="Texture" id=718]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/3_slopeL.png" type="Texture" id=719]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/7_slopeL.png" type="Texture" id=720]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/1_slopeL.png" type="Texture" id=721]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/0_slopeL.png" type="Texture" id=722]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/3_block.png" type="Texture" id=723]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/5_slopeL.png" type="Texture" id=724]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/7_slopeR.png" type="Texture" id=725]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/4_block.png" type="Texture" id=726]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/5_block.png" type="Texture" id=727]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/1_slopeR.png" type="Texture" id=728]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/2_slopeR.png" type="Texture" id=729]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/3_slopeR.png" type="Texture" id=730]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/5_slopeR.png" type="Texture" id=731]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/0_block.png" type="Texture" id=732]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/6_block.png" type="Texture" id=733]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/6_slopeR.png" type="Texture" id=734]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/4_slopeL.png" type="Texture" id=735]
+[ext_resource path="res://assets/tiles/toy_blocks/pallete icons/2_block.png" type="Texture" id=736]
+[ext_resource path="res://assets/tiles/sand/palette_icons/3_block.png" type="Texture" id=737]
+[ext_resource path="res://assets/tiles/sand/palette_icons/3_slopeL.png" type="Texture" id=738]
+[ext_resource path="res://assets/tiles/sand/palette_icons/3_slab.png" type="Texture" id=739]
+[ext_resource path="res://assets/tiles/sand/palette_icons/3_slopeR.png" type="Texture" id=740]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2443,8 +2469,8 @@ group_name = "Sand"
 [node name="Sand" type="Node" parent="PlaceableItems/SandGroup"]
 script = ExtResource( 24 )
 tileset_id = 27
-palette_icons = [ ExtResource( 303 ), ExtResource( 311 ), ExtResource( 313 ), ExtResource( 312 ) ]
-palette_previews = [ ExtResource( 303 ), ExtResource( 311 ), ExtResource( 313 ), ExtResource( 312 ) ]
+palette_icons = [ ExtResource( 303 ), ExtResource( 311 ), ExtResource( 313 ), ExtResource( 312 ), ExtResource( 737 ) ]
+palette_previews = [ ExtResource( 303 ), ExtResource( 311 ), ExtResource( 313 ), ExtResource( 312 ), ExtResource( 737 ) ]
 change_to = "SandSlab"
 items_in_sequence = 4
 icon = ExtResource( 303 )
@@ -2454,8 +2480,8 @@ preview = ExtResource( 303 )
 script = ExtResource( 24 )
 tileset_id = 27
 tile_id = 1
-palette_icons = [ ExtResource( 304 ), ExtResource( 317 ), ExtResource( 316 ), ExtResource( 318 ) ]
-palette_previews = [ ExtResource( 304 ), ExtResource( 317 ), ExtResource( 316 ), ExtResource( 318 ) ]
+palette_icons = [ ExtResource( 304 ), ExtResource( 317 ), ExtResource( 316 ), ExtResource( 318 ), ExtResource( 739 ) ]
+palette_previews = [ ExtResource( 304 ), ExtResource( 317 ), ExtResource( 316 ), ExtResource( 318 ), ExtResource( 739 ) ]
 change_to = "SandSlopeLeft"
 items_in_sequence = 4
 index_in_sequence = 1
@@ -2466,8 +2492,8 @@ preview = ExtResource( 304 )
 script = ExtResource( 24 )
 tileset_id = 27
 tile_id = 2
-palette_icons = [ ExtResource( 309 ), ExtResource( 315 ), ExtResource( 319 ), ExtResource( 314 ) ]
-palette_previews = [ ExtResource( 309 ), ExtResource( 315 ), ExtResource( 319 ), ExtResource( 314 ) ]
+palette_icons = [ ExtResource( 309 ), ExtResource( 315 ), ExtResource( 319 ), ExtResource( 314 ), ExtResource( 738 ) ]
+palette_previews = [ ExtResource( 309 ), ExtResource( 315 ), ExtResource( 319 ), ExtResource( 314 ), ExtResource( 738 ) ]
 change_to = "SandSlopeRight"
 items_in_sequence = 4
 index_in_sequence = 2
@@ -2478,8 +2504,8 @@ preview = ExtResource( 309 )
 script = ExtResource( 24 )
 tileset_id = 27
 tile_id = 3
-palette_icons = [ ExtResource( 310 ), ExtResource( 322 ), ExtResource( 320 ), ExtResource( 321 ) ]
-palette_previews = [ ExtResource( 310 ), ExtResource( 322 ), ExtResource( 320 ), ExtResource( 321 ) ]
+palette_icons = [ ExtResource( 310 ), ExtResource( 322 ), ExtResource( 320 ), ExtResource( 321 ), ExtResource( 740 ) ]
+palette_previews = [ ExtResource( 310 ), ExtResource( 322 ), ExtResource( 320 ), ExtResource( 321 ), ExtResource( 740 ) ]
 change_to = "Sand"
 items_in_sequence = 4
 index_in_sequence = 3
@@ -3085,6 +3111,8 @@ preview = ExtResource( 195 )
 [node name="ToyBlock" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
 tileset_id = 17
+palette_icons = [ ExtResource( 732 ), ExtResource( 716 ), ExtResource( 736 ), ExtResource( 723 ), ExtResource( 726 ), ExtResource( 727 ), ExtResource( 733 ), ExtResource( 713 ) ]
+palette_previews = [ ExtResource( 732 ), ExtResource( 716 ), ExtResource( 736 ), ExtResource( 723 ), ExtResource( 726 ), ExtResource( 727 ), ExtResource( 733 ), ExtResource( 713 ) ]
 change_to = "ToyBlockSlopeLeft"
 items_in_sequence = 3
 icon = ExtResource( 186 )
@@ -3094,6 +3122,8 @@ preview = ExtResource( 186 )
 script = ExtResource( 24 )
 tileset_id = 17
 tile_id = 3
+palette_icons = [ ExtResource( 718 ), ExtResource( 728 ), ExtResource( 729 ), ExtResource( 730 ), ExtResource( 717 ), ExtResource( 731 ), ExtResource( 734 ), ExtResource( 725 ) ]
+palette_previews = [ ExtResource( 718 ), ExtResource( 728 ), ExtResource( 729 ), ExtResource( 730 ), ExtResource( 717 ), ExtResource( 731 ), ExtResource( 734 ), ExtResource( 725 ) ]
 change_to = "ToyBlock"
 items_in_sequence = 3
 index_in_sequence = 1
@@ -3104,6 +3134,8 @@ preview = ExtResource( 193 )
 script = ExtResource( 24 )
 tileset_id = 17
 tile_id = 2
+palette_icons = [ ExtResource( 722 ), ExtResource( 721 ), ExtResource( 714 ), ExtResource( 719 ), ExtResource( 735 ), ExtResource( 724 ), ExtResource( 715 ), ExtResource( 720 ) ]
+palette_previews = [ ExtResource( 722 ), ExtResource( 721 ), ExtResource( 714 ), ExtResource( 719 ), ExtResource( 735 ), ExtResource( 724 ), ExtResource( 715 ), ExtResource( 720 ) ]
 change_to = "ToyBlockSlopeRight"
 items_in_sequence = 3
 index_in_sequence = 1
@@ -3127,13 +3159,6 @@ palette_icons = [ ExtResource( 551 ), ExtResource( 554 ), ExtResource( 553 ), Ex
 palette_previews = [ ExtResource( 551 ), ExtResource( 554 ), ExtResource( 553 ), ExtResource( 552 ) ]
 icon = ExtResource( 551 )
 preview = ExtResource( 551 )
-
-[node name="Cobweb" type="Node" parent="PlaceableItems/BuildingGroup"]
-script = ExtResource( 24 )
-object_id = 103
-is_object = true
-icon = ExtResource( 714 )
-preview = ExtResource( 714 )
 
 [node name="CastleGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
@@ -3223,13 +3248,6 @@ is_object = true
 object_center = Vector2( 32, 32 )
 icon = ExtResource( 692 )
 preview = SubResource( 34 )
-
-[node name="BowserBanner" type="Node" parent="PlaceableItems/CastleGroup"]
-script = ExtResource( 24 )
-object_id = 104
-is_object = true
-icon = ExtResource( 713 )
-preview = ExtResource( 713 )
 
 [node name="MiscGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )

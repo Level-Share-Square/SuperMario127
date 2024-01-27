@@ -1,10 +1,11 @@
-[gd_resource type="Resource" load_steps=6 format=2]
+[gd_resource type="Resource" load_steps=7 format=2]
 
 [ext_resource path="res://scenes/shared/background/foregrounds/pyramids/middle.png" type="Texture" id=1]
 [ext_resource path="res://classes/ParallaxLayerResource.gd" type="Script" id=2]
 [ext_resource path="res://scenes/shared/background/foregrounds/pyramids/palettes/1/middle.png" type="Texture" id=3]
 [ext_resource path="res://scenes/shared/background/foregrounds/pyramids/palettes/3/middle.png" type="Texture" id=4]
 [ext_resource path="res://scenes/shared/background/foregrounds/pyramids/palettes/2/middle.png" type="Texture" id=5]
+[ext_resource path="res://scenes/shared/background/foregrounds/pyramids/palettes/4/middle.png" type="Texture" id=6]
 
 [resource]
 script = ExtResource( 2 )
@@ -12,4 +13,4 @@ texture = ExtResource( 1 )
 scale = Vector2( 0.065, 0 )
 offset = Vector2( 0, -216 )
 mirroring = Vector2( 768, 0 )
-palettes = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ) ]
+palettes = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ) ]

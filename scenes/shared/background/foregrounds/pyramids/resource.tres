@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=9 format=2]
+[gd_resource type="Resource" load_steps=10 format=2]
 
 [ext_resource path="res://classes/ForegroundResource.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/background/foregrounds/pyramids/front.tres" type="Resource" id=2]
@@ -8,10 +8,11 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/pyramids/palettes/3/preview.png" type="Texture" id=6]
 [ext_resource path="res://scenes/shared/background/foregrounds/pyramids/palettes/2/preview.png" type="Texture" id=7]
 [ext_resource path="res://scenes/shared/background/foregrounds/pyramids/palettes/1/preview.png" type="Texture" id=8]
+[ext_resource path="res://scenes/shared/background/foregrounds/pyramids/palettes/4/preview.png" type="Texture" id=9]
 
 [resource]
 script = ExtResource( 1 )
 layers = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 2 ) ]
 immune_to = PoolIntArray(  )
 preview = ExtResource( 4 )
-palettes = [ ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ) ]
+palettes = [ ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 9 ) ]
