@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://classes/GameObject.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/torch/torch.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/torch/torch.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/torch/light1.png" type="Texture" id=3]
-[ext_resource path="res://scenes/actors/objects/torch/light2.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/torch/viginette.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
@@ -37,24 +36,18 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="AnimatedTexture" id=8]
-frames = 2
-fps = 8.0
-frame_0/texture = ExtResource( 3 )
-frame_1/texture = ExtResource( 4 )
-frame_1/delay_sec = 0.0
-
 [node name="Torch" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+z_index = -2
 frames = SubResource( 7 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="Light2D" type="Light2D" parent="."]
-texture = SubResource( 8 )
+texture = ExtResource( 3 )
 texture_scale = 2.0
 color = Color( 0.870588, 0.647059, 0.0509804, 1 )
 energy = 1.27
