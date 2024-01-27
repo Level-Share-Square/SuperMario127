@@ -43,7 +43,7 @@ script = ExtResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 z_index = -2
 frames = SubResource( 7 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Light2D" type="Light2D" parent="."]
