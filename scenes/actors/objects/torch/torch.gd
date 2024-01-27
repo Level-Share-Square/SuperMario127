@@ -48,10 +48,7 @@ func _process(delta):
 		var color_0 = color
 		var color_1 = color
 		
-
-		color_0.s /= 1.5
-		color_0.v *= 3
-		
+		color_0.v *= 1.5
 		color_1.s /= 2
 		
 		sprite2.self_modulate = color_0
