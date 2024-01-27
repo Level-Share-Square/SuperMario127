@@ -1,4 +1,4 @@
-[gd_scene load_steps=742 format=2]
+[gd_scene load_steps=746 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -708,6 +708,10 @@
 [ext_resource path="res://scenes/actors/objects/coral_small/palettes/2/SCoralG.png" type="Texture" id=706]
 [ext_resource path="res://scenes/actors/objects/door/palettes/2/2.png" type="Texture" id=707]
 [ext_resource path="res://scenes/actors/objects/door/palettes/1/1.png" type="Texture" id=708]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/5_slopeL.png" type="Texture" id=709]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/5_slopeR.png" type="Texture" id=710]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/5_block.png" type="Texture" id=711]
+[ext_resource path="res://assets/tiles/lava_rock/palette_icons/5_slab.png" type="Texture" id=712]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2819,8 +2823,8 @@ group_name = "Volcano"
 [node name="LavaRock" type="Node" parent="PlaceableItems/VolcanoGroup"]
 script = ExtResource( 24 )
 tileset_id = 29
-palette_icons = [ ExtResource( 338 ), ExtResource( 361 ), ExtResource( 362 ), ExtResource( 358 ), ExtResource( 359 ) ]
-palette_previews = [ ExtResource( 338 ), ExtResource( 361 ), ExtResource( 362 ), ExtResource( 358 ), ExtResource( 359 ) ]
+palette_icons = [ ExtResource( 338 ), ExtResource( 361 ), ExtResource( 362 ), ExtResource( 358 ), ExtResource( 359 ), ExtResource( 711 ) ]
+palette_previews = [ ExtResource( 338 ), ExtResource( 361 ), ExtResource( 362 ), ExtResource( 358 ), ExtResource( 359 ), ExtResource( 711 ) ]
 change_to = "LavaRockSlab"
 items_in_sequence = 4
 icon = ExtResource( 338 )
@@ -2830,8 +2834,8 @@ preview = ExtResource( 338 )
 script = ExtResource( 24 )
 tileset_id = 29
 tile_id = 1
-palette_icons = [ ExtResource( 344 ), ExtResource( 360 ), ExtResource( 352 ), ExtResource( 350 ), ExtResource( 357 ) ]
-palette_previews = [ ExtResource( 344 ), ExtResource( 360 ), ExtResource( 352 ), ExtResource( 350 ), ExtResource( 357 ) ]
+palette_icons = [ ExtResource( 344 ), ExtResource( 360 ), ExtResource( 352 ), ExtResource( 350 ), ExtResource( 357 ), ExtResource( 712 ) ]
+palette_previews = [ ExtResource( 344 ), ExtResource( 360 ), ExtResource( 352 ), ExtResource( 350 ), ExtResource( 357 ), ExtResource( 712 ) ]
 change_to = "LavaRockSlopeLeft"
 items_in_sequence = 4
 index_in_sequence = 1
@@ -2842,8 +2846,8 @@ preview = ExtResource( 344 )
 script = ExtResource( 24 )
 tileset_id = 29
 tile_id = 2
-palette_icons = [ ExtResource( 345 ), ExtResource( 351 ), ExtResource( 353 ), ExtResource( 354 ), ExtResource( 355 ) ]
-palette_previews = [ ExtResource( 345 ), ExtResource( 351 ), ExtResource( 353 ), ExtResource( 354 ), ExtResource( 355 ) ]
+palette_icons = [ ExtResource( 345 ), ExtResource( 351 ), ExtResource( 353 ), ExtResource( 354 ), ExtResource( 355 ), ExtResource( 709 ) ]
+palette_previews = [ ExtResource( 345 ), ExtResource( 351 ), ExtResource( 353 ), ExtResource( 354 ), ExtResource( 355 ), ExtResource( 709 ) ]
 change_to = "LavaRockSlopeRight"
 items_in_sequence = 4
 index_in_sequence = 2
@@ -2854,8 +2858,8 @@ preview = ExtResource( 345 )
 script = ExtResource( 24 )
 tileset_id = 29
 tile_id = 3
-palette_icons = [ ExtResource( 346 ), ExtResource( 356 ), ExtResource( 347 ), ExtResource( 349 ), ExtResource( 348 ) ]
-palette_previews = [ ExtResource( 346 ), ExtResource( 356 ), ExtResource( 347 ), ExtResource( 349 ), ExtResource( 348 ) ]
+palette_icons = [ ExtResource( 346 ), ExtResource( 356 ), ExtResource( 347 ), ExtResource( 349 ), ExtResource( 348 ), ExtResource( 710 ) ]
+palette_previews = [ ExtResource( 346 ), ExtResource( 356 ), ExtResource( 347 ), ExtResource( 349 ), ExtResource( 348 ), ExtResource( 710 ) ]
 change_to = "LavaRock"
 items_in_sequence = 4
 index_in_sequence = 3
