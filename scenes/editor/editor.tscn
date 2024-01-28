@@ -1,4 +1,4 @@
-[gd_scene load_steps=788 format=2]
+[gd_scene load_steps=808 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -754,6 +754,26 @@
 [ext_resource path="res://scenes/actors/objects/door/palettes/2/icon.png" type="Texture" id=752]
 [ext_resource path="res://scenes/actors/objects/sponge/sponge.png" type="Texture" id=753]
 [ext_resource path="res://scenes/actors/objects/cobweb/icon.png" type="Texture" id=754]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/4_slab.png" type="Texture" id=755]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/5_slab.png" type="Texture" id=756]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/1_block.png" type="Texture" id=757]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/4_block.png" type="Texture" id=758]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/2_slab.png" type="Texture" id=759]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/5_block.png" type="Texture" id=760]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/3_block.png" type="Texture" id=761]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/1_slab.png" type="Texture" id=762]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/3_slab.png" type="Texture" id=763]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/2_block.png" type="Texture" id=764]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/5_slopeL.png" type="Texture" id=765]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/3_slopeL.png" type="Texture" id=766]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/2_slopeL.png" type="Texture" id=767]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/4_slopeL.png" type="Texture" id=768]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/1_slopeL.png" type="Texture" id=769]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/5_slopeR.png" type="Texture" id=770]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/4_slopeR.png" type="Texture" id=771]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/1_slopeR.png" type="Texture" id=772]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/2_slopeR.png" type="Texture" id=773]
+[ext_resource path="res://assets/tiles/snow/pallete_icons/3_slopeR.png" type="Texture" id=774]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2606,6 +2626,8 @@ group_name = "Snow"
 [node name="Snow" type="Node" parent="PlaceableItems/SnowGroup"]
 script = ExtResource( 24 )
 tileset_id = 7
+palette_icons = [ ExtResource( 113 ), ExtResource( 757 ), ExtResource( 764 ), ExtResource( 761 ), ExtResource( 758 ), ExtResource( 760 ) ]
+palette_previews = [ ExtResource( 113 ), ExtResource( 757 ), ExtResource( 764 ), ExtResource( 761 ), ExtResource( 758 ), ExtResource( 760 ) ]
 change_to = "SnowSlab"
 items_in_sequence = 4
 icon = ExtResource( 113 )
@@ -2615,6 +2637,8 @@ preview = ExtResource( 113 )
 script = ExtResource( 24 )
 tileset_id = 7
 tile_id = 1
+palette_icons = [ ExtResource( 111 ), ExtResource( 762 ), ExtResource( 759 ), ExtResource( 763 ), ExtResource( 755 ), ExtResource( 756 ) ]
+palette_previews = [ ExtResource( 111 ), ExtResource( 762 ), ExtResource( 759 ), ExtResource( 763 ), ExtResource( 755 ), ExtResource( 756 ) ]
 change_to = "SnowSlopeLeft"
 items_in_sequence = 4
 index_in_sequence = 1
@@ -2625,6 +2649,8 @@ preview = ExtResource( 111 )
 script = ExtResource( 24 )
 tileset_id = 7
 tile_id = 2
+palette_icons = [ ExtResource( 112 ), ExtResource( 769 ), ExtResource( 767 ), ExtResource( 766 ), ExtResource( 768 ), ExtResource( 765 ) ]
+palette_previews = [ ExtResource( 112 ), ExtResource( 769 ), ExtResource( 767 ), ExtResource( 766 ), ExtResource( 768 ), ExtResource( 765 ) ]
 change_to = "SnowSlopeRight"
 items_in_sequence = 4
 index_in_sequence = 2
@@ -2635,6 +2661,8 @@ preview = ExtResource( 112 )
 script = ExtResource( 24 )
 tileset_id = 7
 tile_id = 3
+palette_icons = [ ExtResource( 114 ), ExtResource( 772 ), ExtResource( 773 ), ExtResource( 774 ), ExtResource( 771 ), ExtResource( 770 ) ]
+palette_previews = [ ExtResource( 114 ), ExtResource( 772 ), ExtResource( 773 ), ExtResource( 774 ), ExtResource( 771 ), ExtResource( 770 ) ]
 change_to = "Snow"
 items_in_sequence = 4
 index_in_sequence = 3

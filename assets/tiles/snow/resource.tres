@@ -1,7 +1,11 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=7 format=2]
 
 [ext_resource path="res://level/Tileset.gd" type="Script" id=1]
-[ext_resource path="res://assets/tiles/snow/snow.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/snow/5.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/snow/2.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/snow/1.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/snow/4.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/snow/3.png" type="Texture" id=6]
 
 [resource]
 script = ExtResource( 1 )
@@ -9,4 +13,4 @@ block_tile_id = 19
 slab_tile_id = 22
 left_slope_tile_id = 21
 right_slope_tile_id = 20
-placing_texture = ExtResource( 2 )
+palettes = [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 2 ) ]
