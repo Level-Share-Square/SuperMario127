@@ -1,4 +1,4 @@
-[gd_scene load_steps=786 format=2]
+[gd_scene load_steps=787 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -685,7 +685,7 @@
 [ext_resource path="res://scenes/actors/objects/coral/coral.png" type="Texture" id=683]
 [ext_resource path="res://scenes/actors/objects/water_balloon/2.png" type="Texture" id=684]
 [ext_resource path="res://scenes/actors/objects/water_balloon/2small.png" type="Texture" id=685]
-[ext_resource path="res://scenes/actors/objects/sponge/testsponge.png" type="Texture" id=686]
+[ext_resource path="res://scenes/actors/objects/sponge/icon.png" type="Texture" id=686]
 [ext_resource path="res://assets/tiles/boo_block/boo_block_invis.png" type="Texture" id=687]
 [ext_resource path="res://assets/level_data/autosave_dropdown.png" type="Texture" id=688]
 [ext_resource path="res://scenes/editor/autosave_button.gd" type="Script" id=689]
@@ -752,6 +752,7 @@
 [ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/1_slopeL.png" type="Texture" id=750]
 [ext_resource path="res://scenes/actors/objects/door/palettes/1/icon.png" type="Texture" id=751]
 [ext_resource path="res://scenes/actors/objects/door/palettes/2/icon.png" type="Texture" id=752]
+[ext_resource path="res://scenes/actors/objects/sponge/sponge.png" type="Texture" id=753]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3481,7 +3482,7 @@ script = ExtResource( 24 )
 object_id = 99
 is_object = true
 icon = ExtResource( 686 )
-preview = ExtResource( 686 )
+preview = ExtResource( 753 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
