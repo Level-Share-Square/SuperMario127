@@ -46,7 +46,7 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -45 )
 frames = SubResource( 14 )
-frame = 2
+frame = 4
 playing = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

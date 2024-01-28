@@ -1,4 +1,4 @@
-[gd_scene load_steps=784 format=2]
+[gd_scene load_steps=786 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -706,13 +706,13 @@
 [ext_resource path="res://scenes/actors/objects/coral_small/palettes/3/SCoralR.png" type="Texture" id=704]
 [ext_resource path="res://scenes/actors/objects/coral_small/palettes/4/SCoralY.png" type="Texture" id=705]
 [ext_resource path="res://scenes/actors/objects/coral_small/palettes/2/SCoralG.png" type="Texture" id=706]
-[ext_resource path="res://scenes/actors/objects/door/palettes/2/2.png" type="Texture" id=707]
-[ext_resource path="res://scenes/actors/objects/door/palettes/1/1.png" type="Texture" id=708]
+[ext_resource path="res://scenes/actors/objects/door/palettes/2/preview.png" type="Texture" id=707]
+[ext_resource path="res://scenes/actors/objects/door/palettes/1/preview.png" type="Texture" id=708]
 [ext_resource path="res://assets/tiles/lava_rock/palette_icons/5_slopeL.png" type="Texture" id=709]
 [ext_resource path="res://assets/tiles/lava_rock/palette_icons/5_slopeR.png" type="Texture" id=710]
 [ext_resource path="res://assets/tiles/lava_rock/palette_icons/5_block.png" type="Texture" id=711]
 [ext_resource path="res://assets/tiles/lava_rock/palette_icons/5_slab.png" type="Texture" id=712]
-[ext_resource path="res://scenes/actors/objects/bowser_banner/bowser_banner.png" type="Texture" id=713]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/icon.png" type="Texture" id=713]
 [ext_resource path="res://assets/tiles/toy_blocks/pallete icons/2_slopeL.png" type="Texture" id=714]
 [ext_resource path="res://assets/tiles/toy_blocks/pallete icons/6_slopeL.png" type="Texture" id=715]
 [ext_resource path="res://assets/tiles/toy_blocks/pallete icons/1_block.png" type="Texture" id=716]
@@ -750,6 +750,8 @@
 [ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/2_slopeR.png" type="Texture" id=748]
 [ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/2_slopeL.png" type="Texture" id=749]
 [ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/1_slopeL.png" type="Texture" id=750]
+[ext_resource path="res://scenes/actors/objects/door/palettes/1/icon.png" type="Texture" id=751]
+[ext_resource path="res://scenes/actors/objects/door/palettes/2/icon.png" type="Texture" id=752]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1735,7 +1737,7 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
-palette_icons = [ ExtResource( 44 ), ExtResource( 708 ), ExtResource( 707 ) ]
+palette_icons = [ ExtResource( 44 ), ExtResource( 751 ), ExtResource( 752 ) ]
 palette_previews = [ ExtResource( 49 ), ExtResource( 708 ), ExtResource( 707 ) ]
 icon = ExtResource( 44 )
 preview = ExtResource( 49 )
@@ -3471,6 +3473,8 @@ palette_icons = [ ExtResource( 703 ), ExtResource( 702 ), ExtResource( 706 ), Ex
 palette_previews = [ ExtResource( 703 ), ExtResource( 702 ), ExtResource( 706 ), ExtResource( 704 ), ExtResource( 705 ) ]
 change_to = "Coral"
 items_in_sequence = 3
+icon = ExtResource( 703 )
+preview = ExtResource( 703 )
 
 [node name="Sponge" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 24 )
