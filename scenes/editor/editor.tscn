@@ -1,4 +1,4 @@
-[gd_scene load_steps=778 format=2]
+[gd_scene load_steps=784 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -744,6 +744,12 @@
 [ext_resource path="res://scenes/actors/objects/cobweb/cobweb.png" type="Texture" id=742]
 [ext_resource path="res://assets/tiles/castle_pillar/pallete_icons/1_block.png" type="Texture" id=743]
 [ext_resource path="res://assets/tiles/castle_pillar/pallete_icons/2_block.png" type="Texture" id=744]
+[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/1_block.png" type="Texture" id=745]
+[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/2_block.png" type="Texture" id=746]
+[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/1_slopeR.png" type="Texture" id=747]
+[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/2_slopeR.png" type="Texture" id=748]
+[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/2_slopeL.png" type="Texture" id=749]
+[ext_resource path="res://assets/tiles/marble_bricks/pallete_icons/1_slopeL.png" type="Texture" id=750]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3053,6 +3059,8 @@ preview = ExtResource( 58 )
 [node name="MarbleBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
 tileset_id = 15
+palette_icons = [ ExtResource( 188 ), ExtResource( 745 ), ExtResource( 746 ) ]
+palette_previews = [ ExtResource( 188 ), ExtResource( 745 ), ExtResource( 746 ) ]
 change_to = "MarbleBrickSlopeLeft"
 items_in_sequence = 3
 icon = ExtResource( 188 )
@@ -3062,6 +3070,8 @@ preview = ExtResource( 188 )
 script = ExtResource( 24 )
 tileset_id = 15
 tile_id = 3
+palette_icons = [ ExtResource( 191 ), ExtResource( 747 ), ExtResource( 748 ) ]
+palette_previews = [ ExtResource( 191 ), ExtResource( 747 ), ExtResource( 748 ) ]
 change_to = "MarbleBrick"
 items_in_sequence = 3
 index_in_sequence = 1
@@ -3072,6 +3082,8 @@ preview = ExtResource( 191 )
 script = ExtResource( 24 )
 tileset_id = 15
 tile_id = 2
+palette_icons = [ ExtResource( 190 ), ExtResource( 750 ), ExtResource( 749 ) ]
+palette_previews = [ ExtResource( 190 ), ExtResource( 750 ), ExtResource( 749 ) ]
 change_to = "MarbleBrickSlopeRight"
 items_in_sequence = 3
 index_in_sequence = 2
