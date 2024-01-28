@@ -1,4 +1,4 @@
-[gd_scene load_steps=787 format=2]
+[gd_scene load_steps=788 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -753,6 +753,7 @@
 [ext_resource path="res://scenes/actors/objects/door/palettes/1/icon.png" type="Texture" id=751]
 [ext_resource path="res://scenes/actors/objects/door/palettes/2/icon.png" type="Texture" id=752]
 [ext_resource path="res://scenes/actors/objects/sponge/sponge.png" type="Texture" id=753]
+[ext_resource path="res://scenes/actors/objects/cobweb/icon.png" type="Texture" id=754]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3183,7 +3184,7 @@ preview = ExtResource( 551 )
 script = ExtResource( 24 )
 object_id = 103
 is_object = true
-icon = ExtResource( 742 )
+icon = ExtResource( 754 )
 preview = ExtResource( 742 )
 
 [node name="CastleGroup" type="Node" parent="PlaceableItems"]
