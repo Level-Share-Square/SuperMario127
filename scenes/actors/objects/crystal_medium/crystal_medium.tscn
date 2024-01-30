@@ -1,0 +1,19 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/actors/objects/big_tree/big_tree.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/5/MGemM.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/3/MGemW.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/MGemB.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/2/MGemY.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/4/MGemG.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/6/MGemBP.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/1/MGemR.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/7/MGemO.png" type="Texture" id=9]
+
+[node name="Medium Crystal" type="Node2D"]
+z_index = -1
+script = ExtResource( 1 )
+palette_textures = [ ExtResource( 8 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 9 ) ]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 4 )

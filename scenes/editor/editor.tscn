@@ -1,4 +1,4 @@
-[gd_scene load_steps=808 format=2]
+[gd_scene load_steps=856 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -774,6 +774,54 @@
 [ext_resource path="res://assets/tiles/snow/pallete_icons/1_slopeR.png" type="Texture" id=772]
 [ext_resource path="res://assets/tiles/snow/pallete_icons/2_slopeR.png" type="Texture" id=773]
 [ext_resource path="res://assets/tiles/snow/pallete_icons/3_slopeR.png" type="Texture" id=774]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/2/SGemY.png" type="Texture" id=775]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/3/SGemW.png" type="Texture" id=776]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/7/SGemO.png" type="Texture" id=777]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/1/SGemR.png" type="Texture" id=778]
+[ext_resource path="res://scenes/actors/objects/crystal_small/crystal.png" type="Texture" id=779]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/5/SGemM.png" type="Texture" id=780]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/6/SGemBP.png" type="Texture" id=781]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/4/SGemG.png" type="Texture" id=782]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/7/SGemOIcon.png" type="Texture" id=783]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/3/SGemWIcon.png" type="Texture" id=784]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/1/SGemRIcon.png" type="Texture" id=785]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/5/SGemMIcon.png" type="Texture" id=786]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/2/SGemYIcon.png" type="Texture" id=787]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/4/SGemGIcon.png" type="Texture" id=788]
+[ext_resource path="res://scenes/actors/objects/crystal_small/palettes/6/SGemBPIcon.png" type="Texture" id=789]
+[ext_resource path="res://scenes/actors/objects/crystal_small/icon.png" type="Texture" id=790]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/5/MGemM.png" type="Texture" id=791]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/3/MGemW.png" type="Texture" id=792]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/MGemB.png" type="Texture" id=793]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/MGemBIcon.png" type="Texture" id=794]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/2/MGemY.png" type="Texture" id=795]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/4/MGemG.png" type="Texture" id=796]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/6/MGemBP.png" type="Texture" id=797]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/2/MGemYIcon.png" type="Texture" id=798]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/7/MGemOIcon.png" type="Texture" id=799]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/1/MGemR.png" type="Texture" id=800]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/7/MGemO.png" type="Texture" id=801]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/3/MGemWIcon.png" type="Texture" id=802]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/4/MGemGIcon.png" type="Texture" id=803]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/6/MGemBPIcon.png" type="Texture" id=804]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/1/MGemRIcon.png" type="Texture" id=805]
+[ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/5/MGemMIcon.png" type="Texture" id=806]
+[ext_resource path="res://scenes/actors/objects/crystal_large/palettes/1/LGemR.png" type="Texture" id=807]
+[ext_resource path="res://scenes/actors/objects/crystal_large/palettes/4/LGemGIcon.png" type="Texture" id=808]
+[ext_resource path="res://scenes/actors/objects/crystal_large/LGemB.png" type="Texture" id=809]
+[ext_resource path="res://scenes/actors/objects/crystal_large/palettes/2/LGemY.png" type="Texture" id=810]
+[ext_resource path="res://scenes/actors/objects/crystal_large/palettes/7/LGemO.png" type="Texture" id=811]
+[ext_resource path="res://scenes/actors/objects/crystal_large/palettes/6/LGemBPIcon.png" type="Texture" id=812]
+[ext_resource path="res://scenes/actors/objects/crystal_large/palettes/4/LGemG.png" type="Texture" id=813]
+[ext_resource path="res://scenes/actors/objects/crystal_large/palettes/5/LGemMIcon.png" type="Texture" id=814]
+[ext_resource path="res://scenes/actors/objects/crystal_large/palettes/6/LGemBP.png" type="Texture" id=815]
+[ext_resource path="res://scenes/actors/objects/crystal_large/palettes/1/LGemRIcon.png" type="Texture" id=816]
+[ext_resource path="res://scenes/actors/objects/crystal_large/palettes/2/LGemYIcon.png" type="Texture" id=817]
+[ext_resource path="res://scenes/actors/objects/crystal_large/palettes/3/LGemW.png" type="Texture" id=818]
+[ext_resource path="res://scenes/actors/objects/crystal_large/palettes/5/LGemM.png" type="Texture" id=819]
+[ext_resource path="res://scenes/actors/objects/crystal_large/LGemBIcon.png" type="Texture" id=820]
+[ext_resource path="res://scenes/actors/objects/crystal_large/palettes/3/LGemWIcon.png" type="Texture" id=821]
+[ext_resource path="res://scenes/actors/objects/crystal_large/palettes/7/LGemOIcon.png" type="Texture" id=822]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2823,6 +2871,41 @@ script = ExtResource( 24 )
 tileset_id = 19
 icon = ExtResource( 197 )
 preview = ExtResource( 197 )
+
+[node name="CrystalSmall" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 24 )
+object_id = 105
+is_object = true
+palette_icons = [ ExtResource( 790 ), ExtResource( 785 ), ExtResource( 787 ), ExtResource( 784 ), ExtResource( 788 ), ExtResource( 786 ), ExtResource( 789 ), ExtResource( 783 ) ]
+palette_previews = [ ExtResource( 779 ), ExtResource( 778 ), ExtResource( 775 ), ExtResource( 776 ), ExtResource( 782 ), ExtResource( 780 ), ExtResource( 781 ), ExtResource( 777 ) ]
+change_to = "CrystalMedium"
+items_in_sequence = 3
+icon = ExtResource( 790 )
+preview = ExtResource( 779 )
+
+[node name="CrystalMedium" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 24 )
+object_id = 106
+is_object = true
+palette_icons = [ ExtResource( 794 ), ExtResource( 805 ), ExtResource( 798 ), ExtResource( 802 ), ExtResource( 803 ), ExtResource( 806 ), ExtResource( 804 ), ExtResource( 799 ) ]
+palette_previews = [ ExtResource( 793 ), ExtResource( 800 ), ExtResource( 795 ), ExtResource( 792 ), ExtResource( 796 ), ExtResource( 791 ), ExtResource( 797 ), ExtResource( 801 ) ]
+change_to = "CrystalLarge"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 794 )
+preview = ExtResource( 793 )
+
+[node name="CrystalLarge" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 24 )
+object_id = 107
+is_object = true
+palette_icons = [ ExtResource( 820 ), ExtResource( 816 ), ExtResource( 817 ), ExtResource( 821 ), ExtResource( 808 ), ExtResource( 814 ), ExtResource( 812 ), ExtResource( 822 ) ]
+palette_previews = [ ExtResource( 809 ), ExtResource( 807 ), ExtResource( 810 ), ExtResource( 818 ), ExtResource( 813 ), ExtResource( 819 ), ExtResource( 815 ), ExtResource( 811 ) ]
+change_to = "CrystalSmall"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 820 )
+preview = ExtResource( 809 )
 
 [node name="CaveTree" type="Node" parent="PlaceableItems/CaveGroup"]
 script = ExtResource( 24 )
