@@ -1,6 +1,13 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=9 format=2]
 
 [ext_resource path="res://level/Tileset.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/castle_wall/1.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/castle_wall/2.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/castle_wall/3.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/castle_wall/4.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/castle_wall/5.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/castle_wall/6.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/castle_wall/7.png" type="Texture" id=8]
 
 [resource]
 script = ExtResource( 1 )
@@ -8,3 +15,4 @@ block_tile_id = 52
 slab_tile_id = 52
 left_slope_tile_id = 52
 right_slope_tile_id = 52
+palettes = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]

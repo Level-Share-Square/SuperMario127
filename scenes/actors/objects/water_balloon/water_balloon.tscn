@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/actors/objects/water_balloon/water_balloon.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/water_balloon/2.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/hover_nozzle/sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/water_balloon/balloonpopping.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/mario/particles/metal_sparkles.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/mario/nozzles/water_particle.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/water_balloon/1.png" type="Texture" id=6]
@@ -163,7 +163,6 @@ recolorable_texture = ExtResource( 7 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -10.0
 
 [node name="Sprite" type="Sprite" parent="."]
 z_index = -1

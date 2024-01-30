@@ -1,4 +1,4 @@
-[gd_scene load_steps=856 format=2]
+[gd_scene load_steps=863 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -822,6 +822,13 @@
 [ext_resource path="res://scenes/actors/objects/crystal_large/LGemBIcon.png" type="Texture" id=820]
 [ext_resource path="res://scenes/actors/objects/crystal_large/palettes/3/LGemWIcon.png" type="Texture" id=821]
 [ext_resource path="res://scenes/actors/objects/crystal_large/palettes/7/LGemOIcon.png" type="Texture" id=822]
+[ext_resource path="res://assets/tiles/castle_wall/pallete_icons/7icon.png" type="Texture" id=823]
+[ext_resource path="res://assets/tiles/castle_wall/pallete_icons/1icon.png" type="Texture" id=824]
+[ext_resource path="res://assets/tiles/castle_wall/pallete_icons/2icon.png" type="Texture" id=825]
+[ext_resource path="res://assets/tiles/castle_wall/pallete_icons/4icon.png" type="Texture" id=826]
+[ext_resource path="res://assets/tiles/castle_wall/pallete_icons/5icon.png" type="Texture" id=827]
+[ext_resource path="res://assets/tiles/castle_wall/pallete_icons/6icon.png" type="Texture" id=828]
+[ext_resource path="res://assets/tiles/castle_wall/pallete_icons/3icon.png" type="Texture" id=829]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3306,6 +3313,8 @@ group_name = "Castle"
 [node name="CastleWall" type="Node" parent="PlaceableItems/CastleGroup"]
 script = ExtResource( 24 )
 tileset_id = 25
+palette_icons = [ ExtResource( 226 ), ExtResource( 824 ), ExtResource( 825 ), ExtResource( 829 ), ExtResource( 826 ), ExtResource( 827 ), ExtResource( 828 ), ExtResource( 823 ) ]
+palette_previews = [ ExtResource( 226 ), ExtResource( 824 ), ExtResource( 825 ), ExtResource( 829 ), ExtResource( 826 ), ExtResource( 827 ), ExtResource( 828 ), ExtResource( 823 ) ]
 icon = ExtResource( 226 )
 preview = ExtResource( 226 )
 
