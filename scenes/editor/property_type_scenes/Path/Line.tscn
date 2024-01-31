@@ -1,0 +1,4 @@
+[gd_scene format=2]
+
+[node name="Line" type="Line2D"]
+width = 5.0

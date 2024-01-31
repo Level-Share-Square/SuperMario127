@@ -1,13 +1,16 @@
 extends Node
 
 var path_node = preload("res://scenes/editor/property_type_scenes/Path/PathNode.tscn")
+var line_node = preload("res://scenes/editor/property_type_scenes/Path/Line.tscn")
 
 export var close_button : NodePath
 onready var object_property_button = $Control
+onready var line
 onready var curve_points
 onready var global_position
 onready var first_node : Node2D
 onready var last_placed_node : Node2D
+
 var editor
 
 var editing_object: GameObject
@@ -17,7 +20,9 @@ func _ready():
 	pass
 
 func initialize(object_ref):
+	editor = get_tree().get_current_scene()
 	set_object_property_button(object_ref)
+	
 	editor.selected_tool = 3
 
 func _process(delta):
@@ -27,21 +32,26 @@ func _process(delta):
 func _unhandled_input(event) -> void:
 	if event.is_action_released("ui_accept"):
 		print("true")
-		add_node(editor.last_mouse_pos)
+		add_node(editor.get_global_mouse_position() - first_node.position)
 	
 func add_node(point : Vector2):
 	var new_node = path_node.instance()
 	new_node.position = point
 	print("position")
 	print(new_node.position)
+	
+	
 	if !is_instance_valid(first_node):
 		first_node = new_node
 		editor.add_child(new_node)
+		line = line_node.instance()
+		new_node.add_child(line)
+		line.add_point(Vector2(0,0))
 	else:
 		first_node.add_child(new_node)
 		new_node.prevnode = last_placed_node
 		last_placed_node.nextnode = new_node
-	print(new_node.get_parent())
+		line.add_point(point)
 	last_placed_node = new_node
 	
 func close():

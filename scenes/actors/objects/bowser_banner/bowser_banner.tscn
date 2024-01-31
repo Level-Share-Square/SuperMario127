@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/actors/objects/metal_platform/semi_solid_platform.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/metal_platform/is_platform_area.gd" type="Script" id=2]
-[ext_resource path="res://scenes/actors/objects/snow_pillar/snow_pillar.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/bowser_banner.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/bowser_banner/bowser_banner.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=9]
@@ -46,7 +46,7 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -45 )
 frames = SubResource( 14 )
-frame = 4
+frame = 1
 playing = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

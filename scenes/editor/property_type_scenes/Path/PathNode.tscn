@@ -4,5 +4,6 @@
 [ext_resource path="res://scenes/actors/objects/touch_lift/circle.png" type="Texture" id=2]
 
 [node name="Sprite" type="Sprite"]
+z_index = 14
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
