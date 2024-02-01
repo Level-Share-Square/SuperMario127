@@ -119,14 +119,18 @@ func _ready():
 	platform.platform_area_collision_shape.disabled = !enabled
 	
 	platform.platform_area_collision_shape.get_parent().connect("body_entered", self, "_on_touch_area_entered")
-	
+	if curve.get_point_count() == 0:
+		curve.add_point(Vector2())
+		curve.add_point(Vector2(0, -64))
 	if curve == null and path.curve == null:
 		path.curve = Curve2D.new()
 		path.curve.add_point(Vector2())
 		path.curve.add_point(Vector2(0,-64))
-		
+		curve = path.curve
 		set_property("curve", path.curve)
+		curve = path.curve
 	elif path.curve == null:
+		print("creating curve2")
 		path.curve = curve
 	elif curve == null:
 		set_property("curve", path.curve)
@@ -153,6 +157,7 @@ func _ready():
 		add_child(end_sprite_node)
 		
 		set_property("end_position", path.curve.get_point_position(path.curve.get_point_count()-1)/32)
+		print(path.curve.get_point_count())
 
 func set_sprite_parts(sprite):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2

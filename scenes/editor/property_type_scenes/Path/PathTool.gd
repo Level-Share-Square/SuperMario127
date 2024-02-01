@@ -23,7 +23,7 @@ func initialize(object_ref):
 	editor = get_tree().get_current_scene()
 	set_object_property_button(object_ref)
 	
-	editor.selected_tool = 3
+	
 
 func _process(delta):
 	pass
@@ -56,9 +56,11 @@ func add_node(point : Vector2):
 	
 func close():
 	first_node.queue_free()
-	queue_free()
 	#TODO: Make a hide function for the editor window.
 	editor.object_settings.visible = true
+	
+	queue_free()
+	
 	
 func set_object_property_button(button: Control):
 	object_property_button = button
@@ -78,4 +80,15 @@ func set_object_property_button(button: Control):
 		nextnode = nextnode.nextnode
 
 func close_pressed():
+	close()
+
+
+func _confirm_pressed():
+	var return_curve = object_property_button.get_value()
+	return_curve.clear_points()
+	var node = first_node
+	while(is_instance_valid(node.nextnode)):
+		return_curve.add_point(node.to_global(node.position))
+		node = node.nextnode
+	object_property_button.set_value(return_curve)
 	close()
