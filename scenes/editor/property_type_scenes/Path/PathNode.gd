@@ -1,19 +1,29 @@
-extends Sprite
+extends TextureButton
 
 #the previous and next nodes in the path
-var nextnode : Node2D
-var prevnode : Node2D
+var first : bool
+var ui
 
 func _ready():
-	pass # Replace with function body.
+	pass
 	
 func delete():
-	if is_instance_valid(prevnode):
-		if is_instance_valid(nextnode):
-			prevnode.nextnode = nextnode
+	if !first:
 		queue_free()
+		ui.get_ref().node_deleted()
+func _process(delta):
+	pass
+		
+func is_hovered():
+	var mouse_pos = get_global_mouse_position()
+	var position = $rect_global_position
+	if mouse_pos.x > position.x and mouse_pos.x < position.x + 48 and mouse_pos.y > position.y and mouse_pos.y < position.y + 48:
+		print("true")
+		Control.get_focus()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_PathNode_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == BUTTON_LEFT:
+			pass
+		elif event.pressed and event.button_index == BUTTON_RIGHT:
+			delete()

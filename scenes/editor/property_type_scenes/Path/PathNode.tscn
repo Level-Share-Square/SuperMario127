@@ -1,9 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/editor/property_type_scenes/Path/PathNode.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/touch_lift/circle.png" type="Texture" id=2]
+[ext_resource path="res://scenes/editor/property_type_scenes/Path/circle.png" type="Texture" id=3]
 
-[node name="Sprite" type="Sprite"]
-z_index = 14
-texture = ExtResource( 2 )
+[node name="PathNode" type="TextureButton"]
+margin_left = -3.7755
+margin_top = -3.83449
+margin_right = 12.2245
+margin_bottom = 12.1655
+rect_scale = Vector2( 0.5, 0.5 )
+rect_pivot_offset = Vector2( -8, -8 )
+focus_mode = 1
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
 script = ExtResource( 1 )
+
+[connection signal="gui_input" from="." to="." method="_on_PathNode_gui_input"]

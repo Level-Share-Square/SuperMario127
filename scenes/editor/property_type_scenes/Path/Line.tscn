@@ -1,4 +1,9 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/editor/property_type_scenes/Path/dash1.png" type="Texture" id=1]
 
 [node name="Line" type="Line2D"]
-width = 5.0
+width = 8.0
+default_color = Color( 0.239216, 0.337255, 0.8, 0.631373 )
+texture = ExtResource( 1 )
+texture_mode = 1

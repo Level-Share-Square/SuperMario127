@@ -29,7 +29,9 @@ var max_speed := 1.0
 onready var blend := pow(0.95, 120 * fps_util.PHYSICS_DELTA)
 
 var curve = Curve2D.new()
+var curve_points
 var custom_path = Curve2D.new()
+
 
 func _set_properties():
 	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset", "custom_path" ]
@@ -69,14 +71,7 @@ func _process(_delta):
 	if curve != path.curve:
 		path.curve = curve
 		
-	if end_position != last_end_position:
-		var last_index = path.curve.get_point_count()-1
-		
-		path.curve.set_point_position(last_index, end_position*32)
-		update()
-		end_sprite_node.position = path.curve.get_point_position(last_index)
-		
-		last_end_position = end_position
+	
 		
 	if color != last_color:
 		platform_sprite_recolor.self_modulate = color
@@ -134,7 +129,7 @@ func _ready():
 		path.curve = curve
 	elif curve == null:
 		set_property("curve", path.curve)
-	
+	curve_points = curve.tessellate()
 	platform.set_parts(parts)
 	
 	linear_offset = start_offset
@@ -156,7 +151,7 @@ func _ready():
 		end_sprite_node.modulate = transparent_color
 		add_child(end_sprite_node)
 		
-		set_property("end_position", path.curve.get_point_position(path.curve.get_point_count()-1)/32)
+
 		print(path.curve.get_point_count())
 
 func set_sprite_parts(sprite):
@@ -165,7 +160,7 @@ func set_sprite_parts(sprite):
 
 func _draw():
 	if mode == 1:
-		draw_polyline(path.curve.get_baked_points(), line_color, 2.0)
+		draw_polyline(curve_points, line_color, 2.0)
 	else:
 		for offset in range(0,path.curve.get_baked_length(), 10.0):
 			var pos : Vector2 = path.curve.interpolate_baked(offset)
