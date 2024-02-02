@@ -9,6 +9,7 @@ onready var line
 onready var curve_points
 onready var global_position
 onready var first_node : Node2D
+onready var selected_node : Control
 onready var last_placed_node : Node2D
 onready var path_node_container = Node2D.new()
 onready var nodes = Array()
@@ -18,6 +19,12 @@ var editor
 var editing_object: GameObject
 var editing_object_transform: Transform2D
 
+enum {MODE_PLACE, MODE_SELECT}
+
+var current_mode = MODE_PLACE
+
+#TODO: Make node deselection work without this.
+var _click_buffer: int = 0
 
 func _ready():
 	pass
@@ -33,13 +40,32 @@ func initialize(object_ref):
 func _process(delta):
 	editor.selected_tool = 3
 	if Input.is_action_just_pressed("place") and get_viewport().get_mouse_position().y > 70:
-		add_node(path_node_container.get_global_transform().xform_inv(editor.get_global_mouse_position()))
+		
+		if _click_buffer == 1 && current_mode == MODE_SELECT:
+			_click_buffer = 0
+			selected_node.release_focus()
+		
+		if current_mode == MODE_PLACE:
+			add_node(path_node_container.get_global_transform().xform_inv(editor.get_global_mouse_position()))
+		else:
+			_click_buffer += 1
+
+			
+			
+
+		
+
 		
 		
 func _gui_input(event) -> void:
 	if event.is_action_released("place"):
-		add_node(path_node_container.get_global_transform().xform_inv(editor.get_global_mouse_position()))
+		if current_mode == MODE_PLACE:
+			add_node(path_node_container.get_global_transform().xform_inv(editor.get_global_mouse_position()))
+		elif _click_buffer != 0:
+			_click_buffer = 0
+			selected_node.release_focus()
 		accept_event()
+
 
 	
 func add_node(point : Vector2):
