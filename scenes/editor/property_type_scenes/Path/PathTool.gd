@@ -6,18 +6,15 @@ var line_node = preload("res://scenes/editor/property_type_scenes/Path/Line.tscn
 export var close_button : NodePath
 onready var object_property_button = $Control
 onready var line
-onready var curve_points
-onready var global_position
-onready var first_node : Node2D
+
 onready var selected_node : Control
-onready var last_placed_node : Node2D
+
 onready var path_node_container = Node2D.new()
 onready var nodes = Array()
 
 var editor
-
+# the object which has the path
 var editing_object: GameObject
-var editing_object_transform: Transform2D
 
 enum {MODE_PLACE, MODE_SELECT}
 
@@ -38,6 +35,7 @@ func initialize(object_ref):
 	
 
 func _process(delta):
+	# this makes the editor unable to do anything
 	editor.selected_tool = 3
 	if Input.is_action_just_pressed("place") and get_viewport().get_mouse_position().y > 70:
 		
@@ -105,11 +103,7 @@ func set_object_property_button(button: Control):
 	#TODO: Add an object reference to the property button.
 	#TODO: Make a hide function for the editor window.
 	editor.object_settings.visible = false
-	curve_points = button.get_value().get_point_count()
-	global_position = editing_object.global_position
-	editing_object_transform = editing_object.get_global_transform()
-	print(button.get_value().get_point_count())
-	for point in range(0, curve_points):
+	for point in range(0, button.get_value().get_point_count()):
 		add_node(button.get_value().get_point_position(point))
 	#var nextnode = first_node
 	#while(is_instance_valid(nextnode)):

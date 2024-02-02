@@ -31,7 +31,7 @@ func set_value(_value: Curve2D):
 		button_node.text = value.name
 	else:
 		# Default to true/false otherwise
-		button_node.text = "True" if value else "False"
+		button_node.text = "Edit path" if value else "False"
 
 func get_value() -> Curve2D:
 	return value

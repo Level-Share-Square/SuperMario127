@@ -4,6 +4,8 @@
 
 [node name="Line" type="Line2D"]
 width = 8.0
-default_color = Color( 0.239216, 0.337255, 0.8, 0.631373 )
+default_color = Color( 1, 1, 1, 1 )
 texture = ExtResource( 1 )
 texture_mode = 1
+sharp_limit = 1.0
+antialiased = true
