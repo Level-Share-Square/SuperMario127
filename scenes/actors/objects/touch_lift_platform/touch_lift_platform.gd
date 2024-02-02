@@ -39,7 +39,7 @@ func _ready():
 	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate()
 
 func _physics_process(delta):
-	momentum = (global_position - last_position) / fps_util.PHYSICS_DELTA
+	momentum = (global_position - last_position) / (fps_util.PHYSICS_DELTA * 2)
 	
 	last_position = global_position
 
