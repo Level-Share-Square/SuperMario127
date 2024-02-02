@@ -6,6 +6,9 @@ var line_node = preload("res://scenes/editor/property_type_scenes/Path/Line.tscn
 export var close_button : NodePath
 onready var object_property_button = $Control
 onready var line
+
+onready var selected_node : Control
+
 onready var path_node_container = Node2D.new()
 onready var nodes = Array()
 
@@ -13,6 +16,12 @@ var editor
 # the object which has the path
 var editing_object: GameObject
 
+enum {MODE_PLACE, MODE_SELECT}
+
+var current_mode = MODE_PLACE
+
+#TODO: Make node deselection work without this.
+var _click_buffer: int = 0
 
 func _ready():
 	pass
@@ -29,13 +38,32 @@ func _process(delta):
 	# this makes the editor unable to do anything
 	editor.selected_tool = 3
 	if Input.is_action_just_pressed("place") and get_viewport().get_mouse_position().y > 70:
-		add_node(path_node_container.get_global_transform().xform_inv(editor.get_global_mouse_position()))
+		
+		if _click_buffer == 1 && current_mode == MODE_SELECT:
+			_click_buffer = 0
+			selected_node.release_focus()
+		
+		if current_mode == MODE_PLACE:
+			add_node(path_node_container.get_global_transform().xform_inv(editor.get_global_mouse_position()))
+		else:
+			_click_buffer += 1
+
+			
+			
+
+		
+
 		
 		
 func _gui_input(event) -> void:
 	if event.is_action_released("place"):
-		add_node(path_node_container.get_global_transform().xform_inv(editor.get_global_mouse_position()))
+		if current_mode == MODE_PLACE:
+			add_node(path_node_container.get_global_transform().xform_inv(editor.get_global_mouse_position()))
+		elif _click_buffer != 0:
+			_click_buffer = 0
+			selected_node.release_focus()
 		accept_event()
+
 
 	
 func add_node(point : Vector2):
