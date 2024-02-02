@@ -104,6 +104,12 @@ func get_objects_overlapping_position(point: Vector2):
 		if is_instance_valid(editor_hitbox):
 			if editor_hitbox.is_in_point(point):
 				found_objects.append(object_node)
+		# for resizable platforms
+		elif object_node.get_node("Sprite") is NinePatchRect:
+			var rect = object_node.get_node("Sprite").get_rect()
+			
+			if rect.has_point(object_node.to_local(point)):
+				found_objects.append(object_node) 
 		else:
 			var overlap : int = precise_object_overlap(object_node, point)
 			
