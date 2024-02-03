@@ -41,7 +41,7 @@ func _process(delta):
 		
 		if _click_buffer == 1 && current_mode == MODE_SELECT:
 			_click_buffer = 0
-			selected_node.release_focus()
+			selected_node.deselect()
 		
 		if current_mode == MODE_PLACE:
 			add_node(path_node_container.get_global_transform().xform_inv(editor.get_global_mouse_position()))
@@ -71,9 +71,9 @@ func add_node(point : Vector2):
 	new_node.ui = weakref(self)
 	path_node_container.add_child(new_node)
 	nodes.push_back(new_node)
-	new_node.rect_position = point
+	new_node.rect_position += point
 	line.add_point(point)
-	if(new_node.rect_position == Vector2(0,0)):
+	if(new_node.rect_position == Vector2(-8,-8)):
 		new_node.first = true
 		
 func node_deleted():
