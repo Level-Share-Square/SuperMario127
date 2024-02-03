@@ -25,14 +25,15 @@ var last_end_position : Vector2
 var max_speed := 1.0
 onready var blend := pow(0.95, 120 * fps_util.PHYSICS_DELTA)
 
-var curve = null
+var curve = Curve2D.new()
+var custom_path = Curve2D.new()
 
 var disappears : bool = true
 var inverted : bool = false
 
 func _set_properties():
-	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "start_offset", "disappears", "inverted"]
-	editable_properties = ["parts", "max_speed", "end_position", "move_type", "touch_start", "start_offset", "inverted"]
+	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "start_offset", "disappears", "inverted", "custom_path"]
+	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "start_offset", "inverted", "custom_path"]
 	
 func _set_property_values():
 	set_property("parts", parts)
@@ -44,6 +45,7 @@ func _set_property_values():
 	set_property("start_offset", start_offset)
 	set_property("disappears", disappears)
 	set_property("inverted", inverted)
+	set_property("custom_path", curve)
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
@@ -67,14 +69,7 @@ func _process(_delta):
 	if curve != path.curve:
 		path.curve = curve
 		
-	if end_position != last_end_position:
-		var last_index = path.curve.get_point_count()-1
-		
-		path.curve.set_point_position(last_index, end_position*32)
-		update()
-		end_sprite_node.position = path.curve.get_point_position(last_index)
-		
-		last_end_position = end_position
+	
 	
 
 #-------------------------------- platform logic -----------------------
@@ -115,7 +110,9 @@ func _ready():
 	platform.platform_area_collision_shape.disabled = !enabled
 	
 	platform.platform_area_collision_shape.get_parent().connect("body_entered", self, "_on_touch_area_entered")
-	
+	if curve.get_point_count() == 0:
+		curve.add_point(Vector2())
+		curve.add_point(Vector2(0, -64))
 	if curve == null and path.curve == null:
 		path.curve = Curve2D.new()
 		path.curve.add_point(Vector2())

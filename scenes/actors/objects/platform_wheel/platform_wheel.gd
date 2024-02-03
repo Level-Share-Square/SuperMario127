@@ -22,6 +22,8 @@ var speed : float = 2
 
 var platform_count := 4
 
+onready var hitbox = $EditorCircle
+
 func _set_properties():
 	savable_properties = ["parts", "speed", "radius", "platform_count", "color", "start_angle"]
 	editable_properties = ["parts", "speed", "radius", "platform_count", "color", "start_angle"]
@@ -74,6 +76,7 @@ func _process(_delta):
 		
 	if radius != last_radius:
 		update() #redraw points
+		hitbox.get_shape().radius = radius * 32
 		last_radius = radius
 		
 	if color != last_color:

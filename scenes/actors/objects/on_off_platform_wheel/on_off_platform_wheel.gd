@@ -24,6 +24,8 @@ var inverted : bool = false
 
 onready var frozen = false
 
+onready var hitbox = $EditorCircle
+
 func _set_properties():
 	savable_properties = ["parts", "speed", "radius", "platform_count",  "start_angle", "disappears", "inverted"]
 	editable_properties = ["parts", "speed", "radius", "platform_count",  "start_angle", "inverted"]
@@ -77,6 +79,7 @@ func _process(_delta):
 		
 	if radius != last_radius:
 		update() #redraw points
+		hitbox.get_shape().radius = radius * 32
 		last_radius = radius
 		
 

@@ -87,7 +87,7 @@ func _physics_process(delta):
 		momentum = Vector2(0,0)
 		$StaticBody2D.constant_linear_velocity = momentum
 		return
-	momentum = (global_position - last_position) / fps_util.PHYSICS_DELTA
+	momentum = (global_position - last_position) / (fps_util.PHYSICS_DELTA * 2)
 
 	last_position = global_position
 	sprite.region_rect.position.x = int(!parent.disappears) * 46

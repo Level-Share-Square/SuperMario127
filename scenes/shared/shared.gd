@@ -101,9 +101,19 @@ func get_objects_overlapping_position(point: Vector2):
 	var found_objects = []
 	for object_node in objects_node.get_children():
 		var editor_hitbox: Area2D = object_node.get_node_or_null("EditorHitbox")
-		if is_instance_valid(editor_hitbox):
+		# for platform wheels
+		if is_instance_valid(object_node.get_node_or_null("EditorCircle")):
+			if(Vector2().distance_to(object_node.to_local(point)) < object_node.get_node_or_null("EditorCircle").get_shape().radius):
+				found_objects.append(object_node)
+		elif is_instance_valid(editor_hitbox):
 			if editor_hitbox.is_in_point(point):
 				found_objects.append(object_node)
+		# for resizable platforms
+		elif object_node.get_node("Sprite") is NinePatchRect:
+			var rect = object_node.get_node("Sprite").get_rect()
+			
+			if rect.has_point(object_node.to_local(point)):
+				found_objects.append(object_node) 
 		else:
 			var overlap : int = precise_object_overlap(object_node, point)
 			
