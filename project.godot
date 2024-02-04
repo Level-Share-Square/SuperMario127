@@ -755,6 +755,10 @@ window/stretch/aspect="keep"
 
 enabled=PoolStringArray( "res://addons/discord_game_sdk/plugin.cfg", "res://addons/silent_wolf/plugin.cfg" )
 
+[global]
+
+physics=false
+
 [importer_defaults]
 
 texture={
@@ -1234,6 +1238,10 @@ limits/message_queue/max_size_kb=2048
 [network]
 
 ssl/certificates="res://ca-certificates.crt"
+
+[physics]
+
+common/physics_interpolation=true
 
 [rendering]
 

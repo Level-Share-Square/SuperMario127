@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 2.0
+radius = 64.0
 
 [node name="PlatformWheel" type="Node2D"]
 scale = Vector2( 0.01, 0.01 )
