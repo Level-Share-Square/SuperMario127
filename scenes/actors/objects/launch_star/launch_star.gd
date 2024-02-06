@@ -1,6 +1,6 @@
 extends GameObject
 
-var speed = 6
+var speed = 10
 
 onready var path : Path2D = $Path2D
 onready var pathfollow = $Path2D/PathFollow2D
@@ -98,7 +98,7 @@ func physics_process_holding(delta:float):
 		state = states.IDLE
 		mario.set_state_by_name("FallState", delta)
 		return
-	mario.position = position
+	mario.position = lerp(mario.position, position, 0.1)
 	if mario.inputs[4][0]:
 		state = states.LAUNCH
 		return
