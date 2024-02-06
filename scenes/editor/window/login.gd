@@ -33,9 +33,11 @@ func on_req_complete(result, response_code, headers, body):
 		yield(get_tree().create_timer(3), "timeout")
 		wrong.hide()
 	else:
+		print(json.result)
+		UserInfo.id = json.result["result"]["_id"]
 		UserInfo.username = json.result["result"]["username"]
 		UserInfo.icon = json.result["result"]["avatar"]
-		UserInfo.token = json.result["result"]["token"]
+		UserInfo.token = json.result["token"]
 		get_parent().get_parent().button_login.text = "Logged in as " + UserInfo.username
 		get_parent().close()
 

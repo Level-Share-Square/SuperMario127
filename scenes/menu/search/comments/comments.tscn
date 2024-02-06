@@ -5,9 +5,12 @@
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/styles/LevelListPanel.tres" type="StyleBox" id=5]
 [ext_resource path="res://assets/fonts/DelfinoFont.tres" type="DynamicFont" id=6]
-[ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=7]
 [ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/styles/whitecurved.tres" type="StyleBox" id=9]
+
+[sub_resource type="DynamicFont" id=13]
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 20
@@ -135,7 +138,7 @@ margin_top = 8.0
 margin_right = 258.0
 margin_bottom = 52.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = SubResource( 13 )
 custom_styles/normal = ExtResource( 9 )
 placeholder_text = "Comment"
 placeholder_alpha = 0.422
@@ -190,6 +193,8 @@ custom_fonts/font = ExtResource( 6 )
 autowrap = true
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest2" type="HTTPRequest" parent="."]
 
 [node name="127BackButton" parent="." instance=ExtResource( 8 )]
 margin_left = 719.0

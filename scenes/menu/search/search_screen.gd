@@ -10,6 +10,7 @@ var creators = []
 var search_cooldown = 5
 var searching = false
 var load_page_1 = true
+var selected_level = ""
 
 var levels = Singleton.SavedLevels.levels
 
@@ -148,7 +149,8 @@ func on_item_selected(index: int):
 		http2.connect("request_completed", self, "_on_request2_completed")
 		http2.request("https://levelsharesquare.com/api/users/" + str(creators[index]))
 		print(level_ids[index])
-		comments.load_comments(level_ids[index])
+		selected_level = level_ids[index]
+		comments.load_comments(selected_level)
 		yield(get_tree().create_timer(0.6), "timeout")
 		rating.set_rating(level_ratings[index])
 		
