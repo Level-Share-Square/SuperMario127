@@ -2,6 +2,7 @@ extends Control
 
 
 onready var httpreq = get_parent().get_node("HTTPRequest")
+onready var httpreq2 = get_parent().get_node("HTTPRequest2")
 onready var email = $Username
 onready var password = $Password
 onready var button = get_parent().get_node("LoginButton")
@@ -33,13 +34,20 @@ func on_req_complete(result, response_code, headers, body):
 		yield(get_tree().create_timer(3), "timeout")
 		wrong.hide()
 	else:
-		print(json.result)
 		UserInfo.id = json.result["result"]["_id"]
 		UserInfo.username = json.result["result"]["username"]
 		UserInfo.icon = json.result["result"]["avatar"]
 		UserInfo.token = json.result["token"]
+		httpreq2.connect("request_completed", self, "on_req2_complete")
+		var header = ["Authorization: Bearer " + UserInfo.token]
+		var resul = httpreq2.request("https://levelsharesquare.com/api/app/intervals/SM127", header, true, 2, "")
 		get_parent().get_parent().button_login.text = "Logged in as " + UserInfo.username
 		get_parent().close()
+		
+func on_req2_complete(result, response_code, headers, body):
+	var json = JSON.parse(body.get_string_from_utf8())
+	print(json.result)
+	print(response_code)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

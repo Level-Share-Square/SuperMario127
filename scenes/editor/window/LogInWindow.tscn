@@ -107,6 +107,8 @@ text = "?"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
+[node name="HTTPRequest2" type="HTTPRequest" parent="."]
+
 [node name="Title2" type="RichTextLabel" parent="."]
 margin_left = 37.5
 margin_top = 372.5
