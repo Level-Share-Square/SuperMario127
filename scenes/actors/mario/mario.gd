@@ -624,8 +624,9 @@ func get_weight() -> int:
 	return 2 if metal_voice else 1
 
 func _physics_process(delta: float) -> void:
+	
 	update_inputs()	
-	if state and state.name == "NoActionState":
+	if state and (state.name == "NoActionState" or state.name == "LaunchStarState"):
 		return
 	
 	bottom_pos.position = bottom_pos_offset if ground_collision_dive.disabled else bottom_pos_dive_offset

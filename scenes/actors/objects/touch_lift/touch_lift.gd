@@ -58,6 +58,11 @@ func _input(event):
 		elif event.button_index == 4: # Mouse wheel up
 			parts += 1
 			set_property("parts", parts)
+# TODO:
+# Optimize the amount of nodes in the curve path.
+# Fix physics:
+	# Reduce applied momentum on bodies
+	# Fix interference while overlapping a platform in midair
 
 func _process(_delta):
 	if parts != last_parts:

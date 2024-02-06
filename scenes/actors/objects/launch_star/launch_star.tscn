@@ -4,12 +4,13 @@
 [ext_resource path="res://scenes/actors/objects/launch_star/launch_star.png" type="Texture" id=2]
 
 [sub_resource type="Curve2D" id=1]
+bake_interval = 200.0
 _data = {
 "points": PoolVector2Array(  )
 }
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 89.4889, 55.8745 )
+extents = Vector2( 35.5032, 44.0332 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
@@ -124,15 +125,15 @@ curve = SubResource( 1 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 loop = false
-lookahead = 0.001
+lookahead = 100.0
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2( 1.70927, 31.1328 )
+position = Vector2( -2.47974, 26.2079 )
 shape = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 27 )
-frame = 17
+frame = 2
 playing = true
