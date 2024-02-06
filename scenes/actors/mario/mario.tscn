@@ -1,4 +1,4 @@
-[gd_scene load_steps=164 format=2]
+[gd_scene load_steps=165 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -74,6 +74,7 @@
 [ext_resource path="res://scenes/actors/mario/states/Squished.gd" type="Script" id=72]
 [ext_resource path="res://scenes/actors/mario/mario_sounds.tscn" type="PackedScene" id=73]
 [ext_resource path="res://scenes/actors/mario/luigi_sounds.tscn" type="PackedScene" id=74]
+[ext_resource path="res://scenes/actors/mario/LaunchStarState.gd" type="Script" id=75]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -1126,7 +1127,7 @@ playing = true
 visible = false
 frames = ExtResource( 44 )
 animation = "swimming"
-frame = 4
+frame = 3
 playing = true
 script = ExtResource( 63 )
 
@@ -1304,6 +1305,9 @@ script = ExtResource( 69 )
 
 [node name="NoActionState" type="Node" parent="States"]
 script = ExtResource( 53 )
+
+[node name="LaunchStarState" type="Node" parent="States"]
+script = ExtResource( 75 )
 
 [node name="Nozzles" type="Node" parent="."]
 
@@ -1669,14 +1673,13 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 10
+frame = 12
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 10
 speed_scale = 3.0
 playing = true
 
@@ -1697,7 +1700,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 4
+frame = 3
 playing = true
 script = ExtResource( 34 )
 
@@ -1705,7 +1708,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 6
+frame = 5
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]

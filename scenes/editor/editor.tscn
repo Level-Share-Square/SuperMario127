@@ -1,4 +1,4 @@
-[gd_scene load_steps=863 format=2]
+[gd_scene load_steps=864 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -829,6 +829,7 @@
 [ext_resource path="res://assets/tiles/castle_wall/pallete_icons/5icon.png" type="Texture" id=827]
 [ext_resource path="res://assets/tiles/castle_wall/pallete_icons/6icon.png" type="Texture" id=828]
 [ext_resource path="res://assets/tiles/castle_wall/pallete_icons/3icon.png" type="Texture" id=829]
+[ext_resource path="res://scenes/actors/objects/launch_star/preview.png" type="Texture" id=830]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1870,6 +1871,13 @@ is_object = true
 object_center = Vector2( 16, 16 )
 icon = ExtResource( 341 )
 preview = ExtResource( 342 )
+
+[node name="LaunchStar" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 108
+is_object = true
+icon = ExtResource( 830 )
+preview = ExtResource( 830 )
 
 [node name="SwitchesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://classes/ParallaxLayerResource.gd" type="Script" id=1]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/front.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+texture = ExtResource( 2 )
+scale = Vector2( 0.15, 0.1 )
+offset = Vector2( 0, -850 )
+mirroring = Vector2( 512, 0 )
+palettes = [  ]

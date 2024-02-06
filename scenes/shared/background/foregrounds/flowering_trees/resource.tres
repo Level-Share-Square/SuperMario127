@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://classes/ForegroundResource.gd" type="Script" id=1]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/front.png" type="Texture" id=2]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/front.tres" type="Resource" id=3]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/back.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 1 )
+layers = [ ExtResource( 4 ), ExtResource( 3 ) ]
+immune_to = PoolIntArray(  )
+preview = ExtResource( 2 )
+palettes = [  ]

@@ -295,6 +295,11 @@ _global_script_classes=[ {
 "path": "res://scenes/actors/mario/states/Knockback.gd"
 }, {
 "base": "State",
+"class": "LaunchStarState",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/LaunchStarState.gd"
+}, {
+"base": "State",
 "class": "LavaBoostState",
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/LavaBoost.gd"
@@ -647,6 +652,7 @@ _global_script_class_icons={
 "InterpreterVar": "",
 "JumpState": "",
 "KnockbackState": "",
+"LaunchStarState": "",
 "LavaBoostState": "",
 "LessThanCondition": "",
 "LessThanOrEqualToCondition": "",

@@ -5,6 +5,7 @@ var line_node = preload("res://scenes/editor/property_type_scenes/Path/Line.tscn
 
 export var close_button : NodePath
 onready var object_property_button = $Control
+onready var cursor = $Sprite
 onready var line
 
 onready var selected_node : Control
@@ -22,6 +23,7 @@ var current_mode = MODE_PLACE
 
 #TODO: Make node deselection work without this.
 var _click_buffer: int = 0
+var mouse_position
 
 func _ready():
 	pass
@@ -35,7 +37,11 @@ func initialize(object_ref):
 	
 
 func _process(delta):
-	# this makes the editor unable to do anything
+	mouse_position = Vector2(stepify(path_node_container.get_local_mouse_position().x, 16), stepify(path_node_container.get_local_mouse_position().y, 16))
+	
+	cursor.position = cursor.to_local(mouse_position)
+	print(mouse_position)
+		# this makes the editor unable to do anything
 	editor.selected_tool = 3
 	if Input.is_action_just_pressed("place") and get_viewport().get_mouse_position().y > 70:
 		
@@ -58,7 +64,7 @@ func _process(delta):
 func _gui_input(event) -> void:
 	if event.is_action_released("place"):
 		if current_mode == MODE_PLACE:
-			add_node(path_node_container.get_global_transform().xform_inv(editor.get_global_mouse_position()))
+			add_node(path_node_container.get_local_transform().xform(mouse_position))
 		elif _click_buffer != 0:
 			_click_buffer = 0
 			selected_node.release_focus()
