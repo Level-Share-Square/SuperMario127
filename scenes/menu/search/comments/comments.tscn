@@ -197,7 +197,7 @@ margin_top = 385.0
 margin_right = 751.0
 margin_bottom = 415.0
 
-[node name="127Button2" parent="." instance=ExtResource( 3 )]
+[node name="PostButton" parent="." instance=ExtResource( 3 )]
 margin_left = 520.0
 margin_top = 382.0
 margin_right = 662.0

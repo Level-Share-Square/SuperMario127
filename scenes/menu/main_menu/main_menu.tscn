@@ -503,6 +503,7 @@ anims/trans_out_SearchScreen_MainMenuScreen = SubResource( 16 )
 one_shot = true
 
 [node name="LogInWindow" parent="." instance=ExtResource( 7 )]
+visible = false
 margin_left = 197.0
 margin_top = 127.0
 margin_right = 1250.0

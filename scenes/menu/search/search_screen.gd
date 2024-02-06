@@ -9,6 +9,7 @@ var level_ratings = []
 var creators = []
 var search_cooldown = 5
 var searching = false
+var load_page_1 = true
 
 var levels = Singleton.SavedLevels.levels
 
@@ -52,7 +53,6 @@ func _ready():
 	comment_button.connect("button_down", self, "comment_pressed")
 	search.connect("text_changed", self, "on_text_changed")
 	http.connect("request_completed", self, "_on_request_completed")
-	request(1)
 #	http.request("https://levelsharesquare.com/api/levels?page=1&game=2")
 	
 func comment_pressed():
@@ -84,6 +84,9 @@ func on_text_changed(new_text):
 		pass
 
 func _process(delta):
+	if "ActiveScreens" in str(get_parent()) && load_page_1 == true:
+		request(1)
+		load_page_1 = false 
 	level_list.margin_bottom = 236
 	buttonx.margin_left = 303
 	buttonx.margin_top = -53

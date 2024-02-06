@@ -505,10 +505,10 @@ placeholder_text = "Search"
 placeholder_alpha = 0.422
 
 [node name="buttonX" parent="Control/VBoxContainer/PanelContainer" instance=ExtResource( 1 )]
-margin_left = 293.0
-margin_top = 549.0
-margin_right = 307.0
-margin_bottom = 593.0
+margin_left = 320.0
+margin_top = 8.0
+margin_right = 334.0
+margin_bottom = 52.0
 size_flags_horizontal = 8
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
@@ -607,9 +607,9 @@ flip_h = true
 
 [node name="Loading" type="TextureRect" parent="."]
 margin_left = 110.0
-margin_top = 657.0
+margin_top = 176.0
 margin_right = 254.0
-margin_bottom = 801.0
+margin_bottom = 320.0
 rect_pivot_offset = Vector2( 72, 72 )
 texture = ExtResource( 17 )
 

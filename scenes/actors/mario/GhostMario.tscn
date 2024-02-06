@@ -8,7 +8,7 @@ modulate = Color( 1, 1, 1, 0.462745 )
 position = Vector2( -1000, -1000 )
 frames = ExtResource( 1 )
 animation = "movingRight"
-frame = 5
+frame = 8
 playing = true
 script = ExtResource( 2 )
 

@@ -470,7 +470,11 @@ func on_button_reset_pressed() -> void:
 	var selected_level = Singleton.SavedLevels.selected_level
 	if selected_level == NO_LEVEL:
 		return
+	var dir = Directory.new()
 	var level_info = levels[selected_level]
+	var ghost_dir = "user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost"
+	if dir.file_exists(ghost_dir):
+		dir.remove(ghost_dir)
 	level_info.reset_save_data()
 	populate_info_panel(level_info)
 

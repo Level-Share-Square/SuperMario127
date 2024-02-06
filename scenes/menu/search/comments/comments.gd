@@ -6,6 +6,7 @@ var level_comment_info = {}
 onready var anim = $AnimationPlayer
 onready var httpreq1 = $HTTPRequest
 onready var back = $"127BackButton"
+onready var post = $"PostButton"
 onready var label = $ScrollContainer/Label
 
 func _process(delta):
@@ -14,6 +15,7 @@ func _process(delta):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	back.connect("button_down", self, "back_pressed")
+	post.connect("button_down", self, "post_pressed")
 	load_comments()
 	
 func anim_in():

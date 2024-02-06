@@ -35,7 +35,8 @@ func on_req_complete(result, response_code, headers, body):
 	else:
 		UserInfo.username = json.result["result"]["username"]
 		UserInfo.icon = json.result["result"]["avatar"]
-		get_parent().get_parent().get_node("ButtonLogin").text = "Logged in as " + UserInfo.username
+		UserInfo.token = json.result["result"]["token"]
+		get_parent().get_parent().button_login.text = "Logged in as " + UserInfo.username
 		get_parent().close()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
