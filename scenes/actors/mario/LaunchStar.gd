@@ -2,10 +2,7 @@ extends State
 
 class_name LaunchStarState
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+var old_gravity_scale = 1.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,9 +15,16 @@ func _ready():
 	override_rotation = true
 	use_dive_collision = true
 	auto_flip = true
+	attack_tier = 2
 
 func _start_check(_delta):
 	pass
 
 func _start(_delta):
-	pass
+	old_gravity_scale = character.gravity_scale
+	character.gravity_scale = 0
+	character.sprite.animation = "spinning"
+	
+func _stop(_delta):
+	character.gravity_scale = old_gravity_scale
+	
