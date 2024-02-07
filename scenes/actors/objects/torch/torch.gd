@@ -10,9 +10,6 @@ onready var light : Light2D = $Light2D
 onready var sprite : AnimatedSprite = $AnimatedSprite
 onready var sprite2 : AnimatedSprite = $AnimatedSprite/RecolorableSprite
 
-var sinx : float
-export var steps = 1
-
 func _set_properties():
 	savable_properties = ["is_background", "color"]
 	editable_properties = ["is_background", "color"]
@@ -58,7 +55,5 @@ func _process(delta):
 		sprite2.visible = true
 		
 		light.color = color
-	#control light flicker
-	light.texture_scale = (round(steps*max(-abs(tan(sin(sinx/steps)))+1, -(abs(tan(sin((sinx/steps)+(1/2)*PI)))-1))-steps)) /6 + 1
-	sinx += 0.12
+	
 

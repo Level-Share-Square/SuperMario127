@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/viginette.png-62a894f64d1e5506d8a9185bb6c03de3.stex"
+path="res://.import/viginette1.png-20faffad26868b16698485a2cc8b0527.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/torch/viginette.png"
-dest_files=[ "res://.import/viginette.png-62a894f64d1e5506d8a9185bb6c03de3.stex" ]
+source_file="res://scenes/actors/objects/torch/viginette1.png"
+dest_files=[ "res://.import/viginette1.png-20faffad26868b16698485a2cc8b0527.stex" ]
 
 [params]
 
