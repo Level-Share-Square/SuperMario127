@@ -67,8 +67,7 @@ func _process(_delta):
 		
 func _physics_process(delta):
 	
-	if(is_instance_valid(mario)):
-		print(momentum)
+	print(state)
 	
 	if enabled and mode == 0:
 		match(state):
@@ -99,6 +98,7 @@ func physics_process_holding(delta:float):
 		mario.set_state_by_name("FallState", delta)
 		return
 	mario.position = lerp(mario.position, position, 0.1)
+	mario.sprite.rotation = lerp_angle(mario.sprite.rotation, pathfollow.rotation + 1.571, 0.07)
 	if mario.inputs[4][0]:
 		state = states.LAUNCH
 		return
@@ -112,8 +112,8 @@ func physics_process_launch(delta:float):
 	
 	last_position = pathfollow.position
 	
-	if(mario.rotation_degrees != pathfollow.rotation_degrees + 90):
-		mario.rotation = lerp_angle(mario.rotation, pathfollow.rotation + 1.571, speed / 200.0)
+	if(mario.sprite.rotation_degrees != pathfollow.rotation_degrees + 90):
+		mario.sprite.rotation = lerp_angle(mario.sprite.rotation, pathfollow.rotation + 1.571, speed / 200.0)
 	mario.position = lerp(mario.position, position + pathfollow.position, 0.05)
 
 	
@@ -123,10 +123,10 @@ func physics_process_launch(delta:float):
 		mario.set_state_by_name("JumpState", delta)
 		mario.jump_animation = 2
 		mario.facing_direction = sign(momentum.x)
-		mario.velocity = Vector2(cos(mario.rotation), sin(mario.rotation)) * speed
+		mario.velocity = Vector2(cos(mario.sprite.rotation), sin(mario.sprite.rotation)) * speed
 		mario.velocity = momentum * 10*speed/(speed*speed)
 		mario.last_position = mario.position
-		mario.rotation = 0
+		mario.sprite.rotation = 0
 		pathfollow.offset = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
