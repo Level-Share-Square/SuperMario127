@@ -25,7 +25,7 @@ func anim_in():
 	
 func back_pressed():
 	anim.play("out")
-#
+
 func post_pressed():
 	if get_parent().selected_level != "" || UserInfo.token != "":
 		var dic = {"level" : get_parent().selected_level, "author": UserInfo.id, "content": textedit.text}

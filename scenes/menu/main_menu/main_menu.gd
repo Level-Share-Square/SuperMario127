@@ -7,13 +7,18 @@ onready var button_templates : Button = $Panel/VBoxContainer/ButtonTemplates
 onready var button_options : Button = $Panel/VBoxContainer/ButtonOptions
 onready var button_quit : Button = $Panel/ButtonQuit
 onready var button_login : Button = $Panel/ButtonLogin
+onready var error_window = $ErrorWindow
 
 onready var timer = $CooldownTimer
+
+onready var lss_icon = preload("res://assets/misc/LSS.svg")
 
 const EDITOR_SCENE : PackedScene = preload("res://scenes/editor/editor.tscn")
 
 
 func _ready() -> void:
+	if UserInfo.username != "":
+		button_login.text = "Logged in as " + UserInfo.username
 	Singleton2.crash = false
 	if Singleton2.rp == true:
 		update_activity()
@@ -67,7 +72,14 @@ func _input(_event : InputEvent) -> void:
 
 func on_button_search_pressed() -> void:
 	emit_signal("screen_change", "main_menu_screen", "search_screen")
-
+	
+func _process(delta):
+	if UserInfo.logged_out == true:
+		button_login.text = "Log In"
+		button_login.icon = lss_icon
+		error_window.open()
+		UserInfo.logged_out = false
+	
 func on_button_levels_pressed() -> void:
 	if timer.time_left > 0:
 		return
