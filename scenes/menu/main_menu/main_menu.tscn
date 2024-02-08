@@ -1066,7 +1066,7 @@ margin_bottom = 102.263
 mouse_filter = 2
 custom_fonts/normal_font = SubResource( 21 )
 bbcode_text = "LSS"
-text = "Error"
+text = "LSS"
 
 [node name="CloseButton" type="TextureButton" parent="ErrorWindow"]
 margin_left = 888.65

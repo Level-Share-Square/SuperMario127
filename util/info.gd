@@ -11,6 +11,15 @@ var ping_timer = 0
 
 onready var httpreq = HTTPRequest.new()
 
+func save_info():
+	var file = File.new()
+	var token = UserInfo.token
+	file.open("user://LSS.login", File.WRITE)
+	file.store_var(UserInfo.id)
+	file.store_var(UserInfo.username)
+	file.store_var(UserInfo.icon)
+	file.store_var(token)
+
 func _ready():
 	add_child(httpreq)
 	httpreq.connect("request_completed", self, "ping_complete")
@@ -38,5 +47,6 @@ func ping_complete(result, response_code, headers, body):
 		username = ""
 		icon = ""
 		token = ""
+		save_info()
 	else:
 		logged_out = false

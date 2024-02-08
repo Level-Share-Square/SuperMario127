@@ -39,21 +39,13 @@ func on_req_complete(result, response_code, headers, body):
 		UserInfo.username = json.result["result"]["username"]
 		UserInfo.icon = json.result["result"]["avatar"]
 		UserInfo.token = json.result["token"]
-		save_info()
+		UserInfo.save_info()
 		httpreq2.connect("request_completed", self, "on_req2_complete")
 		var header = ["Authorization: Bearer " + UserInfo.token]
 		var resul = httpreq2.request("https://levelsharesquare.com/api/app/intervals/SM127", header, true, 2, "")
 		get_parent().get_parent().button_login.text = "Logged in as " + UserInfo.username
 		get_parent().close()
-		
-func save_info():
-	var file = File.new()
-	var token = UserInfo.token
-	file.open("user://LSS.login", File.WRITE)
-	file.store_var(UserInfo.id)
-	file.store_var(UserInfo.username)
-	file.store_var(UserInfo.icon)
-	file.store_var(token)
+	
 	
 func on_req2_complete(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8())
