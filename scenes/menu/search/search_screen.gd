@@ -209,6 +209,7 @@ func _on_request_completed(result, response_code, headers, body):
 				var level_info : LevelInfo = LevelInfo.new(level_code)
 				level_codes.append(level_info)
 				level_ids.append(level_id)
+				actual_codes.append(level_code)
 				level_ratings.append(level_rating)
 				level_list.add_item(level_info.level_name)
 		for i in page_amt:

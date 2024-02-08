@@ -860,7 +860,6 @@ margin_right = 152.0
 margin_bottom = 40.0
 size_flags_horizontal = 0
 custom_fonts/font = SubResource( 12 )
-custom_styles/pressed = ExtResource( 16 )
 text = "Edit"
 
 [node name="ButtonReset" parent="MarginContainer/HBoxContainer/LevelInfo/ControlButtons" instance=ExtResource( 2 )]
