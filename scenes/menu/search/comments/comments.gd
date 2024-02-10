@@ -25,7 +25,7 @@ func anim_in():
 	
 func back_pressed():
 	anim.play("out")
-#
+
 func post_pressed():
 	if get_parent().selected_level != "" || UserInfo.token != "":
 		var dic = {"level" : get_parent().selected_level, "author": UserInfo.id, "content": textedit.text}
@@ -57,12 +57,11 @@ func on_req1_complete(result, response_code, headers, body):
 		for i in json.result["authors"].size():
 			author_info[json.result["authors"][i]["_id"]] = [json.result["authors"][i]["username"], json.result["authors"][i]["avatar"]]
 		for i in json.result["levelComments"].size():
-			print(author_info.keys()[i])
-			level_comment_info[json.result["levelComments"][i]["author"]] = json.result["levelComments"][i]["content"]
-			print(level_comment_info.keys()[i])
+			level_comment_info[i] = [json.result["levelComments"][i]["author"], json.result["levelComments"][i]["content"]]
+			print(level_comment_info.keys())
 			
 		for i in json.result["levelComments"].size():
-			label.text += author_info[author_info.keys()[i]][0] + ":\n" + level_comment_info[author_info.keys()[i]] + "\n\n"
+			label.text += author_info[level_comment_info[i][0]][0] + ":\n" + level_comment_info[i][1] + "\n\n"
 	else:
 		label.text = "No comments found. Be the first!"
 		label.modulate.a = 0.5

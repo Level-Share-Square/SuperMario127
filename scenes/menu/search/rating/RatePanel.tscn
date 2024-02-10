@@ -1,0 +1,204 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow_hover.png" type="Texture" id=2]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=3]
+[ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/menu/search/rating/ratepanel.gd" type="Script" id=7]
+[ext_resource path="res://scenes/menu/127Button.gd" type="Script" id=10]
+
+[sub_resource type="StyleBoxFlat" id=31]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="DynamicFont" id=35]
+size = 24
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxTexture" id=32]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="StyleBoxTexture" id=33]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="StyleBoxEmpty" id=36]
+
+[sub_resource type="StyleBoxTexture" id=34]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="StyleBoxEmpty" id=37]
+
+[sub_resource type="Animation" id=38]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Label3:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Label3:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 10, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=39]
+resource_name = "rated"
+length = 3.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Label3:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -1, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 2.5, 3 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Label3:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 10, -0.25, 0, 0.25, 0, 41.356, -0.25, 0, 0.25, 0, 41.356, -0.25, 0, 0.25, 0, 10, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 2.5, 3 )
+}
+
+[node name="RatePanel" type="Panel"]
+margin_left = 374.0
+margin_top = 351.0
+margin_right = 555.0
+margin_bottom = 392.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 31 )
+script = ExtResource( 7 )
+
+[node name="Label3" type="Label" parent="."]
+margin_left = -1.0
+margin_top = 10.0
+margin_right = 261.0
+margin_bottom = 38.0
+rect_scale = Vector2( 0.7, 0.7 )
+custom_fonts/font = SubResource( 35 )
+text = "Rated!"
+align = 1
+
+[node name="NumControl" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ButtonLeft" type="Button" parent="NumControl"]
+margin_left = 34.0
+margin_top = 34.0
+margin_right = 89.0
+margin_bottom = 89.0
+rect_rotation = -180.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 1 )
+custom_styles/hover = SubResource( 32 )
+custom_styles/pressed = SubResource( 33 )
+custom_styles/focus = SubResource( 36 )
+custom_styles/normal = SubResource( 34 )
+shortcut_in_tooltip = false
+script = ExtResource( 10 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="NumControl/ButtonLeft"]
+stream = ExtResource( 5 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="NumControl/ButtonLeft"]
+stream = ExtResource( 6 )
+volume_db = -10.0
+
+[node name="ButtonRight" type="Button" parent="NumControl"]
+margin_left = 145.0
+margin_top = 7.0
+margin_right = 200.0
+margin_bottom = 62.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 1 )
+custom_styles/hover = SubResource( 32 )
+custom_styles/pressed = SubResource( 33 )
+custom_styles/focus = SubResource( 37 )
+custom_styles/normal = SubResource( 34 )
+shortcut_in_tooltip = false
+script = ExtResource( 10 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="NumControl/ButtonRight"]
+stream = ExtResource( 5 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="NumControl/ButtonRight"]
+stream = ExtResource( 6 )
+volume_db = -10.0
+
+[node name="ButtonRate" parent="NumControl" instance=ExtResource( 4 )]
+margin_left = 54.0
+margin_top = 2.0
+margin_right = 196.0
+margin_bottom = 73.0
+rect_scale = Vector2( 0.5, 0.5 )
+
+[node name="Label" type="Label" parent="NumControl"]
+margin_left = 70.0
+margin_top = 7.0
+margin_right = 110.0
+margin_bottom = 35.0
+custom_fonts/font = SubResource( 35 )
+text = "0.5"
+align = 1
+
+[node name="LoginPopup" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="LoginPopup"]
+margin_right = 181.0
+margin_bottom = 42.0
+color = Color( 0.141176, 0.141176, 0.141176, 0.352941 )
+
+[node name="Label2" type="Label" parent="LoginPopup"]
+margin_left = 24.0
+margin_top = 14.0
+margin_right = 286.0
+margin_bottom = 42.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 35 )
+text = "Login to rate this level!"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 38 )
+anims/rated = SubResource( 39 )
