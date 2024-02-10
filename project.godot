@@ -99,72 +99,82 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://interpreter/instructions/DefineVarInstruction.gd"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivity",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityAssets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_assets.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityParty",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_party.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivitySecrets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_secrets.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityTimestamps",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_timestamps.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordCore",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_core.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobby",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobbyManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobbyTransaction",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_transaction.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordOverlayManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_overlay_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordPartySize",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_party_size.gdns"
 }, {
+"base": "Node",
+"class": "DiscordRPC",
+"language": "GDScript",
+"path": "res://addons/godot_editor_discord_presence/Discord RPC/DiscordRPC.gd"
+}, {
 "base": "Reference",
+"class": "DiscordRPCEnum",
+"language": "GDScript",
+"path": "res://addons/godot_editor_discord_presence/Discord RPC/DiscordRPCEnum.gd"
+}, {
+"base": "",
 "class": "DiscordResult",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_result.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordUser",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_user.gdns"
@@ -264,6 +274,31 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/nozzles/Hover.gd"
 }, {
+"base": "Reference",
+"class": "IPC",
+"language": "GDScript",
+"path": "res://addons/godot_editor_discord_presence/Discord RPC/ipc/IPC.gd"
+}, {
+"base": "Reference",
+"class": "IPCModule",
+"language": "GDScript",
+"path": "res://addons/godot_editor_discord_presence/Discord RPC/ipc/module/IPCModule.gd"
+}, {
+"base": "Reference",
+"class": "IPCPayload",
+"language": "GDScript",
+"path": "res://addons/godot_editor_discord_presence/Discord RPC/ipc/IPCPayload.gd"
+}, {
+"base": "Reference",
+"class": "IPCPipe",
+"language": "GDScript",
+"path": "res://addons/godot_editor_discord_presence/Discord RPC/ipc/pipe/IPCPipe.gd"
+}, {
+"base": "Reference",
+"class": "IPCUtil",
+"language": "GDScript",
+"path": "res://addons/godot_editor_discord_presence/Discord RPC/util/IPCUtil.gd"
+}, {
 "base": "Resource",
 "class": "IdMap",
 "language": "GDScript",
@@ -297,7 +332,7 @@ _global_script_classes=[ {
 "base": "State",
 "class": "LaunchStarState",
 "language": "GDScript",
-"path": "res://scenes/actors/mario/LaunchStar.gd"
+"path": "res://scenes/actors/mario/states/LaunchStar.gd"
 }, {
 "base": "State",
 "class": "LavaBoostState",
@@ -439,6 +474,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/RainbowStarWindup.gd"
 }, {
+"base": "Reference",
+"class": "RichPresence",
+"language": "GDScript",
+"path": "res://addons/godot_editor_discord_presence/Discord RPC/ipc/module/rich presence/RichPresence.gd"
+}, {
+"base": "Reference",
+"class": "RichPresenceButton",
+"language": "GDScript",
+"path": "res://addons/godot_editor_discord_presence/Discord RPC/ipc/module/rich presence/RichPresenceButton.gd"
+}, {
+"base": "IPCModule",
+"class": "RichPresenceModule",
+"language": "GDScript",
+"path": "res://addons/godot_editor_discord_presence/Discord RPC/ipc/module/rich presence/RichPresenceModule.gd"
+}, {
 "base": "Nozzle",
 "class": "RocketNozzle",
 "language": "GDScript",
@@ -499,6 +549,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/State.gd"
 }, {
+"base": "",
+"class": "StreamPeerUnix",
+"language": "NativeScript",
+"path": "res://addons/godot_editor_discord_presence/godot-unix-socket/unix-socket.gdns"
+}, {
 "base": "Reference",
 "class": "SubtractionOperation",
 "language": "GDScript",
@@ -520,6 +575,26 @@ _global_script_classes=[ {
 "path": "res://scenes/actors/mario/nozzles/Turbo.gd"
 }, {
 "base": "Reference",
+"class": "URLUtil",
+"language": "GDScript",
+"path": "res://addons/godot_editor_discord_presence/Discord RPC/util/URLUtil.gd"
+}, {
+"base": "Reference",
+"class": "UUID",
+"language": "GDScript",
+"path": "res://addons/godot_editor_discord_presence/Discord RPC/util/UUID.gd"
+}, {
+"base": "IPCPipe",
+"class": "UnixPipe",
+"language": "GDScript",
+"path": "res://addons/godot_editor_discord_presence/Discord RPC/ipc/pipe/UnixPipe.gd"
+}, {
+"base": "IPCPayload",
+"class": "UpdateRichPresencePayload",
+"language": "GDScript",
+"path": "res://addons/godot_editor_discord_presence/Discord RPC/ipc/module/rich presence/UpdateRichPresencePayload.gd"
+}, {
+"base": "Reference",
 "class": "UtilEnvironment",
 "language": "GDScript",
 "path": "res://interpreter/environments/UtilEnvironment.gd"
@@ -538,6 +613,11 @@ _global_script_classes=[ {
 "class": "WallSlideState",
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/WallSlide.gd"
+}, {
+"base": "IPCPipe",
+"class": "WindowsPipe",
+"language": "GDScript",
+"path": "res://addons/godot_editor_discord_presence/Discord RPC/ipc/pipe/WindowsPipe.gd"
 }, {
 "base": "State",
 "class": "WingMarioState",
@@ -625,6 +705,8 @@ _global_script_class_icons={
 "DiscordLobbyTransaction": "",
 "DiscordOverlayManager": "",
 "DiscordPartySize": "",
+"DiscordRPC": "",
+"DiscordRPCEnum": "",
 "DiscordResult": "",
 "DiscordUser": "",
 "DiveState": "",
@@ -646,6 +728,11 @@ _global_script_class_icons={
 "GroundPoundState": "",
 "Group": "",
 "HoverNozzle": "",
+"IPC": "",
+"IPCModule": "",
+"IPCPayload": "",
+"IPCPipe": "",
+"IPCUtil": "",
 "IdMap": "",
 "IfStatementInstruction": "",
 "InterpreterEnvironment": "",
@@ -681,6 +768,9 @@ _global_script_class_icons={
 "RainbowPowerup": "",
 "RainbowStarState": "",
 "RainbowStarWindupState": "",
+"RichPresence": "",
+"RichPresenceButton": "",
+"RichPresenceModule": "",
 "RocketNozzle": "",
 "Screen": "",
 "ScreenSizeUtil": "",
@@ -693,14 +783,20 @@ _global_script_class_icons={
 "SpinningState": "",
 "SquishedState": "",
 "State": "",
+"StreamPeerUnix": "",
 "SubtractionOperation": "",
 "SwimmingState": "",
 "TeleportObject": "",
 "TurboNozzle": "",
+"URLUtil": "",
+"UUID": "",
+"UnixPipe": "",
+"UpdateRichPresencePayload": "",
 "UtilEnvironment": "",
 "VanishPowerup": "",
 "WallJumpState": "",
 "WallSlideState": "",
+"WindowsPipe": "",
 "WingMarioState": "",
 "WingPowerup": "",
 "clipboard_util": "",

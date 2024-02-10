@@ -32,3 +32,4 @@ addons/godot_editor_discord_presence/LICENSE.md
 addons/godot_editor_discord_presence/plugin.cfg
 addons/godot_editor_discord_presence/plugin.gd
 addons/godot_editor_discord_presence/README.md
+scenes/menu/loading/loading.tscn

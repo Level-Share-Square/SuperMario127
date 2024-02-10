@@ -4,6 +4,7 @@ var speed = 10
 
 onready var path : Path2D = $Path2D
 onready var pathfollow = $Path2D/PathFollow2D
+onready var sprite = $AnimatedSprite
 var curve = Curve2D.new()
 var custom_path = Curve2D.new()
 
@@ -63,12 +64,10 @@ func _ready():
 		
 func _process(_delta):
 	if curve != path.curve:
-		path.curve = curve
-		
+		path.curve = curve		
 func _physics_process(delta):
-	
-	print(state)
-	
+	sprite.look_at(position + path.curve.get_point_position(1))
+	sprite.rotation_degrees += 90
 	if enabled and mode == 0:
 		match(state):
 			states.IDLE:
@@ -101,33 +100,37 @@ func physics_process_holding(delta:float):
 	mario.sprite.rotation = lerp_angle(mario.sprite.rotation, pathfollow.rotation + 1.571, 0.07)
 	if mario.inputs[4][0]:
 		state = states.LAUNCH
+		
 		return
 		
 		
 # the launch star is launching mario
 func physics_process_launch(delta:float):
-	pathfollow.offset += speed
 	
-	momentum = (pathfollow.position - last_position) / (fps_util.PHYSICS_DELTA * 2)
+	pathfollow.offset += speed
+	var dif = pathfollow.position - last_position
+	momentum = dif / (fps_util.PHYSICS_DELTA * 2)
 	
 	last_position = pathfollow.position
 	
-	if(mario.sprite.rotation_degrees != pathfollow.rotation_degrees + 90):
-		mario.sprite.rotation = lerp_angle(mario.sprite.rotation, pathfollow.rotation + 1.571, speed / 200.0)
-	mario.position = lerp(mario.position, position + pathfollow.position, 0.05)
+
+	mario.sprite.look_at(to_global(pathfollow.position))
+	mario.sprite.rotation_degrees += 90
+	mario.position = lerp(mario.position, position + pathfollow.position, clamp(0.008 * speed, 0, 1))
 
 	
 	# reached end
-	if pathfollow.offset >= path.curve.get_baked_length():
+	#todo: fix exit velocity
+	if pathfollow.offset >= path.curve.get_baked_length() and mario.position.distance_to(to_global(pathfollow.position)) <= 32:
 		state = states.IDLE
-		mario.set_state_by_name("JumpState", delta)
-		mario.jump_animation = 2
+		mario.state._stop(delta)
 		mario.facing_direction = sign(momentum.x)
-		mario.velocity = Vector2(cos(mario.sprite.rotation), sin(mario.sprite.rotation)) * speed
-		mario.velocity = momentum * 10*speed/(speed*speed)
+		mario.velocity = Vector2(0, -speed)
+		mario.velocity = dif.rotated(mario.get_angle_to(to_global(pathfollow.position)) + 1.571)
 		mario.last_position = mario.position
-		mario.sprite.rotation = 0
+		mario.rotation = 0
 		pathfollow.offset = 0
+		print(mario.velocity)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

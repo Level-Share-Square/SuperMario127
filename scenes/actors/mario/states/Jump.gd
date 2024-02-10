@@ -16,7 +16,9 @@ var ledge_buffer = 0
 var dive_buffer = 0
 var jump_playing = false
 var last_grounded = false
+var override = false
 var direction_on_tj = 1
+
 
 func _ready():
 	priority = 1
@@ -77,7 +79,13 @@ func _start(delta):
 
 func _update(_delta):
 	var sprite = character.sprite
-	if jump_playing and character.velocity.y < 0 and !character.is_grounded():
+	if override and character.rotating_jump:
+		if character.rotating_jump:
+			sprite.animation="tripleJumpRight"
+		if abs(sprite.rotation_degrees) > 360 or character.is_grounded():
+			override = false
+		
+	elif jump_playing and character.velocity.y < 0 and !character.is_grounded():
 		if character.facing_direction == 1:
 			if character.jump_animation == 0:
 				sprite.animation = "jumpRight"
@@ -104,7 +112,8 @@ func _update(_delta):
 		jump_playing = false
 
 func _stop_check(_delta):
-	return character.velocity.y > 0
+	if(!override):
+		return character.velocity.y > 0
 
 func _general_update(delta):
 	var sprite = character.sprite

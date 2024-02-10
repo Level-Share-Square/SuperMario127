@@ -446,6 +446,9 @@ func show() -> void:
 
 # new_state is of type State, however adding static typing would cause a cyclic dependency
 func set_state(new_state: Node, delta: float) -> void:
+	if(is_instance_valid(state)):
+		if(state.name=="LaunchStarState"):
+			return
 	last_state = state
 	state = null
 	if is_instance_valid(last_state):
