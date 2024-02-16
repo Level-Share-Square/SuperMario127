@@ -1,23 +1,30 @@
 extends GameObject
 
-var speed = 10
+
 
 onready var path : Path2D = $Path2D
 onready var pathfollow = $Path2D/PathFollow2D
-onready var sprite = $AnimatedSprite
+onready var innerstar = $InnerStar
+onready var outerstar = $OuterStar
+onready var speed_tween = $SpeedTween
+onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
+onready var launch_noise : AudioStream = preload("res://scenes/actors/objects/cannon/nsmbwiiBobombCannon.wav")
+onready var player_detector = $PlayerDetector
+
+enum states {IDLE, HOLDING, PRELAUNCH, LAUNCH}
+var state = states.IDLE
+var mario : Character
+#amount of time mario stays floating in the launch star before being dropped
+var float_timer = 4
+var last_position
+
+var speed = 10
 var curve = Curve2D.new()
 var custom_path = Curve2D.new()
 
-onready var player_detector = $PlayerDetector
 
-enum states {IDLE, HOLDING, LAUNCH}
-var state = states.IDLE
-var mario : Character
-var old_gravity_scale = 1.0
-#amount of time mario stays floating in the launch star before being dropped
-var float_timer = 4
-var momentum = 0
-var last_position
+
+
 
 func _set_properties():
 	savable_properties = ["curve", "custom_path", "speed"]
@@ -29,9 +36,6 @@ func _set_property_values():
 	set_property("speed", speed)
 
 func invalid_curve(check : Curve2D):
-	print(is_instance_valid(check))
-	print(check.get_point_count())
-	print(check.get_baked_points())
 	if(!is_instance_valid(check) or check.get_point_count() == 0):
 		return true
 	else:
@@ -45,35 +49,24 @@ func _ready():
 		curve.add_point(Vector2(0, -600))
 	if(invalid_curve(path.curve)):
 		path.curve = curve
-		
-#	if(invalid_curve(curve) and invalid_curve(path.curve)):
-#		print("one")
-#		path.curve.add_point(Vector2(0,0))
-#		path.curve.add_point(Vector2(0, -64))
-#		curve = path.curve
-#	elif(invalid_curve(curve)):
-#		path.curve.add_point(Vector2(0,0))
-#		path.curve.add_point(Vector2(0, -64))
-#		curve = path.curve
-#	# should never run
-#	else:
-#		print("three")
-#		path.curve = curve
-		
 	last_position = position
 		
 func _process(_delta):
 	if curve != path.curve:
 		path.curve = curve		
 func _physics_process(delta):
-	sprite.look_at(position + path.curve.get_point_position(1))
-	sprite.rotation_degrees += 90
+	innerstar.look_at(position + path.curve.get_point_position(1))
+	outerstar.look_at(position + path.curve.get_point_position(1))
+	innerstar.rotation_degrees += 90
+	outerstar.rotation_degrees += 90
 	if enabled and mode == 0:
 		match(state):
 			states.IDLE:
 				physics_process_idle(delta)
 			states.HOLDING:
 				physics_process_holding(delta)
+			states.PRELAUNCH:
+				physics_process_prelaunch(delta)
 			states.LAUNCH:
 				physics_process_launch(delta)
 
@@ -81,10 +74,22 @@ func _physics_process(delta):
 func physics_process_idle(delta:float):
 	for body in player_detector.get_overlapping_bodies():
 		if body.name.begins_with("Character"):
+			#if mario triggers a launch star while already launching
+			if body.inputs[4][0] and body.state and body.state.name == "LaunchStarState":
+				mario = body
+				mario.state._stop(delta)
+				mario.set_state_by_name("LaunchStarState", delta)
+				mario.connect("state_changed", self, "cancel_launch")
+				state = states.PRELAUNCH
+				speed_tween.interpolate_method(outerstar, "change_speed", 50, 0, 1, 1, 1)
+				speed_tween.interpolate_method(innerstar, "change_speed", 50, 0, 1, 1, 1)
+				speed_tween.interpolate_property(innerstar, "position", innerstar.position, innerstar.position + Vector2(0, 20), 1, 0, 1)
+				speed_tween.start()
 			#this is what lets mario fall
-			if float_timer > 0:
+			if float_timer > 0 and body.state and body.state.name != "LaunchStarState":
 				mario = body
 				mario.set_state_by_name("LaunchStarState", delta)
+				mario.connect("state_changed", self, "cancel_launch")
 				state = states.HOLDING
 			return
 	float_timer = 3
@@ -94,43 +99,69 @@ func physics_process_holding(delta:float):
 	float_timer -= delta
 	if(float_timer <= 0):
 		state = states.IDLE
-		mario.set_state_by_name("FallState", delta)
+		mario.state._stop(delta)
 		return
 	mario.position = lerp(mario.position, position, 0.1)
 	mario.sprite.rotation = lerp_angle(mario.sprite.rotation, pathfollow.rotation + 1.571, 0.07)
 	if mario.inputs[4][0]:
-		state = states.LAUNCH
-		
+		state = states.PRELAUNCH
+		speed_tween.interpolate_method(outerstar, "change_speed", 50, 0, 1, 1, 1)
+		speed_tween.interpolate_method(innerstar, "change_speed", 50, 0, 1, 1, 1)
+		speed_tween.interpolate_property(innerstar, "position", innerstar.position, innerstar.position + Vector2(0, 20), 1, 0, 1)
+		speed_tween.start()
 		return
 		
+func physics_process_prelaunch(delta:float):
+	# for mid-launch launch
+	if(mario.state and mario.state.name != "LaunchStarState"):
+		mario.set_state_by_name("LaunchStarState", delta)
+		
+	if !speed_tween.is_active():
+		
+		speed_tween.interpolate_method(outerstar, "change_speed", 0, 1, 0.5, 1, 1, 0)
+		speed_tween.interpolate_method(innerstar, "change_speed", 0, 1, 0.5, 1, 1, 0)
+		speed_tween.interpolate_property(innerstar, "position", innerstar.position, innerstar.position - Vector2(0, 20), 0.1, 0, 1)
+		speed_tween.start()
+		audio_player.stream = launch_noise
+		audio_player.play()
+		state = states.LAUNCH
+	mario.position = to_global(innerstar.position)
+	pass
 		
 # the launch star is launching mario
-func physics_process_launch(delta:float):
-	
+func physics_process_launch(delta:float):	
 	pathfollow.offset += speed
-	var dif = pathfollow.position - last_position
-	momentum = dif / (fps_util.PHYSICS_DELTA * 2)
+	var dif = mario.position - last_position
 	
-	last_position = pathfollow.position
+	last_position = mario.position
 	
 
 	mario.sprite.look_at(to_global(pathfollow.position))
 	mario.sprite.rotation_degrees += 90
 	mario.position = lerp(mario.position, position + pathfollow.position, clamp(0.008 * speed, 0, 1))
 
-	
+	if speed_tween.is_active():
+		mario.camera.auto_move = false
+	else:
+		mario.camera.auto_move = true
 	# reached end
 	#todo: fix exit velocity
-	if pathfollow.offset >= path.curve.get_baked_length() and mario.position.distance_to(to_global(pathfollow.position)) <= 32:
-		state = states.IDLE
+	
+	if pathfollow.offset >= path.curve.get_baked_length() and mario.position.distance_to(to_global(pathfollow.position)) <= 36:
 		mario.state._stop(delta)
-		mario.facing_direction = sign(momentum.x)
+		state = states.IDLE
+		mario.facing_direction = sign(dif.x)
 		mario.velocity = Vector2(0, -speed)
-		mario.velocity = dif.rotated(mario.get_angle_to(to_global(pathfollow.position)) + 1.571)
+		mario.velocity = dif.rotated(mario.get_angle_to(to_global(pathfollow.position)) + 1.571) * speed
+		mario.velocity = Vector2(0, -speed).rotated(mario.get_angle_to(to_global(pathfollow.position)) + 1.571)
+		mario.velocity = dif
 		mario.last_position = mario.position
 		mario.rotation = 0
-		pathfollow.offset = 0
 		print(mario.velocity)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+		
+func cancel_launch(new, old):
+	print("cancelling")
+	state = states.IDLE
+	pathfollow.offset = 10
+	mario.disconnect("state_changed", self, "cancel_launch")
+

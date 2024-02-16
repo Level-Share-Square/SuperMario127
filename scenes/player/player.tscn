@@ -1173,6 +1173,9 @@ drag_margin_bottom = 0.0
 editor_draw_screen = false
 script = ExtResource( 4 )
 character = NodePath("../World/Character")
+background = NodePath("../Backgrounds")
+
+[node name="Tween" type="Tween" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
 
 [node name="World" type="Node2D" parent="Viewports/ViewportContainer/Viewport"]
 script = ExtResource( 21 )
@@ -1234,6 +1237,8 @@ drag_margin_bottom = 0.0
 editor_draw_screen = false
 script = ExtResource( 4 )
 character = NodePath("../../../ViewportContainer/Viewport/World/Character2")
+
+[node name="Tween" type="Tween" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer2/Viewport" instance=ExtResource( 13 )]
 

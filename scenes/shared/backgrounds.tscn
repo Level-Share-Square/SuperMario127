@@ -8,6 +8,7 @@ script = ExtResource( 2 )
 
 [node name="Parallax" type="ParallaxBackground" parent="."]
 layer = -1
+scroll_ignore_camera_zoom = true
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -128

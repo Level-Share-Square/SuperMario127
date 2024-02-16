@@ -26,16 +26,19 @@ func _start(_delta):
 	character.gravity_scale = 0
 	character.sprite.animation = "spinning"
 	character.sprite.speed_scale = 1.5
+	character.camera.set_zoom(Vector2(1.5, 1.5))
 	
 func _stop(_delta):
 	print("stopping")
+	
 	character.gravity_scale = old_gravity_scale
+	character.camera.set_zoom(Vector2(1, 1))
 	var new_state = character.get_state_node("JumpState")
 	character.state = new_state
+	character.emit_signal("state_changed", self, new_state)
 	new_state._start(_delta)
 	new_state.override = true
 	character.rotating_jump = true
-	character.emit_signal("state_changed", self, new_state)
 	
-	print(character.sprite.animation)
+	
 	
