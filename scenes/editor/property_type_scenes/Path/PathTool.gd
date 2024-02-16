@@ -8,7 +8,7 @@ onready var object_property_button = $Control
 onready var cursor = $Sprite
 onready var line
 
-onready var selected_node : Control
+onready var selected_node : Node2D
 
 onready var path_node_container = Node2D.new()
 onready var nodes = Array()
@@ -77,9 +77,9 @@ func add_node(point : Vector2):
 	new_node.ui = weakref(self)
 	path_node_container.add_child(new_node)
 	nodes.push_back(new_node)
-	new_node.rect_position += point
+	new_node.position = point
 	line.add_point(point)
-	if(new_node.rect_position == Vector2(-8,-8)):
+	if(new_node.position == Vector2(0,0)):
 		new_node.first = true
 		
 func node_deleted():
