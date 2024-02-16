@@ -8,8 +8,11 @@ onready var innerstar = $InnerStar
 onready var outerstar = $OuterStar
 onready var speed_tween = $SpeedTween
 onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
-onready var launch_noise : AudioStream = preload("res://scenes/actors/objects/cannon/nsmbwiiBobombCannon.wav")
+onready var fly_noise_player : AudioStreamPlayer2D = $AudioStreamPlayer2D2
 onready var player_detector = $PlayerDetector
+onready var launch_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/launch.wav")
+onready var flying_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/flying.wav")
+onready var windup_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/windup.wav")
 
 enum states {IDLE, HOLDING, PRELAUNCH, LAUNCH}
 var state = states.IDLE
@@ -50,6 +53,7 @@ func _ready():
 	if(invalid_curve(path.curve)):
 		path.curve = curve
 	last_position = position
+	pathfollow.offset = 100
 		
 func _process(_delta):
 	if curve != path.curve:
@@ -80,11 +84,15 @@ func physics_process_idle(delta:float):
 				mario.state._stop(delta)
 				mario.set_state_by_name("LaunchStarState", delta)
 				mario.connect("state_changed", self, "cancel_launch")
+				mario.sprite.look_at(to_global(pathfollow.position))
+				mario.sprite.rotation_degrees += 90
 				state = states.PRELAUNCH
 				speed_tween.interpolate_method(outerstar, "change_speed", 50, 0, 1, 1, 1)
 				speed_tween.interpolate_method(innerstar, "change_speed", 50, 0, 1, 1, 1)
 				speed_tween.interpolate_property(innerstar, "position", innerstar.position, innerstar.position + Vector2(0, 20), 1, 0, 1)
 				speed_tween.start()
+				audio_player.stream = windup_noise
+				audio_player.play()
 			#this is what lets mario fall
 			if float_timer > 0 and body.state and body.state.name != "LaunchStarState":
 				mario = body
@@ -107,8 +115,12 @@ func physics_process_holding(delta:float):
 		state = states.PRELAUNCH
 		speed_tween.interpolate_method(outerstar, "change_speed", 50, 0, 1, 1, 1)
 		speed_tween.interpolate_method(innerstar, "change_speed", 50, 0, 1, 1, 1)
-		speed_tween.interpolate_property(innerstar, "position", innerstar.position, innerstar.position + Vector2(0, 20), 1, 0, 1)
+		speed_tween.interpolate_property(innerstar, "position", innerstar.position, (innerstar.position + Vector2(0, 20)).rotated(rotation), 1, 0, 1)
+		mario.sprite.frame = 4
+		speed_tween.interpolate_property(mario.sprite, "speed_scale", mario.sprite.speed_scale*2, 0.1, 1, 1, 1)
 		speed_tween.start()
+		audio_player.stream = windup_noise
+		audio_player.play()
 		return
 		
 func physics_process_prelaunch(delta:float):
@@ -120,11 +132,15 @@ func physics_process_prelaunch(delta:float):
 		
 		speed_tween.interpolate_method(outerstar, "change_speed", 0, 1, 0.5, 1, 1, 0)
 		speed_tween.interpolate_method(innerstar, "change_speed", 0, 1, 0.5, 1, 1, 0)
-		speed_tween.interpolate_property(innerstar, "position", innerstar.position, innerstar.position - Vector2(0, 20), 0.1, 0, 1)
+		speed_tween.interpolate_property(innerstar, "position", innerstar.position, outerstar.position, 0.1, 0, 1)
 		speed_tween.start()
+		mario.sprite.speed_scale = 1.5
 		audio_player.stream = launch_noise
 		audio_player.play()
+		fly_noise_player.stream = flying_noise
+		fly_noise_player.play()
 		state = states.LAUNCH
+		
 	mario.position = to_global(innerstar.position)
 	pass
 		
@@ -161,7 +177,8 @@ func physics_process_launch(delta:float):
 		
 func cancel_launch(new, old):
 	print("cancelling")
+	fly_noise_player.stop()
 	state = states.IDLE
-	pathfollow.offset = 10
+	pathfollow.offset = 100
 	mario.disconnect("state_changed", self, "cancel_launch")
 

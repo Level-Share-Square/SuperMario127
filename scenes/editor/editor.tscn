@@ -1,4 +1,4 @@
-[gd_scene load_steps=866 format=2]
+[gd_scene load_steps=867 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -832,6 +832,7 @@
 [ext_resource path="res://scenes/actors/objects/launch_star/preview.png" type="Texture" id=830]
 [ext_resource path="res://scenes/actors/objects/sling_star/icon.png" type="Texture" id=831]
 [ext_resource path="res://scenes/actors/objects/sling_star/preview.png" type="Texture" id=832]
+[ext_resource path="res://scenes/actors/objects/launch_star/icon.png" type="Texture" id=833]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1874,19 +1875,24 @@ object_center = Vector2( 16, 16 )
 icon = ExtResource( 341 )
 preview = ExtResource( 342 )
 
-[node name="LaunchStar" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 108
-is_object = true
-icon = ExtResource( 830 )
-preview = ExtResource( 830 )
-
 [node name="SlingStar" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
 object_id = 109
 is_object = true
+change_to = "LaunchStar"
+items_in_sequence = 2
 icon = ExtResource( 831 )
 preview = ExtResource( 832 )
+
+[node name="LaunchStar" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 108
+is_object = true
+change_to = "SlingStar"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 833 )
+preview = ExtResource( 830 )
 
 [node name="SwitchesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
