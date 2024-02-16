@@ -125,6 +125,6 @@ func _confirm_pressed():
 	var return_curve = object_property_button.get_value()
 	return_curve.clear_points()
 	for node in nodes:
-		return_curve.add_point(node.rect_position)
+		return_curve.add_point(node.position)
 	object_property_button.set_value(return_curve)
 	close()

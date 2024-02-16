@@ -48,7 +48,7 @@ func _activated_update(delta):
 	if character.inputs[0][0] and !character.inputs[1][0]:
 		character.facing_direction = -1
 	elif character.inputs[1][0] and !character.inputs[0][0]:
-		character.facing_direction - 1
+		character.facing_direction = 1
 	
 	character.water_check.enabled = true if !character.water_detector.get_overlapping_areas().size() > 0 else false
 	if character.water_check.is_colliding() and !character.water_detector.get_overlapping_areas().size() > 0:

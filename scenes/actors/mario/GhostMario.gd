@@ -75,6 +75,6 @@ func _physics_process(delta):
 			file.close()
 			if frame_counter < ghost_anim.size() - 2:
 				frame_counter += 1
-			animation = ANIM_IDS[ghost_anim[frame_counter]]
-			rotation_degrees = ghost_rotation[frame_counter]
-			position = ghost_pos[frame_counter]
+			#animation = ANIM_IDS[ghost_anim[frame_counter]]
+			#rotation_degrees = ghost_rotation[frame_counter]
+			#position = ghost_pos[frame_counter]
