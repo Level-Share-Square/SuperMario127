@@ -1,4 +1,4 @@
-extends TextureButton
+extends Node2D
 
 #the previous and next nodes in the path
 var first : bool
@@ -19,14 +19,6 @@ func delete():
 func _process(delta):
 	pass
 
-func _on_PathNode_gui_input(event):
-	if event is InputEventMouseButton:
-		ui.get_ref()._click_buffer = 0
-		if event.pressed and event.button_index == BUTTON_LEFT:
-			select()
-		elif event.pressed and event.button_index == BUTTON_RIGHT:
-			delete()
-
 func select():
 	selected = true
 	ui.get_ref().selected_node = self
@@ -39,3 +31,12 @@ func deselect():
 	ui.get_ref().current_mode = 0
 	left_handle.hide()
 	right_handle.hide()
+
+
+func _on_PathNodeButton_gui_input(event):
+	if event is InputEventMouseButton:
+		ui.get_ref()._click_buffer = 0
+		if event.pressed and event.button_index == BUTTON_LEFT:
+			select()
+		elif event.pressed and event.button_index == BUTTON_RIGHT:
+			delete()
