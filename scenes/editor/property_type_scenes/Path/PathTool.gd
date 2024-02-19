@@ -54,13 +54,7 @@ func _process(delta):
 		else:
 			_click_buffer += 1
 
-			
-			
 
-		
-
-		
-		
 func _gui_input(event) -> void:
 	if event.is_action_released("place"):
 		if current_mode == MODE_PLACE:
@@ -78,7 +72,8 @@ func add_node(point : Vector2):
 	path_node_container.add_child(new_node)
 	nodes.push_back(new_node)
 	new_node.position = point
-	line.add_point(point)
+	line.get_node("path").curve.add_point(point)
+	update_line()
 	if(new_node.position == Vector2(0,0)):
 		new_node.first = true
 		
@@ -120,6 +115,8 @@ func set_object_property_button(button: Control):
 func close_pressed():
 	close()
 
+func update_line():
+	line.points = line.get_node("path").curve.get_baked_points()
 
 func _confirm_pressed():
 	var return_curve = object_property_button.get_value()

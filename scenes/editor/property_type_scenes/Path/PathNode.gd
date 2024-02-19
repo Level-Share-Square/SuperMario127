@@ -5,6 +5,8 @@ var first : bool
 var ui
 var selected : bool = false
 
+var handles_active: bool = false
+
 onready var left_handle = $HandleL
 onready var right_handle = $HandleR
 
@@ -23,8 +25,9 @@ func select():
 	selected = true
 	ui.get_ref().selected_node = self
 	ui.get_ref().current_mode = 1
-	left_handle.show()
-	right_handle.show()
+	if handles_active:
+		left_handle.show()
+		right_handle.show()
 
 func deselect():
 	ui.get_ref().selected_node = null
@@ -32,11 +35,23 @@ func deselect():
 	left_handle.hide()
 	right_handle.hide()
 
+func activate_handles():
+	handles_active = true
+
+func deactivate_handles():
+	handles_active = false
+	left_handle.hide()
+	right_handle.hide()
 
 func _on_PathNodeButton_gui_input(event):
 	if event is InputEventMouseButton:
 		ui.get_ref()._click_buffer = 0
 		if event.pressed and event.button_index == BUTTON_LEFT:
+			if !handles_active && Input.is_action_pressed("path_editor_modkey"):
+				activate_handles()
 			select()
 		elif event.pressed and event.button_index == BUTTON_RIGHT:
+			if handles_active && Input.is_action_pressed("path_editor_modkey"):
+				deactivate_handles()
+				return
 			delete()
