@@ -231,16 +231,16 @@ script = ExtResource( 2 )
 [node name="Upper" type="AnimatedSprite" parent="Star"]
 z_index = -2
 frames = SubResource( 26 )
-frame = 19
+frame = 3
 playing = true
 
 [node name="Lower" type="AnimatedSprite" parent="Star"]
 frames = SubResource( 51 )
-frame = 14
+frame = 22
 playing = true
 
 [node name="Tween" type="Tween" parent="."]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 0.132431, 13.2433 )
-volume_db = 20.0
+volume_db = 15.0

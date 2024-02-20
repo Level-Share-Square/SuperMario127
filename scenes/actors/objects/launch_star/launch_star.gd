@@ -153,9 +153,10 @@ func physics_process_prelaunch(delta:float):
 # the launch star is launching mario
 func physics_process_launch(delta:float):	
 	pathfollow.offset += speed
-	var dif = mario.position - last_position
-	
-	last_position = mario.position
+	var dif = to_global(pathfollow.position) - last_position
+	print(dif)
+	if !pathfollow.offset >= path.curve.get_baked_length():
+		last_position = to_global(pathfollow.position)
 	
 
 	mario.sprite.look_at(to_global(pathfollow.position))
@@ -170,13 +171,18 @@ func physics_process_launch(delta:float):
 	#todo: fix exit velocity
 	
 	if pathfollow.offset >= path.curve.get_baked_length() and mario.position.distance_to(to_global(pathfollow.position)) <= 36:
+		mario.velocity = dif
+		mario.velocity = Vector2(0, -speed)
 		mario.state._stop(delta)
 		state = states.IDLE
-		mario.facing_direction = sign(dif.x)
 		mario.velocity = Vector2(0, -speed)
 		mario.velocity = dif.rotated(mario.get_angle_to(to_global(pathfollow.position)) + 1.571) * speed
 		mario.velocity = Vector2(0, -speed).rotated(mario.get_angle_to(to_global(pathfollow.position)) + 1.571)
 		mario.velocity = dif
+		var direction = Vector2(pathfollow.position.x - mario.position.x, pathfollow.position.y - mario.position.y)
+		direction = direction.normalized()
+		mario.velocity = direction * speed * 100
+		mario.velocity = dif * 30
 		mario.last_position = mario.position
 		mario.rotation = 0
 		

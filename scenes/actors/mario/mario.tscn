@@ -1,4 +1,4 @@
-[gd_scene load_steps=165 format=2]
+[gd_scene load_steps=168 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -432,6 +432,21 @@ animations = [ {
 "name": "default",
 "speed": 24.0
 } ]
+
+[sub_resource type="Animation" id=93]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 360.0 ]
+}
 
 [sub_resource type="Animation" id=61]
 length = 0.8
@@ -945,6 +960,86 @@ tracks/11/keys = {
 "values": [ 0.0 ]
 }
 
+[sub_resource type="Animation" id=92]
+resource_name = "triple_jump"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "tripleJumpLeft", "fallLeft" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.594, 0.95 ),
+"update": 0,
+"values": [ 0.0, -360.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:facing_direction")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ -1 ]
+}
+
+[sub_resource type="Animation" id=94]
+resource_name = "triple_jump_right"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "tripleJumpRight", "fallRight" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.594, 0.95 ),
+"update": 0,
+"values": [ 0.0, -360.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:facing_direction")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
 [sub_resource type="AtlasTexture" id=66]
 atlas = ExtResource( 61 )
 region = Rect2( 0, 0, 27, 31 )
@@ -1050,6 +1145,7 @@ bottom_pos_dive_offset = Vector2( 0, 3 )
 cutout_death = ExtResource( 10 )
 cutout_circle = ExtResource( 9 )
 cutout_shine = ExtResource( 54 )
+facing_direction = -1
 mario_frames = ExtResource( 1 )
 luigi_frames = ExtResource( 21 )
 mario_alt_frames = ExtResource( 15 )
@@ -1115,19 +1211,16 @@ shape = SubResource( 7 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-modulate = Color( 0.933333, 0.933333, 0.933333, 0.933333 )
-position = Vector2( 0, 0.133333 )
 rotation = 6.28319
-scale = Vector2( 0.99, 0.99 )
 frames = ExtResource( 1 )
-animation = "idleRight"
+animation = "tripleJumpLeft"
 playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 44 )
 animation = "swimming"
-frame = 8
+frame = 7
 playing = true
 script = ExtResource( 63 )
 
@@ -1661,26 +1754,29 @@ frame = -1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 93 )
 anims/backflip = ExtResource( 32 )
 anims/backflip_right = SubResource( 61 )
 anims/enter_door = SubResource( 62 )
 anims/exit_door = SubResource( 63 )
 anims/shine_dance = SubResource( 64 )
 anims/shine_dance_stop = SubResource( 65 )
+anims/triple_jump = SubResource( 92 )
+anims/triple_jump_right = SubResource( 94 )
 
 [node name="CollectedShineOutline" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 10
+frame = 6
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( -1, -70 )
 frames = ExtResource( 55 )
-frame = 8
+frame = 2
 speed_scale = 3.0
 playing = true
 
@@ -1701,7 +1797,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 8
+frame = 7
 playing = true
 script = ExtResource( 34 )
 
@@ -1709,7 +1805,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 10
+frame = 9
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
