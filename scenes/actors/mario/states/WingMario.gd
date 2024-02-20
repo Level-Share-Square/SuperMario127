@@ -33,6 +33,7 @@ func _start(_delta):
 	# Don't even question it, it just works
 	rotation_down = clamp(90 + sqrt(0.0 if character.velocity.y < 0 else character.velocity.y), 90, 180)
 	momentum = sqrt(character.velocity.length()) * 10
+	character.camera.set_zoom_tween(Vector2(1.5, 1.5), 1.2)
 
 func _update(delta):
 	# Things can - and probably should - be tweaked here
@@ -139,7 +140,8 @@ func _stop(delta):
 			character.set_state_by_name("SlideState", delta)
 		else:
 			character.set_state_by_name("DiveState", delta)
-
+	character.camera.zoom_tween.remove_all()
+	character.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 func _stop_check(_delta):
 	return character.is_grounded() or (character.powerup == null or character.powerup.id != "Wing") or character.inputs[5][1]
 

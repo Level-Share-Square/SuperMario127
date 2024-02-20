@@ -154,6 +154,7 @@ func fire_cannon() -> void:
 	stored_character.controllable = true
 	stored_character.movable = true
 	stored_character.modulate.a = 1
+	stored_character.camera.zoom_tween.remove_all()
 	stored_character.camera.set_zoom_tween(Vector2(1,1), 0.5)
 	invuln_timer.start()
 	#set the player so they will fire out of the cannon properly with velocity and such

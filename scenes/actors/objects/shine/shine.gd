@@ -144,10 +144,12 @@ func _physics_process(_delta : float) -> void:
 				ambient_sound.playing = false
 				ghost.visible = true
 				animated_sprite.visible = false
+				ray_sprite.self_modulate = Color(255, 255, 255, 0)
 			else:
 				if ambient_sound.playing == is_blue:
 					ambient_sound.playing = !is_blue
 				ghost.visible = false
+				ray_sprite.self_modulate = WHITE_COLOR
 				animated_sprite.visible = true
 		# need to change this to also take into account player 2
 		ambient_sound.volume_db = -16 + -abs(camera.global_position.distance_to(global_position)/25)
