@@ -14,6 +14,7 @@ export var collected_particles : StreamTexture
 
 onready var animated_sprite : AnimatedSprite = $AnimatedSprite
 onready var outline_sprite : AnimatedSprite = $AnimatedSpriteOutline
+onready var ray_sprite : Sprite = $Sprite
 onready var particles : Particles2D = $AnimatedSprite/Particles2D
 onready var ghost : Sprite = $Ghost
 onready var area : Area2D = $Area2D
@@ -125,6 +126,7 @@ func _process(_delta):
 
 func _physics_process(_delta : float) -> void:
 	animated_sprite.flip_h = !do_kick_out
+	ray_sprite.rotation_degrees += 0.6
 	if !animated_sprite.playing: #looks like if it is not set to playing, some manual animation is done instead
 		#warning-ignore:integer_division
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
@@ -238,6 +240,7 @@ func collect(body : PhysicsBody2D) -> void:
 		Singleton.Music.volume_multiplier = 0
 
 		collect_sound.play() 
+		character.set_zoom_tween(Vector2(0.8, 0.8), 0.5)
 		collected = true
 		visible = false
 
@@ -263,6 +266,7 @@ func start_shine_dance() -> void:
 	
 	character.sprite.animation = "shineDance"
 	character.anim_player.play("shine_dance")
+	
 	
 	Singleton.Music.play_temporary_music(COURSE_CLEAR_MUSIC_ID, COURSE_CLEAR_MUSIC_VOLUME)
 	

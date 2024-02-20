@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://assets/particles/shiny_particle_material.tres" type="Material" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/actors/mario/particles/recolorable_sparkles.png" type="Texture" id=9]
 [ext_resource path="res://scenes/actors/objects/shine/frames_recolorable.tres" type="SpriteFrames" id=10]
 [ext_resource path="res://scenes/actors/objects/shine/frames_collected.tres" type="SpriteFrames" id=11]
+[ext_resource path="res://scenes/actors/objects/shine/ray.png" type="Texture" id=12]
 
 [sub_resource type="StreamTexture" id=1]
 
@@ -189,13 +190,9 @@ process_parent = true
 
 [node name="AnimatedSpriteOutline" type="AnimatedSprite" parent="."]
 frames = SubResource( 20 )
-frame = 8
-playing = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-frame = 8
-playing = true
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]
 show_behind_parent = true
@@ -216,3 +213,8 @@ anims/appear = SubResource( 22 )
 
 [node name="UnpauseTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -1, 2 )
+z_index = -1
+texture = ExtResource( 12 )

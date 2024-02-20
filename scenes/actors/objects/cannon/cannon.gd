@@ -128,7 +128,7 @@ func _on_animation_finished(anim_name : String) -> void:
 		stored_character.camera.focus_on = cannon_camera_focus
 		stored_character.controllable = true
 		stored_character.set_state_by_name("NoActionState", get_physics_process_delta_time())
-		
+		stored_character.camera.set_zoom_tween(Vector2(1.5, 1.5), 0.8)
 		sprite_fuse.visible = true
 
 		#normally we would change current volume, but process for the audio stream player is disabled until the cannon fires
@@ -154,6 +154,7 @@ func fire_cannon() -> void:
 	stored_character.controllable = true
 	stored_character.movable = true
 	stored_character.modulate.a = 1
+	stored_character.camera.set_zoom_tween(Vector2(1,1), 0.5)
 	invuln_timer.start()
 	#set the player so they will fire out of the cannon properly with velocity and such
 	stored_character.position = cannon_exit_position.global_position

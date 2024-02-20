@@ -811,6 +811,20 @@ tracks/15/keys = {
 "update": 1,
 "values": [ false, false ]
 }
+tracks/16/type = "method"
+tracks/16/path = NodePath(".")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 1.925 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ Vector2( 2, 2 ), 3.0 ],
+"method": "set_zoom_tween"
+} ]
+}
 
 [sub_resource type="Animation" id=65]
 length = 0.95
@@ -958,6 +972,20 @@ tracks/11/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0.0 ]
+}
+tracks/12/type = "method"
+tracks/12/path = NodePath(".")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ Vector2( 1, 1 ), 3.0 ],
+"method": "set_zoom_tween"
+} ]
 }
 
 [sub_resource type="Animation" id=92]
@@ -1211,17 +1239,16 @@ shape = SubResource( 7 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 3 )
 rotation = 6.28319
 frames = ExtResource( 1 )
-animation = "tripleJumpLeft"
-playing = true
+animation = "armsOut"
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 44 )
-animation = "swimming"
-frame = 7
-playing = true
+animation = "shineDance"
+frame = 21
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
@@ -1769,20 +1796,21 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 6
+frame = 8
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( -1, -70 )
+scale = Vector2( 1e-05, 1e-05 )
 frames = ExtResource( 55 )
-frame = 2
+frame = 4
 speed_scale = 3.0
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
 show_behind_parent = true
 material = SubResource( 83 )
+emitting = false
 local_coords = false
 process_material = SubResource( 84 )
 texture = ExtResource( 56 )
@@ -1797,7 +1825,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 7
+frame = 9
 playing = true
 script = ExtResource( 34 )
 
@@ -1805,7 +1833,6 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 9
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]

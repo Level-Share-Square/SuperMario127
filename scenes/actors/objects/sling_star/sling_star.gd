@@ -61,6 +61,7 @@ func physics_process_idle(delta:float):
 				mario.state._stop(delta)
 				mario.set_state_by_name("LaunchStarState", delta)
 				state = states.PRELAUNCH
+				speed_tween.reset_all()
 				speed_tween.interpolate_method(star, "change_speed", 50, 0, 1, 1, 1)
 				speed_tween.interpolate_property(star, "position", star.position, star.position + Vector2(0, 20), 1, 0, 1)
 				mario.sprite.frame = 3
@@ -69,13 +70,15 @@ func physics_process_idle(delta:float):
 				audio_player.stream = windup_noise
 				audio_player.play()
 				mario.camera.auto_move = true
+				star.global_position = position
 			#this is what lets mario fall
 			if float_timer > 0 and body.state and body.state.name != "LaunchStarState":
 				print("catching")
 				mario = body
 				mario.set_state_by_name("LaunchStarState", delta)
 				state = states.HOLDING
-				
+				speed_tween.remove_all()
+				star.global_position = position
 			return
 	
 	float_timer = 3
@@ -104,7 +107,6 @@ func physics_process_holding(delta:float):
 func physics_process_prelaunch(delta:float):
 	mario.position = to_global(star.position)
 	mario.sprite.rotation = lerp_angle(mario.sprite.rotation, rotation, 0.07)
-	print(mario.sprite.speed_scale)
 	if !speed_tween.is_active():
 		speed_tween.interpolate_method(star, "change_speed", 0, 1, 0.5, 1, 1)
 		speed_tween.interpolate_property(star, "position", star.position, star.position - Vector2(0, 20), 1.5, 6, 1)

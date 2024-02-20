@@ -556,6 +556,8 @@ func player_hit(body : Node) -> void:
 			set_state_by_name("KnockbackState", 0)
 			sound_player.play_hit_sound()
 			
+func set_zoom_tween(target: Vector2, time : float):
+	camera.set_zoom_tween(target, time)
 
 func _process(delta: float) -> void:
 	
@@ -627,7 +629,6 @@ func get_weight() -> int:
 	return 2 if metal_voice else 1
 
 func _physics_process(delta: float) -> void:
-	
 	update_inputs()	
 	if state and (state.name == "NoActionState" or state.name == "LaunchStarState"):
 		return

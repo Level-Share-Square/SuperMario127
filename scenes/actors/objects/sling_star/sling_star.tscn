@@ -231,12 +231,12 @@ script = ExtResource( 2 )
 [node name="Upper" type="AnimatedSprite" parent="Star"]
 z_index = -2
 frames = SubResource( 26 )
-frame = 3
+frame = 17
 playing = true
 
 [node name="Lower" type="AnimatedSprite" parent="Star"]
 frames = SubResource( 51 )
-frame = 22
+frame = 12
 playing = true
 
 [node name="Tween" type="Tween" parent="."]
