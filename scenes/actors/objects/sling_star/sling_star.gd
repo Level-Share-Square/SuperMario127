@@ -110,7 +110,7 @@ func physics_process_prelaunch(delta:float):
 	print(mario.sprite.speed_scale)
 	if !speed_tween.is_active():
 		speed_tween.interpolate_method(star, "change_speed", 0, 1, 0.5, 1, 1, 0)
-		speed_tween.interpolate_property(star, "position", star.position, star.position - Vector2(0, 20), 0.1, 0, 1)
+		speed_tween.interpolate_property(star, "position", star.position, star.position - Vector2(0, 20), 1.5, 6, 1)
 		speed_tween.start()
 		audio_player.stream = launch_noise
 		audio_player.play()

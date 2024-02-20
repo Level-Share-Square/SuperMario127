@@ -33,6 +33,7 @@ func _stop(_delta):
 	
 	character.gravity_scale = old_gravity_scale
 	character.camera.set_zoom(Vector2(1, 1))
+	character.camera.auto_move = true
 	var new_state = character.get_state_node("JumpState")
 	character.state = new_state
 	character.emit_signal("state_changed", self, new_state)

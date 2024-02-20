@@ -65,6 +65,7 @@ func _input(event):
 	# Fix interference while overlapping a platform in midair
 
 func _process(_delta):
+	path.set_rotation_degrees(90)
 	if parts != last_parts:
 		platform.set_parts(parts)
 		if(mode==1):
@@ -113,6 +114,7 @@ onready var right_width = platform_sprite.patch_margin_right
 onready var part_width = platform_sprite.texture.get_width() - left_width - right_width
 
 func _ready():
+	
 	activated = !touch_start
 	$TouchLiftPlatform/StaticBody2D/Area2D/CollisionShape2D.disabled = false
 	platform.collision_shape.disabled = !enabled
@@ -158,7 +160,6 @@ func _ready():
 		
 
 		print(path.curve.get_point_count())
-
 func set_sprite_parts(sprite):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts
@@ -174,7 +175,7 @@ func _draw():
 func _physics_process(delta):
 	if(!activated):
 		return
-
+	
 	linear_offset += speed * max_speed * 120 * fps_util.PHYSICS_DELTA
 
 	if move_type != MT_LOOP:
