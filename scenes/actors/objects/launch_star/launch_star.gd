@@ -7,6 +7,7 @@ onready var pathfollow = $Path2D/PathFollow2D
 onready var innerstar = $InnerStar
 onready var outerstar = $OuterStar
 onready var speed_tween = $SpeedTween
+onready var animation_player = $AnimationPlayer
 onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 onready var fly_noise_player : AudioStreamPlayer2D = $AudioStreamPlayer2D2
 onready var player_detector = $PlayerDetector
@@ -44,6 +45,43 @@ func invalid_curve(check : Curve2D):
 	else:
 		return false
 		
+func set_state(to:int):
+	match(to):
+		states.IDLE:
+			mario.camera.auto_move = true
+			state = states.IDLE
+			return
+		states.HOLDING:
+			innerstar.global_position = position
+			mario.set_state_by_name("LaunchStarState", fps_util.PHYSICS_DELTA)
+			if(rotation_degrees < -180):
+				mario.facing_direction = 1
+			elif(rotation_degrees > -180 and rotation_degrees != 0):
+				mario.facing_direction = -1
+			state = states.HOLDING
+			return
+		states.WINDUP:
+			innerstar.global_position = position
+			animation_player.play("windup")
+			audio_player.stop()
+			audio_player.stream = windup_noise
+			audio_player.play()
+			mario.sprite.frame = 5
+			speed_tween.interpolate_property(mario.sprite, "speed_scale", mario.sprite.speed_scale*2, 0.1, 0.7, 1)
+			speed_tween.start()
+			mario.sprite.rotation_degrees = rotation_degrees
+			state = states.WINDUP
+			return
+		states.LAUNCH:
+			animation_player.play("launch")
+			audio_player.stop()
+			audio_player.stream = launch_noise
+			audio_player.play()
+			speed_tween.remove_all()
+			mario.state._stop(fps_util.PHYSICS_DELTA)
+			state = states.LAUNCH
+			return
+	
 
 func _ready():
 	# first creation of object

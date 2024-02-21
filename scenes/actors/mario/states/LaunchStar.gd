@@ -34,15 +34,16 @@ func _stop(_delta):
 	character.gravity_scale = old_gravity_scale
 	character.camera.set_zoom_tween(Vector2(1, 1), 1)
 	character.camera.auto_move = true
-	var new_state = character.get_state_node("SpinningState")
+	var new_state = character.get_state_node("FallState")
+	character.jump_animation = 3
 	character.state = new_state
 	character.emit_signal("state_changed", self, new_state)
-	new_state._start(_delta)
 #	new_state.override = true
-	if(character.velocity.x < 0):
-		character.anim_player.play("triple_jump")
-	else:
+	if(character.facing_direction == 1):
 		character.anim_player.play("triple_jump_right")
+		
+	else:
+		character.anim_player.play("triple_jump")
 	
 	
 	

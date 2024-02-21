@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://scenes/actors/objects/sling_star/sling_star.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/launch_star/launch_star_animatior.gd" type="Script" id=2]
@@ -216,6 +216,90 @@ animations = [ {
 "speed": 10.0
 } ]
 
+[sub_resource type="Animation" id=53]
+resource_name = "launch"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Star:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 20 ), Vector2( 0, -45 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Star:speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 30, 1 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0 ],
+"method": "set_state"
+} ]
+}
+
+[sub_resource type="Animation" id=52]
+resource_name = "windup"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Star:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 0.31864 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 20 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 3 ],
+"method": "set_state"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Star:speed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 0.65975, 1 ),
+"update": 0,
+"values": [ 70, 0 ]
+}
+
 [node name="SlingStar" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -231,12 +315,12 @@ script = ExtResource( 2 )
 [node name="Upper" type="AnimatedSprite" parent="Star"]
 z_index = -2
 frames = SubResource( 26 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="Lower" type="AnimatedSprite" parent="Star"]
 frames = SubResource( 51 )
-frame = 21
+frame = 22
 playing = true
 
 [node name="Tween" type="Tween" parent="."]
@@ -244,3 +328,7 @@ playing = true
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 0.132431, 13.2433 )
 volume_db = 15.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/launch = SubResource( 53 )
+anims/windup = SubResource( 52 )

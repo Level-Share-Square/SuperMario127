@@ -3,11 +3,12 @@ extends GameObject
 onready var speed_tween = $Tween
 onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 onready var player_detector = $PlayerDetector
+onready var animation_player = $AnimationPlayer
 onready var launch_noise : AudioStream = preload("res://scenes/actors/objects/sling_star/sfx/launch.wav")
 onready var windup_noise : AudioStream = preload("res://scenes/actors/objects/sling_star/sfx/windup.wav")
 onready var star = $Star
 
-enum states {IDLE, HOLDING, PRELAUNCH, LAUNCH}
+enum states {IDLE, HOLDING, WINDUP, LAUNCH}
 var state = states.IDLE
 var mario : Character
 #amount of time mario stays floating in the launch star before being dropped
@@ -27,6 +28,44 @@ func _set_properties():
 func _set_property_values():
 	set_property("launch_power", launch_power, 10)
 	
+func set_state(to:int):
+	match(to):
+		states.IDLE:
+			mario.camera.auto_move = true
+			state = states.IDLE
+			return
+		states.HOLDING:
+			star.global_position = position
+			mario.set_state_by_name("LaunchStarState", fps_util.PHYSICS_DELTA)
+			if(rotation_degrees < -180):
+				mario.facing_direction = 1
+			elif(rotation_degrees > -180 and rotation_degrees != 0):
+				mario.facing_direction = -1
+			state = states.HOLDING
+			return
+		states.WINDUP:
+			star.global_position = position
+			animation_player.play("windup")
+			audio_player.stop()
+			audio_player.stream = windup_noise
+			audio_player.play()
+			mario.sprite.frame = 5
+			speed_tween.interpolate_property(mario.sprite, "speed_scale", mario.sprite.speed_scale*2, 0.1, 0.7, 1)
+			speed_tween.start()
+			mario.sprite.rotation_degrees = rotation_degrees
+			state = states.WINDUP
+			return
+		states.LAUNCH:
+			animation_player.play("launch")
+			audio_player.stop()
+			audio_player.stream = launch_noise
+			audio_player.play()
+			speed_tween.remove_all()
+			mario.state._stop(fps_util.PHYSICS_DELTA)
+			mario.velocity = Vector2(1, -launch_power * 80).rotated(rotation)
+			state = states.LAUNCH
+			return
+	
 func _ready():
 	pass
 
@@ -44,8 +83,8 @@ func _physics_process(delta):
 				physics_process_idle(delta)
 			states.HOLDING:
 				physics_process_holding(delta)
-			states.PRELAUNCH:
-				physics_process_prelaunch(delta)
+			states.WINDUP:
+				physics_process_windup(delta)
 			states.LAUNCH:
 				physics_process_launch(delta)
 
@@ -54,31 +93,25 @@ func physics_process_idle(delta:float):
 	
 	for body in player_detector.get_overlapping_bodies():
 		if body.name.begins_with("Character"):
-			
+			mario = body
 			# mid flight interrupt
 			if body.inputs[4][0] and body.state and body.state.name == "LaunchStarState":
-				mario = body
 				mario.state._stop(delta)
 				mario.set_state_by_name("LaunchStarState", delta)
-				state = states.PRELAUNCH
-				speed_tween.reset_all()
-				speed_tween.interpolate_method(star, "change_speed", 50, 0, 1, 1, 1)
-				speed_tween.interpolate_property(star, "position", star.position, star.position + Vector2(0, 20), 1, 0, 1)
-				mario.sprite.frame = 3
-				speed_tween.interpolate_property(mario.sprite, "speed_scale", mario.sprite.speed_scale*2, 0.1, 1, 1, 1)
-				speed_tween.start()
-				audio_player.stream = windup_noise
-				audio_player.play()
+				set_state(2)
 				mario.camera.auto_move = true
-				star.global_position = position
+				
+			# special behavior for powerups
+			if is_instance_valid(mario.powerup) and (mario.powerup.get_name() == "WingPowerup" or mario.powerup.get_name() == "RainbowPowerup"):
+				if mario.powerup.get_name() == "WingPowerup":
+					mario.state._stop(delta)
+					mario.set_state_by_name("LaunchStarState", delta)
+				set_state(2)
 			#this is what lets mario fall
 			if float_timer > 0 and body.state and body.state.name != "LaunchStarState":
 				print("catching")
-				mario = body
-				mario.set_state_by_name("LaunchStarState", delta)
-				state = states.HOLDING
-				speed_tween.remove_all()
-				star.global_position = position
+				set_state(1)
+				
 			return
 	
 	float_timer = 3
@@ -88,43 +121,19 @@ func physics_process_holding(delta:float):
 	mario.velocity = Vector2(0,0)
 	float_timer -= delta
 	if(float_timer <= 0):
-		state = states.IDLE
 		mario.state._stop(delta)
+		set_state(0)
 		return
 	mario.position = lerp(mario.position, position, 0.1)
 	mario.sprite.rotation = lerp_angle(mario.sprite.rotation, rotation, 0.07)
 	if mario.inputs[4][0]:
-		state = states.PRELAUNCH
-		speed_tween.interpolate_method(star, "change_speed", 50, 0, 0.7, 1, 1)
-		speed_tween.interpolate_property(star, "position", star.position, star.position + Vector2(0, 20), 0.7, 0, 1)
-		mario.sprite.frame = 3
-		speed_tween.interpolate_property(mario.sprite, "speed_scale", mario.sprite.speed_scale*2, 0.1, 0.7, 1, 1)
-		speed_tween.start()
-		audio_player.stream = windup_noise
-		audio_player.play()
+		set_state(2)
 		return
 		
-func physics_process_prelaunch(delta:float):
+func physics_process_windup(delta:float):
 	mario.position = to_global(star.position)
-	mario.sprite.rotation = lerp_angle(mario.sprite.rotation, rotation, 0.07)
-	if !speed_tween.is_active():
-		speed_tween.interpolate_method(star, "change_speed", 0, 1, 0.5, 1, 1)
-		speed_tween.interpolate_property(star, "position", star.position, star.position - Vector2(0, 20), 1.5, 6, 1)
-		speed_tween.start()
-		audio_player.stream = launch_noise
-		audio_player.play()
-		mario.velocity = Vector2(1, -launch_power * 80).rotated(rotation)
-		mario.state._stop(delta)
-		mario.sound_player.play_double_jump_sound()
-		float_timer = 0
-		state = states.IDLE
-	
 		
 # the launch star is launching mario
 func physics_process_launch(delta:float):
-	cooldown -= delta
-	mario.sprite.rotation = lerp_angle(mario.sprite.rotation, 0, 0.07)
-	if(cooldown <= 0):
-		mario.sprite.rotation = 0
-		state = states.IDLE
+	pass
 
