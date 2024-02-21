@@ -93,9 +93,6 @@ patch_margin_top = 110
 patch_margin_right = 40
 patch_margin_bottom = 40
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Title" type="RichTextLabel" parent="."]
 margin_left = 24.0
@@ -244,14 +241,16 @@ margin_right = 464.0
 margin_bottom = 380.0
 texture = ExtResource( 18 )
 
-[node name="MusicNote" type="Label" parent="LevelSettings/Music"]
+[node name="MusicNote" type="LineEdit" parent="LevelSettings/Music"]
 margin_left = 127.0
 margin_top = 340.0
 margin_right = 422.0
 margin_bottom = 378.0
 custom_fonts/font = SubResource( 2 )
 align = 1
-valign = 1
+context_menu_enabled = false
+placeholder_text = "Loop point"
+placeholder_alpha = 0.35
 
 [node name="MusicTitle" type="LineEdit" parent="LevelSettings/Music"]
 margin_left = 97.0

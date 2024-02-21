@@ -21,18 +21,30 @@ func update_display():
 		
 		music_title.text = resource.title
 		music_note.text = resource.note
+		music_note.editable = false
 	else:
-		music_title.text = area.settings.music
-		music_note.text = "Custom Music URL"
+		var re = RegEx.new()
+		re.compile("(https:\\/\\/[^\\/]*)(.*)")
+		music_title.text = re.search(area.settings.music).get_string()
+		re.compile("(\\d+(?:\\.\\d+)?)")
+		music_note.editable = true
+		if not re.search(area.settings.music):
+			music_note.text = "0.00"
+		else:
+			music_note.text = re.search(area.settings.music).get_string()
 		
 func text_entered(text):
 	var re = RegEx.new()
-	re.compile("(https:\\/\\/[^\\/]*)(.*)")
+	
+	re.compile("(^https:\\/\\/[^\\/]*)(.*)")
 
-	if not re.search_all(text) or !text.ends_with(".ogg"):
-		music_note.text = "Invalid URL"
+	if not re.search_all(music_title.text) or !music_title.text.ends_with(".ogg"):
+		music_title.text = "Invalid URL"
 	else:
-		Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.music = text
+		re.compile("(\\d+(?:\\.\\d+)?)")
+		if not re.search(music_note.text):
+			music_note.text = "0.00"
+		Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.music = "LP" + music_note.text + "=" + music_title.text
 		update_display()
 
 func _ready():
@@ -43,6 +55,7 @@ func _ready():
 	var _connect4 = button_right.connect("mouse_entered", self, "button_hovered")
 	
 	var _connect5 = music_title.connect("text_entered", self, "text_entered")
+	var _connect6 = music_note.connect("text_entered", self, "text_entered")
 	update_display()
 	
 func button_hovered():
