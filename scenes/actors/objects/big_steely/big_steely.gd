@@ -1,6 +1,7 @@
 extends GameObject
 
 onready var area = $Steely/Area2D
+onready var shape = $Steely/Area2D/CollisionShape2D2
 onready var break_detector = $Steely/BreakDetector
 onready var platform_detector = $Steely/PlatformDetector
 onready var water_detector = $Steely/WaterDetector
@@ -33,6 +34,7 @@ var initial_scale
 var actual_scale
 
 var broken := false
+var fade_away := false
 var break_timer := 0.0
 var time_alive := 0.0
 
@@ -93,7 +95,7 @@ func _physics_process(delta):
 			gravity_scale = 0.3
 		else:
 			gravity_scale = 1
-		
+	
 		if fade_time != 0:
 			alpha = lerp(alpha, 1.0, delta * 3.333)
 			scale = scale.linear_interpolate(actual_scale, delta * 3.333)
@@ -105,6 +107,13 @@ func _physics_process(delta):
 				scale = actual_scale
 				modulate = Color(1, 1, 1, alpha)
 			return
+		if fade_away:
+			
+			alpha = lerp(alpha, -1, delta * 2)
+			modulate = Color(1, 1, 1, alpha)
+			if alpha <= 0:
+				print("free")
+				queue_free()
 		# Use the position difference to calculate velocity
 		# (the one in the physics body isn't accurate
 		# for hitting Mario)

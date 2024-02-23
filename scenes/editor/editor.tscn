@@ -1,4 +1,4 @@
-[gd_scene load_steps=867 format=2]
+[gd_scene load_steps=869 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -833,6 +833,8 @@
 [ext_resource path="res://scenes/actors/objects/sling_star/icon.png" type="Texture" id=831]
 [ext_resource path="res://scenes/actors/objects/sling_star/preview.png" type="Texture" id=832]
 [ext_resource path="res://scenes/actors/objects/launch_star/icon.png" type="Texture" id=833]
+[ext_resource path="res://scenes/actors/objects/big_steely_despawner/icon.png" type="Texture" id=834]
+[ext_resource path="res://scenes/actors/objects/big_steely_despawner/preview.png" type="Texture" id=835]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2392,6 +2394,13 @@ is_object = true
 object_center = Vector2( 16, 16 )
 icon = ExtResource( 144 )
 preview = ExtResource( 145 )
+
+[node name="BigSteelyDespawner" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 24 )
+object_id = 110
+is_object = true
+icon = ExtResource( 834 )
+preview = ExtResource( 835 )
 
 [node name="GrassGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )

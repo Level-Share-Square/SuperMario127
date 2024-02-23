@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/actors/objects/big_steely_despawner/big_steely_despawner.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 15, 32 )
+
+[node name="BigSteelyDespawner" type="Node2D"]
+z_index = -2
+script = ExtResource( 1 )
+
+[node name="Sprite" type="ColorRect" parent="."]
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
