@@ -37,6 +37,7 @@ func set_state(to:int):
 		states.HOLDING:
 			star.global_position = position
 			mario.set_state_by_name("LaunchStarState", fps_util.PHYSICS_DELTA)
+			mario.anim_player.stop()
 			if(rotation_degrees < -180):
 				mario.facing_direction = 1
 			elif(rotation_degrees > -180 and rotation_degrees != 0):
