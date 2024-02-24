@@ -163,7 +163,6 @@ func physics_process_windup(delta:float):
 func physics_process_launch(delta:float):	
 	pathfollow.offset += speed
 	var dif = to_global(pathfollow.position) - last_position
-	print(dif)
 	if !pathfollow.offset >= path.curve.get_baked_length():
 		last_position = to_global(pathfollow.position)
 	
@@ -171,6 +170,7 @@ func physics_process_launch(delta:float):
 	mario.sprite.look_at(to_global(pathfollow.position))
 	mario.sprite.rotation_degrees += 90
 	mario.position = lerp(mario.position, position + pathfollow.position, clamp(0.008 * speed, 0, 1))
+	mario.last_position = mario.position
 
 	# reached end
 	#todo: fix exit velocity
@@ -190,6 +190,5 @@ func physics_process_launch(delta:float):
 		mario.last_position = mario.position
 		
 func cancel_launch(new, old):
-	print("cancelling")
 	set_state(0)
 

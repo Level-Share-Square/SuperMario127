@@ -54,6 +54,7 @@ func set_state(to:int):
 			speed_tween.interpolate_property(mario.sprite, "speed_scale", mario.sprite.speed_scale*2, 0.1, 0.7, 1)
 			speed_tween.start()
 			mario.sprite.rotation_degrees = rotation_degrees
+			mario.anim_player.stop()
 			state = states.WINDUP
 			return
 		states.LAUNCH:
@@ -64,6 +65,7 @@ func set_state(to:int):
 			speed_tween.remove_all()
 			mario.state._stop(fps_util.PHYSICS_DELTA)
 			mario.velocity = Vector2(1, -launch_power * 80).rotated(rotation)
+			mario.sound_player.play_double_jump_sound()
 			state = states.LAUNCH
 			return
 	
@@ -110,7 +112,6 @@ func physics_process_idle(delta:float):
 				set_state(2)
 			#this is what lets mario fall
 			if float_timer > 0 and body.state and body.state.name != "LaunchStarState":
-				print("catching")
 				set_state(1)
 				
 			return
