@@ -126,7 +126,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 17 )
-frame = 15
+frame = 5
 playing = true
 
 [node name="UseArea" type="Area2D" parent="."]
@@ -143,3 +143,8 @@ volume_db = 6.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/touch = SubResource( 19 )
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 5.0
+default_color = Color( 0.4, 0.501961, 1, 0.694118 )

@@ -2,6 +2,7 @@ extends GameObject
 
 onready var use_area = $UseArea
 onready var anim_player = $AnimationPlayer
+onready var offset_line = $Line2D
 
 var tag := "default"
 var auto_activate := false
@@ -24,9 +25,19 @@ func _ready():
 	if enabled:
 		var _connect = use_area.connect("body_entered", self, "set_liquid_level")
 	yield(get_tree(), "physics_frame")
-	if auto_activate and mode != 1:
-		set_liquid_level(null)
-
+	if mode != 1:
+		offset_line.visible = false
+		if auto_activate:
+			set_liquid_level(null)
+	else:
+		offset_line.visible = true
+func _process(delta):
+	if mode == 1:
+		if(horizontal):
+			offset_line.set_point_position(1, Vector2(offset, 0))
+		else:
+			offset_line.set_point_position(1, Vector2(0, offset))
+		
 func set_liquid_level(body):
 	if body != null and visible:
 		anim_player.play("touch")
