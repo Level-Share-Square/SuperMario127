@@ -70,7 +70,8 @@ func set_state(to:int):
 			return
 	
 func _ready():
-	pass
+	if is_preview:
+		z_index = 2
 
 func _input(event):
 	pass

@@ -213,16 +213,13 @@ pause_animated_sprites = false
 process_parent = true
 
 [node name="AnimatedSpriteOutline" type="AnimatedSprite" parent="."]
-visible = false
 frames = SubResource( 20 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-visible = false
 frames = ExtResource( 1 )
 frame = 6
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]
-visible = false
 show_behind_parent = true
 material = SubResource( 21 )
 local_coords = false

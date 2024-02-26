@@ -6,6 +6,9 @@ func _ready():
 		if child is AnimatedSprite:
 			child.frame = 0
 			child.speed_scale = 1
+			child.position = position
+			if get_parent().is_preview:
+				child.z_index = 0
 			
 func _process(delta):
 	for child in get_children():

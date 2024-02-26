@@ -1197,7 +1197,7 @@ bottom_pos_dive_offset = Vector2( 0, 3 )
 cutout_death = ExtResource( 10 )
 cutout_circle = ExtResource( 9 )
 cutout_shine = ExtResource( 54 )
-current_jump = 1
+current_jump = 2
 jump_animation = 1
 mario_frames = ExtResource( 1 )
 luigi_frames = ExtResource( 21 )
@@ -1267,7 +1267,7 @@ disabled = true
 position = Vector2( 0, 3 )
 rotation = 6.28319
 frames = ExtResource( 1 )
-animation = "tripleJumpRight"
+animation = "tripleJumpLeft"
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
@@ -1821,14 +1821,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 5
+frame = 9
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 scale = Vector2( 1e-05, 1e-05 )
 frames = ExtResource( 55 )
-frame = 13
+frame = 10
 speed_scale = 3.0
 playing = true
 
@@ -1850,7 +1850,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 4
+frame = 3
 playing = true
 script = ExtResource( 34 )
 
@@ -1858,7 +1858,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 6
+frame = 5
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]

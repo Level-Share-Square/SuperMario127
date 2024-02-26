@@ -103,7 +103,6 @@ func _ready():
 		path.curve = curve
 	last_position = position
 	pathfollow.offset = 100
-		
 func _process(_delta):
 	if curve != path.curve:
 		path.curve = curve		
