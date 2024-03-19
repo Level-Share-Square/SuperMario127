@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -130,6 +130,9 @@ font_data = ExtResource( 7 )
 size = 32
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 7 )
+
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 393, 216 )
 
 [sub_resource type="Animation" id=15]
 length = 0.001
@@ -1177,6 +1180,13 @@ background = NodePath("../Backgrounds")
 
 [node name="Tween" type="Tween" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
 
+[node name="Area2D" type="Area2D" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
+collision_layer = 0
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Viewports/ViewportContainer/Viewport/CameraP1/Area2D"]
+shape = SubResource( 18 )
+
 [node name="World" type="Node2D" parent="Viewports/ViewportContainer/Viewport"]
 script = ExtResource( 21 )
 
@@ -1191,7 +1201,7 @@ collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 11
+frame = 9
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
@@ -1239,6 +1249,13 @@ script = ExtResource( 4 )
 character = NodePath("../../../ViewportContainer/Viewport/World/Character2")
 
 [node name="Tween" type="Tween" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
+
+[node name="Area2D" type="Area2D" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
+collision_layer = 0
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Viewports/ViewportContainer2/Viewport/CameraP2/Area2D"]
+shape = SubResource( 18 )
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer2/Viewport" instance=ExtResource( 13 )]
 

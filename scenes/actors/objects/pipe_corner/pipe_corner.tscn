@@ -1,11 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/actors/objects/pipe_corner/pipe_corner.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/pipe_corner/texture.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/pipe_corner/outline.png" type="Texture" id=3]
+[ext_resource path="res://classes/camera_stopper.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 45.52, 41.3657 )
 
 [node name="PipeCorner" type="Node2D"]
 script = ExtResource( 1 )
@@ -26,3 +30,11 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2048
+collision_mask = 0
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 2 )
