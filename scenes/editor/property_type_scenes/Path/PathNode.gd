@@ -4,6 +4,7 @@ extends Node2D
 var first : bool
 var ui
 var selected : bool = false
+var held : bool = false
 
 var handles_active: bool = false
 
@@ -47,11 +48,17 @@ func _on_PathNodeButton_gui_input(event):
 	if event is InputEventMouseButton:
 		ui.get_ref()._click_buffer = 0
 		if event.pressed and event.button_index == BUTTON_LEFT:
-			if !handles_active && Input.is_action_pressed("path_editor_modkey"):
+			if !handles_active && Input.is_action_pressed("modkey"):
 				activate_handles()
+			held = true
 			select()
+		elif !event.pressed && event.button_index == BUTTON_LEFT:
+			held = false
 		elif event.pressed and event.button_index == BUTTON_RIGHT:
-			if handles_active && Input.is_action_pressed("path_editor_modkey"):
+			if handles_active && Input.is_action_pressed("modkey"):
 				deactivate_handles()
 				return
 			delete()
+	if held && event is InputEventMouseMotion:
+		global_position += event.relative
+		ui.get_ref().update_node_position(self)

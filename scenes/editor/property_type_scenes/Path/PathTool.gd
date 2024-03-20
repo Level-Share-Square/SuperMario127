@@ -13,6 +13,8 @@ onready var selected_node : Node2D
 onready var path_node_container = Node2D.new()
 onready var nodes = Array()
 
+var node_positions : Dictionary
+
 var editor
 # the object which has the path
 var editing_object: GameObject
@@ -84,7 +86,13 @@ func node_deleted():
 			line.remove_point(i)
 			break
 			
-	
+
+func update_node_position(node: Node2D):
+	var index = nodes.find(node, 0)
+	if index != -1:
+		line.get_node("path").curve.set_point_position(index, node.position)
+		update_line()
+
 func close():
 	path_node_container.queue_free()
 	#TODO: Make a hide function for the editor window.
