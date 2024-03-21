@@ -1272,8 +1272,9 @@ animation = "tripleJumpLeft"
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 44 )
-animation = "shineDance"
-frame = 21
+animation = "swimming"
+frame = 9
+playing = true
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
@@ -1821,7 +1822,7 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 9
+frame = 10
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
@@ -1850,7 +1851,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 3
+frame = 9
 playing = true
 script = ExtResource( 34 )
 
@@ -1858,7 +1859,6 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 5
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
