@@ -52,11 +52,14 @@ func _physics_process(delta):
 #				print(stopper.right_bound.x)
 #				print(stopper.global_position)
 				#GLOBAL POSITION IS IN THE CENTER OF THE CAMERA REMEMBER THIS
+				
+				
+				var attempted_move = global_position
 				if last_position.x + size.x > stopper.left_bound.x and last_position.x + size.x < stopper.right_bound.x and global_position.x > last_position.x and !(global_position.x - size.x > stopper.right_bound.x):
 					print("left intersect")
-					global_position.x = stopper.left_bound.x - size.x + 1
+					attempted_move.x = stopper.left_bound.x - size.x + 1
 				elif last_position.x - size.x < stopper.right_bound.x and last_position.x - size.x > stopper.left_bound.x and global_position.x < last_position.x and !(global_position.x + size.x < stopper.left_bound.x):
-					global_position.x = stopper.right_bound.x + size.x - 1
+					attempted_move.x = stopper.right_bound.x + size.x - 1
 					print("right intersect")
 #					print("hi")
 #					if !last_position.x < stopper.right_bound.x:
@@ -67,23 +70,32 @@ func _physics_process(delta):
 #						print(last_position.x)
 #						print(global_position.x)
 #						print(stopper.right_bound.x)
-				elif last_position.y + size.y > stopper.top_bound.y and last_position.y + size.y < stopper.bottom_bound.y and global_position.y > last_position.y and !(global_position.y - size.y > stopper.bottom_bound.y):
-					global_position.y = stopper.top_bound.y - size.y + 1
+				if last_position.y + size.y > stopper.top_bound.y and last_position.y + size.y < stopper.bottom_bound.y and global_position.y > last_position.y and !(global_position.y - size.y > stopper.bottom_bound.y):
+					attempted_move.y = stopper.top_bound.y - size.y + 1
 					print("top intersect")
 #					if !last_position.y - size.y < stopper.top_bound.y:
 #						global_position.y = stopper.top_bound.y - size.y
 #						print("reset")
 				elif last_position.y - size.y < stopper.bottom_bound.y and last_position.y - size.y > stopper.top_bound.y and global_position.y < last_position.y and !(global_position.y + size.y < stopper.top_bound.y):
 					print("bottom intersect")
-					global_position.y = stopper.bottom_bound.y + size.y - 1
+					attempted_move.y = stopper.bottom_bound.y + size.y - 1
 #					if !last_position.y > stopper.bottom_bound.y:
 #						global_position.y = stopper.bottom_bound.y
 #						print("reset")
+					
 				else:
-					print(global_position.y)
-					print(last_position.y)
-					print(stopper.bottom_bound.y)
-					print(stopper.top_bound.y)
+					pass
+					
+
+				if global_position.x == attempted_move.x:
+					global_position.y = attempted_move.y
+				elif global_position.y == attempted_move.y:
+					global_position.x = attempted_move.x
+				#corner collision has occured
+				elif abs(global_position.x - attempted_move.x) < abs(global_position.y - attempted_move.y):
+					global_position.x = attempted_move.x
+				else:
+					global_position.y = attempted_move.y
 				
 			
 			
