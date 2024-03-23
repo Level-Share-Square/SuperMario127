@@ -1,4 +1,4 @@
-[gd_scene load_steps=869 format=2]
+[gd_scene load_steps=870 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -835,6 +835,7 @@
 [ext_resource path="res://scenes/actors/objects/launch_star/icon.png" type="Texture" id=833]
 [ext_resource path="res://scenes/actors/objects/big_steely_despawner/icon.png" type="Texture" id=834]
 [ext_resource path="res://scenes/actors/objects/big_steely_despawner/preview.png" type="Texture" id=835]
+[ext_resource path="res://scenes/actors/objects/death_plane/death_plane.png" type="Texture" id=836]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1895,6 +1896,13 @@ items_in_sequence = 2
 index_in_sequence = 1
 icon = ExtResource( 833 )
 preview = ExtResource( 830 )
+
+[node name="DeathPlane" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 111
+is_object = true
+icon = ExtResource( 836 )
+preview = ExtResource( 836 )
 
 [node name="SwitchesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
