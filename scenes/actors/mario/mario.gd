@@ -1136,4 +1136,5 @@ func toggle_movement(var value : bool):
 	invulnerable = !value
 	controllable = value
 	movable = value
+	gravity_scale = int(value)
 	

@@ -1904,6 +1904,13 @@ is_object = true
 icon = ExtResource( 836 )
 preview = ExtResource( 836 )
 
+[node name="AreaTransition" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 112
+is_object = true
+icon = ExtResource( 836 )
+preview = ExtResource( 836 )
+
 [node name="SwitchesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
 color = Color( 0.0862745, 0.188235, 0.835294, 1 )

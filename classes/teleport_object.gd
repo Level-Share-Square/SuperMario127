@@ -91,7 +91,10 @@ func change_areas(entering_character : Character, entering):
 			nozzle_name,
 			character.fuel,
 			powerup_array,
-			get_tree().get_current_scene().switch_timer
+			get_tree().get_current_scene().switch_timer,
+			character.velocity,
+			character.state.name,
+			character.facing_direction
 		]
 		
 		if character2 != null:
@@ -111,7 +114,10 @@ func change_areas(entering_character : Character, entering):
 				nozzle_name_2,
 				character2.fuel,
 				powerup_array2,
-				get_tree().get_current_scene().switch_timer
+				get_tree().get_current_scene().switch_timer,
+				character.velocity,
+				character.state.name,
+				character.facing_direction
 			]
 		else:
 			Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []

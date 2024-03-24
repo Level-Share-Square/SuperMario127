@@ -6,9 +6,6 @@ onready var camera_stopper = $CameraStopper
 onready var camera_stop_shape = $CameraStopper/CollisionShape2D
 onready var sprite = $Sprite
 
-onready var left_width = sprite.patch_margin_left
-onready var right_width = sprite.patch_margin_right
-onready var part_width = sprite.texture.get_width() - left_width - right_width
 
 export var parts := 1
 export var stops_camera := true
@@ -35,9 +32,7 @@ func _input(event):
 		elif event.button_index == 4: # Mouse wheel up
 			parts += 1
 			set_property("parts", parts, true)
-			
-func _process(_delta):
-	pass
+
 	
 func _ready():
 	if mode != 1:

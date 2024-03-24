@@ -54,7 +54,7 @@ func _ready():
 					character.controllable = false
 					
 					match transition_data[0]:
-						"pipe", "door":
+						"pipe", "door", "area_transition":
 							exit_teleport(obj)
 							pass
 						_:
@@ -80,6 +80,10 @@ func exit_teleport(obj : Array):
 		character.sprite.modulate = Color(1.0, 1.0, 1.0, 0.0)
 		if obj[1].object_type == "pipe":
 			character.position = obj[1].position + Vector2(0, obj[1].get_bottom_distance())
+		if obj[1].object_type == "area_transition":
+			character.velocity = transition_character_data[6]
+			character.set_state_by_name(transition_character_data[7])
+			character.facing_direction = transition_character_data[8]
 		yield(get_tree().create_timer(0.5), "timeout")
 		if character_string != "character":
 			yield(get_tree().create_timer(1.25), "timeout")
