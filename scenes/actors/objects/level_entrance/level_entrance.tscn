@@ -22,6 +22,15 @@ frames = SubResource( 1 )
 animation = "pipe"
 script = ExtResource( 4 )
 
+[node name="ReferenceRect" type="ReferenceRect" parent="AnimatedSprite"]
+margin_left = -384.0
+margin_top = -216.0
+margin_right = 384.0
+margin_bottom = 216.0
+mouse_filter = 2
+border_width = 0.5
+editor_only = false
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 volume_db = -2.5

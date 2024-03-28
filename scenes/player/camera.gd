@@ -8,6 +8,8 @@ var skip_to_player := true
 var focus_zoom := 1.0
 var last_position = Vector2(0,0)
 var size = Vector2(0,0)
+# todo: make this update based on multiplayer screen size
+var base_size = Vector2(393, 216)
 
 onready var character_node = get_node(character)
 onready var bg = get_node(background)
@@ -40,24 +42,44 @@ func _physics_process(delta):
 				yield(get_tree(), "idle_frame")
 				reset_smoothing()
 				skip_to_player = false
-			
+			shape.shape.extents = base_size * zoom.y
 			size = shape.shape.extents
 			last_position = global_position
 			global_position = character_node.global_position + character_vel
 			for stopper in area.get_overlapping_areas():
-				var overlapX = min(last_position.x + size.x, stopper.right_bound.x) - max(last_position.x - size.x, stopper.left_bound.x)
-				var overlapY = min(last_position.y + size.y, stopper.bottom_bound.y) - max(last_position.y - size.y, stopper.top_bound.y)
+				print("overlap")
+				if global_position.distance_to(stopper.global_position) < size.length() * 1.2:
+					var overlapX = min(abs(last_position.x + size.x - stopper.left_bound.x), abs(last_position.x - size.x - stopper.right_bound.x))
+					var overlapY = min(abs(last_position.y + size.y - stopper.top_bound.y), abs(last_position.y - size.y - stopper.bottom_bound.y))
 					
-				if overlapX < overlapY:
-					if last_position.x < stopper.global_position.x and global_position.x > last_position.x:
-						global_position.x = stopper.left_bound.x - size.x
-					elif last_position.x > stopper.global_position.x and global_position.x < last_position.x:
-						global_position.x = stopper.right_bound.x + size.x
-				else:
-					if last_position.y < stopper.global_position.y and global_position.y > last_position.y:
-						global_position.y = stopper.top_bound.y - size.y
-					elif last_position.y > stopper.global_position.y and global_position.y < last_position.y:
-						global_position.y = stopper.top_bound.y + size.y
+				
+					if overlapX < overlapY:
+#						print("horizontal")
+#						print(overlapX)
+#						print(overlapY)
+						
+						if last_position.x < stopper.global_position.x and global_position.x > last_position.x:
+							global_position.x = stopper.left_bound.x - size.x + 1
+						elif last_position.x > stopper.global_position.x and global_position.x < last_position.x:
+							global_position.x = stopper.right_bound.x + size.x - 1
+						else:
+							print("oops")
+					else:
+#						print("vertical")
+#						print(overlapX)
+#						print(overlapY)
+#						print(global_position.y > last_position.y)
+						# top bound of stopper
+						if last_position.y < stopper.global_position.y and global_position.y > last_position.y:
+							global_position.y = stopper.top_bound.y - size.y + 1
+						# bottom bound of stopper
+						elif last_position.y > stopper.global_position.y and global_position.y < last_position.y:
+							print("botttom")
+							print(stopper.top_bound.y)
+							print(stopper.bottom_bound.y)
+							global_position.y = stopper.bottom_bound.y + size.y - 1
+						else:
+							print("oops")
 				
 			
 			

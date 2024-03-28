@@ -4,8 +4,8 @@ extends GameObject
 
 onready var path : Path2D = $Path2D
 onready var pathfollow = $Path2D/PathFollow2D
-onready var innerstar = $InnerStar
-onready var outerstar = $OuterStar
+onready var star_container = $StarContainer
+onready var innerstar = $StarContainer/InnerStar
 onready var speed_tween = $SpeedTween
 onready var animation_player = $AnimationPlayer
 onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
@@ -103,16 +103,20 @@ func _ready():
 		path.curve = curve
 	last_position = position
 	pathfollow.offset = 100
+	star_container.look_at(position + path.curve.get_point_position(1))
+	star_container.rotation_degrees += 90
+	player_detector.look_at(position + path.curve.get_point_position(1))
+	player_detector.rotation_degrees += 90
+	
 func _process(_delta):
 	if curve != path.curve:
 		path.curve = curve		
 func _physics_process(delta):
-	innerstar.look_at(position + path.curve.get_point_position(1))
-	outerstar.look_at(position + path.curve.get_point_position(1))
-	player_detector.look_at(position + path.curve.get_point_position(1))
-	innerstar.rotation_degrees += 90
-	outerstar.rotation_degrees += 90
-	player_detector.rotation_degrees += 90
+	if mode != 0:
+		star_container.look_at(position + path.curve.get_point_position(1))
+		star_container.rotation_degrees += 90
+		player_detector.look_at(position + path.curve.get_point_position(1))
+		player_detector.rotation_degrees += 90
 	if enabled and mode == 0:
 		match(state):
 			states.IDLE:
@@ -155,39 +159,38 @@ func physics_process_windup(delta:float):
 	if(mario.state and mario.state.name != "LaunchStarState"):
 		mario.set_state_by_name("LaunchStarState", delta)
 		mario.connect("state_changed", self, "cancel_launch")	
-	mario.position = to_global(innerstar.position)
-	pass
+	mario.position = innerstar.global_position
+	mario.sprite.look_at(position + pathfollow.position)
+	mario.sprite.rotation_degrees += 90
 		
 # the launch star is launching mario
 func physics_process_launch(delta:float):	
-	pathfollow.offset += speed
+	
 	var dif = to_global(pathfollow.position) - last_position
 	if !pathfollow.offset >= path.curve.get_baked_length():
 		last_position = to_global(pathfollow.position)
 	
 
-	mario.sprite.look_at(to_global(pathfollow.position))
-	mario.sprite.rotation_degrees += 90
-	mario.position = lerp(mario.position, position + pathfollow.position, clamp(0.008 * speed, 0, 1))
-	mario.last_position = mario.position
+	#mario.sprite.look_at(position + pathfollow.position)
+	mario.sprite.rotation = lerp_angle(mario.sprite.rotation, pathfollow.rotation + PI/2, clamp(0.008 * speed, 0, 1))
+	#mario.sprite.rotation_degrees += 90
+	
+	
 
 	# reached end
 	#todo: fix exit velocity
-	
-	if pathfollow.offset >= path.curve.get_baked_length() and mario.position.distance_to(to_global(pathfollow.position)) <= 36:
-		mario.state._stop(delta)
-		mario.velocity = dif
-		mario.velocity = Vector2(0, -speed)
-		mario.velocity = Vector2(0, -speed)
-		mario.velocity = dif.rotated(mario.get_angle_to(to_global(pathfollow.position)) + 1.571) * speed
-		mario.velocity = Vector2(0, -speed).rotated(mario.get_angle_to(to_global(pathfollow.position)) + 1.571)
-		mario.velocity = dif
-		var direction = Vector2(pathfollow.position.x - mario.position.x, pathfollow.position.y - mario.position.y)
-		direction = direction.normalized()
-		mario.velocity = direction * speed * 100
-		mario.velocity = dif * 30
-		mario.last_position = mario.position
-		
+	if pathfollow.offset >= path.curve.get_baked_length(): 
+		mario.position = mario.position.move_toward(position + pathfollow.position, speed)
+		if mario.position.distance_to(position + pathfollow.position) <= 10:
+			mario.velocity = Vector2(0, -speed).rotated(mario.sprite.rotation) * 60
+			mario.facing_direction = sign(mario.velocity.x)
+			mario.state._stop(delta)
+			
+			mario.last_position = mario.position
+	else:
+		pathfollow.offset += speed
+		mario.position = lerp(mario.position, position + pathfollow.position, clamp(0.008 * speed, 0, 1))
+	mario.last_position = mario.position
 func cancel_launch(new, old):
 	set_state(0)
 

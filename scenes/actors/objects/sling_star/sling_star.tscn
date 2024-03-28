@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://scenes/actors/objects/sling_star/sling_star.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/launch_star/launch_star_animatior.gd" type="Script" id=2]
@@ -216,6 +216,33 @@ animations = [ {
 "speed": 10.0
 } ]
 
+[sub_resource type="Animation" id=54]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Star:speed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Star:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
 [sub_resource type="Animation" id=53]
 resource_name = "launch"
 length = 0.7
@@ -315,12 +342,12 @@ script = ExtResource( 2 )
 [node name="Upper" type="AnimatedSprite" parent="Star"]
 z_index = -2
 frames = SubResource( 26 )
-frame = 3
+frame = 19
 playing = true
 
 [node name="Lower" type="AnimatedSprite" parent="Star"]
 frames = SubResource( 51 )
-frame = 22
+frame = 14
 playing = true
 
 [node name="Tween" type="Tween" parent="."]
@@ -330,5 +357,6 @@ position = Vector2( 0.132431, 13.2433 )
 volume_db = 15.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 54 )
 anims/launch = SubResource( 53 )
 anims/windup = SubResource( 52 )
