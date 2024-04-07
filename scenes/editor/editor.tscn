@@ -1,4 +1,4 @@
-[gd_scene load_steps=870 format=2]
+[gd_scene load_steps=880 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -836,6 +836,16 @@
 [ext_resource path="res://scenes/actors/objects/big_steely_despawner/icon.png" type="Texture" id=834]
 [ext_resource path="res://scenes/actors/objects/big_steely_despawner/preview.png" type="Texture" id=835]
 [ext_resource path="res://scenes/actors/objects/death_plane/death_plane.png" type="Texture" id=836]
+[ext_resource path="res://assets/tiles/bookshelf/icons/1.png" type="Texture" id=837]
+[ext_resource path="res://assets/tiles/bookshelf/icons/4.png" type="Texture" id=838]
+[ext_resource path="res://assets/tiles/bookshelf/icons/6.png" type="Texture" id=839]
+[ext_resource path="res://assets/tiles/bookshelf/icons/7.png" type="Texture" id=840]
+[ext_resource path="res://assets/tiles/bookshelf/icons/5.png" type="Texture" id=841]
+[ext_resource path="res://assets/tiles/bookshelf/icons/9.png" type="Texture" id=842]
+[ext_resource path="res://assets/tiles/bookshelf/icons/2.png" type="Texture" id=843]
+[ext_resource path="res://assets/tiles/bookshelf/icon.png" type="Texture" id=844]
+[ext_resource path="res://assets/tiles/bookshelf/icons/3.png" type="Texture" id=845]
+[ext_resource path="res://assets/tiles/bookshelf/icons/8.png" type="Texture" id=846]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3351,6 +3361,14 @@ object_id = 103
 is_object = true
 icon = ExtResource( 754 )
 preview = ExtResource( 742 )
+
+[node name="Bookshelf" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 24 )
+tileset_id = 36
+palette_icons = [ ExtResource( 844 ), ExtResource( 841 ), ExtResource( 837 ), ExtResource( 839 ), ExtResource( 843 ), ExtResource( 846 ), ExtResource( 845 ), ExtResource( 840 ), ExtResource( 838 ), ExtResource( 842 ) ]
+palette_previews = [ ExtResource( 844 ), ExtResource( 841 ), ExtResource( 837 ), ExtResource( 839 ), ExtResource( 843 ), ExtResource( 846 ), ExtResource( 845 ), ExtResource( 840 ), ExtResource( 838 ), ExtResource( 842 ) ]
+icon = ExtResource( 844 )
+preview = ExtResource( 844 )
 
 [node name="CastleGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
