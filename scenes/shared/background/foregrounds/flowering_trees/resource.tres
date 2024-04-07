@@ -1,13 +1,19 @@
-[gd_resource type="Resource" load_steps=5 format=2]
+[gd_resource type="Resource" load_steps=11 format=2]
 
 [ext_resource path="res://classes/ForegroundResource.gd" type="Script" id=1]
-[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/front.png" type="Texture" id=2]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/preview.png" type="Texture" id=2]
 [ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/front.tres" type="Resource" id=3]
 [ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/back.tres" type="Resource" id=4]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/palettes/MysticalTrees.png" type="Texture" id=5]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/palettes/PinkTrees.png" type="Texture" id=6]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/palettes/WinterTrees.png" type="Texture" id=7]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/palettes/BlueTrees.png" type="Texture" id=8]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/palettes/GhostTrees.png" type="Texture" id=9]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/palettes/FallTrees.png" type="Texture" id=10]
 
 [resource]
 script = ExtResource( 1 )
 layers = [ ExtResource( 4 ), ExtResource( 3 ) ]
 immune_to = PoolIntArray(  )
 preview = ExtResource( 2 )
-palettes = [  ]
+palettes = [ ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]

@@ -28,10 +28,10 @@ var current_screen : Screen
 var previous_screen : Screen
 
 var possible_backgrounds = [
-	4
+	8
 ]
 var possible_parallax = [
-	8
+	18
 ]
 
 func _ready() -> void:
@@ -40,7 +40,7 @@ func _ready() -> void:
 	var picked_background = possible_backgrounds[randi() % possible_backgrounds.size()]
 	var picked_parallax = possible_parallax[randi() % possible_parallax.size()]
 	
-	backgrounds.update_background(picked_background, picked_parallax, Rect2(0, 0, 24, 14), 100, 0)
+	backgrounds.update_background(picked_background, picked_parallax, Rect2(0, 0, 24, 14), 200, 0)
 	backgrounds.do_auto_scroll = true
 	
 	for screen in inactive_screens.get_children():

@@ -1,7 +1,13 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=9 format=2]
 
 [ext_resource path="res://classes/ParallaxLayerResource.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/front.png" type="Texture" id=2]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/palettes/MysticalTrees.png" type="Texture" id=3]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/palettes/PinkTrees.png" type="Texture" id=4]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/palettes/WinterTrees.png" type="Texture" id=5]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/palettes/BlueTrees.png" type="Texture" id=6]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/palettes/GhostTrees.png" type="Texture" id=7]
+[ext_resource path="res://scenes/shared/background/foregrounds/flowering_trees/palettes/FallTrees.png" type="Texture" id=8]
 
 [resource]
 script = ExtResource( 1 )
@@ -9,4 +15,4 @@ texture = ExtResource( 2 )
 scale = Vector2( 0.025, 0.2 )
 offset = Vector2( 0, -270 )
 mirroring = Vector2( 512, 0 )
-palettes = [  ]
+palettes = [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]

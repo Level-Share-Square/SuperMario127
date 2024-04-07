@@ -2,7 +2,7 @@
 
 [ext_resource path="res://classes/ForegroundResource.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/background/foregrounds/bay/front.tres" type="Resource" id=2]
-[ext_resource path="res://scenes/shared/background/foregrounds/bay/front.png" type="Texture" id=3]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/preview.png" type="Texture" id=3]
 
 [resource]
 script = ExtResource( 1 )
