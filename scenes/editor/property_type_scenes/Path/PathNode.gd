@@ -60,5 +60,5 @@ func _on_PathNodeButton_gui_input(event):
 				return
 			delete()
 	if held && event is InputEventMouseMotion:
-		global_position += event.relative / 2
+		position = ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().editor.get_global_mouse_position())
 		ui.get_ref().update_node_position(self)
