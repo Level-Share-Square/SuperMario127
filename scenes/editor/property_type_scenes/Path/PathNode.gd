@@ -60,5 +60,5 @@ func _on_PathNodeButton_gui_input(event):
 				return
 			delete()
 	if held && event is InputEventMouseMotion:
-		global_position += event.relative
+		global_position += event.relative / 2
 		ui.get_ref().update_node_position(self)
