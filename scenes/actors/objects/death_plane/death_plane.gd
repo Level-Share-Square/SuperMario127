@@ -7,7 +7,7 @@ onready var camera_stop_shape = $CameraStopper/CollisionShape2D
 onready var sprite = $Sprite
 
 
-export var parts := 1
+var parts := 1
 export var stops_camera := true
 export var vertical := false
 

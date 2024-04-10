@@ -5,9 +5,11 @@
 [ext_resource path="res://scenes/actors/objects/death_plane/death_plane.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
 extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
+resource_local_to_scene = true
 extents = Vector2( 42, 52 )
 
 [node name="AreaTransition" type="Node2D"]
