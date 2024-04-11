@@ -1,4 +1,4 @@
-[gd_scene load_steps=880 format=2]
+[gd_scene load_steps=881 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -846,6 +846,7 @@
 [ext_resource path="res://assets/tiles/bookshelf/icon.png" type="Texture" id=844]
 [ext_resource path="res://assets/tiles/bookshelf/icons/3.png" type="Texture" id=845]
 [ext_resource path="res://assets/tiles/bookshelf/icons/8.png" type="Texture" id=846]
+[ext_resource path="res://scenes/actors/objects/star_door/left.png" type="Texture" id=847]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1792,50 +1793,6 @@ tile_mode_offset = Vector2( 0, 16 )
 icon = ExtResource( 152 )
 preview = ExtResource( 151 )
 
-[node name="Pipe" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 23
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "PipeBody"
-items_in_sequence = 3
-icon = ExtResource( 110 )
-preview = ExtResource( 108 )
-
-[node name="PipeBody" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 89
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "PipeCorner"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 584 )
-preview = ExtResource( 584 )
-
-[node name="PipeCorner" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 90
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "Pipe"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 585 )
-preview = ExtResource( 585 )
-
-[node name="Door" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 48
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-palette_icons = [ ExtResource( 44 ), ExtResource( 751 ), ExtResource( 752 ) ]
-palette_previews = [ ExtResource( 49 ), ExtResource( 708 ), ExtResource( 707 ) ]
-icon = ExtResource( 44 )
-preview = ExtResource( 49 )
-
 [node name="BreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
 object_id = 33
@@ -1914,7 +1871,63 @@ is_object = true
 icon = ExtResource( 836 )
 preview = ExtResource( 836 )
 
-[node name="AreaTransition" type="Node" parent="PlaceableItems/SpecialGroup"]
+[node name="TeleportGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 25 )
+color = Color( 0.0862745, 0.501961, 0, 1 )
+group_name = "Teleport"
+
+[node name="Pipe" type="Node" parent="PlaceableItems/TeleportGroup"]
+script = ExtResource( 24 )
+object_id = 23
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "PipeBody"
+items_in_sequence = 3
+icon = ExtResource( 110 )
+preview = ExtResource( 108 )
+
+[node name="PipeBody" type="Node" parent="PlaceableItems/TeleportGroup"]
+script = ExtResource( 24 )
+object_id = 89
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "PipeCorner"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 584 )
+preview = ExtResource( 584 )
+
+[node name="PipeCorner" type="Node" parent="PlaceableItems/TeleportGroup"]
+script = ExtResource( 24 )
+object_id = 90
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "Pipe"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 585 )
+preview = ExtResource( 585 )
+
+[node name="Door" type="Node" parent="PlaceableItems/TeleportGroup"]
+script = ExtResource( 24 )
+object_id = 48
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+palette_icons = [ ExtResource( 44 ), ExtResource( 751 ), ExtResource( 752 ) ]
+palette_previews = [ ExtResource( 49 ), ExtResource( 708 ), ExtResource( 707 ) ]
+icon = ExtResource( 44 )
+preview = ExtResource( 49 )
+
+[node name="StarDoor" type="Node" parent="PlaceableItems/TeleportGroup"]
+script = ExtResource( 24 )
+object_id = 113
+is_object = true
+icon = ExtResource( 847 )
+preview = ExtResource( 847 )
+
+[node name="AreaTransition" type="Node" parent="PlaceableItems/TeleportGroup"]
 script = ExtResource( 24 )
 object_id = 112
 is_object = true
