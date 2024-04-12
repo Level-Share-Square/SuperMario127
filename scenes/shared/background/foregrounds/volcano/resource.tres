@@ -7,8 +7,6 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano/palettes/1/preview.png" type="Texture" id=5]
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano/palettes/3/preview.png" type="Texture" id=6]
 
-
-
 [resource]
 script = ExtResource( 1 )
 layers = [ ExtResource( 3 ) ]

@@ -1,0 +1,92 @@
+[gd_resource type="Resource" load_steps=29 format=2]
+
+[ext_resource path="res://classes/ParallaxLayerResource.gd" type="Script" id=1]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/standard/volcano1.png" type="Texture" id=2]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/standard/volcano2.png" type="Texture" id=3]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/standard/volcano3.png" type="Texture" id=4]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/standard/volcano5.png" type="Texture" id=5]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/standard/volcano4.png" type="Texture" id=6]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/standard/volcano6.png" type="Texture" id=7]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/standard/volcano8.png" type="Texture" id=8]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/standard/volcano7.png" type="Texture" id=9]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/cyan/volcanocyan1.png" type="Texture" id=10]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/cyan/volcanocyan4.png" type="Texture" id=11]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/cyan/volcanocyan6.png" type="Texture" id=12]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/cyan/volcanocyan5.png" type="Texture" id=13]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/cyan/volcanocyan3.png" type="Texture" id=14]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/cyan/volcanocyan7.png" type="Texture" id=15]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/cyan/volcanocyan8.png" type="Texture" id=16]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/cyan/volcanocyan2.png" type="Texture" id=17]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/violet/viovolcano1.png" type="Texture" id=18]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/violet/viovolcano2.png" type="Texture" id=19]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/violet/viovolcano7.png" type="Texture" id=20]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/violet/viovolcano6.png" type="Texture" id=21]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/violet/viovolcano5.png" type="Texture" id=22]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/violet/viovolcano8.png" type="Texture" id=23]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/violet/viovolcano4.png" type="Texture" id=24]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/violet/viovolcano3.png" type="Texture" id=25]
+
+[sub_resource type="AnimatedTexture" id=2]
+frames = 8
+fps = 5.0
+frame_0/texture = ExtResource( 10 )
+frame_1/texture = ExtResource( 17 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 14 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 11 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 13 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 12 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 15 )
+frame_6/delay_sec = 0.0
+frame_7/texture = ExtResource( 16 )
+frame_7/delay_sec = 0.0
+
+[sub_resource type="AnimatedTexture" id=3]
+frames = 8
+fps = 5.0
+frame_0/texture = ExtResource( 18 )
+frame_1/texture = ExtResource( 19 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 25 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 24 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 22 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 21 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 20 )
+frame_6/delay_sec = 0.0
+frame_7/texture = ExtResource( 23 )
+frame_7/delay_sec = 0.0
+
+[sub_resource type="AnimatedTexture" id=1]
+frames = 8
+fps = 5.0
+frame_0/texture = ExtResource( 2 )
+frame_1/texture = ExtResource( 3 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 4 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 6 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 5 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 7 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 9 )
+frame_6/delay_sec = 0.0
+frame_7/texture = ExtResource( 8 )
+frame_7/delay_sec = 0.0
+
+[resource]
+script = ExtResource( 1 )
+texture = SubResource( 1 )
+scale = Vector2( 0.25, 0.3 )
+offset = Vector2( 0, 75 )
+mirroring = Vector2( 512, 0 )
+palettes = [ SubResource( 2 ), SubResource( 3 ) ]

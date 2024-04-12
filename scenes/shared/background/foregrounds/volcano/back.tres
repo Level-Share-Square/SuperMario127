@@ -15,8 +15,6 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano/palettes/1/0.png" type="Texture" id=13]
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano/palettes/3/0.png" type="Texture" id=14]
 
-
-
 [sub_resource type="AnimatedTexture" id=1]
 frames = 4
 fps = 6.0

@@ -1,12 +1,105 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=34 format=2]
 
 [ext_resource path="res://classes/ParallaxLayerResource.gd" type="Script" id=1]
-[ext_resource path="res://scenes/shared/background/foregrounds/bay/front.png" type="Texture" id=2]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/front1.png" type="Texture" id=2]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/front2.png" type="Texture" id=3]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/front5.png" type="Texture" id=4]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/front7.png" type="Texture" id=5]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/front9.png" type="Texture" id=6]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/front6.png" type="Texture" id=7]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/front8.png" type="Texture" id=8]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/front4.png" type="Texture" id=9]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/front3.png" type="Texture" id=10]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYROT/front9.png" type="Texture" id=11]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYICE/froze.png" type="Texture" id=12]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYPOIS/front7.png" type="Texture" id=13]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYROT/front1.png" type="Texture" id=14]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYROT/front2.png" type="Texture" id=15]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYROT/front4.png" type="Texture" id=16]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYPOIS/front3.png" type="Texture" id=17]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYPOIS/front4.png" type="Texture" id=18]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYPOIS/front9.png" type="Texture" id=19]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYPOIS/front1.png" type="Texture" id=20]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYPOIS/front2.png" type="Texture" id=21]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYROT/front6.png" type="Texture" id=22]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYPOIS/front6.png" type="Texture" id=23]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYROT/front5.png" type="Texture" id=24]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYROT/front7.png" type="Texture" id=25]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYROT/front8.png" type="Texture" id=26]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYPOIS/front8.png" type="Texture" id=27]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYPOIS/front5.png" type="Texture" id=28]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYROT/front3.png" type="Texture" id=29]
+
+[sub_resource type="AnimatedTexture" id=2]
+frame_0/texture = ExtResource( 12 )
+
+[sub_resource type="AnimatedTexture" id=3]
+frames = 9
+fps = 11.0
+frame_0/texture = ExtResource( 20 )
+frame_1/texture = ExtResource( 21 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 17 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 18 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 28 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 23 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 13 )
+frame_6/delay_sec = 0.0
+frame_7/texture = ExtResource( 27 )
+frame_7/delay_sec = 0.0
+frame_8/texture = ExtResource( 19 )
+frame_8/delay_sec = 0.0
+
+[sub_resource type="AnimatedTexture" id=4]
+frames = 9
+fps = 5.0
+frame_0/texture = ExtResource( 14 )
+frame_1/texture = ExtResource( 15 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 29 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 16 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 24 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 22 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 25 )
+frame_6/delay_sec = 0.0
+frame_7/texture = ExtResource( 26 )
+frame_7/delay_sec = 0.0
+frame_8/texture = ExtResource( 11 )
+frame_8/delay_sec = 0.0
+
+[sub_resource type="AnimatedTexture" id=1]
+frames = 9
+fps = 5.0
+frame_0/texture = ExtResource( 2 )
+frame_1/texture = ExtResource( 3 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 10 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 9 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 4 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 7 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 5 )
+frame_6/delay_sec = 0.0
+frame_7/texture = ExtResource( 8 )
+frame_7/delay_sec = 0.0
+frame_8/texture = ExtResource( 6 )
+frame_8/delay_sec = 0.0
 
 [resource]
 script = ExtResource( 1 )
-texture = ExtResource( 2 )
+texture = SubResource( 1 )
 scale = Vector2( 0.15, 0.1 )
 offset = Vector2( 0, -850 )
 mirroring = Vector2( 512, 0 )
-palettes = [  ]
+palettes = [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ]

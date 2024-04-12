@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=10 format=2]
+
+[ext_resource path="res://classes/ForegroundResource.gd" type="Script" id=1]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/front.tres" type="Resource" id=2]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/back.tres" type="Resource" id=3]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/middlefront.tres" type="Resource" id=4]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/middle.tres" type="Resource" id=5]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/middleback.tres" type="Resource" id=6]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/standard/volcano1.png" type="Texture" id=7]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/violet/viovolcano1.png" type="Texture" id=8]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/cyan/volcanocyan1.png" type="Texture" id=9]
+
+[resource]
+script = ExtResource( 1 )
+layers = [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ) ]
+immune_to = PoolIntArray(  )
+preview = ExtResource( 7 )
+palettes = [ ExtResource( 9 ), ExtResource( 8 ) ]

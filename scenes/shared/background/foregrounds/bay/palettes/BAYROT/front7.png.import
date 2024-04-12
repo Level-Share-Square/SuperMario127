@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/front.png-91e33a650cda1e422f158e2922f12ca9.stex"
+path="res://.import/front7.png-3226fc3431247901c75050b67036c123.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/shared/background/foregrounds/bay/front.png"
-dest_files=[ "res://.import/front.png-91e33a650cda1e422f158e2922f12ca9.stex" ]
+source_file="res://scenes/shared/background/foregrounds/bay/palettes/BAYROT/front7.png"
+dest_files=[ "res://.import/front7.png-3226fc3431247901c75050b67036c123.stex" ]
 
 [params]
 

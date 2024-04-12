@@ -84,6 +84,8 @@ func change_areas(entering_character : Character, entering):
 		var nozzle_name = null
 		if character.nozzle != null:
 			nozzle_name = character.nozzle.name
+		if !is_instance_valid(character.state):
+			character.state = character.get_state_node("FallState")
 		
 		Singleton.CurrentLevelData.level_data.vars.transition_character_data = [
 			character.health,
