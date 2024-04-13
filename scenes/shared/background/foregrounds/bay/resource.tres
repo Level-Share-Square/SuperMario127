@@ -3,13 +3,13 @@
 [ext_resource path="res://classes/ForegroundResource.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/background/foregrounds/bay/front.tres" type="Resource" id=2]
 [ext_resource path="res://scenes/shared/background/foregrounds/bay/preview.png" type="Texture" id=3]
-[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYICE/froze.png" type="Texture" id=4]
-[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYROT/front1.png" type="Texture" id=5]
-[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYPOIS/front1.png" type="Texture" id=6]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYICE/preview.png" type="Texture" id=4]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYPOIS/preview.png" type="Texture" id=5]
+[ext_resource path="res://scenes/shared/background/foregrounds/bay/palettes/BAYROT/preview.png" type="Texture" id=6]
 
 [resource]
 script = ExtResource( 1 )
 layers = [ ExtResource( 2 ) ]
 immune_to = PoolIntArray(  )
 preview = ExtResource( 3 )
-palettes = [ ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ) ]
+palettes = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ]

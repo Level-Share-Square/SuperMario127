@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=29 format=2]
+[gd_resource type="Resource" load_steps=38 format=2]
 
 [ext_resource path="res://classes/ParallaxLayerResource.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano2/standard/volcano1.png" type="Texture" id=2]
@@ -25,6 +25,14 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano2/violet/viovolcano8.png" type="Texture" id=23]
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano2/violet/viovolcano4.png" type="Texture" id=24]
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano2/violet/viovolcano3.png" type="Texture" id=25]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/water/watervolcano3.png" type="Texture" id=26]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/water/watervolcano6.png" type="Texture" id=27]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/water/watervolcano5.png" type="Texture" id=28]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/water/watervolcano2.png" type="Texture" id=29]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/water/watervolcano8.png" type="Texture" id=30]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/water/watervolcano7.png" type="Texture" id=31]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/water/watervolcano4.png" type="Texture" id=32]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/water/watervolcano1.png" type="Texture" id=33]
 
 [sub_resource type="AnimatedTexture" id=2]
 frames = 8
@@ -64,6 +72,25 @@ frame_6/delay_sec = 0.0
 frame_7/texture = ExtResource( 23 )
 frame_7/delay_sec = 0.0
 
+[sub_resource type="AnimatedTexture" id=4]
+frames = 8
+fps = 15.0
+frame_0/texture = ExtResource( 33 )
+frame_1/texture = ExtResource( 29 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 26 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 32 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 28 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 27 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 31 )
+frame_6/delay_sec = 0.0
+frame_7/texture = ExtResource( 30 )
+frame_7/delay_sec = 0.0
+
 [sub_resource type="AnimatedTexture" id=1]
 frames = 8
 fps = 5.0
@@ -89,4 +116,4 @@ texture = SubResource( 1 )
 scale = Vector2( 0.25, 0.3 )
 offset = Vector2( 0, 75 )
 mirroring = Vector2( 512, 0 )
-palettes = [ SubResource( 2 ), SubResource( 3 ) ]
+palettes = [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ]

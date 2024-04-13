@@ -1,7 +1,10 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=6 format=2]
 
 [ext_resource path="res://classes/ParallaxLayerResource.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/background/foregrounds/plains/back.png" type="Texture" id=2]
+[ext_resource path="res://scenes/shared/background/foregrounds/plains/palettes/fall/back.png" type="Texture" id=3]
+[ext_resource path="res://scenes/shared/background/foregrounds/plains/palettes/teal/back.png" type="Texture" id=4]
+[ext_resource path="res://scenes/shared/background/foregrounds/plains/palettes/spring/back.png" type="Texture" id=5]
 
 [resource]
 script = ExtResource( 1 )
@@ -9,4 +12,4 @@ texture = ExtResource( 2 )
 scale = Vector2( 0, 0 )
 offset = Vector2( -400, -210 )
 mirroring = Vector2( 0, 0 )
-palettes = [  ]
+palettes = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ) ]

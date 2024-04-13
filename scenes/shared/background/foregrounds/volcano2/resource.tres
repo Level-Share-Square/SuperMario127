@@ -6,13 +6,13 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano2/middlefront.tres" type="Resource" id=4]
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano2/middle.tres" type="Resource" id=5]
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano2/middleback.tres" type="Resource" id=6]
-[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/standard/volcano1.png" type="Texture" id=7]
-[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/violet/viovolcano1.png" type="Texture" id=8]
-[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/cyan/volcanocyan1.png" type="Texture" id=9]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/cyan/preview.png" type="Texture" id=7]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/standard/preview.png" type="Texture" id=8]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/water/preview.png" type="Texture" id=9]
 
 [resource]
 script = ExtResource( 1 )
 layers = [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ) ]
 immune_to = PoolIntArray(  )
-preview = ExtResource( 7 )
-palettes = [ ExtResource( 9 ), ExtResource( 8 ) ]
+preview = ExtResource( 8 )
+palettes = [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ]
