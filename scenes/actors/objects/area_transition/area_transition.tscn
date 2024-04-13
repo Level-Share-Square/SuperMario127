@@ -131,6 +131,21 @@ func start_exit_anim(character):
 #	character.sprite.frame = 2
 	reset_sprite(character)
 	Singleton.CurrentLevelData.level_data.vars.transition_data = []
+	# code to ensure the camera bounds aren't visible after transition
+	if stops_camera:
+		var camera = character.camera
+		print(character.velocity)
+		if !vertical:
+			if character.velocity.y < 0:
+				camera.global_position.y = camera.size.y - camera_stopper.bottom_bound.y
+			else:
+				camera.global_position.y = camera.size.y + camera_stopper.top_bound.y
+		else:
+			if character.velocity.x < 0:
+				camera.global_position.x = camera.size.x - camera_stopper.left_bound.x
+			else:
+				camera.global_position.x = camera.size.x + camera_stopper.right_bound.x
+		camera.last_position = camera.global_position
 	
 func reset_sprite(character : Character): #This is here in case Mario came from a door to a pipe
 	character.z_index = -1
