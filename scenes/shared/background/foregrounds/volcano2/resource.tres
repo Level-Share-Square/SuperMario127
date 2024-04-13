@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=10 format=2]
+[gd_resource type="Resource" load_steps=11 format=2]
 
 [ext_resource path="res://classes/ForegroundResource.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano2/front.tres" type="Resource" id=2]
@@ -9,10 +9,11 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano2/cyan/preview.png" type="Texture" id=7]
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano2/standard/preview.png" type="Texture" id=8]
 [ext_resource path="res://scenes/shared/background/foregrounds/volcano2/water/preview.png" type="Texture" id=9]
+[ext_resource path="res://scenes/shared/background/foregrounds/volcano2/violet/preview.png" type="Texture" id=10]
 
 [resource]
 script = ExtResource( 1 )
 layers = [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ) ]
 immune_to = PoolIntArray(  )
 preview = ExtResource( 8 )
-palettes = [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ]
+palettes = [ ExtResource( 7 ), ExtResource( 10 ), ExtResource( 9 ) ]
