@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Stardoor-close.ogg-6bd2d0b632b59d5651612cc71182dccb.oggstr"
+
+[deps]
+
+source_file="res://scenes/actors/objects/star_door/Stardoor-close.ogg"
+dest_files=[ "res://.import/Stardoor-close.ogg-6bd2d0b632b59d5651612cc71182dccb.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

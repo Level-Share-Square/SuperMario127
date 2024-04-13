@@ -7,7 +7,7 @@ onready var camera_stopper = $CameraStopper
 onready var camera_stop_shape = $CameraStopper/CollisionShape2D
 onready var sprite = $Sprite
 
-export var parts := 1
+var parts := 1
 export var stops_camera := true
 export var vertical := false
 
@@ -64,10 +64,15 @@ func update_property(key, value):
 			update_parts()
 		"vertical":
 			if vertical:
-				sprite.rect_size.x = 32
-				sprite.rect_position.x = -16
-				collision_shape.shape.extents.x = 16
-				camera_stop_shape.shape.extents.x = 52
+#				sprite.rect_size.x = 32
+#				sprite.rect_position.x = -16
+#				collision_shape.shape.extents.x = 16
+#				camera_stop_shape.shape.extents.x = 52
+				sprite.rect_size.y = 32
+				sprite.rect_position.y = -16
+				collision_shape.shape.extents.y = 16
+				camera_stop_shape.shape.extents.y = 52
+				rotation_degrees = 270
 			else:
 				sprite.rect_size.y = 32
 				sprite.rect_position.y = -16
@@ -79,15 +84,20 @@ func update_property(key, value):
 			
 func update_parts():
 	if vertical:
-		sprite.rect_size.y = parts * 32
-		sprite.rect_position.y = (-16 * parts)
-		collision_shape.shape.extents.y = 16 * parts
-		camera_stop_shape.shape.extents.y = collision_shape.shape.extents.y + 26
+#		sprite.rect_size.y = parts * 32
+#		sprite.rect_position.y = (-16 * parts)
+#		collision_shape.shape.extents.y = 16 * parts
+#		camera_stop_shape.shape.extents.y = collision_shape.shape.extents.y + 26
+		sprite.rect_size.x = parts * 32
+		sprite.rect_position.x = (-16 * parts)
+		collision_shape.shape.extents.x = 16 * parts
+		camera_stop_shape.shape.extents.x = collision_shape.shape.extents.x + 26
 	else:
 		sprite.rect_size.x = parts * 32
 		sprite.rect_position.x = (-16 * parts)
 		collision_shape.shape.extents.x = 16 * parts
 		camera_stop_shape.shape.extents.x = collision_shape.shape.extents.x + 26
+		
 		
 func body_entered(body):
 	if enabled and body.name.begins_with("Character") and !body.dead and body.controllable and teleport_enabled:

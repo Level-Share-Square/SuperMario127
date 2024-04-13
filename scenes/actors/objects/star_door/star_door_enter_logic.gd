@@ -74,7 +74,7 @@ func start_door_enter_animation(character : Character) -> void:
 	#calculate the amount of time it should take based on the players distance from the center
 	var distance_from_center_normalized : float = abs((character.position.x - global_position.x)) / collision_width 
 	distance_from_center_normalized = clamp(distance_from_center_normalized, 0.1, 1)
-	slide_length = slide_to_center_length * distance_from_center_normalized
+	slide_length = slide_to_center_length * distance_from_center_normalized 
 	var can_enter = true
 	# yucky code to stop character from entering if they dont have enough
 	if get_parent().collectible == "coin":
@@ -94,7 +94,7 @@ func start_door_enter_animation(character : Character) -> void:
 	# warning-ignore: return_value_discarded
 	if can_enter:
 		animate_door("open")
-		tween.interpolate_callback(character.anim_player, slide_length, "play", "enter_door")
+		tween.interpolate_callback(character.anim_player, slide_length + (door_sprite.frames.get_frame_count("open") * 2 * fps_util.PHYSICS_DELTA), "play", "enter_door")
 		character.anim_player.connect("animation_finished", self, "character_animation_finished", [character], CONNECT_ONESHOT)
 	else:
 		#copied this from the sign code

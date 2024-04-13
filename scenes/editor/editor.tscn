@@ -1873,7 +1873,7 @@ preview = ExtResource( 836 )
 
 [node name="TeleportGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
-color = Color( 0.0862745, 0.501961, 0, 1 )
+color = Color( 0.117647, 0.686275, 0, 1 )
 group_name = "Teleport"
 
 [node name="Pipe" type="Node" parent="PlaceableItems/TeleportGroup"]
@@ -2442,7 +2442,7 @@ preview = ExtResource( 835 )
 
 [node name="GrassGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
-color = Color( 0.121569, 0.517647, 0.184314, 1 )
+color = Color( 0.0980392, 0.345098, 0.137255, 1 )
 group_name = "Grass"
 
 [node name="Grass" type="Node" parent="PlaceableItems/GrassGroup"]
