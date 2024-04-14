@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/metal_bounce.ogg-229d217e2b25df5a143843b4380ec3b8.oggstr"
+
+[deps]
+
+source_file="res://scenes/actors/objects/sawblade/metal_bounce.ogg"
+dest_files=[ "res://.import/metal_bounce.ogg-229d217e2b25df5a143843b4380ec3b8.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
