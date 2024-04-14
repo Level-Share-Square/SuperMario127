@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://assets/particles/shiny_particle_material.tres" type="Material" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scenes/actors/objects/shine/frames_recolorable.tres" type="SpriteFrames" id=10]
 [ext_resource path="res://scenes/actors/objects/shine/frames_collected.tres" type="SpriteFrames" id=11]
 [ext_resource path="res://scenes/actors/objects/shine/ray.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/shine/ray_recolorable.png" type="Texture" id=13]
 
 [sub_resource type="StreamTexture" id=1]
 
@@ -244,3 +245,7 @@ position = Vector2( -1, 2 )
 rotation = 6.28319
 z_index = -1
 texture = ExtResource( 12 )
+
+[node name="RecolorableRays" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 13 )

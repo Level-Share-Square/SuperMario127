@@ -12,9 +12,11 @@ export var normal_particles : StreamTexture
 export var recolorable_particles : StreamTexture
 export var collected_particles : StreamTexture
 
+
 onready var animated_sprite : AnimatedSprite = $AnimatedSprite
 onready var outline_sprite : AnimatedSprite = $AnimatedSpriteOutline
 onready var ray_sprite : Sprite = $Sprite
+onready var recolorable_ray_sprite : Sprite = $RecolorableRays
 onready var particles : Particles2D = $AnimatedSprite/Particles2D
 onready var ghost : Sprite = $Ghost
 onready var area : Area2D = $Area2D
@@ -106,11 +108,21 @@ func update_color(key, value):
 				
 				animated_sprite.frames = recolorable_frames
 				particles.texture = recolorable_particles
+				
+				recolorable_ray_sprite.visible = true
+				ray_sprite.visible = false
+				recolorable_ray_sprite.self_modulate = color
+				recolorable_ray_sprite.self_modulate.s *= 3
 			else:
 				animated_sprite.self_modulate = WHITE_COLOR
 				
 				animated_sprite.frames = normal_frames
 				particles.texture = normal_particles
+				
+				recolorable_ray_sprite.visible = false
+				ray_sprite.visible = true
+				
+				
 		else:
 			animated_sprite.self_modulate = WHITE_COLOR
 			
@@ -127,6 +139,7 @@ func _process(_delta):
 func _physics_process(_delta : float) -> void:
 	animated_sprite.flip_h = !do_kick_out
 	ray_sprite.rotation_degrees += 0.6
+	recolorable_ray_sprite.transform = ray_sprite.transform
 	if !animated_sprite.playing: #looks like if it is not set to playing, some manual animation is done instead
 		#warning-ignore:integer_division
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
