@@ -1,4 +1,4 @@
-[gd_scene load_steps=881 format=2]
+[gd_scene load_steps=882 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -847,6 +847,7 @@
 [ext_resource path="res://assets/tiles/bookshelf/icons/3.png" type="Texture" id=845]
 [ext_resource path="res://assets/tiles/bookshelf/icons/8.png" type="Texture" id=846]
 [ext_resource path="res://scenes/actors/objects/star_door/left.png" type="Texture" id=847]
+[ext_resource path="res://scenes/actors/objects/sawblade/sawblade.png" type="Texture" id=848]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2337,6 +2338,13 @@ palette_icons = [ ExtResource( 559 ), ExtResource( 555 ), ExtResource( 556 ), Ex
 palette_previews = [ ExtResource( 559 ), ExtResource( 555 ), ExtResource( 556 ), ExtResource( 557 ), ExtResource( 558 ) ]
 icon = ExtResource( 559 )
 preview = ExtResource( 559 )
+
+[node name="Sawblade" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 24 )
+object_id = 114
+is_object = true
+icon = ExtResource( 848 )
+preview = ExtResource( 848 )
 
 [node name="Jelectro" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 24 )
