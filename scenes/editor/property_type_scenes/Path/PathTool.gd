@@ -15,6 +15,7 @@ onready var nodes = Array()
 
 var node_positions : Dictionary
 
+var inverse_transform : Transform2D
 var editor
 # the object which has the path
 var editing_object: GameObject
@@ -35,14 +36,14 @@ func initialize(object_ref):
 	editor.add_child(path_node_container)
 	
 	set_object_property_button(object_ref)
-	
+	path_node_container.transform = editing_object.transform
+	inverse_transform = path_node_container.transform.affine_inverse()
 	
 
 func _process(delta):
 	mouse_position = Vector2(stepify(path_node_container.get_local_mouse_position().x, 16), stepify(path_node_container.get_local_mouse_position().y, 16))
 	
 	cursor.position = cursor.to_local(mouse_position)
-	print(mouse_position)
 		# this makes the editor unable to do anything
 	editor.selected_tool = 3
 	if Input.is_action_just_pressed("place") and get_viewport().get_mouse_position().y > 70:
@@ -52,7 +53,7 @@ func _process(delta):
 			selected_node.deselect()
 		
 		if current_mode == MODE_PLACE:
-			add_node(path_node_container.get_global_transform().xform_inv(editor.get_global_mouse_position()))
+			add_node(inverse_transform.xform(editor.get_global_mouse_position()))
 		else:
 			_click_buffer += 1
 
