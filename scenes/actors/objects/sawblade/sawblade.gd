@@ -73,6 +73,8 @@ func _ready():
 		editor_sprite.visible = true
 		sprite.self_modulate = Color(1, 1, 1, 0.5)
 		var _connect = connect("property_changed", self, "update_property")
+	sprite.animation = String(palette)
+	editor_sprite.animation = String(palette)
 		
 
 
