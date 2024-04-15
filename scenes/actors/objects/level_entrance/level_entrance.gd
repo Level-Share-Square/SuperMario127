@@ -62,6 +62,7 @@ func _ready():
 							character.position = position
 							Singleton.CurrentLevelData.level_data.vars.transition_data = []
 							pass
+					
 				else:
 					character.position = position
 					character.toggle_movement(true)
@@ -81,9 +82,20 @@ func exit_teleport(obj : Array):
 		if obj[1].object_type == "pipe":
 			character.position = obj[1].position + Vector2(0, obj[1].get_bottom_distance())
 		if obj[1].object_type == "area_transition":
-			character.velocity = transition_character_data[6]
-			character.set_state_by_name(transition_character_data[7])
-			character.facing_direction = transition_character_data[8]
+			if transition_character_data.size() >= 7:	
+				var helper = transition_character_data.back()
+				character.velocity = helper.velocity
+				character.set_state_by_name(helper.state)
+				character.facing_direction = helper.facing_direction
+	#			print(character.position)
+	#			print(helper.find_exit_offset(obj[1].vertical, obj[1].parts * 32))
+				character.position += helper.find_exit_offset(obj[1].vertical, obj[1].parts * 32)
+	#			print(character.position)
+				character.camera.global_position = helper.find_camera_position(obj[1].vertical, character.global_position, character.camera.base_size)
+				character.camera.last_position = character.camera.global_position
+				print("set camera position")
+			else:
+				character.state = character.get_state_node("FallState")
 		yield(get_tree().create_timer(0.5), "timeout")
 		if character_string != "character":
 			yield(get_tree().create_timer(1.25), "timeout")

@@ -63,7 +63,8 @@ func _physics_process(delta):
 						elif last_position.x > stopper.global_position.x and global_position.x < last_position.x:
 							global_position.x = stopper.right_bound.x + size.x - 1
 						else:
-							print("oops")
+							#print("oops")
+							pass
 					else:
 #						print("vertical")
 #						print(overlapX)
@@ -74,12 +75,13 @@ func _physics_process(delta):
 							global_position.y = stopper.top_bound.y - size.y + 1
 						# bottom bound of stopper
 						elif last_position.y > stopper.global_position.y and global_position.y < last_position.y:
-							print("botttom")
-							print(stopper.top_bound.y)
-							print(stopper.bottom_bound.y)
+							#print("botttom")
+							#print(stopper.top_bound.y)
+							#print(stopper.bottom_bound.y)
 							global_position.y = stopper.bottom_bound.y + size.y - 1
 						else:
-							print("oops")
+							#print("oops")
+							pass
 				
 			
 			

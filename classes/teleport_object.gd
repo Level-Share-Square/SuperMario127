@@ -93,10 +93,7 @@ func change_areas(entering_character : Character, entering):
 			nozzle_name,
 			character.fuel,
 			powerup_array,
-			get_tree().get_current_scene().switch_timer,
-			character.velocity,
-			character.state.name,
-			character.facing_direction
+			get_tree().get_current_scene().switch_timer
 		]
 		
 		if character2 != null:
@@ -116,10 +113,7 @@ func change_areas(entering_character : Character, entering):
 				nozzle_name_2,
 				character2.fuel,
 				powerup_array2,
-				get_tree().get_current_scene().switch_timer,
-				character.velocity,
-				character.state.name,
-				character.facing_direction
+				get_tree().get_current_scene().switch_timer
 			]
 		else:
 			Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
@@ -160,3 +154,31 @@ func _start_local_transition(character : Character, entering) -> void:
 		Singleton.SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
 		# this starts an inner scene transition, then connects a function (one shot) to start as it finishes
 		Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, -1, -1, false, false)
+		
+class AreaTransitionHelper:
+	var velocity
+	var state
+	var facing_direction
+	var enter_pos
+	var vertical
+
+	func _init(ve, s, f, e, v):
+		velocity = ve
+		state = s
+		facing_direction = f
+		enter_pos = e
+		vertical = v
+		
+	func find_exit_offset(exit_vertical : bool, exit_size : float) -> Vector2:
+		if exit_vertical:
+			return Vector2(16 *  sign(velocity.x), clamp(-enter_pos, -exit_size/2, exit_size/2))
+		else:
+			return Vector2(clamp(enter_pos, -exit_size/2, exit_size/2), 16 * -sign(velocity.y))
+		return Vector2(clamp(enter_pos, -exit_size/2, exit_size/2) + 16 * sign(velocity.x) * int(!exit_vertical), clamp(enter_pos, -exit_size/2, exit_size/2) + 16 * -sign(velocity.y) * int(exit_vertical))
+	func find_camera_position(exit_vertical : bool, exit_global_position : Vector2, camera_rect : Vector2):
+		if exit_vertical:
+			return exit_global_position + Vector2((camera_rect.x + 100) * sign(velocity.x), 0)
+		else:
+			return exit_global_position + Vector2(0, (camera_rect.y + 100) * -sign(velocity.y))
+		return exit_global_position + Vector2((camera_rect.x + 16) * sign(velocity.x), (camera_rect.y) + 16 * -sign(velocity.y))  * Vector2(int(!exit_vertical), int(exit_vertical))
+		

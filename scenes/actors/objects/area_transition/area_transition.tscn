@@ -110,17 +110,16 @@ func update_parts():
 
 func body_entered(body):
 	if enabled and body.name.begins_with(\"Character\") and !body.dead and body.controllable and teleport_enabled:
-		print(\"teleporting\")
 		body.toggle_movement(false)
 		change_areas(body, true)
+		# change this to work with multiplayer
+		Singleton.CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(body.velocity, body.state.name, body.facing_direction, to_local(body.global_position).x, vertical))
 		
 func body_exited(body):
 	if enabled and body.name.begins_with(\"Character\") and !body.dead:
 		teleport_enabled = true
 		
 func start_exit_anim(character):
-	print(\"exit anim\")
-	print(character.global_position)
 	# to prevent teleport loop
 	teleport_enabled = false;
 	character.toggle_movement(true)
@@ -129,23 +128,14 @@ func start_exit_anim(character):
 #	character.sprite.animation = \"pipeRight\"
 #	character.sprite.playing = true
 #	character.sprite.frame = 2
+
+	# this means we came from another area transition
+	if Singleton.CurrentLevelData.level_data.vars.transition_character_data.size() >= 7:
+		var helper = Singleton.CurrentLevelData.level_data.vars.transition_character_data.back()
+		character.camera.global_position = helper.find_camera_position(vertical, character.global_position, character.camera.base_size)
+		character.camera.last_position = character.camera.global_position
+		Singleton.CurrentLevelData.level_data.vars.transition_data = []
 	reset_sprite(character)
-	Singleton.CurrentLevelData.level_data.vars.transition_data = []
-	# code to ensure the camera bounds aren't visible after transition
-	if stops_camera:
-		var camera = character.camera
-		print(character.velocity)
-		if !vertical:
-			if character.velocity.y < 0:
-				camera.global_position.y = camera.size.y - camera_stopper.bottom_bound.y
-			else:
-				camera.global_position.y = camera.size.y + camera_stopper.top_bound.y
-		else:
-			if character.velocity.x < 0:
-				camera.global_position.x = camera.size.x - camera_stopper.left_bound.x
-			else:
-				camera.global_position.x = camera.size.x + camera_stopper.right_bound.x
-		camera.last_position = camera.global_position
 	
 func reset_sprite(character : Character): #This is here in case Mario came from a door to a pipe
 	character.z_index = -1
