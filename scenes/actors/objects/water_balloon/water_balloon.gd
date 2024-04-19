@@ -8,6 +8,8 @@ onready var sound = $AudioStreamPlayer
 export var normal_texture : Texture
 export var recolorable_texture : Texture 
 
+const BOUNCE_POWER = -400
+
 var added_stamina = 100
 var added_water = 50
 var collected = false
@@ -45,7 +47,7 @@ func collect(body):
 		#bounce
 		if !body.big_attack and !body.invincible and body.velocity.y > -325:
 			body.set_state_by_name("BounceState", 0)
-			body.velocity.y = -325
+			body.velocity.y = BOUNCE_POWER
 
 func _ready():
 	$AnimationPlayer.play("bpb")
