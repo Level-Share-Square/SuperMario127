@@ -1,0 +1,19 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/actors/objects/big_tree/big_tree.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/cobweb2/cobweb_flat1.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat2.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat8.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat3.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat5.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat6.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat4.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat9.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat7.png" type="Texture" id=10]
+
+[node name="Cobweb2" type="Node2D"]
+script = ExtResource( 1 )
+palette_textures = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 4 ), ExtResource( 9 ) ]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )

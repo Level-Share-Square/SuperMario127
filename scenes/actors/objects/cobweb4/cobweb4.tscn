@@ -1,0 +1,19 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/actors/objects/big_tree/big_tree.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge3.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge5.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge7.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/cobweb4/cobweb_bridge1.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge2.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge6.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge9.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge8.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge4.png" type="Texture" id=10]
+
+[node name="Cobweb4" type="Node2D"]
+script = ExtResource( 1 )
+palette_textures = [ ExtResource( 6 ), ExtResource( 2 ), ExtResource( 10 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 8 ) ]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 5 )

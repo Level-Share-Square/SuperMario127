@@ -1,11 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/actors/objects/big_tree/big_tree.gd" type="Script" id=1]
-[ext_resource path="res://scenes/actors/objects/cobweb/cobweb.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og9.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og5.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og4.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og6.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og2.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og8.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og7.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og3.png" type="Texture" id=9]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/cobweb.png-eb8b16aa5e99a7b26fe9fd2c701ac758.stex"
 
 [node name="Cobweb" type="Node2D"]
 z_index = -1
 script = ExtResource( 1 )
+palette_textures = [ ExtResource( 6 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 2 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+texture = SubResource( 1 )

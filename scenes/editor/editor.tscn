@@ -1,4 +1,4 @@
-[gd_scene load_steps=886 format=2]
+[gd_scene load_steps=1005 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -753,7 +753,7 @@
 [ext_resource path="res://scenes/actors/objects/door/palettes/1/icon.png" type="Texture" id=751]
 [ext_resource path="res://scenes/actors/objects/door/palettes/2/icon.png" type="Texture" id=752]
 [ext_resource path="res://scenes/actors/objects/sponge/sponge.png" type="Texture" id=753]
-[ext_resource path="res://scenes/actors/objects/cobweb/icon.png" type="Texture" id=754]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og9.png" type="Texture" id=754]
 [ext_resource path="res://assets/tiles/snow/pallete_icons/4_slab.png" type="Texture" id=755]
 [ext_resource path="res://assets/tiles/snow/pallete_icons/5_slab.png" type="Texture" id=756]
 [ext_resource path="res://assets/tiles/snow/pallete_icons/1_block.png" type="Texture" id=757]
@@ -847,11 +847,130 @@
 [ext_resource path="res://assets/tiles/bookshelf/icons/3.png" type="Texture" id=845]
 [ext_resource path="res://assets/tiles/bookshelf/icons/8.png" type="Texture" id=846]
 [ext_resource path="res://scenes/actors/objects/star_door/left.png" type="Texture" id=847]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/2.png" type="Texture" id=848]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/icesaw1.png" type="Texture" id=849]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/darksaw1.png" type="Texture" id=850]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/goldsaw1.png" type="Texture" id=851]
 [ext_resource path="res://scenes/actors/objects/sawblade/sawblade1.png" type="Texture" id=852]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/rustsaw1.png" type="Texture" id=853]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/1.png" type="Texture" id=854]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/4.png" type="Texture" id=855]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/3.png" type="Texture" id=856]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/5.png" type="Texture" id=857]
+[ext_resource path="res://scenes/actors/objects/large_snow_tree/palettes/icons/icon4.png" type="Texture" id=858]
+[ext_resource path="res://scenes/actors/objects/large_snow_tree/palettes/icons/icon3.png" type="Texture" id=859]
+[ext_resource path="res://scenes/actors/objects/large_snow_tree/palettes/icons/icon1.png" type="Texture" id=860]
+[ext_resource path="res://scenes/actors/objects/large_snow_tree/palettes/previews/preview3.png" type="Texture" id=861]
+[ext_resource path="res://scenes/actors/objects/large_snow_tree/palettes/previews/preview4.png" type="Texture" id=862]
+[ext_resource path="res://scenes/actors/objects/large_snow_tree/palettes/icons/icon2.png" type="Texture" id=863]
+[ext_resource path="res://scenes/actors/objects/large_snow_tree/palettes/previews/preview5.png" type="Texture" id=864]
+[ext_resource path="res://scenes/actors/objects/large_snow_tree/palettes/previews/preview2.png" type="Texture" id=865]
+[ext_resource path="res://scenes/actors/objects/large_snow_tree/palettes/icons/icon5.png" type="Texture" id=866]
+[ext_resource path="res://scenes/actors/objects/large_snow_tree/palettes/previews/preview1.png" type="Texture" id=867]
+[ext_resource path="res://scenes/actors/objects/large_snow_pillar/palettes/large_snow_pillar_2.png" type="Texture" id=868]
+[ext_resource path="res://scenes/actors/objects/large_snow_pillar/palettes/large_snow_pillar_3.png" type="Texture" id=869]
+[ext_resource path="res://scenes/actors/objects/large_snow_pillar/palettes/preview_1.png" type="Texture" id=870]
+[ext_resource path="res://scenes/actors/objects/large_snow_pillar/palettes/preview_3.png" type="Texture" id=871]
+[ext_resource path="res://scenes/actors/objects/large_snow_pillar/palettes/preview_4.png" type="Texture" id=872]
+[ext_resource path="res://scenes/actors/objects/large_snow_pillar/palettes/large_snow_pillar_4.png" type="Texture" id=873]
+[ext_resource path="res://scenes/actors/objects/large_snow_pillar/palettes/large_snow_pillar_5.png" type="Texture" id=874]
+[ext_resource path="res://scenes/actors/objects/large_snow_pillar/palettes/preview_2.png" type="Texture" id=875]
+[ext_resource path="res://scenes/actors/objects/large_snow_pillar/palettes/large_snow_pillar_1.png" type="Texture" id=876]
+[ext_resource path="res://scenes/actors/objects/large_snow_pillar/palettes/preview_5.png" type="Texture" id=877]
+[ext_resource path="res://scenes/actors/objects/snow_pillar/palettes/snow_pillar_2.png" type="Texture" id=878]
+[ext_resource path="res://scenes/actors/objects/snow_pillar/palettes/snow_pillar_3.png" type="Texture" id=879]
+[ext_resource path="res://scenes/actors/objects/snow_pillar/palettes/preview_5.png" type="Texture" id=880]
+[ext_resource path="res://scenes/actors/objects/snow_pillar/palettes/snow_pillar_5.png" type="Texture" id=881]
+[ext_resource path="res://scenes/actors/objects/snow_pillar/palettes/preview_4.png" type="Texture" id=882]
+[ext_resource path="res://scenes/actors/objects/snow_pillar/palettes/snow_pillar_1.png" type="Texture" id=883]
+[ext_resource path="res://scenes/actors/objects/snow_pillar/palettes/snow_pillar_4.png" type="Texture" id=884]
+[ext_resource path="res://scenes/actors/objects/snow_pillar/palettes/preview_3.png" type="Texture" id=885]
+[ext_resource path="res://scenes/actors/objects/snow_pillar/palettes/preview_2.png" type="Texture" id=886]
+[ext_resource path="res://scenes/actors/objects/snow_pillar/palettes/preview_1.png" type="Texture" id=887]
+[ext_resource path="res://scenes/actors/objects/snow_log/palettes/icons/6.png" type="Texture" id=888]
+[ext_resource path="res://scenes/actors/objects/snow_log/palettes/7.png" type="Texture" id=889]
+[ext_resource path="res://scenes/actors/objects/snow_log/palettes/icons/1.png" type="Texture" id=890]
+[ext_resource path="res://scenes/actors/objects/snow_log/palettes/icons/2.png" type="Texture" id=891]
+[ext_resource path="res://scenes/actors/objects/snow_log/palettes/3.png" type="Texture" id=892]
+[ext_resource path="res://scenes/actors/objects/snow_log/palettes/icons/5.png" type="Texture" id=893]
+[ext_resource path="res://scenes/actors/objects/snow_log/palettes/1.png" type="Texture" id=894]
+[ext_resource path="res://scenes/actors/objects/snow_log/palettes/5.png" type="Texture" id=895]
+[ext_resource path="res://scenes/actors/objects/snow_log/palettes/icons/3.png" type="Texture" id=896]
+[ext_resource path="res://scenes/actors/objects/snow_log/palettes/icons/7.png" type="Texture" id=897]
+[ext_resource path="res://scenes/actors/objects/snow_log/palettes/6.png" type="Texture" id=898]
+[ext_resource path="res://scenes/actors/objects/snow_log/palettes/icons/4.png" type="Texture" id=899]
+[ext_resource path="res://scenes/actors/objects/snow_log/palettes/4.png" type="Texture" id=900]
+[ext_resource path="res://scenes/actors/objects/snow_log/palettes/2.png" type="Texture" id=901]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og5.png" type="Texture" id=902]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og4.png" type="Texture" id=903]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og6.png" type="Texture" id=904]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og2.png" type="Texture" id=905]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og8.png" type="Texture" id=906]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og7.png" type="Texture" id=907]
+[ext_resource path="res://scenes/actors/objects/cobweb/palettes/cobweb_og3.png" type="Texture" id=908]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat2.png" type="Texture" id=909]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat8.png" type="Texture" id=910]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat3.png" type="Texture" id=911]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat5.png" type="Texture" id=912]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat6.png" type="Texture" id=913]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat4.png" type="Texture" id=914]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat9.png" type="Texture" id=915]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat7.png" type="Texture" id=916]
+[ext_resource path="res://scenes/actors/objects/cobweb2/cobweb_flat1.png" type="Texture" id=917]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat_icon5.png" type="Texture" id=918]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat_icon3.png" type="Texture" id=919]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat_icon7.png" type="Texture" id=920]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat_icon4.png" type="Texture" id=921]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat_icon9.png" type="Texture" id=922]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat_icon6.png" type="Texture" id=923]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat_icon8.png" type="Texture" id=924]
+[ext_resource path="res://scenes/actors/objects/cobweb2/palettes/cobweb_flat_icon2.png" type="Texture" id=925]
+[ext_resource path="res://scenes/actors/objects/cobweb2/cobweb_flat_icon1.png" type="Texture" id=926]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy2.png" type="Texture" id=927]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy8.png" type="Texture" id=928]
+[ext_resource path="res://scenes/actors/objects/cobweb3/cobweb_droopy1.png" type="Texture" id=929]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy3.png" type="Texture" id=930]
+[ext_resource path="res://scenes/actors/objects/cobweb3/cobweb_droopy_icon1.png" type="Texture" id=931]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon2.png" type="Texture" id=932]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon4.png" type="Texture" id=933]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon7.png" type="Texture" id=934]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy7.png" type="Texture" id=935]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy9.png" type="Texture" id=936]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon6.png" type="Texture" id=937]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon9.png" type="Texture" id=938]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy4.png" type="Texture" id=939]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon5.png" type="Texture" id=940]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon8.png" type="Texture" id=941]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy5.png" type="Texture" id=942]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy_icon3.png" type="Texture" id=943]
+[ext_resource path="res://scenes/actors/objects/cobweb3/palettes/cobweb_droopy6.png" type="Texture" id=944]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge3.png" type="Texture" id=945]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge5.png" type="Texture" id=946]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge7.png" type="Texture" id=947]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge_icon7.png" type="Texture" id=948]
+[ext_resource path="res://scenes/actors/objects/cobweb4/cobweb_bridge1.png" type="Texture" id=949]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge2.png" type="Texture" id=950]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge_icon5.png" type="Texture" id=951]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge_icon2.png" type="Texture" id=952]
+[ext_resource path="res://scenes/actors/objects/cobweb4/cobweb_bridge_icon1.png" type="Texture" id=953]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge_icon8.png" type="Texture" id=954]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge_icon6.png" type="Texture" id=955]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge6.png" type="Texture" id=956]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge9.png" type="Texture" id=957]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge_icon4.png" type="Texture" id=958]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge8.png" type="Texture" id=959]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge_icon9.png" type="Texture" id=960]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge_icon3.png" type="Texture" id=961]
+[ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge4.png" type="Texture" id=962]
+[ext_resource path="res://assets/tiles/tiled_floor/palette_icons/tiled_floor_icon2.png" type="Texture" id=963]
+[ext_resource path="res://assets/tiles/tiled_floor/palette_icons/tiled_floor_icon8.png" type="Texture" id=964]
+[ext_resource path="res://assets/tiles/tiled_floor/palette_icons/tiled_floor_icon9.png" type="Texture" id=965]
+[ext_resource path="res://assets/tiles/tiled_floor/palette_icons/tiled_floor_icon5.png" type="Texture" id=966]
+[ext_resource path="res://assets/tiles/tiled_floor/palette_icons/tiled_floor_icon1.png" type="Texture" id=967]
+[ext_resource path="res://assets/tiles/tiled_floor/palette_icons/tiled_floor_icon3.png" type="Texture" id=968]
+[ext_resource path="res://assets/tiles/tiled_floor/palette_icons/tiled_floor_icon6.png" type="Texture" id=969]
+[ext_resource path="res://assets/tiles/tiled_floor/palette_icons/tiled_floor_icon7.png" type="Texture" id=970]
+[ext_resource path="res://assets/tiles/tiled_floor/palette_icons/tiled_floor_icon4.png" type="Texture" id=971]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2856,6 +2975,8 @@ object_id = 24
 is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
+palette_icons = [ ExtResource( 124 ), ExtResource( 854 ), ExtResource( 848 ), ExtResource( 856 ), ExtResource( 855 ), ExtResource( 857 ) ]
+palette_previews = [ ExtResource( 125 ), ExtResource( 854 ), ExtResource( 848 ), ExtResource( 856 ), ExtResource( 855 ), ExtResource( 857 ) ]
 change_to = "LargeSnowTree"
 items_in_sequence = 2
 icon = ExtResource( 125 )
@@ -2867,6 +2988,8 @@ object_id = 59
 is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
+palette_icons = [ ExtResource( 204 ), ExtResource( 860 ), ExtResource( 863 ), ExtResource( 859 ), ExtResource( 858 ), ExtResource( 866 ) ]
+palette_previews = [ ExtResource( 202 ), ExtResource( 867 ), ExtResource( 865 ), ExtResource( 861 ), ExtResource( 862 ), ExtResource( 864 ) ]
 change_to = "SnowTree"
 items_in_sequence = 2
 index_in_sequence = 1
@@ -2879,6 +3002,8 @@ object_id = 60
 is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
+palette_icons = [ ExtResource( 201 ), ExtResource( 883 ), ExtResource( 878 ), ExtResource( 879 ), ExtResource( 884 ), ExtResource( 881 ) ]
+palette_previews = [ ExtResource( 205 ), ExtResource( 887 ), ExtResource( 886 ), ExtResource( 885 ), ExtResource( 882 ), ExtResource( 880 ) ]
 change_to = "LargeSnowPillar"
 items_in_sequence = 2
 icon = ExtResource( 201 )
@@ -2890,6 +3015,8 @@ object_id = 61
 is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
+palette_icons = [ ExtResource( 203 ), ExtResource( 876 ), ExtResource( 868 ), ExtResource( 869 ), ExtResource( 873 ), ExtResource( 874 ) ]
+palette_previews = [ ExtResource( 206 ), ExtResource( 870 ), ExtResource( 875 ), ExtResource( 871 ), ExtResource( 872 ), ExtResource( 877 ) ]
 change_to = "SnowPillar"
 items_in_sequence = 2
 index_in_sequence = 1
@@ -2903,6 +3030,8 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
+palette_icons = [ ExtResource( 221 ), ExtResource( 890 ), ExtResource( 891 ), ExtResource( 896 ), ExtResource( 899 ), ExtResource( 893 ), ExtResource( 888 ), ExtResource( 897 ) ]
+palette_previews = [ ExtResource( 220 ), ExtResource( 894 ), ExtResource( 901 ), ExtResource( 892 ), ExtResource( 900 ), ExtResource( 895 ), ExtResource( 898 ), ExtResource( 889 ) ]
 icon = ExtResource( 221 )
 preview = ExtResource( 220 )
 
@@ -3386,8 +3515,48 @@ preview = ExtResource( 551 )
 script = ExtResource( 24 )
 object_id = 103
 is_object = true
-icon = ExtResource( 754 )
+palette_icons = [ ExtResource( 742 ), ExtResource( 905 ), ExtResource( 908 ), ExtResource( 903 ), ExtResource( 902 ), ExtResource( 904 ), ExtResource( 907 ), ExtResource( 906 ), ExtResource( 754 ) ]
+palette_previews = [ ExtResource( 742 ), ExtResource( 905 ), ExtResource( 908 ), ExtResource( 903 ), ExtResource( 902 ), ExtResource( 904 ), ExtResource( 907 ), ExtResource( 906 ), ExtResource( 754 ) ]
+change_to = "Cobweb2"
+items_in_sequence = 4
+icon = ExtResource( 742 )
 preview = ExtResource( 742 )
+
+[node name="Cobweb2" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 24 )
+object_id = 115
+is_object = true
+palette_icons = [ ExtResource( 926 ), ExtResource( 925 ), ExtResource( 919 ), ExtResource( 921 ), ExtResource( 918 ), ExtResource( 923 ), ExtResource( 920 ), ExtResource( 924 ), ExtResource( 922 ) ]
+palette_previews = [ ExtResource( 917 ), ExtResource( 909 ), ExtResource( 911 ), ExtResource( 914 ), ExtResource( 912 ), ExtResource( 913 ), ExtResource( 916 ), ExtResource( 910 ), ExtResource( 915 ) ]
+change_to = "Cobweb3"
+items_in_sequence = 4
+index_in_sequence = 1
+icon = ExtResource( 926 )
+preview = ExtResource( 917 )
+
+[node name="Cobweb3" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 24 )
+object_id = 116
+is_object = true
+palette_icons = [ ExtResource( 931 ), ExtResource( 932 ), ExtResource( 943 ), ExtResource( 933 ), ExtResource( 940 ), ExtResource( 937 ), ExtResource( 934 ), ExtResource( 941 ), ExtResource( 938 ) ]
+palette_previews = [ ExtResource( 929 ), ExtResource( 927 ), ExtResource( 930 ), ExtResource( 939 ), ExtResource( 942 ), ExtResource( 944 ), ExtResource( 935 ), ExtResource( 928 ), ExtResource( 936 ) ]
+change_to = "Cobweb4"
+items_in_sequence = 4
+index_in_sequence = 2
+icon = ExtResource( 931 )
+preview = ExtResource( 929 )
+
+[node name="Cobweb4" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 24 )
+object_id = 117
+is_object = true
+palette_icons = [ ExtResource( 953 ), ExtResource( 952 ), ExtResource( 961 ), ExtResource( 958 ), ExtResource( 951 ), ExtResource( 955 ), ExtResource( 948 ), ExtResource( 954 ), ExtResource( 960 ) ]
+palette_previews = [ ExtResource( 949 ), ExtResource( 950 ), ExtResource( 945 ), ExtResource( 962 ), ExtResource( 946 ), ExtResource( 956 ), ExtResource( 947 ), ExtResource( 959 ), ExtResource( 957 ) ]
+change_to = "Cobweb"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 953 )
+preview = ExtResource( 949 )
 
 [node name="Bookshelf" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
@@ -3421,6 +3590,8 @@ preview = ExtResource( 227 )
 [node name="TiledFloor" type="Node" parent="PlaceableItems/CastleGroup"]
 script = ExtResource( 24 )
 tileset_id = 22
+palette_icons = [ ExtResource( 222 ), ExtResource( 963 ), ExtResource( 968 ), ExtResource( 971 ), ExtResource( 966 ), ExtResource( 969 ), ExtResource( 970 ), ExtResource( 964 ), ExtResource( 965 ), ExtResource( 967 ) ]
+palette_previews = [ ExtResource( 222 ), ExtResource( 963 ), ExtResource( 968 ), ExtResource( 971 ), ExtResource( 966 ), ExtResource( 969 ), ExtResource( 970 ), ExtResource( 964 ), ExtResource( 965 ), ExtResource( 967 ) ]
 icon = ExtResource( 222 )
 preview = ExtResource( 222 )
 
