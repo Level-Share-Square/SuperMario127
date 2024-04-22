@@ -1,150 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[sub_resource type="GDScript" id=4]
-script/source = "extends TeleportObject
-
-
-onready var area = $Area2D
-onready var collision_shape = $Area2D/CollisionShape2D
-onready var camera_stopper = $CameraStopper
-onready var camera_stop_shape = $CameraStopper/CollisionShape2D
-onready var sprite = $Sprite
-
-var parts := 1
-export var stops_camera := true
-export var vertical := false
-
-var teleport_enabled := true
-
-func _set_properties() -> void:
-	savable_properties = [\"area_id\", \"destination_tag\", \"teleportation_mode\", \"parts\", \"stops_camera\", \"vertical\"]
-	editable_properties = [\"area_id\", \"destination_tag\", \"teleportation_mode\", \"parts\", \"stops_camera\", \"vertical\"]
-	
-func _set_property_values() -> void:
-
-	set_property(\"area_id\", area_id)
-	set_property(\"destination_tag\", destination_tag)
-	set_property(\"teleportation_mode\", teleportation_mode, true, \"Teleport Mode\")
-	set_bool_alias(\"teleportation_mode\", \"Remote\", \"Local\")
-	set_property(\"parts\", parts)
-	set_property(\"stops_camera\", stops_camera)
-	set_property(\"vertical\", vertical)
-	
-	
-func _init():
-	teleportation_mode = false
-	object_type = \"area_transition\"
-	
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
-		if event.button_index == 5: # Mouse wheel down
-			parts -= 1
-			if parts < 1:
-				parts = 1
-			set_property(\"parts\", parts, true)
-		elif event.button_index == 4: # Mouse wheel up
-			parts += 1
-			set_property(\"parts\", parts, true)
-	
-func _ready() -> void:
-	.ready() #calls parent class \"TeleportObject\"
-	var append_tag
-	if destination_tag != \"default_teleporter\" || destination_tag != null:
-		append_tag = destination_tag.to_lower()
-	Singleton.CurrentLevelData.level_data.vars.teleporters.append([append_tag, self])
-	
-	if mode != 1:
-		var _connect = area.connect(\"body_entered\", self, \"body_entered\")
-		var _connect2 = area.connect(\"body_exited\", self, \"body_exited\")
-		sprite.visible = false
-		camera_stopper.monitorable = stops_camera
-	else:
-		var _connect2 = connect(\"property_changed\", self, \"update_property\")
-		camera_stopper.visible = stops_camera
-		
-	update_property(\"parts\", parts)
-		
-func update_property(key, value):
-	match(key):
-		\"parts\":
-			update_parts()
-		\"vertical\":
-			if vertical:
-#				sprite.rect_size.x = 32
-#				sprite.rect_position.x = -16
-#				collision_shape.shape.extents.x = 16
-#				camera_stop_shape.shape.extents.x = 52
-				sprite.rect_size.y = 32
-				sprite.rect_position.y = -16
-				collision_shape.shape.extents.y = 16
-				camera_stop_shape.shape.extents.y = 52
-				rotation_degrees = 270
-			else:
-				sprite.rect_size.y = 32
-				sprite.rect_position.y = -16
-				collision_shape.shape.extents.y = 16
-				camera_stop_shape.shape.extents.y = 52
-			update_parts()
-		\"rotation_degrees\":
-			rotation_degrees = 270 if vertical else 0
-		\"stops_camera\":
-			camera_stopper.visible = value
-			
-func update_parts():
-	if vertical:
-#		sprite.rect_size.y = parts * 32
-#		sprite.rect_position.y = (-16 * parts)
-#		collision_shape.shape.extents.y = 16 * parts
-#		camera_stop_shape.shape.extents.y = collision_shape.shape.extents.y + 26
-		sprite.rect_size.x = parts * 32
-		sprite.rect_position.x = (-16 * parts)
-		collision_shape.shape.extents.x = 16 * parts
-		camera_stop_shape.shape.extents.x = collision_shape.shape.extents.x + 26
-		rotation_degrees = 270
-	else:
-		sprite.rect_size.x = parts * 32
-		sprite.rect_position.x = (-16 * parts)
-		collision_shape.shape.extents.x = 16 * parts
-		camera_stop_shape.shape.extents.x = collision_shape.shape.extents.x + 26
-		
-
-func body_entered(body):
-	if enabled and body.name.begins_with(\"Character\") and !body.dead and body.controllable and teleport_enabled:
-		body.toggle_movement(false)
-		body.gravity_scale = 0
-		change_areas(body, true)
-		# change this to work with multiplayer
-		Singleton.CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(body.velocity, body.state.name, body.facing_direction, to_local(body.global_position).x, vertical))
-		
-func body_exited(body):
-	if enabled and body.name.begins_with(\"Character\") and !body.dead:
-		teleport_enabled = true
-		
-func start_exit_anim(character):
-	# to prevent teleport loop
-	teleport_enabled = false;
-	character.toggle_movement(true)
-	character.gravity_scale = 1
-#	character.velocity = Singleton.CurrentLevelData.level_data.vars.transition_data[3]
-#	character.show()
-#	character.sprite.animation = \"pipeRight\"
-#	character.sprite.playing = true
-#	character.sprite.frame = 2
-
-	# this means we came from another area transition
-	if Singleton.CurrentLevelData.level_data.vars.transition_character_data.size() >= 7:
-		var helper = Singleton.CurrentLevelData.level_data.vars.transition_character_data.back()
-		character.camera.global_position = helper.find_camera_position(vertical, character.global_position, character.camera.base_size)
-		character.camera.last_position = character.camera.global_position
-		Singleton.CurrentLevelData.level_data.vars.transition_data = []
-	reset_sprite(character)
-	
-func reset_sprite(character : Character): #This is here in case Mario came from a door to a pipe
-	character.z_index = -1
-	character.sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
-	character.sprite.scale = Vector2(1.0, 1.0)
-	character.sprite.position = Vector2.ZERO
-"
+[ext_resource path="res://scenes/actors/objects/area_transition/area_transition.gd" type="Script" id=1]
+[ext_resource path="res://classes/camera_stopper.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
@@ -155,53 +12,12 @@ resource_local_to_scene = true
 resource_name = "text"
 load_path = "res://.import/area_transition.png-9f735045b4f2ee1f192817d15e089d27.stex"
 
-[sub_resource type="GDScript" id=3]
-script/source = "extends Area2D
-
-var top_bound
-var bottom_bound 
-var left_bound
-var right_bound 
-var editor_rect
-
-func _ready():
-	set_size(get_child(0).shape.extents)
-	set_collision_layer_bit(11, true)
-	
-	if get_tree().get_current_scene().mode != 0:
-		editor_rect = ReferenceRect.new()
-		editor_rect.rect_size = get_child(0).shape.extents * 2
-		editor_rect.border_color = Color.aqua
-		editor_rect.border_width = 2.0
-		editor_rect.editor_only = false
-		editor_rect.mouse_filter = 2
-		self.add_child(editor_rect)
-
-func _process(_delta):
-	if get_tree().get_current_scene().mode != 0:
-		editor_rect.rect_size = get_child(0).shape.extents * 2
-		editor_rect.rect_position.x = -editor_rect.rect_size.x / 2
-		editor_rect.rect_position.y = -editor_rect.rect_size.y / 2
-	else:
-		print(\"top\")
-		print(to_local(top_bound))
-		print(to_local(bottom_bound))
-		print(to_local(left_bound))
-		print(to_local(right_bound))
-		
-func set_size(size):
-	top_bound = global_transform.xform(Vector2(0, -size.y))
-	bottom_bound = global_transform.xform(Vector2(0, size.y))
-	left_bound = global_transform.xform(Vector2(-size.x, 0))
-	right_bound = global_transform.xform(Vector2(size.x, 0))
-"
-
 [sub_resource type="RectangleShape2D" id=2]
 resource_local_to_scene = true
 extents = Vector2( 42, 52 )
 
 [node name="AreaTransition" type="Node2D"]
-script = SubResource( 4 )
+script = ExtResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
@@ -215,13 +31,14 @@ margin_left = -16.0
 margin_top = -16.0
 margin_right = 16.0
 margin_bottom = 16.0
+rect_pivot_offset = Vector2( 16, 16 )
 texture = SubResource( 5 )
 region_rect = Rect2( 0, 0, 32, 32 )
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="CameraStopper" type="Area2D" parent="."]
-script = SubResource( 3 )
+script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraStopper"]
 shape = SubResource( 2 )

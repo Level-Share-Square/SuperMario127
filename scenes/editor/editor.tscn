@@ -1,4 +1,4 @@
-[gd_scene load_steps=1005 format=2]
+[gd_scene load_steps=1008 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -971,6 +971,9 @@
 [ext_resource path="res://assets/tiles/tiled_floor/palette_icons/tiled_floor_icon6.png" type="Texture" id=969]
 [ext_resource path="res://assets/tiles/tiled_floor/palette_icons/tiled_floor_icon7.png" type="Texture" id=970]
 [ext_resource path="res://assets/tiles/tiled_floor/palette_icons/tiled_floor_icon4.png" type="Texture" id=971]
+[ext_resource path="res://scenes/actors/objects/area_transition/area_transition.png" type="Texture" id=972]
+[ext_resource path="res://scenes/actors/objects/area_transition/preview.png" type="Texture" id=973]
+[ext_resource path="res://scenes/actors/objects/death_plane/preview.png" type="Texture" id=974]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1992,7 +1995,7 @@ preview = ExtResource( 830 )
 script = ExtResource( 24 )
 object_id = 111
 is_object = true
-icon = ExtResource( 836 )
+icon = ExtResource( 974 )
 preview = ExtResource( 836 )
 
 [node name="TeleportGroup" type="Node" parent="PlaceableItems"]
@@ -2055,8 +2058,8 @@ preview = ExtResource( 847 )
 script = ExtResource( 24 )
 object_id = 112
 is_object = true
-icon = ExtResource( 836 )
-preview = ExtResource( 836 )
+icon = ExtResource( 973 )
+preview = ExtResource( 972 )
 
 [node name="SwitchesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
