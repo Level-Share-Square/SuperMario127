@@ -111,6 +111,7 @@ func update_parts():
 func body_entered(body):
 	if enabled and body.name.begins_with(\"Character\") and !body.dead and body.controllable and teleport_enabled:
 		body.toggle_movement(false)
+		body.gravity_scale = 0
 		change_areas(body, true)
 		# change this to work with multiplayer
 		Singleton.CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(body.velocity, body.state.name, body.facing_direction, to_local(body.global_position).x, vertical))
@@ -123,6 +124,7 @@ func start_exit_anim(character):
 	# to prevent teleport loop
 	teleport_enabled = false;
 	character.toggle_movement(true)
+	character.gravity_scale = 1
 #	character.velocity = Singleton.CurrentLevelData.level_data.vars.transition_data[3]
 #	character.show()
 #	character.sprite.animation = \"pipeRight\"
@@ -155,7 +157,6 @@ load_path = "res://.import/area_transition.png-9f735045b4f2ee1f192817d15e089d27.
 
 [sub_resource type="GDScript" id=3]
 script/source = "extends Area2D
-class_name CameraStopper
 
 var top_bound
 var bottom_bound 
@@ -164,16 +165,12 @@ var right_bound
 var editor_rect
 
 func _ready():
-	var size = get_child(0).shape.extents
-	top_bound = global_transform.xform(Vector2(0, -size.y))
-	bottom_bound = global_transform.xform(Vector2(0, size.y))
-	left_bound = global_transform.xform(Vector2(-size.x, 0))
-	right_bound = global_transform.xform(Vector2(size.x, 0))
+	set_size(get_child(0).shape.extents)
 	set_collision_layer_bit(11, true)
 	
 	if get_tree().get_current_scene().mode != 0:
 		editor_rect = ReferenceRect.new()
-		editor_rect.rect_size = size * 2
+		editor_rect.rect_size = get_child(0).shape.extents * 2
 		editor_rect.border_color = Color.aqua
 		editor_rect.border_width = 2.0
 		editor_rect.editor_only = false
@@ -185,6 +182,18 @@ func _process(_delta):
 		editor_rect.rect_size = get_child(0).shape.extents * 2
 		editor_rect.rect_position.x = -editor_rect.rect_size.x / 2
 		editor_rect.rect_position.y = -editor_rect.rect_size.y / 2
+	else:
+		print(\"top\")
+		print(to_local(top_bound))
+		print(to_local(bottom_bound))
+		print(to_local(left_bound))
+		print(to_local(right_bound))
+		
+func set_size(size):
+	top_bound = global_transform.xform(Vector2(0, -size.y))
+	bottom_bound = global_transform.xform(Vector2(0, size.y))
+	left_bound = global_transform.xform(Vector2(-size.x, 0))
+	right_bound = global_transform.xform(Vector2(size.x, 0))
 "
 
 [sub_resource type="RectangleShape2D" id=2]
