@@ -51,7 +51,7 @@ func on_req2_complete(result, response_code, headers, body):
 
 func on_req1_complete(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8())
-	if json.result["authors"] != null:
+	if "authors" in json.result and json.result["authors"] != null:
 		label.text = ""
 		label.modulate.a = 1
 		for i in json.result["authors"].size():

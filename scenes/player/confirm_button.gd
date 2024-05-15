@@ -7,14 +7,12 @@ export var num_of_players : NodePath
 export var player1_char : NodePath
 export var player2_char : NodePath
 
-export var character_node_path : NodePath
-
 var character_node
 var last_hovered
 
 func _ready():
 	if "mode" in get_tree().get_current_scene():
-		character_node = get_node(character_node_path)
+		character_node = owner.owner.get_node(owner.owner.character)
 
 func _pressed():
 	click_sound.play()

@@ -176,21 +176,23 @@ func _physics_process(delta):
 	if(!activated):
 		return
 	
+	var baked_length: float = path.curve.get_baked_length()
+	
 	linear_offset += speed * max_speed * 120 * fps_util.PHYSICS_DELTA
 
 	if move_type != MT_LOOP:
-		linear_offset = clamp(linear_offset, 0.0, path.curve.get_baked_length()-0.01) #so the 
+		linear_offset = clamp(linear_offset, 0.0, baked_length-0.01) #so the 
 
 	loop_offset = lerp(linear_offset, loop_offset, blend) #loop_offset * blend + linear_offset * (1 - blend)
 	
-	path_follower.offset = fmod(loop_offset, path.curve.get_baked_length())
+	path_follower.offset = fmod(loop_offset, baked_length) if baked_length != 0 else 0
 	
 	if speed < 0.0 and path_follower.offset <= 2.0:
 		linear_offset = 0.0
 		speed = -speed
 	
-	elif move_type != MT_LOOP and speed > 0.0 and path_follower.offset >= path.curve.get_baked_length() - 2.0:
-		linear_offset = path.curve.get_baked_length()
+	elif move_type != MT_LOOP and speed > 0.0 and path_follower.offset >= baked_length - 2.0:
+		linear_offset = baked_length
 		reached_end()
 		
 		if !activated:

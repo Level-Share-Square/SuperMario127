@@ -1,5 +1,7 @@
 extends Node
 
+onready var thread = Thread.new()
+
 var number_of_boxes := 10
 var selected_box := 0
 var zoom_level := 1.0
@@ -13,6 +15,7 @@ var tiles_resource : TileSet
 var pinned_items : Array 
 
 var tileset_loaded = false
+var loading_tileset := false
 
 var default_area : LevelArea
 var stored_window_scale := 1
@@ -24,14 +27,16 @@ var layout_palettes = [
 	
 ]
 
-var resource_loader
 
-func _process(delta):
-	if resource_loader == null: return
-
-	if resource_loader.poll() == ERR_FILE_EOF:
-		tiles_resource = resource_loader.get_resource()
-		set_process(false)
+func load_tileset(_userdata):
+	var resource_loader := ResourceLoader.load_interactive("user://tiles.res", "TileSet")
+	
+	while resource_loader.poll() != ERR_FILE_EOF:
+		pass
+	
+	tiles_resource = resource_loader.get_resource()
+	loading_tileset = false
+	print("gg")
 
 func _init():
 	var level_resource = LevelData.new()
@@ -39,9 +44,12 @@ func _init():
 	level_resource.load_in(default_level)
 	default_area = level_resource.areas[0]
 	
-	if ResourceLoader.exists("user://tiles.res"):
-		resource_loader = ResourceLoader.load_interactive("user://tiles.res", "TileSet")
 	var starting_toolbar = load("res://scenes/editor/starting_toolbar.tres")
 	for index in range(number_of_boxes):
 		layout_ids.append(starting_toolbar.ids[index])
 		layout_palettes.append(0)
+
+func _ready():
+	if ResourceLoader.exists("user://tiles.res"):
+		loading_tileset = true
+		thread.start(self, "load_tileset")

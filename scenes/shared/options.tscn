@@ -1031,7 +1031,6 @@ __meta__ = {
 num_of_players = NodePath("../NumberOfPlayers")
 player1_char = NodePath("../Player1Char")
 player2_char = NodePath("../Player2Char")
-character_node_path = NodePath("../../../../Viewports/ViewportContainer/Viewport/World/Character")
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="Page1/ConfirmButton"]
 stream = ExtResource( 2 )

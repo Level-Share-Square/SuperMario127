@@ -31,6 +31,9 @@ var spawn_timer = 0.0
 var done = false
 
 func go_to_menu():
+	while Singleton.EditorSavedSettings.loading_tileset:
+		yield(get_tree(), "idle_frame")
+	
 	if !Singleton.loaded:
 		Singleton.loaded = true
 		var number_of_tiles = load("res://assets/tiles/tiles.tres").get_last_unused_tile_id()
@@ -139,7 +142,7 @@ func update_activity() -> void:
 		push_error(str(result))
 		
 
-func load_palettes(userdata):
+func load_palettes(_userdata):
 	var level_tilesets := preload("res://assets/tiles/ids.tres")
 	var tileset_resource = preload("res://assets/tiles/tiles.tres")
 	var number_of_tiles = tileset_resource.get_last_unused_tile_id()
@@ -206,7 +209,7 @@ func load_palettes(userdata):
 	percentage = 1
 	print("Finished loading all " + str(level_tilesets.ids.size()) + " tilesets.")
 
-func load_singletons(userdata):
+func load_singletons(_userdata):
 	var ms_start := OS.get_ticks_msec()
 	
 	# First 25% = load singletons
