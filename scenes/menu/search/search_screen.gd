@@ -61,7 +61,7 @@ func comment_pressed():
 	
 func request(pageno):
 	http.connect("request_completed", self, "_on_request_completed")
-	http.request("https://levelsharesquare.com/api/levels?page=" + str(pageno) + "&game=2&keep=true")
+	http.request("https://levelsharesquare.com/api/levels/filter/get?page=" + str(pageno) + "&game=2&keep=true")
 	
 func x_pressed():
 	searching = false
@@ -98,7 +98,7 @@ func _process(delta):
 		searching = true
 		page = 0
 		http3.connect("request_completed", self, "_on_request3_completed")
-		var request = "https://levelsharesquare.com/api/levels?page=1&game=2&searchQuery=" + search.get_text() + "&keep=true"
+		var request = "https://levelsharesquare.com/api/levels/filter/get?page=1&game=2&name=" + search.get_text() + "&keep=true"
 		http3.request(request)
 		
 func left_pressed():

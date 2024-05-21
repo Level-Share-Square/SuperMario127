@@ -41,6 +41,7 @@ func _physics_process(delta):
 		ping_timer -= delta
 		
 func ping_complete(result, response_code, headers, body):
+	print(response_code)
 	if response_code == 400:
 		logged_out = true
 		id = ""

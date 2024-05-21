@@ -51,20 +51,13 @@ func on_req2_complete(result, response_code, headers, body):
 
 func on_req1_complete(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8())
-	if "authors" in json.result and json.result["authors"] != null:
+	if json.result["total"] != 0:
 		label.text = ""
 		label.modulate.a = 1
-		for i in json.result["authors"].size():
-			author_info[json.result["authors"][i]["_id"]] = [json.result["authors"][i]["username"], json.result["authors"][i]["avatar"]]
+		var comments = json.result["levelComments"]
 		for i in json.result["levelComments"].size():
-			level_comment_info[i] = [json.result["levelComments"][i]["author"], json.result["levelComments"][i]["content"]]
-			print(level_comment_info.keys())
-			
-		for i in json.result["levelComments"].size():
-			label.text += author_info[level_comment_info[i][0]][0] + ":\n" + level_comment_info[i][1] + "\n\n"
+			label.text += comments[i]["author"]["username"] + ": \n" + comments[i]["content"] + "\n\n"
+	
 	else:
 		label.text = "No comments found. Be the first!"
 		label.modulate.a = 0.5
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
