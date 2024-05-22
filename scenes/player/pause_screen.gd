@@ -27,6 +27,9 @@ onready var topbar_tween = $TweenTopbar
 onready var bottombar_tween = $TweenBottombar
 onready var info_tween = $TweenShineInfo
 
+onready var nextbutton = $ShineInfo/NextShine
+onready var prevbutton = $ShineInfo/PrevShine
+
 export var chat_path : NodePath
 onready var chat_node = get_node(chat_path)
 
@@ -34,13 +37,14 @@ var paused := false
 var levels = Singleton.SavedLevels.levels
 
 #shine information variables
-var selected_shine_index = 0
+var shine_offset = 0
 var selected_level = Singleton.SavedLevels.selected_level
 var shineDetails = Singleton.SavedLevels.get_current_levels()[selected_level].shine_details
 
 func _ready():
 	# You want it to be visible for editing, but that causes a bug, which this fixes
 	visible = false
+	scrollcheck()
 	
 	if Singleton.ModeSwitcher.button.playtesting:
 		quit_button.disabled = true
@@ -48,6 +52,8 @@ func _ready():
 	var _connect = resume_button.connect("pressed", self, "toggle_pause")
 	_connect = retry_button.connect("pressed", self, "retry")
 	_connect = quit_button.connect("pressed", self, "quit_to_menu")
+	_connect = nextbutton.connect("pressed", self, "next_shine")
+	_connect = prevbutton.connect("pressed", self, "prev_shine")
 	Singleton.FocusCheck.is_ui_focused = false
 	
 	darken.modulate = Color(0, 0, 0, 0)
@@ -195,7 +201,7 @@ func update_shine_info():
 		shine_description.bbcode_text = "[center]There are no shine sprites in this level.[/center]"
 		shine_name.bbcode_text = "[center]No shine sprite selected[/center]"
 	else:
-		var selected_shine_info = level_info.shine_details[level_info.selected_shine]
+		var selected_shine_info = level_info.shine_details[level_info.selected_shine + shine_offset]
 		shine_description.bbcode_text = "[center]%s[/center]" % selected_shine_info["description"] 
 		shine_name.bbcode_text = "[center]%s[/center]" % selected_shine_info["title"]
 		
@@ -204,24 +210,35 @@ func _process(delta):
 	populate_info_panel(level_info)
 
 #changes pause menu description to previous shine info
-func _on_PrevShine_pressed():
-	if selected_shine_index > 0:
-		selected_shine_index-=1
-	else:
-		selected_shine_index = 0
+func prev_shine():
+	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
 	
-	updateShineInfo()
+	if level_info.selected_shine + shine_offset >= 1:
+		shine_offset -= 1
+		
+	update_shine_info()
+	scrollcheck()
+	
 
 #changes pause menu description to next shine info
-func _on_NextShine_pressed():	
-	if selected_shine_index < (shineDetails.size()-1):
-		selected_shine_index+=1
+func next_shine():	
+	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+	if (level_info.selected_shine + shine_offset) < (shineDetails.size()-1):
+		shine_offset += 1 
 	else:
-		selected_shine_index = selected_shine_index
+		shine_offset = shine_offset
 	
-	updateShineInfo()
+	update_shine_info()
+	scrollcheck()
+	
+func scrollcheck():
+	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+	if (level_info.selected_shine + shine_offset) < (shineDetails.size()-1):
+		nextbutton.show()
+	else:
+		nextbutton.hide()
 
-#updates shine information
-func updateShineInfo():
-	get_node("ShineInfo/ShineName").bbcode_text = "[center]" + shineDetails[selected_shine_index]["title"] + "[/center]"
-	get_node("ShineInfo/ShineDescription").bbcode_text = "[center]" + shineDetails[selected_shine_index]["description"] + "[/center]"
+	if level_info.selected_shine + shine_offset >= 1:
+		prevbutton.show()
+	else:
+		prevbutton.hide()

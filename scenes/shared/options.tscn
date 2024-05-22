@@ -487,6 +487,7 @@ custom_fonts/font = SubResource( 1 )
 text = "OPTIONS"
 
 [node name="IpAddress" type="LineEdit" parent="."]
+visible = false
 margin_left = 79.8377
 margin_top = 93.2382
 margin_right = 292.838
@@ -503,6 +504,7 @@ __meta__ = {
 }
 
 [node name="ConnectButton" type="Button" parent="."]
+visible = false
 margin_left = 79.8377
 margin_top = 148.406
 margin_right = 292.838
@@ -528,6 +530,7 @@ stream = ExtResource( 4 )
 volume_db = -10.0
 
 [node name="DisconnectButton" type="Button" parent="."]
+visible = false
 margin_left = 79.8377
 margin_top = 258.731
 margin_right = 292.838
@@ -554,6 +557,7 @@ stream = ExtResource( 4 )
 volume_db = -10.0
 
 [node name="HostButton" type="Button" parent="."]
+visible = false
 margin_left = 79.8377
 margin_top = 204.342
 margin_right = 292.838
@@ -584,7 +588,6 @@ anims/trans_out_MainMenuScreen_MultiplayerOptions = SubResource( 15 )
 anims/trans_out_MultiplayerOptions_MainMenuScreen = SubResource( 16 )
 
 [node name="PageSelect" type="Control" parent="."]
-visible = false
 margin_top = -14.0
 margin_right = 40.0
 margin_bottom = 26.0
@@ -1047,9 +1050,10 @@ margin_right = -40.0
 margin_bottom = -40.0
 
 [node name="DarkMode" type="Control" parent="Page2"]
-margin_left = 440.0
-margin_top = -40.0
-margin_right = 480.0
+margin_left = 434.0
+margin_top = -5.0
+margin_right = 474.0
+margin_bottom = 35.0
 script = ExtResource( 32 )
 
 [node name="Box" type="Button" parent="Page2/DarkMode"]
@@ -1079,10 +1083,10 @@ align = 1
 valign = 1
 
 [node name="GhostToggle" type="Control" parent="Page2"]
-margin_left = 251.0
-margin_top = 176.0
-margin_right = 251.0
-margin_bottom = 176.0
+margin_left = 245.0
+margin_top = 211.0
+margin_right = 245.0
+margin_bottom = 211.0
 script = ExtResource( 33 )
 
 [node name="Label" type="Label" parent="Page2/GhostToggle"]
@@ -1108,6 +1112,7 @@ enabled_focus_mode = 0
 text = "True"
 
 [node name="VolumeMixer" type="Button" parent="Page2"]
+visible = false
 margin_left = 218.0
 margin_top = 236.405
 margin_right = 547.0

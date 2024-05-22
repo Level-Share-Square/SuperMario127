@@ -24,28 +24,28 @@ var page = 1
 func _ready():
 	page = 1
 	volume_mixer.visible = false
-	page_select_value.text = "1/2"
+	page_select_value.text = "1"
 	title_only.queue_free()
 	controls_button.controls_options = get_parent().get_node("ControlsOptions")
 
 func _on_Right_pressed():
-	if page_select_value.text == "1/2":
+	if page_select_value.text == "1":
 		page = 2
-		page_select_value.text = "2/2"
+		page_select_value.text = "2"
 
-	elif page_select_value.text == "2/2":
+	elif page_select_value.text == "2":
 		page = 1
-		page_select_value.text = "1/2"
+		page_select_value.text = "1"
 
 
 func _on_Left_pressed():
-	if page_select_value.text == "1/2":
+	if page_select_value.text == "1":
 		page = 2
-		page_select_value.text = "2/2"
+		page_select_value.text = "2"
 
-	elif page_select_value.text == "2/2":
+	elif page_select_value.text == "2":
 		page = 1
-		page_select_value.text = "1/2"
+		page_select_value.text = "1"
 
 func _process(delta):
 	if page == 1 && vm_open == false:

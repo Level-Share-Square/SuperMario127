@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -26,6 +26,8 @@
 [ext_resource path="res://scenes/menu/levels_screen/shine_icon.png" type="Texture" id=24]
 [ext_resource path="res://scenes/player/shine_counter.gd" type="Script" id=25]
 [ext_resource path="res://scenes/player/sccounter.gd" type="Script" id=26]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow_hover.png" type="Texture" id=27]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=28]
 [ext_resource path="res://scenes/actors/fludd_display/fludd_display.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/menu/levels_screen/ui/coin_icon.png" type="Texture" id=31]
 [ext_resource path="res://scenes/player/coin_counter.gd" type="Script" id=32]
@@ -104,6 +106,22 @@ corner_radius_bottom_left = 64
 size = 32
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxTexture" id=19]
+texture = ExtResource( 27 )
+region_rect = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="StyleBoxTexture" id=20]
+texture = ExtResource( 28 )
+region_rect = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="StyleBoxEmpty" id=22]
+
+[sub_resource type="StyleBoxTexture" id=21]
+texture = ExtResource( 28 )
+region_rect = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="StyleBoxEmpty" id=23]
 
 [sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.133333, 0.145098, 0.196078, 0.835294 )
@@ -1051,23 +1069,32 @@ position = Vector2( 22.864, 145 )
 scale = Vector2( 0.366319, 0.385599 )
 texture = ExtResource( 23 )
 
+[node name="PrevShine" type="Button" parent="UI/PauseScreen/ShineInfo"]
+margin_left = 61.0
+margin_top = 270.0
+margin_right = 115.0
+margin_bottom = 324.0
+rect_rotation = 180.0
+custom_styles/hover = SubResource( 19 )
+custom_styles/pressed = SubResource( 20 )
+custom_styles/focus = SubResource( 22 )
+custom_styles/normal = SubResource( 21 )
+
+[node name="NextShine" type="Button" parent="UI/PauseScreen/ShineInfo"]
+margin_left = 707.0
+margin_top = 210.0
+margin_right = 761.0
+margin_bottom = 264.0
+custom_styles/hover = SubResource( 19 )
+custom_styles/pressed = SubResource( 20 )
+custom_styles/focus = SubResource( 23 )
+custom_styles/normal = SubResource( 21 )
+
 [node name="MultiplayerOptions" parent="UI/PauseScreen" instance=ExtResource( 15 )]
 visible = false
 
 [node name="ControlsOptions" parent="UI/PauseScreen" instance=ExtResource( 14 )]
 visible = false
-
-[node name="PrevShine" type="Button" parent="UI/PauseScreen"]
-margin_left = 16.0
-margin_top = 200.0
-margin_right = 96.0
-margin_bottom = 280.0
-
-[node name="NextShine" type="Button" parent="UI/PauseScreen"]
-margin_left = 669.0
-margin_top = 200.0
-margin_right = 749.0
-margin_bottom = 280.0
 
 [node name="SignText" type="Control" parent="UI"]
 pause_mode = 2
@@ -1077,9 +1104,6 @@ margin_right = 611.0
 margin_bottom = 366.0
 mouse_filter = 2
 script = ExtResource( 55 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="UI/SignText"]
 margin_right = 450.0
@@ -1201,7 +1225,7 @@ collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 3
+frame = 0
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
@@ -1289,6 +1313,3 @@ stream = ExtResource( 59 )
 anims/RESET = SubResource( 15 )
 anims/shine_sc_in = SubResource( 16 )
 anims/shine_sc_out = SubResource( 17 )
-
-[connection signal="pressed" from="UI/PauseScreen/PrevShine" to="UI/PauseScreen" method="_on_PrevShine_pressed"]
-[connection signal="pressed" from="UI/PauseScreen/NextShine" to="UI/PauseScreen" method="_on_NextShine_pressed"]

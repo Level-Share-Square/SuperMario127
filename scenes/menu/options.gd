@@ -12,6 +12,7 @@ onready var page_select_value = $PageSelect/Value
 var page = 1
 
 func _ready():
+	page_select_value.text = "1"
 	var _connect = back_button.connect("pressed", self, "go_back")
 	_connect = controls_button.connect("pressed", self, "open_controls")
 
@@ -24,29 +25,29 @@ func open_controls():
 func _on_Right_pressed():
 	if page == 1:
 		page = 2
-		page_select_value.text = "2/2"
+		page_select_value.text = "2"
 
 	elif page == 2:
 		page = 1
-		page_select_value.text = "1/2"
+		page_select_value.text = "1"
 
 	else:
 		page = 1
-		page_select_value.text = "1/2"
+		page_select_value.text = "1"
 
 
 func _on_Left_pressed():
 	if page == 1:
 		page = 2
-		page_select_value.text = "2/2"
+		page_select_value.text = "2"
 
 	elif page == 2:
 		page = 1
-		page_select_value.text = "1/2"
+		page_select_value.text = "1"
 
 	else:
 		page = 1
-		page_select_value.text = "1/2"
+		page_select_value.text = "1"
 
 func _process(delta):
 	if page == 1:

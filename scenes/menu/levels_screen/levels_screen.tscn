@@ -477,7 +477,7 @@ margin_bottom = 195.0
 
 [node name="LevelList" type="ItemList" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel/VBoxContainer"]
 margin_right = 327.0
-margin_bottom = 111.0
+margin_bottom = 187.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 6 )
@@ -495,6 +495,7 @@ __meta__ = {
 }
 
 [node name="CommunityLevelsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel/VBoxContainer"]
+visible = false
 margin_top = 115.0
 margin_right = 327.0
 margin_bottom = 149.0
@@ -508,6 +509,7 @@ custom_styles/normal = ExtResource( 16 )
 text = "Best of the Community"
 
 [node name="SampleLevelsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel/VBoxContainer"]
+visible = false
 margin_top = 153.0
 margin_right = 327.0
 margin_bottom = 187.0
@@ -518,9 +520,9 @@ text = "Sample Levels"
 
 [node name="LevelCodePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 visible = false
-margin_top = 217.0
+margin_top = 182.0
 margin_right = 343.0
-margin_bottom = 359.0
+margin_bottom = 324.0
 size_flags_vertical = 11
 custom_styles/panel = ExtResource( 10 )
 

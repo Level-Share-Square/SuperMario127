@@ -114,16 +114,13 @@ func _ready() -> void:
 func _pre_open_screen() -> void:
 	if Singleton.SavedLevels.is_template_list:
 		if show_sample_levels:
-			button_community_levels.visible = true
 			button_sample_levels.visible = false
 			levels = Singleton.SavedLevels.template_levels 
 		else:
-			button_community_levels.visible = false
 			button_sample_levels.visible = true
 			levels = Singleton.SavedLevels.community_levels
 			pass
 	else:
-		button_community_levels.visible = false
 		button_sample_levels.visible = false
 		levels = Singleton.SavedLevels.levels
 	print("Levels: ", levels.size())
