@@ -25,7 +25,8 @@ func delete():
 		ui.get_ref().node_deleted()
 
 func _process(delta):
-	pass
+	if check_if_hovered():
+		ui.get_ref().last_hovered_node = self
 
 func select():
 	selected = true
@@ -58,7 +59,6 @@ func enable_right_handle():
 
 func _on_PathNodeButton_gui_input(event):
 	if event is InputEventMouseButton:
-		ui.get_ref()._click_buffer = 0
 		if event.pressed and event.button_index == BUTTON_LEFT:
 			if !handles_active && Input.is_action_pressed("modkey"):
 				activate_all_handles()
@@ -95,3 +95,6 @@ func set_left_handle(value):
 	left_handle_active = value
 	if value == false:
 		left_handle.hide()
+
+func check_if_hovered():
+	return $PathNodeButton.is_hovered() || left_handle.get_node("HandleLButton").is_hovered() || right_handle.get_node("HandleRButton").is_hovered()

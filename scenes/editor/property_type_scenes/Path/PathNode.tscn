@@ -20,6 +20,7 @@ texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 3 )
 
 [node name="HandleR" type="Node2D" parent="."]
+visible = false
 position = Vector2( 24, 0 )
 
 [node name="HandleRLine" type="Line2D" parent="HandleR"]
@@ -41,6 +42,7 @@ texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 3 )
 
 [node name="HandleL" type="Node2D" parent="."]
+visible = false
 position = Vector2( -24, 0 )
 
 [node name="HandleLLine" type="Line2D" parent="HandleL"]

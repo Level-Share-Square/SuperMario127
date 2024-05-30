@@ -24,8 +24,8 @@ enum {MODE_PLACE, MODE_SELECT}
 
 var current_mode = MODE_PLACE
 
-#TODO: Make node deselection work without this.
-var _click_buffer: int = 0
+
+var last_hovered_node
 var mouse_position
 
 func _ready():
@@ -47,23 +47,18 @@ func _process(delta):
 		# this makes the editor unable to do anything
 	editor.selected_tool = 3
 	if Input.is_action_just_pressed("place") and get_viewport().get_mouse_position().y > 70:
-		
-		if _click_buffer == 1 && current_mode == MODE_SELECT:
-			_click_buffer = 0
+
+		if is_instance_valid(last_hovered_node) && last_hovered_node.check_if_hovered() == false && current_mode == MODE_SELECT:
 			selected_node.deselect()
-		
 		if current_mode == MODE_PLACE:
 			add_node(inverse_transform.xform(editor.get_global_mouse_position()))
-		else:
-			_click_buffer += 1
 
 
 func _gui_input(event) -> void:
 	if event.is_action_released("place"):
 		if current_mode == MODE_PLACE:
 			add_node(path_node_container.get_local_transform().xform(mouse_position))
-		elif _click_buffer != 0:
-			_click_buffer = 0
+		elif is_instance_valid(last_hovered_node) && last_hovered_node.hovered == false:
 			selected_node.release_focus()
 		accept_event()
 
