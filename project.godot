@@ -1260,6 +1260,7 @@ limits/message_queue/max_size_kb=2048
 [network]
 
 ssl/certificates="res://ca-certificates.crt"
+limits/debugger_stdout/max_chars_per_second=10000
 
 [physics]
 

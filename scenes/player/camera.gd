@@ -47,14 +47,15 @@ func _physics_process(delta):
 			last_position = global_position
 			global_position = character_node.global_position + character_vel
 			for stopper in area.get_overlapping_areas():
-				print("overlap")
-				if global_position.distance_to(stopper.global_position) < size.length() * 1.2:
+#				if global_position.y < stopper.top_bound.y + size.length().y * 1.2 or global_position.y > stopper.bottom_bound.y + size.length().y * 1.2 or global_position.x < stopper.left_bound.x + size.length().x * 1.2 or global_position.x > stopper.right_bound.x + size.length().x * 1.2:
+				# this calculates if the camera is too far away from a horizontal or vertical edge and takes resized bounds into account
+				# the same as what the code commented out above does
+				if abs(global_position.y - stopper.global_position.y) < size.y * 1.2 + abs(stopper.top_bound.y - stopper.global_position.y) or abs(global_position.x - stopper.global_position.x) < size.x * 1.2 + abs(stopper.left_bound.x - stopper.global_position.x):
 					var overlapX = min(abs(last_position.x + size.x - stopper.left_bound.x), abs(last_position.x - size.x - stopper.right_bound.x))
 					var overlapY = min(abs(last_position.y + size.y - stopper.top_bound.y), abs(last_position.y - size.y - stopper.bottom_bound.y))
 					
 				
 					if overlapX < overlapY:
-#						print("horizontal")
 #						print(overlapX)
 #						print(overlapY)
 						
@@ -63,10 +64,8 @@ func _physics_process(delta):
 						elif last_position.x > stopper.global_position.x and global_position.x < last_position.x:
 							global_position.x = stopper.right_bound.x + size.x - 1
 						else:
-							#print("oops")
 							pass
 					else:
-#						print("vertical")
 #						print(overlapX)
 #						print(overlapY)
 #						print(global_position.y > last_position.y)
@@ -80,9 +79,9 @@ func _physics_process(delta):
 							#print(stopper.bottom_bound.y)
 							global_position.y = stopper.bottom_bound.y + size.y - 1
 						else:
-							#print("oops")
 							pass
-				
+				else:
+					print("ESCAPED")
 			
 			
 			
@@ -105,6 +104,8 @@ func set_zoom_tween(target : Vector2, time : float):
 	zoom_tween.interpolate_property(self, "zoom", zoom, target, time, 1, 0)
 	zoom_tween.start()
 
+
+	
 	
 func load_in(_level_data : LevelData, level_area : LevelArea):
 	var level_bounds = level_area.settings.bounds
@@ -119,3 +120,6 @@ func load_in(_level_data : LevelData, level_area : LevelArea):
 	elif character_node != null:
 		position = character_node.global_position
 		character_node.camera = self
+
+
+

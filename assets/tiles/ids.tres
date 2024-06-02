@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource( 1 )
-ids = PoolStringArray( "air", "bricks", "grass", "bricks_green", "bricks_red", "bricks_yellow", "boo_block", "snow", "cave", "glass", "wood", "red_gem_block", "yellow_gem_block", "green_gem_block", "blue_gem_block", "marble_bricks", "stone_bricks", "toy_blocks", "negative_rock", "black_granite", "cobblestone", "pitch_black", "tiled_floor", "carpet", "castle_wood", "castle_wall", "roof", "sand", "pyramid_bricks", "lava_rock", "castle_pillar", "fire_bricks", "dark_bricks", "cabin_window", "garden", "crystal", "bookshelf" )
+ids = PoolStringArray( "air", "bricks", "grass", "bricks_green", "bricks_red", "bricks_yellow", "boo_block", "snow", "cave", "glass", "wood", "red_gem_block", "yellow_gem_block", "green_gem_block", "blue_gem_block", "marble_bricks", "stone_bricks", "toy_blocks", "negative_rock", "black_granite", "cobblestone", "pitch_black", "tiled_floor", "carpet", "castle_wood", "castle_wall", "roof", "sand", "pyramid_bricks", "lava_rock", "castle_pillar", "fire_bricks", "dark_bricks", "cabin_window", "garden", "crystal", "bookshelf", "columns" )

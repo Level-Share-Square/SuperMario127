@@ -101,6 +101,7 @@ func start_door_exit_animation(character : Character, tp_mode : bool) -> void:
 	# just plays a few animations
 	stored_character = character
 	
+	
 	is_idle = false
 	entering = false
 	

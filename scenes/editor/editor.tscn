@@ -1,4 +1,4 @@
-[gd_scene load_steps=1008 format=2]
+[gd_scene load_steps=1048 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -974,6 +974,46 @@
 [ext_resource path="res://scenes/actors/objects/area_transition/area_transition.png" type="Texture" id=972]
 [ext_resource path="res://scenes/actors/objects/area_transition/preview.png" type="Texture" id=973]
 [ext_resource path="res://scenes/actors/objects/death_plane/preview.png" type="Texture" id=974]
+[ext_resource path="res://assets/tiles/columns/palletes/3_block.png" type="Texture" id=975]
+[ext_resource path="res://assets/tiles/columns/palletes/7_block.png" type="Texture" id=976]
+[ext_resource path="res://assets/tiles/columns/palletes/4_block.png" type="Texture" id=977]
+[ext_resource path="res://assets/tiles/columns/palletes/9_block.png" type="Texture" id=978]
+[ext_resource path="res://assets/tiles/columns/icon.png" type="Texture" id=979]
+[ext_resource path="res://assets/tiles/columns/palletes/2icon.png" type="Texture" id=980]
+[ext_resource path="res://assets/tiles/columns/palletes/1_block.png" type="Texture" id=981]
+[ext_resource path="res://assets/tiles/columns/palletes/8_block.png" type="Texture" id=982]
+[ext_resource path="res://assets/tiles/columns/palletes/5_block.png" type="Texture" id=983]
+[ext_resource path="res://assets/tiles/columns/palletes/6_block.png" type="Texture" id=984]
+[ext_resource path="res://assets/tiles/columns/palletes/3_slab.png" type="Texture" id=985]
+[ext_resource path="res://assets/tiles/columns/palletes/7_slab.png" type="Texture" id=986]
+[ext_resource path="res://assets/tiles/columns/palletes/2_slab.png" type="Texture" id=987]
+[ext_resource path="res://assets/tiles/columns/palletes/5_slab.png" type="Texture" id=988]
+[ext_resource path="res://assets/tiles/columns/palletes/6_slab.png" type="Texture" id=989]
+[ext_resource path="res://assets/tiles/columns/slab.png" type="Texture" id=990]
+[ext_resource path="res://assets/tiles/columns/palletes/8_slab.png" type="Texture" id=991]
+[ext_resource path="res://assets/tiles/columns/palletes/9_slab.png" type="Texture" id=992]
+[ext_resource path="res://assets/tiles/columns/palletes/1_slab.png" type="Texture" id=993]
+[ext_resource path="res://assets/tiles/columns/palletes/4_slab.png" type="Texture" id=994]
+[ext_resource path="res://assets/tiles/columns/palletes/8_slopeL.png" type="Texture" id=995]
+[ext_resource path="res://assets/tiles/columns/palletes/1_slopeL.png" type="Texture" id=996]
+[ext_resource path="res://assets/tiles/columns/palletes/6_slopeL.png" type="Texture" id=997]
+[ext_resource path="res://assets/tiles/columns/palletes/4_slopeL.png" type="Texture" id=998]
+[ext_resource path="res://assets/tiles/columns/palletes/2_slopeL.png" type="Texture" id=999]
+[ext_resource path="res://assets/tiles/columns/palletes/3_slopeL.png" type="Texture" id=1000]
+[ext_resource path="res://assets/tiles/columns/palletes/5_slopeL.png" type="Texture" id=1001]
+[ext_resource path="res://assets/tiles/columns/palletes/9_slopeL.png" type="Texture" id=1002]
+[ext_resource path="res://assets/tiles/columns/palletes/7_slopeL.png" type="Texture" id=1003]
+[ext_resource path="res://assets/tiles/columns/left_slope_icon.png" type="Texture" id=1004]
+[ext_resource path="res://assets/tiles/columns/palletes/2_slopeR.png" type="Texture" id=1005]
+[ext_resource path="res://assets/tiles/columns/palletes/3_slopeR.png" type="Texture" id=1006]
+[ext_resource path="res://assets/tiles/columns/palletes/1_slopeR.png" type="Texture" id=1007]
+[ext_resource path="res://assets/tiles/columns/palletes/4_slopeR.png" type="Texture" id=1008]
+[ext_resource path="res://assets/tiles/columns/palletes/5_slopeR.png" type="Texture" id=1009]
+[ext_resource path="res://assets/tiles/columns/palletes/6_slopeR.png" type="Texture" id=1010]
+[ext_resource path="res://assets/tiles/columns/palletes/7_slopeR.png" type="Texture" id=1011]
+[ext_resource path="res://assets/tiles/columns/palletes/8_slopeR.png" type="Texture" id=1012]
+[ext_resource path="res://assets/tiles/columns/palletes/9_slopeR.png" type="Texture" id=1013]
+[ext_resource path="res://assets/tiles/columns/right_slope_icon.png" type="Texture" id=1014]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3647,6 +3687,52 @@ items_in_sequence = 3
 index_in_sequence = 1
 icon = ExtResource( 293 )
 preview = ExtResource( 293 )
+
+[node name="Columns" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 24 )
+tileset_id = 37
+palette_icons = [ ExtResource( 979 ), ExtResource( 981 ), ExtResource( 980 ), ExtResource( 975 ), ExtResource( 977 ), ExtResource( 983 ), ExtResource( 984 ), ExtResource( 976 ), ExtResource( 982 ), ExtResource( 978 ) ]
+palette_previews = [ ExtResource( 979 ), ExtResource( 981 ), ExtResource( 980 ), ExtResource( 975 ), ExtResource( 977 ), ExtResource( 983 ), ExtResource( 984 ), ExtResource( 976 ), ExtResource( 982 ), ExtResource( 978 ) ]
+change_to = "ColumnsSlab"
+items_in_sequence = 4
+icon = ExtResource( 979 )
+preview = ExtResource( 979 )
+
+[node name="ColumnsSlab" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 24 )
+tileset_id = 37
+tile_id = 1
+palette_icons = [ ExtResource( 990 ), ExtResource( 993 ), ExtResource( 987 ), ExtResource( 985 ), ExtResource( 994 ), ExtResource( 988 ), ExtResource( 989 ), ExtResource( 986 ), ExtResource( 991 ), ExtResource( 992 ) ]
+palette_previews = [ ExtResource( 990 ), ExtResource( 993 ), ExtResource( 987 ), ExtResource( 985 ), ExtResource( 994 ), ExtResource( 988 ), ExtResource( 989 ), ExtResource( 986 ), ExtResource( 991 ), ExtResource( 992 ) ]
+change_to = "ColumnsSlopeLeft"
+items_in_sequence = 4
+index_in_sequence = 1
+icon = ExtResource( 990 )
+preview = ExtResource( 990 )
+
+[node name="ColumnsSlopeLeft" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 24 )
+tileset_id = 37
+tile_id = 2
+palette_icons = [ ExtResource( 1004 ), ExtResource( 996 ), ExtResource( 999 ), ExtResource( 1000 ), ExtResource( 998 ), ExtResource( 1001 ), ExtResource( 997 ), ExtResource( 1003 ), ExtResource( 995 ), ExtResource( 1002 ) ]
+palette_previews = [ ExtResource( 1004 ), ExtResource( 996 ), ExtResource( 999 ), ExtResource( 1000 ), ExtResource( 998 ), ExtResource( 1001 ), ExtResource( 997 ), ExtResource( 1003 ), ExtResource( 995 ), ExtResource( 1002 ) ]
+change_to = "ColumnsSlopeRight"
+items_in_sequence = 4
+index_in_sequence = 2
+icon = ExtResource( 1004 )
+preview = ExtResource( 1004 )
+
+[node name="ColumnsSlopeRight" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 24 )
+tileset_id = 37
+tile_id = 3
+palette_icons = [ ExtResource( 1014 ), ExtResource( 1007 ), ExtResource( 1005 ), ExtResource( 1006 ), ExtResource( 1008 ), ExtResource( 1009 ), ExtResource( 1010 ), ExtResource( 1011 ), ExtResource( 1012 ), ExtResource( 1013 ) ]
+palette_previews = [ ExtResource( 1014 ), ExtResource( 1007 ), ExtResource( 1005 ), ExtResource( 1006 ), ExtResource( 1008 ), ExtResource( 1009 ), ExtResource( 1010 ), ExtResource( 1011 ), ExtResource( 1012 ), ExtResource( 1013 ) ]
+change_to = "Columns"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 1014 )
+preview = ExtResource( 1014 )
 
 [node name="CastlePillar" type="Node" parent="PlaceableItems/CastleGroup"]
 script = ExtResource( 24 )

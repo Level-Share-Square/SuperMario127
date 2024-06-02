@@ -162,7 +162,7 @@ class AreaTransitionHelper:
 	var enter_pos
 	var vertical
 
-	func _init(ve, s, f, e, v):
+	func _init(ve, s, f, e : Vector2, v):
 		velocity = ve
 		state = s
 		facing_direction = f
@@ -171,14 +171,14 @@ class AreaTransitionHelper:
 		
 	func find_exit_offset(exit_vertical : bool, exit_size : float) -> Vector2:
 		if exit_vertical:
-			return Vector2(16 *  sign(velocity.x), clamp(-enter_pos, -exit_size/2, exit_size/2))
+			return Vector2(16 *  sign(velocity.x), clamp(-enter_pos.y, -exit_size/2, exit_size/2))
 		else:
-			return Vector2(clamp(enter_pos, -exit_size/2, exit_size/2), 16 * -sign(velocity.y))
-		return Vector2(clamp(enter_pos, -exit_size/2, exit_size/2) + 16 * sign(velocity.x) * int(!exit_vertical), clamp(enter_pos, -exit_size/2, exit_size/2) + 16 * -sign(velocity.y) * int(exit_vertical))
+			return Vector2(clamp(enter_pos.x, -exit_size/2, exit_size/2), 16 * -sign(velocity.y))
+			
 	func find_camera_position(exit_vertical : bool, exit_global_position : Vector2, camera_rect : Vector2):
 		if exit_vertical:
-			return exit_global_position + Vector2((camera_rect.x + 100) * sign(velocity.x), 0)
+			return exit_global_position + Vector2((camera_rect.x + 60) * sign(velocity.x), 0)
 		else:
-			return exit_global_position + Vector2(0, (camera_rect.y + 100) * -sign(velocity.y))
+			return exit_global_position + Vector2(0, (camera_rect.y + 70) * sign(velocity.y))
 		return exit_global_position + Vector2((camera_rect.x + 16) * sign(velocity.x), (camera_rect.y) + 16 * -sign(velocity.y))  * Vector2(int(!exit_vertical), int(exit_vertical))
 		
