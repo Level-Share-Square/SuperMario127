@@ -13,8 +13,8 @@
 
 [resource]
 script = ExtResource( 1 )
-block_tile_id = 90
-slab_tile_id = 91
-left_slope_tile_id = 92
-right_slope_tile_id = 93
+block_tile_id = 94
+slab_tile_id = 93
+left_slope_tile_id = 91
+right_slope_tile_id = 92
 palettes = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ]
