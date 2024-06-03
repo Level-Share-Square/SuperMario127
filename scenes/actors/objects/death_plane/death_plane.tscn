@@ -89,6 +89,8 @@ func kill(body):
 		else:
 			body.kill(\"green_demon\")
 		enabled = false
+		
+		
 				
 	
 	

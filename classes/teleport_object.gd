@@ -95,6 +95,8 @@ func change_areas(entering_character : Character, entering):
 			powerup_array,
 			get_tree().get_current_scene().switch_timer
 		]
+		if object_type == "area_transition":
+			Singleton.CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
 		
 		if character2 != null:
 			var nozzle_name_2 = null
@@ -115,6 +117,8 @@ func change_areas(entering_character : Character, entering):
 				powerup_array2,
 				get_tree().get_current_scene().switch_timer
 			]
+			if object_type == "area_transition":
+				Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.append(AreaTransitionHelper.new(character2.velocity, character2.state, character2.facing_direction, to_local(character2.position), self.vertical))
 		else:
 			Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
 
@@ -171,14 +175,14 @@ class AreaTransitionHelper:
 		
 	func find_exit_offset(exit_vertical : bool, exit_size : float) -> Vector2:
 		if exit_vertical:
-			return Vector2(16 *  sign(velocity.x), clamp(-enter_pos.y, -exit_size/2, exit_size/2))
+			return Vector2(16 *  sign(velocity.x), -clamp(-enter_pos.y, -exit_size/2, exit_size/2))
 		else:
 			return Vector2(clamp(enter_pos.x, -exit_size/2, exit_size/2), 16 * -sign(velocity.y))
 			
 	func find_camera_position(exit_vertical : bool, exit_global_position : Vector2, camera_rect : Vector2):
 		if exit_vertical:
-			return exit_global_position + Vector2((camera_rect.x + 60) * sign(velocity.x), 0)
+			return exit_global_position + Vector2((camera_rect.x + 50) * sign(velocity.x), 0)
 		else:
-			return exit_global_position + Vector2(0, (camera_rect.y + 70) * sign(velocity.y))
+			return exit_global_position + Vector2(0, (camera_rect.y + 50) * sign(velocity.y))
 		return exit_global_position + Vector2((camera_rect.x + 16) * sign(velocity.x), (camera_rect.y) + 16 * -sign(velocity.y))  * Vector2(int(!exit_vertical), int(exit_vertical))
 		
