@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://classes/ForegroundResource.gd" type="Script" id=1]
+[ext_resource path="res://scenes/shared/background/foregrounds/mountain_edge/back.tres" type="Resource" id=2]
+[ext_resource path="res://scenes/shared/background/foregrounds/mountain_edge/middle.tres" type="Resource" id=3]
+[ext_resource path="res://scenes/shared/background/foregrounds/mountain_edge/preview.png" type="Texture" id=4]
+[ext_resource path="res://scenes/shared/background/foregrounds/mountain_edge/front.tres" type="Resource" id=5]
+[ext_resource path="res://scenes/shared/background/foregrounds/mountain_edge/palletes/1/preview.png" type="Texture" id=7]
+[ext_resource path="res://scenes/shared/background/foregrounds/mountain_edge/palletes/2/preview.png" type="Texture" id=8]
+[ext_resource path="res://scenes/shared/background/foregrounds/mountain_edge/palletes/3/preview.png" type="Texture" id=9]
+[ext_resource path="res://scenes/shared/background/foregrounds/mountain_edge/palletes/5/preview.png" type="Texture" id=10]
+[ext_resource path="res://scenes/shared/background/foregrounds/mountain_edge/palletes/6/preview.png" type="Texture" id=11]
+[ext_resource path="res://scenes/shared/background/foregrounds/mountain_edge/palletes/4/preview.png" type="Texture" id=12]
+
+[resource]
+script = ExtResource( 1 )
+layers = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ) ]
+immune_to = PoolIntArray(  )
+preview = ExtResource( 4 )
+palettes = [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 11 ) ]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=1048 format=2]
+[gd_scene load_steps=1108 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1014,6 +1014,66 @@
 [ext_resource path="res://assets/tiles/columns/palletes/8_slopeR.png" type="Texture" id=1012]
 [ext_resource path="res://assets/tiles/columns/palletes/9_slopeR.png" type="Texture" id=1013]
 [ext_resource path="res://assets/tiles/columns/right_slope_icon.png" type="Texture" id=1014]
+[ext_resource path="res://scenes/actors/objects/vine_flower/palletes/vine_flower_icon5.png" type="Texture" id=1015]
+[ext_resource path="res://scenes/actors/objects/vine_flower/palletes/vine_flower4.png" type="Texture" id=1016]
+[ext_resource path="res://scenes/actors/objects/vine_flower/palletes/vine_flower_icon2.png" type="Texture" id=1017]
+[ext_resource path="res://scenes/actors/objects/vine_flower/palletes/vine_flower2.png" type="Texture" id=1018]
+[ext_resource path="res://scenes/actors/objects/vine_flower/palletes/vine_flower5.png" type="Texture" id=1019]
+[ext_resource path="res://scenes/actors/objects/vine_flower/vine_flower_icon.png" type="Texture" id=1020]
+[ext_resource path="res://scenes/actors/objects/vine_flower/palletes/vine_flower_icon3.png" type="Texture" id=1021]
+[ext_resource path="res://scenes/actors/objects/vine_flower/palletes/vine_flower_icon4.png" type="Texture" id=1022]
+[ext_resource path="res://scenes/actors/objects/vine_flower/palletes/vine_flower3.png" type="Texture" id=1023]
+[ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/vine_bulb2.png" type="Texture" id=1025]
+[ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/vine_bulb5.png" type="Texture" id=1027]
+[ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/vine_bulb4.png" type="Texture" id=1028]
+[ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/vine_bulb3.png" type="Texture" id=1029]
+[ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem_icon3.png" type="Texture" id=1030]
+[ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem_icon4.png" type="Texture" id=1031]
+[ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem_icon2.png" type="Texture" id=1033]
+[ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem_icon5.png" type="Texture" id=1034]
+[ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem2.png" type="Texture" id=1036]
+[ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem3.png" type="Texture" id=1037]
+[ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem4.png" type="Texture" id=1038]
+[ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem5.png" type="Texture" id=1039]
+[ext_resource path="res://scenes/actors/objects/vine_thorns/palletes/vine_thorns4.png" type="Texture" id=1040]
+[ext_resource path="res://scenes/actors/objects/vine_thorns/palletes/vine_thorns5.png" type="Texture" id=1041]
+[ext_resource path="res://scenes/actors/objects/vine_thorns/palletes/vine_thorns2.png" type="Texture" id=1043]
+[ext_resource path="res://scenes/actors/objects/vine_thorns/palletes/vine_thorns3.png" type="Texture" id=1044]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend_icon5.png" type="Texture" id=1045]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend_icon4.png" type="Texture" id=1046]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend_icon2.png" type="Texture" id=1047]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend_icon3.png" type="Texture" id=1048]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend2.png" type="Texture" id=1051]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend5.png" type="Texture" id=1052]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend4.png" type="Texture" id=1053]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend3.png" type="Texture" id=1054]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palletes/vine_stem_end2.png" type="Texture" id=1055]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palletes/vine_stem_end3.png" type="Texture" id=1056]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palletes/vine_stem_end5.png" type="Texture" id=1057]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palletes/vine_stem_end1.png" type="Texture" id=1058]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palletes/vine_stem_end4.png" type="Texture" id=1059]
+[ext_resource path="res://scenes/actors/objects/vine_thorns/palletes/vine_thorns2_icon.png" type="Texture" id=1060]
+[ext_resource path="res://scenes/actors/objects/vine_thorns/palletes/vine_thorns5_icon.png" type="Texture" id=1061]
+[ext_resource path="res://scenes/actors/objects/vine_thorns/palletes/vine_thorns3_icon.png" type="Texture" id=1062]
+[ext_resource path="res://scenes/actors/objects/vine_thorns/vine_thorns.png" type="Texture" id=1063]
+[ext_resource path="res://scenes/actors/objects/vine_thorns/palletes/vine_thorns4_icon.png" type="Texture" id=1064]
+[ext_resource path="res://scenes/actors/objects/vine_flower/vine_flower.png" type="Texture" id=1065]
+[ext_resource path="res://scenes/actors/objects/vine_flower/palletes/vine_flower1.png" type="Texture" id=1066]
+[ext_resource path="res://scenes/actors/objects/vine_flower/palletes/vine_flower_icon1.png" type="Texture" id=1067]
+[ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/vine_bulb1.png" type="Texture" id=1068]
+[ext_resource path="res://scenes/actors/objects/vine_bulb/vine_bulb.png" type="Texture" id=1069]
+[ext_resource path="res://scenes/actors/objects/vine_stem/vine_stem.png" type="Texture" id=1070]
+[ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem_icon1.png" type="Texture" id=1071]
+[ext_resource path="res://scenes/actors/objects/vine_stem/vine_stem_icon.png" type="Texture" id=1072]
+[ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem1.png" type="Texture" id=1073]
+[ext_resource path="res://scenes/actors/objects/vine_thorns/palletes/vine_thorns1.png" type="Texture" id=1074]
+[ext_resource path="res://scenes/actors/objects/vine_thorns/palletes/vine_thorns1_icon.png" type="Texture" id=1075]
+[ext_resource path="res://scenes/actors/objects/vine_thorns/vine_thorns_icon.png" type="Texture" id=1076]
+[ext_resource path="res://scenes/actors/objects/vine_bend/vine_bend_icon.png" type="Texture" id=1077]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend_icon1.png" type="Texture" id=1078]
+[ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend1.png" type="Texture" id=1079]
+[ext_resource path="res://scenes/actors/objects/vine_bend/vine_bend.png" type="Texture" id=1080]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/vine_stem_end.png" type="Texture" id=1081]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3956,6 +4016,85 @@ object_id = 99
 is_object = true
 icon = ExtResource( 686 )
 preview = ExtResource( 753 )
+
+[node name="VineFlower" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 24 )
+object_id = 118
+is_object = true
+object_center = Vector2( 16, 12 )
+tile_mode_step = 64
+palette_icons = [ ExtResource( 1020 ), ExtResource( 1067 ), ExtResource( 1017 ), ExtResource( 1021 ), ExtResource( 1022 ), ExtResource( 1015 ) ]
+palette_previews = [ ExtResource( 1065 ), ExtResource( 1066 ), ExtResource( 1018 ), ExtResource( 1023 ), ExtResource( 1016 ), ExtResource( 1019 ) ]
+change_to = "VineBulb"
+items_in_sequence = 6
+icon = ExtResource( 1020 )
+preview = ExtResource( 1065 )
+
+[node name="VineBulb" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 24 )
+object_id = 119
+is_object = true
+object_center = Vector2( 24, 20 )
+tile_mode_step = 16
+palette_icons = [ ExtResource( 1069 ), ExtResource( 1068 ), ExtResource( 1025 ), ExtResource( 1029 ), ExtResource( 1028 ), ExtResource( 1027 ) ]
+palette_previews = [ ExtResource( 1069 ), ExtResource( 1068 ), ExtResource( 1025 ), ExtResource( 1029 ), ExtResource( 1028 ), ExtResource( 1027 ) ]
+change_to = "VineStem"
+items_in_sequence = 6
+icon = ExtResource( 1069 )
+preview = ExtResource( 1069 )
+
+[node name="VineStem" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 24 )
+object_id = 120
+is_object = true
+object_center = Vector2( 24, 32 )
+tile_mode_step = 16
+palette_icons = [ ExtResource( 1072 ), ExtResource( 1071 ), ExtResource( 1033 ), ExtResource( 1030 ), ExtResource( 1031 ), ExtResource( 1034 ) ]
+palette_previews = [ ExtResource( 1070 ), ExtResource( 1073 ), ExtResource( 1036 ), ExtResource( 1037 ), ExtResource( 1038 ), ExtResource( 1039 ) ]
+change_to = "VineThorns"
+items_in_sequence = 6
+icon = ExtResource( 1072 )
+preview = ExtResource( 1070 )
+
+[node name="VineThorns" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 24 )
+object_id = 121
+is_object = true
+object_center = Vector2( 24, 24 )
+tile_mode_step = 16
+palette_icons = [ ExtResource( 1076 ), ExtResource( 1075 ), ExtResource( 1060 ), ExtResource( 1062 ), ExtResource( 1064 ), ExtResource( 1061 ) ]
+palette_previews = [ ExtResource( 1063 ), ExtResource( 1074 ), ExtResource( 1043 ), ExtResource( 1044 ), ExtResource( 1040 ), ExtResource( 1041 ) ]
+change_to = "VineBend"
+items_in_sequence = 6
+icon = ExtResource( 1076 )
+preview = ExtResource( 1074 )
+
+[node name="VineBend" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 24 )
+object_id = 122
+is_object = true
+object_center = Vector2( 32, 32 )
+tile_mode_offset = Vector2( 1, 1 )
+tile_mode_step = 64
+palette_icons = [ ExtResource( 1077 ), ExtResource( 1078 ), ExtResource( 1047 ), ExtResource( 1048 ), ExtResource( 1046 ), ExtResource( 1045 ) ]
+palette_previews = [ ExtResource( 1080 ), ExtResource( 1079 ), ExtResource( 1051 ), ExtResource( 1054 ), ExtResource( 1053 ), ExtResource( 1052 ) ]
+change_to = "VineStemEnd"
+items_in_sequence = 6
+icon = ExtResource( 1077 )
+preview = ExtResource( 1080 )
+
+[node name="VineStemEnd" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 24 )
+object_id = 123
+is_object = true
+object_center = Vector2( 24, 27 )
+tile_mode_step = 16
+palette_icons = [ ExtResource( 1081 ), ExtResource( 1058 ), ExtResource( 1055 ), ExtResource( 1056 ), ExtResource( 1059 ), ExtResource( 1057 ) ]
+palette_previews = [ ExtResource( 1081 ), ExtResource( 1058 ), ExtResource( 1055 ), ExtResource( 1056 ), ExtResource( 1059 ), ExtResource( 1057 ) ]
+change_to = "VineFlower"
+items_in_sequence = 6
+icon = ExtResource( 1081 )
+preview = ExtResource( 1081 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100

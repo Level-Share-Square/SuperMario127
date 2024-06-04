@@ -1,0 +1,17 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/vine_stem_end.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palletes/vine_stem_end2.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palletes/vine_stem_end3.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palletes/vine_stem_end5.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palletes/vine_stem_end1.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/palletes/vine_stem_end4.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/vine_stem_end/vine_stem_end.png" type="Texture" id=7]
+
+[node name="vine" type="Node2D"]
+script = ExtResource( 1 )
+palette_textures = [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 4 ) ]
+
+[node name="Sprite" type="Sprite" parent="."]
+z_index = -9
+texture = ExtResource( 7 )
