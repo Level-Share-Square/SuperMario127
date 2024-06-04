@@ -12,4 +12,4 @@ dest_files=[ "res://.import/metal_mario.ogg-475452b189304fc08ac723f5401e9114.ogg
 [params]
 
 loop=true
-loop_offset=4.95
+loop_offset=10.6
