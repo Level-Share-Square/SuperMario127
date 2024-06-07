@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://scenes/shared/background/foregrounds/reef/palletes/1/mg.png" type="Texture" id=1]
+[ext_resource path="res://classes/ParallaxLayerResource.gd" type="Script" id=2]
+[ext_resource path="res://scenes/shared/background/foregrounds/reef/palletes/2/mg.png" type="Texture" id=3]
+[ext_resource path="res://scenes/shared/background/foregrounds/reef/palletes/3/mg.png" type="Texture" id=4]
+[ext_resource path="res://scenes/shared/background/foregrounds/reef/mg.png" type="Texture" id=5]
+[ext_resource path="res://scenes/shared/background/foregrounds/reef/palletes/4/mg.png" type="Texture" id=6]
+
+[resource]
+script = ExtResource( 2 )
+texture = ExtResource( 5 )
+scale = Vector2( 0.06, 0.2 )
+offset = Vector2( 0, 50 )
+mirroring = Vector2( 512, 0 )
+palettes = [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 6 ) ]
