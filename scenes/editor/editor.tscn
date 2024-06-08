@@ -4330,7 +4330,6 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="HelpButton" type="TextureButton" parent="UI"]
-visible = false
 margin_left = 585.0
 margin_top = 6.0
 margin_right = 729.0

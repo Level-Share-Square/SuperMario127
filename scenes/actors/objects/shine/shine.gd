@@ -169,7 +169,6 @@ func _physics_process(_delta : float) -> void:
 
 	if collected:
 		if send_score == true:
-			SilentWolf.Scores.persist_score("Dignity", Singleton.CurrentLevelData.time_score)
 			send_score = false
 		character.shine_kill = true
 		character.sprite.animation = "shineFall"

@@ -312,13 +312,11 @@ func update_selected_object(mouse_pos : Vector2) -> void:
 
 func _process(delta : float) -> void:
 	
+
+	
 	if autosave_timer > 0:
 		autosave_timer -= 1
 	if autosave_timer <= 0:
-		if Singleton.SavedLevels.selected_level != -1:
-			Singleton.SavedLevels.levels[Singleton.SavedLevels.selected_level] = LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data())
-			var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
-		Singleton.CurrentLevelData.unsaved_editor_changes = false
 		var level = Singleton.SavedLevels.levels
 		var level_info = level[Singleton.SavedLevels.selected_level]
 		var file = File.new()
@@ -326,10 +324,12 @@ func _process(delta : float) -> void:
 		var hours = time["hour"]
 		var minutes = time["minute"]
 		var seconds = time["second"]
-		
-		file.open("user://autosave/" + str(level_info.level_name) + "_" + "hour" + str(hours) + "_" + "minute" + str(minutes) + "_" + "second" + str(seconds) + ".autosave", File.WRITE_READ)
-		file.store_var(level_info.level_code)
-		file.close()
+		if Singleton.SavedLevels.selected_level != -1:
+			Singleton.SavedLevels.levels[Singleton.SavedLevels.selected_level] = LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data())
+			var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
+			
+			Singleton.SavedLevels.save_level_to_disk(LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()), "user://autosave/" + str(level_info.level_name) + "_" + "hour" + str(hours) + "_" + "minute" + str(minutes) + "_" + "second" + str(seconds) + ".autosave")
+		Singleton.CurrentLevelData.unsaved_editor_changes = false
 		
 		autosave_timer = 45000
 	# warning-ignore: integer_division
