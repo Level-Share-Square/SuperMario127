@@ -37,7 +37,7 @@ frame_1/delay_sec = 0.0
 [resource]
 script = ExtResource( 2 )
 texture = SubResource( 4 )
-scale = Vector2( 0.003, 0 )
-offset = Vector2( 0, -50 )
+scale = Vector2( 0.005, 0 )
+offset = Vector2( 0, -30 )
 mirroring = Vector2( 1024, 0 )
 palettes = [ SubResource( 3 ), SubResource( 1 ), SubResource( 5 ) ]

@@ -9,9 +9,17 @@
 [ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem1.png" type="Texture" id=7]
 
 [node name="vine" type="Node2D"]
+z_index = -1
 script = ExtResource( 1 )
 palette_textures = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ]
 
-[node name="Sprite" type="Sprite" parent="."]
-z_index = -9
+[node name="Sprite" type="NinePatchRect" parent="."]
+margin_left = -24.0
+margin_top = -32.0
+margin_right = 24.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 48, 64 )
 texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 48, 64 )
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
