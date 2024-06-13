@@ -3,7 +3,7 @@ extends Node2D
 onready var camera : Camera2D = $"../Camera2D"
 onready var shared : Node2D = $"../Shared"
 onready var backgrounds : Node2D = $"../Backgrounds"
-onready var toggle_button : TextureButton = $"../UI/BoundsControlToggle"
+onready var toggle_button : TextureButton = $"../UI/Tools/Control/BoundaryTool"
 
 onready var left_node = $Left
 onready var top_node = $Top
@@ -17,10 +17,6 @@ func _ready():
 func _process(_delta):
 	camera.smoothing_enabled = true #kinda hacky way to make sure smoothing won't stay disabled
 	
-	visible = toggle_button.pressed
-	
-	if(!visible):
-		return
 	
 	var area = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area]
 	var camera_position = camera.get_camera_screen_center()
