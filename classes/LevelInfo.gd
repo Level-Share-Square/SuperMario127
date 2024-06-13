@@ -32,6 +32,7 @@ var collected_shines : Dictionary = {} # key is the shine id (in a string, becau
 var collected_star_coins : Dictionary = {} # same as collected_shines
 var coin_score : int = 0
 var time_scores : Dictionary = {} # time_scores should probably be stored as the sum of delta while playing, keys are same as collected_shines
+var activated_fludds : Array = [false, false, false]
 
 func _init(passed_level_code : String = "") -> void:
 	if passed_level_code == "":
@@ -95,7 +96,7 @@ func reset_save_data() -> void:
 		collected_shines[collected_shine] = false
 	for collected_star_coin in collected_star_coins:
 		collected_star_coins[collected_star_coin] = false
-
+	activated_fludds = [false, false, false]
 	coin_score = 0
 	for key in time_scores.keys():
 		time_scores[key] = EMPTY_TIME_SCORE
@@ -117,6 +118,7 @@ func get_saveable_dictionary() -> Dictionary:
 		"collected_star_coins": collected_star_coins,
 		"coin_score": coin_score,
 		"time_scores": time_scores,
+		"activated_fludds": activated_fludds
 	}
 	return save_dictionary
 
@@ -137,6 +139,11 @@ func set_shine_collected(shine_id : int, save_to_disk : bool = true) -> void:
 
 func set_star_coin_collected(star_coin_id : int, save_to_disk : bool = true) -> void:
 	collected_star_coins[str(star_coin_id)] = true
+	if save_to_disk:
+		var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
+
+func set_fludd_activated(fludd_id : int, save_to_disk : bool = true) -> void:
+	activated_fludds[fludd_id] = true
 	if save_to_disk:
 		var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
 

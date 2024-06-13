@@ -6,10 +6,20 @@ onready var collision_shape = $StompDetector/CollisionShape2D
 onready var sprite = $Sprite
 onready var sound = $AudioStreamPlayer
 
+var activated = true
+# this is the variable that is actually used for runtime functionality
+var loaded_activated = true
 var buffer := -5
 var character = null
 
 var respawn_timer = 0.0
+
+func _set_properties():
+	savable_properties = ["activated"]
+	editable_properties = ["activated"]
+
+func _set_property_values():
+	set_property("activated", activated)
 
 func _ready():
 	if is_preview:
@@ -21,6 +31,10 @@ func _ready():
 		var _connect2 = area.connect("body_exited", self, "exit_area")
 		
 		var _connect3 = detector.connect("body_entered", self, "enter_detector")
+		if !activated and !Singleton.CurrentLevelData.level_data.vars.is_fludd_activated(0):
+			Singleton.CurrentLevelData.level_data.vars.connect("hover_fludd_activated", self, "_on_fludd_activated", [], CONNECT_ONESHOT)
+			sprite.modulate.a = 0.2
+			loaded_activated = false
 
 func enter_area(body):
 	if body.name.begins_with("Character"):
@@ -31,6 +45,8 @@ func exit_area(body):
 		character = null
 		
 func enter_detector(body):
+	if !loaded_activated:
+		return
 	if body.name.begins_with("Character") and respawn_timer == 0 and enabled and body.velocity.y > 0:
 		respawn_timer = 10.0
 		if body.state != body.get_state_node("GroundPoundState"):
@@ -53,6 +69,13 @@ func enter_detector(body):
 		object.properties.append(Vector2(0, -50))
 		object.properties.append("HoverNozzle")
 		get_parent().create_object(object, false)
+		
+		# activates all deactivated hover fludds loaded in the level
+		Singleton.CurrentLevelData.level_data.vars.activate_fludd(0)
+		
+func _on_fludd_activated():
+	sprite.modulate.a = 1
+	loaded_activated = true
 		
 func _physics_process(delta):
 	if respawn_timer > 0:

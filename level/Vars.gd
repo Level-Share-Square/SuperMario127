@@ -1,6 +1,9 @@
 class_name LevelVars
 
 signal switch_state_changed
+signal hover_fludd_activated
+signal turbo_fludd_activated
+signal rocket_fludd_activated
 
 var coins_collected := 0
 var red_coins_collected := [0, []]
@@ -47,6 +50,21 @@ func toggle_switch_state(var channel : int):
 	else:
 		switch_state.erase(channel)
 	emit_signal("switch_state_changed", channel)
+	
+func activate_fludd(var type : int):
+	if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and Singleton.SavedLevels.selected_level != Singleton.SavedLevels.NO_LEVEL:
+		Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level].set_fludd_activated(type, true)		
+	match(type):
+		0:
+			emit_signal("hover_fludd_activated")
+			print("emitting hover")
+		1:
+			emit_signal("turbo_fludd_activated")
+		2:
+			emit_signal("rocket_fludd_activated")
+			
+func is_fludd_activated(var type : int):
+	return Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level].activated_fludds[type]
 
 #func set_switch_state(var channel : int, value : bool):
 #	switch_state[channel] = value
