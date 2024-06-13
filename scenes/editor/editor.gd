@@ -27,6 +27,8 @@ onready var item_preview : Sprite = get_node(item_preview_path)
 onready var shared : Node2D = get_node(shared_path)
 onready var object_settings : NinePatchRect = get_node(object_settings_path)
 
+onready var bounds_control = $BoundsControl
+
 var lock_axis := "none"
 var lock_pos := 0
 var last_mouse_pos := Vector2(0, 0)

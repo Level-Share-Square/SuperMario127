@@ -1,4 +1,4 @@
-[gd_scene load_steps=1108 format=2]
+[gd_scene load_steps=1114 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1023,26 +1023,32 @@
 [ext_resource path="res://scenes/actors/objects/vine_flower/palletes/vine_flower_icon3.png" type="Texture" id=1021]
 [ext_resource path="res://scenes/actors/objects/vine_flower/palletes/vine_flower_icon4.png" type="Texture" id=1022]
 [ext_resource path="res://scenes/actors/objects/vine_flower/palletes/vine_flower3.png" type="Texture" id=1023]
+[ext_resource path="res://scenes/editor/assets/hammer_icon.png" type="Texture" id=1024]
 [ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/vine_bulb2.png" type="Texture" id=1025]
+[ext_resource path="res://scenes/editor/assets/hammer_icon_hover.png" type="Texture" id=1026]
 [ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/vine_bulb5.png" type="Texture" id=1027]
 [ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/vine_bulb4.png" type="Texture" id=1028]
 [ext_resource path="res://scenes/actors/objects/vine_bulb/palletes/vine_bulb3.png" type="Texture" id=1029]
 [ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem_icon3.png" type="Texture" id=1030]
 [ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem_icon4.png" type="Texture" id=1031]
+[ext_resource path="res://scenes/editor/assets/boundary_icon.png" type="Texture" id=1032]
 [ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem_icon2.png" type="Texture" id=1033]
 [ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem_icon5.png" type="Texture" id=1034]
+[ext_resource path="res://scenes/editor/assets/boundary_icon_hover.png" type="Texture" id=1035]
 [ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem2.png" type="Texture" id=1036]
 [ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem3.png" type="Texture" id=1037]
 [ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem4.png" type="Texture" id=1038]
 [ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem5.png" type="Texture" id=1039]
 [ext_resource path="res://scenes/actors/objects/vine_thorns/palletes/vine_thorns4.png" type="Texture" id=1040]
 [ext_resource path="res://scenes/actors/objects/vine_thorns/palletes/vine_thorns5.png" type="Texture" id=1041]
+[ext_resource path="res://scenes/editor/assets/boundary_icon_pressed.png" type="Texture" id=1042]
 [ext_resource path="res://scenes/actors/objects/vine_thorns/palletes/vine_thorns2.png" type="Texture" id=1043]
 [ext_resource path="res://scenes/actors/objects/vine_thorns/palletes/vine_thorns3.png" type="Texture" id=1044]
 [ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend_icon5.png" type="Texture" id=1045]
 [ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend_icon4.png" type="Texture" id=1046]
 [ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend_icon2.png" type="Texture" id=1047]
 [ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend_icon3.png" type="Texture" id=1048]
+[ext_resource path="res://scenes/editor/boundary_tool.gd" type="Script" id=1049]
 [ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend2.png" type="Texture" id=1051]
 [ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend5.png" type="Texture" id=1052]
 [ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend4.png" type="Texture" id=1053]
@@ -1678,23 +1684,43 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("../LayerSwitcher:rect_position:x")
+tracks/3/path = NodePath("../LayerSwitcher:rect_position:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 721, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 122, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/4/type = "bezier"
-tracks/4/path = NodePath("../LayerSwitcher:rect_position:y")
+tracks/4/path = NodePath("../LayerSwitcher:rect_position:x")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( 72, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 721, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("../ToolsButton:rect_position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 728, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("../ToolsButton:rect_position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 71, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 
@@ -1757,27 +1783,27 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("../LayerSwitcher:rect_position:x")
+tracks/1/path = NodePath("../ToolsButton:rect_position:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 721, -0.25, 0, 0.25, 0, 537.805, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 728, -0.25, 0, 0.25, 0, 546, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("../LayerSwitcher:rect_position:y")
+tracks/2/path = NodePath("../ToolsButton:rect_position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 72, -0.25, 0, 0.25, 0, 72, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 71, -0.25, 0, 0.25, 0, 71, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.4 )
 }
 
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=35]
 resource_name = "tools_out"
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("../Tools:margin_left")
@@ -1790,23 +1816,23 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("../LayerSwitcher:rect_position:x")
+tracks/1/path = NodePath("../ToolsButton:rect_position:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 537.805, -0.25, 0, 0.25, 0, 721, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 547, -0.25, 0, 0.25, 0, 728, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("../LayerSwitcher:rect_position:y")
+tracks/2/path = NodePath("../ToolsButton:rect_position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 72, -0.25, 0, 0.25, 0, 72, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 71, -0.25, 0, 0.25, 0, 71, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.4 )
 }
 
@@ -4277,6 +4303,29 @@ volume_db = -10.0
 stream = ExtResource( 120 )
 volume_db = -10.0
 
+[node name="BoundaryTool" type="TextureButton" parent="UI/Tools/Control"]
+margin_left = 59.0
+margin_top = 6.0
+margin_right = 185.0
+margin_bottom = 132.0
+rect_scale = Vector2( 0.333, 0.333 )
+texture_normal = ExtResource( 1032 )
+texture_pressed = ExtResource( 1042 )
+texture_hover = ExtResource( 1035 )
+expand = true
+script = ExtResource( 1049 )
+normal_tex = ExtResource( 1032 )
+hover_tex = ExtResource( 1035 )
+selected_tex = ExtResource( 1042 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/BoundaryTool"]
+stream = ExtResource( 121 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/BoundaryTool"]
+stream = ExtResource( 120 )
+volume_db = -10.0
+
 [node name="PlaceableItemsContainer" type="TextureRect" parent="UI"]
 margin_left = -1.0
 margin_top = -1.0
@@ -4329,10 +4378,10 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="HelpButton" type="TextureButton" parent="UI"]
-margin_left = 585.0
-margin_top = 6.0
-margin_right = 729.0
-margin_bottom = 158.0
+margin_left = 592.0
+margin_top = 5.0
+margin_right = 736.0
+margin_bottom = 157.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
 texture_normal = ExtResource( 18 )
@@ -4353,9 +4402,9 @@ volume_db = -10.0
 [node name="LayerSwitcher" type="TextureButton" parent="UI"]
 self_modulate = Color( 1, 1, 1, 0.721569 )
 margin_left = 721.0
-margin_top = 72.0
+margin_top = 122.0
 margin_right = 1050.49
-margin_bottom = 219.0
+margin_bottom = 269.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
 texture_normal = ExtResource( 46 )
@@ -4405,15 +4454,17 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="ToolsButton" type="TextureButton" parent="UI"]
-margin_left = 581.0
-margin_top = 3.0
-margin_right = 762.078
-margin_bottom = 204.0
+self_modulate = Color( 1, 1, 1, 0.721569 )
+margin_left = 728.0
+margin_top = 71.0
+margin_right = 845.0
+margin_bottom = 201.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
-texture_normal = ExtResource( 116 )
-texture_pressed = ExtResource( 117 )
-texture_hover = ExtResource( 118 )
+texture_normal = ExtResource( 1024 )
+texture_pressed = ExtResource( 1024 )
+texture_hover = ExtResource( 1026 )
+expand = true
 script = ExtResource( 691 )
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/ToolsButton"]
@@ -4468,9 +4519,9 @@ stream = ExtResource( 120 )
 volume_db = -10.0
 
 [node name="SaveButton" type="TextureButton" parent="UI"]
-margin_left = 646.0
+margin_left = 652.0
 margin_top = 5.0
-margin_right = 790.0
+margin_right = 796.0
 margin_bottom = 157.0
 rect_scale = Vector2( 0.333, 0.333 )
 action_mode = 0
@@ -4794,4 +4845,4 @@ anims/RESET = SubResource( 26 )
 anims/autosave_in = SubResource( 27 )
 anims/autosave_out = SubResource( 31 )
 anims/tools_in = SubResource( 32 )
-anims/tools_out = SubResource( 33 )
+anims/tools_out = SubResource( 35 )

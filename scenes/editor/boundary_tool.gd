@@ -1,7 +1,7 @@
 extends TextureButton
 
 export var editor : NodePath
-onready var editor_node = get_node(editor)
+onready var bounds_control = $"../../../../BoundsControl"
 
 export var tool_index := 0
 export var normal_tex : StreamTexture
@@ -14,15 +14,13 @@ onready var click_sound = $ClickSound
 var last_hovered = false
 
 func _pressed():
-	if editor_node.selected_tool != tool_index:
-		editor_node.selected_tool = tool_index
-		click_sound.play()
+	bounds_control.visible = !bounds_control.visible
+	click_sound.play()
 		
 func _process(_delta):
-	var selected_tool = editor_node.selected_tool
 	var hovered = is_hovered()
 	
-	if selected_tool == tool_index:
+	if bounds_control.visible:
 		texture_normal = selected_tex
 		texture_hover = selected_tex
 	else:
