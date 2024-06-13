@@ -4265,7 +4265,6 @@ texture_pressed = ExtResource( 41 )
 texture_hover = ExtResource( 57 )
 script = ExtResource( 28 )
 editor = NodePath("../../../..")
-tool_index = 2
 normal_tex = ExtResource( 67 )
 hover_tex = ExtResource( 57 )
 selected_tex = ExtResource( 41 )

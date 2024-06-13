@@ -17,6 +17,9 @@ func _pressed():
 	if editor_node.selected_tool != tool_index:
 		editor_node.selected_tool = tool_index
 		click_sound.play()
+	else:
+		texture_normal = normal_tex
+		texture_hover = hover_tex
 		
 func _process(_delta):
 	var selected_tool = editor_node.selected_tool
