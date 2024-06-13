@@ -8,7 +8,6 @@ var skip_to_player := true
 var focus_zoom := 1.0
 var last_position = Vector2(0,0)
 var size = Vector2(0,0)
-# todo: make this update based on multiplayer screen size
 var base_size = Vector2(393, 216)
 
 onready var character_node = get_node(character)
@@ -36,8 +35,8 @@ func _physics_process(delta):
 				character_vel = character_vel.linear_interpolate(character_node.velocity * 15.5 * delta, fps_util.PHYSICS_DELTA * 2)
 			else:
 				character_vel = Vector2()
-			
-			bg.parallax_node.scroll_base_scale.y = zoom.y
+			if is_instance_valid(bg):
+				bg.parallax_node.scroll_base_scale.y = zoom.y
 			if skip_to_player:
 				yield(get_tree(), "idle_frame")
 				reset_smoothing()
@@ -120,6 +119,8 @@ func load_in(_level_data : LevelData, level_area : LevelArea):
 	elif character_node != null:
 		position = character_node.global_position
 		character_node.camera = self
+	if Singleton.PlayerSettings.number_of_players == 2:
+		base_size.x /= 2
 
 
 
