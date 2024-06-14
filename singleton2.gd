@@ -9,8 +9,26 @@ var level
 var ghost_enabled = true
 var crash
 var crash_happened = "no"
-
+var disable_hotkeys = false
 var dark_mode : bool
+
+var default_hotkeys = [
+	"toggle_grid",
+	"zoom_in",
+	"zoom_out",
+	"switch_modes",
+	"switch_placement_mode",
+	"switch_layers",
+	"save_level",
+	"toggle_transparency",
+	"8_pixel_lock",
+	"rotate",
+	"undo",
+	"redo",
+	"flip_object",
+	"flip_object_v",
+	"toggle_enabled",
+]
 
 signal dark_mode_toggled
 

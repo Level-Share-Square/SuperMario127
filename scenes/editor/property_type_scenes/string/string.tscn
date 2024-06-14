@@ -45,9 +45,6 @@ custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/normal = SubResource( 2 )
 clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )

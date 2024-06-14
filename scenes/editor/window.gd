@@ -44,6 +44,7 @@ func open():
 			Tween.TRANS_CIRC, Tween.EASE_OUT)
 		tween.start()
 		yield(tween, "tween_completed")
+		Singleton2.disable_hotkeys = true
 	
 func close():
 	if visible:
@@ -54,6 +55,7 @@ func close():
 		tween.start()
 		yield(tween, "tween_completed")
 		visible = false
+		Singleton2.disable_hotkeys = false
 
 func _ready():
 	close_button.texture_normal = load(close_button.texture_normal.load_path)

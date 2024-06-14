@@ -597,11 +597,11 @@ margin_bottom = 298.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Hotkeys/ScrollContainer"]
 margin_right = 892.0
-margin_bottom = 970.0
+margin_bottom = 909.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Hotkeys/ScrollContainer/HBoxContainer"]
 margin_right = 588.622
-margin_bottom = 970.0
+margin_bottom = 909.0
 rect_min_size = Vector2( 588.622, 115.73 )
 custom_constants/separation = 20
 
@@ -613,7 +613,7 @@ custom_fonts/font = SubResource( 14 )
 [node name="VBoxContainer" type="VBoxContainer" parent="Hotkeys/ScrollContainer/HBoxContainer"]
 margin_left = 592.0
 margin_right = 892.0
-margin_bottom = 970.0
+margin_bottom = 909.0
 rect_min_size = Vector2( 300, 115.73 )
 custom_constants/separation = 6
 
@@ -956,34 +956,19 @@ volume_db = -10.0
 stream = ExtResource( 13 )
 volume_db = -10.0
 
-[node name="search" type="Button" parent="Hotkeys/ScrollContainer/HBoxContainer/VBoxContainer"]
-margin_top = 915.0
-margin_right = 300.0
-margin_bottom = 970.0
-rect_min_size = Vector2( 148, 0 )
-custom_fonts/font = SubResource( 10 )
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/normal = SubResource( 9 )
-shortcut_in_tooltip = false
-action_mode = 0
-script = ExtResource( 24 )
-full_name = "Search"
-
-[node name="HoverSound" type="AudioStreamPlayer" parent="Hotkeys/ScrollContainer/HBoxContainer/VBoxContainer/search"]
-stream = ExtResource( 15 )
-volume_db = -10.0
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="Hotkeys/ScrollContainer/HBoxContainer/VBoxContainer/search"]
-stream = ExtResource( 13 )
-volume_db = -10.0
-
 [node name="Settings" parent="Hotkeys" instance=ExtResource( 21 )]
-margin_left = 297.5
+margin_left = 87.5
 margin_top = 392.698
-margin_right = 697.5
+margin_right = 487.5
 margin_bottom = 482.698
 text = "Level Settings"
+
+[node name="Reset" parent="Hotkeys" instance=ExtResource( 21 )]
+margin_left = 510.0
+margin_top = 392.698
+margin_right = 910.0
+margin_bottom = 482.698
+text = "Reset Hotkeys"
 
 [node name="Label" type="Label" parent="Hotkeys"]
 margin_left = 230.0

@@ -99,39 +99,40 @@ func switch_layers() -> void:
 	shared.toggle_layer_transparency(editing_layer, layers_transparent)
 
 func _unhandled_input(event) -> void:
-	if event.is_action_pressed("switch_placement_mode"):
-		placement_mode = "Tile" if placement_mode == "Drag" else "Drag"
-	elif event.is_action_pressed("toggle_surface_snap"):
-		surface_snap = !surface_snap
-	elif event.is_action_pressed("place") and !Input.is_action_pressed("erase"):
-		left_held = true
-	elif event.is_action_released("place"):
-		left_held = false
-	elif event.is_action_pressed("erase") and !Input.is_action_pressed("place"):
-		right_held = true
-	elif event.is_action_released("erase"):
-		right_held = false
-	elif event.is_action_pressed("undo"):
-		Singleton.ActionManager.undo()
-	elif event.is_action_pressed("redo"):
-		Singleton.ActionManager.redo()
-	elif event.is_action_pressed("pencil_tool"):
-		selected_tool = 0
-	elif event.is_action_pressed("eraser_tool"):
-		selected_tool = 1
-	elif event.is_action_pressed("selection_tool"):
-		selected_tool = 2
-	elif event.is_action_pressed("zoom_out"):
-		add_zoom_level(0.25)
-	elif event.is_action_pressed("zoom_in"):
-		add_zoom_level(-0.25)
-	
-	if event.is_action_pressed("switch_layers"):
-		switch_layers()
-	if event.is_action_pressed("toggle_transparency"):
-		layers_transparent = !layers_transparent
-		Singleton.EditorSavedSettings.layers_transparent = layers_transparent
-		shared.toggle_layer_transparency(editing_layer, layers_transparent)
+	if Singleton2.disable_hotkeys == false:
+		if event.is_action_pressed("switch_placement_mode"):
+			placement_mode = "Tile" if placement_mode == "Drag" else "Drag"
+		elif event.is_action_pressed("toggle_surface_snap"):
+			surface_snap = !surface_snap
+		elif event.is_action_pressed("place") and !Input.is_action_pressed("erase"):
+			left_held = true
+		elif event.is_action_released("place"):
+			left_held = false
+		elif event.is_action_pressed("erase") and !Input.is_action_pressed("place"):
+			right_held = true
+		elif event.is_action_released("erase"):
+			right_held = false
+		elif event.is_action_pressed("undo"):
+			Singleton.ActionManager.undo()
+		elif event.is_action_pressed("redo"):
+			Singleton.ActionManager.redo()
+		elif event.is_action_pressed("pencil_tool"):
+			selected_tool = 0
+		elif event.is_action_pressed("eraser_tool"):
+			selected_tool = 1
+		elif event.is_action_pressed("selection_tool"):
+			selected_tool = 2
+		elif event.is_action_pressed("zoom_out"):
+			add_zoom_level(0.25)
+		elif event.is_action_pressed("zoom_in"):
+			add_zoom_level(-0.25)
+		
+		if event.is_action_pressed("switch_layers"):
+			switch_layers()
+		if event.is_action_pressed("toggle_transparency"):
+			layers_transparent = !layers_transparent
+			Singleton.EditorSavedSettings.layers_transparent = layers_transparent
+			shared.toggle_layer_transparency(editing_layer, layers_transparent)
 
 func _ready() -> void:
 	# reset these to 0 since they get incremented by the loading in process every time

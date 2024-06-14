@@ -102,6 +102,13 @@ func _ready():
 		mario_sprite.frames = luigi_frames
 		mario_reflection.frames = luigi_frames
 		thread.start(self, "load_palettes", null, thread.PRIORITY_HIGH)
+		dir.make_dir("user://hotkeys")
+		file.open("user://hotkeys/defhotkeys.file", File.WRITE)
+		var dict = {}
+		for i in Singleton2.default_hotkeys:
+			dict[i] = InputMap.get_action_list(i)[0].get_scancode()
+		file.store_var(dict)
+		file.close()
 
 func collect_coin(play_sound = true):
 	coins += 1

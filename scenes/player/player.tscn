@@ -1225,7 +1225,7 @@ collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 10
+frame = 0
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
