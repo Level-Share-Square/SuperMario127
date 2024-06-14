@@ -1225,6 +1225,7 @@ collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
+frame = 10
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
@@ -1270,6 +1271,7 @@ drag_margin_bottom = 0.0
 editor_draw_screen = false
 script = ExtResource( 4 )
 character = NodePath("../../../ViewportContainer/Viewport/World/Character2")
+background = NodePath("../Backgrounds")
 
 [node name="Tween" type="Tween" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
 
