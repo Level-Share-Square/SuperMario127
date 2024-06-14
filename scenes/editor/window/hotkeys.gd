@@ -19,7 +19,7 @@ func _ready():
 	inputevent = null
 	hotkey = null
 	for i in hotkey_parent.get_children():
-		i.connect("button_down", self, i.name + "_pressed", [i.name])
+		i.connect("button_down", self, "button_pressed", [i.name])
 		var action_name = i.name
 		hotkeys[action_name] = InputMap.get_action_list(action_name)[0]
 		i.text = InputMap.get_action_list(action_name)[0].as_text()
@@ -53,7 +53,7 @@ func _process(delta):
 		inputevent = null
 		hotkey = null
 	
-func toggle_grid_pressed(inputname):
+func button_pressed(inputname):
 	hotkey = inputname
 	timer = 600
 	timer_run = true
