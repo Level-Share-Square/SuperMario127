@@ -1,7 +1,8 @@
 extends BaseButton
 
 onready var hover_sound : AudioStreamPlayer = $HoverSound 
-onready var click_sound : AudioStreamPlayer = $ClickSound
+onready var click_sound : AudioStreamPlayer = $ClickSound 
+export var full_name : String
 
 func _ready() -> void:
 	var _connect
@@ -22,5 +23,3 @@ func on_focus_entered() -> void:
 
 func on_pressed() -> void:
 	click_sound.play()
-	get_parent().get_parent().visible = false
-	get_parent().get_parent().get_parent().get_node("Hotkeys").visible = true
