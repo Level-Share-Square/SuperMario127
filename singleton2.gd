@@ -11,6 +11,8 @@ var crash
 var crash_happened = "no"
 var disable_hotkeys = false
 var dark_mode : bool
+var autosave_timer : int = 108000
+var time : int
 
 var default_hotkeys = [
 	"toggle_grid",
@@ -47,4 +49,6 @@ func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
 		crash = false
 	
+func reset_time():
+	time = autosave_timer
 

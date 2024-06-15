@@ -136,7 +136,6 @@ stream = ExtResource( 13 )
 volume_db = -10.0
 
 [node name="LevelSettings" type="Control" parent="."]
-visible = false
 anchor_bottom = 0.06
 margin_left = 17.4044
 margin_top = 104.0
@@ -542,6 +541,7 @@ text = "Areas"
 script = ExtResource( 20 )
 
 [node name="Areas" type="Control" parent="."]
+visible = false
 anchor_bottom = 0.06
 margin_left = 17.4044
 margin_top = 104.0

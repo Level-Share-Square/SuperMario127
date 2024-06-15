@@ -218,21 +218,26 @@ func save_level_to_disk(level_info : LevelInfo, level_path : String) -> int:
 		file.close()
 	return OK
 	
+func manual_autosave_level_to_disk(level_code, level_path : String) -> int:
+	if !directory.dir_exists(LEVELS_DIRECTORY):
+		var _error_code = directory.make_dir_recursive(LEVELS_DIRECTORY)
+
+	var error_code = file.open(level_path, File.WRITE)
+	if error_code == OK:
+		file.store_string(level_code)
+		file.close()
+	return OK
+	
 func autosave_level_to_disk(level_info : LevelInfo, level_path : String) -> int:
 	if !directory.dir_exists(LEVELS_DIRECTORY):
 		var _error_code = directory.make_dir_recursive(LEVELS_DIRECTORY)
 
-	var error_code = file.open_encrypted_with_pass(level_path, File.WRITE, ENCRYPTION_PASSWORD)
+	var error_code = file.open(level_path, File.WRITE)
 	if error_code == OK:
-		var time = Time.get_datetime_dict_from_system()
-		var hours = time["hour"]
-		var minutes = time["minute"]
-		var seconds = time["second"]
+		var time = Time.get_unix_time_from_system()
 		var level_save_dictionary = level_info.get_saveable_dictionary()
 		var level_save_dictionary_json = to_json(level_save_dictionary)
-		file.store_string(hours)
-		file.store_string(minutes)
-		file.store_string(seconds)
+		file.store_string(str(time) + "\n")
 		file.store_string(level_save_dictionary_json)
 		file.close()
 	return OK

@@ -6,6 +6,9 @@ onready var hover_sound = $HoverSound
 onready var click_sound = $ClickSound
 var last_hovered = false
 
+func _ready():
+	connect("gui_input", self, "on_input")
+
 func _process(delta):
 	if is_hovered() and !last_hovered:
 		hover_sound.play()
@@ -21,4 +24,9 @@ func _pressed():
 		var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
 
 		Singleton.CurrentLevelData.unsaved_editor_changes = false
+		
+func on_input(event):
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == BUTTON_RIGHT:
+			$"../AutosaveWINDOW".open()
 

@@ -6,7 +6,7 @@
 [sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=11]
 content_margin_left = 11.0
 content_margin_right = 11.0
 bg_color = Color( 0, 0.0470588, 0.317647, 1 )
@@ -22,8 +22,8 @@ margin_right = -138.0
 margin_bottom = 132.0
 theme = ExtResource( 2 )
 custom_fonts/font = SubResource( 4 )
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/disabled = SubResource( 3 )
-custom_styles/normal = SubResource( 3 )
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 11 )
+custom_styles/normal = SubResource( 11 )

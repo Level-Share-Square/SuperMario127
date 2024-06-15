@@ -1,4 +1,4 @@
-[gd_scene load_steps=1114 format=2]
+[gd_scene load_steps=1115 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1049,6 +1049,7 @@
 [ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend_icon2.png" type="Texture" id=1047]
 [ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend_icon3.png" type="Texture" id=1048]
 [ext_resource path="res://scenes/editor/boundary_tool.gd" type="Script" id=1049]
+[ext_resource path="res://scenes/editor/window/AutosaveWindow.tscn" type="PackedScene" id=1050]
 [ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend2.png" type="Texture" id=1051]
 [ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend5.png" type="Texture" id=1052]
 [ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend4.png" type="Texture" id=1053]
@@ -4353,6 +4354,9 @@ visible = false
 [node name="ColorPickerWindow" parent="UI" instance=ExtResource( 219 )]
 
 [node name="HelpWindow" parent="UI" instance=ExtResource( 531 )]
+visible = false
+
+[node name="AutosaveWINDOW" parent="UI" instance=ExtResource( 1050 )]
 visible = false
 
 [node name="LevelSettingsButton" type="TextureButton" parent="UI"]

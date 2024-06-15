@@ -44,7 +44,6 @@ func _physics_process(delta):
 		if inputevent != null:
 			InputMap.action_erase_events(hotkey)
 			InputMap.action_add_event(hotkey, inputevent)
-			print(InputMap.get_action_list(hotkey))
 			inputevent = null
 			hotkey = null
 			hotkeys.clear()
@@ -96,7 +95,6 @@ func reset_pressed():
 	
 func save_hotkeys():
 	var file = File.new()
-	var dir = Directory.new()
 	file.open("user://hotkeys/hotkeys.file", File.WRITE)
 	var dict = {}
 	for i in hotkeys:
