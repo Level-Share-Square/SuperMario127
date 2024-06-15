@@ -74,11 +74,7 @@ func on_button_search_pressed() -> void:
 	emit_signal("screen_change", "main_menu_screen", "search_screen")
 	
 func _process(delta):
-	if UserInfo.logged_out == true:
-		button_login.text = "Log In"
-		button_login.icon = lss_icon
-		error_window.open()
-		UserInfo.logged_out = false
+	pass
 	
 func on_button_levels_pressed() -> void:
 	if timer.time_left > 0:

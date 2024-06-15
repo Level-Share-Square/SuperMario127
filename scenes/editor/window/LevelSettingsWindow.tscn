@@ -542,7 +542,6 @@ text = "Areas"
 script = ExtResource( 20 )
 
 [node name="Areas" type="Control" parent="."]
-visible = false
 anchor_bottom = 0.06
 margin_left = 17.4044
 margin_top = 104.0
@@ -583,6 +582,7 @@ margin_bottom = 493.0
 text = "New Area"
 
 [node name="Hotkeys" type="Control" parent="."]
+visible = false
 margin_left = 20.0
 margin_top = 115.0
 margin_right = 1032.0

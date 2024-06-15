@@ -51,13 +51,7 @@ func _ready():
 	if id == Singleton.CurrentLevelData.area:
 		switch_to_button.disabled = true
 		delete_button.disabled = true
-	if id == Singleton.CurrentLevelData.area:
-		move_down_button.disabled = true
-		move_up_button.disabled = true
-	if id == Singleton.CurrentLevelData.area + 1:
-		move_up_button.disabled = true
-	if id == Singleton.CurrentLevelData.area - 1:
-		move_down_button.disabled = true
+	check_moveability()
 
 func switch_to_area():
 	if id != Singleton.CurrentLevelData.area:
@@ -70,13 +64,22 @@ func delete_area():
 		if Singleton.CurrentLevelData.area > id:
 			Singleton.CurrentLevelData.area -= 1
 		get_parent().get_parent().get_parent().reload_areas()
+		
+func check_moveability():
+	var index = id
+	if index - 1 == -1:
+		move_up_button.disabled = true
+	if index + 1 == Singleton.CurrentLevelData.level_data.areas.size():
+		move_down_button.disabled = true
 
 func duplicate_area():
-	if Singleton.CurrentLevelData.level_data.areas.size() < 16:
+	if Singleton.CurrentLevelData.level_data.areas.size() < 32:
 		var area = LevelArea.new()
 		var dup = Singleton.CurrentLevelData.level_data.areas[id]
 		area.duplicate(dup)
 		area.settings.background = Singleton.CurrentLevelData.level_data.areas[id].settings.background
+		area.settings.sky = Singleton.CurrentLevelData.level_data.areas[id].settings.sky
+		area.settings.background_palette = Singleton.CurrentLevelData.level_data.areas[id].settings.background_palette
 		Singleton.CurrentLevelData.level_data.areas.append(area)
 		get_parent().get_parent().get_parent().reload_areas()
 #		new_area.disabled = (Singleton.CurrentLevelData.level_data.areas.size() == 16)
@@ -86,6 +89,8 @@ func move_area_down():
 		var area1 = LevelArea.new()
 		area1.duplicate(Singleton.CurrentLevelData.level_data.areas[id])
 		area1.settings.background = Singleton.CurrentLevelData.level_data.areas[id].settings.background
+		area1.settings.sky = Singleton.CurrentLevelData.level_data.areas[id].settings.sky
+		area1.settings.background_palette = Singleton.CurrentLevelData.level_data.areas[id].settings.background_palette
 		Singleton.CurrentLevelData.level_data.areas.remove(id)
 		if Singleton.CurrentLevelData.area > id:
 			Singleton.CurrentLevelData.area -= 1
@@ -97,6 +102,8 @@ func move_area_up():
 		var area1 = LevelArea.new()
 		area1.duplicate(Singleton.CurrentLevelData.level_data.areas[id])
 		area1.settings.background = Singleton.CurrentLevelData.level_data.areas[id].settings.background
+		area1.settings.sky = Singleton.CurrentLevelData.level_data.areas[id].settings.sky
+		area1.settings.background_palette = Singleton.CurrentLevelData.level_data.areas[id].settings.background_palette
 		Singleton.CurrentLevelData.level_data.areas.remove(id)
 		if Singleton.CurrentLevelData.area > id:
 			Singleton.CurrentLevelData.area -= 1
