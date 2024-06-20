@@ -9,11 +9,16 @@ var times = ["Never", "5 Minutes", "15 Minutes", "30 Minutes", "1 Hour"]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var file = File.new()
-	file.open("user://autosave/settings.file", File.READ)
-	var timer = file.get_var()
-	file.close()
-	Singleton2.autosave_timer = timer
-	Singleton2.reset_time()
+	if !file.file_exists("user://autosave/settings.file"):
+		Singleton2.autosave_timer = 108000
+		save_timer()
+		Singleton2.reset_time()
+	else:
+		file.open("user://autosave/settings.file", File.READ)
+		var timer = file.get_var()
+		file.close()
+		Singleton2.autosave_timer = timer
+		Singleton2.reset_time()
 	for i in times:
 		selector.add_item(i)
 	selector.connect("item_selected", self, "item_selected")
@@ -47,11 +52,14 @@ func item_selected(index):
 			Singleton2.autosave_timer = 108000
 		4:
 			Singleton2.autosave_timer = 216000
+	save_timer()
+	Singleton2.reset_time()
+			
+func save_timer():
 	var file = File.new()
 	file.open("user://autosave/settings.file", File.WRITE)
 	file.store_var(Singleton2.autosave_timer)
 	file.close()
-	Singleton2.reset_time()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
