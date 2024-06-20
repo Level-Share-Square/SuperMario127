@@ -1,4 +1,4 @@
-[gd_scene load_steps=1115 format=2]
+[gd_scene load_steps=1147 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1081,6 +1081,38 @@
 [ext_resource path="res://scenes/actors/objects/vine_bend/palletes/vine_bend1.png" type="Texture" id=1079]
 [ext_resource path="res://scenes/actors/objects/vine_bend/vine_bend.png" type="Texture" id=1080]
 [ext_resource path="res://scenes/actors/objects/vine_stem_end/vine_stem_end.png" type="Texture" id=1081]
+[ext_resource path="res://assets/tiles/log/icon_slope_right.png" type="Texture" id=1082]
+[ext_resource path="res://assets/tiles/log/icon_slab.png" type="Texture" id=1083]
+[ext_resource path="res://assets/tiles/log/icon_slope_left.png" type="Texture" id=1084]
+[ext_resource path="res://assets/tiles/log/icon.png" type="Texture" id=1085]
+[ext_resource path="res://assets/tiles/log/palletes/1_block.png" type="Texture" id=1086]
+[ext_resource path="res://assets/tiles/log/palletes/2_block.png" type="Texture" id=1087]
+[ext_resource path="res://assets/tiles/log/palletes/4_block.png" type="Texture" id=1088]
+[ext_resource path="res://assets/tiles/log/palletes/5_block.png" type="Texture" id=1089]
+[ext_resource path="res://assets/tiles/log/palletes/6_block.png" type="Texture" id=1090]
+[ext_resource path="res://assets/tiles/log/palletes/7_block.png" type="Texture" id=1091]
+[ext_resource path="res://assets/tiles/log/palletes/3_block.png" type="Texture" id=1092]
+[ext_resource path="res://assets/tiles/log/palletes/2_slab.png" type="Texture" id=1093]
+[ext_resource path="res://assets/tiles/log/palletes/3_slab.png" type="Texture" id=1094]
+[ext_resource path="res://assets/tiles/log/palletes/1_slab.png" type="Texture" id=1095]
+[ext_resource path="res://assets/tiles/log/palletes/4_slab.png" type="Texture" id=1096]
+[ext_resource path="res://assets/tiles/log/palletes/5_slab.png" type="Texture" id=1097]
+[ext_resource path="res://assets/tiles/log/palletes/6_slab.png" type="Texture" id=1098]
+[ext_resource path="res://assets/tiles/log/palletes/7_slab.png" type="Texture" id=1099]
+[ext_resource path="res://assets/tiles/log/palletes/5_slope_L.png" type="Texture" id=1100]
+[ext_resource path="res://assets/tiles/log/palletes/1_slope_L.png" type="Texture" id=1101]
+[ext_resource path="res://assets/tiles/log/palletes/3_slope_L.png" type="Texture" id=1102]
+[ext_resource path="res://assets/tiles/log/palletes/2_slope_L.png" type="Texture" id=1103]
+[ext_resource path="res://assets/tiles/log/palletes/4_slope_L.png" type="Texture" id=1104]
+[ext_resource path="res://assets/tiles/log/palletes/7_slopeL.png" type="Texture" id=1105]
+[ext_resource path="res://assets/tiles/log/palletes/6_slopeL.png" type="Texture" id=1106]
+[ext_resource path="res://assets/tiles/log/palletes/4_slope_R.png" type="Texture" id=1107]
+[ext_resource path="res://assets/tiles/log/palletes/6_slopeR.png" type="Texture" id=1108]
+[ext_resource path="res://assets/tiles/log/palletes/7_slopeR.png" type="Texture" id=1109]
+[ext_resource path="res://assets/tiles/log/palletes/1_slope_R.png" type="Texture" id=1110]
+[ext_resource path="res://assets/tiles/log/palletes/3_slope_R.png" type="Texture" id=1111]
+[ext_resource path="res://assets/tiles/log/palletes/5_slope_R.png" type="Texture" id=1112]
+[ext_resource path="res://assets/tiles/log/palletes/2_slope_R.png" type="Texture" id=1113]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3432,6 +3464,207 @@ tile_mode_step = 64
 icon = ExtResource( 363 )
 preview = ExtResource( 364 )
 
+[node name="PlantGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 25 )
+color = Color( 0.258824, 0.184314, 0.145098, 1 )
+group_name = "Plants"
+
+[node name="Logs" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+tileset_id = 38
+palette_icons = [ ExtResource( 1085 ), ExtResource( 1086 ), ExtResource( 1087 ), ExtResource( 1092 ), ExtResource( 1088 ), ExtResource( 1089 ), ExtResource( 1090 ), ExtResource( 1091 ) ]
+palette_previews = [ ExtResource( 1085 ), ExtResource( 1086 ), ExtResource( 1087 ), ExtResource( 1092 ), ExtResource( 1088 ), ExtResource( 1089 ), ExtResource( 1090 ), ExtResource( 1091 ) ]
+change_to = "LogSlab"
+items_in_sequence = 4
+icon = ExtResource( 1085 )
+preview = ExtResource( 1085 )
+
+[node name="LogSlab" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+tileset_id = 38
+tile_id = 1
+palette_icons = [ ExtResource( 1083 ), ExtResource( 1095 ), ExtResource( 1093 ), ExtResource( 1094 ), ExtResource( 1096 ), ExtResource( 1097 ), ExtResource( 1098 ), ExtResource( 1099 ) ]
+palette_previews = [ ExtResource( 1083 ), ExtResource( 1095 ), ExtResource( 1093 ), ExtResource( 1094 ), ExtResource( 1096 ), ExtResource( 1097 ), ExtResource( 1098 ), ExtResource( 1099 ) ]
+change_to = "LogSlopeLeft"
+items_in_sequence = 4
+index_in_sequence = 1
+icon = ExtResource( 1083 )
+preview = ExtResource( 1083 )
+
+[node name="LogSlopeLeft" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+tileset_id = 38
+tile_id = 3
+palette_icons = [ ExtResource( 1084 ), ExtResource( 1101 ), ExtResource( 1103 ), ExtResource( 1102 ), ExtResource( 1104 ), ExtResource( 1100 ), ExtResource( 1106 ), ExtResource( 1105 ) ]
+palette_previews = [ ExtResource( 1084 ), ExtResource( 1101 ), ExtResource( 1103 ), ExtResource( 1102 ), ExtResource( 1104 ), ExtResource( 1100 ), ExtResource( 1106 ), ExtResource( 1105 ) ]
+change_to = "LogSlopeRight"
+items_in_sequence = 4
+index_in_sequence = 2
+icon = ExtResource( 1084 )
+preview = ExtResource( 1084 )
+
+[node name="LogSlopeRight" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+tileset_id = 38
+tile_id = 2
+palette_icons = [ ExtResource( 1082 ), ExtResource( 1110 ), ExtResource( 1113 ), ExtResource( 1111 ), ExtResource( 1107 ), ExtResource( 1112 ), ExtResource( 1108 ), ExtResource( 1109 ) ]
+palette_previews = [ ExtResource( 1082 ), ExtResource( 1110 ), ExtResource( 1113 ), ExtResource( 1111 ), ExtResource( 1107 ), ExtResource( 1112 ), ExtResource( 1108 ), ExtResource( 1109 ) ]
+change_to = "Logs"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 1082 )
+preview = ExtResource( 1082 )
+
+[node name="MushroomTop" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+object_id = 6
+is_object = true
+object_center = Vector2( 16, 17 )
+tile_mode_offset = Vector2( 0, 1 )
+change_to = "MushroomBody"
+items_in_sequence = 3
+icon = ExtResource( 72 )
+preview = ExtResource( 71 )
+
+[node name="MushroomBody" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+object_id = 7
+is_object = true
+object_center = Vector2( 16, 0 )
+tile_mode_offset = Vector2( 0, -16 )
+change_to = "MushroomCurve"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 73 )
+preview = ExtResource( 69 )
+
+[node name="MushroomCurve" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+object_id = 8
+is_object = true
+object_center = Vector2( 30, 18 )
+tile_mode_offset = Vector2( 14, 2 )
+change_to = "MushroomTop"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 74 )
+preview = ExtResource( 70 )
+
+[node name="TwistedTreeTop" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+object_id = 16
+is_object = true
+object_center = Vector2( 32, 32 )
+tile_mode_step = 64
+change_to = "TwistedTreeBody"
+items_in_sequence = 3
+icon = ExtResource( 97 )
+preview = ExtResource( 97 )
+
+[node name="TwistedTreeBody" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+object_id = 17
+is_object = true
+object_center = Vector2( 32, 32 )
+tile_mode_step = 64
+change_to = "TwistedTreeAngle"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 98 )
+preview = ExtResource( 98 )
+
+[node name="TwistedTreeAngle" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+object_id = 18
+is_object = true
+object_center = Vector2( 72, 40 )
+tile_mode_offset = Vector2( 40, 8 )
+tile_mode_step = 64
+change_to = "TwistedTreeTop"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 99 )
+preview = ExtResource( 99 )
+
+[node name="VineFlower" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+object_id = 118
+is_object = true
+object_center = Vector2( 16, 12 )
+tile_mode_step = 64
+palette_icons = [ ExtResource( 1020 ), ExtResource( 1067 ), ExtResource( 1017 ), ExtResource( 1021 ), ExtResource( 1022 ), ExtResource( 1015 ) ]
+palette_previews = [ ExtResource( 1065 ), ExtResource( 1066 ), ExtResource( 1018 ), ExtResource( 1023 ), ExtResource( 1016 ), ExtResource( 1019 ) ]
+change_to = "VineBulb"
+items_in_sequence = 6
+icon = ExtResource( 1020 )
+preview = ExtResource( 1065 )
+
+[node name="VineBulb" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+object_id = 119
+is_object = true
+object_center = Vector2( 24, 20 )
+tile_mode_step = 16
+palette_icons = [ ExtResource( 1069 ), ExtResource( 1068 ), ExtResource( 1025 ), ExtResource( 1029 ), ExtResource( 1028 ), ExtResource( 1027 ) ]
+palette_previews = [ ExtResource( 1069 ), ExtResource( 1068 ), ExtResource( 1025 ), ExtResource( 1029 ), ExtResource( 1028 ), ExtResource( 1027 ) ]
+change_to = "VineStem"
+items_in_sequence = 6
+icon = ExtResource( 1069 )
+preview = ExtResource( 1069 )
+
+[node name="VineStem" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+object_id = 120
+is_object = true
+object_center = Vector2( 24, 32 )
+tile_mode_step = 16
+palette_icons = [ ExtResource( 1072 ), ExtResource( 1071 ), ExtResource( 1033 ), ExtResource( 1030 ), ExtResource( 1031 ), ExtResource( 1034 ) ]
+palette_previews = [ ExtResource( 1070 ), ExtResource( 1073 ), ExtResource( 1036 ), ExtResource( 1037 ), ExtResource( 1038 ), ExtResource( 1039 ) ]
+change_to = "VineThorns"
+items_in_sequence = 6
+icon = ExtResource( 1072 )
+preview = ExtResource( 1070 )
+
+[node name="VineThorns" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+object_id = 121
+is_object = true
+object_center = Vector2( 24, 24 )
+tile_mode_step = 16
+palette_icons = [ ExtResource( 1076 ), ExtResource( 1075 ), ExtResource( 1060 ), ExtResource( 1062 ), ExtResource( 1064 ), ExtResource( 1061 ) ]
+palette_previews = [ ExtResource( 1063 ), ExtResource( 1074 ), ExtResource( 1043 ), ExtResource( 1044 ), ExtResource( 1040 ), ExtResource( 1041 ) ]
+change_to = "VineBend"
+items_in_sequence = 6
+icon = ExtResource( 1076 )
+preview = ExtResource( 1074 )
+
+[node name="VineBend" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+object_id = 122
+is_object = true
+object_center = Vector2( 32, 32 )
+tile_mode_offset = Vector2( 1, 1 )
+tile_mode_step = 64
+palette_icons = [ ExtResource( 1077 ), ExtResource( 1078 ), ExtResource( 1047 ), ExtResource( 1048 ), ExtResource( 1046 ), ExtResource( 1045 ) ]
+palette_previews = [ ExtResource( 1080 ), ExtResource( 1079 ), ExtResource( 1051 ), ExtResource( 1054 ), ExtResource( 1053 ), ExtResource( 1052 ) ]
+change_to = "VineStemEnd"
+items_in_sequence = 6
+icon = ExtResource( 1077 )
+preview = ExtResource( 1080 )
+
+[node name="VineStemEnd" type="Node" parent="PlaceableItems/PlantGroup"]
+script = ExtResource( 24 )
+object_id = 123
+is_object = true
+object_center = Vector2( 24, 27 )
+tile_mode_step = 16
+palette_icons = [ ExtResource( 1081 ), ExtResource( 1058 ), ExtResource( 1055 ), ExtResource( 1056 ), ExtResource( 1059 ), ExtResource( 1057 ) ]
+palette_previews = [ ExtResource( 1081 ), ExtResource( 1058 ), ExtResource( 1055 ), ExtResource( 1056 ), ExtResource( 1059 ), ExtResource( 1057 ) ]
+change_to = "VineFlower"
+items_in_sequence = 6
+icon = ExtResource( 1081 )
+preview = ExtResource( 1081 )
+
 [node name="BuildingGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
 color = Color( 0.121569, 0.180392, 0.517647, 1 )
@@ -3918,77 +4151,6 @@ tile_mode_step = 16
 icon = ExtResource( 175 )
 preview = ExtResource( 175 )
 
-[node name="MushroomTop" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 24 )
-object_id = 6
-is_object = true
-object_center = Vector2( 16, 17 )
-tile_mode_offset = Vector2( 0, 1 )
-change_to = "MushroomBody"
-items_in_sequence = 3
-icon = ExtResource( 72 )
-preview = ExtResource( 71 )
-
-[node name="MushroomBody" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 24 )
-object_id = 7
-is_object = true
-object_center = Vector2( 16, 0 )
-tile_mode_offset = Vector2( 0, -16 )
-change_to = "MushroomCurve"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 73 )
-preview = ExtResource( 69 )
-
-[node name="MushroomCurve" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 24 )
-object_id = 8
-is_object = true
-object_center = Vector2( 30, 18 )
-tile_mode_offset = Vector2( 14, 2 )
-change_to = "MushroomTop"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 74 )
-preview = ExtResource( 70 )
-
-[node name="TwistedTreeTop" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 24 )
-object_id = 16
-is_object = true
-object_center = Vector2( 32, 32 )
-tile_mode_step = 64
-change_to = "TwistedTreeBody"
-items_in_sequence = 3
-icon = ExtResource( 97 )
-preview = ExtResource( 97 )
-
-[node name="TwistedTreeBody" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 24 )
-object_id = 17
-is_object = true
-object_center = Vector2( 32, 32 )
-tile_mode_step = 64
-change_to = "TwistedTreeAngle"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 98 )
-preview = ExtResource( 98 )
-
-[node name="TwistedTreeAngle" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 24 )
-object_id = 18
-is_object = true
-object_center = Vector2( 72, 40 )
-tile_mode_offset = Vector2( 40, 8 )
-tile_mode_step = 64
-change_to = "TwistedTreeTop"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 99 )
-preview = ExtResource( 99 )
-
 [node name="Rock" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 24 )
 object_id = 73
@@ -4043,85 +4205,6 @@ object_id = 99
 is_object = true
 icon = ExtResource( 686 )
 preview = ExtResource( 753 )
-
-[node name="VineFlower" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 24 )
-object_id = 118
-is_object = true
-object_center = Vector2( 16, 12 )
-tile_mode_step = 64
-palette_icons = [ ExtResource( 1020 ), ExtResource( 1067 ), ExtResource( 1017 ), ExtResource( 1021 ), ExtResource( 1022 ), ExtResource( 1015 ) ]
-palette_previews = [ ExtResource( 1065 ), ExtResource( 1066 ), ExtResource( 1018 ), ExtResource( 1023 ), ExtResource( 1016 ), ExtResource( 1019 ) ]
-change_to = "VineBulb"
-items_in_sequence = 6
-icon = ExtResource( 1020 )
-preview = ExtResource( 1065 )
-
-[node name="VineBulb" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 24 )
-object_id = 119
-is_object = true
-object_center = Vector2( 24, 20 )
-tile_mode_step = 16
-palette_icons = [ ExtResource( 1069 ), ExtResource( 1068 ), ExtResource( 1025 ), ExtResource( 1029 ), ExtResource( 1028 ), ExtResource( 1027 ) ]
-palette_previews = [ ExtResource( 1069 ), ExtResource( 1068 ), ExtResource( 1025 ), ExtResource( 1029 ), ExtResource( 1028 ), ExtResource( 1027 ) ]
-change_to = "VineStem"
-items_in_sequence = 6
-icon = ExtResource( 1069 )
-preview = ExtResource( 1069 )
-
-[node name="VineStem" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 24 )
-object_id = 120
-is_object = true
-object_center = Vector2( 24, 32 )
-tile_mode_step = 16
-palette_icons = [ ExtResource( 1072 ), ExtResource( 1071 ), ExtResource( 1033 ), ExtResource( 1030 ), ExtResource( 1031 ), ExtResource( 1034 ) ]
-palette_previews = [ ExtResource( 1070 ), ExtResource( 1073 ), ExtResource( 1036 ), ExtResource( 1037 ), ExtResource( 1038 ), ExtResource( 1039 ) ]
-change_to = "VineThorns"
-items_in_sequence = 6
-icon = ExtResource( 1072 )
-preview = ExtResource( 1070 )
-
-[node name="VineThorns" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 24 )
-object_id = 121
-is_object = true
-object_center = Vector2( 24, 24 )
-tile_mode_step = 16
-palette_icons = [ ExtResource( 1076 ), ExtResource( 1075 ), ExtResource( 1060 ), ExtResource( 1062 ), ExtResource( 1064 ), ExtResource( 1061 ) ]
-palette_previews = [ ExtResource( 1063 ), ExtResource( 1074 ), ExtResource( 1043 ), ExtResource( 1044 ), ExtResource( 1040 ), ExtResource( 1041 ) ]
-change_to = "VineBend"
-items_in_sequence = 6
-icon = ExtResource( 1076 )
-preview = ExtResource( 1074 )
-
-[node name="VineBend" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 24 )
-object_id = 122
-is_object = true
-object_center = Vector2( 32, 32 )
-tile_mode_offset = Vector2( 1, 1 )
-tile_mode_step = 64
-palette_icons = [ ExtResource( 1077 ), ExtResource( 1078 ), ExtResource( 1047 ), ExtResource( 1048 ), ExtResource( 1046 ), ExtResource( 1045 ) ]
-palette_previews = [ ExtResource( 1080 ), ExtResource( 1079 ), ExtResource( 1051 ), ExtResource( 1054 ), ExtResource( 1053 ), ExtResource( 1052 ) ]
-change_to = "VineStemEnd"
-items_in_sequence = 6
-icon = ExtResource( 1077 )
-preview = ExtResource( 1080 )
-
-[node name="VineStemEnd" type="Node" parent="PlaceableItems/MiscGroup"]
-script = ExtResource( 24 )
-object_id = 123
-is_object = true
-object_center = Vector2( 24, 27 )
-tile_mode_step = 16
-palette_icons = [ ExtResource( 1081 ), ExtResource( 1058 ), ExtResource( 1055 ), ExtResource( 1056 ), ExtResource( 1059 ), ExtResource( 1057 ) ]
-palette_previews = [ ExtResource( 1081 ), ExtResource( 1058 ), ExtResource( 1055 ), ExtResource( 1056 ), ExtResource( 1059 ), ExtResource( 1057 ) ]
-change_to = "VineFlower"
-items_in_sequence = 6
-icon = ExtResource( 1081 )
-preview = ExtResource( 1081 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
