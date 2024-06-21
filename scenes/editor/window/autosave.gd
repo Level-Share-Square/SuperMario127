@@ -41,7 +41,6 @@ func _ready():
 		var code = file.get_line()
 		var json = parse_json(code)
 #		var prin = level_info.load_from_dictionary(code)
-		print(json)
 		main_level_code = json["level_code"]
 		populate_info_panel(LevelInfo.new(main_level_code))
 		main_time = float(time)
@@ -52,15 +51,12 @@ func _ready():
 		$"../LevelName".show()
 	
 	for i in list_files_in_directory("user://autosave"):
-		print(i)
 		file.open("user://autosave/" + i, File.READ)
 		var time = file.get_line() 
 		var code = file.get_line()
 		var json = parse_json(code)
 		codes.append(json["level_code"])
 		times.append(float(time))
-		print(times.size())
-		print(codes.size())
 		
 	for i in times:
 		date.add_item(Time.get_datetime_string_from_unix_time(i, true))
@@ -131,7 +127,6 @@ func on_clear_pressed():
 			break
 		elif file.begins_with("manual_" + LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()).level_name):
 			dir.remove("user://autosave/" + file)
-			print("user://autosave/" + file)
 	dir.remove("user://autosave/" + LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()).level_name + "_main.autosave")
 	dir.list_dir_end()
 	hide()
