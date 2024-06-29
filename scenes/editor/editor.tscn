@@ -1,4 +1,4 @@
-[gd_scene load_steps=1147 format=2]
+[gd_scene load_steps=1156 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1113,6 +1113,15 @@
 [ext_resource path="res://assets/tiles/log/palletes/3_slope_R.png" type="Texture" id=1111]
 [ext_resource path="res://assets/tiles/log/palletes/5_slope_R.png" type="Texture" id=1112]
 [ext_resource path="res://assets/tiles/log/palletes/2_slope_R.png" type="Texture" id=1113]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/1_icon.png" type="Texture" id=1114]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/3_icon.png" type="Texture" id=1115]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/7_icon.png" type="Texture" id=1116]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/6_icon.png" type="Texture" id=1117]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/9_icon.png" type="Texture" id=1118]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/5_icon.png" type="Texture" id=1119]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/4_icon.png" type="Texture" id=1120]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/8_icon.png" type="Texture" id=1121]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/2_icon.png" type="Texture" id=1122]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -4074,6 +4083,8 @@ preview = SubResource( 34 )
 script = ExtResource( 24 )
 object_id = 104
 is_object = true
+palette_icons = [ ExtResource( 713 ), ExtResource( 1114 ), ExtResource( 1122 ), ExtResource( 1115 ), ExtResource( 1120 ), ExtResource( 1119 ), ExtResource( 1117 ), ExtResource( 1116 ), ExtResource( 1121 ), ExtResource( 1118 ) ]
+palette_previews = [ ExtResource( 713 ), ExtResource( 1114 ), ExtResource( 1122 ), ExtResource( 1115 ), ExtResource( 1120 ), ExtResource( 1119 ), ExtResource( 1117 ), ExtResource( 1116 ), ExtResource( 1121 ), ExtResource( 1118 ) ]
 icon = ExtResource( 713 )
 preview = ExtResource( 713 )
 
