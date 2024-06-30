@@ -50,16 +50,16 @@ func _ready():
 		hide()
 		$"../LevelName".show()
 	
-	for i in list_files_in_directory("user://autosave"):
-		file.open("user://autosave/" + i, File.READ)
-		var time = file.get_line() 
-		var code = file.get_line()
-		var json = parse_json(code)
-		codes.append(json["level_code"])
-		times.append(float(time))
-		
-	for i in times:
-		date.add_item(Time.get_datetime_string_from_unix_time(i, true))
+#	for i in list_files_in_directory("user://autosave"):
+#		file.open("user://autosave/" + i, File.READ)
+#		var time = file.get_line() 
+#		var code = file.get_line()
+#		var json = parse_json(code)
+#		codes.append(json["level_code"])
+#		times.append(float(time))
+#
+#	for i in times:
+#		date.add_item(Time.get_datetime_string_from_unix_time(i, true))
 		
 func item_selected(index):
 	if index == 0:

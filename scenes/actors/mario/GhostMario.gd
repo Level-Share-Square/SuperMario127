@@ -80,6 +80,7 @@ func _physics_process(delta):
 	if playback == true:
 		if frame_counter < ghost_anim.size() - 2:
 			frame_counter += 1
-		animation = ANIM_IDS[ghost_anim[frame_counter]]
-		rotation_degrees = ghost_rotation[frame_counter]
-		position = ghost_pos[frame_counter]
+		if frame_counter < ghost_anim.size():
+			animation = ANIM_IDS[ghost_anim[frame_counter]]
+			rotation_degrees = ghost_rotation[frame_counter]
+			position = ghost_pos[frame_counter]
