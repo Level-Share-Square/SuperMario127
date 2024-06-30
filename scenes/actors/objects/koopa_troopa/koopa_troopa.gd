@@ -59,17 +59,17 @@ const PARA_SIN_AMOUNT = 3
 var color := Color(0, 1, 0)
 var rainbow := false
 var winged := false
+var shelled := false
 var attack_cooldown := 0.0 # Prevents the player from getting hurt right after stomping on a paratroopa
 
 func _set_properties():
-	savable_properties = ["color", "rainbow", "winged"]
-	editable_properties = ["color", "rainbow"]
+	savable_properties = ["color", "rainbow", "winged", "shelled"]
+	editable_properties = ["color", "rainbow", "shelled"]
 
 func _set_property_values():
 	set_property("color", color, true)
 	set_property("rainbow", rainbow, true)
 	set_property("winged", winged, true)
-
 
 func on_visibility_changed(is_visible: bool) -> void:
 	for raycast in [left_check, right_check]:
@@ -94,7 +94,6 @@ func _ready() -> void:
 	var scene = get_tree().current_scene
 	if scene.mode == 1 and scene.placed_item_property == "Para":
 		set_property("winged", true)
-	
 	sprite.frames = para_sprite if winged else normal_sprite
 	sprite_color.frames = para_color_sprite if winged else normal_color_sprite
 
@@ -155,7 +154,6 @@ func _process(_delta):
 	if rainbow:
 		# Hue rotation
 		color.h = float(OS.get_ticks_msec() % rainbow_animation_speed) / rainbow_animation_speed
-	
 	if is_instance_valid(shell):
 		# Sync color sprite
 		shell_sprite_color.flip_h = shell_sprite.flip_h
@@ -188,7 +186,6 @@ func _physics_process(delta):
 	
 	if !loaded and visibility_notifier and visibility_notifier.is_on_screen():
 		loaded = true
-	
 	if mode != 1 and enabled and !dead and loaded:
 		var level_bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds
 		if !hit:
@@ -208,6 +205,8 @@ func _physics_process(delta):
 			shell_sprite.rotation_degrees += 2
 			velocity.y += gravity
 			shell.position += velocity * delta
+		if shelled == true and !rainbow :
+			retract_into_shell()
 		
 		# Delete Koopa if the shell exists already
 		if is_instance_valid(shell) and body_exists():
