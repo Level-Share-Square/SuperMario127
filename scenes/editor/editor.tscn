@@ -1,4 +1,4 @@
-[gd_scene load_steps=1176 format=2]
+[gd_scene load_steps=1180 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1142,6 +1142,10 @@
 [ext_resource path="res://assets/tiles/cloud/palletes/1_slab.png" type="Texture" id=1140]
 [ext_resource path="res://assets/tiles/cloud/palletes/1_block.png" type="Texture" id=1141]
 [ext_resource path="res://assets/tiles/cloud/palletes/8_block.png" type="Texture" id=1142]
+[ext_resource path="res://assets/tiles/wood/palette_icons/3_slopeL.png" type="Texture" id=1143]
+[ext_resource path="res://assets/tiles/wood/palette_icons/3.png" type="Texture" id=1144]
+[ext_resource path="res://assets/tiles/wood/palette_icons/3_slopeR.png" type="Texture" id=1145]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/2_block.png" type="Texture" id=1146]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3121,8 +3125,8 @@ preview = ExtResource( 114 )
 [node name="Wood" type="Node" parent="PlaceableItems/SnowGroup"]
 script = ExtResource( 24 )
 tileset_id = 10
-palette_icons = [ ExtResource( 158 ), ExtResource( 284 ), ExtResource( 283 ) ]
-palette_previews = [ ExtResource( 158 ), ExtResource( 284 ), ExtResource( 283 ) ]
+palette_icons = [ ExtResource( 158 ), ExtResource( 284 ), ExtResource( 283 ), ExtResource( 1144 ) ]
+palette_previews = [ ExtResource( 158 ), ExtResource( 284 ), ExtResource( 283 ), ExtResource( 1144 ) ]
 change_to = "WoodSlopeLeft"
 items_in_sequence = 3
 icon = ExtResource( 158 )
@@ -3132,8 +3136,8 @@ preview = ExtResource( 158 )
 script = ExtResource( 24 )
 tileset_id = 10
 tile_id = 2
-palette_icons = [ ExtResource( 546 ), ExtResource( 547 ), ExtResource( 548 ) ]
-palette_previews = [ ExtResource( 546 ), ExtResource( 547 ), ExtResource( 548 ) ]
+palette_icons = [ ExtResource( 546 ), ExtResource( 547 ), ExtResource( 548 ), ExtResource( 1143 ) ]
+palette_previews = [ ExtResource( 546 ), ExtResource( 547 ), ExtResource( 548 ), ExtResource( 1143 ) ]
 change_to = "WoodSlopeRight"
 items_in_sequence = 3
 index_in_sequence = 1
@@ -3144,8 +3148,8 @@ preview = ExtResource( 546 )
 script = ExtResource( 24 )
 tileset_id = 10
 tile_id = 3
-palette_icons = [ ExtResource( 545 ), ExtResource( 549 ), ExtResource( 550 ) ]
-palette_previews = [ ExtResource( 545 ), ExtResource( 549 ), ExtResource( 550 ) ]
+palette_icons = [ ExtResource( 545 ), ExtResource( 549 ), ExtResource( 550 ), ExtResource( 1145 ) ]
+palette_previews = [ ExtResource( 545 ), ExtResource( 549 ), ExtResource( 550 ), ExtResource( 1145 ) ]
 change_to = "Wood"
 items_in_sequence = 3
 index_in_sequence = 2
@@ -3998,8 +4002,8 @@ preview = ExtResource( 223 )
 [node name="CastleWood" type="Node" parent="PlaceableItems/CastleGroup"]
 script = ExtResource( 24 )
 tileset_id = 24
-palette_icons = [ ExtResource( 224 ), ExtResource( 378 ), ExtResource( 379 ) ]
-palette_previews = [ ExtResource( 224 ), ExtResource( 378 ), ExtResource( 379 ) ]
+palette_icons = [ ExtResource( 224 ), ExtResource( 378 ), ExtResource( 379 ), ExtResource( 1146 ) ]
+palette_previews = [ ExtResource( 224 ), ExtResource( 378 ), ExtResource( 379 ), ExtResource( 1146 ) ]
 icon = ExtResource( 224 )
 preview = ExtResource( 224 )
 
