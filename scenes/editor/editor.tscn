@@ -1,4 +1,4 @@
-[gd_scene load_steps=1156 format=2]
+[gd_scene load_steps=1176 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1122,6 +1122,26 @@
 [ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/4_icon.png" type="Texture" id=1120]
 [ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/8_icon.png" type="Texture" id=1121]
 [ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/2_icon.png" type="Texture" id=1122]
+[ext_resource path="res://assets/tiles/cloud/cloud_fullblock.png" type="Texture" id=1123]
+[ext_resource path="res://assets/tiles/cloud/palletes/0_block.png" type="Texture" id=1124]
+[ext_resource path="res://assets/tiles/cloud/palletes/5_slab.png" type="Texture" id=1125]
+[ext_resource path="res://assets/tiles/cloud/palletes/4_slab.png" type="Texture" id=1126]
+[ext_resource path="res://assets/tiles/cloud/palletes/0_slab.png" type="Texture" id=1127]
+[ext_resource path="res://assets/tiles/cloud/palletes/7_slab.png" type="Texture" id=1128]
+[ext_resource path="res://assets/tiles/cloud/palletes/8_slab.png" type="Texture" id=1129]
+[ext_resource path="res://assets/tiles/cloud/palletes/6_block.png" type="Texture" id=1130]
+[ext_resource path="res://assets/tiles/cloud/palletes/4_block.png" type="Texture" id=1131]
+[ext_resource path="res://assets/tiles/cloud/palletes/6_slab.png" type="Texture" id=1132]
+[ext_resource path="res://assets/tiles/cloud/cloud_slab.png" type="Texture" id=1133]
+[ext_resource path="res://assets/tiles/cloud/palletes/3_block.png" type="Texture" id=1134]
+[ext_resource path="res://assets/tiles/cloud/palletes/3_slab.png" type="Texture" id=1135]
+[ext_resource path="res://assets/tiles/cloud/palletes/2_block.png" type="Texture" id=1136]
+[ext_resource path="res://assets/tiles/cloud/palletes/5_block.png" type="Texture" id=1137]
+[ext_resource path="res://assets/tiles/cloud/palletes/7_block.png" type="Texture" id=1138]
+[ext_resource path="res://assets/tiles/cloud/palletes/2_slab.png" type="Texture" id=1139]
+[ext_resource path="res://assets/tiles/cloud/palletes/1_slab.png" type="Texture" id=1140]
+[ext_resource path="res://assets/tiles/cloud/palletes/1_block.png" type="Texture" id=1141]
+[ext_resource path="res://assets/tiles/cloud/palletes/8_block.png" type="Texture" id=1142]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -4152,6 +4172,28 @@ items_in_sequence = 4
 index_in_sequence = 3
 icon = ExtResource( 230 )
 preview = ExtResource( 230 )
+
+[node name="Cloud" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 24 )
+tileset_id = 39
+palette_icons = [ ExtResource( 1123 ), ExtResource( 1124 ), ExtResource( 1141 ), ExtResource( 1136 ), ExtResource( 1134 ), ExtResource( 1131 ), ExtResource( 1137 ), ExtResource( 1130 ), ExtResource( 1138 ), ExtResource( 1142 ) ]
+palette_previews = [ ExtResource( 1123 ), ExtResource( 1124 ), ExtResource( 1141 ), ExtResource( 1136 ), ExtResource( 1134 ), ExtResource( 1131 ), ExtResource( 1137 ), ExtResource( 1130 ), ExtResource( 1138 ), ExtResource( 1142 ) ]
+change_to = "CloudSlab"
+items_in_sequence = 2
+icon = ExtResource( 1123 )
+preview = ExtResource( 1123 )
+
+[node name="CloudSlab" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 24 )
+tileset_id = 39
+tile_id = 1
+palette_icons = [ ExtResource( 1133 ), ExtResource( 1127 ), ExtResource( 1140 ), ExtResource( 1139 ), ExtResource( 1135 ), ExtResource( 1126 ), ExtResource( 1125 ), ExtResource( 1132 ), ExtResource( 1128 ), ExtResource( 1129 ) ]
+palette_previews = [ ExtResource( 1133 ), ExtResource( 1127 ), ExtResource( 1140 ), ExtResource( 1139 ), ExtResource( 1135 ), ExtResource( 1126 ), ExtResource( 1125 ), ExtResource( 1132 ), ExtResource( 1128 ), ExtResource( 1129 ) ]
+change_to = "Cloud"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 1133 )
+preview = ExtResource( 1133 )
 
 [node name="Arrow" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 24 )
