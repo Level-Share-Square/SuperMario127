@@ -25,6 +25,7 @@ func _process(_delta):
 			for raycast in character.raycasts:
 				raycast.set_collision_mask_bit(8, true)
 		character.set_collision_mask_bit(8, true)
+		character.breath = 100
 	else:
 		if last_active:
 			for raycast in character.raycasts:

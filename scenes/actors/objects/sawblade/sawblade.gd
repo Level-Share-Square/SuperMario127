@@ -11,7 +11,7 @@ export var circle_texture : Texture
 
 var custom_path = Curve2D.new()
 var curve = Curve2D.new()
-var speed = 5
+var speed : float = 5
 var working_speed = speed
 var loops = true
 var start_offset = 0

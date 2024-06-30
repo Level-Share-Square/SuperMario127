@@ -97,6 +97,7 @@ func _update(delta):
 		if !jumping:
 			character.velocity.y = 10
 		character.global_position.y = character.water_check.get_collision_point().y - 24
+		character.breath = 100
 
 func _general_update(delta):
 	if jump_buffer > 0:
@@ -112,6 +113,7 @@ func _general_update(delta):
 		ledge_buffer -= delta
 		if ledge_buffer < 0:
 			ledge_buffer = 0
+	
 
 func _stop(_delta):
 	character.water_check.enabled = false

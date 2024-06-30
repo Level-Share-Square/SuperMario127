@@ -1,4 +1,4 @@
-[gd_scene load_steps=1147 format=2]
+[gd_scene load_steps=1180 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1113,6 +1113,39 @@
 [ext_resource path="res://assets/tiles/log/palletes/3_slope_R.png" type="Texture" id=1111]
 [ext_resource path="res://assets/tiles/log/palletes/5_slope_R.png" type="Texture" id=1112]
 [ext_resource path="res://assets/tiles/log/palletes/2_slope_R.png" type="Texture" id=1113]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/1_icon.png" type="Texture" id=1114]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/3_icon.png" type="Texture" id=1115]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/7_icon.png" type="Texture" id=1116]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/6_icon.png" type="Texture" id=1117]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/9_icon.png" type="Texture" id=1118]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/5_icon.png" type="Texture" id=1119]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/4_icon.png" type="Texture" id=1120]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/8_icon.png" type="Texture" id=1121]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/2_icon.png" type="Texture" id=1122]
+[ext_resource path="res://assets/tiles/cloud/cloud_fullblock.png" type="Texture" id=1123]
+[ext_resource path="res://assets/tiles/cloud/palletes/0_block.png" type="Texture" id=1124]
+[ext_resource path="res://assets/tiles/cloud/palletes/5_slab.png" type="Texture" id=1125]
+[ext_resource path="res://assets/tiles/cloud/palletes/4_slab.png" type="Texture" id=1126]
+[ext_resource path="res://assets/tiles/cloud/palletes/0_slab.png" type="Texture" id=1127]
+[ext_resource path="res://assets/tiles/cloud/palletes/7_slab.png" type="Texture" id=1128]
+[ext_resource path="res://assets/tiles/cloud/palletes/8_slab.png" type="Texture" id=1129]
+[ext_resource path="res://assets/tiles/cloud/palletes/6_block.png" type="Texture" id=1130]
+[ext_resource path="res://assets/tiles/cloud/palletes/4_block.png" type="Texture" id=1131]
+[ext_resource path="res://assets/tiles/cloud/palletes/6_slab.png" type="Texture" id=1132]
+[ext_resource path="res://assets/tiles/cloud/cloud_slab.png" type="Texture" id=1133]
+[ext_resource path="res://assets/tiles/cloud/palletes/3_block.png" type="Texture" id=1134]
+[ext_resource path="res://assets/tiles/cloud/palletes/3_slab.png" type="Texture" id=1135]
+[ext_resource path="res://assets/tiles/cloud/palletes/2_block.png" type="Texture" id=1136]
+[ext_resource path="res://assets/tiles/cloud/palletes/5_block.png" type="Texture" id=1137]
+[ext_resource path="res://assets/tiles/cloud/palletes/7_block.png" type="Texture" id=1138]
+[ext_resource path="res://assets/tiles/cloud/palletes/2_slab.png" type="Texture" id=1139]
+[ext_resource path="res://assets/tiles/cloud/palletes/1_slab.png" type="Texture" id=1140]
+[ext_resource path="res://assets/tiles/cloud/palletes/1_block.png" type="Texture" id=1141]
+[ext_resource path="res://assets/tiles/cloud/palletes/8_block.png" type="Texture" id=1142]
+[ext_resource path="res://assets/tiles/wood/palette_icons/3_slopeL.png" type="Texture" id=1143]
+[ext_resource path="res://assets/tiles/wood/palette_icons/3.png" type="Texture" id=1144]
+[ext_resource path="res://assets/tiles/wood/palette_icons/3_slopeR.png" type="Texture" id=1145]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/2_block.png" type="Texture" id=1146]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3092,8 +3125,8 @@ preview = ExtResource( 114 )
 [node name="Wood" type="Node" parent="PlaceableItems/SnowGroup"]
 script = ExtResource( 24 )
 tileset_id = 10
-palette_icons = [ ExtResource( 158 ), ExtResource( 284 ), ExtResource( 283 ) ]
-palette_previews = [ ExtResource( 158 ), ExtResource( 284 ), ExtResource( 283 ) ]
+palette_icons = [ ExtResource( 158 ), ExtResource( 284 ), ExtResource( 283 ), ExtResource( 1144 ) ]
+palette_previews = [ ExtResource( 158 ), ExtResource( 284 ), ExtResource( 283 ), ExtResource( 1144 ) ]
 change_to = "WoodSlopeLeft"
 items_in_sequence = 3
 icon = ExtResource( 158 )
@@ -3103,8 +3136,8 @@ preview = ExtResource( 158 )
 script = ExtResource( 24 )
 tileset_id = 10
 tile_id = 2
-palette_icons = [ ExtResource( 546 ), ExtResource( 547 ), ExtResource( 548 ) ]
-palette_previews = [ ExtResource( 546 ), ExtResource( 547 ), ExtResource( 548 ) ]
+palette_icons = [ ExtResource( 546 ), ExtResource( 547 ), ExtResource( 548 ), ExtResource( 1143 ) ]
+palette_previews = [ ExtResource( 546 ), ExtResource( 547 ), ExtResource( 548 ), ExtResource( 1143 ) ]
 change_to = "WoodSlopeRight"
 items_in_sequence = 3
 index_in_sequence = 1
@@ -3115,8 +3148,8 @@ preview = ExtResource( 546 )
 script = ExtResource( 24 )
 tileset_id = 10
 tile_id = 3
-palette_icons = [ ExtResource( 545 ), ExtResource( 549 ), ExtResource( 550 ) ]
-palette_previews = [ ExtResource( 545 ), ExtResource( 549 ), ExtResource( 550 ) ]
+palette_icons = [ ExtResource( 545 ), ExtResource( 549 ), ExtResource( 550 ), ExtResource( 1145 ) ]
+palette_previews = [ ExtResource( 545 ), ExtResource( 549 ), ExtResource( 550 ), ExtResource( 1145 ) ]
 change_to = "Wood"
 items_in_sequence = 3
 index_in_sequence = 2
@@ -3969,8 +4002,8 @@ preview = ExtResource( 223 )
 [node name="CastleWood" type="Node" parent="PlaceableItems/CastleGroup"]
 script = ExtResource( 24 )
 tileset_id = 24
-palette_icons = [ ExtResource( 224 ), ExtResource( 378 ), ExtResource( 379 ) ]
-palette_previews = [ ExtResource( 224 ), ExtResource( 378 ), ExtResource( 379 ) ]
+palette_icons = [ ExtResource( 224 ), ExtResource( 378 ), ExtResource( 379 ), ExtResource( 1146 ) ]
+palette_previews = [ ExtResource( 224 ), ExtResource( 378 ), ExtResource( 379 ), ExtResource( 1146 ) ]
 icon = ExtResource( 224 )
 preview = ExtResource( 224 )
 
@@ -4074,6 +4107,8 @@ preview = SubResource( 34 )
 script = ExtResource( 24 )
 object_id = 104
 is_object = true
+palette_icons = [ ExtResource( 713 ), ExtResource( 1114 ), ExtResource( 1122 ), ExtResource( 1115 ), ExtResource( 1120 ), ExtResource( 1119 ), ExtResource( 1117 ), ExtResource( 1116 ), ExtResource( 1121 ), ExtResource( 1118 ) ]
+palette_previews = [ ExtResource( 713 ), ExtResource( 1114 ), ExtResource( 1122 ), ExtResource( 1115 ), ExtResource( 1120 ), ExtResource( 1119 ), ExtResource( 1117 ), ExtResource( 1116 ), ExtResource( 1121 ), ExtResource( 1118 ) ]
 icon = ExtResource( 713 )
 preview = ExtResource( 713 )
 
@@ -4141,6 +4176,28 @@ items_in_sequence = 4
 index_in_sequence = 3
 icon = ExtResource( 230 )
 preview = ExtResource( 230 )
+
+[node name="Cloud" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 24 )
+tileset_id = 39
+palette_icons = [ ExtResource( 1123 ), ExtResource( 1124 ), ExtResource( 1141 ), ExtResource( 1136 ), ExtResource( 1134 ), ExtResource( 1131 ), ExtResource( 1137 ), ExtResource( 1130 ), ExtResource( 1138 ), ExtResource( 1142 ) ]
+palette_previews = [ ExtResource( 1123 ), ExtResource( 1124 ), ExtResource( 1141 ), ExtResource( 1136 ), ExtResource( 1134 ), ExtResource( 1131 ), ExtResource( 1137 ), ExtResource( 1130 ), ExtResource( 1138 ), ExtResource( 1142 ) ]
+change_to = "CloudSlab"
+items_in_sequence = 2
+icon = ExtResource( 1123 )
+preview = ExtResource( 1123 )
+
+[node name="CloudSlab" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 24 )
+tileset_id = 39
+tile_id = 1
+palette_icons = [ ExtResource( 1133 ), ExtResource( 1127 ), ExtResource( 1140 ), ExtResource( 1139 ), ExtResource( 1135 ), ExtResource( 1126 ), ExtResource( 1125 ), ExtResource( 1132 ), ExtResource( 1128 ), ExtResource( 1129 ) ]
+palette_previews = [ ExtResource( 1133 ), ExtResource( 1127 ), ExtResource( 1140 ), ExtResource( 1139 ), ExtResource( 1135 ), ExtResource( 1126 ), ExtResource( 1125 ), ExtResource( 1132 ), ExtResource( 1128 ), ExtResource( 1129 ) ]
+change_to = "Cloud"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 1133 )
+preview = ExtResource( 1133 )
 
 [node name="Arrow" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 24 )
