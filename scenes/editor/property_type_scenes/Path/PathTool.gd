@@ -89,6 +89,14 @@ func update_node_position(node: Node2D):
 		line.get_node("path").curve.set_point_position(index, node.position)
 		update_line()
 
+func update_node_handles(node: Node2D):
+	var index = nodes.find(node, 0)
+	if index != -1:
+		line.get_node("path").curve.set_point_in(index, node.left_handle.position)
+		line.get_node("path").curve.set_point_out(index, node.right_handle.position)
+		update_line()
+
+
 func close():
 	path_node_container.queue_free()
 	#TODO: Make a hide function for the editor window.
@@ -125,7 +133,11 @@ func update_line():
 func _confirm_pressed():
 	var return_curve = object_property_button.get_value()
 	return_curve.clear_points()
+	var index = 0
 	for node in nodes:
 		return_curve.add_point(node.position)
+		return_curve.set_point_in(index, node.left_handle.position)
+		return_curve.set_point_out(index, node.right_handle.position)
+		index += 1
 	object_property_button.set_value(return_curve)
 	close()

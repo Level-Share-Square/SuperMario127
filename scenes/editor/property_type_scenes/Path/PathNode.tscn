@@ -20,13 +20,11 @@ texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 3 )
 
 [node name="HandleR" type="Node2D" parent="."]
-visible = false
 position = Vector2( 24, 0 )
 
 [node name="HandleRLine" type="Line2D" parent="HandleR"]
-scale = Vector2( 0.75, 0.75 )
 z_index = -1
-points = PoolVector2Array( 0, 0, -32, 0 )
+points = PoolVector2Array( 0, 0, -24, 0 )
 width = 5.0
 
 [node name="HandleRButton" type="TextureButton" parent="HandleR"]
@@ -42,14 +40,11 @@ texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 3 )
 
 [node name="HandleL" type="Node2D" parent="."]
-visible = false
 position = Vector2( -24, 0 )
 
 [node name="HandleLLine" type="Line2D" parent="HandleL"]
-position = Vector2( 0.5, 0 )
-scale = Vector2( 0.75, 0.75 )
 z_index = -1
-points = PoolVector2Array( 0, 0, 31.3333, 0 )
+points = PoolVector2Array( 0, 0, 24, 0 )
 width = 5.0
 
 [node name="HandleLButton" type="TextureButton" parent="HandleL"]
@@ -65,3 +60,5 @@ texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 3 )
 
 [connection signal="gui_input" from="PathNodeButton" to="." method="_on_PathNodeButton_gui_input"]
+[connection signal="gui_input" from="HandleR/HandleRButton" to="." method="_on_right_handle_gui_input"]
+[connection signal="gui_input" from="HandleL/HandleLButton" to="." method="_on_left_handle_gui_input"]
