@@ -322,17 +322,13 @@ func _process(delta : float) -> void:
 	if Singleton2.time <= 0:
 		var level = Singleton.SavedLevels.levels
 		var level_info = level[Singleton.SavedLevels.selected_level]
-		var time = Time.get_unix_time_from_system()
-		var times = Time.get_datetime_dict_from_system()
-		var hours = str(times["hour"])
-		var minutes = str(times["minute"])
-		var seconds = str(times["second"])
+		var time = round(Time.get_unix_time_from_system())
 		if Singleton.SavedLevels.selected_level != -1:
 			Singleton.SavedLevels.levels[Singleton.SavedLevels.selected_level] = LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data())
 			var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
 			
-			Singleton.SavedLevels.autosave_level_to_disk(LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()), "user://autosave/" + str(level_info.level_name) + "_main" + ".autosave")
-			Singleton.SavedLevels.autosave_level_to_disk(LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()), "user://autosave/manual_" + str(level_info.level_name) + "_" + hours + "_" + minutes + "_" + seconds + ".autosave")
+			Singleton.SavedLevels.autosave_level_to_disk(LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()), "user://autosave/" + "main_" + str(level_info.level_name) + ".autosave")
+			Singleton.SavedLevels.autosave_level_to_disk(LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()), "user://autosave/" + str(level_info.level_name) + "_" + str(time) + ".autosave")
 		Singleton.CurrentLevelData.unsaved_editor_changes = false
 		
 		Singleton2.reset_time()

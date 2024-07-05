@@ -11,11 +11,15 @@ onready var clear = $ClearButton
 var main_level_code
 var main_time
 
+var level_name = Singleton.CurrentLevelData.level_data.name
+
 var active_level_code
 var active_time
 
 var codes = []
 var times = []
+
+var names = []
 
 var selector = {}
 
@@ -35,8 +39,8 @@ func _ready():
 	var file = File.new()
 	$"../LevelName".hide()
 	show()
-	if file.file_exists("user://autosave/" + LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()).level_name + "_main.autosave"):
-		file.open("user://autosave/" + LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()).level_name + "_main.autosave", File.READ)
+	if file.file_exists("user://autosave/" + "main_" + level_name + ".autosave"):
+		file.open("user://autosave/" + "main_" + level_name + ".autosave", File.READ)
 		var time = file.get_line()
 		var code = file.get_line()
 		var json = parse_json(code)
@@ -49,23 +53,26 @@ func _ready():
 	else:
 		hide()
 		$"../LevelName".show()
-	
-#	for i in list_files_in_directory("user://autosave"):
-#		file.open("user://autosave/" + i, File.READ)
-#		var time = file.get_line() 
-#		var code = file.get_line()
-#		var json = parse_json(code)
-#		codes.append(json["level_code"])
-#		times.append(float(time))
 #
-#	for i in times:
-#		date.add_item(Time.get_datetime_string_from_unix_time(i, true))
+	for i in list_files_in_directory("user://autosave"):
+		names.append(i)
+		times.append(int(i))
+
+	for i in times:
+		date.add_item(Time.get_datetime_string_from_unix_time(i, true))
 		
 func item_selected(index):
 	if index == 0:
 		active_level_code = main_level_code
 	else:
-		active_level_code = codes[index - 1]
+		var file = File.new()
+		print("user://autosave/" + names[index - 1])
+		file.open("user://autosave/" + names[index - 1], File.READ)
+		var fodder = file.get_line()
+		var code = file.get_line()
+		file.close()
+		var json = parse_json(code)
+		active_level_code = json["level_code"]
 	populate_info_panel(LevelInfo.new(active_level_code))
 
 func populate_info_panel(level_info : LevelInfo = null) -> void:
@@ -103,13 +110,12 @@ func list_files_in_directory(path):
 	var files = []
 	var dir = Directory.new()
 	dir.open(path)
-	dir.list_dir_begin()
+	dir.list_dir_begin(true)
+	var file
 
-	while true:
-		var file = dir.get_next()
-		if file == "":
-			break
-		elif file.begins_with("manual_" + LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()).level_name):
+	while file != "":
+		file = dir.get_next()
+		if file.begins_with(level_name):
 			files.append(file)
 
 	dir.list_dir_end()
@@ -125,7 +131,7 @@ func on_clear_pressed():
 		var file = dir.get_next()
 		if file == "":
 			break
-		elif file.begins_with("manual_" + LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()).level_name):
+		elif file.begins_with(LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()).level_name):
 			dir.remove("user://autosave/" + file)
 	dir.remove("user://autosave/" + LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()).level_name + "_main.autosave")
 	dir.list_dir_end()
