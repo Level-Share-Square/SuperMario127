@@ -250,44 +250,36 @@ tracks/8/keys = {
 "points": PoolRealArray( 19, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
-tracks/9/type = "bezier"
-tracks/9/path = NodePath("UI/RedCoinCounter:rect_position:x")
+tracks/9/type = "value"
+tracks/9/path = NodePath("UI/VBoxContainer:rect_position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"points": PoolRealArray( 20, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 18, 62 ) ]
 }
 tracks/10/type = "bezier"
-tracks/10/path = NodePath("UI/RedCoinCounter:rect_position:y")
+tracks/10/path = NodePath("UI/VBoxContainer:rect_position:x")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"points": PoolRealArray( 60, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 18, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/11/type = "bezier"
-tracks/11/path = NodePath("UI/ShineShardCounter:rect_position:x")
+tracks/11/path = NodePath("UI/VBoxContainer:rect_position:y")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
 tracks/11/keys = {
-"points": PoolRealArray( 20, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/12/type = "bezier"
-tracks/12/path = NodePath("UI/ShineShardCounter:rect_position:y")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"points": PoolRealArray( 90, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 64, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 
@@ -355,44 +347,24 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.5 )
 }
 tracks/6/type = "bezier"
-tracks/6/path = NodePath("UI/RedCoinCounter:rect_position:x")
+tracks/6/path = NodePath("UI/VBoxContainer:rect_position:x")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"points": PoolRealArray( 20, -0.25, 0, 0.25, 0, 20, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
+"points": PoolRealArray( 18, -0.25, 0, 0.25, 0, 18, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
 }
 tracks/7/type = "bezier"
-tracks/7/path = NodePath("UI/RedCoinCounter:rect_position:y")
+tracks/7/path = NodePath("UI/VBoxContainer:rect_position:y")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"points": PoolRealArray( 8, -0.25, 0, 0.25, 0, 60, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/8/type = "bezier"
-tracks/8/path = NodePath("UI/ShineShardCounter:rect_position:x")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"points": PoolRealArray( 20, -0.25, 0, 0.25, 0, 20, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/9/type = "bezier"
-tracks/9/path = NodePath("UI/ShineShardCounter:rect_position:y")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"points": PoolRealArray( 35, -0.25, 0, 0.25, 0, 90, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
+"points": PoolRealArray( 16, -0.25, 0, 0.25, 0, 64, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
 }
 
 [sub_resource type="Animation" id=17]
@@ -459,44 +431,24 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.5 )
 }
 tracks/6/type = "bezier"
-tracks/6/path = NodePath("UI/RedCoinCounter:rect_position:x")
+tracks/6/path = NodePath("UI/VBoxContainer:rect_position:x")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"points": PoolRealArray( 20, -0.25, 0, 0.25, 0, 20, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
+"points": PoolRealArray( 18, -0.25, 0, 0.25, 0, 18, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
 }
 tracks/7/type = "bezier"
-tracks/7/path = NodePath("UI/RedCoinCounter:rect_position:y")
+tracks/7/path = NodePath("UI/VBoxContainer:rect_position:y")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"points": PoolRealArray( 60, -0.25, 0, 0.25, 0, 8, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/8/type = "bezier"
-tracks/8/path = NodePath("UI/ShineShardCounter:rect_position:x")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"points": PoolRealArray( 20, -0.25, 0, 0.25, 0, 20, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/9/type = "bezier"
-tracks/9/path = NodePath("UI/ShineShardCounter:rect_position:y")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"points": PoolRealArray( 90, -0.25, 0, 0.25, 0, 35, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
+"points": PoolRealArray( 64, -0.25, 0, 0.25, 0, 16, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
 }
 
 [node name="Player" type="Node2D"]
@@ -683,16 +635,19 @@ texture = ExtResource( 23 )
 
 [node name="Tween" type="Tween" parent="UI/SCCounter"]
 
-[node name="RedCoinCounter" type="Control" parent="UI"]
-margin_left = 20.0
-margin_top = 60.0
-margin_right = 60.0
-margin_bottom = 100.0
-rect_rotation = -0.0704831
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+margin_left = 18.0
+margin_top = 64.0
+margin_right = 58.0
+margin_bottom = 174.0
+custom_constants/separation = 28
+
+[node name="RedCoinCounter" type="Control" parent="UI/VBoxContainer"]
+margin_right = 40.0
 script = ExtResource( 36 )
 collected_height = -4.0
 
-[node name="LabelShadow" type="Label" parent="UI/RedCoinCounter"]
+[node name="LabelShadow" type="Label" parent="UI/VBoxContainer/RedCoinCounter"]
 margin_left = 26.0
 margin_top = 2.0
 margin_right = 171.0
@@ -701,43 +656,35 @@ rect_rotation = 0.0366689
 custom_colors/font_color = Color( 0, 0, 0, 0.25098 )
 custom_fonts/font = SubResource( 5 )
 text = "0/8"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Label" type="Label" parent="UI/RedCoinCounter"]
+[node name="Label" type="Label" parent="UI/VBoxContainer/RedCoinCounter"]
 margin_left = 24.0
 margin_right = 169.0
 margin_bottom = 48.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 6 )
 text = "0/8"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="CoinShadow" type="Sprite" parent="UI/RedCoinCounter"]
+[node name="CoinShadow" type="Sprite" parent="UI/VBoxContainer/RedCoinCounter"]
 modulate = Color( 0, 0, 0, 0.25098 )
 position = Vector2( 10, 13 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 35 )
 
-[node name="Coin" type="Sprite" parent="UI/RedCoinCounter"]
+[node name="Coin" type="Sprite" parent="UI/VBoxContainer/RedCoinCounter"]
 position = Vector2( 8, 11 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 35 )
 
-[node name="Tween" type="Tween" parent="UI/RedCoinCounter"]
+[node name="Tween" type="Tween" parent="UI/VBoxContainer/RedCoinCounter"]
 
-[node name="ShineShardCounter" type="Control" parent="UI"]
-margin_left = 20.0
-margin_top = 90.0
-margin_right = 60.0
-margin_bottom = 130.0
-rect_rotation = -0.0704831
+[node name="ShineShardCounter" type="Control" parent="UI/VBoxContainer"]
+margin_top = 28.0
+margin_right = 40.0
+margin_bottom = 28.0
 script = ExtResource( 44 )
 
-[node name="LabelShadow" type="Label" parent="UI/ShineShardCounter"]
+[node name="LabelShadow" type="Label" parent="UI/VBoxContainer/ShineShardCounter"]
 margin_left = 26.046
 margin_top = 2.0
 margin_right = 171.046
@@ -750,31 +697,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="UI/ShineShardCounter"]
+[node name="Label" type="Label" parent="UI/VBoxContainer/ShineShardCounter"]
 margin_left = 24.046
 margin_right = 169.046
 margin_bottom = 48.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 6 )
 text = "0/8"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="CoinShadow" type="Sprite" parent="UI/ShineShardCounter"]
+[node name="CoinShadow" type="Sprite" parent="UI/VBoxContainer/ShineShardCounter"]
 modulate = Color( 0, 0, 0, 0.25098 )
 position = Vector2( 10.046, 13 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 45 )
 
-[node name="Coin" type="Sprite" parent="UI/ShineShardCounter"]
+[node name="Coin" type="Sprite" parent="UI/VBoxContainer/ShineShardCounter"]
 position = Vector2( 8.046, 11 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 45 )
 
-[node name="Tween" type="Tween" parent="UI/ShineShardCounter"]
+[node name="Tween" type="Tween" parent="UI/VBoxContainer/ShineShardCounter"]
 
 [node name="ChatBox" type="Control" parent="UI"]
+visible = false
 margin_left = 5.0
 margin_top = 262.0
 margin_right = 288.0
@@ -819,6 +764,7 @@ __meta__ = {
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
@@ -1098,6 +1044,7 @@ visible = false
 
 [node name="SignText" type="Control" parent="UI"]
 pause_mode = 2
+visible = false
 margin_left = 161.0
 margin_top = 66.0
 margin_right = 611.0
@@ -1166,6 +1113,7 @@ divider_path = NodePath("../UI/Divider")
 character_scene_path = "res://scenes/actors/mario/mario.tscn"
 
 [node name="ViewportContainer" type="ViewportContainer" parent="Viewports"]
+visible = false
 margin_right = 384.0
 margin_bottom = 432.0
 size_flags_horizontal = 3
@@ -1178,7 +1126,7 @@ __meta__ = {
 [node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer"]
 size = Vector2( 384, 432 )
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="CameraP1" type="Camera2D" parent="Viewports/ViewportContainer/Viewport"]
 pause_mode = 2
@@ -1236,7 +1184,7 @@ char_path = NodePath("../Viewport/World/Character")
 char_path = NodePath("../Viewport/World/Character")
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="Viewports"]
-margin_left = 388.0
+visible = false
 margin_right = 772.0
 margin_bottom = 432.0
 size_flags_horizontal = 3
@@ -1247,9 +1195,9 @@ __meta__ = {
 }
 
 [node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer2"]
-size = Vector2( 384, 432 )
+size = Vector2( 772, 432 )
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="CameraP2" type="Camera2D" parent="Viewports/ViewportContainer2/Viewport"]
 pause_mode = 2
