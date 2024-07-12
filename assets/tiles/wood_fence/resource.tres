@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=9 format=2]
+
+[ext_resource path="res://level/Tileset.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/wood_fence/palletes/3.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/wood_fence/palletes/1.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/wood_fence/palletes/2.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/wood_fence/palletes/4.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/wood_fence/palletes/5.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/wood_fence/palletes/7.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/wood_fence/palletes/6.png" type="Texture" id=8]
+
+[resource]
+script = ExtResource( 1 )
+block_tile_id = 102
+slab_tile_id = 102
+left_slope_tile_id = 103
+right_slope_tile_id = 104
+palettes = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ) ]
