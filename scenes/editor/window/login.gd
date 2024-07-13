@@ -8,17 +8,29 @@ onready var password = $Password
 onready var button = get_parent().get_node("LoginButton")
 onready var buttonhelp = get_parent().get_node("HelpButton")
 onready var wrong = get_parent().get_node("Title2")
+onready var visibility = get_parent().get_node("Visible")
 
+onready var on = preload("res://assets/misc/open_eye.png")
+onready var off = preload("res://assets/misc/closed_eye.png")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	wrong.hide()
+	visibility.connect("button_down", self, "on_visible_pressed")
 	httpreq.connect("request_completed", self, "on_req_complete")
 	button.connect("button_down", self, "on_login_pressed")
 	buttonhelp.connect("button_down", self, "on_help_pressed")
 	
 func on_help_pressed():
 	get_parent().get_parent().get_node("HelpWindow").open()
+	
+	
+func on_visible_pressed():
+	password.secret = !password.secret
+	if password.secret:
+		visibility.texture_normal = off
+	else:
+		visibility.texture_normal = on
 	
 func on_login_pressed():
 	var dic = {"email" : email.text, "password": password.text}

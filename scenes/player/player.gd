@@ -60,6 +60,16 @@ func _ready():
 	var data = Singleton.CurrentLevelData.level_data
 	load_in(data, data.areas[Singleton.CurrentLevelData.area])
 	
+	if Singleton.CurrentLevelData.level_data.vars.max_red_coins == 0:
+		$UI/VBoxContainer/RedCoinCounter.visible = false
+	else:
+		$UI/VBoxContainer/RedCoinCounter.visible = true
+	
+	if Singleton.CurrentLevelData.level_data.vars.max_shine_shards == 0:
+		$UI/VBoxContainer/ShineShardCounter.visible = false
+	else:
+		$UI/VBoxContainer/ShineShardCounter.visible = true
+	
 	Singleton.Music.character = get_node(character)
 	Singleton.Music.character2 = get_node(character2)
 	#Singleton.Music.reset_music()

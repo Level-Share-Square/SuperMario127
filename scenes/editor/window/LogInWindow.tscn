@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://assets/styles/BrightButtonStyleNormal.tres" type="StyleBox" id=9]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/editor/window/login.gd" type="Script" id=11]
+[ext_resource path="res://assets/misc/open_eye.png" type="Texture" id=12]
+[ext_resource path="res://assets/misc/reveal_theme.tres" type="Theme" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -90,6 +92,15 @@ secret = true
 placeholder_text = "Password"
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Visible" type="TextureButton" parent="."]
+margin_left = 900.0
+margin_top = 237.5
+margin_right = 1006.0
+margin_bottom = 317.5
+theme = ExtResource( 13 )
+texture_normal = ExtResource( 12 )
+expand = true
 
 [node name="LoginButton" parent="." instance=ExtResource( 10 )]
 margin_left = 630.0
