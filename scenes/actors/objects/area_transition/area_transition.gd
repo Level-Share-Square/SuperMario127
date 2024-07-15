@@ -179,6 +179,7 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 		character.set_collision_layer_bit(1, true)
 		character.set_inter_player_collision(true) 
 		character.gravity_scale = 1
+		
 		if Singleton.CurrentLevelData.level_data.vars.transition_character_data.size() == 1:
 			exit_with_helper(character)
 	else:
@@ -192,6 +193,7 @@ func pipe_exit_anim_finished(character : Character):
 		exit_with_helper(character)
 	# exits the pipe and gives back control to mario
 	Singleton.CurrentLevelData.level_data.vars.transition_data = []
+	Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
 	entering = false
 	character.toggle_movement(true)
 	# undo collision changes 
@@ -207,11 +209,13 @@ func exit_with_helper(character : Character):
 	character.velocity = helper.velocity
 	character.state = helper.state
 	character.facing_direction = helper.facing_direction
+	character.camera.global_position = helper.find_camera_position(vertical, character.global_position, character.camera.base_size)
 	character.camera.last_position = character.camera.position
 	character.camera.auto_move = true
 	character.position = global_position + helper.find_exit_offset(vertical, parts * 32)
 	Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
-	print(helper.velocity)
+	
+	
 	
 func _tween_all_completed() -> void:
 	if entering: #TODO: Make this work w/o if statement
