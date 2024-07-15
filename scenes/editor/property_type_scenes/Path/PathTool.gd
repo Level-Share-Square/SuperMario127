@@ -64,13 +64,22 @@ func _gui_input(event) -> void:
 
 
 	
-func add_node(point : Vector2):
+func add_node(point : Vector2, point_in: Vector2 = Vector2.ZERO, point_out: Vector2 = Vector2.ZERO):
 	var new_node = path_node.instance()
+	var curve_ref = line.get_node("path").curve
 	new_node.ui = weakref(self)
 	path_node_container.add_child(new_node)
 	nodes.push_back(new_node)
 	new_node.position = point
-	line.get_node("path").curve.add_point(point)
+	curve_ref.add_point(point)
+	if point_in != Vector2.ZERO || point_out != Vector2.ZERO:
+		new_node.set_handles_active(true)
+		curve_ref.set_point_in(curve_ref.get_point_count() - 1, point_in)
+		new_node.move_handle(new_node.HANDLE_LEFT, point_in)
+		curve_ref.set_point_out(curve_ref.get_point_count() - 1, point_out)
+		new_node.move_handle(new_node.HANDLE_RIGHT, point_out)
+		if point_in == -point_out:
+			new_node.handles_linked = true
 	update_line()
 	if(new_node.position == Vector2(0,0)):
 		new_node.first = true
@@ -115,9 +124,10 @@ func set_object_property_button(button: Control):
 	#TODO: Make this use a reference to the object rather than a reference to the property button.
 	#TODO: Add an object reference to the property button.
 	#TODO: Make a hide function for the editor window.
+	var current_curve = button.get_value()
 	editor.object_settings.visible = false
-	for point in range(0, button.get_value().get_point_count()):
-		add_node(button.get_value().get_point_position(point))
+	for point in range(0, current_curve.get_point_count()):
+		add_node(current_curve.get_point_position(point), current_curve.get_point_in(point), current_curve.get_point_out(point))
 	#var nextnode = first_node
 	#while(is_instance_valid(nextnode)):
 	#    print(nextnode.position)
@@ -136,8 +146,8 @@ func _confirm_pressed():
 	var index = 0
 	for node in nodes:
 		return_curve.add_point(node.position)
-		return_curve.set_point_in(index, node.left_handle.position)
-		return_curve.set_point_out(index, node.right_handle.position)
+		return_curve.set_point_in(index, node.left_handle.position * int(node.left_handle_enabled))
+		return_curve.set_point_out(index, node.right_handle.position * int(node.right_handle_enabled))
 		index += 1
 	object_property_button.set_value(return_curve)
 	close()
