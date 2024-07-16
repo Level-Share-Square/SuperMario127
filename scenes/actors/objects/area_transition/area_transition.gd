@@ -205,6 +205,7 @@ func pipe_exit_anim_finished(character : Character):
 	print("FINISHED")
 	
 func exit_with_helper(character : Character):
+	
 	var helper = Singleton.CurrentLevelData.level_data.vars.transition_character_data.back()
 	character.velocity = helper.velocity
 	character.state = helper.state

@@ -83,7 +83,7 @@ func exit_teleport(obj : Array):
 			character.position = obj[1].position + Vector2(0, obj[1].get_bottom_distance())
 		if obj[1].object_type == "area_transition":
 			obj[1].is_idle = false
-			if transition_character_data.size() >= 7:	
+			if transition_character_data.size() >= 7 and obj[1].stops_camera:	
 				var helper = transition_character_data.back()
 				character.camera.global_position = helper.find_camera_position(obj[1].vertical, character.global_position, character.camera.base_size, obj[1].parts * 32)
 				character.camera.last_position = character.camera.global_position

@@ -140,6 +140,7 @@ func _physics_process(_delta : float) -> void:
 	animated_sprite.flip_h = !do_kick_out
 	ray_sprite.rotation_degrees += 0.6
 	recolorable_ray_sprite.transform = ray_sprite.transform
+	recolorable_ray_sprite.modulate = ray_sprite.modulate
 	if !animated_sprite.playing: #looks like if it is not set to playing, some manual animation is done instead
 		#warning-ignore:integer_division
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
@@ -157,7 +158,7 @@ func _physics_process(_delta : float) -> void:
 				ambient_sound.playing = false
 				ghost.visible = true
 				animated_sprite.visible = false
-				ray_sprite.self_modulate = Color(255, 255, 255, 0)
+				ray_sprite.modulate = Color(255, 255, 255, 0)
 			else:
 				if ambient_sound.playing == is_blue:
 					ambient_sound.playing = !is_blue

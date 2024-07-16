@@ -193,7 +193,7 @@ func _start_local_transition(character : Character, entering) -> void:
 		if global_position.distance_to(local_pair.global_position) > 800:
 			if object_type == "area_transition":
 				if self.stops_camera:
-					Singleton.SceneTransitions.connect("transition_finished", local_pair, "_dumb_method", [character], CONNECT_ONESHOT)
+					Singleton.SceneTransitions.connect("transition_finished", self, "_dumb_method", [character], CONNECT_ONESHOT)
 			# sets the transition center to Mario's position
 			Singleton.SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
 			# this starts an inner scene transition, then connects a function (one shot) to start as it finishes
