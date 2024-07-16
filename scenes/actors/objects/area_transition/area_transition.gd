@@ -157,7 +157,8 @@ func start_pipe_enter_animation(character : Character) -> void:
 			pair.is_idle = false
 			character.gravity_scale = 0
 			Singleton.CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
-			character.camera.auto_move = false
+			if pair.stops_camera:
+				character.camera.auto_move = false
 	
 	emit_signal("pipe_animation_finished", character, entering)
 	
