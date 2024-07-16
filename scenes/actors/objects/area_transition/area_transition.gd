@@ -209,10 +209,16 @@ func exit_with_helper(character : Character):
 	character.velocity = helper.velocity
 	character.state = helper.state
 	character.facing_direction = helper.facing_direction
+	character.position = global_position + helper.find_exit_offset(vertical, parts * 32)
 	if stops_camera:
 		character.camera.global_position = helper.find_camera_position(vertical, global_position, character.camera.base_size, parts * 32)
 		character.camera.last_position = character.camera.global_position
-		character.position = global_position + helper.find_exit_offset(vertical, parts * 32)
+		if teleportation_mode:
+			character.camera.auto_move = true
+	else:
+		character.camera.global_position = character.global_position
+		character.camera.last_position = character.camera.position
+		character.camera.auto_move = true
 		print("set position")
 	
 

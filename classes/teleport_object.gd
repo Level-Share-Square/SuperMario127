@@ -41,8 +41,8 @@ func local_tp(entering_character : Character, entering):
 		tp_tween.interpolate_callback(tp_pair, WAIT_TIME, "start_exit_anim", entering_character)
 		tp_tween.start()
 		if object_type == "area_transition" and tp_pair.object_type == "area_transition":
-			if tp_pair.stops_camera:
-				return
+			return
+			
 		entering_character.camera.global_position = entering_character.global_position
 		entering_character.camera.skip_to_player = true
 
@@ -154,9 +154,9 @@ func exit_remote_teleport():
 func _start_local_transition(character : Character, entering) -> void:
 	var local_pair = find_local_pair()
 	if entering:
-		# warning-ignore: return_value_discarded
-		
-		if global_position.distance_to(local_pair.global_position) <= 430:
+		# warning-ignore: return_value_discardedt
+		print(global_position.distance_to(local_pair.global_position))
+		if global_position.distance_to(local_pair.global_position) <= 800:
 
 			var tween = Tween.new()
 			add_child(tween)
@@ -165,11 +165,15 @@ func _start_local_transition(character : Character, entering) -> void:
 			var camera = character.camera
 			var end_point = local_pair.position
 			if object_type == "area_transition" and local_pair.object_type == "area_transition":
+				camera.auto_move = false
 				if local_pair.stops_camera:
 					print("true")
 					end_point = Singleton.CurrentLevelData.level_data.vars.transition_character_data.back().find_camera_position(local_pair.vertical, local_pair.global_position, camera.base_size, local_pair.parts * 32)
 					character.sprite.visible = true
-					camera.auto_move = false
+					
+				else:
+					end_point = Singleton.CurrentLevelData.level_data.vars.transition_character_data.back().find_exit_offset(local_pair.vertical, local_pair.parts * 32) + local_pair.global_position
+				print(end_point)
 			tween.interpolate_property(camera, "position", null, end_point, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 			tween.start()
 			
@@ -184,10 +188,11 @@ func _start_local_transition(character : Character, entering) -> void:
 				if local_pair.stops_camera:
 					character.camera.auto_move = false
 	else:
+		
 		character.sprite.visible = true
-		if global_position.distance_to(local_pair.global_position) > 430:
-			if local_pair.object_type == "area_transition":
-				if local_pair.stops_camera:
+		if global_position.distance_to(local_pair.global_position) > 800:
+			if object_type == "area_transition":
+				if self.stops_camera:
 					Singleton.SceneTransitions.connect("transition_finished", local_pair, "_dumb_method", [character], CONNECT_ONESHOT)
 			# sets the transition center to Mario's position
 			Singleton.SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
@@ -222,7 +227,6 @@ class AreaTransitionHelper:
 			
 	func find_camera_position(exit_vertical : bool, exit_global_position : Vector2, camera_rect : Vector2, exit_size : float):
 		if exit_vertical:
-			print(exit_global_position + Vector2((camera_rect.x + 50) * sign(velocity.x), 0))
 			return exit_global_position + Vector2((camera_rect.x + 50) * sign(velocity.x), find_exit_offset(exit_vertical, exit_size).y)
 		else:
 			return exit_global_position + Vector2(find_exit_offset(exit_vertical, exit_size).x, (camera_rect.y + 50) * sign(velocity.y))
