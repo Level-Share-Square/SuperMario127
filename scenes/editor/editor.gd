@@ -350,7 +350,7 @@ func _process(delta : float) -> void:
 	
 	cap_zoom_level(); # Make sure it didn't accidentally get larger somehow
 	
-	if Input.is_action_just_pressed("invis_ui"):
+	if Input.is_action_just_pressed("invis_ui") and Singleton2.disable_hotkeys == false:
 		$"UI".visible = !$"UI".visible
 		$"Grid".visible = !$"Grid".visible
 		$"PlaceableItems/MiscGroup/BooBlock".preview = invis_boo
