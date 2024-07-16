@@ -107,7 +107,7 @@ func physics_process_idle(delta:float):
 				
 			# special behavior for powerups
 			if is_instance_valid(mario.powerup) and (mario.powerup.get_name() == "WingPowerup" or mario.powerup.get_name() == "RainbowPowerup"):
-				if mario.powerup.get_name() == "WingPowerup":
+				if mario.powerup.get_name() == "WingPowerup" and is_instance_valid(mario.state):
 					mario.state._stop(delta)
 					mario.set_state_by_name("LaunchStarState", delta)
 				set_state(2)

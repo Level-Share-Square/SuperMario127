@@ -85,12 +85,9 @@ func exit_teleport(obj : Array):
 			obj[1].is_idle = false
 			if transition_character_data.size() >= 7:	
 				var helper = transition_character_data.back()
-				
-	#			print(character.position)
-				character.camera.global_position = helper.find_camera_position(obj[1].vertical, character.global_position, character.camera.base_size)
+				character.camera.global_position = helper.find_camera_position(obj[1].vertical, character.global_position, character.camera.base_size, obj[1].parts * 32)
 				character.camera.last_position = character.camera.global_position
 				character.camera.auto_move = false
-				print("set camera position")
 			else:
 				character.state = character.get_state_node("FallState")
 		yield(get_tree().create_timer(0.5), "timeout")

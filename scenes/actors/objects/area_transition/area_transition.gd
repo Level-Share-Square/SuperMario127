@@ -110,7 +110,7 @@ func connect_remote_members():
 	
 
 func exit_local_teleport(character = null):
-	#is_idle = true
+	#character.camera.auto_move = true
 	pass
 	
 
@@ -199,7 +199,6 @@ func pipe_exit_anim_finished(character : Character):
 	# undo collision changes 
 	character.set_collision_layer_bit(1, true)
 	character.set_inter_player_collision(true) 
-	
 	stored_character = null
 	area2d.connect("body_exited", self, "exit_remote_teleport")
 	print("FINISHED")
@@ -209,12 +208,16 @@ func exit_with_helper(character : Character):
 	character.velocity = helper.velocity
 	character.state = helper.state
 	character.facing_direction = helper.facing_direction
-	character.camera.global_position = helper.find_camera_position(vertical, character.global_position, character.camera.base_size)
-	character.camera.last_position = character.camera.position
-	character.camera.auto_move = true
-	character.position = global_position + helper.find_exit_offset(vertical, parts * 32)
-	Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
+	if stops_camera:
+		character.camera.global_position = helper.find_camera_position(vertical, global_position, character.camera.base_size, parts * 32)
+		character.camera.last_position = character.camera.global_position
+		character.position = global_position + helper.find_exit_offset(vertical, parts * 32)
+		print("set position")
 	
+
+	
+	Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
+	print(character.camera.global_position)
 	
 	
 func _tween_all_completed() -> void:
@@ -228,6 +231,9 @@ func reset_sprite(character : Character): #This is here in case Mario came from 
 	character.sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	character.sprite.scale = Vector2(1.0, 1.0)
 	character.sprite.position = Vector2.ZERO
+	
+func _dumb_method(character : Character):
+	character.camera.auto_move = true
 
 
 
