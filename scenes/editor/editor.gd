@@ -63,6 +63,7 @@ var coin_frame : int
 onready var normal_boo = preload("res://assets/tiles/boo_block/icon.png")
 onready var invis_boo = preload("res://assets/tiles/boo_block/boo_block_invis.png")
 
+
 # Functions to avoid copy pasted code
 func cap_zoom_level() -> void:
 	# Reduce the zoom level if the screen wouldn't fit within the level
@@ -314,7 +315,15 @@ func update_selected_object(mouse_pos : Vector2) -> void:
 					
 
 func _process(delta : float) -> void:
-	
+	var visible_child_count = 0
+	for i in $UI.get_children():
+		if i is NinePatchRect:
+			if i.visible:
+				visible_child_count += 1
+	if visible_child_count == 0:
+		Singleton2.disable_hotkeys = false
+	else:
+		Singleton2.disable_hotkeys = true
 
 	
 	if Singleton2.time > 0:

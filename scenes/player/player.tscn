@@ -764,7 +764,6 @@ __meta__ = {
 
 [node name="PauseScreen" type="Control" parent="UI"]
 pause_mode = 2
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 8 )
@@ -1044,7 +1043,6 @@ visible = false
 
 [node name="SignText" type="Control" parent="UI"]
 pause_mode = 2
-visible = false
 margin_left = 161.0
 margin_top = 66.0
 margin_right = 611.0
@@ -1113,8 +1111,7 @@ divider_path = NodePath("../UI/Divider")
 character_scene_path = "res://scenes/actors/mario/mario.tscn"
 
 [node name="ViewportContainer" type="ViewportContainer" parent="Viewports"]
-visible = false
-margin_right = 384.0
+margin_right = 772.0
 margin_bottom = 432.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1124,9 +1121,9 @@ __meta__ = {
 }
 
 [node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer"]
-size = Vector2( 384, 432 )
+size = Vector2( 772, 432 )
 handle_input_locally = false
-render_target_update_mode = 0
+render_target_update_mode = 3
 
 [node name="CameraP1" type="Camera2D" parent="Viewports/ViewportContainer/Viewport"]
 pause_mode = 2
@@ -1173,7 +1170,6 @@ collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 0
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
@@ -1185,6 +1181,7 @@ char_path = NodePath("../Viewport/World/Character")
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="Viewports"]
 visible = false
+margin_left = 388.0
 margin_right = 772.0
 margin_bottom = 432.0
 size_flags_horizontal = 3
@@ -1195,7 +1192,7 @@ __meta__ = {
 }
 
 [node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer2"]
-size = Vector2( 772, 432 )
+size = Vector2( 384, 432 )
 handle_input_locally = false
 render_target_update_mode = 0
 

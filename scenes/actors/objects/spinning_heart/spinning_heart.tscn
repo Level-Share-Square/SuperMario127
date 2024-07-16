@@ -156,14 +156,14 @@ volume_db = -3.0
 [node name="Sprite" type="AnimatedSprite" parent="."]
 z_index = -1
 frames = SubResource( 13 )
-frame = 1
+frame = 6
 playing = true
 
 [node name="Color" type="AnimatedSprite" parent="."]
 z_index = -1
 frames = SubResource( 28 )
 animation = "New Anim"
-frame = 1
+frame = 6
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]

@@ -18,6 +18,9 @@ var spin_time : float = 1
 var heal_tick : float = 1
 var cooldown := false
 var cooldown_time := 0
+var charbody = null
+
+var once =  false
 
 var on_cooldown := false
 var can_heal := true
@@ -35,26 +38,36 @@ func _set_property_values():
 	set_property("color", color, 1)
 	set_property("rainbow", rainbow, true)
 
-func collect(body):
-	if enabled and !on_cooldown and body.name.begins_with("Character") and !body.dead:
-		if cooldown:
-			timer.start()
-			on_cooldown = true
-		var velocity = abs(body.velocity.x) if abs(body.velocity.x) > abs(body.velocity.y) else abs(body.velocity.y) 
-		var heal_scale = 1 if body.velocity.x < player_speed_cap else clamp(body.velocity.x, player_speed_cap, player_speed_cap * 2) / player_speed_cap
-		var spin_scale = (clamp(abs(body.velocity.x), 0.001, player_speed_cap) / 15) * heal_scale
-		print(heal_scale)
-		if body.state != null && body.state.name == "SpinningState":
-			tween.interpolate_property(sprite, "speed_scale", 20, 1, (1 + spin_time)) #20 is 300 (player_speed_cap) divided by 15
-			tween.interpolate_property(color_sprite, "speed_scale", 20, 1, (1 + spin_time))
-			body.slow_heal(int((health_given * heal_scale) * 5), 1, spin_time, true)
-		else:
-			body.slow_heal(int((health_given * heal_scale) * 5), 1, spin_time, false) #Timers can't be set to zero
-			tween.interpolate_property(sprite, "speed_scale", spin_scale, 1, 1 + spin_time)
-			tween.interpolate_property(color_sprite, "speed_scale", spin_scale, 1, 1 + spin_time)
-		anim_player.play("hop")
-		sound.play()
-		tween.start()
+func body_enter(body):
+	if body.name.begins_with("Character"):
+		charbody = body
+		
+func body_exit(body):
+	charbody = null
+	once = false
+
+func _physics_process(delta):
+	if charbody != null:
+		if enabled and !on_cooldown and charbody.name.begins_with("Character") and !charbody.dead:
+			if cooldown:
+				timer.start()
+				on_cooldown = true
+			var velocity = abs(charbody.velocity.x) if abs(charbody.velocity.x) > abs(charbody.velocity.y) else abs(charbody.velocity.y) 
+			var heal_scale = 1 if charbody.velocity.x < player_speed_cap else clamp(charbody.velocity.x, player_speed_cap, player_speed_cap * 2) / player_speed_cap
+			var spin_scale = (clamp(abs(charbody.velocity.x), 0.001, player_speed_cap) / 15) * heal_scale
+			print(heal_scale)
+			if charbody.state != null && (charbody.state.name == "SpinningState" || charbody.state.name == "DiveState"):
+				tween.interpolate_property(sprite, "speed_scale", 20, 1, (1 + spin_time)) #20 is 300 (player_speed_cap) divided by 15
+				tween.interpolate_property(color_sprite, "speed_scale", 20, 1, (1 + spin_time))
+				charbody.slow_heal(int((health_given * heal_scale) * 5), 1, spin_time, true)
+			elif once == false:
+				charbody.slow_heal(int((health_given * heal_scale) * 5), 1, spin_time, false) #Timers can't be set to zero
+				tween.interpolate_property(sprite, "speed_scale", spin_scale, 1, 1 + spin_time)
+				tween.interpolate_property(color_sprite, "speed_scale", spin_scale, 1, 1 + spin_time)
+				once = true
+			anim_player.play("hop")
+			sound.play()
+			tween.start()
 
 
 func _ready():
@@ -66,7 +79,8 @@ func _ready():
 	if is_preview:
 		z_index = 0
 		sprite.z_index = 0
-	var _connect = area.connect("body_entered", self, "collect")
+	var _connect = area.connect("body_entered", self, "body_enter")
+	var _connect2 = area.connect("body_exited", self, "body_exit")
 	
 func _process(delta):
 	if color == Color(1, 0, 0):

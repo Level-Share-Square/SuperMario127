@@ -78,6 +78,9 @@ func _process(_delta):
 func _general_update(_delta):
 	if character.nozzle != self:
 		return
+		
+	if activated and !character.turbo_sound.playing:
+		last_activated = false
 	
 	character.water_sprite.rotation_degrees = 90 * character.facing_direction
 	if activated and !last_activated:
@@ -85,7 +88,7 @@ func _general_update(_delta):
 		character.water_sprite.frame = 0
 		character.turbo_sound.play()
 		last_activated = true
-	elif !activated and last_activated:
+	elif !activated:
 		character.turbo_particles.emitting = false
 		character.water_sprite.frame = 0
 		character.turbo_sound.stop()

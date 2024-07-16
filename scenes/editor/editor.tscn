@@ -4541,19 +4541,6 @@ volume_db = -10.0
 stream = ExtResource( 120 )
 volume_db = -10.0
 
-[node name="PlaceableItemsContainer" type="TextureRect" parent="UI"]
-margin_left = -1.0
-margin_top = -1.0
-margin_right = 2304.0
-margin_bottom = 217.0
-rect_scale = Vector2( 0.335, 0.335 )
-texture = ExtResource( 40 )
-stretch_mode = 3
-script = ExtResource( 31 )
-normal_color = Color( 1, 1, 1, 1 )
-selected_color = Color( 0.313726, 0.309804, 0.882353, 1 )
-editor_node_path = NodePath("../..")
-
 [node name="LevelSettingsWindow" parent="UI" instance=ExtResource( 168 )]
 visible = false
 
@@ -4572,6 +4559,19 @@ visible = false
 
 [node name="AutosaveWINDOW" parent="UI" instance=ExtResource( 1050 )]
 visible = false
+
+[node name="PlaceableItemsContainer" type="TextureRect" parent="UI"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 2304.0
+margin_bottom = 217.0
+rect_scale = Vector2( 0.335, 0.335 )
+texture = ExtResource( 40 )
+stretch_mode = 3
+script = ExtResource( 31 )
+normal_color = Color( 1, 1, 1, 1 )
+selected_color = Color( 0.313726, 0.309804, 0.882353, 1 )
+editor_node_path = NodePath("../..")
 
 [node name="LevelSettingsButton" type="TextureButton" parent="UI"]
 margin_left = 713.0
