@@ -944,6 +944,7 @@ func _physics_process(delta: float) -> void:
 	if Singleton.PlayerSettings.other_player_id != -1:
 		if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
 			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
+			print("hi")
 	if !Singleton2.save_ghost:
 		temp_gp.append(Vector2(int(position.x), int(position.y)))
 		temp_ga.append(ANIM_IDS[sprite.animation])
@@ -1101,8 +1102,8 @@ func _connect_signals():
 		i.connect("powerup_state_changed", self, "_on_powerup_state_changed")
 
 func set_collision(value : bool):
-	set_collision_layer_bit(1, false) # disable collisions w/ most things
-	set_inter_player_collision(false)
+	set_collision_layer_bit(1, value) # disable collisions w/ most things
+	set_inter_player_collision(value)
 
 func _on_powerup_state_changed(powerup_id: String): # ====================================================================
 	match powerup_id:                               # | This is here to keep sound.gd from polling every frame to see if | 
