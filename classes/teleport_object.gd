@@ -223,7 +223,7 @@ class AreaTransitionHelper:
 		if exit_vertical:
 			return Vector2(32 *  sign(velocity.x), -clamp(-enter_pos.y, -exit_size/2, exit_size/2))
 		else:
-			return Vector2(clamp(enter_pos.x, -exit_size/2, exit_size/2), 16 * -sign(velocity.y))
+			return Vector2(clamp(enter_pos.x, -exit_size/2, exit_size/2), 45 * sign(velocity.y))
 			
 	func find_camera_position(exit_vertical : bool, exit_global_position : Vector2, camera_rect : Vector2, exit_size : float):
 		if exit_vertical:
