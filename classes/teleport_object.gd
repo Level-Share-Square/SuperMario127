@@ -35,14 +35,14 @@ func local_tp(entering_character : Character, entering):
 		#For now, you can't teleport to another object with the same tag but a different mode
 		if tp_pair.teleportation_mode && teleportation_mode == false:
 			tp_pair = self
-		entering_character.global_position = tp_pair.global_position
+		
 		
 		
 		tp_tween.interpolate_callback(tp_pair, WAIT_TIME, "start_exit_anim", entering_character)
 		tp_tween.start()
 		if object_type == "area_transition" and tp_pair.object_type == "area_transition":
 			return
-			
+		entering_character.global_position = tp_pair.global_position
 		entering_character.camera.global_position = entering_character.global_position
 		entering_character.camera.skip_to_player = true
 
