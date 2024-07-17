@@ -164,11 +164,12 @@ func _ready() -> void:
 	
 func set_selected_box(new_selected_box: Node) -> void:
 	Singleton.EditorSavedSettings.selected_box = new_selected_box.box_index
+	Singleton2.new_box = new_selected_box
 	item_preview.update_preview(new_selected_box.item)
 	selected_box = new_selected_box
 	for placeable_item_button in placeable_items_button_container.get_children():
 		placeable_item_button.update_selection()
-
+		
 # Recursive functions to find an item and a tile respectively within PlaceableItems
 func pick_item_recursive_find(id: int, group: Node) -> PlaceableItem:
 	if group is PlaceableItem:

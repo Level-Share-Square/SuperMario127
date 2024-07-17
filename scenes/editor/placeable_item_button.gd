@@ -40,8 +40,8 @@ func item_changed():
 	
 	icon.texture = null if item == null else item.icon
 	Singleton.EditorSavedSettings.layout_ids[box_index] = item.name
+	item.backup_palette_index = Singleton.EditorSavedSettings.layout_palettes[box_index]
 	Singleton.EditorSavedSettings.layout_palettes[box_index] = item.palette_index
-	
 	
 func is_hovered():
 	var mouse_pos = get_global_mouse_position()
@@ -123,7 +123,7 @@ func button_down():
 	if item != null:
 		if Input.is_action_just_pressed("change_palette"):
 			
-			item.update_palette(item.palette_index + 1)
+			Singleton2.new_box.item.update_palette(Singleton2.new_box.item.palette_index + 1)
 			item_changed()
 		elif editor.selected_box == self and !item.change_to.empty():
 			var old_palette_index = item.palette_index

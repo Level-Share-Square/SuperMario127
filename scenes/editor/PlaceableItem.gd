@@ -27,6 +27,8 @@ export var preview : Texture = null
 export var placement_action : Script
 export var removal_action : Script
 
+var backup_palette_index : int
+
 func update_palette(new_index : int):
 	if palette_icons.size() == 0: return
 	palette_index = wrapi(new_index, 0, palette_icons.size())

@@ -13,6 +13,7 @@ var disable_hotkeys = false
 var dark_mode : bool
 var autosave_timer : int = 108000
 var time : int
+var new_box
 
 var default_hotkeys = [
 	"toggle_grid",
