@@ -1,4 +1,4 @@
-[gd_scene load_steps=1220 format=2]
+[gd_scene load_steps=1221 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1186,6 +1186,7 @@
 [ext_resource path="res://assets/tiles/wood/palette_icons/7_slopeR.png" type="Texture" id=1184]
 [ext_resource path="res://assets/tiles/wood/palette_icons/6_slopeL.png" type="Texture" id=1185]
 [ext_resource path="res://assets/tiles/wood/palette_icons/6_slopeR.png" type="Texture" id=1186]
+[ext_resource path="res://scenes/actors/objects/star_door/icon.png" type="Texture" id=1187]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2196,14 +2197,6 @@ item_name = "Iron Bars"
 icon = ExtResource( 179 )
 preview = ExtResource( 178 )
 
-[node name="CrystalTap" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 81
-is_object = true
-object_center = Vector2( 16, 16 )
-icon = ExtResource( 341 )
-preview = ExtResource( 342 )
-
 [node name="SlingStar" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
 object_id = 109
@@ -2283,6 +2276,7 @@ preview = ExtResource( 49 )
 script = ExtResource( 24 )
 object_id = 113
 is_object = true
+icon = ExtResource( 1187 )
 preview = ExtResource( 847 )
 
 [node name="AreaTransition" type="Node" parent="PlaceableItems/TeleportGroup"]
@@ -2314,6 +2308,14 @@ object_center = Vector2( 16, 16 )
 item_name = "P Switch Block"
 icon = ExtResource( 337 )
 preview = ExtResource( 336 )
+
+[node name="CrystalTap" type="Node" parent="PlaceableItems/SwitchesGroup"]
+script = ExtResource( 24 )
+object_id = 81
+is_object = true
+object_center = Vector2( 16, 16 )
+icon = ExtResource( 341 )
+preview = ExtResource( 342 )
 
 [node name="OnOffSwitch" type="Node" parent="PlaceableItems/SwitchesGroup"]
 script = ExtResource( 24 )

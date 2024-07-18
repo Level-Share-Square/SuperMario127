@@ -202,7 +202,7 @@ func pipe_exit_anim_finished(character : Character):
 	character.set_inter_player_collision(true) 
 	stored_character = null
 	area2d.connect("body_exited", self, "exit_remote_teleport")
-	print("FINISHED")
+	
 	
 func exit_with_helper(character : Character):
 	
@@ -220,12 +220,11 @@ func exit_with_helper(character : Character):
 		character.camera.global_position = character.global_position
 		character.camera.last_position = character.camera.position
 		character.camera.auto_move = true
-		print("set position")
+		
 	
 
 	
 	Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
-	print(character.camera.global_position)
 	
 	
 func _tween_all_completed() -> void:
