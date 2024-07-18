@@ -377,19 +377,35 @@ func on_button_add_pressed() -> void:
 func on_button_new_level_pressed() -> void:
 	# this way of doing it is a bit silly but should work fine unless the import button code massively changes
 	# should move the common code to a function instead of calling the import signal response
-	level_code_entry.text = TEMPLATE_LEVEL
-	on_button_code_import_pressed()
+	import(TEMPLATE_LEVEL)
 
 # the new level button uses this function after setting the level_code_entry text to the template level
 # keep that in mind when editing this
 func on_button_code_import_pressed() -> void:
 	var level_code = level_code_entry.text
+	var also_level_code = OS.clipboard
 
 	if level_code_util.is_valid(level_code):
 		var level_info : LevelInfo = LevelInfo.new(level_code)
 		add_level(level_info)
 		level_code_entry.text = ""
 		set_level_code_panel(false)
+		return
+		
+	if level_code_util.is_valid(also_level_code):
+		var level_info : LevelInfo = LevelInfo.new(also_level_code)
+		add_level(level_info)
+		level_code_entry.text = ""
+		set_level_code_panel(false)
+
+func import(code):
+
+	if level_code_util.is_valid(code):
+		var level_info : LevelInfo = LevelInfo.new(code)
+		add_level(level_info)
+		level_code_entry.text = ""
+		set_level_code_panel(false)
+		return
 
 func on_button_code_cancel_pressed() -> void:
 	level_code_entry.text = ""
@@ -483,10 +499,7 @@ func on_button_time_scores_pressed() -> void:
 
 func on_button_close_time_scores_pressed() -> void:
 	set_time_score_panel(false)
-	
-func info_clicked() -> void:
-	if "0.4" in OS.clipboard:
-		level_code_entry.text = OS.clipboard
+
 	
 func update_activity() -> void:
 	var activity = Discord.Activity.new()
