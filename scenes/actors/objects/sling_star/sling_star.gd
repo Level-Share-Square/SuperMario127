@@ -63,7 +63,8 @@ func set_state(to:int):
 			audio_player.stream = launch_noise
 			audio_player.play()
 			speed_tween.remove_all()
-			mario.state._stop(fps_util.PHYSICS_DELTA)
+			if is_instance_valid(mario.state):
+				mario.state._stop(fps_util.PHYSICS_DELTA)
 			mario.velocity = Vector2(1, -launch_power * 80).rotated(rotation)
 			mario.sound_player.play_double_jump_sound()
 			state = states.LAUNCH
