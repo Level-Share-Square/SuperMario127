@@ -37,11 +37,17 @@ func _ready():
 	update_selection()
 
 func item_changed():
+	var editor = get_tree().get_current_scene()
 	
-	icon.texture = null if item == null else item.icon
 	Singleton.EditorSavedSettings.layout_ids[box_index] = item.name
-	item.backup_palette_index = Singleton.EditorSavedSettings.layout_palettes[box_index]
 	Singleton.EditorSavedSettings.layout_palettes[box_index] = item.palette_index
+	icon.texture = null if item == null else item.icon
+	
+	if editor.placeable_items_button_container != null:
+		for i in editor.placeable_items_button_container.get_children():
+			Singleton.EditorSavedSettings.layout_ids[i.box_index] = i.item.name
+			Singleton.EditorSavedSettings.layout_palettes[i.box_index] = i.item.palette_index
+			i.icon.texture = null if i.item == null else i.item.icon
 	
 func is_hovered():
 	var mouse_pos = get_global_mouse_position()
@@ -122,8 +128,7 @@ func button_down():
 	
 	if item != null:
 		if Input.is_action_just_pressed("change_palette"):
-			
-			Singleton2.new_box.item.update_palette(Singleton2.new_box.item.palette_index + 1)
+			item.update_palette(item.palette_index + 1)
 			item_changed()
 		elif editor.selected_box == self and !item.change_to.empty():
 			var old_palette_index = item.palette_index

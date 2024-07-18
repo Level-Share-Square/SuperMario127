@@ -210,7 +210,27 @@ func pick_tile(tile) -> void:
 	var tile_id = tile[1]
 	var placeable_item := pick_tile_recursive_find(tileset_id, tile_id, placeable_items)
 	if placeable_item == null: return # In case
+	placeable_item.palette_index = tile[2]
+	# Should probably go into a function
+	update_button_container(placeable_item)
 	
+	item_preview.update_preview(placeable_item)
+func find_tile(tile):
+	var tileset_id = tile[0]
+	var tile_id = tile[1]
+	var placeable_item := pick_tile_recursive_find(tileset_id, tile_id, placeable_items)
+	return placeable_item
+func find_item(obj: GameObject):
+	var level_object = obj.level_object.get_ref()
+	var id : int = level_object.type_id
+	var placeable_item := pick_item_recursive_find(id, placeable_items)
+	return placeable_item
+	
+func dupe_tile(tile) -> void:
+	var tileset_id = tile[0]
+	var tile_id = tile[1]
+	var placeable_item := pick_tile_recursive_find(tileset_id, tile_id, placeable_items)
+	if placeable_item == null: return # In case
 	# Should probably go into a function
 	update_button_container(placeable_item)
 	
@@ -392,8 +412,8 @@ func _process(delta : float) -> void:
 			if Input.is_action_just_pressed("toggle_enabled"):
 				hovered_object.set_property("enabled", !hovered_object.enabled, true)
 			
-#			if Input.is_action_just_pressed("minecraft_pick_block"):
-#				pick_item(hovered_object)
+			if Input.is_action_just_pressed("minecraft_pick_block"):
+				pick_item(hovered_object)
 #
 			if Input.is_mouse_button_pressed(4):
 				hovered_object.set_property("scale", Vector2(10, 10), true)
@@ -527,9 +547,23 @@ func _process(delta : float) -> void:
 			
 			# Middle click tiles
 			var item = selected_box.item
-			if !item.is_object and Input.is_action_just_pressed("minecraft_pick_block"):
+			if Input.is_action_just_pressed("minecraft_pick_block"):
+				var item_array : Array
 				var tile = shared.get_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer)
-				pick_tile(tile)
+				var selected_tile = find_tile(tile)
+				for placeable_item_button in placeable_items_button_container.get_children():
+					item_array.append(placeable_item_button.item)
+				if item_array.has(selected_tile):
+					selected_tile.update_palette(tile[2])
+					for placeable_item_button in placeable_items_button_container.get_children():
+						placeable_item_button.item_changed()
+				else:
+					pick_tile(tile)
+					if item_array.count(find_tile(tile)) > 1:
+						find_tile(tile).update_palette(tile[2])
+						for placeable_item_button in placeable_items_button_container.get_children():
+							placeable_item_button.item_changed()
+						
 			
 			if selected_box.item.is_object and !rotating and time_clicked <= 0:
 				update_selected_object(mouse_pos)

@@ -150,7 +150,6 @@ outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 7 )
 
 [sub_resource type="RectangleShape2D" id=18]
-resource_local_to_scene = true
 extents = Vector2( 393, 216 )
 
 [sub_resource type="RectangleShape2D" id=24]
@@ -1175,7 +1174,7 @@ collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 1
+frame = 3
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
