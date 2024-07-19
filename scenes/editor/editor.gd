@@ -400,23 +400,24 @@ func _process(delta : float) -> void:
 		
 		# Handle hovered objects
 		if is_instance_valid(hovered_object):
-			if Input.is_action_just_pressed("rotate"):
-				rotating = true
-			
-			if Input.is_action_just_pressed("flip_object"):
-				hovered_object.set_property("scale", Vector2(-hovered_object.scale.x, hovered_object.scale.y), true)
-			
-			if Input.is_action_just_pressed("flip_object_v"):
-				hovered_object.set_property("scale", Vector2(hovered_object.scale.x, -hovered_object.scale.y), true)
-			
-			if Input.is_action_just_pressed("toggle_enabled"):
-				hovered_object.set_property("enabled", !hovered_object.enabled, true)
-			
-			if Input.is_action_just_pressed("minecraft_pick_block"):
-				pick_item(hovered_object)
-#
-			if Input.is_mouse_button_pressed(4):
-				hovered_object.set_property("scale", Vector2(10, 10), true)
+			if Singleton2.disable_hotkeys == false:
+				if Input.is_action_just_pressed("rotate"):
+					rotating = true
+				
+				if Input.is_action_just_pressed("flip_object"):
+					hovered_object.set_property("scale", Vector2(-hovered_object.scale.x, hovered_object.scale.y), true)
+				
+				if Input.is_action_just_pressed("flip_object_v"):
+					hovered_object.set_property("scale", Vector2(hovered_object.scale.x, -hovered_object.scale.y), true)
+				
+				if Input.is_action_just_pressed("toggle_enabled"):
+					hovered_object.set_property("enabled", !hovered_object.enabled, true)
+				
+				if Input.is_action_just_pressed("minecraft_pick_block"):
+					pick_item(hovered_object)
+	#
+				if Input.is_mouse_button_pressed(4):
+					hovered_object.set_property("scale", Vector2(10, 10), true)
 				
 				
 				

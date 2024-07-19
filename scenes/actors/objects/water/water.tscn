@@ -65,12 +65,12 @@ shader_param/x_size = 1800.0
 z_index = -1
 script = ExtResource( 1 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Col" type="Area2D" parent="."]
 visible = false
-collision_layer = 128
+collision_layer = 640
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Col"]
 position = Vector2( 900, 300 )
 shape = SubResource( 1 )
 

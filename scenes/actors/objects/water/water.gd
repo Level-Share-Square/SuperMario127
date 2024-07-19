@@ -19,8 +19,8 @@ var tap_mode : bool = true
 
 var save_pos : Vector2
 
-onready var area = $Area2D
-onready var area_collision = $Area2D/CollisionShape2D
+onready var area = $Col
+onready var area_collision = $Col/CollisionShape2D
 onready var sprite = $ColorRect
 onready var waves = $Waves
 
@@ -76,6 +76,7 @@ func change_size():
 	last_front = render_in_front
 
 func _physics_process(_delta):
+
 	for body in area.get_overlapping_bodies():
 		if body is Character:
 			body.breath -= 0.25 * toxicity
