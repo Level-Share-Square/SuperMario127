@@ -7,7 +7,7 @@ extends GameObject
 export(Array, Texture) var palette_textures
 
 
-export var parts := 9
+export var parts := 1
 var last_parts := 1
 
 func _set_properties():
@@ -103,7 +103,7 @@ func _physics_process(delta):
 	if !"Editor" in str(get_tree().current_scene):
 		if is_instance_valid(water):
 			position.y = water.position.y - 9
-#			animplay.play("bob")
+			animplay.play("bob")
 		else:
 			animplay.play("RESET")
 			if can_collide_with_floor == false:
