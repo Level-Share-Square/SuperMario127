@@ -1173,8 +1173,16 @@ player_id = 1
 collision_exceptions = [ NodePath("../Character") ]
 character = 1
 
+[node name="CamCollision2" type="Area2D" parent="Viewports/ViewportContainer/Viewport/World/Character2"]
+position = Vector2( 1000, 920 )
+collision_layer = 0
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Viewports/ViewportContainer/Viewport/World/Character2/CamCollision2"]
+shape = SubResource( 24 )
+
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 3
+frame = 11
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
@@ -1221,15 +1229,9 @@ editor_draw_screen = false
 script = ExtResource( 4 )
 character = NodePath("../../../ViewportContainer/Viewport/World/Character2")
 background = NodePath("../Backgrounds")
+character2_cam_collider = NodePath("../../../ViewportContainer/Viewport/World/Character2/CamCollision2")
 
 [node name="Tween" type="Tween" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
-
-[node name="Area2D" type="Area2D" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
-collision_layer = 0
-collision_mask = 2048
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Viewports/ViewportContainer2/Viewport/CameraP2/Area2D"]
-shape = SubResource( 24 )
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer2/Viewport" instance=ExtResource( 13 )]
 

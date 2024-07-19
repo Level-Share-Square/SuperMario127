@@ -2,6 +2,7 @@ extends Camera2D
 
 export var character : NodePath
 export var background : NodePath
+export var character2_cam_collider : NodePath
 var focus_on : Node
 var auto_move := true
 var skip_to_player := true
@@ -9,19 +10,25 @@ var focus_zoom := 1.0
 var last_position = Vector2(0,0)
 var size = Vector2(0,0)
 var base_size = Vector2(393, 216)
+var area
+var shape
 
 onready var character_node = get_node(character)
 onready var bg = get_node(background)
 onready var zoom_tween = $Tween
-onready var area = $Area2D
-onready var shape = $Area2D/CollisionShape2D
+
 onready var viewport
 
 var character_vel = Vector2(0, 0)
 
 func _ready():
+	if is_instance_valid(character_node) && Singleton.PlayerSettings.player2_character == character_node.player_id:
+		shape = get_node(character2_cam_collider).get_node("CollisionShape2D")
+		area = get_node(character2_cam_collider)
+	else:
+		shape = $Area2D/CollisionShape2D
+		area = $Area2D
 	area.connect("area_entered", self, "_on_area_entered")
-	
 func _physics_process(delta):
 	if !auto_move: return
 	if focus_on != null:
@@ -49,6 +56,7 @@ func _physics_process(delta):
 #				if global_position.y < stopper.top_bound.y + size.length().y * 1.2 or global_position.y > stopper.bottom_bound.y + size.length().y * 1.2 or global_position.x < stopper.left_bound.x + size.length().x * 1.2 or global_position.x > stopper.right_bound.x + size.length().x * 1.2:
 				# this calculates if the camera is too far away from a horizontal or vertical edge and takes resized bounds into account
 				# the same as what the code commented out above does
+				
 				if abs(global_position.y - stopper.global_position.y) < size.y * 1.2 + abs(stopper.top_bound.y - stopper.global_position.y) or abs(global_position.x - stopper.global_position.x) < size.x * 1.2 + abs(stopper.left_bound.x - stopper.global_position.x):
 					var overlapX = min(abs(last_position.x + size.x - stopper.left_bound.x), abs(last_position.x - size.x - stopper.right_bound.x))
 					var overlapY = min(abs(last_position.y + size.y - stopper.top_bound.y), abs(last_position.y - size.y - stopper.bottom_bound.y))
@@ -79,10 +87,11 @@ func _physics_process(delta):
 							global_position.y = stopper.bottom_bound.y + size.y - 1
 						else:
 							pass
+					
 				else:
 					print("ESCAPED")
-			
-			
+			if Singleton.PlayerSettings.player2_character == character_node.player_id:
+						area.global_position = global_position
 			
 			
 			
