@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=9 format=2]
+[gd_resource type="Resource" load_steps=10 format=2]
 
 [ext_resource path="res://level/Tileset.gd" type="Script" id=1]
 [ext_resource path="res://assets/tiles/log/palletes/5.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/tiles/log/palletes/1.png" type="Texture" id=6]
 [ext_resource path="res://assets/tiles/log/palletes/2.png" type="Texture" id=7]
 [ext_resource path="res://assets/tiles/log/palletes/6.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/log/palletes/8.png" type="Texture" id=9]
 
 [resource]
 script = ExtResource( 1 )
@@ -15,4 +16,4 @@ block_tile_id = 95
 slab_tile_id = 99
 left_slope_tile_id = 97
 right_slope_tile_id = 98
-palettes = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 8 ), ExtResource( 3 ) ]
+palettes = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 9 ) ]
