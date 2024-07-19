@@ -8,6 +8,7 @@ var current_red_coins := [0, []]
 var current_shine_shards := []
 var liquid_positions := []
 var nozzles_collected := []
+var switch_state := []
 
 func reset():
 	current_checkpoint_id = -1
@@ -18,6 +19,7 @@ func reset():
 	current_shine_shards = []
 	liquid_positions = []
 	nozzles_collected = ["null"]
+	switch_state = []
 	
 	for index in Singleton.CurrentLevelData.level_data.areas.size():
 		current_shine_shards.append([0, []])

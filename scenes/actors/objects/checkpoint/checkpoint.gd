@@ -64,6 +64,8 @@ func set_checkpoint(body):
 		Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area] = []
 		for liquid in Singleton.CurrentLevelData.level_data.vars.liquids:
 			Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].append(liquid[1].save_pos)
+			
+		Singleton.CheckpointSaved.switch_state = Singleton.CurrentLevelData.level_data.vars.switch_state
 	Singleton.CheckpointSaved.liquid_positions = Singleton.CurrentLevelData.level_data.vars.liquid_positions
 	
 	for checkpoint in Singleton.CurrentLevelData.level_data.vars.checkpoints:

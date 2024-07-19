@@ -24,7 +24,7 @@ func _ready():
 #	if mode == 1:
 #			set_property("default_state", default_state, true)
 #
-	sprite.region_rect.position.x = int(true) * 32
+	sprite.region_rect.position.x = int(!Singleton.CurrentLevelData.level_data.vars.switch_state.has(palette)) * 32
 	
 	if !enabled:
 		$StaticBody2D.set_collision_layer_bit(0, false)
