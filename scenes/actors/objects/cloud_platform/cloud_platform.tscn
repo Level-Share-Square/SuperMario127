@@ -29,7 +29,6 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
 collision_layer = 16
 script = ExtResource( 2 )
 

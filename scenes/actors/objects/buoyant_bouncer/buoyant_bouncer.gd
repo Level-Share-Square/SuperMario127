@@ -3,7 +3,8 @@ extends GameObject
 
 #-------------------------------- GameObject logic -----------------------
 
-export var parts := 1
+
+export var parts := 9
 var last_parts := 1
 
 func _set_properties():
@@ -98,10 +99,9 @@ func _physics_process(delta):
 			position.y = water.position.y - 9
 			animplay.play("bob")
 		else:
-			animplay.play("RESET")
 			if can_collide_with_floor == false:
 				position.y += grav
-	
+
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts
