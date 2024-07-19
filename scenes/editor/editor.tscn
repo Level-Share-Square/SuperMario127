@@ -1,4 +1,4 @@
-[gd_scene load_steps=1238 format=2]
+[gd_scene load_steps=1250 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1204,6 +1204,18 @@
 [ext_resource path="res://assets/tiles/log/palletes/8_slab.png" type="Texture" id=1202]
 [ext_resource path="res://assets/tiles/log/palletes/8_block.png" type="Texture" id=1203]
 [ext_resource path="res://assets/tiles/log/palletes/8_slopeL.png" type="Texture" id=1204]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/texture_green.png" type="Texture" id=1205]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/icon_purple.png" type="Texture" id=1206]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/icon_blue.png" type="Texture" id=1207]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/icon_red.png" type="Texture" id=1208]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/icon.png" type="Texture" id=1209]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/texture_pink.png" type="Texture" id=1210]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/icon_pink.png" type="Texture" id=1211]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/texture_purple.png" type="Texture" id=1212]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/texture.png" type="Texture" id=1213]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/icon_green.png" type="Texture" id=1214]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/texture_red.png" type="Texture" id=1215]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/texture_blue.png" type="Texture" id=1216]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2702,6 +2714,18 @@ palette_icons = [ ExtResource( 1189 ), ExtResource( 1191 ), ExtResource( 1201 ),
 palette_previews = [ ExtResource( 1200 ), ExtResource( 1195 ), ExtResource( 1196 ), ExtResource( 1197 ), ExtResource( 1198 ), ExtResource( 1199 ) ]
 icon = ExtResource( 1189 )
 preview = ExtResource( 1188 )
+
+[node name="BuoyantBouncer" type="Node" parent="PlaceableItems/PlatformsGroup"]
+script = ExtResource( 24 )
+object_id = 125
+is_object = true
+object_center = Vector2( 128, 0 )
+tile_mode_offset = Vector2( 64, 4 )
+tile_mode_step = 64
+palette_icons = [ ExtResource( 1209 ), ExtResource( 1207 ), ExtResource( 1214 ), ExtResource( 1211 ), ExtResource( 1206 ), ExtResource( 1208 ) ]
+palette_previews = [ ExtResource( 1213 ), ExtResource( 1216 ), ExtResource( 1205 ), ExtResource( 1210 ), ExtResource( 1212 ), ExtResource( 1215 ) ]
+icon = ExtResource( 1209 )
+preview = ExtResource( 1213 )
 
 [node name="EnemiesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )

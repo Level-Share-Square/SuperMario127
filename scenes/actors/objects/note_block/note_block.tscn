@@ -108,9 +108,6 @@ texture = ExtResource( 1 )
 patch_margin_left = 8
 patch_margin_right = 8
 axis_stretch_horizontal = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Note" type="Sprite" parent="Visual/NinePatchRect"]
 position = Vector2( 16, 16 )

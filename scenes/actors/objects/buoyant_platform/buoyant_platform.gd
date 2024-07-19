@@ -40,6 +40,8 @@ func _process(_delta):
 onready var sprite = $Sprite
 onready var platform_area_collision_shape = $StaticBody2D/Area2D/CollisionShape2D
 onready var collision_shape = $StaticBody2D/CollisionShape2D
+onready var watercol_shape = $watercol/det
+onready var groundcol_shape = $groundcol/CollisionShape2D
 
 onready var left_width = sprite.patch_margin_left
 onready var right_width = sprite.patch_margin_right
@@ -73,9 +75,13 @@ func _ready():
 
 	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate(true)
 	collision_shape.shape = collision_shape.shape.duplicate(true)
+	watercol_shape.shape = watercol_shape.shape.duplicate(true)
+	groundcol_shape.shape = groundcol_shape.shape.duplicate(true)
 	
 	if !enabled:
 		collision_shape.disabled = true
+		watercol_shape.disabled = true
+		groundcol_shape.disabled = true
 		platform_area_collision_shape.disabled = true
 		
 	update_parts()
@@ -115,6 +121,7 @@ func update_parts():
 
 	platform_area_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 + 20
 	collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
-	
+	watercol_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
+	groundcol_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
 	#calculate the total platform scale
 	scale_x = scale.x * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)

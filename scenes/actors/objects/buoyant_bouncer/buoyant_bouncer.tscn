@@ -1,42 +1,66 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://scenes/actors/objects/buoyant_platform/texture.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/texture_green.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/metal_platform/is_platform_area.gd" type="Script" id=2]
-[ext_resource path="res://scenes/actors/objects/metal_platform/semi_solid_platform.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/texture_pink.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/buoyant_bouncer/buoyant_bouncer.gd" type="Script" id=4]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/texture_purple.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/texture.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/texture_red.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/buoyant_bouncer/texture_blue.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 7.5 )
+extents = Vector2( 16.75, 3.75 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 48, 28 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 31, 5 )
+extents = Vector2( 22.625, 3.25 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 31, 3 )
+extents = Vector2( 22.625, 3 )
 
 [sub_resource type="Animation" id=5]
 length = 0.001
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Sprite:rect_position:x")
+tracks/0/path = NodePath("Sprite:rect_position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( -32, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( -12, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Sprite:rect_position:y")
+tracks/1/path = NodePath("Sprite:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( -12, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( -2, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("bouncecol/CollisionShape2D:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -7.75, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("bouncecol/CollisionShape2D:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -1.75, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 
@@ -44,69 +68,50 @@ tracks/1/keys = {
 resource_name = "bob"
 length = 2.0
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Sprite:rect_position:x")
+tracks/0/path = NodePath("Sprite:position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( -32, -0.25, 0, 0.25, 0, -32, -0.25, 0, 0.25, 0, -32, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( -2, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, -2, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 1, 2 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Sprite:rect_position:y")
+tracks/1/path = NodePath("bouncecol/CollisionShape2D:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( -12, -0.25, 0, 0.25, 0, -6.4, -0.25, 0, 0.25, 0, -12, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1, 2 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("StaticBody2D/CollisionShape2D:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( -3.5, -0.25, 0, 0.25, 0, 2.9, -0.25, 0, 0.25, 0, -3.5, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( -1.75, -0.25, 0, 0.25, 0, 1.28, -0.25, 0, 0.25, 0, -1.75, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 1, 2 )
 }
 
 [node name="CloudPlatform" type="Node2D"]
 z_index = -1
 script = ExtResource( 4 )
+palette_textures = [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 7 ) ]
 
-[node name="Sprite" type="NinePatchRect" parent="."]
-margin_left = -32.0
-margin_top = -12.0
-margin_right = 32.0
-margin_bottom = 6.0
-texture = ExtResource( 1 )
-region_rect = Rect2( 0, 14.514, 64, 17.6495 )
-patch_margin_left = 16
-patch_margin_right = 16
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 4, -2 )
+texture = ExtResource( 6 )
+region_rect = Rect2( -0.062, 3.512, 53.441, 25.206 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
+[node name="bouncecol" type="Area2D" parent="."]
 collision_layer = 16
-script = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 0, -3.5 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bouncecol"]
+position = Vector2( -7.75, -1.75 )
 shape = SubResource( 1 )
-one_way_collision = true
 
-[node name="Area2D" type="Area2D" parent="StaticBody2D"]
+[node name="Area2D" type="Area2D" parent="bouncecol"]
 visible = false
 collision_layer = 16
 collision_mask = 0
 script = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bouncecol/Area2D"]
 shape = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
@@ -116,13 +121,13 @@ collision_layer = 0
 collision_mask = 768
 
 [node name="det" type="CollisionShape2D" parent="watercol"]
-position = Vector2( 0, 5 )
+position = Vector2( -4.625, 10.75 )
 shape = SubResource( 3 )
 
 [node name="groundcol" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="groundcol"]
-position = Vector2( 0, 2 )
+position = Vector2( -4.625, 7 )
 shape = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

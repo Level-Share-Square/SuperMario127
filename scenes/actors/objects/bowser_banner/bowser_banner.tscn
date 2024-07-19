@@ -544,14 +544,12 @@ script = ExtResource( 3 )
 position = Vector2( 0, -45 )
 frames = SubResource( 14 )
 animation = "0"
-frame = 3
 playing = true
 
 [node name="Color" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -45 )
 frames = SubResource( 121 )
 animation = "0"
-frame = 3
 playing = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
