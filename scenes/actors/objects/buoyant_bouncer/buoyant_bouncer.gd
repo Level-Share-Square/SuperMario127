@@ -55,6 +55,7 @@ func _ready():
 	var _connect = waterdet.connect("area_entered", self, "water_entered")
 	var _connect2 = grounddet.connect("body_entered", self, "ground_entered")
 	var _connect3 = bouncedet.connect("body_entered", self, "mario_entered")
+	var _connect4 = waterdet.connect("area_exited", self, "water_exited")
 
 func mario_entered(body):
 	if "Character" in str(body):
@@ -121,6 +122,12 @@ func water_entered(area):
 		if !water_array.empty():
 			water = water_array[0]
 	else: return
+	
+func water_exited(area):
+	if "Col" in str(area):
+		if "Water" in str(area.owner) or "Lava" in str(area.owner):
+				can_collide_with_floor = false
+	water = null
 	
 func ground_entered(body):
 	if "Middle" in str(body):

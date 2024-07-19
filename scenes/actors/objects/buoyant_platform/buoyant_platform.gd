@@ -70,6 +70,7 @@ func _ready():
 	print(grav)
 	var _connect = waterdet.connect("area_entered", self, "water_entered")
 	var _connect2 = grounddet.connect("body_entered", self, "ground_entered")
+	var _connect3 = waterdet.connect("area_exited", self, "water_exited")
 	if override_part_width != 0:
 		part_width = override_part_width
 
@@ -89,12 +90,18 @@ func _ready():
 func water_entered(area):
 	if "Col" in str(area):
 		for i in waterdet.get_overlapping_areas():
-			if "Water" in str(i.owner) or "Area2D" in str(i.owner):
+			if "Water" in str(i.owner) or "Lava" in str(i.owner):
 				water_array.append(i.owner)
 				can_collide_with_floor = false
 		if !water_array.empty():
 			water = water_array[0]
 	else: return
+	
+func water_exited(area):
+	if "Col" in str(area):
+		if "Water" in str(area.owner) or "Lava" in str(area.owner):
+				can_collide_with_floor = false
+	water = null
 	
 func ground_entered(body):
 	if "Middle" in str(body):
