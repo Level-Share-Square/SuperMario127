@@ -61,6 +61,8 @@ var water = null
 var water_array : Array
 var grav
 
+var in_water = false
+
 func _ready():
 	if palette != 0:
 		$Sprite.texture = palette_textures[palette]
@@ -78,6 +80,7 @@ func _ready():
 	collision_shape.shape = collision_shape.shape.duplicate(true)
 	watercol_shape.shape = watercol_shape.shape.duplicate(true)
 	groundcol_shape.shape = groundcol_shape.shape.duplicate(true)
+	$StaticBody2D2.add_child(groundcol_shape.duplicate(true))
 	
 	if !enabled:
 		collision_shape.disabled = true
@@ -89,6 +92,7 @@ func _ready():
 
 func water_entered(area):
 	if "Col" in str(area):
+		in_water = true
 		for i in waterdet.get_overlapping_areas():
 			if "Water" in str(i.owner) or "Lava" in str(i.owner):
 				water_array.append(i.owner)
@@ -100,11 +104,14 @@ func water_entered(area):
 func water_exited(area):
 	if "Col" in str(area):
 		if "Water" in str(area.owner) or "Lava" in str(area.owner):
+			if in_water != false:
 				can_collide_with_floor = false
+		in_water = false
 	water = null
 	
 func ground_entered(body):
 	if "Middle" in str(body):
+		in_water = false
 		if water != null:
 			water = null
 		can_collide_with_floor = true
