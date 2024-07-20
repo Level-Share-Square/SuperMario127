@@ -102,7 +102,8 @@ func load_level():
 	get_parent().close()
 	get_parent().visible = false
 	Singleton2.disable_hotkeys = false
-	Singleton.CurrentLevelData.level_data = LevelInfo.new(active_level_code).level_data
+	if date.selected == 0:
+		Singleton.CurrentLevelData.level_data = LevelInfo.new(main_level_code).level_data
 	get_tree().reload_current_scene()
 	
 
