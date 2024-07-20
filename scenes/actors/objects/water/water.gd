@@ -76,7 +76,6 @@ func change_size():
 	last_front = render_in_front
 
 func _physics_process(_delta):
-
 	for body in area.get_overlapping_bodies():
 		if body is Character:
 			body.breath -= 0.25 * toxicity
@@ -90,15 +89,22 @@ func _physics_process(_delta):
 		var end_pos := global_position.y + height
 		var speed_modifier : float = transform.basis_xform(Vector2(0.0, 1.0)).y
 		global_position.y = move_toward(global_position.y, match_level, move_speed * 2)
-		
+		if global_position.y == match_level:
+			moving = false
+			return
 		if !tap_mode:
 			height += speed_modifier * ((end_pos - global_position.y) - height)
 			change_size() # Letting it happen in _process causes issues
 	else:
 		var end_pos := global_position.x + height
+		if global_position.x == end_pos:
+			moving = false
+			return
 		var speed_modifier : float = transform.basis_xform(Vector2(0.0, 1.0)).x
 		global_position.x = move_toward(global_position.x, match_level, move_speed * 2)
-		
+		if global_position.x == match_level:
+			moving = false
+			return
 		if !tap_mode:
 			height += speed_modifier * ((end_pos - global_position.x) - height)
 			change_size() # Letting it happen in _process causes issues

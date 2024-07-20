@@ -2,11 +2,6 @@ extends Screen
 
 var page = 1
 var total_pages = 333
-var level_codes = []
-var actual_codes = []
-var level_ids = []
-var level_ratings = []
-var creators = []
 var search_cooldown = 5
 var searching = false
 var load_page_1 = true
@@ -39,6 +34,9 @@ onready var comment_button = $Control2/ButtonComm
 # var a = 2
 # var b = "text"
 
+var page_dictionary : Dictionary
+var item_index = 0
+
 func _ready():
 	$AnimationPlayer2.play("spin")
 	level_list.connect("item_selected", self, "on_item_selected")
@@ -61,7 +59,7 @@ func comment_pressed():
 	
 func request(pageno):
 	http.connect("request_completed", self, "_on_request_completed")
-	http.request("https://levelsharesquare.com/api/levels/filter/get?page=" + str(pageno) + "&game=2&keep=true")
+	http.request("https://levelsharesquare.com/api/levels/filter/get?page=" + str(pageno) + "&game=2&authors=true")
 	
 func x_pressed():
 	searching = false
@@ -70,21 +68,19 @@ func x_pressed():
 	page_label.text = "Page: " + str(page)
 	request(page)
 	loading.show()
-	level_ids.clear()
-	level_ratings.clear()
 	level_list.clear()
-	level_codes.clear()
 	search.set_text("")
-	creators.clear()
-	
-func on_text_changed(new_text):
-	if " " in new_text:
-		var text = search.text
-		text.replace(" ", "_")
-		search.text = text
-		pass
+	page_dictionary.clear()
+
+
+func _input(event):
+	if search.has_focus():
+		if event is InputEventKey and event.is_pressed():
+			if event.scancode == KEY_SPACE:
+				get_tree().set_input_as_handled()
 
 func _process(delta):
+	print(selected_level)
 	if "ActiveScreens" in str(get_parent()) && load_page_1 == true:
 		request(1)
 		load_page_1 = false 
@@ -98,7 +94,7 @@ func _process(delta):
 		searching = true
 		page = 0
 		http3.connect("request_completed", self, "_on_request3_completed")
-		var request = "https://levelsharesquare.com/api/levels/filter/get?page=1&game=2&name=" + search.get_text() + "&keep=true"
+		var request = "https://levelsharesquare.com/api/levels/filter/get?page=1&game=2&name=" + search.get_text() + "&authors=true"
 		http3.request(request)
 		
 func left_pressed():
@@ -109,14 +105,11 @@ func left_pressed():
 		
 func load_page():
 	http.cancel_request()
-	actual_codes.clear()
-	level_ratings.clear()
 	page_label.text = "Page: " + str(page)
 	loading.show()
 	level_list.clear()
-	level_ids.clear()
-	level_codes.clear()
-	creators.clear()
+	page_dictionary.clear()
+	comments.comment_dict.clear()
 
 		
 func right_pressed():
@@ -145,54 +138,61 @@ static func is_valid(value : String):
 			return false
 			
 func on_item_selected(index: int):
+	item_index = index
 	if !level_list.is_item_disabled(0):
-		http2.connect("request_completed", self, "_on_request2_completed")
-		http2.request("https://levelsharesquare.com/api/users/" + str(creators[index]))
-		print(level_ids[index])
-		selected_level = level_ids[index]
-		comments.load_comments(selected_level)
-		yield(get_tree().create_timer(0.6), "timeout")
-		rating.set_rating(level_ratings[index])
+		if page_dictionary[index][2] == "":
+			var level_code = page_dictionary[index][1]
+			http2.connect("request_completed", self, "_on_request2_completed")
+			http2.request("https://levelsharesquare.com/api/levels/" + level_code + "/code")
+			selected_level = level_code
+			comments.load_comments(selected_level)
+			yield(get_tree().create_timer(0.6), "timeout")
+			rating.set_rating(page_dictionary[index][3])
+		else:
+			selected_level = page_dictionary[index][1]
+			comments.load_comments(page_dictionary[index][1])
+			rating.set_rating(page_dictionary[index][3])
+			populate_info_panel(LevelInfo.new(page_dictionary[item_index][2]), page_dictionary[item_index][4])
+			info.show()
+			level_list.get_selected_items()[0] = 0
 		
 	
 func on_back():
 	emit_signal("screen_change", "search_screen", "main_menu_screen")
 func on_add():
 	if level_list.is_anything_selected():
-		var level_disk_path = Singleton.SavedLevels.generate_level_disk_path(level_codes[level_list.get_selected_items()[0]])
-		var error_code = Singleton.SavedLevels.save_level_to_disk(level_codes[level_list.get_selected_items()[0]], level_disk_path)
+		var level_disk_path = Singleton.SavedLevels.generate_level_disk_path(page_dictionary[level_list.get_selected_items()[0]][2])
+		var error_code = Singleton.SavedLevels.save_level_to_disk(page_dictionary[level_list.get_selected_items()[0]][2], level_disk_path)
 		if error_code == OK:
-			levels.append(level_codes[level_list.get_selected_items()[0]])
+			levels.append(page_dictionary[level_list.get_selected_items()[0]][2])
 			
 		Singleton.SavedLevels.levels_disk_paths.append(level_disk_path)
 		Singleton.SavedLevels.save_level_paths_to_disk()
 func on_copy():
 	if level_list.is_anything_selected():
-		var level_code = actual_codes[level_list.get_selected_items()[0]]
+		var level_code = page_dictionary[level_list.get_selected_items()[0]][2]
 		OS.clipboard = str(level_code)
 
 
 func _on_request3_completed(result, response_code, headers, body):
 	level_list.set_item_disabled(0, false)
 	var json = JSON.parse(body.get_string_from_utf8())
+	if "message" in str(json.result):
+		level_list.add_item("No Levels found.")
+		level_list.set_item_disabled(0, true)
+		loading.hide()
+		return
 	page_amt = json.result["levels"].size()
 	if page_amt == 0:
 		level_list.add_item("No Levels found.")
 		level_list.set_item_disabled(0, true)
 	else:
 		for i in page_amt:
-			var level_code = json.result["levels"][i]["code"]
 			var level_id = json.result["levels"][i]["_id"]
 			var level_rating = json.result["levels"][i]["rating"]
-			if is_valid(level_code):
-				var level_info : LevelInfo = LevelInfo.new(level_code)
-				level_codes.append(level_info)
-				level_ids.append(level_id)
-				level_ratings.append(level_rating)
-				actual_codes.append(level_code)
-				level_list.add_item(level_info.level_name)
-		for i in page_amt:
-			creators.append(json.result["levels"][i]["author"])
+			var level_name = json.result["levels"][i]["name"]
+			var username = json.result["levels"][i]["author"]["username"]
+			page_dictionary[i] = [level_name, level_id, "", level_rating, username]
 	loading.hide()
 
 func _on_request_completed(result, response_code, headers, body):
@@ -200,27 +200,22 @@ func _on_request_completed(result, response_code, headers, body):
 		level_list.set_item_disabled(0, false)
 		var json = JSON.parse(body.get_string_from_utf8())
 		total_pages = json.result["numberOfPages"]
-		page_amt = json.result["levels"].size() - 1
+		page_amt = json.result["levels"].size()
 		for i in page_amt:
-			var level_code = json.result["levels"][i]["code"]
 			var level_id = json.result["levels"][i]["_id"]
 			var level_rating = json.result["levels"][i]["rating"]
-			if is_valid(level_code):
-				var level_info : LevelInfo = LevelInfo.new(level_code)
-				level_codes.append(level_info)
-				level_ids.append(level_id)
-				actual_codes.append(level_code)
-				level_ratings.append(level_rating)
-				level_list.add_item(level_info.level_name)
-		for i in page_amt:
-			creators.append(json.result["levels"][i]["author"])
+			var level_name = json.result["levels"][i]["name"]
+			var username = json.result["levels"][i]["author"]["username"]
+			page_dictionary[i] = [level_name, level_id, "", level_rating, username]
+			level_list.add_item(level_name)
 		loading.hide()
 		
 func _on_request2_completed(result, response_code, headers, body):
+	print(response_code)
 	if !level_list.is_item_disabled(0):
 		var json = JSON.parse(body.get_string_from_utf8())
-		var username = json.result["user"]["username"]
-		populate_info_panel(level_codes[level_list.get_selected_items()[0]], username)
+		page_dictionary[item_index][2] = json.result["levelData"]
+		populate_info_panel(LevelInfo.new(page_dictionary[item_index][2]), page_dictionary[item_index][4])
 		info.show()
 		level_list.get_selected_items()[0] = 0
 

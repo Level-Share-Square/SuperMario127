@@ -16,6 +16,8 @@ onready var panel = $PanelContainer2
 onready var panel1 = $PanelContainer
 onready var levellist = $LevelListPanel
 
+var comment_dict : Dictionary
+
 func _process(delta):
 	$PanelContainer2/buttonX.margin_left = 220
 
@@ -54,26 +56,37 @@ func post_pressed():
 			pass
 	
 func load_comments(level_id : String ="651f32fcb239ad06ffcb9af2"):
-	author_info.clear()
-	level_comment_info.clear()
-	httpreq1.connect("request_completed", self, "on_req1_complete")
-	httpreq1.request("https://levelsharesquare.com/api/levels/" + level_id + "/comments?page=1")
+	if comment_dict.has(level_id):
+		label.text = comment_dict[level_id]
+	else:
+		author_info.clear()
+		level_comment_info.clear()
+		httpreq1.connect("request_completed", self, "on_req1_complete")
+		httpreq1.request("https://levelsharesquare.com/api/levels/" + level_id + "/comments?page=1")
 
 func on_req2_complete(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8())
 	print(response_code)
 	print(json.result)
-	load_comments(get_parent().selected_level)
+	author_info.clear()
+	level_comment_info.clear()
+	httpreq1.connect("request_completed", self, "on_req1_complete")
+	httpreq1.request("https://levelsharesquare.com/api/levels/" + get_parent().selected_level + "/comments?page=1")
 	textedit.text = "Comment"
 
 func on_req1_complete(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8())
+	if json.result == null:
+		label.text = "An error occured. Please try again later!"
+		label.modulate.a = 0.5
+		return
 	if json.result["total"] != 0:
 		label.text = ""
 		label.modulate.a = 1
 		var comments = json.result["levelComments"]
 		for i in json.result["levelComments"].size():
 			label.text += comments[i]["author"]["username"] + ": \n" + comments[i]["content"] + "\n\n"
+			comment_dict[get_parent().selected_level] = label.text
 	
 	else:
 		label.text = "No comments found. Be the first!"
