@@ -92,6 +92,7 @@ tracks/1/keys = {
 z_index = -1
 script = ExtResource( 4 )
 palette_textures = [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 7 ) ]
+override_part_width = null
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 4, -2 )
