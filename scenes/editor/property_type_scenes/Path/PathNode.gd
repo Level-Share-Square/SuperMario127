@@ -65,12 +65,14 @@ func _on_PathNodeButton_gui_input(event):
 		elif !event.pressed && event.button_index == BUTTON_LEFT:
 			held = false
 		elif event.pressed and event.button_index == BUTTON_RIGHT:
-			if handles_active && Input.is_action_pressed("modkey"):
+			if handles_active && Input.is_action_pressed("path_editor_modkey"):
 				set_handles_active(false)
 				return
 			delete()
 	if held && event is InputEventMouseMotion:
 		position = ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().editor.get_global_mouse_position())
+		if Input.is_action_pressed("path_editor_snap"):
+			position = position.snapped(Vector2(8, 8))
 		ui.get_ref().update_node_position(self)
 
 func _on_left_handle_gui_input(event):
@@ -81,7 +83,7 @@ func _on_left_handle_gui_input(event):
 		elif !event.pressed && event.button_index == BUTTON_LEFT:
 			left_handle_held = false
 	if left_handle_held && event is InputEventMouseMotion:
-		move_handle(HANDLE_LEFT, ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().editor.get_global_mouse_position()) - position)
+		move_handle(HANDLE_LEFT, ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().editor.get_global_mouse_position()) - position, true)
 
 
 func _on_right_handle_gui_input(event):
@@ -92,13 +94,14 @@ func _on_right_handle_gui_input(event):
 		elif !event.pressed && event.button_index == BUTTON_LEFT:
 			right_handle_held = false
 	if right_handle_held && event is InputEventMouseMotion:
-		move_handle(HANDLE_RIGHT, ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().editor.get_global_mouse_position()) - position)
+		move_handle(HANDLE_RIGHT, ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().editor.get_global_mouse_position()) - position, true)
 
 
-func move_handle(handle: int, new_pos: Vector2):
+func move_handle(handle: int, new_pos: Vector2, moved_by_user: bool = false):
 		var handle_ref = right_handle if handle == HANDLE_RIGHT else left_handle
+		if moved_by_user && Input.is_action_pressed("path_editor_snap"):
+			new_pos = new_pos.snapped(Vector2(8, 8))
 		handle_ref.position = new_pos
-		
 		handle_ref.get_node("Handle%sLine" % ("R" if handle == HANDLE_RIGHT else "L")).points[1] = handle_ref.to_local(global_position)
 		if handles_linked:
 			handle_ref = left_handle if handle == HANDLE_RIGHT else right_handle

@@ -1,0 +1,41 @@
+[gd_resource type="Resource" load_steps=13 format=2]
+
+[ext_resource path="res://classes/SkyResource.gd" type="Script" id=1]
+[ext_resource path="res://scenes/shared/background/backgrounds/galaxy/galaxy10.png" type="Texture" id=2]
+[ext_resource path="res://scenes/shared/background/backgrounds/galaxy/galaxy8.png" type="Texture" id=3]
+[ext_resource path="res://scenes/shared/background/backgrounds/galaxy/galaxy6.png" type="Texture" id=4]
+[ext_resource path="res://scenes/shared/background/backgrounds/galaxy/galaxy9.png" type="Texture" id=5]
+[ext_resource path="res://scenes/shared/background/backgrounds/galaxy/galaxy7.png" type="Texture" id=6]
+[ext_resource path="res://scenes/shared/background/backgrounds/galaxy/galaxy5.png" type="Texture" id=7]
+[ext_resource path="res://scenes/shared/background/backgrounds/galaxy/galaxy3.png" type="Texture" id=8]
+[ext_resource path="res://scenes/shared/background/backgrounds/galaxy/galaxy4.png" type="Texture" id=9]
+[ext_resource path="res://scenes/shared/background/backgrounds/galaxy/galaxy1.png" type="Texture" id=10]
+[ext_resource path="res://scenes/shared/background/backgrounds/galaxy/galaxy2.png" type="Texture" id=11]
+
+[sub_resource type="AnimatedTexture" id=1]
+frames = 10
+fps = 8.0
+frame_0/texture = ExtResource( 10 )
+frame_1/texture = ExtResource( 11 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 8 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 9 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 7 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 4 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 6 )
+frame_6/delay_sec = 0.0
+frame_7/texture = ExtResource( 3 )
+frame_7/delay_sec = 0.0
+frame_8/texture = ExtResource( 5 )
+frame_8/delay_sec = 0.0
+frame_9/texture = ExtResource( 2 )
+frame_9/delay_sec = 0.0
+
+[resource]
+script = ExtResource( 1 )
+texture = SubResource( 1 )
+parallax_modulate = Color( 0.380392, 0.6, 0.745098, 1 )

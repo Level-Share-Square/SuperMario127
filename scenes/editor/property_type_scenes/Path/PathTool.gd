@@ -50,20 +50,10 @@ func _process(delta):
 
 		if is_instance_valid(last_hovered_node) && last_hovered_node.check_if_hovered() == false && current_mode == MODE_SELECT:
 			selected_node.deselect()
-		if current_mode == MODE_PLACE:
+		if current_mode == MODE_PLACE && !($CloseButton.is_hovered() || $ConfirmButton.is_hovered()):
 			add_node(inverse_transform.xform(editor.get_global_mouse_position()))
 
 
-func _gui_input(event) -> void:
-	if event.is_action_released("place"):
-		if current_mode == MODE_PLACE:
-			add_node(path_node_container.get_local_transform().xform(mouse_position))
-		elif is_instance_valid(last_hovered_node) && last_hovered_node.hovered == false:
-			selected_node.release_focus()
-		accept_event()
-
-
-	
 func add_node(point : Vector2, point_in: Vector2 = Vector2.ZERO, point_out: Vector2 = Vector2.ZERO):
 	var new_node = path_node.instance()
 	var curve_ref = line.get_node("path").curve
