@@ -10,12 +10,15 @@ export(Array, Texture) var palette_textures
 export var parts := 1
 var last_parts := 1
 
+var physics_enabled := true
+
 func _set_properties():
-	savable_properties = ["parts"]
-	editable_properties = ["parts"]
+	savable_properties = ["parts", "physics_enabled"]
+	editable_properties = ["parts", "physics_enabled"]
 	
 func _set_property_values():
 	set_property("parts", parts, 1)
+	set_property("physics_enabled", physics_enabled)
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
@@ -70,9 +73,10 @@ func _ready():
 	var editor = get_tree().current_scene
 	grav = editor.level_area.settings.gravity
 	print(grav)
-	var _connect = waterdet.connect("area_entered", self, "water_entered")
-	var _connect2 = grounddet.connect("body_entered", self, "ground_entered")
-	var _connect3 = waterdet.connect("area_exited", self, "water_exited")
+	if physics_enabled:
+		var _connect = waterdet.connect("area_entered", self, "water_entered")
+		var _connect2 = grounddet.connect("body_entered", self, "ground_entered")
+		var _connect3 = waterdet.connect("area_exited", self, "water_exited")
 	if override_part_width != 0:
 		part_width = override_part_width
 
@@ -84,9 +88,12 @@ func _ready():
 	
 	if !enabled:
 		collision_shape.disabled = true
+		
+	if !physics_enabled:
 		watercol_shape.disabled = true
 		groundcol_shape.disabled = true
 		platform_area_collision_shape.disabled = true
+		can_collide_with_floor = true
 		
 	update_parts()
 
@@ -122,7 +129,37 @@ func ground_entered(body):
 func _physics_process(delta):
 	if !"Editor" in str(get_tree().current_scene):
 		if is_instance_valid(water):
-			position.y = water.position.y - 9
+			
+			if rotation_degrees > 0 and rotation_degrees < 90:
+				global_position.x += (rotation_degrees/90) * 3
+			if rotation_degrees < 0:
+				#global_position.x -= (-(rotation_degrees/90) + 4) * 3
+				global_position.x += (rotation_degrees/90) * 3
+				
+				
+			
+			var top_left = water.global_position
+			var top_right = water.transform.xform(Vector2(water.width, 0))
+			var bottom_right = water.transform.xform(Vector2(water.width, water.height))
+			var bottom_left = water.transform.xform(Vector2(0, water.height))
+			var corners = [top_left, top_right, bottom_right, bottom_left]
+			
+			var largest = 0
+			for i in range(1, 4):
+				if corners[i].y < corners[largest].y:
+					largest = i
+				
+			var slope
+			if global_position.x < corners[largest].x:
+				rotation = lerp_angle(rotation, atan2(corners[largest-1].y - corners[largest].y, corners[largest-1].x - corners[largest].x) + PI, 0.01)
+				slope = tan(atan2(corners[largest-1].y - corners[largest].y, corners[largest-1].x - corners[largest].x))
+				global_position.y = lerp(global_position.y, slope * global_position.x + (corners[largest-1].y - slope * corners[largest-1].x), 0.1)
+			else:
+				rotation = lerp_angle(rotation, atan2(corners[largest].y - corners[(largest + 1) % 4].y, corners[largest].x - corners[(largest + 1) % 4].x) + PI, 0.01)
+				#rotation_degrees += 180
+				slope = tan(atan2(corners[largest].y - corners[(largest + 1) % 4].y, corners[largest].x - corners[(largest + 1) % 4].x))
+				global_position.y = lerp(global_position.y, slope * global_position.x + (corners[largest].y - slope * corners[largest].x), 0.1)
+			
 			animplay.play("bob")
 		else:
 			animplay.play("RESET")

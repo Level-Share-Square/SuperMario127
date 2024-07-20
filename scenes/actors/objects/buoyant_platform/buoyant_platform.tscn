@@ -59,7 +59,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1, 2 )
 }
 
-[node name="CloudPlatform" type="Node2D"]
+[node name="BuoyantPlatform" type="Node2D"]
 z_index = -1
 script = ExtResource( 4 )
 palette_textures = [ ExtResource( 1 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ) ]
