@@ -146,6 +146,10 @@ func _ready():
 	if(mode==1):
 		platform.modulate = transparent_color
 		
+		# i don't know why this fixes the layering, 1.0 doesn't work and 0.0 doesn't work
+		# this is an integer
+		platform.z_index -= 0.5
+		
 		start_sprite_node = Node2D.new()
 		start_sprite_node.add_child(platform_sprite.duplicate())
 		start_sprite_node.add_child(platform_sprite_recolor.duplicate())
