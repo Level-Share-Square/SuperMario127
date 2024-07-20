@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/menu/search/comments/comments.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=3]
@@ -6,11 +6,54 @@
 [ext_resource path="res://assets/styles/LevelListPanel.tres" type="StyleBox" id=5]
 [ext_resource path="res://assets/fonts/DelfinoFont.tres" type="DynamicFont" id=6]
 [ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/styles/whitecurved.tres" type="StyleBox" id=9]
+
+[sub_resource type="StyleBoxFlat" id=12]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.141176, 0.207843, 0.588235, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="DynamicFont" id=13]
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.498039, 0.498039, 0.498039, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=16]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=17]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
 
 [sub_resource type="DynamicFont" id=2]
 size = 20
@@ -25,17 +68,6 @@ font_data = ExtResource( 4 )
 [sub_resource type="StyleBoxEmpty" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=7]
-
-[sub_resource type="StyleBoxFlat" id=12]
-content_margin_left = 16.0
-content_margin_right = 16.0
-content_margin_top = 8.0
-content_margin_bottom = 8.0
-bg_color = Color( 0.141176, 0.207843, 0.588235, 1 )
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id=8]
 content_margin_left = 16.0
@@ -68,6 +100,69 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("PanelContainer:rect_position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 509, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("PanelContainer:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 79, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("PanelContainer:rect_size:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 251, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("PanelContainer:rect_size:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 349, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "focus"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("PanelContainer:rect_size:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 251, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("PanelContainer:rect_size:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 349, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 
@@ -125,42 +220,6 @@ margin_right = 268.0
 rect_pivot_offset = Vector2( 34, -11 )
 script = ExtResource( 1 )
 
-[node name="PanelContainer2" type="PanelContainer" parent="."]
-margin_left = 502.0
-margin_top = 5.0
-margin_right = 768.0
-margin_bottom = 65.0
-custom_styles/panel = ExtResource( 5 )
-
-[node name="TextEdit" type="LineEdit" parent="PanelContainer2"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 258.0
-margin_bottom = 52.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 13 )
-custom_styles/normal = ExtResource( 9 )
-placeholder_text = "Comment"
-placeholder_alpha = 0.422
-
-[node name="buttonX" parent="PanelContainer2" instance=ExtResource( 3 )]
-margin_left = 244.0
-margin_top = 8.0
-margin_right = 258.0
-margin_bottom = 52.0
-size_flags_horizontal = 8
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
-custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 2 )
-custom_styles/hover = SubResource( 3 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/disabled = SubResource( 6 )
-custom_styles/normal = SubResource( 7 )
-text = "X"
-
 [node name="LevelListPanel" type="PanelContainer" parent="."]
 margin_left = 502.0
 margin_top = 70.0
@@ -192,6 +251,46 @@ size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 6 )
 autowrap = true
 
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+margin_left = 502.0
+margin_top = 5.0
+margin_right = 768.0
+margin_bottom = 65.0
+custom_styles/panel = ExtResource( 5 )
+
+[node name="TextEdit" type="Button" parent="PanelContainer2"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 258.0
+margin_bottom = 52.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 13 )
+custom_styles/hover = SubResource( 15 )
+custom_styles/pressed = SubResource( 16 )
+custom_styles/normal = SubResource( 17 )
+text = "Comment"
+clip_text = true
+align = 0
+
+[node name="buttonX" parent="PanelContainer2" instance=ExtResource( 3 )]
+visible = false
+margin_left = 244.0
+margin_top = 8.0
+margin_right = 258.0
+margin_bottom = 52.0
+size_flags_horizontal = 8
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+text = "X"
+
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
 [node name="HTTPRequest2" type="HTTPRequest" parent="."]
@@ -213,5 +312,6 @@ text = "Post"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 9 )
+anims/focus = SubResource( 14 )
 anims/in = SubResource( 10 )
 anims/out = SubResource( 11 )

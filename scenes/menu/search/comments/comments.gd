@@ -11,11 +11,17 @@ onready var post = $"PostButton"
 onready var label = $ScrollContainer/Label
 onready var httpreq2 = $HTTPRequest2
 
+onready var scroll = $ScrollContainer
+onready var panel = $PanelContainer2
+onready var panel1 = $PanelContainer
+onready var levellist = $LevelListPanel
+
 func _process(delta):
 	$PanelContainer2/buttonX.margin_left = 220
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	textedit.connect("button_down", self, "on_edit")
 	back.connect("button_down", self, "back_pressed")
 	post.connect("button_down", self, "post_pressed")
 	load_comments()
@@ -26,15 +32,26 @@ func anim_in():
 func back_pressed():
 	anim.play("out")
 
+func on_edit():
+	var window = preload("res://scenes/editor/window/TextInput2.tscn")
+	var window_child = window.instance()
+	Singleton2.disable_hotkeys = true
+	add_child(window_child)
+	window_child.set_as_toplevel(true)
+	window_child.get_node("Contents/TextEdit").text = textedit.text
+	window_child.get_node("Contents/CancelButton").string = self
+	window_child.get_node("Contents/SaveButton").string = self
+
 func post_pressed():
-	if get_parent().selected_level != "" || UserInfo.token != "":
-		var dic = {"level" : get_parent().selected_level, "author": UserInfo.id, "content": textedit.text}
-		var body = JSON.print(dic)
-		var headers = ["Authorization: Bearer " + UserInfo.token, "Content-Type: application/json", "Accept: application/json"]
-		httpreq2.connect("request_completed", self, "on_req2_complete")
-		var result = httpreq2.request("https://levelsharesquare.com/api/levels/" + get_parent().selected_level + "/comment", headers, true, 2, body)
-	else:
-		pass
+	if textedit.text != "Comment" or textedit.text != "":
+		if get_parent().selected_level != "" || UserInfo.token != "":
+			var dic = {"level" : get_parent().selected_level, "author": UserInfo.id, "content": textedit.text}
+			var body = JSON.print(dic)
+			var headers = ["Authorization: Bearer " + UserInfo.token, "Content-Type: application/json", "Accept: application/json"]
+			httpreq2.connect("request_completed", self, "on_req2_complete")
+			var result = httpreq2.request("https://levelsharesquare.com/api/levels/" + get_parent().selected_level + "/comment", headers, true, 2, body)
+		else:
+			pass
 	
 func load_comments(level_id : String ="651f32fcb239ad06ffcb9af2"):
 	author_info.clear()
@@ -47,7 +64,7 @@ func on_req2_complete(result, response_code, headers, body):
 	print(response_code)
 	print(json.result)
 	load_comments(get_parent().selected_level)
-	textedit.text = ""
+	textedit.text = "Comment"
 
 func on_req1_complete(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8())

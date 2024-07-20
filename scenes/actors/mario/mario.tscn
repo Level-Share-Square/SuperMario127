@@ -1802,7 +1802,6 @@ offset = Vector2( 0, 4 )
 show_behind_parent = true
 material = SubResource( 50 )
 frames = SubResource( 60 )
-frame = -1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

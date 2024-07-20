@@ -39,6 +39,8 @@ format = 1
 [node name="Middle" type="TileMap" parent="Tilemaps"]
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
+collision_layer = 16385
+collision_mask = 16385
 format = 1
 
 [node name="Front" type="TileMap" parent="Tilemaps"]

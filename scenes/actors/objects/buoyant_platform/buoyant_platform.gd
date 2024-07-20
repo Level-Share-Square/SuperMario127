@@ -45,6 +45,7 @@ onready var platform_area_collision_shape = $StaticBody2D/Area2D/CollisionShape2
 onready var collision_shape = $StaticBody2D/CollisionShape2D
 onready var watercol_shape = $watercol/det
 onready var groundcol_shape = $groundcol/CollisionShape2D
+onready var topcol_shape = $topcol/CollisionShape2D
 
 onready var left_width = sprite.patch_margin_left
 onready var right_width = sprite.patch_margin_right
@@ -60,6 +61,7 @@ onready var animplay = $AnimationPlayer
 # initialize parameters for query
 onready var waterdet = $watercol
 onready var grounddet = $groundcol
+onready var topdet = $topcol
 var water = null
 var water_array : Array
 var grav
@@ -84,7 +86,7 @@ func _ready():
 	collision_shape.shape = collision_shape.shape.duplicate(true)
 	watercol_shape.shape = watercol_shape.shape.duplicate(true)
 	groundcol_shape.shape = groundcol_shape.shape.duplicate(true)
-	$StaticBody2D2.add_child(groundcol_shape.duplicate(true))
+	topcol_shape.shape = topcol_shape.shape.duplicate(true)
 	
 	if !enabled:
 		collision_shape.disabled = true
@@ -98,7 +100,8 @@ func _ready():
 	update_parts()
 
 func water_entered(area):
-	if "Col" in str(area):
+	print(area)
+	if "Col" in str(area) or "Area2D" in str(area):
 		in_water = true
 		for i in waterdet.get_overlapping_areas():
 			if "Water" in str(i.owner) or "Lava" in str(i.owner):
@@ -109,12 +112,14 @@ func water_entered(area):
 	else: return
 	
 func water_exited(area):
-	if "Col" in str(area):
+	if topdet.get_overlapping_bodies().size() > 0 or topdet.get_overlapping_areas().size() > 0:
+		can_collide_with_floor = false
+	if "Col" in str(area) or "Area2D" in str(area):
 		if "Water" in str(area.owner) or "Lava" in str(area.owner):
 			if in_water != false:
 				can_collide_with_floor = false
 		in_water = false
-	water = null
+#	water = null
 	
 func ground_entered(body):
 	if "Middle" in str(body):
@@ -153,12 +158,12 @@ func _physics_process(delta):
 			if global_position.x < corners[largest].x:
 				rotation = lerp_angle(rotation, atan2(corners[largest-1].y - corners[largest].y, corners[largest-1].x - corners[largest].x) + PI, 0.01)
 				slope = tan(atan2(corners[largest-1].y - corners[largest].y, corners[largest-1].x - corners[largest].x))
-				global_position.y = lerp(global_position.y, slope * global_position.x + (corners[largest-1].y - slope * corners[largest-1].x), 0.1)
+				global_position.y = lerp(global_position.y, slope * global_position.x + (corners[largest-1].y - slope * corners[largest-1].x) - 9, 0.1)
 			else:
 				rotation = lerp_angle(rotation, atan2(corners[largest].y - corners[(largest + 1) % 4].y, corners[largest].x - corners[(largest + 1) % 4].x) + PI, 0.01)
 				#rotation_degrees += 180
 				slope = tan(atan2(corners[largest].y - corners[(largest + 1) % 4].y, corners[largest].x - corners[(largest + 1) % 4].x))
-				global_position.y = lerp(global_position.y, slope * global_position.x + (corners[largest].y - slope * corners[largest].x), 0.1)
+				global_position.y = lerp(global_position.y, slope * global_position.x + (corners[largest].y - slope * corners[largest].x) - 9, 0.1)
 			
 			animplay.play("bob")
 		else:
@@ -174,5 +179,6 @@ func update_parts():
 	collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
 	watercol_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
 	groundcol_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
+	topcol_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
 	#calculate the total platform scale
 	scale_x = scale.x * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)
