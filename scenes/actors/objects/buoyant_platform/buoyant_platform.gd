@@ -196,6 +196,7 @@ func _physics_process(delta):
 				result_vector += Vector2(0, grav * 0.4)
 			rotation = lerp_angle(rotation, 0, 0.1)
 		set_position(result_vector)
+
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts

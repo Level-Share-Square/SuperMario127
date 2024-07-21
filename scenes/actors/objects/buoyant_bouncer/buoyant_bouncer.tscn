@@ -24,58 +24,14 @@ extents = Vector2( 22.625, 3 )
 [sub_resource type="Animation" id=5]
 length = 0.001
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Sprite:rect_position:y")
+tracks/0/path = NodePath("bouncecol/CollisionShape2D:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( -12, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Sprite:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( -2, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("bouncecol/CollisionShape2D:position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "points": PoolRealArray( -7.75, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("bouncecol/CollisionShape2D:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( -1.75, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "bob"
-length = 2.0
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Sprite:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( -2, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, -2, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1, 2 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath("bouncecol/CollisionShape2D:position:y")
@@ -84,6 +40,20 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
+"points": PoolRealArray( -1.75, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "bob"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("bouncecol/CollisionShape2D:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
 "points": PoolRealArray( -1.75, -0.25, 0, 0.25, 0, 1.28, -0.25, 0, 0.25, 0, -1.75, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 1, 2 )
 }
@@ -92,12 +62,13 @@ tracks/1/keys = {
 z_index = -1
 script = ExtResource( 4 )
 palette_textures = [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 7 ) ]
-override_part_width = null
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 4, -2 )
+[node name="Sprite" type="NinePatchRect" parent="."]
+margin_left = -28.0
+margin_top = -19.0
+margin_right = 36.0
+margin_bottom = 15.0
 texture = ExtResource( 6 )
-region_rect = Rect2( -0.062, 3.512, 53.441, 25.206 )
 
 [node name="bouncecol" type="Area2D" parent="."]
 collision_layer = 16
@@ -129,6 +100,14 @@ shape = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="groundcol"]
 position = Vector2( -4.625, 7 )
+shape = SubResource( 4 )
+
+[node name="topcol" type="Area2D" parent="."]
+collision_layer = 16384
+collision_mask = 16384
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="topcol"]
+position = Vector2( -5, 0 )
 shape = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
