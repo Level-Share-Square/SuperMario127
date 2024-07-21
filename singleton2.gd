@@ -15,7 +15,7 @@ var autosave_timer : int = 108000
 var time : int
 var new_box
 
-var default_hotkeys = [
+var editor_hotkeys = [
 	"toggle_grid",
 	"zoom_in",
 	"zoom_out",
@@ -31,8 +31,23 @@ var default_hotkeys = [
 	"flip_object",
 	"flip_object_v",
 	"toggle_enabled",
+	"invis_ui",
 ]
 
+var player_hotkeys = [
+	"pause",
+	"mute",
+	"toggle_show",
+	"reload",
+	"reload_from_start",
+	"toggle_crt",
+	"fullscreen",
+	"volume_up",
+	"volume_down",
+	"1",
+]
+
+var default_hotkeys = editor_hotkeys + player_hotkeys
 signal dark_mode_toggled
 
 func toggle_dark_mode():

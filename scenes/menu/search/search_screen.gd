@@ -32,6 +32,7 @@ onready var http4 = $HTTPRequest4
 onready var comments = $Comments
 onready var page_amt = 10
 onready var comment_button = $Control2/ButtonComm
+onready var star = preload("res://scenes/editor/assets/star.png")
 # var a = 2
 # var b = "text"
 
@@ -161,10 +162,10 @@ func on_back():
 	emit_signal("screen_change", "search_screen", "main_menu_screen")
 func on_add():
 	if level_list.is_anything_selected():
-		var level_disk_path = Singleton.SavedLevels.generate_level_disk_path(page_dictionary[level_list.get_selected_items()[0]][2])
-		var error_code = Singleton.SavedLevels.save_level_to_disk(page_dictionary[level_list.get_selected_items()[0]][2], level_disk_path)
+		var level_disk_path = Singleton.SavedLevels.generate_level_disk_path(LevelInfo.new(page_dictionary[level_list.get_selected_items()[0]][2]))
+		var error_code = Singleton.SavedLevels.save_level_to_disk(LevelInfo.new(page_dictionary[level_list.get_selected_items()[0]][2]), level_disk_path)
 		if error_code == OK:
-			levels.append(page_dictionary[level_list.get_selected_items()[0]][2])
+			levels.append(LevelInfo.new(page_dictionary[level_list.get_selected_items()[0]][2]))
 			
 		Singleton.SavedLevels.levels_disk_paths.append(level_disk_path)
 		Singleton.SavedLevels.save_level_paths_to_disk()
@@ -177,7 +178,7 @@ func on_copy():
 func _on_request3_completed(result, response_code, headers, body):
 	level_list.set_item_disabled(0, false)
 	var json = JSON.parse(body.get_string_from_utf8())
-	if "message" in str(json.result):
+	if json.result["message"] != "Success.":
 		level_list.add_item("No Levels found.")
 		level_list.set_item_disabled(0, true)
 		loading.hide()
@@ -188,7 +189,6 @@ func _on_request3_completed(result, response_code, headers, body):
 		level_list.set_item_disabled(0, true)
 	else:
 		for i in page_amt:
-			print(i)
 			var level_id = json.result["levels"][i]["_id"]
 			var level_rating = json.result["levels"][i]["rating"]
 			var level_name = json.result["levels"][i]["name"]
@@ -200,6 +200,9 @@ func _on_request3_completed(result, response_code, headers, body):
 				thumbnail = ""
 			page_dictionary[i] = [level_name, level_id, "", level_rating, username, thumbnail]
 			level_list.add_item(level_name)
+			print(level_rating)
+			if level_rating > 4.5:
+				level_list.set_item_icon(i, star)
 	loading.hide()
 
 func _on_request_completed(result, response_code, headers, body):
@@ -220,6 +223,8 @@ func _on_request_completed(result, response_code, headers, body):
 				thumbnail = ""
 			page_dictionary[i] = [level_name, level_id, "", level_rating, username, thumbnail]
 			level_list.add_item(level_name)
+			if level_rating >= 4.5:
+				level_list.set_item_icon(i, star)
 		loading.hide()
 		
 func _on_request2_completed(result, response_code, headers, body):

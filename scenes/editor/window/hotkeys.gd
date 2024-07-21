@@ -16,6 +16,10 @@ var hotkey
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if "LevelSettingsWindow" in str(get_parent()):
+		hide()
+	else:
+		show()
 	var file = File.new()
 	if file.file_exists("user://hotkeys/hotkeys.file"):
 		file.open("user://hotkeys/hotkeys.file", File.READ)
@@ -25,12 +29,29 @@ func _ready():
 	reset.connect("button_down", self, "reset_pressed")
 	inputevent = null
 	hotkey = null
+	var j = 0
 	for i in hotkey_parent.get_children():
-		i.connect("button_down", self, "button_pressed", [i.name])
-		var action_name = i.name
-		hotkeys[action_name] = InputMap.get_action_list(action_name)[0]
-		i.text = InputMap.get_action_list(action_name)[0].as_text()
-		label.text += i.full_name + "\n"
+		if "LevelSettingsWindow" in str(get_parent()):
+			if Singleton2.editor_hotkeys.has(i.name):
+				print(i)
+				i.show()
+				var action_name = i.name
+				hotkeys[action_name] = InputMap.get_action_list(action_name)[0]
+				i.text = InputMap.get_action_list(action_name)[0].as_text()
+				label.text += i.full_name + "\n"
+				i.connect("button_down", self, "button_pressed", [i.name])
+			else:
+				i.hide()
+				
+		else:
+			settings.hide()
+			reset.hide()
+			i.show()
+			var action_name = i.name
+			hotkeys[action_name] = InputMap.get_action_list(action_name)[0]
+			i.text = InputMap.get_action_list(action_name)[0].as_text()
+			label.text += i.full_name + "\n"
+			i.connect("button_down", self, "button_pressed", [i.name])
 
 func _input(event):
 	if event is InputEventKey && timer >= 0 && timer < 600:
@@ -90,6 +111,7 @@ func reset_pressed():
 	var file = File.new()
 	file.open("user://hotkeys/defhotkeys.file", File.READ)
 	var result = file.get_var()
+	print(result)
 	load_hotkeys(result)
 	file.close()
 	
