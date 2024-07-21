@@ -167,6 +167,7 @@ var ghost_anim = []
 var temp_gp = []
 var temp_ga = []
 var temp_gsr = []
+var temp_gar = []
 
 var can_heal : bool = true
 var healing_timer_enabled := false
@@ -289,9 +290,7 @@ const ANIM_IDS : Dictionary = {
 }
 
 func _ready():
-	
-	temp_ga = []
-	temp_gp = []
+
 
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
@@ -946,15 +945,17 @@ func _physics_process(delta: float) -> void:
 			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
 			print("hi")
 	if !Singleton2.save_ghost:
-		temp_gp.append(Vector2(int(position.x), int(position.y)))
-		temp_ga.append(ANIM_IDS[sprite.animation])
-		temp_gsr.append(int(sprite.rotation_degrees))
+		GhostArrays.temp_gp.append(Vector2(int(position.x), int(position.y)))
+		GhostArrays.temp_ga.append(ANIM_IDS[sprite.animation])
+		GhostArrays.temp_gsr.append(int(sprite.rotation_degrees))
+		GhostArrays.temp_gar.append(Singleton.CurrentLevelData.area)
 	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
 	if Singleton2.save_ghost == true:
 		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.WRITE)
-		file.store_var(temp_gp)
-		file.store_var(temp_ga)
-		file.store_var(temp_gsr)
+		file.store_var(GhostArrays.temp_gp)
+		file.store_var(GhostArrays.temp_ga)
+		file.store_var(GhostArrays.temp_gsr)
+		file.store_var(GhostArrays.temp_gar)
 		file.close()
 		
 		
@@ -981,6 +982,7 @@ func switch_areas(area_id, transition_time):
 
 	
 func kill(cause: String) -> void:
+	var r_press = false
 	if !dead:
 		if Singleton.PlayerSettings.other_player_id != -1:
 			get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())
@@ -1000,6 +1002,7 @@ func kill(cause: String) -> void:
 				reload = false
 		elif cause == "reload":
 			transition_time = 0.4
+			r_press = true
 		elif cause == "green_demon":
 			sound_player.play_last_hit_sound()
 			controllable = false
@@ -1029,7 +1032,7 @@ func kill(cause: String) -> void:
 				reload = false
 		
 		if reload:
-			Singleton.SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
+			Singleton.SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true, r_press)
 		else:
 			yield(get_tree().create_timer(3), "timeout")
 			set_powerup(null, false)

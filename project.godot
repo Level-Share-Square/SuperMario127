@@ -737,6 +737,7 @@ Singleton="*res://scenes/actors/singleton/singleton.tscn"
 Singleton2="*res://singleton2.gd"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
 UserInfo="*res://util/info.gd"
+GhostArrays="*res://scenes/actors/mario/misc/ghostarrays.gd"
 
 [debug]
 

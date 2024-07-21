@@ -127,7 +127,7 @@ func switch_scenes():
 	var _change_scene = get_tree().change_scene("res://scenes/editor/editor.tscn")
 
 func reload_scene():
-	var _reload = get_tree().reload_current_scene()
+	GhostArrays.reload = get_tree().reload_current_scene()
 
 func update_activity() -> void:
 	var activity = Discord.Activity.new()
