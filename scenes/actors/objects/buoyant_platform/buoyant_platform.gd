@@ -66,6 +66,7 @@ var water = null
 var water_array : Array
 var grav
 var buoyancy = 0.1
+var spawn_pos = Vector2(0,0)
 
 var in_water = false
 
@@ -89,13 +90,14 @@ func _ready():
 	groundcol_shape.shape = groundcol_shape.shape.duplicate(true)
 	topcol_shape.shape = topcol_shape.shape.duplicate(true)
 	
+	spawn_pos = global_position
+	
 	if !enabled:
 		collision_shape.disabled = true
 		
 	if !physics_enabled:
 		watercol_shape.disabled = true
 		groundcol_shape.disabled = true
-		platform_area_collision_shape.disabled = true
 		can_collide_with_floor = true
 		
 	update_parts()
@@ -132,8 +134,8 @@ func water_exited(area):
 #	water = null
 	
 func calculate_corners(area):
-	var top_left = area.global_position - Vector2(0, 13)
-	var top_right = area.transform.xform(Vector2(area.width, - 13))
+	var top_left = area.global_position - Vector2(0, 10)
+	var top_right = area.transform.xform(Vector2(area.width, - 10))
 	var bottom_right = area.transform.xform(Vector2(area.width, area.height))
 	var bottom_left = area.transform.xform(Vector2(0, area.height))
 
@@ -184,7 +186,15 @@ var rotation_right
 
 func _physics_process(delta):
 	if !"Editor" in str(get_tree().current_scene):
+		if !physics_enabled:
+			return
+		#return platform to spawn pos if it leaves level
+		var bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds 
+		if global_position.x < bounds.position.x * 32 - 300 or global_position.x > bounds.end.x * 32 + 300 or global_position.y > bounds.end.y * 32+ 300:
+			global_position = spawn_pos
+			rotation_degrees = 0
 		var result_vector = global_position
+		
 		if is_instance_valid(water) and in_water:
 			#global_position.x += (rotation_degrees/90) * 3
 			result_vector += Vector2((rotation_degrees/90) * 3.3, 0)

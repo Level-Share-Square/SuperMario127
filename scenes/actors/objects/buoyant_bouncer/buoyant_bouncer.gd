@@ -60,6 +60,7 @@ var strong_bounce_power = 450
 onready var bouncedet = $bouncecol
 
 var in_water = false
+var spawn_pos = Vector2(0, 0)
 
 func _ready():
 	if palette != 0:
@@ -90,6 +91,7 @@ func _ready():
 		platform_area_collision_shape.disabled = true
 		can_collide_with_floor = true
 
+	spawn_pos = global_position
 	update_parts()
 
 func mario_entered(body):
@@ -230,6 +232,11 @@ func _physics_process(delta):
 		if cooldown <= 0:
 			cooldown = 0
 	if !"Editor" in str(get_tree().current_scene):
+		if !physics_enabled:
+			return
+		var bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds 
+		if global_position.x < bounds.position.x * 32 - 300 or global_position.x > bounds.end.x * 32 + 300 or global_position.y > bounds.end.y * 32+ 300:
+			global_position = spawn_pos
 		var result_vector = global_position
 		if is_instance_valid(water) and in_water:
 			#global_position.x += (rotation_degrees/90) * 3
