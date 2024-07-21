@@ -1,23 +1,30 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/editor/property_type_scenes/Path/PathNode.gd" type="Script" id=1]
-[ext_resource path="res://scenes/actors/objects/touch_lift/circle.png" type="Texture" id=2]
 [ext_resource path="res://scenes/editor/property_type_scenes/Path/circle.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 66, 0, 64, 64 )
 
 [node name="PathNode" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="PathNodeButton" type="TextureButton" parent="."]
-margin_left = -8.0
-margin_top = -8.0
-margin_right = 8.0
-margin_bottom = 8.0
-rect_scale = Vector2( 0.5, 0.5 )
-rect_pivot_offset = Vector2( 8, 8 )
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+rect_scale = Vector2( 0.25, 0.25 )
+rect_pivot_offset = Vector2( 32, 32 )
 focus_mode = 1
-texture_normal = ExtResource( 2 )
-texture_pressed = ExtResource( 2 )
-texture_hover = ExtResource( 3 )
+texture_normal = SubResource( 1 )
+texture_pressed = SubResource( 1 )
+texture_hover = SubResource( 2 )
 
 [node name="HandleR" type="Node2D" parent="."]
 position = Vector2( 24, 0 )
@@ -28,16 +35,16 @@ points = PoolVector2Array( 0, 0, -24, 0 )
 width = 5.0
 
 [node name="HandleRButton" type="TextureButton" parent="HandleR"]
-self_modulate = Color( 0.803922, 0.803922, 0.803922, 1 )
-margin_left = -1.0
-margin_top = -8.0
-margin_right = 15.0
-margin_bottom = 8.0
-rect_scale = Vector2( 0.75, 0.75 )
-rect_pivot_offset = Vector2( -20, 8 )
-texture_normal = ExtResource( 2 )
-texture_pressed = ExtResource( 2 )
-texture_hover = ExtResource( 3 )
+self_modulate = Color( 0.694118, 0.694118, 0.694118, 1 )
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+rect_scale = Vector2( 0.2, 0.2 )
+rect_pivot_offset = Vector2( 32, 32 )
+texture_normal = SubResource( 1 )
+texture_pressed = SubResource( 1 )
+texture_hover = SubResource( 2 )
 
 [node name="HandleL" type="Node2D" parent="."]
 position = Vector2( -24, 0 )
@@ -48,16 +55,16 @@ points = PoolVector2Array( 0, 0, 24, 0 )
 width = 5.0
 
 [node name="HandleLButton" type="TextureButton" parent="HandleL"]
-self_modulate = Color( 0.803922, 0.803922, 0.803922, 1 )
-margin_left = -14.5
-margin_top = -8.0
-margin_right = 1.5
-margin_bottom = 8.0
-rect_scale = Vector2( 0.75, 0.75 )
-rect_pivot_offset = Vector2( 36, 8 )
-texture_normal = ExtResource( 2 )
-texture_pressed = ExtResource( 2 )
-texture_hover = ExtResource( 3 )
+self_modulate = Color( 0.694118, 0.694118, 0.694118, 1 )
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 32.0
+margin_bottom = 32.0
+rect_scale = Vector2( 0.2, 0.2 )
+rect_pivot_offset = Vector2( 32, 32 )
+texture_normal = SubResource( 1 )
+texture_pressed = SubResource( 1 )
+texture_hover = SubResource( 2 )
 
 [connection signal="gui_input" from="PathNodeButton" to="." method="_on_PathNodeButton_gui_input"]
 [connection signal="gui_input" from="HandleR/HandleRButton" to="." method="_on_right_handle_gui_input"]
