@@ -209,6 +209,7 @@ func _on_request_completed(result, response_code, headers, body):
 	if searching == false:
 		level_list.set_item_disabled(0, false)
 		var json = JSON.parse(body.get_string_from_utf8())
+		total_pages = json.result["numberOfPages"]
 		page_amt = json.result["levels"].size()
 		for i in page_amt:
 			print(i)

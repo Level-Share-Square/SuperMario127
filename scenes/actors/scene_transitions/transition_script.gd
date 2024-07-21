@@ -17,7 +17,7 @@ const TRANSITION_SCALE_COVERED = 0
 
 var transitioning = false
 
-func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout_circle, transition_time = 0.5, new_area = -1, clear_vars = false, r_press = false):
+func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout_circle, transition_time = 0.5, new_area = -1, clear_vars = false, r_press = true):
 	#if the button is invisible, then we're probably not in editing mode, but if it's visible make sure we don't reload the scene while it's switching
 	if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible or !Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled:
 		var volume_multiplier = Singleton.Music.volume_multiplier
@@ -26,7 +26,7 @@ func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout
 		
 		Singleton.CurrentLevelData.stop_tracking_time_score()
 		if !r_press:
-			GhostArrays.reload = get_tree().reload_current_scene()
+			get_tree().reload_current_scene()
 		if new_area != -1:
 			Singleton.CurrentLevelData.area = new_area
 			

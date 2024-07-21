@@ -950,14 +950,13 @@ func _physics_process(delta: float) -> void:
 		GhostArrays.temp_gsr.append(int(sprite.rotation_degrees))
 		GhostArrays.temp_gar.append(Singleton.CurrentLevelData.area)
 	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
-	if Singleton2.save_ghost == true:
+	if Singleton2.save_ghost == true and GhostArrays.dont_save == false:
 		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.WRITE)
 		file.store_var(GhostArrays.temp_gp)
 		file.store_var(GhostArrays.temp_ga)
 		file.store_var(GhostArrays.temp_gsr)
 		file.store_var(GhostArrays.temp_gar)
 		file.close()
-		
 		
 func encode_int_bytes(val: int, num: int) -> PoolByteArray:
 	var output = PoolByteArray([])
@@ -974,7 +973,7 @@ func encode_int_bytes(val: int, num: int) -> PoolByteArray:
 	return output
 	
 func switch_areas(area_id, transition_time):
-	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id)
+	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id, false, false)
 	if !switched:
 		if Singleton.PlayerSettings.other_player_id != -1:
 			get_tree().multiplayer.send_bytes(JSON.print(["area", area_id, transition_time]).to_ascii())
@@ -1032,13 +1031,14 @@ func kill(cause: String) -> void:
 				reload = false
 		
 		if reload:
-			Singleton.SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true, r_press)
+			Singleton.SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
 		else:
 			yield(get_tree().create_timer(3), "timeout")
 			set_powerup(null, false)
 			health = 8
 			if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CheckpointSaved.current_area == Singleton.CurrentLevelData.area and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
 				position = Singleton.CheckpointSaved.current_spawn_pos
+				GhostArrays.dont_save = true
 			else:
 				position = spawn_pos - Vector2(0, 16)
 			last_position = position # fixes infinite death bug

@@ -68,3 +68,7 @@ func _notification(what):
 func reset_time():
 	time = autosave_timer
 
+func _process(delta):
+	if save_ghost == true:
+		yield(get_tree().create_timer(0.5), "timeout")
+		save_ghost = false
