@@ -12,11 +12,12 @@ export(Array, Texture) var palette_textures
 
 
 func _set_properties():
-	savable_properties = ["strong_bounce_power"]
-	editable_properties = ["strong_bounce_power"]
+	savable_properties = ["strong_bounce_power", "physics_enabled"]
+	editable_properties = ["strong_bounce_power", "physics_enabled"]
 	
 func _set_property_values():
 	set_property("strong_bounce_power", strong_bounce_power, 650)
+	set_property("physics_enabled", physics_enabled)
 
 
 
@@ -49,11 +50,12 @@ onready var topdet = $topcol
 var water = null
 var water_array : Array
 var grav
+var buoyancy = 0.01 # not real buoyancy lol
 
 var cooldown = 0
 
 var bounce_power = 300
-var strong_bounce_power = 650
+var strong_bounce_power = 450
 
 onready var bouncedet = $bouncecol
 
@@ -66,10 +68,12 @@ func _ready():
 	var editor = get_tree().current_scene
 	grav = editor.level_area.settings.gravity
 	print(grav)
-	var _connect = waterdet.connect("area_entered", self, "water_entered")
-	var _connect2 = grounddet.connect("body_entered", self, "ground_entered")
+	if physics_enabled:
+		var _connect = waterdet.connect("area_entered", self, "water_entered")
+		var _connect2 = grounddet.connect("body_entered", self, "ground_entered")
+		var _connect3 = waterdet.connect("area_exited", self, "water_exited")
 	var _connect3 = bouncedet.connect("body_entered", self, "mario_entered")
-	var _connect4 = waterdet.connect("area_exited", self, "water_exited")
+
 	
 	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate(true)
 	collision_shape.shape = collision_shape.shape.duplicate(true)
@@ -176,11 +180,23 @@ func water_exited(area):
 		in_water = false
 
 func calculate_corners(area):
-	var top_left = area.global_position - Vector2(0, 10)
-	var top_right = area.transform.xform(Vector2(area.width, - 10))
+	var top_left = area.global_position - Vector2(0, 13)
+	var top_right = area.transform.xform(Vector2(area.width, - 13))
 	var bottom_right = area.transform.xform(Vector2(area.width, area.height))
 	var bottom_left = area.transform.xform(Vector2(0, area.height))
-	corners = [top_left, top_right, bottom_right, bottom_left]
+
+	
+	
+	# i could NOT think of a better way to do this sorry
+	if area.scale.x < 0 and area.scale.y < 0:
+		corners = [bottom_right, bottom_left, top_left, top_right]
+	elif area.scale.x < 0:
+		corners = [top_right, top_left, bottom_left, bottom_right]
+	elif area.scale.y < 0:
+		corners = [bottom_left, bottom_right, top_right, top_left]
+	else:
+		corners = [top_left, top_right, bottom_right, bottom_left]
+	
 	largest = 0
 	for i in range(1, 4):
 		if corners[i].y < corners[largest].y:
@@ -189,7 +205,7 @@ func calculate_corners(area):
 func set_position(new_position):
 	var movement = new_position - global_position
 	position = new_position
-
+	
 func ground_entered(body):
 	if "Middle" in str(body):
 		in_water = false
@@ -217,17 +233,27 @@ func _physics_process(delta):
 		var result_vector = global_position
 		if is_instance_valid(water) and in_water:
 			#global_position.x += (rotation_degrees/90) * 3
-			result_vector += Vector2((rotation_degrees/90) * 3, 0)
+			result_vector += Vector2((rotation_degrees/90) * 3.3, 0)
 			if water.moving:
 				calculate_corners(water)
 				
 			if global_position.x < corners[largest].x:
 				rotation = lerp_angle(rotation, rotation_left, 0.01)
 				#global_position.y = lerp(global_position.y, slope_left * global_position.x + (corners[largest-1].y - slope_left * corners[largest-1].x), 0.1)
-				result_vector = Vector2(result_vector.x, lerp(global_position.y, slope_left * global_position.x + (corners[largest-1].y - slope_left * corners[largest-1].x), 0.2))
+				var point = slope_left * global_position.x + (corners[largest-1].y - slope_left * corners[largest-1].x)
+				if abs(global_position.y - point) < 20:
+					buoyancy = 0.3
+				else:
+					buoyancy = 0.02
+				result_vector = Vector2(result_vector.x, lerp(global_position.y, point, buoyancy))
 			else:
 				rotation = lerp_angle(rotation, rotation_right, 0.01)
-				result_vector = Vector2(result_vector.x, lerp(global_position.y, slope_right * global_position.x + (corners[largest].y - slope_right * corners[largest].x), 0.2))
+				var point = slope_right * global_position.x + (corners[largest].y - slope_right * corners[largest].x)
+				if abs(global_position.y - point) < 20:
+					buoyancy = 0.3
+				else:
+					buoyancy = 0.02
+				result_vector = Vector2(result_vector.x, lerp(global_position.y, point, buoyancy))
 				
 			
 			animplay.play("bob")
@@ -238,7 +264,7 @@ func _physics_process(delta):
 				result_vector += Vector2(0, grav * 0.4)
 			rotation = lerp_angle(rotation, 0, 0.1)
 		set_position(result_vector)
-	
+
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts
