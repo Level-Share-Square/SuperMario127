@@ -68,7 +68,7 @@ func add_node(point : Vector2, point_in: Vector2 = Vector2.ZERO, point_out: Vect
 		new_node.move_handle(new_node.HANDLE_LEFT, point_in)
 		curve_ref.set_point_out(curve_ref.get_point_count() - 1, point_out)
 		new_node.move_handle(new_node.HANDLE_RIGHT, point_out)
-		if point_in == -point_out:
+		if point_in == -point_out && (point_in.x != -24 || point_out.x != 24):
 			new_node.handles_linked = true
 	update_line()
 	if(new_node.position == Vector2(0,0)):

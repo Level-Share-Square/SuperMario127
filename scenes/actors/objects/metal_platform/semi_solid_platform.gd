@@ -25,6 +25,7 @@ func can_collide_with(character):
 		# cancel it
 		var d = (character.velocity / 60.0 - movement).dot(perp)
 		if d < 0:
+			print("z",name)
 			return false
 		
 		# Account for the movement of the platform to prevent clipping.
@@ -34,4 +35,6 @@ func can_collide_with(character):
 	
 	# Is p on the correct side?
 	var d = (p - p1).dot(perp)
+	if sign(d) == 1:
+		print("d",name)
 	return sign(d) != 1

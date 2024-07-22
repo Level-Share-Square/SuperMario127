@@ -91,6 +91,7 @@ export var initial_position := Vector2(0, 0)
 export var velocity := Vector2(0, 0)
 var last_velocity := Vector2(0, 0)
 var last_position := Vector2(0, 0)
+var last_last_position := Vector2(0, 0)
 
 export var gravity_scale := 1.0
 export var facing_direction := 1
@@ -167,6 +168,7 @@ var ghost_anim = []
 var temp_gp = []
 var temp_ga = []
 var temp_gsr = []
+var temp_gar = []
 
 var can_heal : bool = true
 var healing_timer_enabled := false
@@ -289,9 +291,7 @@ const ANIM_IDS : Dictionary = {
 }
 
 func _ready():
-	
-	temp_ga = []
-	temp_gp = []
+
 
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
@@ -933,7 +933,9 @@ func _physics_process(delta: float) -> void:
 	if position.x > level_bounds.end.x * 32 -1:
 		position.x = level_bounds.end.x * 32 -1
 		velocity.x = 0
+	last_last_position = last_position
 	last_position = global_position
+	
 	last_velocity = velocity
 	last_move_direction = move_direction
 	
@@ -947,17 +949,18 @@ func _physics_process(delta: float) -> void:
 			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
 			print("hi")
 	if !Singleton2.save_ghost:
-		temp_gp.append(Vector2(int(position.x), int(position.y)))
-		temp_ga.append(ANIM_IDS[sprite.animation])
-		temp_gsr.append(int(sprite.rotation_degrees))
+		GhostArrays.temp_gp.append(Vector2(int(position.x), int(position.y)))
+		GhostArrays.temp_ga.append(ANIM_IDS[sprite.animation])
+		GhostArrays.temp_gsr.append(int(sprite.rotation_degrees))
+		GhostArrays.temp_gar.append(Singleton.CurrentLevelData.area)
 	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
-	if Singleton2.save_ghost == true:
+	if Singleton2.save_ghost == true and GhostArrays.dont_save == false:
 		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.WRITE)
-		file.store_var(temp_gp)
-		file.store_var(temp_ga)
-		file.store_var(temp_gsr)
+		file.store_var(GhostArrays.temp_gp)
+		file.store_var(GhostArrays.temp_ga)
+		file.store_var(GhostArrays.temp_gsr)
+		file.store_var(GhostArrays.temp_gar)
 		file.close()
-		
 		
 func encode_int_bytes(val: int, num: int) -> PoolByteArray:
 	var output = PoolByteArray([])
@@ -974,7 +977,7 @@ func encode_int_bytes(val: int, num: int) -> PoolByteArray:
 	return output
 	
 func switch_areas(area_id, transition_time):
-	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id)
+	Singleton.SceneTransitions.reload_scene(cutout_circle, cutout_circle, transition_time, area_id, false, false)
 	if !switched:
 		if Singleton.PlayerSettings.other_player_id != -1:
 			get_tree().multiplayer.send_bytes(JSON.print(["area", area_id, transition_time]).to_ascii())
@@ -982,6 +985,7 @@ func switch_areas(area_id, transition_time):
 
 	
 func kill(cause: String) -> void:
+	var r_press = false
 	if !dead:
 		if Singleton.PlayerSettings.other_player_id != -1:
 			get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())
@@ -1001,6 +1005,7 @@ func kill(cause: String) -> void:
 				reload = false
 		elif cause == "reload":
 			transition_time = 0.4
+			r_press = true
 		elif cause == "green_demon":
 			sound_player.play_last_hit_sound()
 			controllable = false
@@ -1037,6 +1042,7 @@ func kill(cause: String) -> void:
 			health = 8
 			if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CheckpointSaved.current_area == Singleton.CurrentLevelData.area and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
 				position = Singleton.CheckpointSaved.current_spawn_pos
+				GhostArrays.dont_save = true
 			else:
 				position = spawn_pos - Vector2(0, 16)
 			last_position = position # fixes infinite death bug

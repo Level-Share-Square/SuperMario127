@@ -550,6 +550,7 @@ custom_styles/bg = SubResource( 9 )
 allow_reselect = true
 same_column_width = true
 fixed_column_width = 290
+icon_scale = 0.02
 __meta__ = {
 "_edit_use_anchors_": false
 }
