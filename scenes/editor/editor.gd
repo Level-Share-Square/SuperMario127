@@ -429,7 +429,12 @@ func _process(delta : float) -> void:
 					object.type_id = original_object.type_id
 					object.palette = original_object.palette
 					for prop in original_object.properties:
-						object.properties.append(prop)
+						#Prevents a bug that causes certain properties to become
+						#Linked between two objects
+						if typeof(prop) == TYPE_OBJECT:
+							object.properties.append(prop.duplicate())
+						else:
+							object.properties.append(prop)
 					shared.create_object(object, true)
 					update_selected_object(mouse_pos) # Switch to the new object
 				time_clicked += delta
