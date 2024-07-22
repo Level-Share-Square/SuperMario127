@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/actors/objects/touch_lift_platform/texture.png" type="Texture" id=1]
-[ext_resource path="res://scenes/actors/objects/touch_lift_platform/moving_semi_solid.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/metal_platform/is_platform_area.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/touch_lift_platform/touch_lift_platform.gd" type="Script" id=4]
 [ext_resource path="res://scenes/actors/objects/touch_lift_platform/recolorable_texture.png" type="Texture" id=5]
@@ -12,8 +11,11 @@ extents = Vector2( 23, 7 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 23, 8 )
 
-[node name="TouchLiftPlatform" type="Node2D"]
+[node name="TouchLiftPlatform" type="KinematicBody2D"]
 z_index = 1
+collision_layer = 16
+collision_mask = 0
+motion/sync_to_physics = true
 script = ExtResource( 4 )
 
 [node name="Sprite" type="NinePatchRect" parent="."]
@@ -25,9 +27,6 @@ texture = ExtResource( 1 )
 patch_margin_left = 8
 patch_margin_right = 8
 axis_stretch_horizontal = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SpriteRecolor" type="NinePatchRect" parent="."]
 self_modulate = Color( 0, 1, 0, 1 )
@@ -39,26 +38,6 @@ texture = ExtResource( 5 )
 patch_margin_left = 8
 patch_margin_right = 8
 axis_stretch_horizontal = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 16
-collision_mask = 0
-script = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource( 1 )
-one_way_collision = true
-
-[node name="Area2D" type="Area2D" parent="StaticBody2D"]
-collision_layer = 16
-collision_mask = 2
-script = ExtResource( 3 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Area2D"]
-shape = SubResource( 2 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false
@@ -68,4 +47,13 @@ rect = Rect2( -32, -5, 64, 10 )
 process_parent = true
 physics_process_parent = true
 
-[connection signal="body_exited" from="StaticBody2D/Area2D" to="." method="_on_PlatformArea_body_exited"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 2 )

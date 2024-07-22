@@ -417,7 +417,7 @@ func is_grounded() -> bool:
 		raycast_node = ground_check_dive
 		raycast_node.cast_to = Vector2(0, 7.5)
 	
-	var new_is_grounded := (raycast_node.is_colliding() or water_check.is_colliding()) and velocity.y >= 0 
+	var new_is_grounded := (raycast_node.is_colliding() or water_check.is_colliding() or is_on_floor()) and velocity.y >= 0 
 	if !new_is_grounded and prev_is_grounded and velocity.y > 0:
 		velocity.y = 0
 	
@@ -899,6 +899,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Move by velocity
 	if movable:
+		#move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
 		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
 		if (last_position != Vector2.ZERO and (last_position - global_position).length_squared() > 0
 			and get_world_2d().direct_space_state.intersect_ray(last_position, global_position, [self], 1).size() > 0):
