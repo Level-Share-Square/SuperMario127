@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/actors/objects/metal_platform/is_platform_area.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/on_off_touch_lift_platform/on_off_touch_lift_platform.gd" type="Script" id=2]
-[ext_resource path="res://scenes/actors/objects/metal_platform/semi_solid_platform.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/touch_lift_platform/moving_semi_solid.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/on_off_touch_lift_platform/onoffplatform.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
