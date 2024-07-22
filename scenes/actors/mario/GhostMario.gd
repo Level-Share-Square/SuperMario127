@@ -3,10 +3,7 @@ extends AnimatedSprite
 onready var tween = $Tween
 onready var tween2 = $Tween2
 onready var file = File.new()
-var ghost_pos
-var ghost_anim
-var ghost_rotation
-var frame_counter = -1
+var ghost_area
 var sfc = 0
 var find_ghost = false
 var playback = false
@@ -71,16 +68,22 @@ func _physics_process(delta):
 	if Singleton2.ghost_enabled:
 		if find_ghost:
 			file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.READ)
-			ghost_pos = file.get_var()
-			ghost_anim = file.get_var()
-			ghost_rotation = file.get_var()
+			GhostArrays.ghost_pos = file.get_var()
+			GhostArrays.ghost_anim = file.get_var()
+			GhostArrays.ghost_rotation = file.get_var()
+			GhostArrays.ghost_area_array = file.get_var()
 			file.close()
 			playback = true
 			find_ghost = false
 	if playback == true:
-		if frame_counter < ghost_anim.size() - 2:
-			frame_counter += 1
-		if frame_counter < ghost_anim.size():
-			animation = ANIM_IDS[ghost_anim[frame_counter]]
-			rotation_degrees = ghost_rotation[frame_counter]
-			position = ghost_pos[frame_counter]
+		if GhostArrays.frame_counter < GhostArrays.ghost_anim.size() - 2:
+			GhostArrays.frame_counter += 1
+		if GhostArrays.frame_counter < GhostArrays.ghost_anim.size():
+			animation = ANIM_IDS[GhostArrays.ghost_anim[GhostArrays.frame_counter]]
+			rotation_degrees = GhostArrays.ghost_rotation[GhostArrays.frame_counter]
+			position = GhostArrays.ghost_pos[GhostArrays.frame_counter]
+			ghost_area = GhostArrays.ghost_area_array[GhostArrays.frame_counter]
+	if ghost_area == Singleton.CurrentLevelData.area:
+		show()
+	else:
+		hide()

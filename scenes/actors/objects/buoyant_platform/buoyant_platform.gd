@@ -65,6 +65,8 @@ onready var topdet = $topcol
 var water = null
 var water_array : Array
 var grav
+var buoyancy = 0.1
+var spawn_pos = Vector2(0,0)
 
 var in_water = false
 
@@ -88,25 +90,38 @@ func _ready():
 	groundcol_shape.shape = groundcol_shape.shape.duplicate(true)
 	topcol_shape.shape = topcol_shape.shape.duplicate(true)
 	
+	spawn_pos = global_position
+	
 	if !enabled:
 		collision_shape.disabled = true
 		
 	if !physics_enabled:
 		watercol_shape.disabled = true
 		groundcol_shape.disabled = true
-		platform_area_collision_shape.disabled = true
 		can_collide_with_floor = true
 		
 	update_parts()
 
 func water_entered(area):
-	print(area)
+
 	if "Col" in str(area) or "Area2D" in str(area):
 		in_water = true
 		for i in waterdet.get_overlapping_areas():
 			if "Water" in str(i.owner) or "Lava" in str(i.owner):
 				water_array.append(i.owner)
 				can_collide_with_floor = false
+				
+				# Handle water physics
+				calculate_corners(area.get_parent())
+				rotation_left = atan2(corners[largest-1].y - corners[largest].y, corners[largest-1].x - corners[largest].x)
+				slope_left = tan(rotation_left)
+				#print(slope_left)
+				rotation_left += PI #correct the angle
+				
+				rotation_right = atan2(corners[largest].y - corners[(largest + 1) % 4].y, corners[largest].x - corners[(largest + 1) % 4].x)
+				slope_right = tan(rotation_right)
+				#print(slope_right)
+				rotation_right += PI
 		if !water_array.empty():
 			water = water_array[0]
 	else: return
@@ -116,11 +131,47 @@ func water_exited(area):
 		can_collide_with_floor = false
 	if "Col" in str(area) or "Area2D" in str(area):
 		if "Water" in str(area.owner) or "Lava" in str(area.owner):
-			if in_water != false:
+			if in_water == true:
 				can_collide_with_floor = false
-		in_water = false
 #	water = null
 	
+func calculate_corners(area):
+	var temp_top_left = area.global_position - Vector2(0, 10)
+	var temp_top_right = area.transform.xform(Vector2(area.width, - 10))
+	var temp_bottom_right = area.transform.xform(Vector2(area.width, area.height))
+	var temp_bottom_left = area.transform.xform(Vector2(0, area.height))
+	var temp_corners
+	var temp_largest
+	
+	# i could NOT think of a better way to do this sorry
+	if area.scale.x < 0 and area.scale.y < 0:
+		temp_corners = [temp_bottom_right, temp_bottom_left, temp_top_left, temp_top_right]
+	elif area.scale.x < 0:
+		temp_corners = [temp_top_right, temp_top_left, temp_bottom_left, temp_bottom_right]
+	elif area.scale.y < 0:
+		temp_corners = [temp_bottom_left, temp_bottom_right, temp_top_right, temp_top_left]
+	else:
+		temp_corners = [temp_top_left, temp_top_right, temp_bottom_right, temp_bottom_left]
+	
+	temp_largest = 0
+	for i in range(1, 4):
+		if temp_corners[i].y < temp_corners[temp_largest].y:
+			temp_largest = i
+	if corners.size() != 4 or temp_corners[temp_largest].y < corners[largest].y or waterdet.get_overlapping_areas().size() <= 1:
+		corners = temp_corners
+		largest = temp_largest
+		
+		
+
+func set_position(new_position):
+	var movement = new_position - global_position
+	
+	#first move the bodies
+	$StaticBody2D.constant_linear_velocity = movement * 60
+	
+	#then move self
+	position = new_position
+			
 func ground_entered(body):
 	if "Middle" in str(body):
 		in_water = false
@@ -131,46 +182,69 @@ func ground_entered(body):
 		return
 	print(body)
 	
+	
+var corners = []
+var largest
+
+var slope_left
+var rotation_left
+var slope_right
+var rotation_right
+
 func _physics_process(delta):
 	if !"Editor" in str(get_tree().current_scene):
-		if is_instance_valid(water):
+		if !physics_enabled:
+			return
+		
+		if waterdet.get_overlapping_areas().size() == 0:
+			in_water = false
 			
-			if rotation_degrees > 0 and rotation_degrees < 90:
-				global_position.x += (rotation_degrees/90) * 3
-			if rotation_degrees < 0:
-				#global_position.x -= (-(rotation_degrees/90) + 4) * 3
-				global_position.x += (rotation_degrees/90) * 3
+		
+		#return platform to spawn pos if it leaves level
+		var bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds 
+		if global_position.x < bounds.position.x * 32 - 300 or global_position.x > bounds.end.x * 32 + 300 or global_position.y > bounds.end.y * 32+ 300:
+			global_position = spawn_pos
+			rotation_degrees = 0
+		var result_vector = global_position
+		
+		if is_instance_valid(water) and in_water:
+			#print(slope_left)
+			#global_position.x += (rotation_degrees/90) * 3
+			result_vector += Vector2((rotation_degrees/90) * 3.3, 0)
+			if water.moving:
+				calculate_corners(water)
+
+			# the weird slopes are from vertical lines (water with 0 rotation)
+			if global_position.x < corners[largest].x and slope_left != 16331239353195370:
+				rotation = lerp_angle(rotation, rotation_left, 0.01)
+				#global_position.y = lerp(global_position.y, slope_left * global_position.x + (corners[largest-1].y - slope_left * corners[largest-1].x), 0.1)
+				var point = slope_left * global_position.x + (corners[largest-1].y - slope_left * corners[largest-1].x)
 				
-				
-			
-			var top_left = water.global_position
-			var top_right = water.transform.xform(Vector2(water.width, 0))
-			var bottom_right = water.transform.xform(Vector2(water.width, water.height))
-			var bottom_left = water.transform.xform(Vector2(0, water.height))
-			var corners = [top_left, top_right, bottom_right, bottom_left]
-			
-			var largest = 0
-			for i in range(1, 4):
-				if corners[i].y < corners[largest].y:
-					largest = i
-				
-			var slope
-			if global_position.x < corners[largest].x:
-				rotation = lerp_angle(rotation, atan2(corners[largest-1].y - corners[largest].y, corners[largest-1].x - corners[largest].x) + PI, 0.01)
-				slope = tan(atan2(corners[largest-1].y - corners[largest].y, corners[largest-1].x - corners[largest].x))
-				global_position.y = lerp(global_position.y, slope * global_position.x + (corners[largest-1].y - slope * corners[largest-1].x) - 9, 0.1)
+				if abs(global_position.y - point) < 20:
+					buoyancy = 0.3
+				else:
+					buoyancy = 0.02
+				result_vector = Vector2(result_vector.x, lerp(global_position.y, point, buoyancy))
 			else:
-				rotation = lerp_angle(rotation, atan2(corners[largest].y - corners[(largest + 1) % 4].y, corners[largest].x - corners[(largest + 1) % 4].x) + PI, 0.01)
-				#rotation_degrees += 180
-				slope = tan(atan2(corners[largest].y - corners[(largest + 1) % 4].y, corners[largest].x - corners[(largest + 1) % 4].x))
-				global_position.y = lerp(global_position.y, slope * global_position.x + (corners[largest].y - slope * corners[largest].x) - 9, 0.1)
+				rotation = lerp_angle(rotation, rotation_right, 0.01)
+				var point = slope_right * global_position.x + (corners[largest].y - slope_right * corners[largest].x)
+				
+				if abs(global_position.y - point) < 20:
+					buoyancy = 0.3
+				else:
+					buoyancy = 0.02
+				result_vector = Vector2(result_vector.x, lerp(global_position.y, point, buoyancy))
+				
 			
 			animplay.play("bob")
 		else:
 			animplay.play("RESET")
 			if can_collide_with_floor == false:
-				position.y += grav
-	
+				#position.y += grav * 0.4
+				result_vector += Vector2(0, grav * 0.4)
+			rotation = lerp_angle(rotation, 0, 0.1)
+		set_position(result_vector)
+
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts

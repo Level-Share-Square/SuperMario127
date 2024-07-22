@@ -18,6 +18,7 @@ onready var inverted :bool= get_parent().inverted
 onready var parent = get_parent()
 
 var last_position : Vector2
+var last_last_position : Vector2
 var momentum : Vector2
 
 func set_position(new_position):
@@ -89,6 +90,7 @@ func _physics_process(delta):
 		return
 	momentum = (global_position - last_position) / (fps_util.PHYSICS_DELTA * 2)
 
+	last_last_position = last_position
 	last_position = global_position
 	sprite.region_rect.position.x = int(!parent.disappears) * 46
 
@@ -100,7 +102,10 @@ func _on_PlatformArea_body_exited(body):
 		momentum = Vector2(0,0)
 		last_position = momentum
 		return
-	if body.get("velocity") != null:
+	if "sprite" in body and (body.sprite.animation == "movingLeft" or body.sprite.animation == "movingRight"):
+		body.set_state_by_name("FallState")
+		return
+	if body.get("velocity") != null and "state" in body and body.state != body.get_state_node("FallState") and body.state != body.get_state_node("JumpState"):
 		body.velocity += Vector2(momentum.x, min(0, momentum.y))
 
 func toggle_state():

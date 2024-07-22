@@ -1273,6 +1273,7 @@ animation = "tripleJumpLeft"
 visible = false
 frames = ExtResource( 44 )
 animation = "swimming"
+frame = 5
 playing = true
 script = ExtResource( 63 )
 
@@ -1802,6 +1803,7 @@ offset = Vector2( 0, 4 )
 show_behind_parent = true
 material = SubResource( 50 )
 frames = SubResource( 60 )
+frame = -1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1820,14 +1822,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 11
+frame = 13
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 scale = Vector2( 1e-05, 1e-05 )
 frames = ExtResource( 55 )
-frame = 1
+frame = 7
 speed_scale = 3.0
 playing = true
 
@@ -1849,6 +1851,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
+frame = 5
 playing = true
 script = ExtResource( 34 )
 
@@ -1856,7 +1859,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 2
+frame = 7
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]

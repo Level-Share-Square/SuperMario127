@@ -36,7 +36,8 @@ func _set_property_values():
 	set_property("speed", speed, true)
 
 func is_vanish(body):
-	return body.powerup != null and body.powerup.id == "Vanish"
+	if "Character" in body:
+		return body.powerup != null and body.powerup.id == "Vanish"
 
 func kill(body):
 	if dead or !(enabled and body.name.begins_with("Character") and !body.dead and body.controllable):
@@ -64,21 +65,22 @@ func attacked(new_area):
 func stomp(body):
 	if !enabled: return
 	var body_cast = body as Character #this filters out any bodies other than the player from being used
-	if body != null && body.invincible:
-		dead = true
-		animation_player.play("die")
-		return
-	elif is_vanish(body):
-		return
-	else:
-		if body.velocity.y > 0:
-			if body.state != body.get_state_node("GroundPoundState"):
-				if body.state != body.get_state_node("DiveState"):
-					body.set_state_by_name("BounceState", 0)
-				body.velocity.y = -330
-			body.stamina = clamp(body.stamina + 10, 0, 100)
-			knockback_velocity.y = 80
-			knockback(body.global_position)
+	if "Character" in body:
+		if body.invincible:
+			dead = true
+			animation_player.play("die")
+			return
+		elif is_vanish(body):
+			return
+		else:
+			if body.velocity.y > 0:
+				if body.state != body.get_state_node("GroundPoundState"):
+					if body.state != body.get_state_node("DiveState"):
+						body.set_state_by_name("BounceState", 0)
+					body.velocity.y = -330
+				body.stamina = clamp(body.stamina + 10, 0, 100)
+				knockback_velocity.y = 80
+				knockback(body.global_position)
 
 func knockback(body_pos):
 	knockback_sound.play()

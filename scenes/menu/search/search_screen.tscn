@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -17,7 +17,6 @@
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=15]
 [ext_resource path="res://scenes/menu/levels_screen/ui/star_coin_icon.png" type="Texture" id=16]
 [ext_resource path="res://scenes/menu/levels_screen/shine_icon.png" type="Texture" id=17]
-[ext_resource path="res://scenes/shared/background/foregrounds/hills/preview.png" type="Texture" id=18]
 [ext_resource path="res://scenes/menu/search/rating/RatePanel.tscn" type="PackedScene" id=19]
 
 [sub_resource type="DynamicFont" id=10]
@@ -551,6 +550,7 @@ custom_styles/bg = SubResource( 9 )
 allow_reselect = true
 same_column_width = true
 fixed_column_width = 290
+icon_scale = 0.02
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -758,7 +758,7 @@ margin_top = 8.0
 margin_right = 208.0
 margin_bottom = 115.0
 size_flags_vertical = 3
-texture = ExtResource( 18 )
+texture = ExtResource( 15 )
 expand = true
 stretch_mode = 6
 
@@ -810,3 +810,5 @@ anims/spin = SubResource( 40 )
 [node name="HTTPRequest3" type="HTTPRequest" parent="."]
 
 [node name="Comments" parent="." instance=ExtResource( 7 )]
+
+[node name="HTTPRequest4" type="HTTPRequest" parent="."]
