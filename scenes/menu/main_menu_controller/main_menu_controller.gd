@@ -28,8 +28,8 @@ var current_screen : Screen
 var previous_screen : Screen
 
 var possible_backgrounds = [
-	6, # light
-	2 # dark
+	1, # light
+	8 # dark
 ]
 var possible_parallax = [
 	2, # light
@@ -131,6 +131,6 @@ func dark_mode_toggled():
 	var picked_background = possible_backgrounds[0] if !Singleton2.dark_mode else possible_backgrounds[1]
 
 	backgrounds.update_background(picked_background, picked_parallax, Rect2(0, 0, 24, 14), 200, 0)
-	backgrounds.do_auto_scroll = true
+	#backgrounds.do_auto_scroll = true
 	
-	print (picked_parallax)
+	print ("Currently picked parallax:\t", picked_parallax)

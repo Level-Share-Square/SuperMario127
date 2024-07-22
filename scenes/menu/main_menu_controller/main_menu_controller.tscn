@@ -21,9 +21,6 @@ script = ExtResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.009
 margin_bottom = 0.111969
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Backgrounds" parent="Background" instance=ExtResource( 5 )]
 
@@ -60,6 +57,3 @@ anchor_right = 1.0
 anchor_bottom = 0.998969
 margin_top = -0.840912
 margin_bottom = -0.840912
-__meta__ = {
-"_edit_use_anchors_": false
-}
