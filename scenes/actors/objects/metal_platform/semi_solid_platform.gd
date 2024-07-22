@@ -8,7 +8,7 @@ var movement := Vector2.ZERO
 func can_collide_with(character):
 	var direction = global_transform.y.normalized()
 	
-	var is_grounded = character.is_grounded()
+	var is_grounded = character.is_grounded() if character.has_method("is_grounded") else true
 	# Some math that gives us useful vectors
 	var line_center = global_position + (direction * buffer)
 	var line_direction = Vector2(-direction.y, direction.x)
@@ -25,7 +25,6 @@ func can_collide_with(character):
 		# cancel it
 		var d = (character.velocity / 60.0 - movement).dot(perp)
 		if d < 0:
-			print("z",name)
 			return false
 		
 		# Account for the movement of the platform to prevent clipping.
@@ -35,6 +34,4 @@ func can_collide_with(character):
 	
 	# Is p on the correct side?
 	var d = (p - p1).dot(perp)
-	if sign(d) == 1:
-		print("d",name)
 	return sign(d) != 1
