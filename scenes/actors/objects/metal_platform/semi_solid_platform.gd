@@ -1,18 +1,14 @@
+class_name SemiSolidPlatform
 extends PhysicsBody2D
 
-onready var area = $Area2D
-onready var collision_shape = $CollisionShape2D
-
 var buffer := -5
+var movement := Vector2.ZERO
 
-func _ready():
-	collision_shape.one_way_collision = false
 
 func can_collide_with(character):
 	var direction = global_transform.y.normalized()
 	
-	# Use prev_is_grounded because calling is_grounded() is broken
-	var is_grounded = character.prev_is_grounded if character.get("prev_is_grounded") != null else true
+	var is_grounded = character.is_grounded()
 	# Some math that gives us useful vectors
 	var line_center = global_position + (direction * buffer)
 	var line_direction = Vector2(-direction.y, direction.x)
@@ -27,12 +23,12 @@ func can_collide_with(character):
 		# If in the air, check for the velocity first
 		# If we're trying to pass through it from the other way around,
 		# cancel it
-		var d = character.velocity.dot(perp)
+		var d = (character.velocity / 60.0 - movement).dot(perp)
 		if d < 0:
 			return false
 		
-		# In both cases, a threshold is applied that prevents clips
-		p -= character.velocity.normalized()
+		# Account for the movement of the platform to prevent clipping.
+		p += movement
 	else:
 		p -= perp
 	

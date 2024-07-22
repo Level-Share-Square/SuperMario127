@@ -1,10 +1,10 @@
-extends Node2D
+extends SemiSolidPlatform
 
 onready var sprite = $Sprite
 onready var recolor_sprite = $SpriteRecolor
 
-onready var platform_area_collision_shape = $StaticBody2D/Area2D/CollisionShape2D
-onready var collision_shape = $StaticBody2D/CollisionShape2D
+onready var platform_area_collision_shape = $Area2D/CollisionShape2D
+onready var collision_shape = $CollisionShape2D
 
 onready var left_width = sprite.patch_margin_left
 onready var right_width = sprite.patch_margin_right
@@ -15,13 +15,14 @@ var last_position : Vector2
 var momentum : Vector2
 
 func set_position(new_position):
-	var movement = get_parent().to_global(new_position) - global_position
+	movement = get_parent().to_global(new_position) - global_position
 	
 	#first move the bodies
-	$StaticBody2D.constant_linear_velocity = movement * 60
+	#$StaticBody2D.constant_linear_velocity = movement * 60
 	
 	#then move self
 	position = new_position
+
 
 func set_parts(parts: int):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
@@ -33,10 +34,12 @@ func set_parts(parts: int):
 	platform_area_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
 	collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
 
+
 func _ready():
 	last_position = global_position
 	collision_shape.shape = collision_shape.shape.duplicate()
 	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate()
+
 
 func _physics_process(delta):
 	momentum = (global_position - last_position) / (fps_util.PHYSICS_DELTA * 2)
@@ -44,7 +47,7 @@ func _physics_process(delta):
 	last_position = global_position
 
 
-
 func _on_PlatformArea_body_exited(body):
+	return
 	if body.get("velocity") != null:
 		body.velocity += Vector2(momentum.x, min(0, momentum.y))

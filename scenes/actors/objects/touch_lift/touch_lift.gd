@@ -116,7 +116,7 @@ onready var part_width = platform_sprite.texture.get_width() - left_width - righ
 func _ready():
 	
 	activated = !touch_start
-	$TouchLiftPlatform/StaticBody2D/Area2D/CollisionShape2D.disabled = false
+	$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = false
 	platform.collision_shape.disabled = !enabled
 	platform.platform_area_collision_shape.disabled = !enabled
 	
@@ -211,19 +211,19 @@ func reached_end() -> void:
 	match move_type:
 		MT_BACK_FORTH:
 			speed = -speed
-			$TouchLiftPlatform/StaticBody2D/Area2D/CollisionShape2D.disabled = true
+			$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = true
 			yield(get_tree().create_timer(0.1), "timeout")
-			$TouchLiftPlatform/StaticBody2D/Area2D/CollisionShape2D.disabled = false
+			$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = false
 		MT_RESET:
 			$AnimationPlayer.play("Reset")
-			$TouchLiftPlatform/StaticBody2D/Area2D/CollisionShape2D.disabled = true
+			$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = true
 			yield(get_tree().create_timer(0.1), "timeout")
-			$TouchLiftPlatform/StaticBody2D/Area2D/CollisionShape2D.disabled = false
+			$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = false
 		MT_ONCE:
 			activated = false
-			$TouchLiftPlatform/StaticBody2D/Area2D/CollisionShape2D.disabled = true
+			$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = true
 			yield(get_tree().create_timer(0.1), "timeout")
-			$TouchLiftPlatform/StaticBody2D/Area2D/CollisionShape2D.disabled = false
+			$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = false
 			
 func _on_touch_area_entered(body):
 	if body is Character:
