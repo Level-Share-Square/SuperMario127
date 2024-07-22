@@ -48,7 +48,9 @@ func _physics_process(delta):
 
 
 func _on_PlatformArea_body_exited(body):
-	if body.get("velocity") != null:
-		body.velocity += Vector2(momentum.x, min(0, momentum.y))
 	if "sprite" in body and (body.sprite.animation == "movingLeft" or body.sprite.animation == "movingRight"):
 		body.set_state_by_name("FallState")
+		return
+	if body.get("velocity") != null and "state" in body and body.state != body.get_state_node("FallState") and body.state != body.get_state_node("JumpState"):
+		body.velocity += Vector2(momentum.x, min(0, momentum.y))
+	

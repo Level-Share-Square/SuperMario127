@@ -102,10 +102,11 @@ func _on_PlatformArea_body_exited(body):
 		momentum = Vector2(0,0)
 		last_position = momentum
 		return
-	if body.get("velocity") != null:
-		body.velocity += Vector2(momentum.x, min(0, momentum.y))
 	if "sprite" in body and (body.sprite.animation == "movingLeft" or body.sprite.animation == "movingRight"):
 		body.set_state_by_name("FallState")
+		return
+	if body.get("velocity") != null and "state" in body and body.state != body.get_state_node("FallState") and body.state != body.get_state_node("JumpState"):
+		body.velocity += Vector2(momentum.x, min(0, momentum.y))
 
 func toggle_state():
 	inverted = !inverted
