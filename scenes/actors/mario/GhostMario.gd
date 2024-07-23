@@ -64,6 +64,8 @@ func _ready():
 		find_ghost = true
 
 func _physics_process(delta):
+	if Singleton.PlayerSettings.number_of_players != 1:
+		return
 	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
 	if Singleton2.ghost_enabled:
 		if find_ghost:

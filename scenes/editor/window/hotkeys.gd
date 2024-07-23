@@ -44,14 +44,17 @@ func _ready():
 				i.hide()
 				
 		else:
-			settings.hide()
-			reset.hide()
-			i.show()
-			var action_name = i.name
-			hotkeys[action_name] = InputMap.get_action_list(action_name)[0]
-			i.text = InputMap.get_action_list(action_name)[0].as_text()
-			label.text += i.full_name + "\n"
-			i.connect("button_down", self, "button_pressed", [i.name])
+			if Singleton2.player_hotkeys.has(i.name):
+				settings.hide()
+				reset.hide()
+				i.show()
+				var action_name = i.name
+				hotkeys[action_name] = InputMap.get_action_list(action_name)[0]
+				i.text = InputMap.get_action_list(action_name)[0].as_text()
+				label.text += i.full_name + "\n"
+				i.connect("button_down", self, "button_pressed", [i.name])
+			else:
+				i.hide()
 
 func _input(event):
 	if event is InputEventKey && timer >= 0 && timer < 600:

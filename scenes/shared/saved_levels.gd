@@ -27,6 +27,7 @@ var template_level_codes : Array = [
 	"res://level/template_levels/all_season_vacation.tres",
 	"res://level/template_levels/gold_rush_gulch.tres",
 	"res://level/template_levels/lost_cave.tres",
+	"res://level/template_levels/pastel_citadel.tres",
 	"res://level/template_levels/glide_feather_challenge.tres",
 	"res://level/template_levels/mortal_magma_land.tres",
 	"res://level/template_levels/warp_palace.tres",
