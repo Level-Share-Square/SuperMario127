@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/music_changer.gd" type="Script" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://scenes/editor/areas_button.gd" type="Script" id=20]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=21]
 [ext_resource path="res://scenes/shared/Hotkeys.tscn" type="PackedScene" id=22]
+[ext_resource path="res://scenes/editor/window/gravity.gd" type="Script" id=23]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -67,6 +68,15 @@ corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
+
+[sub_resource type="DynamicFont" id=15]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 32
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=10]
 size = 48
@@ -313,9 +323,11 @@ stream = ExtResource( 13 )
 volume_db = -10.0
 
 [node name="LevelSize" type="Control" parent="LevelSettings"]
-margin_top = -25.0
-margin_right = 40.0
-margin_bottom = 15.0
+margin_left = 202.5
+margin_top = 47.5
+margin_right = 242.5
+margin_bottom = 87.5
+rect_scale = Vector2( 0.8, 0.8 )
 script = ExtResource( 3 )
 shared_node_path = NodePath("../../../../Shared")
 backgrounds_node_path = NodePath("../../../../Backgrounds")
@@ -499,6 +511,32 @@ custom_styles/normal = SubResource( 6 )
 context_menu_enabled = false
 placeholder_text = "Level Name"
 placeholder_alpha = 0.35
+
+[node name="Gravity" type="Control" parent="LevelSettings"]
+margin_left = -17.0
+margin_top = -16.5
+margin_right = 23.0
+margin_bottom = 23.5
+script = ExtResource( 23 )
+
+[node name="LineEdit" type="LineEdit" parent="LevelSettings/Gravity"]
+margin_left = 577.0
+margin_top = 144.0
+margin_right = 842.0
+margin_bottom = 222.0
+custom_colors/font_color = Color( 0.14902, 0.188235, 0.439216, 1 )
+custom_fonts/font = SubResource( 15 )
+custom_styles/normal = SubResource( 6 )
+align = 1
+context_menu_enabled = false
+
+[node name="Label" type="Label" parent="LevelSettings/Gravity"]
+margin_left = 644.596
+margin_top = 220.197
+margin_right = 882.596
+margin_bottom = 292.197
+custom_fonts/font = SubResource( 14 )
+text = "Gravity"
 
 [node name="Hotkeys" type="Control" parent="LevelSettings"]
 margin_right = 40.0
