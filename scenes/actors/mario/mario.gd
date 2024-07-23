@@ -417,9 +417,12 @@ func is_grounded() -> bool:
 		raycast_node = ground_check_dive
 		raycast_node.cast_to = Vector2(0, 7.5)
 	
-	var new_is_grounded := (raycast_node.is_colliding() or water_check.is_colliding() or is_on_floor()) and velocity.y >= 0 
-	if !new_is_grounded and prev_is_grounded and velocity.y > 0:
-		velocity.y = 0
+	var normal = Vector2.UP
+	if raycast_node.is_colliding():
+		normal = raycast_node.get_collision_normal()
+	
+	var is_downward: bool = velocity.y > -1
+	var new_is_grounded := (raycast_node.is_colliding() or water_check.is_colliding() or is_on_floor()) and is_downward
 	
 	prev_is_grounded = new_is_grounded
 	return prev_is_grounded
@@ -760,9 +763,10 @@ func _physics_process(delta: float) -> void:
 
 			# Translate velocity X to Y
 			if normal.y != 0: # Avoid division by zero (what)
-				velocity.y += (velocity.x * normal.x / normal.y) * -1
-				if velocity.y < 0: # upwards velocity, don't allow that
-					velocity.y = 0
+				var add = (velocity.x * normal.x / normal.y) * -1
+				if add < 0: # upwards velocity, don't allow that
+					add = 0
+				velocity.y += add
 			
 			if abs(sprite_rotation) >= 80:
 				sprite_rotation = 0
@@ -814,9 +818,7 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = false
 	
 	# Set up snap
-	if is_in_platform:
-		snap = Vector2()
-	elif is_instance_valid(state) and state.disable_snap:
+	if is_instance_valid(state) and state.disable_snap:
 		snap = Vector2()
 	elif (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
 		var normal = ground_check.get_collision_normal()

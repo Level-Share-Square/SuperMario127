@@ -17,15 +17,8 @@ onready var inverted :bool= get_parent().inverted
 
 onready var parent = get_parent()
 
-var last_position : Vector2
-var last_last_position : Vector2
-var momentum : Vector2
-
 func set_position(new_position):
 	if(parent.frozen == true):
-		momentum = Vector2(0,0)
-		last_position = momentum
-		#set_position(Vector2(stepify(position.x, 1), stepify(position.y, 1)))
 		return
 	# Calculate intended motion
 	movement = get_parent().to_global(new_position) - global_position
@@ -58,7 +51,6 @@ func _ready():
 	sprite2.region_rect.position.y = sprite.region_rect.position.y
 	sprite2.region_rect.position.x = 23 + int(!parent.disappears) * 46
 
-	last_position = global_position
 	collision_shape.shape = collision_shape.shape.duplicate()
 	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate()
 
@@ -80,27 +72,12 @@ func _ready():
 
 func _physics_process(delta):
 	if(parent.frozen == true):
-		momentum = Vector2(0,0)
 		return
-	momentum = (global_position - last_position) / (fps_util.PHYSICS_DELTA * 2)
 
-	last_last_position = last_position
-	last_position = global_position
 	sprite.region_rect.position.x = int(!parent.disappears) * 46
 
 	sprite2.region_rect.position.x = 23 + int(!parent.disappears) * 46
 
-
-func _on_PlatformArea_body_exited(body):
-	if(parent.frozen == true || get_collision_layer_bit(4) == false):
-		momentum = Vector2(0,0)
-		last_position = momentum
-		return
-	if "sprite" in body and (body.sprite.animation == "movingLeft" or body.sprite.animation == "movingRight"):
-		body.set_state_by_name("FallState")
-		return
-	if body.get("velocity") != null and "state" in body and body.state != body.get_state_node("FallState") and body.state != body.get_state_node("JumpState"):
-		body.velocity += Vector2(momentum.x, min(0, momentum.y))
 
 func toggle_state():
 	inverted = !inverted
@@ -110,6 +87,7 @@ func switch_state(new_state):
 		if(parent.disappears):
 			set_collision_layer_bit(4, new_state)
 			animation_player.play(str(new_state).to_lower())
+			sprite.visible = new_state
 			sprite2.visible = !new_state
 		else:
 			sprite.visible = true

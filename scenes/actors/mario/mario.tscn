@@ -239,8 +239,8 @@ shader = SubResource( 25 )
 [sub_resource type="RectangleShape2D" id=27]
 extents = Vector2( 8.5, 20 )
 
-[sub_resource type="RectangleShape2D" id=28]
-extents = Vector2( 8.5, 20 )
+[sub_resource type="RectangleShape2D" id=95]
+extents = Vector2( 100, 100 )
 
 [sub_resource type="RectangleShape2D" id=29]
 extents = Vector2( 8.5, 8.5 )
@@ -1273,7 +1273,7 @@ animation = "tripleJumpLeft"
 visible = false
 frames = ExtResource( 44 )
 animation = "swimming"
-frame = 5
+frame = 2
 playing = true
 script = ExtResource( 63 )
 
@@ -1542,14 +1542,13 @@ position = Vector2( 0.5, 4 )
 shape = SubResource( 27 )
 
 [node name="PlatformDetector" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformDetector"]
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0.5, 4 )
-shape = SubResource( 28 )
+shape = SubResource( 95 )
 
 [node name="WaterDetector" type="Area2D" parent="."]
 visible = false
@@ -1822,14 +1821,14 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 13
+frame = 1
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 scale = Vector2( 1e-05, 1e-05 )
 frames = ExtResource( 55 )
-frame = 7
+frame = 4
 speed_scale = 3.0
 playing = true
 
@@ -1851,7 +1850,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 5
+frame = 2
 playing = true
 script = ExtResource( 34 )
 
@@ -1859,7 +1858,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 7
+frame = 4
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
