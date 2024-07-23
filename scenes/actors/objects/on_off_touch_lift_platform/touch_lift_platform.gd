@@ -43,9 +43,3 @@ func _physics_process(delta):
 	momentum = (global_position - last_position) / fps_util.PHYSICS_DELTA
 	
 	last_position = global_position
-	
-
-
-func _on_PlatformArea_body_exited(body):
-	if body.get("velocity") != null:
-		body.velocity += Vector2(momentum.x, min(0, momentum.y))
