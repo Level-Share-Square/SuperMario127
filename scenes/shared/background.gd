@@ -36,6 +36,8 @@ func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rec
 		parallax_layer.motion_offset = layer.offset
 		parallax_layer.motion_mirroring = Vector2(layer.mirroring.x * 2, layer.mirroring.y)
 		
+		# print("\n\nCHANGED Motion Scale:\t", parallax_layer.motion_scale, "\nMotion Offset:\t", parallax_layer.motion_offset, "\nMotion Mirroring:\t", parallax_layer.motion_mirroring)
+		
 		var sprite_instance = TextureRect.new()
 		if background_palette == 0:
 			sprite_instance.texture = layer.texture
