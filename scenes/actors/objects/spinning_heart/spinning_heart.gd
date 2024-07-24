@@ -60,14 +60,17 @@ func _physics_process(delta):
 				tween.interpolate_property(sprite, "speed_scale", 20, 1, (1 + spin_time)) #20 is 300 (player_speed_cap) divided by 15
 				tween.interpolate_property(color_sprite, "speed_scale", 20, 1, (1 + spin_time))
 				charbody.slow_heal(int((health_given * heal_scale) * 5), 1, spin_time, true)
+				anim_player.play("hop")
+				sound.play()
+				tween.start()
 			elif once == false:
 				charbody.slow_heal(int((health_given * heal_scale) * 5), 1, spin_time, false) #Timers can't be set to zero
 				tween.interpolate_property(sprite, "speed_scale", spin_scale, 1, 1 + spin_time)
 				tween.interpolate_property(color_sprite, "speed_scale", spin_scale, 1, 1 + spin_time)
 				once = true
-			anim_player.play("hop")
-			sound.play()
-			tween.start()
+				anim_player.play("hop")
+				sound.play()
+				tween.start()
 
 
 func _ready():
