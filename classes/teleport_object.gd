@@ -37,11 +37,13 @@ func local_tp(entering_character : Character, entering):
 			tp_pair = self
 		
 		
-		
 		tp_tween.interpolate_callback(tp_pair, WAIT_TIME, "start_exit_anim", entering_character)
 		tp_tween.start()
+		
 		if object_type == "area_transition" and tp_pair.object_type == "area_transition":
+			self.is_idle = true
 			return
+		
 		entering_character.global_position = tp_pair.global_position
 		entering_character.camera.global_position = entering_character.global_position
 		entering_character.camera.skip_to_player = true
@@ -154,8 +156,9 @@ func exit_remote_teleport():
 func _start_local_transition(character : Character, entering) -> void:
 	var local_pair = find_local_pair()
 	if entering:
+		if object_type != "area_transition" and local_pair.object_type == "area_transition":
+			local_pair.is_idle = false
 		# warning-ignore: return_value_discardedt
-		print(global_position.distance_to(local_pair.global_position))
 		if global_position.distance_to(local_pair.global_position) <= 800:
 
 			var tween = Tween.new()
@@ -221,8 +224,10 @@ class AreaTransitionHelper:
 		
 	func find_exit_offset(exit_vertical : bool, exit_size : float) -> Vector2:
 		if exit_vertical:
+			velocity.x = 1 if velocity.x == 0 else velocity.x
 			return Vector2(32 *  sign(velocity.x), -clamp(-enter_pos.y, -exit_size/2, exit_size/2))
 		else:
+			velocity.y = 1 if velocity.y == 0 else velocity.y
 			return Vector2(clamp(enter_pos.x, -exit_size/2, exit_size/2), 45 * sign(velocity.y))
 			
 	func find_camera_position(exit_vertical : bool, exit_global_position : Vector2, camera_rect : Vector2, exit_size : float):
