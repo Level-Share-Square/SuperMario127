@@ -27,7 +27,7 @@ runs:
       #   - Get how many commits we have through their unique commit ID.
       #   - Check if we have an actual commit push and not something else (e.g. branch push).
       #   - Check if our current branch is marked as hidden and the user wants to hide hidden branches.
-      #   - Set all needed job outputs.
+      #   - Set all needed job outputs..
       id: process_commits
       run: |
         COMMIT_IDS="${{ join(github.event.commits.*.id, ', ') }}"
