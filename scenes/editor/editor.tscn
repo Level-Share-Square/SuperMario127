@@ -4583,6 +4583,7 @@ texture_pressed = ExtResource( 1042 )
 texture_hover = ExtResource( 1035 )
 expand = true
 script = ExtResource( 1049 )
+editor = NodePath("../../../..")
 normal_tex = ExtResource( 1032 )
 hover_tex = ExtResource( 1035 )
 selected_tex = ExtResource( 1042 )
@@ -4592,6 +4593,31 @@ stream = ExtResource( 121 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/BoundaryTool"]
+stream = ExtResource( 120 )
+volume_db = -10.0
+
+[node name="DragTool" type="TextureButton" parent="UI/Tools/Control"]
+margin_left = 19.0
+margin_top = 5.0
+margin_right = 145.0
+margin_bottom = 131.0
+rect_scale = Vector2( 0.333, 0.333 )
+texture_normal = ExtResource( 1032 )
+texture_pressed = ExtResource( 1042 )
+texture_hover = ExtResource( 1035 )
+expand = true
+script = ExtResource( 28 )
+editor = NodePath("../../../..")
+tool_index = 2
+normal_tex = ExtResource( 1032 )
+hover_tex = ExtResource( 1035 )
+selected_tex = ExtResource( 1042 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/DragTool"]
+stream = ExtResource( 121 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/DragTool"]
 stream = ExtResource( 120 )
 volume_db = -10.0
 

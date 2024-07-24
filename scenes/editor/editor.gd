@@ -35,7 +35,7 @@ var last_mouse_pos := Vector2(0, 0)
 var last_mouse_tile_pos := Vector2(0, 0)
 
 
-
+var timer = 2
 var object_pos : Vector2
 
 
@@ -461,6 +461,7 @@ func _process(delta : float) -> void:
 				hovered_object.set_property("rotation_degrees", fmod(hovered_object.rotation_degrees, 360), true)
 		
 		if selected_box and selected_box.item:
+			var last_object_pos : Vector2
 			
 			# Place items
 			
@@ -478,7 +479,6 @@ func _process(delta : float) -> void:
 						
 						shared.set_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, item.tileset_id, item.tile_id, item.palette_index)
 				elif !is_instance_valid(hovered_object) and !rotating: # Place object
-					var last_object_pos : Vector2
 					
 						
 					if placement_mode == "Tile":
@@ -513,7 +513,6 @@ func _process(delta : float) -> void:
 						# writing this abhorrent line of code. Amen.
 						last_object_pos = object_pos
 						
-						
 					if Input.is_action_pressed("clickdrag"):
 						last_object_pos = object_pos
 						mouse_pos = get_global_mouse_position()
@@ -524,6 +523,51 @@ func _process(delta : float) -> void:
 
 						elif(abs(length_difference.y) >= item_preview.texture.get_height()):
 							object_pos.y = last_object_pos.y + item_preview.texture.get_height() * (length_difference.y/abs(length_difference.y))
+						
+			elif left_held and selected_tool == 2 and !is_instance_valid(hovered_object) and !rotating:
+				var item = selected_box.item
+				if timer <= 0:
+					object_pos = mouse_pos
+					timer = 2
+				else:
+					timer -= 1
+				if !Input.is_action_pressed("8_pixel_lock"):
+					object_pos = Vector2(stepify(object_pos.x, 8), stepify(object_pos.y, 8))
+				if surface_snap:
+					var object_bottom := object_pos + Vector2(0, item.object_size.y)
+					var space_state := get_world_2d().direct_space_state
+					var result := space_state.intersect_ray(object_bottom, object_bottom + Vector2(0, 16))
+					if result:
+						object_pos = result.position - Vector2(0, item.object_size.y)
+				# I am truly sorry for writing this god forsaken code
+				
+
+					
+				
+				if object_pos and !shared.is_object_at_position(object_pos) and item.on_place(object_pos, level_data, level_area):
+					var object := LevelObject.new()
+					object.type_id = item.object_id
+					object.palette = item.palette_index
+					object.properties.append(object_pos)
+					object.properties.append(Vector2(1, 1))
+					object.properties.append(0)
+					object.properties.append(true)
+					object.properties.append(true)
+					var object_copy = object
+					objects_stack.append([shared.create_object(object, true),true,object_copy])
+					# Merciful Lord Jesus, please forgive me for 
+					# writing this abhorrent line of code. Amen.
+					last_object_pos = object_pos
+					
+					last_object_pos = object_pos
+					mouse_pos = get_global_mouse_position()
+					var length_difference = mouse_pos - last_object_pos
+
+					if(abs(length_difference.x) >= item_preview.texture.get_width()):
+						object_pos.x = last_object_pos.x + item_preview.texture.get_width() * (length_difference.x/abs(length_difference.x))
+
+					elif(abs(length_difference.y) >= item_preview.texture.get_height()):
+						object_pos.y = last_object_pos.y + item_preview.texture.get_height() * (length_difference.y/abs(length_difference.y))
 
 						
 						
