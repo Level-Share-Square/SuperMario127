@@ -91,7 +91,7 @@ export var initial_position := Vector2(0, 0)
 export var velocity := Vector2(0, 0)
 var last_velocity := Vector2(0, 0)
 var last_position := Vector2(0, 0)
-var last_last_position := Vector2(0, 0)
+
 
 export var gravity_scale := 1.0
 export var facing_direction := 1
@@ -935,7 +935,7 @@ func _physics_process(delta: float) -> void:
 	if position.x > level_bounds.end.x * 32 -1:
 		position.x = level_bounds.end.x * 32 -1
 		velocity.x = 0
-	last_last_position = last_position
+	
 	last_position = global_position
 	
 	last_velocity = velocity

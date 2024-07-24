@@ -128,6 +128,7 @@ func update_color(key, value):
 			
 			animated_sprite.frames = collected_frames
 			particles.texture = collected_particles
+			ray_sprite.modulate = Color.blue
 		last_color = value
 
 func _process(_delta):

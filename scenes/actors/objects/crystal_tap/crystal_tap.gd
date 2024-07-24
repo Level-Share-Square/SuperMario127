@@ -22,6 +22,7 @@ func _set_property_values():
 	set_property("horizontal", horizontal)
 
 func _ready():
+	connect("property_changed", self, "_on_property_changed")
 	if enabled:
 		var _connect = use_area.connect("body_entered", self, "set_liquid_level")
 	yield(get_tree(), "physics_frame")
@@ -33,11 +34,17 @@ func _ready():
 		offset_line.visible = true
 func _process(delta):
 	if mode == 1:
-		if(horizontal):
-			offset_line.set_point_position(1, Vector2(offset, 0))
-		else:
-			offset_line.set_point_position(1, Vector2(0, offset))
-		
+		pass
+			
+func _on_property_changed(key, value):
+	
+	offset_line.global_scale = Vector2(1, 1)
+	offset_line.global_rotation = 0
+	if(horizontal):
+		offset_line.set_point_position(1, Vector2(offset, 0))
+	else:
+		offset_line.set_point_position(1, Vector2(0, offset))
+	
 func set_liquid_level(body):
 	if body != null and visible:
 		anim_player.play("touch")
