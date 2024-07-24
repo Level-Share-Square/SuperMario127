@@ -1,0 +1,18 @@
+name: Discord Notif
+
+on:
+  push:
+    branches: [ main ] # Replace main with your branch name.
+
+jobs:
+  Notify:
+    runs-on: ubuntu-latest
+    name: Send Notification
+    steps:
+      - name: Send Notification
+        uses: Retr0-01/better-discord-notification@main
+        with:
+          webhook-url: 'https://discord.com/api/webhooks/748931444595884154/UmlvDGGAvP0jifJQ3NoQV9KdgKsITavON0V0k4nJsDBlRv7UUS1x-fHafPEyEqZHPjB4'
+          embed-color: '9498256'
+          footer-icon: 'https://cdn.discordapp.com/emojis/739680612213981265.gif'
+          ignore-hidden: 'true'
