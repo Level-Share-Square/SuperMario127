@@ -531,8 +531,7 @@ func _process(delta : float) -> void:
 					timer = 2
 				else:
 					timer -= 1
-				if !Input.is_action_pressed("8_pixel_lock"):
-					object_pos = Vector2(stepify(object_pos.x, 8), stepify(object_pos.y, 8))
+				object_pos = Vector2(stepify(object_pos.x, 8), stepify(object_pos.y, 8))
 				if surface_snap:
 					var object_bottom := object_pos + Vector2(0, item.object_size.y)
 					var space_state := get_world_2d().direct_space_state
@@ -559,7 +558,6 @@ func _process(delta : float) -> void:
 					# writing this abhorrent line of code. Amen.
 					last_object_pos = object_pos
 					
-					last_object_pos = object_pos
 					mouse_pos = get_global_mouse_position()
 					var length_difference = mouse_pos - last_object_pos
 

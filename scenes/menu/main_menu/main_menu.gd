@@ -7,6 +7,11 @@ onready var button_templates : Button = $Panel/VBoxContainer/ButtonTemplates
 onready var button_options : Button = $Panel/VBoxContainer/ButtonOptions
 onready var button_quit : Button = $Panel/ButtonQuit
 onready var button_login : Button = $Panel/ButtonLogin
+onready var button_skip = $Control/Skip
+onready var button_speed = $Control/Speed
+onready var credits = $Control/AnimationPlayer
+onready var credits2 = $Control/AnimationPlayer2
+onready var credits3 = $Control/AnimationPlayer3
 onready var error_window = $ErrorWindow
 
 onready var timer = $CooldownTimer
@@ -34,6 +39,9 @@ func _ready() -> void:
 	_connect = button_search.connect("pressed", self, "on_button_search_pressed")
 	_connect = button_quit.connect("pressed", self, "on_button_quit_pressed")
 	_connect = button_login.connect("pressed", self, "on_button_login_pressed")
+	_connect = button_campaign.connect("pressed", self, "on_button_credits_pressed")
+	_connect = button_skip.connect("pressed", self, "on_button_skip_pressed")
+	_connect = button_speed.connect("pressed", self, "on_button_speed_pressed")
 	
 #func _on_button_login_pressed():
 #	$LogInWindow.open()
@@ -109,4 +117,19 @@ func on_button_options_pressed() -> void:
 func on_button_quit_pressed() -> void:
 	get_tree().quit()
 	
+func on_button_speed_pressed() -> void:
+	if credits.playback_speed == 1:
+		button_speed.text = "Speed (1x)"
+		credits.playback_speed = 5
+	else:
+		button_speed.text = "Speed (5x)"
+		credits.playback_speed = 1
+		
+func on_button_skip_pressed() -> void:
+	credits.play("skip")
+	
+func on_button_credits_pressed() -> void:
+	credits3.play("Pasted Animation")
+	credits.play("roll")
+	credits2.play("button in")
 
