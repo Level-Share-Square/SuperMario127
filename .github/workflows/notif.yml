@@ -2,7 +2,7 @@ name: Discord Notif
 
 on:
   push:
-    branches: [ main ] # Replace main with your branch name.
+    branches: [ master ] # Replace main with your branch name.
 
 jobs:
   Notify:
@@ -12,7 +12,7 @@ jobs:
       - name: Send Notification
         uses: Retr0-01/better-discord-notification@main
         with:
-          webhook-url: 'https://discord.com/api/webhooks/682639730105647124/7KTSYM2rTre2vr94qG0WN0jgRhiZdExKvfb_w31-F3rFfbhAfo6YkeZpGP0fzAVwaE31'
+          webhook-url: 'https://discord.com/api/webhooks/1265664077792018666/v52ye-uZJbKMqD9-AvHAR4uFhFlC383kvvVzMiMkWFLxvWqkwbXRx52HvJotd2gyDUsm'
           embed-color: '9498256'
           footer-icon: 'https://cdn.discordapp.com/emojis/739680612213981265.gif'
           ignore-hidden: 'true'
