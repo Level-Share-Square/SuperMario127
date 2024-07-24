@@ -32,6 +32,11 @@ func can_collide_with(character):
 	
 	# If we're trying to pass through it from the underside, cancel collision
 	if not is_grounded and vel_dir < 0:
+		if "apply_velocity" in self:
+			#self.apply_velocity = false
+			pass
 		return false
 
+	if "apply_velocity" in self and correct_side:
+		self.apply_velocity = true
 	return correct_side

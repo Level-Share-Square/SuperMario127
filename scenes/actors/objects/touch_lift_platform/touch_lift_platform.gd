@@ -15,6 +15,8 @@ var last_position : Vector2
 
 var momentum : Vector2
 
+var apply_velocity = false
+
 func set_position(new_position):
 	# Calculate intended motion
 	movement = get_parent().to_global(new_position) - global_position
@@ -41,10 +43,15 @@ func _ready():
 
 
 func _physics_process(delta):
-	momentum = (global_position - last_position) / (fps_util.PHYSICS_DELTA * 2)
+	momentum = (global_position - last_position) / (fps_util.PHYSICS_DELTA * 3)
 	last_position = global_position
+
 
 # this is to fix the wile coyote bug
 func _on_Area2D_body_exited(body):
+	if body.get("velocity") != null and apply_velocity:
+		body.velocity += Vector2(momentum.x, min(0, momentum.y))
+		apply_velocity = false
 	if "state" in body and !is_instance_valid(body.state):
 		body.set_state_by_name("FallState")
+		#self.apply_velocity = false
