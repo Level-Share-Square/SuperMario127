@@ -62,9 +62,9 @@ func _process(delta):
 	if enabled and mode == 0:
 		for body in area_2d.get_overlapping_bodies():
 			bounce(body)
-		for area in area_2d.get_overlapping_areas():
-			if area.get_parent() is Character:
-				bounce(area)
+#		for area in area_2d.get_overlapping_areas():
+#			if area.get_parent() is Character:
+#				bounce(area)
 
 
 func bounce(body):
