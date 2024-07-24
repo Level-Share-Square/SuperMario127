@@ -73,6 +73,7 @@ func _ready():
 		back_button.connect("pressed", self, "go_back")
 
 func go_back():
+	get_parent().get_parent().get_node("InactiveScreens/MultiplayerOptions").visible = true
 	emit_signal("screen_change", "controls_screen", "options_screen")
 
 func _input(event):
