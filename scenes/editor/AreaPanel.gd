@@ -77,9 +77,7 @@ func duplicate_area():
 		var area = LevelArea.new()
 		var dup = Singleton.CurrentLevelData.level_data.areas[id]
 		area.duplicate(dup)
-		area.settings.background = Singleton.CurrentLevelData.level_data.areas[id].settings.background
-		area.settings.sky = Singleton.CurrentLevelData.level_data.areas[id].settings.sky
-		area.settings.background_palette = Singleton.CurrentLevelData.level_data.areas[id].settings.background_palette
+		area.settings = Singleton.CurrentLevelData.level_data.areas[id].settings
 		Singleton.CurrentLevelData.level_data.areas.append(area)
 		get_parent().get_parent().get_parent().reload_areas()
 #		new_area.disabled = (Singleton.CurrentLevelData.level_data.areas.size() == 16)
@@ -88,9 +86,7 @@ func move_area_down():
 	if id < Singleton.CurrentLevelData.level_data.areas.size() - 1 && Singleton.CurrentLevelData.level_data.areas.size() > 1:
 		var area1 = LevelArea.new()
 		area1.duplicate(Singleton.CurrentLevelData.level_data.areas[id])
-		area1.settings.background = Singleton.CurrentLevelData.level_data.areas[id].settings.background
-		area1.settings.sky = Singleton.CurrentLevelData.level_data.areas[id].settings.sky
-		area1.settings.background_palette = Singleton.CurrentLevelData.level_data.areas[id].settings.background_palette
+		area1.settings = Singleton.CurrentLevelData.level_data.areas[id].settings
 		Singleton.CurrentLevelData.level_data.areas.remove(id)
 		if Singleton.CurrentLevelData.area > id:
 			Singleton.CurrentLevelData.area -= 1
@@ -101,9 +97,7 @@ func move_area_up():
 	if id > 0 && Singleton.CurrentLevelData.level_data.areas.size() > 1:
 		var area1 = LevelArea.new()
 		area1.duplicate(Singleton.CurrentLevelData.level_data.areas[id])
-		area1.settings.background = Singleton.CurrentLevelData.level_data.areas[id].settings.background
-		area1.settings.sky = Singleton.CurrentLevelData.level_data.areas[id].settings.sky
-		area1.settings.background_palette = Singleton.CurrentLevelData.level_data.areas[id].settings.background_palette
+		area1.settings = Singleton.CurrentLevelData.level_data.areas[id].settings
 		Singleton.CurrentLevelData.level_data.areas.remove(id)
 		if Singleton.CurrentLevelData.area > id:
 			Singleton.CurrentLevelData.area -= 1
