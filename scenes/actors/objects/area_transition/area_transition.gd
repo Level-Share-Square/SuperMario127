@@ -133,6 +133,8 @@ func _on_property_changed(key, value):
 
 
 func _physics_process(_delta : float) -> void:
+	if "\n" in destination_tag:
+		destination_tag = destination_tag.replace("\n", "")
 	if is_idle and enabled:
 		#the area2d is set to only collide with characters, so we can (hopefully) safely assume if there 
 		#is a collision it's with a character

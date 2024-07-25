@@ -110,6 +110,8 @@ func _physics_process(_delta):
 			change_size() # Letting it happen in _process causes issues
 
 func _process(_delta):
+	if "\n" in tag:
+		tag = tag.replace("\n", "")
 	if (Vector2(width, height) != last_size ||
 			color != last_color ||
 			render_in_front != last_front):

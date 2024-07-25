@@ -79,3 +79,7 @@ func _on_property_changed(key, value):
 			bright_color.s /= 1.5
 			bright_color.v *= 1.15
 			sprite2.self_modulate = bright_color
+
+func _process(delta):
+	if "\n" in destination_tag:
+		destination_tag = destination_tag.replace("\n", "")

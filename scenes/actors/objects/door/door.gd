@@ -63,3 +63,7 @@ func exit_local_teleport():
 func exit_remote_teleport():
 	Singleton.CurrentLevelData.level_data.vars.transition_data = []
 	door_enter_logic.is_idle = true
+
+func _process(delta):
+	if "\n" in destination_tag:
+		destination_tag = destination_tag.replace("\n", "")
