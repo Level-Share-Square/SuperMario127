@@ -47,8 +47,10 @@ func _ready():
 		camera_stopper.monitorable = stops_camera
 	else:
 		var _connect2 = connect(\"property_changed\", self, \"update_property\")
+		camera_stopper.visible = stops_camera
 	update_property(\"vertical\", vertical)
 	camera_stopper.set_size(camera_stop_shape.shape.extents)
+	
 	
 func update_property(key, value):
 	match(key):
@@ -68,6 +70,8 @@ func update_property(key, value):
 			update_parts()
 		\"rotation_degrees\":
 			rotation_degrees = 0
+		\"stops_camera\":
+			camera_stopper.visible = stops_camera
 			
 func update_parts():
 	if vertical:

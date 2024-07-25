@@ -58,5 +58,5 @@ func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rec
 
 func _physics_process(delta):
 	if do_auto_scroll:
-		parallax_node.scroll_offset.x += delta * 750
+		parallax_node.scroll_offset.x += delta * 300
 	parallax_node.set_ignore_camera_zoom(true)
