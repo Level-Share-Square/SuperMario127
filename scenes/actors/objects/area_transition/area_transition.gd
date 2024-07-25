@@ -99,14 +99,10 @@ func update_parts():
 		collision_shape.shape.extents.x = 16 * parts
 		camera_stop_shape.shape.extents.x = collision_shape.shape.extents.x + 26
 			
-			
-func set_idle(body : Character):
-	is_idle = true
-
 func connect_local_members():
 	connect("pipe_animation_finished", self, "_start_local_transition")
 	connect("exit", self, "_start_local_transition")
-	#area2d.connect("body_exited", self, "exit_local_teleport")
+	area2d.connect("body_exited", self, "exit_remote_teleport")
 
 func connect_remote_members():
 	connect("pipe_animation_finished", self, "change_areas")
@@ -114,8 +110,9 @@ func connect_remote_members():
 	
 
 func exit_local_teleport(character = null):
-	is_idle = true
+	#is_idle = true
 	pass
+	
 
 func exit_remote_teleport(character = null):
 	is_idle = true
@@ -159,10 +156,8 @@ func start_pipe_enter_animation(character : Character) -> void:
 		if pair.object_type == "area_transition":
 			pair.is_idle = false
 			character.gravity_scale = 0
-			Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
 			Singleton.CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
-			if pair.stops_camera:
-				character.camera.auto_move = false
+			character.camera.auto_move = false
 	
 	emit_signal("pipe_animation_finished", character, entering)
 	
@@ -171,9 +166,11 @@ func start_pipe_enter_animation(character : Character) -> void:
 func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 	character.show()
 	stored_character = character
+	is_idle = false
 	entering = false
 	
 	character.toggle_movement(false)
+
 	
 	if !tp_mode:
 		emit_signal("exit", character, entering)
@@ -185,8 +182,6 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 		
 		if Singleton.CurrentLevelData.level_data.vars.transition_character_data.size() == 1:
 			exit_with_helper(character)
-		else:
-			area2d.connect("body_exited", self, "set_idle", [], CONNECT_ONESHOT)
 	else:
 		pipe_exit_anim_finished(character)
 	reset_sprite(character)
@@ -204,35 +199,22 @@ func pipe_exit_anim_finished(character : Character):
 	# undo collision changes 
 	character.set_collision_layer_bit(1, true)
 	character.set_inter_player_collision(true) 
+	
 	stored_character = null
-	
-	
+	area2d.connect("body_exited", self, "exit_remote_teleport")
+	print("FINISHED")
 	
 func exit_with_helper(character : Character):
-	
 	var helper = Singleton.CurrentLevelData.level_data.vars.transition_character_data.back()
 	character.velocity = helper.velocity
 	character.state = helper.state
 	character.facing_direction = helper.facing_direction
-	
-	if stops_camera:
-		print("stop")
-		character.position = global_position + helper.find_exit_offset(vertical, parts * 32)
-		character.camera.global_position = helper.find_camera_position(vertical, global_position, character.camera.base_size, parts * 32)
-		character.camera.last_position = character.camera.global_position
-		if teleportation_mode:
-			character.camera.auto_move = true
-		is_idle = true
-	else:
-		character.position = global_position
-		character.camera.global_position = character.global_position
-		character.camera.last_position = character.camera.position
-		character.camera.auto_move = true
-		area2d.connect("body_exited", self, "set_idle", [], CONNECT_ONESHOT)
-	
-
-	
+	character.camera.global_position = helper.find_camera_position(vertical, character.global_position, character.camera.base_size)
+	character.camera.last_position = character.camera.position
+	character.camera.auto_move = true
+	character.position = global_position + helper.find_exit_offset(vertical, parts * 32)
 	Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
+	
 	
 	
 func _tween_all_completed() -> void:
@@ -246,10 +228,6 @@ func reset_sprite(character : Character): #This is here in case Mario came from 
 	character.sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	character.sprite.scale = Vector2(1.0, 1.0)
 	character.sprite.position = Vector2.ZERO
-	
-func _dumb_method(character : Character):
-	character.camera.auto_move = true
-
 
 
 

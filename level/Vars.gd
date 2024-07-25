@@ -58,7 +58,6 @@ func activate_fludd(var type : int):
 	match(type):
 		0:
 			emit_signal("hover_fludd_activated")
-			print("emitting hover")
 		1:
 			emit_signal("turbo_fludd_activated")
 		2:
