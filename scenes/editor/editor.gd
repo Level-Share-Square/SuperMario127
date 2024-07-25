@@ -524,7 +524,7 @@ func _process(delta : float) -> void:
 						elif(abs(length_difference.y) >= item_preview.texture.get_height()):
 							object_pos.y = last_object_pos.y + item_preview.texture.get_height() * (length_difference.y/abs(length_difference.y))
 						
-			elif left_held and selected_tool == 2 and !is_instance_valid(hovered_object) and !rotating:
+			elif left_held and selected_tool == 2 and !is_instance_valid(hovered_object) and !rotating and selected_box.item.is_object:
 				var item = selected_box.item
 				if timer <= 0:
 					object_pos = mouse_pos
