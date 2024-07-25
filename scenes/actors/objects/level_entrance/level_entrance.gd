@@ -85,7 +85,7 @@ func exit_teleport(obj : Array):
 			obj[1].is_idle = false
 			if transition_character_data.size() >= 7 and obj[1].stops_camera:	
 				var helper = transition_character_data.back()
-				character.camera.global_position = helper.find_camera_position(obj[1].vertical, character.global_position, character.camera.base_size, obj[1].parts * 32)
+				character.camera.global_position = helper.find_camera_position(obj[1].vertical, character.global_position, character.camera.size, obj[1].parts * 32)
 				character.camera.last_position = character.camera.global_position
 				character.camera.auto_move = false
 			else:
