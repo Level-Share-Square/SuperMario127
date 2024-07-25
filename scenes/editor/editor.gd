@@ -448,7 +448,7 @@ func _process(delta : float) -> void:
 					hovered_object.set_property("position", obj_position, true)
 			
 			if rotating:
-				hovered_object.rotation = -90 + hovered_object.position.angle_to_point(mouse_pos)
+				hovered_object.rotation = deg2rad(-90) + hovered_object.position.angle_to_point(mouse_pos)
 				if !Input.is_action_pressed("8_pixel_lock"):
 					hovered_object.rotation_degrees = stepify(hovered_object.rotation_degrees, 15)
 			

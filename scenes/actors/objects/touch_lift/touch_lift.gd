@@ -143,8 +143,10 @@ func _ready():
 	loop_offset = start_offset
 	path_follower.offset = start_offset
 	
+	platform.set_sync_to_physics(true)
 	if(mode==1):
-		platform.modulate = transparent_color
+		# Disable to fix rotation issues.
+		platform.set_sync_to_physics(false)
 		
 		# i don't know why this fixes the layering, 1.0 doesn't work and 0.0 doesn't work
 		# this is an integer
