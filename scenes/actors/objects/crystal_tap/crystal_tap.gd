@@ -34,7 +34,7 @@ func _ready():
 		offset_line.visible = true
 func _process(delta):
 	if "\n" in tag:
-		tag.replace("\n", "")
+		tag = tag.replace("\n", "")
 			
 func _on_property_changed(key, value):
 	
