@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/actors/objects/door/door_enter_logic.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/door/door.gd" type="Script" id=2]
@@ -7,13 +7,15 @@
 [ext_resource path="res://scenes/actors/objects/door/nsmbwiiDoor1.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/actors/objects/door/palettes/1/doorframes.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://scenes/actors/objects/door/palettes/2/doorframes.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://scenes/actors/objects/door/palettes/3/doorframes.tres" type="SpriteFrames" id=8]
+[ext_resource path="res://scenes/actors/objects/door/palettes/4/doorframes.tres" type="SpriteFrames" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 20 )
 
 [node name="Door" type="Node2D"]
 script = ExtResource( 2 )
-palette_frames = [ ExtResource( 6 ), ExtResource( 7 ) ]
+palette_frames = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ]
 
 [node name="DoorEnterLogic" type="Node2D" parent="."]
 script = ExtResource( 1 )

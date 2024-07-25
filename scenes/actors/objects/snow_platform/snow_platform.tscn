@@ -1,8 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
+[ext_resource path="res://scenes/actors/objects/snow_platform/texture.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/metal_platform/semi_solid_platform.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/metal_platform/is_platform_area.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/metal_platform/resizable_semisolid.gd" type="Script" id=4]
+[ext_resource path="res://scenes/actors/objects/snow_platform/5.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/snow_platform/3.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/snow_platform/4.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/snow_platform/1.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/snow_platform/2.png" type="Texture" id=9]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/texture.png-2a423e6905e2cd598f1759fdcf73a510.stex"
@@ -16,6 +22,7 @@ extents = Vector2( 48, 28 )
 [node name="SnowPlatform" type="Node2D"]
 z_index = -1
 script = ExtResource( 4 )
+palette_textures = [ ExtResource( 1 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 5 ) ]
 parts = 1
 
 [node name="Sprite" type="NinePatchRect" parent="."]
