@@ -15,6 +15,8 @@ onready var off = preload("res://assets/misc/closed_eye.png")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	password.secret
+	visibility.texture_normal = off
 	wrong.hide()
 	visibility.connect("button_down", self, "on_visible_pressed")
 	httpreq.connect("request_completed", self, "on_req_complete")

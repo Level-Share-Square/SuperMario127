@@ -301,7 +301,7 @@ func update_activity() -> void:
 
 	var assets = activity.get_assets()
 	assets.set_large_image("sm127")
-	assets.set_large_text("0.7.2")
+	assets.set_large_text("0.8.0")
 	assets.set_small_image("capsule_main")
 	assets.set_small_text("ZONE 2 WOOO")
 	
@@ -422,7 +422,7 @@ func _process(delta : float) -> void:
 				
 				
 			
-			if left_held and selected_tool == 0 and Input.is_action_just_pressed("place") and !rotating:
+			if left_held and selected_tool == 0 and Input.is_action_just_pressed("place") and !rotating and selected_box.item.is_object:
 				if Input.is_action_pressed("duplicate"):
 					var object := LevelObject.new()
 					var original_object : LevelObject = hovered_object.level_object.get_ref()

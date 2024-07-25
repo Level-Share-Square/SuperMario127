@@ -22,6 +22,7 @@ const EDITOR_SCENE : PackedScene = preload("res://scenes/editor/editor.tscn")
 
 
 func _ready() -> void:
+	$Control/ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if UserInfo.username != "":
 		button_login.text = "Logged in as " + UserInfo.username
 	Singleton2.crash = false
@@ -53,7 +54,7 @@ func update_activity() -> void:
 
 	var assets = activity.get_assets()
 	assets.set_large_image("sm127")
-	assets.set_large_text("0.7.2")
+	assets.set_large_text("0.8.0")
 	assets.set_small_image("capsule_main")
 	assets.set_small_text("ZONE 2 WOOO")
 	
@@ -126,10 +127,19 @@ func on_button_speed_pressed() -> void:
 		credits.playback_speed = 1
 		
 func on_button_skip_pressed() -> void:
+	Singleton.Music.stop_temporary_music()
 	credits.play("skip")
+	$Control/ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 func on_button_credits_pressed() -> void:
+	Singleton.Music.play_temporary_music(66, 50)
 	credits3.play("Pasted Animation")
 	credits.play("roll")
+	var _connect = credits.connect("animation_finished", self, "on_roll_finished")
 	credits2.play("button in")
+	$Control/ColorRect.mouse_filter = Control.MOUSE_FILTER_STOP
 
+func on_roll_finished(anim_name):
+	if anim_name == "roll":
+		Singleton.Music.stop_temporary_music()
+		$Control/ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE

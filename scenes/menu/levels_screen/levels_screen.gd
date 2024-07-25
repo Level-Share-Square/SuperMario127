@@ -516,7 +516,7 @@ func update_activity() -> void:
 
 	var assets = activity.get_assets()
 	assets.set_large_image("sm127")
-	assets.set_large_text("0.7.2")
+	assets.set_large_text("0.8.0")
 	assets.set_small_image("capsule_main")
 	assets.set_small_text("ZONE 2 WOOO")
 	
@@ -534,7 +534,7 @@ func update_activity2() -> void:
 
 	var assets = activity.get_assets()
 	assets.set_large_image("sm127")
-	assets.set_large_text("0.7.2")
+	assets.set_large_text("0.8.0")
 	assets.set_small_image("capsule_main")
 	assets.set_small_text("ZONE 2 WOOO")
 	
