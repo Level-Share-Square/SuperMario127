@@ -81,8 +81,19 @@ func precise_object_overlap(object_node: Node, point: Vector2) -> int:
 	if object_node is AnimatedSprite:
 		return 1 if animated_sprite_get_rect(object_node).has_point(object_node.to_local(point)) else 0
 	if object_node is NinePatchRect:
-		# grow by 10 to make it easier to select moving platforms
-		return 1 if object_node.get_global_rect().grow(10).has_point(point) else 0
+		var global_rect = object_node.get_global_rect()
+		var grow = 10
+		var pos = global_rect.position
+		var size = global_rect.size
+		var rot = 0
+		if "global_rotation" in object_node.get_parent():
+			rot = object_node.get_parent().global_rotation + object_node.rect_rotation
+		var poly = [
+			pos + Vector2(-grow, -grow).rotated(rot),
+			pos + (Vector2(grow, -grow) + size * Vector2.RIGHT).rotated(rot),
+			pos + (Vector2(grow, grow) + size).rotated(rot),
+			pos + (Vector2(-grow, grow) + size * Vector2.DOWN).rotated(rot)]
+		return 1 if Geometry.is_point_in_polygon(point, poly) else 0
 	
 	for child in object_node.get_children():
 		ret_value = max(ret_value, precise_object_overlap(child, point))
