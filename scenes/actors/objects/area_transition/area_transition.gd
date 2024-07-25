@@ -110,7 +110,7 @@ func connect_remote_members():
 	
 
 func exit_local_teleport(character = null):
-	#character.camera.auto_move = true
+	#is_idle = true
 	pass
 	
 
@@ -138,6 +138,11 @@ func _physics_process(_delta : float) -> void:
 		#is a collision it's with a character
 		for body in area2d.get_overlapping_bodies():
 			if body.name.begins_with("Character") and !body.dead:
+				
+				
+				if !teleportation_mode:
+					body.toggle_movement(false)
+					body.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 				start_pipe_enter_animation(body)
 				
 
@@ -156,9 +161,10 @@ func start_pipe_enter_animation(character : Character) -> void:
 		if pair.object_type == "area_transition":
 			pair.is_idle = false
 			character.gravity_scale = 0
+			Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
 			Singleton.CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
-			if pair.stops_camera:
-				character.camera.auto_move = false
+
+			character.camera.auto_move = false
 	
 	emit_signal("pipe_animation_finished", character, entering)
 	
@@ -170,12 +176,10 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 	is_idle = false
 	entering = false
 	
-	character.toggle_movement(false)
 
-	
 	if !tp_mode:
 		emit_signal("exit", character, entering)
-		character.toggle_movement(true)
+		
 		# undo collision changes 
 		character.set_collision_layer_bit(1, true)
 		character.set_inter_player_collision(true) 
@@ -183,6 +187,7 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 		
 		if Singleton.CurrentLevelData.level_data.vars.transition_character_data.size() == 1:
 			exit_with_helper(character)
+		
 	else:
 		pipe_exit_anim_finished(character)
 	reset_sprite(character)
@@ -196,35 +201,32 @@ func pipe_exit_anim_finished(character : Character):
 	Singleton.CurrentLevelData.level_data.vars.transition_data = []
 	Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
 	entering = false
-	character.toggle_movement(true)
+	#character.toggle_movement(true)
 	# undo collision changes 
 	character.set_collision_layer_bit(1, true)
 	character.set_inter_player_collision(true) 
+	character.toggle_movement(true)
 	stored_character = null
 	area2d.connect("body_exited", self, "exit_remote_teleport")
 	
-	
 func exit_with_helper(character : Character):
-	
 	var helper = Singleton.CurrentLevelData.level_data.vars.transition_character_data.back()
 	character.velocity = helper.velocity
 	character.state = helper.state
 	character.facing_direction = helper.facing_direction
+	character.camera.global_position = helper.find_camera_position(vertical, character.global_position, character.camera.size, parts * 32)
+	character.camera.last_position = character.camera.position
+	
 	character.position = global_position + helper.find_exit_offset(vertical, parts * 32)
-	if stops_camera:
-		character.camera.global_position = helper.find_camera_position(vertical, global_position, character.camera.base_size, parts * 32)
-		character.camera.last_position = character.camera.global_position
-		if teleportation_mode:
-			character.camera.auto_move = true
-	else:
-		character.camera.global_position = character.global_position
-		character.camera.last_position = character.camera.position
-		character.camera.auto_move = true
-		
-	
-
-	
+	var timer = Timer.new()
+	timer.connect("timeout", character, "toggle_movement", [true])
+	timer.connect("timeout", self, "set_camera", [character])
+	timer.wait_time = 0.1
+	timer.one_shot = true
+	add_child(timer)
+	timer.start()
 	Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
+	
 	
 	
 func _tween_all_completed() -> void:
@@ -238,10 +240,8 @@ func reset_sprite(character : Character): #This is here in case Mario came from 
 	character.sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	character.sprite.scale = Vector2(1.0, 1.0)
 	character.sprite.position = Vector2.ZERO
-	
-func _dumb_method(character : Character):
+func set_camera(character: Character):
 	character.camera.auto_move = true
-
 
 
 

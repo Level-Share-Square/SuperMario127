@@ -194,6 +194,7 @@ static func pad_timevalue(timevalue : int) -> String:
 
 # LevelInfo dictionary loading functions for different versions start here
 func load_level_0_0_1(save_dictionary : Dictionary):
+	print("01")
 	level_code = save_dictionary["level_code"]
 	level_name = save_dictionary["level_name"]
 
@@ -208,4 +209,5 @@ func load_level_0_0_2(save_dictionary : Dictionary):
 	spawn_area = save_dictionary["spawn_area"]
 	shine_details = save_dictionary["shine_details"] 
 	star_coin_details = save_dictionary["star_coin_details"]
+	activated_fludds = save_dictionary["activated_fludds"]
 
