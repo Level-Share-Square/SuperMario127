@@ -31,7 +31,6 @@ func _input(event):
 func _process(_delta):
 	if palette != 0:
 		$Sprite.texture = palette_textures[palette]
-	print(palette)
 	if parts != last_parts:
 		update_parts()
 	last_parts = parts

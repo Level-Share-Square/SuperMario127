@@ -35,6 +35,11 @@ onready var left_width = sprite.patch_margin_left
 onready var right_width = sprite.patch_margin_right
 onready var part_width = sprite.texture.get_width() - left_width - right_width
 
+onready var strong_bounce = preload("res://scenes/actors/objects/note_block/strong_bounce.wav")
+onready var weak_bounce = preload("res://scenes/actors/objects/note_block/weak_bounce.wav")
+
+onready var sound = $AudioStreamPlayer2D
+
 
 var scale_x : float
 export var override_part_width := 0 # If this value is not equal to 0, this'll replace part_width with it's value
@@ -65,10 +70,8 @@ var spawn_pos = Vector2(0, 0)
 func _ready():
 	if palette != 0:
 		$Sprite.texture = palette_textures[palette]
-	print(palette)
 	var editor = get_tree().current_scene
 	grav = editor.level_area.settings.gravity
-	print(grav)
 	if physics_enabled:
 		var _connect = waterdet.connect("area_entered", self, "water_entered")
 		var _connect2 = grounddet.connect("body_entered", self, "ground_entered")
@@ -149,6 +152,9 @@ func actually_bounce(body):
 	
 	if "stamina" in body:
 		body.stamina = 100
+	
+	sound.stream = weak_bounce if is_weak_bounce else strong_bounce
+	sound.play()
 
 func water_entered(area):
 	print(area)

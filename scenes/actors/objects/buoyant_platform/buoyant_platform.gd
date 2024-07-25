@@ -73,7 +73,6 @@ var in_water = false
 func _ready():
 	if palette != 0:
 		$Sprite.texture = palette_textures[palette]
-	print(palette)
 	var editor = get_tree().current_scene
 	grav = editor.level_area.settings.gravity
 	print(grav)

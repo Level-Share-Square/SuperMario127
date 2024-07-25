@@ -125,10 +125,10 @@ func _process(delta) -> void:
 	if song_cache.size() < level_songs.ids.size():
 		song_cache.append(load("res://assets/music/resources/" + level_songs.ids[song_cache.size()] + ".tres"))
 	
-	#if Input.is_action_just_pressed("volume_up"):
-	#	increment_global_volume(0.1)
-	#if Input.is_action_just_pressed("volume_down"):
-	#	increment_global_volume(-0.1)
+	if Input.is_action_just_pressed("volume_up"):
+		increment_global_volume(0.1)
+	if Input.is_action_just_pressed("volume_down"):
+		increment_global_volume(-0.1)
 	
 	var current_scene = get_tree().get_current_scene()
 	var current_song

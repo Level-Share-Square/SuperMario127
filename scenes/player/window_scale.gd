@@ -49,7 +49,7 @@ func increase_value() -> void:
 	update_window_scale(new_window_scale)
 
 func _input(_event) -> void:
-	if false: #Input.is_action_just_pressed("fullscreen"):
+	if Input.is_action_just_pressed("fullscreen"):
 		if !OS.window_fullscreen:
 			update_window_scale(FULLSCREEN_SCALE_VALUE)
 		elif previous_scale != FULLSCREEN_SCALE_VALUE: #this extra bit is so if you toggle fullscreen on the same instance you'll go back to the same scale
