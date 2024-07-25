@@ -194,6 +194,7 @@ func reached_end() -> void:
 		MT_BACK_FORTH:
 			speed = -speed
 		MT_RESET:
+			platform.cancel_momentum = true
 			$AnimationPlayer.play("Reset")
 		MT_ONCE:
 			activated = false
@@ -207,6 +208,11 @@ func reset_platform():
 	loop_offset = 0.0
 	path_follower.offset = 0.0
 	
+	platform.set_collision_layer_bit(4, false)
 	platform.position = path_follower.position
-	
 	activated = !touch_start
+	
+	yield(get_tree(), "physics_frame")
+	yield(get_tree(), "physics_frame")
+	
+	platform.set_collision_layer_bit(4, true)

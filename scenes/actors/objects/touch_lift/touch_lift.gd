@@ -213,20 +213,12 @@ func reached_end() -> void:
 	match move_type:
 		MT_BACK_FORTH:
 			speed = -speed
-			$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = true
-			yield(get_tree().create_timer(0.1), "timeout")
-			$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = false
 		MT_RESET:
+			platform.cancel_momentum = true
 			$AnimationPlayer.play("Reset")
-			$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = true
-			yield(get_tree().create_timer(0.1), "timeout")
-			$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = false
 		MT_ONCE:
 			activated = false
-			$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = true
-			yield(get_tree().create_timer(0.1), "timeout")
-			$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = false
-			
+
 func _on_touch_area_entered(body):
 	if body is Character:
 		activated = true
@@ -236,6 +228,9 @@ func reset_platform():
 	loop_offset = 0.0
 	path_follower.offset = 0.0
 	
+	platform.set_collision_layer_bit(4, false)
 	platform.position = path_follower.position
-	
 	activated = !touch_start
+	yield(get_tree(), "physics_frame")
+	yield(get_tree(), "physics_frame")
+	platform.set_collision_layer_bit(4, true)

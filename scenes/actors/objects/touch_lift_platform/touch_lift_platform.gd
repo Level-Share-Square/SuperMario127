@@ -13,6 +13,7 @@ onready var part_width = sprite.texture.get_width() - left_width - right_width
 
 var last_position : Vector2
 
+var cancel_momentum: bool = false
 var momentum : Vector2
 
 var apply_velocity = false
@@ -49,6 +50,9 @@ func _physics_process(delta):
 
 # this is to fix the wile coyote bug
 func _on_Area2D_body_exited(body):
+	if cancel_momentum:
+		cancel_momentum = false
+		return
 	if body.get("velocity") != null and apply_velocity:
 		body.velocity += Vector2(momentum.x, min(0, momentum.y))
 		apply_velocity = false

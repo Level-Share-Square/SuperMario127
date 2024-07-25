@@ -17,6 +17,11 @@ onready var inverted :bool= get_parent().inverted
 
 onready var parent = get_parent()
 
+var cancel_momentum: bool = false
+var apply_velocity: bool = false
+var last_position: Vector2
+var momentum: Vector2
+
 func set_position(new_position):
 	if(parent.frozen == true):
 		return
@@ -67,13 +72,18 @@ func _ready():
 
 	#parent._ready()
 	#parent._set_platform_pos()
-
+	last_position = global_position
+	collision_shape.shape = collision_shape.shape.duplicate()
+	platform_area_collision_shape.shape = platform_area_collision_shape.shape.duplicate()
 
 
 func _physics_process(delta):
 	if(parent.frozen == true):
 		return
-
+	
+	momentum = (global_position - last_position) / (fps_util.PHYSICS_DELTA * 3)
+	last_position = global_position
+	
 	sprite.region_rect.position.x = int(!parent.disappears) * 46
 
 	sprite2.region_rect.position.x = 23 + int(!parent.disappears) * 46
@@ -97,3 +107,16 @@ func switch_state(new_state):
 func _on_switch_state_changed(channel):
 	if channel == parent.palette:
 		toggle_state()
+
+
+# this is to fix the wile coyote bug
+func _on_Area2D_body_exited(body):
+	if cancel_momentum:
+		cancel_momentum = false
+		return
+	if body.get("velocity") != null and apply_velocity:
+		body.velocity += Vector2(momentum.x, min(0, momentum.y))
+		apply_velocity = false
+	if "state" in body and !is_instance_valid(body.state):
+		body.set_state_by_name("FallState")
+		#self.apply_velocity = false
