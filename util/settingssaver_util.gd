@@ -84,6 +84,7 @@ static func save():
 	file.open(PATH, File.WRITE)
 	file.store_string(to_json(data))
 	file.close()
+	print("Saved!")
 
 static func save_volume():
 	var data = get_data_or_null()

@@ -75,3 +75,4 @@ func _on_CloseButton_pressed():
 	$VolumeMixer.visible = false
 	vm_open = false
 	page_select.visible = true
+	SettingsSaver.save()

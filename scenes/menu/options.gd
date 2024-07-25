@@ -18,6 +18,7 @@ func _ready():
 
 func go_back():
 	emit_signal("screen_change", "options_screen", "main_menu_screen")
+	SettingsSaver.save()
 
 func open_controls():
 	emit_signal("screen_change", "options_screen", "controls_screen")
@@ -56,4 +57,5 @@ func _process(delta):
 	elif page == 2:
 		page_2.visible = true
 		page_1.visible = false
+		
 

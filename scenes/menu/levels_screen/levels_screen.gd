@@ -76,7 +76,6 @@ func toggle_dark_mode():
 		is_dark = false
 
 func _ready() -> void:
-	
 	Singleton2.save_ghost = false
 	
 	toggle_dark_mode()
@@ -112,6 +111,9 @@ func _ready() -> void:
 	_pre_open_screen() # In case we're exiting a level
 
 func _pre_open_screen() -> void:
+	print(get_parent().get_parent().previous_screen)
+	if ! "ShineSelectScreen" in str(get_parent().get_parent().previous_screen):
+		$TransitionRect.visible = false
 	if Singleton.SavedLevels.is_template_list:
 		if show_sample_levels:
 			button_sample_levels.visible = false
@@ -290,6 +292,11 @@ func start_level(start_in_edit_mode : bool):
 	if start_in_edit_mode and Singleton.SavedLevels.is_template_list: # Can't edit template levels
 		return
 	
+
+	if is_dark:
+		$TransitionRect.color = Color(0, 0, 0, 1)
+	else:
+		$TransitionRect.color = Color(1, 1, 1, 1)
 	# so you aren't able to press the button while it's transitioning
 	can_interact = false
 	
@@ -300,6 +307,7 @@ func start_level(start_in_edit_mode : bool):
 	# TODO: additional checks for things like all shines set to not show in menu and such
 	# using collected_shines for the size check because there can only be one entry in collected shines per id, while shine_details can have multiple shines with the same id
 	if !start_in_edit_mode:
+		$TransitionRect.visible = true
 		# Get the shine count, only count shine sprites that have show_in_menu on
 		var total_shine_count := 0
 		for shine_details in level_info.shine_details:

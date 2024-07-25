@@ -217,6 +217,18 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="Animation" id=29]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransitionRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=23]
 length = 0.001
@@ -244,18 +256,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 2 ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("TransitionRect:color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
 
 [sub_resource type="Animation" id=24]
 length = 2.25
@@ -274,7 +274,7 @@ tracks/0/keys = {
 } ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("TransitionRect:color")
+tracks/1/path = NodePath("TransitionRect:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -289,28 +289,28 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=25]
 length = 1.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("TransitionRect:color")
+tracks/0/path = NodePath("TransitionRect:mouse_filter")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("TransitionRect:mouse_filter")
+tracks/1/path = NodePath("TransitionRect:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 2 ]
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=26]
@@ -356,28 +356,28 @@ tracks/0/keys = {
 } ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("TransitionRect:color")
+tracks/1/path = NodePath("TransitionRect:mouse_filter")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.75 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("TransitionRect:mouse_filter")
+tracks/2/path = NodePath("TransitionRect:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=28]
@@ -1050,10 +1050,10 @@ anims/trans_out_MainMenuScreen_LevelsScreen = SubResource( 28 )
 
 [node name="TransitionRect" type="ColorRect" parent="."]
 visible = false
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 1, 1, 1, 0 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false

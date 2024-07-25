@@ -31,7 +31,9 @@ var template_level_codes : Array = [
 	"res://level/template_levels/glide_feather_challenge.tres",
 	"res://level/template_levels/mortal_magma_land.tres",
 	"res://level/template_levels/warp_palace.tres",
-	"res://level/template_levels/green_demon_cave.tres"
+	"res://level/template_levels/green_demon_cave.tres",
+	"res://level/template_levels/torrent_park.tres",
+	"res://level/template_levels/towering_towers.tres",
 ]
 
 var community_level_codes : Array = [
