@@ -1,4 +1,4 @@
-[gd_scene load_steps=1348 format=2]
+[gd_scene load_steps=1372 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1314,6 +1314,30 @@
 [ext_resource path="res://assets/tiles/castle_wood/icon_slopeR.png" type="Texture" id=1312]
 [ext_resource path="res://assets/tiles/castle_wood/palette_icons/0_slopeR.png" type="Texture" id=1313]
 [ext_resource path="res://assets/tiles/castle_wood/icon_slopeL.png" type="Texture" id=1314]
+[ext_resource path="res://assets/tiles/pitch_black/5_slopeR.png" type="Texture" id=1315]
+[ext_resource path="res://assets/tiles/pitch_black/1_slopeR.png" type="Texture" id=1316]
+[ext_resource path="res://assets/tiles/pitch_black/palette_icons/3_slopeL.png" type="Texture" id=1317]
+[ext_resource path="res://assets/tiles/pitch_black/4_slopeR.png" type="Texture" id=1318]
+[ext_resource path="res://assets/tiles/pitch_black/3_slopeR.png" type="Texture" id=1319]
+[ext_resource path="res://assets/tiles/pitch_black/palette_icons/6_slopeL.png" type="Texture" id=1320]
+[ext_resource path="res://assets/tiles/pitch_black/7_slopeR.png" type="Texture" id=1321]
+[ext_resource path="res://assets/tiles/pitch_black/2_slopeR.png" type="Texture" id=1322]
+[ext_resource path="res://assets/tiles/pitch_black/icon_slopeR.png" type="Texture" id=1323]
+[ext_resource path="res://assets/tiles/pitch_black/palette_icons/5_slopeL.png" type="Texture" id=1324]
+[ext_resource path="res://assets/tiles/pitch_black/palette_icons/4_slopeL.png" type="Texture" id=1325]
+[ext_resource path="res://assets/tiles/pitch_black/icon_slopeL.png" type="Texture" id=1326]
+[ext_resource path="res://assets/tiles/pitch_black/6_slopeR.png" type="Texture" id=1327]
+[ext_resource path="res://assets/tiles/pitch_black/palette_icons/1_slopeL.png" type="Texture" id=1328]
+[ext_resource path="res://assets/tiles/pitch_black/palette_icons/2_slopeL.png" type="Texture" id=1329]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/7/icon.png" type="Texture" id=1330]
+[ext_resource path="res://scenes/actors/objects/flower_bush/palettes/4_icon.png" type="Texture" id=1331]
+[ext_resource path="res://scenes/actors/objects/flower_bush/palettes/3_icon.png" type="Texture" id=1332]
+[ext_resource path="res://scenes/actors/objects/flower_bush/palettes/5_icon.png" type="Texture" id=1333]
+[ext_resource path="res://scenes/actors/objects/flower_bush/palettes/2_icon.png" type="Texture" id=1334]
+[ext_resource path="res://scenes/actors/objects/flower_bush/palettes/1_icon.png" type="Texture" id=1335]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/6/icon.png" type="Texture" id=1336]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/8/icon.png" type="Texture" id=1337]
+[ext_resource path="res://scenes/actors/objects/sign/palettes/9/icon.png" type="Texture" id=1338]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2258,8 +2282,8 @@ object_id = 14
 is_object = true
 object_center = Vector2( 16, 12 )
 tile_mode_offset = Vector2( 0, -4 )
-palette_icons = [ ExtResource( 507 ), ExtResource( 1259 ), ExtResource( 1260 ), ExtResource( 1262 ), ExtResource( 1261 ), ExtResource( 1263 ) ]
-palette_previews = [ ExtResource( 507 ), ExtResource( 1259 ), ExtResource( 1260 ), ExtResource( 1262 ), ExtResource( 1261 ), ExtResource( 1263 ) ]
+palette_icons = [ ExtResource( 507 ), ExtResource( 1259 ), ExtResource( 1260 ), ExtResource( 1262 ), ExtResource( 1261 ), ExtResource( 1263 ), ExtResource( 1336 ), ExtResource( 1330 ), ExtResource( 1337 ), ExtResource( 1338 ) ]
+palette_previews = [ ExtResource( 507 ), ExtResource( 1259 ), ExtResource( 1260 ), ExtResource( 1262 ), ExtResource( 1261 ), ExtResource( 1263 ), ExtResource( 1336 ), ExtResource( 1330 ), ExtResource( 1337 ), ExtResource( 1338 ) ]
 icon = ExtResource( 507 )
 preview = ExtResource( 507 )
 
@@ -3136,6 +3160,8 @@ object_id = 78
 is_object = true
 object_center = Vector2( 32, 12 )
 tile_mode_offset = Vector2( 16, -4 )
+palette_icons = [ ExtResource( 335 ), ExtResource( 1335 ), ExtResource( 1334 ), ExtResource( 1332 ), ExtResource( 1331 ), ExtResource( 1333 ) ]
+palette_previews = [ ExtResource( 335 ), ExtResource( 1335 ), ExtResource( 1334 ), ExtResource( 1332 ), ExtResource( 1331 ), ExtResource( 1333 ) ]
 icon = ExtResource( 335 )
 preview = ExtResource( 335 )
 
@@ -4414,10 +4440,39 @@ group_name = "Misc"
 [node name="PitchBlack" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 24 )
 tileset_id = 21
+item_name = "PitchBlack"
 palette_icons = [ ExtResource( 225 ), ExtResource( 273 ), ExtResource( 274 ), ExtResource( 275 ), ExtResource( 271 ), ExtResource( 272 ), ExtResource( 270 ), ExtResource( 269 ) ]
 palette_previews = [ ExtResource( 225 ), ExtResource( 273 ), ExtResource( 274 ), ExtResource( 275 ), ExtResource( 271 ), ExtResource( 272 ), ExtResource( 270 ), ExtResource( 269 ) ]
+change_to = "PitchBlackSlopeL"
+items_in_sequence = 3
 icon = ExtResource( 225 )
 preview = ExtResource( 225 )
+
+[node name="PitchBlackSlopeL" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 24 )
+tileset_id = 21
+tile_id = 2
+item_name = "PitchBlackSlopeL"
+palette_icons = [ ExtResource( 1326 ), ExtResource( 1328 ), ExtResource( 1329 ), ExtResource( 1317 ), ExtResource( 1325 ), ExtResource( 1324 ), ExtResource( 1320 ), ExtResource( 1326 ) ]
+palette_previews = [ ExtResource( 1326 ), ExtResource( 1328 ), ExtResource( 1329 ), ExtResource( 1317 ), ExtResource( 1325 ), ExtResource( 1324 ), ExtResource( 1320 ), ExtResource( 1326 ) ]
+change_to = "PitchBlackSlopeR"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 1326 )
+preview = ExtResource( 1326 )
+
+[node name="PitchBlackSlopeR" type="Node" parent="PlaceableItems/MiscGroup"]
+script = ExtResource( 24 )
+tileset_id = 21
+tile_id = 3
+item_name = "PitchBlackSlopeR"
+palette_icons = [ ExtResource( 1323 ), ExtResource( 1316 ), ExtResource( 1322 ), ExtResource( 1319 ), ExtResource( 1318 ), ExtResource( 1315 ), ExtResource( 1327 ), ExtResource( 1321 ) ]
+palette_previews = [ ExtResource( 1323 ), ExtResource( 1316 ), ExtResource( 1322 ), ExtResource( 1319 ), ExtResource( 1318 ), ExtResource( 1315 ), ExtResource( 1327 ), ExtResource( 1321 ) ]
+change_to = "PitchBlack"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 1323 )
+preview = ExtResource( 1323 )
 
 [node name="BooBlock" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 24 )
@@ -4518,7 +4573,7 @@ preview = ExtResource( 237 )
 script = ExtResource( 24 )
 object_id = 97
 is_object = true
-object_center = Vector2( 32, 24 )
+object_center = Vector2( 32, -24 )
 palette_icons = [ ExtResource( 683 ), ExtResource( 694 ), ExtResource( 695 ), ExtResource( 693 ), ExtResource( 696 ) ]
 palette_previews = [ ExtResource( 683 ), ExtResource( 694 ), ExtResource( 695 ), ExtResource( 693 ), ExtResource( 696 ) ]
 change_to = "CoralLarge"
