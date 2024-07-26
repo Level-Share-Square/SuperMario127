@@ -73,14 +73,15 @@ func add_node(point : Vector2, point_in: Vector2 = Vector2.ZERO, point_out: Vect
 	update_line()
 	if(new_node.position == Vector2(0,0)):
 		new_node.first = true
-		
-func node_deleted():
-	for i in range(nodes.size()):
-		if(nodes[i].is_queued_for_deletion()):
-			nodes.remove(i)
-			line.remove_point(i)
-			break
-			
+
+func delete_node(node : Node):
+	if is_instance_valid(node) && nodes.has(node):
+		var node_index : int = nodes.find(node)
+		line.remove_point(node_index)
+		line.get_node("path").curve.remove_point(node_index)
+		nodes.remove(node_index)
+		update_line()
+
 
 func update_node_position(node: Node2D):
 	var index = nodes.find(node, 0)
