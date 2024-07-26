@@ -1,4 +1,4 @@
-[gd_scene load_steps=1332 format=2]
+[gd_scene load_steps=1348 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1298,6 +1298,22 @@
 [ext_resource path="res://assets/tiles/carpet/palette_icons/1_slopeR.png" type="Texture" id=1296]
 [ext_resource path="res://assets/tiles/carpet/palette_icons/4_slopeR.png" type="Texture" id=1297]
 [ext_resource path="res://assets/tiles/carpet/palette_icons/1_slopeL.png" type="Texture" id=1298]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/6_slopeR.png" type="Texture" id=1299]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/3_slopeR.png" type="Texture" id=1300]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/4_slopeR.png" type="Texture" id=1301]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/4_slopeL.png" type="Texture" id=1302]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/1_slopeR.png" type="Texture" id=1303]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/0_slopeL.png" type="Texture" id=1304]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/5_slopeR.png" type="Texture" id=1305]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/5_slopeL.png" type="Texture" id=1306]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/2_slopeR.png" type="Texture" id=1307]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/2_slopeL.png" type="Texture" id=1308]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/3_slopeL.png" type="Texture" id=1309]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/1_slopeL.png" type="Texture" id=1310]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/6_slopeL.png" type="Texture" id=1311]
+[ext_resource path="res://assets/tiles/castle_wood/icon_slopeR.png" type="Texture" id=1312]
+[ext_resource path="res://assets/tiles/castle_wood/palette_icons/0_slopeR.png" type="Texture" id=1313]
+[ext_resource path="res://assets/tiles/castle_wood/icon_slopeL.png" type="Texture" id=1314]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -4217,10 +4233,39 @@ preview = ExtResource( 1292 )
 [node name="CastleWood" type="Node" parent="PlaceableItems/CastleGroup"]
 script = ExtResource( 24 )
 tileset_id = 24
+item_name = "CastleWood"
 palette_icons = [ ExtResource( 224 ), ExtResource( 378 ), ExtResource( 379 ), ExtResource( 1146 ), ExtResource( 1180 ), ExtResource( 1181 ), ExtResource( 1178 ), ExtResource( 1167 ) ]
 palette_previews = [ ExtResource( 224 ), ExtResource( 378 ), ExtResource( 379 ), ExtResource( 1146 ), ExtResource( 1180 ), ExtResource( 1181 ), ExtResource( 1178 ), ExtResource( 1167 ) ]
+change_to = "CastleWoodSlopeLeft"
+items_in_sequence = 3
 icon = ExtResource( 224 )
 preview = ExtResource( 224 )
+
+[node name="CastleWoodSlopeLeft" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 24 )
+tileset_id = 24
+tile_id = 2
+item_name = "CastleWoodSlopeLeft"
+palette_icons = [ ExtResource( 1314 ), ExtResource( 1304 ), ExtResource( 1310 ), ExtResource( 1308 ), ExtResource( 1306 ), ExtResource( 1311 ), ExtResource( 1309 ), ExtResource( 1302 ) ]
+palette_previews = [ ExtResource( 1314 ), ExtResource( 1304 ), ExtResource( 1310 ), ExtResource( 1308 ), ExtResource( 1306 ), ExtResource( 1311 ), ExtResource( 1309 ), ExtResource( 1302 ) ]
+change_to = "CastleWoodSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 1314 )
+preview = ExtResource( 1314 )
+
+[node name="CastleWoodSlopeRight" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 24 )
+tileset_id = 24
+tile_id = 3
+item_name = "CastleWoodSlopeRight"
+palette_icons = [ ExtResource( 1312 ), ExtResource( 1313 ), ExtResource( 1303 ), ExtResource( 1307 ), ExtResource( 1305 ), ExtResource( 1299 ), ExtResource( 1300 ), ExtResource( 1301 ) ]
+palette_previews = [ ExtResource( 1312 ), ExtResource( 1313 ), ExtResource( 1303 ), ExtResource( 1307 ), ExtResource( 1305 ), ExtResource( 1299 ), ExtResource( 1300 ), ExtResource( 1301 ) ]
+change_to = "CastleWood"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 1312 )
+preview = ExtResource( 1312 )
 
 [node name="Roof" type="Node" parent="PlaceableItems/CastleGroup"]
 script = ExtResource( 24 )
