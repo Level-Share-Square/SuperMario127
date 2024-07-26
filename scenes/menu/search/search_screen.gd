@@ -25,11 +25,12 @@ onready var page_label = $Control/PageSelect/Label
 onready var page_right = $Control/PageSelect/Right
 onready var page_left = $Control/PageSelect/Left
 onready var level_list = $Control/VBoxContainer/LevelListPanel/VBoxContainer/LevelList
+onready var external = $Control2/External
 onready var http = $HTTPRequest
 onready var http2 = $HTTPRequest2
 onready var http3 = $HTTPRequest3
 onready var http4 = $HTTPRequest4
-onready var comments = $Comments
+onready var comments = $Control2/Comments
 onready var page_amt = 10
 onready var comment_button = $Control2/ButtonComm
 onready var star = preload("res://scenes/editor/assets/star.png")
@@ -55,6 +56,7 @@ func _ready():
 	comment_button.connect("button_down", self, "comment_pressed")
 	search.connect("text_changed", self, "on_text_changed")
 	http.connect("request_completed", self, "_on_request_completed")
+	external.connect("button_down", self, "on_external_pressed")
 #	http.request("https://levelsharesquare.com/api/levels?page=1&game=2")
 	
 func comment_pressed():
@@ -75,6 +77,8 @@ func x_pressed():
 	search.set_text("")
 	page_dictionary.clear()
 
+func on_external_pressed():
+	OS.shell_open("https://levelsharesquare.com/levels/" + page_dictionary[level_list.get_selected_items()[0]][1])
 
 func _input(event):
 	if search.has_focus():
@@ -145,7 +149,7 @@ func on_item_selected(index: int):
 		if page_dictionary[index][2] == "":
 			var level_code = page_dictionary[index][1]
 			http2.connect("request_completed", self, "_on_request2_completed")
-			http2.request("https://levelsharesquare.com/api/levels/" + level_code + "/code")
+			http2.request("https://levelsharesquare.com/api/levels/" + level_code + "?keep=true")
 			selected_level = level_code
 		else:
 			selected_level = page_dictionary[index][1]
@@ -198,7 +202,7 @@ func _on_request3_completed(result, response_code, headers, body):
 				thumbnail = json.result["levels"][i]["thumbnail"]
 			else:
 				thumbnail = ""
-			page_dictionary[i] = [level_name, level_id, "", level_rating, username, thumbnail]
+			page_dictionary[i] = [level_name, level_id, "", level_rating, username, thumbnail, ""]
 			level_list.add_item(level_name)
 			print(level_rating)
 			if level_rating > 4.5:
@@ -222,7 +226,7 @@ func _on_request_completed(result, response_code, headers, body):
 				thumbnail = json.result["levels"][i]["thumbnail"]
 			else:
 				thumbnail = ""
-			page_dictionary[i] = [level_name, level_id, "", level_rating, username, thumbnail]
+			page_dictionary[i] = [level_name, level_id, "", level_rating, username, thumbnail, ""]
 			level_list.add_item(level_name)
 			if level_rating >= 4.5:
 				level_list.set_item_icon(i, star)
@@ -232,7 +236,8 @@ func _on_request2_completed(result, response_code, headers, body):
 	print(response_code)
 	if !level_list.is_item_disabled(0):
 		var json = JSON.parse(body.get_string_from_utf8())
-		page_dictionary[item_index][2] = json.result["levelData"]
+		page_dictionary[item_index][2] = json.result["level"]["code"]
+		page_dictionary[item_index][6] = json.result["level"]["description"]
 		if page_dictionary[level_list.get_selected_items()[0]][5] != "":
 			http4.connect("request_completed", self, "_on_req4_completed")
 			http4.request(page_dictionary[level_list.get_selected_items()[0]][5])
@@ -263,6 +268,7 @@ func populate_info_panel(level_info : LevelInfo = null, username : String = "", 
 		for sc_details in level_info.star_coin_details:
 			total_starcoin_details += 1
 			
+		comments.load_description(page_dictionary[level_list.get_selected_items()[0]][6])
 		comments.load_comments(page_dictionary[level_list.get_selected_items()[0]][1])
 		rating.set_rating(page_dictionary[level_list.get_selected_items()[0]][3])
 		$Control2/LevelScore/ShineProgressPanel/HBoxContainer2/ShineProgressLabel.text = str(total_shine_count)

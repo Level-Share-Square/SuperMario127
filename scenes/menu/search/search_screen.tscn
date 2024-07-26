@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=15]
 [ext_resource path="res://scenes/menu/levels_screen/ui/star_coin_icon.png" type="Texture" id=16]
 [ext_resource path="res://scenes/menu/levels_screen/shine_icon.png" type="Texture" id=17]
+[ext_resource path="res://assets/misc/external.png" type="Texture" id=18]
 [ext_resource path="res://scenes/menu/search/rating/RatePanel.tscn" type="PackedScene" id=19]
 
 [sub_resource type="DynamicFont" id=10]
@@ -424,10 +425,10 @@ tracks/1/keys = {
 [node name="SearchScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = -4.0
-margin_right = 3080.0
-margin_bottom = 1724.0
+margin_left = 1.0
+margin_top = -2.0
+margin_right = 3073.0
+margin_bottom = 1726.0
 rect_pivot_offset = Vector2( -343, -58 )
 script = ExtResource( 10 )
 
@@ -781,6 +782,7 @@ margin_right = 558.0
 margin_bottom = 396.0
 
 [node name="ButtonComm" parent="Control2" instance=ExtResource( 1 )]
+visible = false
 margin_left = 614.0
 margin_top = 357.0
 margin_right = 743.0
@@ -796,6 +798,16 @@ margin_right = 556.0
 margin_bottom = 89.0
 rect_scale = Vector2( 0.05, 0.05 )
 
+[node name="External" parent="Control2" instance=ExtResource( 1 )]
+margin_left = 712.0
+margin_top = 13.0
+margin_right = 1544.0
+margin_bottom = 829.0
+rect_scale = Vector2( 0.05, 0.05 )
+icon = ExtResource( 18 )
+
+[node name="Comments" parent="Control2" instance=ExtResource( 7 )]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 36 )
 anims/trans_out_MainMenuScreen_SearchScreen = SubResource( 37 )
@@ -808,7 +820,5 @@ anims/spin = SubResource( 40 )
 [node name="HTTPRequest2" type="HTTPRequest" parent="."]
 
 [node name="HTTPRequest3" type="HTTPRequest" parent="."]
-
-[node name="Comments" parent="." instance=ExtResource( 7 )]
 
 [node name="HTTPRequest4" type="HTTPRequest" parent="."]
