@@ -1,4 +1,4 @@
-[gd_scene load_steps=1313 format=2]
+[gd_scene load_steps=1332 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1279,6 +1279,25 @@
 [ext_resource path="res://scenes/actors/objects/dead_tree/palletes/2/preview.png" type="Texture" id=1277]
 [ext_resource path="res://scenes/actors/objects/dead_tree/palletes/8/preview.png" type="Texture" id=1278]
 [ext_resource path="res://scenes/actors/objects/dead_tree/palletes/8/icon.png" type="Texture" id=1279]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/7.png" type="Texture" id=1280]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/5_slopeL.png" type="Texture" id=1281]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/7_slopeL.png" type="Texture" id=1282]
+[ext_resource path="res://assets/tiles/carpet/icon_slopeL.png" type="Texture" id=1283]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/6_slopeL.png" type="Texture" id=1284]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/3_slopeR.png" type="Texture" id=1285]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/5.png" type="Texture" id=1286]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/5_slopeR.png" type="Texture" id=1287]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/6_slopeR.png" type="Texture" id=1288]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/7_slopeR.png" type="Texture" id=1289]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/6.png" type="Texture" id=1290]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/2_slopeL.png" type="Texture" id=1291]
+[ext_resource path="res://assets/tiles/carpet/icon_slopeR.png" type="Texture" id=1292]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/3_slopeL.png" type="Texture" id=1293]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/4_slopeL.png" type="Texture" id=1294]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/2_slopeR.png" type="Texture" id=1295]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/1_slopeR.png" type="Texture" id=1296]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/4_slopeR.png" type="Texture" id=1297]
+[ext_resource path="res://assets/tiles/carpet/palette_icons/1_slopeL.png" type="Texture" id=1298]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -4161,10 +4180,39 @@ preview = ExtResource( 222 )
 [node name="Carpet" type="Node" parent="PlaceableItems/CastleGroup"]
 script = ExtResource( 24 )
 tileset_id = 23
-palette_icons = [ ExtResource( 223 ), ExtResource( 286 ), ExtResource( 285 ), ExtResource( 287 ), ExtResource( 288 ) ]
-palette_previews = [ ExtResource( 223 ), ExtResource( 286 ), ExtResource( 285 ), ExtResource( 287 ), ExtResource( 288 ) ]
+item_name = "Carpet"
+palette_icons = [ ExtResource( 223 ), ExtResource( 286 ), ExtResource( 285 ), ExtResource( 287 ), ExtResource( 288 ), ExtResource( 1286 ), ExtResource( 1290 ), ExtResource( 1280 ) ]
+palette_previews = [ ExtResource( 223 ), ExtResource( 286 ), ExtResource( 285 ), ExtResource( 287 ), ExtResource( 288 ), ExtResource( 1286 ), ExtResource( 1290 ), ExtResource( 1280 ) ]
+change_to = "CarpetSlopeLeft"
+items_in_sequence = 3
 icon = ExtResource( 223 )
 preview = ExtResource( 223 )
+
+[node name="CarpetSlopeLeft" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 24 )
+tileset_id = 23
+tile_id = 2
+item_name = "CarpetSlopeLeft"
+palette_icons = [ ExtResource( 1283 ), ExtResource( 1298 ), ExtResource( 1291 ), ExtResource( 1293 ), ExtResource( 1294 ), ExtResource( 1281 ), ExtResource( 1284 ), ExtResource( 1282 ) ]
+palette_previews = [ ExtResource( 1283 ), ExtResource( 1298 ), ExtResource( 1291 ), ExtResource( 1293 ), ExtResource( 1294 ), ExtResource( 1281 ), ExtResource( 1284 ), ExtResource( 1282 ) ]
+change_to = "CarpetSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 1283 )
+preview = ExtResource( 1283 )
+
+[node name="CarpetSlopeRight" type="Node" parent="PlaceableItems/CastleGroup"]
+script = ExtResource( 24 )
+tileset_id = 23
+tile_id = 3
+item_name = "CarpetSlopeRight"
+palette_icons = [ ExtResource( 1292 ), ExtResource( 1296 ), ExtResource( 1295 ), ExtResource( 1285 ), ExtResource( 1297 ), ExtResource( 1287 ), ExtResource( 1288 ), ExtResource( 1289 ) ]
+palette_previews = [ ExtResource( 1292 ), ExtResource( 1296 ), ExtResource( 1295 ), ExtResource( 1285 ), ExtResource( 1297 ), ExtResource( 1287 ), ExtResource( 1288 ), ExtResource( 1289 ) ]
+change_to = "Carpet"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 1292 )
+preview = ExtResource( 1292 )
 
 [node name="CastleWood" type="Node" parent="PlaceableItems/CastleGroup"]
 script = ExtResource( 24 )
