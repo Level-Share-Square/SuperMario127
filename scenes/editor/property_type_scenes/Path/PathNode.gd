@@ -29,8 +29,8 @@ func _ready():
 
 func delete():
 	if !first:
+		ui.get_ref().delete_node(self)
 		queue_free()
-		ui.get_ref().node_deleted()
 
 func _process(delta):
 	if check_if_hovered():
