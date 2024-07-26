@@ -216,7 +216,7 @@ func exit_with_helper(character : Character):
 	character.velocity = helper.velocity
 	character.state = helper.state
 	character.facing_direction = helper.facing_direction
-	character.camera.global_position = helper.find_camera_position(vertical, character.global_position, character.camera.size, parts * 32)
+	character.camera.global_position = helper.find_camera_position(vertical, character.global_position, character.camera.base_size, parts * 32)
 	character.camera.last_position = character.camera.position
 	
 	character.position = global_position + helper.find_exit_offset(vertical, parts * 32)
