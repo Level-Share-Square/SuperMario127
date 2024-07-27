@@ -16,7 +16,6 @@ onready var camera_stop_shape = $CameraStopper/CollisionShape2D
 var vertical = true
 var parts = 1
 var stops_camera = true
-
 var is_idle := true
 var entering := false
 
@@ -43,7 +42,7 @@ func _init():
 func _ready():
 	.ready() #Calls parent class "TeleportObject"
 	connect("property_changed", self, "_on_property_changed")
-
+	$Area2D.connect("body_entered", self, "_on_body_entered")
 	Singleton.CurrentLevelData.level_data.vars.teleporters.append([destination_tag.to_lower(), self])
 	if mode == 1:
 		var _connect2 = connect("property_changed", self, "update_property")
@@ -135,19 +134,24 @@ func _on_property_changed(key, value):
 func _physics_process(_delta : float) -> void:
 	if "\n" in destination_tag:
 		destination_tag = destination_tag.replace("\n", "")
-	if is_idle and enabled:
+	if is_idle and enabled and !teleportation_mode:
 		#the area2d is set to only collide with characters, so we can (hopefully) safely assume if there 
 		#is a collision it's with a character
 		for body in area2d.get_overlapping_bodies():
 			if body.name.begins_with("Character") and !body.dead:
-				
-				
-				if !teleportation_mode:
-					body.toggle_movement(false)
-					body.camera.set_zoom_tween(Vector2(1, 1), 0.5)
+				body.toggle_movement(false)
+				body.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 				start_pipe_enter_animation(body)
 				
 
+func _on_body_entered(body):
+	if enabled and is_idle and !entering:
+		if body.name.begins_with("Character") and !body.dead:
+
+			if !teleportation_mode:
+				body.toggle_movement(false)
+				body.camera.set_zoom_tween(Vector2(1, 1), 0.5)
+			start_pipe_enter_animation(body)
 
 func start_pipe_enter_animation(character : Character) -> void:
 	stored_character = character
@@ -213,6 +217,7 @@ func pipe_exit_anim_finished(character : Character):
 	
 func exit_with_helper(character : Character):
 	var helper = Singleton.CurrentLevelData.level_data.vars.transition_character_data.back()
+	character.global_position += helper.velocity * 2
 	character.velocity = helper.velocity
 	character.state = helper.state
 	character.facing_direction = helper.facing_direction
