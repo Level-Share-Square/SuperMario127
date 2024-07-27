@@ -129,9 +129,9 @@ func break_block():
 	
 func _body_entered(body):
 	print("entered")
-	if body.name.begins_with("Character") and is_rainbow(body) and body.global_position.y > area.global_position.y:
+	if body.name.begins_with("Character") and is_rainbow(body) and body.global_position.y + 23 > area.global_position.y:
 		break_block()
 
 func _body_exited(body):
-	if body.name.begins_with("Character") and is_rainbow(body) and body.global_position.y < area.global_position.y:
+	if body.name.begins_with("Character") and is_rainbow(body) and body.global_position.y + 23 < area.global_position.y:
 		break_block()
