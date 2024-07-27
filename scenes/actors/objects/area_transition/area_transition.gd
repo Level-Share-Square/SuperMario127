@@ -109,7 +109,6 @@ func connect_remote_members():
 	
 
 func exit_local_teleport(character = null):
-	#is_idle = true
 	pass
 	
 
@@ -160,7 +159,7 @@ func start_pipe_enter_animation(character : Character) -> void:
 	stored_characters[character.player_id] = character
 	is_idle = false
 	entering = true
-
+	
 	character.toggle_movement(false)
 	character.sprite.rotation = 0
 	character.set_inter_player_collision(false)
@@ -216,6 +215,14 @@ func pipe_exit_anim_finished(character : Character):
 	# undo collision changes 
 	stored_characters[character.player_id] = null
 	area2d.connect("body_exited", self, "exit_remote_teleport")
+	if !teleportation_mode:
+		var timer = Timer.new()
+		timer.connect("timeout", character, "toggle_movement", [true])
+		timer.connect("timeout", self, "set_camera", [character])
+		timer.wait_time = 0.1
+		timer.one_shot = true
+		add_child(timer)
+		timer.start()
 	
 func exit_with_helper(character : Character):
 	var helper = Singleton.CurrentLevelData.level_data.vars.transition_character_data.back() if character.player_id == 0 else Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.back()
