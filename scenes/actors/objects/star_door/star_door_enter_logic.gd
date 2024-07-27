@@ -118,8 +118,9 @@ func character_animation_finished(_animation : String, character : Character) ->
 	emit_signal("start_door_logic", character, entering)
 	
 func animate_door(animation : String = "close") -> void:
+	print(get_parent().palette_dict[get_parent().palette] + "_" + get_parent().collectible + animation)
 	# this function just plays the door animation, so code doesn't have to repeat
-	icon.animation = get_parent().collectible + "_" + animation
+	icon.animation = get_parent().palette_dict[get_parent().palette] + "_" + get_parent().collectible + "_" + animation
 	icon.playing = true
 	door.animation = get_parent().palette_dict[get_parent().palette] + "_" + animation
 	door.playing = true

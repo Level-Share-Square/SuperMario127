@@ -77,6 +77,7 @@ func _ready():
 		dir.remove("user://tiles.res")
 		dir.remove("user://bg_music.ogg")
 		dir.remove("user://settings.json")
+		OS.move_to_trash(ProjectSettings.globalize_path("user://template_levels"))
 		file.open("user://080.darius", File.WRITE)
 		file.close()
 		dir.remove("user://072.json")

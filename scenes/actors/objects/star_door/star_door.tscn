@@ -1,20 +1,20 @@
-[gd_scene load_steps=111 format=2]
+[gd_scene load_steps=269 format=2]
 
 [ext_resource path="res://scenes/actors/objects/star_door/star_door.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/star_door/star_door_enter_logic.gd" type="Script" id=2]
-[ext_resource path="res://scenes/actors/objects/star_door/overlays/standard_door_double_star_anim_overlay11.png" type="Texture" id=3]
-[ext_resource path="res://scenes/actors/objects/star_door/overlays/standard_door_double_star_anim_overlay10.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_shine_anim_overlay13.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_shine_anim_overlay1.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/door/nsmbwiiDoor1.wav" type="AudioStream" id=5]
-[ext_resource path="res://scenes/actors/objects/star_door/overlays/standard_door_double_star_anim_overlay2.png" type="Texture" id=6]
-[ext_resource path="res://scenes/actors/objects/star_door/overlays/standard_door_double_star_anim_overlay3.png" type="Texture" id=7]
-[ext_resource path="res://scenes/actors/objects/star_door/overlays/standard_door_double_star_anim_overlay7.png" type="Texture" id=8]
-[ext_resource path="res://scenes/actors/objects/star_door/overlays/standard_door_double_star_anim_overlay8.png" type="Texture" id=9]
-[ext_resource path="res://scenes/actors/objects/star_door/overlays/standard_door_double_star_anim_overlay5.png" type="Texture" id=10]
-[ext_resource path="res://scenes/actors/objects/star_door/overlays/standard_door_double_star_anim_overlay9.png" type="Texture" id=11]
-[ext_resource path="res://scenes/actors/objects/star_door/overlays/standard_door_double_star_anim_overlay6.png" type="Texture" id=12]
-[ext_resource path="res://scenes/actors/objects/star_door/overlays/standard_door_double_star_anim_overlay12.png" type="Texture" id=13]
-[ext_resource path="res://scenes/actors/objects/star_door/overlays/standard_door_double_star_anim_overlay1.png" type="Texture" id=14]
-[ext_resource path="res://scenes/actors/objects/star_door/overlays/standard_door_double_star_anim_overlay4.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_shine_anim_overlay13.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_shine_anim_overlay2.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_shine_anim_overlay11.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_shine_anim_overlay5.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_shine_anim_overlay6.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_shine_anim_overlay10.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_shine_anim_overlay3.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_shine_anim_overlay8.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_shine_anim_overlay7.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_shine_anim_overlay9.png" type="Texture" id=15]
 [ext_resource path="res://scenes/actors/objects/star_door/metal_door_double_anim11.png" type="Texture" id=16]
 [ext_resource path="res://scenes/actors/objects/star_door/Stardoor-open.ogg" type="AudioStream" id=17]
 [ext_resource path="res://scenes/actors/objects/star_door/Stardoor-close.ogg" type="AudioStream" id=18]
@@ -107,6 +107,164 @@
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_shine_anim_overlay5.png" type="Texture" id=105]
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_shine_anim_overlay6.png" type="Texture" id=106]
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_coin_anim_overlay13.png" type="Texture" id=107]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_coin_anim_overlay13.png" type="Texture" id=108]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_star_anim_overlay4.png" type="Texture" id=109]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_star_anim_overlay1.png" type="Texture" id=110]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_star_anim_overlay2.png" type="Texture" id=111]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_star_anim_overlay3.png" type="Texture" id=112]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_star_anim_overlay12.png" type="Texture" id=113]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_star_anim_overlay7.png" type="Texture" id=114]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_star_anim_overlay10.png" type="Texture" id=115]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_star_anim_overlay8.png" type="Texture" id=116]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_star_anim_overlay9.png" type="Texture" id=117]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_star_anim_overlay5.png" type="Texture" id=118]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_star_anim_overlay11.png" type="Texture" id=119]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_star_anim_overlay13.png" type="Texture" id=120]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_star_anim_overlay6.png" type="Texture" id=121]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_shine_anim_overlay4.png" type="Texture" id=122]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_shine_anim_overlay12.png" type="Texture" id=123]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_star_anim_overlay13.png" type="Texture" id=124]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_star_anim_overlay1.png" type="Texture" id=125]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_star_anim_overlay5.png" type="Texture" id=126]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_star_anim_overlay4.png" type="Texture" id=127]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_star_anim_overlay7.png" type="Texture" id=128]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_star_anim_overlay9.png" type="Texture" id=129]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_star_anim_overlay2.png" type="Texture" id=130]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_star_anim_overlay12.png" type="Texture" id=131]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_star_anim_overlay3.png" type="Texture" id=132]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_star_anim_overlay8.png" type="Texture" id=133]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_star_anim_overlay10.png" type="Texture" id=134]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_star_anim_overlay6.png" type="Texture" id=135]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_star_anim_overlay11.png" type="Texture" id=136]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_coin_anim_overlay4.png" type="Texture" id=137]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_coin_anim_overlay3.png" type="Texture" id=138]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_coin_anim_overlay12.png" type="Texture" id=139]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_coin_anim_overlay6.png" type="Texture" id=140]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_coin_anim_overlay11.png" type="Texture" id=141]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_coin_anim_overlay2.png" type="Texture" id=142]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_coin_anim_overlay1.png" type="Texture" id=143]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_coin_anim_overlay8.png" type="Texture" id=144]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_coin_anim_overlay5.png" type="Texture" id=145]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_coin_anim_overlay7.png" type="Texture" id=146]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_coin_anim_overlay9.png" type="Texture" id=147]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/metal_door_double_coin_anim_overlay10.png" type="Texture" id=148]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_shine_anim_overlay10.png" type="Texture" id=149]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_shine_anim_overlay9.png" type="Texture" id=150]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_shine_anim_overlay13.png" type="Texture" id=151]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_shine_anim_overlay11.png" type="Texture" id=152]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_shine_anim_overlay12.png" type="Texture" id=153]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_shine_anim_overlay8.png" type="Texture" id=154]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_shine_anim_overlay6.png" type="Texture" id=155]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_shine_anim_overlay7.png" type="Texture" id=156]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_shine_anim_overlay1.png" type="Texture" id=157]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_shine_anim_overlay2.png" type="Texture" id=158]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_shine_anim_overlay3.png" type="Texture" id=159]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_shine_anim_overlay4.png" type="Texture" id=160]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_shine_anim_overlay5.png" type="Texture" id=161]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_star_anim_overlay12.png" type="Texture" id=162]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_star_anim_overlay4.png" type="Texture" id=163]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_star_anim_overlay13.png" type="Texture" id=164]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_star_anim_overlay11.png" type="Texture" id=165]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_star_anim_overlay5.png" type="Texture" id=166]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_star_anim_overlay8.png" type="Texture" id=167]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_star_anim_overlay7.png" type="Texture" id=168]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_star_anim_overlay10.png" type="Texture" id=169]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_star_anim_overlay6.png" type="Texture" id=170]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_star_anim_overlay9.png" type="Texture" id=171]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_star_anim_overlay1.png" type="Texture" id=172]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_star_anim_overlay2.png" type="Texture" id=173]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_star_anim_overlay3.png" type="Texture" id=174]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_coin_anim_overlay7.png" type="Texture" id=175]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_coin_anim_overlay9.png" type="Texture" id=176]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_coin_anim_overlay3.png" type="Texture" id=177]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_coin_anim_overlay8.png" type="Texture" id=178]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_coin_anim_overlay6.png" type="Texture" id=179]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_coin_anim_overlay11.png" type="Texture" id=180]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_coin_anim_overlay12.png" type="Texture" id=181]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_coin_anim_overlay10.png" type="Texture" id=182]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_coin_anim_overlay13.png" type="Texture" id=183]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_coin_anim_overlay1.png" type="Texture" id=184]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_coin_anim_overlay2.png" type="Texture" id=185]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_coin_anim_overlay4.png" type="Texture" id=186]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/spooky_door_double_coin_anim_overlay5.png" type="Texture" id=187]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_shine_anim_overlay1.png" type="Texture" id=188]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_shine_anim_overlay10.png" type="Texture" id=189]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_shine_anim_overlay7.png" type="Texture" id=190]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_shine_anim_overlay4.png" type="Texture" id=191]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_shine_anim_overlay9.png" type="Texture" id=192]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_shine_anim_overlay8.png" type="Texture" id=193]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_shine_anim_overlay11.png" type="Texture" id=194]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_shine_anim_overlay12.png" type="Texture" id=195]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_shine_anim_overlay3.png" type="Texture" id=196]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_shine_anim_overlay13.png" type="Texture" id=197]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_shine_anim_overlay6.png" type="Texture" id=198]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_shine_anim_overlay2.png" type="Texture" id=199]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_shine_anim_overlay5.png" type="Texture" id=200]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_star_anim_overlay7.png" type="Texture" id=201]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_star_anim_overlay10.png" type="Texture" id=202]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_star_anim_overlay8.png" type="Texture" id=203]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_star_anim_overlay13.png" type="Texture" id=204]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_star_anim_overlay1.png" type="Texture" id=205]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_star_anim_overlay3.png" type="Texture" id=206]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_star_anim_overlay5.png" type="Texture" id=207]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_star_anim_overlay11.png" type="Texture" id=208]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_star_anim_overlay4.png" type="Texture" id=209]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_star_anim_overlay9.png" type="Texture" id=210]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_star_anim_overlay12.png" type="Texture" id=211]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_star_anim_overlay2.png" type="Texture" id=212]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_star_anim_overlay6.png" type="Texture" id=213]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_coin_anim_overlay4.png" type="Texture" id=214]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_coin_anim_overlay1.png" type="Texture" id=215]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_coin_anim_overlay2.png" type="Texture" id=216]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_coin_anim_overlay3.png" type="Texture" id=217]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_coin_anim_overlay7.png" type="Texture" id=218]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_coin_anim_overlay11.png" type="Texture" id=219]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_coin_anim_overlay8.png" type="Texture" id=220]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_coin_anim_overlay5.png" type="Texture" id=221]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_coin_anim_overlay6.png" type="Texture" id=222]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_coin_anim_overlay12.png" type="Texture" id=223]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_coin_anim_overlay13.png" type="Texture" id=224]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_coin_anim_overlay9.png" type="Texture" id=225]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/rusty_door_double_coin_anim_overlay10.png" type="Texture" id=226]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_shine_anim_overlay8.png" type="Texture" id=227]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_shine_anim_overlay9.png" type="Texture" id=228]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_shine_anim_overlay12.png" type="Texture" id=229]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_shine_anim_overlay11.png" type="Texture" id=230]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_shine_anim_overlay13.png" type="Texture" id=231]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_shine_anim_overlay10.png" type="Texture" id=232]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_shine_anim_overlay2.png" type="Texture" id=233]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_shine_anim_overlay3.png" type="Texture" id=234]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_shine_anim_overlay4.png" type="Texture" id=235]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_shine_anim_overlay5.png" type="Texture" id=236]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_shine_anim_overlay6.png" type="Texture" id=237]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_shine_anim_overlay7.png" type="Texture" id=238]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_shine_anim_overlay1.png" type="Texture" id=239]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_coin_anim_overlay13.png" type="Texture" id=240]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_coin_anim_overlay11.png" type="Texture" id=241]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_coin_anim_overlay12.png" type="Texture" id=242]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_coin_anim_overlay10.png" type="Texture" id=243]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_star_anim_overlay6.png" type="Texture" id=244]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_star_anim_overlay2.png" type="Texture" id=245]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_star_anim_overlay8.png" type="Texture" id=246]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_star_anim_overlay13.png" type="Texture" id=247]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_coin_anim_overlay5.png" type="Texture" id=248]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_coin_anim_overlay2.png" type="Texture" id=249]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_coin_anim_overlay6.png" type="Texture" id=250]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_star_anim_overlay5.png" type="Texture" id=251]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_coin_anim_overlay7.png" type="Texture" id=252]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_coin_anim_overlay8.png" type="Texture" id=253]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_star_anim_overlay4.png" type="Texture" id=254]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_coin_anim_overlay4.png" type="Texture" id=255]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_star_anim_overlay9.png" type="Texture" id=256]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_coin_anim_overlay1.png" type="Texture" id=257]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_star_anim_overlay7.png" type="Texture" id=258]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_star_anim_overlay10.png" type="Texture" id=259]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_star_anim_overlay3.png" type="Texture" id=260]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_star_anim_overlay12.png" type="Texture" id=261]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_coin_anim_overlay3.png" type="Texture" id=262]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_star_anim_overlay11.png" type="Texture" id=263]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_star_anim_overlay1.png" type="Texture" id=264]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_coin_anim_overlay9.png" type="Texture" id=265]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 33.2978, 20 )
@@ -166,14 +324,34 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 107 ), ExtResource( 87 ), ExtResource( 91 ), ExtResource( 83 ), ExtResource( 94 ), ExtResource( 92 ), ExtResource( 90 ), ExtResource( 93 ), ExtResource( 84 ), ExtResource( 86 ), ExtResource( 89 ), ExtResource( 88 ), ExtResource( 85 ) ],
+"frames": [ ExtResource( 107 ), ExtResource( 139 ), ExtResource( 141 ), ExtResource( 148 ), ExtResource( 147 ), ExtResource( 144 ), ExtResource( 146 ), ExtResource( 140 ), ExtResource( 145 ), ExtResource( 137 ), ExtResource( 138 ), ExtResource( 142 ), ExtResource( 143 ) ],
 "loop": false,
-"name": "coin_close",
+"name": "metal_coin_close",
 "speed": 24.0
 }, {
-"frames": [ ExtResource( 85 ), ExtResource( 88 ), ExtResource( 89 ), ExtResource( 86 ), ExtResource( 84 ), ExtResource( 93 ), ExtResource( 90 ), ExtResource( 92 ), ExtResource( 94 ), ExtResource( 83 ), ExtResource( 91 ), ExtResource( 87 ), ExtResource( 107 ) ],
+"frames": [ ExtResource( 143 ), ExtResource( 142 ), ExtResource( 138 ), ExtResource( 137 ), ExtResource( 145 ), ExtResource( 140 ), ExtResource( 146 ), ExtResource( 144 ), ExtResource( 147 ), ExtResource( 148 ), ExtResource( 141 ), ExtResource( 139 ), ExtResource( 107 ) ],
 "loop": false,
-"name": "coin_open",
+"name": "metal_coin_open",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 123 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 122 ), ExtResource( 12 ), ExtResource( 7 ), ExtResource( 4 ) ],
+"loop": false,
+"name": "metal_shine_close",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 122 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 14 ), ExtResource( 13 ), ExtResource( 15 ), ExtResource( 11 ), ExtResource( 8 ), ExtResource( 123 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "metal_shine_open",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 124 ), ExtResource( 131 ), ExtResource( 136 ), ExtResource( 134 ), ExtResource( 129 ), ExtResource( 133 ), ExtResource( 128 ), ExtResource( 135 ), ExtResource( 126 ), ExtResource( 127 ), ExtResource( 132 ), ExtResource( 130 ), ExtResource( 125 ) ],
+"loop": false,
+"name": "metal_star coin_close",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 125 ), ExtResource( 130 ), ExtResource( 132 ), ExtResource( 127 ), ExtResource( 126 ), ExtResource( 135 ), ExtResource( 128 ), ExtResource( 133 ), ExtResource( 129 ), ExtResource( 134 ), ExtResource( 136 ), ExtResource( 131 ), ExtResource( 124 ) ],
+"loop": false,
+"name": "metal_star coin_open",
 "speed": 24.0
 }, {
 "frames": [ ExtResource( 107 ) ],
@@ -181,24 +359,124 @@ animations = [ {
 "name": "null",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 107 ), ExtResource( 103 ), ExtResource( 102 ), ExtResource( 99 ), ExtResource( 96 ), ExtResource( 101 ), ExtResource( 95 ), ExtResource( 106 ), ExtResource( 105 ), ExtResource( 98 ), ExtResource( 104 ), ExtResource( 97 ), ExtResource( 100 ) ],
+"frames": [ ExtResource( 240 ), ExtResource( 242 ), ExtResource( 241 ), ExtResource( 243 ), ExtResource( 265 ), ExtResource( 253 ), ExtResource( 252 ), ExtResource( 250 ), ExtResource( 248 ), ExtResource( 255 ), ExtResource( 262 ), ExtResource( 249 ), ExtResource( 257 ) ],
 "loop": false,
-"name": "shine_close",
+"name": "plank_coin_close",
 "speed": 24.0
 }, {
-"frames": [ ExtResource( 100 ), ExtResource( 97 ), ExtResource( 104 ), ExtResource( 98 ), ExtResource( 105 ), ExtResource( 106 ), ExtResource( 95 ), ExtResource( 101 ), ExtResource( 96 ), ExtResource( 99 ), ExtResource( 102 ), ExtResource( 103 ), ExtResource( 107 ) ],
+"frames": [ ExtResource( 257 ), ExtResource( 249 ), ExtResource( 262 ), ExtResource( 255 ), ExtResource( 248 ), ExtResource( 250 ), ExtResource( 252 ), ExtResource( 253 ), ExtResource( 265 ), ExtResource( 243 ), ExtResource( 241 ), ExtResource( 242 ), ExtResource( 240 ) ],
 "loop": false,
-"name": "shine_open",
+"name": "plank_coin_open",
 "speed": 24.0
 }, {
-"frames": [ ExtResource( 107 ), ExtResource( 13 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 15 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 14 ) ],
+"frames": [ ExtResource( 231 ), ExtResource( 229 ), ExtResource( 230 ), ExtResource( 232 ), ExtResource( 228 ), ExtResource( 227 ), ExtResource( 238 ), ExtResource( 237 ), ExtResource( 236 ), ExtResource( 235 ), ExtResource( 234 ), ExtResource( 233 ), ExtResource( 239 ) ],
 "loop": false,
-"name": "star coin_close",
+"name": "plank_shine_close",
 "speed": 24.0
 }, {
-"frames": [ ExtResource( 14 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 15 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 13 ), ExtResource( 107 ) ],
+"frames": [ ExtResource( 239 ), ExtResource( 233 ), ExtResource( 234 ), ExtResource( 235 ), ExtResource( 236 ), ExtResource( 237 ), ExtResource( 238 ), ExtResource( 227 ), ExtResource( 228 ), ExtResource( 232 ), ExtResource( 230 ), ExtResource( 229 ), ExtResource( 231 ) ],
 "loop": false,
-"name": "star coin_open",
+"name": "plank_shine_open",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 247 ), ExtResource( 261 ), ExtResource( 263 ), ExtResource( 259 ), ExtResource( 256 ), ExtResource( 246 ), ExtResource( 258 ), ExtResource( 244 ), ExtResource( 251 ), ExtResource( 254 ), ExtResource( 260 ), ExtResource( 245 ), ExtResource( 264 ) ],
+"loop": false,
+"name": "plank_star coin_close",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 264 ), ExtResource( 245 ), ExtResource( 260 ), ExtResource( 254 ), ExtResource( 251 ), ExtResource( 244 ), ExtResource( 258 ), ExtResource( 246 ), ExtResource( 256 ), ExtResource( 259 ), ExtResource( 263 ), ExtResource( 261 ), ExtResource( 247 ) ],
+"loop": false,
+"name": "plank_star coin_open",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 224 ), ExtResource( 223 ), ExtResource( 219 ), ExtResource( 226 ), ExtResource( 225 ), ExtResource( 220 ), ExtResource( 218 ), ExtResource( 222 ), ExtResource( 221 ), ExtResource( 214 ), ExtResource( 217 ), ExtResource( 216 ), ExtResource( 215 ) ],
+"loop": false,
+"name": "rusty_coin_close",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 215 ), ExtResource( 216 ), ExtResource( 217 ), ExtResource( 214 ), ExtResource( 221 ), ExtResource( 222 ), ExtResource( 218 ), ExtResource( 220 ), ExtResource( 225 ), ExtResource( 226 ), ExtResource( 219 ), ExtResource( 223 ), ExtResource( 224 ) ],
+"loop": false,
+"name": "rusty_coin_open",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 197 ), ExtResource( 195 ), ExtResource( 194 ), ExtResource( 189 ), ExtResource( 192 ), ExtResource( 193 ), ExtResource( 190 ), ExtResource( 198 ), ExtResource( 200 ), ExtResource( 191 ), ExtResource( 196 ), ExtResource( 199 ), ExtResource( 188 ) ],
+"loop": false,
+"name": "rusty_shine_close",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 188 ), ExtResource( 199 ), ExtResource( 196 ), ExtResource( 191 ), ExtResource( 200 ), ExtResource( 198 ), ExtResource( 190 ), ExtResource( 193 ), ExtResource( 192 ), ExtResource( 189 ), ExtResource( 194 ), ExtResource( 195 ), ExtResource( 197 ) ],
+"loop": false,
+"name": "rusty_shine_open",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 204 ), ExtResource( 211 ), ExtResource( 208 ), ExtResource( 202 ), ExtResource( 210 ), ExtResource( 203 ), ExtResource( 201 ), ExtResource( 213 ), ExtResource( 207 ), ExtResource( 209 ), ExtResource( 206 ), ExtResource( 212 ), ExtResource( 205 ) ],
+"loop": false,
+"name": "rusty_star coin_close",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 205 ), ExtResource( 212 ), ExtResource( 206 ), ExtResource( 209 ), ExtResource( 207 ), ExtResource( 213 ), ExtResource( 201 ), ExtResource( 203 ), ExtResource( 210 ), ExtResource( 202 ), ExtResource( 208 ), ExtResource( 211 ), ExtResource( 204 ) ],
+"loop": false,
+"name": "rusty_star coin_open",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 183 ), ExtResource( 181 ), ExtResource( 180 ), ExtResource( 182 ), ExtResource( 176 ), ExtResource( 178 ), ExtResource( 175 ), ExtResource( 179 ), ExtResource( 187 ), ExtResource( 186 ), ExtResource( 177 ), ExtResource( 185 ), ExtResource( 184 ) ],
+"loop": false,
+"name": "spooky_coin_close",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 184 ), ExtResource( 185 ), ExtResource( 177 ), ExtResource( 186 ), ExtResource( 187 ), ExtResource( 179 ), ExtResource( 175 ), ExtResource( 178 ), ExtResource( 176 ), ExtResource( 182 ), ExtResource( 180 ), ExtResource( 181 ), ExtResource( 183 ) ],
+"loop": false,
+"name": "spooky_coin_open",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 151 ), ExtResource( 153 ), ExtResource( 152 ), ExtResource( 149 ), ExtResource( 150 ), ExtResource( 154 ), ExtResource( 156 ), ExtResource( 155 ), ExtResource( 161 ), ExtResource( 160 ), ExtResource( 159 ), ExtResource( 158 ), ExtResource( 157 ) ],
+"loop": false,
+"name": "spooky_shine_close",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 157 ), ExtResource( 158 ), ExtResource( 159 ), ExtResource( 160 ), ExtResource( 161 ), ExtResource( 155 ), ExtResource( 156 ), ExtResource( 154 ), ExtResource( 150 ), ExtResource( 149 ), ExtResource( 152 ), ExtResource( 153 ), ExtResource( 151 ) ],
+"loop": false,
+"name": "spooky_shine_open",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 164 ), ExtResource( 162 ), ExtResource( 165 ), ExtResource( 169 ), ExtResource( 171 ), ExtResource( 167 ), ExtResource( 168 ), ExtResource( 170 ), ExtResource( 166 ), ExtResource( 163 ), ExtResource( 174 ), ExtResource( 173 ), ExtResource( 172 ) ],
+"loop": false,
+"name": "spooky_star coin_close",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 172 ), ExtResource( 173 ), ExtResource( 174 ), ExtResource( 163 ), ExtResource( 166 ), ExtResource( 170 ), ExtResource( 168 ), ExtResource( 167 ), ExtResource( 171 ), ExtResource( 169 ), ExtResource( 165 ), ExtResource( 162 ), ExtResource( 164 ) ],
+"loop": false,
+"name": "spooky_star coin_open",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 108 ), ExtResource( 87 ), ExtResource( 91 ), ExtResource( 83 ), ExtResource( 94 ), ExtResource( 92 ), ExtResource( 90 ), ExtResource( 93 ), ExtResource( 84 ), ExtResource( 86 ), ExtResource( 89 ), ExtResource( 88 ), ExtResource( 85 ) ],
+"loop": false,
+"name": "wood_coin_close",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 85 ), ExtResource( 88 ), ExtResource( 89 ), ExtResource( 86 ), ExtResource( 84 ), ExtResource( 93 ), ExtResource( 90 ), ExtResource( 92 ), ExtResource( 94 ), ExtResource( 83 ), ExtResource( 91 ), ExtResource( 87 ), ExtResource( 108 ) ],
+"loop": false,
+"name": "wood_coin_open",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 103 ), ExtResource( 102 ), ExtResource( 99 ), ExtResource( 96 ), ExtResource( 101 ), ExtResource( 95 ), ExtResource( 106 ), ExtResource( 105 ), ExtResource( 98 ), ExtResource( 104 ), ExtResource( 97 ), ExtResource( 100 ) ],
+"loop": false,
+"name": "wood_shine_close",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 100 ), ExtResource( 97 ), ExtResource( 104 ), ExtResource( 98 ), ExtResource( 105 ), ExtResource( 106 ), ExtResource( 95 ), ExtResource( 101 ), ExtResource( 96 ), ExtResource( 99 ), ExtResource( 102 ), ExtResource( 103 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "wood_shine_open",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 120 ), ExtResource( 113 ), ExtResource( 119 ), ExtResource( 115 ), ExtResource( 117 ), ExtResource( 116 ), ExtResource( 114 ), ExtResource( 121 ), ExtResource( 118 ), ExtResource( 109 ), ExtResource( 112 ), ExtResource( 111 ), ExtResource( 110 ) ],
+"loop": false,
+"name": "wood_star coin_close",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 110 ), ExtResource( 111 ), ExtResource( 112 ), ExtResource( 109 ), ExtResource( 118 ), ExtResource( 121 ), ExtResource( 114 ), ExtResource( 116 ), ExtResource( 117 ), ExtResource( 115 ), ExtResource( 119 ), ExtResource( 113 ), ExtResource( 120 ) ],
+"loop": false,
+"name": "wood_star coin_open",
 "speed": 24.0
 } ]
 
@@ -243,4 +521,4 @@ animation = "metal_open"
 [node name="Icon" type="AnimatedSprite" parent="DoorEnterLogic"]
 z_index = -2
 frames = SubResource( 2 )
-animation = "null"
+animation = "plank_coin_close"

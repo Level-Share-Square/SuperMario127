@@ -77,6 +77,7 @@ func precise_object_overlap(object_node: Node, point: Vector2) -> int:
 	if object_node is Sprite:
 		# Pixel perfect hitbox
 		# object_node.is_pixel_opaque(object_node.to_local(point))
+		pass
 		return 1 if sprite_is_pixel_opaque_with_margin(object_node, object_node.to_local(point), 1.0) else 0
 	if object_node is AnimatedSprite:
 		return 1 if animated_sprite_get_rect(object_node).has_point(object_node.to_local(point)) else 0
