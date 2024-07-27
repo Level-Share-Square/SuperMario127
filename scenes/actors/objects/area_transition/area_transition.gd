@@ -19,7 +19,7 @@ var stops_camera = true
 var is_idle := true
 var entering := false
 
-var stored_character : Character
+var stored_characters : Array = [null, null]
 
 func _set_properties():
 	savable_properties = ["area_id", "destination_tag", "teleportation_mode", "vertical", "parts", "stops_camera"]
@@ -145,17 +145,14 @@ func _physics_process(_delta : float) -> void:
 				
 
 func _on_body_entered(body):
-	if enabled and is_idle and !entering:
+	if enabled and is_idle and !entering and teleportation_mode:
 		if body.name.begins_with("Character") and !body.dead:
-
-			if !teleportation_mode:
-				body.toggle_movement(false)
-				body.camera.set_zoom_tween(Vector2(1, 1), 0.5)
+			body.toggle_movement(false)
+			body.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 			start_pipe_enter_animation(body)
 
 func start_pipe_enter_animation(character : Character) -> void:
-	stored_character = character
-
+	stored_characters[character.player_id] = character
 	is_idle = false
 	entering = true
 
@@ -167,9 +164,12 @@ func start_pipe_enter_animation(character : Character) -> void:
 		if pair.object_type == "area_transition":
 			pair.is_idle = false
 			character.gravity_scale = 0
-			Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
-			Singleton.CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
-
+			if character.player_id == 0:
+				Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
+				Singleton.CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
+			else:
+				Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
+				Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
 			character.camera.auto_move = false
 	
 	emit_signal("pipe_animation_finished", character, entering)
@@ -178,7 +178,7 @@ func start_pipe_enter_animation(character : Character) -> void:
 
 func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 	character.show()
-	stored_character = character
+	stored_characters[character.player_id] = character
 	is_idle = false
 	entering = false
 	
@@ -190,8 +190,7 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 		character.set_collision_layer_bit(1, true)
 		character.set_inter_player_collision(true) 
 		character.gravity_scale = 1
-		
-		if Singleton.CurrentLevelData.level_data.vars.transition_character_data.size() == 1:
+		if get_character_transition_data(character).size() == 1:
 			exit_with_helper(character)
 		
 	else:
@@ -201,23 +200,24 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 
 func pipe_exit_anim_finished(character : Character):
 	#this means we came from a transition 
-	if Singleton.CurrentLevelData.level_data.vars.transition_character_data.size() >= 7:
+	if (Singleton.CurrentLevelData.level_data.vars.transition_character_data.size() >= 7
+	|| Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.size() >= 7):
 		exit_with_helper(character)
 	# exits the pipe and gives back control to mario
 	Singleton.CurrentLevelData.level_data.vars.transition_data = []
 	Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
+	Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
 	entering = false
 	#character.toggle_movement(true)
 	# undo collision changes 
 	character.set_collision_layer_bit(1, true)
 	character.set_inter_player_collision(true) 
 	character.toggle_movement(true)
-	stored_character = null
+	stored_characters[character.player_id] = null
 	area2d.connect("body_exited", self, "exit_remote_teleport")
 	
 func exit_with_helper(character : Character):
-	var helper = Singleton.CurrentLevelData.level_data.vars.transition_character_data.back()
-	character.global_position += helper.velocity * 2
+	var helper = Singleton.CurrentLevelData.level_data.vars.transition_character_data.back() if character.player_id == 0 else Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.back()
 	character.velocity = helper.velocity
 	character.state = helper.state
 	character.facing_direction = helper.facing_direction
@@ -232,14 +232,17 @@ func exit_with_helper(character : Character):
 	timer.one_shot = true
 	add_child(timer)
 	timer.start()
-	Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
+	if character.player_id == 0:
+		Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
+	else:
+		Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
 	
 	
 	
-func _tween_all_completed() -> void:
-	if entering: #TODO: Make this work w/o if statement
-		emit_signal("pipe_animation_finished", stored_character, entering)
-		stored_character = null
+#func _tween_all_completed() -> void:
+#	if entering: #TODO: Make this work w/o if statement
+#		emit_signal("pipe_animation_finished", stored_character, entering)
+#		stored_character = null
 
 
 func reset_sprite(character : Character): #This is here in case Mario came from a door to a pipe
@@ -251,4 +254,9 @@ func set_camera(character: Character):
 	character.camera.auto_move = true
 
 
-
+func get_character_transition_data(character : Character):
+		if character.player_id == 0:
+			return Singleton.CurrentLevelData.level_data.vars.transition_character_data
+		else:
+			return Singleton.CurrentLevelData.level_data.vars.transition_character_data_2
+			

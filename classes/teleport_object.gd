@@ -159,6 +159,8 @@ func _start_local_transition(character : Character, entering) -> void:
 			var end_point = local_pair.global_position
 			if Singleton.CurrentLevelData.level_data.vars.transition_character_data.size() == 1 and local_pair.stops_camera:
 				end_point = Singleton.CurrentLevelData.level_data.vars.transition_character_data.back().find_camera_position(local_pair.vertical, local_pair.global_position, character.camera.base_size, local_pair.parts * 32)
+			if Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.size() == 1 and local_pair.stops_camera:
+				end_point = Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.back().find_camera_position(local_pair.vertical, local_pair.global_position, character.camera.base_size, local_pair.parts * 32)
 			tween.interpolate_property(character.camera, "position", null, end_point, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 			tween.start()
 		else:
