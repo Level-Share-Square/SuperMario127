@@ -1,4 +1,4 @@
-[gd_scene load_steps=1332 format=2]
+[gd_scene load_steps=1337 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1298,6 +1298,11 @@
 [ext_resource path="res://assets/tiles/carpet/palette_icons/1_slopeR.png" type="Texture" id=1296]
 [ext_resource path="res://assets/tiles/carpet/palette_icons/4_slopeR.png" type="Texture" id=1297]
 [ext_resource path="res://assets/tiles/carpet/palette_icons/1_slopeL.png" type="Texture" id=1298]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Doors/planks_door_double_shine_anim1.png" type="Texture" id=1299]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Doors/rusty_door_double_shine_anim1.png" type="Texture" id=1300]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Doors/metal_door_double_shine_anim1.png" type="Texture" id=1301]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Doors/standard_door_double_shine_anim1.png" type="Texture" id=1302]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Doors/spooky_door_double_shine_anim1.png" type="Texture" id=1303]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2389,6 +2394,8 @@ preview = ExtResource( 49 )
 script = ExtResource( 24 )
 object_id = 113
 is_object = true
+palette_icons = [ ExtResource( 1302 ), ExtResource( 1301 ), ExtResource( 1303 ), ExtResource( 1300 ), ExtResource( 1299 ) ]
+palette_previews = [ ExtResource( 1302 ), ExtResource( 1301 ), ExtResource( 1303 ), ExtResource( 1300 ), ExtResource( 1299 ) ]
 icon = ExtResource( 1187 )
 preview = ExtResource( 847 )
 

@@ -1,11 +1,19 @@
 extends TeleportObject
 
-onready var sprite = $DoorEnterLogic/DoorSprite
+onready var icon = $DoorEnterLogic/Icon
+onready var door = $DoorEnterLogic/Door
 onready var door_enter_logic = $DoorEnterLogic
 
 export(Array, Texture) var palette_textures
 export(Array, SpriteFrames) var palette_frames
 
+var palette_dict = {
+	0: "wood",
+	1: "metal",
+	2: "spooky",
+	3: "rusty",
+	4: "plank"
+}
 
 var stored_character : Character
 var current_level_info : LevelInfo
@@ -13,6 +21,8 @@ var required_amount := 1
 var collectible := "shine"
 var collectible_dictionary : Dictionary
 var text := ""
+var prev_coll
+var coll
 
 const OPEN_DOOR_WAIT = 0.45
 
@@ -35,16 +45,19 @@ func _init():
 	object_type = "door"
 
 func _ready() -> void:
-	.ready() #calls parent class "TeleportObject"
+	prev_coll = collectible
+	coll = collectible
+	.ready() #calls parent class "TeleportObject"i
 	if is_preview:
 		z_index = 0
-		sprite.z_index = 0
-
-	if palette != 0:
-		sprite.set_sprite_frames(palette_frames[palette - 1])
+		icon.z_index = 0
+		door.z_index = 0
+	icon.animation = collectible + "_open"
+	door.animation = palette_dict[palette] + "_open"
 	if scale.x < 1:
 		scale.x = abs(scale.x)
-		sprite.flip_h = true
+		icon.flip_h = true
+		door.flip_h = true
 	
 	var append_tag 
 	
@@ -90,5 +103,9 @@ func exit_remote_teleport():
 	door_enter_logic.is_idle = true
 	
 func _process(delta):
+	prev_coll = collectible
+	if prev_coll != coll:
+		icon.animation = collectible + "_open"
+	coll = collectible
 	if "\n" in destination_tag:
 		destination_tag = destination_tag.replace("\n", "")

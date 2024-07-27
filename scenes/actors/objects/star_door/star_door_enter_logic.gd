@@ -7,7 +7,8 @@ signal exit
 onready var area2d : Area2D = $Area2D
 onready var tween : Tween = $Tween
 onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
-onready var door_sprite : AnimatedSprite = $DoorSprite
+onready var icon : AnimatedSprite = $Icon
+onready var door : AnimatedSprite = $Door
 
 onready var collision_width : float = $Area2D/CollisionShape2D.shape.extents.x
 
@@ -94,7 +95,7 @@ func start_door_enter_animation(character : Character) -> void:
 	# warning-ignore: return_value_discarded
 	if can_enter:
 		animate_door("open")
-		tween.interpolate_callback(character.anim_player, slide_length + (door_sprite.frames.get_frame_count("open") * 2 * fps_util.PHYSICS_DELTA), "play", "enter_door")
+		tween.interpolate_callback(character.anim_player, slide_length + (icon.frames.get_frame_count("open") * 2 * fps_util.PHYSICS_DELTA), "play", "enter_door")
 		character.anim_player.connect("animation_finished", self, "character_animation_finished", [character], CONNECT_ONESHOT)
 	else:
 		#copied this from the sign code
@@ -118,8 +119,10 @@ func character_animation_finished(_animation : String, character : Character) ->
 	
 func animate_door(animation : String = "close") -> void:
 	# this function just plays the door animation, so code doesn't have to repeat
-	door_sprite.animation = animation
-	door_sprite.playing = true
+	icon.animation = get_parent().collectible + "_" + animation
+	icon.playing = true
+	door.animation = get_parent().palette_dict[get_parent().palette] + "_" + animation
+	door.playing = true
 	audio_player.stream = open_audio if animation == "open" else close_audio
 	audio_player.play()
 
