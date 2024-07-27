@@ -193,8 +193,7 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 		if get_character_transition_data(character).size() == 1:
 			exit_with_helper(character)
 		
-	else:
-		pipe_exit_anim_finished(character)
+	pipe_exit_anim_finished(character)
 	reset_sprite(character)
 	
 
@@ -236,13 +235,7 @@ func exit_with_helper(character : Character):
 		Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
 	else:
 		Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
-	
-	
-	
-#func _tween_all_completed() -> void:
-#	if entering: #TODO: Make this work w/o if statement
-#		emit_signal("pipe_animation_finished", stored_character, entering)
-#		stored_character = null
+
 
 
 func reset_sprite(character : Character): #This is here in case Mario came from a door to a pipe
@@ -250,6 +243,7 @@ func reset_sprite(character : Character): #This is here in case Mario came from 
 	character.sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	character.sprite.scale = Vector2(1.0, 1.0)
 	character.sprite.position = Vector2.ZERO
+
 func set_camera(character: Character):
 	character.camera.auto_move = true
 
