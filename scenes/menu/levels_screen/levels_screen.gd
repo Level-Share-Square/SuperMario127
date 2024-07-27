@@ -324,7 +324,7 @@ func start_level(start_in_edit_mode : bool):
 	# not a multishine level, but if there's 1 shine we should set it as selected 
 	if level_info.shine_details.size() == 1:
 		level_info.selected_shine = 0
-
+	$TransitionRect.visible = false
 	# use the first fire of the transition_finished signal to change the scene when the screen finishes transitioning out
 	var goal_scene = EDITOR_SCENE if start_in_edit_mode else PLAYER_SCENE
 	var _connect = Singleton.SceneTransitions.connect("transition_finished", get_tree(), "change_scene_to", [goal_scene], CONNECT_ONESHOT)

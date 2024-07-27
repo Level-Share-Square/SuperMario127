@@ -87,7 +87,7 @@ func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D
 				polygon[i] = point
 			
 			var collision_polygon := CollisionPolygon2D.new()
-			collision_polygon.transform = node_transform
+			collision_polygon.transform = node_transform.translated(node.offset)
 			collision_polygon.polygon = polygon
 			array.append(collision_polygon)
 	

@@ -130,7 +130,10 @@ func _ready():
 	loop_offset = start_offset
 	path_follower.offset = start_offset
 	
+	platform.set_sync_to_physics(true)
 	if(mode==1):
+		# Disable to fix rotation issues.
+		platform.set_sync_to_physics(false)
 		platform.modulate = transparent_color
 		
 		start_sprite_node = Node2D.new()

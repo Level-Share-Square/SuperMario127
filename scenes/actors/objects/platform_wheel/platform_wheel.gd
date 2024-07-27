@@ -60,8 +60,13 @@ func _process(_delta):
 			var delta_count = platform_count-platforms.size()
 			for _i in range(delta_count):
 				var instance = scene.instance()
+				instance.set_sync_to_physics(true)
+				if(mode==1):
+					# Disable to fix rotation issues.
+					instance.set_sync_to_physics(false)
 				platforms.append(instance)
 				add_child(instance)
+				instance.set_parts(parts)
 				
 				# Disable the collision if enabled = false
 				instance.collision_shape.disabled = !enabled
@@ -103,6 +108,10 @@ func _ready():
 	delta_angle = (PI * 2) / platform_count
 	for _i in range(platform_count):
 		var instance = scene.instance()
+		instance.set_sync_to_physics(true)
+		if(mode==1):
+			# Disable to fix rotation issues.
+			instance.set_sync_to_physics(false)
 		platforms.append(instance)
 		add_child(instance)
 		
