@@ -65,7 +65,7 @@ func attacked(new_area):
 func stomp(body):
 	if !enabled: return
 	var body_cast = body as Character #this filters out any bodies other than the player from being used
-	if "Character" in body:
+	if "Character" in str(body):
 		if body.invincible:
 			dead = true
 			animation_player.play("die")
