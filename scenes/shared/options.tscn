@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
@@ -39,6 +39,7 @@
 [ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=37]
 [ext_resource path="res://scenes/editor/window.gd" type="Script" id=38]
 [ext_resource path="res://scenes/shared/hotkeywindow.gd" type="Script" id=39]
+[ext_resource path="res://assets/misc/folder.png" type="Texture" id=40]
 
 [sub_resource type="DynamicFont" id=2]
 size = 28
@@ -1078,7 +1079,7 @@ custom_styles/disabled = SubResource( 12 )
 custom_styles/normal = SubResource( 11 )
 action_mode = 0
 enabled_focus_mode = 0
-text = "Edit Global Hotkeys"
+text = "Edit Player Hotkeys"
 
 [node name="Label" type="Label" parent="Page2/HotkeyWindow"]
 visible = false
@@ -1152,6 +1153,24 @@ custom_styles/normal = SubResource( 11 )
 action_mode = 0
 enabled_focus_mode = 0
 text = "True"
+
+[node name="Folder" type="Button" parent="Page2/GhostToggle"]
+margin_left = 284.0
+margin_top = -1.0
+margin_right = 348.0
+margin_bottom = 29.0
+focus_mode = 0
+custom_fonts/font = SubResource( 13 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/focus = SubResource( 10 )
+custom_styles/disabled = SubResource( 12 )
+custom_styles/normal = SubResource( 11 )
+action_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 40 )
+icon_align = 1
+expand_icon = true
 
 [node name="AreasWindow" type="NinePatchRect" parent="Page2"]
 visible = false

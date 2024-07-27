@@ -4727,7 +4727,7 @@ volume_db = -10.0
 [node name="DragTool" type="TextureButton" parent="UI/Tools/Control"]
 margin_left = 58.0
 margin_top = 12.0
-margin_right = 229.0
+margin_right = 175.0
 margin_bottom = 120.0
 rect_scale = Vector2( 0.333, 0.333 )
 texture_normal = ExtResource( 1217 )

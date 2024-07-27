@@ -176,6 +176,11 @@ animations = [ {
 "name": "coin_open",
 "speed": 24.0
 }, {
+"frames": [ ExtResource( 107 ) ],
+"loop": true,
+"name": "null",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 107 ), ExtResource( 103 ), ExtResource( 102 ), ExtResource( 99 ), ExtResource( 96 ), ExtResource( 101 ), ExtResource( 95 ), ExtResource( 106 ), ExtResource( 105 ), ExtResource( 98 ), ExtResource( 104 ), ExtResource( 97 ), ExtResource( 100 ) ],
 "loop": false,
 "name": "shine_close",
@@ -238,4 +243,4 @@ animation = "metal_open"
 [node name="Icon" type="AnimatedSprite" parent="DoorEnterLogic"]
 z_index = -2
 frames = SubResource( 2 )
-animation = "shine_open"
+animation = "null"

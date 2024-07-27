@@ -22,6 +22,8 @@ var collectible := "shine"
 var collectible_dictionary : Dictionary
 var text := ""
 var prev_coll
+
+var possible_coll = ["shine", "star coin", "coin"]
 var coll
 
 const OPEN_DOOR_WAIT = 0.45
@@ -52,7 +54,10 @@ func _ready() -> void:
 		z_index = 0
 		icon.z_index = 0
 		door.z_index = 0
-	icon.animation = collectible + "_open"
+	if possible_coll.has(collectible):
+		icon.animation = collectible + "_open"
+	else:
+		icon.animation = "null"
 	door.animation = palette_dict[palette] + "_open"
 	if scale.x < 1:
 		scale.x = abs(scale.x)
@@ -105,7 +110,10 @@ func exit_remote_teleport():
 func _process(delta):
 	prev_coll = collectible
 	if prev_coll != coll:
-		icon.animation = collectible + "_open"
+		if possible_coll.has(collectible):
+			icon.animation = collectible + "_open"
+		else:
+			icon.animation = "null"
 	coll = collectible
 	if "\n" in destination_tag:
 		destination_tag = destination_tag.replace("\n", "")
