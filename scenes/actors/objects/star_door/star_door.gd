@@ -55,7 +55,7 @@ func _ready() -> void:
 		icon.z_index = 0
 		door.z_index = 0
 	if possible_coll.has(collectible):
-		icon.animation = collectible + "_open"
+		icon.animation = palette_dict[palette] + "_" + collectible + "_open"
 	else:
 		icon.animation = "null"
 	door.animation = palette_dict[palette] + "_open"
@@ -111,7 +111,7 @@ func _process(delta):
 	prev_coll = collectible
 	if prev_coll != coll:
 		if possible_coll.has(collectible):
-			icon.animation = collectible + "_open"
+			icon.animation = palette_dict[palette] + "_" + collectible + "_open"
 		else:
 			icon.animation = "null"
 	coll = collectible
