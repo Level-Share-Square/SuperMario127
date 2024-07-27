@@ -142,7 +142,12 @@ func _physics_process(_delta : float) -> void:
 				body.toggle_movement(false)
 				body.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 				start_pipe_enter_animation(body)
-				
+	var character
+	for chr in stored_characters:
+		if chr != null:
+			character = chr
+	if character:
+		print(character.position)
 
 func _on_body_entered(body):
 	if enabled and is_idle and !entering and teleportation_mode:
@@ -209,9 +214,6 @@ func pipe_exit_anim_finished(character : Character):
 	entering = false
 	#character.toggle_movement(true)
 	# undo collision changes 
-	character.set_collision_layer_bit(1, true)
-	character.set_inter_player_collision(true) 
-	character.toggle_movement(true)
 	stored_characters[character.player_id] = null
 	area2d.connect("body_exited", self, "exit_remote_teleport")
 	
@@ -246,6 +248,9 @@ func reset_sprite(character : Character): #This is here in case Mario came from 
 
 func set_camera(character: Character):
 	character.camera.auto_move = true
+	character.call_deferred("set_collision_layer_bit", 1, true)
+	character.set_inter_player_collision(true) 
+	character.call_deferred("toggle_movement", true)
 
 
 func get_character_transition_data(character : Character):
