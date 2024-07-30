@@ -158,9 +158,9 @@ position = Vector2( 2.35992, 0 )
 texture = ExtResource( 6 )
 
 [node name="Color" parent="Contents/Wheel" instance=ExtResource( 8 )]
-margin_left = -234.237
+margin_left = -374.237
 margin_top = 187.181
-margin_right = 85.7629
+margin_right = -54.2371
 margin_bottom = 307.181
 rect_scale = Vector2( 1.5, 1.5 )
 
@@ -212,12 +212,6 @@ text = "Original:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Line2D" type="Line2D" parent="Contents/ColorPreviews"]
-position = Vector2( -39.5, -104 )
-points = PoolVector2Array( 368.534, 740, 368.534, 104 )
-width = 5.0
-default_color = Color( 0, 0, 0, 0.243137 )
 
 [node name="Tween" type="Tween" parent="."]
 

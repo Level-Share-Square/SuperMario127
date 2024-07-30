@@ -3,8 +3,6 @@
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
 
-
-
 [sub_resource type="GDScript" id=1]
 script/source = "extends Control
 
@@ -53,9 +51,6 @@ corner_radius_bottom_left = 24
 margin_right = 320.0
 margin_bottom = 120.0
 script = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 button = NodePath("Button")
 
 [node name="Button" type="Button" parent="."]

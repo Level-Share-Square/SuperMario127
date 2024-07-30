@@ -23,6 +23,7 @@ script = ExtResource( 3 )
 h_edit = NodePath("HEdit")
 s_edit = NodePath("SEdit")
 v_edit = NodePath("VEdit")
+a_edit = NodePath("AEdit")
 
 [node name="HEdit" type="LineEdit" parent="."]
 margin_left = 7.0
@@ -79,4 +80,20 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+max_value = 65535.0
+
+[node name="AEdit" type="LineEdit" parent="."]
+margin_left = 324.0
+margin_top = 58.0
+margin_right = 420.0
+margin_bottom = 112.0
+custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 1 )
+align = 1
+max_length = 5
+context_menu_enabled = false
+placeholder_text = "A"
+placeholder_alpha = 0.35
+script = ExtResource( 2 )
 max_value = 65535.0

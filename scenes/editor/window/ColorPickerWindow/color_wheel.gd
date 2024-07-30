@@ -33,6 +33,7 @@ func _input(event):
 	selector.position = mouse_pos
 	base_color = Color.from_hsv((atan2(-normal_coordinates.x, -normal_coordinates.y) / (2*PI)) + 0.5, normal_coordinates.length(), gradient_selector.value)
 	gradient_selector.modulate = base_color
+	gradient_selector.modulate.a = 255
 	new_color_preview.modulate = base_color
 	color_manager.set_value(base_color)
 	notify_property_manager()
@@ -42,6 +43,7 @@ func update_value(color : Color):
 	var angle := color.h*2*PI
 	selector.position = Vector2(sin(angle)*length, cos(angle)*length)
 	gradient_selector.modulate = color
+	gradient_selector.modulate.a = 255
 	new_color_preview.modulate = color
 	self_modulate = Color(color.v, color.v, color.v)
 	gradient_selector.set_brightness(color.v)
