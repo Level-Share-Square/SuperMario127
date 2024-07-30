@@ -91,7 +91,10 @@ func _ready() -> void:
 
 			# Get the value, returning false if the key doesn't exist
 			is_blue = collected_shines.get(str(id), false)
-	
+		if is_blue:
+			recolorable_ray_sprite.visible = true
+			recolorable_ray_sprite.modulate = Color.blue
+	ray_sprite.visible = do_kick_out and !is_blue
 	var _connect = connect("property_changed", self, "update_color")
 	update_color("color", color)
 
@@ -109,7 +112,8 @@ func update_color(key, value):
 				animated_sprite.frames = recolorable_frames
 				particles.texture = recolorable_particles
 				
-				recolorable_ray_sprite.visible = true
+				
+				recolorable_ray_sprite.visible = true if do_kick_out else false
 				ray_sprite.visible = false
 				recolorable_ray_sprite.self_modulate = color
 				recolorable_ray_sprite.self_modulate.s *= 3
@@ -120,7 +124,7 @@ func update_color(key, value):
 				particles.texture = normal_particles
 				
 				recolorable_ray_sprite.visible = false
-				ray_sprite.visible = true
+				ray_sprite.visible = true if do_kick_out else false
 				
 				
 		else:
@@ -128,9 +132,15 @@ func update_color(key, value):
 			
 			animated_sprite.frames = collected_frames
 			particles.texture = collected_particles
-			ray_sprite.modulate = Color.blue
+			ray_sprite.visible = false
+			recolorable_ray_sprite.visible = true if do_kick_out else false
+			recolorable_ray_sprite.modulate = Color.blue
 		last_color = value
-
+	if key == "do_kick_out":
+		if color != NORMAL_COLOR:
+			recolorable_ray_sprite.visible = value
+		else:
+			ray_sprite.visible = value
 func _process(_delta):
 	outline_sprite.frame = animated_sprite.frame
 	outline_sprite.visible = animated_sprite.visible
@@ -141,7 +151,7 @@ func _physics_process(_delta : float) -> void:
 	animated_sprite.flip_h = !do_kick_out
 	ray_sprite.rotation_degrees += 0.6
 	recolorable_ray_sprite.transform = ray_sprite.transform
-	recolorable_ray_sprite.modulate = ray_sprite.modulate
+	recolorable_ray_sprite.modulate.a = ray_sprite.modulate.a
 	if !animated_sprite.playing: #looks like if it is not set to playing, some manual animation is done instead
 		#warning-ignore:integer_division
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
