@@ -41,6 +41,7 @@ func _process(_delta):
 #-------------------------------- platform logic -----------------------
 	
 onready var sprite = $Sprite
+onready var platform_area = $StaticBody2D/Area2D
 onready var platform_area_collision_shape = $StaticBody2D/Area2D/CollisionShape2D
 onready var collision_shape = $StaticBody2D/CollisionShape2D
 onready var watercol_shape = $watercol/det
@@ -80,6 +81,7 @@ func _ready():
 		var _connect = waterdet.connect("area_entered", self, "water_entered")
 		var _connect2 = grounddet.connect("body_entered", self, "ground_entered")
 		var _connect3 = waterdet.connect("area_exited", self, "water_exited")
+		var _connect4 = platform_area.connect("area_entered", self, "platform_area_entered")
 	if override_part_width != 0:
 		part_width = override_part_width
 
@@ -101,6 +103,11 @@ func _ready():
 		
 	update_parts()
 
+func platform_area_entered(area):
+	if area.get_parent().name.begins_with("DeathPlane"):
+		global_position = spawn_pos
+		rotation_degrees = 0
+		
 func water_entered(area):
 
 	if "Col" in str(area) or "Area2D" in str(area):

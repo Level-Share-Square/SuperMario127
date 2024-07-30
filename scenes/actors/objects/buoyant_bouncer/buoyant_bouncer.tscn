@@ -80,7 +80,7 @@ shape = SubResource( 1 )
 [node name="Area2D" type="Area2D" parent="bouncecol"]
 visible = false
 collision_layer = 16
-collision_mask = 0
+collision_mask = 4
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bouncecol/Area2D"]
