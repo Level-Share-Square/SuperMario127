@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bullet_seek.ogg-1d2dc42cc7a5f6a2fd8262496819f99c.oggstr"
+
+[deps]
+
+source_file="res://scenes/actors/objects/bullet_bill/bullet_seek.ogg"
+dest_files=[ "res://.import/bullet_seek.ogg-1d2dc42cc7a5f6a2fd8262496819f99c.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

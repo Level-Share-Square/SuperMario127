@@ -2,7 +2,6 @@ extends GameObject
 
 onready var sprite = $Top
 onready var color_sprite = $Top/Color
-onready var sound = $AudioStreamPlayer
 onready var collision_shape = $StaticBody2D/CollisionShape2D
 
 var wait_time = 3.0
@@ -92,6 +91,7 @@ func _physics_process(delta):
 			object.properties.append(facing_direction)
 			object.properties.append(invincible)
 			get_parent().create_object(object, false)
+			
 			
 			scale.x = prev_scale_x
 		elif spawn_timer <= 0:

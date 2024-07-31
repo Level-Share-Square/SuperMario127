@@ -6,6 +6,8 @@ onready var sprite = $Sprite
 onready var colored_sprite = $Sprite/Colored
 onready var visibility_notifer = $VisibilityNotifier2D
 onready var sound = $AudioStreamPlayer
+onready var fire_sound = $fire
+onready var seek_sound = $seek
 var character
 
 var speed := 0.75
@@ -76,6 +78,10 @@ func _ready():
 		var _connect = area.connect("body_entered", self, "detect_spin")
 		var _connect2 = area.connect("area_entered", self, "detect_spin")
 		var _connect3 = stomp_detector.connect("body_entered", self, "detect_stomp")
+		fire_sound.play()
+		if chase == true:
+			seek_sound.play()
+		
 		
 func _process(_delta):
 	colored_sprite.modulate = color

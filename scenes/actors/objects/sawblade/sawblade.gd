@@ -5,6 +5,7 @@ const SPEED_SCALE_MULTIPLIER = 30
 onready var path = $Path2D
 onready var pathfollow = $Path2D/PathFollow2D
 onready var sprite = $Path2D/PathFollow2D/Saw/AnimatedSprite
+onready var sound = $Path2D/PathFollow2D/Saw/sound
 onready var editor_sprite = $EditorSprite
 
 export var circle_texture : Texture
@@ -69,6 +70,7 @@ func _ready():
 	if mode == 0:
 		editor_sprite.visible = false
 		sprite.self_modulate = Color(1, 1, 1, 1)
+		sound.play(0)
 	else:
 		editor_sprite.visible = true
 		sprite.self_modulate = Color(1, 1, 1, 0.5)

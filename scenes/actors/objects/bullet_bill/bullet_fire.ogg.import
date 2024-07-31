@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bullet_fire.ogg-99a2457d7de80d4b79d685bff5239bc1.oggstr"
+
+[deps]
+
+source_file="res://scenes/actors/objects/bullet_bill/bullet_fire.ogg"
+dest_files=[ "res://.import/bullet_fire.ogg-99a2457d7de80d4b79d685bff5239bc1.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/actors/objects/bullet_bill/bullet_bill.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/bullet_bill/texture.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/objects/bullet_bill/colored.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/bullet_bill/bullet_fire.ogg" type="AudioStream" id=5]
+[ext_resource path="res://scenes/actors/objects/bullet_bill/bullet_seek.ogg" type="AudioStream" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -75,6 +77,16 @@ shape = SubResource( 8 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -10.0
+
+[node name="fire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = 1.748
+attenuation = 3.4822
+
+[node name="seek" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = 1.0
+attenuation = 3.4822
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -300, -300, 600, 600 )

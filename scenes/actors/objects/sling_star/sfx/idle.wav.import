@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/idle.wav-4778f26d2f7d24f416d42f53ce9a929f.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/sling_star/sfx/idle.wav"
+dest_files=[ "res://.import/idle.wav-4778f26d2f7d24f416d42f53ce9a929f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

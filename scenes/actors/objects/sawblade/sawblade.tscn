@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/actors/objects/sawblade/sawblade.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/rustsaw2.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/goldsaw1.png" type="Texture" id=12]
 [ext_resource path="res://scenes/actors/objects/sawblade/sawblade1.png" type="Texture" id=13]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/rustsaw1.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/sawblade/sawblade.ogg" type="AudioStream" id=15]
 
 [sub_resource type="Curve2D" id=4]
 _data = {
@@ -63,6 +64,11 @@ rotate = false
 
 [node name="Saw" type="Node2D" parent="Path2D/PathFollow2D"]
 script = ExtResource( 3 )
+
+[node name="sound" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D/Saw"]
+stream = ExtResource( 15 )
+max_distance = 1000.0
+attenuation = 1.62451
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Path2D/PathFollow2D/Saw"]
 frames = SubResource( 5 )

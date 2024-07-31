@@ -6,6 +6,7 @@ onready var player_detector = $PlayerDetector
 onready var animation_player = $AnimationPlayer
 onready var launch_noise : AudioStream = preload("res://scenes/actors/objects/sling_star/sfx/launch.wav")
 onready var windup_noise : AudioStream = preload("res://scenes/actors/objects/sling_star/sfx/windup.wav")
+onready var idle_noise_float : AudioStream = preload("res://scenes/actors/objects/sling_star/sfx/float_idle.wav")
 onready var star = $Star
 
 enum states {IDLE, HOLDING, WINDUP, LAUNCH}
@@ -38,6 +39,10 @@ func set_state(to:int):
 			star.global_position = position
 			mario.set_state_by_name("LaunchStarState", fps_util.PHYSICS_DELTA)
 			mario.anim_player.stop()
+			audio_player.volume_db = 15
+			audio_player.stop()
+			audio_player.stream = idle_noise_float
+			audio_player.play()
 			if(rotation_degrees < -180):
 				mario.facing_direction = 1
 			elif(rotation_degrees > -180 and rotation_degrees != 0):
@@ -47,6 +52,7 @@ func set_state(to:int):
 		states.WINDUP:
 			star.global_position = position
 			animation_player.play("windup")
+			audio_player.volume_db = 15
 			audio_player.stop()
 			audio_player.stream = windup_noise
 			audio_player.play()
@@ -59,6 +65,7 @@ func set_state(to:int):
 			return
 		states.LAUNCH:
 			animation_player.play("launch")
+			audio_player.volume_db = 15
 			audio_player.stop()
 			audio_player.stream = launch_noise
 			audio_player.play()

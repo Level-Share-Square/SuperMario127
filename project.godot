@@ -1268,6 +1268,10 @@ file_logging/max_log_files=1
 limits/multithreaded_server/rid_pool_prealloc=120
 limits/message_queue/max_size_kb=2048
 
+[mono]
+
+project/assembly_name="Super Mario 127"
+
 [network]
 
 ssl/certificates="res://ca-certificates.crt"
