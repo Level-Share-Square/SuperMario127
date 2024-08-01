@@ -81,10 +81,11 @@ func on_external_pressed():
 	OS.shell_open("https://levelsharesquare.com/levels/" + page_dictionary[level_list.get_selected_items()[0]][1])
 
 func _input(event):
-	if search.has_focus():
-		if event is InputEventKey and event.is_pressed():
-			if event.scancode == KEY_SPACE:
-				get_tree().set_input_as_handled()
+	pass
+#	if search.has_focus():
+#		if event is InputEventKey and event.is_pressed():
+#			if event.scancode == KEY_SPACE:
+#				get_tree().set_input_as_handled()
 
 func _process(delta):
 	if "ActiveScreens" in str(get_parent()) && load_page_1 == true:
@@ -100,7 +101,10 @@ func _process(delta):
 		searching = true
 		page = 0
 		http3.connect("request_completed", self, "_on_request3_completed")
-		var request = "https://levelsharesquare.com/api/levels/filter/get?page=1&game=2&name=" + search.get_text() + "&authors=true"
+		var text
+		if " " in search.text:
+			text = search.text.replace(" ", "%20")
+		var request = "https://levelsharesquare.com/api/levels/filter/get?page=1&game=2&name=" + text + "&authors=true"
 		http3.request(request)
 		
 func left_pressed():

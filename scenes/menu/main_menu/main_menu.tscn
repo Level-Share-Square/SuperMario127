@@ -2363,3 +2363,12 @@ margin_right = 222.0
 margin_bottom = 150.0
 custom_fonts/font = ExtResource( 17 )
 text = "No internet!"
+
+[node name="Internet2" type="Label" parent="."]
+margin_left = 49.0
+margin_top = 405.0
+margin_right = 183.0
+margin_bottom = 433.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_fonts/font = ExtResource( 17 )
+text = "No internet!"
