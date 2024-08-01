@@ -7,6 +7,8 @@ var token = ""
 
 var logged_out = true
 
+var internet = true
+
 var ping_timer = 0
 
 onready var httpreq = HTTPRequest.new()
@@ -33,15 +35,22 @@ func _ready():
 		
 
 func _physics_process(delta):
-	if token != "" && ping_timer <= 0:
+	if ping_timer <= 1:
 		var header = ["Authorization: Bearer " + token]
-		httpreq.request("https://levelsharesquare.com/api/app/intervals/SM127", header, true, 2, "")
+		var request = httpreq.request("https://levelsharesquare.com/api/app/intervals/SM127", header, true, 2, "")
+		if request != 0:
+			internet = false
+		else:
+			internet = true
 		ping_timer = 60
 	if ping_timer >= 0:
 		ping_timer -= delta
 		
 func ping_complete(result, response_code, headers, body):
-	print(response_code)
+	if result != 0:
+		internet = false
+	else:
+		internet = true
 	if response_code == 400:
 		logged_out = true
 		id = ""

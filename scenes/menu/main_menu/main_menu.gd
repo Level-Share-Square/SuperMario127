@@ -13,6 +13,7 @@ onready var credits = $Control/AnimationPlayer
 onready var credits2 = $Control/AnimationPlayer2
 onready var credits3 = $Control/AnimationPlayer3
 onready var error_window = $ErrorWindow
+onready var int_label = $Internet
 
 onready var timer = $CooldownTimer
 
@@ -83,7 +84,12 @@ func on_button_search_pressed() -> void:
 	emit_signal("screen_change", "main_menu_screen", "search_screen")
 	
 func _process(delta):
-	pass
+	if UserInfo.internet == true:
+		button_search.disabled = false
+		int_label.hide()
+	else:
+		button_search.disabled = true
+		int_label.show()
 	
 func on_button_levels_pressed() -> void:
 	if timer.time_left > 0:
