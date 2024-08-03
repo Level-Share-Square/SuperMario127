@@ -100,9 +100,14 @@ func _physics_process(delta):
 func _on_area_entered(stopper):
 	pass
 	return
-func set_zoom_tween(target : Vector2, time : float):
+func set_zoom_tween(target : Vector2, time : float, override = false):
+	zoom_tween.remove_all()
+	# overrides level boundary safety check
+	if override:
+		zoom_tween.interpolate_property(self, "zoom", zoom, target, time, 1, 0)
+		zoom_tween.start()
+		return
 	var level_size : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds.size * 16
-	
 	var intended_zoom = target * size
 	var max_size = level_size.y/size.y
 	if intended_zoom.x > level_size.x:
