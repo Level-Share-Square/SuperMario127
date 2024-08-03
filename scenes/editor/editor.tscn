@@ -2467,6 +2467,13 @@ is_object = true
 icon = ExtResource( 974 )
 preview = ExtResource( 836 )
 
+[node name="ZoomTrigger" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 126
+is_object = true
+icon = ExtResource( 974 )
+preview = ExtResource( 836 )
+
 [node name="TeleportGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
 color = Color( 0.117647, 0.686275, 0, 1 )
