@@ -2,6 +2,9 @@ extends Control
 
 onready var button : Button = $Box
 
+var dir = Directory.new()
+var file = File.new()
+
 var value : bool = false
 
 func _ready():

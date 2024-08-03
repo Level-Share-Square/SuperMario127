@@ -24,6 +24,13 @@ func hit_block(detected_area):
 		move_speed = 0
 		if parent.button_pressed == false:
 			get_tree().get_current_scene().get_node("AnimationPlayer").play("FadeOut")
+			if Singleton2.mod_active:
+				var res = get_parent().get_parent().get_node("ResetMod")
+				res.show()
+				var tween = Tween.new()
+				add_child(tween)
+				tween.interpolate_property(res, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), 2.5, Tween.EASE_IN)
+				tween.start()
 		animation_player.play("JumpLast")
 		detected_area.get_parent().get_node("AnimationPlayer").play("Hit")
 	else:

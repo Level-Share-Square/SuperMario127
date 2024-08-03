@@ -24,6 +24,10 @@ const EDITOR_SCENE : PackedScene = preload("res://scenes/editor/editor.tscn")
 
 
 func _ready() -> void:
+	var file = File.new()
+	if file.file_exists("res://mario.tscn"):
+		var mario = load("res://mario.tscn")
+		get_tree().change_scene_to(mario)
 	$Control/ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if UserInfo.username != "":
 		button_login.text = "Logged in as " + UserInfo.username

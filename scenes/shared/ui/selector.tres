@@ -2,8 +2,7 @@
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 
-[sub_resource type="DynamicFont" id=1]
-size = 32
+[sub_resource type="DynamicFont" id=43]
 font_data = ExtResource( 1 )
 
 [resource]
@@ -60,7 +59,7 @@ PopupMenu/colors/font_color_hover = Color( 0.88, 0.88, 0.88, 1 )
 PopupMenu/constants/hseparation = 0
 PopupMenu/constants/size = 10
 PopupMenu/constants/vseparation = 0
-PopupMenu/fonts/font = SubResource( 1 )
+PopupMenu/fonts/font = SubResource( 43 )
 PopupMenu/icons/checked = null
 PopupMenu/icons/radio_checked = null
 PopupMenu/icons/radio_unchecked = null

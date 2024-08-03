@@ -777,6 +777,7 @@ enabled=PoolStringArray( "res://addons/discord_game_sdk/plugin.cfg", "res://addo
 [global]
 
 physics=false
+change=false
 
 [importer_defaults]
 

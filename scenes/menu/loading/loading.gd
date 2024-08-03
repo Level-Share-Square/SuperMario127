@@ -18,6 +18,8 @@ onready var coin_scene = preload("res://scenes/menu/loading/coin.tscn")
 var resource_loader
 var button_pressed = false
 
+onready var reset_mod = $ResetMod
+
 onready var amount_of_scenes = Singleton.load_paths.size()
 onready var thread = Thread.new()
 onready var file = File.new()
@@ -59,6 +61,15 @@ static func get_data_or_null():
 		return null
 		
 func _ready():
+	if Singleton2.mod_active == true:
+		reset_mod.show()
+		var tween = Tween.new()
+		add_child(tween)
+		tween.interpolate_property(reset_mod, "modulate", Color(1, 1, 1, 0), Color(1, 1, 1, 1), 2.5, Tween.EASE_IN)
+		tween.start()
+	else:
+		reset_mod.hide()
+	reset_mod.connect("button_down", self, "reset_mod")
 	var data = get_data_or_null()
 	if data != null:
 		if data.has("richpresence"):
@@ -73,17 +84,15 @@ func _ready():
 		$Foreground/ColorRect.color = Color(0,0,0,1)
 	dir.make_dir("user://replays")
 	dir.make_dir("user://autosave")
-	if file.file_exists("user://072.json"):
+	dir.make_dir("user://mods")
+	if !file.file_exists("user://081.dmitri"):
 		dir.remove("user://tiles.res")
 		dir.remove("user://bg_music.ogg")
 		dir.remove("user://settings.json")
 		OS.move_to_trash(ProjectSettings.globalize_path("user://template_levels"))
-		file.open("user://080.darius", File.WRITE)
+		file.open("user://081.dmitri", File.WRITE)
 		file.close()
-		dir.remove("user://072.json")
-	else:
-		file.open("user://080.darius", File.WRITE)
-		file.close()
+		dir.remove("user://080.darius")
 	if Singleton2.rp == true:
 		update_activity()
 	elif Singleton2.rp == false:
@@ -110,6 +119,12 @@ func _ready():
 			dict[i] = InputMap.get_action_list(i)[0].get_scancode()
 		file.store_var(dict)
 		file.close()
+
+func reset_mod():
+	var dir = Directory.new()
+	dir.remove("user://mods/active.127mod")
+	OS.execute(OS.get_executable_path(), [], false)
+	get_tree().quit(0)
 
 func collect_coin(play_sound = true):
 	coins += 1

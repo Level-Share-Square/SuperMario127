@@ -387,7 +387,6 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Sprites/Player"]
 frames = ExtResource( 2 )
 animation = "movingRight"
-frame = 5
 speed_scale = 1.25
 playing = true
 centered = false
@@ -398,7 +397,6 @@ position = Vector2( 0, 80 )
 scale = Vector2( 1, -0.75 )
 frames = ExtResource( 2 )
 animation = "movingRight"
-frame = 5
 speed_scale = 1.25
 playing = true
 centered = false
@@ -502,7 +500,6 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Foreground"]
-self_modulate = Color( 1, 1, 1, 0.4 )
 margin_right = 768.0
 margin_bottom = 432.0
 
@@ -519,13 +516,26 @@ custom_styles/normal = ExtResource( 12 )
 text = "Skip"
 script = ExtResource( 8 )
 
+[node name="ResetMod" type="Button" parent="."]
+margin_left = 319.0
+margin_top = 20.0
+margin_right = 458.0
+margin_bottom = 60.0
+custom_fonts/font = ExtResource( 10 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/normal = ExtResource( 12 )
+text = "Reset Mod"
+script = ExtResource( 8 )
+
 [node name="CoinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = -9.0
 
 [node name="CoinSound2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
-volume_db = -13.2308
+volume_db = -19.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FadeIn = SubResource( 5 )

@@ -15,6 +15,8 @@ var autosave_timer : int = 108000
 var time : int
 var new_box
 
+var mod_active = false
+
 var editor_hotkeys = [
 	"toggle_grid",
 	"zoom_in",
@@ -52,6 +54,14 @@ signal dark_mode_toggled
 
 func toggle_dark_mode():
 	emit_signal("dark_mode_toggled")
+
+func _init():
+	var file = File.new()
+	file.open("user://mods/active.127mod", file.READ)
+	var mod = file.get_line()
+	var success = ProjectSettings.load_resource_pack(mod)
+	print(success)
+	mod_active = success
 
 func _ready():
 	yield(get_tree().create_timer(3),"timeout")
