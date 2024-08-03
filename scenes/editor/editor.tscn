@@ -1,4 +1,4 @@
-[gd_scene load_steps=1463 format=2]
+[gd_scene load_steps=1464 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1429,6 +1429,7 @@
 [ext_resource path="res://assets/tiles/castle_wood/icon_slopeL.png" type="Texture" id=1427]
 [ext_resource path="res://assets/tiles/castle_wood/palette_icons/6_slopeL.png" type="Texture" id=1428]
 [ext_resource path="res://assets/tiles/castle_wood/palette_icons/2_slopeL.png" type="Texture" id=1429]
+[ext_resource path="res://scenes/actors/objects/bullet_bill/texture.png" type="Texture" id=1430]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3060,6 +3061,15 @@ tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
 icon = ExtResource( 231 )
 preview = ExtResource( 232 )
+
+[node name="BulletBill" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 24 )
+object_id = 25
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+icon = ExtResource( 127 )
+preview = ExtResource( 1430 )
 
 [node name="BillBlaster" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 24 )

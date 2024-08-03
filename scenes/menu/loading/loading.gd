@@ -71,8 +71,10 @@ func _ready():
 		$Text/Loading.modulate = Color(1,1,1)
 		$Text/Coins.modulate = Color(1,1,1)
 		$Foreground/ColorRect.color = Color(0,0,0,1)
-	dir.make_dir("user://replays")
-	dir.make_dir("user://autosave")
+	if !dir.dir_exists("user://replays"):
+		dir.make_dir("user://replays")
+	if !dir.dir_exists("user://autosave"):
+		dir.make_dir("user://autosave")
 	if file.file_exists("user://072.json"):
 		dir.remove("user://tiles.res")
 		dir.remove("user://bg_music.ogg")

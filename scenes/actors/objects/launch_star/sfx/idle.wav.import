@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/idle.wav-e45471e0f904b0869c4c5079b3314da5.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/launch_star/sfx/idle.wav"
+dest_files=[ "res://.import/idle.wav-e45471e0f904b0869c4c5079b3314da5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=14554
+edit/loop_end=441467
+compress/mode=0

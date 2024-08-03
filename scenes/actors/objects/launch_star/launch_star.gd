@@ -9,7 +9,7 @@ onready var innerstar = $StarContainer/InnerStar
 onready var speed_tween = $SpeedTween
 onready var animation_player = $AnimationPlayer
 onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
-onready var fly_noise_player : AudioStreamPlayer2D = $AudioStreamPlayer2D2
+onready var fly_noise_player : AudioStreamPlayer = $AudioStreamPlayer
 onready var player_detector = $PlayerDetector
 onready var launch_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/launch.wav")
 onready var flying_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/flying.wav")
@@ -199,4 +199,3 @@ func physics_process_launch(delta:float):
 	mario.last_position = mario.position
 func cancel_launch(new, old):
 	set_state(0)
-

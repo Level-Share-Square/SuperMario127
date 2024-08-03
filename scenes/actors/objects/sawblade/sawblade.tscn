@@ -67,8 +67,9 @@ script = ExtResource( 3 )
 
 [node name="sound" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D/Saw"]
 stream = ExtResource( 15 )
-max_distance = 1000.0
-attenuation = 1.62451
+volume_db = 3.5
+max_distance = 800.0
+attenuation = 1.6818
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Path2D/PathFollow2D/Saw"]
 frames = SubResource( 5 )
