@@ -30,6 +30,7 @@ onready var http = $HTTPRequest
 onready var http2 = $HTTPRequest2
 onready var http3 = $HTTPRequest3
 onready var http4 = $HTTPRequest4
+onready var http5 = $HTTPRequest5
 onready var comments = $Control2/Comments
 onready var page_amt = 10
 onready var comment_button = $Control2/ButtonComm
@@ -81,10 +82,11 @@ func on_external_pressed():
 	OS.shell_open("https://levelsharesquare.com/levels/" + page_dictionary[level_list.get_selected_items()[0]][1])
 
 func _input(event):
-	if search.has_focus():
-		if event is InputEventKey and event.is_pressed():
-			if event.scancode == KEY_SPACE:
-				get_tree().set_input_as_handled()
+	pass
+#	if search.has_focus():
+#		if event is InputEventKey and event.is_pressed():
+#			if event.scancode == KEY_SPACE:
+#				get_tree().set_input_as_handled()
 
 func _process(delta):
 	if "ActiveScreens" in str(get_parent()) && load_page_1 == true:
@@ -100,7 +102,10 @@ func _process(delta):
 		searching = true
 		page = 0
 		http3.connect("request_completed", self, "_on_request3_completed")
-		var request = "https://levelsharesquare.com/api/levels/filter/get?page=1&game=2&name=" + search.get_text() + "&authors=true"
+		var text
+		if " " in search.text:
+			text = search.text.replace(" ", "%20")
+		var request = "https://levelsharesquare.com/api/levels/filter/get?page=1&game=2&name=" + text + "&authors=true"
 		http3.request(request)
 		
 func left_pressed():
@@ -173,11 +178,19 @@ func on_add():
 			
 		Singleton.SavedLevels.levels_disk_paths.append(level_disk_path)
 		Singleton.SavedLevels.save_level_paths_to_disk()
+		if UserInfo.token != "":
+			http5.connect("request_completed", self, "on_req5_completed")
+			var header = ["Authorization: Bearer " + UserInfo.token]
+			var dic = {"levelID" : page_dictionary[level_list.get_selected_items()[0]][1]}
+			var body = JSON.print(dic)
+			var request = http5.request("https://levelsharesquare.com/api/levels/" + page_dictionary[level_list.get_selected_items()[0]][1] + "/play", header, true, 8, "")
 func on_copy():
 	if level_list.is_anything_selected():
 		var level_code = page_dictionary[level_list.get_selected_items()[0]][2]
 		OS.clipboard = str(level_code)
 
+func on_req5_completed(result, response_code, headers, body):
+	print(response_code)
 
 func _on_request3_completed(result, response_code, headers, body):
 	level_list.set_item_disabled(0, false)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://scenes/menu/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=14]
 [ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=15]
 [ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=16]
+[ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=17]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
@@ -2354,3 +2355,20 @@ margin_top = 507.0
 margin_right = 927.404
 margin_bottom = 597.0
 text = "Tiles"
+
+[node name="Internet" type="Label" parent="."]
+margin_left = 88.0
+margin_top = 122.0
+margin_right = 222.0
+margin_bottom = 150.0
+custom_fonts/font = ExtResource( 17 )
+text = "No internet!"
+
+[node name="Internet2" type="Label" parent="."]
+margin_left = 49.0
+margin_top = 405.0
+margin_right = 183.0
+margin_bottom = 433.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_fonts/font = ExtResource( 17 )
+text = "No internet!"

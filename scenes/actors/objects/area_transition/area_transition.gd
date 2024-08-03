@@ -49,6 +49,8 @@ func _ready():
 		sprite.visible = true
 	else:
 		sprite.visible = false
+	if parts < 1:
+		parts = 1
 	update_property("vertical", vertical)
 	camera_stopper.set_size(camera_stop_shape.shape.extents)
 	camera_stopper.monitorable = stops_camera
@@ -68,6 +70,9 @@ func _input(event):
 func update_property(key, value):
 	match(key):
 		"parts":
+			if value < 1:
+				parts = 1
+				return
 			update_parts()
 		"vertical":
 			if vertical:
