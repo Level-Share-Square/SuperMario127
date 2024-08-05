@@ -34,6 +34,10 @@ var on_wall := false
 export(Array, Texture) var palette_textures
 export(Array, Texture) var palette_textures_2
 
+# these are for toads
+signal message_appear
+signal message_disappear
+
 func _set_properties():
 	savable_properties = ["text", "open_menu", "on_wall"]
 	editable_properties = ["text", "open_menu", "on_wall"]
@@ -83,11 +87,19 @@ func enter_area(body):
 		label.bbcode_text = "[center]" + text_replace_util.parse_text(text, character) + "[/center]"
 		message_appear.play()
 		
+		# related to toads
+		if not sprite.visible and not open_menu:
+			emit_signal("message_appear")
+		
 func exit_area(body):
 	if body == character and character.get_collision_layer_bit(1) and enabled:
 		character = null
 		if reset_read_timer == 0:
 			message_disappear.play()
+		
+		# related to toads
+		if not sprite.visible and not open_menu:
+			emit_signal("message_disappear")
 		
 func setup_char():
 	character.set_dive_collision(false)
@@ -148,6 +160,9 @@ func _physics_process(delta):
 		if reset_read_timer <= 0:
 			reset_read_timer = 0
 			being_read = false
+
+			# related to toads
+			if not sprite.visible: emit_signal("message_disappear")
 	
 	if character == null or being_read: 
 		pop_up.position = lerp(pop_up.position, Vector2(normal_pos.x * 0.8, normal_pos.y * 0.9), delta * transition_speed)
@@ -164,6 +179,9 @@ func _physics_process(delta):
 		and character.is_grounded() and !being_read):
 			being_read = true
 			setup_char()
+			
+			# related to toads
+			if not sprite.visible: emit_signal("message_appear")
 	
 	check_timer -= delta
 	if check_timer <= 0:

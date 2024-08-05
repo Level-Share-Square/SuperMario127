@@ -93,7 +93,7 @@ position = Vector2( 0, -35 )
 shape = SubResource( 1 )
 
 [node name="InteractArea" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 4096
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
@@ -117,9 +117,6 @@ margin_right = 178.125
 margin_bottom = 46.25
 mouse_filter = 2
 custom_styles/panel = SubResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="RichTextLabel" parent="Message"]
 margin_left = -42.5
