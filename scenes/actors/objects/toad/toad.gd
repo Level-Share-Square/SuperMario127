@@ -51,14 +51,20 @@ func _ready():
 		# warning-ignore: unused_variable
 		connect("property_changed", self, "property_changed")
 	
+	# if the shape isn't cloned, each toad's detector will share the same shape
+	# and thus changing one toad's radius will change every toad's radius (bad)
+	detector_collision.shape = detector_collision.shape.duplicate(true)
 	detector_collision.shape.radius = speaking_radius
-	yield(get_tree(), "idle_frame")
 	
+	yield(get_tree(), "idle_frame")
 	for body in dialogue_detector.get_overlapping_areas():
 		var object = body.get_parent()
 		if object.has_signal("message_appear"):
 			object.connect("message_appear", self, "start_talking")
 			object.connect("message_disappear", self, "stop_talking")
+		
+		if object.has_signal("message_changed"):
+			object.connect("message_changed", self, "message_changed")
 
 func property_changed(key: String, value):
 	match(key):
@@ -77,17 +83,15 @@ func property_changed(key: String, value):
 
 func start_talking():
 	head.play(expression_map[speaking_expression])
-	spots.play(expression_map[speaking_expression])
-
 	body.play(action_map[speaking_action])
-	coat.play(action_map[speaking_action])
 
 func stop_talking():
 	head.play(expression_map[idle_expression])
-	spots.play(expression_map[idle_expression])
-	
 	body.play(action_map[idle_action])
-	coat.play(action_map[idle_action])
+
+func message_changed(expression, action):
+	head.play(expression_map[expression])
+	body.play(action_map[action])
 
 
 func _process(delta):

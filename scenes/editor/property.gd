@@ -33,6 +33,8 @@ func _ready():
 		type_scene_name = "Color"
 	elif value is Curve2D:
 		type_scene_name = "Path"
+	elif type == TYPE_STRING_ARRAY:
+		type_scene_name = "PoolStringArray"
 	
 	
 	if type_scene_name != "None":

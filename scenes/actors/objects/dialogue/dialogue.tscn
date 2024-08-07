@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/actors/objects/sign/exclamation_mark.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/sign/message_appear.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/actors/objects/sign/message_disappear.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/actors/objects/dialogue/dialogue.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 70, 25 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "bobbin"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Indicator/ExclamationMark:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 53, 23 ), Vector2( 53, 30 ), Vector2( 53, 23 ) ]
+}
+
+[node name="Dialogue" type="Node2D"]
+z_index = -1
+script = ExtResource( 7 )
+
+[node name="CameraFocus" type="Node2D" parent="."]
+position = Vector2( 0, -16 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0, 0.273438, 1, 0.501961 )
+z_index = -9
+texture = ExtResource( 3 )
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 4096
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+position = Vector2( 0, 10 )
+shape = SubResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/bobbin = SubResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Indicator" type="Node2D" parent="."]
+position = Vector2( -65.625, -90 )
+z_index = 99
+z_as_relative = false
+
+[node name="ExclamationMark" type="TextureRect" parent="Indicator"]
+margin_left = 53.0
+margin_top = 23.5736
+margin_right = 203.0
+margin_bottom = 173.574
+rect_scale = Vector2( 0.2, 0.2 )
+mouse_filter = 2
+texture = ExtResource( 2 )
+
+[node name="MessageAppear" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.0
+
+[node name="MessageDisappear" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -10.0
