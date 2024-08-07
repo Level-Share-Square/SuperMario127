@@ -21,6 +21,9 @@ func _ready():
 func pressed():
 	click_sound.play()
 	color_picker_window.open()
+	
+	var color_wheel = color_picker_window.get_node(\"Contents/Wheel\")
+	color_wheel.property_node = get_parent()
 
 func _process(_delta):
 	if button_node.is_hovered() and !last_hovered:
@@ -31,8 +34,8 @@ func set_value(value: Color):
 	button_node.modulate = value
 	
 	var color_wheel = color_picker_window.get_node(\"Contents/Wheel\")
-
 	color_wheel.property_node = get_parent()
+	
 	color_wheel.get_node(\"Color\").set_value(value)
 	color_wheel.update_value(value)
 	
@@ -62,9 +65,6 @@ rect_scale = Vector2( 0.997844, 1 )
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/normal = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HoverSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )

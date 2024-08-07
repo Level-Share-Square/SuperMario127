@@ -52,6 +52,14 @@ static func encode_value(value):
 		curve_string = curve_string.trim_suffix(":")
 			
 		return curve_string
+	elif type == TYPE_STRING_ARRAY:
+		var final_string := "SA"
+		for text in value:
+			final_string += str(text).percent_encode()
+			final_string += ":"
+		
+		final_string = final_string.trim_suffix(":")
+		return final_string
 	else:
 		return str(value)
 
@@ -89,6 +97,15 @@ static func decode_value(value: String):
 			curve.add_point(decode_vector(point_array[0]), decode_vector(point_array[1]), decode_vector(point_array[2]))
 		
 		return curve
+	elif value.begins_with("SA"):
+		value = value.trim_prefix("SA")
+		
+		var string_array := PoolStringArray()
+		var texts = value.split(":")
+		for text in texts:
+			string_array.append(str(text).percent_decode())
+		
+		return string_array
 	else:
 		return value
 		

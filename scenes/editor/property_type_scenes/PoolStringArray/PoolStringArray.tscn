@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/editor/property_type_scenes/PoolStringArray/PoolStringArray.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=4]
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.760784, 0.760784, 0.760784, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[node name="PoolStringArray" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+
+[node name="LineEdit" type="Button" parent="."]
+margin_left = 7.0
+margin_top = 54.0
+margin_right = 314.0
+margin_bottom = 112.0
+focus_mode = 0
+custom_colors/font_color_disabled = Color( 0, 0.0470588, 0.317647, 1 )
+custom_colors/font_color = Color( 0, 0.0470588, 0.317647, 1 )
+custom_colors/font_color_hover = Color( 0, 0.0470588, 0.317647, 1 )
+custom_colors/font_color_pressed = Color( 0, 0.0470588, 0.317647, 1 )
+custom_fonts/font = SubResource( 3 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+text = "Edit"
+clip_text = true
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 8
+
+[node name="Node2D" type="Node2D" parent="CanvasLayer"]
+z_index = 27

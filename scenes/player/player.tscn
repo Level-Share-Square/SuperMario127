@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://scenes/player/sccounter.gd" type="Script" id=26]
 [ext_resource path="res://scenes/editor/assets/clickable_arrow_hover.png" type="Texture" id=27]
 [ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=28]
+[ext_resource path="res://scenes/player/dialogue_text.gd" type="Script" id=29]
 [ext_resource path="res://scenes/actors/fludd_display/fludd_display.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/menu/levels_screen/ui/coin_icon.png" type="Texture" id=31]
 [ext_resource path="res://scenes/player/coin_counter.gd" type="Script" id=32]
@@ -146,6 +147,12 @@ font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=13]
 size = 32
+outline_color = Color( 0.054902, 0, 0.25098, 1 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=25]
+size = 32
+outline_size = 4
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 7 )
 
@@ -1101,6 +1108,88 @@ volume_db = -2.0
 stream = ExtResource( 57 )
 volume_db = -2.0
 
+[node name="DialogueText" type="Control" parent="UI"]
+pause_mode = 2
+margin_left = 161.0
+margin_top = 316.0
+margin_right = 611.0
+margin_bottom = 416.0
+mouse_filter = 2
+script = ExtResource( 29 )
+
+[node name="Panel" type="Panel" parent="UI/DialogueText"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 11 )
+
+[node name="Name" type="RichTextLabel" parent="UI/DialogueText/Panel"]
+margin_left = 6.0
+margin_top = -20.0
+margin_right = 870.0
+margin_bottom = 22.0
+rect_scale = Vector2( 0.5, 0.5 )
+rect_clip_content = false
+custom_fonts/normal_font = SubResource( 25 )
+bbcode_enabled = true
+bbcode_text = "Toad"
+text = "Toad"
+scroll_active = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/DialogueText"]
+anchor_right = 2.0
+anchor_bottom = 2.0
+rect_scale = Vector2( 0.5, 0.5 )
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueText/VBoxContainer"]
+margin_right = 900.0
+margin_bottom = 156.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 16
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 16
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialogueText/VBoxContainer/MarginContainer"]
+margin_left = 20.0
+margin_top = 16.0
+margin_right = 880.0
+margin_bottom = 140.0
+rect_clip_content = false
+mouse_filter = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+custom_fonts/normal_font = SubResource( 12 )
+bbcode_enabled = true
+bbcode_text = "L is real 2401, Mario Peach and Bowser, (not) By Runouw"
+visible_characters = 0
+percent_visible = 0.0
+text = "L is real 2401, Mario Peach and Bowser, (not) By Runouw"
+scroll_active = false
+
+[node name="CloseLabel" type="RichTextLabel" parent="UI/DialogueText/VBoxContainer"]
+margin_top = 160.0
+margin_right = 900.0
+margin_bottom = 200.0
+rect_clip_content = false
+mouse_filter = 2
+size_flags_vertical = 3
+custom_fonts/normal_font = SubResource( 13 )
+bbcode_enabled = true
+bbcode_text = "[center]Press :interactinput: to continue[/center]"
+text = "Press :interactinput: to continue"
+
+[node name="MenuOpen" type="AudioStreamPlayer" parent="UI/DialogueText"]
+stream = ExtResource( 56 )
+volume_db = -2.0
+
+[node name="MenuClose" type="AudioStreamPlayer" parent="UI/DialogueText"]
+stream = ExtResource( 57 )
+volume_db = -2.0
+
+[node name="Tween" type="Tween" parent="UI/DialogueText"]
+
 [node name="Viewports" type="HBoxContainer" parent="."]
 margin_right = 772.0
 margin_bottom = 432.0
@@ -1182,7 +1271,7 @@ collision_mask = 2048
 shape = SubResource( 24 )
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 6
+frame = 3
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
