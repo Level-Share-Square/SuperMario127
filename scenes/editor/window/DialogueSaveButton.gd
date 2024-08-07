@@ -11,6 +11,8 @@ var action: int = 0
 
 export var back_button_path: NodePath
 export var next_button_path: NodePath
+export var index_display_path: NodePath
+onready var index_display = get_node(index_display_path)
 onready var back_button = get_node(back_button_path)
 onready var next_button = get_node(next_button_path)
 
@@ -45,6 +47,8 @@ func _pressed():
 func save_page():
 	dialogue[dialogue_page] = str(expression).pad_zeros(2) + str(action).pad_zeros(2) + text_edit.text
 
+func _process(delta):
+	index_display.text = "%s/%s" % [dialogue_page + 1, dialogue.size()]
 
 func update(): change_page(0)
 func change_page(direction: int):
