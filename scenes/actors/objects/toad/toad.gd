@@ -25,11 +25,11 @@ var idle_action: int = 0
 var speaking_expression: int = 1
 var speaking_action: int = 0
 
-var speaking_radius: float = 50
+var sign_detect_radius: float = 50
 
 func _set_properties():
-	savable_properties = ["spots_color", "coat_color", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "speaking_radius", "rainbow"]
-	editable_properties = ["spots_color", "coat_color", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "speaking_radius", "rainbow"]
+	savable_properties = ["spots_color", "coat_color", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "sign_detect_radius", "rainbow"]
+	editable_properties = ["spots_color", "coat_color", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "sign_detect_radius", "rainbow"]
 
 func _set_property_values():
 	set_property("spots_color", spots_color, true)
@@ -41,7 +41,7 @@ func _set_property_values():
 	set_property("speaking_expression", speaking_expression, true)
 	set_property("speaking_action", speaking_action, true)
 	
-	set_property("speaking_radius", speaking_radius, true)
+	set_property("sign_detect_radius", sign_detect_radius, true)
 	set_property("rainbow", rainbow, true)
 
 func _ready():
@@ -54,7 +54,7 @@ func _ready():
 	# if the shape isn't cloned, each toad's detector will share the same shape
 	# and thus changing one toad's radius will change every toad's radius (bad)
 	detector_collision.shape = detector_collision.shape.duplicate(true)
-	detector_collision.shape.radius = speaking_radius
+	detector_collision.shape.radius = sign_detect_radius
 	
 	yield(get_tree(), "idle_frame")
 	for body in dialogue_detector.get_overlapping_areas():
