@@ -4,8 +4,8 @@ onready var area = $Area2D
 onready var area_shape = $Area2D/CollisionShape2D
 onready var sprite = $Sprite
 
-var target_zoom = 1.5
-var zoom_time = 1
+var target_zoom : float = 1.5
+var zoom_time : float = 1.0
 var parts := 1
 
 func _set_properties():
