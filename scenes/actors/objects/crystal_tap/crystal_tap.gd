@@ -32,10 +32,7 @@ func _ready():
 			set_liquid_level(null)
 	else:
 		offset_line.visible = true
-func _process(delta):
-	if "\n" in tag:
-		tag = tag.replace("\n", "")
-			
+
 func _on_property_changed(key, value):
 	
 	offset_line.global_scale = Vector2(1, 1)
@@ -44,6 +41,9 @@ func _on_property_changed(key, value):
 		offset_line.set_point_position(1, Vector2(offset, 0))
 	else:
 		offset_line.set_point_position(1, Vector2(0, offset))
+		
+	if "\n" in tag:
+		tag = tag.replace("\n", "")
 	
 func set_liquid_level(body):
 	if body != null and visible:

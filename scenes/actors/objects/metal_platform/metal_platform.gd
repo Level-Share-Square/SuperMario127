@@ -32,21 +32,22 @@ func _input(event):
 			set_property("parts", parts, true)
 
 func _process(_delta):
-	if parts != last_parts:
-		update_parts()
-	last_parts = parts
-	if color == Color(1, 1, 1):
-		sprite.texture = normal_texture
-		sprite2.visible = false
-		sprite.self_modulate = Color(1, 1, 1)
-	else:
-		sprite.texture = recolorable_texture
-		sprite2.visible = true
-		sprite.self_modulate = color
-		var bright_color = color
-		bright_color.s /= 1.5
-		bright_color.v *= 1.15
-		sprite2.self_modulate = bright_color
+	if mode == 1:
+		if parts != last_parts:
+			update_parts()
+		last_parts = parts
+		if color == Color(1, 1, 1):
+			sprite.texture = normal_texture
+			sprite2.visible = false
+			sprite.self_modulate = Color(1, 1, 1)
+		else:
+			sprite.texture = recolorable_texture
+			sprite2.visible = true
+			sprite.self_modulate = color
+			var bright_color = color
+			bright_color.s /= 1.5
+			bright_color.v *= 1.15
+			sprite2.self_modulate = bright_color
 
 
 #-------------------------------- platform logic -----------------------
@@ -75,6 +76,19 @@ func _ready():
 		platform_area_collision_shape.disabled = true
 		
 	update_parts()
+	
+	if color == Color(1, 1, 1):
+		sprite.texture = normal_texture
+		sprite2.visible = false
+		sprite.self_modulate = Color(1, 1, 1)
+	else:
+		sprite.texture = recolorable_texture
+		sprite2.visible = true
+		sprite.self_modulate = color
+		var bright_color = color
+		bright_color.s /= 1.5
+		bright_color.v *= 1.15
+		sprite2.self_modulate = bright_color
 
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
