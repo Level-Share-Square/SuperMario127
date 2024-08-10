@@ -1431,7 +1431,7 @@
 [ext_resource path="res://assets/tiles/castle_wood/palette_icons/2_slopeL.png" type="Texture" id=1429]
 [ext_resource path="res://scenes/actors/objects/toad/preview.png" type="Texture" id=1430]
 [ext_resource path="res://scenes/actors/objects/toad/icon.png" type="Texture" id=1431]
-[ext_resource path="res://scenes/actors/objects/dialogue/icon.png" type="Texture" id=1432]
+[ext_resource path="res://scenes/actors/objects/dialogue_trigger/icon.png" type="Texture" id=1432]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2491,7 +2491,7 @@ object_id = 128
 is_object = true
 object_center = Vector2( 16, 12 )
 tile_mode_offset = Vector2( 0, -4 )
-item_name = "Dialogue"
+item_name = "DialogueTrigger"
 icon = ExtResource( 1432 )
 preview = ExtResource( 1432 )
 

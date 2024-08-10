@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/menu_close.wav-17d55cdff5ddf440e07df0b8c261031b.sample"
+path="res://.import/message_appear.wav-d0c604751462356c573210b82f232e06.sample"
 
 [deps]
 
-source_file="res://scenes/actors/objects/dialogue/menu_close.wav"
-dest_files=[ "res://.import/menu_close.wav-17d55cdff5ddf440e07df0b8c261031b.sample" ]
+source_file="res://classes/message_appear.wav"
+dest_files=[ "res://.import/message_appear.wav-d0c604751462356c573210b82f232e06.sample" ]
 
 [params]
 

@@ -1,13 +1,13 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scenes/actors/objects/sign/exclamation_mark.png" type="Texture" id=2]
+[ext_resource path="res://classes/message_appear.wav" type="AudioStream" id=1]
+[ext_resource path="res://classes/message_disappear.wav" type="AudioStream" id=2]
 [ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=3]
-[ext_resource path="res://scenes/actors/objects/sign/message_appear.wav" type="AudioStream" id=4]
-[ext_resource path="res://scenes/actors/objects/sign/message_disappear.wav" type="AudioStream" id=6]
-[ext_resource path="res://scenes/actors/objects/dialogue/dialogue.gd" type="Script" id=7]
+[ext_resource path="res://scenes/actors/objects/sign/exclamation_mark.png" type="Texture" id=4]
+[ext_resource path="res://classes/dialogue.gd" type="Script" id=5]
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 70, 25 )
+[sub_resource type="CircleShape2D" id=4]
+radius = 90.0
 
 [sub_resource type="Animation" id=3]
 resource_name = "bobbin"
@@ -27,7 +27,7 @@ tracks/0/keys = {
 
 [node name="Dialogue" type="Node2D"]
 z_index = -1
-script = ExtResource( 7 )
+script = ExtResource( 5 )
 
 [node name="CameraFocus" type="Node2D" parent="."]
 position = Vector2( 0, -16 )
@@ -43,7 +43,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
 position = Vector2( 0, 10 )
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/bobbin = SubResource( 3 )
@@ -62,12 +62,12 @@ margin_right = 203.0
 margin_bottom = 173.574
 rect_scale = Vector2( 0.2, 0.2 )
 mouse_filter = 2
-texture = ExtResource( 2 )
+texture = ExtResource( 4 )
 
 [node name="MessageAppear" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
+stream = ExtResource( 1 )
 volume_db = -10.0
 
 [node name="MessageDisappear" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
+stream = ExtResource( 2 )
 volume_db = -10.0

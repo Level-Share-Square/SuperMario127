@@ -1,4 +1,6 @@
-extends GameObject
+class_name Dialog
+
+extends Node2D
 
 onready var area = $InteractArea
 onready var animation_player = $AnimationPlayer
@@ -12,11 +14,14 @@ onready var camera_focus = $CameraFocus
 onready var pop_up = $Indicator
 onready var exclamation_mark = $Indicator/ExclamationMark
 
-var dialogue := PoolStringArray(["0100This is a dialogue object.", "0100Try putting this on top of a Toad and see what happens!"])
-var character_name: String = "Toad"
+onready var interact_shape = $InteractArea/CollisionShape2D
+
+var dialogue
+var character_name
 
 var being_read := false
 var character : Character
+var parent
 
 var normal_pos : Vector2
 var transition_speed := 10.0
@@ -29,23 +34,16 @@ signal message_appear
 signal message_disappear
 signal message_changed
 
-func _set_properties():
-	savable_properties = ["dialogue", "character_name"]
-	editable_properties = ["dialogue", "character_name"]
-	
-func _set_property_values():
-	set_property("dialogue", dialogue, true)
-	set_property("character_name", character_name, true)
 
 func _ready():
-	if is_preview:
-		z_index = 0
-		sprite.z_index = 0
+	parent = get_parent()
+	dialogue = parent.dialogue
+	character_name = parent.character_name
 	
-	if !enabled:
+	if !parent.enabled:
 		pop_up.visible = false
 	
-	if !visible and mode != 1:
+	if !visible and parent.mode != 1:
 		visible = true
 		sprite.visible = false
 	
@@ -55,26 +53,32 @@ func _ready():
 	pop_up.position = Vector2(normal_pos.x * 0.8, normal_pos.y * 0.7)
 	pop_up.scale = Vector2(0.8, 0.8)
 	pop_up.modulate = Color(1, 1, 1, 0)
-	if mode != 1:
+	if parent.mode != 1:
 		var _connect = area.connect("body_entered", self, "enter_area")
 		var _connect2 = area.connect("body_exited", self, "exit_area")
 		
+		connect("message_changed", parent, "message_changed")
+		connect("message_appear", parent, "start_talking")
+		connect("message_disappear", parent, "stop_talking")
+		
 		sprite.visible = false
+		if "speaking_radius" in parent:
+			interact_shape.shape.radius = parent.speaking_radius
 
 func enter_area(body):
-	if body.name.begins_with("Character") and character == null and enabled:
+	if body.name.begins_with("Character") and character == null and parent.enabled:
 		character = body
 		message_appear.play()
 		
 func exit_area(body):
-	if body == character and character.get_collision_layer_bit(1) and enabled:
+	if body == character and character.get_collision_layer_bit(1) and parent.enabled:
 		character = null
 		if reset_read_timer == 0:
 			message_disappear.play()
 		
 func setup_char():
 	# flip mario to face this object
-	character.facing_direction = sign(position.x - character.position.x)
+	character.facing_direction = sign(parent.global_position.x - character.global_position.x)
 	
 	character.set_dive_collision(false)
 	character.invulnerable = true 
