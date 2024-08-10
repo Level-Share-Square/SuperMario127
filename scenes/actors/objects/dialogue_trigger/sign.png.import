@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/exclamation_mark.png-6aa3e8ee12a997f2e5bccfc0d2770909.stex"
+path="res://.import/sign.png-857f520c4ee1942d3f5d02d4a7ff81dc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/dialogue/exclamation_mark.png"
-dest_files=[ "res://.import/exclamation_mark.png-6aa3e8ee12a997f2e5bccfc0d2770909.stex" ]
+source_file="res://scenes/actors/objects/dialogue_trigger/sign.png"
+dest_files=[ "res://.import/sign.png-857f520c4ee1942d3f5d02d4a7ff81dc.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
