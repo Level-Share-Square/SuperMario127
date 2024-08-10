@@ -21,6 +21,7 @@ var character_name: String = "Toad"
 
 var curve = Curve2D.new()
 var custom_path = Curve2D.new()
+var loops = false
 var walk_speed : float = 2
 var physics_enabled = true
 
@@ -37,8 +38,8 @@ var speaking_action: int = 0
 var speaking_radius: float = 90
 
 func _set_properties():
-	savable_properties = ["dialogue", "character_name", "curve", "custom_path", "walk_speed", "physics_enabled", "spots_color", "coat_color", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "speaking_radius", "rainbow"]
-	editable_properties = ["dialogue", "character_name", "custom_path", "walk_speed", "physics_enabled", "spots_color", "coat_color", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "speaking_radius", "rainbow"]
+	savable_properties = ["dialogue", "character_name", "curve", "custom_path", "loops", "walk_speed", "physics_enabled", "spots_color", "coat_color", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "speaking_radius", "rainbow"]
+	editable_properties = ["dialogue", "character_name", "custom_path", "walk_speed", "loops", "physics_enabled", "spots_color", "coat_color", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "speaking_radius", "rainbow"]
 
 func _set_property_values():		
 	set_property("dialogue", dialogue, true)
@@ -46,6 +47,7 @@ func _set_property_values():
 	
 	set_property("curve", curve, true)
 	set_property("custom_path", curve, true)
+	set_property("loops", loops, true)
 	set_property("walk_speed", walk_speed, true)
 	set_property("physics_enabled", physics_enabled, true)
 	
