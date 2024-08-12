@@ -1,0 +1,1012 @@
+[gd_scene load_steps=40 format=2]
+
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/menu/options/background.tres" type="Texture" id=2]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-extend.gd" type="Script" id=3]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://scenes/menu/levels_list/level_panel.gd" type="Script" id=7]
+[ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=8]
+[ext_resource path="res://scenes/menu/screen.gd" type="Script" id=9]
+[ext_resource path="res://scenes/menu/levels_list/test.png" type="Texture" id=10]
+[ext_resource path="res://assets/fonts/sm256.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://scenes/menu/levels_list/icons/shine_icon.png" type="Texture" id=12]
+[ext_resource path="res://scenes/menu/levels_list/icons/star_coin_icon.png" type="Texture" id=13]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-sink.gd" type="Script" id=14]
+[ext_resource path="res://scenes/menu/levels_list/list_scripts/saver.gd" type="Script" id=15]
+[ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=16]
+[ext_resource path="res://scenes/menu/levels_list/list_scripts/element_add_buttons.gd" type="Script" id=17]
+[ext_resource path="res://scenes/menu/levels_list/list_scripts/list_handler.gd" type="Script" id=18]
+[ext_resource path="res://scenes/menu/levels_list/list_scripts/sorting.gd" type="Script" id=19]
+[ext_resource path="res://scenes/menu/levels_list/list_scripts/loader.gd" type="Script" id=20]
+[ext_resource path="res://scenes/menu/levels_list/list_scripts/folders.gd" type="Script" id=21]
+[ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=22]
+[ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=23]
+
+[sub_resource type="Gradient" id=7]
+colors = PoolColorArray( 0, 0, 0, 0.501961, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture2D" id=8]
+gradient = SubResource( 7 )
+fill = 1
+fill_to = Vector2( 1, 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 14
+use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "transition"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 3.72529e-09, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ true, false ]
+}
+
+[sub_resource type="DynamicFont" id=12]
+size = 18
+outline_size = 2
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+extra_spacing_char = -1
+font_data = ExtResource( 11 )
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "transition"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0, 1 ),
+"update": 0,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[sub_resource type="StyleBoxEmpty" id=17]
+
+[sub_resource type="StyleBoxEmpty" id=18]
+
+[sub_resource type="Animation" id=19]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 0.9 ) ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "transition"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 48, 96 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.0980392, 0, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "transition"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 48, 71 ), Vector2( 48, 112 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 0.8 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 5.58794e-09, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.0980392, 0, 1, 0 ) ]
+}
+
+[node name="LevelsList" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 9 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 4 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 5 )
+volume_db = -10.0
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color( 0.0980392, 0, 1, 0 )
+margin_left = 48.0
+margin_top = 96.0
+margin_right = 720.0
+margin_bottom = 409.0
+rect_scale = Vector2( 0.8, 0.8 )
+rect_pivot_offset = Vector2( 336, 168 )
+
+[node name="Shadow" type="NinePatchRect" parent="Panel"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 11.0
+margin_top = 11.0
+margin_right = 11.0
+margin_bottom = 11.0
+texture = ExtResource( 8 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Background" type="TextureRect" parent="Panel"]
+anchor_right = 2.0
+anchor_bottom = 2.0
+rect_scale = Vector2( 0.5, 0.5 )
+mouse_filter = 2
+texture = ExtResource( 2 )
+stretch_mode = 2
+
+[node name="Gradient" type="TextureRect" parent="Panel"]
+modulate = Color( 0.866667, 0.866667, 0.866667, 1 )
+anchor_right = 2.0
+anchor_bottom = 2.0
+rect_scale = Vector2( 0.5, 0.5 )
+mouse_filter = 2
+texture = SubResource( 8 )
+expand = true
+stretch_mode = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Panel"]
+margin_top = -32.0
+margin_right = 648.0
+margin_bottom = -8.0
+
+[node name="Back" type="Button" parent="Panel/Buttons"]
+margin_right = 42.0
+margin_bottom = 24.0
+theme_type_variation = "Red"
+custom_fonts/font = SubResource( 1 )
+text = "Back"
+script = ExtResource( 3 )
+
+[node name="Shadow" type="NinePatchRect" parent="Panel/Buttons/Back"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 8 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Add" type="Button" parent="Panel/Buttons"]
+margin_left = 46.0
+margin_right = 95.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 1 )
+text = "Add..."
+script = ExtResource( 3 )
+
+[node name="Shadow" type="NinePatchRect" parent="Panel/Buttons/Add"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 8 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Subscreens" type="Control" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 16 )
+default_screen = NodePath("LevelList")
+
+[node name="LevelList" type="ScrollContainer" parent="Panel/Subscreens"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 336, 313 )
+size_flags_vertical = 3
+follow_focus = true
+scroll_horizontal_enabled = false
+script = ExtResource( 9 )
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Subscreens/LevelList"]
+margin_right = 24.0
+margin_bottom = 24.0
+
+[node name="ListHandler" type="Node" parent="Panel/Subscreens/LevelList/MarginContainer"]
+script = ExtResource( 18 )
+level_grid_path = NodePath("../LevelGrid")
+level_list_path = NodePath("../..")
+level_panel_path = NodePath("../../../LevelInfo/LevelPanel")
+
+[node name="Loader" type="Node" parent="Panel/Subscreens/LevelList/MarginContainer/ListHandler"]
+script = ExtResource( 20 )
+
+[node name="Saver" type="Node" parent="Panel/Subscreens/LevelList/MarginContainer/ListHandler"]
+script = ExtResource( 15 )
+
+[node name="Sorting" type="Node" parent="Panel/Subscreens/LevelList/MarginContainer/ListHandler"]
+script = ExtResource( 19 )
+
+[node name="Folders" type="Node" parent="Panel/Subscreens/LevelList/MarginContainer/ListHandler"]
+script = ExtResource( 21 )
+
+[node name="LevelGrid" type="GridContainer" parent="Panel/Subscreens/LevelList/MarginContainer"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 12.0
+margin_bottom = 12.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/vseparation = 16
+custom_constants/hseparation = 13
+columns = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Subscreens/LevelList"]
+anims/RESET = SubResource( 9 )
+anims/transition = SubResource( 10 )
+
+[node name="LevelInfo" type="MarginContainer" parent="Panel/Subscreens"]
+visible = false
+modulate = Color( 0, 0, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 672, 313 )
+rect_clip_content = true
+script = ExtResource( 9 )
+
+[node name="LevelPanel" type="Control" parent="Panel/Subscreens/LevelInfo"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 660.0
+margin_bottom = 301.0
+script = ExtResource( 7 )
+list_handler_path = NodePath("../../LevelList/MarginContainer/ListHandler")
+completion_color = Color( 1, 1, 0.498039, 1 )
+
+[node name="Info" type="VBoxContainer" parent="Panel/Subscreens/LevelInfo/LevelPanel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -380.0
+margin_bottom = 144.0
+custom_constants/separation = 0
+
+[node name="Title" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/Info"]
+margin_right = 380.0
+margin_bottom = 19.0
+custom_fonts/font = SubResource( 12 )
+text = "SM63 Tall Tall Mountain +"
+align = 1
+valign = 1
+
+[node name="Shadow" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/Info/Title"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 3.0
+margin_bottom = 3.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_fonts/font = SubResource( 12 )
+text = "SM63 Tall Tall Mountain +"
+align = 1
+valign = 1
+clip_text = true
+
+[node name="Author" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/Info"]
+margin_top = 19.0
+margin_right = 380.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 23 )
+text = "by hop193"
+align = 1
+valign = 1
+clip_text = true
+
+[node name="Padding" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/Info"]
+margin_top = 35.0
+margin_right = 380.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 0, 6 )
+
+[node name="Shines" type="HBoxContainer" parent="Panel/Subscreens/LevelInfo/LevelPanel/Info"]
+margin_top = 41.0
+margin_right = 380.0
+margin_bottom = 77.0
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Info/Shines"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/Info/Shines"]
+margin_left = 40.0
+margin_top = 6.0
+margin_right = 66.0
+margin_bottom = 30.0
+text = "1/4"
+align = 1
+valign = 1
+
+[node name="StarCoins" type="HBoxContainer" parent="Panel/Subscreens/LevelInfo/LevelPanel/Info"]
+margin_top = 77.0
+margin_right = 380.0
+margin_bottom = 113.0
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Info/StarCoins"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/Info/StarCoins"]
+margin_left = 40.0
+margin_top = 6.0
+margin_right = 66.0
+margin_bottom = 30.0
+text = "1/4"
+align = 1
+valign = 1
+
+[node name="Padding2" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/Info"]
+margin_top = 113.0
+margin_right = 380.0
+margin_bottom = 119.0
+rect_min_size = Vector2( 0, 6 )
+
+[node name="Completion" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/Info"]
+margin_top = 119.0
+margin_right = 102.0
+margin_bottom = 143.0
+size_flags_horizontal = 0
+text = "Completed: "
+valign = 1
+
+[node name="Percentage" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/Info/Completion"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_right = 39.0
+margin_bottom = 24.0
+size_flags_horizontal = 0
+text = "0%"
+valign = 1
+
+[node name="Thumbnail" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel"]
+margin_right = 256.0
+margin_bottom = 144.0
+texture = ExtResource( 10 )
+expand = true
+
+[node name="Shadow" type="NinePatchRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Thumbnail"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 8 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Panel" type="Panel" parent="Panel/Subscreens/LevelInfo/LevelPanel"]
+self_modulate = Color( 0, 0, 0, 0.501961 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = 157.0
+margin_right = -212.0
+margin_bottom = 4.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Subscreens/LevelInfo/LevelPanel/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="Description" type="RichTextLabel" parent="Panel/Subscreens/LevelInfo/LevelPanel/Panel/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 436.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 432, 128 )
+custom_fonts/normal_font = ExtResource( 23 )
+bbcode_enabled = true
+bbcode_text = "After two years of working on this level (on and off but still), it's finally complete; Super Mario 63 Tall Tall Mountain +!
+
+
+This level is a complete remake and expansion of Super Mario 63's Tall Tall Mountain with a BOATLOAD of new features, including:
+
+- TWO NEW AREAS to explore! A town at the base of the mountain where residents reside, and a new secret area with gravity-defying water!
+
+- NINE* NEW SHINES to gather! These are split up into FOUR new main quest shines and FIVE new \"green shines\" on top of the already existing five, totaling FOURTEEN* SHINES!
+
+- FIFTEEN NEW STAR COINS to locate, totaling TWENTY STAR COINS! (Struggling to find some? Perhaps the doctor in the lab by the lake may be of use...)
+
+- Altered level design from the original to be more fair, \"well designed\", to make more room for new content, or to fit better with SM127's movement.
+
+- Secrets to find not discussed here!
+
+- And more...
+
+
+Now that this update is out, you might see me make more levels, so stay tuned for that!
+Anyways, have fun!
+
+v1.01 (7/29): Quick hotfix to disable some unnecessary pipes, and to mae one of the more hidden star coins easier to find"
+text = "After two years of working on this level (on and off but still), it's finally complete; Super Mario 63 Tall Tall Mountain +!
+
+
+This level is a complete remake and expansion of Super Mario 63's Tall Tall Mountain with a BOATLOAD of new features, including:
+
+- TWO NEW AREAS to explore! A town at the base of the mountain where residents reside, and a new secret area with gravity-defying water!
+
+- NINE* NEW SHINES to gather! These are split up into FOUR new main quest shines and FIVE new \"green shines\" on top of the already existing five, totaling FOURTEEN* SHINES!
+
+- FIFTEEN NEW STAR COINS to locate, totaling TWENTY STAR COINS! (Struggling to find some? Perhaps the doctor in the lab by the lake may be of use...)
+
+- Altered level design from the original to be more fair, \"well designed\", to make more room for new content, or to fit better with SM127's movement.
+
+- Secrets to find not discussed here!
+
+- And more...
+
+
+Now that this update is out, you might see me make more levels, so stay tuned for that!
+Anyways, have fun!
+
+v1.01 (7/29): Quick hotfix to disable some unnecessary pipes, and to mae one of the more hidden star coins easier to find"
+
+[node name="Buttons" type="VBoxContainer" parent="Panel/Subscreens/LevelInfo/LevelPanel"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -134.0
+margin_top = -290.0
+margin_right = 23.0
+custom_constants/separation = 10
+alignment = 2
+
+[node name="Return" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
+margin_top = 100.0
+margin_right = 157.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+custom_colors/font_color_focus = Color( 0.384314, 0.0431373, 0.231373, 1 )
+custom_colors/font_color = Color( 0.384314, 0.0431373, 0.231373, 1 )
+custom_colors/font_color_hover = Color( 0.384314, 0.0431373, 0.231373, 1 )
+custom_colors/font_color_pressed = Color( 0.384314, 0.0431373, 0.231373, 1 )
+text = "Return"
+align = 0
+script = ExtResource( 14 )
+direction = 1
+
+[node name="Padding" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
+margin_top = 130.0
+margin_right = 157.0
+margin_bottom = 130.0
+
+[node name="PlayLevel" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
+margin_top = 140.0
+margin_right = 157.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+text = "Play Level"
+align = 0
+script = ExtResource( 14 )
+direction = 1
+
+[node name="EditLevel" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
+margin_top = 170.0
+margin_right = 157.0
+margin_bottom = 190.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+text = "Edit Level"
+align = 0
+script = ExtResource( 14 )
+direction = 1
+
+[node name="CopyCode" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
+margin_top = 200.0
+margin_right = 157.0
+margin_bottom = 220.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+text = "Copy Code"
+align = 0
+script = ExtResource( 14 )
+direction = 1
+
+[node name="Padding2" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
+margin_top = 230.0
+margin_right = 157.0
+margin_bottom = 230.0
+
+[node name="ViewScores" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
+margin_top = 240.0
+margin_right = 157.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+text = "View Scores"
+align = 0
+script = ExtResource( 14 )
+direction = 1
+
+[node name="ResetSave" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
+margin_top = 270.0
+margin_right = 157.0
+margin_bottom = 290.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+custom_colors/font_color_focus = Color( 0.384314, 0.0431373, 0.231373, 1 )
+custom_colors/font_color = Color( 0.384314, 0.0431373, 0.231373, 1 )
+custom_colors/font_color_hover = Color( 0.384314, 0.0431373, 0.231373, 1 )
+custom_colors/font_color_pressed = Color( 0.384314, 0.0431373, 0.231373, 1 )
+text = "Reset Save"
+align = 0
+script = ExtResource( 14 )
+direction = 1
+
+[node name="DeleteLevel" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
+margin_top = 270.0
+margin_right = 157.0
+margin_bottom = 290.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+custom_colors/font_color_focus = Color( 0.384314, 0.0431373, 0.231373, 1 )
+custom_colors/font_color = Color( 0.384314, 0.0431373, 0.231373, 1 )
+custom_colors/font_color_hover = Color( 0.384314, 0.0431373, 0.231373, 1 )
+custom_colors/font_color_pressed = Color( 0.384314, 0.0431373, 0.231373, 1 )
+text = "Delete Level"
+align = 0
+script = ExtResource( 14 )
+direction = 1
+
+[node name="PressCountdown" type="Node" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel"]
+script = ExtResource( 22 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Subscreens/LevelInfo"]
+anims/RESET = SubResource( 13 )
+anims/transition = SubResource( 14 )
+
+[node name="AddElement" type="MarginContainer" parent="Panel/Subscreens"]
+visible = false
+modulate = Color( 0, 0, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 0, 313 )
+rect_clip_content = true
+script = ExtResource( 9 )
+
+[node name="Control" type="Control" parent="Panel/Subscreens/AddElement"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 660.0
+margin_bottom = 301.0
+
+[node name="ElementAddButtons" type="VBoxContainer" parent="Panel/Subscreens/AddElement/Control"]
+margin_left = -27.0
+margin_right = 136.0
+margin_bottom = 289.0
+custom_constants/separation = 10
+alignment = 1
+script = ExtResource( 17 )
+level_code_path = NodePath("../Panel/MarginContainer/LevelCode")
+list_handler_path = NodePath("../../../LevelList/MarginContainer/ListHandler")
+
+[node name="Return" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
+margin_top = 54.0
+margin_right = 163.0
+margin_bottom = 74.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+custom_colors/font_color_focus = Color( 0.384314, 0.0431373, 0.231373, 1 )
+custom_colors/font_color = Color( 0.384314, 0.0431373, 0.231373, 1 )
+custom_colors/font_color_hover = Color( 0.384314, 0.0431373, 0.231373, 1 )
+custom_colors/font_color_pressed = Color( 0.384314, 0.0431373, 0.231373, 1 )
+text = "Return"
+align = 2
+script = ExtResource( 14 )
+
+[node name="Padding" type="Control" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
+margin_top = 84.0
+margin_right = 163.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="NewLevel" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
+margin_top = 114.0
+margin_right = 163.0
+margin_bottom = 134.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+text = "New Level"
+align = 2
+script = ExtResource( 14 )
+
+[node name="ImportCode" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
+margin_top = 144.0
+margin_right = 163.0
+margin_bottom = 164.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+text = "Import from Code"
+align = 2
+script = ExtResource( 14 )
+
+[node name="Padding2" type="Control" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
+margin_top = 174.0
+margin_right = 163.0
+margin_bottom = 174.0
+
+[node name="NewFolder" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
+margin_top = 184.0
+margin_right = 163.0
+margin_bottom = 204.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+text = "New Folder"
+align = 2
+script = ExtResource( 14 )
+
+[node name="ImportFolder" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
+margin_top = 214.0
+margin_right = 163.0
+margin_bottom = 234.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+text = "Import from File"
+align = 2
+script = ExtResource( 14 )
+
+[node name="Panel" type="Panel" parent="Panel/Subscreens/AddElement/Control"]
+self_modulate = Color( 0, 0, 0, 0.501961 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 201.0
+margin_top = -1.0
+margin_right = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Subscreens/AddElement/Control/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="LevelCode" type="TextEdit" parent="Panel/Subscreens/AddElement/Control/Panel/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 444.0
+margin_bottom = 286.0
+rect_min_size = Vector2( 432, 128 )
+custom_fonts/font = ExtResource( 23 )
+custom_styles/read_only = SubResource( 15 )
+custom_styles/focus = SubResource( 16 )
+custom_styles/normal = SubResource( 17 )
+custom_styles/completion = SubResource( 18 )
+wrap_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Subscreens/AddElement"]
+anims/RESET = SubResource( 19 )
+anims/transition = SubResource( 20 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 5 )
+anims/transition = SubResource( 6 )
+
+[connection signal="pressed" from="Panel/Buttons/Back" to="." method="transition" binds= [ "MainMenu" ]]
+[connection signal="pressed" from="Panel/Buttons/Add" to="Panel/Subscreens/LevelList" method="transition" binds= [ "AddElement" ]]
+[connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/Return" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelInfo/LevelPanel" method="delete_level"]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/Return" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewLevel" to="Panel/Subscreens/LevelList/MarginContainer/ListHandler" method="insert_level"]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewLevel" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement/Control/ElementAddButtons" method="import_level_code"]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewFolder" to="Panel/Subscreens/LevelList/MarginContainer/ListHandler" method="insert_folder"]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewFolder" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]

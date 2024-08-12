@@ -17,7 +17,7 @@ var load_paths = [
 	["Autosave", "res://scenes/editor/autosave.tscn"],
 	["NotificationHandler", "res://scenes/shared/notification/notification_handler.tscn"],
 	["SavedLevels", "res://scenes/shared/saved_levels.tscn"],
-	["MenuVariables", "res://scenes/menu/menu_variables.tscn"],
+	["MenuVariables", "res://scenes/oldmenu/menu_variables.tscn"],
 	["MiscShared", "res://scenes/shared/miscshared.tscn"],
 	["CheckpointSaved", "res://classes/CheckpointSaved.tscn"],
 	["HideUI", "res://scenes/actors/hide_ui/hide_ui.tscn"],

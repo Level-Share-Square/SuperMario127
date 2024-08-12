@@ -1,0 +1,826 @@
+[gd_scene load_steps=46 format=2]
+
+[ext_resource path="res://scenes/oldmenu/127Button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/styles/LevelListPanel.tres" type="StyleBox" id=3]
+[ext_resource path="res://assets/styles/RedButtonStyleNormal.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/styles/RedButtonStyleHover.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=6]
+[ext_resource path="res://scenes/oldmenu/search/comments/comments.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/oldmenu/search/rating/rating.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/editor/assets/search_icon.png" type="Texture" id=9]
+[ext_resource path="res://scenes/oldmenu/search/search_screen.gd" type="Script" id=10]
+[ext_resource path="res://assets/fonts/delfino_dynamicfontdata.tres" type="DynamicFontData" id=11]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow_hover.png" type="Texture" id=12]
+[ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=13]
+[ext_resource path="res://assets/styles/whitecurved.tres" type="StyleBox" id=14]
+[ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=15]
+[ext_resource path="res://scenes/oldmenu/levels_screen/ui/star_coin_icon.png" type="Texture" id=16]
+[ext_resource path="res://scenes/oldmenu/levels_screen/shine_icon.png" type="Texture" id=17]
+[ext_resource path="res://assets/misc/external.png" type="Texture" id=18]
+[ext_resource path="res://scenes/oldmenu/search/rating/RatePanel.tscn" type="PackedScene" id=19]
+
+[sub_resource type="DynamicFont" id=10]
+size = 20
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 19
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxEmpty" id=43]
+
+[sub_resource type="StyleBoxEmpty" id=44]
+
+[sub_resource type="StyleBoxEmpty" id=45]
+
+[sub_resource type="StyleBoxEmpty" id=46]
+
+[sub_resource type="StyleBoxEmpty" id=47]
+
+[sub_resource type="StyleBoxFlat" id=48]
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=49]
+bg_color = Color( 0.75, 0.75, 0.75, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=50]
+bg_color = Color( 0.61, 0.61, 0.61, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=51]
+content_margin_right = 8.0
+bg_color = Color( 0.121569, 0.180392, 0.517647, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="Theme" id=6]
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/styles/grabber = SubResource( 48 )
+VScrollBar/styles/grabber_highlight = SubResource( 49 )
+VScrollBar/styles/grabber_pressed = SubResource( 50 )
+VScrollBar/styles/scroll = SubResource( 51 )
+VScrollBar/styles/scroll_focus = SubResource( 51 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 20
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.0805, 0.120925, 0.35, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id=9]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.121569, 0.180392, 0.517647, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="DynamicFont" id=16]
+size = 24
+outline_size = 2
+outline_color = Color( 0.054902, 0, 0.25098, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=17]
+resource_local_to_scene = true
+size = 24
+outline_size = 2
+outline_color = Color( 0.054902, 0, 0.25098, 1 )
+extra_spacing_char = 1
+font_data = ExtResource( 11 )
+
+[sub_resource type="StyleBoxFlat" id=31]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="DynamicFont" id=32]
+size = 24
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=33]
+size = 24
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=34]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="Animation" id=36]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, -2 ) ]
+}
+
+[sub_resource type="Animation" id=37]
+resource_name = "trans_out_MainMenuScreen_SearchScreen"
+length = 0.6
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Control:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 66, -0.25, 0, 0.25, 0, 66, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Control:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 500, -0.25, 0, 0.25, 0, 22, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Control2:rect_position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Control2:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -400, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Control/VBoxContainer/PanelContainer/buttonX:rect_position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 293, -0.25, 0, 0.25, 0, 293, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Control/VBoxContainer/PanelContainer/buttonX:rect_position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 549, -0.25, 0, 0.25, 0, 72, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Loading:rect_position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 110, -0.25, 0, 0.25, 0, 110, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Loading:rect_position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 657, -0.25, 0, 0.25, 0, 140, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+
+[sub_resource type="Animation" id=38]
+resource_name = "trans_out_SearchScreen_MainMenuScreen"
+length = 0.6
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Control:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 66, -0.25, 0, 0.25, 0, 66, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Control:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 22, -0.25, 0, 0.25, 0, 500, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Control2:rect_position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Control2:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -400, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Control/VBoxContainer/PanelContainer/buttonX:rect_position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 293, -0.25, 0, 0.25, 0, 293, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Control/VBoxContainer/PanelContainer/buttonX:rect_position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 72, -0.25, 0, 0.25, 0, 549, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Loading:rect_position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 110, -0.25, 0, 0.25, 0, 110, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Loading:rect_position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 176, -0.25, 0, 0.25, 0, 657, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.6 )
+}
+
+[sub_resource type="Animation" id=41]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Loading:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Loading:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 110, 176 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Loading:rect_size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 144, 144 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Loading:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Loading:rect_rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=40]
+resource_name = "spin"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Loading:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Loading:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="SearchScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = -2.0
+margin_right = 3073.0
+margin_bottom = 1726.0
+rect_pivot_offset = Vector2( -343, -58 )
+script = ExtResource( 10 )
+
+[node name="Control" type="Control" parent="."]
+margin_left = 66.0
+margin_top = 22.0
+margin_right = 336.0
+margin_bottom = 161.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+visible = false
+margin_left = -51.0
+margin_top = 48.0
+margin_right = 37.0
+margin_bottom = 136.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
+expand = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+margin_left = -55.0
+margin_top = 363.0
+margin_right = 287.0
+margin_bottom = 403.0
+
+[node name="ButtonBack" parent="Control/HBoxContainer" instance=ExtResource( 1 )]
+margin_right = 77.0
+margin_bottom = 40.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 10 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/normal = ExtResource( 4 )
+text = "Back"
+
+[node name="ButtonAdd" parent="Control/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 81.0
+margin_right = 154.0
+margin_bottom = 40.0
+size_flags_horizontal = 8
+custom_fonts/font = SubResource( 10 )
+text = "Add"
+
+[node name="ButtonCopyCode" parent="Control/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 158.0
+margin_right = 342.0
+margin_bottom = 40.0
+size_flags_horizontal = 11
+custom_fonts/font = SubResource( 11 )
+text = "Copy Level Code"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+margin_left = -55.0
+margin_top = -4.0
+margin_right = 287.0
+margin_bottom = 356.0
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/VBoxContainer"]
+margin_right = 342.0
+margin_bottom = 60.0
+custom_styles/panel = ExtResource( 3 )
+
+[node name="TextEdit" type="LineEdit" parent="Control/VBoxContainer/PanelContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 334.0
+margin_bottom = 52.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 6 )
+custom_styles/normal = ExtResource( 14 )
+placeholder_text = "Search"
+placeholder_alpha = 0.422
+
+[node name="buttonX" parent="Control/VBoxContainer/PanelContainer" instance=ExtResource( 1 )]
+margin_left = 320.0
+margin_top = 8.0
+margin_right = 334.0
+margin_bottom = 52.0
+size_flags_horizontal = 8
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
+custom_styles/hover = SubResource( 43 )
+custom_styles/pressed = SubResource( 44 )
+custom_styles/focus = SubResource( 45 )
+custom_styles/disabled = SubResource( 46 )
+custom_styles/normal = SubResource( 47 )
+text = "X"
+
+[node name="LevelListPanel" type="PanelContainer" parent="Control/VBoxContainer"]
+margin_top = 64.0
+margin_right = 342.0
+margin_bottom = 360.0
+size_flags_vertical = 3
+custom_styles/panel = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/VBoxContainer/LevelListPanel"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 334.0
+margin_bottom = 288.0
+
+[node name="LevelList" type="ItemList" parent="Control/VBoxContainer/LevelListPanel/VBoxContainer"]
+margin_right = 326.0
+margin_bottom = 280.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource( 6 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 7 )
+custom_styles/selected_focus = SubResource( 8 )
+custom_styles/bg_focus = SubResource( 9 )
+custom_styles/selected = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
+allow_reselect = true
+same_column_width = true
+fixed_column_width = 290
+icon_scale = 0.02
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PageSelect" type="Control" parent="Control"]
+margin_left = -557.0
+margin_top = 220.0
+margin_right = -545.0
+margin_bottom = 260.0
+
+[node name="Label" type="Label" parent="Control/PageSelect"]
+show_behind_parent = true
+margin_left = 506.0
+margin_top = 88.0
+margin_right = 837.0
+margin_bottom = 132.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 16 )
+custom_styles/normal = ExtResource( 3 )
+text = "Page:"
+align = 1
+valign = 1
+
+[node name="Value" type="Label" parent="Control/PageSelect"]
+visible = false
+margin_left = 685.0
+margin_top = 95.0
+margin_right = 723.0
+margin_bottom = 125.0
+custom_fonts/font = SubResource( 17 )
+text = "nill"
+align = 1
+valign = 1
+
+[node name="Right" type="TextureButton" parent="Control/PageSelect"]
+margin_left = 807.0
+margin_top = 97.0
+margin_right = 833.0
+margin_bottom = 123.0
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 13 )
+texture_hover = ExtResource( 12 )
+expand = true
+
+[node name="Left" type="TextureButton" parent="Control/PageSelect"]
+margin_left = 514.0
+margin_top = 97.0
+margin_right = 540.0
+margin_bottom = 123.0
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 13 )
+texture_hover = ExtResource( 12 )
+expand = true
+flip_h = true
+
+[node name="Loading" type="TextureRect" parent="."]
+margin_left = 110.0
+margin_top = 176.0
+margin_right = 254.0
+margin_bottom = 320.0
+rect_pivot_offset = Vector2( 72, 72 )
+texture = ExtResource( 17 )
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="Control2" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="LevelScore" type="GridContainer" parent="Control2"]
+margin_left = 377.0
+margin_top = 274.0
+margin_right = 743.0
+margin_bottom = 346.0
+size_flags_vertical = 3
+columns = 2
+
+[node name="ShineProgressPanel" type="PanelContainer" parent="Control2/LevelScore"]
+margin_right = 181.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 31 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control2/LevelScore/ShineProgressPanel"]
+margin_left = 16.0
+margin_top = 2.0
+margin_right = 165.0
+margin_bottom = 70.0
+
+[node name="ShineIcon" type="TextureRect" parent="Control2/LevelScore/ShineProgressPanel/HBoxContainer2"]
+margin_right = 72.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShineProgressLabel" type="Label" parent="Control2/LevelScore/ShineProgressPanel/HBoxContainer2"]
+margin_left = 134.0
+margin_top = 20.0
+margin_right = 149.0
+margin_bottom = 48.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 32 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StarCoinProgressPanel" type="PanelContainer" parent="Control2/LevelScore"]
+margin_left = 185.0
+margin_right = 366.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 31 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control2/LevelScore/StarCoinProgressPanel"]
+margin_left = 16.0
+margin_top = 2.0
+margin_right = 165.0
+margin_bottom = 70.0
+
+[node name="StarCoinIcon" type="TextureRect" parent="Control2/LevelScore/StarCoinProgressPanel/HBoxContainer3"]
+margin_right = 72.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 16 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StarCoinProgressLabel" type="Label" parent="Control2/LevelScore/StarCoinProgressPanel/HBoxContainer3"]
+margin_left = 134.0
+margin_top = 20.0
+margin_right = 149.0
+margin_bottom = 48.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 32 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelCreator" type="Label" parent="Control2"]
+margin_left = 431.0
+margin_top = 240.0
+margin_right = 797.0
+margin_bottom = 291.0
+rect_scale = Vector2( 0.7, 0.7 )
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.51
+custom_fonts/font = SubResource( 33 )
+text = "Level Creator
+"
+align = 1
+autowrap = true
+clip_text = true
+max_lines_visible = 2
+
+[node name="LevelInfo" type="VBoxContainer" parent="Control2"]
+margin_left = 377.0
+margin_top = 79.0
+margin_right = 743.0
+margin_bottom = 276.0
+size_flags_horizontal = 3
+custom_constants/separation = 11
+
+[node name="LevelThumbnail" type="MarginContainer" parent="Control2/LevelInfo"]
+margin_right = 366.0
+margin_bottom = 123.0
+size_flags_vertical = 3
+custom_constants/margin_right = 75
+custom_constants/margin_left = 75
+
+[node name="PanelContainer" type="PanelContainer" parent="Control2/LevelInfo/LevelThumbnail"]
+margin_left = 75.0
+margin_right = 291.0
+margin_bottom = 123.0
+size_flags_horizontal = 9
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 34 )
+
+[node name="ThumbnailImage" type="TextureRect" parent="Control2/LevelInfo/LevelThumbnail/PanelContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 208.0
+margin_bottom = 115.0
+size_flags_vertical = 3
+texture = ExtResource( 15 )
+expand = true
+stretch_mode = 6
+
+[node name="ForegroundThumbnailImage" type="TextureRect" parent="Control2/LevelInfo/LevelThumbnail/PanelContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 208.0
+margin_bottom = 115.0
+size_flags_vertical = 3
+texture = ExtResource( 15 )
+expand = true
+stretch_mode = 6
+
+[node name="LevelName" type="Label" parent="Control2/LevelInfo"]
+margin_top = 134.0
+margin_right = 366.0
+margin_bottom = 197.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.51
+custom_fonts/font = SubResource( 33 )
+text = "Level Name"
+align = 1
+clip_text = true
+max_lines_visible = 2
+
+[node name="RatePanel" parent="Control2" instance=ExtResource( 19 )]
+margin_left = 377.0
+margin_top = 355.0
+margin_right = 558.0
+margin_bottom = 396.0
+
+[node name="ButtonComm" parent="Control2" instance=ExtResource( 1 )]
+visible = false
+margin_left = 614.0
+margin_top = 357.0
+margin_right = 743.0
+margin_bottom = 397.0
+size_flags_horizontal = 8
+custom_fonts/font = SubResource( 10 )
+text = "Comments"
+
+[node name="Rating" parent="Control2" instance=ExtResource( 8 )]
+margin_left = 556.0
+margin_top = 89.0
+margin_right = 556.0
+margin_bottom = 89.0
+rect_scale = Vector2( 0.05, 0.05 )
+
+[node name="External" parent="Control2" instance=ExtResource( 1 )]
+margin_left = 712.0
+margin_top = 13.0
+margin_right = 1544.0
+margin_bottom = 829.0
+rect_scale = Vector2( 0.05, 0.05 )
+icon = ExtResource( 18 )
+
+[node name="Comments" parent="Control2" instance=ExtResource( 7 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/default = SubResource( 36 )
+anims/trans_out_MainMenuScreen_SearchScreen = SubResource( 37 )
+anims/trans_out_SearchScreen_MainMenuScreen = SubResource( 38 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 41 )
+anims/spin = SubResource( 40 )
+
+[node name="HTTPRequest2" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest3" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest4" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest5" type="HTTPRequest" parent="."]

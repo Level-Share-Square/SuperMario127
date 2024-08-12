@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
-[ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/oldmenu/127Button.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/player/controls_options.gd" type="Script" id=5]
 [ext_resource path="res://scenes/shared/control/player_selector_system.gd" type="Script" id=6]

@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scenes/menu/options/buttons/enum_option.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=11]
+size = 14
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 2 )
+
+[node name="EnumOption" type="VBoxContainer"]
+margin_right = 168.0
+margin_bottom = 39.0
+rect_min_size = Vector2( 64, 0 )
+custom_constants/separation = 4
+script = ExtResource( 3 )
+options = [ "Value 1", "Value 2" ]
+
+[node name="Label" type="Label" parent="."]
+margin_right = 168.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 11 )
+text = "Enum Option"
+align = 1
+
+[node name="Button" type="Button" parent="."]
+margin_top = 20.0
+margin_right = 168.0
+margin_bottom = 40.0
+theme_type_variation = "OptionsToggle"
+text = "Value 1"
+script = ExtResource( 1 )
+
+[connection signal="renamed" from="." to="." method="renamed"]
+[connection signal="pressed" from="Button" to="." method="pressed"]

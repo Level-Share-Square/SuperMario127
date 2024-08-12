@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/editor/window/hotkey_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/window/hotkeys.gd" type="Script" id=2]
-[ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/oldmenu/127Button.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=9]
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=10]

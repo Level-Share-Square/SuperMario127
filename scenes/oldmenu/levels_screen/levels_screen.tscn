@@ -1,0 +1,1064 @@
+[gd_scene load_steps=57 format=2]
+
+[ext_resource path="res://scenes/oldmenu/levels_screen/levels_screen.gd" type="Script" id=1]
+[ext_resource path="res://scenes/oldmenu/127Button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/styles/RedButtonStyleHover.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/styles/RedButtonStyleNormal.tres" type="StyleBox" id=5]
+[ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=6]
+[ext_resource path="res://scenes/oldmenu/levels_screen/shine_icon.png" type="Texture" id=7]
+[ext_resource path="res://assets/styles/RedButtonStyleDisabled.tres" type="StyleBox" id=8]
+[ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=9]
+[ext_resource path="res://assets/styles/LevelListPanel.tres" type="StyleBox" id=10]
+[ext_resource path="res://scenes/shared/background/foregrounds/hills/preview.png" type="Texture" id=11]
+[ext_resource path="res://scenes/oldmenu/levels_screen/ui/coin_icon.png" type="Texture" id=12]
+[ext_resource path="res://scenes/oldmenu/levels_screen/ui/star_coin_icon.png" type="Texture" id=13]
+[ext_resource path="res://scenes/oldmenu/levels_screen/ui/time_icon.png" type="Texture" id=14]
+[ext_resource path="res://scenes/oldmenu/levels_screen/transition_sound.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/styles/GoldButtonStyleNormal.tres" type="StyleBox" id=16]
+[ext_resource path="res://scenes/oldmenu/levels_screen/delete_confirmation_window.gd" type="Script" id=17]
+[ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=18]
+[ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=19]
+[ext_resource path="res://assets/styles/ButtonStyleDisabled.tres" type="StyleBox" id=20]
+[ext_resource path="res://assets/styles/GoldButtonStyleHover.tres" type="StyleBox" id=21]
+[ext_resource path="res://assets/fonts/delfino_dynamicfontdata.tres" type="DynamicFontData" id=22]
+[ext_resource path="res://assets/styles/GoldButtonStylePressed.tres" type="StyleBox" id=23]
+[ext_resource path="res://assets/styles/BrightRedButtonStyleNormal.tres" type="StyleBox" id=24]
+[ext_resource path="res://assets/styles/BrightRedButtonStyleHover.tres" type="StyleBox" id=25]
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=32]
+bg_color = Color( 0.75, 0.75, 0.75, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=33]
+bg_color = Color( 0.61, 0.61, 0.61, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id=34]
+content_margin_right = 8.0
+bg_color = Color( 0.121569, 0.180392, 0.517647, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="Theme" id=6]
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/styles/grabber = SubResource( 31 )
+VScrollBar/styles/grabber_highlight = SubResource( 32 )
+VScrollBar/styles/grabber_pressed = SubResource( 33 )
+VScrollBar/styles/scroll = SubResource( 34 )
+VScrollBar/styles/scroll_focus = SubResource( 34 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 20
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.0805, 0.120925, 0.35, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id=8]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.121569, 0.180392, 0.517647, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="DynamicFont" id=35]
+size = 19
+outline_size = 1
+outline_color = Color( 0.85098, 0.780392, 0.494118, 1 )
+extra_spacing_top = -2
+extra_spacing_bottom = -3
+font_data = ExtResource( 22 )
+
+[sub_resource type="DynamicFont" id=30]
+size = 19
+extra_spacing_top = -2
+extra_spacing_bottom = -3
+font_data = ExtResource( 22 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 1, 1, 1, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="DynamicFont" id=11]
+size = 20
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 20
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 19
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=14]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="DynamicFont" id=15]
+size = 24
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=16]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="DynamicFont" id=17]
+size = 24
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=18]
+size = 18
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=19]
+size = 19
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 0.121569, 0.180392, 0.517647, 1 )
+border_width_left = 4
+border_width_top = 38
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_top = 38.0
+
+[sub_resource type="Theme" id=21]
+default_font = ExtResource( 9 )
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = ExtResource( 9 )
+Button/styles/disabled = ExtResource( 20 )
+Button/styles/focus = ExtResource( 18 )
+Button/styles/hover = ExtResource( 18 )
+Button/styles/normal = ExtResource( 19 )
+Button/styles/pressed = ExtResource( 19 )
+Panel/styles/PopupPanel = SubResource( 20 )
+Panel/styles/panel = SubResource( 20 )
+WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
+WindowDialog/constants/close_h_ofs = 72
+WindowDialog/constants/close_v_ofs = 34
+WindowDialog/constants/scaleborder_size = 4
+WindowDialog/constants/title_height = 20
+WindowDialog/fonts/title_font = ExtResource( 9 )
+WindowDialog/icons/close = null
+WindowDialog/icons/close_highlight = null
+WindowDialog/styles/PopupPanel = null
+WindowDialog/styles/panel = SubResource( 20 )
+
+[sub_resource type="DynamicFont" id=22]
+size = 24
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=29]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransitionRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=23]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TransitionRect:mouse_filter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=24]
+length = 2.25
+tracks/0/type = "method"
+tracks/0/path = NodePath("TransitionAudio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TransitionRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=25]
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransitionRect:mouse_filter")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TransitionRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=26]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/HBoxContainer/LevelInfo:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
+"update": 0,
+"values": [ Vector2( 360, 0 ), Vector2( 360, 432 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/HBoxContainer/VBoxContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -432 ) ]
+}
+
+[sub_resource type="Animation" id=27]
+tracks/0/type = "method"
+tracks/0/path = NodePath("TransitionAudio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TransitionRect:mouse_filter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TransitionRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=28]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/HBoxContainer/LevelInfo:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.6 ),
+"transitions": PoolRealArray( 0.5, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 360, 432 ), Vector2( 360, -20 ), Vector2( 360, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/HBoxContainer/VBoxContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5, 0.6 ),
+"transitions": PoolRealArray( 0.5, 0.5, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -432 ), Vector2( 0, -432 ), Vector2( 0, 15 ), Vector2( 0, 0 ) ]
+}
+
+[node name="LevelsScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 384, 216 )
+script = ExtResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 712, 10 )
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 736.0
+margin_bottom = 400.0
+custom_constants/separation = 17
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 343.0
+margin_bottom = 368.0
+size_flags_horizontal = 3
+
+[node name="TemplateLevelInfo" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 343.0
+margin_bottom = 117.0
+custom_styles/panel = ExtResource( 10 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/TemplateLevelInfo"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 335.0
+margin_bottom = 109.0
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/TemplateLevelInfo/VBoxContainer"]
+margin_right = 327.0
+margin_bottom = 28.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 9 )
+text = "Sample levels"
+align = 1
+autowrap = true
+
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/TemplateLevelInfo/VBoxContainer"]
+margin_top = 32.0
+margin_right = 327.0
+margin_bottom = 101.0
+custom_fonts/font = SubResource( 1 )
+text = "These templates show what the Level Designer is capable of. They do not reflect the campaign in any way."
+autowrap = true
+
+[node name="LevelListPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 121.0
+margin_right = 343.0
+margin_bottom = 324.0
+size_flags_vertical = 3
+custom_styles/panel = ExtResource( 10 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 335.0
+margin_bottom = 195.0
+
+[node name="LevelList" type="ItemList" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel/VBoxContainer"]
+margin_right = 327.0
+margin_bottom = 187.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource( 6 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 9 )
+custom_styles/selected_focus = SubResource( 7 )
+custom_styles/bg_focus = SubResource( 8 )
+custom_styles/selected = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
+allow_reselect = true
+same_column_width = true
+fixed_column_width = 290
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CommunityLevelsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel/VBoxContainer"]
+visible = false
+margin_top = 115.0
+margin_right = 327.0
+margin_bottom = 149.0
+custom_colors/font_color = Color( 0.682353, 0.439216, 0.176471, 1 )
+custom_colors/font_color_hover = Color( 1, 0.980392, 0.858824, 1 )
+custom_colors/font_color_pressed = Color( 0.494118, 0.239216, 0.180392, 1 )
+custom_fonts/font = SubResource( 35 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 23 )
+custom_styles/normal = ExtResource( 16 )
+text = "Best of the Community"
+
+[node name="SampleLevelsButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelListPanel/VBoxContainer"]
+visible = false
+margin_top = 153.0
+margin_right = 327.0
+margin_bottom = 187.0
+custom_fonts/font = SubResource( 30 )
+custom_styles/hover = ExtResource( 25 )
+custom_styles/normal = ExtResource( 24 )
+text = "Sample Levels"
+
+[node name="LevelCodePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+visible = false
+margin_top = 182.0
+margin_right = 343.0
+margin_bottom = 324.0
+size_flags_vertical = 11
+custom_styles/panel = ExtResource( 10 )
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 335.0
+margin_bottom = 134.0
+custom_styles/panel = SubResource( 8 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer"]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 311.0
+margin_bottom = 118.0
+custom_constants/separation = 7
+
+[node name="LevelCodeEntry" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer"]
+margin_right = 295.0
+margin_bottom = 16.0
+size_flags_vertical = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = SubResource( 10 )
+context_menu_enabled = false
+wrap_enabled = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer"]
+margin_top = 23.0
+margin_right = 295.0
+margin_bottom = 63.0
+
+[node name="ButtonNewLevel" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_right = 145.0
+margin_bottom = 40.0
+size_flags_horizontal = 7
+custom_fonts/font = SubResource( 11 )
+text = "New"
+
+[node name="ButtonCodeImport" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 149.0
+margin_right = 295.0
+margin_bottom = 40.0
+size_flags_horizontal = 7
+size_flags_vertical = 9
+custom_fonts/font = SubResource( 11 )
+text = "Import"
+
+[node name="ButtonCodeCancel" parent="MarginContainer/HBoxContainer/VBoxContainer/LevelCodePanel/PanelContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 70.0
+margin_right = 295.0
+margin_bottom = 110.0
+size_flags_horizontal = 3
+size_flags_vertical = 9
+custom_fonts/font = SubResource( 11 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
+text = "Cancel"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 328.0
+margin_right = 343.0
+margin_bottom = 368.0
+
+[node name="ButtonBack" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_right = 77.0
+margin_bottom = 40.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 12 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
+text = "Back"
+
+[node name="ButtonAdd" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 81.0
+margin_right = 154.0
+margin_bottom = 40.0
+size_flags_horizontal = 8
+custom_fonts/font = SubResource( 12 )
+text = "Add"
+
+[node name="ButtonCopyCode" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 158.0
+margin_right = 343.0
+margin_bottom = 40.0
+size_flags_horizontal = 11
+custom_fonts/font = SubResource( 13 )
+text = "Copy Level Code"
+
+[node name="LevelInfo" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 360.0
+margin_right = 704.0
+margin_bottom = 368.0
+size_flags_horizontal = 3
+custom_constants/separation = 11
+
+[node name="LevelThumbnail" type="MarginContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
+margin_right = 344.0
+margin_bottom = 117.0
+size_flags_vertical = 3
+custom_constants/margin_right = 75
+custom_constants/margin_left = 75
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail"]
+margin_left = 75.0
+margin_right = 269.0
+margin_bottom = 117.0
+size_flags_horizontal = 9
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 14 )
+
+[node name="ThumbnailImage" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 186.0
+margin_bottom = 109.0
+size_flags_vertical = 3
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="ForegroundThumbnailImage" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelThumbnail/PanelContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 186.0
+margin_bottom = 109.0
+size_flags_vertical = 3
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="LevelName" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo"]
+margin_top = 128.0
+margin_right = 344.0
+margin_bottom = 188.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.51
+custom_fonts/font = SubResource( 15 )
+text = "Level Name"
+align = 1
+autowrap = true
+clip_text = true
+max_lines_visible = 2
+
+[node name="LevelScore" type="GridContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
+margin_top = 199.0
+margin_right = 344.0
+margin_bottom = 317.0
+size_flags_vertical = 3
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShineProgressPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
+margin_right = 170.0
+margin_bottom = 55.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 16 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel"]
+margin_left = 16.0
+margin_top = 2.0
+margin_right = 154.0
+margin_bottom = 53.0
+
+[node name="ShineIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel/HBoxContainer2"]
+margin_right = 67.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShineProgressLabel" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/ShineProgressPanel/HBoxContainer2"]
+margin_left = 99.0
+margin_top = 11.0
+margin_right = 138.0
+margin_bottom = 39.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 17 )
+text = "0/0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StarCoinProgressPanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
+margin_left = 174.0
+margin_right = 344.0
+margin_bottom = 55.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 16 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel"]
+margin_left = 16.0
+margin_top = 2.0
+margin_right = 154.0
+margin_bottom = 53.0
+
+[node name="StarCoinIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel/HBoxContainer3"]
+margin_right = 67.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StarCoinProgressLabel" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/StarCoinProgressPanel/HBoxContainer3"]
+margin_left = 99.0
+margin_top = 11.0
+margin_right = 138.0
+margin_bottom = 39.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 17 )
+text = "0/0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CoinScorePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
+margin_top = 59.0
+margin_right = 170.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 16 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel"]
+margin_left = 16.0
+margin_top = 2.0
+margin_right = 154.0
+margin_bottom = 53.0
+
+[node name="CoinScoreIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel/HBoxContainer2"]
+margin_right = 67.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/CoinScorePanel/HBoxContainer2"]
+margin_left = 123.0
+margin_top = 11.0
+margin_right = 138.0
+margin_bottom = 39.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 17 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SingleTimeScorePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore"]
+margin_left = 174.0
+margin_top = 59.0
+margin_right = 344.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 16 )
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel"]
+margin_left = 16.0
+margin_top = 2.0
+margin_right = 154.0
+margin_bottom = 53.0
+
+[node name="TimeScoreIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel/HBoxContainer3"]
+margin_right = 52.0
+margin_bottom = 51.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore/SingleTimeScorePanel/HBoxContainer3"]
+margin_left = 56.0
+margin_top = 15.0
+margin_right = 138.0
+margin_bottom = 36.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 18 )
+text = "99:99.99"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonTimeScores" parent="MarginContainer/HBoxContainer/LevelInfo/LevelScore" instance=ExtResource( 2 )]
+visible = false
+margin_top = 74.0
+margin_right = 170.0
+margin_bottom = 118.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 9 )
+text = "Time Scores"
+
+[node name="ControlButtons" type="HBoxContainer" parent="MarginContainer/HBoxContainer/LevelInfo"]
+margin_top = 328.0
+margin_right = 343.0
+margin_bottom = 368.0
+size_flags_horizontal = 6
+size_flags_vertical = 8
+
+[node name="ButtonPlay" parent="MarginContainer/HBoxContainer/LevelInfo/ControlButtons" instance=ExtResource( 2 )]
+margin_right = 74.0
+margin_bottom = 40.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 12 )
+text = "Play"
+
+[node name="ButtonEdit" parent="MarginContainer/HBoxContainer/LevelInfo/ControlButtons" instance=ExtResource( 2 )]
+margin_left = 78.0
+margin_right = 152.0
+margin_bottom = 40.0
+size_flags_horizontal = 0
+custom_fonts/font = SubResource( 12 )
+text = "Edit"
+
+[node name="ButtonReset" parent="MarginContainer/HBoxContainer/LevelInfo/ControlButtons" instance=ExtResource( 2 )]
+margin_left = 156.0
+margin_right = 246.0
+margin_bottom = 40.0
+size_flags_horizontal = 2
+size_flags_vertical = 8
+custom_fonts/font = SubResource( 12 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = ExtResource( 5 )
+text = "Reset"
+
+[node name="ButtonDelete" parent="MarginContainer/HBoxContainer/LevelInfo/ControlButtons" instance=ExtResource( 2 )]
+margin_left = 250.0
+margin_top = 1.0
+margin_right = 343.0
+margin_bottom = 40.0
+size_flags_horizontal = 2
+size_flags_vertical = 8
+custom_fonts/font = SubResource( 19 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/disabled = ExtResource( 8 )
+custom_styles/normal = ExtResource( 5 )
+text = "Delete"
+
+[node name="TimeScorePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer"]
+visible = false
+margin_left = 719.0
+margin_right = 853.0
+margin_bottom = 368.0
+size_flags_horizontal = 3
+size_flags_vertical = 11
+custom_styles/panel = ExtResource( 10 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/TimeScorePanel"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 126.0
+margin_bottom = 360.0
+custom_styles/panel = SubResource( 8 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TimeScorePanel/PanelContainer"]
+margin_left = 16.0
+margin_top = 8.0
+margin_right = 102.0
+margin_bottom = 344.0
+custom_constants/separation = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimeScoreList" type="ItemList" parent="MarginContainer/HBoxContainer/TimeScorePanel/PanelContainer/VBoxContainer"]
+margin_right = 86.0
+margin_bottom = 288.0
+size_flags_vertical = 3
+theme = SubResource( 6 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 9 )
+custom_styles/selected_focus = SubResource( 7 )
+custom_styles/bg_focus = SubResource( 8 )
+custom_styles/selected = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ButtonCloseTimeScore" parent="MarginContainer/HBoxContainer/TimeScorePanel/PanelContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 296.0
+margin_right = 86.0
+margin_bottom = 336.0
+size_flags_vertical = 8
+custom_fonts/font = SubResource( 12 )
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = ExtResource( 4 )
+custom_styles/normal = ExtResource( 5 )
+text = "Close"
+
+[node name="PopupContainer" type="ColorRect" parent="."]
+visible = false
+margin_right = 768.0
+margin_bottom = 432.0
+color = Color( 0, 0, 0, 0.32549 )
+
+[node name="ConfirmDelete" type="Popup" parent="PopupContainer"]
+visible = true
+margin_right = 553.0
+margin_bottom = 140.0
+theme = SubResource( 21 )
+popup_exclusive = true
+script = ExtResource( 17 )
+
+[node name="Panel" type="Panel" parent="PopupContainer/ConfirmDelete"]
+margin_right = 553.0
+margin_bottom = 136.4
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="PopupContainer/ConfirmDelete"]
+margin_top = 10.0
+margin_right = 553.0
+margin_bottom = 69.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Are you sure you want to delete the level
+\"Level Name\"?"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="PopupContainer/ConfirmDelete"]
+margin_left = 15.0
+margin_top = -32.0
+margin_right = 161.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Delete Level"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupContainer/ConfirmDelete"]
+margin_left = 3.0
+margin_top = 75.0
+margin_right = 553.0
+margin_bottom = 119.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="PopupContainer/ConfirmDelete/HBoxContainer"]
+margin_right = 106.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+
+[node name="OkButton" parent="PopupContainer/ConfirmDelete/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 110.0
+margin_right = 217.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 22 )
+text = "OK"
+
+[node name="Control2" type="Control" parent="PopupContainer/ConfirmDelete/HBoxContainer"]
+margin_left = 221.0
+margin_right = 327.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+
+[node name="CancelButton" parent="PopupContainer/ConfirmDelete/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 331.0
+margin_right = 439.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 22 )
+text = "Cancel"
+
+[node name="Control3" type="Control" parent="PopupContainer/ConfirmDelete/HBoxContainer"]
+margin_left = 443.0
+margin_right = 550.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 29 )
+anims/default = SubResource( 23 )
+anims/trans_edit = SubResource( 24 )
+anims/trans_in_ShineSelectScreen_LevelsScreen = SubResource( 25 )
+anims/trans_out_LevelsScreen_MainMenuScreen = SubResource( 26 )
+anims/trans_out_LevelsScreen_ShineSelectScreen = SubResource( 27 )
+anims/trans_out_MainMenuScreen_LevelsScreen = SubResource( 28 )
+
+[node name="TransitionRect" type="ColorRect" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TransitionAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+volume_db = -6.0

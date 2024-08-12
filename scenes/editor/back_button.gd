@@ -1,4 +1,4 @@
-extends "res://scenes/menu/127Button.gd"
+extends "res://scenes/oldmenu/127Button.gd"
 
 onready var quit_wo_saving_window = $QuitWOSavingWindow
 
