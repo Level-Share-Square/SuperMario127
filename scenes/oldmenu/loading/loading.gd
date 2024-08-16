@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 onready var coins_text = $Text/Coins
 onready var coins_shadow = $Text/Coins/Shadow
@@ -44,10 +44,10 @@ func go_to_menu():
 			Singleton.EditorSavedSettings.data_tiles = number_of_tiles
 			var _reload_scene = get_tree().reload_current_scene()
 		else:
-			Singleton.MenuVariables.quit_to_menu()
+			Singleton.SceneSwitcher.quit_to_menu()
 	else:
-		Singleton.MenuVariables.quit_to_menu()
-		
+		Singleton.SceneSwitcher.quit_to_menu()
+
 static func get_data_or_null():
 	var file = File.new()
 	file.open("user://settings.json", File.READ)
@@ -74,16 +74,16 @@ func _ready():
 	if data != null:
 		if data.has("richpresence"):
 			Singleton2.rp = data["richpresence"]
-		if data.has("darkmode"):
-			Singleton2.dark_mode = data["darkmode"]
-	if Singleton2.dark_mode:
-		$Background/ColorRect.visible = false
-		$Background/TextureRect.visible = false
-		$Text/Loading.modulate = Color(1,1,1)
-		$Text/Coins.modulate = Color(1,1,1)
-		$Foreground/ColorRect.color = Color(0,0,0,1)
+#		if data.has("darkmode"):
+#			Singleton2.dark_mode = data["darkmode"]
+#	if Singleton2.dark_mode:
+#		$Background/ColorRect.visible = false
+#		$Background/TextureRect.visible = false
+#		$Text/Loading.modulate = Color(1,1,1)
+#		$Text/Coins.modulate = Color(1,1,1)
+#		$Foreground/ColorRect.color = Color(0,0,0,1)
 	dir.make_dir("user://replays")
-	dir.make_dir("user://autosave")
+	dir.make_dir("user://autosaves")
 	dir.make_dir("user://mods")
 	if !file.file_exists("user://081.dmitri"):
 		dir.remove("user://tiles.res")

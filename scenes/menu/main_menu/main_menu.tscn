@@ -1,26 +1,56 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/misc/new127icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=2]
 [ext_resource path="res://scenes/menu/main_menu/button_functions.gd" type="Script" id=3]
-[ext_resource path="res://scenes/menu/button_scripts/button_hover-extend.gd" type="Script" id=4]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=4]
 [ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=5]
 [ext_resource path="res://assets/misc/new127icon_shadow.png" type="Texture" id=6]
 [ext_resource path="res://assets/misc/LSS.svg" type="Texture" id=7]
-[ext_resource path="res://scenes/menu/button_scripts/button_hover-sink.gd" type="Script" id=8]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=8]
 [ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=9]
 [ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=11]
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=12]
+[ext_resource path="res://assets/fonts/super-mario-bros-nes.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://scenes/menu/main_menu/.secret/logo.png" type="Texture" id=14]
+[ext_resource path="res://scenes/menu/main_menu/.secret/sprite.png" type="Texture" id=15]
+[ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=16]
+[ext_resource path="res://scenes/menu/button_scripts/icon_helper.gd" type="Script" id=17]
 
-[sub_resource type="Gradient" id=1]
+[sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0.0502793, 0.944134, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.831373, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture2D" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="GradientTexture2D" id=8]
+gradient = SubResource( 6 )
 fill_from = Vector2( 0, 1 )
 fill_to = Vector2( 0, 0 )
+
+[sub_resource type="GDScript" id=9]
+resource_name = "secret"
+script/source = "extends Node
+
+export var show_node_path: NodePath
+onready var show_node = get_node(show_node_path)
+
+export var hide_node_path: NodePath
+var hide_node
+
+func _ready():
+	if has_node(hide_node_path):
+		hide_node = get_node(hide_node_path)
+	
+	toggle_secret(\"secret\", LocalSettings.load_setting(\"General\", \"secret\", false))
+	LocalSettings.connect(\"setting_changed\", self, \"toggle_secret\")
+
+func toggle_secret(key: String, secret_enabled: bool):
+	if key != \"secret\": return
+	
+	show_node.visible = secret_enabled
+	if is_instance_valid(hide_node):
+		hide_node.visible = !secret_enabled
+"
 
 [sub_resource type="GDScript" id=5]
 resource_name = "floaty"
@@ -35,6 +65,11 @@ func _process(delta):
 	time += delta
 	position.y = sin(time*speed) * power
 "
+
+[sub_resource type="DynamicFont" id=7]
+size = 128
+use_filter = true
+font_data = ExtResource( 13 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "RESET"
@@ -205,11 +240,13 @@ default_focus_path = NodePath("../MarginContainer/VBoxContainer/DevLevels")
 unique_name_in_owner = true
 stream = ExtResource( 11 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="WhiteBar" type="TextureRect" parent="."]
 margin_left = -204.0
@@ -217,7 +254,7 @@ margin_top = 218.0
 margin_right = 943.0
 margin_bottom = 431.0
 rect_rotation = 15.0
-texture = SubResource( 2 )
+texture = SubResource( 8 )
 expand = true
 
 [node name="WhiteBar2" type="TextureRect" parent="."]
@@ -226,7 +263,7 @@ margin_top = 207.0
 margin_right = 2128.0
 margin_bottom = 420.0
 rect_rotation = -165.0
-texture = SubResource( 2 )
+texture = SubResource( 8 )
 expand = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -281,15 +318,7 @@ focus_neighbour_top = NodePath("../DevLevels")
 focus_neighbour_bottom = NodePath("../SavedLevels")
 text = "  Level Share Square"
 align = 2
-expand_icon = true
 script = ExtResource( 8 )
-
-[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/LSS"]
-margin_left = 32.0
-rect_min_size = Vector2( 28, 28 )
-texture = ExtResource( 7 )
-expand = true
-stretch_mode = 5
 
 [node name="Shadow" type="NinePatchRect" parent="MarginContainer/VBoxContainer/LSS"]
 modulate = Color( 1, 1, 1, 0.25098 )
@@ -305,6 +334,16 @@ patch_margin_left = 11
 patch_margin_top = 11
 patch_margin_right = 11
 patch_margin_bottom = 11
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/LSS"]
+margin_left = 34.0
+margin_top = 1.0
+margin_right = 59.0
+margin_bottom = 27.0
+texture = ExtResource( 7 )
+expand = true
+script = ExtResource( 17 )
+offset = Vector2( -178, -2 )
 
 [node name="SavedLevels" type="Button" parent="MarginContainer/VBoxContainer"]
 margin_top = 116.0
@@ -355,6 +394,10 @@ theme_type_variation = "Red"
 text = "Exit"
 align = 2
 script = ExtResource( 4 )
+
+[node name="Countdown" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/Exit"]
+script = ExtResource( 16 )
+countdown_style = 2
 
 [node name="Shadow" type="NinePatchRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Exit"]
 modulate = Color( 1, 1, 1, 0.25098 )
@@ -434,6 +477,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Secret" type="Node" parent="LogoAnchor"]
+script = SubResource( 9 )
+show_node_path = NodePath("../Sprite")
+hide_node_path = NodePath("../Logo")
+
 [node name="Logo" type="Sprite" parent="LogoAnchor"]
 scale = Vector2( 0.175, 0.175 )
 texture = ExtResource( 1 )
@@ -450,11 +498,53 @@ scale = Vector2( 3.9, 3.9 )
 texture = ExtResource( 6 )
 centered = false
 
+[node name="Legacy" type="Label" parent="LogoAnchor/Logo"]
+margin_left = 937.143
+margin_top = 1211.43
+margin_right = 2089.14
+margin_bottom = 1467.43
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "LEGACY"
+
+[node name="Shadow" type="Label" parent="LogoAnchor/Logo/Legacy"]
+modulate = Color( 0, 0, 0, 0.25098 )
+show_behind_parent = true
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 1168.0
+margin_bottom = 272.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "LEGACY"
+
+[node name="Sprite" type="Sprite" parent="LogoAnchor"]
+visible = false
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 14 )
+centered = false
+offset = Vector2( 144, 64 )
+script = SubResource( 5 )
+power = 5.0
+speed = 1.0
+
+[node name="Mario" type="Sprite" parent="LogoAnchor/Sprite"]
+position = Vector2( 1276, 264 )
+rotation = 0.0863504
+scale = Vector2( 7, 7 )
+texture = ExtResource( 15 )
+
+[node name="Shadow" type="Sprite" parent="LogoAnchor/Sprite/Mario"]
+modulate = Color( 0, 0, 0, 0.25098 )
+show_behind_parent = true
+texture = ExtResource( 15 )
+offset = Vector2( 2, 3 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
 anims/transition = SubResource( 4 )
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/SavedLevels" to="." method="transition" binds= [ "LevelsList" ]]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Exit" to="ButtonFunctions" method="exit_game"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Exit/Countdown" to="ButtonFunctions" method="exit_game"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Options" to="." method="transition" binds= [ "Options" ]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Credits" to="." method="transition" binds= [ "Credits" ]]

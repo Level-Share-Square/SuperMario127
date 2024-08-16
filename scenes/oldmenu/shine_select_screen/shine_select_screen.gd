@@ -203,7 +203,7 @@ func move_shine_sprites() -> void:
 
 func update_labels() -> void:
 	# this will assume the selected shine and the selected level are valid
-	level_title.text = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level].level_name
+	level_title.text = Singleton.CurrentLevelData.level_info.level_name
 	level_title_backing.text = level_title.text
 	shine_title.text = shine_details[shine_details_indices[selected_shine_index]]["title"]
 	shine_description.text = shine_details[shine_details_indices[selected_shine_index]]["description"]
@@ -222,7 +222,7 @@ func start_level() -> void:
 	
 	get_tree().call_group("shine_sprites", "start_pressed_animation")
 
-	Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level].selected_shine = shine_details_indices[selected_shine_index]
+	Singleton.CurrentLevelData.level_info.selected_shine = shine_details_indices[selected_shine_index]
 	
 	# levels screen is supposed to set the CurrentLevelData before changing to the shine select screen
 	# so we'll assume it's safe to just go straight to the player scene 

@@ -350,15 +350,19 @@ func _process(delta : float) -> void:
 	if Singleton2.time > 0:
 		Singleton2.time -= 1
 	if Singleton2.time <= 0:
-		var level = Singleton.SavedLevels.levels
-		var level_info = level[Singleton.SavedLevels.selected_level]
+		var level_info = Singleton.CurrentLevelData.level_info
 		var time = round(Time.get_unix_time_from_system())
-		if Singleton.SavedLevels.selected_level != -1:
-			Singleton.SavedLevels.levels[Singleton.SavedLevels.selected_level] = LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data())
-			var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
-			
-			Singleton.SavedLevels.autosave_level_to_disk(LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()), "user://autosave/" + "main_" + str(level_info.level_name) + ".autosave")
-			Singleton.SavedLevels.autosave_level_to_disk(LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()), "user://autosave/" + str(level_info.level_name) + "_" + str(time) + ".autosave")
+		
+		# whoever coded this previously, u should know this was essentially making it
+		# turn the level data into a code four times over
+		var level_code: String = Singleton.CurrentLevelData.level_data.get_encoded_level_data()
+		var file_path: String = saved_levels_util.get_level_file_path(Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder)
+		
+		Singleton.CurrentLevelData.level_info = LevelInfo.new(level_code)
+		saved_levels_util.save_level_code_file(level_code, file_path)
+		
+		saved_levels_util.autosave_level_to_disk(level_code, "user://autosaves/" + "main_" + str(level_info.level_name) + ".autosave")
+		saved_levels_util.autosave_level_to_disk(level_code, "user://autosaves/" + str(level_info.level_name) + "_" + str(time) + ".autosave")
 		Singleton.CurrentLevelData.unsaved_editor_changes = false
 		
 		Singleton2.reset_time()

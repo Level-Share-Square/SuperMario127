@@ -26,7 +26,8 @@ func _ready():
 
 	if enabled:
 		if mode != 1:
-			print("jdwjk")
+			# ...who put this here?
+			#print("jdwjk")
 			area.connect("body_entered", self, "_body_entered")
 			area.connect("body_exited", self, "_body_exited")
 		if scale != Vector2.ONE: # Nothing to do on default scale

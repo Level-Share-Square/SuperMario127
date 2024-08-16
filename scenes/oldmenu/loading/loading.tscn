@@ -1,17 +1,18 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/oldmenu/loading/gradient.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://scenes/oldmenu/loading/Player.gd" type="Script" id=3]
-[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=4]
 [ext_resource path="res://scenes/oldmenu/loading/last_block.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/oldmenu/loading/loading.gd" type="Script" id=6]
 [ext_resource path="res://scenes/oldmenu/loading/block.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/oldmenu/loading/SkipLoading.gd" type="Script" id=8]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=9]
-[ext_resource path="res://assets/fonts/DelfinoFont.tres" type="DynamicFont" id=10]
-[ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=11]
-[ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=12]
+[ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=10]
+[ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=11]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=13]
 
 [sub_resource type="Gradient" id=7]
 offsets = PoolRealArray( 0.787709, 1 )
@@ -156,12 +157,6 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="DynamicFont" id=4]
-size = 20
-font_data = ExtResource( 4 )
-
-[sub_resource type="StyleBoxEmpty" id=11]
-
 [sub_resource type="Animation" id=5]
 resource_name = "FadeIn"
 length = 6.0
@@ -176,6 +171,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Foreground/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -219,7 +226,7 @@ tracks/2/keys = {
 } ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("SkipLoading:self_modulate")
+tracks/3/path = NodePath("SkipLoading:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -229,6 +236,30 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Foreground/ColorRect:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SkipLoading:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -264,6 +295,42 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Foreground/ColorRect:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Foreground/ColorRect:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SkipLoading:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -308,7 +375,7 @@ tracks/2/keys = {
 } ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("SkipLoading:self_modulate")
+tracks/3/path = NodePath("SkipLoading:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -318,6 +385,30 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Foreground/ColorRect:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("SkipLoading:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -342,31 +433,62 @@ tracks/1/keys = {
 "points": PoolRealArray( 379, -0.25, 0, 0.25, 0, 378, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.5 )
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("SkipLoading:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
-[node name="Loading" type="Node2D"]
-position = Vector2( 1, 0 )
+[node name="Loading" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 4 )
 script = ExtResource( 6 )
 
-[node name="Background" type="Control" parent="."]
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 12 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 13 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="Focus" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+script = ExtResource( 11 )
+default_focus_path = NodePath("../SkipLoading")
+
+[node name="Background" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="DarkRect" type="TextureRect" parent="Background"]
-margin_left = 771.0
-margin_top = -2.0
-margin_right = 1209.0
-margin_bottom = 773.0
+margin_left = 768.0
+margin_right = 1200.0
+margin_bottom = 768.0
 rect_rotation = 89.9991
 texture = SubResource( 8 )
 expand = true
 
 [node name="ColorRect" type="ColorRect" parent="Background"]
-margin_right = 768.0
-margin_bottom = 432.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="Background"]
-margin_right = 768.0
-margin_bottom = 432.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource( 1 )
 expand = true
 
@@ -391,17 +513,18 @@ frame = 1
 speed_scale = 1.25
 playing = true
 centered = false
+offset = Vector2( 0, -1 )
 
 [node name="Reflection" type="AnimatedSprite" parent="Sprites/Player"]
 modulate = Color( 1, 1, 1, 0.137255 )
 position = Vector2( 0, 80 )
 scale = Vector2( 1, -0.75 )
 frames = ExtResource( 2 )
-animation = "movingRight"
-frame = 1
+animation = "jumpRight"
 speed_scale = 1.25
 playing = true
 centered = false
+offset = Vector2( 0, -0.5 )
 
 [node name="Area2D" type="Area2D" parent="Sprites/Player"]
 visible = false
@@ -461,7 +584,6 @@ margin_right = 748.0
 margin_bottom = 44.0
 size_flags_vertical = 1
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 10 )
 text = "000/100"
 align = 2
 
@@ -471,7 +593,6 @@ margin_top = 2.0
 margin_right = 130.0
 margin_bottom = 26.0
 custom_colors/font_color = Color( 0, 0, 0, 0.156863 )
-custom_fonts/font = SubResource( 4 )
 text = "000/100"
 align = 2
 
@@ -482,7 +603,6 @@ margin_top = 20.0
 margin_right = 164.0
 margin_bottom = 44.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 10 )
 text = "Loading game..."
 
 [node name="Shadow" type="Label" parent="Text/Loading"]
@@ -491,45 +611,66 @@ margin_top = 2.0
 margin_right = 146.0
 margin_bottom = 26.0
 custom_colors/font_color = Color( 0, 0, 0, 0.156863 )
-custom_fonts/font = SubResource( 4 )
 text = "Loading game..."
-
-[node name="Foreground" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Foreground"]
-margin_right = 768.0
-margin_bottom = 432.0
 
 [node name="SkipLoading" type="Button" parent="."]
 margin_left = 783.0
 margin_top = 379.0
 margin_right = 879.0
-margin_bottom = 419.0
-custom_fonts/font = ExtResource( 10 )
-custom_styles/hover = ExtResource( 11 )
-custom_styles/pressed = ExtResource( 12 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/normal = ExtResource( 12 )
+margin_bottom = 411.0
+disabled = true
 text = "Skip"
 script = ExtResource( 8 )
+
+[node name="Shadow" type="NinePatchRect" parent="SkipLoading"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 10 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
 
 [node name="ResetMod" type="Button" parent="."]
 margin_left = 319.0
 margin_top = 20.0
 margin_right = 458.0
-margin_bottom = 60.0
-custom_fonts/font = ExtResource( 10 )
-custom_styles/hover = ExtResource( 11 )
-custom_styles/pressed = ExtResource( 12 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/normal = ExtResource( 12 )
+margin_bottom = 52.0
+rect_pivot_offset = Vector2( -700, 122 )
 text = "Reset Mod"
 script = ExtResource( 8 )
+
+[node name="Shadow" type="NinePatchRect" parent="ResetMod"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 10 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Foreground" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Foreground"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
@@ -537,7 +678,7 @@ volume_db = -9.0
 
 [node name="CoinSound2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
-volume_db = -19.0
+volume_db = -9.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FadeIn = SubResource( 5 )

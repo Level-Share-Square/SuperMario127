@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/actors/objects/shine/frames_outline.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://scenes/menu/levels_list/list_elements/time_score.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 17
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 4 )
+
+[node name="TimeScore" type="HBoxContainer"]
+margin_right = 426.0
+margin_bottom = 31.0
+custom_constants/separation = 4
+script = ExtResource( 5 )
+
+[node name="Sprite" type="Control" parent="."]
+margin_right = 27.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 27, 31 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Sprite"]
+frames = ExtResource( 2 )
+centered = false
+
+[node name="Outline" type="AnimatedSprite" parent="Sprite/AnimatedSprite"]
+frames = ExtResource( 3 )
+centered = false
+
+[node name="Title" type="Label" parent="."]
+margin_left = 31.0
+margin_top = 7.0
+margin_right = 355.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 324, 0 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "The Secret of the Mushroom Or Something Idk Lol Long Shine Sprite Title Lorem Ipsum"
+valign = 1
+clip_text = true
+
+[node name="Timescore" type="Label" parent="."]
+margin_left = 359.0
+margin_top = 5.0
+margin_right = 426.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 1 )
+text = "99:99.99"
+align = 2
+valign = 1

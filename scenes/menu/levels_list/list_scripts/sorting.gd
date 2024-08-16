@@ -29,7 +29,7 @@ func sort_cards(level_grid: GridContainer, element_type: String):
 
 func load_from_json(working_folder: String):
 	var file := File.new()
-	var err := file.open(working_folder + "/sort.json", File.READ)
+	var err: int = file.open(working_folder + "/sort.json", File.READ)
 	if err != OK: 
 		assert("File " + working_folder + "/sort.json" + " could not be loaded. Error code: " + str(err))
 		return
@@ -50,7 +50,7 @@ func save_to_json(working_folder: String, is_blank: bool = false):
 	
 	
 	var file := File.new()
-	var err := file.open(working_folder + "/sort.json", File.WRITE)
+	var err: int = file.open(working_folder + "/sort.json", File.WRITE)
 	if err != OK: 
 		assert("File " + working_folder + "/sort.json" + " could not be loaded. Error code: " + str(err))
 		return

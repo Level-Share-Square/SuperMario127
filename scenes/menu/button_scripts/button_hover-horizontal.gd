@@ -6,11 +6,12 @@ export var direction: int = -1
 
 var original_x: float
 var focused: bool
+var force_hover: bool
 
 func focus_entered(): focused = true
 func focus_exited(): focused = false
 
-func _init():
+func _ready():
 	original_x = rect_position.x
 	
 	#warning-ignore:return_value_discarded
@@ -24,7 +25,7 @@ func _process(delta):
 	if abs(last_x - rect_position.x) > sink_amount/2:
 		rect_position.x = last_x
 	
-	if is_hovered() or focused:
+	if is_hovered() or focused or force_hover:
 		rect_position.x = lerp(rect_position.x, original_x, delta * lerp_speed)
 	else:
 		rect_position.x = lerp(rect_position.x, original_x + (sink_amount * direction), delta * lerp_speed)

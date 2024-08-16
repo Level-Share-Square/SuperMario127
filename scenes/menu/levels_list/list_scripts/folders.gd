@@ -1,5 +1,7 @@
 extends Node
 
+signal folder_changed
+
 onready var list_handler = get_parent()
 onready var dir := Directory.new()
 
@@ -65,3 +67,5 @@ func load_folder(path: String):
 	sorting.load_from_json(path)
 	loader.start_level_loading(path)
 	list_handler.folder_buttons += sorting.sort.folders.size()
+	
+	emit_signal("folder_changed")

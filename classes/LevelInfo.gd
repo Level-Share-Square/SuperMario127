@@ -6,19 +6,21 @@ const EMPTY_TIME_SCORE = -1 # idea: what if level creators could manually set th
 const OBJECT_ID_SHINE = 2 
 const OBJECT_ID_STAR_COIN = 52
 
-const VERSION : String = "0.0.2"
+const VERSION : String = "0.0.3"
 
 # this class stores all the info and savedata relating to a level that can be played from the level list 
 
 var level_code : String # used for saving the level to disk
 
-# trying to recreate a C# property here basically
-# NOTE: ALWAYS call get_level_data() within LevelInfo.gd, Godot won't call the getter within the same script
-var level_data_value : LevelData 
-var level_data : LevelData setget set_level_data, get_level_data
+# i'm not quite sure what the idea was behind making it load
+# the level data twice, but i went and removed that
+var level_data : LevelData
 
 # level info
 var level_name : String = ""
+var level_author : String = ""
+var level_description : String = ""
+
 var spawn_area : int = 0
 var shine_details : Array = []
 var star_coin_details : Array = []
@@ -39,10 +41,7 @@ func _init(passed_level_code : String = "") -> void:
 		return
 
 	level_code = passed_level_code
-	level_data = LevelData.new()
-
-	level_data.load_in(level_code)
-
+	level_data = LevelData.new(level_code)
 	level_name = level_data.name
 
 	# loop through all objects in all areas to find the number of shines and star coins
@@ -80,18 +79,7 @@ func _init(passed_level_code : String = "") -> void:
 			shine_details.sort_custom(self, "shine_sort")
 			star_coin_details.sort()
 
-func set_level_data(new_value : LevelData):
-	level_data_value = new_value
-
-# lazy loading setup, this is why the property emulation is needed 
-# also can't just do level_data == null as it causes a recursive call of get_level_data()
-func get_level_data() -> LevelData:
-	if level_data_value == null:
-		level_data_value = LevelData.new()
-		level_data_value.load_in(level_code)
-	return level_data_value
-
-func reset_save_data() -> void:
+func reset_save_data(delete_file: bool = true) -> void:
 	for collected_shine in collected_shines:
 		collected_shines[collected_shine] = false
 	for collected_star_coin in collected_star_coins:
@@ -100,9 +88,39 @@ func reset_save_data() -> void:
 	coin_score = 0
 	for key in time_scores.keys():
 		time_scores[key] = EMPTY_TIME_SCORE
+	
+	if delete_file and saved_levels_util.file_exists(get_save_path()):
+		saved_levels_util.delete_file(get_save_path())
+	#var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
 
-	var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
 
+### new functions designed to save separately to the level code
+func get_save_path() -> String:
+	return saved_levels_util.get_level_save_path(Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder)
+
+func get_save_file_dictionary() -> Dictionary:
+	var save_dictionary : Dictionary = \
+	{
+		"VERSION": VERSION,
+		"spawn_area": spawn_area,
+		"shine_details": shine_details,
+		"star_coin_details": star_coin_details,
+
+		"collected_shines": collected_shines,
+		"collected_star_coins": collected_star_coins,
+		"coin_score": coin_score,
+		"time_scores": time_scores,
+		"activated_fludds": activated_fludds
+	}
+	return save_dictionary
+
+func load_save_from_dictionary(save_dictionary: Dictionary):
+	match save_dictionary["VERSION"]:
+		"0.0.3":
+			load_save_0_0_3(save_dictionary)
+
+
+### DEPRECATED ###################################
 func get_saveable_dictionary() -> Dictionary:
 	# add saving shine details and star coin details
 	var save_dictionary : Dictionary = \
@@ -128,6 +146,7 @@ func load_from_dictionary(save_dictionary : Dictionary) -> void:
 			load_level_0_0_1(save_dictionary)
 		"0.0.2":
 			load_level_0_0_2(save_dictionary)
+###################################################
 
 static func shine_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
 	return item1["sort_order"] < item2["sort_order"]
@@ -135,17 +154,17 @@ static func shine_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
 func set_shine_collected(shine_id : int, save_to_disk : bool = true) -> void:
 	collected_shines[str(shine_id)] = true
 	if save_to_disk:
-		var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
+		saved_levels_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
 
 func set_star_coin_collected(star_coin_id : int, save_to_disk : bool = true) -> void:
 	collected_star_coins[str(star_coin_id)] = true
 	if save_to_disk:
-		var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
+		saved_levels_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
 
 func set_fludd_activated(fludd_id : int, save_to_disk : bool = true) -> void:
 	activated_fludds[fludd_id] = true
 	if save_to_disk:
-		var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
+		saved_levels_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
 
 func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
 	var new_coin_score = Singleton.CurrentLevelData.level_data.vars.coins_collected
@@ -158,28 +177,56 @@ func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
 		time_scores[str(shine_id)] = new_time_score
 		Singleton2.save_ghost = true
 	if save_to_disk:
-		var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
+		saved_levels_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
 
 func get_level_background_texture() -> StreamTexture:
-	var temp = get_level_data()
-	var level_background = get_level_data().areas[spawn_area].settings.sky 
+	var level_background = level_data.areas[spawn_area].settings.sky 
 	var background_resource = Singleton.CurrentLevelData.background_cache[level_background]
 	return background_resource.texture
 	
 func get_level_background_modulate() -> Color:
-	var level_background = get_level_data().areas[spawn_area].settings.sky
+	var level_background = level_data.areas[spawn_area].settings.sky
 	var background_resource = Singleton.CurrentLevelData.background_cache[level_background]
 	return background_resource.parallax_modulate
 
 func get_level_foreground_texture() -> StreamTexture:
-	var level_foreground = get_level_data().areas[spawn_area].settings.background
+	var level_foreground = level_data.areas[spawn_area].settings.background
 	var foreground_resource = Singleton.CurrentLevelData.foreground_cache[level_foreground]
-	var palette = get_level_data().areas[spawn_area].settings.background_palette
+	var palette = level_data.areas[spawn_area].settings.background_palette
 	
 	if palette == 0:
 		return foreground_resource.preview
 	else:
 		return foreground_resource.palettes[palette - 1]
+
+func get_collectible_counts() -> Dictionary:
+	var dict = {
+		"total_shines": 0,
+		"collected_shines": 0,
+		
+		"total_star_coins": 0,
+		"collected_star_coins": 0,
+		
+		"total_collectibles": 0,
+		"total_collected": 0,
+	}
+	# Only count shine sprites that have show_in_menu on
+	for details in shine_details:
+		dict["total_shines"] += 1
+		if collected_shines[str(details["id"])]:
+			dict["collected_shines"] += 1
+	dict["total_star_coins"] = collected_star_coins.size()
+	dict["collected_star_coins"] = collected_star_coins.values().count(true)
+	
+	dict["total_collectibles"] = dict["total_shines"] + dict["total_star_coins"]
+	dict["total_collected"] = dict["collected_shines"] + dict["collected_star_coins"]
+	
+	return dict
+
+# have you collected all shine sprites and star coins in the level?
+func is_fully_completed() -> bool:
+	var collectible_counts = get_collectible_counts()
+	return collectible_counts["total_collected"] >= collectible_counts["total_collectibles"]
 
 static func generate_time_string(time : float) -> String:
 	# converting to int to use modulo, then doing abs to avoid problems with negative results, then back to int because that's the type
@@ -211,3 +258,14 @@ func load_level_0_0_2(save_dictionary : Dictionary):
 	star_coin_details = save_dictionary["star_coin_details"]
 	activated_fludds = save_dictionary["activated_fludds"]
 
+
+func load_save_0_0_3(save_dictionary: Dictionary):
+	collected_shines = save_dictionary["collected_shines"]
+	collected_star_coins = save_dictionary["collected_star_coins"]
+	coin_score = save_dictionary["coin_score"]
+	time_scores = save_dictionary["time_scores"]
+
+	spawn_area = save_dictionary["spawn_area"]
+	shine_details = save_dictionary["shine_details"] 
+	star_coin_details = save_dictionary["star_coin_details"]
+	activated_fludds = save_dictionary["activated_fludds"]

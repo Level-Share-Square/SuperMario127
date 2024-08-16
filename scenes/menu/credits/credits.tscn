@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=2]
 [ext_resource path="res://scenes/menu/credits/button_functions.gd" type="Script" id=3]
-[ext_resource path="res://scenes/menu/button_scripts/button_hover-sink.gd" type="Script" id=4]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=4]
 [ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=7]
@@ -211,11 +211,13 @@ default_focus_path = NodePath("../MarginContainer/VBoxContainer/Speed")
 unique_name_in_owner = true
 stream = ExtResource( 6 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource( 5 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color( 1, 1, 1, 0 )

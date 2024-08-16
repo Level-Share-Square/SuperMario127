@@ -1,6 +1,4 @@
-extends Button
-
-
+extends "res://scenes/menu/button_scripts/button_hover-vertical.gd"
 
 func _ready():
 	connect("pressed", self, "_button_pressed")

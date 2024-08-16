@@ -7,8 +7,10 @@ var functions = {}
 var global_vars_node = null
 var vars : LevelVars
 
-func _init():
-	pass
+func _init(code: String = ""):
+	if code == "":
+		code = saved_levels_util.load_level_code_file("res://level/default_level.tres")
+	load_in(code)
 #	var ready_function_struct = FunctionStruct.new()
 	
 #	functions.size_ready_function = ready_function_struct

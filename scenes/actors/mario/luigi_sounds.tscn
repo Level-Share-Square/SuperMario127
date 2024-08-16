@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -47,6 +47,7 @@
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/Lava1.wav" type="AudioStream" id=45]
 [ext_resource path="res://classes/BusGroup.gd" type="Script" id=46]
 [ext_resource path="res://classes/SoundGroup.gd" type="Script" id=47]
+[ext_resource path="res://scenes/actors/mario/sounds_misc/footsteps/CLANG.wav" type="AudioStream" id=48]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 2 )
@@ -215,6 +216,13 @@ volume_db = -2.5
 [node name="Step2" type="AudioStreamPlayer" parent="Footsteps/Default"]
 stream = ExtResource( 30 )
 volume_db = -2.5
+
+[node name="Metal" type="Node" parent="Footsteps"]
+script = ExtResource( 47 )
+
+[node name="Step1" type="AudioStreamPlayer" parent="Footsteps/Metal"]
+stream = ExtResource( 48 )
+volume_db = -7.0
 
 [node name="OtherSounds" type="Node" parent="."]
 

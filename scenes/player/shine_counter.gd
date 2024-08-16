@@ -15,7 +15,7 @@ func _physics_process(delta):
 	populate_info_panel()
 	label_shadow.text = label.text
 func populate_info_panel() -> void:
-		var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+		var level_info = Singleton.CurrentLevelData.level_info
 
 		# Only count shine sprites that have show_in_menu on
 		var total_shine_count := 0

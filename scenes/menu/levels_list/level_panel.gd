@@ -1,27 +1,48 @@
 extends Control
 
+const TIME_SCORE_SCENE: PackedScene = preload("res://scenes/menu/levels_list/list_elements/time_score.tscn")
+
 export var list_handler_path: NodePath
 onready var list_handler: Node = get_node(list_handler_path)
+
+var working_folder: String
 var level_id: String
 
+var level_info: LevelInfo
+
+### tabs
+onready var info_tab: Control = $InfoTab
+onready var scores_tab: Control = $ScoresTab
+
+onready var view_button = $Buttons/ViewTab
+export var view_scores_text: String
+export var view_info_text: String
+
 ### info
-onready var title := $Info/Title
-onready var title_shadow := $Info/Title/Shadow
+onready var title := $InfoTab/Info/Title
+onready var title_shadow := $InfoTab/Info/Title/Shadow
 
 export var author_prefix: String = "by "
-onready var author := $Info/Author
+onready var author := $InfoTab/Info/Author
 
-onready var description := $Panel/MarginContainer/Description
+onready var description := $InfoTab/Panel/MarginContainer/Description
 
+onready var thumbnail := $InfoTab/Thumbnail
+onready var foreground := $InfoTab/Thumbnail/Foreground
 
-onready var shine_label := $Info/Shines/Label
-onready var star_coin_label := $Info/StarCoins/Label
+onready var shine_label := $InfoTab/Info/Shines/Label
+onready var star_coin_label := $InfoTab/Info/StarCoins/Label
 
-export var completion_color: Color = Color("e9adff")
-onready var percentage_label := $Info/Completion/Percentage
+export var completion_color: Color = Color("ffffc4")
+onready var percentage_label := $InfoTab/Info/Completion/Percentage
 
-func load_level_info(level_info: LevelInfo, _level_id: String):
+### time scores
+onready var time_scores_container: VBoxContainer = $ScoresTab/Panel/ScrollContainer/MarginContainer/VBoxContainer
+
+func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder: String):
+	level_info = _level_info
 	level_id = _level_id
+	working_folder = _working_folder
 	
 	title.text = level_info.level_name
 	title_shadow.text = title.text
@@ -29,24 +50,38 @@ func load_level_info(level_info: LevelInfo, _level_id: String):
 	author.text = author_prefix + level_info.level_author
 	description.bbcode_text = level_info.level_description
 	
+	# thumbnail
+	thumbnail.texture = level_info.get_level_background_texture()
+	
+	foreground.visible = true
+	foreground.modulate = level_info.get_level_background_modulate()
+	foreground.texture = level_info.get_level_foreground_texture()
 	
 	
-	var shine_amount: int = level_info.shine_details.size()
-	var star_coin_amount: int = level_info.star_coin_details.size()
+	# load save file
+	var save_path: String = saved_levels_util.get_level_save_path(level_id, working_folder)
+	if saved_levels_util.file_exists(save_path):
+		level_info.load_save_from_dictionary(saved_levels_util.load_level_save_file(save_path))
+	load_time_scores()
 	
-	var shine_collected_amount: int = level_info.collected_shines.size()
-	var star_coin_collected_amount: int = level_info.collected_star_coins.size()
+	var collectible_counts = level_info.get_collectible_counts()
 	
-	shine_label.text = str(shine_collected_amount) + "/" + str(shine_amount)
-	shine_label.modulate = completion_color if (shine_collected_amount >= shine_amount) else Color.white
-	star_coin_label.text = str(star_coin_collected_amount) + "/" + str(star_coin_amount)
-	star_coin_label.modulate = completion_color if (star_coin_collected_amount >= star_coin_amount) else Color.white
+	var total_shine_count: int = collectible_counts["total_shines"]
+	var collected_shine_count: int = collectible_counts["collected_shines"]
 	
+	shine_label.text = str(collected_shine_count) + "/" + str(total_shine_count)
+	shine_label.modulate = completion_color if (collected_shine_count >= total_shine_count) else Color.white
+	
+	var total_star_coin_count: int = collectible_counts["total_star_coins"]
+	var collected_star_coin_count: int = collectible_counts["collected_star_coins"]
+	
+	star_coin_label.text = str(collected_star_coin_count) + "/" + str(total_star_coin_count)
+	star_coin_label.modulate = completion_color if (collected_star_coin_count >= total_star_coin_count) else Color.white
 	
 	
 	# these are floats cuz they need to be divided for some calculations :)
-	var total_collectibles: float = shine_amount + star_coin_amount
-	var total_collected: float = shine_collected_amount + star_coin_collected_amount
+	var total_collectibles: float = collectible_counts["total_collectibles"]
+	var total_collected: float = collectible_counts["total_collected"]
 	if total_collectibles <= 0: 
 		percentage_label.text = "100%"
 		percentage_label.modulate = completion_color
@@ -56,5 +91,52 @@ func load_level_info(level_info: LevelInfo, _level_id: String):
 	percentage_label.modulate = completion_color if (completion_percent >= 100) else Color.white
 	percentage_label.text = str(completion_percent) + "%"
 
+func load_time_scores():
+	for child in time_scores_container.get_children():
+		# go, my children, be free
+		child.queue_free()
+	
+	var time_scores = level_info.time_scores.values()
+	var shine_details_sorted = ([] + level_info.shine_details)
+	shine_details_sorted.sort_custom(LevelInfo, "shine_sort")
+	
+	for shine_detail in shine_details_sorted:
+		var time_score = time_scores[
+			shine_detail.id if (shine_detail.id < time_scores.size()) else (time_scores.size() - 1)
+		]
+		
+		var time_score_node = TIME_SCORE_SCENE.instance()
+		time_score_node.shine_detail = shine_detail
+		time_score_node.time_score = time_score
+		time_scores_container.add_child(time_score_node)
+
+## button functions
+
+func play_level():
+	start_level(false)
+
+func edit_level():
+	# it's probably better that save data from playing
+	# doesn't leak into the editor (the file is left intact)
+	level_info.reset_save_data(false)
+	start_level(true)
+
+func copy_code():
+	OS.clipboard = str(level_info.level_code)
+
+func view_scores():
+	var switch_to_scores: bool = (view_button.text == view_scores_text)
+	
+	view_button.text = view_info_text if switch_to_scores else view_scores_text
+	info_tab.visible = !switch_to_scores
+	scores_tab.visible = switch_to_scores
+
+func reset_save():
+	level_info.reset_save_data()
+
 func delete_level():
 	list_handler.remove_level(level_id)
+
+
+func start_level(start_in_edit_mode : bool):
+	Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, start_in_edit_mode, true)

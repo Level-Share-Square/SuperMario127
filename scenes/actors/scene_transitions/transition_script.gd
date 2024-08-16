@@ -86,10 +86,8 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 		canvas_mask.position = Vector2(384, 216) # Reset it, in case a script has modified it before playing the animation
 
 	if stop_temp_music:
+		Singleton.Music.stop_temporary_music()
 		Singleton.Music.reset_music()
-		if !Singleton.Music.muted:
-			yield(get_tree().create_timer(0.1), "timeout")
-			Singleton.Music.volume_db = 0
 
 func play_transition_audio():
 	transition_audio.play()

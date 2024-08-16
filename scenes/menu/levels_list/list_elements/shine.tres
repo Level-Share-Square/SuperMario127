@@ -1,0 +1,39 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=16]
+code = "shader_type canvas_item;
+
+// --- Includes --- //
+//#include \"res://shaders/includes/generic_functions.gdshaderinc\"
+
+// --- Uniforms --- //
+uniform vec4 shine_color: hint_color = vec4(1.0, 1.0, 1.0, 0.25);
+
+uniform float line_width: hint_range(0.0, 2.0, 0.01) = 0.1;
+uniform float angle: hint_range(0.0, 6.28318530718, 0.1308996939) = 0.785398163397;
+
+uniform float speed: hint_range(0.0, 10.0, 0.1) = 1.0;
+uniform float wait_cycles: hint_range(0.0, 10.0, 0.1) = 1.0;
+
+// --- Functions --- //
+vec2 rotate_precalculated(vec2 _pos, float _sine, float _cosine) {
+	return vec2(_pos.x * _cosine + _pos.y * -_sine, _pos.x * _sine + _pos.y * _cosine);
+}
+
+void fragment() {
+	float sine = sin(angle);
+	float cosine = cos(angle);
+	float len = 1.5 - max(abs(sine), abs(cosine)) + line_width;
+	float line = smoothstep(-line_width, line_width, 
+			rotate_precalculated((UV - vec2(0.5)), sine, cosine).y - mod(TIME * speed, (len * 2.0) * wait_cycles) + len);
+	COLOR.rgb += shine_color.rgb * shine_color.a * COLOR.a * vec3(line * (1.0 - line) * 4.0);
+}
+"
+
+[resource]
+shader = SubResource( 16 )
+shader_param/shine_color = Color( 1, 1, 1, 1 )
+shader_param/line_width = 0.1
+shader_param/angle = 0.785398
+shader_param/speed = 1.0
+shader_param/wait_cycles = 1.0

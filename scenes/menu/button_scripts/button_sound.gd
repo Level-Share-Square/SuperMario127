@@ -23,7 +23,6 @@ func on_mouse_exited() -> void:
 
 func on_focus_entered() -> void:
 	hover_sound.play()
-	hover_sound.play()
 
 func on_pressed() -> void:
 	click_sound.play()

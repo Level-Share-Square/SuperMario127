@@ -17,22 +17,22 @@ static func get_data_or_null():
 static func load():
 	var data = get_data_or_null()
 	if data != null:
-		Engine.target_fps = 10 * (data["fpsLock"] + 3)
-		if data.has("richpresence"):
-			Singleton2.rp = data["richpresence"]
-		if data.has("darkmode"):
-			Singleton2.dark_mode = data["darkmode"]
-		if data.has("crashdetect"):
-			Singleton2.crash = data["crashdetect"]
-		if data.has("showghost"):
-			Singleton2.ghost_enabled = data["showghost"]
-		if data.has("showTimer"):
-			Singleton.TimeScore.shown = data["showTimer"]
+#		Engine.target_fps = 10 * (data["fpsLock"] + 3)
+#		if data.has("richpresence"):
+#			Singleton2.rp = data["richpresence"]
+#		if data.has("darkmode"):
+#			Singleton2.dark_mode = data["darkmode"]
+#		if data.has("crashdetect"):
+#			Singleton2.crash = data["crashdetect"]
+#		if data.has("showghost"):
+#			Singleton2.ghost_enabled = data["showghost"]
+#		if data.has("showTimer"):
+#			Singleton.TimeScore.shown = data["showTimer"]
 		#if data.has("volume"):
 			#Singleton.Music.set_global_volume(data["volume"])
-		if data.has("legacyWingCap"):
+		#if data.has("legacyWingCap"):
 			# imo this is cleaner than putting it in presets atm
-			Singleton.PlayerSettings.legacy_wing_cap = data["legacyWingCap"]
+			#Singleton.PlayerSettings.legacy_wing_cap = data["legacyWingCap"]
 		if data.has("gameVersion"):
 			if data["gameVersion"] != Singleton.PlayerSettings.game_version:
 				Singleton.SavedLevels.wipe_template_levels()
@@ -49,10 +49,10 @@ static func load():
 		if data.has("savedPalettes"):
 			Singleton.EditorSavedSettings.tileset_palettes = data["savedPalettes"]
 	
-		yield(Singleton.EditorSavedSettings.get_tree().create_timer(1), "timeout")
-		
-		if data.has("windowScale"):
-			ScreenSizeUtil.set_screen_size(data["windowScale"])
+#		yield(Singleton.EditorSavedSettings.get_tree().create_timer(1), "timeout")
+
+#		if data.has("windowScale"):
+#			ScreenSizeUtil.set_screen_size(data["windowScale"])
 
 static func save():
 	var windowScale = Singleton.EditorSavedSettings.stored_window_scale

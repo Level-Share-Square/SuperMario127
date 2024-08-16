@@ -71,7 +71,7 @@ func _ready() -> void:
 	if destination_tag != "default_teleporter" || destination_tag != null:
 		append_tag = destination_tag.to_lower()
 	Singleton.CurrentLevelData.level_data.vars.teleporters.append([append_tag, self])
-	current_level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+	current_level_info = Singleton.CurrentLevelData.level_info
 	match(collectible):
 		"shines":
 			collectible_dictionary = current_level_info.collected_shines

@@ -11,7 +11,7 @@ font_data = ExtResource( 4 )
 
 [node name="CanvasLayer" type="CanvasLayer"]
 pause_mode = 2
-layer = 20
+layer = 63
 script = ExtResource( 3 )
 
 [node name="TimeScore" type="Label" parent="."]

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=48 format=2]
+[gd_resource type="Theme" load_steps=57 format=2]
 
 [ext_resource path="res://assets/fonts/coolfont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/options/buttons/grabber_highlight.png" type="Texture" id=2]
@@ -59,6 +59,59 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+shadow_color = Color( 0, 0, 0, 0.25098 )
+shadow_size = 2
+shadow_offset = Vector2( 6, 6 )
+
+[sub_resource type="StyleBoxEmpty" id=60]
+
+[sub_resource type="StyleBoxFlat" id=61]
+bg_color = Color( 0.72549, 0.145098, 0.145098, 0.815686 )
+skew = Vector2( 0.5, 0 )
+border_width_left = 6
+border_width_right = 6
+border_color = Color( 0.321569, 0.0509804, 0.176471, 0.501961 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+shadow_color = Color( 0, 0, 0, 0.25098 )
+shadow_size = 2
+shadow_offset = Vector2( 6, 6 )
+
+[sub_resource type="StyleBoxFlat" id=62]
+bg_color = Color( 0.72549, 0.145098, 0.145098, 0.941176 )
+skew = Vector2( 0.5, 0 )
+border_width_left = 6
+border_width_right = 6
+border_color = Color( 0.321569, 0.0509804, 0.176471, 0.501961 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+shadow_color = Color( 0, 0, 0, 0.25098 )
+shadow_size = 2
+shadow_offset = Vector2( 6, 6 )
+
+[sub_resource type="StyleBoxFlat" id=63]
+bg_color = Color( 0.72549, 0.145098, 0.145098, 0.690196 )
+skew = Vector2( 0.5, 0 )
+border_width_left = 6
+border_width_right = 6
+border_color = Color( 0.321569, 0.0509804, 0.176471, 0.501961 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_right = 2.0
 shadow_color = Color( 0, 0, 0, 0.25098 )
 shadow_size = 2
 shadow_offset = Vector2( 6, 6 )
@@ -178,10 +231,27 @@ use_filter = true
 extra_spacing_char = -1
 font_data = ExtResource( 4 )
 
+[sub_resource type="StyleBoxFlat" id=56]
+bg_color = Color( 0.639216, 0.639216, 0.639216, 0.941176 )
+skew = Vector2( 0.5, 0 )
+border_width_left = 6
+border_width_right = 6
+border_color = Color( 0.294118, 0.294118, 0.294118, 0.501961 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+shadow_color = Color( 0, 0, 0, 0.25098 )
+shadow_size = 2
+shadow_offset = Vector2( 6, 6 )
+
 [sub_resource type="StyleBoxEmpty" id=29]
 
 [sub_resource type="StyleBoxFlat" id=54]
-bg_color = Color( 1, 1, 1, 0.815686 )
+bg_color = Color( 0.94902, 0.952941, 0.968627, 1 )
 skew = Vector2( 0.5, 0 )
 border_width_left = 6
 border_width_right = 6
@@ -198,11 +268,77 @@ shadow_size = 2
 shadow_offset = Vector2( 6, 6 )
 
 [sub_resource type="StyleBoxFlat" id=55]
-bg_color = Color( 1, 1, 1, 0.690196 )
+bg_color = Color( 0.9025, 0.908833, 0.95, 1 )
 skew = Vector2( 0.5, 0 )
 border_width_left = 6
 border_width_right = 6
 border_color = Color( 0.709804, 0.752941, 1, 0.501961 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color( 0, 0, 0, 0.25098 )
+shadow_size = 2
+shadow_offset = Vector2( 6, 6 )
+
+[sub_resource type="StyleBoxFlat" id=64]
+bg_color = Color( 0.31, 0.0279, 0.0279, 1 )
+skew = Vector2( 0.5, 0 )
+border_width_left = 6
+border_width_right = 6
+border_color = Color( 0.14, 0.0462, 0.07434, 1 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+shadow_color = Color( 0, 0, 0, 0.25098 )
+shadow_size = 2
+shadow_offset = Vector2( 6, 6 )
+
+[sub_resource type="StyleBoxFlat" id=57]
+bg_color = Color( 0.66, 0.099, 0.099, 1 )
+skew = Vector2( 0.5, 0 )
+border_width_left = 6
+border_width_right = 6
+border_color = Color( 0.462745, 0.113725, 0.219608, 1 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+shadow_color = Color( 0, 0, 0, 0.25098 )
+shadow_size = 2
+shadow_offset = Vector2( 6, 6 )
+
+[sub_resource type="StyleBoxFlat" id=58]
+bg_color = Color( 0.690196, 0.101961, 0.101961, 1 )
+skew = Vector2( 0.5, 0 )
+border_width_left = 6
+border_width_right = 6
+border_color = Color( 0.462745, 0.113725, 0.219608, 1 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+shadow_color = Color( 0, 0, 0, 0.25098 )
+shadow_size = 2
+shadow_offset = Vector2( 6, 6 )
+
+[sub_resource type="StyleBoxFlat" id=59]
+bg_color = Color( 0.65, 0.0975, 0.0975, 1 )
+skew = Vector2( 0.5, 0 )
+border_width_left = 6
+border_width_right = 6
+border_color = Color( 0.462745, 0.113725, 0.219608, 1 )
 border_blend = true
 corner_radius_top_left = 4
 corner_radius_top_right = 4
@@ -366,16 +502,30 @@ corner_radius_bottom_left = 6
 [resource]
 default_font = ExtResource( 1 )
 AlternateButton/base_type = "Button"
-AlternateButton/colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+AlternateButton/colors/font_color = Color( 0.0431373, 0.290196, 0.427451, 1 )
 AlternateButton/colors/font_color_disabled = Color( 0.109804, 0.109804, 0.109804, 1 )
-AlternateButton/colors/font_color_focus = Color( 0, 0.0431373, 0.313726, 1 )
-AlternateButton/colors/font_color_hover = Color( 0, 0.0431373, 0.313726, 1 )
-AlternateButton/colors/font_color_pressed = Color( 0, 0.0431373, 0.313726, 1 )
+AlternateButton/colors/font_color_focus = Color( 0.0431373, 0.290196, 0.427451, 1 )
+AlternateButton/colors/font_color_hover = Color( 0.0431373, 0.290196, 0.427451, 1 )
+AlternateButton/colors/font_color_pressed = Color( 0.0431373, 0.290196, 0.427451, 1 )
 AlternateButton/fonts/font = SubResource( 11 )
 AlternateButton/styles/focus = SubResource( 50 )
 AlternateButton/styles/hover = SubResource( 51 )
 AlternateButton/styles/normal = SubResource( 25 )
 AlternateButton/styles/pressed = SubResource( 52 )
+AlternateButtonRed/base_type = "Button"
+AlternateButtonRed/colors/font_color = Color( 1, 1, 1, 1 )
+AlternateButtonRed/colors/font_color_focus = Color( 1, 1, 1, 1 )
+AlternateButtonRed/colors/font_color_hover = Color( 1, 1, 1, 1 )
+AlternateButtonRed/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+AlternateButtonRed/fonts/font = SubResource( 11 )
+AlternateButtonRed/styles/focus = SubResource( 60 )
+AlternateButtonRed/styles/hover = SubResource( 61 )
+AlternateButtonRed/styles/normal = SubResource( 62 )
+AlternateButtonRed/styles/pressed = SubResource( 63 )
+Button/colors/font_color = Color( 1, 1, 1, 1 )
+Button/colors/font_color_focus = Color( 1, 1, 1, 1 )
+Button/colors/font_color_hover = Color( 1, 1, 1, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 Button/styles/disabled = SubResource( 9 )
 Button/styles/focus = SubResource( 30 )
 Button/styles/hover = SubResource( 7 )
@@ -398,14 +548,37 @@ OptionsPanel/base_type = "Panel"
 OptionsPanel/styles/panel = SubResource( 25 )
 OptionsToggle/base_type = "Button"
 OptionsToggle/colors/font_color = Color( 0.0431373, 0.290196, 0.427451, 1 )
+OptionsToggle/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 OptionsToggle/colors/font_color_focus = Color( 0.0431373, 0.290196, 0.427451, 1 )
 OptionsToggle/colors/font_color_hover = Color( 0.0431373, 0.290196, 0.427451, 1 )
 OptionsToggle/colors/font_color_pressed = Color( 0.0431373, 0.290196, 0.427451, 1 )
 OptionsToggle/fonts/font = SubResource( 26 )
+OptionsToggle/styles/disabled = SubResource( 56 )
 OptionsToggle/styles/focus = SubResource( 29 )
 OptionsToggle/styles/hover = SubResource( 54 )
 OptionsToggle/styles/normal = SubResource( 25 )
 OptionsToggle/styles/pressed = SubResource( 55 )
+OptionsToggleRed/base_type = "Button"
+OptionsToggleRed/colors/font_color = Color( 1, 1, 1, 1 )
+OptionsToggleRed/colors/font_color_focus = Color( 1, 1, 1, 1 )
+OptionsToggleRed/colors/font_color_hover = Color( 1, 1, 1, 1 )
+OptionsToggleRed/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+OptionsToggleRed/fonts/font = SubResource( 26 )
+OptionsToggleRed/styles/disabled = SubResource( 64 )
+OptionsToggleRed/styles/focus = SubResource( 29 )
+OptionsToggleRed/styles/hover = SubResource( 57 )
+OptionsToggleRed/styles/normal = SubResource( 58 )
+OptionsToggleRed/styles/pressed = SubResource( 59 )
+OptionsToggleSelect/base_type = "Button"
+OptionsToggleSelect/colors/font_color = Color( 0.545098, 0.278431, 0.6, 1 )
+OptionsToggleSelect/colors/font_color_focus = Color( 0.545098, 0.278431, 0.6, 1 )
+OptionsToggleSelect/colors/font_color_hover = Color( 0.545098, 0.278431, 0.6, 1 )
+OptionsToggleSelect/colors/font_color_pressed = Color( 0.545098, 0.278431, 0.6, 1 )
+OptionsToggleSelect/fonts/font = SubResource( 26 )
+OptionsToggleSelect/styles/focus = SubResource( 29 )
+OptionsToggleSelect/styles/hover = SubResource( 54 )
+OptionsToggleSelect/styles/normal = SubResource( 25 )
+OptionsToggleSelect/styles/pressed = SubResource( 55 )
 Panel/styles/panel = SubResource( 43 )
 Red/base_type = "Button"
 Red/styles/disabled = SubResource( 15 )

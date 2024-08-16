@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=1]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scenes/menu/options/buttons/boolean_option.gd" type="Script" id=3]
 
@@ -33,6 +33,7 @@ margin_bottom = 40.0
 theme_type_variation = "OptionsToggle"
 text = "Off"
 script = ExtResource( 1 )
+extend_amount = 2
 
 [connection signal="renamed" from="." to="." method="renamed"]
 [connection signal="pressed" from="Button" to="." method="pressed"]
