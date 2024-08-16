@@ -21,7 +21,19 @@ func _set_property_values():
 	set_property("offset", offset)
 	set_property("horizontal", horizontal)
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.is_pressed() and hovered:
+		if event.button_index == 4: # Mouse wheel up
+			offset -= 1
+			set_property("offset", offset)
+		elif event.button_index == 5: # Mouse wheel down
+			offset += 1
+			set_property("offset", offset)
+
 func _ready():
+	use_area.connect("mouse_entered", self, "_on_UseArea_mouse_entered")
+	use_area.connect("mouse_exited", self, "_on_UseArea_mouse_exited")
+	
 	connect("property_changed", self, "_on_property_changed")
 	if enabled:
 		var _connect = use_area.connect("body_entered", self, "set_liquid_level")
