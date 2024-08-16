@@ -216,7 +216,7 @@ func pipe_exit_anim_finished(character : Character):
 	Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
 	Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
 	entering = false
-	#Why was the line bellow even commented????
+	#Why was the line below even commented???? (it was 'bellow' before)
 	character.toggle_movement(true)
 	# undo collision changes 
 	stored_characters[character.player_id] = null
