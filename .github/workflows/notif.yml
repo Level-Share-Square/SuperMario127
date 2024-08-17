@@ -10,7 +10,7 @@ jobs:
     name: Send Notification
     steps:
       - name: Send Notification
-        uses: Retr0-01/better-discord-notification@main
+        uses: level-share-square/supermario127@master
         with:
           webhook-url: ${{ secrets.WEBHOOK_LINK }}
           embed-color: '9498256'
