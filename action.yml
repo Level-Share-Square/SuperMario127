@@ -29,9 +29,11 @@ runs:
         COMMIT_IDS="${{ join(github.event.commits.*.id, 'ƪ') }}"
         COMMIT_MESSAGES="${{ join(github.event.commits.*.message, 'ƪ') }}"
         COMMIT_LINKS="${{ join(github.event.commits.*.url, 'ƪ') }}"
+        COMMIT_AUTHORS="${{ join(github.event.commits.*.author.username, 'ƪ') }}"
         
         IFS='ƪ' read -r -a COMMITS_ARRAY <<< "$COMMIT_IDS"
         IFS='ƪ' read -r -a LINKS_ARRAY <<< "$COMMIT_LINKS"
+        IFS='ƪ' read -r -a AUTHORS_ARRAY <<< "$COMMIT_AUTHORS"
         COMMITS_COUNT="${#COMMITS_ARRAY[@]}"
 
         echo "$COMMIT_MESSAGES_WITH_SECTION"
@@ -42,6 +44,7 @@ runs:
         for i in "${!COMMITS_ARRAY[@]}"; do
           TRUNCATED_ID="${COMMITS_ARRAY[$i]:0:7}"
           LINK="${LINKS_ARRAY[$i]}"
+          AUTHOR="${AUTHORS_ARRAY[$i]}"
           MESSAGE="$(echo "$COMMIT_MESSAGES" | awk -v FS='ƪ' -v n=$i '{print $n}')"
 
           # Commit title is first line. commit description is everything else starting from line 3.
@@ -63,6 +66,7 @@ runs:
           echo "Commit Description: $COMMIT_DESCRIPTION"
 
           # Format commit info
+          FORMATTED_COMMITS+="-# $AUTHOR\n"
           FORMATTED_COMMITS+="$EMOJI_STRING"
           FORMATTED_COMMITS+="**[\`${TRUNCATED_ID}\`](${LINK})・${COMMIT_TITLE}**"
           FORMATTED_COMMITS+="\n"
