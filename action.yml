@@ -47,6 +47,13 @@ runs:
           # Commit title is first line. commit description is everything else starting from line 3.
           COMMIT_TITLE=$(echo "$MESSAGE" | awk 'NR==1 {print}')
           COMMIT_DESCRIPTION=$(echo "$MESSAGE" | awk 'NR>=3 {print}' | paste -sd "\n")
+          
+          # Emoji check
+          if [[ "$COMMIT_TITLE" == Merge* ]]; then
+            EMOJI_STRING="<:869507189549723718:1274497726696001546>"
+          else
+            EMOJI_STRING="<:869507190199828490:1274375974888144957>"
+          fi
 
           # Debug output
           echo "Commit ID: $TRUNCATED_ID"
@@ -56,7 +63,8 @@ runs:
           echo "Commit Description: $COMMIT_DESCRIPTION"
 
           # Format commit info
-          FORMATTED_COMMITS+="<:869507190199828490:1274375974888144957>**[\`${TRUNCATED_ID}\`](${LINK})・${COMMIT_TITLE}**"
+          FORMATTED_COMMITS+="$EMOJI_STRING"
+          FORMATTED_COMMITS+="**[\`${TRUNCATED_ID}\`](${LINK})・${COMMIT_TITLE}**"
           FORMATTED_COMMITS+="\n"
           FORMATTED_COMMITS+="$COMMIT_DESCRIPTION"
           FORMATTED_COMMITS+="\n\n"
