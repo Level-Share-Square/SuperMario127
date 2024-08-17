@@ -22,7 +22,6 @@ func _ready():
 	
 	parent.connect("resized", self, "update_offset")
 	connect("offset_changed", self, "update_offset")
-	connect("resized", self, "update_offset")
 	update_offset()
 
 func update_offset():
