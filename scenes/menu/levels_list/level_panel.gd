@@ -14,7 +14,10 @@ var level_info: LevelInfo
 onready var info_tab: Control = $InfoTab
 onready var scores_tab: Control = $ScoresTab
 
-onready var view_button = $Buttons/ViewTab
+onready var view_button: Button = $Buttons/ViewTab
+onready var view_time_icon: TextureRect = $Buttons/ViewTab/TimeIcon
+onready var view_info_icon: TextureRect = $Buttons/ViewTab/InfoIcon
+
 export var view_scores_text: String
 export var view_info_text: String
 
@@ -128,13 +131,18 @@ func view_scores():
 	var switch_to_scores: bool = (view_button.text == view_scores_text)
 	
 	view_button.text = view_info_text if switch_to_scores else view_scores_text
+	
+	view_time_icon.visible = !switch_to_scores
 	info_tab.visible = !switch_to_scores
+	
+	view_info_icon.visible = switch_to_scores
 	scores_tab.visible = switch_to_scores
 
 func reset_save():
 	level_info.reset_save_data()
 
 func delete_level():
+	reset_save()
 	list_handler.remove_level(level_id)
 
 

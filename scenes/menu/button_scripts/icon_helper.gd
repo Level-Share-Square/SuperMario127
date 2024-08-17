@@ -4,7 +4,7 @@ extends TextureRect
 signal offset_changed
 
 export var countdown_path: NodePath
-onready var countdown = get_node(countdown_path)
+onready var countdown: Node
 
 export var disabled_color := Color.white
 onready var parent = get_parent()
@@ -17,8 +17,12 @@ func set_offset(new_value: Vector2):
 
 
 func _ready():
+	if has_node(countdown_path):
+		countdown = get_node(countdown_path)
+	
 	parent.connect("resized", self, "update_offset")
 	connect("offset_changed", self, "update_offset")
+	connect("resized", self, "update_offset")
 	update_offset()
 
 func update_offset():

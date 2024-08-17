@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/coin_icon.png-93cd28ea7f923dbd6113c4b76d081ec9.stex"
+path="res://.import/settings.png-ef3ca07f86bae92ec71f02bd1578811f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/menu/levels_list/icons/coin_icon.png"
-dest_files=[ "res://.import/coin_icon.png-93cd28ea7f923dbd6113c4b76d081ec9.stex" ]
+source_file="res://scenes/menu/levels_list/icons/settings.png"
+dest_files=[ "res://.import/settings.png-ef3ca07f86bae92ec71f02bd1578811f.stex" ]
 
 [params]
 

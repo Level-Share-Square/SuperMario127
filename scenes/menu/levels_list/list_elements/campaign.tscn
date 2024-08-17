@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-rotate.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://scenes/menu/levels_list/icons/shine_icon.png" type="Texture" id=3]
+[ext_resource path="res://scenes/menu/levels_list/icons/shine.png" type="Texture" id=3]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=4]
 [ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=5]
 

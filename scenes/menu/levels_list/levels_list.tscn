@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/options/background.tres" type="Texture" id=2]
@@ -11,8 +11,8 @@
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=9]
 [ext_resource path="res://scenes/menu/levels_list/test.png" type="Texture" id=10]
 [ext_resource path="res://assets/fonts/sm256.ttf" type="DynamicFontData" id=11]
-[ext_resource path="res://scenes/menu/levels_list/icons/shine_icon.png" type="Texture" id=12]
-[ext_resource path="res://scenes/menu/levels_list/icons/star_coin_icon.png" type="Texture" id=13]
+[ext_resource path="res://scenes/menu/levels_list/icons/shine.png" type="Texture" id=12]
+[ext_resource path="res://scenes/menu/levels_list/icons/star_coin.png" type="Texture" id=13]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=14]
 [ext_resource path="res://scenes/menu/levels_list/list_scripts/saver.gd" type="Script" id=15]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=16]
@@ -27,6 +27,17 @@
 [ext_resource path="res://assets/misc/LSS.svg" type="Texture" id=25]
 [ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=26]
 [ext_resource path="res://scenes/menu/levels_list/dynamic_visibility.gd" type="Script" id=27]
+[ext_resource path="res://scenes/menu/levels_list/icons/edit.png" type="Texture" id=28]
+[ext_resource path="res://scenes/menu/button_scripts/icon_helper.gd" type="Script" id=29]
+[ext_resource path="res://scenes/menu/levels_list/icons/play.png" type="Texture" id=30]
+[ext_resource path="res://scenes/menu/levels_list/icons/add.png" type="Texture" id=31]
+[ext_resource path="res://scenes/menu/levels_list/icons/copy.png" type="Texture" id=32]
+[ext_resource path="res://scenes/menu/levels_list/icons/time.png" type="Texture" id=33]
+[ext_resource path="res://scenes/menu/levels_list/icons/delete.png" type="Texture" id=34]
+[ext_resource path="res://scenes/menu/levels_list/icons/back.png" type="Texture" id=35]
+[ext_resource path="res://scenes/menu/levels_list/icons/settings.png" type="Texture" id=36]
+[ext_resource path="res://scenes/menu/levels_list/icons/folder.png" type="Texture" id=37]
+[ext_resource path="res://scenes/menu/levels_list/icons/reset_save.png" type="Texture" id=38]
 
 [sub_resource type="CanvasItemMaterial" id=22]
 blend_mode = 1
@@ -451,15 +462,26 @@ list_handler_path = NodePath("../Subscreens/LevelList/ScrollContainer/MarginCont
 [node name="Tween" type="Tween" parent="Panel/Buttons"]
 
 [node name="Back" type="Button" parent="Panel/Buttons"]
-margin_right = 103.0
+margin_right = 121.0
 margin_bottom = 24.0
 theme_type_variation = "Red"
 custom_fonts/font = SubResource( 1 )
-text = "Back to Menu"
+text = "Back to Menu      "
 icon = ExtResource( 25 )
 icon_align = 2
 expand_icon = true
 script = ExtResource( 3 )
+
+[node name="Icon" type="TextureRect" parent="Panel/Buttons/Back"]
+margin_left = 99.5
+margin_top = 1.0
+margin_right = 117.5
+margin_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource( 35 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( 48, -2 )
 
 [node name="Shadow" type="NinePatchRect" parent="Panel/Buttons/Back"]
 modulate = Color( 1, 1, 1, 0.25098 )
@@ -478,12 +500,22 @@ patch_margin_bottom = 11
 
 [node name="FolderSettings" type="Button" parent="Panel/Buttons"]
 visible = false
-margin_left = 111.0
-margin_right = 228.0
+margin_right = 132.0
 margin_bottom = 24.0
 custom_fonts/font = SubResource( 1 )
-text = "Folder Settings"
+text = "Folder Settings     "
 script = ExtResource( 3 )
+
+[node name="Icon" type="TextureRect" parent="Panel/Buttons/FolderSettings"]
+margin_left = 111.0
+margin_top = 4.0
+margin_right = 125.0
+margin_bottom = 18.0
+mouse_filter = 2
+texture = ExtResource( 36 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( 52, -1 )
 
 [node name="Shadow" type="NinePatchRect" parent="Panel/Buttons/FolderSettings"]
 modulate = Color( 1, 1, 1, 0.25098 )
@@ -501,12 +533,23 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="Add" type="Button" parent="Panel/Buttons"]
-margin_left = 107.0
-margin_right = 156.0
+margin_left = 125.0
+margin_right = 186.0
 margin_bottom = 24.0
 custom_fonts/font = SubResource( 1 )
-text = "Add..."
+text = "Add...    "
 script = ExtResource( 3 )
+
+[node name="Icon" type="TextureRect" parent="Panel/Buttons/Add"]
+margin_left = 45.5
+margin_top = 6.0
+margin_right = 55.5
+margin_bottom = 16.0
+mouse_filter = 2
+texture = ExtResource( 31 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( 20, -1 )
 
 [node name="Shadow" type="NinePatchRect" parent="Panel/Buttons/Add"]
 modulate = Color( 1, 1, 1, 0.25098 )
@@ -611,8 +654,8 @@ margin_right = 660.0
 margin_bottom = 301.0
 script = ExtResource( 7 )
 list_handler_path = NodePath("../../LevelList/ScrollContainer/MarginContainer/ListHandler")
-view_scores_text = "View Time Scores"
-view_info_text = "View Level Info"
+view_scores_text = "View Scores"
+view_info_text = "View Info"
 completion_color = Color( 1, 1, 0.498039, 1 )
 
 [node name="InfoTab" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel"]
@@ -888,6 +931,17 @@ align = 0
 script = ExtResource( 14 )
 direction = 1
 
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/Return"]
+modulate = Color( 0.694118, 0.2, 0.2, 1 )
+margin_left = 48.0
+margin_right = 66.0
+margin_bottom = 18.0
+mouse_filter = 2
+texture = ExtResource( 35 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( 48, -1 )
+
 [node name="Padding" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
 margin_top = 100.0
 margin_right = 157.0
@@ -904,6 +958,18 @@ align = 0
 script = ExtResource( 14 )
 direction = 1
 
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/PlayLevel"]
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+margin_left = 70.0
+margin_top = 5.0
+margin_right = 80.0
+margin_bottom = 15.0
+mouse_filter = 2
+texture = ExtResource( 30 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( 70, 0 )
+
 [node name="EditLevel" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
 margin_top = 140.0
 margin_right = 157.0
@@ -914,6 +980,18 @@ text = "Edit Level"
 align = 0
 script = ExtResource( 14 )
 direction = 1
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/EditLevel"]
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+margin_left = 66.0
+margin_top = 2.0
+margin_right = 82.0
+margin_bottom = 18.0
+mouse_filter = 2
+texture = ExtResource( 28 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( 66, 0 )
 
 [node name="CopyCode" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
 margin_top = 170.0
@@ -926,6 +1004,18 @@ align = 0
 script = ExtResource( 14 )
 direction = 1
 
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/CopyCode"]
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+margin_left = 72.0
+margin_top = 3.0
+margin_right = 86.0
+margin_bottom = 17.0
+mouse_filter = 2
+texture = ExtResource( 32 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( 72, 0 )
+
 [node name="Padding2" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
 margin_top = 200.0
 margin_right = 157.0
@@ -937,10 +1027,34 @@ margin_right = 157.0
 margin_bottom = 230.0
 rect_min_size = Vector2( 0, 20 )
 theme_type_variation = "AlternateButton"
-text = "View Time Scores"
+text = "View Scores"
 align = 0
 script = ExtResource( 14 )
 direction = 1
+
+[node name="TimeIcon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ViewTab"]
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+margin_left = 80.0
+margin_right = 100.0
+margin_bottom = 20.0
+mouse_filter = 2
+texture = ExtResource( 33 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( 80, 0 )
+
+[node name="InfoIcon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ViewTab"]
+visible = false
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+margin_left = 63.0
+margin_top = 1.0
+margin_right = 81.0
+margin_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource( 13 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( 63, 0 )
 
 [node name="ResetSave" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
 margin_top = 240.0
@@ -952,6 +1066,19 @@ text = "Reset Save"
 align = 0
 script = ExtResource( 14 )
 direction = 1
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ResetSave"]
+margin_left = 72.0
+margin_top = 3.0
+margin_right = 86.0
+margin_bottom = 17.0
+mouse_filter = 2
+texture = ExtResource( 38 )
+expand = true
+script = ExtResource( 29 )
+countdown_path = NodePath("../PressCountdown")
+count_offsets = [ 0, 16, 18, 18 ]
+offset = Vector2( 72, 0 )
 
 [node name="PressCountdown" type="Node" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ResetSave"]
 script = ExtResource( 22 )
@@ -968,6 +1095,19 @@ text = "Delete Level"
 align = 0
 script = ExtResource( 14 )
 direction = 1
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel"]
+margin_left = 80.0
+margin_top = 3.0
+margin_right = 94.0
+margin_bottom = 17.0
+mouse_filter = 2
+texture = ExtResource( 34 )
+expand = true
+script = ExtResource( 29 )
+countdown_path = NodePath("../PressCountdown")
+count_offsets = [ 0, 16, 18, 18, 17, 17 ]
+offset = Vector2( 80, 0 )
 
 [node name="PressCountdown" type="Node" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel"]
 script = ExtResource( 22 )
@@ -1017,13 +1157,25 @@ margin_bottom = 74.0
 rect_min_size = Vector2( 0, 20 )
 focus_neighbour_top = NodePath("../ImportFolder")
 theme_type_variation = "AlternateButton"
-custom_colors/font_color_focus = Color( 0.384314, 0.0431373, 0.231373, 1 )
-custom_colors/font_color = Color( 0.384314, 0.0431373, 0.231373, 1 )
-custom_colors/font_color_hover = Color( 0.384314, 0.0431373, 0.231373, 1 )
-custom_colors/font_color_pressed = Color( 0.384314, 0.0431373, 0.231373, 1 )
+custom_colors/font_color_focus = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_hover = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_pressed = Color( 0.694118, 0.2, 0.2, 1 )
 text = "Return"
 align = 2
 script = ExtResource( 14 )
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons/Return"]
+modulate = Color( 0.694118, 0.2, 0.2, 1 )
+margin_left = 96.0
+margin_top = 1.0
+margin_right = 114.0
+margin_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource( 35 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( -49, 0 )
 
 [node name="Padding" type="Control" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
 margin_top = 84.0
@@ -1041,6 +1193,18 @@ text = "New Level"
 align = 2
 script = ExtResource( 14 )
 
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewLevel"]
+modulate = Color( 0.0470588, 0.290196, 0.427451, 1 )
+margin_left = 84.0
+margin_top = 5.0
+margin_right = 94.0
+margin_bottom = 15.0
+mouse_filter = 2
+texture = ExtResource( 31 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( -69, 0 )
+
 [node name="ImportCode" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
 margin_top = 144.0
 margin_right = 163.0
@@ -1050,6 +1214,18 @@ theme_type_variation = "AlternateButton"
 text = "Import from Code"
 align = 2
 script = ExtResource( 14 )
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode"]
+modulate = Color( 0.0470588, 0.290196, 0.427451, 1 )
+margin_left = 41.0
+margin_top = 3.0
+margin_right = 55.0
+margin_bottom = 17.0
+mouse_filter = 2
+texture = ExtResource( 32 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( -108, 0 )
 
 [node name="Padding2" type="Control" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
 margin_top = 174.0
@@ -1066,6 +1242,18 @@ text = "New Folder"
 align = 2
 script = ExtResource( 14 )
 
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewFolder"]
+modulate = Color( 0.0470588, 0.290196, 0.427451, 1 )
+margin_left = 74.0
+margin_top = 4.0
+margin_right = 88.0
+margin_bottom = 18.0
+mouse_filter = 2
+texture = ExtResource( 37 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( -75, 1 )
+
 [node name="ImportFolder" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
 margin_top = 214.0
 margin_right = 163.0
@@ -1076,6 +1264,18 @@ theme_type_variation = "AlternateButton"
 text = "Import from File"
 align = 2
 script = ExtResource( 14 )
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportFolder"]
+modulate = Color( 0.0470588, 0.290196, 0.427451, 1 )
+margin_left = 50.0
+margin_top = 4.0
+margin_right = 64.0
+margin_bottom = 18.0
+mouse_filter = 2
+texture = ExtResource( 37 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( -99, 1 )
 
 [node name="Panel" type="Panel" parent="Panel/Subscreens/AddElement/Control"]
 self_modulate = Color( 0, 0, 0, 0.501961 )
@@ -1125,9 +1325,11 @@ anims/transition = SubResource( 6 )
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ViewTab" to="Panel/Subscreens/LevelInfo/LevelPanel" method="view_scores"]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ResetSave/PressCountdown" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelList" ]]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ResetSave/PressCountdown" to="Panel/Subscreens/LevelInfo/LevelPanel" method="reset_save"]
+[connection signal="text_changed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ResetSave/PressCountdown" to="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ResetSave/Icon" method="update_offset"]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler" method="change_focus"]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelList" ]]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelInfo/LevelPanel" method="delete_level"]
+[connection signal="text_changed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/Icon" method="update_offset"]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/Return" to="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler" method="change_focus"]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/Return" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewLevel" to="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler" method="insert_level"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/star_coin_icon.png-35780e919de2274ee46971a10ba43e67.stex"
+path="res://.import/time.png-a9d8bd56e625ce76ea383027a23dd7e2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/menu/levels_list/icons/star_coin_icon.png"
-dest_files=[ "res://.import/star_coin_icon.png-35780e919de2274ee46971a10ba43e67.stex" ]
+source_file="res://scenes/menu/levels_list/icons/time.png"
+dest_files=[ "res://.import/time.png-a9d8bd56e625ce76ea383027a23dd7e2.stex" ]
 
 [params]
 
