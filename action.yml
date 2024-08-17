@@ -26,18 +26,49 @@ runs:
     - name: Process Commits
       id: process_commits
       run: |
-        COMMIT_IDS="${{ join(github.event.commits.*.id, ', ') }}"
-        IFS=', ' read -r -a COMMITS_ARRAY <<< "$COMMIT_IDS"
+        COMMIT_IDS="${{ join(github.event.commits.*.id, 'ƪ') }}"
+        COMMIT_MESSAGES="${{ join(github.event.commits.*.message, 'ƪ') }}"
+        COMMIT_LINKS="${{ join(github.event.commits.*.url, 'ƪ') }}"
+        
+        IFS='ƪ' read -r -a COMMITS_ARRAY <<< "$COMMIT_IDS"
+        IFS='ƪ' read -r -a LINKS_ARRAY <<< "$COMMIT_LINKS"
         COMMITS_COUNT="${#COMMITS_ARRAY[@]}"
-        COMMIT_MESSAGE="${{ join(github.event.commits.*.message, '\n') }}"
 
-        if $COMMITS_COUNT == "0" || ${{ contains(github.ref_name, 'hidden/') }} && ${{ inputs.ignore-hidden }} == true; then
+        echo "$COMMIT_MESSAGES_WITH_SECTION"
+        echo "$MESSAGES_ARRAY"
+        
+        # Format commit messages with hyperlinks and titles
+        FORMATTED_COMMITS=""
+        for i in "${!COMMITS_ARRAY[@]}"; do
+          TRUNCATED_ID="${COMMITS_ARRAY[$i]:0:7}"
+          LINK="${LINKS_ARRAY[$i]}"
+          MESSAGE="$(echo "$COMMIT_MESSAGES" | awk -v FS='ƪ' -v n=$i '{print $n}')"
+
+          # Commit title is first line. commit description is everything else starting from line 3.
+          COMMIT_TITLE=$(echo "$MESSAGE" | awk 'NR==1 {print}')
+          COMMIT_DESCRIPTION=$(echo "$MESSAGE" | awk 'NR>=3 {print}' | paste -sd "\n")
+
+          # Debug output
+          echo "Commit ID: $TRUNCATED_ID"
+          echo "Commit Link: $LINK"
+          echo "Full Commit Message: $MESSAGE"
+          echo "Commit Title: $COMMIT_TITLE"
+          echo "Commit Description: $COMMIT_DESCRIPTION"
+
+          # Format commit info
+          FORMATTED_COMMITS+="<:869507190199828490:1274375974888144957>**[\`${TRUNCATED_ID}\`](${LINK})・${COMMIT_TITLE}**"
+          FORMATTED_COMMITS+="\n"
+          FORMATTED_COMMITS+="$COMMIT_DESCRIPTION"
+          FORMATTED_COMMITS+="\n\n"
+        done
+
+        if [ "$COMMITS_COUNT" -eq 0 ] || [[ "$github.ref_name" =~ hidden/ && "$inputs.ignore-hidden" == true ]]; then
           SHOULD_CONTINUE='false'
         else
           SHOULD_CONTINUE='true'
         fi
 
-        echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g' >> $GITHUB_OUTPUT
+        echo "COMMIT_MESSAGE=$FORMATTED_COMMITS" | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g' >> $GITHUB_OUTPUT
         echo "COMMITS_COUNT=$COMMITS_COUNT" >> $GITHUB_OUTPUT
         echo "SHOULD_CONTINUE=$SHOULD_CONTINUE" >> $GITHUB_OUTPUT
       shell: bash
