@@ -16,7 +16,8 @@ var dont_save = false
 var frame_counter = -1
 
 func _process(delta):
-	if "MainMenuController" in str(get_tree().current_scene):
+	## you ppl do the weirdest things sometimes
+	if "MenuController" in str(get_tree().current_scene):
 		dont_save = false
 		temp_ga = []
 		temp_gp = []

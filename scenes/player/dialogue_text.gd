@@ -29,6 +29,8 @@ func _ready():
 	modulate = Color(1, 1, 1, 0)
 
 func open(_dialogue : PoolStringArray, dialogue_node : Node2D, character_node : Character, character_name : String):
+	Singleton.CurrentLevelData.can_pause = false
+	
 	dialogue = _dialogue
 	character = character_node
 	dialogue_obj = dialogue_node
@@ -70,6 +72,7 @@ func interact():
 		tween.playback_speed = INF
 
 func close():
+	Singleton.CurrentLevelData.can_pause = true
 	open = false
 	
 	label.percent_visible = 0

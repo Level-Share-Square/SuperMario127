@@ -39,7 +39,6 @@ func get_song(song_id : int):
 
 func _init() -> void:
 	base_volume = volume_db
-	var _connect = downloader.connect("request_completed", self, "load_ogg")
 	level_songs = preload("res://assets/music/ids.tres")
 	
 func _ready() -> void:
@@ -57,12 +56,41 @@ func increment_global_volume(increment: float) -> void:
 
 func is_tween_active() -> bool:
 	return tween.is_active()
-	
-func load_ogg() -> void:
-	var path := "user://bg_music.ogg"
 
+
+##### CUSTOM MUSIC
+func handle_custom_song(url: String) -> void:
+	loop = 0.0
+	if url.begins_with("LP"):
+		var trimmed_url = url.trim_prefix("LP").split("=")
+		loop = float(trimmed_url[0])
+		url = trimmed_url[1]
+	
+	stop()
+	
+	# i think accessing leveldata singleton is safe for now since
+	# this only is called inside levels, i hope i dont regret that decision
+	var working_folder: String = Singleton.CurrentLevelData.working_folder
+	var file_path: String = saved_levels_util.get_level_music_path(url, working_folder)
+	
+	if not saved_levels_util.file_exists(file_path):
+		save_ogg(url, working_folder)
+	else:
+		load_ogg(file_path)
+
+func save_ogg(url: String, working_folder: String) -> void:
+	if UserInfo.internet == false: return
+	
+	var folder: String = saved_levels_util.get_level_music_folder(working_folder)
+	var file_name: String = saved_levels_util.get_level_music_filename(url)
+	downloader.download(url, folder, file_name)
+	
+	# warning-ignore:return_value_discarded
+	downloader.connect("request_completed", self, "load_ogg", [folder + file_name], CONNECT_ONESHOT)
+
+func load_ogg(file_path: String) -> void:
 	var ogg_file := File.new()
-	var _open = ogg_file.open(path, File.READ)
+	var _open = ogg_file.open(file_path, File.READ)
 	var bytes := ogg_file.get_buffer(ogg_file.get_len())
 
 	var stream := AudioStreamOGGVorbis.new()
@@ -77,6 +105,8 @@ func load_ogg() -> void:
 	if get_tree().get_current_scene().mode != 2:
 		self.stream = stream
 		play()
+#######
+
 
 func change_song(old_setting, music_setting) -> void:
 	var song
@@ -85,12 +115,8 @@ func change_song(old_setting, music_setting) -> void:
 		song = get_song(music_setting)
 	elif typeof(music_setting) == TYPE_STRING:
 		if typeof(music_setting) != typeof(old_setting) or music_setting != old_setting:
-			loop = 0.0
-			if music_setting.begins_with("LP"):
-				loop = float(music_setting.trim_prefix("LP").split("=")[0])
-				#print(str(loop))
-			stop()
-			downloader.download(music_setting, "user://", "bg_music.ogg")
+			handle_custom_song(music_setting)
+			
 	
 	if song != null and stream != song.stream:
 		stream = song.stream

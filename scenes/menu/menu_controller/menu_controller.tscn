@@ -1,0 +1,165 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/menu/main_menu/main_menu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=3]
+[ext_resource path="res://scenes/menu/credits/credits.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/menu/levels_list/levels_list.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/menu/main_menu/.secret/bg.png" type="Texture" id=7]
+[ext_resource path="res://scenes/menu/background_manager.gd" type="Script" id=8]
+
+[sub_resource type="GDScript" id=11]
+resource_name = "secret"
+script/source = "extends Node
+
+export var show_node_path: NodePath
+onready var show_node = get_node(show_node_path)
+
+export var hide_node_path: NodePath
+var hide_node
+
+func _ready():
+	if has_node(hide_node_path):
+		hide_node = get_node(hide_node_path)
+	
+	toggle_secret(\"secret\", LocalSettings.load_setting(\"General\", \"secret\", false))
+	LocalSettings.connect(\"setting_changed\", self, \"toggle_secret\")
+
+func toggle_secret(key: String, secret_enabled: bool):
+	if key != \"secret\": return
+	
+	show_node.visible = secret_enabled
+	if is_instance_valid(hide_node):
+		hide_node.visible = !secret_enabled
+"
+
+[sub_resource type="GDScript" id=13]
+resource_name = "secret_control"
+script/source = "extends Node
+
+## Obama!! Obama!!
+
+export (Array, int) var required_scancodes
+var key_index: int = -1
+
+func _input(event: InputEvent):
+	if not event is InputEventKey: return
+	if not event.is_pressed(): return
+	
+	if event.scancode == required_scancodes[key_index + 1]:
+		key_index += 1
+		if (key_index + 1) >= required_scancodes.size():
+			print(\"W00T!!! SECRET UNLOCKED!\")
+			key_index = -1
+			
+			var secret_enabled = LocalSettings.load_setting(\"General\", \"secret\", false)
+			LocalSettings.change_setting(\"General\", \"secret\", !secret_enabled)
+	else:
+		key_index = -1
+"
+
+[sub_resource type="GDScript" id=12]
+resource_name = "secret2"
+script/source = "extends Node
+
+export var main_menu_path: NodePath
+onready var main_menu = get_node(main_menu_path)
+
+func _ready():
+	toggle_secret(\"secret\", LocalSettings.load_setting(\"General\", \"secret\", false))
+	LocalSettings.connect(\"setting_changed\", self, \"toggle_secret\")
+
+func toggle_secret(key: String, secret_enabled: bool):
+	if key != \"secret\": return
+	
+	main_menu.music_id = 67 if secret_enabled else 31
+	Singleton.Music.change_song(Singleton.Music.last_song, main_menu.music_id)
+"
+
+[sub_resource type="Gradient" id=9]
+colors = PoolColorArray( 0.567, 0.567, 0.7, 1, 0, 0.0156863, 0.439216, 1 )
+
+[sub_resource type="GradientTexture2D" id=10]
+gradient = SubResource( 9 )
+fill = 1
+fill_to = Vector2( 1, 1 )
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float blur_amount : hint_range(0, 5);
+
+void fragment() {
+	COLOR = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur_amount);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/blur_amount = 1.0
+
+[node name="MenuController" type="Node2D"]
+
+[node name="BackgroundManager" type="Node2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="Backgrounds" parent="BackgroundManager" instance=ExtResource( 1 )]
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 50
+
+[node name="Special" type="Control" parent="UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Secret" type="Node" parent="UI/Special"]
+script = SubResource( 11 )
+show_node_path = NodePath("..")
+
+[node name="SecretCTRL" type="Node" parent="UI/Special/Secret"]
+script = SubResource( 13 )
+required_scancodes = [ 67, 72, 69, 65, 84 ]
+
+[node name="Secret2" type="Node" parent="UI/Special"]
+script = SubResource( 12 )
+main_menu_path = NodePath("../../Screens/MainMenu")
+
+[node name="Gradient" type="TextureRect" parent="UI/Special"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 10 )
+expand = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/Special"]
+modulate = Color( 1, 1, 1, 0.376471 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+
+[node name="Blur" type="ColorRect" parent="UI"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0 )
+
+[node name="Screens" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+default_screen = NodePath("MainMenu")
+
+[node name="MainMenu" parent="UI/Screens" instance=ExtResource( 2 )]
+music_id = 31
+
+[node name="Credits" parent="UI/Screens" instance=ExtResource( 4 )]
+visible = false
+music_id = 66
+
+[node name="Options" parent="UI/Screens" instance=ExtResource( 5 )]
+visible = false
+
+[node name="LevelsList" parent="UI/Screens" instance=ExtResource( 6 )]
+visible = false

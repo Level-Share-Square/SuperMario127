@@ -1,49 +1,31 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/actors/mario/mario.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/player/camera.gd" type="Script" id=4]
-[ext_resource path="res://scenes/editor/assets/banner.png" type="Texture" id=5]
-[ext_resource path="res://assets/fonts/sm256.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://scenes/menu/pause/pause_controller.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://scenes/player/pause_screen.gd" type="Script" id=8]
-[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=9]
-[ext_resource path="res://scenes/shared/button_sound_player.gd" type="Script" id=10]
-[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=11]
 [ext_resource path="res://scenes/player/viewports.gd" type="Script" id=12]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/shared/controls_options.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scenes/shared/options.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/actors/mario/GhostMario.tscn" type="PackedScene" id=16]
-[ext_resource path="res://assets/fonts/texteffect_number.tres" type="RichTextEffect" id=17]
-[ext_resource path="res://assets/fonts/texteffect_matrix.tres" type="RichTextEffect" id=18]
-[ext_resource path="res://assets/fonts/texteffect_pulse.tres" type="RichTextEffect" id=19]
-[ext_resource path="res://scenes/player/chat.gd" type="Script" id=20]
 [ext_resource path="res://scenes/player/World.gd" type="Script" id=21]
-[ext_resource path="res://scenes/player/multiplayer_menu_button.gd" type="Script" id=22]
-[ext_resource path="res://scenes/menu/levels_screen/ui/star_coin_icon.png" type="Texture" id=23]
-[ext_resource path="res://scenes/menu/levels_screen/shine_icon.png" type="Texture" id=24]
+[ext_resource path="res://scenes/oldmenu/levels_screen/ui/star_coin_icon.png" type="Texture" id=23]
+[ext_resource path="res://scenes/oldmenu/levels_screen/shine_icon.png" type="Texture" id=24]
 [ext_resource path="res://scenes/player/shine_counter.gd" type="Script" id=25]
 [ext_resource path="res://scenes/player/sccounter.gd" type="Script" id=26]
-[ext_resource path="res://scenes/editor/assets/clickable_arrow_hover.png" type="Texture" id=27]
-[ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=28]
 [ext_resource path="res://scenes/player/dialogue_text.gd" type="Script" id=29]
 [ext_resource path="res://scenes/actors/fludd_display/fludd_display.tscn" type="PackedScene" id=30]
-[ext_resource path="res://scenes/menu/levels_screen/ui/coin_icon.png" type="Texture" id=31]
+[ext_resource path="res://scenes/oldmenu/levels_screen/ui/coin_icon.png" type="Texture" id=31]
 [ext_resource path="res://scenes/player/coin_counter.gd" type="Script" id=32]
 [ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
 [ext_resource path="res://scenes/actors/health_display/health_display.tscn" type="PackedScene" id=34]
-[ext_resource path="res://scenes/menu/levels_screen/ui/red_coin_icon.png" type="Texture" id=35]
+[ext_resource path="res://scenes/oldmenu/levels_screen/ui/red_coin_icon.png" type="Texture" id=35]
 [ext_resource path="res://scenes/player/red_coin_counter.gd" type="Script" id=36]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=39]
 [ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
-[ext_resource path="res://scenes/player/fonts/shine_info_font.tres" type="DynamicFont" id=41]
 [ext_resource path="res://scenes/player/shine_shard_counter.gd" type="Script" id=44]
-[ext_resource path="res://scenes/menu/levels_screen/ui/shine_shard_icon.png" type="Texture" id=45]
-[ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=50]
-[ext_resource path="res://scenes/player/fonts/level_name_font.tres" type="DynamicFont" id=51]
-[ext_resource path="res://scenes/player/fonts/level_name_backing_font.tres" type="DynamicFont" id=52]
+[ext_resource path="res://scenes/oldmenu/levels_screen/ui/shine_shard_icon.png" type="Texture" id=45]
 [ext_resource path="res://scenes/player/sign_text.gd" type="Script" id=55]
 [ext_resource path="res://scenes/actors/objects/sign/menu_open.wav" type="AudioStream" id=56]
 [ext_resource path="res://scenes/actors/objects/sign/menu_close.wav" type="AudioStream" id=57]
@@ -66,63 +48,6 @@ font_data = ExtResource( 7 )
 [sub_resource type="DynamicFont" id=6]
 size = 20
 font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 7 )
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0, 0, 0, 0.12549 )
-border_width_left = 5
-border_width_right = 5
-border_color = Color( 0, 0, 0, 0.12549 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="DynamicFont" id=7]
-size = 100
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 6 )
-
-[sub_resource type="DynamicFont" id=10]
-size = 76
-font_data = ExtResource( 7 )
-
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.0705882, 0, 0.231373, 1 )
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-
-[sub_resource type="StyleBoxFlat" id=9]
-bg_color = Color( 0, 0.0470588, 0.317647, 1 )
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-
-[sub_resource type="DynamicFont" id=14]
-size = 32
-outline_color = Color( 0.054902, 0, 0.25098, 1 )
-font_data = ExtResource( 7 )
-
-[sub_resource type="StyleBoxTexture" id=19]
-texture = ExtResource( 27 )
-region_rect = Rect2( 0, 0, 128, 128 )
-
-[sub_resource type="StyleBoxTexture" id=20]
-texture = ExtResource( 28 )
-region_rect = Rect2( 0, 0, 128, 128 )
-
-[sub_resource type="StyleBoxEmpty" id=22]
-
-[sub_resource type="StyleBoxTexture" id=21]
-texture = ExtResource( 28 )
-region_rect = Rect2( 0, 0, 128, 128 )
-
-[sub_resource type="StyleBoxEmpty" id=23]
 
 [sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.133333, 0.145098, 0.196078, 0.835294 )
@@ -469,19 +394,13 @@ character = NodePath("Viewports/ViewportContainer/Viewport/World/Character")
 character2 = NodePath("Viewports/ViewportContainer/Viewport/World/Character2")
 camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
 
+[node name="PauseController" parent="." instance=ExtResource( 5 )]
+unique_name_in_owner = true
+
 [node name="UI" type="CanvasLayer" parent="."]
 pause_mode = 2
 layer = 63
 script = ExtResource( 33 )
-
-[node name="Divider" type="ColorRect" parent="UI"]
-margin_left = 384.0
-margin_right = 388.0
-margin_bottom = 432.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CoinCounter" type="Control" parent="UI"]
 margin_left = 210.0
@@ -729,329 +648,6 @@ texture = ExtResource( 45 )
 
 [node name="Tween" type="Tween" parent="UI/VBoxContainer/ShineShardCounter"]
 
-[node name="ChatBox" type="Control" parent="UI"]
-visible = false
-margin_left = 5.0
-margin_top = 262.0
-margin_right = 288.0
-margin_bottom = 427.0
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/ChatBox"]
-margin_right = 348.0
-margin_bottom = 163.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource( 20 )
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/ChatBox/VBoxContainer"]
-margin_right = 348.0
-margin_bottom = 140.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/mono_font = SubResource( 1 )
-custom_fonts/bold_italics_font = SubResource( 1 )
-custom_fonts/italics_font = SubResource( 1 )
-custom_fonts/bold_font = SubResource( 1 )
-custom_fonts/normal_font = SubResource( 1 )
-bbcode_enabled = true
-scroll_active = false
-scroll_following = true
-custom_effects = [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ]
-
-[node name="EnterText" type="LineEdit" parent="UI/ChatBox/VBoxContainer"]
-margin_top = 144.0
-margin_right = 348.0
-margin_bottom = 163.0
-custom_colors/font_color = Color( 0.0901961, 0.196078, 0.458824, 1 )
-custom_fonts/font = SubResource( 1 )
-custom_styles/normal = SubResource( 2 )
-context_menu_enabled = false
-placeholder_text = "Enter text here."
-placeholder_alpha = 0.35
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PauseScreen" type="Control" parent="UI"]
-pause_mode = 2
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 8 )
-darken_color = Color( 0.121569, 0.137255, 0.184314, 0.705882 )
-character_node_path = NodePath("../../Viewports/ViewportContainer/Viewport/World/Character")
-character2_node_path = NodePath("../../Viewports/ViewportContainer/Viewport/World/Character2")
-chat_path = NodePath("../ChatBox")
-
-[node name="Darken" type="ColorRect" parent="UI/PauseScreen"]
-margin_left = -0.440735
-margin_top = 0.440735
-margin_right = 767.559
-margin_bottom = 432.441
-color = Color( 0.121569, 0.137255, 0.184314, 0.705882 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Top" type="TextureRect" parent="UI/PauseScreen"]
-margin_right = 2305.0
-margin_bottom = 210.0
-rect_scale = Vector2( 0.335, 0.333 )
-texture = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PAUSED" type="Label" parent="UI/PauseScreen/Top"]
-margin_left = 914.958
-margin_top = 48.048
-margin_right = 1317.96
-margin_bottom = 148.048
-rect_pivot_offset = Vector2( 72, 0 )
-custom_fonts/font = SubResource( 7 )
-text = "PAUSED"
-align = 1
-valign = 1
-
-[node name="Bottom" type="TextureRect" parent="UI/PauseScreen"]
-margin_left = 770.0
-margin_top = 400.0
-margin_right = 3109.0
-margin_bottom = 610.0
-rect_rotation = 180.0
-rect_scale = Vector2( 0.335, 0.333 )
-texture = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Bottom2" type="TextureRect" parent="UI/PauseScreen/Bottom"]
-margin_left = 2311.0
-margin_top = 5.0
-margin_right = 9268.0
-margin_bottom = 215.0
-rect_rotation = 180.0
-rect_scale = Vector2( 2, 1 )
-texture = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Buttons" type="HBoxContainer" parent="UI/PauseScreen/Bottom"]
-margin_left = 2250.0
-margin_top = 133.0
-margin_right = 4445.0
-margin_bottom = 309.0
-rect_rotation = 180.0
-custom_constants/separation = 18
-
-[node name="ResumeButton" type="Button" parent="UI/PauseScreen/Bottom/Buttons"]
-margin_right = 535.0
-margin_bottom = 176.0
-size_flags_horizontal = 7
-custom_fonts/font = SubResource( 10 )
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/normal = SubResource( 9 )
-action_mode = 0
-text = "Resume"
-script = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/Buttons/ResumeButton"]
-stream = ExtResource( 9 )
-volume_db = -10.0
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/Buttons/ResumeButton"]
-stream = ExtResource( 11 )
-volume_db = -10.0
-
-[node name="RetryButton" type="Button" parent="UI/PauseScreen/Bottom/Buttons"]
-margin_left = 553.0
-margin_right = 1088.0
-margin_bottom = 176.0
-size_flags_horizontal = 7
-custom_fonts/font = SubResource( 10 )
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/normal = SubResource( 9 )
-action_mode = 0
-text = "Retry"
-script = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/Buttons/RetryButton"]
-stream = ExtResource( 9 )
-volume_db = -10.0
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/Buttons/RetryButton"]
-stream = ExtResource( 11 )
-volume_db = -10.0
-
-[node name="MultiplayerButton" type="Button" parent="UI/PauseScreen/Bottom/Buttons"]
-margin_left = 1106.0
-margin_right = 1641.0
-margin_bottom = 176.0
-size_flags_horizontal = 7
-custom_fonts/font = SubResource( 10 )
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/normal = SubResource( 9 )
-action_mode = 0
-text = "Options"
-script = ExtResource( 22 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-shine_info = NodePath("../../../ShineInfo")
-multiplayer_options = NodePath("../../../MultiplayerOptions")
-controls_options = NodePath("../../../ControlsOptions")
-
-[node name="HoverSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/Buttons/MultiplayerButton"]
-stream = ExtResource( 9 )
-volume_db = -10.0
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="UI/PauseScreen/Bottom/Buttons/MultiplayerButton"]
-stream = ExtResource( 11 )
-volume_db = -10.0
-
-[node name="QuitButton" parent="UI/PauseScreen/Bottom/Buttons" instance=ExtResource( 50 )]
-margin_left = 1659.0
-margin_right = 2195.0
-margin_bottom = 176.0
-size_flags_horizontal = 3
-custom_fonts/font = SubResource( 10 )
-text = "Quit"
-
-[node name="TweenTopbar" type="Tween" parent="UI/PauseScreen"]
-
-[node name="TweenBottombar" type="Tween" parent="UI/PauseScreen"]
-
-[node name="TweenFade" type="Tween" parent="UI/PauseScreen"]
-
-[node name="TweenShineInfo" type="Tween" parent="UI/PauseScreen"]
-
-[node name="ShineInfo" type="Control" parent="UI/PauseScreen"]
-margin_right = 768.0
-margin_bottom = 332.0
-rect_pivot_offset = Vector2( 384, 166 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LevelName" type="Label" parent="UI/PauseScreen/ShineInfo"]
-margin_top = 111.0
-margin_right = 768.0
-margin_bottom = 178.0
-rect_pivot_offset = Vector2( 72, 0 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 51 )
-text = "Unknown Level"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LevelNameBacking" type="Label" parent="UI/PauseScreen/ShineInfo/LevelName"]
-show_behind_parent = true
-margin_right = 768.0
-margin_bottom = 81.0
-rect_pivot_offset = Vector2( 72, 0 )
-custom_colors/font_color = Color( 0.0392157, 0, 0.188235, 1 )
-custom_fonts/font = ExtResource( 52 )
-text = "Unknown Level"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ShineDescription" type="RichTextLabel" parent="UI/PauseScreen/ShineInfo"]
-margin_left = 116.0
-margin_top = 222.0
-margin_right = 653.0
-margin_bottom = 319.0
-custom_fonts/normal_font = ExtResource( 41 )
-bbcode_enabled = true
-bbcode_text = "[center]You can change this description in the Shine Sprite's properties menu.[/center]"
-text = "You can change this description in the Shine Sprite's properties menu."
-
-[node name="ShineName" type="RichTextLabel" parent="UI/PauseScreen/ShineInfo"]
-margin_top = 189.0
-margin_right = 768.0
-margin_bottom = 216.545
-custom_fonts/normal_font = ExtResource( 41 )
-bbcode_enabled = true
-bbcode_text = "[center]Unnamed Shine[/center]"
-text = "Unnamed Shine"
-
-[node name="ShineCount" type="RichTextLabel" parent="UI/PauseScreen/ShineInfo"]
-visible = false
-margin_left = 50.0
-margin_top = 85.0
-margin_right = 640.0
-margin_bottom = 182.0
-custom_fonts/normal_font = SubResource( 14 )
-bbcode_enabled = true
-bbcode_text = "0/0"
-text = "0/0"
-
-[node name="SCCount" type="RichTextLabel" parent="UI/PauseScreen/ShineInfo"]
-visible = false
-margin_left = 50.0
-margin_top = 129.0
-margin_right = 640.0
-margin_bottom = 226.0
-custom_fonts/normal_font = SubResource( 14 )
-bbcode_enabled = true
-bbcode_text = "0/0"
-text = "0/0"
-
-[node name="Shine" type="Sprite" parent="UI/PauseScreen/ShineInfo"]
-visible = false
-position = Vector2( 25, 100 )
-scale = Vector2( 0.366319, 0.385599 )
-texture = ExtResource( 24 )
-
-[node name="SC" type="Sprite" parent="UI/PauseScreen/ShineInfo"]
-visible = false
-position = Vector2( 22.864, 145 )
-scale = Vector2( 0.366319, 0.385599 )
-texture = ExtResource( 23 )
-
-[node name="PrevShine" type="Button" parent="UI/PauseScreen/ShineInfo"]
-margin_left = 61.0
-margin_top = 270.0
-margin_right = 115.0
-margin_bottom = 324.0
-rect_rotation = 180.0
-custom_styles/hover = SubResource( 19 )
-custom_styles/pressed = SubResource( 20 )
-custom_styles/focus = SubResource( 22 )
-custom_styles/normal = SubResource( 21 )
-
-[node name="NextShine" type="Button" parent="UI/PauseScreen/ShineInfo"]
-margin_left = 707.0
-margin_top = 210.0
-margin_right = 761.0
-margin_bottom = 264.0
-custom_styles/hover = SubResource( 19 )
-custom_styles/pressed = SubResource( 20 )
-custom_styles/focus = SubResource( 23 )
-custom_styles/normal = SubResource( 21 )
-
-[node name="MultiplayerOptions" parent="UI/PauseScreen" instance=ExtResource( 15 )]
-visible = false
-
-[node name="ControlsOptions" parent="UI/PauseScreen" instance=ExtResource( 14 )]
-visible = false
-
 [node name="SignText" type="Control" parent="UI"]
 pause_mode = 2
 margin_left = 161.0
@@ -1200,7 +796,6 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
-divider_path = NodePath("../UI/Divider")
 character_scene_path = "res://scenes/actors/mario/mario.tscn"
 
 [node name="ViewportContainer" type="ViewportContainer" parent="Viewports"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=1]
-[ext_resource path="res://scenes/menu/levels_screen/ui/time_icon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/oldmenu/levels_screen/ui/time_icon.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/time_score/time_score.gd" type="Script" id=3]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
 
@@ -11,7 +11,7 @@ font_data = ExtResource( 4 )
 
 [node name="CanvasLayer" type="CanvasLayer"]
 pause_mode = 2
-layer = 20
+layer = 63
 script = ExtResource( 3 )
 
 [node name="TimeScore" type="Label" parent="."]

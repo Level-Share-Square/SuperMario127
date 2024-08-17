@@ -1,2378 +1,550 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://scenes/menu/main_menu/main_menu.gd" type="Script" id=1]
-[ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://assets/misc/new127icon1.png" type="Texture" id=4]
-[ext_resource path="res://scenes/menu/shine_select_screen/frame_top.png" type="Texture" id=5]
-[ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/editor/window/LogInWindow.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/editor/window_open_button.gd" type="Script" id=8]
-[ext_resource path="res://scenes/editor/window/LSSHelpWindow.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/misc/LSS.svg" type="Texture" id=10]
-[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=11]
-[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=12]
-[ext_resource path="res://scenes/editor/window.gd" type="Script" id=13]
-[ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=14]
-[ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=15]
-[ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=16]
-[ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=17]
+[ext_resource path="res://assets/misc/new127icon.png" type="Texture" id=1]
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/menu/main_menu/button_functions.gd" type="Script" id=3]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=4]
+[ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=5]
+[ext_resource path="res://assets/misc/new127icon_shadow.png" type="Texture" id=6]
+[ext_resource path="res://assets/misc/LSS.svg" type="Texture" id=7]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=8]
+[ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=9]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=11]
+[ext_resource path="res://scenes/menu/screen.gd" type="Script" id=12]
+[ext_resource path="res://assets/fonts/super-mario-bros-nes.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://scenes/menu/main_menu/.secret/logo.png" type="Texture" id=14]
+[ext_resource path="res://scenes/menu/main_menu/.secret/sprite.png" type="Texture" id=15]
+[ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=16]
+[ext_resource path="res://scenes/menu/button_scripts/icon_helper.gd" type="Script" id=17]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0.0502793, 0.944134, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.831373, 1, 1, 1, 0 )
 
-[sub_resource type="DynamicFont" id=3]
-size = 42
-font_data = ExtResource( 3 )
+[sub_resource type="GradientTexture2D" id=8]
+gradient = SubResource( 6 )
+fill_from = Vector2( 0, 1 )
+fill_to = Vector2( 0, 0 )
 
-[sub_resource type="DynamicFont" id=2]
-size = 42
-font_data = ExtResource( 3 )
+[sub_resource type="GDScript" id=9]
+resource_name = "secret"
+script/source = "extends Node
 
-[sub_resource type="DynamicFont" id=20]
-size = 28
-font_data = ExtResource( 3 )
+export var show_node_path: NodePath
+onready var show_node = get_node(show_node_path)
 
-[sub_resource type="StyleBoxFlat" id=4]
-content_margin_left = 16.0
-content_margin_right = 16.0
-content_margin_top = 8.0
-content_margin_bottom = 8.0
-bg_color = Color( 0.513726, 0.0156863, 0.0156863, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+export var hide_node_path: NodePath
+var hide_node
 
-[sub_resource type="StyleBoxFlat" id=5]
-content_margin_left = 16.0
-content_margin_right = 16.0
-content_margin_top = 8.0
-content_margin_bottom = 8.0
-bg_color = Color( 0.698039, 0.2, 0.2, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+func _ready():
+	if has_node(hide_node_path):
+		hide_node = get_node(hide_node_path)
+	
+	toggle_secret(\"secret\", LocalSettings.load_setting(\"General\", \"secret\", false))
+	LocalSettings.connect(\"setting_changed\", self, \"toggle_secret\")
 
-[sub_resource type="DynamicFont" id=30]
-size = 26
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 3 )
+func toggle_secret(key: String, secret_enabled: bool):
+	if key != \"secret\": return
+	
+	show_node.visible = secret_enabled
+	if is_instance_valid(hide_node):
+		hide_node.visible = !secret_enabled
+"
 
-[sub_resource type="Animation" id=31]
-length = 0.001
+[sub_resource type="GDScript" id=5]
+resource_name = "floaty"
+script/source = "extends Sprite
+
+export var power: float
+export var speed: float
+
+var time = 0.0
+
+func _process(delta):
+	time += delta
+	position.y = sin(time*speed) * power
+"
+
+[sub_resource type="DynamicFont" id=7]
+size = 128
+use_filter = true
+font_data = ExtResource( 13 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "RESET"
 tracks/0/type = "value"
-tracks/0/path = NodePath("RichTextLabel:rect_position")
+tracks/0/path = NodePath("MarginContainer:margin_right")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 442 ) ]
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Skip:rect_position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( -109, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Skip:rect_position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 399, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("Speed:rect_position:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( -114, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("Speed:rect_position:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"points": PoolRealArray( 363, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/5/type = "bezier"
-tracks/5/path = NodePath("ColorRect:modulate:r")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/6/type = "bezier"
-tracks/6/path = NodePath("ColorRect:modulate:g")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/7/type = "bezier"
-tracks/7/path = NodePath("ColorRect:modulate:b")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/8/type = "bezier"
-tracks/8/path = NodePath("ColorRect:modulate:a")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/9/type = "bezier"
-tracks/9/path = NodePath("RichTextLabel:modulate:r")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/10/type = "bezier"
-tracks/10/path = NodePath("RichTextLabel:modulate:g")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/11/type = "bezier"
-tracks/11/path = NodePath("RichTextLabel:modulate:b")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/12/type = "bezier"
-tracks/12/path = NodePath("RichTextLabel:modulate:a")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/13/type = "bezier"
-tracks/13/path = NodePath("Speed:modulate:r")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/14/type = "bezier"
-tracks/14/path = NodePath("Speed:modulate:g")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/15/type = "bezier"
-tracks/15/path = NodePath("Speed:modulate:b")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/16/type = "bezier"
-tracks/16/path = NodePath("Speed:modulate:a")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/17/type = "bezier"
-tracks/17/path = NodePath("Skip:modulate:r")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/18/type = "bezier"
-tracks/18/path = NodePath("Skip:modulate:g")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/19/type = "bezier"
-tracks/19/path = NodePath("Skip:modulate:b")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/20/type = "bezier"
-tracks/20/path = NodePath("Skip:modulate:a")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/21/type = "value"
-tracks/21/path = NodePath("ColorRect:mouse_filter")
-tracks/21/interp = 1
-tracks/21/loop_wrap = true
-tracks/21/imported = false
-tracks/21/enabled = true
-tracks/21/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 2 ]
-}
-
-[sub_resource type="Animation" id=33]
-resource_name = "button in"
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Skip:rect_position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( -109, -0.25, 0, 0.3, 107.693, 10, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Skip:rect_position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 399, -0.25, 0, 0.25, 0, 399, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Speed:rect_position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( -114, -0.25, 0, 0.3, 114.421, 6, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("Speed:rect_position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( 363, -0.25, 0, 0.25, 0, 363, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-
-[sub_resource type="Animation" id=32]
-resource_name = "roll"
-length = 180.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("RichTextLabel:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 180 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( -1.52588e-05, 439 ), Vector2( 0, -5748 ) ]
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("ColorRect:modulate:r")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("ColorRect:modulate:g")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("ColorRect:modulate:b")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("ColorRect:modulate:a")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
-tracks/5/type = "method"
-tracks/5/path = NodePath("AnimationPlayer")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 180 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "skip", -1, 1.0, false ],
-"method": "play"
-} ]
-}
-
-[sub_resource type="Animation" id=34]
-resource_name = "skip"
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("ColorRect:modulate:r")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("ColorRect:modulate:g")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("ColorRect:modulate:b")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("ColorRect:modulate:a")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("RichTextLabel:modulate:r")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/5/type = "bezier"
-tracks/5/path = NodePath("RichTextLabel:modulate:g")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/6/type = "bezier"
-tracks/6/path = NodePath("RichTextLabel:modulate:b")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/7/type = "bezier"
-tracks/7/path = NodePath("RichTextLabel:modulate:a")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/8/type = "bezier"
-tracks/8/path = NodePath("Speed:modulate:r")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/9/type = "bezier"
-tracks/9/path = NodePath("Speed:modulate:g")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/10/type = "bezier"
-tracks/10/path = NodePath("Speed:modulate:b")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/11/type = "bezier"
-tracks/11/path = NodePath("Speed:modulate:a")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/12/type = "bezier"
-tracks/12/path = NodePath("Skip:modulate:r")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/13/type = "bezier"
-tracks/13/path = NodePath("Skip:modulate:g")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/14/type = "bezier"
-tracks/14/path = NodePath("Skip:modulate:b")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/15/type = "bezier"
-tracks/15/path = NodePath("Skip:modulate:a")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/16/type = "value"
-tracks/16/path = NodePath("ColorRect:mouse_filter")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 2 ]
+"values": [ 237.0 ]
 }
-tracks/17/type = "method"
-tracks/17/path = NodePath("AnimationPlayer")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/keys = {
-"times": PoolRealArray( 0.5 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "RESET", -1, 1.0, false ],
-"method": "play"
-} ]
-}
-
-[sub_resource type="Animation" id=35]
-resource_name = "button in"
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Skip:rect_position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( -109, -0.25, 0, 0.3, 107.693, 10, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Skip:rect_position:y")
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:margin_left")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 399, -0.25, 0, 0.25, 0, 399, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0.0 ]
 }
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Speed:rect_position:x")
+tracks/2/type = "value"
+tracks/2/path = NodePath("LogoAnchor:margin_left")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( -114, -0.25, 0, 0.3, 114.421, 6, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("Speed:rect_position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( 363, -0.25, 0, 0.25, 0, 363, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-
-[sub_resource type="Animation" id=36]
-resource_name = "Pasted Animation"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("RichTextLabel:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 442 ) ]
+"values": [ -385.0 ]
 }
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Skip:rect_position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( -109, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Skip:rect_position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 399, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("Speed:rect_position:x")
+tracks/3/type = "value"
+tracks/3/path = NodePath("LogoAnchor:margin_right")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( -114, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
 }
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("Speed:rect_position:y")
+tracks/4/type = "value"
+tracks/4/path = NodePath("WhiteBar:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( 363, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
-tracks/5/type = "bezier"
-tracks/5/path = NodePath("ColorRect:modulate:r")
+tracks/5/type = "value"
+tracks/5/path = NodePath("WhiteBar2:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/6/type = "bezier"
-tracks/6/path = NodePath("ColorRect:modulate:g")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/7/type = "bezier"
-tracks/7/path = NodePath("ColorRect:modulate:b")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/8/type = "bezier"
-tracks/8/path = NodePath("ColorRect:modulate:a")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/9/type = "bezier"
-tracks/9/path = NodePath("RichTextLabel:modulate:r")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/10/type = "bezier"
-tracks/10/path = NodePath("RichTextLabel:modulate:g")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/11/type = "bezier"
-tracks/11/path = NodePath("RichTextLabel:modulate:b")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/12/type = "bezier"
-tracks/12/path = NodePath("RichTextLabel:modulate:a")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/13/type = "bezier"
-tracks/13/path = NodePath("Speed:modulate:r")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/14/type = "bezier"
-tracks/14/path = NodePath("Speed:modulate:g")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/15/type = "bezier"
-tracks/15/path = NodePath("Speed:modulate:b")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/16/type = "bezier"
-tracks/16/path = NodePath("Speed:modulate:a")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/17/type = "bezier"
-tracks/17/path = NodePath("Skip:modulate:r")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/18/type = "bezier"
-tracks/18/path = NodePath("Skip:modulate:g")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/19/type = "bezier"
-tracks/19/path = NodePath("Skip:modulate:b")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/20/type = "bezier"
-tracks/20/path = NodePath("Skip:modulate:a")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-
-[sub_resource type="Animation" id=17]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("TextureRect:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 318, -250 ) ]
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=4]
+resource_name = "transition"
+length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("Panel:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("TextureRect:rect_position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 318, 68 ) ]
-}
-
-[sub_resource type="Animation" id=10]
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("Panel:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 2, 0.5 ),
-"update": 0,
-"values": [ Vector2( -309, 0 ), Vector2( 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("TextureRect:rect_position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 318, -250 ), Vector2( 318, 68 ) ]
-}
-
-[sub_resource type="Animation" id=11]
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Panel:rect_position")
+tracks/0/path = NodePath("MarginContainer:margin_right")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 0.5, 1 ),
+"transitions": PoolRealArray( 2, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -309, 0 ) ]
+"values": [ 237.0, 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("TextureRect:rect_position")
+tracks/1/path = NodePath("MarginContainer:margin_left")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"transitions": PoolRealArray( 2, 1 ),
 "update": 0,
-"values": [ Vector2( 318, 68 ), Vector2( 318, -250 ) ]
+"values": [ 0.0, -237 ]
 }
-
-[sub_resource type="Animation" id=18]
-resource_name = "trans_out_MainMenuScreen_MultiplayerOptions"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Panel:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 0.5, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -309, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("TextureRect:rect_position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 318, 68 ), Vector2( 318, -250 ) ]
-}
-
-[sub_resource type="Animation" id=15]
-resource_name = "trans_out_MainMenuScreen_SearchScreen"
-length = 0.6
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Panel/VBoxContainer:rect_position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 32, -0.25, 0, 0.25, 0, 32, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Panel/VBoxContainer:rect_position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 27, -0.25, 0, 0.25, 0, 500, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("TextureRect:rect_position:x")
+tracks/2/type = "value"
+tracks/2/path = NodePath("LogoAnchor:margin_left")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 318, -0.25, 0, 0.25, 0, 318, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ -385.0, 0 ]
 }
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("TextureRect:rect_position:y")
+tracks/3/type = "value"
+tracks/3/path = NodePath("LogoAnchor:margin_right")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 68, -0.25, 0, 0.25, 0, -250, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 0.0, 385 ]
 }
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("Panel:modulate:r")
+tracks/4/type = "value"
+tracks/4/path = NodePath("WhiteBar:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/5/type = "bezier"
-tracks/5/path = NodePath("Panel:modulate:g")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/6/type = "bezier"
-tracks/6/path = NodePath("Panel:modulate:b")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/7/type = "bezier"
-tracks/7/path = NodePath("Panel:modulate:a")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-
-[sub_resource type="Animation" id=19]
-resource_name = "trans_out_MultiplayerOptions_MainMenuScreen"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("Panel:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 2, 0.5 ),
-"update": 0,
-"values": [ Vector2( -309, 0 ), Vector2( 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("TextureRect:rect_position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 318, -250 ), Vector2( 318, 68 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
-
-[sub_resource type="Animation" id=16]
-resource_name = "trans_out_SearchScreen_MainMenuScreen"
-length = 0.6
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Panel/VBoxContainer:rect_position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( 32, -0.25, 0, 0.25, 0, 32, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Panel/VBoxContainer:rect_position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 500, -0.25, 0, 0.25, 0, 27, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("TextureRect:rect_position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 318, -0.25, 0, 0.25, 0, 318, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("TextureRect:rect_position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( -250, -0.25, 0, 0.25, 0, 68, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("Panel:modulate:r")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/5/type = "bezier"
-tracks/5/path = NodePath("Panel:modulate:g")
+tracks/5/type = "value"
+tracks/5/path = NodePath("WhiteBar2:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/6/type = "bezier"
-tracks/6/path = NodePath("Panel:modulate:b")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
-}
-tracks/7/type = "bezier"
-tracks/7/path = NodePath("Panel:modulate:a")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.6 )
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=21]
-size = 56
-use_filter = true
-font_data = ExtResource( 3 )
-
-[sub_resource type="StyleBoxFlat" id=22]
-bg_color = Color( 0.615686, 0.615686, 0.615686, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-
-[sub_resource type="StyleBoxFlat" id=23]
-bg_color = Color( 0.905882, 0.905882, 0.905882, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-
-[sub_resource type="StyleBoxFlat" id=24]
-bg_color = Color( 0.439216, 0.439216, 0.439216, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-
-[sub_resource type="StyleBoxFlat" id=25]
-content_margin_top = 12.0
-bg_color = Color( 0.254902, 0.254902, 0.254902, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id=6]
-content_margin_left = 12.0
-bg_color = Color( 0.266667, 0.266667, 0.266667, 1 )
-
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.615686, 0.615686, 0.615686, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.905882, 0.905882, 0.905882, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-
-[sub_resource type="StyleBoxFlat" id=26]
-
-[sub_resource type="StyleBoxFlat" id=27]
-content_margin_left = 12.0
-bg_color = Color( 0.254902, 0.254902, 0.254902, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="Theme" id=28]
-Button/colors/font_color = Color( 0, 0, 0, 1 )
-Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
-Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
-Button/colors/font_color_pressed = Color( 0, 0, 0, 1 )
-Button/constants/hseparation = 2
-Button/fonts/font = null
-Button/styles/disabled = null
-Button/styles/focus = null
-Button/styles/hover = null
-Button/styles/normal = null
-Button/styles/pressed = null
-CheckBox/colors/font_color = Color( 0, 0, 0, 1 )
-CheckBox/colors/font_color_disabled = Color( 0, 0, 0, 1 )
-CheckBox/colors/font_color_hover = Color( 0, 0, 0, 1 )
-CheckBox/colors/font_color_hover_pressed = Color( 0, 0, 0, 1 )
-CheckBox/colors/font_color_pressed = Color( 0, 0, 0, 1 )
-CheckBox/constants/check_vadjust = 0
-CheckBox/constants/hseparation = 4
-CheckBox/fonts/font = null
-CheckBox/icons/checked = null
-CheckBox/icons/radio_checked = null
-CheckBox/icons/radio_unchecked = null
-CheckBox/icons/unchecked = null
-CheckBox/styles/disabled = null
-CheckBox/styles/focus = null
-CheckBox/styles/hover = null
-CheckBox/styles/hover_pressed = null
-CheckBox/styles/normal = null
-CheckBox/styles/pressed = null
-CheckButton/colors/font_color = Color( 0, 0, 0, 1 )
-CheckButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
-CheckButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
-CheckButton/colors/font_color_hover_pressed = Color( 0, 0, 0, 1 )
-CheckButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
-CheckButton/constants/check_vadjust = 0
-CheckButton/constants/hseparation = 4
-CheckButton/fonts/font = null
-CheckButton/icons/off = null
-CheckButton/icons/off_disabled = null
-CheckButton/icons/on = null
-CheckButton/icons/on_disabled = null
-CheckButton/styles/disabled = null
-CheckButton/styles/focus = null
-CheckButton/styles/hover = null
-CheckButton/styles/hover_pressed = null
-CheckButton/styles/normal = null
-CheckButton/styles/pressed = null
-ColorPicker/constants/h_width = 30
-ColorPicker/constants/label_width = 10
-ColorPicker/constants/margin = 4
-ColorPicker/constants/sv_height = 256
-ColorPicker/constants/sv_width = 256
-ColorPicker/icons/add_preset = null
-ColorPicker/icons/color_hue = null
-ColorPicker/icons/color_sample = null
-ColorPicker/icons/overbright_indicator = null
-ColorPicker/icons/preset_bg = null
-ColorPicker/icons/screen_picker = null
-ColorPickerButton/colors/font_color = Color( 0, 0, 0, 1 )
-ColorPickerButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
-ColorPickerButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
-ColorPickerButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
-ColorPickerButton/constants/hseparation = 2
-ColorPickerButton/fonts/font = null
-ColorPickerButton/icons/bg = null
-ColorPickerButton/styles/disabled = null
-ColorPickerButton/styles/focus = null
-ColorPickerButton/styles/hover = null
-ColorPickerButton/styles/normal = null
-ColorPickerButton/styles/pressed = null
-Dialogs/constants/button_margin = 32
-Dialogs/constants/margin = 8
-FileDialog/colors/file_icon_modulate = Color( 0, 0, 0, 1 )
-FileDialog/colors/files_disabled = Color( 0, 0, 0, 1 )
-FileDialog/colors/folder_icon_modulate = Color( 0, 0, 0, 1 )
-FileDialog/icons/file = null
-FileDialog/icons/folder = null
-FileDialog/icons/parent_folder = null
-FileDialog/icons/reload = null
-FileDialog/icons/toggle_hidden = null
-Fonts/fonts/large = null
-Fonts/fonts/normal = null
-GraphEdit/colors/activity = Color( 0, 0, 0, 1 )
-GraphEdit/colors/grid_major = Color( 0, 0, 0, 1 )
-GraphEdit/colors/grid_minor = Color( 0, 0, 0, 1 )
-GraphEdit/colors/selection_fill = Color( 0, 0, 0, 1 )
-GraphEdit/colors/selection_stroke = Color( 0, 0, 0, 1 )
-GraphEdit/constants/bezier_len_neg = 160
-GraphEdit/constants/bezier_len_pos = 80
-GraphEdit/constants/port_grab_distance_horizontal = 48
-GraphEdit/constants/port_grab_distance_vertical = 6
-GraphEdit/icons/minus = null
-GraphEdit/icons/more = null
-GraphEdit/icons/reset = null
-GraphEdit/icons/snap = null
-GraphEdit/styles/bg = null
-GraphNode/colors/close_color = Color( 0, 0, 0, 1 )
-GraphNode/colors/resizer_color = Color( 0, 0, 0, 1 )
-GraphNode/colors/title_color = Color( 0, 0, 0, 1 )
-GraphNode/constants/close_offset = 18
-GraphNode/constants/port_offset = 3
-GraphNode/constants/separation = 1
-GraphNode/constants/title_offset = 20
-GraphNode/fonts/title_font = null
-GraphNode/icons/close = null
-GraphNode/icons/port = null
-GraphNode/icons/resizer = null
-GraphNode/styles/breakpoint = null
-GraphNode/styles/comment = null
-GraphNode/styles/commentfocus = null
-GraphNode/styles/defaultfocus = null
-GraphNode/styles/defaultframe = null
-GraphNode/styles/frame = null
-GraphNode/styles/position = null
-GraphNode/styles/selectedframe = null
-GridContainer/constants/hseparation = 4
-GridContainer/constants/vseparation = 4
-HBoxContainer/constants/separation = 4
-HScrollBar/icons/decrement = null
-HScrollBar/icons/decrement_highlight = null
-HScrollBar/icons/increment = null
-HScrollBar/icons/increment_highlight = null
-HScrollBar/styles/grabber = SubResource( 22 )
-HScrollBar/styles/grabber_highlight = SubResource( 23 )
-HScrollBar/styles/grabber_pressed = SubResource( 24 )
-HScrollBar/styles/scroll = SubResource( 25 )
-HScrollBar/styles/scroll_focus = SubResource( 6 )
-HSeparator/constants/separation = 4
-HSeparator/styles/separator = null
-HSlider/icons/grabber = null
-HSlider/icons/grabber_disabled = null
-HSlider/icons/grabber_highlight = null
-HSlider/icons/tick = null
-HSlider/styles/grabber_area = null
-HSlider/styles/grabber_area_highlight = null
-HSlider/styles/slider = null
-HSplitContainer/constants/autohide = 1
-HSplitContainer/constants/separation = 12
-HSplitContainer/icons/grabber = null
-HSplitContainer/styles/bg = null
-Icons/icons/close = null
-ItemList/colors/font_color = Color( 0, 0, 0, 1 )
-ItemList/colors/font_color_selected = Color( 0, 0, 0, 1 )
-ItemList/colors/guide_color = Color( 0, 0, 0, 1 )
-ItemList/constants/hseparation = 4
-ItemList/constants/icon_margin = 4
-ItemList/constants/line_separation = 2
-ItemList/constants/vseparation = 2
-ItemList/fonts/font = null
-ItemList/styles/bg = null
-ItemList/styles/bg_focus = null
-ItemList/styles/cursor = null
-ItemList/styles/cursor_unfocused = null
-ItemList/styles/selected = null
-ItemList/styles/selected_focus = null
-Label/colors/font_color = Color( 0, 0, 0, 1 )
-Label/colors/font_color_shadow = Color( 0, 0, 0, 1 )
-Label/colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-Label/constants/line_spacing = 3
-Label/constants/shadow_as_outline = 0
-Label/constants/shadow_offset_x = 1
-Label/constants/shadow_offset_y = 1
-Label/fonts/font = null
-Label/styles/normal = null
-LineEdit/colors/clear_button_color = Color( 0, 0, 0, 1 )
-LineEdit/colors/clear_button_color_pressed = Color( 0, 0, 0, 1 )
-LineEdit/colors/cursor_color = Color( 0, 0, 0, 1 )
-LineEdit/colors/font_color = Color( 0, 0, 0, 1 )
-LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
-LineEdit/colors/font_color_uneditable = Color( 0, 0, 0, 1 )
-LineEdit/colors/selection_color = Color( 0, 0, 0, 1 )
-LineEdit/constants/minimum_spaces = 12
-LineEdit/fonts/font = null
-LineEdit/icons/clear = null
-LineEdit/styles/focus = null
-LineEdit/styles/normal = null
-LineEdit/styles/read_only = null
-LinkButton/colors/font_color = Color( 0, 0, 0, 1 )
-LinkButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
-LinkButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
-LinkButton/constants/underline_spacing = 2
-LinkButton/fonts/font = null
-LinkButton/styles/focus = null
-MarginContainer/constants/margin_bottom = 0
-MarginContainer/constants/margin_left = 0
-MarginContainer/constants/margin_right = 0
-MarginContainer/constants/margin_top = 0
-MenuButton/colors/font_color = Color( 0, 0, 0, 1 )
-MenuButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
-MenuButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
-MenuButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
-MenuButton/constants/hseparation = 3
-MenuButton/fonts/font = null
-MenuButton/styles/disabled = null
-MenuButton/styles/focus = null
-MenuButton/styles/hover = null
-MenuButton/styles/normal = null
-MenuButton/styles/pressed = null
-OptionButton/colors/font_color = Color( 0, 0, 0, 1 )
-OptionButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
-OptionButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
-OptionButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
-OptionButton/constants/arrow_margin = 2
-OptionButton/constants/hseparation = 2
-OptionButton/fonts/font = null
-OptionButton/icons/arrow = null
-OptionButton/styles/disabled = null
-OptionButton/styles/focus = null
-OptionButton/styles/hover = null
-OptionButton/styles/normal = null
-OptionButton/styles/pressed = null
-Panel/styles/panel = null
-PanelContainer/styles/panel = null
-PopupDialog/styles/panel = null
-PopupMenu/colors/font_color = Color( 0, 0, 0, 1 )
-PopupMenu/colors/font_color_accel = Color( 0, 0, 0, 1 )
-PopupMenu/colors/font_color_disabled = Color( 0, 0, 0, 1 )
-PopupMenu/colors/font_color_hover = Color( 0, 0, 0, 1 )
-PopupMenu/constants/hseparation = 4
-PopupMenu/constants/vseparation = 4
-PopupMenu/fonts/font = null
-PopupMenu/icons/checked = null
-PopupMenu/icons/radio_checked = null
-PopupMenu/icons/radio_unchecked = null
-PopupMenu/icons/submenu = null
-PopupMenu/icons/unchecked = null
-PopupMenu/styles/hover = null
-PopupMenu/styles/labeled_separator_left = null
-PopupMenu/styles/labeled_separator_right = null
-PopupMenu/styles/panel = null
-PopupMenu/styles/panel_disabled = null
-PopupMenu/styles/separator = null
-PopupPanel/styles/panel = null
-ProgressBar/colors/font_color = Color( 0, 0, 0, 1 )
-ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
-ProgressBar/fonts/font = null
-ProgressBar/styles/bg = null
-ProgressBar/styles/fg = null
-RichTextLabel/colors/default_color = Color( 0, 0, 0, 1 )
-RichTextLabel/colors/font_color_selected = Color( 0, 0, 0, 1 )
-RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )
-RichTextLabel/colors/selection_color = Color( 0, 0, 0, 1 )
-RichTextLabel/constants/line_separation = 1
-RichTextLabel/constants/shadow_as_outline = 0
-RichTextLabel/constants/shadow_offset_x = 1
-RichTextLabel/constants/shadow_offset_y = 1
-RichTextLabel/constants/table_hseparation = 3
-RichTextLabel/constants/table_vseparation = 3
-RichTextLabel/fonts/bold_font = null
-RichTextLabel/fonts/bold_italics_font = null
-RichTextLabel/fonts/italics_font = null
-RichTextLabel/fonts/mono_font = null
-RichTextLabel/fonts/normal_font = null
-RichTextLabel/styles/focus = null
-RichTextLabel/styles/normal = null
-ScrollContainer/styles/bg = null
-SpinBox/icons/updown = null
-TabContainer/colors/font_color_bg = Color( 0, 0, 0, 1 )
-TabContainer/colors/font_color_disabled = Color( 0, 0, 0, 1 )
-TabContainer/colors/font_color_fg = Color( 0, 0, 0, 1 )
-TabContainer/constants/hseparation = 4
-TabContainer/constants/label_valign_bg = 2
-TabContainer/constants/label_valign_fg = 0
-TabContainer/constants/side_margin = 8
-TabContainer/constants/top_margin = 24
-TabContainer/fonts/font = null
-TabContainer/icons/decrement = null
-TabContainer/icons/decrement_highlight = null
-TabContainer/icons/increment = null
-TabContainer/icons/increment_highlight = null
-TabContainer/icons/menu = null
-TabContainer/icons/menu_highlight = null
-TabContainer/styles/panel = null
-TabContainer/styles/tab_bg = null
-TabContainer/styles/tab_disabled = null
-TabContainer/styles/tab_fg = null
-Tabs/colors/font_color_bg = Color( 0, 0, 0, 1 )
-Tabs/colors/font_color_disabled = Color( 0, 0, 0, 1 )
-Tabs/colors/font_color_fg = Color( 0, 0, 0, 1 )
-Tabs/constants/hseparation = 4
-Tabs/constants/label_valign_bg = 2
-Tabs/constants/label_valign_fg = 0
-Tabs/constants/top_margin = 24
-Tabs/fonts/font = null
-Tabs/icons/close = null
-Tabs/icons/decrement = null
-Tabs/icons/decrement_highlight = null
-Tabs/icons/increment = null
-Tabs/icons/increment_highlight = null
-Tabs/styles/button = null
-Tabs/styles/button_pressed = null
-Tabs/styles/panel = null
-Tabs/styles/tab_bg = null
-Tabs/styles/tab_disabled = null
-Tabs/styles/tab_fg = null
-TextEdit/colors/background_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/bookmark_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/brace_mismatch_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/breakpoint_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/caret_background_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/caret_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/code_folding_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/completion_background_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/completion_existing_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/completion_font_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/completion_scroll_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/completion_selected_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/current_line_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/executing_line_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/font_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/font_color_readonly = Color( 0, 0, 0, 1 )
-TextEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
-TextEdit/colors/function_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/line_number_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/mark_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/member_variable_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/number_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/safe_line_number_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/selection_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/symbol_color = Color( 0, 0, 0, 1 )
-TextEdit/colors/word_highlighted_color = Color( 0, 0, 0, 1 )
-TextEdit/constants/completion_lines = 7
-TextEdit/constants/completion_max_width = 50
-TextEdit/constants/completion_scroll_width = 3
-TextEdit/constants/line_spacing = 4
-TextEdit/fonts/font = null
-TextEdit/icons/fold = null
-TextEdit/icons/folded = null
-TextEdit/icons/space = null
-TextEdit/icons/tab = null
-TextEdit/styles/completion = null
-TextEdit/styles/focus = null
-TextEdit/styles/normal = null
-TextEdit/styles/read_only = null
-ToolButton/colors/font_color = Color( 0, 0, 0, 1 )
-ToolButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
-ToolButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
-ToolButton/colors/font_color_pressed = Color( 0, 0, 0, 1 )
-ToolButton/constants/hseparation = 3
-ToolButton/fonts/font = null
-ToolButton/styles/disabled = null
-ToolButton/styles/focus = null
-ToolButton/styles/hover = null
-ToolButton/styles/normal = null
-ToolButton/styles/pressed = null
-TooltipLabel/colors/font_color = Color( 0, 0, 0, 1 )
-TooltipLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )
-TooltipLabel/constants/shadow_offset_x = 1
-TooltipLabel/constants/shadow_offset_y = 1
-TooltipLabel/fonts/font = null
-TooltipPanel/styles/panel = null
-Tree/colors/custom_button_font_highlight = Color( 0, 0, 0, 1 )
-Tree/colors/drop_position_color = Color( 0, 0, 0, 1 )
-Tree/colors/font_color = Color( 0, 0, 0, 1 )
-Tree/colors/font_color_selected = Color( 0, 0, 0, 1 )
-Tree/colors/guide_color = Color( 0, 0, 0, 1 )
-Tree/colors/relationship_line_color = Color( 0, 0, 0, 1 )
-Tree/colors/title_button_color = Color( 0, 0, 0, 1 )
-Tree/constants/button_margin = 4
-Tree/constants/draw_guides = 1
-Tree/constants/draw_relationship_lines = 0
-Tree/constants/hseparation = 4
-Tree/constants/item_margin = 12
-Tree/constants/scroll_border = 4
-Tree/constants/scroll_speed = 12
-Tree/constants/vseparation = 4
-Tree/fonts/font = null
-Tree/fonts/title_button_font = null
-Tree/icons/arrow = null
-Tree/icons/arrow_collapsed = null
-Tree/icons/checked = null
-Tree/icons/select_arrow = null
-Tree/icons/unchecked = null
-Tree/icons/updown = null
-Tree/styles/bg = null
-Tree/styles/bg_focus = null
-Tree/styles/button_pressed = null
-Tree/styles/cursor = null
-Tree/styles/cursor_unfocused = null
-Tree/styles/custom_button = null
-Tree/styles/custom_button_hover = null
-Tree/styles/custom_button_pressed = null
-Tree/styles/selected = null
-Tree/styles/selected_focus = null
-Tree/styles/title_button_hover = null
-Tree/styles/title_button_normal = null
-Tree/styles/title_button_pressed = null
-VBoxContainer/constants/separation = 4
-VScrollBar/icons/decrement = null
-VScrollBar/icons/decrement_highlight = null
-VScrollBar/icons/increment = null
-VScrollBar/icons/increment_highlight = null
-VScrollBar/styles/grabber = SubResource( 7 )
-VScrollBar/styles/grabber_highlight = SubResource( 8 )
-VScrollBar/styles/grabber_pressed = SubResource( 26 )
-VScrollBar/styles/scroll = SubResource( 27 )
-VScrollBar/styles/scroll_focus = SubResource( 6 )
-VSeparator/constants/separation = 4
-VSeparator/styles/separator = null
-VSlider/icons/grabber = null
-VSlider/icons/grabber_disabled = null
-VSlider/icons/grabber_highlight = null
-VSlider/icons/tick = null
-VSlider/styles/grabber_area = null
-VSlider/styles/grabber_area_highlight = null
-VSlider/styles/slider = null
-VSplitContainer/constants/autohide = 1
-VSplitContainer/constants/separation = 12
-VSplitContainer/icons/grabber = null
-VSplitContainer/styles/bg = null
-WindowDialog/colors/title_color = Color( 0, 0, 0, 1 )
-WindowDialog/constants/close_h_ofs = 18
-WindowDialog/constants/close_v_ofs = 18
-WindowDialog/constants/scaleborder_size = 4
-WindowDialog/constants/title_height = 20
-WindowDialog/fonts/title_font = null
-WindowDialog/icons/close = null
-WindowDialog/icons/close_highlight = null
-WindowDialog/styles/panel = null
-
-[sub_resource type="GDScript" id=12]
-script/source = "extends ScrollContainer
-
-onready var autotiling_container = get_node(\"../Autotiling\")
-
-onready var hotkeys_button = get_node(\"../HotkeysButton\")
-onready var autotiling_button = get_node(\"../AutotilingButton\")
-
-func _ready():
-	var _connect = hotkeys_button.connect(\"pressed\", self, \"switch_to_hotkeys\")
-	_connect = autotiling_button.connect(\"pressed\", self, \"switch_to_autotiling\")
-
-func switch_to_hotkeys():
-	autotiling_container.visible = false
-	autotiling_button.disabled = false
-	
-	hotkeys_button.disabled = true
-	visible = true
-
-func switch_to_autotiling():
-	autotiling_container.visible = true
-	autotiling_button.disabled = true
-	
-	hotkeys_button.disabled = false
-	visible = false
-"
-
-[sub_resource type="DynamicFont" id=29]
-size = 46
-use_filter = true
-font_data = ExtResource( 3 )
-
-[node name="MainMenuScreen" type="Control"]
+[node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 384, 216 )
-script = ExtResource( 1 )
-
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_left = 318.0
-margin_top = -250.0
-margin_right = 2518.0
-margin_bottom = 1150.0
-rect_scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 4 )
-stretch_mode = 1
-
-[node name="TextureRect2" type="TextureRect" parent="TextureRect"]
-modulate = Color( 0.439216, 0.396078, 0.282353, 1 )
-self_modulate = Color( 0.466667, 0.403922, 0.239216, 0.294118 )
-show_behind_parent = true
-margin_left = 100.0
-margin_top = 95.0
-margin_right = 10590.0
-margin_bottom = 6770.0
-rect_scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 4 )
-stretch_mode = 1
-
-[node name="Panel" type="Panel" parent="."]
-margin_bottom = 432.0
-mouse_filter = 2
-custom_styles/panel = SubResource( 1 )
-
-[node name="Background" type="TextureRect" parent="Panel"]
-margin_top = 432.0
-margin_right = 768.0
-margin_bottom = 864.0
-rect_rotation = -90.0
-rect_scale = Vector2( 1, 2.1 )
-mouse_filter = 2
-texture = ExtResource( 5 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-margin_left = 32.0
-margin_top = 27.0
-margin_right = 277.0
-margin_bottom = 471.0
-custom_constants/separation = 12
-
-[node name="ButtonTemplates" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
-margin_right = 245.0
-margin_bottom = 64.0
-focus_neighbour_left = NodePath("../../ButtonQuit")
-custom_fonts/font = SubResource( 3 )
-text = "Samples"
-
-[node name="ButtonSearch" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 76.0
-margin_right = 245.0
-margin_bottom = 140.0
-focus_neighbour_left = NodePath("../../ButtonQuit")
-custom_fonts/font = SubResource( 3 )
-text = "Search"
-
-[node name="ButtonLevels" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 152.0
-margin_right = 245.0
-margin_bottom = 216.0
-focus_neighbour_left = NodePath("../../ButtonQuit")
-custom_fonts/font = SubResource( 2 )
-text = "Levels"
-
-[node name="ButtonOptions" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 228.0
-margin_right = 245.0
-margin_bottom = 292.0
-focus_neighbour_left = NodePath("../../ButtonQuit")
-focus_neighbour_bottom = NodePath("../../ButtonQuit")
-custom_fonts/font = SubResource( 2 )
-text = "Options"
-
-[node name="ButtonCampaign" parent="Panel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 304.0
-margin_right = 245.0
-margin_bottom = 368.0
-focus_neighbour_left = NodePath("../../ButtonQuit")
-focus_neighbour_top = NodePath("../../ButtonQuit")
-custom_fonts/font = SubResource( 2 )
-text = "Credits"
-
-[node name="ButtonLogin" parent="Panel" instance=ExtResource( 2 )]
-margin_left = 40.0
-margin_top = 399.0
-margin_right = 198.0
-margin_bottom = 447.0
-rect_scale = Vector2( 0.62, 0.62 )
-focus_neighbour_left = NodePath("../ButtonQuit")
-focus_neighbour_top = NodePath("../ButtonQuit")
-custom_fonts/font = SubResource( 20 )
-text = "Log in"
-icon = ExtResource( 10 )
-expand_icon = true
-script = ExtResource( 8 )
-window = NodePath("../../LogInWindow")
-starting_position = Vector2( 0, 0 )
-
-[node name="ButtonQuit" parent="Panel" instance=ExtResource( 6 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 4.0
-margin_top = 399.0
-margin_right = 36.0
-margin_bottom = 429.0
-focus_neighbour_top = NodePath("../VBoxContainer/ButtonOptions")
-focus_neighbour_right = NodePath("../VBoxContainer/ButtonOptions")
-focus_neighbour_bottom = NodePath("../VBoxContainer/ButtonCampaign")
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
-icon_align = 1
-
-[node name="Control" type="Control" parent="."]
-margin_left = 1.52588e-05
-margin_top = 1.52588e-05
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="ColorRect" type="ColorRect" parent="Control"]
-modulate = Color( 1, 1, 1, 0 )
-margin_right = 774.0
-margin_bottom = 439.0
-mouse_filter = 2
-color = Color( 0, 0, 0, 1 )
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
-margin_top = 442.0
-margin_right = 796.0
-margin_bottom = 7721.0
-custom_fonts/normal_font = SubResource( 30 )
-bbcode_enabled = true
-bbcode_text = "[center]Super Mario 127
-Development Team
-
-Super Mario 63:
-Robert \"runouw\" Hewitt
-Steven \"runouw\" Hewitt
-
-Campaign Lead:
-\"Samitizer\"
-
-Programming Lead:
-Jake \"PlugAndPlay\"
-Rin \"Dignity\"
-
-Sound Design Lead:
-Arin \"ArieJuice\" Milan
-
-Creative Lead:
-Charlotte \"Charpurr\" Fox
-
-Team Lead:
-\"MrGerund\" (Resigned)
-\"Flarewire\" (Resigned)
-Charlotte \"Charpurr\" Fox
-
-Level Editor Lead:
-Brian \"Linktober\"
-
-Promotional Lead:
-\"FastMario\"
-
-
-
-Audio Engineer:
-Gale \"goatsoup\" Sosa (Resigned)
-Arin \"ArieJuice\" Milan
-
-Composer:
-Gale \"goatsoup\" Sosa (Resigned)
-\"AquaDoesStuff\" (Resigned)
-Mason \"RetroReboot\" Jackson
-Jake \"PlugAndPlay\"
-\"FastMario\"
-\"pyrule\"
-\"AM4\"
-
-Programmer:
-\"TrafficConeGod\" (Resigned)
-\"skeletontourguide\" (Resigned)
-\"JuPaHe64\" (Resigned)
-\"Flarewire\" (Resigned)
-\"Entiss\" (Resigned)
-\"certi\" (Resigned)
-Jake \"PlugAndPlay\"
-Rin \"Dignity\"
-\"Chlorobyte\"
-\"GTcreyon\"
-\"met3o\"
-\"pyrule\"
-\"tabs\"
-
-Sprite Artist:
-\"KrystalPhantasm\" (Resigned)
-\"Reshi\" (Resigned)
-Doram \"DoramB\" Baramour
-Charlotte \"Charpurrr\" Fox
-Mack \"masterminer176\"
-Antonio \"Antonio4444\"
-\"CyanHyprPsychic\"
-Brian \"Linktober\"
-\"AquaDoesStuff\"
-Hrasyurr \"Azzy\"
-\"PumpkinVolt\"
-\"NanTheDark\"
-\"E_WOLFFE\"
-\"AstraSpec\"
-\"le_kappa\"
-\"Saneko\"
-\"wad\"
-
-Animator:
-Charlotte \"Charpurrr\" Fox
-Mack \"masterminer176\"
-\"CyanHyprPsychic\"
-\"PumpkinVolt\"
-
-Level Designer:
-Rudy \"Rudy12345mc\" Mueller
-Christian \"Chri_ti_03\"
-Brian \"Linktober\"
-\"Samitizer\"
-\"tabs\"
-
-UI Design:
-\"AgentOGames\"
-Tee \"teebeeYT\"
-\"Refusion\"
-\"AM4\"
-
-QA Tester:
-\"GreenStarStudios\"
-Brian \"Linktober\"
-\"E_WOLFFE\"
-\"Samitizer\"
-\"Vexxter\"
-
-Marketing:
-Charlotte \"Charpurrr\" Fox
-Rin \"Dignity\"
-\"FastMario\"
-\"tabs\"
-
-Promotional Artist:
-\"T4ctical\" (Resigned)
-Carlos \"The Painted\"
-\"axelorca\"
-
-Concept Artist:
-Mason \"RetroReboot\" Jackson
-\"CyanHyprPsychic\"
-\"GreenStarStudios\"
-\"15 Minute Gamer\"
-\"E_WOLFFE\"
-\"Alkalide\"
-
-Discord Server Staff:
-Rudy \"Rudy12345mc\" Mueller
-\"That's Mama Luigi To You\"
-Charlotte \"Charpurrr\" Fox
-Christian \"Chri_ti_03\"
-\"PumpkinVolt\"
-\"GateTheCat\"
-Rin \"Dignity\"
-\"Luigibonus\"
-\"FastMario\"
-\"Samitizer\"
-\"Linktober\"
-\"Kommult\"
-\"Vexxter\"
-
-Designer Contest Hosts:
-Rudy \"Rudy12345mc\" Mueller
-Brian \"Linktober\"
-\"tabs\"
-
-Level Share Square:
-
-Administration:
-\"Luigibonus\"
-\"MrGerund\"
-\"bluSeven\"
-\"Vexavios\"
-\"Tristaph\"
-
-Moderation:
-Rudy \"Rudy12345mc\" Mueller
-\"GenericNintendoFan\"
-\"BlazingDragon\"
-\"El Cabanoss\"
-\"Vortoxium\"
-\"Skopler\"
-
-
-Inspiration and Reference:
-\"Greiga Master\"
-\"aloelucidity\"
-\"Parakoopa\"
-\"A.J. Nitro\"
-\"Mageker\"
-\"puggesy\"
-\"Ragey\"
-\"Flare\"
-
-Special Thanks:
-Shoutouts to Simpleflips
-John \"John Espagueti Largo DLC\" Espagueti Largo
-Matias \"MrEGamer\" Eberbach
-Daniar \"arcatchik\"
-\"m4r10_fan2008\"
-\"TheGaming100\"
-\"Moola Mixtape\"
-\"DudeGamer64\"
-\"Dude Solid\"
-\"HakonEM\"
-\"G0ldYosh\"
-\"AndratVA\"
-\"zerdebird\"
-\"Gibom\"
-\"Rovert\"
-\"Funz\"
-\"Yaya\"
-And you, for sitting through these credits!
-
-You, too, can join the list by applying for development in the discord server. We hope to see you there!
-
-"
-text = "Super Mario 127
-Development Team
-
-Super Mario 63:
-Robert \"runouw\" Hewitt
-Steven \"runouw\" Hewitt
-
-Campaign Lead:
-\"Samitizer\"
-
-Programming Lead:
-Jake \"PlugAndPlay\"
-Rin \"Dignity\"
-
-Sound Design Lead:
-Arin \"ArieJuice\" Milan
-
-Creative Lead:
-Charlotte \"Charpurr\" Fox
-
-Team Lead:
-\"MrGerund\" (Resigned)
-\"Flarewire\" (Resigned)
-Charlotte \"Charpurr\" Fox
-
-Level Editor Lead:
-Brian \"Linktober\"
-
-Promotional Lead:
-\"FastMario\"
-
-
-
-Audio Engineer:
-Gale \"goatsoup\" Sosa (Resigned)
-Arin \"ArieJuice\" Milan
-
-Composer:
-Gale \"goatsoup\" Sosa (Resigned)
-\"AquaDoesStuff\" (Resigned)
-Mason \"RetroReboot\" Jackson
-Jake \"PlugAndPlay\"
-\"FastMario\"
-\"pyrule\"
-\"AM4\"
-
-Programmer:
-\"TrafficConeGod\" (Resigned)
-\"skeletontourguide\" (Resigned)
-\"JuPaHe64\" (Resigned)
-\"Flarewire\" (Resigned)
-\"Entiss\" (Resigned)
-\"certi\" (Resigned)
-Jake \"PlugAndPlay\"
-Rin \"Dignity\"
-\"Chlorobyte\"
-\"GTcreyon\"
-\"met3o\"
-\"pyrule\"
-\"tabs\"
-
-Sprite Artist:
-\"KrystalPhantasm\" (Resigned)
-\"Reshi\" (Resigned)
-Doram \"DoramB\" Baramour
-Charlotte \"Charpurrr\" Fox
-Mack \"masterminer176\"
-Antonio \"Antonio4444\"
-\"CyanHyprPsychic\"
-Brian \"Linktober\"
-\"AquaDoesStuff\"
-Hrasyurr \"Azzy\"
-\"PumpkinVolt\"
-\"NanTheDark\"
-\"E_WOLFFE\"
-\"AstraSpec\"
-\"le_kappa\"
-\"Saneko\"
-\"wad\"
-
-Animator:
-Charlotte \"Charpurrr\" Fox
-Mack \"masterminer176\"
-\"CyanHyprPsychic\"
-\"PumpkinVolt\"
-
-Level Designer:
-Rudy \"Rudy12345mc\" Mueller
-Christian \"Chri_ti_03\"
-Brian \"Linktober\"
-\"Samitizer\"
-\"tabs\"
-
-UI Design:
-\"AgentOGames\"
-Tee \"teebeeYT\"
-\"Refusion\"
-\"AM4\"
-
-QA Tester:
-\"GreenStarStudios\"
-Brian \"Linktober\"
-\"E_WOLFFE\"
-\"Samitizer\"
-\"Vexxter\"
-
-Marketing:
-Charlotte \"Charpurrr\" Fox
-Rin \"Dignity\"
-\"FastMario\"
-\"tabs\"
-
-Promotional Artist:
-\"T4ctical\" (Resigned)
-Carlos \"The Painted\"
-\"axelorca\"
-
-Concept Artist:
-Mason \"RetroReboot\" Jackson
-\"CyanHyprPsychic\"
-\"GreenStarStudios\"
-\"15 Minute Gamer\"
-\"E_WOLFFE\"
-\"Alkalide\"
-
-Discord Server Staff:
-Rudy \"Rudy12345mc\" Mueller
-\"That's Mama Luigi To You\"
-Charlotte \"Charpurrr\" Fox
-Christian \"Chri_ti_03\"
-\"PumpkinVolt\"
-\"GateTheCat\"
-Rin \"Dignity\"
-\"Luigibonus\"
-\"FastMario\"
-\"Samitizer\"
-\"Linktober\"
-\"Kommult\"
-\"Vexxter\"
-
-Designer Contest Hosts:
-Rudy \"Rudy12345mc\" Mueller
-Brian \"Linktober\"
-\"tabs\"
-
-Level Share Square:
-
-Administration:
-\"Luigibonus\"
-\"MrGerund\"
-\"bluSeven\"
-\"Vexavios\"
-\"Tristaph\"
-
-Moderation:
-Rudy \"Rudy12345mc\" Mueller
-\"GenericNintendoFan\"
-\"BlazingDragon\"
-\"El Cabanoss\"
-\"Vortoxium\"
-\"Skopler\"
-
-
-Inspiration and Reference:
-\"Greiga Master\"
-\"aloelucidity\"
-\"Parakoopa\"
-\"A.J. Nitro\"
-\"Mageker\"
-\"puggesy\"
-\"Ragey\"
-\"Flare\"
-
-Special Thanks:
-Shoutouts to Simpleflips
-John \"John Espagueti Largo DLC\" Espagueti Largo
-Matias \"MrEGamer\" Eberbach
-Daniar \"arcatchik\"
-\"m4r10_fan2008\"
-\"TheGaming100\"
-\"Moola Mixtape\"
-\"DudeGamer64\"
-\"Dude Solid\"
-\"HakonEM\"
-\"G0ldYosh\"
-\"AndratVA\"
-\"zerdebird\"
-\"Gibom\"
-\"Rovert\"
-\"Funz\"
-\"Yaya\"
-And you, for sitting through these credits!
-
-You, too, can join the list by applying for development in the discord server. We hope to see you there!
-
-"
-
-[node name="Skip" parent="Control" instance=ExtResource( 2 )]
-margin_left = -109.0
-margin_top = 399.0
-margin_right = 49.0
-margin_bottom = 447.0
-rect_scale = Vector2( 0.62, 0.62 )
-focus_neighbour_left = NodePath("../ButtonQuit")
-focus_neighbour_top = NodePath("../ButtonQuit")
-custom_fonts/font = SubResource( 20 )
-text = "Skip"
-expand_icon = true
-
-[node name="Speed" parent="Control" instance=ExtResource( 2 )]
-margin_left = -114.0
-margin_top = 363.0
-margin_right = 59.0
-margin_bottom = 411.0
-rect_scale = Vector2( 0.62, 0.62 )
-focus_neighbour_left = NodePath("../ButtonQuit")
-focus_neighbour_top = NodePath("../ButtonQuit")
-custom_fonts/font = SubResource( 20 )
-text = "Speed (5x)"
-expand_icon = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
-anims/RESET = SubResource( 31 )
-"anims/button in" = SubResource( 33 )
-anims/roll = SubResource( 32 )
-anims/skip = SubResource( 34 )
-
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="Control"]
-"anims/button in" = SubResource( 35 )
-
-[node name="AnimationPlayer3" type="AnimationPlayer" parent="Control"]
-"anims/Pasted Animation" = SubResource( 36 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 17 )
-anims/default = SubResource( 9 )
-anims/trans_out_LevelsScreen_MainMenuScreen = SubResource( 10 )
-anims/trans_out_MainMenuScreen_LevelsScreen = SubResource( 11 )
-anims/trans_out_MainMenuScreen_MultiplayerOptions = SubResource( 18 )
-anims/trans_out_MainMenuScreen_SearchScreen = SubResource( 15 )
-anims/trans_out_MultiplayerOptions_MainMenuScreen = SubResource( 19 )
-anims/trans_out_SearchScreen_MainMenuScreen = SubResource( 16 )
-
-[node name="CooldownTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="LogInWindow" parent="." instance=ExtResource( 7 )]
-visible = false
-margin_left = 197.0
-margin_top = 127.0
-margin_right = 1250.0
-margin_bottom = 617.0
-
-[node name="HelpWindow" parent="." instance=ExtResource( 9 )]
-visible = false
-margin_left = 197.0
-margin_top = 135.0
-margin_right = 1250.0
-margin_bottom = 443.0
-
-[node name="ErrorWindow" type="NinePatchRect" parent="."]
-visible = false
-margin_left = 195.0
-margin_top = 133.0
-margin_right = 1248.0
-margin_bottom = 441.0
-rect_scale = Vector2( 0.4, 0.4 )
-mouse_filter = 0
-texture = ExtResource( 16 )
-region_rect = Rect2( 0, 0, 108, 290 )
-patch_margin_left = 40
-patch_margin_top = 110
-patch_margin_right = 40
-patch_margin_bottom = 40
-script = ExtResource( 13 )
-
-[node name="Title" type="RichTextLabel" parent="ErrorWindow"]
-margin_left = 24.0
-margin_top = 24.2632
-margin_right = 456.0
-margin_bottom = 102.263
-mouse_filter = 2
-custom_fonts/normal_font = SubResource( 21 )
-bbcode_text = "LSS"
-text = "LSS"
-
-[node name="CloseButton" type="TextureButton" parent="ErrorWindow"]
-margin_left = 888.65
-margin_top = 12.953
-margin_right = 1043.65
-margin_bottom = 93.953
-rect_scale = Vector2( 0.95, 0.95 )
-texture_normal = ExtResource( 14 )
-texture_pressed = ExtResource( 14 )
-texture_hover = ExtResource( 15 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HoverSound" type="AudioStreamPlayer" parent="ErrorWindow/CloseButton"]
+rect_clip_content = true
+theme = ExtResource( 2 )
+script = ExtResource( 12 )
+
+[node name="ButtonFunctions" type="Control" parent="."]
+script = ExtResource( 3 )
+
+[node name="Focus" type="Control" parent="."]
+script = ExtResource( 9 )
+default_focus_path = NodePath("../MarginContainer/VBoxContainer/DevLevels")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 stream = ExtResource( 11 )
 volume_db = -10.0
+bus = "Sounds"
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="ErrorWindow/CloseButton"]
-stream = ExtResource( 12 )
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
-[node name="Hotkeys" type="ScrollContainer" parent="ErrorWindow"]
-margin_left = 36.0
-margin_top = 126.0
-margin_right = 1014.0
-margin_bottom = 482.0
-theme = SubResource( 28 )
-scroll_horizontal_enabled = false
-script = SubResource( 12 )
+[node name="WhiteBar" type="TextureRect" parent="."]
+margin_left = -204.0
+margin_top = 218.0
+margin_right = 943.0
+margin_bottom = 431.0
+rect_rotation = 15.0
+texture = SubResource( 8 )
+expand = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ErrorWindow/Hotkeys"]
-margin_right = 978.0
-margin_bottom = 356.0
-size_flags_horizontal = 3
+[node name="WhiteBar2" type="TextureRect" parent="."]
+margin_left = 981.0
+margin_top = 207.0
+margin_right = 2128.0
+margin_bottom = 420.0
+rect_rotation = -165.0
+texture = SubResource( 8 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -240.0
+margin_right = 237.0
+rect_rotation = 1.5
 size_flags_vertical = 3
-custom_colors/default_color = Color( 1, 1, 1, 1 )
-custom_fonts/normal_font = SubResource( 29 )
-bbcode_enabled = true
-bbcode_text = "Invalid log-in session. Please log in again to access more Level Share Square features."
-text = "Invalid log-in session. Please log in again to access more Level Share Square features."
-fit_content_height = true
-scroll_active = false
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 28
 
-[node name="Tween" type="Tween" parent="ErrorWindow"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 237.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 232, 0 )
+alignment = 2
 
-[node name="HotkeysButton" parent="ErrorWindow" instance=ExtResource( 2 )]
+[node name="DevLevels" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 20.0
+margin_right = 237.0
+margin_bottom = 52.0
+focus_neighbour_top = NodePath("../HBoxContainer/Options")
+focus_neighbour_bottom = NodePath("../LSS")
+theme_type_variation = "Special"
+text = "Developer Levels"
+align = 2
+script = ExtResource( 8 )
+
+[node name="Shadow" type="NinePatchRect" parent="MarginContainer/VBoxContainer/DevLevels"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 5 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="LSS" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 68.0
+margin_right = 237.0
+margin_bottom = 100.0
+focus_neighbour_top = NodePath("../DevLevels")
+focus_neighbour_bottom = NodePath("../SavedLevels")
+text = "  Level Share Square"
+align = 2
+script = ExtResource( 8 )
+
+[node name="Shadow" type="NinePatchRect" parent="MarginContainer/VBoxContainer/LSS"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 5 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/LSS"]
+margin_left = 34.0
+margin_top = 1.0
+margin_right = 59.0
+margin_bottom = 27.0
+texture = ExtResource( 7 )
+expand = true
+script = ExtResource( 17 )
+offset = Vector2( -178, -2 )
+
+[node name="SavedLevels" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 116.0
+margin_right = 237.0
+margin_bottom = 148.0
+focus_neighbour_top = NodePath("../LSS")
+focus_neighbour_bottom = NodePath("../HBoxContainer/Options")
+text = "Saved Levels"
+align = 2
+script = ExtResource( 8 )
+
+[node name="Shadow" type="NinePatchRect" parent="MarginContainer/VBoxContainer/SavedLevels"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 5 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Padding" type="Control" parent="MarginContainer/VBoxContainer"]
+margin_top = 164.0
+margin_right = 237.0
+margin_bottom = 164.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 180.0
+margin_right = 237.0
+margin_bottom = 212.0
+custom_constants/separation = 6
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 51.0
+margin_bottom = 32.0
+focus_neighbour_left = NodePath("../Credits")
+focus_neighbour_top = NodePath("../../SavedLevels")
+focus_neighbour_right = NodePath("../Options")
+focus_neighbour_bottom = NodePath("../../DevLevels")
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+theme_type_variation = "Red"
+text = "Exit"
+align = 2
+script = ExtResource( 4 )
+
+[node name="Countdown" type="Node" parent="MarginContainer/VBoxContainer/HBoxContainer/Exit"]
+script = ExtResource( 16 )
+countdown_style = 2
+
+[node name="Shadow" type="NinePatchRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Exit"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 5 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 57.0
+margin_right = 144.0
+margin_bottom = 32.0
+focus_neighbour_left = NodePath("../Exit")
+focus_neighbour_top = NodePath("../../SavedLevels")
+focus_neighbour_right = NodePath("../Credits")
+focus_neighbour_bottom = NodePath("../../DevLevels")
+size_flags_horizontal = 3
+text = " Options "
+script = ExtResource( 4 )
+
+[node name="Shadow" type="NinePatchRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Options"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 5 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Credits" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 150.0
+margin_right = 237.0
+margin_bottom = 32.0
+focus_neighbour_left = NodePath("../Options")
+focus_neighbour_top = NodePath("../../SavedLevels")
+focus_neighbour_right = NodePath("../Exit")
+focus_neighbour_bottom = NodePath("../../DevLevels")
+size_flags_horizontal = 3
+text = " Credits "
+script = ExtResource( 4 )
+
+[node name="Shadow" type="NinePatchRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Credits"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 5 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="LogoAnchor" type="Control" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -385.0
+margin_bottom = 245.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Secret" type="Node" parent="LogoAnchor"]
+script = SubResource( 9 )
+show_node_path = NodePath("../Sprite")
+hide_node_path = NodePath("../Logo")
+
+[node name="Logo" type="Sprite" parent="LogoAnchor"]
+scale = Vector2( 0.175, 0.175 )
+texture = ExtResource( 1 )
+centered = false
+script = SubResource( 5 )
+power = 5.0
+speed = 1.0
+
+[node name="Shadow" type="Sprite" parent="LogoAnchor/Logo"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+position = Vector2( 64, 80 )
+scale = Vector2( 3.9, 3.9 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="Legacy" type="Label" parent="LogoAnchor/Logo"]
+margin_left = 937.143
+margin_top = 1211.43
+margin_right = 2089.14
+margin_bottom = 1467.43
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "LEGACY"
+
+[node name="Shadow" type="Label" parent="LogoAnchor/Logo/Legacy"]
+modulate = Color( 0, 0, 0, 0.25098 )
+show_behind_parent = true
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 1168.0
+margin_bottom = 272.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "LEGACY"
+
+[node name="Sprite" type="Sprite" parent="LogoAnchor"]
 visible = false
-margin_left = 107.404
-margin_top = 507.0
-margin_right = 507.404
-margin_bottom = 597.0
-disabled = true
-text = "Hotkeys"
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 14 )
+centered = false
+offset = Vector2( 144, 64 )
+script = SubResource( 5 )
+power = 5.0
+speed = 1.0
 
-[node name="AutotilingButton" parent="ErrorWindow" instance=ExtResource( 2 )]
-visible = false
-margin_left = 527.404
-margin_top = 507.0
-margin_right = 927.404
-margin_bottom = 597.0
-text = "Tiles"
+[node name="Mario" type="Sprite" parent="LogoAnchor/Sprite"]
+position = Vector2( 1276, 264 )
+rotation = 0.0863504
+scale = Vector2( 7, 7 )
+texture = ExtResource( 15 )
 
-[node name="Internet" type="Label" parent="."]
-margin_left = 88.0
-margin_top = 122.0
-margin_right = 222.0
-margin_bottom = 150.0
-custom_fonts/font = ExtResource( 17 )
-text = "No internet!"
+[node name="Shadow" type="Sprite" parent="LogoAnchor/Sprite/Mario"]
+modulate = Color( 0, 0, 0, 0.25098 )
+show_behind_parent = true
+texture = ExtResource( 15 )
+offset = Vector2( 2, 3 )
 
-[node name="Internet2" type="Label" parent="."]
-margin_left = 49.0
-margin_top = 405.0
-margin_right = 183.0
-margin_bottom = 433.0
-rect_scale = Vector2( 0.6, 0.6 )
-custom_fonts/font = ExtResource( 17 )
-text = "No internet!"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/transition = SubResource( 4 )
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SavedLevels" to="." method="transition" binds= [ "LevelsList" ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Exit/Countdown" to="ButtonFunctions" method="exit_game"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Options" to="." method="transition" binds= [ "Options" ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Credits" to="." method="transition" binds= [ "Credits" ]]

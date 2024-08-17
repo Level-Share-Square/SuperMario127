@@ -1,5 +1,11 @@
 extends Node
 
+const BASE_FOLDER: String = "user://level_list"
+
+var level_id: String
+var working_folder: String = BASE_FOLDER
+
+var level_info : LevelInfo
 var level_data : LevelData
 var area := 0
 
@@ -37,7 +43,6 @@ func pick_random_music() -> void:
 
 func create_level_data(userdata):
 	level_data = LevelData.new()
-	level_data.load_in(load("res://assets/level_data/template_level.tres").contents)
 	pick_random_music()
 
 func create_cache(userdata):

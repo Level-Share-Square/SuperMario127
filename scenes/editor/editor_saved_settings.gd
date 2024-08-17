@@ -18,7 +18,6 @@ var tileset_loaded = false
 var loading_tileset := false
 
 var default_area : LevelArea
-var stored_window_scale := 1
 
 var layout_ids = [
 ]
@@ -40,8 +39,6 @@ func load_tileset(_userdata):
 
 func _init():
 	var level_resource = LevelData.new()
-	var default_level = load("res://assets/level_data/template_level.tres").contents
-	level_resource.load_in(default_level)
 	default_area = level_resource.areas[0]
 	
 	var starting_toolbar = load("res://scenes/editor/starting_toolbar.tres")

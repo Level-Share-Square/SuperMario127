@@ -8,6 +8,7 @@ var load_paths = [
 	["CurrentLevelData", "res://scenes/shared/level_data.tscn"],
 	["ModeSwitcher", "res://scenes/actors/mode_switcher/mode_switcher.tscn"],
 	["SceneTransitions", "res://scenes/actors/scene_transitions/CanvasLayer.tscn"],
+	["SceneSwitcher", "res://singletons/scene_switcher.tscn"],
 	["Music", "res://scenes/actors/music/music.tscn"],
 	["Networking", "res://scenes/shared/networking.tscn"],
 	["FocusCheck", "res://scenes/player/focus_check.tscn"],
@@ -16,8 +17,8 @@ var load_paths = [
 	["MiscCache", "res://scenes/shared/misc_cache.tscn"],
 	["Autosave", "res://scenes/editor/autosave.tscn"],
 	["NotificationHandler", "res://scenes/shared/notification/notification_handler.tscn"],
-	["SavedLevels", "res://scenes/shared/saved_levels.tscn"],
-	["MenuVariables", "res://scenes/menu/menu_variables.tscn"],
+	#["SavedLevels", "res://scenes/shared/saved_levels.tscn"],
+	#["MenuVariables", "res://scenes/oldmenu/menu_variables.tscn"],
 	["MiscShared", "res://scenes/shared/miscshared.tscn"],
 	["CheckpointSaved", "res://classes/CheckpointSaved.tscn"],
 	["HideUI", "res://scenes/actors/hide_ui/hide_ui.tscn"],
@@ -26,6 +27,7 @@ var load_paths = [
 
 var ModeSwitcher
 var SceneTransitions
+var SceneSwitcher
 var Music
 var CurrentLevelData
 var PlayerSettings
@@ -38,8 +40,8 @@ var ActionManager
 var MiscCache
 var Autosave
 var NotificationHandler
-var SavedLevels
-var MenuVariables
+#var SavedLevels
+#var MenuVariables
 var TimeScore
 var MiscShared
 var CheckpointSaved

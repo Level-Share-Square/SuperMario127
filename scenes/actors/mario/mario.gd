@@ -296,7 +296,7 @@ func _ready():
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
 	ground_collider_enable_timer.connect("timeout", self, "_on_ground_collder_timer_timeout")
-	print(Singleton.CurrentLevelData.level_data.vars.transition_data)
+	#print(Singleton.CurrentLevelData.level_data.vars.transition_data)
 	if Singleton.CurrentLevelData.level_data.vars.transition_data != []:
 		hide()
 		toggle_movement(false)
@@ -386,6 +386,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	collected_shine.visible = false
 	collected_shine.get_node("ShineParticles").emitting = false
 	
+	print(Singleton.CheckpointSaved.current_checkpoint_id)
 	if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
 		position = Singleton.CheckpointSaved.current_spawn_pos
 		var score_from_before = Singleton.CurrentLevelData.time_score
@@ -666,7 +667,7 @@ func _physics_process(delta: float) -> void:
 		max_aerial_velocity = 640
 		
 	if is_in_water:
-		var fuel_increment = 0.075
+		var fuel_increment = 0.15
 		fuel = clamp(fuel + fuel_increment, 0, 100)
 		if player_id == 0 and Singleton.Music.has_water and !Singleton.Music.play_water:
 			Singleton.Music.toggle_underwater_music(true)
@@ -955,7 +956,7 @@ func _physics_process(delta: float) -> void:
 		GhostArrays.temp_ga.append(ANIM_IDS[sprite.animation])
 		GhostArrays.temp_gsr.append(int(sprite.rotation_degrees))
 		GhostArrays.temp_gar.append(Singleton.CurrentLevelData.area)
-	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+	var level_info = Singleton.CurrentLevelData.level_info
 	if Singleton2.save_ghost == true and GhostArrays.dont_save == false:
 		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.WRITE)
 		file.store_var(GhostArrays.temp_gp)

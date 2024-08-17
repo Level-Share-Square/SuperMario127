@@ -17,7 +17,7 @@ func _physics_process(delta):
 
 
 func populate_info_panel() -> void:
-		var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+		var level_info = Singleton.CurrentLevelData.level_info
 
 		var collected_star_coin_count = level_info.collected_star_coins.values().count(true)
 		label.text = "%s/%s" % [collected_star_coin_count, level_info.collected_star_coins.size()]

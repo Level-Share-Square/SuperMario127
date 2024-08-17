@@ -59,14 +59,14 @@ const ANIM_IDS : Array = [
 
 func _ready():
 	playback = false
-	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+	var level_info = Singleton.CurrentLevelData.level_info
 	if file.file_exists("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost"):
 		find_ghost = true
 
 func _physics_process(delta):
 	if Singleton.PlayerSettings.number_of_players != 1:
 		return
-	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+	var level_info = Singleton.CurrentLevelData.level_info
 	if Singleton2.ghost_enabled:
 		if find_ghost:
 			file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.READ)

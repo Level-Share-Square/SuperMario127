@@ -1,0 +1,708 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=2]
+[ext_resource path="res://scenes/menu/credits/button_functions.gd" type="Script" id=3]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=4]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/menu/screen.gd" type="Script" id=7]
+[ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=8]
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 0.627451 )
+
+[sub_resource type="GradientTexture2D" id=6]
+gradient = SubResource( 5 )
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("RichTextLabel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 432 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "roll"
+length = 144.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("RichTextLabel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 144 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 448 ), Vector2( 0, -4540 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RichTextLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 144 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "MainMenu" ],
+"method": "transition"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:margin_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -128 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:margin_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Background:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RichTextLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "transition"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:margin_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 0.0, -128 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:margin_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 128.0, 0 ]
+}
+tracks/2/type = "animation"
+tracks/2/path = NodePath("Credits")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": PoolStringArray( "roll", "[stop]" ),
+"times": PoolRealArray( 0, 0.1 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RichTextLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Background:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.752941 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="Credits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 7 )
+
+[node name="ButtonFunctions" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 3 )
+credits_player_path = NodePath("../Credits")
+
+[node name="Focus" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+default_focus_path = NodePath("../MarginContainer/VBoxContainer/Speed")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 6 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 5 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 6 )
+expand = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_bottom = 1.0
+margin_top = 432.0
+margin_right = 768.0
+margin_bottom = 5392.0
+bbcode_enabled = true
+bbcode_text = "[center]Super Mario 127
+Development Team
+
+Super Mario 63:
+Robert \"runouw\" Hewitt
+Steven \"runouw\" Hewitt
+
+Campaign Lead:
+\"Samitizer\"
+
+Programming Lead:
+Jake \"PlugAndPlay\"
+Rin \"Dignity\"
+
+Sound Design Lead:
+Arin \"ArieJuice\" Milan
+
+Creative Lead:
+Charlotte \"Charpurr\" Fox
+
+Team Lead:
+\"MrGerund\" (Resigned)
+\"Flarewire\" (Resigned)
+Charlotte \"Charpurr\" Fox
+
+Level Editor Lead:
+Brian \"Linktober\"
+
+Promotional Lead:
+\"FastMario\"
+
+
+
+Audio Engineer:
+Gale \"goatsoup\" Sosa (Resigned)
+Arin \"ArieJuice\" Milan
+
+Composer:
+Gale \"goatsoup\" Sosa (Resigned)
+\"AquaDoesStuff\" (Resigned)
+Mason \"RetroReboot\" Jackson
+Jake \"PlugAndPlay\"
+\"FastMario\"
+\"pyrule\"
+\"AM4\"
+
+Programmer:
+\"TrafficConeGod\" (Resigned)
+\"skeletontourguide\" (Resigned)
+\"JuPaHe64\" (Resigned)
+\"Flarewire\" (Resigned)
+\"Entiss\" (Resigned)
+\"certi\" (Resigned)
+Jake \"PlugAndPlay\"
+Rin \"Dignity\"
+\"Chlorobyte\"
+\"GTcreyon\"
+\"met3o\"
+\"pyrule\"
+\"tabs\"
+
+Sprite Artist:
+\"KrystalPhantasm\" (Resigned)
+\"Reshi\" (Resigned)
+Doram \"DoramB\" Baramour
+Charlotte \"Charpurrr\" Fox
+Mack \"masterminer176\"
+Antonio \"Antonio4444\"
+\"CyanHyprPsychic\"
+Brian \"Linktober\"
+\"AquaDoesStuff\"
+Hrasyurr \"Azzy\"
+\"PumpkinVolt\"
+\"NanTheDark\"
+\"E_WOLFFE\"
+\"AstraSpec\"
+\"le_kappa\"
+\"Saneko\"
+\"wad\"
+
+Animator:
+Charlotte \"Charpurrr\" Fox
+Mack \"masterminer176\"
+\"CyanHyprPsychic\"
+\"PumpkinVolt\"
+
+Level Designer:
+Rudy \"Rudy12345mc\" Mueller
+Christian \"Chri_ti_03\"
+Brian \"Linktober\"
+\"Samitizer\"
+\"tabs\"
+
+UI Design:
+\"AgentOGames\"
+Tee \"teebeeYT\"
+\"Refusion\"
+\"AM4\"
+
+QA Tester:
+\"GreenStarStudios\"
+Brian \"Linktober\"
+\"E_WOLFFE\"
+\"Samitizer\"
+\"Vexxter\"
+
+Marketing:
+Charlotte \"Charpurrr\" Fox
+Rin \"Dignity\"
+\"FastMario\"
+\"tabs\"
+
+Promotional Artist:
+\"T4ctical\" (Resigned)
+Carlos \"The Painted\"
+\"axelorca\"
+
+Concept Artist:
+Mason \"RetroReboot\" Jackson
+\"CyanHyprPsychic\"
+\"GreenStarStudios\"
+\"15 Minute Gamer\"
+\"E_WOLFFE\"
+\"Alkalide\"
+
+Discord Server Staff:
+Rudy \"Rudy12345mc\" Mueller
+\"That's Mama Luigi To You\"
+Charlotte \"Charpurrr\" Fox
+Christian \"Chri_ti_03\"
+\"PumpkinVolt\"
+\"GateTheCat\"
+Rin \"Dignity\"
+\"Luigibonus\"
+\"FastMario\"
+\"Samitizer\"
+\"Linktober\"
+\"Kommult\"
+\"Vexxter\"
+
+Designer Contest Hosts:
+Rudy \"Rudy12345mc\" Mueller
+Brian \"Linktober\"
+\"tabs\"
+
+Level Share Square:
+
+Administration:
+\"Luigibonus\"
+\"MrGerund\"
+\"bluSeven\"
+\"Vexavios\"
+\"Tristaph\"
+
+Moderation:
+Rudy \"Rudy12345mc\" Mueller
+\"GenericNintendoFan\"
+\"BlazingDragon\"
+\"El Cabanoss\"
+\"Vortoxium\"
+\"Skopler\"
+
+
+Inspiration and Reference:
+\"Greiga Master\"
+\"aloelucidity\"
+\"Parakoopa\"
+\"A.J. Nitro\"
+\"Mageker\"
+\"puggesy\"
+\"Ragey\"
+\"Flare\"
+
+Special Thanks:
+Shoutouts to Simpleflips
+John \"John Espagueti Largo DLC\" Espagueti Largo
+Matias \"MrEGamer\" Eberbach
+Daniar \"arcatchik\"
+\"m4r10_fan2008\"
+\"TheGaming100\"
+\"Moola Mixtape\"
+\"DudeGamer64\"
+\"Dude Solid\"
+\"HakonEM\"
+\"G0ldYosh\"
+\"AndratVA\"
+\"zerdebird\"
+\"Gibom\"
+\"Rovert\"
+\"Funz\"
+\"Yaya\"
+And you, for sitting through these credits!
+
+You, too, can join the list by applying for development in the discord server. We hope to see you there!
+
+"
+text = "Super Mario 127
+Development Team
+
+Super Mario 63:
+Robert \"runouw\" Hewitt
+Steven \"runouw\" Hewitt
+
+Campaign Lead:
+\"Samitizer\"
+
+Programming Lead:
+Jake \"PlugAndPlay\"
+Rin \"Dignity\"
+
+Sound Design Lead:
+Arin \"ArieJuice\" Milan
+
+Creative Lead:
+Charlotte \"Charpurr\" Fox
+
+Team Lead:
+\"MrGerund\" (Resigned)
+\"Flarewire\" (Resigned)
+Charlotte \"Charpurr\" Fox
+
+Level Editor Lead:
+Brian \"Linktober\"
+
+Promotional Lead:
+\"FastMario\"
+
+
+
+Audio Engineer:
+Gale \"goatsoup\" Sosa (Resigned)
+Arin \"ArieJuice\" Milan
+
+Composer:
+Gale \"goatsoup\" Sosa (Resigned)
+\"AquaDoesStuff\" (Resigned)
+Mason \"RetroReboot\" Jackson
+Jake \"PlugAndPlay\"
+\"FastMario\"
+\"pyrule\"
+\"AM4\"
+
+Programmer:
+\"TrafficConeGod\" (Resigned)
+\"skeletontourguide\" (Resigned)
+\"JuPaHe64\" (Resigned)
+\"Flarewire\" (Resigned)
+\"Entiss\" (Resigned)
+\"certi\" (Resigned)
+Jake \"PlugAndPlay\"
+Rin \"Dignity\"
+\"Chlorobyte\"
+\"GTcreyon\"
+\"met3o\"
+\"pyrule\"
+\"tabs\"
+
+Sprite Artist:
+\"KrystalPhantasm\" (Resigned)
+\"Reshi\" (Resigned)
+Doram \"DoramB\" Baramour
+Charlotte \"Charpurrr\" Fox
+Mack \"masterminer176\"
+Antonio \"Antonio4444\"
+\"CyanHyprPsychic\"
+Brian \"Linktober\"
+\"AquaDoesStuff\"
+Hrasyurr \"Azzy\"
+\"PumpkinVolt\"
+\"NanTheDark\"
+\"E_WOLFFE\"
+\"AstraSpec\"
+\"le_kappa\"
+\"Saneko\"
+\"wad\"
+
+Animator:
+Charlotte \"Charpurrr\" Fox
+Mack \"masterminer176\"
+\"CyanHyprPsychic\"
+\"PumpkinVolt\"
+
+Level Designer:
+Rudy \"Rudy12345mc\" Mueller
+Christian \"Chri_ti_03\"
+Brian \"Linktober\"
+\"Samitizer\"
+\"tabs\"
+
+UI Design:
+\"AgentOGames\"
+Tee \"teebeeYT\"
+\"Refusion\"
+\"AM4\"
+
+QA Tester:
+\"GreenStarStudios\"
+Brian \"Linktober\"
+\"E_WOLFFE\"
+\"Samitizer\"
+\"Vexxter\"
+
+Marketing:
+Charlotte \"Charpurrr\" Fox
+Rin \"Dignity\"
+\"FastMario\"
+\"tabs\"
+
+Promotional Artist:
+\"T4ctical\" (Resigned)
+Carlos \"The Painted\"
+\"axelorca\"
+
+Concept Artist:
+Mason \"RetroReboot\" Jackson
+\"CyanHyprPsychic\"
+\"GreenStarStudios\"
+\"15 Minute Gamer\"
+\"E_WOLFFE\"
+\"Alkalide\"
+
+Discord Server Staff:
+Rudy \"Rudy12345mc\" Mueller
+\"That's Mama Luigi To You\"
+Charlotte \"Charpurrr\" Fox
+Christian \"Chri_ti_03\"
+\"PumpkinVolt\"
+\"GateTheCat\"
+Rin \"Dignity\"
+\"Luigibonus\"
+\"FastMario\"
+\"Samitizer\"
+\"Linktober\"
+\"Kommult\"
+\"Vexxter\"
+
+Designer Contest Hosts:
+Rudy \"Rudy12345mc\" Mueller
+Brian \"Linktober\"
+\"tabs\"
+
+Level Share Square:
+
+Administration:
+\"Luigibonus\"
+\"MrGerund\"
+\"bluSeven\"
+\"Vexavios\"
+\"Tristaph\"
+
+Moderation:
+Rudy \"Rudy12345mc\" Mueller
+\"GenericNintendoFan\"
+\"BlazingDragon\"
+\"El Cabanoss\"
+\"Vortoxium\"
+\"Skopler\"
+
+
+Inspiration and Reference:
+\"Greiga Master\"
+\"aloelucidity\"
+\"Parakoopa\"
+\"A.J. Nitro\"
+\"Mageker\"
+\"puggesy\"
+\"Ragey\"
+\"Flare\"
+
+Special Thanks:
+Shoutouts to Simpleflips
+John \"John Espagueti Largo DLC\" Espagueti Largo
+Matias \"MrEGamer\" Eberbach
+Daniar \"arcatchik\"
+\"m4r10_fan2008\"
+\"TheGaming100\"
+\"Moola Mixtape\"
+\"DudeGamer64\"
+\"Dude Solid\"
+\"HakonEM\"
+\"G0ldYosh\"
+\"AndratVA\"
+\"zerdebird\"
+\"Gibom\"
+\"Rovert\"
+\"Funz\"
+\"Yaya\"
+And you, for sitting through these credits!
+
+You, too, can join the list by applying for development in the discord server. We hope to see you there!
+
+"
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = -128.0
+margin_top = -128.0
+rect_min_size = Vector2( 128, 0 )
+rect_rotation = -2.0
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 16.0
+margin_top = 12.0
+margin_right = 116.0
+margin_bottom = 104.0
+rect_pivot_offset = Vector2( -228, -180 )
+alignment = 2
+
+[node name="Speed" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 12.0
+margin_right = 100.0
+margin_bottom = 44.0
+focus_neighbour_top = NodePath("../Skip")
+focus_neighbour_bottom = NodePath("../Skip")
+text = "Speed (5x)"
+script = ExtResource( 4 )
+sink_amount = 4
+
+[node name="Shadow" type="NinePatchRect" parent="MarginContainer/VBoxContainer/Speed"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.00001
+margin_top = 6.00003
+margin_right = 6.00001
+margin_bottom = 6.00003
+texture = ExtResource( 8 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Skip" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 60.0
+margin_right = 100.0
+margin_bottom = 92.0
+focus_neighbour_top = NodePath("../Speed")
+focus_neighbour_bottom = NodePath("../Speed")
+theme_type_variation = "Red"
+text = "Skip"
+script = ExtResource( 4 )
+sink_amount = 4
+
+[node name="Shadow" type="NinePatchRect" parent="MarginContainer/VBoxContainer/Skip"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 8 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Credits" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/roll = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/transition = SubResource( 4 )
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Speed" to="ButtonFunctions" method="toggle_speed" binds= [ "MarginContainer/VBoxContainer/Speed" ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Skip" to="." method="transition" binds= [ "MainMenu" ]]

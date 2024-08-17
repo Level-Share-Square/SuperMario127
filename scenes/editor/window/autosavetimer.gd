@@ -9,12 +9,12 @@ var times = ["Never", "5 Minutes", "15 Minutes", "30 Minutes", "1 Hour"]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var file = File.new()
-	if !file.file_exists("user://autosave/settings.file"):
+	if !file.file_exists("user://autosaves/settings.file"):
 		Singleton2.autosave_timer = 108000
 		save_timer()
 		Singleton2.reset_time()
 	else:
-		file.open("user://autosave/settings.file", File.READ)
+		file.open("user://autosaves/settings.file", File.READ)
 		var timer = file.get_var()
 		file.close()
 		Singleton2.autosave_timer = timer
@@ -57,7 +57,7 @@ func item_selected(index):
 			
 func save_timer():
 	var file = File.new()
-	file.open("user://autosave/settings.file", File.WRITE)
+	file.open("user://autosaves/settings.file", File.WRITE)
 	file.store_var(Singleton2.autosave_timer)
 	file.close()
 

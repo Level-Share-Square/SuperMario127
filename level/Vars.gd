@@ -53,8 +53,8 @@ func toggle_switch_state(var channel : int):
 	emit_signal("switch_state_changed", channel)
 	
 func activate_fludd(var type : int):
-	if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and Singleton.SavedLevels.selected_level != Singleton.SavedLevels.NO_LEVEL:
-		Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level].set_fludd_activated(type, true)		
+	if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
+		Singleton.CurrentLevelData.level_info.set_fludd_activated(type, true)		
 	match(type):
 		0:
 			emit_signal("hover_fludd_activated")
@@ -64,7 +64,7 @@ func activate_fludd(var type : int):
 			emit_signal("rocket_fludd_activated")
 			
 func is_fludd_activated(var type : int):
-	return Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level].activated_fludds[type]
+	return Singleton.CurrentLevelData.level_info.activated_fludds[type]
 
 #func set_switch_state(var channel : int, value : bool):
 #	switch_state[channel] = value

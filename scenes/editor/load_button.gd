@@ -16,8 +16,7 @@ func _pressed():
 	click_sound.play()
 	focus_mode = 0
 	if level_code_util.is_valid(text_edit_node.text):
-		var level_data = LevelData.new()
-		level_data.load_in(text_edit_node.text)
+		var level_data = LevelData.new(text_edit_node.text)
 		Singleton.CurrentLevelData.level_data = level_data
 		var _reload = get_tree().reload_current_scene()
 		get_tree().root.get_node("mode_switcher").layer = 127

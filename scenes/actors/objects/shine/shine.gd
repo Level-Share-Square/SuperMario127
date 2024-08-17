@@ -85,9 +85,8 @@ func _ready() -> void:
 		
 		# if the shine is collected, make it blue 
 		# (collected_shines is a Dictionary where the key is the shine id and the value is a bool)
-		if Singleton.SavedLevels.selected_level != Singleton.SavedLevels.NO_LEVEL && \
-		Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
-			var collected_shines = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level].collected_shines
+		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
+			var collected_shines = Singleton.CurrentLevelData.level_info.collected_shines
 
 			# Get the value, returning false if the key doesn't exist
 			is_blue = collected_shines.get(str(id), false)
@@ -270,17 +269,17 @@ func collect(body : PhysicsBody2D) -> void:
 		collected = true
 		visible = false
 
-		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and Singleton.SavedLevels.selected_level != Singleton.SavedLevels.NO_LEVEL:
+		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
 			score_from_before = Singleton.CurrentLevelData.time_score
-			Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level].set_shine_collected(id, false)
-			Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level].update_time_and_coin_score(id, true)
+			Singleton.CurrentLevelData.level_info.set_shine_collected(id, false)
+			Singleton.CurrentLevelData.level_info.update_time_and_coin_score(id, true)
 			Singleton.CurrentLevelData.stop_tracking_time_score()
 			if !do_kick_out:
-				var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+				var level_info = Singleton.CurrentLevelData.level_info
 				var new_shine_id = level_info.selected_shine + 1
 				if new_shine_id < level_info.shine_details.size():
 					level_info.selected_shine = new_shine_id
-				get_tree().get_current_scene().get_node("UI/PauseScreen").update_shine_info()
+				get_tree().get_current_scene().get_node("%PauseController").emit_signal("shine_collected")
 
 func start_shine_dance() -> void:
 	character.set_state_by_name("NoActionState", get_physics_process_delta_time())
@@ -309,7 +308,7 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 	#fades to the correct volume in both situations
 	if do_kick_out:
 		if mode_switcher_button.invisible: #if not running through the editor, play the transition
-			var _connect = Singleton.SceneTransitions.connect("transition_finished", Singleton.MenuVariables, "quit_to_menu", ["levels_screen"], CONNECT_ONESHOT)
+			var _connect = Singleton.SceneTransitions.connect("transition_finished", Singleton.SceneSwitcher, "quit_to_menu", ["levels_screen"], CONNECT_ONESHOT)
 			Singleton.SceneTransitions.do_transition_animation(
 				character.cutout_shine, 
 				Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, 

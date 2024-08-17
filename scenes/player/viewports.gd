@@ -14,9 +14,6 @@ onready var world = $ViewportContainer/Viewport/World
 onready var player1 = $ViewportContainer/Viewport/World/Character
 onready var player2 = $ViewportContainer/Viewport/World/Character2
 
-export var divider_path : NodePath
-onready var divider = get_node(divider_path)
-
 export var character_scene_path : String
 
 var player1_spawn = Vector2(0, 0)
@@ -117,7 +114,5 @@ func _process(_delta):
 		viewport_container1.rect_size.x = 768
 		viewport2.size.x = 0
 		viewport_container2.rect_size.x = 0
-		
-		divider.visible = false
 		if Input.is_action_just_pressed("(disabled)paste_level"):
 			add_player()
