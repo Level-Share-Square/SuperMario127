@@ -356,10 +356,17 @@ grid_container_path = NodePath("../VBoxContainer/GridContainer")
 master_volume_path = NodePath("../VBoxContainer/MarginContainer/VBoxContainer/MasterVolume")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/General"]
+<<<<<<< HEAD
 margin_left = 103.0
 margin_top = 35.0
 margin_right = 465.0
 margin_bottom = 397.0
+=======
+margin_left = 84.0
+margin_top = 5.0
+margin_right = 483.0
+margin_bottom = 426.0
+>>>>>>> 977257c8b21a1f48831b742fee80a3667a3bca8e
 custom_constants/separation = 32
 
 [node name="MarginContainer" type="MarginContainer" parent="Subscreens/General/VBoxContainer"]
@@ -410,8 +417,13 @@ rect_min_size = Vector2( 0, 1 )
 
 [node name="GridContainer" type="GridContainer" parent="Subscreens/General/VBoxContainer"]
 margin_top = 205.0
+<<<<<<< HEAD
 margin_right = 362.0
 margin_bottom = 362.0
+=======
+margin_right = 399.0
+margin_bottom = 421.0
+>>>>>>> 977257c8b21a1f48831b742fee80a3667a3bca8e
 custom_constants/vseparation = 20
 custom_constants/hseparation = 40
 columns = 3
@@ -478,11 +490,23 @@ margin_bottom = 157.0
 setting_section = "General"
 setting_key = "level_ghost"
 
+<<<<<<< HEAD
 [node name="SecondPlayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 11 )]
 margin_left = 273.0
+=======
+[node name="DarkMode" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+margin_left = 305.0
+>>>>>>> 977257c8b21a1f48831b742fee80a3667a3bca8e
 margin_top = 118.0
 margin_right = 362.0
 margin_bottom = 157.0
+setting_section = "General"
+setting_key = "dark_mode"
+
+[node name="SecondPlayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 11 )]
+margin_top = 177.0
+margin_right = 131.0
+margin_bottom = 216.0
 setting_section = "General"
 setting_key = "second_player"
 default_value = 1
@@ -667,10 +691,17 @@ rect_min_size = Vector2( 0, 228 )
 script = ExtResource( 17 )
 category_paths = [ NodePath("Player1"), NodePath("Player2"), NodePath("Interface"), NodePath("Hotkeys") ]
 
+<<<<<<< HEAD
 [node name="Player1" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 margin_left = 14.0
 margin_top = 1.0
 margin_right = 530.0
+=======
+[node name="Gameplay" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
+margin_left = 14.0
+margin_top = 1.0
+margin_right = 529.0
+>>>>>>> 977257c8b21a1f48831b742fee80a3667a3bca8e
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1012,9 +1043,15 @@ setting_key = "63_wing_cap"
 
 [node name="Interface" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
+<<<<<<< HEAD
 margin_left = 32.0
 margin_top = 64.0
 margin_right = 512.0
+=======
+margin_left = 96.0
+margin_top = 64.0
+margin_right = 448.0
+>>>>>>> 977257c8b21a1f48831b742fee80a3667a3bca8e
 margin_bottom = 164.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1074,9 +1111,15 @@ sprite_visible = false
 
 [node name="Hotkeys" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
+<<<<<<< HEAD
 margin_left = 28.0
 margin_top = 33.0
 margin_right = 516.0
+=======
+margin_left = 64.0
+margin_top = 33.0
+margin_right = 480.0
+>>>>>>> 977257c8b21a1f48831b742fee80a3667a3bca8e
 margin_bottom = 195.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32

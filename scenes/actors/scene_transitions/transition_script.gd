@@ -17,6 +17,13 @@ const TRANSITION_SCALE_COVERED = 0
 
 var transitioning = false
 
+const DARK_MODE_TRANSITION_COLOR = Color(0, 0, 0, 1)
+const TRANSITION_COLOR = Color(1, 1, 1, 1)
+var chosen_transition_color = Color(1, 1, 1, 1)
+
+func _ready():
+	Singleton2.connect("dark_mode_toggled", self, "_dark_mode_toggled")
+
 func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout_circle, transition_time = 0.5, new_area = -1, clear_vars = false, r_press = true):
 	#if the button is invisible, then we're probably not in editing mode, but if it's visible make sure we don't reload the scene while it's switching
 	if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible or !Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled:
@@ -91,3 +98,6 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 
 func play_transition_audio():
 	transition_audio.play()
+	
+func _dark_mode_toggled():
+	chosen_transition_color = DARK_MODE_TRANSITION_COLOR if Singleton2.dark_mode else TRANSITION_COLOR

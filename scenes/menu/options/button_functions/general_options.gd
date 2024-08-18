@@ -34,7 +34,9 @@ func change_setting(key: String, new_value):
 			Singleton2.rp = new_value
 		"level_ghost":
 			Singleton2.ghost_enabled = new_value
-		
+		"dark_mode":
+			Singleton2.dark_mode = new_value
+			Singleton2.toggle_dark_mode()
 		"multiplayer":
 			Singleton.PlayerSettings.number_of_players = 2 if new_value else 1
 		"first_player":
