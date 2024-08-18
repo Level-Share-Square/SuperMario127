@@ -350,6 +350,7 @@ anchor_bottom = 1.0
 script = ExtResource( 18 )
 vbox_container_path = NodePath("../VBoxContainer/MarginContainer/VBoxContainer")
 grid_container_path = NodePath("../VBoxContainer/GridContainer")
+master_volume_path = NodePath("../VBoxContainer/MarginContainer/VBoxContainer/MasterVolume")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/General"]
 margin_left = 84.0
@@ -620,9 +621,9 @@ rect_min_size = Vector2( 0, 228 )
 script = ExtResource( 17 )
 
 [node name="Gameplay" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
-margin_left = 14.0
+margin_left = 34.0
 margin_top = 1.0
-margin_right = 529.0
+margin_right = 510.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -765,7 +766,6 @@ margin_bottom = 225.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 1)"
 input_key = "63_wing_cap"
-is_bool = true
 sprite_animation = "flyRight"
 sprite_rotation = 55.0
 sprite_offset = Vector2( 10, 0 )
@@ -780,9 +780,9 @@ setting_key = "63_wing_cap"
 
 [node name="Interface" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 96.0
+margin_left = 90.0
 margin_top = 64.0
-margin_right = 448.0
+margin_right = 454.0
 margin_bottom = 164.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -832,9 +832,9 @@ sprite_visible = false
 
 [node name="Hotkeys" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 64.0
+margin_left = 90.0
 margin_top = 33.0
-margin_right = 480.0
+margin_right = 454.0
 margin_bottom = 195.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32

@@ -133,7 +133,7 @@ static func load_keybindings_into_actions():
 			if not InputMap.has_action(key + input_name):
 				InputMap.add_action(input_name)
 				set_keybindings(key, i)
-				
+
 static func set_keybindings(action : String, player_id : int):
 	var binding = Singleton.PlayerSettings.keybindings[player_id][action]
 	var input_name = action + str(player_id)
@@ -158,7 +158,7 @@ static func set_keybindings(action : String, player_id : int):
 			ev.axis_value = temp[3]
 			InputMap.action_set_deadzone(input_name, 0.5)
 		InputMap.action_add_event(input_name, ev)
-	
+
 static func override_keybindings(action : String, player_id : int):
 	InputMap.action_erase_events(action + str(player_id))
 	set_keybindings(action, player_id)

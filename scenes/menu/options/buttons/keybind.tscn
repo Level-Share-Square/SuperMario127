@@ -63,7 +63,7 @@ position = Vector2( 12, -2 )
 scale = Vector2( 0.75, 0.75 )
 frames = ExtResource( 4 )
 animation = "movingIn"
-frame = 5
+frame = 2
 playing = true
 
 [node name="Button" type="Button" parent="."]
@@ -74,6 +74,7 @@ rect_min_size = Vector2( 0, 18 )
 focus_neighbour_right = NodePath("Reset")
 theme_type_variation = "OptionsToggle"
 custom_fonts/font = SubResource( 12 )
+text = "Unbound"
 clip_text = true
 script = ExtResource( 8 )
 extend_amount = 2

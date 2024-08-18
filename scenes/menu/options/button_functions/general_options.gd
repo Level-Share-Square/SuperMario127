@@ -58,8 +58,16 @@ func change_setting(key: String, new_value):
 			AudioServer.set_bus_volume_db(bus_index, volume_db)
 
 
-# fullscreen hotkey
+# fullscreen and volume hotkeys
+export var master_volume_path: NodePath
+onready var master_volume_slider: HSlider = get_node(master_volume_path).get_node("Panel/HSlider")
+
 var last_non_full_scale: int = 0
 func _input(event):
 	if event.is_action_pressed("fullscreen"):
 		LocalSettings.change_setting("General", "window_scale", 3 if not OS.window_fullscreen else last_non_full_scale)
+
+	if Input.is_action_just_pressed("volume_up"):
+		master_volume_slider.value -= 5
+	if Input.is_action_just_pressed("volume_down"):
+		master_volume_slider.value += 5

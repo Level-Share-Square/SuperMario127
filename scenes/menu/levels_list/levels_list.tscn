@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/options/background.tres" type="Texture" id=2]
@@ -35,9 +35,12 @@
 [ext_resource path="res://scenes/menu/levels_list/icons/time.png" type="Texture" id=33]
 [ext_resource path="res://scenes/menu/levels_list/icons/delete.png" type="Texture" id=34]
 [ext_resource path="res://scenes/menu/levels_list/icons/back.png" type="Texture" id=35]
-[ext_resource path="res://scenes/menu/levels_list/icons/settings.png" type="Texture" id=36]
-[ext_resource path="res://scenes/menu/levels_list/icons/folder.png" type="Texture" id=37]
+[ext_resource path="res://scenes/menu/levels_list/icons/import_from_file.png" type="Texture" id=36]
+[ext_resource path="res://scenes/menu/levels_list/icons/import_from_code.png" type="Texture" id=37]
 [ext_resource path="res://scenes/menu/levels_list/icons/reset_save.png" type="Texture" id=38]
+[ext_resource path="res://scenes/menu/levels_list/icons/folder_settings.png" type="Texture" id=39]
+[ext_resource path="res://scenes/menu/levels_list/icons/view_info.png" type="Texture" id=40]
+[ext_resource path="res://scenes/menu/levels_list/icons/new_folder.png" type="Texture" id=41]
 
 [sub_resource type="CanvasItemMaterial" id=22]
 blend_mode = 1
@@ -500,22 +503,23 @@ patch_margin_bottom = 11
 
 [node name="FolderSettings" type="Button" parent="Panel/Buttons"]
 visible = false
-margin_right = 132.0
+margin_left = 125.0
+margin_right = 263.0
 margin_bottom = 24.0
 custom_fonts/font = SubResource( 1 )
-text = "Folder Settings     "
+text = "Folder Settings       "
 script = ExtResource( 3 )
 
 [node name="Icon" type="TextureRect" parent="Panel/Buttons/FolderSettings"]
-margin_left = 111.0
-margin_top = 4.0
-margin_right = 125.0
-margin_bottom = 18.0
+margin_left = 112.0
+margin_top = 1.0
+margin_right = 132.0
+margin_bottom = 21.0
 mouse_filter = 2
-texture = ExtResource( 36 )
+texture = ExtResource( 39 )
 expand = true
 script = ExtResource( 29 )
-offset = Vector2( 52, -1 )
+offset = Vector2( 53, -1 )
 
 [node name="Shadow" type="NinePatchRect" parent="Panel/Buttons/FolderSettings"]
 modulate = Color( 1, 1, 1, 0.25098 )
@@ -961,9 +965,9 @@ direction = 1
 [node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/PlayLevel"]
 modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
 margin_left = 70.0
-margin_top = 5.0
-margin_right = 80.0
-margin_bottom = 15.0
+margin_top = 4.0
+margin_right = 82.0
+margin_bottom = 16.0
 mouse_filter = 2
 texture = ExtResource( 30 )
 expand = true
@@ -984,9 +988,9 @@ direction = 1
 [node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/EditLevel"]
 modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
 margin_left = 66.0
-margin_top = 2.0
-margin_right = 82.0
-margin_bottom = 18.0
+margin_top = 1.0
+margin_right = 84.0
+margin_bottom = 19.0
 mouse_filter = 2
 texture = ExtResource( 28 )
 expand = true
@@ -1006,25 +1010,20 @@ direction = 1
 
 [node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/CopyCode"]
 modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
-margin_left = 72.0
-margin_top = 3.0
-margin_right = 86.0
-margin_bottom = 17.0
+margin_left = 71.0
+margin_top = 2.0
+margin_right = 87.0
+margin_bottom = 18.0
 mouse_filter = 2
 texture = ExtResource( 32 )
 expand = true
 script = ExtResource( 29 )
-offset = Vector2( 72, 0 )
-
-[node name="Padding2" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
-margin_top = 200.0
-margin_right = 157.0
-margin_bottom = 200.0
+offset = Vector2( 71, 0 )
 
 [node name="ViewTab" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
-margin_top = 210.0
+margin_top = 200.0
 margin_right = 157.0
-margin_bottom = 230.0
+margin_bottom = 220.0
 rect_min_size = Vector2( 0, 20 )
 theme_type_variation = "AlternateButton"
 text = "View Scores"
@@ -1034,27 +1033,33 @@ direction = 1
 
 [node name="TimeIcon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ViewTab"]
 modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
-margin_left = 80.0
-margin_right = 100.0
-margin_bottom = 20.0
+margin_left = 79.0
+margin_top = -1.0
+margin_right = 101.0
+margin_bottom = 21.0
 mouse_filter = 2
 texture = ExtResource( 33 )
 expand = true
 script = ExtResource( 29 )
-offset = Vector2( 80, 0 )
+offset = Vector2( 79, 0 )
 
 [node name="InfoIcon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ViewTab"]
 visible = false
 modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
-margin_left = 63.0
-margin_top = 1.0
+margin_left = 65.0
+margin_top = 2.0
 margin_right = 81.0
-margin_bottom = 19.0
+margin_bottom = 18.0
 mouse_filter = 2
-texture = ExtResource( 13 )
+texture = ExtResource( 40 )
 expand = true
 script = ExtResource( 29 )
-offset = Vector2( 63, 0 )
+offset = Vector2( 65, 0 )
+
+[node name="Padding2" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
+margin_top = 230.0
+margin_right = 157.0
+margin_bottom = 230.0
 
 [node name="ResetSave" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons"]
 margin_top = 240.0
@@ -1068,9 +1073,9 @@ script = ExtResource( 14 )
 direction = 1
 
 [node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ResetSave"]
-margin_left = 72.0
+margin_left = 73.0
 margin_top = 3.0
-margin_right = 86.0
+margin_right = 87.0
 margin_bottom = 17.0
 mouse_filter = 2
 texture = ExtResource( 38 )
@@ -1078,7 +1083,7 @@ expand = true
 script = ExtResource( 29 )
 countdown_path = NodePath("../PressCountdown")
 count_offsets = [ 0, 16, 18, 18 ]
-offset = Vector2( 72, 0 )
+offset = Vector2( 73, 0 )
 
 [node name="PressCountdown" type="Node" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ResetSave"]
 script = ExtResource( 22 )
@@ -1098,9 +1103,9 @@ direction = 1
 
 [node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel"]
 margin_left = 80.0
-margin_top = 3.0
-margin_right = 94.0
-margin_bottom = 17.0
+margin_top = 2.0
+margin_right = 96.0
+margin_bottom = 18.0
 mouse_filter = 2
 texture = ExtResource( 34 )
 expand = true
@@ -1205,37 +1210,10 @@ expand = true
 script = ExtResource( 29 )
 offset = Vector2( -69, 0 )
 
-[node name="ImportCode" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
+[node name="NewFolder" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
 margin_top = 144.0
 margin_right = 163.0
 margin_bottom = 164.0
-rect_min_size = Vector2( 0, 20 )
-theme_type_variation = "AlternateButton"
-text = "Import from Code"
-align = 2
-script = ExtResource( 14 )
-
-[node name="Icon" type="TextureRect" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode"]
-modulate = Color( 0.0470588, 0.290196, 0.427451, 1 )
-margin_left = 41.0
-margin_top = 3.0
-margin_right = 55.0
-margin_bottom = 17.0
-mouse_filter = 2
-texture = ExtResource( 32 )
-expand = true
-script = ExtResource( 29 )
-offset = Vector2( -108, 0 )
-
-[node name="Padding2" type="Control" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 174.0
-margin_right = 163.0
-margin_bottom = 174.0
-
-[node name="NewFolder" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 184.0
-margin_right = 163.0
-margin_bottom = 204.0
 rect_min_size = Vector2( 0, 20 )
 theme_type_variation = "AlternateButton"
 text = "New Folder"
@@ -1244,15 +1222,42 @@ script = ExtResource( 14 )
 
 [node name="Icon" type="TextureRect" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewFolder"]
 modulate = Color( 0.0470588, 0.290196, 0.427451, 1 )
-margin_left = 74.0
-margin_top = 4.0
+margin_left = 70.0
+margin_top = 1.0
 margin_right = 88.0
+margin_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource( 41 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( -75, 0 )
+
+[node name="Padding2" type="Control" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
+margin_top = 174.0
+margin_right = 163.0
+margin_bottom = 174.0
+
+[node name="ImportCode" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
+margin_top = 184.0
+margin_right = 163.0
+margin_bottom = 204.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+text = "Import from Code"
+align = 2
+script = ExtResource( 14 )
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode"]
+modulate = Color( 0.0470588, 0.290196, 0.427451, 1 )
+margin_left = 39.0
+margin_top = 2.0
+margin_right = 55.0
 margin_bottom = 18.0
 mouse_filter = 2
 texture = ExtResource( 37 )
 expand = true
 script = ExtResource( 29 )
-offset = Vector2( -75, 1 )
+offset = Vector2( -108, 0 )
 
 [node name="ImportFolder" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
 margin_top = 214.0
@@ -1267,15 +1272,15 @@ script = ExtResource( 14 )
 
 [node name="Icon" type="TextureRect" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportFolder"]
 modulate = Color( 0.0470588, 0.290196, 0.427451, 1 )
-margin_left = 50.0
-margin_top = 4.0
-margin_right = 64.0
-margin_bottom = 18.0
+margin_left = 47.0
+margin_top = 1.0
+margin_right = 65.0
+margin_bottom = 19.0
 mouse_filter = 2
-texture = ExtResource( 37 )
+texture = ExtResource( 36 )
 expand = true
 script = ExtResource( 29 )
-offset = Vector2( -99, 1 )
+offset = Vector2( -98, 0 )
 
 [node name="Panel" type="Panel" parent="Panel/Subscreens/AddElement/Control"]
 self_modulate = Color( 0, 0, 0, 0.501961 )
@@ -1334,7 +1339,7 @@ anims/transition = SubResource( 6 )
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/Return" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewLevel" to="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler" method="insert_level"]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewLevel" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
-[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
-[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement/Control/ElementAddButtons" method="import_level_code"]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewFolder" to="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler" method="insert_folder"]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewFolder" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement/Control/ElementAddButtons" method="import_level_code"]

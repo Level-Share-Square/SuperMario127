@@ -22,7 +22,8 @@ func back():
 	Singleton.SceneSwitcher.quit_to_menu_with_transition("levels_list")
 
 func _ready():
-	mission_select_sfx.play()
+	if !Singleton.Music.muted:
+		mission_select_sfx.play()
 	
 	level_title.text = level_info.level_name
 	level_title_backing.text = level_title.text

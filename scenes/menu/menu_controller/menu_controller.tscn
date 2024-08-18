@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/menu/credits/credits.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/menu/levels_list/levels_list.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/menu/main_menu/.secret/bg.png" type="Texture" id=7]
+[ext_resource path="res://scenes/menu/main_menu/secret/bg.png" type="Texture" id=7]
 [ext_resource path="res://scenes/menu/background_manager.gd" type="Script" id=8]
 
 [sub_resource type="GDScript" id=11]

@@ -23,7 +23,6 @@ var downloader := Downloader.new()
 
 var song_cache := []
 var loop := 1.0
-var global_volume := 1.0
 
 var muted := false
 var play_water := false
@@ -43,16 +42,6 @@ func _init() -> void:
 	
 func _ready() -> void:
 	var _connect = temporary_music_player.connect("finished", self, "stop_temporary_music")
-
-func set_global_volume(new_volume: float) -> void:
-	global_volume = clamp(new_volume, 0.0, 1.0)
-	var new_db : float = 20 * log(global_volume)
-	if new_db > 0: new_db = 0 # In case... I don't wanna get earraped again :(
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), new_db)
-	SettingsSaver.save_volume()
-
-func increment_global_volume(increment: float) -> void:
-	set_global_volume(global_volume + increment)
 
 func is_tween_active() -> bool:
 	return tween.is_active()
@@ -150,11 +139,6 @@ func reset_music():
 func _process(delta) -> void:
 	if song_cache.size() < level_songs.ids.size():
 		song_cache.append(load("res://assets/music/resources/" + level_songs.ids[song_cache.size()] + ".tres"))
-	
-	if Input.is_action_just_pressed("volume_up"):
-		increment_global_volume(0.1)
-	if Input.is_action_just_pressed("volume_down"):
-		increment_global_volume(-0.1)
 	
 	var current_scene = get_tree().get_current_scene()
 	var current_song

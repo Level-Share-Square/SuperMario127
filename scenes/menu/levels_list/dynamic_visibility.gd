@@ -8,7 +8,7 @@ onready var subscreens: Control = get_node(subscreens_path)
 export var list_handler_path: NodePath
 onready var list_handler: Node = get_node(list_handler_path)
 
-const TWEEN_TIME: float = 0.15
+const TWEEN_TIME: float = 0.25
 onready var tween := $Tween
 
 func _ready():
