@@ -51,6 +51,10 @@ func add_folder_button(file_path: String, folder_name: String, move_to_front: bo
 func add_level_card(file_path: String, level_id: String, working_folder: String, level_code: String = "", move_to_front: bool = false):
 	if level_code == "":
 		level_code = saved_levels_util.load_level_code_file(file_path)
+	
+	var is_new_level: bool
+	is_new_level = (level_code == saved_levels_util.load_level_code_file(list_handler.DEFAULT_LEVEL))
+	
 	var level_grid: GridContainer = list_handler.level_grid
 	
 	
@@ -66,7 +70,7 @@ func add_level_card(file_path: String, level_id: String, working_folder: String,
 	# needs some variables now for visual touches
 	var styling = level_card.get_node("Styling")
 	styling.level_info = level_info
-	styling.is_complete = level_info.is_fully_completed()
+	styling.is_complete = level_info.is_fully_completed() and not is_new_level
 	
 	# add node to tree
 	level_card.get_node("Name").text = level_info.level_name
