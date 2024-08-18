@@ -103,6 +103,7 @@ shader_param/blur_amount = 1.0
 
 [node name="BackgroundManager" type="Node2D" parent="."]
 script = ExtResource( 8 )
+blur_path = NodePath("../UI/Blur")
 
 [node name="Backgrounds" parent="BackgroundManager" instance=ExtResource( 1 )]
 

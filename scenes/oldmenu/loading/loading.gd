@@ -15,6 +15,8 @@ onready var mario_reflection = $Sprites/Player/Reflection
 onready var coin_sound = $CoinSound
 onready var coin_scene = preload("res://scenes/oldmenu/loading/coin.tscn")
 
+onready var bg_rect = $Background/ColorRect
+
 var resource_loader
 var button_pressed = false
 
@@ -61,6 +63,8 @@ static func get_data_or_null():
 		return null
 		
 func _ready():
+	#currently this doesnt work because settings arent initialized until after loading screen is finished
+	bg_rect.visible = !Singleton2.dark_mode
 	if Singleton2.mod_active == true:
 		reset_mod.show()
 		var tween = Tween.new()
@@ -135,6 +139,7 @@ func collect_coin(play_sound = true):
 	coins_shadow.text = coins_text.text
 
 func _physics_process(delta):
+	
 	if stepify(percentage * 100, 1) > coins_spawned and spawn_timer <= 0:
 		if coins_spawned != 33 and coins_spawned != 66 and coins_spawned < 95:
 			var coin_object = coin_scene.instance()
