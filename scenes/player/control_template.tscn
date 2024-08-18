@@ -64,9 +64,6 @@ custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 3 )
 action_mode = 0
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 id = "left"
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="KeyButton"]

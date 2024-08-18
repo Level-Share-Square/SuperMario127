@@ -32,7 +32,9 @@ func _process(delta):
 	if reload == OK:
 		reset()
 		reload = null
-		
+	
+	# this heroic line shall save us from the annoying loading screen error spam !!!!
+	if not InputMap.has_action("reload_from_start"): return
 	if Input.is_action_just_pressed("reload_from_start"):
 		dont_save = false
 		yield(get_tree().create_timer(0.1), "timeout")

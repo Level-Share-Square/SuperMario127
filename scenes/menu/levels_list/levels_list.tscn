@@ -1,7 +1,6 @@
 [gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
-[ext_resource path="res://scenes/menu/options/background.tres" type="Texture" id=2]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=3]
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=5]
@@ -41,6 +40,7 @@
 [ext_resource path="res://scenes/menu/levels_list/icons/folder_settings.png" type="Texture" id=39]
 [ext_resource path="res://scenes/menu/levels_list/icons/view_info.png" type="Texture" id=40]
 [ext_resource path="res://scenes/menu/levels_list/icons/new_folder.png" type="Texture" id=41]
+[ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=42]
 
 [sub_resource type="CanvasItemMaterial" id=22]
 blend_mode = 1
@@ -433,14 +433,7 @@ patch_margin_top = 11
 patch_margin_right = 11
 patch_margin_bottom = 11
 
-[node name="Background" type="TextureRect" parent="Panel"]
-modulate = Color( 1, 0.898039, 0.882353, 1 )
-anchor_right = 2.0
-anchor_bottom = 2.0
-rect_scale = Vector2( 0.5, 0.5 )
-mouse_filter = 2
-texture = ExtResource( 2 )
-stretch_mode = 2
+[node name="Background" parent="Panel" instance=ExtResource( 42 )]
 
 [node name="Gradient" type="TextureRect" parent="Panel/Background"]
 modulate = Color( 0.433568, 0.427246, 0.78125, 0.564706 )
@@ -1305,7 +1298,6 @@ margin_top = 4.0
 margin_right = 444.0
 margin_bottom = 286.0
 rect_min_size = Vector2( 432, 128 )
-focus_mode = 0
 custom_fonts/font = ExtResource( 23 )
 custom_styles/read_only = SubResource( 15 )
 custom_styles/focus = SubResource( 16 )

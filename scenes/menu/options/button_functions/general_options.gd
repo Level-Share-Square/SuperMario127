@@ -68,6 +68,6 @@ func _input(event):
 		LocalSettings.change_setting("General", "window_scale", 3 if not OS.window_fullscreen else last_non_full_scale)
 
 	if Input.is_action_just_pressed("volume_up"):
-		master_volume_slider.value -= 5
-	if Input.is_action_just_pressed("volume_down"):
 		master_volume_slider.value += 5
+	if Input.is_action_just_pressed("volume_down"):
+		master_volume_slider.value -= 5

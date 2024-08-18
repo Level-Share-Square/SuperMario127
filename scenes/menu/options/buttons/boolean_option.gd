@@ -17,14 +17,16 @@ func pressed():
 	value = !value
 	button.text = ON_TEXT if value else OFF_TEXT
 	
-	LocalSettings.change_setting(setting_section, setting_key, value)
+	if !Engine.is_editor_hint():
+		LocalSettings.change_setting(setting_section, setting_key, value)
 
 func renamed():
 	label.text = name.capitalize()
 
 
 func _ready():
-	value = LocalSettings.load_setting(setting_section, setting_key, default_value)
+	if !Engine.is_editor_hint():
+		value = LocalSettings.load_setting(setting_section, setting_key, default_value)
 	button.text = ON_TEXT if value else OFF_TEXT
 	
 	renamed()

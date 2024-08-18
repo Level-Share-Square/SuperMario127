@@ -45,7 +45,7 @@ func _ready():
 	toggle_secret(\"secret\", LocalSettings.load_setting(\"General\", \"secret\", false))
 	LocalSettings.connect(\"setting_changed\", self, \"toggle_secret\")
 
-func toggle_secret(key: String, secret_enabled: bool):
+func toggle_secret(key: String, secret_enabled):
 	if key != \"secret\": return
 	
 	show_node.visible = secret_enabled

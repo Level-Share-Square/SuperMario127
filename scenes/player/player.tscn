@@ -866,7 +866,6 @@ collision_mask = 2048
 shape = SubResource( 24 )
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 3
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 

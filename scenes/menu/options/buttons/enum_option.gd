@@ -16,14 +16,16 @@ func pressed():
 	value = wrapi(value + 1, 0, options.size())
 	button.text = options[value]
 	
-	LocalSettings.change_setting(setting_section, setting_key, value)
+	if !Engine.is_editor_hint():
+		LocalSettings.change_setting(setting_section, setting_key, value)
 
 func renamed():
 	label.text = name.capitalize()
 
 
 func _ready():
-	value = LocalSettings.load_setting(setting_section, setting_key, default_value)
+	if !Engine.is_editor_hint():
+		value = LocalSettings.load_setting(setting_section, setting_key, default_value)
 	
 	button.text = options[value]
 	renamed()

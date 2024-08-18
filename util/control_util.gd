@@ -22,7 +22,7 @@ static func get_formatted_string_by_index(action : String, player_id : int, inde
 			return "Axis " + str(keybinding[index][2]) + ("+" if keybinding[index][3] == 1 else "-")
 	
 	return UNKNOWN
-	
+
 static func get_formatted_string(action : String, player_id : int) -> String:
 	return get_formatted_string_by_index(action, player_id, 0)
 
