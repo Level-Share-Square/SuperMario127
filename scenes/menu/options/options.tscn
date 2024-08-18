@@ -356,35 +356,28 @@ grid_container_path = NodePath("../VBoxContainer/GridContainer")
 master_volume_path = NodePath("../VBoxContainer/MarginContainer/VBoxContainer/MasterVolume")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/General"]
-<<<<<<< HEAD
-margin_left = 103.0
+margin_left = 39.0
 margin_top = 35.0
-margin_right = 465.0
+margin_right = 528.0
 margin_bottom = 397.0
-=======
-margin_left = 84.0
-margin_top = 5.0
-margin_right = 483.0
-margin_bottom = 426.0
->>>>>>> 977257c8b21a1f48831b742fee80a3667a3bca8e
 custom_constants/separation = 32
 
 [node name="MarginContainer" type="MarginContainer" parent="Subscreens/General/VBoxContainer"]
-margin_right = 362.0
+margin_right = 489.0
 margin_bottom = 140.0
-custom_constants/margin_right = 64
+custom_constants/margin_right = 96
 custom_constants/margin_top = 0
-custom_constants/margin_left = 64
+custom_constants/margin_left = 96
 custom_constants/margin_bottom = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/General/VBoxContainer/MarginContainer"]
-margin_left = 64.0
-margin_right = 298.0
+margin_left = 96.0
+margin_right = 393.0
 margin_bottom = 140.0
 alignment = 1
 
 [node name="MasterVolume" parent="Subscreens/General/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource( 9 )]
-margin_right = 234.0
+margin_right = 297.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 160, 0 )
 setting_section = "Audio"
@@ -393,7 +386,7 @@ default_value = 75.0
 
 [node name="Music" parent="Subscreens/General/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource( 9 )]
 margin_top = 52.0
-margin_right = 234.0
+margin_right = 297.0
 margin_bottom = 88.0
 rect_min_size = Vector2( 160, 0 )
 setting_section = "Audio"
@@ -402,7 +395,7 @@ default_value = 100.0
 
 [node name="SoundEffects" parent="Subscreens/General/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource( 9 )]
 margin_top = 104.0
-margin_right = 234.0
+margin_right = 297.0
 margin_bottom = 140.0
 rect_min_size = Vector2( 160, 0 )
 setting_section = "Audio"
@@ -411,41 +404,42 @@ default_value = 100.0
 
 [node name="Separator" type="ColorRect" parent="Subscreens/General/VBoxContainer"]
 margin_top = 172.0
-margin_right = 362.0
+margin_right = 489.0
 margin_bottom = 173.0
 rect_min_size = Vector2( 0, 1 )
 
 [node name="GridContainer" type="GridContainer" parent="Subscreens/General/VBoxContainer"]
 margin_top = 205.0
-<<<<<<< HEAD
-margin_right = 362.0
+margin_right = 489.0
 margin_bottom = 362.0
-=======
-margin_right = 399.0
-margin_bottom = 421.0
->>>>>>> 977257c8b21a1f48831b742fee80a3667a3bca8e
 custom_constants/vseparation = 20
 custom_constants/hseparation = 40
-columns = 3
-
-[node name="RichPresence" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
-margin_right = 120.0
-setting_section = "General"
-setting_key = "rich_presence"
-default_value = true
+columns = 4
 
 [node name="VSync" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
-margin_left = 160.0
-margin_right = 233.0
+margin_right = 120.0
 setting_section = "General"
 setting_key = "v_sync"
 default_value = true
 
 [node name="Multiplayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
-margin_left = 273.0
-margin_right = 362.0
+margin_left = 160.0
+margin_right = 249.0
 setting_section = "General"
 setting_key = "multiplayer"
+
+[node name="ShowTimer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+margin_left = 289.0
+margin_right = 362.0
+setting_section = "General"
+setting_key = "show_timer"
+
+[node name="RichPresence" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+margin_left = 402.0
+margin_right = 489.0
+setting_section = "General"
+setting_key = "rich_presence"
+default_value = true
 
 [node name="WindowScale" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 14 )]
 margin_top = 59.0
@@ -456,22 +450,30 @@ setting_section = "General"
 setting_key = "window_scale"
 options = [ "1x", "2x", "3x", "Full" ]
 
-[node name="ShowTimer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+[node name="FirstPlayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 11 )]
 margin_left = 160.0
 margin_top = 59.0
-margin_right = 233.0
-margin_bottom = 98.0
-setting_section = "General"
-setting_key = "show_timer"
-
-[node name="FirstPlayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 11 )]
-margin_left = 273.0
-margin_top = 59.0
-margin_right = 362.0
+margin_right = 249.0
 margin_bottom = 98.0
 setting_section = "General"
 setting_key = "first_player"
 options = [ "Mario", "Luigi" ]
+
+[node name="LevelGhost" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+margin_left = 289.0
+margin_top = 59.0
+margin_right = 362.0
+margin_bottom = 98.0
+setting_section = "General"
+setting_key = "level_ghost"
+
+[node name="DarkMode" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+margin_left = 402.0
+margin_top = 59.0
+margin_right = 489.0
+margin_bottom = 98.0
+setting_section = "General"
+setting_key = "dark_mode"
 
 [node name="FPSCap" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 14 )]
 margin_top = 118.0
@@ -482,31 +484,11 @@ setting_key = "fps_cap"
 default_value = 3
 options = [ "30", "40", "50", "60" ]
 
-[node name="LevelGhost" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+[node name="SecondPlayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 11 )]
 margin_left = 160.0
 margin_top = 118.0
-margin_right = 233.0
+margin_right = 249.0
 margin_bottom = 157.0
-setting_section = "General"
-setting_key = "level_ghost"
-
-<<<<<<< HEAD
-[node name="SecondPlayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 11 )]
-margin_left = 273.0
-=======
-[node name="DarkMode" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
-margin_left = 305.0
->>>>>>> 977257c8b21a1f48831b742fee80a3667a3bca8e
-margin_top = 118.0
-margin_right = 362.0
-margin_bottom = 157.0
-setting_section = "General"
-setting_key = "dark_mode"
-
-[node name="SecondPlayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 11 )]
-margin_top = 177.0
-margin_right = 131.0
-margin_bottom = 216.0
 setting_section = "General"
 setting_key = "second_player"
 default_value = 1
@@ -691,17 +673,10 @@ rect_min_size = Vector2( 0, 228 )
 script = ExtResource( 17 )
 category_paths = [ NodePath("Player1"), NodePath("Player2"), NodePath("Interface"), NodePath("Hotkeys") ]
 
-<<<<<<< HEAD
 [node name="Player1" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
-margin_left = 14.0
+margin_left = 32.0
 margin_top = 1.0
-margin_right = 530.0
-=======
-[node name="Gameplay" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
-margin_left = 14.0
-margin_top = 1.0
-margin_right = 529.0
->>>>>>> 977257c8b21a1f48831b742fee80a3667a3bca8e
+margin_right = 512.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -871,9 +846,9 @@ setting_key = "63_wing_cap"
 
 [node name="Player2" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 14.0
+margin_left = 32.0
 margin_top = 1.0
-margin_right = 530.0
+margin_right = 512.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1043,15 +1018,9 @@ setting_key = "63_wing_cap"
 
 [node name="Interface" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-<<<<<<< HEAD
 margin_left = 32.0
 margin_top = 64.0
 margin_right = 512.0
-=======
-margin_left = 96.0
-margin_top = 64.0
-margin_right = 448.0
->>>>>>> 977257c8b21a1f48831b742fee80a3667a3bca8e
 margin_bottom = 164.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1111,15 +1080,9 @@ sprite_visible = false
 
 [node name="Hotkeys" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-<<<<<<< HEAD
-margin_left = 28.0
+margin_left = 32.0
 margin_top = 33.0
-margin_right = 516.0
-=======
-margin_left = 64.0
-margin_top = 33.0
-margin_right = 480.0
->>>>>>> 977257c8b21a1f48831b742fee80a3667a3bca8e
+margin_right = 512.0
 margin_bottom = 195.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
