@@ -14,17 +14,16 @@ func _init():
 	var file := File.new()
 	if not file.file_exists(FILE_PATH):
 		config.save(FILE_PATH)
+	
+	# theres only one config file used
+	# so i moved the loading to this function
+	var err = config.load(FILE_PATH)
+	if err != OK:
+		push_error("Error loading config file!")
 
 
 func load_setting(section: String, key: String, default):
-	var err = config.load(FILE_PATH)
-
-	if err == OK:
-		return config.get_value(section, key, default)
-
-	push_error("Error loading config file!")
-
-	return null
+	return config.get_value(section, key, default)
 
 
 func change_setting(section: String, key: String, value):

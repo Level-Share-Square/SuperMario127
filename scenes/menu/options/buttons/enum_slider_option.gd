@@ -1,33 +1,29 @@
-tool
-extends VBoxContainer
+extends OptionBase
 
-export var setting_section: String
-export var setting_key: String
-export var default_value: int
+export var default_value: int = 0
 
 export (Array, String) var options
 
-onready var label := $Label
-onready var slider = $Panel/HSlider
-
-var value: int = 0
-
 func slider_changed(new_val: float):
-	value = new_val
-	renamed()
-	
-	if !Engine.is_editor_hint():
-		LocalSettings.change_setting(setting_section, setting_key, value)
+	value = int(new_val)
+	change_setting(value)
+
+
+func _ready():
+	var slider = $Panel/HSlider
+	slider.min_value = 0
+	slider.max_value = options.size() - 1
+	slider.value = value
 
 func renamed():
 	label.text = name.capitalize() + " - " + options[value]
 
 
-func _ready():
-	if !Engine.is_editor_hint():
-		value = LocalSettings.load_setting(setting_section, setting_key, default_value)
-	
-	slider.min_value = 0
-	slider.max_value = options.size() - 1
-	slider.value = value
+func _update_value():
+	# onready var doesn't work sadly,
+	# since base class ready loads before this class's onready
+	$Panel/HSlider.value = value
 	renamed()
+
+func _get_default_value() -> int:
+	return default_value

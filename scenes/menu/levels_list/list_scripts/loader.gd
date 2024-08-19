@@ -14,7 +14,7 @@ func start_level_loading(working_folder: String):
 
 	var err = level_load_thread.start(self, "load_all_levels", working_folder)
 	if err != OK:
-		assert("Error starting level loading thread.")
+		push_error("Error starting level loading thread.")
 
 # Thread must be disposed (or "joined"), for portability.
 func _exit_tree():

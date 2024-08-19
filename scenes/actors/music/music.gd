@@ -24,7 +24,6 @@ var downloader := Downloader.new()
 var song_cache := []
 var loop := 1.0
 
-var muted := false
 var play_water := false
 var has_water := false
 var temp_music := false
@@ -158,19 +157,15 @@ func _process(delta) -> void:
 	if play_water and !is_instance_valid(character):
 		play_water = false
 	
-	var target_volume = (db2linear(base_volume) * volume_multiplier) if (!muted and !get_tree().paused) else 0
+	var target_volume = (db2linear(base_volume) * volume_multiplier) if !get_tree().paused else 0
 	volume_db = linear2db(lerp(db2linear(volume_db), target_volume if !play_water else 0, delta * 3))
 	water_music_player.volume_db = linear2db(lerp(db2linear(water_music_player.volume_db), target_volume if play_water else 0, delta * 3))
 	if temp_music:
-		var target_temp_volume = db2linear(base_volume) if (!muted and !get_tree().paused) else 0
+		var target_temp_volume = db2linear(base_volume) if !get_tree().paused else 0
 		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), target_temp_volume, delta * 3))
 	else:
 		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), 0, delta * 3))
 		temporary_music_player.volume_db = linear2db(lerp(db2linear(temporary_music_player.volume_db), 0, delta * 3))
-	
-func _unhandled_input(event) -> void:
-	if event.is_action_pressed("mute"):
-		muted = !muted
 
 # the plan for this is to mute the current bgm, play the temp song, and then fade the current bgm back in
 func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0) -> void:
@@ -183,7 +178,7 @@ func play_temporary_music(temp_song_id : int = 0, temp_song_volume : float = 0) 
 
 	var stream = get_song(temp_song_id).stream
 	if temporary_music_player.stream != stream or temporary_music_player.volume_db < -70:
-		temporary_music_player.volume_db = 0 if !muted else -80
+		temporary_music_player.volume_db = 0
 		temporary_music_player.stream = stream
 		temporary_music_player.play()
 	temp_music = true

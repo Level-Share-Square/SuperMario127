@@ -414,6 +414,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/Nozzle.gd"
 }, {
+"base": "VBoxContainer",
+"class": "OptionBase",
+"language": "GDScript",
+"path": "res://scenes/menu/options/buttons/option_base.gd"
+}, {
 "base": "Reference",
 "class": "OrCondition",
 "language": "GDScript",
@@ -711,6 +716,7 @@ _global_script_class_icons={
 "NoActionState": "",
 "NotCondition": "",
 "Nozzle": "",
+"OptionBase": "",
 "OrCondition": "",
 "PanningCamera2D": "",
 "ParallaxLayerResource": "",
@@ -768,11 +774,11 @@ config/windows_native_icon="res://assets/misc/icon.ico"
 [autoload]
 
 LocalSettings="*res://singletons/local_settings.gd"
-Discord="*res://addons/discord_game_sdk/discord.gd"
 Singleton="*res://scenes/actors/singleton/singleton.tscn"
 Singleton2="*res://singleton2.gd"
 UserInfo="*res://util/info.gd"
 GhostArrays="*res://scenes/actors/mario/misc/ghostarrays.gd"
+Discord="*res://addons/discord_game_sdk/discord.gd"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
 
 [debug]

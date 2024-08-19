@@ -29,11 +29,11 @@ export var sprite_rotation: float
 export var sprite_offset: Vector2
 
 func _ready():
-	if is_instance_valid(remapper):
-		button.connect("pressed", remapper, "start_listening", [self, get_parent()])
-		reset_button.connect("pressed", remapper, "reset_keybind", [self])
-	
-	change_button_text()
+	if !Engine.is_editor_hint():
+		if is_instance_valid(remapper):
+			button.connect("pressed", remapper, "start_listening", [self, get_parent()])
+			reset_button.connect("pressed", remapper, "reset_keybind", [self])
+		change_button_text()
 	update()
 
 func pressed():

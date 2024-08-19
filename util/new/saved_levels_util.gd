@@ -10,7 +10,7 @@ static func file_exists(file_path: String) -> bool:
 static func delete_file(file_path: String):
 	var err: int = OS.move_to_trash(ProjectSettings.globalize_path(file_path))
 	if err != OK:
-		assert("Failure deleting level file. Error code: " + str(err))
+		push_error("Failure deleting level file. Error code: " + str(err))
 
 
 ## LEVEL CODES
@@ -21,7 +21,7 @@ static func load_level_code_file(file_path: String) -> String:
 	var file := File.new()
 	var err: int = file.open(file_path, File.READ)
 	if err != OK:
-		assert("File " + file_path + " failed to load. Error code: " + str(err))
+		push_error("File " + file_path + " failed to load. Error code: " + str(err))
 	
 	var level_code: String = file.get_as_text()
 	file.close()
@@ -32,7 +32,7 @@ static func save_level_code_file(level_code: String, file_path: String):
 	var file := File.new()
 	var err: int = file.open(file_path, File.WRITE)
 	if err != OK:
-		assert("File " + file_path + " could not be saved. Error code: " + str(err))
+		push_error("File " + file_path + " could not be saved. Error code: " + str(err))
 	
 	file.store_string(level_code)
 	file.close()
@@ -46,13 +46,13 @@ static func load_level_save_file(file_path: String) -> Dictionary:
 	var file := File.new()
 	var err: int = file.open_encrypted_with_pass(file_path, File.READ, ENCRYPTION_PASSWORD)
 	if err != OK:
-		assert("File " + file_path + " failed to load. Error code: " + str(err))
+		push_error("File " + file_path + " failed to load. Error code: " + str(err))
 	
 	var parse: JSONParseResult = JSON.parse(file.get_as_text())
 	file.close()
 	
 	if parse.error != OK:
-		assert(parse.error_string)
+		push_error(parse.error_string)
 		return {}
 		
 	return parse.result
@@ -63,7 +63,7 @@ static func save_level_save_file(level_save: Dictionary, file_path: String):
 	var file := File.new()
 	var err: int = file.open_encrypted_with_pass(file_path, File.WRITE, ENCRYPTION_PASSWORD)
 	if err != OK:
-		assert("File " + file_path + " could not be saved. Error code: " + str(err))
+		push_error("File " + file_path + " could not be saved. Error code: " + str(err))
 	
 	file.store_string(save_json)
 	file.close()
@@ -90,7 +90,7 @@ static func autosave_level_to_disk(level_code: String, level_path: String):
 	var file := File.new()
 	var err: int = file.open(level_path, File.WRITE)
 	if err != OK: 
-		assert("File " + level_path + " failed to save. Error code: " + str(err))
+		push_error("File " + level_path + " failed to save. Error code: " + str(err))
 	
 	var time = Time.get_unix_time_from_system()
 	file.store_string(str(time) + "\n")

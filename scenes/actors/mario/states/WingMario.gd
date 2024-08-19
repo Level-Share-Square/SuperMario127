@@ -40,7 +40,7 @@ func _update(delta):
 	
 	# Set control mode
 	up_down_controls = LocalSettings.load_setting(
-		"Controls (Player " + str(character.player_id) + ")", 
+		"Controls (Player " + str(character.player_id + 1) + ")", 
 		"63_wing_cap",
 		false
 	)

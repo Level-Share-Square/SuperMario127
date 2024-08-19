@@ -1,21 +1,18 @@
 extends Node
 
-export var vbox_container_path: NodePath
-onready var vbox_container = get_node(vbox_container_path)
-
-export var grid_container_path: NodePath
-onready var grid_container = get_node(grid_container_path)
+const LOAD_CATEGORY = "General"
 
 func _ready():
-	for setting in (grid_container.get_children() + vbox_container.get_children()):
-		change_setting(
-			setting.setting_key, LocalSettings.load_setting(
-				setting.setting_section, 
-				setting.setting_key,
-				setting.default_value
-			)
-		)
 	LocalSettings.connect("setting_changed", self, "change_setting")
+	
+	var config: ConfigFile = LocalSettings.config
+	if not config.has_section(LOAD_CATEGORY): return
+	
+	for key in config.get_section_keys(LOAD_CATEGORY):
+		if config.has_section_key(LOAD_CATEGORY, key):
+			change_setting(
+				key, LocalSettings.load_setting(LOAD_CATEGORY, key, null)
+			)
 
 func change_setting(key: String, new_value):
 	match key:
@@ -48,11 +45,13 @@ func change_setting(key: String, new_value):
 			var bus_index: int = AudioServer.get_bus_index("Master")
 			var volume_db: float = linear2db(float(new_value) / 100)
 			AudioServer.set_bus_volume_db(bus_index, volume_db)
+			last_master_volume = new_value
 
 		"bgm_volume":
 			var bus_index: int = AudioServer.get_bus_index("Music")
 			var volume_db: float = linear2db(float(new_value) / 100)
 			AudioServer.set_bus_volume_db(bus_index, volume_db)
+			if new_value > 0: last_non_muted_bgm = new_value
 
 		"sfx_volume":
 			var bus_index: int = AudioServer.get_bus_index("Sounds")
@@ -60,16 +59,20 @@ func change_setting(key: String, new_value):
 			AudioServer.set_bus_volume_db(bus_index, volume_db)
 
 
-# fullscreen and volume hotkeys
-export var master_volume_path: NodePath
-onready var master_volume_slider: HSlider = get_node(master_volume_path).get_node("Panel/HSlider")
-
+## related to various hotkeys
+var last_master_volume: float = 75
+var last_non_muted_bgm: float = 100
 var last_non_full_scale: int = 0
-func _input(event):
+
+func _unhandled_input(event):
 	if event.is_action_pressed("fullscreen"):
 		LocalSettings.change_setting("General", "window_scale", 3 if not OS.window_fullscreen else last_non_full_scale)
 
-	if Input.is_action_just_pressed("volume_up"):
-		master_volume_slider.value += 5
-	if Input.is_action_just_pressed("volume_down"):
-		master_volume_slider.value -= 5
+	if event.is_action_pressed("volume_up"):
+		LocalSettings.change_setting("General", "master_volume", last_master_volume + 5)
+	if event.is_action_pressed("volume_down"):
+		LocalSettings.change_setting("General", "master_volume", last_master_volume - 5)
+	
+	if event.is_action_pressed("mute"):
+		var current_vol = LocalSettings.load_setting("General", "bgm_volume", 100)
+		LocalSettings.change_setting("General", "bgm_volume", 0 if current_vol > 0 else last_non_muted_bgm)

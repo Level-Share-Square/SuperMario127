@@ -45,7 +45,7 @@ static func load():
 	
 		if data.has("numberOfTiles"):
 			Singleton.EditorSavedSettings.data_tiles = data["numberOfTiles"]
-			
+		
 		if data.has("savedPalettes"):
 			Singleton.EditorSavedSettings.tileset_palettes = data["savedPalettes"]
 	

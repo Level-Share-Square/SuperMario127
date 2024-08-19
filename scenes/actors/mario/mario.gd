@@ -1077,15 +1077,10 @@ func get_input(input_id : int, is_just_pressed : bool) -> bool:
 
 func update_inputs() -> void:
 	if controlled_locally:
-		if !Singleton.FocusCheck.is_ui_focused:
-			var control_id := player_id
-			for input in inputs:
-				input[0] = Input.is_action_pressed(input[2] + str(control_id))
-				input[1] = Input.is_action_just_pressed(input[2] + str(control_id))
-		else:
-			for input in inputs:
-				input[0] = false
-				input[1] = false
+		var control_id := player_id
+		for input in inputs:
+			input[0] = Input.is_action_pressed(input[2] + str(control_id))
+			input[1] = Input.is_action_just_pressed(input[2] + str(control_id))
 
 func set_inter_player_collision(can_collide : bool) -> void:
 	player_collision.set_collision_mask_bit(1, can_collide)

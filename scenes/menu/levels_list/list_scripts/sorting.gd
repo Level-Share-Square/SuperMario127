@@ -31,14 +31,14 @@ func load_from_json(working_folder: String):
 	var file := File.new()
 	var err: int = file.open(working_folder + "/sort.json", File.READ)
 	if err != OK: 
-		assert("File " + working_folder + "/sort.json" + " could not be loaded. Error code: " + str(err))
+		push_error("File " + working_folder + "/sort.json" + " could not be loaded. Error code: " + str(err))
 		return
 	
 	var parse: JSONParseResult = JSON.parse(file.get_as_text())
 	file.close()
 	
 	if parse.error != OK:
-		assert(parse.error_string)
+		push_error(parse.error_string)
 		return
 	
 	sort = parse.result
@@ -52,7 +52,7 @@ func save_to_json(working_folder: String, is_blank: bool = false):
 	var file := File.new()
 	var err: int = file.open(working_folder + "/sort.json", File.WRITE)
 	if err != OK: 
-		assert("File " + working_folder + "/sort.json" + " could not be loaded. Error code: " + str(err))
+		push_error("File " + working_folder + "/sort.json" + " could not be loaded. Error code: " + str(err))
 		return
 	
 	file.store_string(JSON.print(save_dict))
