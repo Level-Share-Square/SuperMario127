@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=57 format=2]
+[gd_resource type="Theme" load_steps=62 format=2]
 
 [ext_resource path="res://assets/fonts/coolfont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/options/buttons/grabber_highlight.png" type="Texture" id=2]
@@ -225,6 +225,22 @@ shadow_size = 2
 shadow_offset = Vector2( 2, 4 )
 anti_aliasing_size = 2.0
 
+[sub_resource type="StyleBoxEmpty" id=66]
+
+[sub_resource type="StyleBoxFlat" id=65]
+bg_color = Color( 0, 0, 0, 0.501961 )
+skew = Vector2( 0.5, 0 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 0 )
+border_blend = true
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
 [sub_resource type="DynamicFont" id=26]
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
@@ -361,6 +377,38 @@ expand_margin_left = 4.0
 expand_margin_right = 4.0
 expand_margin_top = 4.0
 expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id=69]
+bg_color = Color( 1, 1, 1, 1 )
+skew = Vector2( 0.01, 0.01 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 1, 1, 1, 0 )
+border_blend = true
+corner_detail = 1
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="DynamicFont" id=68]
+size = 10
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=67]
+bg_color = Color( 0.0941176, 0.0941176, 0.329412, 0.878431 )
+skew = Vector2( 0.025, 0.025 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.219608, 0.215686, 0.603922, 1 )
+border_blend = true
 
 [sub_resource type="Gradient" id=12]
 offsets = PoolRealArray( 0.335196, 0.653631 )
@@ -540,6 +588,9 @@ HSlider/icons/tick = SubResource( 42 )
 HSlider/styles/slider = SubResource( 40 )
 LevelPanel/base_type = "Panel"
 LevelPanel/styles/panel = SubResource( 44 )
+LineEdit/fonts/font = SubResource( 11 )
+LineEdit/styles/focus = SubResource( 66 )
+LineEdit/styles/normal = SubResource( 65 )
 MarginContainer/constants/margin_bottom = 12
 MarginContainer/constants/margin_left = 12
 MarginContainer/constants/margin_right = 12
@@ -580,6 +631,18 @@ OptionsToggleSelect/styles/hover = SubResource( 54 )
 OptionsToggleSelect/styles/normal = SubResource( 25 )
 OptionsToggleSelect/styles/pressed = SubResource( 55 )
 Panel/styles/panel = SubResource( 43 )
+PanelSlanted/base_type = "Panel"
+PanelSlanted/styles/panel = SubResource( 69 )
+PopupMenu/colors/font_color = Color( 1, 1, 1, 1 )
+PopupMenu/colors/font_color_accel = Color( 1, 1, 1, 0.8 )
+PopupMenu/colors/font_color_disabled = Color( 0.4, 0.4, 0.4, 0.8 )
+PopupMenu/colors/font_color_hover = Color( 1, 1, 1, 1 )
+PopupMenu/colors/font_color_separator = Color( 1, 1, 1, 1 )
+PopupMenu/constants/hseparation = 4
+PopupMenu/constants/vseparation = 0
+PopupMenu/fonts/font = SubResource( 68 )
+PopupMenu/fonts/font_separator = SubResource( 68 )
+PopupMenu/styles/panel = SubResource( 67 )
 Red/base_type = "Button"
 Red/colors/font_color = Color( 1, 1, 1, 1 )
 Red/colors/font_color_focus = Color( 1, 1, 1, 1 )
@@ -600,6 +663,7 @@ Special/styles/focus = SubResource( 33 )
 Special/styles/hover = SubResource( 23 )
 Special/styles/normal = SubResource( 21 )
 Special/styles/pressed = SubResource( 24 )
+TextEdit/fonts/font = SubResource( 11 )
 ToggleBackground/base_type = "Panel"
 ToggleBackground/styles/panel = SubResource( 34 )
 VBoxContainer/constants/separation = 16

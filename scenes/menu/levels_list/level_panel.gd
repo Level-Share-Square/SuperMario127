@@ -1,5 +1,7 @@
 extends Control
 
+const UNKNOWN_AUTHOR: String = "Unknown"
+const UNKNOWN_DESCRIPTION: String = "This level has no description."
 const TIME_SCORE_SCENE: PackedScene = preload("res://scenes/menu/levels_list/list_elements/time_score.tscn")
 
 export var list_handler_path: NodePath
@@ -50,8 +52,15 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 	title.text = level_info.level_name
 	title_shadow.text = title.text
 	
-	author.text = author_prefix + level_info.level_author
-	description.bbcode_text = level_info.level_description
+	# author and description (defaults to preset values if empty)
+	var author_text: String = author_prefix + UNKNOWN_AUTHOR
+	var description_text: String = UNKNOWN_DESCRIPTION
+	
+	if level_info.level_author != "": author_text = author_prefix + level_info.level_author
+	if level_info.level_description != "": description_text = level_info.level_description
+	
+	author.text = author_text
+	description.bbcode_text = "[center]" + description_text + "[/center]"
 	
 	# thumbnail
 	thumbnail.texture = level_info.get_level_background_texture()

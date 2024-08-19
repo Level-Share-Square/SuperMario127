@@ -28,3 +28,7 @@ func screen_change(new_screen_name: String):
 		Singleton.Music.change_song(Singleton.Music.last_song, new_screen.music_id)
 	
 	emit_signal("screen_changed")
+
+
+func transition(extra_arg_0):
+	pass # Replace with function body.

@@ -17,13 +17,6 @@ func remove_from_list(element_id: String, element_type: String):
 	sort[element_type].erase(element_id)
 
 
-func sort_cards(level_grid: GridContainer, element_type: String):
-	for element in sort[element_type]:
-		var card = level_grid.get_node(element)
-		if is_instance_valid(card):
-			level_grid.move_child(card, level_grid.get_child_count())
-
-
 
 ### JSON stuff ###
 

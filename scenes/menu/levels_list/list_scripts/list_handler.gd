@@ -27,7 +27,13 @@ onready var folders: Node = $Folders
 ### variables
 const BASE_FOLDER: String = "user://level_list"
 const DEFAULT_LEVEL: String = "res://level/default_level.tres"
+
 var working_folder: String = BASE_FOLDER
+# back buttons take most recent folder from the stack and pop it
+# while folder buttons push a new folder to the stack
+var folder_stack: Array = [BASE_FOLDER]
+
+var back_buttons: int = 0
 var folder_buttons: int = 0
 
 func _ready():
@@ -57,6 +63,8 @@ func insert_folder():
 	
 	sorting.add_to_list(folder_name, "folders")
 	sorting.save_to_json(working_folder)
+	
+	loader.add_folder_button(working_folder + "/" + folder_name, folder_name, true)
 
 func insert_level(level_code: String = ""):
 	if level_code == "":

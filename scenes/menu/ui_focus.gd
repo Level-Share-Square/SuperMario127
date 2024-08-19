@@ -9,6 +9,7 @@ func _input(event):
 	if disabled: return
 	if not get_parent().visible: return
 	
+	if get_focus_owner() is LineEdit or get_focus_owner() is TextEdit: return
 	if get_focus_owner() != null and event is InputEventMouseMotion and !Input.is_mouse_button_pressed(1): 
 		get_focus_owner().release_focus()
 

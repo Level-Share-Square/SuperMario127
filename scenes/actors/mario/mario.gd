@@ -291,7 +291,7 @@ const ANIM_IDS : Dictionary = {
 }
 
 func _ready():
-
+	Singleton.CurrentLevelData.can_pause = true
 
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
@@ -988,7 +988,7 @@ func switch_areas(area_id, transition_time):
 
 	
 func kill(cause: String) -> void:
-	var r_press = false
+	Singleton.CurrentLevelData.can_pause = false
 	if !dead:
 		if Singleton.PlayerSettings.other_player_id != -1:
 			get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())
@@ -1008,7 +1008,6 @@ func kill(cause: String) -> void:
 				reload = false
 		elif cause == "reload":
 			transition_time = 0.4
-			r_press = true
 		elif cause == "green_demon":
 			sound_player.play_last_hit_sound()
 			controllable = false

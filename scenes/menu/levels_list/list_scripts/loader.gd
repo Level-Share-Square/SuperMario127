@@ -33,7 +33,7 @@ func load_all_levels(working_folder: String):
 	
 	emit_signal("loading_finished")
 
-func add_folder_button(file_path: String, folder_name: String, move_to_front: bool = false):
+func add_folder_button(file_path: String, folder_name: String, move_to_front: bool = false, is_return: bool = false):
 	var level_grid: GridContainer = list_handler.level_grid
 	var folders: Node = list_handler.folders
 	
@@ -41,12 +41,12 @@ func add_folder_button(file_path: String, folder_name: String, move_to_front: bo
 	folder_button.name = folder_name
 	folder_button.get_node("Name").text = folder_name
 	level_grid.call_deferred("add_child", folder_button)
-
+	
 	if move_to_front:
-		level_grid.call_deferred("move_child", folder_button, 0)
+		level_grid.call_deferred("move_child", folder_button, list_handler.back_buttons)
 	
 	#warning-ignore:return_value_discarded
-	folder_button.call_deferred("connect", "pressed", folders, "change_folder", [file_path])
+	folder_button.call_deferred("connect", "pressed", folders, "change_folder", [file_path, true, is_return])
 
 func add_level_card(file_path: String, level_id: String, working_folder: String, level_code: String = "", move_to_front: bool = false):
 	if level_code == "":
@@ -77,7 +77,8 @@ func add_level_card(file_path: String, level_id: String, working_folder: String,
 	
 	level_grid.call_deferred("add_child", level_card)
 	if move_to_front:
-		level_grid.call_deferred("move_child", level_card, list_handler.folder_buttons)
+		var index: int = list_handler.back_buttons + list_handler.folder_buttons
+		level_grid.call_deferred("move_child", level_card, index)
 	
 	## some signal stuff!! the signals tell the level list
 	## to transition to another screen, and then tell the

@@ -1,6 +1,7 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/actors/objects/cloud_platform/texture.png" type="Texture" id=2]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=3]
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=5]
@@ -41,6 +42,11 @@
 [ext_resource path="res://scenes/menu/levels_list/icons/view_info.png" type="Texture" id=40]
 [ext_resource path="res://scenes/menu/levels_list/icons/new_folder.png" type="Texture" id=41]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=42]
+[ext_resource path="res://scenes/actors/mario/luigi.png" type="Texture" id=43]
+[ext_resource path="res://scenes/actors/objects/green_demon/green_demon.png" type="Texture" id=44]
+[ext_resource path="res://scenes/actors/mario/mario.png" type="Texture" id=45]
+[ext_resource path="res://scenes/actors/mario/nozzles/hover_mario.png" type="Texture" id=46]
+[ext_resource path="res://scenes/menu/levels_list/list_scripts/folder_setting_buttons.gd" type="Script" id=47]
 
 [sub_resource type="CanvasItemMaterial" id=22]
 blend_mode = 1
@@ -273,6 +279,101 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=20]
+resource_name = "transition"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
+
+[sub_resource type="DynamicFont" id=27]
+size = 12
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 6 )
+
+[sub_resource type="Gradient" id=25]
+offsets = PoolRealArray( 0, 0.417085 )
+colors = PoolColorArray( 1, 0.968627, 0.968627, 0.0627451, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture2D" id=26]
+gradient = SubResource( 25 )
+fill_from = Vector2( 0, 1 )
+fill_to = Vector2( 0, 0 )
+
+[sub_resource type="Animation" id=23]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 0.9 ) ]
+}
+
+[sub_resource type="Animation" id=24]
 resource_name = "transition"
 length = 0.3
 tracks/0/type = "value"
@@ -824,7 +925,7 @@ margin_bottom = 132.0
 rect_min_size = Vector2( 432, 128 )
 custom_fonts/normal_font = ExtResource( 23 )
 bbcode_enabled = true
-bbcode_text = "After two years of working on this level (on and off but still), it's finally complete; Super Mario 63 Tall Tall Mountain +!
+bbcode_text = "[center]After two years of working on this level (on and off but still), it's finally complete; Super Mario 63 Tall Tall Mountain +!
 
 
 This level is a complete remake and expansion of Super Mario 63's Tall Tall Mountain with a BOATLOAD of new features, including:
@@ -845,7 +946,7 @@ This level is a complete remake and expansion of Super Mario 63's Tall Tall Moun
 Now that this update is out, you might see me make more levels, so stay tuned for that!
 Anyways, have fun!
 
-v1.01 (7/29): Quick hotfix to disable some unnecessary pipes, and to mae one of the more hidden star coins easier to find"
+v1.01 (7/29): Quick hotfix to disable some unnecessary pipes, and to mae one of the more hidden star coins easier to find[/center]"
 text = "After two years of working on this level (on and off but still), it's finally complete; Super Mario 63 Tall Tall Mountain +!
 
 
@@ -1309,12 +1410,401 @@ wrap_enabled = true
 anims/RESET = SubResource( 19 )
 anims/transition = SubResource( 20 )
 
+[node name="FolderSettings" type="MarginContainer" parent="Panel/Subscreens"]
+visible = false
+modulate = Color( 0, 0, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 0, 313 )
+rect_clip_content = true
+script = ExtResource( 9 )
+
+[node name="Focus" type="Control" parent="Panel/Subscreens/FolderSettings"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 660.0
+margin_bottom = 301.0
+script = ExtResource( 26 )
+default_focus_path = NodePath("../Control/FolderSettingButtons/Return")
+
+[node name="Control" type="Control" parent="Panel/Subscreens/FolderSettings"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 660.0
+margin_bottom = 301.0
+
+[node name="FolderSettingButtons" type="VBoxContainer" parent="Panel/Subscreens/FolderSettings/Control"]
+margin_left = -27.0
+margin_right = 136.0
+margin_bottom = 289.0
+custom_constants/separation = 10
+alignment = 1
+script = ExtResource( 47 )
+folder_name_edit_path = NodePath("HBoxContainer/FolderName")
+folder_name_label_path = NodePath("../Panel/MarginContainer/VBoxContainer/FolderName")
+list_handler_path = NodePath("../../../LevelList/ScrollContainer/MarginContainer/ListHandler")
+
+[node name="Return" type="Button" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
+margin_top = 59.0
+margin_right = 163.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 0, 20 )
+focus_neighbour_top = NodePath("../DeleteFolder")
+theme_type_variation = "AlternateButton"
+custom_colors/font_color_focus = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_hover = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_pressed = Color( 0.694118, 0.2, 0.2, 1 )
+text = "Return"
+align = 2
+script = ExtResource( 14 )
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/Return"]
+modulate = Color( 0.694118, 0.2, 0.2, 1 )
+margin_left = 96.0
+margin_top = 1.0
+margin_right = 114.0
+margin_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource( 35 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( -49, 0 )
+
+[node name="Padding" type="Control" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
+margin_top = 89.0
+margin_right = 163.0
+margin_bottom = 99.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
+margin_top = 109.0
+margin_right = 163.0
+margin_bottom = 129.0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+
+[node name="FolderName" type="LineEdit" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/HBoxContainer"]
+margin_right = 139.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 27 )
+align = 2
+placeholder_text = "Folder Name"
+
+[node name="Padding" type="Control" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/HBoxContainer"]
+margin_left = 139.0
+margin_right = 163.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 24, 0 )
+
+[node name="RenameFolder" type="Button" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
+margin_top = 139.0
+margin_right = 163.0
+margin_bottom = 159.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+text = "Rename Folder"
+align = 2
+script = ExtResource( 14 )
+
+[node name="Padding2" type="Control" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
+margin_top = 169.0
+margin_right = 163.0
+margin_bottom = 169.0
+
+[node name="ExportFolder" type="Button" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
+margin_top = 179.0
+margin_right = 163.0
+margin_bottom = 199.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+text = "Export to File"
+align = 2
+script = ExtResource( 14 )
+
+[node name="DeleteFolder" type="Button" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
+margin_top = 209.0
+margin_right = 163.0
+margin_bottom = 229.0
+rect_min_size = Vector2( 0, 20 )
+focus_neighbour_bottom = NodePath("../Return")
+theme_type_variation = "AlternateButtonRed"
+text = "Delete Folder"
+align = 2
+script = ExtResource( 14 )
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/DeleteFolder"]
+margin_left = 59.0
+margin_top = 1.0
+margin_right = 77.0
+margin_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource( 34 )
+expand = true
+script = ExtResource( 29 )
+countdown_path = NodePath("../PressCountdown")
+count_offsets = [ 0, -16, -18, -18, -17, -17 ]
+offset = Vector2( -86, 0 )
+
+[node name="PressCountdown" type="Node" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/DeleteFolder"]
+script = ExtResource( 22 )
+countdown_style = 1
+
+[node name="Panel" type="Panel" parent="Panel/Subscreens/FolderSettings/Control"]
+self_modulate = Color( 0, 0, 0, 0.501961 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 201.0
+margin_top = -1.0
+margin_right = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Subscreens/FolderSettings/Control/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 436.0
+margin_bottom = 278.0
+
+[node name="FolderName" type="Label" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer"]
+margin_right = 424.0
+margin_bottom = 24.0
+text = "New Folder"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 424.0
+margin_bottom = 56.0
+alignment = 1
+
+[node name="Levels" type="Label" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 14.0
+margin_right = 146.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 132, 0 )
+custom_fonts/font = ExtResource( 23 )
+text = "Levels in Folder: 0"
+align = 1
+
+[node name="Shines" type="Label" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 150.0
+margin_right = 278.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 128, 0 )
+custom_fonts/font = ExtResource( 23 )
+text = "Shines Total: 0"
+align = 1
+
+[node name="StarCoins" type="Label" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 282.0
+margin_right = 410.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 128, 0 )
+custom_fonts/font = ExtResource( 23 )
+text = "Star Coins Total: 0"
+align = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer"]
+margin_top = 72.0
+margin_right = 424.0
+margin_bottom = 88.0
+custom_constants/separation = 16
+alignment = 1
+
+[node name="Completion" type="Label" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 40.0
+margin_right = 190.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 150, 0 )
+custom_fonts/font = ExtResource( 23 )
+text = "Total Completion: 100%"
+align = 1
+
+[node name="BestTimes" type="Label" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 206.0
+margin_right = 383.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 160, 0 )
+custom_fonts/font = ExtResource( 23 )
+text = "Best Times Total: 100h 15m 50s"
+align = 1
+
+[node name="useless filler of space" type="Control" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 424.0
+margin_bottom = 266.0
+rect_clip_content = true
+size_flags_vertical = 3
+
+[node name="Gradient" type="TextureRect" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 26 )
+expand = true
+
+[node name="Mario" type="Sprite" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space"]
+position = Vector2( 232, 40 )
+rotation = -0.202988
+texture = ExtResource( 45 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 48, 240, 48, 48 )
+
+[node name="Hover" type="Sprite" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space/Mario"]
+texture = ExtResource( 46 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 48, 240, 48, 48 )
+
+[node name="Luigi" type="Sprite" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space"]
+position = Vector2( 72, 30 )
+rotation = 0.0205573
+texture = ExtResource( 43 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 48, 48 )
+
+[node name="Label" type="Label" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space/Luigi"]
+margin_left = 18.5232
+margin_top = -23.3857
+margin_right = 30.5232
+margin_bottom = 0.614304
+text = "?"
+
+[node name="Cloud" type="NinePatchRect" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space"]
+margin_left = -10.2275
+margin_top = 68.6767
+margin_right = 165.773
+margin_bottom = 92.6767
+rect_rotation = 1.84457
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 64, 23 )
+patch_margin_left = 24
+patch_margin_right = 24
+axis_stretch_horizontal = 1
+
+[node name="Cloud2" type="NinePatchRect" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space"]
+margin_left = 263.773
+margin_top = 126.677
+margin_right = 439.773
+margin_bottom = 150.677
+rect_rotation = -3.93636
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 64, 23 )
+patch_margin_left = 24
+patch_margin_right = 24
+axis_stretch_horizontal = 1
+
+[node name="Afterimage2" type="Control" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space"]
+modulate = Color( 1, 1, 1, 0.25098 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_right = 12.0
+
+[node name="GreenDemon" type="Sprite" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space/Afterimage2"]
+modulate = Color( 1, 0.494118, 0.494118, 1 )
+position = Vector2( 364, 37 )
+rotation = -0.16627
+texture = ExtResource( 44 )
+
+[node name="GreenDemon4" type="Sprite" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space/Afterimage2"]
+modulate = Color( 1, 0.760784, 0.760784, 1 )
+position = Vector2( 423, 32 )
+rotation = -0.125843
+texture = ExtResource( 44 )
+
+[node name="GreenDemon2" type="Sprite" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space/Afterimage2"]
+modulate = Color( 1, 0.65098, 0.65098, 1 )
+position = Vector2( 394, 68 )
+rotation = -0.0719934
+texture = ExtResource( 44 )
+
+[node name="GreenDemon3" type="Sprite" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space/Afterimage2"]
+modulate = Color( 1, 0.329412, 0.329412, 1 )
+position = Vector2( 327, 56 )
+rotation = -0.00769942
+texture = ExtResource( 44 )
+
+[node name="Afterimage" type="Control" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_right = 6.0
+
+[node name="GreenDemon" type="Sprite" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space/Afterimage"]
+modulate = Color( 1, 0.494118, 0.494118, 1 )
+position = Vector2( 364, 37 )
+rotation = -0.16627
+texture = ExtResource( 44 )
+
+[node name="GreenDemon4" type="Sprite" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space/Afterimage"]
+modulate = Color( 1, 0.760784, 0.760784, 1 )
+position = Vector2( 423, 32 )
+rotation = -0.125843
+texture = ExtResource( 44 )
+
+[node name="GreenDemon2" type="Sprite" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space/Afterimage"]
+modulate = Color( 1, 0.65098, 0.65098, 1 )
+position = Vector2( 394, 68 )
+rotation = -0.0719934
+texture = ExtResource( 44 )
+
+[node name="GreenDemon3" type="Sprite" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space/Afterimage"]
+modulate = Color( 1, 0.329412, 0.329412, 1 )
+position = Vector2( 327, 56 )
+rotation = -0.00769942
+texture = ExtResource( 44 )
+
+[node name="Demons" type="Control" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="GreenDemon" type="Sprite" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space/Demons"]
+modulate = Color( 1, 0.494118, 0.494118, 1 )
+position = Vector2( 364, 37 )
+rotation = -0.16627
+texture = ExtResource( 44 )
+
+[node name="GreenDemon4" type="Sprite" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space/Demons"]
+modulate = Color( 1, 0.760784, 0.760784, 1 )
+position = Vector2( 423, 32 )
+rotation = -0.125843
+texture = ExtResource( 44 )
+
+[node name="GreenDemon2" type="Sprite" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space/Demons"]
+modulate = Color( 1, 0.65098, 0.65098, 1 )
+position = Vector2( 394, 68 )
+rotation = -0.0719934
+texture = ExtResource( 44 )
+
+[node name="GreenDemon3" type="Sprite" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space/Demons"]
+modulate = Color( 1, 0.329412, 0.329412, 1 )
+position = Vector2( 327, 56 )
+rotation = -0.00769942
+texture = ExtResource( 44 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Subscreens/FolderSettings"]
+anims/RESET = SubResource( 23 )
+anims/transition = SubResource( 24 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )
 anims/transition = SubResource( 6 )
 
 [connection signal="pressed" from="Panel/Buttons/Back" to="." method="transition" binds= [ "MainMenu" ]]
+[connection signal="pressed" from="Panel/Buttons/FolderSettings" to="Panel/Subscreens/LevelList" method="transition" binds= [ "FolderSettings" ]]
 [connection signal="pressed" from="Panel/Buttons/Add" to="Panel/Subscreens/LevelList" method="transition" binds= [ "AddElement" ]]
+[connection signal="folder_changed" from="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler/Folders" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="update_folder_name"]
+[connection signal="folder_renamed" from="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler/Folders" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="update_folder_name"]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/Return" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelList" ]]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/PlayLevel" to="Panel/Subscreens/LevelInfo/LevelPanel" method="play_level"]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/EditLevel" to="Panel/Subscreens/LevelInfo/LevelPanel" method="edit_level"]
@@ -1335,3 +1825,8 @@ anims/transition = SubResource( 6 )
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewFolder" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement/Control/ElementAddButtons" method="import_level_code"]
+[connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/Return" to="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler" method="change_focus"]
+[connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/Return" to="Panel/Subscreens/FolderSettings" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/RenameFolder" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="rename_folder"]
+[connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/DeleteFolder/PressCountdown" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="delete_folder"]
+[connection signal="text_changed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/DeleteFolder/PressCountdown" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/DeleteFolder/Icon" method="update_offset"]

@@ -7,10 +7,25 @@ static func file_exists(file_path: String) -> bool:
 	var file := File.new()
 	return file.file_exists(file_path)
 
+static func dir_exists(dir_path: String) -> bool:
+	var directory := Directory.new()
+	return directory.dir_exists(dir_path)
+
 static func delete_file(file_path: String):
 	var err: int = OS.move_to_trash(ProjectSettings.globalize_path(file_path))
 	if err != OK:
 		push_error("Failure deleting level file. Error code: " + str(err))
+
+static func move_file(file_path: String, new_path: String):
+	var directory := Directory.new()
+	var err: int = directory.rename(file_path, new_path)
+	if err != OK:
+		push_error("Failure moving file/directory. Error code: " + str(err))
+
+# this retrieves everything after the last "/" in the file path
+static func get_last_in_path(file_path: String) -> String:
+	var path_array: PoolStringArray = file_path.split("/")
+	return path_array[path_array.size() - 1]
 
 
 ## LEVEL CODES

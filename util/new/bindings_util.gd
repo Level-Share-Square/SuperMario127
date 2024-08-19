@@ -152,7 +152,8 @@ static func clear_binding(action: String, player_id: int):
 	if player_id > -1:
 		input_name += str(player_id)
 	
-	InputMap.action_erase_events(input_name)
+	if InputMap.has_action(input_name):
+		InputMap.action_erase_events(input_name)
 
 static func add_from_binding_array(action: String, player_id: int, event_array: Array):
 	# just want to create the inputmap actions even
