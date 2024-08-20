@@ -544,6 +544,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/teleport_object.gd"
 }, {
+"base": "Reference",
+"class": "ThumbnailDownloader",
+"language": "GDScript",
+"path": "res://classes/ThumbnailDownloader.gd"
+}, {
 "base": "Nozzle",
 "class": "TurboNozzle",
 "language": "GDScript",
@@ -742,6 +747,7 @@ _global_script_class_icons={
 "SubtractionOperation": "",
 "SwimmingState": "",
 "TeleportObject": "",
+"ThumbnailDownloader": "",
 "TurboNozzle": "",
 "UtilEnvironment": "",
 "VanishPowerup": "",

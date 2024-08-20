@@ -84,8 +84,28 @@ static func save_level_save_file(level_save: Dictionary, file_path: String):
 	file.close()
 
 ## THUMBNAILS
+const EXTENSIONS = [
+	".png",
+	".jpeg"
+]
 static func get_level_thumbnail_path(level_id: String, working_folder: String) -> String:
-	return working_folder + "/thumbnails/" + level_id + ".png"
+	var path: String = working_folder + "/thumbnails/" + level_id
+	
+	for extension in EXTENSIONS:
+		if file_exists(path + extension):
+			return path + extension
+	return path
+
+static func get_image_from_path(file_path: String) -> ImageTexture:
+	var image := Image.new()
+	var err: int = image.load(file_path)
+	if err != OK:
+		push_error("Error loading image at path " + file_path + ". Error code: " + str(err))
+	 
+	var texture := ImageTexture.new()
+	texture.create_from_image(image)
+	return texture
+
 
 ## MUSIC
 static func get_level_music_path(url: String, working_folder: String) -> String:
@@ -93,8 +113,9 @@ static func get_level_music_path(url: String, working_folder: String) -> String:
 
 # split into multiple functions since downloader wants filename and folder separate
 static func get_level_music_filename(url: String) -> String:
+	var url_base64: String = Marshalls.utf8_to_base64(url)
 	# cutting it cuz of filename length restrictions
-	var url_base64: String = Marshalls.utf8_to_base64(url).left(192)
+	url_base64 = url_base64.right(url_base64.length() - 192)
 	return url_base64 + ".ogg"
 
 static func get_level_music_folder(working_folder: String) -> String:

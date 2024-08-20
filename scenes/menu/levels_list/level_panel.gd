@@ -54,11 +54,15 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 	description.bbcode_text = "[center]" + level_info.level_description + "[/center]"
 	
 	# thumbnail
-	thumbnail.texture = level_info.get_level_background_texture()
-	
-	foreground.visible = true
-	foreground.modulate = level_info.get_level_background_modulate()
-	foreground.texture = level_info.get_level_foreground_texture()
+	if level_id in list_handler.thumbnail_cache.cached_thumbnails:
+		thumbnail.texture = list_handler.thumbnail_cache.cached_thumbnails[level_id]
+		foreground.visible = false
+	else:
+		thumbnail.texture = level_info.get_level_background_texture()
+		
+		foreground.visible = true
+		foreground.modulate = level_info.get_level_background_modulate()
+		foreground.texture = level_info.get_level_foreground_texture()
 	
 	
 	# load save file

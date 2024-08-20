@@ -23,6 +23,7 @@ onready var loader: Node  = $Loader
 onready var saver: Node = $Saver
 onready var sorting: Node = $Sorting
 onready var folders: Node = $Folders
+onready var thumbnail_cache: Node = $ThumbnailCache
 
 ### variables
 const BASE_FOLDER: String = "user://level_list"

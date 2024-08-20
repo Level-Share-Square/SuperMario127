@@ -12,10 +12,9 @@ func start_level_loading(working_folder: String):
 	if level_load_thread.is_active():
 		level_load_thread.wait_to_finish()
 	
-	load_all_levels(working_folder)
-	#var err = level_load_thread.start(self, "load_all_levels", working_folder)
-	#if err != OK:
-	#	push_error("Error starting level loading thread.")
+	var err = level_load_thread.start(self, "load_all_levels", working_folder)
+	if err != OK:
+		push_error("Error starting level loading thread.")
 
 # Thread must be disposed (or "joined"), for portability.
 func _exit_tree():
@@ -23,15 +22,21 @@ func _exit_tree():
 		level_load_thread.wait_to_finish()
 
 
-# is there no default button to focus on yet?
+var last_level_card: Node
 func load_all_levels(working_folder: String):
 	var sorting: Node = list_handler.sorting
-
+	list_handler.thumbnail_cache.clear_queue()
+	
+	print("Loading directory " + working_folder + "...")
 	for folder in sorting.sort.folders:
 		add_folder_button(working_folder + "/" + folder, folder)
 	for level in sorting.sort.levels:
 		add_level_card(working_folder + "/" + level + ".127level", level, working_folder)
 	
+	yield(last_level_card, "ready")
+	list_handler.thumbnail_cache.go_through_queue()
+	
+	print("Done loading levels in directory.")
 	emit_signal("loading_finished")
 
 func add_folder_button(file_path: String, folder_name: String, move_to_front: bool = false, is_return: bool = false):
@@ -71,6 +76,7 @@ func add_level_card(file_path: String, level_id: String, working_folder: String,
 	# needs some variables now for visual touches
 	var styling = level_card.get_node("Styling")
 	styling.level_info = level_info
+	styling.thumbnail_cache = list_handler.thumbnail_cache
 	styling.is_complete = level_info.is_fully_completed() and not is_new_level
 	
 	# add node to tree
@@ -92,3 +98,5 @@ func add_level_card(file_path: String, level_id: String, working_folder: String,
 	#warning-ignore:return_value_discarded
 	# when returning from a level on controller its good to be able to start from its card
 	level_card.call_deferred("connect", "pressed", list_handler, "change_focus", [level_card])
+	
+	last_level_card = level_card
