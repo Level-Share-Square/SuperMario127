@@ -108,6 +108,12 @@ static func decode(code: String):
 		add_amount = 0
 	else:
 		func_array = split_code_top_level(code_array[2])
+	
+	if result.format_version == "0.5.0":
+		result.author = code_array[2].percent_decode()
+		result.description = code_array[3].percent_decode()
+		result.thumbnail_url = code_array[4].percent_decode()
+		add_amount = 4
 		
 	for function in func_array:
 		if function != "":

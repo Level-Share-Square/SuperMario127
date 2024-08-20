@@ -1,7 +1,12 @@
 class_name LevelData
 
-var current_format_version := "0.4.9"
+var current_format_version := "0.5.0"
+
 var name := "My Level"
+var author := "Unknown"
+var description := "This level has no description."
+var thumbnail_url := ""
+
 var areas = []
 var functions = {}
 var global_vars_node = null
@@ -191,7 +196,7 @@ func get_object(result) -> LevelObject:
 	return object
 
 func load_in(code):
-	vars = LevelVars.new()	
+	vars = LevelVars.new()
 
 	var result
 	result = level_code_util.decode(code)
@@ -222,10 +227,16 @@ func load_in(code):
 		
 	if result.format_version == "0.4.8":
 		result = conversion_util.convert_048_to_049(result)
+	
+	if result.format_version == "0.4.9":
+		result = conversion_util.convert_049_to_050(result)
 
 	assert(result.format_version)
 	var format_version = result.format_version
 	name = result.name
+	author = result.author
+	description = result.description
+	thumbnail_url = result.thumbnail_url
 	
 	if format_version == current_format_version:
 		for area_result in result.areas:
@@ -238,10 +249,17 @@ func get_encoded_level_data():
 	
 	var level_string = ""
 	var level_name = name
+	var level_author = author
+	var level_description = description
+	var level_thumbnail = thumbnail_url
 	
-	
+	# resisting the urge to shoot myself
+	# why cant u just automate this,,,
 	level_string += current_format_version + ","
 	level_string += level_name.percent_encode() + ","
+	level_string += level_author.percent_encode() + ","
+	level_string += level_description.percent_encode() + ","
+	level_string += level_thumbnail.percent_encode() + ","
 	
 	level_string += "["
 	for func_key in functions:

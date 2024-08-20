@@ -20,6 +20,7 @@ var level_data : LevelData
 var level_name : String = ""
 var level_author : String = ""
 var level_description : String = ""
+var thumbnail_url : String = ""
 
 var spawn_area : int = 0
 var shine_details : Array = []
@@ -42,7 +43,11 @@ func _init(passed_level_code : String = "") -> void:
 
 	level_code = passed_level_code
 	level_data = LevelData.new(level_code)
+	
 	level_name = level_data.name
+	level_author = level_data.author
+	level_description = level_data.description
+	thumbnail_url = level_data.thumbnail_url
 
 	# loop through all objects in all areas to find the number of shines and star coins
 	for area in level_data.areas:

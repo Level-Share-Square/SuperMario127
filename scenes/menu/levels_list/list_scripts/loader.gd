@@ -11,10 +11,11 @@ onready var level_load_thread := Thread.new()
 func start_level_loading(working_folder: String):
 	if level_load_thread.is_active():
 		level_load_thread.wait_to_finish()
-
-	var err = level_load_thread.start(self, "load_all_levels", working_folder)
-	if err != OK:
-		push_error("Error starting level loading thread.")
+	
+	load_all_levels(working_folder)
+	#var err = level_load_thread.start(self, "load_all_levels", working_folder)
+	#if err != OK:
+	#	push_error("Error starting level loading thread.")
 
 # Thread must be disposed (or "joined"), for portability.
 func _exit_tree():
