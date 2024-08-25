@@ -48,6 +48,7 @@ one_quarter_color = Color( 0.85098, 0.290196, 0.290196, 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 25
+visible = false
 
 [node name="HealthUI" type="TextureProgress" parent="CanvasLayer"]
 margin_left = 693.0
@@ -60,9 +61,6 @@ texture_progress = ExtResource( 5 )
 fill_mode = 5
 tint_progress = Color( 0.341176, 0.282353, 1, 1 )
 stretch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Shadow" type="TextureProgress" parent="CanvasLayer/HealthUI"]
 show_behind_parent = true
@@ -77,9 +75,6 @@ fill_mode = 4
 tint_under = Color( 0, 0, 0, 0.25098 )
 tint_over = Color( 1, 1, 1, 0 )
 tint_progress = Color( 1, 1, 1, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Tween" type="Tween" parent="CanvasLayer/HealthUI"]
 

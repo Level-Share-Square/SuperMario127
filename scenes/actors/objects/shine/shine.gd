@@ -206,6 +206,7 @@ func activate_shine() -> void:
 	Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, 0.5)
 	pause_mode = PAUSE_MODE_PROCESS
 	get_tree().paused = true
+	Singleton.CurrentLevelData.can_pause = false
 	
 	yield(get_tree().create_timer(0.5), "timeout")
 	
@@ -233,6 +234,7 @@ func unpause_game() -> void:
 	yield(get_tree().create_timer(0.25), "timeout")
 	
 	get_tree().paused = false
+	Singleton.CurrentLevelData.can_pause = true
 	pause_mode = PAUSE_MODE_INHERIT
 
 func collect(body : PhysicsBody2D) -> void:

@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 onready var label : Label = $TimeScore
-onready var label_shadow : Label = $TimeScore/Shadow
 
 var shown = false
 
@@ -17,4 +16,3 @@ func _process(_delta) -> void:
 
 func _update_time_display() -> void:
 	label.text = LevelInfo.generate_time_string(Singleton.CurrentLevelData.time_score)
-	label_shadow.text = label.text

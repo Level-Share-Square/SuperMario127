@@ -455,9 +455,9 @@ texture = SubResource( 17 )
 expand = true
 
 [node name="LevelName" type="Label" parent="ShineInfo"]
-margin_top = 32.0
+margin_top = 44.0
 margin_right = 775.0
-margin_bottom = 72.0
+margin_bottom = 84.0
 rect_scale = Vector2( 0.65, 0.65 )
 custom_fonts/font = SubResource( 8 )
 text = "My Level"

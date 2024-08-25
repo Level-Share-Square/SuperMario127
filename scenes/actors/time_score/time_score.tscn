@@ -1,13 +1,15 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=1]
-[ext_resource path="res://scenes/oldmenu/levels_screen/ui/time_icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/marioscript_ui.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scenes/actors/time_score/time_score.gd" type="Script" id=3]
-[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://scenes/player/ui_new/polygon_swatch.tscn" type="PackedScene" id=4]
 
 [sub_resource type="DynamicFont" id=1]
-size = 24
-font_data = ExtResource( 4 )
+outline_size = 2
+use_filter = true
+extra_spacing_char = -2
+font_data = ExtResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer"]
 pause_mode = 2
@@ -15,51 +17,31 @@ layer = 63
 script = ExtResource( 3 )
 
 [node name="TimeScore" type="Label" parent="."]
-margin_left = 657.0
-margin_top = 390.6
-margin_right = 759.0
-margin_bottom = 427.0
-custom_fonts/font = SubResource( 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -51.0
+margin_top = 24.0
+margin_right = 51.0
+margin_bottom = 52.4
+rect_rotation = -7.0
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+custom_fonts/font = ExtResource( 2 )
 text = "00:00.00"
 
-[node name="Shadow" type="Label" parent="TimeScore"]
-modulate = Color( 0, 0, 0, 0.25098 )
+[node name="PolygonSwatch" parent="TimeScore" instance=ExtResource( 4 )]
+modulate = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
 show_behind_parent = true
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 104.0
-margin_bottom = 38.4
-custom_fonts/font = ExtResource( 1 )
-text = "00:00.00"
+position = Vector2( -10, 10 )
 
-[node name="TimeScoreIcon" type="TextureRect" parent="TimeScore/Shadow"]
-anchor_left = -0.402
-anchor_top = -0.321
-anchor_right = 0.02
-anchor_bottom = 1.143
-margin_left = 0.00400162
-margin_top = -0.0115995
-margin_right = -0.039943
-margin_bottom = -0.00353241
-texture = ExtResource( 2 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TimeScoreIcon" type="TextureRect" parent="TimeScore"]
-anchor_left = -0.402
-anchor_top = -0.321
-anchor_right = 0.02
-anchor_bottom = 1.143
-margin_left = 0.00400162
-margin_top = -0.0115995
-margin_right = -0.039943
-margin_bottom = -0.00353241
-texture = ExtResource( 2 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Label" type="Label" parent="TimeScore"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -24.6021
+margin_top = -38.2564
+margin_right = 77.3979
+margin_bottom = -1.85637
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+custom_fonts/font = SubResource( 1 )
+text = "TIME"

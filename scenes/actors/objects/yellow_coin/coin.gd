@@ -28,7 +28,7 @@ func _set_property_values():
 
 func collect(body, is_shell = false):
 	if enabled and !collected and (body and body.name.begins_with("Character") and !body.dead) or is_shell:
-		Singleton.CurrentLevelData.level_data.vars.coins_collected += coins
+		get_tree().current_scene.collect_coin(coins)
 		if body:
 			body.heal(1 if coins == 1 else 15)
 		get_tree().current_scene.get_node("SharedSounds").PlaySound("CoinSound")

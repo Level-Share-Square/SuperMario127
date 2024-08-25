@@ -1,31 +1,35 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/actors/mario/mario.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/player/camera.gd" type="Script" id=4]
 [ext_resource path="res://scenes/menu/pause/pause_controller.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=6]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/player/ui_new/reference2.png" type="Texture" id=9]
+[ext_resource path="res://scenes/player/ui_new/ui/shine_shards.png" type="Texture" id=10]
+[ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://scenes/player/viewports.gd" type="Script" id=12]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/player/ui_new/polygon_swatch.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/fonts/marioscript_ui.tres" type="DynamicFont" id=15]
 [ext_resource path="res://scenes/actors/mario/GhostMario.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/player/ui_new/health.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/player/ui_new/coins.gd" type="Script" id=18]
+[ext_resource path="res://scenes/player/ui_new/red_coins.gd" type="Script" id=19]
+[ext_resource path="res://scenes/player/ui_new/shine_shards.gd" type="Script" id=20]
 [ext_resource path="res://scenes/player/World.gd" type="Script" id=21]
+[ext_resource path="res://scenes/player/ui_new/muitiplayer_realign.gd" type="Script" id=22]
 [ext_resource path="res://scenes/oldmenu/levels_screen/ui/star_coin_icon.png" type="Texture" id=23]
 [ext_resource path="res://scenes/oldmenu/levels_screen/shine_icon.png" type="Texture" id=24]
 [ext_resource path="res://scenes/player/shine_counter.gd" type="Script" id=25]
 [ext_resource path="res://scenes/player/sccounter.gd" type="Script" id=26]
 [ext_resource path="res://scenes/player/dialogue_text.gd" type="Script" id=29]
 [ext_resource path="res://scenes/actors/fludd_display/fludd_display.tscn" type="PackedScene" id=30]
-[ext_resource path="res://scenes/oldmenu/levels_screen/ui/coin_icon.png" type="Texture" id=31]
-[ext_resource path="res://scenes/player/coin_counter.gd" type="Script" id=32]
 [ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
-[ext_resource path="res://scenes/actors/health_display/health_display.tscn" type="PackedScene" id=34]
-[ext_resource path="res://scenes/oldmenu/levels_screen/ui/red_coin_icon.png" type="Texture" id=35]
-[ext_resource path="res://scenes/player/red_coin_counter.gd" type="Script" id=36]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=39]
 [ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
-[ext_resource path="res://scenes/player/shine_shard_counter.gd" type="Script" id=44]
-[ext_resource path="res://scenes/oldmenu/levels_screen/ui/shine_shard_icon.png" type="Texture" id=45]
 [ext_resource path="res://scenes/player/sign_text.gd" type="Script" id=55]
 [ext_resource path="res://scenes/actors/objects/sign/menu_open.wav" type="AudioStream" id=56]
 [ext_resource path="res://scenes/actors/objects/sign/menu_close.wav" type="AudioStream" id=57]
@@ -41,13 +45,489 @@ font_data = ExtResource( 7 )
 size = 24
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=5]
-size = 20
-font_data = ExtResource( 7 )
+[sub_resource type="Animation" id=206]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/Counter:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 51, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/Counter:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer/Counter:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
 
-[sub_resource type="DynamicFont" id=6]
-size = 20
-font_data = ExtResource( 7 )
+[sub_resource type="Animation" id=207]
+resource_name = "collect"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/Counter:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 3.605, 1 ),
+"update": 0,
+"values": [ Vector2( 51, -3 ), Vector2( 51, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/Counter:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.862745, 0.647059, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer/Counter:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1.1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="GDScript" id=189]
+resource_name = "circle"
+script/source = "extends Control
+tool
+
+export var color := Color.white
+
+func _draw():
+	draw_circle(rect_size/2, min(rect_size.x, rect_size.y) / 2, color)
+"
+
+[sub_resource type="Gradient" id=196]
+colors = PoolColorArray( 0.91, 0.466223, 0.2093, 1, 1, 0.666667, 0.286275, 1 )
+
+[sub_resource type="GradientTexture2D" id=197]
+gradient = SubResource( 196 )
+fill_from = Vector2( 0.1375, 0.1375 )
+fill_to = Vector2( 0.141667, 0.166667 )
+
+[sub_resource type="Shader" id=192]
+code = "shader_type canvas_item;
+// Shader to round corners of a canvas. The 'radius_scale' is multiplied by
+// minimum(width, height)/2.0 to calculate the radius of the corners.
+//
+// Instructions:
+// 1) The node that uses this shader must have signals 'tree_entered' and
+// 'item_rect_changed' connected to a callable with the next code:
+// material.set_shader_parameter(\"width\", size.x)
+// material.set_shader_parameter(\"height\", size.y)
+//
+// Known issues:
+// 1) If used on 'TextureRect', take care of 'expand_mode' and 'stretch_mode',
+// because image corners might be outside node rectangle and therefore clipped.
+// Corners are rounded, but they are outside node's rectangle.
+
+
+uniform float radius_scale: hint_range(0.0, 1.0, 0.1) = 0.1;
+uniform bool rounded_corner_top_left = true;
+uniform bool rounded_corner_top_right = true;
+uniform bool rounded_corner_bottom_left = true;
+uniform bool rounded_corner_bottom_right = true;
+uniform float width = 1.0;
+uniform float height = 1.0;
+
+
+void fragment() {
+	vec4 image = texture(TEXTURE, UV);
+	vec2 pos = vec2(UV.x*width, UV.y*height);
+	float radius = min(width, height)*radius_scale/2.0;
+	float dist;
+	// Top left corner
+	if (rounded_corner_top_left) {
+		dist = length(pos - vec2(radius));
+		if (dist > radius && pos.x < radius && pos.y < radius) {
+			image.a = 0.0;
+		}
+		// debugging only
+//		if (dist < radius){image.r = 1.0;}
+	}
+	// Top right corner
+	if (rounded_corner_top_right) {
+		dist = length(pos - vec2(width-radius, radius));
+		if (dist > radius && pos.x > width-radius && pos.y < radius) {
+			image.a = 0.0;
+		}
+		// debugging only
+//		if (dist < radius){image.r = 1.0;}
+	}
+	// Bottom left corner
+	if (rounded_corner_bottom_left) {
+		dist = length(pos - vec2(radius, height-radius));
+		if (dist > radius && pos.x < radius && pos.y > height-radius) {
+			image.a = 0.0;
+		}
+		// debugging only
+//		if (dist < radius){image.r = 1.0;}
+	}
+	// Bottom right corner
+	if (rounded_corner_bottom_right) {
+		dist = length(pos - vec2(width-radius, height-radius));
+		if (dist > radius && pos.x > width-radius && pos.y > height-radius) {
+			image.a = 0.0;
+		}
+		// debugging only
+//		if (dist < radius){image.r = 1.0;}
+	}
+	COLOR = image;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=193]
+shader = SubResource( 192 )
+shader_param/radius_scale = 1.0
+shader_param/rounded_corner_top_left = true
+shader_param/rounded_corner_top_right = true
+shader_param/rounded_corner_bottom_left = true
+shader_param/rounded_corner_bottom_right = true
+shader_param/width = 1.0
+shader_param/height = 1.0
+
+[sub_resource type="Gradient" id=194]
+offsets = PoolRealArray( 0, 0.264249, 0.626943, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.376471, 1, 1, 1, 0.501961, 1, 0.592157, 0, 0, 0.631373, 0.14902, 0.262745, 0.501961 )
+
+[sub_resource type="GradientTexture2D" id=195]
+gradient = SubResource( 194 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="Animation" id=208]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/Counter:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 51, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/Counter:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer/Counter:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=209]
+resource_name = "collect"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/Counter:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 3.605, 1 ),
+"update": 0,
+"values": [ Vector2( 51, -3 ), Vector2( 51, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/Counter:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.368627, 0.545098, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer/Counter:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1.1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=210]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=211]
+resource_name = "fadeout"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.729412, 0.317647, 0.580392, 1 ) ]
+}
+
+[sub_resource type="Gradient" id=198]
+colors = PoolColorArray( 0.6, 0.101961, 0.419608, 1, 0.6, 0.101961, 0.419608, 1 )
+
+[sub_resource type="GradientTexture2D" id=199]
+gradient = SubResource( 198 )
+fill_from = Vector2( 0.1375, 0.1375 )
+fill_to = Vector2( 0.141667, 0.166667 )
+
+[sub_resource type="Gradient" id=200]
+offsets = PoolRealArray( 0, 0.264249, 0.626943, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.376471, 1, 1, 1, 0.501961, 1, 0, 0.74902, 0, 0.631373, 0.14902, 0.262745, 0.501961 )
+
+[sub_resource type="GradientTexture2D" id=201]
+gradient = SubResource( 200 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="Animation" id=212]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Resizable:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -2, -2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Resizable:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Resizable:rect_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Resizable:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=213]
+resource_name = "collect"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Resizable:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.499984 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Resizable:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ 5.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Resizable:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1.25, 1.25, 1.25, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=214]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=215]
+resource_name = "fadeout"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.533333, 0.521569, 0.686275, 1 ) ]
+}
+
+[sub_resource type="Shader" id=12]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+uniform sampler2D gradient;
+
+void fragment(){
+	COLOR.a=texture(TEXTURE,UV).a;
+	vec2 my_uv=vec2(UV.y,0.0);
+	COLOR.rgb=COLOR.rgb*texture(gradient,my_uv).rgb;
+}"
+
+[sub_resource type="Gradient" id=190]
+offsets = PoolRealArray( 0.473373, 0.715976 )
+colors = PoolColorArray( 1, 0.992157, 0.894118, 1, 1, 0.670588, 0.286275, 1 )
+
+[sub_resource type="GradientTexture" id=191]
+gradient = SubResource( 190 )
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = SubResource( 12 )
+shader_param/gradient = SubResource( 191 )
+
+[sub_resource type="DynamicFont" id=31]
+size = 18
+outline_size = 1
+use_filter = true
+extra_spacing_top = 5
+extra_spacing_char = -2
+font_data = ExtResource( 11 )
+
+[sub_resource type="Gradient" id=203]
+offsets = PoolRealArray( 0.222798, 0.554404, 0.80829, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.914417, 1, 1, 1, 0.533333, 0.584314, 0.027451, 0.498039, 0.501961, 0.888295, 0.742127, 0.776589, 0.849079 )
+
+[sub_resource type="GradientTexture2D" id=202]
+gradient = SubResource( 203 )
+fill = 1
+fill_from = Vector2( 0.495833, 0.2125 )
+fill_to = Vector2( 0.516667, 1 )
+
+[sub_resource type="Gradient" id=204]
+offsets = PoolRealArray( 0.12973, 0.497297 )
+colors = PoolColorArray( 0.580392, 0.584314, 0.843137, 1, 0.870588, 0.94902, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=205]
+gradient = SubResource( 204 )
+fill_to = Vector2( 0.00416667, 1 )
 
 [sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.133333, 0.145098, 0.196078, 0.835294 )
@@ -65,12 +545,12 @@ expand_margin_right = 1.0
 expand_margin_top = 1.0
 expand_margin_bottom = 1.0
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=32]
 size = 32
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=33]
 size = 32
 outline_color = Color( 0.054902, 0, 0.25098, 1 )
 font_data = ExtResource( 7 )
@@ -88,10 +568,10 @@ extents = Vector2( 393, 216 )
 resource_local_to_scene = true
 extents = Vector2( 393, 216 )
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=34]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("UI/CoinCounter:rect_position")
+tracks/0/path = NodePath("UI/ShineCounter:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -100,10 +580,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 210, 19 ) ]
+"values": [ Vector2( 29, 19 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("UI/ShineCounter:rect_position")
+tracks/1/path = NodePath("UI/SCCounter:rect_position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -112,110 +592,46 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 29, 19 ) ]
+"values": [ Vector2( 120, 19 ) ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("UI/SCCounter:rect_position")
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("UI/SCCounter:rect_position:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 120, 19 ) ]
+"points": PoolRealArray( 120, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("UI/CoinCounter:rect_position:x")
+tracks/3/path = NodePath("UI/SCCounter:rect_position:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 210, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 19, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/4/type = "bezier"
-tracks/4/path = NodePath("UI/CoinCounter:rect_position:y")
+tracks/4/path = NodePath("UI/ShineCounter:rect_position:x")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( 19, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 29, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 tracks/5/type = "bezier"
-tracks/5/path = NodePath("UI/SCCounter:rect_position:x")
+tracks/5/path = NodePath("UI/ShineCounter:rect_position:y")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"points": PoolRealArray( 120, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/6/type = "bezier"
-tracks/6/path = NodePath("UI/SCCounter:rect_position:y")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
 "points": PoolRealArray( 19, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/7/type = "bezier"
-tracks/7/path = NodePath("UI/ShineCounter:rect_position:x")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"points": PoolRealArray( 29, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/8/type = "bezier"
-tracks/8/path = NodePath("UI/ShineCounter:rect_position:y")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"points": PoolRealArray( 19, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("UI/VBoxContainer:rect_position")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 18, 62 ) ]
-}
-tracks/10/type = "bezier"
-tracks/10/path = NodePath("UI/VBoxContainer:rect_position:x")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"points": PoolRealArray( 18, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/11/type = "bezier"
-tracks/11/path = NodePath("UI/VBoxContainer:rect_position:y")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"points": PoolRealArray( 64, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0 )
 }
 
@@ -223,83 +639,43 @@ tracks/11/keys = {
 resource_name = "shine_sc_in"
 length = 1.5
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("UI/CoinCounter:rect_position:x")
+tracks/0/path = NodePath("UI/SCCounter:rect_position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/keys = {
-"points": PoolRealArray( 210, -0.25, 0, 0.25, 0, 210, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.2, 0.8 )
+"points": PoolRealArray( 120, -0.25, 0, 0.25, 0, 120, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.1, 0.7 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("UI/CoinCounter:rect_position:y")
+tracks/1/path = NodePath("UI/SCCounter:rect_position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( -44.951, -0.25, 0, 0.25, 0, 19, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.2, 0.8 )
+"points": PoolRealArray( -45, -0.25, 0, 0.25, 0, 19, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.1, 0.7 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("UI/SCCounter:rect_position:x")
+tracks/2/path = NodePath("UI/ShineCounter:rect_position:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = false
 tracks/2/keys = {
-"points": PoolRealArray( 120, -0.25, 0, 0.25, 0, 120, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.1, 0.7 )
+"points": PoolRealArray( 29, -0.25, 0, 0.25, 0, 29, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("UI/SCCounter:rect_position:y")
+tracks/3/path = NodePath("UI/ShineCounter:rect_position:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( -45, -0.25, 0, 0.25, 0, 19, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.1, 0.7 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("UI/ShineCounter:rect_position:x")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = false
-tracks/4/keys = {
-"points": PoolRealArray( 29, -0.25, 0, 0.25, 0, 29, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/5/type = "bezier"
-tracks/5/path = NodePath("UI/ShineCounter:rect_position:y")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
 "points": PoolRealArray( -44.951, -0.25, 0, 0.25, 0, 19, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/6/type = "bezier"
-tracks/6/path = NodePath("UI/VBoxContainer:rect_position:x")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"points": PoolRealArray( 18, -0.25, 0, 0.25, 0, 18, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/7/type = "bezier"
-tracks/7/path = NodePath("UI/VBoxContainer:rect_position:y")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"points": PoolRealArray( 16, -0.25, 0, 0.25, 0, 64, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.5 )
 }
 
@@ -307,83 +683,43 @@ tracks/7/keys = {
 resource_name = "shine_sc_out"
 length = 1.5
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("UI/CoinCounter:rect_position:x")
+tracks/0/path = NodePath("UI/SCCounter:rect_position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/keys = {
-"points": PoolRealArray( 210, -0.25, 0, 0.25, 0, 210, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.2, 0.8 )
+"points": PoolRealArray( 120, -0.25, 0, 0.25, 0, 120, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.1, 0.7 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("UI/CoinCounter:rect_position:y")
+tracks/1/path = NodePath("UI/SCCounter:rect_position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 19, -0.25, 0, 0.25, 0, -44.951, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.2, 0.8 )
+"points": PoolRealArray( 19, -0.25, 0, 0.25, 0, -45, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0.1, 0.7 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("UI/SCCounter:rect_position:x")
+tracks/2/path = NodePath("UI/ShineCounter:rect_position:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = false
 tracks/2/keys = {
-"points": PoolRealArray( 120, -0.25, 0, 0.25, 0, 120, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.1, 0.7 )
+"points": PoolRealArray( 29, -0.25, 0, 0.25, 0, 29, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
 }
 tracks/3/type = "bezier"
-tracks/3/path = NodePath("UI/SCCounter:rect_position:y")
+tracks/3/path = NodePath("UI/ShineCounter:rect_position:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 19, -0.25, 0, 0.25, 0, -45, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.1, 0.7 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("UI/ShineCounter:rect_position:x")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = false
-tracks/4/keys = {
-"points": PoolRealArray( 29, -0.25, 0, 0.25, 0, 29, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/5/type = "bezier"
-tracks/5/path = NodePath("UI/ShineCounter:rect_position:y")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
 "points": PoolRealArray( 19, -0.25, 0, 0.25, 0, -44.951, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/6/type = "bezier"
-tracks/6/path = NodePath("UI/VBoxContainer:rect_position:x")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"points": PoolRealArray( 18, -0.25, 0, 0.25, 0, 18, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/7/type = "bezier"
-tracks/7/path = NodePath("UI/VBoxContainer:rect_position:y")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"points": PoolRealArray( 64, -0.25, 0, 0.25, 0, 16, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.5 )
 }
 
@@ -402,64 +738,8 @@ pause_mode = 2
 layer = 63
 script = ExtResource( 33 )
 
-[node name="CoinCounter" type="Control" parent="UI"]
-margin_left = 210.0
-margin_top = 19.0
-margin_right = 250.0
-margin_bottom = 59.0
-rect_rotation = -0.0704831
-script = ExtResource( 32 )
-collected_height = -4.0
-
-[node name="ColorRect2" type="ColorRect" parent="UI/CoinCounter"]
-margin_left = -12.0
-margin_top = 31.0
-margin_right = 84.0
-margin_bottom = 34.0
-color = Color( 0, 0, 0, 0.25098 )
-
-[node name="ColorRect" type="ColorRect" parent="UI/CoinCounter"]
-margin_left = -14.0
-margin_top = 29.0
-margin_right = 82.0
-margin_bottom = 32.0
-
-[node name="LabelShadow" type="Label" parent="UI/CoinCounter"]
-margin_left = 22.0
-margin_top = 2.0
-margin_right = 167.0
-margin_bottom = 77.0
-rect_rotation = 0.0366689
-custom_colors/font_color = Color( 0, 0, 0, 0.25098 )
-custom_fonts/font = SubResource( 3 )
-text = "0000"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="UI/CoinCounter"]
-margin_left = 20.0
-margin_right = 165.0
-margin_bottom = 48.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 4 )
-text = "0000"
-
-[node name="CoinShadow" type="Sprite" parent="UI/CoinCounter"]
-modulate = Color( 0, 0, 0, 0.25098 )
-position = Vector2( 0, 8.5 )
-scale = Vector2( 0.333, 0.333 )
-texture = ExtResource( 31 )
-offset = Vector2( 7, 7 )
-
-[node name="Coin" type="Sprite" parent="UI/CoinCounter"]
-position = Vector2( 0, 8.5 )
-scale = Vector2( 0.333, 0.333 )
-texture = ExtResource( 31 )
-
-[node name="Tween" type="Tween" parent="UI/CoinCounter"]
-
 [node name="ShineCounter" type="Control" parent="UI"]
+visible = false
 margin_left = 29.0
 margin_top = 19.0
 margin_right = 68.9998
@@ -513,6 +793,7 @@ texture = ExtResource( 24 )
 [node name="Tween" type="Tween" parent="UI/ShineCounter"]
 
 [node name="SCCounter" type="Control" parent="UI"]
+visible = false
 margin_left = 120.0
 margin_top = 19.0
 margin_right = 160.0
@@ -565,88 +846,735 @@ texture = ExtResource( 23 )
 
 [node name="Tween" type="Tween" parent="UI/SCCounter"]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
-margin_left = 18.0
-margin_top = 64.0
-margin_right = 58.0
-margin_bottom = 174.0
-custom_constants/separation = 28
+[node name="HUD" type="MarginContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 6 )
+custom_constants/margin_right = 24
+custom_constants/margin_top = 8
+custom_constants/margin_left = 12
+custom_constants/margin_bottom = 20
 
-[node name="RedCoinCounter" type="Control" parent="UI/VBoxContainer"]
+[node name="Control" type="Control" parent="UI/HUD"]
+margin_left = 12.0
+margin_top = 8.0
+margin_right = 744.0
+margin_bottom = 412.0
+
+[node name="Collectibles" type="VBoxContainer" parent="UI/HUD/Control"]
 margin_right = 40.0
-script = ExtResource( 36 )
-collected_height = -4.0
+margin_bottom = 106.0
+rect_scale = Vector2( 1.1, 1.1 )
+custom_constants/separation = 4
 
-[node name="LabelShadow" type="Label" parent="UI/VBoxContainer/RedCoinCounter"]
+[node name="Padding" type="Control" parent="UI/HUD/Control/Collectibles"]
+margin_right = 40.0
+margin_bottom = 4.0
+rect_min_size = Vector2( 0, 4 )
+
+[node name="Coins" type="Control" parent="UI/HUD/Control/Collectibles"]
+unique_name_in_owner = true
+margin_top = 8.0
+margin_right = 40.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 24 )
+script = ExtResource( 18 )
+
+[node name="PolygonSwatch" parent="UI/HUD/Control/Collectibles/Coins" instance=ExtResource( 14 )]
+modulate = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+position = Vector2( 0, 12 )
+rotation = 0.1309
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/HUD/Control/Collectibles/Coins"]
+anims/RESET = SubResource( 206 )
+anims/collect = SubResource( 207 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/Control/Collectibles/Coins"]
+margin_left = 0.90909
+margin_top = 5.63636
+margin_right = 91.9091
+margin_bottom = 29.6364
+rect_rotation = -7.0
+rect_pivot_offset = Vector2( 1.61605, 4.58981 )
+custom_constants/separation = 6
+
+[node name="Padding" type="Control" parent="UI/HUD/Control/Collectibles/Coins/HBoxContainer"]
+margin_bottom = 24.0
+
+[node name="Icon" type="Control" parent="UI/HUD/Control/Collectibles/Coins/HBoxContainer"]
+margin_left = 6.0
+margin_right = 26.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 20, 0 )
+rect_pivot_offset = Vector2( 10, 12 )
+
+[node name="Coin" type="Control" parent="UI/HUD/Control/Collectibles/Coins/HBoxContainer/Icon"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = 1.0
+margin_right = -2.0
+margin_bottom = -3.0
+rect_scale = Vector2( 1.2, 1.2 )
+
+[node name="Circle5" type="Control" parent="UI/HUD/Control/Collectibles/Coins/HBoxContainer/Icon/Coin"]
+margin_left = -0.999999
+margin_top = 1.0
+margin_right = 18.0
+margin_bottom = 18.0
+rect_rotation = -4.0
+rect_scale = Vector2( 1.1, 1.17 )
+script = SubResource( 189 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+
+[node name="Circle2" type="Control" parent="UI/HUD/Control/Collectibles/Coins/HBoxContainer/Icon/Coin"]
+margin_top = 3.0
+margin_right = 18.0
+margin_bottom = 17.0
+rect_rotation = -4.0
+rect_scale = Vector2( 1.1, 1.17 )
+script = SubResource( 189 )
+color = Color( 0.776471, 0.360784, 0.121569, 1 )
+
+[node name="Circle4" type="Control" parent="UI/HUD/Control/Collectibles/Coins/HBoxContainer/Icon/Coin"]
+margin_left = 1.8969
+margin_top = -0.289471
+margin_right = 15.8969
+margin_bottom = 17.7105
+rect_rotation = -4.0
+rect_scale = Vector2( 1.1, 1.17 )
+script = SubResource( 189 )
+color = Color( 1, 0.666667, 0.286275, 1 )
+
+[node name="Circle" type="Control" parent="UI/HUD/Control/Collectibles/Coins/HBoxContainer/Icon/Coin"]
+margin_left = 4.0
+margin_top = 1.0
+margin_right = 17.0
+margin_bottom = 17.0
+rect_rotation = -3.0
+rect_scale = Vector2( 1, 1.08 )
+script = SubResource( 189 )
+color = Color( 1, 0.972549, 0.858824, 1 )
+
+[node name="Circle3" type="Control" parent="UI/HUD/Control/Collectibles/Coins/HBoxContainer/Icon/Coin"]
+margin_left = 5.5
+margin_top = -1.0
+margin_right = 15.5
+margin_bottom = 17.0
+rect_rotation = -3.0
+rect_scale = Vector2( 1, 1.17 )
+script = SubResource( 189 )
+color = Color( 1, 0.862745, 0.647059, 1 )
+
+[node name="Star" type="Polygon2D" parent="UI/HUD/Control/Collectibles/Coins/HBoxContainer/Icon/Coin"]
+position = Vector2( -4.25, 2.5 )
+rotation = -0.0717837
+scale = Vector2( 1.2, 0.966 )
+texture = SubResource( 197 )
+polygon = PoolVector2Array( 12.5573, 3.72072, 11.6166, 6.77537, 8.48952, 6.66306, 10.5104, 9.41432, 9.59757, 12.949, 12.523, 10.7643, 15.1451, 12.8737, 14.3271, 9.49784, 16.2763, 6.56014, 13.5921, 6.74778 )
+
+[node name="Shading" type="TextureRect" parent="UI/HUD/Control/Collectibles/Coins/HBoxContainer/Icon/Coin"]
+material = SubResource( 193 )
+margin_left = 2.12261
+margin_top = 2.20415
+margin_right = 16.1226
+margin_bottom = 17.2041
+rect_rotation = -4.0
+rect_scale = Vector2( 1.1, 1.125 )
+texture = SubResource( 195 )
+expand = true
+
+[node name="X" type="Label" parent="UI/HUD/Control/Collectibles/Coins/HBoxContainer"]
+margin_left = 32.0
+margin_right = 45.0
+margin_bottom = 24.0
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+custom_fonts/font = ExtResource( 15 )
+text = "x"
+
+[node name="Counter" type="Label" parent="UI/HUD/Control/Collectibles/Coins/HBoxContainer"]
+margin_left = 51.0
+margin_right = 92.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 0, 16 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+custom_fonts/font = ExtResource( 15 )
+text = "000"
+
+[node name="RedCoins" type="Control" parent="UI/HUD/Control/Collectibles"]
+visible = false
+margin_top = 36.0
+margin_right = 40.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 24 )
+script = ExtResource( 19 )
+
+[node name="PolygonSwatch" parent="UI/HUD/Control/Collectibles/RedCoins" instance=ExtResource( 14 )]
+modulate = Color( 0.737255, 0.247059, 0.384314, 0.752941 )
+position = Vector2( 0, 12 )
+rotation = 0.1309
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/HUD/Control/Collectibles/RedCoins"]
+anims/RESET = SubResource( 208 )
+anims/collect = SubResource( 209 )
+
+[node name="Fadeout" type="AnimationPlayer" parent="UI/HUD/Control/Collectibles/RedCoins"]
+anims/RESET = SubResource( 210 )
+anims/fadeout = SubResource( 211 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/Control/Collectibles/RedCoins"]
+margin_top = 6.0
+margin_right = 86.0
+margin_bottom = 30.0
+rect_rotation = -7.0
+custom_constants/separation = 6
+
+[node name="Padding" type="Control" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer"]
+margin_bottom = 24.0
+
+[node name="Icon" type="Control" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer"]
+margin_left = 6.0
+margin_right = 26.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="RedCoin" type="Control" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer/Icon"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = 1.0
+margin_right = -2.0
+margin_bottom = -3.0
+rect_scale = Vector2( 1.2, 1.2 )
+
+[node name="Circle5" type="Control" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer/Icon/RedCoin"]
+margin_left = -0.999999
+margin_top = 1.0
+margin_right = 18.0
+margin_bottom = 18.0
+rect_rotation = -4.0
+rect_scale = Vector2( 1.1, 1.17 )
+script = SubResource( 189 )
+color = Color( 0.439216, 0.0941176, 0.247059, 0.65098 )
+
+[node name="Circle2" type="Control" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer/Icon/RedCoin"]
+margin_top = 3.0
+margin_right = 18.0
+margin_bottom = 17.0
+rect_rotation = -4.0
+rect_scale = Vector2( 1.1, 1.17 )
+script = SubResource( 189 )
+color = Color( 0.662745, 0.141176, 0.396078, 1 )
+
+[node name="Circle4" type="Control" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer/Icon/RedCoin"]
+margin_left = 1.8969
+margin_top = -0.289471
+margin_right = 15.8969
+margin_bottom = 17.7105
+rect_rotation = -4.0
+rect_scale = Vector2( 1.1, 1.17 )
+script = SubResource( 189 )
+color = Color( 0.901961, 0.0196078, 0.309804, 1 )
+
+[node name="Circle" type="Control" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer/Icon/RedCoin"]
+margin_left = 4.0
+margin_top = 1.0
+margin_right = 17.0
+margin_bottom = 17.0
+rect_rotation = -3.0
+rect_scale = Vector2( 1, 1.08 )
+script = SubResource( 189 )
+color = Color( 1, 0.690196, 0.807843, 1 )
+
+[node name="Circle3" type="Control" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer/Icon/RedCoin"]
+margin_left = 5.5
+margin_top = -1.0
+margin_right = 15.5
+margin_bottom = 17.0
+rect_rotation = -3.0
+rect_scale = Vector2( 1, 1.17 )
+script = SubResource( 189 )
+color = Color( 1, 0.368627, 0.545098, 1 )
+
+[node name="Control" type="Control" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer/Icon/RedCoin"]
+margin_left = -1.29004
+margin_top = 0.36325
+margin_right = -1.29004
+margin_bottom = 0.36325
+rect_rotation = -2.0
+rect_scale = Vector2( 1.05, 1 )
+
+[node name="Star" type="Polygon2D" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer/Icon/RedCoin/Control"]
+position = Vector2( -4.57172, 3.14765 )
+rotation = -0.0717836
+scale = Vector2( 1.22159, 0.986667 )
+texture = SubResource( 199 )
+polygon = PoolVector2Array( 9.99784, 4.92504, 10.6139, 7.43636, 8.96349, 8.26913, 10.5546, 9.80469, 9.87625, 11.8941, 11.7782, 11.4744, 12.5934, 13.6172, 13.6156, 11.3844, 15.404, 12.0079, 14.8112, 9.89613, 16.5428, 8.46088, 14.9005, 7.42459, 15.6203, 5.26663, 13.75, 6, 12.864, 3.59144, 12, 6 )
+
+[node name="Circle6" type="Control" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer/Icon/RedCoin/Control"]
+margin_left = 10.3447
+margin_top = 4.5435
+margin_right = 12.3447
+margin_bottom = 6.5435
+rect_rotation = -3.0
+script = SubResource( 189 )
+color = Color( 0.6, 0.101961, 0.419608, 1 )
+
+[node name="Circle7" type="Control" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer/Icon/RedCoin/Control"]
+margin_left = 13.779
+margin_top = 5.97964
+margin_right = 15.779
+margin_bottom = 7.97964
+rect_rotation = -3.0
+script = SubResource( 189 )
+color = Color( 0.6, 0.101961, 0.419608, 1 )
+
+[node name="Circle8" type="Control" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer/Icon/RedCoin/Control"]
+margin_left = 7.07417
+margin_top = 6.37339
+margin_right = 9.07417
+margin_bottom = 8.37339
+rect_rotation = -3.0
+script = SubResource( 189 )
+color = Color( 0.6, 0.101961, 0.419608, 1 )
+
+[node name="Circle9" type="Control" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer/Icon/RedCoin/Control"]
+margin_left = 10.0
+margin_top = 9.25
+margin_right = 13.0
+margin_bottom = 12.25
+rect_rotation = -3.0
+script = SubResource( 189 )
+color = Color( 1, 0.368627, 0.545098, 1 )
+
+[node name="Shading" type="TextureRect" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer/Icon/RedCoin"]
+material = SubResource( 193 )
+margin_left = 2.12261
+margin_top = 2.20415
+margin_right = 16.1226
+margin_bottom = 17.2041
+rect_rotation = -4.0
+rect_scale = Vector2( 1.1, 1.125 )
+texture = SubResource( 201 )
+expand = true
+
+[node name="X" type="Label" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer"]
+margin_left = 32.0
+margin_right = 45.0
+margin_bottom = 24.0
+custom_colors/font_outline_modulate = Color( 0.439216, 0.0941176, 0.247059, 0.65098 )
+custom_fonts/font = ExtResource( 15 )
+text = "x"
+
+[node name="Counter" type="Label" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer"]
+margin_left = 51.0
+margin_right = 88.0
+margin_bottom = 24.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.439216, 0.0941176, 0.247059, 0.65098 )
+custom_fonts/font = ExtResource( 15 )
+text = "0/0"
+
+[node name="Padding2" type="Control" parent="UI/HUD/Control/Collectibles"]
+margin_top = 36.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 4 )
+
+[node name="ShineShards" type="Control" parent="UI/HUD/Control/Collectibles"]
+visible = false
+margin_top = 44.0
+margin_right = 40.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 36, 36 )
+script = ExtResource( 20 )
+
+[node name="Paint" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards"]
+position = Vector2( 19.8, 21.6 )
+scale = Vector2( 0.6525, 0.6525 )
+color = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+polygon = PoolVector2Array( 19, -16, 14, -21, 7, -24, -2, -24, -9, -21, -10, -20, -12, -20, -18, -15, -22, -9, -24, -3, -24, 5, -21, 13, -14, 20, -7, 23, 0, 24, 7, 23, 15, 19, 20, 13, 22, 7, 22, -1, 19, -8, 15, -14, 12, -17, 15, -16, 17, -14, 21, -8, 22, -4, 23, -2, 23, 5, 23, 8, 22, 9, 23, 10, 24, 8, 24, 0, 23, -4, 22, -8, 17, -15, 17, -16, 13, -18, 9, -19, 5, -21, 9, -21, 14, -19 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/HUD/Control/Collectibles/ShineShards"]
+anims/RESET = SubResource( 212 )
+anims/collect = SubResource( 213 )
+
+[node name="Fadeout" type="AnimationPlayer" parent="UI/HUD/Control/Collectibles/ShineShards"]
+anims/RESET = SubResource( 214 )
+anims/fadeout = SubResource( 215 )
+
+[node name="Resizable" type="Control" parent="UI/HUD/Control/Collectibles/ShineShards"]
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 38.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 40, 40 )
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 20, 20 )
+
+[node name="Polygon" type="Control" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable"]
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 60.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 64, 64 )
+rect_rotation = -3.5
+rect_scale = Vector2( 0.75, 0.75 )
+
+[node name="Border" type="Control" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon"]
+modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+margin_left = -5.0
+margin_top = -5.0
+margin_right = 35.0
+margin_bottom = 35.0
+rect_scale = Vector2( 1.15, 1.15 )
+
+[node name="Polygon2D" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+rotation = 1.5708
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+rotation = -3.14159
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D4" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+rotation = -1.5708
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D5" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+rotation = 0.785397
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D6" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+rotation = 2.35619
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D7" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+rotation = -2.3562
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D8" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Border"]
+position = Vector2( 32, 36 )
+rotation = -0.785406
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Circle" type="Control" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Border"]
 margin_left = 26.0
-margin_top = 2.0
-margin_right = 171.0
-margin_bottom = 77.0
-rect_rotation = 0.0366689
-custom_colors/font_color = Color( 0, 0, 0, 0.25098 )
-custom_fonts/font = SubResource( 5 )
-text = "0/8"
+margin_top = 7.0
+margin_right = 38.0
+margin_bottom = 19.0
+script = SubResource( 189 )
 
-[node name="Label" type="Label" parent="UI/VBoxContainer/RedCoinCounter"]
-margin_left = 24.0
-margin_right = 169.0
-margin_bottom = 48.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 6 )
-text = "0/8"
+[node name="Circle2" type="Control" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Border"]
+margin_left = 42.0
+margin_top = 13.0
+margin_right = 54.0
+margin_bottom = 25.0
+script = SubResource( 189 )
 
-[node name="CoinShadow" type="Sprite" parent="UI/VBoxContainer/RedCoinCounter"]
-modulate = Color( 0, 0, 0, 0.25098 )
-position = Vector2( 10, 13 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 35 )
+[node name="Circle3" type="Control" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Border"]
+margin_left = 10.0
+margin_top = 13.0
+margin_right = 22.0
+margin_bottom = 25.0
+script = SubResource( 189 )
 
-[node name="Coin" type="Sprite" parent="UI/VBoxContainer/RedCoinCounter"]
-position = Vector2( 8, 11 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 35 )
+[node name="Circle4" type="Control" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Border"]
+margin_left = 16.0
+margin_top = 20.0
+margin_right = 48.0
+margin_bottom = 52.0
+script = SubResource( 189 )
 
-[node name="Tween" type="Tween" parent="UI/VBoxContainer/RedCoinCounter"]
-
-[node name="ShineShardCounter" type="Control" parent="UI/VBoxContainer"]
-margin_top = 28.0
+[node name="Fill" type="Control" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon"]
+visible = false
 margin_right = 40.0
-margin_bottom = 28.0
-script = ExtResource( 44 )
+margin_bottom = 40.0
 
-[node name="LabelShadow" type="Label" parent="UI/VBoxContainer/ShineShardCounter"]
-margin_left = 26.046
-margin_top = 2.0
-margin_right = 171.046
-margin_bottom = 77.0
-rect_rotation = 0.0366689
-custom_colors/font_color = Color( 0, 0, 0, 0.25098 )
-custom_fonts/font = SubResource( 5 )
-text = "0/8"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Polygon2D" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
 
-[node name="Label" type="Label" parent="UI/VBoxContainer/ShineShardCounter"]
-margin_left = 24.046
-margin_right = 169.046
-margin_bottom = 48.0
+[node name="Polygon2D2" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+rotation = 1.5708
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+rotation = -3.14159
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D4" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+rotation = -1.5708
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D5" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+rotation = 0.785397
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D6" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+rotation = 2.35619
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D7" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+rotation = -2.3562
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Polygon2D8" type="Polygon2D" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Fill"]
+position = Vector2( 32, 36 )
+rotation = -0.785406
+polygon = PoolVector2Array( -6, 14, 0.00768089, 15, 6, 14, 3, 20, 0, 25, -3, 20 )
+
+[node name="Circle" type="Control" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Fill"]
+margin_left = 27.0
+margin_top = 5.0
+margin_right = 37.0
+margin_bottom = 15.0
+script = SubResource( 189 )
+
+[node name="Circle2" type="Control" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Fill"]
+margin_left = 45.0
+margin_top = 12.0
+margin_right = 55.0
+margin_bottom = 22.0
+script = SubResource( 189 )
+
+[node name="Circle3" type="Control" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Fill"]
+margin_left = 9.0
+margin_top = 12.0
+margin_right = 19.0
+margin_bottom = 22.0
+script = SubResource( 189 )
+
+[node name="Circle4" type="Control" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable/Polygon/Fill"]
+margin_left = 16.0
+margin_top = 20.0
+margin_right = 48.0
+margin_bottom = 52.0
+script = SubResource( 189 )
+
+[node name="FillUnder" type="TextureProgress" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable"]
+material = SubResource( 15 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_rotation = -3.5
+texture_under = ExtResource( 10 )
+texture_progress = ExtResource( 10 )
+fill_mode = 4
+tint_under = Color( 0.776471, 0.541176, 0.423529, 1 )
+nine_patch_stretch = true
+
+[node name="Fill" type="TextureProgress" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable"]
+material = SubResource( 15 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_rotation = -3.5
+max_value = 5.0
+value = 5.0
+texture_under = ExtResource( 10 )
+texture_progress = ExtResource( 10 )
+fill_mode = 4
+tint_under = Color( 0.776471, 0.541176, 0.423529, 1 )
+nine_patch_stretch = true
+
+[node name="Label" type="Label" parent="UI/HUD/Control/Collectibles/ShineShards/Resizable"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_rotation = -3.5
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 6 )
-text = "0/8"
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 1 )
+custom_colors/font_color_shadow = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 1
+custom_fonts/font = SubResource( 31 )
+text = "0"
+align = 1
+valign = 1
 
-[node name="CoinShadow" type="Sprite" parent="UI/VBoxContainer/ShineShardCounter"]
-modulate = Color( 0, 0, 0, 0.25098 )
-position = Vector2( 10.046, 13 )
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 45 )
+[node name="Fludd" type="Control" parent="UI/HUD/Control"]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -50.0
+rect_scale = Vector2( 1.05, 1.05 )
 
-[node name="Coin" type="Sprite" parent="UI/VBoxContainer/ShineShardCounter"]
-position = Vector2( 8.046, 11 )
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 45 )
+[node name="Paint" type="Polygon2D" parent="UI/HUD/Control/Fludd"]
+position = Vector2( 21, 27 )
+scale = Vector2( 1.2, 1.2 )
+color = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+polygon = PoolVector2Array( 19, -16, 14, -21, 7, -24, -2, -24, -9, -21, -10, -20, -12, -20, -18, -15, -22, -9, -24, -3, -24, 5, -21, 13, -14, 20, -7, 23, 0, 24, 7, 23, 15, 19, 20, 13, 22, 7, 22, -1, 19, -8, 15, -14, 12, -17, 15, -16, 17, -14, 21, -8, 22, -4, 23, -2, 23, 5, 23, 8, 22, 9, 23, 10, 24, 8, 24, 0, 23, -4, 22, -8, 17, -15, 17, -16, 13, -18, 9, -19, 5, -21, 9, -21, 14, -19 )
 
-[node name="Tween" type="Tween" parent="UI/VBoxContainer/ShineShardCounter"]
+[node name="Tank" type="Control" parent="UI/HUD/Control/Fludd"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Outline" type="Polygon2D" parent="UI/HUD/Control/Fludd/Tank"]
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+polygon = PoolVector2Array( 37, 46, 18, 53, 2, 43, 2, 1, 19, -6, 37, 3 )
+
+[node name="Right" type="Polygon2D" parent="UI/HUD/Control/Fludd/Tank"]
+color = Color( 0.403922, 0.607843, 1, 1 )
+polygon = PoolVector2Array( 18, 50, 35, 44, 35, 5, 18, 11 )
+
+[node name="Left" type="Polygon2D" parent="UI/HUD/Control/Fludd/Tank"]
+color = Color( 0.545098, 0.807843, 1, 1 )
+polygon = PoolVector2Array( 18, 50, 4, 41, 4, 3, 18, 11 )
+
+[node name="Top" type="Polygon2D" parent="UI/HUD/Control/Fludd/Tank"]
+color = Color( 0.729412, 0.894118, 1, 1 )
+polygon = PoolVector2Array( 35, 5, 19, -3, 4, 3, 18, 11 )
+
+[node name="Bottom" type="Polygon2D" parent="UI/HUD/Control/Fludd/Tank"]
+position = Vector2( 0, 39 )
+color = Color( 0.729412, 0.894118, 1, 1 )
+polygon = PoolVector2Array( 35, 5, 19, -3, 4, 2, 18, 11 )
+
+[node name="Counter" type="Label" parent="UI/HUD/Control/Fludd"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -8.0
+margin_right = 8.0
+margin_bottom = 10.0
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+custom_fonts/font = ExtResource( 15 )
+text = "50%"
+align = 1
+valign = 2
+
+[node name="Icon" type="Control" parent="UI/HUD/Control/Fludd"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="CircleOutline2" type="Control" parent="UI/HUD/Control/Fludd/Icon"]
+margin_left = -4.0
+margin_top = -22.0001
+margin_right = 15.0
+margin_bottom = -3.00006
+script = SubResource( 189 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+
+[node name="CircleOutline" type="Control" parent="UI/HUD/Control/Fludd/Icon"]
+margin_left = 23.0002
+margin_top = -22.0001
+margin_right = 42.0002
+margin_bottom = -3.00009
+script = SubResource( 189 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+
+[node name="Polygon2D5" type="Polygon2D" parent="UI/HUD/Control/Fludd/Icon"]
+position = Vector2( 6.66669, -18.0952 )
+scale = Vector2( 1.2, 1.25 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+offset = Vector2( -5.714, 14.286 )
+polygon = PoolVector2Array( 6.66669, -1.90479, 8.57147, -0.952393, 10.4762, 0.952362, 11.4286, 3.80951, 10.4762, 5.71426, 8.57147, 7.61905, 5.71429, 8.57141, 0, 7.61905, -4.7619, 5.71426, -8.57141, 2.85712, -9.5238, 1.90475, -10.4762, -0.952393, -9.5238, -2.85715, -6.66663, -4.76193, -1.90472, -4.76193, 1.90479, -8.57144, 5.71429, -7.61905 )
+uv = PoolVector2Array( 46.6887, 26.4332, 51.6044, 28.891, 56.5199, 33.8066, 58.9777, 41.18, 56.5199, 46.0955, 51.6044, 51.0112, 44.2309, 53.4689, 29.4841, 51.0112, 17.1952, 46.0955, 7.36403, 38.7221, 4.9062, 36.2644, 2.44838, 28.891, 4.9062, 23.9754, 12.2797, 19.0598, 24.5686, 19.0598, 34.3998, 9.22864, 44.2309, 11.6865 )
+
+[node name="Polygon2D6" type="Polygon2D" parent="UI/HUD/Control/Fludd/Icon"]
+position = Vector2( -59.0476, -16.1905 )
+rotation = 3.14159
+scale = Vector2( 1.2, -1.25 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+offset = Vector2( -80.917, 12.71 )
+polygon = PoolVector2Array( 6.66669, -1.90479, 8.57147, -0.952393, 10.4762, 0.952362, 11.4286, 3.80951, 10.4762, 5.71426, 8.57147, 7.61905, 5.71429, 8.57141, 0, 7.61905, -4.7619, 5.71426, -8.57141, 2.85712, -9.5238, 1.90475, -10.4762, -0.952393, -9.5238, -2.85715, -6.66663, -4.76193, -1.90472, -4.76193, 1.90479, -8.57144, 5.71429, -7.61905 )
+uv = PoolVector2Array( 46.6887, 26.4332, 51.6044, 28.891, 56.5199, 33.8066, 58.9777, 41.18, 56.5199, 46.0955, 51.6044, 51.0112, 44.2309, 53.4689, 29.4841, 51.0112, 17.1952, 46.0955, 7.36403, 38.7221, 4.9062, 36.2644, 2.44838, 28.891, 4.9062, 23.9754, 12.2797, 19.0598, 24.5686, 19.0598, 34.3998, 9.22864, 44.2309, 11.6865 )
+
+[node name="Polygon2D7" type="Polygon2D" parent="UI/HUD/Control/Fludd/Icon"]
+position = Vector2( -4.7619, 0.952332 )
+scale = Vector2( 1.25, 1.25 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+polygon = PoolVector2Array( 12.1905, -11.4286, 15.2381, -9.14285, 17.1429, -11.4286, 20.9524, -11.4286, 22.8571, -9.14285, 25.9048, -10.6667, 27.4286, -6.09521, 23.6191, -3.04761, 23.6191, -0.761902, 19.0476, 0.761902, 14.4762, -0.761902, 14.4762, -3.04761, 10.6667, -6.85715 )
+uv = PoolVector2Array( 8.08297, 11.692, 18.2589, 18.4759, 25.043, 8.29991, 38.611, 8.29991, 45.3951, 18.4759, 55.571, 11.692, 62.3551, 25.2599, 45.3951, 35.436, 45.3951, 45.612, 31.8271, 49.0041, 18.2589, 45.612, 18.2589, 35.436, 1.29888, 21.868 )
+
+[node name="Circle3" type="Control" parent="UI/HUD/Control/Fludd/Icon"]
+margin_left = -1.99994
+margin_top = -20.0
+margin_right = 13.0001
+margin_bottom = -5.00003
+script = SubResource( 189 )
+color = Color( 1, 0.666667, 0.286275, 1 )
+
+[node name="Shading" type="TextureRect" parent="UI/HUD/Control/Fludd/Icon/Circle3"]
+material = SubResource( 193 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 202 )
+expand = true
+
+[node name="Circle4" type="Control" parent="UI/HUD/Control/Fludd/Icon"]
+margin_left = 24.667
+margin_top = -19.905
+margin_right = 39.667
+margin_bottom = -4.905
+script = SubResource( 189 )
+color = Color( 1, 0.666667, 0.286275, 1 )
+
+[node name="Shading" type="TextureRect" parent="UI/HUD/Control/Fludd/Icon/Circle4"]
+material = SubResource( 193 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 202 )
+expand = true
+
+[node name="Polygon2D4" type="Polygon2D" parent="UI/HUD/Control/Fludd/Icon"]
+position = Vector2( 5.75, -14.286 )
+offset = Vector2( -5.714, 14.286 )
+texture = SubResource( 205 )
+polygon = PoolVector2Array( 6.66669, -1.90479, 8.57147, -0.952393, 10.4762, 0.952362, 11.4286, 3.80951, 10.4762, 5.71426, 8.57147, 7.61905, 5.71429, 8.57141, 0, 7.61905, -4.7619, 5.71426, -8.57141, 2.85712, -9.5238, 1.90475, -10.4762, -0.952393, -9.5238, -2.85715, -6.66663, -4.76193, -1.90472, -4.76193, 1.90479, -8.57144, 5.71429, -7.61905 )
+uv = PoolVector2Array( 46.6887, 26.4332, 51.6044, 28.891, 56.5199, 33.8066, 58.9777, 41.18, 56.5199, 46.0955, 51.6044, 51.0112, 44.2309, 53.4689, 29.4841, 51.0112, 17.1952, 46.0955, 7.36403, 38.7221, 4.9062, 36.2644, 2.44838, 28.891, 4.9062, 23.9754, 12.2797, 19.0598, 24.5686, 19.0598, 34.3998, 9.22864, 44.2309, 11.6865 )
+
+[node name="CircleOutline" type="Control" parent="UI/HUD/Control/Fludd/Icon/Polygon2D4"]
+margin_left = -12.369
+margin_top = 10.726
+margin_right = 7.631
+margin_bottom = 29.726
+rect_rotation = 20.0
+rect_scale = Vector2( 0.9, 0.4 )
+script = SubResource( 189 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="UI/HUD/Control/Fludd/Icon"]
+position = Vector2( -42.8218, -12.6147 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+offset = Vector2( -80.9171, 12.7099 )
+texture = SubResource( 205 )
+polygon = PoolVector2Array( 6.66669, -1.90479, 8.57147, -0.952393, 10.4762, 0.952362, 11.4286, 3.80951, 10.4762, 5.71426, 8.57147, 7.61905, 5.71429, 8.57141, 0, 7.61905, -4.7619, 5.71426, -8.57141, 2.85712, -9.5238, 1.90475, -10.4762, -0.952393, -9.5238, -2.85715, -6.66663, -4.76193, -1.90472, -4.76193, 1.90479, -8.57144, 5.71429, -7.61905 )
+uv = PoolVector2Array( 46.6887, 26.4332, 51.6044, 28.891, 56.5199, 33.8066, 58.9777, 41.18, 56.5199, 46.0955, 51.6044, 51.0112, 44.2309, 53.4689, 29.4841, 51.0112, 17.1952, 46.0955, 7.36403, 38.7221, 4.9062, 36.2644, 2.44838, 28.891, 4.9062, 23.9754, 12.2797, 19.0598, 24.5686, 19.0598, 34.3998, 9.22864, 44.2309, 11.6865 )
+
+[node name="CircleOutline" type="Control" parent="UI/HUD/Control/Fludd/Icon/Polygon2D3"]
+margin_left = -88.0
+margin_top = 9.0
+margin_right = -68.0
+margin_bottom = 28.0
+rect_rotation = 20.0
+rect_scale = Vector2( 0.9, 0.4 )
+script = SubResource( 189 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="UI/HUD/Control/Fludd/Icon"]
+texture = SubResource( 205 )
+polygon = PoolVector2Array( 12.381, -10.4762, 15.2381, -8.57144, 17.1429, -11.4286, 20.9524, -11.4286, 22.8572, -8.57144, 25.7143, -10.4762, 27.6191, -6.66669, 22.8572, -3.80954, 22.8572, -0.952393, 19.0477, 0, 15.2381, -0.952393, 15.2381, -3.80954, 10.4762, -7.61905 )
+uv = PoolVector2Array( 8.08297, 11.692, 18.2589, 18.4759, 25.043, 8.29991, 38.611, 8.29991, 45.3951, 18.4759, 55.571, 11.692, 62.3551, 25.2599, 45.3951, 35.436, 45.3951, 45.612, 31.8271, 49.0041, 18.2589, 45.612, 18.2589, 35.436, 1.29888, 21.868 )
 
 [node name="SignText" type="Control" parent="UI"]
 pause_mode = 2
@@ -674,7 +1602,7 @@ margin_bottom = 500.0
 rect_scale = Vector2( 0.5, 0.5 )
 rect_clip_content = false
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 12 )
+custom_fonts/normal_font = SubResource( 32 )
 bbcode_enabled = true
 bbcode_text = "[center]L is real 2401, Mario Peach and Bowser, (not) By Runouw[/center]"
 text = "L is real 2401, Mario Peach and Bowser, (not) By Runouw"
@@ -688,7 +1616,7 @@ margin_bottom = 315.0
 rect_scale = Vector2( 0.5, 0.5 )
 rect_clip_content = false
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 13 )
+custom_fonts/normal_font = SubResource( 33 )
 bbcode_enabled = true
 bbcode_text = "[center]Press :interactinput: to close[/center]"
 text = "Press :interactinput: to close"
@@ -756,7 +1684,7 @@ rect_clip_content = false
 mouse_filter = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
-custom_fonts/normal_font = SubResource( 12 )
+custom_fonts/normal_font = SubResource( 32 )
 bbcode_enabled = true
 bbcode_text = "L is real 2401, Mario Peach and Bowser, (not) By Runouw"
 visible_characters = 0
@@ -771,7 +1699,7 @@ margin_bottom = 200.0
 rect_clip_content = false
 mouse_filter = 2
 size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 13 )
+custom_fonts/normal_font = SubResource( 33 )
 bbcode_enabled = true
 bbcode_text = "[center]Press :interactinput: to continue[/center]"
 text = "Press :interactinput: to continue"
@@ -786,7 +1714,18 @@ volume_db = -2.0
 
 [node name="Tween" type="Tween" parent="UI/DialogueText"]
 
+[node name="Reference2" type="Sprite" parent="UI"]
+visible = false
+modulate = Color( 1, 1, 1, 0.6 )
+position = Vector2( 724, 356 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Viewports" type="HBoxContainer" parent="."]
+visible = false
 margin_right = 772.0
 margin_bottom = 432.0
 size_flags_horizontal = 0
@@ -811,7 +1750,7 @@ __meta__ = {
 [node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer"]
 size = Vector2( 384, 432 )
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="CameraP1" type="Camera2D" parent="Viewports/ViewportContainer/Viewport"]
 pause_mode = 2
@@ -866,15 +1805,24 @@ collision_mask = 2048
 shape = SubResource( 24 )
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 4
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 
 [node name="FluddDisplay" parent="Viewports/ViewportContainer" instance=ExtResource( 30 )]
 char_path = NodePath("../Viewport/World/Character")
 
-[node name="HealthDisplay" parent="Viewports/ViewportContainer" instance=ExtResource( 34 )]
-char_path = NodePath("../Viewport/World/Character")
+[node name="CanvasLayer" type="CanvasLayer" parent="Viewports/ViewportContainer"]
+layer = 60
+script = ExtResource( 22 )
+
+[node name="Health" parent="Viewports/ViewportContainer/CanvasLayer" instance=ExtResource( 17 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 688.0
+margin_top = 14.0
+margin_right = 752.0
+margin_bottom = 78.0
+character_path = NodePath("../../Viewport/World/Character")
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="Viewports"]
 margin_left = 388.0
@@ -890,7 +1838,7 @@ __meta__ = {
 [node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer2"]
 size = Vector2( 384, 432 )
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="CameraP2" type="Camera2D" parent="Viewports/ViewportContainer2/Viewport"]
 pause_mode = 2
@@ -925,8 +1873,17 @@ character2_cam_collider = NodePath("../../../ViewportContainer/Viewport/World/Ch
 position = Vector2( -388, 0 )
 char_path = NodePath("../../ViewportContainer/Viewport/World/Character2")
 
-[node name="HealthDisplay" parent="Viewports/ViewportContainer2" instance=ExtResource( 34 )]
-char_path = NodePath("../../ViewportContainer/Viewport/World/Character2")
+[node name="CanvasLayer" type="CanvasLayer" parent="Viewports/ViewportContainer2"]
+layer = 60
+
+[node name="Health" parent="Viewports/ViewportContainer2/CanvasLayer" instance=ExtResource( 17 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 688.0
+margin_top = 14.0
+margin_right = 752.0
+margin_bottom = 78.0
+character_path = NodePath("../../../ViewportContainer/Viewport/World/Character2")
 
 [node name="SharedSounds" type="Node" parent="."]
 script = ExtResource( 40 )
@@ -946,6 +1903,6 @@ stream = ExtResource( 58 )
 stream = ExtResource( 59 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 15 )
+anims/RESET = SubResource( 34 )
 anims/shine_sc_in = SubResource( 16 )
 anims/shine_sc_out = SubResource( 17 )

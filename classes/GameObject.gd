@@ -111,6 +111,10 @@ func get_property_index(key) -> int:
 	return index
 
 func set_property(key, value, change_level_object = true, alias = null):
+	if typeof(self[key]) != typeof(value):
+		assert("Object tried to set property '" + key + "', but the provided type does not match.")
+		return
+	
 	self[key] = value
 	if alias != null:
 		editor_aliases[key] = alias

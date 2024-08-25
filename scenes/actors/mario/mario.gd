@@ -3,6 +3,7 @@ extends KinematicBody2D
 class_name Character
 
 signal state_changed
+signal health_changed(new_health, new_shards)
 
 # Child nodes
 onready var states_node = $States
@@ -598,6 +599,8 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 			frames = 4
 		else:
 			health -= amount
+			emit_signal("health_changed", health, health_shards)
+		
 		invulnerable = true if frames != 0 else false
 		invulnerable_frames = frames
 		if health <= 0:
@@ -607,6 +610,7 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 		else:
 			if cause != "lava":
 				sound_player.play_hit_sound()
+				
 
 func slow_heal(shards : int = 1, tick : float = 1, time : float = 1, can_overheal : bool = false) -> void:
 	if can_heal:
@@ -627,6 +631,8 @@ func heal(shards : int = 1) -> void:
 		health_shards = health_shards % 5
 		if health == 8:
 			health_shards = 0
+		
+		emit_signal("health_changed", health, health_shards)
 
 
 func get_weight() -> int:
@@ -1041,7 +1047,11 @@ func kill(cause: String) -> void:
 		else:
 			yield(get_tree().create_timer(3), "timeout")
 			set_powerup(null, false)
+			
 			health = 8
+			health_shards = 0
+			emit_signal("health_changed", health, health_shards)
+			
 			if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CheckpointSaved.current_area == Singleton.CurrentLevelData.area and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
 				position = Singleton.CheckpointSaved.current_spawn_pos
 				GhostArrays.dont_save = true
@@ -1053,6 +1063,7 @@ func kill(cause: String) -> void:
 			sprite.visible = true
 			death_sprite.visible = false
 			controllable = true
+			Singleton.CurrentLevelData.can_pause = true
 			set_state_by_name("FallState", 0)
 
 func exit() -> void:

@@ -380,7 +380,7 @@ expand_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id=69]
 bg_color = Color( 1, 1, 1, 1 )
-skew = Vector2( 0.01, 0.01 )
+skew = Vector2( -0.025, 0.025 )
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -588,6 +588,7 @@ HSlider/icons/tick = SubResource( 42 )
 HSlider/styles/slider = SubResource( 40 )
 LevelPanel/base_type = "Panel"
 LevelPanel/styles/panel = SubResource( 44 )
+LineEdit/colors/font_color = Color( 1, 1, 1, 1 )
 LineEdit/fonts/font = SubResource( 11 )
 LineEdit/styles/focus = SubResource( 66 )
 LineEdit/styles/normal = SubResource( 65 )

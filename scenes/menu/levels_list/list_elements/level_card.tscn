@@ -48,7 +48,6 @@ margin_bottom = 80.0
 rect_min_size = Vector2( 96, 80 )
 rect_pivot_offset = Vector2( 88, 0 )
 theme = ExtResource( 4 )
-theme_type_variation = "LevelPanel"
 script = ExtResource( 1 )
 
 [node name="Styling" type="Control" parent="."]

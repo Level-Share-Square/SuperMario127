@@ -67,7 +67,8 @@ func handle_custom_song(url: String) -> void:
 		load_ogg(file_path)
 
 func save_ogg(url: String, working_folder: String) -> void:
-	if UserInfo.internet == false: return
+	## add an equivalent to this later!!!
+	return #if UserInfo.internet == false: return
 	
 	var folder: String = saved_levels_util.get_level_music_folder(working_folder)
 	var file_name: String = saved_levels_util.get_level_music_filename(url)

@@ -21,8 +21,7 @@ export var anim_damp = 80
 
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
-		Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][0] += 1
-		Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][1].append(id)
+		get_tree().current_scene.collect_shine_shard(id)
 		var player_id = 1
 		if body.name == "Character":
 			player_id = 0

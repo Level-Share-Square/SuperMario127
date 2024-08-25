@@ -227,10 +227,11 @@ texture = SubResource( 6 )
 expand = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_bottom = 1.0
 margin_top = 432.0
 margin_right = 768.0
-margin_bottom = 5392.0
+margin_bottom = 6688.0
 bbcode_enabled = true
 bbcode_text = "[center]Super Mario 127
 Development Team

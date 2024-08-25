@@ -20,10 +20,8 @@ func _ready():
 	update_thumbnail()
 	if level_info.thumbnail_url != "":
 		if !(level_id in thumbnail_cache.cached_thumbnails):
-			print("uncached")
 			thumbnail_cache.thumbnail_queue.append([level_info.thumbnail_url, level_id])
 		else:
-			print("cached")
 			load_custom_thumbnail(level_id)
 	
 	thumbnail_cache.connect("thumbnail_loaded", self, "load_custom_thumbnail")
@@ -48,6 +46,5 @@ func load_custom_thumbnail(id: String):
 	if id != level_id: return
 	
 	if level_id in thumbnail_cache.cached_thumbnails:
-		print(thumbnail_cache.cached_thumbnails[level_id])
 		thumbnail.texture = thumbnail_cache.cached_thumbnails[level_id]
 		foreground.visible = false

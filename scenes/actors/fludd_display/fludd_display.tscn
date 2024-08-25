@@ -49,6 +49,7 @@ material_1 = SubResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 25
+visible = false
 
 [node name="FluddUI" type="TextureProgress" parent="CanvasLayer"]
 margin_left = 622.0
