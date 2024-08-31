@@ -6,13 +6,15 @@ onready var fadeout: AnimationPlayer = $Fadeout
 onready var label: Label = $Resizable/Label
 onready var fill: TextureProgress = $Resizable/Fill
 
+var max_shards: int
+
 func _ready():
 	# and this time, we have to wait for all the shine shard objects to load
 	# (kind of a bad solution imo)
 	for i in range(5):
 		yield(get_tree(), "physics_frame")
 	
-	var max_shards: int = Singleton.CurrentLevelData.level_data.vars.max_shine_shards
+	max_shards = Singleton.CurrentLevelData.level_data.vars.max_shine_shards
 	fill.max_value = max_shards
 	
 	if max_shards > 0:
@@ -35,3 +37,5 @@ func collect_shard(new_shards: int):
 	
 	animation_player.stop()
 	animation_player.play("collect")
+	
+	label.text = str(max_shards - new_shards)
