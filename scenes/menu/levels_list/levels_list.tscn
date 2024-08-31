@@ -10,7 +10,7 @@
 [ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=8]
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=9]
 [ext_resource path="res://scenes/menu/levels_list/test.png" type="Texture" id=10]
-[ext_resource path="res://assets/fonts/sm256.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://scenes/menu/levels_list/icons/shine.png" type="Texture" id=12]
 [ext_resource path="res://scenes/menu/levels_list/icons/star_coin.png" type="Texture" id=13]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=14]
@@ -147,7 +147,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="DynamicFont" id=12]
-size = 18
+size = 22
 outline_size = 2
 outline_color = Color( 0, 0.0431373, 0.313726, 1 )
 extra_spacing_char = -1
@@ -773,7 +773,7 @@ custom_constants/separation = 0
 
 [node name="Title" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
 margin_right = 380.0
-margin_bottom = 19.0
+margin_bottom = 24.0
 custom_fonts/font = SubResource( 12 )
 text = "SM63 Tall Tall Mountain +"
 align = 1
@@ -791,11 +791,14 @@ text = "SM63 Tall Tall Mountain +"
 align = 1
 valign = 1
 clip_text = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Author" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 19.0
+margin_top = 24.0
 margin_right = 380.0
-margin_bottom = 35.0
+margin_bottom = 40.0
 custom_fonts/font = ExtResource( 23 )
 text = "by hop193"
 align = 1
@@ -803,20 +806,31 @@ valign = 1
 clip_text = true
 
 [node name="Padding" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 35.0
+margin_top = 40.0
 margin_right = 380.0
-margin_bottom = 41.0
+margin_bottom = 46.0
 rect_min_size = Vector2( 0, 6 )
 
 [node name="Shines" type="HBoxContainer" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 41.0
+margin_top = 46.0
 margin_right = 380.0
-margin_bottom = 77.0
+margin_bottom = 82.0
 
-[node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info/Shines"]
+[node name="Control" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info/Shines"]
 margin_right = 36.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 36, 36 )
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info/Shines/Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 32, 32 )
 texture = ExtResource( 12 )
 expand = true
 stretch_mode = 6
@@ -831,14 +845,25 @@ align = 1
 valign = 1
 
 [node name="StarCoins" type="HBoxContainer" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 77.0
+margin_top = 82.0
 margin_right = 380.0
-margin_bottom = 113.0
+margin_bottom = 118.0
 
-[node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info/StarCoins"]
+[node name="Control" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info/StarCoins"]
 margin_right = 36.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 36, 36 )
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info/StarCoins/Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -14.0
+margin_top = -14.0
+margin_right = 14.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 28, 28 )
 texture = ExtResource( 13 )
 expand = true
 stretch_mode = 6
@@ -853,15 +878,15 @@ align = 1
 valign = 1
 
 [node name="Padding2" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 113.0
+margin_top = 118.0
 margin_right = 380.0
-margin_bottom = 119.0
+margin_bottom = 124.0
 rect_min_size = Vector2( 0, 6 )
 
 [node name="Completion" type="Label" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Info"]
-margin_top = 119.0
+margin_top = 124.0
 margin_right = 102.0
-margin_bottom = 143.0
+margin_bottom = 148.0
 size_flags_horizontal = 0
 text = "Completed: "
 valign = 1
