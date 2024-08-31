@@ -17,12 +17,13 @@ var level_info: LevelInfo
 var thumbnail_cache: Node
 
 func _ready():
-	update_thumbnail()
 	if level_info.thumbnail_url != "":
 		if !(level_id in thumbnail_cache.cached_thumbnails):
 			thumbnail_cache.thumbnail_queue.append([level_info.thumbnail_url, level_id])
 		else:
 			load_custom_thumbnail(level_id)
+	else:
+		update_thumbnail()
 	
 	thumbnail_cache.connect("thumbnail_loaded", self, "load_custom_thumbnail")
 	

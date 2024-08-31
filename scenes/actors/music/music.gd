@@ -33,11 +33,16 @@ const MUSIC_FADE_LENGTH = 0.75
 var level_songs : IdMap
 
 func get_song(song_id : int):
+	if song_cache[song_id] == null:
+		song_cache[song_id] = load("res://assets/music/resources/" + level_songs.ids[song_id] + ".tres")
+		
 	return song_cache[song_id]
 
 func _init() -> void:
 	base_volume = volume_db
+	
 	level_songs = preload("res://assets/music/ids.tres")
+	song_cache.resize(level_songs.ids.size())
 	
 func _ready() -> void:
 	var _connect = temporary_music_player.connect("finished", self, "stop_temporary_music")
@@ -137,9 +142,6 @@ func reset_music():
 	toggle_underwater_music(false)
 
 func _process(delta) -> void:
-	if song_cache.size() < level_songs.ids.size():
-		song_cache.append(load("res://assets/music/resources/" + level_songs.ids[song_cache.size()] + ".tres"))
-	
 	var current_scene = get_tree().get_current_scene()
 	var current_song
 	

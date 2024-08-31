@@ -912,10 +912,10 @@ rect_pivot_offset = Vector2( 10, 12 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -2.0
-margin_top = 1.0
+margin_top = 2.0
 margin_right = -2.0
-margin_bottom = -3.0
-rect_scale = Vector2( 1.2, 1.2 )
+margin_bottom = -2.0
+rect_scale = Vector2( 1.2, 1.125 )
 
 [node name="Circle5" type="Control" parent="UI/HUD/Control/Collectibles/Coins/HBoxContainer/Icon/Coin"]
 margin_left = -0.999999
@@ -1043,10 +1043,10 @@ rect_min_size = Vector2( 20, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -2.0
-margin_top = 1.0
+margin_top = 2.0
 margin_right = -2.0
-margin_bottom = -3.0
-rect_scale = Vector2( 1.2, 1.2 )
+margin_bottom = -2.0
+rect_scale = Vector2( 1.2, 1.125 )
 
 [node name="Circle5" type="Control" parent="UI/HUD/Control/Collectibles/RedCoins/HBoxContainer/Icon/RedCoin"]
 margin_left = -0.999999
@@ -1805,6 +1805,7 @@ collision_mask = 2048
 shape = SubResource( 24 )
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
+frame = 5
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 

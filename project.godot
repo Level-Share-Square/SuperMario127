@@ -89,20 +89,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/player/control_presets.gd"
 }, {
-"base": "Reference",
-"class": "ControlUtil",
-"language": "GDScript",
-"path": "res://util/control_util.gd"
-}, {
 "base": "Tween",
 "class": "CurveTween",
 "language": "GDScript",
 "path": "res://classes/curve_tween.gd"
-}, {
-"base": "Reference",
-"class": "Decoration",
-"language": "GDScript",
-"path": "res://generation/decorations/decoration.gd"
 }, {
 "base": "Reference",
 "class": "DefineVarInstruction",
@@ -114,72 +104,72 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/dialogue.gd"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivity",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityAssets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_assets.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityParty",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_party.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivitySecrets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_secrets.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityTimestamps",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_timestamps.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordCore",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_core.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobby",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobbyManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobbyTransaction",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_transaction.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordOverlayManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_overlay_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordPartySize",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_party_size.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordResult",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_result.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordUser",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_user.gdns"
@@ -489,11 +479,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://interpreter/instructions/SetValueInstruction.gd"
 }, {
-"base": "Reference",
-"class": "SettingsSaver",
-"language": "GDScript",
-"path": "res://util/settingssaver_util.gd"
-}, {
 "base": "Resource",
 "class": "SkyResource",
 "language": "GDScript",
@@ -620,11 +605,6 @@ _global_script_classes=[ {
 "path": "res://util/new/saved_levels_util.gd"
 }, {
 "base": "Reference",
-"class": "terrain_generator",
-"language": "GDScript",
-"path": "res://generation/generator.gd"
-}, {
-"base": "Reference",
 "class": "text_replace_util",
 "language": "GDScript",
 "path": "res://util/text_replace_util.gd"
@@ -656,9 +636,7 @@ _global_script_class_icons={
 "ChatMessage": "",
 "CloudNozzle": "",
 "ControlPresets": "",
-"ControlUtil": "",
 "CurveTween": "",
-"Decoration": "",
 "DefineVarInstruction": "",
 "Dialog": "",
 "DiscordActivity": "",
@@ -736,7 +714,6 @@ _global_script_class_icons={
 "ScreenSizeUtil": "",
 "SemiSolidPlatform": "",
 "SetValueInstruction": "",
-"SettingsSaver": "",
 "SkyResource": "",
 "SlideState": "",
 "SlideStopState": "",
@@ -762,7 +739,6 @@ _global_script_class_icons={
 "interpreter_util": "",
 "level_code_util": "",
 "saved_levels_util": "",
-"terrain_generator": "",
 "text_replace_util": "",
 "uuid_util": "",
 "value_util": ""
@@ -771,7 +747,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Super Mario 127"
-run/main_scene="res://scenes/oldmenu/loading/loading.tscn"
+run/main_scene="res://scenes/menu/launcher/launcher.tscn"
 boot_splash/show_image=false
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://assets/misc/icon.png"
@@ -780,8 +756,9 @@ config/windows_native_icon="res://assets/misc/icon.ico"
 [autoload]
 
 LocalSettings="*res://singletons/local_settings.gd"
-Singleton="*res://scenes/actors/singleton/singleton.tscn"
+Singleton="*res://singletons/main_singleton.gd"
 Singleton2="*res://singleton2.gd"
+SettingsLoader="*res://singletons/settings_loader.tscn"
 GhostArrays="*res://scenes/actors/mario/misc/ghostarrays.gd"
 Discord="*res://addons/discord_game_sdk/discord.gd"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"

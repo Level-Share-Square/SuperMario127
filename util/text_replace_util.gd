@@ -1,6 +1,14 @@
 class_name text_replace_util
 
-static func parse_text(text : String, character : Character):
+static func input_to_text(action_name: String, player_id: int) -> String:
+	var action = LocalSettings.load_setting("Controls (Player " + str(player_id + 1) + ")", action_name, [])
+	if action.size() > 0:
+		return "[color=#7dcbff]" + bindings_util.get_singular_human_name(action[0]) + "[/color]"
+	
+	return "[color=#7dcbff]" + "Unbound" + "[/color]"
+
+
+static func parse_text(text : String, character : Character) -> String:
 	var character_names = [
 		"Mario",
 		"Luigi"
@@ -12,43 +20,19 @@ static func parse_text(text : String, character : Character):
 	
 	text = text.replace(":winginputs:", ":leftinput: and :rightinput:" if !Singleton.PlayerSettings.legacy_wing_cap else ":upinput: and :downinput:")
 	
-	text = text.replace(":leftinput:", 
-		"[color=#7dcbff]" + ControlUtil.get_formatted_string("left", character.player_id) + "[/color]"
-	)
-	text = text.replace(":rightinput:", 
-		"[color=#7dcbff]" + ControlUtil.get_formatted_string("right", character.player_id) + "[/color]"
-	)
-	text = text.replace(":upinput:", 
-		"[color=#7dcbff]" + ControlUtil.get_formatted_string("up", character.player_id) + "[/color]"
-	)
-	text = text.replace(":downinput:", 
-		"[color=#7dcbff]" + ControlUtil.get_formatted_string("down", character.player_id) + "[/color]"
-	)
-	text = text.replace(":jumpinput:", 
-		"[color=#7dcbff]" + ControlUtil.get_formatted_string("jump", character.player_id) + "[/color]"
-	)
-	text = text.replace(":spininput:", 
-		"[color=#7dcbff]" + ControlUtil.get_formatted_string("spin", character.player_id) + "[/color]"
-	)
-	text = text.replace(":diveinput:", 
-		"[color=#7dcbff]" + ControlUtil.get_formatted_string("dive", character.player_id) + "[/color]"
-	)
-	text = text.replace(":gpinput:", 
-		"[color=#7dcbff]" + ControlUtil.get_formatted_string("gp", character.player_id) + "[/color]"
-	)
-	text = text.replace(":gpcancelinput:", 
-		"[color=#7dcbff]" + ControlUtil.get_formatted_string("gpcancel", character.player_id) + "[/color]"
-	)
-	text = text.replace(":fluddinput:", 
-		"[color=#7dcbff]" + ControlUtil.get_formatted_string("fludd", character.player_id) + "[/color]"
-	)
-	text = text.replace(":nozzlesinput:", 
-		"[color=#7dcbff]" + ControlUtil.get_formatted_string("nozzles", character.player_id) + "[/color]"
-	)
-	text = text.replace(":crouchinput:", 
-		"[color=#7dcbff]" + ControlUtil.get_formatted_string("crouch", character.player_id) + "[/color]"
-	)
-	text = text.replace(":interactinput:", 
-		"[color=#7dcbff]" + ControlUtil.get_formatted_string("interact", character.player_id) + "[/color]"
-	)
+	var player = character.player_id
+	
+	text = text.replace(":leftinput:", input_to_text("left", player))
+	text = text.replace(":rightinput:", input_to_text("right", player))
+	text = text.replace(":upinput:", input_to_text("up", player))
+	text = text.replace(":downinput:", input_to_text("down", player))
+	text = text.replace(":jumpinput:", input_to_text("jump", player))
+	text = text.replace(":spininput:", input_to_text("spin", player))
+	text = text.replace(":diveinput:", input_to_text("dive", player))
+	text = text.replace(":gpinput:", input_to_text("gp", player))
+	text = text.replace(":gpcancelinput:", input_to_text("gpcancel", player))
+	text = text.replace(":fluddinput:", input_to_text("fludd", player))
+	text = text.replace(":nozzlesinput:", input_to_text("nozzles", player))
+	text = text.replace(":crouchinput:", input_to_text("crouch", player))
+	text = text.replace(":interactinput:", input_to_text("interact", player))
 	return text

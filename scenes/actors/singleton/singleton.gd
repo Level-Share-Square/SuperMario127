@@ -5,7 +5,6 @@ var load_paths = [
 	["EditorSavedSettings", "res://scenes/editor/editor_saved_settings.tscn"],
 	["TimeScore", "res://scenes/actors/time_score/time_score.tscn"],
 	["SettingsLoader", "res://singletons/settings_loader.tscn"],
-	["LoadSettings", "res://scenes/shared/load_settings.tscn"],
 	["CurrentLevelData", "res://scenes/shared/level_data.tscn"],
 	["ModeSwitcher", "res://scenes/actors/mode_switcher/mode_switcher.tscn"],
 	["SceneTransitions", "res://scenes/actors/scene_transitions/CanvasLayer.tscn"],
@@ -24,7 +23,6 @@ var PlayerSettings
 var EditorSavedSettings
 var TimeScore
 var SettingsLoader
-var LoadSettings
 var CurrentLevelData
 var ModeSwitcher
 var SceneTransitions

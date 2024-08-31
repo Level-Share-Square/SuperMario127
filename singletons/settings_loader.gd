@@ -1,21 +1,35 @@
 extends Node
 
-const LOAD_CATEGORY = "General"
+const CATEGORIES = [
+	"General",
+	"Meta"
+]
 
-func _ready():
-	LocalSettings.connect("setting_changed", self, "change_setting")
-	
+func _init():
 	var config: ConfigFile = LocalSettings.config
-	if not config.has_section(LOAD_CATEGORY): return
 	
-	for key in config.get_section_keys(LOAD_CATEGORY):
-		if config.has_section_key(LOAD_CATEGORY, key):
+	LocalSettings.connect("setting_changed", self, "change_setting")
+	for category in CATEGORIES:
+		if config.has_section(category):
+			load_category(category, config)
+	
+	# we can initialize this here for now i suppose
+	if not config.has_section_key("Meta", "game_version"):
+		LocalSettings.change_setting("Meta", "game_version", Singleton.PlayerSettings.game_version)
+		handle_version_upgrade()
+
+func load_category(category: String, config: ConfigFile):
+	for key in config.get_section_keys(category):
+		if config.has_section_key(category, key):
 			change_setting(
-				key, LocalSettings.load_setting(LOAD_CATEGORY, key, null)
+				key, LocalSettings.load_setting(category, key, null)
 			)
+
+
 
 func change_setting(key: String, new_value):
 	match key:
+		# General
 		"window_scale":
 			ScreenSizeUtil.set_screen_size(new_value)
 			if not OS.window_fullscreen:
@@ -57,6 +71,11 @@ func change_setting(key: String, new_value):
 			var bus_index: int = AudioServer.get_bus_index("Sounds")
 			var volume_db: float = linear2db(float(new_value) / 100)
 			AudioServer.set_bus_volume_db(bus_index, volume_db)
+		
+		# Meta
+		"game_version":
+			if new_value != Singleton.PlayerSettings.game_version:
+				handle_version_upgrade()
 
 
 ## related to various hotkeys
@@ -76,3 +95,9 @@ func _unhandled_input(event):
 	if event.is_action_pressed("mute"):
 		var current_vol = LocalSettings.load_setting("General", "bgm_volume", 100)
 		LocalSettings.change_setting("General", "bgm_volume", 0 if current_vol > 0 else last_non_muted_bgm)
+
+
+
+## when you come from a version that's lower or higher than your current one
+func handle_version_upgrade():
+	print("Version mismatch! This currently does not do anything...")

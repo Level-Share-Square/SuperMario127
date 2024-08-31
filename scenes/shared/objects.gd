@@ -19,7 +19,7 @@ func set_property(object_node : GameObject, property, value):
 
 func create_object(object, add_to_data):
 	var mode = get_tree().get_current_scene().mode
-	var object_scene = Singleton.CurrentLevelData.object_cache[object.type_id]
+	var object_scene = Singleton.CurrentLevelData.get_cached_object(object.type_id)
 	if object_scene != null:
 		var object_node = object_scene.instance()
 		object_node.mode = mode

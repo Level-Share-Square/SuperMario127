@@ -229,10 +229,12 @@ func load_palettes(_userdata):
 		print("Loaded tileset " + str(current_index))
 	
 	tileset_resource._init()
-	Singleton.EditorSavedSettings.tileset_palettes = tileset_palettes
+	
+	LocalSettings.change_setting("Meta", "number_of_tiles", number_of_tiles)
+	LocalSettings.change_setting("Meta", "saved_palettes", tileset_palettes)
+	
 	ResourceSaver.save("user://tiles.res", tileset_resource)
 	Singleton.EditorSavedSettings.tiles_resource = tileset_resource
-	SettingsSaver.save()
 	
 	percentage = 1
 	print("Finished loading all " + str(level_tilesets.ids.size()) + " tilesets.")

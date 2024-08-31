@@ -18,13 +18,14 @@ func update_background_area(area : LevelArea):
 func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rect2(0, 0, 0, 0), extra_y_offset : float = 0, background_palette : int = 0):
 	if !ready:
 		yield(self,"ready")
+		
 	#warning-ignore:unused_variable
 	var background_id_mapper = preload("res://scenes/shared/background/backgrounds/ids.tres")
-	var background_resource = Singleton.CurrentLevelData.background_cache[sky]
+	var background_resource = Singleton.CurrentLevelData.get_cached_background(sky)
 	
 	#warning-ignore:unused_variable
 	var foreground_id_mapper = preload("res://scenes/shared/background/foregrounds/ids.tres")
-	var foreground_resource = Singleton.CurrentLevelData.foreground_cache[background]
+	var foreground_resource = Singleton.CurrentLevelData.get_cached_foreground(background)
 	
 	background_node.texture = background_resource.texture
 	

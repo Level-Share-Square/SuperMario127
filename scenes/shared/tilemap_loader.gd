@@ -20,9 +20,9 @@ var noise := OpenSimplexNoise.new()
 
 func _ready():
 	var level_tilesets := preload("res://assets/tiles/ids.tres")
+	var tile_set := preload("res://generation/generated_tiles.res")
 	
 	var number_of_tiles = Singleton.EditorSavedSettings.data_tiles
-	var tile_set = Singleton.EditorSavedSettings.tiles_resource
 	very_back_tilemap_node.tile_set = tile_set
 	back_tilemap_node.tile_set = tile_set
 	middle_tilemap_node.tile_set = tile_set
@@ -41,7 +41,7 @@ func _ready():
 			tileset.right_slope_tile_id
 		]
 		
-		tileset_palettes = Singleton.EditorSavedSettings.tileset_palettes
+		tileset_palettes = preload("res://generation/tileset_palettes.res").tileset_palettes
 	
 func get_tile(tileset_id, tile_id, palette_id = 0):
 	if palette_id == 0:

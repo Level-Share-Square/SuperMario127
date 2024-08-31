@@ -17,7 +17,7 @@ func update_display():
 	var area = data.areas[Singleton.CurrentLevelData.area]
 	
 	if typeof(area.settings.music) == TYPE_INT:
-		var resource = Singleton.MiscCache.music_nodes[area.settings.music]
+		var resource = Singleton.MiscCache.get_music_node(area.settings.music)
 		
 		music_title.text = resource.title
 		music_note.text = resource.note

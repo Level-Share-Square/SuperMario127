@@ -57,8 +57,6 @@ func do_transition_fade(transition_time : float = DEFAULT_TRANSITION_TIME, start
 	yield(tween, "tween_all_completed")
 	yield(get_tree().create_timer(0.1), "timeout")
 	
-	while Singleton.EditorSavedSettings.tiles_resource == null:
-		yield(get_tree().create_timer(0.3), "timeout")
 	emit_signal("transition_finished")
 	
 	if reverse_after:

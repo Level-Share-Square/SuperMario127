@@ -38,7 +38,7 @@ func _ready():
 	
 	
 	if type_scene_name != "None":
-		property_type = Singleton.MiscCache.property_scenes[type_scene_name].instance()
+		property_type = Singleton.MiscCache.get_property_scene(type_scene_name).instance()
 		print(property_type)
 		add_child(property_type)
 		property_type.set_value(value)

@@ -186,17 +186,17 @@ func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
 
 func get_level_background_texture() -> StreamTexture:
 	var level_background = level_data.areas[spawn_area].settings.sky 
-	var background_resource = Singleton.CurrentLevelData.background_cache[level_background]
+	var background_resource = Singleton.CurrentLevelData.get_cached_background(level_background)
 	return background_resource.texture
 	
 func get_level_background_modulate() -> Color:
 	var level_background = level_data.areas[spawn_area].settings.sky
-	var background_resource = Singleton.CurrentLevelData.background_cache[level_background]
+	var background_resource = Singleton.CurrentLevelData.get_cached_background(level_background)
 	return background_resource.parallax_modulate
 
 func get_level_foreground_texture() -> StreamTexture:
 	var level_foreground = level_data.areas[spawn_area].settings.background
-	var foreground_resource = Singleton.CurrentLevelData.foreground_cache[level_foreground]
+	var foreground_resource = Singleton.CurrentLevelData.get_cached_foreground(level_foreground)
 	var palette = level_data.areas[spawn_area].settings.background_palette
 	
 	if palette == 0:

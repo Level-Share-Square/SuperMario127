@@ -105,30 +105,35 @@ static func decode_event(event: InputEvent) -> Dictionary:
 
 
 ## for displaying bindings in text
+static func get_singular_human_name(action: Dictionary) -> String:
+	var string: String = ""
+	match(action.input_type):
+		KEYBOARD:
+			string += OS.get_scancode_string(action.scancode)
+		
+		MOUSE:
+			if action.button_index < MOUSE_BUTTONS.size():
+				string += MOUSE_BUTTONS[action.button_index]
+			else:
+				string += UNKNOWN
+		
+		JOYPAD_BUTTON:
+			if action.button_index < JOY_BUTTONS.size():
+				string += JOY_BUTTONS[action.button_index]
+			else:
+				string += UNKNOWN
+		
+		JOYPAD_MOTION:
+			var suffix = "+" if action.axis_value > 0 else "-"
+			string += "Axis " + str(action.axis) + suffix
+	
+	return string
+
 static func get_binding_human_name(action_array: Array) -> String:
 	var string: String = ""
 	for action in action_array:
 		if string != "": string += ", "
-		
-		match(action.input_type):
-			KEYBOARD:
-				string += OS.get_scancode_string(action.scancode)
-			
-			MOUSE:
-				if action.button_index < MOUSE_BUTTONS.size():
-					string += MOUSE_BUTTONS[action.button_index]
-				else:
-					string += UNKNOWN
-			
-			JOYPAD_BUTTON:
-				if action.button_index < JOY_BUTTONS.size():
-					string += JOY_BUTTONS[action.button_index]
-				else:
-					string += UNKNOWN
-			
-			JOYPAD_MOTION:
-				var suffix = "+" if action.axis_value > 0 else "-"
-				string += "Axis " + str(action.axis) + suffix
+		string += get_singular_human_name(action)
 		
 	return string
 
