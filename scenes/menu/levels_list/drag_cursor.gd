@@ -19,6 +19,7 @@ func start_dragging(card: Button):
 	
 	decoration = current_card.get_node("Decoration").duplicate()
 	decoration.modulate.a = 0.75
+	decoration.rect_position = card.rect_global_position - get_viewport().get_mouse_position()
 	add_child(decoration)
 
 

@@ -59,6 +59,7 @@ script = ExtResource( 6 )
 [node name="Decoration" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="Decoration"]
 unique_name_in_owner = true
