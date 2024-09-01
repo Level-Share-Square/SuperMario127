@@ -1,4 +1,5 @@
 extends ButtonSound
+class_name ButtonHoverRotate
 
 export var rotation_amount: float = 5
 export var lerp_speed: float = 12

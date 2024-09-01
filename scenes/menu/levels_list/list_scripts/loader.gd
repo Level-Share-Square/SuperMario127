@@ -2,6 +2,10 @@ extends Node
 
 signal loading_finished
 
+export var drag_cursor_path: NodePath
+onready var drag_cursor: Area2D = get_node(drag_cursor_path)
+
+
 onready var list_handler = get_parent()
 
 onready var level_card_scene: PackedScene = preload("res://scenes/menu/levels_list/list_elements/level_card.tscn")
@@ -74,13 +78,13 @@ func add_level_card(file_path: String, level_id: String, working_folder: String,
 		level_info.load_save_from_dictionary(saved_levels_util.load_level_save_file(save_path))
 	
 	# needs some variables now for visual touches
-	var styling = level_card.get_node("Styling")
+	var styling = level_card.get_node("%Styling")
 	styling.level_info = level_info
 	styling.thumbnail_cache = list_handler.thumbnail_cache
 	styling.is_complete = level_info.is_fully_completed() and not is_new_level
 	
 	# add node to tree
-	level_card.get_node("Name").text = level_info.level_name
+	level_card.get_node("%Name").text = level_info.level_name
 	
 	level_grid.call_deferred("add_child", level_card)
 	if move_to_front:
@@ -92,11 +96,18 @@ func add_level_card(file_path: String, level_id: String, working_folder: String,
 	## level info panel to start loading our level data 
 	
 	#warning-ignore:return_value_discarded
-	level_card.call_deferred("connect", "pressed", list_handler.level_list, "transition", ["LevelInfo"])
+	level_card.call_deferred("connect", "button_pressed", list_handler.level_list, "transition", ["LevelInfo"])
 	#warning-ignore:return_value_discarded
-	level_card.call_deferred("connect", "pressed", list_handler.level_panel, "load_level_info", [level_info, level_id, working_folder])
+	level_card.call_deferred("connect", "button_pressed", list_handler.level_panel, "load_level_info", [level_info, level_id, working_folder])
 	#warning-ignore:return_value_discarded
 	# when returning from a level on controller its good to be able to start from its card
-	level_card.call_deferred("connect", "pressed", list_handler, "change_focus", [level_card])
+	level_card.call_deferred("connect", "button_pressed", list_handler, "change_focus", [level_card])
+	
+	
+	## these signals are for dragging levels around in the list
+	#warning-ignore:return_value_discarded
+	level_card.call_deferred("connect", "drag_started", drag_cursor, "start_dragging")
+	#warning-ignore:return_value_discarded
+	level_card.call_deferred("connect", "drag_ended", drag_cursor, "stop_dragging")
 	
 	last_level_card = level_card

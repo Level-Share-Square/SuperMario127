@@ -12,7 +12,7 @@ var is_complete: bool
 # thumbnail
 onready var thumbnail = get_node("%Thumbnail")
 onready var foreground = get_node("%Foreground")
-onready var level_id: String = get_parent().name
+onready var level_id: String = get_owner().name
 var level_info: LevelInfo
 var thumbnail_cache: Node
 

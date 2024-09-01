@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/actors/objects/cloud_platform/texture.png" type="Texture" id=2]
@@ -48,6 +48,7 @@
 [ext_resource path="res://scenes/actors/mario/nozzles/hover_mario.png" type="Texture" id=46]
 [ext_resource path="res://scenes/menu/levels_list/list_scripts/folder_setting_buttons.gd" type="Script" id=47]
 [ext_resource path="res://scenes/menu/levels_list/list_scripts/thumbnail_cache.gd" type="Script" id=48]
+[ext_resource path="res://scenes/menu/levels_list/drag_cursor.gd" type="Script" id=49]
 
 [sub_resource type="CanvasItemMaterial" id=22]
 blend_mode = 1
@@ -414,6 +415,9 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
 }
 
+[sub_resource type="RectangleShape2D" id=28]
+extents = Vector2( 4, 4 )
+
 [sub_resource type="Animation" id=5]
 length = 0.001
 tracks/0/type = "value"
@@ -703,6 +707,7 @@ focus_path = NodePath("../../../Focus")
 
 [node name="Loader" type="Node" parent="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler"]
 script = ExtResource( 20 )
+drag_cursor_path = NodePath("../../../../../../../DragCursor")
 
 [node name="Saver" type="Node" parent="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler"]
 script = ExtResource( 15 )
@@ -1825,6 +1830,18 @@ texture = ExtResource( 44 )
 anims/RESET = SubResource( 23 )
 anims/transition = SubResource( 24 )
 
+[node name="DragCursor" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+script = ExtResource( 49 )
+sorting_path = NodePath("../Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler/Sorting")
+list_handler_path = NodePath("../Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DragCursor"]
+position = Vector2( 4, 4 )
+shape = SubResource( 28 )
+disabled = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )
 anims/transition = SubResource( 6 )
@@ -1859,3 +1876,4 @@ anims/transition = SubResource( 6 )
 [connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/RenameFolder" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="rename_folder"]
 [connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/DeleteFolder/PressCountdown" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="delete_folder"]
 [connection signal="text_changed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/DeleteFolder/PressCountdown" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/DeleteFolder/Icon" method="update_offset"]
+[connection signal="area_entered" from="DragCursor" to="DragCursor" method="_area_entered"]

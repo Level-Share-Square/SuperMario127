@@ -8,7 +8,7 @@ var sort: Dictionary = {
 func reset_values():
 	sort["folders"] = []
 	sort["levels"] = []
-	
+
 
 func add_to_list(element_id: String, element_type: String):
 	sort[element_type].push_front(element_id)
