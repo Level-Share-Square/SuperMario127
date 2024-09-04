@@ -27,6 +27,7 @@ func screen_change(new_screen_name: String):
 	if new_screen.music_id > -1:
 		Singleton.Music.change_song(Singleton.Music.last_song, new_screen.music_id)
 	
+	new_screen.emit_signal("screen_opened")
 	emit_signal("screen_changed")
 
 

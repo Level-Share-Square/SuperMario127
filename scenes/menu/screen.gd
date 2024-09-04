@@ -1,6 +1,7 @@
 extends Control
 
 signal start_transition
+signal screen_opened
 signal screen_change(new_screen_name)
 
 export var music_id: int = -1

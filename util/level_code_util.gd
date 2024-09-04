@@ -19,6 +19,15 @@ static func is_valid(value : String):
 		else:
 			return false
 
+static func fast_is_valid(value: String) -> bool:
+	if value.length() < 80: return false
+	
+	# hacky but do u really think we're going to increase the code version more than that? 
+	if not value.begins_with("0") and not value.begins_with("1"): return false
+	if not value.ends_with("]"): return false
+	
+	return true
+
 const empty_tile := [0,0,0]
 static func encode(tiles, settings):
 	#print(settings.bounds)

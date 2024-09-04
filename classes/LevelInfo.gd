@@ -7,6 +7,7 @@ const OBJECT_ID_SHINE = 2
 const OBJECT_ID_STAR_COIN = 52
 
 const VERSION : String = "0.0.3"
+const TEMP_DATA_SUFFIX: String = "~0*0~0*0~0*0~0*0]"
 
 # this class stores all the info and savedata relating to a level that can be played from the level list 
 
@@ -15,6 +16,9 @@ var level_code : String # used for saving the level to disk
 # i'm not quite sure what the idea was behind making it load
 # the level data twice, but i went and removed that
 var level_data : LevelData
+# if the code was already loaded in full once,
+# no point in wasting time doing it again :p
+var is_fully_loaded: bool
 
 # level info
 var level_name : String = ""
@@ -40,8 +44,23 @@ var activated_fludds : Array = [false, false, false]
 func _init(passed_level_code : String = "") -> void:
 	if passed_level_code == "":
 		return
-
+	
+	# loading only a few parts at first to lower loading times
+	var temp_level_code = passed_level_code.get_slice("~", 0)
+	temp_level_code += TEMP_DATA_SUFFIX
+	
+	level_data = LevelData.new(temp_level_code)
+	level_name = level_data.name
+	level_author = level_data.author
+	level_description = level_data.description
+	thumbnail_url = level_data.thumbnail_url
+	
+	# save the real level code to be loaded later
 	level_code = passed_level_code
+
+func load_in() -> void:
+	if is_fully_loaded: return
+	
 	level_data = LevelData.new(level_code)
 	
 	level_name = level_data.name
@@ -83,6 +102,9 @@ func _init(passed_level_code : String = "") -> void:
 
 			shine_details.sort_custom(self, "shine_sort")
 			star_coin_details.sort()
+	
+	is_fully_loaded = true
+
 
 func reset_save_data(delete_file: bool = true) -> void:
 	for collected_shine in collected_shines:
@@ -122,6 +144,10 @@ func get_save_file_dictionary() -> Dictionary:
 func load_save_from_dictionary(save_dictionary: Dictionary):
 	match save_dictionary["VERSION"]:
 		"0.0.3":
+			load_save_0_0_1(save_dictionary)
+		"0.0.2":
+			load_save_0_0_2(save_dictionary)
+		"0.0.3":
 			load_save_0_0_3(save_dictionary)
 
 
@@ -148,9 +174,9 @@ func get_saveable_dictionary() -> Dictionary:
 func load_from_dictionary(save_dictionary : Dictionary) -> void:
 	match save_dictionary["VERSION"]:
 		"0.0.1":
-			load_level_0_0_1(save_dictionary)
+			load_save_0_0_1(save_dictionary)
 		"0.0.2":
-			load_level_0_0_2(save_dictionary)
+			load_save_0_0_2(save_dictionary)
 ###################################################
 
 static func shine_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
@@ -245,23 +271,24 @@ static func pad_timevalue(timevalue : int) -> String:
 	return "0" if timevalue < 10 else ""
 
 # LevelInfo dictionary loading functions for different versions start here
-func load_level_0_0_1(save_dictionary : Dictionary):
-	print("01")
-	level_code = save_dictionary["level_code"]
-	level_name = save_dictionary["level_name"]
+func load_save_0_0_1(save_dictionary : Dictionary):
+	#print("01")
+	#level_code = save_dictionary["level_code"]
+	#level_name = save_dictionary["level_name"]
 
 	collected_shines = save_dictionary["collected_shines"]
 	collected_star_coins = save_dictionary["collected_star_coins"]
 	coin_score = save_dictionary["coin_score"]
 	time_scores = save_dictionary["time_scores"]
 
-func load_level_0_0_2(save_dictionary : Dictionary):
-	load_level_0_0_1(save_dictionary)
+func load_save_0_0_2(save_dictionary : Dictionary):
+	load_save_0_0_1(save_dictionary)
 	
 	spawn_area = save_dictionary["spawn_area"]
 	shine_details = save_dictionary["shine_details"] 
 	star_coin_details = save_dictionary["star_coin_details"]
-	activated_fludds = save_dictionary["activated_fludds"]
+	if save_dictionary.has("activated_fludds"):
+		activated_fludds = save_dictionary["activated_fludds"]
 
 
 func load_save_0_0_3(save_dictionary: Dictionary):

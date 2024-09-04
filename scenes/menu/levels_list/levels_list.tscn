@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/actors/objects/cloud_platform/texture.png" type="Texture" id=2]
@@ -49,6 +49,8 @@
 [ext_resource path="res://scenes/menu/levels_list/list_scripts/folder_setting_buttons.gd" type="Script" id=47]
 [ext_resource path="res://scenes/menu/levels_list/list_scripts/thumbnail_cache.gd" type="Script" id=48]
 [ext_resource path="res://scenes/menu/levels_list/drag_cursor.gd" type="Script" id=49]
+[ext_resource path="res://scenes/menu/levels_list/old_levels.gd" type="Script" id=50]
+[ext_resource path="res://scenes/menu/level_portal/smooth_scroll.gd" type="Script" id=51]
 
 [sub_resource type="CanvasItemMaterial" id=22]
 blend_mode = 1
@@ -106,6 +108,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("MouseBlocker:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "transition"
@@ -145,6 +159,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MouseBlocker:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.01, 0.19, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 3,
+"values": [ false, true, true, false ]
 }
 
 [sub_resource type="DynamicFont" id=12]
@@ -687,12 +713,62 @@ script = ExtResource( 9 )
 script = ExtResource( 26 )
 default_focus_path = NodePath("../../../Buttons/Back")
 
+[node name="OldLevels" type="VBoxContainer" parent="Panel/Subscreens/LevelList"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 8
+alignment = 1
+script = ExtResource( 50 )
+saver_path = NodePath("../ScrollContainer/MarginContainer/ListHandler/Saver")
+
+[node name="Label" type="Label" parent="Panel/Subscreens/LevelList/OldLevels"]
+margin_top = 116.0
+margin_right = 672.0
+margin_bottom = 140.0
+size_flags_vertical = 1
+text = "Converting old levels..."
+align = 1
+
+[node name="Label2" type="Label" parent="Panel/Subscreens/LevelList/OldLevels"]
+margin_top = 148.0
+margin_right = 672.0
+margin_bottom = 172.0
+size_flags_vertical = 1
+text = "Don't close the game!"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Subscreens/LevelList/OldLevels"]
+margin_top = 180.0
+margin_right = 672.0
+margin_bottom = 196.0
+
+[node name="Padding" type="Control" parent="Panel/Subscreens/LevelList/OldLevels/HBoxContainer"]
+margin_right = 128.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 128, 0 )
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel/Subscreens/LevelList/OldLevels/HBoxContainer"]
+margin_left = 132.0
+margin_right = 540.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="Padding2" type="Control" parent="Panel/Subscreens/LevelList/OldLevels/HBoxContainer"]
+margin_left = 544.0
+margin_right = 672.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 128, 0 )
+
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/Subscreens/LevelList"]
 margin_right = 24.0
 margin_bottom = 313.0
 size_flags_vertical = 3
 follow_focus = true
 scroll_horizontal_enabled = false
+script = ExtResource( 51 )
+lerp_speed = 18.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/Subscreens/LevelList/ScrollContainer"]
 margin_right = 24.0
@@ -704,6 +780,7 @@ level_grid_path = NodePath("../LevelGrid")
 level_list_path = NodePath("../../..")
 level_panel_path = NodePath("../../../../LevelInfo/LevelPanel")
 focus_path = NodePath("../../../Focus")
+old_levels_path = NodePath("../../../OldLevels")
 
 [node name="Loader" type="Node" parent="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler"]
 script = ExtResource( 20 )
@@ -731,6 +808,11 @@ size_flags_vertical = 3
 custom_constants/vseparation = 16
 custom_constants/hseparation = 13
 columns = 6
+
+[node name="MouseBlocker" type="Control" parent="Panel/Subscreens/LevelList"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Subscreens/LevelList"]
 anims/RESET = SubResource( 9 )

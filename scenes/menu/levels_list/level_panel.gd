@@ -43,9 +43,14 @@ onready var percentage_label := $InfoTab/Info/Completion/Percentage
 onready var time_scores_container: VBoxContainer = $ScoresTab/Panel/ScrollContainer/MarginContainer/VBoxContainer
 
 func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder: String):
+	yield(get_parent(), "screen_opened")
+	
 	level_info = _level_info
 	level_id = _level_id
 	working_folder = _working_folder
+	
+	# load the real level data now
+	level_info.load_in()
 	
 	title.text = level_info.level_name
 	title_shadow.text = title.text

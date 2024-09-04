@@ -359,6 +359,7 @@ func _process(delta : float) -> void:
 		var file_path: String = saved_levels_util.get_level_file_path(Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder)
 		
 		Singleton.CurrentLevelData.level_info = LevelInfo.new(level_code)
+		Singleton.CurrentLevelData.level_info.load_in()
 		saved_levels_util.save_level_code_file(level_code, file_path)
 		
 		saved_levels_util.autosave_level_to_disk(level_code, "user://autosaves/" + "main_" + str(level_info.level_name) + ".autosave")

@@ -36,17 +36,18 @@ func create_folder(path: String):
 
 
 func change_folder(path: String, do_transition: bool = true, is_return: bool = false, auto_save: bool = true):
-	var loader: Node = list_handler.loader
-	if loader.level_load_thread.is_alive(): return
-	
 	if do_transition:
 		list_handler.level_list.transition("LevelList")	
 		# waits for the transition to finish so as to keep everything looking smooth :3
 		yield(list_handler.level_list, "screen_change")
 	
 	
+	var loader: Node = list_handler.loader
+	if loader.level_load_thread.is_active():
+		loader.halt_thread = true
+		loader.level_load_thread.wait_to_finish()
+
 	var old_folder: String = list_handler.working_folder
-	
 	if auto_save:
 		list_handler.sorting.save_to_json(old_folder)
 	list_handler.working_folder = path

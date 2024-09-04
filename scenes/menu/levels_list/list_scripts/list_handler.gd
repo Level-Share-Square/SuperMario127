@@ -3,7 +3,14 @@ extends Node
 ## this entire line of logic gets
 ## pretty complicated!! to make it more manageable,
 ## i split it up into several scripts in separate nodes
-## this way, its easy to find what functionality happens where
+## this way, its easier to find what functionality happens where
+
+## oh!! and a message for any of the solar team, if they happen
+## to start looking at this code to try and adapt it; DON'T
+## this is my first time making anything like this, so it turned
+## out less clean and concise than i was hoping. if i had to make
+## this kind of thing again for another project, i'd probably
+## rethink how to structure it since it feels a bit tangled right now
 
 ### COMMON NODES
 export var level_grid_path: NodePath
@@ -17,6 +24,9 @@ onready var level_panel := get_node(level_panel_path)
 
 export var focus_path: NodePath
 onready var focus := get_node(focus_path)
+
+export var old_levels_path: NodePath
+onready var old_levels := get_node(old_levels_path)
 
 ### sub-scripts
 onready var loader: Node  = $Loader
@@ -38,17 +48,23 @@ var back_buttons: int = 0
 var folder_buttons: int = 0
 
 func _ready():
+	yield(get_owner(), "screen_opened")
+	
 	level_grid.connect("child_entered_tree", self, "auto_change_focus")
 	
 	folders.create_folder(working_folder)
+	if old_levels.should_convert_levels():
+		old_levels.start(BASE_FOLDER)
+		yield(old_levels, "conversion_complete")
+	
 	folders.load_folder(working_folder)
 
 func clear_grid():
 	for child in level_grid.get_children():
 		child.queue_free()
 
-# the auto is there so i can connect its signal without it actually picking
-# the most recently added node
+# the auto is there so i can connect a signal which provides the most recent node as an argument
+# without it actually picking the most recently added node
 func auto_change_focus(focus_node = null): change_focus()
 func change_focus(focus_node = null):
 	if !is_instance_valid(focus_node): 

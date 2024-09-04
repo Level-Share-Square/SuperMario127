@@ -120,7 +120,7 @@ static func convert_048_to_049(result):
 					if object.properties[6] == "default_teleporter" || object.properties[6] == "none":
 						object.properties[6] = new_tag
 					object.properties[7] = false
-					print(object)
+					#print(object)
 				new_objects.append(object)
 			area_result.objects = new_objects #==========================================
 	return result

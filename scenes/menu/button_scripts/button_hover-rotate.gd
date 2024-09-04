@@ -18,7 +18,7 @@ func _ready():
 var last_rot: float
 func _process(delta):
 	## fixes jittering from ui force-repositioning control nodes
-	if abs(last_rot - rect_rotation) > rotation_amount/2:
+	if abs(last_rot - rect_rotation) > rotation_amount/4:
 		rect_rotation = last_rot
 	
 	if is_hovered() or focused:
