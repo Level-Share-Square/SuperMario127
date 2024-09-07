@@ -1,7 +1,7 @@
 extends Control
 
-var path_node = preload("res://scenes/editor/property_type_scenes/Path/PathNode.tscn")
-var line_node = preload("res://scenes/editor/property_type_scenes/Path/Line.tscn")
+var path_node = preload("res://scenes/editor/property_type_scenes/Path/base/PathNode.tscn")
+var line_node = preload("res://scenes/editor/property_type_scenes/Path/base/Line.tscn")
 
 export var close_button : NodePath
 onready var object_property_button = $Control

@@ -15,7 +15,7 @@ func _ready():
 func pressed():
 	click_sound.play()
 	update_value()
-	path_editor_scene = ResourceLoader.load("res://scenes/editor/property_type_scenes/Path/PathToolController.tscn").instance()
+	path_editor_scene = ResourceLoader.load("res://scenes/editor/property_type_scenes/Path/base/PathToolController.tscn").instance()
 	path_editor_scene.editing_object = get_parent().object
 	get_tree().get_current_scene().get_node("UI").add_child(path_editor_scene)
 	path_editor_scene.initialize(self)
