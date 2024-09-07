@@ -2,7 +2,7 @@
 
 [ext_resource path="res://classes/message_appear.wav" type="AudioStream" id=1]
 [ext_resource path="res://classes/message_disappear.wav" type="AudioStream" id=2]
-[ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/dialogue_trigger/sign.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/sign/exclamation_mark.png" type="Texture" id=4]
 [ext_resource path="res://classes/dialogue.gd" type="Script" id=5]
 
@@ -33,7 +33,6 @@ script = ExtResource( 5 )
 position = Vector2( 0, -16 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0, 0.273438, 1, 0.501961 )
 z_index = -9
 texture = ExtResource( 3 )
 
@@ -51,15 +50,15 @@ anims/bobbin = SubResource( 3 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Indicator" type="Node2D" parent="."]
-position = Vector2( -65.625, -90 )
+position = Vector2( -65.625, -74 )
 z_index = 99
 z_as_relative = false
 
 [node name="ExclamationMark" type="TextureRect" parent="Indicator"]
 margin_left = 53.0
-margin_top = 23.5736
+margin_top = 15.5736
 margin_right = 203.0
-margin_bottom = 173.574
+margin_bottom = 165.574
 rect_scale = Vector2( 0.2, 0.2 )
 mouse_filter = 2
 texture = ExtResource( 4 )

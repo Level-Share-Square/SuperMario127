@@ -1,4 +1,4 @@
-[gd_scene load_steps=1466 format=2]
+[gd_scene load_steps=1469 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1432,6 +1432,9 @@
 [ext_resource path="res://scenes/actors/objects/toad/preview.png" type="Texture" id=1430]
 [ext_resource path="res://scenes/actors/objects/toad/icon.png" type="Texture" id=1431]
 [ext_resource path="res://scenes/actors/objects/dialogue_trigger/icon.png" type="Texture" id=1432]
+[ext_resource path="res://scenes/actors/objects/zoom_trigger/zoom_trigger.png" type="Texture" id=1433]
+[ext_resource path="res://scenes/actors/objects/zoom_trigger/preview.png" type="Texture" id=1434]
+[ext_resource path="res://scenes/actors/objects/dialogue_trigger/sign.png" type="Texture" id=1435]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2467,6 +2470,8 @@ preview = ExtResource( 830 )
 script = ExtResource( 24 )
 object_id = 111
 is_object = true
+change_to = "AreaTransition"
+items_in_sequence = 3
 icon = ExtResource( 974 )
 preview = ExtResource( 836 )
 
@@ -2474,8 +2479,11 @@ preview = ExtResource( 836 )
 script = ExtResource( 24 )
 object_id = 126
 is_object = true
-icon = ExtResource( 974 )
-preview = ExtResource( 836 )
+change_to = "DeathPlane"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 1434 )
+preview = ExtResource( 1433 )
 
 [node name="Toad" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
@@ -2493,7 +2501,7 @@ object_center = Vector2( 16, 12 )
 tile_mode_offset = Vector2( 0, -4 )
 item_name = "DialogueTrigger"
 icon = ExtResource( 1432 )
-preview = ExtResource( 1432 )
+preview = ExtResource( 1435 )
 
 [node name="TeleportGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
@@ -2557,6 +2565,9 @@ preview = ExtResource( 847 )
 script = ExtResource( 24 )
 object_id = 112
 is_object = true
+change_to = "ZoomTrigger"
+items_in_sequence = 3
+index_in_sequence = 1
 icon = ExtResource( 973 )
 preview = ExtResource( 972 )
 
@@ -2571,6 +2582,8 @@ object_id = 80
 is_object = true
 object_center = Vector2( 16, 16 )
 item_name = "P Switch"
+change_to = "PSwitchBlock"
+items_in_sequence = 2
 icon = ExtResource( 340 )
 preview = ExtResource( 339 )
 
@@ -2580,6 +2593,9 @@ object_id = 79
 is_object = true
 object_center = Vector2( 16, 16 )
 item_name = "P Switch Block"
+change_to = "PSwitch"
+items_in_sequence = 2
+index_in_sequence = 1
 icon = ExtResource( 337 )
 preview = ExtResource( 336 )
 
@@ -2600,6 +2616,8 @@ item_name = "On/Off Switch"
 palette_icons = [ ExtResource( 626 ), ExtResource( 614 ), ExtResource( 630 ), ExtResource( 629 ), ExtResource( 628 ), ExtResource( 627 ), ExtResource( 642 ) ]
 palette_previews = [ ExtResource( 135 ), ExtResource( 617 ), ExtResource( 618 ), ExtResource( 620 ), ExtResource( 615 ), ExtResource( 619 ), ExtResource( 641 ) ]
 object_size = Vector2( 32, 32 )
+change_to = "SwitchBlock"
+items_in_sequence = 5
 icon = ExtResource( 626 )
 preview = ExtResource( 135 )
 
@@ -2612,6 +2630,9 @@ item_name = "Switch Block"
 palette_icons = [ ExtResource( 637 ), ExtResource( 638 ), ExtResource( 633 ), ExtResource( 639 ), ExtResource( 636 ), ExtResource( 635 ), ExtResource( 640 ) ]
 palette_previews = [ ExtResource( 621 ), ExtResource( 622 ), ExtResource( 624 ), ExtResource( 616 ), ExtResource( 623 ), ExtResource( 625 ), ExtResource( 634 ) ]
 object_size = Vector2( 32, 32 )
+change_to = "OnOffFloorSwitch"
+items_in_sequence = 5
+index_in_sequence = 1
 icon = ExtResource( 637 )
 preview = ExtResource( 621 )
 
@@ -2624,6 +2645,9 @@ tile_mode_offset = Vector2( 0, -2 )
 item_name = "On/Off Floor Switch"
 palette_icons = [ ExtResource( 632 ), ExtResource( 670 ), ExtResource( 672 ), ExtResource( 671 ), ExtResource( 669 ), ExtResource( 668 ), ExtResource( 649 ) ]
 palette_previews = [ ExtResource( 631 ), ExtResource( 682 ), ExtResource( 678 ), ExtResource( 680 ), ExtResource( 679 ), ExtResource( 677 ), ExtResource( 681 ) ]
+change_to = "OnOffTouchLift"
+items_in_sequence = 5
+index_in_sequence = 2
 icon = ExtResource( 632 )
 preview = ExtResource( 631 )
 
@@ -2636,6 +2660,9 @@ tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
 palette_icons = [ ExtResource( 674 ), ExtResource( 648 ), ExtResource( 647 ), ExtResource( 645 ), ExtResource( 644 ), ExtResource( 643 ), ExtResource( 675 ) ]
 palette_previews = [ ExtResource( 676 ), ExtResource( 650 ), ExtResource( 652 ), ExtResource( 653 ), ExtResource( 651 ), ExtResource( 654 ), ExtResource( 673 ) ]
+change_to = "OnOffPlatformWheel"
+items_in_sequence = 5
+index_in_sequence = 3
 icon = ExtResource( 674 )
 preview = ExtResource( 676 )
 
@@ -2648,6 +2675,9 @@ tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
 palette_icons = [ ExtResource( 646 ), ExtResource( 662 ), ExtResource( 663 ), ExtResource( 661 ), ExtResource( 664 ), ExtResource( 666 ), ExtResource( 665 ) ]
 palette_previews = [ ExtResource( 667 ), ExtResource( 660 ), ExtResource( 659 ), ExtResource( 655 ), ExtResource( 656 ), ExtResource( 657 ), ExtResource( 658 ) ]
+change_to = "OnOffSwitch"
+items_in_sequence = 5
+index_in_sequence = 4
 icon = ExtResource( 646 )
 preview = ExtResource( 667 )
 
@@ -2729,7 +2759,7 @@ object_center = Vector2( 8, 0 )
 tile_mode_offset = Vector2( 0, -8 )
 tile_mode_step = 16
 change_to = "BigBottle"
-items_in_sequence = 2
+items_in_sequence = 3
 icon = ExtResource( 103 )
 preview = ExtResource( 102 )
 
@@ -2740,8 +2770,8 @@ is_object = true
 object_center = Vector2( 8, 0 )
 tile_mode_offset = Vector2( 0, -8 )
 tile_mode_step = 16
-change_to = "SmallBottle"
-items_in_sequence = 2
+change_to = "WaterBalloon"
+items_in_sequence = 3
 index_in_sequence = 1
 icon = ExtResource( 104 )
 preview = ExtResource( 105 )
@@ -2753,6 +2783,9 @@ is_object = true
 object_center = Vector2( 8, 0 )
 tile_mode_offset = Vector2( 0, -8 )
 tile_mode_step = 16
+change_to = "SmallBottle"
+items_in_sequence = 3
+index_in_sequence = 2
 icon = ExtResource( 685 )
 preview = ExtResource( 684 )
 
@@ -2858,6 +2891,9 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
+change_to = "TouchLift"
+items_in_sequence = 2
+index_in_sequence = 1
 icon = ExtResource( 156 )
 preview = ExtResource( 157 )
 
@@ -2868,6 +2904,8 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
+change_to = "PlatformWheel"
+items_in_sequence = 2
 icon = ExtResource( 153 )
 preview = ExtResource( 154 )
 
@@ -2963,6 +3001,8 @@ tile_mode_offset = Vector2( 64, 4 )
 tile_mode_step = 64
 palette_icons = [ ExtResource( 1189 ), ExtResource( 1191 ), ExtResource( 1201 ), ExtResource( 1192 ), ExtResource( 1193 ), ExtResource( 1194 ) ]
 palette_previews = [ ExtResource( 1200 ), ExtResource( 1195 ), ExtResource( 1196 ), ExtResource( 1197 ), ExtResource( 1198 ), ExtResource( 1199 ) ]
+change_to = "BuoyantBouncer"
+items_in_sequence = 2
 icon = ExtResource( 1189 )
 preview = ExtResource( 1188 )
 
@@ -2975,6 +3015,9 @@ tile_mode_offset = Vector2( 64, 4 )
 tile_mode_step = 64
 palette_icons = [ ExtResource( 1209 ), ExtResource( 1207 ), ExtResource( 1214 ), ExtResource( 1211 ), ExtResource( 1206 ), ExtResource( 1208 ) ]
 palette_previews = [ ExtResource( 1213 ), ExtResource( 1216 ), ExtResource( 1205 ), ExtResource( 1210 ), ExtResource( 1212 ), ExtResource( 1215 ) ]
+change_to = "BuoyantPlatform"
+items_in_sequence = 2
+index_in_sequence = 1
 icon = ExtResource( 1209 )
 preview = ExtResource( 1213 )
 
@@ -3991,6 +4034,7 @@ palette_icons = [ ExtResource( 1069 ), ExtResource( 1068 ), ExtResource( 1025 ),
 palette_previews = [ ExtResource( 1069 ), ExtResource( 1068 ), ExtResource( 1025 ), ExtResource( 1029 ), ExtResource( 1028 ), ExtResource( 1027 ) ]
 change_to = "VineStem"
 items_in_sequence = 6
+index_in_sequence = 1
 icon = ExtResource( 1069 )
 preview = ExtResource( 1069 )
 
@@ -4004,6 +4048,7 @@ palette_icons = [ ExtResource( 1072 ), ExtResource( 1071 ), ExtResource( 1033 ),
 palette_previews = [ ExtResource( 1070 ), ExtResource( 1073 ), ExtResource( 1036 ), ExtResource( 1037 ), ExtResource( 1038 ), ExtResource( 1039 ) ]
 change_to = "VineThorns"
 items_in_sequence = 6
+index_in_sequence = 2
 icon = ExtResource( 1072 )
 preview = ExtResource( 1070 )
 
@@ -4017,6 +4062,7 @@ palette_icons = [ ExtResource( 1076 ), ExtResource( 1075 ), ExtResource( 1060 ),
 palette_previews = [ ExtResource( 1063 ), ExtResource( 1074 ), ExtResource( 1043 ), ExtResource( 1044 ), ExtResource( 1040 ), ExtResource( 1041 ) ]
 change_to = "VineBend"
 items_in_sequence = 6
+index_in_sequence = 3
 icon = ExtResource( 1076 )
 preview = ExtResource( 1074 )
 
@@ -4031,6 +4077,7 @@ palette_icons = [ ExtResource( 1077 ), ExtResource( 1078 ), ExtResource( 1047 ),
 palette_previews = [ ExtResource( 1080 ), ExtResource( 1079 ), ExtResource( 1051 ), ExtResource( 1054 ), ExtResource( 1053 ), ExtResource( 1052 ) ]
 change_to = "VineStemEnd"
 items_in_sequence = 6
+index_in_sequence = 4
 icon = ExtResource( 1077 )
 preview = ExtResource( 1080 )
 
@@ -4044,6 +4091,7 @@ palette_icons = [ ExtResource( 1081 ), ExtResource( 1058 ), ExtResource( 1055 ),
 palette_previews = [ ExtResource( 1081 ), ExtResource( 1058 ), ExtResource( 1055 ), ExtResource( 1056 ), ExtResource( 1059 ), ExtResource( 1057 ) ]
 change_to = "VineFlower"
 items_in_sequence = 6
+index_in_sequence = 5
 icon = ExtResource( 1081 )
 preview = ExtResource( 1081 )
 
