@@ -14,6 +14,8 @@ var property_scenes = {
 	
 }
 
+signal property_scene_gotten
+
 var music_nodes = [
 	
 ]
@@ -29,11 +31,12 @@ func _init():
 
 
 func get_property_scene(property: String, menu: String):
-	if not property_scenes.has(property):
+	var key : Array = [property, menu]
+	if not property_scenes.has(key):
 		var path: String = "res://scenes/editor/property_type_scenes/" + property + "/" + menu + "/" + menu + ".tscn"
-		property_scenes[property] = load(path)
+		property_scenes[key] = load(path)
 	
-	return property_scenes[property]
+	return property_scenes[key]
 
 
 func get_music_node(index: int):

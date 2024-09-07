@@ -754,6 +754,8 @@ _global_script_class_icons={
 
 config/name="Super Mario 127"
 run/main_scene="res://scenes/menu/launcher/launcher.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="dev"
 boot_splash/show_image=false
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://assets/misc/icon.png"
