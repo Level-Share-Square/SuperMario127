@@ -42,13 +42,15 @@ func _ready():
 		property_type = Singleton.MiscCache.get_property_scene(type_scene_name, menu[0]).instance()
 		print(property_type)
 		add_child(property_type)
-		property_type.set_value(value)
 		
 		if len(menu) > 1:
 			print(len(menu))
 			for i in len(menu):
 				if i != 0:
 					property_type.parameters[i-1] = menu[i]
+		
+		property_type.set_value(value)
+		
 
 func get_value():
 	return property_type.get_value()
