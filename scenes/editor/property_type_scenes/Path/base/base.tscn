@@ -1,13 +1,13 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://scenes/editor/property_type_scenes/Path/Path.gd" type="Script" id=2]
-[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=3]
-[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=1]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scenes/editor/property_type_scenes/Path/base/base.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
-font_data = ExtResource( 1 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.760784, 0.760784, 0.760784, 1 )
@@ -29,7 +29,7 @@ corner_radius_bottom_left = 24
 margin_right = 320.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 320, 120 )
-script = ExtResource( 2 )
+script = ExtResource( 4 )
 button = NodePath("Button")
 
 [node name="Button" type="Button" parent="."]
@@ -48,9 +48,9 @@ custom_styles/normal = SubResource( 3 )
 text = "True"
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 1 )
 volume_db = -10.0
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
+stream = ExtResource( 2 )
 volume_db = -10.0

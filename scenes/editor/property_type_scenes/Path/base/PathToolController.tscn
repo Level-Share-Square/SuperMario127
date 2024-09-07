@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/editor/assets/tick_box_hover.png" type="Texture" id=3]
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=5]
-[ext_resource path="res://scenes/editor/property_type_scenes/Path/PathTool.gd" type="Script" id=6]
+[ext_resource path="res://scenes/editor/property_type_scenes/Path/base/PathTool.gd" type="Script" id=6]
 [ext_resource path="res://scenes/actors/objects/touch_lift/circle.png" type="Texture" id=7]
 [ext_resource path="res://scenes/editor/assets/tick_box.png" type="Texture" id=8]
 

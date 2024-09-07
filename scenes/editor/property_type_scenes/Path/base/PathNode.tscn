@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/editor/property_type_scenes/Path/PathNode.gd" type="Script" id=1]
-[ext_resource path="res://scenes/editor/property_type_scenes/Path/circle.png" type="Texture" id=3]
+[ext_resource path="res://scenes/editor/property_type_scenes/Path/base/PathNode.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/property_type_scenes/Path/base/circle.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )

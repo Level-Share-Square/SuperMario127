@@ -28,9 +28,9 @@ func _init():
 	music_nodes.resize(music_ids.size())
 
 
-func get_property_scene(property: String):
+func get_property_scene(property: String, menu: String):
 	if not property_scenes.has(property):
-		var path: String = "res://scenes/editor/property_type_scenes/" + property + "/" + property + ".tscn"
+		var path: String = "res://scenes/editor/property_type_scenes/" + property + "/" + menu + "/" + menu + ".tscn"
 		property_scenes[property] = load(path)
 	
 	return property_scenes[property]
