@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/circle.png-9a3f584ec14e885c8615acd40466f64f.stex"
+path="res://.import/dash1.png-27ad76f2a75acf8a1a67174199f59314.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/editor/property_type_scenes/Path/circle.png"
-dest_files=[ "res://.import/circle.png-9a3f584ec14e885c8615acd40466f64f.stex" ]
+source_file="res://scenes/editor/property_type_scenes/Path/base/dash1.png"
+dest_files=[ "res://.import/dash1.png-27ad76f2a75acf8a1a67174199f59314.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=1
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false

@@ -119,6 +119,7 @@ offset = Vector2( 0, 1 )
 
 [node name="MushroomTopStem" type="Sprite" parent="."]
 position = Vector2( 0, 5 )
+z_index = -8
 texture = ExtResource( 6 )
 offset = Vector2( 0, 5.5 )
 

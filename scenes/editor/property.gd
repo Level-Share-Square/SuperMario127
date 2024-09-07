@@ -16,6 +16,7 @@ func _ready():
 		label.text = key.capitalize()
 	
 	var value = object[key] if key != "visible" else object.modulate.a == 1
+	var menu = object.property_value_menus[object.get_property_index(key)]
 	var type = typeof(value)
 	var type_scene_name := "None"
 	print(value)
@@ -38,10 +39,16 @@ func _ready():
 	
 	
 	if type_scene_name != "None":
-		property_type = Singleton.MiscCache.get_property_scene(type_scene_name).instance()
+		property_type = Singleton.MiscCache.get_property_scene(type_scene_name, menu[0]).instance()
 		print(property_type)
 		add_child(property_type)
 		property_type.set_value(value)
+		
+		if len(menu) > 1:
+			print(len(menu))
+			for i in len(menu):
+				if i != 0:
+					property_type.parameters[i-1] = menu[i]
 
 func get_value():
 	return property_type.get_value()

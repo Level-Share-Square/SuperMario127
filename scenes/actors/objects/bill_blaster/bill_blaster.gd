@@ -10,13 +10,14 @@ var wait_time = 3.0
 var spawn_timer = 3.0
 var chase := false
 var speed := 0.75
+var offset := 0.0
 var color := Color(0, 1, 0)
 var invincible := false
 var force_direction := 0
 
 func _set_properties():
-	savable_properties = ["chase", "speed", "color", "wait_time", "invincible", "force_direction"]
-	editable_properties = ["chase", "speed", "color", "wait_time", "invincible", "force_direction"]
+	savable_properties = ["chase", "speed", "color", "wait_time", "invincible", "force_direction", "offset"]
+	editable_properties = ["chase", "speed", "offset", "color", "wait_time", "invincible", "force_direction"]
 	
 func _set_property_values():
 	set_property("chase", chase, true)
@@ -24,8 +25,9 @@ func _set_property_values():
 	set_property("color", color, true)
 	set_property("wait_time", wait_time, true)
 	set_property("invincible", invincible, true)
-	set_property("force_direction", force_direction, true)
-	spawn_timer = wait_time
+	set_property("force_direction", force_direction, true, null, ["option", 3, -1, ['Left', 'None', 'Right']])
+	set_property("offset", offset, true)
+	spawn_timer = wait_time+offset
 
 func _ready():
 	collision_shape.disabled = !enabled

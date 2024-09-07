@@ -21,6 +21,8 @@ var is_preview : bool = false
 var base_savable_properties : PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible"]
 var savable_properties : PoolStringArray = []
 
+var property_value_menus : Array = [["base",], ["base",], ["base",], ["base",], ["base",]]
+
 var base_editable_properties : PoolStringArray = ["enabled", "visible", "rotation_degrees", "scale", "position"]
 var editable_properties : PoolStringArray = []
 
@@ -110,7 +112,7 @@ func get_property_index(key) -> int:
 		index += 1
 	return index
 
-func set_property(key, value, change_level_object = true, alias = null):
+func set_property(key, value, change_level_object = true, alias = null, menu = ["base"]):
 	if typeof(self[key]) != typeof(value):
 		assert("Object tried to set property '" + key + "', but the provided type does not match.")
 		return
@@ -125,7 +127,11 @@ func set_property(key, value, change_level_object = true, alias = null):
 			level_object_ref.properties.append(value)
 		else:
 			level_object_ref.properties[index] = value
-			
+		
+		if len(property_value_menus) < len(base_savable_properties+savable_properties):
+			property_value_menus.append(menu)
+			print(property_value_menus)
+		
 		if key == "visible":
 			if mode == 1:
 				visible = true
