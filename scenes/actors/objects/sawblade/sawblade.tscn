@@ -67,7 +67,6 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Path2D/PathFollow2D/Saw"]
 frames = SubResource( 5 )
 animation = "4"
-frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="Path2D/PathFollow2D/Saw"]
@@ -84,4 +83,5 @@ volume_db = 10.0
 [node name="EditorSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
 animation = "4"
+frame = 1
 playing = true
