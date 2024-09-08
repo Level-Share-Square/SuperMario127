@@ -25,7 +25,7 @@ func _set_property_values():
 	set_property("color", color, true)
 	set_property("wait_time", wait_time, true)
 	set_property("invincible", invincible, true)
-	set_property("force_direction", force_direction, true, null, ["option", 3, -1, ['Left', 'None', 'Right']])
+	set_property("force_direction", force_direction, true, null, ["option", 3, -1, ['Face Player', 'Right', 'Left']])
 	set_property("offset", offset, true)
 	spawn_timer = wait_time+offset
 

@@ -15,3 +15,4 @@ func get_value() -> float:
 
 func update_value():
 	get_node("../").update_value(get_value())
+	
