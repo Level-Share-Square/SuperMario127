@@ -60,6 +60,14 @@ static func encode_value(value):
 		
 		final_string = final_string.trim_suffix(":")
 		return final_string
+	elif type == TYPE_VECTOR2_ARRAY:
+		var final_string := "VA"
+		for vector in value:
+			final_string += str(stepify(vector.x,0.1)) + "x" + str(stepify(vector.y, 0.1))
+			final_string += ":"
+		
+		final_string = final_string.trim_suffix(":")
+		return final_string
 	else:
 		return str(value)
 
@@ -106,6 +114,15 @@ static func decode_value(value: String):
 			string_array.append(str(text).percent_decode())
 		
 		return string_array
+	elif value.begins_with("VA"):
+		value = value.trim_prefix("VA")
+		
+		var vector2_array := PoolVector2Array()
+		var vectors = value.split(":")
+		for vector in vectors:
+			var array_value = vector.split("x")
+			var vector2 = Vector2(array_value[0], array_value[1])
+			vector2_array.append(vector2)
 	else:
 		return value
 		
