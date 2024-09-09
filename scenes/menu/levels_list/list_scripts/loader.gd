@@ -16,7 +16,6 @@ func start_level_loading(working_folder: String):
 	if level_load_thread.is_active():
 		level_load_thread.wait_to_finish()
 	
-	halt_thread = false
 	var err = level_load_thread.start(self, "load_all_levels", working_folder)
 	if err != OK:
 		push_error("Error starting level loading thread.")
@@ -26,8 +25,6 @@ func _exit_tree():
 	if level_load_thread.is_active():
 		level_load_thread.wait_to_finish()
 
-
-var halt_thread: bool
 var last_level_card: Node
 func load_all_levels(working_folder: String):
 	var sorting: Node = list_handler.sorting
@@ -35,18 +32,16 @@ func load_all_levels(working_folder: String):
 	
 	print("Loading directory " + working_folder + "...")
 	for folder in sorting.sort.folders:
-		if halt_thread: break
 		add_folder_button(working_folder + "/" + folder, folder)
 	for level in sorting.sort.levels:
-		if halt_thread: break
 		add_level_card(working_folder + "/" + level + ".127level", level, working_folder)
 	
-	if not halt_thread:
-		yield(last_level_card, "ready")
-		list_handler.thumbnail_cache.go_through_queue()
+	if is_instance_valid(last_level_card):
+		last_level_card.connect("ready", list_handler.thumbnail_cache, "go_through_queue", [], CONNECT_ONESHOT)
 		
 		print("Done loading levels in directory.")
-		emit_signal("loading_finished")
+	
+	emit_signal("loading_finished")
 
 func add_folder_button(file_path: String, folder_name: String, move_to_front: bool = false, is_return: bool = false):
 	var level_grid: GridContainer = list_handler.level_grid
@@ -85,11 +80,6 @@ func add_level_card(file_path: String, level_id: String, working_folder: String,
 	if saved_levels_util.file_exists(save_path):
 		level_info.load_save_from_dictionary(saved_levels_util.load_level_save_file(save_path))
 		styling.is_complete = level_info.is_fully_completed()
-
-	# add node to tree
-	if halt_thread:
-		level_card.queue_free()
-		return
 
 	level_card.get_node("%Name").text = level_info.level_name
 

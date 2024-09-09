@@ -114,5 +114,5 @@ func _process(_delta):
 		viewport_container1.rect_size.x = 768
 		viewport2.size.x = 0
 		viewport_container2.rect_size.x = 0
-		if Input.is_action_just_pressed("(disabled)paste_level"):
-			add_player()
+		#if Input.is_action_just_pressed("(disabled)paste_level"):
+		#	add_player()

@@ -44,7 +44,10 @@ func update_text(number: float):
 		emit_signal("text_changed")
 
 func button_down():
-	count = countdown_time
+	if Input.is_action_pressed("skip_count"):
+		count = 0.01
+	else:
+		count = countdown_time
 
 func button_up():
 	count = -1

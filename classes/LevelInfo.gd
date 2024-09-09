@@ -7,7 +7,7 @@ const OBJECT_ID_SHINE = 2
 const OBJECT_ID_STAR_COIN = 52
 
 const VERSION : String = "0.0.3"
-const TEMP_DATA_SUFFIX: String = "~0*0~0*0~0*0~0*0]"
+const INFO_DATA_SUFFIX: String = "~0*0~0*0~0*0~0*0]"
 
 # this class stores all the info and savedata relating to a level that can be played from the level list 
 
@@ -41,15 +41,28 @@ var coin_score : int = 0
 var time_scores : Dictionary = {} # time_scores should probably be stored as the sum of delta while playing, keys are same as collected_shines
 var activated_fludds : Array = [false, false, false]
 
+
+## this function makes it so we can get info about a level for
+## its card without loading everything in the level and wasting
+## processing power :3
+func get_info_level_code(level_code: String):
+	var first_bracket_index: int = level_code.find("[")
+	
+	var level_code_start: String = level_code.left(first_bracket_index)
+	level_code.erase(0, first_bracket_index)
+	
+	var info_level_code = level_code_start + level_code.get_slice("~", 0)
+	info_level_code += INFO_DATA_SUFFIX
+	
+	return info_level_code
+
 func _init(passed_level_code : String = "") -> void:
 	if passed_level_code == "":
 		return
 	
-	# loading only a few parts at first to lower loading times
-	var temp_level_code = passed_level_code.get_slice("~", 0)
-	temp_level_code += TEMP_DATA_SUFFIX
+	var info_level_code: String = get_info_level_code(passed_level_code)
 	
-	level_data = LevelData.new(temp_level_code)
+	level_data = LevelData.new(info_level_code)
 	level_name = level_data.name
 	level_author = level_data.author
 	level_description = level_data.description
@@ -57,6 +70,7 @@ func _init(passed_level_code : String = "") -> void:
 	
 	# save the real level code to be loaded later
 	level_code = passed_level_code
+
 
 func load_in() -> void:
 	if is_fully_loaded: return
@@ -287,7 +301,7 @@ func load_save_0_0_2(save_dictionary : Dictionary):
 	spawn_area = save_dictionary["spawn_area"]
 	shine_details = save_dictionary["shine_details"] 
 	star_coin_details = save_dictionary["star_coin_details"]
-	if save_dictionary.has("activated_fludds"):
+	if save_dictionary.has("activated_fludds") and save_dictionary["activated_fludds"] != null:
 		activated_fludds = save_dictionary["activated_fludds"]
 
 
