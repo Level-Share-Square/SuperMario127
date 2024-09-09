@@ -19,7 +19,7 @@ func _ready():
 func _physics_process(delta):
 	if count < 0: return
 	
-	count -= delta * 2 # made it faster cuz it feels better
+	count -= delta * 3 # made it faster cuz it feels better
 	
 	update_text(count)
 	if count <= 0:
