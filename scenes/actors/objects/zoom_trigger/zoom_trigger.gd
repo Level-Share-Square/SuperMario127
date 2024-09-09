@@ -45,6 +45,6 @@ func _ready():
 		
 func _body_entered(body):
 	if enabled and body.name.begins_with("Character") and !is_equal_approx(body.camera.zoom.x, target_zoom) and !body.camera.zoom_tween.is_active():
-		print("set tween")
+		#print("set tween")
 		body.camera.set_zoom_tween(Vector2(target_zoom, target_zoom), zoom_time, true)
 

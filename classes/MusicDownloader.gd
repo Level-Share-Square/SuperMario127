@@ -1,15 +1,18 @@
+class_name MusicDownloader
 extends Reference
 
-class_name Downloader
+
+const TEMP_SUFFIX: String = ".temp"
+
 
 signal request_completed
 signal request_progress(percent)
 onready var thread
 
 
-func download(url : String, destination : String ="user://", filename : String = "downloaded_file"):
+func download(url : String, file_path : String = "user://downloaded_file"):
 	thread = Thread.new()
-	thread.start(self, "req", [url, destination, filename])
+	thread.start(self, "req", [url, file_path])
 	
 
 func req(arguments):
@@ -17,8 +20,7 @@ func req(arguments):
 	var percent_loaded = 0
 
 	var url = arguments[0]
-	var destination = arguments[1]
-	var filename = arguments[2]
+	var file_path = arguments[1]
 	
 	var http = HTTPClient.new()
 	var file = File.new()
@@ -82,9 +84,9 @@ func req(arguments):
 
 	if http.get_response_code() == 200: # If the request was successful
 		
-		file.open(destination + filename, File.WRITE)
+		file.open(file_path + TEMP_SUFFIX, File.WRITE)
 		file.close()
-		file.open(destination + filename, File.READ_WRITE)
+		file.open(file_path + TEMP_SUFFIX, File.READ_WRITE)
 	
 		while http.get_status() == HTTPClient.STATUS_BODY:
 			
@@ -96,11 +98,12 @@ func req(arguments):
 				emit_signal("request_progress", percent_loaded)
 				
 		file.close()
+		saved_levels_util.move_file(file_path + TEMP_SUFFIX, file_path)
 		
 
 	elif http.get_response_code() == 302:
 		for i in response_headers: response_headers[i.capitalize()] = response_headers[i]
-		req([response_headers["Location"], destination, filename])
+		req([response_headers["Location"], file_path])
 		return
 
 	else:

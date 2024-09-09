@@ -389,7 +389,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	collected_shine.visible = false
 	collected_shine.get_node("ShineParticles").emitting = false
 	
-	print(Singleton.CheckpointSaved.current_checkpoint_id)
+	#print(Singleton.CheckpointSaved.current_checkpoint_id)
 	if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
 		position = Singleton.CheckpointSaved.current_spawn_pos
 		var score_from_before = Singleton.CurrentLevelData.time_score
@@ -961,7 +961,7 @@ func _physics_process(delta: float) -> void:
 	if Singleton.PlayerSettings.other_player_id != -1:
 		if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
 			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
-			print("hi")
+			#print("hi")
 	if !Singleton2.save_ghost:
 		GhostArrays.temp_gp.append(Vector2(int(position.x), int(position.y)))
 		GhostArrays.temp_ga.append(ANIM_IDS[sprite.animation])

@@ -150,8 +150,8 @@ func _physics_process(_delta : float) -> void:
 	for chr in stored_characters:
 		if chr != null:
 			character = chr
-	if character:
-		print(character.position)
+	#if character:
+		#print(character.position)
 
 func _on_body_entered(body):
 	if enabled and is_idle and !entering and teleportation_mode:

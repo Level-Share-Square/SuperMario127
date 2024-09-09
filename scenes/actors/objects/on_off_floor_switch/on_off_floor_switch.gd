@@ -44,7 +44,7 @@ func _ready():
 		update_switch_state()
 
 func press(hit_pos : Vector2) -> void:
-	print("Current_Switch_Palette: ", palette)
+	#print("Current_Switch_Palette: ", palette)
 	if !pressed:
 		pressed = true
 		anim_player.play("press", -1, 2.0)

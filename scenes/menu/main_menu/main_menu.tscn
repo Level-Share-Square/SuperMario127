@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/misc/new127icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=16]
 [ext_resource path="res://scenes/menu/button_scripts/icon_helper.gd" type="Script" id=17]
 [ext_resource path="res://scenes/actors/objects/pipe/pipe.png" type="Texture" id=18]
+[ext_resource path="res://scenes/menu/main_menu/check_internet.gd" type="Script" id=19]
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0.0502793, 0.944134, 1 )
@@ -236,6 +237,9 @@ script = ExtResource( 3 )
 [node name="Focus" type="Control" parent="."]
 script = ExtResource( 9 )
 default_focus_path = NodePath("../MarginContainer/VBoxContainer/DevLevels")
+
+[node name="CheckInternet" type="Control" parent="."]
+script = ExtResource( 19 )
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

@@ -32,14 +32,10 @@ func _update(delta):
 	var vertical_point: float = get_ray_point(vertical_check).y
 	var vertical_length: float = abs(vertical_check.cast_to.y)
 	
-	print(vertical_point)
-	
-	
 	var sprite = character.sprite
 	sprite.scale.y = max(abs(vertical_point) / vertical_length, MIN_SPRITE_SCALE)
 	# i forgot sprite offset was affected by its scale... took me a while to figure out :p
 	sprite.offset.y = (1 - sprite.scale.y) * (SPRITE_SCALE_FACTOR / sprite.scale.y)
-	print(sprite.offset.y)
 
 func _stop_check(_delta):
 	return not get_vertical_check().is_colliding()

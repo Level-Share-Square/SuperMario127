@@ -32,9 +32,6 @@ func _update(delta):
 	var right_point: float = get_ray_point(right_check).x
 	var length: float = abs(left_point) + abs(right_point)
 	var total_length: float = abs(left_check.cast_to.x) + abs(right_check.cast_to.x)
-	
-	print(length)
-	print(total_length)
 
 	var sprite = character.sprite
 	sprite.scale.x = max(length / total_length, MIN_SPRITE_SCALE)

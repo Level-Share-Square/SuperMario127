@@ -19,7 +19,7 @@ var last_mode := 3
 var last_song = 0 # this can't be static typed, can be either an int or a string
 
 var dl_ready := false
-var downloader := Downloader.new()
+var downloader := MusicDownloader.new()
 
 var song_cache := []
 var loop := 1.0
@@ -52,6 +52,23 @@ func is_tween_active() -> bool:
 
 
 ##### CUSTOM MUSIC
+func get_custom_file_path() -> String:
+	# i think accessing leveldata singleton is safe for now since
+	# this only is called inside levels, i hope i dont regret that decision
+	var level_id: String = Singleton.CurrentLevelData.level_id
+	var area: int = Singleton.CurrentLevelData.area
+	var working_folder: String = Singleton.CurrentLevelData.working_folder
+	
+	return saved_levels_util.get_level_music_path(
+		level_id, 
+		area,
+		working_folder)
+
+func reset_custom_song() -> void:
+	var file_path: String = get_custom_file_path()
+	if saved_levels_util.file_exists(file_path):
+		saved_levels_util.delete_file(file_path)
+
 func handle_custom_song(url: String) -> void:
 	loop = 0.0
 	if url.begins_with("LP"):
@@ -61,26 +78,29 @@ func handle_custom_song(url: String) -> void:
 	
 	stop()
 	
-	# i think accessing leveldata singleton is safe for now since
-	# this only is called inside levels, i hope i dont regret that decision
-	var working_folder: String = Singleton.CurrentLevelData.working_folder
-	var file_path: String = saved_levels_util.get_level_music_path(url, working_folder)
-	
+	var file_path: String = get_custom_file_path()
 	if not saved_levels_util.file_exists(file_path):
-		save_ogg(url, working_folder)
+		print("OGG file not found, downloading from url...")
+		
+		var level_id: String = Singleton.CurrentLevelData.level_id
+		var area: int = Singleton.CurrentLevelData.area
+		var working_folder: String = Singleton.CurrentLevelData.working_folder
+		save_ogg(url, level_id, area, working_folder)
 	else:
+		print("OGG file found, loading...")
 		load_ogg(file_path)
 
-func save_ogg(url: String, working_folder: String) -> void:
-	## add an equivalent to this later!!!
-	return #if UserInfo.internet == false: return
+func save_ogg(url: String, level_id: String, area: int, working_folder: String) -> void:
+	if not InternetCheck.internet: return
 	
-	var folder: String = saved_levels_util.get_level_music_folder(working_folder)
-	var file_name: String = saved_levels_util.get_level_music_filename(url)
-	downloader.download(url, folder, file_name)
+	var file_path: String = saved_levels_util.get_level_music_path(
+		level_id, 
+		area,
+		working_folder)
+	downloader.download(url, file_path)
 	
 	# warning-ignore:return_value_discarded
-	downloader.connect("request_completed", self, "load_ogg", [folder + file_name], CONNECT_ONESHOT)
+	downloader.connect("request_completed", self, "load_ogg", [file_path], CONNECT_ONESHOT)
 
 func load_ogg(file_path: String) -> void:
 	var ogg_file := File.new()
@@ -99,6 +119,8 @@ func load_ogg(file_path: String) -> void:
 	if get_tree().get_current_scene().mode != 2:
 		self.stream = stream
 		play()
+	
+	print("OGG file loaded.")
 #######
 
 

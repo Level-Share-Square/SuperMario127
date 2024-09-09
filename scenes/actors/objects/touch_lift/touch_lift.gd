@@ -134,7 +134,7 @@ func _ready():
 		set_property("curve", path.curve)
 		curve = path.curve
 	elif path.curve == null:
-		print("creating curve2")
+		#print("creating curve2")
 		path.curve = curve
 	elif curve == null:
 		set_property("curve", path.curve)
@@ -167,7 +167,7 @@ func _ready():
 		add_child(end_sprite_node)
 		
 
-		print(path.curve.get_point_count())
+		#print(path.curve.get_point_count())
 func set_sprite_parts(sprite):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts

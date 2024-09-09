@@ -108,15 +108,8 @@ static func get_image_from_path(file_path: String) -> ImageTexture:
 
 
 ## MUSIC
-static func get_level_music_path(url: String, working_folder: String) -> String:
-	return get_level_music_folder(working_folder) + get_level_music_filename(url)
-
-# split into multiple functions since downloader wants filename and folder separate
-static func get_level_music_filename(url: String) -> String:
-	var url_base64: String = Marshalls.utf8_to_base64(url)
-	# cutting it cuz of filename length restrictions
-	url_base64 = url_base64.right(url_base64.length() - 192)
-	return url_base64 + ".ogg"
+static func get_level_music_path(level_id: String, area_id: int, working_folder: String) -> String:
+	return get_level_music_folder(working_folder) + level_id + "-" + str(area_id) + ".ogg"
 
 static func get_level_music_folder(working_folder: String) -> String:
 	return working_folder + "/music/"
