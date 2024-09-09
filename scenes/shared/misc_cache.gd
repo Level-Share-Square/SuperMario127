@@ -14,6 +14,8 @@ var property_scenes = {
 	
 }
 
+signal property_scene_gotten
+
 var music_nodes = [
 	
 ]
@@ -28,12 +30,13 @@ func _init():
 	music_nodes.resize(music_ids.size())
 
 
-func get_property_scene(property: String):
-	if not property_scenes.has(property):
-		var path: String = "res://scenes/editor/property_type_scenes/" + property + "/" + property + ".tscn"
-		property_scenes[property] = load(path)
+func get_property_scene(property: String, menu: String):
+	var key : Array = [property, menu]
+	if not property_scenes.has(key):
+		var path: String = "res://scenes/editor/property_type_scenes/" + property + "/" + menu + "/" + menu + ".tscn"
+		property_scenes[key] = load(path)
 	
-	return property_scenes[property]
+	return property_scenes[key]
 
 
 func get_music_node(index: int):

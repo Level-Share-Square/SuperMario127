@@ -37,6 +37,8 @@ signal message_changed
 
 func _ready():
 	parent = get_parent()
+	assert("dialogue" in parent, "Improper use of Dialogue prefab! Must have a dialogue variable")
+	assert("character_name" in parent, "Improper use of Dialogue prefab! Must have a character_name variable")
 	dialogue = parent.dialogue
 	character_name = parent.character_name
 	
@@ -54,27 +56,47 @@ func _ready():
 	pop_up.scale = Vector2(0.8, 0.8)
 	pop_up.modulate = Color(1, 1, 1, 0)
 	if parent.mode != 1:
-		var _connect = area.connect("body_entered", self, "enter_area")
-		var _connect2 = area.connect("body_exited", self, "exit_area")
-		
+		var _connect = area.connect("body_entered", self, "body_entered")
+		var _connect2 = area.connect("body_exited", self, "body_exited")
+		yield(get_tree(), "idle_frame")
+		var _connect3 = area.connect("area_entered", self, "area_entered")
+		var _connect4 = area.connect("area_exited", self, "area_exited")
 		connect("message_changed", parent, "message_changed")
 		connect("message_appear", parent, "start_talking")
 		connect("message_disappear", parent, "stop_talking")
+
 		
 		sprite.visible = false
 		if "speaking_radius" in parent:
 			interact_shape.shape.radius = parent.speaking_radius
 
-func enter_area(body):
+func body_entered(body):
+	
 	if body.name.begins_with("Character") and character == null and parent.enabled:
 		character = body
 		message_appear.play()
 		
-func exit_area(body):
+func body_exited(body):
 	if body == character and character.get_collision_layer_bit(1) and parent.enabled:
 		character = null
 		if reset_read_timer == 0:
 			message_disappear.play()
+
+# this is to make npcs emote in front of signs
+func area_entered(body):
+	# "area" is already taken and im too lazy to change it
+	var area_parent = body.get_parent()
+	if area_parent.has_signal("message_appear") and area_parent.has_signal("message_disappear"):
+
+		area_parent.connect("message_appear", parent, "start_talking")
+		area_parent.connect("message_disappear", parent, "stop_talking")
+
+func area_exited(body):
+	var area_parent = body.get_parent()
+	if area_parent.has_signal("message_appear") and area_parent.has_signal("message_disappear"):
+
+		area_parent.disconnect("message_appear", parent, "start_talking")
+		area_parent.disconnect("message_disappear", parent, "stop_talking")
 		
 func setup_char():
 	# flip mario to face this object
@@ -119,6 +141,7 @@ func open_menu_ui():
 	get_tree().get_current_scene().get_node("UI/DialogueText").open(dialogue, self, character, character_name)
 
 func _physics_process(delta):
+
 	if reset_read_timer > 0:
 		reset_read_timer -= delta
 		if reset_read_timer <= 0:
@@ -155,6 +178,7 @@ func _physics_process(delta):
 		for body in area.get_overlapping_bodies():
 			if body is Character:
 				has_char = true
+			
 		
 		if !has_char and is_instance_valid(character):
-			exit_area(character)
+			body_exited(character)

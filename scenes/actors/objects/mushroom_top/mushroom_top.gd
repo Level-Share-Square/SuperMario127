@@ -9,7 +9,7 @@ var bounce_power = 300
 
 var color := Color(1, 0, 0)
 var bouncy := false
-var strong_bounce_power := 750
+var strong_bounce_power := 650
 
 var cooldown = 0.0
 var idle_bounce_timer = 120 - rand_range(0, 110)
@@ -24,7 +24,7 @@ func _set_property_values():
 	set_property("strong_bounce_power", strong_bounce_power, 1)
 
 func _ready():
-	collision_shape.disabled = !enabled
+	collision_shape.disabled = !enabled or bouncy
 	preview_position = custom_preview_position
 	if is_preview:
 		z_index = 0

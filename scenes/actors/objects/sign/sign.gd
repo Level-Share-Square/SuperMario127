@@ -90,6 +90,7 @@ func enter_area(body):
 		# related to toads
 		if not sprite.visible and not open_menu:
 			emit_signal("message_appear")
+			
 		
 func exit_area(body):
 	if body == character and character.get_collision_layer_bit(1) and enabled:
@@ -98,8 +99,7 @@ func exit_area(body):
 			message_disappear.play()
 		
 		# related to toads
-		if not sprite.visible and not open_menu:
-			emit_signal("message_disappear")
+		if not sprite.visible and not open_menu: emit_signal("message_disappear")
 		
 func setup_char():
 	character.set_dive_collision(false)

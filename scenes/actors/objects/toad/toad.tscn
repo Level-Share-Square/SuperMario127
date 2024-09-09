@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://scenes/actors/objects/toad/toad_head.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/toad/toad_spots.png" type="Texture" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://scenes/actors/objects/toad/special_expressions.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=8]
 [ext_resource path="res://classes/dialogue.tscn" type="PackedScene" id=9]
+
+[sub_resource type="RectangleShape2D" id=46]
+extents = Vector2( 10, 14 )
 
 [sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 5 )
@@ -261,10 +264,20 @@ script = ExtResource( 3 )
 expression_map = [ "smiling", "talking", "neutral", "angry", "shocked", "happy", "raging", "confused" ]
 action_map = [ "standing", "running" ]
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[node name="Dialogue" parent="." instance=ExtResource( 9 )]
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+collision_layer = 4
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 0, 2 )
+shape = SubResource( 46 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="KinematicBody2D"]
 rect = Rect2( -10, -16, 20, 32 )
 
-[node name="Body" type="AnimatedSprite" parent="."]
+[node name="Body" type="AnimatedSprite" parent="KinematicBody2D"]
 frames = SubResource( 7 )
 animation = "standing"
 script = ExtResource( 6 )
@@ -274,28 +287,37 @@ head_offsets = {
 "standing": PoolVector2Array( 0, 0, 0, -1 )
 }
 
-[node name="Coat" type="AnimatedSprite" parent="Body"]
+[node name="Coat" type="AnimatedSprite" parent="KinematicBody2D/Body"]
 modulate = Color( 0, 0, 1, 1 )
 frames = SubResource( 9 )
 animation = "standing"
 script = ExtResource( 8 )
 
-[node name="Head" type="AnimatedSprite" parent="."]
+[node name="Head" type="AnimatedSprite" parent="KinematicBody2D"]
 frames = SubResource( 3 )
 animation = "smiling"
 playing = true
 script = ExtResource( 7 )
 
-[node name="Spots" type="AnimatedSprite" parent="Head"]
+[node name="Spots" type="AnimatedSprite" parent="KinematicBody2D/Head"]
 modulate = Color( 1, 0, 0, 1 )
 frames = SubResource( 5 )
 animation = "smiling"
 playing = true
 script = ExtResource( 8 )
 
-[node name="Dialogue" parent="." instance=ExtResource( 9 )]
-
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource( 45 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+loop = false
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Path2D/PathFollow2D"]
+visible = false
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 10.0
+margin_bottom = 10.0
+mouse_filter = 2
+border_width = 3.0
+editor_only = false
