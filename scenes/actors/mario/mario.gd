@@ -339,6 +339,8 @@ func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String =
 		damage(amount, cause, frames)
 
 func knockback(hit_pos: Vector2):
+	if is_instance_valid(state) and state.disable_knockback: return
+	
 	var direction := sign((global_position - hit_pos).normalized().x)
 	velocity.x = direction * 235
 	velocity.y = -225
@@ -608,7 +610,9 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 			sound_player.play_last_hit_sound()
 			kill(cause)
 		else:
-			if cause != "lava":
+			if cause == "crushed":
+				sound_player.play_last_hit_voice_sound()
+			elif cause != "lava":
 				sound_player.play_hit_sound()
 				
 
@@ -918,13 +922,14 @@ func _physics_process(delta: float) -> void:
 				# Clip attempt, just reset velocity
 				velocity = last_velocity * 0.95
 			else:
+				pass
 				# Going into a corner? Try to bonk.
 				# The squish state has us covered in case we get stuck even harder
-				velocity.x = 150 * -facing_direction
-				velocity.y = -65
-				position.x -= 2 * facing_direction
-				set_state_by_name("BonkedState", delta)
-				sound_player.play_bonk_sound()
+#				velocity.x = 150 * -facing_direction
+#				velocity.y = -65
+#				position.x -= 2 * facing_direction
+#				set_state_by_name("BonkedState", delta)
+#				sound_player.play_bonk_sound()
 		else:
 			var slide_count = get_slide_count()
 			collided_last_frame = slide_count > 0
@@ -1027,7 +1032,7 @@ func kill(cause: String) -> void:
 			yield(get_tree().create_timer(0.55), "timeout")
 			sound_player.play_death_sound()
 			yield(get_tree().create_timer(0.75), "timeout")
-		elif cause == "hit" or cause == "lava":
+		elif cause == "hit" or cause == "lava" or cause == "crushed":
 			controllable = false
 			movable = false
 			cutout_in = cutout_death

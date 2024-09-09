@@ -1,4 +1,4 @@
-[gd_scene load_steps=168 format=2]
+[gd_scene load_steps=169 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -71,10 +71,11 @@
 [ext_resource path="res://scenes/actors/mario/states/Swimming.gd" type="Script" id=69]
 [ext_resource path="res://scenes/actors/mario/states/LavaBoost.gd" type="Script" id=70]
 [ext_resource path="res://scenes/actors/mario/particles/bubble.png" type="Texture" id=71]
-[ext_resource path="res://scenes/actors/mario/states/Squished.gd" type="Script" id=72]
+[ext_resource path="res://scenes/actors/mario/states/Crushed.gd" type="Script" id=72]
 [ext_resource path="res://scenes/actors/mario/mario_sounds.tscn" type="PackedScene" id=73]
 [ext_resource path="res://scenes/actors/mario/luigi_sounds.tscn" type="PackedScene" id=74]
 [ext_resource path="res://scenes/actors/mario/states/LaunchStar.gd" type="Script" id=75]
+[ext_resource path="res://scenes/actors/mario/states/CrushedSide.gd" type="Script" id=76]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -1232,17 +1233,19 @@ shape = SubResource( 4 )
 disabled = true
 
 [node name="GroundCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.5, 0 )
-z_index = 1
 shape = SubResource( 5 )
 disabled = true
 one_way_collision_margin = 0.0
 
 [node name="GroundShape" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2( -1, 16 )
 polygon = PoolVector2Array( -3, -6, 0, 1, 2, 1, 5, -6 )
 
 [node name="LeftCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.5, 8 )
 rotation = -1.5708
 shape = SubResource( 6 )
@@ -1250,6 +1253,7 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="RightCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.5, 8 )
 rotation = 1.5708
 shape = SubResource( 6 )
@@ -1267,13 +1271,13 @@ disabled = true
 position = Vector2( 0, 3 )
 rotation = 6.28319
 frames = ExtResource( 1 )
-animation = "tripleJumpLeft"
+animation = "idleRight"
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 44 )
 animation = "swimming"
-frame = 2
+frame = 4
 playing = true
 script = ExtResource( 63 )
 
@@ -1372,6 +1376,32 @@ local_coords = false
 process_material = SubResource( 24 )
 texture = ExtResource( 30 )
 
+[node name="SquishCasts" type="Node2D" parent="."]
+visible = false
+position = Vector2( 0.5, 0 )
+z_index = 1
+
+[node name="VerticalCheck" type="RayCast2D" parent="SquishCasts"]
+position = Vector2( 0, 20 )
+enabled = true
+cast_to = Vector2( 0, -24 )
+collision_mask = 65
+
+[node name="VerticalCheckDive" type="RayCast2D" parent="SquishCasts"]
+position = Vector2( 0, 6 )
+cast_to = Vector2( 0, -20 )
+collision_mask = 65
+
+[node name="LeftCheck" type="RayCast2D" parent="SquishCasts"]
+enabled = true
+cast_to = Vector2( 8, 0 )
+collision_mask = 65
+
+[node name="RightCheck" type="RayCast2D" parent="SquishCasts"]
+enabled = true
+cast_to = Vector2( -8, 0 )
+collision_mask = 65
+
 [node name="States" type="Node" parent="."]
 
 [node name="FallState" type="Node" parent="States"]
@@ -1407,8 +1437,15 @@ script = ExtResource( 29 )
 [node name="BonkedState" type="Node" parent="States"]
 script = ExtResource( 12 )
 
-[node name="SquishedState" type="Node" parent="States"]
+[node name="CrushedState" type="Node" parent="States"]
 script = ExtResource( 72 )
+vertical_check_path = NodePath("../../SquishCasts/VerticalCheck")
+vertical_check_dive_path = NodePath("../../SquishCasts/VerticalCheckDive")
+
+[node name="CrushedSideState" type="Node" parent="States"]
+script = ExtResource( 76 )
+left_check_path = NodePath("../../SquishCasts/LeftCheck")
+right_check_path = NodePath("../../SquishCasts/RightCheck")
 
 [node name="LavaBoostState" type="Node" parent="States"]
 script = ExtResource( 70 )
@@ -1542,6 +1579,7 @@ position = Vector2( 0.5, 4 )
 shape = SubResource( 27 )
 
 [node name="PlatformDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 17
 
@@ -1581,6 +1619,7 @@ position = Vector2( 0.5, 5 )
 shape = SubResource( 30 )
 
 [node name="TerrainDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TerrainDetector"]
@@ -1589,6 +1628,7 @@ position = Vector2( 0.5, 5 )
 shape = SubResource( 31 )
 
 [node name="SpinArea" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, 6 )
 collision_layer = 2
 collision_mask = 17
@@ -1600,6 +1640,7 @@ shape = SubResource( 32 )
 disabled = true
 
 [node name="SpinSwimArea" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, 6 )
 collision_layer = 2
 collision_mask = 17
@@ -1611,6 +1652,7 @@ shape = SubResource( 32 )
 disabled = true
 
 [node name="PBlockDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 1024
 
@@ -1821,14 +1863,13 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 6
+frame = 14
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 scale = Vector2( 1e-05, 1e-05 )
 frames = ExtResource( 55 )
-frame = 8
 speed_scale = 3.0
 playing = true
 
@@ -1850,7 +1891,7 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 2
+frame = 4
 playing = true
 script = ExtResource( 34 )
 
@@ -1858,7 +1899,7 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 4
+frame = 6
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
