@@ -14,15 +14,16 @@ func _ready():
 	for i in range(5):
 		yield(get_tree(), "physics_frame")
 	
-	max_shards = Singleton.CurrentLevelData.level_data.vars.max_shine_shards
+	var variables: LevelVars = Singleton.CurrentLevelData.level_data.vars
+	max_shards = variables.max_shine_shards
 	fill.max_value = max_shards
 	
 	if max_shards > 0:
 		visible = true
-		get_owner().connect("shine_shard_collected", self, "collect_shard")
+		variables.connect("shine_shard_collected", self, "collect_shard")
 		
 		var shard_amount = (
-			Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[
+			variables.shine_shards_collected[
 				Singleton.CurrentLevelData.area][0]
 			)
 		

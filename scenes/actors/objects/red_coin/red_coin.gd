@@ -19,8 +19,8 @@ export var anim_damp = 80
 
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
-		get_tree().current_scene.collect_coin(2)
-		get_tree().current_scene.collect_red_coin(id)
+		Singleton.CurrentLevelData.level_data.vars.collect_coin(2)
+		Singleton.CurrentLevelData.level_data.vars.collect_red_coin(id)
 		body.heal(5)
 		var player_id = 1
 		if body.name == "Character":

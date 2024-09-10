@@ -8,9 +8,10 @@ func _ready():
 	yield(get_tree(), "physics_frame")
 	yield(get_tree(), "physics_frame")
 	
-	get_owner().connect("coin_collected", self, "collect_coin")
+	var variables: LevelVars = Singleton.CurrentLevelData.level_data.vars
+	variables.connect("coin_collected", self, "collect_coin")
 	
-	var new_coins: int = Singleton.CurrentLevelData.level_data.vars.coins_collected
+	var new_coins: int = variables.coins_collected
 	counter.text = str(new_coins).pad_zeros(3)
 
 func collect_coin(new_coins: int):

@@ -39,8 +39,6 @@ func change_setting(key: String, new_value):
 			OS.vsync_enabled = new_value
 		"fps_cap":
 			Engine.target_fps = 10 * (new_value + 3)
-		"show_timer":
-			Singleton.TimeScore.shown = new_value
 		"rich_presence":
 			Singleton2.rp = new_value
 		"level_ghost":

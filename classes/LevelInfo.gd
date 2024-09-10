@@ -274,10 +274,12 @@ func is_fully_completed() -> bool:
 	return collectible_counts["total_collected"] >= collectible_counts["total_collectibles"]
 
 static func generate_time_string(time : float) -> String:
-	# converting to int to use modulo, then doing abs to avoid problems with negative results, then back to int because that's the type
-	var minutes : int = int(abs(int(time / 60) % 99)) # mod this by 99 so if you somehow take 100+ minutes at least the time will wrap around instead of breaking the display
-	var seconds : int = int(abs(int(time) % 60))
-	var centiseconds : int = int(abs(int(time * 100) % 100))
+	# doing abs to avoid problems with negative results, then converting to int to use modulo
+	time = abs(time)
+	
+	var minutes : int = min(int(time / 60), 99) # lets not allow it to go over 2 digits
+	var seconds : int = int(time) % 60
+	var centiseconds : int = int(time * 100) % 100
 
 	return "%s%s:%s%s.%s%s" % [pad_timevalue(minutes), minutes, pad_timevalue(seconds), seconds, pad_timevalue(centiseconds), centiseconds]
 

@@ -3,7 +3,6 @@ extends Node2D
 var load_paths = [
 	["PlayerSettings", "res://scenes/player/player_settings.tscn"],
 	["EditorSavedSettings", "res://scenes/editor/editor_saved_settings.tscn"],
-	["TimeScore", "res://scenes/actors/time_score/time_score.tscn"],
 	["SettingsLoader", "res://singletons/settings_loader.tscn"],
 	["CurrentLevelData", "res://scenes/shared/level_data.tscn"],
 	["ModeSwitcher", "res://scenes/actors/mode_switcher/mode_switcher.tscn"],
@@ -21,7 +20,6 @@ var load_paths = [
 
 var PlayerSettings
 var EditorSavedSettings
-var TimeScore
 var SettingsLoader
 var CurrentLevelData
 var ModeSwitcher
