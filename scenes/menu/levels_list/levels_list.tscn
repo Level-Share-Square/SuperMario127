@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/actors/objects/cloud_platform/texture.png" type="Texture" id=2]
@@ -51,6 +51,7 @@
 [ext_resource path="res://scenes/menu/levels_list/drag_cursor.gd" type="Script" id=49]
 [ext_resource path="res://scenes/menu/levels_list/old_levels.gd" type="Script" id=50]
 [ext_resource path="res://scenes/menu/level_portal/smooth_scroll.gd" type="Script" id=51]
+[ext_resource path="res://scenes/menu/levels_list/list_scripts/js_file_picker.gd" type="Script" id=52]
 
 [sub_resource type="CanvasItemMaterial" id=22]
 blend_mode = 1
@@ -1510,6 +1511,7 @@ custom_constants/margin_left = 4
 custom_constants/margin_bottom = 4
 
 [node name="LevelCode" type="TextEdit" parent="Panel/Subscreens/AddElement/Control/Panel/MarginContainer"]
+unique_name_in_owner = true
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 444.0
@@ -1521,6 +1523,12 @@ custom_styles/focus = SubResource( 16 )
 custom_styles/normal = SubResource( 17 )
 custom_styles/completion = SubResource( 18 )
 wrap_enabled = true
+
+[node name="JSFilePicker" type="Button" parent="Panel/Subscreens/AddElement/Control/Panel"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 52 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Subscreens/AddElement"]
 anims/RESET = SubResource( 19 )
@@ -1953,6 +1961,7 @@ anims/transition = SubResource( 6 )
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewFolder" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement/Control/ElementAddButtons" method="import_level_code"]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/Panel/JSFilePicker" to="Panel/Subscreens/AddElement/Control/Panel/JSFilePicker" method="open_file_picker"]
 [connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/Return" to="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler" method="change_focus"]
 [connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/Return" to="Panel/Subscreens/FolderSettings" method="transition" binds= [ "LevelList" ]]
 [connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/RenameFolder" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="rename_folder"]
