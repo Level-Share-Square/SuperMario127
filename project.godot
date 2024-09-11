@@ -595,11 +595,6 @@ _global_script_classes=[ {
 "path": "res://util/new/bindings_util.gd"
 }, {
 "base": "Reference",
-"class": "clipboard_util",
-"language": "GDScript",
-"path": "res://util/clipboard_util.gd"
-}, {
-"base": "Reference",
 "class": "conversion_util",
 "language": "GDScript",
 "path": "res://util/conversion_util.gd"
@@ -757,7 +752,6 @@ _global_script_class_icons={
 "WingMarioState": "",
 "WingPowerup": "",
 "bindings_util": "",
-"clipboard_util": "",
 "conversion_util": "",
 "fps_util": "",
 "interpreter_util": "",

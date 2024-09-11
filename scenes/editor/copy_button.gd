@@ -11,7 +11,7 @@ var last_hovered = false
 func _pressed():
 	click_sound.play()
 	focus_mode = 0
-	clipboard_util.copy(text_edit_node.text)
+	OS.clipboard = text_edit_node.text
 
 func _process(_delta):
 	if is_hovered() and !last_hovered:

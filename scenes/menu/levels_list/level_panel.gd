@@ -134,7 +134,12 @@ func edit_level():
 	start_level(true)
 
 func copy_code():
-	OS.clipboard = str(level_info.level_code)
+	if OS.has_feature("JavaScript"):
+		JavaScript.download_buffer(
+			level_info.level_code.to_utf8(), 
+			level_info.level_name + ".txt")
+	else:
+		OS.clipboard = str(level_info.level_code)
 
 func view_scores():
 	var switch_to_scores: bool = (view_button.text == view_scores_text)
