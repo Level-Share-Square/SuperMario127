@@ -36,6 +36,8 @@ func _ready():
 		type_scene_name = "Path"
 	elif type == TYPE_STRING_ARRAY:
 		type_scene_name = "PoolStringArray"
+	elif type == TYPE_VECTOR2_ARRAY:
+		type_scene_name = "PoolVector2Array"
 	
 	
 	if type_scene_name != "None":
@@ -44,7 +46,6 @@ func _ready():
 		add_child(property_type)
 		
 		if len(menu) > 1:
-			#print(len(menu))
 			for i in len(menu):
 				if i != 0:
 					property_type.parameters[i-1] = menu[i]

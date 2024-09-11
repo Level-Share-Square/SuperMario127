@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource( 1 )
-ids = PoolStringArray( "Vector2", "int", "float", "string", "bool", "Color", "Path", "PoolStringArray" )
+ids = PoolStringArray( "Vector2", "int", "float", "string", "bool", "Color", "Path", "PoolStringArray", "PoolVector2Array" )
