@@ -474,6 +474,7 @@ margin_right = 131.0
 margin_bottom = 157.0
 setting_section = "General"
 setting_key = "fps_cap"
+default_value = 3
 options = [ "30", "40", "50", "60" ]
 
 [node name="SecondPlayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 11 )]
@@ -1104,15 +1105,6 @@ margin_bottom = 39.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Hotkeys)"
 input_key = "toggle_ui"
-sprite_visible = false
-
-[node name="ToggleInfoUI" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" instance=ExtResource( 12 )]
-margin_left = 331.0
-margin_right = 416.0
-margin_bottom = 39.0
-remapper_path = NodePath("../..")
-input_group = "Controls (Hotkeys)"
-input_key = "toggle_info_ui"
 sprite_visible = false
 
 [node name="Retry" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" instance=ExtResource( 12 )]
