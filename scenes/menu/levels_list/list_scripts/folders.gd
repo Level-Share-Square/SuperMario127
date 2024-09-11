@@ -36,16 +36,13 @@ func create_folder(path: String):
 
 
 func change_folder(path: String, do_transition: bool = true, is_return: bool = false, auto_save: bool = true):
+	var loader: Node = list_handler.loader
+	if loader.level_load_thread.is_alive(): return
+	
 	if do_transition:
 		list_handler.level_list.transition("LevelList")	
 		# waits for the transition to finish so as to keep everything looking smooth :3
 		yield(list_handler.level_list, "screen_change")
-	
-	
-	var loader: Node = list_handler.loader
-	if loader.level_load_thread.is_active():
-		loader.halt_thread = true
-		loader.level_load_thread.wait_to_finish()
 
 	var old_folder: String = list_handler.working_folder
 	if auto_save:
@@ -60,17 +57,17 @@ func change_folder(path: String, do_transition: bool = true, is_return: bool = f
 	list_handler.folder_buttons = 0
 	if is_return:
 		list_handler.folder_stack.pop_back()
-	
+
 	if path != list_handler.BASE_FOLDER:
 		var return_subtract = 2 if is_return else 1
 		var parent_folder: String = list_handler.folder_stack[list_handler.folder_stack.size() - return_subtract]
-		
+
 		#print("Parent: " + parent_folder)
 		#print("Current: " + list_handler.working_folder)
 		#print(is_return)
 		loader.add_folder_button(parent_folder, "Back...", true, true)
 		list_handler.back_buttons = 1
-		
+
 	if not is_return:
 		list_handler.folder_stack.push_back(list_handler.working_folder)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/menu/pause/pause_controller.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=6]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/actors/time_score/timer_manager.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/player/ui_new/reference2.png" type="Texture" id=9]
 [ext_resource path="res://scenes/player/ui_new/ui/shine_shards.png" type="Texture" id=10]
 [ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=11]
@@ -1576,6 +1577,10 @@ texture = SubResource( 205 )
 polygon = PoolVector2Array( 12.381, -10.4762, 15.2381, -8.57144, 17.1429, -11.4286, 20.9524, -11.4286, 22.8572, -8.57144, 25.7143, -10.4762, 27.6191, -6.66669, 22.8572, -3.80954, 22.8572, -0.952393, 19.0477, 0, 15.2381, -0.952393, 15.2381, -3.80954, 10.4762, -7.61905 )
 uv = PoolVector2Array( 8.08297, 11.692, 18.2589, 18.4759, 25.043, 8.29991, 38.611, 8.29991, 45.3951, 18.4759, 55.571, 11.692, 62.3551, 25.2599, 45.3951, 35.436, 45.3951, 45.612, 31.8271, 49.0041, 18.2589, 45.612, 18.2589, 35.436, 1.29888, 21.868 )
 
+[node name="TimerManager" parent="UI/HUD/Control" instance=ExtResource( 8 )]
+unique_name_in_owner = true
+margin_bottom = 0.0
+
 [node name="SignText" type="Control" parent="UI"]
 pause_mode = 2
 margin_left = 161.0
@@ -1805,7 +1810,6 @@ collision_mask = 2048
 shape = SubResource( 24 )
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
-frame = 7
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
 

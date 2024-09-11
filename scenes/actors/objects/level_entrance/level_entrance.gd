@@ -70,7 +70,7 @@ func _ready():
 
 
 func exit_teleport(obj : Array):
-	print(obj[1].object_type)
+	#print(obj[1].object_type)
 	if transition_data[2] == true: #Remember, true = remote, false = local
 		if obj[1].teleportation_mode != true:
 			character.position = position

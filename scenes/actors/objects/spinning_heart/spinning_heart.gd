@@ -55,7 +55,7 @@ func _physics_process(delta):
 			var velocity = abs(charbody.velocity.x) if abs(charbody.velocity.x) > abs(charbody.velocity.y) else abs(charbody.velocity.y) 
 			var heal_scale = 1 if charbody.velocity.x < player_speed_cap else clamp(charbody.velocity.x, player_speed_cap, player_speed_cap * 2) / player_speed_cap
 			var spin_scale = (clamp(abs(charbody.velocity.x), 0.001, player_speed_cap) / 15) * heal_scale
-			print(heal_scale)
+			#print(heal_scale)
 			if charbody.state != null && (charbody.state.name == "SpinningState" || charbody.state.name == "DiveState"):
 				tween.interpolate_property(sprite, "speed_scale", 20, 1, (1 + spin_time)) #20 is 300 (player_speed_cap) divided by 15
 				tween.interpolate_property(color_sprite, "speed_scale", 20, 1, (1 + spin_time))

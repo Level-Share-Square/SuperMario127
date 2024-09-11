@@ -19,7 +19,7 @@ func _ready():
 	var menu = object.property_value_menus[object.get_property_index(key)]
 	var type = typeof(value)
 	var type_scene_name := "None"
-	print(value)
+	#print(value)
 	if type == TYPE_VECTOR2:
 		type_scene_name = "Vector2"
 	elif type == TYPE_INT:
@@ -42,7 +42,7 @@ func _ready():
 	
 	if type_scene_name != "None":
 		property_type = Singleton.MiscCache.get_property_scene(type_scene_name, menu[0]).instance()
-		print(property_type)
+		#print(property_type)
 		add_child(property_type)
 		
 		if len(menu) > 1:

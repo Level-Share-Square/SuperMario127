@@ -1,9 +1,5 @@
 extends LevelDataLoader
 
-signal coin_collected(new_value)
-signal red_coin_collected(new_value)
-signal shine_shard_collected(new_value)
-
 onready var tick_sound = $SharedSounds/TickSound
 onready var tick_end_sound = $SharedSounds/TickEndSound
 onready var anim_player = $AnimationPlayer
@@ -21,26 +17,6 @@ var can_collect_coins : Array
 
 export var switch_timer : float = 0.0
 export var sound_timer : float = 0.0
-
-
-## sorry for muddying up the player scene with this
-## i really wanted to put it in vars but the game
-## collapsed under its own weight and decided not to load half the time,,
-func collect_coin(amount: int):
-	Singleton.CurrentLevelData.level_data.vars.coins_collected += amount
-	emit_signal("coin_collected", Singleton.CurrentLevelData.level_data.vars.coins_collected)
-
-func collect_red_coin(id: int):
-	Singleton.CurrentLevelData.level_data.vars.red_coins_collected[0] += 1
-	Singleton.CurrentLevelData.level_data.vars.red_coins_collected[1].append(id)
-	emit_signal("red_coin_collected", Singleton.CurrentLevelData.level_data.vars.red_coins_collected[0])
-
-func collect_shine_shard(id: int):
-	var area: int = Singleton.CurrentLevelData.area
-	Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[area][0] += 1
-	Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[area][1].append(id)
-	emit_signal("shine_shard_collected", Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[area][0])
-
 
 func _process(_delta):
 	if Input.is_action_just_pressed("toggle_info_ui"):
@@ -147,3 +123,8 @@ func update_activity() -> void:
 	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
 	if result != Discord.Result.Ok:
 		push_error(str(result))
+
+
+func get_timer_manager() -> Control:
+	var timer_manager: Control = get_node("%TimerManager")
+	return timer_manager

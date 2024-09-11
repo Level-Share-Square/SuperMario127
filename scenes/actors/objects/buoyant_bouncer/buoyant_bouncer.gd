@@ -164,7 +164,7 @@ func platform_area_entered(area):
 		rotation_degrees = 0
 
 func water_entered(area):
-	print(area)
+	#print(area)
 	if "Col" in str(area) or "Area2D" in str(area):
 		in_water = true
 		for i in waterdet.get_overlapping_areas():
@@ -232,7 +232,7 @@ func ground_entered(body):
 		can_collide_with_floor = true
 	else:
 		return
-	print(body)
+	#print(body)
 
 var corners = []
 var largest

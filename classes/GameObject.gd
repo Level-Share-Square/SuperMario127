@@ -130,7 +130,7 @@ func set_property(key, value, change_level_object = true, alias = null, menu = [
 		
 		if len(property_value_menus) < len(base_savable_properties+savable_properties):
 			property_value_menus.append(menu)
-			print(property_value_menus)
+			#print(property_value_menus)
 		
 		if key == "visible":
 			if mode == 1:

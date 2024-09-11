@@ -1,5 +1,9 @@
 class_name LevelVars
 
+signal coin_collected(new_value)
+signal red_coin_collected(new_value)
+signal shine_shard_collected(new_value)
+
 signal switch_state_changed
 signal hover_fludd_activated
 signal turbo_fludd_activated
@@ -65,6 +69,22 @@ func activate_fludd(var type : int):
 			
 func is_fludd_activated(var type : int):
 	return Singleton.CurrentLevelData.level_info.activated_fludds[type]
+
+
+func collect_coin(amount: int):
+	coins_collected += amount
+	emit_signal("coin_collected", coins_collected)
+
+func collect_red_coin(id: int):
+	red_coins_collected[0] += 1
+	red_coins_collected[1].append(id)
+	emit_signal("red_coin_collected", red_coins_collected[0])
+
+func collect_shine_shard(id: int):
+	var area: int = Singleton.CurrentLevelData.area
+	shine_shards_collected[area][0] += 1
+	shine_shards_collected[area][1].append(id)
+	emit_signal("shine_shard_collected", shine_shards_collected[area][0])
 
 #func set_switch_state(var channel : int, value : bool):
 #	switch_state[channel] = value

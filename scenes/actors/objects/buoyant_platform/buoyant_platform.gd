@@ -76,7 +76,7 @@ func _ready():
 		$Sprite.texture = palette_textures[palette]
 	var editor = get_tree().current_scene
 	grav = editor.level_area.settings.gravity
-	print(grav)
+	#print(grav)
 	if physics_enabled:
 		var _connect = waterdet.connect("area_entered", self, "water_entered")
 		var _connect2 = grounddet.connect("body_entered", self, "ground_entered")
@@ -186,7 +186,7 @@ func ground_entered(body):
 		can_collide_with_floor = true
 	else:
 		return
-	print(body)
+	#print(body)
 	
 	
 var corners = []

@@ -45,6 +45,7 @@ func text_entered(text):
 		if not re.search(music_note.text):
 			music_note.text = "0.00"
 		Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.music = "LP" + music_note.text + "=" + music_title.text
+		Singleton.Music.reset_custom_song()
 		update_display()
 
 func _ready():

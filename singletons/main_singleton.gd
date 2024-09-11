@@ -26,10 +26,6 @@ var EditorSavedSettings setget ,_get_editor_saved_settings
 func _get_editor_saved_settings():
 	return lazy_get("EditorSavedSettings", "res://scenes/editor/editor_saved_settings.tscn", EditorSavedSettings)
 
-var TimeScore setget ,_get_time_score
-func _get_time_score():
-	return lazy_get("TimeScore", "res://scenes/actors/time_score/time_score.tscn", TimeScore)
-
 var CurrentLevelData setget ,_get_current_level_data
 func _get_current_level_data():
 	return lazy_get("CurrentLevelData", "res://scenes/shared/level_data.tscn", CurrentLevelData)

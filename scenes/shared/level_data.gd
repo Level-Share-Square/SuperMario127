@@ -59,6 +59,8 @@ func get_cached_object(index: int):
 	return object_cache[index]
 
 func get_cached_background(index: int):
+	if background_cache.size() <= index: 
+		index = 0
 	if background_cache[index] != null:
 		return background_cache[index]
 	
@@ -69,6 +71,8 @@ func get_cached_background(index: int):
 	return background_cache[index]
 
 func get_cached_foreground(index: int):
+	if foreground_cache.size() <= index: 
+		index = 0
 	if foreground_cache[index] != null:
 		return foreground_cache[index]
 	

@@ -100,6 +100,8 @@ var speed := 1.0
 var loop_offset := 0.0
 var linear_offset := 0.0
 var time_alive = 0
+# for the saw desync
+var slowdown_factor := 1.0037
 
 var activated = false
 
@@ -132,7 +134,7 @@ func _ready():
 		set_property("curve", path.curve)
 		curve = path.curve
 	elif path.curve == null:
-		print("creating curve2")
+		#print("creating curve2")
 		path.curve = curve
 	elif curve == null:
 		set_property("curve", path.curve)
@@ -165,7 +167,7 @@ func _ready():
 		add_child(end_sprite_node)
 		
 
-		print(path.curve.get_point_count())
+		#print(path.curve.get_point_count())
 func set_sprite_parts(sprite):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts
@@ -184,7 +186,7 @@ func _physics_process(delta):
 	
 	var baked_length: float = path.curve.get_baked_length()
 	
-	linear_offset += speed * max_speed * 120 * fps_util.PHYSICS_DELTA
+	linear_offset += (speed*slowdown_factor) * max_speed * 120 * fps_util.PHYSICS_DELTA
 
 	if move_type != MT_LOOP:
 		linear_offset = clamp(linear_offset, 0.0, baked_length-0.01) #so the 

@@ -12,13 +12,14 @@ func _ready():
 	yield(get_tree(), "physics_frame")
 	yield(get_tree(), "physics_frame")
 	
-	max_reds = Singleton.CurrentLevelData.level_data.vars.max_red_coins
+	var variables: LevelVars = Singleton.CurrentLevelData.level_data.vars
+	max_reds = variables.max_red_coins
 	
 	if max_reds > 0:
 		visible = true
-		get_owner().connect("red_coin_collected", self, "collect_coin")
+		variables.connect("red_coin_collected", self, "collect_coin")
 		
-		var new_coins: int = Singleton.CurrentLevelData.level_data.vars.red_coins_collected[0]
+		var new_coins: int = variables.red_coins_collected[0]
 		update_counter(new_coins)
 
 func collect_coin(new_coins: int):

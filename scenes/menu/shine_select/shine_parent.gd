@@ -56,7 +56,8 @@ func _ready():
 		shine_sprite.selected = i == 0
 		
 		# make non-kickout shines turn the other way
-		shine_sprite.is_flipped = !shine_details[i]["do_kick_out"]
+		if "do_kick_out" in shine_details[i]:
+			shine_sprite.is_flipped = !shine_details[i]["do_kick_out"]
 		
 		# place all the shines the correct distance away from the center shine
 		if i > 1:
