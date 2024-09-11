@@ -416,7 +416,6 @@ focus_neighbour_bottom = NodePath("../../DevLevels")
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.6
 theme_type_variation = "Red"
-disabled = true
 text = "Exit"
 align = 2
 script = ExtResource( 4 )
