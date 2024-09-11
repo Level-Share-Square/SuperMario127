@@ -123,6 +123,8 @@ static func decode_value(value: String):
 			var array_value = vector.split("x")
 			var vector2 = Vector2(array_value[0], array_value[1])
 			vector2_array.append(vector2)
+			
+		return vector2_array
 	else:
 		return value
 		
