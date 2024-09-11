@@ -44,6 +44,7 @@ func load_tilesets():
 					for coord_y in range(region.size.y):
 						var coord := Vector2(coord_x, coord_y)
 						tileset_resource.autotile_set_bitmask(new_tile_id, coord, tileset_resource.autotile_get_bitmask(base_tile_id, coord))
+						tileset_resource.autotile_set_subtile_priority(new_tile_id, coord, tileset_resource.autotile_get_subtile_priority(base_tile_id, coord))
 				
 				tileset_resource.tile_set_region(new_tile_id, region)
 				tileset_resource.tile_set_texture(new_tile_id, palette)
