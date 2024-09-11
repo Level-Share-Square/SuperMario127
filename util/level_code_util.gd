@@ -22,6 +22,8 @@ static func is_valid(value : String):
 static func fast_is_valid(value: String) -> bool:
 	if value.length() < 80: return false
 	
+	value = value.strip_edges().strip_escapes()
+	
 	# hacky but do u really think we're going to increase the code version more than that? 
 	if not value.begins_with("0") and not value.begins_with("1"): return false
 	if not value.ends_with("]"): return false

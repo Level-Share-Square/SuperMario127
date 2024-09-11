@@ -1800,6 +1800,7 @@ margin_left = 18.5232
 margin_top = -23.3857
 margin_right = 30.5232
 margin_bottom = 0.614304
+theme = ExtResource( 1 )
 text = "?"
 
 [node name="Cloud" type="NinePatchRect" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/useless filler of space"]
