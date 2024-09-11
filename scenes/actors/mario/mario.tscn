@@ -1219,7 +1219,6 @@ luigi_fric = 13.5
 luigi_speed = 216.0
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0.5, -4 )
 z_index = 2
@@ -1374,7 +1373,6 @@ process_material = SubResource( 24 )
 texture = ExtResource( 30 )
 
 [node name="SquishCasts" type="Node2D" parent="."]
-visible = false
 position = Vector2( 0.5, 0 )
 z_index = 1
 
@@ -1389,11 +1387,11 @@ cast_to = Vector2( 0, -20 )
 
 [node name="LeftCheck" type="RayCast2D" parent="SquishCasts"]
 enabled = true
-cast_to = Vector2( 8, 0 )
+cast_to = Vector2( 5, 0 )
 
 [node name="RightCheck" type="RayCast2D" parent="SquishCasts"]
 enabled = true
-cast_to = Vector2( -8, 0 )
+cast_to = Vector2( -5, 0 )
 
 [node name="States" type="Node" parent="."]
 
