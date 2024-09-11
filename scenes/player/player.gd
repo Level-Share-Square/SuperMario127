@@ -2,7 +2,6 @@ extends LevelDataLoader
 
 onready var tick_sound = $SharedSounds/TickSound
 onready var tick_end_sound = $SharedSounds/TickEndSound
-onready var anim_player = $AnimationPlayer
 
 export var character : NodePath
 export var character2 : NodePath
@@ -19,13 +18,6 @@ export var switch_timer : float = 0.0
 export var sound_timer : float = 0.0
 
 func _process(_delta):
-	if Input.is_action_just_pressed("toggle_info_ui"):
-		if ssc_displayed == true:
-			anim_player.play("shine_sc_out")
-			ssc_displayed = false
-		elif ssc_displayed == false:
-			anim_player.play("shine_sc_in")
-			ssc_displayed = true
 	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
 
 func _physics_process(delta):

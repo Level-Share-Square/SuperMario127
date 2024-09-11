@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -22,10 +22,6 @@
 [ext_resource path="res://scenes/player/ui_new/shine_shards.gd" type="Script" id=20]
 [ext_resource path="res://scenes/player/World.gd" type="Script" id=21]
 [ext_resource path="res://scenes/player/ui_new/muitiplayer_realign.gd" type="Script" id=22]
-[ext_resource path="res://scenes/oldmenu/levels_screen/ui/star_coin_icon.png" type="Texture" id=23]
-[ext_resource path="res://scenes/oldmenu/levels_screen/shine_icon.png" type="Texture" id=24]
-[ext_resource path="res://scenes/player/shine_counter.gd" type="Script" id=25]
-[ext_resource path="res://scenes/player/sccounter.gd" type="Script" id=26]
 [ext_resource path="res://scenes/player/dialogue_text.gd" type="Script" id=29]
 [ext_resource path="res://scenes/actors/fludd_display/fludd_display.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
@@ -37,14 +33,6 @@
 [ext_resource path="res://scenes/actors/objects/p_switch/tick.wav" type="AudioStream" id=58]
 [ext_resource path="res://scenes/actors/objects/p_switch/tick_end.wav" type="AudioStream" id=59]
 [ext_resource path="res://scenes/actors/objects/boo/laugh.wav" type="AudioStream" id=60]
-
-[sub_resource type="DynamicFont" id=3]
-size = 24
-font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 24
-font_data = ExtResource( 7 )
 
 [sub_resource type="Animation" id=206]
 length = 0.001
@@ -569,161 +557,6 @@ extents = Vector2( 393, 216 )
 resource_local_to_scene = true
 extents = Vector2( 393, 216 )
 
-[sub_resource type="Animation" id=34]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("UI/ShineCounter:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 29, 19 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("UI/SCCounter:rect_position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 120, 19 ) ]
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("UI/SCCounter:rect_position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 120, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("UI/SCCounter:rect_position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( 19, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("UI/ShineCounter:rect_position:x")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"points": PoolRealArray( 29, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/5/type = "bezier"
-tracks/5/path = NodePath("UI/ShineCounter:rect_position:y")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"points": PoolRealArray( 19, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-
-[sub_resource type="Animation" id=16]
-resource_name = "shine_sc_in"
-length = 1.5
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("UI/SCCounter:rect_position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/keys = {
-"points": PoolRealArray( 120, -0.25, 0, 0.25, 0, 120, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.1, 0.7 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("UI/SCCounter:rect_position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( -45, -0.25, 0, 0.25, 0, 19, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.1, 0.7 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("UI/ShineCounter:rect_position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/keys = {
-"points": PoolRealArray( 29, -0.25, 0, 0.25, 0, 29, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("UI/ShineCounter:rect_position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( -44.951, -0.25, 0, 0.25, 0, 19, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-
-[sub_resource type="Animation" id=17]
-resource_name = "shine_sc_out"
-length = 1.5
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("UI/SCCounter:rect_position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/keys = {
-"points": PoolRealArray( 120, -0.25, 0, 0.25, 0, 120, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.1, 0.7 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("UI/SCCounter:rect_position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 19, -0.25, 0, 0.25, 0, -45, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0.1, 0.7 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("UI/ShineCounter:rect_position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/keys = {
-"points": PoolRealArray( 29, -0.25, 0, 0.25, 0, 29, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("UI/ShineCounter:rect_position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( 19, -0.25, 0, 0.25, 0, -44.951, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
 nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"), NodePath("Viewports/ViewportContainer/Viewport/World/Character"), NodePath("Viewports/ViewportContainer/Viewport/CameraP1"), NodePath("Viewports/ViewportContainer/Viewport/World/Character2"), NodePath("Viewports/ViewportContainer2/Viewport/CameraP2"), NodePath("Viewports/ViewportContainer/Viewport/Backgrounds"), NodePath("Viewports/ViewportContainer2/Viewport/Backgrounds") ]
@@ -738,114 +571,6 @@ unique_name_in_owner = true
 pause_mode = 2
 layer = 63
 script = ExtResource( 33 )
-
-[node name="ShineCounter" type="Control" parent="UI"]
-visible = false
-margin_left = 29.0
-margin_top = 19.0
-margin_right = 68.9998
-margin_bottom = 59.0
-rect_rotation = -0.0704831
-script = ExtResource( 25 )
-
-[node name="ColorRect2" type="ColorRect" parent="UI/ShineCounter"]
-margin_left = -12.0
-margin_top = 31.0
-margin_right = 66.519
-margin_bottom = 34.0
-color = Color( 0, 0, 0, 0.25098 )
-
-[node name="ColorRect" type="ColorRect" parent="UI/ShineCounter"]
-margin_left = -14.0
-margin_top = 29.0
-margin_right = 64.519
-margin_bottom = 32.0
-
-[node name="LabelShadow" type="Label" parent="UI/ShineCounter"]
-margin_left = 25.993
-margin_top = 2.0
-margin_right = 170.993
-margin_bottom = 77.0
-rect_rotation = 0.0366689
-custom_colors/font_color = Color( 0, 0, 0, 0.25098 )
-custom_fonts/font = SubResource( 3 )
-text = "0/0"
-
-[node name="Label" type="Label" parent="UI/ShineCounter"]
-margin_left = 24.085
-margin_right = 169.085
-margin_bottom = 48.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 4 )
-text = "0/0"
-
-[node name="CoinShadow" type="Sprite" parent="UI/ShineCounter"]
-modulate = Color( 0, 0, 0, 0.25098 )
-position = Vector2( -0.131, 7.432 )
-scale = Vector2( 0.333, 0.333 )
-texture = ExtResource( 24 )
-offset = Vector2( 7, 7 )
-
-[node name="Coin" type="Sprite" parent="UI/ShineCounter"]
-position = Vector2( 0, 8.5 )
-scale = Vector2( 0.333, 0.333 )
-texture = ExtResource( 24 )
-
-[node name="Tween" type="Tween" parent="UI/ShineCounter"]
-
-[node name="SCCounter" type="Control" parent="UI"]
-visible = false
-margin_left = 120.0
-margin_top = 19.0
-margin_right = 160.0
-margin_bottom = 59.0
-rect_rotation = -0.0704831
-script = ExtResource( 26 )
-
-[node name="ColorRect2" type="ColorRect" parent="UI/SCCounter"]
-margin_left = -12.0
-margin_top = 31.0
-margin_right = 66.519
-margin_bottom = 34.0
-color = Color( 0, 0, 0, 0.25098 )
-
-[node name="ColorRect" type="ColorRect" parent="UI/SCCounter"]
-margin_left = -14.0
-margin_top = 29.0
-margin_right = 64.519
-margin_bottom = 32.0
-
-[node name="LabelShadow" type="Label" parent="UI/SCCounter"]
-margin_left = 25.993
-margin_top = 2.0
-margin_right = 170.993
-margin_bottom = 77.0
-rect_rotation = 0.0366689
-custom_colors/font_color = Color( 0, 0, 0, 0.25098 )
-custom_fonts/font = SubResource( 3 )
-text = "0/0"
-
-[node name="Label" type="Label" parent="UI/SCCounter"]
-margin_left = 24.085
-margin_right = 169.085
-margin_bottom = 48.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 4 )
-text = "0/0"
-
-[node name="CoinShadow" type="Sprite" parent="UI/SCCounter"]
-modulate = Color( 0, 0, 0, 0.25098 )
-position = Vector2( 0.143, 7.432 )
-scale = Vector2( 0.333, 0.333 )
-texture = ExtResource( 23 )
-offset = Vector2( 7, 7 )
-
-[node name="Coin" type="Sprite" parent="UI/SCCounter"]
-position = Vector2( 0, 8.5 )
-scale = Vector2( 0.333, 0.333 )
-texture = ExtResource( 23 )
-
-[node name="Tween" type="Tween" parent="UI/SCCounter"]
 
 [node name="HUD" type="MarginContainer" parent="UI"]
 anchor_right = 1.0
@@ -1906,8 +1631,3 @@ stream = ExtResource( 58 )
 
 [node name="TickEndSound" type="AudioStreamPlayer" parent="SharedSounds"]
 stream = ExtResource( 59 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 34 )
-anims/shine_sc_in = SubResource( 16 )
-anims/shine_sc_out = SubResource( 17 )
