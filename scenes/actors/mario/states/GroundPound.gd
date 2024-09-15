@@ -31,7 +31,7 @@ func _update(delta):
 
 func _stop(delta):
 	if character.swimming: return
-	if character.is_grounded():
+	if character.is_on_floor():
 		var normal = character.ground_check.get_collision_normal()
 		if stepify(normal.x, 0.1) == 0:
 			character.set_state_by_name("GroundPoundEndState", delta)
@@ -49,4 +49,4 @@ func _stop(delta):
 			character.velocity.y = character.velocity.y / 4
 
 func _stop_check(_delta):
-	return (character.is_grounded() and (character.pipe_detector.get_overlapping_areas().size() == 0 or !character.get_input(Character.input_names.crouch, false))) or (character.inputs[6][1] and can_dive)
+	return (character.is_on_floor() and (character.pipe_detector.get_overlapping_areas().size() == 0 or !character.get_input(Character.input_names.crouch, false))) or (character.inputs[6][1] and can_dive)

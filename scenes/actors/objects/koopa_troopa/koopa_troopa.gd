@@ -24,6 +24,7 @@ export var normal_sprite : SpriteFrames
 export var normal_color_sprite : SpriteFrames
 export var para_sprite : SpriteFrames
 export var para_color_sprite : SpriteFrames
+export var shell_scene : PackedScene
 
 var dead = false
 var loaded = false
@@ -109,7 +110,7 @@ func retract_into_shell():
 			koopa_sound.play()
 		return
 	
-	shell = Singleton.MiscCache.shell_scene.instance()
+	shell = shell_scene.instance()
 	shell_sprite = shell.get_node("Sprite")
 	shell_sprite_color = shell_sprite.get_node("Color")
 	shell_stomp_area = shell.get_node("StompArea")

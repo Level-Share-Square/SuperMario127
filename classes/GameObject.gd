@@ -21,7 +21,8 @@ var is_preview : bool = false
 var base_savable_properties : PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible"]
 var savable_properties : PoolStringArray = []
 
-var property_value_menus : Array = [["base",], ["base",], ["base",], ["base",], ["base",]]
+var base_property_value_menus : Array = [["base",], ["base",], ["base",], ["base",], ["base",]]
+var property_value_menus : Array = []
 
 var base_editable_properties : PoolStringArray = ["enabled", "visible", "rotation_degrees", "scale", "position"]
 var editable_properties : PoolStringArray = []
@@ -128,9 +129,8 @@ func set_property(key, value, change_level_object = true, alias = null, menu = [
 		else:
 			level_object_ref.properties[index] = value
 		
-		if len(property_value_menus) < len(base_savable_properties+savable_properties):
-			property_value_menus.append(menu)
-			#print(property_value_menus)
+#		if len(base_property_value_menus) < len(base_savable_properties+savable_properties):
+#			property_value_menus.append(menu)
 		
 		if key == "visible":
 			if mode == 1:
@@ -138,7 +138,7 @@ func set_property(key, value, change_level_object = true, alias = null, menu = [
 				var color = modulate
 				color.a = 0.5 if value == false else 1.0
 				modulate = color
-	if mode == 1:
+	if mode == 1 and !is_preview:
 		emit_signal("property_changed", key, value)
 
 func get_editor_alias(key):

@@ -4,7 +4,6 @@ var object : GameObject
 var key : String
 var alias : String
 
-
 onready var label = $Label
 
 var property_type
@@ -14,9 +13,17 @@ func _ready():
 		label.text = object.get_editor_alias(key)
 	else:
 		label.text = key.capitalize()
+		
+	var all_property_value_menus = object.base_property_value_menus + object.property_value_menus
 	
 	var value = object[key] if key != "visible" else object.modulate.a == 1
-	var menu = object.property_value_menus[object.get_property_index(key)]
+	var menu
+	if all_property_value_menus > object.base_property_value_menus:
+		menu = all_property_value_menus[object.get_property_index(key)]
+		print("Setting menu of " + key + " to " + menu[0] + " menu!")
+	else:
+		menu = ["base"]
+		print("Setting menu of " + key + " to " + menu[0] + " menu!")
 	var type = typeof(value)
 	var type_scene_name := "None"
 	#print(value)

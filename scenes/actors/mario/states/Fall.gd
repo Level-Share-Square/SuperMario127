@@ -15,7 +15,7 @@ func _update(_delta):
 			sprite.animation = "fallRight"
 		elif character.jump_animation == 1:
 			sprite.animation = "doubleFallRight"
-	else:
+	elif character.facing_direction == -1:
 		if character.jump_animation == 0:
 			sprite.animation = "fallLeft"
 		elif character.jump_animation == 1:

@@ -715,12 +715,12 @@ func _physics_process(delta: float) -> void:
 		move_direction = facing_direction
 			
 	if !controllable:
-		if is_grounded():
+		if is_on_floor():
 			velocity.y = 0 # so velocity doesn't become incredibly high when not controllable
 	
 	# Horizontal physics
 	if move_direction != 0 and controllable:
-		if is_grounded():
+		if is_on_floor():
 			# Accelerate/decelerate
 			if velocity.x * move_direction < 0: #why. just why. you already have the move direction, dingus.
 				velocity.x += deceleration * move_direction
@@ -740,14 +740,14 @@ func _physics_process(delta: float) -> void:
 	elif !disable_friction:
 		if abs(velocity.x) > 0:
 			if abs(velocity.x) > 15:
-				if is_grounded():
+				if is_on_floor():
 					velocity.x -= sign(velocity.x) * friction
 				else:
 					velocity.x -= sign(velocity.x) * aerial_friction * (2 if abs(velocity.x) > move_speed else 1)
 			else:
 				velocity.x = 0
 	
-	if is_grounded() and !disable_animation and movable and controlled_locally and abs(velocity.x) > 15:
+	if is_on_floor() and !disable_animation and movable and controlled_locally and abs(velocity.x) > 15:
 		if !is_walled():
 			sprite.speed_scale = abs(velocity.x) / move_speed if abs(velocity.x) > move_speed else 1.0
 			sprite.animation = "movingRight" if facing_direction == 1 else "movingLeft"
@@ -758,7 +758,7 @@ func _physics_process(delta: float) -> void:
 			sound_player.play_footsteps()
 			footstep_interval = clamp(0.8 - (sprite.speed_scale / 2.5), 0.1, 1)
 		footstep_interval -= delta
-	elif is_grounded():
+	elif is_on_floor():
 		if !disable_animation and movable and controlled_locally:
 			sprite.speed_scale = 1
 			sprite.animation = "idleRight" if facing_direction == 1 else "idleLeft"
@@ -1157,4 +1157,3 @@ func toggle_movement(var value : bool):
 	invulnerable = !value
 	controllable = value
 	movable = value
-	

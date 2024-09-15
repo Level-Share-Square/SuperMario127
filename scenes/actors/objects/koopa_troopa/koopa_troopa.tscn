@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/koopa_troopa.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/regular_frames.tres" type="SpriteFrames" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/para_color_frames.tres" type="SpriteFrames" id=5]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/para_regular_frames.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/body.gd" type="Script" id=7]
+[ext_resource path="res://scenes/actors/objects/koopa_troopa/shell.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RayShape2D" id=1]
 length = 16.0
@@ -30,6 +31,7 @@ normal_sprite = ExtResource( 2 )
 normal_color_sprite = ExtResource( 4 )
 para_sprite = ExtResource( 6 )
 para_color_sprite = ExtResource( 5 )
+shell_scene = ExtResource( 8 )
 
 [node name="Koopa" type="KinematicBody2D" parent="."]
 collision_layer = 4
