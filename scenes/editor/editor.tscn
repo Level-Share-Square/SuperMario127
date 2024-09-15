@@ -1,4 +1,4 @@
-[gd_scene load_steps=1471 format=2]
+[gd_scene load_steps=1473 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1437,6 +1437,8 @@
 [ext_resource path="res://scenes/actors/objects/dialogue_trigger/sign.png" type="Texture" id=1435]
 [ext_resource path="res://scenes/actors/objects/wind_area/windreal.png" type="Texture" id=1436]
 [ext_resource path="res://scenes/actors/objects/wind_area/wind_icon.png" type="Texture" id=1437]
+[ext_resource path="res://scenes/actors/objects/purple_starbits/icon.png" type="Texture" id=1438]
+[ext_resource path="res://scenes/actors/objects/purple_starbits/preview.png" type="Texture" id=1439]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2702,7 +2704,7 @@ object_id = 1
 is_object = true
 object_center = Vector2( 16, 16 )
 change_to = "RedCoin"
-items_in_sequence = 3
+items_in_sequence = 4
 icon = ExtResource( 17 )
 preview = ExtResource( 16 )
 
@@ -2712,7 +2714,7 @@ object_id = 30
 is_object = true
 object_center = Vector2( 16, 16 )
 change_to = "BlueCoin"
-items_in_sequence = 3
+items_in_sequence = 4
 index_in_sequence = 1
 icon = ExtResource( 136 )
 preview = ExtResource( 6 )
@@ -2722,11 +2724,21 @@ script = ExtResource( 24 )
 object_id = 40
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "Coin"
-items_in_sequence = 3
+change_to = "PurpleStarbit"
+items_in_sequence = 4
 index_in_sequence = 2
 icon = SubResource( 1 )
 preview = SubResource( 2 )
+
+[node name="PurpleStarbit" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 130
+is_object = true
+change_to = "Coin"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 1438 )
+preview = ExtResource( 1439 )
 
 [node name="ShineShard" type="Node" parent="PlaceableItems/CollectiblesGroup"]
 script = ExtResource( 24 )
