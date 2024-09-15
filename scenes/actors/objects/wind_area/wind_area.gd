@@ -33,6 +33,8 @@ func _ready():
 		var _connect = area.connect("body_entered", self, "entered")
 		var _connect2 = area.connect("body_exited", self, "exited")
 		sprite.visible = false
+		if triggerable:
+			triggered = false
 	else:
 		var _connect3 = connect("property_changed", self, "update_property")
 	wind_angle_vector = Vector2.UP.rotated(deg2rad(rotation_degrees)).normalized()
