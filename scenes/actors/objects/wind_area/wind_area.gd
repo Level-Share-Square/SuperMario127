@@ -91,6 +91,7 @@ func update_property(key, value):
 
 func entered(body):
 	if triggerable:
+		particles.preprocess = 0
 		triggered = true
 
 func exited(body):
