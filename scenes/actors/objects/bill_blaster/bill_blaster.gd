@@ -18,6 +18,7 @@ var force_direction := 0
 func _set_properties():
 	savable_properties = ["chase", "speed", "color", "wait_time", "invincible", "force_direction", "offset"]
 	editable_properties = ["chase", "speed", "offset", "color", "wait_time", "invincible", "force_direction"]
+	property_value_menus = [["base"], ["base"], ["base"], ["base"], ["base"], ["base"], ["option", 3, -1, ['Face Player', 'Right', 'Left']]]
 	
 func _set_property_values():
 	set_property("chase", chase, true)
@@ -25,7 +26,7 @@ func _set_property_values():
 	set_property("color", color, true)
 	set_property("wait_time", wait_time, true)
 	set_property("invincible", invincible, true)
-	set_property("force_direction", force_direction, true, null, ["option", 3, -1, ['Face Player', 'Right', 'Left']])
+	set_property("force_direction", force_direction, true)
 	set_property("offset", offset, true)
 	spawn_timer = wait_time+offset
 

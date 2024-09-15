@@ -1277,7 +1277,6 @@ animation = "idleRight"
 visible = false
 frames = ExtResource( 44 )
 animation = "swimming"
-frame = 4
 playing = true
 script = ExtResource( 63 )
 
@@ -1294,7 +1293,6 @@ position = Vector2( -7, -6 )
 rotation = -0.00178115
 frames = ExtResource( 24 )
 animation = "in"
-frame = 6
 playing = true
 centered = false
 
@@ -1304,7 +1302,6 @@ position = Vector2( -16, -24 )
 rotation = 1.5708
 frames = ExtResource( 24 )
 animation = "out"
-frame = 6
 playing = true
 centered = false
 
@@ -1836,7 +1833,6 @@ texture = ExtResource( 51 )
 [node name="RingParticles" type="AnimatedSprite" parent="."]
 material = SubResource( 50 )
 frames = SubResource( 59 )
-frame = 7
 playing = true
 offset = Vector2( 0, 4 )
 
@@ -1844,7 +1840,6 @@ offset = Vector2( 0, 4 )
 show_behind_parent = true
 material = SubResource( 50 )
 frames = SubResource( 60 )
-frame = -1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1863,7 +1858,6 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 14
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
@@ -1891,7 +1885,6 @@ z_index = 20
 z_as_relative = false
 frames = ExtResource( 1 )
 animation = "swimming"
-frame = 4
 playing = true
 script = ExtResource( 34 )
 
@@ -1899,7 +1892,6 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 6
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]

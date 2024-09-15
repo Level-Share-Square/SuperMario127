@@ -14,8 +14,8 @@ func _set_properties():
 	editable_properties = ["inverted", "palette"]
 
 func _set_property_values():
-	set_property("inverted", inverted, false)
-	set_property("palette", palette, 0)
+	set_property("inverted", inverted, false, null, ["base"])
+	set_property("palette", palette, 0, null, ["base"])
 
 func _ready():
 	init()

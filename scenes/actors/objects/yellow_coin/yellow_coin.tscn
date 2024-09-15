@@ -13,7 +13,6 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
-frame = 3
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -34,5 +33,6 @@ shape = SubResource( 2 )
 disabled = true
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
 process_parent = true
 physics_process_parent = true
