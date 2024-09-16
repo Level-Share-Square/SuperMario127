@@ -64,6 +64,7 @@ func _ready():
 		
 	Singleton.CurrentLevelData.level_data.vars.max_red_coins = 0
 	Singleton.CurrentLevelData.level_data.vars.max_shine_shards = 0
+	Singleton.CurrentLevelData.level_data.vars.max_purple_starbits = 0
 	Singleton.CurrentLevelData.level_data.vars.teleporters = []
 	Singleton.CurrentLevelData.level_data.vars.liquids = []
 	Singleton.CurrentLevelData.level_data.vars.checkpoints = []

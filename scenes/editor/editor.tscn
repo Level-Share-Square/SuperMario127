@@ -2703,40 +2703,39 @@ script = ExtResource( 24 )
 object_id = 1
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "RedCoin"
-items_in_sequence = 4
+change_to = "BlueCoin"
+items_in_sequence = 2
 icon = ExtResource( 17 )
 preview = ExtResource( 16 )
-
-[node name="RedCoin" type="Node" parent="PlaceableItems/CollectiblesGroup"]
-script = ExtResource( 24 )
-object_id = 30
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "BlueCoin"
-items_in_sequence = 4
-index_in_sequence = 1
-icon = ExtResource( 136 )
-preview = ExtResource( 6 )
 
 [node name="BlueCoin" type="Node" parent="PlaceableItems/CollectiblesGroup"]
 script = ExtResource( 24 )
 object_id = 40
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "PurpleStarbit"
-items_in_sequence = 4
-index_in_sequence = 2
+change_to = "Coin"
+items_in_sequence = 2
+index_in_sequence = 1
 icon = SubResource( 1 )
 preview = SubResource( 2 )
+
+[node name="RedCoin" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 30
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "PurpleStarbit"
+items_in_sequence = 3
+icon = ExtResource( 136 )
+preview = ExtResource( 6 )
 
 [node name="PurpleStarbit" type="Node" parent="PlaceableItems/CollectiblesGroup"]
 script = ExtResource( 24 )
 object_id = 130
 is_object = true
-change_to = "Coin"
-items_in_sequence = 4
-index_in_sequence = 3
+change_to = "ShineShard"
+items_in_sequence = 3
+index_in_sequence = 1
 icon = ExtResource( 1438 )
 preview = ExtResource( 1439 )
 
@@ -2745,9 +2744,9 @@ script = ExtResource( 24 )
 object_id = 45
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "StarCoin"
+change_to = "RedCoin"
 items_in_sequence = 3
-index_in_sequence = 1
+index_in_sequence = 2
 icon = ExtResource( 148 )
 preview = ExtResource( 150 )
 
@@ -2757,8 +2756,8 @@ object_id = 2
 is_object = true
 object_center = Vector2( 16, 16 )
 item_name = "Shine Sprite"
-change_to = "ShineShard"
-items_in_sequence = 3
+change_to = "StarCoin"
+items_in_sequence = 2
 icon = ExtResource( 15 )
 preview = ExtResource( 15 )
 
@@ -2768,8 +2767,8 @@ object_id = 52
 is_object = true
 object_center = Vector2( 16, 16 )
 change_to = "Shine"
-items_in_sequence = 3
-index_in_sequence = 2
+items_in_sequence = 2
+index_in_sequence = 1
 icon = ExtResource( 165 )
 preview = ExtResource( 165 )
 

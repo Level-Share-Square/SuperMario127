@@ -1,15 +1,15 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scenes/actors/objects/rainbow_powerup/collect.wav" type="AudioStream" id=1]
+[ext_resource path="res://scenes/actors/objects/purple_starbits/purple_collect.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/actors/objects/purple_starbits/glow.shader" type="Shader" id=2]
 [ext_resource path="res://scenes/actors/objects/purple_starbits/purple_starbits.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/purple_starbits/purple.tres" type="SpriteFrames" id=4]
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 2 )
-shader_param/Smooth = true
-shader_param/width = 2.0
-shader_param/outline_color = Color( 0.556863, 0.121569, 0.760784, 1 )
+shader_param/Smooth = false
+shader_param/width = 1.0
+shader_param/outline_color = Color( 0.431373, 0.533333, 1, 0.564706 )
 shader_param/pixel_size = 1
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -34,7 +34,6 @@ shape = SubResource( 2 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 1 )
-volume_db = -5.0
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false

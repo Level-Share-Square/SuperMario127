@@ -13,12 +13,13 @@ var gravity : float
 var velocity : Vector2
 
 var id : int
+var timer
 
 export var anim_damp = 80
 
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
-		Singleton.CurrentLevelData.level_data.vars.collect_shine_shard(id)
+		Singleton.CurrentLevelData.level_data.vars.collect_purple_starbit(id)
 		var player_id = 1
 		if body.name == "Character":
 			player_id = 0
@@ -32,10 +33,10 @@ func collect(body):
 func _ready():
 	if mode == 1: return
 	if enabled:
-		id = Singleton.CurrentLevelData.level_data.vars.max_shine_shards
-		Singleton.CurrentLevelData.level_data.vars.max_shine_shards += 1
+		id = Singleton.CurrentLevelData.level_data.vars.max_purple_starbits
+		Singleton.CurrentLevelData.level_data.vars.max_purple_starbits += 1
 	
-	if id in Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][1]:
+	if id in Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][1]:
 		queue_free()
 	
 	var _connect = area.connect("body_entered", self, "collect")
