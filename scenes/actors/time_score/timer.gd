@@ -7,11 +7,15 @@ const FADE_TIME: float = 0.5
 onready var timer_display: Label = $Time
 onready var name_display: Label = $Time/Name
 onready var tween := $Tween
+onready var tick_sound := $Tick
+onready var tick_end_sound := $TickEnd
 
 export var label_text: String = "TIME"
 export var show_time_score: bool = false
 export var is_counting: bool = true
 export var time: float = 0.0
+export var sound: bool = false
+export var sound_time : float = 0.0
 
 
 func _ready():
@@ -42,6 +46,17 @@ func _physics_process(delta):
 	
 	if is_counting:
 		time -= delta
+		
+		if sound:
+			sound_time -= delta
+			if sound_time <= 0:
+				if time > 3:
+					tick_sound.play()
+				else:
+					if !tick_end_sound.playing:
+						tick_end_sound.play()
+				sound_time = wrapf(time, 0, 1.1)
+		
 		timer_display.text = LevelInfo.generate_time_string(time)
 		
 		if time <= 0:
@@ -59,7 +74,7 @@ func cancel_time_over():
 func time_over():
 	is_counting = false
 	emit_signal("time_over")
-			
+	
 	tween.connect("tween_all_completed", self, "queue_free")
 	tween.interpolate_property(
 		timer_display, 

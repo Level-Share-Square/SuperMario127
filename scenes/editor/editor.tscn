@@ -1,4 +1,4 @@
-[gd_scene load_steps=1473 format=2]
+[gd_scene load_steps=1475 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1437,8 +1437,10 @@
 [ext_resource path="res://scenes/actors/objects/dialogue_trigger/sign.png" type="Texture" id=1435]
 [ext_resource path="res://scenes/actors/objects/wind_area/windreal.png" type="Texture" id=1436]
 [ext_resource path="res://scenes/actors/objects/wind_area/wind_icon.png" type="Texture" id=1437]
-[ext_resource path="res://scenes/actors/objects/purple_starbits/icon.png" type="Texture" id=1438]
-[ext_resource path="res://scenes/actors/objects/purple_starbits/preview.png" type="Texture" id=1439]
+[ext_resource path="res://scenes/actors/objects/purple_starbit/icon.png" type="Texture" id=1438]
+[ext_resource path="res://scenes/actors/objects/purple_starbit/preview.png" type="Texture" id=1439]
+[ext_resource path="res://scenes/actors/objects/purple_starbit_switch/preview.png" type="Texture" id=1440]
+[ext_resource path="res://scenes/actors/objects/purple_starbit_switch/icon.png" type="Texture" id=1441]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2611,6 +2613,13 @@ index_in_sequence = 1
 icon = ExtResource( 337 )
 preview = ExtResource( 336 )
 
+[node name="PurpleStarbitSwitch" type="Node" parent="PlaceableItems/SwitchesGroup"]
+script = ExtResource( 24 )
+object_id = 131
+is_object = true
+icon = ExtResource( 1441 )
+preview = ExtResource( 1440 )
+
 [node name="CrystalTap" type="Node" parent="PlaceableItems/SwitchesGroup"]
 script = ExtResource( 24 )
 object_id = 81
@@ -2733,6 +2742,7 @@ preview = ExtResource( 6 )
 script = ExtResource( 24 )
 object_id = 130
 is_object = true
+item_name = "Purple Starbit"
 change_to = "ShineShard"
 items_in_sequence = 3
 index_in_sequence = 1

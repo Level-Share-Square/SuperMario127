@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/preview.png-2b190bed914cf26597a1eab41e2b6452.stex"
+path="res://.import/image.png-59ec943ca64bcb38fcd6c246051774b4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/purple_starbits/preview.png"
-dest_files=[ "res://.import/preview.png-2b190bed914cf26597a1eab41e2b6452.stex" ]
+source_file="res://scenes/actors/objects/purple_starbit/image.png"
+dest_files=[ "res://.import/image.png-59ec943ca64bcb38fcd6c246051774b4.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

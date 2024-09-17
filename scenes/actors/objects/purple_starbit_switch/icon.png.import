@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/purpleslol2.png-04a87880a03956b1c07d8522731465a2.stex"
+path="res://.import/icon.png-82fac73db93fdc6958dee373288a53ec.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/purple_starbits/purpleslol2.png"
-dest_files=[ "res://.import/purpleslol2.png-04a87880a03956b1c07d8522731465a2.stex" ]
+source_file="res://scenes/actors/objects/purple_starbit_switch/icon.png"
+dest_files=[ "res://.import/icon.png-82fac73db93fdc6958dee373288a53ec.stex" ]
 
 [params]
 

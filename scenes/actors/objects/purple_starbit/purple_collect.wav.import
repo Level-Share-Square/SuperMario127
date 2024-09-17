@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/sound_last.wav-77b44674e7cbafb74e9f3255e9cc3f45.sample"
+path="res://.import/purple_collect.wav-3bdd25a6c24189fdf153c34ca5f79726.sample"
 
 [deps]
 
-source_file="res://scenes/actors/objects/purple_starbits/sound_last.wav"
-dest_files=[ "res://.import/sound_last.wav-77b44674e7cbafb74e9f3255e9cc3f45.sample" ]
+source_file="res://scenes/actors/objects/purple_starbit/purple_collect.wav"
+dest_files=[ "res://.import/purple_collect.wav-3bdd25a6c24189fdf153c34ca5f79726.sample" ]
 
 [params]
 
