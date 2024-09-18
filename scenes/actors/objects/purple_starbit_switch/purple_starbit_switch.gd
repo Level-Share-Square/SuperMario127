@@ -5,7 +5,6 @@ var boost_timer = 0.0
 var was_ground_pound = false
 
 var timer_manager
-var _connect
 
 var character : Character
 export var top_point : Vector2
@@ -25,6 +24,7 @@ func _set_property_values():
 func _ready():
 	if mode != 1:
 		timer_manager = get_node("/root/Player").get_node("%TimerManager")
+		get_tree().call_group("purple_starbits", "turn_off")
 	rotation = 0
 
 func press(hit_pos : Vector2) -> void:
@@ -52,8 +52,9 @@ func _physics_process(delta):
 				
 				if boost_timer <= 0:
 					boost_timer = 0
-					var timer_node = timer_manager.add_timer("purple_starbits", pressed_time, true)
-					_connect = timer_node.connect("time_over", self, "timer_ended")
+					get_tree().call_group("purple_starbits", "turn_on")
+					var timer_node = timer_manager.add_timer("PurpleStarbits", pressed_time, true)
+					timer_node.connect("time_over", self, "timer_ended")
 					if !was_ground_pound:
 						character.velocity.y = -325
 						if character.state != character.get_state_node("DiveState"):
@@ -71,8 +72,7 @@ func _physics_process(delta):
 						character = hit_body
 						press(hit_body.global_position)
 
-func timer_ended(timer_name):
-	if timer_name == "purple_starbits":
-		print("Purple Starbits done!")
-		pressed = false
-		anim_player.play("unpress")
+func timer_ended():
+	get_tree().call_group("purple_starbits", "turn_off")
+	pressed = false
+	anim_player.play("unpress")

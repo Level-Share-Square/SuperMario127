@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/preview.png-8c32aac6a9b53c98584cdbd6653ea013.stex"
+path="res://.import/propeller_icon.png-2ad0f282a86261f70777b9781cfc1a01.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/purple_starbit/preview.png"
-dest_files=[ "res://.import/preview.png-8c32aac6a9b53c98584cdbd6653ea013.stex" ]
+source_file="res://scenes/actors/objects/propeller/propeller_icon.png"
+dest_files=[ "res://.import/propeller_icon.png-2ad0f282a86261f70777b9781cfc1a01.stex" ]
 
 [params]
 

@@ -53,7 +53,7 @@ var show_in_menu := true
 var activated := true
 var red_coins_activate := false
 var shine_shards_activate := false
-var required_purple_starbits := 0
+var required_purples := 0
 var color := Color(1, 1, 0)
 var id := 0
 var do_kick_out := true
@@ -62,8 +62,8 @@ var sort_position : int = 0
 var score_from_before = 0 # haha that rhymes
 
 func _set_properties() -> void:
-	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out", "sort_position", "required_purple_starbits"]
-	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "required_purple_starbits", "color", "do_kick_out", "sort_position"]
+	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out", "sort_position", "required_purples"]
+	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "required_purples", "color", "do_kick_out", "sort_position"]
 	
 func _set_property_values() -> void:
 	set_property("title", title, true)
@@ -72,7 +72,7 @@ func _set_property_values() -> void:
 	set_property("activated", activated, true)
 	set_property("red_coins_activate", red_coins_activate, true)
 	set_property("shine_shards_activate", shine_shards_activate, true)
-	set_property("required_purple_starbits", required_purple_starbits, true)
+	set_property("required_purples", required_purples, true)
 	set_property("color", color, true)
 	set_property("id", id, true)
 	set_property("do_kick_out", do_kick_out, true)
@@ -81,9 +81,9 @@ func _set_property_values() -> void:
 func _ready() -> void:
 	send_score = true
 	if mode != 1: # not in edit mode
-		if required_purple_starbits > 0:
+		if required_purples > 0:
 			purple_starbits_activate = true
-			Singleton.CurrentLevelData.level_data.vars.required_purple_starbits[Singleton.CurrentLevelData.area].append(required_purple_starbits)
+			Singleton.CurrentLevelData.level_data.vars.required_purple_starbits[Singleton.CurrentLevelData.area].append(required_purples)
 			Singleton.CurrentLevelData.level_data.vars.required_purple_starbits[Singleton.CurrentLevelData.area].sort()
 		else:
 			purple_starbits_activate = false
@@ -173,7 +173,7 @@ func _physics_process(_delta : float) -> void:
 			if Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][0] == Singleton.CurrentLevelData.level_data.vars.max_shine_shards:
 				activate_shine()
 		if purple_starbits_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_purple_starbits > 0:
-			if Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0] >= required_purple_starbits:
+			if Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0] >= required_purples:
 				activate_shine()
 		if !collected:
 			if !activated:

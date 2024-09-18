@@ -83,5 +83,4 @@ volume_db = 10.0
 [node name="EditorSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
 animation = "4"
-frame = 1
 playing = true

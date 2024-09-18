@@ -1,4 +1,4 @@
-[gd_scene load_steps=1475 format=2]
+[gd_scene load_steps=1477 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1441,6 +1441,8 @@
 [ext_resource path="res://scenes/actors/objects/purple_starbit/preview.png" type="Texture" id=1439]
 [ext_resource path="res://scenes/actors/objects/purple_starbit_switch/preview.png" type="Texture" id=1440]
 [ext_resource path="res://scenes/actors/objects/purple_starbit_switch/icon.png" type="Texture" id=1441]
+[ext_resource path="res://scenes/actors/objects/propeller/preview.png" type="Texture" id=1442]
+[ext_resource path="res://scenes/actors/objects/propeller/propeller_icon.png" type="Texture" id=1443]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3084,6 +3086,14 @@ palette_icons = [ ExtResource( 852 ), ExtResource( 851 ), ExtResource( 853 ), Ex
 palette_previews = [ ExtResource( 852 ), ExtResource( 851 ), ExtResource( 853 ), ExtResource( 849 ), ExtResource( 850 ) ]
 icon = ExtResource( 852 )
 preview = ExtResource( 852 )
+
+[node name="Propeller" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 24 )
+object_id = 132
+is_object = true
+object_center = Vector2( 0, -5 )
+icon = ExtResource( 1443 )
+preview = ExtResource( 1442 )
 
 [node name="Jelectro" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 24 )

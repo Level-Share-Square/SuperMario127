@@ -14,7 +14,7 @@ shader_param/pixel_size = 1
 
 [sub_resource type="RectangleShape2D" id=2]
 
-[node name="PurpleStarbit" type="Node2D"]
+[node name="PurpleStarbit" type="Node2D" groups=["PurpleStarbits"]]
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
