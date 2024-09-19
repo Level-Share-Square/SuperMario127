@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/death.mp3-266a5f0aa7a0c28d9e3e54096c058a3b.mp3str"
+
+[deps]
+
+source_file="res://scenes/actors/objects/skeleton_goonie/death.mp3"
+dest_files=[ "res://.import/death.mp3-266a5f0aa7a0c28d9e3e54096c058a3b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

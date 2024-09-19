@@ -38,7 +38,7 @@ var time_alive := 0.0
 var time_until_die := 0.0
 var time_until_turn := 3.0
 
-var color := Color(1, 0, 0)
+export var color := Color(1, 0, 0)
 var rainbow := false
 
 var hit := false
