@@ -134,7 +134,7 @@ gradient = SubResource( 196 )
 fill_from = Vector2( 0.1375, 0.1375 )
 fill_to = Vector2( 0.141667, 0.166667 )
 
-[sub_resource type="Shader" id=192]
+[sub_resource type="Shader" id=220]
 code = "shader_type canvas_item;
 // Shader to round corners of a canvas. The 'radius_scale' is multiplied by
 // minimum(width, height)/2.0 to calculate the radius of the corners.
@@ -206,7 +206,7 @@ void fragment() {
 "
 
 [sub_resource type="ShaderMaterial" id=193]
-shader = SubResource( 192 )
+shader = SubResource( 220 )
 shader_param/radius_scale = 1.0
 shader_param/rounded_corner_top_left = true
 shader_param/rounded_corner_top_right = true
@@ -333,21 +333,131 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.729412, 0.317647, 0.580392, 1 ) ]
 }
 
-[sub_resource type="Gradient" id=198]
+[sub_resource type="Gradient" id=221]
 colors = PoolColorArray( 0.6, 0.101961, 0.419608, 1, 0.6, 0.101961, 0.419608, 1 )
 
 [sub_resource type="GradientTexture2D" id=199]
-gradient = SubResource( 198 )
+gradient = SubResource( 221 )
 fill_from = Vector2( 0.1375, 0.1375 )
 fill_to = Vector2( 0.141667, 0.166667 )
 
-[sub_resource type="Gradient" id=200]
+[sub_resource type="Gradient" id=222]
 offsets = PoolRealArray( 0, 0.264249, 0.626943, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.376471, 1, 1, 1, 0.501961, 1, 0, 0.74902, 0, 0.352941, 0.0705882, 0.388235, 0.501961 )
 
 [sub_resource type="GradientTexture2D" id=201]
-gradient = SubResource( 200 )
+gradient = SubResource( 222 )
 fill_to = Vector2( 0, 1 )
+
+[sub_resource type="Animation" id=216]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/Counter:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 51, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/Counter:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer/Counter:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=217]
+resource_name = "collect"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/Counter:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 3.605, 1 ),
+"update": 0,
+"values": [ Vector2( 51, -3 ), Vector2( 51, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/Counter:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 0.678431, 0.164706, 0.694118, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer/Counter:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1.1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=218]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=219]
+resource_name = "fadeout"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.521569, 0.137255, 0.572549, 1 ) ]
+}
 
 [sub_resource type="Animation" id=212]
 length = 0.001
@@ -501,116 +611,6 @@ extra_spacing_top = 5
 extra_spacing_char = -2
 font_data = ExtResource( 11 )
 
-[sub_resource type="Animation" id=216]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("HBoxContainer/Counter:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 51, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("HBoxContainer/Counter:custom_colors/font_color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("HBoxContainer/Counter:rect_scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=217]
-resource_name = "collect"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("HBoxContainer/Counter:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25 ),
-"transitions": PoolRealArray( 3.605, 1 ),
-"update": 0,
-"values": [ Vector2( 51, -3 ), Vector2( 51, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("HBoxContainer/Counter:custom_colors/font_color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 2, 1 ),
-"update": 0,
-"values": [ Color( 0.678431, 0.164706, 0.694118, 1 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("HBoxContainer/Counter:rect_scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 0.5, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1.1 ), Vector2( 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=218]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=219]
-resource_name = "fadeout"
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 2, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.521569, 0.137255, 0.572549, 1 ) ]
-}
-
 [sub_resource type="Gradient" id=203]
 offsets = PoolRealArray( 0.222798, 0.554404, 0.80829, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.914417, 1, 1, 1, 0.533333, 0.584314, 0.027451, 0.498039, 0.501961, 0.888295, 0.742127, 0.776589, 0.849079 )
@@ -680,6 +680,7 @@ unique_name_in_owner = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 pause_mode = 2
+unique_name_in_owner = true
 layer = 63
 script = ExtResource( 33 )
 
@@ -1013,17 +1014,191 @@ custom_colors/font_outline_modulate = Color( 0.439216, 0.0941176, 0.247059, 0.65
 custom_fonts/font = ExtResource( 15 )
 text = "0/0"
 
-[node name="Padding2" type="Control" parent="UI/HUD/Control/Collectibles"]
+[node name="PurpleStarbits" type="Control" parent="UI/HUD/Control/Collectibles"]
 margin_top = 36.0
 margin_right = 40.0
-margin_bottom = 40.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 24 )
+script = ExtResource( 23 )
+
+[node name="PolygonSwatch" parent="UI/HUD/Control/Collectibles/PurpleStarbits" instance=ExtResource( 14 )]
+modulate = Color( 0.556863, 0.121569, 0.760784, 0.752941 )
+position = Vector2( 0, 12 )
+rotation = 0.1309
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/HUD/Control/Collectibles/PurpleStarbits"]
+anims/RESET = SubResource( 216 )
+anims/collect = SubResource( 217 )
+
+[node name="Fadeout" type="AnimationPlayer" parent="UI/HUD/Control/Collectibles/PurpleStarbits"]
+anims/RESET = SubResource( 218 )
+anims/fadeout = SubResource( 219 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/Control/Collectibles/PurpleStarbits"]
+margin_top = 6.0
+margin_right = 86.0
+margin_bottom = 30.0
+rect_rotation = -7.0
+custom_constants/separation = 6
+
+[node name="Padding" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer"]
+margin_bottom = 24.0
+
+[node name="Icon" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer"]
+margin_left = 6.0
+margin_right = 26.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="RedCoin" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = 2.0
+margin_right = -2.0
+margin_bottom = -2.0
+rect_scale = Vector2( 1.2, 1.125 )
+
+[node name="Circle5" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin"]
+margin_left = -0.999999
+margin_top = 1.0
+margin_right = 18.0
+margin_bottom = 18.0
+rect_rotation = -4.0
+rect_scale = Vector2( 1.1, 1.17 )
+script = SubResource( 189 )
+color = Color( 0.439216, 0.0941176, 0.247059, 0.65098 )
+
+[node name="Circle2" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin"]
+margin_top = 3.0
+margin_right = 18.0
+margin_bottom = 17.0
+rect_rotation = -4.0
+rect_scale = Vector2( 1.1, 1.17 )
+script = SubResource( 189 )
+color = Color( 0.662745, 0.141176, 0.396078, 1 )
+
+[node name="Circle4" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin"]
+margin_left = 1.8969
+margin_top = -0.289471
+margin_right = 15.8969
+margin_bottom = 17.7105
+rect_rotation = -4.0
+rect_scale = Vector2( 1.1, 1.17 )
+script = SubResource( 189 )
+color = Color( 0.901961, 0.0196078, 0.309804, 1 )
+
+[node name="Circle" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin"]
+margin_left = 4.0
+margin_top = 1.0
+margin_right = 17.0
+margin_bottom = 17.0
+rect_rotation = -3.0
+rect_scale = Vector2( 1, 1.08 )
+script = SubResource( 189 )
+color = Color( 1, 0.690196, 0.807843, 1 )
+
+[node name="Circle3" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin"]
+margin_left = 5.5
+margin_top = -1.0
+margin_right = 15.5
+margin_bottom = 17.0
+rect_rotation = -3.0
+rect_scale = Vector2( 1, 1.17 )
+script = SubResource( 189 )
+color = Color( 1, 0.368627, 0.545098, 1 )
+
+[node name="Control" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin"]
+margin_left = -1.29004
+margin_top = 0.36325
+margin_right = -1.29004
+margin_bottom = 0.36325
+rect_rotation = -2.0
+rect_scale = Vector2( 1.05, 1 )
+
+[node name="Star" type="Polygon2D" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin/Control"]
+position = Vector2( -4.57172, 3.14765 )
+rotation = -0.0717836
+scale = Vector2( 1.22159, 0.986667 )
+texture = SubResource( 199 )
+polygon = PoolVector2Array( 9.99784, 4.92504, 10.6139, 7.43636, 8.96349, 8.26913, 10.5546, 9.80469, 9.87625, 11.8941, 11.7782, 11.4744, 12.5934, 13.6172, 13.6156, 11.3844, 15.404, 12.0079, 14.8112, 9.89613, 16.5428, 8.46088, 14.9005, 7.42459, 15.6203, 5.26663, 13.75, 6, 12.864, 3.59144, 12, 6 )
+
+[node name="Circle6" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin/Control"]
+margin_left = 10.3447
+margin_top = 4.5435
+margin_right = 12.3447
+margin_bottom = 6.5435
+rect_rotation = -3.0
+script = SubResource( 189 )
+color = Color( 0.6, 0.101961, 0.419608, 1 )
+
+[node name="Circle7" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin/Control"]
+margin_left = 13.779
+margin_top = 5.97964
+margin_right = 15.779
+margin_bottom = 7.97964
+rect_rotation = -3.0
+script = SubResource( 189 )
+color = Color( 0.6, 0.101961, 0.419608, 1 )
+
+[node name="Circle8" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin/Control"]
+margin_left = 7.07417
+margin_top = 6.37339
+margin_right = 9.07417
+margin_bottom = 8.37339
+rect_rotation = -3.0
+script = SubResource( 189 )
+color = Color( 0.6, 0.101961, 0.419608, 1 )
+
+[node name="Circle9" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin/Control"]
+margin_left = 10.0
+margin_top = 9.25
+margin_right = 13.0
+margin_bottom = 12.25
+rect_rotation = -3.0
+script = SubResource( 189 )
+color = Color( 1, 0.368627, 0.545098, 1 )
+
+[node name="Shading" type="TextureRect" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin"]
+visible = false
+material = SubResource( 193 )
+margin_left = 2.12261
+margin_top = 2.20415
+margin_right = 16.1226
+margin_bottom = 17.2041
+rect_rotation = -4.0
+rect_scale = Vector2( 1.1, 1.125 )
+texture = SubResource( 201 )
+expand = true
+
+[node name="X" type="Label" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer"]
+margin_left = 32.0
+margin_right = 45.0
+margin_bottom = 24.0
+custom_colors/font_outline_modulate = Color( 0.27451, 0.0588235, 0.376471, 0.65098 )
+custom_fonts/font = ExtResource( 15 )
+text = "x"
+
+[node name="Counter" type="Label" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer"]
+margin_left = 51.0
+margin_right = 136.0
+margin_bottom = 24.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.27451, 0.0588235, 0.376471, 0.65098 )
+custom_fonts/font = ExtResource( 15 )
+text = "000/100"
+
+[node name="Padding2" type="Control" parent="UI/HUD/Control/Collectibles"]
+margin_top = 64.0
+margin_right = 40.0
+margin_bottom = 68.0
 rect_min_size = Vector2( 0, 4 )
 
 [node name="ShineShards" type="Control" parent="UI/HUD/Control/Collectibles"]
 visible = false
-margin_top = 72.0
+margin_top = 100.0
 margin_right = 40.0
-margin_bottom = 108.0
+margin_bottom = 136.0
 rect_min_size = Vector2( 36, 36 )
 script = ExtResource( 20 )
 
@@ -1243,179 +1418,6 @@ custom_fonts/font = SubResource( 31 )
 text = "0"
 align = 1
 valign = 1
-
-[node name="PurpleStarbits" type="Control" parent="UI/HUD/Control/Collectibles"]
-margin_top = 44.0
-margin_right = 40.0
-margin_bottom = 68.0
-rect_min_size = Vector2( 0, 24 )
-script = ExtResource( 23 )
-
-[node name="PolygonSwatch" parent="UI/HUD/Control/Collectibles/PurpleStarbits" instance=ExtResource( 14 )]
-modulate = Color( 0.556863, 0.121569, 0.760784, 0.752941 )
-position = Vector2( 0, 12 )
-rotation = 0.1309
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/HUD/Control/Collectibles/PurpleStarbits"]
-anims/RESET = SubResource( 216 )
-anims/collect = SubResource( 217 )
-
-[node name="Fadeout" type="AnimationPlayer" parent="UI/HUD/Control/Collectibles/PurpleStarbits"]
-anims/RESET = SubResource( 218 )
-anims/fadeout = SubResource( 219 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/Control/Collectibles/PurpleStarbits"]
-margin_top = 6.0
-margin_right = 86.0
-margin_bottom = 30.0
-rect_rotation = -7.0
-custom_constants/separation = 6
-
-[node name="Padding" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer"]
-margin_bottom = 24.0
-
-[node name="Icon" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer"]
-margin_left = 6.0
-margin_right = 26.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 20, 0 )
-
-[node name="RedCoin" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -2.0
-margin_top = 2.0
-margin_right = -2.0
-margin_bottom = -2.0
-rect_scale = Vector2( 1.2, 1.125 )
-
-[node name="Circle5" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin"]
-margin_left = -0.999999
-margin_top = 1.0
-margin_right = 18.0
-margin_bottom = 18.0
-rect_rotation = -4.0
-rect_scale = Vector2( 1.1, 1.17 )
-script = SubResource( 189 )
-color = Color( 0.439216, 0.0941176, 0.247059, 0.65098 )
-
-[node name="Circle2" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin"]
-margin_top = 3.0
-margin_right = 18.0
-margin_bottom = 17.0
-rect_rotation = -4.0
-rect_scale = Vector2( 1.1, 1.17 )
-script = SubResource( 189 )
-color = Color( 0.662745, 0.141176, 0.396078, 1 )
-
-[node name="Circle4" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin"]
-margin_left = 1.8969
-margin_top = -0.289471
-margin_right = 15.8969
-margin_bottom = 17.7105
-rect_rotation = -4.0
-rect_scale = Vector2( 1.1, 1.17 )
-script = SubResource( 189 )
-color = Color( 0.901961, 0.0196078, 0.309804, 1 )
-
-[node name="Circle" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin"]
-margin_left = 4.0
-margin_top = 1.0
-margin_right = 17.0
-margin_bottom = 17.0
-rect_rotation = -3.0
-rect_scale = Vector2( 1, 1.08 )
-script = SubResource( 189 )
-color = Color( 1, 0.690196, 0.807843, 1 )
-
-[node name="Circle3" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin"]
-margin_left = 5.5
-margin_top = -1.0
-margin_right = 15.5
-margin_bottom = 17.0
-rect_rotation = -3.0
-rect_scale = Vector2( 1, 1.17 )
-script = SubResource( 189 )
-color = Color( 1, 0.368627, 0.545098, 1 )
-
-[node name="Control" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin"]
-margin_left = -1.29004
-margin_top = 0.36325
-margin_right = -1.29004
-margin_bottom = 0.36325
-rect_rotation = -2.0
-rect_scale = Vector2( 1.05, 1 )
-
-[node name="Star" type="Polygon2D" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin/Control"]
-position = Vector2( -4.57172, 3.14765 )
-rotation = -0.0717836
-scale = Vector2( 1.22159, 0.986667 )
-texture = SubResource( 199 )
-polygon = PoolVector2Array( 9.99784, 4.92504, 10.6139, 7.43636, 8.96349, 8.26913, 10.5546, 9.80469, 9.87625, 11.8941, 11.7782, 11.4744, 12.5934, 13.6172, 13.6156, 11.3844, 15.404, 12.0079, 14.8112, 9.89613, 16.5428, 8.46088, 14.9005, 7.42459, 15.6203, 5.26663, 13.75, 6, 12.864, 3.59144, 12, 6 )
-
-[node name="Circle6" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin/Control"]
-margin_left = 10.3447
-margin_top = 4.5435
-margin_right = 12.3447
-margin_bottom = 6.5435
-rect_rotation = -3.0
-script = SubResource( 189 )
-color = Color( 0.6, 0.101961, 0.419608, 1 )
-
-[node name="Circle7" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin/Control"]
-margin_left = 13.779
-margin_top = 5.97964
-margin_right = 15.779
-margin_bottom = 7.97964
-rect_rotation = -3.0
-script = SubResource( 189 )
-color = Color( 0.6, 0.101961, 0.419608, 1 )
-
-[node name="Circle8" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin/Control"]
-margin_left = 7.07417
-margin_top = 6.37339
-margin_right = 9.07417
-margin_bottom = 8.37339
-rect_rotation = -3.0
-script = SubResource( 189 )
-color = Color( 0.6, 0.101961, 0.419608, 1 )
-
-[node name="Circle9" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin/Control"]
-margin_left = 10.0
-margin_top = 9.25
-margin_right = 13.0
-margin_bottom = 12.25
-rect_rotation = -3.0
-script = SubResource( 189 )
-color = Color( 1, 0.368627, 0.545098, 1 )
-
-[node name="Shading" type="TextureRect" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin"]
-material = SubResource( 193 )
-margin_left = 2.12261
-margin_top = 2.20415
-margin_right = 16.1226
-margin_bottom = 17.2041
-rect_rotation = -4.0
-rect_scale = Vector2( 1.1, 1.125 )
-texture = SubResource( 201 )
-expand = true
-
-[node name="X" type="Label" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer"]
-margin_left = 32.0
-margin_right = 45.0
-margin_bottom = 24.0
-custom_colors/font_outline_modulate = Color( 0.27451, 0.0588235, 0.376471, 0.65098 )
-custom_fonts/font = ExtResource( 15 )
-text = "x"
-
-[node name="Counter" type="Label" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer"]
-margin_left = 51.0
-margin_right = 88.0
-margin_bottom = 24.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0.27451, 0.0588235, 0.376471, 0.65098 )
-custom_fonts/font = ExtResource( 15 )
-text = "0/0"
 
 [node name="Fludd" type="Control" parent="UI/HUD/Control"]
 visible = false

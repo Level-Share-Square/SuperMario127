@@ -14,6 +14,7 @@ export var label_text: String = "TIME"
 export var show_time_score: bool = false
 export var is_counting: bool = true
 export var time: float = 0.0
+export var kill_on_end: bool = false
 export var sound: bool = false
 export var sound_time : float = 0.0
 
@@ -75,13 +76,23 @@ func time_over():
 	is_counting = false
 	emit_signal("time_over")
 	
-	tween.connect("tween_all_completed", self, "queue_free")
-	tween.interpolate_property(
-		timer_display, 
-		"modulate:a", 
-		1, 0,
-		FADE_TIME)
-	tween.start()
+	if !kill_on_end:
+		tween.connect("tween_all_completed", self, "queue_free")
+		tween.interpolate_property(
+			timer_display, 
+			"modulate:a", 
+			1, 0,
+			FADE_TIME)
+		tween.start()
+	else:
+		var player = get_node("/root").get_node("Player").get_node(get_node("/root").get_node("Player").character)
+		var player2 = get_node("/root").get_node("Player").get_node(get_node("/root").get_node("Player").character2)
+		if is_instance_valid(player):
+			if !player.dead and player.controllable:
+				player.kill("green_demon")
+		if is_instance_valid(player2):
+			if !player2.dead and player2.controllable:
+				player2.kill("green_demon")
 	
 
 func set_label(new_text: String):

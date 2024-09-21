@@ -25,12 +25,12 @@ func _ready():
 func collect_coin(new_coins: int):
 	update_counter(new_coins)
 	
-	if new_coins == max_reds:
-		fadeout.play("fadeout")
-	
 	animation_player.stop()
 	animation_player.play("collect")
 
 func update_counter(new_coins: int):
+	if new_coins == max_reds:
+		fadeout.play("fadeout")
+	
 	var zeroes_length = str(max_reds).length()
 	counter.text = str(new_coins).pad_zeros(zeroes_length) + "/" + str(max_reds)

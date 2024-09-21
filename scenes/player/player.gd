@@ -49,6 +49,10 @@ func _ready():
 		Singleton.CurrentLevelData.area = Singleton.CheckpointSaved.current_area
 		Singleton.CurrentLevelData.level_data.vars.reload()
 	
+	if Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.timer > 0.00:
+		var timer_manager = get_timer_manager()
+		timer_manager.add_timer("area_timer", Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.timer, false, true, true)
+	
 	var data = Singleton.CurrentLevelData.level_data
 	load_in(data, data.areas[Singleton.CurrentLevelData.area])
 	

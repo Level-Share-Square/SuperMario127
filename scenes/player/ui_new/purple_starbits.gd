@@ -5,6 +5,7 @@ onready var fadeout: AnimationPlayer = $Fadeout
 
 onready var counter: Label = $HBoxContainer/Counter
 
+var max_purples: int
 var required_purples: int
 var variables: LevelVars = Singleton.CurrentLevelData.level_data.vars
 
@@ -13,7 +14,10 @@ func _ready():
 	yield(get_tree(), "physics_frame")
 	yield(get_tree(), "physics_frame")
 	
-	update_required_purples()
+	max_purples = variables.max_purple_starbits
+	
+	if max_purples > 0:
+		update_required_purples()
 	
 	if required_purples > 0:
 		visible = true
@@ -25,19 +29,23 @@ func _ready():
 func collect_coin(new_coins: int):
 	update_counter(new_coins)
 	
-	if new_coins == required_purples:
-		fadeout.play("fadeout")
-	
 	animation_player.stop()
 	animation_player.play("collect")
 
 func update_counter(new_coins: int):
 	update_required_purples()
-	var zeroes_length = str(required_purples).length()
-	counter.text = str(new_coins).pad_zeros(zeroes_length) + "/" + str(required_purples)
+	
+	if new_coins == required_purples:
+		fadeout.play("fadeout")
+	
+	var zeroes_length = 3
+	counter.text = str(new_coins).pad_zeros(zeroes_length) + "/" + str(required_purples).pad_zeros(zeroes_length)
 
 func update_required_purples():
-	if variables.purple_starbits_collected[Singleton.CurrentLevelData.area][0] >= required_purples:
+	if len(variables.required_purple_starbits[Singleton.CurrentLevelData.area]) >= 1:
 		if len(variables.required_purple_starbits[Singleton.CurrentLevelData.area]) > 1:
-			variables.required_purple_starbits[Singleton.CurrentLevelData.area].pop_front()
-			required_purples = variables.required_purple_starbits[Singleton.CurrentLevelData.area][0]
+			if variables.purple_starbits_collected[Singleton.CurrentLevelData.area][0] >= required_purples:
+				variables.required_purple_starbits[Singleton.CurrentLevelData.area].pop_front()
+		required_purples = variables.required_purple_starbits[Singleton.CurrentLevelData.area][0]
+	else:
+		required_purples = max_purples

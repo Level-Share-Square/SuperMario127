@@ -1,4 +1,4 @@
-[gd_scene load_steps=1477 format=2]
+[gd_scene load_steps=1475 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1439,8 +1439,6 @@
 [ext_resource path="res://scenes/actors/objects/wind_area/wind_icon.png" type="Texture" id=1437]
 [ext_resource path="res://scenes/actors/objects/purple_starbit/icon.png" type="Texture" id=1438]
 [ext_resource path="res://scenes/actors/objects/purple_starbit/preview.png" type="Texture" id=1439]
-[ext_resource path="res://scenes/actors/objects/purple_starbit_switch/preview.png" type="Texture" id=1440]
-[ext_resource path="res://scenes/actors/objects/purple_starbit_switch/icon.png" type="Texture" id=1441]
 [ext_resource path="res://scenes/actors/objects/propeller/preview.png" type="Texture" id=1442]
 [ext_resource path="res://scenes/actors/objects/propeller/propeller_icon.png" type="Texture" id=1443]
 
@@ -2615,13 +2613,6 @@ index_in_sequence = 1
 icon = ExtResource( 337 )
 preview = ExtResource( 336 )
 
-[node name="PurpleStarbitSwitch" type="Node" parent="PlaceableItems/SwitchesGroup"]
-script = ExtResource( 24 )
-object_id = 131
-is_object = true
-icon = ExtResource( 1441 )
-preview = ExtResource( 1440 )
-
 [node name="CrystalTap" type="Node" parent="PlaceableItems/SwitchesGroup"]
 script = ExtResource( 24 )
 object_id = 81
@@ -3089,7 +3080,7 @@ preview = ExtResource( 852 )
 
 [node name="Propeller" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 24 )
-object_id = 132
+object_id = 131
 is_object = true
 object_center = Vector2( 0, -5 )
 icon = ExtResource( 1443 )
