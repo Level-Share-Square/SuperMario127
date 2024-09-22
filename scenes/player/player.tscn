@@ -1015,6 +1015,7 @@ custom_fonts/font = ExtResource( 15 )
 text = "0/0"
 
 [node name="PurpleStarbits" type="Control" parent="UI/HUD/Control/Collectibles"]
+visible = false
 margin_top = 36.0
 margin_right = 40.0
 margin_bottom = 60.0
@@ -1189,9 +1190,9 @@ custom_fonts/font = ExtResource( 15 )
 text = "000/100"
 
 [node name="Padding2" type="Control" parent="UI/HUD/Control/Collectibles"]
-margin_top = 64.0
+margin_top = 36.0
 margin_right = 40.0
-margin_bottom = 68.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 0, 4 )
 
 [node name="ShineShards" type="Control" parent="UI/HUD/Control/Collectibles"]
