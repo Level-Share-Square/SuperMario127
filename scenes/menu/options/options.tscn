@@ -1074,9 +1074,9 @@ sprite_visible = false
 [node name="Hotkeys" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
 margin_left = 32.0
-margin_top = 33.0
+margin_top = 64.0
 margin_right = 512.0
-margin_bottom = 195.0
+margin_bottom = 164.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
 columns = 4
@@ -1098,7 +1098,7 @@ input_group = "Controls (Hotkeys)"
 input_key = "mute"
 sprite_visible = false
 
-[node name="ToggleUI" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" instance=ExtResource( 12 )]
+[node name="PhotoMode" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" instance=ExtResource( 12 )]
 margin_left = 233.0
 margin_right = 299.0
 margin_bottom = 39.0
