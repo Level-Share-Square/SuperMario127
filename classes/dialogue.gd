@@ -163,7 +163,7 @@ func _physics_process(delta):
 		if (character.inputs[Character.input_names.interact][0]
 		and !character.inputs[Character.input_names.left][0]
 		and !character.inputs[Character.input_names.right][0]
-		and character.is_grounded() and !being_read):
+		and character.is_on_floor() and !being_read):
 			being_read = true
 			setup_char()
 			

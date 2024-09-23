@@ -63,9 +63,6 @@ func _physics_process(delta):
 					if (body.state is GroundPoundState) and (body.velocity.y <= 0):
 						if !body.is_on_floor():
 							body.set_state_by_name("FallState", delta)
-							
-					if body.is_on_floor():
-						body.set_state_by_name("FallState", delta)
 						
 					max_velocity = body.velocity
 						
@@ -113,7 +110,7 @@ func update_size():
 func update_particles():
 	particles.visibility_rect = Rect2(-size.x*2, -size.y*2, size.x*2, size.y*2)
 	particles.lifetime = ((size.y/20)/wind_power)+.1
-	particles.amount = int((size.x/32)*(size.y/32))*2
+	particles.amount = int((size.x/48)*(size.y/48))
 	particles.modulate = Color(color.r, color.g, color.b)
 	particles.process_material.set_shader_param("wind_speed", wind_power)
 	particles.process_material.set_shader_param("size", size/2)

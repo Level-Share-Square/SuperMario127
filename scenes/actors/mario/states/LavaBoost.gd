@@ -8,6 +8,7 @@ export var extra_velocity = 80
 var bounces_left = 0
 var burn_cooldown = 0.0
 var burn_sound_cooldown = 0.0
+#var lava_areas = character.lava_detector.get_overlapping_areas()
 
 func _ready():
 	priority = 5
@@ -24,7 +25,11 @@ func _start(_delta):
 	character.velocity.y = -boost_velocity
 	bounces_left = 3
 	priority = 5
+#	for area in lava_areas:
+#		if area.modulate != 
+#			character.burn_particles.process_material.material.color_ramp.gradient
 	character.burn_particles.emitting = true
+	
 	
 	if burn_sound_cooldown <= 0:
 		character.sound_player.play_burn_sound()
