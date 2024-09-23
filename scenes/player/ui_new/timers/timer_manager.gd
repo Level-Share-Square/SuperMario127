@@ -1,9 +1,13 @@
-extends HBoxContainer
+class_name TimerManager
+extends Control
 
-const TIMER_SCENE = preload("res://scenes/actors/time_score/timer.tscn")
 
-onready var grid: GridContainer = $Grid
-onready var time_score: Control = $Grid/TimeScore
+const TIMER_SCENE = preload("res://scenes/player/ui_new/timers/timer.tscn")
+const RADIAL_TIMER_SCENE = preload("res://scenes/player/ui_new/timers/radial_timer.tscn")
+
+onready var grid: GridContainer = $Timers/Grid
+onready var time_score: Control = $Timers/Grid/TimeScore
+onready var radial_timers: VBoxContainer = $RadialTimers
 var shown: bool
 
 
@@ -39,6 +43,37 @@ func add_timer(timer_name: String, timer_amount: float) -> Control:
 	
 	timer_node.time = timer_amount
 	return timer_node
+
+
+func remove_timer(timer_name: String):
+	var timer_node: Control = grid.get_node_or_null(timer_name)
+	if not is_instance_valid(timer_node):
+		return
+	
+	timer_node.time = 0
+
+
+func add_radial_timer(timer_name: String, timer_amount: float, icon: Texture = null, set_max: bool = true) -> Control:
+	var timer_node: Control = radial_timers.get_node_or_null(timer_name)
+	if not is_instance_valid(timer_node):
+		timer_node = RADIAL_TIMER_SCENE.instance()
+		timer_node.name = timer_name
+		timer_node.icon = icon
+		
+		radial_timers.call_deferred("add_child", timer_node)
+	
+	timer_node.time = timer_amount
+	if set_max:
+		timer_node.call_deferred("set_max_time", timer_amount)
+	return timer_node
+
+
+func remove_radial_timer(timer_name: String):
+	var timer_node: Control = radial_timers.get_node_or_null(timer_name)
+	if not is_instance_valid(timer_node):
+		return
+	
+	timer_node.time = 0
 
 
 # testing

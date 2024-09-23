@@ -3,7 +3,7 @@
 [ext_resource path="res://classes/message_appear.wav" type="AudioStream" id=1]
 [ext_resource path="res://classes/message_disappear.wav" type="AudioStream" id=2]
 [ext_resource path="res://scenes/actors/objects/dialogue_trigger/sign.png" type="Texture" id=3]
-[ext_resource path="res://scenes/actors/objects/sign/exclamation_mark.png" type="Texture" id=4]
+[ext_resource path="res://assets/misc/interaction_marker.png" type="Texture" id=4]
 [ext_resource path="res://classes/dialogue.gd" type="Script" id=5]
 
 [sub_resource type="CircleShape2D" id=4]
@@ -57,11 +57,13 @@ z_as_relative = false
 [node name="ExclamationMark" type="TextureRect" parent="Indicator"]
 margin_left = 53.0
 margin_top = 15.5736
-margin_right = 203.0
-margin_bottom = 165.574
+margin_right = 181.0
+margin_bottom = 143.574
 rect_scale = Vector2( 0.2, 0.2 )
 mouse_filter = 2
 texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
 
 [node name="MessageAppear" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )

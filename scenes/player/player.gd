@@ -117,6 +117,15 @@ func update_activity() -> void:
 		push_error(str(result))
 
 
+# todo: mayb move this stuff elsewhere?? question mark? ?? ?
+const TIMER_ICON := preload("res://scenes/actors/objects/p_switch/icon.png")
+func set_switch_timer(new_time: float):
+	switch_timer = new_time
+	
+	var timer_manager: Control = get_node("%TimerManager")
+	timer_manager.add_radial_timer("PSwitch", new_time, TIMER_ICON)
+
+
 func get_timer_manager() -> Control:
 	var timer_manager: Control = get_node("%TimerManager")
 	return timer_manager

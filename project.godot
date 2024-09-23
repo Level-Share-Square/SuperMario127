@@ -554,6 +554,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/ThumbnailDownloader.gd"
 }, {
+"base": "Control",
+"class": "TimerBase",
+"language": "GDScript",
+"path": "res://scenes/player/ui_new/timers/timer_base.gd"
+}, {
+"base": "Control",
+"class": "TimerManager",
+"language": "GDScript",
+"path": "res://scenes/player/ui_new/timers/timer_manager.gd"
+}, {
 "base": "Nozzle",
 "class": "TurboNozzle",
 "language": "GDScript",
@@ -744,6 +754,8 @@ _global_script_class_icons={
 "SwimmingState": "",
 "TeleportObject": "",
 "ThumbnailDownloader": "",
+"TimerBase": "",
+"TimerManager": "",
 "TurboNozzle": "",
 "UtilEnvironment": "",
 "VanishPowerup": "",
@@ -779,9 +791,9 @@ Singleton="*res://singletons/main_singleton.gd"
 Singleton2="*res://singleton2.gd"
 SettingsLoader="*res://singletons/settings_loader.tscn"
 GhostArrays="*res://scenes/actors/mario/misc/ghostarrays.gd"
+InternetCheck="*res://singletons/internet_check.tscn"
 Discord="*res://addons/discord_game_sdk/discord.gd"
 SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
-InternetCheck="*res://singletons/internet_check.tscn"
 
 [debug]
 
@@ -1271,10 +1283,6 @@ project/assembly_name="Super Mario 127"
 
 ssl/certificates="res://ca-certificates.crt"
 limits/debugger_stdout/max_chars_per_second=10000
-
-[physics]
-
-common/physics_interpolation=true
 
 [rendering]
 

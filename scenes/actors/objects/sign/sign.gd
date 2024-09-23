@@ -173,10 +173,12 @@ func _physics_process(delta):
 		pop_up.scale = lerp(pop_up.scale, Vector2(1, 1), delta * transition_speed)
 		pop_up.modulate = lerp(pop_up.modulate, Color(1, 1, 1, 1), delta * transition_speed)
 		
+		# :C
 		if (open_menu and character.inputs[Character.input_names.interact][0]
 		and !character.inputs[Character.input_names.left][0]
 		and !character.inputs[Character.input_names.right][0]
-		and character.is_grounded() and !being_read):
+		and character.is_grounded() and character.controllable
+		and !being_read):
 			being_read = true
 			setup_char()
 			

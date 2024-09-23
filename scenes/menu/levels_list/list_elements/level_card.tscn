@@ -69,6 +69,7 @@ margin_right = 95.0
 margin_bottom = 79.0
 rect_min_size = Vector2( 94, 78 )
 mouse_filter = 2
+theme = ExtResource( 4 )
 theme_type_variation = "LevelPanel"
 
 [node name="Thumbnail" type="TextureRect" parent="Decoration"]
@@ -114,6 +115,7 @@ margin_bottom = 101.0
 rect_min_size = Vector2( 144, 32 )
 rect_rotation = -3.0
 rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_constants/line_spacing = -4
 text = "SM63 Tall Tall Mountain +"

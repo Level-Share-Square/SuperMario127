@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/player/ui_new/timers/timer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/player/ui_new/timers/timer_manager.gd" type="Script" id=2]
+
+[node name="TimerManager" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="Timers" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Grid" type="GridContainer" parent="Timers"]
+pause_mode = 2
+margin_left = 336.0
+margin_right = 432.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 96, 0 )
+custom_constants/hseparation = 32
+columns = 3
+
+[node name="TimeScore" parent="Timers/Grid" instance=ExtResource( 1 )]
+label_text = "ELAPSED"
+show_time_score = true
+
+[node name="RadialTimers" type="VBoxContainer" parent="."]
+anchor_bottom = 1.0
+alignment = 2

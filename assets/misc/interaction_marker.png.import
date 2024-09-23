@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/exclamation_mark.png-452332501d2489d57d198e5e00ff039f.stex"
+path="res://.import/interaction_marker.png-99106db00ae9c69530f1984fdc8a3a8e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/sign/exclamation_mark.png"
-dest_files=[ "res://.import/exclamation_mark.png-452332501d2489d57d198e5e00ff039f.stex" ]
+source_file="res://assets/misc/interaction_marker.png"
+dest_files=[ "res://.import/interaction_marker.png-99106db00ae9c69530f1984fdc8a3a8e.stex" ]
 
 [params]
 

@@ -4,7 +4,6 @@
 [ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=4]
-[ext_resource path="res://scenes/actors/objects/sign/exclamation_mark.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/sign/message_disappear.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/actors/objects/sign/message_appear.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/actors/objects/sign/stick.png" type="Texture" id=8]
@@ -26,6 +25,7 @@
 [ext_resource path="res://scenes/actors/objects/sign/palettes/9/sign.png" type="Texture" id=24]
 [ext_resource path="res://scenes/actors/objects/sign/palettes/6/sign.png" type="Texture" id=25]
 [ext_resource path="res://scenes/actors/objects/sign/palettes/8/sign.png" type="Texture" id=26]
+[ext_resource path="res://assets/misc/interaction_marker.png" type="Texture" id=27]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 80, 60 )
@@ -151,14 +151,13 @@ __meta__ = {
 visible = false
 margin_left = 53.0
 margin_top = 29.8337
-margin_right = 203.0
-margin_bottom = 179.834
+margin_right = 181.0
+margin_bottom = 157.834
 rect_scale = Vector2( 0.2, 0.2 )
 mouse_filter = 2
-texture = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource( 27 )
+expand = true
+stretch_mode = 6
 
 [node name="MessageAppear" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )

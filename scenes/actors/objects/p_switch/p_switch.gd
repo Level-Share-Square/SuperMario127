@@ -9,6 +9,7 @@ export var top_point : Vector2
 
 onready var anim_player = $AnimationPlayer
 onready var press_area = $PressArea
+onready var current_scene = get_tree().get_current_scene()
 
 var pressed_time := 20.0
 
@@ -47,13 +48,13 @@ func _physics_process(delta):
 				
 				if boost_timer <= 0:
 					boost_timer = 0
-					get_tree().get_current_scene().switch_timer = pressed_time
+					current_scene.set_switch_timer(pressed_time)
 					if !was_ground_pound:
 						character.velocity.y = -325
 						if character.state != character.get_state_node("DiveState"):
 							character.set_state_by_name("BounceState", delta)
 			
-			if get_tree().get_current_scene().switch_timer == 0 and boost_timer == 0:
+			if current_scene.switch_timer == 0 and boost_timer == 0:
 				pressed = false
 				anim_player.play("unpress")
 		else:

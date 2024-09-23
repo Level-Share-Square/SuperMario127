@@ -1,4 +1,4 @@
-[gd_scene load_steps=169 format=2]
+[gd_scene load_steps=173 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -76,6 +76,10 @@
 [ext_resource path="res://scenes/actors/mario/luigi_sounds.tscn" type="PackedScene" id=74]
 [ext_resource path="res://scenes/actors/mario/states/LaunchStar.gd" type="Script" id=75]
 [ext_resource path="res://scenes/actors/mario/states/CrushedSide.gd" type="Script" id=76]
+[ext_resource path="res://scenes/actors/objects/metal_powerup/icon.png" type="Texture" id=77]
+[ext_resource path="res://scenes/actors/objects/rainbow_powerup/icon.png" type="Texture" id=78]
+[ext_resource path="res://scenes/actors/objects/vanish_powerup/icon.png" type="Texture" id=79]
+[ext_resource path="res://scenes/actors/objects/wing_powerup/icon.png" type="Texture" id=80]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -1536,6 +1540,7 @@ id = "Metal"
 is_invincible = true
 material = ExtResource( 36 )
 time_left = 30.0
+display_icon = ExtResource( 77 )
 
 [node name="RainbowPowerup" type="Node" parent="Powerups"]
 script = ExtResource( 39 )
@@ -1544,18 +1549,21 @@ music_id = 25
 is_invincible = true
 material = ExtResource( 38 )
 time_left = 30.0
+display_icon = ExtResource( 78 )
 
 [node name="VanishPowerup" type="Node" parent="Powerups"]
 script = ExtResource( 50 )
 id = "Vanish"
 material = ExtResource( 49 )
 time_left = 30.0
+display_icon = ExtResource( 79 )
 
 [node name="WingPowerup" type="Node" parent="Powerups"]
 script = ExtResource( 62 )
 id = "Wing"
 music_id = 27
 material = SubResource( 26 )
+display_icon = ExtResource( 80 )
 
 [node name="CloudContainer" type="Node2D" parent="."]
 

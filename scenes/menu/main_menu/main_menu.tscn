@@ -527,6 +527,7 @@ texture = ExtResource( 6 )
 centered = false
 
 [node name="Legacy" type="Label" parent="LogoAnchor/Logo"]
+visible = false
 margin_left = 937.143
 margin_top = 1211.43
 margin_right = 2089.14

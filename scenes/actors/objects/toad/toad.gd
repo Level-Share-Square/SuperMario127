@@ -22,7 +22,7 @@ onready var dialogue_object = $Dialogue
 
 onready var rect = $Path2D/PathFollow2D/ReferenceRect
 
-var dialogue := PoolStringArray(["0100I am a Toad.", "0100Try putting changing the expressions and see what happens!"])
+var dialogue := PoolStringArray(["0100Hello! I'm a toad.", "0100Want me to say something different? Click on me in the editor!"])
 var character_name: String = "Toad"
 
 var curve = Curve2D.new()

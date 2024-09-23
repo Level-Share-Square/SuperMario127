@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/menu/pause/pause_controller.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=6]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://scenes/actors/time_score/timer_manager.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/player/ui_new/timers/timer_manager.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/player/ui_new/reference2.png" type="Texture" id=9]
 [ext_resource path="res://scenes/player/ui_new/ui/shine_shards.png" type="Texture" id=10]
 [ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=11]
@@ -564,6 +564,24 @@ character = NodePath("Viewports/ViewportContainer/Viewport/World/Character")
 character2 = NodePath("Viewports/ViewportContainer/Viewport/World/Character2")
 camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
 
+[node name="UIUnder" type="CanvasLayer" parent="."]
+layer = 61
+
+[node name="HUD" type="MarginContainer" parent="UIUnder"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 6 )
+custom_constants/margin_right = 24
+custom_constants/margin_top = 8
+custom_constants/margin_left = 12
+custom_constants/margin_bottom = 16
+
+[node name="Control" type="Control" parent="UIUnder/HUD"]
+margin_left = 12.0
+margin_top = 8.0
+margin_right = 744.0
+margin_bottom = 416.0
+
 [node name="PauseController" parent="." instance=ExtResource( 5 )]
 unique_name_in_owner = true
 
@@ -579,13 +597,13 @@ theme = ExtResource( 6 )
 custom_constants/margin_right = 24
 custom_constants/margin_top = 8
 custom_constants/margin_left = 12
-custom_constants/margin_bottom = 20
+custom_constants/margin_bottom = 16
 
 [node name="Control" type="Control" parent="UI/HUD"]
 margin_left = 12.0
 margin_top = 8.0
 margin_right = 744.0
-margin_bottom = 412.0
+margin_bottom = 416.0
 
 [node name="Collectibles" type="VBoxContainer" parent="UI/HUD/Control"]
 margin_right = 40.0
@@ -1304,7 +1322,6 @@ uv = PoolVector2Array( 8.08297, 11.692, 18.2589, 18.4759, 25.043, 8.29991, 38.61
 
 [node name="TimerManager" parent="UI/HUD/Control" instance=ExtResource( 8 )]
 unique_name_in_owner = true
-margin_bottom = 0.0
 
 [node name="SignText" type="Control" parent="UI"]
 pause_mode = 2
