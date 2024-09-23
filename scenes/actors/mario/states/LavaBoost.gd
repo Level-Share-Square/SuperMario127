@@ -8,26 +8,35 @@ export var extra_velocity = 80
 var bounces_left = 0
 var burn_cooldown = 0.0
 var burn_sound_cooldown = 0.0
-#var lava_areas = character.lava_detector.get_overlapping_areas()
+var lava_areas
+var base_burn_particle_gradient = Gradient.new()
 
 func _ready():
+	base_burn_particle_gradient.colors = PoolColorArray([Color(1, 0.596078, 0), Color(0.658824, 0, 0), Color(0.082353, 0.082353, 0.082353), Color(0, 0, 0, 0)])
+	base_burn_particle_gradient.offsets = PoolRealArray([0, 0.189, 0.692, 0.983])
 	priority = 5
 	auto_flip = true
 	override_rotation = true
 
 func _start_check(_delta):
+	lava_areas = character.lava_detector.get_overlapping_areas()
 	return (character.lava_detector.get_overlapping_areas().size() > 0 and character.terrain_detector.get_overlapping_bodies().size() == 0) and !(character.powerup != null and character.powerup.id == "Metal")
 	
 func _start(_delta):
+	lava_areas = character.lava_detector.get_overlapping_areas()
 	character.sprite.rotation_degrees = 0
 	character.current_jump = 0
 	character.friction = 4
 	character.velocity.y = -boost_velocity
 	bounces_left = 3
 	priority = 5
-#	for area in lava_areas:
-#		if area.modulate != 
-#			character.burn_particles.process_material.material.color_ramp.gradient
+	for area in lava_areas:
+		var area_object = area.get_parent()
+		if area_object.color != Color(1, 0, 0):
+			var new_gradient = Gradient.new()
+			new_gradient.colors = PoolColorArray([area_object.color, Color8((area_object.color.r*255)-87, (area_object.color.g*255)-87, (area_object.color.b*255)-87), Color(0.082353, 0.082353, 0.082353), Color(0, 0, 0, 0)])
+			new_gradient.offsets = PoolRealArray([0, 0.189, 0.692, 0.983])
+			character.burn_particles.process_material.color_ramp.gradient = new_gradient
 	character.burn_particles.emitting = true
 	
 	

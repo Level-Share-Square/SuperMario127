@@ -9,7 +9,7 @@ onready var particles = $Particles2D
 
 var size := Vector2(64, 64)
 var wind_power := 20.0
-var color := Color(255, 255, 255, 255)
+var color := Color(1, 1, 1, 1)
 var triggerable := false
 
 var triggered := true
