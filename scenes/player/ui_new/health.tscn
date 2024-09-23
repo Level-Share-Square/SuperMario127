@@ -272,7 +272,8 @@ script = ExtResource( 2 )
 letter_colors = [ Color( 1, 1, 1, 1 ), Color( 1, 0.368627, 0.545098, 1 ), Color( 1, 0.831373, 0.592157, 1 ), Color( 0.454902, 1, 0.768627, 1 ), Color( 0.545098, 0.807843, 1, 1 ) ]
 letter_offsets = [ 1.0, 0.0, 1.0, 0.0 ]
 normal_color = Color( 1, 0.831373, 0.592157, 1 )
-damaged_color = Color( 0.607843, 0.494118, 0.85098, 1 )
+low_hp_color = Color( 1, 0.254902, 0.254902, 1 )
+damaged_color = Color( 0.686275, 0.388235, 0.388235, 1 )
 shake_duration = 0.5
 shake_intensity = 6.0
 
@@ -322,6 +323,8 @@ show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
 
+[node name="Tween" type="Tween" parent="Meter/Segments/1"]
+
 [node name="2" type="Polygon2D" parent="Meter/Segments"]
 position = Vector2( 32, 32 )
 rotation = 1.59479
@@ -334,6 +337,8 @@ show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
 
+[node name="Tween" type="Tween" parent="Meter/Segments/2"]
+
 [node name="3" type="Polygon2D" parent="Meter/Segments"]
 position = Vector2( 32, 32 )
 rotation = 2.19475
@@ -344,6 +349,8 @@ polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
 show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
+
+[node name="Tween" type="Tween" parent="Meter/Segments/3"]
 
 [node name="4" type="Polygon2D" parent="Meter/Segments"]
 position = Vector2( 32, 32 )
@@ -356,6 +363,8 @@ show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
 
+[node name="Tween" type="Tween" parent="Meter/Segments/4"]
+
 [node name="5" type="Polygon2D" parent="Meter/Segments"]
 position = Vector2( 32, 32 )
 rotation = 3.39467
@@ -366,6 +375,8 @@ polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
 show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
+
+[node name="Tween" type="Tween" parent="Meter/Segments/5"]
 
 [node name="6" type="Polygon2D" parent="Meter/Segments"]
 position = Vector2( 32, 32 )
@@ -378,10 +389,12 @@ show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
 
+[node name="Tween" type="Tween" parent="Meter/Segments/6"]
+
 [node name="7" type="Polygon2D" parent="Meter/Segments"]
 position = Vector2( 32, 32 )
 rotation = 4.59458
-color = Color( 0.607843, 0.494118, 0.85098, 1 )
+color = Color( 0.792157, 0.364706, 0.364706, 1 )
 polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
 
 [node name="Border" type="Polygon2D" parent="Meter/Segments/7"]
@@ -389,16 +402,20 @@ show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
 
+[node name="Tween" type="Tween" parent="Meter/Segments/7"]
+
 [node name="8" type="Polygon2D" parent="Meter/Segments"]
 position = Vector2( 32, 32 )
 rotation = 5.19454
-color = Color( 0.607843, 0.494118, 0.85098, 1 )
+color = Color( 0.792157, 0.364706, 0.364706, 1 )
 polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
 
 [node name="Border" type="Polygon2D" parent="Meter/Segments/8"]
 show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
+
+[node name="Tween" type="Tween" parent="Meter/Segments/8"]
 
 [node name="Pivot" type="Control" parent="Meter"]
 margin_left = 17.0

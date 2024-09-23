@@ -1,5 +1,7 @@
 extends Control
 
+const TWEEN_TIME: float = 0.25
+
 export var character_path: NodePath
 onready var character: Character = get_node(character_path)
 
@@ -7,6 +9,7 @@ export (Array, Color) var letter_colors
 export (Array, float) var letter_offsets
 
 export var normal_color: Color
+export var low_hp_color: Color
 export var damaged_color: Color
 
 export var shake_duration: float
@@ -16,13 +19,15 @@ onready var transition: AnimationPlayer = $Transition
 
 onready var meter: Control = $Meter
 onready var animation: AnimationPlayer = $Meter/Actions
+onready var idle_animation: AnimationPlayer = $Meter/Idle
 
 onready var segments: Control = $Meter/Segments
 onready var letters: HBoxContainer = $Meter/Life
 
 var last_health: int = 8
 var last_shards: int = 0
-		
+
+
 func _ready():
 	# waiting for things to ready themselves yada yada
 	yield(get_tree(), "physics_frame")
@@ -42,6 +47,7 @@ func _ready():
 	Singleton.PhotoMode.connect("photo_mode_changed", self, "toggle_photo_mode")
 	toggle_photo_mode()
 
+
 ## shaking animation when damaged
 var shake_time: float = -1
 func _process(delta):
@@ -58,9 +64,16 @@ func _process(delta):
 		shake_time = -1
 		meter.rect_position = Vector2.ZERO
 
+
 ## most animations called from this function
 func health_changed(new_health: int, new_shards: int):
 	if new_health != last_health:
+		idle_animation.playback_speed = 1
+		if new_health <= 3:
+			idle_animation.playback_speed += (4 - new_health)
+		if new_health <= 0:
+			idle_animation.playback_speed = 0
+		
 		# health animating in and out of the screen
 		if new_health == 8:
 			transition.play("transition")
@@ -82,10 +95,30 @@ func health_changed(new_health: int, new_shards: int):
 		update_shard_segments(new_shards)
 		last_shards = new_shards
 
+
 ## update colors of either group of segments
 func update_health_segments(new_value: int):
-	for segment in segments.get_children():
-		segment.color = damaged_color if int(segment.name) > new_value else normal_color
+	if new_value > 3:
+		for segment in segments.get_children():
+			segment.color = damaged_color if int(segment.name) > new_value else normal_color
+			
+	else:
+		for segment in segments.get_children():
+			if int(segment.name) <= new_value:
+				var mix: float = (4.0 - float(new_value)) / 3
+				var target_color = lerp(normal_color, low_hp_color, mix)
+				
+				var tween: Tween = segment.get_node("Tween")
+				tween.interpolate_property(
+					segment, 
+					"color",
+					segment.color,
+					target_color,
+					TWEEN_TIME)
+				tween.start()
+			else:
+				segment.color = damaged_color
+
 
 func update_shard_segments(new_value: int):
 	var index: int = 0
@@ -100,6 +133,7 @@ func update_shard_segments(new_value: int):
 		# make sure theyre all turned white when u have 0 shards
 		if new_value < index:
 			letter.add_color_override("font_color", letter_colors[0])
+
 
 ## make those letters do da lil hoppy thing :3
 const JUMP_AMOUNT: float = 4.0
