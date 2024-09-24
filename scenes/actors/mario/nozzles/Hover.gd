@@ -5,8 +5,6 @@ class_name HoverNozzle
 export var boost_power := 170
 export var depletion := 1.1
 export var fuel_depletion := 0.035
-var last_activated = false
-var last_state = null
 
 var accel = 30
 var rotation_interpolation_speed = 35
@@ -84,6 +82,8 @@ func _process(_delta):
 
 func _general_update(_delta):
 	if activated and !last_activated:
+		character.emit_signal("fludd_activated")
+		
 		var normal = character.sprite.transform.y.normalized()
 		var power = -boost_power * 4
 		if abs(character.velocity.x) < abs(power * normal.x) * 8:
@@ -99,7 +99,9 @@ func _general_update(_delta):
 			preservation_factor = character.velocity.y / 96
 		else:
 			preservation_factor = 0
-	elif !activated:
+	elif !activated and last_activated:
+		character.emit_signal("fludd_deactivated")
+		
 		character.water_particles.emitting = false
 		character.water_particles_2.emitting = false
 		#character.water_sprite.animation = "in"
@@ -107,5 +109,5 @@ func _general_update(_delta):
 		character.fludd_sound.stop()
 	elif !activated and !last_activated and character.fludd_sound.playing:
 		character.fludd_sound.stop() #somehow there's a glitch where the sound never gets stopped, seems to be that activated gets set to false before last activated can be set to true, so it's sub-frame perfect if that's the case, this is kinda just a bandaid fix
-
+	
 	last_activated = activated

@@ -4,6 +4,10 @@ class_name Character
 
 signal state_changed
 signal health_changed(new_health, new_shards)
+signal nozzle_changed(new_nozzle)
+
+signal fludd_activated
+signal fludd_deactivated
 
 # Child nodes
 onready var states_node = $States
@@ -154,6 +158,7 @@ export var health_shards := 0
 var nozzle : Node = null # Couldn't set static type due to circle reference
 var using_turbo := false
 var turbo_nerf := false
+
 var fuel := 100.0
 var stamina := 100.0
 var breath := 100.0
@@ -521,7 +526,6 @@ func set_nozzle(new_nozzle: String, change_index := true) -> void:
 	fludd_charge_sound.stop()
 	if is_instance_valid(nozzle):
 		nozzle.activated = false
-		nozzle.last_activated = false
 	nozzle = get_nozzle_node(str(new_nozzle))
 	water_sprite.animation = "in"
 	water_sprite.frame = 6
@@ -533,6 +537,8 @@ func set_nozzle(new_nozzle: String, change_index := true) -> void:
 	
 	if is_instance_valid(nozzle) and (is_instance_valid(powerup) and powerup.name == "RainbowPowerup"):
 		set_nozzle("null", true) # Mario simply isn't allowed to have fludd
+	else:
+		emit_signal("nozzle_changed", new_nozzle)
 
 # Handles getting hit by another player
 func player_hit(body : Node) -> void:

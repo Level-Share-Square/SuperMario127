@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://scenes/player/ui_new/health_display.gd" type="Script" id=2]
-[ext_resource path="res://scenes/player/ui_new/segments.gd" type="Script" id=3]
+[ext_resource path="res://scenes/player/ui_new/health/segments.gd" type="Script" id=2]
+[ext_resource path="res://scenes/player/ui_new/health/health_display.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=20]
 length = 0.001
@@ -268,7 +268,7 @@ margin_right = -704.0
 margin_bottom = -368.0
 rect_min_size = Vector2( 64, 64 )
 rect_pivot_offset = Vector2( 32, 32 )
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 letter_colors = [ Color( 1, 1, 1, 1 ), Color( 1, 0.368627, 0.545098, 1 ), Color( 1, 0.831373, 0.592157, 1 ), Color( 0.454902, 1, 0.768627, 1 ), Color( 0.545098, 0.807843, 1, 1 ) ]
 letter_offsets = [ 1.0, 0.0, 1.0, 0.0 ]
 normal_color = Color( 1, 0.831373, 0.592157, 1 )
@@ -285,8 +285,8 @@ anims/transition = SubResource( 21 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -96.0
-margin_right = 64.0
-margin_bottom = -32.0001
+margin_right = 256.0
+margin_bottom = 160.0
 rect_pivot_offset = Vector2( 32, 32 )
 
 [node name="Idle" type="AnimationPlayer" parent="Meter"]
@@ -305,10 +305,10 @@ polygon = PoolVector2Array( 19, -16, 14, -21, 7, -24, -2, -24, -9, -21, -10, -20
 [node name="Segments" type="Control" parent="Meter"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 64.0
-margin_bottom = 63.9996
+margin_right = 640.0
+margin_bottom = 639.999
 rect_pivot_offset = Vector2( 32, 24 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 max_degrees = 275.0
 rotation_offset = 57.0
 

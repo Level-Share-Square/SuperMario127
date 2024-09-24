@@ -5,9 +5,7 @@ class_name TurboNozzle
 export var boost_power := 1000
 export var depletion := 100
 export var fuel_depletion := 0.037
-var last_activated = false
 var last_charged = false
-var last_state = null
 
 var attack_frames = 0
 var accel = 25
@@ -84,11 +82,15 @@ func _general_update(_delta):
 	
 	character.water_sprite.rotation_degrees = 90 * character.facing_direction
 	if activated and !last_activated:
+		character.emit_signal("fludd_activated")
+		
 		character.turbo_particles.emitting = true
 		character.water_sprite.frame = 0
 		character.turbo_sound.play()
 		last_activated = true
-	elif !activated:
+	elif !activated and last_activated:
+		character.emit_signal("fludd_deactivated")
+		
 		character.turbo_particles.emitting = false
 		character.water_sprite.frame = 0
 		character.turbo_sound.stop()

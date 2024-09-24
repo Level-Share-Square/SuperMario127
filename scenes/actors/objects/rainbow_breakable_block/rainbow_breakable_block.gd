@@ -129,7 +129,6 @@ func break_block():
 	queue_free() # die
 	
 func _body_entered(body):
-	print("entered")
 	if body.name.begins_with("Character") and is_rainbow(body) and body.global_position.y + 23 > area.global_position.y:
 		break_block()
 

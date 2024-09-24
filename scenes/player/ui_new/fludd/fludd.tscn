@@ -1,0 +1,424 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/fonts/marioscript_ui.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/player/ui_new/fludd/fludd_display.gd" type="Script" id=2]
+[ext_resource path="res://scenes/player/ui_new/fludd/icon_bounce.gd" type="Script" id=3]
+[ext_resource path="res://scenes/player/ui_new/fludd/paint_flashing.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=218]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Meter:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 96 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Meter/Counter:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -8, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Meter/Icons:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Meter/Paint:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 21, 27 ) ]
+}
+
+[sub_resource type="Animation" id=219]
+resource_name = "transition"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Meter:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -2 ), Vector2( 0, 96 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Meter/Counter:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -8, 0 ), Vector2( -8, -4 ), Vector2( -8, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Meter/Icons:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.3, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -4 ), Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Meter/Paint:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 21, 27 ), Vector2( 21, 22 ), Vector2( 21, 27 ) ]
+}
+
+[sub_resource type="Gradient" id=220]
+offsets = PoolRealArray( 0, 0.5, 1 )
+colors = PoolColorArray( 0.737255, 0.247059, 0.247059, 0.752941, 0.737255, 0.509804, 0.247059, 0.752941, 0.737255, 0.247059, 0.247059, 0.752941 )
+
+[sub_resource type="GDScript" id=189]
+resource_name = "circle"
+script/source = "extends Control
+tool
+
+export var color := Color.white
+
+func _draw():
+	draw_circle(rect_size/2, min(rect_size.x, rect_size.y) / 2, color)
+"
+
+[sub_resource type="Gradient" id=216]
+colors = PoolColorArray( 0.7656, 0.80564, 0.88, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=217]
+gradient = SubResource( 216 )
+fill_from = Vector2( 0, 0.508333 )
+fill_to = Vector2( 0, 0.366667 )
+
+[sub_resource type="Shader" id=192]
+code = "shader_type canvas_item;
+// Shader to round corners of a canvas. The 'radius_scale' is multiplied by
+// minimum(width, height)/2.0 to calculate the radius of the corners.
+//
+// Instructions:
+// 1) The node that uses this shader must have signals 'tree_entered' and
+// 'item_rect_changed' connected to a callable with the next code:
+// material.set_shader_parameter(\"width\", size.x)
+// material.set_shader_parameter(\"height\", size.y)
+//
+// Known issues:
+// 1) If used on 'TextureRect', take care of 'expand_mode' and 'stretch_mode',
+// because image corners might be outside node rectangle and therefore clipped.
+// Corners are rounded, but they are outside node's rectangle.
+
+
+uniform float radius_scale: hint_range(0.0, 1.0, 0.1) = 0.1;
+uniform bool rounded_corner_top_left = true;
+uniform bool rounded_corner_top_right = true;
+uniform bool rounded_corner_bottom_left = true;
+uniform bool rounded_corner_bottom_right = true;
+uniform float width = 1.0;
+uniform float height = 1.0;
+
+
+void fragment() {
+	vec4 image = texture(TEXTURE, UV);
+	vec2 pos = vec2(UV.x*width, UV.y*height);
+	float radius = min(width, height)*radius_scale/2.0;
+	float dist;
+	// Top left corner
+	if (rounded_corner_top_left) {
+		dist = length(pos - vec2(radius));
+		if (dist > radius && pos.x < radius && pos.y < radius) {
+			image.a = 0.0;
+		}
+		// debugging only
+//		if (dist < radius){image.r = 1.0;}
+	}
+	// Top right corner
+	if (rounded_corner_top_right) {
+		dist = length(pos - vec2(width-radius, radius));
+		if (dist > radius && pos.x > width-radius && pos.y < radius) {
+			image.a = 0.0;
+		}
+		// debugging only
+//		if (dist < radius){image.r = 1.0;}
+	}
+	// Bottom left corner
+	if (rounded_corner_bottom_left) {
+		dist = length(pos - vec2(radius, height-radius));
+		if (dist > radius && pos.x < radius && pos.y > height-radius) {
+			image.a = 0.0;
+		}
+		// debugging only
+//		if (dist < radius){image.r = 1.0;}
+	}
+	// Bottom right corner
+	if (rounded_corner_bottom_right) {
+		dist = length(pos - vec2(width-radius, height-radius));
+		if (dist > radius && pos.x > width-radius && pos.y > height-radius) {
+			image.a = 0.0;
+		}
+		// debugging only
+//		if (dist < radius){image.r = 1.0;}
+	}
+	COLOR = image;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=193]
+shader = SubResource( 192 )
+shader_param/radius_scale = 1.0
+shader_param/rounded_corner_top_left = true
+shader_param/rounded_corner_top_right = true
+shader_param/rounded_corner_bottom_left = true
+shader_param/rounded_corner_bottom_right = true
+shader_param/width = 1.0
+shader_param/height = 1.0
+
+[sub_resource type="Gradient" id=203]
+colors = PoolColorArray( 1, 0.992157, 0.894118, 1, 1, 0.992157, 0.894118, 0 )
+
+[sub_resource type="GradientTexture2D" id=202]
+gradient = SubResource( 203 )
+fill_from = Vector2( 0.5, 0.2 )
+fill_to = Vector2( 0.5, 0.6 )
+
+[node name="FluddDisplay" type="Control"]
+margin_right = 40.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 40, 50 )
+script = ExtResource( 2 )
+
+[node name="Transition" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 218 )
+anims/transition = SubResource( 219 )
+
+[node name="Meter" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = 46.0
+margin_bottom = 96.0001
+
+[node name="Paint" type="Polygon2D" parent="Meter"]
+position = Vector2( 21, 27 )
+scale = Vector2( 1.2, 1.2 )
+color = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+polygon = PoolVector2Array( 19, -16, 14, -21, 7, -24, -2, -24, -9, -21, -10, -20, -12, -20, -18, -15, -22, -9, -24, -3, -24, 5, -21, 13, -14, 20, -7, 23, 0, 24, 7, 23, 15, 19, 20, 13, 22, 7, 22, -1, 19, -8, 15, -14, 12, -17, 15, -16, 17, -14, 21, -8, 22, -4, 23, -2, 23, 5, 23, 8, 22, 9, 23, 10, 24, 8, 24, 0, 23, -4, 22, -8, 17, -15, 17, -16, 13, -18, 9, -19, 5, -21, 9, -21, 14, -19 )
+script = ExtResource( 4 )
+default_color = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+animated_color = SubResource( 220 )
+flash_speed = 3.0
+
+[node name="TankOutline" type="Polygon2D" parent="Meter"]
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+polygon = PoolVector2Array( 37, 46, 18, 53, 2, 43, 2, 1, 19, -6, 37, 3 )
+
+[node name="TankEmpty" type="Control" parent="Meter"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Right" type="Polygon2D" parent="Meter/TankEmpty"]
+color = Color( 0.47, 0.47, 0.47, 1 )
+polygon = PoolVector2Array( 18, 50, 35, 44, 35, 5, 18, 11 )
+
+[node name="Left" type="Polygon2D" parent="Meter/TankEmpty"]
+color = Color( 0.64, 0.64, 0.64, 1 )
+polygon = PoolVector2Array( 18, 50, 4, 41, 4, 3, 18, 11 )
+
+[node name="Top" type="Polygon2D" parent="Meter/TankEmpty"]
+color = Color( 0.760784, 0.760784, 0.760784, 1 )
+polygon = PoolVector2Array( 35, 5, 19, -3, 4, 3, 18, 11 )
+
+[node name="Bottom" type="Polygon2D" parent="Meter/TankEmpty"]
+position = Vector2( 0, 39 )
+color = Color( 0.760784, 0.760784, 0.760784, 1 )
+polygon = PoolVector2Array( 35, 5, 19, -3, 4, 2, 18, 11 )
+
+[node name="Tank" type="Control" parent="Meter"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Right" type="Polygon2D" parent="Meter/Tank"]
+color = Color( 0.403922, 0.607843, 1, 1 )
+polygon = PoolVector2Array( 18, 50, 35, 44, 35, 5, 18, 11 )
+
+[node name="Left" type="Polygon2D" parent="Meter/Tank"]
+color = Color( 0.545098, 0.807843, 1, 1 )
+polygon = PoolVector2Array( 18, 50, 4, 41, 4, 3, 18, 11 )
+
+[node name="Top" type="Polygon2D" parent="Meter/Tank"]
+color = Color( 0.729412, 0.894118, 1, 1 )
+polygon = PoolVector2Array( 35, 5, 19, -3, 4, 3, 18, 11 )
+
+[node name="Bottom" type="Polygon2D" parent="Meter/Tank"]
+position = Vector2( 0, 39 )
+color = Color( 0.729412, 0.894118, 1, 1 )
+polygon = PoolVector2Array( 35, 5, 19, -3, 4, 2, 18, 11 )
+
+[node name="Counter" type="Label" parent="Meter"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -8.0
+margin_right = 8.0
+margin_bottom = 10.0
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+custom_fonts/font = ExtResource( 1 )
+text = "50%"
+align = 1
+valign = 2
+
+[node name="Icons" type="Control" parent="Meter"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Hover" type="Control" parent="Meter/Icons"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 3 )
+default_gravity = 0.3
+floaty_gravity = 0.125
+bounce_power = 2.5
+end_bounce_power = 2.75
+
+[node name="CircleOutline2" type="Control" parent="Meter/Icons/Hover"]
+margin_left = -4.0
+margin_top = -22.0001
+margin_right = 15.0
+margin_bottom = -3.00006
+script = SubResource( 189 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+
+[node name="CircleOutline" type="Control" parent="Meter/Icons/Hover"]
+margin_left = 23.0002
+margin_top = -22.0001
+margin_right = 42.0002
+margin_bottom = -3.00009
+script = SubResource( 189 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+
+[node name="Polygon2D5" type="Polygon2D" parent="Meter/Icons/Hover"]
+position = Vector2( 6.667, -18.095 )
+scale = Vector2( 1.2, 1.25 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+offset = Vector2( -5.714, 14.286 )
+polygon = PoolVector2Array( 6.66669, -1.90479, 8.57147, -0.952393, 10.4762, 0.952362, 11.4286, 3.80951, 10.4762, 5.71426, 8.57147, 7.61905, 5.71429, 8.57141, 0, 7.61905, -4.7619, 5.71426, -8.57141, 2.85712, -9.5238, 1.90475, -10.4762, -0.952393, -9.5238, -2.85715, -6.66663, -4.76193, -1.90472, -4.76193, 1.90479, -8.57144, 5.71429, -7.61905, 6.16627, -4.90721 )
+uv = PoolVector2Array( 46.6887, 26.4332, 51.6044, 28.891, 56.5199, 33.8066, 58.9777, 41.18, 56.5199, 46.0955, 51.6044, 51.0112, 44.2309, 53.4689, 29.4841, 51.0112, 17.1952, 46.0955, 7.36403, 38.7221, 4.9062, 36.2644, 2.44838, 28.891, 4.9062, 23.9754, 12.2797, 19.0598, 24.5686, 19.0598, 34.3998, 9.22864, 44.2309, 11.6865 )
+
+[node name="Polygon2D6" type="Polygon2D" parent="Meter/Icons/Hover"]
+position = Vector2( -59.048, -16.191 )
+rotation = 3.14159
+scale = Vector2( 1.2, -1.25 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+offset = Vector2( -80.917, 12.71 )
+polygon = PoolVector2Array( 6.66669, -1.90479, 8.57147, -0.952393, 10.4762, 0.952362, 11.4286, 3.80951, 10.4762, 5.71426, 8.57147, 7.61905, 5.71429, 8.57141, 0, 7.61905, -4.7619, 5.71426, -8.57141, 2.85712, -9.5238, 1.90475, -10.4762, -0.952393, -9.5238, -2.85715, -6.66663, -4.76193, -1.90472, -4.76193, 1.90479, -8.57144, 5.71429, -7.61905 )
+uv = PoolVector2Array( 46.6887, 26.4332, 51.6044, 28.891, 56.5199, 33.8066, 58.9777, 41.18, 56.5199, 46.0955, 51.6044, 51.0112, 44.2309, 53.4689, 29.4841, 51.0112, 17.1952, 46.0955, 7.36403, 38.7221, 4.9062, 36.2644, 2.44838, 28.891, 4.9062, 23.9754, 12.2797, 19.0598, 24.5686, 19.0598, 34.3998, 9.22864, 44.2309, 11.6865 )
+
+[node name="Polygon2D7" type="Polygon2D" parent="Meter/Icons/Hover"]
+position = Vector2( -4.7619, 0.952332 )
+scale = Vector2( 1.25, 1.25 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+polygon = PoolVector2Array( 12.1905, -11.4286, 15.2381, -9.14285, 17.1429, -11.4286, 20.9524, -11.4286, 22.8571, -9.14285, 25.9048, -10.6667, 27.4286, -6.09521, 23.6191, -3.04761, 23.6191, -0.761902, 14.4762, -0.761902, 14.4762, -3.04761, 10.6667, -6.85715 )
+uv = PoolVector2Array( 8.08297, 11.692, 18.2589, 18.4759, 25.043, 8.29991, 38.611, 8.29991, 45.3951, 18.4759, 55.571, 11.692, 62.3551, 25.2599, 45.3951, 35.436, 45.3951, 45.612, 31.8271, 49.0041, 18.2589, 45.612, 18.2589, 35.436, 1.29888, 21.868 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="Meter/Icons/Hover"]
+texture = SubResource( 217 )
+polygon = PoolVector2Array( 12.381, -10.4762, 15.2381, -8.57144, 17.1429, -11.4286, 20.9524, -11.4286, 22.8572, -8.57144, 25.7143, -10.4762, 27.6191, -6.66669, 22.8572, -3.80954, 22.8572, -0.952393, 15.2381, -0.952393, 15.2381, -3.80954, 10.4762, -7.61905 )
+uv = PoolVector2Array( 8.9277, 12.2269, 18.8795, 18.8616, 25.5142, 8.90957, 38.7834, 8.90957, 45.4181, 18.8616, 55.3699, 12.2269, 62.0047, 25.4961, 45.4181, 35.4481, 45.4181, 45.4, 18.8795, 45.4, 18.8795, 35.4481, 2.29295, 22.1789 )
+
+[node name="Circle3" type="Control" parent="Meter/Icons/Hover"]
+margin_left = -1.0
+margin_top = -20.0
+margin_right = 14.0
+margin_bottom = -5.00003
+script = SubResource( 189 )
+color = Color( 1, 0.831373, 0.592157, 1 )
+
+[node name="Shading" type="TextureRect" parent="Meter/Icons/Hover/Circle3"]
+material = SubResource( 193 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 202 )
+expand = true
+
+[node name="Circle4" type="Control" parent="Meter/Icons/Hover"]
+margin_left = 23.667
+margin_top = -19.905
+margin_right = 38.667
+margin_bottom = -4.905
+script = SubResource( 189 )
+color = Color( 1, 0.831373, 0.592157, 1 )
+
+[node name="Shading" type="TextureRect" parent="Meter/Icons/Hover/Circle4"]
+material = SubResource( 193 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 202 )
+expand = true
+
+[node name="Polygon2D4" type="Polygon2D" parent="Meter/Icons/Hover"]
+position = Vector2( 6.75, -14.286 )
+offset = Vector2( -5.714, 14.286 )
+texture = SubResource( 217 )
+polygon = PoolVector2Array( 6.66669, -1.90479, 8.57147, -0.952393, 10.4762, 0.952362, 11.4286, 3.80951, 10.4762, 5.71426, 8.57147, 7.61905, 5.71429, 8.57141, 0, 7.61905, -4.7619, 5.71426, -8.57141, 2.85712, -9.5238, 1.90475, -10.4762, -0.952393, -9.5238, -2.85715, -6.66663, -4.76193, -1.90472, -4.76193, 1.90479, -8.57144, 5.71429, -7.61905 )
+uv = PoolVector2Array( 46.6887, 26.4332, 51.6044, 28.891, 56.5199, 33.8066, 58.9777, 41.18, 56.5199, 46.0955, 51.6044, 51.0112, 44.2309, 53.4689, 29.4841, 51.0112, 17.1952, 46.0955, 7.36403, 38.7221, 4.9062, 36.2644, 2.44838, 28.891, 4.9062, 23.9754, 12.2797, 19.0598, 24.5686, 19.0598, 34.3998, 9.22864, 44.2309, 11.6865 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Meter/Icons/Hover/Polygon2D4"]
+position = Vector2( -0.67041, 2.84128 )
+scale = Vector2( 0.9, 0.9 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+polygon = PoolVector2Array( -2.27087, 13.6709, 1.51038, 15.8896, 3.19788, 18.4834, 2.27893, 20.1348, -0.772766, 20.8363, -4.75269, 20.6865, -9.41687, 18.9002, -13.5201, 16.1216, -14.5491, 13.5948, -13.7681, 12.2512, -11.7709, 11.7519, -6.92712, 12.3584 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="Meter/Icons/Hover"]
+position = Vector2( -43.822, -12.615 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+offset = Vector2( -80.9171, 12.7099 )
+texture = SubResource( 217 )
+polygon = PoolVector2Array( 6.66669, -1.90479, 8.57147, -0.952393, 10.4762, 0.952362, 11.4286, 3.80951, 10.4762, 5.71426, 8.57147, 7.61905, 5.71429, 8.57141, 0, 7.61905, -4.7619, 5.71426, -8.57141, 2.85712, -9.5238, 1.90475, -10.4762, -0.952393, -9.5238, -2.85715, -6.66663, -4.76193, -1.90472, -4.76193, 1.90479, -8.57144, 5.71429, -7.61905 )
+uv = PoolVector2Array( 46.6887, 26.4332, 51.6044, 28.891, 56.5199, 33.8066, 58.9777, 41.18, 56.5199, 46.0955, 51.6044, 51.0112, 44.2309, 53.4689, 29.4841, 51.0112, 17.1952, 46.0955, 7.36403, 38.7221, 4.9062, 36.2644, 2.44838, 28.891, 4.9062, 23.9754, 12.2797, 19.0598, 24.5686, 19.0598, 34.3998, 9.22864, 44.2309, 11.6865 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="Meter/Icons/Hover/Polygon2D3"]
+position = Vector2( -76.1399, 1.07877 )
+scale = Vector2( 0.9, 0.9 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+polygon = PoolVector2Array( -2.27087, 13.6709, 1.51038, 15.8896, 3.19788, 18.4834, 2.27893, 20.1348, -0.772766, 20.8363, -4.75269, 20.6865, -9.41687, 18.9002, -13.5201, 16.1216, -14.5491, 13.5948, -13.7681, 12.2512, -11.7709, 11.7519, -6.92712, 12.3584 )

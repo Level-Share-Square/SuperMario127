@@ -121,8 +121,6 @@ func _unhandled_input(event) -> void:
 			selected_tool = 0
 		elif event.is_action_pressed("eraser_tool"):
 			selected_tool = 1
-		elif event.is_action_pressed("selection_tool"):
-			selected_tool = 2
 		elif event.is_action_pressed("zoom_out"):
 			add_zoom_level(0.25)
 		elif event.is_action_pressed("zoom_in"):

@@ -5,9 +5,7 @@ class_name RocketNozzle
 export var boost_power := 5000
 export var depletion := 100
 export var fuel_depletion := 5
-var last_activated = false
 var last_charged = false
-var last_state = null
 
 var accel = 825
 var charge = 0
@@ -98,6 +96,7 @@ func _update(_delta):
 
 	last_state = character.state
 
+var playing_anim: bool
 func _general_update(delta):
 	if character.is_grounded():
 		cooldown_time = 0
@@ -130,4 +129,12 @@ func _general_update(delta):
 		
 		if charge < 0:
 			charge = 0
+	
+	if activated and not playing_anim:
+		playing_anim = true
+		character.emit_signal("fludd_activated")
+	elif not activated and playing_anim:
+		playing_anim = false
+		character.emit_signal("fludd_deactivated")
+	
 	last_charged = activated
