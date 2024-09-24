@@ -123,7 +123,7 @@ func set_switch_timer(new_time: float):
 	switch_timer = new_time
 	
 	var timer_manager: Control = get_node("%TimerManager")
-	timer_manager.add_radial_timer("PSwitch", new_time, TIMER_ICON)
+	timer_manager.add_radial_timer("PSwitch", self, "switch_timer", TIMER_ICON)
 
 
 func get_timer_manager() -> Control:

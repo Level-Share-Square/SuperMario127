@@ -23,11 +23,17 @@ func _physics_process(delta):
 		timer_display.text = LevelInfo.generate_time_string(Singleton.CurrentLevelData.time_score)
 		return
 	
-	count(delta)
-
-
-func _update_time_display(display_time: float):
-	timer_display.text = LevelInfo.generate_time_string(display_time)
+	# justt in case the timer is set again right after running out
+	if not is_counting and time > 0:
+		cancel_time_over()
+	
+	if is_counting:
+		time -= delta
+		timer_display.text = LevelInfo.generate_time_string(time)
+		
+		if time <= 0:
+			time = 0
+			time_over()
 
 
 func set_label(new_text: String):

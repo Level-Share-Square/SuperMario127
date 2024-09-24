@@ -475,19 +475,22 @@ func get_powerup_node(name: String) -> Node:
 		return powerups_node.get_node(name)
 	return null
 
-func set_powerup(powerup_node: Node, set_temporary_music: bool) -> void:
+func set_powerup(powerup_node: Node, set_temporary_music: bool, duration = -1) -> void:
 	if is_instance_valid(powerup):
 		# Prevent switching away from rainbow star
 		if powerup.name == "RainbowPowerup" and powerup != powerup_node\
 		and is_instance_valid(powerup_node): # unless it's running out
 			return
 		
+		powerup.time_left = 0
 		powerup._stop(0)
 		powerup.remove_visuals()
 	
 	powerup = powerup_node
 	if is_instance_valid(powerup):
 		powerup.play_temp_music = set_temporary_music
+		if duration != -1:
+			powerup.time_left = duration
 		powerup._start(0, set_temporary_music)
 		powerup.apply_visuals()
 

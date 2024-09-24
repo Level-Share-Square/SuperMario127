@@ -25,8 +25,7 @@ func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
 		body.heal(5 * 8)
 		var powerup_node = body.get_powerup_node("WingPowerup")
-		powerup_node.time_left = duration
-		body.set_powerup(powerup_node, powerup_music)
+		body.set_powerup(powerup_node, powerup_music, duration)
 		body.sound_player.play_powerup_sound()
 		body.sound_player.play_powerup_jingle()
 		animation_player.play("collect")

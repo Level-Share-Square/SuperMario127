@@ -17,25 +17,7 @@ func _ready():
 		0, 1,
 		FADE_TIME)
 	tween.start()
-
-
-func count(delta):
-	# justt in case the timer is set again right after running out
-	if not is_counting and time > 0:
-		cancel_time_over()
 	
-	if is_counting:
-		time -= delta
-		_update_time_display(time)
-		
-		if time <= 0:
-			time = 0
-			time_over()
-
-
-func _update_time_display(display_time: float):
-	pass
-
 
 func cancel_time_over():
 	is_counting = true

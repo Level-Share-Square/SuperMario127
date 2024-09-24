@@ -501,22 +501,20 @@ extra_spacing_char = -2
 font_data = ExtResource( 11 )
 
 [sub_resource type="Gradient" id=203]
-offsets = PoolRealArray( 0.222798, 0.554404, 0.80829, 1 )
-colors = PoolColorArray( 1, 1, 1, 0.914417, 1, 1, 1, 0.533333, 0.584314, 0.027451, 0.498039, 0.501961, 0.888295, 0.742127, 0.776589, 0.849079 )
+colors = PoolColorArray( 1, 0.992157, 0.894118, 1, 1, 0.992157, 0.894118, 0 )
 
 [sub_resource type="GradientTexture2D" id=202]
 gradient = SubResource( 203 )
-fill = 1
-fill_from = Vector2( 0.495833, 0.2125 )
-fill_to = Vector2( 0.516667, 1 )
+fill_from = Vector2( 0.5, 0.2 )
+fill_to = Vector2( 0.5, 0.6 )
 
-[sub_resource type="Gradient" id=204]
-offsets = PoolRealArray( 0.12973, 0.497297 )
-colors = PoolColorArray( 0.580392, 0.584314, 0.843137, 1, 0.870588, 0.94902, 1, 1 )
+[sub_resource type="Gradient" id=216]
+colors = PoolColorArray( 0.87, 0.950167, 1, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture2D" id=205]
-gradient = SubResource( 204 )
-fill_to = Vector2( 0.00416667, 1 )
+[sub_resource type="GradientTexture2D" id=217]
+gradient = SubResource( 216 )
+fill_from = Vector2( 0, 0.2 )
+fill_to = Vector2( 0, 0.4 )
 
 [sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.133333, 0.145098, 0.196078, 0.835294 )
@@ -1152,14 +1150,12 @@ align = 1
 valign = 1
 
 [node name="Fludd" type="Control" parent="UI/HUD/Control"]
-visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -40.0
 margin_top = -50.0
-rect_scale = Vector2( 1.05, 1.05 )
 
 [node name="Paint" type="Polygon2D" parent="UI/HUD/Control/Fludd"]
 position = Vector2( 21, 27 )
@@ -1226,15 +1222,15 @@ script = SubResource( 189 )
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
 
 [node name="Polygon2D5" type="Polygon2D" parent="UI/HUD/Control/Fludd/Icon"]
-position = Vector2( 6.66669, -18.0952 )
+position = Vector2( 7.667, -18.095 )
 scale = Vector2( 1.2, 1.25 )
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
 offset = Vector2( -5.714, 14.286 )
-polygon = PoolVector2Array( 6.66669, -1.90479, 8.57147, -0.952393, 10.4762, 0.952362, 11.4286, 3.80951, 10.4762, 5.71426, 8.57147, 7.61905, 5.71429, 8.57141, 0, 7.61905, -4.7619, 5.71426, -8.57141, 2.85712, -9.5238, 1.90475, -10.4762, -0.952393, -9.5238, -2.85715, -6.66663, -4.76193, -1.90472, -4.76193, 1.90479, -8.57144, 5.71429, -7.61905 )
+polygon = PoolVector2Array( 6.66669, -1.90479, 8.57147, -0.952393, 10.4762, 0.952362, 11.4286, 3.80951, 10.4762, 5.71426, 8.57147, 7.61905, 5.71429, 8.57141, 0, 7.61905, -4.7619, 5.71426, -8.57141, 2.85712, -9.5238, 1.90475, -10.4762, -0.952393, -9.5238, -2.85715, -6.66663, -4.76193, -1.90472, -4.76193, 1.90479, -8.57144, 5.71429, -7.61905, 6.16627, -4.90721 )
 uv = PoolVector2Array( 46.6887, 26.4332, 51.6044, 28.891, 56.5199, 33.8066, 58.9777, 41.18, 56.5199, 46.0955, 51.6044, 51.0112, 44.2309, 53.4689, 29.4841, 51.0112, 17.1952, 46.0955, 7.36403, 38.7221, 4.9062, 36.2644, 2.44838, 28.891, 4.9062, 23.9754, 12.2797, 19.0598, 24.5686, 19.0598, 34.3998, 9.22864, 44.2309, 11.6865 )
 
 [node name="Polygon2D6" type="Polygon2D" parent="UI/HUD/Control/Fludd/Icon"]
-position = Vector2( -59.0476, -16.1905 )
+position = Vector2( -60.048, -16.191 )
 rotation = 3.14159
 scale = Vector2( 1.2, -1.25 )
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
@@ -1255,7 +1251,7 @@ margin_top = -20.0
 margin_right = 13.0001
 margin_bottom = -5.00003
 script = SubResource( 189 )
-color = Color( 1, 0.666667, 0.286275, 1 )
+color = Color( 1, 0.831373, 0.592157, 1 )
 
 [node name="Shading" type="TextureRect" parent="UI/HUD/Control/Fludd/Icon/Circle3"]
 material = SubResource( 193 )
@@ -1270,7 +1266,7 @@ margin_top = -19.905
 margin_right = 39.667
 margin_bottom = -4.905
 script = SubResource( 189 )
-color = Color( 1, 0.666667, 0.286275, 1 )
+color = Color( 1, 0.831373, 0.592157, 1 )
 
 [node name="Shading" type="TextureRect" parent="UI/HUD/Control/Fludd/Icon/Circle4"]
 material = SubResource( 193 )
@@ -1280,48 +1276,43 @@ texture = SubResource( 202 )
 expand = true
 
 [node name="Polygon2D4" type="Polygon2D" parent="UI/HUD/Control/Fludd/Icon"]
-position = Vector2( 5.75, -14.286 )
+position = Vector2( 6.75, -14.286 )
 offset = Vector2( -5.714, 14.286 )
-texture = SubResource( 205 )
+texture = SubResource( 217 )
 polygon = PoolVector2Array( 6.66669, -1.90479, 8.57147, -0.952393, 10.4762, 0.952362, 11.4286, 3.80951, 10.4762, 5.71426, 8.57147, 7.61905, 5.71429, 8.57141, 0, 7.61905, -4.7619, 5.71426, -8.57141, 2.85712, -9.5238, 1.90475, -10.4762, -0.952393, -9.5238, -2.85715, -6.66663, -4.76193, -1.90472, -4.76193, 1.90479, -8.57144, 5.71429, -7.61905 )
 uv = PoolVector2Array( 46.6887, 26.4332, 51.6044, 28.891, 56.5199, 33.8066, 58.9777, 41.18, 56.5199, 46.0955, 51.6044, 51.0112, 44.2309, 53.4689, 29.4841, 51.0112, 17.1952, 46.0955, 7.36403, 38.7221, 4.9062, 36.2644, 2.44838, 28.891, 4.9062, 23.9754, 12.2797, 19.0598, 24.5686, 19.0598, 34.3998, 9.22864, 44.2309, 11.6865 )
 
-[node name="CircleOutline" type="Control" parent="UI/HUD/Control/Fludd/Icon/Polygon2D4"]
-margin_left = -12.369
-margin_top = 10.726
-margin_right = 7.631
-margin_bottom = 29.726
-rect_rotation = 20.0
-rect_scale = Vector2( 0.9, 0.4 )
-script = SubResource( 189 )
+[node name="Polygon2D" type="Polygon2D" parent="UI/HUD/Control/Fludd/Icon/Polygon2D4"]
+position = Vector2( -0.67041, 2.84128 )
+scale = Vector2( 0.9, 0.9 )
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+polygon = PoolVector2Array( -2.27087, 13.6709, 1.51038, 15.8896, 3.19788, 18.4834, 2.27893, 20.1348, -0.772766, 20.8363, -4.75269, 20.6865, -9.41687, 18.9002, -13.5201, 16.1216, -14.5491, 13.5948, -13.7681, 12.2512, -11.7709, 11.7519, -6.92712, 12.3584 )
 
 [node name="Polygon2D3" type="Polygon2D" parent="UI/HUD/Control/Fludd/Icon"]
-position = Vector2( -42.8218, -12.6147 )
+position = Vector2( -43.822, -12.615 )
 rotation = 3.14159
 scale = Vector2( 1, -1 )
 offset = Vector2( -80.9171, 12.7099 )
-texture = SubResource( 205 )
+texture = SubResource( 217 )
 polygon = PoolVector2Array( 6.66669, -1.90479, 8.57147, -0.952393, 10.4762, 0.952362, 11.4286, 3.80951, 10.4762, 5.71426, 8.57147, 7.61905, 5.71429, 8.57141, 0, 7.61905, -4.7619, 5.71426, -8.57141, 2.85712, -9.5238, 1.90475, -10.4762, -0.952393, -9.5238, -2.85715, -6.66663, -4.76193, -1.90472, -4.76193, 1.90479, -8.57144, 5.71429, -7.61905 )
 uv = PoolVector2Array( 46.6887, 26.4332, 51.6044, 28.891, 56.5199, 33.8066, 58.9777, 41.18, 56.5199, 46.0955, 51.6044, 51.0112, 44.2309, 53.4689, 29.4841, 51.0112, 17.1952, 46.0955, 7.36403, 38.7221, 4.9062, 36.2644, 2.44838, 28.891, 4.9062, 23.9754, 12.2797, 19.0598, 24.5686, 19.0598, 34.3998, 9.22864, 44.2309, 11.6865 )
 
-[node name="CircleOutline" type="Control" parent="UI/HUD/Control/Fludd/Icon/Polygon2D3"]
-margin_left = -88.0
-margin_top = 9.0
-margin_right = -68.0
-margin_bottom = 28.0
-rect_rotation = 20.0
-rect_scale = Vector2( 0.9, 0.4 )
-script = SubResource( 189 )
+[node name="Polygon2D2" type="Polygon2D" parent="UI/HUD/Control/Fludd/Icon/Polygon2D3"]
+position = Vector2( -76.1399, 1.07877 )
+scale = Vector2( 0.9, 0.9 )
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+polygon = PoolVector2Array( -2.27087, 13.6709, 1.51038, 15.8896, 3.19788, 18.4834, 2.27893, 20.1348, -0.772766, 20.8363, -4.75269, 20.6865, -9.41687, 18.9002, -13.5201, 16.1216, -14.5491, 13.5948, -13.7681, 12.2512, -11.7709, 11.7519, -6.92712, 12.3584 )
 
 [node name="Polygon2D2" type="Polygon2D" parent="UI/HUD/Control/Fludd/Icon"]
-texture = SubResource( 205 )
+texture = SubResource( 217 )
 polygon = PoolVector2Array( 12.381, -10.4762, 15.2381, -8.57144, 17.1429, -11.4286, 20.9524, -11.4286, 22.8572, -8.57144, 25.7143, -10.4762, 27.6191, -6.66669, 22.8572, -3.80954, 22.8572, -0.952393, 19.0477, 0, 15.2381, -0.952393, 15.2381, -3.80954, 10.4762, -7.61905 )
 uv = PoolVector2Array( 8.08297, 11.692, 18.2589, 18.4759, 25.043, 8.29991, 38.611, 8.29991, 45.3951, 18.4759, 55.571, 11.692, 62.3551, 25.2599, 45.3951, 35.436, 45.3951, 45.612, 31.8271, 49.0041, 18.2589, 45.612, 18.2589, 35.436, 1.29888, 21.868 )
 
 [node name="TimerManager" parent="UI/HUD/Control" instance=ExtResource( 8 )]
 unique_name_in_owner = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="SignText" type="Control" parent="UI"]
 pause_mode = 2
@@ -1463,8 +1454,7 @@ volume_db = -2.0
 
 [node name="Reference2" type="Sprite" parent="UI"]
 visible = false
-modulate = Color( 1, 1, 1, 0.6 )
-position = Vector2( 724, 356 )
+position = Vector2( 723, 360 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 9 )
 __meta__ = {

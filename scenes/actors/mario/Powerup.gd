@@ -47,7 +47,4 @@ func _stop(_delta):
 
 
 func start_display_timer():
-	timer_manager.add_radial_timer(name, time_left, display_icon)
-
-func stop_display_timer():
-	timer_manager.remove_radial_timer(name)
+	timer_manager.add_radial_timer(name, self, "time_left", display_icon)

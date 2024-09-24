@@ -53,27 +53,26 @@ func remove_timer(timer_name: String):
 	timer_node.time = 0
 
 
-func add_radial_timer(timer_name: String, timer_amount: float, icon: Texture = null, set_max: bool = true) -> Control:
+func add_radial_timer(timer_name: String, read_node: Node, read_property: String, icon: Texture = null, set_max: bool = true) -> Control:	
+	if not is_instance_valid(read_node):
+		return null
+	
 	var timer_node: Control = radial_timers.get_node_or_null(timer_name)
 	if not is_instance_valid(timer_node):
 		timer_node = RADIAL_TIMER_SCENE.instance()
 		timer_node.name = timer_name
 		timer_node.icon = icon
-		
 		radial_timers.call_deferred("add_child", timer_node)
 	
-	timer_node.time = timer_amount
+	timer_node.read_node = read_node
+	timer_node.read_property = read_property
 	if set_max:
-		timer_node.call_deferred("set_max_time", timer_amount)
+		timer_node.call_deferred("set_max_time", read_node[read_property])
+	
 	return timer_node
 
 
-func remove_radial_timer(timer_name: String):
-	var timer_node: Control = radial_timers.get_node_or_null(timer_name)
-	if not is_instance_valid(timer_node):
-		return
-	
-	timer_node.time = 0
+## (remove a radial timer by setting the property its reading to 0 or lower)
 
 
 # testing

@@ -13,7 +13,6 @@ func _start(_delta, play_temp_music: bool):
 	character.set_all_collision_masks(6, false)
 
 func _stop(_delta):
-	stop_display_timer()
 	emit_signal("powerup_state_changed", "Normal")
 	Singleton.Music.stop_temporary_music()
 	character.set_all_collision_masks(6, true)
