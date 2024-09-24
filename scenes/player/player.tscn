@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -25,7 +25,6 @@
 [ext_resource path="res://scenes/player/ui_new/fludd/fludd.tscn" type="PackedScene" id=23]
 [ext_resource path="res://scenes/player/ui_new/fludd/stamina.tscn" type="PackedScene" id=24]
 [ext_resource path="res://scenes/player/dialogue_text.gd" type="Script" id=29]
-[ext_resource path="res://scenes/actors/fludd_display/fludd_display.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=39]
 [ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
@@ -1289,7 +1288,6 @@ __meta__ = {
 }
 
 [node name="Viewports" type="HBoxContainer" parent="."]
-visible = false
 margin_right = 772.0
 margin_bottom = 432.0
 size_flags_horizontal = 0
@@ -1314,7 +1312,7 @@ __meta__ = {
 [node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer"]
 size = Vector2( 384, 432 )
 handle_input_locally = false
-render_target_update_mode = 0
+render_target_update_mode = 3
 
 [node name="CameraP1" type="Camera2D" parent="Viewports/ViewportContainer/Viewport"]
 pause_mode = 2
@@ -1345,6 +1343,7 @@ collision_layer = 0
 collision_mask = 2048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Viewports/ViewportContainer/Viewport/CameraP1/Area2D"]
+visible = false
 shape = SubResource( 18 )
 
 [node name="World" type="Node2D" parent="Viewports/ViewportContainer/Viewport"]
@@ -1366,14 +1365,12 @@ collision_layer = 0
 collision_mask = 2048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Viewports/ViewportContainer/Viewport/World/Character2/CamCollision2"]
+visible = false
 shape = SubResource( 24 )
 
 [node name="GhostMario" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 16 )]
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer/Viewport" instance=ExtResource( 13 )]
-
-[node name="FluddDisplay" parent="Viewports/ViewportContainer" instance=ExtResource( 30 )]
-char_path = NodePath("../Viewport/World/Character")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Viewports/ViewportContainer"]
 layer = 60
@@ -1403,10 +1400,6 @@ character_path = NodePath("../../Viewport/World/Character")
 layer = 60
 
 [node name="Stamina" parent="Viewports/ViewportContainer/CanvasLayer2" instance=ExtResource( 24 )]
-margin_left = 0.0
-margin_top = 0.0
-margin_right = 22.0
-margin_bottom = 22.0
 character_path = NodePath("../../Viewport/World/Character")
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="Viewports"]
@@ -1423,7 +1416,7 @@ __meta__ = {
 [node name="Viewport" type="Viewport" parent="Viewports/ViewportContainer2"]
 size = Vector2( 384, 432 )
 handle_input_locally = false
-render_target_update_mode = 0
+render_target_update_mode = 3
 
 [node name="CameraP2" type="Camera2D" parent="Viewports/ViewportContainer2/Viewport"]
 pause_mode = 2
@@ -1454,10 +1447,6 @@ character2_cam_collider = NodePath("../../../ViewportContainer/Viewport/World/Ch
 
 [node name="World" type="Node2D" parent="Viewports/ViewportContainer2/Viewport"]
 
-[node name="FluddDisplay2" parent="Viewports/ViewportContainer2" instance=ExtResource( 30 )]
-position = Vector2( -388, 0 )
-char_path = NodePath("../../ViewportContainer/Viewport/World/Character2")
-
 [node name="CanvasLayer" type="CanvasLayer" parent="Viewports/ViewportContainer2"]
 layer = 60
 
@@ -1479,6 +1468,12 @@ margin_left = -66.0
 margin_top = -66.0
 margin_right = -26.0
 margin_bottom = -16.0
+character_path = NodePath("../../../ViewportContainer/Viewport/World/Character2")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="Viewports/ViewportContainer2"]
+layer = 60
+
+[node name="Stamina" parent="Viewports/ViewportContainer2/CanvasLayer2" instance=ExtResource( 24 )]
 character_path = NodePath("../../../ViewportContainer/Viewport/World/Character2")
 
 [node name="SharedSounds" type="Node" parent="."]

@@ -204,10 +204,9 @@ shader_param/use_value_gradient = false
 shader_param/gradient = SubResource( 231 )
 
 [node name="Stamina" type="Control"]
-margin_left = 700.0
-margin_top = 192.0
-margin_right = 722.0
-margin_bottom = 214.0
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 22.0
+margin_bottom = 22.0
 rect_rotation = 5.0
 rect_pivot_offset = Vector2( 11, 11 )
 script = ExtResource( 1 )
