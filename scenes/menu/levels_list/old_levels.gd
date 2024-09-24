@@ -5,6 +5,9 @@ signal conversion_complete
 export var saver_path: NodePath
 onready var saver = get_node(saver_path)
 
+export var sorting_path: NodePath
+onready var sorting = get_node(sorting_path)
+
 onready var progress_bar = $HBoxContainer/ProgressBar
 
 const OLD_LEVELS_SORT_PATH: String = "user://levels/paths.json"
@@ -39,6 +42,8 @@ func convert_old_levels(base_folder: String):
 		return
 	
 	progress_bar.max_value = parse.result.size()
+	
+	sorting.load_from_json(base_folder)
 	
 	var index: int = 0
 	for file_path in parse.result:

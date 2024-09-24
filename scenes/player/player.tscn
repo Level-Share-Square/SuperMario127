@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/player/camera.gd" type="Script" id=4]
 [ext_resource path="res://scenes/menu/pause/pause_controller.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=6]
-[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/player/ui_new/text/dialogue_text.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/player/ui_new/timers/timer_manager.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/player/ui_new/reference2.png" type="Texture" id=9]
 [ext_resource path="res://scenes/player/ui_new/ui/shine_shards.png" type="Texture" id=10]
@@ -24,13 +24,10 @@
 [ext_resource path="res://scenes/player/ui_new/muitiplayer_realign.gd" type="Script" id=22]
 [ext_resource path="res://scenes/player/ui_new/fludd/fludd.tscn" type="PackedScene" id=23]
 [ext_resource path="res://scenes/player/ui_new/fludd/stamina.tscn" type="PackedScene" id=24]
-[ext_resource path="res://scenes/player/dialogue_text.gd" type="Script" id=29]
+[ext_resource path="res://scenes/player/ui_new/text/sign_text.tscn" type="PackedScene" id=25]
 [ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=39]
 [ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
-[ext_resource path="res://scenes/player/sign_text.gd" type="Script" id=55]
-[ext_resource path="res://scenes/actors/objects/sign/menu_open.wav" type="AudioStream" id=56]
-[ext_resource path="res://scenes/actors/objects/sign/menu_close.wav" type="AudioStream" id=57]
 [ext_resource path="res://scenes/actors/objects/p_switch/tick.wav" type="AudioStream" id=58]
 [ext_resource path="res://scenes/actors/objects/p_switch/tick_end.wav" type="AudioStream" id=59]
 [ext_resource path="res://scenes/actors/objects/boo/laugh.wav" type="AudioStream" id=60]
@@ -500,38 +497,6 @@ use_filter = true
 extra_spacing_top = 5
 extra_spacing_char = -2
 font_data = ExtResource( 11 )
-
-[sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 0.133333, 0.145098, 0.196078, 0.835294 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-expand_margin_left = 1.0
-expand_margin_right = 1.0
-expand_margin_top = 1.0
-expand_margin_bottom = 1.0
-
-[sub_resource type="DynamicFont" id=32]
-size = 32
-outline_color = Color( 0.054902, 0, 0.25098, 1 )
-font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=33]
-size = 32
-outline_color = Color( 0.054902, 0, 0.25098, 1 )
-font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=25]
-size = 32
-outline_size = 4
-outline_color = Color( 0.054902, 0, 0.25098, 1 )
-font_data = ExtResource( 7 )
 
 [sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 393, 216 )
@@ -1140,143 +1105,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="SignText" type="Control" parent="UI"]
-pause_mode = 2
-margin_left = 161.0
-margin_top = 66.0
-margin_right = 611.0
-margin_bottom = 366.0
-mouse_filter = 2
-script = ExtResource( 55 )
+[node name="SignText" parent="UI" instance=ExtResource( 25 )]
 
-[node name="Panel" type="Panel" parent="UI/SignText"]
-margin_right = 450.0
-margin_bottom = 300.0
-mouse_filter = 2
-custom_styles/panel = SubResource( 11 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/SignText"]
-margin_left = 15.0
-margin_top = 15.0
-margin_right = 860.0
-margin_bottom = 500.0
-rect_scale = Vector2( 0.5, 0.5 )
-rect_clip_content = false
-mouse_filter = 2
-custom_fonts/normal_font = SubResource( 32 )
-bbcode_enabled = true
-bbcode_text = "[center]L is real 2401, Mario Peach and Bowser, (not) By Runouw[/center]"
-text = "L is real 2401, Mario Peach and Bowser, (not) By Runouw"
-scroll_active = false
-
-[node name="CloseLabel" type="RichTextLabel" parent="UI/SignText"]
-margin_left = 10.0
-margin_top = 270.0
-margin_right = 870.0
-margin_bottom = 315.0
-rect_scale = Vector2( 0.5, 0.5 )
-rect_clip_content = false
-mouse_filter = 2
-custom_fonts/normal_font = SubResource( 33 )
-bbcode_enabled = true
-bbcode_text = "[center]Press :interactinput: to close[/center]"
-text = "Press :interactinput: to close"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MenuOpen" type="AudioStreamPlayer" parent="UI/SignText"]
-stream = ExtResource( 56 )
-volume_db = -2.0
-
-[node name="MenuClose" type="AudioStreamPlayer" parent="UI/SignText"]
-stream = ExtResource( 57 )
-volume_db = -2.0
-
-[node name="DialogueText" type="Control" parent="UI"]
-pause_mode = 2
-margin_left = 161.0
-margin_top = 316.0
-margin_right = 611.0
-margin_bottom = 416.0
-mouse_filter = 2
-script = ExtResource( 29 )
-
-[node name="Panel" type="Panel" parent="UI/DialogueText"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-custom_styles/panel = SubResource( 11 )
-
-[node name="Name" type="RichTextLabel" parent="UI/DialogueText/Panel"]
-margin_left = 6.0
-margin_top = -20.0
-margin_right = 870.0
-margin_bottom = 22.0
-rect_scale = Vector2( 0.5, 0.5 )
-rect_clip_content = false
-custom_fonts/normal_font = SubResource( 25 )
-bbcode_enabled = true
-bbcode_text = "Toad"
-text = "Toad"
-scroll_active = false
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/DialogueText"]
-anchor_right = 2.0
-anchor_bottom = 2.0
-rect_scale = Vector2( 0.5, 0.5 )
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/DialogueText/VBoxContainer"]
-margin_right = 900.0
-margin_bottom = 156.0
-size_flags_vertical = 3
-size_flags_stretch_ratio = 4.0
-custom_constants/margin_right = 20
-custom_constants/margin_top = 16
-custom_constants/margin_left = 20
-custom_constants/margin_bottom = 16
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/DialogueText/VBoxContainer/MarginContainer"]
-margin_left = 20.0
-margin_top = 16.0
-margin_right = 880.0
-margin_bottom = 140.0
-rect_clip_content = false
-mouse_filter = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 5.0
-custom_fonts/normal_font = SubResource( 32 )
-bbcode_enabled = true
-bbcode_text = "L is real 2401, Mario Peach and Bowser, (not) By Runouw"
-visible_characters = 0
-percent_visible = 0.0
-text = "L is real 2401, Mario Peach and Bowser, (not) By Runouw"
-scroll_active = false
-
-[node name="CloseLabel" type="RichTextLabel" parent="UI/DialogueText/VBoxContainer"]
-margin_top = 160.0
-margin_right = 900.0
-margin_bottom = 200.0
-rect_clip_content = false
-mouse_filter = 2
-size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 33 )
-bbcode_enabled = true
-bbcode_text = "[center]Press :interactinput: to continue[/center]"
-text = "Press :interactinput: to continue"
-
-[node name="MenuOpen" type="AudioStreamPlayer" parent="UI/DialogueText"]
-stream = ExtResource( 56 )
-volume_db = -2.0
-
-[node name="MenuClose" type="AudioStreamPlayer" parent="UI/DialogueText"]
-stream = ExtResource( 57 )
-volume_db = -2.0
-
-[node name="Tween" type="Tween" parent="UI/DialogueText"]
+[node name="DialogueText" parent="UI" instance=ExtResource( 7 )]
 
 [node name="Reference2" type="Sprite" parent="UI"]
 visible = false

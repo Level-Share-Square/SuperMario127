@@ -63,7 +63,7 @@ func add_level_card(file_path: String, level_id: String, working_folder: String,
 	
 	if level_code == "":
 		level_code = saved_levels_util.load_level_code_file(file_path)
-	if not level_code_util.fast_is_valid(level_code):
+	elif not level_code_util.fast_is_valid(level_code):
 		level_code = saved_levels_util.load_level_code_file(list_handler.DEFAULT_LEVEL)
 	
 	var level_info := LevelInfo.new(level_code)
