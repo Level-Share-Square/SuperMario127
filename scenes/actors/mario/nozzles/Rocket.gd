@@ -119,7 +119,13 @@ func _general_update(delta):
 			character.fludd_sprite.offset = Vector2(0, 0)
 			last_activated = false
 	
+	if activated:
+		display_stamina = true
+		stamina_value = charge * 1.333333 # bring it into a 0-1 range
+	
 	if !activated:
+		display_stamina = false
+		
 		if last_charged:
 			character.fludd_charge_sound.stop()
 		

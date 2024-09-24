@@ -10,6 +10,9 @@ var blacklisted_states = []
 var last_activated: bool
 var last_state = null
 
+var display_stamina: bool
+var stamina_value: float 
+
 export var frames : SpriteFrames
 export var frames_luigi : SpriteFrames
 

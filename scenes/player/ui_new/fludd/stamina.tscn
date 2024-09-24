@@ -1,0 +1,234 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/player/ui_new/fludd/stamina_display.gd" type="Script" id=1]
+
+[sub_resource type="Shader" id=226]
+code = "shader_type canvas_item;
+// Shader to round corners of a canvas. The 'radius_scale' is multiplied by
+// minimum(width, height)/2.0 to calculate the radius of the corners.
+//
+// Instructions:
+// 1) The node that uses this shader must have signals 'tree_entered' and
+// 'item_rect_changed' connected to a callable with the next code:
+// material.set_shader_parameter(\"width\", size.x)
+// material.set_shader_parameter(\"height\", size.y)
+//
+// Known issues:
+// 1) If used on 'TextureRect', take care of 'expand_mode' and 'stretch_mode',
+// because image corners might be outside node rectangle and therefore clipped.
+// Corners are rounded, but they are outside node's rectangle.
+
+
+uniform float radius_scale: hint_range(0.0, 1.0, 0.1) = 0.1;
+uniform bool rounded_corner_top_left = true;
+uniform bool rounded_corner_top_right = true;
+uniform bool rounded_corner_bottom_left = true;
+uniform bool rounded_corner_bottom_right = true;
+uniform float width = 1.0;
+uniform float height = 1.0;
+
+
+void fragment() {
+	vec4 image = texture(TEXTURE, UV);
+	vec2 pos = vec2(UV.x*width, UV.y*height);
+	float radius = min(width, height)*radius_scale/2.0;
+	float dist;
+	// Top left corner
+	if (rounded_corner_top_left) {
+		dist = length(pos - vec2(radius));
+		if (dist > radius && pos.x < radius && pos.y < radius) {
+			image.a = 0.0;
+		}
+		// debugging only
+//		if (dist < radius){image.r = 1.0;}
+	}
+	// Top right corner
+	if (rounded_corner_top_right) {
+		dist = length(pos - vec2(width-radius, radius));
+		if (dist > radius && pos.x > width-radius && pos.y < radius) {
+			image.a = 0.0;
+		}
+		// debugging only
+//		if (dist < radius){image.r = 1.0;}
+	}
+	// Bottom left corner
+	if (rounded_corner_bottom_left) {
+		dist = length(pos - vec2(radius, height-radius));
+		if (dist > radius && pos.x < radius && pos.y > height-radius) {
+			image.a = 0.0;
+		}
+		// debugging only
+//		if (dist < radius){image.r = 1.0;}
+	}
+	// Bottom right corner
+	if (rounded_corner_bottom_right) {
+		dist = length(pos - vec2(width-radius, height-radius));
+		if (dist > radius && pos.x > width-radius && pos.y > height-radius) {
+			image.a = 0.0;
+		}
+		// debugging only
+//		if (dist < radius){image.r = 1.0;}
+	}
+	COLOR = image;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=227]
+shader = SubResource( 226 )
+shader_param/radius_scale = 1.0
+shader_param/rounded_corner_top_left = true
+shader_param/rounded_corner_top_right = true
+shader_param/rounded_corner_bottom_left = true
+shader_param/rounded_corner_bottom_right = true
+shader_param/width = 1.0
+shader_param/height = 1.0
+
+[sub_resource type="Gradient" id=230]
+offsets = PoolRealArray( 0, 0.37931 )
+colors = PoolColorArray( 0.838203, 0.81, 1, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=229]
+gradient = SubResource( 230 )
+fill_from = Vector2( 0, 0.7 )
+fill_to = Vector2( 0, 0.3 )
+
+[sub_resource type="Shader" id=224]
+code = "shader_type canvas_item;
+
+const float PI = 3.1415926538;
+
+uniform float value : hint_range(0.0, 1.0) = 1.0;
+uniform int segments = 1;
+uniform float radius = 0.475;
+uniform float hollow_radius = 0.0;
+uniform float margin : hint_range(0.0, 1.0) = 0.0;
+uniform float rotation : hint_range(-1.0, 1.0);
+uniform float progress_rotation : hint_range(-1.0, 1.0);
+uniform sampler2D gradient;
+uniform bool use_value_gradient = false;
+uniform sampler2D radius_curve;
+
+
+vec4 get_gradient_color(sampler2D src, float position) {
+	position = clamp(position, 0.01, 0.99); // Color at 0.0 and 1.0 get interpolated by both end
+    return texture(src, vec2(position, 0.5));
+}
+
+float map_range(float min1, float max1, float min2, float max2, float v) {
+	float p = (v - min1) / (max1 - min1);
+	return p * (max2 - min2) + min2;
+}
+
+vec2 rotate_uv(vec2 uv, float p_rotation){
+    float mid = 0.5;
+    return vec2(
+        cos(p_rotation) * (uv.x - mid) + sin(p_rotation) * (uv.y - mid) + mid,
+        cos(p_rotation) * (uv.y - mid) - sin(p_rotation) * (uv.x - mid) + mid
+    );
+}
+
+float circle_shape(vec2 uv, float p_radius) {
+	vec2 center = vec2(0.5, 0.5);
+	return 1.0 - step(p_radius, distance(center, uv));
+}
+
+float radial_shape(vec2 uv, int p_segments) {
+	float radial = 0.0;
+	uv -= 0.5;
+	radial = atan(uv.y, uv.x);
+	radial = map_range(-PI, PI, 0.0, float(p_segments), radial);
+	radial = mod(radial, 1.0);
+	
+	return radial;
+}
+
+void fragment() {
+	vec2 uv = UV;
+	uv = rotate_uv(uv, PI/2.0); // Rotate 90 degrees, so origin pointing at north be default
+	uv = rotate_uv(uv, rotation * PI);
+	
+	float t = radial_shape(uv, 1);
+	if (use_value_gradient) {
+		t = value;
+	}
+	float radius_t = get_gradient_color(radius_curve, radial_shape(uv, 1)).r;
+	
+	float shape = radial_shape(uv, segments);
+	float border_size = (1.0-margin)/2.0;
+	shape *= step(border_size, shape);
+	shape *= step(shape, 1.0 - border_size);
+	shape = step(shape, 0.0);
+	
+	uv = rotate_uv(uv, progress_rotation * PI);
+	float arc = radial_shape(uv, 1);
+	arc = step(arc, value);
+	
+	float bounds = circle_shape(uv, radius * radius_t);
+	float hollow = 1.0-circle_shape(uv, hollow_radius * radius_t);
+	
+	shape = shape * arc * bounds * hollow;
+	
+	vec4 gradient_color = get_gradient_color(gradient, t);
+	COLOR = vec4(gradient_color.rgb, shape);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=232]
+shader = SubResource( 224 )
+shader_param/value = 1.0
+shader_param/segments = 2
+shader_param/radius = 0.5
+shader_param/hollow_radius = 0.2
+shader_param/margin = 0.0
+shader_param/rotation = 0.0
+shader_param/progress_rotation = 0.0
+shader_param/use_value_gradient = false
+
+[sub_resource type="Gradient" id=228]
+colors = PoolColorArray( 0.34, 0.373, 1, 1, 0.160784, 0.2, 0.568627, 1 )
+
+[sub_resource type="GradientTexture" id=231]
+gradient = SubResource( 228 )
+width = 32
+
+[sub_resource type="ShaderMaterial" id=225]
+shader = SubResource( 224 )
+shader_param/value = 0.685
+shader_param/segments = 2
+shader_param/radius = 0.425
+shader_param/hollow_radius = 0.2
+shader_param/margin = 0.0
+shader_param/rotation = 0.0
+shader_param/progress_rotation = 0.0
+shader_param/use_value_gradient = false
+shader_param/gradient = SubResource( 231 )
+
+[node name="Stamina" type="Control"]
+margin_left = 700.0
+margin_top = 192.0
+margin_right = 722.0
+margin_bottom = 214.0
+rect_rotation = 5.0
+rect_pivot_offset = Vector2( 11, 11 )
+script = ExtResource( 1 )
+display_offset = Vector2( -40, -36 )
+alpha = 0.9
+fade_speed = 8.0
+
+[node name="BG" type="TextureRect" parent="."]
+material = SubResource( 227 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 229 )
+expand = true
+
+[node name="ProgressBack" type="ColorRect" parent="."]
+modulate = Color( 0.2915, 0.33125, 0.53, 0.529412 )
+material = SubResource( 232 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Progress" type="ColorRect" parent="."]
+material = SubResource( 225 )
+anchor_right = 1.0
+anchor_bottom = 1.0

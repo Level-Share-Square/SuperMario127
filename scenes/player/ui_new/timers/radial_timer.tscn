@@ -4,15 +4,15 @@
 [ext_resource path="res://shaders/outline2.shader" type="Shader" id=2]
 [ext_resource path="res://scenes/player/ui_new/timers/radial_timer.gd" type="Script" id=3]
 
-[sub_resource type="Gradient" id=225]
+[sub_resource type="Gradient" id=230]
 colors = PoolColorArray( 0.105882, 0.145098, 0.478431, 1, 0.247059, 0.27451, 0.737255, 1 )
 
 [sub_resource type="GradientTexture2D" id=226]
-gradient = SubResource( 225 )
+gradient = SubResource( 230 )
 fill_from = Vector2( 0, 0.8 )
 fill_to = Vector2( 0, 0.3 )
 
-[sub_resource type="Shader" id=216]
+[sub_resource type="Shader" id=227]
 code = "shader_type canvas_item;
 
 uniform float circle_size : hint_range(0.0, 1.0) = 0.4;
@@ -28,27 +28,27 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id=217]
-shader = SubResource( 216 )
+shader = SubResource( 227 )
 shader_param/circle_size = 0.35
 shader_param/ratio_width = 1.0
 shader_param/ratio_height = 1.0
 
-[sub_resource type="Gradient" id=218]
+[sub_resource type="Gradient" id=228]
 colors = PoolColorArray( 0.368627, 0.172549, 0.580392, 0, 0.0980392, 0.0941176, 0.490196, 1 )
 
 [sub_resource type="GradientTexture2D" id=219]
-gradient = SubResource( 218 )
+gradient = SubResource( 228 )
 width = 24
 height = 24
 fill = 1
 fill_from = Vector2( 0.5, 0.8 )
 fill_to = Vector2( 0.491667, 0.1875 )
 
-[sub_resource type="Gradient" id=220]
+[sub_resource type="Gradient" id=229]
 colors = PoolColorArray( 1, 0.603922, 0.203922, 1, 1, 0.992157, 0.894118, 1 )
 
 [sub_resource type="GradientTexture2D" id=221]
-gradient = SubResource( 220 )
+gradient = SubResource( 229 )
 width = 24
 height = 24
 fill = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://scenes/player/World.gd" type="Script" id=21]
 [ext_resource path="res://scenes/player/ui_new/muitiplayer_realign.gd" type="Script" id=22]
 [ext_resource path="res://scenes/player/ui_new/fludd/fludd.tscn" type="PackedScene" id=23]
+[ext_resource path="res://scenes/player/ui_new/fludd/stamina.tscn" type="PackedScene" id=24]
 [ext_resource path="res://scenes/player/dialogue_text.gd" type="Script" id=29]
 [ext_resource path="res://scenes/actors/fludd_display/fludd_display.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
@@ -1396,6 +1397,16 @@ margin_left = -66.0
 margin_top = -66.0
 margin_right = -26.0
 margin_bottom = -16.0
+character_path = NodePath("../../Viewport/World/Character")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="Viewports/ViewportContainer"]
+layer = 60
+
+[node name="Stamina" parent="Viewports/ViewportContainer/CanvasLayer2" instance=ExtResource( 24 )]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 22.0
+margin_bottom = 22.0
 character_path = NodePath("../../Viewport/World/Character")
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="Viewports"]

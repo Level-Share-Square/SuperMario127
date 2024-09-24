@@ -110,4 +110,8 @@ func _general_update(_delta):
 	elif !activated and !last_activated and character.fludd_sound.playing:
 		character.fludd_sound.stop() #somehow there's a glitch where the sound never gets stopped, seems to be that activated gets set to false before last activated can be set to true, so it's sub-frame perfect if that's the case, this is kinda just a bandaid fix
 	
+	
+	display_stamina = character.stamina < 98
+	stamina_value = character.stamina / 100
+	
 	last_activated = activated

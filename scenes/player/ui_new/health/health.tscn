@@ -285,8 +285,8 @@ anims/transition = SubResource( 21 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -96.0
-margin_right = 256.0
-margin_bottom = 160.0
+margin_right = 576.0
+margin_bottom = 480.0
 rect_pivot_offset = Vector2( 32, 32 )
 
 [node name="Idle" type="AnimationPlayer" parent="Meter"]
@@ -305,8 +305,8 @@ polygon = PoolVector2Array( 19, -16, 14, -21, 7, -24, -2, -24, -9, -21, -10, -20
 [node name="Segments" type="Control" parent="Meter"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 640.0
-margin_bottom = 639.999
+margin_right = 2880.0
+margin_bottom = 2880.0
 rect_pivot_offset = Vector2( 32, 24 )
 script = ExtResource( 2 )
 max_degrees = 275.0
