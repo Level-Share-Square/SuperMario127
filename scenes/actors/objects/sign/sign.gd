@@ -10,9 +10,9 @@ onready var message_appear = $MessageAppear
 onready var message_disappear = $MessageDisappear
 
 onready var pop_up = $Message
-onready var panel = $Message/Panel
-onready var label = $Message/Label
-onready var arrow = $Message/TextureRect
+onready var dialogue = $Message/Dialogue
+onready var label = $Message/Dialogue/MarginContainer/RichTextLabel
+onready var arrow = $Message/Arrow
 onready var exclamation_mark = $Message/ExclamationMark
 
 onready var collision_width = $InteractArea/CollisionShape2D.shape.extents.x
@@ -65,7 +65,7 @@ func _ready():
 		pop_up.visible = false
 		
 	if open_menu:
-		panel.visible = false
+		dialogue.visible = false
 		label.visible = false
 		arrow.visible = false
 		exclamation_mark.visible = true

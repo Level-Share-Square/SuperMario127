@@ -6,12 +6,12 @@
 [ext_resource path="res://scenes/actors/objects/sign/menu_close.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=5]
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0.429293, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.0941176 )
 
 [sub_resource type="GradientTexture2D" id=4]
-gradient = SubResource( 3 )
+gradient = SubResource( 6 )
 fill = 1
 fill_from = Vector2( 0.4, 0.3 )
 fill_to = Vector2( 0.9, 0.9 )
@@ -71,6 +71,7 @@ margin_bottom = 233.0
 rect_clip_content = false
 mouse_filter = 2
 size_flags_vertical = 3
+custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
 bbcode_text = "[center]L is real 2401, Mario Peach and Bowser, (not) By Runouw[/center]"
@@ -92,6 +93,7 @@ margin_bottom = 270.0
 rect_min_size = Vector2( 0, 20 )
 rect_clip_content = false
 mouse_filter = 2
+custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[center]Press :interactinput: to close[/center]"

@@ -204,6 +204,7 @@ shader_param/use_value_gradient = false
 shader_param/gradient = SubResource( 231 )
 
 [node name="Stamina" type="Control"]
+pause_mode = 2
 modulate = Color( 1, 1, 1, 0 )
 margin_right = 22.0
 margin_bottom = 22.0
@@ -211,7 +212,7 @@ rect_rotation = 5.0
 rect_pivot_offset = Vector2( 11, 11 )
 script = ExtResource( 1 )
 display_offset = Vector2( -40, -36 )
-alpha = 0.9
+alpha = 1.0
 fade_speed = 8.0
 
 [node name="BG" type="TextureRect" parent="."]
