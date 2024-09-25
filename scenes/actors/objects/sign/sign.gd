@@ -11,7 +11,7 @@ onready var message_disappear = $MessageDisappear
 
 onready var pop_up = $Message
 onready var dialogue = $Message/Dialogue
-onready var label = $Message/Dialogue/MarginContainer/RichTextLabel
+onready var label = $Message/Dialogue/RichTextLabel
 onready var arrow = $Message/Arrow
 onready var exclamation_mark = $Message/ExclamationMark
 
@@ -77,6 +77,7 @@ func _ready():
 	pop_up.scale = Vector2(0.8, 0.8)
 	pop_up.modulate = Color(1, 1, 1, 0)
 	label.bbcode_text = "[center]" + text + "[/center]"
+	label.call_deferred("update_sizing")
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "enter_area")
 		var _connect2 = area.connect("body_exited", self, "exit_area")
@@ -85,6 +86,7 @@ func enter_area(body):
 	if body.name.begins_with("Character") and character == null and enabled:
 		character = body
 		label.bbcode_text = "[center]" + text_replace_util.parse_text(text, character) + "[/center]"
+		label.call_deferred("update_sizing")
 		message_appear.play()
 		
 		# related to toads
