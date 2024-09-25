@@ -100,8 +100,11 @@ func health_changed(new_health: int, new_shards: int):
 func update_health_segments(new_value: int):
 	if new_value > 3:
 		for segment in segments.get_children():
-			segment.color = damaged_color if int(segment.name) > new_value else normal_color
+			var tween: Tween = segment.get_node("Tween")
+			tween.stop_all()
 			
+			segment.color = damaged_color if int(segment.name) > new_value else normal_color
+		
 	else:
 		for segment in segments.get_children():
 			if int(segment.name) <= new_value:

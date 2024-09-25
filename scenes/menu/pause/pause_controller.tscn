@@ -140,5 +140,6 @@ visible = false
 visible = false
 
 [connection signal="timeout" from="Cooldown" to="." method="cooldown_timeout"]
+[connection signal="screen_opened" from="Screens/MainMenu" to="Screens/MainMenu/Counters" method="screen_opened"]
 [connection signal="start_transition" from="Screens/MainMenu" to="Cooldown" method="start"]
 [connection signal="start_transition" from="Screens/Options" to="Cooldown" method="start"]

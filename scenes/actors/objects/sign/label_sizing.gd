@@ -17,5 +17,3 @@ func update_sizing():
 	width_reference.text = text
 	yield(get_tree(), "idle_frame")
 	rect_min_size.x = min(width_reference.rect_size.x, max_width)
-	print(rect_min_size.x)
-

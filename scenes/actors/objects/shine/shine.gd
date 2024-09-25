@@ -25,6 +25,7 @@ onready var collect_sound : AudioStreamPlayer = $CollectSound
 onready var ambient_sound : AudioStreamPlayer = $AmbientSound
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var current_scene : Node = get_tree().current_scene
+onready var shine_get : Node = current_scene.get_node("%ShineGet")
 onready var transitions : Node = Singleton.SceneTransitions
 onready var mode_switcher_button : Node = Singleton.ModeSwitcher.get_node("ModeSwitcherButton")
 
@@ -265,7 +266,7 @@ func collect(body : PhysicsBody2D) -> void:
 
 		# mute level music (gets un-muted after shine dance finishes)
 		Singleton.Music.volume_multiplier = 0
-
+		
 		collect_sound.play() 
 		character.set_zoom_tween(Vector2(0.8, 0.8), 0.5)
 		collected = true
@@ -295,6 +296,7 @@ func start_shine_dance() -> void:
 	character.anim_player.play("shine_dance")
 	
 	
+	shine_get.appear(title)
 	Singleton.Music.play_temporary_music(COURSE_CLEAR_MUSIC_ID, COURSE_CLEAR_MUSIC_VOLUME)
 	
 	# warning-ignore: return_value_discarded
@@ -331,6 +333,7 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 			Singleton.CurrentLevelData.can_pause = true
 	else: 
 		# start playing the dance stop animation
+		shine_get.disappear()
 		character.shine_kill = false
 		character.anim_player.play("shine_dance_stop")
 		character.anim_player.connect("animation_finished", self, "restore_control", [character], CONNECT_ONESHOT)
