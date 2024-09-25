@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=2]
@@ -20,6 +20,9 @@
 [ext_resource path="res://scenes/menu/pause/pause_main/icons/quit.png" type="Texture" id=18]
 [ext_resource path="res://scenes/menu/pause/pause_main/icons/settings.png" type="Texture" id=19]
 [ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=20]
+[ext_resource path="res://scenes/menu/levels_list/icons/star_coin.png" type="Texture" id=21]
+[ext_resource path="res://scenes/menu/levels_list/icons/shine.png" type="Texture" id=22]
+[ext_resource path="res://scenes/menu/pause/pause_main/counters.gd" type="Script" id=23]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.0502793, 0.944134, 1 )
@@ -67,6 +70,21 @@ outline_color = Color( 0, 0.0431373, 0.313726, 1 )
 use_filter = true
 extra_spacing_char = -1
 font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 1, 1, 1, 1 )
+skew = Vector2( -0.5, 0 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 1, 1, 1, 0 )
+border_blend = true
+corner_detail = 1
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
 
 [sub_resource type="Animation" id=5]
 resource_name = "RESET"
@@ -130,6 +148,30 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Counters:rect_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 696, 392 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Counters:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -195,6 +237,30 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Counters:rect_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 608, 384 ), Vector2( 696, 392 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Counters:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 
 [node name="MainMenu" type="Control"]
@@ -412,10 +478,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 384.0
-margin_top = -32.0
-margin_right = 888.0
-margin_bottom = 400.0
+margin_left = -384.0
+margin_top = -248.0
+margin_right = 120.0
+margin_bottom = 184.0
 rect_min_size = Vector2( 504, 0 )
 script = ExtResource( 12 )
 
@@ -582,10 +648,117 @@ margin_right = 352.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 64, 0 )
 
+[node name="Counters" type="Control" parent="."]
+modulate = Color( 0, 0, 0, 0 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -72.0
+margin_top = -40.0
+margin_right = 88.0
+margin_bottom = 8.0
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 160, 0 )
+script = ExtResource( 23 )
+
+[node name="CountersBG" type="Panel" parent="Counters"]
+modulate = Color( 0, 0, 0, 0.25098 )
+margin_top = 12.0
+margin_right = 181.0
+margin_bottom = 36.0
+rect_rotation = 1.0
+custom_styles/panel = SubResource( 22 )
+
+[node name="CountersBG2" type="Panel" parent="Counters/CountersBG"]
+margin_right = 181.0
+margin_bottom = 24.0
+rect_rotation = -3.0
+custom_styles/panel = SubResource( 22 )
+
+[node name="CountersLabels" type="MarginContainer" parent="Counters"]
+margin_right = 160.0
+margin_bottom = 48.0
+grow_horizontal = 0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Counters/CountersLabels"]
+show_behind_parent = true
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 152.0
+margin_bottom = 40.0
+grow_horizontal = 0
+alignment = 2
+
+[node name="ShineIcon" type="Control" parent="Counters/CountersLabels/HBoxContainer"]
+margin_left = 2.0
+margin_right = 30.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 28, 28 )
+
+[node name="TextureRect" type="TextureRect" parent="Counters/CountersLabels/HBoxContainer/ShineIcon"]
+margin_right = 28.0
+margin_bottom = 28.0
+texture = ExtResource( 22 )
+expand = true
+stretch_mode = 6
+
+[node name="ShineCounter" type="Label" parent="Counters/CountersLabels/HBoxContainer"]
+margin_left = 34.0
+margin_top = 4.0
+margin_right = 64.0
+margin_bottom = 28.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "0/5"
+
+[node name="Padding" type="Control" parent="Counters/CountersLabels/HBoxContainer"]
+margin_left = 68.0
+margin_right = 70.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 2, 0 )
+
+[node name="StarCoinIcon" type="Control" parent="Counters/CountersLabels/HBoxContainer"]
+margin_left = 74.0
+margin_right = 102.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 28, 28 )
+
+[node name="TextureRect" type="TextureRect" parent="Counters/CountersLabels/HBoxContainer/StarCoinIcon"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -12.0
+margin_top = -13.0
+margin_right = 12.0
+margin_bottom = 11.0
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="StarCoinCounter" type="Label" parent="Counters/CountersLabels/HBoxContainer"]
+margin_left = 106.0
+margin_top = 4.0
+margin_right = 136.0
+margin_bottom = 28.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "0/5"
+
+[node name="Padding2" type="Control" parent="Counters/CountersLabels/HBoxContainer"]
+margin_left = 140.0
+margin_right = 144.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 4, 0 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )
 anims/transition = SubResource( 6 )
 
+[connection signal="screen_opened" from="." to="Counters" method="screen_opened"]
 [connection signal="pressed" from="Buttons/VBoxContainer/Resume" to="Buttons/ButtonFunctions" method="resume"]
 [connection signal="pressed" from="Buttons/VBoxContainer/Retry" to="Buttons/ButtonFunctions" method="retry"]
 [connection signal="pressed" from="Buttons/VBoxContainer/RetryStart/Countdown" to="Buttons/ButtonFunctions" method="retry_start"]
