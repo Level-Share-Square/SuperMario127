@@ -5,6 +5,13 @@ const LAYER_COUNT = 4
 
 var mode = 1
 
+onready var placement_nodes = [
+	null,
+	null,
+	null,
+	$Placement/RectangleFill
+]
+
 export var placement_mode := "Drag"
 export var surface_snap := false
 export var placeable_items_path : NodePath
@@ -421,9 +428,7 @@ func _process(delta : float) -> void:
 	#
 				if Input.is_mouse_button_pressed(4):
 					hovered_object.set_property("scale", Vector2(10, 10), true)
-				
-				
-				
+			
 			
 			if left_held and selected_tool == 0 and Input.is_action_just_pressed("place") and !rotating and selected_box.item.is_object:
 				if Input.is_action_pressed("duplicate"):
@@ -465,6 +470,21 @@ func _process(delta : float) -> void:
 		
 		if selected_box and selected_box.item:
 			var last_object_pos : Vector2
+			
+			
+			# adios!! (enters portal to "not 600 line script" dimension)
+			var placement_node: Control = placement_nodes[selected_tool]
+			if is_instance_valid(placement_node):
+				placement_node.selected_box = selected_box
+				placement_node.editing_layer = editing_layer
+				
+				placement_node.mouse_pos = mouse_pos
+				placement_node.mouse_tile_pos = mouse_tile_pos
+				
+				placement_node.left_down = left_held
+				placement_node.right_down = right_held
+				placement_node.selected_update()
+			
 			
 			# Place items
 			
@@ -618,6 +638,7 @@ func _process(delta : float) -> void:
 			
 			if selected_box.item.is_object and !rotating and time_clicked <= 0:
 				update_selected_object(mouse_pos)
+		
 		
 		# Finalise tile placement action (for potential future undo)
 		if !left_held:

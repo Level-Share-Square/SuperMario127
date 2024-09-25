@@ -1,4 +1,4 @@
-[gd_scene load_steps=1479 format=2]
+[gd_scene load_steps=1480 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1445,6 +1445,7 @@
 [ext_resource path="res://scenes/actors/objects/skeleton_goonie/icon.png" type="Texture" id=1443]
 [ext_resource path="res://scenes/actors/objects/rex/preview.png" type="Texture" id=1444]
 [ext_resource path="res://scenes/actors/objects/blurp/preview.png" type="Texture" id=1445]
+[ext_resource path="res://scenes/editor/placement/rectangle_fill.gd" type="Script" id=1446]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2212,6 +2213,19 @@ object_settings_path = NodePath("UI/ObjectSettingsWindow")
 
 [node name="Shared" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0.198608, -0.468788 )
+
+[node name="Placement" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="RectangleFill" type="Control" parent="Placement"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1446 )
+
+[node name="Drag" type="ColorRect" parent="Placement/RectangleFill"]
+visible = false
+color = Color( 1, 1, 1, 0.878431 )
 
 [node name="PlaceableItems" type="Node" parent="."]
 

@@ -16,7 +16,7 @@ func _ready():
 	if get_tree().get_current_scene().mode == 0:
 		tex = loaded_boo_texture_invis
 	tilemaps_node.middle_tilemap_node.tile_set.tile_set_texture(18, tex)
-	#Singleton.ActionManager.shared_node = self
+	Singleton.ActionManager.shared_node = self
 	#yield(self, "loaded")
 	#terrain_generator.generate(randi(), self)
 
