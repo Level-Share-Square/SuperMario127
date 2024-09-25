@@ -7,7 +7,8 @@ onready var pause_controller: CanvasLayer = get_parent().get_parent().get_parent
 onready var level_name: Label = $LevelName
 onready var level_name_back: Label = $LevelName/LevelNameBacking
 
-onready var shine_name: Label = $CenterContainer/ShineDetails/ShineName
+onready var star = $CenterContainer/ShineDetails/HBoxContainer/Star
+onready var shine_name = $CenterContainer/ShineDetails/HBoxContainer/ShineName
 onready var shine_description: RichTextLabel = $CenterContainer/ShineDetails/MarginContainer/ShineDescription
 
 onready var buttons = $CenterContainer/ShineDetails/Buttons
@@ -37,6 +38,7 @@ func _ready():
 func update_shine_info():
 	level_info = Singleton.CurrentLevelData.level_info
 	
+	star.visible = false
 	level_name.text = level_info.level_name
 	level_name_back.text = level_name.text
 	
@@ -47,6 +49,7 @@ func update_shine_info():
 		var selected_shine_info = level_info.shine_details[selected_shine + shine_offset]
 		shine_name.text = selected_shine_info["title"]
 		shine_description.bbcode_text = "[center]%s[/center]" % selected_shine_info["description"] 
+		star.visible = level_info.collected_shines.get(str(selected_shine_info["id"]), false)
 	
 	index.text = str(selected_shine + shine_offset + 1) + "/" + str(total_shines)
 
