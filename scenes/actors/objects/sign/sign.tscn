@@ -113,7 +113,7 @@ grow_vertical = 0
 custom_fonts/font = ExtResource( 5 )
 
 [node name="Arrow" type="TextureRect" parent="Message"]
-modulate = Color( 0, 0, 0, 0.752941 )
+modulate = Color( 0, 0, 0, 0.627451 )
 margin_left = 72.0
 margin_top = 47.0
 margin_right = 200.0
