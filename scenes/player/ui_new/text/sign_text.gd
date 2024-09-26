@@ -7,8 +7,8 @@ var transition_speed := 6.0
 var character : Character
 var sign_obj : Node2D
 
-onready var label = $MarginContainer/VBoxContainer/RichTextLabel
-onready var close_label = $MarginContainer/VBoxContainer/CloseLabel
+onready var label = $VBoxContainer/MarginContainer/RichTextLabel
+onready var close_label = $VBoxContainer/CloseLabel
 
 onready var menu_open = $MenuOpen
 onready var menu_close = $MenuClose

@@ -1,113 +1,146 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/player/ui_new/text/dialogue_text.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/sign/menu_open.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/objects/sign/menu_close.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=5]
 
-[sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 0.133333, 0.145098, 0.196078, 0.835294 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-expand_margin_left = 1.0
-expand_margin_right = 1.0
-expand_margin_top = 1.0
-expand_margin_bottom = 1.0
+[sub_resource type="StyleBoxFlat" id=39]
+bg_color = Color( 0, 0, 0, 0.627451 )
+skew = Vector2( 0.2, 0 )
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 48
+corner_radius_bottom_left = 64
 
-[sub_resource type="DynamicFont" id=25]
-size = 32
-outline_size = 4
-outline_color = Color( 0.054902, 0, 0.25098, 1 )
+[sub_resource type="DynamicFont" id=5]
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=32]
-size = 32
-outline_color = Color( 0.054902, 0, 0.25098, 1 )
+[sub_resource type="DynamicFont" id=2]
+size = 15
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=33]
-size = 32
-outline_color = Color( 0.054902, 0, 0.25098, 1 )
-font_data = ExtResource( 1 )
+[sub_resource type="DynamicFont" id=38]
+size = 18
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 5 )
 
 [node name="DialogueText" type="Control"]
 pause_mode = 2
 margin_left = 161.0
-margin_top = 316.0
+margin_top = 308.0
 margin_right = 611.0
-margin_bottom = 416.0
+margin_bottom = 408.0
 mouse_filter = 2
 script = ExtResource( 2 )
 
 [node name="Panel" type="Panel" parent="."]
+margin_left = -6.0
+margin_top = 5.0
+margin_right = 456.0
+margin_bottom = 100.0
+rect_rotation = -0.5
+custom_styles/panel = SubResource( 39 )
+
+[node name="Panel" type="Panel" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
-custom_styles/panel = SubResource( 11 )
-
-[node name="Name" type="RichTextLabel" parent="Panel"]
-margin_left = 6.0
-margin_top = -20.0
-margin_right = 870.0
-margin_bottom = 22.0
-rect_scale = Vector2( 0.5, 0.5 )
-rect_clip_content = false
-custom_fonts/normal_font = SubResource( 25 )
-bbcode_enabled = true
-bbcode_text = "Toad"
-text = "Toad"
-scroll_active = false
+margin_left = -462.0
+margin_right = -462.0
+rect_rotation = 1.0
+rect_scale = Vector2( -1, 1 )
+rect_pivot_offset = Vector2( 462, 0 )
+custom_styles/panel = SubResource( 39 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 2.0
 anchor_bottom = 2.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_right = -450.0
+margin_bottom = -100.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_right = 900.0
-margin_bottom = 156.0
+margin_right = 450.0
+margin_bottom = 68.0
+rect_clip_content = true
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
-custom_constants/margin_right = 20
-custom_constants/margin_top = 16
-custom_constants/margin_left = 20
-custom_constants/margin_bottom = 16
+custom_constants/margin_right = 14
+custom_constants/margin_top = 12
+custom_constants/margin_left = 14
+custom_constants/margin_bottom = 8
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer"]
-margin_left = 20.0
-margin_top = 16.0
-margin_right = 880.0
-margin_bottom = 140.0
+margin_left = 14.0
+margin_top = 12.0
+margin_right = 436.0
+margin_bottom = 60.0
 rect_clip_content = false
 mouse_filter = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
-custom_fonts/normal_font = SubResource( 32 )
+custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
-bbcode_text = "L is real 2401, Mario Peach and Bowser, (not) By Runouw"
-visible_characters = 0
-percent_visible = 0.0
-text = "L is real 2401, Mario Peach and Bowser, (not) By Runouw"
+bbcode_text = "text text text text text text text text text text text text text text text
+text"
+text = "text text text text text text text text text text text text text text text
+text"
 scroll_active = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CloseLabel" type="RichTextLabel" parent="VBoxContainer"]
-margin_top = 160.0
-margin_right = 900.0
-margin_bottom = 200.0
+modulate = Color( 1, 1, 1, 0.878431 )
+margin_top = 72.0
+margin_right = 450.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 24 )
 rect_clip_content = false
 mouse_filter = 2
 size_flags_vertical = 3
-custom_fonts/normal_font = SubResource( 33 )
+custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[center]Press :interactinput: to continue[/center]"
 text = "Press :interactinput: to continue"
+scroll_active = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Padding" type="Control" parent="VBoxContainer"]
+margin_top = 100.0
+margin_right = 450.0
+margin_bottom = 100.0
+
+[node name="Name" type="RichTextLabel" parent="."]
+margin_left = 4.0
+margin_top = -8.0
+margin_right = 532.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 24 )
+rect_clip_content = false
+custom_fonts/normal_font = SubResource( 38 )
+bbcode_enabled = true
+bbcode_text = "Toad"
+text = "Toad"
+scroll_active = false
+deselect_on_focus_loss_enabled = false
 
 [node name="MenuOpen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )

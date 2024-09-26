@@ -285,8 +285,8 @@ anims/transition = SubResource( 21 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -96.0
-margin_right = 704.0
-margin_bottom = 608.0
+margin_right = 896.0
+margin_bottom = 800.0
 rect_pivot_offset = Vector2( 32, 32 )
 
 [node name="Idle" type="AnimationPlayer" parent="Meter"]
@@ -300,13 +300,14 @@ anims/heal = SubResource( 19 )
 [node name="Paint" type="Polygon2D" parent="Meter"]
 position = Vector2( 32, 32 )
 color = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+antialiased = true
 polygon = PoolVector2Array( 19, -16, 14, -21, 7, -24, -2, -24, -9, -21, -10, -20, -12, -20, -18, -15, -22, -9, -24, -3, -24, 5, -21, 13, -14, 20, -7, 23, 0, 24, 7, 23, 15, 19, 20, 13, 22, 7, 22, -1, 19, -8, 15, -14, 12, -17, 15, -16, 17, -14, 21, -8, 22, -4, 23, -2, 23, 5, 23, 8, 22, 9, 23, 10, 24, 8, 24, 0, 23, -4, 22, -8, 17, -15, 17, -16, 13, -18, 9, -19, 5, -21, 9, -21, 14, -19 )
 
 [node name="Segments" type="Control" parent="Meter"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 4224.0
-margin_bottom = 4224.0
+margin_right = 6720.0
+margin_bottom = 6720.0
 rect_pivot_offset = Vector2( 32, 24 )
 script = ExtResource( 2 )
 max_degrees = 275.0
@@ -316,11 +317,13 @@ rotation_offset = 57.0
 position = Vector2( 32, 32 )
 rotation = 0.994838
 color = Color( 1, 0.831373, 0.592157, 1 )
+antialiased = true
 polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
 
 [node name="Border" type="Polygon2D" parent="Meter/Segments/1"]
 show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
 
 [node name="Tween" type="Tween" parent="Meter/Segments/1"]
@@ -335,6 +338,7 @@ polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
 [node name="Border" type="Polygon2D" parent="Meter/Segments/2"]
 show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
 
 [node name="Tween" type="Tween" parent="Meter/Segments/2"]
@@ -343,11 +347,13 @@ polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.68
 position = Vector2( 32, 32 )
 rotation = 2.19475
 color = Color( 1, 0.831373, 0.592157, 1 )
+antialiased = true
 polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
 
 [node name="Border" type="Polygon2D" parent="Meter/Segments/3"]
 show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
 
 [node name="Tween" type="Tween" parent="Meter/Segments/3"]
@@ -356,11 +362,13 @@ polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.68
 position = Vector2( 32, 32 )
 rotation = 2.79471
 color = Color( 1, 0.831373, 0.592157, 1 )
+antialiased = true
 polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
 
 [node name="Border" type="Polygon2D" parent="Meter/Segments/4"]
 show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
 
 [node name="Tween" type="Tween" parent="Meter/Segments/4"]
@@ -369,11 +377,13 @@ polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.68
 position = Vector2( 32, 32 )
 rotation = 3.39467
 color = Color( 1, 0.831373, 0.592157, 1 )
+antialiased = true
 polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
 
 [node name="Border" type="Polygon2D" parent="Meter/Segments/5"]
 show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
 
 [node name="Tween" type="Tween" parent="Meter/Segments/5"]
@@ -382,11 +392,13 @@ polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.68
 position = Vector2( 32, 32 )
 rotation = 3.99462
 color = Color( 1, 0.831373, 0.592157, 1 )
+antialiased = true
 polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
 
 [node name="Border" type="Polygon2D" parent="Meter/Segments/6"]
 show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
 
 [node name="Tween" type="Tween" parent="Meter/Segments/6"]
@@ -395,11 +407,13 @@ polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.68
 position = Vector2( 32, 32 )
 rotation = 4.59458
 color = Color( 0.792157, 0.364706, 0.364706, 1 )
+antialiased = true
 polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
 
 [node name="Border" type="Polygon2D" parent="Meter/Segments/7"]
 show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
 
 [node name="Tween" type="Tween" parent="Meter/Segments/7"]
@@ -408,11 +422,13 @@ polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.68
 position = Vector2( 32, 32 )
 rotation = 5.19454
 color = Color( 0.792157, 0.364706, 0.364706, 1 )
+antialiased = true
 polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
 
 [node name="Border" type="Polygon2D" parent="Meter/Segments/8"]
 show_behind_parent = true
 color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
 polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
 
 [node name="Tween" type="Tween" parent="Meter/Segments/8"]

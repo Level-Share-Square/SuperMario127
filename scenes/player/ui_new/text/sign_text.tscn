@@ -23,6 +23,7 @@ extra_spacing_char = -1
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
+size = 14
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 extra_spacing_char = -1
@@ -50,24 +51,25 @@ anchor_bottom = 1.0
 texture = SubResource( 4 )
 expand = true
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 450.0
+margin_bottom = 300.0
+custom_constants/separation = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_right = 450.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 0, 260 )
 custom_constants/margin_right = 15
 custom_constants/margin_top = 15
 custom_constants/margin_left = 15
 custom_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer"]
 margin_left = 15.0
 margin_top = 15.0
 margin_right = 435.0
-margin_bottom = 285.0
-custom_constants/separation = 8
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
-margin_right = 420.0
-margin_bottom = 233.0
+margin_bottom = 245.0
 rect_clip_content = false
 mouse_filter = 2
 size_flags_vertical = 3
@@ -78,19 +80,19 @@ bbcode_text = "[center]L is real 2401, Mario Peach and Bowser, (not) By Runouw[/
 text = "L is real 2401, Mario Peach and Bowser, (not) By Runouw"
 scroll_active = false
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer"]
-margin_top = 241.0
-margin_right = 420.0
-margin_bottom = 242.0
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
+margin_top = 268.0
+margin_right = 450.0
+margin_bottom = 269.0
 rect_min_size = Vector2( 0, 1 )
 color = Color( 1, 1, 1, 0.501961 )
 
-[node name="CloseLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+[node name="CloseLabel" type="RichTextLabel" parent="VBoxContainer"]
 modulate = Color( 1, 1, 1, 0.878431 )
-margin_top = 250.0
-margin_right = 420.0
-margin_bottom = 270.0
-rect_min_size = Vector2( 0, 20 )
+margin_top = 277.0
+margin_right = 450.0
+margin_bottom = 294.0
+rect_min_size = Vector2( 0, 17 )
 rect_clip_content = false
 mouse_filter = 2
 custom_colors/default_color = Color( 1, 1, 1, 1 )
@@ -98,6 +100,7 @@ custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[center]Press :interactinput: to close[/center]"
 text = "Press :interactinput: to close"
+scroll_active = false
 
 [node name="MenuOpen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )

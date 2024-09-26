@@ -11,7 +11,7 @@ var dialogue_obj : Node2D
 
 onready var label = $VBoxContainer/MarginContainer/RichTextLabel
 onready var close_label = $VBoxContainer/CloseLabel
-onready var name_label = $Panel/Name
+onready var name_label = $Name
 
 onready var menu_open = $MenuOpen
 onready var menu_close = $MenuClose
@@ -23,6 +23,7 @@ var dialogue_page: int
 
 func _ready():
 	normal_pos = rect_position
+	label.percent_visible = 0
 	
 	rect_position = Vector2(normal_pos.x * 1.25, normal_pos.y * 1.2)
 	rect_scale = Vector2(0.8, 0.8)
