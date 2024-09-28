@@ -29,7 +29,7 @@ func update_visibility():
 		time_score.visible = false
 
 
-func add_timer(timer_name: String, timer_amount: float, sound: bool = false, show: bool = true, kill_on_end: bool = false) -> Control:
+func add_timer(timer_name: String, timer_amount: float, sound: String = "none", show: bool = true, kill_on_end: bool = false) -> Control:
 	var timer_node: Control = grid.get_node(timer_name)
 	if not is_instance_valid(timer_node):
 		timer_node = TIMER_SCENE.instance()

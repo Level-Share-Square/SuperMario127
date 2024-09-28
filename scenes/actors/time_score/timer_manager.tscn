@@ -22,4 +22,3 @@ columns = 3
 [node name="TimeScore" parent="Grid" instance=ExtResource( 1 )]
 label_text = "ELAPSED"
 show_time_score = true
-time = 0.0

@@ -33,6 +33,7 @@ func _set_property_values():
 	set_property("vertical", vertical)
 	set_property("parts", parts)
 	set_property("stops_camera", stops_camera)
+#	set_property("instant", instant, true, "Instant (Local)")
 	
 func _init():
 	teleportation_mode = true
@@ -159,6 +160,7 @@ func _on_body_entered(body):
 			body.toggle_movement(false)
 			body.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 			start_pipe_enter_animation(body)
+				
 
 func start_pipe_enter_animation(character : Character) -> void:
 	stored_characters[character.player_id] = character

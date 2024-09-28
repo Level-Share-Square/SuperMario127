@@ -51,7 +51,7 @@ func _ready():
 	
 	if Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.timer > 0.00:
 		var timer_manager = get_timer_manager()
-		timer_manager.add_timer("area_timer", Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.timer, false, true, true)
+		timer_manager.add_timer("area_timer", Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.timer, "death", true, true)
 	
 	var data = Singleton.CurrentLevelData.level_data
 	load_in(data, data.areas[Singleton.CurrentLevelData.area])

@@ -122,6 +122,7 @@ func retract_into_shell():
 	visibility_notifier = shell.get_node("VisibilityNotifier2D")
 	add_child(shell)
 	shell.global_position = body.global_position
+	shell.reset_physics_interpolation()
 	velocity = Vector2()
 	snap = Vector2(0, 6)
 	delete_wings()
@@ -206,6 +207,7 @@ func _physics_process(delta):
 			shell_sprite.rotation_degrees += 2
 			velocity.y += gravity
 			shell.position += velocity * delta
+			reset_physics_interpolation()
 		if shelled == true and !rainbow :
 			retract_into_shell()
 		
@@ -334,6 +336,7 @@ func physics_process_koopa(delta, level_bounds):
 			# Paratroopas go up and down very slightly
 			velocity = Vector2(0, 0)
 			global_position.y = original_position.y + (sin(time_alive * PARA_SIN_SPEED) * PARA_SIN_AMOUNT)
+			reset_physics_interpolation()
 		
 		velocity = body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
 		

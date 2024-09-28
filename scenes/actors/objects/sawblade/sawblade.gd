@@ -84,6 +84,7 @@ func _process(_delta):
 		
 func _physics_process(delta):
 	pathfollow.offset += working_speed * delta * SPEED_SCALE_MULTIPLIER
+	reset_physics_interpolation()
 	if !loops:
 		#beautiful logic right here (makes saw move back and forward
 		if pathfollow.offset >= path.curve.get_baked_length() or pathfollow.offset <= 0:

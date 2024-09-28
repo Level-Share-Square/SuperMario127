@@ -30,6 +30,7 @@ func set_position(new_position):
 	
 	# Move to position
 	position = new_position
+	reset_physics_interpolation()
 
 func set_parts(parts: int):
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2

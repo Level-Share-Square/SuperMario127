@@ -3,6 +3,7 @@ extends GameObject
 onready var animated_sprite = $AnimatedSprite
 onready var sound = $AudioStreamPlayer
 onready var area = $Area2D
+onready var shape = $Area2D/CollisionShape2D
 onready var visibility_enabler = $VisibilityEnabler2D
 onready var tween = $Tween
 
@@ -44,6 +45,7 @@ func _ready():
 	
 	var _connect = area.connect("body_entered", self, "collect")
 
+var prev_activate_shape = false
 func _process(delta):
 	if !timed:
 		if destroy_timer > 0:
@@ -61,6 +63,24 @@ func _process(delta):
 					queue_free()
 				else:
 					despawn_timer = 0.3
+	
+	if mode != 1:
+		var root = get_tree().current_scene
+		var activate_shape = false
+		if !collected:
+			var can_collect_coins = root.can_collect_coins
+			for entity in can_collect_coins:
+				if entity == null:
+					can_collect_coins.erase(entity)
+					continue
+				
+				var entity_global_position = entity.global_transform.get_origin()
+				if (entity_global_position - position).length_squared() <= 200 + 472.25:
+					activate_shape = true
+		
+		if activate_shape != prev_activate_shape:
+			shape.disabled = !activate_shape
+			prev_activate_shape = activate_shape
 	
 	if !collected:
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)

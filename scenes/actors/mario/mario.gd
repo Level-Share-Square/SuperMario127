@@ -790,6 +790,7 @@ func _physics_process(delta: float) -> void:
 		sprite.position = sprite.position.linear_interpolate(sprite_offset, fps_util.PHYSICS_DELTA * rotation_interpolation_speed)
 		sprite.rotation = lerp_angle(sprite.rotation, sprite_rotation, fps_util.PHYSICS_DELTA * rotation_interpolation_speed)
 		sprite.rotation_degrees = wrapf(sprite.rotation_degrees, -180, 180)
+		sprite.reset_physics_interpolation()
 	
 	# Update all states, nozzles and powerups
 	if Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id:
@@ -889,18 +890,25 @@ func _physics_process(delta: float) -> void:
 				water_sprite.position = nozzle.animation_water_positions[sprite.animation]
 			else:
 				water_sprite.position = nozzle.fallback_water_pos_right if facing_direction == 1 else nozzle.fallback_water_pos_left
+			water_sprite.reset_physics_interpolation()
 		else:
 			if sprite.animation in nozzle.animation_water_positions_luigi:
 				water_sprite.position = nozzle.animation_water_positions_luigi[sprite.animation]
 			else:
 				water_sprite.position = nozzle.fallback_water_pos_right_luigi if facing_direction == 1 else nozzle.fallback_water_pos_left_luigi
+			water_sprite.reset_physics_interpolation()
 		
 		water_sprite_2.position = water_sprite.position - Vector2(-5 * facing_direction, 2)
+		water_sprite_2.reset_physics_interpolation()
 		water_particles.position = water_sprite.position + Vector2(12, 3)
+		water_particles.reset_physics_interpolation()
 		water_particles_2.position = water_particles.position + (Vector2(9.5 * facing_direction, 2))
+		water_particles_2.reset_physics_interpolation()
 		turbo_particles.process_material.direction = Vector3(-facing_direction, 0, 0)
 		turbo_particles.position = water_sprite.position + Vector2(-3 * facing_direction, -11.5 if facing_direction == -1 else 11.5)
+		turbo_particles.reset_physics_interpolation()
 		rocket_particles.position = water_sprite.position + Vector2(8 if facing_direction == 1 else 10, 1.5)
+		rocket_particles.reset_physics_interpolation()
 	else:
 		fludd_sprite.visible = false
 		water_sprite.visible = false
@@ -917,6 +925,7 @@ func _physics_process(delta: float) -> void:
 		if (last_position != Vector2.ZERO and (last_position - global_position).length_squared() > 0
 			and get_world_2d().direct_space_state.intersect_ray(last_position, global_position, [self], 1).size() > 0):
 			position = last_position
+			reset_physics_interpolation()
 			
 			if velocity.length_squared() < 1:
 				# Clip attempt, just reset velocity
