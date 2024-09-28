@@ -17,6 +17,7 @@ onready var reset_button = $Button/Reset
 export var input_group: String
 export var input_key: String
 export var player_id: int = -1
+var is_controller: bool
 
 ## visuals
 onready var action: Control = $HBoxContainer/Action
@@ -27,6 +28,7 @@ export var sprite_frames: SpriteFrames
 export var sprite_animation: String
 export var sprite_rotation: float
 export var sprite_offset: Vector2
+
 
 func _ready():
 	if !Engine.is_editor_hint():
@@ -42,11 +44,11 @@ func pressed():
 
 ## button text
 func return_default_text() -> String:
-	var action = LocalSettings.load_setting(input_group, input_key, [])
+	var action = input_settings_util.get_setting_partial(input_group, input_key, is_controller)
 	if action == []:
 		return UNBOUND_TEXT
 	
-	return bindings_util.get_binding_human_name(action)
+	return input_event_util.get_human_name(action)
 
 func change_button_text(new_text: String = ""):
 	if new_text == "": 

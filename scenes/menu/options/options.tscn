@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scenes/menu/options/controls/preset_loader.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=15]
 [ext_resource path="res://scenes/menu/options/subscreens.gd" type="Script" id=16]
 [ext_resource path="res://scenes/menu/options/controls/remapper.gd" type="Script" id=17]
+[ext_resource path="res://scenes/menu/options/controls/device_buttons.gd" type="Script" id=18]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=19]
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=20]
 [ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=21]
@@ -676,6 +677,7 @@ custom_constants/hseparation = 32
 columns = 4
 
 [node name="MoveLeft" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
+margin_right = 96.0
 margin_bottom = 38.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 1)"
@@ -685,8 +687,8 @@ sprite_frames = ExtResource( 20 )
 sprite_animation = "movingLeft"
 
 [node name="MoveRight" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
-margin_left = 127.0
-margin_right = 225.0
+margin_left = 128.0
+margin_right = 226.0
 margin_bottom = 38.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 1)"
@@ -696,8 +698,8 @@ sprite_frames = ExtResource( 20 )
 sprite_animation = "movingRight"
 
 [node name="MoveUp" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
-margin_left = 257.0
-margin_right = 366.0
+margin_left = 258.0
+margin_right = 367.0
 margin_bottom = 38.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 1)"
@@ -708,8 +710,8 @@ sprite_animation = "swimming"
 sprite_offset = Vector2( 0, 4 )
 
 [node name="MoveDown" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
-margin_left = 398.0
-margin_right = 515.0
+margin_left = 399.0
+margin_right = 516.0
 margin_bottom = 38.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 1)"
@@ -722,6 +724,7 @@ sprite_offset = Vector2( 0, -8 )
 
 [node name="Jump" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
 margin_top = 62.0
+margin_right = 96.0
 margin_bottom = 100.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 1)"
@@ -731,9 +734,9 @@ sprite_frames = ExtResource( 20 )
 sprite_animation = "jumpRight"
 
 [node name="Dive" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
-margin_left = 127.0
+margin_left = 128.0
 margin_top = 62.0
-margin_right = 225.0
+margin_right = 226.0
 margin_bottom = 100.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 1)"
@@ -745,9 +748,9 @@ sprite_rotation = 115.0
 sprite_offset = Vector2( 4, -8 )
 
 [node name="Spin" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
-margin_left = 257.0
+margin_left = 258.0
 margin_top = 62.0
-margin_right = 366.0
+margin_right = 367.0
 margin_bottom = 100.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 1)"
@@ -758,9 +761,9 @@ sprite_animation = "spinning"
 sprite_offset = Vector2( 2, 0 )
 
 [node name="GroundPound" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
-margin_left = 398.0
+margin_left = 399.0
 margin_top = 62.0
-margin_right = 515.0
+margin_right = 516.0
 margin_bottom = 100.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 1)"
@@ -772,6 +775,7 @@ sprite_offset = Vector2( -4, 6 )
 
 [node name="GPCancel" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
 margin_top = 124.0
+margin_right = 96.0
 margin_bottom = 162.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 1)"
@@ -781,9 +785,9 @@ sprite_frames = ExtResource( 20 )
 sprite_animation = "fallRight"
 
 [node name="UseFludd" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
-margin_left = 127.0
+margin_left = 128.0
 margin_top = 124.0
-margin_right = 225.0
+margin_right = 226.0
 margin_bottom = 162.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 1)"
@@ -794,9 +798,9 @@ sprite_animation = "jumpRight"
 sprite_rotation = 10.0
 
 [node name="SwapNozzles" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
-margin_left = 257.0
+margin_left = 258.0
 margin_top = 124.0
-margin_right = 366.0
+margin_right = 367.0
 margin_bottom = 162.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 1)"
@@ -806,9 +810,9 @@ sprite_frames = ExtResource( 20 )
 sprite_animation = "idleRight"
 
 [node name="Crouch" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
-margin_left = 398.0
+margin_left = 399.0
 margin_top = 124.0
-margin_right = 515.0
+margin_right = 516.0
 margin_bottom = 162.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 1)"
@@ -821,6 +825,7 @@ sprite_offset = Vector2( 16, -6 )
 
 [node name="Interact" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
 margin_top = 186.0
+margin_right = 96.0
 margin_bottom = 225.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 1)"
@@ -830,18 +835,18 @@ sprite_frames = ExtResource( 20 )
 sprite_animation = "movingIn"
 
 [node name="63WingCap" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 10 )]
-margin_left = 127.0
+margin_left = 128.0
 margin_top = 186.0
-margin_right = 225.0
+margin_right = 226.0
 margin_bottom = 225.0
 setting_section = "Controls (Player 1)"
 setting_key = "63_wing_cap"
 
 [node name="Player2" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 14.0
+margin_left = 32.0
 margin_top = 1.0
-margin_right = 530.0
+margin_right = 512.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1073,9 +1078,9 @@ sprite_visible = false
 
 [node name="Hotkeys" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 28.0
+margin_left = 32.0
 margin_top = 64.0
-margin_right = 516.0
+margin_right = 512.0
 margin_bottom = 164.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1155,25 +1160,28 @@ input_group = "Controls (Hotkeys)"
 input_key = "fullscreen"
 sprite_visible = false
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Subscreens/Controls/VBoxContainer"]
+[node name="Devices" type="VBoxContainer" parent="Subscreens/Controls/VBoxContainer"]
 margin_top = 374.0
 margin_right = 544.0
 margin_bottom = 398.0
 custom_constants/separation = 8
+script = ExtResource( 18 )
+default_theme = "OptionsToggle"
+selected_theme = "OptionsToggleSelect"
 
-[node name="Device" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/Devices"]
 margin_right = 544.0
 margin_bottom = 24.0
 custom_constants/separation = 12
 alignment = 1
 
-[node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/VBoxContainer2/Device"]
+[node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
 margin_left = 110.0
 margin_right = 205.0
 margin_bottom = 24.0
 text = "Input Type:"
 
-[node name="Keyboard" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer2/Device"]
+[node name="Keyboard" type="Button" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
 margin_left = 217.0
 margin_right = 313.0
 margin_bottom = 24.0
@@ -1184,7 +1192,7 @@ text = "Keyboard"
 script = ExtResource( 19 )
 extend_amount = 2
 
-[node name="Controller" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer2/Device"]
+[node name="Controller" type="Button" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
 margin_left = 325.0
 margin_right = 421.0
 margin_bottom = 24.0
@@ -1195,22 +1203,22 @@ text = "Controller"
 script = ExtResource( 19 )
 extend_amount = 2
 
-[node name="Control" type="Control" parent="Subscreens/Controls/VBoxContainer/VBoxContainer2/Device"]
+[node name="Control" type="Control" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
 margin_left = 433.0
 margin_right = 433.0
 margin_bottom = 24.0
 
-[node name="Label2" type="Label" parent="Subscreens/Controls/VBoxContainer/VBoxContainer2/Device"]
+[node name="DeviceLabel" type="Label" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
 visible = false
 margin_left = 361.0
 margin_right = 426.0
 margin_bottom = 24.0
 text = "Device:"
 
-[node name="Device" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer2/Device"]
+[node name="Device" type="Button" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
 visible = false
-margin_left = 438.0
-margin_right = 518.0
+margin_left = 399.0
+margin_right = 479.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 80, 0 )
 theme_type_variation = "OptionsToggle"
@@ -1331,3 +1339,7 @@ anims/transition = SubResource( 1 )
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/KBM" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/kbmouse.cfg" ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/DefaultInterface" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/interface.cfg" ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/DefaultHotkeys" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/hotkeys.cfg" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Remapper" method="switch_device_type" binds= [ false ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device_type" binds= [ false ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Remapper" method="switch_device_type" binds= [ true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device_type" binds= [ true ]]

@@ -600,11 +600,6 @@ _global_script_classes=[ {
 "path": "res://scenes/actors/mario/powerups/Wing.gd"
 }, {
 "base": "Reference",
-"class": "bindings_util",
-"language": "GDScript",
-"path": "res://util/new/bindings_util.gd"
-}, {
-"base": "Reference",
 "class": "conversion_util",
 "language": "GDScript",
 "path": "res://util/conversion_util.gd"
@@ -613,6 +608,26 @@ _global_script_classes=[ {
 "class": "fps_util",
 "language": "GDScript",
 "path": "res://util/fps_util.gd"
+}, {
+"base": "Reference",
+"class": "input_event_util",
+"language": "GDScript",
+"path": "res://util/new/input/input_event_util.gd"
+}, {
+"base": "Reference",
+"class": "input_map_util",
+"language": "GDScript",
+"path": "res://util/new/input/input_map_util.gd"
+}, {
+"base": "Reference",
+"class": "input_settings_util",
+"language": "GDScript",
+"path": "res://util/new/input/input_settings_util.gd"
+}, {
+"base": "Reference",
+"class": "input_util",
+"language": "GDScript",
+"path": "res://util/new/input/input_util.gd"
 }, {
 "base": "Reference",
 "class": "interpreter_util",
@@ -763,9 +778,12 @@ _global_script_class_icons={
 "WallSlideState": "",
 "WingMarioState": "",
 "WingPowerup": "",
-"bindings_util": "",
 "conversion_util": "",
 "fps_util": "",
+"input_event_util": "",
+"input_map_util": "",
+"input_settings_util": "",
+"input_util": "",
 "interpreter_util": "",
 "level_code_util": "",
 "saved_levels_util": "",
@@ -790,6 +808,7 @@ LocalSettings="*res://singletons/local_settings.gd"
 Singleton="*res://singletons/main_singleton.gd"
 Singleton2="*res://singleton2.gd"
 SettingsLoader="*res://singletons/settings_loader.tscn"
+LastInputDevice="*res://singletons/last_input_device.gd"
 GhostArrays="*res://scenes/actors/mario/misc/ghostarrays.gd"
 InternetCheck="*res://singletons/internet_check.tscn"
 Discord="*res://addons/discord_game_sdk/discord.gd"

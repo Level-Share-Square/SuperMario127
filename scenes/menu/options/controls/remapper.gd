@@ -8,34 +8,50 @@ onready var current_category: Control = $Player1
 var listening_keybind: VBoxContainer
 var is_controller: bool = false
 
+
 func _ready():
-	load_all_bindings()
+	load_all_keybinds()
+
 
 func _input(event: InputEvent):
 	if not is_instance_valid(listening_keybind): return
-	if not bindings_util.is_valid_input_event(event.get_class(), is_controller): return
+	if not input_event_util.is_valid_input_event(event.get_class(), is_controller): return
 	
-	var binding_array: Array = LocalSettings.load_setting(listening_keybind.input_group, listening_keybind.input_key, [])
-	var action: Dictionary = bindings_util.decode_event(event)
-	if action == bindings_util.EMPTY_DICTIONARY:
+	var action: Dictionary = input_event_util.decode_event(event)
+	if action == input_event_util.EMPTY_DICTIONARY:
 		return
 	
-	# ensure there aren't duplicate inputs
-	var duplicate_found: bool = false
-	for binding in binding_array:
-		if action.hash() == binding.hash():
-			duplicate_found = true
-			break
-	
-	if not duplicate_found: 
-		binding_array.append(action)
-		bindings_util.add_binding(listening_keybind.input_key, listening_keybind.player_id, action)
-		LocalSettings.change_setting(listening_keybind.input_group, listening_keybind.input_key, binding_array)
+	input_util.add_to_keybind(
+		action, 
+		[listening_keybind.input_group, listening_keybind.input_key, listening_keybind.player_id], 
+		is_controller)
 		
-	listening_keybind.change_button_text()
 	get_tree().set_input_as_handled()
+	listening_keybind.change_button_text()
 	listening_keybind = null
 
+
+func reset_keybind(keybind: VBoxContainer):
+	input_util.reset_keybind(
+		[keybind.input_group, keybind.input_key, keybind.player_id],
+		is_controller
+	)
+	keybind.change_button_text()
+
+
+func load_all_keybinds():
+	for i in range(category_paths.size()):
+		var category: GridContainer = get_node(category_paths[i])
+		
+		for keybind in category.get_children():
+			if keybind is KeybindButton:
+				var keybind_array: Array = [] 
+				keybind_array += input_settings_util.get_setting(keybind.input_group, keybind.input_key)
+				input_map_util.clear_input(keybind.input_key, keybind.player_id)
+				input_map_util.add_input_from_array(keybind.input_key, keybind.player_id, keybind_array)
+				
+				keybind.is_controller = is_controller
+				keybind.change_button_text()
 
 
 func start_listening(keybind: VBoxContainer, parent: GridContainer):
@@ -49,18 +65,8 @@ func start_listening(keybind: VBoxContainer, parent: GridContainer):
 	yield(get_tree(), "idle_frame")
 	listening_keybind = keybind
 
-func reset_keybind(keybind: VBoxContainer):
-	bindings_util.clear_binding(keybind.input_key, keybind.player_id)
-	LocalSettings.change_setting(keybind.input_group, keybind.input_key, [])
-	keybind.change_button_text()
 
-func load_all_bindings():
-	for i in range(category_paths.size()):
-		var category: GridContainer = get_node(category_paths[i])
-		
-		for keybind in category.get_children():
-			if keybind is KeybindButton:
-				var binding_array: Array = LocalSettings.load_setting(keybind.input_group, keybind.input_key, [])
-				bindings_util.clear_binding(keybind.input_key, keybind.player_id)
-				bindings_util.add_from_binding_array(keybind.input_key, keybind.player_id, binding_array)
-				keybind.change_button_text()
+func switch_device_type(_is_controller: bool):
+	is_controller = _is_controller
+	listening_keybind = null
+	load_all_keybinds()
