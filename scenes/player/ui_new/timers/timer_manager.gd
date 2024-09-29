@@ -33,17 +33,32 @@ func update_visibility():
 		time_score.visible = false
 
 
-func add_timer(timer_name: String, timer_amount: float) -> Control:
-	var timer_node: Control = grid.get_node(timer_name)
+func add_set_timer(timer_name: String, timer_amount: float, sound: String = "none", kill_on_end: bool = false, visible: bool = true) -> Control:
+	var timer_node: Control = grid.get_node_or_null(timer_name)
 	if not is_instance_valid(timer_node):
+		print("Timer " + timer_name + " doesn't exist, creating timer of same name.")
 		timer_node = TIMER_SCENE.instance()
 		timer_node.name = timer_name
 		
 		grid.call_deferred("add_child", timer_node)
-	
+	else:
+		print("Time for timer " + timer_name + " set to " + str(timer_amount) + ".")
 	timer_node.time = timer_amount
+	timer_node.sound = sound
+	timer_node.kill_on_end = kill_on_end
 	return timer_node
 
+func get_timer(timer_name: String) -> Control:
+	var timer_node: Control = grid.get_node_or_null(timer_name)
+	
+	return timer_node
+
+func pause_resume_timer(timer_name: String, pause: bool):
+	var timer_node: Control = grid.get_node_or_null(timer_name)
+	if not is_instance_valid(timer_node):
+		return
+	
+	timer_node.is_counting = !pause
 
 func remove_timer(timer_name: String):
 	var timer_node: Control = grid.get_node_or_null(timer_name)
@@ -81,4 +96,4 @@ func add_radial_timer(timer_name: String, read_node: Node, read_property: String
 #	next_spawn -= 1
 #	if next_spawn <= 0:
 #		next_spawn = 60 * rand_range(2, 6)
-#		var timer = add_timer("Timer " + str(rand_range(0, 200)), rand_range(2, 8))
+#		var timer = add_set_timer("Timer " + str(rand_range(0, 200)), rand_range(2, 8))

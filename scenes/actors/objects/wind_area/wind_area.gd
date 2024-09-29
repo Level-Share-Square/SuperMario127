@@ -112,7 +112,8 @@ func update_property(key, value):
 	update_size()
 
 func entered(body):
-	body.velocity += Vector2(wind_power, wind_power)*wind_angle_vector
+	if enabled and body.name.begins_with("Character") and !body.dead and body.controllable:
+		body.velocity += Vector2(wind_power, wind_power)*wind_angle_vector
 	if triggerable:
 		particles.preprocess = 0
 		triggered = true

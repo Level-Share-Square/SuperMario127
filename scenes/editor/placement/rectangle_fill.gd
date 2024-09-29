@@ -89,7 +89,7 @@ func selected_update():
 
 
 func mouse_down() -> void:
-	initial_pos = mouse_tile_pos * TILE_SIZE
+	initial_pos = mouse_tile_pos * TILE_SIZE - Vector2(16, 16)
 	
 	drag.rect_position = initial_pos
 	drag.rect_size = Vector2.ZERO
