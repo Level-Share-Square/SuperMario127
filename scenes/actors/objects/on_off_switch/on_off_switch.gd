@@ -8,7 +8,6 @@ onready var curve_tween = $Sprite/CurveTween
 
 func _set_properties():
 	savable_properties = ["palette"]
-	editable_properties = ["palette"]
 
 func _set_property_values():
 	set_property("palette", palette, 0)

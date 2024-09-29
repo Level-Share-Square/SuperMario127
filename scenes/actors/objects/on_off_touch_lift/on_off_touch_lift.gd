@@ -191,6 +191,7 @@ func _set_platform_pos():
 		platform.set_position(path_follower.position)
 	else:
 		platform.position = path_follower.position
+		platform.reset_physics_interpolation()
 
 func reached_end() -> void:
 	match move_type:
@@ -213,6 +214,7 @@ func reset_platform():
 	
 	platform.set_collision_layer_bit(4, false)
 	platform.position = path_follower.position
+	platform.reset_physics_interpolation()
 	activated = !touch_start
 	
 	yield(get_tree(), "physics_frame")

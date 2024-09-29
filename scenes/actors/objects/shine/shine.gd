@@ -46,6 +46,7 @@ const WHITE_COLOR := Color(1, 1, 1)
 var last_color : Color
 var is_blue := false
 var send_score = false
+var purple_starbits_activate := false
 
 var title := "Unnamed Shine"
 var description := ""
@@ -53,6 +54,7 @@ var show_in_menu := true
 var activated := true
 var red_coins_activate := false
 var shine_shards_activate := false
+var required_purples := 0
 var color := Color(1, 1, 0)
 var id := 0
 var do_kick_out := true
@@ -61,8 +63,8 @@ var sort_position : int = 0
 var score_from_before = 0 # haha that rhymes
 
 func _set_properties() -> void:
-	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out", "sort_position"]
-	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "do_kick_out", "sort_position"]
+	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out", "sort_position", "required_purples"]
+	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "required_purples", "color", "do_kick_out", "sort_position"]
 	
 func _set_property_values() -> void:
 	set_property("title", title, true)
@@ -75,11 +77,18 @@ func _set_property_values() -> void:
 	set_property("id", id, true)
 	set_property("do_kick_out", do_kick_out, true)
 	set_property("sort_position", sort_position, true)
+	set_property("required_purples", required_purples, true)
 
 func _ready() -> void:
 	send_score = true
 	if mode != 1: # not in edit mode
-		if red_coins_activate or shine_shards_activate:
+		if required_purples > 0:
+			purple_starbits_activate = true
+			Singleton.CurrentLevelData.level_data.vars.required_purple_starbits[Singleton.CurrentLevelData.area].append(required_purples)
+			Singleton.CurrentLevelData.level_data.vars.required_purple_starbits[Singleton.CurrentLevelData.area].sort()
+		else:
+			purple_starbits_activate = false
+		if red_coins_activate or shine_shards_activate or purple_starbits_activate:
 			activated = false
 		var _connect = area.connect("body_entered", self, "collect")
 		unpause_timer.wait_time = UNPAUSE_TIMER_LENGTH
@@ -164,6 +173,9 @@ func _physics_process(_delta : float) -> void:
 		if shine_shards_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_shine_shards > 0:
 			if Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][0] == Singleton.CurrentLevelData.level_data.vars.max_shine_shards:
 				activate_shine()
+		if purple_starbits_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_purple_starbits > 0:
+			if Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0] >= required_purples:
+				activate_shine()
 		if !collected:
 			if !activated:
 				ambient_sound.playing = false
@@ -241,7 +253,11 @@ func unpause_game() -> void:
 func collect(body : PhysicsBody2D) -> void:
 	if activated and enabled and !collected and body.name.begins_with("Character") and body.controllable:
 		character = body
-
+		
+		if do_kick_out:
+			var timer_manager = get_node("/root").get_node("Player").get_timer_manager()
+			timer_manager.stop_timer("area_timer")
+		
 		# hacky fix for the player being stuck in the ground during the shine dance if diving into a very low shine
 		if character.state != null and character.state.name == "SlideState" and character.is_grounded():
 			character.position.y -= 16
@@ -307,7 +323,6 @@ func start_shine_dance() -> void:
 func character_shine_dance_finished(_animation : Animation) -> void:
 	# delay a bit once the animation is done before starting the fadeout/transition back to the editor
 	yield(get_tree().create_timer(SHINE_DANCE_END_DELAY), "timeout") 
-	
 	#bus is changed based on whether or not you are in the player, or editor, this makes sure music 
 	#fades to the correct volume in both situations
 	if do_kick_out:
@@ -323,6 +338,7 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 				true,
 				true
 			)
+			
 		else:
 			# yes, another band aid
 			yield(get_tree().create_timer(0.75), "timeout")

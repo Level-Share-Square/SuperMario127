@@ -49,7 +49,6 @@ script = ExtResource( 1 )
 [node name="Outline" type="AnimatedSprite" parent="."]
 frames = ExtResource( 3 )
 animation = "0_outline"
-frame = 1
 playing = true
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -68,6 +67,7 @@ visible = false
 shape = SubResource( 3 )
 
 [node name="HitCollider" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitCollider"]
 shape = SubResource( 4 )

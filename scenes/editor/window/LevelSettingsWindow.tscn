@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/music_changer.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/editor/ResetLevelButton.gd" type="Script" id=5]
 [ext_resource path="res://scenes/shared/background/foregrounds/none/preview.png" type="Texture" id=6]
 [ext_resource path="res://scenes/editor/window.gd" type="Script" id=7]
+[ext_resource path="res://scenes/editor/window/timer.gd" type="Script" id=8]
 [ext_resource path="res://scenes/shared/background/backgrounds/night/night.png" type="Texture" id=9]
 [ext_resource path="res://scenes/editor/Areas.gd" type="Script" id=10]
 [ext_resource path="res://scenes/editor/assets/outline.png" type="Texture" id=11]
@@ -568,6 +569,32 @@ volume_db = -10.0
 stream = ExtResource( 13 )
 volume_db = -10.0
 
+[node name="Timer" type="Control" parent="LevelSettings"]
+margin_left = -24.0
+margin_right = 16.0
+margin_bottom = 39.9999
+script = ExtResource( 8 )
+
+[node name="LineEdit" type="LineEdit" parent="LevelSettings/Timer"]
+margin_left = 577.0
+margin_top = 144.0
+margin_right = 772.0
+margin_bottom = 222.0
+custom_colors/font_color = Color( 0.14902, 0.188235, 0.439216, 1 )
+custom_fonts/font = SubResource( 15 )
+custom_styles/normal = SubResource( 6 )
+align = 1
+context_menu_enabled = false
+
+[node name="Label" type="Label" parent="LevelSettings/Timer"]
+margin_left = 557.096
+margin_top = 220.197
+margin_right = 795.096
+margin_bottom = 292.197
+custom_fonts/font = SubResource( 14 )
+text = "Timer"
+align = 1
+
 [node name="Gravity" type="Control" parent="LevelSettings"]
 margin_left = -24.0
 margin_top = 124.0
@@ -587,12 +614,13 @@ align = 1
 context_menu_enabled = false
 
 [node name="Label" type="Label" parent="LevelSettings/Gravity"]
-margin_left = 609.596
+margin_left = 557.096
 margin_top = 220.197
-margin_right = 847.596
+margin_right = 795.096
 margin_bottom = 292.197
 custom_fonts/font = SubResource( 14 )
 text = "Gravity"
+align = 1
 
 [node name="Hotkeys" type="Control" parent="LevelSettings"]
 margin_right = 40.0
