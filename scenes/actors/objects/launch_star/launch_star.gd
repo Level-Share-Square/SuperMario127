@@ -14,6 +14,7 @@ onready var player_detector = $PlayerDetector
 onready var launch_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/launch.wav")
 onready var flying_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/flying.wav")
 onready var windup_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/windup.wav")
+onready var launch_particles : CPUParticles2D = $LaunchParticles
 
 enum states {IDLE, HOLDING, WINDUP, LAUNCH}
 var state = states.IDLE
@@ -98,6 +99,7 @@ func set_state(to:int):
 			return
 	
 func _ready():
+	launch_particles.emitting = false
 	if(invalid_curve(curve)):
 		curve.add_point(Vector2())
 		curve.add_point(Vector2(0, -600))
@@ -166,8 +168,7 @@ func physics_process_windup(delta:float):
 	mario.sprite.rotation_degrees += 90
 		
 # the launch star is launching mario
-func physics_process_launch(delta:float):	
-	
+func physics_process_launch(delta:float):
 	var dif = to_global(pathfollow.position) - last_position
 	if !pathfollow.offset >= path.curve.get_baked_length():
 		last_position = to_global(pathfollow.position)

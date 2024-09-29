@@ -40,7 +40,7 @@ void vertex() {
 		TRANSFORM[3].x = emission_rect.z * random_m1_p1(seed);
 		TRANSFORM[3].y = emission_rect.y;
 	}
-	if (TRANSFORM[3].y < -size.y*2.0 || TRANSFORM[3].y > size.y*2.0) {
+	if (TRANSFORM[3].y < -size.y*2.0+wind_speed) {
 		//Set the particle opacity
 		if (COLOR.a > 0.0) {
 			COLOR.a -= .25;

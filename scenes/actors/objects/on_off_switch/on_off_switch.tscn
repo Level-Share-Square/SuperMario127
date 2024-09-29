@@ -25,6 +25,7 @@ script = ExtResource( 10 )
 curve = ExtResource( 9 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource( 1 )

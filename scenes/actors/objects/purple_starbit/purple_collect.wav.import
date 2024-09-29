@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/purple_collect.wav-3bdd25a6c24189fdf153c34ca5f79726.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/purple_starbit/purple_collect.wav"
+dest_files=[ "res://.import/purple_collect.wav-3bdd25a6c24189fdf153c34ca5f79726.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -177,6 +177,7 @@ func set_position(new_position):
 	
 	#then move self
 	position = new_position
+	reset_physics_interpolation()
 			
 func ground_entered(body):
 	if "Middle" in str(body):
@@ -211,6 +212,7 @@ func _physics_process(delta):
 		if global_position.x < bounds.position.x * 32 - 300 or global_position.x > bounds.end.x * 32 + 300 or global_position.y > bounds.end.y * 32+ 300:
 			global_position = spawn_pos
 			rotation_degrees = 0
+			reset_physics_interpolation()
 		var result_vector = global_position
 		
 		if is_instance_valid(water) and in_water:

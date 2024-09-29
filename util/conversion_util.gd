@@ -130,6 +130,8 @@ static func convert_049_to_050(result):
 	result.author = "Unknown"
 	result.description = "This level has no description."
 	result.thumbnail_url = ""
+#	for result_area in result.areas:
+#		result_area.timer = 0.00
 	return result
 
 static func compareVersions(version, other) -> int:

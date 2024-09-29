@@ -11,11 +11,11 @@ var inverted : bool = false
 
 func _set_properties():
 	savable_properties = ["inverted", "palette"]
-	editable_properties = ["inverted", "palette"]
+	editable_properties = ["inverted"]
 
 func _set_property_values():
-	set_property("inverted", inverted, false, null, ["base"])
-	set_property("palette", palette, 0, null, ["base"])
+	set_property("inverted", inverted, false)
+	set_property("palette", palette, 0)
 
 func _ready():
 	init()

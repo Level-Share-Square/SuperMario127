@@ -2,6 +2,7 @@ extends LevelDataLoader
 
 onready var tick_sound = $SharedSounds/TickSound
 onready var tick_end_sound = $SharedSounds/TickEndSound
+onready var vignette = $UI/Vignette
 
 export var character : NodePath
 export var character2 : NodePath
@@ -37,6 +38,7 @@ func _physics_process(delta):
 
 func _ready():
 	sound_timer = wrapf(switch_timer, 0, 1.1)
+#	vignette.visible = false
 	
 	Singleton.CurrentLevelData.enemies_instanced = 0
 	Singleton.CurrentLevelData.level_data.vars.reset_counters()
@@ -48,6 +50,11 @@ func _ready():
 	if Singleton.CurrentLevelData.level_data.vars.transition_data == []:
 		Singleton.CurrentLevelData.area = Singleton.CheckpointSaved.current_area
 		Singleton.CurrentLevelData.level_data.vars.reload()
+	
+	if Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.timer > 0.00:
+		var timer_manager = get_timer_manager()
+		timer_manager.add_timer("area_timer", Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.timer, "death", true, true)
+		vignette.visible = true
 	
 	var data = Singleton.CurrentLevelData.level_data
 	load_in(data, data.areas[Singleton.CurrentLevelData.area])
@@ -64,6 +71,7 @@ func _ready():
 		
 	Singleton.CurrentLevelData.level_data.vars.max_red_coins = 0
 	Singleton.CurrentLevelData.level_data.vars.max_shine_shards = 0
+	Singleton.CurrentLevelData.level_data.vars.max_purple_starbits = 0
 	Singleton.CurrentLevelData.level_data.vars.teleporters = []
 	Singleton.CurrentLevelData.level_data.vars.liquids = []
 	Singleton.CurrentLevelData.level_data.vars.checkpoints = []

@@ -56,9 +56,6 @@ rect_scale = Vector2( 0.95, 0.95 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 3 )

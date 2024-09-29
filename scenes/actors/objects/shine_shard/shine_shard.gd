@@ -12,7 +12,6 @@ var collected = false
 var physics = false
 var destroy_timer = 0.0
 var despawn_timer = 0.0
-var gravity : float
 var velocity : Vector2
 
 var id : int

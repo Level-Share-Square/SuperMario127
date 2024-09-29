@@ -15,6 +15,7 @@ var area_id := 0
 var object_type := "unknown"
 var destination_tag := "default_teleporter"
 var tp_pair : TeleportObject
+var instant : bool = false
 
 ## For older levels only
 var pipe_tag : String = "none"
@@ -33,16 +34,23 @@ func local_tp(entering_character : Character, entering):
 	if entering:
 		tp_pair = find_local_pair()
 		#For now, you can't teleport to another object with the same tag but a different mode
-		if tp_pair.teleportation_mode && teleportation_mode == false:
-			tp_pair = self
-		entering_character.global_position = tp_pair.global_position
-		
-		if tp_pair.object_type != "area_transition" or global_position.distance_to(tp_pair.global_position) > 800:
-			entering_character.camera.skip_to_player = true
-			entering_character.camera.global_position = entering_character.global_position
-		entering_character.sprite.modulate = Color(0, 0, 0, 0)
-		tp_tween.interpolate_callback(tp_pair, WAIT_TIME, "start_exit_anim", entering_character)
-		tp_tween.start()
+		if !instant:
+			if tp_pair.teleportation_mode && teleportation_mode == false:
+				tp_pair = self
+			entering_character.global_position = tp_pair.global_position
+			entering_character.reset_physics_interpolation()
+			
+			if tp_pair.object_type != "area_transition" or global_position.distance_to(tp_pair.global_position) > 800:
+				entering_character.camera.skip_to_player = true
+				entering_character.camera.global_position = entering_character.global_position
+			entering_character.sprite.modulate = Color(0, 0, 0, 0)
+			tp_tween.interpolate_callback(tp_pair, WAIT_TIME, "start_exit_anim", entering_character)
+			tp_tween.start()
+		else:
+			if tp_pair.teleportation_mode && teleportation_mode == false:
+				tp_pair = self
+			entering_character.global_position = tp_pair.global_position
+			entering_character.reset_physics_interpolation()
 
 	else:
 		entering_character.invulnerable = false

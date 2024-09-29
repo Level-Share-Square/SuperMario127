@@ -21,9 +21,6 @@ var is_preview : bool = false
 var base_savable_properties : PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible"]
 var savable_properties : PoolStringArray = []
 
-var base_property_value_menus : Array = [["base",], ["base",], ["base",], ["base",], ["base",]]
-var property_value_menus : Array = []
-
 var base_editable_properties : PoolStringArray = ["enabled", "visible", "rotation_degrees", "scale", "position"]
 var editable_properties : PoolStringArray = []
 
@@ -31,6 +28,7 @@ var base_connectable_signals : PoolStringArray = ["ready", "process", "physics_p
 var connectable_signals : PoolStringArray = []
 
 var property_value_to_name := {}
+var property_value_menus := {}
 
 signal process
 signal physics_process
@@ -113,7 +111,7 @@ func get_property_index(key) -> int:
 		index += 1
 	return index
 
-func set_property(key, value, change_level_object = true, alias = null, menu = ["base"]):
+func set_property(key, value, change_level_object = true, alias = null):
 	if typeof(self[key]) != typeof(value):
 		assert("Object tried to set property '" + key + "', but the provided type does not match.")
 		return
@@ -128,9 +126,6 @@ func set_property(key, value, change_level_object = true, alias = null, menu = [
 			level_object_ref.properties.append(value)
 		else:
 			level_object_ref.properties[index] = value
-		
-#		if len(base_property_value_menus) < len(base_savable_properties+savable_properties):
-#			property_value_menus.append(menu)
 		
 		if key == "visible":
 			if mode == 1:
@@ -194,6 +189,12 @@ func set_bool_alias(key, true_alias, false_alias):
 		property_value_to_name[key] = {true: true_alias, false: false_alias}
 	else:
 		push_error("Bool aliases for %s was not set!" % key)
+		
+func set_property_menu(key, menu_array: Array):
+	if menu_array != null:
+		property_value_menus[key] = menu_array
+	else:
+		push_error("Property menu for %s was not set!" % key)
 
 func on_signal_fire(index):
 	var current_mode = get_tree().get_current_scene().mode

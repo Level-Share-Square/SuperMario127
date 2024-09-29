@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/actors/objects/purple_starbit/glow.shader" type="Shader" id=1]
+[ext_resource path="res://scenes/actors/objects/purple_starbit/purple_starbit.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/purple_starbit/purple_collect.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/purple_starbit/purple.tres" type="SpriteFrames" id=4]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 1 )
+shader_param/Smooth = false
+shader_param/width = 1.0
+shader_param/outline_color = Color( 0, 0.133333, 1, 0.145098 )
+shader_param/pixel_size = 1
+
+[sub_resource type="RectangleShape2D" id=2]
+
+[node name="PurpleStarbit" type="Node2D" groups=["PurpleStarbits"]]
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 3 )
+frames = ExtResource( 4 )
+animation = "purple"
+playing = true
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 3 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+process_parent = true
+physics_process_parent = true
+
+[node name="Tween" type="Tween" parent="."]

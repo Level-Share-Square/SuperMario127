@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/actors/objects/sawblade/metal_bounce.ogg" type="AudioStream" id=1]
+[ext_resource path="res://scenes/actors/objects/propeller/propeller.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/propeller/0_frames.tres" type="SpriteFrames" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 26, 3.125 )
+
+[node name="Propellor" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -6 )
+frames = ExtResource( 3 )
+animation = "0"
+playing = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -8.125 )
+shape = SubResource( 1 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+volume_db = 10.0

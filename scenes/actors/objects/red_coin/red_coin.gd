@@ -10,7 +10,6 @@ onready var sparkles = $Sparkles
 
 var collected = false
 var physics = false
-var gravity : float
 var velocity : Vector2
 
 var id : int
