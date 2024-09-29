@@ -8,13 +8,13 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
-extents = Vector2( 64, 64 )
+extents = Vector2( 128, 128 )
 
 [sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
 shader = ExtResource( 5 )
-shader_param/size = Vector2( 64, 64 )
-shader_param/emission_rect = Plane( 0, 0, 64, 1 )
+shader_param/size = Vector2( 128, 128 )
+shader_param/emission_rect = Plane( 0, 0, 128, 1 )
 shader_param/wind_speed = 20.0
 shader_param/alpha = 1.0
 
@@ -44,7 +44,7 @@ gravity_vec = Vector2( 0, -1 )
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, -64 )
+position = Vector2( 0, -128 )
 shape = SubResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
@@ -52,7 +52,7 @@ position = Vector2( 0, -16 )
 z_index = -4
 amount = 32
 preprocess = 10.0
-visibility_rect = Rect2( -64, -128, 128, 128 )
+visibility_rect = Rect2( -160, -288, 320, 320 )
 draw_order = 1
 process_material = SubResource( 6 )
 texture = SubResource( 8 )

@@ -39,10 +39,30 @@ func add_timer(timer_name: String, timer_amount: float, sound: String = "none", 
 		timer_node.kill_on_end = kill_on_end
 		
 		grid.call_deferred("add_child", timer_node)
-	
+		
 	timer_node.time = timer_amount
 	return timer_node
 
+func pause_timer(timer_name):
+	var timer_node: Control = grid.get_node(timer_name)
+	if is_instance_valid(timer_node):
+		timer_node.pause()
+	else:
+		return
+		
+func resume_timer(timer_name):
+	var timer_node: Control = grid.get_node(timer_name)
+	if is_instance_valid(timer_node):
+		timer_node.resume()
+	else:
+		return
+		
+func stop_timer(timer_name):
+	var timer_node: Control = grid.get_node(timer_name)
+	if is_instance_valid(timer_node):
+		timer_node.stop()
+	else:
+		return
 
 # testing
 #var next_spawn: int = 120

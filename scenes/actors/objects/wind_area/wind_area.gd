@@ -7,7 +7,7 @@ onready var area : Area2D = $Area2D
 onready var collision_shape = $Area2D/CollisionShape2D
 onready var particles = $Particles2D
 
-var size := Vector2(64, 64)
+var size := Vector2(128, 128)
 var wind_power := 20.0
 var color := Color(1, 1, 1, 1)
 var triggerable := false
@@ -22,7 +22,7 @@ func _set_properties():
 	editable_properties = ["size", "wind_power", "color", "triggerable"]
 
 func _set_property_values():
-	set_property("size", size, true, null, ["base"])
+	set_property("size", size, true, null)
 	set_property("wind_power", wind_power, true, "Wind Strength")
 	set_property("color", color)
 	set_property("triggerable", triggerable)
@@ -57,6 +57,19 @@ func _physics_process(delta):
 								body.velocity.x += (wind_power*wind_angle_vector.x)*60*delta
 							elif wind_angle_vector.x < 0 and body.velocity.x >= (wind_power*wind_angle_vector.x)*3:
 								body.velocity.x += (wind_power*wind_angle_vector.x)*60*delta
+					
+					if !body.is_on_floor() and body.state is FallState:
+						var char_sprite = body.sprite
+						if body.facing_direction == 1:
+							if body.jump_animation == 0:
+								char_sprite.animation = "fallRight"
+							elif body.jump_animation == 1:
+								char_sprite.animation = "doubleFallRight"
+						elif body.facing_direction == -1:
+							if body.jump_animation == 0:
+								char_sprite.animation = "fallLeft"
+							elif body.jump_animation == 1:
+								char_sprite.animation = "doubleFallLeft"
 					
 					#set's mario's state to falling if he stops going down in a ground pound
 					if (body.state is GroundPoundState) and (body.velocity.y <= 0):
@@ -122,7 +135,7 @@ func update_size():
 	update_particles()
 
 func update_particles():
-	particles.visibility_rect = Rect2(-32, -32, size.x+64, size.y+64)
+	particles.visibility_rect = Rect2(-size.x-32, -(size.y)-32, size.x*2+64, size.y*2+64)
 	particles.lifetime = ((size.y/20)/abs(wind_power))+.1
 	particles.amount = int((size.x/48)*(size.y/48))
 	particles.modulate = Color(color.r, color.g, color.b)

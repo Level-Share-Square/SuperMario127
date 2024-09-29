@@ -8,19 +8,19 @@ onready var close_button = $CloseButton
 onready var hover_sound = $CloseButton/HoverSound
 onready var click_sound = $CloseButton/ClickSound
 
-#Scripting add new variable
-onready var save_button = $Contents/SaveButton
-onready var cancel_button = $Contents/CancelButton
-onready var variable_name = $Contents/TextEdit
-
-#Scripting add new operation
-onready var newvar = $VBoxContainer/NewVar
-onready var position_edit = $VBoxContainer/Position
-onready var if_edit = $VBoxContainer/If
-onready var while_edit = $VBoxContainer/While
-onready var collision_edit = $VBoxContainer/Collision
-onready var scale_edit = $VBoxContainer/Scale
-onready var visibility_edit = $VBoxContainer/Visibility
+##Scripting add new variable
+#onready var save_button = $Contents/SaveButton
+#onready var cancel_button = $Contents/CancelButton
+#onready var variable_name = $Contents/TextEdit
+#
+##Scripting add new operation
+#onready var newvar = $VBoxContainer/NewVar
+#onready var position_edit = $VBoxContainer/Position
+#onready var if_edit = $VBoxContainer/If
+#onready var while_edit = $VBoxContainer/While
+#onready var collision_edit = $VBoxContainer/Collision
+#onready var scale_edit = $VBoxContainer/Scale
+#onready var visibility_edit = $VBoxContainer/Visibility
 
 onready var tween = $Tween
 var drag_position = null

@@ -103,8 +103,8 @@ func _physics_process(delta):
 						0.2)
 					tween.start()
 				timer_display.modulate.r = ((cos(4*PI*mod_color_time)))+2
-				timer_display.modulate.g = ((cos(4*PI*mod_color_time-PI))/4)+.75
-				timer_display.modulate.b = ((cos(4*PI*mod_color_time-PI))/4)+.75
+				timer_display.modulate.g = ((cos(4*PI*sound_time-PI))/4)+.75
+				timer_display.modulate.b = ((cos(4*PI*sound_time-PI))/4)+.75
 		
 		timer_display.text = LevelInfo.generate_time_string(time)
 			
@@ -119,6 +119,21 @@ func cancel_time_over():
 	tween.disconnect("tween_all_completed", self, "queue_free")
 	tween.stop_all()
 
+func pause():
+	is_counting = false
+
+func resume():
+	is_counting = true
+
+func stop():
+	is_counting = false
+	tween.connect("tween_all_completed", self, "queue_free")
+	tween.interpolate_property(
+		timer_display, 
+		"modulate:a", 
+		1, 0,
+		FADE_TIME)
+	tween.start()
 
 func time_over():
 	is_counting = false
@@ -141,7 +156,6 @@ func time_over():
 		if is_instance_valid(player2):
 			if !player2.dead and player2.controllable:
 				player2.kill("green_demon")
-	
 
 func set_label(new_text: String):
 	name_display.text = new_text

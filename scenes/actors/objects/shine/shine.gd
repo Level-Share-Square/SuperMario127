@@ -72,11 +72,11 @@ func _set_property_values() -> void:
 	set_property("activated", activated, true)
 	set_property("red_coins_activate", red_coins_activate, true)
 	set_property("shine_shards_activate", shine_shards_activate, true)
-	set_property("required_purples", required_purples, true)
 	set_property("color", color, true)
 	set_property("id", id, true)
 	set_property("do_kick_out", do_kick_out, true)
 	set_property("sort_position", sort_position, true)
+	set_property("required_purples", required_purples, true)
 
 func _ready() -> void:
 	send_score = true
@@ -252,7 +252,11 @@ func unpause_game() -> void:
 func collect(body : PhysicsBody2D) -> void:
 	if activated and enabled and !collected and body.name.begins_with("Character") and body.controllable:
 		character = body
-
+		
+		if do_kick_out:
+			var timer_manager = get_node("/root").get_node("Player").get_timer_manager()
+			timer_manager.stop_timer("area_timer")
+		
 		# hacky fix for the player being stuck in the ground during the shine dance if diving into a very low shine
 		if character.state != null and character.state.name == "SlideState" and character.is_grounded():
 			character.position.y -= 16
@@ -317,7 +321,6 @@ func start_shine_dance() -> void:
 func character_shine_dance_finished(_animation : Animation) -> void:
 	# delay a bit once the animation is done before starting the fadeout/transition back to the editor
 	yield(get_tree().create_timer(SHINE_DANCE_END_DELAY), "timeout") 
-	
 	#bus is changed based on whether or not you are in the player, or editor, this makes sure music 
 	#fades to the correct volume in both situations
 	if do_kick_out:
@@ -333,6 +336,7 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 				true,
 				true
 			)
+			
 		else:
 			# yes, another band aid
 			yield(get_tree().create_timer(0.75), "timeout")

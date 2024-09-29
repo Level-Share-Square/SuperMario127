@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://scenes/player/World.gd" type="Script" id=21]
 [ext_resource path="res://scenes/player/ui_new/muitiplayer_realign.gd" type="Script" id=22]
 [ext_resource path="res://scenes/player/ui_new/purple_starbits.gd" type="Script" id=23]
+[ext_resource path="res://scenes/player/vignette.gdshader" type="Shader" id=24]
 [ext_resource path="res://scenes/player/dialogue_text.gd" type="Script" id=29]
 [ext_resource path="res://scenes/actors/fludd_display/fludd_display.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
@@ -34,6 +35,12 @@
 [ext_resource path="res://scenes/actors/objects/p_switch/tick.wav" type="AudioStream" id=58]
 [ext_resource path="res://scenes/actors/objects/p_switch/tick_end.wav" type="AudioStream" id=59]
 [ext_resource path="res://scenes/actors/objects/boo/laugh.wav" type="AudioStream" id=60]
+
+[sub_resource type="ShaderMaterial" id=224]
+shader = ExtResource( 24 )
+shader_param/color = Color( 0, 0, 0, 1 )
+shader_param/multiplier = 0.275
+shader_param/softness = 0.814
 
 [sub_resource type="Animation" id=206]
 length = 0.001
@@ -683,6 +690,11 @@ pause_mode = 2
 unique_name_in_owner = true
 layer = 63
 script = ExtResource( 33 )
+
+[node name="Vignette" type="ColorRect" parent="UI"]
+material = SubResource( 224 )
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="HUD" type="MarginContainer" parent="UI"]
 anchor_right = 1.0
@@ -1829,7 +1841,7 @@ shape = SubResource( 24 )
 char_path = NodePath("../Viewport/World/Character")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Viewports/ViewportContainer"]
-layer = 60
+layer = 64
 script = ExtResource( 22 )
 
 [node name="Health" parent="Viewports/ViewportContainer/CanvasLayer" instance=ExtResource( 17 )]

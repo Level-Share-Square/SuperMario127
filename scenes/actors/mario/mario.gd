@@ -747,7 +747,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x = 0
 	
-	if is_on_floor() and !disable_animation and movable and controlled_locally and abs(velocity.x) > 15:
+	if is_grounded() and !disable_animation and movable and controlled_locally and abs(velocity.x) > 15:
 		if !is_walled():
 			sprite.speed_scale = abs(velocity.x) / move_speed if abs(velocity.x) > move_speed else 1.0
 			sprite.animation = "movingRight" if facing_direction == 1 else "movingLeft"
@@ -758,7 +758,7 @@ func _physics_process(delta: float) -> void:
 			sound_player.play_footsteps()
 			footstep_interval = clamp(0.8 - (sprite.speed_scale / 2.5), 0.1, 1)
 		footstep_interval -= delta
-	elif is_on_floor():
+	elif is_grounded():
 		if !disable_animation and movable and controlled_locally:
 			sprite.speed_scale = 1
 			sprite.animation = "idleRight" if facing_direction == 1 else "idleLeft"

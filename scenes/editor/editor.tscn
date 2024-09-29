@@ -2650,6 +2650,21 @@ index_in_sequence = 1
 icon = ExtResource( 637 )
 preview = ExtResource( 621 )
 
+[node name="InvertedSwitchBlock" type="Node" parent="PlaceableItems/SwitchesGroup"]
+script = ExtResource( 24 )
+object_id = 93
+is_object = true
+object_center = Vector2( 16, 16 )
+item_name = "Switch Block"
+palette_icons = [ ExtResource( 637 ), ExtResource( 638 ), ExtResource( 633 ), ExtResource( 639 ), ExtResource( 636 ), ExtResource( 635 ), ExtResource( 640 ) ]
+palette_previews = [ ExtResource( 621 ), ExtResource( 622 ), ExtResource( 624 ), ExtResource( 616 ), ExtResource( 623 ), ExtResource( 625 ), ExtResource( 634 ) ]
+object_size = Vector2( 32, 32 )
+change_to = "OnOffFloorSwitch"
+items_in_sequence = 5
+index_in_sequence = 1
+icon = ExtResource( 637 )
+preview = ExtResource( 621 )
+
 [node name="OnOffFloorSwitch" type="Node" parent="PlaceableItems/SwitchesGroup"]
 script = ExtResource( 24 )
 object_id = 95
