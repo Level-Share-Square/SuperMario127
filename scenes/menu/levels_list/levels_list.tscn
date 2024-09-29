@@ -9,7 +9,7 @@
 [ext_resource path="res://scenes/menu/levels_list/level_panel.gd" type="Script" id=7]
 [ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=8]
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=9]
-[ext_resource path="res://scenes/menu/levels_list/test.png" type="Texture" id=10]
+[ext_resource path="res://scenes/menu/level_portal/default_thumb.png" type="Texture" id=10]
 [ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://scenes/menu/levels_list/icons/shine.png" type="Texture" id=12]
 [ext_resource path="res://scenes/menu/levels_list/icons/star_coin.png" type="Texture" id=13]

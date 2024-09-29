@@ -4,14 +4,14 @@ const COMPLETED_COLOR := Color("ffffc4")
 const SHINE_MATERIAL: ShaderMaterial = preload("res://scenes/menu/levels_list/list_elements/shine.tres")
 
 # completion
-onready var panel = get_node("%Panel")
-onready var thumbnail_edge = get_node("%Edge")
-onready var star = get_node("%Star")
+onready var panel = $"%Panel"
+onready var thumbnail_edge = $"%Edge"
+onready var star = $"%Star"
 var is_complete: bool
 
 # thumbnail
-onready var thumbnail = get_node("%Thumbnail")
-onready var foreground = get_node("%Foreground")
+onready var thumbnail = $"%Thumbnail"
+onready var foreground = $"%Foreground"
 onready var level_id: String = get_owner().name
 var level_info: LevelInfo
 var thumbnail_cache: Node

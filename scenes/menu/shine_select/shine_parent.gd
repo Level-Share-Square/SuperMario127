@@ -4,11 +4,11 @@ extends Node2D
 onready var level_info: LevelInfo = Singleton.CurrentLevelData.level_info
 
 ## nodes
-onready var tween: Tween = get_node("%Tween")
-onready var shine_title: Label = get_node("%ShineTitle")
-onready var shine_description: RichTextLabel = get_node("%ShineDescription")
+onready var tween: Tween = $"%Tween"
+onready var shine_title: Label = $"%ShineTitle"
+onready var shine_description: RichTextLabel = $"%ShineDescription"
 
-onready var mission_focus_sfx: AudioStreamPlayer = get_node("%MissionFocus")
+onready var mission_focus_sfx: AudioStreamPlayer = $"%MissionFocus"
 
 ## visual stuff
 const SHINE_SPRITE_SCENE: PackedScene = preload("res://scenes/menu/shine_select/shine_sprite.tscn")

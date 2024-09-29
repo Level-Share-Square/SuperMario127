@@ -18,7 +18,7 @@ func _ready():
 	list_handler.folders.connect("folder_changed", self, "update_buttons")
 
 func update_buttons(path: String = ""):
-	var is_visible: bool = subscreens.current_screen.name in visible_screens
+	var is_visible: bool = subscreens.get_screen_name() in visible_screens
 	var target_alpha: float = 1 if is_visible else 0
 	
 	if is_visible: 

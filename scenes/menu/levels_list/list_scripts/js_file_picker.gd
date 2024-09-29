@@ -5,7 +5,7 @@ signal read_completed
 ## credits to Pukkah
 ## https://github.com/Pukkah/HTML5-File-Exchange-for-Godot
 
-onready var level_code_edit: TextEdit = get_node("%LevelCode")
+onready var level_code_edit: TextEdit = $"%LevelCode"
 
 var js_callback: JavaScriptObject = JavaScript.create_callback(self, "load_handler");
 var js_interface: JavaScriptObject;

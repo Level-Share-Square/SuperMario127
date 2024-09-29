@@ -319,6 +319,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Knockback.gd"
 }, {
+"base": "Reference",
+"class": "LSSLevelInfo",
+"language": "GDScript",
+"path": "res://scenes/menu/level_portal/classes/lss_level_info.gd"
+}, {
+"base": "Reference",
+"class": "LSSLevelPage",
+"language": "GDScript",
+"path": "res://scenes/menu/level_portal/classes/lss_level_page.gd"
+}, {
 "base": "State",
 "class": "LaunchStarState",
 "language": "GDScript",
@@ -610,6 +620,11 @@ _global_script_classes=[ {
 "path": "res://util/fps_util.gd"
 }, {
 "base": "Reference",
+"class": "image_util",
+"language": "GDScript",
+"path": "res://util/new/image_util.gd"
+}, {
+"base": "Reference",
 "class": "input_event_util",
 "language": "GDScript",
 "path": "res://util/new/input/input_event_util.gd"
@@ -722,6 +737,8 @@ _global_script_class_icons={
 "JumpState": "",
 "KeybindButton": "",
 "KnockbackState": "",
+"LSSLevelInfo": "",
+"LSSLevelPage": "",
 "LaunchStarState": "",
 "LavaBoostState": "",
 "LessThanCondition": "",
@@ -780,6 +797,7 @@ _global_script_class_icons={
 "WingPowerup": "",
 "conversion_util": "",
 "fps_util": "",
+"image_util": "",
 "input_event_util": "",
 "input_map_util": "",
 "input_settings_util": "",

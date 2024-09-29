@@ -1,8 +1,8 @@
-[gd_scene load_steps=198 format=2]
+[gd_scene load_steps=244 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
-[ext_resource path="res://scenes/menu/level_portal/bg_parallax.gd" type="Script" id=2]
-[ext_resource path="res://scenes/menu/level_portal/level_button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/menu/level_portal/level_grid.gd" type="Script" id=2]
+[ext_resource path="res://scenes/menu/level_portal/stripes.png" type="Texture" id=3]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=4]
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=6]
@@ -19,10 +19,37 @@
 [ext_resource path="res://scenes/menu/level_portal/launch_star.gd" type="Script" id=17]
 [ext_resource path="res://scenes/actors/objects/launch_star/sfx/windup.wav" type="AudioStream" id=18]
 [ext_resource path="res://scenes/actors/objects/launch_star/sfx/launch.wav" type="AudioStream" id=19]
-[ext_resource path="res://scenes/menu/level_portal/stripes.png" type="Texture" id=20]
+[ext_resource path="res://scenes/menu/level_portal/bg_parallax.gd" type="Script" id=20]
 [ext_resource path="res://scenes/menu/level_portal/icons/search.png" type="Texture" id=21]
 [ext_resource path="res://scenes/actors/objects/goomba/goomba.png" type="Texture" id=22]
+[ext_resource path="res://scenes/menu/level_portal/http/http_request.gd" type="Script" id=23]
 [ext_resource path="res://scenes/menu/level_portal/smooth_scroll.gd" type="Script" id=24]
+[ext_resource path="res://scenes/menu/level_portal/pages.gd" type="Script" id=25]
+[ext_resource path="res://scenes/menu/level_portal/http/http_thumbnails.gd" type="Script" id=26]
+[ext_resource path="res://scenes/menu/level_portal/page_button.tscn" type="PackedScene" id=27]
+[ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=28]
+[ext_resource path="res://scenes/actors/objects/shine/frames_outline.tres" type="SpriteFrames" id=29]
+[ext_resource path="res://scenes/menu/level_portal/go_to_page.gd" type="Script" id=30]
+[ext_resource path="res://shaders/outline2.shader" type="Shader" id=31]
+[ext_resource path="res://scenes/menu/level_portal/default_thumb.png" type="Texture" id=32]
+[ext_resource path="res://scenes/menu/level_portal/icons/star_empty.png" type="Texture" id=33]
+[ext_resource path="res://scenes/menu/level_portal/icons/star_filled.png" type="Texture" id=34]
+[ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=35]
+[ext_resource path="res://scenes/actors/objects/spinning_heart/icon.png" type="Texture" id=36]
+[ext_resource path="res://scenes/menu/levels_list/icons/play.png" type="Texture" id=37]
+[ext_resource path="res://assets/misc/icon.png" type="Texture" id=38]
+[ext_resource path="res://scenes/menu/level_portal/icons/ratings.png" type="Texture" id=39]
+[ext_resource path="res://shaders/rounded_corners.gdshader" type="Shader" id=40]
+[ext_resource path="res://scenes/menu/levels_list/icons/shine.png" type="Texture" id=41]
+[ext_resource path="res://scenes/menu/levels_list/icons/star_coin.png" type="Texture" id=42]
+[ext_resource path="res://scenes/menu/levels_list/icons/time.png" type="Texture" id=43]
+[ext_resource path="res://scenes/menu/level_portal/level_panel/description.gd" type="Script" id=44]
+[ext_resource path="res://scenes/menu/level_portal/level_panel.gd" type="Script" id=45]
+[ext_resource path="res://scenes/menu/level_portal/http/http_level_page.gd" type="Script" id=46]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=47]
+[ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=48]
+[ext_resource path="res://scenes/menu/level_portal/margin_pivot.gd" type="Script" id=49]
+[ext_resource path="res://scenes/menu/level_portal/buttons_switcher.gd" type="Script" id=50]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -46,7 +73,7 @@ void fragment() {
 	COLOR = vec4(vec3(color),1.0) + bg_color;
 }"
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=192]
 shader = SubResource( 3 )
 shader_param/bg_color = Color( 0.0156863, 0.0313726, 0.223529, 1 )
 
@@ -60,7 +87,7 @@ void fragment () {
 	COLOR = texture(TEXTURE, vec2(UV.x + TIME * speed * direction, UV.y + TIME * speed * direction));
 }"
 
-[sub_resource type="ShaderMaterial" id=24]
+[sub_resource type="ShaderMaterial" id=193]
 shader = SubResource( 23 )
 shader_param/speed = 0.02
 shader_param/direction = 1.0
@@ -69,7 +96,7 @@ shader_param/direction = 1.0
 offsets = PoolRealArray( 0.25, 0.75, 0.96, 1 )
 colors = PoolColorArray( 0.190667, 0, 0.52, 1, 0.0980392, 0, 0.372549, 1, 0, 0.0823529, 0.239216, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture2D" id=188]
+[sub_resource type="GradientTexture2D" id=194]
 gradient = SubResource( 187 )
 width = 256
 height = 256
@@ -81,7 +108,7 @@ fill_to = Vector2( 0.8, 0.4 )
 offsets = PoolRealArray( 0.487047, 0.818653, 0.96, 1 )
 colors = PoolColorArray( 0, 0, 0, 1, 0, 0.0523277, 0.151999, 0.364592, 0, 0.0823529, 0.239216, 1, 0.533333, 0, 1, 0 )
 
-[sub_resource type="GradientTexture2D" id=192]
+[sub_resource type="GradientTexture2D" id=195]
 gradient = SubResource( 191 )
 width = 256
 height = 256
@@ -89,7 +116,7 @@ fill = 1
 fill_from = Vector2( 1, 1 )
 fill_to = Vector2( 0.8, 0.4 )
 
-[sub_resource type="CanvasItemMaterial" id=174]
+[sub_resource type="CanvasItemMaterial" id=196]
 blend_mode = 1
 
 [sub_resource type="OpenSimplexNoise" id=175]
@@ -98,7 +125,7 @@ period = 14.6
 persistence = 0.446
 lacunarity = 2.91
 
-[sub_resource type="NoiseTexture" id=176]
+[sub_resource type="NoiseTexture" id=197]
 width = 256
 height = 256
 bump_strength = 7.2
@@ -140,14 +167,14 @@ void fragment()
 	COLOR = pixel_color;
 }"
 
-[sub_resource type="ShaderMaterial" id=186]
+[sub_resource type="ShaderMaterial" id=198]
 shader = SubResource( 185 )
 shader_param/Smooth = false
 shader_param/width = 12.0
 shader_param/outline_color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
 shader_param/pixel_size = 2
 
-[sub_resource type="GDScript" id=182]
+[sub_resource type="GDScript" id=199]
 resource_name = "rotate"
 script/source = "extends Sprite
 
@@ -157,14 +184,14 @@ func _process(delta):
 	rotation_degrees += rotate_speed
 "
 
-[sub_resource type="CanvasItemMaterial" id=7]
+[sub_resource type="CanvasItemMaterial" id=200]
 blend_mode = 2
 
 [sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0, 0.829016 )
 colors = PoolColorArray( 0, 0.298039, 1, 0.305882, 0, 0.298039, 1, 0 )
 
-[sub_resource type="GradientTexture2D" id=6]
+[sub_resource type="GradientTexture2D" id=201]
 gradient = SubResource( 5 )
 fill = 1
 fill_from = Vector2( 0.5, 1 )
@@ -177,6 +204,277 @@ fill_to = Vector2( 0.5, 0.3 )
 [sub_resource type="StyleBoxEmpty" id=171]
 
 [sub_resource type="ButtonGroup" id=8]
+
+[sub_resource type="Animation" id=218]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../../Buttons:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../../../LaunchStar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=219]
+resource_name = "transition"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../../Buttons:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../../../LaunchStar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="Gradient" id=211]
+colors = PoolColorArray( 0.0741917, 0.0145, 0.29, 0.92549, 0, 0.196078, 0.45098, 0 )
+
+[sub_resource type="GradientTexture2D" id=212]
+gradient = SubResource( 211 )
+fill = 1
+fill_from = Vector2( 0.5, 1 )
+
+[sub_resource type="DynamicFont" id=206]
+size = 22
+outline_size = 2
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+extra_spacing_char = -1
+font_data = ExtResource( 35 )
+
+[sub_resource type="Shader" id=12]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+uniform sampler2D gradient;
+
+void fragment(){
+	COLOR.a=texture(TEXTURE,UV).a;
+	vec2 my_uv=vec2(UV.y,0.0);
+	COLOR.rgb=COLOR.rgb*texture(gradient,my_uv).rgb;
+}"
+
+[sub_resource type="Gradient" id=207]
+offsets = PoolRealArray( 0.473373, 0.715976 )
+colors = PoolColorArray( 1, 0.992157, 0.894118, 1, 1, 0.670588, 0.286275, 1 )
+
+[sub_resource type="GradientTexture" id=208]
+gradient = SubResource( 207 )
+
+[sub_resource type="ShaderMaterial" id=209]
+shader = SubResource( 12 )
+shader_param/gradient = SubResource( 208 )
+
+[sub_resource type="Gradient" id=215]
+offsets = PoolRealArray( 0.473373, 0.715976 )
+colors = PoolColorArray( 0.65098, 1, 0.698039, 1, 0, 0.694118, 0.352941, 1 )
+
+[sub_resource type="GradientTexture" id=216]
+gradient = SubResource( 215 )
+
+[sub_resource type="ShaderMaterial" id=217]
+shader = SubResource( 12 )
+shader_param/gradient = SubResource( 216 )
+
+[sub_resource type="ShaderMaterial" id=205]
+shader = ExtResource( 31 )
+shader_param/Smooth = true
+shader_param/width = 0.0
+shader_param/outline_color = Color( 1, 1, 1, 1 )
+shader_param/pixel_size = 4
+
+[sub_resource type="ShaderMaterial" id=213]
+shader = ExtResource( 40 )
+shader_param/radius_scale = 1.0
+shader_param/rounded_corner_top_left = true
+shader_param/rounded_corner_top_right = true
+shader_param/rounded_corner_bottom_left = true
+shader_param/rounded_corner_bottom_right = true
+shader_param/width = 1.0
+shader_param/height = 1.0
+
+[sub_resource type="Animation" id=220]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../../Buttons:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../../../LaunchStar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=221]
+resource_name = "transition"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../../Buttons:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../../../LaunchStar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=160]
 resource_name = "launch"
@@ -370,7 +668,7 @@ region = Rect2( 714, 0, 102, 102 )
 atlas = ExtResource( 16 )
 region = Rect2( 816, 0, 102, 102 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=210]
 atlas = ExtResource( 16 )
 region = Rect2( 918, 0, 102, 102 )
 
@@ -432,7 +730,7 @@ region = Rect2( 2346, 0, 102, 102 )
 
 [sub_resource type="SpriteFrames" id=163]
 animations = [ {
-"frames": [ SubResource( 152 ), SubResource( 158 ), SubResource( 159 ), SubResource( 155 ), SubResource( 156 ), SubResource( 157 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 172 ), SubResource( 173 ), SubResource( 25 ), SubResource( 26 ) ],
+"frames": [ SubResource( 152 ), SubResource( 158 ), SubResource( 159 ), SubResource( 155 ), SubResource( 156 ), SubResource( 157 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 210 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 172 ), SubResource( 173 ), SubResource( 25 ), SubResource( 26 ) ],
 "loop": true,
 "name": "default",
 "speed": 10.0
@@ -958,12 +1256,189 @@ animations = [ {
 "speed": 10.0
 } ]
 
+[sub_resource type="GDScript" id=204]
+script/source = "extends Node
+
+signal thumbnail_loaded(level_id)
+
+onready var list_handler: Node = get_parent()
+onready var thread := Thread.new()
+
+# thumbnail queue goes like
+# [url, level_id]
+# so that the script can check if it exists first
+# as well as include the id in the signal
+var thumbnail_queue: Array = []
+var cached_thumbnails: Dictionary = {}
+
+func clear_queue():
+	thumbnail_queue.clear()
+
+func go_through_queue():
+	if thread.is_active():
+		thread.wait_to_finish()
+	thread.start(self, \"queue_thread\")
+
+# Thread must be disposed (or \"joined\"), for portability.
+func _exit_tree():
+	if thread.is_active():
+		thread.wait_to_finish()
+
+
+func queue_thread():
+	var downloader := ThumbnailDownloader.new()
+	var working_folder: String = list_handler.working_folder
+	
+	for thumbnail in thumbnail_queue:
+		var url: String = thumbnail[0]
+		var level_id: String = thumbnail[1]
+		
+		var thumbnail_path: String = saved_levels_util.get_level_thumbnail_path(level_id, working_folder)
+		if not level_id in cached_thumbnails.keys():
+			# let's download it and wait for it to finish before continuing
+			# this is a thread and it only downloads once so it's fine to just wait
+			downloader.download(url, working_folder + \"/thumbnails/\", level_id)
+			thumbnail_path = saved_levels_util.get_level_thumbnail_path(level_id, working_folder)
+		
+		var image: ImageTexture = saved_levels_util.get_image_from_path(thumbnail_path)
+		cached_thumbnails[level_id] = image
+		emit_signal(\"thumbnail_loaded\", level_id)
+"
+
+[sub_resource type="Animation" id=203]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BG:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BG/Parallax4:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LaunchStar:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 640, 32 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("LaunchStar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Buttons:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -128, 0 ) ]
+}
+
+[sub_resource type="Animation" id=202]
+resource_name = "transition"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("BG:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BG/Parallax4:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LaunchStar:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 640, 0 ), Vector2( 640, 32 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("LaunchStar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Buttons:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -128, 0 ) ]
+}
+
 [node name="LevelPortal" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_clip_content = true
 theme = ExtResource( 1 )
 script = ExtResource( 8 )
+music_id = 68
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -977,9 +1452,10 @@ volume_db = -10.0
 
 [node name="Focus" type="Control" parent="."]
 script = ExtResource( 7 )
-default_focus_path = NodePath("../ScrollFG/MarginContainer/VBoxContainer/GridContainer/Level")
+default_focus_path = NodePath("../Buttons/LevelList/URL")
 
 [node name="BG" type="Control" parent="."]
+modulate = Color( 0, 0, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -987,13 +1463,13 @@ anchor_bottom = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-script = ExtResource( 2 )
-follow_path = NodePath("../../ScrollFG/MarginContainer")
+script = ExtResource( 20 )
+follow_path = NodePath("../../Subscreens/LevelList/ScrollContainer/MarginContainer")
 parallax_factor = 0.05
 lerp_speed = 18.0
 
 [node name="Stars" type="ColorRect" parent="BG/BGParallax"]
-material = SubResource( 4 )
+material = SubResource( 192 )
 margin_right = 768.0
 margin_bottom = 1536.0
 mouse_filter = 2
@@ -1004,19 +1480,20 @@ color = Color( 1, 1, 1, 0 )
 [node name="Stripes" type="TextureRect" parent="BG/BGParallax"]
 visible = false
 modulate = Color( 1, 1, 1, 0.0470588 )
-material = SubResource( 24 )
+material = SubResource( 193 )
 margin_right = 40.0
 margin_bottom = 40.0
 rect_scale = Vector2( 0.45, 0.45 )
-texture = ExtResource( 20 )
+texture = ExtResource( 3 )
 stretch_mode = 2
 
 [node name="Parallax4" type="Control" parent="BG"]
+modulate = Color( 0, 0, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-script = ExtResource( 2 )
-follow_path = NodePath("../../ScrollFG/MarginContainer")
+script = ExtResource( 20 )
+follow_path = NodePath("../../Subscreens/LevelList/ScrollContainer/MarginContainer")
 parallax_factor = 0.065
 lerp_speed = 18.0
 
@@ -1025,7 +1502,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 192.0
 margin_bottom = 144.0
-texture = SubResource( 188 )
+texture = SubResource( 194 )
 expand = true
 
 [node name="Planet2" type="TextureRect" parent="BG/Parallax4"]
@@ -1033,25 +1510,25 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 192.0
 margin_bottom = 144.0
-texture = SubResource( 192 )
+texture = SubResource( 195 )
 expand = true
 
 [node name="Parallax1" type="Control" parent="BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-script = ExtResource( 2 )
-follow_path = NodePath("../../ScrollFG/MarginContainer")
+script = ExtResource( 20 )
+follow_path = NodePath("../../Subscreens/LevelList/ScrollContainer/MarginContainer")
 parallax_factor = 0.08
 lerp_speed = 18.0
 
 [node name="Noise" type="TextureRect" parent="BG/Parallax1"]
 modulate = Color( 0.815686, 0.411765, 1, 0.156863 )
-material = SubResource( 174 )
+material = SubResource( 196 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = 336.0
-texture = SubResource( 176 )
+texture = SubResource( 197 )
 expand = true
 
 [node name="Parallax3" type="Control" parent="BG"]
@@ -1060,28 +1537,41 @@ anchor_right = 1.333
 anchor_bottom = 2.0
 rect_scale = Vector2( 0.75, 0.75 )
 mouse_filter = 2
-script = ExtResource( 2 )
-follow_path = NodePath("../../ScrollFG/MarginContainer")
+script = ExtResource( 20 )
+follow_path = NodePath("../../Subscreens/LevelList/ScrollContainer/MarginContainer")
 parallax_factor = 0.15
 lerp_speed = 18.0
 
 [node name="Goomba" type="Sprite" parent="BG/Parallax3"]
-material = SubResource( 186 )
+material = SubResource( 198 )
 position = Vector2( 46.6667, 902.667 )
 texture = ExtResource( 22 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 32, 32 )
-script = SubResource( 182 )
+script = SubResource( 199 )
 
 [node name="BGOverlay" type="TextureRect" parent="BG"]
-material = SubResource( 7 )
+material = SubResource( 200 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-texture = SubResource( 6 )
+texture = SubResource( 201 )
 expand = true
 
-[node name="ScrollFG" type="ScrollContainer" parent="."]
+[node name="Subscreens" type="Control" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 48 )
+
+[node name="LevelList" type="Control" parent="Subscreens"]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Subscreens/LevelList"]
 margin_right = 775.0
 margin_bottom = 432.0
 rect_min_size = Vector2( 0, 432 )
@@ -1090,28 +1580,32 @@ scroll_horizontal_enabled = false
 script = ExtResource( 24 )
 lerp_speed = 18.0
 
-[node name="MarginContainer" type="MarginContainer" parent="ScrollFG"]
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelList/ScrollContainer"]
+modulate = Color( 0, 0, 1, 0 )
 margin_right = 768.0
-margin_bottom = 1032.0
+margin_bottom = 104.0
 rect_min_size = Vector2( 768, 0 )
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 384, 0 )
 custom_constants/margin_right = 148
 custom_constants/margin_top = 32
 custom_constants/margin_left = 148
 custom_constants/margin_bottom = 32
+script = ExtResource( 49 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollFG/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer"]
 margin_left = 148.0
 margin_top = 32.0
 margin_right = 620.0
-margin_bottom = 1000.0
+margin_bottom = 72.0
 
-[node name="Search" type="HBoxContainer" parent="ScrollFG/MarginContainer/VBoxContainer"]
+[node name="Search" type="HBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer"]
 margin_right = 472.0
 margin_bottom = 24.0
 custom_constants/separation = 0
 
-[node name="Query" type="LineEdit" parent="ScrollFG/MarginContainer/VBoxContainer/Search"]
-margin_right = 248.0
+[node name="Query" type="LineEdit" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+margin_right = 295.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 custom_styles/read_only = SubResource( 169 )
@@ -1120,7 +1614,7 @@ custom_styles/normal = SubResource( 171 )
 placeholder_text = "Search for levels..."
 placeholder_alpha = 0.8
 
-[node name="Panel" type="Panel" parent="ScrollFG/MarginContainer/VBoxContainer/Search/Query"]
+[node name="Panel" type="Panel" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Query"]
 modulate = Color( 0, 0, 0, 0.627451 )
 show_behind_parent = true
 anchor_right = 1.0
@@ -1129,9 +1623,9 @@ margin_top = 2.0
 margin_bottom = -2.0
 mouse_filter = 2
 
-[node name="Search" type="Button" parent="ScrollFG/MarginContainer/VBoxContainer/Search"]
-margin_left = 248.0
-margin_right = 272.0
+[node name="Search" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+margin_left = 295.0
+margin_right = 319.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
 custom_fonts/font = ExtResource( 9 )
@@ -1140,7 +1634,7 @@ expand_icon = true
 script = ExtResource( 4 )
 extend_amount = 2
 
-[node name="Icon" type="TextureRect" parent="ScrollFG/MarginContainer/VBoxContainer/Search/Search"]
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Search"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -1154,34 +1648,34 @@ texture = ExtResource( 21 )
 expand = true
 stretch_mode = 6
 
-[node name="Padding" type="Control" parent="ScrollFG/MarginContainer/VBoxContainer/Search"]
-margin_left = 272.0
-margin_right = 288.0
+[node name="Padding" type="Control" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+margin_left = 319.0
+margin_right = 335.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 16, 0 )
 
-[node name="Default" type="Button" parent="ScrollFG/MarginContainer/VBoxContainer/Search"]
-margin_left = 288.0
-margin_right = 346.0
+[node name="Default" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+margin_left = 335.0
+margin_right = 402.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 9 )
 toggle_mode = true
 pressed = true
 group = SubResource( 8 )
-text = "Default"
+text = "All Levels"
 script = ExtResource( 4 )
 extend_amount = 2
 
-[node name="Divider" type="ColorRect" parent="ScrollFG/MarginContainer/VBoxContainer/Search"]
-margin_left = 346.0
-margin_right = 347.0
+[node name="Divider" type="ColorRect" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+margin_left = 402.0
+margin_right = 403.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 1, 0 )
 color = Color( 0, 0.0431373, 0.313726, 1 )
 
-[node name="Featured" type="Button" parent="ScrollFG/MarginContainer/VBoxContainer/Search"]
-margin_left = 347.0
-margin_right = 415.0
+[node name="Featured" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+margin_left = 403.0
+margin_right = 471.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 9 )
 toggle_mode = true
@@ -1190,14 +1684,15 @@ text = "Featured"
 script = ExtResource( 4 )
 extend_amount = 2
 
-[node name="Divider2" type="ColorRect" parent="ScrollFG/MarginContainer/VBoxContainer/Search"]
-margin_left = 415.0
-margin_right = 416.0
+[node name="Divider2" type="ColorRect" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+margin_left = 471.0
+margin_right = 472.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 1, 0 )
 color = Color( 0, 0.0431373, 0.313726, 1 )
 
-[node name="Random" type="Button" parent="ScrollFG/MarginContainer/VBoxContainer/Search"]
+[node name="Random" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+visible = false
 margin_left = 416.0
 margin_right = 472.0
 margin_bottom = 24.0
@@ -1208,114 +1703,779 @@ text = "Random"
 script = ExtResource( 4 )
 extend_amount = 2
 
-[node name="GridContainer" type="GridContainer" parent="ScrollFG/MarginContainer/VBoxContainer"]
+[node name="LevelGrid" type="GridContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 40.0
 margin_right = 472.0
-margin_bottom = 968.0
+margin_bottom = 40.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 24
 columns = 2
+script = ExtResource( 2 )
 
-[node name="Level" parent="ScrollFG/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
-rect_pivot_offset = Vector2( 0, 0 )
-
-[node name="Level2" parent="ScrollFG/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 248.0
+[node name="Pages" type="HBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_top = 56.0
 margin_right = 472.0
-rect_pivot_offset = Vector2( 0, 0 )
-lerp_speed = 8.0
+margin_bottom = 80.0
+script = ExtResource( 25 )
 
-[node name="Level3" parent="ScrollFG/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_top = 136.0
-margin_bottom = 248.0
-rect_pivot_offset = Vector2( 0, 0 )
-lerp_speed = 8.0
+[node name="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages" instance=ExtResource( 27 )]
 
-[node name="Level4" parent="ScrollFG/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 248.0
-margin_top = 136.0
+[node name="Button2" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 28.0
+margin_right = 52.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "2"
+
+[node name="Button3" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 56.0
+margin_right = 80.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "3"
+
+[node name="Button4" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 84.0
+margin_right = 108.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "4"
+
+[node name="Button5" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 112.0
+margin_right = 136.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "5"
+
+[node name="Button6" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 140.0
+margin_right = 164.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "6"
+
+[node name="Button7" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 168.0
+margin_right = 192.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "7"
+
+[node name="Button8" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 196.0
+margin_right = 220.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "8"
+
+[node name="Button9" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 224.0
+margin_right = 248.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "9"
+
+[node name="Button10" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 252.0
+margin_right = 276.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "10"
+
+[node name="Button11" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 280.0
+margin_right = 304.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+disabled = true
+text = "..."
+
+[node name="Button12" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 308.0
+margin_right = 337.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "999"
+
+[node name="Padding" type="Control" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 341.0
+margin_right = 349.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 8, 0 )
+
+[node name="GoToPage" type="HBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 353.0
 margin_right = 472.0
-margin_bottom = 248.0
-rect_pivot_offset = Vector2( 0, 0 )
-lerp_speed = 8.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+script = ExtResource( 30 )
 
-[node name="Level5" parent="ScrollFG/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_top = 272.0
-margin_bottom = 384.0
-rect_pivot_offset = Vector2( 0, 0 )
-lerp_speed = 8.0
+[node name="Query" type="LineEdit" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage"]
+margin_right = 95.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+custom_styles/read_only = SubResource( 169 )
+custom_styles/focus = SubResource( 170 )
+custom_styles/normal = SubResource( 171 )
+placeholder_text = "Go to page..."
+placeholder_alpha = 0.8
 
-[node name="Level6" parent="ScrollFG/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 248.0
-margin_top = 272.0
+[node name="Panel" type="Panel" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage/Query"]
+modulate = Color( 0, 0, 0, 0.627451 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_bottom = -2.0
+mouse_filter = 2
+
+[node name="Search" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage"]
+margin_left = 95.0
+margin_right = 119.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 0 )
+custom_fonts/font = ExtResource( 9 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 4 )
+extend_amount = 2
+
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage/Search"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+mouse_filter = 2
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="Loading" type="HBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_top = 56.0
 margin_right = 472.0
-margin_bottom = 384.0
-rect_pivot_offset = Vector2( 0, 0 )
-lerp_speed = 8.0
+margin_bottom = 80.0
+alignment = 1
 
-[node name="Level7" parent="ScrollFG/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_top = 408.0
-margin_bottom = 520.0
-rect_pivot_offset = Vector2( 0, 0 )
-lerp_speed = 8.0
+[node name="Label" type="Label" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading"]
+margin_left = 178.0
+margin_right = 290.0
+margin_bottom = 24.0
+text = "Please wait..."
 
-[node name="Level8" parent="ScrollFG/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 248.0
-margin_top = 408.0
+[node name="Sprite" type="Control" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading"]
+margin_left = 294.0
+margin_right = 294.0
+margin_bottom = 24.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading/Sprite"]
+frames = ExtResource( 28 )
+playing = true
+centered = false
+offset = Vector2( 0, -8 )
+
+[node name="Outline" type="AnimatedSprite" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading/Sprite/AnimatedSprite"]
+frames = ExtResource( 29 )
+playing = true
+centered = false
+offset = Vector2( 0, -8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Subscreens/LevelList"]
+root_node = NodePath("../ScrollContainer")
+anims/RESET = SubResource( 218 )
+anims/transition = SubResource( 219 )
+
+[node name="LevelPage" type="Control" parent="Subscreens"]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Subscreens/LevelPage"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 7.0
+rect_min_size = Vector2( 0, 432 )
+follow_focus = true
+scroll_horizontal_enabled = false
+script = ExtResource( 24 )
+lerp_speed = 18.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelPage/ScrollContainer"]
+modulate = Color( 0, 0, 1, 0 )
+margin_right = 768.0
+margin_bottom = 136.0
+rect_min_size = Vector2( 768, 0 )
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 384, 0 )
+custom_constants/margin_right = 148
+custom_constants/margin_top = 32
+custom_constants/margin_left = 148
+custom_constants/margin_bottom = 32
+script = ExtResource( 49 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer"]
+margin_left = 148.0
+margin_top = 32.0
+margin_right = 620.0
+margin_bottom = 104.0
+
+[node name="Buttons" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+visible = false
 margin_right = 472.0
-margin_bottom = 520.0
-rect_pivot_offset = Vector2( 0, 0 )
-lerp_speed = 8.0
+margin_bottom = 32.0
+alignment = 1
 
-[node name="Level9" parent="ScrollFG/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_top = 544.0
-margin_bottom = 656.0
-rect_pivot_offset = Vector2( 0, 0 )
-lerp_speed = 8.0
+[node name="Button" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Buttons"]
+margin_left = 47.0
+margin_right = 98.0
+margin_bottom = 32.0
+text = "Play!"
 
-[node name="Level10" parent="ScrollFG/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 248.0
-margin_top = 544.0
+[node name="Button2" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Buttons"]
+margin_left = 102.0
+margin_right = 196.0
+margin_bottom = 32.0
+text = "Download"
+
+[node name="Button4" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Buttons"]
+margin_left = 200.0
+margin_right = 338.0
+margin_bottom = 32.0
+text = "Open LSS Page"
+
+[node name="Button3" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Buttons"]
+margin_left = 342.0
+margin_right = 425.0
+margin_bottom = 32.0
+text = "Favorite"
+
+[node name="LevelPanel" type="PanelContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+self_modulate = Color( 0, 0.231373, 0.478431, 0.627451 )
+show_behind_parent = true
+margin_top = 48.0
 margin_right = 472.0
-margin_bottom = 656.0
-rect_pivot_offset = Vector2( 0, 0 )
-lerp_speed = 8.0
+margin_bottom = 282.0
+mouse_filter = 2
+theme_type_variation = "Panel"
+script = ExtResource( 45 )
 
-[node name="Level11" parent="ScrollFG/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_top = 680.0
-margin_bottom = 792.0
-rect_pivot_offset = Vector2( 0, 0 )
-lerp_speed = 8.0
+[node name="Gradient" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 468.0
+margin_bottom = 230.0
+mouse_filter = 2
+texture = SubResource( 212 )
+expand = true
 
-[node name="Level12" parent="ScrollFG/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 248.0
-margin_top = 680.0
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 468.0
+margin_bottom = 230.0
+custom_constants/margin_top = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer"]
+margin_left = 12.0
+margin_top = 6.0
+margin_right = 452.0
+margin_bottom = 214.0
+custom_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer"]
+margin_right = 440.0
+margin_bottom = 24.0
+
+[node name="Clipper" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 308.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Clipper"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="LevelTitle" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Clipper/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 30.0
+margin_right = 278.0
+margin_bottom = 24.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 206 )
+text = "SM63 Tall Tall Mountain +"
+valign = 1
+
+[node name="Shadow" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Clipper/HBoxContainer/LevelTitle"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 3.0
+margin_bottom = 3.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 206 )
+text = "SM63 Tall Tall Mountain +"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Stars" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 312.0
+margin_right = 440.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 128, 24 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Stars"]
+anchor_right = 0.5
+anchor_bottom = 0.5
+rect_scale = Vector2( 2, 2 )
+alignment = 2
+
+[node name="StarOutline" type="TextureProgress" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Stars/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color( 0.803922, 0.513726, 0.513726, 1 )
+material = SubResource( 209 )
+margin_right = 64.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 64, 12 )
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+texture_under = ExtResource( 33 )
+nine_patch_stretch = true
+
+[node name="Stars" type="TextureProgress" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Stars/HBoxContainer/StarOutline"]
+unique_name_in_owner = true
+material = SubResource( 209 )
+margin_right = 64.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 64, 0 )
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+value = 4.5
+texture_progress = ExtResource( 34 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="GreenStarOutline" type="TextureProgress" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Stars/HBoxContainer"]
+unique_name_in_owner = true
+self_modulate = Color( 0, 0.576471, 0.588235, 1 )
+material = SubResource( 217 )
+margin_right = 64.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 64, 0 )
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+texture_under = ExtResource( 33 )
+nine_patch_stretch = true
+
+[node name="GreenStars" type="TextureProgress" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Stars/HBoxContainer/GreenStarOutline"]
+unique_name_in_owner = true
+material = SubResource( 217 )
+margin_right = 64.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 64, 0 )
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+value = 4.5
+texture_progress = ExtResource( 34 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="LevelInfo" type="PanelContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer"]
+self_modulate = Color( 0, 0, 0, 0.25098 )
+margin_top = 32.0
+margin_right = 440.0
+margin_bottom = 184.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 436.0
+margin_bottom = 148.0
+custom_constants/separation = 8
+
+[node name="Thumbnail" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer"]
+unique_name_in_owner = true
+material = SubResource( 205 )
+margin_right = 256.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 256, 144 )
+texture = ExtResource( 32 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer"]
+margin_left = 264.0
+margin_right = 432.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+custom_constants/separation = 4
+
+[node name="PaddingTop" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer"]
+margin_right = 168.0
+
+[node name="Collectibles" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer"]
+margin_top = 4.0
+margin_right = 168.0
+margin_bottom = 24.0
+alignment = 1
+
+[node name="ShinesIcon" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Collectibles"]
+margin_left = 50.0
+margin_right = 70.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Collectibles/ShinesIcon"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 41 )
+expand = true
+stretch_mode = 6
+
+[node name="ShinesLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Collectibles"]
+unique_name_in_owner = true
+margin_left = 74.0
+margin_top = 2.0
+margin_right = 82.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 9 )
+text = "4"
+align = 1
+valign = 1
+
+[node name="CoinsIcon" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Collectibles"]
+margin_left = 86.0
+margin_right = 106.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Collectibles/CoinsIcon"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 42 )
+expand = true
+stretch_mode = 6
+
+[node name="CoinsLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Collectibles"]
+unique_name_in_owner = true
+margin_left = 110.0
+margin_top = 2.0
+margin_right = 118.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 9 )
+text = "4"
+align = 1
+valign = 1
+
+[node name="Author" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer"]
+margin_top = 28.0
+margin_right = 168.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 0, 24 )
+rect_clip_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Author"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="AuthorIcon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Author/HBoxContainer"]
+unique_name_in_owner = true
+material = SubResource( 213 )
+margin_left = 48.0
+margin_right = 72.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 0 )
+texture = ExtResource( 38 )
+expand = true
+
+[node name="AuthorName" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Author/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 76.0
+margin_top = 4.0
+margin_right = 120.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 9 )
+text = "hop193"
+align = 1
+valign = 1
+
+[node name="Padding" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer"]
+margin_top = 56.0
+margin_right = 168.0
+margin_bottom = 60.0
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer"]
+margin_top = 64.0
+margin_right = 168.0
+margin_bottom = 140.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 76.0
+size_flags_horizontal = 3
+custom_constants/separation = 4
+
+[node name="Plays" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 80.0
+margin_bottom = 16.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Icon" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Plays"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Plays/Icon"]
+margin_left = 1.5
+margin_top = 1.0
+margin_right = 14.5
+margin_bottom = 14.0
+mouse_filter = 2
+texture = ExtResource( 37 )
+expand = true
+stretch_mode = 6
+
+[node name="PlaysLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Plays"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_right = 80.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 9 )
+text = "18"
+valign = 1
+clip_text = true
+
+[node name="Favorites" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 20.0
+margin_right = 80.0
+margin_bottom = 36.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Icon2" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Favorites"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Favorites/Icon2"]
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 24.0
+margin_bottom = 24.0
+mouse_filter = 2
+texture = ExtResource( 36 )
+expand = true
+stretch_mode = 6
+
+[node name="FavoritesLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Favorites"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_right = 80.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 9 )
+text = "5"
+valign = 1
+clip_text = true
+
+[node name="Rates" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 80.0
+margin_bottom = 56.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Icon2" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Rates"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Rates/Icon2"]
+margin_left = 1.0
+margin_right = 15.0
+margin_bottom = 14.0
+mouse_filter = 2
+texture = ExtResource( 39 )
+expand = true
+stretch_mode = 6
+
+[node name="RatesLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Rates"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_right = 80.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 9 )
+text = "5"
+valign = 1
+clip_text = true
+
+[node name="Time" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 60.0
+margin_right = 80.0
+margin_bottom = 76.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Icon2" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Time"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Time/Icon2"]
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 18.0
+margin_bottom = 18.0
+mouse_filter = 2
+texture = ExtResource( 43 )
+expand = true
+stretch_mode = 6
+
+[node name="TimeLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Time"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_right = 80.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 9 )
+text = "24/07/29"
+valign = 1
+clip_text = true
+
+[node name="Control" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 84.0
+margin_right = 164.0
+margin_bottom = 76.0
+size_flags_horizontal = 3
+
+[node name="Tags" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/Control"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+alignment = 2
+
+[node name="Padding" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 168.0
+margin_right = 168.0
+margin_bottom = 76.0
+
+[node name="PaddingBottom" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer"]
+margin_top = 144.0
+margin_right = 168.0
+margin_bottom = 144.0
+
+[node name="Description" type="PanelContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+self_modulate = Color( 0, 0, 0, 0.25098 )
+margin_top = 192.0
+margin_right = 440.0
+margin_bottom = 208.0
+size_flags_horizontal = 3
+script = ExtResource( 44 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 436.0
+margin_bottom = 12.0
+custom_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description/VBoxContainer"]
+margin_right = 432.0
+margin_bottom = 8.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description/VBoxContainer/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 428.0
+margin_bottom = 4.0
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Button" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description/VBoxContainer"]
+visible = false
+margin_top = 8.0
+margin_right = 432.0
+margin_bottom = 28.0
+theme_type_variation = "PageButton"
+text = "Read more..."
+script = ExtResource( 47 )
+
+[node name="Tween" type="Tween" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description"]
+
+[node name="Comments" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 298.0
 margin_right = 472.0
-margin_bottom = 792.0
-rect_pivot_offset = Vector2( 0, 0 )
-lerp_speed = 8.0
+margin_bottom = 298.0
 
-[node name="Level13" parent="ScrollFG/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_top = 816.0
-margin_bottom = 928.0
-rect_pivot_offset = Vector2( 0, 0 )
-lerp_speed = 8.0
-
-[node name="Level14" parent="ScrollFG/MarginContainer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 248.0
-margin_top = 816.0
-margin_right = 472.0
-margin_bottom = 928.0
-rect_pivot_offset = Vector2( 0, 0 )
-lerp_speed = 8.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Subscreens/LevelPage"]
+root_node = NodePath("../ScrollContainer")
+anims/RESET = SubResource( 220 )
+anims/transition = SubResource( 221 )
 
 [node name="Buttons" type="MarginContainer" parent="."]
+modulate = Color( 0, 0, 1, 0 )
 anchor_bottom = 1.0
+margin_left = -128.0
+margin_right = -12.0
 rect_min_size = Vector2( 96, 0 )
 rect_rotation = -2.0
 mouse_filter = 2
+script = ExtResource( 50 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Buttons"]
+[node name="LevelList" type="VBoxContainer" parent="Buttons"]
 margin_left = 12.0
 margin_top = 12.0
 margin_right = 104.0
@@ -1324,25 +2484,25 @@ mouse_filter = 2
 custom_constants/separation = 4
 alignment = 2
 
-[node name="URL" type="Button" parent="Buttons/VBoxContainer"]
+[node name="Login" type="Button" parent="Buttons/LevelList"]
 margin_top = 328.0
 margin_right = 92.0
 margin_bottom = 352.0
-custom_fonts/font = ExtResource( 9 )
-text = "Go to URL"
-script = ExtResource( 10 )
-sink_amount = 6
-
-[node name="Login" type="Button" parent="Buttons/VBoxContainer"]
-margin_top = 356.0
-margin_right = 92.0
-margin_bottom = 380.0
 custom_fonts/font = ExtResource( 9 )
 text = "Login"
 script = ExtResource( 10 )
 sink_amount = 6
 
-[node name="Back" type="Button" parent="Buttons/VBoxContainer"]
+[node name="URL" type="Button" parent="Buttons/LevelList"]
+margin_top = 356.0
+margin_right = 92.0
+margin_bottom = 380.0
+custom_fonts/font = ExtResource( 9 )
+text = "Go to URL"
+script = ExtResource( 10 )
+sink_amount = 6
+
+[node name="Back" type="Button" parent="Buttons/LevelList"]
 margin_top = 384.0
 margin_right = 92.0
 margin_bottom = 408.0
@@ -1352,83 +2512,138 @@ text = "Back to Menu"
 script = ExtResource( 10 )
 sink_amount = 6
 
-[node name="Sprite" type="Control" parent="."]
+[node name="LevelPage" type="VBoxContainer" parent="Buttons"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 104.0
+margin_bottom = 420.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 2
+
+[node name="Login" type="Button" parent="Buttons/LevelPage"]
+margin_top = 328.0
+margin_right = 92.0
+margin_bottom = 352.0
+custom_fonts/font = ExtResource( 9 )
+text = "Login"
+script = ExtResource( 10 )
+sink_amount = 6
+
+[node name="URL" type="Button" parent="Buttons/LevelPage"]
+margin_top = 356.0
+margin_right = 92.0
+margin_bottom = 380.0
+custom_fonts/font = ExtResource( 9 )
+text = "Go to URL"
+script = ExtResource( 10 )
+sink_amount = 6
+
+[node name="Back" type="Button" parent="Buttons/LevelPage"]
+margin_top = 384.0
+margin_right = 92.0
+margin_bottom = 408.0
+theme_type_variation = "Red"
+custom_fonts/font = ExtResource( 9 )
+text = "Back"
+script = ExtResource( 10 )
+sink_amount = 6
+
+[node name="LaunchStar" type="Control" parent="."]
+modulate = Color( 0, 0, 1, 0 )
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_left = -128.0
-margin_top = -216.0
-margin_bottom = 216.0
+margin_top = -184.0
+margin_bottom = 248.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
-
-[node name="LaunchStar" type="CanvasLayer" parent="Sprite"]
 script = ExtResource( 17 )
 
-[node name="Button" type="Button" parent="Sprite/LaunchStar"]
+[node name="Button" type="Button" parent="LaunchStar"]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_left = 656.0
+margin_left = 16.0
 margin_top = 335.0
-margin_right = 736.0
+margin_right = 96.0
 margin_bottom = 415.0
 script = ExtResource( 4 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sprite/LaunchStar/Button"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LaunchStar/Button"]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite/LaunchStar/Button"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LaunchStar/Button"]
 anims/launch = SubResource( 160 )
 anims/windup = SubResource( 161 )
 
-[node name="StarContainer" type="Node2D" parent="Sprite/LaunchStar/Button"]
+[node name="StarContainer" type="Node2D" parent="LaunchStar/Button"]
 position = Vector2( 40, 30 )
 
-[node name="InnerStar" type="Node2D" parent="Sprite/LaunchStar/Button/StarContainer"]
+[node name="InnerStar" type="Node2D" parent="LaunchStar/Button/StarContainer"]
 script = SubResource( 162 )
 
-[node name="InnerTop" type="AnimatedSprite" parent="Sprite/LaunchStar/Button/StarContainer/InnerStar"]
-z_index = -3
-z_as_relative = false
-frames = SubResource( 163 )
-frame = 15
-playing = true
-
-[node name="InnerBottom" type="AnimatedSprite" parent="Sprite/LaunchStar/Button/StarContainer/InnerStar"]
-z_index = 1
-z_as_relative = false
-frames = SubResource( 164 )
-frame = 15
-playing = true
-
-[node name="OuterStar" type="Node2D" parent="Sprite/LaunchStar/Button/StarContainer"]
-script = SubResource( 162 )
-
-[node name="OuterTop" type="AnimatedSprite" parent="Sprite/LaunchStar/Button/StarContainer/OuterStar"]
-z_index = -2
-z_as_relative = false
-frames = SubResource( 165 )
-frame = 15
-playing = true
-
-[node name="OuterTopShadow" type="AnimatedSprite" parent="Sprite/LaunchStar/Button/StarContainer/OuterStar"]
-z_index = -4
-z_as_relative = false
-frames = SubResource( 166 )
-frame = 15
-playing = true
-
-[node name="OuterBottom" type="AnimatedSprite" parent="Sprite/LaunchStar/Button/StarContainer/OuterStar"]
+[node name="InnerTop" type="AnimatedSprite" parent="LaunchStar/Button/StarContainer/InnerStar"]
 z_index = 2
-z_as_relative = false
+frames = SubResource( 163 )
+playing = true
+
+[node name="InnerBottom" type="AnimatedSprite" parent="LaunchStar/Button/StarContainer/InnerStar"]
+z_index = 6
+frames = SubResource( 164 )
+playing = true
+
+[node name="OuterStar" type="Node2D" parent="LaunchStar/Button/StarContainer"]
+script = SubResource( 162 )
+
+[node name="OuterTop" type="AnimatedSprite" parent="LaunchStar/Button/StarContainer/OuterStar"]
+z_index = 3
+frames = SubResource( 165 )
+playing = true
+
+[node name="OuterTopShadow" type="AnimatedSprite" parent="LaunchStar/Button/StarContainer/OuterStar"]
+z_index = 1
+frames = SubResource( 166 )
+playing = true
+
+[node name="OuterBottom" type="AnimatedSprite" parent="LaunchStar/Button/StarContainer/OuterStar"]
+z_index = 7
 frames = SubResource( 167 )
-frame = 15
 playing = true
 
-[node name="OuterBottomShadow" type="AnimatedSprite" parent="Sprite/LaunchStar/Button/StarContainer/OuterStar"]
-z_index = -4
-z_as_relative = false
+[node name="OuterBottomShadow" type="AnimatedSprite" parent="LaunchStar/Button/StarContainer/OuterStar"]
+z_index = 1
 frames = SubResource( 168 )
-frame = 15
 playing = true
 
-[connection signal="pressed" from="Sprite/LaunchStar/Button" to="Sprite/LaunchStar" method="pressed"]
+[node name="ThumbnailCache" type="Node" parent="."]
+script = SubResource( 204 )
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 23 )
+
+[node name="HTTPLevelPage" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 46 )
+
+[node name="HTTPThumbnails" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 26 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 203 )
+anims/transition = SubResource( 202 )
+
+[connection signal="screen_opened" from="." to="Subscreens" method="screen_change" binds= [ "LevelList" ]]
+[connection signal="screen_opened" from="." to="HTTPRequest" method="load_page"]
+[connection signal="screen_changed" from="Subscreens" to="Buttons" method="screen_changed"]
+[connection signal="resized" from="Subscreens/LevelList/ScrollContainer/MarginContainer" to="Subscreens/LevelList/ScrollContainer/MarginContainer" method="resized"]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage" method="go"]
+[connection signal="resized" from="Subscreens/LevelPage/ScrollContainer/MarginContainer" to="Subscreens/LevelPage/ScrollContainer/MarginContainer" method="resized"]
+[connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description/VBoxContainer/Button" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description" method="toggle_expand"]
+[connection signal="pressed" from="Buttons/LevelList/Back" to="." method="transition" binds= [ "MainMenu" ]]
+[connection signal="pressed" from="Buttons/LevelList/Back" to="Subscreens/LevelList" method="transition" binds= [ "" ]]
+[connection signal="pressed" from="Buttons/LevelPage/Back" to="Subscreens/LevelPage" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="LaunchStar/Button" to="LaunchStar" method="pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="HTTPRequest" method="request_completed"]
+[connection signal="request_completed" from="HTTPLevelPage" to="HTTPLevelPage" method="request_completed"]

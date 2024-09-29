@@ -15,14 +15,18 @@ func _ready() -> void:
 	connect("pressed", self, "on_pressed")
 
 func on_mouse_entered() -> void:
+	if disabled: return
 	grab_focus()
 	hover_sound.play()
 
 func on_mouse_exited() -> void:
+	if disabled: return
 	release_focus()
 
 func on_focus_entered() -> void:
+	if disabled: return
 	hover_sound.play()
 
 func on_pressed() -> void:
+	if disabled: return
 	click_sound.play()

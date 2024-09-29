@@ -2,9 +2,6 @@ class_name ThumbnailDownloader
 extends Reference
 
 
-const PNG_HEADER: PoolByteArray = PoolByteArray([
-	0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A
-])
 const TEMP_SUFFIX: String = ".temp"
 
 
@@ -104,10 +101,7 @@ func req(arguments):
 		
 		# determine filetype by reading the first 8 bytes (the header)
 		var bytes = file.get_buffer(8)
-		var is_png_header = true
-		for i in range(8):
-			if bytes[i] != PNG_HEADER[i]:
-				is_png_header = false
+		var is_png_header = image_util.is_png(bytes)
 		
 		file.close()
 		

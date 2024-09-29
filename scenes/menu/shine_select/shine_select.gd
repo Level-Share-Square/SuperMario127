@@ -10,8 +10,8 @@ onready var transition_audio: AudioStreamPlayer = $Sounds/TransitionAudio
 onready var letsa_go_sfx: Node = $Sounds/LetsaGo
 onready var letsa_go_sfx_2: Node = $Sounds/LetsaGo2
 
-onready var level_title: Label = get_node("%LevelTitle")
-onready var level_title_backing: Label = get_node("%LevelTitleBacking")
+onready var level_title: Label = $"%LevelTitle"
+onready var level_title_backing: Label = $"%LevelTitleBacking"
 
 ## level data
 onready var level_info: LevelInfo = Singleton.CurrentLevelData.level_info

@@ -122,10 +122,10 @@ const TIMER_ICON := preload("res://scenes/actors/objects/p_switch/icon.png")
 func set_switch_timer(new_time: float):
 	switch_timer = new_time
 	
-	var timer_manager: Control = get_node("%TimerManager")
+	var timer_manager: Control = $"%TimerManager")
 	timer_manager.add_radial_timer("PSwitch", self, "switch_timer", TIMER_ICON)
 
 
 func get_timer_manager() -> Control:
-	var timer_manager: Control = get_node("%TimerManager")
+	var timer_manager: Control = $"%TimerManager")
 	return timer_manager

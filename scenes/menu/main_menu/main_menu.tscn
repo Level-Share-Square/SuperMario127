@@ -573,6 +573,7 @@ offset = Vector2( 2, 3 )
 anims/RESET = SubResource( 3 )
 anims/transition = SubResource( 4 )
 
+[connection signal="pressed" from="MarginContainer/VBoxContainer/LSS" to="." method="transition" binds= [ "LevelPortal" ]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/SavedLevels" to="." method="transition" binds= [ "LevelsList" ]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Exit/Countdown" to="ButtonFunctions" method="exit_game"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Options" to="." method="transition" binds= [ "Options" ]]

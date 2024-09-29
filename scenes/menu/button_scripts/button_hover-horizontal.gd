@@ -8,8 +8,12 @@ var original_x: float
 var focused: bool
 var force_hover: bool
 
+
 func focus_entered(): focused = true
 func focus_exited(): focused = false
+func visibility_changed():
+	rect_position.x = original_x + (sink_amount * direction)
+
 
 func _ready():
 	original_x = rect_position.x
@@ -18,6 +22,9 @@ func _ready():
 	connect("focus_entered", self, "focus_entered")
 	#warning-ignore:return_value_discarded
 	connect("focus_exited", self, "focus_exited")
+	#warning-ignore:return_value_discarded
+	connect("visibility_changed", self, "visibility_changed")
+
 
 var last_x: float
 func _process(delta):
@@ -31,3 +38,4 @@ func _process(delta):
 		rect_position.x = lerp(rect_position.x, original_x + (sink_amount * direction), delta * lerp_speed)
 	
 	last_x = rect_position.x
+

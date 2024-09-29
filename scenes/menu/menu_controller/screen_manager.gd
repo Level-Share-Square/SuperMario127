@@ -3,7 +3,7 @@ extends Control
 signal screen_changed
 
 export var default_screen: NodePath
-onready var current_screen: Control = get_node(default_screen)
+onready var current_screen: Control = get_node_or_null(default_screen)
 
 
 func _ready():
@@ -18,7 +18,10 @@ func screen_change(new_screen_name: String):
 	if is_instance_valid(current_screen):
 		current_screen.visible = false
 	
-	if new_screen_name == "": return
+	if new_screen_name == "": 
+		current_screen = null
+		emit_signal("screen_changed")
+		return
 	
 	var new_screen = get_node(new_screen_name)
 	current_screen = new_screen
@@ -33,5 +36,6 @@ func screen_change(new_screen_name: String):
 	emit_signal("screen_changed")
 
 
-func transition(extra_arg_0):
-	pass # Replace with function body.
+func get_screen_name() -> String:
+	if not is_instance_valid(current_screen): return "None"
+	return current_screen.name

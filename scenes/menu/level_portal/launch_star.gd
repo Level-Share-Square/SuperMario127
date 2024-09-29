@@ -1,7 +1,9 @@
-extends CanvasLayer
+extends Control
+
 
 onready var button = $Button
 onready var animation_player = $Button/AnimationPlayer
+
 
 func pressed():
 	button.disabled = true
