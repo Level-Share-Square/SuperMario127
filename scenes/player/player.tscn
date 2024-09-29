@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=26]
 [ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=27]
 [ext_resource path="res://scenes/player/ui_new/shine_get.gd" type="Script" id=28]
+[ext_resource path="res://scenes/player/ui_new/collectibles/purple_starbits.gd" type="Script" id=29]
 [ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=39]
 [ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
@@ -348,6 +349,116 @@ colors = PoolColorArray( 1, 1, 1, 0.376471, 1, 1, 1, 0.501961, 1, 0, 0.74902, 0,
 [sub_resource type="GradientTexture2D" id=201]
 gradient = SubResource( 200 )
 fill_to = Vector2( 0, 1 )
+
+[sub_resource type="Animation" id=218]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/Counter:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 51, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/Counter:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer/Counter:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=219]
+resource_name = "collect"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/Counter:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25 ),
+"transitions": PoolRealArray( 3.605, 1 ),
+"update": 0,
+"values": [ Vector2( 51, -3 ), Vector2( 51, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/Counter:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.368627, 0.545098, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer/Counter:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1.1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=220]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=221]
+resource_name = "fadeout"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.729412, 0.317647, 0.580392, 1 ) ]
+}
 
 [sub_resource type="Animation" id=212]
 length = 0.001
@@ -864,7 +975,6 @@ custom_fonts/font = ExtResource( 15 )
 text = "000"
 
 [node name="RedCoins" type="Control" parent="UI/HUD/Control/Collectibles"]
-visible = false
 margin_top = 36.0
 margin_right = 40.0
 margin_bottom = 60.0
@@ -1038,25 +1148,24 @@ custom_fonts/font = ExtResource( 15 )
 text = "0/0"
 
 [node name="PurpleStarbits" type="Control" parent="UI/HUD/Control/Collectibles"]
-visible = false
-margin_top = 36.0
+margin_top = 64.0
 margin_right = 40.0
-margin_bottom = 60.0
+margin_bottom = 88.0
 rect_min_size = Vector2( 0, 24 )
-script = ExtResource( 23 )
+script = ExtResource( 29 )
 
 [node name="PolygonSwatch" parent="UI/HUD/Control/Collectibles/PurpleStarbits" instance=ExtResource( 14 )]
-modulate = Color( 0.556863, 0.121569, 0.760784, 0.752941 )
+modulate = Color( 0.737255, 0.247059, 0.384314, 0.752941 )
 position = Vector2( 0, 12 )
 rotation = 0.1309
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/HUD/Control/Collectibles/PurpleStarbits"]
-anims/RESET = SubResource( 216 )
-anims/collect = SubResource( 217 )
+anims/RESET = SubResource( 218 )
+anims/collect = SubResource( 219 )
 
 [node name="Fadeout" type="AnimationPlayer" parent="UI/HUD/Control/Collectibles/PurpleStarbits"]
-anims/RESET = SubResource( 218 )
-anims/fadeout = SubResource( 219 )
+anims/RESET = SubResource( 220 )
+anims/fadeout = SubResource( 221 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/Control/Collectibles/PurpleStarbits"]
 margin_top = 6.0
@@ -1066,12 +1175,12 @@ rect_rotation = -7.0
 custom_constants/separation = 6
 
 [node name="Padding" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer"]
-margin_bottom = 24.0
+margin_bottom = 51.0
 
 [node name="Icon" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer"]
 margin_left = 6.0
 margin_right = 26.0
-margin_bottom = 24.0
+margin_bottom = 51.0
 rect_min_size = Vector2( 20, 0 )
 
 [node name="RedCoin" type="Control" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon"]
@@ -1184,7 +1293,6 @@ script = SubResource( 189 )
 color = Color( 1, 0.368627, 0.545098, 1 )
 
 [node name="Shading" type="TextureRect" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer/Icon/RedCoin"]
-visible = false
 material = SubResource( 193 )
 margin_left = 2.12261
 margin_top = 2.20415
@@ -1198,24 +1306,25 @@ expand = true
 [node name="X" type="Label" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer"]
 margin_left = 32.0
 margin_right = 45.0
-margin_bottom = 24.0
-custom_colors/font_outline_modulate = Color( 0.27451, 0.0588235, 0.376471, 0.65098 )
+margin_bottom = 24.0001
+custom_colors/font_outline_modulate = Color( 0.439216, 0.0941176, 0.247059, 0.65098 )
 custom_fonts/font = ExtResource( 15 )
 text = "x"
 
 [node name="Counter" type="Label" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer"]
 margin_left = 51.0
-margin_right = 136.0
-margin_bottom = 24.0
+margin_right = 134.0
+margin_bottom = 51.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0.27451, 0.0588235, 0.376471, 0.65098 )
+custom_colors/font_outline_modulate = Color( 0.439216, 0.0941176, 0.247059, 0.65098 )
 custom_fonts/font = ExtResource( 15 )
-text = "000/100"
+text = "000/100
+"
 
 [node name="Padding2" type="Control" parent="UI/HUD/Control/Collectibles"]
-margin_top = 36.0
+margin_top = 92.0
 margin_right = 40.0
-margin_bottom = 40.0
+margin_bottom = 96.0
 rect_min_size = Vector2( 0, 4 )
 
 [node name="ShineShards" type="Control" parent="UI/HUD/Control/Collectibles"]

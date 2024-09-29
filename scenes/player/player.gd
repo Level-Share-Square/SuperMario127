@@ -38,7 +38,7 @@ func _physics_process(delta):
 
 func _ready():
 	sound_timer = wrapf(switch_timer, 0, 1.1)
-	vignette.visible = false
+#	vignette.visible = false
 	
 	Singleton.CurrentLevelData.enemies_instanced = 0
 	Singleton.CurrentLevelData.level_data.vars.reset_counters()
