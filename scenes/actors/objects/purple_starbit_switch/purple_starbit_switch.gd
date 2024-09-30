@@ -53,7 +53,7 @@ func _physics_process(delta):
 				if boost_timer <= 0:
 					boost_timer = 0
 					get_tree().call_group("purple_starbits", "turn_on")
-					var timer_node = timer_manager.add_timer("PurpleStarbits", pressed_time, true)
+					var timer_node = timer_manager.add_set_timer("PurpleStarbits", pressed_time, true)
 					timer_node.connect("time_over", self, "timer_ended")
 					if !was_ground_pound:
 						character.velocity.y = -325

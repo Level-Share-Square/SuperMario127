@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/actors/objects/rex/rex.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/rex/rex.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/actors/objects/goomba/poof.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/goomba/poof.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/actors/objects/rex/body.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 10, 5 )
@@ -326,6 +327,7 @@ top_point = Vector2( 0, -15 )
 [node name="Rex" type="KinematicBody2D" parent="."]
 collision_layer = 4
 collision_mask = 85
+script = ExtResource( 7 )
 
 [node name="Sprite" type="AnimatedSprite" parent="Rex"]
 frames = ExtResource( 1 )

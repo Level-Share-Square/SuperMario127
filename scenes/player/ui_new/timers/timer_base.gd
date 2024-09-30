@@ -5,9 +5,14 @@ signal time_over
 
 onready var tween := $Tween
 const FADE_TIME: float = 0.5
+const SOUND_TYPES := {0: "none", 1: "switch", 2: "death"}
+
+onready var audio_player := $Sound
+onready var audio_player_secondary := $SoundSecondary
 
 export var is_counting: bool = true
 export var time: float = 0.0
+export var sound: String = "none"
 
 
 func _ready():

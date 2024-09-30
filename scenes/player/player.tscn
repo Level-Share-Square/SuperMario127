@@ -975,6 +975,7 @@ custom_fonts/font = ExtResource( 15 )
 text = "000"
 
 [node name="RedCoins" type="Control" parent="UI/HUD/Control/Collectibles"]
+visible = false
 margin_top = 36.0
 margin_right = 40.0
 margin_bottom = 60.0
@@ -1148,9 +1149,10 @@ custom_fonts/font = ExtResource( 15 )
 text = "0/0"
 
 [node name="PurpleStarbits" type="Control" parent="UI/HUD/Control/Collectibles"]
-margin_top = 64.0
+visible = false
+margin_top = 36.0
 margin_right = 40.0
-margin_bottom = 88.0
+margin_bottom = 60.0
 rect_min_size = Vector2( 0, 24 )
 script = ExtResource( 29 )
 
@@ -1305,8 +1307,9 @@ expand = true
 
 [node name="X" type="Label" parent="UI/HUD/Control/Collectibles/PurpleStarbits/HBoxContainer"]
 margin_left = 32.0
+margin_top = 13.0
 margin_right = 45.0
-margin_bottom = 24.0001
+margin_bottom = 37.0
 custom_colors/font_outline_modulate = Color( 0.439216, 0.0941176, 0.247059, 0.65098 )
 custom_fonts/font = ExtResource( 15 )
 text = "x"
@@ -1322,9 +1325,9 @@ text = "000/100
 "
 
 [node name="Padding2" type="Control" parent="UI/HUD/Control/Collectibles"]
-margin_top = 92.0
+margin_top = 36.0
 margin_right = 40.0
-margin_bottom = 96.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 0, 4 )
 
 [node name="ShineShards" type="Control" parent="UI/HUD/Control/Collectibles"]
