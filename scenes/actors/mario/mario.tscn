@@ -1516,7 +1516,6 @@ fallback_water_pos_right_luigi = Vector2( -19, -2 )
 
 [node name="RocketNozzle" type="Node" parent="Nozzles"]
 script = ExtResource( 45 )
-display_stamina = false
 frames = ExtResource( 44 )
 frames_luigi = ExtResource( 43 )
 fallback_water_pos_left = Vector2( -5, -2 )
@@ -1526,7 +1525,6 @@ fallback_water_pos_right_luigi = Vector2( -19, -2 )
 
 [node name="TurboNozzle" type="Node" parent="Nozzles"]
 script = ExtResource( 46 )
-display_stamina = null
 frames = ExtResource( 48 )
 frames_luigi = ExtResource( 47 )
 fallback_water_pos_left = Vector2( 16, 0 )

@@ -171,7 +171,6 @@ script = ExtResource( 4 )
 
 [node name="Sprite" parent="." index="0"]
 frames = SubResource( 11 )
-frame = 4
 
 [node name="Poof" type="Particles2D" parent="Sprite" index="0"]
 material = SubResource( 29 )
