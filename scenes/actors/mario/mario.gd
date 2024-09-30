@@ -96,6 +96,7 @@ export var initial_position := Vector2(0, 0)
 export var velocity := Vector2(0, 0)
 var last_velocity := Vector2(0, 0)
 var last_position := Vector2(0, 0)
+var in_wind := false
 
 
 export var gravity_scale := 1.0
@@ -711,7 +712,10 @@ func _physics_process(delta: float) -> void:
 		disable_movement = false
 		disable_turning = false
 		disable_animation = false
-		disable_friction = false
+		if in_wind:
+			disable_friction = true
+		else:
+			disable_friction = false
 	
 	# Movement
 	move_direction = 0

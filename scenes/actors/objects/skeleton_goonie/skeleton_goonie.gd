@@ -35,7 +35,8 @@ var bomb_delete_timer: = 0.0
 var bomb_damage_timer: = 0.0
 
 var bomb_velocity: = Vector2.ZERO
-var wingless_velocity: = Vector2.ZERO
+var velocity: = Vector2.ZERO
+#this is the velocity without wings btw (named like this so it works with wind)
 var wingless_snap = Vector2(0, 16)
 
 var init_bomb: = false
@@ -266,18 +267,18 @@ func goonie_physics_process(delta: float):
 			position.x += 2 * wingless_dir
 		
 		if (wingless_body.is_on_floor()):
-			wingless_velocity.y = 0
+			velocity.y = 0
 			wingless_snap = Vector2(0, 12)
 		else:
-			wingless_velocity.y += gravity * gravity_scale
+			velocity.y += gravity * gravity_scale
 			wingless_snap = Vector2.ZERO
 		
 		wall_check_A.cast_to = Vector2(16 * wingless_dir, 0)
 		wall_check_B.cast_to = wall_check_A.cast_to
 		sprite.flip_h = (wingless_dir > 0)
 		sprite.global_position = wingless_body.global_position
-		wingless_velocity.x = wingless_spd * wingless_dir
-		wingless_velocity = wingless_body.move_and_slide_with_snap(wingless_velocity, wingless_snap, Vector2.UP, true, 4, deg2rad(46))
+		velocity.x = wingless_spd * wingless_dir
+		velocity = wingless_body.move_and_slide_with_snap(velocity, wingless_snap, Vector2.UP, true, 4, deg2rad(46))
 	
 	if (dropped_bomb and is_instance_valid(bomb_body)):
 		if (not bomb_dead):
