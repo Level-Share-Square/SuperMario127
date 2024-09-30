@@ -33,6 +33,7 @@ func _physics_process(delta):
 	if !auto_move: return
 	if focus_on != null:
 		position = position.linear_interpolate(focus_on.global_position, fps_util.PHYSICS_DELTA * 3)
+		reset_physics_interpolation()
 		bg.parallax_node.scroll_base_scale.y = zoom.y
 		#zoom = zoom.linear_interpolate(Vector2(focus_zoom, focus_zoom), fps_util.PHYSICS_DELTA * 3)
 		
@@ -52,6 +53,7 @@ func _physics_process(delta):
 			size = shape.shape.extents
 			last_position = global_position
 			global_position = character_node.global_position + character_vel
+			reset_physics_interpolation()
 			for stopper in area.get_overlapping_areas():
 #				if global_position.y < stopper.top_bound.y + size.length().y * 1.2 or global_position.y > stopper.bottom_bound.y + size.length().y * 1.2 or global_position.x < stopper.left_bound.x + size.length().x * 1.2 or global_position.x > stopper.right_bound.x + size.length().x * 1.2:
 				# this calculates if the camera is too far away from a horizontal or vertical edge and takes resized bounds into account
@@ -68,8 +70,10 @@ func _physics_process(delta):
 						
 						if last_position.x < stopper.global_position.x and global_position.x > last_position.x:
 							global_position.x = stopper.left_bound.x - size.x + 1
+							reset_physics_interpolation()
 						elif last_position.x > stopper.global_position.x and global_position.x < last_position.x:
 							global_position.x = stopper.right_bound.x + size.x - 1
+							reset_physics_interpolation()
 						else:
 							pass
 					else:
@@ -79,12 +83,14 @@ func _physics_process(delta):
 						# top bound of stopper
 						if last_position.y < stopper.global_position.y and global_position.y > last_position.y:
 							global_position.y = stopper.top_bound.y - size.y + 1
+							reset_physics_interpolation()
 						# bottom bound of stopper
 						elif last_position.y > stopper.global_position.y and global_position.y < last_position.y:
 							#print("botttom")
 							#print(stopper.top_bound.y)
 							#print(stopper.bottom_bound.y)
 							global_position.y = stopper.bottom_bound.y + size.y - 1
+							reset_physics_interpolation()
 						else:
 							pass
 					
@@ -92,6 +98,7 @@ func _physics_process(delta):
 					print("ESCAPED")
 			if Singleton.PlayerSettings.player2_character == character_node.player_id:
 						area.global_position = global_position
+						area.reset_physics_interpolation()
 			
 			
 			
@@ -130,8 +137,10 @@ func load_in(_level_data : LevelData, level_area : LevelArea):
 	
 	if focus_on != null:
 		position = focus_on.global_position
+		reset_physics_interpolation()
 	elif character_node != null:
 		position = character_node.global_position
+		reset_physics_interpolation()
 		character_node.camera = self
 	if Singleton.PlayerSettings.number_of_players == 2:
 		base_size.x /= 2

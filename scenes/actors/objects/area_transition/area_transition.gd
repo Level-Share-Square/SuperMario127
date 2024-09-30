@@ -237,9 +237,10 @@ func exit_with_helper(character : Character):
 	character.state = helper.state
 	character.facing_direction = helper.facing_direction
 	character.camera.global_position = helper.find_camera_position(vertical, character.global_position, character.camera.base_size, parts * 32)
+	character.camera.reset_physics_interpolation()
 	character.camera.last_position = character.camera.position
-	
 	character.position = global_position + helper.find_exit_offset(vertical, parts * 32)
+	character.reset_physics_interpolation()
 	var timer = Timer.new()
 	timer.connect("timeout", character, "toggle_movement", [true])
 	timer.connect("timeout", self, "set_camera", [character])
@@ -259,6 +260,7 @@ func reset_sprite(character : Character): #This is here in case Mario came from 
 	character.sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	character.sprite.scale = Vector2(1.0, 1.0)
 	character.sprite.position = Vector2.ZERO
+	character.sprite.reset_physics_interpolation()
 
 func set_camera(character: Character):
 	character.camera.auto_move = true

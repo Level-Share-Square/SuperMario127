@@ -56,5 +56,5 @@ func _on_hit():
 
 func _on_curve_tween(value):
 	sprite.position = value
-
+	sprite.reset_physics_interpolation()
 

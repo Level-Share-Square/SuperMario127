@@ -153,6 +153,7 @@ func physics_process_holding(delta:float):
 		mario.state._stop(delta)
 		return
 	mario.position = lerp(mario.position, position, 0.1)
+	mario.reset_physics_interpolation()
 	mario.sprite.rotation = lerp_angle(mario.sprite.rotation, pathfollow.rotation + 1.571, 0.07)
 	if mario.inputs[4][0]:
 		set_state(2)
@@ -164,6 +165,7 @@ func physics_process_windup(delta:float):
 		mario.set_state_by_name("LaunchStarState", delta)
 		mario.connect("state_changed", self, "cancel_launch")	
 	mario.position = innerstar.global_position
+	mario.reset_physics_interpolation()
 	mario.sprite.look_at(position + pathfollow.position)
 	mario.sprite.rotation_degrees += 90
 		
@@ -184,6 +186,7 @@ func physics_process_launch(delta:float):
 	#todo: fix exit velocity
 	if pathfollow.offset >= path.curve.get_baked_length(): 
 		mario.position = mario.position.move_toward(position + pathfollow.position, speed)
+		mario.reset_physics_interpolation()
 		if mario.position.distance_to(position + pathfollow.position) <= 10:
 			mario.velocity = Vector2(0, -speed).rotated(mario.sprite.rotation) * 60
 			mario.facing_direction = sign(mario.velocity.x)
@@ -193,6 +196,7 @@ func physics_process_launch(delta:float):
 	else:
 		pathfollow.offset += speed
 		mario.position = lerp(mario.position, position + pathfollow.position, clamp(0.008 * speed, 0, 1))
+		mario.reset_physics_interpolation()
 	mario.last_position = mario.position
 func cancel_launch(new, old):
 	set_state(0)

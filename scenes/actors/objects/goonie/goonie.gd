@@ -32,6 +32,7 @@ func set_position(new_position):
 	
 	#then move self
 	position = new_position
+	reset_physics_interpolation()
 
 func _ready():
 	goonie_ready()

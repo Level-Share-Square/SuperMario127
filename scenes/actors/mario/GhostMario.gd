@@ -84,6 +84,7 @@ func _physics_process(delta):
 			animation = ANIM_IDS[GhostArrays.ghost_anim[GhostArrays.frame_counter]]
 			rotation_degrees = GhostArrays.ghost_rotation[GhostArrays.frame_counter]
 			position = GhostArrays.ghost_pos[GhostArrays.frame_counter]
+			reset_physics_interpolation()
 			ghost_area = GhostArrays.ghost_area_array[GhostArrays.frame_counter]
 	if ghost_area == Singleton.CurrentLevelData.area:
 		show()

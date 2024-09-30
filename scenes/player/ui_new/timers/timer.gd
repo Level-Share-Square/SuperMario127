@@ -78,7 +78,7 @@ func _physics_process(delta):
 				
 		if kill_on_end:
 			var mod_color_time = wrapf(time, 0, 1)
-			if time <= 10:
+			if time <= 10 and time > 0:
 				#this is really hacky but it works and I'll take it working, a signal would probably be better here
 				if !tween.is_active() and timer_display.rect_scale != Vector2(1.35, 1.35):
 					tween.interpolate_property(
@@ -86,7 +86,9 @@ func _physics_process(delta):
 						"rect_scale",
 						Vector2(1, 1),
 						Vector2(1.35, 1.35),
-						0.2)
+						0.2, 
+						tween.TRANS_BOUNCE
+						)
 					tween.start()
 				timer_display.modulate.r = ((cos(4*PI*mod_color_time)))+2
 				timer_display.modulate.g = ((cos(4*PI*mod_color_time-PI))/4)+.75

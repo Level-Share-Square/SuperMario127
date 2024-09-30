@@ -49,7 +49,7 @@ func _physics_process(delta):
 	else:
 		sprite.position = lerp(sprite.position, Vector2(0, 48), delta * 8)
 		sprite.scale = lerp(sprite.scale, Vector2(0, 0), delta * 8)
-
+	sprite.reset_physics_interpolation()
 func _process(_delta):
 	if color == Color(1, 0, 0):
 		sprite.self_modulate = Color(1, 1, 1)

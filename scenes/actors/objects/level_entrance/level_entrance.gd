@@ -37,6 +37,7 @@ func _ready():
 				
 			if transition_data.size() == 0:
 				character.position = position
+				character.reset_physics_interpolation()
 			else:
 				var found_obj = false
 				var obj
@@ -60,11 +61,13 @@ func _ready():
 						_:
 							push_error("Remote teleport unsuccessful! %s has an invalid object type!" % transition_data[1])
 							character.position = position
+							character.reset_physics_interpolation()
 							Singleton.CurrentLevelData.level_data.vars.transition_data = []
 							pass
 					
 				else:
 					character.position = position
+					character.reset_physics_interpolation()
 					character.toggle_movement(true)
 				_cleanup()
 
@@ -74,13 +77,16 @@ func exit_teleport(obj : Array):
 	if transition_data[2] == true: #Remember, true = remote, false = local
 		if obj[1].teleportation_mode != true:
 			character.position = position
+			character.reset_physics_interpolation()
 			character.toggle_movement(true)
 			_cleanup()
 			return
 		character.position = obj[1].position
+		character.reset_physics_interpolation()
 		character.sprite.modulate = Color(1.0, 1.0, 1.0, 0.0)
 		if obj[1].object_type == "pipe":
 			character.position = obj[1].position + Vector2(0, obj[1].get_bottom_distance())
+			character.reset_physics_interpolation()
 		if obj[1].object_type == "area_transition":
 			obj[1].is_idle = false
 			if transition_character_data.size() >= 7 and obj[1].stops_camera:	
