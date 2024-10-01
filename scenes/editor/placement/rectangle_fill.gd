@@ -34,7 +34,7 @@ func place_tiles():
 	var fill_size := Vector2(
 		max(select_start.x - select_end.x, select_end.x - select_start.x),
 		max(select_start.y - select_end.y, select_end.y - select_start.y))
-	var fill := Rect2(fill_pos, fill_size)
+	var fill := Rect2(fill_pos, fill_size+(((mouse_tile_pos * TILE_SIZE) - initial_pos).sign()+Vector2(1, 1))/2)
 	
 	for y_offset in fill.size.y:
 		for x_offset in fill.size.x:
@@ -66,7 +66,7 @@ func selected_update():
 	
 	
 	if drag.visible:
-		var drag_size: Vector2 = (mouse_tile_pos * TILE_SIZE) - initial_pos
+		var drag_size: Vector2 = (mouse_tile_pos * TILE_SIZE) - initial_pos + ((((mouse_tile_pos * TILE_SIZE) - initial_pos).sign()+Vector2(1, 1))/2 * Vector2(32, 32))
 		
 		drag.rect_size = drag_size.abs()
 		drag.rect_scale = drag_size.sign()

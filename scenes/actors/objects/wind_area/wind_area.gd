@@ -15,8 +15,6 @@ var triggerable := false
 var triggered := true
 var wind_angle_vector : Vector2
 
-var max_velocity : Vector2
-
 func _set_properties():
 	savable_properties = ["size", "wind_power", "color", "triggerable"]
 	editable_properties = ["size", "wind_power", "color", "triggerable"]
@@ -46,17 +44,20 @@ func _physics_process(delta):
 			particles.emitting = true
 			for body in area.get_overlapping_bodies():
 				if enabled and body.name.begins_with("Character") and !body.dead and body.controllable:
+					if wind_angle_vector.x > 0.05 or wind_angle_vector.x < -0.05:
+						body.in_wind = true
 					body.velocity = apply_velocity(body.velocity, delta)
 					#For some reason mario moves slowly towards the wind generator when on the floor and not moving
 					#so we check if he's moving
-					if !body.inputs[0][0] and !body.inputs[1][0]:
-						#and if he's on the floor
-						if body.is_on_floor():
-							#and if he is we run a modified physics calculation
-							if wind_angle_vector.x > 0 and body.velocity.x <= (wind_power*wind_angle_vector.x)*3:
-								body.velocity.x += (wind_power*wind_angle_vector.x)*60*delta
-							elif wind_angle_vector.x < 0 and body.velocity.x >= (wind_power*wind_angle_vector.x)*3:
-								body.velocity.x += (wind_power*wind_angle_vector.x)*60*delta
+#					if !body.inputs[0][0] and !body.inputs[1][0]:
+#						#and if he's on the floor
+#						if body.is_on_floor():
+#							#and if he is we run a modified physics calculation
+#
+#							if wind_angle_vector.x > 0 and body.velocity.x <= (wind_power*wind_angle_vector.x)*3:
+#								body.velocity.x += (wind_power*wind_angle_vector.x)*60*delta
+#							elif wind_angle_vector.x < 0 and body.velocity.x >= (wind_power*wind_angle_vector.x)*3:
+#								body.velocity.x += (wind_power*wind_angle_vector.x)*60*delta
 					
 					if !body.is_on_floor() and body.state is FallState:
 						var char_sprite = body.sprite
@@ -112,13 +113,15 @@ func update_property(key, value):
 	update_size()
 
 func entered(body):
-	body.velocity += Vector2(wind_power, wind_power)*wind_angle_vector
+	if enabled and body.name.begins_with("Character") and !body.dead and body.controllable:
+		body.velocity += Vector2(wind_power, wind_power)*wind_angle_vector
 	if triggerable:
 		particles.preprocess = 0
 		triggered = true
 
 func exited(body):
 	if enabled and body.name.begins_with("Character") and !body.dead and body.controllable:
+		body.in_wind = false
 		if wind_angle_vector.x != 0:
 			body.velocity.x = body.velocity.x*.95
 		if wind_angle_vector.y != 0:
