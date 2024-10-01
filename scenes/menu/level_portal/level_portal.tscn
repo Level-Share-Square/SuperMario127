@@ -1,4 +1,4 @@
-[gd_scene load_steps=244 format=2]
+[gd_scene load_steps=249 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/level_portal/level_grid.gd" type="Script" id=2]
@@ -25,7 +25,7 @@
 [ext_resource path="res://scenes/menu/level_portal/http/http_request.gd" type="Script" id=23]
 [ext_resource path="res://scenes/menu/level_portal/smooth_scroll.gd" type="Script" id=24]
 [ext_resource path="res://scenes/menu/level_portal/pages.gd" type="Script" id=25]
-[ext_resource path="res://scenes/menu/level_portal/http/http_thumbnails.gd" type="Script" id=26]
+[ext_resource path="res://scenes/menu/level_portal/http/http_images.gd" type="Script" id=26]
 [ext_resource path="res://scenes/menu/level_portal/page_button.tscn" type="PackedScene" id=27]
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=28]
 [ext_resource path="res://scenes/actors/objects/shine/frames_outline.tres" type="SpriteFrames" id=29]
@@ -50,6 +50,10 @@
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=48]
 [ext_resource path="res://scenes/menu/level_portal/margin_pivot.gd" type="Script" id=49]
 [ext_resource path="res://scenes/menu/level_portal/buttons_switcher.gd" type="Script" id=50]
+[ext_resource path="res://scenes/menu/level_portal/http/http_random_level.gd" type="Script" id=51]
+[ext_resource path="res://scenes/menu/level_portal/search.gd" type="Script" id=52]
+[ext_resource path="res://scenes/menu/level_portal/level_panel/comments/comments.gd" type="Script" id=53]
+[ext_resource path="res://scenes/menu/level_portal/http/http_comments.gd" type="Script" id=54]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -243,18 +247,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Color( 0, 0, 1, 0 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("../../../LaunchStar:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 1, 0 ) ]
-}
 
 [sub_resource type="Animation" id=219]
 resource_name = "transition"
@@ -290,18 +282,6 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("../../../LaunchStar:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
@@ -411,18 +391,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Color( 0, 0, 1, 0 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("../../../LaunchStar:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 1, 0 ) ]
-}
 
 [sub_resource type="Animation" id=221]
 resource_name = "transition"
@@ -463,17 +431,44 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("../../../LaunchStar:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
+
+[sub_resource type="Animation" id=222]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("StarContainer/InnerStar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StarContainer/InnerStar:speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StarContainer/OuterStar:speed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
 }
 
 [sub_resource type="Animation" id=160]
@@ -514,27 +509,13 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 0, 30, 1 ]
 }
-tracks/3/type = "method"
-tracks/3/path = NodePath(".")
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "set_camera"
-} ]
-}
-tracks/4/type = "audio"
-tracks/4/path = NodePath("AudioStreamPlayer")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -582,27 +563,13 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 1, 70, 0 ]
 }
-tracks/3/type = "method"
-tracks/3/path = NodePath(".")
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 1.2 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ 3 ],
-"method": "set_state"
-} ]
-}
-tracks/4/type = "audio"
-tracks/4/path = NodePath("AudioStreamPlayer")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -1367,6 +1334,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Vector2( -128, 0 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Buttons:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=202]
 resource_name = "transition"
@@ -1431,6 +1410,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( -128, 0 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Buttons:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
 
 [node name="LevelPortal" type="Control"]
 anchor_right = 1.0
@@ -1452,7 +1443,6 @@ volume_db = -10.0
 
 [node name="Focus" type="Control" parent="."]
 script = ExtResource( 7 )
-default_focus_path = NodePath("../Buttons/LevelList/URL")
 
 [node name="BG" type="Control" parent="."]
 modulate = Color( 0, 0, 1, 0 )
@@ -1566,7 +1556,6 @@ script = ExtResource( 48 )
 
 [node name="LevelList" type="Control" parent="Subscreens"]
 unique_name_in_owner = true
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 8 )
@@ -1600,9 +1589,11 @@ margin_right = 620.0
 margin_bottom = 72.0
 
 [node name="Search" type="HBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_right = 472.0
 margin_bottom = 24.0
 custom_constants/separation = 0
+script = ExtResource( 52 )
 
 [node name="Query" type="LineEdit" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
 margin_right = 295.0
@@ -1719,6 +1710,7 @@ visible = false
 margin_top = 56.0
 margin_right = 472.0
 margin_bottom = 80.0
+alignment = 1
 script = ExtResource( 25 )
 
 [node name="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages" instance=ExtResource( 27 )]
@@ -1926,7 +1918,7 @@ lerp_speed = 18.0
 [node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelPage/ScrollContainer"]
 modulate = Color( 0, 0, 1, 0 )
 margin_right = 768.0
-margin_bottom = 136.0
+margin_bottom = 88.0
 rect_min_size = Vector2( 768, 0 )
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 384, 0 )
@@ -1940,7 +1932,7 @@ script = ExtResource( 49 )
 margin_left = 148.0
 margin_top = 32.0
 margin_right = 620.0
-margin_bottom = 104.0
+margin_bottom = 56.0
 
 [node name="Buttons" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
 visible = false
@@ -1975,10 +1967,8 @@ text = "Favorite"
 [node name="LevelPanel" type="PanelContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 self_modulate = Color( 0, 0.231373, 0.478431, 0.627451 )
-show_behind_parent = true
-margin_top = 48.0
 margin_right = 472.0
-margin_bottom = 282.0
+margin_bottom = 234.0
 mouse_filter = 2
 theme_type_variation = "Panel"
 script = ExtResource( 45 )
@@ -2010,28 +2000,37 @@ custom_constants/separation = 8
 margin_right = 440.0
 margin_bottom = 24.0
 
-[node name="Clipper" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Title" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 308.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Clipper"]
+[node name="Clipper" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Title"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -4.0
+margin_bottom = 4.0
+rect_clip_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Title/Clipper"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
+size_flags_vertical = 0
 alignment = 1
 
-[node name="LevelTitle" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Clipper/HBoxContainer"]
+[node name="LevelTitle" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Title/Clipper/HBoxContainer"]
 unique_name_in_owner = true
 margin_left = 30.0
+margin_top = 4.0
 margin_right = 278.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 206 )
 text = "SM63 Tall Tall Mountain +"
 valign = 1
 
-[node name="Shadow" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Clipper/HBoxContainer/LevelTitle"]
+[node name="Shadow" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Title/Clipper/HBoxContainer/LevelTitle"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -2456,9 +2455,11 @@ script = ExtResource( 47 )
 [node name="Tween" type="Tween" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description"]
 
 [node name="Comments" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 298.0
 margin_right = 472.0
-margin_bottom = 298.0
+margin_bottom = 552.0
+script = ExtResource( 53 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Subscreens/LevelPage"]
 root_node = NodePath("../ScrollContainer")
@@ -2467,9 +2468,9 @@ anims/transition = SubResource( 221 )
 
 [node name="Buttons" type="MarginContainer" parent="."]
 modulate = Color( 0, 0, 1, 0 )
-anchor_bottom = 1.0
 margin_left = -128.0
 margin_right = -12.0
+margin_bottom = 432.0
 rect_min_size = Vector2( 96, 0 )
 rect_rotation = -2.0
 mouse_filter = 2
@@ -2485,20 +2486,11 @@ custom_constants/separation = 4
 alignment = 2
 
 [node name="Login" type="Button" parent="Buttons/LevelList"]
-margin_top = 328.0
-margin_right = 92.0
-margin_bottom = 352.0
-custom_fonts/font = ExtResource( 9 )
-text = "Login"
-script = ExtResource( 10 )
-sink_amount = 6
-
-[node name="URL" type="Button" parent="Buttons/LevelList"]
 margin_top = 356.0
 margin_right = 92.0
 margin_bottom = 380.0
 custom_fonts/font = ExtResource( 9 )
-text = "Go to URL"
+text = "Login"
 script = ExtResource( 10 )
 sink_amount = 6
 
@@ -2522,20 +2514,11 @@ custom_constants/separation = 4
 alignment = 2
 
 [node name="Login" type="Button" parent="Buttons/LevelPage"]
-margin_top = 328.0
-margin_right = 92.0
-margin_bottom = 352.0
-custom_fonts/font = ExtResource( 9 )
-text = "Login"
-script = ExtResource( 10 )
-sink_amount = 6
-
-[node name="URL" type="Button" parent="Buttons/LevelPage"]
 margin_top = 356.0
 margin_right = 92.0
 margin_bottom = 380.0
 custom_fonts/font = ExtResource( 9 )
-text = "Go to URL"
+text = "Login"
 script = ExtResource( 10 )
 sink_amount = 6
 
@@ -2573,6 +2556,7 @@ script = ExtResource( 4 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LaunchStar/Button"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LaunchStar/Button"]
+anims/RESET = SubResource( 222 )
 anims/launch = SubResource( 160 )
 anims/windup = SubResource( 161 )
 
@@ -2626,7 +2610,15 @@ script = ExtResource( 23 )
 unique_name_in_owner = true
 script = ExtResource( 46 )
 
-[node name="HTTPThumbnails" type="HTTPRequest" parent="."]
+[node name="HTTPComments" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 54 )
+
+[node name="HTTPRandomLevel" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 51 )
+
+[node name="HTTPImages" type="HTTPRequest" parent="."]
 unique_name_in_owner = true
 script = ExtResource( 26 )
 
@@ -2638,6 +2630,11 @@ anims/transition = SubResource( 202 )
 [connection signal="screen_opened" from="." to="HTTPRequest" method="load_page"]
 [connection signal="screen_changed" from="Subscreens" to="Buttons" method="screen_changed"]
 [connection signal="resized" from="Subscreens/LevelList/ScrollContainer/MarginContainer" to="Subscreens/LevelList/ScrollContainer/MarginContainer" method="resized"]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search" method="search"]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Default" method="set_pressed_no_signal" binds= [ true ]]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Featured" method="set_pressed_no_signal" binds= [ false ]]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Default" to="HTTPRequest" method="change_page_type" binds= [ false ]]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Featured" to="HTTPRequest" method="change_page_type" binds= [ true ]]
 [connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage" method="go"]
 [connection signal="resized" from="Subscreens/LevelPage/ScrollContainer/MarginContainer" to="Subscreens/LevelPage/ScrollContainer/MarginContainer" method="resized"]
 [connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description/VBoxContainer/Button" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description" method="toggle_expand"]
@@ -2647,3 +2644,6 @@ anims/transition = SubResource( 202 )
 [connection signal="pressed" from="LaunchStar/Button" to="LaunchStar" method="pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="HTTPRequest" method="request_completed"]
 [connection signal="request_completed" from="HTTPLevelPage" to="HTTPLevelPage" method="request_completed"]
+[connection signal="request_completed" from="HTTPComments" to="HTTPComments" method="request_completed"]
+[connection signal="request_completed" from="HTTPRandomLevel" to="HTTPRandomLevel" method="request_completed"]
+[connection signal="image_loaded" from="HTTPImages" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="image_loaded"]

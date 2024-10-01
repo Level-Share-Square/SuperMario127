@@ -55,7 +55,8 @@ func set_style():
 		thumbnail.texture = texture
 
 
-func thumbnail_loaded(level_id: String, _texture: ImageTexture):
-	if level_id != level_info.level_id: return
+func thumbnail_loaded(url: String, _texture: ImageTexture):
+	if _texture == null: return
+	if url != level_info.thumbnail_url: return
 	texture = _texture
 	thumbnail.texture = texture

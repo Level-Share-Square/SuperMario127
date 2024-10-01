@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=7]
 [ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=8]
+[ext_resource path="res://assets/fonts/coolfont.tres" type="DynamicFont" id=9]
 
 [sub_resource type="Gradient" id=5]
 colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 0.627451 )
@@ -227,11 +228,11 @@ texture = SubResource( 6 )
 expand = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 anchor_bottom = 1.0
 margin_top = 432.0
 margin_right = 768.0
-margin_bottom = 6688.0
+margin_bottom = 7120.0
+custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center]Super Mario 127
 Development Team

@@ -282,37 +282,10 @@ valign = 1
 autowrap = true
 clip_text = true
 
-[node name="Comments" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
+[node name="Plays" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
 margin_top = 27.0
 margin_right = 84.0
 margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/Comments"]
-margin_right = 13.0
-margin_bottom = 13.0
-rect_min_size = Vector2( 13, 0 )
-mouse_filter = 2
-texture = ExtResource( 3 )
-expand = true
-stretch_mode = 6
-
-[node name="CommentsLabel" type="Label" parent="MarginContainer/Info/Misc/VBoxContainer/Comments"]
-unique_name_in_owner = true
-margin_left = 17.0
-margin_right = 84.0
-margin_bottom = 13.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0.839216, 0.882353, 1, 1 )
-custom_fonts/font = SubResource( 11 )
-text = "2"
-valign = 1
-clip_text = true
-
-[node name="Plays" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
-margin_top = 42.0
-margin_right = 84.0
-margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="Icon" type="Control" parent="MarginContainer/Info/Misc/VBoxContainer/Plays"]
@@ -343,9 +316,9 @@ valign = 1
 clip_text = true
 
 [node name="Favorites" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
-margin_top = 57.0
+margin_top = 42.0
 margin_right = 84.0
-margin_bottom = 70.0
+margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="Icon2" type="Control" parent="MarginContainer/Info/Misc/VBoxContainer/Favorites"]
@@ -372,6 +345,33 @@ size_flags_horizontal = 3
 custom_colors/font_color = Color( 0.839216, 0.882353, 1, 1 )
 custom_fonts/font = SubResource( 11 )
 text = "5"
+valign = 1
+clip_text = true
+
+[node name="Comments" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
+margin_top = 57.0
+margin_right = 84.0
+margin_bottom = 70.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/Comments"]
+margin_right = 13.0
+margin_bottom = 13.0
+rect_min_size = Vector2( 13, 0 )
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="CommentsLabel" type="Label" parent="MarginContainer/Info/Misc/VBoxContainer/Comments"]
+unique_name_in_owner = true
+margin_left = 17.0
+margin_right = 84.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.839216, 0.882353, 1, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "2"
 valign = 1
 clip_text = true
 

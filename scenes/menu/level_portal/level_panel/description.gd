@@ -4,7 +4,7 @@ extends PanelContainer
 const TRANSITION_DURATION: float = 0.7
 
 
-export var max_size: int = 128
+export var max_size: int = 136
 export var expand_text: String = "Read more..."
 export var collapse_text: String = "Collapse"
 
@@ -30,6 +30,7 @@ func set_description(new_text: String):
 	rich_text_label.rect_size.y = 0
 	rich_text_label.bbcode_text = text
 	
+	visible = (not new_text == "")
 	if new_text != "":
 		rich_text_label.connect("resized", self, "label_resized", [], CONNECT_ONESHOT)
 

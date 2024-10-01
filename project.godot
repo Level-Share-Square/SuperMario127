@@ -320,6 +320,11 @@ _global_script_classes=[ {
 "path": "res://scenes/actors/mario/states/Knockback.gd"
 }, {
 "base": "Reference",
+"class": "LSSComment",
+"language": "GDScript",
+"path": "res://scenes/menu/level_portal/classes/lss_comment.gd"
+}, {
+"base": "Reference",
 "class": "LSSLevelInfo",
 "language": "GDScript",
 "path": "res://scenes/menu/level_portal/classes/lss_level_info.gd"
@@ -737,6 +742,7 @@ _global_script_class_icons={
 "JumpState": "",
 "KeybindButton": "",
 "KnockbackState": "",
+"LSSComment": "",
 "LSSLevelInfo": "",
 "LSSLevelPage": "",
 "LaunchStarState": "",

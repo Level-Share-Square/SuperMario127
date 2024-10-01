@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=70 format=2]
+[gd_resource type="Theme" load_steps=74 format=2]
 
 [ext_resource path="res://assets/fonts/coolfont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/options/buttons/grabber_highlight.png" type="Texture" id=2]
@@ -589,6 +589,46 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
+[sub_resource type="StyleBoxFlat" id=77]
+bg_color = Color( 0, 0, 0, 0.12549 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.211765, 0.341176, 0.419608, 0 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=78]
+bg_color = Color( 0, 0, 0, 0.25098 )
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 3
+border_color = Color( 0.0352941, 0.207843, 0.407843, 0 )
+border_blend = true
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id=79]
+bg_color = Color( 0, 0, 0, 0.376471 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.0431373, 0.286275, 0.423529, 0 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=80]
+bg_color = Color( 0, 0, 0, 0.501961 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0.0431373, 0.313726, 0 )
+border_blend = true
+
 [sub_resource type="StyleBoxFlat" id=45]
 bg_color = Color( 1, 1, 1, 1 )
 border_color = Color( 1, 1, 1, 1 )
@@ -742,6 +782,12 @@ Special/styles/pressed = SubResource( 24 )
 TextEdit/fonts/font = SubResource( 11 )
 ToggleBackground/base_type = "Panel"
 ToggleBackground/styles/panel = SubResource( 34 )
+TransparentButton/base_type = "Button"
+TransparentButton/fonts/font = ExtResource( 5 )
+TransparentButton/styles/disabled = SubResource( 77 )
+TransparentButton/styles/hover = SubResource( 78 )
+TransparentButton/styles/normal = SubResource( 79 )
+TransparentButton/styles/pressed = SubResource( 80 )
 VBoxContainer/constants/separation = 16
 VScrollBar/styles/grabber = SubResource( 45 )
 VScrollBar/styles/grabber_highlight = SubResource( 47 )

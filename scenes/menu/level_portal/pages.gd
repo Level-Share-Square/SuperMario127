@@ -2,6 +2,8 @@ extends HBoxContainer
 
 
 onready var http_request = $"%HTTPRequest"
+onready var go_to_page = $GoToPage
+onready var padding = $Padding
 
 
 const PAGE_BUTTON := preload("res://scenes/menu/level_portal/page_button.tscn")
@@ -21,8 +23,12 @@ func clear_buttons():
 func load_page_buttons(page: int, total_pages: int):
 	clear_buttons()
 	
-	var add_amount: int = (page - BUTTON_AMOUNT/2)
-	add_amount = clamp(add_amount, 0, total_pages - BUTTON_AMOUNT)
+	var total_buttons: int = min(BUTTON_AMOUNT, total_pages)
+	go_to_page.visible = (total_buttons == BUTTON_AMOUNT)
+	padding.visible = go_to_page.visible
+	
+	var add_amount: int = (page - total_buttons/2)
+	add_amount = clamp(add_amount, 0, total_pages - total_buttons)
 	
 	var start_button: Button = PAGE_BUTTON.instance()
 	start_button.text = "<"
@@ -31,7 +37,7 @@ func load_page_buttons(page: int, total_pages: int):
 	call_deferred("add_child", start_button)
 	call_deferred("move_child", start_button, 0)
 	
-	for i in range(BUTTON_AMOUNT):
+	for i in range(total_buttons):
 		var button: Button = PAGE_BUTTON.instance()
 		var button_page: int = (i + 1) + add_amount
 		
@@ -56,4 +62,4 @@ func load_page_buttons(page: int, total_pages: int):
 	end_button.disabled = (page >= total_pages)
 	connect_page_button(end_button, page + 1)
 	call_deferred("add_child", end_button)
-	call_deferred("move_child", end_button, BUTTON_AMOUNT + 2)
+	call_deferred("move_child", end_button, total_buttons + 2)
