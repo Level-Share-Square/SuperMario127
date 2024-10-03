@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://assets/misc/icon.png" type="Texture" id=1]
+[ext_resource path="res://scenes/menu/level_portal/default_icon.png" type="Texture" id=1]
 [ext_resource path="res://shaders/rounded_corners.gdshader" type="Shader" id=2]
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=4]

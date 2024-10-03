@@ -3,7 +3,7 @@ extends PanelContainer
 
 const TAG_SCENE := preload("res://scenes/menu/level_portal/level_panel/tag.tscn")
 const DEFAULT_THUMB := preload("res://scenes/menu/level_portal/default_thumb.png")
-const DEFAULT_ICON := preload("res://assets/misc/icon.png")
+const DEFAULT_ICON := preload("res://scenes/menu/level_portal/default_icon.png")
 
 const UNSAVED_TEXT := "Save"
 const SAVED_TEXT := "Saved"

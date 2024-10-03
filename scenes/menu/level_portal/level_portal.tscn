@@ -37,7 +37,7 @@
 [ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=35]
 [ext_resource path="res://scenes/menu/level_portal/icons/favorites.png" type="Texture" id=36]
 [ext_resource path="res://scenes/menu/levels_list/icons/play.png" type="Texture" id=37]
-[ext_resource path="res://assets/misc/icon.png" type="Texture" id=38]
+[ext_resource path="res://scenes/menu/level_portal/default_icon.png" type="Texture" id=38]
 [ext_resource path="res://scenes/menu/level_portal/icons/ratings.png" type="Texture" id=39]
 [ext_resource path="res://shaders/rounded_corners.gdshader" type="Shader" id=40]
 [ext_resource path="res://scenes/menu/levels_list/icons/shine.png" type="Texture" id=41]
@@ -2604,10 +2604,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 640.0
-margin_top = 32.0
-margin_right = 768.0
-margin_bottom = 464.0
+margin_left = -128.0
+margin_top = -184.0
+margin_bottom = 248.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
 script = ExtResource( 17 )

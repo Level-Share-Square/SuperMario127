@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 
-const DEFAULT_ICON := preload("res://assets/misc/icon.png")
+const DEFAULT_ICON := preload("res://scenes/menu/level_portal/default_icon.png")
 
 
 onready var author_icon = $"%AuthorIcon"
