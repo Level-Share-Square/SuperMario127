@@ -1,4 +1,4 @@
-[gd_scene load_steps=249 format=2]
+[gd_scene load_steps=251 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/level_portal/level_grid.gd" type="Script" id=2]
@@ -35,7 +35,7 @@
 [ext_resource path="res://scenes/menu/level_portal/icons/star_empty.png" type="Texture" id=33]
 [ext_resource path="res://scenes/menu/level_portal/icons/star_filled.png" type="Texture" id=34]
 [ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=35]
-[ext_resource path="res://scenes/actors/objects/spinning_heart/icon.png" type="Texture" id=36]
+[ext_resource path="res://scenes/menu/level_portal/icons/favorites.png" type="Texture" id=36]
 [ext_resource path="res://scenes/menu/levels_list/icons/play.png" type="Texture" id=37]
 [ext_resource path="res://assets/misc/icon.png" type="Texture" id=38]
 [ext_resource path="res://scenes/menu/level_portal/icons/ratings.png" type="Texture" id=39]
@@ -54,6 +54,8 @@
 [ext_resource path="res://scenes/menu/level_portal/search.gd" type="Script" id=52]
 [ext_resource path="res://scenes/menu/level_portal/level_panel/comments/comments.gd" type="Script" id=53]
 [ext_resource path="res://scenes/menu/level_portal/http/http_comments.gd" type="Script" id=54]
+[ext_resource path="res://scenes/menu/level_portal/icons/go_to_page.png" type="Texture" id=55]
+[ext_resource path="res://scenes/menu/level_portal/return_args.gd" type="Script" id=56]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -1357,10 +1359,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.1, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("BG/Parallax4:modulate")
@@ -1381,10 +1383,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.2, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 640, 0 ), Vector2( 640, 32 ) ]
+"values": [ Vector2( 640, 0 ), Vector2( 640, 0 ), Vector2( 640, 32 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("LaunchStar:modulate")
@@ -1574,7 +1576,6 @@ modulate = Color( 0, 0, 1, 0 )
 margin_right = 768.0
 margin_bottom = 104.0
 rect_min_size = Vector2( 768, 0 )
-rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 384, 0 )
 custom_constants/margin_right = 148
 custom_constants/margin_top = 32
@@ -1858,7 +1859,7 @@ margin_top = -8.0
 margin_right = 8.0
 margin_bottom = 8.0
 mouse_filter = 2
-texture = ExtResource( 21 )
+texture = ExtResource( 55 )
 expand = true
 stretch_mode = 6
 
@@ -1900,7 +1901,6 @@ anims/transition = SubResource( 219 )
 
 [node name="LevelPage" type="Control" parent="Subscreens"]
 unique_name_in_owner = true
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 8 )
@@ -1918,7 +1918,7 @@ lerp_speed = 18.0
 [node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelPage/ScrollContainer"]
 modulate = Color( 0, 0, 1, 0 )
 margin_right = 768.0
-margin_bottom = 88.0
+margin_bottom = 348.0
 rect_min_size = Vector2( 768, 0 )
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 384, 0 )
@@ -1932,43 +1932,108 @@ script = ExtResource( 49 )
 margin_left = 148.0
 margin_top = 32.0
 margin_right = 620.0
-margin_bottom = 56.0
+margin_bottom = 316.0
+custom_constants/separation = 12
 
-[node name="Buttons" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="OutdatedVersion" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 visible = false
 margin_right = 472.0
-margin_bottom = 32.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 9 )
+text = "Sorry! A newer version is required to play this level."
+align = 1
+
+[node name="LevelButtons" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 472.0
+margin_bottom = 26.0
+custom_constants/separation = 8
 alignment = 1
 
-[node name="Button" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Buttons"]
-margin_left = 47.0
-margin_right = 98.0
-margin_bottom = 32.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons"]
+margin_right = 96.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 96, 0 )
+alignment = 2
+
+[node name="Website" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/VBoxContainer"]
+margin_top = 6.0
+margin_right = 96.0
+margin_bottom = 26.0
+theme_type_variation = "TransparentButton"
+text = "View on LSS"
+script = ExtResource( 47 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons"]
+margin_left = 104.0
+margin_right = 200.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 96, 0 )
+alignment = 2
+
+[node name="Favorite" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/VBoxContainer2"]
+margin_top = 6.0
+margin_right = 96.0
+margin_bottom = 26.0
+theme_type_variation = "TransparentButton"
+disabled = true
+text = " Favorite? "
+script = ExtResource( 47 )
+
+[node name="Padding" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons"]
+margin_left = 208.0
+margin_right = 316.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+
+[node name="SaveButton" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons"]
+unique_name_in_owner = true
+margin_left = 324.0
+margin_right = 394.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 70, 0 )
+theme_type_variation = "LevelButton"
+disabled = true
+text = "Save"
+script = ExtResource( 4 )
+
+[node name="Panel" type="Panel" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/SaveButton"]
+modulate = Color( 0.172549, 0.27451, 0.537255, 0.501961 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Play" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons"]
+margin_left = 402.0
+margin_right = 472.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 70, 0 )
+theme_type_variation = "LevelButton"
 text = "Play!"
+script = ExtResource( 4 )
 
-[node name="Button2" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Buttons"]
-margin_left = 102.0
-margin_right = 196.0
-margin_bottom = 32.0
-text = "Download"
+[node name="Panel" type="Panel" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/Play"]
+modulate = Color( 0.172549, 0.27451, 0.537255, 0.501961 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
 
-[node name="Button4" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Buttons"]
-margin_left = 200.0
-margin_right = 338.0
-margin_bottom = 32.0
-text = "Open LSS Page"
-
-[node name="Button3" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Buttons"]
-margin_left = 342.0
-margin_right = 425.0
-margin_bottom = 32.0
-text = "Favorite"
+[node name="Padding2" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons"]
+visible = false
+margin_left = 416.0
+margin_right = 472.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
 
 [node name="LevelPanel" type="PanelContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 self_modulate = Color( 0, 0.231373, 0.478431, 0.627451 )
+margin_top = 38.0
 margin_right = 472.0
-margin_bottom = 234.0
+margin_bottom = 272.0
 mouse_filter = 2
 theme_type_variation = "Panel"
 script = ExtResource( 45 )
@@ -2301,10 +2366,10 @@ margin_bottom = 16.0
 rect_min_size = Vector2( 16, 0 )
 
 [node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Favorites/Icon2"]
-margin_left = -8.0
-margin_top = -8.0
-margin_right = 24.0
-margin_bottom = 24.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 15.0
+margin_bottom = 15.0
 mouse_filter = 2
 texture = ExtResource( 36 )
 expand = true
@@ -2456,9 +2521,10 @@ script = ExtResource( 47 )
 
 [node name="Comments" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 298.0
+margin_top = 284.0
 margin_right = 472.0
-margin_bottom = 552.0
+margin_bottom = 284.0
+custom_constants/separation = 12
 script = ExtResource( 53 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Subscreens/LevelPage"]
@@ -2538,9 +2604,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = -184.0
-margin_bottom = 248.0
+margin_left = 640.0
+margin_top = 32.0
+margin_right = 768.0
+margin_bottom = 464.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
 script = ExtResource( 17 )
@@ -2626,6 +2693,10 @@ script = ExtResource( 26 )
 anims/RESET = SubResource( 203 )
 anims/transition = SubResource( 202 )
 
+[node name="ReturnArgs" type="Node" parent="."]
+process_priority = -1
+script = ExtResource( 56 )
+
 [connection signal="screen_opened" from="." to="Subscreens" method="screen_change" binds= [ "LevelList" ]]
 [connection signal="screen_opened" from="." to="HTTPRequest" method="load_page"]
 [connection signal="screen_changed" from="Subscreens" to="Buttons" method="screen_changed"]
@@ -2637,6 +2708,9 @@ anims/transition = SubResource( 202 )
 [connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Featured" to="HTTPRequest" method="change_page_type" binds= [ true ]]
 [connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage" method="go"]
 [connection signal="resized" from="Subscreens/LevelPage/ScrollContainer/MarginContainer" to="Subscreens/LevelPage/ScrollContainer/MarginContainer" method="resized"]
+[connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/VBoxContainer/Website" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="open_website"]
+[connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/SaveButton" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="save_level"]
+[connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/Play" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="play_level"]
 [connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description/VBoxContainer/Button" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description" method="toggle_expand"]
 [connection signal="pressed" from="Buttons/LevelList/Back" to="." method="transition" binds= [ "MainMenu" ]]
 [connection signal="pressed" from="Buttons/LevelList/Back" to="Subscreens/LevelList" method="transition" binds= [ "" ]]

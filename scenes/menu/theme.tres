@@ -1,10 +1,11 @@
-[gd_resource type="Theme" load_steps=74 format=2]
+[gd_resource type="Theme" load_steps=82 format=2]
 
 [ext_resource path="res://assets/fonts/coolfont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/options/buttons/grabber_highlight.png" type="Texture" id=2]
 [ext_resource path="res://scenes/menu/options/buttons/grabber.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="DynamicFont" id=11]
 size = 14
@@ -209,6 +210,44 @@ corner_radius_top_left = 32
 corner_radius_bottom_right = 32
 expand_margin_top = 16.0
 expand_margin_bottom = 16.0
+
+[sub_resource type="DynamicFont" id=81]
+size = 22
+use_filter = true
+extra_spacing_char = -2
+font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxEmpty" id=87]
+
+[sub_resource type="Gradient" id=82]
+offsets = PoolRealArray( 0.0182927, 0.20122, 0.445122, 0.701219 )
+colors = PoolColorArray( 0.6, 0.741176, 1, 1, 0.364706, 0.541176, 0.788235, 1, 0.213392, 0.331289, 0.589737, 1, 0, 0.211765, 0.435294, 1 )
+
+[sub_resource type="GradientTexture2D" id=83]
+gradient = SubResource( 82 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=85]
+content_margin_bottom = 2.0
+texture = SubResource( 83 )
+region_rect = Rect2( 0, 0, 64, 64 )
+margin_left = 6.0
+margin_right = 6.0
+modulate_color = Color( 0.815686, 0.831373, 0.941176, 1 )
+
+[sub_resource type="StyleBoxTexture" id=84]
+content_margin_bottom = 4.0
+texture = SubResource( 83 )
+region_rect = Rect2( 0, 0, 64, 64 )
+margin_left = 6.0
+margin_right = 6.0
+
+[sub_resource type="StyleBoxTexture" id=86]
+texture = SubResource( 83 )
+region_rect = Rect2( 0, 0, 64, 64 )
+margin_left = 6.0
+margin_right = 6.0
+modulate_color = Color( 0.654902, 0.678431, 0.835294, 1 )
 
 [sub_resource type="StyleBoxFlat" id=44]
 bg_color = Color( 1, 1, 1, 1 )
@@ -690,6 +729,12 @@ HSlider/icons/grabber_disabled = SubResource( 41 )
 HSlider/icons/grabber_highlight = ExtResource( 2 )
 HSlider/icons/tick = SubResource( 42 )
 HSlider/styles/slider = SubResource( 40 )
+LevelButton/base_type = "Button"
+LevelButton/fonts/font = SubResource( 81 )
+LevelButton/styles/disabled = SubResource( 87 )
+LevelButton/styles/hover = SubResource( 85 )
+LevelButton/styles/normal = SubResource( 84 )
+LevelButton/styles/pressed = SubResource( 86 )
 LevelPanel/base_type = "Panel"
 LevelPanel/styles/panel = SubResource( 44 )
 LineEdit/colors/font_color = Color( 1, 1, 1, 1 )

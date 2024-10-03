@@ -161,4 +161,5 @@ func delete_level():
 
 
 func start_level(start_in_edit_mode : bool):
+	Singleton.SceneSwitcher.menu_return_screen = "LevelsList"
 	Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, start_in_edit_mode, true)

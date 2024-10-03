@@ -82,5 +82,4 @@ static func get_time_zone_difference() -> int:
 		Time.get_datetime_string_from_system(true))
 	var local_unix: int = Time.get_unix_time_from_datetime_string(
 		Time.get_datetime_string_from_system(false))
-	print(local_unix - global_unix)
 	return (local_unix - global_unix)

@@ -6,9 +6,13 @@ export var edit_bus : String
 var character
 var character2
 
+
+onready var http_request = $HTTPRequest
+
 onready var temporary_music_player : AudioStreamPlayer = $TemporaryMusicPlayer
 onready var water_music_player : AudioStreamPlayer = $WaterMusicPlayer
 onready var tween : Tween = $Tween
+
 
 export var volume_multiplier := 1.0
 export var loading := false
@@ -17,9 +21,6 @@ var stored_volume : float # used when playing temporary music to return the volu
 
 var last_mode := 3
 var last_song = 0 # this can't be static typed, can be either an int or a string
-
-var dl_ready := false
-var downloader := MusicDownloader.new()
 
 var song_cache := []
 var loop := 1.0
@@ -88,7 +89,14 @@ func handle_custom_song(url: String) -> void:
 		save_ogg(url, level_id, area, working_folder)
 	else:
 		print("OGG file found, loading...")
-		load_ogg(file_path)
+		
+		var ogg_file := File.new()
+		var _open = ogg_file.open(file_path, File.READ)
+		var bytes: PoolByteArray = ogg_file.get_buffer(ogg_file.get_len())
+		ogg_file.close()
+		
+		load_ogg(bytes)
+
 
 func save_ogg(url: String, level_id: String, area: int, working_folder: String) -> void:
 	if not InternetCheck.internet: return
@@ -97,24 +105,34 @@ func save_ogg(url: String, level_id: String, area: int, working_folder: String) 
 		level_id, 
 		area,
 		working_folder)
-	downloader.download(url, file_path)
+	
+	#http_request.download_file = file_path
+	http_request.request(url)
 	
 	# warning-ignore:return_value_discarded
-	downloader.connect("request_completed", self, "load_ogg", [file_path], CONNECT_ONESHOT)
+	http_request.connect("request_completed", self, "request_completed", [file_path], CONNECT_ONESHOT)
 
-func load_ogg(file_path: String) -> void:
+
+func request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray, file_path: String):
 	var ogg_file := File.new()
-	var _open = ogg_file.open(file_path, File.READ)
-	var bytes := ogg_file.get_buffer(ogg_file.get_len())
+	var err: int = ogg_file.open(file_path, File.WRITE)
+	if err != OK:
+		push_error("Error loading custom music. Error code: " + str(err))
+		return
+	
+	ogg_file.store_buffer(body)
+	ogg_file.close()
+	
+	load_ogg(body)
 
+
+func load_ogg(bytes: PoolByteArray) -> void:
 	var stream := AudioStreamOGGVorbis.new()
 	stream.data = bytes
 	stream.loop = true
 	stream.loop_offset = loop
 	if stream.data == null:
 		return
-
-	ogg_file.close()
 
 	if get_tree().get_current_scene().mode != 2:
 		self.stream = stream
@@ -178,6 +196,9 @@ func _process(delta) -> void:
 			change_song(last_song, level_song)
 		last_mode = current_scene.mode
 		last_song = level_song
+	else:
+		last_mode = -1
+		last_song = -1
 	
 	if play_water and !is_instance_valid(character):
 		play_water = false

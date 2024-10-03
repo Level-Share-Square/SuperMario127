@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=15]
 [ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=16]
 [ext_resource path="res://scenes/menu/shine_select/shine_parent.gd" type="Script" id=17]
+[ext_resource path="res://assets/fonts/coolfont.tres" type="DynamicFont" id=18]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -316,6 +317,7 @@ margin_top = 24.0
 margin_right = 760.0
 margin_bottom = 120.0
 custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = ExtResource( 18 )
 bbcode_enabled = true
 bbcode_text = "[center]This is a description get stick bugged lol[/center]"
 text = "This is a description get stick bugged lol"

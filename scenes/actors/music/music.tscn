@@ -10,6 +10,8 @@ script = ExtResource( 2 )
 play_bus = "Music"
 edit_bus = "Editor"
 
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
 [node name="TemporaryMusicPlayer" type="AudioStreamPlayer" parent="."]
 bus = "Music"
 

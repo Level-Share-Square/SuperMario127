@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://classes/message_appear.wav" type="AudioStream" id=1]
 [ext_resource path="res://classes/message_disappear.wav" type="AudioStream" id=2]
 [ext_resource path="res://scenes/actors/objects/dialogue_trigger/sign.png" type="Texture" id=3]
 [ext_resource path="res://assets/misc/interaction_marker.png" type="Texture" id=4]
 [ext_resource path="res://classes/dialogue.gd" type="Script" id=5]
+[ext_resource path="res://assets/misc/interaction_marker_outline.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 90.0
@@ -62,6 +63,16 @@ margin_bottom = 143.574
 rect_scale = Vector2( 0.2, 0.2 )
 mouse_filter = 2
 texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="Outline" type="TextureRect" parent="Indicator/ExclamationMark"]
+modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 6 )
 expand = true
 stretch_mode = 6
 

@@ -98,7 +98,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 237.0 ]
+"values": [ 0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("MarginContainer:margin_left")
@@ -110,7 +110,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0.0 ]
+"values": [ -237 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("LogoAnchor:margin_left")
@@ -122,7 +122,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ -385.0 ]
+"values": [ 0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("LogoAnchor:margin_right")
@@ -134,7 +134,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0 ]
+"values": [ 385 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("WhiteBar:modulate")
@@ -146,7 +146,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("WhiteBar2:modulate")
@@ -158,7 +158,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -267,6 +267,7 @@ volume_db = -10.0
 bus = "Sounds"
 
 [node name="WhiteBar" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = -204.0
 margin_top = 218.0
 margin_right = 943.0
@@ -276,6 +277,7 @@ texture = SubResource( 8 )
 expand = true
 
 [node name="WhiteBar2" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 981.0
 margin_top = 207.0
 margin_right = 2128.0
@@ -287,8 +289,8 @@ expand = true
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
+margin_left = -237.0
 margin_top = -240.0
-margin_right = 237.0
 rect_rotation = 1.5
 size_flags_vertical = 3
 custom_constants/margin_right = 0
@@ -584,7 +586,7 @@ rect_min_size = Vector2( 18, 0 )
 [node name="LogoAnchor" type="Control" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -385.0
+margin_right = 385.0
 margin_bottom = 245.0
 __meta__ = {
 "_edit_lock_": true
