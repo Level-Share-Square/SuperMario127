@@ -604,9 +604,6 @@ custom_styles/pressed = ExtResource( 13 )
 custom_styles/normal = ExtResource( 13 )
 text = "To Back"
 script = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/ToBackButton"]
 stream = ExtResource( 2 )
@@ -659,6 +656,7 @@ columns = 2
 [node name="Tween" type="Tween" parent="."]
 
 [node name="HelpButton" parent="." instance=ExtResource( 14 )]
+visible = false
 margin_left = 837.5
 margin_top = 7.5
 margin_right = 905.5

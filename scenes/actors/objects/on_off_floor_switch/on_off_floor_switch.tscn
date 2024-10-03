@@ -98,10 +98,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 1.5 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 2,
-"values": [ -80.0 ]
+"values": [ -8.0, -8.0 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -160,7 +160,8 @@ anims/unpress = SubResource( 4 )
 
 [node name="Beep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -5.0
 
 [node name="Press" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = -8.0
+volume_db = -10.0

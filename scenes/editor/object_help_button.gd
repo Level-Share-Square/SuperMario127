@@ -15,10 +15,12 @@ func _process(_delta):
 	last_hovered = is_hovered()
 
 func _pressed():
-#	if window_node.visible:
-#		window_node.close()
-#		window_node.rect_position = starting_position
-#	else:
-#		window_node.rect_position = starting_position
-#		window_node.open()
 	click_sound.play()
+
+func open_object_help_window(help_text : String):
+	if window_node.visible:
+		window_node.close()
+		window_node.rect_position = starting_position
+	else:
+		window_node.rect_position = starting_position
+		window_node.open()

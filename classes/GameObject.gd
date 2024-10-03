@@ -40,6 +40,8 @@ var physics_frame_counter = 0
 var has_process_connection = false
 var has_physics_connection = false
 
+export var help_menu_text := "Base help menu text."
+
 func _ready():
 	if visible == false and mode == 1:
 		visible = true
