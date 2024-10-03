@@ -135,4 +135,5 @@ func _set_platform_pos():
 			platform.set_position(new_pos)
 		else: # Editor
 			platform.position = new_pos
+			platform.reset_physics_interpolation()
 		angle += delta_angle

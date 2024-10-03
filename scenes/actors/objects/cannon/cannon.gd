@@ -159,6 +159,7 @@ func fire_cannon() -> void:
 	invuln_timer.start()
 	#set the player so they will fire out of the cannon properly with velocity and such
 	stored_character.position = cannon_exit_position.global_position
+	stored_character.reset_physics_interpolation()
 	stored_character.last_position = stored_character.position # Prevent the patch from triggering
 	stored_character.velocity = Vector2.UP.rotated(sprite_body.rotation * cannon_direction_multiplier) * launch_power
 	stored_character.facing_direction = cannon_direction_multiplier

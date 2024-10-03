@@ -35,7 +35,7 @@ func switch_to_settings():
 	visible = false
 
 func create_area():
-	if Singleton.CurrentLevelData.level_data.areas.size() < 32:
+	if Singleton.CurrentLevelData.level_data.areas.size() != 32:
 		var area = LevelArea.new()
 		area.duplicate(Singleton.EditorSavedSettings.default_area)
 		Singleton.CurrentLevelData.level_data.areas.append(area)

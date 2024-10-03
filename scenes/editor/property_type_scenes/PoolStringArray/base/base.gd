@@ -22,7 +22,7 @@ func _process(_delta):
 func pressed():
 	if pressed == false:
 		click_sound.play()
-		var window = preload("res://scenes/editor/window/DialogueInput.tscn")
+		var window = preload("res://scenes/editor/property_type_scenes/PoolStringArray/base/DialogueInput.tscn")
 		var window_child = window.instance()
 		Singleton2.disable_hotkeys = true
 		get_parent().get_parent().get_parent().get_parent().add_child(window_child)

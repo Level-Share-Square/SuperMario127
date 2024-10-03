@@ -29,12 +29,12 @@ func _set_property_values():
 func _ready():
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "entered")
-		var _connect2 = area.connect("body_exited", self, "exited")
+		_connect = area.connect("body_exited", self, "exited")
 		sprite.visible = false
 		if triggerable:
 			triggered = false
 	else:
-		var _connect3 = connect("property_changed", self, "update_property")
+		var _connect = connect("property_changed", self, "update_property")
 	wind_angle_vector = Vector2.UP.rotated(deg2rad(rotation_degrees)).normalized()
 	update_size()
 
@@ -44,43 +44,46 @@ func _physics_process(delta):
 			particles.emitting = true
 			for body in area.get_overlapping_bodies():
 				if enabled and body.name.begins_with("Character") and !body.dead and body.controllable:
-					if wind_angle_vector.x > 0.05 or wind_angle_vector.x < -0.05:
-						body.in_wind = true
-					body.velocity = apply_velocity(body.velocity, delta)
-					#For some reason mario moves slowly towards the wind generator when on the floor and not moving
-					#so we check if he's moving
-#					if !body.inputs[0][0] and !body.inputs[1][0]:
-#						#and if he's on the floor
-#						if body.is_on_floor():
-#							#and if he is we run a modified physics calculation
-#
-#							if wind_angle_vector.x > 0 and body.velocity.x <= (wind_power*wind_angle_vector.x)*3:
-#								body.velocity.x += (wind_power*wind_angle_vector.x)*60*delta
-#							elif wind_angle_vector.x < 0 and body.velocity.x >= (wind_power*wind_angle_vector.x)*3:
-#								body.velocity.x += (wind_power*wind_angle_vector.x)*60*delta
+					if !is_instance_valid(body.powerup):
+						if wind_angle_vector.x > 0.05 or wind_angle_vector.x < -0.05:
+							body.in_wind = true
+						body.velocity = apply_velocity(body.velocity, delta)
+						#For some reason mario moves slowly towards the wind generator when on the floor and not moving
+						#so we check if he's moving
+#						if !body.inputs[0][0] and !body.inputs[1][0]:
+#							#and if he's on the floor
+#							if body.is_on_floor():
+#								#and if he is we run a modified physics calculation
+#	
+#								if wind_angle_vector.x > 0 and body.velocity.x <= (wind_power*wind_angle_vector.x)*3:
+#									body.velocity.x += (wind_power*wind_angle_vector.x)*60*delta
+#								elif wind_angle_vector.x < 0 and body.velocity.x >= (wind_power*wind_angle_vector.x)*3:
+#									body.velocity.x += (wind_power*wind_angle_vector.x)*60*delta
 					
-					if !body.is_on_floor() and body.state is FallState:
-						var char_sprite = body.sprite
-						if body.facing_direction == 1:
-							if body.jump_animation == 0:
-								char_sprite.animation = "fallRight"
-							elif body.jump_animation == 1:
-								char_sprite.animation = "doubleFallRight"
-						elif body.facing_direction == -1:
-							if body.jump_animation == 0:
-								char_sprite.animation = "fallLeft"
-							elif body.jump_animation == 1:
-								char_sprite.animation = "doubleFallLeft"
-					
-					#set's mario's state to falling if he stops going down in a ground pound
-					if (body.state is GroundPoundState) and (body.velocity.y <= 0):
-						if !body.is_on_floor():
-							body.set_state_by_name("FallState", delta)
+						if !body.is_on_floor() and body.state is FallState or null:
+							var char_sprite = body.sprite
+							if body.facing_direction == 1:
+								if body.jump_animation == 0:
+									char_sprite.animation = "fallRight"
+								elif body.jump_animation == 1:
+									char_sprite.animation = "doubleFallRight"
+							elif body.facing_direction == -1:
+								if body.jump_animation == 0:
+									char_sprite.animation = "fallLeft"
+								elif body.jump_animation == 1:
+									char_sprite.animation = "doubleFallLeft"
+						
+						#set's mario's state to falling if he stops going down in a ground pound
+						if (body.state is GroundPoundState) and (body.velocity.y <= 0):
+							if !body.is_on_floor():
+								body.set_state_by_name("FallState", delta)
+					else:
+						if body.powerup.get_name() != "MetalPowerup":
+							pass
 						
 				elif enabled and !body.name.begins_with("Character"):
 					var body_object = body.get_parent()
 					body_object.velocity = apply_velocity(body_object.velocity, delta)
-						
 		else:
 			particles.emitting = false
 	else:

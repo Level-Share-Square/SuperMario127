@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/styles/ButtonStyleNormalOutline.tres" type="StyleBox" id=1]
+[ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=2]
+[ext_resource path="res://assets/fonts/DelfinoFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/styles/ButtonStyleDisabled.tres" type="StyleBox" id=4]
+[ext_resource path="res://scenes/editor/object_help_button.gd" type="Script" id=5]
+[ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=6]
+
+[node name="ObjectHelpButton" type="Button"]
+margin_right = 64.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 1 )
+text = "?"
+icon_align = 1
+script = ExtResource( 5 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]

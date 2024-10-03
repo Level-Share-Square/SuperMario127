@@ -1,5 +1,7 @@
 extends LineEdit
 
+export var absolute: bool = false
+
 func _ready():
 	var _connect = connect("focus_exited", self, "update")
 	
@@ -13,8 +15,14 @@ func update():
 			var error = expression.parse(old_text)
 			#if it is, sets the property to it's result
 			if error == OK:
-				text = str(int(expression.execute()))
-				get_parent().update_value()
+				var value = int(expression.execute())
+				if value > 0 or !absolute:
+					text = str(value)
+					get_parent().update_value()
+	else:
+		if absolute:
+			if int(text) < 0:
+				text = "0"
 		
 
 func _input(event):

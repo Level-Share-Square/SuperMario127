@@ -42,7 +42,7 @@ func update_counter(new_coins: int):
 	counter.text = str(new_coins).pad_zeros(zeroes_length) + "/" + str(required_purples).pad_zeros(zeroes_length)
 
 func update_required_purples():
-	if len(variables.required_purple_starbits[Singleton.CurrentLevelData.area]) >= 1:
+	if len(variables.required_purple_starbits[Singleton.CurrentLevelData.area]) > 1:
 		if len(variables.required_purple_starbits[Singleton.CurrentLevelData.area]) > 1:
 			if variables.purple_starbits_collected[Singleton.CurrentLevelData.area][0] >= required_purples:
 				variables.required_purple_starbits[Singleton.CurrentLevelData.area].pop_front()

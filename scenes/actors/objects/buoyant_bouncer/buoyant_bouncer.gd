@@ -223,6 +223,7 @@ func calculate_corners(area):
 func set_position(new_position):
 	var movement = new_position - global_position
 	position = new_position
+	reset_physics_interpolation()
 	
 func ground_entered(body):
 	if "Middle" in str(body):

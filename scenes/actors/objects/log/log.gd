@@ -105,6 +105,7 @@ func _physics_process(delta):
 		if time_falling > 2.5:
 			falling = false
 			position = orig_pos
+			reset_physics_interpolation()
 			tween.interpolate_property(sprite, "modulate",
 			Color(1, 1, 1, 0), Color(1, 1, 1, 1), 0.25,
 			Tween.TRANS_QUART, Tween.EASE_OUT)

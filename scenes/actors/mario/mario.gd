@@ -398,6 +398,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	#print(Singleton.CheckpointSaved.current_checkpoint_id)
 	if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
 		position = Singleton.CheckpointSaved.current_spawn_pos
+		reset_physics_interpolation()
 		var score_from_before = Singleton.CurrentLevelData.time_score
 		Singleton.CurrentLevelData.start_tracking_time_score()
 		Singleton.CurrentLevelData.time_score = score_from_before
@@ -453,6 +454,7 @@ func hide() -> void:
 	visible = false
 	velocity = Vector2(0, 0)
 	position = initial_position
+	reset_physics_interpolation()
 
 func show() -> void:
 	visible = true
@@ -583,12 +585,14 @@ func _process(delta: float) -> void:
 	
 	if next_position:
 		position = position.linear_interpolate(next_position, fps_util.PHYSICS_DELTA * sync_interpolation_speed)
+		reset_physics_interpolation()
 
 	collected_shine_outline.frame = collected_shine.frame
 	collected_shine_outline.position = collected_shine.position
 	collected_shine_outline.scale = collected_shine.scale
 	collected_shine_outline.visible = collected_shine.visible
 	collected_shine_outline.z_index = collected_shine.z_index
+	collected_shine_outline.reset_physics_interpolation()
 	
 	if state and state.name == "NoActionState":
 		return
@@ -658,6 +662,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	bottom_pos.position = bottom_pos_offset if ground_collision_dive.disabled else bottom_pos_dive_offset
+	bottom_pos.reset_physics_interpolation()
 	var is_in_platform := false
 	for body in platform_detector.get_overlapping_areas():
 		if body.has_method("is_platform_area"):
@@ -1051,6 +1056,7 @@ func kill(cause: String) -> void:
 			death_sprite.global_position = sprite.global_position
 			death_sprite.play_anim()
 			position = Vector2(0, 100000000000000000)
+			reset_physics_interpolation()
 			yield(get_tree().create_timer(0.55), "timeout")
 			sound_player.play_death_sound()
 			yield(get_tree().create_timer(0.75), "timeout")
@@ -1063,6 +1069,7 @@ func kill(cause: String) -> void:
 			death_sprite.global_position = sprite.global_position
 			death_sprite.play_anim()
 			position = Vector2(0, 100000000000000000)
+			reset_physics_interpolation()
 			yield(get_tree().create_timer(0.55), "timeout")
 			sound_player.play_death_sound()
 			yield(get_tree().create_timer(0.75), "timeout")
@@ -1081,9 +1088,11 @@ func kill(cause: String) -> void:
 			
 			if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CheckpointSaved.current_area == Singleton.CurrentLevelData.area and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
 				position = Singleton.CheckpointSaved.current_spawn_pos
+				reset_physics_interpolation()
 				GhostArrays.dont_save = true
 			else:
 				position = spawn_pos - Vector2(0, 16)
+				reset_physics_interpolation()
 			last_position = position # fixes infinite death bug
 			dead = false
 			movable = true

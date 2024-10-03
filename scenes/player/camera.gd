@@ -33,6 +33,7 @@ func _physics_process(delta):
 	if !auto_move: return
 	if focus_on != null:
 		position = position.linear_interpolate(focus_on.global_position, fps_util.PHYSICS_DELTA * 3)
+		reset_physics_interpolation()
 		bg.parallax_node.scroll_base_scale.y = zoom.y
 		#zoom = zoom.linear_interpolate(Vector2(focus_zoom, focus_zoom), fps_util.PHYSICS_DELTA * 3)
 		
@@ -130,8 +131,10 @@ func load_in(_level_data : LevelData, level_area : LevelArea):
 	
 	if focus_on != null:
 		position = focus_on.global_position
+		reset_physics_interpolation()
 	elif character_node != null:
 		position = character_node.global_position
+		reset_physics_interpolation()
 		character_node.camera = self
 	if Singleton.PlayerSettings.number_of_players == 2:
 		base_size.x /= 2

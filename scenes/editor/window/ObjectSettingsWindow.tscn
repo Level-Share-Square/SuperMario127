@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/styles/RedButtonStyleHover.tres" type="StyleBox" id=11]
 [ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=12]
 [ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=13]
+[ext_resource path="res://scenes/editor/ObjectHelpButton.tscn" type="PackedScene" id=14]
 
 [sub_resource type="DynamicFont" id=12]
 size = 56
@@ -656,3 +657,9 @@ custom_constants/hseparation = 340
 columns = 2
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="HelpButton" parent="." instance=ExtResource( 14 )]
+margin_left = 837.5
+margin_top = 7.5
+margin_right = 905.5
+margin_bottom = 95.5

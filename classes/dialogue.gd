@@ -55,6 +55,7 @@ func _ready():
 	pop_up.position = Vector2(normal_pos.x * 0.8, normal_pos.y * 0.7)
 	pop_up.scale = Vector2(0.8, 0.8)
 	pop_up.modulate = Color(1, 1, 1, 0)
+	pop_up.reset_physics_interpolation()
 	if parent.mode != 1:
 		var _connect = area.connect("body_entered", self, "body_entered")
 		var _connect2 = area.connect("body_exited", self, "body_exited")
@@ -155,10 +156,12 @@ func _physics_process(delta):
 		pop_up.position = lerp(pop_up.position, Vector2(normal_pos.x * 0.8, normal_pos.y * 0.9), delta * transition_speed)
 		pop_up.scale = lerp(pop_up.scale, Vector2(0.8, 0.8), delta * transition_speed)
 		pop_up.modulate = lerp(pop_up.modulate, Color(1, 1, 1, 0), delta * transition_speed)
+		reset_physics_interpolation()
 	else:
 		pop_up.position = lerp(pop_up.position, normal_pos, delta * transition_speed)
 		pop_up.scale = lerp(pop_up.scale, Vector2(1, 1), delta * transition_speed)
 		pop_up.modulate = lerp(pop_up.modulate, Color(1, 1, 1, 1), delta * transition_speed)
+		reset_physics_interpolation()
 		
 		# :/
 		if (character.inputs[Character.input_names.interact][0]

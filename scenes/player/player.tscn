@@ -1723,6 +1723,7 @@ editor_draw_screen = false
 script = ExtResource( 4 )
 character = NodePath("../World/Character")
 background = NodePath("../Backgrounds")
+character2_cam_collider = NodePath("../World/Character2/CamCollision2")
 
 [node name="Tween" type="Tween" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
 

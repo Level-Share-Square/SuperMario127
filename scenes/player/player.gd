@@ -2,7 +2,6 @@ extends LevelDataLoader
 
 onready var tick_sound = $SharedSounds/TickSound
 onready var tick_end_sound = $SharedSounds/TickEndSound
-onready var vignette = $UI/Vignette
 
 export var character : NodePath
 export var character2 : NodePath

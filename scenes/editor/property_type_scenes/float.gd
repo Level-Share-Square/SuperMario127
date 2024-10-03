@@ -3,6 +3,7 @@ extends LineEdit
 export var limit_range : bool = false
 export var min_value : float
 export var max_value : float
+export var absolute: bool = false
 
 var cursor_pos : int = 0
 var _old_text := ""
@@ -29,8 +30,14 @@ func update():
 			var error = expression.parse(old_text)
 			#if it is, sets the property to it's result
 			if error == OK:
-				text = str(expression.execute())
-				get_parent().update_value()
+				var value = int(expression.execute())
+				if value > 0 or !absolute:
+					text = str(value)
+					get_parent().update_value()
+	else:
+		if absolute:
+			if int(text) < 0:
+				text = "0"
 
 func check() -> bool:
 	var val := float(text)
