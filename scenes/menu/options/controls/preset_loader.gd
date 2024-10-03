@@ -37,7 +37,7 @@ func load_preset(preset_path: String, category: String = ""):
 	# remapper loads; and this line causes errors then
 	# so in that situation we let it load on its own
 	if not loading_defaults:
-		remapper.load_all_bindings()
+		remapper.load_all_keybinds()
 
 func update_visible_buttons(category: String):
 	for child in get_children():

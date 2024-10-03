@@ -101,8 +101,5 @@ margin_left = 20.0
 margin_top = 6.0
 margin_right = 1000.0
 margin_bottom = 316.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Tween" type="Tween" parent="."]

@@ -440,7 +440,7 @@ func _process(delta : float) -> void:
 						#Prevents a bug that causes certain properties to become
 						#Linked between two objects
 						if typeof(prop) == TYPE_OBJECT:
-							object.properties.append(prop.duplicate())
+							object.properties.append(prop.duplicate(true))
 						else:
 							object.properties.append(prop)
 					shared.create_object(object, true)
