@@ -257,6 +257,7 @@ func collect(body : PhysicsBody2D) -> void:
 		if do_kick_out:
 			var timer_manager = get_node("/root").get_node("Player").get_timer_manager()
 			timer_manager.remove_timer("area_timer")
+
 		
 		# hacky fix for the player being stuck in the ground during the shine dance if diving into a very low shine
 		if character.state != null and character.state.name == "SlideState" and character.is_grounded():

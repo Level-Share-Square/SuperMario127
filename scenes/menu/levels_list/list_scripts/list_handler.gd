@@ -36,7 +36,7 @@ onready var folders: Node = $Folders
 onready var thumbnail_cache: Node = $ThumbnailCache
 
 ### variables
-const BASE_FOLDER: String = "user://level_list"
+const BASE_FOLDER: String = saved_levels_util.BASE_FOLDER
 const DEFAULT_LEVEL: String = "res://level/default_level.tres"
 
 var working_folder: String = BASE_FOLDER
@@ -87,7 +87,7 @@ func insert_level(level_code: String = ""):
 	if level_code == "":
 		level_code = saved_levels_util.load_level_code_file(DEFAULT_LEVEL)
 	
-	var level_id: String = saver.generate_level_id()
+	var level_id: String = saved_levels_util.generate_level_id()
 	saver.save_level(level_code, level_id, working_folder)
 	loader.add_level_card(working_folder + "/" + level_id + ".127level", level_id, working_folder, level_code, true)
 

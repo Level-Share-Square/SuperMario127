@@ -38,8 +38,6 @@ func _init(data: Dictionary):
 	level_id = fetch(data, "_id")
 	level_code = fetch(data, "code")
 	
-	level_info = LevelInfo.new(level_code)
-	
 	level_name = fetch(data, "name")
 	thumbnail_url = fetch(data, "thumbnail")
 	timestamp = fetch(data, "postDate")
@@ -56,3 +54,5 @@ func _init(data: Dictionary):
 	favorites = int(fetch(data, "favourites"))
 	plays = int(fetch(data, "plays"))
 	comments = fetch(data, "commenters", []).size()
+	
+	level_info = LevelInfo.new(level_code)

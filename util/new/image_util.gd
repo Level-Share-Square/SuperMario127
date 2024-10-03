@@ -7,6 +7,9 @@ const PNG_HEADER: PoolByteArray = PoolByteArray([
 
 
 static func is_png(buffer: PoolByteArray) -> bool:
+	if buffer.size() < 8:
+		return false
+	
 	for i in range(8):
 		if buffer[i] != PNG_HEADER[i]:
 			return false

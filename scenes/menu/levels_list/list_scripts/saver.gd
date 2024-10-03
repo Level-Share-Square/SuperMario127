@@ -2,8 +2,7 @@ extends Node
 
 onready var list_handler: Node = get_parent()
 
-func generate_level_id() -> String:
-	return uuid_util.v4()
+
 
 func save_level(level_code: String, level_id: String, working_folder: String):
 	var sorting: Node = list_handler.sorting
@@ -13,6 +12,7 @@ func save_level(level_code: String, level_id: String, working_folder: String):
 	
 	sorting.add_to_list(level_id, "levels")
 	sorting.save_to_json(working_folder)
+
 
 func delete_level(level_id: String, working_folder: String):
 	var sorting: Node = list_handler.sorting
@@ -37,3 +37,11 @@ func delete_level(level_id: String, working_folder: String):
 			if file.begins_with(level_id):
 				saved_levels_util.delete_file(music_folder + "/" + file)
 			file = directory.get_next()
+	
+	var lss_id: String = lss_link_util.get_id_from_path(
+		saved_levels_util.get_level_file_path(
+			level_id,
+			working_folder
+		))
+	if lss_id != "":
+		lss_link_util.remove_level_from_link(lss_id)

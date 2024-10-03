@@ -2,12 +2,15 @@ extends HTTPRequest
 
 
 onready var subscreens = $"../Subscreens"
-
 onready var level_panel = $"%LevelPanel"
-onready var http_thumbnails = $"%HTTPThumbnails"
+onready var http_comments = $"%HTTPComments"
+
+var level_id: String
 
 
-func load_level(level_id: String):
+func load_level(_level_id: String):
+	level_id = _level_id
+	
 	print("Requesting level id ", level_id, "...")
 	var error: int = request("https://levelsharesquare.com/api/levels/" + level_id + "?keep=true")
 	if error != OK:
@@ -31,3 +34,5 @@ func request_completed(result, response_code, headers, body):
 	
 	subscreens.screen_change("LevelPage")
 	print("Level page loaded.")
+	
+	http_comments.load_comments(level_id)
