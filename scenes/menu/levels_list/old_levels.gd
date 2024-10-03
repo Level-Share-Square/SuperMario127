@@ -49,7 +49,7 @@ func convert_old_levels(base_folder: String):
 	for file_path in parse.result:
 		var level_dict = saved_levels_util.load_level_save_file(file_path)
 		var level_code = level_dict.level_code
-		var level_id = saver.generate_level_id()
+		var level_id = saved_levels_util.generate_level_id()
 		level_dict.erase("level_name")
 		level_dict.erase("level_code")
 		

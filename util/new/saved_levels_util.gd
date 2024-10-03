@@ -1,6 +1,9 @@
 class_name saved_levels_util
 
+
+const BASE_FOLDER: String = "user://level_list"
 const ENCRYPTION_PASSWORD = "BadCode"
+
 
 ## MISC
 static func file_exists(file_path: String) -> bool:
@@ -26,6 +29,9 @@ static func move_file(file_path: String, new_path: String):
 static func get_last_in_path(file_path: String) -> String:
 	var path_array: PoolStringArray = file_path.split("/")
 	return path_array[path_array.size() - 1]
+
+static func generate_level_id() -> String:
+	return uuid_util.v4()
 
 
 ## LEVEL CODES

@@ -1,11 +1,16 @@
 class_name LevelData
 
-var current_format_version := "0.5.0"
+const DEFAULT_NAME: String = "My Level"
+const DEFAULT_AUTHOR: String = "Unknown"
+const DEFAULT_DESCRIPTION: String = "This level has no description."
+const DEFAULT_THUMBNAIL_URL: String = ""
+ 
+const current_format_version := "0.5.0"
 
-var name := "My Level"
-var author := "Unknown"
-var description := "This level has no description."
-var thumbnail_url := ""
+var name := DEFAULT_NAME
+var author := DEFAULT_AUTHOR
+var description := DEFAULT_DESCRIPTION
+var thumbnail_url := DEFAULT_THUMBNAIL_URL
 
 var areas = []
 var functions = {}

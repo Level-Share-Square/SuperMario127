@@ -39,7 +39,7 @@ static func convert_042_to_043(result):
 				new_objects.append(object)
 			area_result.objects = new_objects
 	return result
-	
+
 static func convert_044_to_045(result):
 	# basically this function recreates the objects dictonary,
 	# but changes the shine sprites to have an automatic id

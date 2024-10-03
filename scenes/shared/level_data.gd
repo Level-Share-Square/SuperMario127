@@ -1,9 +1,7 @@
 extends Node
 
-const BASE_FOLDER: String = "user://level_list"
-
 var level_id: String
-var working_folder: String = BASE_FOLDER
+var working_folder: String = saved_levels_util.BASE_FOLDER
 
 var level_info : LevelInfo
 var level_data : LevelData

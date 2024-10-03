@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scenes/actors/objects/sign/sign.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://scenes/actors/objects/sign/palettes/8/sign.png" type="Texture" id=26]
 [ext_resource path="res://assets/misc/interaction_marker.png" type="Texture" id=27]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=28]
+[ext_resource path="res://assets/misc/interaction_marker_outline.png" type="Texture" id=29]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 80, 60 )
@@ -175,6 +176,16 @@ margin_bottom = 158.0
 rect_scale = Vector2( 0.2, 0.2 )
 mouse_filter = 2
 texture = ExtResource( 27 )
+expand = true
+stretch_mode = 6
+
+[node name="Outline" type="TextureRect" parent="Message/ExclamationMark"]
+modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 29 )
 expand = true
 stretch_mode = 6
 

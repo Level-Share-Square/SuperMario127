@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=2]
 [ext_resource path="res://scenes/menu/level_portal/icons/comments.png" type="Texture" id=3]
 [ext_resource path="res://scenes/menu/level_portal/icons/star_empty.png" type="Texture" id=4]
-[ext_resource path="res://scenes/actors/objects/spinning_heart/icon.png" type="Texture" id=5]
+[ext_resource path="res://scenes/menu/level_portal/icons/favorites.png" type="Texture" id=5]
 [ext_resource path="res://scenes/menu/level_portal/icons/tags.png" type="Texture" id=6]
 [ext_resource path="res://scenes/menu/level_portal/icons/star_filled.png" type="Texture" id=7]
 [ext_resource path="res://scenes/menu/level_portal/icons/author.png" type="Texture" id=8]
@@ -282,37 +282,10 @@ valign = 1
 autowrap = true
 clip_text = true
 
-[node name="Comments" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
+[node name="Plays" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
 margin_top = 27.0
 margin_right = 84.0
 margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/Comments"]
-margin_right = 13.0
-margin_bottom = 13.0
-rect_min_size = Vector2( 13, 0 )
-mouse_filter = 2
-texture = ExtResource( 3 )
-expand = true
-stretch_mode = 6
-
-[node name="CommentsLabel" type="Label" parent="MarginContainer/Info/Misc/VBoxContainer/Comments"]
-unique_name_in_owner = true
-margin_left = 17.0
-margin_right = 84.0
-margin_bottom = 13.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0.839216, 0.882353, 1, 1 )
-custom_fonts/font = SubResource( 11 )
-text = "2"
-valign = 1
-clip_text = true
-
-[node name="Plays" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
-margin_top = 42.0
-margin_right = 84.0
-margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="Icon" type="Control" parent="MarginContainer/Info/Misc/VBoxContainer/Plays"]
@@ -343,9 +316,9 @@ valign = 1
 clip_text = true
 
 [node name="Favorites" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
-margin_top = 57.0
+margin_top = 42.0
 margin_right = 84.0
-margin_bottom = 70.0
+margin_bottom = 55.0
 mouse_filter = 2
 
 [node name="Icon2" type="Control" parent="MarginContainer/Info/Misc/VBoxContainer/Favorites"]
@@ -354,10 +327,10 @@ margin_bottom = 13.0
 rect_min_size = Vector2( 13, 0 )
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/Favorites/Icon2"]
-margin_left = -6.0
-margin_top = -6.0
-margin_right = 18.0
-margin_bottom = 18.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 12.0
+margin_bottom = 11.0
 mouse_filter = 2
 texture = ExtResource( 5 )
 expand = true
@@ -372,6 +345,33 @@ size_flags_horizontal = 3
 custom_colors/font_color = Color( 0.839216, 0.882353, 1, 1 )
 custom_fonts/font = SubResource( 11 )
 text = "5"
+valign = 1
+clip_text = true
+
+[node name="Comments" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
+margin_top = 57.0
+margin_right = 84.0
+margin_bottom = 70.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/Comments"]
+margin_right = 13.0
+margin_bottom = 13.0
+rect_min_size = Vector2( 13, 0 )
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="CommentsLabel" type="Label" parent="MarginContainer/Info/Misc/VBoxContainer/Comments"]
+unique_name_in_owner = true
+margin_left = 17.0
+margin_right = 84.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.839216, 0.882353, 1, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "2"
 valign = 1
 clip_text = true
 
