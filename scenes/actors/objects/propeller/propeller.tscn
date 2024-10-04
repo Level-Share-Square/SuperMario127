@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/actors/objects/sawblade/metal_bounce.ogg" type="AudioStream" id=1]
 [ext_resource path="res://scenes/actors/objects/propeller/propeller.gd" type="Script" id=2]
-[ext_resource path="res://scenes/actors/objects/propeller/0_frames.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://scenes/actors/objects/propeller/propeller_frames.tres" type="SpriteFrames" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 26, 3.125 )

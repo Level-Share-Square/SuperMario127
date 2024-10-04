@@ -7,6 +7,16 @@ onready var metal_bounce_noise = $AudioStreamPlayer2D
 const METAL_KNOCKBACK = 400
 const METAL_KNOCKBACK_SPEED_LIMIT = 800
 const METAL_DOWNWARD_KNOCKBACK_LIMIT = 100
+
+var propeller_speed : int = 12
+
+func _set_properties():
+	savable_properties = ["propeller_speed"]
+	editable_properties = ["propeller_speed"]
+
+func _set_property_values():
+	set_property("propeller_speed", propeller_speed, true, null)
+	
 	
 func is_vanish(body):
 	return body.powerup != null and body.powerup.id == "Vanish"
@@ -40,4 +50,9 @@ func kill(body):
 func _ready():
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "kill")
-		
+	area.get_child(0).disabled = !enabled
+	if is_preview:
+		z_index = 0
+		sprite.z_index = 0
+	sprite.animation = String(palette)
+	sprite.speed_scale = propeller_speed

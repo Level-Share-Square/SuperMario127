@@ -59,7 +59,7 @@ func open_object(object_to_open: GameObject):
 	# warning-ignore:return_value_discarded
 	object_to_open.connect("property_changed", self, "edit_preview_object")
 
-	preview_object = object_to_open.duplicate(true)
+	preview_object = object_to_open.duplicate()
 	preview_object.mode = 1
 	preview_object.set_property("enabled", false, false)
 	preview_object.position = object_to_open.preview_position

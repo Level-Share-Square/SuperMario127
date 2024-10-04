@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/propeller3.png-45414aac51da20041969b00ed70c3661.stex"
+path="res://.import/propeller_icon3.png-594d260645c07b1da866fc4241277fb7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/propeller/propeller3.png"
-dest_files=[ "res://.import/propeller3.png-45414aac51da20041969b00ed70c3661.stex" ]
+source_file="res://scenes/actors/objects/propeller/palettes/3/propeller_icon3.png"
+dest_files=[ "res://.import/propeller_icon3.png-594d260645c07b1da866fc4241277fb7.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
