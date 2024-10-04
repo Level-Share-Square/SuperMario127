@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/actors/objects/note_block/block.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/note_block/note_block.gd" type="Script" id=2]
@@ -91,6 +91,9 @@ tracks/2/keys = {
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 19, 12 )
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 16, 4 )
+
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 16, 1 )
 
@@ -126,11 +129,23 @@ collision_mask = 38
 position = Vector2( 0, 10 )
 shape = SubResource( 3 )
 
+[node name="FallbackBounce" type="Area2D" parent="."]
+position = Vector2( 0, -16 )
+collision_layer = 0
+collision_mask = 38
+
+[node name="BounceShapeFallback" type="CollisionShape2D" parent="FallbackBounce"]
+position = Vector2( 0, 26 )
+shape = SubResource( 5 )
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 0, 15 )
+rotation = 3.14159
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 0, 15 )
 shape = SubResource( 4 )
+one_way_collision = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )

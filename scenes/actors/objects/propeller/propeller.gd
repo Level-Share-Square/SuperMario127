@@ -58,6 +58,8 @@ func _ready():
 			sprite.z_index = 0
 	
 	sprite.animation = String(palette)
+	sprite.speed_scale = propeller_speed
 
 func update_property(key, value):
-	sprite.speed_scale = value
+	if key == "propeller_speed":
+		sprite.speed_scale = value

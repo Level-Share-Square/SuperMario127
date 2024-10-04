@@ -24,30 +24,28 @@ func _set_property_values():
 	set_property("strong_bounce_power", strong_bounce_power, 1)
 
 func _ready():
+	var _connect = connect("property_changed", self, "update_property")
+	if bouncy and enabled and mode == 0:
+		_connect = area_2d.connect("body_entered", self, "bounce")
+	
 	collision_shape.disabled = !enabled or bouncy
 	preview_position = custom_preview_position
 	if is_preview:
 		z_index = 0
 		$Sprite.z_index = 0
 
-func _process(delta):
+func update_property():
 	if color == Color(1, 0, 0):
 		$Sprite/Color.visible = false
 	else:
 		$Sprite/Color.visible = true
 		$Sprite/Color.modulate = color
-	
+
+func _physics_process(delta):
 	if cooldown > 0:
 		cooldown -= delta
 		if cooldown <= 0:
 			cooldown = 0
-	
-	if enabled and mode == 0 and bouncy == true:
-		for body in area_2d.get_overlapping_bodies():
-			bounce(body)
-#		for area in area_2d.get_overlapping_areas():
-#			if area.get_parent() is Character:
-#				bounce(area)
 		
 		if idle_bounce_timer <= 0:
 			if not animation_player.is_playing():
@@ -61,7 +59,7 @@ func bounce(body):
 	if cooldown != 0:
 		return
 
-	cooldown = 0.1
+	cooldown = 0.05
 	var normal = transform.y
 	
 	if "velocity" in body:

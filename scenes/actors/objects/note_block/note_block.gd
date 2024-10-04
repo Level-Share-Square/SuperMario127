@@ -1,6 +1,7 @@
 extends GameObject
 
 onready var area_2d : Area2D = $Area2D
+onready var bounce_fallback : Area2D = $FallbackBounce
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var sprite : NinePatchRect = $Visual/NinePatchRect
 onready var note : Sprite = $Visual/NinePatchRect/Note
@@ -35,6 +36,10 @@ func _ready():
 	if !enabled:
 		bottom_collision_shape.disabled = true
 		bounce_collision_shape.disabled = true
+	
+	if enabled and mode == 0:
+		var _connect = area_2d.connect("body_entered", self, "bounce")
+		_connect = bounce_fallback.connect("body_entered", self, "bounce")
 		
 	update_parts()
 
@@ -49,7 +54,7 @@ func _input(event):
 			parts += 1
 			set_property("parts", parts, true)
 
-func _process(delta):
+func _physics_process(delta):
 	if cooldown > 0:
 		cooldown -= delta
 		if cooldown <= 0:
@@ -59,19 +64,18 @@ func _process(delta):
 		update_parts()
 	last_parts = parts
 	
-	if enabled and mode == 0:
-		for body in area_2d.get_overlapping_bodies():
-			bounce(body)
-#		for area in area_2d.get_overlapping_areas():
-#			if area.get_parent() is Character:
-#				bounce(area)
-
+#	if enabled and mode == 0:
+#		for body in area_2d.get_overlapping_bodies():
+#			bounce(body)
+##		for area in area_2d.get_overlapping_areas():
+##			if area.get_parent() is Character:
+##				bounce(area)
 
 func bounce(body):
 	if cooldown != 0:
 		return
 
-	cooldown = 0.1
+	cooldown = 0.05
 	var normal = transform.y
 	
 	if "velocity" in body:
