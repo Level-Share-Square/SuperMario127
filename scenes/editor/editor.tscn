@@ -1,4 +1,4 @@
-[gd_scene load_steps=1488 format=2]
+[gd_scene load_steps=1491 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1454,6 +1454,9 @@
 [ext_resource path="res://scenes/editor/assets/rectangle_fill_tool.png" type="Texture" id=1452]
 [ext_resource path="res://scenes/editor/assets/rectangle_fill_tool_selected.png" type="Texture" id=1453]
 [ext_resource path="res://scenes/editor/assets/rectangle_fill_tool_disabled.png" type="Texture" id=1454]
+[ext_resource path="res://scenes/actors/objects/propeller/palettes/3/propeller_icon3.png" type="Texture" id=1455]
+[ext_resource path="res://scenes/actors/objects/propeller/palettes/2/propeller_icon2.png" type="Texture" id=1456]
+[ext_resource path="res://scenes/actors/objects/propeller/palettes/4/propeller_icon4.png" type="Texture" id=1457]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3254,8 +3257,8 @@ preview = ExtResource( 1441 )
 script = ExtResource( 24 )
 object_id = 136
 is_object = true
-palette_icons = [ ExtResource( 1450 ) ]
-palette_previews = [ ExtResource( 1450 ) ]
+palette_icons = [ ExtResource( 1451 ), ExtResource( 1450 ), ExtResource( 1456 ), ExtResource( 1455 ), ExtResource( 1457 ) ]
+palette_previews = [ ExtResource( 1449 ), ExtResource( 1449 ), ExtResource( 1449 ), ExtResource( 1449 ), ExtResource( 1449 ) ]
 icon = ExtResource( 1451 )
 preview = ExtResource( 1449 )
 
