@@ -12,6 +12,7 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -6 )
+z_index = -1
 frames = ExtResource( 3 )
 animation = "0"
 playing = true

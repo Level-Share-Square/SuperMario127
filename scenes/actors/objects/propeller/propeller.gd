@@ -50,9 +50,16 @@ func kill(body):
 func _ready():
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "kill")
-	area.get_child(0).disabled = !enabled
-	if is_preview:
-		z_index = 0
-		sprite.z_index = 0
+	else:
+		var _connect = connect("property_changed", self, "update_property")
+		area.get_child(0).disabled = !enabled
+		if is_preview:
+			z_index = 0
+			sprite.z_index = 0
+	
 	sprite.animation = String(palette)
 	sprite.speed_scale = propeller_speed
+
+func update_property(key, value):
+	if key == "propeller_speed":
+		sprite.speed_scale = value
