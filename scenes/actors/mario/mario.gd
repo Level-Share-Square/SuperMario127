@@ -41,7 +41,6 @@ onready var ground_check_dive : RayCast2D = $GroundCheckDive
 onready var left_check : RayCast2D = $LeftCheck
 onready var right_check : RayCast2D = $RightCheck
 onready var slope_stop_check : RayCast2D = $SlopeStopCheck
-onready var seesaw_tele : RayCast2D = $SeesawTele 
 onready var player_collision : Area2D = $PlayerCollision
 onready var water_detector : Area2D = $WaterDetector
 onready var lava_detector : Area2D = $LavaDetector
@@ -439,7 +438,7 @@ func is_grounded() -> bool:
 	return prev_is_grounded
 
 func is_ceiling() -> bool:
-	return test_move(self.transform, Vector2(0, -0.1)) and collided_last_frame
+	return is_on_ceiling()
 
 func is_walled() -> bool:
 	return (is_walled_left() or is_walled_right()) and collided_last_frame
