@@ -8,6 +8,8 @@ onready var note : Sprite = $Visual/NinePatchRect/Note
 
 onready var bounce_collision_shape : CollisionShape2D = $Area2D/CollisionShape2D
 onready var bottom_collision_shape : CollisionShape2D = $StaticBody2D/CollisionShape2D
+onready var bounce_fallback_shape : CollisionShape2D = $FallbackBounce/BounceShapeFallback
+onready var platform_area_shape : CollisionShape2D = $StaticBody2D/Area2D/CollisionShape2D
 
 onready var left_width = sprite.patch_margin_left
 onready var right_width = sprite.patch_margin_right
@@ -31,15 +33,21 @@ func _set_property_values():
 	
 func _ready():
 	bounce_collision_shape.shape = bounce_collision_shape.shape.duplicate(true)
+	bounce_fallback_shape.shape = bounce_fallback.get_child(0).shape.duplicate(true)
 	bottom_collision_shape.shape = bottom_collision_shape.shape.duplicate(true)
+	platform_area_shape.shape = platform_area_shape.shape.duplicate(true)
 	
 	if !enabled:
 		bottom_collision_shape.disabled = true
+		bounce_fallback_shape.disabled = true
 		bounce_collision_shape.disabled = true
+		platform_area_shape.disabled = true
 	
 	if enabled and mode == 0:
 		var _connect = area_2d.connect("body_entered", self, "bounce")
 		_connect = bounce_fallback.connect("body_entered", self, "bounce")
+	elif mode == 1:
+		var _connect = connect("property_changed", self, "update_property")
 		
 	update_parts()
 
@@ -60,9 +68,9 @@ func _physics_process(delta):
 		if cooldown <= 0:
 			cooldown = 0
 	
-	if parts != last_parts:
-		update_parts()
-	last_parts = parts
+#	if parts != last_parts:
+#
+#	last_parts = parts
 	
 #	if enabled and mode == 0:
 #		for body in area_2d.get_overlapping_bodies():
@@ -125,12 +133,18 @@ func actually_bounce(body):
 	if "stamina" in body:
 		body.stamina = 100
 
+func update_property(key, value):
+	match(key):
+		"parts":
+			update_parts()
 
 func update_parts():
 	sprite.rect_position.x = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.x = left_width + right_width + part_width * parts
 
 	bounce_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 + 1.5
-	bottom_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 - 1
+	bounce_fallback_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
+	bottom_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 - 2
+	platform_area_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 + 20
 
 	note.position.x = sprite.rect_size.x / 2

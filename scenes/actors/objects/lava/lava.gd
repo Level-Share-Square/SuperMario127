@@ -2,6 +2,7 @@ extends GameObject
 
 var width := 600.0
 var height := 300.0
+var size := Vector2(600.0, 300.0)
 var color := Color(1, 0, 0)
 var render_in_front := false
 var tag = "default"
