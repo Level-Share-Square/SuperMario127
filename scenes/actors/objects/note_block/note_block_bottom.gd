@@ -7,7 +7,6 @@ var movement := Vector2.ZERO
 
 
 func can_collide_with(character):
-	if character.state != BounceState:
 		var direction = global_transform.y.normalized()
 		
 		var is_grounded = character.is_grounded() if character.has_method("is_grounded") else true
@@ -40,5 +39,3 @@ func can_collide_with(character):
 		if "apply_velocity" in self and correct_side:
 			self.apply_velocity = true
 		return correct_side
-	else:
-		return false

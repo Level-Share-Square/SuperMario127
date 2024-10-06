@@ -121,6 +121,7 @@ func _physics_process(delta):
 		star_container.rotation_degrees += 90
 		player_detector.look_at(position + path.curve.get_point_position(1))
 		player_detector.rotation_degrees += 90
+		launch_particles.direction = Vector2.UP.rotated(deg2rad(star_container.rotation_degrees))
 	if enabled and mode == 0:
 		match(state):
 			states.IDLE:

@@ -19,6 +19,7 @@ export var placeable_items_button_container_path : NodePath
 export var item_preview_path : NodePath
 export var shared_path : NodePath
 export var object_settings_path : NodePath
+export var mouse_object_area_path : NodePath
 var selected_box : Node
 # Placed objects can use this variable when set in the placement action
 var placed_item_property = null
@@ -33,6 +34,7 @@ onready var max_pins = 5
 onready var item_preview : Sprite = get_node(item_preview_path)
 onready var shared : Node2D = get_node(shared_path)
 onready var object_settings : NinePatchRect = get_node(object_settings_path)
+onready var mouse_object_area : Area2D = get_node(mouse_object_area_path)
 
 onready var bounds_control = $BoundsControl
 
@@ -318,8 +320,10 @@ func update_activity() -> void:
 		push_error(str(result))
 
 func update_selected_object(mouse_pos : Vector2) -> void:
+	if mouse_object_area.position != mouse_pos:
+		mouse_object_area.position = mouse_pos
 	if selected_box.item.is_object and !rotating and time_clicked <= 0:
-		var objects = shared.get_objects_overlapping_position(mouse_pos)
+		var objects = shared.get_objects_overlapping_position(mouse_pos, mouse_object_area)
 		if objects.size() > 0 and placement_mode != "Tile":
 			if hovered_object != objects[0]:
 				# If something was already hovered, mark it as not
@@ -341,17 +345,22 @@ func update_selected_object(mouse_pos : Vector2) -> void:
 					
 
 func _process(delta : float) -> void:
-	var visible_child_count = 0
+	var visible_child_count := 0
+#holy shit get this actual dogshit code out of here 
 	for i in $UI.get_children():
 		if i is NinePatchRect:
 			if i.visible:
 				visible_child_count += 1
+				#what was the point of counting the children if you never check for anything higher than 1?
+
+#	if ui_visible != $UI.visible:
+#		ui_visible = $UI.visible
+
 	if visible_child_count == 0:
 		Singleton2.disable_hotkeys = false
 	else:
 		Singleton2.disable_hotkeys = true
 
-	
 	if Singleton2.time > 0:
 		Singleton2.time -= 1
 	if Singleton2.time <= 0:
@@ -391,22 +400,22 @@ func _process(delta : float) -> void:
 		var mouse_tile_pos := Vector2(floor(mouse_pos.x / selected_box.item.tile_mode_step), floor(mouse_pos.y / selected_box.item.tile_mode_step))
 		
 		# Lock mouse movement in one axis
-		if mouse_pos != last_mouse_pos:
-			if Input.is_action_pressed("lock_tile_axis") and (Input.is_action_pressed("place") or Input.is_action_pressed("erase")):
-				if Input.is_action_just_pressed("place") or Input.is_action_just_pressed("erase"):
-					if abs(mouse_pos.x) - abs(last_mouse_pos.x) > abs(mouse_pos.y) - abs(last_mouse_pos.y):
-						lock_axis = "x"
-						lock_pos = int(mouse_pos.x)
-					else:
-						lock_axis = "y"
-						lock_pos = int(mouse_pos.y)
-				if lock_axis == "x":
-					mouse_pos.x = lock_pos
-				elif lock_axis == "y":
-					mouse_pos.y = lock_pos
-			else:
-				lock_axis = "none"
-				lock_pos = 0
+#		if mouse_pos != last_mouse_pos:
+#			if Input.is_action_pressed("lock_tile_axis") and (Input.is_action_pressed("place") or Input.is_action_pressed("erase")):
+#				if Input.is_action_just_pressed("place") or Input.is_action_just_pressed("erase"):
+#					if abs(mouse_pos.x) - abs(last_mouse_pos.x) > abs(mouse_pos.y) - abs(last_mouse_pos.y):
+#						lock_axis = "x"
+#						lock_pos = int(mouse_pos.x)
+#					else:
+#						lock_axis = "y"
+#						lock_pos = int(mouse_pos.y)
+#				if lock_axis == "x":
+#					mouse_pos.x = lock_pos
+#				elif lock_axis == "y":
+#					mouse_pos.y = lock_pos
+#			else:
+#				lock_axis = "none"
+#				lock_pos = 0
 		
 		# Handle hovered objects
 		if is_instance_valid(hovered_object):
@@ -637,7 +646,8 @@ func _process(delta : float) -> void:
 						
 			
 			if selected_box.item.is_object and !rotating and time_clicked <= 0:
-				update_selected_object(mouse_pos)
+				if mouse_pos != last_mouse_pos:
+					update_selected_object(mouse_pos)
 		
 		
 		# Finalise tile placement action (for potential future undo)

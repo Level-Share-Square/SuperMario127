@@ -106,17 +106,17 @@ var __sort_point := Vector2.ZERO
 func sort_by_dist_to_point(a: Node2D, b: Node2D) -> bool:
 	return a.position.distance_squared_to(__sort_point) < b.position.distance_squared_to(__sort_point)
 
-func get_objects_overlapping_position(point: Vector2):
-	
-	
+func get_objects_overlapping_position(point: Vector2, area_check : Area2D):
 	var found_objects = []
-	for object_node in objects_node.get_children():
+	for object_area in area_check.get_overlapping_areas() + area_check.get_overlapping_bodies():
+		var object_node = object_area.get_parent()
 		var editor_hitbox = object_node.get_node_or_null("EditorCircle")
 		# for platform wheels
 		if is_instance_valid(object_node.get_node_or_null("EditorCircle")):
 			if(Vector2().distance_to(object_node.to_local(point)) < editor_hitbox.get_shape().radius):
 				found_objects.append(object_node)
 		editor_hitbox = object_node.get_node_or_null("EditorHitbox")
+		
 		if is_instance_valid(editor_hitbox):
 			if editor_hitbox.is_in_point(point):
 				found_objects.append(object_node)
@@ -126,7 +126,6 @@ func get_objects_overlapping_position(point: Vector2):
 			
 			if rect.has_point(object_node.to_local(point)):
 				found_objects.append(object_node) 
-		
 		else:
 			var overlap : int = precise_object_overlap(object_node, point)
 			
@@ -142,8 +141,8 @@ func get_objects_overlapping_position(point: Vector2):
 	
 	return found_objects
 
-func destroy_objects_overlapping_position(point: Vector2, remove_from_data):
-	var objectsToDelete = get_objects_overlapping_position(point)
+func destroy_objects_overlapping_position(point: Vector2, area_check : Area2D, remove_from_data):
+	var objectsToDelete = get_objects_overlapping_position(point, area_check)
 	
 	for object_node in objectsToDelete:
 		if remove_from_data:

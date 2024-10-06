@@ -4,6 +4,8 @@ export var custom_preview_position = Vector2(70, 170)
 onready var collision_shape = $StaticBody2D/CollisionShape2D
 onready var area_2d : Area2D = $StaticBody2D/Area2D
 onready var animation_player : AnimationPlayer = $AnimationPlayer
+onready var mushroom_cap : Sprite = $Sprite
+onready var mushroom_cap_color : Sprite = $Sprite/Color
 
 var bounce_power = 300
 
@@ -28,18 +30,19 @@ func _ready():
 	if bouncy and enabled and mode == 0:
 		_connect = area_2d.connect("body_entered", self, "bounce")
 	
+	update_property("color", color)
 	collision_shape.disabled = !enabled or bouncy
 	preview_position = custom_preview_position
 	if is_preview:
 		z_index = 0
-		$Sprite.z_index = 0
+		mushroom_cap.z_index = 0
 
-func update_property():
+func update_property(key, value):
 	if color == Color(1, 0, 0):
-		$Sprite/Color.visible = false
+		mushroom_cap_color.visible = false
 	else:
-		$Sprite/Color.visible = true
-		$Sprite/Color.modulate = color
+		mushroom_cap_color.visible = true
+		mushroom_cap_color.modulate = color
 
 func _physics_process(delta):
 	if cooldown > 0:
@@ -48,11 +51,11 @@ func _physics_process(delta):
 			cooldown = 0
 		
 		if idle_bounce_timer <= 0:
-			if not animation_player.is_playing():
+			if !animation_player.is_playing():
 				animation_player.play("idle")
-			idle_bounce_timer = 120
-		
-		idle_bounce_timer -= 1
+			idle_bounce_timer = 5
+		else:
+			idle_bounce_timer -= delta
 
 
 func bounce(body):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=1491 format=2]
+[gd_scene load_steps=1492 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -70,7 +70,7 @@
 [ext_resource path="res://scenes/editor/assets/save_icon_press.png" type="Texture" id=68]
 [ext_resource path="res://scenes/actors/objects/mushroom_body/mushroom_body.png" type="Texture" id=69]
 [ext_resource path="res://scenes/actors/objects/mushroom_curve/mushroom_curve.png" type="Texture" id=70]
-[ext_resource path="res://scenes/actors/objects/mushroom_top/mushroom_top.png" type="Texture" id=71]
+[ext_resource path="res://scenes/actors/objects/mushroom_top/preview.png" type="Texture" id=71]
 [ext_resource path="res://scenes/actors/objects/mushroom_top/icon.png" type="Texture" id=72]
 [ext_resource path="res://scenes/actors/objects/mushroom_body/icon.png" type="Texture" id=73]
 [ext_resource path="res://scenes/actors/objects/mushroom_curve/icon.png" type="Texture" id=74]
@@ -2028,6 +2028,9 @@ WindowDialog/styles/panel = null
 size = 128
 font_data = ExtResource( 4 )
 
+[sub_resource type="RectangleShape2D" id=36]
+extents = Vector2( 20, 20 )
+
 [sub_resource type="Animation" id=26]
 length = 0.001
 tracks/0/type = "bezier"
@@ -2221,6 +2224,7 @@ placeable_items_button_container_path = NodePath("UI/PlaceableItemsContainer")
 item_preview_path = NodePath("ItemPreview")
 shared_path = NodePath("Shared")
 object_settings_path = NodePath("UI/ObjectSettingsWindow")
+mouse_object_area_path = NodePath("MouseObjectArea")
 
 [node name="Shared" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0.198608, -0.468788 )
@@ -5512,6 +5516,12 @@ script = ExtResource( 22 )
 
 [node name="Backgrounds" parent="." instance=ExtResource( 52 )]
 position = Vector2( -46, 148 )
+
+[node name="MouseObjectArea" type="Area2D" parent="."]
+position = Vector2( 0.198608, -0.468788 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseObjectArea"]
+shape = SubResource( 36 )
 
 [node name="Grid" type="ParallaxBackground" parent="."]
 layer = -1
