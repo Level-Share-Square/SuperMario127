@@ -284,11 +284,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/level_portal/http/http_images.gd"
 }, {
-"base": "HTTPImages",
-"class": "HTTPThumbnails",
-"language": "GDScript",
-"path": "res://scenes/menu/levels_list/list_scripts/http_thumbnails.gd"
-}, {
 "base": "Nozzle",
 "class": "HoverNozzle",
 "language": "GDScript",
@@ -755,7 +750,6 @@ _global_script_class_icons={
 "GroundPoundState": "",
 "Group": "",
 "HTTPImages": "",
-"HTTPThumbnails": "",
 "HoverNozzle": "",
 "IdMap": "",
 "IfStatementInstruction": "",
@@ -844,6 +838,7 @@ _global_script_class_icons={
 
 config/name="Super Mario 127"
 run/main_scene="res://scenes/menu/launcher/launcher.tscn"
+config/use_custom_user_dir=true
 config/custom_user_dir_name="dev"
 boot_splash/show_image=false
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
@@ -856,9 +851,11 @@ LocalSettings="*res://singletons/local_settings.gd"
 Singleton="*res://singletons/main_singleton.gd"
 Singleton2="*res://singleton2.gd"
 SettingsLoader="*res://singletons/settings_loader.tscn"
-LastInputDevice="*res://singletons/last_input_device.gd"
 GhostArrays="*res://scenes/actors/mario/misc/ghostarrays.gd"
+InternetCheck="*res://singletons/internet_check.tscn"
 Discord="*res://addons/discord_game_sdk/discord.gd"
+SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
+LastInputDevice="*res://singletons/last_input_device.gd"
 
 [debug]
 
@@ -898,25 +895,7 @@ change=false
 [importer_defaults]
 
 texture={
-"compress/bptc_ldr": 0,
-"compress/hdr_mode": 0,
-"compress/lossy_quality": 0.7,
-"compress/mode": 0,
-"compress/normal_map": 0,
-"detect_3d": true,
-"flags/anisotropic": false,
-"flags/filter": true,
-"flags/mipmaps": false,
-"flags/repeat": 0,
-"flags/srgb": 2,
-"process/HDR_as_SRGB": false,
-"process/fix_alpha_border": true,
-"process/invert_color": false,
-"process/normal_map_invert_y": false,
-"process/premult_alpha": false,
-"size_limit": 0,
-"stream": false,
-"svg/scale": 1.0
+"flags/filter": false
 }
 
 [input]

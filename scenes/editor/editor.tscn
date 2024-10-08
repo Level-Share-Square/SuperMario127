@@ -1,4 +1,4 @@
-[gd_scene load_steps=1491 format=2]
+[gd_scene load_steps=1511 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1457,6 +1457,26 @@
 [ext_resource path="res://scenes/actors/objects/propeller/palettes/3/propeller_icon3.png" type="Texture" id=1455]
 [ext_resource path="res://scenes/actors/objects/propeller/palettes/2/propeller_icon2.png" type="Texture" id=1456]
 [ext_resource path="res://scenes/actors/objects/propeller/palettes/4/propeller_icon4.png" type="Texture" id=1457]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/previews/1.png" type="Texture" id=1458]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/previews/4.png" type="Texture" id=1459]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/previews/5.png" type="Texture" id=1460]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/previews/3.png" type="Texture" id=1461]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/previews/2.png" type="Texture" id=1462]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/4/MCoralY_preview.png" type="Texture" id=1463]
+[ext_resource path="res://scenes/actors/objects/coral/coral_preview.png" type="Texture" id=1464]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/3/MCoralR_preview.png" type="Texture" id=1465]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/2/MCoralG_preview.png" type="Texture" id=1466]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/1/MCoralB_preview'.png" type="Texture" id=1467]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/3_preview.png" type="Texture" id=1468]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/preview.png" type="Texture" id=1469]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/5_preview.png" type="Texture" id=1470]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/7_preview.png" type="Texture" id=1471]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/1_preview.png" type="Texture" id=1472]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/2_preview.png" type="Texture" id=1473]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/4_preview.png" type="Texture" id=1474]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/6_preview.png" type="Texture" id=1475]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/9_preview.png" type="Texture" id=1476]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/8_preview.png" type="Texture" id=1477]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3667,7 +3687,7 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
 palette_icons = [ ExtResource( 124 ), ExtResource( 854 ), ExtResource( 848 ), ExtResource( 856 ), ExtResource( 855 ), ExtResource( 857 ) ]
-palette_previews = [ ExtResource( 125 ), ExtResource( 854 ), ExtResource( 848 ), ExtResource( 856 ), ExtResource( 855 ), ExtResource( 857 ) ]
+palette_previews = [ ExtResource( 124 ), ExtResource( 1458 ), ExtResource( 1462 ), ExtResource( 1461 ), ExtResource( 1459 ), ExtResource( 1460 ) ]
 change_to = "LargeSnowTree"
 items_in_sequence = 2
 icon = ExtResource( 125 )
@@ -4287,6 +4307,32 @@ script = ExtResource( 24 )
 tileset_id = 9
 palette_icons = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
 palette_previews = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
+change_to = "GlassSlopeLeft"
+items_in_sequence = 3
+icon = ExtResource( 58 )
+preview = ExtResource( 58 )
+
+[node name="GlassSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 24 )
+tileset_id = 9
+tile_id = 2
+palette_icons = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
+palette_previews = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
+change_to = "GlassSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 58 )
+preview = ExtResource( 58 )
+
+[node name="GlassSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 24 )
+tileset_id = 9
+tile_id = 3
+palette_icons = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
+palette_previews = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
+change_to = "Glass"
+items_in_sequence = 3
+index_in_sequence = 2
 icon = ExtResource( 58 )
 preview = ExtResource( 58 )
 
@@ -4703,9 +4749,9 @@ script = ExtResource( 24 )
 object_id = 104
 is_object = true
 palette_icons = [ ExtResource( 713 ), ExtResource( 1114 ), ExtResource( 1122 ), ExtResource( 1115 ), ExtResource( 1120 ), ExtResource( 1119 ), ExtResource( 1117 ), ExtResource( 1116 ), ExtResource( 1121 ), ExtResource( 1118 ) ]
-palette_previews = [ ExtResource( 713 ), ExtResource( 1114 ), ExtResource( 1122 ), ExtResource( 1115 ), ExtResource( 1120 ), ExtResource( 1119 ), ExtResource( 1117 ), ExtResource( 1116 ), ExtResource( 1121 ), ExtResource( 1118 ) ]
+palette_previews = [ ExtResource( 1469 ), ExtResource( 1472 ), ExtResource( 1473 ), ExtResource( 1468 ), ExtResource( 1474 ), ExtResource( 1470 ), ExtResource( 1475 ), ExtResource( 1471 ), ExtResource( 1477 ), ExtResource( 1476 ) ]
 icon = ExtResource( 713 )
-preview = ExtResource( 713 )
+preview = ExtResource( 1469 )
 
 [node name="MiscGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
@@ -4850,12 +4896,12 @@ object_id = 97
 is_object = true
 object_center = Vector2( 32, 24 )
 palette_icons = [ ExtResource( 683 ), ExtResource( 694 ), ExtResource( 695 ), ExtResource( 693 ), ExtResource( 696 ) ]
-palette_previews = [ ExtResource( 683 ), ExtResource( 694 ), ExtResource( 695 ), ExtResource( 693 ), ExtResource( 696 ) ]
+palette_previews = [ ExtResource( 1464 ), ExtResource( 1467 ), ExtResource( 1466 ), ExtResource( 1465 ), ExtResource( 1463 ) ]
 change_to = "CoralLarge"
 items_in_sequence = 3
 index_in_sequence = 1
 icon = ExtResource( 683 )
-preview = ExtResource( 683 )
+preview = ExtResource( 1464 )
 
 [node name="CoralLarge" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 24 )
