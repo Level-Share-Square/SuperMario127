@@ -838,7 +838,6 @@ _global_script_class_icons={
 
 config/name="Super Mario 127"
 run/main_scene="res://scenes/menu/launcher/launcher.tscn"
-config/use_custom_user_dir=true
 config/custom_user_dir_name="dev"
 boot_splash/show_image=false
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
@@ -851,11 +850,10 @@ LocalSettings="*res://singletons/local_settings.gd"
 Singleton="*res://singletons/main_singleton.gd"
 Singleton2="*res://singleton2.gd"
 SettingsLoader="*res://singletons/settings_loader.tscn"
+LastInputDevice="*res://singletons/last_input_device.gd"
 GhostArrays="*res://scenes/actors/mario/misc/ghostarrays.gd"
 InternetCheck="*res://singletons/internet_check.tscn"
 Discord="*res://addons/discord_game_sdk/discord.gd"
-SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
-LastInputDevice="*res://singletons/last_input_device.gd"
 
 [debug]
 
