@@ -2,8 +2,11 @@ extends Control
 
 const TIME_SCORE_SCENE: PackedScene = preload("res://scenes/menu/levels_list/list_elements/time_score.tscn")
 
+
 export var list_handler_path: NodePath
 onready var list_handler: Node = get_node(list_handler_path)
+onready var http_thumbnails = $"%HTTPThumbnails"
+
 
 var working_folder: String
 var level_id: String
@@ -59,15 +62,16 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 	description.bbcode_text = "[center]" + level_info.level_description + "[/center]"
 	
 	# thumbnail
-	if level_id in list_handler.thumbnail_cache.cached_thumbnails:
-		thumbnail.texture = list_handler.thumbnail_cache.cached_thumbnails[level_id]
-		foreground.visible = false
-	else:
+	var cached_image: ImageTexture = http_thumbnails.get_cached_image(level_info.thumbnail_url)
+	if cached_image == null:
 		thumbnail.texture = level_info.get_level_background_texture()
 		
 		foreground.visible = true
 		foreground.modulate = level_info.get_level_background_modulate()
 		foreground.texture = level_info.get_level_foreground_texture()
+	else:
+		thumbnail.texture = cached_image
+		foreground.visible = false
 	
 	
 	# load save file

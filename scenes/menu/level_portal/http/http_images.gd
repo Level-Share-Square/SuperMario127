@@ -21,6 +21,10 @@ func get_cached_image(url: String) -> ImageTexture:
 	return cached_images.get(url)
 
 
+func cache_image(url: String, texture: ImageTexture):
+	cached_images[url] = texture
+
+
 func load_next_image():
 	if image_queue.size() <= 0 or loading: return
 	

@@ -2,6 +2,8 @@ extends Node
 
 signal loading_finished
 
+
+onready var http_thumbnails = $"%HTTPThumbnails"
 export var drag_cursor_path: NodePath
 onready var drag_cursor: Area2D = get_node(drag_cursor_path)
 
@@ -28,7 +30,7 @@ func _exit_tree():
 var last_level_card: Node
 func load_all_levels(working_folder: String):
 	var sorting: Node = list_handler.sorting
-	list_handler.thumbnail_cache.clear_queue()
+	http_thumbnails.clear_queue()
 	
 	print("Loading directory " + working_folder + "...")
 	for folder in sorting.sort.folders:
@@ -37,7 +39,7 @@ func load_all_levels(working_folder: String):
 		add_level_card(working_folder + "/" + level + ".127level", level, working_folder)
 	
 	if is_instance_valid(last_level_card):
-		last_level_card.connect("ready", list_handler.thumbnail_cache, "go_through_queue", [], CONNECT_ONESHOT)
+		last_level_card.connect("ready", http_thumbnails, "load_next_image", [], CONNECT_ONESHOT)
 		
 		print("Done loading levels in directory.")
 	
@@ -73,7 +75,7 @@ func add_level_card(file_path: String, level_id: String, working_folder: String,
 	# needs some variables now for visual touches
 	var styling = level_card.get_node("%Styling")
 	styling.level_info = level_info
-	styling.thumbnail_cache = list_handler.thumbnail_cache
+	styling.http_thumbnails = http_thumbnails
 
 	# load save file
 	var save_path: String = saved_levels_util.get_level_save_path(level_id, working_folder)
@@ -87,7 +89,7 @@ func add_level_card(file_path: String, level_id: String, working_folder: String,
 	if move_to_front:
 		var index: int = list_handler.back_buttons + list_handler.folder_buttons
 		level_grid.call_deferred("move_child", level_card, index)
-
+	
 	## some signal stuff!! the signals tell the level list
 	## to transition to another screen, and then tell the
 	## level info panel to start loading our level data 

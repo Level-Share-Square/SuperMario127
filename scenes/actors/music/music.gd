@@ -99,8 +99,6 @@ func handle_custom_song(url: String) -> void:
 
 
 func save_ogg(url: String, level_id: String, area: int, working_folder: String) -> void:
-	if not InternetCheck.internet: return
-	
 	var file_path: String = saved_levels_util.get_level_music_path(
 		level_id, 
 		area,

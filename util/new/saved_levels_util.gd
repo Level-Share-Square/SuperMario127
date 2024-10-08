@@ -92,14 +92,15 @@ static func save_level_save_file(level_save: Dictionary, file_path: String):
 ## THUMBNAILS
 const EXTENSIONS = [
 	".png",
-	".jpeg"
+	".jpg"
 ]
-static func get_level_thumbnail_path(level_id: String, working_folder: String) -> String:
+static func get_level_thumbnail_path(level_id: String, working_folder: String, add_extension: bool = true) -> String:
 	var path: String = working_folder + "/thumbnails/" + level_id
 	
-	for extension in EXTENSIONS:
-		if file_exists(path + extension):
-			return path + extension
+	if add_extension:
+		for extension in EXTENSIONS:
+			if file_exists(path + extension):
+				return path + extension
 	return path
 
 static func get_image_from_path(file_path: String) -> ImageTexture:
