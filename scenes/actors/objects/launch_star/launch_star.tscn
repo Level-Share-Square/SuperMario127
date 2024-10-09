@@ -802,7 +802,6 @@ anims/windup = SubResource( 153 )
 [node name="StarContainer" type="Node2D" parent="."]
 
 [node name="InnerStar" type="Node2D" parent="StarContainer"]
-position = Vector2( 0, 20 )
 script = ExtResource( 2 )
 speed = 0
 
