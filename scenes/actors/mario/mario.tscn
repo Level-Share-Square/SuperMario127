@@ -1385,22 +1385,18 @@ z_index = 1
 position = Vector2( 0, 20 )
 enabled = true
 cast_to = Vector2( 0, -24 )
-collision_mask = 257
 
 [node name="VerticalCheckDive" type="RayCast2D" parent="SquishCasts"]
 position = Vector2( 0, 6 )
 cast_to = Vector2( 0, -20 )
-collision_mask = 257
 
 [node name="LeftCheck" type="RayCast2D" parent="SquishCasts"]
 enabled = true
 cast_to = Vector2( 5, 0 )
-collision_mask = 257
 
 [node name="RightCheck" type="RayCast2D" parent="SquishCasts"]
 enabled = true
 cast_to = Vector2( -5, 0 )
-collision_mask = 257
 
 [node name="States" type="Node" parent="."]
 

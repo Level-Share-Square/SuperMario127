@@ -252,7 +252,7 @@ func calculate_fireball_velocity(source_position: Vector2, target_position: Vect
 #	final_v.y = (-y_vel)
 	var new_velocity := Vector2.ZERO
 	var displacement := target_position-source_position
-	var arc_height := target_position.y-source_position.y-64
+	var arc_height := clamp((target_position.y-source_position.y-72), (target_position.y-source_position.y-72), -48)
 	
 	if displacement.y > arc_height:
 		var time_up = sqrt(-2 * arc_height/gravity)
