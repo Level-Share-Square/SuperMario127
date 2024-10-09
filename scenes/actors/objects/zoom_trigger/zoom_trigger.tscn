@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/actors/objects/zoom_trigger/zoom_trigger.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/zoom_trigger/zoom_trigger.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
+extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 16 )
 
 [node name="ZoomTrigger" type="Node2D"]
@@ -26,3 +29,8 @@ texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 32, 32 )
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+
+[node name="EditorArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+shape = SubResource( 2 )

@@ -137,7 +137,6 @@ script = ExtResource( 5 )
 
 [node name="Switch" type="Sprite" parent="."]
 position = Vector2( 0, 6 )
-scale = Vector2( 1, 0.2 )
 texture = ExtResource( 3 )
 offset = Vector2( 0, -10.5 )
 region_enabled = true

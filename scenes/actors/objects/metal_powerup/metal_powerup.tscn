@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/actors/objects/rainbow_powerup/collect.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/actors/mario/particles/metal_sparkles.png" type="Texture" id=2]
@@ -154,6 +154,9 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 
+[sub_resource type="CircleShape2D" id=11]
+radius = 11.0
+
 [node name="MetalPowerup" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -165,7 +168,6 @@ texture = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 7 )
-frame = 3
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -183,3 +185,8 @@ volume_db = -7.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/collect = SubResource( 9 )
 anims/respawn = SubResource( 10 )
+
+[node name="EditorArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+shape = SubResource( 11 )

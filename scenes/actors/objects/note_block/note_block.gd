@@ -5,18 +5,22 @@ onready var bounce_fallback : Area2D = $FallbackBounce
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var sprite : NinePatchRect = $Visual/NinePatchRect
 onready var note : Sprite = $Visual/NinePatchRect/Note
+onready var sound : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 onready var bounce_collision_shape : CollisionShape2D = $Area2D/CollisionShape2D
 onready var bottom_collision_shape : CollisionShape2D = $StaticBody2D/CollisionShape2D
-onready var bounce_fallback_shape : CollisionShape2D = $FallbackBounce/BounceShapeFallback
 onready var platform_area_shape : CollisionShape2D = $StaticBody2D/Area2D/CollisionShape2D
 
 onready var left_width = sprite.patch_margin_left
 onready var right_width = sprite.patch_margin_right
 onready var part_width = sprite.texture.get_width() - left_width - right_width
 
+export var weak_bounce_sound : AudioStream
+export var bounce_sound : AudioStream
+
 var bounce_power = 300
 var strong_bounce_power = 650
+var bodies_to_bounce := []
 
 var parts := 1
 var last_parts := 1
@@ -33,19 +37,17 @@ func _set_property_values():
 	
 func _ready():
 	bounce_collision_shape.shape = bounce_collision_shape.shape.duplicate(true)
-	bounce_fallback_shape.shape = bounce_fallback.get_child(0).shape.duplicate(true)
 	bottom_collision_shape.shape = bottom_collision_shape.shape.duplicate(true)
 	platform_area_shape.shape = platform_area_shape.shape.duplicate(true)
 	
 	if !enabled:
 		bottom_collision_shape.disabled = true
-		bounce_fallback_shape.disabled = true
 		bounce_collision_shape.disabled = true
 		platform_area_shape.disabled = true
 	
 	if enabled and mode == 0:
-		var _connect = area_2d.connect("body_entered", self, "bounce")
-		_connect = bounce_fallback.connect("body_entered", self, "bounce")
+		var _connect = area_2d.connect("body_entered", self, "add_body_to_bounce")
+		_connect = area_2d.connect("body_exited", self, "remove_body_to_bounce")
 	elif mode == 1:
 		var _connect = connect("property_changed", self, "update_property")
 		
@@ -72,12 +74,13 @@ func _physics_process(delta):
 #
 #	last_parts = parts
 	
-#	if enabled and mode == 0:
-#		for body in area_2d.get_overlapping_bodies():
-#			bounce(body)
-##		for area in area_2d.get_overlapping_areas():
-##			if area.get_parent() is Character:
-##				bounce(area)
+	if enabled and mode == 0:
+		if bodies_to_bounce.size() > 0:
+			for body in bodies_to_bounce:
+				bounce(body)
+#		for area in area_2d.get_overlapping_areas():
+#			if area.get_parent() is Character:
+#				bounce(area)
 
 func bounce(body):
 	if cooldown != 0:
@@ -86,7 +89,7 @@ func bounce(body):
 	cooldown = 0.05
 	var normal = transform.y
 	
-	if "velocity" in body:
+	if "velocity" in body and body.state != BounceState:
 		actually_bounce(body)
 	elif "velocity" in body.get_parent():
 		actually_bounce(body.get_parent())
@@ -143,8 +146,15 @@ func update_parts():
 	sprite.rect_size.x = left_width + right_width + part_width * parts
 
 	bounce_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 + 1.5
-	bounce_fallback_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2
 	bottom_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 - 2
 	platform_area_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 + 20
 
 	note.position.x = sprite.rect_size.x / 2
+
+func add_body_to_bounce(body):
+	bodies_to_bounce.append(body)
+
+func remove_body_to_bounce(body):
+	var index_to_remove = bodies_to_bounce.find(body)
+	if index_to_remove != null:
+		bodies_to_bounce.remove(index_to_remove)

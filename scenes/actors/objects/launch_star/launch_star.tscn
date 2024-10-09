@@ -802,7 +802,9 @@ anims/windup = SubResource( 153 )
 [node name="StarContainer" type="Node2D" parent="."]
 
 [node name="InnerStar" type="Node2D" parent="StarContainer"]
+position = Vector2( 0, 20 )
 script = ExtResource( 2 )
+speed = 0
 
 [node name="InnerTop" type="AnimatedSprite" parent="StarContainer/InnerStar"]
 z_index = -3
@@ -818,6 +820,7 @@ playing = true
 
 [node name="OuterStar" type="Node2D" parent="StarContainer"]
 script = ExtResource( 2 )
+speed = 0
 
 [node name="OuterTop" type="AnimatedSprite" parent="StarContainer/OuterStar"]
 z_index = -2
@@ -849,7 +852,7 @@ emitting = false
 amount = 20
 lifetime = 0.75
 one_shot = true
-explosiveness = 0.85
+explosiveness = 0.95
 lifetime_randomness = 0.08
 draw_order = 1
 texture = ExtResource( 9 )
@@ -859,6 +862,7 @@ direction = Vector2( 0, -1 )
 spread = 85.0
 gravity = Vector2( 0, 0 )
 initial_velocity = 150.0
+orbit_velocity = 0.01
 linear_accel = 14.64
 linear_accel_random = 1.0
 damping = 200.0
