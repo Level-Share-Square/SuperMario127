@@ -323,7 +323,8 @@ func update_selected_object(mouse_pos : Vector2) -> void:
 	if mouse_object_area.position != mouse_pos:
 		mouse_object_area.position = mouse_pos
 	if selected_box.item.is_object and !rotating and time_clicked <= 0:
-		var objects = shared.get_objects_overlapping_position(mouse_pos, mouse_object_area)
+		var mouse_object_rect = Rect2(mouse_object_area.position-mouse_object_area.get_child(0).shape.extents, mouse_object_area.get_child(0).shape.extents*2)
+		var objects = shared.get_objects_overlapping_position(mouse_pos, mouse_object_rect)
 		if objects.size() > 0 and placement_mode != "Tile":
 			if hovered_object != objects[0]:
 				# If something was already hovered, mark it as not

@@ -2029,7 +2029,8 @@ size = 128
 font_data = ExtResource( 4 )
 
 [sub_resource type="RectangleShape2D" id=36]
-extents = Vector2( 20, 20 )
+resource_local_to_scene = true
+extents = Vector2( 250, 250 )
 
 [sub_resource type="Animation" id=26]
 length = 0.001
@@ -5518,6 +5519,7 @@ script = ExtResource( 22 )
 position = Vector2( -46, 148 )
 
 [node name="MouseObjectArea" type="Area2D" parent="."]
+self_modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0.198608, -0.468788 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MouseObjectArea"]

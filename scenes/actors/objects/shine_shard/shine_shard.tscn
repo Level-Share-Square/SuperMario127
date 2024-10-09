@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/particles/shiny_particle_material.tres" type="Material" id=2]
@@ -44,6 +44,9 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 2 ), Vector2( 0, -4 ), Vector2( 0, 2 ), Vector2( 0, -4 ), Vector2( 0, 2 ), Vector2( 0, -4 ), Vector2( 0, 2 ), Vector2( 0, -4 ), Vector2( 0, 2 ) ]
 }
 
+[sub_resource type="CircleShape2D" id=6]
+radius = 11.0454
+
 [node name="ShineShard" type="Node2D"]
 script = ExtResource( 6 )
 
@@ -75,9 +78,9 @@ margin_left = -12.0
 margin_top = -12.0
 margin_right = 12.0
 margin_bottom = 12.0
-custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0.866667, 0.427451, 0, 1 )
+custom_fonts/font = SubResource( 3 )
 text = "1"
 align = 1
 valign = 1
@@ -92,3 +95,9 @@ texture = ExtResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/default = SubResource( 5 )
+
+[node name="EditorArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+position = Vector2( 0, -3 )
+shape = SubResource( 6 )

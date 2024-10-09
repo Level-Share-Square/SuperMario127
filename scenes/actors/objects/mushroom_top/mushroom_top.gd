@@ -6,8 +6,13 @@ onready var area_2d : Area2D = $StaticBody2D/Area2D
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var mushroom_cap : Sprite = $Sprite
 onready var mushroom_cap_color : Sprite = $Sprite/Color
+onready var sound : AudioStreamPlayer2D = $AudioStreamPlayer2D
+
+export var weak_bounce_sound : AudioStream
+export var bounce_sound : AudioStream
 
 var bounce_power = 300
+var bodies_to_bounce := []
 
 var color := Color(1, 0, 0)
 var bouncy := false
@@ -28,7 +33,8 @@ func _set_property_values():
 func _ready():
 	var _connect = connect("property_changed", self, "update_property")
 	if bouncy and enabled and mode == 0:
-		_connect = area_2d.connect("body_entered", self, "bounce")
+		_connect = area_2d.connect("body_entered", self, "add_body_to_bounce")
+		_connect = area_2d.connect("body_exited", self, "remove_body_to_bounce")
 	
 	update_property("color", color)
 	collision_shape.disabled = !enabled or bouncy
@@ -50,12 +56,18 @@ func _physics_process(delta):
 		if cooldown <= 0:
 			cooldown = 0
 		
+	if idle_bounce_timer > 0:
+		idle_bounce_timer -= delta
 		if idle_bounce_timer <= 0:
 			if !animation_player.is_playing():
 				animation_player.play("idle")
 			idle_bounce_timer = 5
-		else:
-			idle_bounce_timer -= delta
+		
+		
+	if enabled and mode == 0:
+		if bodies_to_bounce.size() > 0:
+			for body in bodies_to_bounce:
+				bounce(body)
 
 
 func bounce(body):
@@ -65,7 +77,7 @@ func bounce(body):
 	cooldown = 0.05
 	var normal = transform.y
 	
-	if "velocity" in body:
+	if "velocity" in body and body.state != BounceState:
 		actually_bounce(body)
 	elif "velocity" in body.get_parent():
 		actually_bounce(body.get_parent())
@@ -111,3 +123,11 @@ func actually_bounce(body):
 	
 	if "stamina" in body:
 		body.stamina = 100
+
+func add_body_to_bounce(body):
+	bodies_to_bounce.append(body)
+
+func remove_body_to_bounce(body):
+	var index_to_remove = bodies_to_bounce.find(body)
+	if index_to_remove != null:
+		bodies_to_bounce.remove(index_to_remove)

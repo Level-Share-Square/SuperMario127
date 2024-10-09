@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/actors/objects/red_coin/red.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/red_coin/sound.wav" type="AudioStream" id=2]
@@ -21,15 +21,18 @@ particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
+[sub_resource type="CircleShape2D" id=4]
+radius = 9.0
+
 [node name="Coin" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-frame = 3
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 2
 
@@ -69,3 +72,8 @@ __meta__ = {
 material = SubResource( 3 )
 process_material = ExtResource( 6 )
 texture = ExtResource( 7 )
+
+[node name="EditorArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+shape = SubResource( 4 )

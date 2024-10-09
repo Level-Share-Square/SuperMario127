@@ -21,10 +21,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.2 ), Vector2( 1, 0.8 ), Vector2( 1.05, 1.1 ), Vector2( 1, 0.95 ), Vector2( 1.025, 1.05 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.3 ), Vector2( 1, 0.8 ), Vector2( 1.05, 1.1 ), Vector2( 1, 0.95 ), Vector2( 1.025, 1.05 ), Vector2( 1, 1 ) ]
 }
 tracks/1/type = "audio"
-tracks/1/path = NodePath("../../AudioStreamPlayer")
+tracks/1/path = NodePath("../../AudioStreamPlayer2D")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -53,7 +53,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.1 ), Vector2( 1, 0.9 ), Vector2( 1.05, 1.1 ), Vector2( 1, 1 ) ]
 }
 tracks/1/type = "audio"
-tracks/1/path = NodePath("../../AudioStreamPlayer")
+tracks/1/path = NodePath("../../AudioStreamPlayer2D")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -82,16 +82,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1.025, 1.05 ), Vector2( 1, 0.95 ), Vector2( 1.025, 1.05 ), Vector2( 1, 1 ) ]
 }
-tracks/1/type = "audio"
-tracks/1/path = NodePath("../../AudioStreamPlayer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"clips": [  ],
-"times": PoolRealArray(  )
-}
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 28, 3 )
@@ -102,6 +92,8 @@ extents = Vector2( 29, 9 )
 [node name="MushroomTop" type="Node2D"]
 z_index = -1
 script = ExtResource( 5 )
+weak_bounce_sound = ExtResource( 8 )
+bounce_sound = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 5 )
@@ -155,7 +147,7 @@ visible = false
 process_parent = true
 physics_process_parent = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-volume_db = 2.0
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = 6.0
 bus = "Sounds"
