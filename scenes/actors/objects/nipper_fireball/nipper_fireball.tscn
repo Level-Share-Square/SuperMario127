@@ -60,8 +60,12 @@ radius = 8.0
 script = ExtResource( 2 )
 
 [node name="Body" type="KinematicBody2D" parent="."]
-collision_layer = 8192
+collision_layer = 0
 collision_mask = 0
+
+[node name="FloorCheck" type="RayCast2D" parent="Body"]
+enabled = true
+cast_to = Vector2( 0, 10 )
 
 [node name="PoofParticles" type="Particles2D" parent="Body"]
 material = SubResource( 11 )
