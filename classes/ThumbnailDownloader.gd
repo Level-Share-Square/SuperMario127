@@ -14,6 +14,7 @@ func download(url : String, destination : String ="user://", filename : String =
 	
 
 func req(arguments):
+	return
 	
 	var percent_loaded = 0
 

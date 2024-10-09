@@ -14,18 +14,21 @@ onready var thumbnail = $"%Thumbnail"
 onready var foreground = $"%Foreground"
 onready var level_id: String = get_owner().name
 var level_info: LevelInfo
-var thumbnail_cache: Node
+var http_thumbnails: Node
+
 
 func _ready():
-	if level_info.thumbnail_url != "":
-		if !(level_id in thumbnail_cache.cached_thumbnails):
-			thumbnail_cache.thumbnail_queue.append([level_info.thumbnail_url, level_id])
+	var thumbnail_url: String = level_info.thumbnail_url
+	if thumbnail_url != "":
+		var cached_image: ImageTexture = http_thumbnails.get_cached_image(thumbnail_url)
+		if cached_image == null:
+			http_thumbnails.add_to_queue(thumbnail_url, level_id)
 		else:
-			load_custom_thumbnail(level_id)
+			load_custom_thumbnail(level_id, cached_image)
 	else:
 		update_thumbnail()
 	
-	thumbnail_cache.connect("thumbnail_loaded", self, "load_custom_thumbnail")
+	http_thumbnails.connect("image_loaded", self, "load_custom_thumbnail")
 	
 	if is_complete:
 		activate_completion_style()
@@ -43,9 +46,8 @@ func update_thumbnail():
 	foreground.modulate = level_info.get_level_background_modulate()
 	foreground.texture = level_info.get_level_foreground_texture()
 
-func load_custom_thumbnail(id: String):
-	if id != level_id: return
+func load_custom_thumbnail(url: String, texture: ImageTexture):
+	if url != level_info.thumbnail_url: return
 	
-	if level_id in thumbnail_cache.cached_thumbnails:
-		thumbnail.texture = thumbnail_cache.cached_thumbnails[level_id]
-		foreground.visible = false
+	thumbnail.texture = texture
+	foreground.visible = false
