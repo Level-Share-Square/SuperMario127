@@ -1,4 +1,4 @@
-[gd_scene load_steps=1511 format=2]
+[gd_scene load_steps=1512 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -2780,7 +2780,7 @@ script = ExtResource( 24 )
 object_id = 30
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "PurpleStarbit"
+change_to = "PurpleStarbits"
 items_in_sequence = 3
 icon = ExtResource( 136 )
 preview = ExtResource( 6 )
