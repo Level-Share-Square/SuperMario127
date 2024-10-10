@@ -22,7 +22,7 @@ onready var viewport
 var character_vel = Vector2(0, 0)
 
 func _ready():
-	if is_instance_valid(character_node) && Singleton.PlayerSettings.player2_character == character_node.player_id:
+	if is_instance_valid(character_node) && character_node.player_id == 1:
 		shape = get_node(character2_cam_collider).get_node("CollisionShape2D")
 		area = get_node(character2_cam_collider)
 	else:
