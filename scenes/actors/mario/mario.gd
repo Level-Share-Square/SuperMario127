@@ -82,6 +82,11 @@ onready var heal_tick_timer = $HealTickTimer
 onready var ground_collider_enable_timer = $GroundColliderEnableTimer
 export var bottom_pos_offset : Vector2
 export var bottom_pos_dive_offset : Vector2
+onready var squish_vertical_check = $SquishCasts/VerticalCheck
+onready var squish_vertical_check_dive = $SquishCasts/VerticalCheckDive
+onready var squish_left_check = $SquishCasts/LeftCheck
+onready var squish_right_check = $SquishCasts/RightCheck
+
 
 onready var spotlight : Light2D = $Spotlight
 
@@ -1112,13 +1117,23 @@ func exit() -> void:
 		# warning-ignore: return_value_discarded
 		get_tree().reload_current_scene()
 
+
+onready var terrain_collision_nodes: Array = [
+	self,
+	ground_check,
+	ground_check_dive,
+	left_check,
+	right_check,
+	slope_stop_check,
+	squish_vertical_check,
+	squish_vertical_check_dive,
+	squish_left_check,
+	squish_right_check
+]
 func set_all_collision_masks(bit, value) -> void:
-	set_collision_mask_bit(bit, value)
-	ground_check.set_collision_mask_bit(bit, value)
-	ground_check_dive.set_collision_mask_bit(bit, value)
-	left_check.set_collision_mask_bit(bit, value)
-	right_check.set_collision_mask_bit(bit, value)
-	slope_stop_check.set_collision_mask_bit(bit, value)
+	for collision_node in terrain_collision_nodes:
+		collision_node.set_collision_mask_bit(bit, value)
+
 
 func get_input(input_id : int, is_just_pressed : bool) -> bool:
 	return inputs[input_id][int(is_just_pressed)]
