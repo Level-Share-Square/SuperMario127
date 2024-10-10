@@ -31,6 +31,8 @@ func change_setting(key: String, new_value):
 	match key:
 		# General
 		"window_scale":
+			if OS.has_feature("JavaScript"): return
+			
 			ScreenSizeUtil.set_screen_size(new_value)
 			if not OS.window_fullscreen:
 				last_non_full_scale = new_value
@@ -86,13 +88,13 @@ func _unhandled_input(event):
 		LocalSettings.change_setting("General", "window_scale", 3 if not OS.window_fullscreen else last_non_full_scale)
 
 	if event.is_action_pressed("volume_up"):
-		LocalSettings.change_setting("General", "master_volume", last_master_volume + 5)
+		LocalSettings.change_setting("Audio", "master_volume", last_master_volume + 5)
 	if event.is_action_pressed("volume_down"):
-		LocalSettings.change_setting("General", "master_volume", last_master_volume - 5)
+		LocalSettings.change_setting("Audio", "master_volume", last_master_volume - 5)
 	
 	if event.is_action_pressed("mute"):
-		var current_vol = LocalSettings.load_setting("General", "bgm_volume", 100)
-		LocalSettings.change_setting("General", "bgm_volume", 0 if current_vol > 0 else last_non_muted_bgm)
+		var current_vol = LocalSettings.load_setting("Audio", "bgm_volume", 100)
+		LocalSettings.change_setting("Audio", "bgm_volume", 0 if current_vol > 0 else last_non_muted_bgm)
 
 
 

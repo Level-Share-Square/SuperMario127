@@ -449,6 +449,9 @@ func is_walled_left() -> bool:
 func is_walled_right() -> bool:
 	return test_move(self.transform, Vector2(0.5, 1)) and test_move(self.transform, Vector2(0.5, -1)) and collided_last_frame
 
+func will_collide(multiplier: float = 1) -> bool:
+	return test_move(self.transform, velocity * multiplier * fps_util.PHYSICS_DELTA)
+
 func hide() -> void:
 	visible = false
 	velocity = Vector2(0, 0)

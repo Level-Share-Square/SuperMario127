@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=27]
 [ext_resource path="res://scenes/player/ui_new/shine_get.gd" type="Script" id=28]
 [ext_resource path="res://scenes/player/ui_new/collectibles/purple_starbits.gd" type="Script" id=29]
+[ext_resource path="res://scenes/player/ui_new/touch/gesture_controls.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=39]
 [ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
@@ -792,24 +793,6 @@ character = NodePath("Viewports/ViewportContainer/Viewport/World/Character")
 character2 = NodePath("Viewports/ViewportContainer/Viewport/World/Character2")
 camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
 
-[node name="UIUnder" type="CanvasLayer" parent="."]
-layer = 61
-
-[node name="HUD" type="MarginContainer" parent="UIUnder"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 6 )
-custom_constants/margin_right = 24
-custom_constants/margin_top = 8
-custom_constants/margin_left = 12
-custom_constants/margin_bottom = 16
-
-[node name="Control" type="Control" parent="UIUnder/HUD"]
-margin_left = 12.0
-margin_top = 8.0
-margin_right = 744.0
-margin_bottom = 416.0
-
 [node name="PauseController" parent="." instance=ExtResource( 5 )]
 unique_name_in_owner = true
 
@@ -821,6 +804,7 @@ script = ExtResource( 33 )
 [node name="HUD" type="MarginContainer" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 theme = ExtResource( 6 )
 custom_constants/margin_right = 24
 custom_constants/margin_top = 8
@@ -1665,6 +1649,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="GestureControls" parent="UI" instance=ExtResource( 30 )]
+character_path = NodePath("../../Viewports/ViewportContainer/Viewport/World/Character")
+
 [node name="Reference2" type="Sprite" parent="UI"]
 visible = false
 position = Vector2( 723, 360 )
@@ -1677,6 +1664,7 @@ __meta__ = {
 [node name="Viewports" type="HBoxContainer" parent="."]
 margin_right = 772.0
 margin_bottom = 432.0
+mouse_filter = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource( 12 )
@@ -1689,6 +1677,7 @@ character_scene_path = "res://scenes/actors/mario/mario.tscn"
 [node name="ViewportContainer" type="ViewportContainer" parent="Viewports"]
 margin_right = 384.0
 margin_bottom = 432.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
@@ -1795,6 +1784,7 @@ character_path = NodePath("../../Viewport/World/Character")
 margin_left = 388.0
 margin_right = 772.0
 margin_bottom = 432.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true

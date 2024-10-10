@@ -1902,7 +1902,6 @@ visible = false
 script = ExtResource( 57 )
 
 [node name="VanishDetector" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2147483712
 

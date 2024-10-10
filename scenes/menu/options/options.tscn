@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scenes/menu/options/controls/preset_loader.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=2]
@@ -41,6 +41,16 @@ colors = PoolColorArray( 0, 0, 0, 0.564706, 0, 0, 0, 0.88656, 0, 0, 0, 1, 0, 0, 
 [sub_resource type="GradientTexture" id=3]
 gradient = SubResource( 2 )
 width = 64
+
+[sub_resource type="GDScript" id=14]
+resource_name = "html5_hide"
+script/source = "extends Node
+
+
+func _ready():
+	if OS.has_feature(\"JavaScript\"):
+		get_parent().hide()
+"
 
 [sub_resource type="Gradient" id=9]
 offsets = PoolRealArray( 0, 0.5, 1 )
@@ -443,6 +453,9 @@ rect_min_size = Vector2( 120, 0 )
 setting_section = "General"
 setting_key = "window_scale"
 options = [ "1x", "2x", "3x", "Full" ]
+
+[node name="Node" type="Node" parent="Subscreens/General/VBoxContainer/GridContainer/WindowScale"]
+script = SubResource( 14 )
 
 [node name="FirstPlayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 11 )]
 margin_left = 171.0
