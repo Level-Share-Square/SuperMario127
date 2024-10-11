@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-499bd3f5b4dad40780d75fb801c9d623.stex"
+path="res://.import/noise.png-b727c5c914245aa3c89eb5cd3706b5e2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/misc/icon.png"
-dest_files=[ "res://.import/icon.png-499bd3f5b4dad40780d75fb801c9d623.stex" ]
+source_file="res://scenes/actors/objects/toxic_gas/noise.png"
+dest_files=[ "res://.import/noise.png-b727c5c914245aa3c89eb5cd3706b5e2.stex" ]
 
 [params]
 
@@ -19,8 +19,8 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
-flags/filter=true
+flags/repeat=0
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

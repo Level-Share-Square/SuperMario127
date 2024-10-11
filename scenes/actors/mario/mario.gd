@@ -96,6 +96,7 @@ export var velocity := Vector2(0, 0)
 var last_velocity := Vector2(0, 0)
 var last_position := Vector2(0, 0)
 var in_wind := false
+var extra_forces : Dictionary = {}
 
 
 export var gravity_scale := 1.0
@@ -438,7 +439,7 @@ func is_grounded() -> bool:
 	return prev_is_grounded
 
 func is_ceiling() -> bool:
-	return is_on_ceiling()
+	return test_move(self.transform, Vector2(0, -0.1)) and collided_last_frame
 
 func is_walled() -> bool:
 	return (is_walled_left() or is_walled_right()) and collided_last_frame
@@ -937,8 +938,9 @@ func _physics_process(delta: float) -> void:
 	
 	# Move by velocity
 	if movable:
-		#move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
+
 		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
+		
 		if (last_position != Vector2.ZERO and (last_position - global_position).length_squared() > 0
 			and get_world_2d().direct_space_state.intersect_ray(last_position, global_position, [self], 1).size() > 0):
 			position = last_position
@@ -1187,3 +1189,6 @@ func toggle_movement(var value : bool):
 	invulnerable = !value
 	controllable = value
 	movable = value
+
+func add_force(velocity : Vector2, UUID : int):
+	extra_forces.get_or_add(UUID, velocity)
