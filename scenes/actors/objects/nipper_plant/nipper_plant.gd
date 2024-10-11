@@ -20,7 +20,7 @@ var character: Character
 
 var rainbow: = false
 var wander: = false
-var fire: = false
+var fire: = 0
 var hit: = false
 var bouncy_fire := false
 
@@ -42,15 +42,17 @@ export var walk_spd = 48
 export var max_fire_pause = 3.0
 
 func _set_properties():
-	savable_properties = ["wander", "fire", "color", "rainbow", "bouncy_fire"]
-	editable_properties = ["wander", "fire", "bouncy_fire", "color", "rainbow"]
+	savable_properties = ["wander", "fire", "color", "rainbow", "super_jump_height"]
+	editable_properties = ["wander", "super_jump_height", "fire", "color", "rainbow"]
 	
 func _set_property_values():
 	set_property("wander", wander, true)
 	set_property("fire", fire, true)
+	set_property_menu("fire", ["option", 3, 0, ["None", "Normal", "Bouncy"]])
 	set_property("color", color, true)
 	set_property("rainbow", rainbow, true)
 	set_property("bouncy_fire", bouncy_fire, true)
+	set_property("super_jump_height", super_jump_height, true, "Jump Height")
 
 func _ready():
 	gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
@@ -75,7 +77,7 @@ func _process(delta):
 	if not (mode != 1 and enabled):
 		return
 	
-	if (fire):
+	if (fire != 0):
 		wander = false
 		wander_pause_timer = 0
 		wander = 0
@@ -275,5 +277,5 @@ func spawn_fireball():
 	object.properties.append(true)
 	object.properties.append(true)
 	object.properties.append(calculate_fireball_velocity(body.global_position - Vector2(0, 8), character_position, gravity*gravit_scale))
-	object.properties.append(bouncy_fire)
+	object.properties.append(fire == 2)
 	get_parent().create_object(object, false)

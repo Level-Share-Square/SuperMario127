@@ -22,8 +22,7 @@ func _ready():
 	
 	var _connect = connect("time_over", self, "kill_player")
 	
-	if (sound in SOUND_TYPES) == false:
-		push_warning("Sound type \"" + sound + "\" not found for timer. Did you mistype?")
+	if (sound in SOUND_TYPES):
 		match(sound):
 			"switch":
 				audio_player.stream = p_switch_tick
