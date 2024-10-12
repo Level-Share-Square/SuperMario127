@@ -19,7 +19,7 @@ func _ready():
 	if object.property_value_menus.has(key):
 		menu = object.property_value_menus[key]
 	
-	print("Setting menu of " + key + " to " + menu[0] + " menu!")
+#	print("Setting menu of " + key + " to " + menu[0] + " menu!")
 	var type = typeof(value)
 	var type_scene_name := "None"
 	#print(value)
