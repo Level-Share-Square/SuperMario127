@@ -3,6 +3,7 @@ extends Node
 
 signal loading_finished
 
+onready var subscreens := $"%Subscreens"
 onready var list_handler: LevelListHandler = $"%ListHandler"
 onready var drag_cursor: Area2D = $"%DragCursor"
 onready var http_thumbnails: HTTPThumbnails = $"%HTTPThumbnails"
@@ -12,11 +13,10 @@ onready var level_card_scene: PackedScene = preload("res://scenes/menu/levels_li
 onready var level_load_thread := Thread.new()
 
 
-func start_level_loading(working_folder: String):
+func thread_load_directory(working_folder: String):
 	if level_load_thread.is_active():
 		level_load_thread.wait_to_finish()
 	
-#	load_directory(working_folder)
 	var err = level_load_thread.start(self, "load_directory", working_folder)
 	if err != OK:
 		push_error("Error starting level loading thread.")
@@ -29,18 +29,24 @@ func _exit_tree():
 
 
 func transition_to_directory(working_folder: String):
+	if is_loading: return
+	
 	list_handler.parent_screen.transition("LevelView")
 	yield(list_handler.parent_screen, "screen_change")
-	load_directory(working_folder)
+	thread_load_directory(working_folder)
 
 
 var first_card: BaseCard
+var is_loading: bool
 func load_directory(working_folder: String):
 	http_thumbnails.clear_queue()
 	list_handler.clear_grid()
+	
 	list_handler.working_folder = working_folder
+	list_handler.emit_signal("directory_changed", working_folder)
 	
 	print("Loading directory " + working_folder + "...")
+	is_loading = true
 	
 	if working_folder != level_list_util.BASE_FOLDER:
 		var parent_folder: String = level_list_util.get_parent_from_path(working_folder)
@@ -55,8 +61,8 @@ func load_directory(working_folder: String):
 	
 	print("Done loading levels in directory.")
 	emit_signal("loading_finished")
+	is_loading = false
 	
-	list_handler.emit_signal("directory_changed", working_folder)
 	list_handler.call_deferred("change_focus", first_card)
 	first_card = null
 

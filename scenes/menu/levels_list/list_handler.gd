@@ -33,7 +33,7 @@ func _ready():
 		old_levels.start(BASE_FOLDER)
 		yield(old_levels, "conversion_complete")
 	
-	loader.load_directory(working_folder)
+	loader.thread_load_directory(working_folder)
 
 
 func clear_grid():
