@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/actors/objects/cloud_platform/texture.png" type="Texture" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://scenes/menu/levels_list/level_panel.gd" type="Script" id=7]
+[ext_resource path="res://scenes/menu/levels_list/level_panel/level_panel.gd" type="Script" id=7]
 [ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=8]
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=9]
 [ext_resource path="res://scenes/menu/level_portal/default_thumb.png" type="Texture" id=10]
@@ -14,19 +14,16 @@
 [ext_resource path="res://scenes/menu/levels_list/icons/shine.png" type="Texture" id=12]
 [ext_resource path="res://scenes/menu/levels_list/icons/star_coin.png" type="Texture" id=13]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=14]
-[ext_resource path="res://scenes/menu/levels_list/list_scripts/saver.gd" type="Script" id=15]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=16]
-[ext_resource path="res://scenes/menu/levels_list/list_scripts/element_add_buttons.gd" type="Script" id=17]
-[ext_resource path="res://scenes/menu/levels_list/list_scripts/list_handler.gd" type="Script" id=18]
-[ext_resource path="res://scenes/menu/levels_list/list_scripts/sorting.gd" type="Script" id=19]
-[ext_resource path="res://scenes/menu/levels_list/list_scripts/loader.gd" type="Script" id=20]
-[ext_resource path="res://scenes/menu/levels_list/list_scripts/folders.gd" type="Script" id=21]
+[ext_resource path="res://scenes/menu/levels_list/misc/element_add_buttons.gd" type="Script" id=17]
+[ext_resource path="res://scenes/menu/levels_list/list_handler.gd" type="Script" id=18]
+[ext_resource path="res://scenes/menu/levels_list/loader.gd" type="Script" id=20]
 [ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=22]
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=23]
 [ext_resource path="res://scenes/shared/background/foregrounds/hills/preview.png" type="Texture" id=24]
 [ext_resource path="res://assets/misc/LSS.svg" type="Texture" id=25]
 [ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=26]
-[ext_resource path="res://scenes/menu/levels_list/dynamic_visibility.gd" type="Script" id=27]
+[ext_resource path="res://scenes/menu/levels_list/misc/dynamic_visibility.gd" type="Script" id=27]
 [ext_resource path="res://scenes/menu/levels_list/icons/edit.png" type="Texture" id=28]
 [ext_resource path="res://scenes/menu/button_scripts/icon_helper.gd" type="Script" id=29]
 [ext_resource path="res://scenes/menu/levels_list/icons/play.png" type="Texture" id=30]
@@ -46,12 +43,12 @@
 [ext_resource path="res://scenes/actors/objects/green_demon/green_demon.png" type="Texture" id=44]
 [ext_resource path="res://scenes/actors/mario/mario.png" type="Texture" id=45]
 [ext_resource path="res://scenes/actors/mario/nozzles/hover_mario.png" type="Texture" id=46]
-[ext_resource path="res://scenes/menu/levels_list/list_scripts/folder_setting_buttons.gd" type="Script" id=47]
-[ext_resource path="res://scenes/menu/levels_list/drag_cursor.gd" type="Script" id=49]
+[ext_resource path="res://scenes/menu/levels_list/misc/folder_setting_buttons.gd" type="Script" id=47]
+[ext_resource path="res://scenes/menu/levels_list/cards/drag_cursor.gd" type="Script" id=49]
 [ext_resource path="res://scenes/menu/levels_list/old_levels.gd" type="Script" id=50]
 [ext_resource path="res://scenes/menu/level_portal/smooth_scroll.gd" type="Script" id=51]
-[ext_resource path="res://scenes/menu/levels_list/list_scripts/js_file_picker.gd" type="Script" id=52]
-[ext_resource path="res://scenes/menu/levels_list/list_scripts/http_thumbnails.gd" type="Script" id=53]
+[ext_resource path="res://scenes/menu/levels_list/misc/js_file_picker.gd" type="Script" id=52]
+[ext_resource path="res://scenes/menu/levels_list/misc/http_thumbnails.gd" type="Script" id=53]
 
 [sub_resource type="CanvasItemMaterial" id=22]
 blend_mode = 1
@@ -584,9 +581,7 @@ margin_top = -32.0
 margin_right = 648.0
 margin_bottom = -8.0
 script = ExtResource( 27 )
-visible_screens = [ "LevelList" ]
-subscreens_path = NodePath("../Subscreens")
-list_handler_path = NodePath("../Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler")
+visible_screens = [ "LevelView" ]
 
 [node name="Tween" type="Tween" parent="Panel/Buttons"]
 
@@ -697,34 +692,35 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="Subscreens" type="Control" parent="Panel"]
+unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 16 )
-default_screen = NodePath("LevelList")
+default_screen = NodePath("LevelView")
 
-[node name="LevelList" type="Control" parent="Panel/Subscreens"]
+[node name="LevelView" type="Control" parent="Panel/Subscreens"]
+unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 336, 313 )
 size_flags_vertical = 3
 script = ExtResource( 9 )
 
-[node name="Focus" type="Control" parent="Panel/Subscreens/LevelList"]
+[node name="Focus" type="Control" parent="Panel/Subscreens/LevelView"]
 script = ExtResource( 26 )
 default_focus_path = NodePath("../../../Buttons/Back")
 
-[node name="OldLevels" type="VBoxContainer" parent="Panel/Subscreens/LevelList"]
+[node name="OldLevels" type="VBoxContainer" parent="Panel/Subscreens/LevelView"]
+unique_name_in_owner = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 8
 alignment = 1
 script = ExtResource( 50 )
-saver_path = NodePath("../ScrollContainer/MarginContainer/ListHandler/Saver")
-sorting_path = NodePath("../ScrollContainer/MarginContainer/ListHandler/Sorting")
 
-[node name="Label" type="Label" parent="Panel/Subscreens/LevelList/OldLevels"]
+[node name="Label" type="Label" parent="Panel/Subscreens/LevelView/OldLevels"]
 margin_top = 116.0
 margin_right = 672.0
 margin_bottom = 140.0
@@ -732,7 +728,7 @@ size_flags_vertical = 1
 text = "Converting old levels..."
 align = 1
 
-[node name="Label2" type="Label" parent="Panel/Subscreens/LevelList/OldLevels"]
+[node name="Label2" type="Label" parent="Panel/Subscreens/LevelView/OldLevels"]
 margin_top = 148.0
 margin_right = 672.0
 margin_bottom = 172.0
@@ -740,30 +736,30 @@ size_flags_vertical = 1
 text = "Don't close the game!"
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Subscreens/LevelList/OldLevels"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Subscreens/LevelView/OldLevels"]
 margin_top = 180.0
 margin_right = 672.0
 margin_bottom = 196.0
 
-[node name="Padding" type="Control" parent="Panel/Subscreens/LevelList/OldLevels/HBoxContainer"]
+[node name="Padding" type="Control" parent="Panel/Subscreens/LevelView/OldLevels/HBoxContainer"]
 margin_right = 128.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 128, 0 )
 
-[node name="ProgressBar" type="ProgressBar" parent="Panel/Subscreens/LevelList/OldLevels/HBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="Panel/Subscreens/LevelView/OldLevels/HBoxContainer"]
 margin_left = 132.0
 margin_right = 540.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 
-[node name="Padding2" type="Control" parent="Panel/Subscreens/LevelList/OldLevels/HBoxContainer"]
+[node name="Padding2" type="Control" parent="Panel/Subscreens/LevelView/OldLevels/HBoxContainer"]
 margin_left = 544.0
 margin_right = 672.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 128, 0 )
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/Subscreens/LevelList"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/Subscreens/LevelView"]
 margin_right = 24.0
 margin_bottom = 313.0
 size_flags_vertical = 3
@@ -772,33 +768,21 @@ scroll_horizontal_enabled = false
 script = ExtResource( 51 )
 lerp_speed = 18.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Subscreens/LevelList/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Subscreens/LevelView/ScrollContainer"]
 margin_right = 24.0
 margin_bottom = 24.0
 
-[node name="ListHandler" type="Node" parent="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer"]
+[node name="ListHandler" type="Node" parent="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
 script = ExtResource( 18 )
-level_grid_path = NodePath("../LevelGrid")
-level_list_path = NodePath("../../..")
-level_panel_path = NodePath("../../../../LevelInfo/LevelPanel")
 focus_path = NodePath("../../../Focus")
-old_levels_path = NodePath("../../../OldLevels")
 
-[node name="Loader" type="Node" parent="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler"]
+[node name="Loader" type="Node" parent="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
 script = ExtResource( 20 )
-drag_cursor_path = NodePath("../../../../../../../DragCursor")
 
-[node name="Saver" type="Node" parent="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler"]
-script = ExtResource( 15 )
-
-[node name="Sorting" type="Node" parent="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler"]
-script = ExtResource( 19 )
-
-[node name="Folders" type="Node" parent="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler"]
-script = ExtResource( 21 )
-
-[node name="LevelGrid" type="GridContainer" parent="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer"]
+[node name="LevelGrid" type="GridContainer" parent="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
 margin_left = 12.0
 margin_top = 12.0
 margin_right = 12.0
@@ -809,12 +793,12 @@ custom_constants/vseparation = 16
 custom_constants/hseparation = 13
 columns = 6
 
-[node name="MouseBlocker" type="Control" parent="Panel/Subscreens/LevelList"]
+[node name="MouseBlocker" type="Control" parent="Panel/Subscreens/LevelView"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Subscreens/LevelList"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Subscreens/LevelView"]
 anims/RESET = SubResource( 9 )
 anims/transition = SubResource( 10 )
 
@@ -837,12 +821,12 @@ script = ExtResource( 26 )
 default_focus_path = NodePath("../LevelPanel/Buttons/Return")
 
 [node name="LevelPanel" type="Control" parent="Panel/Subscreens/LevelInfo"]
+unique_name_in_owner = true
 margin_left = 12.0
 margin_top = 12.0
 margin_right = 660.0
 margin_bottom = 301.0
 script = ExtResource( 7 )
-list_handler_path = NodePath("../../LevelList/ScrollContainer/MarginContainer/ListHandler")
 view_scores_text = "View Scores"
 view_info_text = "View Info"
 completion_color = Color( 1, 1, 0.498039, 1 )
@@ -1363,7 +1347,7 @@ custom_constants/separation = 10
 alignment = 1
 script = ExtResource( 17 )
 level_code_path = NodePath("../Panel/MarginContainer/LevelCode")
-list_handler_path = NodePath("../../../LevelList/ScrollContainer/MarginContainer/ListHandler")
+list_handler_path = NodePath("../../../LevelView/ScrollContainer/MarginContainer/ListHandler")
 
 [node name="Return" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
 margin_top = 54.0
@@ -1566,7 +1550,6 @@ alignment = 1
 script = ExtResource( 47 )
 folder_name_edit_path = NodePath("HBoxContainer/FolderName")
 folder_name_label_path = NodePath("../Panel/MarginContainer/VBoxContainer/FolderName")
-list_handler_path = NodePath("../../../LevelList/ScrollContainer/MarginContainer/ListHandler")
 
 [node name="Return" type="Button" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
 margin_top = 59.0
@@ -1921,11 +1904,10 @@ anims/RESET = SubResource( 23 )
 anims/transition = SubResource( 24 )
 
 [node name="DragCursor" type="Area2D" parent="."]
+unique_name_in_owner = true
 collision_layer = 0
 monitorable = false
 script = ExtResource( 49 )
-sorting_path = NodePath("../Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler/Sorting")
-list_handler_path = NodePath("../Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DragCursor"]
 position = Vector2( 4, 4 )
@@ -1941,33 +1923,31 @@ unique_name_in_owner = true
 script = ExtResource( 53 )
 
 [connection signal="pressed" from="Panel/Buttons/Back" to="." method="transition" binds= [ "MainMenu" ]]
-[connection signal="pressed" from="Panel/Buttons/FolderSettings" to="Panel/Subscreens/LevelList" method="transition" binds= [ "FolderSettings" ]]
-[connection signal="pressed" from="Panel/Buttons/Add" to="Panel/Subscreens/LevelList" method="transition" binds= [ "AddElement" ]]
-[connection signal="folder_changed" from="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler/Folders" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="update_folder_name"]
-[connection signal="folder_renamed" from="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler/Folders" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="update_folder_name"]
-[connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/Return" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="Panel/Buttons/FolderSettings" to="Panel/Subscreens/LevelView" method="transition" binds= [ "FolderSettings" ]]
+[connection signal="pressed" from="Panel/Buttons/Add" to="Panel/Subscreens/LevelView" method="transition" binds= [ "AddElement" ]]
+[connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/Return" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/PlayLevel" to="Panel/Subscreens/LevelInfo/LevelPanel" method="play_level"]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/EditLevel" to="Panel/Subscreens/LevelInfo/LevelPanel" method="edit_level"]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/CopyCode" to="Panel/Subscreens/LevelInfo/LevelPanel" method="copy_code"]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ViewTab" to="Panel/Subscreens/LevelInfo/LevelPanel" method="view_scores"]
-[connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ResetSave/PressCountdown" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ResetSave/PressCountdown" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ResetSave/PressCountdown" to="Panel/Subscreens/LevelInfo/LevelPanel" method="reset_save"]
 [connection signal="text_changed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ResetSave/PressCountdown" to="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/ResetSave/Icon" method="update_offset"]
-[connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler" method="change_focus"]
-[connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="change_focus"]
+[connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelInfo/LevelPanel" method="delete_level"]
 [connection signal="text_changed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/Icon" method="update_offset"]
-[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/Return" to="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler" method="change_focus"]
-[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/Return" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
-[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewLevel" to="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler" method="insert_level"]
-[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewLevel" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
-[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewFolder" to="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler" method="insert_folder"]
-[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewFolder" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
-[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/Return" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="change_focus"]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/Return" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelView" ]]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewLevel" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="insert_level"]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewLevel" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelView" ]]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewFolder" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="insert_folder"]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewFolder" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelView" ]]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement/Control/ElementAddButtons" method="import_level_code"]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/Panel/JSFilePicker" to="Panel/Subscreens/AddElement/Control/Panel/JSFilePicker" method="open_file_picker"]
-[connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/Return" to="Panel/Subscreens/LevelList/ScrollContainer/MarginContainer/ListHandler" method="change_focus"]
-[connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/Return" to="Panel/Subscreens/FolderSettings" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/Return" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="change_focus"]
+[connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/Return" to="Panel/Subscreens/FolderSettings" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/RenameFolder" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="rename_folder"]
 [connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/DeleteFolder/PressCountdown" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="delete_folder"]
 [connection signal="text_changed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/DeleteFolder/PressCountdown" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/DeleteFolder/Icon" method="update_offset"]

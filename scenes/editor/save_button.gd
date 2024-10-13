@@ -19,19 +19,19 @@ func _process(delta):
 func _pressed():
 	click_sound.play()
 	
-	var file_path = saved_levels_util.get_level_file_path(
+	var file_path = level_list_util.get_level_file_path(
 		Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder
 	)
-	saved_levels_util.save_level_code_file(
+	level_list_util.save_level_code_file(
 		Singleton.CurrentLevelData.level_data.get_encoded_level_data(), 
 		file_path
 	)
 	
-	var save_path = saved_levels_util.get_level_save_path(
+	var save_path = level_list_util.get_level_save_path(
 		Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder
 	)
-	if saved_levels_util.file_exists(save_path):
-		saved_levels_util.delete_file(save_path)
+	if level_list_util.file_exists(save_path):
+		level_list_util.delete_file(save_path)
 
 	Singleton.CurrentLevelData.unsaved_editor_changes = false
 		

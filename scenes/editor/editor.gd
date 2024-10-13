@@ -371,14 +371,14 @@ func _process(delta : float) -> void:
 		# whoever coded this previously, u should know this was essentially making it
 		# turn the level data into a code four times over
 		var level_code: String = Singleton.CurrentLevelData.level_data.get_encoded_level_data()
-		var file_path: String = saved_levels_util.get_level_file_path(Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder)
+		var file_path: String = level_list_util.get_level_file_path(Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder)
 		
 		Singleton.CurrentLevelData.level_info = LevelInfo.new(level_code)
 		Singleton.CurrentLevelData.level_info.load_in()
-		saved_levels_util.save_level_code_file(level_code, file_path)
+		level_list_util.save_level_code_file(level_code, file_path)
 		
-		saved_levels_util.autosave_level_to_disk(level_code, "user://autosaves/" + "main_" + str(level_info.level_name) + ".autosave")
-		saved_levels_util.autosave_level_to_disk(level_code, "user://autosaves/" + str(level_info.level_name) + "_" + str(time) + ".autosave")
+		level_list_util.autosave_level_to_disk(level_code, "user://autosaves/" + "main_" + str(level_info.level_name) + ".autosave")
+		level_list_util.autosave_level_to_disk(level_code, "user://autosaves/" + str(level_info.level_name) + "_" + str(time) + ".autosave")
 		Singleton.CurrentLevelData.unsaved_editor_changes = false
 		
 		Singleton2.reset_time()

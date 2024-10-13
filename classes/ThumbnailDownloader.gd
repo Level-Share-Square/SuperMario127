@@ -108,7 +108,7 @@ func req(arguments):
 		
 		# move it to a more permanent location
 		var extension = ".png" if is_png_header else ".jpeg"
-		saved_levels_util.move_file(destination + filename + TEMP_SUFFIX, destination + filename + extension)
+		level_list_util.move_file(destination + filename + TEMP_SUFFIX, destination + filename + extension)
 		
 
 	elif http.get_response_code() == 302:

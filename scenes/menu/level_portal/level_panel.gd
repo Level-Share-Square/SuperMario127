@@ -145,12 +145,12 @@ func save_level():
 	lss_link_util.initialize_folder()
 	page_info = add_info_to_level(page_info)
 	
-	var local_id: String = saved_levels_util.generate_level_id()
-	var level_path: String = saved_levels_util.get_level_file_path(
+	var local_id: String = level_list_util.generate_level_id()
+	var level_path: String = level_list_util.get_level_file_path(
 		local_id,
-		saved_levels_util.BASE_FOLDER)
-	saved_levels_util.save_level_code_file(page_info.level_code, level_path)
-	sort_file_util.add_level_quick(saved_levels_util.BASE_FOLDER, local_id)
+		level_list_util.BASE_FOLDER)
+	level_list_util.save_level_code_file(page_info.level_code, level_path)
+	sort_file_util.add_to_sort(local_id, level_list_util.BASE_FOLDER, sort_file_util.LEVELS)
 	
 	lss_link_util.add_level_to_link(page_info.level_id, level_path)
 	
@@ -164,7 +164,7 @@ func play_level():
 	var local_id: String = lss_link_util.get_path_from_id(page_info.level_id)
 	Singleton.SceneSwitcher.menu_return_screen = "LevelPortal"
 	Singleton.SceneSwitcher.menu_return_args = [page_info.level_id]
-	Singleton.SceneSwitcher.start_level(page_info.level_info, local_id, saved_levels_util.BASE_FOLDER, false, true)
+	Singleton.SceneSwitcher.start_level(page_info.level_info, local_id, level_list_util.BASE_FOLDER, false, true)
 
 
 ## adding descriptions, author, thumbnail

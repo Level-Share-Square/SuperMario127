@@ -1,13 +1,13 @@
 extends Area2D
 
-export var sorting_path: NodePath
-onready var sorting: Node = get_node(sorting_path)
+var sort: Dictionary
 
-export var list_handler_path: NodePath
-onready var list_handler: Node = get_node(list_handler_path)
+onready var list_handler = $"%ListHandler"
+onready var level_grid = $"%LevelGrid"
 
-var current_card: Button
+var current_card: BaseCard
 var decoration: Control
+
 
 func start_dragging(card: Button):
 	if is_instance_valid(current_card): return
@@ -20,6 +20,8 @@ func start_dragging(card: Button):
 	decoration = current_card.get_node("Decoration").duplicate()
 	decoration.modulate.a = 0.75
 	decoration.rect_position = card.rect_global_position - get_viewport().get_mouse_position()
+	
+	decoration.set_script(null)
 	add_child(decoration)
 
 
@@ -32,10 +34,8 @@ func stop_dragging(card: Button):
 	current_card.modulate.a = 1
 	current_card = null
 	
-	decoration.queue_free()
+	decoration.call_deferred("queue_free")
 	decoration = null
-	
-	sorting.save_to_json(list_handler.working_folder)
 
 
 func _process(delta):
@@ -47,19 +47,7 @@ func _area_entered(area):
 	if not is_instance_valid(current_card): return
 	
 	var intersecting_card: Button = area.get_parent()
-	if intersecting_card == current_card: return
-	
-	var level_grid: GridContainer = current_card.get_parent()
 	var new_index: int = intersecting_card.get_index()
-	level_grid.move_child(current_card, new_index)
 	
-	var saved_index: int = new_index
-	saved_index -= sorting.sort.folders.size()
-	if list_handler.folder_stack.size() > 1:
-		saved_index -= 1
-		print("back button present!")
-	
-	var level_id = current_card.name
-	if level_id in sorting.sort.levels:
-		sorting.sort.levels.erase(level_id)
-		sorting.sort.levels.insert(saved_index, level_id)
+	current_card.drag_index = new_index
+	current_card.change_index(new_index)
