@@ -106,33 +106,37 @@ var __sort_point := Vector2.ZERO
 func sort_by_dist_to_point(a: Node2D, b: Node2D) -> bool:
 	return a.position.distance_squared_to(__sort_point) < b.position.distance_squared_to(__sort_point)
 
-func get_objects_overlapping_position(point: Vector2, area_rect: Rect2):
+func get_objects_overlapping_position(point: Vector2, area_rect: Rect2, area: Area2D = Area2D.new()):
 	var found_objects = []
 	for object_node in objects_node.get_children():
-		if area_rect.has_point(object_node.global_position):
-			var editor_hitbox = object_node.get_node_or_null("EditorCircle")
-			if is_instance_valid(object_node.get_node_or_null("EditorCircle")):
-				if(Vector2().distance_to(object_node.to_local(point)) < editor_hitbox.get_shape().radius):
-					found_objects.append(object_node)
-			editor_hitbox = object_node.get_node_or_null("EditorHitbox")
-				
-			if is_instance_valid(editor_hitbox):
-				if editor_hitbox.is_in_point(point):
-					found_objects.append(object_node)
-			# for resizable platforms
-			elif object_node.get_node_or_null("Sprite") is NinePatchRect or object_node.get_node_or_null("Sprite") is ColorRect:
-				var rect = object_node.get_node("Sprite").get_rect()
+		var editor_hitbox = object_node.get_node_or_null("EditorHitbox")
+		if is_instance_valid(editor_hitbox):
+			if area.overlaps_area(editor_hitbox):
+				editor_hitbox = object_node.get_node_or_null("EditorCircle")
+				if is_instance_valid(object_node.get_node_or_null("EditorCircle")):
+					if(Vector2().distance_to(object_node.to_local(point)) < editor_hitbox.get_shape().radius):
+						found_objects.append(object_node)
+				editor_hitbox = object_node.get_node_or_null("EditorHitbox")
 					
-				if rect.has_point(object_node.to_local(point)):
+				if is_instance_valid(editor_hitbox):
+					if editor_hitbox.is_in_point(point):
+						found_objects.append(object_node)
+				# for resizable platforms
+		else:
+			if area_rect.has_point(object_node.position):
+				if object_node.get_node_or_null("Sprite") is NinePatchRect or object_node.get_node_or_null("Sprite") is ColorRect:
+					var rect = object_node.get_node("Sprite").get_rect()
+						
+					if rect.has_point(object_node.to_local(point)):
 						found_objects.append(object_node) 
-			else:
-				var overlap : int = precise_object_overlap(object_node, point)
-				
-				if overlap == -1:
-					overlap = 1 if (object_node.position - point).length() <= 20 else 0
-					
-				if overlap == 1:
-					found_objects.append(object_node)
+				else:
+					var overlap : int = precise_object_overlap(object_node, point)
+						
+					if overlap == -1:
+						overlap = 1 if (object_node.position - point).length() <= 20 else 0
+							
+					if overlap == 1:
+						found_objects.append(object_node)
 		
 	# Sorting from distance to point hopefully improves selecting overlapping objects
 	__sort_point = point

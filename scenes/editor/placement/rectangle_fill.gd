@@ -16,6 +16,7 @@ var placing_button: int
 var initial_pos: Vector2
 var mouse_pos: Vector2
 var mouse_tile_pos: Vector2
+var mouse_pos_direction: Vector2
 
 var left_down: bool
 var right_down: bool
@@ -64,12 +65,14 @@ func set_tile(pos: Vector2):
 func selected_update():
 	if selected_box.item.is_object: return
 	
+	mouse_pos_direction = mouse_pos/Vector2(abs(mouse_pos.x), abs(mouse_pos.y))
 	
 	if drag.visible:
 		var drag_size: Vector2 = (mouse_tile_pos * TILE_SIZE) - initial_pos + ((((mouse_tile_pos * TILE_SIZE) - initial_pos).sign()+Vector2(1, 1))/2 * Vector2(32, 32))
 		
 		drag.rect_size = drag_size.abs()
 		drag.rect_scale = drag_size.sign()
+		drag.rect_position = initial_pos
 		
 	
 	## input
@@ -89,11 +92,17 @@ func selected_update():
 
 
 func mouse_down() -> void:
-	initial_pos = mouse_tile_pos * TILE_SIZE - Vector2(16,16)
+	initial_pos = mouse_tile_pos * TILE_SIZE
+	mouse_pos_direction = mouse_pos/Vector2(abs(mouse_pos.x), abs(mouse_pos.y))
 	
 	drag.rect_position = initial_pos
 	drag.rect_size = Vector2.ZERO
 	drag.visible = true
+	
+	if right_down:
+		drag.color = Color(1, 0, 0, .5)
+	else:
+		drag.color = Color(1, 1, 1, .5)
 
 
 func mouse_up() -> void:
