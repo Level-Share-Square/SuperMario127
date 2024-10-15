@@ -46,7 +46,11 @@ func _update(delta):
 	sprite.animation = "idleRight" if character.facing_direction == 1 else "idleLeft"
 	sprite.rotation = 0
 	
+	priority = 4
+	disable_movement = false
 	if _past_squish_threshold():
+		priority = 8
+		disable_movement = true
 		damage_timer -= delta
 		if damage_timer <= 0:
 			damage_timer = HURT_INTERVAL

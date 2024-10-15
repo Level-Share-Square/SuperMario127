@@ -130,14 +130,14 @@ func reset_save_data(delete_file: bool = true) -> void:
 	for key in time_scores.keys():
 		time_scores[key] = EMPTY_TIME_SCORE
 	
-	if delete_file and saved_levels_util.file_exists(get_save_path()):
-		saved_levels_util.delete_file(get_save_path())
+	if delete_file and level_list_util.file_exists(get_save_path()):
+		level_list_util.delete_file(get_save_path())
 	#var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
 
 
 ### new functions designed to save separately to the level code
 func get_save_path() -> String:
-	return saved_levels_util.get_level_save_path(Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder)
+	return level_list_util.get_level_save_path(Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder)
 
 func get_save_file_dictionary() -> Dictionary:
 	var save_dictionary : Dictionary = \
@@ -199,17 +199,17 @@ static func shine_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
 func set_shine_collected(shine_id : int, save_to_disk : bool = true) -> void:
 	collected_shines[str(shine_id)] = true
 	if save_to_disk:
-		saved_levels_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
+		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
 
 func set_star_coin_collected(star_coin_id : int, save_to_disk : bool = true) -> void:
 	collected_star_coins[str(star_coin_id)] = true
 	if save_to_disk:
-		saved_levels_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
+		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
 
 func set_fludd_activated(fludd_id : int, save_to_disk : bool = true) -> void:
 	activated_fludds[fludd_id] = true
 	if save_to_disk:
-		saved_levels_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
+		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
 
 func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
 	var new_coin_score = Singleton.CurrentLevelData.level_data.vars.coins_collected
@@ -222,7 +222,7 @@ func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
 		time_scores[str(shine_id)] = new_time_score
 		Singleton2.save_ghost = true
 	if save_to_disk:
-		saved_levels_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
+		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
 
 func get_level_background_texture() -> StreamTexture:
 	var level_background = level_data.areas[spawn_area].settings.sky 
@@ -255,11 +255,10 @@ func get_collectible_counts() -> Dictionary:
 		"total_collectibles": 0,
 		"total_collected": 0,
 	}
-	# Only count shine sprites that have show_in_menu on
-	for details in shine_details:
-		dict["total_shines"] += 1
-		if collected_shines[str(details["id"])]:
-			dict["collected_shines"] += 1
+	
+	dict["total_shines"] = collected_shines.values().size()
+	dict["collected_shines"] = collected_shines.values().count(true)
+	
 	dict["total_star_coins"] = collected_star_coins.size()
 	dict["collected_star_coins"] = collected_star_coins.values().count(true)
 	

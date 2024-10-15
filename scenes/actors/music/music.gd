@@ -60,15 +60,15 @@ func get_custom_file_path() -> String:
 	var area: int = Singleton.CurrentLevelData.area
 	var working_folder: String = Singleton.CurrentLevelData.working_folder
 	
-	return saved_levels_util.get_level_music_path(
+	return level_list_util.get_level_music_path(
 		level_id, 
 		area,
 		working_folder)
 
 func reset_custom_song() -> void:
 	var file_path: String = get_custom_file_path()
-	if saved_levels_util.file_exists(file_path):
-		saved_levels_util.delete_file(file_path)
+	if level_list_util.file_exists(file_path):
+		level_list_util.delete_file(file_path)
 
 func handle_custom_song(url: String) -> void:
 	loop = 0.0
@@ -80,7 +80,7 @@ func handle_custom_song(url: String) -> void:
 	stop()
 	
 	var file_path: String = get_custom_file_path()
-	if not saved_levels_util.file_exists(file_path):
+	if not level_list_util.file_exists(file_path):
 		print("OGG file not found, downloading from url...")
 		
 		var level_id: String = Singleton.CurrentLevelData.level_id
@@ -99,7 +99,7 @@ func handle_custom_song(url: String) -> void:
 
 
 func save_ogg(url: String, level_id: String, area: int, working_folder: String) -> void:
-	var file_path: String = saved_levels_util.get_level_music_path(
+	var file_path: String = level_list_util.get_level_music_path(
 		level_id, 
 		area,
 		working_folder)

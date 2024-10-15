@@ -1,16 +1,13 @@
 extends Control
 
-const TIME_SCORE_SCENE: PackedScene = preload("res://scenes/menu/levels_list/list_elements/time_score.tscn")
 
+const TIME_SCORE_SCENE: PackedScene = preload("res://scenes/menu/levels_list/level_panel/time_score.tscn")
 
-export var list_handler_path: NodePath
-onready var list_handler: Node = get_node(list_handler_path)
+onready var list_handler = $"%ListHandler"
 onready var http_thumbnails = $"%HTTPThumbnails"
-
 
 var working_folder: String
 var level_id: String
-
 var level_info: LevelInfo
 
 ### tabs
@@ -75,9 +72,9 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 	
 	
 	# load save file
-	var save_path: String = saved_levels_util.get_level_save_path(level_id, working_folder)
-	if saved_levels_util.file_exists(save_path):
-		level_info.load_save_from_dictionary(saved_levels_util.load_level_save_file(save_path))
+	var save_path: String = level_list_util.get_level_save_path(level_id, working_folder)
+	if level_list_util.file_exists(save_path):
+		level_info.load_save_from_dictionary(level_list_util.load_level_save_file(save_path))
 	load_time_scores()
 	
 	var collectible_counts = level_info.get_collectible_counts()

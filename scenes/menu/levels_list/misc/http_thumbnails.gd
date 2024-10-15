@@ -22,13 +22,13 @@ func load_next_image():
 	var working_folder: String = list_handler.working_folder
 	var level_id: String = ids_queue[0]
 	
-	var thumbnail_path: String = saved_levels_util.get_level_thumbnail_path(level_id, working_folder)
-	if not saved_levels_util.file_exists(thumbnail_path):
+	var thumbnail_path: String = level_list_util.get_level_thumbnail_path(level_id, working_folder)
+	if not level_list_util.file_exists(thumbnail_path):
 		.load_next_image()
 	else:
 		var _id: String = ids_queue.pop_front()
 		var url: String = image_queue.pop_front()
-		var texture: ImageTexture = saved_levels_util.get_image_from_path(thumbnail_path)
+		var texture: ImageTexture = level_list_util.get_image_from_path(thumbnail_path)
 		
 		cache_image(url, texture)
 		emit_signal("image_loaded", url, texture)
@@ -43,7 +43,7 @@ func request_completed(result, response_code, headers, body, url):
 	var working_folder: String = list_handler.working_folder
 	var level_id: String = ids_queue.pop_front()
 	
-	var path: String = saved_levels_util.get_level_thumbnail_path(level_id, working_folder, false)
+	var path: String = level_list_util.get_level_thumbnail_path(level_id, working_folder, false)
 	var extension: String = ".png" if image_util.is_png(body) else ".jpg"
 	
 	var image_file := File.new()

@@ -2,6 +2,7 @@ extends Node
 
 const CATEGORIES = [
 	"General",
+	"Audio",
 	"Meta"
 ]
 

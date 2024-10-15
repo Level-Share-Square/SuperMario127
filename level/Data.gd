@@ -19,7 +19,7 @@ var vars : LevelVars
 
 func _init(code: String = ""):
 	if code == "":
-		code = saved_levels_util.load_level_code_file("res://level/default_level.tres")
+		code = level_list_util.load_level_code_file("res://level/default_level.tres")
 	load_in(code)
 #	var ready_function_struct = FunctionStruct.new()
 	

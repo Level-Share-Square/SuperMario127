@@ -1,7 +1,7 @@
 extends Node
 
 var level_id: String
-var working_folder: String = saved_levels_util.BASE_FOLDER
+var working_folder: String = level_list_util.BASE_FOLDER
 
 var level_info : LevelInfo
 var level_data : LevelData

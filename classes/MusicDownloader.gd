@@ -99,7 +99,7 @@ func req(arguments):
 				emit_signal("request_progress", percent_loaded)
 				
 		file.close()
-		saved_levels_util.move_file(file_path + TEMP_SUFFIX, file_path)
+		level_list_util.move_file(file_path + TEMP_SUFFIX, file_path)
 		
 
 	elif http.get_response_code() == 302:
