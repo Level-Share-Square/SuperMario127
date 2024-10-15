@@ -89,6 +89,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/nozzles/Cloud.gd"
 }, {
+"base": "Node",
+"class": "Component",
+"language": "GDScript",
+"path": "res://Component.gd"
+}, {
 "base": "Reference",
 "class": "ControlPresets",
 "language": "GDScript",
@@ -726,6 +731,7 @@ _global_script_class_icons={
 "Character": "",
 "ChatMessage": "",
 "CloudNozzle": "",
+"Component": "",
 "ControlPresets": "",
 "CrushedBaseState": "",
 "CrushedSideState": "",
