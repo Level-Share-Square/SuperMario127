@@ -3131,6 +3131,15 @@ palette_previews = [ ExtResource( 852 ), ExtResource( 851 ), ExtResource( 853 ),
 icon = ExtResource( 852 )
 preview = ExtResource( 852 )
 
+[node name="Propeller" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 24 )
+object_id = 136
+is_object = true
+palette_icons = [ ExtResource( 1451 ), ExtResource( 1450 ), ExtResource( 1456 ), ExtResource( 1455 ), ExtResource( 1457 ) ]
+palette_previews = [ ExtResource( 1449 ), ExtResource( 1449 ), ExtResource( 1449 ), ExtResource( 1449 ), ExtResource( 1449 ) ]
+icon = ExtResource( 1451 )
+preview = ExtResource( 1449 )
+
 [node name="Jelectro" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 24 )
 object_id = 69
@@ -3277,15 +3286,6 @@ object_id = 133
 is_object = true
 icon = ExtResource( 1442 )
 preview = ExtResource( 1441 )
-
-[node name="Propeller" type="Node" parent="PlaceableItems/EnemiesGroup"]
-script = ExtResource( 24 )
-object_id = 136
-is_object = true
-palette_icons = [ ExtResource( 1451 ), ExtResource( 1450 ), ExtResource( 1456 ), ExtResource( 1455 ), ExtResource( 1457 ) ]
-palette_previews = [ ExtResource( 1449 ), ExtResource( 1449 ), ExtResource( 1449 ), ExtResource( 1449 ), ExtResource( 1449 ) ]
-icon = ExtResource( 1451 )
-preview = ExtResource( 1449 )
 
 [node name="GrassGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )

@@ -324,7 +324,7 @@ func update_selected_object(mouse_pos : Vector2) -> void:
 		mouse_object_area.position = mouse_pos
 	if selected_box.item.is_object and !rotating and time_clicked <= 0:
 		var mouse_object_rect = Rect2(mouse_object_area.position-mouse_object_area.get_child(0).shape.extents, mouse_object_area.get_child(0).shape.extents*2)
-		var objects = shared.get_objects_overlapping_position(mouse_pos, mouse_object_rect)
+		var objects = shared.get_objects_overlapping_position(mouse_pos, mouse_object_rect, mouse_object_area)
 		if objects.size() > 0 and placement_mode != "Tile":
 			if hovered_object != objects[0]:
 				# If something was already hovered, mark it as not
@@ -508,7 +508,7 @@ func _process(delta : float) -> void:
 						var last_tile = shared.get_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer)
 						
 						if !(last_tile[0] == item.tileset_id and last_tile[1] == item.tile_id):
-							tiles_stack.append([mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, last_tile, [item.tileset_id, item.tile_id]])
+							tiles_stack.append([mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, last_tile, [item.tileset_id, item.tile_id, item.palette_index]])
 						
 						shared.set_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, item.tileset_id, item.tile_id, item.palette_index)
 				elif !is_instance_valid(hovered_object) and !rotating: # Place object
@@ -622,7 +622,7 @@ func _process(delta : float) -> void:
 							var last_tile = shared.get_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer)
 							
 							if !(last_tile[0] == 0 and last_tile[1] == 0):
-								tiles_stack.append([mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, last_tile, [0, 0]])
+								tiles_stack.append([mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, last_tile, [0, 0, 0]])
 							
 							shared.set_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, 0, 0)
 			

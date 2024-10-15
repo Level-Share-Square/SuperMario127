@@ -1,8 +1,6 @@
 shader_type canvas_item;
 render_mode blend_add, unshaded;
 
-uniform vec2 scale;
-
 uniform vec4 uv_main_tiling_offset_speed;
 uniform vec4 uv_mask_tiling_offset_speed;
 uniform vec4 uv_dissolve_tiling_offset_speed;
@@ -34,10 +32,17 @@ void fragment() {
 	vec2 main_uv = UV;
 	vec2 mask_uv = UV;
 	
-	vec2 dissolve_uv = UV;
-	dissolve_uv -= 0.5;
-	dissolve_uv *= 2.0;
+	vec2 base_uv = UV;
+	base_uv -= 0.5;
+	base_uv *= 2.0;
 	
+	float angle = atan(base_uv.y, base_uv.x) / (2.0 * PI);
+	float dist = sqrt((base_uv.x*base_uv.x)+(base_uv.y*base_uv.y));
+			
+	vec2 dissolve_polar_uv = vec2(
+			angle,
+			dist
+			);
 	
 	vec2 main_offset = main_offset_speed * TIME;
 	vec2 mask_offset = mask_offset_speed * TIME;
@@ -49,20 +54,10 @@ void fragment() {
 	mask_uv *= mask_tiling;
 	mask_uv += mask_offset;
 	
-//	dissolve_uv *= dissolve_tiling * scale;
-//	dissolve_uv += dissolve_offset;
+	base_uv *= dissolve_tiling;
+	base_uv += dissolve_offset;
 	
 	COLOR = texture(TEXTURE, main_uv);
-//	COLOR.rgb = mod(COLOR.rgb, vec3(.1))*vec3(10.0);
 	COLOR.a *= texture(mask, mask_uv).r/2.0;
-	if (abs(dissolve_uv.x) >= .75 * dissolve_tiling.x * scale.x) {
-		float new_alpha = clamp((dissolve_value -  5.0 * (abs(dissolve_uv.x) - (.75 * dissolve_tiling.x * scale.x)) + min(1, texture(dissolve, dissolve_uv).x)), 0, 1);
-//		new_alpha -= mod(new_alpha, .25)*4.0;
-		COLOR.a *= new_alpha;
-	}
-	if (abs(dissolve_uv.y) >= .75 * dissolve_tiling.y * scale.y) {
-		float new_alpha = clamp((dissolve_value - 5.0 * (abs(dissolve_uv.y) - (.75 * dissolve_tiling.y * scale.y)) + min(1, texture(dissolve, dissolve_uv).x)), 0, 1);
-//		new_alpha -= mod(new_alpha, .25)*4.0;
-		COLOR.a *= new_alpha;
-	}
+//	COLOR = vec4(mod(COLOR.r, .005)*100.0, mod(COLOR.g, .005)*100.0, mod(COLOR.b, .005)*100.0, COLOR.a);
 }

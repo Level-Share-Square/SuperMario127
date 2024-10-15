@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 stream = ExtResource( 2 )
-volume_db = -4
+volume_db = -8
 pitch_scale = 1
 title = "The Alternate Route"
 note = "Remix by ParagonX9"

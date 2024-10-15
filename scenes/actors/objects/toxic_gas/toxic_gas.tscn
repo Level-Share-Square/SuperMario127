@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/actors/objects/toxic_gas/toxic_gas.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/toxic_gas/toxic_gas_dissolve.gdshader" type="Shader" id=2]
@@ -17,22 +17,34 @@ seamless = true
 noise = SubResource( 12 )
 noise_offset = Vector2( 385, 639 )
 
-[sub_resource type="OpenSimplexNoise" id=10]
+[sub_resource type="OpenSimplexNoise" id=14]
 
-[sub_resource type="NoiseTexture" id=11]
+[sub_resource type="NoiseTexture" id=15]
+flags = 3
 seamless = true
-bump_strength = 32.0
-noise = SubResource( 10 )
+bump_strength = 11.8
+noise = SubResource( 14 )
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 2 )
-shader_param/uv_tiling_offset_speed = Plane( 4, -1, 0, 0.25 )
-shader_param/mask = SubResource( 11 )
+shader_param/scale = Vector2( 1, 1 )
+shader_param/uv_main_tiling_offset_speed = Plane( 1, 1, -0.15, -0.15 )
+shader_param/uv_mask_tiling_offset_speed = Plane( 1, 1, -0.05, 0.15 )
+shader_param/uv_dissolve_tiling_offset_speed = Plane( 1, 1, 0, -0.15 )
+shader_param/dissolve_value = 0.721
+shader_param/mask = SubResource( 15 )
 shader_param/dissolve = SubResource( 13 )
 
-[sub_resource type="ShaderMaterial" id=9]
-shader = ExtResource( 2 )
-shader_param/uv_tiling_offset_speed = null
+[sub_resource type="OpenSimplexNoise" id=16]
+persistence = 0.375
+lacunarity = 0.19
+
+[sub_resource type="NoiseTexture" id=17]
+flags = 3
+width = 256
+height = 256
+seamless = true
+noise = SubResource( 16 )
 
 [node name="ToxicGas" type="Node2D"]
 script = ExtResource( 1 )
@@ -44,57 +56,11 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Icon" type="Sprite" parent="."]
-position = Vector2( -135, -116 )
-scale = Vector2( 0.3625, 0.3625 )
+position = Vector2( -128, 0 )
 texture = ExtResource( 3 )
 
 [node name="Node2D" type="Node2D" parent="."]
-modulate = Color( 0.0862745, 0.682353, 0, 1 )
 
 [node name="Sprite" type="Sprite" parent="Node2D"]
 material = SubResource( 7 )
-position = Vector2( 99, -92 )
-texture = ExtResource( 3 )
-
-[node name="ColorRect5" type="ColorRect" parent="Node2D"]
-visible = false
-material = SubResource( 7 )
-margin_left = -16.0
-margin_top = -16.0
-margin_right = 16.0
-margin_bottom = 16.0
-
-[node name="ColorRect" type="ColorRect" parent="Node2D"]
-visible = false
-material = SubResource( 9 )
-margin_left = -26.0
-margin_top = -48.0
-margin_right = 26.0
-margin_bottom = -16.0
-
-[node name="ColorRect2" type="ColorRect" parent="Node2D"]
-visible = false
-material = SubResource( 7 )
-margin_left = 48.0
-margin_top = -26.0
-margin_right = 100.0
-margin_bottom = 6.0
-rect_rotation = 90.0
-
-[node name="ColorRect3" type="ColorRect" parent="Node2D"]
-visible = false
-material = SubResource( 7 )
-margin_left = 26.0
-margin_top = 48.0
-margin_right = 78.0
-margin_bottom = 80.0
-rect_rotation = 180.0
-
-[node name="ColorRect4" type="ColorRect" parent="Node2D"]
-visible = false
-material = SubResource( 7 )
-margin_left = -48.0
-margin_top = 26.0
-margin_right = 4.0
-margin_bottom = 58.0
-rect_rotation = 270.0
+texture = SubResource( 17 )
