@@ -17,6 +17,9 @@ var can_collect_coins : Array
 export var switch_timer : float = 0.0
 export var sound_timer : float = 0.0
 
+func get_shared_node() -> Node:
+	return $Viewports/ViewportContainer/Viewport/World.get_node("Shared")
+
 func _process(_delta):
 	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
 

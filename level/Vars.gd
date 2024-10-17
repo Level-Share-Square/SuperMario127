@@ -17,7 +17,7 @@ var shine_shards_collected := [[0, []]]
 var max_shine_shards := 0
 var purple_starbits_collected := [[0, []]]
 var max_purple_starbits := 0
-var required_purple_starbits := []
+var required_purple_starbits = []
 var nozzles_collected = ["null"]
 var teleporters = []
 var transition_data = []
@@ -38,6 +38,9 @@ func reload():
 	nozzles_collected = Singleton.CheckpointSaved.nozzles_collected.duplicate(true)
 	liquid_positions = Singleton.CheckpointSaved.liquid_positions.duplicate(true)
 	switch_state = Singleton.CheckpointSaved.switch_state.duplicate(true)
+	required_purple_starbits = []
+	for area in Singleton.CurrentLevelData.level_data.areas:
+		required_purple_starbits.append([0])
 	
 
 func reset_counters():

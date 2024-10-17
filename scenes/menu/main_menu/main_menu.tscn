@@ -428,7 +428,7 @@ script = SubResource( 10 )
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Exit"]
 margin_left = 25.0
-margin_top = 3.99997
+margin_top = 3.99998
 margin_right = 45.0
 margin_bottom = 24.0
 mouse_filter = 2

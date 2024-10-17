@@ -13,6 +13,8 @@ func _ready():
 	# (kind of a bad solution imo)
 	for i in range(5):
 		yield(get_tree(), "physics_frame")
+#	var objects = get_node("/root").get_node("Player").get_shared_node().get_node("Objects")
+#	yield(objects, "finished_loading")
 	
 	var variables: LevelVars = Singleton.CurrentLevelData.level_data.vars
 	max_shards = variables.max_shine_shards

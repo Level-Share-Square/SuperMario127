@@ -2,6 +2,8 @@ extends Node
 
 #TODO: Optimize
 
+signal finished_loading
+
 var level_data : LevelData
 var level_area : LevelArea
 
@@ -13,6 +15,8 @@ func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
 	
 	for object in loaded_level_area.objects:
 		create_object(object, false)
+	
+	emit_signal("finished_loading")
 		
 func set_property(object_node : GameObject, property, value):
 	object_node.set_property(property, value, true)
