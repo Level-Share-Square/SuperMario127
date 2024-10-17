@@ -2259,9 +2259,11 @@ margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 1446 )
 
-[node name="Drag" type="ColorRect" parent="Placement/RectangleFill"]
-visible = false
-color = Color( 1, 1, 1, 0.878431 )
+[node name="Node2D" type="Node2D" parent="Placement/RectangleFill"]
+z_index = 10
+
+[node name="Drag" type="ColorRect" parent="Placement/RectangleFill/Node2D"]
+color = Color( 1, 1, 1, 0.501961 )
 
 [node name="PlaceableItems" type="Node" parent="."]
 
