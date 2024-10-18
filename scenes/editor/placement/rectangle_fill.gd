@@ -5,7 +5,7 @@ const TILE_SIZE: int = 32
 
 
 onready var editor: Node = get_owner()
-onready var drag: ColorRect = $Drag
+onready var drag: ColorRect = $Node2D/Drag
 
 
 var selected_box: Node
@@ -17,6 +17,7 @@ var initial_pos: Vector2
 var mouse_pos: Vector2
 var mouse_tile_pos: Vector2
 var mouse_pos_direction: Vector2
+var selection_area : Rect2
 
 var left_down: bool
 var right_down: bool
@@ -24,6 +25,8 @@ var right_down: bool
 var left_last_down: bool
 var right_last_down: bool
 
+func _ready():
+	drag.visible = false
 
 func place_tiles():
 	var select_start: Vector2 = (initial_pos / 32).round()
@@ -92,15 +95,16 @@ func selected_update():
 
 
 func mouse_down() -> void:
-	initial_pos = mouse_tile_pos * TILE_SIZE
+	initial_pos = mouse_pos
 	mouse_pos_direction = mouse_pos/Vector2(abs(mouse_pos.x), abs(mouse_pos.y))
 	
-	drag.rect_position = initial_pos
+	selection_area.size = Vector2(TILE_SIZE, TILE_SIZE)
+#	drag.rect_position = initial_pos + Vector2(TILE_SIZE, TILE_SIZE)*(Vector2(mod(mouse_pos.x, float(TILE_SIZE)), mouse_pos.y%TILE_SIZE))
 	drag.rect_size = Vector2.ZERO
 	drag.visible = true
 	
 	if right_down:
-		drag.color = Color(1, 0, 0, .5)
+		drag.color = Color(1, 0.1, 0.1, .5)
 	else:
 		drag.color = Color(1, 1, 1, .5)
 
