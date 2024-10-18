@@ -86,15 +86,10 @@ func _physics_process(delta):
 	if is_nan(pathfollow.offset): return
 	
 	var offset_add = working_speed * delta * SPEED_SCALE_MULTIPLIER
-	if not is_nan(pathfollow.offset):
-		pathfollow.offset += offset_add
-		reset_physics_interpolation()
-		
-		if !loops:
-			#beautiful logic right here (makes saw move back and forward
-			if pathfollow.offset >= path.curve.get_baked_length() or pathfollow.offset <= 0:
-				working_speed = -working_speed
-	else:
-		print(offset_add)
-		print(pathfollow.offset)
-		
+	pathfollow.offset += offset_add
+	reset_physics_interpolation()
+	
+	if !loops:
+		#beautiful logic right here (makes saw move back and forward
+		if pathfollow.offset >= path.curve.get_baked_length() or pathfollow.offset <= 0:
+			working_speed = -working_speed
