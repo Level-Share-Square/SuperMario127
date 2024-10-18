@@ -11,26 +11,19 @@ class_name lss_link_util
 ## downloaded from online and dont own!!
 
 
-const LSS_FOLDER: String = "user://lss"
+const BASE_FOLDER: String = "user://level_list"
 const LINK_PATH: String = "/level.links"
-const FULL_PATH: String = LSS_FOLDER + LINK_PATH
+const FULL_PATH: String = BASE_FOLDER + LINK_PATH
 
 const SECTION_NAME: String = "LSS Level Links"
 const SECTION_KEY: String = "level_links"
-
-
-static func initialize_folder():
-	var dir := Directory.new()
-	if !dir.dir_exists(LSS_FOLDER):
-		#warning-ignore:return_value_discarded
-		dir.make_dir(LSS_FOLDER)
 
 
 static func get_link_file() -> ConfigFile:
 	var link_file := ConfigFile.new()
 	var error: int = link_file.load(FULL_PATH)
 	if error != OK:
-		push_error("Error loading LSS link file!")
+		printerr("Error loading LSS link file!")
 	return link_file
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=6]
 [ext_resource path="res://scenes/player/ui_new/text/dialogue_text.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/player/ui_new/timers/timer_manager.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/player/ui_new/reference2.png" type="Texture" id=9]
 [ext_resource path="res://scenes/player/ui_new/ui/shine_shards.png" type="Texture" id=10]
 [ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://scenes/player/viewports.gd" type="Script" id=12]
@@ -1651,15 +1650,6 @@ __meta__ = {
 
 [node name="GestureControls" parent="UI" instance=ExtResource( 30 )]
 character_path = NodePath("../../Viewports/ViewportContainer/Viewport/World/Character")
-
-[node name="Reference2" type="Sprite" parent="UI"]
-visible = false
-position = Vector2( 723, 360 )
-scale = Vector2( 0.75, 0.75 )
-texture = ExtResource( 9 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Viewports" type="HBoxContainer" parent="."]
 margin_right = 772.0

@@ -15,7 +15,7 @@ func _ready() -> void:
 	
 	var res = Discord.activity_manager.register_command("/media/sam/adffc9be-fe94-4c6b-87db-cca9cb566739/work/godot-discord/app/export/game.x86_64")
 	if res != Discord.Result.Ok:
-		push_error(res)
+		printerr(res)
 
 func log_(message) -> void:
 	pass
@@ -75,19 +75,19 @@ func update_activity_() -> void:
 
 	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
 	if result != Discord.Result.Ok:
-		push_error(result)
+		printerr(result)
 		
 	invite_to_join_()
 
 func invite_to_join_() -> void:
 	var result = yield(Discord.overlay_manager.open_activity_invite(Discord.ActivityActionType.Join), "result").result
 	if result != Discord.Result.Ok:
-		push_error(result)
+		printerr(result)
 
 func send_message(new_text:String):
 	var result = yield(Discord.lobby_manager.send_lobby_message(lobby_id_, new_text), "result").result
 	if result != Discord.Result.Ok:
-		push_error(result)
+		printerr(result)
 
 func _on_create_game_pressed():
 	var transaction := Discord.lobby_manager.get_lobby_create_transaction()
@@ -98,7 +98,7 @@ func _on_create_game_pressed():
 
 	var result = yield(Discord.lobby_manager.create_lobby(transaction), "result")
 	if result.result != Discord.Result.Ok:
-		push_error(result.result)
+		printerr(result.result)
 		return
 
 	var lobby = result.data

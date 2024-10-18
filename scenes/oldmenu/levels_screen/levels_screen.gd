@@ -525,7 +525,7 @@ func update_activity() -> void:
 
 	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
 	if result != Discord.Result.Ok:
-		push_error(str(result))
+		printerr(str(result))
 		
 func update_activity2() -> void:
 	var activity = Discord.Activity.new()
@@ -543,5 +543,5 @@ func update_activity2() -> void:
 
 	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
 	if result != Discord.Result.Ok:
-		push_error(str(result))
+		printerr(str(result))
 

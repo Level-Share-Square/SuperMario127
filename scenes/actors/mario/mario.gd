@@ -383,7 +383,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 			real_friction = luigi_fric
 			wing_sprite.frames = luigi_wing_frames
 		_:
-			push_error("Illegal character loaded: " + str(character) + " REEEEEE")
+			printerr("Illegal character loaded: " + str(character) + " REEEEEE")
 	
 	add_child(sound_player) #Will throw an error if the level you're in is reset. Not that big of a deal.
 	# Death sprites are shared

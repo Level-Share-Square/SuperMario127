@@ -124,7 +124,7 @@ func update_activity() -> void:
 
 	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
 	if result != Discord.Result.Ok:
-		push_error(str(result))
+		printerr(str(result))
 
 
 # todo: mayb move this stuff elsewhere?? question mark? ?? ?

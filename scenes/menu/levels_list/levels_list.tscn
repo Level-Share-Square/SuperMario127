@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/actors/objects/cloud_platform/texture.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://scenes/menu/levels_list/icons/shine.png" type="Texture" id=12]
 [ext_resource path="res://scenes/menu/levels_list/icons/star_coin.png" type="Texture" id=13]
 [ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=14]
+[ext_resource path="res://scenes/menu/levels_list/misc/return_args.gd" type="Script" id=15]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=16]
 [ext_resource path="res://scenes/menu/levels_list/misc/element_add_buttons.gd" type="Script" id=17]
 [ext_resource path="res://scenes/menu/levels_list/list_handler.gd" type="Script" id=18]
@@ -1354,7 +1355,7 @@ margin_top = 54.0
 margin_right = 163.0
 margin_bottom = 74.0
 rect_min_size = Vector2( 0, 20 )
-focus_neighbour_top = NodePath("../ImportFolder")
+focus_neighbour_top = NodePath("../ImportCode")
 theme_type_variation = "AlternateButton"
 custom_colors/font_color_focus = Color( 0.694118, 0.2, 0.2, 1 )
 custom_colors/font_color = Color( 0.694118, 0.2, 0.2, 1 )
@@ -1436,6 +1437,7 @@ margin_top = 184.0
 margin_right = 163.0
 margin_bottom = 204.0
 rect_min_size = Vector2( 0, 20 )
+focus_neighbour_bottom = NodePath("../Return")
 theme_type_variation = "AlternateButton"
 text = "Import from Code"
 align = 2
@@ -1454,6 +1456,7 @@ script = ExtResource( 29 )
 offset = Vector2( -108, 0 )
 
 [node name="ImportFolder" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
+visible = false
 margin_top = 214.0
 margin_right = 163.0
 margin_bottom = 234.0
@@ -1622,6 +1625,7 @@ margin_right = 163.0
 margin_bottom = 169.0
 
 [node name="ExportFolder" type="Button" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
+visible = false
 margin_top = 179.0
 margin_right = 163.0
 margin_bottom = 199.0
@@ -1685,6 +1689,7 @@ text = "New Folder"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
 margin_top = 40.0
 margin_right = 424.0
 margin_bottom = 56.0
@@ -1718,6 +1723,7 @@ text = "Star Coins Total: 0"
 align = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
 margin_top = 72.0
 margin_right = 424.0
 margin_bottom = 88.0
@@ -1922,9 +1928,13 @@ anims/transition = SubResource( 6 )
 unique_name_in_owner = true
 script = ExtResource( 53 )
 
+[node name="ReturnArgs" type="Node" parent="."]
+script = ExtResource( 15 )
+
 [connection signal="pressed" from="Panel/Buttons/Back" to="." method="transition" binds= [ "MainMenu" ]]
 [connection signal="pressed" from="Panel/Buttons/FolderSettings" to="Panel/Subscreens/LevelView" method="transition" binds= [ "FolderSettings" ]]
 [connection signal="pressed" from="Panel/Buttons/Add" to="Panel/Subscreens/LevelView" method="transition" binds= [ "AddElement" ]]
+[connection signal="directory_changed" from="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="update_folder_name"]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/Return" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/PlayLevel" to="Panel/Subscreens/LevelInfo/LevelPanel" method="play_level"]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/EditLevel" to="Panel/Subscreens/LevelInfo/LevelPanel" method="edit_level"]

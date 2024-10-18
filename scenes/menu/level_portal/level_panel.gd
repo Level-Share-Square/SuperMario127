@@ -141,8 +141,6 @@ func open_website():
 
 func save_level():
 	if lss_link_util.is_level_in_link(page_info.level_id): return
-	
-	lss_link_util.initialize_folder()
 	page_info = add_info_to_level(page_info)
 	
 	var local_id: String = level_list_util.generate_level_id()
@@ -161,10 +159,13 @@ func save_level():
 func play_level():
 	save_level()
 	
-	var local_id: String = lss_link_util.get_path_from_id(page_info.level_id)
+	var level_path: String = lss_link_util.get_path_from_id(page_info.level_id)
+	var local_id: String = level_path.get_file().get_basename()
+	var working_folder: String = level_path.get_base_dir()
+	
 	Singleton.SceneSwitcher.menu_return_screen = "LevelPortal"
 	Singleton.SceneSwitcher.menu_return_args = [page_info.level_id]
-	Singleton.SceneSwitcher.start_level(page_info.level_info, local_id, level_list_util.BASE_FOLDER, false, true)
+	Singleton.SceneSwitcher.start_level(page_info.level_info, local_id, working_folder, false, true)
 
 
 ## adding descriptions, author, thumbnail

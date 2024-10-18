@@ -19,7 +19,7 @@ func _init():
 	# so i moved the loading to this function
 	var err = config.load(FILE_PATH)
 	if err != OK:
-		push_error("Error loading config file!")
+		printerr("Error loading config file!")
 
 
 func load_setting(section: String, key: String, default):

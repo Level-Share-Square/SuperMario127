@@ -317,7 +317,7 @@ func update_activity() -> void:
 
 	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
 	if result != Discord.Result.Ok:
-		push_error(str(result))
+		printerr(str(result))
 
 func update_selected_object(mouse_pos : Vector2) -> void:
 	if mouse_object_area.position != mouse_pos:

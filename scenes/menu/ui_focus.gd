@@ -7,7 +7,7 @@ onready var default_focus: Button = get_node(default_focus_path)
 
 func _input(event):
 	if disabled: return
-	if not get_parent().visible: return
+	if not is_visible_in_tree(): return
 	
 	if get_focus_owner() is LineEdit or get_focus_owner() is TextEdit: return
 	if get_focus_owner() != null and event is InputEventMouseMotion and !Input.is_mouse_button_pressed(1): 
@@ -15,10 +15,10 @@ func _input(event):
 
 func _unhandled_input(event):
 	if disabled: return
-	if not get_parent().visible: return
+	if not is_visible_in_tree(): return
 	if not is_instance_valid(default_focus): return
 	
-	if get_focus_owner() == null:
+	if not is_instance_valid(get_focus_owner()):
 		if (event.is_action_pressed("ui_left")
 		or event.is_action_pressed("ui_right")
 		or event.is_action_pressed("ui_up")
