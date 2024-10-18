@@ -16,7 +16,7 @@ func load_replies(_comment_id: String, page: int = 1):
 	print("Requesting replies for comment id ", comment_id, "...")
 	var error: int = request("https://levelsharesquare.com/api/levels/" + level_id + "/comments/" + comment_id + "?threadpage=" + str(page))
 	if error != OK:
-		push_error("An error occurred while making an HTTP request.")
+		printerr("An error occurred while making an HTTP request.")
 
 
 func load_comments(_level_id: String, page: int = 1):
@@ -29,12 +29,12 @@ func load_comments(_level_id: String, page: int = 1):
 	print("Requesting comments for level id ", level_id, "...")
 	var error: int = request("https://levelsharesquare.com/api/levels/" + level_id + "/comments?page=" + str(page))
 	if error != OK:
-		push_error("An error occurred while making an HTTP request.")
+		printerr("An error occurred while making an HTTP request.")
 
 
 func request_completed(result, response_code, headers, body):
 	if response_code != 200: 
-		push_error("Failed to connect to Level Share Square. Response code: " + str(response_code))
+		printerr("Failed to connect to Level Share Square. Response code: " + str(response_code))
 		return
 	
 	var json: JSONParseResult = JSON.parse(body.get_string_from_utf8())

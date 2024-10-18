@@ -49,7 +49,7 @@ func request_completed(result, response_code, headers, body, url):
 	var image_file := File.new()
 	var err: int = image_file.open(path + extension, File.WRITE)
 	if err != OK:
-		push_error("Error saving level thumbnail. Error code: " + str(err))
+		printerr("Error saving level thumbnail. Error code: " + str(err))
 		return
 	
 	image_file.store_buffer(body)

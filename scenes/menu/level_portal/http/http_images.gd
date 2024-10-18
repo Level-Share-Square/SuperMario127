@@ -35,7 +35,7 @@ func load_next_image():
 		#print("Requesting image at url ", url.left(32), "...")
 		var error = request(url)
 		if error != OK:
-			push_error("An error occurred while making an HTTP request.")
+			printerr("An error occurred while making an HTTP request.")
 		else:
 			loading = true
 			connect("request_completed", self, "request_completed", [url], CONNECT_ONESHOT)
@@ -56,7 +56,7 @@ func request_completed(result, response_code, headers, body, url):
 		error = image.load_jpg_from_buffer(body)
 	
 	if error != OK:
-		push_error("Image failed to load.")
+		printerr("Image failed to load.")
 	
 	var texture := ImageTexture.new()
 	texture.create_from_image(image)

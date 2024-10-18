@@ -24,7 +24,7 @@ func load_preset(preset_path: String, category: String = ""):
 	
 	var err = config.load(preset_path)
 	if err != OK:
-		push_error("Error loading config file!")
+		printerr("Error loading config file!")
 		return
 	
 	if category == "":

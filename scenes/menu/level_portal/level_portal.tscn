@@ -1395,9 +1395,6 @@ unique_name_in_owner = true
 stream = ExtResource( 6 )
 volume_db = -10.0
 
-[node name="Focus" type="Control" parent="."]
-script = ExtResource( 7 )
-
 [node name="BG" type="Control" parent="."]
 modulate = Color( 0, 0, 1, 0 )
 anchor_right = 1.0
@@ -1513,6 +1510,10 @@ unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 8 )
+
+[node name="Focus" type="Control" parent="Subscreens/LevelList"]
+script = ExtResource( 7 )
+default_focus_path = NodePath("../../../Buttons/LevelList/Back")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Subscreens/LevelList"]
 margin_right = 775.0
@@ -1858,6 +1859,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 8 )
 
+[node name="Focus" type="Control" parent="Subscreens/LevelPage"]
+script = ExtResource( 7 )
+default_focus_path = NodePath("../../../Buttons/LevelPage/Back")
+
 [node name="ScrollContainer" type="ScrollContainer" parent="Subscreens/LevelPage"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1916,7 +1921,7 @@ margin_right = 96.0
 margin_bottom = 26.0
 theme_type_variation = "TransparentButton"
 text = "View on LSS"
-script = ExtResource( 47 )
+script = ExtResource( 4 )
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons"]
 margin_left = 104.0
@@ -1932,7 +1937,7 @@ margin_bottom = 26.0
 theme_type_variation = "TransparentButton"
 disabled = true
 text = " Favorite? "
-script = ExtResource( 47 )
+script = ExtResource( 4 )
 
 [node name="Padding" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons"]
 margin_left = 208.0
@@ -2557,10 +2562,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 640.0
-margin_top = 32.0
-margin_right = 768.0
-margin_bottom = 464.0
+margin_left = -128.0
+margin_top = -184.0
+margin_bottom = 248.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
 script = ExtResource( 17 )

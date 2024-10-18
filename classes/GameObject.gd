@@ -190,13 +190,13 @@ func set_bool_alias(key, true_alias, false_alias):
 	if true_alias != null && false_alias != null:
 		property_value_to_name[key] = {true: true_alias, false: false_alias}
 	else:
-		push_error("Bool aliases for %s was not set!" % key)
+		printerr("Bool aliases for %s was not set!" % key)
 		
 func set_property_menu(key, menu_array: Array):
 	if menu_array != null:
 		property_value_menus[key] = menu_array
 	else:
-		push_error("Property menu for %s was not set!" % key)
+		printerr("Property menu for %s was not set!" % key)
 
 func on_signal_fire(index):
 	var current_mode = get_tree().get_current_scene().mode

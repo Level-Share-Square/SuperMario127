@@ -59,7 +59,7 @@ func _ready():
 							exit_teleport(obj)
 							pass
 						_:
-							push_error("Remote teleport unsuccessful! %s has an invalid object type!" % transition_data[1])
+							printerr("Remote teleport unsuccessful! %s has an invalid object type!" % transition_data[1])
 							character.position = position
 							character.reset_physics_interpolation()
 							Singleton.CurrentLevelData.level_data.vars.transition_data = []

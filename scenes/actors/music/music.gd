@@ -115,7 +115,7 @@ func request_completed(result: int, response_code: int, headers: PoolStringArray
 	var ogg_file := File.new()
 	var err: int = ogg_file.open(file_path, File.WRITE)
 	if err != OK:
-		push_error("Error loading custom music. Error code: " + str(err))
+		printerr("Error saving custom music file. Error code: " + str(err) + "\nFile path: " + file_path)
 		return
 	
 	ogg_file.store_buffer(body)

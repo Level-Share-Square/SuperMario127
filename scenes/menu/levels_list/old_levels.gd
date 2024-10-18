@@ -24,14 +24,14 @@ func convert_old_levels(base_folder: String):
 	var file := File.new()
 	var err: int = file.open(OLD_LEVELS_SORT_PATH, File.READ)
 	if err != OK: 
-		push_error("Legacy level sorting json could not be loaded. Error code: " + str(err))
+		printerr("Legacy level sorting json could not be loaded. Error code: " + str(err))
 		return
 	
 	var parse: JSONParseResult = JSON.parse(file.get_as_text())
 	file.close()
 	
 	if parse.error != OK:
-		push_error(parse.error_string)
+		printerr(parse.error_string)
 		return
 	
 	progress_bar.max_value = parse.result.size()

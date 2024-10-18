@@ -19,13 +19,14 @@ func thread_load_directory(working_folder: String):
 	
 	var err = level_load_thread.start(self, "load_directory", working_folder)
 	if err != OK:
-		push_error("Error starting level loading thread.")
+		printerr("Error starting level loading thread.")
 
 
 # Thread must be disposed (or "joined"), for portability.
 func _exit_tree():
 	if level_load_thread.is_active():
-		level_load_thread.wait_to_finish()
+		printerr("Thread aborted while it's still running! If your game crashed, this is probably why.")
+		## lets figure out how to handle this properly, later :p
 
 
 func transition_to_directory(working_folder: String):
