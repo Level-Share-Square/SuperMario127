@@ -18,7 +18,7 @@ onready var tank_right: Polygon2D = $Meter/Tank/Right
 onready var tank_top: Polygon2D = $Meter/Tank/Top
 
 onready var paint = $Meter/Paint
-onready var hover_icon = $Meter/Icons/Hover
+onready var icons = $Meter/Icons
 
 var left_default_poly: PoolVector2Array
 var right_default_poly: PoolVector2Array
@@ -88,19 +88,20 @@ func nozzle_changed(new_nozzle: String):
 	elif last_nozzle == "null":
 		transition.play_backwards("transition")
 	
-	print(new_nozzle)
+	for child in icons.get_children():
+		child.visible = (child.name == new_nozzle)
 	last_nozzle = new_nozzle
 
 
 func fludd_activated():
 	paint.is_flashing = true
-	hover_icon.do_bounce = true
+	icons.do_bounce = true
 
 
 func fludd_deactivated():
 	paint.is_flashing = false
-	hover_icon.end_bounce_queued = true
-	hover_icon.do_bounce = false
+	icons.end_bounce_queued = true
+	icons.do_bounce = false
 
 
 ## for the ui hiding stuff
