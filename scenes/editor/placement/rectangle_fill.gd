@@ -99,7 +99,7 @@ func mouse_down() -> void:
 	mouse_pos_direction = mouse_pos/Vector2(abs(mouse_pos.x), abs(mouse_pos.y))
 	
 	selection_area.size = Vector2(TILE_SIZE, TILE_SIZE)
-#	drag.rect_position = initial_pos + Vector2(TILE_SIZE, TILE_SIZE)*(Vector2(mod(mouse_pos.x, float(TILE_SIZE)), mouse_pos.y%TILE_SIZE))
+	drag.rect_position = initial_pos + Vector2(TILE_SIZE, TILE_SIZE)*(Vector2(int(mouse_pos.x)%TILE_SIZE, int(mouse_pos.y)%TILE_SIZE))
 	drag.rect_size = Vector2.ZERO
 	drag.visible = true
 	
