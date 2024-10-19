@@ -2791,6 +2791,7 @@ preview = ExtResource( 6 )
 script = ExtResource( 24 )
 object_id = 135
 is_object = true
+object_center = Vector2( 16, 16 )
 change_to = "ShineShard"
 items_in_sequence = 3
 index_in_sequence = 1
