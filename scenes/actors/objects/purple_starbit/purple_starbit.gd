@@ -1,5 +1,6 @@
 extends GameObject
 
+onready var animation_player = $AnimationPlayer
 onready var animated_sprite = $AnimatedSprite
 onready var sound = $AudioStreamPlayer
 onready var area = $Area2D
@@ -10,7 +11,6 @@ onready var tween = $Tween
 var collected = false
 var collectable = true
 var physics = false
-var destroy_timer = 0.0
 var despawn_timer = 0.0
 var velocity : Vector2
 
@@ -20,18 +20,17 @@ var timer_on : bool
 
 export var anim_damp = 80
 
+
 func collect(body):
 	if enabled and !collected and collectable and body.name.begins_with("Character") and !body.dead:
 		Singleton.CurrentLevelData.level_data.vars.collect_purple_starbit(id)
 		var player_id = 1
 		if body.name == "Character":
 			player_id = 0
-		if Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id:
-			sound.play()
+		get_tree().current_scene.get_node("SharedSounds").PlaySound("PurpleSound")
 		collected = true
-		animated_sprite.animation = "collect"
-		animated_sprite.frame = 0
-		destroy_timer = 2
+		animation_player.play("collect")
+
 
 func _ready():
 	if mode == 1: return
@@ -48,11 +47,6 @@ func _ready():
 var prev_activate_shape = false
 func _process(delta):
 	if !timed:
-		if destroy_timer > 0:
-			destroy_timer -= delta
-			if destroy_timer <= 0:
-				destroy_timer = 0
-				queue_free()
 		if despawn_timer > 0:
 			despawn_timer -= delta
 			if despawn_timer <= 1:

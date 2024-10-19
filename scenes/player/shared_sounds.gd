@@ -2,6 +2,7 @@ extends Node
 
 onready var play_sounds = [
 	["CoinSound", $CoinSound, false],
+	["PurpleSound", $PurpleSound, false],
 	["LaughSound", $LaughSound, false]
 ]
 
