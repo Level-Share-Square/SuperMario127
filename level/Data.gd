@@ -122,7 +122,7 @@ func get_settings(result) -> LevelAreaSettings:
 	settings.background_palette = result.background_palette
 	settings.music = result.music
 	settings.gravity = abs(result.gravity)
-#	settings.timer = abs(result.timer)
+	settings.timer = abs(result.timer)
 	var size_vec2 = get_vector2(result.size)
 	settings.bounds.size = Vector2(clamp(size_vec2.x, 24, 1500), clamp(size_vec2.y, 14, 1500))
 	return settings
@@ -300,8 +300,8 @@ func get_encoded_level_data():
 		level_string += value_util.encode_value(settings.background) + ","
 		level_string += value_util.encode_value(settings.music) + ","
 		level_string += value_util.encode_value(settings.gravity) + ","
-		level_string += value_util.encode_value(settings.background_palette) + "~"
-#		level_string += value_util.encode_value(settings.timer) + "~"
+		level_string += value_util.encode_value(settings.background_palette) + ","
+		level_string += value_util.encode_value(settings.timer) + "~"
 		
 		var tiles := []
 		var very_background_tiles := []

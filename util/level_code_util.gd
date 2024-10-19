@@ -193,11 +193,10 @@ static func decode(code: String):
 		else:
 			result.areas[area_id].settings.background_palette = 0
 		
-#		if area_settings_array.size() > 6:
-#			result.areas[area_id].settings.timer = value_util.decode_value(area_settings_array[6])
-#			pass
-#		else:
-#			result.areas[area_id].settings.timer = 0.00
+		if area_settings_array.size() > 6:
+			result.areas[area_id].settings.timer = value_util.decode_value(area_settings_array[6])
+		else:
+			result.areas[area_id].settings.timer = 0.00
 		
 		
 		
