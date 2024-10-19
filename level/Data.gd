@@ -17,6 +17,11 @@ var functions = {}
 var global_vars_node = null
 var vars : LevelVars
 
+var layout_ids: Array = []
+var layout_palettes: Array = []
+var pinned_items: Array = []
+
+
 func _init(code: String = ""):
 	if code == "":
 		code = level_list_util.load_level_code_file("res://level/default_level.tres")
@@ -244,6 +249,10 @@ func load_in(code):
 	description = result.description
 	thumbnail_url = result.thumbnail_url
 	
+	layout_ids = result.layout_ids
+	layout_palettes = result.layout_palettes
+	pinned_items = result.pinned_items
+	
 	if format_version == current_format_version:
 		for area_result in result.areas:
 			var area = get_area(area_result)
@@ -268,44 +277,15 @@ func get_encoded_level_data():
 	level_string += level_thumbnail.percent_encode() + ","
 	
 	level_string += "["
-	for func_key in functions:
-		level_string += func_key.percent_encode()
-		level_string += "["
-		for instruction in functions[func_key].instructions:
-			level_string += str(instruction.id) + ","
-			level_string += str(instruction.scope) + ","
-			
-			var instruction_value = instruction.value
-			level_string += str(instruction_value.id) + "["
-			
-			level_string += "["
-			for key in instruction_value.path:
-				level_string += value_util.encode_value(key) + ","
-			level_string.erase(level_string.length() - 1, 1)
-			level_string += "],"
-			
-			level_string += "["
-			for argument in instruction_value.args:
-				if typeof(argument) == TYPE_OBJECT: # there's a good joke in here somewhere
-					level_string += argument.id + "["
-					for value in argument.values:
-						if typeof(value) == TYPE_OBJECT:
-							level_string += value.id + "["
-							for key in value.path:
-								level_string += value_util.encode_value(key) + ","
-							level_string.erase(level_string.length() - 1, 1)
-							level_string += "],"
-						else:
-							level_string += value_util.encode_value(value) + ","
-					level_string.erase(level_string.length() - 1, 1)
-					level_string += "],"
-				else:
-					level_string += value_util.encode_value(argument) + ","
-			level_string.erase(level_string.length() - 1, 1)
-			level_string += "]"
-			
-			level_string += "]"
-		level_string += "],"
+	for index in range(layout_ids.size()):
+		if index != 0:
+			level_string += ","
+		level_string += str(layout_palettes[index]) + str(layout_ids[index])
+	level_string += "^"
+	for index in range(pinned_items.size()):
+		if index != 0:
+			level_string += ","
+		level_string += str(pinned_items[index][1]) + str(pinned_items[index][0])
 	level_string += "],"
 	
 	for area in areas:

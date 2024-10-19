@@ -825,6 +825,7 @@ margin_left = 318.0
 margin_right = 414.0
 
 [node name="PurpleStarbits" type="Control" parent="UIUnder/HUD/Control/TimerManager/RadialTimers" index="0"]
+visible = false
 margin_top = 384.0
 margin_bottom = 408.0
 rect_min_size = Vector2( 0, 24 )

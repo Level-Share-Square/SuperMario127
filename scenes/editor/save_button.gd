@@ -19,6 +19,9 @@ func _process(delta):
 func _pressed():
 	click_sound.play()
 	
+	var editor: Node = get_owner()
+	editor.sync_pinned_items()
+	
 	var file_path = level_list_util.get_level_file_path(
 		Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder
 	)

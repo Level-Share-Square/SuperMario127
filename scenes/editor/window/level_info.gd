@@ -7,25 +7,32 @@ onready var level_author = $MarginContainer/VBoxContainer/HBoxContainer/LevelAut
 onready var thumbnail_url = $MarginContainer/VBoxContainer/MarginContainer/ThumbnailURL
 onready var description = $MarginContainer/VBoxContainer/Description
 
+
 func switch_to_settings():
-	var _connect = level_name.connect("focus_exited", self, "update_level_name", [level_name.text])
-	_connect = level_author.connect("focus_exited", self, "update_level_author", [level_author.text])
-	_connect = thumbnail_url.connect("focus_exited", self, "update_thumbnail_url", [thumbnail_url.text])
-	_connect = description.connect("focus_exited", self, "update_description", [description.text])
-	
 	get_parent().get_node("LevelSettings").visible = true
 	visible = false
 	
+	update_vars()
+	
+
+func update_vars():
 	update_level_name(level_name.text)
 	update_level_author(level_author.text)
 	update_thumbnail_url(thumbnail_url.text)
 	update_description(description.text)
 
+
 func _ready():
+	var _connect = level_name.connect("focus_exited", self, "update_level_name", [level_name.text])
+	_connect = level_author.connect("focus_exited", self, "update_level_author", [level_author.text])
+	_connect = thumbnail_url.connect("focus_exited", self, "update_thumbnail_url", [thumbnail_url.text])
+	_connect = description.connect("focus_exited", self, "update_description", [description.text])
+	
 	level_name.text = Singleton.CurrentLevelData.level_data.name
 	level_author.text = Singleton.CurrentLevelData.level_data.author
 	thumbnail_url.text = Singleton.CurrentLevelData.level_data.thumbnail_url
 	description.text = Singleton.CurrentLevelData.level_data.description
+
 
 func update_level_name(new_value: String):
 	Singleton.CurrentLevelData.level_data.name = new_value

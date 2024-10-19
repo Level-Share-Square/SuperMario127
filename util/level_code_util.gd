@@ -103,7 +103,7 @@ static func split_code_top_level(string):
 				parts.append(string.substr(start_from, index - start_from))
 				start_from = index + 1
 	return parts
-		
+
 static func decode(code: String):
 	var result = {}
 
@@ -114,22 +114,58 @@ static func decode(code: String):
 	result.name = code_array[1].percent_decode()
 	
 	var add_amount = 1
-	var func_array = []
+	var layout_array: Array
+	var pins_array: Array
+	
+	
 	if result.format_version == "0.4.0" or result.format_version == "0.4.1":
 		add_amount = 0
-	else:
-		func_array = split_code_top_level(code_array[2])
 	
-	if result.format_version == "0.5.0":
+	elif conversion_util.compareVersions(result.format_version, "0.5.0") > -1:
 		result.author = code_array[2].percent_decode()
 		result.description = code_array[3].percent_decode()
 		result.thumbnail_url = code_array[4].percent_decode()
-		add_amount = 4
 		
-	for function in func_array:
-		if function != "":
-			print("B")
-			
+		var editor_array: Array = code_array[5].split("^")
+		if editor_array.size() > 1:
+			layout_array = editor_array[0].split(",")
+			pins_array = editor_array[1].split(",")
+		
+		add_amount = 4
+	
+	
+	var layout_ids: Array
+	var layout_palettes: Array
+	var pinned_items: Array
+	
+	var starting_toolbar = preload("res://scenes/editor/starting_toolbar.tres")
+	for index in range(starting_toolbar.ids.size()):
+		layout_ids.append(starting_toolbar.ids[index])
+		layout_palettes.append(0)
+	
+	for index in range(layout_array.size()):
+		var item: String = layout_array[index]
+		var palette := int(item[0])
+		item.erase(0, 1)
+		
+		layout_ids[index] = item
+		layout_palettes[index] = palette
+		
+	for index in range(pins_array.size()):
+		var item: String = pins_array[index]
+		var palette := int(item[0])
+		item.erase(0, 1)
+		
+		var pin_array: Array
+		pin_array.append(item)
+		pin_array.append(palette)
+		pinned_items.append(pin_array)
+	
+	result.layout_ids = layout_ids
+	result.layout_palettes = layout_palettes
+	result.pinned_items = pinned_items
+	
+	
 	var areas = code_array.size() - (2 + add_amount)
 	
 	result.areas = []

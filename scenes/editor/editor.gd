@@ -153,7 +153,12 @@ func _ready() -> void:
 	zoom_level = Singleton.EditorSavedSettings.zoom_level
 	editing_layer = Singleton.EditorSavedSettings.layer
 	layers_transparent = Singleton.EditorSavedSettings.layers_transparent
-	pinned_items = Singleton.EditorSavedSettings.pinned_items
+	
+	for pinned_item in Singleton.CurrentLevelData.level_data.pinned_items:
+		var item: Node = placeable_items.find_node(pinned_item[0])
+		item.palette_index = pinned_item[1]
+		pinned_items.append(item)
+	
 	shared.toggle_layer_transparency(editing_layer, layers_transparent)
 	
 	# if the mode switch button is invisible then the editor hasn't been readyed for the first time yet
@@ -288,8 +293,20 @@ func unpin_item(unpin_index):
 	boxes[pinned_items.size()].item_changed()
 	pinned_items.remove(unpin_index)
 
+
+func sync_pinned_items() -> void:
+	var encoded_pinned_items: Array
+	for pinned_item in pinned_items:
+		var pin_array: Array
+		pin_array.append(pinned_item.name)
+		pin_array.append(pinned_item.palette_index)
+		encoded_pinned_items.append(pin_array)
+	Singleton.CurrentLevelData.level_data.pinned_items = encoded_pinned_items
+
+
 func switch_scenes() -> void:
-	Singleton.EditorSavedSettings.pinned_items = get_tree().get_current_scene().pinned_items
+	sync_pinned_items()
+	
 	if Singleton2.rp == true:
 		update_activity()
 	elif Singleton2.rp == false:
@@ -365,6 +382,8 @@ func _process(delta : float) -> void:
 	if Singleton2.time > 0:
 		Singleton2.time -= 1
 	if Singleton2.time <= 0:
+		sync_pinned_items()
+		
 		var level_info = Singleton.CurrentLevelData.level_info
 		var time = round(Time.get_unix_time_from_system())
 		

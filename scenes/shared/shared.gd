@@ -50,13 +50,15 @@ func animated_sprite_get_rect(node: AnimatedSprite) -> Rect2:
 	var anim_frame : int = node.frame
 	
 	var texture : Texture = node.frames.get_frame(anim_id, anim_frame)
-	var rect := Rect2(0, 0, texture.get_width(), texture.get_height())
-	
-	if node.centered:
-		rect.position -= rect.size / 2
-	rect.position += node.offset
-	
-	return rect
+	if is_instance_valid(texture):
+		var rect := Rect2(0, 0, texture.get_width(), texture.get_height())
+		
+		if node.centered:
+			rect.position -= rect.size / 2
+		rect.position += node.offset
+		
+		return rect
+	return Rect2(Vector2.ZERO, Vector2.ZERO)
 
 func sprite_is_pixel_opaque_with_margin(sprite: Sprite, point: Vector2, margin: float) -> bool:
 	

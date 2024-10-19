@@ -33,7 +33,6 @@ func _ready():
 	for i in hotkey_parent.get_children():
 		if "LevelSettingsWindow" in str(get_parent()):
 			if Singleton2.editor_hotkeys.has(i.name):
-				print(i)
 				i.show()
 				var action_name = i.name
 				hotkeys[action_name] = InputMap.get_action_list(action_name)[0]
