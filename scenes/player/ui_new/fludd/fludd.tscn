@@ -1,10 +1,9 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/fonts/marioscript_ui.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/player/ui_new/fludd/fludd_display.gd" type="Script" id=2]
 [ext_resource path="res://scenes/player/ui_new/fludd/icon_bounce.gd" type="Script" id=3]
 [ext_resource path="res://scenes/player/ui_new/fludd/paint_flashing.gd" type="Script" id=4]
-[ext_resource path="res://scenes/player/ui_new/reference4.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=218]
 length = 0.001
@@ -737,9 +736,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = SubResource( 223 )
 expand = true
-
-[node name="Reference4" type="Sprite" parent="Meter"]
-visible = false
-position = Vector2( 18, -14 )
-scale = Vector2( 0.9, 0.9 )
-texture = ExtResource( 6 )

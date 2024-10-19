@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/actors/objects/purple_starbit/glow.shader" type="Shader" id=1]
 [ext_resource path="res://scenes/actors/objects/purple_starbit/purple_starbit.gd" type="Script" id=2]
-[ext_resource path="res://scenes/actors/objects/purple_starbit/purple_collect.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/objects/purple_starbit/purple.tres" type="SpriteFrames" id=4]
 
 [sub_resource type="ShaderMaterial" id=3]
@@ -201,10 +200,6 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 2 )
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-pause_mode = 2
-stream = ExtResource( 3 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false

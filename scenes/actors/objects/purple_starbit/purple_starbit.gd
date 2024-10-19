@@ -27,8 +27,7 @@ func collect(body):
 		var player_id = 1
 		if body.name == "Character":
 			player_id = 0
-		if Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id:
-			sound.play()
+		get_tree().current_scene.get_node("SharedSounds").PlaySound("PurpleSound")
 		collected = true
 		animation_player.play("collect")
 
