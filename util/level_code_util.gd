@@ -153,13 +153,14 @@ static func decode(code: String):
 		
 	for index in range(pins_array.size()):
 		var item: String = pins_array[index]
-		var palette := int(item[0])
-		item.erase(0, 1)
-		
-		var pin_array: Array
-		pin_array.append(item)
-		pin_array.append(palette)
-		pinned_items.append(pin_array)
+		if item != "":
+			var palette := int(item[0])
+			item.erase(0, 1)
+			
+			var pin_array: Array
+			pin_array.append(item)
+			pin_array.append(palette)
+			pinned_items.append(pin_array)
 	
 	result.layout_ids = layout_ids
 	result.layout_palettes = layout_palettes

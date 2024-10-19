@@ -148,7 +148,7 @@ func restore_control():
 	character.sprite.playing = true
 	
 func open_menu_ui():
-	get_tree().get_current_scene().get_node("UI/SignText").open(text, self, character)
+	get_tree().get_current_scene().get_node("%SignText").open(text, self, character)
 
 func _physics_process(delta):
 	if !sprite.visible and mode != 1:

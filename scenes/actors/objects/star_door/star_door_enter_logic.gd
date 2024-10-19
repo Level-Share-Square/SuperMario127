@@ -110,7 +110,7 @@ func start_door_enter_animation(character : Character) -> void:
 	
 	
 func open_menu_ui(character):
-	get_tree().get_current_scene().get_node("UI/SignText").open(get_parent().text, self, character)
+	get_tree().get_current_scene().get_node("%SignText").open(get_parent().text, self, character)
 	
 func character_animation_finished(_animation : String, character : Character) -> void:
 	# this is so the door closes after mario enters

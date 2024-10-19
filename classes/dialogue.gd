@@ -139,7 +139,7 @@ func restore_control():
 	character.camera.focus_on = null
 	
 func open_menu_ui():
-	get_tree().get_current_scene().get_node("UI/DialogueText").open(dialogue, self, character, character_name)
+	get_tree().get_current_scene().get_node("%DialogueText").open(dialogue, self, character, character_name)
 
 func _physics_process(delta):
 
