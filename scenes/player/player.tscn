@@ -814,101 +814,105 @@ margin_top = 8.0
 margin_right = 744.0
 margin_bottom = 416.0
 
-[node name="PurpleStarbits" type="CenterContainer" parent="UIUnder/HUD/Control"]
-visible = false
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -65.0
-margin_top = -24.0
-margin_right = 65.0
+[node name="TimerManager" parent="UIUnder/HUD/Control" instance=ExtResource( 8 )]
+unique_name_in_owner = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Grid" parent="UIUnder/HUD/Control/TimerManager/Timers" index="0"]
+margin_left = 318.0
+margin_right = 414.0
+
+[node name="PurpleStarbits" type="Control" parent="UIUnder/HUD/Control/TimerManager/RadialTimers" index="0"]
+margin_top = 384.0
+margin_bottom = 408.0
 rect_min_size = Vector2( 0, 24 )
-rect_rotation = -4.0
-rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 80, -6 )
 script = ExtResource( 29 )
 
-[node name="PolygonSwatch" parent="UIUnder/HUD/Control/PurpleStarbits" instance=ExtResource( 14 )]
+[node name="PolygonSwatch" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits" instance=ExtResource( 14 )]
 modulate = Color( 0.380392, 0.243137, 0.686275, 0.752941 )
-position = Vector2( -8, 10 )
-rotation = 0.15708
+position = Vector2( 0, 10 )
+rotation = 0.0872665
 scale = Vector2( 0.2, 0.15 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UIUnder/HUD/Control/PurpleStarbits"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits"]
 anims/RESET = SubResource( 216 )
 anims/collect = SubResource( 217 )
 
-[node name="Fadeout" type="AnimationPlayer" parent="UIUnder/HUD/Control/PurpleStarbits"]
+[node name="Fadeout" type="AnimationPlayer" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits"]
 anims/RESET = SubResource( 218 )
 anims/fadeout = SubResource( 219 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UIUnder/HUD/Control/PurpleStarbits"]
-margin_right = 130.0
+[node name="HBoxContainer" type="HBoxContainer" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits"]
+margin_left = 10.0
+margin_right = 140.0
 margin_bottom = 24.0
+rect_rotation = -4.0
 custom_constants/separation = 6
 
-[node name="Icon" type="Control" parent="UIUnder/HUD/Control/PurpleStarbits/HBoxContainer"]
+[node name="Icon" type="Control" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer"]
 margin_right = 20.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 20, 0 )
 
-[node name="Starbit" type="Control" parent="UIUnder/HUD/Control/PurpleStarbits/HBoxContainer/Icon"]
+[node name="Starbit" type="Control" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer/Icon"]
 
-[node name="Polygon2D3" type="Polygon2D" parent="UIUnder/HUD/Control/PurpleStarbits/HBoxContainer/Icon/Starbit"]
+[node name="Polygon2D3" type="Polygon2D" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer/Icon/Starbit"]
 position = Vector2( -2.642, -2.86832 )
 scale = Vector2( 1.25, 1.25 )
 color = Color( 0.180392, 0.054902, 0.482353, 0.65098 )
 antialiased = true
 polygon = PoolVector2Array( 9.31796, 1.30948, 13.4416, 6.05313, 20.0145, 7.62659, 18.5186, 13.0911, 20.3478, 18.7881, 14.7283, 19.509, 11.093, 23.7101, 6.89194, 20.0749, 0.241486, 19.6098, 1.73746, 14.1453, -0.0918274, 8.44824, 5.60519, 6.61899 )
 
-[node name="Polygon2D" type="Polygon2D" parent="UIUnder/HUD/Control/PurpleStarbits/HBoxContainer/Icon/Starbit"]
+[node name="Polygon2D" type="Polygon2D" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer/Icon/Starbit"]
 antialiased = true
 texture = SubResource( 223 )
 polygon = PoolVector2Array( 9.31796, 1.30948, 13.4416, 6.05313, 20.0145, 7.62659, 18.5186, 13.0911, 20.3478, 18.7881, 14.7283, 19.509, 11.093, 23.7101, 6.89194, 20.0749, 0.241486, 19.6098, 1.73746, 14.1453, -0.0918274, 8.44824, 5.60519, 6.61899 )
 uv = PoolVector2Array( 29.0183, 3.74583, 39.5535, 15.8651, 56.3462, 19.885, 52.5244, 33.846, 57.1978, 48.4011, 42.8408, 50.2427, 33.5533, 60.9759, 22.8202, 51.6884, 5.82937, 50.5003, 9.65134, 36.5393, 4.9778, 21.9842, 19.5328, 17.3108 )
 
-[node name="Polygon2D2" type="Polygon2D" parent="UIUnder/HUD/Control/PurpleStarbits/HBoxContainer/Icon/Starbit"]
+[node name="Polygon2D2" type="Polygon2D" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer/Icon/Starbit"]
 color = Color( 0.462745, 0.141176, 0.815686, 1 )
 antialiased = true
 polygon = PoolVector2Array( 9.16296, 3.52628, 13.2866, 8.26993, 17.7202, 8.57996, 16.3017, 12.9361, 18.2085, 17.5247, 13.6974, 18.3231, 11.248, 21.4933, 8.07785, 19.0439, 2.53583, 18.6564, 3.95425, 14.3003, 2.04749, 9.7117, 6.55859, 8.9133 )
 uv = PoolVector2Array( 28.4728, 8.87138, 39.1081, 21.1059, 50.5429, 21.9055, 44.0259, 32.9406, 51.8024, 44.9751, 40.1676, 47.0342, 33.8505, 55.2106, 25.6742, 48.8934, 11.3806, 47.8939, 17.8976, 36.8589, 10.1211, 24.8244, 21.7558, 22.7652 )
 
-[node name="Polygon2D4" type="Polygon2D" parent="UIUnder/HUD/Control/PurpleStarbits/HBoxContainer/Icon/Starbit"]
+[node name="Polygon2D4" type="Polygon2D" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer/Icon/Starbit"]
 position = Vector2( 1.5, 1.875 )
 scale = Vector2( 0.85, 0.85 )
 color = Color( 0.736, 0.28, 1, 1 )
 antialiased = true
 polygon = PoolVector2Array( 13.8882, 7.52301, 17.4138, 13.013, 19.1042, 7.88776 )
 
-[node name="Polygon2D5" type="Polygon2D" parent="UIUnder/HUD/Control/PurpleStarbits/HBoxContainer/Icon/Starbit"]
+[node name="Polygon2D5" type="Polygon2D" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer/Icon/Starbit"]
 position = Vector2( 1.4816, 1.87537 )
 scale = Vector2( 0.85, 0.85 )
 color = Color( 0.736, 0.28, 1, 1 )
 antialiased = true
 polygon = PoolVector2Array( 6.45627, 20.1071, 2.90897, 14.6176, 1.24026, 19.7424 )
 
-[node name="Polygon2D6" type="Polygon2D" parent="UIUnder/HUD/Control/PurpleStarbits/HBoxContainer/Icon/Starbit"]
+[node name="Polygon2D6" type="Polygon2D" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer/Icon/Starbit"]
 position = Vector2( 1.4816, 1.87537 )
 scale = Vector2( 0.85, 0.85 )
 color = Color( 0.736, 0.28, 1, 1 )
 antialiased = true
 polygon = PoolVector2Array( 11.8546, 17.8639, 13.2498, 16.6511, 14.8274, 12.8302, 15.7667, 18.1375, 12.9763, 20.563, 7.85147, 18.8943 )
 
-[node name="Polygon2D9" type="Polygon2D" parent="UIUnder/HUD/Control/PurpleStarbits/HBoxContainer/Icon/Starbit"]
+[node name="Polygon2D9" type="Polygon2D" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer/Icon/Starbit"]
 antialiased = true
 texture = SubResource( 225 )
 polygon = PoolVector2Array( 9.16296, 3.52628, 13.2866, 8.26993, 17.7202, 8.57996, 16.3017, 12.9361, 18.2085, 17.5247, 13.6974, 18.3231, 11.248, 21.4933, 8.07785, 19.0439, 2.53583, 18.6564, 3.95425, 14.3003, 2.04749, 9.7117, 6.55859, 8.9133 )
 uv = PoolVector2Array( 27.631, 1.07481, 41.5094, 17.04, 56.4309, 18.0834, 47.9267, 32.4834, 58.0745, 48.1876, 42.8919, 50.8745, 34.6486, 61.5442, 23.9791, 53.3007, 5.32695, 51.9964, 13.8312, 37.5965, 3.68339, 21.8924, 18.8658, 19.2052 )
 
-[node name="Polygon2D7" type="Polygon2D" parent="UIUnder/HUD/Control/PurpleStarbits/HBoxContainer/Icon/Starbit"]
+[node name="Polygon2D7" type="Polygon2D" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer/Icon/Starbit"]
 position = Vector2( 1.4816, 1.87534 )
 scale = Vector2( 0.85, 0.85 )
 antialiased = true
 polygon = PoolVector2Array( 5.517, 14.7999, 8.39856, 11.0703, 12.493, 8.73584, 8.67212, 7.15826, 7.73285, 1.85107, 6.06412, 6.97589, 0.66571, 9.21924, 4.48654, 10.7968 )
 uv = PoolVector2Array( 25.3166, 59.09, 37.985, 42.6931, 55.9858, 32.4299, 39.1877, 25.4942, 35.0583, 2.16172, 27.7219, 24.6925, 3.98834, 34.5551, 20.7862, 41.4907 )
 
-[node name="X" type="Label" parent="UIUnder/HUD/Control/PurpleStarbits/HBoxContainer"]
+[node name="X" type="Label" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer"]
 margin_left = 26.0
 margin_right = 39.0
 margin_bottom = 24.0
@@ -916,7 +920,7 @@ custom_colors/font_outline_modulate = Color( 0.178915, 0.0563049, 0.480469, 0.65
 custom_fonts/font = ExtResource( 15 )
 text = "x"
 
-[node name="Counter" type="Label" parent="UIUnder/HUD/Control/PurpleStarbits/HBoxContainer"]
+[node name="Counter" type="Label" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer"]
 margin_left = 45.0
 margin_right = 130.0
 margin_bottom = 24.0
@@ -924,12 +928,6 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0.180392, 0.054902, 0.482353, 0.65098 )
 custom_fonts/font = ExtResource( 15 )
 text = "000/100"
-
-[node name="TimerManager" parent="UIUnder/HUD/Control" instance=ExtResource( 8 )]
-unique_name_in_owner = true
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="ShineGet" type="Control" parent="UIUnder/HUD/Control"]
 unique_name_in_owner = true
@@ -1833,3 +1831,7 @@ bus = "Sounds"
 [node name="TickEndSound" type="AudioStreamPlayer" parent="SharedSounds"]
 stream = ExtResource( 59 )
 bus = "Sounds"
+
+[connection signal="child_entered_tree" from="UIUnder/HUD/Control/TimerManager/RadialTimers" to="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits" method="child_entered_tree"]
+
+[editable path="UIUnder/HUD/Control/TimerManager"]

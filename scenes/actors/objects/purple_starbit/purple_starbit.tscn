@@ -85,10 +85,34 @@ tracks/5/keys = {
 "update": 1,
 "values": [ SubResource( 3 ) ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sparkles:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sparkles:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 4 ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "collect"
-step = 0.01
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:offset")
 tracks/0/interp = 1
@@ -96,10 +120,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3 ),
-"transitions": PoolRealArray( 0.5, 3, 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 0.5, 3 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -8 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, -8 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("AnimatedSprite:scale")
@@ -108,10 +132,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.15, 0.29, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 0, 1 ),
+"times": PoolRealArray( 0, 0.15, 0.29 ),
+"transitions": PoolRealArray( 1, 1, 0 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.5, 0.5 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.5, 0.5 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("AnimatedSprite:animation")
@@ -120,10 +144,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ "purple", "collect" ]
+"values": [ "purple" ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimatedSprite:speed_scale")
@@ -132,10 +156,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3 ),
-"transitions": PoolRealArray( 1, 0, 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 0 ),
 "update": 0,
-"values": [ 12.0, 2.0, 1.0 ]
+"values": [ 12.0, 2.0 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("AnimatedSprite:modulate")
@@ -144,10 +168,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.1, 0.29, 0.3 ),
-"transitions": PoolRealArray( 0.5, 1, 0, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.29 ),
+"transitions": PoolRealArray( 0.5, 1, 0 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1.5, 1, 2, 1 ), Color( 0.501961, 0, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1.5, 1, 2, 1 ), Color( 0.501961, 0, 1, 0 ) ]
 }
 tracks/5/type = "method"
 tracks/5/path = NodePath(".")
@@ -156,7 +180,7 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.5 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -164,16 +188,28 @@ tracks/5/keys = {
 } ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("AnimatedSprite:material")
+tracks/6/path = NodePath("Sparkles:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 3 ), null ]
+"values": [ true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sparkles:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
 }
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -191,6 +227,12 @@ anims/collect = SubResource( 6 )
 material = SubResource( 3 )
 frames = ExtResource( 4 )
 animation = "purple"
+playing = true
+
+[node name="Sparkles" type="AnimatedSprite" parent="."]
+visible = false
+frames = ExtResource( 4 )
+animation = "collect"
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]

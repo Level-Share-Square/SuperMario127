@@ -49,3 +49,8 @@ func update_required_purples():
 			required_purples = variables.required_purple_starbits[Singleton.CurrentLevelData.area][0]
 	else:
 		required_purples = max_purples
+
+
+func child_entered_tree(node):
+	var parent := get_parent()
+	parent.move_child(self, parent.get_child_count() - 1)
