@@ -304,7 +304,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/level_portal/http/http_images.gd"
 }, {
-"base": "HTTPImages",
+"base": "Reference",
 "class": "HTTPThumbnails",
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/misc/http_thumbnails.gd"
