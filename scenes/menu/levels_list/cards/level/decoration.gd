@@ -20,9 +20,10 @@ var http_thumbnails: HTTPThumbnails
 
 
 func _ready():
-	level_info = level_card.level_info
 	http_thumbnails = level_card.http_thumbnails
+	http_thumbnails.connect("image_loaded", self, "load_custom_thumbnail")
 	
+	level_info = level_card.level_info
 	name_label.text = level_info.level_name
 	check_thumbnail()
 	
@@ -49,7 +50,6 @@ func check_thumbnail():
 			load_custom_thumbnail(level_card.id, cached_image)
 	else:
 		update_thumbnail()
-	http_thumbnails.connect("image_loaded", self, "load_custom_thumbnail")
 
 
 func update_thumbnail():
