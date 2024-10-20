@@ -26,13 +26,13 @@ region = Rect2( 96, 24, 24, 24 )
 atlas = ExtResource( 1 )
 region = Rect2( 120, 24, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 24, 0, 24, 24 )
-
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 24, 0, 24, 24 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
@@ -49,7 +49,7 @@ animations = [ {
 "name": "collect",
 "speed": 12.0
 }, {
-"frames": [ SubResource( 2 ), SubResource( 1 ), SubResource( 3 ), SubResource( 4 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "default",
 "speed": 12.0
