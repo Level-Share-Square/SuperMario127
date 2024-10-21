@@ -74,10 +74,7 @@ collision_mask = 2
 position = Vector2( 900, 300 )
 shape = SubResource( 1 )
 
-[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
-rect = Rect2( 0, -15, 1800, 615 )
-
-[node name="ColorRect" type="ColorRect" parent="BackBufferCopy"]
+[node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource( 3 )
 margin_top = 15.0
 margin_right = 1800.0
@@ -85,7 +82,7 @@ margin_bottom = 600.0
 mouse_filter = 2
 color = Color( 0.192157, 0.52549, 1, 0.47451 )
 
-[node name="Waves" type="ColorRect" parent="BackBufferCopy"]
+[node name="Waves" type="ColorRect" parent="."]
 material = SubResource( 5 )
 margin_top = -15.0
 margin_right = 1800.0
