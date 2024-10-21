@@ -21,7 +21,7 @@ static func encode_value(value):
 	if type == TYPE_VECTOR2:
 		return "V2" + str(stepify(value.x,0.1)) + "x" + str(stepify(value.y, 0.1))
 	elif type == TYPE_COLOR:
-		return "CL" + str(stepify(value.r,0.01)) + "x" + str(stepify(value.g,0.01)) + "x" + str(stepify(value.b,0.01))
+		return "CL" + str(stepify(value.r,0.01)) + "x" + str(stepify(value.g,0.01)) + "x" + str(stepify(value.b,0.01)) + "x" + str(stepify(value.a,0.01))
 	elif type == TYPE_BOOL:
 		return "BL" + str(0 if value == false else 1)
 	elif type == TYPE_INT:
@@ -82,7 +82,10 @@ static func decode_value(value: String):
 	elif value.begins_with("CL"):
 		value = value.trim_prefix("CL")
 		var array_value = value.split("x")
-		return Color(array_value[0], array_value[1], array_value[2])
+		var color = Color(array_value[0], array_value[1], array_value[2])
+		if array_value.size() > 3:
+			color.a = float(array_value[3])
+		return color
 	elif value.begins_with("BL"):
 		value = value.trim_prefix("BL")
 		return true if value == "1" else false

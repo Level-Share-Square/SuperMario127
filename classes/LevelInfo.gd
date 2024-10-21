@@ -52,8 +52,10 @@ var activated_fludds : Array = [false, false, false]
 ## processing power :3
 func get_info_level_code(level_code: String):
 	var first_bracket_index: int = level_code.find("[")
+	var first_end_bracket_index: int = level_code.find("]")
 	
 	var level_code_start: String = level_code.left(first_bracket_index)
+	level_code.erase(first_bracket_index, first_end_bracket_index - first_bracket_index)
 	level_code.erase(0, first_bracket_index)
 	
 	var info_level_code = level_code_start + level_code.get_slice("~", 0)
