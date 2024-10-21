@@ -1,5 +1,8 @@
 class_name LevelData
 
+
+const DEFAULT_CODE_PATH: String = "res://level/default_level.tres"
+
 const DEFAULT_NAME: String = "My Level"
 const DEFAULT_AUTHOR: String = "Unknown"
 const DEFAULT_DESCRIPTION: String = "This level has no description."
@@ -24,7 +27,7 @@ var pinned_items: Array = []
 
 func _init(code: String = ""):
 	if code == "":
-		code = level_list_util.load_level_code_file("res://level/default_level.tres")
+		code = level_list_util.load_level_code_file(DEFAULT_CODE_PATH)
 	load_in(code)
 #	var ready_function_struct = FunctionStruct.new()
 	

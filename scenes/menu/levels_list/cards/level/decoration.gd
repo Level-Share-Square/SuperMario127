@@ -5,14 +5,15 @@ const SHINE_MATERIAL: ShaderMaterial = preload("res://scenes/menu/levels_list/ca
 
 ## nodes
 onready var level_card: LevelCard = get_owner()
+onready var visibility_enabler_2d := $"%VisibilityEnabler2D"
 
-onready var panel = $"%Panel"
-onready var thumbnail_edge = $"%Edge"
-onready var star = $"%Star"
+onready var panel := $"%Panel"
+onready var thumbnail_edge := $"%Edge"
+onready var star := $"%Star"
 
-onready var thumbnail = $"%Thumbnail"
-onready var foreground = $"%Foreground"
-onready var name_label = $"%Name"
+onready var thumbnail := $"%Thumbnail"
+onready var foreground := $"%Foreground"
+onready var name_label := $"%Name"
 
 ## external
 var level_info: LevelInfo
@@ -30,7 +31,7 @@ func _ready():
 	if level_card.has_save and level_info.is_fully_completed():
 		activate_completion_style()
 	else:
-		star.visible = false
+		star.call_deferred("hide")
 
 
 func activate_completion_style():
@@ -49,10 +50,10 @@ func check_thumbnail():
 		else:
 			load_custom_thumbnail(level_card.id, cached_image)
 	else:
-		update_thumbnail()
+		visibility_enabler_2d.connect("viewport_entered", self, "load_default_thumbnail", [], CONNECT_ONESHOT)
 
 
-func update_thumbnail():
+func load_default_thumbnail(_viewport: Viewport = null):
 	thumbnail.texture = level_info.get_level_background_texture()
 	
 	foreground.modulate = level_info.get_level_background_modulate()
@@ -64,3 +65,5 @@ func load_custom_thumbnail(url: String, texture: ImageTexture):
 	
 	thumbnail.texture = texture
 	foreground.visible = false
+	
+	http_thumbnails.disconnect("image_loaded", self, "load_custom_thumbnail")

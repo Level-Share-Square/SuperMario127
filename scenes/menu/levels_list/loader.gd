@@ -16,7 +16,7 @@ onready var level_load_thread := Thread.new()
 func thread_load_directory(working_folder: String):
 	if level_load_thread.is_active():
 		level_load_thread.wait_to_finish()
-	
+
 	var err = level_load_thread.start(self, "load_directory", working_folder)
 	if err != OK:
 		printerr("Error starting level loading thread.")

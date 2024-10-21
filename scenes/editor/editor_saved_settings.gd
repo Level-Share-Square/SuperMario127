@@ -13,8 +13,9 @@ var pinned_items : Array
 var tileset_loaded = false
 var loading_tileset := false
 
+var default_level : LevelData
 var default_area : LevelArea
 
 func _init():
-	var level_resource = LevelData.new()
-	default_area = level_resource.areas[0]
+	default_level = LevelData.new()
+	default_area = default_level.areas[0]

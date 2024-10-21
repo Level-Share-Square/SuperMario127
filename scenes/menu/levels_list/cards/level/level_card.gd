@@ -40,7 +40,7 @@ func setup(
 	if level_code == "":
 		level_code = level_list_util.load_level_code_file(file_path)
 	elif not level_code_util.fast_is_valid(level_code):
-		level_code = level_list_util.load_level_code_file(list_handler.DEFAULT_LEVEL)
+		level_code = level_list_util.load_level_code_file(LevelData.DEFAULT_CODE_PATH)
 	
 	level_info = LevelInfo.new(level_code)
 	

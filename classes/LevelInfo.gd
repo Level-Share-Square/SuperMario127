@@ -20,11 +20,16 @@ var level_data : LevelData
 # no point in wasting time doing it again :p
 var is_fully_loaded: bool
 
+
 # level info
 var level_name : String = ""
 var level_author : String = ""
 var level_description : String = ""
+
 var thumbnail_url : String = ""
+var thumbnail_sky : int = 0
+var thumbnail_background : int = 0
+var thumbnail_background_palette : int = 0
 
 var spawn_area : int = 0
 var shine_details : Array = []
@@ -56,17 +61,22 @@ func get_info_level_code(level_code: String):
 	
 	return info_level_code
 
+
 func _init(passed_level_code : String = "") -> void:
 	if passed_level_code == "":
 		return
 	
 	var info_level_code: String = get_info_level_code(passed_level_code)
+	var result: Dictionary = level_code_util.decode_info(info_level_code)
 	
-	level_data = LevelData.new(info_level_code)
-	level_name = level_data.name
-	level_author = level_data.author
-	level_description = level_data.description
-	thumbnail_url = level_data.thumbnail_url
+	level_name = result.get("name", "")
+	level_author = result.get("author", "")
+	level_description = result.get("description", "")
+	
+	thumbnail_url = result.get("thumbnail_url", "")
+	thumbnail_sky = result.areas[0].settings.sky
+	thumbnail_background = result.areas[0].settings.background
+	thumbnail_background_palette = result.areas[0].settings.background_palette
 	
 	# save the real level code to be loaded later
 	level_code = passed_level_code
@@ -81,6 +91,9 @@ func load_in() -> void:
 	level_author = level_data.author
 	level_description = level_data.description
 	thumbnail_url = level_data.thumbnail_url
+	
+	thumbnail_sky = level_data.areas[0].settings.sky
+	thumbnail_background = level_data.areas[0].settings.background
 
 	# loop through all objects in all areas to find the number of shines and star coins
 	for area in level_data.areas:
@@ -225,19 +238,16 @@ func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
 
 func get_level_background_texture() -> StreamTexture:
-	var level_background = level_data.areas[spawn_area].settings.sky 
-	var background_resource = Singleton.CurrentLevelData.get_cached_background(level_background)
+	var background_resource = Singleton.CurrentLevelData.get_cached_background(thumbnail_sky)
 	return background_resource.texture
 	
 func get_level_background_modulate() -> Color:
-	var level_background = level_data.areas[spawn_area].settings.sky
-	var background_resource = Singleton.CurrentLevelData.get_cached_background(level_background)
+	var background_resource = Singleton.CurrentLevelData.get_cached_background(thumbnail_sky)
 	return background_resource.parallax_modulate
 
 func get_level_foreground_texture() -> StreamTexture:
-	var level_foreground = level_data.areas[spawn_area].settings.background
-	var foreground_resource = Singleton.CurrentLevelData.get_cached_foreground(level_foreground)
-	var palette = level_data.areas[spawn_area].settings.background_palette
+	var foreground_resource = Singleton.CurrentLevelData.get_cached_foreground(thumbnail_background)
+	var palette = thumbnail_background_palette
 	
 	if palette == 0:
 		return foreground_resource.preview

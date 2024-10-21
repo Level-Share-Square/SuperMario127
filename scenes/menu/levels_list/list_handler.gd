@@ -21,7 +21,6 @@ onready var focus := get_node(focus_path)
 
 ### variables
 const BASE_FOLDER: String = level_list_util.BASE_FOLDER
-const DEFAULT_LEVEL: String = "res://level/default_level.tres"
 var working_folder: String = BASE_FOLDER
 
 
@@ -61,7 +60,7 @@ func insert_folder():
 
 func insert_level(level_code: String = "", folder: String = working_folder):
 	if level_code == "":
-		level_code = level_list_util.load_level_code_file(DEFAULT_LEVEL)
+		level_code = level_list_util.load_level_code_file(LevelData.DEFAULT_CODE_PATH)
 	
 	var level_id: String = level_list_util.generate_level_id()
 	var file_path: String = level_list_util.get_level_file_path(level_id, folder)

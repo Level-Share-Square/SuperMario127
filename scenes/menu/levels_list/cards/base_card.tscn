@@ -21,8 +21,8 @@ anchor_bottom = 1.0
 mouse_filter = 1
 
 [node name="DragSlot" type="Area2D" parent="."]
-visible = false
 collision_mask = 0
+input_pickable = false
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DragSlot"]
@@ -30,8 +30,10 @@ position = Vector2( 48, 40 )
 shape = SubResource( 1 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-visible = false
+unique_name_in_owner = true
 rect = Rect2( -10, -10, 116, 100 )
+process_parent = true
+physics_process_parent = true
 
 [connection signal="button_down" from="." to="." method="button_down"]
 [connection signal="button_up" from="." to="." method="button_up"]

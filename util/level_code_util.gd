@@ -1,5 +1,6 @@
 class_name level_code_util
 
+
 static func is_valid(value : String):
 	value = value.strip_edges(true, true)
 	
@@ -104,7 +105,7 @@ static func split_code_top_level(string):
 				start_from = index + 1
 	return parts
 
-static func decode(code: String):
+static func decode(code: String) -> Dictionary:
 	var result = {}
 
 	code = code.strip_edges()
@@ -244,5 +245,36 @@ static func decode(code: String):
 						decoded_object.properties.append(value_util.decode_value(value))
 					index += 1
 				result.areas[area_id].objects.append(decoded_object)
+	
+	return result
+
+static func decode_info(code: String) -> Dictionary:
+	var result: Dictionary = {}
+	
+	code = code.strip_edges()
+	var code_array: Array = code.split(",")
+	
+	result.format_version = code_array[0]
+	result.name = code_array[1].percent_decode()
+	
+	
+	var add_amount = 1
+	if result.format_version == "0.4.0" or result.format_version == "0.4.1":
+		add_amount = 0
+	
+	elif conversion_util.compareVersions(result.format_version, "0.5.0") > -1:
+		result.author = code_array[2].percent_decode()
+		result.description = code_array[3].percent_decode()
+		result.thumbnail_url = code_array[4].percent_decode()
+		add_amount = 4
+	
+	var area_index: int = 2 + add_amount
+	result.areas = [{}]
+	result.areas[0].settings = {}
+	result.areas[0].settings.sky = value_util.decode_value(code_array[area_index + 1])
+	result.areas[0].settings.background = value_util.decode_value(code_array[area_index + 2])
+	if conversion_util.compareVersions(result.format_version, "0.4.5") == 1:
+		var split: String = code_array[area_index + 5].get_slice("~", 0)
+		result.areas[0].settings.background_palette = value_util.decode_value(split)
 	
 	return result
