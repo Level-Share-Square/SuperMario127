@@ -21,8 +21,9 @@ var save_pos : Vector2
 
 onready var area = $Col
 onready var area_collision = $Col/CollisionShape2D
-onready var sprite = $ColorRect
-onready var waves = $Waves
+onready var back_buffer_copy = $BackBufferCopy
+onready var sprite = $BackBufferCopy/ColorRect
+onready var waves = $BackBufferCopy/Waves
 
 func _set_properties():
 	savable_properties = ["width", "height", "color", "render_in_front", "tag", "toxicity", "tap_mode"]
@@ -68,6 +69,8 @@ func change_size():
 	waves.material = waves.get_material().duplicate()
 	waves.get_material().set_shader_param("color_tint", color)
 	waves.get_material().set_shader_param("x_size", width)
+	
+	back_buffer_copy.rect.size = Vector2(width, height + 15)
 	
 	z_index = -1 if !render_in_front else 25
 	
