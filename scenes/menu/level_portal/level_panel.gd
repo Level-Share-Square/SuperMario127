@@ -1,6 +1,10 @@
 extends PanelContainer
 
 
+signal level_loaded(page_info)
+
+
+const CHECKED_COLOR := Color("aee3ff")
 const TAG_SCENE := preload("res://scenes/menu/level_portal/level_panel/tag.tscn")
 const DEFAULT_THUMB := preload("res://scenes/menu/level_portal/default_thumb.png")
 const DEFAULT_ICON := preload("res://scenes/menu/level_portal/default_icon.png")
@@ -8,10 +12,14 @@ const DEFAULT_ICON := preload("res://scenes/menu/level_portal/default_icon.png")
 const UNSAVED_TEXT := "Save"
 const SAVED_TEXT := "Saved"
 
+const UNFAVORITED_TEXT := "Favorite?"
+const FAVORITED_TEXT := "Favorited."
+
 
 onready var outdated_version = $"%OutdatedVersion"
 onready var level_buttons = $"%LevelButtons"
 onready var save_button = $"%SaveButton"
+onready var favorite_button = $"%FavoriteButton"
 
 
 onready var level_title = $"%LevelTitle"
@@ -36,6 +44,10 @@ onready var favorites_label = $"%FavoritesLabel"
 onready var rates_label = $"%RatesLabel"
 onready var time_label = $"%TimeLabel"
 
+onready var plays_container = $"%PlaysContainer"
+onready var favorites_container = $"%FavoritesContainer"
+onready var rates_container = $"%RatesContainer"
+
 onready var tags = $"%Tags"
 
 
@@ -43,8 +55,13 @@ onready var shines_label = $"%ShinesLabel"
 onready var coins_label = $"%CoinsLabel"
 
 
+onready var http_account = $"%HTTPAccount"
+onready var account_info = $"%AccountInfo"
+
+onready var http_request = $"%HTTPRequest"
 onready var http_images = $"%HTTPImages"
 var page_info: LSSLevelPage
+
 
 
 func load_level(_page_info: LSSLevelPage):
@@ -71,6 +88,9 @@ func load_level(_page_info: LSSLevelPage):
 	rates_label.text = str(page_info.rates)
 	
 	time_label.text = page_info.timestamp.left(10).right(2)
+	
+	plays_container.modulate = CHECKED_COLOR if page_info.has_played else Color.white 
+	rates_container.modulate = CHECKED_COLOR if page_info.has_rated > 0 else Color.white 
 	
 	
 	var thumb_texture: ImageTexture = http_images.get_cached_image(page_info.thumbnail_url)
@@ -119,6 +139,9 @@ func load_level(_page_info: LSSLevelPage):
 	else:
 		shines_label.text = "N/A"
 		coins_label.text = "N/A"
+	
+	emit_signal("level_loaded", page_info)
+	favorite_button.visible = account_info.logged_in
 
 
 func image_loaded(url: String, texture: ImageTexture):
@@ -154,6 +177,9 @@ func save_level():
 	
 	save_button.disabled = true
 	save_button.text = SAVED_TEXT
+	
+	if account_info.logged_in:
+		http_account.play_level(page_info.level_id)
 
 
 func play_level():
@@ -163,8 +189,12 @@ func play_level():
 	var local_id: String = level_path.get_file().get_basename()
 	var working_folder: String = level_path.get_base_dir()
 	
+	var page_return_vars: Dictionary
+	for variable in http_request.return_args:
+		page_return_vars[variable] = http_request[variable]
+	
 	Singleton.SceneSwitcher.menu_return_screen = "LevelPortal"
-	Singleton.SceneSwitcher.menu_return_args = [page_info.level_id]
+	Singleton.SceneSwitcher.menu_return_args = [page_info.level_id, page_return_vars]
 	Singleton.SceneSwitcher.start_level(page_info.level_info, local_id, working_folder, false, true)
 
 

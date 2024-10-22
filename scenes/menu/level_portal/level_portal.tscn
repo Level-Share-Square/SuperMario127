@@ -1,4 +1,4 @@
-[gd_scene load_steps=251 format=2]
+[gd_scene load_steps=266 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/level_portal/level_grid.gd" type="Script" id=2]
@@ -57,6 +57,16 @@
 [ext_resource path="res://scenes/menu/level_portal/icons/go_to_page.png" type="Texture" id=55]
 [ext_resource path="res://scenes/menu/level_portal/return_args.gd" type="Script" id=56]
 [ext_resource path="res://scenes/menu/level_portal/thumbnail_cache.gd" type="Script" id=57]
+[ext_resource path="res://assets/fonts/coolfont.tres" type="DynamicFont" id=58]
+[ext_resource path="res://scenes/menu/button_scripts/url_opener.gd" type="Script" id=59]
+[ext_resource path="res://scenes/menu/level_portal/login/login_panel.gd" type="Script" id=60]
+[ext_resource path="res://scenes/menu/level_portal/login/account_info.gd" type="Script" id=61]
+[ext_resource path="res://scenes/menu/level_portal/http/http_account.gd" type="Script" id=62]
+[ext_resource path="res://scenes/menu/level_portal/login/profile_loader.gd" type="Script" id=63]
+[ext_resource path="res://scenes/menu/level_portal/level_panel/comments/post_comment_content.tscn" type="PackedScene" id=64]
+[ext_resource path="res://assets/fonts/delfino_medium.tres" type="DynamicFont" id=65]
+[ext_resource path="res://scenes/menu/level_portal/level_panel/rate_button.gd" type="Script" id=66]
+[ext_resource path="res://scenes/menu/level_portal/level_panel/rate_panel.gd" type="Script" id=67]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -356,6 +366,14 @@ shader_param/rounded_corner_bottom_right = true
 shader_param/width = 1.0
 shader_param/height = 1.0
 
+[sub_resource type="Gradient" id=226]
+colors = PoolColorArray( 0.0741917, 0.0145, 0.29, 0.92549, 0, 0.196078, 0.45098, 0 )
+
+[sub_resource type="GradientTexture2D" id=227]
+gradient = SubResource( 226 )
+fill = 1
+fill_from = Vector2( 0.5, 1 )
+
 [sub_resource type="Animation" id=220]
 length = 0.001
 tracks/0/type = "value"
@@ -434,6 +452,95 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
 }
+
+[sub_resource type="Animation" id=223]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../Buttons:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=224]
+resource_name = "transition"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../Buttons:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=225]
+shader = ExtResource( 40 )
+shader_param/radius_scale = 1.0
+shader_param/rounded_corner_top_left = true
+shader_param/rounded_corner_top_right = true
+shader_param/rounded_corner_bottom_left = true
+shader_param/rounded_corner_bottom_right = true
+shader_param/width = 1.0
+shader_param/height = 1.0
 
 [sub_resource type="Animation" id=222]
 length = 0.001
@@ -1548,6 +1655,7 @@ unique_name_in_owner = true
 margin_right = 472.0
 margin_bottom = 24.0
 custom_constants/separation = 0
+alignment = 1
 script = ExtResource( 52 )
 
 [node name="Query" type="LineEdit" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
@@ -1876,7 +1984,7 @@ lerp_speed = 18.0
 [node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelPage/ScrollContainer"]
 modulate = Color( 0, 0, 1, 0 )
 margin_right = 768.0
-margin_bottom = 348.0
+margin_bottom = 420.0
 rect_min_size = Vector2( 768, 0 )
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 384, 0 )
@@ -1890,8 +1998,8 @@ script = ExtResource( 49 )
 margin_left = 148.0
 margin_top = 32.0
 margin_right = 620.0
-margin_bottom = 316.0
-custom_constants/separation = 12
+margin_bottom = 388.0
+custom_constants/separation = 16
 
 [node name="OutdatedVersion" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -1930,7 +2038,8 @@ margin_bottom = 26.0
 rect_min_size = Vector2( 96, 0 )
 alignment = 2
 
-[node name="Favorite" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/VBoxContainer2"]
+[node name="FavoriteButton" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/VBoxContainer2"]
+unique_name_in_owner = true
 margin_top = 6.0
 margin_right = 96.0
 margin_bottom = 26.0
@@ -1989,9 +2098,9 @@ size_flags_horizontal = 3
 [node name="LevelPanel" type="PanelContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 self_modulate = Color( 0, 0.231373, 0.478431, 0.627451 )
-margin_top = 38.0
+margin_top = 42.0
 margin_right = 472.0
-margin_bottom = 272.0
+margin_bottom = 276.0
 mouse_filter = 2
 theme_type_variation = "Panel"
 script = ExtResource( 45 )
@@ -2279,18 +2388,19 @@ margin_bottom = 76.0
 size_flags_horizontal = 3
 custom_constants/separation = 4
 
-[node name="Plays" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="PlaysContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_right = 80.0
 margin_bottom = 16.0
 mouse_filter = 2
 alignment = 1
 
-[node name="Icon" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Plays"]
+[node name="Icon" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlaysContainer"]
 margin_right = 16.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 16, 0 )
 
-[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Plays/Icon"]
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlaysContainer/Icon"]
 margin_left = 1.5
 margin_top = 1.0
 margin_right = 14.5
@@ -2300,7 +2410,7 @@ texture = ExtResource( 37 )
 expand = true
 stretch_mode = 6
 
-[node name="PlaysLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Plays"]
+[node name="PlaysLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlaysContainer"]
 unique_name_in_owner = true
 margin_left = 20.0
 margin_right = 80.0
@@ -2311,19 +2421,20 @@ text = "18"
 valign = 1
 clip_text = true
 
-[node name="Favorites" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="FavoritesContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 20.0
 margin_right = 80.0
 margin_bottom = 36.0
 mouse_filter = 2
 alignment = 1
 
-[node name="Icon2" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Favorites"]
+[node name="Icon2" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/FavoritesContainer"]
 margin_right = 16.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 16, 0 )
 
-[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Favorites/Icon2"]
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/FavoritesContainer/Icon2"]
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 15.0
@@ -2333,7 +2444,7 @@ texture = ExtResource( 36 )
 expand = true
 stretch_mode = 6
 
-[node name="FavoritesLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Favorites"]
+[node name="FavoritesLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/FavoritesContainer"]
 unique_name_in_owner = true
 margin_left = 20.0
 margin_right = 80.0
@@ -2344,19 +2455,20 @@ text = "5"
 valign = 1
 clip_text = true
 
-[node name="Rates" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="RatesContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 40.0
 margin_right = 80.0
 margin_bottom = 56.0
 mouse_filter = 2
 alignment = 1
 
-[node name="Icon2" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Rates"]
+[node name="Icon2" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/RatesContainer"]
 margin_right = 16.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 16, 0 )
 
-[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Rates/Icon2"]
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/RatesContainer/Icon2"]
 margin_left = 1.0
 margin_right = 15.0
 margin_bottom = 14.0
@@ -2365,7 +2477,7 @@ texture = ExtResource( 39 )
 expand = true
 stretch_mode = 6
 
-[node name="RatesLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Rates"]
+[node name="RatesLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/RatesContainer"]
 unique_name_in_owner = true
 margin_left = 20.0
 margin_right = 80.0
@@ -2477,11 +2589,157 @@ script = ExtResource( 47 )
 
 [node name="Tween" type="Tween" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description"]
 
+[node name="RateSubmitting" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_top = 292.0
+margin_right = 472.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 0, 48 )
+custom_fonts/font = ExtResource( 65 )
+text = "Submitting..."
+align = 1
+valign = 1
+
+[node name="RatePanel" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 292.0
+margin_right = 472.0
+margin_bottom = 340.0
+alignment = 1
+script = ExtResource( 67 )
+new_rate_text = "Leave a rating: "
+change_rate_text = "Change rating: "
+
+[node name="Label" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel"]
+margin_left = 80.0
+margin_top = 14.0
+margin_right = 184.0
+margin_bottom = 33.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 65 )
+text = "Leave a rating: "
+align = 1
+valign = 1
+
+[node name="Padding" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel"]
+margin_left = 188.0
+margin_right = 196.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 8, 0 )
+
+[node name="PanelContainer" type="PanelContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel"]
+unique_name_in_owner = true
+self_modulate = Color( 0, 0.231373, 0.478431, 0.627451 )
+margin_left = 200.0
+margin_right = 392.0
+margin_bottom = 48.0
+mouse_filter = 2
+theme_type_variation = "Panel"
+script = ExtResource( 45 )
+
+[node name="Gradient" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 188.0
+margin_bottom = 44.0
+mouse_filter = 2
+texture = SubResource( 212 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 188.0
+margin_bottom = 44.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="Panel" type="Panel" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer"]
+modulate = Color( 0, 0, 0, 0.25098 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 180.0
+margin_bottom = 36.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 180.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 176, 0 )
+alignment = 1
+
+[node name="Rating" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 8.0
+margin_right = 168.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 160, 30 )
+rect_pivot_offset = Vector2( -24, -82 )
+flat = true
+script = ExtResource( 66 )
+
+[node name="Outline" type="TextureProgress" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating"]
+self_modulate = Color( 0.803922, 0.513726, 0.513726, 1 )
+material = SubResource( 209 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+value = 5.0
+texture_under = ExtResource( 33 )
+texture_progress = ExtResource( 34 )
+tint_progress = Color( 0.831373, 0.615686, 0.423529, 1 )
+nine_patch_stretch = true
+
+[node name="Fill" type="TextureProgress" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating/Outline"]
+material = SubResource( 209 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+texture_progress = ExtResource( 34 )
+nine_patch_stretch = true
+
+[node name="PostComment" type="PanelContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+visible = false
+self_modulate = Color( 0, 0.231373, 0.478431, 0.627451 )
+margin_top = 356.0
+margin_right = 472.0
+margin_bottom = 524.0
+theme = ExtResource( 1 )
+
+[node name="Gradient" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/PostComment"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 468.0
+margin_bottom = 164.0
+mouse_filter = 2
+texture = SubResource( 227 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/PostComment"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 468.0
+margin_bottom = 164.0
+custom_constants/margin_right = 6
+custom_constants/margin_top = 6
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 6
+
+[node name="Content" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/PostComment/MarginContainer" instance=ExtResource( 64 )]
+margin_bottom = 154.0
+
 [node name="Comments" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 284.0
+margin_top = 356.0
 margin_right = 472.0
-margin_bottom = 284.0
+margin_bottom = 356.0
 custom_constants/separation = 12
 script = ExtResource( 53 )
 
@@ -2489,6 +2747,207 @@ script = ExtResource( 53 )
 root_node = NodePath("../ScrollContainer")
 anims/RESET = SubResource( 220 )
 anims/transition = SubResource( 221 )
+
+[node name="Login" type="Control" parent="Subscreens"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+
+[node name="Focus" type="Control" parent="Subscreens/Login"]
+script = ExtResource( 7 )
+default_focus_path = NodePath("../../../Buttons/LevelPage/Back")
+
+[node name="MarginContainer" type="CenterContainer" parent="Subscreens/Login"]
+modulate = Color( 0, 0, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 768, 0 )
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 384, 216 )
+
+[node name="LoginPanel" type="PanelContainer" parent="Subscreens/Login/MarginContainer"]
+self_modulate = Color( 0, 0.231373, 0.478431, 0.627451 )
+margin_left = 136.0
+margin_top = 131.0
+margin_right = 632.0
+margin_bottom = 301.0
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = "Panel"
+script = ExtResource( 60 )
+
+[node name="Gradient" type="TextureRect" parent="Subscreens/Login/MarginContainer/LoginPanel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 492.0
+margin_bottom = 166.0
+mouse_filter = 2
+texture = SubResource( 212 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/Login/MarginContainer/LoginPanel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 492.0
+margin_bottom = 166.0
+custom_constants/margin_top = 6
+
+[node name="LoginContents" type="VBoxContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer"]
+unique_name_in_owner = true
+margin_left = 12.0
+margin_top = 6.0
+margin_right = 476.0
+margin_bottom = 150.0
+custom_constants/separation = 12
+
+[node name="WrongPass" type="Label" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents"]
+unique_name_in_owner = true
+visible = false
+margin_right = 464.0
+margin_bottom = 24.0
+custom_colors/font_color = Color( 1, 0.737255, 0.737255, 1 )
+text = "Incorrect email and/or password."
+align = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents"]
+self_modulate = Color( 0, 0, 0, 0.188235 )
+margin_right = 464.0
+margin_bottom = 104.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 460.0
+margin_bottom = 100.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 444.0
+margin_bottom = 84.0
+
+[node name="Email" type="LineEdit" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 432.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 58 )
+placeholder_text = "Email"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer"]
+margin_top = 44.0
+margin_right = 432.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 432, 0 )
+
+[node name="Password" type="LineEdit" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 293.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 58 )
+secret = true
+expand_to_text_length = true
+placeholder_text = "Password"
+
+[node name="Padding" type="Control" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 297.0
+margin_right = 301.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 4, 0 )
+
+[node name="Show" type="Button" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 305.0
+margin_right = 363.0
+margin_bottom = 28.0
+theme_type_variation = "TransparentButton"
+custom_fonts/font = ExtResource( 58 )
+text = " Show "
+
+[node name="Forgot" type="Button" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 367.0
+margin_right = 432.0
+margin_bottom = 28.0
+theme_type_variation = "TransparentButton"
+custom_fonts/font = ExtResource( 58 )
+text = " Reset "
+
+[node name="URL" type="Node" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Forgot"]
+script = ExtResource( 59 )
+url = "https://levelsharesquare.com/forgotpass"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents"]
+margin_top = 116.0
+margin_right = 464.0
+margin_bottom = 144.0
+
+[node name="Login" type="Button" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/HBoxContainer"]
+margin_right = 276.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+theme_type_variation = "TransparentButton"
+custom_fonts/font = ExtResource( 58 )
+text = "Login"
+
+[node name="Register" type="Button" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/HBoxContainer"]
+margin_left = 280.0
+margin_right = 464.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+theme_type_variation = "TransparentButton"
+custom_fonts/font = ExtResource( 58 )
+text = "Register"
+
+[node name="URL" type="Node" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/HBoxContainer/Register"]
+script = ExtResource( 59 )
+url = "https://levelsharesquare.com/auth?url=/#!"
+
+[node name="PleaseWait" type="CenterContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+margin_left = 12.0
+margin_top = 6.0
+margin_right = 476.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 464, 144 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/PleaseWait"]
+margin_left = 174.0
+margin_top = 60.0
+margin_right = 290.0
+margin_bottom = 84.0
+
+[node name="Label" type="Label" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/PleaseWait/HBoxContainer"]
+margin_right = 112.0
+margin_bottom = 24.0
+text = "Please wait..."
+align = 1
+valign = 1
+
+[node name="Sprite" type="Control" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/PleaseWait/HBoxContainer"]
+margin_left = 116.0
+margin_right = 116.0
+margin_bottom = 24.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/PleaseWait/HBoxContainer/Sprite"]
+frames = ExtResource( 28 )
+playing = true
+centered = false
+offset = Vector2( 0, -8 )
+
+[node name="Outline" type="AnimatedSprite" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/PleaseWait/HBoxContainer/Sprite/AnimatedSprite"]
+frames = ExtResource( 29 )
+playing = true
+centered = false
+offset = Vector2( 0, -8 )
+
+[node name="Timer" type="Timer" parent="Subscreens/Login/MarginContainer/LoginPanel"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Subscreens/Login"]
+anims/RESET = SubResource( 223 )
+anims/transition = SubResource( 224 )
 
 [node name="Buttons" type="MarginContainer" parent="."]
 modulate = Color( 0, 0, 1, 0 )
@@ -2509,12 +2968,60 @@ mouse_filter = 2
 custom_constants/separation = 4
 alignment = 2
 
+[node name="Profile" type="HBoxContainer" parent="Buttons/LevelList"]
+visible = false
+margin_right = 92.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+alignment = 1
+script = ExtResource( 63 )
+
+[node name="Icon" type="TextureRect" parent="Buttons/LevelList/Profile"]
+material = SubResource( 225 )
+margin_right = 24.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 24, 24 )
+texture = ExtResource( 38 )
+expand = true
+stretch_mode = 6
+
+[node name="Control" type="Control" parent="Buttons/LevelList/Profile"]
+margin_left = 28.0
+margin_right = 92.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="Buttons/LevelList/Profile/Control"]
+anchor_right = 1.25
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 9 )
+text = "Username"
+valign = 1
+autowrap = true
+
+[node name="Padding" type="Control" parent="Buttons/LevelList"]
+visible = false
+margin_right = 92.0
+margin_bottom = 352.0
+size_flags_vertical = 3
+
+[node name="Logout" type="Button" parent="Buttons/LevelList"]
+visible = false
+margin_top = 328.0
+margin_right = 92.0
+margin_bottom = 352.0
+custom_fonts/font = ExtResource( 9 )
+text = "Log Out"
+script = ExtResource( 10 )
+sink_amount = 6
+
 [node name="Login" type="Button" parent="Buttons/LevelList"]
 margin_top = 356.0
 margin_right = 92.0
 margin_bottom = 380.0
 custom_fonts/font = ExtResource( 9 )
-text = "Login"
+text = "Log In"
 script = ExtResource( 10 )
 sink_amount = 6
 
@@ -2537,16 +3044,26 @@ mouse_filter = 2
 custom_constants/separation = 4
 alignment = 2
 
-[node name="Login" type="Button" parent="Buttons/LevelPage"]
-margin_top = 356.0
+[node name="Back" type="Button" parent="Buttons/LevelPage"]
+margin_top = 384.0
 margin_right = 92.0
-margin_bottom = 380.0
+margin_bottom = 408.0
+theme_type_variation = "Red"
 custom_fonts/font = ExtResource( 9 )
-text = "Login"
+text = "Back"
 script = ExtResource( 10 )
 sink_amount = 6
 
-[node name="Back" type="Button" parent="Buttons/LevelPage"]
+[node name="Login" type="VBoxContainer" parent="Buttons"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 104.0
+margin_bottom = 420.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 2
+
+[node name="Back" type="Button" parent="Buttons/Login"]
 margin_top = 384.0
 margin_right = 92.0
 margin_bottom = 408.0
@@ -2626,6 +3143,10 @@ playing = true
 [node name="ThumbnailCache" type="Node" parent="."]
 script = ExtResource( 57 )
 
+[node name="AccountInfo" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 61 )
+
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 unique_name_in_owner = true
 script = ExtResource( 23 )
@@ -2646,15 +3167,21 @@ script = ExtResource( 51 )
 unique_name_in_owner = true
 script = ExtResource( 26 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 203 )
-anims/transition = SubResource( 202 )
+[node name="HTTPAccount" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 62 )
 
 [node name="ReturnArgs" type="Node" parent="."]
 process_priority = -1
 script = ExtResource( 56 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 203 )
+anims/transition = SubResource( 202 )
+
 [connection signal="screen_opened" from="." to="Subscreens" method="screen_change" binds= [ "LevelList" ]]
+[connection signal="screen_opened" from="." to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search" method="screen_opened"]
+[connection signal="screen_opened" from="." to="AccountInfo" method="load_info"]
 [connection signal="screen_opened" from="." to="HTTPRequest" method="load_page"]
 [connection signal="screen_changed" from="Subscreens" to="Buttons" method="screen_changed"]
 [connection signal="resized" from="Subscreens/LevelList/ScrollContainer/MarginContainer" to="Subscreens/LevelList/ScrollContainer/MarginContainer" method="resized"]
@@ -2668,13 +3195,36 @@ script = ExtResource( 56 )
 [connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/VBoxContainer/Website" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="open_website"]
 [connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/SaveButton" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="save_level"]
 [connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/Play" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="play_level"]
+[connection signal="level_loaded" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel" method="level_loaded"]
+[connection signal="level_loaded" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating" method="level_loaded"]
 [connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description/VBoxContainer/Button" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description" method="toggle_expand"]
+[connection signal="mouse_exited" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating" method="mouse_exited"]
+[connection signal="resized" from="Subscreens/Login/MarginContainer" to="Subscreens/Login/MarginContainer" method="resized"]
+[connection signal="button_down" from="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Show" to="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Password" method="set_secret" binds= [ false ]]
+[connection signal="button_up" from="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Show" to="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Password" method="set_secret" binds= [ true ]]
+[connection signal="pressed" from="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/HBoxContainer/Login" to="Subscreens/Login/MarginContainer/LoginPanel" method="login"]
+[connection signal="timeout" from="Subscreens/Login/MarginContainer/LoginPanel/Timer" to="Subscreens/Login/MarginContainer/LoginPanel" method="timeout"]
+[connection signal="pressed" from="Buttons/LevelList/Logout" to="AccountInfo" method="logout"]
+[connection signal="pressed" from="Buttons/LevelList/Login" to="Subscreens/LevelList" method="transition" binds= [ "Login" ]]
 [connection signal="pressed" from="Buttons/LevelList/Back" to="." method="transition" binds= [ "MainMenu" ]]
 [connection signal="pressed" from="Buttons/LevelList/Back" to="Subscreens/LevelList" method="transition" binds= [ "" ]]
 [connection signal="pressed" from="Buttons/LevelPage/Back" to="Subscreens/LevelPage" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="Buttons/Login/Back" to="Subscreens/Login" method="transition" binds= [ "LevelList" ]]
 [connection signal="pressed" from="LaunchStar/Button" to="LaunchStar" method="pressed"]
+[connection signal="login" from="AccountInfo" to="Buttons/LevelList/Profile" method="show"]
+[connection signal="login" from="AccountInfo" to="Buttons/LevelList/Profile" method="load_profile"]
+[connection signal="login" from="AccountInfo" to="Buttons/LevelList/Padding" method="show"]
+[connection signal="login" from="AccountInfo" to="Buttons/LevelList/Logout" method="show"]
+[connection signal="login" from="AccountInfo" to="Buttons/LevelList/Login" method="hide"]
+[connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Profile" method="hide"]
+[connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Padding" method="hide"]
+[connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Logout" method="hide"]
+[connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Login" method="show"]
+[connection signal="page_loaded" from="HTTPRequest" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search" method="page_loaded"]
 [connection signal="request_completed" from="HTTPRequest" to="HTTPRequest" method="request_completed"]
 [connection signal="request_completed" from="HTTPLevelPage" to="HTTPLevelPage" method="request_completed"]
 [connection signal="request_completed" from="HTTPComments" to="HTTPComments" method="request_completed"]
 [connection signal="request_completed" from="HTTPRandomLevel" to="HTTPRandomLevel" method="request_completed"]
 [connection signal="image_loaded" from="HTTPImages" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="image_loaded"]
+[connection signal="login_request_completed" from="HTTPAccount" to="Subscreens/Login/MarginContainer/LoginPanel" method="request_completed"]
+[connection signal="rating_request_completed" from="HTTPAccount" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel" method="rating_request_completed"]

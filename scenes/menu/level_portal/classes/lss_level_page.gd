@@ -22,6 +22,9 @@ var favorites: int
 var plays: int
 var comments: int
 
+var has_played: bool
+var has_rated: float
+
 
 ## dictionary.value causes errors, if the data happens
 ## not to have the required value.
@@ -48,11 +51,17 @@ func _init(data: Dictionary):
 	description = fetch(data, "description")
 	tags = PoolStringArray(fetch(data, "tags", []))
 	
-	rating = float(fetch(data, "rating"))
-	rates = int(fetch(data, "raters"))
+	rating = float(fetch(data, "rating", 0))
+	rates = int(fetch(data, "raters", 0))
 	
-	favorites = int(fetch(data, "favourites"))
-	plays = int(fetch(data, "plays"))
+	favorites = int(fetch(data, "favourites", 0))
+	plays = int(fetch(data, "plays", 0))
 	comments = fetch(data, "commenters", []).size()
 	
+	has_played = fetch(data, "hasPlayed", false)
+	has_rated = fetch(data, "hasRated", 0)
+	
 	level_info = LevelInfo.new(level_code)
+	
+#	data.erase("code")
+#	print(data)

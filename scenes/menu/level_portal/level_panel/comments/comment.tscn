@@ -3,11 +3,11 @@
 [ext_resource path="res://scenes/menu/level_portal/level_panel/comments/comment_content.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=4]
 
-[sub_resource type="Gradient" id=211]
+[sub_resource type="Gradient" id=226]
 colors = PoolColorArray( 0.0741917, 0.0145, 0.29, 0.92549, 0, 0.196078, 0.45098, 0 )
 
-[sub_resource type="GradientTexture2D" id=212]
-gradient = SubResource( 211 )
+[sub_resource type="GradientTexture2D" id=227]
+gradient = SubResource( 226 )
 fill = 1
 fill_from = Vector2( 0.5, 1 )
 
@@ -23,7 +23,7 @@ margin_top = 4.0
 margin_right = 468.0
 margin_bottom = 107.0
 mouse_filter = 2
-texture = SubResource( 212 )
+texture = SubResource( 227 )
 expand = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

@@ -1,6 +1,7 @@
 extends Control
 
 
+const CHECKED_COLOR := Color("aee3ff")
 const TAG_SEPARATOR: String = ", "
 
 onready var name_label = $"%NameLabel"
@@ -18,6 +19,9 @@ onready var tags_label = $"%TagsLabel"
 onready var favorites_label = $"%FavoritesLabel"
 onready var plays_label = $"%PlaysLabel"
 onready var comments_label = $"%CommentsLabel"
+
+onready var plays_container = $"%PlaysContainer"
+onready var favorites_container = $"%FavoritesContainer"
 
 var level_info: LSSLevelInfo
 var texture: ImageTexture
@@ -50,6 +54,7 @@ func set_style():
 	plays_label.text = str(level_info.plays)
 	comments_label.text = str(level_info.comments)
 	
+	plays_container.modulate = CHECKED_COLOR if level_info.has_played else Color.white 
 	
 	if texture != null:
 		thumbnail.texture = texture

@@ -2253,16 +2253,19 @@ position = Vector2( 0.198608, -0.468788 )
 [node name="Placement" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 
 [node name="RectangleFill" type="Control" parent="Placement"]
 margin_right = 40.0
 margin_bottom = 40.0
+mouse_filter = 2
 script = ExtResource( 1446 )
 
 [node name="Node2D" type="Node2D" parent="Placement/RectangleFill"]
 z_index = 10
 
 [node name="Drag" type="ColorRect" parent="Placement/RectangleFill/Node2D"]
+mouse_filter = 2
 color = Color( 1, 1, 1, 0.501961 )
 
 [node name="PlaceableItems" type="Node" parent="."]

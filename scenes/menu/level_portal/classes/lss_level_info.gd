@@ -14,6 +14,9 @@ var favorites: int
 var plays: int
 var comments: int
 
+var has_played: bool
+var has_rated: bool
+
 
 ## dictionary.value causes errors, if the data happens
 ## not to have the required value.
@@ -40,3 +43,8 @@ func _init(data: Dictionary):
 	favorites = int(fetch(data, "favourites"))
 	plays = int(fetch(data, "plays"))
 	comments = fetch(data, "commenters", []).size()
+	
+	has_played = fetch(data, "hasPlayed", false)
+	has_rated = fetch(data, "hasRated", false)
+	
+	print(data)

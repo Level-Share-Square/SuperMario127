@@ -109,7 +109,7 @@ func load_comments(level_id : String ="651f32fcb239ad06ffcb9af2"):
 		httpreq1.connect("request_completed", self, "on_req1_complete")
 		httpreq1.request("https://levelsharesquare.com/api/levels/" + level_id + "/comments?page=1")
 
-func on_req2_complete(result, response_code, headers, body):
+func on_req2_complete(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
 	var json = JSON.parse(body.get_string_from_utf8())
 	print(response_code)
 	print(json.result)
@@ -119,7 +119,7 @@ func on_req2_complete(result, response_code, headers, body):
 	httpreq1.request("https://levelsharesquare.com/api/levels/" + get_parent().get_parent().selected_level + "/comments?page=1")
 	textedit.text = "Comment"
 
-func on_req1_complete(result, response_code, headers, body):
+func on_req1_complete(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
 	var json = JSON.parse(body.get_string_from_utf8())
 	if json.result == null:
 		label.text = "An error occured. Please try again later!"

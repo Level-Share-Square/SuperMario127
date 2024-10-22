@@ -30,6 +30,11 @@ func quit_to_menu_with_transition(screen_to_open : String = ""):
 
 
 func setup_level(level_info: LevelInfo, level_id: String, working_folder: String):
+	# load save file, if it exists
+	var save_path: String = level_list_util.get_level_save_path(level_id, working_folder)
+	if level_list_util.file_exists(save_path):
+		level_info.load_save_from_dictionary(level_list_util.load_level_save_file(save_path))
+	
 	Singleton.CurrentLevelData.level_info = level_info
 	Singleton.CurrentLevelData.level_data = level_info.level_data
 	

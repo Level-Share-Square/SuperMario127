@@ -189,10 +189,10 @@ func on_copy():
 		var level_code = page_dictionary[level_list.get_selected_items()[0]][2]
 		OS.clipboard = str(level_code)
 
-func on_req5_completed(result, response_code, headers, body):
+func on_req5_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
 	print(response_code)
 
-func _on_request3_completed(result, response_code, headers, body):
+func _on_request3_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
 	level_list.set_item_disabled(0, false)
 	var json = JSON.parse(body.get_string_from_utf8())
 	if json.result["message"] != "Success.":
@@ -222,7 +222,7 @@ func _on_request3_completed(result, response_code, headers, body):
 				level_list.set_item_icon(i, star)
 	loading.hide()
 
-func _on_request_completed(result, response_code, headers, body):
+func _on_request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
 	if searching == false:
 		level_list.set_item_disabled(0, false)
 		var json = JSON.parse(body.get_string_from_utf8())
@@ -245,7 +245,7 @@ func _on_request_completed(result, response_code, headers, body):
 				level_list.set_item_icon(i, star)
 		loading.hide()
 		
-func _on_request2_completed(result, response_code, headers, body):
+func _on_request2_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
 	print(response_code)
 	if !level_list.is_item_disabled(0):
 		var json = JSON.parse(body.get_string_from_utf8())
@@ -261,7 +261,7 @@ func _on_request2_completed(result, response_code, headers, body):
 
 
 # Called when the HTTP request is completed.
-func _on_req4_completed(result, response_code, headers, body):
+func _on_req4_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
 	populate_info_panel(LevelInfo.new(page_dictionary[level_list.get_selected_items()[0]][2]), page_dictionary[level_list.get_selected_items()[0]][4], body)
 	
 

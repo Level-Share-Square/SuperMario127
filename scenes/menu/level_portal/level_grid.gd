@@ -22,7 +22,6 @@ func add_level(level_info: LSSLevelInfo, thumbnail: ImageTexture = null):
 	styling.texture = thumbnail
 	http_images.connect("image_loaded", styling, "thumbnail_loaded")
 	
-	level_button.connect("pressed", http_images, "clear_queue")
 	level_button.connect("pressed", level_list, "transition", [""])
 	level_button.connect("pressed", http_level_page, "load_level", [level_info.level_id])
 	call_deferred("add_child", level_button)

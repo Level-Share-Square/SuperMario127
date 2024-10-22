@@ -1,11 +1,15 @@
 extends HTTPRequest
 
 
+signal page_loaded(page, total_pages, is_featured, last_query)
+
+
 onready var level_grid = $"%LevelGrid"
 onready var pages = $"%Pages"
 onready var loading = $"%Loading"
 onready var search = $"%Search"
 
+onready var account_info = $"%AccountInfo"
 onready var http_images = $"%HTTPImages"
 
 var page: int = -1
@@ -13,6 +17,13 @@ var total_pages: int = 99
 
 var is_featured: bool
 var last_query: String
+
+var return_args: PoolStringArray = [
+	"page",
+	"total_pages",
+	"is_featured",
+	"last_query"
+]
 
 
 ## for connecting signals easier
@@ -28,12 +39,10 @@ func load_page(new_page: int = page, featured: bool = is_featured, query = last_
 		if query != last_query:
 			last_query = query
 			new_page = 1
-		else:
-			if new_page == page: return
 	else:
 		is_featured = featured
 		new_page = 1
-
+	
 	
 	level_grid.clear_children()
 	http_images.clear_queue()
@@ -54,17 +63,30 @@ func load_page(new_page: int = page, featured: bool = is_featured, query = last_
 	
 	var sort_type: String = "featured" if is_featured else "filter"
 	
-	var error: int = request("https://levelsharesquare.com/api/levels/" + sort_type + "/get?page=" + str(page) + "&game=2&authors=true" + search)
+	var header: PoolStringArray
+	if account_info.logged_in:
+		# without the wait time i get errors...
+		yield(get_tree().create_timer(0.1), "timeout")
+		header.append("Authorization: Bearer " + account_info.token)
+	
+	var error: int = request(
+		("https://levelsharesquare.com/api/levels/" 
+		+ sort_type 
+		+ "/get?page=" 
+		+ str(page) 
+		+ "&game=2&authors=true" 
+		+ search
+	), header)
 	if error != OK:
 		printerr("An error occurred while making an HTTP request.")
 
 
-func request_completed(result, response_code, headers, body):
+func request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
 	if response_code != 200 and response_code != 400: 
 		printerr("Failed to connect to Level Share Square. Response code: " + str(response_code))
 		return
 	
-	if response_code != 400:
+	if response_code == 200:
 		var json: JSONParseResult = JSON.parse(body.get_string_from_utf8())
 		
 		for level_dict in json.result.levels:
@@ -85,5 +107,6 @@ func request_completed(result, response_code, headers, body):
 	search.visible = true
 	loading.visible = false
 	
+	emit_signal("page_loaded", page, total_pages, is_featured, last_query)
 	print("Online levels loaded.")
 	http_images.load_next_image()

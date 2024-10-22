@@ -1,6 +1,7 @@
 extends HTTPRequest
 
 
+onready var account_info = $"%AccountInfo"
 onready var subscreens = $"../Subscreens"
 onready var level_panel = $"%LevelPanel"
 onready var http_comments = $"%HTTPComments"
@@ -11,13 +12,17 @@ var level_id: String
 func load_level(_level_id: String):
 	level_id = _level_id
 	
+	var header: PoolStringArray
+	if account_info.logged_in:
+		header.append("Authorization: Bearer " + account_info.token)
+	
 	print("Requesting level id ", level_id, "...")
-	var error: int = request("https://levelsharesquare.com/api/levels/" + level_id + "?keep=true")
+	var error: int = request("https://levelsharesquare.com/api/levels/" + level_id + "?keep=true", header)
 	if error != OK:
 		printerr("An error occurred while making an HTTP request.")
 
 
-func request_completed(result, response_code, headers, body):
+func request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
 	if response_code != 200: 
 		printerr("Failed to connect to Level Share Square. Response code: " + str(response_code))
 		return

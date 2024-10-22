@@ -23,7 +23,7 @@ static func get_link_file() -> ConfigFile:
 	var link_file := ConfigFile.new()
 	var error: int = link_file.load(FULL_PATH)
 	if error != OK:
-		printerr("Error loading LSS link file!")
+		printerr("Error loading LSS link file! Error code: ", error)
 	return link_file
 
 

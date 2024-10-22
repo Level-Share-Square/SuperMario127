@@ -19,7 +19,7 @@ func load_random_level():
 		printerr("An error occurred while making an HTTP request.")
 
 
-func request_completed(result, response_code, headers, body):
+func request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
 	if response_code != 200: 
 		printerr("Failed to connect to Level Share Square. Response code: " + str(response_code))
 		return

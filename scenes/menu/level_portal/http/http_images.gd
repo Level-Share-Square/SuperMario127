@@ -46,7 +46,7 @@ func load_next_image():
 			call_deferred("load_next_image")
 
 
-func request_completed(result, response_code, headers, body, url):
+func request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray, url: String):
 	var image := Image.new()
 	
 	var error: int = -1

@@ -34,7 +34,7 @@ func on_right_pressed():
 		return
 	else:
 		rate_value += 0.5
-		
+
 func on_rate_pressed():
 	var dic = {"starRate": rate_value}
 	var body = JSON.print(dic)
@@ -43,7 +43,7 @@ func on_rate_pressed():
 	var result = httpreq.request("https://levelsharesquare.com/api/levels/" + get_parent().get_parent().selected_level + "/rate", headers, true, 8, body)
 	print(get_parent().get_parent().selected_level)
 
-func on_req1_complete(result, response_code, headers, body):
+func on_req1_complete(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
 	var json = JSON.parse(body.get_string_from_utf8())
 	print(response_code)
 	print(json.result)
