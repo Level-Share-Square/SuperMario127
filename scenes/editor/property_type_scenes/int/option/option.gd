@@ -16,7 +16,10 @@ var last_hovered = false
 func _ready():
 	var _connect = button_node.connect("pressed", self, "pressed")
 	if parameters[2] != null:
-		button_node.text = parameters[2][0]
+		var text: String = parameters[2][0]
+		if typeof(text) == TYPE_STRING:
+			text = text.capitalize()
+		button_node.text = text
 
 func pressed():
 	click_sound.play()
@@ -28,6 +31,9 @@ func set_value(_value: int):
 	value = wrapi(value, parameters[1], parameters[1]+parameters[0])
 	# Does object have a name for the value?
 	if parameters[2] != null:
+		var text: String = parameters[2][value]
+		if typeof(text) == TYPE_STRING:
+			text = text.capitalize()
 		button_node.text = parameters[2][value]
 	else:
 		# Default to value otherwise

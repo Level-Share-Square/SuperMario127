@@ -16,11 +16,19 @@ onready var exclamation_mark = $Indicator/ExclamationMark
 
 onready var interact_shape = $InteractArea/CollisionShape2D
 
+const AUTOSTART_OFF = 0
+const AUTOSTART_ON = 1
+const AUTOSTART_ONESHOT = 2
+
 var dialogue
 var character_name
+var autostart = 0
 
 var being_read := false
+var has_been_read := false
+var interactable := true
 var character : Character
+var stored_velocity : Vector2 = Vector2.ZERO
 var parent
 
 var normal_pos : Vector2
@@ -70,9 +78,12 @@ func _ready():
 		sprite.visible = false
 		if "speaking_radius" in parent:
 			interact_shape.shape.radius = parent.speaking_radius
+		if "autostart" in parent:
+			autostart = parent.autostart
+		if "interactable" in parent:
+			interactable = parent.interactable
 
 func body_entered(body):
-	
 	if body.name.begins_with("Character") and character == null and parent.enabled:
 		character = body
 		message_appear.play()
@@ -83,12 +94,25 @@ func body_exited(body):
 		if reset_read_timer == 0:
 			message_disappear.play()
 
-# this is to make npcs emote in front of signs
+func autostart_dialogue(body):
+	if autostart > AUTOSTART_OFF and body.name.begins_with("PlayerCollision"):
+		if autostart == AUTOSTART_ONESHOT and has_been_read == true: return
+		 
+		character = body.get_parent()
+		if character.controllable and !being_read:
+			being_read = true
+			setup_char(true)
+			return
+
+# this is to make npcs emote in front of signs (and run autostart now lol)
 func area_entered(body):
 	# "area" is already taken and im too lazy to change it
 	var area_parent = body.get_parent()
+	
+	#check if autostart is on (should be above AUTOSTART_OFF which is 0)
+	autostart_dialogue(body)
+	
 	if area_parent.has_signal("message_appear") and area_parent.has_signal("message_disappear"):
-
 		area_parent.connect("message_appear", parent, "start_talking")
 		area_parent.connect("message_disappear", parent, "stop_talking")
 
@@ -99,13 +123,15 @@ func area_exited(body):
 		area_parent.disconnect("message_appear", parent, "start_talking")
 		area_parent.disconnect("message_disappear", parent, "stop_talking")
 		
-func setup_char():
+func setup_char(keep_velocity: bool = false):
 	# flip mario to face this object
 	character.facing_direction = sign(parent.global_position.x - character.global_position.x)
 	
 	character.set_dive_collision(false)
 	character.invulnerable = true 
 	character.controllable = false
+	if keep_velocity:
+		stored_velocity = character.velocity
 	character.velocity = Vector2.ZERO
 	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
 	character.set_inter_player_collision(false)
@@ -127,6 +153,7 @@ func restore_control():
 	character.invulnerable = false 
 	character.controllable = true
 	character.movable = true
+	character.velocity = stored_velocity
 	
 	character.get_state_node("JumpState").jump_buffer = 0 # prevent character from jumping right after closing menu
 	character.inputs[Character.input_names.jump][1] = false
@@ -137,6 +164,10 @@ func restore_control():
 	character.camera.zoom_tween.remove_all()
 	character.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 	character.camera.focus_on = null
+	
+	
+	#can't think of a better place to do anywhere else in the script this so we'll do it here
+	has_been_read = true
 	
 func open_menu_ui():
 	get_tree().get_current_scene().get_node("%DialogueText").open(dialogue, self, character, character_name)
@@ -156,19 +187,17 @@ func _physics_process(delta):
 		pop_up.position = lerp(pop_up.position, Vector2(normal_pos.x * 0.8, normal_pos.y * 0.9), delta * transition_speed)
 		pop_up.scale = lerp(pop_up.scale, Vector2(0.8, 0.8), delta * transition_speed)
 		pop_up.modulate = lerp(pop_up.modulate, Color(1, 1, 1, 0), delta * transition_speed)
-		reset_physics_interpolation()
 	else:
 		pop_up.position = lerp(pop_up.position, normal_pos, delta * transition_speed)
 		pop_up.scale = lerp(pop_up.scale, Vector2(1, 1), delta * transition_speed)
 		pop_up.modulate = lerp(pop_up.modulate, Color(1, 1, 1, 1), delta * transition_speed)
-		reset_physics_interpolation()
 		
 		# :/
 		if (character.inputs[Character.input_names.interact][0]
 		and !character.inputs[Character.input_names.left][0]
 		and !character.inputs[Character.input_names.right][0]
 		and character.is_grounded() and character.controllable
-		and !being_read):
+		and !being_read and interactable):
 			being_read = true
 			setup_char()
 			

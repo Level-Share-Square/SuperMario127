@@ -2,7 +2,6 @@ extends GameObject
 
 onready var animation_player = $AnimationPlayer
 onready var animated_sprite = $AnimatedSprite
-onready var sound = $AudioStreamPlayer
 onready var area = $Area2D
 onready var shape = $Area2D/CollisionShape2D
 onready var visibility_enabler = $VisibilityEnabler2D
@@ -10,7 +9,6 @@ onready var tween = $Tween
 
 var collected = false
 var collectable = true
-var physics = false
 var despawn_timer = 0.0
 var velocity : Vector2
 
@@ -52,11 +50,8 @@ func _process(delta):
 			if despawn_timer <= 1:
 				visible = !visible
 			if despawn_timer <= 0:
-				if !sound.playing:
-					despawn_timer = 0
-					queue_free()
-				else:
-					despawn_timer = 0.3
+				despawn_timer = 0
+				queue_free()
 	
 	if mode != 1:
 		var root = get_tree().current_scene

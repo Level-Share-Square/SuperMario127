@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/SE_SY_E3_TIMER_SCALE_UP.wav-547fcc3f8a8b3320705b73f8a4cf3106.sample"
+
+[deps]
+
+source_file="res://assets/sounds/area_timer/SE_SY_E3_TIMER_SCALE_UP.wav"
+dest_files=[ "res://.import/SE_SY_E3_TIMER_SCALE_UP.wav-547fcc3f8a8b3320705b73f8a4cf3106.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

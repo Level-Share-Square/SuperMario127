@@ -17,19 +17,22 @@ export var kill_beep_final: AudioStream
 
 var sound_time: float
 
+signal play_sound
+
 func _ready():
 	set_label(label_text)
 	
 	var _connect = connect("time_over", self, "kill_player")
 	
-	if (sound in SOUND_TYPES):
-		match(sound):
-			"switch":
-				audio_player.stream = p_switch_tick
-				audio_player_secondary.stream = p_switch_end_tick
-			"death":
-				audio_player.stream = kill_beep_start
-				audio_player_secondary.stream = kill_beep_middle
+	match(sound):
+		"switch":
+			audio_player.stream = p_switch_tick
+			audio_player_secondary.stream = p_switch_end_tick
+		"death":
+			audio_player.stream = kill_beep_start
+			audio_player.volume_db = -2
+			audio_player_secondary.stream = kill_beep_middle
+			audio_player_secondary.volume_db = -2
 
 	
 	# time scores are always visible when enabled, no need to fade them in
@@ -50,6 +53,7 @@ func _physics_process(delta):
 	
 	if is_counting:
 		time -= delta
+		sound_time = wrapf(time, 0, 1)
 		match(sound):
 			"switch":
 				sound_time -= delta
@@ -61,19 +65,20 @@ func _physics_process(delta):
 							audio_player_secondary.play()
 					sound_time = wrapf(time, 0, 1.1)
 			"death":
-				sound_time -= delta
 				if sound_time <= 0:
 					if time <= 10:
 						if time > 6:
-							audio_player.play()
+							set_timer_sound(kill_beep_start)
+							play_timer_sound()
+							
 						elif time > 2:
-							if !audio_player_secondary.playing:
-								audio_player_secondary.play()
+							set_timer_sound(kill_beep_middle)
+							play_timer_sound()
+							
 						elif time > 0:
-							audio_player.stream = kill_beep_final
-							if !audio_player.playing:
-								audio_player.play()
-						sound_time = wrapf(time, 0, 1)
+							set_timer_sound(kill_beep_final)
+							play_timer_sound()
+							
 				
 		if kill_on_end:
 			var mod_color_time = wrapf(time, 0, 1)
@@ -101,7 +106,7 @@ func _physics_process(delta):
 
 func kill_player():
 	var player = get_node("/root").get_node("Player").get_node(get_node("/root").get_node("Player").character)
-	var player2 = get_node("/root").get_node("Player").get_node(get_node("/root").get_node("Player").character2)
+	var player2 = get_node("/root").get_node("Player").get_node_or_null(get_node("/root").get_node("Player").character2)
 	if is_instance_valid(player):
 		if !player.dead and player.controllable:
 			player.kill("green_demon")
@@ -111,3 +116,14 @@ func kill_player():
 
 func set_label(new_text: String):
 	name_display.text = new_text
+
+func set_timer_sound(stream : AudioStream):
+	audio_player.stream = stream
+	audio_player_secondary.stream = stream
+
+func play_timer_sound():
+	if !audio_player.playing:
+		audio_player.play()
+	else:
+		audio_player_secondary.play()
+	

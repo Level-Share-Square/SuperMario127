@@ -5,6 +5,7 @@ onready var area_shape = $Area2D/CollisionShape2D
 onready var sprite = $Sprite
 
 var target_zoom : float = 1.5
+var pan_offset : Vector2 = Vector2.ZERO
 var zoom_time : float = 1.0
 var parts := 1
 
@@ -14,7 +15,7 @@ func _set_properties():
 	
 func _set_property_values():
 	set_property("target_zoom", target_zoom)
-	set_property("zoom_time", zoom_time)
+	set_property("zoom_time", zoom_time, true, "Zoom Time")
 	set_property("parts", parts)
 	
 func _input(event):
@@ -44,7 +45,10 @@ func _ready():
 	update_parts()
 		
 func _body_entered(body):
-	if enabled and body.name.begins_with("Character") and !is_equal_approx(body.camera.zoom.x, target_zoom): #and !body.camera.zoom_tween.is_active():
+	if enabled and body.name.begins_with("Character"): #and !body.camera.zoom_tween.is_active():
 		#print("set tween")
-		body.camera.set_zoom_tween(Vector2(target_zoom, target_zoom), zoom_time, true)
+		if !is_equal_approx(body.camera.zoom.x, target_zoom):
+			body.camera.set_zoom_tween(Vector2(target_zoom, target_zoom), zoom_time, true)
+
+#		body.camera.set_pan_tween(position+pan_offset, zoom_time, false)
 

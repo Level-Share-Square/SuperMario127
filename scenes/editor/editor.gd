@@ -361,12 +361,10 @@ func update_selected_object(mouse_pos : Vector2) -> void:
 
 func _process(delta : float) -> void:
 	var visible_child_count := 0
-#holy shit get this actual dogshit code out of here 
 	for i in $UI.get_children():
 		if i is NinePatchRect:
 			if i.visible:
 				visible_child_count += 1
-				#what was the point of counting the children if you never check for anything higher than 1?
 
 #	if ui_visible != $UI.visible:
 #		ui_visible = $UI.visible
@@ -663,8 +661,9 @@ func _process(delta : float) -> void:
 						
 			
 			if selected_box.item.is_object and !rotating and time_clicked <= 0:
+				update_selected_object(mouse_pos)
 				if mouse_pos != last_mouse_pos:
-					update_selected_object(mouse_pos)
+					print(mouse_pos)
 		
 		
 		# Finalise tile placement action (for potential future undo)
@@ -691,7 +690,7 @@ func _process(delta : float) -> void:
 				# if an action is being added, that means we should count the count the level data as modified and in need of a save
 				Singleton.CurrentLevelData.unsaved_editor_changes = true
 		
-		
+#		if last_mouse_pos != mouse_pos:
 		last_mouse_pos = mouse_pos
 		last_mouse_tile_pos = mouse_tile_pos
 		last_left_held = left_held

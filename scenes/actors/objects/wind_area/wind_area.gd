@@ -129,10 +129,12 @@ func update_size():
 	update_particles()
 
 func update_particles():
+	var wind_particle_seed : int = rand_range(0, 127000000)
 	particles.visibility_rect = Rect2(-size.x-32, -(size.y)-32, size.x*2+64, size.y*2+64)
 	particles.lifetime = ((size.y/20)/abs(wind_power))+.1
 	particles.amount = int((size.x/48)*(size.y/48))
 	particles.modulate = Color(color.r, color.g, color.b)
+	particles.process_material.set_shader_param("seed_input", abs(wind_particle_seed))
 	particles.process_material.set_shader_param("wind_speed", abs(wind_power))
 	particles.process_material.set_shader_param("size", size/2)
 	particles.process_material.set_shader_param("emission_rect", Plane(0.0, 0.0, size.x/2, size.y/2))

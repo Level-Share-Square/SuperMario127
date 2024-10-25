@@ -25,7 +25,7 @@ onready var collect_sound : AudioStreamPlayer = $CollectSound
 onready var ambient_sound : AudioStreamPlayer = $AmbientSound
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var current_scene : Node = get_tree().current_scene
-onready var shine_get : Node = current_scene.get_node("%ShineGet")
+onready var shine_get : Node = current_scene.get_node_or_null("%ShineGet")
 onready var transitions : Node = Singleton.SceneTransitions
 onready var mode_switcher_button : Node = Singleton.ModeSwitcher.get_node("ModeSwitcherButton")
 
@@ -64,7 +64,7 @@ var score_from_before = 0 # haha that rhymes
 
 func _set_properties() -> void:
 	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out", "sort_position", "required_purples"]
-	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "required_purples", "color", "do_kick_out", "sort_position"]
+	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "required_purples", "color", "do_kick_out", "sort_position", "id"]
 	
 func _set_property_values() -> void:
 	set_property("title", title, true)
@@ -75,6 +75,7 @@ func _set_property_values() -> void:
 	set_property("shine_shards_activate", shine_shards_activate, true)
 	set_property("color", color, true)
 	set_property("id", id, true)
+	set_property_menu("id", ["viewer"])
 	set_property("do_kick_out", do_kick_out, true)
 	set_property("sort_position", sort_position, true)
 	set_property("required_purples", required_purples, true)
