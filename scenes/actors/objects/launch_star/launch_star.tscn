@@ -846,6 +846,7 @@ frames = SubResource( 152 )
 playing = true
 
 [node name="LaunchParticles" type="CPUParticles2D" parent="."]
+visible = false
 position = Vector2( 0, 12 )
 emitting = false
 amount = 20

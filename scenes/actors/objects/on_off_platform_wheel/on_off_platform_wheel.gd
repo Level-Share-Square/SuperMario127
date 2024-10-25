@@ -24,7 +24,7 @@ var inverted : bool = false
 
 onready var frozen = false
 
-onready var hitbox = $EditorCircle
+onready var hitbox = $EditorCircle/EditorCircle
 
 func _set_properties():
 	savable_properties = ["parts", "speed", "radius", "platform_count",  "start_angle", "disappears", "inverted"]

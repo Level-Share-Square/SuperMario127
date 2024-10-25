@@ -15,7 +15,8 @@ var shape
 
 onready var character_node = get_node(character)
 onready var bg = get_node(background)
-onready var zoom_tween = $Tween
+onready var zoom_tween = $ZoomTween
+onready var pan_tween = $PanTween
 
 onready var viewport
 
@@ -118,8 +119,20 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 	zoom_tween.interpolate_property(self, "zoom", zoom, target, time, 1, 0)
 	zoom_tween.start()
 
-
-	
+#THIS FUNCTION DOES NOT WORK. DO NOT CALL IT, IT WILL CAUSE THE GAME TO FREEZE.
+#SOMEONE WILL NEED TO FIX IT TO MAKE IT NOT FREEZE THE GAME.
+func set_pan_tween(target : Vector2, time : float, override = false):
+	auto_move = false
+	pan_tween.remove_all()
+	# overrides level boundary safety check
+	if override:
+		pan_tween.interpolate_property(self, "pan", position, target, time, 1, 0)
+		pan_tween.start()
+		return
+	var level_bounds : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds.size * 16
+	target = Vector2(clamp(target.x, 0+(size.x/2), level_bounds.x-(size.x/2)), clamp(target.y, 0+(size.x/2), level_bounds.y-(size.x/2)))
+	pan_tween.interpolate_property(self, "pan", position, target, time, 1, 0)
+	pan_tween.start()
 	
 func load_in(_level_data : LevelData, level_area : LevelArea):
 	var level_bounds = level_area.settings.bounds

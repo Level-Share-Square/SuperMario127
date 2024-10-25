@@ -41,6 +41,8 @@ var speaking_action: int = 0
 var idle_expression: int = 0
 var idle_action: int = 0
 var speaking_radius: float = 90
+var interactable: bool = true
+var autostart: int = 0
 
 var gravity : float = 1
 var velocity : Vector2 = Vector2.ZERO
@@ -49,8 +51,8 @@ var last_position : float = 0
 var working_speed : float = 0
 
 func _set_properties():
-	savable_properties = ["dialogue", "character_name", "curve", "custom_path", "move_type", "walk_speed", "physics_enabled", "spots_color", "coat_color", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "speaking_radius", "rainbow", "path_reference"]
-	editable_properties = ["dialogue", "character_name", "custom_path", "walk_speed", "move_type", "physics_enabled", "spots_color", "coat_color", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "speaking_radius", "rainbow", "path_reference"]
+	savable_properties = ["dialogue", "character_name", "curve", "custom_path", "move_type", "walk_speed", "physics_enabled", "spots_color", "coat_color", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "speaking_radius", "rainbow", "path_reference", "interactable", "autostart"]
+	editable_properties = ["dialogue", "character_name", "custom_path", "walk_speed", "move_type", "physics_enabled", "spots_color", "coat_color", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "speaking_radius", "autostart", "interactable", "rainbow", "path_reference"]
 
 func _set_property_values():		
 	set_property("dialogue", dialogue, true)
@@ -67,14 +69,22 @@ func _set_property_values():
 	set_property("coat_color", coat_color, true)
 	
 	set_property("idle_expression", idle_expression, true)
+	set_property_menu("idle_expression", ["option", expression_map.size(), 0, expression_map])
 	set_property("idle_action", idle_action, true)
+	set_property_menu("idle_action", ["option", action_map.size(), 0, action_map])
 	
 	set_property("speaking_expression", speaking_expression, true)
+	set_property_menu("speaking_expression", ["option", expression_map.size(), 0, expression_map])
 	set_property("speaking_action", speaking_action, true)
+	set_property_menu("speaking_action", ["option", action_map.size(), 0, action_map])
 	set_property("speaking_radius", speaking_radius, true)
 	set_property("rainbow", rainbow, true)
 	
 	set_property("path_reference", path_reference, true)
+	
+	set_property("interactable", interactable, true)
+	set_property("autostart", autostart, true)
+	set_property_menu("autostart", ["option", 3, 0, ["Don't Autostart", "Autostart", "Autostart (Oneshot)"]])
 
 func _ready():
 	stop_talking()
@@ -136,6 +146,7 @@ func message_changed(expression, action):
 func _physics_process(delta):
 	if mode != 1:
 		if physics_enabled:
+			velocity.y += gravity
 			velocity.y += gravity
 			if walk_speed != 0:
 				velocity.x = (pathfollow.global_position.x - physicsbody.global_position.x) / delta

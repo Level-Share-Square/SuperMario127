@@ -942,6 +942,7 @@ enabled=PoolStringArray( "res://addons/discord_game_sdk/plugin.cfg" )
 
 physics=false
 change=false
+audio=false
 
 [importer_defaults]
 

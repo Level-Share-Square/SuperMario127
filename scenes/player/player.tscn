@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -162,6 +162,13 @@ colors = PoolColorArray( 1, 1, 1, 0.376471, 1, 1, 1, 0 )
 gradient = SubResource( 224 )
 fill_from = Vector2( 0, 1 )
 fill_to = Vector2( 0, 0.5 )
+
+[sub_resource type="DynamicFont" id=226]
+size = 15
+outline_size = 1
+use_filter = true
+extra_spacing_char = -2
+font_data = ExtResource( 11 )
 
 [sub_resource type="Animation" id=220]
 length = 0.001
@@ -825,7 +832,6 @@ margin_left = 318.0
 margin_right = 414.0
 
 [node name="PurpleStarbits" type="Control" parent="UIUnder/HUD/Control/TimerManager/RadialTimers" index="0"]
-visible = false
 margin_top = 384.0
 margin_bottom = 408.0
 rect_min_size = Vector2( 0, 24 )
@@ -929,6 +935,17 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0.180392, 0.054902, 0.482353, 0.65098 )
 custom_fonts/font = ExtResource( 15 )
 text = "000/100"
+
+[node name="MaxCounter" type="Label" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer"]
+margin_left = 136.0
+margin_top = 4.0
+margin_right = 165.0
+margin_bottom = 22.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.458824, 0.384314, 0.635294, 0.65098 )
+custom_fonts/font = SubResource( 226 )
+text = "(100)"
+valign = 2
 
 [node name="ShineGet" type="Control" parent="UIUnder/HUD/Control"]
 unique_name_in_owner = true
@@ -1665,7 +1682,9 @@ character = NodePath("../World/Character")
 background = NodePath("../Backgrounds")
 character2_cam_collider = NodePath("../World/Character2/CamCollision2")
 
-[node name="Tween" type="Tween" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
+[node name="ZoomTween" type="Tween" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
+
+[node name="PanTween" type="Tween" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
 
 [node name="Area2D" type="Area2D" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
 collision_layer = 0
@@ -1772,7 +1791,9 @@ character = NodePath("../../../ViewportContainer/Viewport/World/Character2")
 background = NodePath("../Backgrounds")
 character2_cam_collider = NodePath("../../../ViewportContainer/Viewport/World/Character2/CamCollision2")
 
-[node name="Tween" type="Tween" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
+[node name="ZoomTween" type="Tween" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
+
+[node name="PanTween" type="Tween" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer2/Viewport" instance=ExtResource( 13 )]
 
