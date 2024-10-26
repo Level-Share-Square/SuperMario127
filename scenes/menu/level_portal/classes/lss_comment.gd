@@ -4,6 +4,7 @@ class_name LSSComment
 var content: String
 
 var comment_id: String
+var author_id: String
 var author_name: String
 var author_icon_url: String
 var timestamp: String
@@ -27,6 +28,7 @@ func _init(data: Dictionary):
 	content = fetch(data, "content")
 	
 	comment_id = fetch(data, "_id")
+	author_id = fetch(fetch(data, "author", {}), "_id")
 	author_name = fetch(fetch(data, "author", {}), "username")
 	author_icon_url = fetch(fetch(data, "author", {}), "avatar")
 	timestamp = fetch(data, "postDate")

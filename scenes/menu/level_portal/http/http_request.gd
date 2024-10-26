@@ -1,8 +1,8 @@
 extends HTTPRequest
 
 
-signal page_loaded(page, total_pages, is_featured, last_query)
-
+signal page_loaded(page, total_pages, sort_type, last_query)
+enum SortType {Default, Featured, Favorited}
 
 onready var level_grid = $"%LevelGrid"
 onready var pages = $"%Pages"
@@ -15,32 +15,35 @@ onready var http_images = $"%HTTPImages"
 var page: int = -1
 var total_pages: int = 99
 
-var is_featured: bool
+var sort_type: int
 var last_query: String
 
 var return_args: PoolStringArray = [
 	"page",
 	"total_pages",
-	"is_featured",
+	"sort_type",
 	"last_query"
 ]
 
 
 ## for connecting signals easier
-func change_page_type(featured: bool):
+func change_page_type(sort_type: int):
 	if last_query != "": return
-	load_page(page, featured)
+	load_page(page, sort_type)
 
 
-func load_page(new_page: int = page, featured: bool = is_featured, query = last_query):
-	if featured == is_featured:
+func load_page(new_page: int = page, new_sort: int = SortType.Default, query = last_query):
+	if not account_info.logged_in and new_sort == SortType.Favorited:
+		new_sort = SortType.Default
+	
+	if sort_type == new_sort:
 		new_page = clamp(new_page, 1, total_pages)
 		
 		if query != last_query:
 			last_query = query
 			new_page = 1
 	else:
-		is_featured = featured
+		sort_type = new_sort
 		new_page = 1
 	
 	
@@ -59,9 +62,14 @@ func load_page(new_page: int = page, featured: bool = is_featured, query = last_
 	var search: String
 	if query != "":
 		search = "&name=" + query
-		is_featured = false
+		sort_type = SortType.Default
 	
-	var sort_type: String = "featured" if is_featured else "filter"
+	var filter: String = "filter" 
+	if sort_type == SortType.Featured:
+		filter = "featured"
+	elif sort_type == SortType.Favorited:
+		filter = "favourites/" + account_info.id
+	
 	
 	var header: PoolStringArray
 	if account_info.logged_in:
@@ -71,7 +79,7 @@ func load_page(new_page: int = page, featured: bool = is_featured, query = last_
 	
 	var error: int = request(
 		("https://levelsharesquare.com/api/levels/" 
-		+ sort_type 
+		+ filter 
 		+ "/get?page=" 
 		+ str(page) 
 		+ "&game=2&authors=true" 
@@ -90,7 +98,8 @@ func request_completed(result: int, response_code: int, headers: PoolStringArray
 		var json: JSONParseResult = JSON.parse(body.get_string_from_utf8())
 		
 		for level_dict in json.result.levels:
-			var level_info := LSSLevelInfo.new(level_dict)
+			var account_id: String = account_info.id if account_info.logged_in else ""
+			var level_info := LSSLevelInfo.new(level_dict, account_id)
 			var thumbnail: ImageTexture = http_images.get_cached_image(level_info.thumbnail_url)
 			if thumbnail == null and level_info.thumbnail_url != "":
 				http_images.image_queue.append(level_info.thumbnail_url)
@@ -107,6 +116,6 @@ func request_completed(result: int, response_code: int, headers: PoolStringArray
 	search.visible = true
 	loading.visible = false
 	
-	emit_signal("page_loaded", page, total_pages, is_featured, last_query)
+	emit_signal("page_loaded", page, total_pages, sort_type, last_query)
 	print("Online levels loaded.")
 	http_images.load_next_image()

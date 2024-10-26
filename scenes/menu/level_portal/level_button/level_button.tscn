@@ -350,13 +350,14 @@ text = "5"
 valign = 1
 clip_text = true
 
-[node name="Comments" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
+[node name="CommentsContainer" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 57.0
 margin_right = 84.0
 margin_bottom = 70.0
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/Comments"]
+[node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/CommentsContainer"]
 margin_right = 13.0
 margin_bottom = 13.0
 rect_min_size = Vector2( 13, 0 )
@@ -365,7 +366,7 @@ texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 
-[node name="CommentsLabel" type="Label" parent="MarginContainer/Info/Misc/VBoxContainer/Comments"]
+[node name="CommentsLabel" type="Label" parent="MarginContainer/Info/Misc/VBoxContainer/CommentsContainer"]
 unique_name_in_owner = true
 margin_left = 17.0
 margin_right = 84.0

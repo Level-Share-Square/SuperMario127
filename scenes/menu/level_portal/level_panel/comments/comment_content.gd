@@ -13,17 +13,36 @@ onready var likes = $"%Likes"
 onready var dislikes = $"%Dislikes"
 onready var timestamp = $"%Timestamp"
 
+onready var edit = $"%Edit"
 
 var http_images: HTTPRequest
 var comment_info: LSSComment
+
+var account_info: AccountInfo
+var post_content: VBoxContainer
+
+var level_id: String
 
 
 func hide_votes():
 	votes.visible = false
 
 
-func load_info(_comment_info: LSSComment):
+func load_account(_account_info: AccountInfo, _post_content: VBoxContainer):
+	account_info = _account_info
+	post_content = _post_content
+	
+	if account_info.logged_in and comment_info.author_id == account_info.id:
+		edit.visible = true
+	
+	post_content.http_images = http_images
+	post_content.level_id = level_id
+	post_content.load_info(account_info, comment_info.content)
+
+
+func load_info(_comment_info: LSSComment, _level_id: String):
 	comment_info = _comment_info
+	level_id = _level_id
 	
 	content.bbcode_text = comment_info.content
 	author_name.text = comment_info.author_name
@@ -54,6 +73,8 @@ func load_info(_comment_info: LSSComment):
 		author_icon.texture = DEFAULT_ICON
 		if comment_info.author_icon_url != "":
 			http_images.image_queue.append(comment_info.author_icon_url)
+	
+	edit.visible = false
 
 
 func image_loaded(url: String, texture: ImageTexture):

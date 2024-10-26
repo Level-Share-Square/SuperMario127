@@ -3,7 +3,27 @@ extends VBoxContainer
 
 const COMMENT_SCENE := preload("res://scenes/menu/level_portal/level_panel/comments/comment.tscn")
 const COMMENT_CONTENT_SCENE := preload("res://scenes/menu/level_portal/level_panel/comments/comment_content.tscn")
+
 onready var http_images = $"%HTTPImages"
+onready var http_account = $"%HTTPAccount"
+onready var account_info = $"%AccountInfo"
+
+onready var post_comment = $"%PostComment"
+onready var post_comment_content = $"%PostCommentContent"
+
+var level_id: String
+
+
+
+func page_loaded(_level_id: String):
+	level_id = _level_id
+	
+	post_comment.visible = account_info.logged_in
+	if account_info.logged_in:
+		post_comment_content.http_images = http_images
+		post_comment_content.http_account = http_account
+		post_comment_content.level_id = level_id
+		post_comment_content.load_info(account_info)
 
 
 func clear_children():
@@ -11,7 +31,7 @@ func clear_children():
 		child.call_deferred("queue_free")
 
 
-func add_comment(comment_info: LSSComment):
+func add_comment(comment_info: LSSComment, move_to_front: bool = false):
 	var comment_node: Control = COMMENT_SCENE.instance()
 	var comment_content: Control = comment_node.get_node("%Content")
 	comment_node.name = comment_info.comment_id
@@ -20,7 +40,11 @@ func add_comment(comment_info: LSSComment):
 	http_images.connect("image_loaded", comment_content, "image_loaded")
 	
 	call_deferred("add_child", comment_node)
-	comment_content.call_deferred("load_info", comment_info)
+	comment_content.call_deferred("load_info", comment_info, level_id)
+	comment_content.call_deferred("load_account", account_info, comment_node.get_node("%PostContent"))
+	
+	if move_to_front:
+		call_deferred("move_child", comment_node, 0)
 
 
 func add_reply(reply_info: LSSComment, comment_id: String):
@@ -32,9 +56,27 @@ func add_reply(reply_info: LSSComment, comment_id: String):
 	var comment_content: Control = COMMENT_CONTENT_SCENE.instance()
 	
 	comment_content.http_images = http_images
+	comment_content.account_info = account_info
 	http_images.connect("image_loaded", comment_content, "image_loaded")
 	
 	replies.visible = true
 	reply_box.call_deferred("add_child", comment_content)
-	comment_content.call_deferred("load_info", reply_info)
+	comment_content.call_deferred("load_info", reply_info, level_id)
 	comment_content.call_deferred("hide_votes")
+
+
+func comment_added(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
+	if response_code == 201:
+		var dict: Dictionary = JSON.parse(body.get_string_from_utf8()).result.newLevelComment
+		
+		var author_dict: Dictionary = {
+			"_id": account_info.id,
+			"username": account_info.username,
+			"avatar": account_info.icon_url
+		}
+		dict.author = author_dict
+		
+		var comment_info := LSSComment.new(dict)
+		add_comment(comment_info, true)
+	else:
+		printerr("Failure adding comment. Response code: ", response_code)

@@ -1,5 +1,7 @@
 class_name LSSLevelInfo
 
+var account_id: String
+
 var level_id: String
 var level_name: String
 var thumbnail_url: String
@@ -16,6 +18,7 @@ var comments: int
 
 var has_played: bool
 var has_rated: bool
+var has_commented: bool
 
 
 ## dictionary.value causes errors, if the data happens
@@ -29,7 +32,9 @@ func fetch(dictionary: Dictionary, key: String, default = ""):
 	return value 
 
 
-func _init(data: Dictionary):
+func _init(data: Dictionary, acc_id: String = ""):
+	account_id = acc_id
+	
 	level_id = fetch(data, "_id")
 	level_name = fetch(data, "name")
 	thumbnail_url = fetch(data, "thumbnail")
@@ -42,9 +47,13 @@ func _init(data: Dictionary):
 	
 	favorites = int(fetch(data, "favourites"))
 	plays = int(fetch(data, "plays"))
-	comments = fetch(data, "commenters", []).size()
+	
+	var commenters: PoolStringArray = fetch(data, "commenters", [])
+	comments = commenters.size()
 	
 	has_played = fetch(data, "hasPlayed", false)
 	has_rated = fetch(data, "hasRated", false)
+	has_commented = account_id in commenters
 	
-	print(data)
+	if fetch(data, "hasFavourited", null) != null:
+		print("hasFavourited property has been added. time to finish favoriting!!")

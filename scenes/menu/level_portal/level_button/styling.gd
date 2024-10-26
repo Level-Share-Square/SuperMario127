@@ -22,6 +22,7 @@ onready var comments_label = $"%CommentsLabel"
 
 onready var plays_container = $"%PlaysContainer"
 onready var favorites_container = $"%FavoritesContainer"
+onready var comments_container = $"%CommentsContainer"
 
 var level_info: LSSLevelInfo
 var texture: ImageTexture
@@ -54,7 +55,8 @@ func set_style():
 	plays_label.text = str(level_info.plays)
 	comments_label.text = str(level_info.comments)
 	
-	plays_container.modulate = CHECKED_COLOR if level_info.has_played else Color.white 
+	plays_container.modulate = CHECKED_COLOR if level_info.has_played else Color.white
+	comments_container.modulate = CHECKED_COLOR if level_info.has_commented else Color.white 
 	
 	if texture != null:
 		thumbnail.texture = texture
