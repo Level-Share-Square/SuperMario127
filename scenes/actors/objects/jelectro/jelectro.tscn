@@ -126,7 +126,6 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
-frame = 3
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -135,6 +134,7 @@ anims/die = SubResource( 7 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="DeleteTimer" type="Timer" parent="."]
 wait_time = 3.0

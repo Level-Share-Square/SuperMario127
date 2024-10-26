@@ -5097,10 +5097,12 @@ selected_tex = ExtResource( 65 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/EraserTool"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/EraserTool"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="SelectionTool" type="TextureButton" parent="UI/Tools/Control"]
 margin_left = 97.0
@@ -5122,10 +5124,12 @@ selected_tex = ExtResource( 41 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/SelectionTool"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/SelectionTool"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="BoundaryTool" type="TextureButton" parent="UI/Tools/Control"]
 margin_left = 18.0
@@ -5148,10 +5152,12 @@ selected_tex = ExtResource( 1042 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/BoundaryTool"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/BoundaryTool"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="DragTool" type="TextureButton" parent="UI/Tools/Control"]
 margin_left = 58.0
@@ -5176,10 +5182,12 @@ selected_tex = ExtResource( 1218 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/DragTool"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/DragTool"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="RectangleTool" type="TextureButton" parent="UI/Tools/Control"]
 margin_left = 173.0
@@ -5204,10 +5212,12 @@ selected_tex = ExtResource( 1453 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/RectangleTool"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/RectangleTool"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="LevelSettingsWindow" parent="UI" instance=ExtResource( 168 )]
 visible = false
@@ -5258,10 +5268,12 @@ starting_position = Vector2( 165, 130 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelSettingsButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="HelpButton" type="TextureButton" parent="UI"]
 margin_left = 592.0
@@ -5280,10 +5292,12 @@ starting_position = Vector2( 165, 130 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/HelpButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/HelpButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="LayerSwitcher" type="TextureButton" parent="UI"]
 self_modulate = Color( 1, 1, 1, 0.721569 )
@@ -5313,10 +5327,12 @@ valign = 1
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/LayerSwitcher"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/LayerSwitcher"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="AutoSave" type="TextureButton" parent="UI"]
 visible = false
@@ -5334,10 +5350,12 @@ script = ExtResource( 689 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/AutoSave"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/AutoSave"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ToolsButton" type="TextureButton" parent="UI"]
 self_modulate = Color( 1, 1, 1, 0.721569 )
@@ -5356,10 +5374,12 @@ script = ExtResource( 691 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/ToolsButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/ToolsButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="SearchButton" type="TextureButton" parent="UI"]
 margin_left = 533.0
@@ -5377,10 +5397,12 @@ window = NodePath("../ItemPicker")
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/SearchButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/SearchButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="BoundsControlToggle" type="TextureButton" parent="UI"]
 visible = false
@@ -5399,10 +5421,12 @@ script = ExtResource( 3 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/BoundsControlToggle"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/BoundsControlToggle"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="SaveButton" type="TextureButton" parent="UI"]
 margin_left = 652.0
@@ -5420,10 +5444,12 @@ window = NodePath("../LevelCodeWindow")
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/SaveButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/SaveButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ItemPicker" type="TextureRect" parent="UI"]
 visible = false
@@ -5538,10 +5564,12 @@ __meta__ = {
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/ItemPicker/CloseButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/ItemPicker/CloseButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Tween" type="Tween" parent="UI/ItemPicker"]
 
@@ -5730,6 +5758,7 @@ __meta__ = {
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="BoundsControl"]
 stream = ExtResource( 120 )
+bus = "Sounds"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

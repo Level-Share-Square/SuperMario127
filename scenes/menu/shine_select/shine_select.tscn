@@ -185,6 +185,7 @@ luigi_voices = [ ExtResource( 9 ), ExtResource( 11 ) ]
 
 [node name="LetsaGoPlayer" type="AudioStreamPlayer" parent="Sounds/LetsaGo"]
 volume_db = -6.0
+bus = "Voices"
 
 [node name="LetsaGo2" type="Node" parent="Sounds"]
 unique_name_in_owner = true
@@ -195,6 +196,7 @@ is_p2 = true
 
 [node name="LetsaGoPlayer" type="AudioStreamPlayer" parent="Sounds/LetsaGo2"]
 volume_db = -6.0
+bus = "Voices"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_right = 768.0

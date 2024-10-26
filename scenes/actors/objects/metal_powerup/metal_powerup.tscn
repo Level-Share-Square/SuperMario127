@@ -181,6 +181,7 @@ shape = SubResource( 8 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 volume_db = -7.0
+bus = "Sounds"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/collect = SubResource( 9 )

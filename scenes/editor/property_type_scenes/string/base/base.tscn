@@ -49,10 +49,12 @@ clip_text = true
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 8

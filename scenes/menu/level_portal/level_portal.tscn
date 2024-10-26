@@ -3112,6 +3112,7 @@ margin_bottom = 415.0
 script = ExtResource( 4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LaunchStar/Button"]
+bus = "Sounds"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LaunchStar/Button"]
 anims/RESET = SubResource( 222 )
@@ -3241,8 +3242,8 @@ anims/transition = SubResource( 202 )
 [connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Padding" method="hide"]
 [connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Logout" method="hide"]
 [connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Login" method="show"]
-[connection signal="page_loaded" from="HTTPRequest" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search" method="page_loaded"]
 [connection signal="page_loaded" from="HTTPRequest" to="Morse" method="page_loaded"]
+[connection signal="page_loaded" from="HTTPRequest" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search" method="page_loaded"]
 [connection signal="request_completed" from="HTTPRequest" to="HTTPRequest" method="request_completed"]
 [connection signal="request_completed" from="HTTPLevelPage" to="HTTPLevelPage" method="request_completed"]
 [connection signal="request_completed" from="HTTPComments" to="HTTPComments" method="request_completed"]

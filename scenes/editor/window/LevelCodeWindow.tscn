@@ -536,10 +536,12 @@ __meta__ = {
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 3 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 7 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Contents" type="Control" parent="."]
 anchor_bottom = 0.06
@@ -593,10 +595,12 @@ text_edit_path = NodePath("../TextEdit")
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/LoadButton"]
 stream = ExtResource( 3 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="Contents/LoadButton"]
 stream = ExtResource( 7 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="CopyButton" type="Button" parent="Contents"]
 margin_left = 82.2546
@@ -619,9 +623,11 @@ text_edit_path = NodePath("../TextEdit")
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/CopyButton"]
 stream = ExtResource( 3 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="Contents/CopyButton"]
 stream = ExtResource( 7 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Tween" type="Tween" parent="."]

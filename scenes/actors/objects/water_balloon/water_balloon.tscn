@@ -164,6 +164,7 @@ recolorable_texture = ExtResource( 7 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -5.0
+bus = "Sounds"
 
 [node name="Sprite" type="Sprite" parent="."]
 z_index = -1

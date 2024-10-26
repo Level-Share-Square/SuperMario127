@@ -411,16 +411,19 @@ anims/Stomped = SubResource( 8 )
 stream = ExtResource( 3 )
 volume_db = -3.0
 max_distance = 1000.0
+bus = "Sounds"
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="Rex"]
 stream = ExtResource( 4 )
 volume_db = -10.0
 max_distance = 1000.0
+bus = "Sounds"
 
 [node name="Disappear" type="AudioStreamPlayer2D" parent="Rex"]
 stream = ExtResource( 6 )
 volume_db = -3.0
 max_distance = 1000.0
+bus = "Sounds"
 
 [node name="BottomPos" type="Node2D" parent="Rex"]
 position = Vector2( 0, 16 )

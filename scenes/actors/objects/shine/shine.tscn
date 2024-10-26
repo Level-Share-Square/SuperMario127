@@ -199,14 +199,17 @@ shape = SubResource( 2 )
 
 [node name="CollectSound" type="AudioStreamPlayer" parent="."]
 stream = SubResource( 3 )
+bus = "Sounds"
 
 [node name="AppearSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -8.0
+bus = "Sounds"
 
 [node name="AmbientSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = -16.0
+bus = "Sounds"
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false

@@ -107,6 +107,7 @@ collision_mask = 2147483729
 stream = ExtResource( 3 )
 volume_db = -10.0
 max_distance = 1000.0
+bus = "Sounds"
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Koopa"]
 rect = Rect2( -200, -200, 400, 400 )

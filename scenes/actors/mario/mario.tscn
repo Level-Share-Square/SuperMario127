@@ -1725,23 +1725,28 @@ collision_mask = 81
 [node name="FluddSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 25 )
 volume_db = -15.0
+bus = "Sounds"
 
 [node name="TurboFluddSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 67 )
 volume_db = -12.0
+bus = "Sounds"
 
 [node name="FluddBoostSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 60 )
 volume_db = 5.0
 pitch_scale = 1.15
+bus = "Sounds"
 
 [node name="FluddChargeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 42 )
 pitch_scale = 1.1
+bus = "Sounds"
 
 [node name="NozzleSwitchSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 27 )
 volume_db = -5.0
+bus = "Sounds"
 
 [node name="Sounds" parent="." instance=ExtResource( 73 )]
 

@@ -88,10 +88,12 @@ full_name = "Toggle Grid"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/toggle_grid"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/toggle_grid"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="zoom_in" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 61.0
@@ -111,10 +113,12 @@ full_name = "Zoom In"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/zoom_in"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/zoom_in"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="zoom_out" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 122.0
@@ -134,10 +138,12 @@ full_name = "Zoom Out"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/zoom_out"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/zoom_out"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="switch_modes" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 183.0
@@ -157,10 +163,12 @@ full_name = "Switch Modes"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/switch_modes"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/switch_modes"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="switch_placement_mode" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 244.0
@@ -180,10 +188,12 @@ full_name = "Switch Placement Mode"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/switch_placement_mode"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/switch_placement_mode"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="switch_layers" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 305.0
@@ -203,10 +213,12 @@ full_name = "Switch Layers"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/switch_layers"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/switch_layers"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="save_level" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 366.0
@@ -226,10 +238,12 @@ full_name = "Save Level"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/save_level"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/save_level"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="toggle_transparency" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 427.0
@@ -249,10 +263,12 @@ full_name = "Toggle Transparency"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/toggle_transparency"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/toggle_transparency"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="8_pixel_lock" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 488.0
@@ -272,10 +288,12 @@ full_name = "8 Pixel Lock"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/8_pixel_lock"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/8_pixel_lock"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="rotate" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 549.0
@@ -295,10 +313,12 @@ full_name = "Rotate"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/rotate"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/rotate"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="undo" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 610.0
@@ -317,10 +337,12 @@ full_name = "Undo"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/undo"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/undo"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="redo" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 671.0
@@ -339,10 +361,12 @@ full_name = "Redo"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/redo"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/redo"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="flip_object" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 732.0
@@ -361,10 +385,12 @@ full_name = "Horizontal Mirror"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/flip_object"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/flip_object"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="flip_object_v" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 793.0
@@ -383,10 +409,12 @@ full_name = "Vertical Mirror"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/flip_object_v"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/flip_object_v"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="toggle_enabled" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 854.0
@@ -405,10 +433,12 @@ full_name = "Toggle Enabled"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/toggle_enabled"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/toggle_enabled"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="invis_ui" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 915.0
@@ -428,10 +458,12 @@ full_name = "Toggle UI"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/invis_ui"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/invis_ui"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="pause" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 976.0
@@ -450,10 +482,12 @@ full_name = "Pause"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/pause"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/pause"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="mute" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 1037.0
@@ -472,10 +506,12 @@ full_name = "Mute"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/mute"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/mute"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="toggle_show" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 1098.0
@@ -494,10 +530,12 @@ full_name = "Toggle Show"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/toggle_show"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/toggle_show"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="reload" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 1159.0
@@ -516,10 +554,12 @@ full_name = "Reload Checkpoint"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/reload"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/reload"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="reload_from_start" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 1220.0
@@ -538,10 +578,12 @@ full_name = "Reload Start"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/reload_from_start"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/reload_from_start"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="toggle_crt" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 1281.0
@@ -560,10 +602,12 @@ full_name = "Toggle CRT"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/toggle_crt"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/toggle_crt"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="fullscreen" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 1342.0
@@ -582,10 +626,12 @@ full_name = "Fullscreen"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/fullscreen"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/fullscreen"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="volume_up" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 1403.0
@@ -604,10 +650,12 @@ full_name = "Volume Up"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/volume_up"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/volume_up"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="volume_down" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 1464.0
@@ -626,10 +674,12 @@ full_name = "Volume Down"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/volume_down"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/volume_down"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="1" type="Button" parent="ScrollContainer/HBoxContainer/VBoxContainer"]
 margin_top = 1525.0
@@ -648,10 +698,12 @@ full_name = "Toggle Info UI"
 [node name="HoverSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/1"]
 stream = ExtResource( 9 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ScrollContainer/HBoxContainer/VBoxContainer/1"]
 stream = ExtResource( 10 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Settings" parent="." instance=ExtResource( 7 )]
 margin_left = 87.5

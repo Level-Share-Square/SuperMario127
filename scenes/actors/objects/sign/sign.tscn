@@ -192,7 +192,9 @@ stretch_mode = 6
 [node name="MessageAppear" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="MessageDisappear" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -10.0
+bus = "Sounds"

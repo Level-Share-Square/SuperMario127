@@ -73,10 +73,12 @@ __meta__ = {
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_left = 0.05

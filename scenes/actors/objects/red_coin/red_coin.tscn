@@ -43,11 +43,13 @@ shape = SubResource( 1 )
 pause_mode = 2
 stream = ExtResource( 2 )
 volume_db = -9.25
+bus = "Sounds"
 
 [node name="LastCollect" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 4 )
 volume_db = -9.25
+bus = "Sounds"
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 process_parent = true

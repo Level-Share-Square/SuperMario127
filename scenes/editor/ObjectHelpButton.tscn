@@ -20,5 +20,7 @@ icon_align = 1
 script = ExtResource( 5 )
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
+bus = "Sounds"

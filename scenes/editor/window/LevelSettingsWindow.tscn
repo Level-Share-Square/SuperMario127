@@ -184,10 +184,12 @@ texture_hover = ExtResource( 16 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 15 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 13 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="LevelSettings" type="Control" parent="."]
 anchor_bottom = 0.06
@@ -291,10 +293,12 @@ texture_hover = ExtResource( 12 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/BackgroundEdit"]
 stream = ExtResource( 15 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/BackgroundEdit"]
 stream = ExtResource( 13 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Music" type="Control" parent="LevelSettings"]
 margin_right = 40.0
@@ -367,10 +371,12 @@ texture_hover = ExtResource( 12 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/Music"]
 stream = ExtResource( 15 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/Music"]
 stream = ExtResource( 13 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="LevelSize" type="Control" parent="LevelSettings"]
 margin_left = 202.5
@@ -538,10 +544,12 @@ texture_hover = ExtResource( 12 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/LevelSize"]
 stream = ExtResource( 15 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/LevelSize"]
 stream = ExtResource( 13 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="LevelInfo" type="Control" parent="LevelSettings"]
 margin_left = -17.0
@@ -564,10 +572,12 @@ script = SubResource( 16 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/LevelInfo/LevelInfo"]
 stream = ExtResource( 15 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/LevelInfo/LevelInfo"]
 stream = ExtResource( 13 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Timer" type="Control" parent="LevelSettings"]
 margin_left = -24.0
@@ -643,10 +653,12 @@ script = ExtResource( 5 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/Hotkeys/Hotkeys"]
 stream = ExtResource( 15 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/Hotkeys/Hotkeys"]
 stream = ExtResource( 13 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Areas" parent="LevelSettings" instance=ExtResource( 21 )]
 margin_left = 90.0

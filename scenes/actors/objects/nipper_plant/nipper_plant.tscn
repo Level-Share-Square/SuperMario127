@@ -208,11 +208,13 @@ shape = SubResource( 17 )
 stream = ExtResource( 4 )
 volume_db = -10.0
 max_distance = 1000.0
+bus = "Sounds"
 
 [node name="Disappear" type="AudioStreamPlayer2D" parent="Body"]
 stream = ExtResource( 6 )
 volume_db = -3.0
 max_distance = 1000.0
+bus = "Sounds"
 
 [node name="Poof" type="Particles2D" parent="Body"]
 material = SubResource( 18 )

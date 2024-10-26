@@ -102,10 +102,12 @@ __meta__ = {
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 2 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 1 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Contents" type="Control" parent="."]
 anchor_bottom = 0.06
@@ -272,10 +274,12 @@ action_sprite_path = NodePath("../HBoxContainer/Action/Sprite")
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/SaveButton"]
 stream = ExtResource( 2 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="Contents/SaveButton"]
 stream = ExtResource( 1 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="CancelButton" type="Button" parent="Contents"]
 margin_left = 82.2546
@@ -294,10 +298,12 @@ script = ExtResource( 9 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/CancelButton"]
 stream = ExtResource( 2 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="Contents/CancelButton"]
 stream = ExtResource( 1 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Contents"]
 margin_right = 12.0
@@ -305,13 +311,13 @@ margin_bottom = 12.0
 
 [node name="Tween" type="Tween" parent="."]
 
-[connection signal="pressed" from="Contents/HBoxContainer/Back" to="Contents/SaveButton" method="save_page"]
 [connection signal="pressed" from="Contents/HBoxContainer/Back" to="Contents/SaveButton" method="change_page" binds= [ -1 ]]
-[connection signal="pressed" from="Contents/HBoxContainer/Next" to="Contents/SaveButton" method="save_page"]
+[connection signal="pressed" from="Contents/HBoxContainer/Back" to="Contents/SaveButton" method="save_page"]
 [connection signal="pressed" from="Contents/HBoxContainer/Next" to="Contents/SaveButton" method="change_page" binds= [ 1 ]]
+[connection signal="pressed" from="Contents/HBoxContainer/Next" to="Contents/SaveButton" method="save_page"]
 [connection signal="pressed" from="Contents/HBoxContainer/Expression" to="Contents/SaveButton" method="cycle_expression"]
 [connection signal="pressed" from="Contents/HBoxContainer/Action" to="Contents/SaveButton" method="cycle_action"]
-[connection signal="pressed" from="Contents/HBoxContainer/Add" to="Contents/SaveButton" method="save_page"]
 [connection signal="pressed" from="Contents/HBoxContainer/Add" to="Contents/SaveButton" method="add_page"]
+[connection signal="pressed" from="Contents/HBoxContainer/Add" to="Contents/SaveButton" method="save_page"]
 [connection signal="pressed" from="Contents/HBoxContainer/Remove" to="Contents/SaveButton" method="remove_page"]
 [connection signal="focus_exited" from="Contents/TextEdit" to="Contents/SaveButton" method="save_page"]
