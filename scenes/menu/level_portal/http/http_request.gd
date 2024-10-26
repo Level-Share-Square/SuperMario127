@@ -32,7 +32,7 @@ func change_page_type(sort_type: int):
 	load_page(page, sort_type)
 
 
-func load_page(new_page: int = page, new_sort: int = SortType.Default, query = last_query):
+func load_page(new_page: int = page, new_sort: int = sort_type, query = last_query):
 	if not account_info.logged_in and new_sort == SortType.Favorited:
 		new_sort = SortType.Default
 	

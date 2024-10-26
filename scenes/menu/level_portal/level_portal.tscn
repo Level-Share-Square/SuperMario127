@@ -1,4 +1,4 @@
-[gd_scene load_steps=266 format=2]
+[gd_scene load_steps=268 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/level_portal/level_grid.gd" type="Script" id=2]
@@ -67,6 +67,8 @@
 [ext_resource path="res://assets/fonts/delfino_medium.tres" type="DynamicFont" id=65]
 [ext_resource path="res://scenes/menu/level_portal/level_panel/rate_button.gd" type="Script" id=66]
 [ext_resource path="res://scenes/menu/level_portal/level_panel/rate_panel.gd" type="Script" id=67]
+[ext_resource path="res://assets/music/lss_morse.ogg" type="AudioStream" id=68]
+[ext_resource path="res://scenes/menu/level_portal/synced_beat.gd" type="Script" id=69]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -1496,13 +1498,22 @@ music_id = 68
 unique_name_in_owner = true
 stream = ExtResource( 5 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource( 6 )
 volume_db = -10.0
+bus = "Sounds"
+
+[node name="Morse" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 68 )
+volume_db = -10.0
+bus = "Music"
+script = ExtResource( 69 )
 
 [node name="BG" type="Control" parent="."]
+modulate = Color( 0, 0, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -1535,6 +1546,7 @@ texture = ExtResource( 3 )
 stretch_mode = 2
 
 [node name="Parallax4" type="Control" parent="BG"]
+modulate = Color( 0, 0, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -2955,7 +2967,8 @@ anims/transition = SubResource( 224 )
 
 [node name="Buttons" type="MarginContainer" parent="."]
 modulate = Color( 0, 0, 1, 0 )
-margin_right = 116.0
+margin_left = -128.0
+margin_right = -12.0
 margin_bottom = 432.0
 rect_min_size = Vector2( 96, 0 )
 rect_rotation = -2.0
@@ -3078,14 +3091,14 @@ script = ExtResource( 10 )
 sink_amount = 6
 
 [node name="LaunchStar" type="Control" parent="."]
+modulate = Color( 0, 0, 1, 0 )
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 1408.0
-margin_top = 216.0
-margin_right = 1536.0
-margin_bottom = 648.0
+margin_left = -128.0
+margin_top = -184.0
+margin_bottom = 248.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
 script = ExtResource( 17 )
@@ -3229,6 +3242,7 @@ anims/transition = SubResource( 202 )
 [connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Logout" method="hide"]
 [connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Login" method="show"]
 [connection signal="page_loaded" from="HTTPRequest" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search" method="page_loaded"]
+[connection signal="page_loaded" from="HTTPRequest" to="Morse" method="page_loaded"]
 [connection signal="request_completed" from="HTTPRequest" to="HTTPRequest" method="request_completed"]
 [connection signal="request_completed" from="HTTPLevelPage" to="HTTPLevelPage" method="request_completed"]
 [connection signal="request_completed" from="HTTPComments" to="HTTPComments" method="request_completed"]
