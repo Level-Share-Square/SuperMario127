@@ -30,9 +30,9 @@ func _ready():
 			audio_player_secondary.stream = p_switch_end_tick
 		"death":
 			audio_player.stream = kill_beep_start
-			audio_player.volume_db = -2
+			audio_player.volume_db = -4
 			audio_player_secondary.stream = kill_beep_middle
-			audio_player_secondary.volume_db = -2
+			audio_player_secondary.volume_db = -4
 
 	
 	# time scores are always visible when enabled, no need to fade them in

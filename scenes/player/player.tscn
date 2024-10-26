@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://scenes/player/ui_new/shine_get.gd" type="Script" id=28]
 [ext_resource path="res://scenes/player/ui_new/collectibles/purple_starbits.gd" type="Script" id=29]
 [ext_resource path="res://scenes/player/ui_new/touch/gesture_controls.tscn" type="PackedScene" id=30]
+[ext_resource path="res://scenes/player/ui_new/collectibles/show_max_purples.gd" type="Script" id=31]
 [ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=39]
 [ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
@@ -40,7 +41,7 @@
 [sub_resource type="Animation" id=216]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("HBoxContainer/Counter:rect_position:y")
+tracks/0/path = NodePath("HBoxContainer/HBoxContainer/Collected:rect_position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -52,7 +53,7 @@ tracks/0/keys = {
 "values": [ 0.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("HBoxContainer/Counter:custom_colors/font_color")
+tracks/1/path = NodePath("HBoxContainer/HBoxContainer/Collected:custom_colors/font_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -64,7 +65,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("HBoxContainer/Counter:rect_scale")
+tracks/2/path = NodePath("HBoxContainer/HBoxContainer/Collected:rect_scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -81,7 +82,7 @@ resource_name = "collect"
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("HBoxContainer/Counter:rect_position:y")
+tracks/0/path = NodePath("HBoxContainer/HBoxContainer/Collected:rect_position:y")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -93,7 +94,7 @@ tracks/0/keys = {
 "values": [ -3.0, 0.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("HBoxContainer/Counter:custom_colors/font_color")
+tracks/1/path = NodePath("HBoxContainer/HBoxContainer/Collected:custom_colors/font_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -105,7 +106,7 @@ tracks/1/keys = {
 "values": [ Color( 0.890196, 0.368627, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("HBoxContainer/Counter:rect_scale")
+tracks/2/path = NodePath("HBoxContainer/HBoxContainer/Collected:rect_scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -115,6 +116,86 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1.1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=227]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/HBoxContainer/Required/Max:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/HBoxContainer/Required/Max:anchor_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer/HBoxContainer/Required/Max:anchor_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=228]
+resource_name = "transition"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer/HBoxContainer/Required/Max:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2.63902, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.627451 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer/HBoxContainer/Required/Max:anchor_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 2.63, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer/HBoxContainer/Required/Max:anchor_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 2.63, 1 ),
+"update": 0,
+"values": [ 2.0, 1.0 ]
 }
 
 [sub_resource type="Animation" id=218]
@@ -163,11 +244,12 @@ gradient = SubResource( 224 )
 fill_from = Vector2( 0, 1 )
 fill_to = Vector2( 0, 0.5 )
 
-[sub_resource type="DynamicFont" id=226]
-size = 15
-outline_size = 1
+[sub_resource type="DynamicFont" id=229]
+size = 14
+outline_size = 2
 use_filter = true
-extra_spacing_char = -2
+extra_spacing_top = 3
+extra_spacing_bottom = -1
 font_data = ExtResource( 11 )
 
 [sub_resource type="Animation" id=220]
@@ -832,7 +914,6 @@ margin_left = 318.0
 margin_right = 414.0
 
 [node name="PurpleStarbits" type="Control" parent="UIUnder/HUD/Control/TimerManager/RadialTimers" index="0"]
-visible = false
 margin_top = 384.0
 margin_bottom = 408.0
 rect_min_size = Vector2( 0, 24 )
@@ -848,6 +929,12 @@ scale = Vector2( 0.2, 0.15 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits"]
 anims/RESET = SubResource( 216 )
 anims/collect = SubResource( 217 )
+
+[node name="ShowMax" type="AnimationPlayer" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits"]
+anims/RESET = SubResource( 227 )
+anims/transition = SubResource( 228 )
+script = ExtResource( 31 )
+character_path = NodePath("../../../../../../../Viewports/ViewportContainer/Viewport/World/Character")
 
 [node name="Fadeout" type="AnimationPlayer" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits"]
 anims/RESET = SubResource( 218 )
@@ -928,25 +1015,47 @@ custom_colors/font_outline_modulate = Color( 0.178915, 0.0563049, 0.480469, 0.65
 custom_fonts/font = ExtResource( 15 )
 text = "x"
 
-[node name="Counter" type="Label" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer"]
 margin_left = 45.0
 margin_right = 130.0
+margin_bottom = 24.0
+custom_constants/separation = -2
+
+[node name="Collected" type="Label" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer/HBoxContainer"]
+margin_right = 41.0
 margin_bottom = 24.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0.180392, 0.054902, 0.482353, 0.65098 )
 custom_fonts/font = ExtResource( 15 )
-text = "000/100"
+text = "000"
 
-[node name="MaxCounter" type="Label" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer"]
-margin_left = 136.0
-margin_top = 4.0
-margin_right = 165.0
-margin_bottom = 19.0
+[node name="Slash" type="Label" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer/HBoxContainer"]
+margin_left = 39.0
+margin_right = 50.0
+margin_bottom = 24.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0.458824, 0.384314, 0.635294, 0.65098 )
-custom_fonts/font = SubResource( 226 )
+custom_colors/font_outline_modulate = Color( 0.180392, 0.054902, 0.482353, 0.65098 )
+custom_fonts/font = ExtResource( 15 )
+text = "/"
+
+[node name="Required" type="Label" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer/HBoxContainer"]
+margin_left = 48.0
+margin_right = 85.0
+margin_bottom = 24.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.180392, 0.054902, 0.482353, 0.65098 )
+custom_fonts/font = ExtResource( 15 )
+text = "100"
+
+[node name="Max" type="Label" parent="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits/HBoxContainer/HBoxContainer/Required"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_outline_modulate = Color( 0.380392, 0.243137, 0.686275, 0.752941 )
+custom_fonts/font = SubResource( 229 )
 text = "(100)"
-valign = 2
+align = 1
+valign = 1
 
 [node name="ShineGet" type="Control" parent="UIUnder/HUD/Control"]
 unique_name_in_owner = true

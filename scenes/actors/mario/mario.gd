@@ -9,6 +9,9 @@ signal nozzle_changed(new_nozzle)
 signal fludd_activated
 signal fludd_deactivated
 
+signal start_moving
+signal stop_moving
+
 # Child nodes
 onready var states_node = $States
 onready var nozzles_node = $Nozzles
@@ -985,6 +988,11 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0
 	
 	last_position = global_position
+	
+	if velocity != Vector2.ZERO and last_velocity == Vector2.ZERO:
+		emit_signal("start_moving")
+	elif velocity == Vector2.ZERO and last_velocity != Vector2.ZERO:
+		emit_signal("stop_moving")
 	
 	last_velocity = velocity
 	last_move_direction = move_direction

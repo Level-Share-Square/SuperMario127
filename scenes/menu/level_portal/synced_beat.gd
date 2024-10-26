@@ -1,7 +1,7 @@
 extends AudioStreamPlayer
 
 
-const BEAT_MULTIPLE: int = 2
+const BEAT_MULTIPLE: int = 4
 
 export var bpm: float = 104
 onready var seconds_per_beat: float = 60.0 / bpm
@@ -21,6 +21,7 @@ func page_loaded(_page: int, _total_pages: int, _sort_type: int, _last_query: St
 
 
 func _process(delta):
+	return # disabling for now until it reaches a consensus
 	if not is_instance_valid(sync_node): return
 	if not sync_node.playing: return
 	if int(sync_node.cur_setting) != screen.music_id: return

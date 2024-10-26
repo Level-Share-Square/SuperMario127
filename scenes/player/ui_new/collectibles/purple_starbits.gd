@@ -1,14 +1,22 @@
 extends Control
 
+
+const ZEROES_LENGTH: int = 3
+
 onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var show_max = $ShowMax
 onready var fadeout: AnimationPlayer = $Fadeout
 
-onready var counter: Label = $HBoxContainer/Counter
-onready var max_counter: Label = $HBoxContainer/MaxCounter
+onready var collected = $HBoxContainer/HBoxContainer/Collected
+onready var required = $HBoxContainer/HBoxContainer/Required
+onready var max_label = $HBoxContainer/HBoxContainer/Required/Max
 
+var max_shown: bool
 var max_purples: int
 var required_purples: int
+
 var variables: LevelVars = Singleton.CurrentLevelData.level_data.vars
+
 
 func _ready():
 	# sigh, have to wait for the player scene to finish up their work
@@ -39,9 +47,9 @@ func update_counter(new_coins: int):
 	if new_coins == required_purples:
 		fadeout.play("fadeout")
 	
-	var zeroes_length = 3
-	counter.text = str(new_coins).pad_zeros(zeroes_length) + "/" + str(required_purples).pad_zeros(zeroes_length)
-	max_counter.text = "(" + str(max_purples) + ")"
+	collected.text = str(new_coins).pad_zeros(ZEROES_LENGTH)
+	required.text = str(required_purples).pad_zeros(ZEROES_LENGTH)
+	max_label.text = "(" + str(max_purples) + ")"
 
 func update_required_purples():
 	var current_required_purples = variables.required_purple_starbits[Singleton.CurrentLevelData.area]
