@@ -832,6 +832,7 @@ margin_left = 318.0
 margin_right = 414.0
 
 [node name="PurpleStarbits" type="Control" parent="UIUnder/HUD/Control/TimerManager/RadialTimers" index="0"]
+visible = false
 margin_top = 384.0
 margin_bottom = 408.0
 rect_min_size = Vector2( 0, 24 )
@@ -940,7 +941,7 @@ text = "000/100"
 margin_left = 136.0
 margin_top = 4.0
 margin_right = 165.0
-margin_bottom = 22.0
+margin_bottom = 19.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0.458824, 0.384314, 0.635294, 0.65098 )
 custom_fonts/font = SubResource( 226 )
