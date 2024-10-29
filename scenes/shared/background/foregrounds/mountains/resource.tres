@@ -11,11 +11,10 @@
 [ext_resource path="res://scenes/shared/background/foregrounds/mountains/palettes/3/preview.png" type="Texture" id=9]
 [ext_resource path="res://scenes/shared/background/foregrounds/mountains/palettes/4/preview.png" type="Texture" id=10]
 
-
-
 [resource]
 script = ExtResource( 1 )
 layers = [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 3 ) ]
 immune_to = PoolIntArray(  )
 preview = ExtResource( 4 )
 palettes = [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
+auto_scroll_speed = 0.0

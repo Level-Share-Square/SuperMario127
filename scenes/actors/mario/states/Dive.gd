@@ -6,7 +6,7 @@ export var dive_power : Vector2 = Vector2(1200, 75)
 export var dive_power_luigi : Vector2 = Vector2(1200, 75)
 export var bonk_power : float = 150
 export var maxVelocityX : float = 700
-onready var sound_player = $"../Sounds"
+var sound_player
 var last_above_rot_limit := false
 var dive_buffer := 0.0
 var start_facing := 1

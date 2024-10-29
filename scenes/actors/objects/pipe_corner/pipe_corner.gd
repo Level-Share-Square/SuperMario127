@@ -3,7 +3,6 @@ extends GameObject
 onready var sprite = $Sprite
 onready var sprite2 = $Sprite/Sprite2
 onready var collision_shape = $StaticBody2D/CollisionShape2D
-onready var area = $Area2D
 
 var color := Color(1, 1, 1)
 

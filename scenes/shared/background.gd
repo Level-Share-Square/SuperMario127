@@ -5,6 +5,7 @@ onready var background_node = $Background/Sprite
 
 var ready = false
 var do_auto_scroll = false
+var auto_scroll_speed := 0.0
 
 func _ready():
 	ready = true
@@ -56,8 +57,16 @@ func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rec
 		parallax_node.scroll_base_offset.y = (bounds.end.y * 32) - 640
 		
 		parallax_node.offset.y += extra_y_offset
+	
+	auto_scroll_speed = 0
+	parallax_node.scroll_base_scale.x = 1
+	
+	if foreground_resource.auto_scroll_speed > 0.0:
+		do_auto_scroll = true
+		parallax_node.scroll_base_scale.x = 0
+		auto_scroll_speed = foreground_resource.auto_scroll_speed
 
-func _physics_process(delta):
+func _process(delta):
 	if do_auto_scroll:
-		parallax_node.scroll_offset.x += delta * 300
+		parallax_node.scroll_base_offset.x += auto_scroll_speed*delta
 	parallax_node.set_ignore_camera_zoom(true)
