@@ -16,18 +16,17 @@ onready var screen: Control = get_owner()
 onready var sync_node: AudioStreamPlayer = Singleton.Music
 
 
-func page_loaded(_page: int, _total_pages: int, _sort_type: int, _last_query: String):
+func queue_playback():
 	playback_queued = true
 
 
 func _process(delta):
-	return # disabling for now until it reaches a consensus
 	if not is_instance_valid(sync_node): return
 	if not sync_node.playing: return
 	if int(sync_node.cur_setting) != screen.music_id: return
 	
 	song_position = sync_node.get_playback_position() + AudioServer.get_time_since_last_mix()
-	song_position += AudioServer.get_output_latency()
+	song_position -= AudioServer.get_output_latency()
 	
 	song_position_in_beats = int(floor(song_position / seconds_per_beat))
 	if song_position_in_beats != last_beats:

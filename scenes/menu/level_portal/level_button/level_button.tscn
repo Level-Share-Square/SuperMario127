@@ -88,6 +88,7 @@ rect_pivot_offset = Vector2( 112, 56 )
 size_flags_horizontal = 3
 theme = ExtResource( 2 )
 script = ExtResource( 11 )
+click_override = "LevelClickSound"
 
 [node name="Styling" type="Control" parent="."]
 unique_name_in_owner = true
@@ -131,11 +132,13 @@ margin_right = 216.0
 margin_bottom = 13.0
 rect_min_size = Vector2( 0, 12 )
 rect_clip_content = true
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Info/Clipper"]
 margin_right = 216.0
 margin_bottom = 13.0
 rect_clip_content = true
+mouse_filter = 2
 alignment = 1
 
 [node name="NameLabel" type="Label" parent="MarginContainer/Info/Clipper/HBoxContainer"]

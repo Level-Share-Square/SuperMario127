@@ -136,6 +136,7 @@ margin_bottom = 20.0
 custom_constants/separation = 2
 
 [node name="LikeButton" type="Button" parent="HBoxContainer2/Votes"]
+unique_name_in_owner = true
 margin_right = 34.0
 margin_bottom = 20.0
 theme_type_variation = "TransparentButton"
@@ -158,7 +159,8 @@ margin_right = 49.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 2, 0 )
 
-[node name="Dislike" type="Button" parent="HBoxContainer2/Votes"]
+[node name="DislikeButton" type="Button" parent="HBoxContainer2/Votes"]
+unique_name_in_owner = true
 margin_left = 51.0
 margin_right = 99.0
 margin_bottom = 20.0
@@ -192,3 +194,6 @@ margin_bottom = 18.0
 custom_fonts/font = ExtResource( 3 )
 text = "Sep 22, 2024 - 4:30 AM"
 align = 2
+
+[connection signal="pressed" from="HBoxContainer2/Votes/LikeButton" to="." method="react_comment" binds= [ true ]]
+[connection signal="pressed" from="HBoxContainer2/Votes/DislikeButton" to="." method="react_comment" binds= [ false ]]

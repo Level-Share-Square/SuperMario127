@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scenes/menu/level_portal/level_panel/comments/comment_content.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/menu/level_portal/level_panel/comments/combined_content.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/level_portal/level_panel/comments/post_comment_content.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=3]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=4]
 
 [sub_resource type="Gradient" id=226]
@@ -11,6 +12,25 @@ colors = PoolColorArray( 0.0741917, 0.0145, 0.29, 0.92549, 0, 0.196078, 0.45098,
 gradient = SubResource( 226 )
 fill = 1
 fill_from = Vector2( 0.5, 1 )
+
+[sub_resource type="GDScript" id=228]
+resource_name = "dynamic_visibility"
+script/source = "extends HBoxContainer
+
+
+onready var reply_box = $\"%ReplyBox\"
+
+func check_visibility(_node: Node = null):
+	if not is_instance_valid(reply_box): return
+	
+	yield(get_tree(), \"idle_frame\")
+	
+	visible = false
+	for child in reply_box.get_children():
+		if child.visible:
+			visible = true
+			return
+"
 
 [node name="Comment" type="PanelContainer"]
 self_modulate = Color( 0, 0.231373, 0.478431, 0.627451 )
@@ -27,54 +47,41 @@ mouse_filter = 2
 texture = SubResource( 227 )
 expand = true
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 468.0
-margin_bottom = 107.0
-custom_constants/margin_right = 6
-custom_constants/margin_top = 6
-custom_constants/margin_left = 6
-custom_constants/margin_bottom = 6
-
-[node name="PostContent" parent="MarginContainer" instance=ExtResource( 2 )]
+[node name="CombinedContent" parent="." instance=ExtResource( 1 )]
 unique_name_in_owner = true
-visible = false
-margin_bottom = 97.0
 
-[node name="Post" parent="MarginContainer/PostContent/Edit/HBoxContainer2" index="0"]
-visible = false
+[node name="Padding" parent="CombinedContent/Content/HBoxContainer" index="2"]
+margin_right = 313.0
 
-[node name="EditPost" parent="MarginContainer/PostContent/Edit/HBoxContainer2" index="1"]
-visible = true
+[node name="Reply" type="Button" parent="CombinedContent/Content/HBoxContainer" index="3"]
+margin_left = 317.0
+margin_right = 359.0
+margin_bottom = 24.0
+theme_type_variation = "TransparentButton"
+text = " Reply "
+script = ExtResource( 3 )
 
-[node name="Cancel" parent="MarginContainer/PostContent/Edit/HBoxContainer2" index="2"]
-visible = true
-
-[node name="Content" parent="MarginContainer" instance=ExtResource( 1 )]
-unique_name_in_owner = true
-margin_bottom = 97.0
-
-[node name="Replies" type="HBoxContainer" parent="MarginContainer/Content"]
+[node name="Replies" type="HBoxContainer" parent="CombinedContent/Content" index="5"]
 unique_name_in_owner = true
 visible = false
 margin_top = 89.0
 margin_right = 452.0
 margin_bottom = 97.0
+script = SubResource( 228 )
 
-[node name="Control" type="Control" parent="MarginContainer/Content/Replies"]
+[node name="Control" type="Control" parent="CombinedContent/Content/Replies"]
 margin_right = 12.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 12, 0 )
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Content/Replies"]
+[node name="PanelContainer" type="PanelContainer" parent="CombinedContent/Content/Replies"]
 self_modulate = Color( 0, 0, 0, 0.25098 )
 margin_left = 16.0
 margin_right = 452.0
 margin_bottom = 8.0
 size_flags_horizontal = 3
 
-[node name="ReplyBox" type="VBoxContainer" parent="MarginContainer/Content/Replies/PanelContainer"]
+[node name="ReplyBox" type="VBoxContainer" parent="CombinedContent/Content/Replies/PanelContainer"]
 unique_name_in_owner = true
 margin_left = 4.0
 margin_top = 4.0
@@ -82,10 +89,59 @@ margin_right = 432.0
 margin_bottom = 4.0
 custom_constants/separation = 0
 
-[connection signal="pressed" from="MarginContainer/PostContent/Edit/HBoxContainer2/Cancel" to="MarginContainer/PostContent" method="hide"]
-[connection signal="pressed" from="MarginContainer/PostContent/Edit/HBoxContainer2/Cancel" to="MarginContainer/Content" method="show"]
-[connection signal="pressed" from="MarginContainer/Content/HBoxContainer/Edit/Edit" to="MarginContainer/PostContent" method="show"]
-[connection signal="pressed" from="MarginContainer/Content/HBoxContainer/Edit/Edit" to="MarginContainer/Content" method="hide"]
+[node name="PostReply" parent="CombinedContent/Content/Replies/PanelContainer/ReplyBox" instance=ExtResource( 2 )]
+unique_name_in_owner = true
+visible = false
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 428.0
+margin_bottom = 148.0
+is_reply = true
 
-[editable path="MarginContainer/PostContent"]
-[editable path="MarginContainer/Content"]
+[node name="Info" parent="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply" index="2"]
+margin_right = 428.0
+
+[node name="Padding" parent="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply/Info" index="2"]
+margin_right = 242.0
+
+[node name="Label" parent="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply/Info" index="3"]
+margin_left = 246.0
+margin_right = 428.0
+
+[node name="Edit" parent="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply" index="3"]
+margin_right = 428.0
+
+[node name="PanelContainer" parent="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply/Edit" index="0"]
+margin_right = 428.0
+
+[node name="MarginContainer" parent="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply/Edit/PanelContainer" index="0"]
+margin_right = 424.0
+
+[node name="Content" parent="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply/Edit/PanelContainer/MarginContainer" index="0"]
+margin_right = 416.0
+
+[node name="HBoxContainer2" parent="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply/Edit" index="1"]
+margin_right = 428.0
+
+[node name="Cancel2" parent="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply/Edit/HBoxContainer2" index="3"]
+visible = true
+
+[connection signal="deletion_successful" from="CombinedContent/PostContent" to="." method="queue_free"]
+[connection signal="edit_successful" from="CombinedContent/PostContent" to="CombinedContent/Content/PanelContainer/MarginContainer/Content" method="set_bbcode"]
+[connection signal="pressed" from="CombinedContent/Content/HBoxContainer/Reply" to="CombinedContent/Content/Replies" method="check_visibility"]
+[connection signal="pressed" from="CombinedContent/Content/HBoxContainer/Reply" to="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply" method="show"]
+[connection signal="pressed" from="CombinedContent/Content/HBoxContainer/Edit/Edit" to="CombinedContent/PostContent" method="show"]
+[connection signal="pressed" from="CombinedContent/Content/HBoxContainer/Edit/Edit" to="CombinedContent/Content" method="hide"]
+[connection signal="pressed" from="CombinedContent/Content/HBoxContainer/Edit/Delete/PressCountdown" to="CombinedContent/PostContent" method="show"]
+[connection signal="pressed" from="CombinedContent/Content/HBoxContainer/Edit/Delete/PressCountdown" to="CombinedContent/PostContent" method="delete_comment"]
+[connection signal="pressed" from="CombinedContent/Content/HBoxContainer/Edit/Delete/PressCountdown" to="CombinedContent/Content" method="hide"]
+[connection signal="child_entered_tree" from="CombinedContent/Content/Replies/PanelContainer/ReplyBox" to="CombinedContent/Content/Replies" method="check_visibility"]
+[connection signal="child_exiting_tree" from="CombinedContent/Content/Replies/PanelContainer/ReplyBox" to="CombinedContent/Content/Replies" method="check_visibility"]
+[connection signal="post_completed" from="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply" to="CombinedContent/Content/Replies" method="check_visibility"]
+[connection signal="post_completed" from="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply" to="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply" method="hide"]
+[connection signal="pressed" from="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply/Edit/HBoxContainer2/Cancel2" to="CombinedContent/Content/Replies" method="check_visibility"]
+
+[editable path="CombinedContent"]
+[editable path="CombinedContent/PostContent"]
+[editable path="CombinedContent/Content"]
+[editable path="CombinedContent/Content/Replies/PanelContainer/ReplyBox/PostReply"]

@@ -9,3 +9,4 @@ rect_min_size = Vector2( 24, 24 )
 theme_type_variation = "PageButton"
 text = "1"
 script = ExtResource( 1 )
+click_override = "PageSwitchSound"

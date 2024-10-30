@@ -1,4 +1,4 @@
-[gd_scene load_steps=268 format=2]
+[gd_scene load_steps=269 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/level_portal/level_grid.gd" type="Script" id=2]
@@ -67,8 +67,9 @@
 [ext_resource path="res://assets/fonts/delfino_medium.tres" type="DynamicFont" id=65]
 [ext_resource path="res://scenes/menu/level_portal/level_panel/rate_button.gd" type="Script" id=66]
 [ext_resource path="res://scenes/menu/level_portal/level_panel/rate_panel.gd" type="Script" id=67]
-[ext_resource path="res://assets/music/lss_morse.ogg" type="AudioStream" id=68]
-[ext_resource path="res://scenes/menu/level_portal/synced_beat.gd" type="Script" id=69]
+[ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_launch.wav" type="AudioStream" id=70]
+[ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_back.wav" type="AudioStream" id=71]
+[ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_switch.wav" type="AudioStream" id=72]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -1506,11 +1507,23 @@ stream = ExtResource( 6 )
 volume_db = -10.0
 bus = "Sounds"
 
-[node name="Morse" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 68 )
+[node name="BackSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 71 )
 volume_db = -10.0
-bus = "Music"
-script = ExtResource( 69 )
+bus = "Sounds"
+
+[node name="LevelClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 70 )
+volume_db = -5.0
+bus = "Sounds"
+
+[node name="PageSwitchSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 72 )
+volume_db = -8.0
+bus = "Sounds"
 
 [node name="BG" type="Control" parent="."]
 modulate = Color( 0, 0, 1, 0 )
@@ -1728,6 +1741,7 @@ pressed = true
 group = SubResource( 8 )
 text = "All Levels"
 script = ExtResource( 4 )
+click_override = "PageSwitchSound"
 extend_amount = 2
 
 [node name="Divider" type="ColorRect" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
@@ -1746,6 +1760,7 @@ toggle_mode = true
 group = SubResource( 8 )
 text = "Featured"
 script = ExtResource( 4 )
+click_override = "PageSwitchSound"
 extend_amount = 2
 
 [node name="Favorites" type="HBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
@@ -1770,6 +1785,7 @@ toggle_mode = true
 group = SubResource( 8 )
 text = "Favorited"
 script = ExtResource( 4 )
+click_override = "PageSwitchSound"
 extend_amount = 2
 
 [node name="LevelGrid" type="GridContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer"]
@@ -2880,6 +2896,8 @@ margin_bottom = 28.0
 theme_type_variation = "TransparentButton"
 custom_fonts/font = ExtResource( 58 )
 text = " Show "
+script = ExtResource( 4 )
+extend_amount = 2
 
 [node name="Forgot" type="Button" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 367.0
@@ -2888,6 +2906,8 @@ margin_bottom = 28.0
 theme_type_variation = "TransparentButton"
 custom_fonts/font = ExtResource( 58 )
 text = " Reset "
+script = ExtResource( 4 )
+extend_amount = 2
 
 [node name="URL" type="Node" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Forgot"]
 script = ExtResource( 59 )
@@ -2906,6 +2926,9 @@ size_flags_stretch_ratio = 1.5
 theme_type_variation = "TransparentButton"
 custom_fonts/font = ExtResource( 58 )
 text = "Login"
+script = ExtResource( 4 )
+click_override = "LevelClickSound"
+extend_amount = 2
 
 [node name="Register" type="Button" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/HBoxContainer"]
 margin_left = 280.0
@@ -2915,6 +2938,8 @@ size_flags_horizontal = 3
 theme_type_variation = "TransparentButton"
 custom_fonts/font = ExtResource( 58 )
 text = "Register"
+script = ExtResource( 4 )
+extend_amount = 2
 
 [node name="URL" type="Node" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/HBoxContainer/Register"]
 script = ExtResource( 59 )
@@ -3050,6 +3075,7 @@ theme_type_variation = "Red"
 custom_fonts/font = ExtResource( 9 )
 text = "Back to Menu"
 script = ExtResource( 10 )
+click_override = "BackSound"
 sink_amount = 6
 
 [node name="LevelPage" type="VBoxContainer" parent="Buttons"]
@@ -3069,6 +3095,7 @@ theme_type_variation = "Red"
 custom_fonts/font = ExtResource( 9 )
 text = "Back"
 script = ExtResource( 10 )
+click_override = "BackSound"
 sink_amount = 6
 
 [node name="Login" type="VBoxContainer" parent="Buttons"]
@@ -3088,6 +3115,7 @@ theme_type_variation = "Red"
 custom_fonts/font = ExtResource( 9 )
 text = "Back"
 script = ExtResource( 10 )
+click_override = "BackSound"
 sink_amount = 6
 
 [node name="LaunchStar" type="Control" parent="."]
@@ -3243,7 +3271,6 @@ anims/transition = SubResource( 202 )
 [connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Padding" method="hide"]
 [connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Logout" method="hide"]
 [connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Login" method="show"]
-[connection signal="page_loaded" from="HTTPRequest" to="Morse" method="page_loaded"]
 [connection signal="page_loaded" from="HTTPRequest" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search" method="page_loaded"]
 [connection signal="request_completed" from="HTTPRequest" to="HTTPRequest" method="request_completed"]
 [connection signal="request_completed" from="HTTPLevelPage" to="HTTPLevelPage" method="request_completed"]
@@ -3253,3 +3280,4 @@ anims/transition = SubResource( 202 )
 [connection signal="comment_request_completed" from="HTTPAccount" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Comments" method="comment_added"]
 [connection signal="login_request_completed" from="HTTPAccount" to="Subscreens/Login/MarginContainer/LoginPanel" method="request_completed"]
 [connection signal="rating_request_completed" from="HTTPAccount" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel" method="rating_request_completed"]
+[connection signal="reply_request_completed" from="HTTPAccount" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Comments" method="reply_added"]

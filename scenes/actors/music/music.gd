@@ -21,8 +21,7 @@ var stored_volume : float # used when playing temporary music to return the volu
 
 var last_mode := 3
 var last_song = 0 # this can't be static typed, can be either an int or a string
-
-var cur_setting: int = -1
+var cur_setting = -1
 
 var song_cache := []
 var loop := 1.0

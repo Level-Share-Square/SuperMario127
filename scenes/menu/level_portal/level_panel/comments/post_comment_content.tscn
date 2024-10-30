@@ -159,13 +159,22 @@ theme_type_variation = "TransparentButton"
 text = " Cancel "
 script = ExtResource( 6 )
 
+[node name="Cancel2" type="Button" parent="Edit/HBoxContainer2"]
+visible = false
+margin_left = 39.0
+margin_right = 88.0
+margin_bottom = 20.0
+theme_type_variation = "TransparentButton"
+text = " Cancel "
+script = ExtResource( 6 )
+
 [node name="Sending" type="Control" parent="."]
 unique_name_in_owner = true
 visible = false
 margin_top = 152.0
 margin_right = 452.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 0, 148 )
+margin_bottom = 248.0
+rect_min_size = Vector2( 0, 96 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Sending"]
 show_behind_parent = true
@@ -177,27 +186,27 @@ modulate = Color( 0, 0, 0, 0.25098 )
 margin_left = 12.0
 margin_top = 12.0
 margin_right = 440.0
-margin_bottom = 136.0
+margin_bottom = 84.0
 
 [node name="CenterContainer" type="CenterContainer" parent="Sending"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Sending/CenterContainer"]
-margin_left = 184.0
-margin_top = 62.0
-margin_right = 268.0
-margin_bottom = 86.0
+margin_left = 168.0
+margin_top = 36.0
+margin_right = 284.0
+margin_bottom = 60.0
 alignment = 1
 
 [node name="Label" type="Label" parent="Sending/CenterContainer/HBoxContainer"]
-margin_right = 80.0
+margin_right = 112.0
 margin_bottom = 24.0
-text = "Sending..."
+text = "Please wait..."
 
 [node name="Sprite" type="Control" parent="Sending/CenterContainer/HBoxContainer"]
-margin_left = 84.0
-margin_right = 84.0
+margin_left = 116.0
+margin_right = 116.0
 margin_bottom = 24.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Sending/CenterContainer/HBoxContainer/Sprite"]
@@ -213,3 +222,5 @@ centered = false
 offset = Vector2( 0, -8 )
 
 [connection signal="pressed" from="Edit/HBoxContainer2/Post" to="." method="post_comment"]
+[connection signal="pressed" from="Edit/HBoxContainer2/EditPost" to="." method="edit_comment"]
+[connection signal="pressed" from="Edit/HBoxContainer2/Cancel2" to="." method="hide"]

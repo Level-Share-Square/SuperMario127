@@ -9,6 +9,9 @@ var author_name: String
 var author_icon_url: String
 var timestamp: String
 
+var user_likes: PoolStringArray
+var user_dislikes: PoolStringArray
+
 var likes: int
 var dislikes: int
 
@@ -33,5 +36,8 @@ func _init(data: Dictionary):
 	author_icon_url = fetch(fetch(data, "author", {}), "avatar")
 	timestamp = fetch(data, "postDate")
 	
-	likes = fetch(data, "user_likes", []).size()
-	dislikes = fetch(data, "user_dislikes", []).size()
+	user_likes = fetch(data, "user_likes", [])
+	user_dislikes = fetch(data, "user_dislikes", [])
+	
+	likes = user_likes.size()
+	dislikes = user_dislikes.size()
