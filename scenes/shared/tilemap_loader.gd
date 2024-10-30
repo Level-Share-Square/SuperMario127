@@ -42,7 +42,7 @@ func _ready():
 		tileset_palettes = preload("res://generation/tileset_palettes.res").tileset_palettes
 	
 func get_tile(tileset_id, tile_id, palette_id = 0):
-	if palette_id == 0 or tileset_palettes[tileset_id].size() <= palette_id:
+	if palette_id == 0 or tileset_palettes[tileset_id].size() < palette_id:
 		var tileset = tileset_cache[tileset_id]
 		if tile_id == 0:
 			return tileset.block_tile_id
