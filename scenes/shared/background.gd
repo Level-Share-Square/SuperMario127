@@ -5,6 +5,7 @@ onready var background_node = $Background/Sprite
 
 var ready = false
 var do_auto_scroll = false
+var auto_scroll_speed := 0.0
 
 func _ready():
 	ready = true
@@ -15,7 +16,7 @@ func load_in(_level_data : LevelData, level_area : LevelArea):
 func update_background_area(area : LevelArea):
 	update_background(area.settings.sky, area.settings.background, area.settings.bounds, 0, area.settings.background_palette)
 
-func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rect2(0, 0, 0, 0), extra_y_offset : float = 0, background_palette : int = 0):
+func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rect2(0, 0, 0, 0), extra_y_offset : float = 0, background_palette : int = 0, speed_override: float = 0):
 	if !ready:
 		yield(self,"ready")
 		
@@ -56,8 +57,21 @@ func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rec
 		parallax_node.scroll_base_offset.y = (bounds.end.y * 32) - 640
 		
 		parallax_node.offset.y += extra_y_offset
+	
+	auto_scroll_speed = 0
+	parallax_node.scroll_base_scale.x = 1
+	
+	if foreground_resource.auto_scroll_speed > 0.0:
+		do_auto_scroll = true
+		parallax_node.scroll_base_scale.x = 0
+		auto_scroll_speed = foreground_resource.auto_scroll_speed
+	
+	if speed_override > 0:
+		do_auto_scroll = true
+		parallax_node.scroll_base_scale.x = 0
+		auto_scroll_speed = speed_override
 
-func _physics_process(delta):
+func _process(delta):
 	if do_auto_scroll:
-		parallax_node.scroll_offset.x += delta * 300
+		parallax_node.scroll_base_offset.x += auto_scroll_speed*delta
 	parallax_node.set_ignore_camera_zoom(true)

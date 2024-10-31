@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=5 format=2]
+[gd_resource type="AudioBusLayout" load_steps=6 format=2]
 
 [sub_resource type="AudioEffectFilter" id=1]
 resource_name = "Filter"
@@ -29,6 +29,11 @@ voice/4/pan = 0.0
 
 [sub_resource type="AudioEffectLimiter" id=4]
 resource_name = "Limiter"
+ceiling_db = -10.0
+
+[sub_resource type="AudioEffectStereoEnhance" id=5]
+resource_name = "StereoEnhance"
+surround = 1.0
 
 [resource]
 bus/0/volume_db = -4.76812
@@ -68,7 +73,7 @@ bus/5/effect/0/effect = SubResource( 2 )
 bus/5/effect/0/enabled = true
 bus/5/effect/1/effect = SubResource( 3 )
 bus/5/effect/1/enabled = true
-bus/6/name = "Sawblades"
+bus/6/name = "ObjectSounds"
 bus/6/solo = false
 bus/6/mute = false
 bus/6/bypass_fx = false
@@ -76,3 +81,5 @@ bus/6/volume_db = 0.0
 bus/6/send = "Sounds"
 bus/6/effect/0/effect = SubResource( 4 )
 bus/6/effect/0/enabled = true
+bus/6/effect/1/effect = SubResource( 5 )
+bus/6/effect/1/enabled = false

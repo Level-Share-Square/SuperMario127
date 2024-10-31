@@ -103,6 +103,8 @@ func _on_area_entered(stopper):
 	pass
 	return
 func set_zoom_tween(target : Vector2, time : float, override = false):
+	yield(get_tree(), "physics_frame")
+	yield(get_tree(), "physics_frame")
 	zoom_tween.remove_all()
 	# overrides level boundary safety check
 	if override:

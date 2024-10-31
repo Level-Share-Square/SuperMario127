@@ -11,6 +11,7 @@ func _ready():
 			if owner.is_preview:
 				child.z_index = 0
 				child.rotation_degrees = 0
+
 func _process(_delta):
 	for child in get_children():
 			if child is AnimatedSprite:

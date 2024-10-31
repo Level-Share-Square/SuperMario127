@@ -662,8 +662,6 @@ func _process(delta : float) -> void:
 			
 			if selected_box.item.is_object and !rotating and time_clicked <= 0:
 				update_selected_object(mouse_pos)
-				if mouse_pos != last_mouse_pos:
-					print(mouse_pos)
 		
 		
 		# Finalise tile placement action (for potential future undo)

@@ -15,7 +15,7 @@ export var press_time: float = 0.15
 
 
 export var check_path: NodePath
-onready var check: TouchCheck = get_node(check_path)
+onready var check: TouchCheck = get_node_or_null(check_path)
 
 
 func _ready():

@@ -776,7 +776,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x = 0
 	
-	if is_grounded() and !disable_animation and movable and controlled_locally and abs(velocity.x) > 15:
+	if is_grounded() and !disable_animation and movable and controlled_locally and controllable and abs(velocity.x) > 15:
 		if !is_walled():
 			sprite.speed_scale = abs(velocity.x) / move_speed if abs(velocity.x) > move_speed else 1.0
 			sprite.animation = "movingRight" if facing_direction == 1 else "movingLeft"
