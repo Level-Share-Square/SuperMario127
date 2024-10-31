@@ -1,4 +1,4 @@
-[gd_scene load_steps=165 format=2]
+[gd_scene load_steps=166 format=2]
 
 [ext_resource path="res://scenes/actors/objects/launch_star/launch_star.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/launch_star/launch_star_animatior.gd" type="Script" id=2]
@@ -18,6 +18,33 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 35.5032, 44.0332 )
+
+[sub_resource type="Animation" id=156]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("StarContainer/InnerStar:speed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StarContainer/OuterStar:speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
 
 [sub_resource type="Animation" id=154]
 resource_name = "launch"
@@ -796,6 +823,8 @@ max_distance = 9.22337e+18
 attenuation = 2.23403e-05
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+anims/RESET = SubResource( 156 )
 anims/launch = SubResource( 154 )
 anims/windup = SubResource( 153 )
 
@@ -803,7 +832,6 @@ anims/windup = SubResource( 153 )
 
 [node name="InnerStar" type="Node2D" parent="StarContainer"]
 script = ExtResource( 2 )
-speed = 0
 
 [node name="InnerTop" type="AnimatedSprite" parent="StarContainer/InnerStar"]
 z_index = -3
@@ -819,7 +847,6 @@ playing = true
 
 [node name="OuterStar" type="Node2D" parent="StarContainer"]
 script = ExtResource( 2 )
-speed = 0
 
 [node name="OuterTop" type="AnimatedSprite" parent="StarContainer/OuterStar"]
 z_index = -2
@@ -848,7 +875,6 @@ playing = true
 [node name="LaunchParticles" type="CPUParticles2D" parent="."]
 visible = false
 position = Vector2( 0, 12 )
-emitting = false
 amount = 20
 lifetime = 0.75
 one_shot = true

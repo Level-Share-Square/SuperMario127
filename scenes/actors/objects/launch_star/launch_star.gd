@@ -99,7 +99,7 @@ func set_state(to:int):
 			return
 	
 func _ready():
-	launch_particles.emitting = false
+#	launch_particles.emitting = false
 	if(invalid_curve(curve)):
 		curve.add_point(Vector2())
 		curve.add_point(Vector2(0, -600))

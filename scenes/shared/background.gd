@@ -16,7 +16,7 @@ func load_in(_level_data : LevelData, level_area : LevelArea):
 func update_background_area(area : LevelArea):
 	update_background(area.settings.sky, area.settings.background, area.settings.bounds, 0, area.settings.background_palette)
 
-func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rect2(0, 0, 0, 0), extra_y_offset : float = 0, background_palette : int = 0):
+func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rect2(0, 0, 0, 0), extra_y_offset : float = 0, background_palette : int = 0, speed_override: float = 0):
 	if !ready:
 		yield(self,"ready")
 		
@@ -65,6 +65,11 @@ func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rec
 		do_auto_scroll = true
 		parallax_node.scroll_base_scale.x = 0
 		auto_scroll_speed = foreground_resource.auto_scroll_speed
+	
+	if speed_override > 0:
+		do_auto_scroll = true
+		parallax_node.scroll_base_scale.x = 0
+		auto_scroll_speed = speed_override
 
 func _process(delta):
 	if do_auto_scroll:
