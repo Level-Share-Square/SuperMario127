@@ -21,7 +21,6 @@ onready var level_buttons = $"%LevelButtons"
 onready var save_button = $"%SaveButton"
 onready var favorite_button = $"%FavoriteButton"
 
-
 onready var level_title = $"%LevelTitle"
 onready var title_shadow = level_title.get_node("Shadow")
 

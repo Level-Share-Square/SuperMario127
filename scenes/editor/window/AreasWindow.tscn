@@ -60,10 +60,12 @@ texture_hover = ExtResource( 6 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 3 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 7 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Contents" type="Control" parent="."]
 anchor_bottom = 0.06
@@ -91,10 +93,12 @@ text = "Add Area"
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/AddButton"]
 stream = ExtResource( 3 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="Contents/AddButton"]
 stream = ExtResource( 7 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Contents"]
 margin_left = 20.0

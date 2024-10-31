@@ -63,6 +63,7 @@ shape = SubResource( 3 )
 [node name="Use" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -11.0
+bus = "Sounds"
 
 [node name="EditorArea" type="Area2D" parent="."]
 visible = false

@@ -565,10 +565,12 @@ __meta__ = {
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 15 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 13 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Hotkeys" type="ScrollContainer" parent="."]
 margin_left = 36.0

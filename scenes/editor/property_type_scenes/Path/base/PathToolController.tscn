@@ -31,10 +31,12 @@ texture_hover = ExtResource( 2 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 1 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 4 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -57,10 +59,12 @@ stretch_mode = 4
 [node name="HoverSound" type="AudioStreamPlayer" parent="ConfirmButton"]
 stream = ExtResource( 1 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="ConfirmButton"]
 stream = ExtResource( 4 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.501961 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=1512 format=2]
+[gd_scene load_steps=1534 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1477,6 +1477,28 @@
 [ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/6_preview.png" type="Texture" id=1475]
 [ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/9_preview.png" type="Texture" id=1476]
 [ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/8_preview.png" type="Texture" id=1477]
+[ext_resource path="res://assets/tiles/glass/palette_icons/9.png" type="Texture" id=1478]
+[ext_resource path="res://assets/tiles/glass/palette_icons/8.png" type="Texture" id=1479]
+[ext_resource path="res://assets/tiles/glass/icon_slopel.png" type="Texture" id=1480]
+[ext_resource path="res://assets/tiles/glass/icon_sloper.png" type="Texture" id=1481]
+[ext_resource path="res://assets/tiles/glass/palette_icons/1_sloper.png" type="Texture" id=1482]
+[ext_resource path="res://assets/tiles/glass/palette_icons/2_sloper.png" type="Texture" id=1483]
+[ext_resource path="res://assets/tiles/glass/palette_icons/5_sloper.png" type="Texture" id=1484]
+[ext_resource path="res://assets/tiles/glass/palette_icons/3_sloper.png" type="Texture" id=1485]
+[ext_resource path="res://assets/tiles/glass/palette_icons/4_sloper.png" type="Texture" id=1486]
+[ext_resource path="res://assets/tiles/glass/palette_icons/6_sloper.png" type="Texture" id=1487]
+[ext_resource path="res://assets/tiles/glass/palette_icons/7_sloper.png" type="Texture" id=1488]
+[ext_resource path="res://assets/tiles/glass/palette_icons/8_slopel.png" type="Texture" id=1489]
+[ext_resource path="res://assets/tiles/glass/palette_icons/8_sloper.png" type="Texture" id=1490]
+[ext_resource path="res://assets/tiles/glass/palette_icons/4_slopel.png" type="Texture" id=1491]
+[ext_resource path="res://assets/tiles/glass/palette_icons/5_slopel.png" type="Texture" id=1492]
+[ext_resource path="res://assets/tiles/glass/palette_icons/7_slopel.png" type="Texture" id=1493]
+[ext_resource path="res://assets/tiles/glass/palette_icons/6_slopel.png" type="Texture" id=1494]
+[ext_resource path="res://assets/tiles/glass/palette_icons/9_slopel.png" type="Texture" id=1495]
+[ext_resource path="res://assets/tiles/glass/palette_icons/1_slopel.png" type="Texture" id=1496]
+[ext_resource path="res://assets/tiles/glass/palette_icons/2_slopel.png" type="Texture" id=1497]
+[ext_resource path="res://assets/tiles/glass/palette_icons/3_slopel.png" type="Texture" id=1498]
+[ext_resource path="res://assets/tiles/glass/palette_icons/9_sloper.png" type="Texture" id=1499]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -4316,8 +4338,8 @@ preview = ExtResource( 170 )
 [node name="Glass" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
 tileset_id = 9
-palette_icons = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
-palette_previews = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
+palette_icons = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ), ExtResource( 1479 ), ExtResource( 1478 ) ]
+palette_previews = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ), ExtResource( 1479 ), ExtResource( 1478 ) ]
 change_to = "GlassSlopeLeft"
 items_in_sequence = 3
 icon = ExtResource( 58 )
@@ -4327,25 +4349,25 @@ preview = ExtResource( 58 )
 script = ExtResource( 24 )
 tileset_id = 9
 tile_id = 2
-palette_icons = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
-palette_previews = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
+palette_icons = [ ExtResource( 1480 ), ExtResource( 1496 ), ExtResource( 1497 ), ExtResource( 1498 ), ExtResource( 1491 ), ExtResource( 1492 ), ExtResource( 1494 ), ExtResource( 1493 ), ExtResource( 1489 ), ExtResource( 1495 ) ]
+palette_previews = [ ExtResource( 1480 ), ExtResource( 1496 ), ExtResource( 1497 ), ExtResource( 1498 ), ExtResource( 1491 ), ExtResource( 1492 ), ExtResource( 1494 ), ExtResource( 1493 ), ExtResource( 1489 ), ExtResource( 1495 ) ]
 change_to = "GlassSlopeRight"
 items_in_sequence = 3
 index_in_sequence = 1
-icon = ExtResource( 58 )
-preview = ExtResource( 58 )
+icon = ExtResource( 1480 )
+preview = ExtResource( 1480 )
 
 [node name="GlassSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
 tileset_id = 9
 tile_id = 3
-palette_icons = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
-palette_previews = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
+palette_icons = [ ExtResource( 1481 ), ExtResource( 1482 ), ExtResource( 1483 ), ExtResource( 1485 ), ExtResource( 1486 ), ExtResource( 1484 ), ExtResource( 1487 ), ExtResource( 1488 ), ExtResource( 1490 ), ExtResource( 1499 ) ]
+palette_previews = [ ExtResource( 1481 ), ExtResource( 1482 ), ExtResource( 1483 ), ExtResource( 1485 ), ExtResource( 1486 ), ExtResource( 1484 ), ExtResource( 1487 ), ExtResource( 1488 ), ExtResource( 1490 ), ExtResource( 1499 ) ]
 change_to = "Glass"
 items_in_sequence = 3
 index_in_sequence = 2
-icon = ExtResource( 58 )
-preview = ExtResource( 58 )
+icon = ExtResource( 1481 )
+preview = ExtResource( 1481 )
 
 [node name="MarbleBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
@@ -5097,10 +5119,12 @@ selected_tex = ExtResource( 65 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/EraserTool"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/EraserTool"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="SelectionTool" type="TextureButton" parent="UI/Tools/Control"]
 margin_left = 97.0
@@ -5122,10 +5146,12 @@ selected_tex = ExtResource( 41 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/SelectionTool"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/SelectionTool"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="BoundaryTool" type="TextureButton" parent="UI/Tools/Control"]
 margin_left = 18.0
@@ -5148,10 +5174,12 @@ selected_tex = ExtResource( 1042 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/BoundaryTool"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/BoundaryTool"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="DragTool" type="TextureButton" parent="UI/Tools/Control"]
 margin_left = 58.0
@@ -5176,10 +5204,12 @@ selected_tex = ExtResource( 1218 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/DragTool"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/DragTool"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="RectangleTool" type="TextureButton" parent="UI/Tools/Control"]
 margin_left = 173.0
@@ -5204,10 +5234,12 @@ selected_tex = ExtResource( 1453 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/RectangleTool"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/RectangleTool"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="LevelSettingsWindow" parent="UI" instance=ExtResource( 168 )]
 visible = false
@@ -5258,10 +5290,12 @@ starting_position = Vector2( 165, 130 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelSettingsButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="HelpButton" type="TextureButton" parent="UI"]
 margin_left = 592.0
@@ -5280,10 +5314,12 @@ starting_position = Vector2( 165, 130 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/HelpButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/HelpButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="LayerSwitcher" type="TextureButton" parent="UI"]
 self_modulate = Color( 1, 1, 1, 0.721569 )
@@ -5313,10 +5349,12 @@ valign = 1
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/LayerSwitcher"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/LayerSwitcher"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="AutoSave" type="TextureButton" parent="UI"]
 visible = false
@@ -5334,10 +5372,12 @@ script = ExtResource( 689 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/AutoSave"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/AutoSave"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ToolsButton" type="TextureButton" parent="UI"]
 self_modulate = Color( 1, 1, 1, 0.721569 )
@@ -5356,10 +5396,12 @@ script = ExtResource( 691 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/ToolsButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/ToolsButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="SearchButton" type="TextureButton" parent="UI"]
 margin_left = 533.0
@@ -5377,10 +5419,12 @@ window = NodePath("../ItemPicker")
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/SearchButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/SearchButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="BoundsControlToggle" type="TextureButton" parent="UI"]
 visible = false
@@ -5399,10 +5443,12 @@ script = ExtResource( 3 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/BoundsControlToggle"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/BoundsControlToggle"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="SaveButton" type="TextureButton" parent="UI"]
 margin_left = 652.0
@@ -5420,10 +5466,12 @@ window = NodePath("../LevelCodeWindow")
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/SaveButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/SaveButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ItemPicker" type="TextureRect" parent="UI"]
 visible = false
@@ -5538,10 +5586,12 @@ __meta__ = {
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/ItemPicker/CloseButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/ItemPicker/CloseButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Tween" type="Tween" parent="UI/ItemPicker"]
 
@@ -5730,6 +5780,7 @@ __meta__ = {
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="BoundsControl"]
 stream = ExtResource( 120 )
+bus = "Sounds"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

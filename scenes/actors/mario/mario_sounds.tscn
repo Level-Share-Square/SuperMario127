@@ -288,82 +288,102 @@ bus = "Voices"
 [node name="GPHit" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 9 )
 volume_db = -7.5
+bus = "Sounds"
 
 [node name="GPWindup" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 10 )
 volume_db = -7.5
+bus = "Sounds"
 
 [node name="Skid" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 11 )
 volume_db = -7.5
+bus = "Sounds"
 
 [node name="DoubleJump" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 12 )
 volume_db = -7.5
 pitch_scale = 1.15
+bus = "Sounds"
 
 [node name="Jump" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 14 )
 volume_db = -7.75
 pitch_scale = 1.15
+bus = "Sounds"
 
 [node name="WallJump" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 19 )
 volume_db = -7.75
+bus = "Sounds"
 
 [node name="Spin" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 15 )
 volume_db = -7.5
+bus = "Sounds"
 
 [node name="Duck" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 18 )
 volume_db = -7.5
+bus = "Sounds"
 
 [node name="TripleJump" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 13 )
 volume_db = -7.5
 pitch_scale = 1.15
+bus = "Sounds"
 
 [node name="LastHit8Bit" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 24 )
 volume_db = -0.75
+bus = "Sounds"
 
 [node name="Powerup" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 28 )
 volume_db = -4.0
+bus = "Sounds"
 
 [node name="WaterSplash" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 31 )
 volume_db = -14.0
+bus = "Sounds"
 
 [node name="Swim" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 32 )
 volume_db = -15.0
+bus = "Sounds"
 
 [node name="SpinWater" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 33 )
 volume_db = 5.0
+bus = "Sounds"
 
 [node name="Burn" type="AudioStreamPlayer" parent="OtherSounds"]
 stream = ExtResource( 37 )
 volume_db = -7.0
+bus = "Sounds"
 
 [node name="Footsteps" type="Node" parent="."]
 
 [node name="Default" type="Node" parent="Footsteps"]
 script = ExtResource( 39 )
+bus = "Sounds"
 
 [node name="Step1" type="AudioStreamPlayer" parent="Footsteps/Default"]
 stream = ExtResource( 16 )
 volume_db = -2.5
+bus = "Sounds"
 
 [node name="Step2" type="AudioStreamPlayer" parent="Footsteps/Default"]
 stream = ExtResource( 17 )
 volume_db = -2.5
+bus = "Sounds"
 
 [node name="Metal" type="Node" parent="Footsteps"]
 script = ExtResource( 39 )
+bus = "Sounds"
 
 [node name="Step1" type="AudioStreamPlayer" parent="Footsteps/Metal"]
 stream = ExtResource( 38 )
 volume_db = -7.0
+bus = "Sounds"

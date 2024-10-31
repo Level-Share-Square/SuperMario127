@@ -21,6 +21,7 @@ var stored_volume : float # used when playing temporary music to return the volu
 
 var last_mode := 3
 var last_song = 0 # this can't be static typed, can be either an int or a string
+var cur_setting = -1
 
 var song_cache := []
 var loop := 1.0
@@ -143,6 +144,7 @@ func load_ogg(bytes: PoolByteArray) -> void:
 func change_song(old_setting, music_setting) -> void:
 	var song
 	
+	cur_setting = music_setting
 	if typeof(music_setting) == TYPE_INT:
 		song = get_song(music_setting)
 	elif typeof(music_setting) == TYPE_STRING:

@@ -211,7 +211,6 @@ texture = ExtResource( 4 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 6 )
 frames = SubResource( 15 )
-frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -225,6 +224,7 @@ shape = SubResource( 16 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 volume_db = -7.0
+bus = "Sounds"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/collect = SubResource( 17 )

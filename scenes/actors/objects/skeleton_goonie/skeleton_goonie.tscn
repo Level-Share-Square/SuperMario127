@@ -273,11 +273,13 @@ pause_particles = false
 stream = ExtResource( 5 )
 volume_db = -10.0
 max_distance = 1000.0
+bus = "Sounds"
 
 [node name="Bones" type="AudioStreamPlayer2D" parent="." index="5"]
 stream = ExtResource( 13 )
 volume_db = -12.0
 pitch_scale = 1.25
+bus = "Sounds"
 
 [node name="WinglessBody" type="KinematicBody2D" parent="." index="6"]
 pause_mode = 1

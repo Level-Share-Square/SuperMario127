@@ -21,10 +21,13 @@ func load_replies(_comment_id: String, page: int = 1):
 
 func load_comments(_level_id: String, page: int = 1):
 	level_id = _level_id
+	comments.level_id = level_id
+	comments.page_loaded(level_id)
 	
 	cancel_request()
 	if page <= 1:
 		comments.clear_children()
+	
 	
 	print("Requesting comments for level id ", level_id, "...")
 	var error: int = request("https://levelsharesquare.com/api/levels/" + level_id + "/comments?page=" + str(page))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=266 format=2]
+[gd_scene load_steps=269 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/level_portal/level_grid.gd" type="Script" id=2]
@@ -67,6 +67,9 @@
 [ext_resource path="res://assets/fonts/delfino_medium.tres" type="DynamicFont" id=65]
 [ext_resource path="res://scenes/menu/level_portal/level_panel/rate_button.gd" type="Script" id=66]
 [ext_resource path="res://scenes/menu/level_portal/level_panel/rate_panel.gd" type="Script" id=67]
+[ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_launch.wav" type="AudioStream" id=70]
+[ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_back.wav" type="AudioStream" id=71]
+[ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_switch.wav" type="AudioStream" id=72]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -1496,11 +1499,31 @@ music_id = 68
 unique_name_in_owner = true
 stream = ExtResource( 5 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource( 6 )
 volume_db = -10.0
+bus = "Sounds"
+
+[node name="BackSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 71 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="LevelClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 70 )
+volume_db = -5.0
+bus = "Sounds"
+
+[node name="PageSwitchSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 72 )
+volume_db = -8.0
+bus = "Sounds"
 
 [node name="BG" type="Control" parent="."]
 modulate = Color( 0, 0, 1, 0 )
@@ -1659,7 +1682,7 @@ alignment = 1
 script = ExtResource( 52 )
 
 [node name="Query" type="LineEdit" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
-margin_right = 295.0
+margin_right = 296.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 custom_styles/read_only = SubResource( 169 )
@@ -1678,8 +1701,8 @@ margin_bottom = -2.0
 mouse_filter = 2
 
 [node name="Search" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
-margin_left = 295.0
-margin_right = 319.0
+margin_left = 296.0
+margin_right = 320.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
 custom_fonts/font = ExtResource( 9 )
@@ -1703,14 +1726,14 @@ expand = true
 stretch_mode = 6
 
 [node name="Padding" type="Control" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
-margin_left = 319.0
-margin_right = 335.0
+margin_left = 320.0
+margin_right = 336.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 16, 0 )
 
 [node name="Default" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
-margin_left = 335.0
-margin_right = 402.0
+margin_left = 336.0
+margin_right = 403.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 9 )
 toggle_mode = true
@@ -1718,43 +1741,51 @@ pressed = true
 group = SubResource( 8 )
 text = "All Levels"
 script = ExtResource( 4 )
+click_override = "PageSwitchSound"
 extend_amount = 2
 
 [node name="Divider" type="ColorRect" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
-margin_left = 402.0
-margin_right = 403.0
+margin_left = 403.0
+margin_right = 404.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 1, 0 )
 color = Color( 0, 0.0431373, 0.313726, 1 )
 
 [node name="Featured" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
-margin_left = 403.0
-margin_right = 471.0
+margin_left = 404.0
+margin_right = 472.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 9 )
 toggle_mode = true
 group = SubResource( 8 )
 text = "Featured"
 script = ExtResource( 4 )
+click_override = "PageSwitchSound"
 extend_amount = 2
 
-[node name="Divider2" type="ColorRect" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
-margin_left = 471.0
+[node name="Favorites" type="HBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+visible = false
+margin_left = 401.0
 margin_right = 472.0
+margin_bottom = 24.0
+custom_constants/separation = 0
+
+[node name="Divider" type="ColorRect" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Favorites"]
+margin_right = 1.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 1, 0 )
 color = Color( 0, 0.0431373, 0.313726, 1 )
 
-[node name="Random" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
-visible = false
-margin_left = 416.0
-margin_right = 472.0
+[node name="Favorited" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Favorites"]
+margin_left = 1.0
+margin_right = 71.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 9 )
 toggle_mode = true
 group = SubResource( 8 )
-text = "Random"
+text = "Favorited"
 script = ExtResource( 4 )
+click_override = "PageSwitchSound"
 extend_amount = 2
 
 [node name="LevelGrid" type="GridContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer"]
@@ -1984,7 +2015,7 @@ lerp_speed = 18.0
 [node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelPage/ScrollContainer"]
 modulate = Color( 0, 0, 1, 0 )
 margin_right = 768.0
-margin_bottom = 420.0
+margin_bottom = 604.0
 rect_min_size = Vector2( 768, 0 )
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 384, 0 )
@@ -1998,7 +2029,7 @@ script = ExtResource( 49 )
 margin_left = 148.0
 margin_top = 32.0
 margin_right = 620.0
-margin_bottom = 388.0
+margin_bottom = 572.0
 custom_constants/separation = 16
 
 [node name="OutdatedVersion" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
@@ -2706,7 +2737,7 @@ texture_progress = ExtResource( 34 )
 nine_patch_stretch = true
 
 [node name="PostComment" type="PanelContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
-visible = false
+unique_name_in_owner = true
 self_modulate = Color( 0, 0.231373, 0.478431, 0.627451 )
 margin_top = 356.0
 margin_right = 472.0
@@ -2732,14 +2763,15 @@ custom_constants/margin_top = 6
 custom_constants/margin_left = 6
 custom_constants/margin_bottom = 6
 
-[node name="Content" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/PostComment/MarginContainer" instance=ExtResource( 64 )]
+[node name="PostCommentContent" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/PostComment/MarginContainer" instance=ExtResource( 64 )]
+unique_name_in_owner = true
 margin_bottom = 154.0
 
 [node name="Comments" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 356.0
+margin_top = 540.0
 margin_right = 472.0
-margin_bottom = 356.0
+margin_bottom = 540.0
 custom_constants/separation = 12
 script = ExtResource( 53 )
 
@@ -2864,6 +2896,8 @@ margin_bottom = 28.0
 theme_type_variation = "TransparentButton"
 custom_fonts/font = ExtResource( 58 )
 text = " Show "
+script = ExtResource( 4 )
+extend_amount = 2
 
 [node name="Forgot" type="Button" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 367.0
@@ -2872,6 +2906,8 @@ margin_bottom = 28.0
 theme_type_variation = "TransparentButton"
 custom_fonts/font = ExtResource( 58 )
 text = " Reset "
+script = ExtResource( 4 )
+extend_amount = 2
 
 [node name="URL" type="Node" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Forgot"]
 script = ExtResource( 59 )
@@ -2890,6 +2926,9 @@ size_flags_stretch_ratio = 1.5
 theme_type_variation = "TransparentButton"
 custom_fonts/font = ExtResource( 58 )
 text = "Login"
+script = ExtResource( 4 )
+click_override = "LevelClickSound"
+extend_amount = 2
 
 [node name="Register" type="Button" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/HBoxContainer"]
 margin_left = 280.0
@@ -2899,6 +2938,8 @@ size_flags_horizontal = 3
 theme_type_variation = "TransparentButton"
 custom_fonts/font = ExtResource( 58 )
 text = "Register"
+script = ExtResource( 4 )
+extend_amount = 2
 
 [node name="URL" type="Node" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/HBoxContainer/Register"]
 script = ExtResource( 59 )
@@ -3004,6 +3045,7 @@ autowrap = true
 visible = false
 margin_right = 92.0
 margin_bottom = 352.0
+mouse_filter = 2
 size_flags_vertical = 3
 
 [node name="Logout" type="Button" parent="Buttons/LevelList"]
@@ -3033,6 +3075,7 @@ theme_type_variation = "Red"
 custom_fonts/font = ExtResource( 9 )
 text = "Back to Menu"
 script = ExtResource( 10 )
+click_override = "BackSound"
 sink_amount = 6
 
 [node name="LevelPage" type="VBoxContainer" parent="Buttons"]
@@ -3052,6 +3095,7 @@ theme_type_variation = "Red"
 custom_fonts/font = ExtResource( 9 )
 text = "Back"
 script = ExtResource( 10 )
+click_override = "BackSound"
 sink_amount = 6
 
 [node name="Login" type="VBoxContainer" parent="Buttons"]
@@ -3071,6 +3115,7 @@ theme_type_variation = "Red"
 custom_fonts/font = ExtResource( 9 )
 text = "Back"
 script = ExtResource( 10 )
+click_override = "BackSound"
 sink_amount = 6
 
 [node name="LaunchStar" type="Control" parent="."]
@@ -3096,6 +3141,7 @@ margin_bottom = 415.0
 script = ExtResource( 4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LaunchStar/Button"]
+bus = "Sounds"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LaunchStar/Button"]
 anims/RESET = SubResource( 222 )
@@ -3189,9 +3235,11 @@ anims/transition = SubResource( 202 )
 [connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search" method="search"]
 [connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Default" method="set_pressed_no_signal" binds= [ true ]]
 [connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Featured" method="set_pressed_no_signal" binds= [ false ]]
-[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Default" to="HTTPRequest" method="change_page_type" binds= [ false ]]
-[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Featured" to="HTTPRequest" method="change_page_type" binds= [ true ]]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Default" to="HTTPRequest" method="change_page_type" binds= [ 0 ]]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Featured" to="HTTPRequest" method="change_page_type" binds= [ 1 ]]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Favorites/Favorited" to="HTTPRequest" method="change_page_type" binds= [ 2 ]]
 [connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage" method="go"]
+[connection signal="screen_opened" from="Subscreens/LevelPage" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Comments" method="screen_opened"]
 [connection signal="resized" from="Subscreens/LevelPage/ScrollContainer/MarginContainer" to="Subscreens/LevelPage/ScrollContainer/MarginContainer" method="resized"]
 [connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/VBoxContainer/Website" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="open_website"]
 [connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/SaveButton" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="save_level"]
@@ -3212,11 +3260,13 @@ anims/transition = SubResource( 202 )
 [connection signal="pressed" from="Buttons/LevelPage/Back" to="Subscreens/LevelPage" method="transition" binds= [ "LevelList" ]]
 [connection signal="pressed" from="Buttons/Login/Back" to="Subscreens/Login" method="transition" binds= [ "LevelList" ]]
 [connection signal="pressed" from="LaunchStar/Button" to="LaunchStar" method="pressed"]
+[connection signal="login" from="AccountInfo" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Favorites" method="show"]
 [connection signal="login" from="AccountInfo" to="Buttons/LevelList/Profile" method="show"]
 [connection signal="login" from="AccountInfo" to="Buttons/LevelList/Profile" method="load_profile"]
 [connection signal="login" from="AccountInfo" to="Buttons/LevelList/Padding" method="show"]
 [connection signal="login" from="AccountInfo" to="Buttons/LevelList/Logout" method="show"]
 [connection signal="login" from="AccountInfo" to="Buttons/LevelList/Login" method="hide"]
+[connection signal="logout" from="AccountInfo" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Favorites" method="hide"]
 [connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Profile" method="hide"]
 [connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Padding" method="hide"]
 [connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Logout" method="hide"]
@@ -3227,5 +3277,7 @@ anims/transition = SubResource( 202 )
 [connection signal="request_completed" from="HTTPComments" to="HTTPComments" method="request_completed"]
 [connection signal="request_completed" from="HTTPRandomLevel" to="HTTPRandomLevel" method="request_completed"]
 [connection signal="image_loaded" from="HTTPImages" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="image_loaded"]
+[connection signal="comment_request_completed" from="HTTPAccount" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Comments" method="comment_added"]
 [connection signal="login_request_completed" from="HTTPAccount" to="Subscreens/Login/MarginContainer/LoginPanel" method="request_completed"]
 [connection signal="rating_request_completed" from="HTTPAccount" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel" method="rating_request_completed"]
+[connection signal="reply_request_completed" from="HTTPAccount" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Comments" method="reply_added"]

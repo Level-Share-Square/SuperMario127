@@ -82,6 +82,7 @@ shape = SubResource( 3 )
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D/Saw"]
 stream = ExtResource( 5 )
 volume_db = 10.0
+bus = "Sounds"
 
 [node name="EditorSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )

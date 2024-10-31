@@ -32,6 +32,7 @@ shape = SubResource( 1 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DoorEnterLogic"]
 stream = ExtResource( 5 )
 volume_db = -8.0
+bus = "Sounds"
 
 [node name="ZIndex" type="Node2D" parent="DoorEnterLogic"]
 z_index = -10
@@ -49,5 +50,4 @@ color = Color( 0, 0, 0, 1 )
 z_index = -8
 frames = ExtResource( 4 )
 animation = "close"
-frame = 3
 playing = true

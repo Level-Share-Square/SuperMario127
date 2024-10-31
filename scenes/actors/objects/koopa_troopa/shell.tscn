@@ -89,6 +89,7 @@ shape = SubResource( 3 )
 stream = ExtResource( 2 )
 volume_db = -10.0
 max_distance = 1000.0
+bus = "Sounds"
 
 [node name="GroundedCheck" type="RayCast2D" parent="."]
 enabled = true

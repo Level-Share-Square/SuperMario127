@@ -137,6 +137,7 @@ position = Vector2( 0, 12 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Steely"]
 stream = ExtResource( 4 )
 volume_db = -8.5
+bus = "Sounds"
 
 [node name="BreakParticle" type="Particles2D" parent="Steely"]
 material = SubResource( 5 )

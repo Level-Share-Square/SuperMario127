@@ -281,11 +281,13 @@ default_focus_path = NodePath("../Buttons/VBoxContainer/Resume")
 unique_name_in_owner = true
 stream = ExtResource( 3 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource( 4 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="BlueBar" type="TextureRect" parent="."]
 modulate = Color( 0, 0.0431373, 0.313726, 0.878431 )
@@ -479,10 +481,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 384.0
-margin_top = -32.0
-margin_right = 888.001
-margin_bottom = 400.0
+margin_left = -384.0
+margin_top = -248.0
+margin_right = 120.001
+margin_bottom = 184.0
 rect_min_size = Vector2( 504, 0 )
 script = ExtResource( 12 )
 
@@ -682,10 +684,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 696.0
-margin_top = 392.0
-margin_right = 856.0
-margin_bottom = 440.0
+margin_left = -72.0
+margin_top = -40.0
+margin_right = 88.0
+margin_bottom = 8.0
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 160, 0 )
 script = ExtResource( 23 )

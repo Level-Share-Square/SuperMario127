@@ -88,6 +88,7 @@ rect_pivot_offset = Vector2( 112, 56 )
 size_flags_horizontal = 3
 theme = ExtResource( 2 )
 script = ExtResource( 11 )
+click_override = "LevelClickSound"
 
 [node name="Styling" type="Control" parent="."]
 unique_name_in_owner = true
@@ -131,11 +132,13 @@ margin_right = 216.0
 margin_bottom = 13.0
 rect_min_size = Vector2( 0, 12 )
 rect_clip_content = true
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Info/Clipper"]
 margin_right = 216.0
 margin_bottom = 13.0
 rect_clip_content = true
+mouse_filter = 2
 alignment = 1
 
 [node name="NameLabel" type="Label" parent="MarginContainer/Info/Clipper/HBoxContainer"]
@@ -293,6 +296,7 @@ mouse_filter = 2
 margin_right = 13.0
 margin_bottom = 13.0
 rect_min_size = Vector2( 13, 0 )
+mouse_filter = 2
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/PlaysContainer/Icon"]
 margin_left = 2.0
@@ -323,12 +327,13 @@ margin_right = 84.0
 margin_bottom = 55.0
 mouse_filter = 2
 
-[node name="Icon2" type="Control" parent="MarginContainer/Info/Misc/VBoxContainer/FavoritesContainer"]
+[node name="Icon" type="Control" parent="MarginContainer/Info/Misc/VBoxContainer/FavoritesContainer"]
 margin_right = 13.0
 margin_bottom = 13.0
 rect_min_size = Vector2( 13, 0 )
+mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/FavoritesContainer/Icon2"]
+[node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/FavoritesContainer/Icon"]
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 12.0
@@ -350,13 +355,14 @@ text = "5"
 valign = 1
 clip_text = true
 
-[node name="Comments" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
+[node name="CommentsContainer" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 57.0
 margin_right = 84.0
 margin_bottom = 70.0
 mouse_filter = 2
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/Comments"]
+[node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/CommentsContainer"]
 margin_right = 13.0
 margin_bottom = 13.0
 rect_min_size = Vector2( 13, 0 )
@@ -365,7 +371,7 @@ texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 
-[node name="CommentsLabel" type="Label" parent="MarginContainer/Info/Misc/VBoxContainer/Comments"]
+[node name="CommentsLabel" type="Label" parent="MarginContainer/Info/Misc/VBoxContainer/CommentsContainer"]
 unique_name_in_owner = true
 margin_left = 17.0
 margin_right = 84.0
