@@ -1,5 +1,6 @@
 extends Node
 
+# these names really aren't good,,, please dont do this stuff next time
 var temp_ga
 var temp_gp
 var temp_gsr

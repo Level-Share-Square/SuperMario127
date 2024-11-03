@@ -82,7 +82,8 @@ func _process(_delta):
 		
 	if radius != last_radius:
 		update() #redraw points
-		hitbox.get_shape().radius = radius * 32
+		if is_instance_valid(hitbox):
+			hitbox.get_shape().radius = radius * 32
 		last_radius = radius
 		
 

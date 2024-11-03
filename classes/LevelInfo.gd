@@ -147,7 +147,12 @@ func reset_save_data(delete_file: bool = true) -> void:
 	
 	if delete_file and level_list_util.file_exists(get_save_path()):
 		level_list_util.delete_file(get_save_path())
-	#var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
+	
+	# delete replays
+	for shine in shine_details:
+		var replay_path: String = "user://replays/" + level_name + "_" + str(shine.id) + ".127ghost"
+		if level_list_util.file_exists(replay_path):
+			level_list_util.delete_file(replay_path)
 
 
 ### new functions designed to save separately to the level code
