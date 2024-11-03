@@ -24,6 +24,7 @@ func pressed():
 	
 	var color_wheel = color_picker_window.get_node(\"Contents/Wheel\")
 	color_wheel.property_node = get_parent()
+	color_wheel.update_value(button_node.modulate, false)
 
 func _process(_delta):
 	if button_node.is_hovered() and !last_hovered:
