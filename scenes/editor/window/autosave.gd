@@ -39,6 +39,11 @@ func _ready():
 	var file = File.new()
 	$"../LevelName".hide()
 	show()
+	
+	var directory := Directory.new()
+	if !directory.dir_exists("user://autosaves"):
+		directory.make_dir("user://autosaves")
+			
 	if file.file_exists("user://autosaves/" + "main_" + level_name + ".autosave"):
 		file.open("user://autosaves/" + "main_" + level_name + ".autosave", File.READ)
 		var time = file.get_line()
