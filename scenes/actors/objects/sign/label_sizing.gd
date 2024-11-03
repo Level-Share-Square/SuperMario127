@@ -13,6 +13,10 @@ export var width_reference_path: NodePath
 onready var width_reference: Label = get_node(width_reference_path)
 
 
+func _ready():
+	width_reference.rect_size.x = 0
+
+
 func update_sizing():
 	width_reference.text = text
 	yield(width_reference, "resized")
