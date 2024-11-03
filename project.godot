@@ -908,6 +908,7 @@ SettingsLoader="*res://singletons/settings_loader.tscn"
 GhostArrays="*res://scenes/actors/mario/misc/ghostarrays.gd"
 Discord="*res://addons/discord_game_sdk/discord.gd"
 LastInputDevice="*res://singletons/last_input_device.gd"
+LSSPing="*res://singletons/lss_ping.tscn"
 
 [debug]
 
