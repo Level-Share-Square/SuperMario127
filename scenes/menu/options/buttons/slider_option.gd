@@ -14,7 +14,7 @@ func _ready():
 	var slider = $Panel/HSlider
 	slider.min_value = min_val
 	slider.max_value = max_val
-	slider.value = value
+	slider.set_value_no_signal(value)
 
 func renamed():
 	label.text = name.capitalize() + " - " + str(value)
@@ -23,7 +23,7 @@ func renamed():
 func _update_value():
 	# onready var doesn't work sadly,
 	# since base class ready loads before this class's onready
-	$Panel/HSlider.value = value
+	$Panel/HSlider.set_value_no_signal(value)
 	renamed()
 
 func _get_default_value() -> float:
