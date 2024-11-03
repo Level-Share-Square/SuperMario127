@@ -32,6 +32,7 @@ func _ready():
 	directory.list_dir_end()
 	
 	none_button.disabled = not level_list_util.file_exists(MODS_FOLDER + "/" + ACTIVE_MOD)
+	none_button.connect("pressed", self, "set_active_mod", [""])
 
 
 func create_mod_button(path: String):
@@ -43,10 +44,14 @@ func create_mod_button(path: String):
 
 
 func set_active_mod(new_mod: String):
-	var file := File.new()
-	file.open(MODS_FOLDER + "/" + ACTIVE_MOD, file.WRITE)
-	file.store_line(MODS_FOLDER + "/" + new_mod)
-	file.close()
+	if new_mod != "":
+		var file := File.new()
+		file.open(MODS_FOLDER + "/" + ACTIVE_MOD, file.WRITE)
+		file.store_line(MODS_FOLDER + "/" + new_mod)
+		file.close()
+	else:
+		var directory := Directory.new()
+		directory.remove("user://mods/active.127mod")
 	
 	OS.execute(OS.get_executable_path(), [], false)
 	get_tree().quit(0)
