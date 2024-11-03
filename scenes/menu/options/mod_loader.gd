@@ -1,7 +1,55 @@
 extends Node
 
 
+const MODS_FOLDER = "user://mods"
+const ACTIVE_MOD = "active.127mod"
+
+
 onready var old_data_button = $"%CleanOldData"
+onready var mods_container = $"%ModsContainer"
+onready var none_button = $"%NoMods"
+
+
+func _ready():
+	if OS.has_feature("JavaScript"):
+		mods_container.hide()
+		return
+	
+	var directory := Directory.new()
+	if not directory.dir_exists(MODS_FOLDER):
+		mods_container.hide()
+		return
+	
+	directory.open(MODS_FOLDER)
+	directory.list_dir_begin(true)
+	
+	var file: String = directory.get_next()
+	while file != "":
+		if file != ACTIVE_MOD:
+			if file.get_extension() == "zip":
+				create_mod_button(file)
+		file = directory.get_next()
+	directory.list_dir_end()
+	
+	none_button.disabled = not level_list_util.file_exists(MODS_FOLDER + "/" + ACTIVE_MOD)
+
+
+func create_mod_button(path: String):
+	var mod_button: Button = none_button.duplicate()
+	mod_button.text = path.get_basename()
+	mod_button.disabled = (path == Singleton2.mod_path.get_file())
+	mod_button.connect("pressed", self, "set_active_mod", [path])
+	mods_container.call_deferred("add_child", mod_button)
+
+
+func set_active_mod(new_mod: String):
+	var file := File.new()
+	file.open(MODS_FOLDER + "/" + ACTIVE_MOD, file.WRITE)
+	file.store_line(MODS_FOLDER + "/" + new_mod)
+	file.close()
+	
+	OS.execute(OS.get_executable_path(), [], false)
+	get_tree().quit(0)
 
 
 func open_appdata():

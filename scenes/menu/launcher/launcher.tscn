@@ -1,6 +1,69 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/menu/launcher/launcher.gd" type="Script" id=1]
 
-[node name="Launcher" type="Control"]
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0.113725, 0.0784314, 0.211765, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=2]
+gradient = SubResource( 1 )
+fill = 1
+fill_from = Vector2( 0.5, 1 )
+fill_to = Vector2( 0.2, 0 )
+
+[node name="Launcher" type="CanvasLayer"]
 script = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="ColorRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 2 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -19.0
+margin_bottom = 19.0
+alignment = 1
+
+[node name="Wait" type="Label" parent="VBoxContainer"]
+margin_right = 768.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Starting..."
+align = 1
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 768.0
+margin_bottom = 18.0
+
+[node name="CurrentMod" type="Label" parent="VBoxContainer"]
+margin_top = 22.0
+margin_right = 768.0
+margin_bottom = 36.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Current Mod: None"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 40.0
+margin_right = 768.0
+margin_bottom = 60.0
+alignment = 1
+
+[node name="ResetMod" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 344.0
+margin_right = 424.0
+margin_bottom = 20.0
+text = "Reset Mod"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ResetMod" to="." method="reset_mod"]
