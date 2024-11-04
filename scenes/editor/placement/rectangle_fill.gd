@@ -2,7 +2,7 @@ extends Control
 
 
 const TILE_SIZE: int = 32
-
+const TILE: Vector2 = Vector2(TILE_SIZE, TILE_SIZE)
 
 onready var editor: Node = get_owner()
 onready var drag: ColorRect = $Node2D/Drag
@@ -13,11 +13,9 @@ var selected_box: Node
 var editing_layer: int
 var placing_button: int
 
-var initial_pos: Vector2
+var fill_rect: Rect2
 var mouse_pos: Vector2
 var mouse_tile_pos: Vector2
-var mouse_pos_direction: Vector2
-var selection_area : Rect2
 
 var left_down: bool
 var right_down: bool
@@ -29,22 +27,20 @@ func _ready():
 	drag.visible = false
 
 func place_tiles():
-	var select_start: Vector2 = (initial_pos / 32).round()
-	var select_end: Vector2 = mouse_tile_pos
-	
-	var fill_pos := Vector2(
-		min(select_start.x, select_end.x),
-		min(select_start.y, select_end.y))
-	var fill_size := Vector2(
-		max(select_start.x - select_end.x, select_end.x - select_start.x),
-		max(select_start.y - select_end.y, select_end.y - select_start.y))
-	var fill := Rect2(fill_pos, fill_size+(((mouse_tile_pos * TILE_SIZE) - initial_pos).sign()+Vector2(1, 1))/2)
-	
-	for y_offset in fill.size.y:
-		for x_offset in fill.size.x:
-			var offset := Vector2(x_offset, y_offset)
-			set_tile(fill.position + offset)
+	fill_rect.size = drag.rect_size.snapped(TILE)/TILE_SIZE
 
+	if mouse_pos.x < fill_rect.position.x*32:
+		fill_rect.position.x = round(mouse_pos.x/TILE_SIZE)
+	if mouse_pos.y < fill_rect.position.y*32:
+		fill_rect.position.y = round(mouse_pos.y/TILE_SIZE)
+	
+	for y in range(fill_rect.position.y, fill_rect.position.y+fill_rect.size.y):
+		for x in range(fill_rect.position.x, fill_rect.position.x+fill_rect.size.x):
+			var pos := Vector2(x, y)
+			set_tile(pos)
+
+#THANK YOU LB FOR LETTING ME SEE YOUR SCRIPTS <3
+#THIS TOOL WOULDN'T WORK AS WELL AS IT DOES WITHOUT YOU GOAT
 
 func set_tile(pos: Vector2):
 	var item = selected_box.item
@@ -68,16 +64,44 @@ func set_tile(pos: Vector2):
 func selected_update():
 	if selected_box.item.is_object: return
 	
-	mouse_pos_direction = mouse_pos/Vector2(abs(mouse_pos.x), abs(mouse_pos.y))
-	
 	if drag.visible:
-		var drag_size: Vector2 = (mouse_tile_pos * TILE_SIZE) - initial_pos + ((((mouse_tile_pos * TILE_SIZE) - initial_pos).sign()+Vector2(1, 1))/2 * Vector2(32, 32))
+		var calculated_size : Vector2
+		# If I had a nickel for every time I had to write a long set of if-else statements for
+		# calculating the components of a Vector2, I'd have two nickels. Which isn't a lot,
+		# but it's weird it's happened twice now.
 		
-		drag.rect_size = drag_size.abs()
-		drag.rect_scale = drag_size.sign()
-		drag.rect_position = initial_pos
+		#calculating X component for the rectangle
+		if mouse_pos.x > fill_rect.position.x*TILE_SIZE:
+			drag.rect_position.x = ((fill_rect.position.x)) * TILE_SIZE
+			
+			calculated_size.x = (fill_rect.position.x - round(mouse_pos.x/TILE_SIZE)) * -TILE_SIZE
+			drag.rect_size.x = abs(calculated_size.x)
+			drag.rect_scale.x = sign(calculated_size.x)
+			
+		else:
+			drag.rect_position.x = ((fill_rect.position.x)+1) * TILE_SIZE
+			
+			calculated_size.x = (round(mouse_pos.x/TILE_SIZE - 1) - fill_rect.position.x) * TILE_SIZE
+			drag.rect_size.x = abs(calculated_size.x)
+			drag.rect_scale.x = sign(calculated_size.x)
 		
-	
+		
+		#calculating the Y component for the rectangle (thrilling stuff I know)
+		if mouse_pos.y > fill_rect.position.y*TILE_SIZE:
+			drag.rect_position.y = (fill_rect.position.y) * TILE_SIZE
+			
+			calculated_size.y = (fill_rect.position.y - round(mouse_pos.y/TILE_SIZE)) * -TILE_SIZE
+			drag.rect_size.y = abs(calculated_size.y)
+			drag.rect_scale.y = sign(calculated_size.y)
+			
+		else:
+			drag.rect_position.y = ((fill_rect.position.y)+1) * TILE_SIZE
+			
+			calculated_size.y = (round(mouse_pos.y/TILE_SIZE - 1) - fill_rect.position.y) * TILE_SIZE
+			drag.rect_size.y = abs(calculated_size.y)
+			drag.rect_scale.y = sign(calculated_size.y)
+			
+			
 	## input
 	
 	if left_down and not left_last_down:
@@ -95,12 +119,10 @@ func selected_update():
 
 
 func mouse_down() -> void:
-	initial_pos = mouse_pos
-	mouse_pos_direction = mouse_pos/Vector2(abs(mouse_pos.x), abs(mouse_pos.y))
+	fill_rect.position = Vector2(round(mouse_pos.x/TILE_SIZE), round(mouse_pos.y/TILE_SIZE))
 	
-	selection_area.size = Vector2(TILE_SIZE, TILE_SIZE)
-	drag.rect_position = initial_pos + Vector2(TILE_SIZE, TILE_SIZE)*(Vector2(int(mouse_pos.x)%TILE_SIZE, int(mouse_pos.y)%TILE_SIZE))
-	drag.rect_size = Vector2.ZERO
+	drag.rect_position = fill_rect.position*TILE_SIZE + Vector2(8, 8)
+	drag.rect_size = TILE
 	drag.visible = true
 	
 	if right_down:
@@ -111,6 +133,4 @@ func mouse_down() -> void:
 
 func mouse_up() -> void:
 	drag.visible = false
-	if drag.rect_size.x < TILE_SIZE or drag.rect_size.y < TILE_SIZE: return
-	
 	place_tiles()
