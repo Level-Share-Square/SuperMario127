@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/music_changer.gd" type="Script" id=2]
@@ -21,7 +21,6 @@
 [ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=19]
 [ext_resource path="res://scenes/editor/areas_button.gd" type="Script" id=20]
 [ext_resource path="res://scenes/oldmenu/127Button.tscn" type="PackedScene" id=21]
-[ext_resource path="res://scenes/shared/Hotkeys.tscn" type="PackedScene" id=22]
 [ext_resource path="res://scenes/editor/window/gravity.gd" type="Script" id=23]
 [ext_resource path="res://scenes/editor/window/level_info.gd" type="Script" id=24]
 
@@ -632,11 +631,11 @@ custom_fonts/font = SubResource( 14 )
 text = "Gravity"
 align = 1
 
-[node name="Hotkeys" type="Control" parent="LevelSettings"]
+[node name="Options" type="Control" parent="LevelSettings"]
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Hotkeys" type="Button" parent="LevelSettings/Hotkeys"]
+[node name="Options" type="Button" parent="LevelSettings/Options"]
 margin_left = 510.0
 margin_top = 402.567
 margin_right = 910.0
@@ -647,15 +646,15 @@ custom_styles/pressed = SubResource( 9 )
 custom_styles/normal = SubResource( 9 )
 shortcut_in_tooltip = false
 action_mode = 0
-text = "Hotkeys"
+text = "Options"
 script = ExtResource( 5 )
 
-[node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/Hotkeys/Hotkeys"]
+[node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/Options/Options"]
 stream = ExtResource( 15 )
 volume_db = -10.0
 bus = "Sounds"
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/Hotkeys/Hotkeys"]
+[node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/Options/Options"]
 stream = ExtResource( 13 )
 volume_db = -10.0
 bus = "Sounds"
@@ -708,9 +707,6 @@ margin_top = 403.0
 margin_right = 910.0
 margin_bottom = 493.0
 text = "New Area"
-
-[node name="Hotkeys" parent="." instance=ExtResource( 22 )]
-visible = false
 
 [node name="LevelInfo" type="Control" parent="."]
 visible = false

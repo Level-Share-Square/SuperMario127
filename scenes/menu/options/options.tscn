@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://scenes/menu/options/controls/preset_loader.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://scenes/actors/mario/luigi_frames.tres" type="SpriteFrames" id=22]
 [ext_resource path="res://scenes/menu/options/mod_loader.gd" type="Script" id=23]
 [ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=24]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=25]
 
 [sub_resource type="CanvasItemMaterial" id=11]
 blend_mode = 1
@@ -53,6 +54,38 @@ func _ready():
 	if OS.has_feature(\"JavaScript\"):
 		get_parent().hide()
 "
+
+[sub_resource type="DynamicFont" id=24]
+
+[sub_resource type="StyleBoxEmpty" id=25]
+
+[sub_resource type="StyleBoxEmpty" id=26]
+
+[sub_resource type="StyleBoxEmpty" id=27]
+
+[sub_resource type="StyleBoxEmpty" id=28]
+
+[sub_resource type="GDScript" id=31]
+resource_name = "pass_group"
+script/source = "extends GridContainer
+
+
+export var input_group: String
+"
+
+[sub_resource type="DynamicFont" id=29]
+size = 14
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 25 )
+
+[sub_resource type="DynamicFont" id=30]
+size = 10
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 25 )
 
 [sub_resource type="Gradient" id=9]
 offsets = PoolRealArray( 0, 0.5, 1 )
@@ -703,7 +736,7 @@ margin_right = 544.0
 margin_bottom = 334.0
 rect_min_size = Vector2( 0, 228 )
 script = ExtResource( 17 )
-category_paths = [ NodePath("Player1"), NodePath("Player2"), NodePath("Interface"), NodePath("Hotkeys") ]
+category_paths = [ NodePath("Player1"), NodePath("Player2"), NodePath("Interface"), NodePath("Hotkeys/Gameplay"), NodePath("Hotkeys/Editor") ]
 
 [node name="Player1" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 margin_left = 14.0
@@ -882,15 +915,16 @@ setting_key = "63_wing_cap"
 
 [node name="Player2" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 14.0
+margin_left = 32.0
 margin_top = 1.0
-margin_right = 530.0
+margin_right = 512.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
 columns = 4
 
 [node name="MoveLeft" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
+margin_right = 96.0
 margin_bottom = 38.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 2)"
@@ -900,8 +934,8 @@ sprite_frames = ExtResource( 22 )
 sprite_animation = "movingLeft"
 
 [node name="MoveRight" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
-margin_left = 127.0
-margin_right = 225.0
+margin_left = 128.0
+margin_right = 226.0
 margin_bottom = 38.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 2)"
@@ -911,8 +945,8 @@ sprite_frames = ExtResource( 22 )
 sprite_animation = "movingRight"
 
 [node name="MoveUp" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
-margin_left = 257.0
-margin_right = 366.0
+margin_left = 258.0
+margin_right = 367.0
 margin_bottom = 38.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 2)"
@@ -923,8 +957,8 @@ sprite_animation = "swimming"
 sprite_offset = Vector2( 0, 4 )
 
 [node name="MoveDown" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
-margin_left = 398.0
-margin_right = 515.0
+margin_left = 399.0
+margin_right = 516.0
 margin_bottom = 38.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 2)"
@@ -937,6 +971,7 @@ sprite_offset = Vector2( 0, -8 )
 
 [node name="Jump" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
 margin_top = 62.0
+margin_right = 96.0
 margin_bottom = 100.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 2)"
@@ -946,9 +981,9 @@ sprite_frames = ExtResource( 22 )
 sprite_animation = "jumpRight"
 
 [node name="Dive" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
-margin_left = 127.0
+margin_left = 128.0
 margin_top = 62.0
-margin_right = 225.0
+margin_right = 226.0
 margin_bottom = 100.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 2)"
@@ -960,9 +995,9 @@ sprite_rotation = 115.0
 sprite_offset = Vector2( 4, -8 )
 
 [node name="Spin" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
-margin_left = 257.0
+margin_left = 258.0
 margin_top = 62.0
-margin_right = 366.0
+margin_right = 367.0
 margin_bottom = 100.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 2)"
@@ -973,9 +1008,9 @@ sprite_animation = "spinning"
 sprite_offset = Vector2( 2, 0 )
 
 [node name="GroundPound" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
-margin_left = 398.0
+margin_left = 399.0
 margin_top = 62.0
-margin_right = 515.0
+margin_right = 516.0
 margin_bottom = 100.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 2)"
@@ -987,6 +1022,7 @@ sprite_offset = Vector2( -4, 6 )
 
 [node name="GPCancel" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
 margin_top = 124.0
+margin_right = 96.0
 margin_bottom = 162.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 2)"
@@ -996,9 +1032,9 @@ sprite_frames = ExtResource( 22 )
 sprite_animation = "fallRight"
 
 [node name="UseFludd" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
-margin_left = 127.0
+margin_left = 128.0
 margin_top = 124.0
-margin_right = 225.0
+margin_right = 226.0
 margin_bottom = 162.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 2)"
@@ -1009,9 +1045,9 @@ sprite_animation = "jumpRight"
 sprite_rotation = 10.0
 
 [node name="SwapNozzles" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
-margin_left = 257.0
+margin_left = 258.0
 margin_top = 124.0
-margin_right = 366.0
+margin_right = 367.0
 margin_bottom = 162.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 2)"
@@ -1021,9 +1057,9 @@ sprite_frames = ExtResource( 22 )
 sprite_animation = "idleRight"
 
 [node name="Crouch" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
-margin_left = 398.0
+margin_left = 399.0
 margin_top = 124.0
-margin_right = 515.0
+margin_right = 516.0
 margin_bottom = 162.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 2)"
@@ -1036,6 +1072,7 @@ sprite_offset = Vector2( 16, -6 )
 
 [node name="Interact" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
 margin_top = 186.0
+margin_right = 96.0
 margin_bottom = 225.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Player 2)"
@@ -1045,9 +1082,9 @@ sprite_frames = ExtResource( 22 )
 sprite_animation = "movingIn"
 
 [node name="63WingCap" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 10 )]
-margin_left = 127.0
+margin_left = 128.0
 margin_top = 186.0
-margin_right = 225.0
+margin_right = 226.0
 margin_bottom = 225.0
 setting_section = "Controls (Player 2)"
 setting_key = "63_wing_cap"
@@ -1063,140 +1100,375 @@ custom_constants/hseparation = 32
 columns = 4
 
 [node name="UILeft" parent="Subscreens/Controls/VBoxContainer/Remapper/Interface" instance=ExtResource( 12 )]
-margin_bottom = 39.0
+margin_right = 96.0
+margin_bottom = 38.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Interface)"
 input_key = "ui_left"
 sprite_visible = false
 
 [node name="UIRight" parent="Subscreens/Controls/VBoxContainer/Remapper/Interface" instance=ExtResource( 12 )]
-margin_left = 96.0
-margin_right = 191.0
-margin_bottom = 39.0
+margin_left = 128.0
+margin_right = 224.0
+margin_bottom = 38.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Interface)"
 input_key = "ui_right"
 sprite_visible = false
 
 [node name="UI_Up" parent="Subscreens/Controls/VBoxContainer/Remapper/Interface" instance=ExtResource( 12 )]
-margin_left = 192.0
-margin_right = 287.0
-margin_bottom = 39.0
+margin_left = 256.0
+margin_right = 352.0
+margin_bottom = 38.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Interface)"
 input_key = "ui_up"
 sprite_visible = false
 
 [node name="UIDown" parent="Subscreens/Controls/VBoxContainer/Remapper/Interface" instance=ExtResource( 12 )]
-margin_left = 288.0
-margin_right = 383.0
-margin_bottom = 39.0
+margin_left = 384.0
+margin_right = 480.0
+margin_bottom = 38.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Interface)"
 input_key = "ui_down"
 sprite_visible = false
 
 [node name="UiAccept" parent="Subscreens/Controls/VBoxContainer/Remapper/Interface" instance=ExtResource( 12 )]
-margin_top = 63.0
-margin_bottom = 102.0
+margin_top = 62.0
+margin_right = 96.0
+margin_bottom = 100.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Interface)"
 input_key = "ui_accept"
 sprite_visible = false
 
 [node name="UiBack" parent="Subscreens/Controls/VBoxContainer/Remapper/Interface" instance=ExtResource( 12 )]
-margin_left = 96.0
-margin_top = 63.0
-margin_right = 191.0
-margin_bottom = 102.0
+margin_left = 128.0
+margin_top = 62.0
+margin_right = 224.0
+margin_bottom = 100.0
 remapper_path = NodePath("../..")
 input_group = "Controls (Interface)"
 input_key = "ui_cancel"
 sprite_visible = false
 
-[node name="Hotkeys" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
+[node name="Hotkeys" type="TabContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 28.0
-margin_top = 64.0
-margin_right = 516.0
-margin_bottom = 164.0
+margin_left = 272.0
+margin_top = 113.0
+margin_right = 272.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 24 )
+custom_styles/tab_fg = SubResource( 25 )
+custom_styles/tab_disabled = SubResource( 26 )
+custom_styles/tab_bg = SubResource( 27 )
+custom_styles/panel = SubResource( 28 )
+
+[node name="Gameplay" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
 columns = 4
+script = SubResource( 31 )
+input_group = "Controls (Hotkeys)"
 
-[node name="Pause" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" instance=ExtResource( 12 )]
-margin_right = 65.0
-margin_bottom = 39.0
-remapper_path = NodePath("../..")
+[node name="Pause" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_right = 104.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
 input_group = "Controls (Hotkeys)"
 input_key = "pause"
 sprite_visible = false
 
-[node name="MuteMusic" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" instance=ExtResource( 12 )]
-margin_left = 97.0
-margin_right = 201.0
-margin_bottom = 39.0
-remapper_path = NodePath("../..")
+[node name="MuteMusic" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_left = 136.0
+margin_right = 232.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
 input_group = "Controls (Hotkeys)"
 input_key = "mute"
 sprite_visible = false
 
-[node name="PhotoMode" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" instance=ExtResource( 12 )]
-margin_left = 233.0
-margin_right = 299.0
-margin_bottom = 39.0
-remapper_path = NodePath("../..")
+[node name="PhotoMode" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_left = 264.0
+margin_right = 360.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
 input_group = "Controls (Hotkeys)"
 input_key = "toggle_ui"
 sprite_visible = false
 
-[node name="Retry" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" instance=ExtResource( 12 )]
-margin_top = 63.0
-margin_right = 65.0
-margin_bottom = 102.0
-remapper_path = NodePath("../..")
+[node name="Retry" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_left = 392.0
+margin_right = 488.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
 input_group = "Controls (Hotkeys)"
 input_key = "reload"
 sprite_visible = false
 
-[node name="RetryFromStart" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" instance=ExtResource( 12 )]
-margin_left = 97.0
-margin_top = 63.0
-margin_right = 201.0
-margin_bottom = 102.0
-remapper_path = NodePath("../..")
+[node name="RetryFromStart" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_top = 62.0
+margin_right = 104.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
 input_group = "Controls (Hotkeys)"
 input_key = "reload_from_start"
 sprite_visible = false
 
-[node name="VolumeDown" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" instance=ExtResource( 12 )]
-margin_left = 331.0
-margin_top = 63.0
-margin_right = 427.0
-margin_bottom = 102.0
-remapper_path = NodePath("../..")
+[node name="VolumeDown" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_left = 136.0
+margin_top = 62.0
+margin_right = 232.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
 input_group = "Controls (Hotkeys)"
 input_key = "volume_down"
 sprite_visible = false
 
-[node name="VolumeUp" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" instance=ExtResource( 12 )]
-margin_left = 233.0
-margin_top = 63.0
-margin_right = 299.0
-margin_bottom = 102.0
-remapper_path = NodePath("../..")
+[node name="VolumeUp" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_left = 264.0
+margin_top = 62.0
+margin_right = 360.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
 input_group = "Controls (Hotkeys)"
 input_key = "volume_up"
 sprite_visible = false
 
-[node name="Fullscreen" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" instance=ExtResource( 12 )]
-margin_top = 126.0
-margin_right = 65.0
-margin_bottom = 165.0
-remapper_path = NodePath("../..")
+[node name="Fullscreen" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_left = 392.0
+margin_top = 62.0
+margin_right = 488.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
 input_group = "Controls (Hotkeys)"
 input_key = "fullscreen"
 sprite_visible = false
+
+[node name="SwitchTabs" type="VBoxContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay"]
+margin_top = 124.0
+margin_right = 104.0
+margin_bottom = 162.0
+rect_min_size = Vector2( 96, 0 )
+theme = ExtResource( 2 )
+custom_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay/SwitchTabs"]
+margin_right = 104.0
+margin_bottom = 16.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay/SwitchTabs/HBoxContainer"]
+margin_right = 104.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 29 )
+text = "Editor Hotkeys"
+align = 1
+
+[node name="Button" type="Button" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay/SwitchTabs"]
+margin_top = 20.0
+margin_right = 104.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 0, 18 )
+theme_type_variation = "OptionsToggle"
+custom_fonts/font = SubResource( 30 )
+text = "Next page..."
+clip_text = true
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Editor" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+custom_constants/vseparation = 24
+custom_constants/hseparation = 32
+columns = 4
+
+[node name="ZoomIn" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_right = 104.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 104, 0 )
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "zoom_in"
+sprite_visible = false
+
+[node name="ZoomOut" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 136.0
+margin_right = 232.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "zoom_out"
+sprite_visible = false
+
+[node name="TestLevel" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 264.0
+margin_right = 360.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "switch_modes"
+sprite_visible = false
+
+[node name="SaveLevel" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 392.0
+margin_right = 488.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "save_level"
+sprite_visible = false
+
+[node name="TileLock" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_top = 62.0
+margin_right = 104.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "switch_placement_mode"
+sprite_visible = false
+
+[node name="SwitchLayers" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 136.0
+margin_top = 62.0
+margin_right = 232.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "switch_layers"
+sprite_visible = false
+
+[node name="ToggleGrid" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 264.0
+margin_top = 62.0
+margin_right = 360.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "toggle_grid"
+sprite_visible = false
+
+[node name="8PixelLock" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 392.0
+margin_top = 62.0
+margin_right = 488.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "8_pixel_lock"
+sprite_visible = false
+
+[node name="RotateObject" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_top = 124.0
+margin_right = 104.0
+margin_bottom = 162.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "rotate"
+sprite_visible = false
+
+[node name="DisableObject" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 136.0
+margin_top = 124.0
+margin_right = 232.0
+margin_bottom = 162.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "toggle_enabled"
+sprite_visible = false
+
+[node name="FlipObjectH" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 264.0
+margin_top = 124.0
+margin_right = 360.0
+margin_bottom = 162.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "flip_object"
+sprite_visible = false
+
+[node name="FlipObjectV" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 392.0
+margin_top = 124.0
+margin_right = 488.0
+margin_bottom = 162.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "flip_object_v"
+sprite_visible = false
+
+[node name="Undo" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_top = 186.0
+margin_right = 104.0
+margin_bottom = 224.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "undo"
+sprite_visible = false
+
+[node name="Redo" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 136.0
+margin_top = 186.0
+margin_right = 232.0
+margin_bottom = 224.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "redo"
+sprite_visible = false
+
+[node name="HideToolbar" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 264.0
+margin_top = 186.0
+margin_right = 360.0
+margin_bottom = 224.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "invis_ui"
+sprite_visible = false
+
+[node name="SwitchTabs2" type="VBoxContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor"]
+margin_left = 392.0
+margin_top = 186.0
+margin_right = 488.0
+margin_bottom = 224.0
+rect_min_size = Vector2( 96, 0 )
+theme = ExtResource( 2 )
+custom_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor/SwitchTabs2"]
+margin_right = 96.0
+margin_bottom = 16.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor/SwitchTabs2/HBoxContainer"]
+margin_right = 96.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 29 )
+text = "Other Hotkeys"
+align = 1
+
+[node name="Button" type="Button" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor/SwitchTabs2"]
+margin_top = 20.0
+margin_right = 96.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 0, 18 )
+theme_type_variation = "OptionsToggle"
+custom_fonts/font = SubResource( 30 )
+text = "Back..."
+clip_text = true
+script = ExtResource( 19 )
+extend_amount = 2
 
 [node name="Devices" type="VBoxContainer" parent="Subscreens/Controls/VBoxContainer"]
 margin_top = 374.0
@@ -1391,6 +1663,8 @@ anims/transition = SubResource( 1 )
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/KBM" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/kbmouse.cfg" ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/DefaultInterface" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/interface.cfg" ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/DefaultHotkeys" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/hotkeys.cfg" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay/SwitchTabs/Button" to="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" method="set_current_tab" binds= [ 1 ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor/SwitchTabs2/Button" to="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" method="set_current_tab" binds= [ 0 ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Remapper" method="switch_device_type" binds= [ false ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device_type" binds= [ false ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Remapper" method="switch_device_type" binds= [ true ]]

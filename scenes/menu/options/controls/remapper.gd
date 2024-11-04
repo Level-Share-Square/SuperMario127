@@ -41,7 +41,7 @@ func reset_keybind(keybind: VBoxContainer):
 
 func load_all_keybinds():
 	for i in range(category_paths.size()):
-		var category: GridContainer = get_node(category_paths[i])
+		var category: Container = get_node(category_paths[i])
 		
 		for keybind in category.get_children():
 			if keybind is KeybindButton:

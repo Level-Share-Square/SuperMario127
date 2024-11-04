@@ -26,12 +26,12 @@ func screen_change(new_screen_name: String):
 	if is_instance_valid(current_screen):
 		current_screen.visible = false
 	
-	if new_screen_name == "": 
+	var new_screen = get_node_or_null(new_screen_name)
+	if not is_instance_valid(new_screen): 
 		current_screen = null
 		emit_signal("screen_changed")
 		return
 	
-	var new_screen = get_node(new_screen_name)
 	current_screen = new_screen
 	
 	new_screen.animation_player.play_backwards("transition")
