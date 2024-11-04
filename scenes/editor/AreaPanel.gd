@@ -73,7 +73,7 @@ func check_moveability():
 		move_down_button.disabled = true
 
 func duplicate_area():
-	if Singleton.CurrentLevelData.level_data.areas.size() == 32:
+	if Singleton.CurrentLevelData.level_data.areas.size() != 32:
 		var area = LevelArea.new()
 		var dup = Singleton.CurrentLevelData.level_data.areas[id]
 		area.duplicate(dup)

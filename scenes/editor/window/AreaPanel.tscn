@@ -193,4 +193,3 @@ texture_disabled = ExtResource( 16 )
 expand = true
 
 [connection signal="pressed" from="HBoxContainer/DeleteButton" to="HBoxContainer/DeleteButton" method="_on_ResetLevelButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/DuplicateButton" to="HBoxContainer/DuplicateButton" method="_on_ResetLevelButton_pressed"]
