@@ -4,7 +4,7 @@
 [ext_resource path="res://classes/message_disappear.wav" type="AudioStream" id=2]
 [ext_resource path="res://scenes/actors/objects/dialogue_trigger/sign.png" type="Texture" id=3]
 [ext_resource path="res://assets/misc/interaction_marker.png" type="Texture" id=4]
-[ext_resource path="res://classes/dialogue.gd" type="Script" id=5]
+[ext_resource path="res://classes/text/dialogue.gd" type="Script" id=5]
 [ext_resource path="res://assets/misc/interaction_marker_outline.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=4]

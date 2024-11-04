@@ -9,13 +9,14 @@ onready var stick_sprite = $Stick
 onready var message_appear = $MessageAppear
 onready var message_disappear = $MessageDisappear
 
-onready var pop_up = $Message
-onready var dialogue = $Message/Dialogue
-onready var label = $Message/Dialogue/RichTextLabel
-onready var arrow = $Message/Arrow
+
+onready var speech_bubble = $SpeechBubble
+
+onready var interact_pop_up = $Message
 onready var exclamation_mark = $Message/ExclamationMark
 
 onready var collision_width = $InteractArea/CollisionShape2D.shape.extents.x
+
 
 var slide_to_center_length := 1.25
 var text := "This is a sign. Click on it in the editor to edit this text!"
@@ -33,10 +34,6 @@ var on_wall := false
 
 export(Array, Texture) var palette_textures
 export(Array, Texture) var palette_textures_2
-
-# these are for toads
-signal message_appear
-signal message_disappear
 
 func _set_properties():
 	savable_properties = ["text", "open_menu", "on_wall"]
@@ -62,22 +59,21 @@ func _ready():
 		stick_sprite.texture = palette_textures_2[palette - 1]
 	
 	if !enabled:
-		pop_up.visible = false
-		
+		interact_pop_up.visible = false
+	
+	if not enabled:
+		speech_bubble.hide()
 	if open_menu:
-		dialogue.visible = false
-		label.visible = false
-		arrow.visible = false
+		speech_bubble.hide()
 		exclamation_mark.visible = true
 		animation_player.play("bobbin") # exclamation mark fucking bobbin
 		area = $InteractArea
 	
-	normal_pos = pop_up.position
-	pop_up.position = Vector2(normal_pos.x * 0.8, normal_pos.y * 0.7)
-	pop_up.scale = Vector2(0.8, 0.8)
-	pop_up.modulate = Color(1, 1, 1, 0)
-	label.bbcode_text = "[center]" + text + "[/center]"
-	label.call_deferred("update_sizing")
+	normal_pos = interact_pop_up.position
+	interact_pop_up.position = Vector2(normal_pos.x * 0.8, normal_pos.y * 0.7)
+	interact_pop_up.scale = Vector2(0.8, 0.8)
+	interact_pop_up.modulate = Color(1, 1, 1, 0)
+	
 	if mode != 1:
 		var _connect = area.connect("body_entered", self, "enter_area")
 		var _connect2 = area.connect("body_exited", self, "exit_area")
@@ -85,24 +81,18 @@ func _ready():
 func enter_area(body):
 	if body.name.begins_with("Character") and character == null and enabled:
 		character = body
-		label.bbcode_text = "[center]" + text_replace_util.parse_text(text, character) + "[/center]"
-		label.call_deferred("update_sizing")
-		message_appear.play()
 		
-		# related to toads
-		if not sprite.visible and not open_menu:
-			emit_signal("message_appear")
-			
-		
+		if open_menu:
+			message_appear.play()
+
+
 func exit_area(body):
 	if body == character and character.get_collision_layer_bit(1) and enabled:
 		character = null
-		if reset_read_timer == 0:
+		if reset_read_timer == 0 and open_menu:
 			message_disappear.play()
-		
-		# related to toads
-		if not sprite.visible and not open_menu: emit_signal("message_disappear")
-		
+
+
 func setup_char():
 	character.set_dive_collision(false)
 	character.invulnerable = true 
@@ -162,18 +152,16 @@ func _physics_process(delta):
 		if reset_read_timer <= 0:
 			reset_read_timer = 0
 			being_read = false
-
-			# related to toads
-			if not sprite.visible: emit_signal("message_disappear")
+	
 	
 	if character == null or being_read: 
-		pop_up.position = lerp(pop_up.position, Vector2(normal_pos.x * 0.8, normal_pos.y * 0.9), delta * transition_speed)
-		pop_up.scale = lerp(pop_up.scale, Vector2(0.8, 0.8), delta * transition_speed)
-		pop_up.modulate = lerp(pop_up.modulate, Color(1, 1, 1, 0), delta * transition_speed)
+		interact_pop_up.position = lerp(interact_pop_up.position, Vector2(normal_pos.x * 0.8, normal_pos.y * 0.9), delta * transition_speed)
+		interact_pop_up.scale = lerp(interact_pop_up.scale, Vector2(0.8, 0.8), delta * transition_speed)
+		interact_pop_up.modulate = lerp(interact_pop_up.modulate, Color(1, 1, 1, 0), delta * transition_speed)
 	else:
-		pop_up.position = lerp(pop_up.position, normal_pos, delta * transition_speed)
-		pop_up.scale = lerp(pop_up.scale, Vector2(1, 1), delta * transition_speed)
-		pop_up.modulate = lerp(pop_up.modulate, Color(1, 1, 1, 1), delta * transition_speed)
+		interact_pop_up.position = lerp(interact_pop_up.position, normal_pos, delta * transition_speed)
+		interact_pop_up.scale = lerp(interact_pop_up.scale, Vector2(1, 1), delta * transition_speed)
+		interact_pop_up.modulate = lerp(interact_pop_up.modulate, Color(1, 1, 1, 1), delta * transition_speed)
 		
 		# :C
 		if (open_menu and character.inputs[Character.input_names.interact][0]
@@ -183,9 +171,6 @@ func _physics_process(delta):
 		and !being_read):
 			being_read = true
 			setup_char()
-			
-			# related to toads
-			if not sprite.visible: emit_signal("message_appear")
 	
 	check_timer -= delta
 	if check_timer <= 0:
@@ -198,3 +183,9 @@ func _physics_process(delta):
 		
 		if !has_char and is_instance_valid(character):
 			exit_area(character)
+
+
+## compatibility w/ pop-up prefab
+var bubble_text: String setget ,get_bubble_text
+func get_bubble_text():
+	return text

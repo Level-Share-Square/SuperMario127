@@ -37,7 +37,6 @@ var reset_read_timer := 0.0
 
 var check_timer := 3.0
 
-# these are for toads
 signal message_appear
 signal message_disappear
 signal message_changed
@@ -82,14 +81,22 @@ func _ready():
 			autostart = parent.autostart
 		if "interactable" in parent:
 			interactable = parent.interactable
+			if not interactable: hide()
+
 
 func body_entered(body):
-	if body.name.begins_with("Character") and character == null and parent.enabled:
+	if not interactable: return
+	if not is_visible_in_tree(): return
+	if not parent.enabled: return
+	if body.name.begins_with("Character") and character == null:
 		character = body
 		message_appear.play()
 		
 func body_exited(body):
-	if body == character and character.get_collision_layer_bit(1) and parent.enabled:
+	if not interactable: return
+	if not is_visible_in_tree(): return
+	if not parent.enabled: return
+	if body == character and character.get_collision_layer_bit(1):
 		character = null
 		if reset_read_timer == 0:
 			message_disappear.play()
@@ -180,8 +187,8 @@ func _physics_process(delta):
 			reset_read_timer = 0
 			being_read = false
 			
-			# related to toads
-			if not sprite.visible: emit_signal("message_disappear")
+			if not sprite.visible: 
+				emit_signal("message_disappear")
 	
 	if character == null or being_read: 
 		pop_up.position = lerp(pop_up.position, Vector2(normal_pos.x * 0.8, normal_pos.y * 0.9), delta * transition_speed)

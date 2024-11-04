@@ -8,7 +8,7 @@
 [ext_resource path="res://scenes/actors/objects/toad/body_sync.gd" type="Script" id=6]
 [ext_resource path="res://scenes/actors/objects/toad/special_expressions.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=8]
-[ext_resource path="res://classes/dialogue.tscn" type="PackedScene" id=9]
+[ext_resource path="res://classes/text/dialogue.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=46]
 extents = Vector2( 10, 14 )
