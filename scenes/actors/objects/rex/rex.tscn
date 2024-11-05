@@ -319,6 +319,7 @@ orbit_velocity_random = 0.0
 anim_speed = 1.0
 
 [node name="Rex" type="Node2D"]
+z_index = -2
 script = ExtResource( 2 )
 velocity = Vector2( 0, -64 )
 flicker_timer = -1.0

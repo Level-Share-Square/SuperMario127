@@ -17,11 +17,12 @@ var bubble_text: String = "This text appears as a speech bubble above your NPC!"
 var display_mode: int = 0
 
 var tag: String
+var remote_tag: String
 
 
 func _set_properties():
-	savable_properties = ["dialogue", "character_name", "autostart", "interactable", "bubble_text", "display_mode", "tag"]
-	editable_properties = ["dialogue", "character_name", "autostart", "interactable", "bubble_text", "display_mode", "tag"]
+	savable_properties = ["dialogue", "character_name", "autostart", "interactable", "bubble_text", "display_mode", "tag", "remote_tag"]
+	editable_properties = ["dialogue", "character_name", "autostart", "interactable", "bubble_text", "display_mode", "tag", "remote_tag"]
 	
 func _set_property_values():		
 	set_property("dialogue", dialogue, true)
@@ -35,6 +36,7 @@ func _set_property_values():
 	set_property_menu("display_mode", ["option", 3, 0, ["Menu", "Speech Bubble", "Both"]])
 	
 	set_property("tag", tag, true)
+	set_property("remote_tag", remote_tag, true)
 
 
 func _ready():

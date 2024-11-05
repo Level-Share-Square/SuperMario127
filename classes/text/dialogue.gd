@@ -2,6 +2,8 @@ class_name Dialog
 
 extends Node2D
 
+const DIALOGUE_GROUP: String = "TaggedDialogue"
+
 onready var area = $InteractArea
 onready var animation_player = $AnimationPlayer
 onready var tween = $Tween
@@ -15,6 +17,7 @@ onready var pop_up = $Indicator
 onready var exclamation_mark = $Indicator/ExclamationMark
 
 onready var interact_shape = $InteractArea/CollisionShape2D
+onready var dialogue_menu = get_tree().get_current_scene().get_node_or_null("%DialogueText")
 
 const AUTOSTART_OFF = 0
 const AUTOSTART_ON = 1
@@ -22,11 +25,14 @@ const AUTOSTART_ONESHOT = 2
 
 var dialogue
 var character_name
-var autostart = 0
+var autostart: int = 0
+var tag: String
+var remote_tag: String
 
 var being_read := false
 var has_been_read := false
 var interactable := true
+var body_overlapping := false
 var character : Character
 var stored_velocity : Vector2 = Vector2.ZERO
 var parent
@@ -82,21 +88,56 @@ func _ready():
 		if "interactable" in parent:
 			interactable = parent.interactable
 			if not interactable: hide()
+		if "tag" in parent and parent.tag != "":
+			tag = parent.tag
+			add_to_group(DIALOGUE_GROUP)
+		if "remote_tag" in parent:
+			remote_tag = parent.remote_tag
+
+
+func open_remote_menu(new_char: Character):
+	if being_read: return
+	being_read = true
+	dialogue_menu.connect("menu_closed", self, "menu_closed", [], CONNECT_ONESHOT)
+	# calls immediately so it can
+	# override mario's inputs
+	get_tree().call_group_flags(
+		SceneTree.GROUP_CALL_REALTIME,
+		DIALOGUE_GROUP,
+		"open_menu_conditional", new_char, remote_tag
+	)
+
+func open_menu_conditional(new_char: Character, compare_tag: String):
+	if tag != compare_tag: return
+	open_menu(new_char)
+
+func open_menu(new_char: Character):
+	if being_read: return
+	character = new_char
+	being_read = true
+	setup_char()
+
+
+func menu_closed():
+	reset_read_timer = 0.5
 
 
 func body_entered(body):
 	if not interactable: return
 	if not is_visible_in_tree(): return
 	if not parent.enabled: return
-	if body.name.begins_with("Character") and character == null:
-		character = body
-		message_appear.play()
-		
+	if body.name.begins_with("Character"):
+		body_overlapping = true
+		if character == null:
+			character = body
+			message_appear.play()
+
 func body_exited(body):
 	if not interactable: return
 	if not is_visible_in_tree(): return
 	if not parent.enabled: return
 	if body == character and character.get_collision_layer_bit(1):
+		body_overlapping = false
 		character = null
 		if reset_read_timer == 0:
 			message_disappear.play()
@@ -104,12 +145,12 @@ func body_exited(body):
 func autostart_dialogue(body):
 	if autostart > AUTOSTART_OFF and body.name.begins_with("PlayerCollision"):
 		if autostart == AUTOSTART_ONESHOT and has_been_read == true: return
-		 
-		character = body.get_parent()
-		if character.controllable and !being_read:
-			being_read = true
-			setup_char(true)
-			return
+		
+		if remote_tag == "" or remote_tag == tag:
+			open_menu(body.get_parent())
+		else:
+			open_remote_menu(body.get_parent())
+
 
 # this is to make npcs emote in front of signs (and run autostart now lol)
 func area_entered(body):
@@ -129,7 +170,7 @@ func area_exited(body):
 
 		area_parent.disconnect("message_appear", parent, "start_talking")
 		area_parent.disconnect("message_disappear", parent, "stop_talking")
-		
+
 func setup_char(keep_velocity: bool = false):
 	# flip mario to face this object
 	character.facing_direction = sign(parent.global_position.x - character.global_position.x)
@@ -172,12 +213,11 @@ func restore_control():
 	character.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 	character.camera.focus_on = null
 	
-	
 	#can't think of a better place to do anywhere else in the script this so we'll do it here
 	has_been_read = true
-	
+
 func open_menu_ui():
-	get_tree().get_current_scene().get_node("%DialogueText").open(dialogue, self, character, character_name)
+	dialogue_menu.open(dialogue, self, character, character_name)
 
 func _physics_process(delta):
 
@@ -190,7 +230,7 @@ func _physics_process(delta):
 			if not sprite.visible: 
 				emit_signal("message_disappear")
 	
-	if character == null or being_read: 
+	if not body_overlapping or being_read: 
 		pop_up.position = lerp(pop_up.position, Vector2(normal_pos.x * 0.8, normal_pos.y * 0.9), delta * transition_speed)
 		pop_up.scale = lerp(pop_up.scale, Vector2(0.8, 0.8), delta * transition_speed)
 		pop_up.modulate = lerp(pop_up.modulate, Color(1, 1, 1, 0), delta * transition_speed)
@@ -200,13 +240,16 @@ func _physics_process(delta):
 		pop_up.modulate = lerp(pop_up.modulate, Color(1, 1, 1, 1), delta * transition_speed)
 		
 		# :/
-		if (character.inputs[Character.input_names.interact][0]
+		if (body_overlapping
+		and character.inputs[Character.input_names.interact][0]
 		and !character.inputs[Character.input_names.left][0]
 		and !character.inputs[Character.input_names.right][0]
 		and character.is_grounded() and character.controllable
 		and !being_read and interactable):
-			being_read = true
-			setup_char()
+			if remote_tag == "" or remote_tag == tag:
+				open_menu(character)
+			else:
+				open_remote_menu(character)
 			
 			# message appear signal was removed from here, made
 			# redundant by the message changed signal

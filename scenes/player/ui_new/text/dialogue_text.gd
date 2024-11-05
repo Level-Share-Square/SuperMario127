@@ -1,5 +1,8 @@
 extends Control
 
+signal menu_opened
+signal menu_closed
+
 const TYPE_SPEED = 0.035
 
 var open := false
@@ -41,6 +44,7 @@ func open(_dialogue : PoolStringArray, dialogue_node : Node2D, character_node : 
 	name_label.bbcode_text = character_name
 	open = true
 	
+	emit_signal("menu_opened")
 	dialogue_page = 0
 	interact()
 
@@ -82,7 +86,8 @@ func close():
 	menu_close.play()
 	character = null
 	dialogue_obj = null
-	
+	emit_signal("menu_closed")
+
 func _physics_process(delta):
 	if !open:
 		rect_position = lerp(rect_position, Vector2(normal_pos.x * 1.25, normal_pos.y * 1.2), delta * transition_speed)
