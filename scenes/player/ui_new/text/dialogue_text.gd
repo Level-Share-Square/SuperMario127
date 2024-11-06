@@ -59,8 +59,6 @@ func interact():
 		
 		var tagged_node: Node = get_dialogue_from_tag(last_tag)
 		if is_instance_valid(tagged_node):
-			dialogue_obj.emit_signal("message_disappear")
-			
 			last_tag = ""
 			label.percent_visible = 0
 			tagged_node.being_read = false
