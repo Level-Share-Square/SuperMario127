@@ -7,7 +7,7 @@ onready var bubble_prefab = $SpeechBubble
 
 enum DisplayMode {Menu, Bubble, Both}
 
-var dialogue := PoolStringArray(["0100This is a dialogue object.", "0100Try putting this on top of an object and see what happens!"])
+var dialogue := PoolStringArray(["0100;This is a dialogue object.", "0100;Try putting this on top of an object and see what happens!"])
 var character_name: String = "NPC"
 var speaking_radius: float = 90
 var autostart: int = 0
@@ -22,7 +22,7 @@ var remote_tag: String
 
 func _set_properties():
 	savable_properties = ["dialogue", "character_name", "autostart", "interactable", "bubble_text", "display_mode", "tag", "remote_tag"]
-	editable_properties = ["dialogue", "character_name", "autostart", "interactable", "bubble_text", "display_mode", "tag", "remote_tag"]
+	editable_properties = ["dialogue", "bubble_text", "character_name", "display_mode", "tag", "remote_tag", "autostart", "interactable"]
 	
 func _set_property_values():		
 	set_property("dialogue", dialogue, true)
