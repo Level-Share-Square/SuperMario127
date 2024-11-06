@@ -1,14 +1,13 @@
 extends GameObject
 
 
+enum DisplayMode {Menu, Bubble, Both}
+
 onready var dialogue_prefab = $Dialogue
 onready var bubble_prefab = $SpeechBubble
 
-
-enum DisplayMode {Menu, Bubble, Both}
-
 var dialogue := PoolStringArray(["0100;This is a dialogue object.", "0100;Try putting this on top of an object and see what happens!"])
-var character_name: String = "NPC"
+var character_name: String
 var speaking_radius: float = 90
 var autostart: int = 0
 var interactable: bool = true
@@ -18,6 +17,10 @@ var display_mode: int = 0
 
 var tag: String
 var remote_tag: String
+
+signal start_talking
+signal stop_talking
+signal change_emote(expression, action)
 
 
 func _set_properties():
@@ -42,6 +45,12 @@ func _set_property_values():
 func _ready():
 	if mode == 1: return
 	
+	dialogue_prefab.connect("message_changed", self, "change_emote")
+	dialogue_prefab.connect("message_disappear", self, "emit_signal", ["stop_talking"])
+	
+	bubble_prefab.connect("message_appear", self, "emit_signal", ["start_talking"])
+	bubble_prefab.connect("message_disappear", self, "emit_signal", ["stop_talking"])
+	
 	match display_mode:
 		DisplayMode.Menu:
 			bubble_prefab.hide()
@@ -59,3 +68,7 @@ func menu_closed():
 		dialogue_prefab.interactable = false
 		dialogue_prefab.hide()
 		bubble_prefab.show()
+
+
+func change_emote(expression, action):
+	emit_signal("change_emote", expression, action)

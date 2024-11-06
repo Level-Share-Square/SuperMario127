@@ -46,7 +46,7 @@ var check_timer := 3.0
 
 signal message_appear
 signal message_disappear
-signal message_changed
+signal message_changed(expression, action)
 
 
 func _ready():
@@ -79,7 +79,7 @@ func _ready():
 		connect("message_changed", parent, "message_changed")
 		connect("message_appear", parent, "start_talking")
 		connect("message_disappear", parent, "stop_talking")
-
+		
 		
 		sprite.visible = false
 		if "speaking_radius" in parent:
@@ -124,9 +124,10 @@ func open_menu(new_char: Character):
 
 
 func menu_closed():
-	if body_overlapping:
+	if is_instance_valid(character) and not character.controllable:
 		restore_control()
 	reset_read_timer = 0.5
+	has_been_read = true
 	page_cache = 0
 
 
@@ -222,9 +223,6 @@ func restore_control():
 	character.camera.zoom_tween.remove_all()
 	character.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 	character.camera.focus_on = null
-	
-	#can't think of a better place to do anywhere else in the script this so we'll do it here
-	has_been_read = true
 
 func open_menu_ui():
 	dialogue_menu.open(dialogue, self, character, character_name)

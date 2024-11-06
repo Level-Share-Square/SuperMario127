@@ -1,5 +1,6 @@
 extends Node2D
 
+
 onready var parent = get_parent()
 
 onready var label = $Dialogue/RichTextLabel
@@ -9,6 +10,9 @@ onready var message_disappear = $"%MessageDisappear"
 
 var is_shown: bool
 var body_overlapping: bool
+
+signal message_appear
+signal message_disappear
 
 
 func _ready():
@@ -48,6 +52,7 @@ func appear():
 	is_shown = true
 	
 	animation_player.play_backwards("transition")
+	emit_signal("message_appear")
 	if is_visible_in_tree():
 		message_appear.play()
 
@@ -57,5 +62,6 @@ func disappear():
 	is_shown = false
 	
 	animation_player.play("transition")
+	emit_signal("message_disappear")
 	if is_visible_in_tree():
 		message_disappear.play()

@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/actors/objects/npc_base/npc_base.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/npc_base/animation_handler.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 16.0
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 14 )
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[node name="NPCBase" type="Node2D"]
+z_index = -2
+script = ExtResource( 1 )
+expression_map = [ "smiling", "talking", "neutral", "angry", "shocked", "happy", "raging", "confused" ]
+action_map = [ "standing", "running" ]
+
+[node name="DialogueDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4096
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueDetector"]
+shape = SubResource( 3 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+collision_layer = 4
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 0, 2 )
+shape = SubResource( 1 )
+
+[node name="AnimationHandler" type="Node2D" parent="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+loop = false
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Path2D/PathFollow2D"]
+visible = false
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 10.0
+margin_bottom = 10.0
+mouse_filter = 2
+border_width = 3.0
+editor_only = false

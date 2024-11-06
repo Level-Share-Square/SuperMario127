@@ -74,7 +74,7 @@ func remove_page():
 	remove_button.disabled = (dialogue.size() <= 1)
 
 func add_page():
-	dialogue.insert(dialogue_page + 1, "0100")
+	dialogue.insert(dialogue_page + 1, "0100;")
 	update()
 	
 	remove_button.disabled = (dialogue.size() <= 1)

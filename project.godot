@@ -469,6 +469,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/MusicDownloader.gd"
 }, {
+"base": "GameObject",
+"class": "NPCBase",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/npc_base/npc_base.gd"
+}, {
 "base": "State",
 "class": "NoActionState",
 "language": "GDScript",
@@ -832,6 +837,7 @@ _global_script_class_icons={
 "MetalPowerup": "",
 "MethodExecution": "",
 "MusicDownloader": "",
+"NPCBase": "",
 "NoActionState": "",
 "NotCondition": "",
 "Nozzle": "",
