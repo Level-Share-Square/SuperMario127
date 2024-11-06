@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
@@ -36,9 +36,12 @@ corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 
-[sub_resource type="DynamicFont" id=18]
-size = 32
-font_data = ExtResource( 7 )
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.112, 0.1432, 0.32, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
 
 [sub_resource type="DynamicFont" id=13]
 size = 32
@@ -56,6 +59,10 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="DynamicFont" id=18]
+size = 32
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=16]
 size = 48
@@ -119,28 +126,28 @@ margin_bottom = 498.0
 [node name="HBoxContainer" type="HBoxContainer" parent="Contents"]
 margin_left = 18.0
 margin_top = 148.0
-margin_right = 1070.0
+margin_right = 1008.0
 margin_bottom = 228.0
 
 [node name="Back" type="Button" parent="Contents/HBoxContainer"]
-margin_right = 128.0
+margin_right = 96.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 128, 0 )
+rect_min_size = Vector2( 96, 0 )
 focus_mode = 0
 custom_fonts/font = SubResource( 17 )
 custom_styles/hover = SubResource( 14 )
 custom_styles/pressed = SubResource( 15 )
-custom_styles/disabled = ExtResource( 10 )
+custom_styles/disabled = SubResource( 19 )
 custom_styles/normal = SubResource( 15 )
 disabled = true
 enabled_focus_mode = 0
 text = "Back"
 
 [node name="Next" type="Button" parent="Contents/HBoxContainer"]
-margin_left = 132.0
-margin_right = 260.0
+margin_left = 100.0
+margin_right = 196.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 128, 0 )
+rect_min_size = Vector2( 96, 0 )
 focus_mode = 0
 custom_fonts/font = SubResource( 17 )
 custom_styles/hover = SubResource( 14 )
@@ -151,14 +158,32 @@ enabled_focus_mode = 0
 text = "Next"
 
 [node name="Padding" type="Control" parent="Contents/HBoxContainer"]
-margin_left = 264.0
-margin_right = 354.0
+margin_left = 200.0
+margin_right = 232.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 90, 0 )
+size_flags_horizontal = 3
+
+[node name="RemoteTag" type="LineEdit" parent="Contents/HBoxContainer"]
+margin_left = 236.0
+margin_right = 460.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 224, 0 )
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.188235, 0.258824, 0.494118, 1 )
+custom_fonts/font = SubResource( 13 )
+custom_styles/normal = SubResource( 12 )
+align = 1
+placeholder_text = "Remote Tag"
+
+[node name="Padding3" type="Control" parent="Contents/HBoxContainer"]
+margin_left = 464.0
+margin_right = 496.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
 
 [node name="Expression" type="Button" parent="Contents/HBoxContainer"]
-margin_left = 358.0
-margin_right = 438.0
+margin_left = 500.0
+margin_right = 580.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 80, 0 )
 focus_mode = 0
@@ -176,16 +201,16 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 32, 32 )
 
 [node name="IndexDisplay" type="Label" parent="Contents/HBoxContainer"]
-margin_left = 442.0
+margin_left = 584.0
 margin_top = 22.0
-margin_right = 511.0
+margin_right = 653.0
 margin_bottom = 58.0
 custom_fonts/font = SubResource( 18 )
 text = "0/10"
 
 [node name="Action" type="Button" parent="Contents/HBoxContainer"]
-margin_left = 515.0
-margin_right = 595.0
+margin_left = 657.0
+margin_right = 737.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 80, 0 )
 focus_mode = 0
@@ -203,16 +228,16 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 32, 32 )
 
 [node name="Padding2" type="Control" parent="Contents/HBoxContainer"]
-margin_left = 599.0
-margin_right = 689.0
+margin_left = 741.0
+margin_right = 773.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 90, 0 )
+size_flags_horizontal = 3
 
 [node name="Add" type="Button" parent="Contents/HBoxContainer"]
-margin_left = 693.0
-margin_right = 821.0
+margin_left = 777.0
+margin_right = 857.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 128, 0 )
+rect_min_size = Vector2( 80, 0 )
 focus_mode = 0
 custom_fonts/font = SubResource( 17 )
 custom_styles/hover = SubResource( 14 )
@@ -223,10 +248,10 @@ enabled_focus_mode = 0
 text = "Add"
 
 [node name="Remove" type="Button" parent="Contents/HBoxContainer"]
-margin_left = 825.0
-margin_right = 985.0
+margin_left = 861.0
+margin_right = 989.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 160, 0 )
+rect_min_size = Vector2( 128, 0 )
 focus_mode = 0
 custom_fonts/font = SubResource( 17 )
 custom_styles/hover = SubResource( 14 )
@@ -263,13 +288,6 @@ shortcut_in_tooltip = false
 action_mode = 0
 text = "Save"
 script = ExtResource( 8 )
-back_button_path = NodePath("../HBoxContainer/Back")
-next_button_path = NodePath("../HBoxContainer/Next")
-index_display_path = NodePath("../HBoxContainer/IndexDisplay")
-remove_button_path = NodePath("../HBoxContainer/Remove")
-text_edit_path = NodePath("../TextEdit")
-expression_sprite_path = NodePath("../HBoxContainer/Expression/Sprite")
-action_sprite_path = NodePath("../HBoxContainer/Action/Sprite")
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/SaveButton"]
 stream = ExtResource( 2 )

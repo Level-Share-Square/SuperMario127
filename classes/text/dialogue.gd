@@ -29,6 +29,7 @@ var autostart: int = 0
 var tag: String
 var remote_tag: String
 
+var page_cache: int = 0
 var being_read := false
 var has_been_read := false
 var interactable := true
@@ -95,10 +96,14 @@ func _ready():
 			remote_tag = parent.remote_tag
 
 
+func connect_menu_oneshot():
+	if not dialogue_menu.is_connected("menu_closed", self, "menu_closed"):
+		dialogue_menu.connect("menu_closed", self, "menu_closed", [], CONNECT_ONESHOT)
+
 func open_remote_menu(new_char: Character):
 	if being_read: return
 	being_read = true
-	dialogue_menu.connect("menu_closed", self, "menu_closed", [], CONNECT_ONESHOT)
+	connect_menu_oneshot()
 	# calls immediately so it can
 	# override mario's inputs
 	get_tree().call_group_flags(
@@ -119,7 +124,10 @@ func open_menu(new_char: Character):
 
 
 func menu_closed():
+	if body_overlapping:
+		restore_control()
 	reset_read_timer = 0.5
+	page_cache = 0
 
 
 func body_entered(body):
@@ -137,10 +145,10 @@ func body_exited(body):
 	if not is_visible_in_tree(): return
 	if not parent.enabled: return
 	if body == character and character.get_collision_layer_bit(1):
+		if body_overlapping and reset_read_timer == 0:
+			message_disappear.play()
 		body_overlapping = false
 		character = null
-		if reset_read_timer == 0:
-			message_disappear.play()
 
 func autostart_dialogue(body):
 	if autostart > AUTOSTART_OFF and body.name.begins_with("PlayerCollision"):
@@ -172,6 +180,8 @@ func area_exited(body):
 		area_parent.disconnect("message_disappear", parent, "stop_talking")
 
 func setup_char(keep_velocity: bool = false):
+	connect_menu_oneshot()
+	
 	# flip mario to face this object
 	character.facing_direction = sign(parent.global_position.x - character.global_position.x)
 	

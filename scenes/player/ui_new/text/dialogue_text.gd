@@ -22,7 +22,7 @@ onready var menu_close = $MenuClose
 onready var tween = $Tween
 
 var dialogue: PoolStringArray 
-var dialogue_page: int
+var last_tag: String
 
 func _ready():
 	normal_pos = rect_position
@@ -39,27 +39,48 @@ func open(_dialogue : PoolStringArray, dialogue_node : Node2D, character_node : 
 	character = character_node
 	dialogue_obj = dialogue_node
 	
-	menu_open.play()
+	if not open:
+		menu_open.play()
 	close_label.bbcode_text = text_replace_util.parse_text("[center]Press :interactinput: to continue[/center]", character_node)
 	name_label.bbcode_text = character_name
 	open = true
 	
+	last_tag = ""
 	emit_signal("menu_opened")
-	dialogue_page = 0
 	interact()
 
 func interact():
+	var dialogue_page: int = dialogue_obj.page_cache
+	
 	if label.percent_visible == 1:
 		dialogue_page += 1
+		dialogue_obj.page_cache += 1
 		tween.stop_all()
 		
-		if dialogue_page >= dialogue.size():
-			close()
+		var tagged_node: Node = get_dialogue_from_tag(last_tag)
+		if is_instance_valid(tagged_node):
+			dialogue_obj.emit_signal("message_disappear")
+			
+			last_tag = ""
+			label.percent_visible = 0
+			tagged_node.being_read = false
+			tagged_node.open_menu(character)
 			return
 	
-	var cur_text = dialogue[dialogue_page].substr(4)
-	var expression = int(dialogue[dialogue_page].left(2))
-	var action = int(dialogue[dialogue_page].substr(2, 2))
+	if dialogue_obj.page_cache >= dialogue.size():
+		close()
+		return
+	
+	var page_text: String = dialogue[dialogue_page]
+	var colon_offset: int = page_text.find(";")
+	
+	var cur_text: String = page_text.substr(colon_offset + 1)
+	var tag: String = page_text.substr(4, colon_offset - 4)
+	
+	last_tag = tag
+	
+	var expression: int = int(page_text.left(2))
+	var action: int = int(page_text.substr(2, 2))
 	dialogue_obj.emit_signal("message_changed", expression, action)
 	
 	label.bbcode_text = text_replace_util.parse_text(cur_text, character)
@@ -76,13 +97,17 @@ func interact():
 	else:
 		tween.playback_speed = INF
 
+func get_dialogue_from_tag(tag: String) -> Node:
+	if tag == "": return null
+	for node in get_tree().get_nodes_in_group("TaggedDialogue"):
+		if node.tag == tag: return node
+	return null
+
 func close():
 	Singleton.CurrentLevelData.can_pause = true
 	open = false
 	
 	label.percent_visible = 0
-	dialogue_obj.reset_read_timer = 0.5
-	dialogue_obj.restore_control()
 	menu_close.play()
 	character = null
 	dialogue_obj = null
