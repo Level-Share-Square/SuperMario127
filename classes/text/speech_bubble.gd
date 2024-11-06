@@ -8,6 +8,7 @@ onready var message_appear = $"%MessageAppear"
 onready var message_disappear = $"%MessageDisappear"
 
 var is_shown: bool
+var body_overlapping: bool
 
 
 func _ready():
@@ -15,13 +16,25 @@ func _ready():
 
 
 func body_entered(body):
-	if is_visible_in_tree() and body is Character:
-		set_text(text_replace_util.parse_text(parent.bubble_text, body))
+	if not body is Character: return
+	body_overlapping = true
+	set_text(text_replace_util.parse_text(parent.bubble_text, body))
+	if is_visible_in_tree():
 		appear()
 
 
 func body_exited(body):
-	if is_visible_in_tree() and body is Character:
+	if not body is Character: return
+	body_overlapping = false
+	if is_visible_in_tree():
+		disappear()
+
+
+func visibility_changed():
+	if visible and body_overlapping:
+		appear()
+	
+	if not visible:
 		disappear()
 
 

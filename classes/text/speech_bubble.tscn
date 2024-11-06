@@ -175,5 +175,6 @@ collision_mask = 2
 position = Vector2( 0, -35 )
 shape = SubResource( 10 )
 
+[connection signal="visibility_changed" from="." to="." method="visibility_changed"]
 [connection signal="body_entered" from="MessageArea" to="." method="body_entered"]
 [connection signal="body_exited" from="MessageArea" to="." method="body_exited"]
