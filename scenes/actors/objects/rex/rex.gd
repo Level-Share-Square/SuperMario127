@@ -48,6 +48,8 @@ export var inv_timer: = -1.0
 export var flicker_timer: = 0.0
 var attack_timer: = 0.0
 
+var knockback_affect := false
+
 var character:Character
 
 var loaded: = true
@@ -138,6 +140,10 @@ func reset_collision_layers():
 	attack_area_small.set_collision_mask_bit(2, true)
 	stomp_area.set_collision_mask_bit(2, true)
 
+func knockback_recover():
+	pass
+	knockback_affect = false
+
 func kill(hit_pos:Vector2):
 	if not hit and not dead and enabled and inv_timer <= 0:
 		if is_instance_valid(kinematic_body):
@@ -158,9 +164,13 @@ func kill(hit_pos:Vector2):
 				if was_ground_pound:
 					squish = true
 			else:
+				knockback_affect = true
+				var _knockback_timer = get_tree().create_timer(.5)
+				_knockback_timer.connect("timeout", self, "knockback_recover")
+				
 				hit_sound.play()
 				var normal: = sign((kinematic_body.global_position - hit_pos).x)
-				velocity = Vector2(normal * 225, - 90)
+				velocity = Vector2(normal * 125, - 90)
 				position.y -= 2
 				snap = Vector2(0, 0)
 				
@@ -283,7 +293,7 @@ func _physics_process(delta:float)->void :
 						character.set_state_by_name("BounceState", delta)
 
 func physics_process_hit(delta, is_in_platform: bool):
-	velocity.y += gravity * gravity_scale
+	velocity.y += gravity * gravity_scale * 2
 	velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
 	
 	if dead:
@@ -349,17 +359,21 @@ func physics_process_normal(delta, is_in_platform: bool):
 		wall_check_cast2.cast_to = Vector2(10 * facing_direction, 0)
 		if wall_check_cast.is_colliding() or wall_check_cast2.is_colliding() or kinematic_body.is_on_wall():
 			facing_direction *= -1
-			position.x += 2 * facing_direction
-	
-	sprite.flip_h = (true if (facing_direction > 0) else false) if (facing_direction != 0) else sprite.flip_h
-	velocity.x = lerp(velocity.x, facing_direction * working_speed, fps_util.PHYSICS_DELTA * accel)
+			velocity.x = -velocity.x
 	
 	if kinematic_body.is_on_floor():
+		if !knockback_affect:
+			sprite.flip_h = (true if (facing_direction > 0) else false) if (facing_direction != 0) else sprite.flip_h
+			velocity.x = lerp(velocity.x, facing_direction * working_speed, fps_util.PHYSICS_DELTA * accel)
+			
 		if (velocity.y >= 0):
 			jumped = false
 		snap = Vector2(0, 0 if is_in_platform or jumped else 12)
 	else:
 		velocity.y += gravity * gravity_scale
+		snap = Vector2.ZERO
+		
+	if !was_stomped and knockback_affect:
 		snap = Vector2.ZERO
 	
 	velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))

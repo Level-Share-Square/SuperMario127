@@ -25,7 +25,7 @@ var hit: = false
 var bouncy_fire := false
 
 var gravity: = 0.0
-var gravit_scale: = 1.0
+var gravit_scale: = 2.0
 var wander_timer: = 0.0
 var wander_pause_timer: = 1.0
 var fire_pause: = 0.0
@@ -276,6 +276,6 @@ func spawn_fireball():
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
-	object.properties.append(calculate_fireball_velocity(body.global_position - Vector2(0, 8), character_position, gravity*gravit_scale))
+	object.properties.append(calculate_fireball_velocity(body.global_position - Vector2(0, 8), character_position, gravity))
 	object.properties.append(fire == 2)
 	get_parent().create_object(object, false)
