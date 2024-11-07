@@ -26,7 +26,7 @@ var bomb_collision_mask: = 0
 var wingless_dir: = 1
 
 var gravity: = 0.0
-var gravity_scale: = 1.0
+var gravity_scale: = 2
 var wingless_spd: = 120.0
 var inv_timer: = 0.0
 var delete_timer: = 0.0
@@ -187,7 +187,7 @@ func drop_bomb():
 	if (bomb_body.get_parent() != wing_body or dropped_bomb):
 		return
 	
-	bomb_velocity.y = gravity * (gravity_scale * 16)
+	bomb_velocity.y = gravity * (gravity_scale * 8)
 	bomb_body.collision_mask = bomb_collision_mask
 	dropped_bomb = true
 
