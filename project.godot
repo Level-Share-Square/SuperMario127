@@ -1368,6 +1368,7 @@ toggle_enabled={
 2d_physics/layer_12="camera stopper"
 2d_physics/layer_13="dialogue"
 2d_physics/layer_14="projectiles"
+2d_physics/layer_15="npc"
 
 [logging]
 

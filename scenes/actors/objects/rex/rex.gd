@@ -33,8 +33,8 @@ var boost_timer: = 0.0
 var hide_timer: = 0.0
 var delete_timer: = 0.0
 var speed: = 80
-var run_speed: = 200
-var shell_max_speed: = 560
+var run_speed: = 125
+var squished_speed = 200
 var accel: = 1.25
 var jump_buffer = 0.0
 
@@ -80,6 +80,7 @@ func _ready():
 	on_visibility_changed(visibility_enabler.is_on_screen())
 	
 	player_detector.connect("body_entered", self, "detect_player")
+	player_detector.connect("body_exited", self, "lose_player")
 	player_detector.scale = Vector2(1, 1) / scale
 	Singleton.CurrentLevelData.enemies_instanced += 1
 	time_alive += float(Singleton.CurrentLevelData.enemies_instanced) / 2.0
@@ -118,6 +119,10 @@ func detect_player(body:Character)->void :
 		if kinematic_body.is_on_floor():
 			jump()
 
+func lose_player(body: Character):
+	if character != null and enabled and body != null and not dead:
+		character = null
+
 func on_visibility_changed(is_visible:bool)->void :
 	for raycast in raycasts:
 		if is_instance_valid(raycast):
@@ -154,8 +159,6 @@ func kill(hit_pos:Vector2):
 					squish = true
 			else:
 				hit_sound.play()
-				inv_timer = 1.0
-				flicker_timer = 0.01
 				var normal: = sign((kinematic_body.global_position - hit_pos).x)
 				velocity = Vector2(normal * 225, - 90)
 				position.y -= 2
@@ -328,19 +331,28 @@ func physics_process_normal(delta, is_in_platform: bool):
 				else:
 					hit_body.damage_with_knockback(kinematic_body.global_position)
 	
+	var working_speed : float
+	
+	if not squish and not is_instance_valid(character):
+		working_speed = speed 
+	elif not squish:
+		working_speed = run_speed
+	else:
+		working_speed = squished_speed
+	
 	if is_instance_valid(character):
 		facing_direction = sign(character.global_position.x - kinematic_body.global_position.x)
+		sprite.speed_scale = lerp(sprite.speed_scale, working_speed / speed, fps_util.PHYSICS_DELTA * accel)
 	else:
+		sprite.speed_scale = 1
 		wall_check_cast.cast_to = Vector2(10 * facing_direction, 0)
 		wall_check_cast2.cast_to = Vector2(10 * facing_direction, 0)
 		if wall_check_cast.is_colliding() or wall_check_cast2.is_colliding() or kinematic_body.is_on_wall():
 			facing_direction *= -1
 			position.x += 2 * facing_direction
 	
-	var _spd = speed if not squish else run_speed
-	sprite.speed_scale = 1 if not squish else 1.25
 	sprite.flip_h = (true if (facing_direction > 0) else false) if (facing_direction != 0) else sprite.flip_h
-	velocity.x = lerp(velocity.x, facing_direction * _spd, fps_util.PHYSICS_DELTA * accel)
+	velocity.x = lerp(velocity.x, facing_direction * working_speed, fps_util.PHYSICS_DELTA * accel)
 	
 	if kinematic_body.is_on_floor():
 		if (velocity.y >= 0):
