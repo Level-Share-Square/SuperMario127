@@ -267,7 +267,7 @@ action_map = [ "standing", "running" ]
 [node name="Dialogue" parent="." instance=ExtResource( 9 )]
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-collision_layer = 4
+collision_layer = 16384
 collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
