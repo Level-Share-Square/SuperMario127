@@ -48,7 +48,7 @@ func check_thumbnail():
 			http_thumbnails.add_to_queue(thumbnail_url, level_card.id)
 			http_thumbnails.load_next_image()
 		else:
-			load_custom_thumbnail(level_card.id, cached_image)
+			load_custom_thumbnail(thumbnail_url, cached_image)
 	else:
 		visibility_enabler_2d.connect("viewport_entered", self, "load_default_thumbnail", [], CONNECT_ONESHOT)
 

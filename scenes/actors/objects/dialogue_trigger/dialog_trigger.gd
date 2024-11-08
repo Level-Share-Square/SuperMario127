@@ -6,7 +6,7 @@ enum DisplayMode {Menu, Bubble, Both}
 onready var dialogue_prefab = $Dialogue
 onready var bubble_prefab = $SpeechBubble
 
-var dialogue := PoolStringArray(["0100;This is a dialogue object.", "0100;Try putting this on top of an object and see what happens!"])
+var dialogue := PoolStringArray(["0100;This is a dialogue object.", "0100;Try putting this on top of an NPC and see what happens!"])
 var character_name: String
 var speaking_radius: float = 90
 var autostart: int = 0
