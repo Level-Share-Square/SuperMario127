@@ -39,7 +39,7 @@ var dialogue_trigger: Node
 
 func _set_properties():
 	savable_properties = ["curve", "custom_path", "move_type", "walk_speed", "physics_enabled", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "path_reference", "dialogue_link"]
-	editable_properties = ["dialogue_link", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "custom_path", "walk_speed", "move_type", "physics_enabled", "path_reference"]
+	editable_properties = ["idle_expression", "idle_action", "speaking_expression", "speaking_action", "dialogue_link", "custom_path", "walk_speed", "move_type", "physics_enabled", "path_reference"]
 
 
 func _set_property_values():
@@ -86,6 +86,7 @@ func set_dialogue(dialogue_trigger: Node):
 
 func _ready():
 	stop_talking()
+	animation_handler.is_preview = is_preview
 	
 	path.global_position = global_position
 	if(invalid_curve(curve)):

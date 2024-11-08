@@ -3,7 +3,7 @@ extends NPCBase
 
 const rainbow_animation_speed := 1500
 
-onready var visibility_notifier := $KinematicBody2D/VisibilityNotifier2D
+onready var visibility_notifier = $"%VisibilityNotifier2D"
 
 onready var spots = $KinematicBody2D/AnimationHandler/Head/Spots
 onready var coat = $KinematicBody2D/AnimationHandler/Body/Coat
@@ -15,7 +15,7 @@ var rainbow: bool
 
 func _set_properties():
 	savable_properties = ["curve", "custom_path", "move_type", "walk_speed", "physics_enabled", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "path_reference", "dialogue_link", "spots_color", "coat_color", "rainbow"]
-	editable_properties = ["dialogue_link", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "custom_path", "walk_speed", "move_type", "physics_enabled", "path_reference", "spots_color", "coat_color", "rainbow"]
+	editable_properties = ["idle_expression", "idle_action", "speaking_expression", "speaking_action", "dialogue_link", "custom_path", "walk_speed", "move_type", "physics_enabled", "path_reference", "spots_color", "coat_color", "rainbow"]
 
 
 func _set_property_values():

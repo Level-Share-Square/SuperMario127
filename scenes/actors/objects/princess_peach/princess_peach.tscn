@@ -137,7 +137,7 @@ collision_layer = 16384
 position = Vector2( 0, 3 )
 
 [node name="AnimationHandler" parent="KinematicBody2D" index="1"]
-head_offsets = {
+head_positions = {
 "running": PoolVector2Array( 0, -5, 0, -8, 0, -7, 0, -5, 0, -7, 0, -6 ),
 "standing": PoolVector2Array( -1, -6, -1, -7 )
 }

@@ -43,7 +43,8 @@ static func move_level_files(level_id: String, working_folder: String, new_folde
 		move_file(save_path, new_save_path)
 	
 	var thumbnail_path: String = get_level_thumbnail_path(level_id, working_folder)
-	var new_thumbnail_path: String = get_level_thumbnail_path(level_id, new_folder)
+	var new_thumbnail_path: String = get_level_thumbnail_path(level_id, new_folder, false)
+	new_thumbnail_path += "." + thumbnail_path.get_extension()
 	if file_exists(thumbnail_path):
 		move_file(thumbnail_path, new_thumbnail_path)
 	
@@ -56,7 +57,7 @@ static func move_level_files(level_id: String, working_folder: String, new_folde
 		var file: String = directory.get_next()
 		while file != "":
 			if file.begins_with(level_id):
-				move_file(music_folder + "/" + file, new_folder + "/" + file)
+				move_file(music_folder + "/" + file, new_music_folder + "/" + file)
 			file = directory.get_next()
 	
 	var lss_id: String = lss_link_util.get_id_from_path(file_path)
