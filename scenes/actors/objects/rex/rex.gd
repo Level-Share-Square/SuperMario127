@@ -8,6 +8,7 @@ onready var hitbox_shape = $Rex/NormalShape
 onready var hitbox_shape_small = $Rex/SquishedShape
 onready var kinematic_body = $Rex
 onready var sprite = $Rex/Sprite
+onready var eye_sprite = $Rex/Sprite/Eyes
 onready var platform_detector = $Rex/PlatformDetector
 onready var visibility_enabler = $VisibilityEnabler2D
 onready var player_detector = $Rex/PlayerDetector
@@ -19,6 +20,10 @@ onready var hit_sound = $Rex/Hit
 onready var bottom_pos = $Rex/BottomPos
 onready var wall_check_cast = $Rex/WallCheck
 onready var wall_check_cast2 = $Rex/WallCheck2
+onready var left_check : RayCast2D = $Rex/LeftFallCheck
+onready var right_check : RayCast2D = $Rex/RightFallCheck
+onready var floor_left_check : RayCast2D = $Rex/LeftFloorCheck
+onready var floor_right_check : RayCast2D = $Rex/RightFloorCheck
 onready var poof_sound = $Rex/Disappear
 onready var particles = $Rex/Poof
 onready var collision_layer_area = $Rex/CollisionLayerArea
@@ -83,6 +88,9 @@ func _ready():
 	
 	player_detector.connect("body_entered", self, "detect_player")
 	player_detector.connect("body_exited", self, "lose_player")
+	
+	sprite.connect("frame_changed", self, "update_eyes")
+	
 	player_detector.scale = Vector2(1, 1) / scale
 	Singleton.CurrentLevelData.enemies_instanced += 1
 	time_alive += float(Singleton.CurrentLevelData.enemies_instanced) / 2.0
@@ -92,6 +100,12 @@ func _ready():
 	if scale.x < 0:
 		scale.x = abs(scale.x)
 		facing_direction = - facing_direction
+	
+	update_eyes()
+	
+	if mode == 1 or !enabled:
+		sprite.animation = "default"
+		eye_sprite.animation = "default"
 
 func jump():
 	position.y -= 2
@@ -144,6 +158,17 @@ func knockback_recover():
 	pass
 	knockback_affect = false
 
+func update_eyes():
+	if squish:
+		eye_sprite.animation = "walking_squished"
+	elif is_instance_valid(character):
+		eye_sprite.animation = "walking_angry"
+	else:
+		eye_sprite.animation = "walking"
+	
+	eye_sprite.flip_h = sprite.flip_h
+	eye_sprite.frame = wrapi(sprite.frame, 0, eye_sprite.frames.get_frame_count(eye_sprite.animation)-1)
+
 func kill(hit_pos:Vector2):
 	if not hit and not dead and enabled and inv_timer <= 0:
 		if is_instance_valid(kinematic_body):
@@ -159,20 +184,23 @@ func kill(hit_pos:Vector2):
 				stomp_sound.play()
 				velocity = Vector2()
 				sprite.animation = "default"
+				eye_sprite.visible = false
+				update_eyes()
 				anim_player.play("Stomped", -1, 2.0)
 				boost_timer = 0.05
 				if was_ground_pound:
 					squish = true
 			else:
-				knockback_affect = true
-				var _knockback_timer = get_tree().create_timer(.5)
-				_knockback_timer.connect("timeout", self, "knockback_recover")
-				
-				hit_sound.play()
-				var normal: = sign((kinematic_body.global_position - hit_pos).x)
-				velocity = Vector2(normal * 125, - 90)
-				position.y -= 2
-				snap = Vector2(0, 0)
+				if !knockback_affect:
+					knockback_affect = true
+					var _knockback_timer = get_tree().create_timer(.5)
+					_knockback_timer.connect("timeout", self, "knockback_recover")
+					
+					hit_sound.play()
+					var normal: = sign((kinematic_body.global_position - hit_pos).x)
+					velocity = Vector2(normal * 125, - 90)
+					position.y -= 2
+					snap = Vector2(0, 0)
 				
 				# if squish:
 				# 	flicker_timer = 0
@@ -183,7 +211,11 @@ func kill(hit_pos:Vector2):
 func _physics_process(delta:float)->void :
 	time_alive += delta
 	
-	sprite.animation = "walking" if not squish else "walking_squished"
+	if mode != 1 and enabled:
+		sprite.animation = "walking" if not squish else "walking_squished"
+	else:
+		sprite.animation = "default"
+	
 	attack_area.get_node("Collision").disabled = squish
 	attack_area_small.get_node("Collision").disabled = not squish
 	hitbox_shape.disabled = squish
@@ -352,7 +384,8 @@ func physics_process_normal(delta, is_in_platform: bool):
 	
 	if is_instance_valid(character):
 		facing_direction = sign(character.global_position.x - kinematic_body.global_position.x)
-		sprite.speed_scale = lerp(sprite.speed_scale, working_speed / speed, fps_util.PHYSICS_DELTA * accel)
+		sprite.speed_scale = lerp(sprite.speed_scale, abs(velocity.x/100)+working_speed / speed, fps_util.PHYSICS_DELTA * accel)
+		
 	else:
 		sprite.speed_scale = 1
 		wall_check_cast.cast_to = Vector2(10 * facing_direction, 0)
@@ -360,16 +393,37 @@ func physics_process_normal(delta, is_in_platform: bool):
 		if wall_check_cast.is_colliding() or wall_check_cast2.is_colliding() or kinematic_body.is_on_wall():
 			facing_direction *= -1
 			velocity.x = -velocity.x
+		
+		if !squish:
+			#check if a floor is present four tiles down, if so turn around
+			if !left_check.is_colliding():
+				facing_direction = 1
+			if !right_check.is_colliding():
+				facing_direction = -1
 	
-	if kinematic_body.is_on_floor():
+	var level_bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds
+	#makes sure rex doesn't run off the side of the level
+	if kinematic_body.global_position.x < (level_bounds.position.x * 32):
+		facing_direction = 1
+		accel = 10
+	elif kinematic_body.global_position.x > (level_bounds.end.x * 32 - 1):
+		facing_direction = -1
+		accel = 10
+	else:
+		accel = 1.25
+	
+	if kinematic_body.is_on_floor() or kinematic_body.test_move(kinematic_body.global_transform, Vector2(-0.1, 0)) or kinematic_body.test_move(kinematic_body.global_transform, Vector2(0.1, 0)):
 		if !knockback_affect:
 			sprite.flip_h = (true if (facing_direction > 0) else false) if (facing_direction != 0) else sprite.flip_h
 			velocity.x = lerp(velocity.x, facing_direction * working_speed, fps_util.PHYSICS_DELTA * accel)
 			
 		if (velocity.y >= 0):
 			jumped = false
-		snap = Vector2(0, 0 if is_in_platform or jumped else 12)
+		snap = Vector2(0, 0)
 	else:
+		if knockback_affect:
+			sprite.speed_scale = 0
+		
 		velocity.y += gravity * gravity_scale
 		snap = Vector2.ZERO
 		

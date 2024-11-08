@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://scenes/actors/objects/rex/rex.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/rex/rex.gd" type="Script" id=2]
@@ -7,6 +7,91 @@
 [ext_resource path="res://scenes/actors/objects/goomba/poof.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/goomba/poof.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/actors/objects/rex/body.gd" type="Script" id=7]
+[ext_resource path="res://scenes/actors/objects/rex/rexnormal_eyes.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/rex/rexangry_eyes.png" type="Texture" id=9]
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 25, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 25, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 8 )
+region = Rect2( 25, 0, 25, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 8 )
+region = Rect2( 50, 0, 25, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 8 )
+region = Rect2( 75, 0, 25, 32 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 8 )
+region = Rect2( 100, 0, 25, 32 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 8 )
+region = Rect2( 125, 0, 25, 32 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 8 )
+region = Rect2( 150, 0, 25, 32 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 25, 32 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 9 )
+region = Rect2( 25, 0, 25, 32 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 9 )
+region = Rect2( 50, 0, 25, 32 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 9 )
+region = Rect2( 75, 0, 25, 32 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 9 )
+region = Rect2( 100, 0, 25, 32 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 9 )
+region = Rect2( 125, 0, 25, 32 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 9 )
+region = Rect2( 150, 0, 25, 32 )
+
+[sub_resource type="SpriteFrames" id=24]
+animations = [ {
+"frames": [ SubResource( 16 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
+"loop": true,
+"name": "walking",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
+"loop": true,
+"name": "walking_angry",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "walking_squished",
+"speed": 5.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 10, 5 )
@@ -333,6 +418,11 @@ script = ExtResource( 7 )
 [node name="Sprite" type="AnimatedSprite" parent="Rex"]
 frames = ExtResource( 1 )
 
+[node name="Eyes" type="AnimatedSprite" parent="Rex/Sprite"]
+z_index = 1
+frames = SubResource( 24 )
+speed_scale = 0.0
+
 [node name="SquishedShape" type="CollisionShape2D" parent="Rex"]
 visible = false
 position = Vector2( 0, 5 )
@@ -443,6 +533,30 @@ position = Vector2( 0, -10 )
 enabled = true
 cast_to = Vector2( 0, 0 )
 collision_mask = 85
+
+[node name="LeftFallCheck" type="RayCast2D" parent="Rex"]
+position = Vector2( -8, 4 )
+enabled = true
+cast_to = Vector2( 0, 128 )
+collision_mask = 81
+
+[node name="RightFallCheck" type="RayCast2D" parent="Rex"]
+position = Vector2( 8, 4 )
+enabled = true
+cast_to = Vector2( 0, 128 )
+collision_mask = 2147483729
+
+[node name="LeftFloorCheck" type="RayCast2D" parent="Rex"]
+position = Vector2( -8, 4 )
+enabled = true
+cast_to = Vector2( 0, 16 )
+collision_mask = 81
+
+[node name="RightFloorCheck" type="RayCast2D" parent="Rex"]
+position = Vector2( 8, 4 )
+enabled = true
+cast_to = Vector2( 0, 16 )
+collision_mask = 2147483729
 
 [node name="GroundCollisionL" type="CollisionShape2D" parent="Rex"]
 position = Vector2( -8.5, 6 )

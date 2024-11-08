@@ -9,14 +9,18 @@ var level_area : LevelArea
 
 var object_cache = []
 
+var object_index = 0
+var object_count = 0
+
 func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
+	object_index = 0
+	object_count = get_child_count()
 	level_data = loaded_level_data
 	level_area = loaded_level_area
 	
 	for object in loaded_level_area.objects:
 		create_object(object, false)
-	
-	emit_signal("finished_loading")
+		object_index += 1
 		
 func set_property(object_node : GameObject, property, value):
 	object_node.set_property(property, value, true)
@@ -70,3 +74,8 @@ func move_object_to_front(object_node):
 	level_area.objects.erase(level_object)
 	level_area.objects.append(level_object)
 	move_child(object_node, get_child_count()-1)
+
+func _process(delta):
+	if object_index == object_count-1:
+		emit_signal("finished_loading")
+		print("objects loaded")
