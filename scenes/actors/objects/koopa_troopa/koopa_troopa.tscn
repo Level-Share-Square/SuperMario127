@@ -40,7 +40,6 @@ script = ExtResource( 7 )
 
 [node name="Sprite" type="AnimatedSprite" parent="Koopa"]
 frames = ExtResource( 2 )
-playing = true
 
 [node name="Color" type="AnimatedSprite" parent="Koopa/Sprite"]
 modulate = Color( 0, 1, 0, 1 )
@@ -92,13 +91,13 @@ position = Vector2( 0, 7 )
 shape = SubResource( 3 )
 
 [node name="Left" type="RayCast2D" parent="Koopa"]
-position = Vector2( -14, 14 )
+position = Vector2( -9, 14 )
 enabled = true
 cast_to = Vector2( 0, 32 )
 collision_mask = 81
 
 [node name="Right" type="RayCast2D" parent="Koopa"]
-position = Vector2( 14, 14 )
+position = Vector2( 9, 14 )
 enabled = true
 cast_to = Vector2( 0, 32 )
 collision_mask = 2147483729
@@ -110,12 +109,14 @@ max_distance = 1000.0
 bus = "Sounds"
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Koopa"]
+visible = false
 rect = Rect2( -200, -200, 400, 400 )
 
 [node name="BottomPos" type="Node2D" parent="Koopa"]
 position = Vector2( 0, 12 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
 rect = Rect2( -200, -200, 400, 400 )
 process_parent = true
 physics_process_parent = true

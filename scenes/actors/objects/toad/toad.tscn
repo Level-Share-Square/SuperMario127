@@ -251,6 +251,12 @@ animations = [ {
 [node name="Toad" instance=ExtResource( 6 )]
 script = ExtResource( 3 )
 
+[node name="KinematicBody2D" parent="." index="1"]
+collision_layer = 16384
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="KinematicBody2D" index="1"]
+rect = Rect2( -10, -16, 20, 32 )
+
 [node name="AnimationHandler" parent="KinematicBody2D" index="2"]
 head_positions = {
 "running": PoolVector2Array( 0, -2, 0, -1, -1, 0, -1, -1, 0, -2, 0, -1, -1, 0, -1, -1 ),
