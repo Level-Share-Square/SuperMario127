@@ -1,3 +1,4 @@
+tool
 extends AnimatedSprite
 
 onready var mario_sprite : AnimatedSprite = get_parent()

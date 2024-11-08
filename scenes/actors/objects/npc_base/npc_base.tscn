@@ -35,6 +35,12 @@ collision_mask = 17
 position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="KinematicBody2D"]
+unique_name_in_owner = true
+position = Vector2( 2.38419e-07, 0 )
+scale = Vector2( 1.6, 1 )
+rect = Rect2( -10, -16, 20, 32 )
+
 [node name="AnimationHandler" type="Node2D" parent="KinematicBody2D"]
 script = ExtResource( 2 )
 

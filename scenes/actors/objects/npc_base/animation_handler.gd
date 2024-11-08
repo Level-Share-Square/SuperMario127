@@ -1,7 +1,10 @@
 extends Node2D
 
 
-export var head_offsets: Dictionary
+onready var visibility_notifier = $"%VisibilityNotifier2D"
+
+export var head_positions: Dictionary
+export var expression_offsets: Dictionary
 
 onready var head = $Head
 onready var body = $Body
@@ -9,9 +12,13 @@ onready var body = $Body
 var head_anim: String
 var body_anim: String
 
+var is_preview: bool
+
 
 func _process(delta):
-	head.position = head_offsets[body_anim][body.frame]
+	if not visibility_notifier.is_on_screen() and not is_preview: return
+	
+	head.position = head_positions[body_anim][body.frame]
 	
 	head.offset = Vector2.ZERO
 	head.rotation_degrees = 0
@@ -28,7 +35,9 @@ func _process(delta):
 		)
 	else:
 		head.modulate = lerp(head.modulate, Color.white, delta * 4)
-
+	
+	if head_anim in expression_offsets:
+		head.offset = expression_offsets[head_anim]
 
 func play_expression(animation: String):
 	head_anim = animation
