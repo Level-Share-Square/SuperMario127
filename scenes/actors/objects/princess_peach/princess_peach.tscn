@@ -1,8 +1,10 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scenes/actors/objects/npc_base/npc_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/princess_peach/peach_head.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/princess_peach/peach_body.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/princess_peach/rage.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/princess_peach/rage.gd" type="Script" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -53,9 +55,9 @@ animations = [ {
 atlas = ExtResource( 2 )
 region = Rect2( 72, 0, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 24, 24 )
+region = Rect2( 144, 0, 24, 24 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 2 )
@@ -92,10 +94,10 @@ animations = [ {
 "name": "angry",
 "speed": 0.0
 }, {
-"frames": [ SubResource( 11 ) ],
-"loop": true,
+"frames": [ SubResource( 26 ) ],
+"loop": false,
 "name": "confused",
-"speed": 5.0
+"speed": 0.0
 }, {
 "frames": [ SubResource( 12 ) ],
 "loop": false,
@@ -128,6 +130,74 @@ animations = [ {
 "speed": 6.0
 } ]
 
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 48, 64 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 4 )
+region = Rect2( 48, 0, 48, 64 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 48, 64 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 4 )
+region = Rect2( 144, 0, 48, 64 )
+
+[sub_resource type="SpriteFrames" id=25]
+animations = [ {
+"frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
+"loop": true,
+"name": "default",
+"speed": 9.0
+} ]
+
+[sub_resource type="Animation" id=27]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1.1, 1.1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "pulse"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1.1, 1.1 ), Vector2( 1.2, 1.2 ) ]
+}
+
 [node name="PrincessPeach" instance=ExtResource( 1 )]
 
 [node name="KinematicBody2D" parent="." index="1"]
@@ -136,11 +206,12 @@ collision_layer = 16384
 [node name="CollisionShape2D" parent="KinematicBody2D" index="0"]
 position = Vector2( 0, 3 )
 
-[node name="AnimationHandler" parent="KinematicBody2D" index="1"]
+[node name="AnimationHandler" parent="KinematicBody2D" index="2"]
 head_positions = {
 "running": PoolVector2Array( 0, -5, 0, -8, 0, -7, 0, -5, 0, -7, 0, -6 ),
 "standing": PoolVector2Array( -1, -6, -1, -7 )
 }
+head_transforms = false
 
 [node name="Body" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler" index="0"]
 frames = SubResource( 9 )
@@ -152,3 +223,18 @@ position = Vector2( -1, -6 )
 frames = SubResource( 19 )
 animation = "smiling"
 playing = true
+
+[node name="Rage" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler" index="2"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -12 )
+scale = Vector2( 1.1, 1.1 )
+z_index = 5
+frames = SubResource( 25 )
+playing = true
+offset = Vector2( 0, -2 )
+script = ExtResource( 5 )
+visible_alpha = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody2D/AnimationHandler/Rage" index="0"]
+anims/RESET = SubResource( 27 )
+anims/pulse = SubResource( 28 )
