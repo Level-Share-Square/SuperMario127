@@ -40,7 +40,7 @@ var delete_timer: = 0.0
 var speed: = 80
 var run_speed: = 125
 var squished_speed = 200
-var accel: = 1.25
+var accel: = 2
 var jump_buffer = 0.0
 
 var facing_direction: = -1
@@ -196,9 +196,10 @@ func kill(hit_pos:Vector2):
 					var _knockback_timer = get_tree().create_timer(.5)
 					_knockback_timer.connect("timeout", self, "knockback_recover")
 					
+					sprite.frame = 1
 					hit_sound.play()
 					var normal: = sign((kinematic_body.global_position - hit_pos).x)
-					velocity = Vector2(normal * 125, - 90)
+					velocity = Vector2(normal * 125, -180)
 					position.y -= 2
 					snap = Vector2(0, 0)
 				
@@ -209,6 +210,7 @@ func kill(hit_pos:Vector2):
 				# 	dead = true
 
 func _physics_process(delta:float)->void :
+	snap = Vector2(0, 12)
 	time_alive += delta
 	
 	if mode != 1 and enabled:
@@ -383,6 +385,7 @@ func physics_process_normal(delta, is_in_platform: bool):
 		working_speed = squished_speed
 	
 	if is_instance_valid(character):
+		accel = 1
 		facing_direction = sign(character.global_position.x - kinematic_body.global_position.x)
 		sprite.speed_scale = lerp(sprite.speed_scale, abs(velocity.x/100)+working_speed / speed, fps_util.PHYSICS_DELTA * accel)
 		
@@ -410,7 +413,7 @@ func physics_process_normal(delta, is_in_platform: bool):
 		facing_direction = -1
 		accel = 10
 	else:
-		accel = 1.25
+		accel = 2
 	
 	if kinematic_body.is_on_floor() or kinematic_body.test_move(kinematic_body.global_transform, Vector2(-0.1, 0)) or kinematic_body.test_move(kinematic_body.global_transform, Vector2(0.1, 0)):
 		if !knockback_affect:
@@ -419,12 +422,12 @@ func physics_process_normal(delta, is_in_platform: bool):
 			
 		if (velocity.y >= 0):
 			jumped = false
-		snap = Vector2(0, 0)
+		snap = Vector2(0, 12)
 	else:
 		if knockback_affect:
 			sprite.speed_scale = 0
 		
-		velocity.y += gravity * gravity_scale
+		velocity.y += gravity * gravity_scale * 2
 		snap = Vector2.ZERO
 		
 	if !was_stomped and knockback_affect:

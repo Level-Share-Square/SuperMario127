@@ -2464,17 +2464,6 @@ object_size = Vector2( 16, 16 )
 icon = ExtResource( 134 )
 preview = ExtResource( 134 )
 
-[node name="Sign" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 14
-is_object = true
-object_center = Vector2( 16, 12 )
-tile_mode_offset = Vector2( 0, -4 )
-palette_icons = [ ExtResource( 507 ), ExtResource( 1259 ), ExtResource( 1260 ), ExtResource( 1262 ), ExtResource( 1261 ), ExtResource( 1263 ), ExtResource( 1411 ), ExtResource( 1410 ), ExtResource( 1407 ), ExtResource( 1406 ) ]
-palette_previews = [ ExtResource( 507 ), ExtResource( 1259 ), ExtResource( 1260 ), ExtResource( 1262 ), ExtResource( 1261 ), ExtResource( 1263 ), ExtResource( 1411 ), ExtResource( 1410 ), ExtResource( 1407 ), ExtResource( 1406 ) ]
-icon = ExtResource( 507 )
-preview = ExtResource( 507 )
-
 [node name="Water" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
 object_id = 72
@@ -2576,39 +2565,31 @@ index_in_sequence = 2
 icon = ExtResource( 1434 )
 preview = ExtResource( 1433 )
 
-[node name="Toad" type="Node" parent="PlaceableItems/SpecialGroup"]
+[node name="WindArea" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
-object_id = 127
+object_id = 129
 is_object = true
-item_name = "Toad"
-change_to = "Yoshi"
-items_in_sequence = 3
-icon = ExtResource( 1431 )
-preview = ExtResource( 1430 )
+item_name = "Wind Area"
+icon = ExtResource( 1437 )
+preview = ExtResource( 1436 )
 
-[node name="Yoshi" type="Node" parent="PlaceableItems/SpecialGroup"]
+[node name="DialogueGruop" type="Node" parent="PlaceableItems"]
+script = ExtResource( 25 )
+color = Color( 0.356863, 0.231373, 0, 1 )
+group_name = "NPCs"
+
+[node name="Sign" type="Node" parent="PlaceableItems/DialogueGruop"]
 script = ExtResource( 24 )
-object_id = 138
+object_id = 14
 is_object = true
-item_name = "Yoshi"
-change_to = "PrincessPeach"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 1503 )
-preview = ExtResource( 1503 )
+object_center = Vector2( 16, 12 )
+tile_mode_offset = Vector2( 0, -4 )
+palette_icons = [ ExtResource( 507 ), ExtResource( 1259 ), ExtResource( 1260 ), ExtResource( 1262 ), ExtResource( 1261 ), ExtResource( 1263 ), ExtResource( 1411 ), ExtResource( 1410 ), ExtResource( 1407 ), ExtResource( 1406 ) ]
+palette_previews = [ ExtResource( 507 ), ExtResource( 1259 ), ExtResource( 1260 ), ExtResource( 1262 ), ExtResource( 1261 ), ExtResource( 1263 ), ExtResource( 1411 ), ExtResource( 1410 ), ExtResource( 1407 ), ExtResource( 1406 ) ]
+icon = ExtResource( 507 )
+preview = ExtResource( 507 )
 
-[node name="PrincessPeach" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 137
-is_object = true
-item_name = "Princess Peach"
-change_to = "Toad"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 1502 )
-preview = ExtResource( 1502 )
-
-[node name="Dialogue" type="Node" parent="PlaceableItems/SpecialGroup"]
+[node name="Dialogue" type="Node" parent="PlaceableItems/DialogueGruop"]
 script = ExtResource( 24 )
 object_id = 128
 is_object = true
@@ -2618,81 +2599,48 @@ item_name = "DialogueTrigger"
 icon = ExtResource( 1432 )
 preview = ExtResource( 1435 )
 
-[node name="WindArea" type="Node" parent="PlaceableItems/SpecialGroup"]
+[node name="Toad" type="Node" parent="PlaceableItems/DialogueGruop"]
 script = ExtResource( 24 )
-object_id = 129
+object_id = 127
 is_object = true
-item_name = "Wind Area"
-icon = ExtResource( 1437 )
-preview = ExtResource( 1436 )
+item_name = "Toad"
+change_to = "RedBobOmb"
+items_in_sequence = 4
+icon = ExtResource( 1431 )
+preview = ExtResource( 1430 )
 
-[node name="TeleportGroup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 25 )
-color = Color( 0.117647, 0.686275, 0, 1 )
-group_name = "Teleport"
-
-[node name="Pipe" type="Node" parent="PlaceableItems/TeleportGroup"]
+[node name="RedBobOmb" type="Node" parent="PlaceableItems/DialogueGruop"]
 script = ExtResource( 24 )
-object_id = 23
+object_id = 139
 is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "PipeBody"
-items_in_sequence = 3
-icon = ExtResource( 110 )
-preview = ExtResource( 108 )
-
-[node name="PipeBody" type="Node" parent="PlaceableItems/TeleportGroup"]
-script = ExtResource( 24 )
-object_id = 89
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "PipeCorner"
-items_in_sequence = 3
+item_name = "Pink Bob-omb"
+change_to = "Yoshi"
+items_in_sequence = 4
 index_in_sequence = 1
-icon = ExtResource( 584 )
-preview = ExtResource( 584 )
+icon = ExtResource( 1502 )
+preview = ExtResource( 1502 )
 
-[node name="PipeCorner" type="Node" parent="PlaceableItems/TeleportGroup"]
+[node name="Yoshi" type="Node" parent="PlaceableItems/DialogueGruop"]
 script = ExtResource( 24 )
-object_id = 90
+object_id = 138
 is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "Pipe"
-items_in_sequence = 3
+item_name = "Yoshi"
+change_to = "PrincessPeach"
+items_in_sequence = 4
 index_in_sequence = 2
-icon = ExtResource( 585 )
-preview = ExtResource( 585 )
+icon = ExtResource( 1503 )
+preview = ExtResource( 1503 )
 
-[node name="Door" type="Node" parent="PlaceableItems/TeleportGroup"]
+[node name="PrincessPeach" type="Node" parent="PlaceableItems/DialogueGruop"]
 script = ExtResource( 24 )
-object_id = 48
+object_id = 137
 is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-palette_icons = [ ExtResource( 44 ), ExtResource( 751 ), ExtResource( 752 ), ExtResource( 1257 ), ExtResource( 1255 ) ]
-palette_previews = [ ExtResource( 49 ), ExtResource( 708 ), ExtResource( 707 ), ExtResource( 1258 ), ExtResource( 1256 ) ]
-icon = ExtResource( 44 )
-preview = ExtResource( 49 )
-
-[node name="StarDoor" type="Node" parent="PlaceableItems/TeleportGroup"]
-script = ExtResource( 24 )
-object_id = 113
-is_object = true
-palette_icons = [ ExtResource( 1302 ), ExtResource( 1301 ), ExtResource( 1303 ), ExtResource( 1300 ), ExtResource( 1299 ) ]
-palette_previews = [ ExtResource( 1302 ), ExtResource( 1301 ), ExtResource( 1303 ), ExtResource( 1300 ), ExtResource( 1299 ) ]
-icon = ExtResource( 1187 )
-preview = ExtResource( 847 )
-
-[node name="AreaTransition" type="Node" parent="PlaceableItems/TeleportGroup"]
-script = ExtResource( 24 )
-object_id = 112
-is_object = true
-change_to = "ZoomTrigger"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 973 )
-preview = ExtResource( 972 )
+item_name = "Princess Peach"
+change_to = "Toad"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 1502 )
+preview = ExtResource( 1502 )
 
 [node name="SwitchesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
@@ -2803,6 +2751,74 @@ items_in_sequence = 5
 index_in_sequence = 4
 icon = ExtResource( 646 )
 preview = ExtResource( 667 )
+
+[node name="TeleportGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 25 )
+color = Color( 0.117647, 0.686275, 0, 1 )
+group_name = "Teleport"
+
+[node name="Pipe" type="Node" parent="PlaceableItems/TeleportGroup"]
+script = ExtResource( 24 )
+object_id = 23
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "PipeBody"
+items_in_sequence = 3
+icon = ExtResource( 110 )
+preview = ExtResource( 108 )
+
+[node name="PipeBody" type="Node" parent="PlaceableItems/TeleportGroup"]
+script = ExtResource( 24 )
+object_id = 89
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "PipeCorner"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 584 )
+preview = ExtResource( 584 )
+
+[node name="PipeCorner" type="Node" parent="PlaceableItems/TeleportGroup"]
+script = ExtResource( 24 )
+object_id = 90
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "Pipe"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 585 )
+preview = ExtResource( 585 )
+
+[node name="Door" type="Node" parent="PlaceableItems/TeleportGroup"]
+script = ExtResource( 24 )
+object_id = 48
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+palette_icons = [ ExtResource( 44 ), ExtResource( 751 ), ExtResource( 752 ), ExtResource( 1257 ), ExtResource( 1255 ) ]
+palette_previews = [ ExtResource( 49 ), ExtResource( 708 ), ExtResource( 707 ), ExtResource( 1258 ), ExtResource( 1256 ) ]
+icon = ExtResource( 44 )
+preview = ExtResource( 49 )
+
+[node name="StarDoor" type="Node" parent="PlaceableItems/TeleportGroup"]
+script = ExtResource( 24 )
+object_id = 113
+is_object = true
+palette_icons = [ ExtResource( 1302 ), ExtResource( 1301 ), ExtResource( 1303 ), ExtResource( 1300 ), ExtResource( 1299 ) ]
+palette_previews = [ ExtResource( 1302 ), ExtResource( 1301 ), ExtResource( 1303 ), ExtResource( 1300 ), ExtResource( 1299 ) ]
+icon = ExtResource( 1187 )
+preview = ExtResource( 847 )
+
+[node name="AreaTransition" type="Node" parent="PlaceableItems/TeleportGroup"]
+script = ExtResource( 24 )
+object_id = 112
+is_object = true
+change_to = "ZoomTrigger"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 973 )
+preview = ExtResource( 972 )
 
 [node name="CollectiblesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )

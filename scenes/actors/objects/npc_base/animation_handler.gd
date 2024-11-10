@@ -6,6 +6,8 @@ onready var visibility_notifier = $"%VisibilityNotifier2D"
 export var head_positions: Dictionary
 export var expression_offsets: Dictionary
 
+export var raging_scale := 1.0
+
 onready var head = $Head
 onready var body = $Body
 
@@ -30,8 +32,8 @@ func _process(delta):
 	if head_anim == "raging":
 		head.modulate = lerp(head.modulate, Color.red, delta)
 		head.offset = Vector2(
-			rand_range(-1.0, 1.0),
-			rand_range(0, 2.0)
+			rand_range(-1.0, 1.0)*raging_scale,
+			rand_range(0, 2.0)*raging_scale
 		)
 	else:
 		head.modulate = lerp(head.modulate, Color.white, delta * 4)

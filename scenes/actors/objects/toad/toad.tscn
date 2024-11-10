@@ -254,8 +254,9 @@ script = ExtResource( 3 )
 [node name="KinematicBody2D" parent="." index="1"]
 collision_layer = 16384
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="KinematicBody2D" index="1"]
-rect = Rect2( -10, -16, 20, 32 )
+[node name="VisibilityNotifier2D" parent="KinematicBody2D" index="1"]
+position = Vector2( 0, 0 )
+scale = Vector2( 1, 1 )
 
 [node name="AnimationHandler" parent="KinematicBody2D" index="2"]
 head_positions = {

@@ -37,7 +37,7 @@ var original_position
 var delete_timer = 0.0
 var speed = 30
 var shell_max_speed = 560
-var accel = 20
+var accel = 15
 
 var facing_direction := -1
 var time_alive = 0.0

@@ -404,7 +404,7 @@ orbit_velocity_random = 0.0
 anim_speed = 1.0
 
 [node name="Rex" type="Node2D"]
-z_index = -2
+z_index = -1
 script = ExtResource( 2 )
 velocity = Vector2( 0, -64 )
 flicker_timer = -1.0
@@ -535,13 +535,13 @@ cast_to = Vector2( 0, 0 )
 collision_mask = 85
 
 [node name="LeftFallCheck" type="RayCast2D" parent="Rex"]
-position = Vector2( -8, 4 )
+position = Vector2( -16, 4 )
 enabled = true
 cast_to = Vector2( 0, 128 )
 collision_mask = 81
 
 [node name="RightFallCheck" type="RayCast2D" parent="Rex"]
-position = Vector2( 8, 4 )
+position = Vector2( 16, 4 )
 enabled = true
 cast_to = Vector2( 0, 128 )
 collision_mask = 2147483729
@@ -549,13 +549,13 @@ collision_mask = 2147483729
 [node name="LeftFloorCheck" type="RayCast2D" parent="Rex"]
 position = Vector2( -8, 4 )
 enabled = true
-cast_to = Vector2( 0, 16 )
+cast_to = Vector2( 0, 18 )
 collision_mask = 81
 
 [node name="RightFloorCheck" type="RayCast2D" parent="Rex"]
 position = Vector2( 8, 4 )
 enabled = true
-cast_to = Vector2( 0, 16 )
+cast_to = Vector2( 0, 18 )
 collision_mask = 2147483729
 
 [node name="GroundCollisionL" type="CollisionShape2D" parent="Rex"]

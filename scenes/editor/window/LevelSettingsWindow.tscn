@@ -732,7 +732,7 @@ margin_bottom = 416.0
 custom_constants/separation = 12
 
 [node name="HBoxContainer" type="HBoxContainer" parent="LevelInfo/MarginContainer/VBoxContainer"]
-margin_right = 987.0
+margin_right = 986.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 0, 64 )
 custom_constants/separation = 16
@@ -749,7 +749,7 @@ placeholder_text = "Level Name"
 
 [node name="LevelAuthor" type="LineEdit" parent="LevelInfo/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 598.0
-margin_right = 987.0
+margin_right = 986.0
 margin_bottom = 64.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0.14902, 0.188235, 0.439216, 1 )
@@ -759,14 +759,14 @@ placeholder_text = "Level Author"
 
 [node name="MarginContainer" type="MarginContainer" parent="LevelInfo/MarginContainer/VBoxContainer"]
 margin_top = 76.0
-margin_right = 987.0
+margin_right = 986.0
 margin_bottom = 112.0
 custom_constants/margin_right = 4
 custom_constants/margin_left = 4
 
 [node name="ThumbnailURL" type="LineEdit" parent="LevelInfo/MarginContainer/VBoxContainer/MarginContainer"]
 margin_left = 4.0
-margin_right = 983.0
+margin_right = 982.0
 margin_bottom = 36.0
 custom_colors/font_color = Color( 0.14902, 0.188235, 0.439216, 1 )
 custom_fonts/font = SubResource( 7 )
@@ -775,7 +775,7 @@ placeholder_text = "Thumbnail URL"
 
 [node name="Description" type="TextEdit" parent="LevelInfo/MarginContainer/VBoxContainer"]
 margin_top = 124.0
-margin_right = 987.0
+margin_right = 986.0
 margin_bottom = 400.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 17 )
@@ -811,7 +811,158 @@ margin_right = 508.0
 margin_bottom = 493.0
 text = "Back to Settings"
 
+[node name="BackgroundSettings" type="Control" parent="."]
+visible = false
+anchor_bottom = 0.06
+margin_left = 17.4044
+margin_top = 104.0
+margin_right = 1036.4
+margin_bottom = 498.0
+
+[node name="BackgroundEdit" type="Control" parent="BackgroundSettings"]
+margin_top = 30.0
+margin_right = 40.0
+margin_bottom = 70.0
+script = ExtResource( 4 )
+backgrounds_node_path = NodePath("../../../../Backgrounds")
+
+[node name="Preview" type="Control" parent="BackgroundSettings/BackgroundEdit"]
+margin_left = 80.0
+margin_right = 120.0
+margin_bottom = 40.0
+
+[node name="Outline" type="TextureRect" parent="BackgroundSettings/BackgroundEdit/Preview"]
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 798.0
+margin_bottom = 467.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+stretch_mode = 1
+
+[node name="BackgroundPreview" type="TextureRect" parent="BackgroundSettings/BackgroundEdit/Preview"]
+margin_right = 768.0
+margin_bottom = 432.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
+
+[node name="ForegroundPreview" type="TextureRect" parent="BackgroundSettings/BackgroundEdit/Preview"]
+margin_right = 768.0
+margin_bottom = 432.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="BackgroundButtons" type="Control" parent="BackgroundSettings/BackgroundEdit"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Left" type="TextureButton" parent="BackgroundSettings/BackgroundEdit/BackgroundButtons"]
+margin_left = -28.1108
+margin_right = 99.8892
+margin_bottom = 128.0
+rect_rotation = 180.0
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
+
+[node name="Right" type="TextureButton" parent="BackgroundSettings/BackgroundEdit/BackgroundButtons"]
+margin_left = 445.0
+margin_right = 573.0
+margin_bottom = 128.0
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
+
+[node name="ForegroundButtons" type="Control" parent="BackgroundSettings/BackgroundEdit"]
+margin_top = 100.0
+margin_right = 40.0
+margin_bottom = 140.0
+
+[node name="Left" type="TextureButton" parent="BackgroundSettings/BackgroundEdit/ForegroundButtons"]
+margin_left = -28.1108
+margin_top = -7.49707
+margin_right = 99.8892
+margin_bottom = 120.503
+rect_rotation = 180.0
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+button_mask = 3
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
+
+[node name="Right" type="TextureButton" parent="BackgroundSettings/BackgroundEdit/ForegroundButtons"]
+margin_left = 445.0
+margin_top = -7.497
+margin_right = 573.0
+margin_bottom = 120.503
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+button_mask = 3
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="BackgroundSettings/BackgroundEdit"]
+stream = ExtResource( 15 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="BackgroundSettings/BackgroundEdit"]
+stream = ExtResource( 13 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="LevelInfo" type="Control" parent="BackgroundSettings"]
+margin_left = -17.0
+margin_top = -104.0
+margin_right = 23.0
+margin_bottom = -64.0
+
+[node name="Gravity" type="Control" parent="BackgroundSettings"]
+margin_left = -24.0
+margin_top = 124.0
+margin_right = 16.0
+margin_bottom = 164.0
+script = ExtResource( 23 )
+
+[node name="LineEdit" type="LineEdit" parent="BackgroundSettings/Gravity"]
+margin_left = 577.0
+margin_top = 144.0
+margin_right = 772.0
+margin_bottom = 222.0
+custom_colors/font_color = Color( 0.14902, 0.188235, 0.439216, 1 )
+custom_fonts/font = SubResource( 15 )
+custom_styles/normal = SubResource( 6 )
+align = 1
+context_menu_enabled = false
+
+[node name="Label" type="Label" parent="BackgroundSettings/Gravity"]
+margin_left = 557.096
+margin_top = 220.197
+margin_right = 795.096
+margin_bottom = 292.197
+custom_fonts/font = SubResource( 14 )
+text = "Gravity"
+align = 1
+
+[node name="Back" parent="BackgroundSettings" instance=ExtResource( 21 )]
+margin_left = 15.0
+margin_top = 422.0
+margin_right = 508.0
+margin_bottom = 493.0
+text = "Back to Settings"
+
 [node name="Tween" type="Tween" parent="."]
 
 [connection signal="pressed" from="CloseButton" to="LevelInfo" method="update_vars"]
 [connection signal="pressed" from="LevelInfo/Back" to="LevelInfo" method="switch_to_settings"]
+[connection signal="pressed" from="BackgroundSettings/Back" to="LevelInfo" method="switch_to_settings"]
