@@ -15,7 +15,7 @@ var rainbow: bool
 
 
 func _set_properties():
-	savable_properties = ["curve", "custom_path", "move_type", "walk_speed", "physics_enabled", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "path_reference", "tag_link", "skin_color", "shoe_color", "rainbow", "required_shines"]
+	savable_properties = ["curve", "custom_path", "move_type", "walk_speed", "physics_enabled", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "path_reference", "tag_link", "required_shines", "skin_color", "shoe_color", "rainbow"]
 	editable_properties = ["idle_expression", "idle_action", "speaking_expression", "speaking_action", "tag_link", "custom_path", "walk_speed", "move_type", "physics_enabled", "required_shines", "path_reference", "skin_color", "shoe_color", "rainbow"]
 
 
