@@ -2,7 +2,7 @@ extends Node
 
 #TODO: Optimize
 
-signal finished_loading
+signal objects_ready
 
 var level_data : LevelData
 var level_area : LevelArea
@@ -10,17 +10,15 @@ var level_area : LevelArea
 var object_cache = []
 
 var object_index = 0
-var object_count = 0
 
 func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
 	object_index = 0
-	object_count = get_child_count()
+	
 	level_data = loaded_level_data
 	level_area = loaded_level_area
 	
 	for object in loaded_level_area.objects:
 		create_object(object, false)
-		object_index += 1
 		
 func set_property(object_node : GameObject, property, value):
 	object_node.set_property(property, value, true)
@@ -30,6 +28,7 @@ func create_object(object, add_to_data):
 	var object_scene = Singleton.CurrentLevelData.get_cached_object(object.type_id)
 	if object_scene != null:
 		var object_node = object_scene.instance()
+		object_node.connect("ready", self, "object_ready")
 		object_node.mode = mode
 		object_node.level_data = level_data
 		object_node.level_area = level_area
@@ -75,7 +74,10 @@ func move_object_to_front(object_node):
 	level_area.objects.append(level_object)
 	move_child(object_node, get_child_count()-1)
 
-func _process(delta):
-	if object_index == object_count-1:
-		emit_signal("finished_loading")
-		print("objects loaded")
+func object_ready():
+	object_index += 1
+	var object_count = level_area.objects.size()
+	
+	if object_index == object_count:
+		emit_signal("objects_ready")
+		print("Objects are all loaded!")
