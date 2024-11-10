@@ -109,8 +109,6 @@ func _ready():
 		physicsbody.set_collision_mask_bit(4, physics_enabled)
 		rect.visible = path_reference
 		
-		animation_handler.scale.x *= scale.x
-		
 		# have to wait for all the dialogue to load in first
 		for i in range(5):
 			yield(get_tree(), "idle_frame")
@@ -182,7 +180,7 @@ func _physics_process(delta):
 			if walk_speed != 0:
 				if velocity.x != 0:
 					animation_handler.play_action("running")
-					animation_handler.scale.x = sign(velocity.x*scale.x*-1)
+					animation_handler.scale.x = sign(-velocity.x)
 				else:
 					animation_handler.play_action("standing")
 			
