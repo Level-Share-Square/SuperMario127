@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scenes/actors/objects/rex/rex.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/rex/rex.gd" type="Script" id=2]
@@ -116,6 +116,9 @@ extents = Vector2( 208.896, 69.015 )
 
 [sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 30, 32 )
+
+[sub_resource type="RectangleShape2D" id=32]
+extents = Vector2( 11, 8 )
 
 [sub_resource type="Animation" id=7]
 length = 0.001
@@ -493,6 +496,16 @@ priority = 1.0
 
 [node name="Collision" type="CollisionShape2D" parent="Rex/CollisionLayerArea"]
 shape = SubResource( 15 )
+
+[node name="WaterDetector" type="Area2D" parent="Rex"]
+visible = false
+position = Vector2( 0, -7 )
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rex/WaterDetector"]
+position = Vector2( 0, 8 )
+shape = SubResource( 32 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Rex"]
 anims/RESET = SubResource( 7 )

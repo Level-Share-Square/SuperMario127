@@ -9,13 +9,11 @@ onready var fill: TextureProgress = $Resizable/Fill
 var max_shards: int
 
 func _ready():
-	# and this time, we have to wait for all the shine shard objects to load
-	# (kind of a bad solution imo)
-	for i in range(5):
-		yield(get_tree(), "physics_frame")
-#	var objects = get_node("/root").get_node("Player").get_shared_node().get_node("Objects")
-#	yield(objects, "finished_loading")
+	var objects = get_node("/root").get_node("Player").get_shared_node().get_node("Objects")
+	objects.connect("objects_ready", self, "delayed_ready")
 	
+
+func delayed_ready():
 	var variables: LevelVars = Singleton.CurrentLevelData.level_data.vars
 	max_shards = variables.max_shine_shards
 	fill.max_value = max_shards
@@ -29,7 +27,7 @@ func _ready():
 				Singleton.CurrentLevelData.area][0]
 			)
 		
-		label.text = str(max_shards)
+		label.text = str(shard_amount)
 		fill.value = shard_amount
 
 

@@ -12,6 +12,7 @@ onready var eye_sprite = $Rex/Sprite/Eyes
 onready var platform_detector = $Rex/PlatformDetector
 onready var visibility_enabler = $VisibilityEnabler2D
 onready var player_detector = $Rex/PlayerDetector
+onready var water_detector : Node2D = $Rex/WaterDetector
 onready var stomp_area = $Rex/StompDetector
 onready var stomp_area_small = $Rex/StompDetectorSmall
 onready var stomp_sound = $Rex/Stomp
@@ -47,6 +48,7 @@ var facing_direction: = -1
 
 export var velocity: Vector2 = Vector2.ZERO
 export var snap: Vector2 = Vector2(0, 12)
+export var water_scale := Vector2.ONE
 export var hit: = false
 export var squish: = false
 export var inv_timer: = -1.0
@@ -212,6 +214,8 @@ func kill(hit_pos:Vector2):
 func _physics_process(delta:float)->void :
 	snap = Vector2(0, 12)
 	time_alive += delta
+	water_scale.x = 0.95 if water_detector.get_overlapping_areas().size() > 0 else 1
+	water_scale.y = 0.25 if water_detector.get_overlapping_areas().size() > 0 else 1
 	
 	if mode != 1 and enabled:
 		sprite.animation = "walking" if not squish else "walking_squished"
@@ -327,7 +331,7 @@ func _physics_process(delta:float)->void :
 						character.set_state_by_name("BounceState", delta)
 
 func physics_process_hit(delta, is_in_platform: bool):
-	velocity.y += gravity * gravity_scale * 2
+	velocity.y += gravity * gravity_scale * 2 * water_scale.y
 	velocity = kinematic_body.move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
 	
 	if dead:
@@ -418,7 +422,7 @@ func physics_process_normal(delta, is_in_platform: bool):
 	if kinematic_body.is_on_floor() or kinematic_body.test_move(kinematic_body.global_transform, Vector2(-0.1, 0)) or kinematic_body.test_move(kinematic_body.global_transform, Vector2(0.1, 0)):
 		if !knockback_affect:
 			sprite.flip_h = (true if (facing_direction > 0) else false) if (facing_direction != 0) else sprite.flip_h
-			velocity.x = lerp(velocity.x, facing_direction * working_speed, fps_util.PHYSICS_DELTA * accel)
+			velocity.x = lerp(velocity.x, facing_direction * working_speed, fps_util.PHYSICS_DELTA * accel) * water_scale.x
 			
 		if (velocity.y >= 0):
 			jumped = false
@@ -427,7 +431,7 @@ func physics_process_normal(delta, is_in_platform: bool):
 		if knockback_affect:
 			sprite.speed_scale = 0
 		
-		velocity.y += gravity * gravity_scale * 2
+		velocity.y += gravity * gravity_scale * 2 * water_scale.y
 		snap = Vector2.ZERO
 		
 	if !was_stomped and knockback_affect:

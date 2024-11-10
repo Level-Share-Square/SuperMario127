@@ -12,6 +12,7 @@ var action: int = 0
 onready var back_button = $"../HBoxContainer/Back"
 onready var next_button = $"../HBoxContainer/Next"
 onready var remote_tag = $"../HBoxContainer/RemoteTag"
+onready var facing_dir = $"../HBoxContainer/FacingDir"
 onready var expression_sprite = $"../HBoxContainer/Expression/Sprite"
 onready var action_sprite = $"../HBoxContainer/Action/Sprite"
 onready var index_display = $"../HBoxContainer/IndexDisplay"
