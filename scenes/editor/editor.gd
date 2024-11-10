@@ -693,3 +693,6 @@ func _process(delta : float) -> void:
 		last_mouse_tile_pos = mouse_tile_pos
 		last_left_held = left_held
 		last_right_held = right_held
+
+func get_shared_node() -> Node:
+	return $Shared

@@ -16,7 +16,7 @@ var bubble_text: String = "This text appears as a speech bubble above your NPC!"
 var display_mode: int = 0
 
 var tag: String
-var remote_tag: String
+var delegate_tag: String
 
 signal start_talking
 signal stop_talking
@@ -24,8 +24,8 @@ signal change_emote(expression, action)
 
 
 func _set_properties():
-	savable_properties = ["dialogue", "character_name", "autostart", "interactable", "bubble_text", "display_mode", "tag", "remote_tag"]
-	editable_properties = ["dialogue", "bubble_text", "character_name", "display_mode", "tag", "remote_tag", "autostart", "interactable"]
+	savable_properties = ["dialogue", "character_name", "autostart", "interactable", "bubble_text", "display_mode", "tag", "delegate_tag"]
+	editable_properties = ["dialogue", "bubble_text", "character_name", "display_mode", "tag", "delegate_tag", "autostart", "interactable"]
 	
 func _set_property_values():		
 	set_property("dialogue", dialogue, true)
@@ -39,7 +39,7 @@ func _set_property_values():
 	set_property_menu("display_mode", ["option", 3, 0, ["Menu", "Speech Bubble", "Both"]])
 	
 	set_property("tag", tag, true)
-	set_property("remote_tag", remote_tag, true)
+	set_property("delegate_tag", delegate_tag, true)
 
 
 func _ready():
