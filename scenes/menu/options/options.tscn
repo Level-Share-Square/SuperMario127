@@ -414,7 +414,6 @@ default_subscreen_path = NodePath("General")
 buttons_container_path = NodePath("../BlackBar/MarginContainer/VBoxContainer")
 
 [node name="General" type="CenterContainer" parent="Subscreens"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -561,6 +560,7 @@ default_value = 1
 options = [ "Mario", "Luigi" ]
 
 [node name="Controls" type="MarginContainer" parent="Subscreens"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -746,8 +746,9 @@ custom_constants/separation = 12
 margin_right = 80.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 80, 0 )
-focus_neighbour_left = NodePath("../Default")
+focus_neighbour_left = NodePath("../SNES")
 focus_neighbour_top = NodePath("../../../Category/Player1")
+focus_neighbour_right = NodePath("../Default")
 theme_type_variation = "OptionsToggle"
 text = "None"
 script = ExtResource( 19 )
@@ -758,8 +759,9 @@ margin_left = 92.0
 margin_right = 172.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../None")
 focus_neighbour_top = NodePath("../../../Category/Hotkeys")
-focus_neighbour_right = NodePath("../None")
+focus_neighbour_right = NodePath("../SNES")
 theme_type_variation = "OptionsToggle"
 text = "Default"
 script = ExtResource( 19 )
@@ -770,7 +772,9 @@ margin_left = 184.0
 margin_right = 264.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../Default")
 focus_neighbour_top = NodePath("../../../Category/Interface")
+focus_neighbour_right = NodePath("../None")
 theme_type_variation = "OptionsToggle"
 text = "SNES"
 script = ExtResource( 19 )
@@ -803,6 +807,7 @@ script = ExtResource( 19 )
 extend_amount = 2
 
 [node name="Remapper" type="CenterContainer" parent="Subscreens/Controls/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 106.0
 margin_right = 544.0
 margin_bottom = 334.0
@@ -987,9 +992,9 @@ setting_key = "63_wing_cap"
 
 [node name="Player2" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 14.0
+margin_left = 32.0
 margin_top = 1.0
-margin_right = 530.0
+margin_right = 512.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1603,6 +1608,8 @@ margin_left = 399.0
 margin_right = 479.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../Controller")
+focus_neighbour_right = NodePath("../Keyboard")
 theme_type_variation = "OptionsToggle"
 text = "Any"
 script = ExtResource( 19 )
@@ -1720,11 +1727,13 @@ color = Color( 1, 1, 1, 0 )
 anims/RESET = SubResource( 4 )
 anims/transition = SubResource( 1 )
 
+[connection signal="screen_opened" from="." to="Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Back" to="." method="transition" binds= [ "MainMenu" ]]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/General" to="Subscreens" method="change_subscreen" binds= [ "General" ]]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Controls" to="Subscreens" method="change_subscreen" binds= [ "Controls" ]]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Storage" to="Subscreens" method="change_subscreen" binds= [ "Storage" ]]
 [connection signal="category_switched" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="update_visible_buttons"]
+[connection signal="category_switched" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" to="Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category/Player1" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" method="switch_category" binds= [ "Player1" ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category/Player2" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" method="switch_category" binds= [ "Player2" ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category/Interface" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" method="switch_category" binds= [ "Interface" ]]
@@ -1742,14 +1751,17 @@ anims/transition = SubResource( 1 )
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/DefaultHotkeys" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/hotkeys.cfg", true ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay/SwitchTabs/Button" to="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" method="set_current_tab" binds= [ 1 ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor/SwitchTabs2/Button" to="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" method="set_current_tab" binds= [ 0 ]]
-[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Remapper" method="switch_device_type" binds= [ false ]]
-[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device_type" binds= [ false ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard" method="show"]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller" method="hide"]
-[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Remapper" method="switch_device_type" binds= [ true ]]
-[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device_type" binds= [ true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Remapper" method="switch_device_type" binds= [ false ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device_type" binds= [ false ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" method="set_focus_neighbour" binds= [ 2, "../Keyboard" ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard" method="hide"]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller" method="show"]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Remapper" method="switch_device_type" binds= [ true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device_type" binds= [ true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" method="set_focus_neighbour" binds= [ 2, "../Device" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Device" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device"]
 [connection signal="ready" from="Subscreens/Storage/ModLoader" to="Subscreens/Storage/ModLoader" method="check_old_data" binds= [ false ]]
 [connection signal="pressed" from="Subscreens/Storage/VBoxContainer/OpenAppdata" to="Subscreens/Storage/ModLoader" method="open_appdata"]
 [connection signal="pressed" from="Subscreens/Storage/VBoxContainer/CleanOldData/Countdown" to="Subscreens/Storage/ModLoader" method="check_old_data" binds= [ true ]]
