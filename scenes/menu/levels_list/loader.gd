@@ -37,7 +37,6 @@ func transition_to_directory(working_folder: String):
 	thread_load_directory(working_folder)
 
 
-var first_card: BaseCard
 var is_loading: bool
 func load_directory(working_folder: String):
 	http_thumbnails.clear_queue()
@@ -45,6 +44,9 @@ func load_directory(working_folder: String):
 	
 	list_handler.working_folder = working_folder
 	list_handler.emit_signal("directory_changed", working_folder)
+	
+	var level_grid: GridContainer = list_handler.level_grid
+	level_grid.connect("child_entered_tree", list_handler, "change_focus", [], CONNECT_ONESHOT)
 	
 	print("Loading directory " + working_folder + "...")
 	is_loading = true
@@ -63,9 +65,6 @@ func load_directory(working_folder: String):
 	print("Done loading levels in directory.")
 	emit_signal("loading_finished")
 	is_loading = false
-	
-	list_handler.call_deferred("change_focus", first_card)
-	first_card = null
 
 
 func add_folder_card(
@@ -90,8 +89,6 @@ func add_folder_card(
 	)
 	
 	level_grid.call_deferred("add_child", card_node)
-	if not is_instance_valid(first_card):
-		first_card = card_node
 
 
 func add_level_card(
@@ -117,5 +114,3 @@ func add_level_card(
 	)
 	
 	level_grid.call_deferred("add_child", card_node)
-	if not is_instance_valid(first_card):
-		first_card = card_node

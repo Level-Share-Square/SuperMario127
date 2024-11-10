@@ -174,3 +174,5 @@ visible = false
 
 [node name="LevelPortal" parent="UI/Screens" instance=ExtResource( 9 )]
 visible = false
+
+[connection signal="screen_opened" from="UI/Screens/Options" to="UI/Screens/Options/Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]

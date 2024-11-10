@@ -816,9 +816,9 @@ script = ExtResource( 17 )
 category_paths = [ NodePath("Player1"), NodePath("Player2"), NodePath("Interface"), NodePath("Hotkeys/Gameplay"), NodePath("Hotkeys/Editor") ]
 
 [node name="Player1" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
-margin_left = 14.0
+margin_left = 32.0
 margin_top = 1.0
-margin_right = 530.0
+margin_right = 512.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1727,6 +1727,7 @@ color = Color( 1, 1, 1, 0 )
 anims/RESET = SubResource( 4 )
 anims/transition = SubResource( 1 )
 
+[connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3]
 [connection signal="screen_opened" from="." to="Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Back" to="." method="transition" binds= [ "MainMenu" ]]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/General" to="Subscreens" method="change_subscreen" binds= [ "General" ]]

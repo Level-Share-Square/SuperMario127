@@ -15,9 +15,8 @@ onready var level_grid := $"%LevelGrid"
 onready var level_panel := $"%LevelPanel"
 onready var old_levels := $"%OldLevels"
 onready var loader := $"%Loader"
+onready var focus = $"%Focus"
 
-export var focus_path: NodePath
-onready var focus := get_node(focus_path)
 
 ### variables
 const BASE_FOLDER: String = level_list_util.BASE_FOLDER
@@ -45,6 +44,7 @@ func change_focus(focus_node = null):
 		focus_node = level_grid.get_child(0)
 		print(focus_node)
 	focus.default_focus = focus_node
+	focus.call_deferred("focus_node")
 
 
 func insert_folder():
