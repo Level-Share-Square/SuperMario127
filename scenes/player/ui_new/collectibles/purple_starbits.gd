@@ -8,6 +8,7 @@ onready var show_max = $ShowMax
 onready var fadeout: AnimationPlayer = $Fadeout
 
 onready var collected = $HBoxContainer/HBoxContainer/Collected
+onready var slash = $HBoxContainer/HBoxContainer/Slash
 onready var required = $HBoxContainer/HBoxContainer/Required
 onready var max_label = $HBoxContainer/HBoxContainer/Required/Max
 
@@ -24,16 +25,18 @@ func _ready():
 	yield(get_tree(), "physics_frame")
 	
 	max_purples = variables.max_purple_starbits
+	variables.connect("purple_starbit_collected", self, "collect_coin")
 	
 	if max_purples > 0:
 		visible = true
 		update_required_purples()
 	
 	if required_purples > 0:
-		variables.connect("purple_starbit_collected", self, "collect_coin")
-		
 		var new_coins: int = variables.purple_starbits_collected[Singleton.CurrentLevelData.area][0]
 		update_counter(new_coins)
+	else:
+		slash.visible = false
+		required.visible = false
 
 func collect_coin(new_coins: int):
 	update_counter(new_coins)
