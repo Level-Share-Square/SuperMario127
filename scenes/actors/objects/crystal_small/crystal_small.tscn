@@ -11,7 +11,7 @@
 [ext_resource path="res://scenes/actors/objects/crystal_small/palettes/4/SGemG.png" type="Texture" id=9]
 
 [node name="Small Crystal" type="Node2D"]
-z_index = -2
+z_index = -3
 script = ExtResource( 1 )
 palette_textures = [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 4 ) ]
 

@@ -12,6 +12,9 @@
 [node name="Yoshi" instance=ExtResource( 2 )]
 script = ExtResource( 8 )
 
+[node name="KinematicBody2D" parent="." index="1"]
+collision_layer = 16384
+
 [node name="AnimationHandler" parent="KinematicBody2D" index="2"]
 position = Vector2( -1, -7 )
 head_positions = {
