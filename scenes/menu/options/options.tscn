@@ -645,12 +645,12 @@ alignment = 1
 script = ExtResource( 1 )
 remapper_path = NodePath("../../Remapper")
 buttons_by_screen = {
-"Hotkeys": [ NodePath("DefaultHotkeys") ],
-"Interface": [ NodePath("DefaultInterface") ],
-"Player1": [ NodePath("Default"), NodePath("Mario63"), NodePath("WASD"), NodePath("KBM") ],
-"Player2": [ NodePath("Default"), NodePath("Mario63"), NodePath("WASD"), NodePath("KBM") ]
+"Hotkeys": [ NodePath("Keyboard/DefaultHotkeys"), NodePath("Controller/DefaultHotkeys") ],
+"Interface": [ NodePath("Keyboard/DefaultInterface"), NodePath("Controller/DefaultInterface") ],
+"Player1": [ NodePath("Keyboard/Default"), NodePath("Keyboard/Mario63"), NodePath("Keyboard/WASD"), NodePath("Keyboard/KBM"), NodePath("Controller/None"), NodePath("Controller/Default"), NodePath("Controller/SNES") ],
+"Player2": [ NodePath("Keyboard/Default"), NodePath("Keyboard/Mario63"), NodePath("Keyboard/WASD"), NodePath("Keyboard/KBM"), NodePath("Controller/None"), NodePath("Controller/Default"), NodePath("Controller/SNES") ]
 }
-category_init = [ [ "Controls (Player 1)", "res://scenes/menu/options/controls/presets/default.cfg" ], [ "Controls (Player 2)", "res://scenes/menu/options/controls/presets/wasd.cfg" ], [ "Controls (Interface)", "res://scenes/menu/options/controls/presets/interface.cfg" ], [ "Controls (Hotkeys)", "res://scenes/menu/options/controls/presets/hotkeys.cfg" ] ]
+category_init = [ [ "Controls (Player 1)", "res://scenes/menu/options/controls/presets/default.cfg" ], [ "Controls (Player 2)", "res://scenes/menu/options/controls/presets/wasd.cfg" ], [ "Controls (Interface)", "res://scenes/menu/options/controls/presets/interface.cfg" ], [ "Controls (Hotkeys)", "res://scenes/menu/options/controls/presets/hotkeys.cfg" ], [ "Controls (Player 1) (Controller)", "res://scenes/menu/options/controls/presets/controller/default.cfg" ], [ "Controls (Player 2) (Controller)", "res://scenes/menu/options/controls/presets/controller/none.cfg" ], [ "Controls (Interface) (Controller)", "res://scenes/menu/options/controls/presets/controller/interface.cfg" ], [ "Controls (Hotkeys) (Controller)", "res://scenes/menu/options/controls/presets/controller/hotkeys.cfg" ] ]
 
 [node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset"]
 margin_left = 48.0
@@ -658,79 +658,156 @@ margin_right = 117.0
 margin_bottom = 24.0
 text = "Preset: "
 
-[node name="Default" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset"]
+[node name="Keyboard" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset"]
 margin_left = 129.0
-margin_right = 209.0
+margin_right = 496.0
+margin_bottom = 24.0
+custom_constants/separation = 12
+
+[node name="Default" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
+margin_right = 80.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 80, 0 )
 focus_neighbour_left = NodePath("../KBM")
-focus_neighbour_top = NodePath("../../Category/Player1")
+focus_neighbour_top = NodePath("../../../Category/Player1")
 theme_type_variation = "OptionsToggle"
 text = "Default"
 script = ExtResource( 19 )
 extend_amount = 2
 
-[node name="Mario63" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset"]
-margin_left = 221.0
-margin_right = 301.0
+[node name="Mario63" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
+margin_left = 92.0
+margin_right = 172.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 80, 0 )
-focus_neighbour_top = NodePath("../../Category/Player2")
+focus_neighbour_top = NodePath("../../../Category/Player2")
 theme_type_variation = "OptionsToggle"
 text = "Mario 63"
 script = ExtResource( 19 )
 extend_amount = 2
 
-[node name="WASD" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset"]
-margin_left = 313.0
-margin_right = 393.0
+[node name="WASD" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
+margin_left = 184.0
+margin_right = 264.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 80, 0 )
-focus_neighbour_top = NodePath("../../Category/Interface")
+focus_neighbour_top = NodePath("../../../Category/Interface")
 theme_type_variation = "OptionsToggle"
 text = "WASD"
 script = ExtResource( 19 )
 extend_amount = 2
 
-[node name="KBM" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset"]
-margin_left = 405.0
-margin_right = 496.0
+[node name="KBM" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
+margin_left = 276.0
+margin_right = 367.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 80, 0 )
-focus_neighbour_top = NodePath("../../Category/Hotkeys")
+focus_neighbour_top = NodePath("../../../Category/Hotkeys")
 focus_neighbour_right = NodePath("../Default")
 theme_type_variation = "OptionsToggle"
 text = "KB + Mouse"
 script = ExtResource( 19 )
 extend_amount = 2
 
-[node name="DefaultInterface" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset"]
+[node name="DefaultInterface" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
 visible = false
-margin_left = 129.0
-margin_right = 255.0
+margin_left = -373.0
+margin_right = -247.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 80, 0 )
 focus_neighbour_left = NodePath("../KBM")
-focus_neighbour_top = NodePath("../../Category/Player1")
+focus_neighbour_top = NodePath("../../../Category/Player1")
 theme_type_variation = "OptionsToggle"
 text = "Reset to Default"
 script = ExtResource( 19 )
 extend_amount = 2
 
-[node name="DefaultHotkeys" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset"]
+[node name="DefaultHotkeys" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
 visible = false
-margin_left = 129.0
-margin_right = 255.0
+margin_left = -373.0
+margin_right = -247.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 80, 0 )
 focus_neighbour_left = NodePath("../KBM")
-focus_neighbour_top = NodePath("../../Category/Player1")
+focus_neighbour_top = NodePath("../../../Category/Player1")
+theme_type_variation = "OptionsToggle"
+text = "Reset to Default"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Controller" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset"]
+visible = false
+margin_left = 180.0
+margin_right = 444.0
+margin_bottom = 24.0
+custom_constants/separation = 12
+
+[node name="None" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller"]
+margin_right = 80.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../SNES")
+focus_neighbour_top = NodePath("../../../Category/Player1")
+focus_neighbour_right = NodePath("../Default")
+theme_type_variation = "OptionsToggle"
+text = "None"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Default" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller"]
+margin_left = 92.0
+margin_right = 172.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../None")
+focus_neighbour_top = NodePath("../../../Category/Hotkeys")
+focus_neighbour_right = NodePath("../SNES")
+theme_type_variation = "OptionsToggle"
+text = "Default"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="SNES" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller"]
+margin_left = 184.0
+margin_right = 264.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../Default")
+focus_neighbour_top = NodePath("../../../Category/Interface")
+focus_neighbour_right = NodePath("../None")
+theme_type_variation = "OptionsToggle"
+text = "SNES"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="DefaultInterface" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller"]
+visible = false
+margin_left = 276.0
+margin_right = 402.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../Default")
+focus_neighbour_top = NodePath("../../../Category/Player1")
+theme_type_variation = "OptionsToggle"
+text = "Reset to Default"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="DefaultHotkeys" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller"]
+visible = false
+margin_left = -373.0
+margin_right = -247.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../Default")
+focus_neighbour_top = NodePath("../../../Category/Player1")
 theme_type_variation = "OptionsToggle"
 text = "Reset to Default"
 script = ExtResource( 19 )
 extend_amount = 2
 
 [node name="Remapper" type="CenterContainer" parent="Subscreens/Controls/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 106.0
 margin_right = 544.0
 margin_bottom = 334.0
@@ -1531,6 +1608,8 @@ margin_left = 399.0
 margin_right = 479.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../Controller")
+focus_neighbour_right = NodePath("../Keyboard")
 theme_type_variation = "OptionsToggle"
 text = "Any"
 script = ExtResource( 19 )
@@ -1648,27 +1727,42 @@ color = Color( 1, 1, 1, 0 )
 anims/RESET = SubResource( 4 )
 anims/transition = SubResource( 1 )
 
+[connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3]
+[connection signal="screen_opened" from="." to="Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Back" to="." method="transition" binds= [ "MainMenu" ]]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/General" to="Subscreens" method="change_subscreen" binds= [ "General" ]]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Controls" to="Subscreens" method="change_subscreen" binds= [ "Controls" ]]
 [connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Storage" to="Subscreens" method="change_subscreen" binds= [ "Storage" ]]
 [connection signal="category_switched" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="update_visible_buttons"]
+[connection signal="category_switched" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" to="Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category/Player1" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" method="switch_category" binds= [ "Player1" ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category/Player2" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" method="switch_category" binds= [ "Player2" ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category/Interface" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" method="switch_category" binds= [ "Interface" ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category/Hotkeys" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" method="switch_category" binds= [ "Hotkeys" ]]
-[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Default" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/default.cfg" ]]
-[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Mario63" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/mario63.cfg" ]]
-[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/WASD" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/wasd.cfg" ]]
-[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/KBM" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/kbmouse.cfg" ]]
-[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/DefaultInterface" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/interface.cfg" ]]
-[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/DefaultHotkeys" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/hotkeys.cfg" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard/Default" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/default.cfg" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard/Mario63" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/mario63.cfg" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard/WASD" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/wasd.cfg" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard/KBM" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/kbmouse.cfg" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard/DefaultInterface" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/interface.cfg" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard/DefaultHotkeys" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/hotkeys.cfg" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/None" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/none.cfg", true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/Default" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/default.cfg", true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/SNES" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/snes.cfg", true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/DefaultInterface" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/interface.cfg", true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/DefaultHotkeys" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/hotkeys.cfg", true ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay/SwitchTabs/Button" to="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" method="set_current_tab" binds= [ 1 ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor/SwitchTabs2/Button" to="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" method="set_current_tab" binds= [ 0 ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard" method="show"]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller" method="hide"]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Remapper" method="switch_device_type" binds= [ false ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device_type" binds= [ false ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" method="set_focus_neighbour" binds= [ 2, "../Keyboard" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard" method="hide"]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller" method="show"]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Remapper" method="switch_device_type" binds= [ true ]]
 [connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device_type" binds= [ true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" method="set_focus_neighbour" binds= [ 2, "../Device" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Device" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device"]
 [connection signal="ready" from="Subscreens/Storage/ModLoader" to="Subscreens/Storage/ModLoader" method="check_old_data" binds= [ false ]]
 [connection signal="pressed" from="Subscreens/Storage/VBoxContainer/OpenAppdata" to="Subscreens/Storage/ModLoader" method="open_appdata"]
 [connection signal="pressed" from="Subscreens/Storage/VBoxContainer/CleanOldData/Countdown" to="Subscreens/Storage/ModLoader" method="check_old_data" binds= [ true ]]

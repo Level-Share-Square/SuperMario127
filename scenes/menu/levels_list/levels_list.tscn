@@ -709,8 +709,8 @@ size_flags_vertical = 3
 script = ExtResource( 9 )
 
 [node name="Focus" type="Control" parent="Panel/Subscreens/LevelView"]
+unique_name_in_owner = true
 script = ExtResource( 26 )
-default_focus_path = NodePath("../../../Buttons/Back")
 
 [node name="OldLevels" type="VBoxContainer" parent="Panel/Subscreens/LevelView"]
 unique_name_in_owner = true
@@ -776,7 +776,6 @@ margin_bottom = 24.0
 [node name="ListHandler" type="Node" parent="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
 script = ExtResource( 18 )
-focus_path = NodePath("../../../Focus")
 
 [node name="Loader" type="Node" parent="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
@@ -1931,10 +1930,13 @@ script = ExtResource( 53 )
 [node name="ReturnArgs" type="Node" parent="."]
 script = ExtResource( 15 )
 
+[connection signal="screen_opened" from="." to="Panel/Subscreens/LevelView/Focus" method="focus_node" flags=3]
 [connection signal="pressed" from="Panel/Buttons/Back" to="." method="transition" binds= [ "MainMenu" ]]
 [connection signal="pressed" from="Panel/Buttons/FolderSettings" to="Panel/Subscreens/LevelView" method="transition" binds= [ "FolderSettings" ]]
 [connection signal="pressed" from="Panel/Buttons/Add" to="Panel/Subscreens/LevelView" method="transition" binds= [ "AddElement" ]]
+[connection signal="screen_opened" from="Panel/Subscreens/LevelView" to="Panel/Subscreens/LevelView/Focus" method="focus_node" flags=3]
 [connection signal="directory_changed" from="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="update_folder_name"]
+[connection signal="screen_opened" from="Panel/Subscreens/LevelInfo" to="Panel/Subscreens/LevelInfo/Focus" method="focus_node" flags=3]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/Return" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/PlayLevel" to="Panel/Subscreens/LevelInfo/LevelPanel" method="play_level"]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/EditLevel" to="Panel/Subscreens/LevelInfo/LevelPanel" method="edit_level"]
@@ -1947,6 +1949,7 @@ script = ExtResource( 15 )
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelInfo/LevelPanel" method="delete_level"]
 [connection signal="text_changed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/Icon" method="update_offset"]
+[connection signal="screen_opened" from="Panel/Subscreens/AddElement" to="Panel/Subscreens/AddElement/Focus" method="focus_node" flags=3]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/Return" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="change_focus"]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/Return" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewLevel" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="insert_level"]
@@ -1956,6 +1959,7 @@ script = ExtResource( 15 )
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement/Control/ElementAddButtons" method="import_level_code"]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/Panel/JSFilePicker" to="Panel/Subscreens/AddElement/Control/Panel/JSFilePicker" method="open_file_picker"]
+[connection signal="screen_opened" from="Panel/Subscreens/FolderSettings" to="Panel/Subscreens/FolderSettings/Focus" method="focus_node" flags=3]
 [connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/Return" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="change_focus"]
 [connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/Return" to="Panel/Subscreens/FolderSettings" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/RenameFolder" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="rename_folder"]

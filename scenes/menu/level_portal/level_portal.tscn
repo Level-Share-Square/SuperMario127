@@ -2000,7 +2000,7 @@ script = ExtResource( 8 )
 
 [node name="Focus" type="Control" parent="Subscreens/LevelPage"]
 script = ExtResource( 7 )
-default_focus_path = NodePath("../../../Buttons/LevelPage/Back")
+default_focus_path = NodePath("../ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/Play")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Subscreens/LevelPage"]
 anchor_right = 1.0
@@ -3124,10 +3124,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 640.0
-margin_top = 32.0
-margin_right = 768.0
-margin_bottom = 464.0
+margin_left = -128.0
+margin_top = -184.0
+margin_bottom = 248.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
 script = ExtResource( 17 )
@@ -3227,10 +3226,12 @@ anims/RESET = SubResource( 203 )
 anims/transition = SubResource( 202 )
 
 [connection signal="screen_opened" from="." to="Subscreens" method="screen_change" binds= [ "LevelList" ]]
+[connection signal="screen_opened" from="." to="Subscreens/LevelList/Focus" method="focus_node" flags=3]
 [connection signal="screen_opened" from="." to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search" method="screen_opened"]
 [connection signal="screen_opened" from="." to="AccountInfo" method="load_info"]
 [connection signal="screen_opened" from="." to="HTTPRequest" method="load_page"]
 [connection signal="screen_changed" from="Subscreens" to="Buttons" method="screen_changed"]
+[connection signal="screen_opened" from="Subscreens/LevelList" to="Subscreens/LevelList/Focus" method="focus_node" flags=3]
 [connection signal="resized" from="Subscreens/LevelList/ScrollContainer/MarginContainer" to="Subscreens/LevelList/ScrollContainer/MarginContainer" method="resized"]
 [connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search" method="search"]
 [connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Default" method="set_pressed_no_signal" binds= [ true ]]
@@ -3239,6 +3240,7 @@ anims/transition = SubResource( 202 )
 [connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Featured" to="HTTPRequest" method="change_page_type" binds= [ 1 ]]
 [connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Favorites/Favorited" to="HTTPRequest" method="change_page_type" binds= [ 2 ]]
 [connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage" method="go"]
+[connection signal="screen_opened" from="Subscreens/LevelPage" to="Subscreens/LevelPage/Focus" method="focus_node" flags=3]
 [connection signal="screen_opened" from="Subscreens/LevelPage" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Comments" method="screen_opened"]
 [connection signal="resized" from="Subscreens/LevelPage/ScrollContainer/MarginContainer" to="Subscreens/LevelPage/ScrollContainer/MarginContainer" method="resized"]
 [connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/VBoxContainer/Website" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="open_website"]
@@ -3248,6 +3250,7 @@ anims/transition = SubResource( 202 )
 [connection signal="level_loaded" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating" method="level_loaded"]
 [connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description/VBoxContainer/Button" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description" method="toggle_expand"]
 [connection signal="mouse_exited" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating" method="mouse_exited"]
+[connection signal="screen_opened" from="Subscreens/Login" to="Subscreens/Login/Focus" method="focus_node" flags=3]
 [connection signal="resized" from="Subscreens/Login/MarginContainer" to="Subscreens/Login/MarginContainer" method="resized"]
 [connection signal="button_down" from="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Show" to="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Password" method="set_secret" binds= [ false ]]
 [connection signal="button_up" from="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Show" to="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Password" method="set_secret" binds= [ true ]]

@@ -28,8 +28,9 @@ func _ready():
 	toggle_secret(\"secret\", LocalSettings.load_setting(\"General\", \"secret\", false))
 	LocalSettings.connect(\"setting_changed\", self, \"toggle_secret\")
 
-func toggle_secret(key: String, secret_enabled: bool):
+func toggle_secret(key: String, secret_enabled):
 	if key != \"secret\": return
+	if not secret_enabled is bool: return
 	
 	show_node.visible = secret_enabled
 	if is_instance_valid(hide_node):
@@ -72,8 +73,9 @@ func _ready():
 	toggle_secret(\"secret\", LocalSettings.load_setting(\"General\", \"secret\", false))
 	LocalSettings.connect(\"setting_changed\", self, \"toggle_secret\")
 
-func toggle_secret(key: String, secret_enabled: bool):
+func toggle_secret(key: String, secret_enabled):
 	if key != \"secret\": return
+	if not secret_enabled is bool: return
 	
 	main_menu.music_id = 67 if secret_enabled else 31
 	Singleton.Music.change_song(Singleton.Music.last_song, main_menu.music_id)
@@ -172,3 +174,5 @@ visible = false
 
 [node name="LevelPortal" parent="UI/Screens" instance=ExtResource( 9 )]
 visible = false
+
+[connection signal="screen_opened" from="UI/Screens/Options" to="UI/Screens/Options/Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]

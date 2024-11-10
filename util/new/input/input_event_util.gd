@@ -84,6 +84,11 @@ static func is_valid_input_event(event_class: String, is_controller: bool) -> bo
 	return false
 
 
+static func is_controller_input(event_dict: Dictionary) -> bool:
+	if not "input_type" in event_dict: return false
+	return event_dict.input_type == JOYPAD_BUTTON or event_dict.input_type == JOYPAD_MOTION
+	
+
 ## For getting human-readable names from button_index variables.
 const UNKNOWN = "Unknown"
 const MOUSE_BUTTONS: Array = [

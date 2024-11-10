@@ -3,14 +3,15 @@ extends Control
 signal menu_opened
 signal menu_closed
 
-const TYPE_SPEED = 0.035
+const TYPE_SPEED: float = 0.035
 
 var open := false
-var normal_pos : Vector2
+var normal_pos: Vector2
 var transition_speed := 6.0
 
-var character : Character
-var dialogue_obj : Node2D
+var character: Character
+var dialogue_obj: Node2D
+var stored_velocity: Vector2
 
 onready var label = $VBoxContainer/MarginContainer/RichTextLabel
 onready var close_label = $VBoxContainer/CloseLabel
@@ -107,6 +108,10 @@ func close():
 	
 	label.percent_visible = 0
 	menu_close.play()
+	
+	character.velocity = stored_velocity
+	stored_velocity = Vector2.ZERO
+	
 	character = null
 	dialogue_obj = null
 	emit_signal("menu_closed")

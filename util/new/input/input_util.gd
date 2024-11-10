@@ -17,7 +17,7 @@ static func add_to_keybind(event: Dictionary, keybind_info: Array, is_controller
 	
 	if not duplicate_found: 
 		keybind_array.append(event)
-		input_map_util.add_input(input_key, player_id, event)
+		input_map_util.add_input(input_key, player_id, event, input_group)
 		input_settings_util.change_setting(input_group, input_key, keybind_array, is_controller)
 
 
@@ -32,5 +32,5 @@ static func reset_keybind(keybind_info: Array, is_controller: bool):
 	# if you clear the controller keybinds... it should still have the keyboard ones and vice versa
 	var keybind_array: Array = []
 	keybind_array += input_settings_util.get_setting_partial(input_group, input_key, not is_controller)
-	input_map_util.add_input_from_array(input_key, player_id, keybind_array)
+	input_map_util.add_input_from_array(input_key, player_id, keybind_array, input_group)
 

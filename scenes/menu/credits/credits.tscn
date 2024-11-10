@@ -228,6 +228,7 @@ texture = SubResource( 6 )
 expand = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_bottom = 1.0
 margin_top = 432.0
 margin_right = 768.0
@@ -705,5 +706,6 @@ anims/roll = SubResource( 2 )
 anims/RESET = SubResource( 3 )
 anims/transition = SubResource( 4 )
 
+[connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Speed" to="ButtonFunctions" method="toggle_speed" binds= [ "MarginContainer/VBoxContainer/Speed" ]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Skip" to="." method="transition" binds= [ "MainMenu" ]]

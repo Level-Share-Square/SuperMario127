@@ -35,7 +35,6 @@ var has_been_read := false
 var interactable := true
 var body_overlapping := false
 var character : Character
-var stored_velocity : Vector2 = Vector2.ZERO
 var parent
 
 var normal_pos : Vector2
@@ -112,6 +111,7 @@ func open_remote_menu(new_char: Character):
 		"open_menu_conditional", new_char, remote_tag
 	)
 
+
 func open_menu_conditional(new_char: Character, compare_tag: String):
 	if tag != compare_tag: return
 	open_menu(new_char)
@@ -155,6 +155,7 @@ func autostart_dialogue(body):
 	if autostart > AUTOSTART_OFF and body.name.begins_with("PlayerCollision"):
 		if autostart == AUTOSTART_ONESHOT and has_been_read == true: return
 		
+		dialogue_menu.stored_velocity = body.get_parent().velocity
 		if remote_tag == "" or remote_tag == tag:
 			open_menu(body.get_parent())
 		else:
@@ -180,7 +181,7 @@ func area_exited(body):
 		area_parent.disconnect("message_appear", parent, "start_talking")
 		area_parent.disconnect("message_disappear", parent, "stop_talking")
 
-func setup_char(keep_velocity: bool = false):
+func setup_char():
 	connect_menu_oneshot()
 	
 	# flip mario to face this object
@@ -189,8 +190,6 @@ func setup_char(keep_velocity: bool = false):
 	character.set_dive_collision(false)
 	character.invulnerable = true 
 	character.controllable = false
-	if keep_velocity:
-		stored_velocity = character.velocity
 	character.velocity = Vector2.ZERO
 	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
 	character.set_inter_player_collision(false)
@@ -208,11 +207,9 @@ func setup_char(keep_velocity: bool = false):
 	character.movable = false
 
 func restore_control():
-	character.velocity = Vector2.ZERO
 	character.invulnerable = false 
 	character.controllable = true
 	character.movable = true
-	character.velocity = stored_velocity
 	
 	character.get_state_node("JumpState").jump_buffer = 0 # prevent character from jumping right after closing menu
 	character.inputs[Character.input_names.jump][1] = false

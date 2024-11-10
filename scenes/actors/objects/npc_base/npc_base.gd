@@ -21,7 +21,8 @@ var walk_speed: float = 0
 var physics_enabled: bool = true
 
 var path_reference: bool = false
-var dialogue_link: String
+var tag_link: String
+var required_shines: int
 
 var speaking_expression: int = 1
 var speaking_action: int = 0
@@ -38,8 +39,8 @@ var dialogue_trigger: Node
 
 
 func _set_properties():
-	savable_properties = ["curve", "custom_path", "move_type", "walk_speed", "physics_enabled", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "path_reference", "dialogue_link"]
-	editable_properties = ["idle_expression", "idle_action", "speaking_expression", "speaking_action", "dialogue_link", "custom_path", "walk_speed", "move_type", "physics_enabled", "path_reference"]
+	savable_properties = ["curve", "custom_path", "move_type", "walk_speed", "physics_enabled", "idle_expression", "idle_action", "speaking_expression", "speaking_action", "path_reference", "tag_link", "required_shines"]
+	editable_properties = ["idle_expression", "idle_action", "speaking_expression", "speaking_action", "tag_link", "custom_path", "walk_speed", "move_type", "physics_enabled", "required_shines", "path_reference"]
 
 
 func _set_property_values():
@@ -61,7 +62,8 @@ func _set_property_values():
 	set_property_menu("speaking_action", ["option", action_map.size(), 0, action_map])
 	
 	set_property("path_reference", path_reference, true)
-	set_property("dialogue_link", dialogue_link, true)
+	set_property("tag_link", tag_link, true)
+	set_property("required_shines", required_shines, true)
 
 
 func get_dialogue_from_tag(tag: String) -> Node:
@@ -113,8 +115,8 @@ func _ready():
 		for i in range(5):
 			yield(get_tree(), "idle_frame")
 		
-		if dialogue_link != "":
-			var dialogue_obj: Node = get_dialogue_from_tag(dialogue_link)
+		if tag_link != "":
+			var dialogue_obj: Node = get_dialogue_from_tag(tag_link)
 			if is_instance_valid(dialogue_obj):
 				set_dialogue(dialogue_obj.get_parent())
 		else:
@@ -123,6 +125,11 @@ func _ready():
 				for area in overlapping_areas:
 					set_dialogue(area.get_parent().get_parent())
 					break
+		
+		if required_shines > 0:
+			var collected_shines: int = Singleton.CurrentLevelData.level_info.collected_shines.values().count(true)
+			if collected_shines < required_shines:
+				queue_free()
 
 
 func invalid_curve(check : Curve2D):

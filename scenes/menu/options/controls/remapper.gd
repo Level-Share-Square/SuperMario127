@@ -42,16 +42,19 @@ func reset_keybind(keybind: VBoxContainer):
 func load_all_keybinds():
 	for i in range(category_paths.size()):
 		var category: Container = get_node(category_paths[i])
-		
-		for keybind in category.get_children():
-			if keybind is KeybindButton:
-				var keybind_array: Array = [] 
-				keybind_array += input_settings_util.get_setting(keybind.input_group, keybind.input_key)
-				input_map_util.clear_input(keybind.input_key, keybind.player_id)
-				input_map_util.add_input_from_array(keybind.input_key, keybind.player_id, keybind_array)
-				
-				keybind.is_controller = is_controller
-				keybind.change_button_text()
+		load_category(category)
+
+
+func load_category(category: Container):
+	for keybind in category.get_children():
+		if keybind is KeybindButton:
+			var keybind_array: Array = [] 
+			keybind_array += input_settings_util.get_setting(keybind.input_group, keybind.input_key)
+			input_map_util.clear_input(keybind.input_key, keybind.player_id)
+			input_map_util.add_input_from_array(keybind.input_key, keybind.player_id, keybind_array, keybind.input_group)
+			
+			keybind.is_controller = is_controller
+			keybind.change_button_text()
 
 
 func start_listening(keybind: VBoxContainer, parent: GridContainer):

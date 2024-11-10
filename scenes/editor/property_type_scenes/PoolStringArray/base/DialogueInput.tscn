@@ -329,10 +329,11 @@ margin_bottom = 12.0
 
 [node name="Tween" type="Tween" parent="."]
 
-[connection signal="pressed" from="Contents/HBoxContainer/Back" to="Contents/SaveButton" method="change_page" binds= [ -1 ]]
+[connection signal="pressed" from="Contents/HBoxContainer/Back" to="Contents/SaveButton" method="change_page" flags=3 binds= [ -1 ]]
 [connection signal="pressed" from="Contents/HBoxContainer/Back" to="Contents/SaveButton" method="save_page"]
-[connection signal="pressed" from="Contents/HBoxContainer/Next" to="Contents/SaveButton" method="change_page" binds= [ 1 ]]
+[connection signal="pressed" from="Contents/HBoxContainer/Next" to="Contents/SaveButton" method="change_page" flags=3 binds= [ 1 ]]
 [connection signal="pressed" from="Contents/HBoxContainer/Next" to="Contents/SaveButton" method="save_page"]
+[connection signal="focus_exited" from="Contents/HBoxContainer/RemoteTag" to="Contents/SaveButton" method="save_page"]
 [connection signal="pressed" from="Contents/HBoxContainer/Expression" to="Contents/SaveButton" method="cycle_expression"]
 [connection signal="pressed" from="Contents/HBoxContainer/Action" to="Contents/SaveButton" method="cycle_action"]
 [connection signal="pressed" from="Contents/HBoxContainer/Add" to="Contents/SaveButton" method="add_page"]

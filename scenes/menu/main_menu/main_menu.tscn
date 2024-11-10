@@ -301,6 +301,7 @@ rect_min_size = Vector2( 232, 0 )
 alignment = 2
 
 [node name="DevLevels" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 20.0
 margin_right = 237.0
 margin_bottom = 52.0
@@ -327,6 +328,7 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="LSS" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 68.0
 margin_right = 237.0
 margin_bottom = 100.0
@@ -362,6 +364,7 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="SavedLevels" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 116.0
 margin_right = 237.0
 margin_bottom = 148.0
@@ -460,6 +463,7 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 margin_left = 93.0
 margin_right = 129.0
 margin_bottom = 32.0
@@ -536,6 +540,7 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="Credits" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 margin_left = 177.0
 margin_right = 213.0
 margin_bottom = 32.0
@@ -666,10 +671,16 @@ grow_vertical = 0
 anims/RESET = SubResource( 3 )
 anims/transition = SubResource( 4 )
 
+[connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3 binds= [ "" ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/DevLevels" to="Focus" method="set_default_focus" binds= [ "%DevLevels" ]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/LSS" to="." method="transition" binds= [ "LevelPortal" ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/LSS" to="Focus" method="set_default_focus" binds= [ "%LSS" ]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/SavedLevels" to="." method="transition" binds= [ "LevelsList" ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SavedLevels" to="Focus" method="set_default_focus" binds= [ "%SavedLevels" ]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Exit/Countdown" to="ButtonFunctions" method="exit_game"]
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/HBoxContainer/Exit/Countdown" to="MarginContainer/VBoxContainer/HBoxContainer/Exit/Icon" method="update_offset"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Options" to="." method="transition" binds= [ "Options" ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Options" to="Focus" method="set_default_focus" binds= [ "%Options" ]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Discord" to="ButtonFunctions" method="open_discord"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Credits" to="." method="transition" binds= [ "Credits" ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Credits" to="Focus" method="set_default_focus" binds= [ "%Credits" ]]
