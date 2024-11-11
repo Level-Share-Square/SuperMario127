@@ -104,6 +104,7 @@ func exit_teleport(obj : Array):
 		if transition_character_data.size() > 0:
 			character.health = transition_character_data[0]
 			character.health_shards = transition_character_data[1]
+			character.emit_signal("health_changed", character.health, character.health_shards)
 			if transition_character_data[2] != null:
 				character.set_nozzle(transition_character_data[2])
 			character.fuel = transition_character_data[3]
