@@ -27,8 +27,21 @@ func _set_property_values():
 	set_property("cycle_timer", cycle_timer)
 	set_property("cycle_offset", cycle_offset)
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.is_pressed() and hovered:
+		if event.button_index == 4: # Mouse wheel up
+			offset -= 8
+			set_property("offset", offset)
+		elif event.button_index == 5: # Mouse wheel down
+			offset += 8
+			set_property("offset", offset)
+
 func _ready():
 	get_parent().connect("objects_ready", self, "ready_synced")
+  
+	use_area.connect("mouse_entered", self, "_on_UseArea_mouse_entered")
+	use_area.connect("mouse_exited", self, "_on_UseArea_mouse_exited")
+
 	connect("property_changed", self, "_on_property_changed")
 	if enabled:
 		var _connect = use_area.connect("body_entered", self, "set_liquid_level")
