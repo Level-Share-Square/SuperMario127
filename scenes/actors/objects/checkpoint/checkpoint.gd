@@ -68,6 +68,7 @@ func set_checkpoint(body):
 			
 		Singleton.CheckpointSaved.switch_state = Singleton.CurrentLevelData.level_data.vars.switch_state
 	Singleton.CheckpointSaved.liquid_positions = Singleton.CurrentLevelData.level_data.vars.liquid_positions
+	Singleton.CheckpointSaved.activated_shine_ids = Singleton.CurrentLevelData.level_data.vars.activated_shine_ids
 	
 	for checkpoint in Singleton.CurrentLevelData.level_data.vars.checkpoints:
 		if checkpoint[1] != self:

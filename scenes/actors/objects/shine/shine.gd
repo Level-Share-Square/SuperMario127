@@ -22,6 +22,7 @@ onready var ghost : Sprite = $Ghost
 onready var area : Area2D = $Area2D
 onready var unpause_timer : Timer = $UnpauseTimer
 onready var collect_sound : AudioStreamPlayer = $CollectSound
+onready var appear_sound = $AppearSound
 onready var ambient_sound : AudioStreamPlayer = $AmbientSound
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var current_scene : Node = get_tree().current_scene
@@ -168,15 +169,17 @@ func _physics_process(_delta : float) -> void:
 		
 	if mode != 1:
 		var camera : Camera2D = current_scene.get_node(current_scene.camera)
+		var do_animation: bool = not (id in Singleton.CurrentLevelData.level_data.vars.activated_shine_ids)
+		
 		if red_coins_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_red_coins > 0:
 			if Singleton.CurrentLevelData.level_data.vars.red_coins_collected[0] == Singleton.CurrentLevelData.level_data.vars.max_red_coins:
-				activate_shine()
+				activate_shine(do_animation)
 		if shine_shards_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_shine_shards > 0:
 			if Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][0] == Singleton.CurrentLevelData.level_data.vars.max_shine_shards:
-				activate_shine()
+				activate_shine(do_animation)
 		if purple_starbits_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_purple_starbits > 0:
 			if Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0] >= required_purples:
-				activate_shine()
+				activate_shine(do_animation)
 		if !collected:
 			if !activated:
 				ambient_sound.playing = false
@@ -204,34 +207,40 @@ func _physics_process(_delta : float) -> void:
 		if character.is_grounded():
 			start_shine_dance() #shine dance setup also disables physics process, so it's only called once
 
-func activate_shine() -> void:
+func activate_shine(do_animation: bool = true) -> void:
 	activated = true
 	
-	while current_scene.character == null:
-		yield(get_tree(), "idle_frame")
-	var character = current_scene.get_node(current_scene.character)
-	
-	while !character.movable or !character.controllable:
-		yield(get_tree(), "idle_frame")
-	
-	animation_player.play("appear")
+	if do_animation:
+		Singleton.CurrentLevelData.level_data.vars.activate_shine(id)
+		
+		while current_scene.character == null:
+			yield(get_tree(), "idle_frame")
+		var character = current_scene.get_node(current_scene.character)
+		
+		while !character.movable or !character.controllable:
+			yield(get_tree(), "idle_frame")
+		
+		animation_player.play("appear")
 
-	var camera = current_scene.get_node(current_scene.camera)
-	Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, 0.5)
-	pause_mode = PAUSE_MODE_PROCESS
-	get_tree().paused = true
-	Singleton.CurrentLevelData.can_pause = false
-	
-	yield(get_tree().create_timer(0.5), "timeout")
-	
-	camera.focus_on = self
-	camera.auto_move = false
-	camera.global_position = global_position
-	camera.skip_to_player = true
-	
-	unpause_timer.start()
-	# warning-ignore: return_value_discarded
-	unpause_timer.connect("timeout", self, "unpause_game")
+		var camera = current_scene.get_node(current_scene.camera)
+		Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, 0.5)
+		pause_mode = PAUSE_MODE_PROCESS
+		get_tree().paused = true
+		Singleton.CurrentLevelData.can_pause = false
+		
+		yield(get_tree().create_timer(0.5), "timeout")
+		
+		camera.focus_on = self
+		camera.auto_move = false
+		camera.global_position = global_position
+		camera.skip_to_player = true
+		
+		unpause_timer.start()
+		# warning-ignore: return_value_discarded
+		unpause_timer.connect("timeout", self, "unpause_game")
+	else:
+		appear_sound.volume_db = -80
+		animation_player.play("appear", -1, INF)
 
 # unpauses the game after the activate shine cutscene is done
 func unpause_game() -> void:

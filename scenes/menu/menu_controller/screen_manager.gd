@@ -18,7 +18,7 @@ func _ready():
 		if screen.visible:
 			# do open animation sped-up so its visible if the
 			# reset vars normally make it invisible
-			screen.animation_player.play("transition", -1, -9999999, true)
+			screen.animation_player.play("transition", -1, -INF, true)
 			screen.emit_signal("screen_opened")
 
 

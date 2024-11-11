@@ -29,6 +29,7 @@ var checkpoints = []
 var current_liquid_id = 0
 var last_red_coin_id = 0
 var switch_state : Array = []
+var activated_shine_ids := []
 
 func reload():
 	coins_collected = Singleton.CheckpointSaved.current_coins
@@ -38,6 +39,7 @@ func reload():
 	nozzles_collected = Singleton.CheckpointSaved.nozzles_collected.duplicate(true)
 	liquid_positions = Singleton.CheckpointSaved.liquid_positions.duplicate(true)
 	switch_state = Singleton.CheckpointSaved.switch_state.duplicate(true)
+	activated_shine_ids = Singleton.CheckpointSaved.activated_shine_ids.duplicate(true)
 	required_purple_starbits = []
 	for area in Singleton.CurrentLevelData.level_data.areas:
 		required_purple_starbits.append([0])
@@ -102,6 +104,10 @@ func collect_purple_starbit(id: int):
 	purple_starbits_collected[area][0] += 1
 	purple_starbits_collected[area][1].append(id)
 	emit_signal("purple_starbit_collected", purple_starbits_collected[area][0])
+
+func activate_shine(id: int):
+	if id in activated_shine_ids: return
+	activated_shine_ids.append(id)
 
 #func set_switch_state(var channel : int, value : bool):
 #	switch_state[channel] = value
