@@ -1931,6 +1931,7 @@ script = ExtResource( 53 )
 script = ExtResource( 15 )
 
 [connection signal="screen_opened" from="." to="Panel/Subscreens/LevelView/Focus" method="focus_node" flags=3]
+[connection signal="screen_opened" from="." to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="screen_opened"]
 [connection signal="pressed" from="Panel/Buttons/Back" to="." method="transition" binds= [ "MainMenu" ]]
 [connection signal="pressed" from="Panel/Buttons/FolderSettings" to="Panel/Subscreens/LevelView" method="transition" binds= [ "FolderSettings" ]]
 [connection signal="pressed" from="Panel/Buttons/Add" to="Panel/Subscreens/LevelView" method="transition" binds= [ "AddElement" ]]

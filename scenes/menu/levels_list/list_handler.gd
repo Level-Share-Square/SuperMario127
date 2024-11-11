@@ -73,3 +73,15 @@ func insert_level(level_code: String = "", folder: String = working_folder):
 func remove_level(level_id: String, folder: String = working_folder):
 	level_list_util.wipe_level_files(level_id, folder)
 	level_grid.get_node(level_id).call_deferred("queue_free")
+
+
+var prev_level_sort: Array
+func screen_opened():
+	var sort_dict: Dictionary = sort_file_util.load_sort_file(BASE_FOLDER)
+	var level_sort: Array = sort_dict.get(sort_file_util.LEVELS, [])
+	
+	if prev_level_sort != [] and level_sort.size() != prev_level_sort.size():
+		loader.thread_load_directory(BASE_FOLDER)
+	
+	prev_level_sort = level_sort
+	
