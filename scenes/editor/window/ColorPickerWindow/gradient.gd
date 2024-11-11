@@ -29,7 +29,9 @@ func _input(event):
 	
 	var new_color = color_wheel.base_color
 	new_color.v = value
-	color_manager.set_value(new_color)
+	color_manager.set_value(
+		Color(new_color, float(color_manager.a_edit_node.text) / 255)
+	)
 	new_color_preview.modulate = new_color
 	color_wheel.notify_property_manager()
 
