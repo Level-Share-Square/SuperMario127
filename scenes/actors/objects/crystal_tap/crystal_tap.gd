@@ -45,8 +45,9 @@ func ready_synced():
 		if auto_activate:
 			set_liquid_level(null)
 		
-		var timer = get_tree().create_timer(cycle_offset+cycle_timer, false)
-		timer.connect("timeout", self, "autoset_liquid_level")
+		if cycle_timer > 0:
+			var timer = get_tree().create_timer(cycle_offset+cycle_timer, false)
+			timer.connect("timeout", self, "autoset_liquid_level")
 
 func _on_property_changed(key, value):
 	

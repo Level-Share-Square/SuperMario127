@@ -27,7 +27,7 @@ func delayed_ready():
 				Singleton.CurrentLevelData.area][0]
 			)
 		
-		label.text = str(shard_amount)
+		label.text = str(max_shards-shard_amount)
 		fill.value = shard_amount
 
 

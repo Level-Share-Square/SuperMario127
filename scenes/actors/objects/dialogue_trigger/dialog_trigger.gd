@@ -72,3 +72,4 @@ func menu_closed():
 
 func change_emote(expression, action):
 	emit_signal("change_emote", expression, action)
+		
