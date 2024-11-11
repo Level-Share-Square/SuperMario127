@@ -25,7 +25,7 @@ func quit_to_menu_with_transition(screen_to_open : String = ""):
 	# after the transition finishes fading out, switch to the menu before starting the fade in
 	# warning-ignore: return_value_discarded
 	Singleton.SceneTransitions.connect("transition_finished", self, "quit_to_menu", [screen_to_open], CONNECT_ONESHOT)
-	Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Singleton.SceneTransitions.chosen_transition_color)
+	Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)
 
 
 
@@ -75,11 +75,11 @@ func start_level(level_info: LevelInfo, level_id: String, working_folder: String
 	var _connect = Singleton.SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [goal_scene], CONNECT_ONESHOT)
 	
 	Singleton.SceneTransitions.play_transition_audio()
-	Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Singleton.SceneTransitions.chosen_transition_color)
+	Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)
 
 ## start level without setting any variables
 ## or doing any shine select screen checks
 func force_start_level():
 	var _connect = Singleton.SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [PLAYER_PATH], CONNECT_ONESHOT)
 	
-	Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Color(1, 1, 1, 0), Singleton.SceneTransitions.chosen_transition_color)
+	Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)

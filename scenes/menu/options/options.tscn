@@ -532,7 +532,7 @@ margin_bottom = 98.0
 setting_section = "General"
 setting_key = "level_ghost"
 
-[node name="DarkMode" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+[node name="DarkTransitions" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
 margin_left = 439.0
 margin_top = 59.0
 margin_right = 533.0

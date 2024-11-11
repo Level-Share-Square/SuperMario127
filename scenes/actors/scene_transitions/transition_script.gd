@@ -17,12 +17,8 @@ const TRANSITION_SCALE_COVERED = 0
 
 var transitioning = false
 
-const DARK_MODE_TRANSITION_COLOR = Color(0, 0, 0, 1)
-const TRANSITION_COLOR = Color(1, 1, 1, 1)
-var chosen_transition_color = Color(1, 1, 1, 1)
-
-func _ready():
-	Singleton2.connect("dark_mode_toggled", self, "_dark_mode_toggled")
+const DARK_MODE_TRANSITION_COLOR = Color.black
+const TRANSITION_COLOR = Color.white
 
 func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout_circle, transition_time = 0.5, new_area = -1, clear_vars = false, r_press = true):
 	#if the button is invisible, then we're probably not in editing mode, but if it's visible make sure we don't reload the scene while it's switching
@@ -45,11 +41,19 @@ func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout
 		
 		yield(do_transition_animation(transition_out_tex, transition_time, TRANSITION_SCALE_COVERED, TRANSITION_SCALE_UNCOVER, volume_multiplier / 4, volume_multiplier, false, true), "completed")
 
-func do_transition_fade(transition_time : float = DEFAULT_TRANSITION_TIME, start_color : Color = Color(0, 0, 0, 0), end_color : Color = Color(0, 0, 0, 1), reverse_after : bool = true):
+func do_transition_fade(transition_time : float = DEFAULT_TRANSITION_TIME, start_alpha: float = 0, end_alpha: float = 1, reverse_after : bool = true):
+	var chosen_transition_color: Color = TRANSITION_COLOR
+	if LocalSettings.load_setting("General", "dark_mode", false):
+		chosen_transition_color = DARK_MODE_TRANSITION_COLOR
+	
+	var start_color := Color(chosen_transition_color, start_alpha)
+	var end_color := Color(chosen_transition_color, end_alpha)
+	
 	canvas_background.mouse_filter = canvas_background.MOUSE_FILTER_STOP
 	canvas_mask.texture_scale = TRANSITION_SCALE_COVERED
-	var to_black = start_color.a > end_color.a
 	canvas_background.color = start_color
+	
+	var to_black = start_alpha > end_alpha
 	tween.interpolate_property(canvas_background, "color", start_color, end_color, transition_time, Tween.TRANS_LINEAR, Tween.EASE_OUT if to_black else Tween.EASE_IN)
 	tween.start()
 	
@@ -60,7 +64,7 @@ func do_transition_fade(transition_time : float = DEFAULT_TRANSITION_TIME, start
 	emit_signal("transition_finished")
 	
 	if reverse_after:
-		do_transition_fade(transition_time, end_color, start_color, false)
+		do_transition_fade(transition_time, end_alpha, start_alpha, false)
 	else:
 		transitioning = false
 		canvas_background.mouse_filter = canvas_background.MOUSE_FILTER_IGNORE
@@ -96,6 +100,3 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 
 func play_transition_audio():
 	transition_audio.play()
-	
-func _dark_mode_toggled():
-	chosen_transition_color = DARK_MODE_TRANSITION_COLOR if Singleton2.dark_mode else TRANSITION_COLOR
