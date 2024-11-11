@@ -27,7 +27,7 @@ var dialogue
 var character_name
 var autostart: int = 0
 var tag: String
-var remote_tag: String
+var delegate_tag: String
 
 var page_cache: int = 0
 var being_read := false
@@ -91,8 +91,8 @@ func _ready():
 		if "tag" in parent and parent.tag != "":
 			tag = parent.tag
 			add_to_group(DIALOGUE_GROUP)
-		if "remote_tag" in parent:
-			remote_tag = parent.remote_tag
+		if "delegate_tag" in parent:
+			delegate_tag = parent.delegate_tag
 
 
 func connect_menu_oneshot():
@@ -108,7 +108,7 @@ func open_remote_menu(new_char: Character):
 	get_tree().call_group_flags(
 		SceneTree.GROUP_CALL_REALTIME,
 		DIALOGUE_GROUP,
-		"open_menu_conditional", new_char, remote_tag
+		"open_menu_conditional", new_char, delegate_tag
 	)
 
 
@@ -156,7 +156,7 @@ func autostart_dialogue(body):
 		if autostart == AUTOSTART_ONESHOT and has_been_read == true: return
 		
 		dialogue_menu.stored_velocity = body.get_parent().velocity
-		if remote_tag == "" or remote_tag == tag:
+		if delegate_tag == "" or delegate_tag == tag:
 			open_menu(body.get_parent())
 		else:
 			open_remote_menu(body.get_parent())
@@ -251,7 +251,7 @@ func _physics_process(delta):
 		and !character.inputs[Character.input_names.right][0]
 		and character.is_grounded() and character.controllable
 		and !being_read and interactable):
-			if remote_tag == "" or remote_tag == tag:
+			if delegate_tag == "" or delegate_tag == tag:
 				open_menu(character)
 			else:
 				open_remote_menu(character)
