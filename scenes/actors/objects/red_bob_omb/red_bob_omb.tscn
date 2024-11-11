@@ -141,7 +141,7 @@ region = Rect2( 72, 0, 24, 24 )
 
 [sub_resource type="SpriteFrames" id=30]
 animations = [ {
-"frames": [ SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ) ],
+"frames": [ SubResource( 77 ), SubResource( 77 ), SubResource( 78 ), SubResource( 78 ), SubResource( 79 ), SubResource( 79 ), SubResource( 80 ), SubResource( 80 ) ],
 "loop": true,
 "name": "angry",
 "speed": 6.0

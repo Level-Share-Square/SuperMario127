@@ -297,7 +297,7 @@ position = Vector2( 0, 30 )
 
 [node name="SpriteBody" type="Sprite" parent="CannonMoveable/SpriteBodyReverser"]
 material = SubResource( 4 )
-position = Vector2( 0, -21.3203 )
+position = Vector2( 0, -19 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -6.301 )
 region_enabled = true
