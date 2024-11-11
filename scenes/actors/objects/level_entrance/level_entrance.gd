@@ -105,13 +105,16 @@ func exit_teleport(obj : Array):
 			character.health = transition_character_data[0]
 			character.health_shards = transition_character_data[1]
 			character.emit_signal("health_changed", character.health, character.health_shards)
+			
 			if transition_character_data[2] != null:
 				character.set_nozzle(transition_character_data[2])
 			character.fuel = transition_character_data[3]
 			if transition_character_data[4][0] != null:
-				character.set_powerup(character.get_powerup_node(transition_character_data[4][0]), transition_character_data[4][2])
-				character.powerup.time_left = transition_character_data[4][1]
-			get_tree().get_current_scene().switch_timer = transition_character_data[5]
+				var powerup_node: Powerup = character.get_powerup_node(transition_character_data[4][0])
+				powerup_node.time_left = transition_character_data[4][1]
+				character.set_powerup(powerup_node, transition_character_data[4][2])
+			
+			get_tree().get_current_scene().set_switch_timer(transition_character_data[5])
 		_cleanup()
 
 func _cleanup():

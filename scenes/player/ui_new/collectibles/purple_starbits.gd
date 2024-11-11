@@ -64,7 +64,7 @@ func update_required_purples():
 			required_purples = variables.required_purple_starbits[Singleton.CurrentLevelData.area][0]
 
 
+# this is to make sure the counter always displays underneath any radial timers
 func child_entered_tree(node):
 	var parent := get_parent()
-	call_deferred("move_child", self, parent.get_child_count()-1)
-#	parent.move_child(self, parent.get_child_count() - 1)
+	parent.call_deferred("move_child", self, parent.get_child_count() - 1)
