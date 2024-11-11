@@ -177,7 +177,7 @@ func get_save_file_dictionary() -> Dictionary:
 
 func load_save_from_dictionary(save_dictionary: Dictionary):
 	match save_dictionary["VERSION"]:
-		"0.0.3":
+		"0.0.1":
 			load_save_0_0_1(save_dictionary)
 		"0.0.2":
 			load_save_0_0_2(save_dictionary)
