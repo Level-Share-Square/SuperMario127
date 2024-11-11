@@ -35,7 +35,9 @@ func _input(event):
 	gradient_selector.modulate = base_color
 	gradient_selector.modulate.a = 255
 	new_color_preview.modulate = base_color
-	color_manager.set_value(base_color)
+	color_manager.set_value(
+		Color(base_color, float(color_manager.a_edit_node.text) / 255)
+	)
 	notify_property_manager()
 
 func update_value(color: Color, notify_manager: bool = true):
