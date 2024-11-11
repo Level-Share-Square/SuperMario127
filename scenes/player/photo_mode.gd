@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Node
 
 ## ...what is this script
 ## how do you make something so simple so weird
@@ -24,7 +24,6 @@ func _input(event):
 	
 func update_photo_mode(do_pause = true):
 	var is_photo_mode = Singleton.PhotoMode.enabled
-	offset.y = 1000000 if is_photo_mode else 0 # hax
 	get_tree().paused = is_photo_mode and do_pause
 	
 	if do_pause:

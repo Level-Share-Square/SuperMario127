@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://scenes/player/ui_new/collectibles/purple_starbits.gd" type="Script" id=29]
 [ext_resource path="res://scenes/player/ui_new/touch/gesture_controls.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/player/ui_new/collectibles/show_max_purples.gd" type="Script" id=31]
+[ext_resource path="res://scenes/player/photo_mode_updater.gd" type="Script" id=32]
 [ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=39]
 [ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
@@ -882,10 +883,14 @@ character = NodePath("Viewports/ViewportContainer/Viewport/World/Character")
 character2 = NodePath("Viewports/ViewportContainer/Viewport/World/Character2")
 camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
 
+[node name="PhotoModeController" type="Node" parent="."]
+pause_mode = 2
+script = ExtResource( 33 )
+
 [node name="UIUnder" type="CanvasLayer" parent="."]
 pause_mode = 2
 layer = 61
-script = ExtResource( 33 )
+script = ExtResource( 32 )
 
 [node name="HUD" type="MarginContainer" parent="UIUnder"]
 anchor_right = 1.0
@@ -1170,7 +1175,7 @@ unique_name_in_owner = true
 [node name="UIOver" type="CanvasLayer" parent="."]
 pause_mode = 2
 layer = 63
-script = ExtResource( 33 )
+script = ExtResource( 32 )
 
 [node name="HUD" type="MarginContainer" parent="UIOver"]
 anchor_right = 1.0

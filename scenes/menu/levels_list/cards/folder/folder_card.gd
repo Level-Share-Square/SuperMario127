@@ -39,7 +39,6 @@ func card_dragged(card: BaseCard):
 			get_folder_path()
 		)
 		card.call_deferred("queue_free")
-		print("meow")
 	else:
 		print("This card type cannot be moved into a folder card.")
 
