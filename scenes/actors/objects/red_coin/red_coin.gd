@@ -10,7 +10,6 @@ onready var sparkles = $Sparkles
 
 var collected = false
 var physics = false
-var gravity : float
 var velocity : Vector2
 
 var id : int
@@ -19,9 +18,8 @@ export var anim_damp = 80
 
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
-		Singleton.CurrentLevelData.level_data.vars.coins_collected += 2
-		Singleton.CurrentLevelData.level_data.vars.red_coins_collected[0] += 1
-		Singleton.CurrentLevelData.level_data.vars.red_coins_collected[1].append(id)
+		Singleton.CurrentLevelData.level_data.vars.collect_coin(2)
+		Singleton.CurrentLevelData.level_data.vars.collect_red_coin(id)
 		body.heal(5)
 		var player_id = 1
 		if body.name == "Character":

@@ -1,5 +1,8 @@
 extends State
 
+## old and unused! but keeping it here just in case its needed
+## want the new version of the state? see CrushedState
+
 class_name SquishedState
 
 var frames_squished := 0
@@ -14,8 +17,8 @@ func _ready():
 	disable_movement = true
 
 func _start_check(_delta):
-	#_update_squish_amount()
-	return false #squish_amount > (0.1 if character.ground_check.is_colliding() else 0.5)
+	_update_squish_amount()
+	return squish_amount > (0.1 if character.ground_check.is_colliding() else 0.5)
 
 func _start(_delta):
 	_update_squish_amount()

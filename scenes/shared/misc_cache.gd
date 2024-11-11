@@ -1,56 +1,50 @@
 extends Node
 
+## this script has a bunch of the same lazy loading stuff as the currentleveldata script does
+
 var thread
 
-var shell_scene
-var loaded_ids := 0
-var loaded_ids_max := 0
+var shell_scene setget ,get_shell_scene
+func get_shell_scene():
+	if !is_instance_valid(shell_scene):
+		shell_scene = preload("res://scenes/actors/objects/koopa_troopa/shell.tscn")
+	return shell_scene
 
 var property_scenes = {
 	
 }
 
+signal property_scene_gotten
+
 var music_nodes = [
 	
 ]
 
-onready var music_ids = preload("res://assets/music/ids.tres").ids
-onready var property_type_ids = preload("res://scenes/editor/property_type_scenes/property_types.tres").ids
+var music_ids
+var property_type_ids
 
-func _ready():
-	thread = Thread.new()
-	thread.start(self, "load_resources")
+func _init():
+	music_ids = preload("res://assets/music/ids.tres").ids
+	property_type_ids = preload("res://scenes/editor/property_type_scenes/property_types.tres").ids
+	
+	music_nodes.resize(music_ids.size())
 
-func load_resources(userdata):
-	loaded_ids_max = 1 + music_ids.size() + property_type_ids.size()
-	loaded_ids = 0
-	var resource_loader
+
+func get_property_scene(property: String, menu: String):
+	var key : Array = [property, menu]
+	if not property_scenes.has(key):
+		var path: String = "res://scenes/editor/property_type_scenes/" + property + "/" + menu + "/" + menu + ".tscn"
+		property_scenes[key] = load(path)
 	
-	resource_loader = ResourceLoader.load_interactive("res://scenes/actors/objects/koopa_troopa/shell.tscn")
-	while true:
-		OS.delay_msec(1)
-		
-		if resource_loader.poll() == ERR_FILE_EOF:
-			shell_scene = resource_loader.get_resource()
-			loaded_ids += 1
-			break
+	return property_scenes[key]
+
+
+func get_music_node(index: int):
+	if music_nodes[index] != null:
+		return music_nodes[index]
 	
-	for music_name in music_ids:
-		resource_loader = ResourceLoader.load_interactive("res://assets/music/resources/" + music_name + ".tres")
-		while true:
-			OS.delay_msec(1)
-			
-			if resource_loader.poll() == ERR_FILE_EOF:
-				music_nodes.append(resource_loader.get_resource())
-				loaded_ids += 1
-				break
+	var key: String = music_ids[index]
+	var path: String = "res://assets/music/resources/" + key + ".tres"
 	
-	for property in property_type_ids:
-		resource_loader = ResourceLoader.load_interactive("res://scenes/editor/property_type_scenes/" + property + "/" + property + ".tscn")
-		while true:
-			OS.delay_msec(1)
-			
-			if resource_loader.poll() == ERR_FILE_EOF:
-				property_scenes[property] = resource_loader.get_resource()
-				loaded_ids += 1
-				break
+	music_nodes[index] = load(path)
+	return music_nodes[index]

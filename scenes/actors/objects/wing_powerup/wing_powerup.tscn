@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/actors/objects/wing_powerup/wing_powerup.png" type="Texture" id=2]
@@ -190,6 +190,9 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 11.5, 16 )
+
 [node name="WingPowerup" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -201,7 +204,6 @@ texture = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 17 )
-frame = 3
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -215,7 +217,14 @@ shape = SubResource( 18 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 volume_db = -9.0
+bus = "Sounds"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/collect = SubResource( 19 )
 anims/respawn = SubResource( 20 )
+
+[node name="EditorArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+position = Vector2( 1.5, 0 )
+shape = SubResource( 21 )

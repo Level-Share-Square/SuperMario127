@@ -1,0 +1,165 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scenes/menu/levels_list/level_panel/thumbnail_border.png" type="Texture" id=1]
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/menu/levels_list/cards/base_card.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/menu/levels_list/cards/level/decoration.gd" type="Script" id=4]
+[ext_resource path="res://scenes/menu/levels_list/cards/level/page_switcher.gd" type="Script" id=5]
+[ext_resource path="res://scenes/menu/levels_list/cards/level/level_card.gd" type="Script" id=6]
+
+[sub_resource type="Shader" id=9]
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = SubResource( 9 )
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 0.509804, 0.662745, 0.74902, 0.501961, 0.466667, 0.517647, 0.54902, 0.25098 )
+
+[sub_resource type="GradientTexture" id=16]
+gradient = SubResource( 3 )
+width = 16
+
+[sub_resource type="Gradient" id=11]
+colors = PoolColorArray( 1, 0.94902, 0.207843, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=17]
+gradient = SubResource( 11 )
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2( 0.195833, 0.516667 )
+fill_to = Vector2( 0.5, 0 )
+
+[sub_resource type="CanvasItemMaterial" id=18]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=14]
+colors = PoolColorArray( 1, 0, 0, 0, 0.105882, 0.105882, 0.105882, 0.305882 )
+
+[sub_resource type="GradientTexture2D" id=19]
+gradient = SubResource( 14 )
+fill_from = Vector2( 0, 1 )
+fill_to = Vector2( 0, 0 )
+
+[node name="LevelCard" instance=ExtResource( 3 )]
+script = ExtResource( 6 )
+
+[node name="PageSwitcher" type="Node" parent="." index="0"]
+script = ExtResource( 5 )
+
+[node name="Decoration" parent="." index="1"]
+script = ExtResource( 4 )
+
+[node name="Panel" type="Panel" parent="Decoration" index="0"]
+unique_name_in_owner = true
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 95.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 94, 78 )
+mouse_filter = 2
+theme = ExtResource( 2 )
+theme_type_variation = "LevelPanel"
+
+[node name="Thumbnail" type="TextureRect" parent="Decoration" index="1"]
+unique_name_in_owner = true
+material = SubResource( 15 )
+margin_left = 2.5
+margin_top = 6.0
+margin_right = 90.5
+margin_bottom = 55.5
+rect_rotation = -3.0
+mouse_filter = 2
+size_flags_vertical = 3
+expand = true
+stretch_mode = 1
+
+[node name="Foreground" type="TextureRect" parent="Decoration/Thumbnail" index="0"]
+unique_name_in_owner = true
+material = SubResource( 15 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+size_flags_vertical = 3
+expand = true
+stretch_mode = 1
+
+[node name="Edge" type="TextureRect" parent="Decoration/Thumbnail" index="1"]
+unique_name_in_owner = true
+material = SubResource( 15 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+size_flags_vertical = 3
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
+
+[node name="Name" type="Label" parent="Decoration" index="2"]
+unique_name_in_owner = true
+margin_left = 6.0
+margin_top = 57.0
+margin_right = 178.0
+margin_bottom = 101.0
+rect_min_size = Vector2( 144, 32 )
+rect_rotation = -3.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_constants/line_spacing = -4
+text = "SM63 Tall Tall Mountain +"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="Tape" type="TextureRect" parent="Decoration" index="3"]
+margin_left = 86.0
+margin_top = -7.0
+margin_right = 110.0
+margin_bottom = 1.0
+rect_rotation = 47.1687
+mouse_filter = 2
+texture = SubResource( 16 )
+expand = true
+
+[node name="Star" type="Control" parent="Decoration" index="4"]
+unique_name_in_owner = true
+margin_left = -6.0
+margin_right = 14.0
+margin_bottom = 20.0
+rect_rotation = -7.0
+rect_scale = Vector2( 0.7, 0.7 )
+mouse_filter = 2
+
+[node name="Shadow" type="Polygon2D" parent="Decoration/Star" index="0"]
+show_behind_parent = true
+position = Vector2( -2, -1 )
+scale = Vector2( 1.4, 1.4 )
+color = Color( 0, 0, 0, 0.25098 )
+antialiased = true
+polygon = PoolVector2Array( 18, 20, 10, 15, 2, 20, 5, 12, 0, 6, 7, 7, 10, 0, 13, 7, 20, 6, 15, 12 )
+
+[node name="Polygon2D2" type="Polygon2D" parent="Decoration/Star" index="1"]
+show_behind_parent = true
+position = Vector2( -4, -4 )
+scale = Vector2( 1.4, 1.4 )
+color = Color( 0.917647, 0.694118, 0.65098, 1 )
+antialiased = true
+texture = SubResource( 17 )
+polygon = PoolVector2Array( 18, 20, 10, 15, 2, 20, 5, 12, 0, 6, 7, 7, 10, 0, 13, 7, 20, 6, 15, 12 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Decoration/Star" index="2"]
+position = Vector2( -1, -1 )
+scale = Vector2( 1.1, 1.1 )
+antialiased = true
+texture = SubResource( 17 )
+polygon = PoolVector2Array( 18, 20, 10, 15, 2, 20, 5, 12, 0, 6, 7, 7, 10, 0, 13, 7, 20, 6, 15, 12 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="Decoration/Star" index="3"]
+material = SubResource( 18 )
+position = Vector2( -4, -4 )
+scale = Vector2( 1.4, 1.4 )
+antialiased = true
+texture = SubResource( 19 )
+polygon = PoolVector2Array( 18, 20, 10, 15, 2, 20, 5, 12, 0, 6, 7, 7, 10, 0, 13, 7, 20, 6, 15, 12 )

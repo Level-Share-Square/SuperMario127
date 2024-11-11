@@ -1,4 +1,4 @@
-[gd_scene load_steps=163 format=2]
+[gd_scene load_steps=166 format=2]
 
 [ext_resource path="res://scenes/actors/objects/launch_star/launch_star.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/launch_star/launch_star_animatior.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/actors/objects/launch_star/sprites/OuterShadowTop.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/launch_star/sprites/OuterTop.png" type="Texture" id=7]
 [ext_resource path="res://scenes/actors/objects/launch_star/sprites/OuterBottom.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/launch_star/sparkle.png" type="Texture" id=9]
 
 [sub_resource type="Curve2D" id=1]
 bake_interval = 200.0
@@ -17,6 +18,33 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 35.5032, 44.0332 )
+
+[sub_resource type="Animation" id=156]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("StarContainer/InnerStar:speed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StarContainer/OuterStar:speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
 
 [sub_resource type="Animation" id=154]
 resource_name = "launch"
@@ -69,6 +97,18 @@ tracks/3/keys = {
 "args": [  ],
 "method": "set_camera"
 } ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("LaunchParticles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=153]
@@ -749,6 +789,11 @@ animations = [ {
 "speed": 10.0
 } ]
 
+[sub_resource type="Gradient" id=155]
+interpolation_mode = 2
+offsets = PoolRealArray( 0.753351, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0 )
+
 [node name="LaunchStar" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
@@ -771,13 +816,17 @@ shape = SubResource( 2 )
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 volume_db = 15.0
 attenuation = 1e-05
+bus = "Sounds"
 
 [node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
 volume_db = 15.0
 max_distance = 9.22337e+18
 attenuation = 2.23403e-05
+bus = "Sounds"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+anims/RESET = SubResource( 156 )
 anims/launch = SubResource( 154 )
 anims/windup = SubResource( 153 )
 
@@ -790,14 +839,12 @@ script = ExtResource( 2 )
 z_index = -3
 z_as_relative = false
 frames = SubResource( 27 )
-frame = 2
 playing = true
 
 [node name="InnerBottom" type="AnimatedSprite" parent="StarContainer/InnerStar"]
 z_index = 1
 z_as_relative = false
 frames = SubResource( 52 )
-frame = 22
 playing = true
 
 [node name="OuterStar" type="Node2D" parent="StarContainer"]
@@ -807,26 +854,44 @@ script = ExtResource( 2 )
 z_index = -2
 z_as_relative = false
 frames = SubResource( 77 )
-frame = 11
 playing = true
 
 [node name="OuterTopShadow" type="AnimatedSprite" parent="StarContainer/OuterStar"]
 z_index = -4
 z_as_relative = false
 frames = SubResource( 102 )
-frame = 6
 playing = true
 
 [node name="OuterBottom" type="AnimatedSprite" parent="StarContainer/OuterStar"]
 z_index = 2
 z_as_relative = false
 frames = SubResource( 127 )
-frame = 10
 playing = true
 
 [node name="OuterBottomShadow" type="AnimatedSprite" parent="StarContainer/OuterStar"]
 z_index = -4
 z_as_relative = false
 frames = SubResource( 152 )
-frame = 16
 playing = true
+
+[node name="LaunchParticles" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2( 0, 12 )
+amount = 20
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.95
+lifetime_randomness = 0.08
+draw_order = 1
+texture = ExtResource( 9 )
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector2( 0, -1 )
+spread = 85.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 150.0
+orbit_velocity = 0.01
+linear_accel = 14.64
+linear_accel_random = 1.0
+damping = 200.0
+color_ramp = SubResource( 155 )

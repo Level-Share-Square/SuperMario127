@@ -5,6 +5,7 @@ export var preview : NodePath
 export var delete_button : NodePath
 export var to_back_button : NodePath
 export var to_front_button : NodePath
+export var help_button : NodePath
 export var shared : NodePath
 
 var object
@@ -16,12 +17,14 @@ onready var preview_node = get_node(preview)
 onready var delete_button_node = get_node(delete_button)
 onready var to_back_button_node = get_node(to_back_button)
 onready var to_front_button_node = get_node(to_front_button)
+onready var help_button_node = get_node(help_button)
 onready var shared_node = get_node(shared)
 
 func _ready():
 	var _connect = delete_button_node.connect("pressed", self, "delete_pressed")
-	var _connect2 = to_back_button_node.connect("pressed", self, "to_back_pressed")
-	var _connect3 = to_front_button_node.connect("pressed", self, "to_front_pressed")
+	_connect = to_back_button_node.connect("pressed", self, "to_back_pressed")
+	_connect = to_front_button_node.connect("pressed", self, "to_front_pressed")
+#	_connect = help_button_node.connect("pressed", help_button, "open_help_window")
 	
 func delete_pressed():
 	close()

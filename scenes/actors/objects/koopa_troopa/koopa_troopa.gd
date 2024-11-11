@@ -24,6 +24,7 @@ export var normal_sprite : SpriteFrames
 export var normal_color_sprite : SpriteFrames
 export var para_sprite : SpriteFrames
 export var para_color_sprite : SpriteFrames
+export var shell_scene : PackedScene
 
 var dead = false
 var loaded = false
@@ -36,7 +37,7 @@ var original_position
 var delete_timer = 0.0
 var speed = 30
 var shell_max_speed = 560
-var accel = 5
+var accel = 15
 
 var facing_direction := -1
 var time_alive = 0.0
@@ -109,7 +110,7 @@ func retract_into_shell():
 			koopa_sound.play()
 		return
 	
-	shell = Singleton.MiscCache.shell_scene.instance()
+	shell = shell_scene.instance()
 	shell_sprite = shell.get_node("Sprite")
 	shell_sprite_color = shell_sprite.get_node("Color")
 	shell_stomp_area = shell.get_node("StompArea")
@@ -121,6 +122,7 @@ func retract_into_shell():
 	visibility_notifier = shell.get_node("VisibilityNotifier2D")
 	add_child(shell)
 	shell.global_position = body.global_position
+	shell.reset_physics_interpolation()
 	velocity = Vector2()
 	snap = Vector2(0, 6)
 	delete_wings()
@@ -205,6 +207,7 @@ func _physics_process(delta):
 			shell_sprite.rotation_degrees += 2
 			velocity.y += gravity
 			shell.position += velocity * delta
+			reset_physics_interpolation()
 		if shelled == true and !rainbow :
 			retract_into_shell()
 		
@@ -333,6 +336,7 @@ func physics_process_koopa(delta, level_bounds):
 			# Paratroopas go up and down very slightly
 			velocity = Vector2(0, 0)
 			global_position.y = original_position.y + (sin(time_alive * PARA_SIN_SPEED) * PARA_SIN_AMOUNT)
+			reset_physics_interpolation()
 		
 		velocity = body.move_and_slide_with_snap(velocity, snap, Vector2.UP.normalized(), true, 4, deg2rad(46))
 		

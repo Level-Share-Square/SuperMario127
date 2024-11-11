@@ -181,16 +181,19 @@ shape = SubResource( 3 )
 stream = ExtResource( 6 )
 volume_db = -3.0
 max_distance = 1000.0
+bus = "Sounds"
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="Goomba"]
 stream = ExtResource( 3 )
 volume_db = -10.0
 max_distance = 1000.0
+bus = "Sounds"
 
 [node name="Disappear" type="AudioStreamPlayer2D" parent="Goomba"]
 stream = ExtResource( 5 )
 volume_db = -3.0
 max_distance = 1000.0
+bus = "Sounds"
 
 [node name="WallCheck" type="RayCast2D" parent="Goomba"]
 position = Vector2( 0, -3 )

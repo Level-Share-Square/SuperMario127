@@ -23,8 +23,8 @@ func _ready():
 	label_shadow.text = label.text
 	if max_shard_amount != 0:
 		visible = true
-	if Singleton.CurrentLevelData.level_data.vars.max_red_coins == 0:
-		rect_position.y = get_node("../RedCoinCounter").rect_position.y
+	#if Singleton.CurrentLevelData.level_data.vars.max_red_coins == 0:
+		#rect_position.y = get_node("../RedCoinCounter").rect_position.y
 
 func _process(delta):
 	var shard_amount = Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][0]

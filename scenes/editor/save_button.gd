@@ -18,12 +18,25 @@ func _process(delta):
 
 func _pressed():
 	click_sound.play()
+	
+	var editor: Node = get_owner()
+	editor.sync_pinned_items()
+	
+	var file_path = level_list_util.get_level_file_path(
+		Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder
+	)
+	level_list_util.save_level_code_file(
+		Singleton.CurrentLevelData.level_data.get_encoded_level_data(), 
+		file_path
+	)
+	
+	var save_path = level_list_util.get_level_save_path(
+		Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder
+	)
+	if level_list_util.file_exists(save_path):
+		level_list_util.delete_file(save_path)
 
-	if Singleton.SavedLevels.selected_level != -1:
-		Singleton.SavedLevels.levels[Singleton.SavedLevels.selected_level] = LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data())
-		var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
-
-		Singleton.CurrentLevelData.unsaved_editor_changes = false
+	Singleton.CurrentLevelData.unsaved_editor_changes = false
 		
 func on_input(event):
 	if event is InputEventMouseButton and event.pressed:

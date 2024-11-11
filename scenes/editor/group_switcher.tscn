@@ -52,17 +52,16 @@ shortcut_in_tooltip = false
 action_mode = 0
 enabled_focus_mode = 0
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 stream = SubResource( 5 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 stream = SubResource( 6 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Label" type="Label" parent="."]
 margin_right = 400.0

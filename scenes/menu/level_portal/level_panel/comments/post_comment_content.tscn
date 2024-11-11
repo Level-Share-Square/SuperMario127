@@ -1,0 +1,226 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scenes/menu/level_portal/default_icon.png" type="Texture" id=1]
+[ext_resource path="res://shaders/rounded_corners.gdshader" type="Shader" id=2]
+[ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=4]
+[ext_resource path="res://scenes/menu/level_portal/level_panel/comments/post_comment_content.gd" type="Script" id=5]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=6]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=8]
+[ext_resource path="res://scenes/actors/objects/shine/frames_outline.tres" type="SpriteFrames" id=9]
+[ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=10]
+
+[sub_resource type="ShaderMaterial" id=213]
+shader = ExtResource( 2 )
+shader_param/radius_scale = 1.0
+shader_param/rounded_corner_top_left = true
+shader_param/rounded_corner_top_right = true
+shader_param/rounded_corner_bottom_left = true
+shader_param/rounded_corner_bottom_right = true
+shader_param/width = 1.0
+shader_param/height = 1.0
+
+[sub_resource type="StyleBoxEmpty" id=214]
+
+[sub_resource type="StyleBoxEmpty" id=215]
+
+[sub_resource type="StyleBoxEmpty" id=216]
+
+[sub_resource type="StyleBoxEmpty" id=217]
+
+[node name="PostContent" type="VBoxContainer"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 458.0
+margin_bottom = 117.0
+theme = ExtResource( 4 )
+custom_constants/separation = 4
+script = ExtResource( 5 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 7 )
+volume_db = -10.0
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 8 )
+volume_db = -10.0
+
+[node name="Info" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+margin_right = 452.0
+margin_bottom = 24.0
+
+[node name="AuthorIcon" type="TextureRect" parent="Info"]
+unique_name_in_owner = true
+material = SubResource( 213 )
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+texture = ExtResource( 1 )
+expand = true
+
+[node name="AuthorName" type="Label" parent="Info"]
+unique_name_in_owner = true
+margin_left = 28.0
+margin_top = 4.0
+margin_right = 90.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 3 )
+text = "Username"
+align = 1
+valign = 1
+
+[node name="Padding" type="Control" parent="Info"]
+margin_left = 94.0
+margin_right = 266.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Info"]
+unique_name_in_owner = true
+modulate = Color( 0.721569, 0.803922, 1, 1 )
+margin_left = 270.0
+margin_top = 4.0
+margin_right = 452.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 3 )
+text = "Please try to be constructive! "
+align = 1
+valign = 1
+
+[node name="Edit" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+margin_top = 28.0
+margin_right = 452.0
+margin_bottom = 148.0
+custom_constants/separation = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="Edit"]
+self_modulate = Color( 0, 0, 0, 0.501961 )
+margin_right = 452.0
+margin_bottom = 96.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Edit/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 448.0
+margin_bottom = 92.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="Content" type="TextEdit" parent="Edit/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 440.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 0, 80 )
+custom_colors/font_color = Color( 0.87451, 0.917647, 0.968627, 1 )
+custom_styles/read_only = SubResource( 214 )
+custom_styles/focus = SubResource( 215 )
+custom_styles/normal = SubResource( 216 )
+custom_styles/completion = SubResource( 217 )
+smooth_scrolling = true
+wrap_enabled = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Edit"]
+margin_top = 100.0
+margin_right = 452.0
+margin_bottom = 120.0
+custom_constants/separation = 2
+
+[node name="Post" type="Button" parent="Edit/HBoxContainer2"]
+margin_right = 37.0
+margin_bottom = 20.0
+theme_type_variation = "TransparentButton"
+text = " Post "
+script = ExtResource( 6 )
+
+[node name="EditPost" type="Button" parent="Edit/HBoxContainer2"]
+visible = false
+margin_left = 39.0
+margin_right = 73.0
+margin_bottom = 20.0
+theme_type_variation = "TransparentButton"
+text = " Submit "
+script = ExtResource( 6 )
+
+[node name="Cancel" type="Button" parent="Edit/HBoxContainer2"]
+visible = false
+margin_left = 39.0
+margin_right = 88.0
+margin_bottom = 20.0
+theme_type_variation = "TransparentButton"
+text = " Cancel "
+script = ExtResource( 6 )
+
+[node name="Cancel2" type="Button" parent="Edit/HBoxContainer2"]
+visible = false
+margin_left = 39.0
+margin_right = 88.0
+margin_bottom = 20.0
+theme_type_variation = "TransparentButton"
+text = " Cancel "
+script = ExtResource( 6 )
+
+[node name="Sending" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+margin_top = 152.0
+margin_right = 452.0
+margin_bottom = 248.0
+rect_min_size = Vector2( 0, 96 )
+
+[node name="MarginContainer" type="MarginContainer" parent="Sending"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="Sending/MarginContainer"]
+modulate = Color( 0, 0, 0, 0.25098 )
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 440.0
+margin_bottom = 84.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Sending"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Sending/CenterContainer"]
+margin_left = 168.0
+margin_top = 36.0
+margin_right = 284.0
+margin_bottom = 60.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Sending/CenterContainer/HBoxContainer"]
+margin_right = 112.0
+margin_bottom = 24.0
+text = "Please wait..."
+
+[node name="Sprite" type="Control" parent="Sending/CenterContainer/HBoxContainer"]
+margin_left = 116.0
+margin_right = 116.0
+margin_bottom = 24.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Sending/CenterContainer/HBoxContainer/Sprite"]
+frames = ExtResource( 10 )
+playing = true
+centered = false
+offset = Vector2( 0, -8 )
+
+[node name="Outline" type="AnimatedSprite" parent="Sending/CenterContainer/HBoxContainer/Sprite/AnimatedSprite"]
+frames = ExtResource( 9 )
+playing = true
+centered = false
+offset = Vector2( 0, -8 )
+
+[connection signal="pressed" from="Edit/HBoxContainer2/Post" to="." method="post_comment"]
+[connection signal="pressed" from="Edit/HBoxContainer2/EditPost" to="." method="edit_comment"]
+[connection signal="pressed" from="Edit/HBoxContainer2/Cancel2" to="." method="hide"]

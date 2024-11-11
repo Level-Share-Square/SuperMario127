@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cosmic_clones.ogg-9fff7dc5842a8b7e2040f8e65148e30c.oggstr"
+
+[deps]
+
+source_file="res://assets/music/cosmic_clones.ogg"
+dest_files=[ "res://.import/cosmic_clones.ogg-9fff7dc5842a8b7e2040f8e65148e30c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=9.408

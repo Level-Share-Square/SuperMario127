@@ -110,7 +110,7 @@ func start_door_enter_animation(character : Character) -> void:
 	
 	
 func open_menu_ui(character):
-	get_tree().get_current_scene().get_node("UI/SignText").open(get_parent().text, self, character)
+	get_tree().get_current_scene().get_node("%SignText").open(get_parent().text, self, character)
 	
 func character_animation_finished(_animation : String, character : Character) -> void:
 	# this is so the door closes after mario enters
@@ -118,7 +118,7 @@ func character_animation_finished(_animation : String, character : Character) ->
 	emit_signal("start_door_logic", character, entering)
 	
 func animate_door(animation : String = "close") -> void:
-	print(get_parent().palette_dict[get_parent().palette] + "_" + get_parent().collectible + animation)
+	#print(get_parent().palette_dict[get_parent().palette] + "_" + get_parent().collectible + animation)
 	# this function just plays the door animation, so code doesn't have to repeat
 	icon.animation = get_parent().palette_dict[get_parent().palette] + "_" + get_parent().collectible + "_" + animation
 	icon.playing = true

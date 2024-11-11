@@ -119,7 +119,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.11, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 8.95777e-12, 1, 2.82843, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1, 0.5 ), Vector2( 1, 1 ), Vector2( 1, 0.1 ), Vector2( 0.1, 1.5 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1, 0.5 ), Vector2( 1, 1 ), Vector2( 1, 0.1 ), Vector2( 0, 1.5 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("..:top_point")
@@ -222,14 +222,17 @@ shape = SubResource( 15 )
 [node name="Stomp" type="AudioStreamPlayer" parent="CheepCheep"]
 stream = ExtResource( 6 )
 volume_db = -3.0
+bus = "Sounds"
 
 [node name="Hit" type="AudioStreamPlayer" parent="CheepCheep"]
 stream = ExtResource( 3 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Disappear" type="AudioStreamPlayer" parent="CheepCheep"]
 stream = ExtResource( 5 )
 volume_db = -3.0
+bus = "Sounds"
 
 [node name="Poof" type="Particles2D" parent="CheepCheep"]
 material = SubResource( 16 )

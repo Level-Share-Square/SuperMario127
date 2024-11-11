@@ -54,10 +54,12 @@ texture_stop = ExtResource( 2 )
 [node name="Sound" type="AudioStreamPlayer" parent="ModeSwitcherButton"]
 stream = ExtResource( 4 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="ModeSwitcherButton"]
 stream = ExtResource( 6 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Coin" type="Sprite" parent="ModeSwitcherButton"]
 show_behind_parent = true

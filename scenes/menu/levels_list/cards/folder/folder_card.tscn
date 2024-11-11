@@ -1,0 +1,108 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/menu/levels_list/cards/base_card.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/menu/levels_list/cards/folder/decoration.gd" type="Script" id=2]
+[ext_resource path="res://scenes/menu/levels_list/cards/folder/folder_card.gd" type="Script" id=3]
+[ext_resource path="res://scenes/menu/levels_list/cards/folder/directory_switcher.gd" type="Script" id=4]
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=5]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 1, 0.992157, 0.933333, 1, 1, 0.756863, 0.243137, 0.501961 )
+
+[sub_resource type="GradientTexture2D" id=2]
+gradient = SubResource( 1 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 0.509804, 0.662745, 0.74902, 0.501961, 0.466667, 0.517647, 0.54902, 0.25098 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+width = 16
+
+[node name="FolderCard" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="DirectorySwitcher" type="Node" parent="." index="0"]
+script = ExtResource( 4 )
+
+[node name="Decoration" parent="." index="1"]
+theme = ExtResource( 5 )
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="Decoration" index="0"]
+margin_left = 1.0
+margin_top = 14.0
+margin_right = 95.0
+margin_bottom = 77.0
+mouse_filter = 2
+theme_type_variation = "FolderPanel"
+
+[node name="Back" type="Panel" parent="Decoration/Panel" index="0"]
+modulate = Color( 0.772549, 0.509804, 0.176471, 1 )
+show_behind_parent = true
+margin_left = -1.0
+margin_top = -10.0
+margin_right = 50.0
+margin_bottom = 54.0
+rect_rotation = -2.0
+mouse_filter = 2
+theme_type_variation = "FolderPanel"
+
+[node name="Back2" type="Panel" parent="Decoration/Panel" index="1"]
+modulate = Color( 0.772549, 0.509804, 0.176471, 1 )
+show_behind_parent = true
+margin_left = 44.0
+margin_top = -13.0
+margin_right = 93.0
+margin_bottom = 26.0
+rect_rotation = -67.7501
+rect_scale = Vector2( -1, 1 )
+mouse_filter = 2
+theme_type_variation = "FolderPanel"
+
+[node name="Paper" type="Panel" parent="Decoration/Panel" index="2"]
+show_behind_parent = true
+margin_left = 4.0
+margin_top = -6.0
+margin_right = 86.0
+margin_bottom = 54.0
+mouse_filter = 2
+theme_type_variation = "LevelPanel"
+
+[node name="Gradient" type="TextureRect" parent="Decoration/Panel" index="3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 5.0
+margin_right = -4.0
+rect_rotation = -3.1
+texture = SubResource( 2 )
+expand = true
+
+[node name="Name" type="Label" parent="Decoration" index="1"]
+unique_name_in_owner = true
+margin_left = 4.0
+margin_top = 20.0
+margin_right = 176.0
+margin_bottom = 131.0
+rect_min_size = Vector2( 144, 32 )
+rect_rotation = -3.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_constants/line_spacing = -4
+text = "New Folder"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="Tape" type="TextureRect" parent="Decoration" index="2"]
+margin_left = 84.0
+margin_top = -2.0
+margin_right = 111.0
+margin_bottom = 7.0
+rect_rotation = 51.9852
+mouse_filter = 2
+texture = SubResource( 4 )
+expand = true

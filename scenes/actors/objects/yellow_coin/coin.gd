@@ -28,7 +28,7 @@ func _set_property_values():
 
 func collect(body, is_shell = false):
 	if enabled and !collected and (body and body.name.begins_with("Character") and !body.dead) or is_shell:
-		Singleton.CurrentLevelData.level_data.vars.coins_collected += coins
+		Singleton.CurrentLevelData.level_data.vars.collect_coin(coins)
 		if body:
 			body.heal(1 if coins == 1 else 15)
 		get_tree().current_scene.get_node("SharedSounds").PlaySound("CoinSound")
@@ -40,13 +40,13 @@ func collect(body, is_shell = false):
 		queue_free() # die
 
 func _ready():
-	if physics:
+	if do_physics():
 		gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
 	
 	yield(get_tree().create_timer(0.2), "timeout")
 	var _connect = area.connect("body_entered", self, "collect")
 	
-	if physics:
+	if do_physics():
 		yield(get_tree().create_timer(9.0 - 0.2), "timeout")
 		blink = true # Make the coin flash before disappearing
 		yield(get_tree().create_timer(1.0), "timeout")
@@ -62,7 +62,7 @@ func _process(delta):
 		if new_frame != previous_frame:
 			animated_sprite.frame = new_frame
 			previous_frame = new_frame
-	if physics:
+	if do_physics():
 		water_shape.disabled = false
 	
 	# Toggle the collection shape (perf)
@@ -102,7 +102,7 @@ func _physics_process(delta):
 	if mode == 1 or !visibility_enabler.is_on_screen():
 		return
 	
-	if physics:
+	if do_physics():
 		if water_detector.get_overlapping_areas().size() > 0:
 			gravity_scale = 0
 			velocity = velocity.move_toward(Vector2.ZERO, delta * 120)
@@ -135,3 +135,6 @@ func shell_hit():
 
 func is_coin():
 	return true
+
+func do_physics() -> bool:
+	return physics and mode != 1

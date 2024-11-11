@@ -44,23 +44,23 @@ func _ready():
 	update_parts()
 	
 func update_property(key, value):
-	match(key):
-		"parts":
-			update_parts()
-		"vertical":
-			if vertical:
-				sprite.rect_size.x = 32
-				sprite.rect_position.x = -16
-				collision_shape.shape.extents.x = 16
-				camera_stop_shape.shape.extents.x = 52
-			else:
-				sprite.rect_size.y = 32
-				sprite.rect_position.y = -16
-				collision_shape.shape.extents.y = 16
-				camera_stop_shape.shape.extents.y = 52
-			update_parts()
-		"rotation_degrees":
-			rotation_degrees = 0
+		match(key):
+			"parts":
+				update_parts()
+			"vertical":
+				if vertical:
+					sprite.rect_size.x = 32
+					sprite.rect_position.x = -16
+					collision_shape.shape.extents.x = 16
+					camera_stop_shape.shape.extents.x = 52
+				else:
+					sprite.rect_size.y = 32
+					sprite.rect_position.y = -16
+					collision_shape.shape.extents.y = 16
+					camera_stop_shape.shape.extents.y = 52
+				update_parts()
+			"rotation_degrees":
+				rotation_degrees = 0
 			
 func update_parts():
 	if vertical:

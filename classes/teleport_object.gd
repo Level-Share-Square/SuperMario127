@@ -8,6 +8,8 @@ class_name TeleportObject
 # | can consolidate some of this mess.       |
 # ============================================
 
+signal teleport_ended
+
 #LOCAL = TP within the same area, REMOTE = TP to different area
 const WAIT_TIME := 0.45
 var teleportation_mode = true #true = remote, false = local
@@ -15,6 +17,8 @@ var area_id := 0
 var object_type := "unknown"
 var destination_tag := "default_teleporter"
 var tp_pair : TeleportObject
+var instant : bool = false
+var timer_manager
 
 ## For older levels only
 var pipe_tag : String = "none"
@@ -29,20 +33,34 @@ func ready():
 	else:
 		connect_local_members()
 
+func _process(delta):
+	if !is_instance_valid(timer_manager) and mode != 1:
+		timer_manager = get_node("/root").get_node("Player").get_timer_manager()
+
 func local_tp(entering_character : Character, entering):
+	timer_manager.pause_resume_timer("area_timer", true)
+	
 	if entering:
 		tp_pair = find_local_pair()
-		#For now, you can't teleport to another object with the same tag but a different mode
-		if tp_pair.teleportation_mode && teleportation_mode == false:
-			tp_pair = self
-		entering_character.global_position = tp_pair.global_position
 		
-		if tp_pair.object_type != "area_transition" or global_position.distance_to(tp_pair.global_position) > 800:
-			entering_character.camera.skip_to_player = true
-			entering_character.camera.global_position = entering_character.global_position
-		entering_character.sprite.modulate = Color(0, 0, 0, 0)
-		tp_tween.interpolate_callback(tp_pair, WAIT_TIME, "start_exit_anim", entering_character)
-		tp_tween.start()
+		#For now, you can't teleport to another object with the same tag but a different mode
+		if !instant:
+			if tp_pair.teleportation_mode && teleportation_mode == false:
+				tp_pair = self
+			entering_character.global_position = tp_pair.global_position
+			entering_character.reset_physics_interpolation()
+			
+			if tp_pair.object_type != "area_transition" or global_position.distance_to(tp_pair.global_position) > 800:
+				entering_character.camera.skip_to_player = true
+				entering_character.camera.global_position = entering_character.global_position
+			entering_character.sprite.modulate = Color(0, 0, 0, 0)
+			tp_tween.interpolate_callback(tp_pair, WAIT_TIME, "start_exit_anim", entering_character)
+			tp_tween.start()
+		else:
+			if tp_pair.teleportation_mode && teleportation_mode == false:
+				tp_pair = self
+			entering_character.global_position = tp_pair.global_position
+			entering_character.reset_physics_interpolation()
 
 	else:
 		entering_character.invulnerable = false
@@ -73,6 +91,8 @@ func change_areas(entering_character : Character, entering):
 	if area_id >= Singleton.CurrentLevelData.level_data.areas.size():
 		area_id = Singleton.CurrentLevelData.area
 	if entering:
+		timer_manager.remove_timer("area_timer")
+		
 		Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area] = []
 		for liquid in Singleton.CurrentLevelData.level_data.vars.liquids:
 			Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].append(liquid[1].save_pos)

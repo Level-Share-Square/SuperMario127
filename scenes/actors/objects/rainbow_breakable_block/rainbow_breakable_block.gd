@@ -26,7 +26,8 @@ func _ready():
 
 	if enabled:
 		if mode != 1:
-			print("jdwjk")
+			# ...who put this here?
+			#print("jdwjk")
 			area.connect("body_entered", self, "_body_entered")
 			area.connect("body_exited", self, "_body_exited")
 		if scale != Vector2.ONE: # Nothing to do on default scale
@@ -128,7 +129,6 @@ func break_block():
 	queue_free() # die
 	
 func _body_entered(body):
-	print("entered")
 	if body.name.begins_with("Character") and is_rainbow(body) and body.global_position.y + 23 > area.global_position.y:
 		break_block()
 

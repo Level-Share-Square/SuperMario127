@@ -91,10 +91,12 @@ __meta__ = {
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 2 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 1 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Contents" type="Control" parent="."]
 anchor_bottom = 0.06
@@ -134,10 +136,12 @@ script = ExtResource( 8 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/SaveButton"]
 stream = ExtResource( 2 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="Contents/SaveButton"]
 stream = ExtResource( 1 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="CancelButton" type="Button" parent="Contents"]
 margin_left = 82.2546
@@ -156,10 +160,12 @@ script = ExtResource( 9 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/CancelButton"]
 stream = ExtResource( 2 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="Contents/CancelButton"]
 stream = ExtResource( 1 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Contents"]
 margin_right = 12.0

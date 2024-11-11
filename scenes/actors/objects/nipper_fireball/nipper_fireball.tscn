@@ -1,0 +1,101 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scenes/actors/objects/nipper_fireball/fireball.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/nipper_fireball/nipper_fireball.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/nipper_fireball/particle.png" type="Texture" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=11]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=13]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 96.0
+initial_velocity_random = 0.75
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+anim_speed = 1.0
+
+[sub_resource type="ParticlesMaterial" id=12]
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+anim_speed = 1.0
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 17, 17 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 17, 0, 17, 17 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 34, 0, 17, 17 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 51, 0, 17, 17 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
+
+[sub_resource type="CircleShape2D" id=14]
+radius = 8.0
+
+[sub_resource type="RectangleShape2D" id=15]
+
+[node name="NipperFireball" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Body" type="KinematicBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="FloorCheck" type="RayCast2D" parent="Body"]
+enabled = true
+cast_to = Vector2( 0, 10 )
+
+[node name="PoofParticles" type="Particles2D" parent="Body"]
+material = SubResource( 11 )
+z_index = -1
+emitting = false
+amount = 12
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.75
+local_coords = false
+process_material = SubResource( 13 )
+texture = ExtResource( 3 )
+
+[node name="Particles" type="Particles2D" parent="Body"]
+material = SubResource( 11 )
+lifetime = 0.25
+local_coords = false
+process_material = SubResource( 12 )
+texture = ExtResource( 3 )
+
+[node name="Sprite" type="AnimatedSprite" parent="Body"]
+frames = SubResource( 5 )
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+shape = SubResource( 14 )
+
+[node name="AttackArea" type="Area2D" parent="Body"]
+collision_layer = 8192
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackArea"]
+shape = SubResource( 15 )

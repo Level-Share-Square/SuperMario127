@@ -1,7 +1,7 @@
 extends TextureButton
 
 
-onready var animplay = get_node("%AnimationPlayer")
+onready var animplay = $"%AnimationPlayer"
 var is_in = false
 
 

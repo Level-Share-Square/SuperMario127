@@ -1,4 +1,4 @@
-[gd_scene load_steps=168 format=2]
+[gd_scene load_steps=173 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -71,10 +71,15 @@
 [ext_resource path="res://scenes/actors/mario/states/Swimming.gd" type="Script" id=69]
 [ext_resource path="res://scenes/actors/mario/states/LavaBoost.gd" type="Script" id=70]
 [ext_resource path="res://scenes/actors/mario/particles/bubble.png" type="Texture" id=71]
-[ext_resource path="res://scenes/actors/mario/states/Squished.gd" type="Script" id=72]
+[ext_resource path="res://scenes/actors/mario/states/Crushed.gd" type="Script" id=72]
 [ext_resource path="res://scenes/actors/mario/mario_sounds.tscn" type="PackedScene" id=73]
 [ext_resource path="res://scenes/actors/mario/luigi_sounds.tscn" type="PackedScene" id=74]
 [ext_resource path="res://scenes/actors/mario/states/LaunchStar.gd" type="Script" id=75]
+[ext_resource path="res://scenes/actors/mario/states/CrushedSide.gd" type="Script" id=76]
+[ext_resource path="res://scenes/actors/objects/metal_powerup/icon.png" type="Texture" id=77]
+[ext_resource path="res://scenes/actors/objects/rainbow_powerup/icon.png" type="Texture" id=78]
+[ext_resource path="res://scenes/actors/objects/vanish_powerup/icon.png" type="Texture" id=79]
+[ext_resource path="res://scenes/actors/objects/wing_powerup/icon.png" type="Texture" id=80]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -284,8 +289,8 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="Gradient" id=38]
-offsets = PoolRealArray( 0, 0.184615, 0.692308, 1 )
-colors = PoolColorArray( 1, 0.596078, 0, 1, 0.66, 0, 0, 1, 0.0823529, 0.0823529, 0.0823529, 1, 0, 0, 0, 0 )
+offsets = PoolRealArray( 0, 0.189076, 0.692308, 0.983193 )
+colors = PoolColorArray( 1, 0.596078, 0, 1, 0.658824, 0, 0, 1, 0.0823529, 0.0823529, 0.0823529, 1, 0, 0, 0, 0 )
 
 [sub_resource type="GradientTexture" id=39]
 gradient = SubResource( 38 )
@@ -1232,17 +1237,19 @@ shape = SubResource( 4 )
 disabled = true
 
 [node name="GroundCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.5, 0 )
-z_index = 1
 shape = SubResource( 5 )
 disabled = true
 one_way_collision_margin = 0.0
 
 [node name="GroundShape" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2( -1, 16 )
 polygon = PoolVector2Array( -3, -6, 0, 1, 2, 1, 5, -6 )
 
 [node name="LeftCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.5, 8 )
 rotation = -1.5708
 shape = SubResource( 6 )
@@ -1250,6 +1257,7 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="RightCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0.5, 8 )
 rotation = 1.5708
 shape = SubResource( 6 )
@@ -1267,7 +1275,7 @@ disabled = true
 position = Vector2( 0, 3 )
 rotation = 6.28319
 frames = ExtResource( 1 )
-animation = "tripleJumpLeft"
+animation = "idleRight"
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
@@ -1289,7 +1297,6 @@ position = Vector2( -7, -6 )
 rotation = -0.00178115
 frames = ExtResource( 24 )
 animation = "in"
-frame = 6
 playing = true
 centered = false
 
@@ -1299,7 +1306,6 @@ position = Vector2( -16, -24 )
 rotation = 1.5708
 frames = ExtResource( 24 )
 animation = "out"
-frame = 6
 playing = true
 centered = false
 
@@ -1371,6 +1377,31 @@ local_coords = false
 process_material = SubResource( 24 )
 texture = ExtResource( 30 )
 
+[node name="SquishCasts" type="Node2D" parent="."]
+position = Vector2( 0.5, 0 )
+z_index = 1
+
+[node name="VerticalCheck" type="RayCast2D" parent="SquishCasts"]
+position = Vector2( 0, 20 )
+enabled = true
+cast_to = Vector2( 0, -24 )
+collision_mask = 65
+
+[node name="VerticalCheckDive" type="RayCast2D" parent="SquishCasts"]
+position = Vector2( 0, 6 )
+cast_to = Vector2( 0, -20 )
+collision_mask = 65
+
+[node name="LeftCheck" type="RayCast2D" parent="SquishCasts"]
+enabled = true
+cast_to = Vector2( 5, 0 )
+collision_mask = 65
+
+[node name="RightCheck" type="RayCast2D" parent="SquishCasts"]
+enabled = true
+cast_to = Vector2( -5, 0 )
+collision_mask = 65
+
 [node name="States" type="Node" parent="."]
 
 [node name="FallState" type="Node" parent="States"]
@@ -1406,8 +1437,15 @@ script = ExtResource( 29 )
 [node name="BonkedState" type="Node" parent="States"]
 script = ExtResource( 12 )
 
-[node name="SquishedState" type="Node" parent="States"]
+[node name="CrushedState" type="Node" parent="States"]
 script = ExtResource( 72 )
+vertical_check_path = NodePath("../../SquishCasts/VerticalCheck")
+vertical_check_dive_path = NodePath("../../SquishCasts/VerticalCheckDive")
+
+[node name="CrushedSideState" type="Node" parent="States"]
+script = ExtResource( 76 )
+left_check_path = NodePath("../../SquishCasts/LeftCheck")
+right_check_path = NodePath("../../SquishCasts/RightCheck")
 
 [node name="LavaBoostState" type="Node" parent="States"]
 script = ExtResource( 70 )
@@ -1507,6 +1545,7 @@ id = "Metal"
 is_invincible = true
 material = ExtResource( 36 )
 time_left = 30.0
+display_icon = ExtResource( 77 )
 
 [node name="RainbowPowerup" type="Node" parent="Powerups"]
 script = ExtResource( 39 )
@@ -1515,18 +1554,21 @@ music_id = 25
 is_invincible = true
 material = ExtResource( 38 )
 time_left = 30.0
+display_icon = ExtResource( 78 )
 
 [node name="VanishPowerup" type="Node" parent="Powerups"]
 script = ExtResource( 50 )
 id = "Vanish"
 material = ExtResource( 49 )
 time_left = 30.0
+display_icon = ExtResource( 79 )
 
 [node name="WingPowerup" type="Node" parent="Powerups"]
 script = ExtResource( 62 )
 id = "Wing"
 music_id = 27
 material = SubResource( 26 )
+display_icon = ExtResource( 80 )
 
 [node name="CloudContainer" type="Node2D" parent="."]
 
@@ -1541,6 +1583,7 @@ position = Vector2( 0.5, 4 )
 shape = SubResource( 27 )
 
 [node name="PlatformDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 17
 
@@ -1580,6 +1623,7 @@ position = Vector2( 0.5, 5 )
 shape = SubResource( 30 )
 
 [node name="TerrainDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TerrainDetector"]
@@ -1588,6 +1632,7 @@ position = Vector2( 0.5, 5 )
 shape = SubResource( 31 )
 
 [node name="SpinArea" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, 6 )
 collision_layer = 2
 collision_mask = 17
@@ -1599,6 +1644,7 @@ shape = SubResource( 32 )
 disabled = true
 
 [node name="SpinSwimArea" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, 6 )
 collision_layer = 2
 collision_mask = 17
@@ -1610,6 +1656,7 @@ shape = SubResource( 32 )
 disabled = true
 
 [node name="PBlockDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 1024
 
@@ -1678,23 +1725,28 @@ collision_mask = 81
 [node name="FluddSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 25 )
 volume_db = -15.0
+bus = "Sounds"
 
 [node name="TurboFluddSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 67 )
 volume_db = -12.0
+bus = "Sounds"
 
 [node name="FluddBoostSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 60 )
 volume_db = 5.0
 pitch_scale = 1.15
+bus = "Sounds"
 
 [node name="FluddChargeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 42 )
 pitch_scale = 1.1
+bus = "Sounds"
 
 [node name="NozzleSwitchSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 27 )
 volume_db = -5.0
+bus = "Sounds"
 
 [node name="Sounds" parent="." instance=ExtResource( 73 )]
 
@@ -1793,7 +1845,6 @@ texture = ExtResource( 51 )
 [node name="RingParticles" type="AnimatedSprite" parent="."]
 material = SubResource( 50 )
 frames = SubResource( 59 )
-frame = 7
 playing = true
 offset = Vector2( 0, 4 )
 
@@ -1801,7 +1852,6 @@ offset = Vector2( 0, 4 )
 show_behind_parent = true
 material = SubResource( 50 )
 frames = SubResource( 60 )
-frame = -1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1820,14 +1870,12 @@ visible = false
 position = Vector2( -1, 20 )
 z_index = -5
 frames = SubResource( 82 )
-frame = 12
 playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
 scale = Vector2( 1e-05, 1e-05 )
 frames = ExtResource( 55 )
-frame = 6
 speed_scale = 3.0
 playing = true
 
@@ -1856,7 +1904,6 @@ script = ExtResource( 34 )
 visible = false
 frames = ExtResource( 23 )
 animation = "swimming"
-frame = 2
 playing = true
 
 [node name="ThisShouldntBeNecessary" type="Node2D" parent="."]
@@ -1864,7 +1911,6 @@ visible = false
 script = ExtResource( 57 )
 
 [node name="VanishDetector" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2147483712
 

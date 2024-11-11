@@ -19,6 +19,7 @@ func _ready():
 			var transition_data = Singleton.CurrentLevelData.level_data.vars.transition_data
 			if transition_data.size() == 0:
 				character.position = position
+				character.reset_physics_interpolation()
 			else:
 				yield(get_tree(), "physics_frame")
 				for pipe in Singleton.CurrentLevelData.level_data.vars.pipes:

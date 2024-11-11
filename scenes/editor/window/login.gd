@@ -40,7 +40,7 @@ func on_login_pressed():
 	var headers = ["Content-Type: application/json", "Accept: application/json"]
 	var result = httpreq.request("https://levelsharesquare.com/api/users/login", headers, true, 2, body)
 
-func on_req_complete(result, response_code, headers, body):
+func on_req_complete(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
 	var json = JSON.parse(body.get_string_from_utf8())
 	print(json.result)
 	if response_code != 200:
@@ -61,7 +61,7 @@ func on_req_complete(result, response_code, headers, body):
 		get_parent().close()
 	
 	
-func on_req2_complete(result, response_code, headers, body):
+func on_req2_complete(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
 	var json = JSON.parse(body.get_string_from_utf8())
 	print(json.result)
 	print(response_code)

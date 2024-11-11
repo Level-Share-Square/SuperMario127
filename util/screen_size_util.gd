@@ -5,13 +5,11 @@ const WIDTH_FACTOR = DEFAULT_SIZE.x / DEFAULT_SIZE.y
 
 static func set_screen_size(window_scale):
 	
-	var window_size : Vector2 = DEFAULT_SIZE * window_scale
+	var window_size : Vector2 = DEFAULT_SIZE * (window_scale + 1)
 	var max_size = Vector2(OS.get_screen_size().x, OS.get_screen_size().y)
 	
 	var modified = false
-	if window_size.x > max_size.x:
-		window_scale = 3
-	if window_size.y > max_size.y:
+	if window_size.x > max_size.x or window_size.y > max_size.y:
 		window_scale = 3
 	
 	if window_scale != 3:
@@ -21,4 +19,4 @@ static func set_screen_size(window_scale):
 	else:
 		OS.window_fullscreen = true
 	
-	Singleton.EditorSavedSettings.stored_window_scale = window_scale
+	#Singleton.EditorSavedSettings.stored_window_scale = window_scale

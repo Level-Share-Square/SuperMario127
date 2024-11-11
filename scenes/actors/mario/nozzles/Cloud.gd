@@ -5,9 +5,7 @@ class_name CloudNozzle
 export var boost_power := 5000
 export var depletion := 100
 export var fuel_depletion := 5
-var last_activated = false
 var last_charged = false
-var last_state = null
 
 var accel = 825
 var charge = 0

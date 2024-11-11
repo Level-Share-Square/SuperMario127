@@ -1,0 +1,98 @@
+[gd_resource type="SpriteFrames" load_steps=15 format=2]
+
+[ext_resource path="res://scenes/actors/objects/red_bob_omb/eyes.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=80]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 24, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=81]
+atlas = ExtResource( 2 )
+region = Rect2( 24, 24, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=82]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 24, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=83]
+atlas = ExtResource( 2 )
+region = Rect2( 72, 24, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=85]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=76]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 48, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=78]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 48, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=72]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=73]
+atlas = ExtResource( 2 )
+region = Rect2( 24, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=74]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=75]
+atlas = ExtResource( 2 )
+region = Rect2( 72, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=84]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 24, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=86]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 24, 24 )
+
+[resource]
+animations = [ {
+"frames": [ SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ) ],
+"loop": true,
+"name": "angry",
+"speed": 6.0
+}, {
+"frames": [ SubResource( 85 ), SubResource( 85 ), SubResource( 85 ), SubResource( 85 ) ],
+"loop": true,
+"name": "confused",
+"speed": 6.0
+}, {
+"frames": [ SubResource( 76 ), SubResource( 78 ), SubResource( 76 ), SubResource( 76 ) ],
+"loop": true,
+"name": "happy",
+"speed": 6.0
+}, {
+"frames": [ SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ) ],
+"loop": true,
+"name": "neutral",
+"speed": 6.0
+}, {
+"frames": [ SubResource( 84 ), SubResource( 84 ), SubResource( 84 ), SubResource( 84 ) ],
+"loop": true,
+"name": "raging",
+"speed": 6.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "shocked",
+"speed": 6.0
+}, {
+"frames": [ SubResource( 86 ), SubResource( 86 ), SubResource( 86 ), SubResource( 86 ) ],
+"loop": true,
+"name": "smiling",
+"speed": 6.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "talking",
+"speed": 6.0
+} ]

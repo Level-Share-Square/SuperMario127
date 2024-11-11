@@ -78,6 +78,7 @@ physics_process_parent = true
 [node name="Broken" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="BreakParticle" type="Particles2D" parent="."]
 material = SubResource( 11 )

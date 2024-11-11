@@ -8,7 +8,6 @@ onready var curve_tween = $Sprite/CurveTween
 
 func _set_properties():
 	savable_properties = ["palette"]
-	editable_properties = ["palette"]
 
 func _set_property_values():
 	set_property("palette", palette, 0)
@@ -57,5 +56,5 @@ func _on_hit():
 
 func _on_curve_tween(value):
 	sprite.position = value
-
+	sprite.reset_physics_interpolation()
 

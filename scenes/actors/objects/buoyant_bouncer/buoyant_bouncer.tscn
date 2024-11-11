@@ -116,3 +116,4 @@ anims/bob = SubResource( 6 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 volume_db = 12.0
+bus = "Sounds"

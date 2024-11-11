@@ -48,9 +48,6 @@ margin_right = 1800.0
 margin_bottom = 600.0
 mouse_filter = 2
 color = Color( 0.431373, 0, 0.14902, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource( 4 )
@@ -61,9 +58,6 @@ mouse_filter = 2
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Recolorable" type="TextureRect" parent="TextureRect"]
 visible = false

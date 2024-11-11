@@ -162,6 +162,7 @@ func _process(_delta)->void :
 	recolorable.flip_h = sprite.flip_h
 	
 	recolorable.position = sprite.position
+	recolorable.reset_physics_interpolation()
 	recolorable.scale = sprite.scale
 	recolorable.rotation = sprite.rotation
 

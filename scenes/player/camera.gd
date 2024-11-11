@@ -15,14 +15,15 @@ var shape
 
 onready var character_node = get_node(character)
 onready var bg = get_node(background)
-onready var zoom_tween = $Tween
+onready var zoom_tween = $ZoomTween
+onready var pan_tween = $PanTween
 
 onready var viewport
 
 var character_vel = Vector2(0, 0)
 
 func _ready():
-	if is_instance_valid(character_node) && Singleton.PlayerSettings.player2_character == character_node.player_id:
+	if is_instance_valid(character_node) && character_node.player_id == 1:
 		shape = get_node(character2_cam_collider).get_node("CollisionShape2D")
 		area = get_node(character2_cam_collider)
 	else:
@@ -33,6 +34,7 @@ func _physics_process(delta):
 	if !auto_move: return
 	if focus_on != null:
 		position = position.linear_interpolate(focus_on.global_position, fps_util.PHYSICS_DELTA * 3)
+		reset_physics_interpolation()
 		bg.parallax_node.scroll_base_scale.y = zoom.y
 		#zoom = zoom.linear_interpolate(Vector2(focus_zoom, focus_zoom), fps_util.PHYSICS_DELTA * 3)
 		
@@ -101,6 +103,8 @@ func _on_area_entered(stopper):
 	pass
 	return
 func set_zoom_tween(target : Vector2, time : float, override = false):
+	yield(get_tree(), "physics_frame")
+	yield(get_tree(), "physics_frame")
 	zoom_tween.remove_all()
 	# overrides level boundary safety check
 	if override:
@@ -117,8 +121,20 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 	zoom_tween.interpolate_property(self, "zoom", zoom, target, time, 1, 0)
 	zoom_tween.start()
 
-
-	
+#THIS FUNCTION DOES NOT WORK. DO NOT CALL IT, IT WILL CAUSE THE GAME TO FREEZE.
+#SOMEONE WILL NEED TO FIX IT TO MAKE IT NOT FREEZE THE GAME.
+func set_pan_tween(target : Vector2, time : float, override = false):
+	auto_move = false
+	pan_tween.remove_all()
+	# overrides level boundary safety check
+	if override:
+		pan_tween.interpolate_property(self, "pan", position, target, time, 1, 0)
+		pan_tween.start()
+		return
+	var level_bounds : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds.size * 16
+	target = Vector2(clamp(target.x, 0+(size.x/2), level_bounds.x-(size.x/2)), clamp(target.y, 0+(size.x/2), level_bounds.y-(size.x/2)))
+	pan_tween.interpolate_property(self, "pan", position, target, time, 1, 0)
+	pan_tween.start()
 	
 func load_in(_level_data : LevelData, level_area : LevelArea):
 	var level_bounds = level_area.settings.bounds
@@ -130,8 +146,10 @@ func load_in(_level_data : LevelData, level_area : LevelArea):
 	
 	if focus_on != null:
 		position = focus_on.global_position
+		reset_physics_interpolation()
 	elif character_node != null:
 		position = character_node.global_position
+		reset_physics_interpolation()
 		character_node.camera = self
 	if Singleton.PlayerSettings.number_of_players == 2:
 		base_size.x /= 2

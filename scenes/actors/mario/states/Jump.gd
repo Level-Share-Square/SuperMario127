@@ -97,7 +97,7 @@ func _update(_delta):
 				else:
 					sprite.animation = "tripleJumpLeft"
 				character.rotating_jump = true
-		else:
+		elif character.facing_direction == -1:
 			if character.jump_animation == 0:
 				sprite.animation = "jumpLeft"
 			elif character.jump_animation == 1:

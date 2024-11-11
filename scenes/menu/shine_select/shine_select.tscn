@@ -1,0 +1,371 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=4]
+[ext_resource path="res://scenes/menu/shine_select/shine_select.gd" type="Script" id=5]
+[ext_resource path="res://scenes/oldmenu/shine_select_screen/LetsaGo.gd" type="Script" id=6]
+[ext_resource path="res://scenes/oldmenu/shine_select_screen/letsa go/Mario1.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/oldmenu/shine_select_screen/letsa go/Mario2.wav" type="AudioStream" id=8]
+[ext_resource path="res://scenes/oldmenu/shine_select_screen/letsa go/Luigi1.wav" type="AudioStream" id=9]
+[ext_resource path="res://scenes/oldmenu/shine_select_screen/Mission_Select.wav" type="AudioStream" id=10]
+[ext_resource path="res://scenes/oldmenu/shine_select_screen/letsa go/Luigi2.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=12]
+[ext_resource path="res://scenes/oldmenu/shine_select_screen/Mission_Starts.wav" type="AudioStream" id=13]
+[ext_resource path="res://scenes/oldmenu/shine_select_screen/Mission_Focus.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=15]
+[ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=16]
+[ext_resource path="res://scenes/menu/shine_select/shine_parent.gd" type="Script" id=17]
+[ext_resource path="res://assets/fonts/coolfont.tres" type="DynamicFont" id=18]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float blur_amount : hint_range(0, 5);
+
+void fragment() {
+	COLOR = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur_amount);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/blur_amount = 1.0
+
+[sub_resource type="Gradient" id=11]
+offsets = PoolRealArray( 0, 0.865922, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.752941, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture2D" id=12]
+gradient = SubResource( 11 )
+width = 2
+height = 32
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="DynamicFont" id=21]
+size = 28
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_char = -1
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="Theme" id=10]
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = SubResource( 5 )
+Button/styles/focus = SubResource( 6 )
+Button/styles/hover = SubResource( 7 )
+Button/styles/normal = SubResource( 8 )
+Button/styles/pressed = SubResource( 9 )
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer:rect_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 768, 432 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "transition"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer:rect_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 768, 432 ), Vector2( 768, 688 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -128 ) ]
+}
+
+[node name="ShineSelect" type="CanvasLayer"]
+layer = 96
+script = ExtResource( 5 )
+
+[node name="Backgrounds" parent="." instance=ExtResource( 3 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="Blur" type="ColorRect" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0 )
+
+[node name="Tween" type="Tween" parent="."]
+unique_name_in_owner = true
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="MissionSelect" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 10 )
+volume_db = -3.0
+bus = "Music"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="Sounds"]
+unique_name_in_owner = true
+stream = ExtResource( 15 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="Sounds"]
+unique_name_in_owner = true
+stream = ExtResource( 12 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="MissionFocus" type="AudioStreamPlayer" parent="Sounds"]
+unique_name_in_owner = true
+stream = ExtResource( 14 )
+volume_db = -4.0
+bus = "Sounds"
+
+[node name="TransitionAudio" type="AudioStreamPlayer" parent="Sounds"]
+unique_name_in_owner = true
+stream = ExtResource( 13 )
+volume_db = -6.0
+bus = "Sounds"
+
+[node name="LetsaGo" type="Node" parent="Sounds"]
+unique_name_in_owner = true
+script = ExtResource( 6 )
+mario_voices = [ ExtResource( 7 ), ExtResource( 8 ) ]
+luigi_voices = [ ExtResource( 9 ), ExtResource( 11 ) ]
+
+[node name="LetsaGoPlayer" type="AudioStreamPlayer" parent="Sounds/LetsaGo"]
+volume_db = -6.0
+bus = "Voices"
+
+[node name="LetsaGo2" type="Node" parent="Sounds"]
+unique_name_in_owner = true
+script = ExtResource( 6 )
+mario_voices = [ ExtResource( 7 ), ExtResource( 8 ) ]
+luigi_voices = [ ExtResource( 9 ), ExtResource( 11 ) ]
+is_p2 = true
+
+[node name="LetsaGoPlayer" type="AudioStreamPlayer" parent="Sounds/LetsaGo2"]
+volume_db = -6.0
+bus = "Voices"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 768.0
+margin_bottom = 432.0
+theme = ExtResource( 1 )
+custom_constants/separation = 0
+
+[node name="TopBar" type="TextureRect" parent="VBoxContainer"]
+margin_right = 768.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 0, 128 )
+texture = SubResource( 12 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TopBar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 8
+
+[node name="Padding" type="Control" parent="VBoxContainer/TopBar/VBoxContainer"]
+margin_right = 768.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 0, 8 )
+
+[node name="LevelTitle" type="Label" parent="VBoxContainer/TopBar/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 16.0
+margin_right = 768.0
+margin_bottom = 46.0
+custom_fonts/font = SubResource( 21 )
+text = "My Level"
+align = 1
+
+[node name="LevelTitleBacking" type="Label" parent="VBoxContainer/TopBar/VBoxContainer/LevelTitle"]
+unique_name_in_owner = true
+show_behind_parent = true
+margin_top = 4.0
+margin_right = 768.0
+margin_bottom = 44.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "My Level"
+align = 1
+clip_text = true
+
+[node name="Padding2" type="Control" parent="VBoxContainer/TopBar/VBoxContainer"]
+margin_top = 54.0
+margin_right = 768.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 0, 8 )
+
+[node name="ShineTitle" type="Label" parent="VBoxContainer/TopBar/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 70.0
+margin_right = 768.0
+margin_bottom = 94.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "The Rainbow Shine Sprite"
+align = 1
+valign = 1
+clip_text = true
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 128.0
+margin_right = 768.0
+margin_bottom = 304.0
+mouse_filter = 2
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="ButtonMoveLeft" type="Button" parent="VBoxContainer/Buttons"]
+margin_right = 304.0
+margin_bottom = 176.0
+size_flags_horizontal = 3
+theme = SubResource( 10 )
+flat = true
+
+[node name="ButtonSelectShine" type="Button" parent="VBoxContainer/Buttons"]
+margin_left = 304.0
+margin_right = 464.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 160, 0 )
+theme = SubResource( 10 )
+flat = true
+
+[node name="ButtonMoveRight" type="Button" parent="VBoxContainer/Buttons"]
+margin_left = 464.0
+margin_right = 768.0
+margin_bottom = 176.0
+size_flags_horizontal = 3
+theme = SubResource( 10 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomBar" type="TextureRect" parent="VBoxContainer"]
+margin_top = 304.0
+margin_right = 768.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 0, 128 )
+texture = SubResource( 12 )
+expand = true
+flip_v = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/BottomBar"]
+margin_right = 768.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 24
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="ShineDescription" type="RichTextLabel" parent="VBoxContainer/BottomBar/MarginContainer2"]
+unique_name_in_owner = true
+margin_left = 8.0
+margin_top = 24.0
+margin_right = 760.0
+margin_bottom = 120.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = ExtResource( 18 )
+bbcode_enabled = true
+bbcode_text = "[center]This is a description get stick bugged lol[/center]"
+text = "This is a description get stick bugged lol"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/BottomBar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 72.0
+
+[node name="Back" type="Button" parent="VBoxContainer/BottomBar/MarginContainer"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 62.0
+margin_bottom = 44.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = "Red"
+text = "Back"
+script = ExtResource( 4 )
+
+[node name="Shadow" type="NinePatchRect" parent="VBoxContainer/BottomBar/MarginContainer/Back"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 16 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="ShineParent" type="Node2D" parent="."]
+position = Vector2( 384, 216 )
+script = ExtResource( 17 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 13 )
+anims/transition = SubResource( 14 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[connection signal="pressed" from="VBoxContainer/Buttons/ButtonMoveLeft" to="ShineParent" method="attempt_increment_selected_shine_index" binds= [ -1 ]]
+[connection signal="pressed" from="VBoxContainer/Buttons/ButtonSelectShine" to="." method="start_level"]
+[connection signal="pressed" from="VBoxContainer/Buttons/ButtonMoveRight" to="ShineParent" method="attempt_increment_selected_shine_index" binds= [ 1 ]]
+[connection signal="pressed" from="VBoxContainer/BottomBar/MarginContainer/Back" to="." method="back"]

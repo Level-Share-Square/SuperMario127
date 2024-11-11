@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=1]
 [ext_resource path="res://scenes/shared/background.gd" type="Script" id=2]
 
 [node name="Backgrounds" type="Node2D"]
@@ -16,5 +15,4 @@ layer = -128
 [node name="Sprite" type="Sprite" parent="Background"]
 z_index = -512
 z_as_relative = false
-texture = ExtResource( 1 )
 centered = false

@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/menu/background_scroll/icons.png" type="Texture" id=1]
+[ext_resource path="res://scenes/menu/background_scroll/stripes.png" type="Texture" id=2]
+[ext_resource path="res://scenes/menu/background_scroll/background.gd" type="Script" id=3]
+
+[sub_resource type="Shader" id=23]
+code = "shader_type canvas_item;
+
+uniform float speed;
+uniform float direction = 1;
+
+void fragment () {
+	COLOR = texture(TEXTURE, vec2(UV.x + TIME * speed * direction, UV.y + TIME * speed * direction));
+}"
+
+[sub_resource type="ShaderMaterial" id=24]
+shader = SubResource( 23 )
+shader_param/speed = 0.02
+shader_param/direction = 1.0
+
+[sub_resource type="ShaderMaterial" id=25]
+shader = SubResource( 23 )
+shader_param/speed = 0.04
+shader_param/direction = -1.0
+
+[sub_resource type="Shader" id=26]
+code = "shader_type canvas_item;
+
+uniform float u_amount = 0.1;
+
+float get_noise(vec2 uv) {
+	return fract(sin(dot(uv ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+void fragment() {
+	vec4 screen_sample = texture(SCREEN_TEXTURE, SCREEN_UV);
+	
+	float n = 2.0 * get_noise(UV + vec2(TIME, 0.0)) - 1.0;
+	COLOR = (texture(TEXTURE, UV) + n * u_amount);
+}"
+
+[sub_resource type="ShaderMaterial" id=27]
+shader = SubResource( 26 )
+shader_param/u_amount = 1.75
+
+[node name="Background" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+script = ExtResource( 3 )
+overlay_tint = Color( 0.054902, 0.0588235, 0.129412, 0.270588 )
+static_amount = 1.75
+gradient_visible = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.117647, 0.0823529, 0.419608, 1 )
+
+[node name="Stripes" type="TextureRect" parent="."]
+self_modulate = Color( 1, 1, 1, 0.376471 )
+material = SubResource( 24 )
+anchor_right = 7.144
+anchor_bottom = 7.144
+rect_scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 2
+
+[node name="Scroll" type="TextureRect" parent="."]
+material = SubResource( 25 )
+anchor_right = 6.45
+anchor_bottom = 6.45
+rect_scale = Vector2( 0.155, 0.155 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 2
+
+[node name="Overlay" type="ColorRect" parent="."]
+modulate = Color( 0.054902, 0.0588235, 0.129412, 0.270588 )
+material = SubResource( 27 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0 )

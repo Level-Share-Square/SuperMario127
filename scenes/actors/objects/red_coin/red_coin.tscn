@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/actors/objects/red_coin/red.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/objects/red_coin/sound.wav" type="AudioStream" id=2]
@@ -21,15 +21,18 @@ particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
+[sub_resource type="CircleShape2D" id=4]
+radius = 9.0
+
 [node name="Coin" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 2
 
@@ -40,11 +43,13 @@ shape = SubResource( 1 )
 pause_mode = 2
 stream = ExtResource( 2 )
 volume_db = -9.25
+bus = "Sounds"
 
 [node name="LastCollect" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 4 )
 volume_db = -9.25
+bus = "Sounds"
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 process_parent = true
@@ -56,8 +61,8 @@ margin_left = -12.0
 margin_top = -12.0
 margin_right = 12.0
 margin_bottom = 12.0
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
 text = "1"
 align = 1
 valign = 1
@@ -69,3 +74,8 @@ __meta__ = {
 material = SubResource( 3 )
 process_material = ExtResource( 6 )
 texture = ExtResource( 7 )
+
+[node name="EditorArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
+shape = SubResource( 4 )

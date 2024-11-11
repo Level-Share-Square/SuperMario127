@@ -2,6 +2,7 @@ extends GameObject
 
 var width := 600.0
 var height := 300.0
+var size := Vector2(600.0, 300.0)
 var color := Color(1, 0, 0)
 var render_in_front := false
 var tag = "default"
@@ -61,9 +62,10 @@ func change_size():
 	waves.rect_size.x = sprite.rect_size.x
 	color_sprite.rect_size.x = sprite.rect_size.x
 	area_collision.position = Vector2(width / 2, height / 2)
+	area_collision.reset_physics_interpolation()
 	area_collision.shape.extents = area_collision.position
-	
 	body_collision.position = area_collision.position
+	body_collision.reset_physics_interpolation()
 	body_collision.shape = area_collision.shape
 	
 	var rounded_color = Color(stepify(color.r, 0.05), stepify(color.g, 0.05), stepify(color.b, 0.05))

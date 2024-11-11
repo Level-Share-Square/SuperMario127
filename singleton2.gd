@@ -15,7 +15,8 @@ var autosave_timer : int = 108000
 var time : int
 var new_box
 
-var mod_active = false
+var mod_active: bool = false
+var mod_path: String
 
 var editor_hotkeys = [
 	"toggle_grid",
@@ -58,8 +59,8 @@ func toggle_dark_mode():
 func _init():
 	var file = File.new()
 	file.open("user://mods/active.127mod", file.READ)
-	var mod = file.get_line()
-	var success = ProjectSettings.load_resource_pack(mod)
+	mod_path = file.get_line()
+	var success = ProjectSettings.load_resource_pack(mod_path)
 	print(success)
 	mod_active = success
 

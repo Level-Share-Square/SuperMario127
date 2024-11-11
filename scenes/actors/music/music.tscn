@@ -5,14 +5,18 @@
 [node name="AudioStreamPlayer" type="AudioStreamPlayer"]
 pause_mode = 2
 process_priority = -1
-bus = "Editor"
+bus = "Music"
 script = ExtResource( 2 )
-play_bus = "Master"
+play_bus = "Music"
 edit_bus = "Editor"
 
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
 [node name="TemporaryMusicPlayer" type="AudioStreamPlayer" parent="."]
+bus = "Music"
 
 [node name="WaterMusicPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -80.0
+bus = "Music"
 
 [node name="Tween" type="Tween" parent="."]

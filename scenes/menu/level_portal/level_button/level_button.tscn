@@ -1,0 +1,413 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/menu/level_portal/icons/comments.png" type="Texture" id=3]
+[ext_resource path="res://scenes/menu/level_portal/icons/star_empty.png" type="Texture" id=4]
+[ext_resource path="res://scenes/menu/level_portal/icons/favorites.png" type="Texture" id=5]
+[ext_resource path="res://scenes/menu/level_portal/icons/tags.png" type="Texture" id=6]
+[ext_resource path="res://scenes/menu/level_portal/icons/star_filled.png" type="Texture" id=7]
+[ext_resource path="res://scenes/menu/level_portal/icons/author.png" type="Texture" id=8]
+[ext_resource path="res://scenes/menu/levels_list/icons/play.png" type="Texture" id=9]
+[ext_resource path="res://scenes/menu/level_portal/default_thumb.png" type="Texture" id=10]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-scale.gd" type="Script" id=11]
+[ext_resource path="res://scenes/menu/level_portal/level_button/styling.gd" type="Script" id=12]
+
+[sub_resource type="Gradient" id=197]
+colors = PoolColorArray( 0.0741917, 0.0145, 0.29, 0.92549, 0, 0.196078, 0.45098, 0 )
+
+[sub_resource type="GradientTexture2D" id=9]
+gradient = SubResource( 197 )
+fill = 1
+fill_from = Vector2( 0.5, 1 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 11
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 1 )
+
+[sub_resource type="Shader" id=195]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+uniform sampler2D gradient;
+
+void fragment(){
+	COLOR.a=texture(TEXTURE,UV).a;
+	vec2 my_uv=vec2(UV.y,0.0);
+	COLOR.rgb=COLOR.rgb*texture(gradient,my_uv).rgb;
+}"
+
+[sub_resource type="Gradient" id=190]
+offsets = PoolRealArray( 0.473373, 0.715976 )
+colors = PoolColorArray( 1, 0.992157, 0.894118, 1, 1, 0.670588, 0.286275, 1 )
+
+[sub_resource type="GradientTexture" id=196]
+gradient = SubResource( 190 )
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = SubResource( 195 )
+shader_param/gradient = SubResource( 196 )
+
+[sub_resource type="Shader" id=198]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+uniform sampler2D gradient;
+
+void fragment(){
+	COLOR.a=texture(TEXTURE,UV).a;
+	vec2 my_uv=vec2(UV.y,0.0);
+	COLOR.rgb=COLOR.rgb*texture(gradient,my_uv).rgb;
+}"
+
+[sub_resource type="Gradient" id=192]
+offsets = PoolRealArray( 0.473373, 0.715976 )
+colors = PoolColorArray( 0.65098, 1, 0.698039, 1, 0, 0.694118, 0.352941, 1 )
+
+[sub_resource type="GradientTexture" id=199]
+gradient = SubResource( 192 )
+
+[sub_resource type="ShaderMaterial" id=194]
+shader = SubResource( 198 )
+shader_param/gradient = SubResource( 199 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 10
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 1 )
+
+[node name="Level" type="Button"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_right = 224.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 224, 112 )
+rect_pivot_offset = Vector2( 112, 56 )
+size_flags_horizontal = 3
+theme = ExtResource( 2 )
+script = ExtResource( 11 )
+click_override = "LevelClickSound"
+
+[node name="Styling" type="Control" parent="."]
+unique_name_in_owner = true
+mouse_filter = 2
+script = ExtResource( 12 )
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color( 0, 0.231373, 0.478431, 0.627451 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Gradient" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = SubResource( 9 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 4
+custom_constants/margin_top = 2
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 2
+
+[node name="Info" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 4.0
+margin_top = 2.0
+margin_right = 220.0
+margin_bottom = 110.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 1
+
+[node name="Clipper" type="Control" parent="MarginContainer/Info"]
+margin_top = 1.0
+margin_right = 216.0
+margin_bottom = 13.0
+rect_min_size = Vector2( 0, 12 )
+rect_clip_content = true
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Info/Clipper"]
+margin_right = 216.0
+margin_bottom = 13.0
+rect_clip_content = true
+mouse_filter = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/Info/Clipper/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 30.0
+margin_right = 186.0
+margin_bottom = 13.0
+rect_clip_content = true
+custom_fonts/font = SubResource( 10 )
+text = "Super Mario 63 Tall Tall Mountain +"
+valign = 1
+
+[node name="Misc" type="HBoxContainer" parent="MarginContainer/Info"]
+margin_top = 17.0
+margin_right = 216.0
+margin_bottom = 89.0
+mouse_filter = 2
+
+[node name="Thumbnail" type="TextureRect" parent="MarginContainer/Info/Misc"]
+unique_name_in_owner = true
+margin_right = 128.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 128, 72 )
+mouse_filter = 2
+texture = ExtResource( 10 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Info/Misc/Thumbnail"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 2
+custom_constants/margin_top = 2
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 58
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Info/Misc/Thumbnail/MarginContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 126.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 0, 12 )
+mouse_filter = 2
+alignment = 2
+
+[node name="StarOutline" type="TextureProgress" parent="MarginContainer/Info/Misc/Thumbnail/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+self_modulate = Color( 0.803922, 0.513726, 0.513726, 1 )
+material = SubResource( 15 )
+margin_left = 60.0
+margin_right = 124.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 64, 0 )
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+texture_under = ExtResource( 4 )
+nine_patch_stretch = true
+
+[node name="Stars" type="TextureProgress" parent="MarginContainer/Info/Misc/Thumbnail/MarginContainer/HBoxContainer/StarOutline"]
+unique_name_in_owner = true
+material = SubResource( 15 )
+margin_right = 64.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 64, 0 )
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+value = 4.5
+texture_progress = ExtResource( 7 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="GreenStarOutline" type="TextureProgress" parent="MarginContainer/Info/Misc/Thumbnail/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color( 0, 0.576471, 0.588235, 1 )
+material = SubResource( 194 )
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 64, 0 )
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+texture_under = ExtResource( 4 )
+nine_patch_stretch = true
+
+[node name="GreenStars" type="TextureProgress" parent="MarginContainer/Info/Misc/Thumbnail/MarginContainer/HBoxContainer/GreenStarOutline"]
+unique_name_in_owner = true
+material = SubResource( 194 )
+margin_right = 64.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 64, 0 )
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+value = 4.5
+texture_progress = ExtResource( 7 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Info/Misc"]
+margin_left = 132.0
+margin_right = 216.0
+margin_bottom = 72.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/separation = 2
+alignment = 1
+
+[node name="Author" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
+margin_top = 1.0
+margin_right = 84.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 24 )
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/Author"]
+margin_right = 13.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 13, 0 )
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="AuthorLabel" type="Label" parent="MarginContainer/Info/Misc/VBoxContainer/Author"]
+unique_name_in_owner = true
+margin_left = 17.0
+margin_right = 84.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.839216, 0.882353, 1, 1 )
+custom_constants/line_spacing = -2
+custom_fonts/font = SubResource( 11 )
+text = "Matthew_of_C0lumbus"
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="PlaysContainer" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 27.0
+margin_right = 84.0
+margin_bottom = 40.0
+mouse_filter = 2
+
+[node name="Icon" type="Control" parent="MarginContainer/Info/Misc/VBoxContainer/PlaysContainer"]
+margin_right = 13.0
+margin_bottom = 13.0
+rect_min_size = Vector2( 13, 0 )
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/PlaysContainer/Icon"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 11.0
+margin_bottom = 11.0
+mouse_filter = 2
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="PlaysLabel" type="Label" parent="MarginContainer/Info/Misc/VBoxContainer/PlaysContainer"]
+unique_name_in_owner = true
+margin_left = 17.0
+margin_right = 84.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.839216, 0.882353, 1, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "18"
+valign = 1
+clip_text = true
+
+[node name="FavoritesContainer" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 42.0
+margin_right = 84.0
+margin_bottom = 55.0
+mouse_filter = 2
+
+[node name="Icon" type="Control" parent="MarginContainer/Info/Misc/VBoxContainer/FavoritesContainer"]
+margin_right = 13.0
+margin_bottom = 13.0
+rect_min_size = Vector2( 13, 0 )
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/FavoritesContainer/Icon"]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 12.0
+margin_bottom = 11.0
+mouse_filter = 2
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="FavoritesLabel" type="Label" parent="MarginContainer/Info/Misc/VBoxContainer/FavoritesContainer"]
+unique_name_in_owner = true
+margin_left = 17.0
+margin_right = 84.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.839216, 0.882353, 1, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "5"
+valign = 1
+clip_text = true
+
+[node name="CommentsContainer" type="HBoxContainer" parent="MarginContainer/Info/Misc/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 57.0
+margin_right = 84.0
+margin_bottom = 70.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Info/Misc/VBoxContainer/CommentsContainer"]
+margin_right = 13.0
+margin_bottom = 13.0
+rect_min_size = Vector2( 13, 0 )
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="CommentsLabel" type="Label" parent="MarginContainer/Info/Misc/VBoxContainer/CommentsContainer"]
+unique_name_in_owner = true
+margin_left = 17.0
+margin_right = 84.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.839216, 0.882353, 1, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "2"
+valign = 1
+clip_text = true
+
+[node name="Tags" type="HBoxContainer" parent="MarginContainer/Info"]
+margin_top = 93.0
+margin_right = 216.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 0, 13 )
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Info/Tags"]
+margin_right = 13.0
+margin_bottom = 13.0
+rect_min_size = Vector2( 13, 0 )
+mouse_filter = 2
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="TagsLabel" type="Label" parent="MarginContainer/Info/Tags"]
+unique_name_in_owner = true
+margin_left = 13.0
+margin_right = 216.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.839216, 0.882353, 1, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "ToLDC, Exploration, Short, Musical, Funny"
+align = 1
+clip_text = true

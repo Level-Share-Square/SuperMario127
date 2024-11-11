@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/styles/LevelListPanel.tres" type="StyleBox" id=9]
 [ext_resource path="res://assets/styles/BrightButtonStyleNormal.tres" type="StyleBox" id=10]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=11]
-[ext_resource path="res://scenes/menu/127Button.gd" type="Script" id=12]
+[ext_resource path="res://scenes/oldmenu/127Button.gd" type="Script" id=12]
 [ext_resource path="res://assets/styles/ButtonStyleDisabled.tres" type="StyleBox" id=13]
 [ext_resource path="res://scenes/editor/assets/clickable_shadow_arrow.png" type="Texture" id=14]
 [ext_resource path="res://scenes/editor/assets/clickable_shadow_arrow_hover.png" type="Texture" id=15]
@@ -100,10 +100,12 @@ __meta__ = {
 [node name="HoverSound" type="AudioStreamPlayer" parent="HBoxContainer/SwitchToButton"]
 stream = ExtResource( 11 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="HBoxContainer/SwitchToButton"]
 stream = ExtResource( 6 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="DeleteButton" type="Button" parent="HBoxContainer"]
 margin_left = 224.0
@@ -126,10 +128,12 @@ __meta__ = {
 [node name="HoverSound" type="AudioStreamPlayer" parent="HBoxContainer/DeleteButton"]
 stream = ExtResource( 11 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="HBoxContainer/DeleteButton"]
 stream = ExtResource( 6 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="DuplicateButton" type="Button" parent="HBoxContainer"]
 margin_left = 419.0
@@ -153,10 +157,12 @@ script = ExtResource( 12 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="HBoxContainer/DuplicateButton"]
 stream = ExtResource( 11 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="HBoxContainer/DuplicateButton"]
 stream = ExtResource( 6 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="MoveArea" type="Control" parent="."]
 margin_left = 738.0
@@ -187,4 +193,3 @@ texture_disabled = ExtResource( 16 )
 expand = true
 
 [connection signal="pressed" from="HBoxContainer/DeleteButton" to="HBoxContainer/DeleteButton" method="_on_ResetLevelButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/DuplicateButton" to="HBoxContainer/DuplicateButton" method="_on_ResetLevelButton_pressed"]

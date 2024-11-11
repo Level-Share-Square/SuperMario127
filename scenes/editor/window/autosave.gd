@@ -39,13 +39,16 @@ func _ready():
 	var file = File.new()
 	$"../LevelName".hide()
 	show()
-	if file.file_exists("user://autosave/" + "main_" + level_name + ".autosave"):
-		file.open("user://autosave/" + "main_" + level_name + ".autosave", File.READ)
+	
+	var directory := Directory.new()
+	if !directory.dir_exists("user://autosaves"):
+		directory.make_dir("user://autosaves")
+			
+	if file.file_exists("user://autosaves/" + "main_" + level_name + ".autosave"):
+		file.open("user://autosaves/" + "main_" + level_name + ".autosave", File.READ)
 		var time = file.get_line()
-		var code = file.get_line()
-		var json = parse_json(code)
-#		var prin = level_info.load_from_dictionary(code)
-		main_level_code = json["level_code"]
+		main_level_code = file.get_line()
+		
 		populate_info_panel(LevelInfo.new(main_level_code))
 		main_time = float(time)
 		date.add_item(Time.get_datetime_string_from_unix_time(main_time, true) + " (Main)")
@@ -54,7 +57,7 @@ func _ready():
 		hide()
 		$"../LevelName".show()
 #
-	for i in list_files_in_directory("user://autosave"):
+	for i in list_files_in_directory("user://autosaves"):
 		names.append(i)
 		times.append(int(i))
 
@@ -66,13 +69,12 @@ func item_selected(index):
 		active_level_code = main_level_code
 	else:
 		var file = File.new()
-		print("user://autosave/" + names[index - 1])
-		file.open("user://autosave/" + names[index - 1], File.READ)
+		print("user://autosaves/" + names[index - 1])
+		file.open("user://autosaves/" + names[index - 1], File.READ)
 		var fodder = file.get_line()
-		var code = file.get_line()
+		active_level_code = file.get_line()
 		file.close()
-		var json = parse_json(code)
-		active_level_code = json["level_code"]
+		
 	populate_info_panel(LevelInfo.new(active_level_code))
 
 func populate_info_panel(level_info : LevelInfo = null) -> void:
@@ -125,7 +127,7 @@ func list_files_in_directory(path):
 
 func on_clear_pressed():
 	var dir = Directory.new()
-	dir.open("user://autosave")
+	dir.open("user://autosaves")
 	dir.list_dir_begin()
 
 	while true:
@@ -133,8 +135,8 @@ func on_clear_pressed():
 		if file == "":
 			break
 		elif file.begins_with(LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()).level_name):
-			dir.remove("user://autosave/" + file)
-	dir.remove("user://autosave/" + LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()).level_name + "_main.autosave")
+			dir.remove("user://autosaves/" + file)
+	dir.remove("user://autosaves/" + LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()).level_name + "_main.autosave")
 	dir.list_dir_end()
 	hide()
 	$"../LevelName".show()

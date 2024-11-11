@@ -14,6 +14,7 @@ onready var player_detector = $PlayerDetector
 onready var launch_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/launch.wav")
 onready var flying_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/flying.wav")
 onready var windup_noise : AudioStream = preload("res://scenes/actors/objects/launch_star/sfx/windup.wav")
+onready var launch_particles : CPUParticles2D = $LaunchParticles
 
 enum states {IDLE, HOLDING, WINDUP, LAUNCH}
 var state = states.IDLE
@@ -46,7 +47,7 @@ func invalid_curve(check : Curve2D):
 		return false
 		
 func set_camera():
-	print("set camera")
+	#print("set camera")
 	if mario.movable:
 		mario.camera.auto_move = true
 		
@@ -98,6 +99,7 @@ func set_state(to:int):
 			return
 	
 func _ready():
+#	launch_particles.emitting = false
 	if(invalid_curve(curve)):
 		curve.add_point(Vector2())
 		curve.add_point(Vector2(0, -600))
@@ -119,6 +121,7 @@ func _physics_process(delta):
 		star_container.rotation_degrees += 90
 		player_detector.look_at(position + path.curve.get_point_position(1))
 		player_detector.rotation_degrees += 90
+		launch_particles.direction = Vector2.UP.rotated(deg2rad(star_container.rotation_degrees))
 	if enabled and mode == 0:
 		match(state):
 			states.IDLE:
@@ -151,6 +154,7 @@ func physics_process_holding(delta:float):
 		mario.state._stop(delta)
 		return
 	mario.position = lerp(mario.position, position, 0.1)
+	mario.reset_physics_interpolation()
 	mario.sprite.rotation = lerp_angle(mario.sprite.rotation, pathfollow.rotation + 1.571, 0.07)
 	if mario.inputs[4][0]:
 		set_state(2)
@@ -162,12 +166,12 @@ func physics_process_windup(delta:float):
 		mario.set_state_by_name("LaunchStarState", delta)
 		mario.connect("state_changed", self, "cancel_launch")	
 	mario.position = innerstar.global_position
+	mario.reset_physics_interpolation()
 	mario.sprite.look_at(position + pathfollow.position)
 	mario.sprite.rotation_degrees += 90
 		
 # the launch star is launching mario
-func physics_process_launch(delta:float):	
-	
+func physics_process_launch(delta:float):
 	var dif = to_global(pathfollow.position) - last_position
 	if !pathfollow.offset >= path.curve.get_baked_length():
 		last_position = to_global(pathfollow.position)
@@ -183,6 +187,7 @@ func physics_process_launch(delta:float):
 	#todo: fix exit velocity
 	if pathfollow.offset >= path.curve.get_baked_length(): 
 		mario.position = mario.position.move_toward(position + pathfollow.position, speed)
+		mario.reset_physics_interpolation()
 		if mario.position.distance_to(position + pathfollow.position) <= 10:
 			mario.velocity = Vector2(0, -speed).rotated(mario.sprite.rotation) * 60
 			mario.facing_direction = sign(mario.velocity.x)
@@ -192,6 +197,7 @@ func physics_process_launch(delta:float):
 	else:
 		pathfollow.offset += speed
 		mario.position = lerp(mario.position, position + pathfollow.position, clamp(0.008 * speed, 0, 1))
+		mario.reset_physics_interpolation()
 	mario.last_position = mario.position
 func cancel_launch(new, old):
 	set_state(0)

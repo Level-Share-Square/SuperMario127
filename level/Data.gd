@@ -1,14 +1,34 @@
 class_name LevelData
 
-var current_format_version := "0.4.9"
-var name := "My Level"
+
+const DEFAULT_CODE_PATH: String = "res://level/default_level.tres"
+
+const DEFAULT_NAME: String = "My Level"
+const DEFAULT_AUTHOR: String = "Unknown"
+const DEFAULT_DESCRIPTION: String = "This level has no description."
+const DEFAULT_THUMBNAIL_URL: String = ""
+ 
+const current_format_version := "0.5.0"
+
+var name := DEFAULT_NAME
+var author := DEFAULT_AUTHOR
+var description := DEFAULT_DESCRIPTION
+var thumbnail_url := DEFAULT_THUMBNAIL_URL
+
 var areas = []
 var functions = {}
 var global_vars_node = null
 var vars : LevelVars
 
-func _init():
-	pass
+var layout_ids: Array = []
+var layout_palettes: Array = []
+var pinned_items: Array = []
+
+
+func _init(code: String = ""):
+	if code == "":
+		code = level_list_util.load_level_code_file(DEFAULT_CODE_PATH)
+	load_in(code)
 #	var ready_function_struct = FunctionStruct.new()
 	
 #	functions.size_ready_function = ready_function_struct
@@ -105,6 +125,7 @@ func get_settings(result) -> LevelAreaSettings:
 	settings.background_palette = result.background_palette
 	settings.music = result.music
 	settings.gravity = abs(result.gravity)
+	settings.timer = abs(result.timer)
 	var size_vec2 = get_vector2(result.size)
 	settings.bounds.size = Vector2(clamp(size_vec2.x, 24, 1500), clamp(size_vec2.y, 14, 1500))
 	return settings
@@ -189,7 +210,7 @@ func get_object(result) -> LevelObject:
 	return object
 
 func load_in(code):
-	vars = LevelVars.new()	
+	vars = LevelVars.new()
 
 	var result
 	result = level_code_util.decode(code)
@@ -220,10 +241,20 @@ func load_in(code):
 		
 	if result.format_version == "0.4.8":
 		result = conversion_util.convert_048_to_049(result)
+	
+	if result.format_version == "0.4.9":
+		result = conversion_util.convert_049_to_050(result)
 
 	assert(result.format_version)
 	var format_version = result.format_version
 	name = result.name
+	author = result.author
+	description = result.description
+	thumbnail_url = result.thumbnail_url
+	
+	layout_ids = result.layout_ids
+	layout_palettes = result.layout_palettes
+	pinned_items = result.pinned_items
 	
 	if format_version == current_format_version:
 		for area_result in result.areas:
@@ -236,50 +267,28 @@ func get_encoded_level_data():
 	
 	var level_string = ""
 	var level_name = name
+	var level_author = author
+	var level_description = description
+	var level_thumbnail = thumbnail_url
 	
-	
+	# resisting the urge to shoot myself
+	# why cant u just automate this,,,
 	level_string += current_format_version + ","
 	level_string += level_name.percent_encode() + ","
+	level_string += level_author.percent_encode() + ","
+	level_string += level_description.percent_encode() + ","
+	level_string += level_thumbnail.percent_encode() + ","
 	
 	level_string += "["
-	for func_key in functions:
-		level_string += func_key.percent_encode()
-		level_string += "["
-		for instruction in functions[func_key].instructions:
-			level_string += str(instruction.id) + ","
-			level_string += str(instruction.scope) + ","
-			
-			var instruction_value = instruction.value
-			level_string += str(instruction_value.id) + "["
-			
-			level_string += "["
-			for key in instruction_value.path:
-				level_string += value_util.encode_value(key) + ","
-			level_string.erase(level_string.length() - 1, 1)
-			level_string += "],"
-			
-			level_string += "["
-			for argument in instruction_value.args:
-				if typeof(argument) == TYPE_OBJECT: # there's a good joke in here somewhere
-					level_string += argument.id + "["
-					for value in argument.values:
-						if typeof(value) == TYPE_OBJECT:
-							level_string += value.id + "["
-							for key in value.path:
-								level_string += value_util.encode_value(key) + ","
-							level_string.erase(level_string.length() - 1, 1)
-							level_string += "],"
-						else:
-							level_string += value_util.encode_value(value) + ","
-					level_string.erase(level_string.length() - 1, 1)
-					level_string += "],"
-				else:
-					level_string += value_util.encode_value(argument) + ","
-			level_string.erase(level_string.length() - 1, 1)
-			level_string += "]"
-			
-			level_string += "]"
-		level_string += "],"
+	for index in range(layout_ids.size()):
+		if index != 0:
+			level_string += ","
+		level_string += str(layout_palettes[index]) + str(layout_ids[index])
+	level_string += "^"
+	for index in range(pinned_items.size()):
+		if index != 0:
+			level_string += ","
+		level_string += str(pinned_items[index][1]) + str(pinned_items[index][0])
 	level_string += "],"
 	
 	for area in areas:
@@ -294,7 +303,8 @@ func get_encoded_level_data():
 		level_string += value_util.encode_value(settings.background) + ","
 		level_string += value_util.encode_value(settings.music) + ","
 		level_string += value_util.encode_value(settings.gravity) + ","
-		level_string += value_util.encode_value(settings.background_palette) + "~"
+		level_string += value_util.encode_value(settings.background_palette) + ","
+		level_string += value_util.encode_value(settings.timer) + "~"
 		
 		var tiles := []
 		var very_background_tiles := []

@@ -29,6 +29,6 @@ func set_bus(bus: String):
 	for i in container:
 		i.bus = bus
 	current_bus = bus
-	print(get_bus())
+	#print(get_bus())
 func get_bus():
 	return current_bus

@@ -12,8 +12,8 @@
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=10]
 [ext_resource path="res://scenes/shared/background/foregrounds/hills/preview.png" type="Texture" id=11]
 [ext_resource path="res://scenes/editor/window/autosave.gd" type="Script" id=12]
-[ext_resource path="res://scenes/menu/levels_screen/shine_icon.png" type="Texture" id=13]
-[ext_resource path="res://scenes/menu/levels_screen/ui/star_coin_icon.png" type="Texture" id=14]
+[ext_resource path="res://scenes/oldmenu/levels_screen/shine_icon.png" type="Texture" id=13]
+[ext_resource path="res://scenes/oldmenu/levels_screen/ui/star_coin_icon.png" type="Texture" id=14]
 [ext_resource path="res://scenes/editor/window/autosavetimer.gd" type="Script" id=16]
 [ext_resource path="res://scenes/shared/ui/selector.tres" type="Theme" id=17]
 
@@ -133,10 +133,12 @@ __meta__ = {
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 3 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 7 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Contents" type="Control" parent="."]
 anchor_bottom = 0.06
@@ -188,10 +190,12 @@ text = "Load Save"
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/LoadButton"]
 stream = ExtResource( 3 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="Contents/LoadButton"]
 stream = ExtResource( 7 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClearButton" type="Button" parent="Contents"]
 margin_left = 570.096
@@ -209,10 +213,12 @@ text = "Clear All Saves"
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/ClearButton"]
 stream = ExtResource( 3 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="Contents/ClearButton"]
 stream = ExtResource( 7 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ShineProgressPanel" type="PanelContainer" parent="Contents"]
 margin_left = 430.096

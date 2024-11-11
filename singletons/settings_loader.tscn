@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://singletons/settings_loader.gd" type="Script" id=1]
+
+[node name="SettingsLoader" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 1 )

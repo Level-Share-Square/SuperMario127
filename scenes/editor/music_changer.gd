@@ -17,7 +17,7 @@ func update_display():
 	var area = data.areas[Singleton.CurrentLevelData.area]
 	
 	if typeof(area.settings.music) == TYPE_INT:
-		var resource = Singleton.MiscCache.music_nodes[area.settings.music]
+		var resource = Singleton.MiscCache.get_music_node(area.settings.music)
 		
 		music_title.text = resource.title
 		music_note.text = resource.note
@@ -45,6 +45,7 @@ func text_entered(text):
 		if not re.search(music_note.text):
 			music_note.text = "0.00"
 		Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.music = "LP" + music_note.text + "=" + music_title.text
+		Singleton.Music.reset_custom_song()
 		update_display()
 
 func _ready():

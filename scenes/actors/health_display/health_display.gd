@@ -33,6 +33,9 @@ var current_health = 8
 # being rewritten already. I doubt anyone would need to work much
 # with this code between now, and after the rewrite is finished.
 
+## ^ AND THATS WHERE UR WRONG NERD
+## good thing im rewriting it anyways lolll xP
+
 func _ready():
 	character = get_node(char_path)
 	if (character.player_id == 0) and Singleton.PlayerSettings.number_of_players == 2 and Singleton.PlayerSettings.other_player_id == -1:
@@ -66,6 +69,7 @@ func _process(delta):
 				var color_to_use
 				
 				# i would think up a better solution but again waste of effort
+				## omg yandere dev hiiiii :D
 				if character.health > 6:
 					color_to_use = four_quarter_color
 				elif character.health > 4:

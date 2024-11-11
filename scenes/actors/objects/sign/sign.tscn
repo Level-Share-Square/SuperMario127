@@ -1,10 +1,8 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scenes/actors/objects/sign/sign.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=2]
-[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://scenes/editor/assets/clickable_arrow.png" type="Texture" id=4]
-[ext_resource path="res://scenes/actors/objects/sign/exclamation_mark.png" type="Texture" id=5]
+[ext_resource path="res://classes/text/speech_bubble.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/actors/objects/sign/message_disappear.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/actors/objects/sign/message_appear.wav" type="AudioStream" id=7]
 [ext_resource path="res://scenes/actors/objects/sign/stick.png" type="Texture" id=8]
@@ -26,6 +24,8 @@
 [ext_resource path="res://scenes/actors/objects/sign/palettes/9/sign.png" type="Texture" id=24]
 [ext_resource path="res://scenes/actors/objects/sign/palettes/6/sign.png" type="Texture" id=25]
 [ext_resource path="res://scenes/actors/objects/sign/palettes/8/sign.png" type="Texture" id=26]
+[ext_resource path="res://assets/misc/interaction_marker.png" type="Texture" id=27]
+[ext_resource path="res://assets/misc/interaction_marker_outline.png" type="Texture" id=29]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 80, 60 )
@@ -48,27 +48,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 53, 23 ), Vector2( 53, 30 ), Vector2( 53, 23 ) ]
 }
-
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.133333, 0.145098, 0.196078, 0.835294 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-expand_margin_left = 1.0
-expand_margin_right = 1.0
-expand_margin_top = 1.0
-expand_margin_bottom = 1.0
-
-[sub_resource type="DynamicFont" id=5]
-size = 25
-outline_color = Color( 0.054902, 0, 0.25098, 1 )
-font_data = ExtResource( 3 )
 
 [node name="Sign" type="Node2D"]
 z_index = -1
@@ -93,10 +72,11 @@ position = Vector2( 0, -35 )
 shape = SubResource( 1 )
 
 [node name="InteractArea" type="Area2D" parent="."]
-collision_layer = 4096
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+visible = false
 position = Vector2( 0, 5 )
 shape = SubResource( 2 )
 
@@ -105,65 +85,42 @@ anims/bobbin = SubResource( 3 )
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="SpeechBubble" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -31 )
+
 [node name="Message" type="Node2D" parent="."]
 position = Vector2( -65.625, -90 )
 z_index = 99
 z_as_relative = false
 
-[node name="Panel" type="Panel" parent="Message"]
-margin_left = -46.875
-margin_top = -19.375
-margin_right = 178.125
-margin_bottom = 46.25
-mouse_filter = 2
-custom_styles/panel = SubResource( 4 )
-
-[node name="Label" type="RichTextLabel" parent="Message"]
-margin_left = -42.5
-margin_top = -14.375
-margin_right = 390.0
-margin_bottom = 98.375
-rect_scale = Vector2( 0.5, 0.5 )
-mouse_filter = 2
-custom_fonts/normal_font = SubResource( 5 )
-bbcode_enabled = true
-bbcode_text = "[center]L is real 2401, Mario Peach and Bowser, (not) By Runouw[/center]"
-text = "L is real 2401, Mario Peach and Bowser, (not) By Runouw"
-scroll_active = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="Message"]
-margin_left = 72.0
-margin_top = 46.875
-margin_right = 200.0
-margin_bottom = 174.875
-rect_rotation = 90.0
-rect_scale = Vector2( 0.1, 0.1 )
-mouse_filter = 2
-texture = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ExclamationMark" type="TextureRect" parent="Message"]
 visible = false
 margin_left = 53.0
 margin_top = 29.8337
-margin_right = 203.0
-margin_bottom = 179.834
+margin_right = 181.0
+margin_bottom = 158.0
 rect_scale = Vector2( 0.2, 0.2 )
 mouse_filter = 2
-texture = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource( 27 )
+expand = true
+stretch_mode = 6
+
+[node name="Outline" type="TextureRect" parent="Message/ExclamationMark"]
+modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 29 )
+expand = true
+stretch_mode = 6
 
 [node name="MessageAppear" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="MessageDisappear" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -10.0
+bus = "Sounds"

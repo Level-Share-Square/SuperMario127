@@ -38,7 +38,7 @@ func _input(event):
 	color_manager.set_value(base_color)
 	notify_property_manager()
 
-func update_value(color : Color):
+func update_value(color: Color, notify_manager: bool = true):
 	var length := get_rect().size.x * color.s / 2
 	var angle := color.h*2*PI
 	selector.position = Vector2(sin(angle)*length, cos(angle)*length)
@@ -48,7 +48,9 @@ func update_value(color : Color):
 	self_modulate = Color(color.v, color.v, color.v)
 	gradient_selector.set_brightness(color.v)
 	base_color = color
-	notify_property_manager()
+	
+	if notify_manager:
+		notify_property_manager()
 
 func notify_property_manager():
 	var color = color_manager.get_value()

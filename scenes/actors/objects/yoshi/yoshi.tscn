@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/actors/objects/yoshi/body_color1_frames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/actors/objects/npc_base/npc_base.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/actors/objects/yoshi/head_color_frames.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://scenes/actors/objects/yoshi/head_frames.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://scenes/actors/objects/yoshi/body_color2_frames.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://scenes/actors/objects/yoshi/body_frames.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=7]
+[ext_resource path="res://scenes/actors/objects/yoshi/yoshi.gd" type="Script" id=8]
+
+[node name="Yoshi" instance=ExtResource( 2 )]
+script = ExtResource( 8 )
+
+[node name="KinematicBody2D" parent="." index="1"]
+collision_layer = 16384
+
+[node name="AnimationHandler" parent="KinematicBody2D" index="2"]
+position = Vector2( -1, -7 )
+head_positions = {
+"running": PoolVector2Array( -2, -3, -2, -4, -2, -5, -2, -4, -3, -3, -3, -4, -3, -5, -3, -5 ),
+"standing": PoolVector2Array( -1, -4, -1, -5 )
+}
+expression_offsets = {
+"happy": Vector2( -1, 0 ),
+"shocked": Vector2( -1, 0 )
+}
+
+[node name="Body" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler" index="0"]
+frames = ExtResource( 6 )
+animation = "standing"
+playing = true
+
+[node name="Color1" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler/Body" index="0"]
+frames = ExtResource( 1 )
+animation = "standing"
+playing = true
+script = ExtResource( 7 )
+
+[node name="Color2" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler/Body" index="1"]
+frames = ExtResource( 5 )
+animation = "standing"
+playing = true
+script = ExtResource( 7 )
+
+[node name="Head" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler" index="1"]
+position = Vector2( -2, -4 )
+frames = ExtResource( 4 )
+animation = "smiling"
+playing = true
+
+[node name="Color" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler/Head" index="0"]
+frames = ExtResource( 3 )
+animation = "smiling"
+playing = true
+script = ExtResource( 7 )

@@ -14,6 +14,7 @@ var hovered := false
 var enabled := true
 var preview_position := Vector2(72, 92)
 var palette := 0
+var palettes := 0
 
 # true if creating a GameObject for the object settings preview
 var is_preview : bool = false
@@ -28,6 +29,7 @@ var base_connectable_signals : PoolStringArray = ["ready", "process", "physics_p
 var connectable_signals : PoolStringArray = []
 
 var property_value_to_name := {}
+var property_value_menus := {}
 
 signal process
 signal physics_process
@@ -38,6 +40,8 @@ var physics_frame_counter = 0
 
 var has_process_connection = false
 var has_physics_connection = false
+
+export var help_menu_text := "Base help menu text."
 
 func _ready():
 	if visible == false and mode == 1:
@@ -111,6 +115,10 @@ func get_property_index(key) -> int:
 	return index
 
 func set_property(key, value, change_level_object = true, alias = null):
+	if typeof(self[key]) != typeof(value):
+		assert("Object tried to set property '" + key + "', but the provided type does not match.")
+		return
+	
 	self[key] = value
 	if alias != null:
 		editor_aliases[key] = alias
@@ -121,14 +129,14 @@ func set_property(key, value, change_level_object = true, alias = null):
 			level_object_ref.properties.append(value)
 		else:
 			level_object_ref.properties[index] = value
-			
+		
 		if key == "visible":
 			if mode == 1:
 				visible = true
 				var color = modulate
 				color.a = 0.5 if value == false else 1.0
 				modulate = color
-	if mode == 1:
+	if mode == 1 and !is_preview:
 		emit_signal("property_changed", key, value)
 
 func get_editor_alias(key):
@@ -183,7 +191,13 @@ func set_bool_alias(key, true_alias, false_alias):
 	if true_alias != null && false_alias != null:
 		property_value_to_name[key] = {true: true_alias, false: false_alias}
 	else:
-		push_error("Bool aliases for %s was not set!" % key)
+		printerr("Bool aliases for %s was not set!" % key)
+		
+func set_property_menu(key, menu_array: Array):
+	if menu_array != null:
+		property_value_menus[key] = menu_array
+	else:
+		printerr("Property menu for %s was not set!" % key)
 
 func on_signal_fire(index):
 	var current_mode = get_tree().get_current_scene().mode

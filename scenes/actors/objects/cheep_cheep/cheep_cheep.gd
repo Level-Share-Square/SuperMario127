@@ -38,7 +38,7 @@ var time_alive := 0.0
 var time_until_die := 0.0
 var time_until_turn := 3.0
 
-var color := Color(1, 0, 0)
+export var color := Color(1, 0, 0)
 var rainbow := false
 
 var hit := false
@@ -156,6 +156,7 @@ func _process(_delta) -> void:
 		color_sprite.frame = sprite.frame
 		color_sprite.rotation = sprite.rotation
 		color_sprite.position = sprite.position
+		color_sprite.reset_physics_interpolation()
 		color_sprite.scale = sprite.scale
 		color_sprite.flip_h = sprite.flip_h
 		color_sprite.modulate = color

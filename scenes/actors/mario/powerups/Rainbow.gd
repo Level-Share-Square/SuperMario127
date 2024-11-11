@@ -13,6 +13,7 @@ func _ready():
 	music_id = 26
 
 func _start(_delta, play_temp_music: bool):
+	start_display_timer()
 	emit_signal("powerup_state_changed", id)
 	if play_temp_music:
 		Singleton.Music.play_temporary_music(music_id)

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/level_designer_portal_ng.ogg-a06772e7f91c752e823fd34318095624.oggstr"
+
+[deps]
+
+source_file="res://assets/music/level_designer_portal_ng.ogg"
+dest_files=[ "res://.import/level_designer_portal_ng.ogg-a06772e7f91c752e823fd34318095624.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=18.909

@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Luigi1.wav-49b19f465db7e8a9aad850e13ab162d6.sample"
+
+[deps]
+
+source_file="res://scenes/oldmenu/shine_select_screen/letsa go/Luigi1.wav"
+dest_files=[ "res://.import/Luigi1.wav-49b19f465db7e8a9aad850e13ab162d6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

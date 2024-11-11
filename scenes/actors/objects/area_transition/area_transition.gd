@@ -33,6 +33,7 @@ func _set_property_values():
 	set_property("vertical", vertical)
 	set_property("parts", parts)
 	set_property("stops_camera", stops_camera)
+#	set_property("instant", instant, true, "Instant (Local)")
 	
 func _init():
 	teleportation_mode = true
@@ -150,8 +151,8 @@ func _physics_process(_delta : float) -> void:
 	for chr in stored_characters:
 		if chr != null:
 			character = chr
-	if character:
-		print(character.position)
+	#if character:
+		#print(character.position)
 
 func _on_body_entered(body):
 	if enabled and is_idle and !entering and teleportation_mode:
@@ -159,6 +160,7 @@ func _on_body_entered(body):
 			body.toggle_movement(false)
 			body.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 			start_pipe_enter_animation(body)
+				
 
 func start_pipe_enter_animation(character : Character) -> void:
 	stored_characters[character.player_id] = character
@@ -235,9 +237,10 @@ func exit_with_helper(character : Character):
 	character.state = helper.state
 	character.facing_direction = helper.facing_direction
 	character.camera.global_position = helper.find_camera_position(vertical, character.global_position, character.camera.base_size, parts * 32)
+	character.camera.reset_physics_interpolation()
 	character.camera.last_position = character.camera.position
-	
 	character.position = global_position + helper.find_exit_offset(vertical, parts * 32)
+	character.reset_physics_interpolation()
 	var timer = Timer.new()
 	timer.connect("timeout", character, "toggle_movement", [true])
 	timer.connect("timeout", self, "set_camera", [character])
@@ -257,6 +260,7 @@ func reset_sprite(character : Character): #This is here in case Mario came from 
 	character.sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	character.sprite.scale = Vector2(1.0, 1.0)
 	character.sprite.position = Vector2.ZERO
+	character.sprite.reset_physics_interpolation()
 
 func set_camera(character: Character):
 	character.camera.auto_move = true

@@ -39,7 +39,11 @@ func _update(delta):
 	# Things can - and probably should - be tweaked here
 	
 	# Set control mode
-	up_down_controls = Singleton.PlayerSettings.legacy_wing_cap
+	up_down_controls = LocalSettings.load_setting(
+		"Controls (Player " + str(character.player_id + 1) + ")", 
+		"63_wing_cap",
+		false
+	)
 	
 	# Capping rotation
 	var clamp_max : float = lerp(rotation_down, 220 - momentum / 1.5, fps_util.PHYSICS_DELTA * 4)

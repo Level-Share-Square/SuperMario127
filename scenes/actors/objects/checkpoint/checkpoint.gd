@@ -59,6 +59,7 @@ func set_checkpoint(body):
 	Singleton.CheckpointSaved.nozzles_collected = Singleton.CurrentLevelData.level_data.vars.nozzles_collected.duplicate(true)
 	Singleton.CheckpointSaved.current_red_coins = Singleton.CurrentLevelData.level_data.vars.red_coins_collected.duplicate(true)
 	Singleton.CheckpointSaved.current_shine_shards = Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.duplicate(true)
+	Singleton.CheckpointSaved.current_purple_starbits = Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected.duplicate(true)
 	
 	if save_water_level:
 		Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area] = []

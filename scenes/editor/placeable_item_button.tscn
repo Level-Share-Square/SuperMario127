@@ -36,10 +36,12 @@ offset = Vector2( 0, 3 )
 [node name="Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Grid" type="TextureRect" parent="."]
 margin_left = -72.0

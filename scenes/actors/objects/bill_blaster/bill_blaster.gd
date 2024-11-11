@@ -2,7 +2,7 @@ extends GameObject
 
 onready var sprite = $Top
 onready var color_sprite = $Top/Color
-onready var sound = $AudioStreamPlayer
+onready var sound = $AudioStreamPlayer2D
 onready var collision_shape = $StaticBody2D/CollisionShape2D
 
 var wait_time = 3.0
@@ -10,13 +10,14 @@ var wait_time = 3.0
 var spawn_timer = 3.0
 var chase := false
 var speed := 0.75
+var offset := 0.0
 var color := Color(0, 1, 0)
 var invincible := false
 var force_direction := 0
 
 func _set_properties():
-	savable_properties = ["chase", "speed", "color", "wait_time", "invincible", "force_direction"]
-	editable_properties = ["chase", "speed", "color", "wait_time", "invincible", "force_direction"]
+	savable_properties = ["chase", "speed", "color", "wait_time", "invincible", "force_direction", "offset"]
+	editable_properties = ["chase", "speed", "offset", "color", "wait_time", "invincible", "force_direction"]
 	
 func _set_property_values():
 	set_property("chase", chase, true)
@@ -25,9 +26,13 @@ func _set_property_values():
 	set_property("wait_time", wait_time, true)
 	set_property("invincible", invincible, true)
 	set_property("force_direction", force_direction, true)
-	spawn_timer = wait_time
+	set_property_menu("force_direction", ["option", 3, -1, ['Face Player', 'Right', 'Left']])
+	set_property("offset", offset, true)
+	spawn_timer = wait_time+offset
 
 func _ready():
+	if mode != 1:
+		sprite.frame = 0
 	collision_shape.disabled = !enabled
 
 func _process(delta):
@@ -94,5 +99,8 @@ func _physics_process(delta):
 			get_parent().create_object(object, false)
 			
 			scale.x = prev_scale_x
+			
+			sound.play()
+			
 		elif spawn_timer <= 0:
 			spawn_timer = wait_time

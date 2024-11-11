@@ -5,6 +5,13 @@ const LAYER_COUNT = 4
 
 var mode = 1
 
+onready var placement_nodes = [
+	null,
+	null,
+	null,
+	$Placement/RectangleFill
+]
+
 export var placement_mode := "Drag"
 export var surface_snap := false
 export var placeable_items_path : NodePath
@@ -12,6 +19,7 @@ export var placeable_items_button_container_path : NodePath
 export var item_preview_path : NodePath
 export var shared_path : NodePath
 export var object_settings_path : NodePath
+export var mouse_object_area_path : NodePath
 var selected_box : Node
 # Placed objects can use this variable when set in the placement action
 var placed_item_property = null
@@ -26,6 +34,7 @@ onready var max_pins = 5
 onready var item_preview : Sprite = get_node(item_preview_path)
 onready var shared : Node2D = get_node(shared_path)
 onready var object_settings : NinePatchRect = get_node(object_settings_path)
+onready var mouse_object_area : Area2D = get_node(mouse_object_area_path)
 
 onready var bounds_control = $BoundsControl
 
@@ -90,9 +99,6 @@ func set_zoom_level(level : float) -> void:
 func add_zoom_level(level : float) -> void:
 	set_zoom_level(zoom_level + level)
 
-func get_shared_node() -> Node:
-	return shared
-
 func switch_layers() -> void:
 	editing_layer = wrapi(editing_layer + 1, 0, LAYER_COUNT)
 	Singleton.EditorSavedSettings.layer = editing_layer
@@ -121,8 +127,6 @@ func _unhandled_input(event) -> void:
 			selected_tool = 0
 		elif event.is_action_pressed("eraser_tool"):
 			selected_tool = 1
-		elif event.is_action_pressed("selection_tool"):
-			selected_tool = 2
 		elif event.is_action_pressed("zoom_out"):
 			add_zoom_level(0.25)
 		elif event.is_action_pressed("zoom_in"):
@@ -146,7 +150,12 @@ func _ready() -> void:
 	zoom_level = Singleton.EditorSavedSettings.zoom_level
 	editing_layer = Singleton.EditorSavedSettings.layer
 	layers_transparent = Singleton.EditorSavedSettings.layers_transparent
-	pinned_items = Singleton.EditorSavedSettings.pinned_items
+	
+	for pinned_item in Singleton.CurrentLevelData.level_data.pinned_items:
+		var item: Node = placeable_items.find_node(pinned_item[0])
+		item.palette_index = pinned_item[1]
+		pinned_items.append(item)
+	
 	shared.toggle_layer_transparency(editing_layer, layers_transparent)
 	
 	# if the mode switch button is invisible then the editor hasn't been readyed for the first time yet
@@ -281,8 +290,20 @@ func unpin_item(unpin_index):
 	boxes[pinned_items.size()].item_changed()
 	pinned_items.remove(unpin_index)
 
+
+func sync_pinned_items() -> void:
+	var encoded_pinned_items: Array
+	for pinned_item in pinned_items:
+		var pin_array: Array
+		pin_array.append(pinned_item.name)
+		pin_array.append(pinned_item.palette_index)
+		encoded_pinned_items.append(pin_array)
+	Singleton.CurrentLevelData.level_data.pinned_items = encoded_pinned_items
+
+
 func switch_scenes() -> void:
-	Singleton.EditorSavedSettings.pinned_items = get_tree().get_current_scene().pinned_items
+	sync_pinned_items()
+	
 	if Singleton2.rp == true:
 		update_activity()
 	elif Singleton2.rp == false:
@@ -310,11 +331,14 @@ func update_activity() -> void:
 
 	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
 	if result != Discord.Result.Ok:
-		push_error(str(result))
+		printerr(str(result))
 
 func update_selected_object(mouse_pos : Vector2) -> void:
+	if mouse_object_area.position != mouse_pos:
+		mouse_object_area.position = mouse_pos
 	if selected_box.item.is_object and !rotating and time_clicked <= 0:
-		var objects = shared.get_objects_overlapping_position(mouse_pos)
+		var mouse_object_rect = Rect2(mouse_object_area.position-mouse_object_area.get_child(0).shape.extents, mouse_object_area.get_child(0).shape.extents*2)
+		var objects = shared.get_objects_overlapping_position(mouse_pos, mouse_object_rect, mouse_object_area)
 		if objects.size() > 0 and placement_mode != "Tile":
 			if hovered_object != objects[0]:
 				# If something was already hovered, mark it as not
@@ -336,29 +360,39 @@ func update_selected_object(mouse_pos : Vector2) -> void:
 					
 
 func _process(delta : float) -> void:
-	var visible_child_count = 0
+	var visible_child_count := 0
 	for i in $UI.get_children():
 		if i is NinePatchRect:
 			if i.visible:
 				visible_child_count += 1
+
+#	if ui_visible != $UI.visible:
+#		ui_visible = $UI.visible
+
 	if visible_child_count == 0:
 		Singleton2.disable_hotkeys = false
 	else:
 		Singleton2.disable_hotkeys = true
 
-	
 	if Singleton2.time > 0:
 		Singleton2.time -= 1
 	if Singleton2.time <= 0:
-		var level = Singleton.SavedLevels.levels
-		var level_info = level[Singleton.SavedLevels.selected_level]
+		sync_pinned_items()
+		
+		var level_info = Singleton.CurrentLevelData.level_info
 		var time = round(Time.get_unix_time_from_system())
-		if Singleton.SavedLevels.selected_level != -1:
-			Singleton.SavedLevels.levels[Singleton.SavedLevels.selected_level] = LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data())
-			var _error_code = Singleton.SavedLevels.save_level_by_index(Singleton.SavedLevels.selected_level)
-			
-			Singleton.SavedLevels.autosave_level_to_disk(LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()), "user://autosave/" + "main_" + str(level_info.level_name) + ".autosave")
-			Singleton.SavedLevels.autosave_level_to_disk(LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()), "user://autosave/" + str(level_info.level_name) + "_" + str(time) + ".autosave")
+		
+		# whoever coded this previously, u should know this was essentially making it
+		# turn the level data into a code four times over
+		var level_code: String = Singleton.CurrentLevelData.level_data.get_encoded_level_data()
+		var file_path: String = level_list_util.get_level_file_path(Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder)
+		
+		Singleton.CurrentLevelData.level_info = LevelInfo.new(level_code)
+		Singleton.CurrentLevelData.level_info.load_in()
+		level_list_util.save_level_code_file(level_code, file_path)
+		
+		level_list_util.autosave_level_to_disk(level_code, "user://autosaves/" + "main_" + str(level_info.level_name) + ".autosave")
+		level_list_util.autosave_level_to_disk(level_code, "user://autosaves/" + str(level_info.level_name) + "_" + str(time) + ".autosave")
 		Singleton.CurrentLevelData.unsaved_editor_changes = false
 		
 		Singleton2.reset_time()
@@ -381,22 +415,22 @@ func _process(delta : float) -> void:
 		var mouse_tile_pos := Vector2(floor(mouse_pos.x / selected_box.item.tile_mode_step), floor(mouse_pos.y / selected_box.item.tile_mode_step))
 		
 		# Lock mouse movement in one axis
-		if mouse_pos != last_mouse_pos:
-			if Input.is_action_pressed("lock_tile_axis") and (Input.is_action_pressed("place") or Input.is_action_pressed("erase")):
-				if Input.is_action_just_pressed("place") or Input.is_action_just_pressed("erase"):
-					if abs(mouse_pos.x) - abs(last_mouse_pos.x) > abs(mouse_pos.y) - abs(last_mouse_pos.y):
-						lock_axis = "x"
-						lock_pos = int(mouse_pos.x)
-					else:
-						lock_axis = "y"
-						lock_pos = int(mouse_pos.y)
-				if lock_axis == "x":
-					mouse_pos.x = lock_pos
-				elif lock_axis == "y":
-					mouse_pos.y = lock_pos
-			else:
-				lock_axis = "none"
-				lock_pos = 0
+#		if mouse_pos != last_mouse_pos:
+#			if Input.is_action_pressed("lock_tile_axis") and (Input.is_action_pressed("place") or Input.is_action_pressed("erase")):
+#				if Input.is_action_just_pressed("place") or Input.is_action_just_pressed("erase"):
+#					if abs(mouse_pos.x) - abs(last_mouse_pos.x) > abs(mouse_pos.y) - abs(last_mouse_pos.y):
+#						lock_axis = "x"
+#						lock_pos = int(mouse_pos.x)
+#					else:
+#						lock_axis = "y"
+#						lock_pos = int(mouse_pos.y)
+#				if lock_axis == "x":
+#					mouse_pos.x = lock_pos
+#				elif lock_axis == "y":
+#					mouse_pos.y = lock_pos
+#			else:
+#				lock_axis = "none"
+#				lock_pos = 0
 		
 		# Handle hovered objects
 		if is_instance_valid(hovered_object):
@@ -418,9 +452,7 @@ func _process(delta : float) -> void:
 	#
 				if Input.is_mouse_button_pressed(4):
 					hovered_object.set_property("scale", Vector2(10, 10), true)
-				
-				
-				
+			
 			
 			if left_held and selected_tool == 0 and Input.is_action_just_pressed("place") and !rotating and selected_box.item.is_object:
 				if Input.is_action_pressed("duplicate"):
@@ -432,7 +464,7 @@ func _process(delta : float) -> void:
 						#Prevents a bug that causes certain properties to become
 						#Linked between two objects
 						if typeof(prop) == TYPE_OBJECT:
-							object.properties.append(prop.duplicate())
+							object.properties.append(prop.duplicate(true))
 						else:
 							object.properties.append(prop)
 					shared.create_object(object, true)
@@ -463,6 +495,21 @@ func _process(delta : float) -> void:
 		if selected_box and selected_box.item:
 			var last_object_pos : Vector2
 			
+			
+			# adios!! (enters portal to "not 600 line script" dimension)
+			var placement_node: Control = placement_nodes[selected_tool]
+			if is_instance_valid(placement_node):
+				placement_node.selected_box = selected_box
+				placement_node.editing_layer = editing_layer
+				
+				placement_node.mouse_pos = mouse_pos
+				placement_node.mouse_tile_pos = mouse_tile_pos
+				
+				placement_node.left_down = left_held
+				placement_node.right_down = right_held
+				placement_node.selected_update()
+			
+			
 			# Place items
 			
 			if left_held and selected_tool == 0:
@@ -475,7 +522,7 @@ func _process(delta : float) -> void:
 						var last_tile = shared.get_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer)
 						
 						if !(last_tile[0] == item.tileset_id and last_tile[1] == item.tile_id):
-							tiles_stack.append([mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, last_tile, [item.tileset_id, item.tile_id]])
+							tiles_stack.append([mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, last_tile, [item.tileset_id, item.tile_id, item.palette_index]])
 						
 						shared.set_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, item.tileset_id, item.tile_id, item.palette_index)
 				elif !is_instance_valid(hovered_object) and !rotating: # Place object
@@ -589,7 +636,7 @@ func _process(delta : float) -> void:
 							var last_tile = shared.get_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer)
 							
 							if !(last_tile[0] == 0 and last_tile[1] == 0):
-								tiles_stack.append([mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, last_tile, [0, 0]])
+								tiles_stack.append([mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, last_tile, [0, 0, 0]])
 							
 							shared.set_tile(mouse_tile_pos.x, mouse_tile_pos.y, editing_layer, 0, 0)
 			
@@ -616,6 +663,7 @@ func _process(delta : float) -> void:
 			if selected_box.item.is_object and !rotating and time_clicked <= 0:
 				update_selected_object(mouse_pos)
 		
+		
 		# Finalise tile placement action (for potential future undo)
 		if !left_held:
 			time_clicked = 0
@@ -640,8 +688,11 @@ func _process(delta : float) -> void:
 				# if an action is being added, that means we should count the count the level data as modified and in need of a save
 				Singleton.CurrentLevelData.unsaved_editor_changes = true
 		
-		
+#		if last_mouse_pos != mouse_pos:
 		last_mouse_pos = mouse_pos
 		last_mouse_tile_pos = mouse_tile_pos
 		last_left_held = left_held
 		last_right_held = right_held
+
+func get_shared_node() -> Node:
+	return $Shared

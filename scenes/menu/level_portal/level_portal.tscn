@@ -1,0 +1,3286 @@
+[gd_scene load_steps=269 format=2]
+
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/menu/level_portal/level_grid.gd" type="Script" id=2]
+[ext_resource path="res://scenes/menu/level_portal/stripes.png" type="Texture" id=3]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=4]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=7]
+[ext_resource path="res://scenes/menu/screen.gd" type="Script" id=8]
+[ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=9]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=10]
+[ext_resource path="res://scenes/actors/objects/launch_star/sprites/InnerBottom.png" type="Texture" id=11]
+[ext_resource path="res://scenes/actors/objects/launch_star/sprites/OuterBottom.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/launch_star/sprites/OuterShadowBottom.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/launch_star/sprites/OuterTop.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/launch_star/sprites/OuterShadowTop.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/launch_star/sprites/InnerTop.png" type="Texture" id=16]
+[ext_resource path="res://scenes/menu/level_portal/launch_star.gd" type="Script" id=17]
+[ext_resource path="res://scenes/actors/objects/launch_star/sfx/windup.wav" type="AudioStream" id=18]
+[ext_resource path="res://scenes/actors/objects/launch_star/sfx/launch.wav" type="AudioStream" id=19]
+[ext_resource path="res://scenes/menu/level_portal/bg_parallax.gd" type="Script" id=20]
+[ext_resource path="res://scenes/menu/level_portal/icons/search.png" type="Texture" id=21]
+[ext_resource path="res://scenes/actors/objects/goomba/goomba.png" type="Texture" id=22]
+[ext_resource path="res://scenes/menu/level_portal/http/http_request.gd" type="Script" id=23]
+[ext_resource path="res://scenes/menu/level_portal/smooth_scroll.gd" type="Script" id=24]
+[ext_resource path="res://scenes/menu/level_portal/pages.gd" type="Script" id=25]
+[ext_resource path="res://scenes/menu/level_portal/http/http_images.gd" type="Script" id=26]
+[ext_resource path="res://scenes/menu/level_portal/page_button.tscn" type="PackedScene" id=27]
+[ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=28]
+[ext_resource path="res://scenes/actors/objects/shine/frames_outline.tres" type="SpriteFrames" id=29]
+[ext_resource path="res://scenes/menu/level_portal/go_to_page.gd" type="Script" id=30]
+[ext_resource path="res://shaders/outline2.shader" type="Shader" id=31]
+[ext_resource path="res://scenes/menu/level_portal/default_thumb.png" type="Texture" id=32]
+[ext_resource path="res://scenes/menu/level_portal/icons/star_empty.png" type="Texture" id=33]
+[ext_resource path="res://scenes/menu/level_portal/icons/star_filled.png" type="Texture" id=34]
+[ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=35]
+[ext_resource path="res://scenes/menu/level_portal/icons/favorites.png" type="Texture" id=36]
+[ext_resource path="res://scenes/menu/levels_list/icons/play.png" type="Texture" id=37]
+[ext_resource path="res://scenes/menu/level_portal/default_icon.png" type="Texture" id=38]
+[ext_resource path="res://scenes/menu/level_portal/icons/ratings.png" type="Texture" id=39]
+[ext_resource path="res://shaders/rounded_corners.gdshader" type="Shader" id=40]
+[ext_resource path="res://scenes/menu/levels_list/icons/shine.png" type="Texture" id=41]
+[ext_resource path="res://scenes/menu/levels_list/icons/star_coin.png" type="Texture" id=42]
+[ext_resource path="res://scenes/menu/levels_list/icons/time.png" type="Texture" id=43]
+[ext_resource path="res://scenes/menu/level_portal/level_panel/description.gd" type="Script" id=44]
+[ext_resource path="res://scenes/menu/level_portal/level_panel.gd" type="Script" id=45]
+[ext_resource path="res://scenes/menu/level_portal/http/http_level_page.gd" type="Script" id=46]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=47]
+[ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=48]
+[ext_resource path="res://scenes/menu/level_portal/margin_pivot.gd" type="Script" id=49]
+[ext_resource path="res://scenes/menu/level_portal/buttons_switcher.gd" type="Script" id=50]
+[ext_resource path="res://scenes/menu/level_portal/http/http_random_level.gd" type="Script" id=51]
+[ext_resource path="res://scenes/menu/level_portal/search.gd" type="Script" id=52]
+[ext_resource path="res://scenes/menu/level_portal/level_panel/comments/comments.gd" type="Script" id=53]
+[ext_resource path="res://scenes/menu/level_portal/http/http_comments.gd" type="Script" id=54]
+[ext_resource path="res://scenes/menu/level_portal/icons/go_to_page.png" type="Texture" id=55]
+[ext_resource path="res://scenes/menu/level_portal/return_args.gd" type="Script" id=56]
+[ext_resource path="res://scenes/menu/level_portal/thumbnail_cache.gd" type="Script" id=57]
+[ext_resource path="res://assets/fonts/coolfont.tres" type="DynamicFont" id=58]
+[ext_resource path="res://scenes/menu/button_scripts/url_opener.gd" type="Script" id=59]
+[ext_resource path="res://scenes/menu/level_portal/login/login_panel.gd" type="Script" id=60]
+[ext_resource path="res://scenes/menu/level_portal/login/account_info.gd" type="Script" id=61]
+[ext_resource path="res://scenes/menu/level_portal/http/http_account.gd" type="Script" id=62]
+[ext_resource path="res://scenes/menu/level_portal/login/profile_loader.gd" type="Script" id=63]
+[ext_resource path="res://scenes/menu/level_portal/level_panel/comments/post_comment_content.tscn" type="PackedScene" id=64]
+[ext_resource path="res://assets/fonts/delfino_medium.tres" type="DynamicFont" id=65]
+[ext_resource path="res://scenes/menu/level_portal/level_panel/rate_button.gd" type="Script" id=66]
+[ext_resource path="res://scenes/menu/level_portal/level_panel/rate_panel.gd" type="Script" id=67]
+[ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_launch.wav" type="AudioStream" id=70]
+[ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_back.wav" type="AudioStream" id=71]
+[ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_switch.wav" type="AudioStream" id=72]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform vec4 bg_color: hint_color;
+
+float rand(vec2 st) {
+    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
+void fragment() {
+	float size = 100.0;
+	vec2 pos = floor(1.0 / size * UV.xy);
+	float color = 0.0;
+
+	if (rand(UV.xy / 20.0) > 0.996)
+	{
+		float r = rand(UV.xy);
+		color = r * (0.85 * sin(TIME * (r * 5.0) + 720.0 * r) + 0.95);
+	}
+	COLOR = vec4(vec3(color),1.0) + bg_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=192]
+shader = SubResource( 3 )
+shader_param/bg_color = Color( 0.0156863, 0.0313726, 0.223529, 1 )
+
+[sub_resource type="Shader" id=23]
+code = "shader_type canvas_item;
+
+uniform float speed;
+uniform float direction = 1;
+
+void fragment () {
+	COLOR = texture(TEXTURE, vec2(UV.x + TIME * speed * direction, UV.y + TIME * speed * direction));
+}"
+
+[sub_resource type="ShaderMaterial" id=193]
+shader = SubResource( 23 )
+shader_param/speed = 0.02
+shader_param/direction = 1.0
+
+[sub_resource type="Gradient" id=187]
+offsets = PoolRealArray( 0.25, 0.75, 0.96, 1 )
+colors = PoolColorArray( 0.190667, 0, 0.52, 1, 0.0980392, 0, 0.372549, 1, 0, 0.0823529, 0.239216, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture2D" id=194]
+gradient = SubResource( 187 )
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2( 1, 1 )
+fill_to = Vector2( 0.8, 0.4 )
+
+[sub_resource type="Gradient" id=191]
+offsets = PoolRealArray( 0.487047, 0.818653, 0.96, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0.0523277, 0.151999, 0.364592, 0, 0.0823529, 0.239216, 1, 0.533333, 0, 1, 0 )
+
+[sub_resource type="GradientTexture2D" id=195]
+gradient = SubResource( 191 )
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2( 1, 1 )
+fill_to = Vector2( 0.8, 0.4 )
+
+[sub_resource type="CanvasItemMaterial" id=196]
+blend_mode = 1
+
+[sub_resource type="OpenSimplexNoise" id=175]
+seed = 2
+period = 14.6
+persistence = 0.446
+lacunarity = 2.91
+
+[sub_resource type="NoiseTexture" id=197]
+width = 256
+height = 256
+bump_strength = 7.2
+noise = SubResource( 175 )
+
+[sub_resource type="Shader" id=185]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform bool Smooth = true;
+uniform float width : hint_range(0.0, 16) = 1.0;
+uniform vec4 outline_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform int pixel_size : hint_range(1, 10) = 4;
+ 
+void fragment()
+{
+	vec2 unit = (1.0/float(pixel_size) ) / vec2(textureSize(TEXTURE, 0));
+	vec4 pixel_color = texture(TEXTURE, UV);
+	if (pixel_color.a == 0.0) {
+		pixel_color = outline_color;
+		pixel_color.a = 0.0;
+		for (float x = -ceil(width); x <= ceil(width); x++) {
+			for (float y = -ceil(width); y <= ceil(width); y++) {
+				if (texture(TEXTURE, UV + vec2(x*unit.x, y*unit.y)).a == 0.0 || (x==0.0 && y==0.0)) {
+					continue;
+				}
+				if (Smooth) {
+					pixel_color.a += outline_color.a / (pow(x,2)+pow(y,2)) * (1.0-pow(2.0, -width));
+					if (pixel_color.a > 1.0) {
+						pixel_color.a = 1.0;
+					}
+				} else {
+					pixel_color.a = outline_color.a;
+					break
+				}
+			}
+		}
+	}
+	COLOR = pixel_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=198]
+shader = SubResource( 185 )
+shader_param/Smooth = false
+shader_param/width = 12.0
+shader_param/outline_color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+shader_param/pixel_size = 2
+
+[sub_resource type="GDScript" id=199]
+resource_name = "rotate"
+script/source = "extends Sprite
+
+export var rotate_speed: float = 0.25
+
+func _process(delta):
+	rotation_degrees += rotate_speed
+"
+
+[sub_resource type="CanvasItemMaterial" id=200]
+blend_mode = 2
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.829016 )
+colors = PoolColorArray( 0, 0.298039, 1, 0.305882, 0, 0.298039, 1, 0 )
+
+[sub_resource type="GradientTexture2D" id=201]
+gradient = SubResource( 5 )
+fill = 1
+fill_from = Vector2( 0.5, 1 )
+fill_to = Vector2( 0.5, 0.3 )
+
+[sub_resource type="StyleBoxEmpty" id=169]
+
+[sub_resource type="StyleBoxEmpty" id=170]
+
+[sub_resource type="StyleBoxEmpty" id=171]
+
+[sub_resource type="ButtonGroup" id=8]
+
+[sub_resource type="Animation" id=218]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../../Buttons:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=219]
+resource_name = "transition"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../../Buttons:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="Gradient" id=211]
+colors = PoolColorArray( 0.0741917, 0.0145, 0.29, 0.92549, 0, 0.196078, 0.45098, 0 )
+
+[sub_resource type="GradientTexture2D" id=212]
+gradient = SubResource( 211 )
+fill = 1
+fill_from = Vector2( 0.5, 1 )
+
+[sub_resource type="DynamicFont" id=206]
+size = 22
+outline_size = 2
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+extra_spacing_char = -1
+font_data = ExtResource( 35 )
+
+[sub_resource type="Shader" id=12]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+uniform sampler2D gradient;
+
+void fragment(){
+	COLOR.a=texture(TEXTURE,UV).a;
+	vec2 my_uv=vec2(UV.y,0.0);
+	COLOR.rgb=COLOR.rgb*texture(gradient,my_uv).rgb;
+}"
+
+[sub_resource type="Gradient" id=207]
+offsets = PoolRealArray( 0.473373, 0.715976 )
+colors = PoolColorArray( 1, 0.992157, 0.894118, 1, 1, 0.670588, 0.286275, 1 )
+
+[sub_resource type="GradientTexture" id=208]
+gradient = SubResource( 207 )
+
+[sub_resource type="ShaderMaterial" id=209]
+shader = SubResource( 12 )
+shader_param/gradient = SubResource( 208 )
+
+[sub_resource type="Gradient" id=215]
+offsets = PoolRealArray( 0.473373, 0.715976 )
+colors = PoolColorArray( 0.65098, 1, 0.698039, 1, 0, 0.694118, 0.352941, 1 )
+
+[sub_resource type="GradientTexture" id=216]
+gradient = SubResource( 215 )
+
+[sub_resource type="ShaderMaterial" id=217]
+shader = SubResource( 12 )
+shader_param/gradient = SubResource( 216 )
+
+[sub_resource type="ShaderMaterial" id=205]
+shader = ExtResource( 31 )
+shader_param/Smooth = true
+shader_param/width = 0.0
+shader_param/outline_color = Color( 1, 1, 1, 1 )
+shader_param/pixel_size = 4
+
+[sub_resource type="ShaderMaterial" id=213]
+shader = ExtResource( 40 )
+shader_param/radius_scale = 1.0
+shader_param/rounded_corner_top_left = true
+shader_param/rounded_corner_top_right = true
+shader_param/rounded_corner_bottom_left = true
+shader_param/rounded_corner_bottom_right = true
+shader_param/width = 1.0
+shader_param/height = 1.0
+
+[sub_resource type="Gradient" id=226]
+colors = PoolColorArray( 0.0741917, 0.0145, 0.29, 0.92549, 0, 0.196078, 0.45098, 0 )
+
+[sub_resource type="GradientTexture2D" id=227]
+gradient = SubResource( 226 )
+fill = 1
+fill_from = Vector2( 0.5, 1 )
+
+[sub_resource type="Animation" id=220]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../../Buttons:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=221]
+resource_name = "transition"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../../Buttons:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=223]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../Buttons:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=224]
+resource_name = "transition"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../../Buttons:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=225]
+shader = ExtResource( 40 )
+shader_param/radius_scale = 1.0
+shader_param/rounded_corner_top_left = true
+shader_param/rounded_corner_top_right = true
+shader_param/rounded_corner_bottom_left = true
+shader_param/rounded_corner_bottom_right = true
+shader_param/width = 1.0
+shader_param/height = 1.0
+
+[sub_resource type="Animation" id=222]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("StarContainer/InnerStar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StarContainer/InnerStar:speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StarContainer/OuterStar:speed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=160]
+resource_name = "launch"
+tracks/0/type = "value"
+tracks/0/path = NodePath("StarContainer/InnerStar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 0.143587, 0.57435, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 20 ), Vector2( 0, -50 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StarContainer/InnerStar:speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 1 ),
+"transitions": PoolRealArray( 0.8, 2, 1 ),
+"update": 0,
+"values": [ 0, 30, 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StarContainer/OuterStar:speed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 1 ),
+"transitions": PoolRealArray( 0.8, 2, 1 ),
+"update": 0,
+"values": [ 0, 30, 1 ]
+}
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 19 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=161]
+resource_name = "windup"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("StarContainer/InnerStar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 20 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StarContainer/OuterStar:speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 1 ),
+"transitions": PoolRealArray( 1.68179, 0.63728, 1 ),
+"update": 0,
+"values": [ 1, 70, 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("StarContainer/InnerStar:speed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 1 ),
+"transitions": PoolRealArray( 1.68, 0.637, 1 ),
+"update": 0,
+"values": [ 1, 70, 0 ]
+}
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 18 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="GDScript" id=162]
+resource_name = "launch_star"
+script/source = "extends Node2D
+export var speed : int = 1
+
+func _ready():
+	for child in get_children():
+		if child is AnimatedSprite:
+			child.frame = 0
+			child.speed_scale = 1
+			child.position = position
+
+func _process(delta):
+	for child in get_children():
+			if child is AnimatedSprite:
+				child.speed_scale = speed
+	
+	
+
+"
+
+[sub_resource type="AtlasTexture" id=152]
+atlas = ExtResource( 16 )
+region = Rect2( 0, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=158]
+atlas = ExtResource( 16 )
+region = Rect2( 102, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=159]
+atlas = ExtResource( 16 )
+region = Rect2( 204, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=155]
+atlas = ExtResource( 16 )
+region = Rect2( 306, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=156]
+atlas = ExtResource( 16 )
+region = Rect2( 408, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=157]
+atlas = ExtResource( 16 )
+region = Rect2( 510, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 16 )
+region = Rect2( 612, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 16 )
+region = Rect2( 714, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 16 )
+region = Rect2( 816, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=210]
+atlas = ExtResource( 16 )
+region = Rect2( 918, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 16 )
+region = Rect2( 1020, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 16 )
+region = Rect2( 1122, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 16 )
+region = Rect2( 1224, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 16 )
+region = Rect2( 1326, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 16 )
+region = Rect2( 1428, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 16 )
+region = Rect2( 1530, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 16 )
+region = Rect2( 1632, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 16 )
+region = Rect2( 1734, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 16 )
+region = Rect2( 1836, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 16 )
+region = Rect2( 1938, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=172]
+atlas = ExtResource( 16 )
+region = Rect2( 2040, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=173]
+atlas = ExtResource( 16 )
+region = Rect2( 2142, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 16 )
+region = Rect2( 2244, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 16 )
+region = Rect2( 2346, 0, 102, 102 )
+
+[sub_resource type="SpriteFrames" id=163]
+animations = [ {
+"frames": [ SubResource( 152 ), SubResource( 158 ), SubResource( 159 ), SubResource( 155 ), SubResource( 156 ), SubResource( 157 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 210 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 172 ), SubResource( 173 ), SubResource( 25 ), SubResource( 26 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 11 )
+region = Rect2( 102, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 11 )
+region = Rect2( 204, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 11 )
+region = Rect2( 306, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 11 )
+region = Rect2( 408, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 11 )
+region = Rect2( 510, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 11 )
+region = Rect2( 612, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 11 )
+region = Rect2( 714, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 11 )
+region = Rect2( 816, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 11 )
+region = Rect2( 918, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 11 )
+region = Rect2( 1020, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 11 )
+region = Rect2( 1122, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 11 )
+region = Rect2( 1224, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 11 )
+region = Rect2( 1326, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 11 )
+region = Rect2( 1428, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 11 )
+region = Rect2( 1530, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 11 )
+region = Rect2( 1632, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 11 )
+region = Rect2( 1734, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 11 )
+region = Rect2( 1836, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 11 )
+region = Rect2( 1938, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 11 )
+region = Rect2( 2040, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 11 )
+region = Rect2( 2142, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 11 )
+region = Rect2( 2244, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 11 )
+region = Rect2( 2346, 0, 102, 102 )
+
+[sub_resource type="SpriteFrames" id=164]
+animations = [ {
+"frames": [ SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 14 )
+region = Rect2( 102, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 14 )
+region = Rect2( 204, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 14 )
+region = Rect2( 306, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 14 )
+region = Rect2( 408, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 14 )
+region = Rect2( 510, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 14 )
+region = Rect2( 612, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 14 )
+region = Rect2( 714, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 14 )
+region = Rect2( 816, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 14 )
+region = Rect2( 918, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 14 )
+region = Rect2( 1020, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 14 )
+region = Rect2( 1122, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 14 )
+region = Rect2( 1224, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 14 )
+region = Rect2( 1326, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 14 )
+region = Rect2( 1428, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 14 )
+region = Rect2( 1530, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=69]
+atlas = ExtResource( 14 )
+region = Rect2( 1632, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=70]
+atlas = ExtResource( 14 )
+region = Rect2( 1734, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=71]
+atlas = ExtResource( 14 )
+region = Rect2( 1836, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=72]
+atlas = ExtResource( 14 )
+region = Rect2( 1938, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=73]
+atlas = ExtResource( 14 )
+region = Rect2( 2040, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=74]
+atlas = ExtResource( 14 )
+region = Rect2( 2142, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=75]
+atlas = ExtResource( 14 )
+region = Rect2( 2244, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=76]
+atlas = ExtResource( 14 )
+region = Rect2( 2346, 0, 102, 102 )
+
+[sub_resource type="SpriteFrames" id=165]
+animations = [ {
+"frames": [ SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="AtlasTexture" id=78]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=79]
+atlas = ExtResource( 15 )
+region = Rect2( 102, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=80]
+atlas = ExtResource( 15 )
+region = Rect2( 204, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=81]
+atlas = ExtResource( 15 )
+region = Rect2( 306, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=82]
+atlas = ExtResource( 15 )
+region = Rect2( 408, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=83]
+atlas = ExtResource( 15 )
+region = Rect2( 510, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=84]
+atlas = ExtResource( 15 )
+region = Rect2( 612, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=85]
+atlas = ExtResource( 15 )
+region = Rect2( 714, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=86]
+atlas = ExtResource( 15 )
+region = Rect2( 816, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=87]
+atlas = ExtResource( 15 )
+region = Rect2( 918, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=88]
+atlas = ExtResource( 15 )
+region = Rect2( 1020, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=89]
+atlas = ExtResource( 15 )
+region = Rect2( 1122, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=90]
+atlas = ExtResource( 15 )
+region = Rect2( 1224, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=91]
+atlas = ExtResource( 15 )
+region = Rect2( 1326, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=92]
+atlas = ExtResource( 15 )
+region = Rect2( 1428, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=93]
+atlas = ExtResource( 15 )
+region = Rect2( 1530, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=94]
+atlas = ExtResource( 15 )
+region = Rect2( 1632, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=95]
+atlas = ExtResource( 15 )
+region = Rect2( 1734, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=96]
+atlas = ExtResource( 15 )
+region = Rect2( 1836, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=97]
+atlas = ExtResource( 15 )
+region = Rect2( 1938, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=98]
+atlas = ExtResource( 15 )
+region = Rect2( 2040, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=99]
+atlas = ExtResource( 15 )
+region = Rect2( 2142, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=100]
+atlas = ExtResource( 15 )
+region = Rect2( 2244, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=101]
+atlas = ExtResource( 15 )
+region = Rect2( 2346, 0, 102, 102 )
+
+[sub_resource type="SpriteFrames" id=166]
+animations = [ {
+"frames": [ SubResource( 78 ), SubResource( 79 ), SubResource( 80 ), SubResource( 81 ), SubResource( 82 ), SubResource( 83 ), SubResource( 84 ), SubResource( 85 ), SubResource( 86 ), SubResource( 87 ), SubResource( 88 ), SubResource( 89 ), SubResource( 90 ), SubResource( 91 ), SubResource( 92 ), SubResource( 93 ), SubResource( 94 ), SubResource( 95 ), SubResource( 96 ), SubResource( 97 ), SubResource( 98 ), SubResource( 99 ), SubResource( 100 ), SubResource( 101 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="AtlasTexture" id=103]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=104]
+atlas = ExtResource( 12 )
+region = Rect2( 102, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=105]
+atlas = ExtResource( 12 )
+region = Rect2( 204, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=106]
+atlas = ExtResource( 12 )
+region = Rect2( 306, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=107]
+atlas = ExtResource( 12 )
+region = Rect2( 408, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=108]
+atlas = ExtResource( 12 )
+region = Rect2( 510, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=109]
+atlas = ExtResource( 12 )
+region = Rect2( 612, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=110]
+atlas = ExtResource( 12 )
+region = Rect2( 714, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=111]
+atlas = ExtResource( 12 )
+region = Rect2( 816, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=112]
+atlas = ExtResource( 12 )
+region = Rect2( 918, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=113]
+atlas = ExtResource( 12 )
+region = Rect2( 1020, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=114]
+atlas = ExtResource( 12 )
+region = Rect2( 1122, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=115]
+atlas = ExtResource( 12 )
+region = Rect2( 1224, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=116]
+atlas = ExtResource( 12 )
+region = Rect2( 1326, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=117]
+atlas = ExtResource( 12 )
+region = Rect2( 1428, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=118]
+atlas = ExtResource( 12 )
+region = Rect2( 1530, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=119]
+atlas = ExtResource( 12 )
+region = Rect2( 1632, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=120]
+atlas = ExtResource( 12 )
+region = Rect2( 1734, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=121]
+atlas = ExtResource( 12 )
+region = Rect2( 1836, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=122]
+atlas = ExtResource( 12 )
+region = Rect2( 1938, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=123]
+atlas = ExtResource( 12 )
+region = Rect2( 2040, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=124]
+atlas = ExtResource( 12 )
+region = Rect2( 2142, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=125]
+atlas = ExtResource( 12 )
+region = Rect2( 2244, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=126]
+atlas = ExtResource( 12 )
+region = Rect2( 2346, 0, 102, 102 )
+
+[sub_resource type="SpriteFrames" id=167]
+animations = [ {
+"frames": [ SubResource( 103 ), SubResource( 104 ), SubResource( 105 ), SubResource( 106 ), SubResource( 107 ), SubResource( 108 ), SubResource( 109 ), SubResource( 110 ), SubResource( 111 ), SubResource( 112 ), SubResource( 113 ), SubResource( 114 ), SubResource( 115 ), SubResource( 116 ), SubResource( 117 ), SubResource( 118 ), SubResource( 119 ), SubResource( 120 ), SubResource( 121 ), SubResource( 122 ), SubResource( 123 ), SubResource( 124 ), SubResource( 125 ), SubResource( 126 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="AtlasTexture" id=128]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=129]
+atlas = ExtResource( 13 )
+region = Rect2( 102, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=130]
+atlas = ExtResource( 13 )
+region = Rect2( 204, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=131]
+atlas = ExtResource( 13 )
+region = Rect2( 306, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=132]
+atlas = ExtResource( 13 )
+region = Rect2( 408, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=133]
+atlas = ExtResource( 13 )
+region = Rect2( 510, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=134]
+atlas = ExtResource( 13 )
+region = Rect2( 612, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=135]
+atlas = ExtResource( 13 )
+region = Rect2( 714, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=136]
+atlas = ExtResource( 13 )
+region = Rect2( 816, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=137]
+atlas = ExtResource( 13 )
+region = Rect2( 918, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=138]
+atlas = ExtResource( 13 )
+region = Rect2( 1020, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=139]
+atlas = ExtResource( 13 )
+region = Rect2( 1122, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=140]
+atlas = ExtResource( 13 )
+region = Rect2( 1224, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=141]
+atlas = ExtResource( 13 )
+region = Rect2( 1326, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=142]
+atlas = ExtResource( 13 )
+region = Rect2( 1428, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=143]
+atlas = ExtResource( 13 )
+region = Rect2( 1530, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=144]
+atlas = ExtResource( 13 )
+region = Rect2( 1632, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=145]
+atlas = ExtResource( 13 )
+region = Rect2( 1734, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=146]
+atlas = ExtResource( 13 )
+region = Rect2( 1836, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=147]
+atlas = ExtResource( 13 )
+region = Rect2( 1938, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=148]
+atlas = ExtResource( 13 )
+region = Rect2( 2040, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=149]
+atlas = ExtResource( 13 )
+region = Rect2( 2142, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=150]
+atlas = ExtResource( 13 )
+region = Rect2( 2244, 0, 102, 102 )
+
+[sub_resource type="AtlasTexture" id=151]
+atlas = ExtResource( 13 )
+region = Rect2( 2346, 0, 102, 102 )
+
+[sub_resource type="SpriteFrames" id=168]
+animations = [ {
+"frames": [ SubResource( 128 ), SubResource( 129 ), SubResource( 130 ), SubResource( 131 ), SubResource( 132 ), SubResource( 133 ), SubResource( 134 ), SubResource( 135 ), SubResource( 136 ), SubResource( 137 ), SubResource( 138 ), SubResource( 139 ), SubResource( 140 ), SubResource( 141 ), SubResource( 142 ), SubResource( 143 ), SubResource( 144 ), SubResource( 145 ), SubResource( 146 ), SubResource( 147 ), SubResource( 148 ), SubResource( 149 ), SubResource( 150 ), SubResource( 151 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="Animation" id=203]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BG:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BG/Parallax4:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LaunchStar:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 640, 32 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("LaunchStar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Buttons:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -128, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Buttons:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=202]
+resource_name = "transition"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("BG:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BG/Parallax4:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LaunchStar:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 640, 0 ), Vector2( 640, 0 ), Vector2( 640, 32 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("LaunchStar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Buttons:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -128, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Buttons:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+
+[node name="LevelPortal" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+theme = ExtResource( 1 )
+script = ExtResource( 8 )
+music_id = 68
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 5 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 6 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="BackSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 71 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="LevelClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 70 )
+volume_db = -5.0
+bus = "Sounds"
+
+[node name="PageSwitchSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 72 )
+volume_db = -8.0
+bus = "Sounds"
+
+[node name="BG" type="Control" parent="."]
+modulate = Color( 0, 0, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BGParallax" type="Control" parent="BG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 20 )
+follow_path = NodePath("../../Subscreens/LevelList/ScrollContainer/MarginContainer")
+parallax_factor = 0.05
+lerp_speed = 18.0
+
+[node name="Stars" type="ColorRect" parent="BG/BGParallax"]
+material = SubResource( 192 )
+margin_right = 768.0
+margin_bottom = 1536.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 1, 1, 1, 0 )
+
+[node name="Stripes" type="TextureRect" parent="BG/BGParallax"]
+visible = false
+modulate = Color( 1, 1, 1, 0.0470588 )
+material = SubResource( 193 )
+margin_right = 40.0
+margin_bottom = 40.0
+rect_scale = Vector2( 0.45, 0.45 )
+texture = ExtResource( 3 )
+stretch_mode = 2
+
+[node name="Parallax4" type="Control" parent="BG"]
+modulate = Color( 0, 0, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 20 )
+follow_path = NodePath("../../Subscreens/LevelList/ScrollContainer/MarginContainer")
+parallax_factor = 0.065
+lerp_speed = 18.0
+
+[node name="Planet" type="TextureRect" parent="BG/Parallax4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 192.0
+margin_bottom = 144.0
+texture = SubResource( 194 )
+expand = true
+
+[node name="Planet2" type="TextureRect" parent="BG/Parallax4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 192.0
+margin_bottom = 144.0
+texture = SubResource( 195 )
+expand = true
+
+[node name="Parallax1" type="Control" parent="BG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 20 )
+follow_path = NodePath("../../Subscreens/LevelList/ScrollContainer/MarginContainer")
+parallax_factor = 0.08
+lerp_speed = 18.0
+
+[node name="Noise" type="TextureRect" parent="BG/Parallax1"]
+modulate = Color( 0.815686, 0.411765, 1, 0.156863 )
+material = SubResource( 196 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 336.0
+texture = SubResource( 197 )
+expand = true
+
+[node name="Parallax3" type="Control" parent="BG"]
+modulate = Color( 0.909804, 0.85098, 1, 1 )
+anchor_right = 1.333
+anchor_bottom = 2.0
+rect_scale = Vector2( 0.75, 0.75 )
+mouse_filter = 2
+script = ExtResource( 20 )
+follow_path = NodePath("../../Subscreens/LevelList/ScrollContainer/MarginContainer")
+parallax_factor = 0.15
+lerp_speed = 18.0
+
+[node name="Goomba" type="Sprite" parent="BG/Parallax3"]
+material = SubResource( 198 )
+position = Vector2( 46.6667, 902.667 )
+texture = ExtResource( 22 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+script = SubResource( 199 )
+
+[node name="BGOverlay" type="TextureRect" parent="BG"]
+material = SubResource( 200 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = SubResource( 201 )
+expand = true
+
+[node name="Subscreens" type="Control" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 48 )
+
+[node name="LevelList" type="Control" parent="Subscreens"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+
+[node name="Focus" type="Control" parent="Subscreens/LevelList"]
+script = ExtResource( 7 )
+default_focus_path = NodePath("../../../Buttons/LevelList/Back")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Subscreens/LevelList"]
+margin_right = 775.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 0, 432 )
+follow_focus = true
+scroll_horizontal_enabled = false
+script = ExtResource( 24 )
+lerp_speed = 18.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelList/ScrollContainer"]
+modulate = Color( 0, 0, 1, 0 )
+margin_right = 768.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 768, 0 )
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 384, 0 )
+custom_constants/margin_right = 148
+custom_constants/margin_top = 32
+custom_constants/margin_left = 148
+custom_constants/margin_bottom = 32
+script = ExtResource( 49 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer"]
+margin_left = 148.0
+margin_top = 32.0
+margin_right = 620.0
+margin_bottom = 72.0
+
+[node name="Search" type="HBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 472.0
+margin_bottom = 24.0
+custom_constants/separation = 0
+alignment = 1
+script = ExtResource( 52 )
+
+[node name="Query" type="LineEdit" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+margin_right = 296.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+custom_styles/read_only = SubResource( 169 )
+custom_styles/focus = SubResource( 170 )
+custom_styles/normal = SubResource( 171 )
+placeholder_text = "Search for levels..."
+placeholder_alpha = 0.8
+
+[node name="Panel" type="Panel" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Query"]
+modulate = Color( 0, 0, 0, 0.627451 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_bottom = -2.0
+mouse_filter = 2
+
+[node name="Search" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+margin_left = 296.0
+margin_right = 320.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 0 )
+custom_fonts/font = ExtResource( 9 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 4 )
+extend_amount = 2
+
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Search"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+mouse_filter = 2
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="Padding" type="Control" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+margin_left = 320.0
+margin_right = 336.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="Default" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+margin_left = 336.0
+margin_right = 403.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 9 )
+toggle_mode = true
+pressed = true
+group = SubResource( 8 )
+text = "All Levels"
+script = ExtResource( 4 )
+click_override = "PageSwitchSound"
+extend_amount = 2
+
+[node name="Divider" type="ColorRect" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+margin_left = 403.0
+margin_right = 404.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 1, 0 )
+color = Color( 0, 0.0431373, 0.313726, 1 )
+
+[node name="Featured" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+margin_left = 404.0
+margin_right = 472.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 9 )
+toggle_mode = true
+group = SubResource( 8 )
+text = "Featured"
+script = ExtResource( 4 )
+click_override = "PageSwitchSound"
+extend_amount = 2
+
+[node name="Favorites" type="HBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
+visible = false
+margin_left = 401.0
+margin_right = 472.0
+margin_bottom = 24.0
+custom_constants/separation = 0
+
+[node name="Divider" type="ColorRect" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Favorites"]
+margin_right = 1.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 1, 0 )
+color = Color( 0, 0.0431373, 0.313726, 1 )
+
+[node name="Favorited" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Favorites"]
+margin_left = 1.0
+margin_right = 71.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 9 )
+toggle_mode = true
+group = SubResource( 8 )
+text = "Favorited"
+script = ExtResource( 4 )
+click_override = "PageSwitchSound"
+extend_amount = 2
+
+[node name="LevelGrid" type="GridContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 40.0
+margin_right = 472.0
+margin_bottom = 40.0
+custom_constants/vseparation = 24
+custom_constants/hseparation = 24
+columns = 2
+script = ExtResource( 2 )
+
+[node name="Pages" type="HBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_top = 56.0
+margin_right = 472.0
+margin_bottom = 80.0
+alignment = 1
+script = ExtResource( 25 )
+
+[node name="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages" instance=ExtResource( 27 )]
+
+[node name="Button2" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 28.0
+margin_right = 52.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "2"
+
+[node name="Button3" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 56.0
+margin_right = 80.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "3"
+
+[node name="Button4" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 84.0
+margin_right = 108.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "4"
+
+[node name="Button5" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 112.0
+margin_right = 136.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "5"
+
+[node name="Button6" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 140.0
+margin_right = 164.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "6"
+
+[node name="Button7" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 168.0
+margin_right = 192.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "7"
+
+[node name="Button8" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 196.0
+margin_right = 220.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "8"
+
+[node name="Button9" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 224.0
+margin_right = 248.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "9"
+
+[node name="Button10" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 252.0
+margin_right = 276.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "10"
+
+[node name="Button11" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 280.0
+margin_right = 304.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+disabled = true
+text = "..."
+
+[node name="Button12" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 308.0
+margin_right = 337.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+theme_type_variation = "PageButton"
+text = "999"
+
+[node name="Padding" type="Control" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 341.0
+margin_right = 349.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 8, 0 )
+
+[node name="GoToPage" type="HBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages"]
+margin_left = 353.0
+margin_right = 472.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+script = ExtResource( 30 )
+
+[node name="Query" type="LineEdit" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage"]
+margin_right = 95.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+custom_styles/read_only = SubResource( 169 )
+custom_styles/focus = SubResource( 170 )
+custom_styles/normal = SubResource( 171 )
+placeholder_text = "Go to page..."
+placeholder_alpha = 0.8
+
+[node name="Panel" type="Panel" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage/Query"]
+modulate = Color( 0, 0, 0, 0.627451 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_bottom = -2.0
+mouse_filter = 2
+
+[node name="Search" type="Button" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage"]
+margin_left = 95.0
+margin_right = 119.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 0 )
+custom_fonts/font = ExtResource( 9 )
+icon_align = 1
+expand_icon = true
+script = ExtResource( 4 )
+extend_amount = 2
+
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage/Search"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+mouse_filter = 2
+texture = ExtResource( 55 )
+expand = true
+stretch_mode = 6
+
+[node name="Loading" type="HBoxContainer" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_top = 56.0
+margin_right = 472.0
+margin_bottom = 80.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading"]
+margin_left = 178.0
+margin_right = 290.0
+margin_bottom = 24.0
+text = "Please wait..."
+
+[node name="Sprite" type="Control" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading"]
+margin_left = 294.0
+margin_right = 294.0
+margin_bottom = 24.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading/Sprite"]
+frames = ExtResource( 28 )
+playing = true
+centered = false
+offset = Vector2( 0, -8 )
+
+[node name="Outline" type="AnimatedSprite" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading/Sprite/AnimatedSprite"]
+frames = ExtResource( 29 )
+playing = true
+centered = false
+offset = Vector2( 0, -8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Subscreens/LevelList"]
+root_node = NodePath("../ScrollContainer")
+anims/RESET = SubResource( 218 )
+anims/transition = SubResource( 219 )
+
+[node name="LevelPage" type="Control" parent="Subscreens"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+
+[node name="Focus" type="Control" parent="Subscreens/LevelPage"]
+script = ExtResource( 7 )
+default_focus_path = NodePath("../ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/Play")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Subscreens/LevelPage"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 7.0
+rect_min_size = Vector2( 0, 432 )
+follow_focus = true
+scroll_horizontal_enabled = false
+script = ExtResource( 24 )
+lerp_speed = 18.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelPage/ScrollContainer"]
+modulate = Color( 0, 0, 1, 0 )
+margin_right = 768.0
+margin_bottom = 604.0
+rect_min_size = Vector2( 768, 0 )
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 384, 0 )
+custom_constants/margin_right = 148
+custom_constants/margin_top = 32
+custom_constants/margin_left = 148
+custom_constants/margin_bottom = 32
+script = ExtResource( 49 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer"]
+margin_left = 148.0
+margin_top = 32.0
+margin_right = 620.0
+margin_bottom = 572.0
+custom_constants/separation = 16
+
+[node name="OutdatedVersion" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_right = 472.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 9 )
+text = "Sorry! A newer version is required to play this level."
+align = 1
+
+[node name="LevelButtons" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 472.0
+margin_bottom = 26.0
+custom_constants/separation = 8
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons"]
+margin_right = 96.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 96, 0 )
+alignment = 2
+
+[node name="Website" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/VBoxContainer"]
+margin_top = 6.0
+margin_right = 96.0
+margin_bottom = 26.0
+theme_type_variation = "TransparentButton"
+text = "View on LSS"
+script = ExtResource( 4 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons"]
+margin_left = 104.0
+margin_right = 200.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 96, 0 )
+alignment = 2
+
+[node name="FavoriteButton" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/VBoxContainer2"]
+unique_name_in_owner = true
+margin_top = 6.0
+margin_right = 96.0
+margin_bottom = 26.0
+theme_type_variation = "TransparentButton"
+disabled = true
+text = " Favorite? "
+script = ExtResource( 4 )
+
+[node name="Padding" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons"]
+margin_left = 208.0
+margin_right = 316.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+
+[node name="SaveButton" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons"]
+unique_name_in_owner = true
+margin_left = 324.0
+margin_right = 394.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 70, 0 )
+theme_type_variation = "LevelButton"
+disabled = true
+text = "Save"
+script = ExtResource( 4 )
+
+[node name="Panel" type="Panel" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/SaveButton"]
+modulate = Color( 0.172549, 0.27451, 0.537255, 0.501961 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Play" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons"]
+margin_left = 402.0
+margin_right = 472.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 70, 0 )
+theme_type_variation = "LevelButton"
+text = "Play!"
+script = ExtResource( 4 )
+
+[node name="Panel" type="Panel" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/Play"]
+modulate = Color( 0.172549, 0.27451, 0.537255, 0.501961 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Padding2" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons"]
+visible = false
+margin_left = 416.0
+margin_right = 472.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+
+[node name="LevelPanel" type="PanelContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+self_modulate = Color( 0, 0.231373, 0.478431, 0.627451 )
+margin_top = 42.0
+margin_right = 472.0
+margin_bottom = 276.0
+mouse_filter = 2
+theme_type_variation = "Panel"
+script = ExtResource( 45 )
+
+[node name="Gradient" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 468.0
+margin_bottom = 230.0
+mouse_filter = 2
+texture = SubResource( 212 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 468.0
+margin_bottom = 230.0
+custom_constants/margin_top = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer"]
+margin_left = 12.0
+margin_top = 6.0
+margin_right = 452.0
+margin_bottom = 214.0
+custom_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer"]
+margin_right = 440.0
+margin_bottom = 24.0
+
+[node name="Title" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 308.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="Clipper" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Title"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -4.0
+margin_bottom = 4.0
+rect_clip_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Title/Clipper"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+alignment = 1
+
+[node name="LevelTitle" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Title/Clipper/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 30.0
+margin_top = 4.0
+margin_right = 278.0
+margin_bottom = 28.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 206 )
+text = "SM63 Tall Tall Mountain +"
+valign = 1
+
+[node name="Shadow" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Title/Clipper/HBoxContainer/LevelTitle"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 3.0
+margin_bottom = 3.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 206 )
+text = "SM63 Tall Tall Mountain +"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Stars" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 312.0
+margin_right = 440.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 128, 24 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Stars"]
+anchor_right = 0.5
+anchor_bottom = 0.5
+rect_scale = Vector2( 2, 2 )
+alignment = 2
+
+[node name="StarOutline" type="TextureProgress" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Stars/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color( 0.803922, 0.513726, 0.513726, 1 )
+material = SubResource( 209 )
+margin_right = 64.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 64, 12 )
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+texture_under = ExtResource( 33 )
+nine_patch_stretch = true
+
+[node name="Stars" type="TextureProgress" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Stars/HBoxContainer/StarOutline"]
+unique_name_in_owner = true
+material = SubResource( 209 )
+margin_right = 64.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 64, 0 )
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+value = 4.5
+texture_progress = ExtResource( 34 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="GreenStarOutline" type="TextureProgress" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Stars/HBoxContainer"]
+unique_name_in_owner = true
+self_modulate = Color( 0, 0.576471, 0.588235, 1 )
+material = SubResource( 217 )
+margin_right = 64.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 64, 0 )
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+texture_under = ExtResource( 33 )
+nine_patch_stretch = true
+
+[node name="GreenStars" type="TextureProgress" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/HBoxContainer/Stars/HBoxContainer/GreenStarOutline"]
+unique_name_in_owner = true
+material = SubResource( 217 )
+margin_right = 64.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 64, 0 )
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+value = 4.5
+texture_progress = ExtResource( 34 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="LevelInfo" type="PanelContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer"]
+self_modulate = Color( 0, 0, 0, 0.25098 )
+margin_top = 32.0
+margin_right = 440.0
+margin_bottom = 184.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 436.0
+margin_bottom = 148.0
+custom_constants/separation = 8
+
+[node name="Thumbnail" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer"]
+unique_name_in_owner = true
+material = SubResource( 205 )
+margin_right = 256.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 256, 144 )
+texture = ExtResource( 32 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer"]
+margin_left = 264.0
+margin_right = 432.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+custom_constants/separation = 4
+
+[node name="PaddingTop" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer"]
+margin_right = 168.0
+
+[node name="Collectibles" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer"]
+margin_top = 4.0
+margin_right = 168.0
+margin_bottom = 24.0
+alignment = 1
+
+[node name="ShinesIcon" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Collectibles"]
+margin_left = 50.0
+margin_right = 70.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Collectibles/ShinesIcon"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 41 )
+expand = true
+stretch_mode = 6
+
+[node name="ShinesLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Collectibles"]
+unique_name_in_owner = true
+margin_left = 74.0
+margin_top = 2.0
+margin_right = 82.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 9 )
+text = "4"
+align = 1
+valign = 1
+
+[node name="CoinsIcon" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Collectibles"]
+margin_left = 86.0
+margin_right = 106.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Collectibles/CoinsIcon"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 18.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 42 )
+expand = true
+stretch_mode = 6
+
+[node name="CoinsLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Collectibles"]
+unique_name_in_owner = true
+margin_left = 110.0
+margin_top = 2.0
+margin_right = 118.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 9 )
+text = "4"
+align = 1
+valign = 1
+
+[node name="Author" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer"]
+margin_top = 28.0
+margin_right = 168.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 0, 24 )
+rect_clip_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Author"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="AuthorIcon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Author/HBoxContainer"]
+unique_name_in_owner = true
+material = SubResource( 213 )
+margin_left = 48.0
+margin_right = 72.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 0 )
+texture = ExtResource( 38 )
+expand = true
+
+[node name="AuthorName" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/Author/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 76.0
+margin_top = 4.0
+margin_right = 120.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 9 )
+text = "hop193"
+align = 1
+valign = 1
+
+[node name="Padding" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer"]
+margin_top = 56.0
+margin_right = 168.0
+margin_bottom = 60.0
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer"]
+margin_top = 64.0
+margin_right = 168.0
+margin_bottom = 140.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 76.0
+size_flags_horizontal = 3
+custom_constants/separation = 4
+
+[node name="PlaysContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 80.0
+margin_bottom = 16.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Icon" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlaysContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlaysContainer/Icon"]
+margin_left = 1.5
+margin_top = 1.0
+margin_right = 14.5
+margin_bottom = 14.0
+mouse_filter = 2
+texture = ExtResource( 37 )
+expand = true
+stretch_mode = 6
+
+[node name="PlaysLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/PlaysContainer"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_right = 80.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 9 )
+text = "18"
+valign = 1
+clip_text = true
+
+[node name="FavoritesContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 20.0
+margin_right = 80.0
+margin_bottom = 36.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Icon2" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/FavoritesContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/FavoritesContainer/Icon2"]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 15.0
+margin_bottom = 15.0
+mouse_filter = 2
+texture = ExtResource( 36 )
+expand = true
+stretch_mode = 6
+
+[node name="FavoritesLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/FavoritesContainer"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_right = 80.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 9 )
+text = "5"
+valign = 1
+clip_text = true
+
+[node name="RatesContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 40.0
+margin_right = 80.0
+margin_bottom = 56.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Icon2" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/RatesContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/RatesContainer/Icon2"]
+margin_left = 1.0
+margin_right = 15.0
+margin_bottom = 14.0
+mouse_filter = 2
+texture = ExtResource( 39 )
+expand = true
+stretch_mode = 6
+
+[node name="RatesLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/RatesContainer"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_right = 80.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 9 )
+text = "5"
+valign = 1
+clip_text = true
+
+[node name="Time" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 60.0
+margin_right = 80.0
+margin_bottom = 76.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Icon2" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Time"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 0 )
+
+[node name="Icon" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Time/Icon2"]
+margin_left = -2.0
+margin_top = -2.0
+margin_right = 18.0
+margin_bottom = 18.0
+mouse_filter = 2
+texture = ExtResource( 43 )
+expand = true
+stretch_mode = 6
+
+[node name="TimeLabel" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Time"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_right = 80.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 9 )
+text = "24/07/29"
+valign = 1
+clip_text = true
+
+[node name="Control" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 84.0
+margin_right = 164.0
+margin_bottom = 76.0
+size_flags_horizontal = 3
+
+[node name="Tags" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer/Control"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+alignment = 2
+
+[node name="Padding" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 168.0
+margin_right = 168.0
+margin_bottom = 76.0
+
+[node name="PaddingBottom" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/LevelInfo/HBoxContainer/VBoxContainer"]
+margin_top = 144.0
+margin_right = 168.0
+margin_bottom = 144.0
+
+[node name="Description" type="PanelContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+self_modulate = Color( 0, 0, 0, 0.25098 )
+margin_top = 192.0
+margin_right = 440.0
+margin_bottom = 208.0
+size_flags_horizontal = 3
+script = ExtResource( 44 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 436.0
+margin_bottom = 12.0
+custom_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description/VBoxContainer"]
+margin_right = 432.0
+margin_bottom = 8.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description/VBoxContainer/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 428.0
+margin_bottom = 4.0
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Button" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description/VBoxContainer"]
+visible = false
+margin_top = 8.0
+margin_right = 432.0
+margin_bottom = 28.0
+theme_type_variation = "PageButton"
+text = "Read more..."
+script = ExtResource( 47 )
+
+[node name="Tween" type="Tween" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description"]
+
+[node name="RateSubmitting" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_top = 292.0
+margin_right = 472.0
+margin_bottom = 340.0
+rect_min_size = Vector2( 0, 48 )
+custom_fonts/font = ExtResource( 65 )
+text = "Submitting..."
+align = 1
+valign = 1
+
+[node name="RatePanel" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 292.0
+margin_right = 472.0
+margin_bottom = 340.0
+alignment = 1
+script = ExtResource( 67 )
+new_rate_text = "Leave a rating: "
+change_rate_text = "Change rating: "
+
+[node name="Label" type="Label" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel"]
+margin_left = 80.0
+margin_top = 14.0
+margin_right = 184.0
+margin_bottom = 33.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 65 )
+text = "Leave a rating: "
+align = 1
+valign = 1
+
+[node name="Padding" type="Control" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel"]
+margin_left = 188.0
+margin_right = 196.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 8, 0 )
+
+[node name="PanelContainer" type="PanelContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel"]
+unique_name_in_owner = true
+self_modulate = Color( 0, 0.231373, 0.478431, 0.627451 )
+margin_left = 200.0
+margin_right = 392.0
+margin_bottom = 48.0
+mouse_filter = 2
+theme_type_variation = "Panel"
+script = ExtResource( 45 )
+
+[node name="Gradient" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 188.0
+margin_bottom = 44.0
+mouse_filter = 2
+texture = SubResource( 212 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 188.0
+margin_bottom = 44.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="Panel" type="Panel" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer"]
+modulate = Color( 0, 0, 0, 0.25098 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 180.0
+margin_bottom = 36.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 180.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 176, 0 )
+alignment = 1
+
+[node name="Rating" type="Button" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer"]
+margin_left = 8.0
+margin_right = 168.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 160, 30 )
+rect_pivot_offset = Vector2( -24, -82 )
+flat = true
+script = ExtResource( 66 )
+
+[node name="Outline" type="TextureProgress" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating"]
+self_modulate = Color( 0.803922, 0.513726, 0.513726, 1 )
+material = SubResource( 209 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+value = 5.0
+texture_under = ExtResource( 33 )
+texture_progress = ExtResource( 34 )
+tint_progress = Color( 0.831373, 0.615686, 0.423529, 1 )
+nine_patch_stretch = true
+
+[node name="Fill" type="TextureProgress" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating/Outline"]
+material = SubResource( 209 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+max_value = 5.0
+step = 0.0
+texture_progress = ExtResource( 34 )
+nine_patch_stretch = true
+
+[node name="PostComment" type="PanelContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+self_modulate = Color( 0, 0.231373, 0.478431, 0.627451 )
+margin_top = 356.0
+margin_right = 472.0
+margin_bottom = 524.0
+theme = ExtResource( 1 )
+
+[node name="Gradient" type="TextureRect" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/PostComment"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 468.0
+margin_bottom = 164.0
+mouse_filter = 2
+texture = SubResource( 227 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/PostComment"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 468.0
+margin_bottom = 164.0
+custom_constants/margin_right = 6
+custom_constants/margin_top = 6
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 6
+
+[node name="PostCommentContent" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/PostComment/MarginContainer" instance=ExtResource( 64 )]
+unique_name_in_owner = true
+margin_bottom = 154.0
+
+[node name="Comments" type="VBoxContainer" parent="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 540.0
+margin_right = 472.0
+margin_bottom = 540.0
+custom_constants/separation = 12
+script = ExtResource( 53 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Subscreens/LevelPage"]
+root_node = NodePath("../ScrollContainer")
+anims/RESET = SubResource( 220 )
+anims/transition = SubResource( 221 )
+
+[node name="Login" type="Control" parent="Subscreens"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+
+[node name="Focus" type="Control" parent="Subscreens/Login"]
+script = ExtResource( 7 )
+default_focus_path = NodePath("../../../Buttons/LevelPage/Back")
+
+[node name="MarginContainer" type="CenterContainer" parent="Subscreens/Login"]
+modulate = Color( 0, 0, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 768, 0 )
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 384, 216 )
+
+[node name="LoginPanel" type="PanelContainer" parent="Subscreens/Login/MarginContainer"]
+self_modulate = Color( 0, 0.231373, 0.478431, 0.627451 )
+margin_left = 136.0
+margin_top = 131.0
+margin_right = 632.0
+margin_bottom = 301.0
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = "Panel"
+script = ExtResource( 60 )
+
+[node name="Gradient" type="TextureRect" parent="Subscreens/Login/MarginContainer/LoginPanel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 492.0
+margin_bottom = 166.0
+mouse_filter = 2
+texture = SubResource( 212 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/Login/MarginContainer/LoginPanel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 492.0
+margin_bottom = 166.0
+custom_constants/margin_top = 6
+
+[node name="LoginContents" type="VBoxContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer"]
+unique_name_in_owner = true
+margin_left = 12.0
+margin_top = 6.0
+margin_right = 476.0
+margin_bottom = 150.0
+custom_constants/separation = 12
+
+[node name="WrongPass" type="Label" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents"]
+unique_name_in_owner = true
+visible = false
+margin_right = 464.0
+margin_bottom = 24.0
+custom_colors/font_color = Color( 1, 0.737255, 0.737255, 1 )
+text = "Incorrect email and/or password."
+align = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents"]
+self_modulate = Color( 0, 0, 0, 0.188235 )
+margin_right = 464.0
+margin_bottom = 104.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 460.0
+margin_bottom = 100.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 444.0
+margin_bottom = 84.0
+
+[node name="Email" type="LineEdit" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 432.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 58 )
+placeholder_text = "Email"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer"]
+margin_top = 44.0
+margin_right = 432.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 432, 0 )
+
+[node name="Password" type="LineEdit" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 293.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 58 )
+secret = true
+expand_to_text_length = true
+placeholder_text = "Password"
+
+[node name="Padding" type="Control" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 297.0
+margin_right = 301.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 4, 0 )
+
+[node name="Show" type="Button" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 305.0
+margin_right = 363.0
+margin_bottom = 28.0
+theme_type_variation = "TransparentButton"
+custom_fonts/font = ExtResource( 58 )
+text = " Show "
+script = ExtResource( 4 )
+extend_amount = 2
+
+[node name="Forgot" type="Button" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 367.0
+margin_right = 432.0
+margin_bottom = 28.0
+theme_type_variation = "TransparentButton"
+custom_fonts/font = ExtResource( 58 )
+text = " Reset "
+script = ExtResource( 4 )
+extend_amount = 2
+
+[node name="URL" type="Node" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Forgot"]
+script = ExtResource( 59 )
+url = "https://levelsharesquare.com/forgotpass"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents"]
+margin_top = 116.0
+margin_right = 464.0
+margin_bottom = 144.0
+
+[node name="Login" type="Button" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/HBoxContainer"]
+margin_right = 276.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+theme_type_variation = "TransparentButton"
+custom_fonts/font = ExtResource( 58 )
+text = "Login"
+script = ExtResource( 4 )
+click_override = "LevelClickSound"
+extend_amount = 2
+
+[node name="Register" type="Button" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/HBoxContainer"]
+margin_left = 280.0
+margin_right = 464.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+theme_type_variation = "TransparentButton"
+custom_fonts/font = ExtResource( 58 )
+text = "Register"
+script = ExtResource( 4 )
+extend_amount = 2
+
+[node name="URL" type="Node" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/HBoxContainer/Register"]
+script = ExtResource( 59 )
+url = "https://levelsharesquare.com/auth?url=/#!"
+
+[node name="PleaseWait" type="CenterContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+margin_left = 12.0
+margin_top = 6.0
+margin_right = 476.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 464, 144 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/PleaseWait"]
+margin_left = 174.0
+margin_top = 60.0
+margin_right = 290.0
+margin_bottom = 84.0
+
+[node name="Label" type="Label" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/PleaseWait/HBoxContainer"]
+margin_right = 112.0
+margin_bottom = 24.0
+text = "Please wait..."
+align = 1
+valign = 1
+
+[node name="Sprite" type="Control" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/PleaseWait/HBoxContainer"]
+margin_left = 116.0
+margin_right = 116.0
+margin_bottom = 24.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/PleaseWait/HBoxContainer/Sprite"]
+frames = ExtResource( 28 )
+playing = true
+centered = false
+offset = Vector2( 0, -8 )
+
+[node name="Outline" type="AnimatedSprite" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/PleaseWait/HBoxContainer/Sprite/AnimatedSprite"]
+frames = ExtResource( 29 )
+playing = true
+centered = false
+offset = Vector2( 0, -8 )
+
+[node name="Timer" type="Timer" parent="Subscreens/Login/MarginContainer/LoginPanel"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Subscreens/Login"]
+anims/RESET = SubResource( 223 )
+anims/transition = SubResource( 224 )
+
+[node name="Buttons" type="MarginContainer" parent="."]
+modulate = Color( 0, 0, 1, 0 )
+margin_left = -128.0
+margin_right = -12.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 96, 0 )
+rect_rotation = -2.0
+mouse_filter = 2
+script = ExtResource( 50 )
+
+[node name="LevelList" type="VBoxContainer" parent="Buttons"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 104.0
+margin_bottom = 420.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 2
+
+[node name="Profile" type="HBoxContainer" parent="Buttons/LevelList"]
+visible = false
+margin_right = 92.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+alignment = 1
+script = ExtResource( 63 )
+
+[node name="Icon" type="TextureRect" parent="Buttons/LevelList/Profile"]
+material = SubResource( 225 )
+margin_right = 24.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 24, 24 )
+texture = ExtResource( 38 )
+expand = true
+stretch_mode = 6
+
+[node name="Control" type="Control" parent="Buttons/LevelList/Profile"]
+margin_left = 28.0
+margin_right = 92.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="Buttons/LevelList/Profile/Control"]
+anchor_right = 1.25
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 9 )
+text = "Username"
+valign = 1
+autowrap = true
+
+[node name="Padding" type="Control" parent="Buttons/LevelList"]
+visible = false
+margin_right = 92.0
+margin_bottom = 352.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="Logout" type="Button" parent="Buttons/LevelList"]
+visible = false
+margin_top = 328.0
+margin_right = 92.0
+margin_bottom = 352.0
+custom_fonts/font = ExtResource( 9 )
+text = "Log Out"
+script = ExtResource( 10 )
+sink_amount = 6
+
+[node name="Login" type="Button" parent="Buttons/LevelList"]
+margin_top = 356.0
+margin_right = 92.0
+margin_bottom = 380.0
+custom_fonts/font = ExtResource( 9 )
+text = "Log In"
+script = ExtResource( 10 )
+sink_amount = 6
+
+[node name="Back" type="Button" parent="Buttons/LevelList"]
+margin_top = 384.0
+margin_right = 92.0
+margin_bottom = 408.0
+theme_type_variation = "Red"
+custom_fonts/font = ExtResource( 9 )
+text = "Back to Menu"
+script = ExtResource( 10 )
+click_override = "BackSound"
+sink_amount = 6
+
+[node name="LevelPage" type="VBoxContainer" parent="Buttons"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 104.0
+margin_bottom = 420.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 2
+
+[node name="Back" type="Button" parent="Buttons/LevelPage"]
+margin_top = 384.0
+margin_right = 92.0
+margin_bottom = 408.0
+theme_type_variation = "Red"
+custom_fonts/font = ExtResource( 9 )
+text = "Back"
+script = ExtResource( 10 )
+click_override = "BackSound"
+sink_amount = 6
+
+[node name="Login" type="VBoxContainer" parent="Buttons"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 104.0
+margin_bottom = 420.0
+mouse_filter = 2
+custom_constants/separation = 4
+alignment = 2
+
+[node name="Back" type="Button" parent="Buttons/Login"]
+margin_top = 384.0
+margin_right = 92.0
+margin_bottom = 408.0
+theme_type_variation = "Red"
+custom_fonts/font = ExtResource( 9 )
+text = "Back"
+script = ExtResource( 10 )
+click_override = "BackSound"
+sink_amount = 6
+
+[node name="LaunchStar" type="Control" parent="."]
+modulate = Color( 0, 0, 1, 0 )
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -184.0
+margin_bottom = 248.0
+rect_min_size = Vector2( 128, 0 )
+mouse_filter = 2
+script = ExtResource( 17 )
+
+[node name="Button" type="Button" parent="LaunchStar"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 16.0
+margin_top = 335.0
+margin_right = 96.0
+margin_bottom = 415.0
+script = ExtResource( 4 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LaunchStar/Button"]
+bus = "Sounds"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LaunchStar/Button"]
+anims/RESET = SubResource( 222 )
+anims/launch = SubResource( 160 )
+anims/windup = SubResource( 161 )
+
+[node name="StarContainer" type="Node2D" parent="LaunchStar/Button"]
+position = Vector2( 40, 30 )
+
+[node name="InnerStar" type="Node2D" parent="LaunchStar/Button/StarContainer"]
+script = SubResource( 162 )
+
+[node name="InnerTop" type="AnimatedSprite" parent="LaunchStar/Button/StarContainer/InnerStar"]
+z_index = 2
+frames = SubResource( 163 )
+playing = true
+
+[node name="InnerBottom" type="AnimatedSprite" parent="LaunchStar/Button/StarContainer/InnerStar"]
+z_index = 6
+frames = SubResource( 164 )
+playing = true
+
+[node name="OuterStar" type="Node2D" parent="LaunchStar/Button/StarContainer"]
+script = SubResource( 162 )
+
+[node name="OuterTop" type="AnimatedSprite" parent="LaunchStar/Button/StarContainer/OuterStar"]
+z_index = 3
+frames = SubResource( 165 )
+playing = true
+
+[node name="OuterTopShadow" type="AnimatedSprite" parent="LaunchStar/Button/StarContainer/OuterStar"]
+z_index = 1
+frames = SubResource( 166 )
+playing = true
+
+[node name="OuterBottom" type="AnimatedSprite" parent="LaunchStar/Button/StarContainer/OuterStar"]
+z_index = 7
+frames = SubResource( 167 )
+playing = true
+
+[node name="OuterBottomShadow" type="AnimatedSprite" parent="LaunchStar/Button/StarContainer/OuterStar"]
+z_index = 1
+frames = SubResource( 168 )
+playing = true
+
+[node name="ThumbnailCache" type="Node" parent="."]
+script = ExtResource( 57 )
+
+[node name="AccountInfo" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 61 )
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 23 )
+
+[node name="HTTPLevelPage" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 46 )
+
+[node name="HTTPComments" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 54 )
+
+[node name="HTTPRandomLevel" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 51 )
+
+[node name="HTTPImages" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 26 )
+
+[node name="HTTPAccount" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 62 )
+
+[node name="ReturnArgs" type="Node" parent="."]
+process_priority = -1
+script = ExtResource( 56 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 203 )
+anims/transition = SubResource( 202 )
+
+[connection signal="screen_opened" from="." to="Subscreens" method="screen_change" binds= [ "LevelList" ]]
+[connection signal="screen_opened" from="." to="Subscreens/LevelList/Focus" method="focus_node" flags=3]
+[connection signal="screen_opened" from="." to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search" method="screen_opened"]
+[connection signal="screen_opened" from="." to="AccountInfo" method="load_info"]
+[connection signal="screen_opened" from="." to="HTTPRequest" method="load_page"]
+[connection signal="screen_changed" from="Subscreens" to="Buttons" method="screen_changed"]
+[connection signal="screen_opened" from="Subscreens/LevelList" to="Subscreens/LevelList/Focus" method="focus_node" flags=3]
+[connection signal="resized" from="Subscreens/LevelList/ScrollContainer/MarginContainer" to="Subscreens/LevelList/ScrollContainer/MarginContainer" method="resized"]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search" method="search"]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Default" method="set_pressed_no_signal" binds= [ true ]]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Featured" method="set_pressed_no_signal" binds= [ false ]]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Default" to="HTTPRequest" method="change_page_type" binds= [ 0 ]]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Featured" to="HTTPRequest" method="change_page_type" binds= [ 1 ]]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Favorites/Favorited" to="HTTPRequest" method="change_page_type" binds= [ 2 ]]
+[connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage" method="go"]
+[connection signal="screen_opened" from="Subscreens/LevelPage" to="Subscreens/LevelPage/Focus" method="focus_node" flags=3]
+[connection signal="screen_opened" from="Subscreens/LevelPage" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Comments" method="screen_opened"]
+[connection signal="resized" from="Subscreens/LevelPage/ScrollContainer/MarginContainer" to="Subscreens/LevelPage/ScrollContainer/MarginContainer" method="resized"]
+[connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/VBoxContainer/Website" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="open_website"]
+[connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/SaveButton" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="save_level"]
+[connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/Play" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="play_level"]
+[connection signal="level_loaded" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel" method="level_loaded"]
+[connection signal="level_loaded" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating" method="level_loaded"]
+[connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description/VBoxContainer/Button" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description" method="toggle_expand"]
+[connection signal="mouse_exited" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating" method="mouse_exited"]
+[connection signal="screen_opened" from="Subscreens/Login" to="Subscreens/Login/Focus" method="focus_node" flags=3]
+[connection signal="resized" from="Subscreens/Login/MarginContainer" to="Subscreens/Login/MarginContainer" method="resized"]
+[connection signal="button_down" from="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Show" to="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Password" method="set_secret" binds= [ false ]]
+[connection signal="button_up" from="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Show" to="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Password" method="set_secret" binds= [ true ]]
+[connection signal="pressed" from="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/HBoxContainer/Login" to="Subscreens/Login/MarginContainer/LoginPanel" method="login"]
+[connection signal="timeout" from="Subscreens/Login/MarginContainer/LoginPanel/Timer" to="Subscreens/Login/MarginContainer/LoginPanel" method="timeout"]
+[connection signal="pressed" from="Buttons/LevelList/Logout" to="AccountInfo" method="logout"]
+[connection signal="pressed" from="Buttons/LevelList/Login" to="Subscreens/LevelList" method="transition" binds= [ "Login" ]]
+[connection signal="pressed" from="Buttons/LevelList/Back" to="." method="transition" binds= [ "MainMenu" ]]
+[connection signal="pressed" from="Buttons/LevelList/Back" to="Subscreens/LevelList" method="transition" binds= [ "" ]]
+[connection signal="pressed" from="Buttons/LevelPage/Back" to="Subscreens/LevelPage" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="Buttons/Login/Back" to="Subscreens/Login" method="transition" binds= [ "LevelList" ]]
+[connection signal="pressed" from="LaunchStar/Button" to="LaunchStar" method="pressed"]
+[connection signal="login" from="AccountInfo" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Favorites" method="show"]
+[connection signal="login" from="AccountInfo" to="Buttons/LevelList/Profile" method="show"]
+[connection signal="login" from="AccountInfo" to="Buttons/LevelList/Profile" method="load_profile"]
+[connection signal="login" from="AccountInfo" to="Buttons/LevelList/Padding" method="show"]
+[connection signal="login" from="AccountInfo" to="Buttons/LevelList/Logout" method="show"]
+[connection signal="login" from="AccountInfo" to="Buttons/LevelList/Login" method="hide"]
+[connection signal="logout" from="AccountInfo" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Favorites" method="hide"]
+[connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Profile" method="hide"]
+[connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Padding" method="hide"]
+[connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Logout" method="hide"]
+[connection signal="logout" from="AccountInfo" to="Buttons/LevelList/Login" method="show"]
+[connection signal="page_loaded" from="HTTPRequest" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search" method="page_loaded"]
+[connection signal="request_completed" from="HTTPRequest" to="HTTPRequest" method="request_completed"]
+[connection signal="request_completed" from="HTTPLevelPage" to="HTTPLevelPage" method="request_completed"]
+[connection signal="request_completed" from="HTTPComments" to="HTTPComments" method="request_completed"]
+[connection signal="request_completed" from="HTTPRandomLevel" to="HTTPRandomLevel" method="request_completed"]
+[connection signal="image_loaded" from="HTTPImages" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" method="image_loaded"]
+[connection signal="comment_request_completed" from="HTTPAccount" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Comments" method="comment_added"]
+[connection signal="login_request_completed" from="HTTPAccount" to="Subscreens/Login/MarginContainer/LoginPanel" method="request_completed"]
+[connection signal="rating_request_completed" from="HTTPAccount" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel" method="rating_request_completed"]
+[connection signal="reply_request_completed" from="HTTPAccount" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Comments" method="reply_added"]

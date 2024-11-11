@@ -109,6 +109,10 @@ func play_fall_sound():
 func play_last_hit_sound():
 	if ready:
 		last_hit_8bit_sound.play()
+
+func play_last_hit_voice_sound():
+	if ready:
+		last_hit_sounds.play()
 	
 func play_hit_sound():
 	if ready:

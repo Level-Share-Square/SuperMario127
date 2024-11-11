@@ -187,7 +187,7 @@ func quit_to_menu() -> void:
 	Singleton.MenuVariables.quit_to_menu_with_transition("levels_screen")
 
 func update_shine_info():
-	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+	var level_info = Singleton.CurrentLevelData.level_info
 	
 	var level_name : Label = shine_info.get_node("LevelName")
 	var level_name_backing : Label = shine_info.get_node("LevelName/LevelNameBacking")
@@ -206,12 +206,12 @@ func update_shine_info():
 		shine_name.bbcode_text = "[center]%s[/center]" % selected_shine_info["title"]
 		
 func _process(delta):
-	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+	var level_info = Singleton.CurrentLevelData.level_info
 	populate_info_panel(level_info)
 
 #changes pause menu description to previous shine info
 func prev_shine():
-	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+	var level_info = Singleton.CurrentLevelData.level_info
 	
 	if level_info.selected_shine + shine_offset >= 1:
 		shine_offset -= 1
@@ -222,7 +222,7 @@ func prev_shine():
 
 #changes pause menu description to next shine info
 func next_shine():	
-	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+	var level_info = Singleton.CurrentLevelData.level_info
 	if (level_info.selected_shine + shine_offset) < (shineDetails.size()-1):
 		shine_offset += 1 
 	else:
@@ -232,7 +232,7 @@ func next_shine():
 	scrollcheck()
 	
 func scrollcheck():
-	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+	var level_info = Singleton.CurrentLevelData.level_info
 	if (level_info.selected_shine + shine_offset) < (shineDetails.size()-1):
 		nextbutton.show()
 	else:

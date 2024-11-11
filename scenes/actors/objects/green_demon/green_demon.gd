@@ -116,6 +116,7 @@ func _physics_process(delta):
 			#this calculates the position offset using the current angle, and then sets the position accordingly
 			var offset = Vector2(sin(chase_start_anim_angle), cos(chase_start_anim_angle)) * CHASE_ANIM_ROTATION_RADIUS
 			position = original_position + offset
+			reset_physics_interpolation()
 			
 	else:
 		particles.emitting = false

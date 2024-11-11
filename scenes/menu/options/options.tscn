@@ -1,0 +1,1768 @@
+[gd_scene load_steps=49 format=2]
+
+[ext_resource path="res://scenes/menu/options/controls/preset_loader.gd" type="Script" id=1]
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=3]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=6]
+[ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=7]
+[ext_resource path="res://scenes/menu/screen.gd" type="Script" id=8]
+[ext_resource path="res://scenes/menu/options/buttons/slider_option.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/menu/options/buttons/boolean_option.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/menu/options/buttons/enum_option.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/menu/options/controls/keybind.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/menu/options/controls/category_buttons.gd" type="Script" id=13]
+[ext_resource path="res://scenes/menu/options/buttons/enum_slider_option.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=15]
+[ext_resource path="res://scenes/menu/options/subscreens.gd" type="Script" id=16]
+[ext_resource path="res://scenes/menu/options/controls/remapper.gd" type="Script" id=17]
+[ext_resource path="res://scenes/menu/options/controls/device_buttons.gd" type="Script" id=18]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=19]
+[ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=20]
+[ext_resource path="res://scenes/menu/background_scroll/background.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/actors/mario/luigi_frames.tres" type="SpriteFrames" id=22]
+[ext_resource path="res://scenes/menu/options/mod_loader.gd" type="Script" id=23]
+[ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=24]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=25]
+
+[sub_resource type="CanvasItemMaterial" id=11]
+blend_mode = 1
+
+[sub_resource type="Gradient" id=12]
+offsets = PoolRealArray( 0, 0.25, 0.75, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=13]
+gradient = SubResource( 12 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.620112, 0.921788, 1 )
+colors = PoolColorArray( 0, 0, 0, 0.564706, 0, 0, 0, 0.88656, 0, 0, 0, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+width = 64
+
+[sub_resource type="GDScript" id=14]
+resource_name = "html5_hide"
+script/source = "extends Node
+
+
+func _ready():
+	if OS.has_feature(\"JavaScript\"):
+		get_parent().hide()
+"
+
+[sub_resource type="DynamicFont" id=24]
+
+[sub_resource type="StyleBoxEmpty" id=25]
+
+[sub_resource type="StyleBoxEmpty" id=26]
+
+[sub_resource type="StyleBoxEmpty" id=27]
+
+[sub_resource type="StyleBoxEmpty" id=28]
+
+[sub_resource type="GDScript" id=31]
+resource_name = "pass_group"
+script/source = "extends GridContainer
+
+
+export var input_group: String
+"
+
+[sub_resource type="DynamicFont" id=29]
+size = 14
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 25 )
+
+[sub_resource type="DynamicFont" id=30]
+size = 10
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 25 )
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0, 0.5, 1 )
+colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 0.501961, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture2D" id=6]
+gradient = SubResource( 9 )
+fill = 1
+fill_to = Vector2( 1, 1 )
+
+[sub_resource type="Gradient" id=10]
+offsets = PoolRealArray( 0, 0.05, 0.95, 1 )
+colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture2D" id=8]
+gradient = SubResource( 10 )
+fill_from = Vector2( 0, 1 )
+fill_to = Vector2( 1, 1 )
+
+[sub_resource type="Gradient" id=19]
+offsets = PoolRealArray( 0.335196, 0.653631 )
+colors = PoolColorArray( 0.290196, 0, 0.490196, 1, 0.545098, 0.278431, 0.6, 1 )
+
+[sub_resource type="GradientTexture2D" id=20]
+flags = 4
+gradient = SubResource( 19 )
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2( 0.5, 1 )
+fill_to = Vector2( 0.5, 0 )
+
+[sub_resource type="StyleBoxTexture" id=23]
+texture = SubResource( 20 )
+region_rect = Rect2( 15, 0, 1, 32 )
+margin_left = 4.0
+margin_right = 4.0
+margin_top = 3.0
+margin_bottom = 5.0
+axis_stretch_horizontal = 1
+modulate_color = Color( 0.980392, 0.847059, 1, 1 )
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BlackBar:margin_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -206 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BlackBar:margin_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -14 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Subscreens:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Background:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "transition"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("BlackBar:margin_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ -6.0, -206 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BlackBar:margin_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 186.0, -14 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Subscreens:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Background:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.5 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="Options" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+theme = ExtResource( 2 )
+script = ExtResource( 8 )
+
+[node name="Focus" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 7 )
+default_focus_path = NodePath("../BlackBar/MarginContainer/VBoxContainer/Back")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 5 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 4 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="Background" parent="." instance=ExtResource( 21 )]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 0.953
+anchor_bottom = 0.953
+rect_scale = Vector2( 1.05, 1.05 )
+overlay_tint = Color( 0.0941176, 0.172549, 0.380392, 0.270588 )
+static_amount = 0.35
+
+[node name="Gradient" type="TextureRect" parent="Background"]
+modulate = Color( 0.294118, 0.835294, 1, 0.12549 )
+material = SubResource( 11 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 13 )
+expand = true
+
+[node name="BlackBar" type="TextureRect" parent="."]
+anchor_bottom = 1.0
+margin_left = -206.0
+margin_top = -7.0
+margin_right = -14.0
+margin_bottom = 5.0
+rect_min_size = Vector2( 208, 0 )
+rect_rotation = 2.0
+texture = SubResource( 3 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="BlackBar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 16
+custom_constants/margin_left = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BlackBar/MarginContainer"]
+margin_top = 12.0
+margin_right = 192.0
+margin_bottom = 432.0
+alignment = 1
+
+[node name="Back" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
+margin_top = 114.0
+margin_right = 192.0
+margin_bottom = 146.0
+focus_neighbour_top = NodePath("../Storage")
+focus_neighbour_bottom = NodePath("../General")
+theme_type_variation = "Red"
+text = "Back to Menu"
+align = 2
+script = ExtResource( 3 )
+
+[node name="Shadow" type="NinePatchRect" parent="BlackBar/MarginContainer/VBoxContainer/Back"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 6 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Padding" type="Control" parent="BlackBar/MarginContainer/VBoxContainer"]
+margin_top = 162.0
+margin_right = 192.0
+margin_bottom = 162.0
+
+[node name="General" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
+margin_top = 178.0
+margin_right = 192.0
+margin_bottom = 210.0
+focus_neighbour_top = NodePath("../Back")
+focus_neighbour_bottom = NodePath("../Controls")
+text = "General"
+align = 2
+script = ExtResource( 3 )
+
+[node name="Shadow" type="NinePatchRect" parent="BlackBar/MarginContainer/VBoxContainer/General"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 6 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Controls" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
+margin_top = 226.0
+margin_right = 192.0
+margin_bottom = 258.0
+focus_neighbour_top = NodePath("../General")
+text = "Controls"
+align = 2
+script = ExtResource( 3 )
+
+[node name="Shadow" type="NinePatchRect" parent="BlackBar/MarginContainer/VBoxContainer/Controls"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 6 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Storage" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
+margin_top = 274.0
+margin_right = 192.0
+margin_bottom = 306.0
+focus_neighbour_bottom = NodePath("../Back")
+text = "Storage"
+align = 2
+script = ExtResource( 3 )
+
+[node name="Shadow" type="NinePatchRect" parent="BlackBar/MarginContainer/VBoxContainer/Storage"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 6 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Subscreens" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -568.0
+margin_top = -216.0
+margin_bottom = 216.0
+rect_min_size = Vector2( 568, 0 )
+script = ExtResource( 16 )
+default_subscreen_path = NodePath("General")
+buttons_container_path = NodePath("../BlackBar/MarginContainer/VBoxContainer")
+
+[node name="General" type="CenterContainer" parent="Subscreens"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/General"]
+margin_left = 17.0
+margin_top = 35.0
+margin_right = 550.0
+margin_bottom = 397.0
+custom_constants/separation = 32
+
+[node name="MarginContainer" type="MarginContainer" parent="Subscreens/General/VBoxContainer"]
+margin_right = 533.0
+margin_bottom = 140.0
+custom_constants/margin_right = 96
+custom_constants/margin_top = 0
+custom_constants/margin_left = 96
+custom_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/General/VBoxContainer/MarginContainer"]
+margin_left = 96.0
+margin_right = 437.0
+margin_bottom = 140.0
+alignment = 1
+
+[node name="MasterVolume" parent="Subscreens/General/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource( 9 )]
+margin_right = 341.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 160, 0 )
+setting_section = "Audio"
+setting_key = "master_volume"
+default_value = 75.0
+
+[node name="Music" parent="Subscreens/General/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource( 9 )]
+margin_top = 52.0
+margin_right = 341.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 160, 0 )
+setting_section = "Audio"
+setting_key = "bgm_volume"
+default_value = 100.0
+
+[node name="SoundEffects" parent="Subscreens/General/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource( 9 )]
+margin_top = 104.0
+margin_right = 341.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 160, 0 )
+setting_section = "Audio"
+setting_key = "sfx_volume"
+default_value = 100.0
+
+[node name="Separator" type="ColorRect" parent="Subscreens/General/VBoxContainer"]
+margin_top = 172.0
+margin_right = 533.0
+margin_bottom = 173.0
+rect_min_size = Vector2( 0, 1 )
+
+[node name="GridContainer" type="GridContainer" parent="Subscreens/General/VBoxContainer"]
+margin_top = 205.0
+margin_right = 533.0
+margin_bottom = 362.0
+custom_constants/vseparation = 20
+custom_constants/hseparation = 40
+columns = 4
+
+[node name="VSync" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+margin_right = 131.0
+setting_section = "General"
+setting_key = "v_sync"
+default_value = true
+
+[node name="Multiplayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+margin_left = 171.0
+margin_right = 265.0
+setting_section = "General"
+setting_key = "multiplayer"
+
+[node name="ShowTimer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+margin_left = 305.0
+margin_right = 399.0
+setting_section = "General"
+setting_key = "show_timer"
+
+[node name="RichPresence" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+margin_left = 439.0
+margin_right = 533.0
+setting_section = "General"
+setting_key = "rich_presence"
+default_value = true
+
+[node name="WindowScale" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 14 )]
+margin_top = 59.0
+margin_right = 131.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 120, 0 )
+setting_section = "General"
+setting_key = "window_scale"
+options = [ "1x", "2x", "3x", "Full" ]
+
+[node name="Node" type="Node" parent="Subscreens/General/VBoxContainer/GridContainer/WindowScale"]
+script = SubResource( 14 )
+
+[node name="FirstPlayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 11 )]
+margin_left = 171.0
+margin_top = 59.0
+margin_right = 265.0
+margin_bottom = 98.0
+setting_section = "General"
+setting_key = "first_player"
+options = [ "Mario", "Luigi" ]
+
+[node name="LevelGhost" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+margin_left = 305.0
+margin_top = 59.0
+margin_right = 399.0
+margin_bottom = 98.0
+setting_section = "General"
+setting_key = "level_ghost"
+
+[node name="DarkTransitions" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+margin_left = 439.0
+margin_top = 59.0
+margin_right = 533.0
+margin_bottom = 98.0
+setting_section = "General"
+setting_key = "dark_mode"
+
+[node name="FPSCap" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 14 )]
+margin_top = 118.0
+margin_right = 131.0
+margin_bottom = 157.0
+setting_section = "General"
+setting_key = "fps_cap"
+default_value = 3
+options = [ "30", "40", "50", "60" ]
+
+[node name="SecondPlayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 11 )]
+margin_left = 171.0
+margin_top = 118.0
+margin_right = 265.0
+margin_bottom = 157.0
+setting_section = "General"
+setting_key = "second_player"
+default_value = 1
+options = [ "Mario", "Luigi" ]
+
+[node name="Controls" type="MarginContainer" parent="Subscreens"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/Controls"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 556.0
+margin_bottom = 420.0
+custom_constants/separation = 40
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/Controls/VBoxContainer"]
+margin_top = 10.0
+margin_right = 544.0
+margin_bottom = 66.0
+custom_constants/separation = 8
+
+[node name="Category" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/VBoxContainer"]
+margin_right = 544.0
+margin_bottom = 24.0
+custom_constants/separation = 12
+alignment = 1
+script = ExtResource( 13 )
+default_theme = "OptionsToggle"
+selected_theme = "OptionsToggleSelect"
+remapper_path = NodePath("../../Remapper")
+
+[node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Category"]
+margin_left = 43.0
+margin_right = 133.0
+margin_bottom = 24.0
+text = "Category:"
+
+[node name="Player1" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Category"]
+margin_left = 145.0
+margin_right = 225.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../Hotkeys")
+theme_type_variation = "OptionsToggleSelect"
+text = "Player 1"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Player2" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Category"]
+margin_left = 237.0
+margin_right = 317.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+theme_type_variation = "OptionsToggle"
+text = "Player 2"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Interface" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Category"]
+margin_left = 329.0
+margin_right = 409.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+theme_type_variation = "OptionsToggle"
+text = "Interface"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Hotkeys" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Category"]
+margin_left = 421.0
+margin_right = 501.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_right = NodePath("../Player1")
+theme_type_variation = "OptionsToggle"
+text = "Hotkeys"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Preset" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/VBoxContainer"]
+margin_top = 32.0
+margin_right = 544.0
+margin_bottom = 56.0
+custom_constants/separation = 12
+alignment = 1
+script = ExtResource( 1 )
+remapper_path = NodePath("../../Remapper")
+buttons_by_screen = {
+"Hotkeys": [ NodePath("Keyboard/DefaultHotkeys"), NodePath("Controller/DefaultHotkeys") ],
+"Interface": [ NodePath("Keyboard/DefaultInterface"), NodePath("Controller/DefaultInterface") ],
+"Player1": [ NodePath("Keyboard/Default"), NodePath("Keyboard/Mario63"), NodePath("Keyboard/WASD"), NodePath("Keyboard/KBM"), NodePath("Controller/None"), NodePath("Controller/Default"), NodePath("Controller/SNES") ],
+"Player2": [ NodePath("Keyboard/Default"), NodePath("Keyboard/Mario63"), NodePath("Keyboard/WASD"), NodePath("Keyboard/KBM"), NodePath("Controller/None"), NodePath("Controller/Default"), NodePath("Controller/SNES") ]
+}
+category_init = [ [ "Controls (Player 1)", "res://scenes/menu/options/controls/presets/default.cfg" ], [ "Controls (Player 2)", "res://scenes/menu/options/controls/presets/wasd.cfg" ], [ "Controls (Interface)", "res://scenes/menu/options/controls/presets/interface.cfg" ], [ "Controls (Hotkeys)", "res://scenes/menu/options/controls/presets/hotkeys.cfg" ], [ "Controls (Player 1) (Controller)", "res://scenes/menu/options/controls/presets/controller/default.cfg" ], [ "Controls (Player 2) (Controller)", "res://scenes/menu/options/controls/presets/controller/none.cfg" ], [ "Controls (Interface) (Controller)", "res://scenes/menu/options/controls/presets/controller/interface.cfg" ], [ "Controls (Hotkeys) (Controller)", "res://scenes/menu/options/controls/presets/controller/hotkeys.cfg" ] ]
+
+[node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset"]
+margin_left = 48.0
+margin_right = 117.0
+margin_bottom = 24.0
+text = "Preset: "
+
+[node name="Keyboard" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset"]
+margin_left = 129.0
+margin_right = 496.0
+margin_bottom = 24.0
+custom_constants/separation = 12
+
+[node name="Default" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
+margin_right = 80.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../KBM")
+focus_neighbour_top = NodePath("../../../Category/Player1")
+theme_type_variation = "OptionsToggle"
+text = "Default"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Mario63" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
+margin_left = 92.0
+margin_right = 172.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_top = NodePath("../../../Category/Player2")
+theme_type_variation = "OptionsToggle"
+text = "Mario 63"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="WASD" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
+margin_left = 184.0
+margin_right = 264.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_top = NodePath("../../../Category/Interface")
+theme_type_variation = "OptionsToggle"
+text = "WASD"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="KBM" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
+margin_left = 276.0
+margin_right = 367.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_top = NodePath("../../../Category/Hotkeys")
+focus_neighbour_right = NodePath("../Default")
+theme_type_variation = "OptionsToggle"
+text = "KB + Mouse"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="DefaultInterface" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
+visible = false
+margin_left = -373.0
+margin_right = -247.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../KBM")
+focus_neighbour_top = NodePath("../../../Category/Player1")
+theme_type_variation = "OptionsToggle"
+text = "Reset to Default"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="DefaultHotkeys" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard"]
+visible = false
+margin_left = -373.0
+margin_right = -247.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../KBM")
+focus_neighbour_top = NodePath("../../../Category/Player1")
+theme_type_variation = "OptionsToggle"
+text = "Reset to Default"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Controller" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset"]
+visible = false
+margin_left = 180.0
+margin_right = 444.0
+margin_bottom = 24.0
+custom_constants/separation = 12
+
+[node name="None" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller"]
+margin_right = 80.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../SNES")
+focus_neighbour_top = NodePath("../../../Category/Player1")
+focus_neighbour_right = NodePath("../Default")
+theme_type_variation = "OptionsToggle"
+text = "None"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Default" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller"]
+margin_left = 92.0
+margin_right = 172.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../None")
+focus_neighbour_top = NodePath("../../../Category/Hotkeys")
+focus_neighbour_right = NodePath("../SNES")
+theme_type_variation = "OptionsToggle"
+text = "Default"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="SNES" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller"]
+margin_left = 184.0
+margin_right = 264.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../Default")
+focus_neighbour_top = NodePath("../../../Category/Interface")
+focus_neighbour_right = NodePath("../None")
+theme_type_variation = "OptionsToggle"
+text = "SNES"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="DefaultInterface" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller"]
+visible = false
+margin_left = 276.0
+margin_right = 402.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../Default")
+focus_neighbour_top = NodePath("../../../Category/Player1")
+theme_type_variation = "OptionsToggle"
+text = "Reset to Default"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="DefaultHotkeys" type="Button" parent="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller"]
+visible = false
+margin_left = -373.0
+margin_right = -247.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../Default")
+focus_neighbour_top = NodePath("../../../Category/Player1")
+theme_type_variation = "OptionsToggle"
+text = "Reset to Default"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Remapper" type="CenterContainer" parent="Subscreens/Controls/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 106.0
+margin_right = 544.0
+margin_bottom = 334.0
+rect_min_size = Vector2( 0, 228 )
+script = ExtResource( 17 )
+category_paths = [ NodePath("Player1"), NodePath("Player2"), NodePath("Interface"), NodePath("Hotkeys/Gameplay"), NodePath("Hotkeys/Editor") ]
+
+[node name="Player1" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
+margin_left = 32.0
+margin_top = 1.0
+margin_right = 512.0
+margin_bottom = 226.0
+custom_constants/vseparation = 24
+custom_constants/hseparation = 32
+columns = 4
+
+[node name="MoveLeft" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
+margin_right = 96.0
+margin_bottom = 38.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 1)"
+input_key = "left"
+player_id = 0
+sprite_frames = ExtResource( 20 )
+sprite_animation = "movingLeft"
+
+[node name="MoveRight" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
+margin_left = 128.0
+margin_right = 226.0
+margin_bottom = 38.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 1)"
+input_key = "right"
+player_id = 0
+sprite_frames = ExtResource( 20 )
+sprite_animation = "movingRight"
+
+[node name="MoveUp" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
+margin_left = 258.0
+margin_right = 367.0
+margin_bottom = 38.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 1)"
+input_key = "up"
+player_id = 0
+sprite_frames = ExtResource( 20 )
+sprite_animation = "swimming"
+sprite_offset = Vector2( 0, 4 )
+
+[node name="MoveDown" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
+margin_left = 399.0
+margin_right = 516.0
+margin_bottom = 38.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 1)"
+input_key = "down"
+player_id = 0
+sprite_frames = ExtResource( 20 )
+sprite_animation = "swimming"
+sprite_rotation = 180.0
+sprite_offset = Vector2( 0, -8 )
+
+[node name="Jump" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
+margin_top = 62.0
+margin_right = 96.0
+margin_bottom = 100.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 1)"
+input_key = "jump"
+player_id = 0
+sprite_frames = ExtResource( 20 )
+sprite_animation = "jumpRight"
+
+[node name="Dive" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
+margin_left = 128.0
+margin_top = 62.0
+margin_right = 226.0
+margin_bottom = 100.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 1)"
+input_key = "dive"
+player_id = 0
+sprite_frames = ExtResource( 20 )
+sprite_animation = "diveRight"
+sprite_rotation = 115.0
+sprite_offset = Vector2( 4, -8 )
+
+[node name="Spin" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
+margin_left = 258.0
+margin_top = 62.0
+margin_right = 367.0
+margin_bottom = 100.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 1)"
+input_key = "spin"
+player_id = 0
+sprite_frames = ExtResource( 20 )
+sprite_animation = "spinning"
+sprite_offset = Vector2( 2, 0 )
+
+[node name="GroundPound" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
+margin_left = 399.0
+margin_top = 62.0
+margin_right = 516.0
+margin_bottom = 100.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 1)"
+input_key = "gp"
+player_id = 0
+sprite_frames = ExtResource( 20 )
+sprite_animation = "groundPoundRight"
+sprite_offset = Vector2( -4, 6 )
+
+[node name="GPCancel" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
+margin_top = 124.0
+margin_right = 96.0
+margin_bottom = 162.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 1)"
+input_key = "gpcancel"
+player_id = 0
+sprite_frames = ExtResource( 20 )
+sprite_animation = "fallRight"
+
+[node name="UseFludd" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
+margin_left = 128.0
+margin_top = 124.0
+margin_right = 226.0
+margin_bottom = 162.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 1)"
+input_key = "fludd"
+player_id = 0
+sprite_frames = ExtResource( 20 )
+sprite_animation = "jumpRight"
+sprite_rotation = 10.0
+
+[node name="SwapNozzles" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
+margin_left = 258.0
+margin_top = 124.0
+margin_right = 367.0
+margin_bottom = 162.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 1)"
+input_key = "nozzles"
+player_id = 0
+sprite_frames = ExtResource( 20 )
+sprite_animation = "idleRight"
+
+[node name="Crouch" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
+margin_left = 399.0
+margin_top = 124.0
+margin_right = 516.0
+margin_bottom = 162.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 1)"
+input_key = "crouch"
+player_id = 0
+sprite_frames = ExtResource( 20 )
+sprite_animation = "diveRight"
+sprite_rotation = 90.0
+sprite_offset = Vector2( 16, -6 )
+
+[node name="Interact" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 12 )]
+margin_top = 186.0
+margin_right = 96.0
+margin_bottom = 225.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 1)"
+input_key = "interact"
+player_id = 0
+sprite_frames = ExtResource( 20 )
+sprite_animation = "movingIn"
+
+[node name="63WingCap" parent="Subscreens/Controls/VBoxContainer/Remapper/Player1" instance=ExtResource( 10 )]
+margin_left = 128.0
+margin_top = 186.0
+margin_right = 226.0
+margin_bottom = 225.0
+setting_section = "Controls (Player 1)"
+setting_key = "63_wing_cap"
+
+[node name="Player2" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
+visible = false
+margin_left = 32.0
+margin_top = 1.0
+margin_right = 512.0
+margin_bottom = 226.0
+custom_constants/vseparation = 24
+custom_constants/hseparation = 32
+columns = 4
+
+[node name="MoveLeft" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
+margin_right = 96.0
+margin_bottom = 38.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 2)"
+input_key = "left"
+player_id = 1
+sprite_frames = ExtResource( 22 )
+sprite_animation = "movingLeft"
+
+[node name="MoveRight" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
+margin_left = 128.0
+margin_right = 226.0
+margin_bottom = 38.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 2)"
+input_key = "right"
+player_id = 1
+sprite_frames = ExtResource( 22 )
+sprite_animation = "movingRight"
+
+[node name="MoveUp" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
+margin_left = 258.0
+margin_right = 367.0
+margin_bottom = 38.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 2)"
+input_key = "up"
+player_id = 1
+sprite_frames = ExtResource( 22 )
+sprite_animation = "swimming"
+sprite_offset = Vector2( 0, 4 )
+
+[node name="MoveDown" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
+margin_left = 399.0
+margin_right = 516.0
+margin_bottom = 38.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 2)"
+input_key = "down"
+player_id = 1
+sprite_frames = ExtResource( 22 )
+sprite_animation = "swimming"
+sprite_rotation = 180.0
+sprite_offset = Vector2( 0, -8 )
+
+[node name="Jump" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
+margin_top = 62.0
+margin_right = 96.0
+margin_bottom = 100.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 2)"
+input_key = "jump"
+player_id = 1
+sprite_frames = ExtResource( 22 )
+sprite_animation = "jumpRight"
+
+[node name="Dive" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
+margin_left = 128.0
+margin_top = 62.0
+margin_right = 226.0
+margin_bottom = 100.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 2)"
+input_key = "dive"
+player_id = 1
+sprite_frames = ExtResource( 22 )
+sprite_animation = "diveRight"
+sprite_rotation = 115.0
+sprite_offset = Vector2( 4, -8 )
+
+[node name="Spin" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
+margin_left = 258.0
+margin_top = 62.0
+margin_right = 367.0
+margin_bottom = 100.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 2)"
+input_key = "spin"
+player_id = 1
+sprite_frames = ExtResource( 22 )
+sprite_animation = "spinning"
+sprite_offset = Vector2( 2, 0 )
+
+[node name="GroundPound" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
+margin_left = 399.0
+margin_top = 62.0
+margin_right = 516.0
+margin_bottom = 100.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 2)"
+input_key = "gp"
+player_id = 1
+sprite_frames = ExtResource( 22 )
+sprite_animation = "groundPoundRight"
+sprite_offset = Vector2( -4, 6 )
+
+[node name="GPCancel" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
+margin_top = 124.0
+margin_right = 96.0
+margin_bottom = 162.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 2)"
+input_key = "gpcancel"
+player_id = 1
+sprite_frames = ExtResource( 22 )
+sprite_animation = "fallRight"
+
+[node name="UseFludd" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
+margin_left = 128.0
+margin_top = 124.0
+margin_right = 226.0
+margin_bottom = 162.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 2)"
+input_key = "fludd"
+player_id = 1
+sprite_frames = ExtResource( 22 )
+sprite_animation = "jumpRight"
+sprite_rotation = 10.0
+
+[node name="SwapNozzles" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
+margin_left = 258.0
+margin_top = 124.0
+margin_right = 367.0
+margin_bottom = 162.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 2)"
+input_key = "nozzles"
+player_id = 1
+sprite_frames = ExtResource( 22 )
+sprite_animation = "idleRight"
+
+[node name="Crouch" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
+margin_left = 399.0
+margin_top = 124.0
+margin_right = 516.0
+margin_bottom = 162.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 2)"
+input_key = "crouch"
+player_id = 1
+sprite_frames = ExtResource( 22 )
+sprite_animation = "diveRight"
+sprite_rotation = 90.0
+sprite_offset = Vector2( 16, -6 )
+
+[node name="Interact" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 12 )]
+margin_top = 186.0
+margin_right = 96.0
+margin_bottom = 225.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Player 2)"
+input_key = "interact"
+player_id = 1
+sprite_frames = ExtResource( 22 )
+sprite_animation = "movingIn"
+
+[node name="63WingCap" parent="Subscreens/Controls/VBoxContainer/Remapper/Player2" instance=ExtResource( 10 )]
+margin_left = 128.0
+margin_top = 186.0
+margin_right = 226.0
+margin_bottom = 225.0
+setting_section = "Controls (Player 2)"
+setting_key = "63_wing_cap"
+
+[node name="Interface" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
+visible = false
+margin_left = 32.0
+margin_top = 64.0
+margin_right = 512.0
+margin_bottom = 164.0
+custom_constants/vseparation = 24
+custom_constants/hseparation = 32
+columns = 4
+
+[node name="UILeft" parent="Subscreens/Controls/VBoxContainer/Remapper/Interface" instance=ExtResource( 12 )]
+margin_right = 96.0
+margin_bottom = 38.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Interface)"
+input_key = "ui_left"
+sprite_visible = false
+
+[node name="UIRight" parent="Subscreens/Controls/VBoxContainer/Remapper/Interface" instance=ExtResource( 12 )]
+margin_left = 128.0
+margin_right = 224.0
+margin_bottom = 38.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Interface)"
+input_key = "ui_right"
+sprite_visible = false
+
+[node name="UI_Up" parent="Subscreens/Controls/VBoxContainer/Remapper/Interface" instance=ExtResource( 12 )]
+margin_left = 256.0
+margin_right = 352.0
+margin_bottom = 38.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Interface)"
+input_key = "ui_up"
+sprite_visible = false
+
+[node name="UIDown" parent="Subscreens/Controls/VBoxContainer/Remapper/Interface" instance=ExtResource( 12 )]
+margin_left = 384.0
+margin_right = 480.0
+margin_bottom = 38.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Interface)"
+input_key = "ui_down"
+sprite_visible = false
+
+[node name="UiAccept" parent="Subscreens/Controls/VBoxContainer/Remapper/Interface" instance=ExtResource( 12 )]
+margin_top = 62.0
+margin_right = 96.0
+margin_bottom = 100.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Interface)"
+input_key = "ui_accept"
+sprite_visible = false
+
+[node name="UiBack" parent="Subscreens/Controls/VBoxContainer/Remapper/Interface" instance=ExtResource( 12 )]
+margin_left = 128.0
+margin_top = 62.0
+margin_right = 224.0
+margin_bottom = 100.0
+remapper_path = NodePath("../..")
+input_group = "Controls (Interface)"
+input_key = "ui_cancel"
+sprite_visible = false
+
+[node name="Hotkeys" type="TabContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
+visible = false
+margin_left = 272.0
+margin_top = 113.0
+margin_right = 272.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 24 )
+custom_styles/tab_fg = SubResource( 25 )
+custom_styles/tab_disabled = SubResource( 26 )
+custom_styles/tab_bg = SubResource( 27 )
+custom_styles/panel = SubResource( 28 )
+
+[node name="Gameplay" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+custom_constants/vseparation = 24
+custom_constants/hseparation = 32
+columns = 4
+script = SubResource( 31 )
+input_group = "Controls (Hotkeys)"
+
+[node name="Pause" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_right = 104.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "pause"
+sprite_visible = false
+
+[node name="MuteMusic" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_left = 136.0
+margin_right = 232.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "mute"
+sprite_visible = false
+
+[node name="PhotoMode" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_left = 264.0
+margin_right = 360.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "toggle_ui"
+sprite_visible = false
+
+[node name="Retry" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_left = 392.0
+margin_right = 488.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "reload"
+sprite_visible = false
+
+[node name="RetryFromStart" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_top = 62.0
+margin_right = 104.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "reload_from_start"
+sprite_visible = false
+
+[node name="VolumeDown" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_left = 136.0
+margin_top = 62.0
+margin_right = 232.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "volume_down"
+sprite_visible = false
+
+[node name="VolumeUp" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_left = 264.0
+margin_top = 62.0
+margin_right = 360.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "volume_up"
+sprite_visible = false
+
+[node name="Fullscreen" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay" instance=ExtResource( 12 )]
+margin_left = 392.0
+margin_top = 62.0
+margin_right = 488.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "fullscreen"
+sprite_visible = false
+
+[node name="SwitchTabs" type="VBoxContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay"]
+margin_top = 124.0
+margin_right = 104.0
+margin_bottom = 162.0
+rect_min_size = Vector2( 96, 0 )
+theme = ExtResource( 2 )
+custom_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay/SwitchTabs"]
+margin_right = 104.0
+margin_bottom = 16.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay/SwitchTabs/HBoxContainer"]
+margin_right = 104.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 29 )
+text = "Editor Hotkeys"
+align = 1
+
+[node name="Button" type="Button" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay/SwitchTabs"]
+margin_top = 20.0
+margin_right = 104.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 0, 18 )
+theme_type_variation = "OptionsToggle"
+custom_fonts/font = SubResource( 30 )
+text = "Next page..."
+clip_text = true
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Editor" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+custom_constants/vseparation = 24
+custom_constants/hseparation = 32
+columns = 4
+
+[node name="ZoomIn" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_right = 104.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 104, 0 )
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "zoom_in"
+sprite_visible = false
+
+[node name="ZoomOut" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 136.0
+margin_right = 232.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "zoom_out"
+sprite_visible = false
+
+[node name="TestLevel" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 264.0
+margin_right = 360.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "switch_modes"
+sprite_visible = false
+
+[node name="SaveLevel" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 392.0
+margin_right = 488.0
+margin_bottom = 38.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "save_level"
+sprite_visible = false
+
+[node name="TileLock" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_top = 62.0
+margin_right = 104.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "switch_placement_mode"
+sprite_visible = false
+
+[node name="SwitchLayers" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 136.0
+margin_top = 62.0
+margin_right = 232.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "switch_layers"
+sprite_visible = false
+
+[node name="ToggleGrid" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 264.0
+margin_top = 62.0
+margin_right = 360.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "toggle_grid"
+sprite_visible = false
+
+[node name="8PixelLock" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 392.0
+margin_top = 62.0
+margin_right = 488.0
+margin_bottom = 100.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "8_pixel_lock"
+sprite_visible = false
+
+[node name="RotateObject" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_top = 124.0
+margin_right = 104.0
+margin_bottom = 162.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "rotate"
+sprite_visible = false
+
+[node name="DisableObject" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 136.0
+margin_top = 124.0
+margin_right = 232.0
+margin_bottom = 162.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "toggle_enabled"
+sprite_visible = false
+
+[node name="FlipObjectH" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 264.0
+margin_top = 124.0
+margin_right = 360.0
+margin_bottom = 162.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "flip_object"
+sprite_visible = false
+
+[node name="FlipObjectV" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 392.0
+margin_top = 124.0
+margin_right = 488.0
+margin_bottom = 162.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "flip_object_v"
+sprite_visible = false
+
+[node name="Undo" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_top = 186.0
+margin_right = 104.0
+margin_bottom = 224.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "undo"
+sprite_visible = false
+
+[node name="Redo" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 136.0
+margin_top = 186.0
+margin_right = 232.0
+margin_bottom = 224.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "redo"
+sprite_visible = false
+
+[node name="HideToolbar" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor" instance=ExtResource( 12 )]
+margin_left = 264.0
+margin_top = 186.0
+margin_right = 360.0
+margin_bottom = 224.0
+remapper_path = NodePath("../../..")
+input_group = "Controls (Hotkeys)"
+input_key = "invis_ui"
+sprite_visible = false
+
+[node name="SwitchTabs2" type="VBoxContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor"]
+margin_left = 392.0
+margin_top = 186.0
+margin_right = 488.0
+margin_bottom = 224.0
+rect_min_size = Vector2( 96, 0 )
+theme = ExtResource( 2 )
+custom_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor/SwitchTabs2"]
+margin_right = 96.0
+margin_bottom = 16.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor/SwitchTabs2/HBoxContainer"]
+margin_right = 96.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 29 )
+text = "Other Hotkeys"
+align = 1
+
+[node name="Button" type="Button" parent="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor/SwitchTabs2"]
+margin_top = 20.0
+margin_right = 96.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 0, 18 )
+theme_type_variation = "OptionsToggle"
+custom_fonts/font = SubResource( 30 )
+text = "Back..."
+clip_text = true
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Devices" type="VBoxContainer" parent="Subscreens/Controls/VBoxContainer"]
+margin_top = 374.0
+margin_right = 544.0
+margin_bottom = 398.0
+custom_constants/separation = 8
+script = ExtResource( 18 )
+default_theme = "OptionsToggle"
+selected_theme = "OptionsToggleSelect"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Controls/VBoxContainer/Devices"]
+margin_right = 544.0
+margin_bottom = 24.0
+custom_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
+margin_left = 110.0
+margin_right = 205.0
+margin_bottom = 24.0
+text = "Input Type:"
+
+[node name="Keyboard" type="Button" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
+margin_left = 217.0
+margin_right = 313.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 96, 0 )
+focus_neighbour_left = NodePath("../Controller")
+theme_type_variation = "OptionsToggleSelect"
+text = "Keyboard"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Controller" type="Button" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
+margin_left = 325.0
+margin_right = 421.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 96, 0 )
+focus_neighbour_right = NodePath("../Keyboard")
+theme_type_variation = "OptionsToggle"
+text = "Controller"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Control" type="Control" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
+margin_left = 433.0
+margin_right = 433.0
+margin_bottom = 24.0
+
+[node name="DeviceLabel" type="Label" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
+visible = false
+margin_left = 361.0
+margin_right = 426.0
+margin_bottom = 24.0
+text = "Device:"
+
+[node name="Device" type="Button" parent="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer"]
+visible = false
+margin_left = 399.0
+margin_right = 479.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 80, 0 )
+focus_neighbour_left = NodePath("../Controller")
+focus_neighbour_right = NodePath("../Keyboard")
+theme_type_variation = "OptionsToggle"
+text = "Any"
+script = ExtResource( 19 )
+extend_amount = 2
+
+[node name="Storage" type="Control" parent="Subscreens"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ModLoader" type="Node" parent="Subscreens/Storage"]
+script = ExtResource( 23 )
+
+[node name="TextureRect" type="TextureRect" parent="Subscreens/Storage"]
+modulate = Color( 1, 1, 1, 0.752941 )
+margin_left = 276.0
+margin_right = 516.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 240, 432 )
+texture = SubResource( 6 )
+expand = true
+
+[node name="Edges" type="TextureRect" parent="Subscreens/Storage/TextureRect"]
+modulate = Color( 1, 1, 1, 0.501961 )
+margin_left = -16.0
+margin_right = 256.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 272, 432 )
+texture = SubResource( 8 )
+expand = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Subscreens/Storage"]
+margin_left = 300.0
+margin_top = 48.0
+margin_right = 492.0
+margin_bottom = 384.0
+rect_min_size = Vector2( 192, 336 )
+
+[node name="ModsContainer" type="VBoxContainer" parent="Subscreens/Storage/ScrollContainer"]
+unique_name_in_owner = true
+margin_right = 192.0
+margin_bottom = 336.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="Subscreens/Storage/ScrollContainer/ModsContainer"]
+margin_top = 148.0
+margin_right = 192.0
+margin_bottom = 164.0
+custom_fonts/font = ExtResource( 15 )
+text = "Select a mod:"
+align = 1
+
+[node name="Padding" type="Control" parent="Subscreens/Storage/ScrollContainer/ModsContainer"]
+rect_min_size = Vector2( 0, 8 )
+
+[node name="NoMods" type="Button" parent="Subscreens/Storage/ScrollContainer/ModsContainer"]
+unique_name_in_owner = true
+margin_top = 164.0
+margin_right = 192.0
+margin_bottom = 188.0
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 15 )
+custom_styles/disabled = SubResource( 23 )
+text = "None"
+clip_text = true
+align = 0
+script = ExtResource( 3 )
+sink_amount = 12
+direction = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/Storage"]
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_right = 222.0
+alignment = 1
+
+[node name="OpenAppdata" type="Button" parent="Subscreens/Storage/VBoxContainer"]
+margin_top = 184.0
+margin_right = 158.0
+margin_bottom = 208.0
+rect_min_size = Vector2( 80, 24 )
+focus_neighbour_top = NodePath("../CleanOldData")
+theme_type_variation = "OptionsToggle"
+text = "Open Data Folder"
+script = ExtResource( 19 )
+
+[node name="CleanOldData" type="Button" parent="Subscreens/Storage/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 224.0
+margin_right = 158.0
+margin_bottom = 248.0
+rect_min_size = Vector2( 80, 24 )
+focus_neighbour_bottom = NodePath("../OpenAppdata")
+theme_type_variation = "OptionsToggle"
+custom_colors/font_color_focus = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_hover = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_pressed = Color( 0.694118, 0.2, 0.2, 1 )
+text = "Clean Old Data"
+script = ExtResource( 19 )
+
+[node name="Countdown" type="Node" parent="Subscreens/Storage/VBoxContainer/CleanOldData"]
+script = ExtResource( 24 )
+
+[node name="InputBlocker" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 4 )
+anims/transition = SubResource( 1 )
+
+[connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3]
+[connection signal="screen_opened" from="." to="Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
+[connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Back" to="." method="transition" binds= [ "MainMenu" ]]
+[connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/General" to="Subscreens" method="change_subscreen" binds= [ "General" ]]
+[connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Controls" to="Subscreens" method="change_subscreen" binds= [ "Controls" ]]
+[connection signal="pressed" from="BlackBar/MarginContainer/VBoxContainer/Storage" to="Subscreens" method="change_subscreen" binds= [ "Storage" ]]
+[connection signal="category_switched" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="update_visible_buttons"]
+[connection signal="category_switched" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" to="Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category/Player1" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" method="switch_category" binds= [ "Player1" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category/Player2" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" method="switch_category" binds= [ "Player2" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category/Interface" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" method="switch_category" binds= [ "Interface" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Category/Hotkeys" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Category" method="switch_category" binds= [ "Hotkeys" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard/Default" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/default.cfg" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard/Mario63" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/mario63.cfg" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard/WASD" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/wasd.cfg" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard/KBM" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/kbmouse.cfg" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard/DefaultInterface" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/interface.cfg" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard/DefaultHotkeys" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/hotkeys.cfg" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/None" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/none.cfg", true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/Default" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/default.cfg", true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/SNES" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/snes.cfg", true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/DefaultInterface" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/interface.cfg", true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller/DefaultHotkeys" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset" method="load_preset" binds= [ "res://scenes/menu/options/controls/presets/controller/hotkeys.cfg", true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Gameplay/SwitchTabs/Button" to="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" method="set_current_tab" binds= [ 1 ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys/Editor/SwitchTabs2/Button" to="Subscreens/Controls/VBoxContainer/Remapper/Hotkeys" method="set_current_tab" binds= [ 0 ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard" method="show"]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller" method="hide"]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Remapper" method="switch_device_type" binds= [ false ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device_type" binds= [ false ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Keyboard" to="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" method="set_focus_neighbour" binds= [ 2, "../Keyboard" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Keyboard" method="hide"]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/VBoxContainer/Preset/Controller" method="show"]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Remapper" method="switch_device_type" binds= [ true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device_type" binds= [ true ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" to="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Controller" method="set_focus_neighbour" binds= [ 2, "../Device" ]]
+[connection signal="pressed" from="Subscreens/Controls/VBoxContainer/Devices/HBoxContainer/Device" to="Subscreens/Controls/VBoxContainer/Devices" method="switch_device"]
+[connection signal="ready" from="Subscreens/Storage/ModLoader" to="Subscreens/Storage/ModLoader" method="check_old_data" binds= [ false ]]
+[connection signal="pressed" from="Subscreens/Storage/VBoxContainer/OpenAppdata" to="Subscreens/Storage/ModLoader" method="open_appdata"]
+[connection signal="pressed" from="Subscreens/Storage/VBoxContainer/CleanOldData/Countdown" to="Subscreens/Storage/ModLoader" method="check_old_data" binds= [ true ]]

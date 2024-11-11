@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/music_changer.gd" type="Script" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/editor/ResetLevelButton.gd" type="Script" id=5]
 [ext_resource path="res://scenes/shared/background/foregrounds/none/preview.png" type="Texture" id=6]
 [ext_resource path="res://scenes/editor/window.gd" type="Script" id=7]
-[ext_resource path="res://scenes/editor/level_name_editor.gd" type="Script" id=8]
+[ext_resource path="res://scenes/editor/window/timer.gd" type="Script" id=8]
 [ext_resource path="res://scenes/shared/background/backgrounds/night/night.png" type="Texture" id=9]
 [ext_resource path="res://scenes/editor/Areas.gd" type="Script" id=10]
 [ext_resource path="res://scenes/editor/assets/outline.png" type="Texture" id=11]
@@ -20,9 +20,9 @@
 [ext_resource path="res://scenes/editor/assets/music_background.png" type="Texture" id=18]
 [ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=19]
 [ext_resource path="res://scenes/editor/areas_button.gd" type="Script" id=20]
-[ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=21]
-[ext_resource path="res://scenes/shared/Hotkeys.tscn" type="PackedScene" id=22]
+[ext_resource path="res://scenes/oldmenu/127Button.tscn" type="PackedScene" id=21]
 [ext_resource path="res://scenes/editor/window/gravity.gd" type="Script" id=23]
+[ext_resource path="res://scenes/editor/window/level_info.gd" type="Script" id=24]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -55,29 +55,6 @@ corner_radius_bottom_left = 24
 size = 112
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=7]
-size = 32
-font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 16
-border_width_right = 16
-border_color = Color( 1, 1, 1, 1 )
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
-[sub_resource type="DynamicFont" id=15]
-size = 32
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=14]
-size = 32
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 1 )
-
 [sub_resource type="DynamicFont" id=10]
 size = 48
 font_data = ExtResource( 1 )
@@ -95,6 +72,78 @@ corner_radius_top_left = 64
 corner_radius_top_right = 64
 corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
+
+[sub_resource type="GDScript" id=16]
+resource_name = "level_info_button"
+script/source = "extends BaseButton
+
+## i really hate the current level editor UI...
+
+onready var hover_sound : AudioStreamPlayer = $HoverSound 
+onready var click_sound : AudioStreamPlayer = $ClickSound
+
+func _ready() -> void:
+	var _connect
+	_connect = connect(\"focus_entered\", self, \"on_focus_entered\")
+	_connect = connect(\"mouse_entered\", self, \"on_mouse_entered\")
+	_connect = connect(\"mouse_exited\", self, \"on_mouse_exited\")
+	_connect = connect(\"pressed\", self, \"on_pressed\")
+
+func on_mouse_entered() -> void:
+	grab_focus()
+	hover_sound.play()
+
+func on_mouse_exited() -> void:
+	release_focus()
+
+func on_focus_entered() -> void:
+	hover_sound.play()
+
+func on_pressed() -> void:
+	click_sound.play()
+	get_parent().get_parent().visible = false
+	get_parent().get_parent().get_parent().get_node(\"LevelInfo\").visible = true
+"
+
+[sub_resource type="DynamicFont" id=15]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 16
+border_width_right = 16
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="DynamicFont" id=14]
+size = 32
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=17]
+size = 30
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+border_width_left = 16
+border_width_right = 16
+border_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 
 [node name="LevelSettingsWindow" type="NinePatchRect"]
 margin_left = 165.0
@@ -134,10 +183,12 @@ texture_hover = ExtResource( 16 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 15 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 13 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="LevelSettings" type="Control" parent="."]
 anchor_bottom = 0.06
@@ -241,10 +292,12 @@ texture_hover = ExtResource( 12 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/BackgroundEdit"]
 stream = ExtResource( 15 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/BackgroundEdit"]
 stream = ExtResource( 13 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Music" type="Control" parent="LevelSettings"]
 margin_right = 40.0
@@ -317,10 +370,12 @@ texture_hover = ExtResource( 12 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/Music"]
 stream = ExtResource( 15 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/Music"]
 stream = ExtResource( 13 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="LevelSize" type="Control" parent="LevelSettings"]
 margin_left = 202.5
@@ -488,35 +543,72 @@ texture_hover = ExtResource( 12 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/LevelSize"]
 stream = ExtResource( 15 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/LevelSize"]
 stream = ExtResource( 13 )
 volume_db = -10.0
+bus = "Sounds"
 
-[node name="LevelName" type="Control" parent="LevelSettings"]
+[node name="LevelInfo" type="Control" parent="LevelSettings"]
 margin_left = -17.0
 margin_top = -104.0
 margin_right = 23.0
 margin_bottom = -64.0
-script = ExtResource( 8 )
 
-[node name="LineEdit" type="LineEdit" parent="LevelSettings/LevelName"]
+[node name="LevelInfo" type="Button" parent="LevelSettings/LevelInfo"]
 margin_left = 577.0
 margin_top = 134.0
-margin_right = 1025.0
+margin_right = 1007.0
 margin_bottom = 212.0
-custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 10 )
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/normal = SubResource( 9 )
+text = "Level Info"
+script = SubResource( 16 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/LevelInfo/LevelInfo"]
+stream = ExtResource( 15 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/LevelInfo/LevelInfo"]
+stream = ExtResource( 13 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="Timer" type="Control" parent="LevelSettings"]
+margin_left = -24.0
+margin_right = 16.0
+margin_bottom = 39.9999
+script = ExtResource( 8 )
+
+[node name="LineEdit" type="LineEdit" parent="LevelSettings/Timer"]
+margin_left = 577.0
+margin_top = 144.0
+margin_right = 772.0
+margin_bottom = 222.0
+custom_colors/font_color = Color( 0.14902, 0.188235, 0.439216, 1 )
+custom_fonts/font = SubResource( 15 )
 custom_styles/normal = SubResource( 6 )
+align = 1
 context_menu_enabled = false
-placeholder_text = "Level Name"
-placeholder_alpha = 0.35
+
+[node name="Label" type="Label" parent="LevelSettings/Timer"]
+margin_left = 557.096
+margin_top = 220.197
+margin_right = 795.096
+margin_bottom = 292.197
+custom_fonts/font = SubResource( 14 )
+text = "Timer"
+align = 1
 
 [node name="Gravity" type="Control" parent="LevelSettings"]
-margin_left = -17.0
-margin_top = 51.0
-margin_right = 23.0
-margin_bottom = 91.0
+margin_left = -24.0
+margin_top = 124.0
+margin_right = 16.0
+margin_bottom = 164.0
 script = ExtResource( 23 )
 
 [node name="LineEdit" type="LineEdit" parent="LevelSettings/Gravity"]
@@ -531,18 +623,19 @@ align = 1
 context_menu_enabled = false
 
 [node name="Label" type="Label" parent="LevelSettings/Gravity"]
-margin_left = 609.596
+margin_left = 557.096
 margin_top = 220.197
-margin_right = 847.596
+margin_right = 795.096
 margin_bottom = 292.197
 custom_fonts/font = SubResource( 14 )
 text = "Gravity"
+align = 1
 
-[node name="Hotkeys" type="Control" parent="LevelSettings"]
+[node name="Options" type="Control" parent="LevelSettings"]
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Hotkeys" type="Button" parent="LevelSettings/Hotkeys"]
+[node name="Options" type="Button" parent="LevelSettings/Options"]
 margin_left = 510.0
 margin_top = 402.567
 margin_right = 910.0
@@ -553,16 +646,18 @@ custom_styles/pressed = SubResource( 9 )
 custom_styles/normal = SubResource( 9 )
 shortcut_in_tooltip = false
 action_mode = 0
-text = "Hotkeys"
+text = "Options"
 script = ExtResource( 5 )
 
-[node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/Hotkeys/Hotkeys"]
+[node name="HoverSound" type="AudioStreamPlayer" parent="LevelSettings/Options/Options"]
 stream = ExtResource( 15 )
 volume_db = -10.0
+bus = "Sounds"
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/Hotkeys/Hotkeys"]
+[node name="ClickSound" type="AudioStreamPlayer" parent="LevelSettings/Options/Options"]
 stream = ExtResource( 13 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Areas" parent="LevelSettings" instance=ExtResource( 21 )]
 margin_left = 90.0
@@ -613,7 +708,261 @@ margin_right = 910.0
 margin_bottom = 493.0
 text = "New Area"
 
-[node name="Hotkeys" parent="." instance=ExtResource( 22 )]
+[node name="LevelInfo" type="Control" parent="."]
 visible = false
+margin_left = 17.404
+margin_top = 104.0
+margin_right = 1036.4
+margin_bottom = 536.0
+script = ExtResource( 24 )
+
+[node name="MarginContainer" type="MarginContainer" parent="LevelInfo"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelInfo/MarginContainer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 1002.0
+margin_bottom = 416.0
+custom_constants/separation = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelInfo/MarginContainer/VBoxContainer"]
+margin_right = 986.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 64 )
+custom_constants/separation = 16
+
+[node name="LevelName" type="LineEdit" parent="LevelInfo/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 582.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+custom_colors/font_color = Color( 0.14902, 0.188235, 0.439216, 1 )
+custom_fonts/font = SubResource( 7 )
+custom_styles/normal = SubResource( 6 )
+placeholder_text = "Level Name"
+
+[node name="LevelAuthor" type="LineEdit" parent="LevelInfo/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 598.0
+margin_right = 986.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.14902, 0.188235, 0.439216, 1 )
+custom_fonts/font = SubResource( 7 )
+custom_styles/normal = SubResource( 6 )
+placeholder_text = "Level Author"
+
+[node name="MarginContainer" type="MarginContainer" parent="LevelInfo/MarginContainer/VBoxContainer"]
+margin_top = 76.0
+margin_right = 986.0
+margin_bottom = 112.0
+custom_constants/margin_right = 4
+custom_constants/margin_left = 4
+
+[node name="ThumbnailURL" type="LineEdit" parent="LevelInfo/MarginContainer/VBoxContainer/MarginContainer"]
+margin_left = 4.0
+margin_right = 982.0
+margin_bottom = 36.0
+custom_colors/font_color = Color( 0.14902, 0.188235, 0.439216, 1 )
+custom_fonts/font = SubResource( 7 )
+custom_styles/normal = SubResource( 6 )
+placeholder_text = "Thumbnail URL"
+
+[node name="Description" type="TextEdit" parent="LevelInfo/MarginContainer/VBoxContainer"]
+margin_top = 124.0
+margin_right = 986.0
+margin_bottom = 400.0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 17 )
+custom_styles/normal = SubResource( 18 )
+text = "After two years of working on this level (on and off but still), it's finally complete; Super Mario 63 Tall Tall Mountain +!
+
+
+This level is a complete remake and expansion of Super Mario 63's Tall Tall Mountain with a BOATLOAD of new features, including:
+
+- TWO NEW AREAS to explore! A town at the base of the mountain where residents reside, and a new secret area with gravity-defying water!
+
+- NINE* NEW SHINES to gather! These are split up into FOUR new main quest shines and FIVE new \"green shines\" on top of the already existing five, totaling FOURTEEN* SHINES!
+
+- FIFTEEN NEW STAR COINS to locate, totaling TWENTY STAR COINS! (Struggling to find some? Perhaps the doctor in the lab by the lake may be of use...)
+
+- Altered level design from the original to be more fair, \"well designed\", to make more room for new content, or to fit better with SM127's movement.
+
+- Secrets to find not discussed here!
+
+- And more...
+
+
+Now that this update is out, you might see me make more levels, so stay tuned for that!
+Anyways, have fun!
+
+v1.01 (7/29): Quick hotfix to disable some unnecessary pipes, and to mae one of the more hidden star coins easier to find"
+wrap_enabled = true
+
+[node name="Back" parent="LevelInfo" instance=ExtResource( 21 )]
+margin_left = 15.0
+margin_top = 422.0
+margin_right = 508.0
+margin_bottom = 493.0
+text = "Back to Settings"
+
+[node name="BackgroundSettings" type="Control" parent="."]
+visible = false
+anchor_bottom = 0.06
+margin_left = 17.4044
+margin_top = 104.0
+margin_right = 1036.4
+margin_bottom = 498.0
+
+[node name="BackgroundEdit" type="Control" parent="BackgroundSettings"]
+margin_top = 30.0
+margin_right = 40.0
+margin_bottom = 70.0
+script = ExtResource( 4 )
+backgrounds_node_path = NodePath("../../../../Backgrounds")
+
+[node name="Preview" type="Control" parent="BackgroundSettings/BackgroundEdit"]
+margin_left = 80.0
+margin_right = 120.0
+margin_bottom = 40.0
+
+[node name="Outline" type="TextureRect" parent="BackgroundSettings/BackgroundEdit/Preview"]
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 798.0
+margin_bottom = 467.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+stretch_mode = 1
+
+[node name="BackgroundPreview" type="TextureRect" parent="BackgroundSettings/BackgroundEdit/Preview"]
+margin_right = 768.0
+margin_bottom = 432.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
+
+[node name="ForegroundPreview" type="TextureRect" parent="BackgroundSettings/BackgroundEdit/Preview"]
+margin_right = 768.0
+margin_bottom = 432.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="BackgroundButtons" type="Control" parent="BackgroundSettings/BackgroundEdit"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Left" type="TextureButton" parent="BackgroundSettings/BackgroundEdit/BackgroundButtons"]
+margin_left = -28.1108
+margin_right = 99.8892
+margin_bottom = 128.0
+rect_rotation = 180.0
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
+
+[node name="Right" type="TextureButton" parent="BackgroundSettings/BackgroundEdit/BackgroundButtons"]
+margin_left = 445.0
+margin_right = 573.0
+margin_bottom = 128.0
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
+
+[node name="ForegroundButtons" type="Control" parent="BackgroundSettings/BackgroundEdit"]
+margin_top = 100.0
+margin_right = 40.0
+margin_bottom = 140.0
+
+[node name="Left" type="TextureButton" parent="BackgroundSettings/BackgroundEdit/ForegroundButtons"]
+margin_left = -28.1108
+margin_top = -7.49707
+margin_right = 99.8892
+margin_bottom = 120.503
+rect_rotation = 180.0
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+button_mask = 3
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
+
+[node name="Right" type="TextureButton" parent="BackgroundSettings/BackgroundEdit/ForegroundButtons"]
+margin_left = 445.0
+margin_top = -7.497
+margin_right = 573.0
+margin_bottom = 120.503
+rect_scale = Vector2( 0.4, 0.4 )
+rect_pivot_offset = Vector2( 64, 64 )
+action_mode = 0
+button_mask = 3
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 12 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="BackgroundSettings/BackgroundEdit"]
+stream = ExtResource( 15 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="BackgroundSettings/BackgroundEdit"]
+stream = ExtResource( 13 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="LevelInfo" type="Control" parent="BackgroundSettings"]
+margin_left = -17.0
+margin_top = -104.0
+margin_right = 23.0
+margin_bottom = -64.0
+
+[node name="Gravity" type="Control" parent="BackgroundSettings"]
+margin_left = -24.0
+margin_top = 124.0
+margin_right = 16.0
+margin_bottom = 164.0
+script = ExtResource( 23 )
+
+[node name="LineEdit" type="LineEdit" parent="BackgroundSettings/Gravity"]
+margin_left = 577.0
+margin_top = 144.0
+margin_right = 772.0
+margin_bottom = 222.0
+custom_colors/font_color = Color( 0.14902, 0.188235, 0.439216, 1 )
+custom_fonts/font = SubResource( 15 )
+custom_styles/normal = SubResource( 6 )
+align = 1
+context_menu_enabled = false
+
+[node name="Label" type="Label" parent="BackgroundSettings/Gravity"]
+margin_left = 557.096
+margin_top = 220.197
+margin_right = 795.096
+margin_bottom = 292.197
+custom_fonts/font = SubResource( 14 )
+text = "Gravity"
+align = 1
+
+[node name="Back" parent="BackgroundSettings" instance=ExtResource( 21 )]
+margin_left = 15.0
+margin_top = 422.0
+margin_right = 508.0
+margin_bottom = 493.0
+text = "Back to Settings"
 
 [node name="Tween" type="Tween" parent="."]
+
+[connection signal="pressed" from="CloseButton" to="LevelInfo" method="update_vars"]
+[connection signal="pressed" from="LevelInfo/Back" to="LevelInfo" method="switch_to_settings"]
+[connection signal="pressed" from="BackgroundSettings/Back" to="LevelInfo" method="switch_to_settings"]

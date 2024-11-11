@@ -9,7 +9,7 @@
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=15]
 [ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=16]
 [ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=19]
-[ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/oldmenu/127Button.tscn" type="PackedScene" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -562,10 +562,12 @@ texture_hover = ExtResource( 16 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 15 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 13 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Hotkeys" type="ScrollContainer" parent="."]
 margin_left = 36.0

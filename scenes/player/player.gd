@@ -2,7 +2,6 @@ extends LevelDataLoader
 
 onready var tick_sound = $SharedSounds/TickSound
 onready var tick_end_sound = $SharedSounds/TickEndSound
-onready var anim_player = $AnimationPlayer
 
 export var character : NodePath
 export var character2 : NodePath
@@ -18,14 +17,10 @@ var can_collect_coins : Array
 export var switch_timer : float = 0.0
 export var sound_timer : float = 0.0
 
+func get_shared_node() -> Node:
+	return $Viewports/ViewportContainer/Viewport/World.get_node("Shared")
+
 func _process(_delta):
-	if Input.is_action_just_pressed("1"):
-		if ssc_displayed == true:
-			anim_player.play("shine_sc_out")
-			ssc_displayed = false
-		elif ssc_displayed == false:
-			anim_player.play("shine_sc_in")
-			ssc_displayed = true
 	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
 
 func _physics_process(delta):
@@ -45,6 +40,7 @@ func _physics_process(delta):
 
 func _ready():
 	sound_timer = wrapf(switch_timer, 0, 1.1)
+#	vignette.visible = false
 	
 	Singleton.CurrentLevelData.enemies_instanced = 0
 	Singleton.CurrentLevelData.level_data.vars.reset_counters()
@@ -57,18 +53,13 @@ func _ready():
 		Singleton.CurrentLevelData.area = Singleton.CheckpointSaved.current_area
 		Singleton.CurrentLevelData.level_data.vars.reload()
 	
+	if Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.timer > 0.00:
+		var timer_manager = get_timer_manager()
+		timer_manager.add_set_timer("area_timer", Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.timer, "death", true, true)
+#		vignette.visible = true
+	
 	var data = Singleton.CurrentLevelData.level_data
 	load_in(data, data.areas[Singleton.CurrentLevelData.area])
-	
-	if Singleton.CurrentLevelData.level_data.vars.max_red_coins == 0:
-		$UI/VBoxContainer/RedCoinCounter.visible = false
-	else:
-		$UI/VBoxContainer/RedCoinCounter.visible = true
-	
-	if Singleton.CurrentLevelData.level_data.vars.max_shine_shards == 0:
-		$UI/VBoxContainer/ShineShardCounter.visible = false
-	else:
-		$UI/VBoxContainer/ShineShardCounter.visible = true
 	
 	Singleton.Music.character = get_node(character)
 	Singleton.Music.character2 = get_node(character2)
@@ -79,22 +70,10 @@ func _ready():
 	can_collect_coins.append(get_node(character))
 	if Singleton.PlayerSettings.number_of_players == 2:
 		can_collect_coins.append(get_node(character2))
-
-	if Singleton.PlayerSettings.other_player_id != -1:
-		if Singleton.PlayerSettings.my_player_index == 0:
-			get_node(character).set_network_master(get_tree().get_network_unique_id())
-			get_node(character).controlled_locally = true
-			get_node(character2).set_network_master(Singleton.PlayerSettings.other_player_id)
-			get_node(character2).controlled_locally = false
-		else:
-			get_node(character2).set_network_master(get_tree().get_network_unique_id())
-			get_node(character2).controlled_locally = true
-			get_node(character).set_network_master(Singleton.PlayerSettings.other_player_id)
-			get_node(character).controlled_locally = false
-			get_node(camera).character_node = get_node(character2)
 		
 	Singleton.CurrentLevelData.level_data.vars.max_red_coins = 0
 	Singleton.CurrentLevelData.level_data.vars.max_shine_shards = 0
+	Singleton.CurrentLevelData.level_data.vars.max_purple_starbits = 0
 	Singleton.CurrentLevelData.level_data.vars.teleporters = []
 	Singleton.CurrentLevelData.level_data.vars.liquids = []
 	Singleton.CurrentLevelData.level_data.vars.checkpoints = []
@@ -145,4 +124,18 @@ func update_activity() -> void:
 
 	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
 	if result != Discord.Result.Ok:
-		push_error(str(result))
+		printerr(str(result))
+
+
+# todo: mayb move this stuff elsewhere?? question mark? ?? ?
+const TIMER_ICON := preload("res://scenes/actors/objects/p_switch/icon.png")
+func set_switch_timer(new_time: float):
+	switch_timer = new_time
+	
+	var timer_manager: Control = $"%TimerManager"
+	timer_manager.add_radial_timer("PSwitch", self, "switch_timer", TIMER_ICON)
+
+
+func get_timer_manager() -> Control:
+	var timer_manager: Control = $"%TimerManager"
+	return timer_manager

@@ -21,7 +21,7 @@ static func encode_value(value):
 	if type == TYPE_VECTOR2:
 		return "V2" + str(stepify(value.x,0.1)) + "x" + str(stepify(value.y, 0.1))
 	elif type == TYPE_COLOR:
-		return "CL" + str(stepify(value.r,0.01)) + "x" + str(stepify(value.g,0.01)) + "x" + str(stepify(value.b,0.01))
+		return "CL" + str(stepify(value.r,0.01)) + "x" + str(stepify(value.g,0.01)) + "x" + str(stepify(value.b,0.01)) + "x" + str(stepify(value.a,0.01))
 	elif type == TYPE_BOOL:
 		return "BL" + str(0 if value == false else 1)
 	elif type == TYPE_INT:
@@ -60,6 +60,14 @@ static func encode_value(value):
 		
 		final_string = final_string.trim_suffix(":")
 		return final_string
+	elif type == TYPE_VECTOR2_ARRAY:
+		var final_string := "VA"
+		for vector in value:
+			final_string += str(stepify(vector.x,0.1)) + "x" + str(stepify(vector.y, 0.1))
+			final_string += ":"
+		
+		final_string = final_string.trim_suffix(":")
+		return final_string
 	else:
 		return str(value)
 
@@ -74,7 +82,10 @@ static func decode_value(value: String):
 	elif value.begins_with("CL"):
 		value = value.trim_prefix("CL")
 		var array_value = value.split("x")
-		return Color(array_value[0], array_value[1], array_value[2])
+		var color = Color(array_value[0], array_value[1], array_value[2])
+		if array_value.size() > 3:
+			color.a = float(array_value[3])
+		return color
 	elif value.begins_with("BL"):
 		value = value.trim_prefix("BL")
 		return true if value == "1" else false
@@ -106,6 +117,17 @@ static func decode_value(value: String):
 			string_array.append(str(text).percent_decode())
 		
 		return string_array
+	elif value.begins_with("VA"):
+		value = value.trim_prefix("VA")
+		
+		var vector2_array := PoolVector2Array()
+		var vectors = value.split(":")
+		for vector in vectors:
+			var array_value = vector.split("x")
+			var vector2 = Vector2(array_value[0], array_value[1])
+			vector2_array.append(vector2)
+			
+		return vector2_array
 	else:
 		return value
 		

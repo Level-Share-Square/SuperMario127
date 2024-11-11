@@ -39,7 +39,7 @@ static func convert_042_to_043(result):
 				new_objects.append(object)
 			area_result.objects = new_objects
 	return result
-	
+
 static func convert_044_to_045(result):
 	# basically this function recreates the objects dictonary,
 	# but changes the shine sprites to have an automatic id
@@ -120,9 +120,18 @@ static func convert_048_to_049(result):
 					if object.properties[6] == "default_teleporter" || object.properties[6] == "none":
 						object.properties[6] = new_tag
 					object.properties[7] = false
-					print(object)
+					#print(object)
 				new_objects.append(object)
 			area_result.objects = new_objects #==========================================
+	return result
+
+static func convert_049_to_050(result):
+	result.format_version = "0.5.0"
+	result.author = "Unknown"
+	result.description = "This level has no description."
+	result.thumbnail_url = ""
+#	for result_area in result.areas:
+#		result_area.timer = 0.00
 	return result
 
 static func compareVersions(version, other) -> int:
@@ -134,7 +143,9 @@ static func compareVersions(version, other) -> int:
 		var no = int(o[i])
 		if(nv<no):
 			return -1 #smaller version
-		if(nv<no):
+		# so originally this was a lower than symbol again instead of a greater than symbol like it should be?
+		# that caused me quite a fair deal of annoyance... and it was over one character,, (dies)
+		if(nv>no):
 			return 1 #bigger version
 
 	return 0 #same version

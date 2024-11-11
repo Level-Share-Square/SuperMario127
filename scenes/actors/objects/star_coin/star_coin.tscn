@@ -79,7 +79,6 @@ collected_particles = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-frame = 5
 playing = true
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]
@@ -98,6 +97,7 @@ shape = SubResource( 3 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 volume_db = -8.0
+bus = "Sounds"
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false

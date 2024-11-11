@@ -56,17 +56,16 @@ rect_scale = Vector2( 0.95, 0.95 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 3 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 7 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Contents" type="Control" parent="."]
 anchor_bottom = 0.06
@@ -94,18 +93,17 @@ text = "Add Area"
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/AddButton"]
 stream = ExtResource( 3 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="Contents/AddButton"]
 stream = ExtResource( 7 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Contents"]
 margin_left = 20.0
 margin_top = 6.0
 margin_right = 1000.0
 margin_bottom = 316.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Tween" type="Tween" parent="."]

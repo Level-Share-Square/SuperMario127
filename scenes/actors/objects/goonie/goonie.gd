@@ -32,8 +32,12 @@ func set_position(new_position):
 	
 	#then move self
 	position = new_position
+	reset_physics_interpolation()
 
 func _ready():
+	goonie_ready()
+
+func goonie_ready():
 	if speed == 0:
 		speed = 0.00001
 		set_property("speed", speed, true)
@@ -57,6 +61,9 @@ func _ready():
 	rotation_degrees = 0
 
 func _physics_process(delta):
+	goonie_physics_process(delta)
+
+func goonie_physics_process(delta):
 	momentum = (global_position - last_position) / fps_util.PHYSICS_DELTA
 	last_position = global_position
 	sprite.speed_scale = clamp(speed, 0.5, 3)

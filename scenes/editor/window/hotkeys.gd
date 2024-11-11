@@ -33,7 +33,6 @@ func _ready():
 	for i in hotkey_parent.get_children():
 		if "LevelSettingsWindow" in str(get_parent()):
 			if Singleton2.editor_hotkeys.has(i.name):
-				print(i)
 				i.show()
 				var action_name = i.name
 				hotkeys[action_name] = InputMap.get_action_list(action_name)[0]
@@ -66,8 +65,8 @@ func _physics_process(delta):
 		timerlabel.visible = true
 		timer -= 1
 		if inputevent != null:
-			InputMap.action_erase_events(hotkey)
-			InputMap.action_add_event(hotkey, inputevent)
+			#InputMap.action_erase_events(hotkey)
+			#InputMap.action_add_event(hotkey, inputevent)
 			inputevent = null
 			hotkey = null
 			hotkeys.clear()
@@ -98,8 +97,9 @@ func load_hotkeys(hotkey_dict: Dictionary):
 		input.set_scancode(hotkey_dict[i])
 		dict[i] = input
 	for i in dict:
-		InputMap.action_erase_events(i)
-		InputMap.action_add_event(i, dict[i])
+		pass
+		#InputMap.action_erase_events(i)
+		#InputMap.action_add_event(i, dict[i])
 	for i in hotkey_parent.get_children():
 		var action_name = i.name
 		i.text = InputMap.get_action_list(action_name)[0].as_text()

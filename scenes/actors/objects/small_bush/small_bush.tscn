@@ -15,5 +15,6 @@ custom_preview_position = Vector2( 70, 110 )
 palette_textures = [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 6 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 1 )
 z_index = -9
 texture = ExtResource( 1 )

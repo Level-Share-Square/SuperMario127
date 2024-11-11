@@ -39,14 +39,14 @@ func _ready():
 func item_changed():
 	var editor = get_tree().get_current_scene()
 	
-	Singleton.EditorSavedSettings.layout_ids[box_index] = item.name
-	Singleton.EditorSavedSettings.layout_palettes[box_index] = item.palette_index
+	Singleton.CurrentLevelData.level_data.layout_ids[box_index] = item.name
+	Singleton.CurrentLevelData.level_data.layout_palettes[box_index] = item.palette_index
 	icon.texture = null if item == null else item.icon
 	
 	if editor.placeable_items_button_container != null:
 		for i in editor.placeable_items_button_container.get_children():
-			Singleton.EditorSavedSettings.layout_ids[i.box_index] = i.item.name
-			Singleton.EditorSavedSettings.layout_palettes[i.box_index] = i.item.palette_index
+			Singleton.CurrentLevelData.level_data.layout_ids[i.box_index] = i.item.name
+			Singleton.CurrentLevelData.level_data.layout_palettes[i.box_index] = i.item.palette_index
 			i.icon.texture = null if i.item == null else i.item.icon
 	
 func is_hovered():

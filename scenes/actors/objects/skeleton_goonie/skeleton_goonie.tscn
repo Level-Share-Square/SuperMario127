@@ -1,0 +1,333 @@
+[gd_scene load_steps=44 format=2]
+
+[ext_resource path="res://scenes/actors/objects/goonie/goonie.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/actors/objects/skeleton_goonie/wing_spread.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/skeleton_goonie/regular.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/skeleton_goonie/skeleton_goonie.gd" type="Script" id=4]
+[ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/actors/objects/skeleton_goonie/wingbone.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/skeleton_goonie/wingless.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/goomba/poof.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/objects/skeleton_goonie/head.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/skeleton_goonie/bomb.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/bob_omb/explosion_sound.wav" type="AudioStream" id=11]
+[ext_resource path="res://scenes/actors/objects/bob_omb/explosion.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/skeleton_goonie/death.mp3" type="AudioStream" id=13]
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 3 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 3 )
+region = Rect2( 144, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 3 )
+region = Rect2( 192, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 3 )
+region = Rect2( 240, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 3 )
+region = Rect2( 288, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 3 )
+region = Rect2( 336, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 65, 16 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 2 )
+region = Rect2( 65, 0, 65, 16 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 7 )
+region = Rect2( 2, 0, 21, 22 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 7 )
+region = Rect2( 25, 0, 24, 22 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 7 )
+region = Rect2( 51, 0, 25, 22 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"loop": true,
+"name": "flying",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 20 ), SubResource( 21 ) ],
+"loop": true,
+"name": "spreadWings",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 32 ), SubResource( 25 ) ],
+"loop": true,
+"name": "wingless_walk",
+"speed": 10.0
+} ]
+
+[sub_resource type="CanvasItemMaterial" id=29]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=36]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+anim_speed = 1.0
+
+[sub_resource type="ParticlesMaterial" id=30]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 25.0
+gravity = Vector3( 0, 480, 0 )
+initial_velocity = 180.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[sub_resource type="ParticlesMaterial" id=31]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 90.0
+gravity = Vector3( 0, 480, 0 )
+initial_velocity = 160.0
+initial_velocity_random = 0.25
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 180.0
+angle_random = 0.25
+
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 19.5, 5 )
+
+[sub_resource type="RectangleShape2D" id=35]
+extents = Vector2( 6, 8 )
+
+[sub_resource type="RectangleShape2D" id=37]
+extents = Vector2( 24, 24 )
+
+[sub_resource type="RectangleShape2D" id=42]
+extents = Vector2( 8, 10 )
+
+[sub_resource type="RectangleShape2D" id=38]
+extents = Vector2( 36.5, 105.5 )
+
+[sub_resource type="CanvasItemMaterial" id=39]
+particles_animation = true
+particles_anim_h_frames = 9
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=40]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+anim_speed = 2.0
+
+[sub_resource type="RectangleShape2D" id=27]
+extents = Vector2( 8.5, 5 )
+
+[sub_resource type="RayShape2D" id=28]
+length = 8.0
+
+[sub_resource type="RectangleShape2D" id=33]
+extents = Vector2( 9.5, 10.1755 )
+
+[sub_resource type="RectangleShape2D" id=34]
+extents = Vector2( 14.9344, 5.68388 )
+
+[sub_resource type="CircleShape2D" id=41]
+radius = 11.0
+
+[node name="SkeletonGoonie" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+
+[node name="Sprite" parent="." index="0"]
+frames = SubResource( 11 )
+
+[node name="Poof" type="Particles2D" parent="Sprite" index="0"]
+material = SubResource( 29 )
+emitting = false
+amount = 1
+lifetime = 0.35
+one_shot = true
+local_coords = false
+process_material = SubResource( 36 )
+texture = ExtResource( 8 )
+
+[node name="Head" type="Particles2D" parent="Sprite" index="1"]
+emitting = false
+amount = 1
+lifetime = 3.0
+one_shot = true
+process_material = SubResource( 30 )
+texture = ExtResource( 9 )
+
+[node name="BonesParticles" type="Particles2D" parent="Sprite" index="2"]
+emitting = false
+amount = 6
+lifetime = 3.0
+one_shot = true
+speed_scale = 1.25
+explosiveness = 1.0
+randomness = 0.75
+local_coords = false
+process_material = SubResource( 31 )
+texture = ExtResource( 6 )
+
+[node name="StaticBody2D" parent="." index="1"]
+collision_layer = 0
+
+[node name="StompAreaWing" type="Area2D" parent="StaticBody2D" index="2"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/StompAreaWing" index="0"]
+position = Vector2( -0.5, -7 )
+scale = Vector2( 1, -1 )
+shape = SubResource( 22 )
+
+[node name="BombBody" type="KinematicBody2D" parent="StaticBody2D" index="3"]
+position = Vector2( 1, 15 )
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/BombBody" index="0"]
+position = Vector2( -2, 0 )
+shape = SubResource( 35 )
+
+[node name="DamageArea" type="Area2D" parent="StaticBody2D/BombBody" index="1"]
+position = Vector2( -2, 0 )
+collision_layer = 4
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/BombBody/DamageArea" index="0"]
+shape = SubResource( 37 )
+
+[node name="CollisionCheck" type="Area2D" parent="StaticBody2D/BombBody" index="2"]
+position = Vector2( -2, 0 )
+collision_layer = 0
+collision_mask = 87
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/BombBody/CollisionCheck" index="0"]
+shape = SubResource( 42 )
+
+[node name="DropCheck" type="Area2D" parent="StaticBody2D/BombBody" index="3"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/BombBody/DropCheck" index="0"]
+position = Vector2( -0.5, 95.5 )
+shape = SubResource( 38 )
+
+[node name="Bomb" type="Sprite" parent="StaticBody2D/BombBody" index="4"]
+position = Vector2( -2, 0 )
+texture = ExtResource( 10 )
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="StaticBody2D/BombBody" index="5"]
+stream = ExtResource( 11 )
+volume_db = -5.0
+max_distance = 1000.0
+
+[node name="ExplodeParticle" type="Particles2D" parent="StaticBody2D/BombBody" index="6"]
+material = SubResource( 39 )
+emitting = false
+amount = 1
+one_shot = true
+local_coords = false
+process_material = SubResource( 40 )
+texture = ExtResource( 12 )
+
+[node name="VisibilityEnabler2D" parent="." index="2"]
+visible = true
+pause_particles = false
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="." index="4"]
+stream = ExtResource( 5 )
+volume_db = -10.0
+max_distance = 1000.0
+bus = "Sounds"
+
+[node name="Bones" type="AudioStreamPlayer2D" parent="." index="5"]
+stream = ExtResource( 13 )
+volume_db = -12.0
+pitch_scale = 1.25
+bus = "Sounds"
+
+[node name="WinglessBody" type="KinematicBody2D" parent="." index="6"]
+pause_mode = 1
+position = Vector2( -4, 0 )
+collision_layer = 4
+collision_mask = 85
+
+[node name="Shape" type="CollisionShape2D" parent="WinglessBody" index="0"]
+position = Vector2( 1.5, -3 )
+shape = SubResource( 27 )
+one_way_collision_margin = 0.0
+
+[node name="FloorL" type="CollisionShape2D" parent="WinglessBody" index="1"]
+position = Vector2( -5, 2 )
+shape = SubResource( 28 )
+one_way_collision_margin = 0.0
+
+[node name="FloorR" type="CollisionShape2D" parent="WinglessBody" index="2"]
+position = Vector2( 8, 2 )
+shape = SubResource( 28 )
+one_way_collision_margin = 0.0
+
+[node name="WallCheckA" type="RayCast2D" parent="WinglessBody" index="3"]
+position = Vector2( 1, -10 )
+enabled = true
+cast_to = Vector2( 16, 0 )
+collision_mask = 85
+
+[node name="WallCheckB" type="RayCast2D" parent="WinglessBody" index="4"]
+position = Vector2( 1, -3 )
+enabled = true
+cast_to = Vector2( 16, 0 )
+collision_mask = 85
+
+[node name="AttackArea" type="Area2D" parent="WinglessBody" index="5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinglessBody/AttackArea" index="0"]
+position = Vector2( 1.5, 1.15367 )
+scale = Vector2( 1.00439, 0.967649 )
+shape = SubResource( 33 )
+
+[node name="StompArea" type="Area2D" parent="WinglessBody" index="6"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinglessBody/StompArea" index="0"]
+position = Vector2( 2, -7.5 )
+scale = Vector2( 1.00439, 0.967649 )
+shape = SubResource( 34 )
+
+[node name="EditorCircle" type="CollisionShape2D" parent="." index="7"]
+position = Vector2( -2, 1 )
+shape = SubResource( 41 )

@@ -82,9 +82,6 @@ func switch() -> void:
 		Singleton.CurrentLevelData.level_data.vars.reload()
 		Singleton.CurrentLevelData.enemies_instanced = 0
 		Singleton.MiscShared.is_play_reload = true
-		var new_scene_mode = get_tree().get_current_scene().mode
-		if new_scene_mode == 0:
-			Singleton.Networking.disconnect_from_peers()
 		
 		sound.play()
 		switching_disabled = true
@@ -127,6 +124,7 @@ func switch() -> void:
 		Singleton.CurrentLevelData.level_data.vars.init()
 		
 		get_tree().get_current_scene().switch_scenes()
+		var new_scene_mode = get_tree().get_current_scene().mode
 		if new_scene_mode == 0:
 			playtesting = false
 		elif new_scene_mode == 1:

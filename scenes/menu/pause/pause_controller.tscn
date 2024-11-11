@@ -1,0 +1,144 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
+[ext_resource path="res://scenes/menu/pause/pause_main/pause_main.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/menu/pause/pause_controller.gd" type="Script" id=4]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float blur_amount : hint_range(0, 5);
+
+void fragment() {
+	COLOR = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur_amount);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/blur_amount = 0.0
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Blur/Shader:material:shader_param/blur_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Blur/Shader:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Blur/Shader/Tint:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "transition"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Blur/Shader:material:shader_param/blur_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Blur/Shader:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Blur/Shader/Tint:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.0470588, 0.0745098, 0.176471, 0.376471 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[node name="PauseController" type="CanvasLayer"]
+pause_mode = 2
+layer = 64
+script = ExtResource( 4 )
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Blur" type="CanvasLayer" parent="."]
+layer = 62
+
+[node name="Shader" type="ColorRect" parent="Blur"]
+visible = false
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0 )
+
+[node name="Tint" type="ColorRect" parent="Blur/Shader"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+
+[node name="Animation" type="AnimationPlayer" parent="Blur/Shader"]
+root_node = NodePath("../../..")
+anims/RESET = SubResource( 3 )
+anims/transition = SubResource( 4 )
+
+[node name="Screens" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 2 )
+
+[node name="MainMenu" parent="Screens" instance=ExtResource( 3 )]
+visible = false
+
+[node name="Options" parent="Screens" instance=ExtResource( 1 )]
+visible = false
+
+[connection signal="timeout" from="Cooldown" to="." method="cooldown_timeout"]
+[connection signal="start_transition" from="Screens/MainMenu" to="Cooldown" method="start"]
+[connection signal="start_transition" from="Screens/Options" to="Cooldown" method="start"]

@@ -1,5 +1,6 @@
 class_name level_code_util
 
+
 static func is_valid(value : String):
 	value = value.strip_edges(true, true)
 	
@@ -18,6 +19,17 @@ static func is_valid(value : String):
 			return true
 		else:
 			return false
+
+static func fast_is_valid(value: String) -> bool:
+	if value.length() < 80: return false
+	
+	value = value.strip_edges().strip_escapes()
+	
+	# hacky but do u really think we're going to increase the code version more than that? 
+	if not value.begins_with("0") and not value.begins_with("1"): return false
+	if not value.ends_with("]"): return false
+	
+	return true
 
 const empty_tile := [0,0,0]
 static func encode(tiles, settings):
@@ -92,8 +104,8 @@ static func split_code_top_level(string):
 				parts.append(string.substr(start_from, index - start_from))
 				start_from = index + 1
 	return parts
-		
-static func decode(code: String):
+
+static func decode(code: String) -> Dictionary:
 	var result = {}
 
 	code = code.strip_edges()
@@ -103,16 +115,59 @@ static func decode(code: String):
 	result.name = code_array[1].percent_decode()
 	
 	var add_amount = 1
-	var func_array = []
+	var layout_array: Array
+	var pins_array: Array
+	
+	
 	if result.format_version == "0.4.0" or result.format_version == "0.4.1":
 		add_amount = 0
-	else:
-		func_array = split_code_top_level(code_array[2])
+	
+	elif conversion_util.compareVersions(result.format_version, "0.5.0") > -1:
+		result.author = code_array[2].percent_decode()
+		result.description = code_array[3].percent_decode()
+		result.thumbnail_url = code_array[4].percent_decode()
 		
-	for function in func_array:
-		if function != "":
-			print("B")
+		var editor_array: Array = code_array[5].split("^")
+		if editor_array.size() > 1:
+			layout_array = editor_array[0].split(",")
+			pins_array = editor_array[1].split(",")
+		
+		add_amount = 4
+	
+	
+	var layout_ids: Array
+	var layout_palettes: Array
+	var pinned_items: Array
+	
+	var starting_toolbar = preload("res://scenes/editor/starting_toolbar.tres")
+	for index in range(starting_toolbar.ids.size()):
+		layout_ids.append(starting_toolbar.ids[index])
+		layout_palettes.append(0)
+	
+	for index in range(layout_array.size()):
+		var item: String = layout_array[index]
+		var palette := int(item[0])
+		item.erase(0, 1)
+		
+		layout_ids[index] = item
+		layout_palettes[index] = palette
+		
+	for index in range(pins_array.size()):
+		var item: String = pins_array[index]
+		if item != "":
+			var palette := int(item[0])
+			item.erase(0, 1)
 			
+			var pin_array: Array
+			pin_array.append(item)
+			pin_array.append(palette)
+			pinned_items.append(pin_array)
+	
+	result.layout_ids = layout_ids
+	result.layout_palettes = layout_palettes
+	result.pinned_items = pinned_items
+	
+	
 	var areas = code_array.size() - (2 + add_amount)
 	
 	result.areas = []
@@ -139,6 +194,12 @@ static func decode(code: String):
 			result.areas[area_id].settings.background_palette = value_util.decode_value(area_settings_array[5])
 		else:
 			result.areas[area_id].settings.background_palette = 0
+		
+		if area_settings_array.size() > 6:
+			result.areas[area_id].settings.timer = value_util.decode_value(area_settings_array[6])
+		else:
+			result.areas[area_id].settings.timer = 0.00
+		
 		
 		
 		if(conversion_util.compareVersions(result.format_version, "0.4.5") == -1):
@@ -184,5 +245,38 @@ static func decode(code: String):
 						decoded_object.properties.append(value_util.decode_value(value))
 					index += 1
 				result.areas[area_id].objects.append(decoded_object)
+	
+	return result
+
+static func decode_info(code: String) -> Dictionary:
+	var result: Dictionary = {}
+	
+	code = code.strip_edges()
+	var code_array: Array = code.split(",")
+	
+	result.format_version = code_array[0]
+	result.name = code_array[1].percent_decode()
+	
+	
+	var add_amount = 1
+	if result.format_version == "0.4.0" or result.format_version == "0.4.1":
+		add_amount = 0
+	
+	elif conversion_util.compareVersions(result.format_version, "0.5.0") > -1:
+		result.author = code_array[2].percent_decode()
+		result.description = code_array[3].percent_decode()
+		result.thumbnail_url = code_array[4].percent_decode()
+		add_amount = 4
+	
+	var area_index: int = 2 + add_amount
+	result.areas = [{}]
+	result.areas[0].settings = {}
+	result.areas[0].settings.sky = value_util.decode_value(code_array[area_index + 1])
+	result.areas[0].settings.background = value_util.decode_value(code_array[area_index + 2])
+	result.areas[0].settings.background_palette = 0
+	
+	if conversion_util.compareVersions(result.format_version, "0.4.5") == 1:
+		var split: String = code_array[area_index + 5].get_slice("~", 0)
+		result.areas[0].settings.background_palette = value_util.decode_value(split)
 	
 	return result

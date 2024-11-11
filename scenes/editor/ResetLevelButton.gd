@@ -22,6 +22,4 @@ func on_focus_entered() -> void:
 
 func on_pressed() -> void:
 	click_sound.play()
-	get_parent().get_parent().visible = false
-	get_parent().get_parent().get_parent().get_node("Hotkeys").visible = true
-	Singleton2.disable_hotkeys = true
+	get_owner().get_owner().get_node("%ScreenManager").screen_change("Options")

@@ -3,6 +3,14 @@ extends KinematicBody2D
 class_name Character
 
 signal state_changed
+signal health_changed(new_health, new_shards)
+signal nozzle_changed(new_nozzle)
+
+signal fludd_activated
+signal fludd_deactivated
+
+signal start_moving
+signal stop_moving
 
 # Child nodes
 onready var states_node = $States
@@ -36,7 +44,6 @@ onready var ground_check_dive : RayCast2D = $GroundCheckDive
 onready var left_check : RayCast2D = $LeftCheck
 onready var right_check : RayCast2D = $RightCheck
 onready var slope_stop_check : RayCast2D = $SlopeStopCheck
-onready var seesaw_tele : RayCast2D = $SeesawTele 
 onready var player_collision : Area2D = $PlayerCollision
 onready var water_detector : Area2D = $WaterDetector
 onready var lava_detector : Area2D = $LavaDetector
@@ -78,6 +85,11 @@ onready var heal_tick_timer = $HealTickTimer
 onready var ground_collider_enable_timer = $GroundColliderEnableTimer
 export var bottom_pos_offset : Vector2
 export var bottom_pos_dive_offset : Vector2
+onready var squish_vertical_check = $SquishCasts/VerticalCheck
+onready var squish_vertical_check_dive = $SquishCasts/VerticalCheckDive
+onready var squish_left_check = $SquishCasts/LeftCheck
+onready var squish_right_check = $SquishCasts/RightCheck
+
 
 onready var spotlight : Light2D = $Spotlight
 
@@ -91,6 +103,8 @@ export var initial_position := Vector2(0, 0)
 export var velocity := Vector2(0, 0)
 var last_velocity := Vector2(0, 0)
 var last_position := Vector2(0, 0)
+var in_wind := false
+var extra_forces : Dictionary = {}
 
 
 export var gravity_scale := 1.0
@@ -153,6 +167,7 @@ export var health_shards := 0
 var nozzle : Node = null # Couldn't set static type due to circle reference
 var using_turbo := false
 var turbo_nerf := false
+
 var fuel := 100.0
 var stamina := 100.0
 var breath := 100.0
@@ -291,12 +306,12 @@ const ANIM_IDS : Dictionary = {
 }
 
 func _ready():
-
+	Singleton.CurrentLevelData.can_pause = true
 
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
 	ground_collider_enable_timer.connect("timeout", self, "_on_ground_collder_timer_timeout")
-	print(Singleton.CurrentLevelData.level_data.vars.transition_data)
+	#print(Singleton.CurrentLevelData.level_data.vars.transition_data)
 	if Singleton.CurrentLevelData.level_data.vars.transition_data != []:
 		hide()
 		toggle_movement(false)
@@ -338,6 +353,8 @@ func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String =
 		damage(amount, cause, frames)
 
 func knockback(hit_pos: Vector2):
+	if is_instance_valid(state) and state.disable_knockback: return
+	
 	var direction := sign((global_position - hit_pos).normalized().x)
 	velocity.x = direction * 235
 	velocity.y = -225
@@ -369,7 +386,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 			real_friction = luigi_fric
 			wing_sprite.frames = luigi_wing_frames
 		_:
-			push_error("Illegal character loaded: " + str(character) + " REEEEEE")
+			printerr("Illegal character loaded: " + str(character) + " REEEEEE")
 	
 	add_child(sound_player) #Will throw an error if the level you're in is reset. Not that big of a deal.
 	# Death sprites are shared
@@ -386,8 +403,10 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	collected_shine.visible = false
 	collected_shine.get_node("ShineParticles").emitting = false
 	
+	#print(Singleton.CheckpointSaved.current_checkpoint_id)
 	if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
 		position = Singleton.CheckpointSaved.current_spawn_pos
+		reset_physics_interpolation()
 		var score_from_before = Singleton.CurrentLevelData.time_score
 		Singleton.CurrentLevelData.start_tracking_time_score()
 		Singleton.CurrentLevelData.time_score = score_from_before
@@ -439,10 +458,14 @@ func is_walled_left() -> bool:
 func is_walled_right() -> bool:
 	return test_move(self.transform, Vector2(0.5, 1)) and test_move(self.transform, Vector2(0.5, -1)) and collided_last_frame
 
+func will_collide(multiplier: float = 1) -> bool:
+	return test_move(self.transform, velocity * multiplier * fps_util.PHYSICS_DELTA)
+
 func hide() -> void:
 	visible = false
 	velocity = Vector2(0, 0)
 	position = initial_position
+	reset_physics_interpolation()
 
 func show() -> void:
 	visible = true
@@ -471,19 +494,22 @@ func get_powerup_node(name: String) -> Node:
 		return powerups_node.get_node(name)
 	return null
 
-func set_powerup(powerup_node: Node, set_temporary_music: bool) -> void:
+func set_powerup(powerup_node: Node, set_temporary_music: bool, duration = -1) -> void:
 	if is_instance_valid(powerup):
 		# Prevent switching away from rainbow star
 		if powerup.name == "RainbowPowerup" and powerup != powerup_node\
 		and is_instance_valid(powerup_node): # unless it's running out
 			return
 		
+		powerup.time_left = 0
 		powerup._stop(0)
 		powerup.remove_visuals()
 	
 	powerup = powerup_node
 	if is_instance_valid(powerup):
 		powerup.play_temp_music = set_temporary_music
+		if duration != -1:
+			powerup.time_left = duration
 		powerup._start(0, set_temporary_music)
 		powerup.apply_visuals()
 
@@ -514,7 +540,6 @@ func set_nozzle(new_nozzle: String, change_index := true) -> void:
 	fludd_charge_sound.stop()
 	if is_instance_valid(nozzle):
 		nozzle.activated = false
-		nozzle.last_activated = false
 	nozzle = get_nozzle_node(str(new_nozzle))
 	water_sprite.animation = "in"
 	water_sprite.frame = 6
@@ -526,6 +551,8 @@ func set_nozzle(new_nozzle: String, change_index := true) -> void:
 	
 	if is_instance_valid(nozzle) and (is_instance_valid(powerup) and powerup.name == "RainbowPowerup"):
 		set_nozzle("null", true) # Mario simply isn't allowed to have fludd
+	else:
+		emit_signal("nozzle_changed", new_nozzle)
 
 # Handles getting hit by another player
 func player_hit(body : Node) -> void:
@@ -569,12 +596,14 @@ func _process(delta: float) -> void:
 	
 	if next_position:
 		position = position.linear_interpolate(next_position, fps_util.PHYSICS_DELTA * sync_interpolation_speed)
+		reset_physics_interpolation()
 
 	collected_shine_outline.frame = collected_shine.frame
 	collected_shine_outline.position = collected_shine.position
 	collected_shine_outline.scale = collected_shine.scale
 	collected_shine_outline.visible = collected_shine.visible
 	collected_shine_outline.z_index = collected_shine.z_index
+	collected_shine_outline.reset_physics_interpolation()
 	
 	if state and state.name == "NoActionState":
 		return
@@ -597,6 +626,8 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 			frames = 4
 		else:
 			health -= amount
+			emit_signal("health_changed", health, health_shards)
+		
 		invulnerable = true if frames != 0 else false
 		invulnerable_frames = frames
 		if health <= 0:
@@ -604,8 +635,11 @@ func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> voi
 			sound_player.play_last_hit_sound()
 			kill(cause)
 		else:
-			if cause != "lava":
+			if cause == "crushed":
+				sound_player.play_last_hit_voice_sound()
+			elif cause != "lava":
 				sound_player.play_hit_sound()
+				
 
 func slow_heal(shards : int = 1, tick : float = 1, time : float = 1, can_overheal : bool = false) -> void:
 	if can_heal:
@@ -626,17 +660,21 @@ func heal(shards : int = 1) -> void:
 		health_shards = health_shards % 5
 		if health == 8:
 			health_shards = 0
+		
+		emit_signal("health_changed", health, health_shards)
 
 
 func get_weight() -> int:
 	return 2 if metal_voice else 1
 
 func _physics_process(delta: float) -> void:
-	update_inputs()	
+	update_inputs()
 	if state and (state.name == "NoActionState" or state.name == "LaunchStarState"):
+		update_ghost()
 		return
 	
 	bottom_pos.position = bottom_pos_offset if ground_collision_dive.disabled else bottom_pos_dive_offset
+	bottom_pos.reset_physics_interpolation()
 	var is_in_platform := false
 	for body in platform_detector.get_overlapping_areas():
 		if body.has_method("is_platform_area"):
@@ -666,7 +704,7 @@ func _physics_process(delta: float) -> void:
 		max_aerial_velocity = 640
 		
 	if is_in_water:
-		var fuel_increment = 0.075
+		var fuel_increment = 0.15
 		fuel = clamp(fuel + fuel_increment, 0, 100)
 		if player_id == 0 and Singleton.Music.has_water and !Singleton.Music.play_water:
 			Singleton.Music.toggle_underwater_music(true)
@@ -691,7 +729,10 @@ func _physics_process(delta: float) -> void:
 		disable_movement = false
 		disable_turning = false
 		disable_animation = false
-		disable_friction = false
+		if in_wind:
+			disable_friction = true
+		else:
+			disable_friction = false
 	
 	# Movement
 	move_direction = 0
@@ -704,12 +745,12 @@ func _physics_process(delta: float) -> void:
 		move_direction = facing_direction
 			
 	if !controllable:
-		if is_grounded():
+		if is_on_floor():
 			velocity.y = 0 # so velocity doesn't become incredibly high when not controllable
 	
 	# Horizontal physics
 	if move_direction != 0 and controllable:
-		if is_grounded():
+		if is_on_floor():
 			# Accelerate/decelerate
 			if velocity.x * move_direction < 0: #why. just why. you already have the move direction, dingus.
 				velocity.x += deceleration * move_direction
@@ -729,14 +770,14 @@ func _physics_process(delta: float) -> void:
 	elif !disable_friction:
 		if abs(velocity.x) > 0:
 			if abs(velocity.x) > 15:
-				if is_grounded():
+				if is_on_floor():
 					velocity.x -= sign(velocity.x) * friction
 				else:
 					velocity.x -= sign(velocity.x) * aerial_friction * (2 if abs(velocity.x) > move_speed else 1)
 			else:
 				velocity.x = 0
 	
-	if is_grounded() and !disable_animation and movable and controlled_locally and abs(velocity.x) > 15:
+	if is_grounded() and !disable_animation and movable and controlled_locally and controllable and abs(velocity.x) > 15:
 		if !is_walled():
 			sprite.speed_scale = abs(velocity.x) / move_speed if abs(velocity.x) > move_speed else 1.0
 			sprite.animation = "movingRight" if facing_direction == 1 else "movingLeft"
@@ -779,6 +820,7 @@ func _physics_process(delta: float) -> void:
 		sprite.position = sprite.position.linear_interpolate(sprite_offset, fps_util.PHYSICS_DELTA * rotation_interpolation_speed)
 		sprite.rotation = lerp_angle(sprite.rotation, sprite_rotation, fps_util.PHYSICS_DELTA * rotation_interpolation_speed)
 		sprite.rotation_degrees = wrapf(sprite.rotation_degrees, -180, 180)
+		sprite.reset_physics_interpolation()
 	
 	# Update all states, nozzles and powerups
 	if Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id:
@@ -878,18 +920,25 @@ func _physics_process(delta: float) -> void:
 				water_sprite.position = nozzle.animation_water_positions[sprite.animation]
 			else:
 				water_sprite.position = nozzle.fallback_water_pos_right if facing_direction == 1 else nozzle.fallback_water_pos_left
+			water_sprite.reset_physics_interpolation()
 		else:
 			if sprite.animation in nozzle.animation_water_positions_luigi:
 				water_sprite.position = nozzle.animation_water_positions_luigi[sprite.animation]
 			else:
 				water_sprite.position = nozzle.fallback_water_pos_right_luigi if facing_direction == 1 else nozzle.fallback_water_pos_left_luigi
+			water_sprite.reset_physics_interpolation()
 		
 		water_sprite_2.position = water_sprite.position - Vector2(-5 * facing_direction, 2)
+		water_sprite_2.reset_physics_interpolation()
 		water_particles.position = water_sprite.position + Vector2(12, 3)
+		water_particles.reset_physics_interpolation()
 		water_particles_2.position = water_particles.position + (Vector2(9.5 * facing_direction, 2))
+		water_particles_2.reset_physics_interpolation()
 		turbo_particles.process_material.direction = Vector3(-facing_direction, 0, 0)
 		turbo_particles.position = water_sprite.position + Vector2(-3 * facing_direction, -11.5 if facing_direction == -1 else 11.5)
+		turbo_particles.reset_physics_interpolation()
 		rocket_particles.position = water_sprite.position + Vector2(8 if facing_direction == 1 else 10, 1.5)
+		rocket_particles.reset_physics_interpolation()
 	else:
 		fludd_sprite.visible = false
 		water_sprite.visible = false
@@ -901,23 +950,26 @@ func _physics_process(delta: float) -> void:
 	
 	# Move by velocity
 	if movable:
-		#move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
+
 		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
+		
 		if (last_position != Vector2.ZERO and (last_position - global_position).length_squared() > 0
 			and get_world_2d().direct_space_state.intersect_ray(last_position, global_position, [self], 1).size() > 0):
 			position = last_position
+			reset_physics_interpolation()
 			
 			if velocity.length_squared() < 1:
 				# Clip attempt, just reset velocity
 				velocity = last_velocity * 0.95
 			else:
+				pass
 				# Going into a corner? Try to bonk.
 				# The squish state has us covered in case we get stuck even harder
-				velocity.x = 150 * -facing_direction
-				velocity.y = -65
-				position.x -= 2 * facing_direction
-				set_state_by_name("BonkedState", delta)
-				sound_player.play_bonk_sound()
+#				velocity.x = 150 * -facing_direction
+#				velocity.y = -65
+#				position.x -= 2 * facing_direction
+#				set_state_by_name("BonkedState", delta)
+#				sound_player.play_bonk_sound()
 		else:
 			var slide_count = get_slide_count()
 			collided_last_frame = slide_count > 0
@@ -938,6 +990,11 @@ func _physics_process(delta: float) -> void:
 	
 	last_position = global_position
 	
+	if velocity != Vector2.ZERO and last_velocity == Vector2.ZERO:
+		emit_signal("start_moving")
+	elif velocity == Vector2.ZERO and last_velocity != Vector2.ZERO:
+		emit_signal("stop_moving")
+	
 	last_velocity = velocity
 	last_move_direction = move_direction
 	
@@ -949,20 +1006,33 @@ func _physics_process(delta: float) -> void:
 	if Singleton.PlayerSettings.other_player_id != -1:
 		if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
 			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
-			print("hi")
+			#print("hi")
+	
+	update_ghost()
+
+
+func update_ghost():
 	if !Singleton2.save_ghost:
 		GhostArrays.temp_gp.append(Vector2(int(position.x), int(position.y)))
 		GhostArrays.temp_ga.append(ANIM_IDS[sprite.animation])
 		GhostArrays.temp_gsr.append(int(sprite.rotation_degrees))
 		GhostArrays.temp_gar.append(Singleton.CurrentLevelData.area)
-	var level_info = Singleton.SavedLevels.get_current_levels()[Singleton.SavedLevels.selected_level]
+	
+	var level_info = Singleton.CurrentLevelData.level_info
 	if Singleton2.save_ghost == true and GhostArrays.dont_save == false:
+		Singleton2.save_ghost = false
+		
+		var directory := Directory.new()
+		if !directory.dir_exists("user://replays"):
+			directory.make_dir("user://replays")
+		
 		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.WRITE)
 		file.store_var(GhostArrays.temp_gp)
 		file.store_var(GhostArrays.temp_ga)
 		file.store_var(GhostArrays.temp_gsr)
 		file.store_var(GhostArrays.temp_gar)
 		file.close()
+
 		
 func encode_int_bytes(val: int, num: int) -> PoolByteArray:
 	var output = PoolByteArray([])
@@ -987,7 +1057,7 @@ func switch_areas(area_id, transition_time):
 
 	
 func kill(cause: String) -> void:
-	var r_press = false
+	Singleton.CurrentLevelData.can_pause = false
 	if !dead:
 		if Singleton.PlayerSettings.other_player_id != -1:
 			get_tree().multiplayer.send_bytes(JSON.print(["reload"]).to_ascii())
@@ -1007,7 +1077,6 @@ func kill(cause: String) -> void:
 				reload = false
 		elif cause == "reload":
 			transition_time = 0.4
-			r_press = true
 		elif cause == "green_demon":
 			sound_player.play_last_hit_sound()
 			controllable = false
@@ -1018,10 +1087,11 @@ func kill(cause: String) -> void:
 			death_sprite.global_position = sprite.global_position
 			death_sprite.play_anim()
 			position = Vector2(0, 100000000000000000)
+			reset_physics_interpolation()
 			yield(get_tree().create_timer(0.55), "timeout")
 			sound_player.play_death_sound()
 			yield(get_tree().create_timer(0.75), "timeout")
-		elif cause == "hit" or cause == "lava":
+		elif cause == "hit" or cause == "lava" or cause == "crushed":
 			controllable = false
 			movable = false
 			cutout_in = cutout_death
@@ -1030,6 +1100,7 @@ func kill(cause: String) -> void:
 			death_sprite.global_position = sprite.global_position
 			death_sprite.play_anim()
 			position = Vector2(0, 100000000000000000)
+			reset_physics_interpolation()
 			yield(get_tree().create_timer(0.55), "timeout")
 			sound_player.play_death_sound()
 			yield(get_tree().create_timer(0.75), "timeout")
@@ -1041,18 +1112,25 @@ func kill(cause: String) -> void:
 		else:
 			yield(get_tree().create_timer(3), "timeout")
 			set_powerup(null, false)
+			
 			health = 8
+			health_shards = 0
+			emit_signal("health_changed", health, health_shards)
+			
 			if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CheckpointSaved.current_area == Singleton.CurrentLevelData.area and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
 				position = Singleton.CheckpointSaved.current_spawn_pos
+				reset_physics_interpolation()
 				GhostArrays.dont_save = true
 			else:
 				position = spawn_pos - Vector2(0, 16)
+				reset_physics_interpolation()
 			last_position = position # fixes infinite death bug
 			dead = false
 			movable = true
 			sprite.visible = true
 			death_sprite.visible = false
 			controllable = true
+			Singleton.CurrentLevelData.can_pause = true
 			set_state_by_name("FallState", 0)
 
 func exit() -> void:
@@ -1063,28 +1141,33 @@ func exit() -> void:
 		# warning-ignore: return_value_discarded
 		get_tree().reload_current_scene()
 
+
+onready var terrain_collision_nodes: Array = [
+	self,
+	ground_check,
+	ground_check_dive,
+	left_check,
+	right_check,
+	slope_stop_check,
+	squish_vertical_check,
+	squish_vertical_check_dive,
+	squish_left_check,
+	squish_right_check
+]
 func set_all_collision_masks(bit, value) -> void:
-	set_collision_mask_bit(bit, value)
-	ground_check.set_collision_mask_bit(bit, value)
-	ground_check_dive.set_collision_mask_bit(bit, value)
-	left_check.set_collision_mask_bit(bit, value)
-	right_check.set_collision_mask_bit(bit, value)
-	slope_stop_check.set_collision_mask_bit(bit, value)
+	for collision_node in terrain_collision_nodes:
+		collision_node.set_collision_mask_bit(bit, value)
+
 
 func get_input(input_id : int, is_just_pressed : bool) -> bool:
 	return inputs[input_id][int(is_just_pressed)]
 
 func update_inputs() -> void:
 	if controlled_locally:
-		if !Singleton.FocusCheck.is_ui_focused:
-			var control_id := player_id
-			for input in inputs:
-				input[0] = Input.is_action_pressed(input[2] + str(control_id))
-				input[1] = Input.is_action_just_pressed(input[2] + str(control_id))
-		else:
-			for input in inputs:
-				input[0] = false
-				input[1] = false
+		var control_id := player_id
+		for input in inputs:
+			input[0] = Input.is_action_pressed(input[2] + str(control_id))
+			input[1] = Input.is_action_just_pressed(input[2] + str(control_id))
 
 func set_inter_player_collision(can_collide : bool) -> void:
 	player_collision.set_collision_mask_bit(1, can_collide)
@@ -1146,4 +1229,6 @@ func toggle_movement(var value : bool):
 	invulnerable = !value
 	controllable = value
 	movable = value
-	
+
+func add_force(velocity : Vector2, UUID : int):
+	extra_forces.get_or_add(UUID, velocity)

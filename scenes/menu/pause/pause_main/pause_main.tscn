@@ -1,0 +1,800 @@
+[gd_scene load_steps=36 format=2]
+
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/menu/screen.gd" type="Script" id=5]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://scenes/menu/pause/pause_main/icons/resume.png" type="Texture" id=7]
+[ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=8]
+[ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=9]
+[ext_resource path="res://scenes/menu/pause/pause_main/adaptive_hide.gd" type="Script" id=10]
+[ext_resource path="res://scenes/menu/pause/pause_main/button_functions.gd" type="Script" id=11]
+[ext_resource path="res://scenes/menu/pause/pause_main/shine_info.gd" type="Script" id=12]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=13]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=14]
+[ext_resource path="res://scenes/menu/button_scripts/icon_helper.gd" type="Script" id=15]
+[ext_resource path="res://scenes/menu/pause/pause_main/icons/retry_from_start.png" type="Texture" id=16]
+[ext_resource path="res://scenes/menu/pause/pause_main/icons/retry.png" type="Texture" id=17]
+[ext_resource path="res://scenes/menu/pause/pause_main/icons/quit.png" type="Texture" id=18]
+[ext_resource path="res://scenes/menu/pause/pause_main/icons/settings.png" type="Texture" id=19]
+[ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=20]
+[ext_resource path="res://scenes/menu/levels_list/icons/star_coin.png" type="Texture" id=21]
+[ext_resource path="res://scenes/menu/levels_list/icons/shine.png" type="Texture" id=22]
+[ext_resource path="res://scenes/menu/pause/pause_main/counters.gd" type="Script" id=23]
+[ext_resource path="res://scenes/menu/level_portal/icons/ratings.png" type="Texture" id=24]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.0502793, 0.944134, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.831373, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture2D" id=18]
+gradient = SubResource( 1 )
+fill_from = Vector2( 0, 1 )
+fill_to = Vector2( 0, 0 )
+
+[sub_resource type="Gradient" id=16]
+colors = PoolColorArray( 0, 0.0431373, 0.313726, 0.878431, 0.0392157, 0.282353, 0.423529, 0.25098 )
+
+[sub_resource type="GradientTexture2D" id=17]
+gradient = SubResource( 16 )
+fill = 1
+fill_from = Vector2( 0, 1 )
+
+[sub_resource type="DynamicFont" id=21]
+size = 28
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_char = -1
+font_data = ExtResource( 20 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 20
+outline_size = 2
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=20]
+size = 14
+outline_size = 2
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=19]
+outline_size = 2
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 1, 1, 1, 1 )
+skew = Vector2( -0.5, 0 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 1, 1, 1, 0 )
+border_blend = true
+corner_detail = 1
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="Animation" id=5]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("ShineInfo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ShineInfo:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 384, -32 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Buttons:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -247, 252 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BlueBar:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -2, 443 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Buttons:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Counters:rect_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 696, 392 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Counters:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "transition"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("ShineInfo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ShineInfo:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 264, 0 ), Vector2( 384, -32 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Buttons:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( -12, 252 ), Vector2( -247, 252 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BlueBar:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( -2, 315 ), Vector2( -2, 443 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Buttons:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Counters:rect_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 608, 384 ), Vector2( 696, 392 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Counters:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+theme = ExtResource( 1 )
+script = ExtResource( 5 )
+
+[node name="Focus" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+default_focus_path = NodePath("../Buttons/VBoxContainer/Resume")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 3 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 4 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="BlueBar" type="TextureRect" parent="."]
+modulate = Color( 0, 0.0431373, 0.313726, 0.878431 )
+margin_left = -2.0
+margin_top = 443.0
+margin_right = 488.0
+margin_bottom = 656.0
+rect_rotation = 15.0
+texture = SubResource( 18 )
+expand = true
+
+[node name="Buttons" type="MarginContainer" parent="."]
+modulate = Color( 0, 0, 1, 0 )
+margin_left = -247.0
+margin_top = 252.0
+margin_right = 47.0
+margin_bottom = 432.0
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 28
+
+[node name="ButtonFunctions" type="Node" parent="Buttons"]
+script = ExtResource( 11 )
+root_path = NodePath("../..")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Buttons"]
+margin_right = 230.0
+margin_bottom = 152.0
+rect_min_size = Vector2( 230, 0 )
+size_flags_horizontal = 0
+alignment = 2
+
+[node name="Resume" type="Button" parent="Buttons/VBoxContainer"]
+margin_right = 230.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 0, 22 )
+theme_type_variation = "OptionsToggle"
+text = "Resume"
+align = 2
+icon_align = 1
+script = ExtResource( 13 )
+
+[node name="Icon" type="TextureRect" parent="Buttons/VBoxContainer/Resume"]
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+margin_left = 152.0
+margin_top = 4.0
+margin_right = 166.0
+margin_bottom = 18.0
+mouse_filter = 2
+texture = ExtResource( 7 )
+expand = true
+script = ExtResource( 15 )
+offset = Vector2( -64, 0 )
+
+[node name="Retry" type="Button" parent="Buttons/VBoxContainer"]
+margin_top = 38.0
+margin_right = 230.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 22 )
+theme_type_variation = "OptionsToggle"
+text = "Retry"
+align = 2
+icon_align = 1
+script = ExtResource( 13 )
+
+[node name="Icon" type="TextureRect" parent="Buttons/VBoxContainer/Retry"]
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+margin_left = 162.0
+margin_top = 3.0
+margin_right = 178.0
+margin_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource( 17 )
+expand = true
+script = ExtResource( 15 )
+offset = Vector2( -52, 0 )
+
+[node name="RetryStart" type="Button" parent="Buttons/VBoxContainer"]
+margin_top = 76.0
+margin_right = 230.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 0, 22 )
+theme_type_variation = "OptionsToggle"
+custom_colors/font_color_focus = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_hover = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_pressed = Color( 0.694118, 0.2, 0.2, 1 )
+text = "Retry from Start"
+align = 2
+icon_align = 1
+script = ExtResource( 13 )
+
+[node name="Icon" type="TextureRect" parent="Buttons/VBoxContainer/RetryStart"]
+modulate = Color( 0.694118, 0.2, 0.2, 1 )
+margin_left = 86.0
+margin_top = 3.0
+margin_right = 102.0
+margin_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource( 16 )
+expand = true
+script = ExtResource( 15 )
+countdown_path = NodePath("../Countdown")
+count_offsets = [ 0, -19, -21, -21 ]
+offset = Vector2( -128, 0 )
+
+[node name="Countdown" type="Node" parent="Buttons/VBoxContainer/RetryStart"]
+script = ExtResource( 9 )
+countdown_style = 1
+countdown_time = 3
+
+[node name="Padding" type="Control" parent="Buttons/VBoxContainer"]
+margin_top = 114.0
+margin_right = 230.0
+margin_bottom = 114.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Buttons/VBoxContainer"]
+margin_top = 130.0
+margin_right = 230.0
+margin_bottom = 152.0
+custom_constants/separation = 12
+script = ExtResource( 10 )
+
+[node name="Quit" type="Button" parent="Buttons/VBoxContainer/HBoxContainer"]
+margin_right = 109.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 47, 22 )
+size_flags_horizontal = 3
+theme_type_variation = "OptionsToggleRed"
+text = "Quit"
+align = 2
+script = ExtResource( 14 )
+
+[node name="Icon" type="TextureRect" parent="Buttons/VBoxContainer/HBoxContainer/Quit"]
+margin_left = 53.0
+margin_top = 3.0
+margin_right = 69.0
+margin_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource( 18 )
+expand = true
+script = ExtResource( 15 )
+countdown_path = NodePath("../Countdown")
+disabled_color = Color( 0.427451, 0.2, 0.2, 1 )
+count_offsets = [ 0, -19, -21, -21 ]
+offset = Vector2( -40, 0 )
+
+[node name="Countdown" type="Node" parent="Buttons/VBoxContainer/HBoxContainer/Quit"]
+script = ExtResource( 9 )
+countdown_style = 2
+countdown_time = 3
+
+[node name="ShineMap" type="Button" parent="Buttons/VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 59.0
+margin_right = 142.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 0, 22 )
+size_flags_horizontal = 3
+theme_type_variation = "OptionsToggle"
+text = "Shine Map"
+script = ExtResource( 14 )
+
+[node name="Options" type="Button" parent="Buttons/VBoxContainer/HBoxContainer"]
+margin_left = 121.0
+margin_right = 230.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 0, 22 )
+size_flags_horizontal = 3
+theme_type_variation = "OptionsToggle"
+text = "       Options"
+script = ExtResource( 14 )
+
+[node name="Icon" type="TextureRect" parent="Buttons/VBoxContainer/HBoxContainer/Options"]
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+margin_left = 18.5
+margin_top = 3.0
+margin_right = 34.5
+margin_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource( 19 )
+expand = true
+script = ExtResource( 15 )
+disabled_color = Color( 0.427451, 0.2, 0.2, 1 )
+offset = Vector2( -28, 0 )
+
+[node name="ShineInfo" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -384.0
+margin_top = -248.0
+margin_right = 120.001
+margin_bottom = 184.0
+rect_min_size = Vector2( 504, 0 )
+script = ExtResource( 12 )
+
+[node name="MissionBackground" type="TextureRect" parent="ShineInfo"]
+margin_left = 65.0
+margin_top = 112.0
+margin_right = 568.0
+margin_bottom = 362.0
+rect_rotation = -5.0
+texture = SubResource( 17 )
+expand = true
+
+[node name="Glow" type="TextureRect" parent="ShineInfo/MissionBackground"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 4.0
+margin_bottom = 4.0
+rect_rotation = -3.0
+texture = SubResource( 17 )
+expand = true
+
+[node name="Glow2" type="TextureRect" parent="ShineInfo/MissionBackground/Glow"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 4.0
+margin_bottom = 4.0
+rect_rotation = 4.0
+texture = SubResource( 17 )
+expand = true
+
+[node name="LevelName" type="Label" parent="ShineInfo"]
+margin_top = 44.0
+margin_right = 592.875
+margin_bottom = 84.0
+rect_scale = Vector2( 0.85, 0.85 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "My Level"
+align = 1
+clip_text = true
+
+[node name="LevelNameBacking" type="Label" parent="ShineInfo/LevelName"]
+show_behind_parent = true
+anchor_right = 1.0
+margin_top = 4.0
+margin_right = 1.0
+margin_bottom = 44.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "My Level"
+align = 1
+clip_text = true
+
+[node name="CenterContainer" type="CenterContainer" parent="ShineInfo"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -0.000427246
+margin_bottom = 4.0
+
+[node name="ShineDetails" type="VBoxContainer" parent="ShineInfo/CenterContainer"]
+margin_left = 76.0
+margin_top = 110.0
+margin_right = 428.0
+margin_bottom = 326.0
+rect_min_size = Vector2( 352, 0 )
+custom_constants/separation = 12
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShineInfo/CenterContainer/ShineDetails"]
+margin_right = 352.0
+margin_bottom = 24.0
+alignment = 1
+
+[node name="Star" type="Control" parent="ShineInfo/CenterContainer/ShineDetails/HBoxContainer"]
+visible = false
+margin_left = 33.0
+margin_right = 57.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+
+[node name="Icon" type="TextureRect" parent="ShineInfo/CenterContainer/ShineDetails/HBoxContainer/Star"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 24 )
+expand = true
+stretch_mode = 6
+
+[node name="ShineName" type="Label" parent="ShineInfo/CenterContainer/ShineDetails/HBoxContainer"]
+margin_left = 47.0
+margin_right = 305.0
+margin_bottom = 24.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.501961 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 11 )
+text = "The Shine Sprite Mission Thing"
+align = 1
+
+[node name="Separator" type="ColorRect" parent="ShineInfo/CenterContainer/ShineDetails"]
+margin_top = 36.0
+margin_right = 352.0
+margin_bottom = 37.0
+rect_min_size = Vector2( 0, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="ShineInfo/CenterContainer/ShineDetails"]
+margin_top = 49.0
+margin_right = 352.0
+margin_bottom = 185.0
+rect_min_size = Vector2( 0, 128 )
+rect_clip_content = true
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="ShineDescription" type="RichTextLabel" parent="ShineInfo/CenterContainer/ShineDetails/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 348.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 0, 128 )
+rect_clip_content = false
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.501961 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 2
+custom_fonts/normal_font = SubResource( 20 )
+bbcode_enabled = true
+bbcode_text = "[center]Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.[/center]"
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+
+[node name="Buttons" type="HBoxContainer" parent="ShineInfo/CenterContainer/ShineDetails"]
+margin_top = 197.0
+margin_right = 352.0
+margin_bottom = 216.0
+custom_constants/separation = 24
+
+[node name="Padding" type="Control" parent="ShineInfo/CenterContainer/ShineDetails/Buttons"]
+margin_right = 64.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 64, 0 )
+
+[node name="Left" type="Button" parent="ShineInfo/CenterContainer/ShineDetails/Buttons"]
+margin_left = 88.0
+margin_right = 140.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+theme_type_variation = "OptionsToggle"
+custom_fonts/font = ExtResource( 8 )
+text = "<-"
+script = ExtResource( 14 )
+extend_amount = 2
+
+[node name="Index" type="Label" parent="ShineInfo/CenterContainer/ShineDetails/Buttons"]
+margin_left = 164.0
+margin_right = 187.0
+margin_bottom = 19.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.501961 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 19 )
+text = "0/3"
+
+[node name="Right" type="Button" parent="ShineInfo/CenterContainer/ShineDetails/Buttons"]
+margin_left = 211.0
+margin_right = 264.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+theme_type_variation = "OptionsToggle"
+custom_fonts/font = ExtResource( 8 )
+text = "->"
+script = ExtResource( 14 )
+extend_amount = 2
+
+[node name="Padding2" type="Control" parent="ShineInfo/CenterContainer/ShineDetails/Buttons"]
+margin_left = 288.0
+margin_right = 352.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 64, 0 )
+
+[node name="Counters" type="Control" parent="."]
+modulate = Color( 0, 0, 0, 0 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -72.0
+margin_top = -40.0
+margin_right = 88.0
+margin_bottom = 8.0
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 160, 0 )
+script = ExtResource( 23 )
+
+[node name="CountersBG" type="Panel" parent="Counters"]
+modulate = Color( 0, 0, 0, 0.25098 )
+margin_top = 12.0
+margin_right = 181.0
+margin_bottom = 36.0
+rect_rotation = 1.0
+custom_styles/panel = SubResource( 22 )
+
+[node name="CountersBG2" type="Panel" parent="Counters/CountersBG"]
+margin_right = 181.0
+margin_bottom = 24.0
+rect_rotation = -3.0
+custom_styles/panel = SubResource( 22 )
+
+[node name="CountersLabels" type="MarginContainer" parent="Counters"]
+margin_right = 160.0
+margin_bottom = 48.0
+grow_horizontal = 0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Counters/CountersLabels"]
+show_behind_parent = true
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 152.0
+margin_bottom = 40.0
+grow_horizontal = 0
+alignment = 2
+
+[node name="ShineIcon" type="Control" parent="Counters/CountersLabels/HBoxContainer"]
+margin_left = 2.0
+margin_right = 30.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 28, 28 )
+
+[node name="TextureRect" type="TextureRect" parent="Counters/CountersLabels/HBoxContainer/ShineIcon"]
+margin_right = 28.0
+margin_bottom = 28.0
+texture = ExtResource( 22 )
+expand = true
+stretch_mode = 6
+
+[node name="ShineCounter" type="Label" parent="Counters/CountersLabels/HBoxContainer"]
+margin_left = 34.0
+margin_top = 4.0
+margin_right = 64.0
+margin_bottom = 28.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "0/5"
+
+[node name="Padding" type="Control" parent="Counters/CountersLabels/HBoxContainer"]
+margin_left = 68.0
+margin_right = 70.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 2, 0 )
+
+[node name="StarCoinIcon" type="Control" parent="Counters/CountersLabels/HBoxContainer"]
+margin_left = 74.0
+margin_right = 102.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 28, 28 )
+
+[node name="TextureRect" type="TextureRect" parent="Counters/CountersLabels/HBoxContainer/StarCoinIcon"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -12.0
+margin_top = -13.0
+margin_right = 12.0
+margin_bottom = 11.0
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="StarCoinCounter" type="Label" parent="Counters/CountersLabels/HBoxContainer"]
+margin_left = 106.0
+margin_top = 4.0
+margin_right = 136.0
+margin_bottom = 28.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "0/5"
+
+[node name="Padding2" type="Control" parent="Counters/CountersLabels/HBoxContainer"]
+margin_left = 140.0
+margin_right = 144.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 4, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 5 )
+anims/transition = SubResource( 6 )
+
+[connection signal="screen_opened" from="." to="Counters" method="screen_opened"]
+[connection signal="pressed" from="Buttons/VBoxContainer/Resume" to="Buttons/ButtonFunctions" method="resume"]
+[connection signal="pressed" from="Buttons/VBoxContainer/Retry" to="Buttons/ButtonFunctions" method="retry"]
+[connection signal="pressed" from="Buttons/VBoxContainer/RetryStart/Countdown" to="Buttons/ButtonFunctions" method="retry_start"]
+[connection signal="text_changed" from="Buttons/VBoxContainer/RetryStart/Countdown" to="Buttons/VBoxContainer/RetryStart/Icon" method="update_offset"]
+[connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/Quit/Countdown" to="Buttons/ButtonFunctions" method="quit"]
+[connection signal="text_changed" from="Buttons/VBoxContainer/HBoxContainer/Quit/Countdown" to="Buttons/VBoxContainer/HBoxContainer/Quit/Icon" method="update_offset"]
+[connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/Options" to="." method="transition" binds= [ "Options" ]]
+[connection signal="pressed" from="ShineInfo/CenterContainer/ShineDetails/Buttons/Left" to="ShineInfo" method="prev_shine"]
+[connection signal="pressed" from="ShineInfo/CenterContainer/ShineDetails/Buttons/Right" to="ShineInfo" method="next_shine"]

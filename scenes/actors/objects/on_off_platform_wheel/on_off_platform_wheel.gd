@@ -24,7 +24,7 @@ var inverted : bool = false
 
 onready var frozen = false
 
-onready var hitbox = $EditorCircle
+onready var hitbox = $EditorCircle/EditorCircle
 
 func _set_properties():
 	savable_properties = ["parts", "speed", "radius", "platform_count",  "start_angle", "disappears", "inverted"]
@@ -82,7 +82,8 @@ func _process(_delta):
 		
 	if radius != last_radius:
 		update() #redraw points
-		hitbox.get_shape().radius = radius * 32
+		if is_instance_valid(hitbox):
+			hitbox.get_shape().radius = radius * 32
 		last_radius = radius
 		
 
@@ -135,4 +136,5 @@ func _set_platform_pos():
 			platform.set_position(new_pos)
 		else: # Editor
 			platform.position = new_pos
+			platform.reset_physics_interpolation()
 		angle += delta_angle

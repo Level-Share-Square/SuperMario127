@@ -1,0 +1,55 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scenes/actors/objects/cheep_cheep/cheep_cheep.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/actors/objects/blurp/blurp.png" type="Texture" id=2]
+[ext_resource path="res://scenes/actors/objects/blurp/recolorable.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 24, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 24, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 3 )
+region = Rect2( 48, 0, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 13 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[node name="CheepCheep" instance=ExtResource( 1 )]
+color = Color( 0.160784, 0.870588, 0, 1 )
+
+[node name="Sprite" parent="CheepCheep" index="0"]
+frames = SubResource( 4 )
+
+[node name="ColorSprite" parent="CheepCheep" index="1"]
+modulate = Color( 0.160784, 0.870588, 0, 1 )
+frames = SubResource( 11 )

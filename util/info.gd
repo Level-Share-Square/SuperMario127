@@ -1,5 +1,7 @@
 extends Node
 
+## todo: move all this to the LSS levels screen
+
 var id = ""
 var username = ""
 var icon = ""
@@ -15,11 +17,10 @@ onready var httpreq = HTTPRequest.new()
 
 func save_info():
 	var file = File.new()
-	var token = UserInfo.token
 	file.open("user://LSS.login", File.WRITE)
-	file.store_var(UserInfo.id)
-	file.store_var(UserInfo.username)
-	file.store_var(UserInfo.icon)
+	file.store_var(id)
+	file.store_var(username)
+	file.store_var(icon)
 	file.store_var(token)
 
 func _ready():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=1466 format=2]
+[gd_scene load_steps=1538 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -70,7 +70,7 @@
 [ext_resource path="res://scenes/editor/assets/save_icon_press.png" type="Texture" id=68]
 [ext_resource path="res://scenes/actors/objects/mushroom_body/mushroom_body.png" type="Texture" id=69]
 [ext_resource path="res://scenes/actors/objects/mushroom_curve/mushroom_curve.png" type="Texture" id=70]
-[ext_resource path="res://scenes/actors/objects/mushroom_top/mushroom_top.png" type="Texture" id=71]
+[ext_resource path="res://scenes/actors/objects/mushroom_top/preview.png" type="Texture" id=71]
 [ext_resource path="res://scenes/actors/objects/mushroom_top/icon.png" type="Texture" id=72]
 [ext_resource path="res://scenes/actors/objects/mushroom_body/icon.png" type="Texture" id=73]
 [ext_resource path="res://scenes/actors/objects/mushroom_curve/icon.png" type="Texture" id=74]
@@ -106,7 +106,7 @@
 [ext_resource path="res://scenes/actors/objects/big_bottle/icon.png" type="Texture" id=104]
 [ext_resource path="res://scenes/actors/objects/big_bottle/big_bottle.png" type="Texture" id=105]
 [ext_resource path="res://scenes/actors/objects/rainbow_breakable_block/icon.png" type="Texture" id=106]
-[ext_resource path="res://scenes/menu/levels_screen/ui/star_coin_icon.png" type="Texture" id=107]
+[ext_resource path="res://scenes/oldmenu/levels_screen/ui/star_coin_icon.png" type="Texture" id=107]
 [ext_resource path="res://scenes/actors/objects/pipe/preview.png" type="Texture" id=108]
 [ext_resource path="res://scenes/editor/assets/save_icon.png" type="Texture" id=109]
 [ext_resource path="res://scenes/actors/objects/pipe/icon.png" type="Texture" id=110]
@@ -165,10 +165,10 @@
 [ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=163]
 [ext_resource path="res://assets/fonts/DelfinoFont24.tres" type="DynamicFont" id=164]
 [ext_resource path="res://scenes/actors/objects/star_coin/icon.png" type="Texture" id=165]
-[ext_resource path="res://scenes/menu/127BackButton.tscn" type="PackedScene" id=166]
+[ext_resource path="res://scenes/oldmenu/127BackButton.tscn" type="PackedScene" id=166]
 [ext_resource path="res://scenes/editor/window/AreasWindow.tscn" type="PackedScene" id=167]
 [ext_resource path="res://scenes/editor/window/LevelSettingsWindow.tscn" type="PackedScene" id=168]
-[ext_resource path="res://scenes/menu/127Button.tscn" type="PackedScene" id=169]
+[ext_resource path="res://scenes/oldmenu/127Button.tscn" type="PackedScene" id=169]
 [ext_resource path="res://assets/tiles/red_gem_block/icon.png" type="Texture" id=170]
 [ext_resource path="res://assets/tiles/blue_gem_block/icon.png" type="Texture" id=171]
 [ext_resource path="res://assets/tiles/yellow_gem_block/icon.png" type="Texture" id=172]
@@ -1432,6 +1432,77 @@
 [ext_resource path="res://scenes/actors/objects/toad/preview.png" type="Texture" id=1430]
 [ext_resource path="res://scenes/actors/objects/toad/icon.png" type="Texture" id=1431]
 [ext_resource path="res://scenes/actors/objects/dialogue_trigger/icon.png" type="Texture" id=1432]
+[ext_resource path="res://scenes/actors/objects/zoom_trigger/zoom_trigger.png" type="Texture" id=1433]
+[ext_resource path="res://scenes/actors/objects/zoom_trigger/preview.png" type="Texture" id=1434]
+[ext_resource path="res://scenes/actors/objects/dialogue_trigger/sign.png" type="Texture" id=1435]
+[ext_resource path="res://scenes/actors/objects/wind_area/windreal.png" type="Texture" id=1436]
+[ext_resource path="res://scenes/actors/objects/wind_area/wind_icon.png" type="Texture" id=1437]
+[ext_resource path="res://scenes/actors/objects/rex/icon.png" type="Texture" id=1438]
+[ext_resource path="res://scenes/actors/objects/blurp/icon.png" type="Texture" id=1439]
+[ext_resource path="res://scenes/actors/objects/skeleton_goonie/preview.png" type="Texture" id=1440]
+[ext_resource path="res://scenes/actors/objects/nipper_plant/preview.png" type="Texture" id=1441]
+[ext_resource path="res://scenes/actors/objects/nipper_plant/icon.png" type="Texture" id=1442]
+[ext_resource path="res://scenes/actors/objects/skeleton_goonie/icon.png" type="Texture" id=1443]
+[ext_resource path="res://scenes/actors/objects/rex/preview.png" type="Texture" id=1444]
+[ext_resource path="res://scenes/actors/objects/blurp/preview.png" type="Texture" id=1445]
+[ext_resource path="res://scenes/editor/placement/rectangle_fill.gd" type="Script" id=1446]
+[ext_resource path="res://scenes/actors/objects/purple_starbit/icon.png" type="Texture" id=1447]
+[ext_resource path="res://scenes/actors/objects/purple_starbit/preview.png" type="Texture" id=1448]
+[ext_resource path="res://scenes/actors/objects/propeller/preview.png" type="Texture" id=1449]
+[ext_resource path="res://scenes/actors/objects/propeller/palettes/1/propeller_icon1.png" type="Texture" id=1450]
+[ext_resource path="res://scenes/actors/objects/propeller/propeller_icon.png" type="Texture" id=1451]
+[ext_resource path="res://scenes/editor/assets/rectangle_fill_tool.png" type="Texture" id=1452]
+[ext_resource path="res://scenes/editor/assets/rectangle_fill_tool_selected.png" type="Texture" id=1453]
+[ext_resource path="res://scenes/editor/assets/rectangle_fill_tool_disabled.png" type="Texture" id=1454]
+[ext_resource path="res://scenes/actors/objects/propeller/palettes/3/propeller_icon3.png" type="Texture" id=1455]
+[ext_resource path="res://scenes/actors/objects/propeller/palettes/2/propeller_icon2.png" type="Texture" id=1456]
+[ext_resource path="res://scenes/actors/objects/propeller/palettes/4/propeller_icon4.png" type="Texture" id=1457]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/previews/1.png" type="Texture" id=1458]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/previews/4.png" type="Texture" id=1459]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/previews/5.png" type="Texture" id=1460]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/previews/3.png" type="Texture" id=1461]
+[ext_resource path="res://scenes/actors/objects/snow_tree/palettes/previews/2.png" type="Texture" id=1462]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/4/MCoralY_preview.png" type="Texture" id=1463]
+[ext_resource path="res://scenes/actors/objects/coral/coral_preview.png" type="Texture" id=1464]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/3/MCoralR_preview.png" type="Texture" id=1465]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/2/MCoralG_preview.png" type="Texture" id=1466]
+[ext_resource path="res://scenes/actors/objects/coral/palettes/1/MCoralB_preview'.png" type="Texture" id=1467]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/3_preview.png" type="Texture" id=1468]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/preview.png" type="Texture" id=1469]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/5_preview.png" type="Texture" id=1470]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/7_preview.png" type="Texture" id=1471]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/1_preview.png" type="Texture" id=1472]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/2_preview.png" type="Texture" id=1473]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/4_preview.png" type="Texture" id=1474]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/6_preview.png" type="Texture" id=1475]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/9_preview.png" type="Texture" id=1476]
+[ext_resource path="res://scenes/actors/objects/bowser_banner/palletes/8_preview.png" type="Texture" id=1477]
+[ext_resource path="res://assets/tiles/glass/palette_icons/9.png" type="Texture" id=1478]
+[ext_resource path="res://assets/tiles/glass/palette_icons/8.png" type="Texture" id=1479]
+[ext_resource path="res://assets/tiles/glass/icon_slopel.png" type="Texture" id=1480]
+[ext_resource path="res://assets/tiles/glass/icon_sloper.png" type="Texture" id=1481]
+[ext_resource path="res://assets/tiles/glass/palette_icons/1_sloper.png" type="Texture" id=1482]
+[ext_resource path="res://assets/tiles/glass/palette_icons/2_sloper.png" type="Texture" id=1483]
+[ext_resource path="res://assets/tiles/glass/palette_icons/5_sloper.png" type="Texture" id=1484]
+[ext_resource path="res://assets/tiles/glass/palette_icons/3_sloper.png" type="Texture" id=1485]
+[ext_resource path="res://assets/tiles/glass/palette_icons/4_sloper.png" type="Texture" id=1486]
+[ext_resource path="res://assets/tiles/glass/palette_icons/6_sloper.png" type="Texture" id=1487]
+[ext_resource path="res://assets/tiles/glass/palette_icons/7_sloper.png" type="Texture" id=1488]
+[ext_resource path="res://assets/tiles/glass/palette_icons/8_slopel.png" type="Texture" id=1489]
+[ext_resource path="res://assets/tiles/glass/palette_icons/8_sloper.png" type="Texture" id=1490]
+[ext_resource path="res://assets/tiles/glass/palette_icons/4_slopel.png" type="Texture" id=1491]
+[ext_resource path="res://assets/tiles/glass/palette_icons/5_slopel.png" type="Texture" id=1492]
+[ext_resource path="res://assets/tiles/glass/palette_icons/7_slopel.png" type="Texture" id=1493]
+[ext_resource path="res://assets/tiles/glass/palette_icons/6_slopel.png" type="Texture" id=1494]
+[ext_resource path="res://assets/tiles/glass/palette_icons/9_slopel.png" type="Texture" id=1495]
+[ext_resource path="res://assets/tiles/glass/palette_icons/1_slopel.png" type="Texture" id=1496]
+[ext_resource path="res://assets/tiles/glass/palette_icons/2_slopel.png" type="Texture" id=1497]
+[ext_resource path="res://assets/tiles/glass/palette_icons/3_slopel.png" type="Texture" id=1498]
+[ext_resource path="res://assets/tiles/glass/palette_icons/9_sloper.png" type="Texture" id=1499]
+[ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1500]
+[ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=1501]
+[ext_resource path="res://scenes/actors/objects/princess_peach/icon.png" type="Texture" id=1502]
+[ext_resource path="res://scenes/actors/objects/yoshi/icon.png" type="Texture" id=1503]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2003,6 +2074,10 @@ WindowDialog/styles/panel = null
 size = 128
 font_data = ExtResource( 4 )
 
+[sub_resource type="RectangleShape2D" id=36]
+resource_local_to_scene = true
+extents = Vector2( 250, 250 )
+
 [sub_resource type="Animation" id=26]
 length = 0.001
 tracks/0/type = "bezier"
@@ -2131,7 +2206,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 770, -0.25, 0, 0.25, 0, 588, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 770, -0.25, 0, 0.25, 0, 548, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/1/type = "bezier"
@@ -2141,7 +2216,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 728, -0.25, 0, 0.25, 0, 546, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 728, -0.25, 0, 0.25, 0, 506, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/2/type = "bezier"
@@ -2164,7 +2239,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 588, -0.25, 0, 0.25, 0, 770, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 548, -0.25, 0, 0.25, 0, 770, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/1/type = "bezier"
@@ -2174,7 +2249,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 547, -0.25, 0, 0.25, 0, 728, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 507, -0.25, 0, 0.25, 0, 728, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 0.4 )
 }
 tracks/2/type = "bezier"
@@ -2196,9 +2271,28 @@ placeable_items_button_container_path = NodePath("UI/PlaceableItemsContainer")
 item_preview_path = NodePath("ItemPreview")
 shared_path = NodePath("Shared")
 object_settings_path = NodePath("UI/ObjectSettingsWindow")
+mouse_object_area_path = NodePath("MouseObjectArea")
 
 [node name="Shared" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0.198608, -0.468788 )
+
+[node name="Placement" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+
+[node name="RectangleFill" type="Control" parent="Placement"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 1446 )
+
+[node name="Node2D" type="Node2D" parent="Placement/RectangleFill"]
+z_index = 10
+
+[node name="Drag" type="ColorRect" parent="Placement/RectangleFill/Node2D"]
+mouse_filter = 2
+color = Color( 1, 1, 1, 0.501961 )
 
 [node name="PlaceableItems" type="Node" parent="."]
 
@@ -2370,17 +2464,6 @@ object_size = Vector2( 16, 16 )
 icon = ExtResource( 134 )
 preview = ExtResource( 134 )
 
-[node name="Sign" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 14
-is_object = true
-object_center = Vector2( 16, 12 )
-tile_mode_offset = Vector2( 0, -4 )
-palette_icons = [ ExtResource( 507 ), ExtResource( 1259 ), ExtResource( 1260 ), ExtResource( 1262 ), ExtResource( 1261 ), ExtResource( 1263 ), ExtResource( 1411 ), ExtResource( 1410 ), ExtResource( 1407 ), ExtResource( 1406 ) ]
-palette_previews = [ ExtResource( 507 ), ExtResource( 1259 ), ExtResource( 1260 ), ExtResource( 1262 ), ExtResource( 1261 ), ExtResource( 1263 ), ExtResource( 1411 ), ExtResource( 1410 ), ExtResource( 1407 ), ExtResource( 1406 ) ]
-icon = ExtResource( 507 )
-preview = ExtResource( 507 )
-
 [node name="Water" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
 object_id = 72
@@ -2467,6 +2550,8 @@ preview = ExtResource( 830 )
 script = ExtResource( 24 )
 object_id = 111
 is_object = true
+change_to = "AreaTransition"
+items_in_sequence = 3
 icon = ExtResource( 974 )
 preview = ExtResource( 836 )
 
@@ -2474,18 +2559,37 @@ preview = ExtResource( 836 )
 script = ExtResource( 24 )
 object_id = 126
 is_object = true
-icon = ExtResource( 974 )
-preview = ExtResource( 836 )
+change_to = "DeathPlane"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 1434 )
+preview = ExtResource( 1433 )
 
-[node name="Toad" type="Node" parent="PlaceableItems/SpecialGroup"]
+[node name="WindArea" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
-object_id = 127
+object_id = 129
 is_object = true
-item_name = "Toad"
-icon = ExtResource( 1431 )
-preview = ExtResource( 1430 )
+item_name = "Wind Area"
+icon = ExtResource( 1437 )
+preview = ExtResource( 1436 )
 
-[node name="Dialogue" type="Node" parent="PlaceableItems/SpecialGroup"]
+[node name="DialogueGruop" type="Node" parent="PlaceableItems"]
+script = ExtResource( 25 )
+color = Color( 0.356863, 0.231373, 0, 1 )
+group_name = "NPCs"
+
+[node name="Sign" type="Node" parent="PlaceableItems/DialogueGruop"]
+script = ExtResource( 24 )
+object_id = 14
+is_object = true
+object_center = Vector2( 16, 12 )
+tile_mode_offset = Vector2( 0, -4 )
+palette_icons = [ ExtResource( 507 ), ExtResource( 1259 ), ExtResource( 1260 ), ExtResource( 1262 ), ExtResource( 1261 ), ExtResource( 1263 ), ExtResource( 1411 ), ExtResource( 1410 ), ExtResource( 1407 ), ExtResource( 1406 ) ]
+palette_previews = [ ExtResource( 507 ), ExtResource( 1259 ), ExtResource( 1260 ), ExtResource( 1262 ), ExtResource( 1261 ), ExtResource( 1263 ), ExtResource( 1411 ), ExtResource( 1410 ), ExtResource( 1407 ), ExtResource( 1406 ) ]
+icon = ExtResource( 507 )
+preview = ExtResource( 507 )
+
+[node name="Dialogue" type="Node" parent="PlaceableItems/DialogueGruop"]
 script = ExtResource( 24 )
 object_id = 128
 is_object = true
@@ -2493,7 +2597,160 @@ object_center = Vector2( 16, 12 )
 tile_mode_offset = Vector2( 0, -4 )
 item_name = "DialogueTrigger"
 icon = ExtResource( 1432 )
-preview = ExtResource( 1432 )
+preview = ExtResource( 1435 )
+
+[node name="Toad" type="Node" parent="PlaceableItems/DialogueGruop"]
+script = ExtResource( 24 )
+object_id = 127
+is_object = true
+item_name = "Toad"
+change_to = "RedBobOmb"
+items_in_sequence = 4
+icon = ExtResource( 1431 )
+preview = ExtResource( 1430 )
+
+[node name="RedBobOmb" type="Node" parent="PlaceableItems/DialogueGruop"]
+script = ExtResource( 24 )
+object_id = 139
+is_object = true
+item_name = "Pink Bob-omb"
+change_to = "Yoshi"
+items_in_sequence = 4
+index_in_sequence = 1
+icon = ExtResource( 1502 )
+preview = ExtResource( 1502 )
+
+[node name="Yoshi" type="Node" parent="PlaceableItems/DialogueGruop"]
+script = ExtResource( 24 )
+object_id = 138
+is_object = true
+item_name = "Yoshi"
+change_to = "PrincessPeach"
+items_in_sequence = 4
+index_in_sequence = 2
+icon = ExtResource( 1503 )
+preview = ExtResource( 1503 )
+
+[node name="PrincessPeach" type="Node" parent="PlaceableItems/DialogueGruop"]
+script = ExtResource( 24 )
+object_id = 137
+is_object = true
+item_name = "Princess Peach"
+change_to = "Toad"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 1502 )
+preview = ExtResource( 1502 )
+
+[node name="SwitchesGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 25 )
+color = Color( 0.0862745, 0.188235, 0.835294, 1 )
+group_name = "Switches"
+
+[node name="PSwitch" type="Node" parent="PlaceableItems/SwitchesGroup"]
+script = ExtResource( 24 )
+object_id = 80
+is_object = true
+object_center = Vector2( 16, 16 )
+item_name = "P Switch"
+change_to = "PSwitchBlock"
+items_in_sequence = 2
+icon = ExtResource( 340 )
+preview = ExtResource( 339 )
+
+[node name="PSwitchBlock" type="Node" parent="PlaceableItems/SwitchesGroup"]
+script = ExtResource( 24 )
+object_id = 79
+is_object = true
+object_center = Vector2( 16, 16 )
+item_name = "P Switch Block"
+change_to = "PSwitch"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 337 )
+preview = ExtResource( 336 )
+
+[node name="CrystalTap" type="Node" parent="PlaceableItems/SwitchesGroup"]
+script = ExtResource( 24 )
+object_id = 81
+is_object = true
+object_center = Vector2( 16, 16 )
+icon = ExtResource( 341 )
+preview = ExtResource( 342 )
+
+[node name="OnOffSwitch" type="Node" parent="PlaceableItems/SwitchesGroup"]
+script = ExtResource( 24 )
+object_id = 92
+is_object = true
+object_center = Vector2( 16, 16 )
+item_name = "On/Off Switch"
+palette_icons = [ ExtResource( 626 ), ExtResource( 614 ), ExtResource( 630 ), ExtResource( 629 ), ExtResource( 628 ), ExtResource( 627 ), ExtResource( 642 ) ]
+palette_previews = [ ExtResource( 135 ), ExtResource( 617 ), ExtResource( 618 ), ExtResource( 620 ), ExtResource( 615 ), ExtResource( 619 ), ExtResource( 641 ) ]
+object_size = Vector2( 32, 32 )
+change_to = "SwitchBlock"
+items_in_sequence = 5
+icon = ExtResource( 626 )
+preview = ExtResource( 135 )
+
+[node name="SwitchBlock" type="Node" parent="PlaceableItems/SwitchesGroup"]
+script = ExtResource( 24 )
+object_id = 93
+is_object = true
+object_center = Vector2( 16, 16 )
+item_name = "Switch Block"
+palette_icons = [ ExtResource( 637 ), ExtResource( 638 ), ExtResource( 633 ), ExtResource( 639 ), ExtResource( 636 ), ExtResource( 635 ), ExtResource( 640 ) ]
+palette_previews = [ ExtResource( 621 ), ExtResource( 622 ), ExtResource( 624 ), ExtResource( 616 ), ExtResource( 623 ), ExtResource( 625 ), ExtResource( 634 ) ]
+object_size = Vector2( 32, 32 )
+change_to = "OnOffFloorSwitch"
+items_in_sequence = 5
+index_in_sequence = 1
+icon = ExtResource( 637 )
+preview = ExtResource( 621 )
+
+[node name="OnOffFloorSwitch" type="Node" parent="PlaceableItems/SwitchesGroup"]
+script = ExtResource( 24 )
+object_id = 95
+is_object = true
+object_center = Vector2( 16, 20 )
+tile_mode_offset = Vector2( 0, -2 )
+item_name = "On/Off Floor Switch"
+palette_icons = [ ExtResource( 632 ), ExtResource( 670 ), ExtResource( 672 ), ExtResource( 671 ), ExtResource( 669 ), ExtResource( 668 ), ExtResource( 649 ) ]
+palette_previews = [ ExtResource( 631 ), ExtResource( 682 ), ExtResource( 678 ), ExtResource( 680 ), ExtResource( 679 ), ExtResource( 677 ), ExtResource( 681 ) ]
+change_to = "OnOffTouchLift"
+items_in_sequence = 5
+index_in_sequence = 2
+icon = ExtResource( 632 )
+preview = ExtResource( 631 )
+
+[node name="OnOffTouchLift" type="Node" parent="PlaceableItems/SwitchesGroup"]
+script = ExtResource( 24 )
+object_id = 94
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+palette_icons = [ ExtResource( 674 ), ExtResource( 648 ), ExtResource( 647 ), ExtResource( 645 ), ExtResource( 644 ), ExtResource( 643 ), ExtResource( 675 ) ]
+palette_previews = [ ExtResource( 676 ), ExtResource( 650 ), ExtResource( 652 ), ExtResource( 653 ), ExtResource( 651 ), ExtResource( 654 ), ExtResource( 673 ) ]
+change_to = "OnOffPlatformWheel"
+items_in_sequence = 5
+index_in_sequence = 3
+icon = ExtResource( 674 )
+preview = ExtResource( 676 )
+
+[node name="OnOffPlatformWheel" type="Node" parent="PlaceableItems/SwitchesGroup"]
+script = ExtResource( 24 )
+object_id = 96
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+palette_icons = [ ExtResource( 646 ), ExtResource( 662 ), ExtResource( 663 ), ExtResource( 661 ), ExtResource( 664 ), ExtResource( 666 ), ExtResource( 665 ) ]
+palette_previews = [ ExtResource( 667 ), ExtResource( 660 ), ExtResource( 659 ), ExtResource( 655 ), ExtResource( 656 ), ExtResource( 657 ), ExtResource( 658 ) ]
+change_to = "OnOffSwitch"
+items_in_sequence = 5
+index_in_sequence = 4
+icon = ExtResource( 646 )
+preview = ExtResource( 667 )
 
 [node name="TeleportGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
@@ -2557,99 +2814,11 @@ preview = ExtResource( 847 )
 script = ExtResource( 24 )
 object_id = 112
 is_object = true
+change_to = "ZoomTrigger"
+items_in_sequence = 3
+index_in_sequence = 1
 icon = ExtResource( 973 )
 preview = ExtResource( 972 )
-
-[node name="SwitchesGroup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 25 )
-color = Color( 0.0862745, 0.188235, 0.835294, 1 )
-group_name = "Switches"
-
-[node name="PSwitch" type="Node" parent="PlaceableItems/SwitchesGroup"]
-script = ExtResource( 24 )
-object_id = 80
-is_object = true
-object_center = Vector2( 16, 16 )
-item_name = "P Switch"
-icon = ExtResource( 340 )
-preview = ExtResource( 339 )
-
-[node name="PSwitchBlock" type="Node" parent="PlaceableItems/SwitchesGroup"]
-script = ExtResource( 24 )
-object_id = 79
-is_object = true
-object_center = Vector2( 16, 16 )
-item_name = "P Switch Block"
-icon = ExtResource( 337 )
-preview = ExtResource( 336 )
-
-[node name="CrystalTap" type="Node" parent="PlaceableItems/SwitchesGroup"]
-script = ExtResource( 24 )
-object_id = 81
-is_object = true
-object_center = Vector2( 16, 16 )
-icon = ExtResource( 341 )
-preview = ExtResource( 342 )
-
-[node name="OnOffSwitch" type="Node" parent="PlaceableItems/SwitchesGroup"]
-script = ExtResource( 24 )
-object_id = 92
-is_object = true
-object_center = Vector2( 16, 16 )
-item_name = "On/Off Switch"
-palette_icons = [ ExtResource( 626 ), ExtResource( 614 ), ExtResource( 630 ), ExtResource( 629 ), ExtResource( 628 ), ExtResource( 627 ), ExtResource( 642 ) ]
-palette_previews = [ ExtResource( 135 ), ExtResource( 617 ), ExtResource( 618 ), ExtResource( 620 ), ExtResource( 615 ), ExtResource( 619 ), ExtResource( 641 ) ]
-object_size = Vector2( 32, 32 )
-icon = ExtResource( 626 )
-preview = ExtResource( 135 )
-
-[node name="SwitchBlock" type="Node" parent="PlaceableItems/SwitchesGroup"]
-script = ExtResource( 24 )
-object_id = 93
-is_object = true
-object_center = Vector2( 16, 16 )
-item_name = "Switch Block"
-palette_icons = [ ExtResource( 637 ), ExtResource( 638 ), ExtResource( 633 ), ExtResource( 639 ), ExtResource( 636 ), ExtResource( 635 ), ExtResource( 640 ) ]
-palette_previews = [ ExtResource( 621 ), ExtResource( 622 ), ExtResource( 624 ), ExtResource( 616 ), ExtResource( 623 ), ExtResource( 625 ), ExtResource( 634 ) ]
-object_size = Vector2( 32, 32 )
-icon = ExtResource( 637 )
-preview = ExtResource( 621 )
-
-[node name="OnOffFloorSwitch" type="Node" parent="PlaceableItems/SwitchesGroup"]
-script = ExtResource( 24 )
-object_id = 95
-is_object = true
-object_center = Vector2( 16, 16 )
-tile_mode_offset = Vector2( 0, -2 )
-item_name = "On/Off Floor Switch"
-palette_icons = [ ExtResource( 632 ), ExtResource( 670 ), ExtResource( 672 ), ExtResource( 671 ), ExtResource( 669 ), ExtResource( 668 ), ExtResource( 649 ) ]
-palette_previews = [ ExtResource( 631 ), ExtResource( 682 ), ExtResource( 678 ), ExtResource( 680 ), ExtResource( 679 ), ExtResource( 677 ), ExtResource( 681 ) ]
-icon = ExtResource( 632 )
-preview = ExtResource( 631 )
-
-[node name="OnOffTouchLift" type="Node" parent="PlaceableItems/SwitchesGroup"]
-script = ExtResource( 24 )
-object_id = 94
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-palette_icons = [ ExtResource( 674 ), ExtResource( 648 ), ExtResource( 647 ), ExtResource( 645 ), ExtResource( 644 ), ExtResource( 643 ), ExtResource( 675 ) ]
-palette_previews = [ ExtResource( 676 ), ExtResource( 650 ), ExtResource( 652 ), ExtResource( 653 ), ExtResource( 651 ), ExtResource( 654 ), ExtResource( 673 ) ]
-icon = ExtResource( 674 )
-preview = ExtResource( 676 )
-
-[node name="OnOffPlatformWheel" type="Node" parent="PlaceableItems/SwitchesGroup"]
-script = ExtResource( 24 )
-object_id = 96
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-palette_icons = [ ExtResource( 646 ), ExtResource( 662 ), ExtResource( 663 ), ExtResource( 661 ), ExtResource( 664 ), ExtResource( 666 ), ExtResource( 665 ) ]
-palette_previews = [ ExtResource( 667 ), ExtResource( 660 ), ExtResource( 659 ), ExtResource( 655 ), ExtResource( 656 ), ExtResource( 657 ), ExtResource( 658 ) ]
-icon = ExtResource( 646 )
-preview = ExtResource( 667 )
 
 [node name="CollectiblesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
@@ -2661,21 +2830,10 @@ script = ExtResource( 24 )
 object_id = 1
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "RedCoin"
-items_in_sequence = 3
+change_to = "BlueCoin"
+items_in_sequence = 2
 icon = ExtResource( 17 )
 preview = ExtResource( 16 )
-
-[node name="RedCoin" type="Node" parent="PlaceableItems/CollectiblesGroup"]
-script = ExtResource( 24 )
-object_id = 30
-is_object = true
-object_center = Vector2( 16, 16 )
-change_to = "BlueCoin"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 136 )
-preview = ExtResource( 6 )
 
 [node name="BlueCoin" type="Node" parent="PlaceableItems/CollectiblesGroup"]
 script = ExtResource( 24 )
@@ -2683,19 +2841,40 @@ object_id = 40
 is_object = true
 object_center = Vector2( 16, 16 )
 change_to = "Coin"
-items_in_sequence = 3
-index_in_sequence = 2
+items_in_sequence = 2
+index_in_sequence = 1
 icon = SubResource( 1 )
 preview = SubResource( 2 )
+
+[node name="RedCoin" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 30
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "PurpleStarbits"
+items_in_sequence = 3
+icon = ExtResource( 136 )
+preview = ExtResource( 6 )
+
+[node name="PurpleStarbits" type="Node" parent="PlaceableItems/CollectiblesGroup"]
+script = ExtResource( 24 )
+object_id = 135
+is_object = true
+object_center = Vector2( 16, 16 )
+change_to = "ShineShard"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 1447 )
+preview = ExtResource( 1448 )
 
 [node name="ShineShard" type="Node" parent="PlaceableItems/CollectiblesGroup"]
 script = ExtResource( 24 )
 object_id = 45
 is_object = true
 object_center = Vector2( 16, 16 )
-change_to = "StarCoin"
+change_to = "RedCoin"
 items_in_sequence = 3
-index_in_sequence = 1
+index_in_sequence = 2
 icon = ExtResource( 148 )
 preview = ExtResource( 150 )
 
@@ -2705,8 +2884,8 @@ object_id = 2
 is_object = true
 object_center = Vector2( 16, 16 )
 item_name = "Shine Sprite"
-change_to = "ShineShard"
-items_in_sequence = 3
+change_to = "StarCoin"
+items_in_sequence = 2
 icon = ExtResource( 15 )
 preview = ExtResource( 15 )
 
@@ -2716,8 +2895,8 @@ object_id = 52
 is_object = true
 object_center = Vector2( 16, 16 )
 change_to = "Shine"
-items_in_sequence = 3
-index_in_sequence = 2
+items_in_sequence = 2
+index_in_sequence = 1
 icon = ExtResource( 165 )
 preview = ExtResource( 165 )
 
@@ -2729,7 +2908,7 @@ object_center = Vector2( 8, 0 )
 tile_mode_offset = Vector2( 0, -8 )
 tile_mode_step = 16
 change_to = "BigBottle"
-items_in_sequence = 2
+items_in_sequence = 3
 icon = ExtResource( 103 )
 preview = ExtResource( 102 )
 
@@ -2740,8 +2919,8 @@ is_object = true
 object_center = Vector2( 8, 0 )
 tile_mode_offset = Vector2( 0, -8 )
 tile_mode_step = 16
-change_to = "SmallBottle"
-items_in_sequence = 2
+change_to = "WaterBalloon"
+items_in_sequence = 3
 index_in_sequence = 1
 icon = ExtResource( 104 )
 preview = ExtResource( 105 )
@@ -2753,6 +2932,9 @@ is_object = true
 object_center = Vector2( 8, 0 )
 tile_mode_offset = Vector2( 0, -8 )
 tile_mode_step = 16
+change_to = "SmallBottle"
+items_in_sequence = 3
+index_in_sequence = 2
 icon = ExtResource( 685 )
 preview = ExtResource( 684 )
 
@@ -2858,6 +3040,9 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
+change_to = "TouchLift"
+items_in_sequence = 2
+index_in_sequence = 1
 icon = ExtResource( 156 )
 preview = ExtResource( 157 )
 
@@ -2868,6 +3053,8 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
+change_to = "PlatformWheel"
+items_in_sequence = 2
 icon = ExtResource( 153 )
 preview = ExtResource( 154 )
 
@@ -2963,6 +3150,8 @@ tile_mode_offset = Vector2( 64, 4 )
 tile_mode_step = 64
 palette_icons = [ ExtResource( 1189 ), ExtResource( 1191 ), ExtResource( 1201 ), ExtResource( 1192 ), ExtResource( 1193 ), ExtResource( 1194 ) ]
 palette_previews = [ ExtResource( 1200 ), ExtResource( 1195 ), ExtResource( 1196 ), ExtResource( 1197 ), ExtResource( 1198 ), ExtResource( 1199 ) ]
+change_to = "BuoyantBouncer"
+items_in_sequence = 2
 icon = ExtResource( 1189 )
 preview = ExtResource( 1188 )
 
@@ -2975,6 +3164,9 @@ tile_mode_offset = Vector2( 64, 4 )
 tile_mode_step = 64
 palette_icons = [ ExtResource( 1209 ), ExtResource( 1207 ), ExtResource( 1214 ), ExtResource( 1211 ), ExtResource( 1206 ), ExtResource( 1208 ) ]
 palette_previews = [ ExtResource( 1213 ), ExtResource( 1216 ), ExtResource( 1205 ), ExtResource( 1210 ), ExtResource( 1212 ), ExtResource( 1215 ) ]
+change_to = "BuoyantPlatform"
+items_in_sequence = 2
+index_in_sequence = 1
 icon = ExtResource( 1209 )
 preview = ExtResource( 1213 )
 
@@ -3011,6 +3203,15 @@ palette_previews = [ ExtResource( 852 ), ExtResource( 851 ), ExtResource( 853 ),
 icon = ExtResource( 852 )
 preview = ExtResource( 852 )
 
+[node name="Propeller" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 24 )
+object_id = 136
+is_object = true
+palette_icons = [ ExtResource( 1451 ), ExtResource( 1450 ), ExtResource( 1456 ), ExtResource( 1455 ), ExtResource( 1457 ) ]
+palette_previews = [ ExtResource( 1449 ), ExtResource( 1449 ), ExtResource( 1449 ), ExtResource( 1449 ), ExtResource( 1449 ) ]
+icon = ExtResource( 1451 )
+preview = ExtResource( 1449 )
+
 [node name="Jelectro" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 24 )
 object_id = 69
@@ -3027,6 +3228,15 @@ object_center = Vector2( 8, 8 )
 tile_mode_step = 16
 icon = ExtResource( 133 )
 preview = ExtResource( 132 )
+
+[node name="Rex" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 24 )
+object_id = 130
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+icon = ExtResource( 1438 )
+preview = ExtResource( 1444 )
 
 [node name="KoopaTroopa" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 24 )
@@ -3068,8 +3278,22 @@ object_id = 74
 is_object = true
 object_center = Vector2( 8, 8 )
 tile_mode_step = 16
+change_to = "Blurp"
+items_in_sequence = 2
 icon = ExtResource( 240 )
 preview = ExtResource( 239 )
+
+[node name="Blurp" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 24 )
+object_id = 132
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+change_to = "CheepCheep"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 1439 )
+preview = ExtResource( 1445 )
 
 [node name="Boo" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 24 )
@@ -3086,8 +3310,23 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
+change_to = "SkeletonGoonie"
+items_in_sequence = 2
 icon = ExtResource( 231 )
 preview = ExtResource( 232 )
+
+[node name="SkeletonGoonie" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 24 )
+object_id = 131
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+change_to = "Goonie"
+items_in_sequence = 2
+index_in_sequence = 1
+icon = ExtResource( 1443 )
+preview = ExtResource( 1440 )
 
 [node name="BillBlaster" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 24 )
@@ -3112,6 +3351,13 @@ object_id = 110
 is_object = true
 icon = ExtResource( 834 )
 preview = ExtResource( 835 )
+
+[node name="NipperPlant" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 24 )
+object_id = 133
+is_object = true
+icon = ExtResource( 1442 )
+preview = ExtResource( 1441 )
 
 [node name="GrassGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
@@ -3518,7 +3764,7 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 16, -16 )
 palette_icons = [ ExtResource( 124 ), ExtResource( 854 ), ExtResource( 848 ), ExtResource( 856 ), ExtResource( 855 ), ExtResource( 857 ) ]
-palette_previews = [ ExtResource( 125 ), ExtResource( 854 ), ExtResource( 848 ), ExtResource( 856 ), ExtResource( 855 ), ExtResource( 857 ) ]
+palette_previews = [ ExtResource( 124 ), ExtResource( 1458 ), ExtResource( 1462 ), ExtResource( 1461 ), ExtResource( 1459 ), ExtResource( 1460 ) ]
 change_to = "LargeSnowTree"
 items_in_sequence = 2
 icon = ExtResource( 125 )
@@ -3991,6 +4237,7 @@ palette_icons = [ ExtResource( 1069 ), ExtResource( 1068 ), ExtResource( 1025 ),
 palette_previews = [ ExtResource( 1069 ), ExtResource( 1068 ), ExtResource( 1025 ), ExtResource( 1029 ), ExtResource( 1028 ), ExtResource( 1027 ) ]
 change_to = "VineStem"
 items_in_sequence = 6
+index_in_sequence = 1
 icon = ExtResource( 1069 )
 preview = ExtResource( 1069 )
 
@@ -4004,6 +4251,7 @@ palette_icons = [ ExtResource( 1072 ), ExtResource( 1071 ), ExtResource( 1033 ),
 palette_previews = [ ExtResource( 1070 ), ExtResource( 1073 ), ExtResource( 1036 ), ExtResource( 1037 ), ExtResource( 1038 ), ExtResource( 1039 ) ]
 change_to = "VineThorns"
 items_in_sequence = 6
+index_in_sequence = 2
 icon = ExtResource( 1072 )
 preview = ExtResource( 1070 )
 
@@ -4017,6 +4265,7 @@ palette_icons = [ ExtResource( 1076 ), ExtResource( 1075 ), ExtResource( 1060 ),
 palette_previews = [ ExtResource( 1063 ), ExtResource( 1074 ), ExtResource( 1043 ), ExtResource( 1044 ), ExtResource( 1040 ), ExtResource( 1041 ) ]
 change_to = "VineBend"
 items_in_sequence = 6
+index_in_sequence = 3
 icon = ExtResource( 1076 )
 preview = ExtResource( 1074 )
 
@@ -4031,6 +4280,7 @@ palette_icons = [ ExtResource( 1077 ), ExtResource( 1078 ), ExtResource( 1047 ),
 palette_previews = [ ExtResource( 1080 ), ExtResource( 1079 ), ExtResource( 1051 ), ExtResource( 1054 ), ExtResource( 1053 ), ExtResource( 1052 ) ]
 change_to = "VineStemEnd"
 items_in_sequence = 6
+index_in_sequence = 4
 icon = ExtResource( 1077 )
 preview = ExtResource( 1080 )
 
@@ -4044,6 +4294,7 @@ palette_icons = [ ExtResource( 1081 ), ExtResource( 1058 ), ExtResource( 1055 ),
 palette_previews = [ ExtResource( 1081 ), ExtResource( 1058 ), ExtResource( 1055 ), ExtResource( 1056 ), ExtResource( 1059 ), ExtResource( 1057 ) ]
 change_to = "VineFlower"
 items_in_sequence = 6
+index_in_sequence = 5
 icon = ExtResource( 1081 )
 preview = ExtResource( 1081 )
 
@@ -4131,10 +4382,36 @@ preview = ExtResource( 170 )
 [node name="Glass" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
 tileset_id = 9
-palette_icons = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
-palette_previews = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ) ]
+palette_icons = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ), ExtResource( 1479 ), ExtResource( 1478 ) ]
+palette_previews = [ ExtResource( 58 ), ExtResource( 276 ), ExtResource( 279 ), ExtResource( 281 ), ExtResource( 277 ), ExtResource( 282 ), ExtResource( 280 ), ExtResource( 278 ), ExtResource( 1479 ), ExtResource( 1478 ) ]
+change_to = "GlassSlopeLeft"
+items_in_sequence = 3
 icon = ExtResource( 58 )
 preview = ExtResource( 58 )
+
+[node name="GlassSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 24 )
+tileset_id = 9
+tile_id = 2
+palette_icons = [ ExtResource( 1480 ), ExtResource( 1496 ), ExtResource( 1497 ), ExtResource( 1498 ), ExtResource( 1491 ), ExtResource( 1492 ), ExtResource( 1494 ), ExtResource( 1493 ), ExtResource( 1489 ), ExtResource( 1495 ) ]
+palette_previews = [ ExtResource( 1480 ), ExtResource( 1496 ), ExtResource( 1497 ), ExtResource( 1498 ), ExtResource( 1491 ), ExtResource( 1492 ), ExtResource( 1494 ), ExtResource( 1493 ), ExtResource( 1489 ), ExtResource( 1495 ) ]
+change_to = "GlassSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 1480 )
+preview = ExtResource( 1480 )
+
+[node name="GlassSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 24 )
+tileset_id = 9
+tile_id = 3
+palette_icons = [ ExtResource( 1481 ), ExtResource( 1482 ), ExtResource( 1483 ), ExtResource( 1485 ), ExtResource( 1486 ), ExtResource( 1484 ), ExtResource( 1487 ), ExtResource( 1488 ), ExtResource( 1490 ), ExtResource( 1499 ) ]
+palette_previews = [ ExtResource( 1481 ), ExtResource( 1482 ), ExtResource( 1483 ), ExtResource( 1485 ), ExtResource( 1486 ), ExtResource( 1484 ), ExtResource( 1487 ), ExtResource( 1488 ), ExtResource( 1490 ), ExtResource( 1499 ) ]
+change_to = "Glass"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 1481 )
+preview = ExtResource( 1481 )
 
 [node name="MarbleBrick" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
@@ -4549,9 +4826,9 @@ script = ExtResource( 24 )
 object_id = 104
 is_object = true
 palette_icons = [ ExtResource( 713 ), ExtResource( 1114 ), ExtResource( 1122 ), ExtResource( 1115 ), ExtResource( 1120 ), ExtResource( 1119 ), ExtResource( 1117 ), ExtResource( 1116 ), ExtResource( 1121 ), ExtResource( 1118 ) ]
-palette_previews = [ ExtResource( 713 ), ExtResource( 1114 ), ExtResource( 1122 ), ExtResource( 1115 ), ExtResource( 1120 ), ExtResource( 1119 ), ExtResource( 1117 ), ExtResource( 1116 ), ExtResource( 1121 ), ExtResource( 1118 ) ]
+palette_previews = [ ExtResource( 1469 ), ExtResource( 1472 ), ExtResource( 1473 ), ExtResource( 1468 ), ExtResource( 1474 ), ExtResource( 1470 ), ExtResource( 1475 ), ExtResource( 1471 ), ExtResource( 1477 ), ExtResource( 1476 ) ]
 icon = ExtResource( 713 )
-preview = ExtResource( 713 )
+preview = ExtResource( 1469 )
 
 [node name="MiscGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
@@ -4696,12 +4973,12 @@ object_id = 97
 is_object = true
 object_center = Vector2( 32, 24 )
 palette_icons = [ ExtResource( 683 ), ExtResource( 694 ), ExtResource( 695 ), ExtResource( 693 ), ExtResource( 696 ) ]
-palette_previews = [ ExtResource( 683 ), ExtResource( 694 ), ExtResource( 695 ), ExtResource( 693 ), ExtResource( 696 ) ]
+palette_previews = [ ExtResource( 1464 ), ExtResource( 1467 ), ExtResource( 1466 ), ExtResource( 1465 ), ExtResource( 1463 ) ]
 change_to = "CoralLarge"
 items_in_sequence = 3
 index_in_sequence = 1
 icon = ExtResource( 683 )
-preview = ExtResource( 683 )
+preview = ExtResource( 1464 )
 
 [node name="CoralLarge" type="Node" parent="PlaceableItems/MiscGroup"]
 script = ExtResource( 24 )
@@ -4732,6 +5009,18 @@ object_id = 99
 is_object = true
 icon = ExtResource( 686 )
 preview = ExtResource( 753 )
+
+[node name="Options" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="ScreenManager" type="Control" parent="Options"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 1501 )
+
+[node name="Options" parent="Options/ScreenManager" instance=ExtResource( 1500 )]
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
@@ -4872,6 +5161,7 @@ margin_right = 254.0
 margin_bottom = 130.0
 rect_scale = Vector2( 0.333, 0.333 )
 focus_mode = 0
+enabled_focus_mode = 0
 texture_normal = ExtResource( 48 )
 texture_pressed = ExtResource( 65 )
 texture_hover = ExtResource( 39 )
@@ -4885,10 +5175,12 @@ selected_tex = ExtResource( 65 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/EraserTool"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/EraserTool"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="SelectionTool" type="TextureButton" parent="UI/Tools/Control"]
 margin_left = 97.0
@@ -4897,6 +5189,7 @@ margin_right = 217.0
 margin_bottom = 131.0
 rect_scale = Vector2( 0.333, 0.333 )
 focus_mode = 0
+enabled_focus_mode = 0
 texture_normal = ExtResource( 67 )
 texture_pressed = ExtResource( 41 )
 texture_hover = ExtResource( 57 )
@@ -4909,10 +5202,12 @@ selected_tex = ExtResource( 41 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/SelectionTool"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/SelectionTool"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="BoundaryTool" type="TextureButton" parent="UI/Tools/Control"]
 margin_left = 18.0
@@ -4920,6 +5215,8 @@ margin_top = 7.0
 margin_right = 144.0
 margin_bottom = 133.0
 rect_scale = Vector2( 0.333, 0.333 )
+focus_mode = 0
+enabled_focus_mode = 0
 texture_normal = ExtResource( 1032 )
 texture_pressed = ExtResource( 1042 )
 texture_hover = ExtResource( 1035 )
@@ -4933,10 +5230,12 @@ selected_tex = ExtResource( 1042 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/BoundaryTool"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/BoundaryTool"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="DragTool" type="TextureButton" parent="UI/Tools/Control"]
 margin_left = 58.0
@@ -4944,6 +5243,8 @@ margin_top = 12.0
 margin_right = 175.0
 margin_bottom = 120.0
 rect_scale = Vector2( 0.333, 0.333 )
+focus_mode = 0
+enabled_focus_mode = 0
 texture_normal = ExtResource( 1217 )
 texture_pressed = ExtResource( 1218 )
 texture_hover = ExtResource( 1219 )
@@ -4959,10 +5260,42 @@ selected_tex = ExtResource( 1218 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/DragTool"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/DragTool"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
+
+[node name="RectangleTool" type="TextureButton" parent="UI/Tools/Control"]
+margin_left = 173.0
+margin_top = 12.0
+margin_right = 290.0
+margin_bottom = 120.0
+rect_scale = Vector2( 0.333, 0.333 )
+focus_mode = 0
+enabled_focus_mode = 0
+texture_normal = ExtResource( 1452 )
+texture_pressed = ExtResource( 1453 )
+texture_hover = ExtResource( 1454 )
+expand = true
+stretch_mode = 5
+script = ExtResource( 28 )
+editor = NodePath("../../../..")
+tool_index = 3
+normal_tex = ExtResource( 1452 )
+hover_tex = ExtResource( 1454 )
+selected_tex = ExtResource( 1453 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/Tools/Control/RectangleTool"]
+stream = ExtResource( 121 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/Tools/Control/RectangleTool"]
+stream = ExtResource( 120 )
+volume_db = -10.0
+bus = "Sounds"
 
 [node name="LevelSettingsWindow" parent="UI" instance=ExtResource( 168 )]
 visible = false
@@ -5013,10 +5346,12 @@ starting_position = Vector2( 165, 130 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/LevelSettingsButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/LevelSettingsButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="HelpButton" type="TextureButton" parent="UI"]
 margin_left = 592.0
@@ -5035,10 +5370,12 @@ starting_position = Vector2( 165, 130 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/HelpButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/HelpButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="LayerSwitcher" type="TextureButton" parent="UI"]
 self_modulate = Color( 1, 1, 1, 0.721569 )
@@ -5068,10 +5405,12 @@ valign = 1
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/LayerSwitcher"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/LayerSwitcher"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="AutoSave" type="TextureButton" parent="UI"]
 visible = false
@@ -5089,10 +5428,12 @@ script = ExtResource( 689 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/AutoSave"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/AutoSave"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ToolsButton" type="TextureButton" parent="UI"]
 self_modulate = Color( 1, 1, 1, 0.721569 )
@@ -5111,10 +5452,12 @@ script = ExtResource( 691 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/ToolsButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/ToolsButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="SearchButton" type="TextureButton" parent="UI"]
 margin_left = 533.0
@@ -5132,10 +5475,12 @@ window = NodePath("../ItemPicker")
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/SearchButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/SearchButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="BoundsControlToggle" type="TextureButton" parent="UI"]
 visible = false
@@ -5154,10 +5499,12 @@ script = ExtResource( 3 )
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/BoundsControlToggle"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/BoundsControlToggle"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="SaveButton" type="TextureButton" parent="UI"]
 margin_left = 652.0
@@ -5175,10 +5522,12 @@ window = NodePath("../LevelCodeWindow")
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/SaveButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/SaveButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ItemPicker" type="TextureRect" parent="UI"]
 visible = false
@@ -5293,10 +5642,12 @@ __meta__ = {
 [node name="HoverSound" type="AudioStreamPlayer" parent="UI/ItemPicker/CloseButton"]
 stream = ExtResource( 121 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="UI/ItemPicker/CloseButton"]
 stream = ExtResource( 120 )
 volume_db = -10.0
+bus = "Sounds"
 
 [node name="Tween" type="Tween" parent="UI/ItemPicker"]
 
@@ -5324,6 +5675,13 @@ script = ExtResource( 22 )
 
 [node name="Backgrounds" parent="." instance=ExtResource( 52 )]
 position = Vector2( -46, 148 )
+
+[node name="MouseObjectArea" type="Area2D" parent="."]
+self_modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 0.198608, -0.468788 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseObjectArea"]
+shape = SubResource( 36 )
 
 [node name="Grid" type="ParallaxBackground" parent="."]
 layer = -1
@@ -5478,6 +5836,7 @@ __meta__ = {
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="BoundsControl"]
 stream = ExtResource( 120 )
+bus = "Sounds"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -5487,3 +5846,5 @@ anims/autosave_in = SubResource( 27 )
 anims/autosave_out = SubResource( 31 )
 anims/tools_in = SubResource( 32 )
 anims/tools_out = SubResource( 35 )
+
+[connection signal="screen_opened" from="Options/ScreenManager/Options" to="Options/ScreenManager/Options/Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]

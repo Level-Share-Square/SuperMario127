@@ -7,6 +7,12 @@ var activated: bool
 var override_rotation: bool
 var blacklisted_states = []
 
+var last_activated: bool
+var last_state = null
+
+var display_stamina: bool
+var stamina_value: float 
+
 export var frames : SpriteFrames
 export var frames_luigi : SpriteFrames
 
@@ -39,6 +45,8 @@ func handle_update(delta: float):
 				activated = false
 		else:
 			activated = false
+	else:
+		activated = false
 	_general_update(delta)
 	
 func _activate_check(_delta: float):

@@ -1,0 +1,524 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/fonts/super-mario-script-3-1402.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/player/ui_new/health/segments.gd" type="Script" id=2]
+[ext_resource path="res://scenes/player/ui_new/health/health_display.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=20]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Meter:rect_position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -96.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Meter/Segments:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Meter/Pivot:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 17, 16 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Meter/Paint:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 32, 32 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Meter/Life:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 11, -2 ) ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "transition"
+length = 0.7
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Meter:rect_position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ 0.0, 2.0, -96.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Meter/Segments:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.05, 0.25, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 4 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Meter/Pivot:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.3, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 17, 16 ), Vector2( 17, 22 ), Vector2( 17, 16 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Meter/Paint:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 32 ), Vector2( 32, 44 ), Vector2( 32, 32 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Meter/Life:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1, 0.3, 0.7 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( 11, -2 ), Vector2( 11, 2 ), Vector2( 11, -2 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Segments:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Segments:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0.95, 0.95 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pivot:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0.95, 0.95 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=18]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "heal"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1.25, 1.25, 1.25, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Gradient" id=15]
+offsets = PoolRealArray( 0.621622, 1 )
+colors = PoolColorArray( 1, 0.992157, 0.894118, 1, 1, 0.670588, 0.286275, 1 )
+
+[sub_resource type="GradientTexture2D" id=14]
+gradient = SubResource( 15 )
+width = 24
+height = 24
+fill_from = Vector2( 0, 0.4 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 18
+outline_size = 2
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 1 )
+
+[node name="HealthDisplay" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -704.0
+margin_bottom = -368.0
+rect_min_size = Vector2( 64, 64 )
+rect_pivot_offset = Vector2( 32, 32 )
+script = ExtResource( 3 )
+letter_colors = [ Color( 1, 1, 1, 1 ), Color( 1, 0.368627, 0.545098, 1 ), Color( 1, 0.831373, 0.592157, 1 ), Color( 0.454902, 1, 0.768627, 1 ), Color( 0.545098, 0.807843, 1, 1 ) ]
+letter_offsets = [ 1.0, 0.0, 1.0, 0.0 ]
+normal_color = Color( 1, 0.831373, 0.592157, 1 )
+low_hp_color = Color( 1, 0.254902, 0.254902, 1 )
+damaged_color = Color( 0.686275, 0.388235, 0.388235, 1 )
+shake_duration = 0.5
+shake_intensity = 6.0
+
+[node name="Transition" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 20 )
+anims/transition = SubResource( 21 )
+
+[node name="Meter" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -96.0
+margin_right = 960.0
+margin_bottom = 864.0
+rect_pivot_offset = Vector2( 32, 32 )
+
+[node name="Idle" type="AnimationPlayer" parent="Meter"]
+anims/RESET = SubResource( 16 )
+anims/idle = SubResource( 17 )
+
+[node name="Actions" type="AnimationPlayer" parent="Meter"]
+anims/RESET = SubResource( 18 )
+anims/heal = SubResource( 19 )
+
+[node name="Paint" type="Polygon2D" parent="Meter"]
+position = Vector2( 32, 32 )
+color = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+antialiased = true
+polygon = PoolVector2Array( 19, -16, 14, -21, 7, -24, -2, -24, -9, -21, -10, -20, -12, -20, -18, -15, -22, -9, -24, -3, -24, 5, -21, 13, -14, 20, -7, 23, 0, 24, 7, 23, 15, 19, 20, 13, 22, 7, 22, -1, 19, -8, 15, -14, 12, -17, 15, -16, 17, -14, 21, -8, 22, -4, 23, -2, 23, 5, 23, 8, 22, 9, 23, 10, 24, 8, 24, 0, 23, -4, 22, -8, 17, -15, 17, -16, 13, -18, 9, -19, 5, -21, 9, -21, 14, -19 )
+
+[node name="Segments" type="Control" parent="Meter"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 7680.0
+margin_bottom = 7680.0
+rect_pivot_offset = Vector2( 32, 24 )
+script = ExtResource( 2 )
+max_degrees = 275.0
+rotation_offset = 57.0
+
+[node name="1" type="Polygon2D" parent="Meter/Segments"]
+position = Vector2( 32, 32 )
+rotation = 0.994838
+color = Color( 1, 0.831373, 0.592157, 1 )
+antialiased = true
+polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
+
+[node name="Border" type="Polygon2D" parent="Meter/Segments/1"]
+show_behind_parent = true
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
+polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
+
+[node name="Tween" type="Tween" parent="Meter/Segments/1"]
+
+[node name="2" type="Polygon2D" parent="Meter/Segments"]
+position = Vector2( 32, 32 )
+rotation = 1.59479
+color = Color( 1, 0.831373, 0.592157, 1 )
+antialiased = true
+polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
+
+[node name="Border" type="Polygon2D" parent="Meter/Segments/2"]
+show_behind_parent = true
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
+polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
+
+[node name="Tween" type="Tween" parent="Meter/Segments/2"]
+
+[node name="3" type="Polygon2D" parent="Meter/Segments"]
+position = Vector2( 32, 32 )
+rotation = 2.19475
+color = Color( 1, 0.831373, 0.592157, 1 )
+antialiased = true
+polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
+
+[node name="Border" type="Polygon2D" parent="Meter/Segments/3"]
+show_behind_parent = true
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
+polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
+
+[node name="Tween" type="Tween" parent="Meter/Segments/3"]
+
+[node name="4" type="Polygon2D" parent="Meter/Segments"]
+position = Vector2( 32, 32 )
+rotation = 2.79471
+color = Color( 1, 0.831373, 0.592157, 1 )
+antialiased = true
+polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
+
+[node name="Border" type="Polygon2D" parent="Meter/Segments/4"]
+show_behind_parent = true
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
+polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
+
+[node name="Tween" type="Tween" parent="Meter/Segments/4"]
+
+[node name="5" type="Polygon2D" parent="Meter/Segments"]
+position = Vector2( 32, 32 )
+rotation = 3.39467
+color = Color( 1, 0.831373, 0.592157, 1 )
+antialiased = true
+polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
+
+[node name="Border" type="Polygon2D" parent="Meter/Segments/5"]
+show_behind_parent = true
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
+polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
+
+[node name="Tween" type="Tween" parent="Meter/Segments/5"]
+
+[node name="6" type="Polygon2D" parent="Meter/Segments"]
+position = Vector2( 32, 32 )
+rotation = 3.99462
+color = Color( 1, 0.831373, 0.592157, 1 )
+antialiased = true
+polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
+
+[node name="Border" type="Polygon2D" parent="Meter/Segments/6"]
+show_behind_parent = true
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
+polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
+
+[node name="Tween" type="Tween" parent="Meter/Segments/6"]
+
+[node name="7" type="Polygon2D" parent="Meter/Segments"]
+position = Vector2( 32, 32 )
+rotation = 4.59458
+color = Color( 0.792157, 0.364706, 0.364706, 1 )
+antialiased = true
+polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
+
+[node name="Border" type="Polygon2D" parent="Meter/Segments/7"]
+show_behind_parent = true
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
+polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
+
+[node name="Tween" type="Tween" parent="Meter/Segments/7"]
+
+[node name="8" type="Polygon2D" parent="Meter/Segments"]
+position = Vector2( 32, 32 )
+rotation = 5.19454
+color = Color( 0.792157, 0.364706, 0.364706, 1 )
+antialiased = true
+polygon = PoolVector2Array( -5, -29, 5, -29, 2, -19, -3, -19 )
+
+[node name="Border" type="Polygon2D" parent="Meter/Segments/8"]
+show_behind_parent = true
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
+polygon = PoolVector2Array( -8.14603, -31.5221, 8.4971, -31.4452, 3.6822, -16.6866, -4.36705, -17.1444 )
+
+[node name="Tween" type="Tween" parent="Meter/Segments/8"]
+
+[node name="Pivot" type="Control" parent="Meter"]
+margin_left = 17.0
+margin_top = 16.0
+margin_right = 45.0
+margin_bottom = 47.9997
+rect_pivot_offset = Vector2( 14, 10 )
+
+[node name="Center" type="Polygon2D" parent="Meter/Pivot"]
+position = Vector2( -14.2671, -14.9489 )
+scale = Vector2( 1.5, 1.55 )
+antialiased = true
+texture = SubResource( 14 )
+polygon = PoolVector2Array( 18.7773, 9.92182, 26.7446, 12.8835, 28.1299, 25.2569, 16.9403, 30.1676, 9.39173, 20.1417, 14.2305, 13.1755, 21.155, 16.2206, 22.0727, 22.3525, 18.7773, 22.7697, 18.1516, 18.8486, 15.8156, 18.1394, 14.314, 20.5588, 19.0276, 25.5228, 23.1573, 22.8114, 23.4075, 15.8035, 17.3591, 12.2995 )
+uv = PoolVector2Array( 18.7773, 9.92182, 26.7446, 12.8835, 28.1299, 25.2569, 16.9403, 30.1676, 9.39173, 20.1417, 14.2305, 13.1755, 21.155, 16.2206, 22.0727, 22.3525, 18.7773, 22.7697, 18.1516, 18.8486, 15.8156, 18.1394, 14.314, 20.5588, 19.0276, 25.5228, 23.1573, 22.8114, 23.4075, 15.8035, 17.3591, 12.2995 )
+
+[node name="Outline" type="Polygon2D" parent="Meter/Pivot/Center"]
+show_behind_parent = true
+position = Vector2( -4, -4 )
+scale = Vector2( 1.2, 1.2 )
+color = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+antialiased = true
+polygon = PoolVector2Array( 18.7773, 9.92182, 26.7446, 12.8835, 28.1299, 25.2569, 16.9403, 30.1676, 9.39173, 20.1417, 14.2305, 13.1755, 16.2595, 14.0585, 17.3591, 12.2995 )
+uv = PoolVector2Array( 18.7773, 9.92182, 26.7446, 12.8835, 28.1299, 25.2569, 16.9403, 30.1676, 9.39173, 20.1417, 14.2305, 13.1755, 21.155, 16.2206, 22.0727, 22.3525, 18.7773, 22.7697, 18.1516, 18.8486, 15.8156, 18.1394, 14.314, 20.5588, 19.0276, 25.5228, 23.1573, 22.8114, 23.4075, 15.8035, 17.3591, 12.2995 )
+
+[node name="Life" type="HBoxContainer" parent="Meter"]
+margin_left = 11.0
+margin_top = -2.0
+margin_right = 55.0
+margin_bottom = 19.0
+rect_rotation = -3.97558
+rect_pivot_offset = Vector2( 22, 10 )
+custom_constants/separation = -1
+
+[node name="L" type="Label" parent="Meter/Life"]
+margin_top = 1.0
+margin_right = 12.0
+margin_bottom = 19.0
+rect_pivot_offset = Vector2( 6, 9 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+custom_fonts/font = SubResource( 4 )
+text = "L"
+
+[node name="Tween" type="Tween" parent="Meter/Life/L"]
+
+[node name="I" type="Label" parent="Meter/Life"]
+margin_left = 11.0
+margin_right = 18.0
+margin_bottom = 21.0
+rect_pivot_offset = Vector2( 3.5, 10 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+custom_constants/line_spacing = -15
+custom_fonts/font = SubResource( 4 )
+text = "
+I"
+valign = 1
+
+[node name="Tween" type="Tween" parent="Meter/Life/I"]
+
+[node name="F" type="Label" parent="Meter/Life"]
+margin_left = 17.0
+margin_top = 1.0
+margin_right = 29.0
+margin_bottom = 19.0
+rect_pivot_offset = Vector2( 6, 9 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+custom_fonts/font = SubResource( 4 )
+text = "F"
+
+[node name="Tween" type="Tween" parent="Meter/Life/F"]
+
+[node name="E" type="Label" parent="Meter/Life"]
+margin_left = 28.0
+margin_right = 40.0
+margin_bottom = 21.0
+rect_pivot_offset = Vector2( 6, 10 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
+custom_constants/line_spacing = -15
+custom_fonts/font = SubResource( 4 )
+text = "
+E"
+
+[node name="Tween" type="Tween" parent="Meter/Life/E"]
+
+[connection signal="ready" from="Meter/Segments" to="Meter/Segments" method="realign_segments"]
+[connection signal="visibility_changed" from="Meter/Segments" to="Meter/Segments" method="realign_segments"]

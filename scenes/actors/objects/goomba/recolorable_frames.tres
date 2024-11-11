@@ -18,6 +18,10 @@ region = Rect2( 64, 0, 32, 32 )
 atlas = ExtResource( 1 )
 region = Rect2( 96, 0, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 64, 32, 32 )
+
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
 region = Rect2( 32, 64, 32, 32 )
@@ -50,16 +54,17 @@ region = Rect2( 128, 32, 32, 32 )
 atlas = ExtResource( 1 )
 region = Rect2( 160, 32, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 64, 32, 32 )
-
 [resource]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "default",
 "speed": 6.0
+}, {
+"frames": [ SubResource( 13 ) ],
+"loop": false,
+"name": "fall",
+"speed": 0.0
 }, {
 "frames": [ SubResource( 5 ) ],
 "loop": false,
@@ -75,9 +80,4 @@ animations = [ {
 "loop": true,
 "name": "walking",
 "speed": 12.0
-}, {
-"frames": [ SubResource( 13 ) ],
-"loop": false,
-"name": "fall",
-"speed": 0.0
 } ]

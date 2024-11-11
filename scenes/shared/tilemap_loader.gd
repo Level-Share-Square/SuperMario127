@@ -16,13 +16,11 @@ var level_area : LevelArea
 var tileset_cache := []
 var tileset_palettes := []
 
-var noise := OpenSimplexNoise.new()
-
 func _ready():
 	var level_tilesets := preload("res://assets/tiles/ids.tres")
+	var tile_set := preload("res://generation/generated_tiles.res")
 	
 	var number_of_tiles = Singleton.EditorSavedSettings.data_tiles
-	var tile_set = Singleton.EditorSavedSettings.tiles_resource
 	very_back_tilemap_node.tile_set = tile_set
 	back_tilemap_node.tile_set = tile_set
 	middle_tilemap_node.tile_set = tile_set
@@ -41,10 +39,10 @@ func _ready():
 			tileset.right_slope_tile_id
 		]
 		
-		tileset_palettes = Singleton.EditorSavedSettings.tileset_palettes
+		tileset_palettes = preload("res://generation/tileset_palettes.res").tileset_palettes
 	
 func get_tile(tileset_id, tile_id, palette_id = 0):
-	if palette_id == 0:
+	if palette_id == 0 or tileset_palettes[tileset_id].size() < palette_id:
 		var tileset = tileset_cache[tileset_id]
 		if tile_id == 0:
 			return tileset.block_tile_id
@@ -85,7 +83,7 @@ func get_tile(tileset_id, tile_id, palette_id = 0):
 func get_chunk_key(x: int, y: int, layer: int) -> String:
 	return str(floor(x / 16.0), ":", floor(y / 16.0), ":", layer)
 
-const emptyTile = [0,0]
+const emptyTile = [0,0,0]
 func get_tile_in_data(x: int, y: int, layer: int):
 	var chunk_key = get_chunk_key(x, y, layer)
 	
@@ -193,16 +191,17 @@ func update_tilemaps():
 		for y in range(top+1, (bottom-1)+1): #range end needs +1 to to actually reach the end
 			tilemap.set_cell(left, y, tile)
 			tilemap.set_cell(right, y, tile)
+		
 
 		
 	tile = middle_tilemap_node.tile_set.find_tile_by_name("OutOfBounds")
 	
-	
+	# this is seperate so the level boundaries are set correctly
 	for x in range(left-2, (right+2)+1): #range end needs +1 to to actually reach the end
 		very_back_tilemap_node.set_cell(x,top, tile)
 		very_back_tilemap_node.set_cell(x,top-1, tile)
 		very_back_tilemap_node.set_cell(x,top-2, tile)
-		
+
 		very_back_tilemap_node.set_cell(x,bottom, tile)
 		very_back_tilemap_node.set_cell(x,bottom+1, tile)
 		very_back_tilemap_node.set_cell(x,bottom+2, tile)
@@ -211,10 +210,10 @@ func update_tilemaps():
 		very_back_tilemap_node.set_cell(left, y, tile)
 		very_back_tilemap_node.set_cell(left-1, y, tile)
 		very_back_tilemap_node.set_cell(left-2, y, tile)
-		
+
 		very_back_tilemap_node.set_cell(right, y, tile)
 		very_back_tilemap_node.set_cell(right+1, y, tile)
 		very_back_tilemap_node.set_cell(right+2, y, tile)
-		
+
 	for tilemap in [very_back_tilemap_node, back_tilemap_node, middle_tilemap_node, front_tilemap_node]:
 		tilemap.update_bitmask_region(bounds.position, bounds.end)

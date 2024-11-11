@@ -1,0 +1,102 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scenes/actors/objects/p_switch/icon.png" type="Texture" id=1]
+[ext_resource path="res://shaders/outline2.shader" type="Shader" id=2]
+[ext_resource path="res://scenes/player/ui_new/timers/radial_timer.gd" type="Script" id=3]
+
+[sub_resource type="Gradient" id=230]
+colors = PoolColorArray( 0.105882, 0.145098, 0.478431, 1, 0.247059, 0.27451, 0.737255, 1 )
+
+[sub_resource type="GradientTexture2D" id=226]
+gradient = SubResource( 230 )
+fill_from = Vector2( 0, 0.8 )
+fill_to = Vector2( 0, 0.3 )
+
+[sub_resource type="Shader" id=227]
+code = "shader_type canvas_item;
+
+uniform float circle_size : hint_range(0.0, 1.0) = 0.4;
+uniform float ratio_width = 1.0;
+uniform float ratio_height = 1.0;
+
+void fragment() {
+    float ratio = ratio_width / ratio_height;
+    float dist = distance(vec2(0.5, 0.5), vec2(mix(0.5, UV.x, ratio), UV.y));
+    vec4 orig_color = texture(TEXTURE, UV);
+    COLOR.rgb = orig_color.rgb;
+    COLOR.a = (1.0 - step(circle_size, dist)) * orig_color.a;
+}"
+
+[sub_resource type="ShaderMaterial" id=217]
+shader = SubResource( 227 )
+shader_param/circle_size = 0.35
+shader_param/ratio_width = 1.0
+shader_param/ratio_height = 1.0
+
+[sub_resource type="Gradient" id=228]
+colors = PoolColorArray( 0.368627, 0.172549, 0.580392, 0, 0.0980392, 0.0941176, 0.490196, 1 )
+
+[sub_resource type="GradientTexture2D" id=219]
+gradient = SubResource( 228 )
+width = 24
+height = 24
+fill = 1
+fill_from = Vector2( 0.5, 0.8 )
+fill_to = Vector2( 0.491667, 0.1875 )
+
+[sub_resource type="Gradient" id=229]
+colors = PoolColorArray( 1, 0.603922, 0.203922, 1, 1, 0.992157, 0.894118, 1 )
+
+[sub_resource type="GradientTexture2D" id=221]
+gradient = SubResource( 229 )
+width = 24
+height = 24
+fill = 1
+fill_from = Vector2( 0.5, 0.8 )
+fill_to = Vector2( 0.5, 0.2 )
+
+[sub_resource type="ShaderMaterial" id=223]
+shader = ExtResource( 2 )
+shader_param/Smooth = true
+shader_param/width = 16.0
+shader_param/outline_color = Color( 0, 0, 0, 0.0627451 )
+shader_param/pixel_size = 4
+
+[node name="RadialTimer" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+script = ExtResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Paint" type="Polygon2D" parent="."]
+position = Vector2( 20.5, 19 )
+scale = Vector2( 0.8, 0.8 )
+texture = SubResource( 226 )
+polygon = PoolVector2Array( 19, -16, 14, -21, 7, -24, -2, -24, -9, -21, -10, -20, -12, -20, -18, -15, -22, -9, -24, -3, -24, 5, -21, 13, -14, 20, -7, 23, 0, 24, 7, 23, 15, 19, 20, 13, 22, 7, 22, -1, 19, -8, 15, -14, 12, -17, 15, -16, 17, -14, 21, -8, 22, -4, 23, -2, 23, 5, 23, 8, 22, 9, 23, 10, 24, 8, 24, 0, 23, -4, 22, -8, 17, -15, 17, -16, 13, -18, 9, -19, 5, -21, 9, -21, 14, -19 )
+uv = PoolVector2Array( 56.3724, 12.4089, 50.0615, 6.09797, 41.2262, 2.31143, 29.8666, 2.31143, 21.0314, 6.09797, 19.7692, 7.36015, 17.2448, 7.36015, 9.67178, 13.671, 4.62307, 21.2441, 2.09871, 28.8172, 2.09871, 38.9146, 5.88524, 49.012, 14.7205, 57.8473, 23.5557, 61.6338, 32.391, 62.896, 41.2262, 61.6338, 51.3237, 56.5851, 57.6345, 49.012, 60.1589, 41.439, 60.1589, 31.3415, 56.3724, 22.5063, 51.3237, 14.9332, 47.5371, 11.1467, 51.3237, 12.4089, 53.848, 14.9332, 58.8967, 22.5063, 60.1589, 27.555, 61.4211, 30.0794, 61.4211, 38.9146, 61.4211, 42.7011, 60.1589, 43.9633, 61.4211, 45.2255, 62.6833, 42.7011, 62.6833, 32.6037, 61.4211, 27.555, 60.1589, 22.5063, 53.848, 13.671, 53.848, 12.4089, 48.7993, 9.8845, 43.7506, 8.62232, 38.7019, 6.09797, 43.7506, 6.09797, 50.0615, 8.62232 )
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+material = SubResource( 217 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_rotation = -3.0
+rect_pivot_offset = Vector2( 20, 20 )
+step = 0.0
+value = 45.0
+texture_under = SubResource( 219 )
+texture_progress = SubResource( 221 )
+fill_mode = 5
+nine_patch_stretch = true
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 223 )
+position = Vector2( 20, 20 )
+rotation = -0.0523599
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 1 )
+
+[node name="sound" type="AudioStreamPlayer" parent="."]
+
+[node name="sound_secondary" type="AudioStreamPlayer" parent="."]
