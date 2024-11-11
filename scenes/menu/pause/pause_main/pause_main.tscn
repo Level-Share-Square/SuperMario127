@@ -322,6 +322,7 @@ size_flags_horizontal = 0
 alignment = 2
 
 [node name="Resume" type="Button" parent="Buttons/VBoxContainer"]
+unique_name_in_owner = true
 margin_right = 230.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 0, 22 )
@@ -453,6 +454,7 @@ text = "Shine Map"
 script = ExtResource( 14 )
 
 [node name="Options" type="Button" parent="Buttons/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 margin_left = 121.0
 margin_right = 230.0
 margin_bottom = 22.0
@@ -481,10 +483,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -384.0
-margin_top = -248.0
-margin_right = 120.001
-margin_bottom = 184.0
+margin_left = 384.0
+margin_top = -32.0
+margin_right = 888.001
+margin_bottom = 400.0
 rect_min_size = Vector2( 504, 0 )
 script = ExtResource( 12 )
 
@@ -684,10 +686,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -72.0
-margin_top = -40.0
-margin_right = 88.0
-margin_bottom = 8.0
+margin_left = 696.0
+margin_top = 392.0
+margin_right = 856.0
+margin_bottom = 440.0
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 160, 0 )
 script = ExtResource( 23 )
@@ -788,7 +790,9 @@ rect_min_size = Vector2( 4, 0 )
 anims/RESET = SubResource( 5 )
 anims/transition = SubResource( 6 )
 
+[connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3]
 [connection signal="screen_opened" from="." to="Counters" method="screen_opened"]
+[connection signal="pressed" from="Buttons/VBoxContainer/Resume" to="Focus" method="set_default_focus" binds= [ "%Resume" ]]
 [connection signal="pressed" from="Buttons/VBoxContainer/Resume" to="Buttons/ButtonFunctions" method="resume"]
 [connection signal="pressed" from="Buttons/VBoxContainer/Retry" to="Buttons/ButtonFunctions" method="retry"]
 [connection signal="pressed" from="Buttons/VBoxContainer/RetryStart/Countdown" to="Buttons/ButtonFunctions" method="retry_start"]
@@ -796,5 +800,6 @@ anims/transition = SubResource( 6 )
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/Quit/Countdown" to="Buttons/ButtonFunctions" method="quit"]
 [connection signal="text_changed" from="Buttons/VBoxContainer/HBoxContainer/Quit/Countdown" to="Buttons/VBoxContainer/HBoxContainer/Quit/Icon" method="update_offset"]
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/Options" to="." method="transition" binds= [ "Options" ]]
+[connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/Options" to="Focus" method="set_default_focus" binds= [ "%Options" ]]
 [connection signal="pressed" from="ShineInfo/CenterContainer/ShineDetails/Buttons/Left" to="ShineInfo" method="prev_shine"]
 [connection signal="pressed" from="ShineInfo/CenterContainer/ShineDetails/Buttons/Right" to="ShineInfo" method="next_shine"]

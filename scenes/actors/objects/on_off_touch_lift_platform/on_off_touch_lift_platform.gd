@@ -6,6 +6,7 @@ onready var sprite = $Sprite
 onready var sprite2 = $Sprite2
 onready var animation_player = $AnimationPlayer
 
+onready var area_2d = $Area2D
 onready var platform_area_collision_shape = $Area2D/CollisionShape2D
 onready var collision_shape = $CollisionShape2D
 
@@ -97,6 +98,8 @@ func toggle_state():
 func switch_state(new_state):
 		if(parent.disappears):
 			set_collision_layer_bit(4, new_state)
+			area_2d.monitorable = new_state
+			area_2d.monitoring = new_state
 			animation_player.play(str(new_state).to_lower())
 			sprite.visible = new_state
 			sprite2.visible = !new_state
