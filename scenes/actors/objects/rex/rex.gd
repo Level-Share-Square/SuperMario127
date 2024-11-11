@@ -115,6 +115,18 @@ func jump():
 	snap = Vector2.ZERO
 	jumped = true
 
+func shell_hit(shell_pos:Vector2)->void :
+	if not hit:
+		kill(shell_pos)
+		
+func exploded(explosion_pos:Vector2)->void :
+	if not hit:
+		kill(explosion_pos)
+
+func steely_hit(hit_pos:Vector2)->void :
+	if not hit:
+		kill(hit_pos)
+
 func create_coin()->void :
 	var object: = LevelObject.new()
 	object.type_id = 1
