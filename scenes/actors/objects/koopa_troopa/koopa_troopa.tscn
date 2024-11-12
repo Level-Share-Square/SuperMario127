@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/koopa_troopa.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/regular_frames.tres" type="SpriteFrames" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/para_regular_frames.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/body.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/objects/koopa_troopa/shell.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=9]
 
 [sub_resource type="RayShape2D" id=1]
 length = 16.0
@@ -45,6 +46,7 @@ frames = ExtResource( 2 )
 modulate = Color( 0, 1, 0, 1 )
 frames = ExtResource( 4 )
 playing = true
+script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Koopa"]
 position = Vector2( -6.5, 0 )

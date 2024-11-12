@@ -260,7 +260,7 @@ scale_curve = SubResource( 11 )
 color = Color( 0.87451, 0.819608, 0.74902, 1 )
 
 [sub_resource type="RectangleShape2D" id=13]
-extents = Vector2( 16, 11 )
+extents = Vector2( 16, 10 )
 
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 24, 4 )
@@ -273,6 +273,12 @@ script = ExtResource( 4 )
 
 [node name="PipeEnterLogic" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -31 )
+
+[node name="CollisionShape2D" parent="PipeEnterLogic/Area2D" index="0"]
+visible = false
+
+[node name="CollisionShape2D" parent="PipeEnterLogic/GPArea" index="0"]
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1
@@ -297,7 +303,7 @@ position = Vector2( 0, 30 )
 
 [node name="SpriteBody" type="Sprite" parent="CannonMoveable/SpriteBodyReverser"]
 material = SubResource( 4 )
-position = Vector2( 0, -19 )
+position = Vector2( 0, -20.3125 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -6.301 )
 region_enabled = true
@@ -354,7 +360,7 @@ position = Vector2( 0, -15 )
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EntranceCollision"]
-position = Vector2( 0, -4 )
+position = Vector2( 0, -3 )
 shape = SubResource( 13 )
 
 [node name="RingCollision" type="StaticBody2D" parent="."]
@@ -369,6 +375,7 @@ collision_mask = 2147483650
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NearbyCharacterDetection"]
+visible = false
 position = Vector2( 0, -22 )
 shape = SubResource( 15 )
 
