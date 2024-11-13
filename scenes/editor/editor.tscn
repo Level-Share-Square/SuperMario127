@@ -5830,3 +5830,5 @@ anims/autosave_in = SubResource( 27 )
 anims/autosave_out = SubResource( 31 )
 anims/tools_in = SubResource( 32 )
 anims/tools_out = SubResource( 35 )
+
+[connection signal="screen_opened" from="Options/ScreenManager/Options" to="Options/ScreenManager/Options/Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]

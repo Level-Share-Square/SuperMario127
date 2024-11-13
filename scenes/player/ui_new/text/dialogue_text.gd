@@ -3,7 +3,7 @@ extends Control
 signal menu_opened
 signal menu_closed
 
-const TYPE_SPEED: float = 0.035
+const TYPE_SPEED: float = 0.03
 
 var open := false
 var normal_pos: Vector2
@@ -19,6 +19,8 @@ onready var name_label = $Name
 
 onready var menu_open = $MenuOpen
 onready var menu_close = $MenuClose
+onready var page_change = $PageChange
+onready var typing = $Typing
 
 onready var tween = $Tween
 
@@ -42,6 +44,8 @@ func open(_dialogue : PoolStringArray, dialogue_node : Node2D, character_node : 
 	
 	if not open:
 		menu_open.play()
+	else:
+		page_change.play()
 	close_label.bbcode_text = text_replace_util.parse_text("[center]Press :interactinput: to continue[/center]", character_node)
 	name_label.bbcode_text = character_name
 	open = true
@@ -69,6 +73,8 @@ func interact():
 	if dialogue_obj.page_cache >= dialogue.size():
 		close()
 		return
+	elif label.percent_visible == 1:
+		page_change.play()
 	
 	var page_text: String = dialogue[dialogue_page]
 	var colon_offset: int = page_text.find(";")
@@ -84,6 +90,7 @@ func interact():
 	
 	label.bbcode_text = text_replace_util.parse_text(cur_text, character)
 	if not tween.is_active():
+		typing.play()
 		tween.playback_speed = 1
 		tween.interpolate_property(
 			label, 
@@ -94,6 +101,7 @@ func interact():
 		)
 		tween.start()
 	else:
+		typing.stop()
 		tween.playback_speed = INF
 
 func get_dialogue_from_tag(tag: String) -> Node:
