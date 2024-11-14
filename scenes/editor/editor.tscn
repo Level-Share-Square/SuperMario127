@@ -2272,7 +2272,6 @@ object_settings_path = NodePath("UI/ObjectSettingsWindow")
 mouse_object_area_path = NodePath("MouseObjectArea")
 
 [node name="Shared" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0.198608, -0.468788 )
 
 [node name="Placement" type="Control" parent="."]
 margin_right = 40.0
