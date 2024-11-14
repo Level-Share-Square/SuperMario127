@@ -792,6 +792,8 @@ anims/transition = SubResource( 6 )
 
 [connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3]
 [connection signal="screen_opened" from="." to="Counters" method="screen_opened"]
+[connection signal="back_press" from="Focus" to="Focus" method="set_default_focus" binds= [ "%Resume" ]]
+[connection signal="back_press" from="Focus" to="Buttons/ButtonFunctions" method="resume"]
 [connection signal="pressed" from="Buttons/VBoxContainer/Resume" to="Focus" method="set_default_focus" binds= [ "%Resume" ]]
 [connection signal="pressed" from="Buttons/VBoxContainer/Resume" to="Buttons/ButtonFunctions" method="resume"]
 [connection signal="pressed" from="Buttons/VBoxContainer/Retry" to="Buttons/ButtonFunctions" method="retry"]

@@ -84,4 +84,11 @@ func screen_opened():
 		loader.thread_load_directory(BASE_FOLDER)
 	
 	prev_level_sort = level_sort
-	
+
+func go_back():
+	if working_folder == BASE_FOLDER:
+		get_owner().transition("MainMenu")
+	else:
+		# um... sorta hacky
+		# gets the "back..." folder and presses it automatically
+		level_grid.get_child(0).emit_signal("button_pressed")

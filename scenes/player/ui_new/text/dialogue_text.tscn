@@ -158,7 +158,7 @@ volume_db = 5.0
 
 [node name="Typing" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-volume_db = 11.5
+volume_db = 12.0
 
 [node name="Tween" type="Tween" parent="."]
 

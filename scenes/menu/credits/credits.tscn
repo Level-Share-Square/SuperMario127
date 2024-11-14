@@ -707,5 +707,6 @@ anims/RESET = SubResource( 3 )
 anims/transition = SubResource( 4 )
 
 [connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3]
+[connection signal="back_press" from="Focus" to="." method="transition" binds= [ "MainMenu" ]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Speed" to="ButtonFunctions" method="toggle_speed" binds= [ "MarginContainer/VBoxContainer/Speed" ]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Skip" to="." method="transition" binds= [ "MainMenu" ]]

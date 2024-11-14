@@ -1,6 +1,8 @@
 extends Control
 
 
+signal back_press
+
 export var disabled: bool
 
 export var default_focus_path: NodePath
@@ -19,6 +21,10 @@ func _input(event):
 func _unhandled_input(event):
 	if disabled: return
 	if not is_visible_in_tree(): return
+
+	if event.is_action_pressed("ui_cancel"):
+			emit_signal("back_press")
+	
 	if not is_instance_valid(default_focus): return
 	
 	if not is_instance_valid(get_focus_owner()):
