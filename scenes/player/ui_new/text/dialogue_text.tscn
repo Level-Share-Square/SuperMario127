@@ -147,18 +147,22 @@ deselect_on_focus_loss_enabled = false
 [node name="MenuOpen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -3.0
+bus = "Sounds"
 
 [node name="MenuClose" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -2.0
+bus = "Sounds"
 
 [node name="PageChange" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-volume_db = 5.0
+volume_db = 6.5
+bus = "Sounds"
 
 [node name="Typing" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-volume_db = 12.0
+volume_db = 13.0
+bus = "Sounds"
 
 [node name="Tween" type="Tween" parent="."]
 

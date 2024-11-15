@@ -21,4 +21,16 @@ func _process(delta):
 			target_scroll = -1
 	
 	last_scroll = scroll_vertical
+
+
+func _ready():
+	follow_focus = false
+	get_viewport().connect("gui_focus_changed", self, "gui_focus_changed")
+
+
+func gui_focus_changed(control: Control):
+	if not is_visible_in_tree(): return
+	if LastInputDevice.was_mouse: return
+	if not is_a_parent_of(control): return
 	
+	scroll_vertical = (control.rect_position.y + control.rect_size.y) - rect_size.y/2

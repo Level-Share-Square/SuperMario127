@@ -3,7 +3,7 @@ extends Control
 signal menu_opened
 signal menu_closed
 
-const TYPE_SPEED: float = 0.03
+const TYPE_SPEED: float = 0.023
 
 var open := false
 var normal_pos: Vector2
@@ -55,6 +55,9 @@ func open(_dialogue : PoolStringArray, dialogue_node : Node2D, character_node : 
 	interact()
 
 func interact():
+	if is_instance_valid(character):
+		character.inputs[Character.input_names.interact][1] = false
+	
 	var dialogue_page: int = dialogue_obj.page_cache
 	
 	if label.percent_visible == 1:
@@ -90,7 +93,9 @@ func interact():
 	
 	label.bbcode_text = text_replace_util.parse_text(cur_text, character)
 	if not tween.is_active():
-		typing.play()
+		if cur_text.length() > 0: 
+			typing.play()
+		
 		tween.playback_speed = 1
 		tween.interpolate_property(
 			label, 
@@ -116,6 +121,7 @@ func close():
 	
 	label.percent_visible = 0
 	menu_close.play()
+	typing.stop()
 	
 	character.velocity = stored_velocity
 	stored_velocity = Vector2.ZERO
@@ -123,6 +129,7 @@ func close():
 	character = null
 	dialogue_obj = null
 	emit_signal("menu_closed")
+
 
 func _physics_process(delta):
 	if !open:

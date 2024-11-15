@@ -246,7 +246,7 @@ func _physics_process(delta):
 		
 		# :/
 		if (body_overlapping
-		and character.inputs[Character.input_names.interact][0]
+		and character.inputs[Character.input_names.interact][1]
 		and !character.inputs[Character.input_names.left][0]
 		and !character.inputs[Character.input_names.right][0]
 		and character.is_grounded() and character.controllable
