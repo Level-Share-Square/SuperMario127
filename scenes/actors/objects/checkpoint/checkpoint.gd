@@ -9,15 +9,17 @@ onready var sound = $Use
 var is_used := false
 
 var save_water_level := true
+var save_switch_state := true
 var spawn_y_offset := 0.0
 var id = 0
 
 func _set_properties():
-	savable_properties = ["save_water_level", "spawn_y_offset", "id"]
-	editable_properties = ["save_water_level", "spawn_y_offset"]
+	savable_properties = ["save_water_level", "spawn_y_offset", "save_switch_state", "id"]
+	editable_properties = ["save_water_level", "save_switch_state", "spawn_y_offset"]
 	
 func _set_property_values():
 	set_property("save_water_level", save_water_level, true)
+	set_property("save_switch_state", save_switch_state, true)
 	set_property("spawn_y_offset", spawn_y_offset, true)
 
 func _ready():
@@ -66,7 +68,8 @@ func set_checkpoint(body):
 		for liquid in Singleton.CurrentLevelData.level_data.vars.liquids:
 			Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].append(liquid[1].save_pos)
 	
-	Singleton.CheckpointSaved.switch_state = Singleton.CurrentLevelData.level_data.vars.switch_state.duplicate(true)
+	if save_switch_state:
+		Singleton.CheckpointSaved.switch_state = Singleton.CurrentLevelData.level_data.vars.switch_state.duplicate(true)
 	Singleton.CheckpointSaved.liquid_positions = Singleton.CurrentLevelData.level_data.vars.liquid_positions.duplicate(true)
 	Singleton.CheckpointSaved.activated_shine_ids = Singleton.CurrentLevelData.level_data.vars.activated_shine_ids.duplicate(true)
 	
