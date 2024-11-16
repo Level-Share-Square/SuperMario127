@@ -170,24 +170,29 @@ func _physics_process(delta):
 		path.curve = curve
 	
 	if mode != 1:
+		#x component of velocity
+		if walk_speed != 0:
+			velocity.x = (pathfollow.global_position.x - physicsbody.global_position.x) / delta
+		
+		#y component of velocity
 		if physics_enabled:
 			velocity.y += gravity
 			velocity.y += gravity
-			if walk_speed != 0:
-				velocity.x = (pathfollow.global_position.x - physicsbody.global_position.x) / delta
-			
-			velocity = physicsbody.move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
-			if walk_speed != 0:
-				if velocity.x != 0:
-					animation_handler.play_action("running")
-					animation_handler.scale.x = sign(-velocity.x)
-				else:
-					animation_handler.play_action("standing")
-			
-			last_position = pathfollow.global_position.x
-			
 		else:
-			physicsbody.global_position = pathfollow.global_position
+			physicsbody.global_position.y = pathfollow.global_position.y
+		
+		#apply velocity
+		velocity = physicsbody.move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
+		
+		#update action animations to have the NPC run
+		if walk_speed != 0:
+			if velocity.x != 0:
+				animation_handler.play_action("running")
+				animation_handler.scale.x = sign(-velocity.x)
+			else:
+				animation_handler.play_action("standing")
+				
+		last_position = pathfollow.global_position.x
 		
 		pathfollow.offset += working_speed
 		if move_type and (pathfollow.offset >= path.curve.get_baked_length() or pathfollow.offset <= 0):
