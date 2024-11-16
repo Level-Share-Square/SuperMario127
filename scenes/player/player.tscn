@@ -1865,6 +1865,8 @@ layer = 60
 
 [node name="Stamina" parent="Viewports/ViewportContainer/CanvasLayer2" instance=ExtResource( 24 )]
 character_path = NodePath("../../Viewport/World/Character")
+camera_path = NodePath("../../Viewport/CameraP1")
+viewport_offset = Vector2( 192, 216 )
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="Viewports"]
 margin_left = 388.0
@@ -1943,6 +1945,8 @@ layer = 60
 
 [node name="Stamina" parent="Viewports/ViewportContainer2/CanvasLayer2" instance=ExtResource( 24 )]
 character_path = NodePath("../../../ViewportContainer/Viewport/World/Character2")
+camera_path = NodePath("../../Viewport/CameraP2")
+viewport_offset = Vector2( 576, 216 )
 
 [node name="SharedSounds" type="Node" parent="."]
 unique_name_in_owner = true
@@ -1971,5 +1975,7 @@ stream = ExtResource( 59 )
 bus = "Sounds"
 
 [connection signal="child_entered_tree" from="UIUnder/HUD/Control/TimerManager/RadialTimers" to="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits" method="child_entered_tree"]
+[connection signal="player_removed" from="Viewports" to="Viewports/ViewportContainer/CanvasLayer2/Stamina" method="player_removed"]
+[connection signal="player_removed" from="Viewports" to="Viewports/ViewportContainer2/CanvasLayer2/Stamina" method="player_removed"]
 
 [editable path="UIUnder/HUD/Control/TimerManager"]

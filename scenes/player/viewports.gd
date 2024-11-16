@@ -1,5 +1,7 @@
 extends HBoxContainer
 
+signal player_removed
+
 onready var viewport_container1 = $ViewportContainer
 onready var viewport_container2 = $ViewportContainer2
 
@@ -21,6 +23,8 @@ var player2_spawn = Vector2(0, 0)
 
 func remove_player():
 	if Singleton.PlayerSettings.number_of_players == 2:
+		emit_signal("player_removed")
+		
 		player2.position.y = -9999999999999
 		viewport_container2.visible = false
 		camera2.character_node = null
