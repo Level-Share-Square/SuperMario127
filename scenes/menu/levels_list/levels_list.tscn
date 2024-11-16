@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/actors/objects/cloud_platform/texture.png" type="Texture" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=16]
 [ext_resource path="res://scenes/menu/levels_list/misc/element_add_buttons.gd" type="Script" id=17]
 [ext_resource path="res://scenes/menu/levels_list/list_handler.gd" type="Script" id=18]
+[ext_resource path="res://scenes/menu/button_scripts/button_scroller.gd" type="Script" id=19]
 [ext_resource path="res://scenes/menu/levels_list/loader.gd" type="Script" id=20]
 [ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=22]
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=23]
@@ -1070,6 +1071,13 @@ Anyways, have fun!
 
 v1.01 (7/29): Quick hotfix to disable some unnecessary pipes, and to mae one of the more hidden star coins easier to find"
 
+[node name="ButtonScroller" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/InfoTab/Panel/MarginContainer/Description"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+flat = true
+script = ExtResource( 19 )
+scroll_path = NodePath("..")
+
 [node name="ScoresTab" type="Control" parent="Panel/Subscreens/LevelInfo/LevelPanel"]
 visible = false
 anchor_right = 1.0
@@ -1084,6 +1092,13 @@ margin_top = -4.0
 margin_right = 436.0
 margin_bottom = 4.0
 rect_min_size = Vector2( 440, 0 )
+
+[node name="ButtonScroller" type="Button" parent="Panel/Subscreens/LevelInfo/LevelPanel/ScoresTab/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+flat = true
+script = ExtResource( 19 )
+scroll_path = NodePath("../ScrollContainer")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/Subscreens/LevelInfo/LevelPanel/ScoresTab/Panel"]
 anchor_right = 1.0

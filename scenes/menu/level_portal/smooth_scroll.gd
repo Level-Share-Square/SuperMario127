@@ -30,7 +30,7 @@ func _ready():
 
 func gui_focus_changed(control: Control):
 	if not is_visible_in_tree(): return
-	if LastInputDevice.was_mouse: return
+	if LastInputDevice.is_mouse: return
 	if not is_a_parent_of(control): return
 	
 	scroll_vertical = (control.rect_position.y + control.rect_size.y) - rect_size.y/2

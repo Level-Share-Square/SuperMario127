@@ -42,7 +42,7 @@ func set_default_focus(node_path: String):
 
 
 func focus_node(node_path: String = ""):
-	if LastInputDevice.was_mouse: return
+	if LastInputDevice.is_mouse: return
 	
 	var node: Control = default_focus
 	if node_path != "":

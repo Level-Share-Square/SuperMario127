@@ -38,4 +38,5 @@ shape = SubResource( 2 )
 
 [node name="SwitchSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+volume_db = -8.0
 bus = "Sounds"

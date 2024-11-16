@@ -2,6 +2,7 @@ extends Node
 
 
 signal input_type_changed(new_input_type)
+signal mouse_changed(is_mouse)
 
 
 var class_type_map: Dictionary = {
@@ -16,11 +17,15 @@ var class_type_map: Dictionary = {
 
 enum InputType {Keyboard, Controller, Touch}
 var last_input_type: int = InputType.Keyboard
-var was_mouse: bool
+var is_mouse: bool
 
 
 func _input(event):
-	was_mouse = (event is InputEventMouseMotion or event is InputEventMouseButton)
+	var last_mouse: bool = is_mouse
+	is_mouse = (event is InputEventMouseMotion or event is InputEventMouseButton)
+	if is_mouse != last_mouse:
+		emit_signal("mouse_changed", is_mouse)
+	
 	
 	var class_string: String = event.get_class()
 	if class_string in class_type_map.keys():

@@ -34,7 +34,7 @@ signal button_pressed
 
 const DRAG_HOLD_TIME = 0.125
 
-var was_mouse: bool
+var is_mouse: bool
 var button_down: bool
 var hold_time: float
 var drag_index: int
@@ -94,7 +94,7 @@ func _process(delta):
 		if hold_time >= DRAG_HOLD_TIME:
 			decoration.modulate.a = 0.75
 			if Input.is_mouse_button_pressed(BUTTON_LEFT):
-				was_mouse = true
+				is_mouse = true
 				emit_signal("mouse_drag_started", self)
 
 
@@ -114,7 +114,7 @@ func button_up():
 	button_down = false
 	if hold_time >= DRAG_HOLD_TIME:
 		drag_over()
-		if was_mouse:
+		if is_mouse:
 			emit_signal("mouse_drag_ended", self)
 	else:
 		list_handler.change_focus(self)
