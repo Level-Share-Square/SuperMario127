@@ -41,8 +41,18 @@ void vertex() {
 		TRANSFORM[3].x = emission_rect.z * random_m1_p1(seed);
 		TRANSFORM[3].y = emission_rect.y;
 	}
-	if (TRANSFORM[3].y < -size.y*2.0+wind_speed) {
+	if (-size.y*2.0+wind_speed > TRANSFORM[3].y){
 		//Set the particle opacity
+		if (wind_speed/abs(wind_speed) == 1.0){
+			if (COLOR.a > 0.0) {
+				COLOR.a -= .25;
+			}
+			else {
+				COLOR.a = 0.0;
+				ACTIVE = false;
+			}
+		}
+	if (TRANSFORM[3].y > 0.0+wind_speed){
 		if (COLOR.a > 0.0) {
 			COLOR.a -= .25;
 		}
@@ -50,6 +60,7 @@ void vertex() {
 			COLOR.a = 0.0;
 			ACTIVE = false;
 		}
+	}
 	}
 	VELOCITY = vec3(0, -wind_speed*20.0, 0);
 }

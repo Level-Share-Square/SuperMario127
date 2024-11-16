@@ -228,6 +228,10 @@ func physics_process_shell(delta, _level_bounds):
 			else:
 				velocity.x *= hit_speed
 			koopa_sound.play()
+			
+		if hit_body.name.begins_with("Rex"):
+			velocity = Vector2(-velocity.x/2, -50)
+	
 	for hit_area in shell_attack_area.get_overlapping_areas():
 		if hit_area.has_method("is_hurt_area"):
 			velocity.x = (shell.global_position - hit_area.global_position).normalized().x
@@ -242,6 +246,9 @@ func physics_process_shell(delta, _level_bounds):
 		
 		if hit_area.get_collision_layer_bit(2) == true and hit_parent_parent.has_method("shell_hit") and hit_parent_parent != self and abs(velocity.x) > 15:
 			hit_parent_parent.shell_hit(shell.global_position)
+			if hit_parent_parent.name.begins_with("Rex"):
+				velocity = Vector2(-velocity.x/2, -50)
+		
 		elif hit_area.get_parent().has_method("is_coin"):
 			hit_parent.shell_hit()
 	

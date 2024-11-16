@@ -79,28 +79,29 @@ func _physics_process(delta):
 
 func apply_velocity(velocity: Vector2, delta: float) -> Vector2:
 	var new_velocity := velocity
+	var working_wind_power := abs(wind_power)
 	
 	# first apply the X component
-	if wind_angle_vector.x > 0 and velocity.x <= (wind_power*wind_angle_vector.x)*18:
+	if wind_angle_vector.x > 0 and velocity.x*sign(wind_power) <= (working_wind_power*wind_angle_vector.x)*18:
 		new_velocity.x += wind_power*wind_angle_vector.x*60*delta
-	elif wind_angle_vector.x < 0 and velocity.x >= (wind_power*wind_angle_vector.x)*18:
+	elif wind_angle_vector.x < 0 and velocity.x*sign(wind_power) >= (working_wind_power*wind_angle_vector.x)*18:
 		new_velocity.x += wind_power*wind_angle_vector.x*60*delta
 
 	#then the y component
-	if wind_angle_vector.y > 0 and velocity.y <= (wind_power*wind_angle_vector.y)*18:
+	if wind_angle_vector.y > 0 and velocity.y*sign(wind_power) <= (working_wind_power*wind_angle_vector.y)*18:
 		new_velocity.y += wind_power*wind_angle_vector.y*60*delta
-	elif wind_angle_vector.y < 0 and velocity.y >= (wind_power*wind_angle_vector.y)*18:
+	elif wind_angle_vector.y < 0 and velocity.y*sign(wind_power) >= (working_wind_power*wind_angle_vector.y)*18:
 		new_velocity.y += wind_power*wind_angle_vector.y*60*delta
 	
 	#then return the new velocity that's been calculated. Simple! :D
 	return new_velocity
 
 func update_property(key, value):
-	match(key):
-		"wind_power":
-			if wind_power <= 0:
-				wind_power = 1
-				
+#	match(key):
+#		"wind_power":
+#			if wind_power <= 0:
+#				wind_power = 0
+#
 	update_size()
 
 func entered(body):
@@ -113,9 +114,9 @@ func entered(body):
 func exited(body):
 	if enabled and body.name.begins_with("Character") and !body.dead and body.controllable:
 		body.in_wind = false
-		if wind_angle_vector.x != 0:
+		if wind_angle_vector.x != 0 and body.velocity.x >= (wind_power*wind_angle_vector.y)*18:
 			body.velocity.x = body.velocity.x*.95
-		if wind_angle_vector.y != 0:
+		if wind_angle_vector.y != 0 and body.velocity.y >= (wind_power*wind_angle_vector.y)*18:
 			body.velocity.y = body.velocity.y*.75
 	elif enabled and !body.name.begins_with("Character"):
 		body.get_parent().velocity.y = body.get_parent().velocity.y*.75
@@ -131,10 +132,16 @@ func update_size():
 func update_particles():
 	var wind_particle_seed : int = rand_range(0, 127000000)
 	particles.visibility_rect = Rect2(-size.x-32, -(size.y)-32, size.x*2+64, size.y*2+64)
-	particles.lifetime = ((size.y/20)/abs(wind_power))+.1
+	if wind_power != 0:
+		particles.lifetime = ((size.y/20)/abs(wind_power))+.1
+	else:
+		particles.lifetime = 0
 	particles.amount = int((size.x/48)*(size.y/48))
 	particles.modulate = Color(color.r, color.g, color.b)
 	particles.process_material.set_shader_param("seed_input", abs(wind_particle_seed))
-	particles.process_material.set_shader_param("wind_speed", abs(wind_power))
+	particles.process_material.set_shader_param("wind_speed", wind_power)
 	particles.process_material.set_shader_param("size", size/2)
-	particles.process_material.set_shader_param("emission_rect", Plane(0.0, 0.0, size.x/2, size.y/2))
+	if wind_power >= 0:
+		particles.process_material.set_shader_param("emission_rect", Rect2(0.0, 0.0, size.x/2, size.y/2))
+	else:
+		particles.process_material.set_shader_param("emission_rect", Rect2(0.0, -size.y, size.x/2, size.y/2))
