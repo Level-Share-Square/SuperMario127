@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/actors/objects/toxic_gas/toxic_gas.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/toxic_gas/toxic_gas_dissolve.gdshader" type="Shader" id=2]
 [ext_resource path="res://assets/misc/icon.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/toxic_gas/toxic_gas.gdshader" type="Shader" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 64 )
@@ -36,15 +37,72 @@ shader_param/mask = SubResource( 15 )
 shader_param/dissolve = SubResource( 13 )
 
 [sub_resource type="OpenSimplexNoise" id=16]
+seed = 3
 persistence = 0.375
 lacunarity = 0.19
 
 [sub_resource type="NoiseTexture" id=17]
 flags = 3
+seamless = true
+noise = SubResource( 16 )
+
+[sub_resource type="OpenSimplexNoise" id=18]
+seed = 3
+persistence = 0.375
+lacunarity = 0.19
+
+[sub_resource type="NoiseTexture" id=19]
+flags = 3
+seamless = true
+noise = SubResource( 18 )
+
+[sub_resource type="OpenSimplexNoise" id=20]
+seed = 1
+persistence = 0.375
+lacunarity = 0.19
+
+[sub_resource type="NoiseTexture" id=21]
+flags = 3
+width = 1024
+height = 1024
+seamless = true
+noise = SubResource( 20 )
+
+[sub_resource type="OpenSimplexNoise" id=22]
+seed = 4
+persistence = 0.375
+lacunarity = 0.19
+
+[sub_resource type="NoiseTexture" id=23]
+flags = 3
+seamless = true
+noise = SubResource( 22 )
+
+[sub_resource type="ShaderMaterial" id=24]
+shader = ExtResource( 4 )
+shader_param/base_uv_speed = Vector2( 0, -0.1 )
+shader_param/base_uv_scale = Vector2( 1, 1 )
+shader_param/opacity_uv_speed = Vector2( -0.2, 0 )
+shader_param/opacity_uv_scale = Vector2( 1, 1 )
+shader_param/dissolve_uv_scale = Vector2( 0.25, 0.25 )
+shader_param/dissolve_uv_speed = -0.1
+shader_param/dissolve_threshold = 0.417
+shader_param/edge_threshold = 2.539
+shader_param/base_texture = SubResource( 19 )
+shader_param/opacity_texture = SubResource( 23 )
+shader_param/dissolve_texture = SubResource( 21 )
+
+[sub_resource type="OpenSimplexNoise" id=25]
+seed = 3
+persistence = 0.375
+lacunarity = 0.19
+
+[sub_resource type="NoiseTexture" id=26]
+flags = 3
 width = 256
 height = 256
 seamless = true
-noise = SubResource( 16 )
+noise = SubResource( 25 )
 
 [node name="ToxicGas" type="Node2D"]
 script = ExtResource( 1 )
@@ -62,5 +120,10 @@ texture = ExtResource( 3 )
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Node2D"]
+visible = false
 material = SubResource( 7 )
 texture = SubResource( 17 )
+
+[node name="Sprite2" type="Sprite" parent="Node2D"]
+material = SubResource( 24 )
+texture = SubResource( 26 )
