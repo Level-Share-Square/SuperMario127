@@ -94,10 +94,10 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 10, 5 )
+extents = Vector2( 10, 7 )
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 10, 10.5 )
+extents = Vector2( 10, 14.5 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 6 )
@@ -427,13 +427,12 @@ frames = SubResource( 24 )
 speed_scale = 0.0
 
 [node name="SquishedShape" type="CollisionShape2D" parent="Rex"]
-visible = false
-position = Vector2( 0, 5 )
+position = Vector2( 0, 7 )
 shape = SubResource( 10 )
 disabled = true
 
 [node name="NormalShape" type="CollisionShape2D" parent="Rex"]
-position = Vector2( 0, -4.5 )
+position = Vector2( 0, -0.5 )
 shape = SubResource( 11 )
 
 [node name="StompDetector" type="Area2D" parent="Rex"]
@@ -501,7 +500,7 @@ shape = SubResource( 15 )
 visible = false
 position = Vector2( 0, -7 )
 collision_layer = 0
-collision_mask = 128
+collision_mask = 384
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rex/WaterDetector"]
 position = Vector2( 0, 8 )
