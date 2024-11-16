@@ -65,10 +65,10 @@ func set_checkpoint(body):
 		Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area] = []
 		for liquid in Singleton.CurrentLevelData.level_data.vars.liquids:
 			Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].append(liquid[1].save_pos)
-			
-		Singleton.CheckpointSaved.switch_state = Singleton.CurrentLevelData.level_data.vars.switch_state
-	Singleton.CheckpointSaved.liquid_positions = Singleton.CurrentLevelData.level_data.vars.liquid_positions
-	Singleton.CheckpointSaved.activated_shine_ids = Singleton.CurrentLevelData.level_data.vars.activated_shine_ids
+	
+	Singleton.CheckpointSaved.switch_state = Singleton.CurrentLevelData.level_data.vars.switch_state.duplicate(true)
+	Singleton.CheckpointSaved.liquid_positions = Singleton.CurrentLevelData.level_data.vars.liquid_positions.duplicate(true)
+	Singleton.CheckpointSaved.activated_shine_ids = Singleton.CurrentLevelData.level_data.vars.activated_shine_ids.duplicate(true)
 	
 	for checkpoint in Singleton.CurrentLevelData.level_data.vars.checkpoints:
 		if checkpoint[1] != self:
