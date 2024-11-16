@@ -28,7 +28,9 @@ func _ready():
 	get_viewport().connect("gui_focus_changed", self, "gui_focus_changed")
 
 
+export var custom_follow_focus: bool
 func gui_focus_changed(control: Control):
+	if not custom_follow_focus: return
 	if not is_visible_in_tree(): return
 	if LastInputDevice.is_mouse: return
 	if not is_a_parent_of(control): return

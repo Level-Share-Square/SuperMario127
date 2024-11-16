@@ -1,4 +1,4 @@
-[gd_scene load_steps=269 format=2]
+[gd_scene load_steps=273 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/level_portal/level_grid.gd" type="Script" id=2]
@@ -67,9 +67,11 @@
 [ext_resource path="res://assets/fonts/delfino_medium.tres" type="DynamicFont" id=65]
 [ext_resource path="res://scenes/menu/level_portal/level_panel/rate_button.gd" type="Script" id=66]
 [ext_resource path="res://scenes/menu/level_portal/level_panel/rate_panel.gd" type="Script" id=67]
+[ext_resource path="res://scenes/menu/level_portal/cursor.gd" type="Script" id=68]
 [ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_launch.wav" type="AudioStream" id=70]
 [ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_back.wav" type="AudioStream" id=71]
 [ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_switch.wav" type="AudioStream" id=72]
+[ext_resource path="res://scenes/menu/level_portal/scroll.gd" type="Script" id=73]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -224,6 +226,9 @@ fill_to = Vector2( 0.5, 0.3 )
 [sub_resource type="StyleBoxEmpty" id=171]
 
 [sub_resource type="ButtonGroup" id=8]
+
+[sub_resource type="RectangleShape2D" id=228]
+extents = Vector2( 236, 29.5 )
 
 [sub_resource type="Animation" id=218]
 length = 0.001
@@ -1487,6 +1492,9 @@ tracks/5/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
 }
 
+[sub_resource type="RectangleShape2D" id=229]
+extents = Vector2( 4, 4 )
+
 [node name="LevelPortal" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1643,13 +1651,13 @@ script = ExtResource( 8 )
 
 [node name="Focus" type="Control" parent="Subscreens/LevelList"]
 script = ExtResource( 7 )
+disabled = true
 default_focus_path = NodePath("../../../Buttons/LevelList/Back")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Subscreens/LevelList"]
 margin_right = 775.0
 margin_bottom = 432.0
 rect_min_size = Vector2( 0, 432 )
-follow_focus = true
 scroll_horizontal_enabled = false
 script = ExtResource( 24 )
 lerp_speed = 18.0
@@ -1684,6 +1692,10 @@ script = ExtResource( 52 )
 [node name="Query" type="LineEdit" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search"]
 margin_right = 296.0
 margin_bottom = 24.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
 size_flags_horizontal = 3
 custom_styles/read_only = SubResource( 169 )
 custom_styles/focus = SubResource( 170 )
@@ -1705,6 +1717,7 @@ margin_left = 296.0
 margin_right = 320.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
+focus_mode = 0
 custom_fonts/font = ExtResource( 9 )
 icon_align = 1
 expand_icon = true
@@ -1735,6 +1748,7 @@ rect_min_size = Vector2( 16, 0 )
 margin_left = 336.0
 margin_right = 403.0
 margin_bottom = 24.0
+focus_mode = 0
 custom_fonts/font = ExtResource( 9 )
 toggle_mode = true
 pressed = true
@@ -1755,6 +1769,7 @@ color = Color( 0, 0.0431373, 0.313726, 1 )
 margin_left = 404.0
 margin_right = 472.0
 margin_bottom = 24.0
+focus_mode = 0
 custom_fonts/font = ExtResource( 9 )
 toggle_mode = true
 group = SubResource( 8 )
@@ -1780,6 +1795,7 @@ color = Color( 0, 0.0431373, 0.313726, 1 )
 margin_left = 1.0
 margin_right = 71.0
 margin_bottom = 24.0
+focus_mode = 0
 custom_fonts/font = ExtResource( 9 )
 toggle_mode = true
 group = SubResource( 8 )
@@ -1915,6 +1931,10 @@ script = ExtResource( 30 )
 [node name="Query" type="LineEdit" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage"]
 margin_right = 95.0
 margin_bottom = 24.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
 size_flags_horizontal = 3
 custom_styles/read_only = SubResource( 169 )
 custom_styles/focus = SubResource( 170 )
@@ -1936,6 +1956,7 @@ margin_left = 95.0
 margin_right = 119.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
+focus_mode = 0
 custom_fonts/font = ExtResource( 9 )
 icon_align = 1
 expand_icon = true
@@ -1987,6 +2008,27 @@ playing = true
 centered = false
 offset = Vector2( 0, -8 )
 
+[node name="ScrollUp" type="Area2D" parent="Subscreens/LevelList"]
+position = Vector2( 148, 0 )
+collision_layer = 0
+script = ExtResource( 73 )
+scroll_path = NodePath("../ScrollContainer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Subscreens/LevelList/ScrollUp"]
+position = Vector2( 236, 29.5 )
+shape = SubResource( 228 )
+
+[node name="ScrollDown" type="Area2D" parent="Subscreens/LevelList"]
+position = Vector2( 148, 373 )
+collision_layer = 0
+script = ExtResource( 73 )
+scroll_path = NodePath("../ScrollContainer")
+direction = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Subscreens/LevelList/ScrollDown"]
+position = Vector2( 236, 29.5 )
+shape = SubResource( 228 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Subscreens/LevelList"]
 root_node = NodePath("../ScrollContainer")
 anims/RESET = SubResource( 218 )
@@ -2000,6 +2042,7 @@ script = ExtResource( 8 )
 
 [node name="Focus" type="Control" parent="Subscreens/LevelPage"]
 script = ExtResource( 7 )
+disabled = true
 default_focus_path = NodePath("../ScrollContainer/MarginContainer/VBoxContainer/LevelButtons/Play")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Subscreens/LevelPage"]
@@ -2007,7 +2050,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 7.0
 rect_min_size = Vector2( 0, 432 )
-follow_focus = true
 scroll_horizontal_enabled = false
 script = ExtResource( 24 )
 lerp_speed = 18.0
@@ -2058,6 +2100,7 @@ alignment = 2
 margin_top = 6.0
 margin_right = 96.0
 margin_bottom = 26.0
+focus_mode = 0
 theme_type_variation = "TransparentButton"
 text = "View on LSS"
 script = ExtResource( 4 )
@@ -2074,6 +2117,7 @@ unique_name_in_owner = true
 margin_top = 6.0
 margin_right = 96.0
 margin_bottom = 26.0
+focus_mode = 0
 theme_type_variation = "TransparentButton"
 disabled = true
 text = " Favorite? "
@@ -2091,6 +2135,7 @@ margin_left = 324.0
 margin_right = 394.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 70, 0 )
+focus_mode = 0
 theme_type_variation = "LevelButton"
 disabled = true
 text = "Save"
@@ -2108,6 +2153,7 @@ margin_left = 402.0
 margin_right = 472.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 70, 0 )
+focus_mode = 0
 theme_type_variation = "LevelButton"
 text = "Play!"
 script = ExtResource( 4 )
@@ -2775,6 +2821,27 @@ margin_bottom = 540.0
 custom_constants/separation = 12
 script = ExtResource( 53 )
 
+[node name="ScrollUp" type="Area2D" parent="Subscreens/LevelPage"]
+position = Vector2( 148, 0 )
+collision_layer = 0
+script = ExtResource( 73 )
+scroll_path = NodePath("../ScrollContainer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Subscreens/LevelPage/ScrollUp"]
+position = Vector2( 236, 29.5 )
+shape = SubResource( 228 )
+
+[node name="ScrollDown" type="Area2D" parent="Subscreens/LevelPage"]
+position = Vector2( 148, 373 )
+collision_layer = 0
+script = ExtResource( 73 )
+scroll_path = NodePath("../ScrollContainer")
+direction = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Subscreens/LevelPage/ScrollDown"]
+position = Vector2( 236, 29.5 )
+shape = SubResource( 228 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Subscreens/LevelPage"]
 root_node = NodePath("../ScrollContainer")
 anims/RESET = SubResource( 220 )
@@ -2788,6 +2855,7 @@ script = ExtResource( 8 )
 
 [node name="Focus" type="Control" parent="Subscreens/Login"]
 script = ExtResource( 7 )
+disabled = true
 default_focus_path = NodePath("../../../Buttons/LevelPage/Back")
 
 [node name="MarginContainer" type="CenterContainer" parent="Subscreens/Login"]
@@ -2864,6 +2932,10 @@ margin_bottom = 84.0
 unique_name_in_owner = true
 margin_right = 432.0
 margin_bottom = 28.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
 custom_fonts/font = ExtResource( 58 )
 placeholder_text = "Email"
 
@@ -2877,6 +2949,10 @@ rect_min_size = Vector2( 432, 0 )
 unique_name_in_owner = true
 margin_right = 293.0
 margin_bottom = 28.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 58 )
 secret = true
@@ -2893,6 +2969,7 @@ rect_min_size = Vector2( 4, 0 )
 margin_left = 305.0
 margin_right = 363.0
 margin_bottom = 28.0
+focus_mode = 0
 theme_type_variation = "TransparentButton"
 custom_fonts/font = ExtResource( 58 )
 text = " Show "
@@ -2903,6 +2980,7 @@ extend_amount = 2
 margin_left = 367.0
 margin_right = 432.0
 margin_bottom = 28.0
+focus_mode = 0
 theme_type_variation = "TransparentButton"
 custom_fonts/font = ExtResource( 58 )
 text = " Reset "
@@ -2921,6 +2999,7 @@ margin_bottom = 144.0
 [node name="Login" type="Button" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/HBoxContainer"]
 margin_right = 276.0
 margin_bottom = 28.0
+focus_mode = 0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.5
 theme_type_variation = "TransparentButton"
@@ -2934,6 +3013,7 @@ extend_amount = 2
 margin_left = 280.0
 margin_right = 464.0
 margin_bottom = 28.0
+focus_mode = 0
 size_flags_horizontal = 3
 theme_type_variation = "TransparentButton"
 custom_fonts/font = ExtResource( 58 )
@@ -3053,6 +3133,7 @@ visible = false
 margin_top = 328.0
 margin_right = 92.0
 margin_bottom = 352.0
+focus_mode = 0
 custom_fonts/font = ExtResource( 9 )
 text = "Log Out"
 script = ExtResource( 10 )
@@ -3062,6 +3143,7 @@ sink_amount = 6
 margin_top = 356.0
 margin_right = 92.0
 margin_bottom = 380.0
+focus_mode = 0
 custom_fonts/font = ExtResource( 9 )
 text = "Log In"
 script = ExtResource( 10 )
@@ -3071,6 +3153,7 @@ sink_amount = 6
 margin_top = 384.0
 margin_right = 92.0
 margin_bottom = 408.0
+focus_mode = 0
 theme_type_variation = "Red"
 custom_fonts/font = ExtResource( 9 )
 text = "Back to Menu"
@@ -3091,6 +3174,7 @@ alignment = 2
 margin_top = 384.0
 margin_right = 92.0
 margin_bottom = 408.0
+focus_mode = 0
 theme_type_variation = "Red"
 custom_fonts/font = ExtResource( 9 )
 text = "Back"
@@ -3111,6 +3195,7 @@ alignment = 2
 margin_top = 384.0
 margin_right = 92.0
 margin_bottom = 408.0
+focus_mode = 0
 theme_type_variation = "Red"
 custom_fonts/font = ExtResource( 9 )
 text = "Back"
@@ -3124,10 +3209,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 640.0
-margin_top = 32.0
-margin_right = 768.0
-margin_bottom = 464.0
+margin_left = -128.0
+margin_top = -184.0
+margin_bottom = 248.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
 script = ExtResource( 17 )
@@ -3138,6 +3222,7 @@ margin_left = 16.0
 margin_top = 335.0
 margin_right = 96.0
 margin_bottom = 415.0
+focus_mode = 0
 script = ExtResource( 4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LaunchStar/Button"]
@@ -3226,18 +3311,39 @@ script = ExtResource( 56 )
 anims/RESET = SubResource( 203 )
 anims/transition = SubResource( 202 )
 
-[node name="Cursor" type="ColorRect" parent="."]
-visible = false
+[node name="Node2D" type="Node2D" parent="."]
+z_index = 10
+
+[node name="Cursor" type="Panel" parent="Node2D"]
+process_priority = 1
 margin_right = 8.0
 margin_bottom = 8.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+focus_mode = 2
+mouse_filter = 2
+theme = ExtResource( 1 )
+theme_type_variation = "Cursor"
+script = ExtResource( 68 )
+cursor_speed = 6.0
+
+[node name="Area2D" type="Area2D" parent="Node2D/Cursor"]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Cursor/Area2D"]
+position = Vector2( 4, 4 )
+shape = SubResource( 229 )
 
 [connection signal="screen_opened" from="." to="Subscreens" method="screen_change" binds= [ "LevelList" ]]
-[connection signal="screen_opened" from="." to="Subscreens/LevelList/Focus" method="focus_node" flags=3]
 [connection signal="screen_opened" from="." to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search" method="screen_opened"]
 [connection signal="screen_opened" from="." to="AccountInfo" method="load_info"]
 [connection signal="screen_opened" from="." to="HTTPRequest" method="load_page"]
+[connection signal="screen_opened" from="." to="Node2D/Cursor" method="reset_cursor"]
 [connection signal="screen_changed" from="Subscreens" to="Buttons" method="screen_changed"]
-[connection signal="screen_opened" from="Subscreens/LevelList" to="Subscreens/LevelList/Focus" method="focus_node" flags=3]
 [connection signal="back_press" from="Subscreens/LevelList/Focus" to="." method="transition" binds= [ "MainMenu" ]]
 [connection signal="back_press" from="Subscreens/LevelList/Focus" to="Subscreens/LevelList" method="transition" binds= [ "" ]]
 [connection signal="resized" from="Subscreens/LevelList/ScrollContainer/MarginContainer" to="Subscreens/LevelList/ScrollContainer/MarginContainer" method="resized"]
@@ -3248,7 +3354,6 @@ margin_bottom = 8.0
 [connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Featured" to="HTTPRequest" method="change_page_type" binds= [ 1 ]]
 [connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Favorites/Favorited" to="HTTPRequest" method="change_page_type" binds= [ 2 ]]
 [connection signal="pressed" from="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage/Search" to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage" method="go"]
-[connection signal="screen_opened" from="Subscreens/LevelPage" to="Subscreens/LevelPage/Focus" method="focus_node" flags=3]
 [connection signal="screen_opened" from="Subscreens/LevelPage" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/Comments" method="screen_opened"]
 [connection signal="back_press" from="Subscreens/LevelPage/Focus" to="Subscreens/LevelPage" method="transition" binds= [ "LevelList" ]]
 [connection signal="resized" from="Subscreens/LevelPage/ScrollContainer/MarginContainer" to="Subscreens/LevelPage/ScrollContainer/MarginContainer" method="resized"]
@@ -3259,7 +3364,6 @@ margin_bottom = 8.0
 [connection signal="level_loaded" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating" method="level_loaded"]
 [connection signal="pressed" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description/VBoxContainer/Button" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/LevelPanel/MarginContainer/VBoxContainer/Description" method="toggle_expand"]
 [connection signal="mouse_exited" from="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating" to="Subscreens/LevelPage/ScrollContainer/MarginContainer/VBoxContainer/RatePanel/PanelContainer/MarginContainer/HBoxContainer/Rating" method="mouse_exited"]
-[connection signal="screen_opened" from="Subscreens/Login" to="Subscreens/Login/Focus" method="focus_node" flags=3]
 [connection signal="back_press" from="Subscreens/Login/Focus" to="Subscreens/Login" method="transition" binds= [ "LevelList" ]]
 [connection signal="resized" from="Subscreens/Login/MarginContainer" to="Subscreens/Login/MarginContainer" method="resized"]
 [connection signal="button_down" from="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Show" to="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Password" method="set_secret" binds= [ false ]]

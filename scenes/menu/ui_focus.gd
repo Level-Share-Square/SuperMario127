@@ -19,12 +19,12 @@ func _input(event):
 
 
 func _unhandled_input(event):
-	if disabled: return
 	if not is_visible_in_tree(): return
 
 	if event.is_action_pressed("ui_cancel"):
-			emit_signal("back_press")
+		emit_signal("back_press")
 	
+	if disabled: return
 	if not is_instance_valid(default_focus): return
 	
 	if not is_instance_valid(get_focus_owner()):

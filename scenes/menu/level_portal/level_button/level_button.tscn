@@ -85,6 +85,7 @@ margin_right = 224.0
 margin_bottom = 112.0
 rect_min_size = Vector2( 224, 112 )
 rect_pivot_offset = Vector2( 112, 56 )
+focus_mode = 0
 size_flags_horizontal = 3
 theme = ExtResource( 2 )
 script = ExtResource( 11 )

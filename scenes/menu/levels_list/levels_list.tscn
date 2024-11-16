@@ -769,6 +769,7 @@ follow_focus = true
 scroll_horizontal_enabled = false
 script = ExtResource( 51 )
 lerp_speed = 18.0
+custom_follow_focus = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/Subscreens/LevelView/ScrollContainer"]
 margin_right = 24.0

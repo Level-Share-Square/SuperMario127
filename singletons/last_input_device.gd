@@ -21,10 +21,11 @@ var is_mouse: bool
 
 
 func _input(event):
-	var last_mouse: bool = is_mouse
-	is_mouse = (event is InputEventMouseMotion or event is InputEventMouseButton)
-	if is_mouse != last_mouse:
-		emit_signal("mouse_changed", is_mouse)
+	if not "device" in event or event.device != -1:
+		var last_mouse: bool = is_mouse
+		is_mouse = (event is InputEventMouseMotion or event is InputEventMouseButton)
+		if is_mouse != last_mouse:
+			emit_signal("mouse_changed", is_mouse)
 	
 	
 	var class_string: String = event.get_class()
