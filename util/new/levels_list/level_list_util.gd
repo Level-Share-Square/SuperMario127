@@ -155,6 +155,13 @@ static func init_levels_list():
 				get_level_file_path(level, DEV_FOLDER)
 			)
 			
+			var thumbnail_path: String = get_level_thumbnail_path(level, INTERNAL_DEV_FOLDER)
+			if file_exists(thumbnail_path):
+				var new_thumbnail_path: String = get_level_thumbnail_path(level, DEV_FOLDER, false)
+				new_thumbnail_path += "." + thumbnail_path.get_extension()
+				dir.copy(thumbnail_path, new_thumbnail_path)
+			
+			
 		sort_file_util.save_sort_file(DEV_FOLDER, sort)
 
 static func delete_level_folder(path: String):
