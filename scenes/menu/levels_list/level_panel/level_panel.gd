@@ -42,7 +42,14 @@ onready var percentage_label := $InfoTab/Info/Completion/Percentage
 ### time scores
 onready var time_scores_container: VBoxContainer = $ScoresTab/Panel/ScrollContainer/MarginContainer/VBoxContainer
 
-func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder: String):
+### buttons
+onready var back_button = $Buttons/Return
+onready var edit_button = $Buttons/EditLevel
+onready var reset_button = $Buttons/ResetSave
+onready var delete_button = $Buttons/DeleteLevel
+
+
+func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder: String, can_edit: bool = true):
 	yield(get_parent(), "screen_opened")
 	
 	level_info = _level_info
@@ -57,6 +64,16 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 	
 	author.text = author_prefix + level_info.level_author
 	description.bbcode_text = "[center]" + level_info.level_description + "[/center]"
+	
+	# buttons
+	edit_button.visible = can_edit
+	delete_button.visible = can_edit
+	if not can_edit:
+		back_button.focus_neighbour_top = back_button.get_path_to(reset_button)
+		reset_button.focus_neighbour_bottom = reset_button.get_path_to(back_button)
+	else:
+		back_button.focus_neighbour_top = back_button.get_path_to(delete_button)
+		reset_button.focus_neighbour_bottom = reset_button.get_path_to(delete_button)
 	
 	# thumbnail
 	var cached_image: ImageTexture = http_thumbnails.get_cached_image(level_info.thumbnail_url)

@@ -672,6 +672,8 @@ anims/RESET = SubResource( 3 )
 anims/transition = SubResource( 4 )
 
 [connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3 binds= [ "" ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/DevLevels" to="." method="transition" binds= [ "LevelsList" ]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/DevLevels" to="ButtonFunctions" method="set_dev_toggle"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/DevLevels" to="Focus" method="set_default_focus" binds= [ "%DevLevels" ]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/LSS" to="." method="transition" binds= [ "LevelPortal" ]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/LSS" to="Focus" method="set_default_focus" binds= [ "%LSS" ]]

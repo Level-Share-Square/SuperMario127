@@ -20,18 +20,38 @@ onready var focus = $"%Focus"
 
 ### variables
 const BASE_FOLDER: String = level_list_util.BASE_FOLDER
+const DEV_FOLDER: String = level_list_util.DEV_FOLDER
 var working_folder: String = BASE_FOLDER
+var loaded_folder: String
 
 
 func _ready():
-	level_list_util.create_level_folder(working_folder)
-	yield(get_owner(), "screen_opened")
-	
+	level_list_util.init_levels_list()
+
+
+var prev_level_sort: Array
+func screen_opened():
 	if old_levels.should_convert_levels():
 		old_levels.start(BASE_FOLDER)
 		yield(old_levels, "conversion_complete")
 	
-	loader.thread_load_directory(working_folder)
+	if working_folder != loaded_folder:
+		loader.thread_load_directory(working_folder)
+		loaded_folder = working_folder
+		return
+	
+	# checking if any levels were added (from the LSS menu)
+	# and reloading if so
+	if working_folder != BASE_FOLDER: return
+	
+	var sort_dict: Dictionary = sort_file_util.load_sort_file(working_folder)
+	var level_sort: Array = sort_dict.get(sort_file_util.LEVELS, [])
+	
+	if prev_level_sort != [] and level_sort.size() != prev_level_sort.size():
+		loaded_folder = working_folder
+		loader.thread_load_directory(working_folder)
+	
+	prev_level_sort = level_sort
 
 
 func clear_grid():
@@ -75,18 +95,8 @@ func remove_level(level_id: String, folder: String = working_folder):
 	level_grid.get_node(level_id).call_deferred("queue_free")
 
 
-var prev_level_sort: Array
-func screen_opened():
-	var sort_dict: Dictionary = sort_file_util.load_sort_file(BASE_FOLDER)
-	var level_sort: Array = sort_dict.get(sort_file_util.LEVELS, [])
-	
-	if prev_level_sort != [] and level_sort.size() != prev_level_sort.size():
-		loader.thread_load_directory(BASE_FOLDER)
-	
-	prev_level_sort = level_sort
-
 func go_back():
-	if working_folder == BASE_FOLDER:
+	if working_folder == BASE_FOLDER or working_folder == DEV_FOLDER:
 		get_owner().transition("MainMenu")
 	else:
 		# um... sorta hacky

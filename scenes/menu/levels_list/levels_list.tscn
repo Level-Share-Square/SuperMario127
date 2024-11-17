@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/actors/objects/cloud_platform/texture.png" type="Texture" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://scenes/menu/levels_list/list_handler.gd" type="Script" id=18]
 [ext_resource path="res://scenes/menu/button_scripts/button_scroller.gd" type="Script" id=19]
 [ext_resource path="res://scenes/menu/levels_list/loader.gd" type="Script" id=20]
+[ext_resource path="res://scenes/menu/levels_list/dev_toggle.gd" type="Script" id=21]
 [ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=22]
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=23]
 [ext_resource path="res://scenes/shared/background/foregrounds/hills/preview.png" type="Texture" id=24]
@@ -529,6 +530,12 @@ anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 9 )
 
+[node name="DevToggle" type="Control" parent="."]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 21 )
+
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource( 4 )
@@ -820,7 +827,7 @@ margin_top = 12.0
 margin_right = 660.0
 margin_bottom = 301.0
 script = ExtResource( 26 )
-default_focus_path = NodePath("../LevelPanel/Buttons/Return")
+default_focus_path = NodePath("../LevelPanel/Buttons/PlayLevel")
 
 [node name="LevelPanel" type="Control" parent="Panel/Subscreens/LevelInfo"]
 unique_name_in_owner = true
@@ -1946,6 +1953,7 @@ script = ExtResource( 53 )
 [node name="ReturnArgs" type="Node" parent="."]
 script = ExtResource( 15 )
 
+[connection signal="screen_opened" from="." to="DevToggle" method="screen_opened"]
 [connection signal="screen_opened" from="." to="Panel/Subscreens/LevelView/Focus" method="focus_node" flags=3]
 [connection signal="screen_opened" from="." to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="screen_opened"]
 [connection signal="pressed" from="Panel/Buttons/Back" to="." method="transition" binds= [ "MainMenu" ]]

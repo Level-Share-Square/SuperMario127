@@ -2,6 +2,8 @@ class_name level_list_util
 
 
 const BASE_FOLDER: String = "user://level_list"
+const DEV_FOLDER: String = BASE_FOLDER + "/Developer Levels"
+const INTERNAL_DEV_FOLDER: String = "res://level/Developer Levels/"
 const ENCRYPTION_PASSWORD = "BadCode"
 
 
@@ -137,6 +139,23 @@ static func create_level_folder(path: String):
 	
 	sort_file_util.save_sort_file(path, {})
 
+static func init_levels_list():
+	var dir := Directory.new()
+	if !dir.dir_exists(BASE_FOLDER):
+		create_level_folder(BASE_FOLDER)
+	
+	if !dir.dir_exists(DEV_FOLDER):
+		create_level_folder(DEV_FOLDER)
+		
+		var sort: Dictionary = sort_file_util.load_sort_file(INTERNAL_DEV_FOLDER)
+		var level_sort: Array = sort.get(sort_file_util.LEVELS, [])
+		for level in level_sort:
+			dir.copy(
+				get_level_file_path(level, INTERNAL_DEV_FOLDER), 
+				get_level_file_path(level, DEV_FOLDER)
+			)
+			
+		sort_file_util.save_sort_file(DEV_FOLDER, sort)
 
 static func delete_level_folder(path: String):
 	var parent_folder: String = get_parent_from_path(path)

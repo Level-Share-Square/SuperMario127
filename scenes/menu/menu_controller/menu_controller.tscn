@@ -160,19 +160,22 @@ script = ExtResource( 3 )
 default_screen = NodePath("MainMenu")
 
 [node name="MainMenu" parent="UI/Screens" instance=ExtResource( 2 )]
+unique_name_in_owner = true
 music_id = 31
 
 [node name="Credits" parent="UI/Screens" instance=ExtResource( 4 )]
+unique_name_in_owner = true
 visible = false
 music_id = 66
 
 [node name="Options" parent="UI/Screens" instance=ExtResource( 5 )]
+unique_name_in_owner = true
 visible = false
 
 [node name="LevelsList" parent="UI/Screens" instance=ExtResource( 6 )]
+unique_name_in_owner = true
 visible = false
 
 [node name="LevelPortal" parent="UI/Screens" instance=ExtResource( 9 )]
+unique_name_in_owner = true
 visible = false
-
-[connection signal="screen_opened" from="UI/Screens/Options" to="UI/Screens/Options/Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]

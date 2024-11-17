@@ -51,16 +51,18 @@ func load_directory(working_folder: String):
 	print("Loading directory " + working_folder + "...")
 	is_loading = true
 	
-	if working_folder != level_list_util.BASE_FOLDER:
+	var is_base_folder: bool = working_folder == level_list_util.BASE_FOLDER
+	var is_dev_folder: bool = working_folder == level_list_util.DEV_FOLDER
+	if not is_base_folder and not is_dev_folder:
 		var parent_folder: String = level_list_util.get_parent_from_path(working_folder)
 		# folder id is useless on back buttons :p
 		add_folder_card("", parent_folder, false, false, true)
 	
 	var sort: Dictionary = sort_file_util.load_sort_file(working_folder)
 	for folder in sort.get(sort_file_util.FOLDERS, []):
-		add_folder_card(folder, working_folder, true)
+		add_folder_card(folder, working_folder, not is_dev_folder)
 	for level in sort.get(sort_file_util.LEVELS, []):
-		add_level_card(level, working_folder, true)
+		add_level_card(level, working_folder, not is_dev_folder)
 	
 	print("Done loading levels in directory.")
 	emit_signal("loading_finished")

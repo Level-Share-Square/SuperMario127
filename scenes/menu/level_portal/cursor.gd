@@ -12,8 +12,15 @@ func _ready():
 
 func mouse_changed(is_mouse: bool):
 	visible = not is_mouse
-	if not get_owner().is_visible_in_tree(): return
-	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN if not is_mouse else Input.MOUSE_MODE_VISIBLE
+	var visible_in_tree: bool = get_owner().is_visible_in_tree()
+	if not is_mouse and visible_in_tree:
+		Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+func _exit_tree():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
 func _input(event):
