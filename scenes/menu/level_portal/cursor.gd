@@ -10,6 +10,11 @@ func _ready():
 	mouse_changed(false)
 
 
+func screen_opened():
+	reset_cursor()
+	mouse_changed(LastInputDevice.is_mouse)
+
+
 func mouse_changed(is_mouse: bool):
 	visible = not is_mouse
 	var visible_in_tree: bool = get_owner().is_visible_in_tree()

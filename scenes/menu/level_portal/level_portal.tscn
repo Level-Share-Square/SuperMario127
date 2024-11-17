@@ -3209,10 +3209,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 640.0
-margin_top = 32.0
-margin_right = 768.0
-margin_bottom = 464.0
+margin_left = -128.0
+margin_top = -184.0
+margin_bottom = 248.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
 script = ExtResource( 17 )
@@ -3346,7 +3345,7 @@ shape = SubResource( 229 )
 [connection signal="screen_opened" from="." to="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search" method="screen_opened"]
 [connection signal="screen_opened" from="." to="AccountInfo" method="load_info"]
 [connection signal="screen_opened" from="." to="HTTPRequest" method="load_page"]
-[connection signal="screen_opened" from="." to="Node2D/Cursor" method="reset_cursor"]
+[connection signal="screen_opened" from="." to="Node2D/Cursor" method="screen_opened"]
 [connection signal="screen_changed" from="Subscreens" to="Buttons" method="screen_changed"]
 [connection signal="back_press" from="Subscreens/LevelList/Focus" to="." method="transition" binds= [ "MainMenu" ]]
 [connection signal="back_press" from="Subscreens/LevelList/Focus" to="Subscreens/LevelList" method="transition" binds= [ "" ]]
