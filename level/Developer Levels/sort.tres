@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://level/level_sort_resource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+json = "{\"levels\":[\"f37b2c6f-22c6-4b83-a96f-b32719c09e50\",\"6fcac9cc-90c9-427c-a5a4-c7b09b6017ba\"]}"

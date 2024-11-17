@@ -3,6 +3,7 @@ class_name sort_file_util
 
 const EMPTY_DICTIONARY: Dictionary = {}
 const BASE_FOLDER: String = "user://level_list"
+const INTERNAL_SORT: String = "res://level/Developer Levels/sort.tres"
 const LEVELS: String = "levels"
 const FOLDERS: String = "folders"
 
@@ -17,6 +18,15 @@ static func remove_from_sort(id: String, working_folder: String, sort_type: Stri
 	var sort: Dictionary = load_sort_file(working_folder)
 	sort.get_or_add(sort_type, []).erase(id)
 	save_sort_file(working_folder, sort)
+
+
+static func load_internal_sort_file() -> Dictionary:
+	var text: String = load(INTERNAL_SORT).json
+	var parse: JSONParseResult = JSON.parse(text)
+	if parse.error != OK:
+		printerr(parse.error_string)
+		return EMPTY_DICTIONARY
+	return parse.result
 
 
 static func load_sort_file(working_folder: String) -> Dictionary:

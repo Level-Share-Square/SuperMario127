@@ -146,29 +146,27 @@ static func init_levels_list():
 	
 	var setup_dev: bool = not dir.dir_exists(DEV_FOLDER)
 	if not setup_dev:
-		var internal_array: Array = sort_file_util.load_sort_file(INTERNAL_DEV_FOLDER).get(sort_file_util.LEVELS, [])
+		var internal_array: Array = sort_file_util.load_internal_sort_file().get(sort_file_util.LEVELS, [])
 		var array: Array = sort_file_util.load_sort_file(DEV_FOLDER).get(sort_file_util.LEVELS, [])
 		if internal_array.size() != array.size():
-			print("meow")
 			setup_dev = true
 	
 	if setup_dev:
 		create_level_folder(DEV_FOLDER)
 		
-		var sort: Dictionary = sort_file_util.load_sort_file(INTERNAL_DEV_FOLDER)
+		var sort: Dictionary = sort_file_util.load_internal_sort_file()
 		var level_sort: Array = sort.get(sort_file_util.LEVELS, [])
 		for level in level_sort:
-			dir.copy(
-				get_level_file_path(level, INTERNAL_DEV_FOLDER), 
-				get_level_file_path(level, DEV_FOLDER)
-			)
+			var level_code: String = load(INTERNAL_DEV_FOLDER + "/" + level + ".tres").code
+			save_level_code_file(level_code, get_level_file_path(level, DEV_FOLDER))
 			
-			var thumbnail_path: String = get_level_thumbnail_path(level, INTERNAL_DEV_FOLDER)
-			if file_exists(thumbnail_path):
+			var thumbnail_path: String = get_level_thumbnail_path(level, INTERNAL_DEV_FOLDER, false) + ".png"
+			if ResourceLoader.exists(thumbnail_path):
 				var new_thumbnail_path: String = get_level_thumbnail_path(level, DEV_FOLDER, false)
-				new_thumbnail_path += "." + thumbnail_path.get_extension()
-				dir.copy(thumbnail_path, new_thumbnail_path)
-			
+				new_thumbnail_path += ".png"
+				
+				var texture: Texture = load(thumbnail_path)
+				texture.get_data().save_png(new_thumbnail_path)
 			
 		sort_file_util.save_sort_file(DEV_FOLDER, sort)
 
