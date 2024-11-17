@@ -155,11 +155,14 @@ func autostart_dialogue(body):
 	if autostart > AUTOSTART_OFF and body.name.begins_with("PlayerCollision"):
 		if autostart == AUTOSTART_ONESHOT and has_been_read == true: return
 		
-		dialogue_menu.stored_velocity = body.get_parent().velocity
+		var new_char: Character = body.get_parent()
+		if not new_char.controllable: return
+		
+		dialogue_menu.stored_velocity = new_char.velocity
 		if delegate_tag == "" or delegate_tag == tag:
-			open_menu(body.get_parent())
+			open_menu(new_char)
 		else:
-			open_remote_menu(body.get_parent())
+			open_remote_menu(new_char)
 
 
 # this is to make npcs emote in front of signs (and run autostart now lol)
