@@ -724,7 +724,10 @@ func _physics_process(delta: float) -> void:
 		disable_movement = state.disable_movement or (nozzle != null and (nozzle.name == "TurboNozzle" and nozzle.activated))
 		disable_turning = state.disable_turning or (nozzle != null and (nozzle.name == "TurboNozzle" and nozzle.activated))
 		disable_animation = state.disable_animation
-		disable_friction = state.disable_friction or (nozzle != null and (nozzle.name == "TurboNozzle" and nozzle.activated))
+		if in_wind:
+			disable_friction = true
+		else:
+			disable_friction = state.disable_friction or (nozzle != null and (nozzle.name == "TurboNozzle" and nozzle.activated))
 	else:
 		disable_movement = false
 		disable_turning = false
@@ -750,7 +753,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Horizontal physics
 	if move_direction != 0 and controllable:
-		if is_on_floor():
+		if is_grounded():
 			# Accelerate/decelerate
 			if velocity.x * move_direction < 0: #why. just why. you already have the move direction, dingus.
 				velocity.x += deceleration * move_direction
@@ -769,13 +772,38 @@ func _physics_process(delta: float) -> void:
 				pass
 	elif !disable_friction:
 		if abs(velocity.x) > 0:
-			if abs(velocity.x) > 15:
+			if abs(velocity.x) > 10:
+				var new_velocity
 				if is_on_floor():
-					velocity.x -= sign(velocity.x) * friction
+					new_velocity = sign(velocity.x) * friction
+					if abs(new_velocity) > 0:
+						velocity.x -= new_velocity
+					else:
+						velocity.x -= sign(velocity.x) * clamp(abs(new_velocity), 0, velocity.x)
 				else:
-					velocity.x -= sign(velocity.x) * aerial_friction * (2 if abs(velocity.x) > move_speed else 1)
+					new_velocity = sign(velocity.x) * aerial_friction * (2 if abs(velocity.x) > move_speed else 1)
+					if abs(new_velocity) > 0:
+						velocity.x -= new_velocity
+					else:
+						velocity.x -= sign(velocity.x) * clamp(abs(new_velocity), 0, velocity.x)
 			else:
 				velocity.x = 0
+	
+	#frictionless is affected by gravity on slopes (also gets dives working with friction)
+	if disable_friction and is_grounded() and !(nozzle != null and (nozzle.name == "TurboNozzle" and nozzle.activated)):
+		var normal = ground_check.get_collision_normal()
+		if abs(velocity.length()) < 450 and abs(normal.y) < 1:
+			if normal.y > 1:
+				if !(inputs[1][0] and !inputs[0][0] and disable_movement == false):
+					velocity.x += gravity*gravity_scale*normal.x*2
+				else:
+					velocity.x += gravity*gravity_scale*normal.x*5.5
+			
+			if normal.y < 1:
+				if !(inputs[0][0] and !inputs[1][0] and disable_movement == false):
+					velocity.x += gravity*gravity_scale*normal.x*2
+				else:
+					velocity.x += gravity*gravity_scale*normal.x*5.5
 	
 	if is_grounded() and !disable_animation and movable and controlled_locally and controllable and abs(velocity.x) > 15:
 		if !is_walled():
@@ -1106,6 +1134,21 @@ func kill(cause: String) -> void:
 			yield(get_tree().create_timer(0.75), "timeout")
 			if number_of_players != 1:
 				reload = false
+		elif cause == "timer":
+			sound_player.play_last_hit_sound()
+			controllable = false
+			movable = false
+			cutout_in = cutout_death
+			sprite.visible = false
+			death_sprite.set_as_toplevel(true)
+			death_sprite.global_position = sprite.global_position
+			death_sprite.play_anim()
+			position = Vector2(0, 100000000000000000)
+			reset_physics_interpolation()
+			yield(get_tree().create_timer(0.55), "timeout")
+			sound_player.play_death_sound()
+			yield(get_tree().create_timer(0.75), "timeout")
+			reload = true
 		
 		if reload:
 			Singleton.SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)

@@ -1,0 +1,149 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/actors/objects/water_bubble/water_bubble.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/water_bubble/path_draw.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform vec4 color_tint : hint_color;
+uniform float x_size;
+
+float rand(vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+float sine(vec2 uv_coords, float time, float arg1, float arg2) {
+	return sin((uv_coords.x * arg1 * (x_size / 1500.0f)) + time * arg2);
+}
+
+void fragment() {
+	vec4 color = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
+	
+	color = mix(color, color_tint, 0.4);
+	color.rgb = mix(vec3(0.5), color.rgb, 1.4);
+	
+	float final_sine = sine(UV, TIME / 2.0f, 20.5f, 5.5f) * sine(UV, TIME / 2.0f, 15.5f, 5.5f) * sine(UV, TIME / 2.0f, 30.5f, 5.5f);
+	float sine_height = (final_sine / 5.0f) + 0.25f;
+	if (UV.y < sine_height) {
+		color.a = 0.0;
+	} else {
+		float gradient_pos = round(((UV.y * 2.0) - (sine_height * 2.0)) * 3.0) / 3.0;
+		float mix_amount = clamp(1.0 - gradient_pos, 0.0, 1.0);
+		color.rgb = mix(color.rgb, vec3(1), mix_amount);
+	}
+	
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 4 )
+shader_param/color_tint = Color( 0.278431, 0.662745, 0.85098, 1 )
+shader_param/x_size = 1800.0
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+shader_param/color_tint = Color( 0.278431, 0.662745, 0.85098, 1 )
+shader_param/x_size = 1800.0
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 256.0
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform vec4 color_tint : hint_color;
+
+void fragment() {
+	vec4 color = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
+	
+	color = mix(color, color_tint, 0.4);
+	color.rgb = mix(vec3(0.5), color.rgb, 1.4);
+	
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 2 )
+shader_param/color_tint = Color( 0.278431, 0.662745, 0.85098, 1 )
+
+[sub_resource type="Shader" id=8]
+code = "shader_type canvas_item;
+
+uniform vec4 color_tint : hint_color;
+uniform float x_size;
+
+float rand(vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+float sine(vec2 uv_coords, float time, float arg1, float arg2) {
+	return sin((uv_coords.x * arg1 * (x_size / 1500.0f)) + time * arg2);
+}
+
+void fragment() {
+	vec4 color = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0);
+	
+	color = mix(color, color_tint, 0.4);
+	color.rgb = mix(vec3(0.5), color.rgb, 1.4);
+	
+	float final_sine = sine(UV, TIME / 2.0f, 20.5f, 5.5f) * sine(UV, TIME / 2.0f, 15.5f, 5.5f) * sine(UV, TIME / 2.0f, 30.5f, 5.5f);
+	float sine_height = (final_sine / 5.0f) + 0.25f;
+	if (UV.y < sine_height) {
+		color.a = 0.0;
+	} else {
+		float gradient_pos = round(((UV.y * 2.0) - (sine_height * 2.0)) * 3.0) / 3.0;
+		float mix_amount = clamp(1.0 - gradient_pos, 0.0, 1.0);
+		color.rgb = mix(color.rgb, vec3(1), mix_amount);
+	}
+	
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
+shader_param/color_tint = Color( 0.278431, 0.662745, 0.85098, 1 )
+shader_param/x_size = 8.51372
+
+[node name="Water" type="Node2D"]
+z_index = -1
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 3 )
+margin_top = 15.0
+margin_right = 1800.0
+margin_bottom = 600.0
+mouse_filter = 2
+color = Color( 0.192157, 0.52549, 1, 0.47451 )
+
+[node name="Waves" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 5 )
+margin_top = -15.0
+margin_right = 1800.0
+margin_bottom = 15.0
+mouse_filter = 2
+color = Color( 0.192157, 0.52549, 1, 0.47451 )
+
+[node name="Col" type="Area2D" parent="."]
+script = ExtResource( 2 )
+radius = 256
+
+[node name="Shape" type="CollisionShape2D" parent="Col"]
+shape = SubResource( 6 )
+
+[node name="Fill" type="Polygon2D" parent="Col"]
+material = SubResource( 7 )
+color = Color( 0.192157, 0.52549, 1, 0.47451 )
+polygon = PoolVector2Array( 256, 0, 255.23, 19.8381, 252.925, 39.5568, 249.099, 59.0377, 243.775, 78.1635, 236.985, 96.8192, 228.77, 114.893, 219.179, 132.275, 208.269, 148.862, 196.107, 164.554, 182.766, 179.256, 168.325, 192.88, 152.873, 205.344, 136.5, 216.573, 119.307, 226.499, 101.396, 235.063, 82.8759, 242.214, 63.8569, 247.908, 44.4539, 252.111, 24.7836, 254.798, 4.96418, 255.952, -14.8851, 255.567, -34.6448, 253.645, -54.1962, 250.197, -73.4216, 245.245, -92.2055, 238.818, -110.435, 230.955, -128, 221.702, -144.795, 211.117, -160.72, 199.261, -175.678, 186.208, -189.579, 172.034, -202.341, 156.826, -213.885, 140.674, -224.143, 123.677, -233.053, 105.936, -240.561, 87.5572, -246.623, 68.6522, -251.201, 49.3343, -254.269, 29.7198, -255.807, 9.92649, -255.807, -9.92649, -254.269, -29.7198, -251.201, -49.3343, -246.623, -68.6522, -240.561, -87.5572, -233.053, -105.936, -224.143, -123.677, -213.885, -140.674, -202.341, -156.826, -189.579, -172.034, -175.678, -186.208, -160.72, -199.261, -144.795, -211.117, -128, -221.702, -110.435, -230.955, -92.2055, -238.818, -73.4216, -245.245, -54.1962, -250.197, -34.6448, -253.645, -14.8851, -255.567, 4.96418, -255.952, 24.7836, -254.798, 44.4539, -252.111, 63.8569, -247.908, 82.8759, -242.214, 101.396, -235.063, 119.307, -226.499, 136.5, -216.573, 152.873, -205.344, 168.325, -192.88, 182.766, -179.256, 196.107, -164.554, 208.269, -148.862, 219.179, -132.275, 228.77, -114.893, 236.985, -96.8192, 243.775, -78.1635, 249.099, -59.0377, 252.925, -39.5568, 255.23, -19.8381, 256, 0 )
+
+[node name="Line" type="Line2D" parent="Col"]
+material = SubResource( 9 )
+points = PoolVector2Array( 256, 0, 255.23, 19.8381, 252.925, 39.5568, 249.099, 59.0377, 243.775, 78.1635, 236.985, 96.8192, 228.77, 114.893, 219.179, 132.275, 208.269, 148.862, 196.107, 164.554, 182.766, 179.256, 168.325, 192.88, 152.873, 205.344, 136.5, 216.573, 119.307, 226.499, 101.396, 235.063, 82.8759, 242.214, 63.8569, 247.908, 44.4539, 252.111, 24.7836, 254.798, 4.96418, 255.952, -14.8851, 255.567, -34.6448, 253.645, -54.1962, 250.197, -73.4216, 245.245, -92.2055, 238.818, -110.435, 230.955, -128, 221.702, -144.795, 211.117, -160.72, 199.261, -175.678, 186.208, -189.579, 172.034, -202.341, 156.826, -213.885, 140.674, -224.143, 123.677, -233.053, 105.936, -240.561, 87.5572, -246.623, 68.6522, -251.201, 49.3343, -254.269, 29.7198, -255.807, 9.92649, -255.807, -9.92649, -254.269, -29.7198, -251.201, -49.3343, -246.623, -68.6522, -240.561, -87.5572, -233.053, -105.936, -224.143, -123.677, -213.885, -140.674, -202.341, -156.826, -189.579, -172.034, -175.678, -186.208, -160.72, -199.261, -144.795, -211.117, -128, -221.702, -110.435, -230.955, -92.2055, -238.818, -73.4216, -245.245, -54.1962, -250.197, -34.6448, -253.645, -14.8851, -255.567, 4.96418, -255.952, 24.7836, -254.798, 44.4539, -252.111, 63.8569, -247.908, 82.8759, -242.214, 101.396, -235.063, 119.307, -226.499, 136.5, -216.573, 152.873, -205.344, 168.325, -192.88, 182.766, -179.256, 196.107, -164.554, 208.269, -148.862, 219.179, -132.275, 228.77, -114.893, 236.985, -96.8192, 243.775, -78.1635, 249.099, -59.0377, 252.925, -39.5568, 255.23, -19.8381, 256, 0 )
+width = 32.0
+default_color = Color( 0.192157, 0.52549, 1, 0.47451 )
+texture_mode = 1
+joint_mode = 2
+round_precision = 20

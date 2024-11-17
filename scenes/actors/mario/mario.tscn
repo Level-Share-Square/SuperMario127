@@ -1280,14 +1280,14 @@ animation = "idleRight"
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 44 )
-animation = "swimming"
+animation = "idleRight"
 playing = true
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
 visible = false
 frames = ExtResource( 65 )
-animation = "lavaBoost"
+animation = "idleRight"
 script = ExtResource( 63 )
 
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]

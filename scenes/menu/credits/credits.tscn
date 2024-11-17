@@ -232,7 +232,7 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_bottom = 1.0
 margin_top = 432.0
 margin_right = 768.0
-margin_bottom = 7120.0
+margin_bottom = 7552.0
 custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center]Super Mario 127
@@ -295,6 +295,8 @@ Rin \"Dignity\"
 \"met3o\"
 \"pyrule\"
 \"tabs\"
+\"aloelucidity\"
+\"SilvererCoin\"
 
 Sprite Artist:
 \"KrystalPhantasm\" (Resigned)
@@ -413,6 +415,7 @@ Shoutouts to Simpleflips
 John \"John Espagueti Largo DLC\" Espagueti Largo
 Matias \"MrEGamer\" Eberbach
 Daniar \"arcatchik\"
+John \"JohnDevelopment\" Russell
 \"m4r10_fan2008\"
 \"TheGaming100\"
 \"Moola Mixtape\"
@@ -426,6 +429,7 @@ Daniar \"arcatchik\"
 \"Rovert\"
 \"Funz\"
 \"Yaya\"
+\"Davin\"
 And you, for sitting through these credits!
 
 You, too, can join the list by applying for development in the discord server. We hope to see you there!
@@ -491,6 +495,8 @@ Rin \"Dignity\"
 \"met3o\"
 \"pyrule\"
 \"tabs\"
+\"aloelucidity\"
+\"SilvererCoin\"
 
 Sprite Artist:
 \"KrystalPhantasm\" (Resigned)
@@ -609,6 +615,7 @@ Shoutouts to Simpleflips
 John \"John Espagueti Largo DLC\" Espagueti Largo
 Matias \"MrEGamer\" Eberbach
 Daniar \"arcatchik\"
+John \"JohnDevelopment\" Russell
 \"m4r10_fan2008\"
 \"TheGaming100\"
 \"Moola Mixtape\"
@@ -622,6 +629,7 @@ Daniar \"arcatchik\"
 \"Rovert\"
 \"Funz\"
 \"Yaya\"
+\"Davin\"
 And you, for sitting through these credits!
 
 You, too, can join the list by applying for development in the discord server. We hope to see you there!
