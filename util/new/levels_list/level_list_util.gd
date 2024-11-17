@@ -144,7 +144,15 @@ static func init_levels_list():
 	if !dir.dir_exists(BASE_FOLDER):
 		create_level_folder(BASE_FOLDER)
 	
-	if !dir.dir_exists(DEV_FOLDER):
+	var setup_dev: bool = not dir.dir_exists(DEV_FOLDER)
+	if not setup_dev:
+		var internal_array: Array = sort_file_util.load_sort_file(INTERNAL_DEV_FOLDER).get(sort_file_util.LEVELS, [])
+		var array: Array = sort_file_util.load_sort_file(DEV_FOLDER).get(sort_file_util.LEVELS, [])
+		if internal_array.size() != array.size():
+			print("meow")
+			setup_dev = true
+	
+	if setup_dev:
 		create_level_folder(DEV_FOLDER)
 		
 		var sort: Dictionary = sort_file_util.load_sort_file(INTERNAL_DEV_FOLDER)
