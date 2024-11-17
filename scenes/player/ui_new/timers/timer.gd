@@ -109,10 +109,10 @@ func kill_player():
 	var player2 = get_node("/root").get_node("Player").get_node_or_null(get_node("/root").get_node("Player").character2)
 	if is_instance_valid(player):
 		if !player.dead and player.controllable:
-			player.kill("green_demon")
+			player.kill("timer")
 	if is_instance_valid(player2):
 		if !player2.dead and player2.controllable:
-			player2.kill("green_demon")
+			player2.kill("timer")
 
 func set_label(new_text: String):
 	name_display.text = new_text

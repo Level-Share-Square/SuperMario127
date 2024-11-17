@@ -1134,6 +1134,21 @@ func kill(cause: String) -> void:
 			yield(get_tree().create_timer(0.75), "timeout")
 			if number_of_players != 1:
 				reload = false
+		elif cause == "timer":
+			sound_player.play_last_hit_sound()
+			controllable = false
+			movable = false
+			cutout_in = cutout_death
+			sprite.visible = false
+			death_sprite.set_as_toplevel(true)
+			death_sprite.global_position = sprite.global_position
+			death_sprite.play_anim()
+			position = Vector2(0, 100000000000000000)
+			reset_physics_interpolation()
+			yield(get_tree().create_timer(0.55), "timeout")
+			sound_player.play_death_sound()
+			yield(get_tree().create_timer(0.75), "timeout")
+			reload = true
 		
 		if reload:
 			Singleton.SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
