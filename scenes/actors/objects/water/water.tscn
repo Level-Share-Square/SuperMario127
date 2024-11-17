@@ -19,7 +19,7 @@ void fragment() {
 	COLOR = color;
 }"
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=7]
 shader = SubResource( 2 )
 shader_param/color_tint = Color( 0.278431, 0.662745, 0.85098, 1 )
 
@@ -75,7 +75,7 @@ position = Vector2( 900, 300 )
 shape = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource( 3 )
+material = SubResource( 7 )
 margin_top = 15.0
 margin_right = 1800.0
 margin_bottom = 600.0

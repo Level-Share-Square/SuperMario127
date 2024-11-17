@@ -62,5 +62,8 @@ void vertex() {
 		}
 	}
 	}
-	VELOCITY = vec3(0, -wind_speed*20.0, 0);
+	uint base_number_2 = NUMBER;
+	uint seed_2 = hash(base_number+seed_input+uint(3)+RANDOM_SEED);
+	
+	VELOCITY = vec3(random_m1_p1(seed_2)*18.0, -wind_speed*(20.0-random_m1_p1(seed_2)*4.0), 0);
 }
