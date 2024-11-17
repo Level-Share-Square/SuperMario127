@@ -232,7 +232,7 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_bottom = 1.0
 margin_top = 432.0
 margin_right = 768.0
-margin_bottom = 7120.0
+margin_bottom = 7552.0
 custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center]Super Mario 127
@@ -295,6 +295,8 @@ Rin \"Dignity\"
 \"met3o\"
 \"pyrule\"
 \"tabs\"
+\"aloelucidity\"
+\"SilvererCoin\"
 
 Sprite Artist:
 \"KrystalPhantasm\" (Resigned)
@@ -491,6 +493,8 @@ Rin \"Dignity\"
 \"met3o\"
 \"pyrule\"
 \"tabs\"
+\"aloelucidity\"
+\"SilvererCoin\"
 
 Sprite Artist:
 \"KrystalPhantasm\" (Resigned)
