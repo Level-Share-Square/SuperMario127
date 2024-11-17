@@ -211,7 +211,8 @@ head_positions = {
 "running": PoolVector2Array( 0, -5, 0, -8, 0, -7, 0, -5, 0, -7, 0, -6 ),
 "standing": PoolVector2Array( -1, -6, -1, -7 )
 }
-head_transforms = false
+confuse_rotation = false
+raging_anim = false
 
 [node name="Body" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler" index="0"]
 frames = SubResource( 9 )

@@ -5,8 +5,9 @@ onready var visibility_notifier = $"%VisibilityNotifier2D"
 
 export var head_positions: Dictionary
 export var expression_offsets: Dictionary
-export var head_transforms: bool = true
 
+export var confuse_rotation: bool = true
+export var raging_anim: bool = true
 export var raging_scale := 1.0
 
 onready var head = $Head
@@ -26,11 +27,12 @@ func _process(delta):
 	head.offset = Vector2.ZERO
 	head.rotation_degrees = 0
 	
-	if head_transforms:
+	if confuse_rotation:
 		if head_anim == "confused":
 			head.rotation_degrees = 10
 			head.offset = Vector2(1, 0)
 
+	if raging_anim:
 		if head_anim == "raging":
 			head.modulate = lerp(head.modulate, Color.red, delta)
 			head.offset = Vector2(

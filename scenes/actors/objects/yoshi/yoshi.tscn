@@ -25,6 +25,7 @@ expression_offsets = {
 "happy": Vector2( -1, 0 ),
 "shocked": Vector2( -1, 0 )
 }
+confuse_rotation = false
 
 [node name="Body" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler" index="0"]
 frames = ExtResource( 6 )

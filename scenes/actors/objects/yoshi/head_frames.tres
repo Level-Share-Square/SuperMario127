@@ -8,7 +8,7 @@ region = Rect2( 78, 0, 26, 24 )
 
 [sub_resource type="AtlasTexture" id=37]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 26, 24 )
+region = Rect2( 156, 0, 26, 24 )
 
 [sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 1 )
