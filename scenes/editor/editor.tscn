@@ -2601,21 +2601,10 @@ script = ExtResource( 24 )
 object_id = 127
 is_object = true
 item_name = "Toad"
-change_to = "RedBobOmb"
-items_in_sequence = 4
+change_to = "Yoshi"
+items_in_sequence = 3
 icon = ExtResource( 1431 )
 preview = ExtResource( 1430 )
-
-[node name="RedBobOmb" type="Node" parent="PlaceableItems/DialogueGruop"]
-script = ExtResource( 24 )
-object_id = 139
-is_object = true
-item_name = "Pink Bob-omb"
-change_to = "Yoshi"
-items_in_sequence = 4
-index_in_sequence = 1
-icon = ExtResource( 1502 )
-preview = ExtResource( 1502 )
 
 [node name="Yoshi" type="Node" parent="PlaceableItems/DialogueGruop"]
 script = ExtResource( 24 )
@@ -2623,8 +2612,8 @@ object_id = 138
 is_object = true
 item_name = "Yoshi"
 change_to = "PrincessPeach"
-items_in_sequence = 4
-index_in_sequence = 2
+items_in_sequence = 3
+index_in_sequence = 1
 icon = ExtResource( 1503 )
 preview = ExtResource( 1503 )
 
@@ -2634,8 +2623,8 @@ object_id = 137
 is_object = true
 item_name = "Princess Peach"
 change_to = "Toad"
-items_in_sequence = 4
-index_in_sequence = 3
+items_in_sequence = 3
+index_in_sequence = 2
 icon = ExtResource( 1502 )
 preview = ExtResource( 1502 )
 
@@ -5829,5 +5818,3 @@ anims/autosave_in = SubResource( 27 )
 anims/autosave_out = SubResource( 31 )
 anims/tools_in = SubResource( 32 )
 anims/tools_out = SubResource( 35 )
-
-[connection signal="screen_opened" from="Options/ScreenManager/Options" to="Options/ScreenManager/Options/Subscreens/Controls/VBoxContainer/Devices" method="screen_opened"]
