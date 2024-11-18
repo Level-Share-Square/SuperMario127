@@ -193,6 +193,10 @@ tracks/4/keys = {
 [node name="Credits" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -8.0
+margin_top = 1.0
+margin_right = -8.0
+margin_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 7 )
 
@@ -232,7 +236,7 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_bottom = 1.0
 margin_top = 432.0
 margin_right = 768.0
-margin_bottom = 7552.0
+margin_bottom = 7984.0
 custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center]Super Mario 127
