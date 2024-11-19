@@ -174,7 +174,8 @@ func _set_platform_pos():
 
 	loop_offset = lerp(linear_offset, loop_offset, blend) #loop_offset * blend + linear_offset * (1 - blend)
 	
-	path_follower.offset = fmod(loop_offset, path.curve.get_baked_length())
+	if !is_nan(fmod(loop_offset, path.curve.get_baked_length())):
+		path_follower.offset = fmod(loop_offset, path.curve.get_baked_length())
 	
 	if speed < 0.0 and path_follower.offset <= 2.0:
 		linear_offset = 0.0

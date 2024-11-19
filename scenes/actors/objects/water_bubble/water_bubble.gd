@@ -5,7 +5,7 @@ var color := Color(0.19, 0.52, 1)
 var render_in_front := false
 var tag = "default"
 
-var last_size : float
+var last_radius : float
 var last_color : Color
 var last_front : bool
 
@@ -20,8 +20,8 @@ var save_pos : Vector2
 
 onready var area = $Col
 onready var area_collision = $Col/Shape
-onready var sprite = $Col/Fill
-onready var waves = $Col/Line
+onready var sprite = $Fill
+onready var waves = $Line
 
 func _set_properties():
 	savable_properties = ["radius", "color", "render_in_front", "tag", "toxicity", "tap_mode"]
@@ -48,27 +48,24 @@ func _ready():
 	color.a = 0.5
 	area_collision.shape = area_collision.shape.duplicate()
 	change_size()
-	last_size = radius
+	last_radius = radius
 	
 	area_collision.disabled = !enabled
 	
 	Singleton.CurrentLevelData.level_data.vars.liquids.append([tag.to_lower(), self])
 
 func change_size():
-	sprite.rect_size = Vector2(width, height - 15)
+	area.set_radius(radius)
+	
 	sprite.material = sprite.get_material().duplicate()
 	sprite.get_material().set_shader_param("color_tint", color)
-	area_collision.position = Vector2(width / 2, height / 2)
-	area_collision.shape.extents = area_collision.position
 	
-	waves.rect_size.x = width
 	waves.material = waves.get_material().duplicate()
 	waves.get_material().set_shader_param("color_tint", color)
-	waves.get_material().set_shader_param("x_size", width)
 	
 	z_index = -1 if !render_in_front else 25
 	
-	last_size = Vector2(width, height)
+	last_radius = radius
 	last_color = color
 	last_front = render_in_front
 
@@ -83,17 +80,17 @@ func _physics_process(_delta):
 	if !moving: return
 	
 	if !horizontal:
-		var end_pos := global_position.y + height
+		var end_pos := global_position.y
 		var speed_modifier : float = transform.basis_xform(Vector2(0.0, 1.0)).y
 		global_position.y = move_toward(global_position.y, match_level, move_speed * 2)
 		if global_position.y == match_level:
 			moving = false
 			return
 		if !tap_mode:
-			height += speed_modifier * ((end_pos - global_position.y) - height)
+			radius += speed_modifier * ((end_pos - global_position.y))
 			change_size() # Letting it happen in _process causes issues
 	else:
-		var end_pos := global_position.x + height
+		var end_pos := global_position.x
 		if global_position.x == end_pos:
 			moving = false
 			return
@@ -103,13 +100,13 @@ func _physics_process(_delta):
 			moving = false
 			return
 		if !tap_mode:
-			height += speed_modifier * ((end_pos - global_position.x) - height)
+			radius += speed_modifier * ((end_pos - global_position.x))
 			change_size() # Letting it happen in _process causes issues
 
 func _process(_delta):
 	if "\n" in tag:
 		tag = tag.replace("\n", "")
-	if (Vector2(width, height) != last_size ||
+	if (radius != radius ||
 			color != last_color ||
 			render_in_front != last_front):
 		change_size()

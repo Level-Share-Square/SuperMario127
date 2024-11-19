@@ -88,9 +88,9 @@ palette_textures = [ ExtResource( 1 ), ExtResource( 6 ), ExtResource( 5 ), ExtRe
 margin_left = -32.0
 margin_top = -12.0
 margin_right = 32.0
-margin_bottom = 6.0
+margin_bottom = 5.0
 texture = ExtResource( 1 )
-region_rect = Rect2( -0.0618973, 10.8002, 64.1129, 17.4734 )
+region_rect = Rect2( 0, 11, 64, 17 )
 patch_margin_left = 16
 patch_margin_right = 16
 axis_stretch_horizontal = 1
@@ -121,7 +121,7 @@ collision_layer = 0
 collision_mask = 768
 
 [node name="det" type="CollisionShape2D" parent="watercol"]
-position = Vector2( 0, 8.33338 )
+position = Vector2( 0, 8 )
 shape = SubResource( 3 )
 
 [node name="groundcol" type="Area2D" parent="."]
