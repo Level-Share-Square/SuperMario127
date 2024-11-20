@@ -772,7 +772,7 @@ func _physics_process(delta: float) -> void:
 				pass
 	elif !disable_friction:
 		if abs(velocity.x) > 0:
-			if abs(velocity.x) > 10:
+			if abs(velocity.x) > 15:
 				var new_velocity
 				if is_on_floor():
 					new_velocity = sign(velocity.x) * friction
