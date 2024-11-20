@@ -94,6 +94,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/discord_game_sdk/example/lobby/chat_message.gd"
 }, {
+"base": "Area2D",
+"class": "CircleArea",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/water_bubble/CircleArea.gd"
+}, {
 "base": "Nozzle",
 "class": "CloudNozzle",
 "language": "GDScript",
@@ -762,6 +767,7 @@ _global_script_class_icons={
 "CameraStopper": "",
 "Character": "",
 "ChatMessage": "",
+"CircleArea": "",
 "CloudNozzle": "",
 "Component": "",
 "ControlPresets": "",

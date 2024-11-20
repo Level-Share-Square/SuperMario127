@@ -16,8 +16,26 @@ func _init():
 
 func duplicate(base_area):
 	settings = duplicate_settings(base_area.settings)
-	objects = base_area.objects.duplicate(true)
+	objects = base_area.duplicate_objects(base_area.objects)
 	tile_chunks = base_area.tile_chunks.duplicate(true)
+
+func duplicate_objects(base_objects: Array):
+	var new_objects: Array
+	for object in base_objects:
+		var new_object = LevelObject.new()
+		new_object.type_id = object.type_id
+		new_object.palette = object.palette
+		for prop in object.properties:
+			#Prevents a bug that causes certain properties to become
+			#Linked between two objects
+			if typeof(prop) == TYPE_OBJECT:
+				new_object.properties.append(prop.duplicate(true))
+			else:
+				new_object.properties.append(prop)
+		
+		new_objects.append(new_object)
+	
+	return new_objects
 
 func duplicate_settings(base_settings):
 	var new_settings = LevelAreaSettings.new()

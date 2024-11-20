@@ -45,28 +45,10 @@ func _physics_process(delta):
 			for body in area.get_overlapping_bodies():
 				if enabled and body.name.begins_with("Character") and !body.dead and body.controllable:
 					if !is_instance_valid(body.powerup):
-							if body.powerup != MetalPowerup:
-								if wind_angle_vector.x > 0.05 or wind_angle_vector.x < -0.05:
-									body.in_wind = true
-								body.velocity = apply_velocity(body.velocity, delta)
-					
-								if !body.is_on_floor() and (body.state is FallState or body.state == null):
-									var char_sprite = body.sprite
-									if body.facing_direction == 1:
-										if body.jump_animation == 0:
-											char_sprite.animation = "fallRight"
-										elif body.jump_animation == 1:
-											char_sprite.animation = "doubleFallRight"
-									elif body.facing_direction == -1:
-										if body.jump_animation == 0:
-											char_sprite.animation = "fallLeft"
-										elif body.jump_animation == 1:
-											char_sprite.animation = "doubleFallLeft"
-						
-							#set's mario's state to falling if he stops going down in a ground pound
-								if (body.state is GroundPoundState) and (body.velocity.y <= 0):
-									if !body.is_on_floor():
-										body.set_state_by_name("FallState", delta)
+						character_apply_wind(body, delta)
+					else:
+						if body.powerup != MetalPowerup:
+							character_apply_wind(body, delta)
 
 						
 				elif enabled and !body.name.begins_with("Character"):
@@ -76,6 +58,30 @@ func _physics_process(delta):
 			particles.emitting = false
 	else:
 		sprite.visible == true
+
+func character_apply_wind(body, delta):
+	if wind_angle_vector.x > 0.05 or wind_angle_vector.x < -0.05:
+		body.in_wind = true
+	body.velocity = apply_velocity(body.velocity, delta)
+	
+	if !body.is_on_floor() and (body.state is FallState or body.state == null):
+		var char_sprite = body.sprite
+		if body.facing_direction == 1:
+			if body.jump_animation == 0:
+				char_sprite.animation = "fallRight"
+			elif body.jump_animation == 1:
+				char_sprite.animation = "doubleFallRight"
+		
+		elif body.facing_direction == -1:
+			if body.jump_animation == 0:
+				char_sprite.animation = "fallLeft"
+			elif body.jump_animation == 1:
+				char_sprite.animation = "doubleFallLeft"
+						
+		#set's mario's state to falling if he stops going down in a ground pound
+		if (body.state is GroundPoundState) and (body.velocity.y <= 0):
+			if !body.is_on_floor():
+				body.set_state_by_name("FallState", delta)
 
 func apply_velocity(velocity: Vector2, delta: float) -> Vector2:
 	var new_velocity := velocity
