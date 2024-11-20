@@ -39,7 +39,7 @@ func _start(delta):
 	if ledge_buffer > 0:
 		if dive_buffer > 0:
 			character.current_jump = 0
-		if character.current_jump == 2 and abs(character.velocity.x) < 80:
+		if character.current_jump == 2 and (not (character.powerup is WingPowerup) and abs(character.velocity.x) < 80):
 			character.current_jump = 1
 		if character.current_jump != 2 and character.last_state == character.get_state_node("SpinningState"):
 			character.set_state_by_name("SpinningState", delta)
