@@ -19,8 +19,8 @@ func _set_properties():
 	
 func _set_property_values():
 	set_property("save_water_level", save_water_level, true)
-	set_property("save_switch_state", save_switch_state, true)
 	set_property("spawn_y_offset", spawn_y_offset, true)
+	set_property("save_switch_state", save_switch_state, true)	
 
 func _ready():
 	if is_preview: return
