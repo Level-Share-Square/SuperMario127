@@ -11,6 +11,7 @@ var character_name: String
 var speaking_radius: float = 90
 var autostart: int = 0
 var interactable: bool = true
+var zoom_size: float = 0.65
 
 var bubble_text: String = "This text appears as a speech bubble above your NPC!"
 var display_mode: int = 0
@@ -24,8 +25,8 @@ signal change_emote(expression, action)
 
 
 func _set_properties():
-	savable_properties = ["dialogue", "character_name", "autostart", "interactable", "bubble_text", "display_mode", "tag", "delegate_tag"]
-	editable_properties = ["dialogue", "bubble_text", "character_name", "display_mode", "tag", "delegate_tag", "autostart", "interactable"]
+	savable_properties = ["dialogue", "character_name", "autostart", "interactable", "bubble_text", "display_mode", "tag", "delegate_tag", "zoom_size"]
+	editable_properties = ["dialogue", "bubble_text", "character_name", "display_mode", "zoom_size", "tag", "delegate_tag", "autostart", "interactable"]
 	
 func _set_property_values():		
 	set_property("dialogue", dialogue, true)
@@ -40,6 +41,7 @@ func _set_property_values():
 	
 	set_property("tag", tag, true)
 	set_property("delegate_tag", delegate_tag, true)
+	set_property("zoom_size", zoom_size, true, "Target Zoom")
 
 
 func _ready():

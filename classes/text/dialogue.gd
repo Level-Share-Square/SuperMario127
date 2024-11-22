@@ -28,6 +28,7 @@ var character_name
 var autostart: int = 0
 var tag: String
 var delegate_tag: String
+var zoom_size: float = 0.65
 
 var page_cache: int = 0
 var being_read := false
@@ -93,6 +94,8 @@ func _ready():
 			add_to_group(DIALOGUE_GROUP)
 		if "delegate_tag" in parent:
 			delegate_tag = parent.delegate_tag
+		if "zoom_size" in parent:
+			zoom_size = parent.zoom_size
 
 
 func connect_menu_oneshot():
@@ -198,7 +201,7 @@ func setup_char():
 	character.set_inter_player_collision(false)
 	character.camera.smoothing_enabled = true # Re-enable camera smoothing
 	
-	character.camera.set_zoom_tween(Vector2(0.65, 0.65), 1)
+	character.camera.set_zoom_tween(Vector2(zoom_size, zoom_size), 1)
 	character.camera.focus_on = camera_focus
 	
 	open_menu_ui()
