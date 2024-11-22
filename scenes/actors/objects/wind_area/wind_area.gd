@@ -77,11 +77,11 @@ func character_apply_wind(body, delta):
 				char_sprite.animation = "fallLeft"
 			elif body.jump_animation == 1:
 				char_sprite.animation = "doubleFallLeft"
-						
-		#set's mario's state to falling if he stops going down in a ground pound
-		if (body.state is GroundPoundState) and (body.velocity.y <= 0):
-			if !body.is_on_floor():
-				body.set_state_by_name("FallState", delta)
+	
+	#set's mario's state to falling if he stops going down in a ground pound
+	if (body.state is GroundPoundState) and (body.velocity.y <= 0):
+		if !body.is_on_floor():
+			body.set_state_by_name("FallState", delta)
 
 func apply_velocity(velocity: Vector2, delta: float) -> Vector2:
 	var new_velocity := velocity
