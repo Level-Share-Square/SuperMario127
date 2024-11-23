@@ -5,8 +5,9 @@
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://scenes/editor/property_type_scenes/bool/base/base.gd" type="Script" id=4]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 32
+use_mipmaps = true
 font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -41,7 +42,7 @@ custom_colors/font_color_disabled = Color( 0, 0.0470588, 0.317647, 1 )
 custom_colors/font_color = Color( 0, 0.0470588, 0.317647, 1 )
 custom_colors/font_color_hover = Color( 0, 0.0470588, 0.317647, 1 )
 custom_colors/font_color_pressed = Color( 0, 0.0470588, 0.317647, 1 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/normal = SubResource( 2 )

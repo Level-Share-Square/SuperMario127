@@ -149,7 +149,7 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordActivityAssets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_assets.gdns"
@@ -318,6 +318,11 @@ _global_script_classes=[ {
 "class": "HTTPThumbnails",
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/misc/http_thumbnails.gd"
+}, {
+"base": "ScrollContainer",
+"class": "HelpPage",
+"language": "GDScript",
+"path": "res://scenes/editor/window/HelpPage.gd"
 }, {
 "base": "Nozzle",
 "class": "HoverNozzle",
@@ -812,6 +817,7 @@ _global_script_class_icons={
 "Group": "",
 "HTTPImages": "",
 "HTTPThumbnails": "",
+"HelpPage": "",
 "HoverNozzle": "",
 "IdMap": "",
 "IfStatementInstruction": "",
@@ -1216,7 +1222,7 @@ search={
 }
 path_editor_modkey={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777238,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777237,"unicode":0,"echo":false,"script":null)
  ]
 }
 modkey={
@@ -1226,7 +1232,7 @@ modkey={
 }
 path_editor_snap={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777237,"unicode":0,"echo":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777238,"unicode":0,"echo":false,"script":null)
  ]
 }
 invis_ui={

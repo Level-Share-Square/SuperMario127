@@ -11,7 +11,7 @@
 extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 14, 16 )
+extents = Vector2( 16, 16 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 22, 12 )
@@ -23,7 +23,7 @@ extents = Vector2( 36, 10 )
 extents = Vector2( 24, 24 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 24, 100.541 )
+extents = Vector2( 32, 102 )
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 100, 24 )
@@ -68,14 +68,12 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
 collision_mask = 2147483654
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource( 1 )
 
 [node name="StompArea" type="Area2D" parent="."]
-visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StompArea"]
@@ -104,7 +102,6 @@ collision_mask = 0
 shape = SubResource( 5 )
 
 [node name="PlayerStompDetector" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 

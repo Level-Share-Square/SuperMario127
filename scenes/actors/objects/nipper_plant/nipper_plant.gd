@@ -238,23 +238,10 @@ func _physics_process(delta):
 
 
 func calculate_fireball_velocity(source_position: Vector2, target_position: Vector2, gravity: float) -> Vector2:
-#	# blud's aim kind sucks when you're further away from it idk im not that good at math :emoji_401:
-#	var height_offset = min(body.global_position.y, target_pos.y) - 90
-#	var y_vel = sqrt((body.global_position.y - height_offset) * 90 * gravity)
-#
-#	var peak_t = y_vel / gravity
-#	var fall_t = sqrt((target_pos.y - height_offset) / gravity)
-#	var total_t = peak_t + fall_t
-#
-#	var pos_delta = target_pos - body.global_position
-#	pos_delta.y = 0;
-#
-#	var distance = pos_delta.length()
-#	var final_v = pos_delta.normalized() * (distance / total_t) * 30
-#	final_v.y = (-y_vel)
 	var new_velocity := Vector2.ZERO
 	var displacement := target_position-source_position
-	var arc_height := clamp((target_position.y-source_position.y-72), (target_position.y-source_position.y-72), -48)
+	var arc_height := min((target_position.y-source_position.y-72), -64)-abs(displacement.x/5)
+	print(arc_height)
 	
 	if displacement.y > arc_height:
 		var time_up = sqrt(-2 * arc_height/gravity)
