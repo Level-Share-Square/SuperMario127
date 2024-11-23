@@ -55,7 +55,7 @@ func deselect():
 func _on_PathNodeButton_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == BUTTON_LEFT:
-			if Input.is_action_pressed("modkey"):
+			if Input.is_action_pressed("path_editor_modkey"):
 				if handles_active:
 					_toggle_handle_link()
 				else:
@@ -71,7 +71,7 @@ func _on_PathNodeButton_gui_input(event):
 			delete()
 	if held && event is InputEventMouseMotion:
 		position = ui.get_ref().path_node_container.get_global_transform().xform_inv(ui.get_ref().editor.get_global_mouse_position())
-		if Input.is_action_pressed("path_editor_snap"):
+		if !Input.is_action_pressed("path_editor_snap"):
 			position = position.snapped(Vector2(8, 8))
 		ui.get_ref().update_node_position(self)
 
@@ -99,7 +99,7 @@ func _on_right_handle_gui_input(event):
 
 func move_handle(handle: int, new_pos: Vector2, moved_by_user: bool = false):
 		var handle_ref = right_handle if handle == HANDLE_RIGHT else left_handle
-		if moved_by_user && Input.is_action_pressed("path_editor_snap"):
+		if moved_by_user && !Input.is_action_pressed("path_editor_snap"):
 			new_pos = new_pos.snapped(Vector2(8, 8))
 		handle_ref.position = new_pos
 		handle_ref.get_node("Handle%sLine" % ("R" if handle == HANDLE_RIGHT else "L")).points[1] = handle_ref.to_local(global_position)
