@@ -9,7 +9,7 @@ var last_parts := 4
 var color := Color.green
 var last_color := Color.green
 
-var start_offset := 0
+var start_offset := 0.0
 var start_percentage := 0
 var last_start_percentage := 0
 
@@ -32,10 +32,11 @@ var curve = Curve2D.new()
 var curve_points
 var custom_path = Curve2D.new()
 
+var baked_length : float = 0
 
 func _set_properties():
-	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset", "custom_path" ]
-	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "color", "start_offset", "custom_path"]
+	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset", "custom_path", "baked_length" ]
+	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "color", "start_offset", "custom_path", "baked_length"]
 	
 func _set_property_values():
 	set_property("parts", parts)
@@ -48,6 +49,8 @@ func _set_property_values():
 	set_property("color", color)
 	set_property("start_offset", start_offset)
 	set_property("custom_path", curve)
+	set_property("baked_length", baked_length, true, "Path Length")
+	set_property_menu("baked_length", ["viewer"])
 	
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
@@ -117,7 +120,6 @@ onready var right_width = platform_sprite.patch_margin_right
 onready var part_width = platform_sprite.texture.get_width() - left_width - right_width
 
 func _ready():
-	
 	activated = !touch_start
 	$TouchLiftPlatform/Area2D/CollisionShape2D.disabled = false
 	platform.collision_shape.disabled = !enabled
@@ -166,7 +168,6 @@ func _ready():
 		end_sprite_node.add_child(platform_sprite_recolor.duplicate())
 		end_sprite_node.modulate = transparent_color
 		add_child(end_sprite_node)
-		
 
 		#print(path.curve.get_point_count())
 func set_sprite_parts(sprite):
@@ -186,7 +187,7 @@ func _physics_process(delta):
 	if(!activated):
 		return
 	
-	var baked_length: float = path.curve.get_baked_length()
+	baked_length = path.curve.get_baked_length()
 	
 	linear_offset += (speed*slowdown_factor) * max_speed * 120 * fps_util.PHYSICS_DELTA
 
