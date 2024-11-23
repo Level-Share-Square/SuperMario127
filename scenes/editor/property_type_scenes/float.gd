@@ -30,7 +30,7 @@ func update():
 			var error = expression.parse(old_text)
 			#if it is, sets the property to it's result
 			if error == OK:
-				var value = int(expression.execute())
+				var value = float(expression.execute())
 				if value > 0 or !absolute:
 					text = str(value)
 					get_parent().update_value()
