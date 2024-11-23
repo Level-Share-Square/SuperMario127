@@ -47,6 +47,7 @@ func _ready():
 	
 	if enabled and mode == 0:
 		var _connect = area_2d.connect("body_entered", self, "add_body_to_bounce")
+		_connect = area_2d.connect("body_exited", self, "bounce")
 		_connect = area_2d.connect("body_exited", self, "remove_body_to_bounce")
 	elif mode == 1:
 		var _connect = connect("property_changed", self, "update_property")
