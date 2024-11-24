@@ -18,6 +18,7 @@ var object_type := "unknown"
 var destination_tag := "default_teleporter"
 var tp_pair : TeleportObject
 var instant : bool = false
+var force_fadeout := false
 var timer_manager
 
 ## For older levels only
@@ -50,7 +51,7 @@ func local_tp(entering_character : Character, entering):
 			entering_character.global_position = tp_pair.global_position
 			entering_character.reset_physics_interpolation()
 			
-			if tp_pair.object_type != "area_transition" or global_position.distance_to(tp_pair.global_position) > 800:
+			if tp_pair.object_type != "area_transition" or global_position.distance_to(tp_pair.global_position) > 800 or force_fadeout:
 				entering_character.camera.skip_to_player = true
 				entering_character.camera.global_position = entering_character.global_position
 			entering_character.sprite.modulate = Color(0, 0, 0, 0)
@@ -167,11 +168,12 @@ func exit_local_teleport():
 func exit_remote_teleport():
 	pass
 
-func _start_local_transition(character : Character, entering) -> void:
+func _start_local_transition(character : Character, entering, force_fadeout := false) -> void:
 	var local_pair = find_local_pair()
 	if entering:
+		character.force_warp_fadeout = force_fadeout
 		character.set_collision(false)
-		if global_position.distance_to(local_pair.global_position) <= 800:
+		if global_position.distance_to(local_pair.global_position) <= 800 and !force_fadeout:
 			
 			var tween = Tween.new()
 			add_child(tween)
@@ -193,7 +195,7 @@ func _start_local_transition(character : Character, entering) -> void:
 			Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, Singleton.SceneTransitions.TRANSITION_SCALE_UNCOVER, Singleton.SceneTransitions.TRANSITION_SCALE_COVERED, -1, -1, false, false)
 	else:
 		
-		if global_position.distance_to(local_pair.global_position) > 800:
+		if global_position.distance_to(local_pair.global_position) > 800 or character.force_warp_fadeout:
 			# sets the transition center to Mario's position
 			Singleton.SceneTransitions.canvas_mask.global_position = get_character_screen_position(character)
 			# this starts an inner scene transition, then connects a function (one shot) to start as it finishes

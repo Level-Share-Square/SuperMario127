@@ -11,8 +11,8 @@ var stored_character : Character
 const OPEN_DOOR_WAIT = 0.45
 
 func _set_properties() -> void:
-	savable_properties = ["area_id", "destination_tag", "teleportation_mode"]
-	editable_properties = ["area_id", "destination_tag", "teleportation_mode"]
+	savable_properties = ["area_id", "destination_tag", "teleportation_mode", "force_fadeout"]
+	editable_properties = ["area_id", "destination_tag", "teleportation_mode", "force_fadeout"]
 	
 func _set_property_values() -> void:
 
@@ -20,6 +20,7 @@ func _set_property_values() -> void:
 	set_property("destination_tag", destination_tag)
 	set_property("teleportation_mode", teleportation_mode, true, "Teleport Mode")
 	set_bool_alias("teleportation_mode", "Remote", "Local")
+	set_property("force_fadeout", force_fadeout)
 
 
 func _init():

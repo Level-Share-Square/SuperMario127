@@ -9,8 +9,8 @@ export var recolorable_texture : Texture
 var color := Color(0, 1, 0)
 
 func _set_properties():
-	savable_properties = ["area_id", "destination_tag", "color", "teleportation_mode"]
-	editable_properties = ["area_id", "destination_tag", "color", "teleportation_mode"]
+	savable_properties = ["area_id", "destination_tag", "color", "teleportation_mode", "force_fadeout"]
+	editable_properties = ["area_id", "destination_tag", "color", "teleportation_mode", "force_fadeout"]
 	
 func _set_property_values():
 	set_property("area_id", area_id, true, "Area Destination")
@@ -18,6 +18,7 @@ func _set_property_values():
 	set_property("color", color, true)
 	set_property("teleportation_mode", teleportation_mode, true, "Teleport Mode")
 	set_bool_alias("teleportation_mode", "Remote", "Local")
+	set_property("force_fadeout", force_fadeout)
 
 func _init():
 	teleportation_mode = true
