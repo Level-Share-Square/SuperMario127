@@ -145,6 +145,7 @@ func update_tilemaps():
 	middle_tilemap_node.clear()
 	front_tilemap_node.clear()
 	
+#	print("Area Chunk Count: " + str(level_area.tile_chunks.size()))
 	for key in level_area.tile_chunks:
 		var chunk : Array = level_area.tile_chunks[key]
 
@@ -152,22 +153,29 @@ func update_tilemaps():
 		var chunk_x := int(_key[0])
 		var chunk_y := int(_key[1])
 		var layer 	:= int(_key[2])
+#		print(_key)
+#		print("Chunk Position: (" + str(chunk_x) + ", " + str(chunk_y) + ")")
+#		print("Chunk Layer: " + str(layer))
 		
+		var layer_tilemap_node
+		match(layer):
+			3:
+				layer_tilemap_node = very_back_tilemap_node
+			1:
+				layer_tilemap_node = middle_tilemap_node
+			2:
+				layer_tilemap_node = front_tilemap_node
+			0:
+				layer_tilemap_node = back_tilemap_node
 		
-		var layer_tilemap_node = back_tilemap_node
-		if layer == 3:
-			layer_tilemap_node = very_back_tilemap_node	
-		elif layer == 1:
-			layer_tilemap_node = middle_tilemap_node	
-		elif layer == 2:
-			layer_tilemap_node = front_tilemap_node	
-		#print(_key)
-
 		for x in range(16):
 			for y in range(16):
 				var tile = chunk[x + y*16] #get tile from chunk
 				if tile and bounds.has_point(Vector2(chunk_x*16 + x + 0.5, chunk_y*16 + y + 0.5)):
+#					print("Tile (" + str(x) + ", " + str(y) + ") placed")
 					layer_tilemap_node.set_cell(chunk_x*16 + x, chunk_y*16 + y, get_tile(tile[0],tile[1],tile[2]))
+		
+#		print("")
 	
 	very_back_tilemap_node.tile_set = tile_set
 	back_tilemap_node.tile_set = tile_set
@@ -217,3 +225,13 @@ func update_tilemaps():
 
 	for tilemap in [very_back_tilemap_node, back_tilemap_node, middle_tilemap_node, front_tilemap_node]:
 		tilemap.update_bitmask_region(bounds.position, bounds.end)
+		tilemap.update()
+
+#func _draw():
+#	for tilemap in [middle_tilemap_node]:
+#		var bounds = level_area.settings.bounds
+#		for x in range(bounds.position.x, bounds.end.x):
+#			for y in range(bounds.position.y, bounds.end.y):
+#				var tile = tilemap.get_cell(x, y)
+#				if tile != -1:
+#					draw_rect(Rect2(Vector2(x, y) * 32, Vector2(32, 32)), Color(1, 0, 0, 0.3))

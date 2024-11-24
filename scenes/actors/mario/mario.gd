@@ -775,17 +775,17 @@ func _physics_process(delta: float) -> void:
 			if abs(velocity.x) > 15:
 				var new_velocity
 				if is_on_floor():
-					new_velocity = sign(velocity.x) * friction
-					if abs(new_velocity) > 0:
-						velocity.x -= new_velocity
-					else:
-						velocity.x -= sign(velocity.x) * clamp(abs(new_velocity), 0, velocity.x)
+#					new_velocity = 
+#					if abs(new_velocity) > 0:
+					velocity.x -= sign(velocity.x) * friction
+#					else:
+#						velocity.x -= sign(velocity.x) * clamp(abs(new_velocity), 0, velocity.x)
 				else:
 					new_velocity = sign(velocity.x) * aerial_friction * (2 if abs(velocity.x) > move_speed else 1)
-					if abs(new_velocity) > 0:
-						velocity.x -= new_velocity
-					else:
-						velocity.x -= sign(velocity.x) * clamp(abs(new_velocity), 0, velocity.x)
+#					if abs(new_velocity) > 0:
+					velocity.x -= new_velocity
+#					else:
+#						velocity.x -= sign(velocity.x) * clamp(abs(new_velocity), 0, velocity.x)
 			else:
 				velocity.x = 0
 	
@@ -993,11 +993,11 @@ func _physics_process(delta: float) -> void:
 				pass
 				# Going into a corner? Try to bonk.
 				# The squish state has us covered in case we get stuck even harder
-#				velocity.x = 150 * -facing_direction
-#				velocity.y = -65
-#				position.x -= 2 * facing_direction
-#				set_state_by_name("BonkedState", delta)
-#				sound_player.play_bonk_sound()
+				velocity.x = 150 * -facing_direction
+				velocity.y = -65
+				position.x -= 2 * facing_direction
+				set_state_by_name("BonkedState", delta)
+				sound_player.play_bonk_sound()
 		else:
 			var slide_count = get_slide_count()
 			collided_last_frame = slide_count > 0

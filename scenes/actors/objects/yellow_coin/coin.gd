@@ -1,10 +1,12 @@
 extends GameObject
 
-onready var animated_sprite = $AnimatedSprite
-onready var area = $Area2D
-onready var water_detector = $WaterDetector
-onready var shape = $Area2D/CollisionShape2D
-onready var water_shape = $WaterDetector/CollisionShape2D
+onready var animated_sprite = $KinematicBody2D/AnimatedSprite
+onready var kinematic_body = $KinematicBody2D
+onready var kinematic_shape = $KinematicBody2D/KinematicShape
+onready var area = $KinematicBody2D/Area2D
+onready var water_detector = $KinematicBody2D/WaterDetector
+onready var shape = $KinematicBody2D/Area2D/CollisionShape2D
+onready var water_shape = $KinematicBody2D/WaterDetector/CollisionShape2D
 onready var visibility_enabler = $VisibilityEnabler2D
 
 export var coins : int = 1
@@ -15,6 +17,8 @@ var blink := false
 var gravity : float
 var gravity_scale := 1.0
 var velocity : Vector2
+
+var frictin_coeff : float = .33
 
 export var anim_fps = 12
 
@@ -40,16 +44,25 @@ func collect(body, is_shell = false):
 		queue_free() # die
 
 func _ready():
-	if do_physics():
-		gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
+	kinematic_shape.shape = kinematic_shape.shape.duplicate()
 	
-	yield(get_tree().create_timer(0.2), "timeout")
+	if do_physics():
+		kinematic_shape.disabled = false
+		gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity
+	else:
+		kinematic_shape.disabled = true
+	
+	yield(get_tree().create_timer(0.2, false), "timeout")
 	var _connect = area.connect("body_entered", self, "collect")
 	
+	for body in area.get_overlapping_bodies():
+			if enabled and !collected and (body and body.name.begins_with("Character") and !body.dead):
+				collect(body)
+	
 	if do_physics():
-		yield(get_tree().create_timer(9.0 - 0.2), "timeout")
+		yield(get_tree().create_timer(9.0 - 0.2, false), "timeout")
 		blink = true # Make the coin flash before disappearing
-		yield(get_tree().create_timer(1.0), "timeout")
+		yield(get_tree().create_timer(1.0, false), "timeout")
 		queue_free() # die
 
 # Sprite frame assignments seem to be expensive
@@ -77,7 +90,7 @@ func _process(delta):
 					continue
 				
 				var entity_global_position = entity.global_transform.get_origin()
-				if (entity_global_position - position).length_squared() <= 200 + 472.25:
+				if (entity_global_position - kinematic_body.global_position).length_squared() <= 200 + 472.25:
 					activate_shape = true
 		
 		if activate_shape != prev_activate_shape:
@@ -108,27 +121,31 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(Vector2.ZERO, delta * 120)
 		else:
 			gravity_scale = 1
+		velocity.x -= sign(velocity.x)*frictin_coeff
+		velocity.y += gravity * gravity_scale * 2
 		
-		velocity.y += gravity * delta * 120 * gravity_scale
-		position += velocity * delta
+		if kinematic_body.is_on_floor():
+			velocity.y = 0
 		
-		var up = velocity.y < 0
-		var result = vertical_cast()
-		if result:
-			if up:
-				velocity.y = 30
-				position.y += 2
-			else:
-				velocity.x = lerp(velocity.x, 0, delta)
-				velocity.y = 0
-				position.y = result.position.y - 10
+		kinematic_body.move_and_slide_with_snap(velocity, Vector2(0, 0), Vector2.UP, false, 8, deg2rad(56))
 		
-		if abs(velocity.x) > 0.00001:
-			result = horizontal_cast()
-			if result:
-				var x_cast = 5 if velocity.x > 0 else -5
-				velocity.x = 0
-				position.x = result.position.x - x_cast
+#		var up = velocity.y < 0
+#		var result = vertical_cast()
+#		if result:
+#			if up:
+#				velocity.y = 30
+#				position.y += 2
+#			else:
+#				velocity.x = lerp(velocity.x, 0, delta)
+#				velocity.y = 0
+#				position.y = result.position.y - 10
+#
+#		if abs(velocity.x) > 0.00001:
+#			result = horizontal_cast()
+#			if result:
+#				var x_cast = 5 if velocity.x > 0 else -5
+#				velocity.x = 0
+#				position.x = result.position.x - x_cast
 
 func shell_hit():
 	collect(null, true)

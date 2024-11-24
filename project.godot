@@ -97,7 +97,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "CircleArea",
 "language": "GDScript",
-"path": "res://scenes/actors/objects/water_bubble/CircleArea.gd"
+"path": "res://scenes/actors/objects/liquid_bubble/CircleArea.gd"
 }, {
 "base": "Nozzle",
 "class": "CloudNozzle",
@@ -1391,6 +1391,10 @@ project/assembly_name="Super Mario 127"
 [network]
 
 limits/debugger_stdout/max_chars_per_second=10000
+
+[physics]
+
+2d/physics_engine="GodotPhysics"
 
 [rendering]
 
