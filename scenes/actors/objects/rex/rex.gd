@@ -181,7 +181,8 @@ func update_eyes():
 		eye_sprite.animation = "walking"
 	
 	eye_sprite.flip_h = sprite.flip_h
-	eye_sprite.frame = wrapi(sprite.frame, 0, eye_sprite.frames.get_frame_count(eye_sprite.animation)-1)
+	eye_sprite.frame = sprite.frame
+	eye_sprite.offset = sprite.offset
 
 func kill(hit_pos:Vector2):
 	if not hit and not dead and enabled and inv_timer <= 0:
@@ -228,9 +229,9 @@ func _physics_process(delta:float)->void :
 	time_alive += delta
 	water_scale.x = 0.95 if water_detector.get_overlapping_areas().size() > 0 else 1
 	water_scale.y = 0.25 if water_detector.get_overlapping_areas().size() > 0 else 1
-	
 	if mode != 1 and enabled:
 		sprite.animation = "walking" if not squish else "walking_squished"
+		update_eyes()
 	else:
 		sprite.animation = "default"
 	

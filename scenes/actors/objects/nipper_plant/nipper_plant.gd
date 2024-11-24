@@ -211,6 +211,9 @@ func _physics_process(delta):
 	elif hide_timer > 0:
 		hide_timer -= delta
 		
+		if body.is_on_floor():
+			velocity.x -= sign(velocity.x)*5
+		
 		sprite.rotation_degrees += (velocity.x / 15)
 		velocity.y += (gravity * gravit_scale)
 		if velocity.length_squared() < 2500 and body.is_on_floor():
@@ -241,7 +244,6 @@ func calculate_fireball_velocity(source_position: Vector2, target_position: Vect
 	var new_velocity := Vector2.ZERO
 	var displacement := target_position-source_position
 	var arc_height := min((target_position.y-source_position.y-72), -64)-abs(displacement.x/5)
-	print(arc_height)
 	
 	if displacement.y > arc_height:
 		var time_up = sqrt(-2 * arc_height/gravity)

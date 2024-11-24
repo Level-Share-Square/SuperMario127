@@ -169,6 +169,7 @@ orbit_velocity_random = 0.0
 anim_speed = 1.0
 
 [node name="NipperPlant" type="Node2D"]
+z_index = -2
 script = ExtResource( 3 )
 
 [node name="Body" type="KinematicBody2D" parent="."]

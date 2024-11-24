@@ -57,6 +57,8 @@ radius = 8.0
 [sub_resource type="RectangleShape2D" id=15]
 
 [node name="NipperFireball" type="Node2D"]
+z_index = 16
+z_as_relative = false
 script = ExtResource( 2 )
 
 [node name="Body" type="KinematicBody2D" parent="."]

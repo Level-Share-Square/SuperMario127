@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/actors/objects/blue_coin/blue.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/coin.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 6, 7 )
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.0
@@ -15,31 +18,37 @@ radius = 9.0
 script = ExtResource( 3 )
 coins = 5
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+collision_layer = 8
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 frames = ExtResource( 2 )
 playing = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="KinematicShape" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="KinematicBody2D"]
 collision_layer = 8
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Area2D"]
 shape = SubResource( 1 )
 disabled = true
 
-[node name="WaterDetector" type="Area2D" parent="."]
+[node name="WaterDetector" type="Area2D" parent="KinematicBody2D"]
 collision_layer = 0
 collision_mask = 128
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/WaterDetector"]
 shape = SubResource( 2 )
 disabled = true
+
+[node name="EditorArea" type="Area2D" parent="KinematicBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/EditorArea"]
+shape = SubResource( 3 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 process_parent = true
 physics_process_parent = true
-
-[node name="EditorArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EditorArea"]
-shape = SubResource( 3 )

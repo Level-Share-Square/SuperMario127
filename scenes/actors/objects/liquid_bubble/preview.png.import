@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-cf7b692f67825720405c00941cc46fbc.stex"
+path="res://.import/preview.png-e911aa364a0f11d0af49ad4cc40e8618.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/water_bubble/icon.png"
-dest_files=[ "res://.import/icon.png-cf7b692f67825720405c00941cc46fbc.stex" ]
+source_file="res://scenes/actors/objects/liquid_bubble/preview.png"
+dest_files=[ "res://.import/preview.png-e911aa364a0f11d0af49ad4cc40e8618.stex" ]
 
 [params]
 
