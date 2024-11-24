@@ -97,7 +97,6 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "CircleArea",
 "language": "GDScript",
-"path": "res://scenes/actors/objects/water_bubble/CircleArea.gd"
 "path": "res://scenes/actors/objects/liquid_bubble/CircleArea.gd"
 }, {
 "base": "Nozzle",
