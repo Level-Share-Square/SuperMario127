@@ -25,7 +25,7 @@ func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout
 	if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible or !Singleton.ModeSwitcher.get_node("ModeSwitcherButton").switching_disabled:
 		var volume_multiplier = Singleton.Music.volume_multiplier
 
-		yield(do_transition_animation(transition_in_tex, transition_time, TRANSITION_SCALE_UNCOVER, TRANSITION_SCALE_COVERED, volume_multiplier, volume_multiplier / 4, false, true), "completed")
+		yield(do_transition_animation(transition_in_tex, transition_time, TRANSITION_SCALE_UNCOVER, TRANSITION_SCALE_COVERED, volume_multiplier, volume_multiplier / 4, false, false), "completed")
 		
 		Singleton.CurrentLevelData.stop_tracking_time_score()
 		if !r_press:
@@ -39,7 +39,7 @@ func reload_scene(transition_in_tex = cutout_circle, transition_out_tex = cutout
 		yield(get_tree().create_timer(0.1), "timeout")
 		get_tree().paused = false
 		
-		yield(do_transition_animation(transition_out_tex, transition_time, TRANSITION_SCALE_COVERED, TRANSITION_SCALE_UNCOVER, volume_multiplier / 4, volume_multiplier, false, true), "completed")
+		yield(do_transition_animation(transition_out_tex, transition_time, TRANSITION_SCALE_COVERED, TRANSITION_SCALE_UNCOVER, volume_multiplier / 4, volume_multiplier, false, false), "completed")
 
 func do_transition_fade(transition_time : float = DEFAULT_TRANSITION_TIME, start_alpha: float = 0, end_alpha: float = 1, reverse_after : bool = true):
 	var chosen_transition_color: Color = TRANSITION_COLOR

@@ -40,6 +40,7 @@ func _set_property_values() -> void:
 	set_bool_alias("teleportation_mode", "Remote", "Local")
 	set_property("collectible", collectible)
 	set_property("required_amount", required_amount)
+	set_property("force_fadeout", force_fadeout)
 
 
 func _init():

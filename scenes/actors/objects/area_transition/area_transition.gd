@@ -22,8 +22,8 @@ var entering := false
 var stored_characters : Array = [null, null]
 
 func _set_properties():
-	savable_properties = ["area_id", "destination_tag", "teleportation_mode", "vertical", "parts", "stops_camera"]
-	editable_properties = ["area_id", "destination_tag", "teleportation_mode", "vertical", "parts", "stops_camera"]
+	savable_properties = ["area_id", "destination_tag", "teleportation_mode", "vertical", "parts", "stops_camera", "force_fadeout"]
+	editable_properties = ["area_id", "destination_tag", "teleportation_mode", "vertical", "parts", "stops_camera", "force_fadeout"]
 	
 func _set_property_values():
 	set_property("area_id", area_id, true, "Area Destination")
@@ -33,6 +33,7 @@ func _set_property_values():
 	set_property("vertical", vertical)
 	set_property("parts", parts)
 	set_property("stops_camera", stops_camera)
+	set_property("force_fadeout", force_fadeout)
 #	set_property("instant", instant, true, "Instant (Local)")
 	
 func _init():
@@ -183,7 +184,7 @@ func start_pipe_enter_animation(character : Character) -> void:
 				Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
 			character.camera.auto_move = false
 	
-	emit_signal("pipe_animation_finished", character, entering)
+	emit_signal("pipe_animation_finished", character, entering, force_fadeout)
 	
 	
 
@@ -195,7 +196,7 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 	
 
 	if !tp_mode:
-		emit_signal("exit", character, entering)
+		emit_signal("exit", character, entering, force_fadeout)
 		
 		# undo collision changes 
 		character.set_collision_layer_bit(1, true)

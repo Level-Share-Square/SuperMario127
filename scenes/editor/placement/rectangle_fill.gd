@@ -119,9 +119,9 @@ func selected_update():
 
 
 func mouse_down() -> void:
-	fill_rect.position = Vector2(round(mouse_pos.x/TILE_SIZE), round(mouse_pos.y/TILE_SIZE))
+	fill_rect.position = Vector2(floor(mouse_pos.x/TILE_SIZE), floor(mouse_pos.y/TILE_SIZE))
 	
-	drag.rect_position = fill_rect.position*TILE_SIZE + Vector2(8, 8)
+	drag.rect_position = Vector2(floor(mouse_pos.x/TILE_SIZE), floor(mouse_pos.y/TILE_SIZE))
 	drag.rect_size = TILE
 	drag.visible = true
 	

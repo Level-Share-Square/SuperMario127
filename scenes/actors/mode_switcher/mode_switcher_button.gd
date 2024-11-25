@@ -73,7 +73,7 @@ func change_visuals(new_scene_mode : int) -> void:
 func switch() -> void:
 	if get_parent().layer != 99 and !switching_disabled and !get_tree().paused and !Singleton.SceneTransitions.transitioning:
 		Singleton.Music.reset_music()
-		Singleton.Music.stop_temporary_music()
+		Singleton.Music.stop_temporary_music(1, 1)
 
 		Singleton.ActionManager.clear_history()
 		

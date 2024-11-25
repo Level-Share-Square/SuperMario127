@@ -115,7 +115,7 @@ func open_menu_ui(character):
 func character_animation_finished(_animation : String, character : Character) -> void:
 	# this is so the door closes after mario enters
 	animate_door("close")
-	emit_signal("start_door_logic", character, entering)
+	emit_signal("start_door_logic", character, entering, get_parent().force_fadeout)
 	
 func animate_door(animation : String = "close") -> void:
 	#print(get_parent().palette_dict[get_parent().palette] + "_" + get_parent().collectible + animation)
@@ -137,7 +137,7 @@ func start_door_exit_animation(character : Character, tp_mode : bool) -> void:
 	character.toggle_movement(false)
 	
 	if !tp_mode:
-		emit_signal("exit", character, entering)
+		emit_signal("exit", character, entering, get_parent().force_fadeout)
 	
 	animate_door("open")
 	character.anim_player.play("exit_door")

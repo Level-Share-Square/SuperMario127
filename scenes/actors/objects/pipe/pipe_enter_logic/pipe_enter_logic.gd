@@ -132,7 +132,7 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 	character.sprite.frame = 2
 	
 	if !tp_mode:
-		emit_signal("exit", character, entering)
+		emit_signal("exit", character, entering, get_parent().force_fadeout)
 	
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character, "position:y", global_position.y + PIPE_BOTTOM_DISTANCE, \
@@ -172,7 +172,7 @@ func pipe_exit_anim_finished(character : Character):
 	
 func _tween_all_completed() -> void:
 	if entering: #TODO: Make this work w/o if statement
-		emit_signal("pipe_animation_finished", stored_character, entering)
+		emit_signal("pipe_animation_finished", stored_character, entering, get_parent().force_fadeout)
 		stored_character = null
 
 
