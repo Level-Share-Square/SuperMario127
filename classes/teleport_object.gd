@@ -83,7 +83,7 @@ func get_character_screen_position(character : Character) -> Vector2:
 	# Return relative screen position
 	return character.global_position - camera_pos + Vector2(384, 216)
 
-func change_areas(entering_character : Character, entering):
+func change_areas(entering_character : Character, entering, force_fadeout):
 	#TODO: REMOVE UPWARD CALLS ASAP
 	var character = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character) #Holy crap this is bad
 	var character2
@@ -168,12 +168,13 @@ func exit_local_teleport():
 func exit_remote_teleport():
 	pass
 
-func _start_local_transition(character : Character, entering, force_fadeout := false) -> void:
+func _start_local_transition(character : Character, entering, working_force_fadeout := false) -> void:
 	var local_pair = find_local_pair()
 	if entering:
-		character.force_warp_fadeout = force_fadeout
+		working_force_fadeout = working_force_fadeout if teleportation_mode == false else true
+		character.force_warp_fadeout = working_force_fadeout
 		character.set_collision(false)
-		if global_position.distance_to(local_pair.global_position) <= 800 and !force_fadeout:
+		if global_position.distance_to(local_pair.global_position) <= 800 and !working_force_fadeout:
 			
 			var tween = Tween.new()
 			add_child(tween)
