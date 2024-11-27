@@ -27,16 +27,31 @@ func _start(_delta):
 	character.sprite.rotation_degrees = 0
 	character.current_jump = 0
 	character.friction = 4
-	character.velocity.y = -boost_velocity
 	bounces_left = 3
 	priority = 5
 	for area in lava_areas:
 		var area_object = area.get_parent()
 		if area_object.color != Color(1, 0, 0):
+			#constructs a new gradient if the color is not the base red
 			var new_gradient = Gradient.new()
 			new_gradient.colors = PoolColorArray([area_object.color, Color8((area_object.color.r*255)-87, (area_object.color.g*255)-87, (area_object.color.b*255)-87), Color(0.082353, 0.082353, 0.082353), Color(0, 0, 0, 0)])
 			new_gradient.offsets = PoolRealArray([0, 0.189, 0.692, 0.983])
 			character.burn_particles.process_material.color_ramp.gradient = new_gradient
+			
+		#velocity application
+		if area_object != CircleArea:
+			#if it's not a circle then just use the angle
+			if area_object.name.begins_with("Fire") or area_object.name.begins_with("@Fire"):
+				character.velocity.y = -boost_velocity
+			else:
+				var lava_normal := Vector2.UP.rotated(area_object.rotation)
+				if !is_equal_approx(lava_normal.x, 0):
+					character.velocity.x = lava_normal.x * area_object.scale.x * boost_velocity
+				if !is_equal_approx(lava_normal.y, 0):
+					character.velocity.y = lava_normal.y * area_object.scale.y * boost_velocity
+		else:
+			#if it's a circle shaped hitbox find the angle from
+			character.velocity = Vector2.UP.rotated(atan((area_object.position.x-character.x)/(area_object.position.y-character.y))) * boost_velocity
 	character.burn_particles.emitting = true
 	
 	

@@ -432,7 +432,7 @@ func physics_process_normal(delta, is_in_platform: bool):
 	else:
 		accel = 2
 	
-	if kinematic_body.is_on_floor() or kinematic_body.test_move(kinematic_body.global_transform, Vector2(-0.1, 0)) or kinematic_body.test_move(kinematic_body.global_transform, Vector2(0.1, 0)):
+	if kinematic_body.is_on_floor():
 		if !knockback_affect:
 			sprite.flip_h = (true if (facing_direction > 0) else false) if (facing_direction != 0) else sprite.flip_h
 			velocity.x = lerp(velocity.x, facing_direction * working_speed, fps_util.PHYSICS_DELTA * accel) * water_scale.x
