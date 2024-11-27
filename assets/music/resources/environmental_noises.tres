@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 stream = ExtResource( 2 )
-volume_db = 0
+volume_db = -10
 pitch_scale = 1
 title = "Environmental Noises"
 note = "From Super Mario Odyssey"

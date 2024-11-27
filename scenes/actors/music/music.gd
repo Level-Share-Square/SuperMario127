@@ -154,6 +154,7 @@ func change_song(old_setting, music_setting) -> void:
 	
 	if song != null and stream != song.stream:
 		stream = song.stream
+		base_volume = song.volume_db
 		play()
 		
 		if song.underwater_stream != null:
