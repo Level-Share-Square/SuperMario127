@@ -1,9 +1,28 @@
-[gd_resource type="Theme" load_steps=3 format=2]
+[gd_resource type="Theme" load_steps=7 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=2]
+[ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=3]
+[ext_resource path="res://assets/styles/ButtonStyleDisabled.tres" type="StyleBox" id=4]
 
 [sub_resource type="DynamicFont" id=43]
 font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=44]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.141176, 0.207843, 0.588235, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [resource]
 Button/constants/hseparation = 0
@@ -52,24 +71,28 @@ MarginContainer/constants/margin_top = 0
 MenuButton/constants/hseparation = 0
 OptionButton/constants/arrow_margin = 0
 OptionButton/constants/hseparation = 0
+OptionButton/icons/arrow = null
+OptionButton/styles/disabled = ExtResource( 4 )
+OptionButton/styles/hover = ExtResource( 2 )
+OptionButton/styles/normal = ExtResource( 3 )
+OptionButton/styles/pressed = ExtResource( 3 )
 PopupMenu/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
 PopupMenu/colors/font_color_accel = Color( 0.7, 0.7, 0.7, 0.8 )
 PopupMenu/colors/font_color_disabled = Color( 0.4, 0.4, 0.4, 0.8 )
 PopupMenu/colors/font_color_hover = Color( 0.88, 0.88, 0.88, 1 )
-PopupMenu/constants/hseparation = 0
-PopupMenu/constants/size = 10
-PopupMenu/constants/vseparation = 0
+PopupMenu/constants/hseparation = 10
+PopupMenu/constants/size = 30
+PopupMenu/constants/vseparation = 3
 PopupMenu/fonts/font = SubResource( 43 )
 PopupMenu/icons/checked = null
 PopupMenu/icons/radio_checked = null
 PopupMenu/icons/radio_unchecked = null
 PopupMenu/icons/submenu = null
 PopupMenu/icons/unchecked = null
-PopupMenu/styles/hover = null
+PopupMenu/styles/hover = ExtResource( 2 )
 PopupMenu/styles/labeled_separator_left = null
 PopupMenu/styles/labeled_separator_right = null
-PopupMenu/styles/panel = null
-PopupMenu/styles/panel_disabled = null
+PopupMenu/styles/panel = SubResource( 44 )
 PopupMenu/styles/separator = null
 RichTextLabel/constants/line_separation = 0
 RichTextLabel/constants/shadow_as_outline = 0

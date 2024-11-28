@@ -52,7 +52,6 @@ func _ready():
 	else:
 		kinematic_shape.disabled = true
 	
-	yield(get_tree().create_timer(0.2, false), "timeout")
 	var _connect = area.connect("body_entered", self, "collect")
 	
 	for body in area.get_overlapping_bodies():
@@ -60,10 +59,7 @@ func _ready():
 				collect(body)
 	
 	if do_physics():
-		yield(get_tree().create_timer(9.0 - 0.2, false), "timeout")
-		blink = true # Make the coin flash before disappearing
-		yield(get_tree().create_timer(1.0, false), "timeout")
-		queue_free() # die
+		despawn_coin()
 
 # Sprite frame assignments seem to be expensive
 var previous_frame = 0
@@ -109,6 +105,12 @@ func vertical_cast():
 	var pos_new = position + Vector2(0, -10 if velocity.y < 0 else 10)
 	return get_world_2d().direct_space_state.intersect_ray(
 		position, pos_new, [self], 17)
+
+func despawn_coin():
+	yield(get_tree().create_timer(9.0 - 0.2, false), "timeout")
+	blink = true # Make the coin flash before disappearing
+	yield(get_tree().create_timer(1.0, false), "timeout")
+	queue_free() # die
 
 func _physics_process(delta):
 	# Everything else here is irrelevant for edit mode

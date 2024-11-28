@@ -149,11 +149,13 @@ func change_song(old_setting, music_setting) -> void:
 		song = get_song(music_setting)
 	elif typeof(music_setting) == TYPE_STRING:
 		if typeof(music_setting) != typeof(old_setting) or music_setting != old_setting:
+			base_volume = 0
 			handle_custom_song(music_setting)
 			
 	
 	if song != null and stream != song.stream:
 		stream = song.stream
+		base_volume = song.volume_db
 		play()
 		
 		if song.underwater_stream != null:

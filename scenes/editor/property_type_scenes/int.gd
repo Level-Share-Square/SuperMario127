@@ -9,7 +9,7 @@ func update():
 	if !text.is_valid_integer():
 		var old_text : String = text
 		text = "0"
-		if !has_letters(text):
+		if !has_letters(old_text):
 			#parses the entered text to see if it's a valid math expression
 			var expression = Expression.new()
 			var error = expression.parse(old_text)

@@ -70,19 +70,16 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 4 )
-frame = 2
 playing = true
 
 [node name="Color1" type="AnimatedSprite" parent="AnimatedSprite"]
 visible = false
 frames = SubResource( 6 )
-frame = 2
 playing = true
 
 [node name="Color2" type="AnimatedSprite" parent="AnimatedSprite"]
 visible = false
 frames = SubResource( 12 )
-frame = 2
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]

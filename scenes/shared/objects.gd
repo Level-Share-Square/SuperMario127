@@ -11,7 +11,10 @@ var object_cache = []
 
 var object_index = 0
 
+var loaded := false
+
 func load_in(loaded_level_data : LevelData, loaded_level_area : LevelArea):
+	loaded = false
 	object_index = 0
 	
 	level_data = loaded_level_data
@@ -78,6 +81,7 @@ func object_ready():
 	object_index += 1
 	var object_count = level_area.objects.size()
 	
-	if object_index == object_count:
+	if object_index == object_count and !loaded:
+		loaded = true
 		emit_signal("objects_ready")
 		print("Objects are all loaded!")

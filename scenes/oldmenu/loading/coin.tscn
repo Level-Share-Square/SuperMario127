@@ -18,7 +18,6 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
-frame = 2
 playing = true
 centered = false
 
@@ -27,7 +26,6 @@ modulate = Color( 1, 1, 1, 0.137255 )
 position = Vector2( 0, 35 )
 scale = Vector2( 1, -0.75 )
 frames = ExtResource( 2 )
-frame = 2
 playing = true
 centered = false
 
