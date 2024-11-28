@@ -46,9 +46,9 @@ func _start(_delta):
 			else:
 				var lava_normal := Vector2.UP.rotated(area_object.rotation)
 				if !is_equal_approx(lava_normal.x, 0):
-					character.velocity.x = lava_normal.x * area_object.scale.x * boost_velocity
-				if !is_equal_approx(lava_normal.y, 0):
-					character.velocity.y = lava_normal.y * area_object.scale.y * boost_velocity
+					character.velocity.x = min(abs(lava_normal.x * boost_velocity), 480) * sign(area_object.scale.x) * sign(lava_normal.x)
+				
+				character.velocity.y = -boost_velocity*(abs(lava_normal.y)/2 + .5)
 		else:
 			#if it's a circle shaped hitbox find the angle from
 			character.velocity = Vector2.UP.rotated(atan((area_object.position.x-character.x)/(area_object.position.y-character.y))) * boost_velocity
