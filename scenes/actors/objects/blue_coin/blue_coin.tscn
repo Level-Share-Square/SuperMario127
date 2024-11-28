@@ -20,6 +20,7 @@ coins = 5
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 collision_layer = 8
+collision_mask = 17
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 frames = ExtResource( 2 )
