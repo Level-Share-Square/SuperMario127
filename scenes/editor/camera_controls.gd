@@ -74,18 +74,14 @@ func resolve_limit_collisions():
 
 func _physics_process(delta):
 	var move_speed = speed * 2 if Input.is_action_pressed("speed_up_camera") else speed
-	if up_held:
-		position.y -= move_speed
-		resolve_limit_collisions()
-	elif down_held:
-		position.y += move_speed
-		resolve_limit_collisions()
-	if left_held:
-		position.x -= move_speed
-		resolve_limit_collisions()
-	elif right_held:
-		position.x += move_speed
-		resolve_limit_collisions()
+	
+	var move_dir := Vector2.ZERO
+	
+	move_dir = Input.get_vector("editor_left", "editor_right", "editor_up", "editor_down")
+	
+
+	position += move_dir*move_speed*60*delta
+	resolve_limit_collisions()
 		
 	var editor = get_tree().get_current_scene()
 	if(zoom.x != editor.zoom_level):
