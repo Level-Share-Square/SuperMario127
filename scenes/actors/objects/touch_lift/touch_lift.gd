@@ -32,11 +32,11 @@ var curve = Curve2D.new()
 var curve_points
 var custom_path = Curve2D.new()
 
-var baked_length : float = 0
+var path_length : float = 0
 
 func _set_properties():
-	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset", "custom_path", "baked_length" ]
-	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "color", "start_offset", "custom_path", "baked_length"]
+	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset", "custom_path", "path_length" ]
+	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "color", "start_offset", "custom_path", "path_length"]
 	
 func _set_property_values():
 	set_property("parts", parts)
@@ -49,8 +49,8 @@ func _set_property_values():
 	set_property("color", color)
 	set_property("start_offset", start_offset)
 	set_property("custom_path", curve)
-	set_property("baked_length", baked_length, true, "Path Length")
-	set_property_menu("baked_length", ["viewer"])
+	set_property("path_length", path_length, true)
+	set_property_menu("path_length", ["viewer"])
 	
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
@@ -187,7 +187,8 @@ func _physics_process(delta):
 	if(!activated):
 		return
 	
-	baked_length = path.curve.get_baked_length()
+	var baked_length = path.curve.get_baked_length()
+	set_property("path_length", baked_length, true)
 	
 	linear_offset += (speed*slowdown_factor) * max_speed * 120 * fps_util.PHYSICS_DELTA
 
