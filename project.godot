@@ -962,6 +962,7 @@ enabled=PoolStringArray( "res://addons/discord_game_sdk/plugin.cfg" )
 physics=false
 change=false
 audio=false
+transforms=false
 
 [importer_defaults]
 
@@ -1404,6 +1405,7 @@ quality/intended_usage/framebuffer_allocation.mobile=0
 vram_compression/import_bptc=true
 vram_compression/import_etc=true
 quality/filters/anisotropic_filter_level=1
+batching/precision/uv_contract=true
 gles3/shaders/shader_compilation_mode=2
 limits/buffers/canvas_polygon_buffer_size_kb=1024
 limits/buffers/canvas_polygon_index_buffer_size_kb=1024
