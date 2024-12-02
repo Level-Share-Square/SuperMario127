@@ -30,6 +30,7 @@ func _unhandled_input(event):
 	elif event.is_action_released("editor_right"):
 		right_held = false
 
+
 func load_in(_level_data : LevelData, level_area : LevelArea):
 	var zoom_level = Singleton.EditorSavedSettings.zoom_level
 	position.x = (get_viewport_rect().size.x / 2) * zoom_level
@@ -77,7 +78,9 @@ func _physics_process(delta):
 	
 	var move_dir := Vector2.ZERO
 	
-	move_dir = Input.get_vector("editor_left", "editor_right", "editor_up", "editor_down")
+	# to make sure it doesnt just move around when selecting text boxes or doing anything important
+	if up_held or down_held or left_held or right_held:
+		move_dir = Input.get_vector("editor_left", "editor_right", "editor_up", "editor_down")
 	
 
 	position += move_dir*move_speed*60*delta
