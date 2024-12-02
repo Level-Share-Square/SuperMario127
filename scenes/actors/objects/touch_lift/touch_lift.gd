@@ -9,7 +9,7 @@ var last_parts := 4
 var color := Color.green
 var last_color := Color.green
 
-var start_offset := 0.0
+var start_offset := 0
 var start_percentage := 0
 var last_start_percentage := 0
 
@@ -35,7 +35,7 @@ var custom_path = Curve2D.new()
 var path_length : float = 0
 
 func _set_properties():
-	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset", "custom_path", "path_length" ]
+	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "color", "start_offset", "custom_path", "path_length"]
 	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "color", "start_offset", "custom_path", "path_length"]
 	
 func _set_property_values():
@@ -188,7 +188,7 @@ func _physics_process(delta):
 		return
 	
 	var baked_length = path.curve.get_baked_length()
-	set_property("path_length", baked_length, true)
+	path_length = baked_length
 	
 	linear_offset += (speed*slowdown_factor) * max_speed * 120 * fps_util.PHYSICS_DELTA
 
