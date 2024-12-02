@@ -46,7 +46,7 @@ func _start(_delta):
 			else:
 				var lava_normal := Vector2.UP.rotated(area_object.rotation)
 				if !is_equal_approx(lava_normal.x, 0):
-					character.velocity.x = min(abs(lava_normal.x * boost_velocity), 480) * sign(area_object.scale.x) * sign(lava_normal.x)
+					character.velocity.x = min(abs(lava_normal.x * boost_velocity), 480) * sign(area_object.scale.x)
 				
 				character.velocity.y = -boost_velocity*(abs(lava_normal.y)/2 + .5)
 		else:
