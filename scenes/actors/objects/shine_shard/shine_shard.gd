@@ -28,15 +28,23 @@ func collect(body):
 			sound.play()
 		collected = true
 		label.text = str(Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][0])
-		label.visible = true
+		
+		#all of the collecting animation takes place in the animation player now, any old commented
+		#out code is part of the old animation and is simply left here to revert if necessary
+		animation_player.play("collect")
+		
+#		label.visible = true
 		#animated_sprite.animation = "collect"
 		#animated_sprite.frame = 0
-		animated_sprite.visible = false
-		sparkles.emitting = false
-		destroy_timer = 2
+#		animated_sprite.visible = false
+#		destroy_timer = 2
 		
 func _ready():
-	if mode == 1: return
+	if mode == 1:
+		#if in the editor, use the base position and modulate values of the shine shard, then exit _ready()
+		animation_player.play("RESET")
+		return
+	
 	if enabled:
 		id = Singleton.CurrentLevelData.level_data.vars.max_shine_shards
 		Singleton.CurrentLevelData.level_data.vars.max_shine_shards += 1
@@ -48,25 +56,22 @@ func _ready():
 	animation_player.play("default")
 
 func _process(delta):
-	if destroy_timer > 0:
-		destroy_timer -= delta
-		if destroy_timer <= 0:
-			destroy_timer = 0
-			queue_free()
-	if despawn_timer > 0:
-		despawn_timer -= delta
-		if despawn_timer <= 1:
-			visible = !visible
-		if despawn_timer <= 0:
-			if !sound.playing:
-				despawn_timer = 0
-				queue_free()
-			else:
-				despawn_timer = 0.3
-	if !collected:
-		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
-	else:
-		var label_color = label.modulate
-		label_color.a -= 0.035
-		label.modulate = label_color
-		label.rect_position.y -= 0.75
+#	if destroy_timer > 0:
+#		destroy_timer -= delta
+#		if destroy_timer <= 0:
+#			destroy_timer = 0
+#			queue_free()
+#	if despawn_timer > 0:
+#		despawn_timer -= delta
+#		if despawn_timer <= 1:
+#			visible = !visible
+#		if despawn_timer <= 0:
+#			if !sound.playing:
+#				despawn_timer = 0
+#				queue_free()
+#			else:
+#				despawn_timer = 0.3
+
+	if collected:
+		if sparkles.emitting:
+			sparkles.emitting = false

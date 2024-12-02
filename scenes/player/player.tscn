@@ -1516,9 +1516,9 @@ rect_min_size = Vector2( 0, 4 )
 
 [node name="ShineShards" type="Control" parent="UIOver/HUD/Control/Collectibles"]
 visible = false
-margin_top = 72.0
+margin_top = 44.0
 margin_right = 40.0
-margin_bottom = 108.0
+margin_bottom = 80.0
 rect_min_size = Vector2( 36, 36 )
 script = ExtResource( 20 )
 

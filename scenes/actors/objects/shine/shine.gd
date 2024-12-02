@@ -211,7 +211,6 @@ func activate_shine(do_animation: bool = true) -> void:
 	activated = true
 	
 	if do_animation:
-		Singleton.CurrentLevelData.level_data.vars.activate_shine(id)
 		
 		while current_scene.character == null:
 			yield(get_tree(), "idle_frame")
@@ -220,20 +219,36 @@ func activate_shine(do_animation: bool = true) -> void:
 		while !character.movable or !character.controllable:
 			yield(get_tree(), "idle_frame")
 		
-		animation_player.play("appear")
-
 		var camera = current_scene.get_node(current_scene.camera)
-		Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, 0.5)
+		
 		pause_mode = PAUSE_MODE_PROCESS
 		get_tree().paused = true
 		Singleton.CurrentLevelData.can_pause = false
 		
-		yield(get_tree().create_timer(0.5), "timeout")
+		var working_trans_time = 0.25
 		
-		camera.focus_on = self
-		camera.auto_move = false
-		camera.global_position = global_position
-		camera.skip_to_player = true
+		if global_position.distance_to(character.global_position) <= 800:
+			working_trans_time = 0.25
+			
+			var tween = get_tree().create_tween()
+			tween.set_pause_mode(SceneTreeTween.TWEEN_PAUSE_PROCESS)
+			tween.set_trans(Tween.TRANS_QUAD)
+			
+			tween.tween_property(camera, "global_position", global_position, .25)
+			yield(get_tree().create_timer(working_trans_time), "timeout")
+		else:
+			working_trans_time = 0.5
+			
+			Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, 0.5)
+			yield(get_tree().create_timer(working_trans_time), "timeout")
+			camera.focus_on = self
+			camera.auto_move = false
+			camera.global_position = global_position
+			camera.skip_to_player = true
+		
+		
+		animation_player.play("appear")
+		Singleton.CurrentLevelData.level_data.vars.activate_shine(id)
 		
 		unpause_timer.start()
 		# warning-ignore: return_value_discarded
@@ -244,17 +259,34 @@ func activate_shine(do_animation: bool = true) -> void:
 
 # unpauses the game after the activate shine cutscene is done
 func unpause_game() -> void:
-	Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, 0.5)
+#	Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, 0.5)
 	yield(get_tree().create_timer(0.5), "timeout")
 	
 	var character = current_scene.get_node(current_scene.character)
 	var camera = current_scene.get_node(current_scene.camera)
-	camera.focus_on = null
-	camera.auto_move = true
-	camera.global_position = character.global_position
-	camera.skip_to_player = true
 	
-	yield(get_tree().create_timer(0.25), "timeout")
+	var working_trans_time = 0.25
+	
+	if global_position.distance_to(character.global_position) <= 800:
+		working_trans_time = 0.25
+		
+		var tween = get_tree().create_tween()
+		tween.set_pause_mode(SceneTreeTween.TWEEN_PAUSE_PROCESS)
+		tween.set_trans(Tween.TRANS_QUAD)
+		
+		tween.tween_property(camera, "global_position", character.global_position, working_trans_time)
+		yield(get_tree().create_timer(working_trans_time), "timeout")
+	else:
+		working_trans_time = 0.5
+		
+		Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, working_trans_time)
+		yield(get_tree().create_timer(working_trans_time), "timeout")
+		camera.focus_on = null
+		camera.auto_move = true
+		camera.global_position = character.global_position
+		camera.skip_to_player = true
+	
+	yield(get_tree().create_timer(0.3), "timeout")
 	
 	get_tree().paused = false
 	Singleton.CurrentLevelData.can_pause = true
