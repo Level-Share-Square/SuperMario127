@@ -61,7 +61,7 @@ func _init(data: Dictionary):
 	has_played = fetch(data, "hasPlayed", false)
 	has_rated = fetch(data, "hasRated", 0)
 	
-	level_info = LevelInfo.new(level_code)
+	level_info = LevelInfo.new("", "", level_code)
 	
 #	data.erase("code")
 #	print(data)

@@ -83,6 +83,8 @@ func update_visuals(new_fuel: float):
 
 var last_nozzle: String = "null"
 func nozzle_changed(new_nozzle: String):
+	if new_nozzle == last_nozzle: return
+	
 	if new_nozzle == "null":
 		transition.play("transition")
 	elif last_nozzle == "null":

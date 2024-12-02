@@ -4,7 +4,7 @@ extends TimerBase
 onready var timer_display: Label = $Time
 onready var name_display: Label = $Time/Name
 
-export var label_text: String = "TIME"
+export var label_text: String = "TIME LEFT"
 export var show_time_score: bool = false
 export var kill_on_end: bool = false
 

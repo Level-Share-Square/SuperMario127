@@ -43,6 +43,9 @@ var min_rotation := 0
 var max_rotation := 90
 var faces_right := true
 	
+# for compatibility
+var force_fadeout: bool
+	
 # the audio files used in the code for some of the cannons movements
 onready var cannon_move_noise : AudioStream = preload("res://scenes/actors/objects/cannon/crank.tres")
 onready var cannon_fire_noise : AudioStream = preload("res://scenes/actors/objects/cannon/nsmbwiiBobombCannon.wav")
@@ -111,7 +114,7 @@ func _physics_process(delta : float) -> void:
 			or sprite_body.rotation_degrees == max_rotation #the stream used for the cannon move sound is set in the cannon startup animation finish function
 
 # called by a signal when the pipe enter animation finished
-func _start_cannon_animation(character : Character, entering : bool) -> void:
+func _start_cannon_animation(character : Character, entering : bool, force_fadeout: bool = false) -> void:
 	stored_character = character
 	stored_character.modulate.a = 0
 	stored_character.camera.focus_on = cannon_camera_startup_focus

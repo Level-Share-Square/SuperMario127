@@ -24,7 +24,7 @@ custom_constants/hseparation = 32
 columns = 3
 
 [node name="TimeScore" parent="Timers/Grid" instance=ExtResource( 1 )]
-label_text = "ELAPSED"
+label_text = "MISSION"
 show_time_score = true
 
 [node name="RadialTimers" type="VBoxContainer" parent="."]

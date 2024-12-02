@@ -25,7 +25,8 @@ func thread_load_directory(working_folder: String):
 # Thread must be disposed (or "joined"), for portability.
 func _exit_tree():
 	if level_load_thread.is_active():
-		printerr("Thread aborted while it's still running! If your game crashed, this is probably why.")
+		pass
+		#printerr("Thread aborted while it's still running! If your game crashed, this is probably why.")
 		## lets figure out how to handle this properly, later :p
 
 

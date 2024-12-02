@@ -169,7 +169,7 @@ func pipe_exit_anim_finished(character : Character):
 	
 	stored_character = null
 
-	
+
 func _tween_all_completed() -> void:
 	if entering: #TODO: Make this work w/o if statement
 		emit_signal("pipe_animation_finished", stored_character, entering, get_parent().force_fadeout)

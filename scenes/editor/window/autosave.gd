@@ -11,7 +11,9 @@ onready var clear = $ClearButton
 var main_level_code
 var main_time
 
-var level_name = Singleton.CurrentLevelData.level_data.name
+var level_name: String = Singleton.CurrentLevelData.level_data.name
+var level_id: String = Singleton.CurrentLevelData.level_id
+var working_folder: String = Singleton.CurrentLevelData.working_folder
 
 var active_level_code
 var active_time
@@ -49,7 +51,7 @@ func _ready():
 		var time = file.get_line()
 		main_level_code = file.get_line()
 		
-		populate_info_panel(LevelInfo.new(main_level_code))
+		populate_info_panel(LevelInfo.new(level_id, working_folder, main_level_code))
 		main_time = float(time)
 		date.add_item(Time.get_datetime_string_from_unix_time(main_time, true) + " (Main)")
 		file.close()
@@ -75,7 +77,7 @@ func item_selected(index):
 		active_level_code = file.get_line()
 		file.close()
 		
-	populate_info_panel(LevelInfo.new(active_level_code))
+	populate_info_panel(LevelInfo.new(level_id, working_folder, active_level_code))
 
 func populate_info_panel(level_info : LevelInfo = null) -> void:
 	if level_info != null:
@@ -105,7 +107,7 @@ func load_level():
 	get_parent().visible = false
 	Singleton2.disable_hotkeys = false
 	if date.selected == 0:
-		Singleton.CurrentLevelData.level_data = LevelInfo.new(main_level_code).level_data
+		Singleton.CurrentLevelData.level_data = LevelInfo.new(level_id, working_folder, main_level_code).level_data
 	get_tree().reload_current_scene()
 	
 
@@ -134,9 +136,9 @@ func on_clear_pressed():
 		var file = dir.get_next()
 		if file == "":
 			break
-		elif file.begins_with(LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()).level_name):
+		elif file.begins_with(LevelInfo.new(level_id, working_folder, Singleton.CurrentLevelData.level_data.get_encoded_level_data()).level_name):
 			dir.remove("user://autosaves/" + file)
-	dir.remove("user://autosaves/" + LevelInfo.new(Singleton.CurrentLevelData.level_data.get_encoded_level_data()).level_name + "_main.autosave")
+	dir.remove("user://autosaves/" + LevelInfo.new(level_id, working_folder, Singleton.CurrentLevelData.level_data.get_encoded_level_data()).level_name + "_main.autosave")
 	dir.list_dir_end()
 	hide()
 	$"../LevelName".show()

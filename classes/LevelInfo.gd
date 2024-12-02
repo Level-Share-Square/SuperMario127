@@ -12,6 +12,8 @@ const INFO_DATA_SUFFIX: String = "~0*0~0*0~0*0~0*0]"
 # this class stores all the info and savedata relating to a level that can be played from the level list 
 
 var level_code : String # used for saving the level to disk
+var level_id: String
+var level_folder: String
 
 # i'm not quite sure what the idea was behind making it load
 # the level data twice, but i went and removed that
@@ -19,7 +21,6 @@ var level_data : LevelData
 # if the code was already loaded in full once,
 # no point in wasting time doing it again :p
 var is_fully_loaded: bool
-
 
 # level info
 var level_name : String = ""
@@ -64,7 +65,9 @@ func get_info_level_code(level_code: String):
 	return info_level_code
 
 
-func _init(passed_level_code : String = "") -> void:
+func _init(passed_id: String, passed_folder: String, passed_level_code: String = "") -> void:
+	level_id = passed_id
+	level_folder = passed_folder
 	if passed_level_code == "":
 		return
 	
@@ -157,7 +160,7 @@ func reset_save_data(delete_file: bool = true) -> void:
 
 ### new functions designed to save separately to the level code
 func get_save_path() -> String:
-	return level_list_util.get_level_save_path(Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder)
+	return level_list_util.get_level_save_path(level_id, level_folder)
 
 func get_save_file_dictionary() -> Dictionary:
 	var save_dictionary : Dictionary = \

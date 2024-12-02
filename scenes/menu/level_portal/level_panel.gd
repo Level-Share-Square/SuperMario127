@@ -194,6 +194,9 @@ func play_level():
 	
 	Singleton.SceneSwitcher.menu_return_screen = "LevelPortal"
 	Singleton.SceneSwitcher.menu_return_args = [page_info.level_id, page_return_vars]
+	
+	page_info.level_info.level_id = local_id
+	page_info.level_info.level_folder = working_folder
 	Singleton.SceneSwitcher.start_level(page_info.level_info, local_id, working_folder, false, true)
 
 
