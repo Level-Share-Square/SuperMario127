@@ -16,6 +16,7 @@ extents = Vector2( 48, 28 )
 [node name="MetalPlatform" type="Node2D"]
 z_index = -1
 script = ExtResource( 4 )
+parts = 8
 normal_texture = ExtResource( 1 )
 recolorable_texture = ExtResource( 5 )
 

@@ -29,6 +29,9 @@ func delayed_ready():
 		
 		label.text = str(max_shards-shard_amount)
 		fill.value = shard_amount
+		
+		if label.text == "0":
+			fadeout.play("fadeout")
 
 
 func collect_shard(new_shards: int):
