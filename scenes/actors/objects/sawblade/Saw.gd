@@ -19,7 +19,12 @@ func kill(body):
 	
 	
 	if is_metal_or_rainbow(body):
-		var added_speed = global_position.direction_to(body.global_position) * METAL_KNOCKBACK
+		var added_speed = global_position.direction_to(body.global_position) 
+		## limit bounce direction
+		added_speed.x = 0 if abs(added_speed.x) < 0.65 else sign(added_speed.x) * 0.65
+		added_speed.y = stepify(added_speed.y, 0.5)
+		added_speed *= METAL_KNOCKBACK
+		
 		body.velocity.x += added_speed.x
 		body.velocity.y = added_speed.y
 		body.velocity.limit_length(METAL_KNOCKBACK_SPEED_LIMIT)
