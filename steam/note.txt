@@ -1,0 +1,1 @@
+ copy this folder to the export folder when doing a new release! and then delete this txt file, ofc :D
