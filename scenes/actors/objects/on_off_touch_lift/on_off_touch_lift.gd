@@ -27,13 +27,14 @@ onready var blend := pow(0.95, 120 * fps_util.PHYSICS_DELTA)
 
 var curve = Curve2D.new()
 var custom_path = Curve2D.new()
+var path_length : float = 0.0
 
 var disappears : bool = true
 var inverted : bool = false
 
 func _set_properties():
-	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "start_offset", "disappears", "inverted", "custom_path"]
-	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "start_offset", "inverted", "custom_path"]
+	savable_properties = ["parts", "max_speed", "curve", "move_type", "touch_start", "start_offset", "disappears", "inverted", "custom_path", "path_length"]
+	editable_properties = ["parts", "max_speed", "move_type", "touch_start", "start_offset", "inverted", "custom_path", "path_length"]
 	
 func _set_property_values():
 	set_property("parts", parts)
@@ -41,11 +42,14 @@ func _set_property_values():
 	set_property("curve", curve)
 	set_property("end_position", end_position)
 	set_property("move_type", move_type)
+	set_property_menu("move_type", ["option", 5, 0, ['Back and Forth', 'Reset', 'Once', 'Loop', 'Freeze']])
 	set_property("touch_start", touch_start)
 	set_property("start_offset", start_offset)
 	set_property("disappears", disappears)
 	set_property("inverted", inverted)
 	set_property("custom_path", curve)
+	set_property("path_length", path_length)
+	set_property_menu("path_length", ["viewer"])
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
@@ -68,7 +72,8 @@ func _process(_delta):
 		last_parts = parts
 	if curve != path.curve:
 		path.curve = curve
-		
+	if path_length != path.curve.get_baked_length():
+		path_length = path.curve.get_baked_length()
 	
 	
 

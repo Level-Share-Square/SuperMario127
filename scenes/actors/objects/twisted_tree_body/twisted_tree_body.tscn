@@ -11,3 +11,8 @@ custom_preview_position = Vector2( 70, 110 )
 [node name="Sprite" type="Sprite" parent="."]
 z_index = -7
 texture = ExtResource( 1 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -64, -64, 128, 128 )
+process_parent = true
+physics_process_parent = true
