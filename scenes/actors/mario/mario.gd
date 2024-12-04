@@ -990,15 +990,6 @@ func _physics_process(delta: float) -> void:
 			if velocity.length_squared() < 1:
 				# Clip attempt, just reset velocity
 				velocity = last_velocity * 0.95
-			else:
-				pass
-				# Going into a corner? Try to bonk.
-				# The squish state has us covered in case we get stuck even harder
-				velocity.x = 150 * -facing_direction
-				velocity.y = -65
-				position.x -= 2 * facing_direction
-				set_state_by_name("BonkedState", delta)
-				sound_player.play_bonk_sound()
 		else:
 			var slide_count = get_slide_count()
 			collided_last_frame = slide_count > 0

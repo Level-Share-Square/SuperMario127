@@ -87,10 +87,13 @@ func turbo_breakable(hit_body):
 func is_rainbow(body):
 	return body.powerup != null and body.powerup.id == "Rainbow"
 
+func is_metal(body):
+	return body.powerup != null and body.powerup.id == "Metal"
+
 func handle_character_exception(character: Character):
 	if !is_instance_valid(character): return
 	
-	if is_rainbow(character) or\
+	if (is_rainbow(character) or is_metal(character)) or\
 	player_spin_detector.overlaps_body(character) and (side_breakable(character) or turbo_breakable(character))\
 	or player_detector.overlaps_body(character) and top_breakable(character):
 		static_body.add_collision_exception_with(character)

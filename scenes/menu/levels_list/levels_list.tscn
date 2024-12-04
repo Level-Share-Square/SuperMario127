@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/actors/objects/cloud_platform/texture.png" type="Texture" id=2]
@@ -47,6 +47,7 @@
 [ext_resource path="res://scenes/actors/mario/mario.png" type="Texture" id=45]
 [ext_resource path="res://scenes/actors/mario/nozzles/hover_mario.png" type="Texture" id=46]
 [ext_resource path="res://scenes/menu/levels_list/misc/folder_setting_buttons.gd" type="Script" id=47]
+[ext_resource path="res://assets/fonts/delfino_medium.tres" type="DynamicFont" id=48]
 [ext_resource path="res://scenes/menu/levels_list/cards/drag_cursor.gd" type="Script" id=49]
 [ext_resource path="res://scenes/menu/levels_list/old_levels.gd" type="Script" id=50]
 [ext_resource path="res://scenes/menu/level_portal/smooth_scroll.gd" type="Script" id=51]
@@ -1369,13 +1370,13 @@ margin_bottom = 289.0
 custom_constants/separation = 10
 alignment = 1
 script = ExtResource( 17 )
-level_code_path = NodePath("../Panel/MarginContainer/LevelCode")
+level_code_path = NodePath("../VBoxContainer/Panel/MarginContainer/LevelCode")
 list_handler_path = NodePath("../../../LevelView/ScrollContainer/MarginContainer/ListHandler")
 
 [node name="Return" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 54.0
+margin_top = 69.0
 margin_right = 163.0
-margin_bottom = 74.0
+margin_bottom = 89.0
 rect_min_size = Vector2( 0, 20 )
 focus_neighbour_top = NodePath("../ImportCode")
 theme_type_variation = "AlternateButton"
@@ -1400,15 +1401,15 @@ script = ExtResource( 29 )
 offset = Vector2( -49, 0 )
 
 [node name="Padding" type="Control" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 84.0
+margin_top = 99.0
 margin_right = 163.0
-margin_bottom = 104.0
+margin_bottom = 119.0
 rect_min_size = Vector2( 0, 20 )
 
 [node name="NewLevel" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 114.0
+margin_top = 129.0
 margin_right = 163.0
-margin_bottom = 134.0
+margin_bottom = 149.0
 rect_min_size = Vector2( 0, 20 )
 theme_type_variation = "AlternateButton"
 text = "New Level"
@@ -1428,9 +1429,9 @@ script = ExtResource( 29 )
 offset = Vector2( -69, 0 )
 
 [node name="NewFolder" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 144.0
+margin_top = 159.0
 margin_right = 163.0
-margin_bottom = 164.0
+margin_bottom = 179.0
 rect_min_size = Vector2( 0, 20 )
 theme_type_variation = "AlternateButton"
 text = "New Folder"
@@ -1450,14 +1451,14 @@ script = ExtResource( 29 )
 offset = Vector2( -75, 0 )
 
 [node name="Padding2" type="Control" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 174.0
+margin_top = 189.0
 margin_right = 163.0
-margin_bottom = 174.0
+margin_bottom = 189.0
 
 [node name="ImportCode" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 184.0
+margin_top = 199.0
 margin_right = 163.0
-margin_bottom = 204.0
+margin_bottom = 219.0
 rect_min_size = Vector2( 0, 20 )
 focus_neighbour_bottom = NodePath("../Return")
 theme_type_variation = "AlternateButton"
@@ -1501,16 +1502,30 @@ expand = true
 script = ExtResource( 29 )
 offset = Vector2( -98, 0 )
 
-[node name="Panel" type="Panel" parent="Panel/Subscreens/AddElement/Control"]
-self_modulate = Color( 0, 0, 0, 0.501961 )
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Subscreens/AddElement/Control"]
 margin_left = 201.0
 margin_top = -1.0
-margin_right = 1.0
+margin_right = 649.0
+margin_bottom = 290.0
+custom_constants/separation = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/Subscreens/AddElement/Control/Panel"]
+[node name="Label" type="Label" parent="Panel/Subscreens/AddElement/Control/VBoxContainer"]
+margin_right = 448.0
+margin_bottom = 19.0
+custom_fonts/font = ExtResource( 48 )
+text = "Paste code..."
+align = 1
+valign = 1
+
+[node name="Panel" type="Panel" parent="Panel/Subscreens/AddElement/Control/VBoxContainer"]
+self_modulate = Color( 0, 0, 0, 0.501961 )
+show_behind_parent = true
+margin_top = 27.0
+margin_right = 448.0
+margin_bottom = 291.0
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Subscreens/AddElement/Control/VBoxContainer/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 4
@@ -1518,12 +1533,12 @@ custom_constants/margin_top = 4
 custom_constants/margin_left = 4
 custom_constants/margin_bottom = 4
 
-[node name="LevelCode" type="TextEdit" parent="Panel/Subscreens/AddElement/Control/Panel/MarginContainer"]
+[node name="LevelCode" type="TextEdit" parent="Panel/Subscreens/AddElement/Control/VBoxContainer/Panel/MarginContainer"]
 unique_name_in_owner = true
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 444.0
-margin_bottom = 286.0
+margin_bottom = 260.0
 rect_min_size = Vector2( 432, 128 )
 custom_fonts/font = ExtResource( 23 )
 custom_styles/read_only = SubResource( 15 )
@@ -1532,7 +1547,7 @@ custom_styles/normal = SubResource( 17 )
 custom_styles/completion = SubResource( 18 )
 wrap_enabled = true
 
-[node name="JSFilePicker" type="Button" parent="Panel/Subscreens/AddElement/Control/Panel"]
+[node name="JSFilePicker" type="Button" parent="Panel/Subscreens/AddElement/Control/VBoxContainer/Panel"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1986,7 +2001,7 @@ script = ExtResource( 15 )
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewFolder" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement/Control/ElementAddButtons" method="import_level_code"]
-[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/Panel/JSFilePicker" to="Panel/Subscreens/AddElement/Control/Panel/JSFilePicker" method="open_file_picker"]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/VBoxContainer/Panel/JSFilePicker" to="Panel/Subscreens/AddElement/Control/VBoxContainer/Panel/JSFilePicker" method="open_file_picker"]
 [connection signal="screen_opened" from="Panel/Subscreens/FolderSettings" to="Panel/Subscreens/FolderSettings/Focus" method="focus_node" flags=3]
 [connection signal="back_press" from="Panel/Subscreens/FolderSettings/Focus" to="Panel/Subscreens/FolderSettings" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/Return" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="change_focus"]
