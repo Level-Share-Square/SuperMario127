@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var bottom_pos := Vector2(0, 8)
+onready var bottom_pos = $BottomPos
 
 func _ready():
 	pass

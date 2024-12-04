@@ -51,5 +51,5 @@ disabled = true
 shape = SubResource( 3 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+freeze_bodies = false
 process_parent = true
-physics_process_parent = true

@@ -53,7 +53,9 @@ disabled = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/EditorArea"]
 shape = SubResource( 3 )
 
+[node name="BottomPos" type="Node2D" parent="KinematicBody2D"]
+position = Vector2( 0, 8 )
+
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-visible = false
+freeze_bodies = false
 process_parent = true
-physics_process_parent = true

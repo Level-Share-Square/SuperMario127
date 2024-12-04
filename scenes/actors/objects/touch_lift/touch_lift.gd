@@ -80,6 +80,8 @@ func _process(_delta):
 		last_parts = parts
 	if curve != path.curve:
 		path.curve = curve
+	if path_length != path.curve.get_baked_length() and mode == 1:
+		path_length = path.curve.get_baked_length()
 		
 	
 		
