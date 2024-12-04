@@ -46,9 +46,9 @@ func _ready():
 		platform_area_shape.disabled = true
 	
 	if enabled and mode == 0:
-		var _connect = area_2d.connect("body_entered", self, "add_body_to_bounce")
-		_connect = area_2d.connect("body_exited", self, "bounce")
-		_connect = area_2d.connect("body_exited", self, "remove_body_to_bounce")
+		area_2d.connect("body_entered", self, "add_body_to_bounce")
+		area_2d.connect("body_exited", self, "bounce")
+		area_2d.connect("body_exited", self, "remove_body_to_bounce")
 	elif mode == 1:
 		var _connect = connect("property_changed", self, "update_property")
 		
@@ -73,6 +73,9 @@ func _physics_process(delta):
 			if cooldown <= 0:
 				cooldown = 0
 		bodies_to_bounce[object] = cooldown
+		
+		if !area_2d.overlaps_body(object):
+			remove_body_to_bounce(object)
 		
 	if enabled and mode == 0:
 		if bodies_to_bounce.size() > 0:
