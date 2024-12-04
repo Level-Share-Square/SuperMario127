@@ -16,9 +16,11 @@ var working_speed = speed
 var loops = true
 var start_offset = 0
 
+var baked_length : float = 0.0
+
 func _set_properties():
-	savable_properties = ["curve", "custom_path", "speed", "start_offset", "loops"]
-	editable_properties = ["custom_path", "speed", "start_offset", "loops"]
+	savable_properties = ["curve", "custom_path", "speed", "start_offset", "loops", "baked_length"]
+	editable_properties = ["custom_path", "speed", "start_offset", "baked_length", "loops"]
 	
 func _set_property_values():
 	set_property("curve", curve)
@@ -26,6 +28,8 @@ func _set_property_values():
 	set_property("speed", speed)
 	set_property("start_offset", start_offset)
 	set_property("loops", loops)
+	set_property("baked_length", baked_length)
+	set_property_menu("baked_length", ["viewer"])
 	
 func update_property(key, value):
 	match(key):
@@ -56,9 +60,9 @@ func _draw():
 func _ready():
 	if(invalid_curve(curve)):
 		curve.add_point(Vector2(0, 0))
-		curve.add_point(Vector2(-50, -50))
-		curve.add_point(Vector2(0, -100))
-		curve.add_point(Vector2(50, -50))
+		curve.add_point(Vector2(-48, -48))
+		curve.add_point(Vector2(0, -96))
+		curve.add_point(Vector2(48, -48))
 		curve.add_point(Vector2(0, 0))
 	path.curve = curve
 	pathfollow.offset = start_offset
@@ -80,6 +84,10 @@ func _process(_delta):
 	if mode != 1: return
 	if curve != path.curve:
 		path.curve = curve
+	if baked_length != path.curve.get_baked_length():
+		baked_length = path.curve.get_baked_length()
+	if editor_sprite.position != path.curve.interpolate_baked(start_offset, true):
+		editor_sprite.position = path.curve.interpolate_baked(start_offset, true)
 
 
 func _physics_process(delta):

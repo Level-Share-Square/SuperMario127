@@ -16,3 +16,8 @@ texture = ExtResource( 1 )
 visible = false
 z_index = -7
 texture = ExtResource( 3 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -64, -64, 128, 128 )
+process_parent = true
+physics_process_parent = true
