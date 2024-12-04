@@ -19,6 +19,7 @@ var gravity_scale := 1.0
 var velocity : Vector2
 
 var frictin_coeff : float = .33
+var physics_frame := true
 
 export var anim_fps = 12
 
@@ -114,22 +115,31 @@ func despawn_coin():
 
 func _physics_process(delta):
 	# Everything else here is irrelevant for edit mode
-	if mode == 1 or !visibility_enabler.is_on_screen():
+	if mode == 1:
 		return
 	
 	if do_physics():
-		if water_detector.get_overlapping_areas().size() > 0:
-			gravity_scale = 0
-			velocity = velocity.move_toward(Vector2.ZERO, delta * 120)
+		if physics_frame:
+			if water_detector.get_overlapping_areas().size() > 0:
+				gravity_scale = 0
+				velocity = velocity.move_toward(Vector2.ZERO, delta * 120)
+			else:
+				gravity_scale = 1
+			velocity.x -= sign(velocity.x)*frictin_coeff*2
+			
+			velocity.y += gravity * gravity_scale * 4
+			
+			if kinematic_body.is_on_floor():
+				velocity.y = 0
+			
+			kinematic_body.move_and_slide_with_snap(velocity, Vector2(0, 0), Vector2.UP, false, 8, deg2rad(56))
+			
+			#we probably shouldn't be running coin physics every frame, so we'll run it every other frame
+			physics_frame = false
 		else:
-			gravity_scale = 1
-		velocity.x -= sign(velocity.x)*frictin_coeff
-		velocity.y += gravity * gravity_scale * 2
-		
-		if kinematic_body.is_on_floor():
-			velocity.y = 0
-		
-		kinematic_body.move_and_slide_with_snap(velocity, Vector2(0, 0), Vector2.UP, false, 8, deg2rad(56))
+			global_position += velocity*delta
+			physics_frame = true
+	
 		
 #		var up = velocity.y < 0
 #		var result = vertical_cast()
