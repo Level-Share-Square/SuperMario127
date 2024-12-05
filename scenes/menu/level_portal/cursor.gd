@@ -16,6 +16,8 @@ func screen_opened():
 
 
 func mouse_changed(is_mouse: bool):
+	if not visible and get_focus_owner() != null: return
+	
 	visible = not is_mouse
 	var visible_in_tree: bool = get_owner().is_visible_in_tree()
 	if not is_mouse and visible_in_tree:
@@ -31,7 +33,7 @@ func _exit_tree():
 func _input(event):
 	if not is_visible_in_tree(): return
 	
-	if get_focus_owner() is LineEdit: 
+	if get_focus_owner() is LineEdit or get_focus_owner() is TextEdit: 
 		if event.is_action_pressed("ui_cancel"):
 			get_tree().set_input_as_handled()
 			get_focus_owner().release_focus()

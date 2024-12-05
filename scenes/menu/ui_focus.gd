@@ -22,7 +22,8 @@ func _unhandled_input(event):
 	if not is_visible_in_tree(): return
 
 	if event.is_action_pressed("ui_cancel"):
-		emit_signal("back_press")
+		if not (get_focus_owner() is LineEdit or get_focus_owner() is TextEdit): 
+			emit_signal("back_press")
 	
 	if disabled: return
 	if not is_instance_valid(default_focus): return

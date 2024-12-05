@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/actors/objects/cloud_platform/texture.png" type="Texture" id=2]
@@ -53,6 +53,8 @@
 [ext_resource path="res://scenes/menu/level_portal/smooth_scroll.gd" type="Script" id=51]
 [ext_resource path="res://scenes/menu/levels_list/misc/js_file_picker.gd" type="Script" id=52]
 [ext_resource path="res://scenes/menu/levels_list/misc/http_thumbnails.gd" type="Script" id=53]
+[ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=54]
+[ext_resource path="res://scenes/menu/text_edit_unfocus.gd" type="Script" id=55]
 
 [sub_resource type="CanvasItemMaterial" id=22]
 blend_mode = 1
@@ -1546,6 +1548,7 @@ custom_styles/focus = SubResource( 16 )
 custom_styles/normal = SubResource( 17 )
 custom_styles/completion = SubResource( 18 )
 wrap_enabled = true
+script = ExtResource( 55 )
 
 [node name="JSFilePicker" type="Button" parent="Panel/Subscreens/AddElement/Control/VBoxContainer/Panel"]
 modulate = Color( 1, 1, 1, 0 )
@@ -1639,6 +1642,7 @@ size_flags_horizontal = 3
 custom_fonts/font = SubResource( 27 )
 align = 2
 placeholder_text = "Folder Name"
+script = ExtResource( 54 )
 
 [node name="Padding" type="Control" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/HBoxContainer"]
 margin_left = 139.0

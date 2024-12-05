@@ -1,4 +1,4 @@
-[gd_scene load_steps=273 format=2]
+[gd_scene load_steps=274 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/level_portal/level_grid.gd" type="Script" id=2]
@@ -68,6 +68,7 @@
 [ext_resource path="res://scenes/menu/level_portal/level_panel/rate_button.gd" type="Script" id=66]
 [ext_resource path="res://scenes/menu/level_portal/level_panel/rate_panel.gd" type="Script" id=67]
 [ext_resource path="res://scenes/menu/level_portal/cursor.gd" type="Script" id=68]
+[ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=69]
 [ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_launch.wav" type="AudioStream" id=70]
 [ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_back.wav" type="AudioStream" id=71]
 [ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_switch.wav" type="AudioStream" id=72]
@@ -1702,6 +1703,7 @@ custom_styles/focus = SubResource( 170 )
 custom_styles/normal = SubResource( 171 )
 placeholder_text = "Search for levels..."
 placeholder_alpha = 0.8
+script = ExtResource( 69 )
 
 [node name="Panel" type="Panel" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Search/Query"]
 modulate = Color( 0, 0, 0, 0.627451 )
@@ -1941,6 +1943,7 @@ custom_styles/focus = SubResource( 170 )
 custom_styles/normal = SubResource( 171 )
 placeholder_text = "Go to page..."
 placeholder_alpha = 0.8
+script = ExtResource( 69 )
 
 [node name="Panel" type="Panel" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Pages/GoToPage/Query"]
 modulate = Color( 0, 0, 0, 0.627451 )
@@ -2938,6 +2941,7 @@ focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath(".")
 custom_fonts/font = ExtResource( 58 )
 placeholder_text = "Email"
+script = ExtResource( 69 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer"]
 margin_top = 44.0
@@ -2958,6 +2962,7 @@ custom_fonts/font = ExtResource( 58 )
 secret = true
 expand_to_text_length = true
 placeholder_text = "Password"
+script = ExtResource( 69 )
 
 [node name="Padding" type="Control" parent="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 297.0
