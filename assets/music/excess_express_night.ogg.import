@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/excess_express_night.ogg-8690511c45c1285fef974d50784ef630.oggstr"
+
+[deps]
+
+source_file="res://assets/music/excess_express_night.ogg"
+dest_files=[ "res://.import/excess_express_night.ogg-8690511c45c1285fef974d50784ef630.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=1.792
