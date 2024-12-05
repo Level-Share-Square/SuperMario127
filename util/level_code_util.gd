@@ -109,6 +109,7 @@ static func decode(code: String) -> Dictionary:
 	var result = {}
 
 	code = code.strip_edges()
+	code = code.replace("\n", "")
 	var code_array = split_code_top_level(code)
 	
 	result.format_version = code_array[0]
