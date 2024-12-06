@@ -85,3 +85,8 @@ bus = "Sounds"
 stream = ExtResource( 2 )
 volume_db = -10.0
 bus = "Sounds"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="Timer" to="." method="on_timer_timeout"]

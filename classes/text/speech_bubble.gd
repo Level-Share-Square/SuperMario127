@@ -23,14 +23,14 @@ func body_entered(body):
 	if not body is Character: return
 	body_overlapping = true
 	set_text(text_replace_util.parse_text(parent.bubble_text, body))
-	if is_visible_in_tree():
+	if visible:
 		appear()
 
 
 func body_exited(body):
 	if not body is Character: return
 	body_overlapping = false
-	if is_visible_in_tree():
+	if visible:
 		disappear()
 
 

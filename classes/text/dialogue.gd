@@ -7,6 +7,7 @@ const DIALOGUE_GROUP: String = "TaggedDialogue"
 onready var area = $InteractArea
 onready var animation_player = $AnimationPlayer
 onready var tween = $Tween
+onready var timer = $Timer
 onready var sprite = $Sprite
 
 onready var message_appear = $MessageAppear
@@ -143,6 +144,7 @@ func body_entered(body):
 		if character == null:
 			character = body
 			message_appear.play()
+			timer.start()
 
 func body_exited(body):
 	if not interactable: return
@@ -153,6 +155,7 @@ func body_exited(body):
 			message_disappear.play()
 		body_overlapping = false
 		character = null
+		timer.stop()
 
 func autostart_dialogue(body):
 	if autostart > AUTOSTART_OFF and body.name.begins_with("PlayerCollision"):
@@ -277,3 +280,9 @@ func _physics_process(delta):
 		
 		if !has_char and is_instance_valid(character):
 			body_exited(character)
+
+## check periodically that the characters still there
+func on_timer_timeout():
+	if not is_instance_valid(character): return
+	if area.get_overlapping_bodies().size() <= 0:
+		body_exited(character)
