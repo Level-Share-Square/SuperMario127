@@ -4,7 +4,7 @@ class_name input_settings_util
 const CONTROLLER_SUFFIX = " (Controller)"
 
 
-static func change_setting(input_group: String, input_key: String, keybind_array: Array, is_controller: bool):
+static func change_setting(input_group: String, input_key: String, keybind_array, is_controller: bool):
 	LocalSettings.change_setting(input_group + get_group_suffix(is_controller), input_key, keybind_array)
 
 
