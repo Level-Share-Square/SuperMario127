@@ -98,8 +98,8 @@ func _ready() -> void:
 	sprite.frames = para_sprite if winged else normal_sprite
 	sprite_color.frames = para_color_sprite if winged else normal_color_sprite
 	
-	if scale.x < 0 and mode == 0:
-		facing_direction = 1
+	if scale.x < 0 and mode == 0 and enabled:
+		facing_direction = sign(scale.x)
 		scale.x = abs(scale.x)
 
 func delete_wings():
