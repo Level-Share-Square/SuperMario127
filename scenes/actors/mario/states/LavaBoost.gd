@@ -11,6 +11,7 @@ var burn_sound_cooldown = 0.0
 var lava_areas
 var base_burn_particle_gradient = Gradient.new()
 
+
 func _ready():
 	base_burn_particle_gradient.colors = PoolColorArray([Color(1, 0.596078, 0), Color(0.658824, 0, 0), Color(0.082353, 0.082353, 0.082353), Color(0, 0, 0, 0)])
 	base_burn_particle_gradient.offsets = PoolRealArray([0, 0.189, 0.692, 0.983])
@@ -44,13 +45,21 @@ func _start(_delta):
 			if area_object.name.begins_with("Fire") or area_object.name.begins_with("@Fire"):
 				character.velocity.y = -boost_velocity
 			else:
-				var lava_normal := Vector2.UP.rotated(area_object.rotation)
-				if !is_equal_approx(lava_normal.x, 0):
-					character.velocity.x = min(abs(lava_normal.x * boost_velocity), 480) * sign(area_object.scale.x)
+				var lava_normal : Vector2 = area_object.transform.y
+				print(lava_normal)
 				
-				character.velocity.y = -boost_velocity*sign(area_object.scale.y)*(abs(lava_normal.y)/2 + .5)
+				var lava_scale_sign : Vector2 = area_object.scale.sign()
+				if !is_equal_approx(lava_normal.x, 0):
+					character.velocity.x = min(abs(lava_normal.x * boost_velocity), 480) * -sign(lava_normal.x)
+					
+				if lava_normal.y < 0:
+					character.velocity.y = -boost_velocity * (lava_normal.y/2)
+				else:
+					character.velocity.y = -boost_velocity * (lava_normal.y/2 + .5)
+				
+				
 		else:
-			#if it's a circle shaped hitbox find the angle from
+			#if it is a circle find the angle from the angle to the center to the player's position
 			character.velocity = Vector2.UP.rotated(atan((area_object.position.x-character.x)/(area_object.position.y-character.y))) * boost_velocity
 	character.burn_particles.emitting = true
 	

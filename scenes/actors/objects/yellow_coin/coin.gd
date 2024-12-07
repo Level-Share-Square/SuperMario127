@@ -8,6 +8,7 @@ onready var water_detector = $KinematicBody2D/WaterDetector
 onready var shape = $KinematicBody2D/Area2D/CollisionShape2D
 onready var water_shape = $KinematicBody2D/WaterDetector/CollisionShape2D
 onready var visibility_enabler = $VisibilityEnabler2D
+onready var bottom_pos = $KinematicBody2D/BottomPos
 
 export var coins : int = 1
 
@@ -20,6 +21,7 @@ var velocity : Vector2
 
 var frictin_coeff : float = .33
 var physics_frame := true
+var physics_run := false
 
 export var anim_fps = 12
 
@@ -120,26 +122,16 @@ func _physics_process(delta):
 	
 	if do_physics():
 		if physics_frame:
-			if water_detector.get_overlapping_areas().size() > 0:
-				gravity_scale = 0
-				velocity = velocity.move_toward(Vector2.ZERO, delta * 120)
-			else:
-				gravity_scale = 1
-			velocity.x -= sign(velocity.x)*frictin_coeff*2
-			
-			velocity.y += gravity * gravity_scale * 4
-			
-			if kinematic_body.is_on_floor():
-				velocity.y = 0
+			velocity = calc_physics(false, delta)
 			
 			kinematic_body.move_and_slide_with_snap(velocity, Vector2(0, 0), Vector2.UP, false, 8, deg2rad(56))
+			$VisibilityEnabler2D.global_position = kinematic_body.global_position
 			
-			#we probably shouldn't be running coin physics every frame, so we'll run it every other frame
-			physics_frame = false
-		else:
-			global_position += velocity*delta
 			physics_frame = true
-	
+		else:
+			physics_frame = true
+		
+		
 		
 #		var up = velocity.y < 0
 #		var result = vertical_cast()
@@ -158,6 +150,31 @@ func _physics_process(delta):
 #				var x_cast = 5 if velocity.x > 0 else -5
 #				velocity.x = 0
 #				position.x = result.position.x - x_cast
+
+func calc_physics(interp : bool, delta) -> Vector2:
+	var new_velocity := velocity
+	#changes whether physics is being run every frame or not
+	var interp_scale : int = 1 if interp == false else 2
+	
+	#if in water slow velocity down to zero gradually
+	if water_detector.get_overlapping_areas().size() > 0:
+		gravity_scale = 0
+		new_velocity = new_velocity.move_toward(Vector2.ZERO, delta * 120)
+	else:
+		gravity_scale = 1
+	
+	#friction calculations
+	new_velocity.x -= sign(new_velocity.x)*frictin_coeff * interp_scale
+	
+	#gravity calculations
+	new_velocity.y += gravity * gravity_scale * 2 * interp_scale
+	
+	#if on the floor, set the Y velocity to zero so it doesn't stack
+	if kinematic_body.is_on_floor():
+		new_velocity.y = 0
+	
+	return new_velocity
+	
 
 func shell_hit():
 	collect(null, true)
