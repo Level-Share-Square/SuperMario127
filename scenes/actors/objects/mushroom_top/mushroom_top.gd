@@ -12,7 +12,7 @@ export var weak_bounce_sound : AudioStream
 export var bounce_sound : AudioStream
 
 var bounce_power = 300
-var bodies_to_bounce := {}
+var blacklisted_bodies := {}
 
 var color := Color(1, 0, 0)
 var bouncy := false
@@ -30,11 +30,8 @@ func _set_property_values():
 func _ready():
 	var _connect = connect("property_changed", self, "update_property")
 	if bouncy and enabled and mode == 0:
-		var timer = get_tree().create_timer(5)
-		_connect = timer.connect("timeout", self, "idle_bounce_anim")
-		_connect = area_2d.connect("body_entered", self, "add_body_to_bounce")
+		_connect = get_tree().create_timer(5).connect("timeout", self, "idle_bounce_anim")
 		_connect = area_2d.connect("body_entered", self, "bounce")
-		_connect = area_2d.connect("body_exited", self, "remove_body_to_bounce")
 	
 	update_property("color", color)
 	collision_shape.disabled = !enabled or bouncy
@@ -51,37 +48,33 @@ func update_property(key, value):
 		mushroom_cap_color.modulate = color
 
 func _physics_process(delta):
-	for object in bodies_to_bounce.keys():
-		var cooldown = bodies_to_bounce[object]
+	for object in blacklisted_bodies.keys():
+		var cooldown = blacklisted_bodies[object]
 		if cooldown > 0:
 			cooldown -= delta
 			if cooldown <= 0:
-				cooldown = 0
-		bodies_to_bounce[object] = cooldown
+				remove_body_to_bounce(object)
+			else:
+				blacklisted_bodies[object] = cooldown
 		
 	if enabled and mode == 0:
-		if bodies_to_bounce.size() > 0:
-			for body in bodies_to_bounce:
-				bounce(body)
+		if area_2d.get_overlapping_bodies().size() > 0:
+			for body in area_2d.get_overlapping_bodies():
+					bounce(body)
 
 
 func bounce(body):
-	if (body in bodies_to_bounce.keys()) == false:
-		add_body_to_bounce(body)
-	
-	var cooldown = bodies_to_bounce[body]
-	if cooldown != 0:
+	if (body in blacklisted_bodies.keys()) == true:
 		return
 	
-	cooldown = 0.1
 	var normal = transform.y
 	
-	if "velocity" in body and body.state != BounceState:
+	if "velocity" in body:
 		actually_bounce(body)
 	elif "velocity" in body.get_parent():
 		actually_bounce(body.get_parent())
 	
-	bodies_to_bounce[body] = cooldown
+	add_body_to_bounce(body)
 
 func actually_bounce(body):
 	var normal := transform.y
@@ -126,13 +119,12 @@ func actually_bounce(body):
 		body.stamina = 100
 
 func add_body_to_bounce(body):
-	bodies_to_bounce.get_or_add(body, 0)
+	blacklisted_bodies.get_or_add(body, 0.1)
 
 func remove_body_to_bounce(body):
-	bodies_to_bounce.erase(body)
+	blacklisted_bodies.erase(body)
 
 func idle_bounce_anim():
-	var timer = get_tree().create_timer(5)
-	var _connect = timer.connect("timeout", self, "idle_bounce_anim")
+	var _connect = get_tree().create_timer(5).connect("timeout", self, "idle_bounce_anim")
 	if !animation_player.is_playing():
 		animation_player.play("idle")

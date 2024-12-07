@@ -97,6 +97,10 @@ func _ready() -> void:
 		set_property("winged", true)
 	sprite.frames = para_sprite if winged else normal_sprite
 	sprite_color.frames = para_color_sprite if winged else normal_color_sprite
+	
+	if scale.x < 0 and mode == 0:
+		facing_direction = 1
+		scale.x = abs(scale.x)
 
 func delete_wings():
 	if !rainbow:
@@ -349,7 +353,9 @@ func physics_process_koopa(delta, level_bounds):
 		
 		if !winged:
 			# Collision with walls
-			if !left_check.is_colliding()  or body.global_position.x < (level_bounds.position.x * 32) or body.test_move(body.global_transform, Vector2(-0.1, 0)):
+			if !left_check.is_colliding() or (body.global_position.x < (level_bounds.position.x * 32) + 4) or body.test_move(body.global_transform, Vector2(-0.1, 0)):
 				facing_direction = 1
-			if !right_check.is_colliding() or body.global_position.x > (level_bounds.end.x * 32 - 1) or body.test_move(body.global_transform, Vector2(0.1, 0)):
+			
+			if !right_check.is_colliding() or (body.global_position.x > (level_bounds.end.x * 32 - 1) - 4) or body.test_move(body.global_transform, Vector2(0.1, 0)):
 				facing_direction = -1
+			
