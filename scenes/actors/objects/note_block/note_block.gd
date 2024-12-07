@@ -20,12 +20,11 @@ export var bounce_sound : AudioStream
 
 var bounce_power = 300
 var strong_bounce_power = 650
-var bodies_to_bounce := {}
+var blacklisted_bodies := {}
 
 var parts := 1
 var last_parts := 1
 
-var cooldown = 0.0
 
 func _set_properties():
 	savable_properties = ["parts", "strong_bounce_power"]
@@ -46,9 +45,7 @@ func _ready():
 		platform_area_shape.disabled = true
 	
 	if enabled and mode == 0:
-		area_2d.connect("body_entered", self, "add_body_to_bounce")
-		area_2d.connect("body_exited", self, "bounce")
-		area_2d.connect("body_exited", self, "remove_body_to_bounce")
+		area_2d.connect("body_entered", self, "bounce")
 	elif mode == 1:
 		var _connect = connect("property_changed", self, "update_property")
 		
@@ -66,39 +63,32 @@ func _input(event):
 			set_property("parts", parts, true)
 
 func _physics_process(delta):
-	for object in bodies_to_bounce.keys():
-		var cooldown = bodies_to_bounce[object]
+	for object in blacklisted_bodies.keys():
+		var cooldown = blacklisted_bodies[object]
 		if cooldown > 0:
 			cooldown -= delta
 			if cooldown <= 0:
-				cooldown = 0
-		bodies_to_bounce[object] = cooldown
-		
-		if !area_2d.overlaps_body(object):
-			remove_body_to_bounce(object)
+				remove_body_to_bounce(object)
+			else:
+				blacklisted_bodies[object] = cooldown
 		
 	if enabled and mode == 0:
-		if bodies_to_bounce.size() > 0:
-			for body in bodies_to_bounce:
-				bounce(body)
+		if area_2d.get_overlapping_bodies().size() > 0:
+			for body in area_2d.get_overlapping_bodies():
+					bounce(body)
 
 func bounce(body):
-	if (body in bodies_to_bounce.keys()) == false:
-		add_body_to_bounce(body)
-	
-	var cooldown = bodies_to_bounce[body]
-	if cooldown != 0:
+	if (body in blacklisted_bodies.keys()) == true:
 		return
 	
-	cooldown = 0.1
 	var normal = transform.y
 	
-	if "velocity" in body and body.state != BounceState:
+	if "velocity" in body:
 		actually_bounce(body)
 	elif "velocity" in body.get_parent():
 		actually_bounce(body.get_parent())
 	
-	bodies_to_bounce[body] = cooldown
+	add_body_to_bounce(body)
 
 func actually_bounce(body):
 	var normal := transform.y
@@ -158,7 +148,7 @@ func update_parts():
 	note.position.x = sprite.rect_size.x / 2
 
 func add_body_to_bounce(body):
-	bodies_to_bounce.get_or_add(body, 0)
+	blacklisted_bodies.get_or_add(body, 0.1)
 
 func remove_body_to_bounce(body):
-	bodies_to_bounce.erase(body)
+	blacklisted_bodies.erase(body)
