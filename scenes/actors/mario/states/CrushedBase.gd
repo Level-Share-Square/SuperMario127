@@ -28,7 +28,7 @@ func get_ray_point(raycast: RayCast2D) -> Vector2:
 
 
 func _start_check(_delta):
-	return _is_squished()
+	return false #_is_squished()
 
 func _start(_delta):
 	character.velocity = Vector2.ZERO

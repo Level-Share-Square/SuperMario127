@@ -7,6 +7,7 @@ var focus_on : Node
 var auto_move := true
 var skip_to_player := true
 var focus_zoom := 1.0
+var current_zoom := Vector2(1.0, 1.0)
 var last_position = Vector2(0,0)
 var size = Vector2(0,0)
 var base_size = Vector2(393, 216)
@@ -101,6 +102,7 @@ func _on_area_entered(stopper):
 	pass
 	return
 func set_zoom_tween(target : Vector2, time : float, override = false):
+	current_zoom = target
 	yield(get_tree(), "physics_frame")
 	yield(get_tree(), "physics_frame")
 	zoom_tween.remove_all()
@@ -151,6 +153,3 @@ func load_in(_level_data : LevelData, level_area : LevelArea):
 		character_node.camera = self
 	if Singleton.PlayerSettings.number_of_players == 2:
 		base_size.x /= 2
-
-
-

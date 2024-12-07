@@ -679,13 +679,13 @@ func _process(delta : float) -> void:
 						action.data.append(element)
 					tiles_stack.clear()
 					Singleton.ActionManager.add_action(action)
-				else:
-					var action2 = Action.new()
-					action2.type = "place_object"
-					for element in objects_stack:
-						action2.data.append(element)
-					objects_stack.clear()
-					Singleton.ActionManager.add_action(action2)
+#				else:
+#					var action2 = Action.new()
+#					action2.type = "place_object"
+#					for element in objects_stack:
+#						action2.data.append(element)
+#					objects_stack.clear()
+#					Singleton.ActionManager.add_action(action2)
 
 				# if an action is being added, that means we should count the count the level data as modified and in need of a save
 				Singleton.CurrentLevelData.unsaved_editor_changes = true

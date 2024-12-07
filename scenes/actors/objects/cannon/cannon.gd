@@ -45,21 +45,25 @@ var faces_right := true
 	
 # for compatibility
 var force_fadeout: bool
-	
+
+var target_zoom: float = 1.5
+var stored_zoom: float = 1.0
+
 # the audio files used in the code for some of the cannons movements
 onready var cannon_move_noise : AudioStream = preload("res://scenes/actors/objects/cannon/crank.tres")
 onready var cannon_fire_noise : AudioStream = preload("res://scenes/actors/objects/cannon/nsmbwiiBobombCannon.wav")
 
 func _set_properties() -> void:
-	savable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right"]
-	editable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right"]
+	savable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right", "target_zoom"]
+	editable_properties = ["launch_power", "min_rotation", "max_rotation", "faces_right", "target_zoom"]
 	
 func _set_property_values() -> void:
 	set_property("launch_power", launch_power)
 	set_property("min_rotation", min_rotation)
 	set_property("max_rotation", max_rotation)
 	set_property("faces_right", faces_right)
-
+	set_property("target_zoom", target_zoom)
+	
 func _ready() -> void:
 	set_physics_process(false)
 
@@ -131,7 +135,12 @@ func _on_animation_finished(anim_name : String) -> void:
 		stored_character.camera.focus_on = cannon_camera_focus
 		stored_character.controllable = true
 		stored_character.set_state_by_name("NoActionState", get_physics_process_delta_time())
-		stored_character.camera.set_zoom_tween(Vector2(1.5, 1.5), 0.8)
+		stored_zoom = stored_character.camera.current_zoom.x
+		
+		if !is_equal_approx(stored_character.camera.current_zoom.x, target_zoom):
+			stored_character.camera.zoom_tween.remove_all()
+			stored_character.camera.set_zoom_tween(Vector2(target_zoom, target_zoom), 0.8, true)
+		
 		sprite_fuse.visible = true
 
 		#normally we would change current volume, but process for the audio stream player is disabled until the cannon fires
@@ -157,16 +166,17 @@ func fire_cannon() -> void:
 	stored_character.controllable = true
 	stored_character.movable = true
 	stored_character.modulate.a = 1
-	stored_character.camera.zoom_tween.remove_all()
-	stored_character.camera.set_zoom_tween(Vector2(1,1), 0.5)
+	if !is_equal_approx(stored_character.camera.current_zoom.x, stored_zoom):
+		stored_character.camera.zoom_tween.remove_all()
+		stored_character.camera.set_zoom_tween(Vector2(stored_zoom, stored_zoom), 0.5, true)
 	invuln_timer.start()
 	#set the player so they will fire out of the cannon properly with velocity and such
 	stored_character.position = cannon_exit_position.global_position
-	stored_character.reset_physics_interpolation()
 	stored_character.last_position = stored_character.position # Prevent the patch from triggering
-	stored_character.velocity = Vector2.UP.rotated(sprite_body.rotation) * launch_power
-	stored_character.facing_direction = cannon_direction_multiplier
+	var launch_velocity = Vector2.UP.rotated(
+		sprite_body.global_rotation) * launch_power
 	stored_character.set_state_by_name("DiveState", get_physics_process_delta_time())
+	stored_character.velocity = launch_velocity
 
 	#play cannon fire sound
 	audio_player.stream = cannon_fire_noise
