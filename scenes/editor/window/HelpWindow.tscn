@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/tiles/tiles.tres" type="TileSet" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/editor/window/HelpWindow.gd" type="Script" id=4]
 [ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=5]
 [ext_resource path="res://scenes/editor/window/HelpPage.gd" type="Script" id=6]
+[ext_resource path="res://scenes/actors/objects/sign/sign.png" type="Texture" id=7]
 [ext_resource path="res://scenes/actors/objects/toad/icon.png" type="Texture" id=9]
 [ext_resource path="res://scenes/actors/objects/princess_peach/icon.png" type="Texture" id=10]
 [ext_resource path="res://scenes/actors/objects/yoshi/icon.png" type="Texture" id=11]
@@ -685,6 +686,7 @@ Tab - Toggle CRT Filter
 "
 fit_content_height = true
 scroll_active = false
+script = ExtResource( 12 )
 
 [node name="Autotiling" type="ScrollContainer" parent="Pages"]
 visible = false
@@ -856,6 +858,7 @@ That should be everything you need to know about tiles. If anything above wasn't
 "
 fit_content_height = true
 scroll_active = false
+script = ExtResource( 12 )
 
 [node name="Images" type="Node2D" parent="Pages/Autotiling"]
 position = Vector2( 16, 0 )
@@ -876,21 +879,21 @@ texture = SubResource( 15 )
 stretch_mode = 1
 
 [node name="Dialogue" type="ScrollContainer" parent="Pages"]
-visible = false
 margin_left = 448.0
 margin_top = 450.0
 margin_right = 1426.0
 margin_bottom = 806.0
 theme = SubResource( 11 )
 scroll_horizontal_enabled = false
+scroll_vertical = 2047
 script = ExtResource( 3 )
 page_name = "Dialogue & NPCs"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Pages/Dialogue"]
 margin_left = 16.0
-margin_top = 8.0
-margin_right = 962.0
-margin_bottom = 2117.0
+margin_top = -2039.0
+margin_right = 950.0
+margin_bottom = 440.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/default_color = Color( 1, 1, 1, 1 )
@@ -930,8 +933,17 @@ Their properties are as follows;
 [color=#54f954]Speaking Expression/Action[color=red]*[/color][/color] - action when idling/speaking 
 [color=#54f954]Tag Link[/color] - links a dialogue trigger to the NPC from a distance (uses Tag)
 [color=#54f954]Required Shines[/color] - NPC will not show up when less shines than required are collected
-[color=#54f954]Path Options[/color] - properties like custom path, walk speed, physics enabled, and move type. Each are fairly self explanatory. See path help page if help is needed with the path editor.
+[color=#54f954]Path Options[/color] - properties like custom path, walk speed, physics enabled, and move type. Each are fairly self explanatory. See hotkey help page for help with the path editor.
+[color=#54f954]Path Reference[/color] - Gives a visual on where the NPC's path is located
 [/indent][color=red]*require an attached dialogue trigger with bubble text[/color]
+
+[center][color=yellow]--Signs--[/color][/center]
+Signs act as single page NPCs that
+cannot show emotion. These are best
+used as, well, signs. There's nothing
+very noteworthy to bring up
+so properties won't be discussed here,
+as they're self explanatory.
 
 If anything above isn't clear or you still have questions, feel free to ask in the [url=https://discord.gg/QrftDjD][color=fuchsia]Super Mario 127 Discord[/color][/url]!
 "
@@ -969,8 +981,17 @@ Idle Expression/Action - expression/action when idling
 Speaking Expression/Action* - action when idling/speaking 
 Tag Link - links a dialogue trigger to the NPC from a distance (uses Tag)
 Required Shines - NPC will not show up when less shines than required are collected
-Path Options - properties like custom path, walk speed, physics enabled, and move type. Each are fairly self explanatory. See path help page if help is needed with the path editor.
+Path Options - properties like custom path, walk speed, physics enabled, and move type. Each are fairly self explanatory. See hotkey help page for help with the path editor.
+Path Reference - Gives a visual on where the NPC's path is located
 *require an attached dialogue trigger with bubble text
+
+--Signs--
+Signs act as single page NPCs that
+cannot show emotion. These are best
+used as, well, signs. There's nothing
+very noteworthy to bring up
+so properties won't be discussed here,
+as they're self explanatory.
 
 If anything above isn't clear or you still have questions, feel free to ask in the Super Mario 127 Discord!
 "
@@ -979,6 +1000,7 @@ scroll_active = false
 script = ExtResource( 12 )
 
 [node name="Images" type="Node2D" parent="Pages/Dialogue"]
+position = Vector2( 0, -2047 )
 
 [node name="Sign" type="Sprite" parent="Pages/Dialogue/Images"]
 position = Vector2( 764, 168 )
@@ -1013,6 +1035,11 @@ texture = ExtResource( 9 )
 
 [node name="Sign2" type="Sprite" parent="Pages/Dialogue/Images/NPCS/Toad"]
 texture = ExtResource( 17 )
+
+[node name="Sign2" type="Sprite" parent="Pages/Dialogue/Images"]
+position = Vector2( 794.5, 2204.5 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 7 )
 
 [node name="Tween" type="Tween" parent="."]
 
