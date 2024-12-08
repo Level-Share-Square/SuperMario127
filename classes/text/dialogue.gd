@@ -197,6 +197,9 @@ func setup_char():
 	# flip mario to face this object
 	character.facing_direction = sign(parent.global_position.x - character.global_position.x)
 	
+	if character.controllable:
+		stored_zoom = character.camera.current_zoom
+	
 	character.set_dive_collision(false)
 	character.invulnerable = true 
 	character.controllable = false
@@ -205,7 +208,6 @@ func setup_char():
 	character.set_inter_player_collision(false)
 	character.camera.smoothing_enabled = true # Re-enable camera smoothing
 	
-	stored_zoom = character.camera.current_zoom
 	character.camera.set_zoom_tween(Vector2(zoom_size, zoom_size), 1)
 	character.camera.focus_on = camera_focus
 	
