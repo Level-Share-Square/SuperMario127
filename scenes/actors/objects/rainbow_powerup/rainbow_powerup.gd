@@ -6,6 +6,9 @@ onready var area = $Area2D
 onready var animation_player = $AnimationPlayer
 onready var particles = $Particles2D
 
+onready var gradient_texture = GradientTexture.new()
+onready var gradient = Gradient.new()
+
 var collected = false
 var respawn_timer = 0.0
 var duration = 30.0
@@ -49,8 +52,6 @@ func _process(delta):
 			animation_player.play("respawn")
 
 	hue += 0.015
-	var gradient_texture = GradientTexture.new()
-	var gradient = Gradient.new()
 	gradient.offsets = PoolRealArray([0.15, 1])
 	gradient.colors = PoolColorArray([Color.from_hsv(hue, 1, 1), Color(1, 1, 1)])
 	gradient_texture.gradient = gradient
