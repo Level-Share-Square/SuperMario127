@@ -126,19 +126,17 @@ func load_time_scores():
 		# go, my children, be free
 		child.queue_free()
 	
-	var time_scores = level_info.time_scores.values()
+	var time_scores = level_info.time_scores
 	var shine_details_sorted = ([] + level_info.shine_details)
 	shine_details_sorted.sort_custom(LevelInfo, "shine_sort")
 	
 	for shine_detail in shine_details_sorted:
-		var time_score = time_scores[
-			shine_detail.id if (shine_detail.id < time_scores.size()) else (time_scores.size() - 1)
-		]
-		
-		var time_score_node = TIME_SCORE_SCENE.instance()
-		time_score_node.shine_detail = shine_detail
-		time_score_node.time_score = time_score
-		time_scores_container.add_child(time_score_node)
+		var time_score = time_scores.get(str(shine_detail.id))
+		if time_score != null:
+			var time_score_node = TIME_SCORE_SCENE.instance()
+			time_score_node.shine_detail = shine_detail
+			time_score_node.time_score = time_score
+			time_scores_container.add_child(time_score_node)
 
 ## button functions
 
