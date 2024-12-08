@@ -177,6 +177,7 @@ func fire_cannon() -> void:
 		sprite_body.global_rotation) * launch_power
 	stored_character.set_state_by_name("DiveState", get_physics_process_delta_time())
 	stored_character.velocity = launch_velocity
+	stored_character.facing_direction = sign(Vector2.UP.rotated(sprite_body.global_rotation).x)
 
 	#play cannon fire sound
 	audio_player.stream = cannon_fire_noise

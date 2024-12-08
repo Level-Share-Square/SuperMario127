@@ -46,7 +46,6 @@ func _start(_delta):
 				character.velocity.y = -boost_velocity
 			else:
 				var lava_normal : Vector2 = area_object.transform.y
-				print(lava_normal)
 				
 				var lava_scale_sign : Vector2 = area_object.scale.sign()
 				if !is_equal_approx(lava_normal.x, 0):
