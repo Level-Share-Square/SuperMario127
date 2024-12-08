@@ -16,7 +16,7 @@ var blacklisted_bodies := {}
 
 var color := Color(1, 0, 0)
 var bouncy := false
-var strong_bounce_power := 650
+var strong_bounce_power : int = 650
 
 func _set_properties():
 	savable_properties = ["color", "bouncy", "strong_bounce_power"]
@@ -57,7 +57,7 @@ func _physics_process(delta):
 			else:
 				blacklisted_bodies[object] = cooldown
 		
-	if enabled and mode == 0:
+	if bouncy and enabled and mode == 0:
 		if area_2d.get_overlapping_bodies().size() > 0:
 			for body in area_2d.get_overlapping_bodies():
 					bounce(body)
