@@ -30,6 +30,7 @@ var autostart: int = 0
 var tag: String
 var delegate_tag: String
 var zoom_size: float = 0.65
+var stored_zoom := Vector2.ONE
 
 var page_cache: int = 0
 var being_read := false
@@ -204,6 +205,7 @@ func setup_char():
 	character.set_inter_player_collision(false)
 	character.camera.smoothing_enabled = true # Re-enable camera smoothing
 	
+	stored_zoom = character.camera.current_zoom
 	character.camera.set_zoom_tween(Vector2(zoom_size, zoom_size), 1)
 	character.camera.focus_on = camera_focus
 	
@@ -227,7 +229,7 @@ func restore_control():
 	character.set_inter_player_collision(true)
 
 	character.camera.zoom_tween.remove_all()
-	character.camera.set_zoom_tween(Vector2(1, 1), 0.5)
+	character.camera.set_zoom_tween(stored_zoom, 0.5)
 	character.camera.focus_on = null
 
 func open_menu_ui():
