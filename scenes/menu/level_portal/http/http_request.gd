@@ -1,12 +1,17 @@
 extends HTTPRequest
 
 
+const LOAD_TEXT: String = "Please wait..."
+const LOAD_ERROR_PREFIX: String = "Sorry, try again later. Error code: "
+
 signal page_loaded(page, total_pages, sort_type, last_query)
 enum SortType {Default, Featured, Favorited}
 
 onready var level_grid = $"%LevelGrid"
 onready var pages = $"%Pages"
 onready var loading = $"%Loading"
+onready var load_label = $"%LoadLabel"
+onready var load_sprite = $"%LoadSprite"
 onready var search = $"%Search"
 
 onready var account_info = $"%AccountInfo"
@@ -54,7 +59,8 @@ func load_page(new_page: int = page, new_sort: int = sort_type, query = last_que
 	pages.visible = false
 	search.visible = false
 	loading.visible = true
-	
+	load_sprite.visible = true
+	load_label.text = LOAD_TEXT
 	
 	print("Requesting online levels... (Page: ", str(new_page), ")")
 	
@@ -91,6 +97,8 @@ func load_page(new_page: int = page, new_sort: int = sort_type, query = last_que
 
 func request_completed(result: int, response_code: int, headers: PoolStringArray, body: PoolByteArray):
 	if response_code != 200 and response_code != 400: 
+		load_sprite.visible = false
+		load_label.text = LOAD_ERROR_PREFIX + str(response_code)
 		printerr("Failed to connect to Level Share Square. Response code: " + str(response_code))
 		return
 	

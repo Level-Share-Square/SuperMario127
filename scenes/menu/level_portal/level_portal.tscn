@@ -1988,24 +1988,26 @@ margin_right = 472.0
 margin_bottom = 80.0
 alignment = 1
 
-[node name="Label" type="Label" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading"]
+[node name="LoadLabel" type="Label" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading"]
+unique_name_in_owner = true
 margin_left = 178.0
 margin_right = 290.0
 margin_bottom = 24.0
 text = "Please wait..."
 
-[node name="Sprite" type="Control" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading"]
+[node name="LoadSprite" type="Control" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading"]
+unique_name_in_owner = true
 margin_left = 294.0
 margin_right = 294.0
 margin_bottom = 24.0
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading/Sprite"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading/LoadSprite"]
 frames = ExtResource( 28 )
 playing = true
 centered = false
 offset = Vector2( 0, -8 )
 
-[node name="Outline" type="AnimatedSprite" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading/Sprite/AnimatedSprite"]
+[node name="Outline" type="AnimatedSprite" parent="Subscreens/LevelList/ScrollContainer/MarginContainer/VBoxContainer/Loading/LoadSprite/AnimatedSprite"]
 frames = ExtResource( 29 )
 playing = true
 centered = false
