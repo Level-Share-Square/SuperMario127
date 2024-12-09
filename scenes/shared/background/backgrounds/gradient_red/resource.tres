@@ -39,4 +39,4 @@ frame_9/delay_sec = 0.0
 [resource]
 script = ExtResource( 1 )
 texture = SubResource( 1 )
-parallax_modulate = Color( 0.701961, 0.34902, 0.231373, 1 )
+parallax_modulate = Color( 1, 0.592157, 0.454902, 1 )
