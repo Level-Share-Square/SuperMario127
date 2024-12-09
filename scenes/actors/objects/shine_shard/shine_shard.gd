@@ -27,6 +27,7 @@ func collect(body):
 		if Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id:
 			sound.play()
 		collected = true
+		
 		label.text = str(Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][0])
 		
 		#all of the collecting animation takes place in the animation player now, any old commented
@@ -48,6 +49,10 @@ func _ready():
 	if enabled:
 		id = Singleton.CurrentLevelData.level_data.vars.max_shine_shards
 		Singleton.CurrentLevelData.level_data.vars.max_shine_shards += 1
+	
+	# band aid crash fix
+	while Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.size() <= Singleton.CurrentLevelData.area:
+		Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.append([])
 	
 	if id in Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][1]:
 		queue_free()

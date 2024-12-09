@@ -94,6 +94,10 @@ func change_areas(entering_character : Character, entering, force_fadeout):
 	if entering:
 		timer_manager.remove_timer("area_timer")
 		
+		# band aid crash fix
+		while Singleton.CurrentLevelData.level_data.vars.liquid_positions.size() <= Singleton.CurrentLevelData.area:
+			Singleton.CurrentLevelData.level_data.vars.liquid_positions.append([])
+		
 		Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area] = []
 		for liquid in Singleton.CurrentLevelData.level_data.vars.liquids:
 			Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].append(liquid[1].save_pos)

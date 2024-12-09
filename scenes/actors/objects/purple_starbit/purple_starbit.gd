@@ -37,6 +37,10 @@ func _ready():
 		id = Singleton.CurrentLevelData.level_data.vars.max_purple_starbits
 		Singleton.CurrentLevelData.level_data.vars.max_purple_starbits += 1
 	
+	# band aid crash fix
+	while Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected.size() <= Singleton.CurrentLevelData.area:
+		Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected.append([])
+	
 	if id in Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][1] and !timed:
 		queue_free()
 	
