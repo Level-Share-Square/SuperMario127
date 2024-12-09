@@ -238,6 +238,7 @@ func _physics_process(delta):
 			return
 	
 	velocity = body.move_and_slide(velocity, Vector2.UP)
+	$VisibilityEnabler2D.global_position = body.global_position
 
 
 func calculate_fireball_velocity(source_position: Vector2, target_position: Vector2, gravity: float) -> Vector2:
