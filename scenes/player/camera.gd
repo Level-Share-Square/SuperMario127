@@ -113,7 +113,11 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 		return
 	var level_size : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds.size * 16
 	var intended_zoom = target * size
-	var max_size = level_size.y/size.y
+	
+	var divide: float = size.y
+	if divide == 0: divide = 0.0001
+	var max_size = level_size.y/divide
+	
 	if intended_zoom.x > level_size.x:
 		#target.x = clamp(target.x, target.x, level_size.x/size.x)
 		max_size = (level_size.x/size.x)
