@@ -140,7 +140,8 @@ func load_level(_page_info: LSSLevelPage):
 		coins_label.text = "N/A"
 	
 	emit_signal("level_loaded", page_info)
-	favorite_button.visible = account_info.logged_in
+	favorite_button.visible = false #account_info.logged_in
+	## ^ smh why hasnt hasfavourited been added to the site yet? i need it,, 
 
 
 func image_loaded(url: String, texture: ImageTexture):

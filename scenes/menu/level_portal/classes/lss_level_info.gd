@@ -55,5 +55,3 @@ func _init(data: Dictionary, acc_id: String = ""):
 	has_rated = fetch(data, "hasRated", false)
 	has_commented = account_id in commenters
 	
-	if fetch(data, "hasFavourited", null) != null:
-		print("hasFavourited property has been added. time to finish favoriting!!")

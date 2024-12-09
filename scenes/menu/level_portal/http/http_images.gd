@@ -33,12 +33,17 @@ func load_next_image():
 		# let's download it and wait for it to finish before continuing
 		# this is a thread and it only downloads once so it's fine to just wait
 		#print("Requesting image at url ", url.left(32), "...")
-		var error = request(url)
-		if error != OK:
-			printerr("An error occurred while making an HTTP request.")
-		else:
-			loading = true
-			connect("request_completed", self, "request_completed", [url], CONNECT_ONESHOT)
+		# also, check that its a valid url before trying to download it
+		var url_regex = RegEx.new()
+		url_regex.compile('^(http|https)://[^ "]+$')
+		var result = url_regex.search(url)
+		if result:
+			var error = request(url)
+			if error != OK:
+				printerr("An error occurred while making an HTTP request.")
+			else:
+				loading = true
+				connect("request_completed", self, "request_completed", [url], CONNECT_ONESHOT)
 	
 	# just move on if it fails
 	if not loading:

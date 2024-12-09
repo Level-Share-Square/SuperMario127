@@ -63,5 +63,8 @@ func _init(data: Dictionary):
 	
 	level_info = LevelInfo.new("", "", level_code)
 	
+	if fetch(data, "hasFavourited", null) != null:
+		printerr("hasFavourited property has been added. time to finish favoriting!!")
+	
 #	data.erase("code")
 #	print(data)
