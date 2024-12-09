@@ -2122,7 +2122,6 @@ margin_right = 96.0
 margin_bottom = 26.0
 focus_mode = 0
 theme_type_variation = "TransparentButton"
-disabled = true
 text = " Favorite? "
 script = ExtResource( 4 )
 

@@ -55,7 +55,7 @@ func get_info_level_code(level_code: String):
 	var first_bracket_index: int = level_code.find("[")
 	var first_end_bracket_index: int = level_code.find("]")
 	
-	var level_code_start: String = level_code.left(first_bracket_index)
+	var level_code_start: String = level_code.left(first_bracket_index + 1)
 	level_code.erase(first_bracket_index, first_end_bracket_index - first_bracket_index)
 	level_code.erase(0, first_bracket_index)
 	
@@ -68,6 +68,7 @@ func get_info_level_code(level_code: String):
 func _init(passed_id: String, passed_folder: String, passed_level_code: String = "") -> void:
 	level_id = passed_id
 	level_folder = passed_folder
+	level_code = passed_level_code
 	if passed_level_code == "":
 		return
 	
@@ -82,9 +83,6 @@ func _init(passed_id: String, passed_folder: String, passed_level_code: String =
 	thumbnail_sky = result.areas[0].settings.sky
 	thumbnail_background = result.areas[0].settings.background
 	thumbnail_background_palette = result.areas[0].settings.background_palette
-	
-	# save the real level code to be loaded later
-	level_code = passed_level_code
 
 
 func load_in() -> void:

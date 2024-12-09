@@ -24,6 +24,7 @@ var comments: int
 
 var has_played: bool
 var has_rated: float
+var has_favorited: bool
 
 
 ## dictionary.value causes errors, if the data happens
@@ -60,11 +61,9 @@ func _init(data: Dictionary):
 	
 	has_played = fetch(data, "hasPlayed", false)
 	has_rated = fetch(data, "hasRated", 0)
+	has_favorited = fetch(data, "hasFavourited", false)
 	
 	level_info = LevelInfo.new("", "", level_code)
-	
-	if fetch(data, "hasFavourited", null) != null:
-		printerr("hasFavourited property has been added. time to finish favoriting!!")
 	
 #	data.erase("code")
 #	print(data)

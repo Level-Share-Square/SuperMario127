@@ -276,7 +276,7 @@ static func decode_info(code: String) -> Dictionary:
 	result.areas[0].settings.background = value_util.decode_value(code_array[area_index + 2])
 	result.areas[0].settings.background_palette = 0
 	
-	if conversion_util.compareVersions(result.format_version, "0.4.5") == 1:
+	if conversion_util.compareVersions(result.format_version, "0.4.6") == 1:
 		var split: String = code_array[area_index + 5].get_slice("~", 0)
 		result.areas[0].settings.background_palette = value_util.decode_value(split)
 	
