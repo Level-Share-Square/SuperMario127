@@ -139,7 +139,6 @@ modulate = Color( 1, 1, 1, 0 )
 margin_right = 22.0
 margin_bottom = 22.0
 rect_rotation = 5.0
-rect_pivot_offset = Vector2( 11, 11 )
 script = ExtResource( 1 )
 display_offset = Vector2( -40, -36 )
 alpha = 1.0

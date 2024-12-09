@@ -31,7 +31,10 @@ func _physics_process(delta):
 	
 	var player_pos: Vector2 = character.global_position
 	var camera_pos: Vector2 = camera.get_camera_screen_center()
-	rect_position = (player_pos - camera_pos) + display_offset + viewport_offset
+	var camera_zoom: Vector2 = camera.zoom
+	rect_position = ((player_pos - camera_pos) + display_offset) / camera_zoom 
+	rect_position += viewport_offset
+	rect_scale = Vector2.ONE / camera_zoom
 	modulate.a = lerp(modulate.a, alpha if is_visible else 0, delta * fade_speed)
 
 
