@@ -6,6 +6,7 @@ const BASE_FOLDER: String = "user://level_list"
 const INTERNAL_SORT: String = "res://level/Developer Levels/sort.tres"
 const LEVELS: String = "levels"
 const FOLDERS: String = "folders"
+const VERSION: String = "dev_version"
 
 
 static func add_to_sort(id: String, working_folder: String, sort_type: String):

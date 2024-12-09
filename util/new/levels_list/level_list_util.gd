@@ -146,9 +146,9 @@ static func init_levels_list():
 	
 	var setup_dev: bool = not dir.dir_exists(DEV_FOLDER)
 	if not setup_dev:
-		var internal_array: Array = sort_file_util.load_internal_sort_file().get(sort_file_util.LEVELS, [])
-		var array: Array = sort_file_util.load_sort_file(DEV_FOLDER).get(sort_file_util.LEVELS, [])
-		if internal_array.size() != array.size():
+		var internal_version: int = sort_file_util.load_internal_sort_file().get(sort_file_util.VERSION, -1)
+		var version: int = sort_file_util.load_sort_file(DEV_FOLDER).get(sort_file_util.VERSION, -1)
+		if internal_version > version:
 			setup_dev = true
 	
 	if setup_dev:
