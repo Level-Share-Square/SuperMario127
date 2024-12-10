@@ -13,29 +13,26 @@ onready var level_card_scene: PackedScene = preload("res://scenes/menu/levels_li
 onready var level_load_thread := Thread.new()
 
 
-func thread_load_directory(working_folder: String):
-	if level_load_thread.is_active():
-		level_load_thread.wait_to_finish()
+#func thread_load_directory(working_folder: String):
+#	if level_load_thread.is_active():
+#		level_load_thread.wait_to_finish()
+#
+#	var err = level_load_thread.start(self, "load_directory", working_folder)
+#	if err != OK:
+#		printerr("Error starting level loading thread.")
 
-	var err = level_load_thread.start(self, "load_directory", working_folder)
-	if err != OK:
-		printerr("Error starting level loading thread.")
 
-
-# Thread must be disposed (or "joined"), for portability.
-func _exit_tree():
-	if level_load_thread.is_active():
-		pass
-		#printerr("Thread aborted while it's still running! If your game crashed, this is probably why.")
-		## lets figure out how to handle this properly, later :p
+func clear_level_queue():
+	level_queue.clear()
 
 
 func transition_to_directory(working_folder: String):
-	if is_loading: return
+	if is_loading: 
+		clear_level_queue()
 	
 	list_handler.parent_screen.transition("LevelView")
 	yield(list_handler.parent_screen, "screen_change")
-	thread_load_directory(working_folder)
+	load_directory(working_folder)
 
 
 var is_loading: bool
@@ -63,11 +60,37 @@ func load_directory(working_folder: String):
 	for folder in sort.get(sort_file_util.FOLDERS, []):
 		add_folder_card(folder, working_folder, not is_dev_folder)
 	for level in sort.get(sort_file_util.LEVELS, []):
-		add_level_card(level, working_folder, not is_dev_folder)
+		level_queue.append(level)
+
+	load_next_queue_level(working_folder, not is_dev_folder)
+
+
+var level_queue: Array
+func load_next_queue_level(working_folder, can_sort):
+	if level_queue.size() <= 0:
+		print("Done loading levels in directory.")
+		emit_signal("loading_finished")
+		is_loading = false
+		return
 	
-	print("Done loading levels in directory.")
-	emit_signal("loading_finished")
-	is_loading = false
+	if level_load_thread.is_active():
+		level_load_thread.wait_to_finish()
+	
+	var err = level_load_thread.start(self, "thread_add_level_card", [
+		level_queue.pop_front(), 
+		working_folder, 
+		can_sort
+	])
+	if err != OK:
+		printerr("Error starting level loading thread.")
+
+
+func thread_add_level_card(params: Array):
+	var level_id: String = params[0]
+	var working_folder: String = params[1]
+	var can_sort: bool = params[2]
+	var level_card: LevelCard = add_level_card(level_id, working_folder, can_sort)
+	level_card.connect("ready", self, "load_next_queue_level", [working_folder, can_sort])
 
 
 func add_folder_card(
@@ -100,7 +123,7 @@ func add_level_card(
 	can_sort: bool,
 	move_to_front: bool = false,
 	level_code: String = ""
-):
+) -> LevelCard:
 	var level_grid: GridContainer = list_handler.level_grid
 	var card_node: LevelCard = level_card_scene.instance()
 	card_node.pass_nodes(
@@ -117,3 +140,4 @@ func add_level_card(
 	)
 	
 	level_grid.call_deferred("add_child", card_node)
+	return card_node

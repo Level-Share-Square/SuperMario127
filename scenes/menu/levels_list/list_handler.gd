@@ -36,7 +36,7 @@ func screen_opened():
 		yield(old_levels, "conversion_complete")
 	
 	if working_folder != loaded_folder:
-		loader.thread_load_directory(working_folder)
+		loader.load_directory(working_folder)
 		loaded_folder = working_folder
 		return
 	
@@ -49,7 +49,7 @@ func screen_opened():
 	
 	if prev_level_sort != [] and level_sort.size() != prev_level_sort.size():
 		loaded_folder = working_folder
-		loader.thread_load_directory(working_folder)
+		loader.load_directory(working_folder)
 	
 	prev_level_sort = level_sort
 

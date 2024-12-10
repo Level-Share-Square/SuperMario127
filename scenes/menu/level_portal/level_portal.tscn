@@ -1,4 +1,4 @@
-[gd_scene load_steps=274 format=2]
+[gd_scene load_steps=275 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menu/level_portal/level_grid.gd" type="Script" id=2]
@@ -73,6 +73,7 @@
 [ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_back.wav" type="AudioStream" id=71]
 [ext_resource path="res://scenes/menu/level_portal/sounds/dsimenu_switch.wav" type="AudioStream" id=72]
 [ext_resource path="res://scenes/menu/level_portal/scroll.gd" type="Script" id=73]
+[ext_resource path="res://scenes/menu/button_scripts/press_countdown.gd" type="Script" id=74]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -3145,6 +3146,10 @@ text = "Log Out"
 script = ExtResource( 10 )
 sink_amount = 6
 
+[node name="PressCountdown" type="Node" parent="Buttons/LevelList/Logout"]
+script = ExtResource( 74 )
+countdown_time = 3
+
 [node name="Login" type="Button" parent="Buttons/LevelList"]
 margin_top = 356.0
 margin_right = 92.0
@@ -3379,7 +3384,7 @@ shape = SubResource( 229 )
 [connection signal="button_up" from="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Show" to="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Password" method="set_secret" binds= [ true ]]
 [connection signal="pressed" from="Subscreens/Login/MarginContainer/LoginPanel/MarginContainer/LoginContents/HBoxContainer/Login" to="Subscreens/Login/MarginContainer/LoginPanel" method="login"]
 [connection signal="timeout" from="Subscreens/Login/MarginContainer/LoginPanel/Timer" to="Subscreens/Login/MarginContainer/LoginPanel" method="timeout"]
-[connection signal="pressed" from="Buttons/LevelList/Logout" to="AccountInfo" method="logout"]
+[connection signal="pressed" from="Buttons/LevelList/Logout/PressCountdown" to="AccountInfo" method="logout"]
 [connection signal="pressed" from="Buttons/LevelList/Login" to="Subscreens/LevelList" method="transition" binds= [ "Login" ]]
 [connection signal="pressed" from="Buttons/LevelList/Back" to="." method="transition" binds= [ "MainMenu" ]]
 [connection signal="pressed" from="Buttons/LevelList/Back" to="Subscreens/LevelList" method="transition" binds= [ "" ]]
