@@ -62,6 +62,8 @@ func _physics_process(delta):
 
 
 func update_visuals(new_fuel: float):
+	new_fuel = max(0, new_fuel)
+	
 	counter.text = str(round(new_fuel)) + "%"
 	
 	var y_offset: float = bottom_pos * (1 - (new_fuel / 100))
