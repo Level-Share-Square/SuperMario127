@@ -6,7 +6,7 @@ var player_name
 var current_var
 var save_ghost = false
 var level
-var ghost_enabled = true
+var ghost_enabled = false
 var crash
 var crash_happened = "no"
 var disable_hotkeys = false
