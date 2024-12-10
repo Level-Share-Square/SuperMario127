@@ -779,6 +779,7 @@ follow_focus = true
 scroll_horizontal_enabled = false
 script = ExtResource( 51 )
 lerp_speed = 18.0
+page_loading = true
 custom_follow_focus = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/Subscreens/LevelView/ScrollContainer"]
@@ -1980,6 +1981,7 @@ script = ExtResource( 15 )
 [connection signal="pressed" from="Panel/Buttons/Add" to="Panel/Subscreens/LevelView" method="transition" binds= [ "AddElement" ]]
 [connection signal="screen_opened" from="Panel/Subscreens/LevelView" to="Panel/Subscreens/LevelView/Focus" method="focus_node" flags=3]
 [connection signal="back_press" from="Panel/Subscreens/LevelView/Focus" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="go_back"]
+[connection signal="next_page" from="Panel/Subscreens/LevelView/ScrollContainer" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/Loader" method="next_page"]
 [connection signal="directory_changed" from="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="update_folder_name"]
 [connection signal="screen_opened" from="Panel/Subscreens/LevelInfo" to="Panel/Subscreens/LevelInfo/Focus" method="focus_node" flags=3]
 [connection signal="back_press" from="Panel/Subscreens/LevelInfo/Focus" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelView" ]]

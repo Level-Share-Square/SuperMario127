@@ -22,6 +22,15 @@ onready var level_load_thread := Thread.new()
 #		printerr("Error starting level loading thread.")
 
 
+func next_page():
+	if not is_loading: return
+	if load_amount > 0: return
+	load_amount = 50
+	load_next_queue_level(
+		list_handler.working_folder, 
+		list_handler.working_folder != level_list_util.DEV_FOLDER)
+
+
 func clear_level_queue():
 	level_queue.clear()
 
@@ -61,11 +70,13 @@ func load_directory(working_folder: String):
 		add_folder_card(folder, working_folder, not is_dev_folder)
 	for level in sort.get(sort_file_util.LEVELS, []):
 		level_queue.append(level)
-
+	
+	load_amount = 50
 	load_next_queue_level(working_folder, not is_dev_folder)
 
 
 var level_queue: Array
+var load_amount: int
 func load_next_queue_level(working_folder, can_sort):
 	if level_queue.size() <= 0:
 		print("Done loading levels in directory.")
@@ -76,6 +87,7 @@ func load_next_queue_level(working_folder, can_sort):
 	if level_load_thread.is_active():
 		level_load_thread.wait_to_finish()
 	
+	load_amount -= 1
 	var err = level_load_thread.start(self, "thread_add_level_card", [
 		level_queue.pop_front(), 
 		working_folder, 
@@ -90,7 +102,8 @@ func thread_add_level_card(params: Array):
 	var working_folder: String = params[1]
 	var can_sort: bool = params[2]
 	var level_card: LevelCard = add_level_card(level_id, working_folder, can_sort)
-	level_card.connect("ready", self, "load_next_queue_level", [working_folder, can_sort])
+	if load_amount > 0:
+		level_card.connect("ready", self, "load_next_queue_level", [working_folder, can_sort])
 
 
 func add_folder_card(

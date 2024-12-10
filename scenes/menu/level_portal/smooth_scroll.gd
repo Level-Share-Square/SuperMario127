@@ -1,5 +1,6 @@
 extends ScrollContainer
 
+signal next_page
 
 const SNAP_THRESHOLD: float = 0.1
 const LERP_THRESHOLD: float = 8.0
@@ -8,6 +9,9 @@ export var lerp_speed: float
 var target_scroll: float = -1
 var last_scroll: float
 
+# hacky code but i really dont want to care rn ,, 
+export var page_loading: bool
+var child: Node
 
 func _process(delta):
 	if abs(last_scroll - scroll_vertical) > LERP_THRESHOLD:
@@ -19,6 +23,13 @@ func _process(delta):
 		if abs(target_scroll - scroll_vertical) < SNAP_THRESHOLD:
 			scroll_vertical = target_scroll
 			target_scroll = -1
+	
+	if page_loading and target_scroll > 0:
+		if not is_instance_valid(child):
+			child = get_child(0)
+		
+		if target_scroll != last_scroll and target_scroll > child.rect_size.y - rect_size.y - 32:
+			emit_signal("next_page")
 	
 	last_scroll = scroll_vertical
 
