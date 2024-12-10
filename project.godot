@@ -149,7 +149,7 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordActivityAssets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_assets.gdns"
@@ -1378,7 +1378,6 @@ toggle_enabled={
 [logging]
 
 file_logging/enable_file_logging=true
-file_logging/max_log_files=1
 
 [memory]
 
