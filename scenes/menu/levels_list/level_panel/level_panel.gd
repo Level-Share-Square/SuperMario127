@@ -9,6 +9,7 @@ onready var http_thumbnails = $"%HTTPThumbnails"
 var working_folder: String
 var level_id: String
 var level_info: LevelInfo
+var can_edit: bool
 
 ### tabs
 onready var info_tab: Control = $InfoTab
@@ -49,12 +50,13 @@ onready var reset_button = $Buttons/ResetSave
 onready var delete_button = $Buttons/DeleteLevel
 
 
-func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder: String, can_edit: bool = true):
+func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder: String, _can_edit: bool = true):
 	yield(get_parent(), "screen_opened")
 	
 	level_info = _level_info
 	level_id = _level_id
 	working_folder = _working_folder
+	can_edit = _can_edit
 	
 	# load the real level data now
 	level_info.load_in()
@@ -178,5 +180,5 @@ func delete_level():
 
 func start_level(start_in_edit_mode : bool):
 	Singleton.SceneSwitcher.menu_return_screen = "LevelsList"
-	Singleton.SceneSwitcher.menu_return_args = [working_folder]
+	Singleton.SceneSwitcher.menu_return_args = [level_info, level_id, working_folder, can_edit]
 	Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, start_in_edit_mode, true)
