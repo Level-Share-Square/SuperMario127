@@ -96,9 +96,10 @@ func remove_level(level_id: String, folder: String = working_folder):
 
 
 func go_back():
+	if not loader.can_return: return
 	if working_folder == BASE_FOLDER or working_folder == DEV_FOLDER:
 		get_owner().transition("MainMenu")
-	else:
+	elif level_grid.get_child_count() > 0:
 		# um... sorta hacky
 		# gets the "back..." folder and presses it automatically
 		level_grid.get_child(0).emit_signal("button_pressed")

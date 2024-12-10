@@ -36,6 +36,7 @@ func clear_level_queue():
 
 
 func transition_to_directory(working_folder: String):
+	can_return = false
 	if is_loading: 
 		clear_level_queue()
 	
@@ -44,8 +45,10 @@ func transition_to_directory(working_folder: String):
 	load_directory(working_folder)
 
 
+var can_return: bool
 var is_loading: bool
 func load_directory(working_folder: String):
+	clear_level_queue()
 	http_thumbnails.clear_queue()
 	list_handler.clear_grid()
 	
@@ -64,6 +67,7 @@ func load_directory(working_folder: String):
 		var parent_folder: String = level_list_util.get_parent_from_path(working_folder)
 		# folder id is useless on back buttons :p
 		add_folder_card("", parent_folder, false, false, true)
+	can_return = true
 	
 	var sort: Dictionary = sort_file_util.load_sort_file(working_folder)
 	for folder in sort.get(sort_file_util.FOLDERS, []):
