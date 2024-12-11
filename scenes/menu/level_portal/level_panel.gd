@@ -178,6 +178,7 @@ func save_level():
 	save_button.disabled = true
 	save_button.text = SAVED_TEXT
 	
+	Singleton.SceneSwitcher.reload_base_folder = true
 	if account_info.logged_in:
 		http_account.play_level(page_info.level_id)
 

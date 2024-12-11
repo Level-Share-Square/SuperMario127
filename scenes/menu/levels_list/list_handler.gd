@@ -29,7 +29,6 @@ func _ready():
 	level_list_util.init_levels_list()
 
 
-var prev_level_sort: Array
 func screen_opened():
 	if old_levels.should_convert_levels():
 		old_levels.start(BASE_FOLDER)
@@ -40,18 +39,13 @@ func screen_opened():
 		loaded_folder = working_folder
 		return
 	
-	# checking if any levels were added (from the LSS menu)
+	# checking if any levels were added from the LSS menu
 	# and reloading if so
 	if working_folder != BASE_FOLDER: return
-	
-	var sort_dict: Dictionary = sort_file_util.load_sort_file(working_folder)
-	var level_sort: Array = sort_dict.get(sort_file_util.LEVELS, [])
-	
-	if prev_level_sort != [] and level_sort.size() != prev_level_sort.size():
+	if Singleton.SceneSwitcher.reload_base_folder:
 		loaded_folder = working_folder
 		loader.load_directory(working_folder)
-	
-	prev_level_sort = level_sort
+		Singleton.SceneSwitcher.reload_base_folder = false
 
 
 func clear_grid():

@@ -7,6 +7,7 @@ const SHINE_SELECT_PATH = "res://scenes/menu/shine_select/shine_select.tscn"
 #### scene switching
 var menu_return_screen: String
 var menu_return_args: Array
+var reload_base_folder: bool
 
 func quit_to_menu(screen_to_open : String = ""):
 	# if we quit from the pause menu, the tree will be paused, and that means the menu will also be paused and not work
