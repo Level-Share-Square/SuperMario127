@@ -146,10 +146,21 @@ static func init_levels_list():
 	
 	var setup_dev: bool = not dir.dir_exists(DEV_FOLDER)
 	if not setup_dev:
-		var internal_version: int = sort_file_util.load_internal_sort_file().get(sort_file_util.VERSION, -1)
-		var version: int = sort_file_util.load_sort_file(DEV_FOLDER).get(sort_file_util.VERSION, -1)
+		var internal_sort: Dictionary = sort_file_util.load_internal_sort_file()
+		var sort: Dictionary = sort_file_util.load_sort_file(DEV_FOLDER)
+		
+		var internal_version: int = internal_sort.get(sort_file_util.VERSION, -1)
+		var version: int = sort.get(sort_file_util.VERSION, -1)
+		
 		if internal_version > version:
+			print("Version outdated, updating dev levels...")
 			setup_dev = true
+			for reset_id in internal_sort.get("reset_levels", []):
+				var save_path: String = get_level_save_path(reset_id, DEV_FOLDER)
+				if file_exists(save_path):
+					delete_file(save_path)
+					print("Save file deleted for level id ", reset_id)
+	
 	
 	if setup_dev:
 		create_level_folder(DEV_FOLDER)
