@@ -150,7 +150,8 @@ func physics_process_idle(delta:float):
 func physics_process_holding(delta:float):
 	mario.velocity = Vector2(0,0)
 	float_timer -= delta
-	if(float_timer <= 0):
+	if(float_timer <= 0 or mario.inputs[5][1]):
+		float_timer = 0
 		mario.state._stop(delta)
 		return
 	mario.position = lerp(mario.position, position, 0.1)
