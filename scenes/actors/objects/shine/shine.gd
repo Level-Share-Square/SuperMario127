@@ -171,6 +171,12 @@ func _physics_process(_delta : float) -> void:
 		var camera : Camera2D = current_scene.get_node(current_scene.camera)
 		var do_animation: bool = not (id in Singleton.CurrentLevelData.level_data.vars.activated_shine_ids)
 		
+		# band aid crash fix
+		while Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.size() <= Singleton.CurrentLevelData.area:
+			Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.append([])
+		while Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected.size() <= Singleton.CurrentLevelData.area:
+			Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected.append([])
+		
 		if red_coins_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_red_coins > 0:
 			if Singleton.CurrentLevelData.level_data.vars.red_coins_collected[0] == Singleton.CurrentLevelData.level_data.vars.max_red_coins:
 				activate_shine(do_animation)
