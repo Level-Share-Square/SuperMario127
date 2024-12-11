@@ -173,9 +173,9 @@ func _physics_process(_delta : float) -> void:
 		
 		# band aid crash fix
 		while Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.size() <= Singleton.CurrentLevelData.area:
-			Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.append([])
+			Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.append([0, []])
 		while Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected.size() <= Singleton.CurrentLevelData.area:
-			Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected.append([])
+			Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected.append([0, []])
 		
 		if red_coins_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_red_coins > 0:
 			if Singleton.CurrentLevelData.level_data.vars.red_coins_collected[0] == Singleton.CurrentLevelData.level_data.vars.max_red_coins:

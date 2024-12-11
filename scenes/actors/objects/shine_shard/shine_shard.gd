@@ -52,7 +52,7 @@ func _ready():
 	
 	# band aid crash fix
 	while Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.size() <= Singleton.CurrentLevelData.area:
-		Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.append([])
+		Singleton.CurrentLevelData.level_data.vars.shine_shards_collected.append([0, []])
 	
 	if id in Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][1]:
 		queue_free()
