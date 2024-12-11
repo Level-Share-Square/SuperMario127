@@ -36,7 +36,7 @@ var shine_details_indices: Array = []
 # contains an array that stores dictionaries containing all the information needed to populate the shine select screen
 var shine_details: Array = []
 
-var selected_shine_index: int = 0
+var selected_shine_index: int = -1
 
 func _ready():
 	shine_details = level_info.shine_details
@@ -51,9 +51,6 @@ func _ready():
 		var shine_sprite = SHINE_SPRITE_SCENE.instance()
 		shine_sprites.append(shine_sprite)
 		shine_details_indices.append(i)
-		
-		# mark the selected shine and only that shine as selected
-		shine_sprite.selected = i == 0
 		
 		# make non-kickout shines turn the other way
 		if "do_kick_out" in shine_details[i]:
@@ -72,7 +69,10 @@ func _ready():
 		# if it is collected, show the correct colour of the shine
 		var collected_shines = level_info.collected_shines
 		var is_collected = collected_shines[str(shine_details[i]["id"])]
-		if !is_collected: 
+		if !is_collected:
+			# automatically select first empty shine
+			if selected_shine_index == -1:
+				selected_shine_index = i
 			shine_sprite.make_blue()
 		else:
 			# Shine color is stored as rgba32 from a json, and json converts stuff to float so it has to be converted twice
@@ -81,8 +81,12 @@ func _ready():
 		shine_sprite.add_to_group("shine_sprites")
 		add_child(shine_sprite)
 	
-	move_shine_sprites() # make sure everything is in the right spot and size and such
+	selected_shine_index = max(0, selected_shine_index)
+	get_child(selected_shine_index).selected = true
+	
+	move_shine_sprites(true) # make sure everything is in the right spot and size and such
 	update_labels()
+
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_right"):
@@ -115,7 +119,7 @@ func attempt_increment_selected_shine_index(increment : int) -> void:
 	move_shine_sprites()
 	update_labels()
 	
-func move_shine_sprites() -> void:
+func move_shine_sprites(instant: bool = false) -> void:
 	for i in range(shine_sprites.size()):
 		var shine_size = SHINE_DEFAULT_SIZE
 		var target_position_x : float
@@ -134,14 +138,15 @@ func move_shine_sprites() -> void:
 			# shine 2 on the right would be at 225, shine 3 at 325, shine 2 on the left at 225, etc
 			target_position_x = (SHINE_FIRST_OFFSET_DIFFERENCE + (abs(i - selected_shine_index) * \
 					SHINE_POSITION_INCREMENT)) * sign(i - selected_shine_index)
-			
+		
+		var tween_time = CHANGE_SELECTION_TIME if not instant else 0.0001
 		# smoothly interplate to the new scale, position, and alpha value
 		tween.interpolate_property(shine_sprites[i], "scale", null, Vector2(shine_size, shine_size), \
-				CHANGE_SELECTION_TIME, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+				tween_time, Tween.TRANS_CUBIC, Tween.EASE_OUT)
 		tween.interpolate_property(shine_sprites[i], "position:x", null, target_position_x, \
-				CHANGE_SELECTION_TIME, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+				tween_time, Tween.TRANS_CUBIC, Tween.EASE_OUT)
 		tween.interpolate_property(shine_sprites[i], "modulate:a", null, shine_transparency, \
-				CHANGE_SELECTION_TIME, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+				tween_time, Tween.TRANS_CUBIC, Tween.EASE_OUT)
 
 	tween.start()
 
