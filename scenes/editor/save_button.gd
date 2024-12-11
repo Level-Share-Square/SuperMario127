@@ -22,20 +22,24 @@ func _pressed():
 	var editor: Node = get_owner()
 	editor.sync_pinned_items()
 	
+	var level_id: String = Singleton.CurrentLevelData.level_id
+	var working_folder: String = Singleton.CurrentLevelData.working_folder
+	var level_code: String = Singleton.CurrentLevelData.level_data.get_encoded_level_data()
+	
 	var file_path = level_list_util.get_level_file_path(
-		Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder
+		level_id, working_folder
 	)
 	level_list_util.save_level_code_file(
-		Singleton.CurrentLevelData.level_data.get_encoded_level_data(), 
+		level_code, 
 		file_path
 	)
 	
 	var save_path = level_list_util.get_level_save_path(
-		Singleton.CurrentLevelData.level_id, Singleton.CurrentLevelData.working_folder
+		level_id, working_folder
 	)
 	if level_list_util.file_exists(save_path):
 		level_list_util.delete_file(save_path)
-
+	
 	Singleton.CurrentLevelData.unsaved_editor_changes = false
 		
 func on_input(event):
