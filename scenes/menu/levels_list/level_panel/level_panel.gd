@@ -80,6 +80,11 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 	# thumbnail
 	var cached_image: ImageTexture = http_thumbnails.get_cached_image(level_info.thumbnail_url)
 	if cached_image == null:
+		var thumb_path: String = level_list_util.get_level_thumbnail_path(level_id, working_folder)
+		if level_list_util.file_exists(thumb_path):
+			cached_image = level_list_util.get_image_from_path(thumb_path)
+	
+	if cached_image == null:
 		thumbnail.texture = level_info.get_level_background_texture()
 		
 		foreground.visible = true
