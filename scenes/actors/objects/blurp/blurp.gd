@@ -1,7 +1,7 @@
 extends GameObject
 
 onready var sprite : AnimatedSprite = $CheepCheep/Sprite
-onready var color_sprite : AnimatedSprite = $CheepCheep/Sprite/ColorSprite
+onready var color_sprite : AnimatedSprite = $CheepCheep/ColorSprite
 onready var kinematic_body : KinematicBody2D = $CheepCheep
 onready var attack_area : Area2D = $CheepCheep/AttackArea
 onready var player_detector : Area2D = $CheepCheep/PlayerDetector
@@ -42,7 +42,7 @@ export var color := Color(1, 0, 0)
 var rainbow := false
 
 var hit := false
-var snap := Vector2(0, 0)
+var snap := Vector2(0, 12)
 
 var bounced := false
 
@@ -153,6 +153,12 @@ func _process(_delta) -> void:
 			color.h = float(wrapi(OS.get_ticks_msec(), 0, 500)) / 500
 		
 		sprite.playing = true
+		color_sprite.frame = sprite.frame
+		color_sprite.rotation = sprite.rotation
+		color_sprite.position = sprite.position
+		color_sprite.reset_physics_interpolation()
+		color_sprite.scale = sprite.scale
+		color_sprite.flip_h = sprite.flip_h
 		color_sprite.modulate = color
 
 func _physics_process(delta : float) -> void:
@@ -180,7 +186,6 @@ func physics_process_normal(delta: float, is_in_platform: bool) -> void:
 	if water_detector.get_overlapping_areas().size() > 0:
 		if gravity_scale == 1:
 			velocity.y = 120
-			
 		
 		gravity_scale = 0
 		
@@ -210,7 +215,7 @@ func physics_process_normal(delta: float, is_in_platform: bool) -> void:
 		
 		# Ground collision
 		if kinematic_body.is_on_floor():
-			snap = Vector2(0, 0 if is_in_platform else 0)
+			snap = Vector2(0, 0 if is_in_platform else 12)
 		else: # or not
 			snap = Vector2(0, 0)
 		# Run physics
@@ -276,7 +281,7 @@ func physics_process_hit(delta: float, is_in_platform: bool) -> void:
 	if sprite.visible:
 		# Ground collision
 		if kinematic_body.is_on_floor():
-			snap = Vector2(0, 0 if is_in_platform else 0)
+			snap = Vector2(0, 0 if is_in_platform else 12)
 		else: # or not
 			snap = Vector2(0, 0)
 		

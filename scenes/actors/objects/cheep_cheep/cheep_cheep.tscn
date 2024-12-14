@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scenes/actors/objects/cheep_cheep/cheep_cheep.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/cheep_cheep/cheep_cheep.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/actors/objects/goomba/stomp.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/actors/objects/goomba/body.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/objects/cheep_cheep/recolorable.png" type="Texture" id=8]
+[ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -159,9 +160,10 @@ script = ExtResource( 7 )
 [node name="Sprite" type="AnimatedSprite" parent="CheepCheep"]
 frames = SubResource( 4 )
 
-[node name="ColorSprite" type="AnimatedSprite" parent="CheepCheep"]
+[node name="ColorSprite" type="AnimatedSprite" parent="CheepCheep/Sprite"]
 modulate = Color( 1, 0, 0, 1 )
 frames = SubResource( 8 )
+script = ExtResource( 9 )
 
 [node name="GroundCollision" type="CollisionShape2D" parent="CheepCheep"]
 visible = false
