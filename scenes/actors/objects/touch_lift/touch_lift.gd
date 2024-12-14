@@ -229,7 +229,7 @@ func reached_end() -> void:
 			activated = false
 
 func _on_touch_area_entered(body):
-	if body is Character:
+	if body is Character or body is EnemyBase:
 		activated = true
 
 func reset_platform():

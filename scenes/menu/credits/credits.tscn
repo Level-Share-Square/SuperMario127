@@ -37,7 +37,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "roll"
-length = 144.0
+length = 130.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("RichTextLabel:rect_position")
 tracks/0/interp = 1
@@ -45,7 +45,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 144 ),
+"times": PoolRealArray( 0, 130 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 448 ), Vector2( 0, -4980 ) ]
@@ -69,7 +69,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 144 ),
+"times": PoolRealArray( 129.2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ "MainMenu" ],
@@ -228,7 +228,6 @@ texture = SubResource( 6 )
 expand = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 anchor_bottom = 1.0
 margin_top = 432.0
 margin_right = 768.0
@@ -291,7 +290,6 @@ Programmer:
 Jake \"PlugAndPlay\"
 Rin \"Dignity\"
 \"Chlorobyte\"
-\"GTcreyon\"
 \"met3o\"
 \"pyrule\"
 \"tabs\"
@@ -490,7 +488,6 @@ Programmer:
 Jake \"PlugAndPlay\"
 Rin \"Dignity\"
 \"Chlorobyte\"
-\"GTcreyon\"
 \"met3o\"
 \"pyrule\"
 \"tabs\"

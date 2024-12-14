@@ -49,7 +49,9 @@ func _physics_process(delta):
 					else:
 						if body.powerup != MetalPowerup:
 							character_apply_wind(body, delta)
-
+				
+				elif enabled and body is EnemyBase:
+					body.velocity = apply_velocity(body.velocity, delta)
 						
 				elif enabled and !body.name.begins_with("Character"):
 					var body_object = body.get_parent()
@@ -114,6 +116,8 @@ func update_property(key, value):
 	update_size()
 
 func entered(body):
+	if enabled and body is EnemyBase:
+		body.snap_enabled = false
 	if enabled and body.name.begins_with("Character") and !body.dead and body.controllable:
 		body.velocity += Vector2(wind_power, wind_power)*wind_angle_vector
 	if triggerable:
@@ -121,7 +125,9 @@ func entered(body):
 		triggered = true
 
 func exited(body):
-	if enabled and body.name.begins_with("Character") and !body.dead and body.controllable:
+	if enabled and body is EnemyBase:
+		body.snap_enabled = true
+	elif enabled and body.name.begins_with("Character") and !body.dead and body.controllable:
 		body.in_wind = false
 		if wind_angle_vector.x != 0 and body.velocity.x >= (wind_power*wind_angle_vector.y)*18:
 			body.velocity.x = body.velocity.x*.95

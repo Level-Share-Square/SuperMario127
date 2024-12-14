@@ -45,6 +45,7 @@ func _process(delta):
 
 func _area_entered(area):
 	if not is_instance_valid(current_card): return
+	if not area.get_parent() is Button: return
 	
 	var intersecting_card: Button = area.get_parent()
 	var new_index: int = intersecting_card.get_index()

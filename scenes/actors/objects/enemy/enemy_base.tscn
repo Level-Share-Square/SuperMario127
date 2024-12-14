@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/actors/objects/enemy/enemy_base.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/enemy/enemy_damage.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 8, 16 )
+
+[sub_resource type="CircleShape2D" id=14]
+radius = 3.0
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 13, 2 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 6, 8 )
+
+[node name="EnemyBase" type="KinematicBody2D"]
+z_index = -2
+collision_layer = 4
+collision_mask = 21
+collision/safe_margin = 0.1
+script = ExtResource( 1 )
+
+[node name="TerrainCollider" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -16 )
+shape = SubResource( 11 )
+
+[node name="LiquidsDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32768
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LiquidsDetector"]
+position = Vector2( 0, -16 )
+shape = SubResource( 11 )
+
+[node name="States" type="Node2D" parent="."]
+
+[node name="Damage" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="Crush" type="Area2D" parent="Damage"]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage/Crush"]
+position = Vector2( 0, -16 )
+shape = SubResource( 14 )
+
+[node name="Stomp" type="Area2D" parent="Damage"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+priority = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage/Stomp"]
+position = Vector2( 0, -24 )
+shape = SubResource( 13 )
+
+[node name="Attack" type="Area2D" parent="Damage"]
+collision_layer = 0
+collision_mask = 8482
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage/Attack"]
+position = Vector2( 0, -8 )
+shape = SubResource( 12 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -20 )
+animation = "walk"
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 0, -32 )
+rect = Rect2( -64, -64, 128, 128 )
+
+[node name="BottomPos" type="Node2D" parent="."]
+
+[connection signal="body_entered" from="Damage/Crush" to="Damage" method="crush_body_entered"]
+[connection signal="body_entered" from="Damage/Stomp" to="Damage" method="stomp_body_entered"]
+[connection signal="area_entered" from="Damage/Attack" to="Damage" method="attack_area_entered"]
+[connection signal="body_entered" from="Damage/Attack" to="Damage" method="attack_body_entered"]

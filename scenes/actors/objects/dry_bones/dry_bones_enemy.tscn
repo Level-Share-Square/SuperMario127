@@ -1,0 +1,577 @@
+[gd_scene load_steps=55 format=2]
+
+[ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/actors/objects/enemy/states/patrol_state.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/dry_bones/animations/idle.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/dry_bones/animations/shamble.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/dry_bones/animations/toss.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/dry_bones/animations/crumble.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/dry_bones/damage.gd" type="Script" id=7]
+[ext_resource path="res://scenes/actors/objects/dry_bones/states/crumble_state.gd" type="Script" id=8]
+[ext_resource path="res://scenes/actors/objects/dry_bones/shake.gd" type="Script" id=9]
+[ext_resource path="res://scenes/actors/objects/dry_bones/states/toss_state.gd" type="Script" id=10]
+[ext_resource path="res://scenes/actors/objects/dry_bones/throw_timer.gd" type="Script" id=11]
+[ext_resource path="res://scenes/actors/objects/dry_bones/animations/head.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/dry_bones/animations/body.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/dry_bones/animations/foot.png" type="Texture" id=14]
+[ext_resource path="res://scenes/actors/objects/dry_bones/animations/hand.png" type="Texture" id=15]
+[ext_resource path="res://scenes/actors/objects/dry_bones/states/die_state.gd" type="Script" id=16]
+[ext_resource path="res://scenes/actors/objects/dry_bones/dry_bones_enemy.gd" type="Script" id=17]
+[ext_resource path="res://scenes/actors/objects/dry_bones/states/stunned_state.gd" type="Script" id=18]
+[ext_resource path="res://scenes/actors/objects/enemy/states/idle_state.gd" type="Script" id=19]
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 39, 40 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 6 )
+region = Rect2( 39, 0, 39, 40 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 6 )
+region = Rect2( 78, 0, 39, 40 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 6 )
+region = Rect2( 117, 0, 39, 40 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 30, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 60, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 90, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 120, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 39, 40 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 5 )
+region = Rect2( 30, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 5 )
+region = Rect2( 60, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 5 )
+region = Rect2( 90, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 5 )
+region = Rect2( 120, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 5 )
+region = Rect2( 150, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 5 )
+region = Rect2( 180, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 5 )
+region = Rect2( 210, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 5 )
+region = Rect2( 240, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 31, 40 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 4 )
+region = Rect2( 31, 0, 31, 40 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 4 )
+region = Rect2( 62, 0, 31, 40 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 4 )
+region = Rect2( 93, 0, 31, 40 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 4 )
+region = Rect2( 124, 0, 31, 40 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 4 )
+region = Rect2( 155, 0, 31, 40 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 4 )
+region = Rect2( 186, 0, 31, 40 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 4 )
+region = Rect2( 217, 0, 31, 40 )
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"loop": false,
+"name": "crumble",
+"speed": 9.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ) ],
+"loop": true,
+"name": "idle",
+"speed": 9.0
+}, {
+"frames": [ SubResource( 34 ) ],
+"loop": false,
+"name": "stunned",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
+"loop": false,
+"name": "toss",
+"speed": 9.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "walk",
+"speed": 9.0
+} ]
+
+[sub_resource type="Animation" id=28]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:shake_amount")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AnimatedSprite:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "crumble"
+length = 15.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "crumble" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 14.7, 14.8, 14.9, 15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 3, 2, 1, 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 14.9 ),
+"transitions": PoolRealArray( 0, 0, 0 ),
+"update": 0,
+"values": [ Vector2( 0, -20 ), Vector2( 0, -19 ), Vector2( 0, -20 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AnimatedSprite:shake_amount")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 13, 13.2, 14.7 ),
+"transitions": PoolRealArray( 1, 1, 0, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.5, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 15 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "set_default_state"
+} ]
+}
+
+[sub_resource type="Animation" id=35]
+resource_name = "stunned"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "stunned" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:shake_amount")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 2, 2, 2, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "set_default_state"
+} ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "toss"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "toss" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 8 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "set_default_state"
+} ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("States/TossState")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "toss_bone"
+} ]
+}
+
+[sub_resource type="Gradient" id=31]
+offsets = PoolRealArray( 0, 0.75, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=32]
+gradient = SubResource( 31 )
+
+[sub_resource type="ParticlesMaterial" id=33]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+gravity = Vector3( 0, 392, 0 )
+initial_velocity = 120.0
+angular_velocity = 720.0
+angular_velocity_random = 0.25
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle_random = 0.5
+color_ramp = SubResource( 32 )
+
+[node name="DryBonesEnemy" instance=ExtResource( 1 )]
+script = ExtResource( 17 )
+cur_state = "PatrolState"
+float_in_liquids = true
+is_stationary = false
+
+[node name="IdleState" type="Node2D" parent="States" index="0"]
+script = ExtResource( 19 )
+
+[node name="PatrolState" type="Node2D" parent="States" index="1"]
+script = ExtResource( 2 )
+move_speed = 20.0
+ledge_turning = true
+
+[node name="Ledge" type="RayCast2D" parent="States/PatrolState" index="0"]
+position = Vector2( -12, -8 )
+cast_to = Vector2( 0, 32 )
+collision_mask = 21
+
+[node name="Wall" type="RayCast2D" parent="States/PatrolState" index="1"]
+position = Vector2( 0, -16 )
+cast_to = Vector2( -9, 0 )
+collision_mask = 21
+
+[node name="CrumbleState" type="Node2D" parent="States" index="2"]
+script = ExtResource( 8 )
+can_attack = false
+can_be_hurt = false
+
+[node name="TossState" type="Node2D" parent="States" index="3"]
+script = ExtResource( 10 )
+bone_speed = 60.0
+toss_offset = Vector2( 10, -16 )
+
+[node name="StunnedState" type="Node2D" parent="States" index="4"]
+script = ExtResource( 18 )
+
+[node name="DieState" type="Node2D" parent="States" index="5"]
+script = ExtResource( 16 )
+can_attack = false
+can_be_hurt = false
+
+[node name="Damage" parent="." index="3"]
+script = ExtResource( 7 )
+
+[node name="AnimatedSprite" parent="." index="4"]
+frames = SubResource( 14 )
+animation = "idle"
+playing = true
+script = ExtResource( 9 )
+
+[node name="VisibilityEnabler2D" parent="." index="5"]
+pause_particles = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+unique_name_in_owner = true
+anims/RESET = SubResource( 28 )
+anims/crumble = SubResource( 29 )
+anims/stunned = SubResource( 35 )
+anims/toss = SubResource( 30 )
+
+[node name="Timer" type="Timer" parent="." index="8"]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+script = ExtResource( 11 )
+
+[node name="DeathParticles" type="Node2D" parent="." index="9"]
+unique_name_in_owner = true
+position = Vector2( 0, -16 )
+
+[node name="Head" type="Particles2D" parent="DeathParticles" index="0"]
+emitting = false
+amount = 1
+one_shot = true
+explosiveness = 1.0
+fract_delta = false
+local_coords = false
+process_material = SubResource( 33 )
+texture = ExtResource( 12 )
+
+[node name="Body" type="Particles2D" parent="DeathParticles" index="1"]
+emitting = false
+amount = 1
+one_shot = true
+explosiveness = 1.0
+fract_delta = false
+local_coords = false
+process_material = SubResource( 33 )
+texture = ExtResource( 13 )
+
+[node name="Hands" type="Particles2D" parent="DeathParticles" index="2"]
+emitting = false
+amount = 2
+one_shot = true
+explosiveness = 1.0
+fract_delta = false
+local_coords = false
+process_material = SubResource( 33 )
+texture = ExtResource( 15 )
+
+[node name="Feet" type="Particles2D" parent="DeathParticles" index="3"]
+emitting = false
+amount = 2
+one_shot = true
+explosiveness = 1.0
+fract_delta = false
+local_coords = false
+process_material = SubResource( 33 )
+texture = ExtResource( 14 )
+
+[connection signal="state_changed" from="." to="Timer" method="state_changed"]
+[connection signal="timeout" from="Timer" to="." method="set_state_by_name" binds= [ "TossState" ]]
