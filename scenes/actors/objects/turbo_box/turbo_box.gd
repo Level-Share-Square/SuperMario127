@@ -68,7 +68,7 @@ func enter_detector(body):
 		object.properties.append(0)
 		object.properties.append(true)
 		object.properties.append(true)
-		object.properties.append(Vector2(0, -50))
+		object.properties.append(Vector2(0, -250))
 		object.properties.append("TurboNozzle")
 		get_parent().create_object(object, false)
 		
