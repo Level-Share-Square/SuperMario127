@@ -14,6 +14,8 @@ var destroy_timer = 0.0
 var gravity: = 0.0
 var gravity_scale: = 1.0
 
+var run_physics := true
+
 func _set_properties():
 	savable_properties = ["velocity", "nozzle_type"]
 	editable_properties = ["velocity", "nozzle_type"]
@@ -24,7 +26,8 @@ func _set_property_values():
 func collect(body):
 	if enabled and !collected and body.name.begins_with("Character") and !body.dead:
 		sound.play()
-		kinematic_body.visible = false
+		visible = false
+		run_physics = false
 		destroy_timer = 2
 		body.fuel = 100
 		collected = true
@@ -44,7 +47,7 @@ func _process(delta):
 			queue_free()
 			
 func _physics_process(delta):
-	if mode != 1:
+	if mode != 1 and run_physics:
 		if velocity.y < 600:
 			velocity.y += gravity * gravity_scale * 2
 		
