@@ -31,16 +31,14 @@ func _set_property_values():
 	spawn_timer = wait_time+offset
 
 func _ready():
-	if mode != 1:
-		sprite.frame = 0
+	sprite.frame = 3
 	collision_shape.disabled = !enabled
 
 func _process(delta):
-	if mode != 1:
-		if sprite.frame == 1 or sprite.frame == 2:
-			sprite.scale = sprite.scale.linear_interpolate(Vector2(1.75, 1.75), delta * 12)
-		else:
-			sprite.scale = sprite.scale.linear_interpolate(Vector2(1, 1), delta * 7)
+	if sprite.frame == 1 or sprite.frame == 2:
+		sprite.scale = sprite.scale.linear_interpolate(Vector2(1.75, 1.75), delta * 12)
+	else:
+		sprite.scale = sprite.scale.linear_interpolate(Vector2(1, 1), delta * 7)
 
 func _physics_process(delta):
 	if invincible:
@@ -52,7 +50,6 @@ func _physics_process(delta):
 		spawn_timer -= delta
 		if spawn_timer <= 0.35 and sprite.frame == 3:
 			sprite.frame = 0
-			color_sprite.frame = 0
 
 		if spawn_timer <= 0:
 			spawn_timer = wait_time
