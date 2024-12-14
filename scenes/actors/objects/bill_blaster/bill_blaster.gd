@@ -36,10 +36,11 @@ func _ready():
 	collision_shape.disabled = !enabled
 
 func _process(delta):
-	if sprite.frame == 1 or sprite.frame == 2:
-		sprite.scale = sprite.scale.linear_interpolate(Vector2(1.75, 1.75), delta * 12)
-	else:
-		sprite.scale = sprite.scale.linear_interpolate(Vector2(1, 1), delta * 7)
+	if mode != 1:
+		if sprite.frame == 1 or sprite.frame == 2:
+			sprite.scale = sprite.scale.linear_interpolate(Vector2(1.75, 1.75), delta * 12)
+		else:
+			sprite.scale = sprite.scale.linear_interpolate(Vector2(1, 1), delta * 7)
 
 func _physics_process(delta):
 	if invincible:
