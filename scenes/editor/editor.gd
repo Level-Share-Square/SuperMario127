@@ -425,6 +425,7 @@ func _process(delta : float) -> void:
 		$"UI".visible = !$"UI".visible
 		$"Grid".visible = !$"Grid".visible
 		$"PlaceableItems/MiscGroup/BooBlock".preview = invis_boo
+		Singleton.ModeSwitcher.offset.y = 100000 if !$"UI".visible else 0
 	
 	if get_viewport().get_mouse_position().y > 70: # Mouse is below the toolbar
 		var mouse_pos := get_global_mouse_position()
