@@ -4,6 +4,7 @@ signal menu_opened
 signal menu_closed
 
 const TYPE_SPEED: float = 0.023
+const FADE_TIME: float = 0.25
 
 var open := false
 var normal_pos: Vector2
@@ -23,9 +24,21 @@ onready var page_change = $PageChange
 onready var typing = $Typing
 
 onready var tween = $Tween
+onready var fade_tween = $FadeTween
 
 var dialogue: PoolStringArray 
 var last_tag: String
+
+var player_expressions: Dictionary = {
+	":Char:": "talking",
+	":CharHappy:": "happy",
+	":CharShocked:": "shocked",
+	":CharAgree:": "nodding",
+	":CharDisagree:": "disagree",
+	":CharThink:": "thinking",
+	":CharAngry:": "angry",
+}
+var player_speaking: bool
 
 func _ready():
 	normal_pos = rect_position
@@ -54,13 +67,37 @@ func open(_dialogue : PoolStringArray, dialogue_node : Node2D, character_node : 
 	emit_signal("menu_opened")
 	interact()
 
+
+func player_speak(expression: String):
+	player_speaking = true
+
+	var last_focus: Node = character.camera.focus_on
+	character.camera.focus_on = character.dialogue_focus
+	character.anim_player.play(expression)
+	
+	character.auto_flip = false
+	character.sprite.flip_h = (character.facing_direction < 0)
+	
+	yield(character.anim_player, "animation_finished")
+	
+	character.camera.focus_on = last_focus
+	player_speaking = false
+
+
 func interact():
 	if is_instance_valid(character):
 		character.inputs[Character.input_names.interact][1] = false
+	if player_speaking: return
 	
 	var dialogue_page: int = dialogue_obj.page_cache
 	
 	if label.percent_visible == 1:
+		for key in player_expressions.keys():
+			if last_tag.begins_with(key):
+				last_tag = last_tag.trim_prefix(key)
+				player_speak(player_expressions[key])
+				yield(character.anim_player, "animation_finished")
+		
 		dialogue_page += 1
 		dialogue_obj.page_cache += 1
 		tween.stop_all()
@@ -132,7 +169,7 @@ func close():
 
 
 func _physics_process(delta):
-	if !open:
+	if !open or player_speaking:
 		rect_position = lerp(rect_position, Vector2(normal_pos.x * 1.25, normal_pos.y * 1.2), delta * transition_speed)
 		rect_scale = lerp(rect_scale, Vector2(0.8, 0.8), delta * transition_speed)
 		modulate = lerp(modulate, Color(1, 1, 1, 0), delta * transition_speed)

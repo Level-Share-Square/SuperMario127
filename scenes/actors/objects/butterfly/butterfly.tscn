@@ -92,3 +92,8 @@ script = ExtResource( 2 )
 frames = SubResource( 13 )
 animation = "butterfly6"
 playing = true
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -32, -32, 64, 64 )
+process_parent = true
+physics_process_parent = true

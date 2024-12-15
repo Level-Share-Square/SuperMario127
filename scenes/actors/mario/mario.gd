@@ -71,6 +71,7 @@ onready var rainbow_particles : Particles2D = $RainbowSparkles
 onready var metal_particles : Particles2D = $MetalSparkles
 onready var vanish_particles : Particles2D = $VanishSparkles
 onready var bottom_pos : Node2D = $BottomPos
+onready var dialogue_focus : Node2D = $DialogueFocus
 onready var ring_particles : AnimatedSprite = $RingParticles
 onready var ring_particles_back : AnimatedSprite = $RingParticlesBack
 onready var collected_shine : AnimatedSprite = $CollectedShine # used for the shine dance animation, can be edited to reflect different shine colours or sprites or something
@@ -156,6 +157,7 @@ var state : Node = null
 var last_state : Node = null
 var switching_state := false
 export var controllable := true
+export var auto_flip := true
 export var invulnerable := false
 export var invulnerable_frames := 0
 export var movable := true
@@ -304,6 +306,13 @@ const ANIM_IDS : Dictionary = {
 	"tripleJumpRight" : 44,
 	"wallSlideLeft" : 45,
 	"wallSlideRight" : 46,
+	"talking" : 47,
+	"happy" : 48,
+	"shocked" : 49,
+	"nodding" : 50,
+	"disagree": 51,
+	"thinking": 52,
+	"angry": 53,
 }
 
 func _ready():
@@ -375,11 +384,13 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		0: # Mario
 			sound_player = $Sounds
 			$Sounds2.queue_free()
+			remove_child($Sounds2)
 			sprite.frames = mario_alt_frames if use_alt_character else mario_frames
 			real_friction = friction
 		1: # Luigi
 			sound_player = $Sounds2
 			$Sounds.queue_free()
+			remove_child($Sounds)
 			sprite.frames = luigi_alt_frames if use_alt_character else luigi_frames
 			move_speed = luigi_speed
 			acceleration = luigi_accel
@@ -389,7 +400,8 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		_:
 			printerr("Illegal character loaded: " + str(character) + " REEEEEE")
 	
-	add_child(sound_player) #Will throw an error if the level you're in is reset. Not that big of a deal.
+	sound_player.set_deferred("name", "Sounds")
+	call_deferred("add_child", sound_player) #Will throw an error if the level you're in is reset. Not that big of a deal.
 	# Death sprites are shared
 	death_sprite.frames = sprite.frames
 
@@ -878,15 +890,17 @@ func _physics_process(delta: float) -> void:
 		
 		if state.use_dive_collision != using_dive_collision:
 			call_deferred("set_dive_collision", state.use_dive_collision)
-		if state.auto_flip == true:
-			sprite.flip_h = false if facing_direction == 1 else true
-		else:
-			sprite.flip_h = false
-			pass
+		
+		if auto_flip:
+			if state.auto_flip == true:
+				sprite.flip_h = false if facing_direction == 1 else true
+			else:
+				sprite.flip_h = false
 	else:
 		attacking = false
 		big_attack = false
-		sprite.flip_h = false
+		if auto_flip:
+			sprite.flip_h = false
 	
 	# Set up snap
 	if is_instance_valid(state) and state.disable_snap:

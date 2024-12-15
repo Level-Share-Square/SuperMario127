@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/enemy/states/patrol_state.gd" type="Script" id=2]
@@ -19,6 +19,13 @@
 [ext_resource path="res://scenes/actors/objects/dry_bones/dry_bones_enemy.gd" type="Script" id=17]
 [ext_resource path="res://scenes/actors/objects/dry_bones/states/stunned_state.gd" type="Script" id=18]
 [ext_resource path="res://scenes/actors/objects/enemy/states/idle_state.gd" type="Script" id=19]
+[ext_resource path="res://scenes/actors/objects/dry_bones/animations/speak.png" type="Texture" id=20]
+[ext_resource path="res://scenes/actors/objects/dry_bones/sounds/SeEmKaronHeadConnect.wav" type="AudioStream" id=21]
+[ext_resource path="res://scenes/actors/objects/dry_bones/sounds/3W_SeEmFishBoneBreak.wav" type="AudioStream" id=22]
+[ext_resource path="res://scenes/actors/objects/dry_bones/sounds/3W_SeEmKaronRecover.wav" type="AudioStream" id=23]
+[ext_resource path="res://scenes/actors/objects/dry_bones/sounds/SeEmKaronpatawait.wav" type="AudioStream" id=24]
+[ext_resource path="res://scenes/actors/objects/dry_bones/sounds/SeEmHammerBrosThrow.wav" type="AudioStream" id=25]
+[ext_resource path="res://scenes/actors/objects/dry_bones/sounds/3W_SeEmKaronRecoverSignLv.wav" type="AudioStream" id=26]
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 6 )
@@ -55,6 +62,14 @@ region = Rect2( 120, 0, 30, 40 )
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 20 )
+region = Rect2( 0, 0, 30, 40 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 20 )
+region = Rect2( 30, 0, 30, 40 )
 
 [sub_resource type="AtlasTexture" id=34]
 atlas = ExtResource( 6 )
@@ -138,6 +153,11 @@ animations = [ {
 "frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ), SubResource( 13 ) ],
 "loop": true,
 "name": "idle",
+"speed": 9.0
+}, {
+"frames": [ SubResource( 36 ), SubResource( 37 ) ],
+"loop": true,
+"name": "speak",
 "speed": 9.0
 }, {
 "frames": [ SubResource( 34 ) ],
@@ -233,7 +253,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id=29]
 resource_name = "crumble"
-length = 15.0
+length = 15.7
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:playing")
@@ -290,10 +310,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 13, 13.2, 14.7 ),
-"transitions": PoolRealArray( 1, 1, 0, 1 ),
+"times": PoolRealArray( 0, 0.3, 13, 13.2, 14.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 0, 1 ),
 "update": 0,
-"values": [ 0.0, 0.0, 0.5, 0.0 ]
+"values": [ 2.5, 0.0, 0.0, 0.5, 0.0 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("AnimatedSprite:self_modulate")
@@ -320,6 +340,81 @@ tracks/6/keys = {
 "args": [  ],
 "method": "set_default_state"
 } ]
+}
+tracks/7/type = "audio"
+tracks/7/path = NodePath("Sounds/Sound1")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 21 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "audio"
+tracks/8/path = NodePath("Sounds/Sound2")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 22 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 23 )
+} ],
+"times": PoolRealArray( 0.05, 14.7 )
+}
+tracks/9/type = "audio"
+tracks/9/path = NodePath("Sounds/Sound3")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"clips": [ {
+"end_offset": 8.30255,
+"start_offset": 0.0,
+"stream": ExtResource( 26 )
+} ],
+"times": PoolRealArray( 13 )
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Sounds/Sound3:volume_db")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 13 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=38]
+resource_name = "die"
+tracks/0/type = "audio"
+tracks/0/path = NodePath("Sounds/Sound2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 22 )
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=35]
@@ -373,6 +468,32 @@ tracks/3/keys = {
 "args": [  ],
 "method": "set_default_state"
 } ]
+}
+tracks/4/type = "audio"
+tracks/4/path = NodePath("Sounds/Sound3")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 24 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sounds/Sound3:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 5.0 ]
 }
 
 [sub_resource type="Animation" id=30]
@@ -442,6 +563,32 @@ tracks/4/keys = {
 "method": "toss_bone"
 } ]
 }
+tracks/5/type = "audio"
+tracks/5/path = NodePath("Sounds/Sound3")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 25 )
+} ],
+"times": PoolRealArray( 0.4 )
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sounds/Sound3:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -8.0 ]
+}
 
 [sub_resource type="Gradient" id=31]
 offsets = PoolRealArray( 0, 0.75, 1 )
@@ -467,6 +614,7 @@ script = ExtResource( 17 )
 cur_state = "PatrolState"
 float_in_liquids = true
 is_stationary = false
+toss_time = 5.0
 
 [node name="IdleState" type="Node2D" parent="States" index="0"]
 script = ExtResource( 19 )
@@ -483,7 +631,7 @@ collision_mask = 21
 
 [node name="Wall" type="RayCast2D" parent="States/PatrolState" index="1"]
 position = Vector2( 0, -16 )
-cast_to = Vector2( -9, 0 )
+cast_to = Vector2( -12, 0 )
 collision_mask = 21
 
 [node name="CrumbleState" type="Node2D" parent="States" index="2"]
@@ -513,6 +661,9 @@ animation = "idle"
 playing = true
 script = ExtResource( 9 )
 
+[node name="DialogueDetector" parent="AnimatedSprite" index="0"]
+enabled = true
+
 [node name="VisibilityEnabler2D" parent="." index="5"]
 pause_particles = false
 
@@ -520,6 +671,7 @@ pause_particles = false
 unique_name_in_owner = true
 anims/RESET = SubResource( 28 )
 anims/crumble = SubResource( 29 )
+anims/die = SubResource( 38 )
 anims/stunned = SubResource( 35 )
 anims/toss = SubResource( 30 )
 
@@ -573,5 +725,18 @@ local_coords = false
 process_material = SubResource( 33 )
 texture = ExtResource( 14 )
 
+[node name="Sound1" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
+stream = ExtResource( 21 )
+bus = "Sounds"
+
+[node name="Sound2" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+stream = ExtResource( 23 )
+bus = "Sounds"
+
+[node name="Sound3" type="AudioStreamPlayer2D" parent="Sounds" index="2"]
+stream = ExtResource( 26 )
+bus = "Sounds"
+
 [connection signal="state_changed" from="." to="Timer" method="state_changed"]
+[connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]
 [connection signal="timeout" from="Timer" to="." method="set_state_by_name" binds= [ "TossState" ]]

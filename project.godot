@@ -254,6 +254,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/objects/enemy/enemy_state.gd"
 }, {
+"base": "EnemyState",
+"class": "EnemyStopState",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/enemy/states/stop_state.gd"
+}, {
 "base": "Reference",
 "class": "EqualsCondition",
 "language": "GDScript",
@@ -824,6 +829,7 @@ _global_script_class_icons={
 "EnemyDamage": "",
 "EnemySpawnerBase": "",
 "EnemyState": "",
+"EnemyStopState": "",
 "EqualsCondition": "",
 "ExitScopeInstruction": "",
 "FallState": "",

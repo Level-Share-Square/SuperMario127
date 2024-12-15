@@ -664,6 +664,11 @@ region = Rect2( 0, 480, 48, 48 )
 
 [resource]
 animations = [ {
+"frames": [  ],
+"loop": false,
+"name": "angry",
+"speed": 12.0
+}, {
 "frames": [ SubResource( 107 ) ],
 "loop": false,
 "name": "armsOut",
@@ -688,6 +693,11 @@ animations = [ {
 "loop": false,
 "name": "deathFall",
 "speed": 0.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "disagree",
+"speed": 12.0
 }, {
 "frames": [ SubResource( 6 ) ],
 "loop": false,
@@ -779,6 +789,11 @@ animations = [ {
 "name": "groundPoundRight",
 "speed": 0.0
 }, {
+"frames": [  ],
+"loop": true,
+"name": "happy",
+"speed": 12.0
+}, {
 "frames": [ SubResource( 152 ) ],
 "loop": false,
 "name": "idleLeft",
@@ -824,6 +839,11 @@ animations = [ {
 "name": "movingRight",
 "speed": 18.0
 }, {
+"frames": [  ],
+"loop": false,
+"name": "nodding",
+"speed": 12.0
+}, {
 "frames": [ SubResource( 159 ), SubResource( 160 ), SubResource( 161 ) ],
 "loop": false,
 "name": "pipeExitLeft",
@@ -854,6 +874,11 @@ animations = [ {
 "name": "shineFall",
 "speed": 0.0
 }, {
+"frames": [  ],
+"loop": true,
+"name": "shocked",
+"speed": 15.0
+}, {
 "frames": [ SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ) ],
 "loop": true,
 "name": "spinning",
@@ -873,6 +898,16 @@ animations = [ {
 "loop": true,
 "name": "swimming",
 "speed": 12.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "talking",
+"speed": 9.0
+}, {
+"frames": [  ],
+"loop": false,
+"name": "thinking",
+"speed": 9.0
 }, {
 "frames": [ SubResource( 96 ) ],
 "loop": true,

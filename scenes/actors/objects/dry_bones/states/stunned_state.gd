@@ -1,4 +1,4 @@
-extends EnemyState
+extends EnemyStopState
 
 
 onready var animation_player = $"%AnimationPlayer"

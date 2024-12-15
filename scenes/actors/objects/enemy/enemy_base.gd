@@ -26,6 +26,8 @@ var gravity: float
 var enabled: bool
 # for wind
 var snap_enabled: bool = true
+# whether to emit particles on startup
+var spawn_effect: bool = true
 
 # water and lava
 onready var liquids_detector: Area2D = $LiquidsDetector
@@ -33,6 +35,11 @@ onready var liquids_detector: Area2D = $LiquidsDetector
 onready var state_container: Node = $States 
 # self explanatory
 onready var sprite: AnimatedSprite = $AnimatedSprite
+# checks for nearby dialogue triggers when disabled
+onready var dialogue_detector: Area2D = $AnimatedSprite/DialogueDetector
+# emits when spawned
+onready var spawn_particles: Particles2D = $SpawnParticles
+
 # what the enemys currently doing
 var state: EnemyState
 # inflicting and receiving damage
@@ -58,8 +65,12 @@ func set_state_node(new_state: EnemyState) -> void:
 		new_state._start()
 
 
-func initialize():
+func _ready():
+	if spawn_effect:
+		spawn_particles.emitting = true
+	
 	if enabled:
+		dialogue_detector.initialize()
 		set_state_by_name(cur_state)
 		if float_in_liquids:
 			liquids_detector.monitoring = true
@@ -71,6 +82,7 @@ func _physics_process(delta):
 	sprite.flip_h = (facing_direction > 0)
 	
 	var working_snap_vector: Vector2 = SNAP_VECTOR if snap_enabled else Vector2.ZERO
+	
 	var gravity_multiplier: float = 1
 	if is_instance_valid(state):
 		state._update(delta)
@@ -96,4 +108,6 @@ func _physics_process(delta):
 		else:
 			working_velocity.x *= abs(floor_normal.y)
 	
-	velocity.y = move_and_slide_with_snap(working_velocity, working_snap_vector, UP_DIR, false, 4, FLOOR_MAX_ANGLE).y
+	velocity.y = move_and_slide_with_snap(working_velocity, 
+		working_snap_vector if velocity.y >= 0 else Vector2.ZERO, 
+		UP_DIR, false, 4, FLOOR_MAX_ANGLE).y
