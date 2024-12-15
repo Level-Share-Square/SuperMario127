@@ -5,6 +5,7 @@ onready var detector = $StompDetector
 onready var collision_shape = $StompDetector/CollisionShape2D
 onready var sprite = $Sprite
 onready var sound = $AudioStreamPlayer
+onready var collect_sound = $CollectSound
 
 var buffer := -5
 var character = null
@@ -57,21 +58,30 @@ func enter_detector(body):
 			body.position.y -= 4
 			if body.state != null and body.state.name != "DiveState":
 				body.set_state_by_name("BounceState", 0)
-		body.add_nozzle("RocketNozzle")
+			
+			#add the nozzle to the player (speedrun strats or smth idk)
+			body.add_nozzle("RocketNozzle")
+			
+			#create nozzle after bouncing
+			var object = LevelObject.new()
+			object.type_id = 20
+			object.properties = []
+			object.properties.append(position + Vector2(0, 4))
+			object.properties.append(Vector2(1, 1))
+			object.properties.append(0)
+			object.properties.append(true)
+			object.properties.append(true)
+			object.properties.append(Vector2(0, -250))
+			object.properties.append("RocketNozzle")
+			get_parent().create_object(object, false)
+		
+		else:
+			collect_sound.play()
+			body.fuel = 100
+			body.add_nozzle("RocketNozzle")
+			body.set_nozzle("RocketNozzle")
 		sprite.visible = false
 		sound.play()
-		
-		var object = LevelObject.new()
-		object.type_id = 20
-		object.properties = []
-		object.properties.append(position + Vector2(0, 4))
-		object.properties.append(Vector2(1, 1))
-		object.properties.append(0)
-		object.properties.append(true)
-		object.properties.append(true)
-		object.properties.append(Vector2(0, -50))
-		object.properties.append("RocketNozzle")
-		get_parent().create_object(object, false)
 		
 		# activates all deactivated rocket turbo loaded in the level
 		Singleton.CurrentLevelData.level_data.vars.activate_fludd(2)

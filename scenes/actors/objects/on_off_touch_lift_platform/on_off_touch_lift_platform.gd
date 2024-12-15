@@ -97,8 +97,7 @@ func toggle_state():
 func switch_state(new_state):
 		if(parent.disappears):
 			set_collision_layer_bit(4, new_state)
-			area_2d.monitorable = new_state if !parent.inverted else !new_state
-			area_2d.monitoring = new_state if !parent.inverted else !new_state
+			platform_area_collision_shape.disabled = !new_state
 			animation_player.play(str(new_state).to_lower())
 			sprite.visible = new_state
 			sprite2.visible = !new_state
