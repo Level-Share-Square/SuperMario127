@@ -93,7 +93,7 @@ func interact():
 	
 	if label.percent_visible == 1:
 		for key in player_expressions.keys():
-			if last_tag.begins_with(key):
+			if last_tag.begins_with(key) and character.is_grounded() and not is_instance_valid(character.state):
 				last_tag = last_tag.trim_prefix(key)
 				player_speak(player_expressions[key])
 				yield(character.anim_player, "animation_finished")
