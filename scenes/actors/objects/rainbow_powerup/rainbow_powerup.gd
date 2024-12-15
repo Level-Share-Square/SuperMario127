@@ -50,7 +50,8 @@ func _process(delta):
 			respawn_timer = 0
 			collected = false
 			animation_player.play("respawn")
-
+	
+	
 	hue += 0.015
 	gradient.offsets = PoolRealArray([0.15, 1])
 	gradient.colors = PoolColorArray([Color.from_hsv(hue, 1, 1), Color(1, 1, 1)])

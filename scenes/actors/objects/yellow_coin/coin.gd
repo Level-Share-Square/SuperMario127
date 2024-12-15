@@ -167,7 +167,9 @@ func calc_physics(interp : bool, delta) -> Vector2:
 	new_velocity.x -= sign(new_velocity.x)*frictin_coeff * interp_scale
 	
 	#gravity calculations
-	new_velocity.y += gravity * gravity_scale * 2 * interp_scale
+	
+	if velocity.y < 600:
+		new_velocity.y += gravity * gravity_scale * 2 * interp_scale
 	
 	#if on the floor, set the Y velocity to zero so it doesn't stack
 	if kinematic_body.is_on_floor():
