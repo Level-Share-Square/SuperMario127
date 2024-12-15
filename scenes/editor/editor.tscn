@@ -1,4 +1,4 @@
-[gd_scene load_steps=1536 format=2]
+[gd_scene load_steps=1537 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1438,6 +1438,7 @@
 [ext_resource path="res://scenes/actors/objects/wind_area/windreal.png" type="Texture" id=1436]
 [ext_resource path="res://scenes/actors/objects/wind_area/wind_icon.png" type="Texture" id=1437]
 [ext_resource path="res://scenes/actors/objects/rex/icon.png" type="Texture" id=1438]
+[ext_resource path="res://scenes/actors/objects/sandtide/icon.png" type="Texture" id=1439]
 [ext_resource path="res://scenes/actors/objects/skeleton_goonie/preview.png" type="Texture" id=1440]
 [ext_resource path="res://scenes/actors/objects/nipper_plant/preview.png" type="Texture" id=1441]
 [ext_resource path="res://scenes/actors/objects/nipper_plant/icon.png" type="Texture" id=1442]
@@ -3635,6 +3636,16 @@ items_in_sequence = 3
 index_in_sequence = 2
 icon = ExtResource( 324 )
 preview = ExtResource( 324 )
+
+[node name="SandTide" type="Node" parent="PlaceableItems/SandGroup"]
+script = ExtResource( 24 )
+object_id = 140
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 16, -16 )
+index_in_sequence = 1
+icon = ExtResource( 1439 )
+preview = ExtResource( 1439 )
 
 [node name="SnowGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
