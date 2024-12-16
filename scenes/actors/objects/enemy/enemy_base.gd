@@ -110,4 +110,4 @@ func _physics_process(delta):
 	
 	velocity.y = move_and_slide_with_snap(working_velocity, 
 		working_snap_vector if velocity.y >= 0 else Vector2.ZERO, 
-		UP_DIR, false, 4, FLOOR_MAX_ANGLE).y
+		UP_DIR, true, 4, FLOOR_MAX_ANGLE).y
