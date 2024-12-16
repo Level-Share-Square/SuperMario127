@@ -83,6 +83,9 @@ func attack_body_entered(body) -> void:
 	if not enemy.enabled: return
 	
 	if not is_instance_valid(enemy.state) or enemy.state.can_be_hurt:
+		if body is Character and body.attacking:
+			spin_attacked()
+		
 		if body is Character and body.invincible:
 			magicked()
 		
@@ -92,7 +95,7 @@ func attack_body_entered(body) -> void:
 	if not is_instance_valid(enemy.state) or enemy.state.can_attack:
 		if body is Character:
 			# lets not hurt the player if theyre stomping,,
-			if body.velocity.y > 0: return
+			if body.velocity.y > 0 or body.attacking: return
 			damage_player(body)
 
 
