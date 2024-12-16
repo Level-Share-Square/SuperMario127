@@ -36,7 +36,7 @@ func can_collide_with(character):
 			#self.apply_velocity = false
 			pass
 		return false
-
+	
 	if "apply_velocity" in self and correct_side:
 		self.apply_velocity = true
 	return correct_side
