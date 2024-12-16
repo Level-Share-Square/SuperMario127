@@ -237,7 +237,7 @@ func _physics_process(delta):
 			queue_free()
 			return
 	
-	velocity = body.move_and_slide(velocity, Vector2.UP)
+	velocity = body.move_and_slide(velocity, Vector2.UP, true)
 	$VisibilityEnabler2D.global_position = body.global_position
 
 
