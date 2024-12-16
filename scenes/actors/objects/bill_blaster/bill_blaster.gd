@@ -28,9 +28,9 @@ func _set_property_values():
 	set_property("force_direction", force_direction, true)
 	set_property_menu("force_direction", ["option", 3, -1, ['Face Player', 'Right', 'Left']])
 	set_property("offset", offset, true)
-	spawn_timer = wait_time+offset
 
 func _ready():
+	spawn_timer = wait_time+offset
 	sprite.frame = 3
 	collision_shape.disabled = !enabled
 

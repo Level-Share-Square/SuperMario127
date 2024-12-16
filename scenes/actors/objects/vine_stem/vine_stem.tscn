@@ -9,7 +9,7 @@
 [ext_resource path="res://scenes/actors/objects/vine_stem/palletes/vine_stem1.png" type="Texture" id=7]
 
 [node name="vine" type="Node2D"]
-z_index = -1
+z_index = -2
 script = ExtResource( 1 )
 palette_textures = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ]
 

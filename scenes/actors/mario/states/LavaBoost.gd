@@ -38,6 +38,8 @@ func _start(_delta):
 			new_gradient.colors = PoolColorArray([area_object.color, Color8((area_object.color.r*255)-87, (area_object.color.g*255)-87, (area_object.color.b*255)-87), Color(0.082353, 0.082353, 0.082353), Color(0, 0, 0, 0)])
 			new_gradient.offsets = PoolRealArray([0, 0.189, 0.692, 0.983])
 			character.burn_particles.process_material.color_ramp.gradient = new_gradient
+		else:
+			character.burn_particles.process_material.color_ramp.gradient = base_burn_particle_gradient
 			
 		#velocity application
 		if area_object != CircleArea:
