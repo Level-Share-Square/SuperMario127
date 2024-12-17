@@ -1,4 +1,4 @@
-[gd_scene load_steps=1538 format=2]
+[gd_scene load_steps=1539 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1503,6 +1503,7 @@
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=1501]
 [ext_resource path="res://scenes/actors/objects/princess_peach/icon.png" type="Texture" id=1502]
 [ext_resource path="res://scenes/actors/objects/yoshi/icon.png" type="Texture" id=1503]
+[ext_resource path="res://scenes/actors/objects/red_bob_omb/preview.png" type="Texture" id=1504]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2639,8 +2640,8 @@ object_size = Vector2( 24, 24 )
 change_to = "Toad"
 items_in_sequence = 4
 index_in_sequence = 3
-icon = ExtResource( 1502 )
-preview = ExtResource( 1502 )
+icon = ExtResource( 1504 )
+preview = ExtResource( 1504 )
 
 [node name="SwitchesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
