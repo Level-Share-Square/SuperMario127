@@ -90,12 +90,12 @@ func _process(delta):
 		for action in x_actions:
 			commit_action(action[input_dir.x + 1], true)
 			commit_action(action[last_input_dir.x + 1], false)
-		print("x input change: ", input_dir.x)
+		#print("x input change: ", input_dir.x)
 	
 	if input_dir.y != last_input_dir.y:
 		for action in y_actions:
 			commit_action(action[input_dir.y + 1], true)
 			commit_action(action[last_input_dir.y + 1], false)
-		print("y input change: ", input_dir.y)
+		#print("y input change: ", input_dir.y)
 	
 	last_input_dir = input_dir

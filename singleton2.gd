@@ -61,7 +61,7 @@ func _init():
 	file.open("user://mods/active.127mod", file.READ)
 	mod_path = file.get_line()
 	var success = ProjectSettings.load_resource_pack(mod_path)
-	print(success)
+	#print(success)
 	mod_active = success
 
 func _ready():

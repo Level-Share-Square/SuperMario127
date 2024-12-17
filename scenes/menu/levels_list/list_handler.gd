@@ -56,7 +56,6 @@ func clear_grid():
 func change_focus(focus_node = null):
 	if !is_instance_valid(focus_node): 
 		focus_node = level_grid.get_child(0)
-		print(focus_node)
 	focus.default_focus = focus_node
 	focus.call_deferred("focus_node")
 

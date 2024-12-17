@@ -10,5 +10,4 @@ func _input(_event):
 
 
 func nozzle_changed(new_nozzle: String):
-	print(new_nozzle)
 	get_parent().visible = (new_nozzle != "null")
