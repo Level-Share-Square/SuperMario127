@@ -63,9 +63,6 @@ region_rect = Rect2( 0, 0, 23, 13 )
 patch_margin_left = 8
 patch_margin_right = 9
 axis_stretch_horizontal = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Sprite2" type="NinePatchRect" parent="."]
 visible = false

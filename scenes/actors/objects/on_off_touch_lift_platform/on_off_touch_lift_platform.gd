@@ -14,7 +14,8 @@ onready var left_width = sprite.patch_margin_left
 onready var right_width = sprite.patch_margin_right
 onready var part_width = 6
 
-onready var inverted :bool= get_parent().inverted
+onready var inverted: bool = get_parent().inverted
+onready var enabled: bool = get_parent().enabled
 
 onready var parent = get_parent()
 
@@ -96,8 +97,8 @@ func toggle_state():
 
 func switch_state(new_state):
 		if(parent.disappears):
-			set_collision_layer_bit(4, new_state)
-			platform_area_collision_shape.disabled = !new_state
+			collision_shape.set_deferred("disabled", not enabled or not new_state)
+			platform_area_collision_shape.set_deferred("disabled", not enabled or not new_state)
 			animation_player.play(str(new_state).to_lower())
 			sprite.visible = new_state
 			sprite2.visible = !new_state
