@@ -1539,7 +1539,7 @@ playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
-frames = ExtResource( 44 )
+frames = ExtResource( 23 )
 animation = "idleRight"
 script = ExtResource( 63 )
 

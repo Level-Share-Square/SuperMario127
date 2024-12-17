@@ -92,7 +92,10 @@ func change_areas(entering_character : Character, entering, force_fadeout):
 	if area_id >= Singleton.CurrentLevelData.level_data.areas.size():
 		area_id = Singleton.CurrentLevelData.area
 	if entering:
-		timer_manager.remove_timer("area_timer")
+		if is_instance_valid(timer_manager):
+			timer_manager.remove_timer("area_timer")
+		else:
+			printerr("Couldn't find timer manager node!")
 		
 		# band aid crash fix
 		while Singleton.CurrentLevelData.level_data.vars.liquid_positions.size() <= Singleton.CurrentLevelData.area:
