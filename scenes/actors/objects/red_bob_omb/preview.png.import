@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/peach_body.png-dc8b8630fcf66e72139081d3e59f4a72.stex"
+path="res://.import/preview.png-a2ba800864b9a377b8a91bd137732051.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/red_bob_omb/peach_body.png"
-dest_files=[ "res://.import/peach_body.png-dc8b8630fcf66e72139081d3e59f4a72.stex" ]
+source_file="res://scenes/actors/objects/red_bob_omb/preview.png"
+dest_files=[ "res://.import/preview.png-a2ba800864b9a377b8a91bd137732051.stex" ]
 
 [params]
 

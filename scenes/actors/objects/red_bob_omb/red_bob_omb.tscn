@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://scenes/actors/objects/npc_base/npc_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/red_bob_omb/feet_front.png" type="Texture" id=2]
@@ -11,9 +11,10 @@
 [ext_resource path="res://scenes/actors/objects/red_bob_omb/feet_back.png" type="Texture" id=9]
 [ext_resource path="res://scenes/actors/objects/red_bob_omb/shine.png" type="Texture" id=10]
 [ext_resource path="res://scenes/actors/objects/red_bob_omb/shadow.png" type="Texture" id=11]
+[ext_resource path="res://scenes/editor/editor_hitbox.gd" type="Script" id=12]
 
-[sub_resource type="RectangleShape2D" id=105]
-extents = Vector2( 6, 8 )
+[sub_resource type="RectangleShape2D" id=136]
+extents = Vector2( 6, 7 )
 
 [sub_resource type="AtlasTexture" id=77]
 atlas = ExtResource( 3 )
@@ -182,6 +183,27 @@ animations = [ {
 "speed": 6.0
 } ]
 
+[sub_resource type="Shader" id=134]
+code = "shader_type canvas_item;
+
+uniform sampler2D shine_texture;
+uniform sampler2D shadow_texture;
+
+//void fragment() {
+//	vec4 base = texture(TEXTURE, UV);
+//	vec4 shine = texture(shine_texture, UV);
+//	vec4 shadow = texture(shadow_texture, UV);
+//
+//	vec4 combined = vec4(base.rgb * (1.0-shadow.rgb) + shine.rgb, base.a);
+//
+//	COLOR = combined;
+//}"
+
+[sub_resource type="ShaderMaterial" id=135]
+shader = SubResource( 134 )
+shader_param/shine_texture = ExtResource( 10 )
+shader_param/shadow_texture = ExtResource( 11 )
+
 [sub_resource type="SpriteFrames" id=76]
 animations = [ {
 "frames": [ ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ) ],
@@ -345,13 +367,19 @@ animations = [ {
 [node name="RedBobOmb" instance=ExtResource( 1 )]
 script = ExtResource( 8 )
 
+[node name="DialogueDetector" parent="." index="0"]
+visible = false
+
 [node name="KinematicBody2D" parent="." index="1"]
 collision_layer = 16384
 
 [node name="CollisionShape2D" parent="KinematicBody2D" index="0"]
 visible = false
 position = Vector2( -1, 1 )
-shape = SubResource( 105 )
+shape = SubResource( 136 )
+
+[node name="VisibilityNotifier2D" parent="KinematicBody2D" index="1"]
+visible = false
 
 [node name="AnimationHandler" parent="KinematicBody2D" index="2"]
 head_positions = {
@@ -368,6 +396,7 @@ playing = true
 
 [node name="HeadColor" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler/Head" index="0"]
 modulate = Color( 1, 0, 0.392157, 1 )
+material = SubResource( 135 )
 frames = SubResource( 76 )
 animation = "talking"
 playing = true
@@ -402,3 +431,13 @@ script = ExtResource( 4 )
 frames = SubResource( 25 )
 animation = "standing"
 script = ExtResource( 4 )
+
+[node name="Path2D" parent="." index="2"]
+visible = false
+
+[node name="EditorHitbox" type="Area2D" parent="." index="3"]
+visible = false
+script = ExtResource( 12 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EditorHitbox" index="0"]
+polygon = PoolVector2Array( 10, 8, 10, -10, -11, -10, -11, 8 )
