@@ -124,7 +124,7 @@ func _general_update(delta):
 		stamina_value = charge * 1.333333 # bring it into a 0-1 range
 	
 	if !activated:
-		display_stamina = false
+		display_stamina = character.stamina < 98
 		
 		if last_charged:
 			character.fludd_charge_sound.stop()
