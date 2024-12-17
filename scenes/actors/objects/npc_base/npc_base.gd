@@ -89,6 +89,7 @@ func set_dialogue(dialogue_trigger: Node):
 func _ready():
 	stop_talking()
 	animation_handler.is_preview = is_preview
+	animation_handler.flip_h = false if scale.x >= 0 else true
 	
 	path.global_position = global_position
 	if(invalid_curve(curve)):
@@ -188,7 +189,7 @@ func _physics_process(delta):
 		if walk_speed != 0:
 			if velocity.x != 0:
 				animation_handler.play_action("running")
-				animation_handler.scale.x = sign(-velocity.x)
+				animation_handler.scale.x = sign(-velocity.x) * (1 if !animation_handler.flip_h else -1)
 			else:
 				animation_handler.play_action("standing")
 				

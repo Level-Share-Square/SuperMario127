@@ -2604,7 +2604,7 @@ object_id = 127
 is_object = true
 item_name = "Toad"
 change_to = "Yoshi"
-items_in_sequence = 3
+items_in_sequence = 4
 icon = ExtResource( 1431 )
 preview = ExtResource( 1430 )
 
@@ -2614,7 +2614,7 @@ object_id = 138
 is_object = true
 item_name = "Yoshi"
 change_to = "PrincessPeach"
-items_in_sequence = 3
+items_in_sequence = 4
 index_in_sequence = 1
 icon = ExtResource( 1503 )
 preview = ExtResource( 1503 )
@@ -2624,9 +2624,21 @@ script = ExtResource( 24 )
 object_id = 137
 is_object = true
 item_name = "Princess Peach"
-change_to = "Toad"
-items_in_sequence = 3
+change_to = "PinkBobOmb"
+items_in_sequence = 4
 index_in_sequence = 2
+icon = ExtResource( 1502 )
+preview = ExtResource( 1502 )
+
+[node name="PinkBobOmb" type="Node" parent="PlaceableItems/DialogueGruop"]
+script = ExtResource( 24 )
+object_id = 139
+is_object = true
+item_name = "Friendly Bob-Omb"
+object_size = Vector2( 24, 24 )
+change_to = "Toad"
+items_in_sequence = 4
+index_in_sequence = 3
 icon = ExtResource( 1502 )
 preview = ExtResource( 1502 )
 

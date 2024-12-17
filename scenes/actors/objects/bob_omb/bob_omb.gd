@@ -94,6 +94,9 @@ func _ready() -> void:
 		scale.x = abs(scale.x)
 		facing_direction = -facing_direction
 	
+	if !enabled:
+		kinematic_body.set_collision_mask_bit(3, false)
+	
 func _process(_delta):
 	fuse.frame = sprite.frame
 	if mode == 1:
@@ -101,13 +104,14 @@ func _process(_delta):
 		sprite.frame = wrapi(OS.get_ticks_msec() / 166, 0, 8)
 		
 func exploded(explosion_pos : Vector2):
-	hit = true
-	snap = Vector2(0, 0)
-	velocity.x = (kinematic_body.global_position - explosion_pos).normalized().x * 275
-	velocity.y = -275
-	position.y -= 4
-	explode_timer = 4
-	character = 0 # hacks are fun
+	if enabled:
+		hit = true
+		snap = Vector2(0, 0)
+		velocity.x = (kinematic_body.global_position - explosion_pos).normalized().x * 275
+		velocity.y = -275
+		position.y -= 4
+		explode_timer = 4
+		character = 0 # hacks are fun
 	
 func steely_hit(hit_pos : Vector2):
 	hit = true
@@ -129,7 +133,7 @@ func shell_hit(shell_pos : Vector2):
 	character = 0 # hacker chungus
 
 func _physics_process(delta):
-	if mode == 1:
+	if mode == 1 or !enabled:
 		return
 	
 	var is_in_platform = false

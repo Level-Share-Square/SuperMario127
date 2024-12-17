@@ -17,6 +17,7 @@ var head_anim: String
 var body_anim: String
 
 var is_preview: bool
+var flip_h: bool = false
 
 
 func _process(delta):
