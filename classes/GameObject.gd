@@ -16,13 +16,23 @@ var preview_position := Vector2(72, 92)
 var palette := 0
 var palettes := 0
 
+var layer := 2
+# translates layer var into a Z index
+var layer_dictionary = {
+	0: -12,
+	1: -11,
+	2: -1,
+	3: 9
+}
+const BG_MODULATE := Color(0.54, 0.54, 0.54)
+
 # true if creating a GameObject for the object settings preview
 var is_preview : bool = false
 
-var base_savable_properties : PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible"]
+var base_savable_properties : PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible", "layer"]
 var savable_properties : PoolStringArray = []
 
-var base_editable_properties : PoolStringArray = ["enabled", "visible", "rotation_degrees", "scale", "position"]
+var base_editable_properties : PoolStringArray = ["enabled", "visible", "rotation_degrees", "scale", "position", "layer"]
 var editable_properties : PoolStringArray = []
 
 var base_connectable_signals : PoolStringArray = ["ready", "process", "physics_process"]
@@ -49,6 +59,7 @@ func _ready():
 		var color = modulate
 		color.a = 0.5
 		modulate = color
+		
 	
 	if get_tree().current_scene.name == "Editor":
 		var polygons: Array = []
@@ -62,6 +73,8 @@ func _ready():
 				hitbox.add_child(polygon)
 			
 			add_child(hitbox)
+	set_property_menu("layer", ["option", 4, 0, ['Very Background', 'Background', 'Ground', 'Foreground']])
+	update_layer()
 
 func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D, array: Array) -> void:
 	if node is Sprite:
@@ -136,6 +149,9 @@ func set_property(key, value, change_level_object = true, alias = null):
 				var color = modulate
 				color.a = 0.5 if value == false else 1.0
 				modulate = color
+		elif key == "layer":
+			update_layer()
+			
 	if mode == 1 and !is_preview:
 		emit_signal("property_changed", key, value)
 
@@ -212,3 +228,18 @@ func on_signal_fire(index):
 		for function_name in functions:
 			var function_struct = level_data.functions[function_name]
 			interpreter_util.run_function(function_struct, self)
+			
+func update_layer():
+	if layer <= 4:
+		z_index = layer_dictionary[layer]
+	else:
+		printerr("Object has assigned layer %s" % layer)
+		
+	if layer == 0 or layer == 1:
+		enabled = false
+		modulate = BG_MODULATE
+	else:
+		modulate = Color(1, 1, 1)
+	if layer == 3:
+		enabled = false
+		

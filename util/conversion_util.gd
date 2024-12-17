@@ -133,6 +133,19 @@ static func convert_049_to_050(result):
 #	for result_area in result.areas:
 #		result_area.timer = 0.00
 	return result
+	
+static func convert_050_to_051(result):
+	result.format_version = "0.5.1"
+	for area_result in result.areas:
+		if typeof(area_result) == TYPE_DICTIONARY:
+			var new_objects = []
+			for object_result in area_result.objects:
+				var object = object_result
+				object.properties.insert(5, 2)
+				new_objects.append(object)
+			area_result.objects = new_objects
+	print(result.areas.size())
+	return result
 
 static func compareVersions(version, other) -> int:
 	var v = version.split(".")

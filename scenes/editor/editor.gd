@@ -357,15 +357,18 @@ func update_selected_object(mouse_pos : Vector2) -> void:
 			if hovered_object != objects[0]:
 				# If something was already hovered, mark it as not
 				if is_instance_valid(hovered_object):
-					hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
+					#hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
+					hovered_object.modulate = hovered_object.modulate * 2
 					hovered_object.hovered = false
 				
 				hovered_object = objects[0]
 				hovered_object.hovered = true
-				hovered_object.modulate = Color(0.65, 0.65, 1, hovered_object.modulate.a)
+				#hovered_object.modulate = Color(0.65, 0.65, 1, hovered_object.modulate.a)
+				hovered_object.modulate = hovered_object.modulate / 2
 				item_preview.visible = false
 		elif is_instance_valid(hovered_object):
-			hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
+			#hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
+			hovered_object.modulate = hovered_object.modulate * 2
 			hovered_object.hovered = false
 			hovered_object = null
 			item_preview.visible = true
@@ -571,6 +574,16 @@ func _process(delta : float) -> void:
 						object.properties.append(0)
 						object.properties.append(true)
 						object.properties.append(true)
+						# place the object on currently selected background layer
+						match(editing_layer):
+							0:
+								object.properties.append(1)
+							1:
+								object.properties.append(2)
+							2:
+								object.properties.append(3)
+							3:
+								object.properties.append(0)
 						var object_copy = object
 						objects_stack.append([shared.create_object(object, true),true,object_copy])
 						# Merciful Lord Jesus, please forgive me for 

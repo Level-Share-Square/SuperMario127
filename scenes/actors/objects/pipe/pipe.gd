@@ -3,6 +3,7 @@ extends TeleportObject
 onready var pipe_enter_logic = $PipeEnterLogic
 onready var sprite = $Sprite
 onready var sprite2 = $Sprite/Sprite2
+onready var collision_shape = $StaticBody2D/CollisionShape2D
 
 export var normal_texture : Texture
 export var recolorable_texture : Texture 
@@ -43,6 +44,9 @@ func _ready():
 		bright_color.s /= 1.5
 		bright_color.v *= 1.15
 		sprite2.self_modulate = bright_color
+		
+	if layer == 0 or layer == 1:
+		collision_shape.disabled = true
 
 
 func connect_local_members():
