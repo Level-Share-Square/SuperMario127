@@ -1,12 +1,16 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://scenes/actors/objects/npc_base/npc_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/actors/objects/red_bob_omb/feet_front.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/red_bob_omb/head.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=4]
 [ext_resource path="res://scenes/actors/objects/red_bob_omb/head_color.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/red_bob_omb/eyes.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://scenes/actors/objects/red_bob_omb/eye_sync_color.gd" type="Script" id=7]
 [ext_resource path="res://scenes/actors/objects/red_bob_omb/red_bob_omb.gd" type="Script" id=8]
+[ext_resource path="res://scenes/actors/objects/red_bob_omb/feet_back.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/red_bob_omb/shine.png" type="Texture" id=10]
+[ext_resource path="res://scenes/actors/objects/red_bob_omb/shadow.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=105]
 extents = Vector2( 6, 8 )
@@ -58,10 +62,6 @@ region = Rect2( 48, 0, 24, 24 )
 [sub_resource type="AtlasTexture" id=88]
 atlas = ExtResource( 3 )
 region = Rect2( 72, 0, 24, 24 )
-
-[sub_resource type="AtlasTexture" id=72]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 24, 24 )
 
 [sub_resource type="AtlasTexture" id=73]
 atlas = ExtResource( 3 )
@@ -141,7 +141,7 @@ region = Rect2( 72, 0, 24, 24 )
 
 [sub_resource type="SpriteFrames" id=30]
 animations = [ {
-"frames": [ SubResource( 77 ), SubResource( 77 ), SubResource( 78 ), SubResource( 78 ), SubResource( 79 ), SubResource( 79 ), SubResource( 80 ), SubResource( 80 ) ],
+"frames": [ SubResource( 77 ), SubResource( 78 ), SubResource( 79 ), SubResource( 80 ) ],
 "loop": true,
 "name": "angry",
 "speed": 6.0
@@ -156,7 +156,7 @@ animations = [ {
 "name": "happy",
 "speed": 6.0
 }, {
-"frames": [ SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ) ],
+"frames": [ SubResource( 85 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ) ],
 "loop": true,
 "name": "neutral",
 "speed": 6.0
@@ -225,12 +225,18 @@ animations = [ {
 "speed": 6.0
 } ]
 
+[sub_resource type="CanvasItemMaterial" id=132]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=133]
+blend_mode = 2
+
 [sub_resource type="SpriteFrames" id=39]
 animations = [ {
-"frames": [ null, null, null, null ],
+"frames": [ null, null, null, null, null, null, null, null ],
 "loop": true,
 "name": "running",
-"speed": 6.0
+"speed": 20.0
 }, {
 "frames": [ null, null, null, null ],
 "loop": true,
@@ -238,27 +244,99 @@ animations = [ {
 "speed": 6.0
 } ]
 
+[sub_resource type="AtlasTexture" id=123]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 72, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=124]
+atlas = ExtResource( 9 )
+region = Rect2( 24, 72, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=125]
+atlas = ExtResource( 9 )
+region = Rect2( 48, 72, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=126]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 96, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=127]
+atlas = ExtResource( 9 )
+region = Rect2( 24, 96, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=128]
+atlas = ExtResource( 9 )
+region = Rect2( 48, 96, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=129]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 120, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=130]
+atlas = ExtResource( 9 )
+region = Rect2( 24, 120, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=131]
+atlas = ExtResource( 2 )
+region = Rect2( 1, 96, 24, 24 )
+
 [sub_resource type="SpriteFrames" id=24]
 animations = [ {
-"frames": [  ],
+"frames": [ SubResource( 123 ), SubResource( 124 ), SubResource( 125 ), SubResource( 126 ), SubResource( 127 ), SubResource( 128 ), SubResource( 129 ), SubResource( 130 ) ],
 "loop": true,
 "name": "running",
 "speed": 6.0
 }, {
-"frames": [  ],
+"frames": [ SubResource( 131 ) ],
 "loop": true,
 "name": "standing",
 "speed": 5.0
 } ]
 
+[sub_resource type="AtlasTexture" id=115]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 72, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=116]
+atlas = ExtResource( 2 )
+region = Rect2( 24, 72, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=117]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 72, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=118]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 96, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=119]
+atlas = ExtResource( 2 )
+region = Rect2( 24, 96, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=120]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 96, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=121]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 120, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=122]
+atlas = ExtResource( 2 )
+region = Rect2( 24, 120, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=106]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 24, 24 )
+
 [sub_resource type="SpriteFrames" id=25]
 animations = [ {
-"frames": [  ],
+"frames": [ SubResource( 115 ), SubResource( 116 ), SubResource( 117 ), SubResource( 118 ), SubResource( 119 ), SubResource( 120 ), SubResource( 121 ), SubResource( 122 ) ],
 "loop": true,
 "name": "running",
-"speed": 6.0
+"speed": 8.0
 }, {
-"frames": [  ],
+"frames": [ SubResource( 106 ) ],
 "loop": true,
 "name": "standing",
 "speed": 5.0
@@ -271,12 +349,13 @@ script = ExtResource( 8 )
 collision_layer = 16384
 
 [node name="CollisionShape2D" parent="KinematicBody2D" index="0"]
+visible = false
 position = Vector2( -1, 1 )
 shape = SubResource( 105 )
 
 [node name="AnimationHandler" parent="KinematicBody2D" index="2"]
 head_positions = {
-"running": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 ),
+"running": PoolVector2Array( 0, -2, -1, -2, 0, -1, 0, -1, 1, -2, 0, -2, 0, -1, 1, -1 ),
 "standing": PoolVector2Array( 0, -1, 0, 0, 0, -1, 0, 0 )
 }
 raging_scale = 0.5
@@ -284,19 +363,27 @@ raging_scale = 0.5
 [node name="Head" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler" index="0"]
 position = Vector2( 0, -1 )
 frames = SubResource( 30 )
-animation = "smiling"
+animation = "talking"
 playing = true
 
 [node name="HeadColor" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler/Head" index="0"]
 modulate = Color( 1, 0, 0.392157, 1 )
 frames = SubResource( 76 )
-animation = "smiling"
+animation = "talking"
 playing = true
 script = ExtResource( 4 )
 
-[node name="Eyes" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler/Head" index="1"]
+[node name="Shine" type="Sprite" parent="KinematicBody2D/AnimationHandler/Head" index="1"]
+material = SubResource( 132 )
+texture = ExtResource( 10 )
+
+[node name="Shadow" type="Sprite" parent="KinematicBody2D/AnimationHandler/Head" index="2"]
+material = SubResource( 133 )
+texture = ExtResource( 11 )
+
+[node name="Eyes" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler/Head" index="3"]
 frames = ExtResource( 6 )
-animation = "smiling"
+animation = "talking"
 playing = true
 script = ExtResource( 7 )
 
@@ -306,12 +393,12 @@ animation = "standing"
 playing = true
 
 [node name="BackFoot" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler/Body" index="0"]
+z_index = -1
 frames = SubResource( 24 )
 animation = "standing"
 script = ExtResource( 4 )
 
 [node name="FrontFoot" type="AnimatedSprite" parent="KinematicBody2D/AnimationHandler/Body" index="1"]
-z_index = 1
 frames = SubResource( 25 )
 animation = "standing"
 script = ExtResource( 4 )

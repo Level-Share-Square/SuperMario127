@@ -120,6 +120,7 @@ process_material = SubResource( 5 )
 texture = ExtResource( 6 )
 
 [node name="DamageArea" type="Area2D" parent="KinematicBody2D"]
+visible = false
 position = Vector2( 0, -3 )
 collision_layer = 4
 collision_mask = 6
@@ -148,6 +149,7 @@ position = Vector2( 0, 4 )
 shape = SubResource( 7 )
 
 [node name="RayCast2D" type="RayCast2D" parent="KinematicBody2D"]
+visible = false
 position = Vector2( 0, -3 )
 enabled = true
 cast_to = Vector2( 0, 16 )
@@ -157,6 +159,7 @@ collision_mask = 81
 position = Vector2( 0, 4 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
 rect = Rect2( -300, -300, 600, 600 )
 pause_particles = false
 process_parent = true

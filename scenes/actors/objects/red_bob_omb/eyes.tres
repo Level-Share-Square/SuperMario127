@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=15 format=2]
+[gd_resource type="SpriteFrames" load_steps=26 format=2]
 
 [ext_resource path="res://scenes/actors/objects/red_bob_omb/eyes.png" type="Texture" id=2]
 
@@ -18,9 +18,21 @@ region = Rect2( 48, 24, 24, 24 )
 atlas = ExtResource( 2 )
 region = Rect2( 72, 24, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=85]
+[sub_resource type="AtlasTexture" id=87]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 24, 24 )
+region = Rect2( 0, 120, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=88]
+atlas = ExtResource( 2 )
+region = Rect2( 24, 120, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=89]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 120, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=90]
+atlas = ExtResource( 2 )
+region = Rect2( 72, 120, 24, 24 )
 
 [sub_resource type="AtlasTexture" id=76]
 atlas = ExtResource( 2 )
@@ -30,29 +42,61 @@ region = Rect2( 0, 48, 24, 24 )
 atlas = ExtResource( 2 )
 region = Rect2( 48, 48, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=72]
+[sub_resource type="AtlasTexture" id=91]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 24, 24 )
+region = Rect2( 0, 72, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=73]
+[sub_resource type="AtlasTexture" id=92]
 atlas = ExtResource( 2 )
-region = Rect2( 24, 0, 24, 24 )
+region = Rect2( 24, 72, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=74]
+[sub_resource type="AtlasTexture" id=93]
 atlas = ExtResource( 2 )
-region = Rect2( 48, 0, 24, 24 )
+region = Rect2( 48, 72, 24, 24 )
 
-[sub_resource type="AtlasTexture" id=75]
+[sub_resource type="AtlasTexture" id=94]
 atlas = ExtResource( 2 )
-region = Rect2( 72, 0, 24, 24 )
+region = Rect2( 72, 72, 24, 24 )
 
 [sub_resource type="AtlasTexture" id=84]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 24, 24, 24 )
 
+[sub_resource type="AtlasTexture" id=95]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 96, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=96]
+atlas = ExtResource( 2 )
+region = Rect2( 24, 96, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=97]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 96, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=98]
+atlas = ExtResource( 2 )
+region = Rect2( 72, 96, 24, 24 )
+
 [sub_resource type="AtlasTexture" id=86]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=99]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=100]
+atlas = ExtResource( 2 )
+region = Rect2( 24, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=101]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=102]
+atlas = ExtResource( 2 )
+region = Rect2( 72, 0, 24, 24 )
 
 [resource]
 animations = [ {
@@ -61,7 +105,7 @@ animations = [ {
 "name": "angry",
 "speed": 6.0
 }, {
-"frames": [ SubResource( 85 ), SubResource( 85 ), SubResource( 85 ), SubResource( 85 ) ],
+"frames": [ SubResource( 87 ), SubResource( 88 ), SubResource( 89 ), SubResource( 90 ) ],
 "loop": true,
 "name": "confused",
 "speed": 6.0
@@ -71,7 +115,7 @@ animations = [ {
 "name": "happy",
 "speed": 6.0
 }, {
-"frames": [ SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ) ],
+"frames": [ SubResource( 91 ), SubResource( 92 ), SubResource( 93 ), SubResource( 94 ) ],
 "loop": true,
 "name": "neutral",
 "speed": 6.0
@@ -81,7 +125,7 @@ animations = [ {
 "name": "raging",
 "speed": 6.0
 }, {
-"frames": [  ],
+"frames": [ SubResource( 95 ), SubResource( 96 ), SubResource( 97 ), SubResource( 98 ) ],
 "loop": true,
 "name": "shocked",
 "speed": 6.0
@@ -91,7 +135,7 @@ animations = [ {
 "name": "smiling",
 "speed": 6.0
 }, {
-"frames": [  ],
+"frames": [ SubResource( 99 ), SubResource( 100 ), SubResource( 101 ), SubResource( 102 ) ],
 "loop": true,
 "name": "talking",
 "speed": 6.0
