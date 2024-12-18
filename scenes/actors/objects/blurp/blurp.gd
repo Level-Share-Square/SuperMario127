@@ -171,7 +171,7 @@ func _physics_process(delta : float) -> void:
 			if platform_body.has_method("is_platform_area"):
 				if platform_body.is_platform_area():
 					is_in_platform = true
-				if platform_body.get_parent().can_collide_with(kinematic_body):
+				if platform_body.get_parent().has_method("can_collide_with") and platform_body.get_parent().can_collide_with(kinematic_body):
 					platform_collision_enabled = true
 		kinematic_body.set_collision_mask_bit(4, platform_collision_enabled)
 		
