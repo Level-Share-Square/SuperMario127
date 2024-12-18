@@ -11,6 +11,8 @@ enum RespawnMode {Never, Offscreen, Onscreen}
 onready var respawn_timer: Timer = $RespawnTimer
 onready var visibility_notifier: VisibilityNotifier2D = $VisibilityNotifier2D
 var spawned_enemies: Array
+# enemies should be made invisible but not the spawner,, cuz of projectiles
+var is_visible: bool = true
 
 export var enemy_scene_path: String = "res://scenes/actors/objects/enemy/enemy_base.tscn"
 
@@ -70,6 +72,8 @@ func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	var spawned_enemy: EnemyBase = load(enemy_scene_path).instance()
 	# disable it if in editor
 	spawned_enemy.enabled = (enabled and mode != 1)
+	# hide it if invisible
+	spawned_enemy.visible = is_visible
 	# give it proper gravity
 	spawned_enemy.gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity * 2
 	# handle being flipped
@@ -116,6 +120,10 @@ func enemy_deleted(enemy: EnemyBase):
 
 
 func _ready():
+	if mode != 1:
+		is_visible = visible
+		visible = true
+	
 	if enabled and mode != 1 and spawn_offset > 0:
 		yield(get_tree().create_timer(spawn_offset), "timeout")
 	
