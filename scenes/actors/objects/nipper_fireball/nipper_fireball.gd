@@ -26,9 +26,11 @@ func _ready():
 			modulate = Color(0, 1, 1)
 			bounce_count = 2
 			body.set_collision_mask_bit(0, true)
+			body.set_collision_mask_bit(4, true)
 		else:
 			modulate = Color(1, 1, 1)
 			body.set_collision_mask_bit(0, false)
+			body.set_collision_mask_bit(4, false)
 		var _connect = hit_area.connect("body_entered", self, "damage_player")
 		_connect = poof_particles.connect("finished", self, "queue_free")
 
