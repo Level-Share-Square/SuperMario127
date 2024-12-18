@@ -13,8 +13,9 @@
 [ext_resource path="res://scenes/actors/objects/red_bob_omb/shadow.png" type="Texture" id=11]
 [ext_resource path="res://scenes/editor/editor_hitbox.gd" type="Script" id=12]
 
-[sub_resource type="RectangleShape2D" id=136]
-extents = Vector2( 6, 7 )
+[sub_resource type="CapsuleShape2D" id=136]
+radius = 6.0
+height = 2.0
 
 [sub_resource type="AtlasTexture" id=77]
 atlas = ExtResource( 3 )
