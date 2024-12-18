@@ -40,6 +40,8 @@ var selected_shine_index: int = -1
 
 func _ready():
 	shine_details = level_info.shine_details
+	
+	var shine_index: int = 0
 	for i in range(shine_details.size()):
 		if used_shine_ids.has(shine_details[i]["id"]):
 			continue
@@ -72,12 +74,13 @@ func _ready():
 		if !is_collected:
 			# automatically select first empty shine
 			if selected_shine_index == -1:
-				selected_shine_index = i
+				selected_shine_index = shine_index
 			shine_sprite.make_blue()
 		else:
 			# Shine color is stored as rgba32 from a json, and json converts stuff to float so it has to be converted twice
 			shine_sprite.set_color(Color(int(shine_details[i]["color"])))
 		
+		shine_index += 1
 		shine_sprite.add_to_group("shine_sprites")
 		add_child(shine_sprite)
 	
