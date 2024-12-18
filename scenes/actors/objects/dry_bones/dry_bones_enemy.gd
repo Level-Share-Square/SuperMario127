@@ -2,7 +2,7 @@ extends EnemyBase
 
 
 export var is_stationary: bool = false
-export var toss_time: float = 5
+export var toss_wait: float = 5
 export var regenerate_time: float = 10
 
 
