@@ -110,7 +110,10 @@ func stomp_body_entered(body) -> void:
 	
 	if body is Character:
 		if body.velocity.y > 0 and not body.swimming:
-			if body.big_attack:
+			if body.invincible:
+				magicked()
+				bounce_player(body)
+			elif body.big_attack:
 				ground_pound()
 			else:
 				stomp()
