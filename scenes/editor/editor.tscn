@@ -1,4 +1,4 @@
-[gd_scene load_steps=1563 format=2]
+[gd_scene load_steps=1581 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1528,6 +1528,24 @@
 [ext_resource path="res://scenes/actors/objects/moss_rock/palettes/6.png" type="Texture" id=1526]
 [ext_resource path="res://scenes/actors/objects/moss_rock/palettes/9.png" type="Texture" id=1527]
 [ext_resource path="res://scenes/actors/objects/moss_rock/palettes/8.png" type="Texture" id=1528]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_top/palettes/6.png" type="Texture" id=1529]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_top/palettes/5.png" type="Texture" id=1530]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_top/palettes/1.png" type="Texture" id=1531]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_top/palettes/4.png" type="Texture" id=1532]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_top/palettes/2.png" type="Texture" id=1533]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_top/palettes/3.png" type="Texture" id=1534]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/4.png" type="Texture" id=1535]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/6.png" type="Texture" id=1536]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/2.png" type="Texture" id=1537]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/3.png" type="Texture" id=1538]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/5.png" type="Texture" id=1539]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_body/palette/1.png" type="Texture" id=1540]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_angle/palette/2.png" type="Texture" id=1541]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_angle/palette/3.png" type="Texture" id=1542]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_angle/palette/4.png" type="Texture" id=1543]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_angle/palette/1.png" type="Texture" id=1544]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_angle/palette/5.png" type="Texture" id=1545]
+[ext_resource path="res://scenes/actors/objects/twisted_tree_angle/palette/6.png" type="Texture" id=1546]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -4204,6 +4222,8 @@ object_id = 16
 is_object = true
 object_center = Vector2( 32, 32 )
 tile_mode_step = 64
+palette_icons = [ ExtResource( 97 ), ExtResource( 1531 ), ExtResource( 1533 ), ExtResource( 1534 ), ExtResource( 1532 ), ExtResource( 1530 ), ExtResource( 1529 ) ]
+palette_previews = [ ExtResource( 97 ), ExtResource( 1531 ), ExtResource( 1533 ), ExtResource( 1534 ), ExtResource( 1532 ), ExtResource( 1530 ), ExtResource( 1529 ) ]
 change_to = "TwistedTreeBody"
 items_in_sequence = 3
 icon = ExtResource( 97 )
@@ -4215,6 +4235,8 @@ object_id = 17
 is_object = true
 object_center = Vector2( 32, 32 )
 tile_mode_step = 64
+palette_icons = [ ExtResource( 98 ), ExtResource( 1540 ), ExtResource( 1537 ), ExtResource( 1538 ), ExtResource( 1535 ), ExtResource( 1539 ), ExtResource( 1536 ) ]
+palette_previews = [ ExtResource( 98 ), ExtResource( 1540 ), ExtResource( 1537 ), ExtResource( 1538 ), ExtResource( 1535 ), ExtResource( 1539 ), ExtResource( 1536 ) ]
 change_to = "TwistedTreeAngle"
 items_in_sequence = 3
 index_in_sequence = 1
@@ -4228,6 +4250,8 @@ is_object = true
 object_center = Vector2( 72, 40 )
 tile_mode_offset = Vector2( 40, 8 )
 tile_mode_step = 64
+palette_icons = [ ExtResource( 99 ), ExtResource( 1544 ), ExtResource( 1541 ), ExtResource( 1542 ), ExtResource( 1543 ), ExtResource( 1545 ), ExtResource( 1546 ) ]
+palette_previews = [ ExtResource( 99 ), ExtResource( 1544 ), ExtResource( 1541 ), ExtResource( 1542 ), ExtResource( 1543 ), ExtResource( 1545 ), ExtResource( 1546 ) ]
 change_to = "TwistedTreeTop"
 items_in_sequence = 3
 index_in_sequence = 2
