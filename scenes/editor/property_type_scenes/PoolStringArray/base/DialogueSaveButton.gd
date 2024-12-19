@@ -9,22 +9,50 @@ var dialogue_page: int = 0
 var expression: int = 1
 var action: int = 0
 
-onready var back_button = $"../HBoxContainer/Back"
-onready var next_button = $"../HBoxContainer/Next"
-onready var remote_tag = $"../HBoxContainer/RemoteTag"
-onready var facing_dir = $"../HBoxContainer/FacingDir"
-onready var expression_sprite = $"../HBoxContainer/Expression/Sprite"
-onready var action_sprite = $"../HBoxContainer/Action/Sprite"
-onready var index_display = $"../HBoxContainer/IndexDisplay"
-onready var add_button = $"../HBoxContainer/Add"
-onready var remove_button = $"../HBoxContainer/Remove"
+const EXPRESSIONS_AMOUNT = 8
+const ACTIONS_AMOUNT = 2
+
+onready var back_button = $"../PageControls/Back"
+onready var next_button = $"../PageControls/Next"
+onready var index_display = $"../PageControls/IndexDisplay"
+onready var add_button = $"../PageControls/Add"
+onready var remove_button = $"../PageControls/Remove"
+onready var remote_tag = $"../RemoteTag"
+onready var facing_dir = $"../EmoteOptions/FacingDir"
+onready var expression_option = $"../EmoteOptions/ExpressionOption"
+onready var action_option = $"../EmoteOptions/ActionOption"
+onready var expression_sprite = $"../EmoteOptions/Expression/Sprite"
+onready var action_sprite = $"../EmoteOptions/Action/Sprite"
 onready var text_edit = $"../TextEdit"
+
+export var expression_textures : Texture
+export var action_textures : Texture
+
+var expression_icons : Array
+var action_icons : Array
 
 # just in case ur confused im using the editor ui to connect
 # signals for most of these buttons
 
 func _ready():
 	var connect = connect("clicked", self, "_pressed")
+	
+	for i in range(0, EXPRESSIONS_AMOUNT):
+		var new_image := AtlasTexture.new()
+		new_image.set_atlas(expression_textures)
+		new_image.region.size = Vector2(32, 32)
+		new_image.region.position.x = i * 32
+		expression_icons.append(new_image)
+		
+		expression_option.add_icon_item(expression_icons[i] , "", i)
+	for i in range(0, ACTIONS_AMOUNT):
+		var new_image := AtlasTexture.new()
+		new_image.set_atlas(action_textures)
+		new_image.region.size = Vector2(32, 32)
+		new_image.region.position.x = i * 32
+		action_icons.append(new_image)
+		
+		action_option.add_icon_item(action_icons[i] , "", i)
 	
 	yield(get_tree(), "idle_frame")
 	dialogue = string.dialogue
@@ -80,15 +108,28 @@ func add_page():
 	
 	remove_button.disabled = (dialogue.size() <= 1)
 
-
-const EXPRESSIONS_AMOUNT = 8
-func update_expression(): expression_sprite.region_rect.position.x = expression * 32
+#updates expressions with their corresponding index
+func update_expression(): expression_option.selected = expression
 func cycle_expression():
 	expression = wrapi(expression + 1, 0, EXPRESSIONS_AMOUNT)
-	update_expression()
+#	update_expression()
+	
+func set_expression(index : int):
+	if index < EXPRESSIONS_AMOUNT-1:
+		expression = index
+	else:
+		expression = 0
+#	update_expression()
 
-const ACTIONS_AMOUNT = 2
-func update_action(): action_sprite.region_rect.position.x = action * 32
+#updates actions with their corresponding index
+func update_action(): action_option.selected = action
 func cycle_action():
 	action = wrapi(action + 1, 0, ACTIONS_AMOUNT)
-	update_action()
+#	update_action()
+
+func set_action(index : int):
+	if index < ACTIONS_AMOUNT-1:
+		action = index
+	else:
+		action = 0
+#	update_expression()
