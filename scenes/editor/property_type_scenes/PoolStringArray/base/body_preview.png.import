@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/head_preview.png-d2b60b8f395dede9ce2592b50ec10152.stex"
+path="res://.import/body_preview.png-7599149653ad7eb4e64184d668ccda65.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/toad/head_preview.png"
-dest_files=[ "res://.import/head_preview.png-d2b60b8f395dede9ce2592b50ec10152.stex" ]
+source_file="res://scenes/editor/property_type_scenes/PoolStringArray/base/body_preview.png"
+dest_files=[ "res://.import/body_preview.png-7599149653ad7eb4e64184d668ccda65.stex" ]
 
 [params]
 

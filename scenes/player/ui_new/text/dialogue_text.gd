@@ -28,16 +28,18 @@ onready var fade_tween = $FadeTween
 
 var dialogue: PoolStringArray 
 var last_tag: String
+var last_player: int
 
-var player_expressions: Dictionary = {
-	":Char:": "talking",
-	":CharHappy:": "happy",
-	":CharShocked:": "shocked",
-	":CharAgree:": "nodding",
-	":CharDisagree:": "disagree",
-	":CharThink:": "thinking",
-	":CharAngry:": "angry",
-}
+var player_expressions: Array = [
+	"",
+	"talking",
+	"happy",
+	"shocked",
+	"nodding",
+	"disagree",
+	"thinking",
+	"angry",
+]
 var player_speaking: bool
 
 func _ready():
@@ -92,11 +94,9 @@ func interact():
 	var dialogue_page: int = dialogue_obj.page_cache
 	
 	if label.percent_visible == 1:
-		for key in player_expressions.keys():
-			if last_tag.begins_with(key) and character.is_grounded() and not is_instance_valid(character.state):
-				last_tag = last_tag.trim_prefix(key)
-				player_speak(player_expressions[key])
-				yield(character.anim_player, "animation_finished")
+		if last_player != 0 and character.is_grounded() and not is_instance_valid(character.state):
+			player_speak(player_expressions[last_player])
+			yield(character.anim_player, "animation_finished")
 		
 		dialogue_page += 1
 		dialogue_obj.page_cache += 1
@@ -121,11 +121,11 @@ func interact():
 	
 	var cur_text: String = page_text.substr(colon_offset + 1)
 	var tag: String = page_text.substr(4, colon_offset - 4)
-	
 	last_tag = tag
 	
 	var expression: int = int(page_text.left(2))
-	var action: int = int(page_text.substr(2, 2))
+	var action: int = int(page_text.substr(3, 1))
+	last_player = int(page_text.substr(2, 1))
 	dialogue_obj.emit_signal("message_changed", expression, action)
 	
 	label.bbcode_text = text_replace_util.parse_text(cur_text, character)
