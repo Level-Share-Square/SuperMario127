@@ -7,6 +7,7 @@ onready var area = $Area2D
 onready var visibility_enabler = $VisibilityEnabler2D
 onready var label = $Label
 onready var sparkles = $Sparkles
+onready var animation_player = $AnimationPlayer
 
 var collected = false
 var physics = false
@@ -31,14 +32,10 @@ func collect(body):
 				last_sound.play()
 		collected = true
 		label.text = str(Singleton.CurrentLevelData.level_data.vars.red_coins_collected[0])
-		label.visible = true
-		animated_sprite.animation = "collect"
-		animated_sprite.frame = 0
-		sparkles.emitting = false
-		yield(get_tree().create_timer(2.0), "timeout")
-		queue_free() # die
+		animation_player.play("collect")
 		
 func _ready():
+	animation_player.play("RESET")
 	if mode == 1: return
 	if enabled:
 		id = Singleton.CurrentLevelData.level_data.vars.last_red_coin_id + Singleton.CurrentLevelData.get_red_coins_before_area(Singleton.CurrentLevelData.area)
@@ -52,8 +49,3 @@ func _ready():
 func _process(delta):
 	if !collected:
 		animated_sprite.frame = (OS.get_ticks_msec() / anim_damp) % 4
-	else:
-		var label_color = label.modulate
-		label_color.a -= 0.035
-		label.modulate = label_color
-		label.rect_position.y -= 0.75

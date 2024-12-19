@@ -371,9 +371,6 @@ script = ExtResource( 8 )
 [node name="DialogueDetector" parent="." index="0"]
 visible = false
 
-[node name="KinematicBody2D" parent="." index="1"]
-collision_layer = 16384
-
 [node name="CollisionShape2D" parent="KinematicBody2D" index="0"]
 visible = false
 position = Vector2( -1, 1 )

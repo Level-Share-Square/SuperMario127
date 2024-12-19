@@ -239,7 +239,7 @@ func reset_platform():
 	
 	platform.set_collision_layer_bit(4, false)
 	platform.position = path_follower.position
-	reset_physics_interpolation()
+	platform.reset_physics_interpolation()
 	activated = !touch_start
 	yield(get_tree(), "physics_frame")
 	yield(get_tree(), "physics_frame")
