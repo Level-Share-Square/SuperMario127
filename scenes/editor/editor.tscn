@@ -1,4 +1,4 @@
-[gd_scene load_steps=1541 format=2]
+[gd_scene load_steps=1563 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1506,6 +1506,28 @@
 [ext_resource path="res://scenes/actors/objects/red_bob_omb/preview.png" type="Texture" id=1504]
 [ext_resource path="res://scenes/actors/objects/moss_rock/moss_rock.png" type="Texture" id=1505]
 [ext_resource path="res://scenes/actors/objects/moss_rock/icon.png" type="Texture" id=1506]
+[ext_resource path="res://scenes/actors/objects/rock/palettes/4/icon.png" type="Texture" id=1507]
+[ext_resource path="res://scenes/actors/objects/rock/palettes/3/icon.png" type="Texture" id=1508]
+[ext_resource path="res://scenes/actors/objects/rock/palettes/3/rock.png" type="Texture" id=1509]
+[ext_resource path="res://scenes/actors/objects/rock/palettes/4/rock.png" type="Texture" id=1510]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/2.png" type="Texture" id=1511]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/5.png" type="Texture" id=1512]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/3.png" type="Texture" id=1513]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/1.png" type="Texture" id=1514]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/3icon.png" type="Texture" id=1515]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/5icon.png" type="Texture" id=1516]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/7icon.png" type="Texture" id=1517]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/6icon.png" type="Texture" id=1518]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/8icon.png" type="Texture" id=1519]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/9icon.png" type="Texture" id=1520]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/1icon.png" type="Texture" id=1521]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/2icon.png" type="Texture" id=1522]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/4icon.png" type="Texture" id=1523]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/4.png" type="Texture" id=1524]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/7.png" type="Texture" id=1525]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/6.png" type="Texture" id=1526]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/9.png" type="Texture" id=1527]
+[ext_resource path="res://scenes/actors/objects/moss_rock/palettes/8.png" type="Texture" id=1528]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -4960,8 +4982,8 @@ is_object = true
 object_center = Vector2( 64, 0 )
 tile_mode_offset = Vector2( 32, -32 )
 tile_mode_step = 64
-palette_icons = [ ExtResource( 238 ), ExtResource( 505 ), ExtResource( 506 ) ]
-palette_previews = [ ExtResource( 237 ), ExtResource( 504 ), ExtResource( 503 ) ]
+palette_icons = [ ExtResource( 238 ), ExtResource( 505 ), ExtResource( 506 ), ExtResource( 1508 ), ExtResource( 1507 ) ]
+palette_previews = [ ExtResource( 237 ), ExtResource( 504 ), ExtResource( 503 ), ExtResource( 1509 ), ExtResource( 1510 ) ]
 change_to = "MossRock"
 items_in_sequence = 2
 icon = ExtResource( 238 )
@@ -4973,6 +4995,8 @@ object_id = 141
 is_object = true
 tile_mode_offset = Vector2( 32, -32 )
 tile_mode_step = 64
+palette_icons = [ ExtResource( 1506 ), ExtResource( 1521 ), ExtResource( 1522 ), ExtResource( 1515 ), ExtResource( 1523 ), ExtResource( 1516 ), ExtResource( 1518 ), ExtResource( 1517 ), ExtResource( 1519 ), ExtResource( 1520 ) ]
+palette_previews = [ ExtResource( 1505 ), ExtResource( 1514 ), ExtResource( 1511 ), ExtResource( 1513 ), ExtResource( 1524 ), ExtResource( 1512 ), ExtResource( 1526 ), ExtResource( 1525 ), ExtResource( 1528 ), ExtResource( 1527 ) ]
 change_to = "Rock"
 items_in_sequence = 2
 index_in_sequence = 1
