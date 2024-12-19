@@ -22,15 +22,16 @@ var collectible := "shine"
 var collectible_dictionary : Dictionary
 var text := ""
 var prev_coll
+var insufficient_text: String = "Sorry! You need {num} {col} to open this door!"
 
-var possible_coll = ["shine", "star coin", "coin"]
+var possible_coll = ["shine", "star coin", "coin", "star bit"]
 var coll
 
 const OPEN_DOOR_WAIT = 0.45
 
 func _set_properties() -> void:
-	savable_properties = ["area_id", "destination_tag", "teleportation_mode", "collectible", "required_amount"]
-	editable_properties = ["area_id", "destination_tag", "teleportation_mode", "collectible", "required_amount"]
+	savable_properties = ["area_id", "destination_tag", "teleportation_mode", "collectible", "required_amount", "insufficient_text"]
+	editable_properties = ["area_id", "destination_tag", "teleportation_mode", "collectible", "required_amount", "insufficient_text"]
 	
 func _set_property_values() -> void:
 
@@ -41,6 +42,7 @@ func _set_property_values() -> void:
 	set_property("collectible", collectible)
 	set_property("required_amount", required_amount)
 	set_property("force_fadeout", force_fadeout)
+	set_property("insufficient_text", insufficient_text)
 
 
 func _init():
@@ -74,20 +76,23 @@ func _ready() -> void:
 	Singleton.CurrentLevelData.level_data.vars.teleporters.append([append_tag, self])
 	current_level_info = Singleton.CurrentLevelData.level_info
 	match(collectible):
-		"shines":
+		"shine":
 			collectible_dictionary = current_level_info.collected_shines
 		"star coin":
 			collectible_dictionary = current_level_info.collected_star_coins
 		"coin":
 			pass
+		"star bit":
+			pass
 		_:
 			collectible_dictionary = current_level_info.collected_shines
-			
-		
-	if(required_amount == 1):
-		text = "Sorry! You need " + String(required_amount) + " " + collectible + " to open this door!"
-	else:
-		text = "Sorry! You need " + String(required_amount) + " " + collectible + "s to open this door!"
+	
+	var collectible_text: String = collectible
+	if required_amount != 1: collectible_text += "s"
+	text = insufficient_text.format({
+		"num": required_amount,
+		"col": collectible_text
+	})
 	
 
 func connect_local_members():

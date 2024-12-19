@@ -81,6 +81,10 @@ func start_door_enter_animation(character : Character) -> void:
 	if get_parent().collectible == "coin":
 		if Singleton.CurrentLevelData.level_data.vars.coins_collected < get_parent().required_amount:
 			can_enter = false
+	elif get_parent().collectible == "star bit":
+		var star_bits_collected: int = Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0]
+		if star_bits_collected < get_parent().required_amount:
+			can_enter = false
 	else:
 		var collected = 0
 		#yuck

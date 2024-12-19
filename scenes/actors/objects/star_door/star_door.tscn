@@ -1,4 +1,4 @@
-[gd_scene load_steps=269 format=2]
+[gd_scene load_steps=282 format=2]
 
 [ext_resource path="res://scenes/actors/objects/star_door/star_door.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/star_door/star_door_enter_logic.gd" type="Script" id=2]
@@ -265,6 +265,19 @@
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_star_anim_overlay11.png" type="Texture" id=263]
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_star_anim_overlay1.png" type="Texture" id=264]
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/planks_door_double_coin_anim_overlay9.png" type="Texture" id=265]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_starbit_anim_overlay5.png" type="Texture" id=266]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_starbit_anim_overlay2.png" type="Texture" id=267]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_starbit_anim_overlay4.png" type="Texture" id=268]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_starbit_anim_overlay13.png" type="Texture" id=269]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_starbit_anim_overlay3.png" type="Texture" id=270]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_starbit_anim_overlay7.png" type="Texture" id=271]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_starbit_anim_overlay6.png" type="Texture" id=272]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_starbit_anim_overlay1.png" type="Texture" id=273]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_starbit_anim_overlay12.png" type="Texture" id=274]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_starbit_anim_overlay8.png" type="Texture" id=275]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_starbit_anim_overlay9.png" type="Texture" id=276]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_starbit_anim_overlay10.png" type="Texture" id=277]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/standard_door_double_starbit_anim_overlay11.png" type="Texture" id=278]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 33.2978, 20 )
@@ -469,6 +482,16 @@ animations = [ {
 "name": "wood_shine_open",
 "speed": 24.0
 }, {
+"frames": [ ExtResource( 269 ), ExtResource( 274 ), ExtResource( 278 ), ExtResource( 277 ), ExtResource( 276 ), ExtResource( 275 ), ExtResource( 271 ), ExtResource( 272 ), ExtResource( 266 ), ExtResource( 268 ), ExtResource( 270 ), ExtResource( 267 ), ExtResource( 273 ) ],
+"loop": false,
+"name": "wood_star bit_close",
+"speed": 24.0
+}, {
+"frames": [ ExtResource( 273 ), ExtResource( 267 ), ExtResource( 270 ), ExtResource( 268 ), ExtResource( 266 ), ExtResource( 272 ), ExtResource( 271 ), ExtResource( 275 ), ExtResource( 276 ), ExtResource( 277 ), ExtResource( 278 ), ExtResource( 274 ), ExtResource( 269 ) ],
+"loop": false,
+"name": "wood_star bit_open",
+"speed": 24.0
+}, {
 "frames": [ ExtResource( 120 ), ExtResource( 113 ), ExtResource( 119 ), ExtResource( 115 ), ExtResource( 117 ), ExtResource( 116 ), ExtResource( 114 ), ExtResource( 121 ), ExtResource( 118 ), ExtResource( 109 ), ExtResource( 112 ), ExtResource( 111 ), ExtResource( 110 ) ],
 "loop": false,
 "name": "wood_star coin_close",
@@ -522,4 +545,4 @@ animation = "metal_open"
 [node name="Icon" type="AnimatedSprite" parent="DoorEnterLogic"]
 z_index = -2
 frames = SubResource( 2 )
-animation = "plank_coin_close"
+animation = "wood_star bit_open"
