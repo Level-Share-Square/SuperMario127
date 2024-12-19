@@ -5,10 +5,10 @@ export var back_tilemap: NodePath
 export var middle_tilemap: NodePath
 export var front_tilemap: NodePath
 
-onready var very_back_tilemap_node = get_node(very_back_tilemap)
-onready var back_tilemap_node = get_node(back_tilemap)
-onready var middle_tilemap_node = get_node(middle_tilemap)
-onready var front_tilemap_node = get_node(front_tilemap)
+onready var very_back_tilemap_node : TileMap = get_node(very_back_tilemap)
+onready var back_tilemap_node : TileMap = get_node(back_tilemap)
+onready var middle_tilemap_node : TileMap = get_node(middle_tilemap)
+onready var front_tilemap_node : TileMap = get_node(front_tilemap)
 
 var level_data : LevelData
 var level_area : LevelArea
@@ -173,7 +173,7 @@ func update_tilemaps():
 				var tile = chunk[x + y*16] #get tile from chunk
 				if tile and bounds.has_point(Vector2(chunk_x*16 + x + 0.5, chunk_y*16 + y + 0.5)):
 #					print("Tile (" + str(x) + ", " + str(y) + ") placed")
-					layer_tilemap_node.set_cell(chunk_x*16 + x, chunk_y*16 + y, get_tile(tile[0],tile[1],tile[2]))
+					layer_tilemap_node.call_deferred("set_cell", chunk_x*16 + x, chunk_y*16 + y, get_tile(tile[0],tile[1],tile[2]))
 		
 #		print("")
 	
@@ -193,12 +193,12 @@ func update_tilemaps():
 	
 	for tilemap in [back_tilemap_node, middle_tilemap_node, front_tilemap_node]:
 		for x in range(left, (right)+1): #range end needs +1 to to actually reach the end
-			tilemap.set_cell(x,top, tile)
-			tilemap.set_cell(x,bottom, tile)
+			tilemap.call_deferred("set_cell", x, top, tile)
+			tilemap.call_deferred("set_cell", x, bottom, tile)
 
 		for y in range(top+1, (bottom-1)+1): #range end needs +1 to to actually reach the end
-			tilemap.set_cell(left, y, tile)
-			tilemap.set_cell(right, y, tile)
+			tilemap.call_deferred("set_cell", left, y, tile)
+			tilemap.call_deferred("set_cell", right, y, tile)
 		
 
 		
@@ -206,25 +206,17 @@ func update_tilemaps():
 	
 	# this is seperate so the level boundaries are set correctly
 	for x in range(left-2, (right+2)+1): #range end needs +1 to to actually reach the end
-		very_back_tilemap_node.set_cell(x,top, tile)
-		very_back_tilemap_node.set_cell(x,top-1, tile)
-		very_back_tilemap_node.set_cell(x,top-2, tile)
-
-		very_back_tilemap_node.set_cell(x,bottom, tile)
-		very_back_tilemap_node.set_cell(x,bottom+1, tile)
-		very_back_tilemap_node.set_cell(x,bottom+2, tile)
+		for offset in range(0, 3):
+			very_back_tilemap_node.call_deferred("set_cell", x, top-offset, tile)
+			very_back_tilemap_node.call_deferred("set_cell", x, bottom+offset, tile)
 
 	for y in range(top+1, (bottom-1)+1): #range end needs +1 to to actually reach the end
-		very_back_tilemap_node.set_cell(left, y, tile)
-		very_back_tilemap_node.set_cell(left-1, y, tile)
-		very_back_tilemap_node.set_cell(left-2, y, tile)
-
-		very_back_tilemap_node.set_cell(right, y, tile)
-		very_back_tilemap_node.set_cell(right+1, y, tile)
-		very_back_tilemap_node.set_cell(right+2, y, tile)
+		for offset in range(0, 3):
+			very_back_tilemap_node.call_deferred("set_cell", left-offset, y, tile)
+			very_back_tilemap_node.call_deferred("set_cell", right+offset, y, tile)
 
 	for tilemap in [very_back_tilemap_node, back_tilemap_node, middle_tilemap_node, front_tilemap_node]:
-		tilemap.update_bitmask_region(bounds.position, bounds.end)
+		tilemap.call_deferred("update_bitmask_region", bounds.position, bounds.end)
 		tilemap.update()
 
 #func _draw():
