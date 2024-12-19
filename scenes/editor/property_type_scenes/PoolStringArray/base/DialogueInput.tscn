@@ -188,8 +188,9 @@ wrap_enabled = true
 [node name="FacingDir" type="Button" parent="Contents/VBoxContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
-margin_right = 1167.0
-margin_bottom = 418.0
+margin_top = 211.0
+margin_right = 989.0
+margin_bottom = 226.0
 rect_min_size = Vector2( 96, 0 )
 focus_mode = 0
 custom_fonts/font = SubResource( 17 )
@@ -369,8 +370,9 @@ expand_icon = true
 
 [node name="Expression" type="Button" parent="Contents/VBoxContainer/HBoxContainer/EmoteOptions"]
 visible = false
-margin_right = 80.0
-margin_bottom = 119.0
+margin_top = 252.0
+margin_right = 114.0
+margin_bottom = 302.0
 rect_min_size = Vector2( 80, 0 )
 focus_mode = 0
 size_flags_vertical = 3
@@ -390,8 +392,9 @@ region_rect = Rect2( 0, 0, 32, 32 )
 
 [node name="Action" type="Button" parent="Contents/VBoxContainer/HBoxContainer/EmoteOptions"]
 visible = false
-margin_right = 80.0
-margin_bottom = 242.0
+margin_top = 259.0
+margin_right = 114.0
+margin_bottom = 302.0
 rect_min_size = Vector2( 80, 0 )
 focus_mode = 0
 size_flags_vertical = 3
@@ -473,8 +476,8 @@ bus = "Sounds"
 
 [connection signal="text_changed" from="Contents/VBoxContainer/HBoxContainer/VBoxContainer/TextEdit" to="Contents/VBoxContainer/Buttons/SaveButton" method="save_page"]
 [connection signal="pressed" from="Contents/VBoxContainer/HBoxContainer/VBoxContainer/Pages/Remove" to="Contents/VBoxContainer/Buttons/SaveButton" method="remove_page"]
-[connection signal="pressed" from="Contents/VBoxContainer/HBoxContainer/VBoxContainer/Pages/Add" to="Contents/VBoxContainer/Buttons/SaveButton" method="add_page" flags=3]
 [connection signal="pressed" from="Contents/VBoxContainer/HBoxContainer/VBoxContainer/Pages/Add" to="Contents/VBoxContainer/Buttons/SaveButton" method="save_page"]
+[connection signal="pressed" from="Contents/VBoxContainer/HBoxContainer/VBoxContainer/Pages/Add" to="Contents/VBoxContainer/Buttons/SaveButton" method="add_page" flags=3]
 [connection signal="pressed" from="Contents/VBoxContainer/HBoxContainer/VBoxContainer/Pages/Back" to="Contents/VBoxContainer/Buttons/SaveButton" method="save_page"]
 [connection signal="pressed" from="Contents/VBoxContainer/HBoxContainer/VBoxContainer/Pages/Back" to="Contents/VBoxContainer/Buttons/SaveButton" method="change_page" flags=3 binds= [ -1 ]]
 [connection signal="pressed" from="Contents/VBoxContainer/HBoxContainer/VBoxContainer/Pages/Next" to="Contents/VBoxContainer/Buttons/SaveButton" method="save_page"]
