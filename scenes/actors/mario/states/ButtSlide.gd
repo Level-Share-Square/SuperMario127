@@ -62,11 +62,14 @@ func _update(delta):
 		temp_speed = clamp(temp_speed - 2, move_speed, move_speed * 10)
 		character.velocity.x = lerp(character.velocity.x, 0, delta * 2)
 		
-	if abs(character.velocity.x) < 20 and abs(normal.x) <= 0.2:
-		stop_buffer = 0
-		character.set_state_by_name("BounceState", delta)
-		character.position.y -= 1
-		character.velocity.y = -150
+	if abs(normal.x) <= 0.2:
+		if abs(character.velocity.x) < 20:
+			stop_buffer = 0
+			character.set_state_by_name("BounceState", delta)
+			character.position.y -= 1
+			character.velocity.y = -150
+#		else: # to enable later
+#			character.velocity.x -= sign(character.velocity.x) * 10
 		
 	if character.inputs[2][0]:
 		character.set_state_by_name("JumpState", 0)
