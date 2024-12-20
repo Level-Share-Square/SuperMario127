@@ -121,6 +121,7 @@ export var aerial_acceleration := 16.0
 export var friction := 27.0
 export var aerial_friction := 2.3
 export var max_aerial_velocity := 640
+export var max_frictionless_slide_velocity : float = 450
 export var raycast_length := 26
 
 # Sounds
@@ -756,6 +757,8 @@ func _physics_process(delta: float) -> void:
 		move_direction = -1
 	elif inputs[1][0] and !inputs[0][0] and disable_movement == false:
 		move_direction = 1
+	else:
+		move_direction = 0 #redundacy never hurt anyone :P
 	
 	if move_direction == 0 and disable_movement == false and nozzle != null and nozzle.name == "TurboNozzle" and nozzle.activated:
 		move_direction = facing_direction
@@ -802,21 +805,33 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x = 0
 	
+	
 	#frictionless is affected by gravity on slopes (also gets dives working with friction)
-	if disable_friction and is_grounded() and !(nozzle != null and (nozzle.name == "TurboNozzle" and nozzle.activated)):
+	if disable_friction and is_grounded() and !(nozzle != null and (nozzle.name == "TurboNozzle" and nozzle.activated)) and powerup != get_powerup_node("RainbowPowerup") and state != get_state_node("ButtSlideState"):
 		var normal = ground_check.get_collision_normal()
-		if abs(velocity.length()) < 450 and abs(normal.y) < 1:
-			if normal.y > 1:
-				if !(inputs[1][0] and !inputs[0][0] and disable_movement == false):
-					velocity.x += gravity*gravity_scale*normal.x*2
-				else:
+		var max_speed = 450
+		if state == null or state == get_state_node("DiveState"):
+			max_speed = max_frictionless_slide_velocity
+		elif state == get_state_node("ButtSlideState"):
+			max_speed = state.move_speed
+		
+		if abs(velocity.length()) < max_speed and abs(normal.y) < 1:
+			if normal.y > 0:
+				if move_direction == -1:
+					velocity.x += gravity*gravity_scale*normal.x*1.25
+				elif move_direction == 1:
 					velocity.x += gravity*gravity_scale*normal.x*5.5
-			
-			if normal.y < 1:
-				if !(inputs[0][0] and !inputs[1][0] and disable_movement == false):
-					velocity.x += gravity*gravity_scale*normal.x*2
 				else:
+					velocity.x += gravity*gravity_scale*normal.x*1.5
+
+			if normal.y < 0:
+				if move_direction == 1:
+					velocity.x += gravity*gravity_scale*normal.x*1.25
+				elif move_direction == -1:
 					velocity.x += gravity*gravity_scale*normal.x*5.5
+				else:
+					velocity.x += gravity*gravity_scale*normal.x*1.5
+	
 	
 	if is_grounded() and !disable_animation and movable and controlled_locally and controllable and abs(velocity.x) > 15:
 		if !is_walled():
