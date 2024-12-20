@@ -1,4 +1,4 @@
-[gd_scene load_steps=1581 format=2]
+[gd_scene load_steps=1584 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -846,7 +846,7 @@
 [ext_resource path="res://assets/tiles/bookshelf/icon.png" type="Texture" id=844]
 [ext_resource path="res://assets/tiles/bookshelf/icons/3.png" type="Texture" id=845]
 [ext_resource path="res://assets/tiles/bookshelf/icons/8.png" type="Texture" id=846]
-[ext_resource path="res://scenes/actors/objects/star_door/stardoor.png" type="Texture" id=847]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/planks_door_double_icon.png" type="Texture" id=847]
 [ext_resource path="res://scenes/actors/objects/snow_tree/palettes/2.png" type="Texture" id=848]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/icesaw1.png" type="Texture" id=849]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/darksaw1.png" type="Texture" id=850]
@@ -1186,7 +1186,7 @@
 [ext_resource path="res://assets/tiles/wood/palette_icons/7_slopeR.png" type="Texture" id=1184]
 [ext_resource path="res://assets/tiles/wood/palette_icons/6_slopeL.png" type="Texture" id=1185]
 [ext_resource path="res://assets/tiles/wood/palette_icons/6_slopeR.png" type="Texture" id=1186]
-[ext_resource path="res://scenes/actors/objects/star_door/icon.png" type="Texture" id=1187]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/single/standard_door_icon.png" type="Texture" id=1187]
 [ext_resource path="res://scenes/actors/objects/buoyant_platform/texture.png" type="Texture" id=1188]
 [ext_resource path="res://scenes/actors/objects/buoyant_platform/icon.png" type="Texture" id=1189]
 [ext_resource path="res://assets/tiles/log/palletes/8_slopeR.png" type="Texture" id=1190]
@@ -1298,11 +1298,11 @@
 [ext_resource path="res://assets/tiles/carpet/palette_icons/1_slopeR.png" type="Texture" id=1296]
 [ext_resource path="res://assets/tiles/carpet/palette_icons/4_slopeR.png" type="Texture" id=1297]
 [ext_resource path="res://assets/tiles/carpet/palette_icons/1_slopeL.png" type="Texture" id=1298]
-[ext_resource path="res://scenes/actors/objects/star_door/Emblem Doors/planks_door_double_shine_anim1.png" type="Texture" id=1299]
-[ext_resource path="res://scenes/actors/objects/star_door/Emblem Doors/rusty_door_double_shine_anim1.png" type="Texture" id=1300]
-[ext_resource path="res://scenes/actors/objects/star_door/Emblem Doors/metal_door_double_shine_anim1.png" type="Texture" id=1301]
-[ext_resource path="res://scenes/actors/objects/star_door/Emblem Doors/standard_door_double_shine_anim1.png" type="Texture" id=1302]
-[ext_resource path="res://scenes/actors/objects/star_door/Emblem Doors/spooky_door_double_shine_anim1.png" type="Texture" id=1303]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/standard_door_double_icon.png" type="Texture" id=1299]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/rusty_door_double_icon.png" type="Texture" id=1300]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/metal_door_double_icon.png" type="Texture" id=1301]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/single/metal_door_icon.png" type="Texture" id=1302]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/double/spooky_door_double_icon.png" type="Texture" id=1303]
 [ext_resource path="res://assets/tiles/pyramid_bricks/palette_icons/4Red-sandstone_brick_slope_l_icon.png" type="Texture" id=1304]
 [ext_resource path="res://assets/tiles/pyramid_bricks/palette_icons/4Red-sandstone_brick_icon.png" type="Texture" id=1305]
 [ext_resource path="res://assets/tiles/fire_bricks/palette_icons/5Yellow-magma_brick_slope_l_icon.png" type="Texture" id=1306]
@@ -1546,6 +1546,9 @@
 [ext_resource path="res://scenes/actors/objects/twisted_tree_angle/palette/1.png" type="Texture" id=1544]
 [ext_resource path="res://scenes/actors/objects/twisted_tree_angle/palette/5.png" type="Texture" id=1545]
 [ext_resource path="res://scenes/actors/objects/twisted_tree_angle/palette/6.png" type="Texture" id=1546]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/single/rusty_door_icon.png" type="Texture" id=1547]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/single/spooky_door_icon.png" type="Texture" id=1548]
+[ext_resource path="res://scenes/actors/objects/star_door/Editor/single/planks_door_icon.png" type="Texture" id=1549]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2832,6 +2835,16 @@ index_in_sequence = 2
 icon = ExtResource( 585 )
 preview = ExtResource( 585 )
 
+[node name="AreaTransition" type="Node" parent="PlaceableItems/TeleportGroup"]
+script = ExtResource( 24 )
+object_id = 112
+is_object = true
+change_to = "ZoomTrigger"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 973 )
+preview = ExtResource( 972 )
+
 [node name="Door" type="Node" parent="PlaceableItems/TeleportGroup"]
 script = ExtResource( 24 )
 object_id = 48
@@ -2848,20 +2861,25 @@ preview = ExtResource( 49 )
 script = ExtResource( 24 )
 object_id = 113
 is_object = true
-palette_icons = [ ExtResource( 1302 ), ExtResource( 1301 ), ExtResource( 1303 ), ExtResource( 1300 ), ExtResource( 1299 ) ]
-palette_previews = [ ExtResource( 1302 ), ExtResource( 1301 ), ExtResource( 1303 ), ExtResource( 1300 ), ExtResource( 1299 ) ]
-icon = ExtResource( 1187 )
-preview = ExtResource( 847 )
+palette_icons = [ ExtResource( 1299 ), ExtResource( 1301 ), ExtResource( 1303 ), ExtResource( 1300 ), ExtResource( 847 ) ]
+palette_previews = [ ExtResource( 1299 ), ExtResource( 1301 ), ExtResource( 1303 ), ExtResource( 1300 ), ExtResource( 847 ) ]
+change_to = "StarDoorSingle"
+items_in_sequence = 2
+icon = ExtResource( 1299 )
+preview = ExtResource( 1299 )
 
-[node name="AreaTransition" type="Node" parent="PlaceableItems/TeleportGroup"]
+[node name="StarDoorSingle" type="Node" parent="PlaceableItems/TeleportGroup"]
 script = ExtResource( 24 )
-object_id = 112
+object_id = 113
 is_object = true
-change_to = "ZoomTrigger"
-items_in_sequence = 3
+palette_icons = [ ExtResource( 1187 ), ExtResource( 1302 ), ExtResource( 1548 ), ExtResource( 1547 ), ExtResource( 1549 ) ]
+palette_previews = [ ExtResource( 1187 ), ExtResource( 1302 ), ExtResource( 1548 ), ExtResource( 1547 ), ExtResource( 1549 ) ]
+change_to = "StarDoor"
+items_in_sequence = 2
 index_in_sequence = 1
-icon = ExtResource( 973 )
-preview = ExtResource( 972 )
+icon = ExtResource( 1187 )
+preview = ExtResource( 1187 )
+placement_action = ExtResource( 33 )
 
 [node name="CollectiblesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )

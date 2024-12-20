@@ -1,11 +1,29 @@
 extends TeleportObject
 
-onready var icon = $DoorEnterLogic/Icon
-onready var door = $DoorEnterLogic/Door
-onready var door_enter_logic = $DoorEnterLogic
 
-export(Array, Texture) var palette_textures
-export(Array, SpriteFrames) var palette_frames
+const SINGLE_VOLUME: float = -8.0
+const DOUBLE_VOLUME: float = 6.0
+
+onready var collision_shape: CollisionShape2D = $DoorEnterLogic/Area2D/CollisionShape2D
+onready var icon: AnimatedSprite = $DoorEnterLogic/Icon
+onready var door: AnimatedSprite = $DoorEnterLogic/Door
+onready var audio_player: AudioStreamPlayer = $DoorEnterLogic/AudioStreamPlayer
+onready var door_enter_logic: Node2D = $DoorEnterLogic
+
+export var double_door_frames: SpriteFrames
+export var single_door_frames: SpriteFrames
+
+export var double_icon_frames: SpriteFrames
+export var single_icon_frames: SpriteFrames
+
+export var double_area_shape: Shape2D
+export var single_area_shape: Shape2D
+
+export var double_open_audio: AudioStream
+export var double_close_audio: AudioStream
+
+export var single_open_audio: AudioStream
+export var single_close_audio: AudioStream
 
 var palette_dict = {
 	0: "wood",
@@ -23,14 +41,15 @@ var collectible_dictionary : Dictionary
 var text := ""
 var prev_coll
 var insufficient_text: String = "Sorry! You need {num} {col} to open this door!"
+var is_single: bool = false
 
-var possible_coll = ["shine", "star coin", "coin", "starbit"]
+var possible_coll = ["shine", "star coin", "coin", "star bit"]
 var coll
 
 const OPEN_DOOR_WAIT = 0.45
 
 func _set_properties() -> void:
-	savable_properties = ["area_id", "destination_tag", "teleportation_mode", "collectible", "required_amount", "insufficient_text"]
+	savable_properties = ["area_id", "destination_tag", "teleportation_mode", "collectible", "required_amount", "insufficient_text", "is_single"]
 	editable_properties = ["area_id", "destination_tag", "teleportation_mode", "collectible", "required_amount", "insufficient_text"]
 	
 func _set_property_values() -> void:
@@ -40,10 +59,11 @@ func _set_property_values() -> void:
 	set_property("teleportation_mode", teleportation_mode, true, "Teleport Mode")
 	set_bool_alias("teleportation_mode", "Remote", "Local")
 	set_property("collectible", collectible)
-	set_property_menu("collectible", ["option_string", possible_coll, 0, ["Shines", "Star Coins", "Coins", "Purple Starbits"]])
+	set_property_menu("collectible", ["option_string", possible_coll, 0, ["Shines", "Star Coins", "Coins", "Star Bits"]])
 	set_property("required_amount", required_amount)
 	set_property("force_fadeout", force_fadeout)
 	set_property("insufficient_text", insufficient_text)
+	set_property("is_single", is_single)
 
 
 func _init():
@@ -51,6 +71,22 @@ func _init():
 	object_type = "door"
 
 func _ready() -> void:
+	# weird system but whateverrr :p
+	# also reusing the paratroopa one cuz idk dont feel like making new script
+	var scene = get_tree().current_scene
+	if scene.mode == 1 and scene.placed_item_property == "Para":
+		set_property("is_single", true)
+	
+	# set up single vs double doors
+	door.frames = single_door_frames if is_single else double_door_frames
+	icon.frames = single_icon_frames if is_single else double_icon_frames
+	collision_shape.shape = single_area_shape if is_single else double_area_shape
+	
+	door_enter_logic.open_audio = single_open_audio if is_single else double_open_audio
+	door_enter_logic.close_audio = single_close_audio if is_single else double_close_audio
+	audio_player.volume_db = SINGLE_VOLUME if is_single else DOUBLE_VOLUME
+	
+	# everything else :D
 	prev_coll = collectible
 	coll = collectible
 	.ready() #calls parent class "TeleportObject"i
@@ -59,22 +95,20 @@ func _ready() -> void:
 		icon.z_index = 0
 		door.z_index = 0
 	if possible_coll.has(collectible):
-		icon.animation = palette_dict[palette] + "_" + collectible + "_open"
+		icon.animation = palette_dict[palette] + "_" + collectible
 	else:
 		icon.animation = "null"
-	door.animation = palette_dict[palette] + "_open"
+	door.animation = palette_dict[palette]
 	if scale.x < 1:
 		scale.x = abs(scale.x)
 		icon.flip_h = true
 		door.flip_h = true
 	
-	var append_tag 
-	
-	
-
+	var append_tag
 	if destination_tag != "default_teleporter" || destination_tag != null:
 		append_tag = destination_tag.to_lower()
 	Singleton.CurrentLevelData.level_data.vars.teleporters.append([append_tag, self])
+	
 	current_level_info = Singleton.CurrentLevelData.level_info
 	match(collectible):
 		"shine":
@@ -113,12 +147,12 @@ func exit_local_teleport():
 func exit_remote_teleport():
 	Singleton.CurrentLevelData.level_data.vars.transition_data = []
 	door_enter_logic.is_idle = true
-	
+
 func _process(delta):
 	prev_coll = collectible
 	if prev_coll != coll:
 		if possible_coll.has(collectible):
-			icon.animation = palette_dict[palette] + "_" + collectible + "_open"
+			icon.animation = palette_dict[palette] + "_" + collectible
 		else:
 			icon.animation = "null"
 	coll = collectible
