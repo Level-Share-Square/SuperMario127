@@ -1,3 +1,4 @@
+class_name ResizableSemisolid
 extends GameObject
 
 

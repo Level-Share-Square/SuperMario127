@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/actors/objects/pearl_platform/pearl_platform.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/metal_platform/semi_solid_platform.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/metal_platform/is_platform_area.gd" type="Script" id=3]
-[ext_resource path="res://scenes/actors/objects/metal_platform/resizable_semisolid.gd" type="Script" id=4]
+[ext_resource path="res://scenes/actors/objects/pearl_platform/recolorable_semisolid.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 4 )
@@ -26,9 +26,6 @@ texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 32, 8 )
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 visible = false
