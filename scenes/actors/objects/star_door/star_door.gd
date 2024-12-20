@@ -43,7 +43,7 @@ var prev_coll
 var insufficient_text: String = "Sorry! You need {num} {col} to open this door!"
 var is_single: bool = false
 
-var possible_coll = ["shine", "star coin", "coin", "star bit"]
+var possible_coll = ["shine", "star coin", "coin", "star bit", "unknown"]
 var coll
 
 const OPEN_DOOR_WAIT = 0.45
@@ -59,7 +59,7 @@ func _set_property_values() -> void:
 	set_property("teleportation_mode", teleportation_mode, true, "Teleport Mode")
 	set_bool_alias("teleportation_mode", "Remote", "Local")
 	set_property("collectible", collectible)
-	set_property_menu("collectible", ["option_string", possible_coll, 0, ["Shines", "Star Coins", "Coins", "Star Bits"]])
+	set_property_menu("collectible", ["option_string", possible_coll, 0, ["Shines", "Star Coins", "Coins", "Star Bits", "Empty"]])
 	set_property("required_amount", required_amount)
 	set_property("force_fadeout", force_fadeout)
 	set_property("insufficient_text", insufficient_text)
@@ -94,7 +94,7 @@ func _ready() -> void:
 		z_index = 0
 		icon.z_index = 0
 		door.z_index = 0
-	if possible_coll.has(collectible):
+	if collectible != "unknown" and possible_coll.has(collectible):
 		icon.animation = palette_dict[palette] + "_" + collectible
 	else:
 		icon.animation = "null"
@@ -151,7 +151,7 @@ func exit_remote_teleport():
 func _process(delta):
 	prev_coll = collectible
 	if prev_coll != coll:
-		if possible_coll.has(collectible):
+		if collectible != "unknown" and possible_coll.has(collectible):
 			icon.animation = palette_dict[palette] + "_" + collectible
 		else:
 			icon.animation = "null"

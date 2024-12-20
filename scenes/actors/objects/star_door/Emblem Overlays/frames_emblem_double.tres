@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=225 format=2]
+[gd_resource type="SpriteFrames" load_steps=281 format=2]
 
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/double/rusty_door_double_coin_anim_overlay.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/double/planks_door_double_star_anim_overlay.png" type="Texture" id=2]
@@ -16,6 +16,10 @@
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/double/spooky_door_double_star_anim_overlay.png" type="Texture" id=14]
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/double/spooky_door_double_coin_anim_overlay.png" type="Texture" id=15]
 [ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/double/spooky_door_double_shine_anim_overlay.png" type="Texture" id=16]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/double/spooky_door_double_starbit_anim_overlay.png" type="Texture" id=17]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/double/rusty_door_double_starbit_anim_overlay.png" type="Texture" id=18]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/double/planks_door_double_starbit_anim_overlay.png" type="Texture" id=19]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/double/metal_door_double_starbit_anim_overlay.png" type="Texture" id=20]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 8 )
@@ -119,6 +123,58 @@ region = Rect2( 528, 0, 48, 40 )
 
 [sub_resource type="AtlasTexture" id=26]
 atlas = ExtResource( 9 )
+region = Rect2( 576, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=209]
+atlas = ExtResource( 20 )
+region = Rect2( 0, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=210]
+atlas = ExtResource( 20 )
+region = Rect2( 48, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=211]
+atlas = ExtResource( 20 )
+region = Rect2( 96, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=212]
+atlas = ExtResource( 20 )
+region = Rect2( 144, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=213]
+atlas = ExtResource( 20 )
+region = Rect2( 192, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=214]
+atlas = ExtResource( 20 )
+region = Rect2( 240, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=215]
+atlas = ExtResource( 20 )
+region = Rect2( 288, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=216]
+atlas = ExtResource( 20 )
+region = Rect2( 336, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=217]
+atlas = ExtResource( 20 )
+region = Rect2( 384, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=218]
+atlas = ExtResource( 20 )
+region = Rect2( 432, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=219]
+atlas = ExtResource( 20 )
+region = Rect2( 480, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=220]
+atlas = ExtResource( 20 )
+region = Rect2( 528, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=221]
+atlas = ExtResource( 20 )
 region = Rect2( 576, 0, 48, 40 )
 
 [sub_resource type="AtlasTexture" id=27]
@@ -277,6 +333,58 @@ region = Rect2( 528, 0, 48, 40 )
 atlas = ExtResource( 11 )
 region = Rect2( 576, 0, 48, 40 )
 
+[sub_resource type="AtlasTexture" id=222]
+atlas = ExtResource( 19 )
+region = Rect2( 0, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=223]
+atlas = ExtResource( 19 )
+region = Rect2( 48, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=224]
+atlas = ExtResource( 19 )
+region = Rect2( 96, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=225]
+atlas = ExtResource( 19 )
+region = Rect2( 144, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=226]
+atlas = ExtResource( 19 )
+region = Rect2( 192, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=227]
+atlas = ExtResource( 19 )
+region = Rect2( 240, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=228]
+atlas = ExtResource( 19 )
+region = Rect2( 288, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=229]
+atlas = ExtResource( 19 )
+region = Rect2( 336, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=230]
+atlas = ExtResource( 19 )
+region = Rect2( 384, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=231]
+atlas = ExtResource( 19 )
+region = Rect2( 432, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=232]
+atlas = ExtResource( 19 )
+region = Rect2( 480, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=233]
+atlas = ExtResource( 19 )
+region = Rect2( 528, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=234]
+atlas = ExtResource( 19 )
+region = Rect2( 576, 0, 48, 40 )
+
 [sub_resource type="AtlasTexture" id=66]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 48, 40 )
@@ -433,6 +541,58 @@ region = Rect2( 528, 0, 48, 40 )
 atlas = ExtResource( 10 )
 region = Rect2( 576, 0, 48, 40 )
 
+[sub_resource type="AtlasTexture" id=235]
+atlas = ExtResource( 18 )
+region = Rect2( 0, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=236]
+atlas = ExtResource( 18 )
+region = Rect2( 48, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=237]
+atlas = ExtResource( 18 )
+region = Rect2( 96, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=238]
+atlas = ExtResource( 18 )
+region = Rect2( 144, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=239]
+atlas = ExtResource( 18 )
+region = Rect2( 192, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=240]
+atlas = ExtResource( 18 )
+region = Rect2( 240, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=241]
+atlas = ExtResource( 18 )
+region = Rect2( 288, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=242]
+atlas = ExtResource( 18 )
+region = Rect2( 336, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=243]
+atlas = ExtResource( 18 )
+region = Rect2( 384, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=244]
+atlas = ExtResource( 18 )
+region = Rect2( 432, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=245]
+atlas = ExtResource( 18 )
+region = Rect2( 480, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=246]
+atlas = ExtResource( 18 )
+region = Rect2( 528, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=247]
+atlas = ExtResource( 18 )
+region = Rect2( 576, 0, 48, 40 )
+
 [sub_resource type="AtlasTexture" id=105]
 atlas = ExtResource( 13 )
 region = Rect2( 0, 0, 48, 40 )
@@ -587,6 +747,58 @@ region = Rect2( 528, 0, 48, 40 )
 
 [sub_resource type="AtlasTexture" id=143]
 atlas = ExtResource( 16 )
+region = Rect2( 576, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=248]
+atlas = ExtResource( 17 )
+region = Rect2( 0, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=249]
+atlas = ExtResource( 17 )
+region = Rect2( 48, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=250]
+atlas = ExtResource( 17 )
+region = Rect2( 96, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=251]
+atlas = ExtResource( 17 )
+region = Rect2( 144, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=252]
+atlas = ExtResource( 17 )
+region = Rect2( 192, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=253]
+atlas = ExtResource( 17 )
+region = Rect2( 240, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=254]
+atlas = ExtResource( 17 )
+region = Rect2( 288, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=255]
+atlas = ExtResource( 17 )
+region = Rect2( 336, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=256]
+atlas = ExtResource( 17 )
+region = Rect2( 384, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=257]
+atlas = ExtResource( 17 )
+region = Rect2( 432, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=258]
+atlas = ExtResource( 17 )
+region = Rect2( 480, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=259]
+atlas = ExtResource( 17 )
+region = Rect2( 528, 0, 48, 40 )
+
+[sub_resource type="AtlasTexture" id=260]
+atlas = ExtResource( 17 )
 region = Rect2( 576, 0, 48, 40 )
 
 [sub_resource type="AtlasTexture" id=144]
@@ -861,7 +1073,7 @@ animations = [ {
 "name": "metal_shine",
 "speed": 24.0
 }, {
-"frames": [  ],
+"frames": [ SubResource( 209 ), SubResource( 210 ), SubResource( 211 ), SubResource( 212 ), SubResource( 213 ), SubResource( 214 ), SubResource( 215 ), SubResource( 216 ), SubResource( 217 ), SubResource( 218 ), SubResource( 219 ), SubResource( 220 ), SubResource( 221 ) ],
 "loop": false,
 "name": "metal_star bit",
 "speed": 24.0
@@ -886,7 +1098,7 @@ animations = [ {
 "name": "plank_shine",
 "speed": 24.0
 }, {
-"frames": [  ],
+"frames": [ SubResource( 222 ), SubResource( 223 ), SubResource( 224 ), SubResource( 225 ), SubResource( 226 ), SubResource( 227 ), SubResource( 228 ), SubResource( 229 ), SubResource( 230 ), SubResource( 231 ), SubResource( 232 ), SubResource( 233 ), SubResource( 234 ) ],
 "loop": false,
 "name": "plank_star bit",
 "speed": 24.0
@@ -906,7 +1118,7 @@ animations = [ {
 "name": "rusty_shine",
 "speed": 24.0
 }, {
-"frames": [  ],
+"frames": [ SubResource( 235 ), SubResource( 236 ), SubResource( 237 ), SubResource( 238 ), SubResource( 239 ), SubResource( 240 ), SubResource( 241 ), SubResource( 242 ), SubResource( 243 ), SubResource( 244 ), SubResource( 245 ), SubResource( 246 ), SubResource( 247 ) ],
 "loop": false,
 "name": "rusty_star bit",
 "speed": 24.0
@@ -926,7 +1138,7 @@ animations = [ {
 "name": "spooky_shine",
 "speed": 24.0
 }, {
-"frames": [  ],
+"frames": [ SubResource( 248 ), SubResource( 249 ), SubResource( 250 ), SubResource( 251 ), SubResource( 252 ), SubResource( 253 ), SubResource( 254 ), SubResource( 255 ), SubResource( 256 ), SubResource( 257 ), SubResource( 258 ), SubResource( 259 ), SubResource( 260 ) ],
 "loop": false,
 "name": "spooky_star bit",
 "speed": 24.0
