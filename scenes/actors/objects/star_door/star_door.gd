@@ -24,7 +24,7 @@ var text := ""
 var prev_coll
 var insufficient_text: String = "Sorry! You need {num} {col} to open this door!"
 
-var possible_coll = ["shine", "star coin", "coin", "star bit"]
+var possible_coll = ["shine", "star coin", "coin", "starbit"]
 var coll
 
 const OPEN_DOOR_WAIT = 0.45
@@ -40,6 +40,7 @@ func _set_property_values() -> void:
 	set_property("teleportation_mode", teleportation_mode, true, "Teleport Mode")
 	set_bool_alias("teleportation_mode", "Remote", "Local")
 	set_property("collectible", collectible)
+	set_property_menu("collectible", ["option_string", possible_coll, 0, ["Shines", "Star Coins", "Coins", "Purple Starbits"]])
 	set_property("required_amount", required_amount)
 	set_property("force_fadeout", force_fadeout)
 	set_property("insufficient_text", insufficient_text)
