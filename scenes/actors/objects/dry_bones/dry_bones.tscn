@@ -7,5 +7,5 @@
 script = ExtResource( 2 )
 enemy_scene_path = "res://scenes/actors/objects/dry_bones/dry_bones_enemy.tscn"
 is_stationary = false
-toss_time = 5.0
+toss_wait = 5.0
 regenerate_time = 10.0
