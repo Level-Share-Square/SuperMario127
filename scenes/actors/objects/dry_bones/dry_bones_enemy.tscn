@@ -768,10 +768,10 @@ can_be_hurt = false
 [node name="RegenerateState" type="Node2D" parent="States" index="6"]
 script = ExtResource( 28 )
 
-[node name="Damage" parent="." index="3"]
+[node name="Damage" parent="." index="4"]
 script = ExtResource( 7 )
 
-[node name="AnimatedSprite" parent="." index="4"]
+[node name="AnimatedSprite" parent="." index="5"]
 frames = SubResource( 14 )
 animation = "idle"
 playing = true
@@ -780,7 +780,7 @@ script = ExtResource( 9 )
 [node name="DialogueDetector" parent="AnimatedSprite" index="0"]
 enabled = true
 
-[node name="VisibilityEnabler2D" parent="." index="5"]
+[node name="VisibilityEnabler2D" parent="." index="6"]
 pause_particles = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
@@ -858,7 +858,6 @@ bus = "Sounds"
 stream = ExtResource( 26 )
 bus = "Sounds"
 
-[connection signal="state_changed" from="." to="Timer" method="state_changed"]
-[connection signal="state_changed" from="." to="RegenerateTimer" method="state_changed"]
+[connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]
 [connection signal="timeout" from="Timer" to="." method="set_state_by_name" binds= [ "TossState" ]]
 [connection signal="timeout" from="RegenerateTimer" to="." method="set_state_by_name" binds= [ "RegenerateState" ]]

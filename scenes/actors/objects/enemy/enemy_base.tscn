@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_base.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/enemy/dialogue.gd" type="Script" id=2]
@@ -11,6 +11,9 @@ height = 16.0
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 8, 16 )
+
+[sub_resource type="RectangleShape2D" id=38]
+extents = Vector2( 100, 100 )
 
 [sub_resource type="CircleShape2D" id=14]
 radius = 3.0
@@ -68,6 +71,14 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LiquidsDetector"]
 position = Vector2( 0, -16 )
 shape = SubResource( 11 )
+
+[node name="PlatformDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformDetector"]
+position = Vector2( 0, -16 )
+shape = SubResource( 38 )
 
 [node name="States" type="Node2D" parent="."]
 

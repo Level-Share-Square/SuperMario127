@@ -31,6 +31,8 @@ var spawn_effect: bool = true
 
 # water and lava
 onready var liquids_detector: Area2D = $LiquidsDetector
+# detects platforms (copy pasted from mario.gd so we're just going to reuse this from there)
+onready var platform_detector: Area2D = $PlatformDetector
 # holds all the states
 onready var state_container: Node = $States 
 # self explanatory
@@ -39,6 +41,8 @@ onready var sprite: AnimatedSprite = $AnimatedSprite
 onready var dialogue_detector: Area2D = $AnimatedSprite/DialogueDetector
 # emits when spawned
 onready var spawn_particles: Particles2D = $SpawnParticles
+#bottom pos so platforms don't explode
+onready var bottom_pos: Node2D = $BottomPos
 
 # what the enemys currently doing
 var state: EnemyState
@@ -98,6 +102,13 @@ func _physics_process(delta):
 	
 	var floor_normal: Vector2 = get_floor_normal()
 	var working_velocity = velocity
+	
+	for body in platform_detector.get_overlapping_bodies():
+		if body is PhysicsBody2D:
+			if body.can_collide_with(self):
+				remove_collision_exception_with(body)
+			else:
+				add_collision_exception_with(body)
 	
 	# counteract slope slowdown/speedup
 	if is_on_floor() and not is_zero_approx(floor_normal.y):
