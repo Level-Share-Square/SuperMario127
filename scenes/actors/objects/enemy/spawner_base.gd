@@ -78,7 +78,7 @@ func instance_enemy(emit_particles: bool = true) -> EnemyBase:
 	spawned_enemy.gravity = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.gravity * 2
 	# handle being flipped
 	if scale.x < 0:
-		scale.x = abs(scale.x)
+		spawned_enemy.scale = Vector2.ONE
 		spawned_enemy.facing_direction = -1
 	# and rotation
 	if enabled:
