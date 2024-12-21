@@ -726,7 +726,7 @@ script = ExtResource( 17 )
 cur_state = "PatrolState"
 float_in_liquids = true
 is_stationary = false
-toss_time = 5.0
+toss_wait = 5.0
 regenerate_time = 10.0
 
 [node name="IdleState" type="Node2D" parent="States" index="0"]
@@ -858,6 +858,7 @@ bus = "Sounds"
 stream = ExtResource( 26 )
 bus = "Sounds"
 
-[connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]
+[connection signal="state_changed" from="." to="Timer" method="state_changed"]
+[connection signal="state_changed" from="." to="RegenerateTimer" method="state_changed"]
 [connection signal="timeout" from="Timer" to="." method="set_state_by_name" binds= [ "TossState" ]]
 [connection signal="timeout" from="RegenerateTimer" to="." method="set_state_by_name" binds= [ "RegenerateState" ]]
