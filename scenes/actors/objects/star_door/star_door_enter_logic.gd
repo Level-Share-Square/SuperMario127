@@ -93,6 +93,10 @@ func start_door_enter_animation(character : Character) -> void:
 				collected += 1
 		if collected < get_parent().required_amount:
 			can_enter = false
+	
+	if not Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and (
+		get_parent().collectible == "shine" or get_parent().collectible == "star coin"):
+		can_enter = true
 			
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character, "position:x", null, global_position.x, slide_length)
