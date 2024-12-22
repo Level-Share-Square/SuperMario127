@@ -225,15 +225,12 @@ func pipe_exit_anim_finished(character : Character):
 	#character.toggle_movement(true)
 	# undo collision changes 
 	stored_characters[character.player_id] = null
-	area2d.connect("body_exited", self, "exit_remote_teleport")
 	if !teleportation_mode:
-		var timer = Timer.new()
+		var timer = get_tree().create_timer(0.1)
 		timer.connect("timeout", character, "toggle_movement", [true])
 		timer.connect("timeout", self, "set_camera", [character])
-		timer.wait_time = 0.1
-		timer.one_shot = true
-		add_child(timer)
-		timer.start()
+	else:
+		set_camera(character)
 	
 func exit_with_helper(character : Character):
 	var helper = Singleton.CurrentLevelData.level_data.vars.transition_character_data.back() if character.player_id == 0 else Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.back()
@@ -241,10 +238,8 @@ func exit_with_helper(character : Character):
 	character.state = helper.state
 	character.facing_direction = helper.facing_direction
 	character.camera.global_position = helper.find_camera_position(vertical, character.global_position, character.camera.base_size, parts * 32)
-	character.camera.reset_physics_interpolation()
 	character.camera.last_position = character.camera.position
 	character.position = global_position + helper.find_exit_offset(vertical, parts * 32)
-	character.reset_physics_interpolation()
 	var timer = Timer.new()
 	timer.connect("timeout", character, "toggle_movement", [true])
 	timer.connect("timeout", self, "set_camera", [character])

@@ -47,7 +47,7 @@ func _physics_process(delta):
 					if !is_instance_valid(body.powerup):
 						character_apply_wind(body, delta)
 					else:
-						if body.powerup != MetalPowerup:
+						if body.powerup != body.get_powerup_node("MetalPowerup"):
 							character_apply_wind(body, delta)
 				
 				elif enabled and body is EnemyBase:
@@ -61,12 +61,12 @@ func _physics_process(delta):
 	else:
 		sprite.visible == true
 
-func character_apply_wind(body, delta):
+func character_apply_wind(body : Character, delta):
 	if wind_angle_vector.x > 0.05 or wind_angle_vector.x < -0.05:
 		body.in_wind = true
 	body.velocity = apply_velocity(body.velocity, delta)
 	
-	if !body.is_on_floor() and (body.state is FallState or body.state == null):
+	if !body.is_on_floor() and (body.state == body.get_state_node("FallState") or body.state == null):
 		var char_sprite = body.sprite
 		if body.facing_direction == 1:
 			if body.jump_animation == 0:
@@ -81,7 +81,7 @@ func character_apply_wind(body, delta):
 				char_sprite.animation = "doubleFallLeft"
 	
 	#set's mario's state to falling if he stops going down in a ground pound or dive (dive has a certain threshold tho)
-	if (body.state is GroundPoundState) and (body.velocity.y <= 0):
+	if (body.state == body.get_state_node("GroundPoundState")) and (body.velocity.y <= 0):
 		if !body.is_on_floor():
 			body.set_state_by_name("FallState", delta)
 	elif (body.state is DiveState) and (body.velocity.y <= -wind_power*18) and (wind_angle_vector.y == -1):
