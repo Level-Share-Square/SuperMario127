@@ -16,16 +16,19 @@ func update_property(key, value):
 		"color":
 			update_liquid_color(value)
 		"size" or "death_threshold":
-			update_death_threshold()
+			if key == "death_threshold":
+				update_death_threshold(value)
+			else:
+				update_death_threshold(death_threshold)
 
 
 func update_liquid_color(color):
 	waves.material.set_shader_param("color", color)
 	liquid_body.material.set_shader_param("color", color)
 
-func update_death_threshold():
+func update_death_threshold(threshold):
 	threshold_gradient.rect_size = size
-	var gradient_position = (death_threshold)/size.y
+	var gradient_position = max(threshold, 16)/size.y
 	print(gradient_position)
 	var gradient : GradientTexture2D = threshold_gradient.texture
 	gradient.fill_from.y = (gradient_position - 18/size.y)
@@ -51,9 +54,10 @@ func _ready():
 	liquid_body.material.set_shader_param("noise_scale_3", liquid_body.rect_size/Vector2(128, 128))
 	
 	update_liquid_color(color)
-	update_death_threshold()
+	
 
 func _physics_process(delta):
+	update_death_threshold(death_threshold)
 	if !enabled: return
 	
 	for body in liquid_area.get_overlapping_bodies():
