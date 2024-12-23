@@ -322,7 +322,7 @@ func _ready():
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
 	ground_collider_enable_timer.connect("timeout", self, "_on_ground_collder_timer_timeout")
-	#print(Singleton.CurrentLevelData.level_data.vars.transition_data)
+	print(Singleton.CurrentLevelData.level_data.vars.transition_data)
 	if Singleton.CurrentLevelData.level_data.vars.transition_data != []:
 		hide()
 		toggle_movement(false)
@@ -1170,7 +1170,15 @@ func kill(cause: String) -> void:
 			sound_player.play_death_sound()
 			yield(get_tree().create_timer(0.75), "timeout")
 			reload = true
-		
+		elif cause == "quicksand":
+			controllable = false
+			sound_player.play_death_sound()
+			if number_of_players == 1:
+				cutout_in = cutout_death
+				yield(get_tree().create_timer(1), "timeout")
+			else:
+				reload = false
+			
 		if reload:
 			Singleton.SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
 		else:
