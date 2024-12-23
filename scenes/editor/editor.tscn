@@ -2509,16 +2509,6 @@ object_size = Vector2( 16, 16 )
 icon = ExtResource( 134 )
 preview = ExtResource( 134 )
 
-[node name="Water" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 72
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-icon = ExtResource( 235 )
-preview = ExtResource( 236 )
-
 [node name="Cannon" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
 object_id = 46
@@ -3415,6 +3405,42 @@ is_object = true
 icon = ExtResource( 1442 )
 preview = ExtResource( 1441 )
 
+[node name="LiquidsGroup" type="Node" parent="PlaceableItems"]
+script = ExtResource( 25 )
+color = Color( 0.835294, 0.639216, 0.266667, 1 )
+group_name = "Liquids"
+
+[node name="Water" type="Node" parent="PlaceableItems/LiquidsGroup"]
+script = ExtResource( 24 )
+object_id = 72
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+icon = ExtResource( 235 )
+preview = ExtResource( 236 )
+
+[node name="Lava" type="Node" parent="PlaceableItems/LiquidsGroup"]
+script = ExtResource( 24 )
+object_id = 75
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+icon = ExtResource( 289 )
+preview = ExtResource( 290 )
+
+[node name="Quicksand" type="Node" parent="PlaceableItems/LiquidsGroup"]
+script = ExtResource( 24 )
+object_id = 142
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+item_name = "Quicksand"
+icon = ExtResource( 289 )
+preview = ExtResource( 290 )
+
 [node name="GrassGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
 color = Color( 0.0980392, 0.345098, 0.137255, 1 )
@@ -4127,16 +4153,6 @@ palette_icons = [ ExtResource( 371 ), ExtResource( 1264 ), ExtResource( 1265 ), 
 palette_previews = [ ExtResource( 370 ), ExtResource( 1270 ), ExtResource( 1277 ), ExtResource( 1275 ), ExtResource( 1269 ), ExtResource( 1272 ), ExtResource( 1273 ), ExtResource( 1274 ), ExtResource( 1278 ) ]
 icon = ExtResource( 371 )
 preview = ExtResource( 370 )
-
-[node name="Lava" type="Node" parent="PlaceableItems/VolcanoGroup"]
-script = ExtResource( 24 )
-object_id = 75
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-icon = ExtResource( 289 )
-preview = ExtResource( 290 )
 
 [node name="Fire" type="Node" parent="PlaceableItems/VolcanoGroup"]
 script = ExtResource( 24 )

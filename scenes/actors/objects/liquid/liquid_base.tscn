@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/actors/objects/liquid/liquid_base.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 900, 300 )
+
+[node name="LiquidBase" type="Node2D"]
+z_index = -1
+script = ExtResource( 1 )
+
+[node name="LiquidArea" type="Area2D" parent="."]
+collision_layer = 33408
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LiquidArea"]
+position = Vector2( 900, 300 )
+shape = SubResource( 1 )
