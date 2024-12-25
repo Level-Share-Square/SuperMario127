@@ -36,23 +36,24 @@ void fragment() {
 	base *= color;
 	base.rgb /= vec3(2);
 	
-	vec2 noise_uv_1 = (UV * noise_scale_1) + (noise_offset_1/noise_scale_1) + (noise_speed_1 * TIME);
+	vec2 noise_uv_1 = (UV * noise_scale_1) + (noise_offset_1/vec2(512)) + (noise_speed_1 * TIME);
 	vec4 noise_1 = texture(noise_texture_1, noise_uv_1);
 	
-	vec2 noise_uv_2 = (UV * noise_scale_2) + (noise_offset_2/noise_scale_2) + (noise_speed_2 * TIME);
+	vec2 noise_uv_2 = (UV * noise_scale_2) + (noise_offset_2/vec2(32)) + (noise_speed_2 * TIME);
 	vec4 noise_2 = texture(noise_texture_2, noise_uv_2);
 	
-	vec2 noise_uv_3 = (UV * noise_scale_3) - (noise_offset_3/noise_scale_3) + (noise_speed_3 * TIME);
+	vec2 noise_uv_3 = (UV * noise_scale_3) - (noise_offset_3/vec2(128)) + (noise_speed_3 * TIME);
 	vec4 noise_3 = texture(noise_texture_3, noise_uv_3);
 	
-	vec3 mix1 = noise_1.rgb/vec3(4) / vec3(2);
-	vec3 mix2 = noise_2.rgb/vec3(4);
-	vec3 mix3 = noise_3.rgb/vec3(8);
+	vec3 mix1 = noise_1.rgb/vec3(7.5);
+	vec3 mix2 = noise_2.rgb/vec3(4.5);
+	vec3 mix3 = noise_3.rgb/vec3(10);
 	
 	base.rgb = base.rgb + mix1 + mix2 - mix3;
+//	base.rgb = base.rgb + mix3*vec3(8);
 	
-	float final_sine = sine(UV, TIME / 8.0f, 10.5f, 5.5f) * sine(UV, TIME / 8.0f, 7.5f, 5.5f) * sine(UV, TIME / 8.0f, 15.5f, 5.5f);
-	float sine_height = (final_sine / 5.0f) + 0.25f;
+	float final_sine = sine(UV, TIME / 8.0f, 10.5f, 1.0f) * sine(UV, TIME / 8.0f, 7.5f, 5.5f) * sine(UV, TIME / 8.0f, 15.5f, 1.0f);
+	float sine_height = (final_sine / 20.0f) + 0.25f;
 	if (UV.y < sine_height) {
 		base.a = 0.0;
 	} else {

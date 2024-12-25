@@ -1,4 +1,4 @@
-[gd_scene load_steps=180 format=2]
+[gd_scene load_steps=187 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -80,6 +80,8 @@
 [ext_resource path="res://scenes/actors/objects/rainbow_powerup/icon.png" type="Texture" id=78]
 [ext_resource path="res://scenes/actors/objects/vanish_powerup/icon.png" type="Texture" id=79]
 [ext_resource path="res://scenes/actors/objects/wing_powerup/icon.png" type="Texture" id=80]
+[ext_resource path="res://scenes/actors/mario/states/QuicksandHop.gd" type="Script" id=81]
+[ext_resource path="res://scenes/actors/mario/states/QuicksandIdle.gd" type="Script" id=82]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -251,7 +253,10 @@ extents = Vector2( 100, 100 )
 extents = Vector2( 8.5, 8.5 )
 
 [sub_resource type="RectangleShape2D" id=30]
-extents = Vector2( 6.5, 15 )
+extents = Vector2( 6.5, 17.5 )
+
+[sub_resource type="RectangleShape2D" id=103]
+extents = Vector2( 7, 17 )
 
 [sub_resource type="RectangleShape2D" id=31]
 extents = Vector2( 4, 15.7 )
@@ -312,11 +317,11 @@ color_ramp = SubResource( 39 )
 hue_variation_random = 0.15
 anim_speed = 1.0
 
-[sub_resource type="ParticlesMaterial" id=42]
+[sub_resource type="ParticlesMaterial" id=43]
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, -27, 0 )
-initial_velocity = 90.0
+initial_velocity = 80.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 100.0
@@ -324,7 +329,7 @@ scale = 0.75
 color_ramp = SubResource( 35 )
 anim_speed = 0.8
 
-[sub_resource type="ParticlesMaterial" id=43]
+[sub_resource type="ParticlesMaterial" id=106]
 flag_disable_z = true
 direction = Vector3( -1, 0, 0 )
 spread = 0.0
@@ -386,6 +391,48 @@ orbit_velocity_random = 0.0
 damping = 100.0
 color_ramp = SubResource( 48 )
 anim_speed = 1.3
+
+[sub_resource type="Curve" id=108]
+min_value = -0.05
+max_value = 0.05
+_data = [ Vector2( 0, 0.00943182 ), 0.0, -0.0107955, 0, 1, Vector2( 1, -0.00136364 ), -0.0107955, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=109]
+curve = SubResource( 108 )
+
+[sub_resource type="ParticlesMaterial" id=104]
+flag_disable_z = true
+direction = Vector3( 0.75, -0.25, 0 )
+spread = 0.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 60.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 100.0
+scale = 0.75
+color_ramp = SubResource( 35 )
+hue_variation = -0.01
+hue_variation_random = 1.0
+hue_variation_curve = SubResource( 109 )
+anim_speed = 0.8
+
+[sub_resource type="ParticlesMaterial" id=107]
+flag_disable_z = true
+direction = Vector3( -0.75, -0.25, 0 )
+spread = 0.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 60.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 100.0
+scale = 0.75
+color_ramp = SubResource( 35 )
+hue_variation = -0.01
+hue_variation_random = 1.0
+hue_variation_curve = SubResource( 109 )
+anim_speed = 0.8
 
 [sub_resource type="CanvasItemMaterial" id=50]
 blend_mode = 1
@@ -1497,7 +1544,6 @@ shape = SubResource( 4 )
 disabled = true
 
 [node name="GroundCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, 0 )
 shape = SubResource( 5 )
 disabled = true
@@ -1525,14 +1571,13 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="GroundCollisionDive" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, -6 )
 z_index = 2
 shape = SubResource( 7 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -19.5793 )
+position = Vector2( 0, -20 )
 rotation = 6.28319
 frames = ExtResource( 1 )
 animation = "idleRight"
@@ -1752,6 +1797,13 @@ script = ExtResource( 53 )
 [node name="LaunchStarState" type="Node" parent="States"]
 script = ExtResource( 75 )
 
+[node name="QuicksandIdleState" type="Node" parent="States"]
+script = ExtResource( 82 )
+
+[node name="QuicksandHopState" type="Node" parent="States"]
+script = ExtResource( 81 )
+priority = 1
+
 [node name="Nozzles" type="Node" parent="."]
 
 [node name="HoverNozzle" type="Node" parent="Nozzles"]
@@ -1831,6 +1883,7 @@ material = SubResource( 26 )
 display_icon = ExtResource( 80 )
 
 [node name="CloudContainer" type="Node2D" parent="."]
+visible = false
 
 [node name="PlayerCollision" type="Area2D" parent="."]
 visible = false
@@ -1871,6 +1924,15 @@ collision_mask = 256
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0.5, 5 )
 shape = SubResource( 30 )
+
+[node name="LiquidDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LiquidDetector"]
+modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
+position = Vector2( 0, 4 )
+shape = SubResource( 103 )
 
 [node name="PipeDetector" type="Area2D" parent="."]
 visible = false
@@ -2049,7 +2111,7 @@ z_index = 2
 emitting = false
 amount = 14
 local_coords = false
-process_material = SubResource( 42 )
+process_material = SubResource( 43 )
 texture = ExtResource( 30 )
 
 [node name="GPParticles2" type="Particles2D" parent="."]
@@ -2059,7 +2121,7 @@ z_index = 2
 emitting = false
 amount = 14
 local_coords = false
-process_material = SubResource( 43 )
+process_material = SubResource( 106 )
 texture = ExtResource( 30 )
 
 [node name="RainbowSparkles" type="Particles2D" parent="."]
@@ -2101,6 +2163,26 @@ emitting = false
 local_coords = false
 process_material = SubResource( 49 )
 texture = ExtResource( 51 )
+
+[node name="QuicksandParticles" type="Particles2D" parent="."]
+material = SubResource( 33 )
+position = Vector2( 0, 18 )
+z_index = 27
+emitting = false
+amount = 14
+local_coords = false
+process_material = SubResource( 104 )
+texture = ExtResource( 30 )
+
+[node name="QuicksandParticles2" type="Particles2D" parent="."]
+material = SubResource( 33 )
+position = Vector2( 0, 18 )
+z_index = 27
+emitting = false
+amount = 14
+local_coords = false
+process_material = SubResource( 107 )
+texture = ExtResource( 30 )
 
 [node name="RingParticles" type="AnimatedSprite" parent="."]
 material = SubResource( 50 )
@@ -2182,6 +2264,7 @@ visible = false
 script = ExtResource( 57 )
 
 [node name="VanishDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2147483712
 

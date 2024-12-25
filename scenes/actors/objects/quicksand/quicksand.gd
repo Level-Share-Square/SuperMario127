@@ -1,6 +1,7 @@
 extends LiquidBase
 
 onready var threshold_gradient : TextureRect = $ThresholdGradient
+onready var bubbles : Particles2D = $Bubbles
 
 var sinking_speed : float = 30.0
 var death_threshold : float = 128.0
@@ -15,35 +16,33 @@ func update_property(key, value):
 	match(key):
 		"color":
 			update_liquid_color(value)
-		"size" or "death_threshold":
-			if key == "death_threshold":
-				update_death_threshold(value)
-			else:
-				update_death_threshold(death_threshold)
+		"size":
+			update()
+		"death_threshold":
+			update()
+				
 
 
 func update_liquid_color(color):
 	waves.material.set_shader_param("color", color)
 	liquid_body.material.set_shader_param("color", color)
 
-func update_death_threshold(threshold):
+func update():
+	threshold_gradient = get_node("ThresholdGradient")
 	threshold_gradient.rect_size = size
-	var gradient_position = max(threshold, 16)/size.y
-	print(gradient_position)
+	var gradient_position = max(death_threshold, 18)/size.y
 	var gradient : GradientTexture2D = threshold_gradient.texture
-	gradient.fill_from.y = (gradient_position - 18/size.y)
-	print(gradient.fill_from.y)
+	gradient.fill_from.y = 0
 	gradient.fill_to.y = (gradient_position + 6/size.y)
-	print(gradient.fill_to.y)
-
-func _ready():
-	if mode == 1:
-		connect("property_changed", self, "update_property")
 	
-	liquid_area.monitoring = enabled
-	liquid_area.monitorable = enabled
-	liquid_type = LiquidType.Quicksand
+	if death_threshold <= 2:
+		bubbles.visible = true
+		bubbles.position = size/2
+		bubbles.process_material.emission_box_extents = Vector3(bubbles.position.x, bubbles.position.y, 0)
+	else:
+		bubbles.visible = false
 	
+	#update shader stuff
 	waves.material.set_shader_param("x_size", waves.rect_size.x)
 	waves.material.set_shader_param("noise_scale_1", waves.rect_size/Vector2(512, 512))
 	waves.material.set_shader_param("noise_scale_2", waves.rect_size/Vector2(32, 32))
@@ -53,24 +52,20 @@ func _ready():
 	liquid_body.material.set_shader_param("noise_scale_2", liquid_body.rect_size/Vector2(32, 32))
 	liquid_body.material.set_shader_param("noise_scale_3", liquid_body.rect_size/Vector2(128, 128))
 	
+
+func _ready():
+	if mode == 1:
+		connect("property_changed", self, "update_property")
+	else:
+		connect("transform_changed", self, "update")
+	
+	liquid_area.monitoring = (enabled and mode != 1)
+	liquid_area.monitorable = (enabled and mode != 1)
+	
 	update_liquid_color(color)
+	update()
 	
 
 func _physics_process(delta):
-	update_death_threshold(death_threshold)
-	if !enabled: return
-	
-	for body in liquid_area.get_overlapping_bodies():
-		if body.name.begins_with("Character"):
-			var character : Character = body
-			if character.velocity.y > sinking_speed:
-				character.velocity.y -= 80*delta*60
-			else:
-				character.velocity.y = sinking_speed
-				if character.state == character.get_state_node("GroundPoundState"):
-					character.set_state_by_name("FallState")
-					
-			character.velocity.x /= 2.5
-			
-			if body.global_position.y > global_position.y + death_threshold:
-				body.kill("quicksand")
+	if size != last_size:
+		update()

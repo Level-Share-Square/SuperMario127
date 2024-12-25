@@ -1,4 +1,4 @@
-[gd_scene load_steps=1584 format=2]
+[gd_scene load_steps=1585 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1549,6 +1549,7 @@
 [ext_resource path="res://scenes/actors/objects/star_door/Editor/single/rusty_door_icon.png" type="Texture" id=1547]
 [ext_resource path="res://scenes/actors/objects/star_door/Editor/single/spooky_door_icon.png" type="Texture" id=1548]
 [ext_resource path="res://scenes/actors/objects/star_door/Editor/single/planks_door_icon.png" type="Texture" id=1549]
+[ext_resource path="res://scenes/actors/objects/quicksand/icon.png" type="Texture" id=1550]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3417,6 +3418,8 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
+change_to = "Lava"
+items_in_sequence = 3
 icon = ExtResource( 235 )
 preview = ExtResource( 236 )
 
@@ -3427,6 +3430,9 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
+change_to = "Quicksand"
+items_in_sequence = 3
+index_in_sequence = 1
 icon = ExtResource( 289 )
 preview = ExtResource( 290 )
 
@@ -3438,8 +3444,11 @@ object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
 item_name = "Quicksand"
-icon = ExtResource( 289 )
-preview = ExtResource( 290 )
+change_to = "Water"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 1550 )
+preview = ExtResource( 1550 )
 
 [node name="GrassGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )

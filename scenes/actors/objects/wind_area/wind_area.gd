@@ -35,7 +35,7 @@ func _ready():
 			triggered = false
 	else:
 		var _connect = connect("property_changed", self, "update_property")
-	wind_angle_vector = Vector2.UP.rotated(deg2rad(rotation_degrees)).normalized()
+	wind_angle_vector = -global_transform.y
 	update_size()
 
 func _physics_process(delta):

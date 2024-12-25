@@ -36,11 +36,12 @@ void fragment() {
 	
 	base.rgb /= vec3(2);
 	
-	vec3 mix1 = noise_1.rgb/vec3(8);
-	vec3 mix2 = noise_2.rgb/vec3(4);
-	vec3 mix3 = noise_3.rgb/vec3(8);
+	vec3 mix1 = noise_1.rgb/vec3(7.5);
+	vec3 mix2 = noise_2.rgb/vec3(4.5);
+	vec3 mix3 = noise_3.rgb/vec3(10);
 	
 	base.rgb = base.rgb + mix1 + mix2 - mix3;
+//	base.rgb = base.rgb + mix3*vec3(10);
 	
 //	base.rgb = step(vec3(.5), base.rgb);
 	

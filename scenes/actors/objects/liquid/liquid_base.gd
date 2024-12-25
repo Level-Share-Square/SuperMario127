@@ -39,7 +39,7 @@ var liquid_properties: Array = [
 	"waves_enable",
 ]
 
-signal transform_changed(liquid_position, size)
+signal transform_changed()
 
 func get_liquid_properties() -> Array:
 	return []
@@ -101,6 +101,7 @@ func change_size():
 	last_size = size
 	last_color = color
 	last_front = render_in_front
+	emit_signal("transform_changed")
 
 func _physics_process(_delta):
 	if !moving: return

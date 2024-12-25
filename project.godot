@@ -559,6 +559,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/Powerup.gd"
 }, {
+"base": "State",
+"class": "QuicksandHopState",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/states/QuicksandHop.gd"
+}, {
+"base": "State",
+"class": "QuicksandIdleState",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/states/QuicksandIdle.gd"
+}, {
 "base": "Powerup",
 "class": "RainbowPowerup",
 "language": "GDScript",
@@ -895,6 +905,8 @@ _global_script_class_icons={
 "PlaceableItem": "",
 "PlayerSelector": "",
 "Powerup": "",
+"QuicksandHopState": "",
+"QuicksandIdleState": "",
 "RainbowPowerup": "",
 "RainbowStarState": "",
 "RainbowStarWindupState": "",
