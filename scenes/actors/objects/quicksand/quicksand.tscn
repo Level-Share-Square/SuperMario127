@@ -75,11 +75,10 @@ fill_from = Vector2( 0, 0.156 )
 fill_to = Vector2( 0, 0.204167 )
 
 [sub_resource type="CanvasItemMaterial" id=13]
-blend_mode = 1
 particles_animation = true
 particles_anim_h_frames = 10
 particles_anim_v_frames = 1
-particles_anim_loop = true
+particles_anim_loop = false
 
 [sub_resource type="ParticlesMaterial" id=14]
 emission_shape = 2
@@ -88,7 +87,7 @@ flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-color = Color( 0.137255, 0.137255, 0.137255, 1 )
+color = Color( 0.137255, 0.137255, 0.137255, 0.172549 )
 
 [node name="Quicksand" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -132,5 +131,6 @@ expand = true
 material = SubResource( 13 )
 position = Vector2( 900, 300 )
 amount = 200
+lifetime = 2.0
 process_material = SubResource( 14 )
 texture = ExtResource( 7 )

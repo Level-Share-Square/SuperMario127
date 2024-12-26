@@ -33,12 +33,16 @@ func update():
 	var gradient_position = max(death_threshold, 18)/size.y
 	var gradient : GradientTexture2D = threshold_gradient.texture
 	gradient.fill_from.y = 0
-	gradient.fill_to.y = (gradient_position + 6/size.y)
+	gradient.fill_to.y = (gradient_position+6/size.y)
 	
-	if death_threshold <= 2:
+	if death_threshold <= 0:
 		bubbles.visible = true
 		bubbles.position = size/2
-		bubbles.process_material.emission_box_extents = Vector3(bubbles.position.x, bubbles.position.y, 0)
+		bubbles.position.y += 10
+		bubbles.process_material.emission_box_extents = Vector3(size.x/2, (size.y-10)/2, 0)
+		bubbles.process_material.color = color
+		bubbles.process_material.color.a8 = 44
+		bubbles.amount = (size.x*size.y)/(64*64)
 	else:
 		bubbles.visible = false
 	
