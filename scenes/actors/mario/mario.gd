@@ -320,6 +320,8 @@ const ANIM_IDS : Dictionary = {
 }
 
 func _ready():
+	Engine.set_target_fps(60)
+	Engine.iterations_per_second = 60
 	Singleton.CurrentLevelData.can_pause = true
 
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")

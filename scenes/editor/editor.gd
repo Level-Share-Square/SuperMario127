@@ -154,6 +154,8 @@ func _unhandled_input(event) -> void:
 			shared.toggle_layer_transparency(editing_layer, layers_transparent)
 
 func _ready() -> void:
+	Engine.set_target_fps(0)
+	Engine.iterations_per_second = 120
 	# reset these to 0 since they get incremented by the loading in process every time
 	Singleton.CurrentLevelData.next_shine_id = 0
 	Singleton.CurrentLevelData.next_star_coin_id = 0
