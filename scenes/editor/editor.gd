@@ -37,6 +37,7 @@ onready var object_settings : NinePatchRect = get_node(object_settings_path)
 onready var mouse_object_area : Area2D = get_node(mouse_object_area_path)
 
 onready var bounds_control = $BoundsControl
+onready var camera : Camera2D = $Camera2D
 
 var lock_axis := "none"
 var lock_pos := 0
@@ -88,26 +89,25 @@ func quit_to_menu():
 
 
 # Functions to avoid copy pasted code
-func cap_zoom_level() -> void:
+func cap_zoom_level(level : float) -> float:
 	# Reduce the zoom level if the screen wouldn't fit within the level
 	# NOTE: all values are -6 since there are 3 tiles OOB in both directions for both axis
 	var level_size : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds.size
+#	var max_zoom = 
 	if (level_size.x < 36 or level_size.y < 16) and zoom_level > 1.5:
-		set_zoom_level(1.5)
+		return 1.5
 	# Level size Y is capped at 14. The Y check would be at 13 otherwise
 	if level_size.x < 30 and zoom_level > 1.25:
-		set_zoom_level(1.25)
-	# 1.25 zoom is *just enough* to see the smallest level
-	#if (level_size.x < 24 or level_size.y < 9) and zoom_level > 1.0:
-	#	set_zoom_level(1.0)
+		return 1.25
+	
+	return level
 
 func set_zoom_level(level : float) -> void:
 	# Zoom level limits
 	if level < 0.25: level = 0.25
-	if level > 1.75: level = 1.75
+#	if level > 1.75: level = 1.75 #we don't be limiting the zoom size around here
 	
-	zoom_level = level
-	cap_zoom_level(); # Make sure it's not too large
+	zoom_level = cap_zoom_level(level) # makes sure the zoom isn't too large when
 	Singleton.EditorSavedSettings.zoom_level = zoom_level
 
 func add_zoom_level(level : float) -> void:
@@ -421,7 +421,7 @@ func _process(delta : float) -> void:
 	# causes issues, so wait a frame instead by placing the assignment over here
 	placed_item_property = null
 	
-	cap_zoom_level(); # Make sure it didn't accidentally get larger somehow
+	zoom_level = cap_zoom_level(zoom_level); # Make sure it didn't accidentally get larger somehow
 	
 	if Input.is_action_just_pressed("invis_ui") and Singleton2.disable_hotkeys == false:
 		$"UI".visible = !$"UI".visible

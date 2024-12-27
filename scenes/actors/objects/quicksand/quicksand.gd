@@ -36,6 +36,8 @@ func update():
 	gradient.fill_to.y = (gradient_position+6/size.y)
 	
 	if death_threshold <= 0:
+		bubbles.visibility_rect.position = Vector2.ZERO
+		bubbles.visibility_rect.size = size
 		bubbles.visible = true
 		bubbles.position = size/2
 		bubbles.position.y += 10

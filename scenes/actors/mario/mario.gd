@@ -1280,11 +1280,12 @@ func set_dive_collision(is_enabled : bool) -> void:
 		ground_shape.disabled = is_enabled
 	else:
 		ground_collider_enable_timer.start()
-	collision_raycast.disabled = is_enabled
-	dive_collision_shape.disabled = !is_enabled
-	ground_collision_dive.disabled = !is_enabled
-	left_collision.disabled = is_enabled
-	right_collision.disabled = is_enabled
+	
+	collision_raycast.set_deferred("disabled", is_enabled)
+	dive_collision_shape.set_deferred("disabled", !is_enabled)
+	ground_collision_dive.set_deferred("disabled", !is_enabled)
+	left_collision.set_deferred("disabled", is_enabled)
+	right_collision.set_deferred("disabled", is_enabled)
 
 func hide_shine_dance_shine():
 	$CollectedShine.visible = false

@@ -2519,6 +2519,18 @@ tile_mode_offset = Vector2( 0, 16 )
 icon = ExtResource( 152 )
 preview = ExtResource( 151 )
 
+[node name="Water" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 72
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+change_to = "Lava"
+items_in_sequence = 3
+icon = ExtResource( 235 )
+preview = ExtResource( 236 )
+
 [node name="BreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
 object_id = 33
@@ -3406,50 +3418,6 @@ is_object = true
 icon = ExtResource( 1442 )
 preview = ExtResource( 1441 )
 
-[node name="LiquidsGroup" type="Node" parent="PlaceableItems"]
-script = ExtResource( 25 )
-color = Color( 0.835294, 0.639216, 0.266667, 1 )
-group_name = "Liquids"
-
-[node name="Water" type="Node" parent="PlaceableItems/LiquidsGroup"]
-script = ExtResource( 24 )
-object_id = 72
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-change_to = "Lava"
-items_in_sequence = 3
-icon = ExtResource( 235 )
-preview = ExtResource( 236 )
-
-[node name="Lava" type="Node" parent="PlaceableItems/LiquidsGroup"]
-script = ExtResource( 24 )
-object_id = 75
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-change_to = "Quicksand"
-items_in_sequence = 3
-index_in_sequence = 1
-icon = ExtResource( 289 )
-preview = ExtResource( 290 )
-
-[node name="Quicksand" type="Node" parent="PlaceableItems/LiquidsGroup"]
-script = ExtResource( 24 )
-object_id = 142
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-item_name = "Quicksand"
-change_to = "Water"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 1550 )
-preview = ExtResource( 1550 )
-
 [node name="GrassGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
 color = Color( 0.0980392, 0.345098, 0.137255, 1 )
@@ -3720,6 +3688,20 @@ palette_icons = [ ExtResource( 308 ), ExtResource( 525 ), ExtResource( 529 ), Ex
 palette_previews = [ ExtResource( 307 ), ExtResource( 528 ), ExtResource( 527 ), ExtResource( 530 ) ]
 icon = ExtResource( 308 )
 preview = ExtResource( 307 )
+
+[node name="Quicksand" type="Node" parent="PlaceableItems/SandGroup"]
+script = ExtResource( 24 )
+object_id = 142
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+item_name = "Quicksand"
+change_to = "Water"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 1550 )
+preview = ExtResource( 1550 )
 
 [node name="PyramidBrick" type="Node" parent="PlaceableItems/SandGroup"]
 script = ExtResource( 24 )
@@ -4162,6 +4144,19 @@ palette_icons = [ ExtResource( 371 ), ExtResource( 1264 ), ExtResource( 1265 ), 
 palette_previews = [ ExtResource( 370 ), ExtResource( 1270 ), ExtResource( 1277 ), ExtResource( 1275 ), ExtResource( 1269 ), ExtResource( 1272 ), ExtResource( 1273 ), ExtResource( 1274 ), ExtResource( 1278 ) ]
 icon = ExtResource( 371 )
 preview = ExtResource( 370 )
+
+[node name="Lava" type="Node" parent="PlaceableItems/VolcanoGroup"]
+script = ExtResource( 24 )
+object_id = 75
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+change_to = "Quicksand"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 289 )
+preview = ExtResource( 290 )
 
 [node name="Fire" type="Node" parent="PlaceableItems/VolcanoGroup"]
 script = ExtResource( 24 )

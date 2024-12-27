@@ -71,10 +71,9 @@ flags = 3
 gradient = SubResource( 11 )
 width = 192
 height = 192
-fill_from = Vector2( 0, 0.156 )
 fill_to = Vector2( 0, 0.204167 )
 
-[sub_resource type="CanvasItemMaterial" id=13]
+[sub_resource type="CanvasItemMaterial" id=33]
 particles_animation = true
 particles_anim_h_frames = 10
 particles_anim_v_frames = 1
@@ -128,7 +127,7 @@ texture = SubResource( 12 )
 expand = true
 
 [node name="Bubbles" type="Particles2D" parent="." index="4"]
-material = SubResource( 13 )
+material = SubResource( 33 )
 position = Vector2( 900, 300 )
 amount = 200
 lifetime = 2.0

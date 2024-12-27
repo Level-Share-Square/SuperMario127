@@ -977,6 +977,7 @@ LSSPing="*res://singletons/lss_ping.tscn"
 
 [debug]
 
+settings/fps/force_fps=60
 gdscript/warnings/integer_division=false
 shapes/collision/shape_color=Color( 0, 0.6, 0.701961, 0.419608 )
 
