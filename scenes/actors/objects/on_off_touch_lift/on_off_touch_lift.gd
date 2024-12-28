@@ -110,9 +110,6 @@ func _ready():
 	
 	if(!disappears && inverted):
 		frozen = true
-		
-	platform.collision_shape.disabled = !enabled
-	platform.platform_area_collision_shape.disabled = !enabled
 	
 	platform.platform_area_collision_shape.get_parent().connect("body_entered", self, "_on_touch_area_entered")
 	if curve.get_point_count() == 0:
@@ -210,7 +207,7 @@ func reached_end() -> void:
 			activated = false
 
 func _on_touch_area_entered(body):
-	if body is Character:
+	if body is Character or body is EnemyBase:
 		activated = true
 
 func reset_platform():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -48,6 +48,17 @@
 [ext_resource path="res://classes/BusGroup.gd" type="Script" id=46]
 [ext_resource path="res://classes/SoundGroup.gd" type="Script" id=47]
 [ext_resource path="res://scenes/actors/mario/sounds_misc/footsteps/CLANG.wav" type="AudioStream" id=48]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L32_AWAWAU.wav" type="AudioStream" id=49]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L52_TALK4.wav" type="AudioStream" id=50]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L32_WAAA.wav" type="AudioStream" id=51]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L53_TALK5.wav" type="AudioStream" id=52]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L36_TALK1.wav" type="AudioStream" id=53]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L29_NOO.wav" type="AudioStream" id=54]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L41_AHA.wav" type="AudioStream" id=55]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L25_HUNNN3.wav" type="AudioStream" id=56]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L20_OHYEAH.wav" type="AudioStream" id=57]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L43_HUNNN2.wav" type="AudioStream" id=58]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L21_OK.wav" type="AudioStream" id=59]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 2 )
@@ -203,6 +214,82 @@ bus = "Voices"
 [node name="Shine2" type="AudioStreamPlayer" parent="VoiceEffects/ShineSounds"]
 stream = ExtResource( 38 )
 volume_db = 4.5
+bus = "Voices"
+
+[node name="SpeakSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
+
+[node name="Talk1" type="AudioStreamPlayer" parent="VoiceEffects/SpeakSounds"]
+stream = ExtResource( 53 )
+volume_db = -4.0
+bus = "Voices"
+
+[node name="Talk2" type="AudioStreamPlayer" parent="VoiceEffects/SpeakSounds"]
+stream = ExtResource( 50 )
+volume_db = -4.0
+bus = "Voices"
+
+[node name="Talk3" type="AudioStreamPlayer" parent="VoiceEffects/SpeakSounds"]
+stream = ExtResource( 52 )
+volume_db = -4.0
+bus = "Voices"
+
+[node name="HappySounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
+
+[node name="Happy1" type="AudioStreamPlayer" parent="VoiceEffects/HappySounds"]
+stream = ExtResource( 55 )
+volume_db = -4.0
+bus = "Voices"
+
+[node name="ShockedSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
+
+[node name="Shocked1" type="AudioStreamPlayer" parent="VoiceEffects/ShockedSounds"]
+stream = ExtResource( 51 )
+volume_db = -4.0
+bus = "Voices"
+
+[node name="Shocked2" type="AudioStreamPlayer" parent="VoiceEffects/ShockedSounds"]
+stream = ExtResource( 49 )
+volume_db = -4.0
+bus = "Voices"
+
+[node name="AgreeSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
+
+[node name="Agree1" type="AudioStreamPlayer" parent="VoiceEffects/AgreeSounds"]
+stream = ExtResource( 59 )
+volume_db = -4.0
+bus = "Voices"
+
+[node name="Agree2" type="AudioStreamPlayer" parent="VoiceEffects/AgreeSounds"]
+stream = ExtResource( 57 )
+volume_db = -4.0
+bus = "Voices"
+
+[node name="DisagreeSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
+
+[node name="Disagree1" type="AudioStreamPlayer" parent="VoiceEffects/DisagreeSounds"]
+stream = ExtResource( 54 )
+volume_db = -4.0
+bus = "Voices"
+
+[node name="ThinkSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
+
+[node name="Think1" type="AudioStreamPlayer" parent="VoiceEffects/ThinkSounds"]
+stream = ExtResource( 58 )
+volume_db = -4.0
+bus = "Voices"
+
+[node name="AngrySounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
+
+[node name="Angry1" type="AudioStreamPlayer" parent="VoiceEffects/AngrySounds"]
+stream = ExtResource( 56 )
+volume_db = -4.0
 bus = "Voices"
 
 [node name="Footsteps" type="Node" parent="."]

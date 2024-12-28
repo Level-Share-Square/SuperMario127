@@ -81,6 +81,10 @@ func start_door_enter_animation(character : Character) -> void:
 	if get_parent().collectible == "coin":
 		if Singleton.CurrentLevelData.level_data.vars.coins_collected < get_parent().required_amount:
 			can_enter = false
+	elif get_parent().collectible == "star bit":
+		var star_bits_collected: int = Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0]
+		if star_bits_collected < get_parent().required_amount:
+			can_enter = false
 	else:
 		var collected = 0
 		#yuck
@@ -89,12 +93,16 @@ func start_door_enter_animation(character : Character) -> void:
 				collected += 1
 		if collected < get_parent().required_amount:
 			can_enter = false
+	
+	if not Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and (
+		get_parent().collectible == "shine" or get_parent().collectible == "star coin"):
+		can_enter = true
 			
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character, "position:x", null, global_position.x, slide_length)
 	# warning-ignore: return_value_discarded
 	if can_enter:
-		animate_door("open")
+		animate_door(false)
 		tween.interpolate_callback(character.anim_player, slide_length + (icon.frames.get_frame_count("open") * 2 * fps_util.PHYSICS_DELTA), "play", "enter_door")
 		character.anim_player.connect("animation_finished", self, "character_animation_finished", [character], CONNECT_ONESHOT)
 	else:
@@ -114,17 +122,19 @@ func open_menu_ui(character):
 	
 func character_animation_finished(_animation : String, character : Character) -> void:
 	# this is so the door closes after mario enters
-	animate_door("close")
+	animate_door(true)
 	emit_signal("start_door_logic", character, entering, get_parent().force_fadeout)
 	
-func animate_door(animation : String = "close") -> void:
+func animate_door(is_backwards: bool = false) -> void:
 	#print(get_parent().palette_dict[get_parent().palette] + "_" + get_parent().collectible + animation)
 	# this function just plays the door animation, so code doesn't have to repeat
-	icon.animation = get_parent().palette_dict[get_parent().palette] + "_" + get_parent().collectible + "_" + animation
-	icon.playing = true
-	door.animation = get_parent().palette_dict[get_parent().palette] + "_" + animation
-	door.playing = true
-	audio_player.stream = open_audio if animation == "open" else close_audio
+	icon.play(
+		get_parent().palette_dict[get_parent().palette] + "_" + get_parent().collectible,
+		is_backwards)
+	door.play(
+		get_parent().palette_dict[get_parent().palette] + "_" + get_parent().collectible,
+		is_backwards)
+	audio_player.stream = open_audio if not is_backwards else close_audio
 	audio_player.play()
 
 func start_door_exit_animation(character : Character, tp_mode : bool) -> void:
@@ -139,7 +149,7 @@ func start_door_exit_animation(character : Character, tp_mode : bool) -> void:
 	if !tp_mode:
 		emit_signal("exit", character, entering, get_parent().force_fadeout)
 	
-	animate_door("open")
+	animate_door(false)
 	character.anim_player.play("exit_door")
 	# when mario finishes exiting, run a function (one shot)
 	# warning-ignore: return_value_discarded
@@ -162,7 +172,7 @@ func door_exit_anim_finished(_animation : String, character : Character) -> void
 	
 	character.sprite.animation = "exitDoor" + ("Right" if character.facing_direction == 1 else "Left")
 	character.sprite.playing = true
-	animate_door("close")
+	animate_door(true)
 
 func _tween_all_completed() -> void:
 	emit_signal("door_animation_finished", stored_character)

@@ -1,7 +1,7 @@
 extends GameObject
 
 onready var sprite : AnimatedSprite = $CheepCheep/Sprite
-onready var color_sprite : AnimatedSprite = $CheepCheep/ColorSprite
+onready var color_sprite : AnimatedSprite = $CheepCheep/Sprite/ColorSprite
 onready var kinematic_body : KinematicBody2D = $CheepCheep
 onready var attack_area : Area2D = $CheepCheep/AttackArea
 onready var player_detector : Area2D = $CheepCheep/PlayerDetector
@@ -42,7 +42,7 @@ export var color := Color(1, 0, 0)
 var rainbow := false
 
 var hit := false
-var snap := Vector2(0, 12)
+var snap := Vector2(0, 0)
 
 var bounced := false
 
@@ -153,12 +153,6 @@ func _process(_delta) -> void:
 			color.h = float(wrapi(OS.get_ticks_msec(), 0, 500)) / 500
 		
 		sprite.playing = true
-		color_sprite.frame = sprite.frame
-		color_sprite.rotation = sprite.rotation
-		color_sprite.position = sprite.position
-		color_sprite.reset_physics_interpolation()
-		color_sprite.scale = sprite.scale
-		color_sprite.flip_h = sprite.flip_h
 		color_sprite.modulate = color
 
 func _physics_process(delta : float) -> void:
@@ -171,7 +165,7 @@ func _physics_process(delta : float) -> void:
 			if platform_body.has_method("is_platform_area"):
 				if platform_body.is_platform_area():
 					is_in_platform = true
-				if platform_body.get_parent().can_collide_with(kinematic_body):
+				if platform_body.get_parent().has_method("can_collide_with") and platform_body.get_parent().can_collide_with(kinematic_body):
 					platform_collision_enabled = true
 		kinematic_body.set_collision_mask_bit(4, platform_collision_enabled)
 		
@@ -186,11 +180,13 @@ func physics_process_normal(delta: float, is_in_platform: bool) -> void:
 	if water_detector.get_overlapping_areas().size() > 0:
 		if gravity_scale == 1:
 			velocity.y = 120
+			
 		
 		gravity_scale = 0
 		
 		if is_instance_valid(character):
 			facing_direction = -1
+			sprite.flip_v = false if Vector2.UP.rotated(sprite.rotation).y < 0 else true
 			sprite.rotation = lerp_angle(sprite.rotation, character.global_position.angle_to_point(kinematic_body.global_position), fps_util.PHYSICS_DELTA * 2)
 			velocity = velocity.move_toward(Vector2.RIGHT.rotated(sprite.rotation) * swim_speed, fps_util.PHYSICS_DELTA * 480)
 		else:
@@ -214,7 +210,7 @@ func physics_process_normal(delta: float, is_in_platform: bool) -> void:
 		
 		# Ground collision
 		if kinematic_body.is_on_floor():
-			snap = Vector2(0, 0 if is_in_platform else 12)
+			snap = Vector2(0, 0 if is_in_platform else 0)
 		else: # or not
 			snap = Vector2(0, 0)
 		# Run physics
@@ -280,7 +276,7 @@ func physics_process_hit(delta: float, is_in_platform: bool) -> void:
 	if sprite.visible:
 		# Ground collision
 		if kinematic_body.is_on_floor():
-			snap = Vector2(0, 0 if is_in_platform else 12)
+			snap = Vector2(0, 0 if is_in_platform else 0)
 		else: # or not
 			snap = Vector2(0, 0)
 		

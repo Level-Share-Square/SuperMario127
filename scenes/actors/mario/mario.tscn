@@ -1,4 +1,4 @@
-[gd_scene load_steps=173 format=2]
+[gd_scene load_steps=180 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -452,6 +452,84 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 360.0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idleRight" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CollectedShine/ShineParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollectedShine:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=102]
+resource_name = "angry"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "angry", "idleRight" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sounds")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_angry_sound"
+} ]
+}
 
 [sub_resource type="Animation" id=61]
 length = 0.8
@@ -466,6 +544,36 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 0.594603, 0.965936 ),
 "update": 0,
 "values": [ 0.0, -360.0 ]
+}
+
+[sub_resource type="Animation" id=100]
+resource_name = "disagree"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "disagree", "idleRight" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sounds")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_disagree_sound"
+} ]
 }
 
 [sub_resource type="Animation" id=62]
@@ -617,6 +725,66 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ -9, -9, -1 ]
+}
+
+[sub_resource type="Animation" id=97]
+resource_name = "happy"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "happy", "idleRight" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sounds")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_happy_sound"
+} ]
+}
+
+[sub_resource type="Animation" id=99]
+resource_name = "nodding"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "nodding", "idleRight" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sounds")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_agree_sound"
+} ]
 }
 
 [sub_resource type="Animation" id=64]
@@ -993,6 +1161,97 @@ tracks/12/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=98]
+resource_name = "shocked"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "shocked", "idleRight" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sounds")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_shocked_sound"
+} ]
+}
+
+[sub_resource type="Animation" id=96]
+resource_name = "talking"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "talking", "idleRight" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sounds")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_speak_sound"
+} ]
+}
+
+[sub_resource type="Animation" id=101]
+resource_name = "thinking"
+length = 1.55
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.55 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "thinking", "idleRight" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sounds")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_think_sound"
+} ]
+}
+
 [sub_resource type="Animation" id=92]
 resource_name = "triple_jump"
 length = 0.5
@@ -1272,16 +1531,16 @@ shape = SubResource( 7 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, 3 )
+position = Vector2( 0, -19.5793 )
 rotation = 6.28319
 frames = ExtResource( 1 )
 animation = "idleRight"
+playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
-frames = ExtResource( 44 )
+frames = ExtResource( 23 )
 animation = "idleRight"
-playing = true
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
@@ -1856,12 +2115,19 @@ playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 93 )
+anims/angry = SubResource( 102 )
 anims/backflip = ExtResource( 32 )
 anims/backflip_right = SubResource( 61 )
+anims/disagree = SubResource( 100 )
 anims/enter_door = SubResource( 62 )
 anims/exit_door = SubResource( 63 )
+anims/happy = SubResource( 97 )
+anims/nodding = SubResource( 99 )
 anims/shine_dance = SubResource( 64 )
 anims/shine_dance_stop = SubResource( 65 )
+anims/shocked = SubResource( 98 )
+anims/talking = SubResource( 96 )
+anims/thinking = SubResource( 101 )
 anims/triple_jump = SubResource( 92 )
 anims/triple_jump_right = SubResource( 94 )
 
@@ -1874,9 +2140,9 @@ playing = true
 
 [node name="CollectedShine" type="AnimatedSprite" parent="."]
 visible = false
-scale = Vector2( 1e-05, 1e-05 )
+position = Vector2( -0.499446, -40.9587 )
 frames = ExtResource( 55 )
-speed_scale = 3.0
+speed_scale = 3.66667
 playing = true
 
 [node name="ShineParticles" type="Particles2D" parent="CollectedShine"]
@@ -1890,6 +2156,10 @@ texture = ExtResource( 56 )
 [node name="BottomPos" type="Node2D" parent="."]
 visible = false
 position = Vector2( 0, 20 )
+
+[node name="DialogueFocus" type="Node2D" parent="."]
+visible = false
+position = Vector2( 0, -18 )
 
 [node name="DeathSprite" type="AnimatedSprite" parent="."]
 visible = false

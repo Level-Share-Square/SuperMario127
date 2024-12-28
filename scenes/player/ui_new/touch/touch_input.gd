@@ -71,7 +71,7 @@ func touch_moved(event: InputEvent):
 	if check_distance(cur_pos):
 		var angle: float = rad2deg(cur_pos.angle_to_point(start_pos))
 		if abs(angle_difference(angle, swipe_angle)) < angle_lenience:
-			print("swipe registered")
+			#print("swipe registered")
 			was_pressed = true
 			commit_all_actions(true, true)
 

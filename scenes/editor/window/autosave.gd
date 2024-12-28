@@ -71,7 +71,7 @@ func item_selected(index):
 		active_level_code = main_level_code
 	else:
 		var file = File.new()
-		print("user://autosaves/" + names[index - 1])
+		#print("user://autosaves/" + names[index - 1])
 		file.open("user://autosaves/" + names[index - 1], File.READ)
 		var fodder = file.get_line()
 		active_level_code = file.get_line()

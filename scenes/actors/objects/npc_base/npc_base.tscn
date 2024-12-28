@@ -6,8 +6,8 @@
 [sub_resource type="CircleShape2D" id=3]
 radius = 16.0
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 14 )
+[sub_resource type="CapsuleShape2D" id=4]
+height = 8.0
 
 [sub_resource type="Curve2D" id=2]
 _data = {
@@ -28,12 +28,12 @@ collision_mask = 4096
 shape = SubResource( 3 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-collision_layer = 4
+collision_layer = 16384
 collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 position = Vector2( 0, 2 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="KinematicBody2D"]
 unique_name_in_owner = true

@@ -17,7 +17,7 @@ func _physics_process(delta):
 
 
 func body_entered(body):
-	if body is Character:
+	if body is Character and not body.invincible:
 		body.damage_with_knockback(global_position, DAMAGE)
 
 

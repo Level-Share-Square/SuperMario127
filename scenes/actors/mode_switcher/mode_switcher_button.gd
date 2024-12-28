@@ -71,6 +71,7 @@ func change_visuals(new_scene_mode : int) -> void:
 	self.texture_normal = texture_play if new_scene_mode == 0 else texture_stop
 
 func switch() -> void:
+	get_parent().offset.y = 0
 	if get_parent().layer != 99 and !switching_disabled and !get_tree().paused and !Singleton.SceneTransitions.transitioning:
 		Singleton.Music.reset_music()
 		Singleton.Music.stop_temporary_music(1, 1)

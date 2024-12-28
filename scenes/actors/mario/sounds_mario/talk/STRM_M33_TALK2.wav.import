@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/STRM_M33_TALK2.wav-6cc0cf682f25625d559c872a4f07a62e.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_mario/talk/STRM_M33_TALK2.wav"
+dest_files=[ "res://.import/STRM_M33_TALK2.wav-6cc0cf682f25625d559c872a4f07a62e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -27,21 +27,21 @@ func page_next():
 	current_page = wrapi(current_page, 0, len(page_nodes))
 	update_page()
 	
-	print("Current Page: " + str(current_page))
+	#print("Current Page: " + str(current_page))
 
 func page_back():
 	current_page -= 1
 	current_page = wrapi(current_page, 0, len(page_nodes))
 	update_page()
 	
-	print("Current Page: " + str(current_page))
+	#print("Current Page: " + str(current_page))
 
 func page_set(page_id):
 	current_page = page_id
 	current_page = wrapi(current_page, 0, len(page_nodes))
 	update_page()
 	
-	print("Current Page: " + str(current_page))
+	#print("Current Page: " + str(current_page))
 
 func update_page():
 	var index : int = 0
@@ -51,7 +51,7 @@ func update_page():
 			page_title.bbcode_text = "Help - " + "[color=yellow]" + page.page_name + "[/color]"
 			page_number.text = str(index + 1) + "/" + str(len(page_nodes))
 			page_selector.selected = current_page
-			print(page)
+			#print(page)
 		else:
 			page.visible = false
 		

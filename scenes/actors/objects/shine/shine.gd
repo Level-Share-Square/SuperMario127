@@ -304,7 +304,10 @@ func collect(body : PhysicsBody2D) -> void:
 		
 		if do_kick_out:
 			var timer_manager = get_node("/root").get_node("Player").get_timer_manager()
-			timer_manager.remove_timer("area_timer")
+			if is_instance_valid(timer_manager):
+				timer_manager.remove_timer("area_timer")
+			else:
+				printerr("Couldn't find timer manager node!")
 
 		
 		# hacky fix for the player being stuck in the ground during the shine dance if diving into a very low shine

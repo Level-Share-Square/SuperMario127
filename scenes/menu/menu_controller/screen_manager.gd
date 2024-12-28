@@ -7,7 +7,6 @@ onready var current_screen: Control
 
 
 func _ready():
-	print(default_screen)
 	current_screen = get_node_or_null(default_screen)
 	if is_instance_valid(current_screen) and current_screen.music_id > -1:
 		Singleton.Music.change_song(Singleton.Music.last_song, current_screen.music_id)

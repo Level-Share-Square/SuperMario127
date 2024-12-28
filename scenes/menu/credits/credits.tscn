@@ -228,6 +228,7 @@ texture = SubResource( 6 )
 expand = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_bottom = 1.0
 margin_top = 432.0
 margin_right = 768.0
@@ -288,12 +289,12 @@ Programmer:
 \"Entiss\" (Resigned)
 \"certi\" (Resigned)
 Jake \"PlugAndPlay\"
+\"SilvererCoin\"
 Rin \"Dignity\"
 \"Chlorobyte\"
 \"met3o\"
 \"pyrule\"
 \"tabs\"
-\"SilvererCoin\"
 
 Sprite Artist:
 \"KrystalPhantasm\" (Resigned)
@@ -304,6 +305,7 @@ Mack \"masterminer176\"
 Antonio \"Antonio4444\"
 \"CyanHyprPsychic\"
 Brian \"Linktober\"
+\"ChoosingBerry\"
 \"AquaDoesStuff\"
 Hrasyurr \"Azzy\"
 \"PumpkinVolt\"
@@ -486,12 +488,12 @@ Programmer:
 \"Entiss\" (Resigned)
 \"certi\" (Resigned)
 Jake \"PlugAndPlay\"
+\"SilvererCoin\"
 Rin \"Dignity\"
 \"Chlorobyte\"
 \"met3o\"
 \"pyrule\"
 \"tabs\"
-\"SilvererCoin\"
 
 Sprite Artist:
 \"KrystalPhantasm\" (Resigned)
@@ -502,6 +504,7 @@ Mack \"masterminer176\"
 Antonio \"Antonio4444\"
 \"CyanHyprPsychic\"
 Brian \"Linktober\"
+\"ChoosingBerry\"
 \"AquaDoesStuff\"
 Hrasyurr \"Azzy\"
 \"PumpkinVolt\"

@@ -20,10 +20,10 @@ func _ready():
 
 func enable_raycasts(is_enabled: bool) -> void:
 	if ledge_turning and is_instance_valid(ledge_detector):
-		ledge_detector.enabled = is_enabled
+		ledge_detector.set_deferred("enabled", is_enabled)
 	else:
-		ledge_detector.enabled = false
-	wall_detector.enabled = is_enabled
+		ledge_detector.set_deferred("enabled", false)
+	wall_detector.set_deferred("enabled", is_enabled)
 
 
 func _start() -> void:

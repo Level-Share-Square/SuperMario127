@@ -27,9 +27,8 @@ func pressed():
 		Singleton2.disable_hotkeys = true
 		get_parent().get_parent().get_parent().get_parent().add_child(window_child)
 		window_child.set_as_toplevel(true)
-		window_child.get_node("Contents/TextEdit").text = dialogue[0]
-		window_child.get_node("Contents/CancelButton").string = self
-		window_child.get_node("Contents/SaveButton").string = self
+		window_child.get_node("%TextEdit").text = dialogue[0]
+		window_child.get_node("%SaveButton").string = self
 		pressed = true
 
 

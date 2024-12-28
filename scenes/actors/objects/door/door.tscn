@@ -9,9 +9,7 @@
 [ext_resource path="res://scenes/actors/objects/door/palettes/2/doorframes.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://scenes/actors/objects/door/palettes/3/doorframes.tres" type="SpriteFrames" id=8]
 [ext_resource path="res://scenes/actors/objects/door/palettes/4/doorframes.tres" type="SpriteFrames" id=9]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14, 20 )
+[ext_resource path="res://scenes/actors/objects/star_door/single_enter_area.tres" type="Shape2D" id=10]
 
 [node name="Door" type="Node2D"]
 script = ExtResource( 2 )
@@ -27,7 +25,7 @@ close_audio = ExtResource( 3 )
 [node name="Area2D" type="Area2D" parent="DoorEnterLogic"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorEnterLogic/Area2D"]
-shape = SubResource( 1 )
+shape = ExtResource( 10 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DoorEnterLogic"]
 stream = ExtResource( 5 )

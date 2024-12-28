@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/STRM_M26_NOOO.wav-5c782cc5ca10da59fda29012771dd938.sample"
+
+[deps]
+
+source_file="res://scenes/actors/mario/sounds_mario/talk/STRM_M26_NOOO.wav"
+dest_files=[ "res://.import/STRM_M26_NOOO.wav-5c782cc5ca10da59fda29012771dd938.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

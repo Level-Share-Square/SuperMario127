@@ -105,5 +105,5 @@ func _confirm_pressed():
 		return_points.push_back(node.position)
 		index += 1
 	object_property_button.set_value(return_points)
-	print(return_points)
+	#print(return_points)
 	close()

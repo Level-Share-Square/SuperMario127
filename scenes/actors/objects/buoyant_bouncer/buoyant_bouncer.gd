@@ -123,7 +123,7 @@ func actually_bounce(body):
 		if !body.controllable:
 			return # Don't gbj players
 	
-	if body.has_method("set_state_by_name"):
+	if body is Character:
 		body.set_state_by_name("BounceState", 0)
 		if body.inputs[2][0]:
 			is_weak_bounce = false

@@ -114,7 +114,7 @@ func reset_pressed():
 	var file = File.new()
 	file.open("user://hotkeys/defhotkeys.file", File.READ)
 	var result = file.get_var()
-	print(result)
+	#print(result)
 	load_hotkeys(result)
 	file.close()
 	

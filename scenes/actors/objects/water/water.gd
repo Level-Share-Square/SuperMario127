@@ -76,12 +76,13 @@ func change_size():
 	last_front = render_in_front
 
 func _physics_process(_delta):
-	for body in area.get_overlapping_bodies():
-		if body is Character:
-			body.breath -= 0.25 * toxicity
-			if body.breath <= 0:
-				body.breath = 100
-				body.damage(1, "hit", 0)
+	if area.get_overlapping_bodies().size() > 0:
+		for body in area.get_overlapping_bodies():
+			if body is Character:
+				body.breath -= 0.25 * toxicity
+				if body.breath <= 0:
+					body.breath = 100
+					body.damage(1, "hit", 0)
 	
 	if !moving: return
 	

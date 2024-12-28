@@ -44,7 +44,6 @@ func _init():
 func _ready():
 	.ready() #Calls parent class "TeleportObject"
 	connect("property_changed", self, "_on_property_changed")
-	$Area2D.connect("body_entered", self, "_on_body_entered")
 	Singleton.CurrentLevelData.level_data.vars.teleporters.append([destination_tag.to_lower(), self])
 	if mode == 1:
 		var _connect2 = connect("property_changed", self, "update_property")
@@ -57,6 +56,10 @@ func _ready():
 	camera_stopper.set_size(camera_stop_shape.shape.extents)
 	camera_stopper.monitorable = stops_camera
 	camera_stopper.visible = stops_camera
+	
+	# waits to connect to stop frame 1 teleport bugs
+	yield(get_tree().create_timer(1.0), "timeout")
+	$Area2D.connect("body_entered", self, "_on_body_entered")
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:

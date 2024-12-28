@@ -78,10 +78,6 @@ func _ready():
 		yield(get_tree(), "idle_frame")
 		var _connect3 = area.connect("area_entered", self, "area_entered")
 		var _connect4 = area.connect("area_exited", self, "area_exited")
-		connect("message_changed", parent, "message_changed")
-		connect("message_appear", parent, "start_talking")
-		connect("message_disappear", parent, "stop_talking")
-		
 		
 		sprite.visible = false
 		if "speaking_radius" in parent:
@@ -222,6 +218,7 @@ func setup_char():
 func restore_control():
 	character.invulnerable = false 
 	character.controllable = true
+	character.auto_flip = true
 	character.movable = true
 	
 	character.get_state_node("JumpState").jump_buffer = 0 # prevent character from jumping right after closing menu

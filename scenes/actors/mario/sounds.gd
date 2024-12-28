@@ -12,6 +12,13 @@ onready var stomped_sounds = $VoiceEffects/StompedSounds
 onready var powerup_sounds = $VoiceEffects/PowerupSounds
 onready var lava_hurt_sounds = $VoiceEffects/LavaHurtSounds
 onready var shine_sounds = $VoiceEffects/ShineSounds
+onready var speak_sounds = $VoiceEffects/SpeakSounds
+onready var happy_sounds = $VoiceEffects/HappySounds
+onready var shocked_sounds = $VoiceEffects/ShockedSounds
+onready var agree_sounds = $VoiceEffects/AgreeSounds
+onready var disagree_sounds = $VoiceEffects/DisagreeSounds
+onready var think_sounds = $VoiceEffects/ThinkSounds
+onready var angry_sounds = $VoiceEffects/AngrySounds
 
 onready var gp_hit = $OtherSounds/GPHit
 onready var gp_windup = $OtherSounds/GPWindup
@@ -129,6 +136,34 @@ func play_powerup_sound():
 func play_shine_sound():
 	if ready:
 		shine_sounds.play()
+
+func play_speak_sound():
+	if ready:
+		speak_sounds.play()
+
+func play_happy_sound():
+	if ready:
+		happy_sounds.play()
+
+func play_shocked_sound():
+	if ready:
+		shocked_sounds.play()
+
+func play_agree_sound():
+	if ready:
+		agree_sounds.play()
+
+func play_disagree_sound():
+	if ready:
+		disagree_sounds.play()
+
+func play_think_sound():
+	if ready:
+		think_sounds.play()
+
+func play_angry_sound():
+	if ready:
+		angry_sounds.play()
 
 func play_powerup_jingle():
 	if ready:

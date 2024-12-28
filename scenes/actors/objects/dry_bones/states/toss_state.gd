@@ -1,4 +1,4 @@
-extends EnemyState
+extends EnemyStopState
 
 
 const BONE_STATE: PackedScene = preload("res://scenes/actors/objects/dry_bones/bone/bone.tscn")
@@ -10,6 +10,7 @@ onready var animation_player = $"%AnimationPlayer"
 
 func _start() -> void:
 	enemy.velocity.x = 0
+	animation_player.stop()
 	animation_player.play("toss")
 
 

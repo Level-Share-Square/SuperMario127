@@ -12,7 +12,6 @@ func _ready():
 	
 	var return_args: Array = Singleton.SceneSwitcher.menu_return_args
 	for variable in return_args[1]:
-		print(variable, return_args[1][variable])
 		http_request[variable] = return_args[1][variable]
 	
 	yield(get_parent(), "screen_opened")
