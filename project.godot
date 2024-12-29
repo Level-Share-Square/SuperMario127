@@ -1374,6 +1374,7 @@ toggle_enabled={
 2d_physics/layer_13="dialogue"
 2d_physics/layer_14="projectiles"
 2d_physics/layer_15="npc"
+2d_physics/layer_16="liquids"
 
 [logging]
 
