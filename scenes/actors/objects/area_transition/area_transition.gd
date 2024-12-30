@@ -222,7 +222,6 @@ func pipe_exit_anim_finished(character : Character):
 	Singleton.CurrentLevelData.level_data.vars.transition_character_data = []
 	Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
 	entering = false
-	is_idle = true
 	#character.toggle_movement(true)
 	# undo collision changes 
 	stored_characters[character.player_id] = null
@@ -231,6 +230,7 @@ func pipe_exit_anim_finished(character : Character):
 		timer.connect("timeout", character, "toggle_movement", [true])
 		timer.connect("timeout", self, "set_camera", [character])
 	else:
+		is_idle = true
 		var timer = get_tree().create_timer(0.1)
 		timer.connect("timeout", character, "toggle_movement", [true])
 		timer.connect("timeout", self, "set_camera", [character])
