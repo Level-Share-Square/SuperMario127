@@ -3689,20 +3689,6 @@ palette_previews = [ ExtResource( 307 ), ExtResource( 528 ), ExtResource( 527 ),
 icon = ExtResource( 308 )
 preview = ExtResource( 307 )
 
-[node name="Quicksand" type="Node" parent="PlaceableItems/SandGroup"]
-script = ExtResource( 24 )
-object_id = 142
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-item_name = "Quicksand"
-change_to = "Water"
-items_in_sequence = 3
-index_in_sequence = 2
-icon = ExtResource( 1550 )
-preview = ExtResource( 1550 )
-
 [node name="PyramidBrick" type="Node" parent="PlaceableItems/SandGroup"]
 script = ExtResource( 24 )
 tileset_id = 28
@@ -3736,6 +3722,20 @@ items_in_sequence = 3
 index_in_sequence = 2
 icon = ExtResource( 324 )
 preview = ExtResource( 324 )
+
+[node name="Quicksand" type="Node" parent="PlaceableItems/SandGroup"]
+script = ExtResource( 24 )
+object_id = 142
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+item_name = "Quicksand"
+change_to = "Water"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 1550 )
+preview = ExtResource( 1550 )
 
 [node name="SnowGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )

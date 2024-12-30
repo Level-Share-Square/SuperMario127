@@ -1,4 +1,4 @@
-[gd_scene load_steps=187 format=2]
+[gd_scene load_steps=184 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -82,6 +82,7 @@
 [ext_resource path="res://scenes/actors/objects/wing_powerup/icon.png" type="Texture" id=80]
 [ext_resource path="res://scenes/actors/mario/states/QuicksandHop.gd" type="Script" id=81]
 [ext_resource path="res://scenes/actors/mario/states/QuicksandIdle.gd" type="Script" id=82]
+[ext_resource path="res://scenes/actors/objects/quicksand/quicksand_particles.tscn" type="PackedScene" id=83]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -391,48 +392,6 @@ orbit_velocity_random = 0.0
 damping = 100.0
 color_ramp = SubResource( 48 )
 anim_speed = 1.3
-
-[sub_resource type="Curve" id=108]
-min_value = -0.05
-max_value = 0.05
-_data = [ Vector2( 0, 0.00943182 ), 0.0, -0.0107955, 0, 1, Vector2( 1, -0.00136364 ), -0.0107955, 0.0, 1, 0 ]
-
-[sub_resource type="CurveTexture" id=109]
-curve = SubResource( 108 )
-
-[sub_resource type="ParticlesMaterial" id=104]
-flag_disable_z = true
-direction = Vector3( 0.75, -0.25, 0 )
-spread = 0.0
-gravity = Vector3( 0, 98, 0 )
-initial_velocity = 60.0
-initial_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-damping = 100.0
-scale = 0.75
-color_ramp = SubResource( 35 )
-hue_variation = -0.01
-hue_variation_random = 1.0
-hue_variation_curve = SubResource( 109 )
-anim_speed = 0.8
-
-[sub_resource type="ParticlesMaterial" id=107]
-flag_disable_z = true
-direction = Vector3( -0.75, -0.25, 0 )
-spread = 0.0
-gravity = Vector3( 0, 98, 0 )
-initial_velocity = 60.0
-initial_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-damping = 100.0
-scale = 0.75
-color_ramp = SubResource( 35 )
-hue_variation = -0.01
-hue_variation_random = 1.0
-hue_variation_curve = SubResource( 109 )
-anim_speed = 0.8
 
 [sub_resource type="CanvasItemMaterial" id=50]
 blend_mode = 1
@@ -2163,25 +2122,8 @@ local_coords = false
 process_material = SubResource( 49 )
 texture = ExtResource( 51 )
 
-[node name="QuicksandParticles" type="Particles2D" parent="."]
-material = SubResource( 33 )
+[node name="QuicksandParticles" parent="." instance=ExtResource( 83 )]
 position = Vector2( 0, 18 )
-z_index = 27
-emitting = false
-amount = 14
-local_coords = false
-process_material = SubResource( 104 )
-texture = ExtResource( 30 )
-
-[node name="QuicksandParticles2" type="Particles2D" parent="."]
-material = SubResource( 33 )
-position = Vector2( 0, 18 )
-z_index = 27
-emitting = false
-amount = 14
-local_coords = false
-process_material = SubResource( 107 )
-texture = ExtResource( 30 )
 
 [node name="RingParticles" type="AnimatedSprite" parent="."]
 material = SubResource( 50 )

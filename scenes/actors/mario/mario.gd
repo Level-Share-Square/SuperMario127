@@ -71,8 +71,7 @@ onready var regen_particles : Particles2D = $RegenParticles
 onready var rainbow_particles : Particles2D = $RainbowSparkles
 onready var metal_particles : Particles2D = $MetalSparkles
 onready var vanish_particles : Particles2D = $VanishSparkles
-onready var quicksand_particles : Particles2D = $QuicksandParticles
-onready var quicksand_particles2 : Particles2D = $QuicksandParticles2
+onready var quicksand_particles : ParticlesCollection = $QuicksandParticles
 onready var bottom_pos : Node2D = $BottomPos
 onready var dialogue_focus : Node2D = $DialogueFocus
 onready var ring_particles : AnimatedSprite = $RingParticles
@@ -327,7 +326,7 @@ func _ready():
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
 	ground_collider_enable_timer.connect("timeout", self, "_on_ground_collder_timer_timeout")
-	print(Singleton.CurrentLevelData.level_data.vars.transition_data)
+#	print(Singleton.CurrentLevelData.level_data.vars.transition_data)
 	if Singleton.CurrentLevelData.level_data.vars.transition_data != []:
 		hide()
 		toggle_movement(false)
@@ -818,7 +817,7 @@ func _physics_process(delta: float) -> void:
 		if state == null or state == get_state_node("DiveState"):
 			max_speed = max_frictionless_slide_velocity
 		elif state == get_state_node("ButtSlideState"):
-			max_speed = state.move_speed
+			max_speed = state.move_speed*1.1
 		
 		if abs(velocity.length()) < max_speed and abs(normal.y) < 1:
 			if normal.y > 0:
@@ -1333,8 +1332,8 @@ func toggle_movement(var value : bool):
 	movable = value
 
 func handle_liquids(liquid_areas, delta):
-	quicksand_particles.emitting = false
-	quicksand_particles2.emitting = false
+	quicksand_particles.set_particles_emitting(false)
+	
 	if liquid_areas.size() <= 0: return
 	
 	for area in liquid_areas:
@@ -1365,27 +1364,22 @@ func handle_liquids(liquid_areas, delta):
 					global_position.x * m + b
 					)
 				
-#				if state != get_state_node("QuicksandIdleState") or state != get_state_node("QuicksandHopState"):
-#					set_state_by_name("QuicksandIdleState")
 				var idle_state = get_state_node("QuicksandIdleState")
 				var hop_state = get_state_node("QuicksandHopState")
 				
+				quicksand_particles.set_particles_color(liquid.color/lerp(max(1+(((bottom_pos.global_position.y-liquid.global_position.y)/death_threshold)/1.75), 1.1), 1.25, .5))
+				quicksand_particles.set_particles_emitting(true)
 				
 				idle_state.fall_speed = sinking_speed
 				
 				if bottom_pos.global_position.y < liquid.global_position.y + 2:
-					hop_state.working_jump_strength = get_state_node("JumpState").jump_power
+					hop_state.working_jump_strength = get_state_node("JumpState").jump_power*.9
 					idle_state.move_speed_modifier = .9
 				else:
 					hop_state.working_jump_strength = get_state_node("QuicksandHopState").jump_strength
 					
 					if !dead:
 						idle_state.move_speed_modifier = min(1-(((bottom_pos.global_position.y-liquid.global_position.y)/death_threshold)/1.75), .75)
-					
-					quicksand_particles.process_material.color = liquid.color/1.2
-					quicksand_particles2.process_material.color = liquid.color/1.2
-					quicksand_particles.emitting = true
-					quicksand_particles2.emitting = true
 			
 				if bottom_pos.global_position.y > top_position.y + death_threshold*rotation_vector.y and !dead:
 					print(top_position)

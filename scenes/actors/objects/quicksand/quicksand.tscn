@@ -87,6 +87,7 @@ gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 color = Color( 0.137255, 0.137255, 0.137255, 0.172549 )
+anim_speed = 2.0
 
 [node name="Quicksand" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -127,6 +128,7 @@ texture = SubResource( 12 )
 expand = true
 
 [node name="Bubbles" type="Particles2D" parent="." index="4"]
+visible = false
 material = SubResource( 33 )
 position = Vector2( 900, 300 )
 amount = 200

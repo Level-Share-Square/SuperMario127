@@ -544,6 +544,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/ParallaxLayerResource.gd"
 }, {
+"base": "Node2D",
+"class": "ParticlesCollection",
+"language": "GDScript",
+"path": "res://classes/ParticleCollection.gd"
+}, {
 "base": "Node",
 "class": "PlaceableItem",
 "language": "GDScript",
@@ -902,6 +907,7 @@ _global_script_class_icons={
 "OrCondition": "",
 "PanningCamera2D": "",
 "ParallaxLayerResource": "",
+"ParticlesCollection": "",
 "PlaceableItem": "",
 "PlayerSelector": "",
 "Powerup": "",

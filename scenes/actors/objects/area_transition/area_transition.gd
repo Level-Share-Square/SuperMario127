@@ -277,3 +277,9 @@ func get_character_transition_data(character : Character) -> Array:
 		else:
 			return Singleton.CurrentLevelData.level_data.vars.transition_character_data_2
 			
+
+func _process(delta):
+	if parts <= 0:
+		parts = 1
+		set_property("parts", parts, true)
+			

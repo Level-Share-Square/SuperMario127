@@ -23,8 +23,8 @@ func _start_check(_delta):
 func _start(delta):
 	length_remaining = jump_length
 	
-	character.quicksand_particles.emitting = true
-	character.quicksand_particles2.emitting = true
+	character.quicksand_particles.set_particles_emitting(true)
+	
 	character.sound_player.play_jump_sound()
 	character.velocity.y = -working_jump_strength
 	character.position.y -= 3
@@ -43,8 +43,7 @@ func _stop_check(_delta):
 	length_remaining -= 1
 	var check = length_remaining <= 0 or character.velocity.y > 0
 	if check:
-		character.quicksand_particles.emitting = false
-		character.quicksand_particles2.emitting = false
+		character.quicksand_particles.set_particles_emitting(false)
 	return check
 
 func _general_update(delta):
