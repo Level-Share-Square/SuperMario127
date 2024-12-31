@@ -95,6 +95,7 @@ script = ExtResource( 2 )
 
 [node name="SandKickup" type="CPUParticles2D" parent="."]
 material = SubResource( 123 )
+emitting = false
 amount = 32
 lifetime = 0.75
 local_coords = false
@@ -111,6 +112,7 @@ anim_speed = 0.75
 
 [node name="DustLeft" type="Particles2D" parent="."]
 material = SubResource( 33 )
+emitting = false
 amount = 14
 local_coords = false
 process_material = SubResource( 116 )
@@ -118,6 +120,7 @@ texture = ExtResource( 1 )
 
 [node name="DustRight" type="Particles2D" parent="."]
 material = SubResource( 33 )
+emitting = false
 amount = 14
 local_coords = false
 process_material = SubResource( 120 )

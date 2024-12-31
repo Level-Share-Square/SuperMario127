@@ -226,6 +226,7 @@ func pipe_exit_anim_finished(character : Character):
 	# undo collision changes 
 	stored_characters[character.player_id] = null
 	if !teleportation_mode:
+		character.camera.global_position = character.global_position
 		var timer = get_tree().create_timer(0.1)
 		timer.connect("timeout", character, "toggle_movement", [true])
 		timer.connect("timeout", self, "set_camera", [character])

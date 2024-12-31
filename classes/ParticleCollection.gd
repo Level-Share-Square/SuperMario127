@@ -7,7 +7,7 @@ func _ready():
 	for child in get_children():
 		if (child is Particles2D) or (child is CPUParticles2D):
 			particle_nodes.append(child)
-			print(child)
+#			print(child)
 
 func set_particles_emitting(value : bool):
 	for particle in particle_nodes:

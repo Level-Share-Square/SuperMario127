@@ -1367,7 +1367,7 @@ func handle_liquids(liquid_areas, delta):
 				var idle_state = get_state_node("QuicksandIdleState")
 				var hop_state = get_state_node("QuicksandHopState")
 				
-				quicksand_particles.set_particles_color(liquid.color/lerp(max(1+(((bottom_pos.global_position.y-liquid.global_position.y)/death_threshold)/1.75), 1.1), 1.25, .5))
+				quicksand_particles.set_particles_color(liquid.color/1.2)
 				quicksand_particles.set_particles_emitting(true)
 				
 				idle_state.fall_speed = sinking_speed
