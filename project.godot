@@ -120,11 +120,6 @@ _global_script_classes=[ {
 "path": "res://scenes/actors/mario/states/CrushedBase.gd"
 }, {
 "base": "CrushedBaseState",
-"class": "CrushedSideState",
-"language": "GDScript",
-"path": "res://scenes/actors/mario/states/CrushedSide.gd"
-}, {
-"base": "CrushedBaseState",
 "class": "CrushedState",
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Crushed.gd"
@@ -807,7 +802,6 @@ _global_script_class_icons={
 "Component": "",
 "ControlPresets": "",
 "CrushedBaseState": "",
-"CrushedSideState": "",
 "CrushedState": "",
 "CurveTween": "",
 "DefineVarInstruction": "",
@@ -946,6 +940,7 @@ _global_script_class_icons={
 
 config/name="Super Mario 127"
 run/main_scene="res://scenes/menu/launcher/launcher.tscn"
+config/use_custom_user_dir=true
 config/custom_user_dir_name="dev"
 boot_splash/show_image=false
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
@@ -1411,6 +1406,7 @@ toggle_enabled={
 2d_physics/layer_14="projectiles"
 2d_physics/layer_15="npc"
 2d_physics/layer_16="liquids"
+2d_physics/layer_17="crushers"
 
 [logging]
 

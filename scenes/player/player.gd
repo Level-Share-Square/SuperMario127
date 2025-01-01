@@ -127,6 +127,13 @@ func update_activity() -> void:
 		printerr(str(result))
 
 
+func get_characters() -> Array:
+	var array: Array = [get_node(character)]
+	if Singleton.PlayerSettings.number_of_players == 2:
+		array.append(get_node(character2))
+	return array
+
+
 # todo: mayb move this stuff elsewhere?? question mark? ?? ?
 const TIMER_ICON := preload("res://scenes/actors/objects/p_switch/icon.png")
 func set_switch_timer(new_time: float):

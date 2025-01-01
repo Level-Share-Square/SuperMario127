@@ -86,10 +86,11 @@ onready var heal_tick_timer = $HealTickTimer
 onready var ground_collider_enable_timer = $GroundColliderEnableTimer
 export var bottom_pos_offset : Vector2
 export var bottom_pos_dive_offset : Vector2
-onready var squish_vertical_check = $SquishCasts/VerticalCheck
-onready var squish_vertical_check_dive = $SquishCasts/VerticalCheckDive
-onready var squish_left_check = $SquishCasts/LeftCheck
-onready var squish_right_check = $SquishCasts/RightCheck
+onready var crusher_detector = $CrusherDetector
+onready var crushed_collision = $CrushedCollision
+onready var crushed_collision_dive = $CrushedCollisionDive
+var predictive_collision: bool = false
+var crush_disable: bool = false
 
 
 onready var spotlight : Light2D = $Spotlight
@@ -809,6 +810,7 @@ func _physics_process(delta: float) -> void:
 	#frictionless is affected by gravity on slopes (also gets dives working with friction)
 	if disable_friction and is_grounded() and !(nozzle != null and (nozzle.name == "TurboNozzle" and nozzle.activated)) and powerup != get_powerup_node("RainbowPowerup") and state != get_state_node("ButtSlideState"):
 		var normal = ground_check.get_collision_normal()
+		
 		var max_speed = 450
 		if state == null or state == get_state_node("DiveState"):
 			max_speed = max_frictionless_slide_velocity
@@ -853,8 +855,9 @@ func _physics_process(delta: float) -> void:
 	if movable and (!is_instance_valid(state) or !state.override_rotation) and (!is_instance_valid(nozzle) or !nozzle.override_rotation) and !rotating_jump and last_state != get_state_node("SlideState"):
 		var sprite_rotation = 0
 		var sprite_offset = Vector2()
-		if ground_check.is_colliding():
+		if ground_check.is_colliding() and crusher_detector.get_overlapping_bodies().size() <= 0:
 			var normal = ground_check.get_collision_normal()
+			
 			sprite_rotation = (atan2(normal.y, normal.x) + (PI/2)) / 2
 			sprite_offset = Vector2(rad2deg(sprite_rotation) / 10, -abs(rad2deg(sprite_rotation) / 10))
 
@@ -1008,14 +1011,15 @@ func _physics_process(delta: float) -> void:
 	
 	# Move by velocity
 	if movable:
-
-		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
+		# if crushers detected, disable all collision and enable singular "crushed" collider
+		update_collision(crusher_detector.get_overlapping_bodies().size() <= 0)
 		
-		if (last_position != Vector2.ZERO and (last_position - global_position).length_squared() > 0
-			and get_world_2d().direct_space_state.intersect_ray(last_position, global_position, [self], 1).size() > 0):
+		velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP, true, 4, deg2rad(46))
+		## CLIPPING CODE
+		var ray_check: Dictionary = get_world_2d().direct_space_state.intersect_ray(last_position, global_position, [self], 1)
+		var ray_colliding: bool = not ray_check.empty()
+		if (ray_colliding and last_position != Vector2.ZERO and (last_position - global_position).length_squared() > 0):
 			position = last_position
-			reset_physics_interpolation()
-			
 			if velocity.length_squared() < 1:
 				# Clip attempt, just reset velocity
 				velocity = last_velocity * 0.95
@@ -1024,6 +1028,14 @@ func _physics_process(delta: float) -> void:
 			collided_last_frame = slide_count > 0
 	else:
 		collided_last_frame = false
+	
+	# fix ground magnet mario
+	if is_grounded() and last_velocity.y < 0 and not is_on_ceiling() and not is_in_platform:
+		velocity.y = last_velocity.y * 0.95
+	
+	# check if mario will collide w/ anything if he continues moving
+	var motion: Vector2 = global_position - last_position
+	predictive_collision = test_move(global_transform.translated(motion), Vector2(0, 0.001))
 
 	# Boundaries
 	if position.y > (level_bounds.end.y * 32) + 128:
@@ -1212,11 +1224,7 @@ onready var terrain_collision_nodes: Array = [
 	ground_check_dive,
 	left_check,
 	right_check,
-	slope_stop_check,
-	squish_vertical_check,
-	squish_vertical_check_dive,
-	squish_left_check,
-	squish_right_check
+	slope_stop_check
 ]
 func set_all_collision_masks(bit, value) -> void:
 	for collision_node in terrain_collision_nodes:
@@ -1237,17 +1245,32 @@ func set_inter_player_collision(can_collide : bool) -> void:
 	player_collision.set_collision_mask_bit(1, can_collide)
 	player_collision.set_collision_layer_bit(1, can_collide)
 
-func set_dive_collision(is_enabled : bool) -> void:
-	using_dive_collision = is_enabled
-	if is_enabled:
-		ground_shape.disabled = is_enabled
+func set_dive_collision(is_dive : bool, force_disabled: bool = crush_disable, set_using: bool = true) -> void:
+	if set_using:
+		using_dive_collision = is_dive
+	
+	if force_disabled:
+		ground_shape.disabled = false
+	elif is_dive:
+		ground_shape.disabled = is_dive
 	else:
 		ground_collider_enable_timer.start()
-	collision_raycast.disabled = is_enabled
-	dive_collision_shape.disabled = !is_enabled
-	ground_collision_dive.disabled = !is_enabled
-	left_collision.disabled = is_enabled
-	right_collision.disabled = is_enabled
+	
+	collision_shape.disabled = is_dive or force_disabled
+	collision_raycast.disabled = is_dive or force_disabled
+	dive_collision_shape.disabled = !is_dive or force_disabled
+	ground_collision_dive.disabled = !is_dive or force_disabled
+	left_collision.disabled = is_dive or force_disabled
+	right_collision.disabled = is_dive or force_disabled
+	
+	crushed_collision.disabled = is_dive or !force_disabled
+	crushed_collision_dive.disabled = !is_dive or !force_disabled
+
+
+func update_collision(enabled: bool) -> void:
+	set_dive_collision(using_dive_collision, not enabled, false)
+	crush_disable = not enabled
+
 
 func hide_shine_dance_shine():
 	$CollectedShine.visible = false

@@ -1,41 +1,46 @@
 class_name CrushedState
 extends CrushedBaseState
 
-const SPRITE_SCALE_FACTOR: int = 24
-const PAINFUL_SCALE_THRESHOLD: float = 0.3
 
-export var vertical_check_path: NodePath
-export var vertical_check_dive_path: NodePath
+const PAINFUL_SCALE_THRESHOLD: float = 0.5
 
-onready var vertical_check: RayCast2D = get_node(vertical_check_path)
-onready var vertical_check_dive: RayCast2D = get_node(vertical_check_dive_path)
+export var detector_path: NodePath
+export var pain_path: NodePath
+
+onready var crushed_detector: Area2D = get_node(detector_path)
+onready var pain_detector: Area2D = get_node(pain_path)
+
 
 func _ready():
-	blacklisted_states = ["CrushedSideState", "SlideStopState"]
+	blacklisted_states = ["SlideStopState"]
 
 func _is_squished() -> bool:
-	return character.is_grounded() and get_vertical_check().is_colliding()
+	print(crushed_detector.get_overlapping_bodies().size())
+	return character.predictive_collision and crushed_detector.get_overlapping_bodies().size() > 1
 
 func _past_squish_threshold() -> bool:
-	var sprite = character.sprite
-	return sprite.scale.y < PAINFUL_SCALE_THRESHOLD
+	return pain_detector.get_overlapping_bodies().size() > 0
 
-func get_vertical_check() -> RayCast2D:
-	if character.using_dive_collision: return vertical_check_dive
-	return vertical_check
 
+func _start(_delta):
+	._start(_delta)
+	#character.collision_raycast.disabled = true
 
 func _update(delta):
 	# calls update in the base class
 	._update(delta)
 	
-	var vertical_point: float = get_ray_point(vertical_check).y
-	var vertical_length: float = abs(vertical_check.cast_to.y)
-	
-	var sprite = character.sprite
-	sprite.scale.y = max(abs(vertical_point) / vertical_length, MIN_SPRITE_SCALE)
-	# i forgot sprite offset was affected by its scale... took me a while to figure out :p
-	sprite.offset.y = (1 - sprite.scale.y) * (SPRITE_SCALE_FACTOR / sprite.scale.y)
+	## TODO: real animation
+	character.sprite.scale = Vector2(1, 0.1)
+	character.sprite.rotation = 0
+	#var left_point: float = get_ray_point(left_check).x
+	#var right_point: float = get_ray_point(right_check).x
+	#var length: float = abs(left_point) + abs(right_point)
+	#var total_length: float = abs(left_check.cast_to.x) + abs(right_check.cast_to.x)
 
-func _stop_check(_delta):
-	return not get_vertical_check().is_colliding()
+	#var sprite = character.sprite
+	#sprite.scale.x = max(length / total_length, MIN_SPRITE_SCALE)
+
+func _stop(_delta):
+	._stop(_delta)
+	#character.collision_raycast.disabled = false
