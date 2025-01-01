@@ -110,8 +110,7 @@ func actually_bounce(body):
 			body.position.y += 2 * sign(y_power)
 			# Bounce the player off of the ground if necessary,
 			# if this wasn't done the player would stay on the ground, repeatedly bouncing
-			if y_power < 0 and body.prev_is_grounded\
-			and !body.test_move(body.transform, Vector2(0, 4 * sign(y_power))):
+			if y_power < 0 and "prev_is_grounded" in body and body.prev_is_grounded and !body.test_move(body.transform, Vector2(0, 4 * sign(y_power))):
 				body.position.y += 4 * sign(y_power)
 	animation_player.play("bounce_weak" if is_weak_bounce else "bounce")
 	

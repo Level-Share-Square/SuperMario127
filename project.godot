@@ -139,72 +139,72 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/text/dialogue.gd"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordActivity",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordActivityAssets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_assets.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordActivityManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_manager.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordActivityParty",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_party.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordActivitySecrets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_secrets.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordActivityTimestamps",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_timestamps.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordCore",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_core.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordLobby",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordLobbyManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_manager.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordLobbyTransaction",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_transaction.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordOverlayManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_overlay_manager.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordPartySize",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_party_size.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordResult",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_result.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordUser",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_user.gdns"
@@ -223,11 +223,6 @@ _global_script_classes=[ {
 "class": "EditorWindow",
 "language": "GDScript",
 "path": "res://scenes/editor/window.gd"
-}, {
-"base": "GameObject",
-"class": "Enemy",
-"language": "GDScript",
-"path": "res://classes/Enemy.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "EnemyBase",
@@ -479,6 +474,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/Vars.gd"
 }, {
+"base": "GameObject",
+"class": "LiquidBase",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/liquid/liquid_base.gd"
+}, {
 "base": "Resource",
 "class": "Member",
 "language": "GDScript",
@@ -539,6 +539,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/ParallaxLayerResource.gd"
 }, {
+"base": "Node2D",
+"class": "ParticlesCollection",
+"language": "GDScript",
+"path": "res://classes/ParticleCollection.gd"
+}, {
 "base": "Node",
 "class": "PlaceableItem",
 "language": "GDScript",
@@ -553,6 +558,16 @@ _global_script_classes=[ {
 "class": "Powerup",
 "language": "GDScript",
 "path": "res://scenes/actors/mario/Powerup.gd"
+}, {
+"base": "State",
+"class": "QuicksandHopState",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/states/QuicksandHop.gd"
+}, {
+"base": "State",
+"class": "QuicksandIdleState",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/states/QuicksandIdle.gd"
 }, {
 "base": "Powerup",
 "class": "RainbowPowerup",
@@ -823,7 +838,6 @@ _global_script_class_icons={
 "DiveState": "",
 "EditorHitbox": "",
 "EditorWindow": "",
-"Enemy": "",
 "EnemyBase": "",
 "EnemyDamage": "",
 "EnemySpawnerBase": "",
@@ -874,6 +888,7 @@ _global_script_class_icons={
 "LevelSong": "",
 "LevelTileset": "",
 "LevelVars": "",
+"LiquidBase": "",
 "Member": "",
 "MetalPowerup": "",
 "MethodExecution": "",
@@ -886,9 +901,12 @@ _global_script_class_icons={
 "OrCondition": "",
 "PanningCamera2D": "",
 "ParallaxLayerResource": "",
+"ParticlesCollection": "",
 "PlaceableItem": "",
 "PlayerSelector": "",
 "Powerup": "",
+"QuicksandHopState": "",
+"QuicksandIdleState": "",
 "RainbowPowerup": "",
 "RainbowStarState": "",
 "RainbowStarWindupState": "",
@@ -994,6 +1012,7 @@ physics=false
 change=false
 audio=false
 transforms=false
+fps=true
 
 [importer_defaults]
 
@@ -1427,6 +1446,7 @@ limits/debugger_stdout/max_chars_per_second=10000
 
 [physics]
 
+common/physics_fps=120
 2d/physics_engine="GodotPhysics"
 
 [rendering]

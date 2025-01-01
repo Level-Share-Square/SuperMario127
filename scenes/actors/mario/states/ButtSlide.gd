@@ -53,6 +53,8 @@ func _update(delta):
 	
 	if character.left_check.is_colliding() and character.right_check.is_colliding():
 		character.velocity.y = 550
+	
+	#disable this and remove the check for buttsliding in mario.gd (frictionless sliding) for more experimental sliding physics
 	if character.is_grounded() and move_direction != 0:
 		temp_speed += 2
 		stop_buffer = 0.5
@@ -68,7 +70,7 @@ func _update(delta):
 			character.set_state_by_name("BounceState", delta)
 			character.position.y -= 1
 			character.velocity.y = -150
-#		else: # to enable later
+#		else: # enable this (see line 57)
 #			character.velocity.x -= sign(character.velocity.x) * 10
 		
 	if character.inputs[2][0]:

@@ -1,0 +1,49 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform vec4 color : hint_color;
+uniform sampler2D noise_texture_1;
+uniform sampler2D noise_texture_2;
+uniform sampler2D noise_texture_3;
+
+uniform vec2 noise_scale_1;
+uniform vec2 noise_speed_1;
+
+uniform vec2 noise_scale_2;
+uniform vec2 noise_speed_2;
+
+uniform vec2 noise_scale_3;
+uniform vec2 noise_speed_3;
+
+float rand(vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+void fragment() {
+	vec4 base = texture(TEXTURE, UV);
+	base *= color;
+	
+	vec2 noise_uv_1 = (UV  * noise_scale_1) + (noise_speed_1 * TIME);
+	vec4 noise_1 = texture(noise_texture_1, noise_uv_1);
+	
+	vec2 noise_uv_2 = (UV  * noise_scale_2) + (noise_speed_2 * TIME);
+	vec4 noise_2 = texture(noise_texture_2, noise_uv_2);
+	
+	vec2 noise_uv_3 = (UV  * noise_scale_3) + (noise_speed_3 * TIME);
+	vec4 noise_3 = texture(noise_texture_3, noise_uv_3);
+	
+	base.rgb /= vec3(2);
+	
+	vec3 mix1 = noise_1.rgb/vec3(7.5);
+	vec3 mix2 = noise_2.rgb/vec3(4.5);
+	vec3 mix3 = noise_3.rgb/vec3(10);
+	
+	base.rgb = base.rgb + mix1 + mix2 - mix3;
+//	base.rgb = base.rgb + mix3*vec3(10);
+	
+//	base.rgb = step(vec3(.5), base.rgb);
+	
+	COLOR = base;
+}"

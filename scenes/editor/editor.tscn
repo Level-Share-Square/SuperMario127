@@ -1551,6 +1551,7 @@
 [ext_resource path="res://scenes/actors/objects/star_door/Editor/single/planks_door_icon.png" type="Texture" id=1549]
 [ext_resource path="res://scenes/actors/objects/thwomp/icon.png" type="Texture" id=1550]
 [ext_resource path="res://scenes/actors/objects/thwomp/preview.png" type="Texture" id=1551]
+[ext_resource path="res://scenes/actors/objects/quicksand/icon.png" type="Texture" id=1552]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2511,16 +2512,6 @@ object_size = Vector2( 16, 16 )
 icon = ExtResource( 134 )
 preview = ExtResource( 134 )
 
-[node name="Water" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 72
-is_object = true
-object_center = Vector2( 32, 0 )
-tile_mode_offset = Vector2( 0, -32 )
-tile_mode_step = 64
-icon = ExtResource( 235 )
-preview = ExtResource( 236 )
-
 [node name="Cannon" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
 object_id = 46
@@ -2529,6 +2520,18 @@ object_center = Vector2( 16, 32 )
 tile_mode_offset = Vector2( 0, 16 )
 icon = ExtResource( 152 )
 preview = ExtResource( 151 )
+
+[node name="Water" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 72
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+change_to = "Lava"
+items_in_sequence = 3
+icon = ExtResource( 235 )
+preview = ExtResource( 236 )
 
 [node name="BreakableBlock" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )
@@ -3730,6 +3733,20 @@ index_in_sequence = 2
 icon = ExtResource( 324 )
 preview = ExtResource( 324 )
 
+[node name="Quicksand" type="Node" parent="PlaceableItems/SandGroup"]
+script = ExtResource( 24 )
+object_id = 142
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+item_name = "Quicksand"
+change_to = "Water"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 1552 )
+preview = ExtResource( 1552 )
+
 [node name="SnowGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
 color = Color( 0.121569, 0.322702, 0.517647, 1 )
@@ -4145,6 +4162,9 @@ is_object = true
 object_center = Vector2( 32, 0 )
 tile_mode_offset = Vector2( 0, -32 )
 tile_mode_step = 64
+change_to = "Quicksand"
+items_in_sequence = 3
+index_in_sequence = 1
 icon = ExtResource( 289 )
 preview = ExtResource( 290 )
 

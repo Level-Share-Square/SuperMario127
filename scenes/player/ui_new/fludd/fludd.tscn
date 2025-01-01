@@ -251,9 +251,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -40.0
-margin_top = 46.0
-margin_bottom = 96.0001
+margin_top = 96.0
+margin_right = 40.0
+margin_bottom = 146.0
 
 [node name="Paint" type="Polygon2D" parent="Meter"]
 position = Vector2( 21, 27 )
@@ -315,8 +315,8 @@ polygon = PoolVector2Array( 35, 5, 19, -3, 4, 2, 18, 11 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -8.0
-margin_right = 8.0
-margin_bottom = 10.0
+margin_right = 48.0
+margin_bottom = 60.0001
 custom_colors/font_outline_modulate = Color( 0.105882, 0.145098, 0.478431, 0.65098 )
 custom_fonts/font = ExtResource( 1 )
 text = "50%"

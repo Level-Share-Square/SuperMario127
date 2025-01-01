@@ -24,7 +24,6 @@ onready var page_change = $PageChange
 onready var typing = $Typing
 
 onready var tween = $Tween
-onready var fade_tween = $FadeTween
 
 var dialogue: PoolStringArray 
 var last_tag: String

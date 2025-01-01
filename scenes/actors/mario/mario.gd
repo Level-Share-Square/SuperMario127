@@ -47,6 +47,7 @@ onready var slope_stop_check : RayCast2D = $SlopeStopCheck
 onready var player_collision : Area2D = $PlayerCollision
 onready var water_detector : Area2D = $WaterDetector
 onready var lava_detector : Area2D = $LavaDetector
+onready var liquid_detector : Area2D = $LiquidDetector
 onready var pipe_detector : Area2D = $PipeDetector
 onready var p_block_detector : Area2D = $PBlockDetector
 onready var burn_particles : Particles2D = $BurnParticles
@@ -70,6 +71,7 @@ onready var regen_particles : Particles2D = $RegenParticles
 onready var rainbow_particles : Particles2D = $RainbowSparkles
 onready var metal_particles : Particles2D = $MetalSparkles
 onready var vanish_particles : Particles2D = $VanishSparkles
+onready var quicksand_particles : ParticlesCollection = $QuicksandParticles
 onready var bottom_pos : Node2D = $BottomPos
 onready var dialogue_focus : Node2D = $DialogueFocus
 onready var ring_particles : AnimatedSprite = $RingParticles
@@ -318,12 +320,14 @@ const ANIM_IDS : Dictionary = {
 }
 
 func _ready():
+	Engine.set_target_fps(60)
+	Engine.iterations_per_second = 60
 	Singleton.CurrentLevelData.can_pause = true
 
 	heal_timer.connect("timeout", self, "_on_heal_timer_timeout")
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
 	ground_collider_enable_timer.connect("timeout", self, "_on_ground_collder_timer_timeout")
-	#print(Singleton.CurrentLevelData.level_data.vars.transition_data)
+#	print(Singleton.CurrentLevelData.level_data.vars.transition_data)
 	if Singleton.CurrentLevelData.level_data.vars.transition_data != []:
 		hide()
 		toggle_movement(false)
@@ -633,7 +637,7 @@ func _process(delta: float) -> void:
 				frames_until_flash = 3
 				powerup.toggle_visuals()
 	
-	visible = !visible if invulnerable_frames > 0 else true
+	sprite.self_modulate.a8 = 100 if invulnerable_frames%2 == 1 else 255
 
 func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> void:
 	if !dead:
@@ -815,7 +819,7 @@ func _physics_process(delta: float) -> void:
 		if state == null or state == get_state_node("DiveState"):
 			max_speed = max_frictionless_slide_velocity
 		elif state == get_state_node("ButtSlideState"):
-			max_speed = state.move_speed
+			max_speed = state.move_speed*1.1
 		
 		if abs(velocity.length()) < max_speed and abs(normal.y) < 1:
 			if normal.y > 0:
@@ -889,6 +893,8 @@ func _physics_process(delta: float) -> void:
 			nozzle_node.handle_update(delta)
 		for powerup_node in powerups_node.get_children():
 			powerup_node.handle_update(delta)
+		
+		handle_liquids(liquid_detector.get_overlapping_areas(), delta)
 	
 	# Handle powerup
 	if is_instance_valid(powerup):
@@ -1128,61 +1134,91 @@ func kill(cause: String) -> void:
 		var cutout_out := cutout_circle
 		var transition_time := 0.75
 		Singleton.Music.stop_temporary_music()
-		if cause == "fall":
-			controllable = false
-			sound_player.play_fall_sound()
-			if number_of_players == 1:
-				cutout_in = cutout_death
-				yield(get_tree().create_timer(1), "timeout")
-			else:
-				reload = false
-		elif cause == "reload":
-			transition_time = 0.4
-		elif cause == "green_demon":
-			sound_player.play_last_hit_sound()
-			controllable = false
-			movable = false
-			cutout_in = cutout_death
-			sprite.visible = false
-			death_sprite.set_as_toplevel(true)
-			death_sprite.global_position = sprite.global_position
-			death_sprite.play_anim()
-			position = Vector2(0, 100000000000000000)
-			reset_physics_interpolation()
-			yield(get_tree().create_timer(0.55), "timeout")
-			sound_player.play_death_sound()
-			yield(get_tree().create_timer(0.75), "timeout")
-		elif cause == "hit" or cause == "lava" or cause == "crushed":
-			controllable = false
-			movable = false
-			cutout_in = cutout_death
-			sprite.visible = false
-			death_sprite.set_as_toplevel(true)
-			death_sprite.global_position = sprite.global_position
-			death_sprite.play_anim()
-			position = Vector2(0, 100000000000000000)
-			reset_physics_interpolation()
-			yield(get_tree().create_timer(0.55), "timeout")
-			sound_player.play_death_sound()
-			yield(get_tree().create_timer(0.75), "timeout")
-			if number_of_players != 1:
-				reload = false
-		elif cause == "timer":
-			sound_player.play_last_hit_sound()
-			controllable = false
-			movable = false
-			cutout_in = cutout_death
-			sprite.visible = false
-			death_sprite.set_as_toplevel(true)
-			death_sprite.global_position = sprite.global_position
-			death_sprite.play_anim()
-			position = Vector2(0, 100000000000000000)
-			reset_physics_interpolation()
-			yield(get_tree().create_timer(0.55), "timeout")
-			sound_player.play_death_sound()
-			yield(get_tree().create_timer(0.75), "timeout")
-			reload = true
 		
+		match(cause):
+			"fall":
+				controllable = false
+				sound_player.play_fall_sound()
+				if number_of_players == 1:
+					cutout_in = cutout_death
+					yield(get_tree().create_timer(1), "timeout")
+				else:
+					reload = false
+			"reload":
+				transition_time = 0.4
+			"green_demon":
+				sound_player.play_last_hit_sound()
+				controllable = false
+				movable = false
+				cutout_in = cutout_death
+				sprite.visible = false
+				death_sprite.set_as_toplevel(true)
+				death_sprite.global_position = sprite.global_position
+				death_sprite.play_anim()
+				position = Vector2(0, 100000000000000000)
+				reset_physics_interpolation()
+				yield(get_tree().create_timer(0.55), "timeout")
+				sound_player.play_death_sound()
+				yield(get_tree().create_timer(0.75), "timeout")
+			"hit", "lava", "crushed":
+				controllable = false
+				movable = false
+				cutout_in = cutout_death
+				sprite.visible = false
+				death_sprite.set_as_toplevel(true)
+				death_sprite.global_position = sprite.global_position
+				death_sprite.play_anim()
+				position = Vector2(0, 100000000000000000)
+				reset_physics_interpolation()
+				yield(get_tree().create_timer(0.55), "timeout")
+				sound_player.play_death_sound()
+				yield(get_tree().create_timer(0.75), "timeout")
+				if number_of_players != 1:
+					reload = false
+			"timer":
+				sound_player.play_last_hit_sound()
+				controllable = false
+				movable = false
+				cutout_in = cutout_death
+				sprite.visible = false
+				death_sprite.set_as_toplevel(true)
+				death_sprite.global_position = sprite.global_position
+				death_sprite.play_anim()
+				position = Vector2(0, 100000000000000000)
+				reset_physics_interpolation()
+				yield(get_tree().create_timer(0.55), "timeout")
+				sound_player.play_death_sound()
+				yield(get_tree().create_timer(0.75), "timeout")
+				reload = true
+			"quicksand":
+				controllable = false
+				disable_movement = true
+#				sprite.animation = "bonkedLeft" if facing_direction == -1 else "bonkedRight"
+				sprite.animation = "jumpRight"
+#				sprite.speed_scale = 0
+#				sprite.frame = 0
+				sound_player.play_death_sound()
+				if number_of_players == 1:
+					cutout_in = cutout_death
+					yield(get_tree().create_timer(1), "timeout")
+				else:
+					reload = false
+			"poison":
+				sound_player.play_last_hit_sound()
+				controllable = false
+				movable = false
+				cutout_in = cutout_death
+				sprite.visible = false
+				death_sprite.set_as_toplevel(true)
+				death_sprite.global_position = sprite.global_position
+				death_sprite.play_anim()
+				position = Vector2(0, 100000000000000000)
+				reset_physics_interpolation()
+				yield(get_tree().create_timer(0.55), "timeout")
+				sound_player.play_death_sound()
+				yield(get_tree().create_timer(0.75), "timeout")
+				
+			
 		if reload:
 			Singleton.SceneTransitions.reload_scene(cutout_in, cutout_out, transition_time, 0, true)
 		else:
@@ -1250,21 +1286,21 @@ func set_dive_collision(is_dive : bool, force_disabled: bool = crush_disable, se
 		using_dive_collision = is_dive
 	
 	if force_disabled:
-		ground_shape.disabled = false
+		ground_shape.set_deferred("disabled", false)
 	elif is_dive:
-		ground_shape.disabled = is_dive
+		ground_shape.set_deferred("disabled", is_dive)
 	else:
 		ground_collider_enable_timer.start()
 	
-	collision_shape.disabled = is_dive or force_disabled
-	collision_raycast.disabled = is_dive or force_disabled
-	dive_collision_shape.disabled = !is_dive or force_disabled
-	ground_collision_dive.disabled = !is_dive or force_disabled
-	left_collision.disabled = is_dive or force_disabled
-	right_collision.disabled = is_dive or force_disabled
+	collision_shape.set_deferred("disabled", is_dive or force_disabled)
+	collision_raycast.set_deferred("disabled", is_dive or force_disabled)
+	dive_collision_shape.set_deferred("disabled", !is_dive or force_disabled)
+	ground_collision_dive.set_deferred("disabled", !is_dive or force_disabled)
+	left_collision.set_deferred("disabled", is_dive or force_disabled)
+	right_collision.set_deferred("disabled", is_dive or force_disabled)
 	
-	crushed_collision.disabled = is_dive or !force_disabled
-	crushed_collision_dive.disabled = !is_dive or !force_disabled
+	crushed_collision.set_deferred("disabled", is_dive or !force_disabled)
+	crushed_collision_dive.set_deferred("disabled", !is_dive or !force_disabled)
 
 
 func update_collision(enabled: bool) -> void:
@@ -1317,5 +1353,60 @@ func toggle_movement(var value : bool):
 	controllable = value
 	movable = value
 
-func add_force(velocity : Vector2, UUID : int):
-	extra_forces.get_or_add(UUID, velocity)
+func handle_liquids(liquid_areas, delta):
+	quicksand_particles.set_particles_emitting(false)
+	
+	if liquid_areas.size() <= 0: return
+	
+	for area in liquid_areas:
+		var liquid : LiquidBase = area.get_parent()
+		match(liquid.liquid_type):
+			liquid.LiquidType.Water:
+				pass
+				
+			liquid.LiquidType.Lava:
+				pass
+				
+			liquid.LiquidType.Quicksand:
+				var sinking_speed = liquid.sinking_speed/10
+				var death_threshold = liquid.death_threshold
+				
+				if death_threshold <= 0 and !dead:
+					kill("quicksand")
+				if dead:
+					velocity = Vector2(0, sinking_speed*6)
+				
+				var rotation_vector : Vector2 = liquid.global_transform.y
+				
+				var m = rotation_vector.x/rotation_vector.y
+				var b = liquid.global_position.y - m*(liquid.global_position.x)
+				
+				var top_position := Vector2(
+					(global_position.y - b) / m if m != 0 else global_position.x,
+					global_position.x * m + b
+					)
+				
+				var idle_state = get_state_node("QuicksandIdleState")
+				var hop_state = get_state_node("QuicksandHopState")
+				
+				quicksand_particles.set_particles_color(liquid.color/1.2)
+				quicksand_particles.set_particles_emitting(true)
+				
+				idle_state.fall_speed = sinking_speed
+				
+				if bottom_pos.global_position.y < liquid.global_position.y + 2:
+					hop_state.working_jump_strength = get_state_node("JumpState").jump_power*.9
+					idle_state.move_speed_modifier = .9
+				else:
+					hop_state.working_jump_strength = get_state_node("QuicksandHopState").jump_strength
+					
+					if !dead:
+						idle_state.move_speed_modifier = min(1-(((bottom_pos.global_position.y-liquid.global_position.y)/death_threshold)/1.75), .75)
+			
+				if bottom_pos.global_position.y > top_position.y + death_threshold*rotation_vector.y and !dead:
+					print(top_position)
+					print(global_position)
+					kill("quicksand")
+
+			liquid.LiquidType.Poison:
+				kill("poison")

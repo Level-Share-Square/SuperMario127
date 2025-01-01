@@ -173,6 +173,8 @@ func area_entered(body):
 	# "area" is already taken and im too lazy to change it
 	var area_parent = body.get_parent()
 	
+	if !(area_parent is Character): return
+	
 	#check if autostart is on (should be above AUTOSTART_OFF which is 0)
 	autostart_dialogue(body)
 	
@@ -182,6 +184,9 @@ func area_entered(body):
 
 func area_exited(body):
 	var area_parent = body.get_parent()
+	
+	if !(area_parent is Character): return
+	
 	if area_parent.has_signal("message_appear") and area_parent.has_signal("message_disappear"):
 
 		area_parent.disconnect("message_appear", parent, "start_talking")
