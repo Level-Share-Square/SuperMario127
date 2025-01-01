@@ -451,7 +451,7 @@ func is_grounded() -> bool:
 	
 	var raycast_node := ground_check
 	raycast_node.cast_to = Vector2(0, raycast_length) #26 or 30
-	if !ground_collision_dive.disabled:
+	if using_dive_collision:
 		raycast_node = ground_check_dive
 		raycast_node.cast_to = Vector2(0, 7.5)
 	
@@ -692,7 +692,7 @@ func _physics_process(delta: float) -> void:
 		update_ghost()
 		return
 	
-	bottom_pos.position = bottom_pos_offset if ground_collision_dive.disabled else bottom_pos_dive_offset
+	bottom_pos.position = bottom_pos_offset if not using_dive_collision else bottom_pos_dive_offset
 	bottom_pos.reset_physics_interpolation()
 	var is_in_platform := false
 	for body in platform_detector.get_overlapping_areas():
@@ -1285,9 +1285,7 @@ func set_dive_collision(is_dive : bool, force_disabled: bool = crush_disable, se
 	if set_using:
 		using_dive_collision = is_dive
 	
-	if force_disabled:
-		ground_shape.disabled = false
-	elif is_dive:
+	if force_disabled or is_dive:
 		ground_shape.disabled = is_dive
 	else:
 		ground_collider_enable_timer.start()
