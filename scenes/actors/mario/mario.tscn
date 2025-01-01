@@ -1,4 +1,4 @@
-[gd_scene load_steps=184 format=2]
+[gd_scene load_steps=187 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -105,7 +105,7 @@ length = 6.0
 custom_solver_bias = 0.5
 length = 13.0
 
-[sub_resource type="RectangleShape2D" id=103]
+[sub_resource type="RectangleShape2D" id=108]
 extents = Vector2( 0.05, 0.5 )
 
 [sub_resource type="CanvasItemMaterial" id=8]
@@ -247,7 +247,7 @@ extents = Vector2( 4.5, 15 )
 [sub_resource type="RectangleShape2D" id=105]
 extents = Vector2( 2.5, 10 )
 
-[sub_resource type="RectangleShape2D" id=106]
+[sub_resource type="RectangleShape2D" id=107]
 extents = Vector2( 9.5, 17 )
 
 [sub_resource type="Shader" id=25]
@@ -1546,13 +1546,13 @@ disabled = true
 visible = false
 position = Vector2( 0, 23.5 )
 z_index = 2
-shape = SubResource( 103 )
+shape = SubResource( 108 )
 disabled = true
 
 [node name="CrushedCollisionDive" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 7 )
 z_index = 2
-shape = SubResource( 103 )
+shape = SubResource( 108 )
 disabled = true
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
@@ -1661,6 +1661,7 @@ process_material = SubResource( 24 )
 texture = ExtResource( 30 )
 
 [node name="IsCrushedDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 65537
 
@@ -1684,7 +1685,7 @@ collision_mask = 65536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CrusherDetector"]
 position = Vector2( 0.5, 8 )
-shape = SubResource( 106 )
+shape = SubResource( 107 )
 
 [node name="States" type="Node" parent="."]
 

@@ -1286,21 +1286,21 @@ func set_dive_collision(is_dive : bool, force_disabled: bool = crush_disable, se
 		using_dive_collision = is_dive
 	
 	if force_disabled:
-		ground_shape.set_deferred("disabled", false)
+		ground_shape.disabled = false
 	elif is_dive:
-		ground_shape.set_deferred("disabled", is_dive)
+		ground_shape.disabled = is_dive
 	else:
 		ground_collider_enable_timer.start()
 	
-	collision_shape.set_deferred("disabled", is_dive or force_disabled)
-	collision_raycast.set_deferred("disabled", is_dive or force_disabled)
-	dive_collision_shape.set_deferred("disabled", !is_dive or force_disabled)
-	ground_collision_dive.set_deferred("disabled", !is_dive or force_disabled)
-	left_collision.set_deferred("disabled", is_dive or force_disabled)
-	right_collision.set_deferred("disabled", is_dive or force_disabled)
+	collision_shape.disabled = is_dive or force_disabled
+	collision_raycast.disabled = is_dive or force_disabled
+	dive_collision_shape.disabled = !is_dive or force_disabled
+	ground_collision_dive.disabled = !is_dive or force_disabled
+	left_collision.disabled = is_dive or force_disabled
+	right_collision.disabled = is_dive or force_disabled
 	
-	crushed_collision.set_deferred("disabled", is_dive or !force_disabled)
-	crushed_collision_dive.set_deferred("disabled", !is_dive or !force_disabled)
+	crushed_collision.disabled = is_dive or !force_disabled
+	crushed_collision_dive.disabled = !is_dive or !force_disabled
 
 
 func update_collision(enabled: bool) -> void:
