@@ -1,4 +1,4 @@
-[gd_scene load_steps=1586 format=2]
+[gd_scene load_steps=1587 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -3422,7 +3422,7 @@ preview = ExtResource( 1441 )
 
 [node name="Thwomp" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 24 )
-object_id = 142
+object_id = 143
 is_object = true
 item_name = "Thwomp"
 icon = ExtResource( 1550 )
