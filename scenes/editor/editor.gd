@@ -73,6 +73,8 @@ var coin_frame : int
 onready var normal_boo = preload("res://assets/tiles/boo_block/icon.png")
 onready var invis_boo = preload("res://assets/tiles/boo_block/boo_block_invis.png")
 
+signal zoom_changed(zoom)
+
 
 func quit_to_menu():
 	var level_id: String = Singleton.CurrentLevelData.level_id
@@ -93,12 +95,9 @@ func cap_zoom_level(level : float) -> float:
 	# Reduce the zoom level if the screen wouldn't fit within the level
 	# NOTE: all values are -6 since there are 3 tiles OOB in both directions for both axis
 	var level_size : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds.size
-#	var max_zoom = 
-	if (level_size.x < 36 or level_size.y < 16) and zoom_level > 1.5:
-		return 1.5
-	# Level size Y is capped at 14. The Y check would be at 13 otherwise
-	if level_size.x < 30 and zoom_level > 1.25:
-		return 1.25
+	
+	while (393*level > level_size.x*17) or (216*level > level_size.y*17):
+		level = level-.25
 	
 	return level
 
@@ -109,6 +108,7 @@ func set_zoom_level(level : float) -> void:
 	
 	zoom_level = cap_zoom_level(level) # makes sure the zoom isn't too large when
 	Singleton.EditorSavedSettings.zoom_level = zoom_level
+	emit_signal("zoom_changed", zoom_level)
 
 func add_zoom_level(level : float) -> void:
 	set_zoom_level(zoom_level + level)
@@ -155,7 +155,7 @@ func _unhandled_input(event) -> void:
 
 func _ready() -> void:
 	Engine.set_target_fps(0)
-	Engine.iterations_per_second = 120
+	Engine.iterations_per_second = 60
 	# reset these to 0 since they get incremented by the loading in process every time
 	Singleton.CurrentLevelData.next_shine_id = 0
 	Singleton.CurrentLevelData.next_star_coin_id = 0

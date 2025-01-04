@@ -1,4 +1,4 @@
-[gd_scene load_steps=1587 format=2]
+[gd_scene load_steps=1589 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1552,6 +1552,7 @@
 [ext_resource path="res://scenes/actors/objects/thwomp/icon.png" type="Texture" id=1550]
 [ext_resource path="res://scenes/actors/objects/thwomp/preview.png" type="Texture" id=1551]
 [ext_resource path="res://scenes/actors/objects/quicksand/icon.png" type="Texture" id=1552]
+[ext_resource path="res://scenes/editor/editor_zoom_display.gd" type="Script" id=1553]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -1585,6 +1586,13 @@ load_path = "res://.import/preview.png-584db9af5d40df5a45a1c65bf93d4d3b.stex"
 
 [sub_resource type="DynamicFontData" id=29]
 font_path = "res://assets/fonts/delfino.ttf"
+
+[sub_resource type="DynamicFont" id=37]
+size = 22
+outline_size = 2
+outline_color = Color( 0.121569, 0.180392, 0.517647, 1 )
+use_filter = true
+font_data = SubResource( 29 )
 
 [sub_resource type="DynamicFont" id=30]
 size = 32
@@ -1649,6 +1657,7 @@ corner_radius_bottom_left = 8
 
 [sub_resource type="DynamicFont" id=14]
 size = 64
+use_filter = true
 font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxFlat" id=15]
@@ -5133,6 +5142,31 @@ script = ExtResource( 1501 )
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 100
 
+[node name="ZoomDisplay" type="Label" parent="UI"]
+margin_left = -72.0
+margin_top = 76.0
+margin_right = 7.0
+margin_bottom = 104.0
+custom_fonts/font = SubResource( 37 )
+text = "x1.0"
+script = ExtResource( 1553 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="UI/ZoomDisplay"]
+stream = ExtResource( 121 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="UI/ZoomDisplay"]
+stream = ExtResource( 120 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="Timer" type="Timer" parent="UI/ZoomDisplay"]
+wait_time = 2.5
+one_shot = true
+
+[node name="Tween" type="Tween" parent="UI/ZoomDisplay"]
+
 [node name="TextureRect" type="TextureRect" parent="UI"]
 margin_left = 327.0
 margin_top = -574.0
@@ -5506,7 +5540,7 @@ margin_right = 136.0
 margin_bottom = 117.002
 custom_colors/font_color = Color( 0.258824, 0.270588, 0.658824, 1 )
 custom_fonts/font = SubResource( 14 )
-text = "1"
+text = "G"
 align = 1
 valign = 1
 
@@ -5767,9 +5801,9 @@ script = ExtResource( 8 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -7.56805, -12.6135 )
 current = true
+process_mode = 0
 limit_left = 0
 limit_top = -70
-limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 12.5
 editor_draw_screen = false
@@ -5785,6 +5819,7 @@ script = ExtResource( 22 )
 position = Vector2( -46, 148 )
 
 [node name="MouseObjectArea" type="Area2D" parent="."]
+visible = false
 self_modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0.198608, -0.468788 )
 
