@@ -12,7 +12,7 @@ func update_zoom_display(zoom) -> void:
 	timer.stop()
 	timer.disconnect("timeout", self, "hide_zoom_display")
 	
-	text = "x" + str(zoom)
+	text = "x" + "%0.2f" % zoom
 	
 	show_zoom_display()
 	timer.start(2.5)

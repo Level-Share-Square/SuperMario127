@@ -103,10 +103,14 @@ func cap_zoom_level(level : float) -> float:
 
 func set_zoom_level(level : float) -> void:
 	# Zoom level limits
-	if level < 0.25: level = 0.25
-#	if level > 1.75: level = 1.75 #we don't be limiting the zoom size around here
+	if level < 0.25: level = 0.25 #lower limit on zoom
 	
-	zoom_level = cap_zoom_level(level) # makes sure the zoom isn't too large when
+	if level > 4.01: #just 4 wouldn't work and I don't know why
+		$Grid.visible = false
+	else:
+		$Grid.visible = true
+	
+	zoom_level = cap_zoom_level(level) # makes sure the zoom isn't too large
 	Singleton.EditorSavedSettings.zoom_level = zoom_level
 	emit_signal("zoom_changed", zoom_level)
 
@@ -142,9 +146,15 @@ func _unhandled_input(event) -> void:
 		elif event.is_action_pressed("eraser_tool"):
 			selected_tool = 1
 		elif event.is_action_pressed("zoom_out"):
-			add_zoom_level(0.25)
+			if Input.is_action_pressed("8_pixel_lock"):
+				add_zoom_level(0.05)
+			else:
+				add_zoom_level(0.25)
 		elif event.is_action_pressed("zoom_in"):
-			add_zoom_level(-0.25)
+			if Input.is_action_pressed("8_pixel_lock"):
+				add_zoom_level(-0.05)
+			else:
+				add_zoom_level(-0.25)
 		
 		if event.is_action_pressed("switch_layers"):
 			switch_layers()

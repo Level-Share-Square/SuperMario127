@@ -5834,8 +5834,8 @@ script = ExtResource( 30 )
 motion_mirroring = Vector2( 2048, 1024 )
 
 [node name="TextureRect" type="TextureRect" parent="Grid/Layer"]
-margin_right = 2048.0
-margin_bottom = 1024.0
+margin_right = 4096.0
+margin_bottom = 2048.0
 mouse_filter = 2
 stretch_mode = 2
 __meta__ = {
