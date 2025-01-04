@@ -1785,7 +1785,6 @@ limit_left = 0
 limit_top = 0
 limit_right = 960
 limit_bottom = 960
-limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 15.0
 drag_margin_left = 0.0
