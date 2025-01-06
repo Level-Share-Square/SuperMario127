@@ -8,7 +8,7 @@ export var extra_velocity = 80
 var bounces_left = 0
 var burn_cooldown = 0.0
 var burn_sound_cooldown = 0.0
-var lava_areas
+var liquid_areas
 var base_burn_particle_gradient = Gradient.new()
 
 
@@ -20,18 +20,20 @@ func _ready():
 	override_rotation = true
 
 func _start_check(_delta):
-	lava_areas = character.lava_detector.get_overlapping_areas()
-	return (character.lava_detector.get_overlapping_areas().size() > 0 and character.terrain_detector.get_overlapping_bodies().size() == 0) and !(character.powerup != null and character.powerup.id == "Metal")
+	for area in character.liquid_detector.get_overlapping_areas():
+		if area.get_parent().liquid_type == LiquidBase.LiquidType.Lava:
+			return (character.terrain_detector.get_overlapping_bodies().size() == 0) and !(character.powerup != null and character.powerup.id == "Metal")
+	return false
 	
 func _start(_delta):
-	lava_areas = character.lava_detector.get_overlapping_areas()
+	liquid_areas = character.liquid_detector.get_overlapping_areas()
 	character.sprite.rotation_degrees = 0
 	character.current_jump = 0
 	character.friction = 4
 	bounces_left = 3
 	priority = 5
-	for area in lava_areas:
-		var area_object = area.get_parent()
+	for area in liquid_areas:
+		var area_object : LiquidBase = area.get_parent()
 		if area_object.color != Color(1, 0, 0):
 			#constructs a new gradient if the color is not the base red
 			var new_gradient = Gradient.new()

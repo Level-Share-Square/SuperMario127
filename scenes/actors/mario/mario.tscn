@@ -102,7 +102,7 @@ length = 24.0
 length = 6.0
 
 [sub_resource type="RayShape2D" id=7]
-custom_solver_bias = 0.5
+custom_solver_bias = 1.0
 length = 13.0
 
 [sub_resource type="RectangleShape2D" id=108]
