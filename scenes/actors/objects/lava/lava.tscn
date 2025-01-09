@@ -1,14 +1,158 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=36 format=2]
 
-[ext_resource path="res://scenes/actors/objects/lava/lava.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/lava/lava_shader.tres" type="Shader" id=1]
 [ext_resource path="res://scenes/actors/objects/lava/lava.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/lava/color.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/liquid/liquid_base.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/actors/objects/lava/body_texture.png" type="Texture" id=5]
+[ext_resource path="res://scenes/actors/objects/lava/wave_texture.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/lava/lava_waves_shader.tres" type="Shader" id=7]
+[ext_resource path="res://scenes/actors/objects/lava/new_lava.gd" type="Script" id=8]
+[ext_resource path="res://scenes/actors/objects/lava/bubble.png" type="Texture" id=9]
+[ext_resource path="res://scenes/actors/objects/lava/body_distortion.png" type="Texture" id=10]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=10]
+resource_local_to_scene = true
 extents = Vector2( 900, 300 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=7]
+resource_local_to_scene = true
 extents = Vector2( 900, 300 )
+
+[sub_resource type="OpenSimplexNoise" id=25]
+
+[sub_resource type="NoiseTexture" id=26]
+seamless = true
+noise = SubResource( 25 )
+
+[sub_resource type="ShaderMaterial" id=14]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/color = Color( 1, 0, 0, 1 )
+shader_param/noise_scale_1 = Vector2( 3.516, 1 )
+shader_param/noise_offset_1 = Vector2( 0, 0.75 )
+shader_param/noise_speed_1 = Vector2( 0, 0.05 )
+shader_param/noise_scale_2 = Vector2( 28.128, 9.376 )
+shader_param/noise_offset_2 = Vector2( 0, 16 )
+shader_param/noise_speed_2 = Vector2( 0, 0.1 )
+shader_param/noise_scale_3 = Vector2( 28.128, 9.376 )
+shader_param/noise_offset_3 = Vector2( 0, 16 )
+shader_param/noise_speed_3 = Vector2( 0.1, -0.1 )
+shader_param/x_size = 1800.0
+shader_param/noise_texture_1 = SubResource( 26 )
+shader_param/noise_texture_2 = ExtResource( 10 )
+shader_param/noise_texture_3 = ExtResource( 5 )
+
+[sub_resource type="Gradient" id=23]
+interpolation_mode = 2
+offsets = PoolRealArray( 0, 0.742754, 1 )
+colors = PoolColorArray( 1, 0, 0, 1, 1, 0.768627, 0, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=24]
+resource_local_to_scene = true
+gradient = SubResource( 23 )
+width = 128
+
+[sub_resource type="OpenSimplexNoise" id=21]
+persistence = 0.0
+lacunarity = 1.0
+
+[sub_resource type="NoiseTexture" id=22]
+seamless = true
+bump_strength = 64.0
+noise = SubResource( 21 )
+
+[sub_resource type="ShaderMaterial" id=12]
+resource_local_to_scene = true
+shader = ExtResource( 7 )
+shader_param/color = Color( 1, 0, 0, 1 )
+shader_param/noise_scale_1 = Vector2( 3.516, 0.063 )
+shader_param/noise_offset_1 = Vector2( 0, 0.75 )
+shader_param/noise_speed_1 = Vector2( -0.012, 0 )
+shader_param/noise_scale_2 = Vector2( 56.252, 1 )
+shader_param/noise_offset_2 = Vector2( 0, 16 )
+shader_param/noise_speed_2 = Vector2( 0, 0.15 )
+shader_param/noise_scale_3 = Vector2( 14.063, 0.25 )
+shader_param/noise_offset_3 = Vector2( 0, 16 )
+shader_param/noise_speed_3 = Vector2( -0.1, 0.1 )
+shader_param/x_size = 1800.0
+shader_param/noise_texture_1 = SubResource( 24 )
+shader_param/noise_texture_2 = ExtResource( 6 )
+shader_param/noise_texture_3 = SubResource( 22 )
+
+[sub_resource type="Shader" id=15]
+code = "shader_type canvas_item;
+render_mode blend_add;
+
+uniform sampler2D noise_texture;
+uniform sampler2D distortion_texture;
+uniform vec4 color : hint_color;
+uniform vec2 noise_scale;
+uniform vec2 scroll_speed;
+
+void fragment() {
+	vec4 distortion = texture(distortion_texture, UV*noise_scale);
+	vec4 noise = texture(noise_texture, (UV*noise_scale+(scroll_speed*TIME))+distortion.r/3.0);
+	
+	COLOR.rgb = color.rgb;
+	COLOR.a = round(noise.r*15.0)/15.0 * ((UV.y)/1.75);
+	
+}"
+
+[sub_resource type="OpenSimplexNoise" id=19]
+seed = 5
+
+[sub_resource type="NoiseTexture" id=20]
+width = 256
+height = 256
+seamless = true
+noise = SubResource( 19 )
+
+[sub_resource type="OpenSimplexNoise" id=16]
+
+[sub_resource type="NoiseTexture" id=17]
+flags = 3
+width = 256
+height = 256
+seamless = true
+noise = SubResource( 16 )
+
+[sub_resource type="ShaderMaterial" id=18]
+resource_local_to_scene = true
+shader = SubResource( 15 )
+shader_param/color = Color( 1, 0, 0, 1 )
+shader_param/noise_scale = Vector2( 14.063, 0.25 )
+shader_param/scroll_speed = Vector2( 0, 0.15 )
+shader_param/noise_texture = SubResource( 17 )
+shader_param/distortion_texture = SubResource( 20 )
+
+[sub_resource type="CanvasItemMaterial" id=29]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=30]
+interpolation_mode = 2
+offsets = PoolRealArray( 0.554348, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=31]
+gradient = SubResource( 30 )
+
+[sub_resource type="ParticlesMaterial" id=32]
+resource_local_to_scene = true
+emission_shape = 2
+emission_box_extents = Vector3( 896, 4, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.65
+color_ramp = SubResource( 31 )
+anim_speed = 1.5
+anim_speed_random = 0.1
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -20,49 +164,103 @@ void fragment(){
     COLOR = c;
 }"
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=13]
 shader = SubResource( 3 )
 
-[node name="Lava" type="Node2D"]
-z_index = -1
-script = ExtResource( 1 )
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 33024
-collision_mask = 0
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 32, 32, 32 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 900, 300 )
-shape = SubResource( 1 )
+[sub_resource type="AnimatedTexture" id=9]
+frames = 2
+frame_0/texture = SubResource( 5 )
+frame_1/texture = SubResource( 6 )
+frame_1/delay_sec = 0.0
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Lava" instance=ExtResource( 4 )]
+script = ExtResource( 8 )
+liquid_type = 1
+color = Color( 1, 0, 0, 1 )
+horizontal = false
+crystal_tap_movement = Vector2( 0, 1 )
+surface_offset = -14.0
+
+[node name="LiquidArea" parent="." index="0"]
+visible = false
+
+[node name="CollisionShape2D" parent="LiquidArea" index="0"]
+shape = SubResource( 10 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="1"]
+visible = false
 collision_layer = 256
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 position = Vector2( 900, 300 )
-shape = SubResource( 2 )
+shape = SubResource( 7 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="New" type="Node2D" parent="." index="2"]
+
+[node name="Body" type="ColorRect" parent="New" index="0"]
+material = SubResource( 14 )
 margin_right = 1800.0
 margin_bottom = 600.0
 mouse_filter = 2
 color = Color( 0.431373, 0, 0.14902, 1 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
-material = SubResource( 4 )
+[node name="Waves" type="ColorRect" parent="New" index="1"]
+material = SubResource( 12 )
+margin_top = -14.0
+margin_right = 1800.0
+margin_bottom = 18.0
+mouse_filter = 2
+color = Color( 0.431373, 0, 0.14902, 1 )
+
+[node name="LavaLight" type="ColorRect" parent="New/Waves" index="0"]
+show_behind_parent = true
+material = SubResource( 18 )
+margin_top = -10.0
+margin_right = 1800.0
+margin_bottom = 14.0
+mouse_filter = 2
+
+[node name="Bubbles" type="Particles2D" parent="New/Waves" index="1"]
+modulate = Color( 1, 1, 1, 0.43 )
+material = SubResource( 29 )
+position = Vector2( 900, 18 )
+amount = 128
+visibility_rect = Rect2( -900, -64, 1800, 128 )
+process_material = SubResource( 32 )
+texture = ExtResource( 9 )
+
+[node name="Old" type="Node2D" parent="." index="3"]
+visible = false
+
+[node name="Body" type="ColorRect" parent="Old" index="0"]
+margin_right = 1800.0
+margin_bottom = 600.0
+mouse_filter = 2
+color = Color( 0.431373, 0, 0.14902, 1 )
+
+[node name="Waves" type="TextureRect" parent="Old" index="1"]
+material = SubResource( 13 )
 margin_top = -12.0
 margin_right = 1800.0
 margin_bottom = 20.0
 mouse_filter = 2
-texture = ExtResource( 2 )
+texture = SubResource( 9 )
 expand = true
 stretch_mode = 2
 
-[node name="Recolorable" type="TextureRect" parent="TextureRect"]
+[node name="WavesRecolorable" type="TextureRect" parent="Old/Waves" index="0"]
 visible = false
 modulate = Color( 0, 0.447059, 0.972549, 1 )
-material = SubResource( 4 )
+material = SubResource( 13 )
 margin_right = 1800.0
 margin_bottom = 32.0
 mouse_filter = 2

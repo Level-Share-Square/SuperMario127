@@ -6,13 +6,13 @@
 [ext_resource path="res://scenes/actors/objects/quicksand/grayscale.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/quicksand/quicksand_waves_shader.tres" type="Shader" id=5]
 [ext_resource path="res://scenes/actors/objects/quicksand/grain_noise.png" type="Texture" id=6]
-[ext_resource path="res://scenes/actors/mario/particles/dust.png" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/lava/bubble.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
 extents = Vector2( 900, 300 )
 
-[sub_resource type="OpenSimplexNoise" id=7]
+[sub_resource type="OpenSimplexNoise" id=11]
 seed = 3
 period = 39.6
 persistence = 0.651
@@ -23,7 +23,7 @@ flags = 3
 width = 128
 height = 128
 seamless = true
-noise = SubResource( 7 )
+noise = SubResource( 11 )
 noise_offset = Vector2( 256, 256 )
 
 [sub_resource type="ShaderMaterial" id=2]
@@ -45,13 +45,13 @@ resource_local_to_scene = true
 shader = ExtResource( 5 )
 shader_param/color = Color( 1, 0.584314, 0, 1 )
 shader_param/noise_scale_1 = Vector2( 3.516, 0.063 )
-shader_param/noise_offset_1 = Vector2( 0, 0.75 )
+shader_param/noise_offset_1 = Vector2( 0, 0 )
 shader_param/noise_speed_1 = Vector2( -0.012, 0 )
 shader_param/noise_scale_2 = Vector2( 56.25, 1 )
-shader_param/noise_offset_2 = Vector2( 0, 16 )
+shader_param/noise_offset_2 = Vector2( 0, 0 )
 shader_param/noise_speed_2 = Vector2( 0, -0.25 )
 shader_param/noise_scale_3 = Vector2( 14.063, 0.25 )
-shader_param/noise_offset_3 = Vector2( 0, 16 )
+shader_param/noise_offset_3 = Vector2( 0, 0 )
 shader_param/noise_speed_3 = Vector2( 0.1, -0.1 )
 shader_param/x_size = 1800.0
 shader_param/noise_texture_1 = ExtResource( 6 )
@@ -61,41 +61,45 @@ shader_param/noise_texture_3 = SubResource( 8 )
 [sub_resource type="CanvasItemMaterial" id=10]
 blend_mode = 2
 
-[sub_resource type="Gradient" id=11]
+[sub_resource type="Gradient" id=34]
 resource_local_to_scene = true
 colors = PoolColorArray( 0, 0, 0, 1, 0.203125, 0.203125, 0.203125, 1 )
 
 [sub_resource type="GradientTexture2D" id=12]
 resource_local_to_scene = true
 flags = 3
-gradient = SubResource( 11 )
+gradient = SubResource( 34 )
 width = 192
 height = 192
 fill_to = Vector2( 0, 0.204167 )
 
 [sub_resource type="CanvasItemMaterial" id=33]
 particles_animation = true
-particles_anim_h_frames = 10
+particles_anim_h_frames = 8
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="ParticlesMaterial" id=14]
+resource_local_to_scene = true
 emission_shape = 2
 emission_box_extents = Vector3( 900, 300, 1 )
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-color = Color( 0.137255, 0.137255, 0.137255, 0.172549 )
+scale = 0.75
+color = Color( 1, 1, 1, 0.172549 )
 anim_speed = 2.0
 
 [node name="Quicksand" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 liquid_type = 2
 color = Color( 1, 0.584314, 0, 1 )
+horizontal = false
+crystal_tap_movement = Vector2( 0, 1 )
+surface_offset = -8.0
 
 [node name="LiquidArea" parent="." index="0"]
-collision_layer = 32768
 collision_mask = 6
 
 [node name="CollisionShape2D" parent="LiquidArea" index="0"]
@@ -103,18 +107,18 @@ shape = SubResource( 1 )
 
 [node name="Body" type="ColorRect" parent="." index="1"]
 material = SubResource( 2 )
-margin_top = 8.0
+margin_top = 23.0
 margin_right = 1800.0
-margin_bottom = 608.0
+margin_bottom = 623.0
 rect_pivot_offset = Vector2( 77, 71 )
 mouse_filter = 2
 color = Color( 1, 0.584314, 0, 1 )
 
 [node name="Waves" type="ColorRect" parent="." index="2"]
 material = SubResource( 9 )
-margin_top = -8.0
+margin_top = -9.0
 margin_right = 1800.0
-margin_bottom = 24.0
+margin_bottom = 23.0
 mouse_filter = 2
 color = Color( 1, 0.584314, 0, 1 )
 
@@ -128,7 +132,6 @@ texture = SubResource( 12 )
 expand = true
 
 [node name="Bubbles" type="Particles2D" parent="." index="4"]
-visible = false
 material = SubResource( 33 )
 position = Vector2( 900, 300 )
 amount = 200

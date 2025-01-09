@@ -20,10 +20,7 @@ func _ready():
 	override_rotation = true
 
 func _start_check(_delta):
-	for area in character.liquid_detector.get_overlapping_areas():
-		if area.get_parent().liquid_type == LiquidBase.LiquidType.Lava:
-			return (character.terrain_detector.get_overlapping_bodies().size() == 0) and !(character.powerup != null and character.powerup.id == "Metal")
-	return false
+	false
 	
 func _start(_delta):
 	liquid_areas = character.liquid_detector.get_overlapping_areas()
@@ -33,7 +30,7 @@ func _start(_delta):
 	bounces_left = 3
 	priority = 5
 	for area in liquid_areas:
-		var area_object : LiquidBase = area.get_parent()
+		var area_object = area.get_parent()
 		if area_object.color != Color(1, 0, 0):
 			#constructs a new gradient if the color is not the base red
 			var new_gradient = Gradient.new()
@@ -43,29 +40,28 @@ func _start(_delta):
 		else:
 			character.burn_particles.process_material.color_ramp.gradient = base_burn_particle_gradient
 			
+			
 		#velocity application
-		if area_object != CircleArea:
-			#if it's not a circle then just use the angle
-			if area_object.name.begins_with("Fire") or area_object.name.begins_with("@Fire"):
-				character.velocity.y = -boost_velocity
+		if area_object is LiquidBase: #if it's a standard lava object then we use the angle to set the velocity
+			var liquid : LiquidBase = area_object
+			
+			var lava_normal : Vector2 = liquid.transform.y
+				
+			if !is_equal_approx(lava_normal.x, 0):
+				character.velocity.x = min(abs(lava_normal.x * boost_velocity), 480) * -sign(lava_normal.x)
+				
+			if lava_normal.y < 0:
+				character.velocity.y = -boost_velocity * (lava_normal.y/2)
 			else:
-				var lava_normal : Vector2 = area_object.transform.y
-				
-				var lava_scale_sign : Vector2 = area_object.scale.sign()
-				if !is_equal_approx(lava_normal.x, 0):
-					character.velocity.x = min(abs(lava_normal.x * boost_velocity), 480) * -sign(lava_normal.x)
-					
-				if lava_normal.y < 0:
-					character.velocity.y = -boost_velocity * (lava_normal.y/2)
-				else:
-					character.velocity.y = -boost_velocity * (lava_normal.y/2 + .5)
-				
-				
-		else:
+				character.velocity.y = -boost_velocity * (lava_normal.y/2 + .5)
+		
+		elif area_object is CircleArea:
 			#if it is a circle find the angle from the angle to the center to the player's position
 			character.velocity = Vector2.UP.rotated(atan((area_object.position.x-character.x)/(area_object.position.y-character.y))) * boost_velocity
-	character.burn_particles.emitting = true
+		
+			
 	
+	character.burn_particles.emitting = true
 	
 	if burn_sound_cooldown <= 0:
 		character.sound_player.play_burn_sound()

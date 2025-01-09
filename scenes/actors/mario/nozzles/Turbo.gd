@@ -38,7 +38,7 @@ func _activated_update(delta):
 			direction = 1
 		character.damage_with_knockback(character.position + Vector2(direction * 8, 0), 0, "Hit", 0)
 	
-	if character.fuel > 0 and !character.water_detector.get_overlapping_areas().size() > 0:
+	if character.fuel > 0 and !character.check_liquid(LiquidBase.LiquidType.Water):
 		character.fuel -= fuel_depletion
 		if character.fuel <= 0:
 			character.fuel = 0
@@ -48,8 +48,8 @@ func _activated_update(delta):
 	elif character.inputs[1][0] and !character.inputs[0][0]:
 		character.facing_direction = 1
 	
-	character.water_check.enabled = true if !character.water_detector.get_overlapping_areas().size() > 0 else false
-	if character.water_check.is_colliding() and !character.water_detector.get_overlapping_areas().size() > 0:
+	character.water_check.enabled = true if !character.check_liquid(LiquidBase.LiquidType.Water) else false
+	if character.water_check.is_colliding() and !character.check_liquid(LiquidBase.LiquidType.Water):
 		if character.state == null:
 			character.velocity.y = 10
 		character.global_position.y = character.water_check.get_collision_point().y - 20

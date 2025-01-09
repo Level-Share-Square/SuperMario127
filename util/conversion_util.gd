@@ -134,6 +134,54 @@ static func convert_049_to_050(result):
 #		result_area.timer = 0.00
 	return result
 
+static func convert_051_to_052(result):
+	result.format_version = "0.5.2"
+	for area_result in result.areas:
+		if typeof(area_result) == TYPE_DICTIONARY:
+			var new_objects : Array = []
+			for object_result in area_result.objects:
+				var object = object_result
+				#liquid conversion (oh boy let the fun begin)
+				match(object.type_id):
+					72:
+						var old_properties = object.properties.duplicate()
+						object.properties.resize(12)
+						object.properties[5] = Vector2(old_properties[5], old_properties[6])
+						object.properties[6] = old_properties[7]
+						object.properties[7] = old_properties[8]
+						object.properties[8] = old_properties[9]
+						object.properties[9] = true if old_properties.size() < 12 else old_properties[11]
+						object.properties[10] = true
+						object.properties[11] = old_properties[10]
+					75:
+						var old_properties = object.properties.duplicate()
+						object.properties.resize(14)
+						object.properties[5] = Vector2(old_properties[5], old_properties[6])
+						object.properties[6] = old_properties[7]
+						object.properties[7] = old_properties[8]
+						object.properties[8] = old_properties[9]
+						object.properties[9] = true if old_properties.size() < 11 else old_properties[10]
+						object.properties[10] = true
+						object.properties[11] = true
+						object.properties[12] = true
+						object.properties[13] = Color8(255, 195, 0, 255)
+					142:
+						var old_properties = object.properties.duplicate()
+						object.properties.resize(13)
+						object.properties[5] = old_properties[5]
+						object.properties[6] = old_properties[6]
+						object.properties[7] = old_properties[7]
+						object.properties[8] = old_properties[8]
+						object.properties[9] = old_properties[9]
+						object.properties[10] = old_properties[12]
+						object.properties[11] = old_properties[13]
+						object.properties[12] = old_properties[14]
+				
+				new_objects.append(object)
+			area_result.objects = new_objects
+
+	return result
+
 static func compareVersions(version, other) -> int:
 	var v = version.split(".")
 	var o = other.split(".")

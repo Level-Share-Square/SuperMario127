@@ -81,7 +81,7 @@ func _stop(delta : float) -> void:
 		character.sound_player.play_bonk_sound()
 	if character.is_grounded():
 		character.set_state_by_name("SlideState", delta)
-	elif character.water_detector.get_overlapping_areas().size() <= 0:
+	elif !character.check_liquid(LiquidBase.LiquidType.Water):
 		sprite.rotation_degrees = 0
 	character.ground_shape.disabled = true
 	

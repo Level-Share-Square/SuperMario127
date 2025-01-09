@@ -1,4 +1,4 @@
-[gd_scene load_steps=187 format=2]
+[gd_scene load_steps=188 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -269,6 +269,9 @@ extents = Vector2( 6.5, 17.5 )
 
 [sub_resource type="RectangleShape2D" id=103]
 extents = Vector2( 7, 17 )
+
+[sub_resource type="RectangleShape2D" id=109]
+extents = Vector2( 7, 8 )
 
 [sub_resource type="RectangleShape2D" id=31]
 extents = Vector2( 4, 15.7 )
@@ -1883,7 +1886,7 @@ shape = SubResource( 95 )
 [node name="WaterDetector" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
-collision_mask = 128
+collision_mask = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WaterDetector"]
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
@@ -1904,10 +1907,15 @@ shape = SubResource( 30 )
 collision_layer = 0
 collision_mask = 32768
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LiquidDetector"]
+[node name="BaseCollision" type="CollisionShape2D" parent="LiquidDetector"]
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0, 4 )
 shape = SubResource( 103 )
+
+[node name="DiveCollision" type="CollisionShape2D" parent="LiquidDetector"]
+modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
+position = Vector2( 0, -2 )
+shape = SubResource( 109 )
 
 [node name="PipeDetector" type="Area2D" parent="."]
 visible = false

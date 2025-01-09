@@ -157,8 +157,8 @@ export var player_id := 0
 
 # States. Couldn't set static type due to circle reference
 var switched = false
-var state : Node = null
-var last_state : Node = null
+var state : State = null
+var last_state : State = null
 var switching_state := false
 export var controllable := true
 export var auto_flip := true
@@ -714,7 +714,8 @@ func _physics_process(delta: float) -> void:
 	if invulnerable_frames > 0:
 		invulnerable_frames -= 1
 	
-	var is_in_water = water_detector.get_overlapping_areas().size() > 0
+	var is_in_water = check_liquid(LiquidBase.LiquidType.Water)
+	
 	if is_in_water and (max_aerial_velocity == 640 or gravity_scale == 1):
 		gravity_scale = 0.5
 		max_aerial_velocity = 320
@@ -1351,7 +1352,23 @@ func toggle_movement(var value : bool):
 	controllable = value
 	movable = value
 
+func check_liquid(liquid_type) -> bool:
+	if liquid_type == LiquidBase.LiquidType.Water:
+		for liquid_area in water_detector.get_overlapping_areas():
+			if liquid_area.get_parent().liquid_type == liquid_type:
+				return true
+	else:
+		for liquid_area in liquid_detector.get_overlapping_areas():
+			if liquid_area.get_parent().liquid_type == liquid_type:
+				return true
+	
+	return false
+
 func handle_liquids(liquid_areas, delta):
+	if is_instance_valid(state):
+		liquid_detector.get_node("BaseCollision").disabled = state.use_dive_collision
+		liquid_detector.get_node("DiveCollision").disabled = !state.use_dive_collision
+	
 	quicksand_particles.set_particles_emitting(false)
 	
 	if liquid_areas.size() <= 0: return
@@ -1360,10 +1377,15 @@ func handle_liquids(liquid_areas, delta):
 		var liquid : LiquidBase = area.get_parent()
 		match(liquid.liquid_type):
 			liquid.LiquidType.Water:
-				pass
+				var toxicity = liquid.toxicity
+				
+				breath -= 0.25 * toxicity
+				if breath <= 0:
+					breath = 100
+					damage(1, "hit", 0)
 				
 			liquid.LiquidType.Lava:
-				pass
+				set_state_by_name("LavaBoostState", delta)
 				
 			liquid.LiquidType.Quicksand:
 				var sinking_speed = liquid.sinking_speed/10

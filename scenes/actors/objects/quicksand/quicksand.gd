@@ -36,9 +36,9 @@ func update():
 	gradient.fill_to.y = (gradient_position+6/size.y)
 	
 	if death_threshold <= 0:
+		bubbles.visible = true
 		bubbles.visibility_rect.position = Vector2.ZERO
 		bubbles.visibility_rect.size = size
-		bubbles.visible = true
 		bubbles.position = size/2
 		bubbles.position.y += 10
 		bubbles.process_material.emission_box_extents = Vector3(size.x/2, (size.y-10)/2, 0)
