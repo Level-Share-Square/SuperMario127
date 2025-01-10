@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/actors/objects/liquid/liquid_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/quicksand/quicksand.gd" type="Script" id=2]
@@ -74,22 +74,32 @@ height = 192
 fill_to = Vector2( 0, 0.204167 )
 
 [sub_resource type="CanvasItemMaterial" id=33]
+blend_mode = 1
 particles_animation = true
 particles_anim_h_frames = 8
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
+[sub_resource type="Gradient" id=35]
+offsets = PoolRealArray( 0.67029, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=36]
+gradient = SubResource( 35 )
+
 [sub_resource type="ParticlesMaterial" id=14]
 resource_local_to_scene = true
 emission_shape = 2
-emission_box_extents = Vector3( 900, 300, 1 )
+emission_box_extents = Vector3( 896, 300, 1 )
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.75
-color = Color( 1, 1, 1, 0.172549 )
+color = Color( 1, 1, 1, 0.235294 )
+color_ramp = SubResource( 36 )
 anim_speed = 2.0
+anim_speed_random = 0.2
 
 [node name="Quicksand" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -131,10 +141,12 @@ mouse_filter = 2
 texture = SubResource( 12 )
 expand = true
 
-[node name="Bubbles" type="Particles2D" parent="." index="4"]
+[node name="InstaKillBubbles" type="Particles2D" parent="." index="4"]
+modulate = Color( 1, 0.584314, 0, 1 )
 material = SubResource( 33 )
 position = Vector2( 900, 300 )
 amount = 200
 lifetime = 2.0
+visibility_rect = Rect2( -900, -300, 1800, 300 )
 process_material = SubResource( 14 )
 texture = ExtResource( 7 )

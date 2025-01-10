@@ -76,6 +76,17 @@ func update_liquid_color(color):
 		old_waves.self_modulate = desat_color
 
 func update():
+	#update base stuff
+	if waves_enable:
+		waves.visible = true
+		waves.rect_size.x = size.x
+		liquid_body.rect_position.y = 0
+		liquid_body.rect_size = size
+	else:
+		waves.visible = false
+		liquid_body.rect_position.y = 0
+		liquid_body.rect_size = size
+	
 	#update new stuff
 	waves.material.set_shader_param("x_size", waves.rect_size.x)
 	waves.material.set_shader_param("noise_scale_2", waves.rect_size/Vector2(64, 64))
@@ -99,10 +110,17 @@ func update():
 	body_collision.position = liquid_area_collision.position
 	body_collision.shape = liquid_area_collision.shape
 	
-	old_lava_fill.rect_size = size
-	old_waves.rect_size.x = old_lava_fill.rect_size.x
-	old_waves_recolorable.rect_size.x = old_lava_fill.rect_size.x
-	
+	if waves_enable:
+		old_waves.visible = true
+		old_waves.rect_size.x = old_lava_fill.rect_size.x
+		old_waves_recolorable.rect_size.x = old_lava_fill.rect_size.x
+		old_lava_fill.rect_position.y = old_waves.rect_position.y+old_waves.rect_size.y
+		old_lava_fill.rect_size = size-old_lava_fill.rect_position
+	else:
+		old_waves.visible = false
+		old_lava_fill.rect_position.y = 0
+		old_lava_fill.rect_size = size
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

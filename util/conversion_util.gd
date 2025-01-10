@@ -146,13 +146,13 @@ static func convert_051_to_052(result):
 					72:
 						var old_properties = object.properties.duplicate()
 						object.properties.resize(12)
-						object.properties[5] = Vector2(old_properties[5], old_properties[6])
-						object.properties[6] = old_properties[7]
+						object.properties[5] = Vector2(old_properties[5], old_properties[6]) #convert width and height to single vector2
+						object.properties[6] = old_properties[7] #move subsequent properties forward: color, render in front, tag
 						object.properties[7] = old_properties[8]
 						object.properties[8] = old_properties[9]
-						object.properties[9] = true if old_properties.size() < 12 else old_properties[11]
-						object.properties[10] = true
-						object.properties[11] = old_properties[10]
+						object.properties[9] = true if old_properties.size() < 12 else old_properties[11] #tap mode (checks if property is present, if it isn't it just sets it to true)
+						object.properties[10] = true #waves enable (defaults to true)
+						object.properties[11] = old_properties[10] #water toxicity
 					75:
 						var old_properties = object.properties.duplicate()
 						object.properties.resize(14)

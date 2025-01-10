@@ -1,7 +1,7 @@
 extends LiquidBase
 
 onready var threshold_gradient : TextureRect = $ThresholdGradient
-onready var bubbles : Particles2D = $Bubbles
+onready var bubbles : Particles2D = $InstaKillBubbles
 
 var sinking_speed : float = 30.0
 var death_threshold : float = 128.0
@@ -13,6 +13,7 @@ func get_liquid_properties():
 	]
 
 func update_property(key, value):
+	update()
 	match(key):
 		"color":
 			update_liquid_color(value)
@@ -22,14 +23,26 @@ func update_property(key, value):
 			update()
 				
 
-
 func update_liquid_color(color):
 	waves.material.set_shader_param("color", color)
 	liquid_body.material.set_shader_param("color", color)
 
 func update():
-	threshold_gradient = get_node("ThresholdGradient")
-	threshold_gradient.rect_size = size
+	waves.rect_position.y = surface_offset
+	waves.rect_size.x = size.x
+	if waves_enable:
+		waves.visible = true
+		liquid_body.rect_position.y = waves.rect_position.y+waves.rect_size.y
+		liquid_body.rect_size = size-liquid_body.rect_position
+		threshold_gradient.rect_position = Vector2(0, 8)
+		threshold_gradient.rect_size = Vector2(liquid_body.rect_size.x, liquid_body.rect_size.y+16)
+	else:
+		waves.visible = false
+		liquid_body.rect_position.y = 0
+		liquid_body.rect_size = size
+		threshold_gradient.rect_position = liquid_body.rect_position
+		threshold_gradient.rect_size = size
+	
 	var gradient_position = max(death_threshold, 18)/size.y
 	var gradient : GradientTexture2D = threshold_gradient.texture
 	gradient.fill_from.y = 0
@@ -38,12 +51,12 @@ func update():
 	if death_threshold <= 0:
 		bubbles.visible = true
 		bubbles.visibility_rect.position = Vector2.ZERO
-		bubbles.visibility_rect.size = size
+		bubbles.visibility_rect.size = Vector2(size.x-4, size.y)
 		bubbles.position = size/2
 		bubbles.position.y += 10
 		bubbles.process_material.emission_box_extents = Vector3(size.x/2, (size.y-10)/2, 0)
-		bubbles.process_material.color = color
-		bubbles.process_material.color.a8 = 44
+		bubbles.modulate = color
+		bubbles.process_material.color.a8 = 60
 		bubbles.amount = (size.x*size.y)/(64*64)
 	else:
 		bubbles.visible = false
@@ -60,14 +73,6 @@ func update():
 	
 
 func _ready():
-	if mode == 1:
-		connect("property_changed", self, "update_property")
-	else:
-		connect("transform_changed", self, "update")
-	
-	liquid_area.monitoring = (enabled and mode != 1)
-	liquid_area.monitorable = (enabled and mode != 1)
-	
 	update_liquid_color(color)
 	update()
 	

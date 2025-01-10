@@ -53,7 +53,7 @@ func update_liquid_color(color : Color):
 func update():
 	pass
 
-func waves_toggle(set_visible):
+func update_property(key, value):
 	pass
 
 func _set_properties():
@@ -80,6 +80,12 @@ func _set_property_values():
 	set_liquid_property_menus()
 
 func _ready():
+	if mode == 1:
+		connect("property_changed", self, "update_property")
+	
+	connect("transform_changed", self, "update")
+	connect("ready", self, "change_size")
+	
 	var id = Singleton.CurrentLevelData.level_data.vars.current_liquid_id
 	if Singleton.CurrentLevelData.level_data.vars.liquid_positions.size() > Singleton.CurrentLevelData.area and Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].size() > id:
 		var set_position = Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area][id]
@@ -88,11 +94,10 @@ func _ready():
 			save_pos = set_position
 	Singleton.CurrentLevelData.level_data.vars.current_liquid_id += 1
 	
-	change_size()
 	last_size = size
 	
-	liquid_area.monitoring = enabled
-	liquid_area.monitorable = enabled
+	liquid_area.monitoring = (enabled and mode != 1)
+	liquid_area.monitorable = (enabled and mode != 1)
 	
 	Singleton.CurrentLevelData.level_data.vars.liquids.append([tag.to_lower(), self])
 
@@ -100,9 +105,6 @@ func change_size():
 	if !is_instance_valid(waves) and !is_instance_valid(liquid_body): return
 	
 	preview_position = -size/2
-	waves.rect_position.y = surface_offset
-	waves.rect_size.x = size.x
-	liquid_body.rect_size = size
 	liquid_area_collision.position = size/2
 	liquid_area_collision.shape.extents = liquid_area_collision.position
 	
@@ -111,7 +113,7 @@ func change_size():
 	last_size = size
 	last_color = color
 	last_front = render_in_front
-	emit_signal("transform_changed")
+	emit_signal("transform_changed") #calling update in here causes issues with getting nodes, so we connect that to this instead
 
 func _physics_process(_delta):
 	if !moving: return

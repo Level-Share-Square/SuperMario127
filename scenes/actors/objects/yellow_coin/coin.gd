@@ -117,20 +117,14 @@ func despawn_coin():
 
 func _physics_process(delta):
 	# Everything else here is irrelevant for edit mode
-	if mode == 1:
+	if mode == 1 or !do_physics() or !visibility_enabler.is_on_screen():
 		return
 	
-	if do_physics():
-		if physics_frame:
-			velocity = calc_physics(false, delta)
-			
-			kinematic_body.move_and_slide_with_snap(velocity, Vector2(0, 0), Vector2.UP, false, 8, deg2rad(56))
-			$VisibilityEnabler2D.global_position = kinematic_body.global_position
-			
-			physics_frame = true
-		else:
-			physics_frame = true
-		
+	velocity = calc_physics(false, delta)
+	
+	kinematic_body.move_and_slide_with_snap(velocity, Vector2(0, 0), Vector2.UP, false, 8, deg2rad(56))
+	if visibility_enabler.global_position != kinematic_body.global_position:
+		visibility_enabler.global_position = kinematic_body.global_position
 		
 		
 #		var up = velocity.y < 0
