@@ -11,7 +11,7 @@ onready var old_waves = $Old/Waves
 onready var old_waves_recolorable = $Old/Waves/WavesRecolorable
 onready var old_lava_fill = $Old/Body
 
-var use_old_lava : bool = true
+var use_old_lava : bool = false
 var lighting : bool = true
 var surface_color : Color = Color8(255, 195, 0, 255)
 
@@ -34,14 +34,14 @@ func update_property(key, value):
 
 func update_liquid_color(color):
 	waves.material.set_shader_param("color", surface_color)
-	
+	var rounded_surface_color = Color(stepify(surface_color.r, 0.05), stepify(surface_color.g, 0.05), stepify(surface_color.b, 0.05))
 	var gradient = Gradient.new()
 	gradient.interpolation_mode = Gradient.GRADIENT_INTERPOLATE_CUBIC
 	gradient.colors = PoolColorArray(
 		[
-			color if color == Color(1, 0, 0) and surface_color == Color8(255, 195, 0) else surface_color.s/1.1,
+			color if color == Color(1, 0, 0) else surface_color.s/1.1,
 			surface_color,
-			Color(1, 1, 1, 1)
+			Color.white
 		]
 	)
 	gradient.offsets = PoolRealArray(

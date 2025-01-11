@@ -1,4 +1,4 @@
-[gd_scene load_steps=1589 format=2]
+[gd_scene load_steps=1588 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -289,7 +289,6 @@
 [ext_resource path="res://assets/tiles/carpet/palette_icons/3.png" type="Texture" id=287]
 [ext_resource path="res://assets/tiles/carpet/palette_icons/4.png" type="Texture" id=288]
 [ext_resource path="res://scenes/actors/objects/lava/icon.png" type="Texture" id=289]
-[ext_resource path="res://scenes/actors/objects/lava/lava.png" type="Texture" id=290]
 [ext_resource path="res://assets/tiles/roof/icon.png" type="Texture" id=291]
 [ext_resource path="res://assets/tiles/roof/left_slope_icon.png" type="Texture" id=292]
 [ext_resource path="res://assets/tiles/roof/right_slope_icon.png" type="Texture" id=293]
@@ -4175,7 +4174,7 @@ change_to = "Quicksand"
 items_in_sequence = 3
 index_in_sequence = 1
 icon = ExtResource( 289 )
-preview = ExtResource( 290 )
+preview = ExtResource( 289 )
 
 [node name="Fire" type="Node" parent="PlaceableItems/VolcanoGroup"]
 script = ExtResource( 24 )
