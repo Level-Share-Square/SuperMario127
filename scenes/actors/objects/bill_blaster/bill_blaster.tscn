@@ -73,6 +73,9 @@ script = ExtResource( 7 )
 position = Vector2( 0, 4 )
 texture = ExtResource( 5 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -64, -64, 128, 128 )
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]

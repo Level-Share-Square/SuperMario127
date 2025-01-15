@@ -4,7 +4,8 @@ onready var play_sounds = [
 	["CoinSound", $CoinSound, false],
 	["PurpleSound", $PurpleSound, false],
 	["LaughSound", $LaughSound, false],
-	["BlastLaunchSound", $BlastSound, false]
+	["BlastLaunchSound", $BlastSound, false],
+	["BlastSeekSound", $BlastSeekSound, false]
 ]
 
 onready var saw_sound : AudioStreamPlayer2D = $SawSound

@@ -3,6 +3,7 @@ extends GameObject
 onready var sprite = $Top
 onready var color_sprite = $Top/Color
 onready var collision_shape = $StaticBody2D/CollisionShape2D
+onready var visibility_notifier = $VisibilityNotifier2D
 
 var wait_time = 3.0
 
@@ -98,8 +99,10 @@ func _physics_process(delta):
 			
 			scale.x = prev_scale_x
 			
-			get_tree().current_scene.get_node("SharedSounds").blaster_sound.handle_blast_sound_position(character.global_position)
-			get_tree().current_scene.get_node("SharedSounds").PlaySound("BlastLaunchSound")
+			if visibility_notifier.is_on_screen():
+				get_tree().current_scene.get_node("SharedSounds").PlaySound("BlastLaunchSound")
+				if chase:
+					get_tree().current_scene.get_node("SharedSounds").PlaySound("BlastSeekSound")
 			
 		elif spawn_timer <= 0:
 			spawn_timer = wait_time

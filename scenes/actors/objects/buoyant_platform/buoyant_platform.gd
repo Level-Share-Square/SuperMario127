@@ -143,9 +143,9 @@ func water_exited(area):
 	
 func calculate_corners(area):
 	var temp_top_left = area.global_position - Vector2(0, 10)
-	var temp_top_right = area.transform.xform(Vector2(area.width, - 10))
-	var temp_bottom_right = area.transform.xform(Vector2(area.width, area.height))
-	var temp_bottom_left = area.transform.xform(Vector2(0, area.height))
+	var temp_top_right = area.transform.xform(Vector2(area.size.x, - 10))
+	var temp_bottom_right = area.transform.xform(Vector2(area.size.x, area.size.y))
+	var temp_bottom_left = area.transform.xform(Vector2(0, area.size.y))
 	var temp_corners
 	var temp_largest
 	

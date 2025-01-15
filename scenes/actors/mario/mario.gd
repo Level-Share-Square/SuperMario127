@@ -1154,15 +1154,13 @@ func kill(cause: String) -> void:
 				transition_time = 0.4
 			"green_demon":
 				sound_player.play_last_hit_sound()
-				controllable = false
-				movable = false
+				toggle_movement(false)
 				cutout_in = cutout_death
 				sprite.visible = false
 				death_sprite.z_index = 127
 				death_sprite.global_position = sprite.global_position
 				death_sprite.play_anim()
-				position = Vector2(0, 100000000000000000)
-				reset_physics_interpolation()
+				
 				yield(get_tree().create_timer(0.55), "timeout")
 				sound_player.play_death_sound()
 				yield(get_tree().create_timer(0.75), "timeout")

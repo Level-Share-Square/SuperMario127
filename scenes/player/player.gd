@@ -24,8 +24,12 @@ func _process(_delta):
 	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
 
 func _physics_process(delta):
-	get_node("%SharedSounds").saw_sound.handle_saw_sound_position(get_node(character).global_position)
-	get_node("%SharedSounds").blaster_sound.handle_blast_sound_position(get_node(character).global_position)
+	var viewport_rect : Rect2 = get_viewport_rect()
+	viewport_rect.size = Vector2(768, 432) * get_node(camera).zoom
+	viewport_rect.position = -get_canvas_transform().get_origin()
+#	print(viewport_rect)
+	get_node("%SharedSounds").saw_sound.handle_saw_sound_position(viewport_rect)
+	get_node("%SharedSounds").blaster_sound.handle_blast_sound_position(viewport_rect)
 	
 	if switch_timer > 0:
 		switch_timer -= delta
