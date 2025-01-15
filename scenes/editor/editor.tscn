@@ -4067,6 +4067,18 @@ index_in_sequence = 1
 icon = ExtResource( 216 )
 preview = ExtResource( 215 )
 
+[node name="ToxicGas" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 24 )
+object_id = 144
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+change_to = "Lava"
+items_in_sequence = 3
+icon = ExtResource( 235 )
+preview = ExtResource( 236 )
+
 [node name="VolcanoGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
 color = Color( 0.552941, 0.239216, 0.0862745, 1 )
@@ -5830,7 +5842,7 @@ layer = -1
 script = ExtResource( 30 )
 
 [node name="Layer" type="ParallaxLayer" parent="Grid"]
-motion_mirroring = Vector2( 2048, 1024 )
+motion_mirroring = Vector2( 4096, 2048 )
 
 [node name="TextureRect" type="TextureRect" parent="Grid/Layer"]
 margin_right = 4096.0

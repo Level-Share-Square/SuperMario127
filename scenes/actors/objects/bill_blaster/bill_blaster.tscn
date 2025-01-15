@@ -1,11 +1,9 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/actors/objects/bill_blaster/bill_blaster.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/bill_blaster/top_colored.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/hover_box/sound.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/actors/objects/bill_blaster/top.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/bill_blaster/bottom.png" type="Texture" id=5]
-[ext_resource path="res://scenes/actors/objects/bill_blaster/sounds/WU_SE_EMY_KILLER_SHOT_fast.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -55,20 +53,9 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 8, 12 )
 
-[node name="BillBlaster" type="Node2D"]
+[node name="BillBlaster" type="Node2D" groups=["blasters"]]
 z_index = -1
 script = ExtResource( 1 )
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 6 )
-volume_db = 10.0
-max_distance = 768.0
-bus = "ObjectSounds"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-volume_db = -10.0
-bus = "ObjectSounds"
 
 [node name="Top" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -4 )

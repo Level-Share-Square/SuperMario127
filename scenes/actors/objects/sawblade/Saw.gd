@@ -44,3 +44,4 @@ func kill(body):
 
 func _ready():
 	var _connect = area.connect("body_entered", self, "kill")
+	add_to_group("sawblades")

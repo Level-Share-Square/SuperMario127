@@ -50,8 +50,10 @@ func _start(_delta):
 			if !is_equal_approx(lava_normal.x, 0):
 				character.velocity.x = min(abs(lava_normal.x * boost_velocity), 480) * -sign(lava_normal.x)
 				
-			if lava_normal.y < 0:
-				character.velocity.y = -boost_velocity * (lava_normal.y/2)
+			if is_equal_approx(lava_normal.y, 0):
+				character.velocity.y = -boost_velocity * lava_normal.x
+			if abs(lava_normal.y) > .25:
+				character.velocity.y = -boost_velocity * (lava_normal.y/1.25)
 			else:
 				character.velocity.y = -boost_velocity * (lava_normal.y/2 + .5)
 		
@@ -92,7 +94,8 @@ func _update(delta):
 		_start(delta)
 
 func _stop(delta):
-	character.burn_particles.emitting = false
+	if !character.dead:
+		character.burn_particles.emitting = false
 	var sprite = character.sprite
 	sprite.offset.y = 0
 	character.friction = character.real_friction

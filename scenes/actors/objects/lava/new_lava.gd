@@ -134,12 +134,6 @@ func _ready():
 	
 	change_size()
 	
-	if mode == 1:
-		connect("property_changed", self, "update_property")
-	else:
-		connect("transform_changed", self, "update")
-	
-	
 	liquid_area.monitoring = (enabled and mode != 1)
 	liquid_area.monitorable = (enabled and mode != 1)
 	

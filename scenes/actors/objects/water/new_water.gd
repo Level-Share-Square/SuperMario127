@@ -8,6 +8,10 @@ func get_liquid_properties() -> Array:
 func update_property(key, value):
 	update()
 
+func update_liquid_color(new_color):
+	waves.get_material().set_shader_param("color_tint", new_color)
+	liquid_body.get_material().set_shader_param("color_tint", new_color)
+
 func update():
 	waves.rect_position.y = surface_offset
 	waves.rect_size.x = size.x
@@ -20,7 +24,7 @@ func update():
 		liquid_body.rect_position.y = 0
 		liquid_body.rect_size = size
 	
-	waves.get_material().set_shader_param("color_tint", color)
+	
 	waves.get_material().set_shader_param("x_size", size.x)
 	liquid_body.get_material().set_shader_param("color_tint", color)
 

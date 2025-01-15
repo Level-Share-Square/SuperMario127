@@ -2,7 +2,6 @@ extends GameObject
 
 onready var sprite = $Top
 onready var color_sprite = $Top/Color
-onready var sound = $AudioStreamPlayer2D
 onready var collision_shape = $StaticBody2D/CollisionShape2D
 
 var wait_time = 3.0
@@ -30,6 +29,7 @@ func _set_property_values():
 	set_property("offset", offset, true)
 
 func _ready():
+	add_to_group("blasters")
 	spawn_timer = wait_time+offset
 	sprite.frame = 3
 	collision_shape.disabled = !enabled
@@ -98,7 +98,8 @@ func _physics_process(delta):
 			
 			scale.x = prev_scale_x
 			
-			sound.play()
+			get_tree().current_scene.get_node("SharedSounds").blaster_sound.handle_blast_sound_position(character.global_position)
+			get_tree().current_scene.get_node("SharedSounds").PlaySound("BlastLaunchSound")
 			
 		elif spawn_timer <= 0:
 			spawn_timer = wait_time

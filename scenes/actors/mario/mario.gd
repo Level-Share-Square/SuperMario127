@@ -491,6 +491,8 @@ func show() -> void:
 
 # new_state is of type State, however adding static typing would cause a cyclic dependency
 func set_state(new_state: Node, delta: float) -> void:
+	if dead: return
+	
 	if(is_instance_valid(state)):
 		if(state.name=="LaunchStarState"):
 			return
@@ -733,6 +735,9 @@ func _physics_process(delta: float) -> void:
 		if player_id == 0 and Singleton.Music.play_water:
 			Singleton.Music.toggle_underwater_music(false)
 	
+	if dead: #ewwwwwwwwwwwww I don't like doing this but you give me no choice old devs with your shitty code
+		burn_particles.global_position = death_sprite.global_position
+	
 	# Gravity
 	# Twice to work the same as 120fps
 	velocity.y += gravity * gravity_scale
@@ -887,7 +892,7 @@ func _physics_process(delta: float) -> void:
 		sprite.reset_physics_interpolation()
 	
 	# Update all states, nozzles and powerups
-	if Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id:
+	if Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id and !dead:
 		for state_node in states_node.get_children():
 			state_node.handle_update(delta)
 		for nozzle_node in nozzles_node.get_children():
@@ -1153,7 +1158,7 @@ func kill(cause: String) -> void:
 				movable = false
 				cutout_in = cutout_death
 				sprite.visible = false
-				death_sprite.set_as_toplevel(true)
+				death_sprite.z_index = 127
 				death_sprite.global_position = sprite.global_position
 				death_sprite.play_anim()
 				position = Vector2(0, 100000000000000000)
@@ -1162,17 +1167,23 @@ func kill(cause: String) -> void:
 				sound_player.play_death_sound()
 				yield(get_tree().create_timer(0.75), "timeout")
 			"hit", "lava", "crushed":
-				controllable = false
-				movable = false
+				toggle_movement(false)
 				cutout_in = cutout_death
 				sprite.visible = false
-				death_sprite.set_as_toplevel(true)
+				death_sprite.z_index = 127
 				death_sprite.global_position = sprite.global_position
+				
+				if cause == "lava":
+					burn_particles.z_index = 127
+					burn_particles.global_position = Vector2(sprite.global_position.x, sprite.global_position.y)
+					burn_particles.emitting = true
+				
 				death_sprite.play_anim()
-				position = Vector2(0, 100000000000000000)
-				reset_physics_interpolation()
 				yield(get_tree().create_timer(0.55), "timeout")
-				sound_player.play_death_sound()
+				if cause != "lava":
+					sound_player.play_death_sound()
+				else:
+					sound_player.play_lava_hurt_sound()
 				yield(get_tree().create_timer(0.75), "timeout")
 				if number_of_players != 1:
 					reload = false
@@ -1182,7 +1193,7 @@ func kill(cause: String) -> void:
 				movable = false
 				cutout_in = cutout_death
 				sprite.visible = false
-				death_sprite.set_as_toplevel(true)
+				death_sprite.z_index = 127
 				death_sprite.global_position = sprite.global_position
 				death_sprite.play_anim()
 				position = Vector2(0, 100000000000000000)
@@ -1210,7 +1221,7 @@ func kill(cause: String) -> void:
 				movable = false
 				cutout_in = cutout_death
 				sprite.visible = false
-				death_sprite.set_as_toplevel(true)
+				death_sprite.z_index = 127
 				death_sprite.global_position = sprite.global_position
 				death_sprite.play_anim()
 				position = Vector2(0, 100000000000000000)
@@ -1371,6 +1382,7 @@ func handle_liquids(liquid_areas, delta):
 	
 	quicksand_particles.set_particles_emitting(false)
 	
+	
 	if liquid_areas.size() <= 0: return
 	
 	for area in liquid_areas:
@@ -1379,13 +1391,15 @@ func handle_liquids(liquid_areas, delta):
 			liquid.LiquidType.Water:
 				var toxicity = liquid.toxicity
 				
-				breath -= 0.25 * toxicity
-				if breath <= 0:
-					breath = 100
-					damage(1, "hit", 0)
+				if toxicity > 0:
+					breath -= 0.25 * toxicity
+					if breath <= 0:
+						breath = 100
+						damage(1, "hit", 0)
 				
 			liquid.LiquidType.Lava:
-				set_state_by_name("LavaBoostState", delta)
+				if powerup != get_powerup_node("MetalPowerup"):
+					set_state_by_name("LavaBoostState", delta)
 				
 			liquid.LiquidType.Quicksand:
 				var sinking_speed = liquid.sinking_speed/10
@@ -1429,4 +1443,14 @@ func handle_liquids(liquid_areas, delta):
 					kill("quicksand")
 
 			liquid.LiquidType.Poison:
-				kill("poison")
+				var toxicity = liquid.toxicity
+				
+				if toxicity > 255:
+					breath -= 12
+					if breath <= 0:
+						kill("poison")
+				elif toxicity > 0:
+					breath -= 0.25 * toxicity
+					if breath <= 0:
+						breath = 100
+						damage(1, "hit", 0)

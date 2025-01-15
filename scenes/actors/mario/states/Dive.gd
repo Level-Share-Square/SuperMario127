@@ -91,8 +91,9 @@ func _stop(delta : float) -> void:
 		var sprite_rotation = atan2(normal.y, normal.x) + (PI/2)
 		sprite_rotation += PI/2 * start_facing
 		character.sprite.rotation = sprite_rotation
-		#below fixes an issue with dives putting your bottom position below the actual surface of the liquid
 		if character.check_liquid(LiquidBase.LiquidType.Quicksand) or character.check_liquid(LiquidBase.LiquidType.Lava):
+			# below fixes an issue with dives putting your bottom 
+			# position below the actual surface of the liquid
 			character.global_position.y -= 12
 
 func _stop_check(_delta : float) -> bool:

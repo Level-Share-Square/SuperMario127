@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -33,6 +33,10 @@
 [ext_resource path="res://scenes/player/ui_new/collectibles/show_max_purples.gd" type="Script" id=31]
 [ext_resource path="res://scenes/player/photo_mode_updater.gd" type="Script" id=32]
 [ext_resource path="res://scenes/player/photo_mode.gd" type="Script" id=33]
+[ext_resource path="res://scenes/actors/objects/sawblade/sawblade.ogg" type="AudioStream" id=34]
+[ext_resource path="res://scenes/actors/objects/bill_blaster/sounds/WU_SE_EMY_KILLER_SHOT_fast.wav" type="AudioStream" id=35]
+[ext_resource path="res://scenes/player/shared_saw_sound.gd" type="Script" id=36]
+[ext_resource path="res://scenes/player/shared_blast_launch_sound.gd" type="Script" id=37]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=39]
 [ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
 [ext_resource path="res://scenes/actors/objects/p_switch/tick.wav" type="AudioStream" id=58]
@@ -1950,6 +1954,22 @@ viewport_offset = Vector2( 576, 216 )
 [node name="SharedSounds" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource( 40 )
+
+[node name="SawSound" type="AudioStreamPlayer2D" parent="SharedSounds"]
+pause_mode = 1
+stream = ExtResource( 34 )
+volume_db = -80.0
+max_distance = 1280.0
+attenuation = 2.0
+bus = "Sounds"
+script = ExtResource( 36 )
+
+[node name="BlastSound" type="AudioStreamPlayer2D" parent="SharedSounds"]
+pause_mode = 1
+stream = ExtResource( 35 )
+max_distance = 1280.0
+bus = "Sounds"
+script = ExtResource( 37 )
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="SharedSounds"]
 stream = ExtResource( 39 )
