@@ -20,7 +20,7 @@ func update_status():
 			"Authorization: Bearer " + token
 		]
 		var error: int = request(
-			"https://levelsharesquare.com/api/app/intervals/SM127", 
+			"https://levelsharesquare.com/api/app/intervals/SM127?hidden=true", 
 			header, 
 			true, 
 			HTTPClient.METHOD_POST
