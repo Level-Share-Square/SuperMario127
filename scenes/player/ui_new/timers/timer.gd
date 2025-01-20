@@ -3,6 +3,7 @@ extends TimerBase
 
 onready var timer_display: Label = $Time
 onready var name_display: Label = $Time/Name
+onready var death_sound_timer: Timer = $DeathSoundTimer
 
 export var label_text: String = "TIME LEFT"
 export var show_time_score: bool = false
@@ -47,16 +48,16 @@ func _physics_process(delta):
 		timer_display.text = LevelInfo.generate_time_string(Singleton.CurrentLevelData.time_score)
 		return
 	
-	# justt in case the timer is set again right after running out
+	# just in case the timer is set again right after running out
 	if not is_counting and time > 0:
 		cancel_time_over()
 	
 	if is_counting:
-		time -= delta
+		time -= fps_util.PHYSICS_DELTA
 		sound_time = wrapf(time, 0, 1)
 		match(sound):
 			"switch":
-				sound_time -= delta
+				sound_time -= fps_util.PHYSICS_DELTA
 				if sound_time <= 0:
 					if time > 3:
 						audio_player.play()
@@ -65,33 +66,24 @@ func _physics_process(delta):
 							audio_player_secondary.play()
 					sound_time = wrapf(time, 0, 1.1)
 			"death":
-				if sound_time <= 0:
-					if time <= 10:
-						if time > 6:
-							set_timer_sound(kill_beep_start)
-							play_timer_sound()
-							
-						elif time > 2:
-							set_timer_sound(kill_beep_middle)
-							play_timer_sound()
-							
-						elif time > 0:
-							set_timer_sound(kill_beep_final)
-							play_timer_sound()
+				if time <= 10 and true:
+					death_sound_timer.start(1)
+#					death_sound_timer.connect(m)
 							
 				
 		if kill_on_end:
 			var mod_color_time = wrapf(time, 0, 1)
 			if time <= 10 and time > 0:
 				#this is really hacky but it works and I'll take it working, a signal would probably be better here
-				if !tween.is_active() and timer_display.rect_scale != Vector2(1.35, 1.35):
+				if !tween.is_active() and timer_display.rect_scale != Vector2(1.25, 1.25):
 					tween.interpolate_property(
 						timer_display,
 						"rect_scale",
 						Vector2(1, 1),
-						Vector2(1.35, 1.35),
+						Vector2(1.25, 1.25),
 						0.2, 
-						tween.TRANS_BOUNCE
+						Tween.TRANS_QUAD,
+						Tween.EASE_IN_OUT
 						)
 					tween.start()
 				timer_display.modulate.r = ((cos(4*PI*mod_color_time)))+2
@@ -107,6 +99,7 @@ func _physics_process(delta):
 func kill_player():
 	var player = get_node("/root").get_node("Player").get_node(get_node("/root").get_node("Player").character)
 	var player2 = get_node("/root").get_node("Player").get_node_or_null(get_node("/root").get_node("Player").character2)
+	
 	if is_instance_valid(player):
 		if !player.dead and player.controllable:
 			player.kill("timer")
@@ -117,11 +110,10 @@ func kill_player():
 func set_label(new_text: String):
 	name_display.text = new_text
 
-func set_timer_sound(stream : AudioStream):
+func play_timer_sound(stream : AudioStream):
 	audio_player.stream = stream
 	audio_player_secondary.stream = stream
-
-func play_timer_sound():
+	
 	if !audio_player.playing:
 		audio_player.play()
 	else:

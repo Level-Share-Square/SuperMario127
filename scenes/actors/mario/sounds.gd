@@ -1,4 +1,5 @@
 extends Node
+
 onready var voice_effects = $VoiceEffects
 onready var jump_sounds = $VoiceEffects/JumpSounds
 onready var double_jump_sounds = $VoiceEffects/DoubleJumpSounds
@@ -8,6 +9,7 @@ onready var fall_sounds = $VoiceEffects/FallSounds
 onready var hit_sounds = $VoiceEffects/HitSounds
 onready var last_hit_sounds = $VoiceEffects/LastHitSounds
 onready var death_sounds = $VoiceEffects/DeathSounds
+onready var timeout_sounds = $VoiceEffects/TimeoutSounds
 onready var stomped_sounds = $VoiceEffects/StompedSounds
 onready var powerup_sounds = $VoiceEffects/PowerupSounds
 onready var lava_hurt_sounds = $VoiceEffects/LavaHurtSounds
@@ -39,7 +41,7 @@ onready var burn_sound = $OtherSounds/Burn
 onready var footsteps_default = $Footsteps/Default
 onready var footsteps_metal = $Footsteps/Metal
 
-
+enum death_types {Normal, Fall, Lava, Poison, Timeout}
 
 export var normal_bus : String
 export var metal_bus : String
@@ -128,6 +130,10 @@ func play_hit_sound():
 func play_death_sound():
 	if ready:
 		death_sounds.play()
+
+func play_timeout_sound():
+	if ready:
+		timeout_sounds.play()
 
 func play_powerup_sound():
 	if ready:

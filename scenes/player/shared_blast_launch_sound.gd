@@ -13,7 +13,7 @@ func handle_blast_sound_position(screen_rect : Rect2):
 	for blaster in get_tree().get_nodes_in_group("blasters"):
 		var distance : float = screen_rect.get_center().distance_to(blaster.global_position)
 		
-		if screen_rect.has_point(blaster.global_position):
+		if blaster.visibility_notifier.is_on_screen():
 			blasters_in_range += 1
 			# if the new distance is smaller than the old one then set audio player's position to the closer position
 			if distance < working_distance:
@@ -22,5 +22,5 @@ func handle_blast_sound_position(screen_rect : Rect2):
 	
 	volume_db = min(blasters_in_range*1.45, 5)
 
-func _draw():
-	draw_circle(global_position, 5, Color.green)
+#func _draw():
+#	draw_circle(global_position, 5, Color.green)

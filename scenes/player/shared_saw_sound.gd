@@ -37,5 +37,5 @@ func set_random_saw_pitch():
 	pitch_scale = rand_range(0.97, 1.03)
 #	print(saw_sound.pitch_scale)
 
-func _draw():
-	draw_circle(global_position, 5, Color.red)
+#func _draw():
+#	draw_circle(global_position, 5, Color.red)

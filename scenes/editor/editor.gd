@@ -95,9 +95,10 @@ func cap_zoom_level(level : float) -> float:
 	# Reduce the zoom level if the screen wouldn't fit within the level
 	# NOTE: all values are -6 since there are 3 tiles OOB in both directions for both axis
 	var level_size : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds.size
-	
-	while (393*level > level_size.x*17) or (216*level > level_size.y*17):
-		level = level-.25
+#	print(Vector2(768*level, 432*level))
+#	print((level_size+Vector2(6, 6))*32)
+	while (768*level > (level_size.x+6)*32) or ((432-70)*level > (level_size.y+6)*32):
+		level = level-.05
 	
 	return level
 

@@ -617,14 +617,12 @@ func _process(delta: float) -> void:
 	
 	if next_position:
 		position = position.linear_interpolate(next_position, fps_util.PHYSICS_DELTA * sync_interpolation_speed)
-		reset_physics_interpolation()
 
 	collected_shine_outline.frame = collected_shine.frame
 	collected_shine_outline.position = collected_shine.position
 	collected_shine_outline.scale = collected_shine.scale
 	collected_shine_outline.visible = collected_shine.visible
 	collected_shine_outline.z_index = collected_shine.z_index
-	collected_shine_outline.reset_physics_interpolation()
 	
 	if state and state.name == "NoActionState":
 		return
@@ -695,7 +693,6 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	bottom_pos.position = bottom_pos_offset if not using_dive_collision else bottom_pos_dive_offset
-	bottom_pos.reset_physics_interpolation()
 	var is_in_platform := false
 	for body in platform_detector.get_overlapping_areas():
 		if body.has_method("is_platform_area"):
@@ -740,8 +737,10 @@ func _physics_process(delta: float) -> void:
 	
 	# Gravity
 	# Twice to work the same as 120fps
-	velocity.y += gravity * gravity_scale
-	velocity.y += gravity * gravity_scale
+	if movable:
+		velocity.y += gravity * gravity_scale
+		velocity.y += gravity * gravity_scale
+	
 	if !swimming:
 		velocity.y = clamp(velocity.y, velocity.y, max_aerial_velocity)
 	
@@ -891,7 +890,7 @@ func _physics_process(delta: float) -> void:
 		sprite.rotation_degrees = wrapf(sprite.rotation_degrees, -180, 180)
 		sprite.reset_physics_interpolation()
 	
-	# Update all states, nozzles and powerups
+	# Update all states, nozzles, powerups, and liquid-dependant physics
 	if Singleton.PlayerSettings.other_player_id == -1 or Singleton.PlayerSettings.my_player_index == player_id and !dead:
 		for state_node in states_node.get_children():
 			state_node.handle_update(delta)
@@ -934,12 +933,12 @@ func _physics_process(delta: float) -> void:
 	
 	# Set up snap
 	if is_instance_valid(state) and state.disable_snap:
-		snap = Vector2()
 	elif (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
+		snap = Vector2.ZERO
 		var normal = ground_check.get_collision_normal()
 		snap = Vector2(0, 6 if normal.x == 0 else 12)
 	else:
-		snap = Vector2()
+		snap = Vector2.ZERO
 	
 	# Switch nozzle
 	if (inputs[8][1] and Singleton.CurrentLevelData.level_data.vars.nozzles_collected.size() > 1
@@ -1042,7 +1041,7 @@ func _physics_process(delta: float) -> void:
 		collided_last_frame = false
 	
 	# fix ground magnet mario
-	if is_grounded() and last_velocity.y < 0 and not is_on_ceiling() and not is_in_platform:
+	if is_grounded() and last_velocity.y < 0 and !is_on_ceiling() and !is_in_platform:
 		velocity.y = last_velocity.y * 0.95
 	
 	# check if mario will collide w/ anything if he continues moving
@@ -1143,7 +1142,7 @@ func kill(cause: String) -> void:
 		
 		match(cause):
 			"fall":
-				controllable = false
+				toggle_movement(false)
 				sound_player.play_fall_sound()
 				if number_of_players == 1:
 					cutout_in = cutout_death
@@ -1187,17 +1186,15 @@ func kill(cause: String) -> void:
 					reload = false
 			"timer":
 				sound_player.play_last_hit_sound()
-				controllable = false
-				movable = false
+				toggle_movement(false)
 				cutout_in = cutout_death
 				sprite.visible = false
 				death_sprite.z_index = 127
 				death_sprite.global_position = sprite.global_position
 				death_sprite.play_anim()
-				position = Vector2(0, 100000000000000000)
 				reset_physics_interpolation()
 				yield(get_tree().create_timer(0.55), "timeout")
-				sound_player.play_death_sound()
+				sound_player.play_timeout_sound()
 				yield(get_tree().create_timer(0.75), "timeout")
 				reload = true
 			"quicksand":
@@ -1377,9 +1374,11 @@ func handle_liquids(liquid_areas, delta):
 	if is_instance_valid(state):
 		liquid_detector.get_node("BaseCollision").disabled = state.use_dive_collision
 		liquid_detector.get_node("DiveCollision").disabled = !state.use_dive_collision
+	else:
+		liquid_detector.get_node("BaseCollision").disabled = false
+		liquid_detector.get_node("DiveCollision").disabled = true
 	
 	quicksand_particles.set_particles_emitting(false)
-	
 	
 	if liquid_areas.size() <= 0: return
 	

@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/actors/objects/sawblade/sawblade.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/rustsaw2.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/sawblade/Saw.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/sawblade/circle.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/sawblade/metal_bounce.ogg" type="AudioStream" id=5]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/icesaw1.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/goldsaw2.png" type="Texture" id=7]
 [ext_resource path="res://scenes/actors/objects/sawblade/pals/icesaw2.png" type="Texture" id=8]
@@ -77,6 +78,11 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/Saw/Area2D"]
 shape = SubResource( 3 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D/Saw"]
+stream = ExtResource( 5 )
+volume_db = 7.0
+bus = "Sounds"
 
 [node name="EditorSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )

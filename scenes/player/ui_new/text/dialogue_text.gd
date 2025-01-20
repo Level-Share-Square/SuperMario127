@@ -52,6 +52,8 @@ func _ready():
 func open(_dialogue : PoolStringArray, dialogue_node : Node2D, character_node : Character, character_name : String):
 	Singleton.CurrentLevelData.can_pause = false
 	
+	var area_timer : TimerBase = get_tree().get_current_scene().get_node("%TimerManager").pause_resume_timer("area_timer", true)
+	
 	dialogue = _dialogue
 	character = character_node
 	dialogue_obj = dialogue_node

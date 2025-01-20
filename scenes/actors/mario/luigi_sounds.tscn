@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://addons/mixing-desk/sound/nonspatial/ran_cont.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/mario/sounds.gd" type="Script" id=2]
@@ -59,6 +59,7 @@
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L20_OHYEAH.wav" type="AudioStream" id=57]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L43_HUNNN2.wav" type="AudioStream" id=58]
 [ext_resource path="res://scenes/actors/mario/sounds_luigi/talk/STRM_L21_OK.wav" type="AudioStream" id=59]
+[ext_resource path="res://scenes/actors/mario/sounds_luigi/Timeout1.wav" type="AudioStream" id=60]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 2 )
@@ -170,6 +171,13 @@ script = ExtResource( 47 )
 
 [node name="Death1" type="AudioStreamPlayer" parent="VoiceEffects/DeathSounds"]
 stream = ExtResource( 31 )
+bus = "Voices"
+
+[node name="TimeoutSounds" type="Node" parent="VoiceEffects"]
+script = ExtResource( 47 )
+
+[node name="Timeout1" type="AudioStreamPlayer" parent="VoiceEffects/TimeoutSounds"]
+stream = ExtResource( 60 )
 bus = "Voices"
 
 [node name="PowerupSounds" type="Node" parent="VoiceEffects"]
