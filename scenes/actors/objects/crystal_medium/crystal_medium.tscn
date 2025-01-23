@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://scenes/actors/objects/big_tree/big_tree.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/big_tree/Decoration.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/5/MGemM.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/crystal_medium/palettes/3/MGemW.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/crystal_medium/MGemB.png" type="Texture" id=4]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/actors/objects/large_cave_tree/large_cave_tree.png" type="Texture" id=1]
-[ext_resource path="res://scenes/actors/objects/big_tree/big_tree.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/big_tree/Decoration.gd" type="Script" id=2]
 
 [node name="LargeCaveTree" type="Node2D"]
 z_index = -1

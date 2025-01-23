@@ -4,7 +4,7 @@ export var custom_preview_position = Vector2(70, 170)
 export(Array, Texture) var palette_textures
 
 
-onready var sprite = $Sprite
+onready var sprite = $Node2D/Sprite
 onready var left_width = sprite.patch_margin_top
 onready var right_width = sprite.patch_margin_bottom
 onready var part_width = 64
@@ -49,16 +49,12 @@ func _process(_delta):
 		update_parts()
 	last_parts = parts
 	
+	if palette != 0 and sprite.texture != palette_textures[palette-1]:
+		sprite.texture = palette_textures[palette - 1]
+	
 func update_parts():
 	sprite.rect_position.y = -(left_width + (part_width * parts) + right_width) / 2
 	sprite.rect_size.y = left_width + right_width + part_width * parts
 
-	
-
-	
 	#calculate the total platform scale
 	scale_y = scale.y * (left_width + right_width + part_width * parts) / (left_width + right_width + part_width)
-
-
-	
-	

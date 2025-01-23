@@ -129,6 +129,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/curve_tween.gd"
 }, {
+"base": "GameObject",
+"class": "Decoration",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/big_tree/Decoration.gd"
+}, {
 "base": "Reference",
 "class": "DefineVarInstruction",
 "language": "GDScript",
@@ -819,6 +824,7 @@ _global_script_class_icons={
 "CrushedBaseState": "",
 "CrushedState": "",
 "CurveTween": "",
+"Decoration": "",
 "DefineVarInstruction": "",
 "Dialog": "",
 "DiscordActivity": "",

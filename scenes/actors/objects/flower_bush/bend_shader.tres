@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float STRENGTH = 0.0;
+uniform vec2 CENTER = vec2(0.5);
+
+void fragment() {
+	vec2 uv = UV - CENTER;
+	float angle = STRENGTH * uv.y;
+	mat2 rot = mat2(
+		vec2( cos(angle), -sin(angle) ),
+		vec2( sin(angle),  cos(angle) )
+	);
+	uv = rot * uv + CENTER;
+	COLOR = texture(TEXTURE, uv);
+}"
+
+[resource]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/STRENGTH = 0.0
+shader_param/CENTER = Vector2( 0.5, 0.96 )
