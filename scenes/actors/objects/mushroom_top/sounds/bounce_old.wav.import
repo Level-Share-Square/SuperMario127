@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bounce_old.wav-7e9878a413af36f19cb4731ca218fbbd.sample"
+
+[deps]
+
+source_file="res://scenes/actors/objects/mushroom_top/sounds/bounce_old.wav"
+dest_files=[ "res://.import/bounce_old.wav-7e9878a413af36f19cb4731ca218fbbd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
