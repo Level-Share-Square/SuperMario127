@@ -17,10 +17,10 @@ var is_blue := false
 
 func _set_properties():
 	savable_properties = ["id"]
-	editable_properties = []
+	editable_properties = ["id"]
 
 func _set_property_values():
-	set_property("id", id)
+	set_property("id", id, true, "ID")
 
 func _ready() -> void:
 	var _connect = area.connect("body_entered", self, "collect")

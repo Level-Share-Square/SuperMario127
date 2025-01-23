@@ -76,7 +76,7 @@ func _set_property_values() -> void:
 	set_property("shine_shards_activate", shine_shards_activate, true)
 	set_property("color", color, true)
 	set_property("id", id, true, "ID")
-	set_property_menu("id", ["viewer"])
+#	set_property_menu("id", ["viewer"])
 	set_property("do_kick_out", do_kick_out, true)
 	set_property("sort_position", sort_position, true)
 	set_property("required_purples", required_purples, true)

@@ -111,24 +111,45 @@ func load_in() -> void:
 						"show_in_menu": object.properties[7],
 						"color": object.properties[11].to_rgba32(),
 						"id": object.properties[12],
-						"do_kick_out": object.properties[13]
+						"do_kick_out": object.properties[13],
+						"enabled": object.properties[3]
 					}
 					# Lol band aid
 					if object.properties.size() > 13:
 						shine_dictionary["sort_order"] = object.properties[14]
 					else:
 						shine_dictionary["sort_order"] = object.properties[12]
-					shine_details.append(shine_dictionary)
-
-					# initialize collected_shines and time_scores
-					collected_shines[str(shine_dictionary["id"])] = false 
-					time_scores[str(shine_dictionary["id"])] = EMPTY_TIME_SCORE
+					
+					var repeated_shine : bool = false
+					
+					for shine in shine_details:
+						if shine["id"] == shine_dictionary["id"]:
+							repeated_shine = true
+							break
+					
+					if !repeated_shine and shine_dictionary["enabled"]:
+						shine_details.append(shine_dictionary)
+						
+						# initialize collected_shines and time_scores
+						collected_shines[str(shine_dictionary["id"])] = false 
+						time_scores[str(shine_dictionary["id"])] = EMPTY_TIME_SCORE
+						
 				OBJECT_ID_STAR_COIN:
 					var star_coin_id = object.properties[5]
-					star_coin_details.append(star_coin_id)
-
-					# initialize collected star coins
-					collected_star_coins[str(star_coin_id)] = false
+					var enabled = object.properties[3]
+					
+					var repeated_star_coin : bool = false
+					
+					for star_coin in star_coin_details:
+						if star_coin["id"] == star_coin_id:
+							repeated_star_coin = true
+							break
+					
+					if enabled:
+						star_coin_details.append(star_coin_id)
+						
+						# initialize collected star coins
+						collected_star_coins[str(star_coin_id)] = false
 
 			shine_details.sort_custom(self, "shine_sort")
 			star_coin_details.sort()
