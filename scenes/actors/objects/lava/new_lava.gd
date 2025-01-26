@@ -1,7 +1,7 @@
 extends LiquidBase
 
 onready var new = $New
-onready var lava_light = $New/Waves/LavaLight
+onready var lava_light = $New/Waves/ZSetter/LavaLight
 onready var bubbles = $New/Waves/Bubbles
 
 onready var body_collision = $StaticBody2D/CollisionShape2D

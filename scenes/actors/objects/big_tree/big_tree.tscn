@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/actors/objects/big_tree/big_tree.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/big_tree/big_tree.gd" type="Script" id=2]
@@ -7,7 +7,13 @@
 [ext_resource path="res://scenes/actors/objects/big_tree/palettes/5/big_tree.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/big_tree/palettes/4/big_tree.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/big_tree/palettes/1/big_tree.png" type="Texture" id=7]
-[ext_resource path="res://scenes/actors/objects/flower_bush/bend_shader.tres" type="Material" id=8]
+[ext_resource path="res://shaders/bend_shader.gdshader" type="Shader" id=8]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 8 )
+shader_param/strength = 0.0
+shader_param/center = Vector2( 0.5, 1 )
 
 [node name="BigTree" type="Node2D"]
 z_index = -1
@@ -15,7 +21,7 @@ script = ExtResource( 2 )
 palette_textures = [ ExtResource( 7 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
-material = ExtResource( 8 )
+material = SubResource( 1 )
 z_index = -9
 texture = ExtResource( 1 )
 offset = Vector2( 0, -36 )

@@ -165,13 +165,15 @@ func _unhandled_input(event) -> void:
 			shared.toggle_layer_transparency(editing_layer, layers_transparent)
 
 func _ready() -> void:
-	Engine.set_target_fps(0)
+	#this is to dynamically update the framerate
+	_update_editor_framerate()
+	
 	Engine.iterations_per_second = 60
 	# reset these to 0 since they get incremented by the loading in process every time
 	Singleton.CurrentLevelData.next_shine_id = 0
 	Singleton.CurrentLevelData.next_star_coin_id = 0
 	Singleton.CheckpointSaved.reset()
-
+	
 	var data = Singleton.CurrentLevelData.level_data
 	load_in(data, data.areas[Singleton.CurrentLevelData.area])
 	zoom_level = Singleton.EditorSavedSettings.zoom_level
@@ -192,12 +194,16 @@ func _ready() -> void:
 		# enable the mode switching button since we're using the editor
 		Singleton.ModeSwitcher.get_node("ModeSwitcherButton").change_button_state(true)
 		Singleton.Music.play() # needed as the music no longer plays by default
-
+	
 		# make sure the mode switcher button is set to have the play button as it's visual
 		Singleton.ModeSwitcher.get_node("ModeSwitcherButton").change_visuals(0)
-
-		Singleton.CurrentLevelData.unsaved_editor_changes = false
 	
+		Singleton.CurrentLevelData.unsaved_editor_changes = false
+
+func _update_editor_framerate():
+	LocalSettings._update_framerate_to_refresh_rate()
+	get_tree().create_timer(1.0).connect("timeout", self, "_update_editor_framerate")
+
 func set_selected_box(new_selected_box: Node) -> void:
 	Singleton.EditorSavedSettings.selected_box = new_selected_box.box_index
 	Singleton2.new_box = new_selected_box

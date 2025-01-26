@@ -205,7 +205,7 @@ func update_bounce_anim(delta):
 	spring_anim_power -= force * delta
 	base_scale_factor -= spring_anim_power * delta
 	
-	mushroom_cap.scale.y = (1 + base_scale_factor)
+	mushroom_cap.scale.y = (1 + base_scale_factor*1.25)
 	mushroom_cap.scale.x = 1-((mushroom_cap.scale.y-1)/2)
-	$Node2D.scale.y = (1 + base_scale_factor)
+	$Node2D.scale.y = (1 + base_scale_factor*1.25)
 	$Node2D.scale.x = 1-(($Node2D.scale.y-1)/2)

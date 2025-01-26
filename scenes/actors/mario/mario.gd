@@ -320,6 +320,7 @@ const ANIM_IDS : Dictionary = {
 }
 
 func _ready():
+#	_update_player_framerate()
 	Engine.set_target_fps(60)
 	Engine.iterations_per_second = 60
 	Singleton.CurrentLevelData.can_pause = true
@@ -338,6 +339,9 @@ func _ready():
 	for input in input_names.keys():
 		inputs.append([false, false, str(input)])
 
+func _update_player_framerate():
+	LocalSettings._update_framerate_to_refresh_rate()
+	get_tree().create_timer(1.0).connect("timeout", self, "_update_player_framerate")
 
 #slavery in super mario 127 :flushed:
 puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_attacking, is_big_attacking, is_heavy, is_dead, is_controllable): # Ok slave
@@ -375,7 +379,9 @@ func knockback(hit_pos: Vector2):
 	velocity.x = direction * 235
 	velocity.y = -225
 	set_state_by_name("KnockbackState", 0)
-	
+
+func play_shine_sound() -> void:
+	sound_player.play_shine_sound()
 
 # warning-ignore: unused_argument
 func load_in(level_data : LevelData, level_area : LevelArea):
@@ -617,14 +623,14 @@ func _process(delta: float) -> void:
 	
 	if next_position:
 		position = position.linear_interpolate(next_position, fps_util.PHYSICS_DELTA * sync_interpolation_speed)
-
+	
 	collected_shine_outline.frame = collected_shine.frame
 	collected_shine_outline.position = collected_shine.position
 	collected_shine_outline.scale = collected_shine.scale
 	collected_shine_outline.visible = collected_shine.visible
 	collected_shine_outline.z_index = collected_shine.z_index
 	
-	if state and state.name == "NoActionState":
+	if state == get_state_node("NoActionState"):
 		return
 	
 	if is_instance_valid(powerup):
@@ -734,6 +740,7 @@ func _physics_process(delta: float) -> void:
 	
 	if dead: #ewwwwwwwwwwwww I don't like doing this but you give me no choice old devs with your shitty code
 		burn_particles.global_position = death_sprite.global_position
+		burn_particles.reset_physics_interpolation()
 	
 	# Gravity
 	# Twice to work the same as 120fps
@@ -933,8 +940,8 @@ func _physics_process(delta: float) -> void:
 	
 	# Set up snap
 	if is_instance_valid(state) and state.disable_snap:
-	elif (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
 		snap = Vector2.ZERO
+	elif (left_check.is_colliding() or right_check.is_colliding()) and velocity.y > 0:
 		var normal = ground_check.get_collision_normal()
 		snap = Vector2(0, 6 if normal.x == 0 else 12)
 	else:
@@ -1158,6 +1165,7 @@ func kill(cause: String) -> void:
 				sprite.visible = false
 				death_sprite.z_index = 127
 				death_sprite.global_position = sprite.global_position
+				death_sprite.reset_physics_interpolation()
 				death_sprite.play_anim()
 				
 				yield(get_tree().create_timer(0.55), "timeout")
@@ -1169,10 +1177,12 @@ func kill(cause: String) -> void:
 				sprite.visible = false
 				death_sprite.z_index = 127
 				death_sprite.global_position = sprite.global_position
+				death_sprite.reset_physics_interpolation()
 				
 				if cause == "lava":
 					burn_particles.z_index = 127
 					burn_particles.global_position = Vector2(sprite.global_position.x, sprite.global_position.y)
+					burn_particles.reset_physics_interpolation()
 					burn_particles.emitting = true
 				
 				death_sprite.play_anim()
@@ -1191,8 +1201,8 @@ func kill(cause: String) -> void:
 				sprite.visible = false
 				death_sprite.z_index = 127
 				death_sprite.global_position = sprite.global_position
+				death_sprite.reset_physics_interpolation()
 				death_sprite.play_anim()
-				reset_physics_interpolation()
 				yield(get_tree().create_timer(0.55), "timeout")
 				sound_player.play_timeout_sound()
 				yield(get_tree().create_timer(0.75), "timeout")
@@ -1218,9 +1228,8 @@ func kill(cause: String) -> void:
 				sprite.visible = false
 				death_sprite.z_index = 127
 				death_sprite.global_position = sprite.global_position
+				death_sprite.reset_physics_interpolation()
 				death_sprite.play_anim()
-				position = Vector2(0, 100000000000000000)
-				reset_physics_interpolation()
 				yield(get_tree().create_timer(0.55), "timeout")
 				sound_player.play_death_sound()
 				yield(get_tree().create_timer(0.75), "timeout")

@@ -60,12 +60,13 @@ var color := Color(1, 1, 0)
 var id := 0
 var do_kick_out := true
 var sort_position : int = 0
+var activation_tag : String = "shine_tag"
 
 var score_from_before = 0 # haha that rhymes
 
 func _set_properties() -> void:
-	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out", "sort_position", "required_purples"]
-	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "required_purples", "color", "do_kick_out", "sort_position", "id"]
+	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out", "sort_position", "required_purples", "activation_tag"]
+	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "required_purples", "color", "do_kick_out", "activation_tag", "sort_position", "id"]
 	
 func _set_property_values() -> void:
 	set_property("title", title, true)
@@ -80,6 +81,7 @@ func _set_property_values() -> void:
 	set_property("do_kick_out", do_kick_out, true)
 	set_property("sort_position", sort_position, true)
 	set_property("required_purples", required_purples, true)
+	set_property("activation_tag", activation_tag, true)
 
 func _ready() -> void:
 	send_score = true

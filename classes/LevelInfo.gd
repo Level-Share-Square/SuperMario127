@@ -135,13 +135,13 @@ func load_in() -> void:
 						time_scores[str(shine_dictionary["id"])] = EMPTY_TIME_SCORE
 						
 				OBJECT_ID_STAR_COIN:
-					var star_coin_id = object.properties[5]
+					var star_coin_id : int = object.properties[5]
 					var enabled = object.properties[3]
 					
 					var repeated_star_coin : bool = false
 					
-					for star_coin in star_coin_details:
-						if star_coin["id"] == star_coin_id:
+					for id in star_coin_details:
+						if id == star_coin_id:
 							repeated_star_coin = true
 							break
 					

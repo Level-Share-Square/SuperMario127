@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/actors/objects/large_pine_tree/pine_tree.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/large_pine_tree/large_pine_tree.gd" type="Script" id=2]
@@ -7,14 +7,20 @@
 [ext_resource path="res://scenes/actors/objects/large_pine_tree/palettes/4/pine_tree.png" type="Texture" id=5]
 [ext_resource path="res://scenes/actors/objects/large_pine_tree/palettes/3/pine_tree.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/large_pine_tree/palettes/5/pine_tree.png" type="Texture" id=7]
-[ext_resource path="res://scenes/actors/objects/flower_bush/bend_shader.tres" type="Material" id=8]
+[ext_resource path="res://shaders/bend_shader.gdshader" type="Shader" id=8]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 8 )
+shader_param/strength = 0.0
+shader_param/center = Vector2( 0.5, 1 )
 
 [node name="LargePineTree" type="Node2D"]
 script = ExtResource( 2 )
 palette_textures = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 7 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
-material = ExtResource( 8 )
+material = SubResource( 1 )
 z_index = -9
 texture = ExtResource( 1 )
 offset = Vector2( 0, -64 )

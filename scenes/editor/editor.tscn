@@ -5855,6 +5855,7 @@ __meta__ = {
 }
 
 [node name="BoundsControl" type="Node2D" parent="."]
+z_index = 64
 script = ExtResource( 19 )
 
 [node name="Left" type="Node2D" parent="BoundsControl"]

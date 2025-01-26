@@ -32,11 +32,18 @@ func _start(_delta):
 	for area in liquid_areas:
 		var area_object = area.get_parent()
 		if area_object.color != Color(1, 0, 0):
-			#constructs a new gradient if the color is not the base red
-			var new_gradient = Gradient.new()
-			new_gradient.colors = PoolColorArray([area_object.color, Color8((area_object.color.r*255)-87, (area_object.color.g*255)-87, (area_object.color.b*255)-87), Color(0.082353, 0.082353, 0.082353), Color(0, 0, 0, 0)])
-			new_gradient.offsets = PoolRealArray([0, 0.189, 0.692, 0.983])
-			character.burn_particles.process_material.color_ramp.gradient = new_gradient
+			if !(area_object is LiquidBase):
+				#constructs a new gradient if the color is not the base red
+				var new_gradient = Gradient.new()
+				new_gradient.colors = PoolColorArray([area_object.color, Color8((area_object.color.r*255)-87, (area_object.color.g*255)-87, (area_object.color.b*255)-87), Color(0.082353, 0.082353, 0.082353), Color(0, 0, 0, 0)])
+				new_gradient.offsets = PoolRealArray([0, 0.189, 0.692, 0.983])
+				character.burn_particles.process_material.color_ramp.gradient = new_gradient
+			else:
+				if area_object.liquid_type == LiquidBase.LiquidType.Lava:
+					var new_gradient = Gradient.new()
+					new_gradient.colors = PoolColorArray([area_object.color, Color8((area_object.color.r*255)-87, (area_object.color.g*255)-87, (area_object.color.b*255)-87), Color(0.082353, 0.082353, 0.082353), Color(0, 0, 0, 0)])
+					new_gradient.offsets = PoolRealArray([0, 0.189, 0.692, 0.983])
+					character.burn_particles.process_material.color_ramp.gradient = new_gradient
 		else:
 			character.burn_particles.process_material.color_ramp.gradient = base_burn_particle_gradient
 			
@@ -60,8 +67,6 @@ func _start(_delta):
 		elif area_object is CircleArea:
 			#if it is a circle find the angle from the angle to the center to the player's position
 			character.velocity = Vector2.UP.rotated(atan((area_object.position.x-character.x)/(area_object.position.y-character.y))) * boost_velocity
-		
-			
 	
 	character.burn_particles.emitting = true
 	
@@ -85,6 +90,7 @@ func _update(delta):
 	sprite.offset = Vector2(offset_x, offset_y)
 	
 	character.burn_particles.position.x = -2.5 * character.facing_direction
+	character.burn_particles.reset_physics_interpolation()
 
 	if character.is_grounded() and bounces_left > 0:
 		character.velocity.y = -(bounce_velocity + (extra_velocity * bounces_left))

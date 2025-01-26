@@ -1,8 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
-
-[sub_resource type="Shader" id=1]
-resource_local_to_scene = true
-code = "shader_type canvas_item;
+shader_type canvas_item;
 
 uniform float strength = 0.0;
 uniform vec2 center = vec2(0.5);
@@ -18,10 +14,4 @@ void fragment() {
 	
 	new_uv = rotation_matrix * new_uv + center;
 	COLOR = texture(TEXTURE, new_uv);
-}"
-
-[resource]
-resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/strength = 0.308
-shader_param/center = Vector2( 0.5, 1 )
+}

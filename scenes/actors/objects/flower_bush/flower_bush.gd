@@ -18,7 +18,7 @@ func _process(delta):
 		if !is_equal_approx(displacement_spring_anim_power, 0):
 			update_displacement_spring(delta)
 		else:
-			sprite.material.set_shader_param("STRENGTH", 0)
+			sprite.material.set_shader_param("strength", 0)
 		
 		if !is_equal_approx(scale_spring_anim_power, 0):
 			update_scale_spring(delta)
@@ -38,24 +38,25 @@ func start_anim(body):
 	if sign(entrance_velocity.x) == 0:
 		set_scale_spring(8)
 	else:
-		set_scale_spring(-7)
-		set_displacement_spring(7 * sign(entrance_velocity.x))
+#		set_scale_spring(-7)
+		set_displacement_spring(10 * sign(entrance_velocity.x))
 
 
 func set_displacement_spring(power : float):
 	displacement_spring_anim_power = power
 
 func update_displacement_spring(delta):
-	var spring_constant = 200
-	var damping_constant = 9
+	var spring_constant = 800
+	var damping_constant = 7
 	
 	var damping_ratio = damping_constant / (2 * sqrt(spring_constant))
+
 	
 	var force = (-spring_constant * displacement) + (damping_constant * displacement_spring_anim_power)
 	displacement_spring_anim_power -= force * delta
 	displacement -= displacement_spring_anim_power * delta
 	
-	sprite.material.set_shader_param("STRENGTH", displacement)
+	sprite.material.set_shader_param("strength", displacement)
 
 
 func set_scale_spring(power : float):

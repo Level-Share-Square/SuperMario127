@@ -32,5 +32,3 @@ func update_status():
 func request_completed(_result: int, response_code: int, _headers: PoolStringArray, _body: PoolByteArray):
 	print("LSS ping complete. Response code: ", response_code)
 	
-func _physics_process(delta):
-	OS.set_window_title("Super Mario 127 (FPS: " + str(Engine.get_frames_per_second()) + ")")
