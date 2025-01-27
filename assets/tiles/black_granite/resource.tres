@@ -1,12 +1,20 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=11 format=2]
 
 [ext_resource path="res://level/Tileset.gd" type="Script" id=1]
-[ext_resource path="res://assets/tiles/grass/grass.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/black_granite/palettes/5.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/black_granite/palettes/2.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/black_granite/palettes/7.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/black_granite/palettes/8.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/black_granite/palettes/6.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/black_granite/palettes/9.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/black_granite/palettes/3.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/black_granite/palettes/4.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/black_granite/palettes/1.png" type="Texture" id=10]
 
 [resource]
 script = ExtResource( 1 )
 block_tile_id = 46
-slab_tile_id = 46
-left_slope_tile_id = 46
-right_slope_tile_id = 46
-placing_texture = ExtResource( 2 )
+slab_tile_id = 115
+left_slope_tile_id = 113
+right_slope_tile_id = 114
+palettes = [ ExtResource( 10 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ) ]

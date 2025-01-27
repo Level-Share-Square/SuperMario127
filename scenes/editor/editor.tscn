@@ -1,4 +1,4 @@
-[gd_scene load_steps=1588 format=2]
+[gd_scene load_steps=1653 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -289,6 +289,7 @@
 [ext_resource path="res://assets/tiles/carpet/palette_icons/3.png" type="Texture" id=287]
 [ext_resource path="res://assets/tiles/carpet/palette_icons/4.png" type="Texture" id=288]
 [ext_resource path="res://scenes/actors/objects/lava/icon.png" type="Texture" id=289]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/9_block.png" type="Texture" id=290]
 [ext_resource path="res://assets/tiles/roof/icon.png" type="Texture" id=291]
 [ext_resource path="res://assets/tiles/roof/left_slope_icon.png" type="Texture" id=292]
 [ext_resource path="res://assets/tiles/roof/right_slope_icon.png" type="Texture" id=293]
@@ -1552,6 +1553,70 @@
 [ext_resource path="res://scenes/actors/objects/thwomp/preview.png" type="Texture" id=1551]
 [ext_resource path="res://scenes/actors/objects/quicksand/icon.png" type="Texture" id=1552]
 [ext_resource path="res://scenes/editor/editor_zoom_display.gd" type="Script" id=1553]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/7_slopeL.png" type="Texture" id=1554]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/8_slopeR.png" type="Texture" id=1555]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/9_slopeL.png" type="Texture" id=1556]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/8_slab.png" type="Texture" id=1557]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/8_slopeL.png" type="Texture" id=1558]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/7_slab.png" type="Texture" id=1559]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/9_slopeR.png" type="Texture" id=1560]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/7_block.png" type="Texture" id=1561]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/8_block.png" type="Texture" id=1562]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/7_slopeR.png" type="Texture" id=1563]
+[ext_resource path="res://assets/tiles/crystal/palette_icons/9_slab.png" type="Texture" id=1564]
+[ext_resource path="res://assets/tiles/black_granite/icon_slab.png" type="Texture" id=1565]
+[ext_resource path="res://assets/tiles/black_granite/icon_slopeL.png" type="Texture" id=1566]
+[ext_resource path="res://assets/tiles/black_granite/icon_slopeR.png" type="Texture" id=1567]
+[ext_resource path="res://assets/tiles/black_granite/palettes/2_block.png" type="Texture" id=1568]
+[ext_resource path="res://assets/tiles/black_granite/palettes/7_block.png" type="Texture" id=1569]
+[ext_resource path="res://assets/tiles/black_granite/palettes/5_block.png" type="Texture" id=1570]
+[ext_resource path="res://assets/tiles/black_granite/palettes/1_block.png" type="Texture" id=1571]
+[ext_resource path="res://assets/tiles/black_granite/palettes/3_block.png" type="Texture" id=1572]
+[ext_resource path="res://assets/tiles/black_granite/palettes/8_block.png" type="Texture" id=1573]
+[ext_resource path="res://assets/tiles/black_granite/palettes/4_block.png" type="Texture" id=1574]
+[ext_resource path="res://assets/tiles/black_granite/palettes/6_block.png" type="Texture" id=1575]
+[ext_resource path="res://assets/tiles/black_granite/palettes/9_block.png" type="Texture" id=1576]
+[ext_resource path="res://assets/tiles/black_granite/palettes/3_slab.png" type="Texture" id=1577]
+[ext_resource path="res://assets/tiles/black_granite/palettes/5_slab.png" type="Texture" id=1578]
+[ext_resource path="res://assets/tiles/black_granite/palettes/2_slab.png" type="Texture" id=1579]
+[ext_resource path="res://assets/tiles/black_granite/palettes/6_slab.png" type="Texture" id=1580]
+[ext_resource path="res://assets/tiles/black_granite/palettes/9_slab.png" type="Texture" id=1581]
+[ext_resource path="res://assets/tiles/black_granite/palettes/8_slab.png" type="Texture" id=1582]
+[ext_resource path="res://assets/tiles/black_granite/palettes/4_slab.png" type="Texture" id=1583]
+[ext_resource path="res://assets/tiles/black_granite/palettes/7_slab.png" type="Texture" id=1584]
+[ext_resource path="res://assets/tiles/black_granite/palettes/1_slab.png" type="Texture" id=1585]
+[ext_resource path="res://assets/tiles/black_granite/palettes/5_slopeL.png" type="Texture" id=1586]
+[ext_resource path="res://assets/tiles/black_granite/palettes/6_slopeL.png" type="Texture" id=1587]
+[ext_resource path="res://assets/tiles/black_granite/palettes/1_slopeL.png" type="Texture" id=1588]
+[ext_resource path="res://assets/tiles/black_granite/palettes/3_slopeL.png" type="Texture" id=1589]
+[ext_resource path="res://assets/tiles/black_granite/palettes/7_slopeL.png" type="Texture" id=1590]
+[ext_resource path="res://assets/tiles/black_granite/palettes/2_slopeL.png" type="Texture" id=1591]
+[ext_resource path="res://assets/tiles/black_granite/palettes/8_slopeL.png" type="Texture" id=1592]
+[ext_resource path="res://assets/tiles/black_granite/palettes/4_slopeL.png" type="Texture" id=1593]
+[ext_resource path="res://assets/tiles/black_granite/palettes/9_slopeL.png" type="Texture" id=1594]
+[ext_resource path="res://assets/tiles/black_granite/palettes/6_slopeR.png" type="Texture" id=1595]
+[ext_resource path="res://assets/tiles/black_granite/palettes/5_slopeR.png" type="Texture" id=1596]
+[ext_resource path="res://assets/tiles/black_granite/palettes/4_slopeR.png" type="Texture" id=1597]
+[ext_resource path="res://assets/tiles/black_granite/palettes/1_slopeR.png" type="Texture" id=1598]
+[ext_resource path="res://assets/tiles/black_granite/palettes/8_slopeR.png" type="Texture" id=1599]
+[ext_resource path="res://assets/tiles/black_granite/palettes/2_slopeR.png" type="Texture" id=1600]
+[ext_resource path="res://assets/tiles/black_granite/palettes/3_slopeR.png" type="Texture" id=1601]
+[ext_resource path="res://assets/tiles/black_granite/palettes/7_slopeR.png" type="Texture" id=1602]
+[ext_resource path="res://assets/tiles/black_granite/palettes/9_slopeR.png" type="Texture" id=1603]
+[ext_resource path="res://assets/tiles/cobblestone/slopeL.png" type="Texture" id=1604]
+[ext_resource path="res://assets/tiles/cobblestone/slopeR.png" type="Texture" id=1605]
+[ext_resource path="res://assets/tiles/cobblestone/palette_icons/1_slopeL.png" type="Texture" id=1606]
+[ext_resource path="res://assets/tiles/cobblestone/palette_icons/4_slopeR.png" type="Texture" id=1607]
+[ext_resource path="res://assets/tiles/cobblestone/palette_icons/6_slopeR.png" type="Texture" id=1608]
+[ext_resource path="res://assets/tiles/cobblestone/palette_icons/3_slopeR.png" type="Texture" id=1609]
+[ext_resource path="res://assets/tiles/cobblestone/palette_icons/5_slopeR.png" type="Texture" id=1610]
+[ext_resource path="res://assets/tiles/cobblestone/palette_icons/3_slopeL.png" type="Texture" id=1611]
+[ext_resource path="res://assets/tiles/cobblestone/palette_icons/6_slopeL.png" type="Texture" id=1612]
+[ext_resource path="res://assets/tiles/cobblestone/palette_icons/2_slopeL.png" type="Texture" id=1613]
+[ext_resource path="res://assets/tiles/cobblestone/palette_icons/5_slopeL.png" type="Texture" id=1614]
+[ext_resource path="res://assets/tiles/cobblestone/palette_icons/4_slopeL.png" type="Texture" id=1615]
+[ext_resource path="res://assets/tiles/cobblestone/palette_icons/1_slopeR.png" type="Texture" id=1616]
+[ext_resource path="res://assets/tiles/cobblestone/palette_icons/2_slopeR.png" type="Texture" id=1617]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3922,8 +3987,8 @@ group_name = "Cave"
 [node name="Crystal" type="Node" parent="PlaceableItems/CaveGroup"]
 script = ExtResource( 24 )
 tileset_id = 35
-palette_icons = [ ExtResource( 586 ), ExtResource( 600 ), ExtResource( 604 ), ExtResource( 598 ), ExtResource( 599 ), ExtResource( 602 ), ExtResource( 601 ) ]
-palette_previews = [ ExtResource( 586 ), ExtResource( 600 ), ExtResource( 604 ), ExtResource( 598 ), ExtResource( 599 ), ExtResource( 602 ), ExtResource( 601 ) ]
+palette_icons = [ ExtResource( 586 ), ExtResource( 600 ), ExtResource( 604 ), ExtResource( 598 ), ExtResource( 599 ), ExtResource( 602 ), ExtResource( 601 ), ExtResource( 1561 ), ExtResource( 1562 ), ExtResource( 290 ) ]
+palette_previews = [ ExtResource( 586 ), ExtResource( 600 ), ExtResource( 604 ), ExtResource( 598 ), ExtResource( 599 ), ExtResource( 602 ), ExtResource( 601 ), ExtResource( 1561 ), ExtResource( 1562 ), ExtResource( 290 ) ]
 change_to = "CrystalSlab"
 items_in_sequence = 4
 icon = ExtResource( 586 )
@@ -3933,8 +3998,8 @@ preview = ExtResource( 586 )
 script = ExtResource( 24 )
 tileset_id = 35
 tile_id = 1
-palette_icons = [ ExtResource( 589 ), ExtResource( 593 ), ExtResource( 590 ), ExtResource( 591 ), ExtResource( 597 ), ExtResource( 605 ), ExtResource( 607 ) ]
-palette_previews = [ ExtResource( 589 ), ExtResource( 593 ), ExtResource( 590 ), ExtResource( 591 ), ExtResource( 597 ), ExtResource( 605 ), ExtResource( 607 ) ]
+palette_icons = [ ExtResource( 589 ), ExtResource( 593 ), ExtResource( 590 ), ExtResource( 591 ), ExtResource( 597 ), ExtResource( 605 ), ExtResource( 607 ), ExtResource( 1559 ), ExtResource( 1557 ), ExtResource( 1564 ) ]
+palette_previews = [ ExtResource( 589 ), ExtResource( 593 ), ExtResource( 590 ), ExtResource( 591 ), ExtResource( 597 ), ExtResource( 605 ), ExtResource( 607 ), ExtResource( 1559 ), ExtResource( 1557 ), ExtResource( 1564 ) ]
 change_to = "CrystalSlopeLeft"
 items_in_sequence = 4
 index_in_sequence = 1
@@ -3945,8 +4010,8 @@ preview = ExtResource( 589 )
 script = ExtResource( 24 )
 tileset_id = 35
 tile_id = 2
-palette_icons = [ ExtResource( 587 ), ExtResource( 594 ), ExtResource( 595 ), ExtResource( 603 ), ExtResource( 596 ), ExtResource( 592 ), ExtResource( 606 ) ]
-palette_previews = [ ExtResource( 587 ), ExtResource( 594 ), ExtResource( 595 ), ExtResource( 603 ), ExtResource( 596 ), ExtResource( 592 ), ExtResource( 606 ) ]
+palette_icons = [ ExtResource( 587 ), ExtResource( 594 ), ExtResource( 595 ), ExtResource( 603 ), ExtResource( 596 ), ExtResource( 592 ), ExtResource( 606 ), ExtResource( 1554 ), ExtResource( 1558 ), ExtResource( 1556 ) ]
+palette_previews = [ ExtResource( 587 ), ExtResource( 594 ), ExtResource( 595 ), ExtResource( 603 ), ExtResource( 596 ), ExtResource( 592 ), ExtResource( 606 ), ExtResource( 1554 ), ExtResource( 1558 ), ExtResource( 1556 ) ]
 change_to = "CrystalSlopeRight"
 items_in_sequence = 4
 index_in_sequence = 2
@@ -3957,8 +4022,8 @@ preview = ExtResource( 587 )
 script = ExtResource( 24 )
 tileset_id = 35
 tile_id = 3
-palette_icons = [ ExtResource( 588 ), ExtResource( 609 ), ExtResource( 611 ), ExtResource( 613 ), ExtResource( 610 ), ExtResource( 612 ), ExtResource( 608 ) ]
-palette_previews = [ ExtResource( 588 ), ExtResource( 609 ), ExtResource( 611 ), ExtResource( 613 ), ExtResource( 610 ), ExtResource( 612 ), ExtResource( 608 ) ]
+palette_icons = [ ExtResource( 588 ), ExtResource( 609 ), ExtResource( 611 ), ExtResource( 613 ), ExtResource( 610 ), ExtResource( 612 ), ExtResource( 608 ), ExtResource( 1563 ), ExtResource( 1555 ), ExtResource( 1560 ) ]
+palette_previews = [ ExtResource( 588 ), ExtResource( 609 ), ExtResource( 611 ), ExtResource( 613 ), ExtResource( 610 ), ExtResource( 612 ), ExtResource( 608 ), ExtResource( 1563 ), ExtResource( 1555 ), ExtResource( 1560 ) ]
 change_to = "Crystal"
 items_in_sequence = 4
 index_in_sequence = 3
@@ -3968,8 +4033,49 @@ preview = ExtResource( 588 )
 [node name="BlackGranite" type="Node" parent="PlaceableItems/CaveGroup"]
 script = ExtResource( 24 )
 tileset_id = 19
+palette_icons = [ ExtResource( 197 ), ExtResource( 1571 ), ExtResource( 1568 ), ExtResource( 1572 ), ExtResource( 1574 ), ExtResource( 1570 ), ExtResource( 1575 ), ExtResource( 1569 ), ExtResource( 1573 ), ExtResource( 1576 ) ]
+palette_previews = [ ExtResource( 197 ), ExtResource( 1571 ), ExtResource( 1568 ), ExtResource( 1572 ), ExtResource( 1574 ), ExtResource( 1570 ), ExtResource( 1575 ), ExtResource( 1569 ), ExtResource( 1573 ), ExtResource( 1576 ) ]
+change_to = "BlackGraniteSlab"
+items_in_sequence = 4
 icon = ExtResource( 197 )
 preview = ExtResource( 197 )
+
+[node name="BlackGraniteSlab" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 24 )
+tileset_id = 19
+tile_id = 1
+palette_icons = [ ExtResource( 1565 ), ExtResource( 1585 ), ExtResource( 1579 ), ExtResource( 1577 ), ExtResource( 1583 ), ExtResource( 1578 ), ExtResource( 1580 ), ExtResource( 1584 ), ExtResource( 1582 ), ExtResource( 1581 ) ]
+palette_previews = [ ExtResource( 1565 ), ExtResource( 1585 ), ExtResource( 1579 ), ExtResource( 1577 ), ExtResource( 1583 ), ExtResource( 1578 ), ExtResource( 1580 ), ExtResource( 1584 ), ExtResource( 1582 ), ExtResource( 1581 ) ]
+change_to = "BlackGraniteSlopeLeft"
+items_in_sequence = 4
+index_in_sequence = 1
+icon = ExtResource( 1565 )
+preview = ExtResource( 1565 )
+
+[node name="BlackGraniteSlopeLeft" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 24 )
+tileset_id = 19
+tile_id = 2
+palette_icons = [ ExtResource( 1566 ), ExtResource( 1588 ), ExtResource( 1591 ), ExtResource( 1589 ), ExtResource( 1593 ), ExtResource( 1586 ), ExtResource( 1587 ), ExtResource( 1590 ), ExtResource( 1592 ), ExtResource( 1594 ) ]
+palette_previews = [ ExtResource( 1566 ), ExtResource( 1588 ), ExtResource( 1591 ), ExtResource( 1589 ), ExtResource( 1593 ), ExtResource( 1586 ), ExtResource( 1587 ), ExtResource( 1590 ), ExtResource( 1592 ), ExtResource( 1594 ) ]
+change_to = "BlackGraniteSlopeRight"
+items_in_sequence = 4
+index_in_sequence = 2
+icon = ExtResource( 1566 )
+preview = ExtResource( 1566 )
+
+[node name="BlackGraniteSlopeRight" type="Node" parent="PlaceableItems/CaveGroup"]
+script = ExtResource( 24 )
+tileset_id = 19
+tile_id = 3
+item_name = "BlackGraniteSlopeRight"
+palette_icons = [ ExtResource( 1567 ), ExtResource( 1598 ), ExtResource( 1600 ), ExtResource( 1601 ), ExtResource( 1597 ), ExtResource( 1596 ), ExtResource( 1595 ), ExtResource( 1602 ), ExtResource( 1599 ), ExtResource( 1603 ) ]
+palette_previews = [ ExtResource( 1567 ), ExtResource( 1598 ), ExtResource( 1600 ), ExtResource( 1601 ), ExtResource( 1597 ), ExtResource( 1596 ), ExtResource( 1595 ), ExtResource( 1602 ), ExtResource( 1599 ), ExtResource( 1603 ) ]
+change_to = "BlackGranite"
+items_in_sequence = 4
+index_in_sequence = 3
+icon = ExtResource( 1567 )
+preview = ExtResource( 1567 )
 
 [node name="CrystalSmall" type="Node" parent="PlaceableItems/CaveGroup"]
 script = ExtResource( 24 )
@@ -4632,8 +4738,34 @@ script = ExtResource( 24 )
 tileset_id = 20
 palette_icons = [ ExtResource( 200 ), ExtResource( 376 ), ExtResource( 375 ), ExtResource( 1357 ), ExtResource( 1353 ), ExtResource( 1359 ), ExtResource( 1366 ) ]
 palette_previews = [ ExtResource( 200 ), ExtResource( 376 ), ExtResource( 375 ), ExtResource( 1357 ), ExtResource( 1353 ), ExtResource( 1359 ), ExtResource( 1366 ) ]
+change_to = "CobblestoneSlopeLeft"
+items_in_sequence = 3
 icon = ExtResource( 200 )
 preview = ExtResource( 200 )
+
+[node name="CobblestoneSlopeRight" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 24 )
+tileset_id = 20
+tile_id = 3
+palette_icons = [ ExtResource( 1605 ), ExtResource( 1616 ), ExtResource( 1617 ), ExtResource( 1609 ), ExtResource( 1607 ), ExtResource( 1610 ), ExtResource( 1608 ) ]
+palette_previews = [ ExtResource( 1605 ), ExtResource( 1616 ), ExtResource( 1617 ), ExtResource( 1609 ), ExtResource( 1607 ), ExtResource( 1610 ), ExtResource( 1608 ) ]
+change_to = "Cobblestone"
+items_in_sequence = 3
+index_in_sequence = 2
+icon = ExtResource( 1605 )
+preview = ExtResource( 1605 )
+
+[node name="CobblestoneSlopeLeft" type="Node" parent="PlaceableItems/BuildingGroup"]
+script = ExtResource( 24 )
+tileset_id = 20
+tile_id = 2
+palette_icons = [ ExtResource( 1604 ), ExtResource( 1606 ), ExtResource( 1613 ), ExtResource( 1611 ), ExtResource( 1615 ), ExtResource( 1614 ), ExtResource( 1612 ) ]
+palette_previews = [ ExtResource( 1604 ), ExtResource( 1606 ), ExtResource( 1613 ), ExtResource( 1611 ), ExtResource( 1615 ), ExtResource( 1614 ), ExtResource( 1612 ) ]
+change_to = "CobblestoneSlopeRight"
+items_in_sequence = 3
+index_in_sequence = 1
+icon = ExtResource( 1604 )
+preview = ExtResource( 1604 )
 
 [node name="AirshipWindow" type="Node" parent="PlaceableItems/BuildingGroup"]
 script = ExtResource( 24 )
