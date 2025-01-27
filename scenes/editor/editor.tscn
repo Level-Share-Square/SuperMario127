@@ -1,4 +1,4 @@
-[gd_scene load_steps=1653 format=2]
+[gd_scene load_steps=1678 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -1617,6 +1617,31 @@
 [ext_resource path="res://assets/tiles/cobblestone/palette_icons/4_slopeL.png" type="Texture" id=1615]
 [ext_resource path="res://assets/tiles/cobblestone/palette_icons/1_slopeR.png" type="Texture" id=1616]
 [ext_resource path="res://assets/tiles/cobblestone/palette_icons/2_slopeR.png" type="Texture" id=1617]
+[ext_resource path="res://assets/tiles/grass/palette_icons/7_block.png" type="Texture" id=1618]
+[ext_resource path="res://assets/tiles/grass/palette_icons/9_block.png" type="Texture" id=1619]
+[ext_resource path="res://assets/tiles/grass/palette_icons/6_block.png" type="Texture" id=1620]
+[ext_resource path="res://assets/tiles/grass/palette_icons/8_block.png" type="Texture" id=1621]
+[ext_resource path="res://assets/tiles/grass/palette_icons/6_slab.png" type="Texture" id=1622]
+[ext_resource path="res://assets/tiles/grass/palette_icons/8_slab.png" type="Texture" id=1623]
+[ext_resource path="res://assets/tiles/grass/palette_icons/7_slab.png" type="Texture" id=1624]
+[ext_resource path="res://assets/tiles/grass/palette_icons/9_slab.png" type="Texture" id=1625]
+[ext_resource path="res://assets/tiles/grass/palette_icons/6_slopeL.png" type="Texture" id=1626]
+[ext_resource path="res://assets/tiles/grass/palette_icons/8_slopeR.png" type="Texture" id=1627]
+[ext_resource path="res://assets/tiles/grass/palette_icons/7_slopeL.png" type="Texture" id=1628]
+[ext_resource path="res://assets/tiles/grass/palette_icons/7_slopeR.png" type="Texture" id=1629]
+[ext_resource path="res://assets/tiles/grass/palette_icons/9_slopeL.png" type="Texture" id=1630]
+[ext_resource path="res://assets/tiles/grass/palette_icons/6_slopeR.png" type="Texture" id=1631]
+[ext_resource path="res://assets/tiles/grass/palette_icons/8_slopeL.png" type="Texture" id=1632]
+[ext_resource path="res://assets/tiles/grass/palette_icons/9_slopeR.png" type="Texture" id=1633]
+[ext_resource path="res://assets/tiles/garden/palette_icons/5_block.png" type="Texture" id=1634]
+[ext_resource path="res://assets/tiles/garden/palette_icons/5_slab.png" type="Texture" id=1635]
+[ext_resource path="res://assets/tiles/garden/palette_icons/5_slopeL.png" type="Texture" id=1636]
+[ext_resource path="res://assets/tiles/garden/palette_icons/5_slopeR.png" type="Texture" id=1637]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/6/icon.png" type="Texture" id=1638]
+[ext_resource path="res://scenes/actors/objects/big_bush/palettes/6/big_bush.png" type="Texture" id=1639]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/6/small_bush.png" type="Texture" id=1640]
+[ext_resource path="res://scenes/actors/objects/small_bush/palettes/6/icon.png" type="Texture" id=1641]
+[ext_resource path="res://scenes/actors/objects/flower_bush/palettes/6_icon.png" type="Texture" id=1642]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -3509,8 +3534,8 @@ group_name = "Grass"
 [node name="Grass" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 24 )
 tileset_id = 2
-palette_icons = [ ExtResource( 10 ), ExtResource( 243 ), ExtResource( 242 ), ExtResource( 244 ), ExtResource( 241 ), ExtResource( 368 ) ]
-palette_previews = [ ExtResource( 10 ), ExtResource( 243 ), ExtResource( 242 ), ExtResource( 244 ), ExtResource( 241 ), ExtResource( 368 ) ]
+palette_icons = [ ExtResource( 10 ), ExtResource( 243 ), ExtResource( 242 ), ExtResource( 244 ), ExtResource( 241 ), ExtResource( 368 ), ExtResource( 1619 ), ExtResource( 1620 ), ExtResource( 1618 ), ExtResource( 1621 ) ]
+palette_previews = [ ExtResource( 10 ), ExtResource( 243 ), ExtResource( 242 ), ExtResource( 244 ), ExtResource( 241 ), ExtResource( 368 ), ExtResource( 1619 ), ExtResource( 1620 ), ExtResource( 1618 ), ExtResource( 1621 ) ]
 change_to = "GrassSlab"
 items_in_sequence = 4
 icon = ExtResource( 10 )
@@ -3520,8 +3545,8 @@ preview = ExtResource( 10 )
 script = ExtResource( 24 )
 tileset_id = 2
 tile_id = 1
-palette_icons = [ ExtResource( 63 ), ExtResource( 251 ), ExtResource( 247 ), ExtResource( 246 ), ExtResource( 249 ), ExtResource( 369 ) ]
-palette_previews = [ ExtResource( 63 ), ExtResource( 251 ), ExtResource( 247 ), ExtResource( 246 ), ExtResource( 249 ), ExtResource( 369 ) ]
+palette_icons = [ ExtResource( 63 ), ExtResource( 251 ), ExtResource( 247 ), ExtResource( 246 ), ExtResource( 249 ), ExtResource( 369 ), ExtResource( 1625 ), ExtResource( 1622 ), ExtResource( 1624 ), ExtResource( 1623 ) ]
+palette_previews = [ ExtResource( 63 ), ExtResource( 251 ), ExtResource( 247 ), ExtResource( 246 ), ExtResource( 249 ), ExtResource( 369 ), ExtResource( 1625 ), ExtResource( 1622 ), ExtResource( 1624 ), ExtResource( 1623 ) ]
 change_to = "GrassSlopeLeft"
 items_in_sequence = 4
 index_in_sequence = 1
@@ -3532,8 +3557,8 @@ preview = ExtResource( 63 )
 script = ExtResource( 24 )
 tileset_id = 2
 tile_id = 2
-palette_icons = [ ExtResource( 14 ), ExtResource( 248 ), ExtResource( 255 ), ExtResource( 254 ), ExtResource( 252 ), ExtResource( 367 ) ]
-palette_previews = [ ExtResource( 14 ), ExtResource( 248 ), ExtResource( 255 ), ExtResource( 254 ), ExtResource( 252 ), ExtResource( 367 ) ]
+palette_icons = [ ExtResource( 14 ), ExtResource( 248 ), ExtResource( 255 ), ExtResource( 254 ), ExtResource( 252 ), ExtResource( 367 ), ExtResource( 1630 ), ExtResource( 1626 ), ExtResource( 1628 ), ExtResource( 1632 ) ]
+palette_previews = [ ExtResource( 14 ), ExtResource( 248 ), ExtResource( 255 ), ExtResource( 254 ), ExtResource( 252 ), ExtResource( 367 ), ExtResource( 1630 ), ExtResource( 1626 ), ExtResource( 1628 ), ExtResource( 1632 ) ]
 change_to = "GrassSlopeRight"
 items_in_sequence = 4
 index_in_sequence = 2
@@ -3544,8 +3569,8 @@ preview = ExtResource( 14 )
 script = ExtResource( 24 )
 tileset_id = 2
 tile_id = 3
-palette_icons = [ ExtResource( 13 ), ExtResource( 245 ), ExtResource( 253 ), ExtResource( 256 ), ExtResource( 250 ), ExtResource( 366 ) ]
-palette_previews = [ ExtResource( 13 ), ExtResource( 245 ), ExtResource( 253 ), ExtResource( 256 ), ExtResource( 250 ), ExtResource( 366 ) ]
+palette_icons = [ ExtResource( 13 ), ExtResource( 245 ), ExtResource( 253 ), ExtResource( 256 ), ExtResource( 250 ), ExtResource( 366 ), ExtResource( 1633 ), ExtResource( 1631 ), ExtResource( 1629 ), ExtResource( 1627 ) ]
+palette_previews = [ ExtResource( 13 ), ExtResource( 245 ), ExtResource( 253 ), ExtResource( 256 ), ExtResource( 250 ), ExtResource( 366 ), ExtResource( 1633 ), ExtResource( 1631 ), ExtResource( 1629 ), ExtResource( 1627 ) ]
 change_to = "Grass"
 items_in_sequence = 4
 index_in_sequence = 3
@@ -3555,8 +3580,8 @@ preview = ExtResource( 13 )
 [node name="Garden" type="Node" parent="PlaceableItems/GrassGroup"]
 script = ExtResource( 24 )
 tileset_id = 34
-palette_icons = [ ExtResource( 560 ), ExtResource( 565 ), ExtResource( 564 ), ExtResource( 566 ), ExtResource( 568 ), ExtResource( 567 ) ]
-palette_previews = [ ExtResource( 560 ), ExtResource( 565 ), ExtResource( 564 ), ExtResource( 566 ), ExtResource( 568 ), ExtResource( 567 ) ]
+palette_icons = [ ExtResource( 560 ), ExtResource( 565 ), ExtResource( 564 ), ExtResource( 566 ), ExtResource( 568 ), ExtResource( 567 ), ExtResource( 1634 ) ]
+palette_previews = [ ExtResource( 560 ), ExtResource( 565 ), ExtResource( 564 ), ExtResource( 566 ), ExtResource( 568 ), ExtResource( 567 ), ExtResource( 1634 ) ]
 change_to = "GardenSlab"
 items_in_sequence = 4
 icon = ExtResource( 560 )
@@ -3566,8 +3591,8 @@ preview = ExtResource( 560 )
 script = ExtResource( 24 )
 tileset_id = 34
 tile_id = 1
-palette_icons = [ ExtResource( 561 ), ExtResource( 569 ), ExtResource( 570 ), ExtResource( 571 ), ExtResource( 572 ), ExtResource( 573 ) ]
-palette_previews = [ ExtResource( 561 ), ExtResource( 569 ), ExtResource( 570 ), ExtResource( 571 ), ExtResource( 572 ), ExtResource( 573 ) ]
+palette_icons = [ ExtResource( 561 ), ExtResource( 569 ), ExtResource( 570 ), ExtResource( 571 ), ExtResource( 572 ), ExtResource( 573 ), ExtResource( 1635 ) ]
+palette_previews = [ ExtResource( 561 ), ExtResource( 569 ), ExtResource( 570 ), ExtResource( 571 ), ExtResource( 572 ), ExtResource( 573 ), ExtResource( 1635 ) ]
 change_to = "GardenSlopeLeft"
 items_in_sequence = 4
 index_in_sequence = 1
@@ -3578,8 +3603,8 @@ preview = ExtResource( 561 )
 script = ExtResource( 24 )
 tileset_id = 34
 tile_id = 2
-palette_icons = [ ExtResource( 563 ), ExtResource( 574 ), ExtResource( 575 ), ExtResource( 576 ), ExtResource( 582 ), ExtResource( 577 ) ]
-palette_previews = [ ExtResource( 563 ), ExtResource( 574 ), ExtResource( 575 ), ExtResource( 576 ), ExtResource( 582 ), ExtResource( 577 ) ]
+palette_icons = [ ExtResource( 563 ), ExtResource( 574 ), ExtResource( 575 ), ExtResource( 576 ), ExtResource( 582 ), ExtResource( 577 ), ExtResource( 1636 ) ]
+palette_previews = [ ExtResource( 563 ), ExtResource( 574 ), ExtResource( 575 ), ExtResource( 576 ), ExtResource( 582 ), ExtResource( 577 ), ExtResource( 1636 ) ]
 change_to = "GardenSlopeRight"
 items_in_sequence = 4
 index_in_sequence = 2
@@ -3590,8 +3615,8 @@ preview = ExtResource( 563 )
 script = ExtResource( 24 )
 tileset_id = 34
 tile_id = 3
-palette_icons = [ ExtResource( 562 ), ExtResource( 580 ), ExtResource( 583 ), ExtResource( 579 ), ExtResource( 578 ), ExtResource( 581 ) ]
-palette_previews = [ ExtResource( 562 ), ExtResource( 580 ), ExtResource( 583 ), ExtResource( 579 ), ExtResource( 578 ), ExtResource( 581 ) ]
+palette_icons = [ ExtResource( 562 ), ExtResource( 580 ), ExtResource( 583 ), ExtResource( 579 ), ExtResource( 578 ), ExtResource( 581 ), ExtResource( 1637 ) ]
+palette_previews = [ ExtResource( 562 ), ExtResource( 580 ), ExtResource( 583 ), ExtResource( 579 ), ExtResource( 578 ), ExtResource( 581 ), ExtResource( 1637 ) ]
 change_to = "Garden"
 items_in_sequence = 4
 index_in_sequence = 3
@@ -3642,8 +3667,8 @@ object_id = 11
 is_object = true
 object_center = Vector2( 32, 20 )
 tile_mode_offset = Vector2( 16, 4 )
-palette_icons = [ ExtResource( 82 ), ExtResource( 491 ), ExtResource( 484 ), ExtResource( 489 ), ExtResource( 483 ), ExtResource( 482 ) ]
-palette_previews = [ ExtResource( 79 ), ExtResource( 479 ), ExtResource( 473 ), ExtResource( 478 ), ExtResource( 480 ), ExtResource( 476 ) ]
+palette_icons = [ ExtResource( 82 ), ExtResource( 491 ), ExtResource( 484 ), ExtResource( 489 ), ExtResource( 483 ), ExtResource( 482 ), ExtResource( 1638 ) ]
+palette_previews = [ ExtResource( 79 ), ExtResource( 479 ), ExtResource( 473 ), ExtResource( 478 ), ExtResource( 480 ), ExtResource( 476 ), ExtResource( 1639 ) ]
 change_to = "SmallBush"
 items_in_sequence = 2
 index_in_sequence = 1
@@ -3656,8 +3681,8 @@ object_id = 12
 is_object = true
 object_center = Vector2( 32, 12 )
 tile_mode_offset = Vector2( 16, -4 )
-palette_icons = [ ExtResource( 81 ), ExtResource( 486 ), ExtResource( 481 ), ExtResource( 488 ), ExtResource( 492 ), ExtResource( 490 ) ]
-palette_previews = [ ExtResource( 80 ), ExtResource( 477 ), ExtResource( 474 ), ExtResource( 475 ), ExtResource( 487 ), ExtResource( 485 ) ]
+palette_icons = [ ExtResource( 81 ), ExtResource( 486 ), ExtResource( 481 ), ExtResource( 488 ), ExtResource( 492 ), ExtResource( 490 ), ExtResource( 1641 ) ]
+palette_previews = [ ExtResource( 80 ), ExtResource( 477 ), ExtResource( 474 ), ExtResource( 475 ), ExtResource( 487 ), ExtResource( 485 ), ExtResource( 1640 ) ]
 change_to = "BigBush"
 items_in_sequence = 2
 icon = ExtResource( 81 )
@@ -3669,8 +3694,8 @@ object_id = 78
 is_object = true
 object_center = Vector2( 32, 12 )
 tile_mode_offset = Vector2( 16, -4 )
-palette_icons = [ ExtResource( 335 ), ExtResource( 1408 ), ExtResource( 1405 ), ExtResource( 1409 ), ExtResource( 1412 ), ExtResource( 1413 ) ]
-palette_previews = [ ExtResource( 335 ), ExtResource( 1408 ), ExtResource( 1405 ), ExtResource( 1409 ), ExtResource( 1412 ), ExtResource( 1413 ) ]
+palette_icons = [ ExtResource( 335 ), ExtResource( 1408 ), ExtResource( 1405 ), ExtResource( 1409 ), ExtResource( 1412 ), ExtResource( 1413 ), ExtResource( 1642 ) ]
+palette_previews = [ ExtResource( 335 ), ExtResource( 1408 ), ExtResource( 1405 ), ExtResource( 1409 ), ExtResource( 1412 ), ExtResource( 1413 ), ExtResource( 1642 ) ]
 icon = ExtResource( 335 )
 preview = ExtResource( 335 )
 

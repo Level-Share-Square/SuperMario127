@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/actors/objects/flower_bush/palettes/1_icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/objects/flower_bush/flower_bush.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/actors/objects/flower_bush/palettes/3_icon.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/flower_bush/icon.png" type="Texture" id=7]
 [ext_resource path="res://shaders/bend_shader.gdshader" type="Shader" id=8]
+[ext_resource path="res://scenes/actors/objects/flower_bush/palettes/6_icon.png" type="Texture" id=9]
 
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
@@ -21,7 +22,7 @@ extents = Vector2( 17, 8.5 )
 [node name="FlowerBush" type="Node2D"]
 z_index = -1
 script = ExtResource( 2 )
-palette_textures = [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 3 ) ]
+palette_textures = [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 9 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 4 )
