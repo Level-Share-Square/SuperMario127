@@ -20,6 +20,7 @@ onready var raycasts = [grounded_check]
 var dead = false
 var character
 var character_damage
+var wander: = true
 
 var gravity : float
 var gravity_scale : float
@@ -42,11 +43,11 @@ var loaded = true
 var snap := Vector2(0, 12)
 
 func _set_properties():
-	savable_properties = []
-	editable_properties = []
+	savable_properties = ["wander"]
+	editable_properties = ["wander"]
 	
 func _set_property_values():
-	pass
+	set_property("wander", wander, false)
 
 func player_entered(body):
 	if enabled and body.name.begins_with("Character") and !dead and character == null:
@@ -213,7 +214,7 @@ func _physics_process(delta):
 		sprite.flip_h = true if facing_direction == 1 else false
 		velocity = kinematic_body.move_and_slide_with_snap(Vector2(velocity.x, velocity.y + (gravity * 2) * gravity_scale), snap, Vector2.UP, true, 4, deg2rad(46))
 		if character == null:
-			if walk_wait > 0:
+			if walk_wait > 0 and wander:
 				sprite.animation = "default"
 				velocity.x = lerp(velocity.x, 0, fps_util.PHYSICS_DELTA * accel)
 				walk_wait -= delta
