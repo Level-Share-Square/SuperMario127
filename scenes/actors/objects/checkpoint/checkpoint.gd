@@ -10,16 +10,16 @@ var is_used := false
 
 var save_water_level := true
 var save_switch_state := true
-var spawn_y_offset := 0.0
+var spawn_offset := Vector2(0,0)
 var id = 0
 
 func _set_properties():
-	savable_properties = ["save_water_level", "spawn_y_offset", "save_switch_state", "id"]
-	editable_properties = ["save_water_level", "save_switch_state", "spawn_y_offset"]
+	savable_properties = ["save_water_level", "spawn_offset", "save_switch_state", "id"]
+	editable_properties = ["save_water_level", "save_switch_state", "spawn_offset"]
 	
 func _set_property_values():
 	set_property("save_water_level", save_water_level, true)
-	set_property("spawn_y_offset", spawn_y_offset, true)
+	set_property("spawn_offset", spawn_offset, true)
 	set_property("save_switch_state", save_switch_state, true)	
 
 func _ready():
@@ -27,7 +27,7 @@ func _ready():
 	
 	var _connect = use_area.connect("body_entered", self, "set_checkpoint")
 	Singleton.CurrentLevelData.set_checkpoint_ids()
-	id = level_object.get_ref().properties[6]
+	id = level_object.get_ref().properties[7]
 	if Singleton.CheckpointSaved.current_checkpoint_id == id:
 		is_used = true
 	
@@ -55,7 +55,7 @@ func set_checkpoint(body):
 	is_used = true
 	
 	Singleton.CheckpointSaved.current_checkpoint_id = id
-	Singleton.CheckpointSaved.current_spawn_pos = global_position + Vector2(0, spawn_y_offset)
+	Singleton.CheckpointSaved.current_spawn_pos = global_position + spawn_offset
 	Singleton.CheckpointSaved.current_area = Singleton.CurrentLevelData.area
 	Singleton.CheckpointSaved.current_coins = Singleton.CurrentLevelData.level_data.vars.coins_collected
 	Singleton.CheckpointSaved.nozzles_collected = Singleton.CurrentLevelData.level_data.vars.nozzles_collected.duplicate(true)
