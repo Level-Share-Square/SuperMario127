@@ -2,7 +2,7 @@ extends Control
 
 export var line_edit : NodePath
 
-var pressed = false
+var is_pressed = false
 var last_hovered = false
 
 onready var hover_sound = $HoverSound
@@ -18,7 +18,7 @@ func _process(_delta):
 	last_hovered = text.is_hovered()
 
 func pressed():
-	if pressed == false:
+	if is_pressed == false:
 		click_sound.play()
 		var window = preload("res://scenes/editor/window/TextInput.tscn")
 		var window_child = window.instance()
@@ -27,8 +27,9 @@ func pressed():
 		window_child.set_as_toplevel(true)
 		window_child.get_node("Contents/TextEdit").text = text.text
 		window_child.get_node("Contents/CancelButton").string = self
+		window_child.get_node("CloseButton").string = self
 		window_child.get_node("Contents/SaveButton").string = self
-		pressed = true
+		toggle_pressed()
 
 
 func set_value(value: String):
@@ -38,5 +39,9 @@ func get_value() -> String:
 	return text.text
 
 func update_value():
-	pressed = false
+	toggle_pressed()
 	get_node("../").update_value(get_value())
+
+func toggle_pressed() -> void:
+	
+	is_pressed = !is_pressed

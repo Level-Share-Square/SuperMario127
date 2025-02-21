@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
@@ -8,12 +8,14 @@
 [ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=6]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://scenes/editor/property_type_scenes/PoolStringArray/base/DialogueSaveButton.gd" type="Script" id=8]
+[ext_resource path="res://scenes/editor/property_type_scenes/PoolStringArray/base/CancelButton.gd" type="Script" id=9]
 [ext_resource path="res://assets/styles/ButtonStyleDisabled.tres" type="StyleBox" id=10]
 [ext_resource path="res://scenes/editor/property_type_scenes/PoolStringArray/base/body_preview.png" type="Texture" id=11]
 [ext_resource path="res://scenes/editor/property_type_scenes/PoolStringArray/base/head_preview.png" type="Texture" id=12]
 [ext_resource path="res://scenes/editor/property_type_scenes/PoolStringArray/base/facing_dir.gd" type="Script" id=13]
 [ext_resource path="res://scenes/shared/ui/selector.tres" type="Theme" id=14]
 [ext_resource path="res://scenes/editor/property_type_scenes/PoolStringArray/base/player_preview.png" type="Texture" id=15]
+[ext_resource path="res://scenes/editor/property_type_scenes/PoolStringArray/base/CloseButton.gd" type="Script" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -121,6 +123,7 @@ bbcode_text = "Text"
 text = "Text"
 
 [node name="CloseButton" type="TextureButton" parent="."]
+unique_name_in_owner = true
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -170.0
@@ -130,6 +133,7 @@ rect_scale = Vector2( 0.95, 0.95 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 4 )
+script = ExtResource( 16 )
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 2 )
@@ -432,6 +436,7 @@ custom_styles/normal = SubResource( 15 )
 shortcut_in_tooltip = false
 action_mode = 0
 text = "Cancel"
+script = ExtResource( 9 )
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/VBoxContainer/Buttons/CancelButton"]
 stream = ExtResource( 2 )

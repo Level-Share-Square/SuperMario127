@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://scenes/editor/window/SaveButton2.gd" type="Script" id=8]
 [ext_resource path="res://scenes/editor/window/CancelButton.gd" type="Script" id=9]
+[ext_resource path="res://scenes/editor/window/CloseButton.gd" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 56
@@ -84,9 +85,7 @@ rect_scale = Vector2( 0.95, 0.95 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+script = ExtResource( 10 )
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 2 )

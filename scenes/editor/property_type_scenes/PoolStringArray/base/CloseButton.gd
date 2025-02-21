@@ -1,4 +1,5 @@
-extends Button
+extends TextureButton
+
 
 var string: Control
 
@@ -9,7 +10,7 @@ var string: Control
 
 func _pressed():
 	string.toggle_pressed()
-	get_parent().get_parent().close()
+	get_parent().close()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
