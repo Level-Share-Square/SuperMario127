@@ -2,7 +2,7 @@ extends Control
 
 export var line_edit : NodePath
 
-var pressed = false
+var is_pressed = false
 var last_hovered = false
 
 onready var hover_sound = $HoverSound
@@ -20,7 +20,7 @@ func _process(_delta):
 	last_hovered = text.is_hovered()
 
 func pressed():
-	if pressed == false:
+	if is_pressed == false:
 		click_sound.play()
 		var window = preload("res://scenes/editor/property_type_scenes/PoolStringArray/base/DialogueInput.tscn")
 		var window_child = window.instance()
@@ -28,8 +28,10 @@ func pressed():
 		get_parent().get_parent().get_parent().get_parent().add_child(window_child)
 		window_child.set_as_toplevel(true)
 		window_child.get_node("%TextEdit").text = dialogue[0]
+		window_child.get_node("%CancelButton").string = self
+		window_child.get_node("%CloseButton").string = self
 		window_child.get_node("%SaveButton").string = self
-		pressed = true
+		toggle_pressed()
 
 
 func set_value(value: PoolStringArray):
@@ -39,5 +41,9 @@ func get_value() -> PoolStringArray:
 	return dialogue
 
 func update_value():
-	pressed = false
+	toggle_pressed()
 	get_node("../").update_value(get_value())
+
+func toggle_pressed() -> void:
+	
+	is_pressed = !is_pressed
