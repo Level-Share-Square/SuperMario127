@@ -86,9 +86,18 @@ func move_area_down():
 		area1.duplicate(Singleton.CurrentLevelData.level_data.areas[id])
 		area1.settings = Singleton.CurrentLevelData.level_data.areas[id].settings
 		Singleton.CurrentLevelData.level_data.areas.remove(id)
-		if Singleton.CurrentLevelData.area > id:
-			Singleton.CurrentLevelData.area -= 1
 		Singleton.CurrentLevelData.level_data.areas.insert(id+1, area1)
+		
+		# Properly re-assign the current area.
+		if (Singleton.CurrentLevelData.area == id):
+			# If the area we're moving is the current area.
+			Singleton.CurrentLevelData.area += 1
+			
+		elif (abs(Singleton.CurrentLevelData.area - id) == 1):
+			# If the area we're moving is next to the current area.
+			Singleton.CurrentLevelData.area -= 1
+			
+		# Don't re-assign the current area if it isn't next to the area we're moving.
 		get_parent().get_parent().get_parent().reload_areas()
 
 func move_area_up():
@@ -97,7 +106,14 @@ func move_area_up():
 		area1.duplicate(Singleton.CurrentLevelData.level_data.areas[id])
 		area1.settings = Singleton.CurrentLevelData.level_data.areas[id].settings
 		Singleton.CurrentLevelData.level_data.areas.remove(id)
-		if Singleton.CurrentLevelData.area > id:
-			Singleton.CurrentLevelData.area -= 1
 		Singleton.CurrentLevelData.level_data.areas.insert(id-1, area1)
+		
+		if (Singleton.CurrentLevelData.area == id):
+			
+			Singleton.CurrentLevelData.area -= 1
+			
+		elif (abs(Singleton.CurrentLevelData.area - id) == 1):
+			
+			Singleton.CurrentLevelData.area += 1
+			
 		get_parent().get_parent().get_parent().reload_areas()
