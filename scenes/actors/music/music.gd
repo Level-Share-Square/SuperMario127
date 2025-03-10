@@ -148,6 +148,9 @@ func change_song(old_setting, music_setting) -> void:
 	if typeof(music_setting) == TYPE_INT:
 		song = get_song(music_setting)
 	elif typeof(music_setting) == TYPE_STRING:
+		# Custom music can't have water variations currently
+		# Set has_water to false whenever loading custom music
+		has_water = false
 		if typeof(music_setting) != typeof(old_setting) or music_setting != old_setting:
 			base_volume = 0
 			handle_custom_song(music_setting)
