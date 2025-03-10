@@ -20,7 +20,7 @@ front_tilemap = NodePath("Front")
 
 [node name="VeryBack" type="TileMap" parent="Tilemaps"]
 modulate = Color( 0.545098, 0.545098, 0.545098, 1 )
-z_index = -10
+z_index = -11
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 262144

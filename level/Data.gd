@@ -244,6 +244,10 @@ func load_in(code):
 	
 	if result.format_version == "0.4.9":
 		result = conversion_util.convert_049_to_050(result)
+	
+	#uncomment this when the conversion function is finished
+	#if result.format_version == "0.5.0":
+	#	result = conversion_util.convert_050_to_051(result)
 
 	if result.format_version == "0.5.0":
 		result.format_version = "0.5.1"
