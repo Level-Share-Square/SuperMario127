@@ -91,9 +91,21 @@ func change_areas(entering_character : Character, entering, force_fadeout):
 			character2 = get_tree().get_current_scene().get_node(get_tree().get_current_scene().character2)
 	if area_id >= Singleton.CurrentLevelData.level_data.areas.size():
 		area_id = Singleton.CurrentLevelData.area
+	
 	if entering:
 		if is_instance_valid(timer_manager):
-			timer_manager.remove_timer("area_timer")
+			
+			if (area_id == Singleton.CurrentLevelData.area):
+				
+				var area_timer: Control = timer_manager.get_timer("area_timer")
+				
+				if (is_instance_valid(area_timer) && area_timer.time < .65):
+					# Don't chage the area if the area timer is too low.
+					# Ideally the time left would just be carried over after reloading the area.
+					# This only happens when the player teleports from and to the same area.
+					return
+			else:
+				timer_manager.remove_timer("area_timer")
 		else:
 			printerr("Couldn't find timer manager node!")
 		

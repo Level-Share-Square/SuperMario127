@@ -161,6 +161,7 @@ var state : State = null
 var last_state : State = null
 var switching_state := false
 export var controllable := true
+export var shine_cutscene: bool = false
 export var auto_flip := true
 export var invulnerable := false
 export var invulnerable_frames := 0

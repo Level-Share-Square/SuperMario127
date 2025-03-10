@@ -302,10 +302,13 @@ func unpause_game() -> void:
 
 func collect(body : PhysicsBody2D) -> void:
 	if activated and enabled and !collected and body.name.begins_with("Character") and body.controllable:
+		
+		var timer_manager = get_node("/root").get_node("Player").get_timer_manager()
+		timer_manager.pause_resume_timer("area_timer",true)
+		
 		character = body
 		
 		if do_kick_out:
-			var timer_manager = get_node("/root").get_node("Player").get_timer_manager()
 			if is_instance_valid(timer_manager):
 				timer_manager.remove_timer("area_timer")
 			else:
@@ -323,6 +326,7 @@ func collect(body : PhysicsBody2D) -> void:
 		character.velocity.x = 0
 		character.sprite.rotation_degrees = 0
 		character.controllable = false
+		character.shine_cutscene = true
 
 		# fixes the player being in the ground if they dive into a shine in the air
 		#character.set_state(null, get_physics_process_delta_time())
@@ -436,6 +440,9 @@ func restore_control(animation : String, character : Character) -> void:
 	# return the character to a state they can actually move around in
 	character.set_state(null, get_physics_process_delta_time())
 	character.controllable = true
+	character.shine_cutscene = false
+	var timer_manager = get_node("/root").get_node("Player").get_timer_manager()
+	timer_manager.pause_resume_timer("area_timer",false)
 	
 	# to prevent cheese on other shine time scores
 	Singleton.CurrentLevelData.start_tracking_time_score()
