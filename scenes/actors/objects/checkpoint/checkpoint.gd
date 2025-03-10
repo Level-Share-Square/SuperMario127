@@ -27,7 +27,7 @@ func _ready():
 	
 	var _connect = use_area.connect("body_entered", self, "set_checkpoint")
 	Singleton.CurrentLevelData.set_checkpoint_ids()
-	id = level_object.get_ref().properties[6]
+	id = level_object.get_ref().properties[7]
 	if Singleton.CheckpointSaved.current_checkpoint_id == id:
 		is_used = true
 	
