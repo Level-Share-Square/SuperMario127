@@ -24,6 +24,13 @@ func _process(_delta):
 	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4
 
 func _physics_process(delta):
+	var viewport_rect : Rect2 = get_viewport_rect()
+	viewport_rect.size = Vector2(768, 432) * get_node(camera).zoom
+	viewport_rect.position = -get_canvas_transform().get_origin()
+#	print(viewport_rect)
+	get_node("%SharedSounds").saw_sound.handle_saw_sound_position(viewport_rect)
+	get_node("%SharedSounds").blaster_sound.handle_blast_sound_position(viewport_rect)
+	
 	if switch_timer > 0:
 		switch_timer -= delta
 		sound_timer -= delta
@@ -125,6 +132,13 @@ func update_activity() -> void:
 	var result = yield(Discord.activity_manager.update_activity(activity), "result").result
 	if result != Discord.Result.Ok:
 		printerr(str(result))
+
+
+func get_characters() -> Array:
+	var array: Array = [get_node(character)]
+	if Singleton.PlayerSettings.number_of_players == 2:
+		array.append(get_node(character2))
+	return array
 
 
 # todo: mayb move this stuff elsewhere?? question mark? ?? ?

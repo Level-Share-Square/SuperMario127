@@ -49,7 +49,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 23.0868
+radius = 23.0
 
 [sub_resource type="CircleShape2D" id=6]
 radius = 27.0185
@@ -64,7 +64,7 @@ curve = SubResource( 4 )
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 rotate = false
 
-[node name="Saw" type="Node2D" parent="Path2D/PathFollow2D"]
+[node name="Saw" type="Node2D" parent="Path2D/PathFollow2D" groups=["sawblades"]]
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Path2D/PathFollow2D/Saw"]
@@ -81,7 +81,7 @@ shape = SubResource( 3 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Path2D/PathFollow2D/Saw"]
 stream = ExtResource( 5 )
-volume_db = 10.0
+volume_db = 7.0
 bus = "Sounds"
 
 [node name="EditorSprite" type="AnimatedSprite" parent="."]

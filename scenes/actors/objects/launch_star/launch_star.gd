@@ -182,7 +182,7 @@ func physics_process_launch(delta:float):
 	mario.sprite.rotation = lerp_angle(mario.sprite.rotation, pathfollow.rotation + PI/2, clamp(0.008 * speed, 0, 1))
 	#mario.sprite.rotation_degrees += 90
 	
-	
+	speed = max(speed,1) # Speeds lower than 1 softlock the player.
 
 	# reached end
 	#todo: fix exit velocity

@@ -48,10 +48,12 @@ func add_set_timer(timer_name: String, timer_amount: float, sound: String = "non
 	timer_node.kill_on_end = kill_on_end
 	return timer_node
 
+
 func get_timer(timer_name: String) -> Control:
 	var timer_node: Control = grid.get_node_or_null(timer_name)
 	
 	return timer_node
+
 
 func pause_resume_timer(timer_name: String, pause: bool):
 	var timer_node: Control = grid.get_node_or_null(timer_name)
@@ -59,13 +61,16 @@ func pause_resume_timer(timer_name: String, pause: bool):
 		return
 	
 	timer_node.is_counting = !pause
+	print(timer_node)
+	print(timer_node.is_counting)
+
 
 func remove_timer(timer_name: String):
 	var timer_node: Control = grid.get_node_or_null(timer_name)
 	if not is_instance_valid(timer_node):
 		return
 	
-	timer_node.time = 0
+	timer_node.stop()
 
 
 func add_radial_timer(timer_name: String, read_node: Node, read_property: String, icon: Texture = null, set_max: bool = true) -> Control:	

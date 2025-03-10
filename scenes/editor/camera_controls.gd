@@ -82,7 +82,6 @@ func _physics_process(delta):
 	if up_held or down_held or left_held or right_held:
 		move_dir = Input.get_vector("editor_left", "editor_right", "editor_up", "editor_down")
 	
-
 	position += move_dir*move_speed*60*delta
 	resolve_limit_collisions()
 		

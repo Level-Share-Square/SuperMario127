@@ -1,5 +1,6 @@
 extends GameObject
 
+onready var area = $Area2D
 onready var area_shape = $Area2D/CollisionShape2D
 onready var sprite = $AnimatedSprite
 onready var sprite_1 = $AnimatedSprite/Color1
@@ -30,6 +31,8 @@ func _ready():
 	next_state_timer = burning_time if !reversed else retracted_time
 	
 	next_state_timer += offset
+	
+	area.connect("body_entered", self, "burn_player")
 
 func _physics_process(delta):
 	if mode == 1:
@@ -50,6 +53,7 @@ func _physics_process(delta):
 		sprite.position = lerp(sprite.position, Vector2(0, 48), delta * 8)
 		sprite.scale = lerp(sprite.scale, Vector2(0, 0), delta * 8)
 	sprite.reset_physics_interpolation()
+
 func _process(_delta):
 	if color == Color(1, 0, 0):
 		sprite.self_modulate = Color(1, 1, 1)
@@ -67,3 +71,10 @@ func _process(_delta):
 		sprite_2.self_modulate = color
 		sprite_1.visible = true
 		sprite_2.visible = true
+
+func burn_player(body):
+	#putting this here instead of the lava boost state or mario.gd 
+	#bc I don't know how to do it better frankly
+	if body is Character:
+		body.set_state_by_name("LavaBoostState", fps_util.PHYSICS_DELTA)
+		body.velocity.y = -body.get_state_node("LavaBoostState").boost_velocity

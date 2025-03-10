@@ -1,13 +1,20 @@
-extends GameObject
+extends Decoration
 
-export var custom_preview_position = Vector2(70, 170)
-export(Array, Texture) var palette_textures
+onready var sprite = $Sprite
 
-func _ready():
-	preview_position = custom_preview_position
-	if is_preview:
-		z_index = 0
-		$Sprite.z_index = 0
-	
-	if palette != 0:
-		$Sprite.texture = palette_textures[palette - 1]
+var sway : bool = false
+var sway_offset : float = rand_range(-127, 127)
+
+
+func _set_properties():
+	savable_properties = ["sway"]
+	editable_properties = ["sway"]
+
+func _set_property_values():
+	set_property("sway", sway, true)
+
+func _process(delta):
+	if sway:
+		sprite.material.set_shader_param("strength", sin((OS.get_ticks_msec()/1000.0) + sway_offset)/30.0)
+	else:
+		sprite.material.set_shader_param("strength", 0)

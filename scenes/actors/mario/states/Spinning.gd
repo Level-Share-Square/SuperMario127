@@ -21,8 +21,8 @@ func _start_check(_delta):
 	return !(character.is_grounded() and character.rainbow_stored) and boost_cooldown_timer == 0 and spin_timer > 0 and (character.state == null or character.state != character.get_state_node("DiveState")) and character.jump_animation != 2
 
 func _start(_delta):
+	character.ring_particles.animation = "twirl"
 	character.ring_particles.frame = 0
-	character.ring_particles_back.frame = 0
 	attack_timer = attack_time
 	character.spin_area_shape.disabled = false
 	if sound_buffer > 0:

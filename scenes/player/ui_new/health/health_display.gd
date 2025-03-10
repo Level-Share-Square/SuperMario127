@@ -63,6 +63,9 @@ func _process(delta):
 	if shake_time <= 0:
 		shake_time = -1
 		meter.rect_position = Vector2.ZERO
+	
+	if character.health != last_health: #this is to fix any desync between the UI and character's health if it drops too fast
+		health_changed(character.health, character.health_shards)
 
 
 ## most animations called from this function
@@ -136,7 +139,6 @@ func update_shard_segments(new_value: int):
 		# make sure theyre all turned white when u have 0 shards
 		if new_value < index:
 			letter.add_color_override("font_color", letter_colors[0])
-
 
 ## make those letters do da lil hoppy thing :3
 const JUMP_AMOUNT: float = 4.0

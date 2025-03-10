@@ -14,6 +14,9 @@ func is_metal_or_rainbow(body):
 	return body.powerup != null and (body.powerup.id == "Metal" or body.powerup.id == "Rainbow")
 
 func kill(body):
+	
+	enabled = get_parent().get_parent().get_parent().enabled
+	
 	if !(enabled and body.name.begins_with("Character") and !body.dead and body.controllable):
 		return
 	
@@ -44,3 +47,4 @@ func kill(body):
 
 func _ready():
 	var _connect = area.connect("body_entered", self, "kill")
+	add_to_group("sawblades")

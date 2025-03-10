@@ -52,3 +52,8 @@ func _body_entered(body):
 
 #		body.camera.set_pan_tween(position+pan_offset, zoom_time, false)
 
+func _process(delta):
+	if parts <= 0:
+		parts = 1
+		set_property("parts", parts, true)
+			

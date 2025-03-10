@@ -1,6 +1,6 @@
 extends Button
 
-var string
+var string: Control
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -8,6 +8,7 @@ var string
 
 
 func _pressed():
+	string.toggle_pressed()
 	get_parent().get_parent().close()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

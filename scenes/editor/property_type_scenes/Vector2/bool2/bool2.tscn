@@ -36,9 +36,6 @@ context_menu_enabled = false
 placeholder_text = "X"
 placeholder_alpha = 0.35
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="YEdit" type="LineEdit" parent="."]
 margin_left = 165.0

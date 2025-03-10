@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SM64_Thwomp_Grunt.ogg-df001907c28c3bb29335394c4a72822d.oggstr"
+
+[deps]
+
+source_file="res://scenes/actors/objects/thwomp/SM64_Thwomp_Grunt.ogg"
+dest_files=[ "res://.import/SM64_Thwomp_Grunt.ogg-df001907c28c3bb29335394c4a72822d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

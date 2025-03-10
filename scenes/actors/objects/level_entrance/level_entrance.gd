@@ -37,7 +37,6 @@ func _ready():
 				
 			if transition_data.size() == 0:
 				character.position = position
-				character.reset_physics_interpolation()
 			else:
 				var found_obj = false
 				var obj

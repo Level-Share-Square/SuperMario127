@@ -57,5 +57,6 @@ shape = SubResource( 3 )
 position = Vector2( 0, 8 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -512, -512, 1024, 1024 )
 freeze_bodies = false
 process_parent = true

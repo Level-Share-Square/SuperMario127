@@ -83,17 +83,18 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 	tween.interpolate_property(canvas_mask, "texture_scale", texture_scale_start, texture_scale_end, transition_time, Tween.TRANS_CIRC, Tween.EASE_OUT if to_black else Tween.EASE_IN)
 	tween.start()
 	
-	# wait for the tween to finish before returning, and then a little extra time
-	yield(tween, "tween_all_completed")
-	yield(get_tree().create_timer(0.1), "timeout")
-	emit_signal("transition_finished")
-	
 	if reverse_after:
 		do_transition_animation(cutout_circle, transition_time, texture_scale_end, texture_scale_start, volume_end, volume_start, false, stop_temp_music)
 	else:
+		# wait for the tween to finish before returning, and then a little extra time
+		yield(tween, "tween_all_completed")
+		yield(get_tree().create_timer(0.1), "timeout")
+		emit_signal("transition_finished")
 		transitioning = false
 		canvas_mask.position = Vector2(384, 216) # Reset it, in case a script has modified it before playing the animation
 
+	
+	
 	if stop_temp_music:
 		Singleton.Music.stop_temporary_music()
 		Singleton.Music.reset_music()

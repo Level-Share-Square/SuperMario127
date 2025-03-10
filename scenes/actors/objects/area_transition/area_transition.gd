@@ -171,9 +171,7 @@ func start_pipe_enter_animation(character : Character) -> void:
 	is_idle = false
 	entering = true
 	
-	character.toggle_movement(false)
-	character.sprite.rotation = 0
-	character.set_inter_player_collision(false)
+
 	if !teleportation_mode:
 		var pair = find_local_pair()
 		if pair.object_type == "area_transition":
@@ -186,6 +184,8 @@ func start_pipe_enter_animation(character : Character) -> void:
 				Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
 				Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
 			character.camera.auto_move = false
+	else:
+		pass
 	
 	emit_signal("pipe_animation_finished", character, entering, force_fadeout)
 	
@@ -225,26 +225,25 @@ func pipe_exit_anim_finished(character : Character):
 	#character.toggle_movement(true)
 	# undo collision changes 
 	stored_characters[character.player_id] = null
-	area2d.connect("body_exited", self, "exit_remote_teleport")
 	if !teleportation_mode:
-		var timer = Timer.new()
+		character.camera.global_position = character.global_position
+		var timer = get_tree().create_timer(0.1)
 		timer.connect("timeout", character, "toggle_movement", [true])
 		timer.connect("timeout", self, "set_camera", [character])
-		timer.wait_time = 0.1
-		timer.one_shot = true
-		add_child(timer)
-		timer.start()
+	else:
+		is_idle = true
+		var timer = get_tree().create_timer(0.1)
+		timer.connect("timeout", character, "toggle_movement", [true])
+		timer.connect("timeout", self, "set_camera", [character])
 	
 func exit_with_helper(character : Character):
-	var helper = Singleton.CurrentLevelData.level_data.vars.transition_character_data.back() if character.player_id == 0 else Singleton.CurrentLevelData.level_data.vars.transition_character_data_2.back()
+	var helper = get_character_transition_data(character).back()
 	character.velocity = helper.velocity
 	character.state = helper.state
 	character.facing_direction = helper.facing_direction
 	character.camera.global_position = helper.find_camera_position(vertical, character.global_position, character.camera.base_size, parts * 32)
-	character.camera.reset_physics_interpolation()
 	character.camera.last_position = character.camera.position
 	character.position = global_position + helper.find_exit_offset(vertical, parts * 32)
-	character.reset_physics_interpolation()
 	var timer = Timer.new()
 	timer.connect("timeout", character, "toggle_movement", [true])
 	timer.connect("timeout", self, "set_camera", [character])
@@ -273,9 +272,15 @@ func set_camera(character: Character):
 	character.call_deferred("toggle_movement", true)
 
 
-func get_character_transition_data(character : Character):
+func get_character_transition_data(character : Character) -> Array:
 		if character.player_id == 0:
 			return Singleton.CurrentLevelData.level_data.vars.transition_character_data
 		else:
 			return Singleton.CurrentLevelData.level_data.vars.transition_character_data_2
+			
+
+func _process(delta):
+	if parts <= 0:
+		parts = 1
+		set_property("parts", parts, true)
 			

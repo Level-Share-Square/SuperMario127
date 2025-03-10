@@ -31,3 +31,4 @@ func update_status():
 
 func request_completed(_result: int, response_code: int, _headers: PoolStringArray, _body: PoolByteArray):
 	print("LSS ping complete. Response code: ", response_code)
+	

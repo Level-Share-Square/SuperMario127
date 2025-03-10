@@ -81,16 +81,20 @@ func _stop(delta : float) -> void:
 		character.sound_player.play_bonk_sound()
 	if character.is_grounded():
 		character.set_state_by_name("SlideState", delta)
-	elif character.water_detector.get_overlapping_areas().size() <= 0:
+	elif !character.check_liquid(LiquidBase.LiquidType.Water):
 		sprite.rotation_degrees = 0
 	character.ground_shape.disabled = true
 	
-	if character.is_grounded():
+	if character.is_grounded() or character.check_liquid(LiquidBase.LiquidType.Quicksand):
 		character.facing_direction = start_facing
 		var normal = character.ground_check.get_collision_normal()
 		var sprite_rotation = atan2(normal.y, normal.x) + (PI/2)
 		sprite_rotation += PI/2 * start_facing
 		character.sprite.rotation = sprite_rotation
+		if character.check_liquid(LiquidBase.LiquidType.Quicksand) or character.check_liquid(LiquidBase.LiquidType.Lava):
+			# below fixes an issue with dives putting your bottom 
+			# position below the actual surface of the liquid
+			character.global_position.y -= 12
 
 func _stop_check(_delta : float) -> bool:
 	return character.is_grounded() or (character.is_walled_right() and character.facing_direction == 1) or (character.is_walled_left() and character.facing_direction == -1)

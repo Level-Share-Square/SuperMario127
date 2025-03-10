@@ -101,9 +101,10 @@ func kill(body):
 		
 		
 				
-	
-	
-
+func _process(delta):
+	if parts <= 0:
+		parts = 1
+		set_property(\"parts\", parts, true)
 			
 
 "

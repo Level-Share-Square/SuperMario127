@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/main_menu/main_menu.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/menu/background_manager.gd" type="Script" id=8]
 [ext_resource path="res://scenes/menu/level_portal/level_portal.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/menu/menu_controller/return_args.gd" type="Script" id=10]
+[ext_resource path="res://scenes/menu/menu_controller/menu_controller.gd" type="Script" id=11]
 
 [sub_resource type="GDScript" id=11]
 resource_name = "secret"
@@ -104,6 +105,7 @@ shader = SubResource( 1 )
 shader_param/blur_amount = 0.8
 
 [node name="MenuController" type="Node2D"]
+script = ExtResource( 11 )
 
 [node name="BackgroundManager" type="Node2D" parent="."]
 script = ExtResource( 8 )

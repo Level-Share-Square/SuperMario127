@@ -69,3 +69,5 @@ bus = "Sounds"
 
 [node name="SoundSecondary" type="AudioStreamPlayer" parent="."]
 bus = "Sounds"
+
+[node name="DeathSoundTimer" type="Timer" parent="."]

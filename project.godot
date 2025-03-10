@@ -120,11 +120,6 @@ _global_script_classes=[ {
 "path": "res://scenes/actors/mario/states/CrushedBase.gd"
 }, {
 "base": "CrushedBaseState",
-"class": "CrushedSideState",
-"language": "GDScript",
-"path": "res://scenes/actors/mario/states/CrushedSide.gd"
-}, {
-"base": "CrushedBaseState",
 "class": "CrushedState",
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Crushed.gd"
@@ -133,6 +128,11 @@ _global_script_classes=[ {
 "class": "CurveTween",
 "language": "GDScript",
 "path": "res://classes/curve_tween.gd"
+}, {
+"base": "GameObject",
+"class": "Decoration",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/big_tree/Decoration.gd"
 }, {
 "base": "Reference",
 "class": "DefineVarInstruction",
@@ -228,11 +228,6 @@ _global_script_classes=[ {
 "class": "EditorWindow",
 "language": "GDScript",
 "path": "res://scenes/editor/window.gd"
-}, {
-"base": "GameObject",
-"class": "Enemy",
-"language": "GDScript",
-"path": "res://classes/Enemy.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "EnemyBase",
@@ -484,6 +479,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/Vars.gd"
 }, {
+"base": "GameObject",
+"class": "LiquidBase",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/liquid/liquid_base.gd"
+}, {
 "base": "Resource",
 "class": "Member",
 "language": "GDScript",
@@ -544,6 +544,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/ParallaxLayerResource.gd"
 }, {
+"base": "Node2D",
+"class": "ParticlesCollection",
+"language": "GDScript",
+"path": "res://classes/ParticleCollection.gd"
+}, {
 "base": "Node",
 "class": "PlaceableItem",
 "language": "GDScript",
@@ -558,6 +563,16 @@ _global_script_classes=[ {
 "class": "Powerup",
 "language": "GDScript",
 "path": "res://scenes/actors/mario/Powerup.gd"
+}, {
+"base": "State",
+"class": "QuicksandHopState",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/states/QuicksandHop.gd"
+}, {
+"base": "State",
+"class": "QuicksandIdleState",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/states/QuicksandIdle.gd"
 }, {
 "base": "Powerup",
 "class": "RainbowPowerup",
@@ -807,9 +822,9 @@ _global_script_class_icons={
 "Component": "",
 "ControlPresets": "",
 "CrushedBaseState": "",
-"CrushedSideState": "",
 "CrushedState": "",
 "CurveTween": "",
+"Decoration": "",
 "DefineVarInstruction": "",
 "Dialog": "",
 "DiscordActivity": "",
@@ -829,7 +844,6 @@ _global_script_class_icons={
 "DiveState": "",
 "EditorHitbox": "",
 "EditorWindow": "",
-"Enemy": "",
 "EnemyBase": "",
 "EnemyDamage": "",
 "EnemySpawnerBase": "",
@@ -880,6 +894,7 @@ _global_script_class_icons={
 "LevelSong": "",
 "LevelTileset": "",
 "LevelVars": "",
+"LiquidBase": "",
 "Member": "",
 "MetalPowerup": "",
 "MethodExecution": "",
@@ -892,9 +907,12 @@ _global_script_class_icons={
 "OrCondition": "",
 "PanningCamera2D": "",
 "ParallaxLayerResource": "",
+"ParticlesCollection": "",
 "PlaceableItem": "",
 "PlayerSelector": "",
 "Powerup": "",
+"QuicksandHopState": "",
+"QuicksandIdleState": "",
 "RainbowPowerup": "",
 "RainbowStarState": "",
 "RainbowStarWindupState": "",
@@ -1411,6 +1429,7 @@ toggle_enabled={
 2d_physics/layer_14="projectiles"
 2d_physics/layer_15="npc"
 2d_physics/layer_16="liquids"
+2d_physics/layer_17="crushers"
 
 [logging]
 

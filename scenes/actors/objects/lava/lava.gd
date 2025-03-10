@@ -19,6 +19,7 @@ var tap_mode : bool = true
 
 var save_pos : Vector2
 
+onready var area = $Area2D
 onready var area_collision = $Area2D/CollisionShape2D
 onready var body_collision = $StaticBody2D/CollisionShape2D
 onready var sprite = $ColorRect
@@ -62,10 +63,8 @@ func change_size():
 	waves.rect_size.x = sprite.rect_size.x
 	color_sprite.rect_size.x = sprite.rect_size.x
 	area_collision.position = Vector2(width / 2, height / 2)
-	area_collision.reset_physics_interpolation()
 	area_collision.shape.extents = area_collision.position
 	body_collision.position = area_collision.position
-	body_collision.reset_physics_interpolation()
 	body_collision.shape = area_collision.shape
 	
 	var rounded_color = Color(stepify(color.r, 0.05), stepify(color.g, 0.05), stepify(color.b, 0.05))
@@ -90,7 +89,7 @@ func change_size():
 	last_color = color
 	last_front = render_in_front
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if !moving: return
 	
 	if !horizontal:

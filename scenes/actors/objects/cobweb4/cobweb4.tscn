@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://scenes/actors/objects/big_tree/big_tree.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/big_tree/Decoration.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge3.png" type="Texture" id=2]
 [ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge5.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/cobweb4/palettes/cobweb_bridge7.png" type="Texture" id=4]

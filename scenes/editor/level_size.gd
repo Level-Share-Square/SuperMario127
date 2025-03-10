@@ -69,63 +69,73 @@ func button_press():
 	
 	var amount = 1
 	
-	if Input.is_mouse_button_pressed(2):
+	if Input.is_key_pressed(KEY_SHIFT):
 		amount = 10
-		
+	
+#	print(amount)
 	click_sound.play()
 	
-	for _integer in range(amount):
-		if button_left_out.pressed and area.settings.bounds.size.x < 1500:
-			area.settings.bounds = area.settings.bounds.grow_individual(1,0,0,0)
-			shared_node.update_tilemaps()
-			camera_node.update_limits(area)
-			update_label()
-			
-		if button_left_in.pressed and area.settings.bounds.size.x > 24:
-			area.settings.bounds = area.settings.bounds.grow_individual(-1,0,0,0)
-			shared_node.update_tilemaps()
-			camera_node.update_limits(area)
-			camera_node.position.x -= 32
-			update_label()
+	if button_left_out.pressed and area.settings.bounds.size.x < 1500:
+		amount = clamp(amount, 24-area.settings.bounds.size.x, 1500-area.settings.bounds.size.x)
+		area.settings.bounds = area.settings.bounds.grow_individual(amount,0,0,0)
+		shared_node.update_tilemaps()
+		camera_node.update_limits(area)
+		update_label()
+		
+	if button_left_in.pressed and area.settings.bounds.size.x > 24:
+		amount = clamp(amount, 24-area.settings.bounds.size.x, 1500-area.settings.bounds.size.x)
+		area.settings.bounds = area.settings.bounds.grow_individual(-amount,0,0,0)
+		shared_node.update_tilemaps()
+		camera_node.update_limits(area)
+		camera_node.position.x += 32
+		update_label()
 	
-		if button_right_out.pressed and area.settings.bounds.size.x < 1500:
-			area.settings.bounds = area.settings.bounds.grow_individual(0,0,1,0)
-			shared_node.update_tilemaps()
-			camera_node.update_limits(area)
-			update_label()
+	if button_right_out.pressed and area.settings.bounds.size.x < 1500:
+		amount = clamp(amount, 24-area.settings.bounds.size.x, 1500-area.settings.bounds.size.x)
+		area.settings.bounds = area.settings.bounds.grow_individual(0,0,amount,0)
+		shared_node.update_tilemaps()
+		camera_node.update_limits(area)
+		update_label()
 			
-		if button_right_in.pressed and area.settings.bounds.size.x > 24:
-			area.settings.bounds = area.settings.bounds.grow_individual(0,0,-1,0)
-			shared_node.update_tilemaps()
-			camera_node.update_limits(area)
-			update_label()
+	if button_right_in.pressed and area.settings.bounds.size.x > 24:
+		amount = clamp(amount, 24-area.settings.bounds.size.x, 1500-area.settings.bounds.size.x)
+		area.settings.bounds = area.settings.bounds.grow_individual(0,0,-amount,0)
+		shared_node.update_tilemaps()
+		camera_node.update_limits(area)
+		update_label()
 	
-		if button_down_out.pressed and area.settings.bounds.size.y < 1500:
-			area.settings.bounds = area.settings.bounds.grow_individual(0,0,0,1)
-			shared_node.update_tilemaps()
-			backgrounds_node.update_background_area(area)
-			camera_node.update_limits(area)
-			camera_node.position.y += 32
-			update_label()
-			
-		if button_down_in.pressed and area.settings.bounds.size.y > 14:
-			area.settings.bounds = area.settings.bounds.grow_individual(0,0,0,-1)
-			shared_node.update_tilemaps()
-			backgrounds_node.update_background_area(area)
-			camera_node.update_limits(area)
-			update_label()
+	if button_down_out.pressed and area.settings.bounds.size.y < 1500:
+		amount = clamp(amount, 14-area.settings.bounds.size.y, 1500-area.settings.bounds.size.y)
+		area.settings.bounds = area.settings.bounds.grow_individual(0,0,0,amount)
+		shared_node.update_tilemaps()
+		backgrounds_node.update_background_area(area)
+		camera_node.update_limits(area)
+		camera_node.position.y += 32
+		update_label()
+		
+	if button_down_in.pressed and area.settings.bounds.size.y > 14:
+		amount = clamp(amount, 14-area.settings.bounds.size.y, 1500-area.settings.bounds.size.y)
+		area.settings.bounds = area.settings.bounds.grow_individual(0,0,0,-amount)
+		shared_node.update_tilemaps()
+		backgrounds_node.update_background_area(area)
+		camera_node.update_limits(area)
+		update_label()
 	
-		if button_up_out.pressed and area.settings.bounds.size.y < 1500:
-			area.settings.bounds = area.settings.bounds.grow_individual(0,1,0,0)
-			shared_node.update_tilemaps()
-			backgrounds_node.update_background_area(area)
-			camera_node.update_limits(area)
-			camera_node.position.y += 32
-			update_label()
+	if button_up_out.pressed and area.settings.bounds.size.y < 1500:
+		amount = clamp(amount, 14-area.settings.bounds.size.y, 1500-area.settings.bounds.size.y)
+		area.settings.bounds = area.settings.bounds.grow_individual(0,amount,0,0)
+		shared_node.update_tilemaps()
+		backgrounds_node.update_background_area(area)
+		camera_node.update_limits(area)
+		camera_node.position.y += 32
+		update_label()
 			
-		if button_up_in.pressed and area.settings.bounds.size.y > 14:
-			area.settings.bounds = area.settings.bounds.grow_individual(0,-1,0,0)
-			shared_node.update_tilemaps()
-			backgrounds_node.update_background_area(area)
-			camera_node.update_limits(area)
-			update_label()
+	if button_up_in.pressed and area.settings.bounds.size.y > 14:
+		amount = clamp(amount, 14-area.settings.bounds.size.y, 1500-area.settings.bounds.size.y)
+		area.settings.bounds = area.settings.bounds.grow_individual(0,-amount,0,0)
+		shared_node.update_tilemaps()
+		backgrounds_node.update_background_area(area)
+		camera_node.update_limits(area)
+		update_label()
+	
+#	print(amount)

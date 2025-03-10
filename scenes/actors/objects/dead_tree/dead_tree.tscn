@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/actors/objects/dead_tree/dead_tree.png" type="Texture" id=1]
-[ext_resource path="res://scenes/actors/objects/big_tree/big_tree.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/big_tree/Decoration.gd" type="Script" id=2]
 [ext_resource path="res://scenes/actors/objects/dead_tree/palletes/7/dead_tree.png" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/dead_tree/palletes/2/dead_tree.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/objects/dead_tree/palletes/3/dead_tree.png" type="Texture" id=5]

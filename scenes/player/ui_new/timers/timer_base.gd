@@ -41,3 +41,13 @@ func time_over():
 		1, 0,
 		FADE_TIME)
 	tween.start()
+
+func stop():
+	is_counting = false
+	tween.connect("tween_all_completed", self, "queue_free")
+	tween.interpolate_property(
+		self, 
+		"modulate:a", 
+		1, 0,
+		FADE_TIME)
+	tween.start()
