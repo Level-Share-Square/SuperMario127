@@ -232,6 +232,11 @@ func _physics_process(delta:float)->void :
 	if mode != 1 and enabled:
 		sprite.animation = "walking" if not squish else "walking_squished"
 		update_eyes()
+	
+	elif squish:
+		
+		sprite.animation = "squished"
+		
 	else:
 		sprite.animation = "default"
 	
