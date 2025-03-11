@@ -321,7 +321,7 @@ const ANIM_IDS : Dictionary = {
 }
 
 func _ready():
-#	_update_player_framerate()
+	_update_player_framerate()
 	Engine.set_target_fps(60)
 	Engine.iterations_per_second = 60
 	Singleton.CurrentLevelData.can_pause = true
@@ -341,7 +341,7 @@ func _ready():
 		inputs.append([false, false, str(input)])
 
 func _update_player_framerate():
-	LocalSettings._update_framerate_to_refresh_rate()
+	fps_util._update_framerate(false)
 	get_tree().create_timer(1.0).connect("timeout", self, "_update_player_framerate")
 
 #slavery in super mario 127 :flushed:

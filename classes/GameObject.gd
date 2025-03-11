@@ -19,8 +19,8 @@ var palettes := 0
 var layer := 2
 # translates layer var into a Z index
 var layer_dictionary = {
-	0: -12,
-	1: -11,
+	0: -11,
+	1: -10,
 	2: -1,
 	3: 9
 }

@@ -106,12 +106,12 @@ func load_in() -> void:
 					# these use weird indexed things because that's unfortunately just how stuff is stored before being loaded, this bit does what you'd expect, the values are the shines properties
 					var shine_dictionary : Dictionary = \
 					{
-						"title": object.properties[5],
-						"description": object.properties[6],
-						"show_in_menu": object.properties[7],
-						"color": object.properties[11].to_rgba32(),
-						"id": object.properties[12],
-						"do_kick_out": object.properties[13],
+						"title": object.properties[6],
+						"description": object.properties[7],
+						"show_in_menu": object.properties[8],
+						"color": object.properties[12].to_rgba32(),
+						"id": object.properties[13],
+						"do_kick_out": object.properties[14],
 						"enabled": object.properties[3]
 					}
 					# Lol band aid
@@ -135,7 +135,7 @@ func load_in() -> void:
 						time_scores[str(shine_dictionary["id"])] = EMPTY_TIME_SCORE
 						
 				OBJECT_ID_STAR_COIN:
-					var star_coin_id : int = object.properties[5]
+					var star_coin_id : int = object.properties[6]
 					var enabled = object.properties[3]
 					
 					var repeated_star_coin : bool = false

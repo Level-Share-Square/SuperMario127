@@ -5,6 +5,6 @@ func _ready():
 	_update_menu_framerate()
 
 func _update_menu_framerate():
-	LocalSettings._update_framerate_to_refresh_rate()
+	fps_util._update_framerate(true)
 	
 	get_tree().create_timer(1.0).connect("timeout", self, "_update_menu_framerate")

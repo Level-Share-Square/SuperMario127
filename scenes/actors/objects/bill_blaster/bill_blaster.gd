@@ -89,6 +89,7 @@ func _physics_process(delta):
 			object.properties.append(scale)
 			object.properties.append(rotation_degrees)
 			object.properties.append(enabled)
+			object.properties.append(layer)
 			object.properties.append(true)
 			object.properties.append(chase)
 			object.properties.append(speed)
