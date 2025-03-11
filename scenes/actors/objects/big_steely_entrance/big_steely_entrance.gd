@@ -54,6 +54,7 @@ func create_new_steely_object() -> Node:
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
+	object.properties.append(layer)
 
 	return objects.create_object(object, false)
 

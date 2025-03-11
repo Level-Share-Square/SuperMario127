@@ -94,7 +94,7 @@ func goonie_ready():
 func exploded(hit_pos:Vector2):
 	hurt(hit_pos)
 
-func create_coin(spawn_pos)->void :
+func create_coin(spawn_pos) -> void:
 	var object: = LevelObject.new()
 	object.type_id = 1
 	object.properties = []
@@ -103,6 +103,7 @@ func create_coin(spawn_pos)->void :
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
+	object.properties.append(layer)
 	object.properties.append(true)
 	var velocity_x = - 80 if randi() % 2 == 0 else 80
 	object.properties.append(Vector2(velocity_x, - 300))

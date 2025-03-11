@@ -63,6 +63,7 @@ func create_coin():
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
+	object.properties.append(layer)
 	object.properties.append(true)
 	var velocity_x = -80 if int(time_alive * 10) % 2 == 0 else 80
 	object.properties.append(Vector2(velocity_x, -300))

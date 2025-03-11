@@ -80,6 +80,7 @@ func create_coin(): #creates a coin
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
+	object.properties.append(layer)
 	object.properties.append(true)
 	var power = int(time_alive*100) % 80
 	var velocity_x = -power if int(time_alive * 10) % 2 == 0 else power

@@ -121,6 +121,7 @@ func create_coin()->void :
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
+	object.properties.append(layer)
 	object.properties.append(true)
 	var velocity_x = - 80 if randi() % 2 == 0 else 80
 	object.properties.append(Vector2(velocity_x, - 300))
@@ -266,6 +267,7 @@ func spawn_fireball():
 	object.properties.append(0)
 	object.properties.append(true)
 	object.properties.append(true)
+	object.properties.append(layer)
 	object.properties.append(calculate_fireball_velocity(body.global_position - Vector2(0, 8), character_position, gravity))
 	object.properties.append(fire == 2)
 	get_parent().create_object(object, false)
