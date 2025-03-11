@@ -4,6 +4,8 @@ extends TimerBase
 onready var timer_display: Label = $Time
 onready var name_display: Label = $Time/Name
 onready var death_sound_timer: Timer = $DeathSoundTimer
+onready var death_sound_type: int = 0
+onready var ticks_left: int = 0
 
 export var label_text: String = "TIME LEFT"
 export var show_time_score: bool = false
@@ -15,6 +17,9 @@ export var p_switch_end_tick: AudioStream
 export var kill_beep_start: AudioStream
 export var kill_beep_middle: AudioStream
 export var kill_beep_final: AudioStream
+export var timer_finished: AudioStream
+
+enum DeathSoundType {NO_SOUND = 0,BEEP_START = 1,BEEP_MIDDLE = 2,BEEP_FINAL = 3,FINISHED = 4}
 
 var sound_time: float
 
@@ -24,6 +29,7 @@ func _ready():
 	set_label(label_text)
 	
 	var _connect = connect("time_over", self, "kill_player")
+	death_sound_timer.connect("timeout",self,"handle_death_timer")
 	
 	match(sound):
 		"switch":
@@ -40,6 +46,9 @@ func _ready():
 	if show_time_score:
 		modulate.a = 1
 		return
+		
+	death_sound_timer.stop()
+	death_sound_timer.set_one_shot(true)
 
 
 func _physics_process(delta):
@@ -67,10 +76,30 @@ func _physics_process(delta):
 							audio_player_secondary.play()
 					sound_time = wrapf(time, 0, 1.1)
 			"death":
-				if time <= 10 and true:
-					death_sound_timer.start(1)
-#					death_sound_timer.connect(m)
+				if (death_sound_timer.is_stopped() && death_sound_type != DeathSoundType.FINISHED):
+					
+					if (time > 11):
+						death_sound_timer.start(time-11)
+					else:
+						death_sound_timer.set_one_shot(false)
+						
+						if (time > 6):
 							
+							death_sound_type = DeathSoundType.BEEP_START
+							death_sound_timer.start(time-floor(time))
+							ticks_left = int(time)-6
+						
+						elif (time > 2):
+							
+							death_sound_type = DeathSoundType.BEEP_MIDDLE
+							death_sound_timer.start(time-floor(time))
+							ticks_left = int(time)-2
+						
+						else:
+							
+							death_sound_type = DeathSoundType.BEEP_FINAL
+							death_sound_timer.start(time-floor(time))
+							ticks_left = 1
 				
 		if kill_on_end:
 			var mod_color_time = wrapf(time, 0, 1)
@@ -107,6 +136,52 @@ func kill_player():
 	if is_instance_valid(player2):
 		if !player2.dead:
 			player2.kill("timer")
+
+func handle_death_timer():
+	
+	match (death_sound_type):
+		
+		DeathSoundType.NO_SOUND:
+			
+			death_sound_timer.start(1)
+			death_sound_timer.set_one_shot(false)
+			
+			death_sound_type = DeathSoundType.BEEP_START
+			ticks_left = 4 # 4 ticks of the timer until transitioning to the next sound type
+		
+		DeathSoundType.BEEP_START:
+			
+			play_timer_sound(kill_beep_start)
+			ticks_left -= 1
+			
+			if (ticks_left == 0):
+				
+				death_sound_type = DeathSoundType.BEEP_MIDDLE
+				ticks_left = 4
+		
+		DeathSoundType.BEEP_MIDDLE:
+			
+			play_timer_sound(kill_beep_middle)
+			ticks_left -= 1
+			
+			if (ticks_left == 0):
+				
+				death_sound_type = DeathSoundType.BEEP_FINAL
+				ticks_left = 2
+		
+		DeathSoundType.BEEP_FINAL:
+			
+			play_timer_sound(kill_beep_final)
+			ticks_left -= 1
+			
+			if (ticks_left == 0):
+				
+				death_sound_type = DeathSoundType.FINISHED
+		
+		DeathSoundType.FINISHED:
+			
+			play_timer_sound(timer_finished)
+			death_sound_timer.stop()
 
 func set_label(new_text: String):
 	name_display.text = new_text
