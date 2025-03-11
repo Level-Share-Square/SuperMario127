@@ -76,14 +76,14 @@ func button_press():
 	click_sound.play()
 	
 	if button_left_out.pressed and area.settings.bounds.size.x < 1500:
-		amount = clamp(amount, 24-area.settings.bounds.size.x, 1500-area.settings.bounds.size.x)
+		amount = clamp(amount, 1, 1500-area.settings.bounds.size.x)
 		area.settings.bounds = area.settings.bounds.grow_individual(amount,0,0,0)
 		shared_node.update_tilemaps()
 		camera_node.update_limits(area)
 		update_label()
 		
 	if button_left_in.pressed and area.settings.bounds.size.x > 24:
-		amount = clamp(amount, 24-area.settings.bounds.size.x, 1500-area.settings.bounds.size.x)
+		amount = clamp(amount, 1, area.settings.bounds.size.x-24)
 		area.settings.bounds = area.settings.bounds.grow_individual(-amount,0,0,0)
 		shared_node.update_tilemaps()
 		camera_node.update_limits(area)
@@ -91,21 +91,21 @@ func button_press():
 		update_label()
 	
 	if button_right_out.pressed and area.settings.bounds.size.x < 1500:
-		amount = clamp(amount, 24-area.settings.bounds.size.x, 1500-area.settings.bounds.size.x)
+		amount = clamp(amount, 1, 1500-area.settings.bounds.size.x)
 		area.settings.bounds = area.settings.bounds.grow_individual(0,0,amount,0)
 		shared_node.update_tilemaps()
 		camera_node.update_limits(area)
 		update_label()
 			
 	if button_right_in.pressed and area.settings.bounds.size.x > 24:
-		amount = clamp(amount, 24-area.settings.bounds.size.x, 1500-area.settings.bounds.size.x)
+		amount = clamp(amount, 1, area.settings.bounds.size.x-24)
 		area.settings.bounds = area.settings.bounds.grow_individual(0,0,-amount,0)
 		shared_node.update_tilemaps()
 		camera_node.update_limits(area)
 		update_label()
 	
 	if button_down_out.pressed and area.settings.bounds.size.y < 1500:
-		amount = clamp(amount, 14-area.settings.bounds.size.y, 1500-area.settings.bounds.size.y)
+		amount = clamp(amount, 1, 1500-area.settings.bounds.size.y)
 		area.settings.bounds = area.settings.bounds.grow_individual(0,0,0,amount)
 		shared_node.update_tilemaps()
 		backgrounds_node.update_background_area(area)
@@ -114,7 +114,7 @@ func button_press():
 		update_label()
 		
 	if button_down_in.pressed and area.settings.bounds.size.y > 14:
-		amount = clamp(amount, 14-area.settings.bounds.size.y, 1500-area.settings.bounds.size.y)
+		amount = clamp(amount, 1, area.settings.bounds.size.y-14)
 		area.settings.bounds = area.settings.bounds.grow_individual(0,0,0,-amount)
 		shared_node.update_tilemaps()
 		backgrounds_node.update_background_area(area)
@@ -122,7 +122,7 @@ func button_press():
 		update_label()
 	
 	if button_up_out.pressed and area.settings.bounds.size.y < 1500:
-		amount = clamp(amount, 14-area.settings.bounds.size.y, 1500-area.settings.bounds.size.y)
+		amount = clamp(amount, 1, 1500-area.settings.bounds.size.y)
 		area.settings.bounds = area.settings.bounds.grow_individual(0,amount,0,0)
 		shared_node.update_tilemaps()
 		backgrounds_node.update_background_area(area)
@@ -131,7 +131,7 @@ func button_press():
 		update_label()
 			
 	if button_up_in.pressed and area.settings.bounds.size.y > 14:
-		amount = clamp(amount, 14-area.settings.bounds.size.y, 1500-area.settings.bounds.size.y)
+		amount = clamp(amount, 1, area.settings.bounds.size.y-14)
 		area.settings.bounds = area.settings.bounds.grow_individual(0,-amount,0,0)
 		shared_node.update_tilemaps()
 		backgrounds_node.update_background_area(area)
