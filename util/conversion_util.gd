@@ -1,5 +1,6 @@
 class_name conversion_util
 
+
 static func convert_040_to_041(result):
 	result.format_version = "0.4.1"
 	for area_result in result.areas:
@@ -27,6 +28,7 @@ static func convert_040_to_041(result):
 			area_result.objects = new_objects
 	return result
 
+
 static func convert_042_to_043(result):
 	result.format_version = "0.4.3"
 	for area_result in result.areas:
@@ -39,6 +41,7 @@ static func convert_042_to_043(result):
 				new_objects.append(object)
 			area_result.objects = new_objects
 	return result
+
 
 static func convert_044_to_045(result):
 	# basically this function recreates the objects dictonary,
@@ -62,7 +65,8 @@ static func convert_044_to_045(result):
 				new_objects.append(object)
 			area_result.objects = new_objects
 	return result
-	
+
+
 static func convert_047_to_048(result):
 	result.format_version = "0.4.8"
 	var door_container = []
@@ -99,6 +103,7 @@ static func convert_047_to_048(result):
 			area_result.objects = new_objects
 	return result
 
+
 static func convert_048_to_049(result):
 	result.format_version = "0.4.9"
 	var current_id = 0
@@ -125,6 +130,7 @@ static func convert_048_to_049(result):
 			area_result.objects = new_objects #==========================================
 	return result
 
+
 static func convert_049_to_050(result):
 	result.format_version = "0.5.0"
 	result.author = "Unknown"
@@ -133,19 +139,7 @@ static func convert_049_to_050(result):
 #	for result_area in result.areas:
 #		result_area.timer = 0.00
 	return result
-	
-static func convert_050_to_051(result):
-	result.format_version = "0.5.1"
-	for area_result in result.areas:
-		if typeof(area_result) == TYPE_DICTIONARY:
-			var new_objects = []
-			for object_result in area_result.objects:
-				var object = object_result
-				object.properties.insert(5, 2)
-				new_objects.append(object)
-			area_result.objects = new_objects
-	print(result.areas.size())
-	return result
+
 
 static func convert_051_to_052(result):
 	result.format_version = "0.5.2"
@@ -195,6 +189,26 @@ static func convert_051_to_052(result):
 
 	return result
 
+
+static func convert_052_to_053(result):
+	result.format_version = "0.5.3"
+	for area_result in result.areas:
+		if typeof(area_result) == TYPE_DICTIONARY:
+			var new_objects = []
+			for object_result in area_result.objects:
+				var object = object_result
+				object.properties.insert(5, 2)
+				
+				if object.type_id == 82: #checkpoint conversion
+					var old_properties = object.properties.duplicate()
+					object.properties[7] = Vector2(0, old_properties[7])
+				
+				new_objects.append(object)
+			area_result.objects = new_objects
+	print(result.areas.size())
+	return result
+
+
 static func compareVersions(version, other) -> int:
 	var v = version.split(".")
 	var o = other.split(".")
@@ -211,6 +225,7 @@ static func compareVersions(version, other) -> int:
 
 	return 0 #same version
 
+
 static func get_chunk_tile_id(chunk : String):
 	var chunk_parts
 	if "*" in chunk: 
@@ -224,7 +239,8 @@ static func get_chunk_tile_id(chunk : String):
 		return tile[1].left(2)
 	else:
 		return chunk_parts[0].left(2)
-	
+
+
 static func set_chunk_tile_id(chunk : String, new_id : String):
 	var chunk_parts
 	if "*" in chunk: 
