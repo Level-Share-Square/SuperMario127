@@ -46,8 +46,8 @@ func set_displacement_spring(power : float):
 	displacement_spring_anim_power = power
 
 func update_displacement_spring(delta):
-	var spring_constant = 800
-	var damping_constant = 7
+	var spring_constant = 200
+	var damping_constant = 12
 	
 	var damping_ratio = damping_constant / (2 * sqrt(spring_constant))
 

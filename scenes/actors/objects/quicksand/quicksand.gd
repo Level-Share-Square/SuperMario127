@@ -1,7 +1,7 @@
 extends LiquidBase
 
-onready var threshold_gradient : TextureRect = $ThresholdGradient
-onready var bubbles : Particles2D = $InstaKillBubbles
+onready var threshold_gradient : TextureRect = $Visual/ThresholdGradient
+onready var bubbles : Particles2D = $Visual/InstaKillBubbles
 
 var sinking_speed : float = 30.0
 var death_threshold : float = 128.0
@@ -14,6 +14,7 @@ func get_liquid_properties():
 
 func update_property(key, value):
 	update()
+	update_layer()
 	match(key):
 		"color":
 			update_liquid_color(value)

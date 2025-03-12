@@ -228,7 +228,8 @@ func on_signal_fire(index):
 		for function_name in functions:
 			var function_struct = level_data.functions[function_name]
 			interpreter_util.run_function(function_struct, self)
-			
+
+
 func update_layer():
 	if layer <= 4:
 		z_index = layer_dictionary[layer]
@@ -242,4 +243,4 @@ func update_layer():
 		modulate = Color(1, 1, 1)
 	if layer == 3:
 		enabled = false
-		
+

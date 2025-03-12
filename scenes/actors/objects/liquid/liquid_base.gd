@@ -26,9 +26,11 @@ onready var liquid_area : Area2D = $LiquidArea
 
 onready var liquid_area_collision : CollisionShape2D = $LiquidArea/CollisionShape2D
 
-onready var liquid_body : Control = $Body
+onready var visual : Node2D = $Visual
 
-onready var waves : Control = $Waves
+onready var liquid_body : Control = $Visual/Body
+
+onready var waves : Control = $Visual/Waves
 
 var liquid_properties: Array = [
 	"size",
@@ -56,6 +58,23 @@ func update():
 func update_property(key, value):
 	pass
 
+func update_layer():
+	var next_object_layer : int = wrapi(layer+1, 0, layer_dictionary.size())
+	
+	if layer <= 4:
+		z_index = layer_dictionary[layer] if !render_in_front else layer_dictionary[next_object_layer]
+	else:
+		printerr("Object has assigned layer %s" % layer)
+		
+	if layer == 0 or layer == 1:
+		enabled = false
+		modulate = BG_MODULATE
+	else:
+		modulate = Color(1, 1, 1)
+	if layer == 3:
+		enabled = false
+
+
 func _set_properties():
 	savable_properties = []
 	editable_properties = []
@@ -72,7 +91,7 @@ func _set_properties():
 
 func _set_property_values():
 	for liquid_property in liquid_properties:
-		set_property(liquid_property, self[liquid_property], true)
+		set_property(liquid_property, self[liquid_property], true, null if liquid_property != "render_in_front" else "Next Layer")
 	set_bool_alias("crystal_tap_mode", "Move", "Grow/Shrink")
 	
 	for liquid_property in get_liquid_properties():
@@ -107,8 +126,6 @@ func change_size():
 	preview_position = -size/2
 	liquid_area_collision.position = size/2
 	liquid_area_collision.shape.extents = liquid_area_collision.position
-	
-	z_index = -1 if !render_in_front else 25
 	
 	last_size = size
 	last_color = color

@@ -7,6 +7,7 @@ func get_liquid_properties() -> Array:
 
 func update_property(key, value):
 	update()
+	update_layer()
 
 func update_liquid_color(new_color):
 	waves.get_material().set_shader_param("color_tint", new_color)

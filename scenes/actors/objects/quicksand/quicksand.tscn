@@ -105,8 +105,6 @@ anim_speed_random = 0.2
 script = ExtResource( 2 )
 liquid_type = 2
 color = Color( 1, 0.584314, 0, 1 )
-horizontal = false
-crystal_tap_movement = Vector2( 0, 1 )
 surface_offset = -8.0
 
 [node name="LiquidArea" parent="." index="0"]
@@ -115,7 +113,10 @@ collision_mask = 6
 [node name="CollisionShape2D" parent="LiquidArea" index="0"]
 shape = SubResource( 1 )
 
-[node name="Body" type="ColorRect" parent="." index="1"]
+[node name="Visual" type="Node2D" parent="." index="1"]
+z_index = -1
+
+[node name="Body" type="ColorRect" parent="Visual" index="0"]
 material = SubResource( 2 )
 margin_top = 23.0
 margin_right = 1800.0
@@ -124,7 +125,7 @@ rect_pivot_offset = Vector2( 77, 71 )
 mouse_filter = 2
 color = Color( 1, 0.584314, 0, 1 )
 
-[node name="Waves" type="ColorRect" parent="." index="2"]
+[node name="Waves" type="ColorRect" parent="Visual" index="1"]
 material = SubResource( 9 )
 margin_top = -9.0
 margin_right = 1800.0
@@ -132,7 +133,7 @@ margin_bottom = 23.0
 mouse_filter = 2
 color = Color( 1, 0.584314, 0, 1 )
 
-[node name="ThresholdGradient" type="TextureRect" parent="." index="3"]
+[node name="ThresholdGradient" type="TextureRect" parent="Visual" index="2"]
 material = SubResource( 10 )
 margin_top = 8.0
 margin_right = 1800.0
@@ -141,7 +142,7 @@ mouse_filter = 2
 texture = SubResource( 12 )
 expand = true
 
-[node name="InstaKillBubbles" type="Particles2D" parent="." index="4"]
+[node name="InstaKillBubbles" type="Particles2D" parent="Visual" index="3"]
 modulate = Color( 1, 0.584314, 0, 1 )
 material = SubResource( 33 )
 position = Vector2( 900, 300 )

@@ -203,6 +203,7 @@ position = Vector2( 900, 300 )
 shape = SubResource( 7 )
 
 [node name="New" type="Node2D" parent="." index="2"]
+z_index = -2
 
 [node name="Body" type="ColorRect" parent="New" index="0"]
 light_mask = 0
@@ -244,6 +245,7 @@ texture = ExtResource( 9 )
 
 [node name="Old" type="Node2D" parent="." index="3"]
 visible = false
+z_index = -1
 
 [node name="Body" type="ColorRect" parent="Old" index="0"]
 light_mask = 0

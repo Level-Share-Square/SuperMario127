@@ -26,6 +26,8 @@ func get_liquid_properties():
 
 func update_property(key, value):
 	update()
+	update_layer()
+	visual = $New if !use_old_lava else $Old
 	match(key):
 		"color":
 			update_liquid_color(value)
@@ -127,6 +129,7 @@ func _ready():
 	#gets the correct nodes for the waves and liquid body
 	waves = $New/Waves
 	liquid_body = $New/Body
+	visual = $New if !use_old_lava else $Old
 	
 	var scene = get_tree().current_scene
 	if scene.mode == 1 and scene.placed_item_property == "NewLava":
