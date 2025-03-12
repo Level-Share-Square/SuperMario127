@@ -15,5 +15,6 @@ script = ExtResource( 1 )
 palette_textures = [ ExtResource( 8 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 9 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.72549 )
 z_index = -4
 texture = ExtResource( 4 )
