@@ -377,17 +377,17 @@ func update_selected_object(mouse_pos : Vector2) -> void:
 				# If something was already hovered, mark it as not
 				if is_instance_valid(hovered_object):
 					#hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
-					hovered_object.modulate = hovered_object.modulate * 2
+					hovered_object.modulate = hovered_object.modulate * 1.5
 					hovered_object.hovered = false
 				
 				hovered_object = objects[0]
 				hovered_object.hovered = true
 				#hovered_object.modulate = Color(0.65, 0.65, 1, hovered_object.modulate.a)
-				hovered_object.modulate = hovered_object.modulate / 2
+				hovered_object.modulate = hovered_object.modulate / 1.5
 				item_preview.visible = false
 		elif is_instance_valid(hovered_object):
 			#hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
-			hovered_object.modulate = hovered_object.modulate * 2
+			hovered_object.modulate = hovered_object.modulate * 1.5
 			hovered_object.hovered = false
 			hovered_object = null
 			item_preview.visible = true
