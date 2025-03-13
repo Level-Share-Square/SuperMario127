@@ -157,7 +157,7 @@ func _ready():
 		
 		# i don't know why this fixes the layering, 1.0 doesn't work and 0.0 doesn't work
 		# this is an integer
-		platform.z_index -= 0.5
+		#platform.z_index -= 0.5
 		
 		start_sprite_node = Node2D.new()
 		start_sprite_node.add_child(platform_sprite.duplicate())

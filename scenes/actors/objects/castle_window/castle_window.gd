@@ -14,3 +14,6 @@ func _ready():
 		layer = 1
 		update_layer()
 		is_background = false
+		
+	if palette != 0:
+		self.texture = palette_textures[palette - 1]

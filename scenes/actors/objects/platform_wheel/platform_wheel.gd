@@ -114,11 +114,12 @@ func _ready():
 			instance.set_sync_to_physics(false)
 		platforms.append(instance)
 		add_child(instance)
+		instance.z_index = z_index
 		
 		# Disable the collision if enabled = false
 		instance.collision_shape.disabled = !enabled
 		instance.platform_area_collision_shape.disabled = !enabled
-
+		
 func _physics_process(_delta):
 	time_alive += fps_util.PHYSICS_DELTA * speed
 	var angle := fmod(time_alive + angle_offset, (2*PI))

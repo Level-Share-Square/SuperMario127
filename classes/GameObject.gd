@@ -25,6 +25,7 @@ var layer_dictionary = {
 	3: 9
 }
 const BG_MODULATE := Color(0.54, 0.54, 0.54)
+var show_above_layer : bool = false
 
 # true if creating a GameObject for the object settings preview
 var is_preview : bool = false
@@ -232,7 +233,7 @@ func on_signal_fire(index):
 
 func update_layer():
 	if layer <= 4:
-		z_index = layer_dictionary[layer]
+		z_index = layer_dictionary[layer] + (1 * int(show_above_layer))
 	else:
 		printerr("Object has assigned layer %s" % layer)
 		

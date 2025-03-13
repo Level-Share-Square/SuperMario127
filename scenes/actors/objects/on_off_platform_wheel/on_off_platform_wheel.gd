@@ -115,6 +115,7 @@ func _ready():
 		# Disable the collision if enabled = false
 		instance.collision_shape.disabled = !enabled
 		instance.platform_area_collision_shape.disabled = !enabled
+		instance.z_index = z_index
 	
 	#_set_platform_pos()
 	
