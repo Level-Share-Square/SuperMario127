@@ -46,7 +46,13 @@ func open():
 		yield(tween, "tween_completed")
 		Singleton2.disable_hotkeys = true
 	
-func close():
+	var back_button = get_parent().get_node("BackButton")
+	back_button.connect("open_quit_wo_saving_popup",self,"temporary_close")
+	
+	var quit_wo_saving_window = back_button.get_node("QuitWOSavingWindow")
+	quit_wo_saving_window.set_open_window(self)
+
+func temporary_close()-> void:
 	if visible:
 		rect_scale = Vector2(0.4, 0.4)
 		tween.interpolate_property(self, "rect_scale",
@@ -56,6 +62,13 @@ func close():
 		yield(tween, "tween_completed")
 		visible = false
 		Singleton2.disable_hotkeys = false
+
+func close():
+	
+	var quit_wo_saving_window = get_parent().get_node("BackButton").get_node("QuitWOSavingWindow")
+	quit_wo_saving_window.set_open_window(null)
+	
+	temporary_close()
 
 func _ready():
 	close_button.texture_normal = load(close_button.texture_normal.load_path)
