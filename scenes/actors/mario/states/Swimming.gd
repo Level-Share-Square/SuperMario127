@@ -178,5 +178,5 @@ func _stop_check(_delta):
 
 func _general_update(_delta):
 	
-	if (!character.swimming):
+	if (!character.swimming && character.sound_player.swim_sound.playing):
 		character.sound_player.set_swim_playing(false)
