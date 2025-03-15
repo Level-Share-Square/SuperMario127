@@ -176,3 +176,7 @@ func _stop(delta):
 func _stop_check(_delta):
 	return !character.check_liquid(LiquidBase.LiquidType.Water) or (character.powerup != null and character.powerup.id == "Metal")
 
+func _general_update(_delta):
+	
+	if (!character.swimming && character.sound_player.swim_sound.playing):
+		character.sound_player.set_swim_playing(false)
