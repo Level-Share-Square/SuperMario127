@@ -1,3 +1,4 @@
+class_name Water
 extends LiquidBase
 
 export var toxicity : float = 0.0

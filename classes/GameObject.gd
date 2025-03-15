@@ -25,7 +25,7 @@ var layer_dictionary = {
 	3: 9
 }
 const BG_MODULATE := Color(0.54, 0.54, 0.54)
-var show_above_layer : bool = false
+export var show_above_layer : bool = false
 
 # true if creating a GameObject for the object settings preview
 var is_preview : bool = false

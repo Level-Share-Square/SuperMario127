@@ -8,11 +8,11 @@ export var size := Vector2(600.0, 300.0)
 export var color := Color(0.19, 0.52, 1)
 export var render_in_front := false
 export var tag = "default"
-export var move_speed : float = 1.0
-export var crystal_tap_mode : bool = true
 export var waves_enable : bool = true
 
+var crystal_tap_mode : bool = true
 var moving : bool = false
+var move_speed : float = 1.0
 var horizontal : bool = false
 var last_size : Vector2
 var last_color : Color
@@ -62,7 +62,7 @@ func update_layer():
 	var next_object_layer : int = wrapi(layer+1, 0, layer_dictionary.size())
 	
 	if layer <= 4:
-		z_index = layer_dictionary[layer] if !render_in_front else layer_dictionary[next_object_layer]
+		z_index = layer_dictionary[layer] if !render_in_front else layer_dictionary[next_object_layer] + (1 * int(show_above_layer))
 	else:
 		printerr("Object has assigned layer %s" % layer)
 		

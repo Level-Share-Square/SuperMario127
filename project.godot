@@ -404,6 +404,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/LaunchStar.gd"
 }, {
+"base": "LiquidBase",
+"class": "Lava",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/lava/new_lava.gd"
+}, {
 "base": "State",
 "class": "LavaBoostState",
 "language": "GDScript",
@@ -564,6 +569,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/Powerup.gd"
 }, {
+"base": "LiquidBase",
+"class": "Quicksand",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/quicksand/quicksand.gd"
+}, {
 "base": "State",
 "class": "QuicksandHopState",
 "language": "GDScript",
@@ -689,6 +699,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/player/ui_new/touch/checks/touch_check.gd"
 }, {
+"base": "LiquidBase",
+"class": "ToxicGas",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/toxic_gas/toxic_gas.gd"
+}, {
 "base": "Nozzle",
 "class": "TurboNozzle",
 "language": "GDScript",
@@ -713,6 +728,11 @@ _global_script_classes=[ {
 "class": "WallSlideState",
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/WallSlide.gd"
+}, {
+"base": "LiquidBase",
+"class": "Water",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/water/new_water.gd"
 }, {
 "base": "State",
 "class": "WingMarioState",
@@ -879,6 +899,7 @@ _global_script_class_icons={
 "LSSLevelInfo": "",
 "LSSLevelPage": "",
 "LaunchStarState": "",
+"Lava": "",
 "LavaBoostState": "",
 "LessThanCondition": "",
 "LessThanOrEqualToCondition": "",
@@ -911,6 +932,7 @@ _global_script_class_icons={
 "PlaceableItem": "",
 "PlayerSelector": "",
 "Powerup": "",
+"Quicksand": "",
 "QuicksandHopState": "",
 "QuicksandIdleState": "",
 "RainbowPowerup": "",
@@ -936,11 +958,13 @@ _global_script_class_icons={
 "TimerBase": "",
 "TimerManager": "",
 "TouchCheck": "",
+"ToxicGas": "",
 "TurboNozzle": "",
 "UtilEnvironment": "",
 "VanishPowerup": "",
 "WallJumpState": "",
 "WallSlideState": "",
+"Water": "",
 "WingMarioState": "",
 "WingPowerup": "",
 "conversion_util": "",

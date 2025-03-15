@@ -104,9 +104,9 @@ func cap_zoom_level(level : float) -> float:
 
 func set_zoom_level(level : float) -> void:
 	# Zoom level limits
-	if level < 0.25: level = 0.25 #lower limit on zoom
+	if level < 0.25: level = 0.25 # lower limit on zoom
 	
-	if level > 4.01: #just 4 wouldn't work and I don't know why
+	if level > 4.01: # 4 flat wouldn't work and I don't know why
 		$Grid.visible = false
 	else:
 		$Grid.visible = true
@@ -377,23 +377,21 @@ func update_selected_object(mouse_pos : Vector2) -> void:
 				# If something was already hovered, mark it as not
 				if is_instance_valid(hovered_object):
 					#hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
-					hovered_object.modulate = hovered_object.modulate * 1.5
+					hovered_object.modulate.a8 = 255
 					hovered_object.hovered = false
 				
 				hovered_object = objects[0]
 				hovered_object.hovered = true
 				#hovered_object.modulate = Color(0.65, 0.65, 1, hovered_object.modulate.a)
-				hovered_object.modulate = hovered_object.modulate / 1.5
+				hovered_object.modulate.a8 = 127
 				item_preview.visible = false
 		elif is_instance_valid(hovered_object):
 			#hovered_object.modulate = Color(1, 1, 1, hovered_object.modulate.a)
-			hovered_object.modulate = hovered_object.modulate * 1.5
+			hovered_object.modulate.a8 = 255
 			hovered_object.hovered = false
 			hovered_object = null
 			item_preview.visible = true
 
-
-					
 
 func _process(delta : float) -> void:
 	var visible_child_count := 0

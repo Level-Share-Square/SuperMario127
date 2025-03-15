@@ -1,3 +1,4 @@
+class_name Lava
 extends LiquidBase
 
 onready var new = $New

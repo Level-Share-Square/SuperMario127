@@ -1,3 +1,4 @@
+class_name Quicksand
 extends LiquidBase
 
 onready var threshold_gradient : TextureRect = $Visual/ThresholdGradient
@@ -71,13 +72,17 @@ func update():
 	liquid_body.material.set_shader_param("noise_scale_1", liquid_body.rect_size/Vector2(512, 512))
 	liquid_body.material.set_shader_param("noise_scale_2", liquid_body.rect_size/Vector2(32, 32))
 	liquid_body.material.set_shader_param("noise_scale_3", liquid_body.rect_size/Vector2(128, 128))
-	
+
 
 func _ready():
 	update_liquid_color(color)
 	update()
-	
+
 
 func _physics_process(delta):
 	if size != last_size:
 		update()
+
+
+func depth_check(pos: Vector2):
+	pass

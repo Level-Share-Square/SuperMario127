@@ -1380,6 +1380,7 @@ func check_liquid(liquid_type) -> bool:
 	
 	return false
 
+
 func handle_liquids(liquid_areas, delta):
 	if is_instance_valid(state):
 		liquid_detector.get_node("BaseCollision").disabled = state.use_dive_collision
@@ -1395,61 +1396,7 @@ func handle_liquids(liquid_areas, delta):
 	for area in liquid_areas:
 		var liquid : LiquidBase = area.get_parent()
 		match(liquid.liquid_type):
-			liquid.LiquidType.Water:
-				var toxicity = liquid.toxicity
-				
-				if toxicity > 0:
-					breath -= 0.25 * toxicity
-					if breath <= 0:
-						breath = 100
-						damage(1, "hit", 0)
-				
-			liquid.LiquidType.Lava:
-				if powerup != get_powerup_node("MetalPowerup"):
-					set_state_by_name("LavaBoostState", delta)
-				
-			liquid.LiquidType.Quicksand:
-				var sinking_speed = liquid.sinking_speed/10
-				var death_threshold = liquid.death_threshold
-				
-				if death_threshold <= 0 and !dead:
-					kill("quicksand")
-				if dead:
-					velocity = Vector2(0, sinking_speed*6)
-				
-				var rotation_vector : Vector2 = liquid.global_transform.y
-				
-				var m = rotation_vector.x/rotation_vector.y
-				var b = liquid.global_position.y - m*(liquid.global_position.x)
-				
-				var top_position := Vector2(
-					(global_position.y - b) / m if m != 0 else global_position.x,
-					global_position.x * m + b
-					)
-				
-				var idle_state = get_state_node("QuicksandIdleState")
-				var hop_state = get_state_node("QuicksandHopState")
-				
-				quicksand_particles.set_particles_color(liquid.color/1.2)
-				quicksand_particles.set_particles_emitting(true)
-				
-				idle_state.fall_speed = sinking_speed
-				
-				if bottom_pos.global_position.y < liquid.global_position.y + 2:
-					hop_state.working_jump_strength = get_state_node("JumpState").jump_power*.9
-					idle_state.move_speed_modifier = .9
-				else:
-					hop_state.working_jump_strength = get_state_node("QuicksandHopState").jump_strength
-					
-					if !dead:
-						idle_state.move_speed_modifier = min(1-(((bottom_pos.global_position.y-liquid.global_position.y)/death_threshold)/1.75), .75)
-			
-				if bottom_pos.global_position.y > top_position.y + death_threshold*rotation_vector.y and !dead:
-					print(top_position)
-					print(global_position)
-					kill("quicksand")
-
-			liquid.LiquidType.Poison:
+			liquid.LiquidType.Water, liquid.LiquidType.Poison:
 				var toxicity = liquid.toxicity
 				
 				if toxicity > 255:
@@ -1461,3 +1408,48 @@ func handle_liquids(liquid_areas, delta):
 					if breath <= 0:
 						breath = 100
 						damage(1, "hit", 0)
+
+			liquid.LiquidType.Lava:
+				if powerup != get_powerup_node("MetalPowerup"):
+					set_state_by_name("LavaBoostState", delta)
+
+			liquid.LiquidType.Quicksand:
+				var sinking_speed = liquid.sinking_speed/10
+				var death_threshold = liquid.death_threshold
+
+				if death_threshold <= 0 and !dead:
+					kill("quicksand")
+				if dead:
+					velocity = Vector2(0, sinking_speed*6)
+
+				var rotation_vector : Vector2 = liquid.global_transform.y
+
+				var m = rotation_vector.x/rotation_vector.y
+				var b = liquid.global_position.y - m*(liquid.global_position.x)
+
+				var top_position := Vector2(
+					(global_position.y - b) / m if m != 0 else global_position.x,
+					global_position.x * m + b
+					)
+
+				var idle_state = get_state_node("QuicksandIdleState")
+				var hop_state = get_state_node("QuicksandHopState")
+
+				quicksand_particles.set_particles_color(liquid.color/1.2)
+				quicksand_particles.set_particles_emitting(true)
+
+				idle_state.fall_speed = sinking_speed
+
+				if bottom_pos.global_position.y < liquid.global_position.y + 2:
+					hop_state.working_jump_strength = get_state_node("JumpState").jump_power*.9
+					idle_state.move_speed_modifier = .9
+				else:
+					hop_state.working_jump_strength = get_state_node("QuicksandHopState").jump_strength
+					
+					if !dead:
+						idle_state.move_speed_modifier = min(1-(((bottom_pos.global_position.y-liquid.global_position.y)/death_threshold)/1.75), .75)
+
+				if bottom_pos.global_position.y > top_position.y + death_threshold*rotation_vector.y and !dead:
+					print(top_position)
+					print(global_position)
+					kill("quicksand")
