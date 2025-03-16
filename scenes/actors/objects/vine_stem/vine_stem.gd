@@ -31,7 +31,7 @@ func _ready():
 		z_index = 0
 	
 	if palette != 0:
-		$Sprite.texture = palette_textures[palette - 1]
+		sprite.texture = palette_textures[palette - 1]
 		
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:

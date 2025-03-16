@@ -1818,6 +1818,7 @@ shape = SubResource( 18 )
 script = ExtResource( 21 )
 
 [node name="Shared" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 2 )]
+unique_name_in_owner = true
 
 [node name="Character" parent="Viewports/ViewportContainer/Viewport/World" instance=ExtResource( 3 )]
 collision_exceptions = [ NodePath("../Character2") ]

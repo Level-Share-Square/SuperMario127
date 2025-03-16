@@ -646,6 +646,7 @@ func _process(delta: float) -> void:
 	
 	sprite.self_modulate.a8 = 100 if invulnerable_frames%2 == 1 else 255
 
+
 func damage(amount : int = 1, cause : String = "hit", frames : int = 180) -> void:
 	if !dead:
 		if invincible:

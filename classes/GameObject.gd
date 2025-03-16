@@ -77,6 +77,7 @@ func _ready():
 	set_property_menu("layer", ["option", 4, 0, ['Very Background', 'Background', 'Ground', 'Foreground']])
 	update_layer()
 
+
 func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D, array: Array) -> void:
 	if node is Sprite:
 		var bitmap := BitMap.new()
@@ -113,13 +114,15 @@ func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D
 		if child is Node2D:
 			create_collision_polygons_from_tree(child, node_transform * child.transform, array)
 
+
 func is_savable_property(key) -> bool:
 	for savable_property in (base_savable_properties + savable_properties):
 		if key == savable_property:
 			return true
 	
 	return false
-	
+
+
 func get_property_index(key) -> int:
 	var index = 0
 	for savable_property in (base_savable_properties + savable_properties):
@@ -127,6 +130,7 @@ func get_property_index(key) -> int:
 			return index
 		index += 1
 	return index
+
 
 func set_property(key, value, change_level_object = true, alias = null):
 	if typeof(self[key]) != typeof(value):
@@ -156,38 +160,46 @@ func set_property(key, value, change_level_object = true, alias = null):
 	if mode == 1 and !is_preview:
 		emit_signal("property_changed", key, value)
 
+
 func get_editor_alias(key):
 	return editor_aliases[key]
+
 
 func has_editor_alias(key):
 	for i in editor_aliases.keys():
 		if i == key:
 			return true
 	return false
-	
+
+
 func set_property_by_index(index, value, change_level_object, alias = null):
 	var key = (base_savable_properties + savable_properties)[index]
 	set_property(key, value, change_level_object, alias)
-	
+
+
 func _set_properties():
 	pass
-	
+
+
 func _set_property_values():
 	pass
-	
+
+
 func _process(_delta):
 	if has_process_connection:
 		process_frame_counter -= 1
 		if process_frame_counter <= 0:
 			emit_signal("process")
 			process_frame_counter = 4
-	
+
+
 func _physics_process(_delta):
 	if has_physics_connection:
 		physics_frame_counter -= 1
 		if physics_frame_counter <= 0:
 			emit_signal("physics_process")
 			physics_frame_counter = 4
+
 
 func _init_signals():
 	var index = 0
@@ -204,17 +216,20 @@ func _init_signals():
 					if level_object_ref.player_signal_connections[index].size() > 0:
 						has_process_connection = true
 
+
 func set_bool_alias(key, true_alias, false_alias):
 	if true_alias != null && false_alias != null:
 		property_value_to_name[key] = {true: true_alias, false: false_alias}
 	else:
 		printerr("Bool aliases for %s was not set!" % key)
-		
+
+
 func set_property_menu(key, menu_array: Array):
 	if menu_array != null:
 		property_value_menus[key] = menu_array
 	else:
 		printerr("Property menu for %s was not set!" % key)
+
 
 func on_signal_fire(index):
 	var current_mode = get_tree().get_current_scene().mode
@@ -245,3 +260,6 @@ func update_layer():
 	if layer == 3:
 		enabled = false
 
+
+func get_shared():
+	return get_parent().get_parent()
