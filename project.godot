@@ -1435,8 +1435,7 @@ toggle_enabled={
 
 [layer_names]
 
-2d_render/layer_1="player"
-2d_render/layer_2="coins"
+2d_render/layer_20="fg_clip"
 2d_physics/layer_1="terrain"
 2d_physics/layer_2="player"
 2d_physics/layer_3="enemies"
@@ -1481,6 +1480,7 @@ limits/debugger_stdout/max_chars_per_second=10000
 quality/driver/fallback_to_gles2=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
+threads/thread_model=2
 vram_compression/import_bptc=true
 vram_compression/import_etc=true
 quality/filters/anisotropic_filter_level=1
@@ -1488,6 +1488,5 @@ batching/precision/uv_contract=true
 gles3/shaders/shader_compilation_mode=2
 limits/buffers/canvas_polygon_buffer_size_kb=1024
 limits/buffers/canvas_polygon_index_buffer_size_kb=1024
-limits/rendering/max_renderable_elements=131072
 environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
 quality/2d/use_pixel_snap=false

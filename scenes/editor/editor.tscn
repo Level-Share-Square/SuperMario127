@@ -1,4 +1,4 @@
-[gd_scene load_steps=1678 format=2]
+[gd_scene load_steps=1679 format=2]
 
 [ext_resource path="res://scenes/editor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -342,7 +342,7 @@
 [ext_resource path="res://scenes/actors/objects/p_switch/icon.png" type="Texture" id=340]
 [ext_resource path="res://scenes/actors/objects/crystal_tap/icon.png" type="Texture" id=341]
 [ext_resource path="res://scenes/actors/objects/crystal_tap/preview.png" type="Texture" id=342]
-[ext_resource path="res://scenes/actors/objects/checkpoint/icon.png" type="Texture" id=343]
+[ext_resource path="res://scenes/actors/objects/checkpoint/image.png" type="Texture" id=343]
 [ext_resource path="res://assets/tiles/lava_rock/slab_icon.png" type="Texture" id=344]
 [ext_resource path="res://assets/tiles/lava_rock/left_slope_icon.png" type="Texture" id=345]
 [ext_resource path="res://assets/tiles/lava_rock/right_slope_icon.png" type="Texture" id=346]
@@ -1642,6 +1642,7 @@
 [ext_resource path="res://scenes/actors/objects/small_bush/palettes/6/small_bush.png" type="Texture" id=1640]
 [ext_resource path="res://scenes/actors/objects/small_bush/palettes/6/icon.png" type="Texture" id=1641]
 [ext_resource path="res://scenes/actors/objects/flower_bush/palettes/6_icon.png" type="Texture" id=1642]
+[ext_resource path="res://scenes/actors/objects/fg_hider/icon.png" type="Texture" id=1643]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/icon.png-b79c93c9218fd28768c5a71f04f70e98.stex"
@@ -2597,6 +2598,7 @@ script = ExtResource( 24 )
 object_id = 82
 is_object = true
 object_center = Vector2( 16, 16 )
+item_name = "Checkpoint"
 icon = ExtResource( 343 )
 preview = ExtResource( 343 )
 
@@ -2712,6 +2714,14 @@ items_in_sequence = 3
 index_in_sequence = 2
 icon = ExtResource( 1434 )
 preview = ExtResource( 1433 )
+
+[node name="FGHider" type="Node" parent="PlaceableItems/SpecialGroup"]
+script = ExtResource( 24 )
+object_id = 145
+is_object = true
+item_name = "Foreground Hider"
+icon = ExtResource( 1643 )
+preview = ExtResource( 1643 )
 
 [node name="WindArea" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )

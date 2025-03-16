@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/actors/objects/fg_hider/icon.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/objects/fg_hider/fg_hider.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/wind_area/bounds_display.gd" type="Script" id=4]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 1 )
+colors = PoolColorArray( 0, 0, 0, 0.25098 )
+
+[sub_resource type="GradientTexture2D" id=3]
+gradient = SubResource( 4 )
+width = 1
+height = 1
+fill_from = Vector2( 0.445833, 0.291667 )
+
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 128, 128 )
+
+[node name="FG Hider" type="Node2D"]
+z_index = 2
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+z_index = 8
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 34.4661, 26.1036 )
+
+[node name="Mask" type="Light2D" parent="."]
+visible = false
+light_mask = 524288
+scale = Vector2( 256, 256 )
+texture = SubResource( 3 )
+mode = 3
+range_item_cull_mask = 524288
+
+[node name="Area2D" type="Area2D" parent="."]
+z_index = 1
+collision_layer = 0
+collision_mask = 2
+gravity_vec = Vector2( 0, -1 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[connection signal="body_exited" from="Area2D" to="." method="_exited"]

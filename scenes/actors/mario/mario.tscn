@@ -1,4 +1,4 @@
-[gd_scene load_steps=188 format=2]
+[gd_scene load_steps=189 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -16,7 +16,7 @@
 [ext_resource path="res://scenes/actors/mario/states/Getup.gd" type="Script" id=14]
 [ext_resource path="res://scenes/actors/mario/alt_frames.tres" type="SpriteFrames" id=15]
 [ext_resource path="res://scenes/actors/mario/luigi_alt_frames.tres" type="SpriteFrames" id=16]
-[ext_resource path="res://assets/tiles/layer2_mask.png" type="Texture" id=17]
+[ext_resource path="res://assets/tiles/spotlight_mask.png" type="Texture" id=17]
 [ext_resource path="res://scenes/actors/mario/states/GroundPoundStart.gd" type="Script" id=18]
 [ext_resource path="res://scenes/actors/mario/states/GroundPound.gd" type="Script" id=19]
 [ext_resource path="res://scenes/actors/mario/states/GroundPoundEnd.gd" type="Script" id=20]
@@ -75,6 +75,7 @@
 [ext_resource path="res://scenes/actors/mario/mario_sounds.tscn" type="PackedScene" id=73]
 [ext_resource path="res://scenes/actors/mario/luigi_sounds.tscn" type="PackedScene" id=74]
 [ext_resource path="res://scenes/actors/mario/states/LaunchStar.gd" type="Script" id=75]
+[ext_resource path="res://scenes/actors/mario/foreground_spotlight.gd" type="Script" id=76]
 [ext_resource path="res://scenes/actors/objects/metal_powerup/icon.png" type="Texture" id=77]
 [ext_resource path="res://scenes/actors/objects/rainbow_powerup/icon.png" type="Texture" id=78]
 [ext_resource path="res://scenes/actors/objects/vanish_powerup/icon.png" type="Texture" id=79]
@@ -1977,19 +1978,6 @@ shape = SubResource( 30 )
 
 [node name="Bubble" type="Sprite" parent="."]
 
-[node name="Spotlight" type="Light2D" parent="."]
-visible = false
-light_mask = 0
-position = Vector2( 0.058899, 0.111328 )
-enabled = false
-texture = ExtResource( 17 )
-mode = 3
-range_item_cull_mask = 524288
-shadow_item_cull_mask = 524288
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="WaterGroundCheck" type="RayCast2D" parent="."]
 visible = false
 position = Vector2( 0.5, 0 )
@@ -2254,3 +2242,12 @@ one_shot = true
 [node name="GroundColliderEnableTimer" type="Timer" parent="."]
 wait_time = 0.05
 one_shot = true
+
+[node name="Spotlight" type="Light2D" parent="."]
+light_mask = 0
+texture = ExtResource( 17 )
+texture_scale = 0.75
+mode = 3
+range_height = 1.0
+range_item_cull_mask = 524288
+script = ExtResource( 76 )
