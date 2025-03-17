@@ -47,7 +47,8 @@ func open():
 		Singleton2.disable_hotkeys = true
 	
 	var back_button = get_parent().get_node("BackButton")
-	back_button.connect("open_quit_wo_saving_popup",self,"temporary_close")
+	if (!back_button.is_connected("open_quit_wo_saving_popup",self,"temporary_close")):
+		back_button.connect("open_quit_wo_saving_popup",self,"temporary_close")
 	
 	var quit_wo_saving_window = back_button.get_node("QuitWOSavingWindow")
 	quit_wo_saving_window.set_open_window(self)

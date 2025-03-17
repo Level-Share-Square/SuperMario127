@@ -9,6 +9,8 @@ export var selected_color : Color
 export var editor_node_path : NodePath 
 onready var editor_node = get_node(editor_node_path)
 
+var hovered: bool = false
+
 func _ready():
 	var placeable_items = editor_node.get_node(editor_node.placeable_items_path)
 	var starting_toolbar = Singleton.CurrentLevelData.level_data.layout_ids
@@ -32,4 +34,28 @@ func _ready():
 		if index == Singleton.EditorSavedSettings.selected_box:
 			editor_node.selected_box = placeable_item_button
 		add_child(placeable_item_button)
+	
+	for child in get_children():
 		
+		child.connect("mouse_entered",self,"_on_mouse_entered")
+		child.connect("mouse_exited",self,"_on_mouse_exited")
+	
+	var parent: CanvasLayer = get_parent()
+	var level_settings_button: TextureButton = parent.get_node("LevelSettingsButton")
+	var help_button: TextureButton = parent.get_node("HelpButton")
+	var search_button: TextureButton = parent.get_node("SearchButton")
+	var save_button: TextureButton = parent.get_node("SaveButton")
+	var button_children: Array = [level_settings_button,help_button,search_button,save_button]
+	
+	for button in button_children:
+		
+		button.connect("mouse_entered",self,"_on_mouse_entered")
+		button.connect("mouse_exited",self,"_on_mouse_exited")
+
+
+
+func _on_mouse_entered():
+	hovered = true
+
+func _on_mouse_exited():
+	hovered = false

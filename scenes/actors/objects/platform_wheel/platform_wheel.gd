@@ -37,6 +37,8 @@ func _set_property_values():
 	set_property("start_angle", start_angle)
 
 func _input(event):
+	if (.is_window_open() || .is_mouse_over_area()):
+		return
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
 		if event.button_index == 5: # Mouse wheel down
 			parts -= 1

@@ -263,3 +263,85 @@ func update_layer():
 
 func get_shared():
 	return get_parent().get_parent()
+
+func is_window_open()-> bool:
+	
+	if (get_parent().name != "Objects"):
+		
+		return true
+	
+	# Get the Editor UI Node
+	var UI: CanvasLayer = get_parent().get_parent().get_parent().get_node("UI")
+	
+	if (UI == null):
+		
+		return true
+	
+	# Get all the potentially open windows
+	var quit_wo_saving_window: Popup = UI.get_node("BackButton").get_node("QuitWOSavingWindow")
+	var level_settings_window: NinePatchRect = UI.get_node("LevelSettingsWindow")
+	var object_settings_window: NinePatchRect = UI.get_node("ObjectSettingsWindow")
+	var level_code_window: NinePatchRect = UI.get_node("LevelCodeWindow") # Not currently used
+	var areas_window: NinePatchRect = UI.get_node("AreasWindow")
+	var colour_picker_window: NinePatchRect = UI.get_node("ColorPickerWindow") # Shouldn't need to check this window
+	var help_window: NinePatchRect = UI.get_node("HelpWindow")
+	var auto_save_window: NinePatchRect = UI.get_node("AutosaveWINDOW")
+	
+	var windows: Array = [quit_wo_saving_window,level_settings_window,object_settings_window,
+		areas_window,help_window,auto_save_window]
+	
+	for window in windows:
+		
+		if (window.visible): # if a window is visible, it's open
+			return true
+	
+	return false
+
+func is_mouse_over_area()-> bool:
+	
+	var mouse_pos: Vector2
+	
+	# Get the Editor UI Node
+	var UI: CanvasLayer = get_parent().get_parent().get_parent().get_node("UI")
+	
+	if (UI == null):
+		return true
+	
+	# Get all the potential overlapping areas
+	var placeable_items_container: TextureRect = UI.get_node("PlaceableItemsContainer")
+	var item_picker: TextureRect = UI.get_node("ItemPicker")
+	var item_picker_bottom: TextureRect
+	var item_picker_close_button: Button
+	if (item_picker.visible):
+		
+		item_picker_bottom = item_picker.get_node("Bottom")
+		item_picker_close_button = item_picker.get_node("CloseButton")
+	
+	var areas: Array = [placeable_items_container,item_picker,item_picker_bottom,item_picker_close_button]
+	
+	for area in areas:
+		
+		if (area == null || !area.visible): # Don't check for areas that aren't visible
+			continue
+		
+		if (area.hovered):
+			
+			return true
+	
+	# none of the areas are currently hovered over
+	return false
+
+func parts_input_handler(event,object):
+	if (is_window_open() || is_mouse_over_area()):
+		return
+	if event is InputEventMouseButton and event.is_pressed() and hovered:
+		if event.button_index == 5: # Mouse wheel down
+			object.parts -= 1
+			if object.parts < 1:
+				object.parts = 1
+			object.set_property("parts", object.parts, true)
+			object.update_parts()
+		elif event.button_index == 4: # Mouse wheel up
+			object.parts += 1
+			object.set_property("parts", object.parts, true)
+			object.update_parts()
