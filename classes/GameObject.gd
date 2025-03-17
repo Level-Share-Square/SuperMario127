@@ -264,7 +264,7 @@ func update_layer():
 func get_shared():
 	return get_parent().get_parent()
 
-func is_window_open()-> bool:
+func is_mouse_over_window()-> bool:
 	
 	var UI: CanvasLayer
 	
@@ -295,7 +295,7 @@ func is_window_open()-> bool:
 	
 	for window in windows:
 		
-		if (window.visible):
+		if (window.hovered):
 			return true
 	
 	return false
@@ -338,7 +338,7 @@ func is_mouse_over_area()-> bool:
 	return false
 
 func parts_input_handler(event,object):
-	if (is_window_open() || is_mouse_over_area()):
+	if (is_mouse_over_window() || is_mouse_over_area()):
 		return
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
 		if event.button_index == 5: # Mouse wheel down
