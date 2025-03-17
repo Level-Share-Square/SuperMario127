@@ -31,16 +31,21 @@ func _set_property_values():
 
 
 func _ready():
+	if is_preview:
+		return
+
+	set_property("layer", 3, true)
+	set_property_menu("layer", ["option", 1, 3, ["", "", "", "Foreground"]])
+
 	if mode != 1:
 		sprite.visible = false
 	else:
 		var _connect = connect("property_changed", self, "update_property")
 		sprite.visible = true
 
-	if !is_preview:
-		shared = get_shared()
-		tilemaps = shared.get_node("Tilemaps")
-		front_tilemap = tilemaps.get_node(tilemaps.front_tilemap)
+	shared = get_shared()
+	tilemaps = shared.get_node("Tilemaps")
+	front_tilemap = tilemaps.get_node(tilemaps.front_tilemap)
 
 	update_size()
 

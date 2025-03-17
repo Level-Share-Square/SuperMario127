@@ -5,6 +5,7 @@ export var used_sparkles : Texture
 
 onready var use_area = $UseArea
 onready var sound = $Use
+onready var display = $Display
 
 var is_used := false
 
@@ -25,7 +26,13 @@ func _set_property_values():
 func _ready():
 	if is_preview: return
 	
-	var _connect = use_area.connect("body_entered", self, "set_checkpoint")
+	if mode != 1:
+		display.visible = false
+		var _connect = use_area.connect("body_entered", self, "set_checkpoint")
+	else:
+		display.visible = true
+	
+	
 	Singleton.CurrentLevelData.set_checkpoint_ids()
 	id = level_object.get_ref().properties[7]
 	if Singleton.CheckpointSaved.current_checkpoint_id == id:

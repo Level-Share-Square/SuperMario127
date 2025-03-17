@@ -29,7 +29,7 @@ region_rect = Rect2( 0, 0, 34.4661, 26.1036 )
 
 [node name="Mask" type="Light2D" parent="."]
 visible = false
-light_mask = 524288
+light_mask = 0
 scale = Vector2( 256, 256 )
 texture = SubResource( 3 )
 mode = 3

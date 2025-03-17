@@ -27,11 +27,14 @@ func _init():
 
 func _ready():
 	.ready() #Calls parent class "TeleportObject"
+
 	connect("property_changed", self, "_on_property_changed")
-	if rotation != 0 and enabled: #TODO: Vertical & Lateral pipes
-		enabled = false
-	if rotation == 0:
+
+	if is_zero_approx(rotation): #TODO: Vertical & Lateral pipes
 		Singleton.CurrentLevelData.level_data.vars.teleporters.append([destination_tag.to_lower(), self])
+	else:
+		enabled = false
+
 	if color == Color(0, 1, 0):
 		sprite.texture = normal_texture
 		sprite2.visible = false
@@ -44,7 +47,7 @@ func _ready():
 		bright_color.s /= 1.5
 		bright_color.v *= 1.15
 		sprite2.self_modulate = bright_color
-		
+
 	if layer == 0 or layer == 1:
 		collision_shape.disabled = true
 
@@ -53,19 +56,22 @@ func connect_local_members():
 	pipe_enter_logic.connect("pipe_animation_finished", self, "_start_local_transition")
 	pipe_enter_logic.connect("exit", self, "_start_local_transition")
 
+
 func connect_remote_members():
 	pipe_enter_logic.connect("pipe_animation_finished", self, "change_areas")
-	
+
 
 func exit_local_teleport():
 	pipe_enter_logic.is_idle = true
-	
+
 
 func exit_remote_teleport():
 	pipe_enter_logic.is_idle = true
 
+
 func start_exit_anim(character):
 	pipe_enter_logic.start_pipe_exit_animation(character, teleportation_mode)
+
 
 func get_bottom_distance():
 	return pipe_enter_logic.PIPE_BOTTOM_DISTANCE - 30
