@@ -24,6 +24,7 @@ onready var click_sound = $CloseButton/ClickSound
 
 onready var tween = $Tween
 var drag_position = null
+var hovered: bool = false
 
 func _gui_input(event):
 	if event is InputEventMouseButton:
@@ -47,10 +48,52 @@ func open():
 		Singleton2.disable_hotkeys = true
 	
 	var back_button = get_parent().get_node("BackButton")
-	back_button.connect("open_quit_wo_saving_popup",self,"temporary_close")
+	if (!back_button.is_connected("open_quit_wo_saving_popup",self,"temporary_close")):
+		back_button.connect("open_quit_wo_saving_popup",self,"temporary_close")
 	
 	var quit_wo_saving_window = back_button.get_node("QuitWOSavingWindow")
 	quit_wo_saving_window.set_open_window(self)
+	
+	connect("mouse_entered",self,"on_mouse_entered")
+	connect("mouse_exited",self,"on_mouse_exited")
+	
+	var current_parents = [self]
+	var current_children: Array
+	
+	while (array_has_children(current_parents)):
+		
+		current_children = get_array_children(current_parents)
+		
+		for child in current_children:
+			
+			if (child.has_signal("mouse_entered")):
+			
+				child.connect("mouse_entered",self,"on_mouse_entered")
+				child.connect("mouse_exited",self,"on_mouse_exited")
+		
+		current_parents = Array(current_children)
+
+func array_has_children(array:Array)-> bool:
+	
+	for val in array:
+		
+		if (val.get_child_count() != 0):
+			return true
+	
+	return false
+
+func get_array_children(array:Array)-> Array:
+	
+	var children: Array = []
+	
+	for val in array:
+		
+		if (val.get_child_count() == 0):
+			continue
+		
+		children += val.get_children()
+	
+	return children
 
 func temporary_close()-> void:
 	if visible:
@@ -86,3 +129,9 @@ func pressed():
 	
 func is_open() -> bool:
 	return visible
+
+func on_mouse_entered()-> void:
+	hovered = true
+
+func on_mouse_exited()-> void:
+	hovered = false
