@@ -16,7 +16,16 @@ func pressed():
 	animation_player.play("windup", -1)
 	
 	yield(http_random_level, "request_completed")
+	
+	# In case the user went to a different screen while waiting
+	if (!is_instance_valid(http_random_level.subscreens.current_screen)):
+		button.disabled = false
+		animation_player.play("launch", -1,999)
+		return
+		
 	animation_player.play("launch", -1)
 	
-	yield(http_level_page, "request_completed")
+	if (http_random_level.request_ok):
+	
+		yield(http_level_page, "request_completed")
 	button.disabled = false
