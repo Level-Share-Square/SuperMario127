@@ -300,17 +300,17 @@ func is_mouse_over_window()-> bool:
 	
 	return false
 
-func is_mouse_over_area()-> bool:
+func is_mouse_over_area() -> bool:
 	
 	var mouse_pos: Vector2
 	
 	# Get the Editor UI Node
 	var UI: CanvasLayer = get_parent().get_parent().get_parent().get_node_or_null("UI")
 	
-	if (UI == null):
+	if !is_instance_valid(UI):
 		
 		UI = get_parent().get_parent().get_parent().get_parent()
-		if (UI == null):
+		if !is_instance_valid(UI):
 			return true
 	
 	# Get all the potential overlapping areas
@@ -327,19 +327,19 @@ func is_mouse_over_area()-> bool:
 	
 	for area in areas:
 		
-		if (area == null || !area.visible): # Don't check for areas that aren't visible
+		if !is_instance_valid(area) or !area.visible: # Don't check for areas that aren't visible
 			continue
 		
-		if (area.hovered):
-			
+		if area.hovered:
 			return true
 	
 	# none of the areas are currently hovered over
 	return false
 
-func parts_input_handler(event,object):
-	if (is_mouse_over_window() || is_mouse_over_area()):
+func parts_input_handler(event, object):
+	if is_mouse_over_window() or is_mouse_over_area():
 		return
+	
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
 		if event.button_index == 5: # Mouse wheel down
 			object.parts -= 1

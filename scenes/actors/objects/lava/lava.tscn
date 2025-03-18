@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://scenes/actors/objects/lava/lava_shader.tres" type="Shader" id=1]
 [ext_resource path="res://scenes/actors/objects/lava/lava.png" type="Texture" id=2]
@@ -29,16 +29,13 @@ noise = SubResource( 25 )
 resource_local_to_scene = true
 shader = ExtResource( 1 )
 shader_param/color = Color( 1, 0, 0, 1 )
-shader_param/noise_scale_1 = Vector2( 3.516, 1 )
 shader_param/noise_offset_1 = Vector2( 0, 0.75 )
 shader_param/noise_speed_1 = Vector2( 0, 0.05 )
-shader_param/noise_scale_2 = Vector2( 28.128, 9.376 )
 shader_param/noise_offset_2 = Vector2( 0, 16 )
 shader_param/noise_speed_2 = Vector2( 0, 0.1 )
-shader_param/noise_scale_3 = Vector2( 28.128, 9.376 )
 shader_param/noise_offset_3 = Vector2( 0, 16 )
 shader_param/noise_speed_3 = Vector2( 0.1, -0.1 )
-shader_param/x_size = 1800.0
+shader_param/size = Vector2( 1800, 600 )
 shader_param/noise_texture_1 = SubResource( 26 )
 shader_param/noise_texture_2 = ExtResource( 10 )
 shader_param/noise_texture_3 = ExtResource( 5 )
@@ -66,27 +63,24 @@ noise = SubResource( 21 )
 resource_local_to_scene = true
 shader = ExtResource( 7 )
 shader_param/color = Color( 1, 0, 0, 1 )
-shader_param/noise_scale_1 = Vector2( 3.516, 0.063 )
 shader_param/noise_offset_1 = Vector2( 0, 0.75 )
 shader_param/noise_speed_1 = Vector2( -0.012, 0 )
-shader_param/noise_scale_2 = Vector2( 56.252, 1 )
 shader_param/noise_offset_2 = Vector2( 0, 16 )
 shader_param/noise_speed_2 = Vector2( 0, 0.15 )
-shader_param/noise_scale_3 = Vector2( 14.063, 0.25 )
 shader_param/noise_offset_3 = Vector2( 0, 16 )
 shader_param/noise_speed_3 = Vector2( -0.1, 0.1 )
-shader_param/x_size = 1800.0
+shader_param/size = null
 shader_param/noise_texture_1 = SubResource( 24 )
 shader_param/noise_texture_2 = ExtResource( 6 )
 shader_param/noise_texture_3 = SubResource( 22 )
 
 [sub_resource type="Shader" id=15]
 code = "shader_type canvas_item;
-render_mode blend_add;
 
 uniform sampler2D noise_texture;
 uniform sampler2D distortion_texture;
-uniform vec4 color : hint_color;
+uniform sampler2D fade_out;
+
 uniform vec2 noise_scale;
 uniform vec2 scroll_speed;
 
@@ -94,9 +88,7 @@ void fragment() {
 	vec4 distortion = texture(distortion_texture, UV*noise_scale);
 	vec4 noise = texture(noise_texture, (UV*noise_scale+(scroll_speed*TIME))+distortion.r/3.0);
 	
-	COLOR.rgb = color.rgb;
-	COLOR.a = noise.r * ((UV.y)/1.75);
-	
+	COLOR.rgb = round((noise.rgb * texture(fade_out, vec2(UV.y, UV.x)).a) * 5.0) / 5.0;
 }"
 
 [sub_resource type="OpenSimplexNoise" id=19]
@@ -107,6 +99,12 @@ width = 256
 height = 256
 seamless = true
 noise = SubResource( 19 )
+
+[sub_resource type="Gradient" id=34]
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=35]
+gradient = SubResource( 34 )
 
 [sub_resource type="OpenSimplexNoise" id=16]
 
@@ -120,11 +118,14 @@ noise = SubResource( 16 )
 [sub_resource type="ShaderMaterial" id=18]
 resource_local_to_scene = true
 shader = SubResource( 15 )
-shader_param/color = Color( 1, 0, 0, 1 )
 shader_param/noise_scale = Vector2( 14.063, 0.25 )
 shader_param/scroll_speed = Vector2( 0, 0.15 )
 shader_param/noise_texture = SubResource( 17 )
 shader_param/distortion_texture = SubResource( 20 )
+shader_param/fade_out = SubResource( 35 )
+
+[sub_resource type="ViewportTexture" id=33]
+viewport_path = NodePath("New/Waves/Viewport")
 
 [sub_resource type="CanvasItemMaterial" id=29]
 blend_mode = 1
@@ -222,19 +223,24 @@ margin_bottom = 18.0
 mouse_filter = 2
 color = Color( 0.431373, 0, 0.14902, 1 )
 
-[node name="ZSetter" type="Node2D" parent="New/Waves" index="0"]
-position = Vector2( 0, -7 )
-z_index = -1
+[node name="Viewport" type="Viewport" parent="New/Waves" index="0"]
+size = Vector2( 1800, 24 )
+transparent_bg = true
+render_target_v_flip = true
+render_target_update_mode = 3
 
-[node name="LavaLight" type="ColorRect" parent="New/Waves/ZSetter" index="0"]
-modulate = Color( 1, 0, 0, 1 )
+[node name="LavaLight" type="ColorRect" parent="New/Waves/Viewport" index="0"]
 material = SubResource( 18 )
-margin_top = -3.0
 margin_right = 1800.0
-margin_bottom = 21.0
+margin_bottom = 24.0
 mouse_filter = 2
 
-[node name="Bubbles" type="Particles2D" parent="New/Waves" index="1"]
+[node name="Light2D" type="Light2D" parent="New/Waves" index="1"]
+position = Vector2( 900, 7 )
+texture = SubResource( 33 )
+energy = 1.27
+
+[node name="Bubbles" type="Particles2D" parent="New/Waves" index="2"]
 modulate = Color( 1, 1, 1, 0.43 )
 material = SubResource( 29 )
 position = Vector2( 900, 18 )

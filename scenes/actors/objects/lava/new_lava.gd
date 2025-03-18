@@ -2,7 +2,9 @@ class_name Lava
 extends LiquidBase
 
 onready var new = $New
-onready var lava_light = $New/Waves/ZSetter/LavaLight
+onready var lava_light_viewport = $New/Waves/Viewport
+onready var lava_light_texture = $New/Waves/Viewport/LavaLight
+onready var lava_light = $New/Waves/Light2D
 onready var bubbles = $New/Waves/Bubbles
 
 onready var body_collision = $StaticBody2D/CollisionShape2D
@@ -18,12 +20,14 @@ var surface_color : Color = Color8(255, 195, 0, 255)
 
 var surface_gradient : GradientTexture = GradientTexture.new()
 
+
 func get_liquid_properties():
 	return [
 		"use_old_lava",
 		"lighting",
 		"surface_color"
 	]
+
 
 func update_property(key, value):
 	update()
@@ -34,6 +38,13 @@ func update_property(key, value):
 			update_liquid_color(value)
 		"surface_color":
 			update_liquid_color(color)
+
+
+func update_layer():
+	.update_layer()
+	
+	
+
 
 func update_liquid_color(color):
 	waves.material.set_shader_param("color", surface_color)
@@ -59,7 +70,6 @@ func update_liquid_color(color):
 	waves.material.set_shader_param("noise_texture_1", surface_gradient)
 	
 	liquid_body.material.set_shader_param("color", color)
-	lava_light.material.set_shader_param("color", color)
 	bubbles.modulate = Color(surface_color.r, surface_color.g, surface_color.b, 111)
 	
 	#update old color
@@ -78,6 +88,7 @@ func update_liquid_color(color):
 		desat_color.s /= 2
 		old_waves.self_modulate = desat_color
 
+
 func update():
 	#update base stuff
 	if waves_enable:
@@ -91,17 +102,18 @@ func update():
 		liquid_body.rect_size = size
 	
 	#update new stuff
-	waves.material.set_shader_param("x_size", waves.rect_size.x)
-	waves.material.set_shader_param("noise_scale_2", waves.rect_size/Vector2(64, 64))
-	waves.material.set_shader_param("noise_scale_3", waves.rect_size/Vector2(512, 512))
+	waves.material.set_shader_param("size", waves.rect_size)
 	
-	liquid_body.material.set_shader_param("noise_scale_1", liquid_body.rect_size/Vector2(64, 64))
-	liquid_body.material.set_shader_param("noise_scale_2", liquid_body.rect_size/Vector2(64, 64))
-	liquid_body.material.set_shader_param("noise_scale_3", liquid_body.rect_size/Vector2(512, 512))
+	liquid_body.material.set_shader_param("size", liquid_body.rect_size)
+	
+	lava_light_texture.rect_size.x = size.x
+	lava_light_texture.material.set_shader_param("noise_scale", Vector2(size.x/256, .25))
+	
+	lava_light_viewport.size.x = size.x
 	
 	lava_light.visible = lighting
-	lava_light.rect_size.x = size.x
-	lava_light.material.set_shader_param("noise_scale", Vector2(size.x/256, .25))
+	lava_light.position.x = size.x/2
+	lava_light.color = color.linear_interpolate(surface_color, 0.5)
 	
 	bubbles.position.x = size.x/2
 	bubbles.process_material.emission_box_extents.x = (size.x/2) - 4
@@ -145,8 +157,25 @@ func _ready():
 	update()
 	
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if (new.visible == use_old_lava):
 		new.visible = !use_old_lava
 		old.visible = use_old_lava
+
+
+func update_light_layer():
+	match(layer + (1 if render_in_front else 0)):
+		0:
+			lava_light.range_z_min = -11
+			lava_light.range_z_max = -10
+		1:
+			lava_light.range_z_min = -10
+			lava_light.range_z_max = -10
+		2:
+			lava_light.range_z_min = -1
+			lava_light.range_z_max = 0
+		3:
+			lava_light.range_z_min = 9
+			lava_light.range_z_max = 10

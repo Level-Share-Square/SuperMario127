@@ -52,14 +52,14 @@ func update():
 	
 	if death_threshold <= 0:
 		bubbles.visible = true
-		bubbles.visibility_rect.position = Vector2.ZERO
-		bubbles.visibility_rect.size = Vector2(size.x-4, size.y)
-		bubbles.position = size/2
-		bubbles.position.y += 10
-		bubbles.process_material.emission_box_extents = Vector3(size.x/2, (size.y-10)/2, 0)
+		bubbles.position = Vector2(size.x/2, 0)
+		bubbles.process_material.emission_box_extents.x = (size.x/2) - 4
+		bubbles.amount = int(size.x/22)
+		bubbles.visibility_rect.position.x = -size.x/2
+		bubbles.visibility_rect.size.x = size.x
 		bubbles.modulate = color
-		bubbles.process_material.color.a8 = 60
-		bubbles.amount = (size.x*size.y)/(64*64)
+		bubbles.modulate.s /= 1.5
+		bubbles.modulate.a = 1
 	else:
 		bubbles.visible = false
 	

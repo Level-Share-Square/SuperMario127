@@ -17,7 +17,7 @@ func _set_property_values():
 	set_property("can_rotate", can_rotate, 1)
 
 func _input(event):
-	parts_input_handler(event,self)
+	parts_input_handler(event, self)
 
 
 func update_property(key, value):
