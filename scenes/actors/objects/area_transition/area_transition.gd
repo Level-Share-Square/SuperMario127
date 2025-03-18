@@ -62,15 +62,7 @@ func _ready():
 	$Area2D.connect("body_entered", self, "_on_body_entered")
 
 func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
-		if event.button_index == 5: # Mouse wheel down
-			parts -= 1
-			if parts < 1:
-				parts = 1
-			set_property("parts", parts, true)
-		elif event.button_index == 4: # Mouse wheel up
-			parts += 1
-			set_property("parts", parts, true)
+	parts_input_handler(event,self)
 			
 func update_property(key, value):
 	match(key):

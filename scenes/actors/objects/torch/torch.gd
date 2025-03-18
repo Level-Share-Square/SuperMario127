@@ -76,5 +76,5 @@ func update_light_layer():
 			light.range_z_max = 0
 		3:
 			light.range_z_min = 9
-			light.range_z_max = 10	
+			light.range_z_max = 10
 

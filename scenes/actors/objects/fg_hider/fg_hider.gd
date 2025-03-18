@@ -67,8 +67,7 @@ func _process(delta):
 					
 					HideMode.HideAll:
 						front_tilemap.display = true
-	
-	if hide_mode == HideMode.HideAll:
+	else:
 		var area_rect = Rect2(-size/2.0, size)
 
 		if area_rect.has_point(get_local_mouse_position()):

@@ -4,7 +4,7 @@ extends GameObject
 enum LiquidType {Water, Lava, Quicksand, Poison}
 
 export (LiquidType) var liquid_type
-export var size := Vector2(600.0, 300.0)
+export var size := Vector2(640.0, 320.0)
 export var color := Color(0.19, 0.52, 1)
 export var render_in_front := false
 export var tag = "default"
@@ -43,20 +43,26 @@ var liquid_properties: Array = [
 
 signal transform_changed()
 
+
 func get_liquid_properties() -> Array:
 	return []
+
 
 func set_liquid_property_menus():
 	pass
 
+
 func update_liquid_color(color : Color):
 	pass
+
 
 func update():
 	pass
 
+
 func update_property(key, value):
 	pass
+
 
 func update_layer():
 	var next_object_layer : int = wrapi(layer+1, 0, layer_dictionary.size())
@@ -89,6 +95,7 @@ func _set_properties():
 		editable_properties.insert(i, liquid_property)
 		i += 1
 
+
 func _set_property_values():
 	for liquid_property in liquid_properties:
 		set_property(liquid_property, self[liquid_property], true, null if liquid_property != "render_in_front" else "Next Layer")
@@ -97,6 +104,7 @@ func _set_property_values():
 	for liquid_property in get_liquid_properties():
 		set_property(liquid_property, self[liquid_property], true)
 	set_liquid_property_menus()
+
 
 func _ready():
 	if mode == 1:
@@ -120,6 +128,7 @@ func _ready():
 	
 	Singleton.CurrentLevelData.level_data.vars.liquids.append([tag.to_lower(), self])
 
+
 func change_size():
 	if !is_instance_valid(waves) and !is_instance_valid(liquid_body): return
 	
@@ -131,6 +140,7 @@ func change_size():
 	last_color = color
 	last_front = render_in_front
 	emit_signal("transform_changed") #calling update in here causes issues with getting nodes, so we connect that to this instead
+
 
 func _physics_process(_delta):
 	if !moving: return
@@ -145,7 +155,6 @@ func _physics_process(_delta):
 		if !crystal_tap_mode:
 			size.y += speed_modifier * ((end_pos - global_position.y) - size.y)
 			change_size() # Letting it happen in _process causes issues
-	
 	else:
 		var end_pos := global_position.x + size.x
 		if global_position.x == end_pos:
@@ -159,6 +168,7 @@ func _physics_process(_delta):
 		if !crystal_tap_mode:
 			size.y += speed_modifier * ((end_pos - global_position.x) - size.y)
 			change_size() # Letting it happen in _process causes issues
+
 
 func _process(_delta):
 	if "\n" in tag:

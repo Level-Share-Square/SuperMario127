@@ -49,9 +49,6 @@ patch_margin_left = 32
 patch_margin_right = 32
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Screw" type="Sprite" parent="Sprite"]
 position = Vector2( 48, 9 )

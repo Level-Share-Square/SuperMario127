@@ -4,6 +4,7 @@ onready var hover_sound = $HoverSound
 onready var click_sound = $ClickSound
 
 var last_hovered
+var hovered: bool = false
 
 func _pressed():
 	click_sound.play()

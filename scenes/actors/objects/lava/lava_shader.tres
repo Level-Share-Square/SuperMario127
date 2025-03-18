@@ -8,19 +8,21 @@ uniform sampler2D noise_texture_1;
 uniform sampler2D noise_texture_2;
 uniform sampler2D noise_texture_3;
 
-uniform vec2 noise_scale_1;
 uniform vec2 noise_offset_1;
 uniform vec2 noise_speed_1;
 
-uniform vec2 noise_scale_2;
 uniform vec2 noise_offset_2;
 uniform vec2 noise_speed_2;
 
-uniform vec2 noise_scale_3;
 uniform vec2 noise_offset_3;
 uniform vec2 noise_speed_3;
 
-uniform float x_size = 600.0;
+uniform vec2 size;
+
+varying vec2 noise_scale_1;
+varying vec2 noise_scale_2;
+varying vec2 noise_scale_3;
+
 
 float random (vec2 uv) {
     return fract(sin(dot(uv.xy, vec2(12.9898,78.233))) * 43758.5453123);
@@ -28,17 +30,21 @@ float random (vec2 uv) {
 
 
 float sine(vec2 uv_coords, float time, float arg1, float arg2) {
-	return sin((uv_coords.x * arg1 * (x_size / 20.0f)) + time * arg2);
+	return sin((uv_coords.x * arg1 * (size.x / 20.0f)) + time * arg2);
 }
 
-float get_size() {
-	return x_size/1500.0f;
+vec2 get_scale(ivec2 texture_size) {
+	return size/vec2(texture_size);
 }
 
 void fragment() {
 	vec4 base = texture(TEXTURE, UV);
 	base *= color;
 	base.rgb /= vec3(2);
+	
+	noise_scale_1 = get_scale(textureSize(noise_texture_1, 0));
+	noise_scale_2 = get_scale(textureSize(noise_texture_2, 0));
+	noise_scale_3 = get_scale(textureSize(noise_texture_3, 0));
 	
 	//retooled as a distortion map
 	vec2 noise_uv_3 = (UV * noise_scale_3) - (noise_offset_3/vec2(128)) + (noise_speed_3 * TIME);
