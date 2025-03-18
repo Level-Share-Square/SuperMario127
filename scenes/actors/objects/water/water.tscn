@@ -79,7 +79,6 @@ position = Vector2( 900, 300 )
 copy_mode = 2
 
 [node name="Visual" type="Node2D" parent="." index="2"]
-z_index = -1
 
 [node name="Body" type="ColorRect" parent="Visual" index="0"]
 material = SubResource( 5 )
