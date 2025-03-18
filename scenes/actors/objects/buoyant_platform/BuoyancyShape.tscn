@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 5.0
+
+[node name="BuoyancyShape" type="CollisionShape2D"]
+shape = SubResource( 1 )
