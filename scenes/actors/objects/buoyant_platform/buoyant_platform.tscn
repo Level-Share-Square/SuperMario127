@@ -18,6 +18,7 @@ extents = Vector2( 32, 7.5 )
 extents = Vector2( 48, 28 )
 
 [sub_resource type="RectangleShape2D" id=7]
+resource_local_to_scene = true
 extents = Vector2( 30, 10 )
 
 [node name="BuoyantPlatform" type="Node2D"]
@@ -27,18 +28,17 @@ palette_textures = [ ExtResource( 1 ), ExtResource( 6 ), ExtResource( 5 ), ExtRe
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 rotation = 6.28319
-collision_layer = 32768
+collision_layer = 0
 collision_mask = 32769
-gravity_scale = 2.0
+gravity_scale = 3.0
 linear_damp = 1.0
 angular_damp = 3.0
 script = ExtResource( 10 )
 
 [node name="Sprite" type="NinePatchRect" parent="RigidBody2D"]
 margin_left = -32.0
-margin_top = -12.0
 margin_right = 32.0
-margin_bottom = 5.0
+margin_bottom = 17.0
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 11, 64, 17 )
 patch_margin_left = 16
@@ -47,18 +47,16 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="RigidBody2D"]
-visible = false
+position = Vector2( 2.09815e-06, 12 )
 collision_layer = 16
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/StaticBody2D"]
-visible = false
 position = Vector2( 0, -3.5 )
 shape = SubResource( 1 )
 one_way_collision = true
 
 [node name="Area2D" type="Area2D" parent="RigidBody2D/StaticBody2D"]
-visible = false
 collision_layer = 16
 collision_mask = 4
 script = ExtResource( 2 )
@@ -67,8 +65,7 @@ script = ExtResource( 2 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+visible = false
 shape = SubResource( 7 )
 
 [node name="RayCast2D" type="RayCast2D" parent="RigidBody2D"]
-
-[node name="Tween" type="Tween" parent="."]
