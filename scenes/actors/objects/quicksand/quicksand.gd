@@ -1,11 +1,19 @@
 class_name Quicksand
 extends LiquidBase
 
+enum DepthResults {Surface, Sinking, Death}
+
 onready var threshold_gradient : TextureRect = $Visual/ThresholdGradient
 onready var bubbles : Particles2D = $Visual/InstaKillBubbles
 
 var sinking_speed : float = 30.0
 var death_threshold : float = 128.0
+
+## Box which determines where mario will slow down to a crawl when walking
+var sink_rect := Rect2(Vector2(0, death_threshold), size)
+
+## Box which determines where mario will die
+var death_rect := Rect2(Vector2(0, death_threshold), size)
 
 func get_liquid_properties():
 	return [
@@ -30,6 +38,12 @@ func update_liquid_color(color):
 	liquid_body.material.set_shader_param("color", color)
 
 func update():
+	sink_rect.position = Vector2(0, 2)
+	sink_rect.size = size
+	
+	death_rect.position = Vector2(0, death_threshold)
+	death_rect.size = size
+	
 	waves.rect_position.y = surface_offset
 	waves.rect_size.x = size.x
 	if waves_enable:
@@ -75,8 +89,8 @@ func update():
 
 
 func _ready():
-	update_liquid_color(color)
 	update()
+	update_liquid_color(color)
 
 
 func _physics_process(delta):
@@ -85,4 +99,14 @@ func _physics_process(delta):
 
 
 func depth_check(pos: Vector2):
-	pass
+	var local_pos : Vector2 = to_local(pos)
+	
+	if death_rect.has_point(local_pos):
+		return DepthResults.Death
+	elif sink_rect.has_point(local_pos):
+		return DepthResults.Sinking
+	else:
+		return DepthResults.Surface
+
+func _draw():
+	draw_rect(death_rect, Color.red, false, 2.0)

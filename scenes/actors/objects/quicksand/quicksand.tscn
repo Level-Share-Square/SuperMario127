@@ -112,6 +112,7 @@ collision_mask = 6
 shape = SubResource( 1 )
 
 [node name="Visual" type="Node2D" parent="." index="1"]
+show_behind_parent = true
 
 [node name="Body" type="ColorRect" parent="Visual" index="0"]
 material = SubResource( 2 )
