@@ -32,10 +32,10 @@ func pressed():
 		window_child.get_node("Contents/SaveButton").string = self
 		toggle_pressed()
 		
-		var parent = get_parent().get_parent().get_parent().get_parent().get_parent()
-		parent.add_window(window_child)
+		var UI = get_tree().root.get_node("Editor/UI")
+		UI.get_node("ObjectSettingsWindow").add_window(window_child)
 		
-		var back_button = parent.get_parent().get_node("BackButton")
+		var back_button = UI.get_node("BackButton")
 		if (!back_button.is_connected("open_quit_wo_saving_popup",self,"temporary_close")):
 			back_button.connect("open_quit_wo_saving_popup",self,"temporary_close")
 
