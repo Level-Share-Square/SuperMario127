@@ -36,7 +36,8 @@ func _gui_input(event):
 	if event is InputEventMouseMotion and drag_position:
 		rect_global_position = get_global_mouse_position() - drag_position
 
-func open():
+func reopen()-> void:
+	
 	emit_signal("window_opened")
 	if !visible:
 		visible = true
@@ -47,31 +48,47 @@ func open():
 		yield(tween, "tween_completed")
 		Singleton2.disable_hotkeys = true
 	
-	var back_button = get_parent().get_node("BackButton")
+	var back_button = get_parent().get_node_or_null("BackButton")
+	
+	if (!is_instance_valid(back_button)): # For text input windows
+		back_button = get_parent().get_parent().get_parent().get_node("BackButton")
+		
 	if (!back_button.is_connected("open_quit_wo_saving_popup",self,"temporary_close")):
 		back_button.connect("open_quit_wo_saving_popup",self,"temporary_close")
 	
-	var quit_wo_saving_window = back_button.get_node("QuitWOSavingWindow")
-	quit_wo_saving_window.set_open_window(self)
+	if (!is_connected("mouse_entered",self,"on_mouse_entered")):
 	
-	connect("mouse_entered",self,"on_mouse_entered")
-	connect("mouse_exited",self,"on_mouse_exited")
+		connect("mouse_entered",self,"on_mouse_entered")
+		connect("mouse_exited",self,"on_mouse_exited")
 	
 	var current_parents = [self]
 	var current_children: Array
+	var max_iterations = 10
+	var current_iteration = 1
 	
-	while (array_has_children(current_parents)):
+	while (array_has_children(current_parents) and current_iteration < max_iterations):
 		
 		current_children = get_array_children(current_parents)
 		
 		for child in current_children:
-			
-			if (child.has_signal("mouse_entered")):
+			if (child.has_signal("mouse_entered") and !(
+				child.is_connected("mouse_entered",self,"on_mouse_entered"))):
 			
 				child.connect("mouse_entered",self,"on_mouse_entered")
 				child.connect("mouse_exited",self,"on_mouse_exited")
 		
 		current_parents = Array(current_children)
+		current_iteration += 1
+
+func add_window(window)-> void:
+	
+	var quit_wo_saving_window = get_parent().get_node("BackButton").get_node("QuitWOSavingWindow")
+	quit_wo_saving_window.add_window(window)
+
+func open():
+	
+	reopen()
+	add_window(self)
 
 func array_has_children(array:Array)-> bool:
 	
@@ -108,8 +125,12 @@ func temporary_close()-> void:
 
 func close():
 	
-	var quit_wo_saving_window = get_parent().get_node("BackButton").get_node("QuitWOSavingWindow")
-	quit_wo_saving_window.set_open_window(null)
+	var quit_wo_saving_window
+	if (get_parent().name == "UI"):
+		quit_wo_saving_window = get_parent().get_node("BackButton").get_node("QuitWOSavingWindow")
+	else:
+		quit_wo_saving_window = get_parent().get_parent().get_parent().get_node("BackButton").get_node("QuitWOSavingWindow")
+	quit_wo_saving_window.remove_window(self)
 	
 	temporary_close()
 

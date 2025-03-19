@@ -4,6 +4,7 @@ export var line_edit : NodePath
 
 var is_pressed = false
 var last_hovered = false
+var window_child = null
 
 onready var hover_sound = $HoverSound
 onready var click_sound = $ClickSound
@@ -21,7 +22,7 @@ func pressed():
 	if is_pressed == false:
 		click_sound.play()
 		var window = preload("res://scenes/editor/window/TextInput.tscn")
-		var window_child = window.instance()
+		window_child = window.instance()
 		Singleton2.disable_hotkeys = true
 		get_parent().get_parent().get_parent().get_parent().add_child(window_child)
 		window_child.set_as_toplevel(true)
@@ -30,7 +31,20 @@ func pressed():
 		window_child.get_node("CloseButton").string = self
 		window_child.get_node("Contents/SaveButton").string = self
 		toggle_pressed()
+		
+		var parent = get_parent().get_parent().get_parent().get_parent().get_parent()
+		parent.add_window(window_child)
+		
+		var back_button = parent.get_parent().get_node("BackButton")
+		if (!back_button.is_connected("open_quit_wo_saving_popup",self,"temporary_close")):
+			back_button.connect("open_quit_wo_saving_popup",self,"temporary_close")
 
+
+func temporary_close()-> void:
+	
+	if (window_child.visible):
+		
+		window_child.visible = false
 
 func set_value(value: String):
 	text.text = value
