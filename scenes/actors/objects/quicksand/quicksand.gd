@@ -107,6 +107,3 @@ func depth_check(pos: Vector2):
 		return DepthResults.Sinking
 	else:
 		return DepthResults.Surface
-
-func _draw():
-	draw_rect(death_rect, Color.red, false, 2.0)
