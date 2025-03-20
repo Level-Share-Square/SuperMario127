@@ -92,6 +92,7 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 		foreground.visible = false
 		thumbnail.texture = default_thumbnail
 		
+		load_time_scores()
 		load_collectibles_info(level_info)
 		
 		return
