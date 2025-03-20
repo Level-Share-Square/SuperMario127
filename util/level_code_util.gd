@@ -279,6 +279,7 @@ static func decode_info(code: String) -> Dictionary:
 		add_amount = 4
 	
 	if (code_array.size() < 5 + add_amount):
+		result.name = "~~~"
 		return result
 	
 	var area_index: int = 2 + add_amount
