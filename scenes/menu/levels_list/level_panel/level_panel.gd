@@ -5,6 +5,7 @@ const TIME_SCORE_SCENE: PackedScene = preload("res://scenes/menu/levels_list/lev
 
 onready var list_handler = $"%ListHandler"
 onready var http_thumbnails = $"%HTTPThumbnails"
+onready var default_thumbnail = preload("res://.import/default_thumb.png-3e78509f186eb58e5a939ece4213411a.stex")
 
 var working_folder: String
 var level_id: String
@@ -44,11 +45,27 @@ onready var percentage_label := $InfoTab/Info/Completion/Percentage
 onready var time_scores_container: VBoxContainer = $ScoresTab/Panel/ScrollContainer/MarginContainer/VBoxContainer
 
 ### buttons
+onready var play_button = $Buttons/PlayLevel
 onready var back_button = $Buttons/Return
 onready var edit_button = $Buttons/EditLevel
 onready var reset_button = $Buttons/ResetSave
 onready var delete_button = $Buttons/DeleteLevel
 
+func load_collectibles_info(level_info: LevelInfo)-> void:
+	
+	var collectible_counts = level_info.get_collectible_counts()
+	
+	var total_shine_count: int = collectible_counts["total_shines"]
+	var collected_shine_count: int = collectible_counts["collected_shines"]
+	
+	shine_label.text = str(collected_shine_count) + "/" + str(total_shine_count)
+	shine_label.modulate = completion_color if (collected_shine_count >= total_shine_count) else Color.white
+	
+	var total_star_coin_count: int = collectible_counts["total_star_coins"]
+	var collected_star_coin_count: int = collectible_counts["collected_star_coins"]
+	
+	star_coin_label.text = str(collected_star_coin_count) + "/" + str(total_star_coin_count)
+	star_coin_label.modulate = completion_color if (collected_star_coin_count >= total_star_coin_count) else Color.white
 
 func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder: String, _can_edit: bool = true):
 	yield(get_parent(), "screen_opened")
@@ -60,6 +77,26 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 	
 	# load the real level data now
 	level_info.load_in()
+	
+	if (level_info.thumbnail_sky == -999):
+		# Invalid level detected!
+		edit_button.visible = false
+		play_button.visible = false
+		title.text = "Invalid Level"
+		title_shadow.text = title.text
+		author.text = "Unauthored"
+		description.bbcode_text = "[center]" + "The are no descriptions for invalid levels, silly :)" + "[/center]"
+		back_button.focus_neighbour_top = back_button.get_path_to(reset_button)
+		reset_button.focus_neighbour_bottom = reset_button.get_path_to(back_button)
+		
+		foreground.visible = false
+		thumbnail.texture = default_thumbnail
+		
+		load_collectibles_info(level_info)
+		
+		return
+	
+	play_button.visible = true
 	
 	title.text = level_info.level_name
 	title_shadow.text = title.text
@@ -101,25 +138,13 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 		level_info.load_save_from_dictionary(level_list_util.load_level_save_file(save_path))
 	load_time_scores()
 	
+	load_collectibles_info(level_info)
 	var collectible_counts = level_info.get_collectible_counts()
-	
-	var total_shine_count: int = collectible_counts["total_shines"]
-	var collected_shine_count: int = collectible_counts["collected_shines"]
-	
-	shine_label.text = str(collected_shine_count) + "/" + str(total_shine_count)
-	shine_label.modulate = completion_color if (collected_shine_count >= total_shine_count) else Color.white
-	
-	var total_star_coin_count: int = collectible_counts["total_star_coins"]
-	var collected_star_coin_count: int = collectible_counts["collected_star_coins"]
-	
-	star_coin_label.text = str(collected_star_coin_count) + "/" + str(total_star_coin_count)
-	star_coin_label.modulate = completion_color if (collected_star_coin_count >= total_star_coin_count) else Color.white
-	
 	
 	# these are floats cuz they need to be divided for some calculations :)
 	var total_collectibles: float = collectible_counts["total_collectibles"]
 	var total_collected: float = collectible_counts["total_collected"]
-	if total_collectibles <= 0: 
+	if total_collectibles <= 0:
 		percentage_label.text = "100%"
 		percentage_label.modulate = completion_color
 		return # OTHERWISE THE UNIVERSE WILL EXPLODEEEE ZOMG

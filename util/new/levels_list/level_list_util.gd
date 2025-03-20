@@ -270,11 +270,12 @@ static func get_level_thumbnail_path(level_id: String, working_folder: String, a
 static func get_image_from_path(file_path: String) -> ImageTexture:
 	var image := Image.new()
 	var err: int = image.load(file_path)
+	var texture := ImageTexture.new()
 	if err != OK:
 		printerr("Error loading image at path " + file_path + ". Error code: " + str(err))
-	 
-	var texture := ImageTexture.new()
-	texture.create_from_image(image)
+	
+	else:
+		texture.create_from_image(image)
 	return texture
 
 

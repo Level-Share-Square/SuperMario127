@@ -23,7 +23,12 @@ func update_preview():
 	var data = Singleton.CurrentLevelData.level_data
 	var area = data.areas[Singleton.CurrentLevelData.area]
 	var palette = area.settings.background_palette
-
+	
+	if (abs(area.settings.sky) > background_id_mapper.ids.size()-1):
+		area.settings.sky = 0
+	if (abs(area.settings.background) > foreground_id_mapper.ids.size()-1):
+		area.settings.background = 0
+	
 	var background_mapped_id = background_id_mapper.ids[area.settings.sky]
 	var background_resource = load("res://scenes/shared/background/backgrounds/" + background_mapped_id + "/resource.tres")
 	

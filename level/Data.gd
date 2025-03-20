@@ -77,6 +77,8 @@ func _init(code: String = ""):
 #	functions.size_process_function = process_function_struct
 
 func get_vector2(result) -> Vector2:
+	if (typeof(result) != TYPE_VECTOR2):
+		return Vector2(24,14)
 	return Vector2(result.x, result.y)
 
 func get_area(result) -> LevelArea:
@@ -214,6 +216,9 @@ func load_in(code):
 
 	var result
 	result = level_code_util.decode(code)
+	
+	if (result == null or result.size() < 5):
+		return
 
 	if result.format_version == "0.4.0":
 		result = conversion_util.convert_040_to_041(result)
@@ -259,11 +264,14 @@ func load_in(code):
 		result = conversion_util.convert_052_to_053(result)
 
 	assert(result.format_version)
+	var version_int = result.format_version.replace(".","")
 	var format_version = result.format_version
 	name = result.name
-	author = result.author
-	description = result.description
-	thumbnail_url = result.thumbnail_url
+	
+	if (version_int.is_valid_integer()):
+		author = result.author
+		description = result.description
+		thumbnail_url = result.thumbnail_url
 	
 	layout_ids = result.layout_ids
 	layout_palettes = result.layout_palettes

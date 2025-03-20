@@ -212,7 +212,9 @@ static func convert_052_to_053(result):
 static func compareVersions(version, other) -> int:
 	var v = version.split(".")
 	var o = other.split(".")
-
+	
+	if (len(v) != 3 or len(o) != 3):
+		return -1
 	for i in range(3):
 		var nv = int(v[i])
 		var no = int(o[i])
