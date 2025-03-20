@@ -112,6 +112,10 @@ static func decode(code: String) -> Dictionary:
 	code = code.replace("\n", "")
 	var code_array = split_code_top_level(code)
 	
+	if (code_array.size() < 4):
+		result.areas = [{}]
+		return result
+	
 	result.format_version = code_array[0]
 	result.name = code_array[1].percent_decode()
 	
@@ -180,6 +184,11 @@ static func decode(code: String) -> Dictionary:
 		var area_array = code_array[area_index].split("~")
 	
 		var area_settings_array = area_array[0].split(",")
+		
+		if (area_settings_array.size() < 4):
+			result.areas = [{}]
+			return result
+		
 		result.areas.append({})
 		result.areas[area_id].settings = {}
 		result.areas[area_id].settings.size = value_util.decode_value(area_settings_array[0])
@@ -256,7 +265,7 @@ static func decode_info(code: String) -> Dictionary:
 	var code_array: Array = code.split(",")
 	
 	result.format_version = code_array[0]
-	result.name = code_array[1].percent_decode()
+	result.name = code_array[1].percent_decode() if code_array.size() > 1 else "~~~"
 	
 	
 	var add_amount = 1
@@ -268,6 +277,10 @@ static func decode_info(code: String) -> Dictionary:
 		result.description = code_array[3].percent_decode()
 		result.thumbnail_url = code_array[4].percent_decode()
 		add_amount = 4
+	
+	if (code_array.size() < 5 + add_amount):
+		result.name = "~~~"
+		return result
 	
 	var area_index: int = 2 + add_amount
 	result.areas = [{}]

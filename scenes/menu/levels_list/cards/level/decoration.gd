@@ -6,6 +6,7 @@ const SHINE_MATERIAL: ShaderMaterial = preload("res://scenes/menu/levels_list/ca
 ## nodes
 onready var level_card: LevelCard = get_owner()
 onready var visibility_enabler_2d := $"%VisibilityEnabler2D"
+onready var default_thumbnail = preload("res://.import/default_thumb.png-3e78509f186eb58e5a939ece4213411a.stex")
 
 onready var panel := $"%Panel"
 onready var thumbnail_edge := $"%Edge"
@@ -26,7 +27,13 @@ func _ready():
 	
 	level_info = level_card.level_info
 	name_label.text = level_info.level_name
-	check_thumbnail()
+	
+	var is_valid: bool = (name_label.text != "~~~")
+	
+	if (!is_valid):
+		thumbnail.texture = default_thumbnail
+	else:
+		check_thumbnail()
 	
 	if level_card.has_save and level_info.is_fully_completed():
 		activate_completion_style()

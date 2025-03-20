@@ -31,7 +31,8 @@ func pick_random_music() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
 	var array_index = rng.randi_range(0, random_music.size() - 1)
-	level_data.areas[area].settings.music = random_music[array_index]
+	if (level_data.areas.size() > 0):
+		level_data.areas[area].settings.music = random_music[array_index]
 
 func create_level_data():
 	level_data = LevelData.new()
@@ -57,7 +58,7 @@ func get_cached_object(index: int):
 	return object_cache[index]
 
 func get_cached_background(index: int):
-	if background_cache.size() <= index: 
+	if background_cache.size() <= index or abs(index) > background_cache.size()-1:
 		index = 0
 	if background_cache[index] != null:
 		return background_cache[index]
@@ -69,7 +70,7 @@ func get_cached_background(index: int):
 	return background_cache[index]
 
 func get_cached_foreground(index: int):
-	if foreground_cache.size() <= index: 
+	if foreground_cache.size() <= index or abs(index) > foreground_cache.size()-1:
 		index = 0
 	if foreground_cache[index] != null:
 		return foreground_cache[index]

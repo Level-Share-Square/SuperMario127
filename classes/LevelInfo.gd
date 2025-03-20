@@ -73,11 +73,23 @@ func _init(passed_id: String, passed_folder: String, passed_level_code: String =
 		return
 	
 	var info_level_code: String = get_info_level_code(passed_level_code)
+	if (info_level_code == null):
+		return
 	var result: Dictionary = level_code_util.decode_info(info_level_code)
 	
 	level_name = result.get("name", "")
 	level_author = result.get("author", "")
 	level_description = result.get("description", "")
+	
+	if (result.size() < 3):
+		level_name = "~~~"
+		return
+	
+	if (typeof(result.areas[0].settings.sky) != TYPE_INT or
+	typeof(result.areas[0].settings.background) != TYPE_INT or
+	typeof(result.areas[0].settings.background_palette) != TYPE_INT):
+		level_name = "~~~"
+		return
 	
 	thumbnail_url = result.get("thumbnail_url", "")
 	thumbnail_sky = result.areas[0].settings.sky
@@ -90,10 +102,17 @@ func load_in() -> void:
 	
 	level_data = LevelData.new(level_code)
 	
+	if (thumbnail_sky == -999):
+		return
+	
 	level_name = level_data.name
 	level_author = level_data.author
 	level_description = level_data.description
 	thumbnail_url = level_data.thumbnail_url
+	
+	if (level_data.areas.size() == 0):
+		thumbnail_sky = -999
+		return
 	
 	thumbnail_sky = level_data.areas[0].settings.sky
 	thumbnail_background = level_data.areas[0].settings.background

@@ -173,8 +173,9 @@ func has_editor_alias(key):
 
 
 func set_property_by_index(index, value, change_level_object, alias = null):
-	var key = (base_savable_properties + savable_properties)[index]
-	set_property(key, value, change_level_object, alias)
+	if (index < (base_savable_properties + savable_properties).size()):
+		var key = (base_savable_properties + savable_properties)[index]
+		set_property(key, value, change_level_object, alias)
 
 
 func _set_properties():
