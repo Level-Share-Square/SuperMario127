@@ -216,8 +216,8 @@ func load_in(code):
 
 	var result
 	result = level_code_util.decode(code)
-	
-	if (result == null or result.size() < 5):
+
+	if !is_instance_valid(result) or result.size() < 5:
 		return
 
 	if result.format_version == "0.4.0":
@@ -231,10 +231,10 @@ func load_in(code):
 
 	if result.format_version == "0.4.3":
 		result.format_version = "0.4.4"
-		
+
 	if result.format_version == "0.4.4":
 		result = conversion_util.convert_044_to_045(result)
-	
+
 	if result.format_version == "0.4.5":
 		result.format_version = "0.4.6"
 
@@ -243,20 +243,16 @@ func load_in(code):
 
 	if result.format_version == "0.4.7":
 		result = conversion_util.convert_047_to_048(result)
-		
+
 	if result.format_version == "0.4.8":
 		result = conversion_util.convert_048_to_049(result)
-	
+
 	if result.format_version == "0.4.9":
 		result = conversion_util.convert_049_to_050(result)
-	
-	#uncomment this when the conversion function is finished
-	#if result.format_version == "0.5.0":
-	#	result = conversion_util.convert_050_to_051(result)
 
 	if result.format_version == "0.5.0":
 		result.format_version = "0.5.1"
-	
+
 	if result.format_version == "0.5.1":
 		result = conversion_util.convert_051_to_052(result)
 
@@ -267,16 +263,16 @@ func load_in(code):
 	var version_int = result.format_version.replace(".","")
 	var format_version = result.format_version
 	name = result.name
-	
+
 	if (version_int.is_valid_integer()):
 		author = result.author
 		description = result.description
 		thumbnail_url = result.thumbnail_url
-	
+
 	layout_ids = result.layout_ids
 	layout_palettes = result.layout_palettes
 	pinned_items = result.pinned_items
-	
+
 	if format_version == current_format_version:
 		for area_result in result.areas:
 			var area = get_area(area_result)

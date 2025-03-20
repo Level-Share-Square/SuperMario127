@@ -146,6 +146,9 @@ static func convert_051_to_052(result):
 	for area_result in result.areas:
 		if typeof(area_result) == TYPE_DICTIONARY:
 			var new_objects : Array = []
+			if !area_result.has("objects"):
+				return
+			
 			for object_result in area_result.objects:
 				var object = object_result
 				#liquid conversion (oh boy let the fun begin)
