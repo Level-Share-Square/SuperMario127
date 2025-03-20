@@ -25,6 +25,10 @@ var layout_palettes: Array = []
 var pinned_items: Array = []
 
 
+static func check_code(code):
+	return typeof(code) == TYPE_DICTIONARY or code.size() >= 5
+
+
 func _init(code: String = ""):
 	if code == "":
 		code = level_list_util.load_level_code_file(DEFAULT_CODE_PATH)
@@ -76,10 +80,12 @@ func _init(code: String = ""):
 	
 #	functions.size_process_function = process_function_struct
 
+
 func get_vector2(result) -> Vector2:
 	if (typeof(result) != TYPE_VECTOR2):
 		return Vector2(24,14)
 	return Vector2(result.x, result.y)
+
 
 func get_area(result) -> LevelArea:
 	var area = LevelArea.new()
@@ -119,7 +125,8 @@ func get_area(result) -> LevelArea:
 		var object = get_object(object_result)
 		area.objects.append(object)
 	return area
-	
+
+
 func get_settings(result) -> LevelAreaSettings:
 	var settings = LevelAreaSettings.new()
 	settings.sky = result.sky
@@ -131,7 +138,8 @@ func get_settings(result) -> LevelAreaSettings:
 	var size_vec2 = get_vector2(result.size)
 	settings.bounds.size = Vector2(clamp(size_vec2.x, 24, 1500), clamp(size_vec2.y, 14, 1500))
 	return settings
-	
+
+
 func get_chunks(resultLayers: Array, size: Vector2) -> Dictionary:
 	var level_width := int(size.x)
 	var chunks: Dictionary = {}
@@ -191,6 +199,7 @@ func get_chunks(resultLayers: Array, size: Vector2) -> Dictionary:
 		
 	return chunks
 
+
 func get_chunk_for_position(x: int, y: int, layer: int, chunks: Dictionary) -> Array:
 	var chunk_x: int = x / 16
 	var chunk_y: int = y / 16
@@ -203,6 +212,7 @@ func get_chunk_for_position(x: int, y: int, layer: int, chunks: Dictionary) -> A
 		chunks[key] = chunk
 		return chunk
 
+
 func get_object(result) -> LevelObject:
 	var object
 	object = LevelObject.new()
@@ -211,13 +221,14 @@ func get_object(result) -> LevelObject:
 	object.properties = result.properties
 	return object
 
+
 func load_in(code):
 	vars = LevelVars.new()
 
 	var result
 	result = level_code_util.decode(code)
 
-	if !is_instance_valid(result) or result.size() < 5:
+	if !check_code(result):
 		return
 
 	if result.format_version == "0.4.0":
@@ -280,8 +291,8 @@ func load_in(code):
 	else:
 		print("Outdated format version. Current version is " + current_format_version + ", but course uses version " + format_version + ".")
 
+
 func get_encoded_level_data():
-	
 	var level_string = ""
 	var level_name = name
 	var level_author = author

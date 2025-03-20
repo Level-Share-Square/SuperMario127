@@ -5,6 +5,10 @@ static func convert_040_to_041(result):
 	result.format_version = "0.4.1"
 	for area_result in result.areas:
 		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
 			var new_objects = []
 			area_result.settings.music = int(area_result.settings.music)
 			for object_result in area_result.objects:
@@ -33,6 +37,10 @@ static func convert_042_to_043(result):
 	result.format_version = "0.4.3"
 	for area_result in result.areas:
 		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
 			var new_objects = []
 			for object_result in area_result.objects:
 				var object = object_result
@@ -51,6 +59,10 @@ static func convert_044_to_045(result):
 	var current_id = 0
 	for area_result in result.areas:
 		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
 			var new_objects = []
 			for object_result in area_result.objects:
 				var object = object_result
@@ -73,6 +85,10 @@ static func convert_047_to_048(result):
 	var current_id = 0
 	for area_result in result.areas:
 		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
 			var new_objects = []
 			for object_result in area_result.objects:
 				var object = object_result
@@ -83,6 +99,7 @@ static func convert_047_to_048(result):
 					door_container.append(object)
 					continue
 				new_objects.append(object)
+			
 			if door_container != null:
 				var door_pairs = []
 				var pair_id = 0
@@ -145,10 +162,11 @@ static func convert_051_to_052(result):
 	result.format_version = "0.5.2"
 	for area_result in result.areas:
 		if typeof(area_result) == TYPE_DICTIONARY:
-			var new_objects : Array = []
-			if !area_result.has("objects"):
-				return
 			
+			if !area_result.has("objects"):
+				break
+			
+			var new_objects : Array = []
 			for object_result in area_result.objects:
 				var object = object_result
 				#liquid conversion (oh boy let the fun begin)
@@ -197,6 +215,10 @@ static func convert_052_to_053(result):
 	result.format_version = "0.5.3"
 	for area_result in result.areas:
 		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
 			var new_objects = []
 			for object_result in area_result.objects:
 				var object = object_result
