@@ -7,7 +7,7 @@ const OBJECT_ID_SHINE = 2
 const OBJECT_ID_STAR_COIN = 52
 
 const VERSION : String = "0.0.3"
-const INFO_DATA_SUFFIX: String = "~0*0~0*0~0*0~0*0]"
+#const INFO_DATA_SUFFIX: String = "~0*0~0*0~0*0~0*0]"
 
 # this class stores all the info and savedata relating to a level that can be played from the level list 
 
@@ -46,50 +46,42 @@ var collected_star_coins : Dictionary = {} # same as collected_shines
 var coin_score : int = 0
 var time_scores : Dictionary = {} # time_scores should probably be stored as the sum of delta while playing, keys are same as collected_shines
 var activated_fludds : Array = [false, false, false]
+var validity_check: ValidityChecker
 
 
 ## this function makes it so we can get info about a level for
 ## its card without loading everything in the level and wasting
 ## processing power :3
-func get_info_level_code(level_code: String):
-	var first_bracket_index: int = level_code.find("[")
-	var first_end_bracket_index: int = level_code.find("]")
-	
-	var level_code_start: String = level_code.left(first_bracket_index + 1)
-	level_code.erase(first_bracket_index, first_end_bracket_index - first_bracket_index)
-	level_code.erase(0, first_bracket_index)
-	
-	var info_level_code = level_code_start + level_code.get_slice("~", 0)
-	info_level_code += INFO_DATA_SUFFIX
-	
-	return info_level_code
+#func get_info_level_code(level_code: String):
+#	var first_bracket_index: int = level_code.find("[")
+#	var first_end_bracket_index: int = level_code.find("]")
+#
+#	var level_code_start: String = level_code.left(first_bracket_index + 1)
+#	level_code.erase(first_bracket_index, first_end_bracket_index - first_bracket_index)
+#	level_code.erase(0, first_bracket_index)
+#
+#	var info_level_code = level_code_start + level_code.get_slice("~", 0)
+#	info_level_code += INFO_DATA_SUFFIX
+#
+#	return info_level_code
 
 
 func _init(passed_id: String, passed_folder: String, passed_level_code: String = "") -> void:
 	level_id = passed_id
 	level_folder = passed_folder
 	level_code = passed_level_code
-	if passed_level_code == "":
-		return
 	
-	var info_level_code: String = get_info_level_code(passed_level_code)
-	if (info_level_code == null):
+	
+	validity_check = ValidityChecker.new(level_code,ValidityChecker.ValidityCheckTypes.INFO)
+	var result = validity_check.result
+	
+	if (!validity_check.is_valid):
+		level_name = "\"InvalidLevel\""
 		return
-	var result: Dictionary = level_code_util.decode_info(info_level_code)
 	
 	level_name = result.get("name", "")
 	level_author = result.get("author", "")
 	level_description = result.get("description", "")
-	
-	if (result.size() < 3):
-		level_name = "~~~"
-		return
-	
-	if (typeof(result.areas[0].settings.sky) != TYPE_INT or
-	typeof(result.areas[0].settings.background) != TYPE_INT or
-	typeof(result.areas[0].settings.background_palette) != TYPE_INT):
-		level_name = "~~~"
-		return
 	
 	thumbnail_url = result.get("thumbnail_url", "")
 	thumbnail_sky = result.areas[0].settings.sky
@@ -100,19 +92,18 @@ func _init(passed_id: String, passed_folder: String, passed_level_code: String =
 func load_in() -> void:
 	if is_fully_loaded: return
 	
-	level_data = LevelData.new(level_code)
+	validity_check = ValidityChecker.new(level_code,ValidityChecker.ValidityCheckTypes.FULL)
 	
-	if (thumbnail_sky == -999):
+	if (!validity_check.is_valid):
+		level_name = "\"InvalidLevel\""
 		return
+	
+	level_data = validity_check
 	
 	level_name = level_data.name
 	level_author = level_data.author
 	level_description = level_data.description
 	thumbnail_url = level_data.thumbnail_url
-	
-	if (level_data.areas.size() == 0):
-		thumbnail_sky = -999
-		return
 	
 	thumbnail_sky = level_data.areas[0].settings.sky
 	thumbnail_background = level_data.areas[0].settings.background

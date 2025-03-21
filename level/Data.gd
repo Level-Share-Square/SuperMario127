@@ -28,11 +28,12 @@ var pinned_items: Array = []
 static func check_code(code):
 	return typeof(code) == TYPE_DICTIONARY or code.size() >= 5
 
-
-func _init(code: String = ""):
+func _init(code: String = "",skip: bool = false):
+	if (skip):
+		return
 	if code == "":
 		code = level_list_util.load_level_code_file(DEFAULT_CODE_PATH)
-	load_in(code)
+#	load_in(code)
 #	var ready_function_struct = FunctionStruct.new()
 	
 #	functions.size_ready_function = ready_function_struct
@@ -222,74 +223,76 @@ func get_object(result) -> LevelObject:
 	return object
 
 
-func load_in(code):
-	vars = LevelVars.new()
-
-	var result
-	result = level_code_util.decode(code)
-
-	if !check_code(result):
-		return
-
-	if result.format_version == "0.4.0":
-		result = conversion_util.convert_040_to_041(result)
-
-	if result.format_version == "0.4.1":
-		result.format_version = "0.4.2"
-
-	if result.format_version == "0.4.2":
-		result = conversion_util.convert_042_to_043(result)
-
-	if result.format_version == "0.4.3":
-		result.format_version = "0.4.4"
-
-	if result.format_version == "0.4.4":
-		result = conversion_util.convert_044_to_045(result)
-
-	if result.format_version == "0.4.5":
-		result.format_version = "0.4.6"
-
-	if result.format_version == "0.4.6":
-		result.format_version = "0.4.7"
-
-	if result.format_version == "0.4.7":
-		result = conversion_util.convert_047_to_048(result)
-
-	if result.format_version == "0.4.8":
-		result = conversion_util.convert_048_to_049(result)
-
-	if result.format_version == "0.4.9":
-		result = conversion_util.convert_049_to_050(result)
-
-	if result.format_version == "0.5.0":
-		result.format_version = "0.5.1"
-
-	if result.format_version == "0.5.1":
-		result = conversion_util.convert_051_to_052(result)
-
-	if result.format_version == "0.5.2":
-		result = conversion_util.convert_052_to_053(result)
-
-	assert(result.format_version)
-	var version_int = result.format_version.replace(".","")
-	var format_version = result.format_version
-	name = result.name
-
-	if (version_int.is_valid_integer()):
-		author = result.author
-		description = result.description
-		thumbnail_url = result.thumbnail_url
-
-	layout_ids = result.layout_ids
-	layout_palettes = result.layout_palettes
-	pinned_items = result.pinned_items
-
-	if format_version == current_format_version:
-		for area_result in result.areas:
-			var area = get_area(area_result)
-			areas.append(area)
-	else:
-		print("Outdated format version. Current version is " + current_format_version + ", but course uses version " + format_version + ".")
+#func load_in(code):
+#	print("loading in level data...")
+#	vars = LevelVars.new()
+#
+#	var result
+#	result = level_code_util.decode(code)
+#
+#	if !check_code(result):
+#		return
+#
+#	if result.format_version == "0.4.0":
+#		result = conversion_util.convert_040_to_041(result)
+#
+#	if result.format_version == "0.4.1":
+#		result.format_version = "0.4.2"
+#
+#	if result.format_version == "0.4.2":
+#		result = conversion_util.convert_042_to_043(result)
+#
+#	if result.format_version == "0.4.3":
+#		result.format_version = "0.4.4"
+#
+#	if result.format_version == "0.4.4":
+#		result = conversion_util.convert_044_to_045(result)
+#
+#	if result.format_version == "0.4.5":
+#		result.format_version = "0.4.6"
+#
+#	if result.format_version == "0.4.6":
+#		result.format_version = "0.4.7"
+#
+#	if result.format_version == "0.4.7":
+#		result = conversion_util.convert_047_to_048(result)
+#
+#	if result.format_version == "0.4.8":
+#		result = conversion_util.convert_048_to_049(result)
+#
+#	if result.format_version == "0.4.9":
+#		result = conversion_util.convert_049_to_050(result)
+#
+#	if result.format_version == "0.5.0":
+#		result.format_version = "0.5.1"
+#
+#	if result.format_version == "0.5.1":
+#		result = conversion_util.convert_051_to_052(result)
+#
+#	if result.format_version == "0.5.2":
+#		result = conversion_util.convert_052_to_053(result)
+#
+#	assert(result.format_version)
+#	var version_int = result.format_version.replace(".","")
+#	var format_version = result.format_version
+#	name = result.name
+#
+#	if (version_int.is_valid_integer()):
+#		author = result.author
+#		description = result.description
+#		thumbnail_url = result.thumbnail_url
+#
+#	layout_ids = result.layout_ids
+#	layout_palettes = result.layout_palettes
+#	pinned_items = result.pinned_items
+#
+#	if format_version == current_format_version:
+#		for area_result in result.areas:
+#			if (area_result.size() == 6):
+#				var area = get_area(area_result)
+#				areas.append(area)
+#	else:
+#		print("Outdated format version. Current version is " + current_format_version + ", but course uses version " + format_version + ".")
 
 
 func get_encoded_level_data():

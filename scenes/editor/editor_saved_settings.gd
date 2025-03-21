@@ -17,5 +17,5 @@ var default_level : LevelData
 var default_area : LevelArea
 
 func _init():
-	default_level = LevelData.new()
+	default_level = ValidityChecker.new()
 	default_area = default_level.areas[0]
