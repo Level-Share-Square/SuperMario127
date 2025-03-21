@@ -76,16 +76,17 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 	can_edit = _can_edit
 	
 	# load the real level data now
-	level_info.load_in()
+	if (level_info.validity_check.is_valid):
+		level_info.load_in()
 	
-	if (level_info.thumbnail_sky == -999):
+	if (!level_info.validity_check.is_valid):
 		# Invalid level detected!
 		edit_button.visible = false
 		play_button.visible = false
 		title.text = "Invalid Level"
 		title_shadow.text = title.text
 		author.text = "Unauthored"
-		description.bbcode_text = "[center]" + "The are no descriptions for invalid levels, silly :)" + "[/center]"
+		description.bbcode_text = "[center]" + level_info.validity_check.invalid_reason + "[/center]"
 		back_button.focus_neighbour_top = back_button.get_path_to(reset_button)
 		reset_button.focus_neighbour_bottom = reset_button.get_path_to(back_button)
 		
@@ -94,6 +95,8 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 		
 		load_time_scores()
 		load_collectibles_info(level_info)
+		percentage_label.text = "100%"
+		percentage_label.modulate = completion_color
 		
 		return
 	

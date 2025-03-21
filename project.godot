@@ -714,6 +714,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://interpreter/environments/UtilEnvironment.gd"
 }, {
+"base": "LevelData",
+"class": "ValidityChecker",
+"language": "GDScript",
+"path": "res://classes/ValidityChecker.gd"
+}, {
 "base": "Powerup",
 "class": "VanishPowerup",
 "language": "GDScript",
@@ -961,6 +966,7 @@ _global_script_class_icons={
 "ToxicGas": "",
 "TurboNozzle": "",
 "UtilEnvironment": "",
+"ValidityChecker": "",
 "VanishPowerup": "",
 "WallJumpState": "",
 "WallSlideState": "",

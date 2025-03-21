@@ -28,9 +28,11 @@ func _ready():
 	level_info = level_card.level_info
 	name_label.text = level_info.level_name
 	
-	var is_valid: bool = (name_label.text != "~~~")
+	var is_valid: bool = level_info.validity_check.is_valid
 	
 	if (!is_valid):
+		level_info.level_name = "Invalid Level"
+		name_label.text = "Invalid Level"
 		thumbnail.texture = default_thumbnail
 	else:
 		check_thumbnail()

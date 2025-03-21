@@ -46,7 +46,7 @@ func setup(
 	
 	# Uncomment the lines below and above to have any invalid level code be replaced by the default level code
 	# For now it just shows a predefined invalid level card that doesn't let you edit or play the level
-#	if (level_info.level_name == "~~~"):
+#	if (level_info.level_name == "\"Invalid Level\""):
 #		level_code = level_list_util.load_level_code_file(LevelData.DEFAULT_CODE_PATH)
 #		level_info = LevelInfo.new(id, parent_folder, level_code)
 	

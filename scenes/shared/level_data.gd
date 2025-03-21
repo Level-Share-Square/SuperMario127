@@ -35,7 +35,7 @@ func pick_random_music() -> void:
 		level_data.areas[area].settings.music = random_music[array_index]
 
 func create_level_data():
-	level_data = LevelData.new()
+	level_data = ValidityChecker.new()
 	pick_random_music()
 
 ## caching
