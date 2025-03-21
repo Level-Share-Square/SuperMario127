@@ -92,7 +92,7 @@ func _init(passed_id: String, passed_folder: String, passed_level_code: String =
 func load_in() -> void:
 	if is_fully_loaded: return
 	
-	validity_check = ValidityChecker.new(level_code,ValidityChecker.ValidityCheckTypes.FULL)
+	validity_check = ValidityChecker.new(level_code, ValidityChecker.ValidityCheckTypes.FULL)
 	
 	if (!validity_check.is_valid):
 		level_name = "\"InvalidLevel\""

@@ -13,16 +13,16 @@ export (ValidityCheckTypes) var validity_check_type = -1
 
 func _init(code: String = "",type: int = 0)-> void:
 	
-	._init("",true)
+	._init("", true)
 	
-	if (ValidityCheckTypes.find_key(type) == null):
+	if ValidityCheckTypes.find_key(type) == null:
 		printerr("Invalid validity check type passed!\n"+"Valid values: ",ValidityCheckTypes.values(),
 		"\nSetting validity check to None.")
 		validity_check_type = ValidityCheckTypes.NONE
 	
 	else:
-		
 		validity_check_type = type
+	
 	level_code = code
 	is_valid = false
 	invalid_reason = "This level has not been checked for validity yet."
@@ -41,7 +41,7 @@ func _init(code: String = "",type: int = 0)-> void:
 			full_check()
 		
 		ValidityCheckTypes.NONE:
-			print("Warining! Validity check is None, level code will not be verified.")
+			push_warning("Warning! Validity check is None, level code will not be verified.")
 
 ## this function makes it so we can get info about a level for
 ## its card without loading everything in the level and wasting
@@ -360,9 +360,13 @@ func load_in(code: String)-> void:
 		for area_result in result.areas:
 			if (area_result.size() == 6):
 				var area = get_area(area_result)
-				areas.append(area)
+				
+				if is_instance_valid(area):
+					areas.append(area)
+				else:
+					printerr("Found invalid area while parsing level code, area will be skipped.")
 			else:
-				print("found invalid area while parsing level code, area will be skipped.")
+				printerr("Found invalid area while parsing level code, area will be skipped.")
 	else:
 		print("Outdated format version. Current version is " \
 		+ current_format_version + ", but course uses version " + format_version + ".")

@@ -2,6 +2,7 @@ extends LevelDataLoader
 
 const COIN_ANIM_FPS = 12
 const LAYER_COUNT = 4
+const TILE_SIZE = 32
 
 var mode = 1
 
@@ -9,7 +10,7 @@ onready var placement_nodes = [
 	null,
 	null,
 	null,
-	$Placement/RectangleFill
+	$Placement/RectangleFill,
 ]
 
 export var placement_mode := "Drag"
@@ -91,16 +92,26 @@ func quit_to_menu():
 
 
 # Functions to avoid copy pasted code
-func cap_zoom_level(level : float) -> float:
+func cap_zoom_level(zoom : float) -> float:
 	# Reduce the zoom level if the screen wouldn't fit within the level
-	# NOTE: all values are -6 since there are 3 tiles OOB in both directions for both axis
+	# NOTE: all tile counts are +6 since there are 3 tiles OOB in both directions for both axis
+	var viewport_size := Vector2(
+		ProjectSettings.get_setting("display/window/size/width"), 
+		ProjectSettings.get_setting("display/window/size/height")
+	)
+	# This accounts for the toolbar cutting off the top 70 pixels of the screen,
+	# I'd prefer to not hardcode this but frankly it's not worth the time to 
+	# figure out getting the height of the toolbar.
+	var toolbar_size : float = 70
 	var level_size : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds.size
-#	print(Vector2(768*level, 432*level))
-#	print((level_size+Vector2(6, 6))*32)
-	while (768*level > (level_size.x+6)*32) or ((432-70)*level > (level_size.y+6)*32):
-		level = level-.05
+
+	while (
+		viewport_size.x * zoom > (level_size.x + 6) * TILE_SIZE or 
+		(viewport_size.y - 70) * zoom > (level_size.y + 6) * TILE_SIZE
+	):
+		zoom = zoom-.05
 	
-	return level
+	return zoom
 
 func set_zoom_level(level : float) -> void:
 	# Zoom level limits
