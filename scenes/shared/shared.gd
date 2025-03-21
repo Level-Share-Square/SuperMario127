@@ -160,14 +160,21 @@ func toggle_layer_transparency(current_layer, is_transparent):
 		var tilemap_color = Color(1, 1, 1, 1)
 		if tilemap.name == "Back" or tilemap.name == "VeryBack":
 			tilemap_color = Color(0.54, 0.54, 0.54, 1)
+		
 		if index == current_layer:
 			tilemap.modulate = tilemap_color
-			tilemap.self_modulate = tilemap_color
+			
+			if tilemap.name == "Front":
+				tilemap.target_alpha = tilemap_color.a
 		else:
 			if is_transparent:
 				tilemap_color.a = 0.25
+			
 			tilemap.modulate = tilemap_color
-			tilemap.self_modulate = tilemap_color
+			
+			if tilemap.name == "Front":
+				tilemap.target_alpha = tilemap_color.a
+			
 		index = (index + 1) % 4
 
 func move_object_to_back(object):
