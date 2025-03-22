@@ -154,7 +154,7 @@ func destroy_objects_overlapping_position(point: Vector2, area_check : Rect2, re
 func update_tilemaps():
 	tilemaps_node.update_tilemaps()
 
-func toggle_layer_transparency(current_layer, is_transparent):
+func toggle_layer_transparency(current_layer: int, is_transparent: bool):
 	var index = 3 # has to be done because for some reason the indices are wrong for the layers
 	for tilemap in tilemaps_node.get_children():
 		var tilemap_color = Color(1, 1, 1, 1)
@@ -175,7 +175,7 @@ func toggle_layer_transparency(current_layer, is_transparent):
 			if tilemap.name == "Front":
 				tilemap.target_alpha = tilemap_color.a
 			
-		index = (index + 1) % 4
+		index = wrapi(index + 1, 0, 3)
 
 func move_object_to_back(object):
 	objects_node.move_object_to_back(object)

@@ -36,7 +36,7 @@ func _get_mode_switcher():
 
 var SceneTransitions setget ,_get_scene_transitions
 func _get_scene_transitions():
-	return lazy_get("SceneTransitions", "res://scenes/actors/scene_transitions/CanvasLayer.tscn", SceneTransitions)
+	return lazy_get("SceneTransitions", "res://scenes/actors/scene_transitions/SceneTransitions.tscn", SceneTransitions)
 
 var SceneSwitcher setget ,_get_scene_switcher
 func _get_scene_switcher():

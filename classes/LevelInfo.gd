@@ -114,12 +114,11 @@ func load_in() -> void:
 			match(object.type_id):
 				OBJECT_ID_SHINE:
 					# these use weird indexed things because that's unfortunately just how stuff is stored before being loaded, this bit does what you'd expect, the values are the shines properties
-					var shine_dictionary : Dictionary = \
-					{
+					var shine_dictionary : Dictionary = {
 						"title": object.properties[6],
 						"description": object.properties[7],
 						"show_in_menu": object.properties[8],
-						"color": object.properties[12].to_rgba32(),
+						"color": object.properties[12].to_rgba32() if typeof(object.properties[12]) == TYPE_COLOR else Color(1, 1, 0).to_rgba32(),
 						"id": object.properties[13],
 						"do_kick_out": object.properties[14],
 						"enabled": object.properties[3]
