@@ -12,18 +12,21 @@ export var normal_particles : StreamTexture
 export var recolorable_particles : StreamTexture
 export var collected_particles : StreamTexture
 
+export var normal_spawn_particles : Texture
+export var recolorable_spawn_particles : Texture
+export var collected_spawn_particles : Texture
 
 onready var animated_sprite : AnimatedSprite = $AnimatedSprite
-onready var outline_sprite : AnimatedSprite = $AnimatedSpriteOutline
-onready var ray_sprite : Sprite = $Sprite
-onready var recolorable_ray_sprite : Sprite = $RecolorableRays
+onready var outline_sprite : AnimatedSprite = $AnimatedSprite/AnimatedSpriteOutline
+onready var vector_rays: ColorRect = $RaysContainer/VectorRays
 onready var particles : Particles2D = $AnimatedSprite/Particles2D
+onready var spawn_particles : Particles2D = $SpawnParticles
 onready var ghost : Sprite = $Ghost
 onready var area : Area2D = $Area2D
 onready var unpause_timer : Timer = $UnpauseTimer
 onready var collect_sound : AudioStreamPlayer = $CollectSound
 onready var appear_sound = $AppearSound
-onready var ambient_sound : AudioStreamPlayer = $AmbientSound
+onready var ambient_sound : AudioStreamPlayer2D = $AmbientSound
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 onready var current_scene : Node = get_tree().current_scene
 onready var shine_get : Node = current_scene.get_node_or_null("%ShineGet")
@@ -37,11 +40,14 @@ const COURSE_CLEAR_MUSIC_VOLUME := -2.25
 const SHINE_DANCE_END_DELAY := 0.65
 const MUSIC_TRANSITION_TIME_PLAY_MODE := 0.5
 
+enum ActivateAnimations {NORMAL, SKIP, SHORT}
+
 var collected := false
 var character : Character
 
 var anim_damp := 160
 const NORMAL_COLOR := Color(1, 1, 0)
+const NORMAL_RAY_COLOR := Color8(227, 205, 10)
 const WHITE_COLOR := Color(1, 1, 1)
 
 var last_color : Color
@@ -60,14 +66,18 @@ var color := Color(1, 1, 0)
 var id := 0
 var do_kick_out := true
 var sort_position : int = 0
-var activation_tag : String = "shine_tag"
+var activation_tag : String = "empty"
 
 var score_from_before = 0 # haha that rhymes
+
+signal shine_collected
+signal shine_dance_end
 
 func _set_properties() -> void:
 	savable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "color", "id", "do_kick_out", "sort_position", "required_purples", "activation_tag"]
 	editable_properties = ["title", "description", "show_in_menu", "activated", "red_coins_activate", "shine_shards_activate", "required_purples", "color", "do_kick_out", "activation_tag", "sort_position", "id"]
-	
+
+
 func _set_property_values() -> void:
 	set_property("title", title, true)
 	set_property("description", description, true)
@@ -82,6 +92,7 @@ func _set_property_values() -> void:
 	set_property("required_purples", required_purples, true)
 	set_property("activation_tag", activation_tag, true)
 
+
 func _ready() -> void:
 	send_score = true
 	if mode != 1: # not in edit mode
@@ -91,10 +102,17 @@ func _ready() -> void:
 			Singleton.CurrentLevelData.level_data.vars.required_purple_starbits[Singleton.CurrentLevelData.area].sort()
 		else:
 			purple_starbits_activate = false
+		
 		if red_coins_activate or shine_shards_activate or purple_starbits_activate:
 			activated = false
 		var _connect = area.connect("body_entered", self, "collect")
 		unpause_timer.wait_time = UNPAUSE_TIMER_LENGTH
+		
+		if activated:
+			animation_player.play("active")
+			ambient_sound.playing = !is_blue
+		else:
+			animation_player.play("inactive")
 		
 		# if the shine is collected, make it blue 
 		# (collected_shines is a Dictionary where the key is the shine id and the value is a bool)
@@ -104,72 +122,79 @@ func _ready() -> void:
 			# Get the value, returning false if the key doesn't exist
 			is_blue = collected_shines.get(str(id), false)
 		if is_blue:
-			recolorable_ray_sprite.visible = true
-			recolorable_ray_sprite.modulate = Color.blue
-	ray_sprite.visible = do_kick_out and !is_blue
+			vector_rays.color = Color.blue
+	else:
+		animation_player.play("RESET")
+	
+	vector_rays.visible = do_kick_out and !is_blue
 	var _connect = connect("property_changed", self, "update_color")
 	update_color("color", color)
+	
+	if activation_tag.to_lower() != "empty":
+		add_to_group("tag_shine_%s" % activation_tag.to_lower())
+
 
 func on_place():
 	Singleton.CurrentLevelData.set_shine_ids()
 	id = level_object.get_ref().properties[12]
 	set_property("id", id)
 
+
 func update_color(key, value):
-	if key == "color" and value != last_color:
+	if key == "color":
 		if !is_blue:
 			if color != NORMAL_COLOR:
 				animated_sprite.self_modulate = color
-				
 				animated_sprite.frames = recolorable_frames
+				
 				particles.texture = recolorable_particles
 				
+				spawn_particles.self_modulate = color
+				spawn_particles.texture = recolorable_spawn_particles
 				
-				recolorable_ray_sprite.visible = true if do_kick_out else false
-				ray_sprite.visible = false
-				recolorable_ray_sprite.self_modulate = color
-				recolorable_ray_sprite.self_modulate.s *= 3
+				vector_rays.visible = true if do_kick_out else false
+				vector_rays.color = color
+				vector_rays.color.s *= 3
 			else:
 				animated_sprite.self_modulate = WHITE_COLOR
-				
 				animated_sprite.frames = normal_frames
+				
 				particles.texture = normal_particles
 				
-				recolorable_ray_sprite.visible = false
-				ray_sprite.visible = true if do_kick_out else false
+				spawn_particles.self_modulate = WHITE_COLOR
+				spawn_particles.texture = normal_spawn_particles
 				
-				
+				vector_rays.visible = true if do_kick_out else false
 		else:
 			animated_sprite.self_modulate = WHITE_COLOR
-			
 			animated_sprite.frames = collected_frames
+			
 			particles.texture = collected_particles
-			ray_sprite.visible = false
-			recolorable_ray_sprite.visible = true if do_kick_out else false
-			recolorable_ray_sprite.modulate = Color.blue
-		last_color = value
+			
+			if color != NORMAL_COLOR:
+				spawn_particles.self_modulate = color
+				spawn_particles.texture = recolorable_spawn_particles
+			else:
+				spawn_particles.self_modulate = WHITE_COLOR
+				spawn_particles.texture = collected_spawn_particles
+			
+			vector_rays.visible = true if do_kick_out else false
+			vector_rays.color = Color.blue
+	
 	if key == "do_kick_out":
 		if color != NORMAL_COLOR:
-			recolorable_ray_sprite.visible = value
+			vector_rays.color = color
 		else:
-			ray_sprite.visible = value
-func _process(_delta):
-	outline_sprite.frame = animated_sprite.frame
-	outline_sprite.visible = animated_sprite.visible
-	outline_sprite.offset = animated_sprite.offset
-	outline_sprite.flip_h = animated_sprite.flip_h
+			vector_rays.color = NORMAL_RAY_COLOR
+
 
 func _physics_process(_delta : float) -> void:
 	animated_sprite.flip_h = !do_kick_out
-	ray_sprite.rotation_degrees += 0.6
-	recolorable_ray_sprite.transform = ray_sprite.transform
-	recolorable_ray_sprite.modulate.a = ray_sprite.modulate.a
 	if !animated_sprite.playing: #looks like if it is not set to playing, some manual animation is done instead
 		#warning-ignore:integer_division
 		animated_sprite.frame = wrapi(OS.get_ticks_msec() / (1000/8), 0, 16)
 		
 	if mode != 1:
-		var camera : Camera2D = current_scene.get_node(current_scene.camera)
 		var do_animation: bool = not (id in Singleton.CurrentLevelData.level_data.vars.activated_shine_ids)
 		
 		# band aid crash fix
@@ -180,28 +205,14 @@ func _physics_process(_delta : float) -> void:
 		
 		if red_coins_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_red_coins > 0:
 			if Singleton.CurrentLevelData.level_data.vars.red_coins_collected[0] == Singleton.CurrentLevelData.level_data.vars.max_red_coins:
-				activate_shine(do_animation)
+				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP)
 		if shine_shards_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_shine_shards > 0:
 			if Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][0] == Singleton.CurrentLevelData.level_data.vars.max_shine_shards:
-				activate_shine(do_animation)
+				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP)
 		if purple_starbits_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_purple_starbits > 0:
 			if Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0] >= required_purples:
-				activate_shine(do_animation)
-		if !collected:
-			if !activated:
-				ambient_sound.playing = false
-				ghost.visible = true
-				animated_sprite.visible = false
-				ray_sprite.modulate = Color(255, 255, 255, 0)
-			else:
-				if ambient_sound.playing == is_blue:
-					ambient_sound.playing = !is_blue
-				ghost.visible = false
-				ray_sprite.self_modulate = WHITE_COLOR
-				animated_sprite.visible = true
-		# need to change this to also take into account player 2
-		ambient_sound.volume_db = -16 + -abs(camera.global_position.distance_to(global_position)/25)
-
+				activate_shine(ActivateAnimations.NORMAL)
+	
 	if collected:
 		if send_score == true:
 			send_score = false
@@ -214,96 +225,73 @@ func _physics_process(_delta : float) -> void:
 		if character.is_grounded():
 			start_shine_dance() #shine dance setup also disables physics process, so it's only called once
 
-func activate_shine(do_animation: bool = true) -> void:
-	activated = true
-	
-	if do_animation:
-		
-		while current_scene.character == null:
-			yield(get_tree(), "idle_frame")
-		var character = current_scene.get_node(current_scene.character)
-		
-		while !character.movable or !character.controllable:
-			yield(get_tree(), "idle_frame")
-		
-		var camera = current_scene.get_node(current_scene.camera)
-		
-		pause_mode = PAUSE_MODE_PROCESS
-		get_tree().paused = true
-		Singleton.CurrentLevelData.can_pause = false
-		
-		var working_trans_time = 0.25
-		
-		if global_position.distance_to(character.global_position) <= 800:
-			working_trans_time = 0.25
-			
-			var tween = get_tree().create_tween()
-			tween.set_pause_mode(SceneTreeTween.TWEEN_PAUSE_PROCESS)
-			tween.set_trans(Tween.TRANS_QUAD)
-			
-			tween.tween_property(camera, "global_position", global_position, .25)
-			yield(get_tree().create_timer(working_trans_time), "timeout")
-		else:
-			working_trans_time = 0.5
-			
-			Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, 0.5)
-			yield(get_tree().create_timer(working_trans_time), "timeout")
-			camera.focus_on = self
-			camera.auto_move = false
-			camera.global_position = global_position
-			camera.skip_to_player = true
-		
-		
-		animation_player.play("appear")
-		Singleton.CurrentLevelData.level_data.vars.activate_shine(id)
-		
-		unpause_timer.start()
-		# warning-ignore: return_value_discarded
-		unpause_timer.connect("timeout", self, "unpause_game")
-	else:
-		appear_sound.volume_db = -80
-		animation_player.play("appear", -1, INF)
-
-# unpauses the game after the activate shine cutscene is done
-func unpause_game() -> void:
-#	Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, 0.5)
-	yield(get_tree().create_timer(0.5), "timeout")
-	
-	var character = current_scene.get_node(current_scene.character)
-	var camera = current_scene.get_node(current_scene.camera)
-	
-	var working_trans_time = 0.25
-	
-	if global_position.distance_to(character.global_position) <= 800:
-		working_trans_time = 0.25
-		
-		var tween = get_tree().create_tween()
-		tween.set_pause_mode(SceneTreeTween.TWEEN_PAUSE_PROCESS)
-		tween.set_trans(Tween.TRANS_QUAD)
-		
-		tween.tween_property(camera, "global_position", character.global_position, working_trans_time)
-		yield(get_tree().create_timer(working_trans_time), "timeout")
-	else:
-		working_trans_time = 0.5
-		
-		Singleton.SceneTransitions.do_transition_animation(Singleton.SceneTransitions.cutout_circle, working_trans_time)
-		yield(get_tree().create_timer(working_trans_time), "timeout")
-		camera.focus_on = null
-		camera.auto_move = true
-		camera.global_position = character.global_position
-		camera.skip_to_player = true
-	
-	yield(get_tree().create_timer(0.3), "timeout")
-	
-	get_tree().paused = false
-	Singleton.CurrentLevelData.can_pause = true
+func activate_shine(animation: int, temporary: bool = false) -> void:
 	pause_mode = PAUSE_MODE_INHERIT
+	if activated:
+		return
+	
+	yield(get_tree(), "idle_frame")
+	
+	character = current_scene.get_node(current_scene.character)
+	while !is_instance_valid(character):
+		yield(get_tree(), "idle_frame")
+		character = current_scene.get_node(current_scene.character)
+		
+	var camera = current_scene.get_node(current_scene.camera)
+	while !is_instance_valid(camera):
+		yield(get_tree(), "idle_frame")
+		camera = current_scene.get_node(current_scene.camera)
+	
+	if animation == ActivateAnimations.NORMAL:
+		var cutscene: CameraCutscene = CameraCutscene.new()
+		cutscene.cutscene_type = cutscene.Type.AUTO
+		cutscene.tween_ease = Tween.EASE_IN_OUT
+		cutscene.transition_type = Tween.TRANS_QUAD
+		cutscene.time = 0.25
+		cutscene.animation = "appear"
+		cutscene.set_up(self, global_position)
+		camera.queue_cutscene(cutscene)
+	elif animation == ActivateAnimations.SHORT:
+		var cutscene: CameraCutscene = CameraCutscene.new()
+		cutscene.cutscene_type = cutscene.Type.AUTO
+		cutscene.tween_ease = Tween.EASE_IN_OUT
+		cutscene.transition_type = Tween.TRANS_QUAD
+		cutscene.time = 0.25
+		cutscene.animation = "appear_short"
+		cutscene.set_up(self, global_position)
+		camera.queue_cutscene(cutscene)
+	else:
+		yield(get_tree(), "idle_frame")
+		appear_sound.volume_db = -80
+		animation_player.play("active", -1, INF)
+	
+	activated = true
+	if !temporary:
+		Singleton.CurrentLevelData.level_data.vars.activate_shine(id)
+
+
+func deactivate_shine(do_animation: bool) -> void:
+	if !activated:
+		return
+	
+	animation_player.play("disappear")
+	
+	activated = false
+	Singleton.CurrentLevelData.level_data.vars.deactivate_shine(id)
+
+
+# Updates the ambient noise appropriately depending on if the shine is active and not collected prior.
+func update_ambient_noise() -> void:
+	ambient_sound.playing = activated and !is_blue
+
 
 func collect(body : PhysicsBody2D) -> void:
 	if activated and enabled and !collected and body.name.begins_with("Character") and body.controllable:
 		
 		var timer_manager = get_node("/root").get_node("Player").get_timer_manager()
-		timer_manager.pause_resume_timer("area_timer",true)
+		timer_manager.pause_resume_timer("area_timer", true)
+		
+		emit_signal("shine_collected")
 		
 		character = body
 		
@@ -313,7 +301,6 @@ func collect(body : PhysicsBody2D) -> void:
 			else:
 				printerr("Couldn't find timer manager node!")
 
-		
 		# hacky fix for the player being stuck in the ground during the shine dance if diving into a very low shine
 		if character.state != null and character.state.name == "SlideState" and character.is_grounded():
 			character.position.y -= 16
@@ -410,8 +397,10 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 		character.shine_kill = false
 		character.anim_player.play("shine_dance_stop")
 		character.anim_player.connect("animation_finished", self, "restore_control", [character], CONNECT_ONESHOT)
+		character.anim_player.connect("animation_finished", self, "emit_signal", ["shine_dance_end"], CONNECT_ONESHOT)
 
-func restore_control(animation : String, character : Character) -> void:
+# warning-ignore:shadowed_variable
+func restore_control(_animation : String, character : Character) -> void:
 	# bad code sorry
 	yield(get_tree().create_timer(0.2), "timeout")
 
@@ -441,7 +430,7 @@ func restore_control(animation : String, character : Character) -> void:
 	character.controllable = true
 	character.shine_cutscene = false
 	var timer_manager = get_node("/root").get_node("Player").get_timer_manager()
-	timer_manager.pause_resume_timer("area_timer",false)
+	timer_manager.pause_resume_timer("area_timer", false)
 	
 	# to prevent cheese on other shine time scores
 	Singleton.CurrentLevelData.start_tracking_time_score()

@@ -15,6 +15,7 @@ var tilemaps: Node
 var front_tilemap: TileMap
 
 var display: bool = false
+var run_process: bool = false
 
 
 func _set_properties():
@@ -31,6 +32,8 @@ func _set_property_values():
 
 
 func _ready():
+	run_process = true
+	
 	if is_preview:
 		return
 
@@ -51,7 +54,7 @@ func _ready():
 
 
 func _process(delta):
-	if is_preview:
+	if is_preview or !get_parent().loaded:
 		return
 	
 	if layer != 3:
@@ -64,7 +67,6 @@ func _process(delta):
 					HideMode.Spotlight:
 						body.spotlight.display = true
 						body.spotlight.target_scale = spotlight_scale
-					
 					HideMode.HideAll:
 						front_tilemap.display = true
 	else:

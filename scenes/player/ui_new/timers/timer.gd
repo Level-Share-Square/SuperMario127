@@ -63,6 +63,7 @@ func _physics_process(delta):
 		cancel_time_over()
 	
 	if is_counting:
+		death_sound_timer.paused = false
 		time -= fps_util.PHYSICS_DELTA
 		sound_time = wrapf(time, 0, 1)
 		match(sound):
@@ -76,29 +77,29 @@ func _physics_process(delta):
 							audio_player_secondary.play()
 					sound_time = wrapf(time, 0, 1.1)
 			"death":
-				if (death_sound_timer.is_stopped() && death_sound_type != DeathSoundType.FINISHED):
+				if (death_sound_timer.is_stopped() and death_sound_type != DeathSoundType.FINISHED):
 					
-					if (time > 11):
-						death_sound_timer.start(time-11)
+					if time > 11:
+						death_sound_timer.start(time - 11)
 					else:
 						death_sound_timer.set_one_shot(false)
 						
-						if (time > 6):
+						if time > 6:
 							
 							death_sound_type = DeathSoundType.BEEP_START
-							death_sound_timer.start(time-floor(time))
-							ticks_left = int(time)-6
+							death_sound_timer.start(time - floor(time))
+							ticks_left = int(time) - 6
 						
-						elif (time > 2):
+						elif time > 2:
 							
 							death_sound_type = DeathSoundType.BEEP_MIDDLE
-							death_sound_timer.start(time-floor(time))
-							ticks_left = int(time)-2
+							death_sound_timer.start(time - floor(time))
+							ticks_left = int(time) - 2
 						
 						else:
 							
 							death_sound_type = DeathSoundType.BEEP_FINAL
-							death_sound_timer.start(time-floor(time))
+							death_sound_timer.start(time - floor(time))
 							ticks_left = 1
 				
 		if kill_on_end:
@@ -125,8 +126,13 @@ func _physics_process(delta):
 		if time <= 0:
 			time = 0
 			time_over()
+	else:
+		death_sound_timer.paused = true
 
 func kill_player():
+	if !kill_on_end:
+		return
+	
 	var player = get_node("/root").get_node("Player").get_node(get_node("/root").get_node("Player").character)
 	var player2 = get_node("/root").get_node("Player").get_node_or_null(get_node("/root").get_node("Player").character2)
 	

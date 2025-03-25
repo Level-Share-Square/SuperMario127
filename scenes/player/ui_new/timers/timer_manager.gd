@@ -58,11 +58,12 @@ func get_timer(timer_name: String) -> Control:
 func pause_resume_timer(timer_name: String, pause: bool):
 	var timer_node: Control = grid.get_node_or_null(timer_name)
 	if not is_instance_valid(timer_node):
+		push_warning("Timer %s could not be gotten, returning instead.")
 		return
 	
 	timer_node.is_counting = !pause
-	print(timer_node)
-	print(timer_node.is_counting)
+#	print(timer_node)
+#	print(timer_node.is_counting)
 
 
 func remove_timer(timer_name: String):

@@ -1804,7 +1804,8 @@ character2_cam_collider = NodePath("../World/Character2/CamCollision2")
 
 [node name="ZoomTween" type="Tween" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
 
-[node name="PanTween" type="Tween" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
+[node name="CutsceneTween" type="Tween" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
+pause_mode = 2
 
 [node name="Area2D" type="Area2D" parent="Viewports/ViewportContainer/Viewport/CameraP1"]
 collision_layer = 0
@@ -1916,7 +1917,8 @@ character2_cam_collider = NodePath("../../../ViewportContainer/Viewport/World/Ch
 
 [node name="ZoomTween" type="Tween" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
 
-[node name="PanTween" type="Tween" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
+[node name="CutsceneTween" type="Tween" parent="Viewports/ViewportContainer2/Viewport/CameraP2"]
+pause_mode = 2
 
 [node name="Backgrounds" parent="Viewports/ViewportContainer2/Viewport" instance=ExtResource( 13 )]
 

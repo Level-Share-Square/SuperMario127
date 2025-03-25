@@ -1,3 +1,4 @@
+class_name SceneTransitions
 extends CanvasLayer
 
 onready var canvas_background = $Background

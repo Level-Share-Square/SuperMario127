@@ -13,17 +13,23 @@ var size = Vector2(0,0)
 var base_size = Vector2(393, 216)
 var area
 var shape
+var in_cutscene: bool = false
+
+var cutscene_queue: Array
+var current_cutscene: CameraCutscene
 
 onready var character_node = get_node(character)
 onready var bg = get_node(background)
-onready var zoom_tween = $ZoomTween
-onready var pan_tween = $PanTween
+onready var zoom_tween: Tween = $ZoomTween
+onready var cutscene_tween: Tween = $CutsceneTween
 
 onready var viewport
 
 var character_vel = Vector2(0, 0)
 
 func _ready():
+	in_cutscene = false
+	
 	if is_instance_valid(character_node) && character_node.player_id == 1:
 		shape = get_node(character2_cam_collider).get_node("CollisionShape2D")
 		area = get_node(character2_cam_collider)
@@ -31,14 +37,17 @@ func _ready():
 		shape = $Area2D/CollisionShape2D
 		area = $Area2D
 	area.connect("area_entered", self, "_on_area_entered")
+
+
 func _physics_process(delta):
-	if !auto_move: return
+	if !auto_move: 
+		return
+	
 	if focus_on != null:
 		position = position.linear_interpolate(focus_on.global_position, fps_util.PHYSICS_DELTA * 3)
 		reset_physics_interpolation()
 		bg.parallax_node.scroll_base_scale.y = zoom.y
-		#zoom = zoom.linear_interpolate(Vector2(focus_zoom, focus_zoom), fps_util.PHYSICS_DELTA * 3)
-		
+	
 	elif is_instance_valid(character_node):
 		if !character_node.dead and !get_tree().paused:
 			if character_node.controllable:
@@ -55,6 +64,7 @@ func _physics_process(delta):
 			size = shape.shape.extents
 			last_position = global_position
 			global_position = character_node.global_position + character_vel
+			
 			for stopper in area.get_overlapping_areas():
 #				if global_position.y < stopper.top_bound.y + size.length().y * 1.2 or global_position.y > stopper.bottom_bound.y + size.length().y * 1.2 or global_position.x < stopper.left_bound.x + size.length().x * 1.2 or global_position.x > stopper.right_bound.x + size.length().x * 1.2:
 				# this calculates if the camera is too far away from a horizontal or vertical edge and takes resized bounds into account
@@ -90,17 +100,13 @@ func _physics_process(delta):
 							global_position.y = stopper.bottom_bound.y + size.y - 1
 						else:
 							pass
-					
 				else:
 					print("ESCAPED")
+			
 			if Singleton.PlayerSettings.player2_character == character_node.player_id:
 						area.global_position = global_position
-			
-			
-			
-func _on_area_entered(stopper):
-	pass
-	return
+
+
 func set_zoom_tween(target : Vector2, time : float, override = false):
 	current_zoom = target
 	yield(get_tree(), "physics_frame")
@@ -125,21 +131,7 @@ func set_zoom_tween(target : Vector2, time : float, override = false):
 	zoom_tween.interpolate_property(self, "zoom", zoom, target, time, 1, 0)
 	zoom_tween.start()
 
-#THIS FUNCTION DOES NOT WORK. DO NOT CALL IT, IT WILL CAUSE THE GAME TO FREEZE.
-#SOMEONE WILL NEED TO FIX IT TO MAKE IT NOT FREEZE THE GAME.
-func set_pan_tween(target : Vector2, time : float, override = false):
-	auto_move = false
-	pan_tween.remove_all()
-	# overrides level boundary safety check
-	if override:
-		pan_tween.interpolate_property(self, "pan", position, target, time, 1, 0)
-		pan_tween.start()
-		return
-	var level_bounds : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds.size * 16
-	target = Vector2(clamp(target.x, 0+(size.x/2), level_bounds.x-(size.x/2)), clamp(target.y, 0+(size.x/2), level_bounds.y-(size.x/2)))
-	pan_tween.interpolate_property(self, "pan", position, target, time, 1, 0)
-	pan_tween.start()
-	
+
 func load_in(_level_data : LevelData, level_area : LevelArea):
 	var level_bounds = level_area.settings.bounds
 	limit_left = level_bounds.position.x * 32
@@ -157,3 +149,88 @@ func load_in(_level_data : LevelData, level_area : LevelArea):
 		character_node.camera = self
 	if Singleton.PlayerSettings.number_of_players == 2:
 		base_size.x /= 2
+
+
+func queue_cutscene(cutscene : CameraCutscene):
+	cutscene_queue.append(cutscene)
+	
+#	print(cutscene_queue)
+#	print(cutscene.owner.pause_mode)
+
+
+func start_queue():
+	if !in_cutscene:
+		in_cutscene = true
+		play_cutscene(cutscene_queue[0])
+	
+#	print("queue started!")
+
+
+func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):
+	current_cutscene = cutscene
+	
+	pause_mode = PAUSE_MODE_PROCESS
+	cutscene.owner.pause_mode = PAUSE_MODE_PROCESS
+	get_tree().paused = true
+	character_node.toggle_movement(false)
+	Singleton.CurrentLevelData.can_pause = false
+	
+	var new_position = cutscene.to if !reverse else character_node.position
+	var camera_distance = position.distance_to(new_position)
+	
+	if cutscene.cutscene_type == cutscene.Type.AUTO:
+		if position.distance_to(new_position) <= 800:
+			cutscene.cutscene_type = cutscene.Type.PAN
+			cutscene.time = cutscene.time * (camera_distance/800)
+		else:
+			cutscene.cutscene_type = cutscene.Type.TRANSITION
+	
+	if cutscene.cutscene_type == cutscene.Type.PAN:
+		cutscene_tween.remove_all()
+		cutscene_tween.interpolate_property(
+			self, 
+			"position", 
+			position, 
+			new_position, 
+			cutscene.time, 
+			cutscene.transition_type, 
+			cutscene.tween_ease
+			)
+		cutscene_tween.start()
+		yield(cutscene_tween, "tween_completed")
+		
+		if cutscene.animation != "" and !reverse:
+			cutscene.owner.animation_player.play(cutscene.animation)
+			yield(cutscene.owner.animation_player, "animation_finished")
+	
+	elif cutscene.cutscene_type == cutscene.Type.TRANSITION:
+		smoothing_enabled = false
+		Singleton.SceneTransitions.do_transition_animation(
+			Singleton.SceneTransitions.cutout_circle, 
+			cutscene.time
+			)
+		yield(Singleton.SceneTransitions, "transition_finished")
+		position = new_position
+		yield(Singleton.SceneTransitions, "transition_finished")
+		
+		if cutscene.animation != "" and !reverse:
+			cutscene.owner.animation_player.play(cutscene.animation)
+			yield(cutscene.owner.animation_player, "animation_finished")
+		
+	update_cutscene_queue()
+
+
+func update_cutscene_queue():
+	var last_cutscene: CameraCutscene = cutscene_queue.pop_front()
+	
+	if cutscene_queue.size() > 0:
+		play_cutscene(cutscene_queue[0])
+	elif is_instance_valid(last_cutscene):
+		play_cutscene(last_cutscene, true)
+	else:
+		in_cutscene = false
+		pause_mode = PAUSE_MODE_INHERIT
+		get_tree().paused = false
+		character_node.toggle_movement(true)
+		smoothing_enabled = true
+		Singleton.CurrentLevelData.can_pause = true

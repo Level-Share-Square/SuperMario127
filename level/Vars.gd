@@ -68,7 +68,8 @@ func toggle_switch_state(var channel : int):
 	else:
 		switch_state.erase(channel)
 	emit_signal("switch_state_changed", channel)
-	
+
+
 func activate_fludd(var type : int):
 	if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
 		Singleton.CurrentLevelData.level_info.set_fludd_activated(type, true)		
@@ -79,7 +80,8 @@ func activate_fludd(var type : int):
 			emit_signal("turbo_fludd_activated")
 		2:
 			emit_signal("rocket_fludd_activated")
-			
+
+
 func is_fludd_activated(var type : int):
 	return Singleton.CurrentLevelData.level_info.activated_fludds[type]
 
@@ -88,10 +90,12 @@ func collect_coin(amount: int):
 	coins_collected += amount
 	emit_signal("coin_collected", coins_collected)
 
+
 func collect_red_coin(id: int):
 	red_coins_collected[0] += 1
 	red_coins_collected[1].append(id)
 	emit_signal("red_coin_collected", red_coins_collected[0])
+
 
 func collect_shine_shard(id: int):
 	var area: int = Singleton.CurrentLevelData.area
@@ -99,15 +103,28 @@ func collect_shine_shard(id: int):
 	shine_shards_collected[area][1].append(id)
 	emit_signal("shine_shard_collected", shine_shards_collected[area][0])
 
+
 func collect_purple_starbit(id: int):
 	var area: int = Singleton.CurrentLevelData.area
 	purple_starbits_collected[area][0] += 1
 	purple_starbits_collected[area][1].append(id)
 	emit_signal("purple_starbit_collected", purple_starbits_collected[area][0])
 
+
 func activate_shine(id: int):
-	if id in activated_shine_ids: return
+	if id in activated_shine_ids:
+		return
+	
 	activated_shine_ids.append(id)
+
+
+func deactivate_shine(id: int):
+	if !(id in activated_shine_ids):
+		return
+	
+	var index = activated_shine_ids.find(id)
+	activated_shine_ids.remove(index)
+
 
 #func set_switch_state(var channel : int, value : bool):
 #	switch_state[channel] = value

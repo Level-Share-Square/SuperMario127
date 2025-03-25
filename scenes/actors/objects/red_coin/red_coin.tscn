@@ -239,6 +239,7 @@ volume_db = -9.25
 bus = "Sounds"
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+pause_animations = false
 process_parent = true
 physics_process_parent = true
 

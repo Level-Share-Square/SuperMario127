@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hammer_icon_hover.png-30e38e1612984dafa0143106b9f135f6.stex"
+path="res://.import/icon.png-56d2b7e3803c922a0ebae30073f1e845.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/editor/assets/hammer_icon_hover.png"
-dest_files=[ "res://.import/hammer_icon_hover.png-30e38e1612984dafa0143106b9f135f6.stex" ]
+source_file="res://scenes/actors/objects/shine_activator/icon.png"
+dest_files=[ "res://.import/icon.png-56d2b7e3803c922a0ebae30073f1e845.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
