@@ -36,6 +36,7 @@ func pick_random_music() -> void:
 
 func create_level_data():
 	level_data = ValidityChecker.new()
+	level_data.check_validity()
 	pick_random_music()
 
 ## caching

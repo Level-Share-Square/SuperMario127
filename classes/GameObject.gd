@@ -296,14 +296,12 @@ func is_mouse_over_window()-> bool:
 	
 	for window in windows:
 		
-		if (window.hovered):
+		if (window.hovered and window.visible):
 			return true
 	
 	return false
 
 func is_mouse_over_area() -> bool:
-	
-	var mouse_pos: Vector2
 	
 	# Get the Editor UI Node
 	var UI: CanvasLayer = get_parent().get_parent().get_parent().get_node_or_null("UI")

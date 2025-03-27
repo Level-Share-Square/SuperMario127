@@ -37,7 +37,7 @@ var being_read := false
 var has_been_read := false
 var interactable := true
 var body_overlapping := false
-var character : Character
+var characters: Array = []
 var parent
 
 var normal_pos : Vector2
@@ -50,6 +50,28 @@ signal message_appear
 signal message_disappear
 signal message_changed(expression, action)
 
+
+func add_character(character: Character)-> void:
+	
+	remove_character(character)
+	characters.append(character)
+
+func remove_character(character: Character)-> void:
+	
+	characters.erase(character)
+
+func get_interacting_character()-> Character:
+	
+	for character in characters:
+		if (body_overlapping
+		and character.inputs[Character.input_names.interact][1]
+		and !character.inputs[Character.input_names.left][0]
+		and !character.inputs[Character.input_names.right][0]
+		and character.is_grounded() and character.controllable
+		and !being_read and interactable):
+			return character
+	
+	return null
 
 func _ready():
 	parent = get_parent()
@@ -119,14 +141,22 @@ func open_menu_conditional(new_char: Character, compare_tag: String):
 
 func open_menu(new_char: Character):
 	if being_read: return
-	character = new_char
+	add_character(new_char)
 	being_read = true
-	setup_char()
+	connect_menu_oneshot()
+	open_menu_ui(new_char)
+	
+	var players: Array = get_tree().root.get_node("Player").get_characters()
+	for player in players:
+		setup_char(player)
 
 
 func menu_closed():
-	if is_instance_valid(character) and not character.controllable:
-		restore_control()
+	
+	var players: Array = get_tree().root.get_node("Player").get_characters()
+	for player in players:
+		if is_instance_valid(player) and not player.controllable:
+			restore_control(player)
 	reset_read_timer = 0.5
 	has_been_read = true
 	page_cache = 0
@@ -136,23 +166,26 @@ func body_entered(body):
 	if not interactable: return
 	if not is_visible_in_tree(): return
 	if not parent.enabled: return
+	if being_read: return
 	if body.name.begins_with("Character"):
 		body_overlapping = true
-		if character == null:
-			character = body
+		add_character(body)
+		if (len(characters) == 1):
 			message_appear.play()
-			timer.start()
+		timer.start()
 
 func body_exited(body):
 	if not interactable: return
 	if not is_visible_in_tree(): return
 	if not parent.enabled: return
-	if body == character and character.get_collision_layer_bit(1):
-		if body_overlapping and reset_read_timer == 0:
-			message_disappear.play()
-		body_overlapping = false
-		character = null
-		timer.stop()
+	if being_read: return
+	for character in characters:
+		if (body == character and character.get_collision_layer_bit(1)):
+			if (body_overlapping and reset_read_timer == 0 and len(characters) == 1):
+				message_disappear.play()
+				body_overlapping = false
+			remove_character(body)
+			timer.stop()
 
 func autostart_dialogue(body):
 	if autostart > AUTOSTART_OFF and body.name.begins_with("PlayerCollision"):
@@ -192,8 +225,7 @@ func area_exited(body):
 		area_parent.disconnect("message_appear", parent, "start_talking")
 		area_parent.disconnect("message_disappear", parent, "stop_talking")
 
-func setup_char():
-	connect_menu_oneshot()
+func setup_char(character: Character):
 	
 	# flip mario to face this object
 	character.facing_direction = sign(parent.global_position.x - character.global_position.x)
@@ -212,16 +244,14 @@ func setup_char():
 	character.camera.set_zoom_tween(Vector2(zoom_size, zoom_size), 1)
 	character.camera.focus_on = camera_focus
 	
-	open_menu_ui()
-	
 	# sadly, i can't think of a cleaner way to get him to actually
 	# face the camera at the moment; even setting the sprite direction
 	# manually doesn't do anything without these two lines
 	yield(get_tree(), "idle_frame")
 	character.movable = false
 
-func restore_control():
-	character.invulnerable = false 
+func restore_control(character: Character):
+	character.invulnerable = false
 	character.controllable = true
 	character.auto_flip = true
 	character.movable = true
@@ -236,7 +266,7 @@ func restore_control():
 	character.camera.set_zoom_tween(stored_zoom, 0.5)
 	character.camera.focus_on = null
 
-func open_menu_ui():
+func open_menu_ui(character: Character):
 	dialogue_menu.open(dialogue, self, character, character_name)
 
 func _physics_process(delta):
@@ -260,19 +290,15 @@ func _physics_process(delta):
 		pop_up.modulate = lerp(pop_up.modulate, Color(1, 1, 1, 1), delta * transition_speed)
 		
 		# :/
-		if (body_overlapping
-		and character.inputs[Character.input_names.interact][1]
-		and !character.inputs[Character.input_names.left][0]
-		and !character.inputs[Character.input_names.right][0]
-		and character.is_grounded() and character.controllable
-		and !being_read and interactable):
+		var character_interacting: Character = get_interacting_character()
+		if (is_instance_valid(character_interacting)):
 			if delegate_tag == "" or delegate_tag == tag:
-				open_menu(character)
+				open_menu(character_interacting)
 			else:
-				open_remote_menu(character)
-			
-			# message appear signal was removed from here, made
-			# redundant by the message changed signal
+				open_remote_menu(character_interacting)
+		
+		# message appear signal was removed from here, made
+		# redundant by the message changed signal
 	
 	check_timer -= delta
 	if check_timer <= 0:
@@ -284,11 +310,11 @@ func _physics_process(delta):
 				has_char = true
 			
 		
-		if !has_char and is_instance_valid(character):
-			body_exited(character)
+#		if !has_char and len(characters) > 0:
+#			remove_all_characters()
 
 ## check periodically that the characters still there
 func on_timer_timeout():
-	if not is_instance_valid(character): return
-	if area.get_overlapping_bodies().size() <= 0:
-		body_exited(character)
+	if len(characters) == 0: return
+#	if area.get_overlapping_bodies().size() <= 0:
+#		remove_all_characters()

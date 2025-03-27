@@ -138,10 +138,10 @@ func _ready():
 	close_button.texture_normal = load(close_button.texture_normal.load_path)
 	close_button.texture_hover = load(close_button.texture_hover.load_path)
 	close_button.texture_pressed = load(close_button.texture_pressed.load_path)
-	var _connect = close_button.connect("mouse_entered", self, "hovered")
+	var _connect = close_button.connect("mouse_entered", self, "hover")
 	var _connect2 = close_button.connect("pressed", self, "pressed")
 
-func hovered():
+func hover():
 	hover_sound.play()
 
 func pressed():
