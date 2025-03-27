@@ -58,8 +58,6 @@ func _ready():
 	camera_stopper.monitorable = stops_camera
 	camera_stopper.visible = stops_camera
 	
-	players = get_tree().root.get_node("Player").get_characters()
-	
 	# waits to connect to stop frame 1 teleport bugs
 	yield(get_tree().create_timer(1.0), "timeout")
 	$Area2D.connect("body_entered", self, "_on_body_entered")
