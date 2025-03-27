@@ -2,7 +2,7 @@ extends LevelData
 class_name ValidityChecker
 
 const INFO_DATA_SUFFIX: String = "~0*0~0*0~0*0~0*0]"
-const MULTIPLAYER_INVALID_OBJECTS: Array = [999] # List of object IDs invalid with multiplayer
+const MULTIPLAYER_INVALID_OBJECTS: Array = [145] # List of object IDs invalid with multiplayer
 enum ValidityCheckTypes {INIT = 0,NONE = 1,INFO = 2,FULL = 3}
 
 var is_valid: bool = true
@@ -238,7 +238,7 @@ func decode(code: String)-> Dictionary:
 		
 		if (area_settings_array.size() < 4):
 			full_result = {"decode_error":true}
-			invalid_reason = "Area id: "+String(area_id)\
+			invalid_reason = "Area ID: "+String(area_id)\
 			+" missing required value(s)- foreground, background, "\
 			+"music, or gravity."
 			return full_result
@@ -299,10 +299,10 @@ func decode(code: String)-> Dictionary:
 				decoded_object.type_id = int(object_array[0])
 				if (is_not_multiplayer_compatible(decoded_object.type_id,self)):
 					full_result = {"decode_error":true}
-					invalid_reason = "Area id: "+String(area_id)\
+					invalid_reason = "Area ID: "+String(area_id)\
 					+" has an object incompatible with multiplayer ("\
 					+get_object_name(decoded_object.type_id)+")\nPlease turn off multiplayer to play"\
-					+" this level."
+					+" or edit this level."
 					return full_result
 				var start_index = 1
 				if (conversion_util.compareVersions(full_result.format_version, "0.4.7") != -1):

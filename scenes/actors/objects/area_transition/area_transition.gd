@@ -18,6 +18,7 @@ var parts = 1
 var stops_camera = true
 var is_idle := true
 var entering := false
+var players: Array = []
 
 var stored_characters : Array = [null, null]
 
@@ -57,13 +58,16 @@ func _ready():
 	camera_stopper.monitorable = stops_camera
 	camera_stopper.visible = stops_camera
 	
+	players = get_tree().root.get_node("Player").get_characters()
+	
 	# waits to connect to stop frame 1 teleport bugs
 	yield(get_tree().create_timer(1.0), "timeout")
 	$Area2D.connect("body_entered", self, "_on_body_entered")
+	$Area2D.connect("body_exited", self, "on_body_exited")
 
 func _input(event):
 	parts_input_handler(event,self)
-			
+
 func update_property(key, value):
 	match(key):
 		"parts":
@@ -135,13 +139,16 @@ func _on_property_changed(key, value):
 func _physics_process(_delta : float) -> void:
 	if "\n" in destination_tag:
 		destination_tag = destination_tag.replace("\n", "")
-	if is_idle and enabled and !teleportation_mode:
+#	print("physics process, entering: ",entering)
+	if is_idle and enabled and !teleportation_mode and !entering:
 		#the area2d is set to only collide with characters, so we can (hopefully) safely assume if there 
 		#is a collision it's with a character
 		for body in area2d.get_overlapping_bodies():
 			if body.name.begins_with("Character") and !body.dead:
-				body.toggle_movement(false)
-				body.camera.set_zoom_tween(Vector2(1, 1), 0.5)
+				players = get_tree().root.get_node("Player").get_characters()
+				for player in players:
+					player.toggle_movement(false)
+					player.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 				start_pipe_enter_animation(body)
 	var character
 	for chr in stored_characters:
@@ -153,10 +160,14 @@ func _physics_process(_delta : float) -> void:
 func _on_body_entered(body):
 	if enabled and is_idle and !entering and teleportation_mode:
 		if body.name.begins_with("Character") and !body.dead:
-			body.toggle_movement(false)
-			body.camera.set_zoom_tween(Vector2(1, 1), 0.5)
+			players = get_tree().root.get_node("Player").get_characters()
+			for player in players:
+				player.toggle_movement(false)
+				player.camera.set_zoom_tween(Vector2(1, 1), 0.5)
 			start_pipe_enter_animation(body)
-				
+
+func on_body_exited(_body)-> void:
+	entering = false
 
 func start_pipe_enter_animation(character : Character) -> void:
 	stored_characters[character.player_id] = character
@@ -193,13 +204,16 @@ func start_pipe_exit_animation(character : Character, tp_mode : bool) -> void:
 	if !tp_mode:
 		emit_signal("exit", character, entering, force_fadeout)
 		
-		# undo collision changes 
-		character.set_collision_layer_bit(1, true)
-		character.set_inter_player_collision(true) 
-		character.gravity_scale = 1
-		if get_character_transition_data(character).size() == 1:
-			exit_with_helper(character)
-		
+		players = get_tree().root.get_node("Player").get_characters()
+		for player in players:
+			# undo collision changes 
+			player.set_collision_layer_bit(1, true)
+			player.set_inter_player_collision(true) 
+			player.toggle_movement(true)
+			player.camera.auto_move = true
+			player.gravity_scale = 1
+			if get_character_transition_data(player).size() == 1 and player == character:
+				exit_with_helper(player)
 	pipe_exit_anim_finished(character)
 	reset_sprite(character)
 	
