@@ -234,10 +234,10 @@ func setup_char(character: Character):
 		stored_zoom = character.camera.current_zoom
 	
 	character.set_dive_collision(false)
-	character.invulnerable = true 
+	character.invulnerable = true
 	character.controllable = false
 	character.velocity = Vector2.ZERO
-	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
+#	character.set_collision_layer_bit(1, false) # disable collisions w/ most things
 	character.set_inter_player_collision(false)
 	character.camera.smoothing_enabled = true # Re-enable camera smoothing
 	
