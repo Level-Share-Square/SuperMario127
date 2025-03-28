@@ -63,6 +63,7 @@ func _process(delta):
 	if mode != 1:
 		for body in area.get_overlapping_bodies():
 			if body is Character:
+				body.spotlight.enabled = true
 				match(hide_mode):
 					HideMode.Spotlight:
 						body.spotlight.display = true
