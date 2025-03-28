@@ -616,7 +616,7 @@ func _process(delta : float) -> void:
 						objects_stack.append([shared.create_object(object, true),true,object_copy])
 						# Set level as not multiplayer compatible if the object placed
 						# isn't compatible with multiplayer and also changes game mode to singleplayer
-						Singleton.CurrentLevelData.level_info.validity_check.is_not_multiplayer_compatible(object.type_id,self)
+						Singleton.CurrentLevelData.level_info.validity_check.is_object_multiplayer_compatible(object.type_id,self)
 						# Merciful Lord Jesus, please forgive me for 
 						# writing this abhorrent line of code. Amen.
 						last_object_pos = object_pos
@@ -664,7 +664,7 @@ func _process(delta : float) -> void:
 					objects_stack.append([shared.create_object(object, true),true,object_copy])
 					# Set level as not multiplayer compatible if the object placed
 					# isn't compatible with multiplayer and also changes game mode to singleplayer
-					Singleton.CurrentLevelData.level_info.validity_check.is_not_multiplayer_compatible(object.type_id,self)
+					Singleton.CurrentLevelData.level_info.validity_check.is_object_multiplayer_compatible(object.type_id,self)
 					# Merciful Lord Jesus, please forgive me for 
 					# writing this abhorrent line of code. Amen.
 					last_object_pos = object_pos

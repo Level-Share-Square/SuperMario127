@@ -29,6 +29,7 @@ func _init(code: String = "",type: int = 0)-> void:
 
 func check_validity()-> void:
 	
+	result = {}
 	is_valid = false
 	invalid_reason = "This level has not been checked for validity yet."
 	
@@ -48,7 +49,7 @@ func check_validity()-> void:
 		ValidityCheckTypes.NONE:
 			push_warning("Warning! Validity check is None, level code will not be verified.")
 
-func is_not_multiplayer_compatible(id: int,caller: Object)-> bool:
+func is_object_multiplayer_compatible(id: int,caller: Object)-> bool:
 	
 	var is_multiplayer: bool = Singleton.PlayerSettings.number_of_players > 1
 	var has_object: bool = MULTIPLAYER_INVALID_OBJECTS.has(id)
@@ -58,10 +59,10 @@ func is_not_multiplayer_compatible(id: int,caller: Object)-> bool:
 		if (caller != self):
 			Singleton.PlayerSettings.number_of_players = 1
 	
-	if (!is_multiplayer):
-		return false
+	if (!is_multiplayer and caller == self):
+		return true
 	
-	return has_object
+	return !has_object
 
 func get_object_name(id: int)-> String:
 	
@@ -297,7 +298,7 @@ func decode(code: String)-> Dictionary:
 				var decoded_object = {}
 				decoded_object.properties = []
 				decoded_object.type_id = int(object_array[0])
-				if (is_not_multiplayer_compatible(decoded_object.type_id,self)):
+				if (!is_object_multiplayer_compatible(decoded_object.type_id,self)):
 					full_result = {"decode_error":true}
 					invalid_reason = "Area ID: "+String(area_id)\
 					+" has an object incompatible with multiplayer ("\
@@ -388,6 +389,7 @@ func load_in(code: String)-> void:
 	pinned_items = result.pinned_items
 	
 	if format_version == current_format_version:
+		areas = []
 		for area_result in result.areas:
 			if (area_result.size() == 6):
 				var area = get_area(area_result)
