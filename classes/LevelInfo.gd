@@ -47,6 +47,7 @@ var coin_score : int = 0
 var time_scores : Dictionary = {} # time_scores should probably be stored as the sum of delta while playing, keys are same as collected_shines
 var activated_fludds : Array = [false, false, false]
 var validity_check: ValidityChecker
+var previous_number_of_players: int = 0
 
 
 ## this function makes it so we can get info about a level for
@@ -71,10 +72,16 @@ func _init(passed_id: String, passed_folder: String, passed_level_code: String =
 	level_folder = passed_folder
 	level_code = passed_level_code
 	
-	
-	validity_check = ValidityChecker.new(level_code,ValidityChecker.ValidityCheckTypes.INFO)
+	if (!is_instance_valid(validity_check)):
+		validity_check = ValidityChecker.new(level_code,ValidityChecker.ValidityCheckTypes.INFO)
+	else:
+		validity_check.validity_check_type = ValidityChecker.ValidityCheckTypes.INFO
+	validity_check.check_validity()
 	var result = validity_check.result
 	
+	if (!validity_check.is_level_multiplayer_compatible):
+		level_name = "\"MultiplayerIncompatibleLevel\""
+		return
 	if (!validity_check.is_valid):
 		level_name = "\"InvalidLevel\""
 		return
@@ -90,11 +97,23 @@ func _init(passed_id: String, passed_folder: String, passed_level_code: String =
 
 
 func load_in() -> void:
-	if is_fully_loaded: return
 	
-	validity_check = ValidityChecker.new(level_code, ValidityChecker.ValidityCheckTypes.FULL)
+	var current_number_of_players: int = Singleton.PlayerSettings.number_of_players
 	
-	if (!validity_check.is_valid):
+	if current_number_of_players == previous_number_of_players and is_fully_loaded: return
+	
+	if (!is_instance_valid(validity_check)):
+		validity_check = ValidityChecker.new(level_code, ValidityChecker.ValidityCheckTypes.FULL)
+	else:
+		validity_check.validity_check_type = ValidityChecker.ValidityCheckTypes.FULL
+	validity_check.check_validity()
+	
+	previous_number_of_players = int(current_number_of_players)
+	
+	if (Singleton.PlayerSettings.number_of_players > 1 and !validity_check.is_level_multiplayer_compatible):
+		level_name = "\"MultiplayerIncompatibleLevel\""
+		return
+	elif (!validity_check.is_valid):
 		level_name = "\"InvalidLevel\""
 		return
 	

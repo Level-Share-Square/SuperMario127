@@ -11,6 +11,7 @@ var working_folder: String
 var level_id: String
 var level_info: LevelInfo
 var can_edit: bool
+var previous_number_of_players: int = 0
 
 ### tabs
 onready var info_tab: Control = $InfoTab
@@ -75,17 +76,24 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 	working_folder = _working_folder
 	can_edit = _can_edit
 	
+	var current_number_of_players: int = Singleton.PlayerSettings.number_of_players
 	# load the real level data now
-	if (level_info.validity_check.is_valid):
+	if (level_info.validity_check.is_valid or current_number_of_players != previous_number_of_players):
 		level_info.load_in()
+	
+	previous_number_of_players = int(current_number_of_players)
 	
 	if (!level_info.validity_check.is_valid):
 		# Invalid level detected!
 		edit_button.visible = false
 		play_button.visible = false
-		title.text = "Invalid Level"
+		if (!level_info.validity_check.is_level_multiplayer_compatible):
+			title.text = "Multiplayer Incompatible Level"
+			author.text = author_prefix + level_info.level_author
+		else:
+			title.text = "Invalid Level"
+			author.text = ""
 		title_shadow.text = title.text
-		author.text = "Unauthored"
 		description.bbcode_text = "[center]" + level_info.validity_check.invalid_reason + "[/center]"
 		back_button.focus_neighbour_top = back_button.get_path_to(reset_button)
 		reset_button.focus_neighbour_bottom = reset_button.get_path_to(back_button)

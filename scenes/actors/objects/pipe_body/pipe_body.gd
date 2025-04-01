@@ -52,5 +52,5 @@ func _process(_delta):
 		update_parts()
 	last_parts = parts
 
-func _input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)

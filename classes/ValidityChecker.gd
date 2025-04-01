@@ -2,9 +2,11 @@ extends LevelData
 class_name ValidityChecker
 
 const INFO_DATA_SUFFIX: String = "~0*0~0*0~0*0~0*0]"
+const MULTIPLAYER_INVALID_OBJECTS: Array = [145] # List of object IDs invalid with multiplayer
 enum ValidityCheckTypes {INIT = 0,NONE = 1,INFO = 2,FULL = 3}
 
 var is_valid: bool = true
+var is_level_multiplayer_compatible: bool = true
 var invalid_reason: String
 var level_code: String
 var result: Dictionary = {}
@@ -24,6 +26,10 @@ func _init(code: String = "",type: int = 0)-> void:
 		validity_check_type = type
 	
 	level_code = code
+
+func check_validity()-> void:
+	
+	result = {}
 	is_valid = false
 	invalid_reason = "This level has not been checked for validity yet."
 	
@@ -37,11 +43,30 @@ func _init(code: String = "",type: int = 0)-> void:
 			
 		ValidityCheckTypes.INIT: # For initialisation cases
 			vars = LevelVars.new()
-			code = level_list_util.load_level_code_file(DEFAULT_CODE_PATH)
+			level_code = level_list_util.load_level_code_file(DEFAULT_CODE_PATH)
 			full_check()
 		
 		ValidityCheckTypes.NONE:
 			push_warning("Warning! Validity check is None, level code will not be verified.")
+
+func is_object_multiplayer_compatible(id: int,caller: Object)-> bool:
+	
+	var is_multiplayer: bool = Singleton.PlayerSettings.number_of_players > 1
+	var has_object: bool = MULTIPLAYER_INVALID_OBJECTS.has(id)
+	
+	if (has_object):
+		is_level_multiplayer_compatible = false
+		if (caller != self):
+			Singleton.PlayerSettings.number_of_players = 1
+	
+	if (!is_multiplayer and caller == self):
+		return true
+	
+	return !has_object
+
+func get_object_name(id: int)-> String:
+	
+	return Singleton.CurrentLevelData.object_id_map.ids[id]
 
 ## this function makes it so we can get info about a level for
 ## its card without loading everything in the level and wasting
@@ -214,9 +239,9 @@ func decode(code: String)-> Dictionary:
 		
 		if (area_settings_array.size() < 4):
 			full_result = {"decode_error":true}
-			invalid_reason = "Area id: "+String(area_id)\
+			invalid_reason = "Area ID: "+String(area_id)\
 			+" missing required value(s)- foreground, background, "\
-			+"music, or gravity"
+			+"music, or gravity."
 			return full_result
 		
 		full_result.areas.append({})
@@ -273,6 +298,13 @@ func decode(code: String)-> Dictionary:
 				var decoded_object = {}
 				decoded_object.properties = []
 				decoded_object.type_id = int(object_array[0])
+				if (!is_object_multiplayer_compatible(decoded_object.type_id,self)):
+					full_result = {"decode_error":true}
+					invalid_reason = "Area ID: "+String(area_id)\
+					+" has an object incompatible with multiplayer ("\
+					+get_object_name(decoded_object.type_id)+")\nPlease turn off multiplayer to play"\
+					+" or edit this level."
+					return full_result
 				var start_index = 1
 				if (conversion_util.compareVersions(full_result.format_version, "0.4.7") != -1):
 					decoded_object.palette = int(object_array[1])
@@ -357,6 +389,7 @@ func load_in(code: String)-> void:
 	pinned_items = result.pinned_items
 	
 	if format_version == current_format_version:
+		areas = []
 		for area_result in result.areas:
 			if (area_result.size() == 6):
 				var area = get_area(area_result)

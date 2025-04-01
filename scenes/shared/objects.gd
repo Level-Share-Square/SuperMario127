@@ -69,10 +69,18 @@ func get_object_at_position(position: Vector2):
 
 
 func destroy_object(object_node, remove_from_data):
+	var level_object = object_node.level_object.get_ref()
 	if remove_from_data:
-		var level_object = object_node.level_object.get_ref()
 		level_area.objects.erase(level_object)
 	object_node.queue_free()
+	if (!Singleton.CurrentLevelData.level_info.validity_check.is_object_multiplayer_compatible(\
+	level_object.type_id,self)):
+		for area in level_data.areas:
+			for object in area.objects:
+				if (!Singleton.CurrentLevelData.level_info.validity_check.is_object_multiplayer_compatible(\
+				object.type_id,self)):
+					return
+		Singleton.CurrentLevelData.level_info.validity_check.is_level_multiplayer_compatible = true
 
 
 func move_object_to_back(object_node):

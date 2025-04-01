@@ -33,7 +33,7 @@ func _ready():
 	if palette != 0:
 		sprite.texture = palette_textures[palette - 1]
 		
-func _input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
 
 func _process(_delta):
