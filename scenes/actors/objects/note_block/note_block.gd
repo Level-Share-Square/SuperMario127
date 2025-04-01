@@ -51,7 +51,7 @@ func _ready():
 		
 	update_parts()
 
-func _input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
 
 func _physics_process(delta):

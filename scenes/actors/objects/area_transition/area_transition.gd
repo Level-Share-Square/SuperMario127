@@ -63,7 +63,7 @@ func _ready():
 	$Area2D.connect("body_entered", self, "_on_body_entered")
 	$Area2D.connect("body_exited", self, "on_body_exited")
 
-func _input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
 
 func update_property(key, value):

@@ -20,7 +20,7 @@ func _set_property_values():
 	set_property("parts", parts, 1)
 	set_property("physics_enabled", physics_enabled)
 
-func _input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
 
 func _process(_delta):

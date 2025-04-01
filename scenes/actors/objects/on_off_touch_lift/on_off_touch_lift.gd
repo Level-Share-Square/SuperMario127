@@ -51,9 +51,7 @@ func _set_property_values():
 	set_property("path_length", path_length)
 	set_property_menu("path_length", ["viewer"])
 
-func _input(event):
-	if (.is_mouse_over_window() || .is_mouse_over_area()):
-		return
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
 		if event.button_index == 5: # Mouse wheel down
 			parts -= 1

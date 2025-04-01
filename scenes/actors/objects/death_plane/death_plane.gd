@@ -22,7 +22,7 @@ func _set_property_values():
 	set_property("stops_camera", stops_camera)
 	set_property("vertical", vertical)
 	
-func _input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
 
 	
