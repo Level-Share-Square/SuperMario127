@@ -10,6 +10,7 @@ var level_data = null
 var level_area = null
 var level_object = null
 var hovered := false
+var camera: Camera2D
 
 var enabled := true
 var preview_position := Vector2(72, 92)
@@ -350,3 +351,72 @@ func parts_input_handler(event, object):
 			object.parts += 1
 			object.set_property("parts", object.parts, true)
 			object.update_parts()
+
+func get_sprite_size(body)-> Vector2:
+	
+	var sprite_base = body.find_node("Sprite") # Most static image objects
+	if (!is_instance_valid(sprite_base)):
+		sprite_base = body.find_node("AnimatedSprite")
+	if (!is_instance_valid(sprite_base)): # NPC check
+		sprite_base = body.find_node("Body")
+	if (!is_instance_valid(sprite_base)): # For only fludd nozzle objects
+		match body.nozzle_type:
+			"HoverNozzle":
+				sprite_base = body.get_node("Sprite_HoverNozzle")
+			"TurboNozzle":
+				sprite_base = body.get_node("Sprite_TurboNozzle")
+			"RocketNozzle":
+				sprite_base = body.get_node("Sprite_RocketNozzle")
+	
+	if (sprite_base is AnimatedSprite): # Animated objects
+		var body_sprites: AnimatedSprite = sprite_base
+		var body_anim: SpriteFrames = body_sprites.frames
+		var body_texture: Texture = body_anim.get_frame(body_sprites.animation,body_sprites.frame)
+		
+		return body_texture.get_size()
+	
+	# Static image objects
+	var body_sprite: Sprite = sprite_base
+	var body_texture: Texture = body_sprite.texture
+	
+	return body_texture.get_size()
+
+func is_on_screen(body)-> bool:
+	
+	var sprite_size: Vector2 = get_sprite_size(body)
+	var sprite_width: float = sprite_size.x
+	var sprite_height: float = sprite_size.y
+	
+	var root: Viewport = get_tree().root
+	var editor = root.get_node_or_null("Editor")
+	var is_editor: bool = is_instance_valid(editor)
+	
+	if (is_editor):
+		camera = editor.camera # editor camera
+	else:
+		camera = root.get_node("Player").get_node_or_null("CameraP1") # gameplay camera
+	
+	if (!is_instance_valid(camera)):
+		# If you're playing multiplayer this doesn't work and I'm not
+		# going to try to make it work :)
+		return true
+	
+	# offset the camera position by this much so that it acts as if
+	# being in the top-left is -96,-96
+	var width_offset: int = 288 + 96
+	var height_offset: int = 50 + 96 if is_editor else 50 + 166
+	
+	var camera_width: float = 786 * camera.scale.x
+	var camera_height: float = 432 * camera.scale.y
+	
+	var camera_pos: Vector2 = camera.get_camera_screen_center() - Vector2(width_offset,height_offset)
+	
+#	print(camera_pos," ",position)
+	
+	if (position.x + sprite_width < camera_pos.x or # Object off left side of screen
+	position.y + sprite_height < camera_pos.y or # Object off top of screen
+	position.x - sprite_width > camera_pos.x + camera_width or # Object off right side of screen
+	position.y - sprite_height > camera_pos.y + camera_height): # Object off bottom of screen
+		return false
+	
+	return true
