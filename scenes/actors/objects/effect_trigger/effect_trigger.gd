@@ -18,19 +18,9 @@ func _set_property_values():
 	set_property("zoom_time", zoom_time, true, "Zoom Time")
 	set_property("parts", parts)
 	
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and hovered:
-		if event.button_index == 5: # Mouse wheel down
-			parts -= 1
-			if parts < 1:
-				parts = 1
-			set_property("parts", parts, true)
-			update_parts()
-		elif event.button_index == 4: # Mouse wheel up
-			parts += 1
-			set_property("parts", parts, true)
-			update_parts()
-			
+func _unhandled_input(event: InputEvent) -> void:
+	parts_input_handler(event,self)
+
 func update_parts():
 	sprite.rect_size.y = parts * 32
 	sprite.rect_position.y = (-16 * parts)

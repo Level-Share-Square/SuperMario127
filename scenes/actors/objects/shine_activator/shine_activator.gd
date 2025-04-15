@@ -27,7 +27,7 @@ func _set_property_values():
 	set_property("parts", parts)
 
 
-func _input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	parts_input_handler(event,self)
 
 
