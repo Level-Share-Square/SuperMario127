@@ -16,6 +16,7 @@ var wings_spread = false
 var spreads_started = 0
 
 var facing_direction = 1
+var has_been_on_screen: bool = false
 
 func _set_properties():
 	savable_properties = ["speed"]
@@ -61,7 +62,14 @@ func goonie_ready():
 	rotation_degrees = 0
 
 func _physics_process(delta):
-	goonie_physics_process(delta)
+	if (mode == 0):
+		var on_screen: bool
+		if (!has_been_on_screen):
+			on_screen = is_on_screen(self)
+			if (on_screen and is_instance_valid(camera)):
+				has_been_on_screen = true
+		if (has_been_on_screen or on_screen):
+			goonie_physics_process(delta)
 
 func goonie_physics_process(delta):
 	momentum = (global_position - last_position) / fps_util.PHYSICS_DELTA

@@ -154,9 +154,19 @@ func destroy_objects_overlapping_position(point: Vector2, area_check : Rect2, re
 func update_tilemaps():
 	tilemaps_node.update_tilemaps()
 
+func sort_layers(a:TileMap, b:TileMap) -> bool:
+	# Values gotten from switch_layers function in editor.gd
+	var layer_index_dict: Dictionary = {"Back":0,"Front":1,"Middle":2,"VeryBack":3}
+	
+	return layer_index_dict.get(a.name) > layer_index_dict.get(b.name)
+
 func toggle_layer_transparency(current_layer: int, is_transparent: bool):
+	var tilemaps: Array = tilemaps_node.get_children()
+	
+	tilemaps.sort_custom(self,"sort_layers")
+	
 	var index = 3 # has to be done because for some reason the indices are wrong for the layers
-	for tilemap in tilemaps_node.get_children():
+	for tilemap in tilemaps:
 		var tilemap_color = Color(1, 1, 1, 1)
 		if tilemap.name == "Back" or tilemap.name == "VeryBack":
 			tilemap_color = Color(0.54, 0.54, 0.54, 1)
