@@ -23,7 +23,8 @@ var layer_dictionary = {
 	0: -11,
 	1: -10,
 	2: -1,
-	3: 9
+	3: 9,
+	4: 10 # For objects that should appear in-front of FG tiles
 }
 const BG_MODULATE := Color(0.54, 0.54, 0.54)
 export var show_above_layer : bool = false
