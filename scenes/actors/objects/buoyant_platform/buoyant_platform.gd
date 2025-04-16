@@ -53,7 +53,7 @@ var spawn_pos
 
 func _ready():
 	if palette != 0:
-		$Sprite.texture = palette_textures[palette]
+		$RigidBody2D/Sprite.texture = palette_textures[palette]
 
 	if override_part_width != 0:
 		part_width = override_part_width
