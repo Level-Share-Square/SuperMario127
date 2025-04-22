@@ -230,7 +230,24 @@ static func convert_052_to_053(result):
 				
 				new_objects.append(object)
 			area_result.objects = new_objects
-	print(result.areas.size())
+	return result
+
+
+static func convert_053_to_054(result):
+	result.format_version = "0.5.4"
+	for area_result in result.areas:
+		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
+			var new_objects = []
+			for object_result in area_result.objects:
+				var object = object_result
+				object.properties[5] += 1
+				
+				new_objects.append(object)
+			area_result.objects = new_objects
 	return result
 
 

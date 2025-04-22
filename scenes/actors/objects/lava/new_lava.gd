@@ -171,16 +171,5 @@ func _process(delta):
 
 
 func update_light_layer():
-	match(layer + (1 if render_in_front else 0)):
-		0:
-			lava_light.range_z_min = -11
-			lava_light.range_z_max = -10
-		1:
-			lava_light.range_z_min = -10
-			lava_light.range_z_max = -10
-		2:
-			lava_light.range_z_min = -1
-			lava_light.range_z_max = 0
-		3:
-			lava_light.range_z_min = 9
-			lava_light.range_z_max = 10
+	lava_light.range_z_max = z_index - 1
+	lava_light.range_z_min = lava_light.range_z_max - (LevelShared.layer_spacing * 1.5)

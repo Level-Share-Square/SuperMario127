@@ -65,20 +65,12 @@ func update_property(key, value):
 
 
 func update_layer():
-	var next_object_layer : int = wrapi(layer+1, 0, layer_dictionary.size())
+	if render_in_front:
+		layer_shift = 1
+	else:
+		layer_shift = -1
 	
-	if layer <= 4:
-		z_index = layer_dictionary[layer] if !render_in_front else layer_dictionary[next_object_layer] + (1 * int(show_above_layer))
-	else:
-		printerr("Object has assigned layer %s" % layer)
-		
-	if layer == 0 or layer == 1:
-		enabled = false
-		modulate = BG_MODULATE
-	else:
-		modulate = Color(1, 1, 1)
-	if layer == 3:
-		enabled = false
+	.update_layer()
 
 
 func _set_properties():

@@ -5,27 +5,27 @@ class_name GameObject
 var global := {}
 var editor_aliases := {}
 
-var mode : int = 0
+var mode: int = 0
 var level_data = null
 var level_area = null
 var level_object = null
 var hovered := false
+var shared: LevelShared = null
 
 var enabled := true
 var preview_position := Vector2(72, 92)
 var palette := 0
 var palettes := 0
 
-var layer := 2
-# translates layer var into a Z index
-var layer_dictionary = {
-	0: -11,
-	1: -10,
-	2: -1,
-	3: 9
-}
+export(LevelShared.Layers) var default_layer: int = 3
+export var layer_shift: int = 0
+export var lock_layer: bool = false
+export var always_enabled: bool = false
+
+var layer: int = 3
+var z_layer: int = 0
+
 const BG_MODULATE := Color(0.54, 0.54, 0.54)
-export var show_above_layer : bool = false
 
 # true if creating a GameObject for the object settings preview
 var is_preview : bool = false
@@ -60,7 +60,8 @@ func _ready():
 		var color = modulate
 		color.a = 0.5
 		modulate = color
-		
+	
+	z_layer = layer + LevelShared.layer_index_offset
 	
 	if get_tree().current_scene.name == "Editor":
 		var polygons: Array = []
@@ -74,7 +75,12 @@ func _ready():
 				hitbox.add_child(polygon)
 			
 			add_child(hitbox)
-	set_property_menu("layer", ["option", 4, 0, ['Very Background', 'Background', 'Ground', 'Foreground']])
+	
+	if lock_layer:
+		set_property_menu("layer", ["option", 1, layer, ['Way Background', 'Very Background', 'Background', 'Ground', 'Foreground', 'Very Foreground']])
+	else:
+		set_property_menu("layer", ["option", 6, 0, ['Way Background', 'Very Background', 'Background', 'Ground', 'Foreground', 'Very Foreground']])
+	
 	update_layer()
 
 
@@ -140,9 +146,11 @@ func set_property(key, value, change_level_object = true, alias = null):
 	self[key] = value
 	if alias != null:
 		editor_aliases[key] = alias
+	
 	if change_level_object and is_savable_property(key):
 		var level_object_ref = level_object.get_ref()
 		var index = get_property_index(key)
+		
 		if index == level_object_ref.properties.size():
 			level_object_ref.properties.append(value)
 		else:
@@ -248,97 +256,25 @@ func on_signal_fire(index):
 
 
 func update_layer():
-	if layer <= 4:
-		z_index = layer_dictionary[layer] + (1 * int(show_above_layer))
+	if layer <= 5:
+		z_layer = layer + LevelShared.layer_index_offset
+		z_index = (z_layer * LevelShared.layer_spacing) - layer_shift
 	else:
 		printerr("Object has assigned layer %s" % layer)
-		
-	if layer == 0 or layer == 1:
-		enabled = false
+	
+	if layer < 3:
 		modulate = BG_MODULATE
 	else:
 		modulate = Color(1, 1, 1)
-	if layer == 3:
+	
+	if layer != 3 and not always_enabled:
 		enabled = false
+	
+	print(z_layer)
+	print(z_index)
 
-
-func get_shared():
-	return get_parent().get_parent()
-
-#func is_mouse_over_window()-> bool:
-#
-#	var UI: CanvasLayer
-#
-#	# Get the Editor UI Node
-#	if (get_parent().name != "Objects"):
-#
-#		UI = get_tree().root.get_node_or_null("Editor/UI")
-#
-#	else:
-#
-#		UI = get_parent().get_parent().get_parent().get_node_or_null("UI")
-#
-#	if (UI == null):
-#		return true
-#
-#	# Get all the potentially open windows
-#	var quit_wo_saving_window: Popup = UI.get_node("BackButton").get_node("QuitWOSavingWindow")
-#	var level_settings_window: NinePatchRect = UI.get_node("LevelSettingsWindow")
-#	var object_settings_window: NinePatchRect = UI.get_node("ObjectSettingsWindow")
-#	var level_code_window: NinePatchRect = UI.get_node("LevelCodeWindow") # Not currently used
-#	var areas_window: NinePatchRect = UI.get_node("AreasWindow")
-#	var colour_picker_window: NinePatchRect = UI.get_node("ColorPickerWindow")
-#	var help_window: NinePatchRect = UI.get_node("HelpWindow")
-#	var auto_save_window: NinePatchRect = UI.get_node("AutosaveWINDOW")
-#
-#	var windows: Array = [quit_wo_saving_window,level_settings_window,object_settings_window,
-#		areas_window,colour_picker_window,help_window,auto_save_window]
-#
-#	for window in windows:
-#
-#		if (window.hovered and window.visible):
-#			return true
-#
-#	return false
-#
-#func is_mouse_over_area() -> bool:
-#
-#	# Get the Editor UI Node
-#	var UI: CanvasLayer = get_parent().get_parent().get_parent().get_node_or_null("UI")
-#
-#	if !is_instance_valid(UI):
-#
-#		UI = get_parent().get_parent().get_parent().get_parent()
-#		if !is_instance_valid(UI):
-#			return true
-#
-#	# Get all the potential overlapping areas
-#	var placeable_items_container: TextureRect = UI.get_node("PlaceableItemsContainer")
-#	var item_picker: TextureRect = UI.get_node("ItemPicker")
-#	var item_picker_bottom: TextureRect
-#	var item_picker_close_button: Button
-#	if (item_picker.visible):
-#
-#		item_picker_bottom = item_picker.get_node("Bottom")
-#		item_picker_close_button = item_picker.get_node("CloseButton")
-#
-#	var areas: Array = [placeable_items_container,item_picker,item_picker_bottom,item_picker_close_button]
-#
-#	for area in areas:
-#
-#		if !is_instance_valid(area) or !area.visible: # Don't check for areas that aren't visible
-#			continue
-#
-#		if area.hovered:
-#			return true
-#
-#	# none of the areas are currently hovered over
-#	return false
 
 func parts_input_handler(event, object):
-#	if is_mouse_over_window() or is_mouse_over_area():
-#		return
-	
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
 		if event.button_index == 5: # Mouse wheel down
 			object.parts -= 1

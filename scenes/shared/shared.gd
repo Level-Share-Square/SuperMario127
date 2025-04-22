@@ -1,15 +1,31 @@
+class_name LevelShared
 extends LevelDataLoader
+
+
+enum Layers {
+	WayBack,
+	VeryBack,
+	Back,
+	Middle,
+	Front,
+	VeryFront,
+}
+
+const layer_index_offset: int = -3
+const layer_spacing: int = 16
 
 export var tilemaps : NodePath
 export var objects : NodePath
 export var boo_block_texture = "res://assets/tiles/boo_block/boo_block.png"
 export var boo_block_texture_invis = "res://assets/tiles/boo_block/boo_block_invis.png"
 
+
 onready var loaded_boo_texture = load(boo_block_texture)
 onready var loaded_boo_texture_invis = load(boo_block_texture_invis)
 
 onready var tilemaps_node = get_node(tilemaps)
 onready var objects_node = get_node(objects)
+
 
 func _ready():
 	var tex = loaded_boo_texture
@@ -155,27 +171,17 @@ func update_tilemaps():
 	tilemaps_node.update_tilemaps()
 
 func toggle_layer_transparency(current_layer: int, is_transparent: bool):
-	var index = 3 # has to be done because for some reason the indices are wrong for the layers
+	var index = 0
+	
 	for tilemap in tilemaps_node.get_children():
-		var tilemap_color = Color(1, 1, 1, 1)
-		if tilemap.name == "Back" or tilemap.name == "VeryBack":
-			tilemap_color = Color(0.54, 0.54, 0.54, 1)
+		var corrected_index = wrapi(index - 1, 0, 4)
 		
-		if index == current_layer:
-			tilemap.modulate = tilemap_color
-			
-			if tilemap.name == "Front":
-				tilemap.target_alpha = tilemap_color.a
+		if corrected_index == current_layer:
+			tilemap.hidden = false
 		else:
-			if is_transparent:
-				tilemap_color.a = 0.25
-			
-			tilemap.modulate = tilemap_color
-			
-			if tilemap.name == "Front":
-				tilemap.target_alpha = tilemap_color.a
-			
-		index = wrapi(index + 1, 0, 3)
+			tilemap.hidden = is_transparent
+		
+		index += 1
 
 func move_object_to_back(object):
 	objects_node.move_object_to_back(object)

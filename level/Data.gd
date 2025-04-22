@@ -8,7 +8,7 @@ const DEFAULT_AUTHOR: String = "Unknown"
 const DEFAULT_DESCRIPTION: String = "This level has no description."
 const DEFAULT_THUMBNAIL_URL: String = ""
  
-const current_format_version := "0.5.3"
+const current_format_version := "0.5.4"
 
 var name := DEFAULT_NAME
 var author := DEFAULT_AUTHOR

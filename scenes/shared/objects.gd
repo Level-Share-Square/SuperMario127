@@ -4,6 +4,8 @@ extends Node
 
 signal objects_ready
 
+export(NodePath) var shared_path
+
 var level_data : LevelData
 var level_area : LevelArea
 
@@ -39,6 +41,7 @@ func create_object(object, add_to_data):
 		object_node.level_area = level_area
 		object_node.level_object = weakref(object)
 		object_node.palette = object.palette
+		object_node.shared = get_node(shared_path)
 		
 		object_node._set_properties()
 		

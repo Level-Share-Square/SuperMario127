@@ -602,16 +602,7 @@ func _process(delta : float) -> void:
 						object.properties.append(0)
 						object.properties.append(true)
 						object.properties.append(true)
-						# place the object on currently selected background layer
-						match(editing_layer):
-							0:
-								object.properties.append(1)
-							1:
-								object.properties.append(2)
-							2:
-								object.properties.append(3)
-							3:
-								object.properties.append(0)
+						object.properties.append(3)
 						var object_copy = object
 						objects_stack.append([shared.create_object(object, true),true,object_copy])
 						# Set level as not multiplayer compatible if the object placed

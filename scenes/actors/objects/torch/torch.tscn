@@ -103,5 +103,5 @@ color = Color( 0.870588, 0.647059, 0.0509804, 1 )
 energy = 1.27
 range_z_min = -10
 range_z_max = -10
-range_layer_max = 11
+range_layer_max = 1
 shadow_color = Color( 0.282353, 0.172549, 0.172549, 0.631373 )

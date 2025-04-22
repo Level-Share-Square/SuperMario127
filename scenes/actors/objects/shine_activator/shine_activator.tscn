@@ -12,6 +12,7 @@ extents = Vector2( 16, 16 )
 
 [node name="ShineActivator" type="Node2D"]
 script = ExtResource( 1 )
+lock_layer = true
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
