@@ -34,8 +34,11 @@ shader_param/noise_speed_1 = Vector2( 0, 0.05 )
 shader_param/noise_offset_2 = Vector2( 0, 16 )
 shader_param/noise_speed_2 = Vector2( 0, 0.1 )
 shader_param/noise_offset_3 = Vector2( 0, 16 )
-shader_param/noise_speed_3 = Vector2( 0.1, -0.1 )
+shader_param/noise_speed_3 = Vector2( 0, -0.1 )
+shader_param/position = Vector2( 0, 0 )
 shader_param/size = Vector2( 1800, 600 )
+shader_param/offset = Vector2( 0.062, -1.464 )
+shader_param/rotation = 0.0
 shader_param/noise_texture_1 = SubResource( 26 )
 shader_param/noise_texture_2 = ExtResource( 10 )
 shader_param/noise_texture_3 = ExtResource( 5 )
@@ -69,7 +72,9 @@ shader_param/noise_offset_2 = Vector2( 0, 16 )
 shader_param/noise_speed_2 = Vector2( 0, 0.15 )
 shader_param/noise_offset_3 = Vector2( 0, 16 )
 shader_param/noise_speed_3 = Vector2( -0.1, 0.1 )
+shader_param/position = Vector2( 0, 0 )
 shader_param/size = Vector2( 1800, 32 )
+shader_param/offset = Vector2( 0, 0 )
 shader_param/noise_texture_1 = SubResource( 24 )
 shader_param/noise_texture_2 = ExtResource( 6 )
 shader_param/noise_texture_3 = SubResource( 22 )
@@ -158,15 +163,21 @@ anim_speed_random = 0.1
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 
+uniform vec2 size;
+uniform vec2 offset;
+
 void fragment(){
-    vec2 newuv = UV;
+    vec2 newuv = UV - vec2(offset / size);
     newuv.x += TIME / 2.0;
     vec4 c = texture(TEXTURE, newuv);
     COLOR = c;
 }"
 
 [sub_resource type="ShaderMaterial" id=13]
+resource_local_to_scene = true
 shader = SubResource( 3 )
+shader_param/size = Vector2( 1800, 32 )
+shader_param/offset = Vector2( 0, 0 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
@@ -274,12 +285,10 @@ stretch_mode = 2
 [node name="WavesRecolorable" type="TextureRect" parent="Old/Waves" index="0"]
 visible = false
 modulate = Color( 0, 0.447059, 0.972549, 1 )
+light_mask = 0
 material = SubResource( 13 )
 margin_right = 1800.0
 margin_bottom = 32.0
 mouse_filter = 2
 texture = ExtResource( 3 )
 stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}

@@ -34,16 +34,12 @@ func update_property(key, value):
 	update_layer()
 	visual = $New if !use_old_lava else $Old
 	match(key):
-		"color":
+		"color" or "surface_color":
 			update_liquid_color(value)
-		"surface_color":
-			update_liquid_color(color)
 
 
 func update_layer():
 	.update_layer()
-	
-	
 
 
 func update_liquid_color(color):
@@ -102,9 +98,14 @@ func update():
 		liquid_body.rect_size = size
 	
 	#update new stuff
+	waves.material.set_shader_param("position", position)
 	waves.material.set_shader_param("size", waves.rect_size)
+	waves.material.set_shader_param("offset", Vector2(position.x, 0))
 	
+	liquid_body.material.set_shader_param("position", Vector2.ZERO)
 	liquid_body.material.set_shader_param("size", liquid_body.rect_size)
+	liquid_body.material.set_shader_param("offset", position)
+	liquid_body.material.set_shader_param("rotation", rotation)
 	
 	lava_light_texture.rect_size.x = size.x
 	lava_light_texture.material.set_shader_param("noise_scale", Vector2(size.x/256, .25))
@@ -114,6 +115,8 @@ func update():
 	lava_light.visible = lighting
 	lava_light.position.x = size.x/2
 	lava_light.color = color.linear_interpolate(surface_color, 0.5)
+	
+	update_light_layer()
 	
 	bubbles.position.x = size.x/2
 	bubbles.process_material.emission_box_extents.x = (size.x/2) - 4
@@ -129,6 +132,8 @@ func update():
 		old_waves.visible = true
 		old_waves.rect_size.x = old_lava_fill.rect_size.x
 		old_waves_recolorable.rect_size.x = old_lava_fill.rect_size.x
+		old_waves.material.set_shader_param("size", liquid_body.rect_size)
+		old_waves.material.set_shader_param("offset", Vector2(position.x, 0))
 		old_lava_fill.rect_position.y = old_waves.rect_position.y+old_waves.rect_size.y
 		old_lava_fill.rect_size = size-old_lava_fill.rect_position
 	else:

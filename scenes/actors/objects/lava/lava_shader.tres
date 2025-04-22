@@ -17,7 +17,10 @@ uniform vec2 noise_speed_2;
 uniform vec2 noise_offset_3;
 uniform vec2 noise_speed_3;
 
+uniform vec2 position;
 uniform vec2 size;
+uniform vec2 offset;
+uniform float rotation;
 
 varying vec2 noise_scale_1;
 varying vec2 noise_scale_2;
@@ -37,7 +40,27 @@ vec2 get_scale(ivec2 texture_size) {
 	return size/vec2(texture_size);
 }
 
+vec2 transform_uv(vec2 uv, vec2 pivot, vec2 scale, float angle, vec2 translation) {
+	// First we scale...
+	uv -= pivot;
+	uv *= scale;
+	
+	// Next we rotate...
+	float cosine = cos(angle);
+	float sine = sin(angle);
+	uv = vec2(
+		uv.x * cosine - uv.y * sine,
+		uv.x * sine + uv.y * cosine
+	);
+	
+	// Finally we undo the pivot and translate the UV! Simple :D
+	uv += pivot + translation;
+	return uv;
+}
+
 void fragment() {
+	vec2 offset_normal = (offset / size);
+	
 	vec4 base = texture(TEXTURE, UV);
 	base *= color;
 	base.rgb /= vec3(2);
@@ -46,15 +69,19 @@ void fragment() {
 	noise_scale_2 = get_scale(textureSize(noise_texture_2, 0));
 	noise_scale_3 = get_scale(textureSize(noise_texture_3, 0));
 	
+	
 	//retooled as a distortion map
-	vec2 noise_uv_3 = (UV * noise_scale_3) - (noise_offset_3/vec2(128)) + (noise_speed_3 * TIME);
+	vec2 offset_3 = (noise_offset_3/vec2(textureSize(noise_texture_3, 0))) + (noise_speed_3 * TIME);
+	vec2 noise_uv_3 = transform_uv(UV, position / size, noise_scale_3, rotation, offset_3 + (offset / vec2(textureSize(noise_texture_3, 0))));
 	vec4 noise_3 = texture(noise_texture_3, noise_uv_3);
 	
-	vec2 noise_uv_1 = (UV * noise_scale_1) + (noise_offset_1/vec2(512)) + (noise_speed_1 * TIME);
-	vec4 noise_1 = texture(noise_texture_1, noise_uv_1+noise_3.xy/12.0);
+	vec2 offset_1 = (noise_offset_1/vec2(textureSize(noise_texture_1, 0))) + (noise_speed_1 * TIME) + noise_3.xy/12.0;
+	vec2 noise_uv_1 = transform_uv(UV, position / size, noise_scale_1, rotation, offset_1 + (offset / vec2(textureSize(noise_texture_1, 0))));
+	vec4 noise_1 = texture(noise_texture_1, noise_uv_1);
 	
-	vec2 noise_uv_2 = (UV * noise_scale_2) + (noise_offset_2/vec2(32)) + (noise_speed_2 * TIME);
-	vec4 noise_2 = texture(noise_texture_2, noise_uv_2+((noise_1.xy*2.0)/(12.0)));
+	vec2 offset_2 = (noise_offset_2/vec2(textureSize(noise_texture_2, 0))) + (noise_speed_2 * TIME) + (noise_1.xy*2.0 / 12.0);
+	vec2 noise_uv_2 = transform_uv(UV, position / size, noise_scale_2, rotation, offset_2 + (offset / vec2(textureSize(noise_texture_2, 0))));
+	vec4 noise_2 = texture(noise_texture_2, noise_uv_2);
 	
 	vec3 mix1 = noise_1.rgb/vec3(4.0);
 	vec3 mix2 = noise_2.rgb/vec3(4.0);

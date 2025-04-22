@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://interpreter/instructions/CallMethodInstruction.gd"
 }, {
+"base": "Resource",
+"class": "CameraCutscene",
+"language": "GDScript",
+"path": "res://classes/CameraCutscene.gd"
+}, {
 "base": "Area2D",
 "class": "CameraStopper",
 "language": "GDScript",
@@ -469,6 +474,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/Resource.gd"
 }, {
+"base": "LevelDataLoader",
+"class": "LevelShared",
+"language": "GDScript",
+"path": "res://scenes/shared/shared.gd"
+}, {
 "base": "Resource",
 "class": "LevelSong",
 "language": "GDScript",
@@ -608,6 +618,11 @@ _global_script_classes=[ {
 "class": "RocketNozzle",
 "language": "GDScript",
 "path": "res://scenes/actors/mario/nozzles/Rocket.gd"
+}, {
+"base": "CanvasLayer",
+"class": "SceneTransitions",
+"language": "GDScript",
+"path": "res://scenes/actors/scene_transitions/transition_script.gd"
 }, {
 "base": "Control",
 "class": "Screen",
@@ -839,6 +854,7 @@ _global_script_class_icons={
 "ButtonHoverRotate": "",
 "ButtonSound": "",
 "CallMethodInstruction": "",
+"CameraCutscene": "",
 "CameraStopper": "",
 "Character": "",
 "ChatMessage": "",
@@ -917,6 +933,7 @@ _global_script_class_icons={
 "LevelListHandler": "",
 "LevelObject": "",
 "LevelResource": "",
+"LevelShared": "",
 "LevelSong": "",
 "LevelTileset": "",
 "LevelVars": "",
@@ -945,6 +962,7 @@ _global_script_class_icons={
 "RainbowStarWindupState": "",
 "ResizableSemisolid": "",
 "RocketNozzle": "",
+"SceneTransitions": "",
 "Screen": "",
 "ScreenSizeUtil": "",
 "SemiSolidPlatform": "",
