@@ -326,6 +326,8 @@ func load_in(code: String)-> void:
 	
 	result = decode(code)
 	
+	var starting_format_version = result.format_version
+	
 	if (result.has("decode_error")):
 		result = {}
 		return
@@ -375,7 +377,10 @@ func load_in(code: String)-> void:
 		result = conversion_util.convert_052_to_053(result)
 	
 	if result.format_version == "0.5.3":
-		result = conversion_util.convert_053_to_054(result)
+		if starting_format_version == "0.5.3":
+			result = conversion_util.convert_053_to_054(result)
+		else:
+			result.format_version = "0.5.4"
 
 	assert(result.format_version)
 	var version_int = result.format_version.replace(".","")
