@@ -66,9 +66,9 @@ func update_property(key, value):
 
 func update_layer():
 	if render_in_front:
-		layer_shift = 1
+		layer_shift = LevelShared.layer_spacing + 1
 	else:
-		layer_shift = -1
+		layer_shift = 1
 	
 	.update_layer()
 

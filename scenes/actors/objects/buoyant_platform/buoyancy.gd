@@ -32,7 +32,7 @@ func _ready():
 func _integrate_forces(state):
 	#if linear_velocity == Vector2.ZERO:
 		#linear_velocity = Vector2(0, 98)
-	print(applied_force)
+#	print(applied_force)
 	#applied_force = applied_force.normalized() * 200
 	linear_velocity.limit_length(300)
 	test_ray.cast_to = applied_force

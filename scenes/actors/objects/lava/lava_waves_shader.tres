@@ -7,6 +7,7 @@ uniform vec4 color : hint_color;
 uniform sampler2D noise_texture_1;
 uniform sampler2D noise_texture_2;
 uniform sampler2D noise_texture_3;
+uniform sampler2D gradient_fadeout;
 
 uniform vec2 noise_offset_1;
 uniform vec2 noise_speed_1;
@@ -87,7 +88,7 @@ void fragment() {
 	
 //	base.rgb = base.rgb + mix1 + mix2;
 	
-	vec2 sine_uv = transform_uv(UV, -position / size, vec2(1.0), 0.0, offset_normal);
+	vec2 sine_uv = transform_uv(UV, position / size, vec2(1.0), 0.0, offset_normal);
 	
 	float s1 = sine(sine_uv, TIME, 1.0f, 1.5f) * sin(TIME*1.5);
 	float s2 = sine(sine_uv, TIME+1.5707f, 1.0f, 1.5f) * sin(TIME*1.5+1.5707f);
@@ -102,7 +103,8 @@ void fragment() {
 		float gradient_pos = (((sine_uv.y * 1.0) - (sine_height * 1.0)) * 24.0) / 8.0;
 		vec4 gradient_color = texture(noise_texture_1, vec2(1.0-gradient_pos+(noise_3.r/4.0), 0));
 		base.rgb = mix(base.rgb, vec3(1.0), gradient_color.rgb) + (mix2.rgb);
-		base.a = clamp((1.0-sine_uv.y)*1.75, 0, 1.0)
+		
+		base.a = texture(gradient_fadeout, vec2(sine_uv.y, 0.0)).a
 	}
 	
 	COLOR = base;

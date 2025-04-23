@@ -61,6 +61,12 @@ func _ready():
 		color.a = 0.5
 		modulate = color
 	
+	if not layer == default_layer and lock_layer:
+		set_property("layer", default_layer, true)
+	
+	if always_enabled:
+		set_property("enabled", true, true)
+	
 	z_layer = layer + LevelShared.layer_index_offset
 	
 	if get_tree().current_scene.name == "Editor":
@@ -258,7 +264,7 @@ func on_signal_fire(index):
 func update_layer():
 	if layer <= 5:
 		z_layer = layer + LevelShared.layer_index_offset
-		z_index = (z_layer * LevelShared.layer_spacing) - layer_shift
+		z_index = (z_layer * LevelShared.layer_spacing) + layer_shift
 	else:
 		printerr("Object has assigned layer %s" % layer)
 	
@@ -268,10 +274,7 @@ func update_layer():
 		modulate = Color(1, 1, 1)
 	
 	if layer != 3 and not always_enabled:
-		enabled = false
-	
-	print(z_layer)
-	print(z_index)
+		set_property("enabled", false, true)
 
 
 func parts_input_handler(event, object):

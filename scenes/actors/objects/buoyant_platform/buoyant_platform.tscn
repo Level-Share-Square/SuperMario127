@@ -12,9 +12,11 @@
 [ext_resource path="res://scenes/actors/objects/buoyant_platform/buoyancy.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
 extents = Vector2( 32, 7.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
+resource_local_to_scene = true
 extents = Vector2( 48, 28 )
 
 [sub_resource type="RectangleShape2D" id=7]
@@ -24,6 +26,7 @@ extents = Vector2( 30, 10 )
 [node name="BuoyantPlatform" type="Node2D"]
 z_index = -1
 script = ExtResource( 4 )
+layer_shift = -4
 palette_textures = [ ExtResource( 1 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ) ]
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]

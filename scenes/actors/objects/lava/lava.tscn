@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://scenes/actors/objects/lava/lava_shader.tres" type="Shader" id=1]
 [ext_resource path="res://scenes/actors/objects/lava/lava.png" type="Texture" id=2]
@@ -43,6 +43,13 @@ shader_param/noise_texture_1 = SubResource( 26 )
 shader_param/noise_texture_2 = ExtResource( 10 )
 shader_param/noise_texture_3 = ExtResource( 5 )
 
+[sub_resource type="Gradient" id=36]
+offsets = PoolRealArray( 0.65, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=37]
+gradient = SubResource( 36 )
+
 [sub_resource type="Gradient" id=23]
 interpolation_mode = 2
 offsets = PoolRealArray( 0, 0.742754, 1 )
@@ -78,6 +85,7 @@ shader_param/offset = Vector2( 0, 0 )
 shader_param/noise_texture_1 = SubResource( 24 )
 shader_param/noise_texture_2 = ExtResource( 6 )
 shader_param/noise_texture_3 = SubResource( 22 )
+shader_param/gradient_fadeout = SubResource( 37 )
 
 [sub_resource type="Shader" id=15]
 code = "shader_type canvas_item;
@@ -106,6 +114,7 @@ seamless = true
 noise = SubResource( 19 )
 
 [sub_resource type="Gradient" id=34]
+offsets = PoolRealArray( 0, 0.5875 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1 )
 
 [sub_resource type="GradientTexture" id=35]
@@ -228,9 +237,9 @@ color = Color( 0.431373, 0, 0.14902, 1 )
 [node name="Waves" type="ColorRect" parent="New" index="1"]
 light_mask = 0
 material = SubResource( 12 )
-margin_top = -14.0
+margin_top = -16.0
 margin_right = 1800.0
-margin_bottom = 18.0
+margin_bottom = 16.0
 mouse_filter = 2
 color = Color( 0.431373, 0, 0.14902, 1 )
 
@@ -247,7 +256,7 @@ margin_bottom = 24.0
 mouse_filter = 2
 
 [node name="Light2D" type="Light2D" parent="New/Waves" index="1"]
-position = Vector2( 900, 7 )
+position = Vector2( 900, 2 )
 texture = SubResource( 33 )
 energy = 1.27
 
