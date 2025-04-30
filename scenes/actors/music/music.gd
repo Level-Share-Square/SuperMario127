@@ -54,7 +54,7 @@ func is_tween_active() -> bool:
 
 
 ##### CUSTOM MUSIC
-func get_custom_file_path() -> String:
+func get_custom_file_path(file_type: String) -> String:
 	# i think accessing leveldata singleton is safe for now since
 	# this only is called inside levels, i hope i dont regret that decision
 	var level_id: String = Singleton.CurrentLevelData.level_id
@@ -64,10 +64,11 @@ func get_custom_file_path() -> String:
 	return level_list_util.get_level_music_path(
 		level_id, 
 		area,
-		working_folder)
+		working_folder,
+		file_type)
 
-func reset_custom_song() -> void:
-	var file_path: String = get_custom_file_path()
+func reset_custom_song(file_type: String) -> void:
+	var file_path: String = get_custom_file_path(file_type)
 	if level_list_util.file_exists(file_path):
 		level_list_util.delete_file(file_path)
 
@@ -80,30 +81,32 @@ func handle_custom_song(url: String) -> void:
 	
 	stop()
 	
-	var file_path: String = get_custom_file_path()
+	var file_type: String = url.substr(url.find_last("."))
+	var file_path: String = get_custom_file_path(file_type)
 	if not level_list_util.file_exists(file_path):
-		print("OGG file not found, downloading from url...")
+		print("Music file not found, downloading from url...")
 		
 		var level_id: String = Singleton.CurrentLevelData.level_id
 		var area: int = Singleton.CurrentLevelData.area
 		var working_folder: String = Singleton.CurrentLevelData.working_folder
-		save_ogg(url, level_id, area, working_folder)
+		save_music(url, level_id, area, working_folder, file_type)
 	else:
-		print("OGG file found, loading...")
+		print("Music file found, loading...")
 		
 		var ogg_file := File.new()
 		var _open = ogg_file.open(file_path, File.READ)
 		var bytes: PoolByteArray = ogg_file.get_buffer(ogg_file.get_len())
 		ogg_file.close()
 		
-		load_ogg(bytes)
+		load_music(bytes,file_type)
 
 
-func save_ogg(url: String, level_id: String, area: int, working_folder: String) -> void:
+func save_music(url: String, level_id: String, area: int, working_folder: String, file_type: String) -> void:
 	var file_path: String = level_list_util.get_level_music_path(
 		level_id, 
 		area,
-		working_folder)
+		working_folder,
+		file_type)
 	
 	#http_request.download_file = file_path
 	http_request.request(url)
@@ -122,14 +125,29 @@ func request_completed(result: int, response_code: int, headers: PoolStringArray
 	ogg_file.store_buffer(body)
 	ogg_file.close()
 	
-	load_ogg(body)
+	var file_type: String = file_path.substr(file_path.find_last("."))
+	load_music(body,file_type)
 
 
-func load_ogg(bytes: PoolByteArray) -> void:
-	var stream := AudioStreamOGGVorbis.new()
+func load_music(bytes: PoolByteArray,file_type: String) -> void:
+	var stream: AudioStream
+	match (file_type):
+		".ogg":
+			stream = AudioStreamOGGVorbis.new()
+			stream.loop = true
+			stream.loop_offset = loop
+		".mp3":
+			stream = AudioStreamMP3.new()
+			stream.loop = true
+			stream.loop_offset = loop
+#		".wav": Doesn't work currently and I don't know how to fix it
+#			stream = AudioStreamSample.new()
+#			stream.loop_mode = AudioStreamSample.LOOP_FORWARD
+#			stream.loop_begin = loop
+		_:
+			stream = AudioStream.new()
 	stream.data = bytes
-	stream.loop = true
-	stream.loop_offset = loop
+	
 	if stream.data == null:
 		return
 
@@ -137,7 +155,7 @@ func load_ogg(bytes: PoolByteArray) -> void:
 		self.stream = stream
 		play()
 	
-	print("OGG file loaded.")
+	print("Music file loaded.")
 #######
 
 
