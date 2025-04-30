@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
@@ -14,10 +14,11 @@
 [ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=12]
 [ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=13]
 [ext_resource path="res://scenes/editor/ObjectHelpButton.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/misc/editor_theme.tres" type="Theme" id=15]
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=15]
 size = 56
-use_filter = true
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=13]
@@ -518,14 +519,19 @@ to_front_button = NodePath("Contents/ToFrontButton")
 shared = NodePath("../../Shared")
 
 [node name="Title" type="RichTextLabel" parent="."]
-margin_left = 24.0
-margin_top = 24.2632
-margin_right = 456.0
-margin_bottom = 102.263
+anchor_left = 0.02
+anchor_top = 0.03
+anchor_right = 0.02
+anchor_bottom = 0.03
+margin_right = 975.0
+margin_bottom = 56.0
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 12 )
+theme = ExtResource( 15 )
+theme_type_variation = "WindowTitle"
+custom_fonts/normal_font = SubResource( 15 )
 bbcode_text = "Object Settings"
 text = "Object Settings"
+fit_content_height = true
 
 [node name="CloseButton" type="TextureButton" parent="."]
 anchor_left = 1.0
@@ -538,9 +544,6 @@ rect_scale = Vector2( 0.95, 0.95 )
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
 stream = ExtResource( 2 )
@@ -559,9 +562,6 @@ margin_top = 104.0
 margin_right = 1087.0
 margin_bottom = 574.5
 rect_clip_content = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Preview" type="TextureRect" parent="Contents"]
 margin_left = 32.0
@@ -583,9 +583,6 @@ custom_styles/pressed = ExtResource( 10 )
 custom_styles/normal = ExtResource( 10 )
 text = "Delete"
 script = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="Contents/DeleteButton"]
 stream = ExtResource( 2 )

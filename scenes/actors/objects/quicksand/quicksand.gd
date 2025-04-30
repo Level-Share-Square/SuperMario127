@@ -78,14 +78,15 @@ func update():
 		bubbles.visible = false
 	
 	#update shader stuff
-	waves.material.set_shader_param("x_size", waves.rect_size.x)
-	waves.material.set_shader_param("noise_scale_1", waves.rect_size/Vector2(512, 512))
-	waves.material.set_shader_param("noise_scale_2", waves.rect_size/Vector2(32, 32))
-	waves.material.set_shader_param("noise_scale_3", waves.rect_size/Vector2(128, 128))
+	liquid_body.material.set_shader_param("position", Vector2.ZERO)
+	liquid_body.material.set_shader_param("size", liquid_body.rect_size)
+	liquid_body.material.set_shader_param("rotation", rotation)
+	liquid_body.material.set_shader_param("offset", -position)
 	
-	liquid_body.material.set_shader_param("noise_scale_1", liquid_body.rect_size/Vector2(512, 512))
-	liquid_body.material.set_shader_param("noise_scale_2", liquid_body.rect_size/Vector2(32, 32))
-	liquid_body.material.set_shader_param("noise_scale_3", liquid_body.rect_size/Vector2(128, 128))
+	waves.material.set_shader_param("position", Vector2(0, 32))
+	waves.material.set_shader_param("size", waves.rect_size)
+	waves.material.set_shader_param("rotation", rotation)
+	waves.material.set_shader_param("offset", -position)
 
 
 func _ready():

@@ -33,7 +33,7 @@ onready var placeable_items_button_container : TextureRect = get_node(placeable_
 onready var pinned_items : Array 
 onready var max_pins = 5
 onready var item_preview : Sprite = get_node(item_preview_path)
-onready var shared : Node2D = get_node(shared_path)
+onready var shared: LevelShared = get_node(shared_path)
 onready var object_settings : NinePatchRect = get_node(object_settings_path)
 onready var mouse_object_area : Area2D = get_node(mouse_object_area_path)
 
@@ -603,11 +603,12 @@ func _process(delta : float) -> void:
 						object.properties.append(true)
 						object.properties.append(true)
 						object.properties.append(3)
+						
 						var object_copy = object
 						objects_stack.append([shared.create_object(object, true),true,object_copy])
 						# Set level as not multiplayer compatible if the object placed
 						# isn't compatible with multiplayer and also changes game mode to singleplayer
-						Singleton.CurrentLevelData.level_info.validity_check.is_object_multiplayer_compatible(object.type_id,self)
+#						Singleton.CurrentLevelData.level_info.validity_check.is_object_multiplayer_compatible(object.type_id,self)
 						# Merciful Lord Jesus, please forgive me for 
 						# writing this abhorrent line of code. Amen.
 						last_object_pos = object_pos
@@ -651,6 +652,8 @@ func _process(delta : float) -> void:
 					object.properties.append(0)
 					object.properties.append(true)
 					object.properties.append(true)
+					object.properties.append(3)
+					
 					var object_copy = object
 					objects_stack.append([shared.create_object(object, true),true,object_copy])
 					# Set level as not multiplayer compatible if the object placed

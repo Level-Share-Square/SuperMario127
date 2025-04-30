@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=83 format=2]
 
-[ext_resource path="res://assets/fonts/coolfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/DelfinoFont20.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/options/buttons/grabber_highlight.png" type="Texture" id=2]
 [ext_resource path="res://scenes/menu/options/buttons/grabber.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]

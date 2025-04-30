@@ -118,10 +118,8 @@ func deactivate_shines(shines: Array):
 
 
 func remove_active_shines(tagged_shines: Array) -> Array:
-	print(tagged_shines)
 	for shine in tagged_shines:
 		if shine.activated and !shine.collected:
 			tagged_shines.remove(tagged_shines.find(shine))
-	print(tagged_shines)
 	
 	return tagged_shines

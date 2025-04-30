@@ -17,7 +17,7 @@
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=15]
 [ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=16]
 [ext_resource path="res://scenes/menu/shine_select/shine_parent.gd" type="Script" id=17]
-[ext_resource path="res://assets/fonts/coolfont.tres" type="DynamicFont" id=18]
+[ext_resource path="res://assets/fonts/DelfinoFont20.tres" type="DynamicFont" id=18]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;

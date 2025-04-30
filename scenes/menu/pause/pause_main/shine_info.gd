@@ -29,11 +29,14 @@ func _ready():
 	pause_controller.connect("shine_collected", self, "update_shine_info")
 	
 	level_info = Singleton.CurrentLevelData.level_info
-	total_shines = level_info.shine_details.size()
-	selected_shine = level_info.selected_shine
 	
-	update_shine_info()
-	scrollcheck()
+	if is_instance_valid(level_info):
+		total_shines = level_info.shine_details.size()
+		selected_shine = level_info.selected_shine
+		
+		update_shine_info()
+		scrollcheck()
+
 
 func update_shine_info():
 	level_info = Singleton.CurrentLevelData.level_info

@@ -16,6 +16,8 @@ animations = [ {
 [node name="EntranceLuigi" type="Node2D"]
 z_index = -1
 script = ExtResource( 3 )
+lock_layer = true
+always_enabled = null
 character_string = "character2"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

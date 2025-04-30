@@ -8,7 +8,7 @@ var editor_aliases := {}
 var mode: int = 0
 var level_data = null
 var level_area = null
-var level_object = null
+var level_object: WeakRef = null
 var hovered := false
 var shared: LevelShared = null
 
@@ -20,7 +20,7 @@ var palettes := 0
 export(LevelShared.Layers) var default_layer: int = 3
 export var layer_shift: int = 0
 export var lock_layer: bool = false
-export var always_enabled: bool = false
+export var ignore_layer_disabling: bool = false
 
 var layer: int = 3
 var z_layer: int = 0
@@ -61,11 +61,10 @@ func _ready():
 		color.a = 0.5
 		modulate = color
 	
-	if not layer == default_layer and lock_layer:
-		set_property("layer", default_layer, true)
+	print("From object, ", level_object)
 	
-	if always_enabled:
-		set_property("enabled", true, true)
+	if layer != default_layer and lock_layer:
+		set_property("layer", default_layer, true)
 	
 	z_layer = layer + LevelShared.layer_index_offset
 	
@@ -153,9 +152,9 @@ func set_property(key, value, change_level_object = true, alias = null):
 	if alias != null:
 		editor_aliases[key] = alias
 	
-	if change_level_object and is_savable_property(key):
+	if change_level_object and is_savable_property(key) and !is_preview:
 		var level_object_ref = level_object.get_ref()
-		var index = get_property_index(key)
+		var index: int = get_property_index(key)
 		
 		if index == level_object_ref.properties.size():
 			level_object_ref.properties.append(value)
@@ -268,24 +267,27 @@ func update_layer():
 	else:
 		printerr("Object has assigned layer %s" % layer)
 	
-	if layer < 3:
+	if layer < LevelShared.Layers.Middle:
 		modulate = BG_MODULATE
 	else:
 		modulate = Color(1, 1, 1)
 	
-	if layer != 3 and not always_enabled:
-		set_property("enabled", false, true)
+	if layer != default_layer:
+		set_property("enabled", ignore_layer_disabling, true)
 
 
 func parts_input_handler(event, object):
 	if event is InputEventMouseButton and event.is_pressed() and hovered:
-		if event.button_index == 5: # Mouse wheel down
-			object.parts -= 1
-			if object.parts < 1:
-				object.parts = 1
-			object.set_property("parts", object.parts, true)
-			object.update_parts()
-		elif event.button_index == 4: # Mouse wheel up
-			object.parts += 1
-			object.set_property("parts", object.parts, true)
-			object.update_parts()
+		match event.button_index:
+			BUTTON_WHEEL_UP: # Mouse wheel up
+				object.parts += 1
+				object.set_property("parts", object.parts, true)
+				object.update_parts()
+			
+			BUTTON_WHEEL_DOWN: # Mouse wheel down
+				object.parts -= 1
+				if object.parts < 1:
+					object.parts = 1
+				object.set_property("parts", object.parts, true)
+				object.update_parts()
+

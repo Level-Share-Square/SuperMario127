@@ -15,7 +15,7 @@ dest_files=[ "res://.import/grain_noise.png-c1a74c396491650ddc9564e1347c4c3b.ste
 [params]
 
 compress/mode=0
-compress/lossy_quality=0.7
+compress/lossy_quality=0.1
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0

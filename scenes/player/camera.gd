@@ -159,11 +159,15 @@ func queue_cutscene(cutscene : CameraCutscene):
 
 
 func start_queue():
+	if cutscene_queue.size() == 0:
+		push_warning("No cutscene queue to start, queue a cutscene then call start_queue()!")
+		return
+	
 	if !in_cutscene:
 		in_cutscene = true
 		play_cutscene(cutscene_queue[0])
+		print("queue started!")
 	
-#	print("queue started!")
 
 
 func play_cutscene(cutscene : CameraCutscene, reverse: bool = false):

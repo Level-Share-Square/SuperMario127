@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/oldmenu/127Button.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/styles/LevelListPanel.tres" type="StyleBox" id=5]
-[ext_resource path="res://assets/fonts/DelfinoFont.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/fonts/DelfinoFont32.tres" type="DynamicFont" id=6]
 [ext_resource path="res://assets/misc/comment.png" type="Texture" id=7]
 [ext_resource path="res://scenes/oldmenu/127BackButton.tscn" type="PackedScene" id=8]
 

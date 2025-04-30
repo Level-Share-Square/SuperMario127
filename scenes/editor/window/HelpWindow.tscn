@@ -879,21 +879,21 @@ texture = SubResource( 15 )
 stretch_mode = 1
 
 [node name="Dialogue" type="ScrollContainer" parent="Pages"]
+visible = false
 margin_left = 448.0
 margin_top = 450.0
 margin_right = 1426.0
 margin_bottom = 806.0
 theme = SubResource( 11 )
 scroll_horizontal_enabled = false
-scroll_vertical = 2047
 script = ExtResource( 3 )
 page_name = "Dialogue & NPCs"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Pages/Dialogue"]
 margin_left = 16.0
-margin_top = -2039.0
-margin_right = 950.0
-margin_bottom = 440.0
+margin_top = 8.0
+margin_right = 962.0
+margin_bottom = 2487.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/default_color = Color( 1, 1, 1, 1 )
@@ -1000,7 +1000,6 @@ scroll_active = false
 script = ExtResource( 12 )
 
 [node name="Images" type="Node2D" parent="Pages/Dialogue"]
-position = Vector2( 0, -2047 )
 
 [node name="Sign" type="Sprite" parent="Pages/Dialogue/Images"]
 position = Vector2( 764, 168 )

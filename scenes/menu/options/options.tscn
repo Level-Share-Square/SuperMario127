@@ -431,6 +431,7 @@ default_subscreen_path = NodePath("General")
 buttons_container_path = NodePath("../BlackBar/MarginContainer/VBoxContainer")
 
 [node name="General" type="CenterContainer" parent="Subscreens"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 27 )
@@ -1634,7 +1635,6 @@ script = ExtResource( 19 )
 extend_amount = 2
 
 [node name="Storage" type="Control" parent="Subscreens"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -1676,7 +1676,7 @@ custom_constants/separation = 0
 alignment = 1
 
 [node name="Label" type="Label" parent="Subscreens/Storage/ScrollContainer/ModsContainer"]
-margin_top = 144.0
+margin_top = 143.0
 margin_right = 192.0
 margin_bottom = 160.0
 custom_fonts/font = ExtResource( 15 )
@@ -1693,7 +1693,7 @@ rect_min_size = Vector2( 0, 8 )
 unique_name_in_owner = true
 margin_top = 168.0
 margin_right = 192.0
-margin_bottom = 192.0
+margin_bottom = 193.0
 custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
 custom_fonts/font = ExtResource( 15 )
 custom_styles/disabled = SubResource( 23 )

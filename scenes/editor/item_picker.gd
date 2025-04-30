@@ -87,29 +87,3 @@ func change_group():
 		var item_dragger_node = load(item_dragger_path).instance()
 		item_dragger_node.item = item
 		grid_container.add_child(item_dragger_node)
-	
-	for child in get_children():
-		
-		child.connect("mouse_entered",self,"_on_mouse_entered")
-		child.connect("mouse_exited",self,"_on_mouse_exited")
-	
-	var grid1: GridContainer = get_node("ScrollContainer/GridContainer")
-	var grid2: GridContainer = get_node("Groups/GridContainer")
-	
-	for child in grid1.get_children():
-		
-		child.connect("mouse_entered",self,"_on_mouse_entered")
-		child.connect("mouse_exited",self,"_on_mouse_exited")
-	
-	for child in grid2.get_children():
-		
-		child.connect("mouse_entered",self,"_on_mouse_entered")
-		child.connect("mouse_exited",self,"_on_mouse_exited")
-
-
-func _on_mouse_entered():
-	hovered = true
-
-
-func _on_mouse_exited():
-	hovered = false

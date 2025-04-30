@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/menu/screen.gd" type="Script" id=7]
 [ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=8]
-[ext_resource path="res://assets/fonts/coolfont.tres" type="DynamicFont" id=9]
+[ext_resource path="res://assets/fonts/DelfinoFont20.tres" type="DynamicFont" id=9]
 
 [sub_resource type="Gradient" id=5]
 colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 0.627451 )

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=1]
-[ext_resource path="res://assets/fonts/DelfinoFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/DelfinoFont32.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/styles/BrightButtonStyleNormal.tres" type="StyleBox" id=4]
 [ext_resource path="res://scenes/shared/ui/selector.tscn" type="PackedScene" id=5]

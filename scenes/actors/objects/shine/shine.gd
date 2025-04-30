@@ -205,13 +205,13 @@ func _physics_process(_delta : float) -> void:
 		
 		if red_coins_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_red_coins > 0:
 			if Singleton.CurrentLevelData.level_data.vars.red_coins_collected[0] == Singleton.CurrentLevelData.level_data.vars.max_red_coins:
-				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP)
+				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
 		if shine_shards_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_shine_shards > 0:
 			if Singleton.CurrentLevelData.level_data.vars.shine_shards_collected[Singleton.CurrentLevelData.area][0] == Singleton.CurrentLevelData.level_data.vars.max_shine_shards:
-				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP)
+				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
 		if purple_starbits_activate and !activated and Singleton.CurrentLevelData.level_data.vars.max_purple_starbits > 0:
 			if Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0] >= required_purples:
-				activate_shine(ActivateAnimations.NORMAL)
+				activate_shine(ActivateAnimations.NORMAL if do_animation else ActivateAnimations.SKIP, false, true)
 	
 	if collected:
 		if send_score == true:
@@ -225,7 +225,7 @@ func _physics_process(_delta : float) -> void:
 		if character.is_grounded():
 			start_shine_dance() #shine dance setup also disables physics process, so it's only called once
 
-func activate_shine(animation: int, temporary: bool = false) -> void:
+func activate_shine(animation: int, temporary: bool = false, manual_start_cutscene: bool = false) -> void:
 	pause_mode = PAUSE_MODE_INHERIT
 	if activated:
 		return
@@ -266,8 +266,12 @@ func activate_shine(animation: int, temporary: bool = false) -> void:
 		animation_player.play("active", -1, INF)
 	
 	activated = true
+	
 	if !temporary:
 		Singleton.CurrentLevelData.level_data.vars.activate_shine(id)
+	
+	if manual_start_cutscene:
+		camera.start_queue()
 
 
 func deactivate_shine(do_animation: bool) -> void:

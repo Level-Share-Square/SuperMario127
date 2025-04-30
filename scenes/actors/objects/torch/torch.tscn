@@ -1,11 +1,13 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/actors/objects/torch/torch.gd" type="Script" id=1]
 [ext_resource path="res://scenes/actors/objects/torch/torch.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/objects/torch/viginette1.png" type="Texture" id=3]
+[ext_resource path="res://scenes/actors/objects/torch/torch_light_anim.tres" type="Texture" id=3]
 [ext_resource path="res://scenes/actors/objects/torch/recolorable_sprite.png" type="Texture" id=4]
-[ext_resource path="res://scenes/actors/objects/torch/viginette3.png" type="Texture" id=5]
-[ext_resource path="res://scenes/actors/objects/torch/viginette2.png" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/torch/gradient_filter_fix.gd" type="Script" id=5]
+[ext_resource path="res://scenes/actors/objects/torch/torch__light_1.tres" type="Texture" id=6]
+[ext_resource path="res://scenes/actors/objects/torch/torch__light_2.tres" type="Texture" id=7]
+[ext_resource path="res://scenes/actors/objects/torch/torch__light_0.tres" type="Texture" id=8]
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
@@ -71,20 +73,10 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="AnimatedTexture" id=22]
-frames = 4
-fps = 10.0
-frame_0/texture = ExtResource( 3 )
-frame_1/texture = ExtResource( 6 )
-frame_1/delay_sec = 0.1
-frame_2/texture = ExtResource( 5 )
-frame_2/delay_sec = 0.1
-frame_3/texture = ExtResource( 6 )
-frame_3/delay_sec = 0.1
-
 [node name="Torch" type="Node2D"]
 z_index = -2
 script = ExtResource( 1 )
+ignore_layer_disabling = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 z_index = -2
@@ -98,10 +90,12 @@ frames = SubResource( 21 )
 playing = true
 
 [node name="Light2D" type="Light2D" parent="."]
-texture = SubResource( 22 )
+texture = ExtResource( 3 )
 color = Color( 0.870588, 0.647059, 0.0509804, 1 )
 energy = 1.27
 range_z_min = -10
 range_z_max = -10
 range_layer_max = 1
 shadow_color = Color( 0.282353, 0.172549, 0.172549, 0.631373 )
+script = ExtResource( 5 )
+textures = [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ) ]

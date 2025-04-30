@@ -21,9 +21,6 @@ margin_right = 40.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 320, 120 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 line_edit = NodePath("LineEdit")
 
 [node name="LineEdit" type="LineEdit" parent="."]
@@ -39,6 +36,3 @@ context_menu_enabled = false
 placeholder_text = "0"
 placeholder_alpha = 0.35
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
