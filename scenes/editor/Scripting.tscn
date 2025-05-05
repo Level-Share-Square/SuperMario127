@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/editor/window/AddBlockWindow.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/editor/window/VarNameWindow.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/editor/scripting/newvar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/editor/scripting/PanningCamera2D.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/editor/scripting/ifcon.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripting.gd" type="Script" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+font_data = ExtResource( 1 )
+
+[node name="Scripting" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+margin_right = 768.0
+margin_bottom = 44.0
+color = Color( 0.0196078, 0, 0.286275, 1 )
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+text = "Editing: Test"
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+margin_top = 46.0
+margin_right = 40.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -85772.0
+margin_top = -37157.0
+margin_right = 88440.0
+margin_bottom = 60257.0
+color = Color( 0.00784314, 0, 0.113725, 1 )
+
+[node name="AddBlockWindow" parent="." instance=ExtResource( 2 )]
+margin_left = 473.0
+margin_top = 139.0
+margin_right = 810.0
+margin_bottom = 824.0
+
+[node name="PanningCamera2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( 383, 215 )
+current = true
+
+[node name="IfCondition" parent="." instance=ExtResource( 6 )]
+margin_left = 59147.0
+margin_top = 35865.0
+margin_right = 59446.0
+margin_bottom = 35913.0
+
+[node name="NewVar" parent="." instance=ExtResource( 4 )]
+margin_left = 87270.0
+margin_top = 21543.0
+margin_right = 87591.0
+margin_bottom = 21591.0
+
+[node name="VarNameWindow" parent="." instance=ExtResource( 3 )]
+visible = false
+margin_left = 56057.0
+margin_top = 19931.0
+margin_right = 57110.0
+margin_bottom = 20333.0

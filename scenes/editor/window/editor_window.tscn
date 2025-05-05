@@ -1,0 +1,696 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://assets/misc/editor_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=2]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/fonts/DelfinoFont10.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://scenes/menu/range_sound.gd" type="Script" id=7]
+[ext_resource path="res://scenes/editor/assets/level_settings.png" type="Texture" id=8]
+[ext_resource path="res://assets/styles/ButtonStyleDisabled.tres" type="StyleBox" id=9]
+[ext_resource path="res://scenes/editor/window/editor_window.gd" type="Script" id=10]
+[ext_resource path="res://scenes/editor/property_type_scenes/PoolStringArray/base/player_preview_small.png" type="Texture" id=11]
+[ext_resource path="res://scenes/editor/property_type_scenes/PoolStringArray/base/body_preview_small.png" type="Texture" id=15]
+[ext_resource path="res://scenes/editor/property_type_scenes/PoolStringArray/base/head_preview_small.png" type="Texture" id=16]
+[ext_resource path="res://scenes/editor/window/option_icon.gd" type="Script" id=17]
+
+[sub_resource type="DynamicFont" id=1]
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 13
+font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.0705882, 0, 0.231373, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0.0470588, 0.317647, 1 )
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[node name="Popup" type="Popup"]
+visible = true
+margin_right = 419.0
+margin_bottom = 220.0
+theme = ExtResource( 1 )
+popup_exclusive = true
+script = ExtResource( 10 )
+window_panel_path = NodePath("Window")
+drag_control_path = NodePath("Window/WindowMat/HeaderContentDivider/HeaderMat")
+close_button_path = NodePath("Window/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox/WindowClose")
+
+[node name="Window" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 417, 220 )
+focus_mode = 1
+theme = ExtResource( 1 )
+theme_type_variation = "WindowBack"
+
+[node name="Border" type="PanelContainer" parent="Window"]
+visible = false
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 415.0
+margin_bottom = 218.0
+mouse_filter = 2
+theme_type_variation = "WindowBorder"
+
+[node name="WindowMat" type="MarginContainer" parent="Window"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 416.0
+margin_bottom = 217.0
+mouse_filter = 2
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="HeaderContentDivider" type="VBoxContainer" parent="Window/WindowMat"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 409.0
+margin_bottom = 210.0
+
+[node name="HeaderMat" type="MarginContainer" parent="Window/WindowMat/HeaderContentDivider"]
+margin_right = 405.0
+margin_bottom = 26.0
+mouse_filter = 1
+custom_constants/margin_right = 6
+custom_constants/margin_top = 3
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 1
+
+[node name="HeaderBox" type="HBoxContainer" parent="Window/WindowMat/HeaderContentDivider/HeaderMat"]
+margin_left = 6.0
+margin_top = 3.0
+margin_right = 399.0
+margin_bottom = 25.0
+custom_constants/separation = 1
+
+[node name="Icon" type="TextureRect" parent="Window/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
+margin_right = 21.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 21, 21 )
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="Control" type="Control" parent="Window/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
+margin_left = 22.0
+margin_right = 24.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 2, 0 )
+
+[node name="Title" type="RichTextLabel" parent="Window/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
+margin_left = 25.0
+margin_right = 371.0
+margin_bottom = 22.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme = ExtResource( 1 )
+theme_type_variation = "WindowTitle"
+bbcode_enabled = true
+bbcode_text = "{Object} Settings"
+text = "{Object} Settings"
+fit_content_height = true
+
+[node name="WindowClose" type="Button" parent="Window/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
+margin_left = 372.0
+margin_right = 393.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 21, 21 )
+hint_tooltip = "Close"
+theme = ExtResource( 1 )
+theme_type_variation = "ButtonRed"
+custom_fonts/font = SubResource( 1 )
+text = "X"
+icon_align = 1
+script = ExtResource( 2 )
+
+[node name="HSeparator" type="HSeparator" parent="Window/WindowMat/HeaderContentDivider"]
+margin_top = 30.0
+margin_right = 405.0
+margin_bottom = 30.0
+custom_constants/separation = 0
+
+[node name="ContentMat" type="MarginContainer" parent="Window/WindowMat/HeaderContentDivider"]
+margin_top = 34.0
+margin_right = 405.0
+margin_bottom = 206.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 1
+custom_constants/margin_top = 1
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 2
+
+[node name="ContentBox" type="HBoxContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat"]
+margin_top = 1.0
+margin_right = 404.0
+margin_bottom = 170.0
+size_flags_vertical = 3
+
+[node name="PreviewMat" type="MarginContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox"]
+margin_right = 100.0
+margin_bottom = 169.0
+custom_constants/margin_right = 2
+custom_constants/margin_left = 2
+
+[node name="Preview" type="VBoxContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat"]
+margin_left = 2.0
+margin_right = 98.0
+margin_bottom = 169.0
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview"]
+margin_right = 96.0
+margin_bottom = 98.0
+
+[node name="PreviewBack" type="PanelContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer"]
+margin_right = 96.0
+margin_bottom = 98.0
+size_flags_horizontal = 6
+theme = ExtResource( 1 )
+theme_type_variation = "PreviewPanel"
+
+[node name="PreviewContainer" type="ViewportContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer/PreviewBack"]
+margin_right = 96.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer/PreviewBack/PreviewContainer"]
+size = Vector2( 96, 96 )
+size_override_stretch = true
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Delete" type="Button" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview"]
+margin_top = 102.0
+margin_right = 96.0
+margin_bottom = 121.0
+theme = ExtResource( 1 )
+theme_type_variation = "ButtonRed"
+text = "Delete"
+script = ExtResource( 2 )
+
+[node name="ZOrderControls" type="HBoxContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview"]
+margin_top = 125.0
+margin_right = 96.0
+margin_bottom = 141.0
+
+[node name="Back" type="Button" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/ZOrderControls"]
+margin_right = 46.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = "ButtonPurple"
+custom_fonts/font = ExtResource( 5 )
+text = "To Back"
+script = ExtResource( 2 )
+
+[node name="Front" type="Button" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/ZOrderControls"]
+margin_left = 50.0
+margin_right = 96.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = "ButtonPurple"
+custom_fonts/font = ExtResource( 5 )
+text = "To Front"
+script = ExtResource( 2 )
+
+[node name="VSeparator" type="VSeparator" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox"]
+margin_left = 104.0
+margin_right = 108.0
+margin_bottom = 169.0
+
+[node name="PropertyGroups" type="TabContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox"]
+margin_left = 112.0
+margin_right = 404.0
+margin_bottom = 169.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.5
+tab_align = 0
+use_hidden_tabs_for_min_size = true
+
+[node name="Dialogue" type="ScrollContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 33.0
+margin_right = -8.0
+margin_bottom = -12.0
+scroll_horizontal_enabled = false
+
+[node name="MarginContainer" type="MarginContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue"]
+margin_right = 264.0
+margin_bottom = 202.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 0
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 0
+
+[node name="Properties" type="VBoxContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer"]
+margin_left = 4.0
+margin_right = 260.0
+margin_bottom = 202.0
+custom_constants/separation = 8
+
+[node name="DialogueEditor" type="VBoxContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties"]
+margin_right = 256.0
+margin_bottom = 148.0
+custom_constants/separation = 2
+
+[node name="Label" type="Label" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor"]
+margin_right = 256.0
+margin_bottom = 17.0
+text = "Text:"
+
+[node name="DialogueEditor" type="TextEdit" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor"]
+margin_top = 19.0
+margin_right = 256.0
+margin_bottom = 127.0
+rect_min_size = Vector2( 256, 108 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Hello, how are you doing on this fine day?
+I'm doing splendid!"
+show_line_numbers = true
+smooth_scrolling = true
+v_scroll_speed = 0.0
+wrap_enabled = true
+caret_blink = true
+
+[node name="Pages" type="HBoxContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor"]
+margin_left = 9.0
+margin_top = 129.0
+margin_right = 247.0
+margin_bottom = 148.0
+size_flags_horizontal = 6
+size_flags_vertical = 2
+custom_constants/separation = 6
+
+[node name="Remove" type="Button" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor/Pages"]
+margin_right = 64.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 64, 0 )
+focus_mode = 0
+size_flags_vertical = 3
+enabled_focus_mode = 0
+text = "Erase"
+
+[node name="Add" type="Button" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor/Pages"]
+margin_left = 70.0
+margin_right = 134.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 64, 0 )
+focus_mode = 0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+enabled_focus_mode = 0
+text = "Add"
+
+[node name="Back" type="Button" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor/Pages"]
+margin_left = 140.0
+margin_right = 170.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 30, 0 )
+focus_mode = 0
+size_flags_horizontal = 5
+size_flags_vertical = 3
+disabled = true
+enabled_focus_mode = 0
+text = "<"
+
+[node name="IndexDisplay" type="Label" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor/Pages"]
+margin_left = 176.0
+margin_right = 202.0
+margin_bottom = 19.0
+size_flags_vertical = 3
+text = "0/10"
+align = 1
+valign = 1
+
+[node name="Next" type="Button" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor/Pages"]
+margin_left = 208.0
+margin_right = 238.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 30, 0 )
+focus_mode = 0
+size_flags_vertical = 3
+enabled_focus_mode = 0
+text = ">"
+
+[node name="FacingDir" type="Button" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties"]
+visible = false
+margin_top = 76.0
+margin_right = 717.0
+margin_bottom = 91.0
+rect_min_size = Vector2( 96, 0 )
+focus_mode = 0
+custom_fonts/font = SubResource( 2 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/disabled = ExtResource( 9 )
+custom_styles/normal = SubResource( 4 )
+enabled_focus_mode = 0
+text = "Face Left"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/FacingDir"]
+stream = ExtResource( 4 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/FacingDir"]
+stream = ExtResource( 3 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="RemoteTagEditor" type="HBoxContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties"]
+margin_top = 156.0
+margin_right = 256.0
+margin_bottom = 175.0
+custom_constants/separation = 8
+
+[node name="Label" type="Label" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/RemoteTagEditor"]
+margin_top = 1.0
+margin_right = 62.0
+margin_bottom = 18.0
+text = "Switch to:"
+
+[node name="RemoteTag" type="LineEdit" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/RemoteTagEditor"]
+margin_left = 70.0
+margin_right = 256.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 96, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/cursor_color = Color( 0.1496, 0.18832, 0.44, 1 )
+custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
+align = 1
+placeholder_text = "(leave empty for next page)"
+placeholder_alpha = 0.4
+
+[node name="EmoteOptions" type="HBoxContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties"]
+margin_top = 183.0
+margin_right = 256.0
+margin_bottom = 202.0
+rect_min_size = Vector2( 114, 0 )
+alignment = 1
+
+[node name="ExpressionOption" type="OptionButton" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/EmoteOptions"]
+unique_name_in_owner = true
+margin_right = 82.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.6
+icon_align = 1
+script = ExtResource( 17 )
+icon_count = 8
+textures = ExtResource( 16 )
+
+[node name="ActionOption" type="OptionButton" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/EmoteOptions"]
+unique_name_in_owner = true
+margin_left = 86.0
+margin_right = 169.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.6
+icon_align = 1
+script = ExtResource( 17 )
+icon_count = 2
+textures = ExtResource( 15 )
+
+[node name="PlayerOption" type="OptionButton" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/EmoteOptions"]
+unique_name_in_owner = true
+margin_left = 173.0
+margin_right = 256.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.6
+icon_align = 1
+script = ExtResource( 17 )
+icon_count = 8
+textures = ExtResource( 11 )
+
+[node name="Buttons" type="HBoxContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties"]
+visible = false
+margin_top = 229.0
+margin_right = 256.0
+margin_bottom = 248.0
+alignment = 1
+
+[node name="CancelButton" type="Button" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/Buttons"]
+margin_right = 126.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+shortcut_in_tooltip = false
+action_mode = 0
+text = "Cancel"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/Buttons/CancelButton"]
+stream = ExtResource( 4 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/Buttons/CancelButton"]
+stream = ExtResource( 3 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="SaveButton" type="Button" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/Buttons"]
+margin_left = 130.0
+margin_right = 256.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+shortcut_in_tooltip = false
+action_mode = 0
+text = "Save"
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/Buttons/SaveButton"]
+stream = ExtResource( 4 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/Buttons/SaveButton"]
+stream = ExtResource( 3 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="Misc" type="ScrollContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 33.0
+margin_right = -8.0
+margin_bottom = -12.0
+scroll_horizontal_enabled = false
+
+[node name="MarginContainer" type="MarginContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc"]
+margin_right = 189.0
+margin_bottom = 128.0
+custom_constants/margin_right = 4
+custom_constants/margin_left = 4
+
+[node name="Properties" type="VBoxContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer"]
+margin_left = 4.0
+margin_right = 185.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PropertyList" type="GridContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties"]
+margin_right = 181.0
+margin_bottom = 94.0
+custom_constants/vseparation = 6
+custom_constants/hseparation = 8
+columns = 2
+
+[node name="Position" type="Label" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
+margin_top = 1.0
+margin_right = 57.0
+margin_bottom = 18.0
+hint_tooltip = "The place the object will be in the level."
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+text = "Position:"
+
+[node name="PositionEditor" type="HBoxContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
+margin_left = 65.0
+margin_right = 181.0
+margin_bottom = 19.0
+
+[node name="X" type="LineEdit" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList/PositionEditor"]
+margin_right = 56.0
+margin_bottom = 19.0
+input_pass_on_modal_close_click = false
+text = "0"
+align = 1
+placeholder_text = "X"
+placeholder_alpha = 0.4
+caret_blink = true
+
+[node name="Y" type="LineEdit" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList/PositionEditor"]
+margin_left = 60.0
+margin_right = 116.0
+margin_bottom = 19.0
+text = "0"
+align = 1
+placeholder_text = "Y"
+placeholder_alpha = 0.4
+caret_blink = true
+
+[node name="Scale" type="Label" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
+margin_top = 26.0
+margin_right = 57.0
+margin_bottom = 43.0
+hint_tooltip = "Scale (how large) the object will be relative to it's initial size."
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+text = "Scale:"
+
+[node name="ScaleEditor" type="HBoxContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
+margin_left = 65.0
+margin_top = 25.0
+margin_right = 181.0
+margin_bottom = 44.0
+
+[node name="X" type="LineEdit" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList/ScaleEditor"]
+margin_right = 56.0
+margin_bottom = 19.0
+text = "1"
+align = 1
+placeholder_text = "X"
+placeholder_alpha = 0.4
+caret_blink = true
+
+[node name="Y" type="LineEdit" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList/ScaleEditor"]
+margin_left = 60.0
+margin_right = 116.0
+margin_bottom = 19.0
+text = "1"
+align = 1
+placeholder_text = "Y"
+placeholder_alpha = 0.4
+caret_blink = true
+
+[node name="Rotation" type="Label" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
+margin_top = 51.0
+margin_right = 57.0
+margin_bottom = 68.0
+hint_tooltip = "The angle the object will be rotated at."
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+text = "Rotation:"
+
+[node name="RotationEditor" type="HBoxContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
+margin_left = 65.0
+margin_top = 50.0
+margin_right = 181.0
+margin_bottom = 69.0
+
+[node name="SpinBox" type="SpinBox" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList/RotationEditor"]
+margin_right = 72.0
+margin_bottom = 19.0
+min_value = -360.0
+max_value = 360.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+align = 1
+suffix = "°"
+custom_arrow_step = 1.0
+script = ExtResource( 7 )
+
+[node name="Layer" type="Label" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
+margin_top = 76.0
+margin_right = 57.0
+margin_bottom = 93.0
+hint_tooltip = "The layer the object will appear on. 
+(Way Back and Very Front will put the object behind tile layer BG2 and in front of tile layer FG respectively.)"
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+text = "Layer:"
+
+[node name="LayerEditor" type="HBoxContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
+margin_left = 65.0
+margin_top = 75.0
+margin_right = 181.0
+margin_bottom = 94.0
+
+[node name="OptionButton" type="OptionButton" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList/LayerEditor"]
+margin_right = 65.0
+margin_bottom = 19.0
+text = "Middle"
+items = [ "Way Back", null, false, 0, null, "Very Back", null, false, 1, null, "Back", null, false, 2, null, "Middle", null, false, 3, null, "Front", null, false, 4, null, "Very Front", null, false, 5, null ]
+selected = 3
+script = ExtResource( 2 )
+
+[node name="HSeparator" type="HSeparator" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties"]
+margin_top = 98.0
+margin_right = 181.0
+margin_bottom = 102.0
+custom_constants/separation = 4
+
+[node name="PropertyGrid" type="GridContainer" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties"]
+margin_top = 106.0
+margin_right = 181.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/vseparation = 6
+custom_constants/hseparation = 16
+columns = 2
+
+[node name="Visible" type="CheckButton" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyGrid"]
+margin_right = 83.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Visible"
+icon_align = 1
+expand_icon = true
+script = ExtResource( 2 )
+
+[node name="Enabled" type="CheckButton" parent="Window/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyGrid"]
+margin_left = 99.0
+margin_right = 181.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Enabled"
+icon_align = 1
+expand_icon = true
+script = ExtResource( 2 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="Window"]
+unique_name_in_owner = true
+stream = ExtResource( 4 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="Window"]
+unique_name_in_owner = true
+stream = ExtResource( 3 )
+volume_db = -10.0
+bus = "Sounds"

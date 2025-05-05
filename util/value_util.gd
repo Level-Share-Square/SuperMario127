@@ -1,12 +1,12 @@
 class_name value_util
 
 static func get_true_value(value):
-#	if typeof(value) == TYPE_DICTIONARY:
-#		# very hacky cause i dont know how else to add it
-#		if value.type == "Vector2":
-#			return Vector2(value.construction[0], value.construction[1])
-#	else:
-	return value
+	if typeof(value) == TYPE_DICTIONARY:
+		# very hacky cause i dont know how else to add it
+		if value.type == "Vector2":
+			return Vector2(value.construction[0], value.construction[1])
+	else:
+		return value
 		
 static func get_value_from_true(value):
 	# again very hacky cause i dont know how else to add it
@@ -77,8 +77,8 @@ static func decode_value(value: String):
 		
 	if value.begins_with("V2"):
 		value = value.trim_prefix("V2")
-		return decode_vector(value)
-		
+		var array_value = value.split("x")
+		return Vector2(array_value[0], array_value[1])
 	elif value.begins_with("CL"):
 		value = value.trim_prefix("CL")
 		var array_value = value.split("x")
@@ -86,23 +86,18 @@ static func decode_value(value: String):
 		if array_value.size() > 3:
 			color.a = float(array_value[3])
 		return color
-	
 	elif value.begins_with("BL"):
 		value = value.trim_prefix("BL")
 		return true if value == "1" else false
-	
 	elif value.begins_with("IT"):
 		value = value.trim_prefix("IT")
 		return int(value)
-	
 	elif value.begins_with("FL"):
 		value = value.trim_prefix("FL")
 		return float(value)
-	
 	elif value.begins_with("ST"):
 		value = value.trim_prefix("ST")
 		return str(value).percent_decode()
-	
 	elif value.begins_with("C2"):
 		value = value.trim_prefix("C2")
 		var curve_array = value.split(":")
@@ -113,7 +108,6 @@ static func decode_value(value: String):
 			curve.add_point(decode_vector(point_array[0]), decode_vector(point_array[1]), decode_vector(point_array[2]))
 		
 		return curve
-	
 	elif value.begins_with("SA"):
 		value = value.trim_prefix("SA")
 		
@@ -123,7 +117,6 @@ static func decode_value(value: String):
 			string_array.append(str(text).percent_decode())
 		
 		return string_array
-	
 	elif value.begins_with("VA"):
 		value = value.trim_prefix("VA")
 		
@@ -135,7 +128,6 @@ static func decode_value(value: String):
 			vector2_array.append(vector2)
 			
 		return vector2_array
-	
 	else:
 		return value
 		

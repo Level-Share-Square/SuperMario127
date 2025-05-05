@@ -11,7 +11,7 @@
 [ext_resource path="res://scenes/actors/objects/red_bob_omb/feet_back.png" type="Texture" id=9]
 [ext_resource path="res://scenes/actors/objects/red_bob_omb/shine.png" type="Texture" id=10]
 [ext_resource path="res://scenes/actors/objects/red_bob_omb/shadow.png" type="Texture" id=11]
-[ext_resource path="res://scenes/oldeditor/editor_hitbox.gd" type="Script" id=12]
+[ext_resource path="res://scenes/editor/editor_hitbox.gd" type="Script" id=12]
 
 [sub_resource type="CapsuleShape2D" id=136]
 radius = 6.0

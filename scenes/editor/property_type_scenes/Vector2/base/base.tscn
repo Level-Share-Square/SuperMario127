@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/editor/property_type_scenes/float.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scenes/editor/property_type_scenes/Vector2/base/base.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 1, 1, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[node name="Vector2" type="Control"]
+margin_right = 320.0
+margin_bottom = 120.0
+script = ExtResource( 3 )
+x_edit = NodePath("XEdit")
+y_edit = NodePath("YEdit")
+
+[node name="XEdit" type="LineEdit" parent="."]
+margin_left = 7.0
+margin_top = 58.0
+margin_right = 158.0
+margin_bottom = 112.0
+custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
+custom_fonts/font = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+align = 1
+context_menu_enabled = false
+placeholder_text = "X"
+placeholder_alpha = 0.35
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="YEdit" type="LineEdit" parent="."]
+margin_left = 165.0
+margin_top = 58.0
+margin_right = 316.0
+margin_bottom = 112.0
+custom_colors/font_color = Color( 0.1496, 0.18832, 0.44, 1 )
+custom_fonts/font = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+align = 1
+context_menu_enabled = false
+placeholder_text = "Y"
+placeholder_alpha = 0.35
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

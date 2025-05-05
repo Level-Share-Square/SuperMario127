@@ -36,6 +36,9 @@ var savable_properties : PoolStringArray = []
 var base_editable_properties : PoolStringArray = ["enabled", "visible", "rotation_degrees", "scale", "position", "layer"]
 var editable_properties : PoolStringArray = []
 
+var base_connectable_signals : PoolStringArray = ["ready", "process", "physics_process"]
+var connectable_signals : PoolStringArray = []
+
 var property_value_to_name := {}
 var property_value_menus := {}
 
@@ -196,6 +199,38 @@ func _set_property_values():
 	pass
 
 
+func _process(_delta):
+	if has_process_connection:
+		process_frame_counter -= 1
+		if process_frame_counter <= 0:
+			emit_signal("process")
+			process_frame_counter = 4
+
+
+func _physics_process(_delta):
+	if has_physics_connection:
+		physics_frame_counter -= 1
+		if physics_frame_counter <= 0:
+			emit_signal("physics_process")
+			physics_frame_counter = 4
+
+
+func _init_signals():
+	var index = 0
+	var level_object_ref = level_object.get_ref()
+	if level_object_ref.player_signal_connections[index].size() > 0:
+		for signal_name in (base_connectable_signals + connectable_signals):
+			var _connect = connect(signal_name, self, "on_signal_fire", [index])
+			index += 1
+			if index < level_object_ref.player_signal_connections.size():
+				if signal_name == "physics_process":
+					if level_object_ref.player_signal_connections[index].size() > 0:
+						has_physics_connection = true
+				elif signal_name == "process":
+					if level_object_ref.player_signal_connections[index].size() > 0:
+						has_process_connection = true
+
+
 func set_bool_alias(key, true_alias, false_alias):
 	if true_alias != null && false_alias != null:
 		property_value_to_name[key] = {true: true_alias, false: false_alias}
@@ -208,6 +243,21 @@ func set_property_menu(key, menu_array: Array):
 		property_value_menus[key] = menu_array
 	else:
 		printerr("Property menu for %s was not set!" % key)
+
+
+func on_signal_fire(index):
+	var current_mode = get_tree().get_current_scene().mode
+	var level_object_ref = level_object.get_ref()
+	if current_mode == 0:
+		var functions = level_object_ref.player_signal_connections[index]
+		for function_name in functions:
+			var function_struct = level_data.functions[function_name]
+			interpreter_util.run_function(function_struct, self)
+	elif current_mode == 1:
+		var functions = level_object_ref.editor_signal_connections[index]
+		for function_name in functions:
+			var function_struct = level_data.functions[function_name]
+			interpreter_util.run_function(function_struct, self)
 
 
 func update_layer():

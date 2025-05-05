@@ -55,7 +55,7 @@ func player_entered(body):
 		fuse_sound.play()
 		
 func create_coin():
-	var object = ObjectData.new()
+	var object = LevelObject.new()
 	object.type_id = 1
 	object.properties = []
 	object.properties.append(kinematic_body.global_position)

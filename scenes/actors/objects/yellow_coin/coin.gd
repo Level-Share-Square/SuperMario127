@@ -1,7 +1,6 @@
 extends GameObject
 
-onready var coin = $KinematicBody2D/Coin
-onready var particles = $KinematicBody2D/Particles
+onready var animated_sprite = $KinematicBody2D/AnimatedSprite
 onready var kinematic_body = $KinematicBody2D
 onready var kinematic_shape = $KinematicBody2D/KinematicShape
 onready var area = $KinematicBody2D/Area2D
@@ -37,27 +36,18 @@ func _set_property_values():
 func collect(body, is_shell = false):
 	if enabled and !collected and (body and body.name.begins_with("Character") and !body.dead) or is_shell:
 		Singleton.CurrentLevelData.level_data.vars.collect_coin(coins)
-		
 		if body:
 			body.heal(1 if coins == 1 else 15)
-		
 		get_tree().current_scene.get_node("SharedSounds").PlaySound("CoinSound")
-		
 		collected = true
 		physics = false
-		
-		coin.hide()
-		particles.show()
-		particles.frame = 0
-		particles.play("collect")
-		
-		particles.connect("animation_finished", self, "queue_free")
+		animated_sprite.animation = "collect"
+		animated_sprite.frame = 0
+		yield(get_tree().create_timer(1.0), "timeout")
+		queue_free() # die
 
 func _ready():
 	kinematic_shape.shape = kinematic_shape.shape.duplicate()
-	
-	coin.show()
-	particles.hide()
 	
 	if do_physics():
 		kinematic_shape.disabled = false
@@ -79,12 +69,11 @@ var previous_frame = 0
 # Additional cache variables
 var prev_activate_shape = false
 func _process(delta):
-#	if !collected:
-#		var new_frame = get_tree().current_scene.coin_frame
-#		if new_frame != previous_frame:
-#			animated_sprite.frame = new_frame
-#			previous_frame = new_frame
-	
+	if !collected:
+		var new_frame = get_tree().current_scene.coin_frame
+		if new_frame != previous_frame:
+			animated_sprite.frame = new_frame
+			previous_frame = new_frame
 	if do_physics():
 		water_shape.disabled = false
 	

@@ -1,0 +1,133 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scenes/editor/assets/window.png" type="Texture" id=1]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=2]
+[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/editor/assets/window_close.png" type="Texture" id=4]
+[ext_resource path="res://scenes/editor/assets/window_close_hover.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/DelfinoFont20.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/editor/window.gd" type="Script" id=8]
+[ext_resource path="res://assets/styles/BrightButtonStyleNormal.tres" type="StyleBox" id=9]
+[ext_resource path="res://scenes/oldmenu/127Button.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/editor/window/login.gd" type="Script" id=11]
+[ext_resource path="res://assets/misc/open_eye.png" type="Texture" id=12]
+[ext_resource path="res://assets/misc/reveal_theme.tres" type="Theme" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+size = 56
+use_filter = true
+font_data = ExtResource( 7 )
+
+[node name="LogInWindow" type="NinePatchRect"]
+margin_left = 165.0
+margin_top = 130.0
+margin_right = 1218.0
+margin_bottom = 683.0
+rect_scale = Vector2( 0.4, 0.4 )
+mouse_filter = 0
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 108, 290 )
+patch_margin_left = 40
+patch_margin_top = 110
+patch_margin_right = 40
+patch_margin_bottom = 40
+script = ExtResource( 8 )
+
+[node name="Title" type="RichTextLabel" parent="."]
+margin_left = 24.0
+margin_top = 24.2632
+margin_right = 456.0
+margin_bottom = 102.263
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_text = "Log In"
+text = "Log In"
+
+[node name="CloseButton" type="TextureButton" parent="."]
+margin_left = 888.65
+margin_top = 12.953
+margin_right = 1043.65
+margin_bottom = 93.953
+rect_scale = Vector2( 0.95, 0.95 )
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="CloseButton"]
+stream = ExtResource( 2 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="CloseButton"]
+stream = ExtResource( 3 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="Contents" type="Control" parent="."]
+anchor_bottom = 0.06
+margin_left = 17.4044
+margin_top = 104.0
+margin_right = 1036.4
+margin_bottom = 498.0
+script = ExtResource( 11 )
+
+[node name="Username" type="LineEdit" parent="Contents"]
+margin_left = 5.0
+margin_top = 16.0
+margin_right = 918.0
+margin_bottom = 109.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 6 )
+custom_styles/normal = ExtResource( 9 )
+placeholder_text = "E-Mail"
+
+[node name="Password" type="LineEdit" parent="Contents"]
+margin_left = 3.0
+margin_top = 126.0
+margin_right = 1010.0
+margin_bottom = 219.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 6 )
+custom_styles/normal = ExtResource( 9 )
+secret = true
+placeholder_text = "Password"
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Visible" type="TextureButton" parent="."]
+margin_left = 900.0
+margin_top = 237.5
+margin_right = 1006.0
+margin_bottom = 317.5
+theme = ExtResource( 13 )
+texture_normal = ExtResource( 12 )
+expand = true
+
+[node name="LoginButton" parent="." instance=ExtResource( 10 )]
+margin_left = 630.0
+margin_top = 362.5
+margin_right = 1030.0
+margin_bottom = 452.5
+text = "Log in"
+
+[node name="HelpButton" parent="." instance=ExtResource( 10 )]
+margin_left = 940.5
+margin_top = 123.0
+margin_right = 1030.5
+margin_bottom = 213.0
+text = "?"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest2" type="HTTPRequest" parent="."]
+
+[node name="Title2" type="RichTextLabel" parent="."]
+margin_left = 37.5
+margin_top = 372.5
+margin_right = 962.5
+margin_bottom = 450.5
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_text = "Incorrect credentials."
+text = "Incorrect credentials."

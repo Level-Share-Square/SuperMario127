@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/editor/placeable_item_button.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/assets/shadow_shader.material" type="Material" id=2]
+[ext_resource path="res://scenes/editor/assets/item_box.png" type="Texture" id=3]
+[ext_resource path="res://scenes/editor/assets/item_box_hover.png" type="Texture" id=4]
+[ext_resource path="res://scenes/editor/assets/item_box_press.png" type="Texture" id=5]
+[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/editor/sounds/click.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/editor/assets/grid.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/grass/icon.png" type="Texture" id=9]
+[ext_resource path="res://assets/misc/pin.png" type="Texture" id=10]
+
+[node name="PlaceableItemButton" type="TextureButton"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 156.0
+margin_bottom = 164.0
+rect_clip_content = true
+focus_mode = 0
+action_mode = 0
+button_mask = 3
+enabled_focus_mode = 0
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+script = ExtResource( 1 )
+
+[node name="Icon" type="Sprite" parent="."]
+material = ExtResource( 2 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 9 )
+centered = false
+offset = Vector2( 0, 3 )
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="Grid" type="TextureRect" parent="."]
+margin_left = -72.0
+margin_top = -64.0
+margin_right = 24.0
+margin_bottom = 32.0
+rect_scale = Vector2( 3, 3 )
+texture = ExtResource( 8 )
+stretch_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 15.0
+margin_top = 12.0
+margin_right = 129.0
+margin_bottom = 20.0
+alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+margin_left = 15.0
+margin_top = 140.0
+margin_right = 129.0
+margin_bottom = 148.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Pin" type="Sprite" parent="."]
+position = Vector2( 29.88, 29.9934 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 10 )
+
+[connection signal="button_down" from="." to="." method="button_down"]
+[connection signal="button_up" from="." to="." method="button_up"]

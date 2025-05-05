@@ -126,7 +126,7 @@ func _physics_process(delta):
 func create_coin(): #creates a coin
 	time_alive += 1
 	time_alive += (time_alive/3*5/10)
-	var object = ObjectData.new()
+	var object = LevelObject.new()
 	object.type_id = 1
 	object.properties = []
 	object.properties.append(static_body.global_position)

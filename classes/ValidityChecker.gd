@@ -197,7 +197,7 @@ func decode(code: String)-> Dictionary:
 	var layout_palettes: Array = []
 	var pinned_items: Array = []
 	
-	var starting_toolbar = preload("res://scenes/oldeditor/starting_toolbar.tres")
+	var starting_toolbar = preload("res://scenes/editor/starting_toolbar.tres")
 	for index in range(starting_toolbar.ids.size()):
 		layout_ids.append(starting_toolbar.ids[index])
 		layout_palettes.append(0)
@@ -325,10 +325,6 @@ func load_in(code: String)-> void:
 	vars = LevelVars.new()
 	
 	result = decode(code)
-	
-	if not result.has("format_version"):
-		result = {}
-		return
 	
 	var starting_format_version = result.format_version
 	
