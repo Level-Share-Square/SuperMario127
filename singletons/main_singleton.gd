@@ -24,7 +24,7 @@ func _get_player_settings():
 
 var EditorSavedSettings setget ,_get_editor_saved_settings
 func _get_editor_saved_settings():
-	return lazy_get("EditorSavedSettings", "res://scenes/editor/editor_saved_settings.tscn", EditorSavedSettings)
+	return lazy_get("EditorSavedSettings", "res://scenes/oldeditor/editor_saved_settings.tscn", EditorSavedSettings)
 
 var CurrentLevelData setget ,_get_current_level_data
 func _get_current_level_data():
@@ -52,7 +52,7 @@ func _get_photo_mode():
 
 var ActionManager setget ,_get_action_manager
 func _get_action_manager():
-	return lazy_get("ActionManager", "res://scenes/editor/action_manager.tscn", ActionManager)
+	return lazy_get("ActionManager", "res://scenes/oldeditor/action_manager.tscn", ActionManager)
 
 var MiscCache setget ,_get_misc_cache
 func _get_misc_cache():
@@ -60,7 +60,7 @@ func _get_misc_cache():
 
 var Autosave setget ,_get_autosave
 func _get_autosave():
-	return lazy_get("Autosave", "res://scenes/editor/autosave.tscn", Autosave)
+	return lazy_get("Autosave", "res://scenes/oldeditor/autosave.tscn", Autosave)
 
 var NotificationHandler setget ,_get_notifaction_handler
 func _get_notifaction_handler():

@@ -1,4 +1,5 @@
 class_name LevelData
+extends Resource
 
 
 const DEFAULT_CODE_PATH: String = "res://level/default_level.tres"
@@ -214,9 +215,9 @@ func get_chunk_for_position(x: int, y: int, layer: int, chunks: Dictionary) -> A
 		return chunk
 
 
-func get_object(result) -> LevelObject:
+func get_object(result) -> ObjectData:
 	var object
-	object = LevelObject.new()
+	object = ObjectData.new()
 	object.type_id = result.type_id
 	object.palette = result.palette
 	object.properties = result.properties

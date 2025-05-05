@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://level/Resource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+contents = "0.5.4,My%20Level,Unknown,This%20level%20has%20no%20description.,,[0Grass,0Sand,0Snow,0Crystal,0LavaRock,0Brick,0Coin,0Shine,0WoodPlatform,0LaunchStar^],[V280x30,IT1,IT1,IT1,FL7.82,IT0,FL0~000*2240,020*15,000*65,020*15,000*65~000*2400~000*2400~000*2400~0,0,V2146x876,V21x1,IT0,BL1,BL1,IT3|5,0,V2113x878,V21x1,IT0,BL1,BL1,IT3]"

@@ -22,7 +22,7 @@ func duplicate(base_area):
 func duplicate_objects(base_objects: Array):
 	var new_objects: Array
 	for object in base_objects:
-		var new_object = LevelObject.new()
+		var new_object = ObjectData.new()
 		new_object.type_id = object.type_id
 		new_object.palette = object.palette
 		for prop in object.properties:

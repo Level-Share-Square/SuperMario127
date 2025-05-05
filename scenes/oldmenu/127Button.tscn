@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=1]
+[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/styles/ButtonStyleHover.tres" type="StyleBox" id=4]
 [ext_resource path="res://assets/styles/ButtonStyleNormal.tres" type="StyleBox" id=5]
 [ext_resource path="res://scenes/oldmenu/127Button.gd" type="Script" id=6]

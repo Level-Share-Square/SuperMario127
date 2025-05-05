@@ -128,7 +128,7 @@ func steely_hit(hit_pos:Vector2)->void :
 		kill(hit_pos)
 
 func create_coin() -> void:
-	var object: = LevelObject.new()
+	var object: = ObjectData.new()
 	object.type_id = 1
 	object.properties = []
 	object.properties.append(kinematic_body.global_position)

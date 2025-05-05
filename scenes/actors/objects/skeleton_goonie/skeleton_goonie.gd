@@ -95,7 +95,7 @@ func exploded(hit_pos:Vector2):
 	hurt(hit_pos)
 
 func create_coin(spawn_pos) -> void:
-	var object: = LevelObject.new()
+	var object: = ObjectData.new()
 	object.type_id = 1
 	object.properties = []
 	object.properties.append(spawn_pos)

@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/actors/mode_switcher/ui/coin.png" type="Texture" id=3]
 [ext_resource path="res://scenes/shared/sounds/play_button_reverb.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/actors/mode_switcher/mode_switcher_button.gd" type="Script" id=5]
-[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=6]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends CanvasLayer

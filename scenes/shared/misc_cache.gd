@@ -25,7 +25,7 @@ var property_type_ids
 
 func _init():
 	music_ids = preload("res://assets/music/ids.tres").ids
-	property_type_ids = preload("res://scenes/editor/property_type_scenes/property_types.tres").ids
+	property_type_ids = preload("res://scenes/oldeditor/property_type_scenes/property_types.tres").ids
 	
 	music_nodes.resize(music_ids.size())
 
@@ -33,7 +33,7 @@ func _init():
 func get_property_scene(property: String, menu: String):
 	var key : Array = [property, menu]
 	if not property_scenes.has(key):
-		var path: String = "res://scenes/editor/property_type_scenes/" + property + "/" + menu + "/" + menu + ".tscn"
+		var path: String = "res://scenes/oldeditor/property_type_scenes/" + property + "/" + menu + "/" + menu + ".tscn"
 		property_scenes[key] = load(path)
 	
 	return property_scenes[key]

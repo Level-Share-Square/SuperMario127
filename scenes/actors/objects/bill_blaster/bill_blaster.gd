@@ -82,7 +82,7 @@ func _physics_process(delta):
 			var prev_scale_x = scale.x
 			scale.x = scale.y
 			
-			var object = LevelObject.new()
+			var object = ObjectData.new()
 			object.type_id = 25
 			object.properties = []
 			object.properties.append(transform.xform(Vector2(16 * facing_direction, 0)))

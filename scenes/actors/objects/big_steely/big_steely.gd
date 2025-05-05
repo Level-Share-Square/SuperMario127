@@ -72,7 +72,7 @@ func destroy():
 func create_coin(): #creates a coin
 	time_alive += 1
 	time_alive += (time_alive/3*5/10)
-	var object = LevelObject.new()
+	var object = ObjectData.new()
 	object.type_id = 40
 	object.properties = []
 	object.properties.append(body.global_position)

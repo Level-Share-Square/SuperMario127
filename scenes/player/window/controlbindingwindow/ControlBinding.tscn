@@ -2,8 +2,8 @@
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/player/window/controlbindingwindow/extra_controlbinding_button.gd" type="Script" id=2]
-[ext_resource path="res://scenes/editor/sounds/hover.wav" type="AudioStream" id=3]
-[ext_resource path="res://scenes/editor/sounds/click2.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=4]
 [ext_resource path="res://scenes/shared/button_sound_player.gd" type="Script" id=5]
 
 
