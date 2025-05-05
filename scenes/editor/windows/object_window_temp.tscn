@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/fonts/DelfinoFont10.tres" type="DynamicFont" id=2]
@@ -18,11 +18,35 @@
 [ext_resource path="res://scenes/editor/windows/editor_window.gd" type="Script" id=16]
 [ext_resource path="res://assets/misc/settings.png" type="Texture" id=17]
 [ext_resource path="res://assets/misc/gear.svg" type="Texture" id=18]
+[ext_resource path="res://scenes/editor/windows/aside_hide.gd" type="Script" id=19]
 
 [sub_resource type="DynamicFont" id=1]
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxLine" id=5]
+color = Color( 1, 1, 1, 0.705882 )
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 2
+vertical = true
+
+[sub_resource type="StyleBoxLine" id=6]
+color = Color( 1, 1, 1, 0.862745 )
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 2
+vertical = true
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxLine" id=8]
+color = Color( 1, 1, 1, 0.470588 )
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 2
+vertical = true
 
 [sub_resource type="DynamicFont" id=2]
 size = 13
@@ -44,8 +68,8 @@ corner_radius_bottom_left = 64
 
 [node name="Popup" type="Popup"]
 visible = true
-margin_right = 336.0
-margin_bottom = 220.0
+margin_right = 418.0
+margin_bottom = 235.0
 theme = ExtResource( 8 )
 popup_exclusive = true
 script = ExtResource( 16 )
@@ -54,24 +78,24 @@ drag_control_path = NodePath("WindowBack/WindowMat/HeaderContentDivider/HeaderMa
 close_button_path = NodePath("WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox/WindowClose")
 title = "Object Settings"
 icon = ExtResource( 17 )
-window_size = Vector2( 336, 224 )
 
 [node name="WindowBack" type="PanelContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_min_size = Vector2( 417, 220 )
 focus_mode = 1
 theme = ExtResource( 8 )
 theme_type_variation = "WindowBack"
 
 [node name="Border" type="PanelContainer" parent="WindowBack"]
-margin_right = 336.0
-margin_bottom = 220.0
+margin_right = 418.0
+margin_bottom = 235.0
 mouse_filter = 2
 theme_type_variation = "WindowBorder"
 
 [node name="WindowMat" type="MarginContainer" parent="WindowBack"]
-margin_right = 336.0
-margin_bottom = 220.0
+margin_right = 418.0
+margin_bottom = 235.0
 mouse_filter = 2
 custom_constants/margin_right = 4
 custom_constants/margin_top = 4
@@ -81,11 +105,11 @@ custom_constants/margin_bottom = 4
 [node name="HeaderContentDivider" type="VBoxContainer" parent="WindowBack/WindowMat"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 332.0
-margin_bottom = 216.0
+margin_right = 414.0
+margin_bottom = 231.0
 
 [node name="HeaderMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider"]
-margin_right = 328.0
+margin_right = 410.0
 margin_bottom = 26.0
 custom_constants/margin_right = 6
 custom_constants/margin_top = 3
@@ -95,7 +119,7 @@ custom_constants/margin_bottom = 1
 [node name="HeaderBox" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat"]
 margin_left = 6.0
 margin_top = 3.0
-margin_right = 322.0
+margin_right = 404.0
 margin_bottom = 25.0
 custom_constants/separation = 1
 
@@ -131,14 +155,14 @@ fit_content_height = true
 
 [node name="HideSpacer" type="Control" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
 margin_left = 154.0
-margin_right = 234.0
+margin_right = 275.0
 margin_bottom = 22.0
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="WindowClose" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
-margin_left = 294.0
-margin_right = 316.0
+margin_left = 376.0
+margin_right = 398.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Close"
@@ -152,14 +176,14 @@ script = ExtResource( 4 )
 
 [node name="HSeparator" type="HSeparator" parent="WindowBack/WindowMat/HeaderContentDivider"]
 margin_top = 30.0
-margin_right = 328.0
+margin_right = 410.0
 margin_bottom = 30.0
 custom_constants/separation = 0
 
 [node name="ContentMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider"]
 margin_top = 34.0
-margin_right = 328.0
-margin_bottom = 212.0
+margin_right = 410.0
+margin_bottom = 227.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 1
@@ -169,58 +193,160 @@ custom_constants/margin_bottom = 2
 
 [node name="ContentBox" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat"]
 margin_top = 1.0
-margin_right = 327.0
-margin_bottom = 176.0
+margin_right = 409.0
+margin_bottom = 191.0
 size_flags_vertical = 3
 
+[node name="PreviewClipBox" type="Control" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox"]
+margin_right = 108.0
+margin_bottom = 190.0
+rect_min_size = Vector2( 108, 0 )
+rect_clip_content = true
+script = ExtResource( 19 )
+
+[node name="PreviewMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox"]
+margin_right = 108.0
+margin_bottom = 189.0
+rect_min_size = Vector2( 108, 0 )
+custom_constants/margin_right = 2
+custom_constants/margin_top = 1
+custom_constants/margin_left = 2
+custom_constants/margin_bottom = 1
+
+[node name="Preview" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat"]
+margin_left = 2.0
+margin_top = 1.0
+margin_right = 106.0
+margin_bottom = 188.0
+custom_constants/separation = 6
+
+[node name="PreviewBack" type="PanelContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat/Preview"]
+margin_left = 4.0
+margin_right = 100.0
+margin_bottom = 98.0
+size_flags_horizontal = 6
+theme = ExtResource( 8 )
+theme_type_variation = "PreviewPanel"
+
+[node name="PreviewContainer" type="ViewportContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat/Preview/PreviewBack"]
+margin_right = 96.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat/Preview/PreviewBack/PreviewContainer"]
+size = Vector2( 96, 96 )
+size_override_stretch = true
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Delete" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat/Preview"]
+margin_top = 104.0
+margin_right = 104.0
+margin_bottom = 126.0
+rect_min_size = Vector2( 0, 22 )
+theme = ExtResource( 8 )
+theme_type_variation = "ButtonRed"
+text = "Delete"
+script = ExtResource( 4 )
+
+[node name="ZOrderControls" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat/Preview"]
+margin_top = 132.0
+margin_right = 104.0
+margin_bottom = 151.0
+
+[node name="Back" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat/Preview/ZOrderControls"]
+margin_right = 48.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 0, 18 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = "ButtonPurple"
+custom_fonts/font = ExtResource( 2 )
+text = "To Back"
+script = ExtResource( 4 )
+
+[node name="Front" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat/Preview/ZOrderControls"]
+margin_left = 52.0
+margin_right = 104.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 0, 19 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = "ButtonPurple"
+custom_fonts/font = ExtResource( 2 )
+text = "To Front"
+script = ExtResource( 4 )
+
+[node name="ButtonSound" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox"]
+margin_left = 112.0
+margin_right = 114.0
+margin_bottom = 190.0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+script = ExtResource( 4 )
+
+[node name="VSeparator" type="VSeparator" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox"]
+visible = false
+margin_left = 117.0
+margin_right = 121.0
+margin_bottom = 190.0
+
 [node name="PropertyGroups" type="TabContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox"]
-margin_right = 327.0
-margin_bottom = 175.0
+margin_left = 118.0
+margin_right = 409.0
+margin_bottom = 190.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.5
 custom_constants/hseparation = 8
+custom_constants/side_margin = 4
 tab_align = 0
 all_tabs_in_front = true
+use_hidden_tabs_for_min_size = true
 
 [node name="Dialogue" type="ScrollContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
 margin_top = 31.0
-margin_right = 15.0
+margin_right = -8.0
 margin_bottom = -12.0
 scroll_horizontal_enabled = false
-scroll_vertical = 61
 
-[node name="Mat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue"]
-margin_top = -61.0
+[node name="MarginContainer" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue"]
 margin_right = 264.0
-margin_bottom = 147.0
+margin_bottom = 208.0
 custom_constants/margin_right = 4
 custom_constants/margin_top = 2
 custom_constants/margin_left = 4
 custom_constants/margin_bottom = 4
 
-[node name="Properties" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat"]
+[node name="Properties" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer"]
 margin_left = 4.0
 margin_top = 2.0
 margin_right = 260.0
 margin_bottom = 204.0
 custom_constants/separation = 8
 
-[node name="DialogueEditor" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties"]
+[node name="DialogueEditor" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties"]
 margin_right = 256.0
 margin_bottom = 148.0
 custom_constants/separation = 2
 
-[node name="Label" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/DialogueEditor"]
+[node name="Label" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor"]
 margin_right = 256.0
 margin_bottom = 17.0
 text = "Text:"
 
-[node name="DialogueEditor" type="TextEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/DialogueEditor"]
+[node name="DialogueEditor" type="TextEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor"]
 margin_top = 19.0
 margin_right = 256.0
 margin_bottom = 127.0
@@ -235,7 +361,7 @@ v_scroll_speed = 0.0
 wrap_enabled = true
 caret_blink = true
 
-[node name="Pages" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/DialogueEditor"]
+[node name="Pages" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor"]
 margin_left = 9.0
 margin_top = 129.0
 margin_right = 247.0
@@ -244,7 +370,7 @@ size_flags_horizontal = 6
 size_flags_vertical = 2
 custom_constants/separation = 6
 
-[node name="Remove" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/DialogueEditor/Pages"]
+[node name="Remove" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor/Pages"]
 margin_right = 64.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 64, 0 )
@@ -253,7 +379,7 @@ size_flags_vertical = 3
 enabled_focus_mode = 0
 text = "Erase"
 
-[node name="Add" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/DialogueEditor/Pages"]
+[node name="Add" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor/Pages"]
 margin_left = 70.0
 margin_right = 134.0
 margin_bottom = 19.0
@@ -264,7 +390,7 @@ size_flags_stretch_ratio = 3.0
 enabled_focus_mode = 0
 text = "Add"
 
-[node name="Back" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/DialogueEditor/Pages"]
+[node name="Back" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor/Pages"]
 margin_left = 140.0
 margin_right = 170.0
 margin_bottom = 19.0
@@ -276,7 +402,7 @@ disabled = true
 enabled_focus_mode = 0
 text = "<"
 
-[node name="IndexDisplay" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/DialogueEditor/Pages"]
+[node name="IndexDisplay" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor/Pages"]
 margin_left = 176.0
 margin_right = 202.0
 margin_bottom = 19.0
@@ -285,7 +411,7 @@ text = "0/10"
 align = 1
 valign = 1
 
-[node name="Next" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/DialogueEditor/Pages"]
+[node name="Next" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/DialogueEditor/Pages"]
 margin_left = 208.0
 margin_right = 238.0
 margin_bottom = 19.0
@@ -295,7 +421,7 @@ size_flags_vertical = 3
 enabled_focus_mode = 0
 text = ">"
 
-[node name="FacingDir" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties"]
+[node name="FacingDir" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties"]
 visible = false
 margin_top = 76.0
 margin_right = 717.0
@@ -310,29 +436,29 @@ custom_styles/normal = SubResource( 4 )
 enabled_focus_mode = 0
 text = "Face Left"
 
-[node name="HoverSound" type="AudioStreamPlayer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/FacingDir"]
+[node name="HoverSound" type="AudioStreamPlayer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/FacingDir"]
 stream = ExtResource( 12 )
 volume_db = -10.0
 bus = "Sounds"
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/FacingDir"]
+[node name="ClickSound" type="AudioStreamPlayer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/FacingDir"]
 stream = ExtResource( 5 )
 volume_db = -10.0
 bus = "Sounds"
 
-[node name="RemoteTagEditor" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties"]
+[node name="RemoteTagEditor" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties"]
 margin_top = 156.0
 margin_right = 256.0
 margin_bottom = 175.0
 custom_constants/separation = 8
 
-[node name="Label" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/RemoteTagEditor"]
+[node name="Label" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/RemoteTagEditor"]
 margin_top = 1.0
 margin_right = 62.0
 margin_bottom = 18.0
 text = "Switch to:"
 
-[node name="RemoteTag" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/RemoteTagEditor"]
+[node name="RemoteTag" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/RemoteTagEditor"]
 margin_left = 70.0
 margin_right = 256.0
 margin_bottom = 19.0
@@ -345,14 +471,14 @@ align = 1
 placeholder_text = "(leave empty for next page)"
 placeholder_alpha = 0.4
 
-[node name="EmoteOptions" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties"]
+[node name="EmoteOptions" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties"]
 margin_top = 183.0
 margin_right = 256.0
 margin_bottom = 202.0
 rect_min_size = Vector2( 114, 0 )
 alignment = 1
 
-[node name="ExpressionOption" type="OptionButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/EmoteOptions"]
+[node name="ExpressionOption" type="OptionButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/EmoteOptions"]
 unique_name_in_owner = true
 margin_right = 82.0
 margin_bottom = 19.0
@@ -364,7 +490,7 @@ script = ExtResource( 15 )
 icon_count = 8
 textures = ExtResource( 6 )
 
-[node name="ActionOption" type="OptionButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/EmoteOptions"]
+[node name="ActionOption" type="OptionButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/EmoteOptions"]
 unique_name_in_owner = true
 margin_left = 86.0
 margin_right = 169.0
@@ -377,7 +503,7 @@ script = ExtResource( 15 )
 icon_count = 2
 textures = ExtResource( 10 )
 
-[node name="PlayerOption" type="OptionButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/EmoteOptions"]
+[node name="PlayerOption" type="OptionButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/EmoteOptions"]
 unique_name_in_owner = true
 margin_left = 173.0
 margin_right = 256.0
@@ -390,14 +516,14 @@ script = ExtResource( 15 )
 icon_count = 8
 textures = ExtResource( 14 )
 
-[node name="Buttons" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties"]
+[node name="Buttons" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties"]
 visible = false
 margin_top = 229.0
 margin_right = 256.0
 margin_bottom = 248.0
 alignment = 1
 
-[node name="CancelButton" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/Buttons"]
+[node name="CancelButton" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/Buttons"]
 margin_right = 126.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
@@ -405,17 +531,17 @@ shortcut_in_tooltip = false
 action_mode = 0
 text = "Cancel"
 
-[node name="HoverSound" type="AudioStreamPlayer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/Buttons/CancelButton"]
+[node name="HoverSound" type="AudioStreamPlayer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/Buttons/CancelButton"]
 stream = ExtResource( 12 )
 volume_db = -10.0
 bus = "Sounds"
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/Buttons/CancelButton"]
+[node name="ClickSound" type="AudioStreamPlayer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/Buttons/CancelButton"]
 stream = ExtResource( 5 )
 volume_db = -10.0
 bus = "Sounds"
 
-[node name="SaveButton" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/Buttons"]
+[node name="SaveButton" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/Buttons"]
 margin_left = 130.0
 margin_right = 256.0
 margin_bottom = 19.0
@@ -424,12 +550,12 @@ shortcut_in_tooltip = false
 action_mode = 0
 text = "Save"
 
-[node name="HoverSound" type="AudioStreamPlayer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/Buttons/SaveButton"]
+[node name="HoverSound" type="AudioStreamPlayer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/Buttons/SaveButton"]
 stream = ExtResource( 12 )
 volume_db = -10.0
 bus = "Sounds"
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/Mat/Properties/Buttons/SaveButton"]
+[node name="ClickSound" type="AudioStreamPlayer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue/MarginContainer/Properties/Buttons/SaveButton"]
 stream = ExtResource( 5 )
 volume_db = -10.0
 bus = "Sounds"
@@ -444,7 +570,7 @@ margin_right = -8.0
 margin_bottom = -12.0
 scroll_horizontal_enabled = false
 
-[node name="Mat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path"]
+[node name="MarginContainer" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path"]
 margin_right = 264.0
 margin_bottom = 140.0
 custom_constants/margin_right = 4
@@ -452,7 +578,7 @@ custom_constants/margin_top = 2
 custom_constants/margin_left = 4
 custom_constants/margin_bottom = 4
 
-[node name="Properties" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat"]
+[node name="Properties" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer"]
 margin_left = 4.0
 margin_top = 2.0
 margin_right = 260.0
@@ -460,17 +586,17 @@ margin_bottom = 136.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties"]
+[node name="HBoxContainer" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties"]
 margin_right = 256.0
 margin_bottom = 22.0
 
-[node name="ButtonSound" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/HBoxContainer"]
+[node name="ButtonSound" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/HBoxContainer"]
 margin_right = 68.0
 margin_bottom = 22.0
 text = "Edit Path"
 script = ExtResource( 4 )
 
-[node name="TextureButton" type="TextureButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/HBoxContainer"]
+[node name="TextureButton" type="TextureButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/HBoxContainer"]
 margin_left = 72.0
 margin_right = 94.0
 margin_bottom = 22.0
@@ -483,13 +609,13 @@ texture_pressed = ExtResource( 9 )
 expand = true
 stretch_mode = 5
 
-[node name="Control" type="Control" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties"]
+[node name="Control" type="Control" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties"]
 margin_top = 26.0
 margin_right = 256.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 2 )
 
-[node name="Points" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties"]
+[node name="Points" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties"]
 margin_top = 32.0
 margin_right = 256.0
 margin_bottom = 126.0
@@ -497,7 +623,7 @@ custom_constants/vseparation = 10
 custom_constants/hseparation = 8
 columns = 2
 
-[node name="Index" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points"]
+[node name="Index" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points"]
 margin_right = 9.0
 margin_bottom = 17.0
 mouse_filter = 1
@@ -506,12 +632,12 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "1:"
 
-[node name="PointEditor" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points"]
+[node name="PointEditor" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points"]
 margin_left = 20.0
 margin_right = 256.0
 margin_bottom = 42.0
 
-[node name="X" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points/PointEditor"]
+[node name="X" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points/PointEditor"]
 margin_right = 56.0
 margin_bottom = 19.0
 input_pass_on_modal_close_click = false
@@ -522,7 +648,7 @@ placeholder_text = "X"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="Y" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points/PointEditor"]
+[node name="Y" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points/PointEditor"]
 margin_left = 60.0
 margin_right = 116.0
 margin_bottom = 19.0
@@ -533,13 +659,13 @@ placeholder_text = "Y"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="CurvePoints" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points/PointEditor"]
+[node name="CurvePoints" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points/PointEditor"]
 margin_left = 120.0
 margin_right = 236.0
 margin_bottom = 42.0
 columns = 2
 
-[node name="InX" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points/PointEditor/CurvePoints"]
+[node name="InX" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points/PointEditor/CurvePoints"]
 margin_right = 56.0
 margin_bottom = 19.0
 input_pass_on_modal_close_click = false
@@ -549,7 +675,7 @@ placeholder_text = "In X"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="InY" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points/PointEditor/CurvePoints"]
+[node name="InY" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points/PointEditor/CurvePoints"]
 margin_left = 60.0
 margin_right = 116.0
 margin_bottom = 19.0
@@ -559,7 +685,7 @@ placeholder_text = "In Y"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="OutX" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points/PointEditor/CurvePoints"]
+[node name="OutX" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points/PointEditor/CurvePoints"]
 margin_top = 23.0
 margin_right = 56.0
 margin_bottom = 42.0
@@ -570,7 +696,7 @@ placeholder_text = "Out X"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="OutY" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points/PointEditor/CurvePoints"]
+[node name="OutY" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points/PointEditor/CurvePoints"]
 margin_left = 60.0
 margin_top = 23.0
 margin_right = 116.0
@@ -581,7 +707,7 @@ placeholder_text = "Out Y"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="Index2" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points"]
+[node name="Index2" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points"]
 margin_top = 64.0
 margin_right = 12.0
 margin_bottom = 81.0
@@ -590,13 +716,13 @@ mouse_default_cursor_shape = 16
 size_flags_horizontal = 0
 text = "2:"
 
-[node name="PointEditor2" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points"]
+[node name="PointEditor2" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points"]
 margin_left = 20.0
 margin_top = 52.0
 margin_right = 256.0
 margin_bottom = 94.0
 
-[node name="X" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points/PointEditor2"]
+[node name="X" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points/PointEditor2"]
 margin_right = 56.0
 margin_bottom = 19.0
 input_pass_on_modal_close_click = false
@@ -607,7 +733,7 @@ placeholder_text = "X"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="Y" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points/PointEditor2"]
+[node name="Y" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points/PointEditor2"]
 margin_left = 60.0
 margin_right = 116.0
 margin_bottom = 19.0
@@ -618,13 +744,13 @@ placeholder_text = "Y"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="CurvePoints" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points/PointEditor2"]
+[node name="CurvePoints" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points/PointEditor2"]
 margin_left = 120.0
 margin_right = 236.0
 margin_bottom = 42.0
 columns = 2
 
-[node name="InX" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points/PointEditor2/CurvePoints"]
+[node name="InX" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points/PointEditor2/CurvePoints"]
 margin_right = 56.0
 margin_bottom = 19.0
 input_pass_on_modal_close_click = false
@@ -634,7 +760,7 @@ placeholder_text = "In X"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="InY" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points/PointEditor2/CurvePoints"]
+[node name="InY" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points/PointEditor2/CurvePoints"]
 margin_left = 60.0
 margin_right = 116.0
 margin_bottom = 19.0
@@ -644,7 +770,7 @@ placeholder_text = "In Y"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="OutX" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points/PointEditor2/CurvePoints"]
+[node name="OutX" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points/PointEditor2/CurvePoints"]
 margin_top = 23.0
 margin_right = 56.0
 margin_bottom = 42.0
@@ -655,7 +781,7 @@ placeholder_text = "Out X"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="OutY" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points/PointEditor2/CurvePoints"]
+[node name="OutY" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points/PointEditor2/CurvePoints"]
 margin_left = 60.0
 margin_top = 23.0
 margin_right = 116.0
@@ -666,14 +792,13 @@ placeholder_text = "Out Y"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="HSeparator" type="HSeparator" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties"]
+[node name="HSeparator" type="HSeparator" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties"]
 margin_top = 130.0
 margin_right = 256.0
 margin_bottom = 134.0
 custom_constants/separation = 4
 
 [node name="Misc" type="ScrollContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -682,192 +807,120 @@ margin_right = -8.0
 margin_bottom = -12.0
 scroll_horizontal_enabled = false
 
-[node name="Mat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc"]
-margin_right = 304.0
-margin_bottom = 140.0
+[node name="MarginContainer" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc"]
+margin_right = 189.0
+margin_bottom = 152.0
 custom_constants/margin_right = 4
 custom_constants/margin_top = 2
 custom_constants/margin_left = 4
 custom_constants/margin_bottom = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat"]
+[node name="Properties" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer"]
 margin_left = 4.0
 margin_top = 2.0
-margin_right = 300.0
-margin_bottom = 136.0
-
-[node name="Preview" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer"]
-margin_right = 103.0
-margin_bottom = 151.0
-custom_constants/separation = 6
-
-[node name="PreviewBack" type="PanelContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Preview"]
-margin_left = 3.0
-margin_right = 99.0
-margin_bottom = 98.0
-size_flags_horizontal = 6
-theme = ExtResource( 8 )
-theme_type_variation = "PreviewPanel"
-
-[node name="PreviewContainer" type="ViewportContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Preview/PreviewBack"]
-margin_right = 96.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 96, 96 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch = true
-
-[node name="Viewport" type="Viewport" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Preview/PreviewBack/PreviewContainer"]
-size = Vector2( 96, 96 )
-size_override_stretch = true
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 0
-
-[node name="Delete" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Preview"]
-margin_top = 104.0
-margin_right = 103.0
-margin_bottom = 126.0
-rect_min_size = Vector2( 0, 22 )
-theme = ExtResource( 8 )
-theme_type_variation = "ButtonRed"
-text = "Delete"
-script = ExtResource( 4 )
-
-[node name="ZOrderControls" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Preview"]
-margin_top = 132.0
-margin_right = 103.0
-margin_bottom = 151.0
-
-[node name="Back" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Preview/ZOrderControls"]
-margin_right = 47.0
-margin_bottom = 19.0
-rect_min_size = Vector2( 0, 19 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_type_variation = "ButtonPurple"
-custom_fonts/font = ExtResource( 2 )
-text = "To Back"
-script = ExtResource( 4 )
-
-[node name="Front" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Preview/ZOrderControls"]
-margin_left = 51.0
-margin_right = 103.0
-margin_bottom = 19.0
-rect_min_size = Vector2( 0, 19 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_type_variation = "ButtonPurple"
-custom_fonts/font = ExtResource( 2 )
-text = "To Front"
-script = ExtResource( 4 )
-
-[node name="VSeparator" type="VSeparator" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer"]
-margin_left = 107.0
-margin_right = 111.0
-margin_bottom = 151.0
-
-[node name="Properties" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer"]
-margin_left = 115.0
-margin_right = 296.0
-margin_bottom = 151.0
+margin_right = 185.0
+margin_bottom = 148.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PropertyList" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties"]
+[node name="PropertyList" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties"]
 margin_right = 181.0
-margin_bottom = 94.0
+margin_bottom = 106.0
 custom_constants/vseparation = 6
 custom_constants/hseparation = 8
 columns = 2
 
-[node name="Position" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyList"]
-margin_top = 1.0
+[node name="Position" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
+margin_top = 2.0
 margin_right = 57.0
-margin_bottom = 18.0
+margin_bottom = 19.0
 hint_tooltip = "The place the object will be in the level."
 mouse_filter = 1
 mouse_default_cursor_shape = 16
 text = "Position:"
 
-[node name="PositionEditor" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyList"]
+[node name="PositionEditor" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
 margin_left = 65.0
 margin_right = 181.0
-margin_bottom = 19.0
+margin_bottom = 22.0
 
-[node name="X" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyList/PositionEditor"]
+[node name="X" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList/PositionEditor"]
 margin_right = 56.0
-margin_bottom = 19.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 0, 22 )
 input_pass_on_modal_close_click = false
 text = "0"
 align = 1
-editable = false
 placeholder_text = "X"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="Y" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyList/PositionEditor"]
+[node name="Y" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList/PositionEditor"]
 margin_left = 60.0
 margin_right = 116.0
-margin_bottom = 19.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 0, 22 )
 text = "0"
 align = 1
 placeholder_text = "Y"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="Scale" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyList"]
-margin_top = 26.0
+[node name="Scale" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
+margin_top = 30.0
 margin_right = 57.0
-margin_bottom = 43.0
+margin_bottom = 47.0
 hint_tooltip = "Scale (how large) the object will be relative to it's initial size."
 mouse_filter = 1
 mouse_default_cursor_shape = 16
 text = "Scale:"
 
-[node name="ScaleEditor" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyList"]
+[node name="ScaleEditor" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
 margin_left = 65.0
-margin_top = 25.0
+margin_top = 28.0
 margin_right = 181.0
-margin_bottom = 44.0
+margin_bottom = 50.0
 
-[node name="X" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyList/ScaleEditor"]
+[node name="X" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList/ScaleEditor"]
 margin_right = 56.0
-margin_bottom = 19.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 0, 22 )
 text = "1"
 align = 1
 placeholder_text = "X"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="Y" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyList/ScaleEditor"]
+[node name="Y" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList/ScaleEditor"]
 margin_left = 60.0
 margin_right = 116.0
-margin_bottom = 19.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 0, 22 )
 text = "1"
 align = 1
 placeholder_text = "Y"
 placeholder_alpha = 0.4
 caret_blink = true
 
-[node name="Rotation" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyList"]
-margin_top = 51.0
+[node name="Rotation" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
+margin_top = 58.0
 margin_right = 57.0
-margin_bottom = 68.0
+margin_bottom = 75.0
 hint_tooltip = "The angle the object will be rotated at."
 mouse_filter = 1
 mouse_default_cursor_shape = 16
 text = "Rotation:"
 
-[node name="RotationEditor" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyList"]
+[node name="RotationEditor" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
 margin_left = 65.0
-margin_top = 50.0
+margin_top = 56.0
 margin_right = 181.0
-margin_bottom = 69.0
+margin_bottom = 78.0
 
-[node name="SpinBox" type="SpinBox" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyList/RotationEditor"]
+[node name="SpinBox" type="SpinBox" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList/RotationEditor"]
 margin_right = 72.0
-margin_bottom = 19.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 0, 22 )
 min_value = -360.0
 max_value = 360.0
 step = 0.01
@@ -878,47 +931,48 @@ suffix = "°"
 custom_arrow_step = 1.0
 script = ExtResource( 7 )
 
-[node name="Layer" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyList"]
-margin_top = 76.0
+[node name="Layer" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
+margin_top = 86.0
 margin_right = 57.0
-margin_bottom = 93.0
+margin_bottom = 103.0
 hint_tooltip = "The layer the object will appear on. 
 (Way Back and Very Front will put the object behind tile layer BG2 and in front of tile layer FG respectively.)"
 mouse_filter = 1
 mouse_default_cursor_shape = 16
 text = "Layer:"
 
-[node name="LayerEditor" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyList"]
+[node name="LayerEditor" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList"]
 margin_left = 65.0
-margin_top = 75.0
+margin_top = 84.0
 margin_right = 181.0
-margin_bottom = 94.0
+margin_bottom = 106.0
 
-[node name="OptionButton" type="OptionButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyList/LayerEditor"]
+[node name="OptionButton" type="OptionButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyList/LayerEditor"]
 margin_right = 65.0
-margin_bottom = 19.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 0, 22 )
 text = "Middle"
 items = [ "Way Back", null, false, 0, null, "Very Back", null, false, 1, null, "Back", null, false, 2, null, "Middle", null, false, 3, null, "Front", null, false, 4, null, "Very Front", null, false, 5, null ]
 selected = 3
 script = ExtResource( 4 )
 
-[node name="HSeparator" type="HSeparator" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties"]
-margin_top = 98.0
+[node name="HSeparator" type="HSeparator" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties"]
+margin_top = 110.0
 margin_right = 181.0
-margin_bottom = 108.0
+margin_bottom = 120.0
 custom_constants/separation = 10
 
-[node name="PropertyGrid" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties"]
-margin_top = 112.0
+[node name="PropertyGrid" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties"]
+margin_top = 124.0
 margin_right = 181.0
-margin_bottom = 151.0
+margin_bottom = 146.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 6
 custom_constants/hseparation = 16
 columns = 2
 
-[node name="Visible" type="CheckButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyGrid"]
+[node name="Visible" type="CheckButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyGrid"]
 margin_right = 83.0
 margin_bottom = 22.0
 hint_tooltip = "Determines if the object is able to be seen."
@@ -928,7 +982,7 @@ icon_align = 1
 expand_icon = true
 script = ExtResource( 4 )
 
-[node name="Enabled" type="CheckButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/Mat/HBoxContainer/Properties/PropertyGrid"]
+[node name="Enabled" type="CheckButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Misc/MarginContainer/Properties/PropertyGrid"]
 margin_left = 99.0
 margin_right = 181.0
 margin_bottom = 22.0
@@ -951,4 +1005,5 @@ stream = ExtResource( 5 )
 volume_db = -10.0
 bus = "Sounds"
 
-[connection signal="toggled" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/HBoxContainer/TextureButton" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/Mat/Properties/Points" method="set_visible"]
+[connection signal="pressed" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ButtonSound" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox" method="toggle_visibility"]
+[connection signal="toggled" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/HBoxContainer/TextureButton" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points" method="set_visible"]
