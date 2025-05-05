@@ -88,13 +88,13 @@ theme = ExtResource( 8 )
 theme_type_variation = "WindowBack"
 
 [node name="Border" type="PanelContainer" parent="WindowBack"]
-margin_right = 418.0
+margin_right = 421.0
 margin_bottom = 235.0
 mouse_filter = 2
 theme_type_variation = "WindowBorder"
 
 [node name="WindowMat" type="MarginContainer" parent="WindowBack"]
-margin_right = 418.0
+margin_right = 421.0
 margin_bottom = 235.0
 mouse_filter = 2
 custom_constants/margin_right = 4
@@ -105,11 +105,11 @@ custom_constants/margin_bottom = 4
 [node name="HeaderContentDivider" type="VBoxContainer" parent="WindowBack/WindowMat"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 414.0
+margin_right = 417.0
 margin_bottom = 231.0
 
 [node name="HeaderMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider"]
-margin_right = 410.0
+margin_right = 413.0
 margin_bottom = 26.0
 custom_constants/margin_right = 6
 custom_constants/margin_top = 3
@@ -119,7 +119,7 @@ custom_constants/margin_bottom = 1
 [node name="HeaderBox" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat"]
 margin_left = 6.0
 margin_top = 3.0
-margin_right = 404.0
+margin_right = 407.0
 margin_bottom = 25.0
 custom_constants/separation = 1
 
@@ -155,14 +155,14 @@ fit_content_height = true
 
 [node name="HideSpacer" type="Control" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
 margin_left = 154.0
-margin_right = 275.0
+margin_right = 277.0
 margin_bottom = 22.0
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="WindowClose" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
-margin_left = 376.0
-margin_right = 398.0
+margin_left = 379.0
+margin_right = 401.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Close"
@@ -176,13 +176,13 @@ script = ExtResource( 4 )
 
 [node name="HSeparator" type="HSeparator" parent="WindowBack/WindowMat/HeaderContentDivider"]
 margin_top = 30.0
-margin_right = 410.0
+margin_right = 413.0
 margin_bottom = 30.0
 custom_constants/separation = 0
 
 [node name="ContentMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider"]
 margin_top = 34.0
-margin_right = 410.0
+margin_right = 413.0
 margin_bottom = 227.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -193,7 +193,7 @@ custom_constants/margin_bottom = 2
 
 [node name="ContentBox" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat"]
 margin_top = 1.0
-margin_right = 409.0
+margin_right = 412.0
 margin_bottom = 191.0
 size_flags_vertical = 3
 
@@ -299,7 +299,7 @@ margin_bottom = 190.0
 
 [node name="PropertyGroups" type="TabContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox"]
 margin_left = 118.0
-margin_right = 409.0
+margin_right = 412.0
 margin_bottom = 190.0
 mouse_filter = 1
 size_flags_horizontal = 3
@@ -312,7 +312,6 @@ all_tabs_in_front = true
 use_hidden_tabs_for_min_size = true
 
 [node name="Dialogue" type="ScrollContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -799,6 +798,7 @@ margin_bottom = 134.0
 custom_constants/separation = 4
 
 [node name="Misc" type="ScrollContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
