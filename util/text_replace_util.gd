@@ -38,9 +38,23 @@ static func input_to_text(input_key: String, player_id: int) -> String:
 
 
 static func parse_text(text : String, character : Character) -> String:
-	text = text.replace(":char:", CHARACTER_NAMES[character.character].to_lower())
-	text = text.replace(":Char:", CHARACTER_NAMES[character.character])
-	text = text.replace(":CHAR:", CHARACTER_NAMES[character.character].to_upper())
+	
+	var modifier: int = 0
+	var character_index: int = character.character
+	
+	if (text.to_lower().find(":!char:") != -1):
+		modifier = 1
+	
+	character_index += modifier
+	character_index = wrapi(character_index,0,2)
+	
+	text = text.replace(":char:", CHARACTER_NAMES[character_index].to_lower())
+	text = text.replace(":Char:", CHARACTER_NAMES[character_index])
+	text = text.replace(":CHAR:", CHARACTER_NAMES[character_index].to_upper())
+	
+	text = text.replace(":!char:", CHARACTER_NAMES[character_index].to_lower())
+	text = text.replace(":!Char:", CHARACTER_NAMES[character_index])
+	text = text.replace(":!CHAR:", CHARACTER_NAMES[character_index].to_upper())
 	
 	text = text.replace(":winginputs:", ":leftinput: and :rightinput:" if !Singleton.PlayerSettings.legacy_wing_cap else ":upinput: and :downinput:")
 	
