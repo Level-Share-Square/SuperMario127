@@ -300,8 +300,15 @@ func _physics_process(delta):
 		# message appear signal was removed from here, made
 		# redundant by the message changed signal
 	
+	# making sure players don't get weirldy softlocked after finishing dialogue
+	if (!being_read and characters.size() > 0):
+		for character in characters:
+			restore_control(character)
+			remove_character(character)
+	
 	check_timer -= delta
 	if check_timer <= 0:
+		
 		check_timer = 3.0
 		
 		var has_char = false
