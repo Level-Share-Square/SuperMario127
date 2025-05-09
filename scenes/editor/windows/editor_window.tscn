@@ -135,13 +135,17 @@ custom_constants/margin_top = 1
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 2
 
-[node name="HoverSound" type="AudioStreamPlayer" parent="WindowBack"]
+[node name="ResizeHandle" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource( 5 )
 volume_db = -10.0
 bus = "Sounds"
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="WindowBack"]
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource( 3 )
 volume_db = -10.0

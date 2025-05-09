@@ -1,10 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/misc/magnifying_glass_v2.svg" type="Texture" id=2]
-[ext_resource path="res://scenes/editor/windows/item_picker/group_button.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/editor/styles/group_button_normal.tres" type="StyleBox" id=4]
 [ext_resource path="res://scenes/editor/windows/item_picker/item_button.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/editor/items/placeable_item.gd" type="Script" id=6]
+[ext_resource path="res://scenes/actors/objects/yellow_coin/preview.png" type="Texture" id=7]
+[ext_resource path="res://scenes/editor/group_button.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/editor/items/placeable_items/coin_editor_data.tres" type="Resource" id=9]
+[ext_resource path="res://scenes/editor/items/items.tres" type="Resource" id=10]
+[ext_resource path="res://scenes/editor/windows/item_picker/items_box.gd" type="Script" id=11]
 
 [sub_resource type="Shader" id=1]
 code = "//from https://godotshaders.com/shader/2d-outline-inline/
@@ -90,29 +94,15 @@ shader_param/inside = false
 shader_param/add_margins = true
 shader_param/texture_offset = Vector2( 0, 2 )
 
-[sub_resource type="StyleBoxFlat" id=9]
-content_margin_left = 4.0
-content_margin_right = 4.0
-bg_color = Color( 0.0862745, 0.188235, 0.835294, 1 )
-skew = Vector2( 0.1, 0 )
-border_width_bottom = 2
-border_color = Color( 0.0647059, 0.141176, 0.626471, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 2
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id=6]
-content_margin_left = 4.0
-content_margin_right = 4.0
-bg_color = Color( 0.647059, 0.647059, 0.647059, 1 )
-skew = Vector2( 0.1, 0 )
-border_width_bottom = 2
-border_color = Color( 0.485294, 0.485294, 0.485294, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 2
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 2
+[sub_resource type="Resource" id=11]
+script = ExtResource( 6 )
+item_name = "Coin"
+groups = PoolStringArray(  )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 7 ) ]
+previews = [ ExtResource( 7 ) ]
 
 [sub_resource type="StyleBoxLine" id=10]
 color = Color( 1, 1, 1, 0.470588 )
@@ -123,9 +113,9 @@ thickness = 2
 [node name="ItemPickerWindow" instance=ExtResource( 1 )]
 margin_right = 256.0
 margin_bottom = 256.0
-title = "Object Picker"
+title = "Item Picker"
 icon = ExtResource( 2 )
-icon_tooltip = "Use this window to pick an object!"
+icon_tooltip = "Use this window to pick a tile or object to place!"
 window_size = Vector2( 256, 256 )
 
 [node name="Border" parent="WindowBack" index="0"]
@@ -179,12 +169,12 @@ custom_constants/separation = 3
 
 [node name="GroupsBox" type="ScrollContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="0"]
 margin_right = 244.0
-margin_bottom = 38.0
+margin_bottom = 34.0
 scroll_vertical_enabled = false
 
 [node name="GroupMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox" index="0"]
-margin_right = 345.0
-margin_bottom = 30.0
+margin_right = 276.0
+margin_bottom = 26.0
 custom_constants/margin_right = 2
 custom_constants/margin_top = 1
 custom_constants/margin_left = 2
@@ -193,60 +183,44 @@ custom_constants/margin_bottom = 6
 [node name="Groups" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat" index="0"]
 margin_left = 2.0
 margin_top = 1.0
-margin_right = 343.0
-margin_bottom = 24.0
+margin_right = 274.0
+margin_bottom = 20.0
 custom_constants/separation = 6
 
-[node name="Search" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="0" instance=ExtResource( 3 )]
-margin_right = 23.0
-margin_bottom = 23.0
-rect_min_size = Vector2( 23, 23 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_styles/normal = ExtResource( 4 )
-text = ""
+[node name="Search" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="0" instance=ExtResource( 8 )]
 icon = ExtResource( 2 )
-align = 2
-expand_icon = true
-color = Color( 0.133333, 0.133333, 0.133333, 1 )
+color = Color( 0, 0.294118, 0.705882, 1 )
 
-[node name="Special" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="1" instance=ExtResource( 3 )]
-margin_left = 29.0
-margin_right = 92.0
-margin_bottom = 23.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_styles/normal = ExtResource( 4 )
+[node name="Special" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="1" instance=ExtResource( 8 )]
+margin_left = 14.0
+margin_right = 65.0
 text = "Special"
-color = Color( 0.55836, 0.1518, 0.66, 1 )
+expand_icon = false
+color = Color( 0.556863, 0.152941, 0.658824, 1 )
 
-[node name="Dialogue" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="2" instance=ExtResource( 3 )]
-margin_left = 98.0
-margin_right = 173.0
-margin_bottom = 23.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_styles/normal = ExtResource( 4 )
+[node name="GroupButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="2" instance=ExtResource( 8 )]
+margin_left = 71.0
+margin_right = 135.0
 text = "Dialogue"
+expand_icon = false
 color = Color( 0.5, 0.325, 0, 1 )
 
-[node name="Switches" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="3" instance=ExtResource( 3 )]
-margin_left = 179.0
-margin_right = 260.0
-margin_bottom = 23.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_styles/normal = SubResource( 9 )
+[node name="GroupButton2" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="3" instance=ExtResource( 8 )]
+margin_left = 141.0
+margin_right = 204.0
 text = "Switches"
+expand_icon = false
 color = Color( 0.098, 0.2156, 0.98, 1 )
 
-[node name="Teleport" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="4" instance=ExtResource( 3 )]
-margin_left = 266.0
-margin_right = 341.0
-margin_bottom = 23.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_styles/normal = SubResource( 6 )
+[node name="GroupButton3" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="4" instance=ExtResource( 8 )]
+margin_left = 210.0
+margin_right = 272.0
 text = "Teleport"
+expand_icon = false
 color = Color( 0.117647, 0.686275, 0, 1 )
 
 [node name="ItemsPanel" type="PanelContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="1"]
-margin_top = 41.0
+margin_top = 37.0
 margin_right = 244.0
 margin_bottom = 211.0
 size_flags_horizontal = 3
@@ -256,111 +230,73 @@ size_flags_vertical = 3
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 238.0
-margin_bottom = 164.0
-follow_focus = true
+margin_bottom = 168.0
 scroll_horizontal_enabled = false
 
-[node name="ItemsBox" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll" index="0"]
-margin_right = 216.0
-margin_bottom = 180.0
+[node name="ItemsMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll" index="0"]
+margin_right = 5.0
+margin_bottom = 25.0
+custom_constants/margin_right = 1
+custom_constants/margin_top = 1
+custom_constants/margin_left = 1
+custom_constants/margin_bottom = 4
 
-[node name="Tiles" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsBox" index="0"]
-margin_right = 216.0
-margin_bottom = 164.0
+[node name="ItemsBox" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsMat" index="0"]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 4.0
+margin_bottom = 21.0
+script = ExtResource( 11 )
+placeable_items = ExtResource( 10 )
+item_button_scene = ExtResource( 5 )
+
+[node name="TileItems" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsMat/ItemsBox" index="0"]
+unique_name_in_owner = true
+margin_left = 1.0
+margin_right = 1.0
 size_flags_horizontal = 6
 size_flags_vertical = 3
 custom_constants/vseparation = 10
 custom_constants/hseparation = 8
 columns = 4
 
-[node name="Item" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsBox/Tiles" index="0" instance=ExtResource( 5 )]
+[node name="Test" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsMat/ItemsBox/TileItems" index="0" instance=ExtResource( 5 )]
+visible = false
+placeable_item = ExtResource( 9 )
 
-[node name="Button2" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsBox/Tiles" index="1"]
-margin_left = 56.0
-margin_right = 104.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
-theme_type_variation = "ButtonRectangle"
+[node name="Test2" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsMat/ItemsBox/TileItems" index="1" instance=ExtResource( 5 )]
+visible = false
+placeable_item = SubResource( 11 )
 
-[node name="Button3" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsBox/Tiles" index="2"]
-margin_left = 112.0
-margin_right = 160.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
-theme_type_variation = "ButtonRectangle"
+[node name="Test3" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsMat/ItemsBox/TileItems" index="2" instance=ExtResource( 5 )]
+visible = false
+placeable_item = SubResource( 11 )
 
-[node name="Button4" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsBox/Tiles" index="3"]
-margin_left = 168.0
-margin_right = 216.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
-theme_type_variation = "ButtonRectangle"
+[node name="Test4" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsMat/ItemsBox/TileItems" index="3" instance=ExtResource( 5 )]
+visible = false
+placeable_item = SubResource( 11 )
 
-[node name="Button5" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsBox/Tiles" index="4"]
-margin_top = 58.0
-margin_right = 48.0
-margin_bottom = 106.0
-rect_min_size = Vector2( 48, 48 )
-theme_type_variation = "ButtonRectangle"
+[node name="Test5" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsMat/ItemsBox/TileItems" index="4" instance=ExtResource( 5 )]
+visible = false
+placeable_item = SubResource( 11 )
 
-[node name="Button6" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsBox/Tiles" index="5"]
-margin_left = 56.0
-margin_top = 58.0
-margin_right = 104.0
-margin_bottom = 106.0
-rect_min_size = Vector2( 48, 48 )
-theme_type_variation = "ButtonRectangle"
-
-[node name="Button7" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsBox/Tiles" index="6"]
-margin_left = 112.0
-margin_top = 58.0
-margin_right = 160.0
-margin_bottom = 106.0
-rect_min_size = Vector2( 48, 48 )
-theme_type_variation = "ButtonRectangle"
-
-[node name="Button8" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsBox/Tiles" index="7"]
-margin_left = 168.0
-margin_top = 58.0
-margin_right = 216.0
-margin_bottom = 106.0
-rect_min_size = Vector2( 48, 48 )
-theme_type_variation = "ButtonRectangle"
-
-[node name="Button9" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsBox/Tiles" index="8"]
-margin_top = 116.0
-margin_right = 48.0
-margin_bottom = 164.0
-rect_min_size = Vector2( 48, 48 )
-theme_type_variation = "ButtonRectangle"
-
-[node name="Button10" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsBox/Tiles" index="9"]
-margin_left = 56.0
-margin_top = 116.0
-margin_right = 104.0
-margin_bottom = 164.0
-rect_min_size = Vector2( 48, 48 )
-theme_type_variation = "ButtonRectangle"
-
-[node name="Button11" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsBox/Tiles" index="10"]
-margin_left = 112.0
-margin_top = 116.0
-margin_right = 160.0
-margin_bottom = 164.0
-rect_min_size = Vector2( 48, 48 )
-theme_type_variation = "ButtonRectangle"
-
-[node name="Button12" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsBox/Tiles" index="11"]
-margin_left = 168.0
-margin_top = 116.0
-margin_right = 216.0
-margin_bottom = 164.0
-rect_min_size = Vector2( 48, 48 )
-theme_type_variation = "ButtonRectangle"
-
-[node name="HSeparator" type="HSeparator" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsBox" index="1"]
-margin_top = 168.0
-margin_right = 216.0
-margin_bottom = 180.0
+[node name="HSeparator" type="HSeparator" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsMat/ItemsBox" index="1"]
+margin_top = 4.0
+margin_right = 3.0
+margin_bottom = 16.0
 custom_constants/separation = 12
 custom_styles/separator = SubResource( 10 )
+
+[node name="ObjectItems" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ItemsPanel/ItemsScroll/ItemsMat/ItemsBox" index="2"]
+unique_name_in_owner = true
+margin_top = 20.0
+margin_right = 3.0
+margin_bottom = 20.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 8
+
+[connection signal="focus_exited" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/Search" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/Search/Content" method="_button_up"]
+[connection signal="focus_exited" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/Special" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/Special/Content" method="_button_up"]
+[connection signal="focus_exited" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/GroupButton" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/GroupButton/Content" method="_button_up"]
+[connection signal="focus_exited" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/GroupButton2" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/GroupButton2/Content" method="_button_up"]
+[connection signal="focus_exited" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/GroupButton3" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/GroupButton3/Content" method="_button_up"]

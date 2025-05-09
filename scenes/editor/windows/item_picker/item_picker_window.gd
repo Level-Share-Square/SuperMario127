@@ -1,0 +1,5 @@
+extends EditorWindow
+
+
+func close():
+	

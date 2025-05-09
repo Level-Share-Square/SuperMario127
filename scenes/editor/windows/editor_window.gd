@@ -2,8 +2,6 @@ class_name EditorWindow
 extends Popup
 
 
-const placeable_items_path: String = "res://scenes/editor/items"
-
 export(NodePath) var window_panel_path
 export(NodePath) var drag_control_path
 export(NodePath) var close_button_path
@@ -39,7 +37,7 @@ func _ready() -> void:
 	drag_control.connect("gui_input", self, "drag_window")
 	
 	var close_button: BaseButton = get_node(close_button_path)
-	close_button.connect("pressed", self, "hide")
+	close_button.connect("pressed", self, "close")
 	
 	# I don't know why, but if you don't pop the window up first the 
 	# minimum size is never calculated
@@ -59,6 +57,12 @@ func _ready() -> void:
 	
 	set_icon(icon)
 	set_tooltip(icon_tooltip)
+
+
+func close():
+	var focus: Control = get_focus_owner()
+	focus.grab_focus()
+	hide()
 
 
 func drag_window(event):

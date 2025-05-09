@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/fonts/DelfinoFont10.tres" type="DynamicFont" id=2]
@@ -19,34 +19,24 @@
 [ext_resource path="res://assets/misc/settings.png" type="Texture" id=17]
 [ext_resource path="res://assets/misc/gear.svg" type="Texture" id=18]
 [ext_resource path="res://scenes/editor/windows/aside_hide.gd" type="Script" id=19]
+[ext_resource path="res://assets/fonts/DelfinoFont20.tres" type="DynamicFont" id=20]
+[ext_resource path="res://scenes/oldeditor/assets/clickable_arrow.png" type="Texture" id=21]
+[ext_resource path="res://scenes/oldeditor/assets/clickable_arrow_hover.png" type="Texture" id=22]
 
 [sub_resource type="DynamicFont" id=1]
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxLine" id=5]
-color = Color( 1, 1, 1, 0.705882 )
-grow_begin = 0.0
-grow_end = 0.0
-thickness = 2
-vertical = true
+[sub_resource type="StyleBoxEmpty" id=5]
 
-[sub_resource type="StyleBoxLine" id=6]
-color = Color( 1, 1, 1, 0.862745 )
-grow_begin = 0.0
-grow_end = 0.0
-thickness = 2
-vertical = true
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=9]
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
-[sub_resource type="StyleBoxLine" id=8]
-color = Color( 1, 1, 1, 0.470588 )
-grow_begin = 0.0
-grow_end = 0.0
-thickness = 2
-vertical = true
+[sub_resource type="StyleBoxEmpty" id=8]
 
 [sub_resource type="DynamicFont" id=2]
 size = 13
@@ -68,7 +58,7 @@ corner_radius_bottom_left = 64
 
 [node name="Popup" type="Popup"]
 visible = true
-margin_right = 418.0
+margin_right = 427.0
 margin_bottom = 235.0
 theme = ExtResource( 8 )
 popup_exclusive = true
@@ -78,6 +68,7 @@ drag_control_path = NodePath("WindowBack/WindowMat/HeaderContentDivider/HeaderMa
 close_button_path = NodePath("WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox/WindowClose")
 title = "Object Settings"
 icon = ExtResource( 17 )
+window_size = Vector2( 428, 235 )
 
 [node name="WindowBack" type="PanelContainer" parent="."]
 anchor_right = 1.0
@@ -88,13 +79,13 @@ theme = ExtResource( 8 )
 theme_type_variation = "WindowBack"
 
 [node name="Border" type="PanelContainer" parent="WindowBack"]
-margin_right = 421.0
+margin_right = 427.0
 margin_bottom = 235.0
 mouse_filter = 2
 theme_type_variation = "WindowBorder"
 
 [node name="WindowMat" type="MarginContainer" parent="WindowBack"]
-margin_right = 421.0
+margin_right = 427.0
 margin_bottom = 235.0
 mouse_filter = 2
 custom_constants/margin_right = 4
@@ -105,11 +96,11 @@ custom_constants/margin_bottom = 4
 [node name="HeaderContentDivider" type="VBoxContainer" parent="WindowBack/WindowMat"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 417.0
+margin_right = 423.0
 margin_bottom = 231.0
 
 [node name="HeaderMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider"]
-margin_right = 413.0
+margin_right = 419.0
 margin_bottom = 26.0
 custom_constants/margin_right = 6
 custom_constants/margin_top = 3
@@ -119,7 +110,7 @@ custom_constants/margin_bottom = 1
 [node name="HeaderBox" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat"]
 margin_left = 6.0
 margin_top = 3.0
-margin_right = 407.0
+margin_right = 413.0
 margin_bottom = 25.0
 custom_constants/separation = 1
 
@@ -155,14 +146,14 @@ fit_content_height = true
 
 [node name="HideSpacer" type="Control" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
 margin_left = 154.0
-margin_right = 277.0
+margin_right = 280.0
 margin_bottom = 22.0
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="WindowClose" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
-margin_left = 379.0
-margin_right = 401.0
+margin_left = 385.0
+margin_right = 407.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 22, 22 )
 hint_tooltip = "Close"
@@ -176,13 +167,13 @@ script = ExtResource( 4 )
 
 [node name="HSeparator" type="HSeparator" parent="WindowBack/WindowMat/HeaderContentDivider"]
 margin_top = 30.0
-margin_right = 413.0
+margin_right = 419.0
 margin_bottom = 30.0
 custom_constants/separation = 0
 
 [node name="ContentMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider"]
 margin_top = 34.0
-margin_right = 413.0
+margin_right = 419.0
 margin_bottom = 227.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -193,34 +184,80 @@ custom_constants/margin_bottom = 2
 
 [node name="ContentBox" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat"]
 margin_top = 1.0
-margin_right = 412.0
+margin_right = 418.0
 margin_bottom = 191.0
 size_flags_vertical = 3
 
-[node name="PreviewClipBox" type="Control" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox"]
+[node name="PreviewBox" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox"]
+margin_right = 108.0
+margin_bottom = 190.0
+
+[node name="HideMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewBox"]
+margin_right = 23.0
+margin_bottom = 19.0
+size_flags_horizontal = 2
+size_flags_vertical = 4
+custom_constants/margin_top = -4
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = -1
+
+[node name="PreviewHide" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewBox/HideMat"]
+margin_left = 5.0
+margin_top = -4.0
+margin_right = 23.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 18, 24 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 20 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+text = ">"
+flat = true
+expand_icon = true
+script = ExtResource( 4 )
+
+[node name="TextureButton" type="TextureButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewBox/HideMat"]
+visible = false
+margin_left = 5.0
+margin_top = -4.0
+margin_right = 23.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 16, 16 )
+toggle_mode = true
+texture_normal = ExtResource( 21 )
+texture_hover = ExtResource( 22 )
+expand = true
+stretch_mode = 5
+
+[node name="PreviewClipBox" type="Control" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewBox"]
+margin_top = 23.0
 margin_right = 108.0
 margin_bottom = 190.0
 rect_min_size = Vector2( 108, 0 )
 rect_clip_content = true
+size_flags_vertical = 3
 script = ExtResource( 19 )
 
-[node name="PreviewMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox"]
+[node name="PreviewMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewBox/PreviewClipBox"]
 margin_right = 108.0
-margin_bottom = 189.0
+margin_bottom = 190.0
 rect_min_size = Vector2( 108, 0 )
 custom_constants/margin_right = 2
 custom_constants/margin_top = 1
 custom_constants/margin_left = 2
 custom_constants/margin_bottom = 1
 
-[node name="Preview" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat"]
+[node name="Preview" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewBox/PreviewClipBox/PreviewMat"]
 margin_left = 2.0
 margin_top = 1.0
 margin_right = 106.0
-margin_bottom = 188.0
+margin_bottom = 189.0
 custom_constants/separation = 6
 
-[node name="PreviewBack" type="PanelContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat/Preview"]
+[node name="PreviewBack" type="PanelContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewBox/PreviewClipBox/PreviewMat/Preview"]
 margin_left = 4.0
 margin_right = 100.0
 margin_bottom = 98.0
@@ -228,7 +265,7 @@ size_flags_horizontal = 6
 theme = ExtResource( 8 )
 theme_type_variation = "PreviewPanel"
 
-[node name="PreviewContainer" type="ViewportContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat/Preview/PreviewBack"]
+[node name="PreviewContainer" type="ViewportContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewBox/PreviewClipBox/PreviewMat/Preview/PreviewBack"]
 margin_right = 96.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 96, 96 )
@@ -236,14 +273,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat/Preview/PreviewBack/PreviewContainer"]
+[node name="Viewport" type="Viewport" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewBox/PreviewClipBox/PreviewMat/Preview/PreviewBack/PreviewContainer"]
 size = Vector2( 96, 96 )
 size_override_stretch = true
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="Delete" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat/Preview"]
+[node name="Delete" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewBox/PreviewClipBox/PreviewMat/Preview"]
 margin_top = 104.0
 margin_right = 104.0
 margin_bottom = 126.0
@@ -253,12 +290,12 @@ theme_type_variation = "ButtonRed"
 text = "Delete"
 script = ExtResource( 4 )
 
-[node name="ZOrderControls" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat/Preview"]
+[node name="ZOrderControls" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewBox/PreviewClipBox/PreviewMat/Preview"]
 margin_top = 132.0
 margin_right = 104.0
 margin_bottom = 151.0
 
-[node name="Back" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat/Preview/ZOrderControls"]
+[node name="Back" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewBox/PreviewClipBox/PreviewMat/Preview/ZOrderControls"]
 margin_right = 48.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 0, 18 )
@@ -269,7 +306,7 @@ custom_fonts/font = ExtResource( 2 )
 text = "To Back"
 script = ExtResource( 4 )
 
-[node name="Front" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox/PreviewMat/Preview/ZOrderControls"]
+[node name="Front" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewBox/PreviewClipBox/PreviewMat/Preview/ZOrderControls"]
 margin_left = 52.0
 margin_right = 104.0
 margin_bottom = 19.0
@@ -281,25 +318,14 @@ custom_fonts/font = ExtResource( 2 )
 text = "To Front"
 script = ExtResource( 4 )
 
-[node name="ButtonSound" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox"]
-margin_left = 112.0
-margin_right = 114.0
-margin_bottom = 190.0
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 7 )
-custom_styles/normal = SubResource( 8 )
-script = ExtResource( 4 )
-
 [node name="VSeparator" type="VSeparator" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox"]
-visible = false
-margin_left = 117.0
-margin_right = 121.0
+margin_left = 112.0
+margin_right = 116.0
 margin_bottom = 190.0
 
 [node name="PropertyGroups" type="TabContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox"]
-margin_left = 118.0
-margin_right = 412.0
+margin_left = 120.0
+margin_right = 418.0
 margin_bottom = 190.0
 mouse_filter = 1
 size_flags_horizontal = 3
@@ -315,9 +341,9 @@ use_hidden_tabs_for_min_size = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
-margin_top = 31.0
-margin_right = -8.0
-margin_bottom = -12.0
+margin_top = 29.0
+margin_right = -6.0
+margin_bottom = -6.0
 scroll_horizontal_enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Dialogue"]
@@ -382,7 +408,7 @@ text = "Erase"
 margin_left = 70.0
 margin_right = 134.0
 margin_bottom = 19.0
-rect_min_size = Vector2( 64, 0 )
+rect_min_size = Vector2( 64, 19 )
 focus_mode = 0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
@@ -1005,5 +1031,5 @@ stream = ExtResource( 5 )
 volume_db = -10.0
 bus = "Sounds"
 
-[connection signal="pressed" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/ButtonSound" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewClipBox" method="toggle_visibility"]
+[connection signal="pressed" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewBox/HideMat/PreviewHide" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewBox/PreviewClipBox" method="toggle_visibility"]
 [connection signal="toggled" from="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/HBoxContainer/TextureButton" to="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PropertyGroups/Path/MarginContainer/Properties/Points" method="set_visible"]

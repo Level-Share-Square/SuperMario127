@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/editor/editor_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/editor/check_box.gd" type="Script" id=3]
+[ext_resource path="res://assets/misc/checkbox.svg" type="Texture" id=4]
+[ext_resource path="res://assets/misc/checkbox_fill.svg" type="Texture" id=5]
+
+[node name="EditorCheckButton" instance=ExtResource( 2 )]
+margin_right = 143.0
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( -87, -55 )
+toggle_mode = true
+
+[node name="ContentBox" parent="Content/ContentMat" index="0"]
+margin_right = 139.0
+margin_bottom = 21.0
+
+[node name="Text" parent="Content/ContentMat/ContentBox" index="0"]
+margin_left = 32.0
+margin_top = 1.0
+margin_right = 32.0
+margin_bottom = 18.0
+
+[node name="CheckBox" type="TextureRect" parent="Content/ContentMat/ContentBox" index="1"]
+margin_left = 117.0
+margin_top = 1.0
+margin_right = 135.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 18, 18 )
+size_flags_horizontal = 10
+size_flags_vertical = 6
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 3 )
+checked = ExtResource( 5 )
+unchecked = ExtResource( 4 )
+
+[connection signal="toggled" from="." to="Content/ContentMat/ContentBox/CheckBox" method="_toggle"]

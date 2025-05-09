@@ -1,38 +1,12 @@
 extends Camera2D
 
 
-export(NodePath) var editor_path
-onready var editor = get_node(editor_path)
-
 export var speed: float = 12.0
-
-
-# tracks whether the actions below are held or not
-var actions := {
-	"editor_left": false,
-	"editor_right": false,
-	"editor_up": false,
-	"editor_down": false,
-}
-
-func _unhandled_input(event):
-	for action in actions.keys():
-		if event.is_action_pressed(action):
-			actions[action] = true
-		elif event.is_action_released(action):
-			actions[action] = false
+export var zoom_level: float = 1.0
 
 
 func _physics_process(delta):
-	var can_move: bool = true
-	
-	for action in actions.values():
-		if action == false:
-			can_move = false
-			break
-	
-	if actions.values().has(true):
-		camera_movement(delta)
+	camera_movement(delta)
 
 
 func load_in(_level_data: LevelData, level_area: LevelArea):
@@ -45,6 +19,13 @@ func load_in(_level_data: LevelData, level_area: LevelArea):
 
 
 func camera_movement(delta: float):
+	var editor_ui: Control = get_node("%EditorUI")
+	
+	print(editor_ui.get_focus_owner())
+	
+	if editor_ui.get_focus_owner():
+		return
+	
 	var move_speed = speed * 2 if Input.is_action_pressed("speed_up_camera") else speed
 	var direction := Input.get_vector("editor_left", "editor_right", "editor_up", "editor_down")
 	
@@ -55,17 +36,21 @@ func camera_movement(delta: float):
 
 func update_limits(level_area : LevelArea):
 	var area_bounds = level_area.settings.bounds.grow(3)
-
-	limit_left  = int(area_bounds.position.x * 32)
-	limit_top   = int(area_bounds.position.y * 32 - 70 * zoom.x) #needs to include the toolbar
-
-	limit_right  = int(area_bounds.end.x * 32)
+	
+	limit_left = int(area_bounds.position.x * 32)
+	limit_top = int(area_bounds.position.y * 32 - 70 * zoom.x) #needs to include the toolbar
+	
+	limit_right = int(area_bounds.end.x * 32)
 	limit_bottom = int(area_bounds.end.y * 32)
-
+	
 	resolve_limit_collisions()
 
 
 func resolve_limit_collisions():
+	# If you were curious, this stops the camera node's position value from
+	# exceeding the level bounds. If you don't do this, the camera will continue
+	# to move past the limits while the viewport won't.
+	
 	var camera_left = position.x - ((get_viewport_rect().size.x / 2) * zoom.x)
 	var camera_right = position.x + ((get_viewport_rect().size.x / 2) * zoom.x)
 	var camera_up = position.y - ((get_viewport_rect().size.y / 2) * zoom.y)

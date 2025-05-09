@@ -35,6 +35,6 @@ collision_mask = 0
 shape = SubResource( 2 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-visible = false
+rect = Rect2( -128, -128, 256, 256 )
 process_parent = true
 physics_process_parent = true

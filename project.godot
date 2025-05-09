@@ -214,6 +214,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/editor.gd"
 }, {
+"base": "ButtonSound",
+"class": "EditorButton",
+"language": "GDScript",
+"path": "res://scenes/editor/editor_button.gd"
+}, {
 "base": "Area2D",
 "class": "EditorHitbox",
 "language": "GDScript",
@@ -513,6 +518,11 @@ _global_script_classes=[ {
 "class": "PlaceableObject",
 "language": "GDScript",
 "path": "res://scenes/editor/items/placeable_object.gd"
+}, {
+"base": "PlaceableItem",
+"class": "PlaceableTile",
+"language": "GDScript",
+"path": "res://scenes/editor/items/placeable_tile.gd"
 }, {
 "base": "Button",
 "class": "PlayerSelector",
@@ -821,6 +831,7 @@ _global_script_class_icons={
 "DiscordUser": "",
 "DiveState": "",
 "Editor": "",
+"EditorButton": "",
 "EditorHitbox": "",
 "EditorWindow": "",
 "EnemyBase": "",
@@ -881,6 +892,7 @@ _global_script_class_icons={
 "PlaceableItemList": "",
 "PlaceableItemOld": "",
 "PlaceableObject": "",
+"PlaceableTile": "",
 "PlayerSelector": "",
 "Powerup": "",
 "Property": "",
@@ -994,10 +1006,6 @@ audio=false
 transforms=false
 fps=true
 "Game Version"="0.9.2"
-
-[gui]
-
-common/snap_controls_to_pixels=false
 
 [importer_defaults]
 

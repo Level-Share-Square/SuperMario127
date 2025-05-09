@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/editor/group_button.gd" type="Script" id=1]
+[ext_resource path="res://scenes/editor/editor_button.tscn" type="PackedScene" id=2]
+
+[node name="GroupButton" instance=ExtResource( 2 )]
+margin_right = 8.0
+script = ExtResource( 1 )
+color = Color( 0.454902, 0.454902, 0.454902, 1 )
+
+[node name="ContentBox" parent="Content/ContentMat" index="0"]
+margin_right = 4.0
+
+[node name="Text" parent="Content/ContentMat/ContentBox" index="0"]
+margin_left = 0.0
+margin_right = 0.0

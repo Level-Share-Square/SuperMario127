@@ -1,19 +1,38 @@
-tool
 extends ButtonSound
 
 
-onready var icon_display: TextureRect = $ClipBox/Icon
+export var placeable_item: Resource
+
+onready var icon_display: TextureRect = $"%Icon"
+onready var grid: TextureRect = $"%Grid"
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	set_item(placeable_item)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func set_item(value: PlaceableItem):
+	placeable_item = value
+	
+	if placeable_item.icons.size() > 1:
+		icon_display.texture = create_cycling_icon(placeable_item.icons)
+	else:
+		icon_display.texture = placeable_item.icons[placeable_item.palette]
+	
+	hint_tooltip = placeable_item.item_name
+	
+	if placeable_item is PlaceableObject:
+		grid.visible = false
+	else:
+		grid.visible = true
 
 
-func _button_down():
-	pass # Replace with function body.
+func create_cycling_icon(icons: Array) -> AnimatedTexture:
+	var final_icon := AnimatedTexture.new()
+	final_icon.fps = .75
+	final_icon.frames = icons.size()
+	
+	for i in range(icons.size()):
+		final_icon.set_frame_texture(i, icons[i])
+	
+	return final_icon

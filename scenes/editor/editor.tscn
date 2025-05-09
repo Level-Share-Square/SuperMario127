@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -7,10 +7,23 @@
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/editor/editor_camera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/shared/background/backgrounds/day/clouds.png" type="Texture" id=8]
 [ext_resource path="res://scenes/editor/windows/item_picker/item_picker_window.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/oldeditor/assets/search_icon.png" type="Texture" id=10]
 [ext_resource path="res://scenes/oldeditor/assets/search_icon_hover.png" type="Texture" id=11]
 [ext_resource path="res://scenes/oldeditor/assets/search_icon_press.png" type="Texture" id=12]
+[ext_resource path="res://scenes/editor/bg_autoscroll.gd" type="Script" id=13]
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0.515152, 1 )
+colors = PoolColorArray( 0.835294, 0.956863, 1, 1, 0.356863, 0.784314, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=10]
+gradient = SubResource( 9 )
+width = 16
+height = 128
+fill_from = Vector2( 0, 1 )
+fill_to = Vector2( 0, 0 )
 
 [sub_resource type="InputEventKey" id=3]
 scancode = 49
@@ -46,6 +59,60 @@ nodes_to_load = [ NodePath("Backgrounds"), NodePath("Shared"), NodePath("EditorC
 
 [node name="Backgrounds" parent="." instance=ExtResource( 6 )]
 
+[node name="TestBG" type="Node2D" parent="."]
+visible = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="TestBG"]
+layer = -16
+
+[node name="Gradient" type="TextureRect" parent="TestBG/CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 10 )
+stretch_mode = 1
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="TestBG/CanvasLayer"]
+layer = -16
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="TestBG/CanvasLayer/ParallaxBackground"]
+motion_scale = Vector2( 0, 0 )
+motion_offset = Vector2( 0, -288 )
+motion_mirroring = Vector2( 768, 0 )
+script = ExtResource( 13 )
+scroll_speed = -4.0
+
+[node name="TextureRect" type="TextureRect" parent="TestBG/CanvasLayer/ParallaxBackground/ParallaxLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 8 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="TestBG/CanvasLayer/ParallaxBackground"]
+visible = false
+motion_scale = Vector2( 0, 0 )
+motion_offset = Vector2( 0, -162 )
+motion_mirroring = Vector2( 768, 0 )
+script = ExtResource( 13 )
+scroll_speed = -8.0
+
+[node name="TextureRect" type="TextureRect" parent="TestBG/CanvasLayer/ParallaxBackground/ParallaxLayer2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 8 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="TestBG/CanvasLayer/ParallaxBackground"]
+visible = false
+motion_scale = Vector2( 0, 0 )
+motion_offset = Vector2( 0, -108 )
+motion_mirroring = Vector2( 768, 0 )
+script = ExtResource( 13 )
+scroll_speed = -11.0
+
+[node name="TextureRect" type="TextureRect" parent="TestBG/CanvasLayer/ParallaxBackground/ParallaxLayer3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 8 )
+
 [node name="Shared" parent="." instance=ExtResource( 5 )]
 
 [node name="EditorCamera" parent="." instance=ExtResource( 7 )]
@@ -55,6 +122,7 @@ limit_top = -10000000
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="EditorUI" type="Control" parent="UI"]
+unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 4 )

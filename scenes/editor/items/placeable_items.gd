@@ -2,12 +2,16 @@ class_name PlaceableItemList
 extends Resource
 
 
-export(Dictionary) var items
+export(Dictionary) var placeable_items
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func get_items_in_group(group: String):
+	var items: Array = []
+	
+	for item in placeable_items:
+		if item is PlaceableItem:
+			if item.groups.has(group):
+				items.append(item)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
