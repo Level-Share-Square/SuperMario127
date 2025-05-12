@@ -64,6 +64,7 @@ visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="TestBG"]
 layer = -16
+visible = false
 
 [node name="Gradient" type="TextureRect" parent="TestBG/CanvasLayer"]
 anchor_right = 1.0
@@ -73,6 +74,7 @@ stretch_mode = 1
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="TestBG/CanvasLayer"]
 layer = -16
+visible = false
 scroll_ignore_camera_zoom = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="TestBG/CanvasLayer/ParallaxBackground"]
