@@ -235,20 +235,20 @@ grow_end = 0.0
 
 [sub_resource type="StyleBoxEmpty" id=155]
 
-[sub_resource type="StyleBoxFlat" id=109]
+[sub_resource type="StyleBoxFlat" id=156]
 content_margin_left = 4.0
 content_margin_right = 4.0
 content_margin_top = 1.0
 content_margin_bottom = 1.0
 bg_color = Color( 1, 1, 1, 1 )
 skew = Vector2( 0.1, 0 )
-border_width_bottom = 2
+border_width_top = 2
 border_color = Color( 0.65, 0.65, 0.65, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 2
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 2
-expand_margin_bottom = 2.0
+expand_margin_top = 2.0
 
 [sub_resource type="StyleBoxFlat" id=143]
 content_margin_left = 6.0
@@ -546,7 +546,7 @@ LineEdit/colors/cursor_color = Color( 0, 0, 0, 1 )
 LineEdit/colors/font_color = Color( 0, 0, 0, 1 )
 LineEdit/colors/font_color_uneditable = Color( 0, 0, 0, 0.501961 )
 LineEdit/styles/focus = SubResource( 155 )
-LineEdit/styles/normal = SubResource( 109 )
+LineEdit/styles/normal = SubResource( 156 )
 LineEdit/styles/read_only = SubResource( 113 )
 MenuButton/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
 MenuButton/colors/font_color_disabled = Color( 1, 1, 1, 0.3 )
