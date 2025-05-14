@@ -7,6 +7,7 @@ export var buttons_container_path: NodePath
 onready var buttons_container: VBoxContainer = get_node(buttons_container_path)
 
 func _ready():
+	current_subscreen.visible = true
 	toggle_button_appearance(true)
 
 

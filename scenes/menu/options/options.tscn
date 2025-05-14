@@ -180,6 +180,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Label:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 710, 448 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "transition"
@@ -233,16 +245,16 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Label:rect_position")
+tracks/4/path = NodePath("Label:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.2 ),
+"times": PoolRealArray( 0.2, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 709, 404 ), Vector2( 709, 448 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [node name="Options" type="Control"]
@@ -431,7 +443,6 @@ default_subscreen_path = NodePath("General")
 buttons_container_path = NodePath("../BlackBar/MarginContainer/VBoxContainer")
 
 [node name="General" type="CenterContainer" parent="Subscreens"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 27 )
@@ -835,9 +846,9 @@ script = ExtResource( 17 )
 category_paths = [ NodePath("Player1"), NodePath("Player2"), NodePath("Interface"), NodePath("Hotkeys/Gameplay"), NodePath("Hotkeys/Editor") ]
 
 [node name="Player1" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
-margin_left = 14.0
+margin_left = 32.0
 margin_top = 1.0
-margin_right = 530.0
+margin_right = 512.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1011,9 +1022,9 @@ setting_key = "63_wing_cap"
 
 [node name="Player2" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 14.0
+margin_left = 32.0
 margin_top = 1.0
-margin_right = 530.0
+margin_right = 512.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1635,6 +1646,7 @@ script = ExtResource( 19 )
 extend_amount = 2
 
 [node name="Storage" type="Control" parent="Subscreens"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -1739,14 +1751,15 @@ script = ExtResource( 19 )
 script = ExtResource( 24 )
 
 [node name="Label" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -59.0
-margin_top = -28.0
-margin_right = -8.0
-margin_bottom = -4.0
+margin_left = -58.0
+margin_top = 16.0
+margin_right = -7.0
+margin_bottom = 40.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "v0.9.1"
