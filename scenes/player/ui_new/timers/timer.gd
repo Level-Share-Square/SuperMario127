@@ -62,6 +62,11 @@ func _physics_process(delta):
 	if not is_counting and time > 0 && !player.shine_cutscene:
 		cancel_time_over()
 	
+	if (player.reading_text):
+		is_counting = false
+	else:
+		is_counting = true
+	
 	if is_counting:
 		death_sound_timer.paused = false
 		time -= fps_util.PHYSICS_DELTA

@@ -29,6 +29,10 @@ func open(text : String, sign_node : Node2D, character_node : Character):
 	label.bbcode_text = "[center]" + text_replace_util.parse_text(text, character) + "[/center]"
 	close_label.bbcode_text = text_replace_util.parse_text("[center]Press :interactinput: to close[/center]", character_node)
 	open = true
+	
+	var players: Array = get_tree().root.get_node("Player").get_characters()
+	for player in players:
+		player.reading_text = true
 
 func close():
 	Singleton.CurrentLevelData.can_pause = true
@@ -39,6 +43,10 @@ func close():
 	menu_close.play()
 	character = null
 	sign_obj = null
+	
+	var players: Array = get_tree().root.get_node("Player").get_characters()
+	for player in players:
+		player.reading_text = false
 	
 func _physics_process(delta):
 	if !open:
