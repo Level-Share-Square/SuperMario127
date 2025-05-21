@@ -149,6 +149,7 @@ func open_menu(new_char: Character):
 	var players: Array = get_tree().root.get_node("Player").get_characters()
 	for player in players:
 		setup_char(player)
+		player.reading_text = true
 
 
 func menu_closed():
@@ -157,6 +158,7 @@ func menu_closed():
 	for player in players:
 		if is_instance_valid(player) and not player.controllable:
 			restore_control(player)
+			player.reading_text = false
 	reset_read_timer = 0.5
 	has_been_read = true
 	page_cache = 0
