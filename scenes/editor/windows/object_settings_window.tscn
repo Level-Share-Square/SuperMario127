@@ -91,7 +91,6 @@ shader_param/add_margins = true
 shader_param/texture_offset = Vector2( 0, 2 )
 
 [node name="ObjectSettingsWindow" instance=ExtResource( 1 )]
-visible = true
 script = ExtResource( 2 )
 title = "{Object} Settings"
 icon_tooltip = "No object tooltip has been set..."
@@ -122,8 +121,8 @@ margin_right = 103.0
 margin_bottom = 98.0
 
 [node name="PreviewBack" type="PanelContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview/AspectRatioContainer" index="0"]
-margin_left = 3.5
-margin_right = 99.5
+margin_left = 51.5
+margin_right = 51.5
 margin_bottom = 98.0
 size_flags_horizontal = 6
 theme = ExtResource( 3 )
@@ -142,7 +141,7 @@ size = Vector2( 96, 96 )
 size_override_stretch = true
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="Delete" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/PreviewMat/Preview" index="1"]
 margin_top = 102.0

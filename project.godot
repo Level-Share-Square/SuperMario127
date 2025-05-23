@@ -39,11 +39,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Bonked.gd"
 }, {
-"base": "Property",
-"class": "BoolProperty",
-"language": "GDScript",
-"path": "res://classes/property_types/Bool.gd"
-}, {
 "base": "State",
 "class": "BounceState",
 "language": "GDScript",
@@ -134,72 +129,72 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/text/dialogue.gd"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivity",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityAssets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_assets.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityParty",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_party.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivitySecrets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_secrets.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordActivityTimestamps",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_timestamps.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordCore",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_core.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobby",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobbyManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordLobbyTransaction",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_transaction.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordOverlayManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_overlay_manager.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordPartySize",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_party_size.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordResult",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_result.gdns"
 }, {
-"base": "Reference",
+"base": "",
 "class": "DiscordUser",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_user.gdns"
@@ -534,11 +529,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/Powerup.gd"
 }, {
-"base": "Resource",
-"class": "Property",
-"language": "GDScript",
-"path": "res://classes/property_types/Property.gd"
-}, {
 "base": "LiquidBase",
 "class": "Quicksand",
 "language": "GDScript",
@@ -704,6 +694,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/WallSlide.gd"
 }, {
+"base": "Node",
+"class": "WarpHelper",
+"language": "GDScript",
+"path": "res://classes/warp_helper.gd"
+}, {
 "base": "LiquidBase",
 "class": "Water",
 "language": "GDScript",
@@ -796,7 +791,6 @@ _global_script_class_icons={
 "BaseCard": "",
 "Block": "",
 "BonkedState": "",
-"BoolProperty": "",
 "BounceState": "",
 "BusGroup": "",
 "ButtSlideState": "",
@@ -895,7 +889,6 @@ _global_script_class_icons={
 "PlaceableTile": "",
 "PlayerSelector": "",
 "Powerup": "",
-"Property": "",
 "Quicksand": "",
 "QuicksandHopState": "",
 "QuicksandIdleState": "",
@@ -929,6 +922,7 @@ _global_script_class_icons={
 "VanishPowerup": "",
 "WallJumpState": "",
 "WallSlideState": "",
+"WarpHelper": "",
 "Water": "",
 "WingMarioState": "",
 "WingPowerup": "",
@@ -1000,11 +994,6 @@ enabled=PoolStringArray( "res://addons/discord_game_sdk/plugin.cfg" )
 
 [global]
 
-physics=false
-change=false
-audio=false
-transforms=false
-fps=true
 "Game Version"="0.9.2"
 
 [importer_defaults]

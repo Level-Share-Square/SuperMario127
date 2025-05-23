@@ -20,12 +20,15 @@ frame_3/texture = ExtResource( 5 )
 frame_3/delay_sec = 0.0
 
 [sub_resource type="CircleShape2D" id=4]
+resource_local_to_scene = true
 radius = 7.0
 
 [sub_resource type="CircleShape2D" id=1]
+resource_local_to_scene = true
 radius = 20.0
 
 [sub_resource type="CircleShape2D" id=2]
+resource_local_to_scene = true
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 9.0
@@ -39,6 +42,7 @@ collision_mask = 17
 script = ExtResource( 1 )
 
 [node name="Particles" type="AnimatedSprite" parent="KinematicBody2D"]
+visible = false
 frames = ExtResource( 2 )
 animation = "collect"
 frame = 5
@@ -46,7 +50,7 @@ frame = 5
 [node name="Coin" type="Sprite" parent="KinematicBody2D"]
 texture = SubResource( 5 )
 
-[node name="KinematicShape" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 shape = SubResource( 4 )
 disabled = true
 
@@ -56,7 +60,6 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Area2D"]
 shape = SubResource( 1 )
-disabled = true
 
 [node name="WaterDetector" type="Area2D" parent="KinematicBody2D"]
 visible = false

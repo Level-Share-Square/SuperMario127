@@ -1,8 +1,8 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=1]
 [ext_resource path="res://assets/misc/editor_theme.tres" type="Theme" id=2]
-[ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/fonts/DelfinoFont16.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/misc/gear.svg" type="Texture" id=5]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=6]
@@ -96,42 +96,36 @@ shader_param/inside = false
 shader_param/add_margins = true
 shader_param/texture_offset = Vector2( 0, 2 )
 
-[sub_resource type="DynamicFont" id=3]
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 3 )
-
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=12]
 colors = PoolColorArray( 1, 0, 0, 1, 0, 1, 0.367188, 1 )
 
 [sub_resource type="GradientTexture2D" id=5]
-gradient = SubResource( 4 )
+gradient = SubResource( 12 )
 fill_to = Vector2( 1, 1 )
 
 [sub_resource type="GradientTexture2D" id=6]
-gradient = SubResource( 4 )
+gradient = SubResource( 12 )
 width = 80
 height = 48
 fill_to = Vector2( 1, 1 )
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.141176, 0.223529, 0.541176, 1 )
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=14]
 size = 25
 outline_size = 1
 font_data = ExtResource( 10 )
 
 [sub_resource type="Theme" id=11]
-default_font = SubResource( 12 )
-Button/styles/normal = SubResource( 10 )
+default_font = SubResource( 14 )
+Button/styles/normal = SubResource( 13 )
 
 [node name="EditorWindow" type="Popup"]
-visible = true
 margin_right = 419.0
 margin_bottom = 220.0
 theme = ExtResource( 2 )
@@ -142,7 +136,7 @@ drag_control_path = NodePath("WindowBack/WindowMat/HeaderContentDivider/HeaderMa
 close_button_path = NodePath("WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox/WindowClose")
 title = "Editor Settings"
 icon = ExtResource( 5 )
-icon_tooltip = "I have no tip to tool for you..."
+icon_tooltip = "Change your level's"
 window_size = Vector2( 419, 220 )
 
 [node name="WindowBack" type="PanelContainer" parent="."]
@@ -208,7 +202,7 @@ mouse_filter = 2
 
 [node name="Title" type="RichTextLabel" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
 margin_left = 25.0
-margin_right = 243.0
+margin_right = 264.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 128, 0 )
 mouse_filter = 2
@@ -221,16 +215,16 @@ bbcode_text = "Editor Settings"
 text = "Editor Settings"
 fit_content_height = true
 
-[node name="WindowClose2" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
-margin_left = 244.0
+[node name="GameSettings" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/HeaderMat/HeaderBox"]
+margin_left = 265.0
 margin_right = 374.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 21, 21 )
 hint_tooltip = "Close"
 theme = ExtResource( 2 )
 theme_type_variation = "ButtonPurple"
-custom_fonts/font = SubResource( 3 )
-text = "Player Settings"
+custom_fonts/font = ExtResource( 3 )
+text = "Game Settings"
 icon_align = 1
 script = ExtResource( 1 )
 
@@ -249,7 +243,7 @@ rect_min_size = Vector2( 21, 21 )
 hint_tooltip = "Close"
 theme = ExtResource( 2 )
 theme_type_variation = "ButtonRed"
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = ExtResource( 3 )
 text = "X"
 icon_align = 1
 script = ExtResource( 1 )
@@ -286,7 +280,6 @@ all_tabs_in_front = true
 use_hidden_tabs_for_min_size = true
 
 [node name="Level" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat2/Tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -497,6 +490,7 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "≡"
 
 [node name="Music" type="ScrollContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat2/Tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0

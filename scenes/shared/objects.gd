@@ -43,7 +43,7 @@ func create_object(object, add_to_data):
 		object_node.shared = get_node(shared_path)
 		object_node.palette = object.palette
 		
-		print(object_node.level_object)
+#		print(object_node.level_object)
 		
 		if not add_to_data:
 			if object_node.layer != object_node.default_layer:

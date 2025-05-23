@@ -13,12 +13,14 @@ var rainbow := false
 func _set_properties():
 	savable_properties = ["color", "rainbow"]
 	editable_properties = ["color", "rainbow"]
-	
+
+
 func _set_property_values():
 	set_property("color", color, 1)
 	set_property("rainbow", rainbow, true)
+
+
 func _ready():
-	
 	collision_shape.disabled = !enabled
 	preview_position = custom_preview_position
 	if is_preview:
@@ -29,7 +31,8 @@ func _ready():
 	
 	self.show_above_layer = true
 	update_layer()
-		
+
+
 func _process(delta):
 	if color == Color(1, 0, 0):
 		$Color.visible = false

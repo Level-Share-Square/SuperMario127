@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=51 format=2]
+[gd_resource type="Theme" load_steps=52 format=2]
 
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -232,6 +232,23 @@ corner_radius_bottom_left = 2
 color = Color( 1, 1, 1, 0.470588 )
 grow_begin = 0.0
 grow_end = 0.0
+
+[sub_resource type="StyleBoxFlat" id=157]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+bg_color = Color( 0.329412, 0.203922, 0.117647, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.478431, 0.270588, 0.133333, 1 )
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 
 [sub_resource type="StyleBoxEmpty" id=155]
 
@@ -542,6 +559,8 @@ HScrollBar/styles/grabber_highlight = SubResource( 149 )
 HScrollBar/styles/grabber_pressed = SubResource( 150 )
 HScrollBar/styles/scroll = SubResource( 148 )
 HSeparator/styles/separator = SubResource( 96 )
+ImageBorder/base_type = "PanelContainer"
+ImageBorder/styles/panel = SubResource( 157 )
 LineEdit/colors/cursor_color = Color( 0, 0, 0, 1 )
 LineEdit/colors/font_color = Color( 0, 0, 0, 1 )
 LineEdit/colors/font_color_uneditable = Color( 0, 0, 0, 0.501961 )

@@ -58,7 +58,7 @@ func _ready():
 		color.a = 0.5
 		modulate = color
 	
-	print("From object, ", level_object)
+#	print("From object, ", level_object)
 	
 	if layer != default_layer and lock_layer:
 		set_property("layer", default_layer, true)

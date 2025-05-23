@@ -14,7 +14,7 @@ var spawned_enemies: Array
 # enemies should be made invisible but not the spawner,, cuz of projectiles
 var is_visible: bool = true
 
-export var enemy_scene_path: String = "res://scenes/actors/objects/enemy/enemy_base.tscn"
+export(String, FILE, "*.tscn") var enemy_scene_path: String = "res://scenes/actors/objects/enemy/enemy_base.tscn"
 
 export var respawn_time: float = 15
 export(RespawnMode) var respawn_mode
