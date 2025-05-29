@@ -9,6 +9,7 @@ onready var crusher: KinematicBody2D = $Crusher
 onready var sprite: AnimatedSprite = $Body/AnimatedSprite
 onready var urgh_sound: AudioStreamPlayer2D = $Body/URGH
 onready var crash_sound: AudioStreamPlayer2D = $Body/Crash
+onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 export var fall_accel: float = 1
 export var fall_speed: float = 7
@@ -49,7 +50,6 @@ func set_state(new_state: int):
 		ThwompState.Idle:
 			sprite.play("idle")
 		ThwompState.Falling:
-			sprite.speed_scale = fall_accel
 			sprite.play("urgh")
 		ThwompState.Grounded:
 			timer.start()

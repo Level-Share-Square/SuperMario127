@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/mario.gd"
 }, {
+"base": "Area2D",
+"class": "CharacterHitbox",
+"language": "GDScript",
+"path": "res://scenes/actors/mario/enemy_collision_area.gd"
+}, {
 "base": "Resource",
 "class": "ChatMessage",
 "language": "GDScript",
@@ -233,6 +238,11 @@ _global_script_classes=[ {
 "class": "EnemyDamage",
 "language": "GDScript",
 "path": "res://scenes/actors/objects/enemy/enemy_damage.gd"
+}, {
+"base": "EnemyState",
+"class": "EnemyPatrolState",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/enemy/states/patrol_state.gd"
 }, {
 "base": "GameObject",
 "class": "EnemySpawnerBase",
@@ -799,6 +809,7 @@ _global_script_class_icons={
 "CameraCutscene": "",
 "CameraStopper": "",
 "Character": "",
+"CharacterHitbox": "",
 "ChatMessage": "",
 "CircleArea": "",
 "CloudNozzle": "",
@@ -830,6 +841,7 @@ _global_script_class_icons={
 "EditorWindow": "",
 "EnemyBase": "",
 "EnemyDamage": "",
+"EnemyPatrolState": "",
 "EnemySpawnerBase": "",
 "EnemyState": "",
 "EnemyStopState": "",

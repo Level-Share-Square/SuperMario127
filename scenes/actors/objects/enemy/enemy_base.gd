@@ -94,8 +94,9 @@ func _physics_process(delta):
 	
 	# gravity and floating in liquids
 	if not float_in_liquids or liquids_detector.get_overlapping_areas().size() <= 0:
-		velocity.y += gravity * gravity_multiplier * delta * 60
-		velocity.y = min(velocity.y, gravity * max_gravity_factor)
+		if not is_on_floor():
+			velocity.y += gravity * gravity_multiplier * delta * 60
+			velocity.y = min(velocity.y, gravity * max_gravity_factor)
 	else:
 		velocity.y = move_toward(velocity.y, -float_speed, float_accel * delta * 60)
 		working_snap_vector = Vector2.ZERO
@@ -110,14 +111,14 @@ func _physics_process(delta):
 			else:
 				add_collision_exception_with(body)
 	
-	# counteract slope slowdown/speedup
-	if is_on_floor() and not is_zero_approx(floor_normal.y):
-		# anti-slowdown
-		if sign(floor_normal.x) != sign(working_velocity.x):
-			working_velocity.x /= abs(floor_normal.y)
-		# anti-speedup
-		else:
-			working_velocity.x *= abs(floor_normal.y)
+#	# counteract slope slowdown/speedup
+#	if is_on_floor() and not is_zero_approx(floor_normal.y):
+#		# anti-slowdown
+#		if sign(floor_normal.x) != sign(working_velocity.x):
+#			working_velocity.x /= abs(floor_normal.y)
+#		# anti-speedup
+#		else:
+#			working_velocity.x *= abs(floor_normal.y)
 	
 	velocity.y = move_and_slide_with_snap(working_velocity, 
 		working_snap_vector if velocity.y >= 0 else Vector2.ZERO, 

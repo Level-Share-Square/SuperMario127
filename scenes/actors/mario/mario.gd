@@ -1,6 +1,6 @@
+class_name Character
 extends KinematicBody2D
 
-class_name Character
 
 signal state_changed
 signal health_changed(new_health, new_shards)
@@ -45,6 +45,7 @@ onready var left_check : RayCast2D = $LeftCheck
 onready var right_check : RayCast2D = $RightCheck
 onready var slope_stop_check : RayCast2D = $SlopeStopCheck
 onready var player_collision : Area2D = $PlayerCollision
+onready var enemy_collision: Area2D = $EnemyCollision
 onready var water_detector : Area2D = $WaterDetector
 onready var lava_detector : Area2D = $LavaDetector
 onready var liquid_detector : Area2D = $LiquidDetector

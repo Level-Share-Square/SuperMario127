@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/recolorable.png-f7948fa7617fe1e7e4716aef23a17b5a.stex"
+path="res://.import/goomba.png-ec39d3f3bf3ad40650b90b7c26d845de.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/goomba/recolorable.png"
-dest_files=[ "res://.import/recolorable.png-f7948fa7617fe1e7e4716aef23a17b5a.stex" ]
+source_file="res://scenes/actors/objects/goomba/animations/goomba.png"
+dest_files=[ "res://.import/goomba.png-ec39d3f3bf3ad40650b90b7c26d845de.stex" ]
 
 [params]
 

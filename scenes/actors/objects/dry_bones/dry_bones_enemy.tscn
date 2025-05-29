@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/enemy/states/patrol_state.gd" type="Script" id=2]
@@ -28,6 +28,31 @@
 [ext_resource path="res://scenes/actors/objects/dry_bones/sounds/3W_SeEmKaronRecoverSignLv.wav" type="AudioStream" id=26]
 [ext_resource path="res://scenes/actors/objects/dry_bones/regenerate_timer.gd" type="Script" id=27]
 [ext_resource path="res://scenes/actors/objects/dry_bones/states/regenerate_state.gd" type="Script" id=28]
+
+[sub_resource type="CapsuleShape2D" id=40]
+resource_local_to_scene = true
+radius = 8.0
+height = 16.0
+
+[sub_resource type="RectangleShape2D" id=41]
+resource_local_to_scene = true
+extents = Vector2( 8, 16 )
+
+[sub_resource type="RectangleShape2D" id=42]
+resource_local_to_scene = true
+extents = Vector2( 100, 100 )
+
+[sub_resource type="CircleShape2D" id=43]
+resource_local_to_scene = true
+radius = 3.0
+
+[sub_resource type="RectangleShape2D" id=44]
+resource_local_to_scene = true
+extents = Vector2( 13, 2 )
+
+[sub_resource type="RectangleShape2D" id=45]
+resource_local_to_scene = true
+extents = Vector2( 6, 8 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 6 )
@@ -177,6 +202,9 @@ animations = [ {
 "name": "walk",
 "speed": 9.0
 } ]
+
+[sub_resource type="CircleShape2D" id=46]
+resource_local_to_scene = true
 
 [sub_resource type="Animation" id=28]
 length = 0.001
@@ -729,6 +757,16 @@ is_stationary = false
 toss_wait = 5.0
 regenerate_time = 10.0
 
+[node name="TerrainCollider" parent="." index="0"]
+visible = false
+shape = SubResource( 40 )
+
+[node name="CollisionShape2D" parent="LiquidsDetector" index="0"]
+shape = SubResource( 41 )
+
+[node name="CollisionShape2D" parent="PlatformDetector" index="0"]
+shape = SubResource( 42 )
+
 [node name="IdleState" type="Node2D" parent="States" index="0"]
 script = ExtResource( 19 )
 
@@ -771,7 +809,17 @@ script = ExtResource( 28 )
 [node name="Damage" parent="." index="4"]
 script = ExtResource( 7 )
 
+[node name="CollisionShape2D" parent="Damage/Crush" index="0"]
+shape = SubResource( 43 )
+
+[node name="CollisionShape2D" parent="Damage/Stomp" index="0"]
+shape = SubResource( 44 )
+
+[node name="CollisionShape2D" parent="Damage/Attack" index="0"]
+shape = SubResource( 45 )
+
 [node name="AnimatedSprite" parent="." index="5"]
+position = Vector2( 0, -19 )
 frames = SubResource( 14 )
 animation = "idle"
 playing = true
@@ -779,6 +827,9 @@ script = ExtResource( 9 )
 
 [node name="DialogueDetector" parent="AnimatedSprite" index="0"]
 enabled = true
+
+[node name="CollisionShape2D" parent="AnimatedSprite/DialogueDetector" index="0"]
+shape = SubResource( 46 )
 
 [node name="VisibilityEnabler2D" parent="." index="6"]
 pause_particles = false
@@ -851,14 +902,16 @@ stream = ExtResource( 21 )
 bus = "Sounds"
 
 [node name="Sound2" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
-stream = ExtResource( 23 )
+stream = ExtResource( 22 )
 bus = "Sounds"
 
 [node name="Sound3" type="AudioStreamPlayer2D" parent="Sounds" index="2"]
-stream = ExtResource( 26 )
+stream = ExtResource( 25 )
+volume_db = -8.0
 bus = "Sounds"
 
 [connection signal="state_changed" from="." to="Timer" method="state_changed"]
 [connection signal="state_changed" from="." to="RegenerateTimer" method="state_changed"]
+[connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]
 [connection signal="timeout" from="Timer" to="." method="set_state_by_name" binds= [ "TossState" ]]
 [connection signal="timeout" from="RegenerateTimer" to="." method="set_state_by_name" binds= [ "RegenerateState" ]]

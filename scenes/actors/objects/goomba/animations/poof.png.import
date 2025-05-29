@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/goomba.png-fbe73d9d4475108dc9cfbbc732e8e464.stex"
+path="res://.import/poof.png-a9d947c9390caba915a1715b521c8be6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/objects/goomba/goomba.png"
-dest_files=[ "res://.import/goomba.png-fbe73d9d4475108dc9cfbbc732e8e464.stex" ]
+source_file="res://scenes/actors/objects/goomba/animations/poof.png"
+dest_files=[ "res://.import/poof.png-a9d947c9390caba915a1715b521c8be6.stex" ]
 
 [params]
 

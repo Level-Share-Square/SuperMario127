@@ -1,0 +1,487 @@
+[gd_scene load_steps=42 format=2]
+
+[ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/actors/objects/goomba/goomba_enemy.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/enemy/states/wander_idle_state.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/goomba/animations/goomba.png" type="Texture" id=4]
+[ext_resource path="res://scenes/actors/objects/enemy/states/wander_state.gd" type="Script" id=5]
+[ext_resource path="res://scenes/actors/objects/goomba/damage.gd" type="Script" id=6]
+[ext_resource path="res://scenes/actors/objects/goomba/states/air_state.gd" type="Script" id=7]
+[ext_resource path="res://scenes/actors/objects/goomba/states/die_state.gd" type="Script" id=8]
+[ext_resource path="res://scenes/actors/objects/goomba/states/knockback_state.gd" type="Script" id=9]
+[ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=10]
+[ext_resource path="res://scenes/actors/objects/goomba/recolorable_frames.tres" type="SpriteFrames" id=11]
+[ext_resource path="res://scenes/actors/objects/goomba/sounds/poof.wav" type="AudioStream" id=12]
+[ext_resource path="res://scenes/actors/objects/goomba/sounds/stomp.wav" type="AudioStream" id=13]
+[ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=14]
+
+[sub_resource type="CapsuleShape2D" id=36]
+radius = 7.0
+height = 4.0
+
+[sub_resource type="RectangleShape2D" id=57]
+resource_local_to_scene = true
+extents = Vector2( 7, 9.5 )
+
+[sub_resource type="RectangleShape2D" id=52]
+resource_local_to_scene = true
+extents = Vector2( 100, 100 )
+
+[sub_resource type="CircleShape2D" id=53]
+resource_local_to_scene = true
+radius = 3.0
+
+[sub_resource type="RectangleShape2D" id=54]
+extents = Vector2( 12, 2 )
+
+[sub_resource type="RectangleShape2D" id=59]
+resource_local_to_scene = true
+extents = Vector2( 7, 6 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=39]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=41]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 96, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 4 )
+region = Rect2( 160, 32, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=15]
+animations = [ {
+"frames": [ SubResource( 37 ) ],
+"loop": false,
+"name": "fall",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ) ],
+"loop": true,
+"name": "idle",
+"speed": 6.0
+}, {
+"frames": [ SubResource( 42 ) ],
+"loop": false,
+"name": "jump",
+"speed": 0.0
+}, {
+"frames": [ SubResource( 43 ) ],
+"loop": true,
+"name": "stomped",
+"speed": 6.0
+}, {
+"frames": [ SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ) ],
+"loop": true,
+"name": "walk",
+"speed": 12.0
+} ]
+
+[sub_resource type="CircleShape2D" id=56]
+resource_local_to_scene = true
+
+[sub_resource type="Animation" id=61]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -7 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Poof:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=58]
+resource_name = "squish"
+length = 1.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -14 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05, 0.06, 0.13, 0.18, 0.2, 0.29 ),
+"transitions": PoolRealArray( 0.378929, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 0.24 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 0.5 ), Vector2( 1, 0.8 ), Vector2( 0.32, 1.2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.05, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ "idle", "stomped", "idle" ]
+}
+tracks/4/type = "audio"
+tracks/4/path = NodePath("Sounds/Stomp")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 13 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Poof:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.45 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 1.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AnimatedSprite:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.55 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/8/type = "audio"
+tracks/8/path = NodePath("Sounds/Poof")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 12 )
+} ],
+"times": PoolRealArray( 0.45 )
+}
+
+[sub_resource type="CanvasItemMaterial" id=60]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=34]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=35]
+gradient = SubResource( 34 )
+
+[sub_resource type="ParticlesMaterial" id=50]
+emission_shape = 2
+emission_box_extents = Vector3( 8, 8, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.75
+color_ramp = SubResource( 35 )
+anim_speed = 0.8
+
+[node name="GoombaEnemy" instance=ExtResource( 1 )]
+collision_mask = 17
+script = ExtResource( 2 )
+max_gravity_factor = 30.0
+cur_state = "IdleState"
+color = Color( 1, 0, 0, 1 )
+
+[node name="TerrainCollider" parent="." index="0"]
+position = Vector2( 0, -9 )
+shape = SubResource( 36 )
+
+[node name="CollisionShape2D" parent="LiquidsDetector" index="0"]
+position = Vector2( 0, -9.5 )
+shape = SubResource( 57 )
+
+[node name="PlatformDetector" parent="." index="2"]
+visible = false
+
+[node name="CollisionShape2D" parent="PlatformDetector" index="0"]
+shape = SubResource( 52 )
+
+[node name="IdleState" type="Node2D" parent="States" index="0"]
+script = ExtResource( 3 )
+friction = 2.5
+min_idle_time = 1.0
+max_idle_time = 3.0
+
+[node name="WanderState" type="Node2D" parent="States" index="1"]
+script = ExtResource( 5 )
+move_speed = 16.0
+ledge_turning = true
+min_wander_time = 2.0
+max_wander_time = 4.0
+
+[node name="Ledge" type="RayCast2D" parent="States/WanderState" index="0"]
+position = Vector2( -12, -8 )
+cast_to = Vector2( 0, 64 )
+collision_mask = 17
+
+[node name="Wall" type="RayCast2D" parent="States/WanderState" index="1"]
+position = Vector2( 0, -10 )
+cast_to = Vector2( -12, 0 )
+collision_mask = 21
+
+[node name="AirState" type="Node2D" parent="States" index="2"]
+script = ExtResource( 7 )
+
+[node name="KnockbackState" type="Node2D" parent="States" index="3"]
+script = ExtResource( 9 )
+can_attack = false
+can_be_hurt = false
+
+[node name="DieState" type="Node2D" parent="States" index="4"]
+script = ExtResource( 8 )
+can_attack = false
+can_be_hurt = false
+
+[node name="Damage" parent="." index="4"]
+position = Vector2( 0, 1 )
+script = ExtResource( 6 )
+bounce_type = 1
+
+[node name="Crush" parent="Damage" index="0"]
+position = Vector2( 0, -1 )
+
+[node name="CollisionShape2D" parent="Damage/Crush" index="0"]
+position = Vector2( 0, -10 )
+shape = SubResource( 53 )
+
+[node name="CollisionShape2D" parent="Damage/Stomp" index="0"]
+position = Vector2( 0, -20 )
+shape = SubResource( 54 )
+
+[node name="CollisionShape2D" parent="Damage/Attack" index="0"]
+position = Vector2( 0, -7 )
+shape = SubResource( 59 )
+
+[node name="AnimatedSprite" parent="." index="5"]
+position = Vector2( 0, -9 )
+rotation = -6.28319
+frames = SubResource( 15 )
+animation = "idle"
+playing = true
+offset = Vector2( 0, -7 )
+
+[node name="RecolorSprite" type="AnimatedSprite" parent="AnimatedSprite" index="0"]
+visible = false
+self_modulate = Color( 1, 0.4, 0.333333, 1 )
+frames = ExtResource( 11 )
+animation = "idle"
+offset = Vector2( 0, -14 )
+script = ExtResource( 10 )
+
+[node name="DialogueDetector" parent="AnimatedSprite" index="1"]
+visible = false
+
+[node name="CollisionShape2D" parent="AnimatedSprite/DialogueDetector" index="0"]
+position = Vector2( 0, 6 )
+shape = SubResource( 56 )
+
+[node name="VisibilityEnabler2D" parent="." index="6"]
+visible = false
+position = Vector2( 0, -20 )
+
+[node name="IdleTimer" type="Timer" parent="." index="7"]
+unique_name_in_owner = true
+
+[node name="WanderTimer" type="Timer" parent="." index="8"]
+unique_name_in_owner = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+unique_name_in_owner = true
+anims/RESET = SubResource( 61 )
+anims/squish = SubResource( 58 )
+
+[node name="Poof" type="CPUParticles2D" parent="." index="10"]
+material = SubResource( 60 )
+position = Vector2( -2.84217e-14, -9 )
+emitting = false
+amount = 4
+one_shot = true
+explosiveness = 1.0
+draw_order = 1
+texture = ExtResource( 14 )
+emission_shape = 1
+emission_sphere_radius = 5.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 20.0
+initial_velocity_random = 1.0
+anim_speed = 2.0
+
+[node name="Stomp" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
+stream = ExtResource( 13 )
+
+[node name="Poof" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+stream = ExtResource( 12 )
+
+[node name="SpawnParticles" parent="." index="13"]
+position = Vector2( 0, -9 )
+process_material = SubResource( 50 )
+
+[connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]
+[connection signal="timeout" from="IdleTimer" to="." method="set_state_by_name" binds= [ "WanderState" ]]
+[connection signal="timeout" from="WanderTimer" to="." method="set_state_by_name" binds= [ "IdleState" ]]

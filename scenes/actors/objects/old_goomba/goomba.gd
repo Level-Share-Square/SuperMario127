@@ -1,22 +1,22 @@
 extends GameObject
 
-onready  var sprite:AnimatedSprite = $Goomba / Sprite
-onready  var recolorable:AnimatedSprite = $Goomba / Recolorable
+onready  var sprite:AnimatedSprite = $Goomba/Sprite
+onready  var recolorable:AnimatedSprite = $Goomba/Recolorable
 onready  var kinematic_body:KinematicBody2D = $Goomba
-onready  var attack_area:Area2D = $Goomba / AttackArea
-onready  var stomp_area:Area2D = $Goomba / StompArea
-onready  var player_detector:Area2D = $Goomba / PlayerDetector
-onready  var platform_detector:Area2D = $Goomba / PlatformDetector
-onready  var wall_check:RayCast2D = $Goomba / WallCheck
-onready  var wall_vacant_check:RayCast2D = $Goomba / WallVacantCheck
-onready  var pit_check:RayCast2D = $Goomba / PitCheck
-onready  var particles:Particles2D = $Goomba / Poof
-onready  var stomp_sound:AudioStreamPlayer2D = $Goomba / Stomp
-onready  var poof_sound:AudioStreamPlayer2D = $Goomba / Disappear
-onready  var hit_sound:AudioStreamPlayer2D = $Goomba / Hit
-onready  var anim_player:AnimationPlayer = $Goomba / AnimationPlayer
-onready  var bottom_pos:Node2D = $Goomba / BottomPos
-onready  var water_detector:Node2D = $Goomba / WaterDetector
+onready  var attack_area:Area2D = $Goomba/AttackArea
+onready  var stomp_area:Area2D = $Goomba/StompArea
+onready  var player_detector:Area2D = $Goomba/PlayerDetector
+onready  var platform_detector:Area2D = $Goomba/PlatformDetector
+onready  var wall_check:RayCast2D = $Goomba/WallCheck
+onready  var wall_vacant_check:RayCast2D = $Goomba/WallVacantCheck
+onready  var pit_check:RayCast2D = $Goomba/PitCheck
+onready  var particles:Particles2D = $Goomba/Poof
+onready  var stomp_sound:AudioStreamPlayer2D = $Goomba/Stomp
+onready  var poof_sound:AudioStreamPlayer2D = $Goomba/Disappear
+onready  var hit_sound:AudioStreamPlayer2D = $Goomba/Hit
+onready  var anim_player:AnimationPlayer = $Goomba/AnimationPlayer
+onready  var bottom_pos:Node2D = $Goomba/BottomPos
+onready  var water_detector:Node2D = $Goomba/WaterDetector
 
 onready  var visibility_enabler:Node2D = $VisibilityEnabler2D
 onready  var raycasts: = [wall_check, wall_vacant_check, pit_check]

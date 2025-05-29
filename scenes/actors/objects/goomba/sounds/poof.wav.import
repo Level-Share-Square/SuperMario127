@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/poof.wav-5dcd3af6b3f94f017c8bf352a52ed232.sample"
+path="res://.import/poof.wav-9f50dc27b25b419b779ba87573c76789.sample"
 
 [deps]
 
-source_file="res://scenes/actors/objects/goomba/poof.wav"
-dest_files=[ "res://.import/poof.wav-5dcd3af6b3f94f017c8bf352a52ed232.sample" ]
+source_file="res://scenes/actors/objects/goomba/sounds/poof.wav"
+dest_files=[ "res://.import/poof.wav-9f50dc27b25b419b779ba87573c76789.sample" ]
 
 [params]
 

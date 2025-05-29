@@ -1,4 +1,4 @@
-[gd_scene load_steps=189 format=2]
+[gd_scene load_steps=192 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -83,6 +83,7 @@
 [ext_resource path="res://scenes/actors/mario/states/QuicksandHop.gd" type="Script" id=81]
 [ext_resource path="res://scenes/actors/mario/states/QuicksandIdle.gd" type="Script" id=82]
 [ext_resource path="res://scenes/actors/objects/quicksand/quicksand_particles.tscn" type="PackedScene" id=83]
+[ext_resource path="res://scenes/actors/mario/enemy_collision_area.gd" type="Script" id=84]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 4 )
@@ -243,7 +244,7 @@ color_ramp = SubResource( 86 )
 hue_variation = 1.0
 
 [sub_resource type="RectangleShape2D" id=104]
-extents = Vector2( 4.5, 15 )
+extents = Vector2( 4.5, 14.5 )
 
 [sub_resource type="RectangleShape2D" id=105]
 extents = Vector2( 2.5, 10 )
@@ -259,6 +260,12 @@ shader = SubResource( 25 )
 [sub_resource type="RectangleShape2D" id=27]
 extents = Vector2( 8.5, 20 )
 
+[sub_resource type="RectangleShape2D" id=110]
+extents = Vector2( 6, 10.5 )
+
+[sub_resource type="RectangleShape2D" id=111]
+extents = Vector2( 6, 4 )
+
 [sub_resource type="RectangleShape2D" id=95]
 extents = Vector2( 100, 100 )
 
@@ -269,7 +276,7 @@ extents = Vector2( 8.5, 8.5 )
 extents = Vector2( 6.5, 17.5 )
 
 [sub_resource type="RectangleShape2D" id=103]
-extents = Vector2( 7, 17.5 )
+extents = Vector2( 7, 18 )
 
 [sub_resource type="RectangleShape2D" id=109]
 extents = Vector2( 7, 8 )
@@ -1530,7 +1537,6 @@ position = Vector2( -1, 16 )
 polygon = PoolVector2Array( -3, -6, 0, 1, 2, 1, 5, -6 )
 
 [node name="LeftCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, 8 )
 rotation = -1.5708
 shape = SubResource( 6 )
@@ -1538,7 +1544,6 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="RightCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, 8 )
 rotation = 1.5708
 shape = SubResource( 6 )
@@ -1559,6 +1564,7 @@ shape = SubResource( 108 )
 disabled = true
 
 [node name="CrushedCollisionDive" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, 7 )
 z_index = 2
 shape = SubResource( 108 )
@@ -1684,7 +1690,7 @@ collision_layer = 0
 collision_mask = 65537
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="IsCrushedDetector"]
-position = Vector2( 0.5, 8 )
+position = Vector2( 0.5, 8.5 )
 shape = SubResource( 104 )
 
 [node name="CrushPainfulDetector" type="Area2D" parent="."]
@@ -1888,6 +1894,26 @@ modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
 position = Vector2( 0.5, 4 )
 shape = SubResource( 27 )
 
+[node name="EnemyCollision" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource( 84 )
+character_path = NodePath("..")
+normal_shape = NodePath("Normal")
+dive_shape = NodePath("Dive")
+
+[node name="Normal" type="CollisionShape2D" parent="EnemyCollision"]
+modulate = Color( 0.780392, 1, 0, 1 )
+position = Vector2( 0, 13.5 )
+shape = SubResource( 110 )
+
+[node name="Dive" type="CollisionShape2D" parent="EnemyCollision"]
+modulate = Color( 0.780392, 1, 0, 1 )
+position = Vector2( 0, 7 )
+shape = SubResource( 111 )
+disabled = true
+
 [node name="PlatformDetector" type="Area2D" parent="."]
 visible = false
 collision_layer = 2
@@ -1919,12 +1945,13 @@ position = Vector2( 0.5, 5 )
 shape = SubResource( 30 )
 
 [node name="LiquidDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 32768
 
 [node name="BaseCollision" type="CollisionShape2D" parent="LiquidDetector"]
 modulate = Color( 0.839216, 0.345098, 0.345098, 1 )
-position = Vector2( 0, 5.5 )
+position = Vector2( 0, 6 )
 shape = SubResource( 103 )
 
 [node name="DiveCollision" type="CollisionShape2D" parent="LiquidDetector"]
@@ -1996,6 +2023,7 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="GroundCheck" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( 0.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 26 )

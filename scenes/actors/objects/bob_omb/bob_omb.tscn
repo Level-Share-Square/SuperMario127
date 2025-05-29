@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/actors/objects/bob_omb/fuse2.wav" type="AudioStream" id=5]
 [ext_resource path="res://scenes/actors/objects/bob_omb/explosion.png" type="Texture" id=6]
 [ext_resource path="res://scenes/actors/objects/bob_omb/explosion_sound.wav" type="AudioStream" id=7]
-[ext_resource path="res://scenes/actors/objects/goomba/body.gd" type="Script" id=8]
+[ext_resource path="res://scenes/actors/objects/old_goomba/body.gd" type="Script" id=8]
 
 [sub_resource type="RayShape2D" id=1]
 length = 9.0

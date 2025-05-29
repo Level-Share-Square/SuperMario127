@@ -6,25 +6,32 @@
 [ext_resource path="res://scenes/actors/objects/enemy/dust.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=37]
+resource_local_to_scene = true
 radius = 8.0
 height = 16.0
 
 [sub_resource type="RectangleShape2D" id=11]
+resource_local_to_scene = true
 extents = Vector2( 8, 16 )
 
 [sub_resource type="RectangleShape2D" id=38]
+resource_local_to_scene = true
 extents = Vector2( 100, 100 )
 
 [sub_resource type="CircleShape2D" id=14]
+resource_local_to_scene = true
 radius = 3.0
 
 [sub_resource type="RectangleShape2D" id=13]
+resource_local_to_scene = true
 extents = Vector2( 13, 2 )
 
 [sub_resource type="RectangleShape2D" id=12]
+resource_local_to_scene = true
 extents = Vector2( 6, 8 )
 
 [sub_resource type="CircleShape2D" id=15]
+resource_local_to_scene = true
 
 [sub_resource type="CanvasItemMaterial" id=33]
 particles_animation = true
@@ -147,7 +154,7 @@ process_material = SubResource( 36 )
 texture = ExtResource( 4 )
 
 [connection signal="body_entered" from="Damage/Crush" to="Damage" method="crush_body_entered"]
-[connection signal="body_entered" from="Damage/Stomp" to="Damage" method="stomp_body_entered"]
+[connection signal="area_entered" from="Damage/Stomp" to="Damage" method="stomp_area_entered"]
 [connection signal="area_entered" from="Damage/Attack" to="Damage" method="attack_area_entered"]
 [connection signal="body_entered" from="Damage/Attack" to="Damage" method="attack_body_entered"]
 [connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]
