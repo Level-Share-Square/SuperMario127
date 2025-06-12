@@ -37,16 +37,24 @@ func text_entered(text):
 	var re = RegEx.new()
 	
 	re.compile("(^https:\\/\\/[^\\/]*)(.*)")
+	var file_type: String = music_title.text.substr(music_title.text.find_last("."))
 
-	if not re.search_all(music_title.text) or !music_title.text.ends_with(".ogg"):
+	if not re.search_all(music_title.text) or !is_music_file(file_type):
 		music_title.text = "Invalid URL"
 	else:
+		
 		re.compile("(\\d+(?:\\.\\d+)?)")
 		if not re.search(music_note.text):
 			music_note.text = "0.00"
 		Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.music = "LP" + music_note.text + "=" + music_title.text
-		Singleton.Music.reset_custom_song()
+		Singleton.Music.reset_custom_song(file_type)
 		update_display()
+
+func is_music_file(file_type: String) -> bool:
+	
+	var valid_types: PoolStringArray = [".ogg",".mp3"]#,".wav"]
+	
+	return (file_type in valid_types)
 
 func _ready():
 	var _connect = button_left.connect("pressed", self, "button_press")
