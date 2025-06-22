@@ -20,6 +20,11 @@ var override = false
 var direction_on_tj = 1
 
 
+## jump height variation
+var jump_released: bool = false
+const HEIGHT_MULT: float = 0.7
+
+
 func _ready():
 	priority = 1
 	blacklisted_states = ["BounceState", "DiveState", "SlideState", "GetupState", "BackflipState"]
@@ -31,6 +36,9 @@ func _start_check(_delta):
 	return ledge_buffer > 0 and (jump_buffer > 0 or (dive_buffer > 0 and abs(character.velocity.x) > 50 and !character.test_move(character.transform, Vector2(8 * character.facing_direction, 0))))
 
 func _start(delta):
+	## jump height variation
+	jump_released = false
+	
 	var sprite = character.sprite
 	var sound_player = character.sound_player
 	jump_buffer = 0
@@ -110,6 +118,12 @@ func _update(_delta):
 				character.rotating_jump = true
 	else:
 		jump_playing = false
+	
+	## jump height variation
+	if not jump_released and not character.inputs[2][0] and dive_buffer <= 0:
+		jump_released = true
+		character.velocity.y *= HEIGHT_MULT
+
 
 func _stop_check(_delta):
 	if(!override):

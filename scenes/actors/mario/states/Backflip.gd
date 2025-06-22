@@ -12,6 +12,12 @@ var unlock_timer = 0.0
 
 export var backflip_power := Vector2(280, 360) # no longer nice
 
+
+## jump height variation
+var jump_released: bool = false
+const HEIGHT_MULT: float = 0.67
+
+
 func _ready():
 	priority = 4
 	disable_animation = true
@@ -19,6 +25,9 @@ func _ready():
 	disable_turning = true
 
 func _start(_delta):
+	## jump height variation
+	jump_released = false
+	
 	priority = 4
 	unlock_timer = 0.4
 	direction_on_start = character.facing_direction
@@ -60,6 +69,12 @@ func _update(_delta):
 	else:
 		sprite.animation = "jumpLeft"
 		
+	## jump height variation
+	if not jump_released and not character.inputs[2][0]:
+		jump_released = true
+		character.velocity.y *= HEIGHT_MULT
+
+
 func _stop(_delta):
 	character.anim_player.stop()
 	

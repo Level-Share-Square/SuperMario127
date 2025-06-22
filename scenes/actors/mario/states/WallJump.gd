@@ -13,6 +13,12 @@ var position_on_wj = Vector2(0, 0)
 var character_in_range = false
 var correcting_frames = 0
 
+
+## jump height variation
+var jump_released: bool = false
+const HEIGHT_MULT: float = 0.7
+
+
 func _ready():
 	actual_power = walljump_power
 	priority = 2
@@ -24,6 +30,9 @@ func _start_check(_delta):
 	return (character.state == character.get_state_node("WallSlideState") or slide_check) and press_buffer > 0
 
 func _start(_delta):
+	## jump height variation
+	jump_released = false
+	
 	var sound_player = character.sound_player
 	if character_in_range:
 		actual_power.y /= 1.15
@@ -54,7 +63,12 @@ func _update(_delta):
 		sprite.animation = "jumpRight"
 	else:
 		sprite.animation = "jumpLeft"
-	pass
+	
+	## jump height variation
+	if not jump_released and not character.inputs[2][0]:
+		jump_released = true
+		character.velocity.y *= HEIGHT_MULT
+
 
 func _stop_check(_delta):
 	return wall_jump_timer <= 0 or character.is_walled() or character.is_grounded()
