@@ -10,7 +10,6 @@ var time: int = 500
 
 func _start() -> void:
 	time = rand_range(min_idle_time, max_idle_time)
-	print(time)
 
 
 func _update(delta: float) -> void:

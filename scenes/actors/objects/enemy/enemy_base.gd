@@ -81,16 +81,10 @@ func _ready():
 		set_state_by_name(cur_state)
 		if float_in_liquids:
 			liquids_detector.monitoring = true
-	
-	level_bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds
 
 
 func _physics_process(delta):
 	if not enabled: return
-	
-	if global_position.y > (level_bounds.end.y * 32) + 128:
-		queue_free()
-		return
 	
 	sprite.flip_h = (facing_direction > 0)
 	

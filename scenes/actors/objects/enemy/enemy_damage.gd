@@ -9,17 +9,25 @@ onready var enemy: KinematicBody2D = get_owner()
 
 export var health: int = 1
 export var damage: int = 1
+export var knockback_power := Vector2(225, 235)
+export var set_player_knockback_state: bool = true
 
 export(BounceType) var bounce_type: int = 0
 export var bounce_power: float = 330
 export var spring_bounce_windup_length: float = 0.15
 export var spring_bounce_depth: float = 6
 
-
-
 onready var attack_area = get_node_or_null("Attack") 
 onready var stomp_area = get_node_or_null("Stomp")
 onready var crush_area = get_node_or_null("Crush")
+
+
+var level_bounds: Rect2
+
+
+func _ready():
+	level_bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds
+
 
 ## sorry but this has to be done, we don't want mario to be able to stand inside an enemy
 func _physics_process(delta):
@@ -27,6 +35,9 @@ func _physics_process(delta):
 		var areas = attack_area.get_overlapping_areas()
 		for area in areas:
 			attack_area_entered(area)
+	
+	if enemy.global_position.y > (level_bounds.end.y * 32) + 128:
+		pit()
 
 
 ## default (mario, shells)
@@ -36,12 +47,12 @@ func hurt(body: PhysicsBody2D = null) -> void:
 
 ## steelies
 func strong_hurt(body: PhysicsBody2D = null) -> void:
-	hurt()
+	hurt(body)
 
 
 ## being jumped on
 func stomp(body: PhysicsBody2D = null) -> void:
-	hurt()
+	hurt(body)
 
 
 ## self explanatory
@@ -82,9 +93,16 @@ func crushed(body: PhysicsBody2D = null) -> void:
 	strong_hurt(body)
 
 
+func pit() -> void:
+	queue_free()
+
+
 ## get off me mario!!
 func damage_player(character: Character) -> void:
-	character.damage_with_knockback(global_position, damage)
+	if damage > 0:
+		character.damage_with_knockback(global_position, damage)
+	else:
+		character.knockback(global_position, knockback_power, set_player_knockback_state)
 
 
 func bounce_player(character: Character) -> void:

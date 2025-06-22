@@ -1,4 +1,4 @@
-[gd_scene load_steps=1678 format=2]
+[gd_scene load_steps=1679 format=2]
 
 [ext_resource path="res://scenes/oldeditor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -687,6 +687,7 @@
 [ext_resource path="res://scenes/actors/objects/water_balloon/2small.png" type="Texture" id=685]
 [ext_resource path="res://scenes/actors/objects/sponge/icon.png" type="Texture" id=686]
 [ext_resource path="res://assets/tiles/boo_block/icon.png" type="Texture" id=687]
+[ext_resource path="res://scenes/actors/objects/bully/icon.png" type="Texture" id=688]
 [ext_resource path="res://scenes/oldeditor/autosave_button.gd" type="Script" id=689]
 [ext_resource path="res://assets/level_data/autosave.png" type="Texture" id=690]
 [ext_resource path="res://scenes/oldeditor/tools_button.gd" type="Script" id=691]
@@ -3396,6 +3397,15 @@ object_center = Vector2( 8, 8 )
 tile_mode_step = 16
 icon = ExtResource( 133 )
 preview = ExtResource( 132 )
+
+[node name="Bully" type="Node" parent="PlaceableItems/EnemiesGroup"]
+script = ExtResource( 24 )
+object_id = 147
+is_object = true
+object_center = Vector2( 8, 8 )
+tile_mode_step = 16
+icon = ExtResource( 688 )
+preview = ExtResource( 688 )
 
 [node name="Rex" type="Node" parent="PlaceableItems/EnemiesGroup"]
 script = ExtResource( 24 )

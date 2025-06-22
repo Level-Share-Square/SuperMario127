@@ -15,7 +15,7 @@ onready var wall_detector: RayCast2D = get_node_or_null("Wall")
 func _start() -> void:
 	enable_raycasts(true)
 	
-	enemy.sprite.play("walk")
+#	enemy.sprite.play("walk")
 
 
 func _update(delta: float) -> void:
@@ -27,7 +27,7 @@ func _update(delta: float) -> void:
 		return
 	
 	if enemy.is_on_ground():
-		enemy.sprite.play("walk")
+#		enemy.sprite.play("walk")
 		
 		if is_instance_valid(ledge_detector):
 			ledge_detector.position.x = abs(ledge_detector.position.x) * enemy.facing_direction
@@ -36,9 +36,11 @@ func _update(delta: float) -> void:
 				jump()
 	else:
 		if enemy.velocity.y > 0:
-			enemy.sprite.play("fall")
+#			enemy.sprite.play("fall")
+			pass
 		else:
-			enemy.sprite.play("jump")
+#			enemy.sprite.play("jump")
+			pass
 	
 	
 	if is_instance_valid(wall_detector):
@@ -63,4 +65,4 @@ func enable_raycasts(is_enabled: bool) -> void:
 
 
 func jump() -> void:
-	enemy.velocity.y = -225
+	enemy.velocity.y = -128

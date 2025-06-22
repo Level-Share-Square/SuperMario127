@@ -1,0 +1,11 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=2]
+
+[ext_resource path="res://scenes/actors/objects/bully/animations/chill_bully.png" type="Texture" id=1]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]

@@ -114,7 +114,6 @@ func spawn_onscreen():
 
 
 func enemy_deleted(enemy: EnemyBase):
-	print("oh shit he dead")
 	spawned_enemies.erase(enemy)
 	if respawn_mode == RespawnMode.Onscreen and spawned_enemies.size() < max_enemies:
 		respawn_timer.start()

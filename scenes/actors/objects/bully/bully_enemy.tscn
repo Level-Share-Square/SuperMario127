@@ -1,24 +1,22 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/actors/objects/goomba/goomba_enemy.gd" type="Script" id=2]
-[ext_resource path="res://scenes/actors/objects/goomba/states/idle_state.gd" type="Script" id=3]
-[ext_resource path="res://scenes/actors/objects/goomba/animations/goomba.png" type="Texture" id=4]
-[ext_resource path="res://scenes/actors/objects/goomba/states/wander_state.gd" type="Script" id=5]
-[ext_resource path="res://scenes/actors/objects/goomba/damage.gd" type="Script" id=6]
+[ext_resource path="res://scenes/actors/objects/bully/states/knockback_state.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/bully/damage.gd" type="Script" id=3]
+[ext_resource path="res://scenes/actors/objects/bully/animations/normal.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://scenes/actors/objects/bully/states/wander_state.gd" type="Script" id=5]
+[ext_resource path="res://scenes/actors/objects/bully/states/idle_state.gd" type="Script" id=6]
 [ext_resource path="res://scenes/actors/objects/goomba/player_detector.gd" type="Script" id=7]
-[ext_resource path="res://scenes/actors/objects/goomba/states/die_state.gd" type="Script" id=8]
-[ext_resource path="res://scenes/actors/objects/goomba/states/knockback_state.gd" type="Script" id=9]
-[ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=10]
+[ext_resource path="res://scenes/actors/objects/bully/states/die_state.gd" type="Script" id=8]
+[ext_resource path="res://scenes/actors/objects/bully/bully_enemy.gd" type="Script" id=9]
+[ext_resource path="res://scenes/actors/objects/bully/states/chase_state.gd" type="Script" id=10]
 [ext_resource path="res://scenes/actors/objects/goomba/recolorable_frames.tres" type="SpriteFrames" id=11]
 [ext_resource path="res://scenes/actors/objects/goomba/sounds/poof.wav" type="AudioStream" id=12]
 [ext_resource path="res://scenes/actors/objects/goomba/sounds/stomp.wav" type="AudioStream" id=13]
 [ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=14]
-[ext_resource path="res://scenes/actors/objects/goomba/states/chase_state.gd" type="Script" id=15]
 
-[sub_resource type="CapsuleShape2D" id=36]
-radius = 7.0
-height = 4.0
+[sub_resource type="CapsuleShape2D" id=64]
+height = 2.0
 
 [sub_resource type="RectangleShape2D" id=57]
 resource_local_to_scene = true
@@ -38,100 +36,16 @@ extents = Vector2( 7, 9.5 )
 resource_local_to_scene = true
 radius = 3.0
 
-[sub_resource type="RectangleShape2D" id=54]
-extents = Vector2( 12, 2 )
+[sub_resource type="RectangleShape2D" id=65]
+extents = Vector2( 11, 5 )
 
-[sub_resource type="RectangleShape2D" id=59]
+[sub_resource type="RectangleShape2D" id=66]
 resource_local_to_scene = true
-extents = Vector2( 7, 6 )
+extents = Vector2( 11, 8 )
 
-[sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 64, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=38]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=39]
-atlas = ExtResource( 4 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 4 )
-region = Rect2( 64, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=41]
-atlas = ExtResource( 4 )
-region = Rect2( 96, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=42]
-atlas = ExtResource( 4 )
-region = Rect2( 32, 64, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=43]
-atlas = ExtResource( 4 )
-region = Rect2( 32, 96, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=44]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=45]
-atlas = ExtResource( 4 )
-region = Rect2( 32, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=46]
-atlas = ExtResource( 4 )
-region = Rect2( 64, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=47]
-atlas = ExtResource( 4 )
-region = Rect2( 96, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=48]
-atlas = ExtResource( 4 )
-region = Rect2( 128, 32, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=49]
-atlas = ExtResource( 4 )
-region = Rect2( 160, 32, 32, 32 )
-
-[sub_resource type="SpriteFrames" id=15]
-animations = [ {
-"frames": [ SubResource( 37 ) ],
-"loop": false,
-"name": "fall",
-"speed": 0.0
-}, {
-"frames": [ SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ) ],
-"loop": true,
-"name": "idle",
-"speed": 6.0
-}, {
-"frames": [ SubResource( 42 ) ],
-"loop": false,
-"name": "jump",
-"speed": 0.0
-}, {
-"frames": [  ],
-"loop": true,
-"name": "speak",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 43 ) ],
-"loop": true,
-"name": "stomped",
-"speed": 6.0
-}, {
-"frames": [ SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ) ],
-"loop": true,
-"name": "walk",
-"speed": 12.0
-} ]
-
-[sub_resource type="CircleShape2D" id=56]
+[sub_resource type="CircleShape2D" id=67]
 resource_local_to_scene = true
+radius = 11.0
 
 [sub_resource type="Animation" id=61]
 length = 0.001
@@ -211,7 +125,7 @@ tracks/5/keys = {
 [sub_resource type="Animation" id=58]
 resource_name = "squish"
 length = 0.9
-step = 0.0333333
+step = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:position")
 tracks/0/interp = 1
@@ -353,16 +267,16 @@ scale = 0.75
 color_ramp = SubResource( 35 )
 anim_speed = 0.8
 
-[node name="GoombaEnemy" instance=ExtResource( 1 )]
+[node name="BullyEnemy" instance=ExtResource( 1 )]
 collision_mask = 17
-script = ExtResource( 2 )
+script = ExtResource( 9 )
 max_gravity_factor = 30.0
 cur_state = "IdleState"
-color = Color( 1, 0, 0, 1 )
+horn_color = Color( 1, 0, 0, 1 )
 
 [node name="TerrainCollider" parent="." index="0"]
-position = Vector2( 0, -9 )
-shape = SubResource( 36 )
+position = Vector2( 0, -12 )
+shape = SubResource( 64 )
 
 [node name="CollisionShape2D" parent="LiquidsDetector" index="0"]
 position = Vector2( 0, -9.5 )
@@ -376,6 +290,7 @@ shape = SubResource( 52 )
 
 [node name="PlayerDetector" type="Area2D" parent="." index="3"]
 unique_name_in_owner = true
+visible = false
 position = Vector2( 0, -13 )
 script = ExtResource( 7 )
 
@@ -389,17 +304,21 @@ enabled = true
 cast_to = Vector2( 0, 6 )
 
 [node name="IdleState" type="Node2D" parent="States" index="0"]
-script = ExtResource( 3 )
+script = ExtResource( 6 )
 friction = 2.5
+min_idle_time = 120
+max_idle_time = 180
 
 [node name="WanderState" type="Node2D" parent="States" index="1"]
 script = ExtResource( 5 )
 move_speed = 16.0
 ledge_turning = true
+min_wander_time = 240
+max_wander_time = 360
 
 [node name="Ledge" type="RayCast2D" parent="States/WanderState" index="0"]
 position = Vector2( -12, -8 )
-cast_to = Vector2( 0, 64 )
+cast_to = Vector2( 0, 32 )
 collision_mask = 17
 
 [node name="Wall" type="RayCast2D" parent="States/WanderState" index="1"]
@@ -416,7 +335,7 @@ position = Vector2( 0, -9.5 )
 shape = SubResource( 62 )
 
 [node name="ChaseState" type="Node2D" parent="States" index="2"]
-script = ExtResource( 15 )
+script = ExtResource( 10 )
 move_speed = 32.0
 chase_speed = 64.0
 accel = 4.0
@@ -434,7 +353,7 @@ cast_to = Vector2( -12, 0 )
 collision_mask = 17
 
 [node name="KnockbackState" type="Node2D" parent="States" index="3"]
-script = ExtResource( 9 )
+script = ExtResource( 2 )
 can_attack = false
 can_be_hurt = false
 
@@ -445,8 +364,10 @@ can_be_hurt = false
 
 [node name="Damage" parent="." index="6"]
 position = Vector2( 0, 1 )
-script = ExtResource( 6 )
-bounce_type = 1
+script = ExtResource( 3 )
+damage = 0
+knockback_power = Vector2( 350, 200 )
+set_player_knockback_state = false
 spring_bounce_windup_length = 0.125
 spring_bounce_depth = 8.0
 
@@ -458,16 +379,18 @@ position = Vector2( 0, -10 )
 shape = SubResource( 53 )
 
 [node name="CollisionShape2D" parent="Damage/Stomp" index="0"]
-position = Vector2( 0, -20 )
-shape = SubResource( 54 )
+position = Vector2( 0, -22 )
+shape = SubResource( 65 )
+
+[node name="Attack" parent="Damage" index="2"]
+position = Vector2( 0, -1 )
 
 [node name="CollisionShape2D" parent="Damage/Attack" index="0"]
-position = Vector2( 0, -7 )
-shape = SubResource( 59 )
+shape = SubResource( 66 )
 
 [node name="AnimatedSprite" parent="." index="7"]
 position = Vector2( 0, -9 )
-frames = SubResource( 15 )
+frames = ExtResource( 4 )
 animation = "idle"
 playing = true
 offset = Vector2( 0, -7 )
@@ -477,15 +400,15 @@ visible = false
 self_modulate = Color( 1, 0.4, 0.333333, 1 )
 frames = ExtResource( 11 )
 animation = "idle"
-offset = Vector2( 0, -16 )
-script = ExtResource( 10 )
+offset = Vector2( 0, -7 )
 
 [node name="DialogueDetector" parent="AnimatedSprite" index="1"]
 visible = false
+position = Vector2( 0, -11 )
 
 [node name="CollisionShape2D" parent="AnimatedSprite/DialogueDetector" index="0"]
 position = Vector2( 0, 6 )
-shape = SubResource( 56 )
+shape = SubResource( 67 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 unique_name_in_owner = true
@@ -510,7 +433,6 @@ initial_velocity_random = 1.0
 anim_speed = 2.0
 
 [node name="VisibilityEnabler2D" parent="." index="10"]
-visible = true
 position = Vector2( 0, -20 )
 
 [node name="Stomp" type="AudioStreamPlayer2D" parent="Sounds" index="0"]

@@ -357,33 +357,44 @@ puppet func sync(pos, vel, sprite_frame, sprite_animation, sprite_rotation, is_a
 	heavy = is_heavy
 	dead = is_dead
 	controllable = is_controllable
-		
+
+
 func exploded(explosion_pos : Vector2) -> void:
 	if !invincible:
 		damage_with_knockback(explosion_pos, 2)
+
 
 func steely_hit(steely_pos : Vector2) -> void:
 	if !invincible:
 		damage_with_knockback(steely_pos, 2)
 
-func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String = "hit", frames : int = 180) -> void:
+
+func damage_with_knockback(hit_pos : Vector2, amount : int = 1, cause : String = "hit", frames : int = 180, power := Vector2(235, 225)) -> void:
 	if !invulnerable:
 		# Mario shouldn't take damage with the vanish cap*
 		if amount > 0 and is_instance_valid(powerup) and powerup.get_name() == "VanishPowerup":
 			return
-		knockback(hit_pos)
+		knockback(hit_pos, power, true)
 		damage(amount, cause, frames)
 
-func knockback(hit_pos: Vector2):
+
+func knockback(hit_pos: Vector2, power := Vector2(235, 225), set_state: bool = true):
 	if is_instance_valid(state) and state.disable_knockback: return
 	
 	var direction := sign((global_position - hit_pos).normalized().x)
-	velocity.x = direction * 235
-	velocity.y = -225
-	set_state_by_name("KnockbackState", 0)
+	velocity.x = direction * power.x
+	velocity.y = -power.y
+	
+	if set_state:
+		set_state_by_name("KnockbackState", 0)
+	else:
+#		if sound_player.hit_sounds
+		sound_player.play_hit_sound()
+
 
 func play_shine_sound() -> void:
 	sound_player.play_shine_sound()
+
 
 # warning-ignore: unused_argument
 func load_in(level_data : LevelData, level_area : LevelArea):
