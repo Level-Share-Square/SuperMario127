@@ -72,3 +72,7 @@ func drag_window(event):
 			raise()
 	if (event is InputEventMouseMotion) and (event.button_mask == BUTTON_LEFT):
 		rect_global_position = event.global_position - drag_position
+
+
+func _on_Settings_pressed():
+	pass # Replace with function body.

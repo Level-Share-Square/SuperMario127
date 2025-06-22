@@ -87,6 +87,12 @@ collision_mask = 16
 position = Vector2( 0, -16 )
 shape = SubResource( 38 )
 
+[node name="FloorDetector" type="RayCast2D" parent="."]
+position = Vector2( 0, -2 )
+enabled = true
+cast_to = Vector2( 0, 4 )
+collision_mask = 17
+
 [node name="States" type="Node2D" parent="."]
 
 [node name="Damage" type="Node2D" parent="."]
@@ -132,8 +138,9 @@ script = ExtResource( 2 )
 shape = SubResource( 15 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
 position = Vector2( 0, -32 )
-rect = Rect2( -64, -64, 128, 128 )
+rect = Rect2( -256, -256, 512, 512 )
 process_parent = true
 physics_process_parent = true
 

@@ -9,6 +9,9 @@ export(NodePath) var dive_shape
 
 
 func _physics_process(delta):
+	if not is_instance_valid(get_node_or_null(dive_shape)):
+		return
+	
 	var character: Character = get_node(character_path)
 	
 	if is_instance_valid(character.state):

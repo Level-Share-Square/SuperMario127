@@ -259,6 +259,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/objects/enemy/states/stop_state.gd"
 }, {
+"base": "EnemyStopState",
+"class": "EnemyWanderIdleState",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/enemy/states/wander_idle_state.gd"
+}, {
+"base": "EnemyPatrolState",
+"class": "EnemyWanderState",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/enemy/states/wander_state.gd"
+}, {
 "base": "State",
 "class": "FallState",
 "language": "GDScript",
@@ -845,6 +855,8 @@ _global_script_class_icons={
 "EnemySpawnerBase": "",
 "EnemyState": "",
 "EnemyStopState": "",
+"EnemyWanderIdleState": "",
+"EnemyWanderState": "",
 "FallState": "",
 "FolderCard": "",
 "ForegroundResource": "",

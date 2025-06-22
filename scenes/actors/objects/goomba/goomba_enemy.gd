@@ -6,7 +6,7 @@ const DEFAULT_COLOR := Color.red
 export var color := Color.red
 
 onready var recolor_sprite: AnimatedSprite = $AnimatedSprite/RecolorSprite
-
+onready var player_detector: Area2D = $PlayerDetector
 
 func set_color(value: Color) -> void:
 	color = value
@@ -26,8 +26,6 @@ func _ready():
 
 
 func _enter_tree():
-#	enabled = true
-#	gravity = 7.82 * 2
 	cur_state = "IdleState"
 
 

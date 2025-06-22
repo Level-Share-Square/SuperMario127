@@ -20,6 +20,7 @@ export var float_in_liquids: bool
 export var float_speed: float = 32
 export var float_accel: float = 4
 
+var level_bounds: Rect2
 # parent should set this to area gravity times two
 var gravity: float
 # if not enabled... enemy stops moving altogether (also used for editor)
@@ -33,6 +34,8 @@ var spawn_effect: bool = true
 onready var liquids_detector: Area2D = $LiquidsDetector
 # detects platforms (copy pasted from mario.gd so we're just going to reuse this from there)
 onready var platform_detector: Area2D = $PlatformDetector
+# checks for the floor bc is_on_floor() is way too janky on it's own.
+onready var floor_detector: RayCast2D = $FloorDetector
 # holds all the states
 onready var state_container: Node = $States 
 # self explanatory
@@ -78,10 +81,16 @@ func _ready():
 		set_state_by_name(cur_state)
 		if float_in_liquids:
 			liquids_detector.monitoring = true
+	
+	level_bounds = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds
 
 
 func _physics_process(delta):
 	if not enabled: return
+	
+	if global_position.y > (level_bounds.end.y * 32) + 128:
+		queue_free()
+		return
 	
 	sprite.flip_h = (facing_direction > 0)
 	
@@ -102,7 +111,6 @@ func _physics_process(delta):
 		working_snap_vector = Vector2.ZERO
 	
 	var floor_normal: Vector2 = get_floor_normal()
-	var working_velocity = velocity
 	
 	for body in platform_detector.get_overlapping_bodies():
 		if body is PhysicsBody2D:
@@ -111,15 +119,28 @@ func _physics_process(delta):
 			else:
 				add_collision_exception_with(body)
 	
-#	# counteract slope slowdown/speedup
-#	if is_on_floor() and not is_zero_approx(floor_normal.y):
-#		# anti-slowdown
-#		if sign(floor_normal.x) != sign(working_velocity.x):
-#			working_velocity.x /= abs(floor_normal.y)
-#		# anti-speedup
-#		else:
-#			working_velocity.x *= abs(floor_normal.y)
-	
-	velocity.y = move_and_slide_with_snap(working_velocity, 
+	velocity = move_and_slide_with_snap(velocity, 
 		working_snap_vector if velocity.y >= 0 else Vector2.ZERO, 
-		UP_DIR, true, 4, FLOOR_MAX_ANGLE).y
+		UP_DIR, true, 4, FLOOR_MAX_ANGLE)
+
+
+func is_on_ground() -> bool:
+	return is_on_floor() or floor_detector.is_colliding()
+
+
+func create_coin(velocity: Vector2, offset: Vector2) -> void:
+	var object: = ObjectData.new()
+	object.type_id = 1
+	object.properties = []
+	object.properties.append(global_position + offset)
+	object.properties.append(Vector2.ONE)
+	object.properties.append(0)
+	object.properties.append(true)
+	object.properties.append(true)
+	object.properties.append(LevelShared.Layers.Middle)
+	object.properties.append(true)
+	object.properties.append(velocity)
+	
+	var shared = get_tree().current_scene.get_shared_node()
+	
+	shared.create_object(object, false)

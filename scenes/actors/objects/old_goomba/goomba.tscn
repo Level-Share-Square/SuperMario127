@@ -183,7 +183,7 @@ playing = true
 [node name="Recolorable" type="AnimatedSprite" parent="Goomba/Sprite"]
 visible = false
 frames = ExtResource( 5 )
-animation = "fall"
+animation = "stomped"
 script = ExtResource( 7 )
 
 [node name="GroundCollisionL" type="CollisionShape2D" parent="Goomba"]

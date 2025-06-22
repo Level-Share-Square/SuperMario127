@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://scenes/oldeditor/assets/search_icon_hover.png" type="Texture" id=11]
 [ext_resource path="res://scenes/oldeditor/assets/search_icon_press.png" type="Texture" id=12]
 [ext_resource path="res://scenes/editor/bg_autoscroll.gd" type="Script" id=13]
+[ext_resource path="res://scenes/oldeditor/assets/level_settings_hover.png" type="Texture" id=14]
+[ext_resource path="res://scenes/oldeditor/assets/level_settings_press.png" type="Texture" id=15]
+[ext_resource path="res://scenes/oldeditor/assets/level_settings.png" type="Texture" id=16]
 
 [sub_resource type="Gradient" id=9]
 offsets = PoolRealArray( 0.515152, 1 )
@@ -260,7 +263,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 
 [node name="Utilities" type="HBoxContainer" parent="UI/EditorUI/Toolbar/ToolbarMat/Toolbar"]
-margin_left = 704.0
+margin_left = 660.0
 margin_right = 752.0
 margin_bottom = 48.0
 size_flags_horizontal = 10
@@ -273,6 +276,17 @@ rect_min_size = Vector2( 48, 48 )
 texture_normal = ExtResource( 10 )
 texture_pressed = ExtResource( 12 )
 texture_hover = ExtResource( 11 )
+expand = true
+stretch_mode = 5
+
+[node name="Settings" type="TextureButton" parent="UI/EditorUI/Toolbar/ToolbarMat/Toolbar/Utilities"]
+margin_left = 52.0
+margin_right = 92.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 40, 0 )
+texture_normal = ExtResource( 16 )
+texture_pressed = ExtResource( 15 )
+texture_hover = ExtResource( 14 )
 expand = true
 stretch_mode = 5
 

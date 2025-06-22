@@ -30,34 +30,34 @@ func _physics_process(delta):
 
 
 ## default (mario, shells)
-func hurt() -> void:
+func hurt(body: PhysicsBody2D = null) -> void:
 	pass
 
 
 ## steelies
-func strong_hurt() -> void:
+func strong_hurt(body: PhysicsBody2D = null) -> void:
 	hurt()
 
 
 ## being jumped on
-func stomp() -> void:
+func stomp(body: PhysicsBody2D = null) -> void:
 	hurt()
 
 
 ## self explanatory
-func spin_attacked() -> void:
-	hurt()
+func spin_attacked(body: PhysicsBody2D = null) -> void:
+	hurt(body)
 
 
 ## self explanatory
-func ground_pound() -> void:
-	strong_hurt()
+func ground_pound(body: PhysicsBody2D = null) -> void:
+	strong_hurt(body)
 
 
 ## bob-ombs
 ## doesnt function, need to change how explosions work
-func exploded() -> void:
-	strong_hurt()
+func exploded(body: PhysicsBody2D = null) -> void:
+	strong_hurt(body)
 
 
 ## fire
@@ -69,17 +69,17 @@ func burnt() -> void:
 ## lava
 ## doesnt function, need ability to distinguish lava and fire
 func incinerated() -> void:
-	strong_hurt()
+	pass
 
 
 ## metal and rainbow mario
-func magicked() -> void:
-	strong_hurt()
+func magicked(body: PhysicsBody2D = null) -> void:
+	strong_hurt(body)
 
 
 ## self explanatory
-func crushed() -> void:
-	strong_hurt()
+func crushed(body: PhysicsBody2D = null) -> void:
+	strong_hurt(body)
 
 
 ## get off me mario!!
@@ -100,7 +100,7 @@ func bounce_player(character: Character) -> void:
 			
 			character.velocity.y = 0
 			character.movable = false
-			character.enemy_collision.monitorable = false
+			character.enemy_collision.set_deferred("monitorable", false)
 			if character.move_direction != 0:
 				character.global_position.x += character.move_direction * 2
 			
@@ -114,10 +114,9 @@ func bounce_player(character: Character) -> void:
 			tween.tween_property(character, "global_position:y", character.global_position.y - spring_bounce_depth, spring_bounce_windup_length / 2.0)
 			yield(tween, "finished")
 			
-			character.enemy_collision.monitorable = true
+			character.enemy_collision.set_deferred("monitorable", true)
 			character.movable = true
 			character.velocity.y = -bounce_power
-			
 
 
 ## collision detection methods
@@ -126,21 +125,21 @@ func attack_body_entered(body) -> void:
 	
 	if not is_instance_valid(enemy.state) or enemy.state.can_be_hurt:
 		if body.name == "Steely":
-			strong_hurt()
+			strong_hurt(body)
 
 
 func attack_area_entered(area):
 	if area.has_method("is_hurt_area"):
-		spin_attacked()
+		spin_attacked(area.get_character())
 	elif area is CharacterHitbox:
 		var character: Character = area.get_character()
 		
 		if not is_instance_valid(enemy.state) or enemy.state.can_be_hurt:
 			if character.attacking:
-				spin_attacked()
+				spin_attacked(character)
 			
 			if character.invincible:
-				magicked()
+				magicked(character)
 			
 		if not is_instance_valid(enemy.state) or enemy.state.can_attack:
 			# lets not hurt the player if theyre stomping,,
@@ -161,12 +160,12 @@ func stomp_area_entered(area: Area2D) -> void:
 	if is_instance_valid(character):
 		if character.velocity.y > 0 and not character.swimming:
 			if character.invincible:
-				magicked()
+				magicked(character)
 				bounce_player(character)
 			elif character.big_attack:
-				ground_pound()
+				ground_pound(character)
 			else:
-				stomp()
+				stomp(character)
 				bounce_player(character)
 
 

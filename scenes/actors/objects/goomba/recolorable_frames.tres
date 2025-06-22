@@ -71,6 +71,11 @@ animations = [ {
 "name": "jump",
 "speed": 0.0
 }, {
+"frames": [  ],
+"loop": true,
+"name": "speak",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 6 ) ],
 "loop": true,
 "name": "stomped",

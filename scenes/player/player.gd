@@ -6,6 +6,7 @@ onready var tick_end_sound = $SharedSounds/TickEndSound
 export var character : NodePath
 export var character2 : NodePath
 export var camera : NodePath
+export var shared : NodePath
 
 var mode = 0
 var ssc_displayed = true
@@ -18,7 +19,7 @@ export var switch_timer : float = 0.0
 export var sound_timer : float = 0.0
 
 func get_shared_node() -> Node:
-	return $Viewports/ViewportContainer/Viewport/World.get_node("Shared")
+	return get_node(shared)
 
 func _process(_delta):
 	coin_frame = (OS.get_ticks_msec() * coin_anim_fps / 1000) % 4

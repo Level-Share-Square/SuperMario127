@@ -43,6 +43,9 @@ func remove_player():
 			if child is Character:
 				get_parent().character = get_parent().get_path_to(child)
 			
+			if child is LevelShared:
+				get_parent().shared = get_parent().get_path_to(child)
+			
 		for child in viewport1.get_children():
 			child.get_parent().remove_child(child)
 			get_parent().add_child(child)

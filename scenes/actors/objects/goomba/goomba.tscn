@@ -4,6 +4,3 @@
 
 [node name="Goomba" instance=ExtResource( 1 )]
 enemy_scene_path = "res://scenes/actors/objects/goomba/goomba_enemy.tscn"
-respawn_time = 3.0
-respawn_mode = 2
-max_enemies = 10

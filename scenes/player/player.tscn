@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -43,6 +43,31 @@
 [ext_resource path="res://scenes/actors/objects/p_switch/tick.wav" type="AudioStream" id=58]
 [ext_resource path="res://scenes/actors/objects/p_switch/tick_end.wav" type="AudioStream" id=59]
 [ext_resource path="res://scenes/actors/objects/boo/laugh.wav" type="AudioStream" id=60]
+
+[sub_resource type="CanvasItemMaterial" id=233]
+blend_mode = 1
+
+[sub_resource type="ParticlesMaterial" id=230]
+emission_shape = 2
+emission_box_extents = Vector3( 608, 1, 1 )
+flag_align_y = true
+flag_disable_z = true
+direction = Vector3( 0.4, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 256.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 196.0
+
+[sub_resource type="Gradient" id=231]
+colors = PoolColorArray( 0.539063, 0.562109, 1, 1, 0.683594, 0.701172, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=232]
+gradient = SubResource( 231 )
+width = 1
+height = 6
+fill_from = Vector2( 1, 1 )
 
 [sub_resource type="Animation" id=216]
 length = 0.001
@@ -887,10 +912,27 @@ nodes_to_load = [ NodePath("Viewports/ViewportContainer/Viewport/World/Shared"),
 character = NodePath("Viewports/ViewportContainer/Viewport/World/Character")
 character2 = NodePath("Viewports/ViewportContainer/Viewport/World/Character2")
 camera = NodePath("Viewports/ViewportContainer/Viewport/CameraP1")
+shared = NodePath("Viewports/ViewportContainer/Viewport/World/Shared")
 
 [node name="PhotoModeController" type="Node" parent="."]
 pause_mode = 2
 script = ExtResource( 33 )
+
+[node name="LevelEffects" type="CanvasLayer" parent="."]
+layer = 32
+visible = false
+
+[node name="Particles2D" type="Particles2D" parent="LevelEffects"]
+material = SubResource( 233 )
+position = Vector2( 384, -16 )
+emitting = false
+amount = 196
+lifetime = 2.0
+preprocess = 2.0
+visibility_rect = Rect2( -384, 16, 768, 432 )
+local_coords = false
+process_material = SubResource( 230 )
+texture = SubResource( 232 )
 
 [node name="UIUnder" type="CanvasLayer" parent="."]
 pause_mode = 2

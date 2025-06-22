@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterHitbox
 
 func is_hurt_area():
 	return true

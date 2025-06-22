@@ -3,7 +3,10 @@ extends EnemyState
 
 
 export var friction: float = 2
+export var air_friction: float = 1
 
 
 func _update(delta: float) -> void:
-	enemy.velocity.x = move_toward(enemy.velocity.x, 0, delta * friction * 60)
+	var working_friction = friction if enemy.is_on_floor() else air_friction
+	
+	enemy.velocity.x = move_toward(enemy.velocity.x, 0, delta * working_friction * 60)
