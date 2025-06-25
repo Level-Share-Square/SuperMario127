@@ -337,7 +337,7 @@ shape = SubResource( 62 )
 [node name="ChaseState" type="Node2D" parent="States" index="2"]
 script = ExtResource( 10 )
 move_speed = 32.0
-chase_speed = 64.0
+chase_speed = 96.0
 accel = 4.0
 
 [node name="Ledge" type="RayCast2D" parent="States/ChaseState" index="0"]

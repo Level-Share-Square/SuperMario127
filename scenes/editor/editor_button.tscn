@@ -7,7 +7,9 @@
 [node name="EditorButton" type="Button"]
 margin_right = 135.0
 margin_bottom = 19.0
+focus_mode = 0
 theme = ExtResource( 1 )
+enabled_focus_mode = 0
 keep_pressed_outside = true
 expand_icon = true
 script = ExtResource( 3 )

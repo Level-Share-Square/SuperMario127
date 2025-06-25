@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=52 format=2]
+[gd_resource type="Theme" load_steps=53 format=2]
 
 [ext_resource path="res://assets/fonts/delfino_small.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=2]
@@ -80,6 +80,8 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 2
 expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id=158]
 
 [sub_resource type="StyleBoxFlat" id=120]
 content_margin_left = 4.0
@@ -527,6 +529,12 @@ Button/styles/hover = SubResource( 116 )
 Button/styles/hover_pressed = SubResource( 118 )
 Button/styles/normal = SubResource( 151 )
 Button/styles/pressed = SubResource( 125 )
+ButtonEmpty/base_type = "Button"
+ButtonEmpty/styles/disabled = SubResource( 158 )
+ButtonEmpty/styles/focus = SubResource( 158 )
+ButtonEmpty/styles/hover = SubResource( 158 )
+ButtonEmpty/styles/normal = SubResource( 158 )
+ButtonEmpty/styles/pressed = SubResource( 158 )
 ButtonPurple/base_type = "Button"
 ButtonPurple/colors/font_color = Color( 1, 1, 1, 1 )
 ButtonPurple/colors/font_color_disabled = Color( 1, 1, 1, 1 )

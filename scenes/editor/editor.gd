@@ -6,10 +6,14 @@ const mode: int = 1
 
 var placed_item_property = null
 
+var temp
 
 func _ready():
 	#this is to dynamically update the framerate
 	_update_editor_framerate()
+	
+#	temp = Control.new()
+#	add_child(temp)
 	
 	Engine.iterations_per_second = 60
 	# reset these to 0 since they get incremented by the loading in process every time

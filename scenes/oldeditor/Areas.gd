@@ -4,7 +4,7 @@ onready var v_box_container = $ScrollContainer/VBoxContainer
 onready var settings_switch = $Settings
 onready var new_area = $NewArea
 
-const AREA_PANEL_SCENE = "res://scenes/editor/window/AreaPanel.tscn"
+const AREA_PANEL_SCENE = "res://scenes/oldeditor/window/AreaPanel.tscn"
 
 func _ready():
 	var _connect = get_parent().connect("window_opened", self, "reload_areas")

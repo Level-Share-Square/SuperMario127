@@ -14,7 +14,7 @@
 [resource]
 script = ExtResource( 1 )
 item_name = "Bricks"
-groups = PoolStringArray(  )
+groups = PoolStringArray( "special" )
 change_to = ""
 items_in_sequence = 0
 index_in_sequence = 0

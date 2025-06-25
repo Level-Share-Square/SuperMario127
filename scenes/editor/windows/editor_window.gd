@@ -5,6 +5,7 @@ extends Popup
 export(NodePath) var window_panel_path
 export(NodePath) var drag_control_path
 export(NodePath) var close_button_path
+export(NodePath) var resize_control_path
 
 export var title: String
 export var icon: Texture
@@ -39,6 +40,9 @@ func _ready() -> void:
 	var close_button: BaseButton = get_node(close_button_path)
 	close_button.connect("pressed", self, "close")
 	
+	var resize_control: Control = get_node(resize_control_path)
+	resize_control.connect("gui_input", self, "resize_window")
+	
 	# I don't know why, but if you don't pop the window up first the 
 	# minimum size is never calculated
 	popup_centered(Vector2(0, 0))
@@ -60,8 +64,6 @@ func _ready() -> void:
 
 
 func close():
-	var focus: Control = get_focus_owner()
-	focus.grab_focus()
 	hide()
 
 
@@ -70,9 +72,21 @@ func drag_window(event):
 		if event.pressed:
 			drag_position = get_local_mouse_position()
 			raise()
+	
 	if (event is InputEventMouseMotion) and (event.button_mask == BUTTON_LEFT):
 		rect_global_position = event.global_position - drag_position
+	
+	var window_rect := Rect2(rect_position, rect_size)
+	
+	if not window_rect.intersects(get_viewport_rect()):
+		hide()
 
 
-func _on_Settings_pressed():
-	pass # Replace with function body.
+func resize_window(event):
+	if (event is InputEventMouseMotion) and (event.button_mask == BUTTON_LEFT):
+		rect_size = event.global_position - rect_global_position
+	
+	var window_rect := Rect2(rect_position, rect_size)
+	
+	if not window_rect.intersects(get_viewport_rect()):
+		hide()

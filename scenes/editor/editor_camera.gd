@@ -21,8 +21,6 @@ func load_in(_level_data: LevelData, level_area: LevelArea):
 func camera_movement(delta: float):
 	var editor_ui: Control = get_node("%EditorUI")
 	
-	print(editor_ui.get_focus_owner())
-	
 	if editor_ui.get_focus_owner():
 		return
 	
@@ -38,7 +36,7 @@ func update_limits(level_area : LevelArea):
 	var area_bounds = level_area.settings.bounds.grow(3)
 	
 	limit_left = int(area_bounds.position.x * 32)
-	limit_top = int(area_bounds.position.y * 32 - 70 * zoom.x) #needs to include the toolbar
+	limit_top = int(area_bounds.position.y * 32 - 61 * zoom.x) #needs to include the toolbar
 	
 	limit_right = int(area_bounds.end.x * 32)
 	limit_bottom = int(area_bounds.end.y * 32)

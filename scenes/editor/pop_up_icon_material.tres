@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=2]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=23]
 code = "//from https://godotshaders.com/shader/2d-outline-inline/
 shader_type canvas_item;
 
@@ -74,12 +74,12 @@ void fragment() {
 
 [resource]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+shader = SubResource( 23 )
 shader_param/color = Color( 0.768627, 0.768627, 0.768627, 1 )
 shader_param/width = 11.6364
 shader_param/pattern = 0
 shader_param/min_alpha = 1.0
-shader_param/blur_level = 1.0
+shader_param/blur_level = 0.0
 shader_param/inside = false
 shader_param/add_margins = true
 shader_param/texture_offset = Vector2( 0, 2 )

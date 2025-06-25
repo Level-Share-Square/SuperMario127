@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/magnifying_glass_v2.svg-e23bb7dc33a35a6fd55d3531c0b7d739.stex"
+path="res://.import/item_picker_pressed.svg-f5c259349275c7a3fa210fa56a4b281b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/misc/magnifying_glass_v2.svg"
-dest_files=[ "res://.import/magnifying_glass_v2.svg-e23bb7dc33a35a6fd55d3531c0b7d739.stex" ]
+source_file="res://scenes/editor/assets/item_picker_pressed.svg"
+dest_files=[ "res://.import/item_picker_pressed.svg-f5c259349275c7a3fa210fa56a4b281b.stex" ]
 
 [params]
 
@@ -32,4 +32,4 @@ process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true
-svg/scale=4.0
+svg/scale=6.0

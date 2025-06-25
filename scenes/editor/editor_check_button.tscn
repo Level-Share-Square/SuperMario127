@@ -2,8 +2,8 @@
 
 [ext_resource path="res://scenes/editor/editor_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/editor/check_box.gd" type="Script" id=3]
-[ext_resource path="res://assets/misc/checkbox.svg" type="Texture" id=4]
-[ext_resource path="res://assets/misc/checkbox_fill.svg" type="Texture" id=5]
+[ext_resource path="res://scenes/editor/assets/checkbox.svg" type="Texture" id=4]
+[ext_resource path="res://scenes/editor/assets/checkbox_fill.svg" type="Texture" id=5]
 
 [node name="EditorCheckButton" instance=ExtResource( 2 )]
 margin_right = 143.0

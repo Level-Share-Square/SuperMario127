@@ -9,15 +9,18 @@
 [node name="Button" type="Button"]
 margin_right = 48.0
 margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
+rect_min_size = Vector2( 32, 32 )
+focus_mode = 0
 theme = ExtResource( 1 )
 theme_type_variation = "ButtonRectangle"
+enabled_focus_mode = 0
 keep_pressed_outside = true
 script = ExtResource( 4 )
 
 [node name="ClipBox" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_min_size = Vector2( 48, 48 )
 rect_clip_content = true
 mouse_filter = 2
 script = ExtResource( 5 )
