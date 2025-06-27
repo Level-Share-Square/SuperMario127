@@ -25,7 +25,7 @@ func _set_properties():
 func _set_property_values():
 	set_property("size", size, true)
 	set_property("hide_mode", hide_mode, true)
-	set_property_menu("hide_mode", ["option", 2, 0, ["Hide All"]])
+	set_property_menu("hide_mode", ["option", 1, 0, ["Hide All"]])
 	
 	set_property("spotlight_scale", spotlight_scale, true)
 

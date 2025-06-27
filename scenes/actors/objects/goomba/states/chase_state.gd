@@ -15,7 +15,7 @@ onready var wall_detector: RayCast2D = get_node_or_null("Wall")
 func _start() -> void:
 	enable_raycasts(true)
 	
-	enemy.sprite.play("walk")
+	jump()
 
 
 func _update(delta: float) -> void:

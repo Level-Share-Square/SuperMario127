@@ -477,7 +477,8 @@ visible = false
 self_modulate = Color( 1, 0.4, 0.333333, 1 )
 frames = ExtResource( 11 )
 animation = "idle"
-offset = Vector2( 0, -16 )
+frame = 2
+offset = Vector2( 0, -7 )
 script = ExtResource( 10 )
 
 [node name="DialogueDetector" parent="AnimatedSprite" index="1"]
@@ -522,5 +523,3 @@ stream = ExtResource( 12 )
 [node name="SpawnParticles" parent="." index="13"]
 position = Vector2( 0, -9 )
 process_material = SubResource( 50 )
-
-[connection signal="area_entered" from="AnimatedSprite/DialogueDetector" to="AnimatedSprite/DialogueDetector" method="area_entered"]
