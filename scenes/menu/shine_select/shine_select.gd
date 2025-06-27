@@ -9,6 +9,7 @@ onready var mission_select_sfx: AudioStreamPlayer = $Sounds/MissionSelect
 onready var transition_audio: AudioStreamPlayer = $Sounds/TransitionAudio
 onready var letsa_go_sfx: Node = $Sounds/LetsaGo
 onready var letsa_go_sfx_2: Node = $Sounds/LetsaGo2
+onready var back = $VBoxContainer/BottomBar/MarginContainer/Back
 
 onready var level_title: Label = $"%LevelTitle"
 onready var level_title_backing: Label = $"%LevelTitleBacking"
@@ -19,7 +20,7 @@ onready var level_data: LevelData = Singleton.CurrentLevelData.level_data
 
 func back():
 	anim_player.play("transition")
-	Singleton.SceneSwitcher.quit_to_menu_with_transition("levels_list")
+	Singleton.SceneSwitcher.quit_level()
 
 func _ready():
 	mission_select_sfx.play()
