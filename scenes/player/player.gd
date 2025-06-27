@@ -87,6 +87,7 @@ func _ready():
 	Singleton.CurrentLevelData.level_data.vars.checkpoints = []
 	
 	Singleton.MiscShared.is_play_reload = true
+	get_tree().paused = false
 
 	yield(get_tree(), "physics_frame")
 	Singleton.CurrentLevelData.level_data.vars.max_red_coins = Singleton.CurrentLevelData.get_red_coins_before_area(Singleton.CurrentLevelData.level_data.areas.size())
