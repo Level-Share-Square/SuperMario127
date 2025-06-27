@@ -22,4 +22,4 @@ func quit():
 	# music is stopped while paused, but there's a frame where it starts playing again after the transition, just kill it here to stop that
 	Singleton.Music.change_song(Singleton.Music.last_song, 0)
 	Singleton.Music.stop_temporary_music()
-	player_scene.quit_level()
+	Singleton.SceneSwitcher.quit_level()

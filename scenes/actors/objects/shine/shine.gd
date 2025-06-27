@@ -375,7 +375,7 @@ func character_shine_dance_finished(_animation : Animation) -> void:
 	#fades to the correct volume in both situations
 	if do_kick_out:
 		if mode_switcher_button.invisible: #if not running through the editor, play the transition
-			var _connect = Singleton.SceneTransitions.connect("transition_finished", current_scene, "quit_level", [false], CONNECT_ONESHOT)
+			var _connect = Singleton.SceneTransitions.connect("transition_finished", Singleton.SceneSwitcher, "quit_level", [false], CONNECT_ONESHOT)
 			Singleton.SceneTransitions.do_transition_animation(
 				character.cutout_shine, 
 				Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME, 
