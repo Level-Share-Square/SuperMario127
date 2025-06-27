@@ -2,6 +2,8 @@ extends Node
 
 var level_id: String
 var working_folder: String = level_list_util.BASE_FOLDER
+var hub_level: String = ""
+var is_campaign: bool = false
 
 var level_info : LevelInfo
 var level_data : LevelData
@@ -178,3 +180,8 @@ func get_red_coins_before_area(area_id : int):
 				last_red_coin_id += 1
 	return last_red_coin_id
 
+
+## temp
+func _unhandled_input(event):
+	if event.is_action_pressed("flip_object"):
+		print(is_campaign)

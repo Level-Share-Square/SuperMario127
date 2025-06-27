@@ -22,6 +22,7 @@ onready var focus = $"%Focus"
 const BASE_FOLDER: String = level_list_util.BASE_FOLDER
 const DEV_FOLDER: String = level_list_util.DEV_FOLDER
 var working_folder: String = BASE_FOLDER
+var is_campaign: bool = false
 var loaded_folder: String
 
 
@@ -35,7 +36,7 @@ func screen_opened():
 		yield(old_levels, "conversion_complete")
 	
 	if working_folder != loaded_folder:
-		loader.load_directory(working_folder)
+		loader.load_directory(working_folder, is_campaign)
 		loaded_folder = working_folder
 		return
 	
@@ -44,7 +45,7 @@ func screen_opened():
 	if working_folder != BASE_FOLDER: return
 	if Singleton.SceneSwitcher.reload_base_folder:
 		loaded_folder = working_folder
-		loader.load_directory(working_folder)
+		loader.load_directory(working_folder, false)
 		Singleton.SceneSwitcher.reload_base_folder = false
 
 
@@ -58,6 +59,17 @@ func change_focus(focus_node = null):
 		focus_node = level_grid.get_child(0)
 	focus.default_focus = focus_node
 	focus.call_deferred("focus_node")
+
+
+func insert_campaign():
+	var folder_id: String = "New Campaign"
+	folder_id = level_list_util.get_valid_folder_name(folder_id, working_folder)
+	
+	var folder_path: String = level_list_util.get_folder_path(folder_id, working_folder)
+	level_list_util.create_level_folder(folder_path)
+	
+	sort_file_util.add_to_sort(folder_id, working_folder, sort_file_util.CAMPAIGNS)
+	loader.add_campaign_card(folder_id, working_folder, true, true)
 
 
 func insert_folder():

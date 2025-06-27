@@ -1,0 +1,55 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scenes/actors/objects/door/door_enter_logic.gd" type="Script" id=1]
+[ext_resource path="res://scenes/actors/objects/door/door_old.gd" type="Script" id=2]
+[ext_resource path="res://scenes/actors/objects/door/nsmbwiiDoor2.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/actors/objects/door/doorframes.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://scenes/actors/objects/door/nsmbwiiDoor1.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/actors/objects/door/palettes/1/doorframes.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://scenes/actors/objects/door/palettes/2/doorframes.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://scenes/actors/objects/door/palettes/3/doorframes.tres" type="SpriteFrames" id=8]
+[ext_resource path="res://scenes/actors/objects/door/palettes/4/doorframes.tres" type="SpriteFrames" id=9]
+[ext_resource path="res://scenes/actors/objects/star_door/single_enter_area.tres" type="Shape2D" id=10]
+[ext_resource path="res://classes/teleport/warp_helper.gd" type="Script" id=11]
+
+[node name="Door" type="Node2D"]
+script = ExtResource( 2 )
+palette_frames = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ]
+
+[node name="WarpHelper" type="Node2D" parent="."]
+script = ExtResource( 11 )
+
+[node name="DoorEnterLogic" type="Node2D" parent="."]
+script = ExtResource( 1 )
+open_audio = ExtResource( 5 )
+close_audio = ExtResource( 3 )
+
+[node name="Tween" type="Tween" parent="DoorEnterLogic"]
+
+[node name="Area2D" type="Area2D" parent="DoorEnterLogic"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorEnterLogic/Area2D"]
+shape = ExtResource( 10 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DoorEnterLogic"]
+stream = ExtResource( 5 )
+volume_db = -8.0
+bus = "Sounds"
+
+[node name="ZIndex" type="Node2D" parent="DoorEnterLogic"]
+z_index = -10
+z_as_relative = false
+
+[node name="DoorBackground" type="ColorRect" parent="DoorEnterLogic/ZIndex"]
+margin_left = -12.0
+margin_top = -20.0
+margin_right = 12.0
+margin_bottom = 20.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="DoorSprite" type="AnimatedSprite" parent="DoorEnterLogic"]
+z_index = -8
+frames = ExtResource( 4 )
+animation = "close"
+playing = true

@@ -11,6 +11,7 @@ var working_folder: String
 var level_id: String
 var level_info: LevelInfo
 var can_edit: bool
+var is_campaign: bool
 var previous_number_of_players: int = 0
 
 ### tabs
@@ -68,13 +69,14 @@ func load_collectibles_info(level_info: LevelInfo)-> void:
 	star_coin_label.text = str(collected_star_coin_count) + "/" + str(total_star_coin_count)
 	star_coin_label.modulate = completion_color if (collected_star_coin_count >= total_star_coin_count) else Color.white
 
-func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder: String, _can_edit: bool = true):
+func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder: String, _can_edit: bool = true, _is_campaign: bool = false):
 	yield(get_parent(), "screen_opened")
 	
 	level_info = _level_info
 	level_id = _level_id
 	working_folder = _working_folder
 	can_edit = _can_edit
+	is_campaign = _is_campaign
 	
 	var current_number_of_players: int = Singleton.PlayerSettings.number_of_players
 	# load the real level data now
@@ -222,5 +224,13 @@ func delete_level():
 
 func start_level(start_in_edit_mode : bool):
 	Singleton.SceneSwitcher.menu_return_screen = "LevelsList"
-	Singleton.SceneSwitcher.menu_return_args = [level_info, level_id, working_folder, can_edit]
-	Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, start_in_edit_mode, true)
+	# next time deal with the whole hub level junk i guess
+	Singleton.SceneSwitcher.menu_return_args = [level_info, level_id, working_folder, can_edit, is_campaign]
+	Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, start_in_edit_mode, false, get_hub_level())
+
+
+func get_hub_level() -> String:
+	if is_campaign:
+		return "d0754fc4-41e4-4570-bddb-f53a01a3c4ed" #TEMP
+	else:
+		return ""

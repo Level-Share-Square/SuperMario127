@@ -1377,9 +1377,9 @@ level_code_path = NodePath("../VBoxContainer/Panel/MarginContainer/LevelCode")
 list_handler_path = NodePath("../../../LevelView/ScrollContainer/MarginContainer/ListHandler")
 
 [node name="Return" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 69.0
+margin_top = 54.0
 margin_right = 163.0
-margin_bottom = 89.0
+margin_bottom = 74.0
 rect_min_size = Vector2( 0, 20 )
 focus_neighbour_top = NodePath("../ImportCode")
 theme_type_variation = "AlternateButton"
@@ -1404,15 +1404,15 @@ script = ExtResource( 29 )
 offset = Vector2( -49, 0 )
 
 [node name="Padding" type="Control" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 99.0
+margin_top = 84.0
 margin_right = 163.0
-margin_bottom = 119.0
+margin_bottom = 104.0
 rect_min_size = Vector2( 0, 20 )
 
 [node name="NewLevel" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 129.0
+margin_top = 114.0
 margin_right = 163.0
-margin_bottom = 149.0
+margin_bottom = 134.0
 rect_min_size = Vector2( 0, 20 )
 theme_type_variation = "AlternateButton"
 text = "New Level"
@@ -1432,9 +1432,9 @@ script = ExtResource( 29 )
 offset = Vector2( -69, 0 )
 
 [node name="NewFolder" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 159.0
+margin_top = 144.0
 margin_right = 163.0
-margin_bottom = 179.0
+margin_bottom = 164.0
 rect_min_size = Vector2( 0, 20 )
 theme_type_variation = "AlternateButton"
 text = "New Folder"
@@ -1453,15 +1453,37 @@ expand = true
 script = ExtResource( 29 )
 offset = Vector2( -75, 0 )
 
-[node name="Padding2" type="Control" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 189.0
+[node name="NewCampaign" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
+margin_top = 174.0
 margin_right = 163.0
-margin_bottom = 189.0
+margin_bottom = 194.0
+rect_min_size = Vector2( 0, 20 )
+theme_type_variation = "AlternateButton"
+text = "New Campaign"
+align = 2
+script = ExtResource( 14 )
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewCampaign"]
+modulate = Color( 0.0470588, 0.290196, 0.427451, 1 )
+margin_left = 54.0
+margin_top = 1.0
+margin_right = 72.0
+margin_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource( 41 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( -91, 0 )
+
+[node name="Padding2" type="Control" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
+margin_top = 204.0
+margin_right = 163.0
+margin_bottom = 204.0
 
 [node name="ImportCode" type="Button" parent="Panel/Subscreens/AddElement/Control/ElementAddButtons"]
-margin_top = 199.0
+margin_top = 214.0
 margin_right = 163.0
-margin_bottom = 219.0
+margin_bottom = 234.0
 rect_min_size = Vector2( 0, 20 )
 focus_neighbour_bottom = NodePath("../Return")
 theme_type_variation = "AlternateButton"
@@ -2007,6 +2029,8 @@ script = ExtResource( 15 )
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewLevel" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewFolder" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="insert_folder"]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewFolder" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelView" ]]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewCampaign" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="insert_campaign"]
+[connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/NewCampaign" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/ImportCode" to="Panel/Subscreens/AddElement/Control/ElementAddButtons" method="import_level_code"]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/VBoxContainer/Panel/JSFilePicker" to="Panel/Subscreens/AddElement/Control/VBoxContainer/Panel/JSFilePicker" method="open_file_picker"]

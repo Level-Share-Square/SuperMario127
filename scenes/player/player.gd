@@ -116,6 +116,27 @@ func switch_scenes():
 func reload_scene():
 	GhostArrays.reload = get_tree().reload_current_scene()
 
+func quit_level(do_transition: bool = true):
+	if Singleton.CurrentLevelData.is_campaign and Singleton.CurrentLevelData.level_id != Singleton.CurrentLevelData.hub_level:
+		## ok maybe make a helper function for setting up 
+		## and starting a level from its id and folder ^^;
+		## this is getting to be too much boilerplate
+		var level_id: String = Singleton.CurrentLevelData.hub_level
+		var working_folder: String = Singleton.CurrentLevelData.working_folder
+		var level_info: LevelInfo = Singleton.SceneSwitcher.load_level_info(level_id, working_folder)
+		var hub_level: String = Singleton.CurrentLevelData.hub_level
+		if do_transition:
+			var _connect = Singleton.SceneTransitions.connect("transition_finished", Singleton.SceneSwitcher, "start_level", 
+			[level_info, level_id, working_folder, false, true, hub_level, false], CONNECT_ONESHOT)
+			Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)
+		else:
+			Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, false, true, hub_level, false)
+	else:
+		if do_transition:
+			Singleton.SceneSwitcher.quit_to_menu_with_transition("levels_screen")
+		else:
+			Singleton.SceneSwitcher.quit_to_menu("levels_screen")
+
 func update_activity() -> void:
 	var activity = Discord.Activity.new()
 	activity.set_type(Discord.ActivityType.Playing)

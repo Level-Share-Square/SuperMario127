@@ -29,8 +29,19 @@ func quit_to_menu_with_transition(screen_to_open : String = ""):
 	Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)
 
 
+func load_level_info(level_id: String, working_folder: String) -> LevelInfo:
+	var file_path: String = level_list_util.get_level_file_path(level_id, working_folder)
+	var level_code: String = level_list_util.load_level_code_file(file_path)
+	var level_info := LevelInfo.new(level_id, working_folder, level_code)
+	
+	# load in the entire level data (we'll need it)
+	if (level_info.validity_check.is_valid):
+		level_info.load_in()
+	
+	return level_info
 
-func setup_level(level_info: LevelInfo, level_id: String, working_folder: String):
+
+func setup_level(level_info: LevelInfo, level_id: String, working_folder: String, hub_level: String = ""):
 	# load save file, if it exists
 	var save_path: String = level_list_util.get_level_save_path(level_id, working_folder)
 	if level_list_util.file_exists(save_path):
@@ -41,15 +52,15 @@ func setup_level(level_info: LevelInfo, level_id: String, working_folder: String
 	
 	Singleton.CurrentLevelData.working_folder = working_folder
 	Singleton.CurrentLevelData.level_id = level_id
+	Singleton.CurrentLevelData.hub_level = hub_level
+	Singleton.CurrentLevelData.is_campaign = not (hub_level == "")
 	
 	Singleton.CurrentLevelData.level_info.selected_shine = -1
 	Singleton.CurrentLevelData.area = 0
 
 ## loads shine select if there's more than 1 shine,
 ## else loads directly into level
-func start_level(level_info: LevelInfo, level_id: String, working_folder: String, start_in_edit_mode : bool, has_back_button: bool = false):
-	setup_level(level_info, level_id, working_folder)
-	
+func start_level(level_info: LevelInfo, level_id: String, working_folder: String, start_in_edit_mode: bool, skip_shine_select: bool = false, hub_level: String = "", do_transition: bool = true):
 	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
 	# using collected_shines for the size check because there can only be one entry in collected shines per id, while shine_details can have multiple shines with the same id
 	var goal_scene = EDITOR_PATH if start_in_edit_mode else PLAYER_PATH
@@ -62,7 +73,7 @@ func start_level(level_info: LevelInfo, level_id: String, working_folder: String
 	
 	# If there is more than 1, go to shine select screen
 	if total_shine_count > 1:
-		if start_in_edit_mode:
+		if start_in_edit_mode or skip_shine_select:
 			# just so the menu can work properly
 			level_info.selected_shine = 0
 		else:
@@ -72,11 +83,17 @@ func start_level(level_info: LevelInfo, level_id: String, working_folder: String
 	# not a multishine level, but if there's 1 shine we should set it as selected 
 	if level_info.shine_details.size() == 1:
 		level_info.selected_shine = 0
-
-	var _connect = Singleton.SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [goal_scene], CONNECT_ONESHOT)
 	
-	Singleton.SceneTransitions.play_transition_audio()
-	Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)
+	if do_transition:
+		# setup level when the transition finishes so music doesnt bug out
+		var _connect = Singleton.SceneTransitions.connect("transition_finished", self, "setup_level", [level_info, level_id, working_folder, hub_level], CONNECT_ONESHOT)
+		_connect = Singleton.SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [goal_scene], CONNECT_ONESHOT)
+		
+		Singleton.SceneTransitions.play_transition_audio()
+		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)
+	else:
+		setup_level(level_info, level_id, working_folder, hub_level)
+		get_tree().change_scene(goal_scene)
 
 ## start level without setting any variables
 ## or doing any shine select screen checks

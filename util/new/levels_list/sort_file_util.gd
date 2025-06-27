@@ -6,6 +6,7 @@ const BASE_FOLDER: String = "user://level_list"
 const INTERNAL_SORT: String = "res://level/Developer Levels/sort.tres"
 const LEVELS: String = "levels"
 const FOLDERS: String = "folders"
+const CAMPAIGNS: String = "campaigns"
 const VERSION: String = "dev_version"
 
 
@@ -61,7 +62,9 @@ static func save_sort_file(working_folder: String, save_dict: Dictionary):
 static func get_start_index(sort: Dictionary, sort_type: String) -> int:
 	match (sort_type):
 		LEVELS:
-			return get_category_size(sort, FOLDERS)
+			return get_category_size(sort, FOLDERS) + get_category_size(sort, CAMPAIGNS)
+		FOLDERS:
+			return get_category_size(sort, CAMPAIGNS)
 	return 0
 
 static func get_start_index_with_back(sort: Dictionary, sort_type: String, working_folder: String) -> int:

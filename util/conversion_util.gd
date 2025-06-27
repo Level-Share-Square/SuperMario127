@@ -251,6 +251,31 @@ static func convert_053_to_054(result):
 	return result
 
 
+static func convert_054_to_055(result):
+	result.format_version = "0.5.5"
+	for area_result in result.areas:
+		if typeof(area_result) == TYPE_DICTIONARY:
+			
+			if !area_result.has("objects"):
+				break
+			
+			var new_objects : Array = []
+			for object_result in area_result.objects:
+				var object = object_result
+				# teleporter conversion (property indexes are gonna make me go insane i swear
+				match(object.type_id):
+					48: # door
+						object.properties.resize(10)
+						var teleport_mode = object.properties[8]
+						var force_fadeout = object.properties[9]
+						object.properties[8] = int(teleport_mode) # true = remote, false = local (why was it that way :/)
+						object.properties[9] = 0 if force_fadeout == true else 800 # setting max pan distance to 0 acts the same as force fadeout
+				
+				new_objects.append(object)
+			area_result.objects = new_objects
+	return result
+
+
 static func compareVersions(version, other) -> int:
 	var v = version.split(".")
 	var o = other.split(".")

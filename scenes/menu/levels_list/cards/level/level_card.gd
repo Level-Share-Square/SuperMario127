@@ -7,6 +7,7 @@ var http_thumbnails: HTTPThumbnails
 
 ## internal
 var level_info: LevelInfo
+var is_campaign: bool
 var has_save: bool
 
 
@@ -25,11 +26,13 @@ func setup(
 	_parent_folder: String,
 	_can_sort: bool,
 	_move_to_front: bool,
-	level_code: String = ""
+	level_code: String = "",
+	_is_campaign: bool = false
 ):
 	sort_type = sort_file_util.LEVELS
 	can_sort = _can_sort
 	move_to_front = _move_to_front
+	is_campaign = _is_campaign
 	
 	id = _id
 	name = id

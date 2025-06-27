@@ -80,13 +80,14 @@ signal zoom_changed(zoom)
 func quit_to_menu():
 	var level_id: String = Singleton.CurrentLevelData.level_id
 	var working_folder: String = Singleton.CurrentLevelData.working_folder
+	var is_campaign: bool = Singleton.CurrentLevelData.is_campaign
 	
 	var code_path: String = level_list_util.get_level_file_path(level_id, working_folder)
 	var level_code: String = level_list_util.load_level_code_file(code_path)
 	
 	Singleton.CurrentLevelData.level_info = LevelInfo.new(level_id, working_folder, level_code)
 	if Singleton.SceneSwitcher.menu_return_args.size() > 0:
-		Singleton.SceneSwitcher.menu_return_args = [Singleton.CurrentLevelData.level_info, level_id, working_folder, true]
+		Singleton.SceneSwitcher.menu_return_args = [Singleton.CurrentLevelData.level_info, level_id, working_folder, true, is_campaign]
 	
 	Singleton.SceneSwitcher.quit_to_menu_with_transition("levels_screen")
 

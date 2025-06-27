@@ -110,7 +110,10 @@ static func get_valid_folder_name(folder_id: String, parent_folder: String) -> S
 
 static func get_parent_from_path(file_path: String):
 	var index: int = file_path.rfind("/")
-	return file_path.substr(0, index)
+	if index != -1:
+		return file_path.substr(0, index)
+	else:
+		return ""
 
 # this retrieves everything after the last "/" in the file path
 static func get_last_in_path(file_path: String) -> String:

@@ -199,7 +199,7 @@ func play_level():
 	
 	page_info.level_info.level_id = local_id
 	page_info.level_info.level_folder = working_folder
-	Singleton.SceneSwitcher.start_level(page_info.level_info, local_id, working_folder, false, true)
+	Singleton.SceneSwitcher.start_level(page_info.level_info, local_id, working_folder, false)
 
 
 ## adding descriptions, author, thumbnail

@@ -385,6 +385,9 @@ func load_in(code: String)-> void:
 			result = conversion_util.convert_053_to_054(result)
 		else:
 			result.format_version = "0.5.4"
+	
+	if result.format_version == "0.5.4":
+		result = conversion_util.convert_054_to_055(result)
 
 	assert(result.format_version)
 	var version_int = result.format_version.replace(".","")
