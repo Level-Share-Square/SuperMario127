@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/menu/levels_list/cards/base_card.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/levels_list/cards/campaign/decoration.gd" type="Script" id=2]
@@ -10,13 +10,14 @@
 [ext_resource path="res://scenes/shared/background/backgrounds/day/day.png" type="Texture" id=8]
 
 [sub_resource type="Gradient" id=6]
-colors = PoolColorArray( 0.247059, 0.188235, 0.501961, 1, 0.541176, 0.592157, 0.729412, 1 )
+offsets = PoolRealArray( 0.52381, 1 )
+colors = PoolColorArray( 0.2, 0.27451, 0.505882, 1, 0.847059, 0.0941176, 0.764706, 1 )
 
 [sub_resource type="GradientTexture2D" id=7]
 gradient = SubResource( 6 )
 fill = 1
-fill_from = Vector2( 0.957831, 1 )
-fill_to = Vector2( 0.379518, 0 )
+fill_from = Vector2( 0.7, 1 )
+fill_to = Vector2( 0.5, 0 )
 
 [sub_resource type="Gradient" id=8]
 colors = PoolColorArray( 0.0470588, 0.00784314, 0.145098, 1, 0.482353, 0.45098, 0.843137, 1 )
@@ -50,14 +51,6 @@ gradient = SubResource( 12 )
 fill_from = Vector2( 0.126506, 0.957831 )
 fill_to = Vector2( 0.524096, 0.457831 )
 
-[sub_resource type="DynamicFont" id=5]
-size = 20
-outline_size = 4
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-extra_spacing_char = -1
-font_data = ExtResource( 6 )
-
 [sub_resource type="Gradient" id=14]
 colors = PoolColorArray( 0.0588235, 0.00392157, 1, 1, 0.301961, 0.713726, 0.298039, 1 )
 
@@ -65,6 +58,25 @@ colors = PoolColorArray( 0.0588235, 0.00392157, 1, 1, 0.301961, 0.713726, 0.2980
 gradient = SubResource( 14 )
 fill = 1
 fill_from = Vector2( 1, 1 )
+
+[sub_resource type="CanvasItemMaterial" id=18]
+blend_mode = 3
+
+[sub_resource type="Gradient" id=19]
+offsets = PoolRealArray( 0, 0.571429 )
+colors = PoolColorArray( 0.698039, 0.647059, 1, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=20]
+gradient = SubResource( 19 )
+fill_from = Vector2( 1, 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 20
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 6 )
 
 [sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 0.509804, 0.662745, 0.74902, 0.501961, 0.466667, 0.517647, 0.54902, 0.25098 )
@@ -84,21 +96,20 @@ theme = ExtResource( 5 )
 script = ExtResource( 2 )
 
 [node name="Outline" type="Polygon2D" parent="Decoration" index="0"]
-self_modulate = Color( 1, 1, 1, 0.25098 )
-position = Vector2( 0, -3.97562 )
+position = Vector2( -0.332191, -2.69189 )
 texture = SubResource( 7 )
-polygon = PoolVector2Array( 3.22896, 82.2219, 100.143, 76.7832, 96.0517, 19.3373, 90.8026, 8.41008, -4.56621, 14.1764, -1, 76 )
+polygon = PoolVector2Array( 3.23678, 81.7623, 99.679, 75.9224, 96.0517, 19.3373, 90.8356, 8.84672, -3.03013, 15.4098, 0.0665321, 76.0893 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Decoration" index="1"]
-position = Vector2( 0, -3.97562 )
+position = Vector2( -0.332191, -2.69189 )
 texture = SubResource( 9 )
 polygon = PoolVector2Array( 4.47268, 79.2979, 97.2538, 73.8463, 93.7969, 19.7757, 89.8673, 11.4546, -1, 17, 2.80793, 76.0228 )
 
 [node name="Thumbnail" type="TextureRect" parent="Decoration" index="2"]
-margin_left = -1.0
-margin_top = 13.0244
-margin_right = 90.0
-margin_bottom = 72.0244
+margin_left = -1.33219
+margin_top = 14.3081
+margin_right = 89.6678
+margin_bottom = 73.3081
 rect_rotation = -3.5
 texture = ExtResource( 8 )
 expand = true
@@ -111,29 +122,49 @@ expand = true
 
 [node name="Polygon2D2" type="Polygon2D" parent="Decoration" index="3"]
 self_modulate = Color( 1, 1, 1, 0.564706 )
-position = Vector2( 0, 1.02438 )
+position = Vector2( -0.332191, 2.30811 )
 texture = SubResource( 17 )
 polygon = PoolVector2Array( 93.4297, 65.3672, 89.8281, 6.46094, 74.0469, 7.41406, 78.0156, 66.2734 )
 uv = PoolVector2Array( 45.4297, 59.3672, 41.8281, 0.460938, 26.0469, 1.41406, 30.0156, 60.2734 )
 
 [node name="Polygon2D4" type="Polygon2D" parent="Decoration" index="4"]
-position = Vector2( 0, 1.02438 )
+position = Vector2( -0.332191, 2.30811 )
 texture = SubResource( 11 )
 polygon = PoolVector2Array( 91.1562, 28.2812, 89.8281, 6.46094, 68.8974, 7.7381 )
 uv = PoolVector2Array( 61.4586, 59.3769, 58.0523, 3.41391, 4.37078, 6.68947 )
 
 [node name="Polygon2D6" type="Polygon2D" parent="Decoration" index="5"]
-position = Vector2( 0, 1.02438 )
+position = Vector2( -0.332191, 2.30811 )
 texture = SubResource( 13 )
 polygon = PoolVector2Array( 91.1562, 28.2812, 73.2178, 11.7394, 73.2597, 15.9525, 72.9546, 20.1885, 71.9574, 23.6207, 69.9111, 26.9777, 77.8169, 27.2135, 86.3024, 27.7537 )
 uv = PoolVector2Array( 63.3124, 50.6168, 12.0599, 3.35468, 12.1796, 15.3921, 11.308, 27.4948, 8.4589, 37.3011, 2.61253, 46.8924, 25.2001, 47.566, 49.4445, 49.1095 )
 
-[node name="Name" type="Label" parent="Decoration" index="6"]
+[node name="Polygon2D5" type="Polygon2D" parent="Decoration" index="6"]
+position = Vector2( -0.332191, 2.30811 )
+polygon = PoolVector2Array( 88, 20, 87, 9, 77, 10, 77.5763, 15.7629, 80, 18, 82.181, 20 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Decoration/Polygon2D5" index="0"]
+texture = SubResource( 15 )
+polygon = PoolVector2Array( 81.7443, 9.48879, 83.8894, 12.565, 87.2004, 12.1446, 85.6409, 15.6687, 87.3625, 19.6417, 82.7686, 17.4893, 81.0143, 18.9295, 79.3083, 17.3142, 79.7476, 16.066, 77.375, 13.2812, 80.4732, 13.1169 )
+uv = PoolVector2Array( 27.6869, 1.93284, 39.6643, 19.1098, 58.1521, 16.7621, 49.4442, 36.4396, 59.0573, 58.6236, 33.4061, 46.6053, 23.6109, 54.647, 14.0849, 45.6279, 16.538, 38.658, 3.28999, 23.1088, 20.5896, 22.1911 )
+
+[node name="Polygon2D3" type="Polygon2D" parent="Decoration" index="7"]
+position = Vector2( -0.332191, 2.30811 )
+color = Color( 1, 0.65625, 0, 1 )
+
+[node name="Polygon2D7" type="Polygon2D" parent="Decoration" index="8"]
+material = SubResource( 18 )
+position = Vector2( -0.332191, -2.69189 )
+texture = SubResource( 20 )
+polygon = PoolVector2Array( 4.47268, 79.2979, 97.2538, 73.8463, 93.7969, 19.7757, 89.8673, 11.4546, -1, 17, 2.80793, 76.0228 )
+uv = PoolVector2Array( -12.4035, 64.6787, 80.5376, 64.7134, 80.2785, 10.5331, 76.847, 1.99452, -14.1892, 2.16638, -13.872, 61.3111 )
+
+[node name="Name" type="Label" parent="Decoration" index="9"]
 unique_name_in_owner = true
-margin_left = 1.0
-margin_top = 13.0
-margin_right = 144.0
-margin_bottom = 120.0
+margin_left = 0.667809
+margin_top = 14.2837
+margin_right = 143.668
+margin_bottom = 121.284
 rect_rotation = -4.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -148,20 +179,7 @@ valign = 1
 autowrap = true
 clip_text = true
 
-[node name="Polygon2D5" type="Polygon2D" parent="Decoration" index="7"]
-position = Vector2( 0, 1.02438 )
-polygon = PoolVector2Array( 88, 20, 87, 9, 77, 10, 77.5763, 15.7629, 80, 18, 82.181, 20 )
-
-[node name="Polygon2D" type="Polygon2D" parent="Decoration/Polygon2D5" index="0"]
-texture = SubResource( 15 )
-polygon = PoolVector2Array( 81.7443, 9.48879, 83.8894, 12.565, 87.2004, 12.1446, 85.6409, 15.6687, 87.3625, 19.6417, 82.7686, 17.4893, 81.0143, 18.9295, 79.3083, 17.3142, 79.7476, 16.066, 77.375, 13.2812, 80.4732, 13.1169 )
-uv = PoolVector2Array( 27.6869, 1.93284, 39.6643, 19.1098, 58.1521, 16.7621, 49.4442, 36.4396, 59.0573, 58.6236, 33.4061, 46.6053, 23.6109, 54.647, 14.0849, 45.6279, 16.538, 38.658, 3.28999, 23.1088, 20.5896, 22.1911 )
-
-[node name="Polygon2D3" type="Polygon2D" parent="Decoration" index="8"]
-position = Vector2( 0, 1.02438 )
-color = Color( 1, 0.65625, 0, 1 )
-
-[node name="Tape" type="TextureRect" parent="Decoration" index="9"]
+[node name="Tape" type="TextureRect" parent="Decoration" index="10"]
 margin_left = 84.0
 margin_top = -2.0
 margin_right = 111.0
