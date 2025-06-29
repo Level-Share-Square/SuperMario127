@@ -750,6 +750,7 @@ angle_random = 0.5
 color_ramp = SubResource( 32 )
 
 [node name="DryBonesEnemy" instance=ExtResource( 1 )]
+collision_mask = 17
 script = ExtResource( 17 )
 cur_state = "PatrolState"
 float_in_liquids = true
@@ -806,7 +807,7 @@ can_be_hurt = false
 [node name="RegenerateState" type="Node2D" parent="States" index="6"]
 script = ExtResource( 28 )
 
-[node name="Damage" parent="." index="4"]
+[node name="Damage" parent="." index="5"]
 script = ExtResource( 7 )
 
 [node name="CollisionShape2D" parent="Damage/Crush" index="0"]
@@ -818,7 +819,7 @@ shape = SubResource( 44 )
 [node name="CollisionShape2D" parent="Damage/Attack" index="0"]
 shape = SubResource( 45 )
 
-[node name="AnimatedSprite" parent="." index="5"]
+[node name="AnimatedSprite" parent="." index="6"]
 position = Vector2( 0, -19 )
 frames = SubResource( 14 )
 animation = "idle"
@@ -830,9 +831,6 @@ enabled = true
 
 [node name="CollisionShape2D" parent="AnimatedSprite/DialogueDetector" index="0"]
 shape = SubResource( 46 )
-
-[node name="VisibilityEnabler2D" parent="." index="6"]
-pause_particles = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
 unique_name_in_owner = true
@@ -896,6 +894,9 @@ fract_delta = false
 local_coords = false
 process_material = SubResource( 33 )
 texture = ExtResource( 14 )
+
+[node name="VisibilityEnabler2D" parent="." index="11"]
+pause_particles = false
 
 [node name="Sound1" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
 stream = ExtResource( 21 )
