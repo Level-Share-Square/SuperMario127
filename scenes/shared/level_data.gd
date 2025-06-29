@@ -5,6 +5,9 @@ var working_folder: String = level_list_util.BASE_FOLDER
 var hub_level: String = ""
 var is_campaign: bool = false
 
+var level_transition_data: Dictionary
+var hub_return_data: Dictionary
+
 var level_info : LevelInfo
 var level_data : LevelData
 var area := 0

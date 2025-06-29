@@ -50,7 +50,7 @@ func change_setting(key: String, new_value):
 			Singleton2.dark_mode = new_value
 			Singleton2.toggle_dark_mode()
 		"multiplayer":
-			Singleton.PlayerSettings.number_of_players = 2 if new_value else 1
+			Singleton.PlayerSettings.number_of_players = 1
 		"first_player":
 			Singleton.PlayerSettings.player1_character = new_value
 		"second_player":

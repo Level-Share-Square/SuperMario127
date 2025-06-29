@@ -53,13 +53,13 @@ func start_exit_animation(character: Character) -> void:
 
 ## mostly just restoring control to mario
 func finish_exit_animation(character: Character) -> void:
-	Singleton.CurrentLevelData.level_data.vars.transition_data = []
+	Singleton.CurrentLevelData.level_data.vars.transition_data = {}
 	if not character.dead:
 		character.toggle_movement(true)
 	character.velocity = Vector2.ZERO
 	# undo collision changes 
 	character.set_collision_layer_bit(1, true)
-	character.set_inter_player_collision(true) 
+	character.set_inter_player_collision(true)
 
 
 ### MISC

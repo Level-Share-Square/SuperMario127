@@ -57,7 +57,7 @@ func _ready():
 		Singleton.CheckpointSaved.reset()
 		Singleton.CurrentLevelData.level_data.vars.init()
 	
-	if Singleton.CurrentLevelData.level_data.vars.transition_data == []:
+	if Singleton.CurrentLevelData.level_data.vars.transition_data.get("target_tag", "") == "":
 		Singleton.CurrentLevelData.area = Singleton.CheckpointSaved.current_area
 		Singleton.CurrentLevelData.level_data.vars.reload()
 	

@@ -20,7 +20,7 @@ var max_purple_starbits := 0
 var required_purple_starbits = []
 var nozzles_collected = ["null"]
 var teleporters = []
-var transition_data = []
+var transition_data: Dictionary = {}
 var transition_character_data = []
 var transition_character_data_2 = []
 var liquids = []
@@ -58,7 +58,7 @@ func reset_counters():
 		required_purple_starbits.append([0])
 
 func init():
-	transition_data = []
+	transition_data = {}
 	transition_character_data = []
 	transition_character_data_2 = []
 

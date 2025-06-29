@@ -331,12 +331,8 @@ func _ready():
 	heal_tick_timer.connect("timeout", self, "_on_heal_tick_timer_timeout")
 	ground_collider_enable_timer.connect("timeout", self, "_on_ground_collder_timer_timeout")
 #	print(Singleton.CurrentLevelData.level_data.vars.transition_data)
-	if Singleton.CurrentLevelData.level_data.vars.transition_data != []:
-		hide()
-		toggle_movement(false)
-	else:
-		show()
-		toggle_movement(true)
+	hide()
+	toggle_movement(false)
 	Singleton.Music.toggle_underwater_music(false)
 	for input in input_names.keys():
 		inputs.append([false, false, str(input)])
@@ -441,26 +437,61 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	collected_shine.visible = false
 	collected_shine.get_node("ShineParticles").emitting = false
 	
-	#print(Singleton.CheckpointSaved.current_checkpoint_id)
-	if Singleton.CheckpointSaved.current_checkpoint_id != -1 and Singleton.CurrentLevelData.level_data.vars.transition_data == []:
-		position = Singleton.CheckpointSaved.current_spawn_pos
-		reset_physics_interpolation()
+	# the ghost of player 2 shall not haunt my teleporter code,,,
+	if player_id != 0:
+		return
+	
+	# time score
+	if Singleton.CurrentLevelData.level_data.vars.transition_data.get("target_tag", "") == "" and Singleton.CheckpointSaved.current_checkpoint_id == -1:
+		Singleton.CurrentLevelData.start_tracking_time_score()
+	else:
 		var score_from_before = Singleton.CurrentLevelData.time_score
 		Singleton.CurrentLevelData.start_tracking_time_score()
 		Singleton.CurrentLevelData.time_score = score_from_before
+	
+	# teleporters
+	var do_teleport: bool = false
+	var target_tag: String = Singleton.CurrentLevelData.level_data.vars.transition_data.get("target_tag", "")
+	var level_target_tag: String = Singleton.CurrentLevelData.level_transition_data.get("target_tag", "")
+	
+	if target_tag != "":
+		do_teleport = true
+	elif Singleton.CheckpointSaved.current_checkpoint_id != -1:
+		position = Singleton.CheckpointSaved.current_spawn_pos
+		reset_physics_interpolation()
+	elif level_target_tag != "":
+		do_teleport = true
+		target_tag = level_target_tag
 	else:
-		# start speedrun timer
-		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and Singleton.CheckpointSaved.current_checkpoint_id == -1:
-			if Singleton.CurrentLevelData.level_data.vars.transition_data == []:
-				Singleton.CurrentLevelData.start_tracking_time_score()
-			else:
-				var score_from_before = Singleton.CurrentLevelData.time_score
-				Singleton.CurrentLevelData.start_tracking_time_score()
-				Singleton.CurrentLevelData.time_score = score_from_before
-		elif Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and Singleton.CurrentLevelData.level_data.vars.transition_data != []:
-			var score_from_before = Singleton.CurrentLevelData.time_score
-			Singleton.CurrentLevelData.start_tracking_time_score()
-			Singleton.CurrentLevelData.time_score = score_from_before
+		do_teleport = true
+		target_tag = "_entrance"
+	
+	if do_teleport:
+		var shared_node: LevelShared = get_tree().get_current_scene().get_shared_node()
+		yield(shared_node.get_objects_node(), "objects_ready")
+		
+		show()
+		var teleporter: GameObject = find_teleporter(target_tag)
+		print(target_tag, teleporter)
+		if not is_instance_valid(teleporter):
+			target_tag = "_entrance"
+			teleporter = find_teleporter(target_tag)
+		
+		if is_instance_valid(teleporter):
+			global_position = teleporter.global_position
+			reset_physics_interpolation()
+			
+			teleporter.start_exit_animation(self)
+		else:
+			toggle_movement(true)
+
+
+func find_teleporter(target_tag: String) -> GameObject:
+	for i in Singleton.CurrentLevelData.level_data.vars.teleporters:
+		if i[0] == target_tag.to_lower():
+			return i[1]
+	return null
+
 
 var prev_is_grounded := false
 func is_grounded() -> bool:

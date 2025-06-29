@@ -38,13 +38,20 @@ func quit_level(do_transition: bool = true):
 		var working_folder: String = Singleton.CurrentLevelData.working_folder
 		var level_info: LevelInfo = Singleton.SceneSwitcher.load_level_info(level_id, working_folder)
 		var hub_level: String = Singleton.CurrentLevelData.hub_level
+		
+		Singleton.CurrentLevelData.level_transition_data = Singleton.CurrentLevelData.hub_return_data
+		Singleton.CurrentLevelData.hub_return_data = {}
+		
 		if do_transition:
 			var _connect = Singleton.SceneTransitions.connect("transition_finished", Singleton.SceneSwitcher, "start_level", 
 			[level_info, level_id, working_folder, false, true, hub_level, false], CONNECT_ONESHOT)
 			Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)
 		else:
+			yield(get_tree(), "physics_frame")
 			Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, false, true, hub_level, false)
 	else:
+		Singleton.CurrentLevelData.level_transition_data = {}
+		Singleton.CurrentLevelData.hub_return_data = {}
 		if do_transition:
 			Singleton.SceneSwitcher.quit_to_menu_with_transition("levels_screen")
 		else:
