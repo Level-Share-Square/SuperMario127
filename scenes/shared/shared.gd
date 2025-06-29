@@ -11,6 +11,13 @@ enum Layers {
 	VeryFront,
 }
 
+enum TileLayers {
+	Back,
+	Middle,
+	Front,
+	VeryBack,
+}
+
 const layer_index_offset: int = -3
 const layer_spacing: int = 16
 
@@ -39,7 +46,7 @@ func _ready():
 func get_objects_node():
 	return objects_node
 
-func set_tile(x: int, y:int, layer: int, tileset_id: int, tile_id: int, palette_id : int = 0):
+func set_tile(x: int, y: int, layer: int, tileset_id: int, tile_id: int, palette_id : int = 0):
 	#print("set ",x," ",y)
 	tilemaps_node.set_tile(x, y, layer, tileset_id, tile_id, palette_id)
 
@@ -172,7 +179,6 @@ func update_tilemaps():
 
 func toggle_layer_transparency(current_layer: int, is_transparent: bool):
 	var index = 0
-	
 	for tilemap in tilemaps_node.get_children():
 		var corrected_index = wrapi(index - 1, 0, 4)
 		
