@@ -322,9 +322,9 @@ margin_bottom = 432.0
 alignment = 1
 
 [node name="Back" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
-margin_top = 114.0
+margin_top = 112.0
 margin_right = 192.0
-margin_bottom = 146.0
+margin_bottom = 145.0
 focus_neighbour_top = NodePath("../Storage")
 focus_neighbour_bottom = NodePath("../General")
 theme_type_variation = "Red"
@@ -348,12 +348,12 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="Padding" type="Control" parent="BlackBar/MarginContainer/VBoxContainer"]
-margin_top = 162.0
+margin_top = 161.0
 margin_right = 192.0
-margin_bottom = 162.0
+margin_bottom = 161.0
 
 [node name="General" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
-margin_top = 178.0
+margin_top = 177.0
 margin_right = 192.0
 margin_bottom = 210.0
 focus_neighbour_top = NodePath("../Back")
@@ -380,7 +380,7 @@ patch_margin_bottom = 11
 [node name="Controls" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
 margin_top = 226.0
 margin_right = 192.0
-margin_bottom = 258.0
+margin_bottom = 259.0
 focus_neighbour_top = NodePath("../General")
 text = "Controls"
 align = 2
@@ -402,9 +402,9 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="Storage" type="Button" parent="BlackBar/MarginContainer/VBoxContainer"]
-margin_top = 274.0
+margin_top = 275.0
 margin_right = 192.0
-margin_bottom = 306.0
+margin_bottom = 308.0
 focus_neighbour_bottom = NodePath("../Back")
 text = "Storage"
 align = 2
@@ -449,9 +449,9 @@ script = ExtResource( 27 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Subscreens/General"]
 margin_left = 17.0
-margin_top = 35.0
+margin_top = 64.0
 margin_right = 550.0
-margin_bottom = 397.0
+margin_bottom = 367.0
 custom_constants/separation = 32
 
 [node name="MarginContainer" type="MarginContainer" parent="Subscreens/General/VBoxContainer"]
@@ -503,40 +503,33 @@ rect_min_size = Vector2( 0, 1 )
 [node name="GridContainer" type="GridContainer" parent="Subscreens/General/VBoxContainer"]
 margin_top = 205.0
 margin_right = 533.0
-margin_bottom = 362.0
+margin_bottom = 303.0
 custom_constants/vseparation = 20
 custom_constants/hseparation = 40
 columns = 4
 
 [node name="VSync" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
-margin_right = 131.0
+margin_right = 94.0
 setting_section = "General"
 setting_key = "v_sync"
 default_value = true
 
-[node name="Multiplayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
-margin_left = 171.0
-margin_right = 265.0
-setting_section = "General"
-setting_key = "multiplayer"
-
 [node name="ShowTimer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
-margin_left = 305.0
-margin_right = 399.0
+margin_left = 134.0
+margin_right = 228.0
 setting_section = "General"
 setting_key = "show_timer"
 
-[node name="RichPresence" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
-margin_left = 439.0
-margin_right = 533.0
+[node name="Character" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 11 )]
+margin_left = 268.0
+margin_right = 362.0
 setting_section = "General"
-setting_key = "rich_presence"
-default_value = true
+setting_key = "first_player"
+options = [ "Mario", "Luigi" ]
 
 [node name="WindowScale" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 14 )]
-margin_top = 59.0
-margin_right = 131.0
-margin_bottom = 98.0
+margin_left = 402.0
+margin_right = 533.0
 rect_min_size = Vector2( 120, 0 )
 setting_section = "General"
 setting_key = "window_scale"
@@ -545,49 +538,39 @@ options = [ "1x", "2x", "3x", "Full" ]
 [node name="Node" type="Node" parent="Subscreens/General/VBoxContainer/GridContainer/WindowScale"]
 script = SubResource( 14 )
 
-[node name="FirstPlayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 11 )]
-margin_left = 171.0
+[node name="RichPresence" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
 margin_top = 59.0
-margin_right = 265.0
+margin_right = 94.0
 margin_bottom = 98.0
 setting_section = "General"
-setting_key = "first_player"
-options = [ "Mario", "Luigi" ]
-
-[node name="LevelGhost" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
-margin_left = 305.0
-margin_top = 59.0
-margin_right = 399.0
-margin_bottom = 98.0
-setting_section = "General"
-setting_key = "level_ghost"
+setting_key = "rich_presence"
+default_value = true
 
 [node name="DarkTransitions" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
-margin_left = 439.0
+margin_left = 134.0
 margin_top = 59.0
-margin_right = 533.0
+margin_right = 228.0
 margin_bottom = 98.0
 setting_section = "General"
 setting_key = "dark_mode"
 
+[node name="LevelGhost" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 10 )]
+margin_left = 268.0
+margin_top = 59.0
+margin_right = 362.0
+margin_bottom = 98.0
+setting_section = "General"
+setting_key = "level_ghost"
+
 [node name="FPSCap" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 14 )]
-margin_top = 118.0
-margin_right = 131.0
-margin_bottom = 157.0
+margin_left = 402.0
+margin_top = 59.0
+margin_right = 533.0
+margin_bottom = 98.0
 setting_section = "General"
 setting_key = "fps_cap"
 default_value = 3
 options = [ "30", "40", "50", "60" ]
-
-[node name="SecondPlayer" parent="Subscreens/General/VBoxContainer/GridContainer" instance=ExtResource( 11 )]
-margin_left = 171.0
-margin_top = 118.0
-margin_right = 265.0
-margin_bottom = 157.0
-setting_section = "General"
-setting_key = "second_player"
-default_value = 1
-options = [ "Mario", "Luigi" ]
 
 [node name="Controls" type="MarginContainer" parent="Subscreens"]
 visible = false
@@ -846,9 +829,9 @@ script = ExtResource( 17 )
 category_paths = [ NodePath("Player1"), NodePath("Player2"), NodePath("Interface"), NodePath("Hotkeys/Gameplay"), NodePath("Hotkeys/Editor") ]
 
 [node name="Player1" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
-margin_left = 32.0
+margin_left = 14.0
 margin_top = 1.0
-margin_right = 512.0
+margin_right = 530.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1022,9 +1005,9 @@ setting_key = "63_wing_cap"
 
 [node name="Player2" type="GridContainer" parent="Subscreens/Controls/VBoxContainer/Remapper"]
 visible = false
-margin_left = 32.0
+margin_left = 14.0
 margin_top = 1.0
-margin_right = 512.0
+margin_right = 530.0
 margin_bottom = 226.0
 custom_constants/vseparation = 24
 custom_constants/hseparation = 32
@@ -1756,10 +1739,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -58.0
-margin_top = 16.0
-margin_right = -7.0
-margin_bottom = 40.0
+margin_left = 710.0
+margin_top = 448.0
+margin_right = 761.0
+margin_bottom = 473.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "v0.9.1"

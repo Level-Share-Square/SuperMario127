@@ -264,6 +264,15 @@ static func convert_054_to_055(result):
 				var object = object_result
 				# teleporter conversion (property indexes are gonna make me go insane i swear
 				match(object.type_id):
+					23: # pipe
+						object.properties.resize(12)
+						var color = object.properties[8]
+						var teleport_mode = object.properties[9]
+						var force_fadeout = object.properties[10]
+						object.properties[11] = color
+						object.properties[8] = int(teleport_mode) # true = remote, false = local (why was it that way :/)
+						object.properties[9] = 0 if force_fadeout == true else 800 # setting max pan distance to 0 acts the same as force fadeout
+					
 					48: # door
 						object.properties.resize(10)
 						var teleport_mode = object.properties[8]

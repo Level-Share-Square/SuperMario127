@@ -1,4 +1,4 @@
-[gd_scene load_steps=1679 format=2]
+[gd_scene load_steps=1676 format=2]
 
 [ext_resource path="res://scenes/oldeditor/bounds_control_button.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://scenes/actors/objects/red_coin/preview.png" type="Texture" id=6]
 [ext_resource path="res://scenes/oldeditor/window_open_button.gd" type="Script" id=7]
 [ext_resource path="res://scenes/oldeditor/dragged_item.gd" type="Script" id=8]
-[ext_resource path="res://scenes/oldeditor/luigi_entrance_item/entrance_removal.gd" type="Script" id=9]
 [ext_resource path="res://assets/tiles/grass/icon.png" type="Texture" id=10]
 [ext_resource path="res://scenes/oldeditor/assets/help_icon_press.png" type="Texture" id=11]
 [ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=12]
@@ -25,7 +24,6 @@
 [ext_resource path="res://scenes/oldeditor/layer_switcher_button.gd" type="Script" id=23]
 [ext_resource path="res://scenes/oldeditor/PlaceableItem.gd" type="Script" id=24]
 [ext_resource path="res://scenes/oldeditor/group.gd" type="Script" id=25]
-[ext_resource path="res://scenes/oldeditor/luigi_entrance_item/entrance_placement.gd" type="Script" id=26]
 [ext_resource path="res://scenes/oldeditor/camera_controls.gd" type="Script" id=27]
 [ext_resource path="res://scenes/oldeditor/tool_selector.gd" type="Script" id=28]
 [ext_resource path="res://scenes/oldeditor/editor.gd" type="Script" id=29]
@@ -54,7 +52,6 @@
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=52]
 [ext_resource path="res://scenes/oldeditor/assets/layer_icon_press.png" type="Texture" id=53]
 [ext_resource path="res://scenes/oldeditor/assets/search_icon_hover.png" type="Texture" id=54]
-[ext_resource path="res://scenes/actors/objects/level_entrance_luigi/sprite.png" type="Texture" id=55]
 [ext_resource path="res://scenes/oldeditor/assets/clickable_shadow_arrow.png" type="Texture" id=56]
 [ext_resource path="res://scenes/oldeditor/assets/pencil_tool_hover.png" type="Texture" id=57]
 [ext_resource path="res://assets/tiles/glass/icon.png" type="Texture" id=58]
@@ -2566,27 +2563,11 @@ group_name = "Special"
 script = ExtResource( 24 )
 is_object = true
 object_center = Vector2( 15, 16 )
-item_name = "Player 1 Entrance"
-change_to = "EntranceLuigi"
-items_in_sequence = 2
+item_name = "Entrance"
 icon = ExtResource( 12 )
 preview = ExtResource( 12 )
 placement_action = ExtResource( 155 )
 removal_action = ExtResource( 149 )
-
-[node name="EntranceLuigi" type="Node" parent="PlaceableItems/SpecialGroup"]
-script = ExtResource( 24 )
-object_id = 5
-is_object = true
-object_center = Vector2( 15, 16 )
-item_name = "Player 2 Entrance"
-change_to = "Entrance"
-items_in_sequence = 2
-index_in_sequence = 1
-icon = ExtResource( 55 )
-preview = ExtResource( 55 )
-placement_action = ExtResource( 26 )
-removal_action = ExtResource( 9 )
 
 [node name="Checkpoint" type="Node" parent="PlaceableItems/SpecialGroup"]
 script = ExtResource( 24 )

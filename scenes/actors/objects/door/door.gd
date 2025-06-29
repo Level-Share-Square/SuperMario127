@@ -54,14 +54,17 @@ func entrance_animation_finished(_animation: String) -> void:
 func start_exit_animation(character: Character) -> void:
 	.start_exit_animation(character)
 	
-	animate_door("open")
 	character.toggle_movement(false)
 	character.anim_player.play("exit_door")
+	animate_door("open")
 	
 	# when mario finishes exiting, run a function (one shot)
 	# warning-ignore: return_value_discarded
 
 	character.anim_player.connect("animation_finished", self, "exit_animation_finished", [character], CONNECT_ONESHOT)
+	
+	yield(get_tree(), "idle_frame")
+	character.show()
 
 func exit_animation_finished(_animation: String, character: Character):
 	character.sprite.animation = "exitDoor" + ("Right" if character.facing_direction == 1 else "Left")

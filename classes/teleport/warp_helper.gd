@@ -5,6 +5,8 @@ extends Node
 const WAIT_TIME := 0.25
 const CAMERA_TWEEN_TIME := 0.5
 onready var teleporter: GameObject = get_parent()
+var timer_manager
+
 
 ### WARP FUNCTIONS ####
 func location_warp(character: Character, target_tag: String, max_pan_distance: int) -> void:
@@ -24,6 +26,7 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 	
 	yield(get_tree().create_timer(WAIT_TIME), "timeout")
 	
+	character.hide()
 	character.global_position = target_teleporter.global_position
 	character.reset_physics_interpolation()
 	
@@ -39,7 +42,62 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 
 
 func area_warp(character: Character, target_tag: String, target_area: int) -> void:
-	pass
+#	if is_instance_valid(timer_manager):
+#		if (area_id == Singleton.CurrentLevelData.area):
+#
+#			var area_timer: Control = timer_manager.get_timer("area_timer")
+#
+#			if (is_instance_valid(area_timer) && area_timer.time < .65):
+#				# Don't chage the area if the area timer is too low.
+#				# Ideally the time left would just be carried over after reloading the area.
+#				# This only happens when the player teleports from and to the same area.
+#				return
+#		else:
+#			timer_manager.remove_timer("area_timer")
+#	else:
+#		printerr("Couldn't find timer manager node!")
+	
+	# band aid crash fix
+	while Singleton.CurrentLevelData.level_data.vars.liquid_positions.size() <= Singleton.CurrentLevelData.area:
+		Singleton.CurrentLevelData.level_data.vars.liquid_positions.append([])
+	
+	Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area] = []
+	for liquid in Singleton.CurrentLevelData.level_data.vars.liquids:
+		Singleton.CurrentLevelData.level_data.vars.liquid_positions[Singleton.CurrentLevelData.area].append(liquid[1].save_pos)
+	
+	var powerup_array = [null, null, null]
+	if is_instance_valid(character.powerup):
+		powerup_array[0] = character.powerup.name
+		powerup_array[1] = character.powerup.time_left
+		powerup_array[2] = character.powerup.play_temp_music
+	
+	var nozzle_name = null
+	if character.nozzle != null:
+		nozzle_name = character.nozzle.name
+	if !is_instance_valid(character.state):
+		character.state = character.get_state_node("FallState")
+	
+	Singleton.CurrentLevelData.level_data.vars.transition_character_data = [
+		character.health,
+		character.health_shards,
+		nozzle_name,
+		character.fuel,
+		powerup_array,
+		get_tree().get_current_scene().switch_timer
+	]
+#	if object_type == "area_transition":
+#		Singleton.CurrentLevelData.level_data.vars.transition_character_data.append(AreaTransitionHelper.new(character.velocity, character.state, character.facing_direction, to_local(character.position), self.vertical))
+	
+	Singleton.CurrentLevelData.level_data.vars.transition_character_data_2 = []
+	
+#	Singleton.CurrentLevelData.level_data.vars.transition_data = [
+#		object_type, 
+#		target_tag,
+#		teleportation_mode
+#	]
+	Singleton.CurrentLevelData.level_data.vars.transition_data = {"target_tag": target_tag}
+	character.switch_areas(target_area, 0.5)
+	print(target_area)
 
 
 ## setting target area to -1 will enter mario into the level normally, other
@@ -54,10 +112,18 @@ func level_warp(character: Character, target_level: String,
 	var hub_level: String = Singleton.CurrentLevelData.hub_level
 	var is_campaign: bool = Singleton.CurrentLevelData.is_campaign
 	
+	if target_area != -1:
+		Singleton.CurrentLevelData.level_transition_data = {
+			"target_area": target_area, "target_tag": target_tag}
+	else:
+		Singleton.CurrentLevelData.level_transition_data = {}
+	
+	if Singleton.CurrentLevelData.level_id == hub_level:
+		Singleton.CurrentLevelData.hub_return_data = {
+			"target_area": Singleton.CurrentLevelData.area, "target_tag": target_tag}
+	
 	Singleton.Music.reset_music()
 	Singleton.Music.stop()
-	Singleton.SceneSwitcher.menu_return_screen = "LevelsList"
-	Singleton.SceneSwitcher.menu_return_args = [level_info, level_id, working_folder, false, is_campaign]
 	Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, false, false, hub_level)
 
 
