@@ -4,8 +4,22 @@ extends Camera2D
 export var speed: float = 12.0
 export var zoom_level: float = 1.0
 
+var editor: Editor = get_owner()
+
+
+func _input(event):
+	var zoom_amount = 0.25
+	if Input.is_action_pressed("8_pixel_lock"):
+		zoom_amount = 0.05
+	
+	if event.is_action_pressed("zoom_out"):
+		add_zoom_level(zoom_amount)
+	elif event.is_action_pressed("zoom_in"):
+		add_zoom_level(-zoom_amount)
+
 
 func _physics_process(delta):
+	zoom = zoom.linear_interpolate(Vector2(zoom_level, zoom_level), delta * 30.0)
 	camera_movement(delta)
 
 
@@ -32,11 +46,11 @@ func camera_movement(delta: float):
 	resolve_limit_collisions()
 
 
-func update_limits(level_area : LevelArea):
+func update_limits(level_area: LevelArea):
 	var area_bounds = level_area.settings.bounds.grow(3)
 	
 	limit_left = int(area_bounds.position.x * 32)
-	limit_top = int(area_bounds.position.y * 32 - 61 * zoom.x) #needs to include the toolbar
+	limit_top = int(area_bounds.position.y * 32 * zoom.x) #needs to include the toolbar
 	
 	limit_right = int(area_bounds.end.x * 32)
 	limit_bottom = int(area_bounds.end.y * 32)
@@ -62,3 +76,44 @@ func resolve_limit_collisions():
 		position.y = limit_top + ((get_viewport_rect().size.y / 2) * zoom.y)
 	if camera_down > limit_bottom:
 		position.y = limit_bottom - ((get_viewport_rect().size.y / 2) * zoom.y)
+
+
+# Functions to avoid copy pasted code
+func cap_zoom_level(zoom : float) -> float:
+	# Reduce the zoom level if the screen wouldn't fit within the level
+	# NOTE: all tile counts are +6 since there are 3 tiles OOB in both directions for both axis
+	var viewport_size := Vector2(
+		ProjectSettings.get_setting("display/window/size/width"), 
+		ProjectSettings.get_setting("display/window/size/height")
+	)
+	# This accounts for the toolbar cutting off the top 70 pixels of the screen,
+	# I'd prefer to not hardcode this but frankly it's not worth the time to 
+	# figure out getting the height of the toolbar.
+	var toolbar_size : float = 0
+	var level_size : Vector2 = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.bounds.size
+
+	while (
+		viewport_size.x * zoom > (level_size.x + 6) * Editor.TILE_SIZE.x or 
+		(viewport_size.y - 70) * zoom > (level_size.y + 6) * Editor.TILE_SIZE.y
+	):
+		zoom = zoom - .05
+	
+	return zoom
+
+
+func set_zoom_level(level : float) -> void:
+	# Zoom level limits
+	if level < 0.25: level = 0.25 # lower limit on zoom
+	
+#	if level > 4.01: # 4 flat wouldn't work and I don't know why
+#		$Grid.visible = false
+#	else:
+#		$Grid.visible = true
+	
+	zoom_level = cap_zoom_level(level) # makes sure the zoom isn't too large
+	Singleton.EditorSavedSettings.zoom_level = zoom_level
+	emit_signal("zoom_changed", zoom_level)
+
+
+func add_zoom_level(level : float) -> void:
+	set_zoom_level(zoom_level + level)

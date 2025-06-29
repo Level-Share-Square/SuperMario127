@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -25,6 +25,10 @@
 [ext_resource path="res://scenes/actors/objects/yellow_coin/icon.png" type="Texture" id=23]
 [ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=24]
 [ext_resource path="res://scenes/actors/objects/cannon/icon.png" type="Texture" id=25]
+[ext_resource path="res://scenes/oldeditor/placement/rectangle_fill.gd" type="Script" id=26]
+[ext_resource path="res://scenes/editor/pen_tool.gd" type="Script" id=27]
+[ext_resource path="res://scenes/oldeditor/assets/grid.png" type="Texture" id=28]
+[ext_resource path="res://scenes/actors/mode_switcher/ui/play_button.png" type="Texture" id=29]
 
 [sub_resource type="Gradient" id=9]
 offsets = PoolRealArray( 0.515152, 1 )
@@ -75,6 +79,7 @@ shortcut = SubResource( 11 )
 [node name="Editor" type="Node2D"]
 script = ExtResource( 3 )
 nodes_to_load = [ NodePath("Backgrounds"), NodePath("Shared"), NodePath("EditorCamera") ]
+shared_path = NodePath("Shared")
 
 [node name="Backgrounds" parent="." instance=ExtResource( 6 )]
 
@@ -109,7 +114,6 @@ anchor_bottom = 1.0
 texture = ExtResource( 8 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="TestBG/CanvasLayer/ParallaxBackground"]
-visible = false
 motion_scale = Vector2( 0, 0 )
 motion_offset = Vector2( 0, -162 )
 motion_mirroring = Vector2( 768, 0 )
@@ -122,7 +126,6 @@ anchor_bottom = 1.0
 texture = ExtResource( 8 )
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="TestBG/CanvasLayer/ParallaxBackground"]
-visible = false
 motion_scale = Vector2( 0, 0 )
 motion_offset = Vector2( 0, -108 )
 motion_mirroring = Vector2( 768, 0 )
@@ -136,6 +139,30 @@ texture = ExtResource( 8 )
 
 [node name="Shared" parent="." instance=ExtResource( 5 )]
 
+[node name="Tools" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+
+[node name="Pen" type="Control" parent="Tools"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 27 )
+
+[node name="RectangleFill" type="Control" parent="Tools"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 26 )
+
+[node name="Node2D" type="Node2D" parent="Tools/RectangleFill"]
+z_index = 10
+
+[node name="Drag" type="ColorRect" parent="Tools/RectangleFill/Node2D"]
+mouse_filter = 2
+color = Color( 1, 1, 1, 0.501961 )
+
 [node name="EditorCamera" parent="." instance=ExtResource( 7 )]
 limit_left = -10000000
 limit_top = -10000000
@@ -146,6 +173,7 @@ limit_top = -10000000
 unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 theme = ExtResource( 4 )
 
 [node name="Utilities" type="HBoxContainer" parent="UI/EditorUI"]
@@ -461,6 +489,16 @@ theme_type_variation = "ButtonEmpty"
 enabled_focus_mode = 0
 flat = true
 
+[node name="TextureButton" type="TextureButton" parent="UI/EditorUI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = -54.0
+margin_right = 54.0
+margin_bottom = -6.0
+texture_normal = ExtResource( 29 )
+expand = true
+
 [node name="ItemPickerWindow" parent="UI" instance=ExtResource( 9 )]
 visible = false
 
@@ -469,6 +507,21 @@ margin_left = 344.0
 margin_top = 66.0
 margin_right = 763.0
 margin_bottom = 286.0
+
+[node name="Grid" type="ParallaxBackground" parent="UI"]
+layer = -1
+
+[node name="GridRepeat" type="ParallaxLayer" parent="UI/Grid"]
+motion_mirroring = Vector2( 3072, 1664 )
+
+[node name="GridTexture" type="TextureRect" parent="UI/Grid/GridRepeat"]
+margin_right = 3072.0
+margin_bottom = 1664.0
+texture = ExtResource( 28 )
+stretch_mode = 2
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Options" type="CanvasLayer" parent="."]
 layer = 128
@@ -479,8 +532,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
 
 [node name="Options" parent="Options/ScreenManager" instance=ExtResource( 1 )]
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
 
 [node name="HoverSound" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

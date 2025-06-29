@@ -95,7 +95,7 @@ func selected_update():
 			drag.rect_scale.y = sign(calculated_size.y)
 			
 		else:
-			drag.rect_position.y = ((fill_rect.position.y)+1) * TILE_SIZE
+			drag.rect_position.y = ((fill_rect.position.y) + 1) * TILE_SIZE
 			
 			calculated_size.y = (round(mouse_pos.y/TILE_SIZE - 1) - fill_rect.position.y) * TILE_SIZE
 			drag.rect_size.y = abs(calculated_size.y)

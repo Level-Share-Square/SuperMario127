@@ -3,10 +3,20 @@ extends LevelDataLoader
 
 
 const mode: int = 1
+const TILE_SIZE := Vector2(32, 32)
+
+export(NodePath) var shared_path
 
 var placed_item_property = null
 
-var temp
+# Just useless debug stuff don't mind this
+#var temp
+
+onready var current_tool : EditorTool = $Tools/Pen
+
+onready var tools_container = $Tools
+
+
 
 func _ready():
 	#this is to dynamically update the framerate
@@ -38,14 +48,14 @@ func _ready():
 		Singleton.CurrentLevelData.unsaved_editor_changes = false
 
 
-func _process(delta):
+func _input(event):
 	pass
 
 
-#func _input(event):
-#	if event is InputEventKey:
-#		print(event.scancode)
-#		print(event.physical_scancode)
+func _physics_process(delta):
+	if is_instance_valid(current_tool):
+		current_tool._update(delta)
+	
 
 
 func _update_editor_framerate():
@@ -55,3 +65,7 @@ func _update_editor_framerate():
 
 func switch_scenes():
 	var _change_scene = get_tree().change_scene("res://scenes/player/player.tscn")
+
+
+func get_shared_node() -> LevelShared:
+	return get_node(shared_path) as LevelShared
