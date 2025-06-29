@@ -398,7 +398,7 @@ move_speed = 16.0
 ledge_turning = true
 
 [node name="Ledge" type="RayCast2D" parent="States/WanderState" index="0"]
-position = Vector2( -12, -8 )
+position = Vector2( -12, -2 )
 cast_to = Vector2( 0, 64 )
 collision_mask = 17
 
@@ -422,7 +422,7 @@ chase_speed = 64.0
 accel = 4.0
 
 [node name="Ledge" type="RayCast2D" parent="States/ChaseState" index="0"]
-position = Vector2( -12, -8 )
+position = Vector2( -12, -2 )
 enabled = true
 cast_to = Vector2( 0, 32 )
 collision_mask = 17
@@ -477,6 +477,7 @@ visible = false
 self_modulate = Color( 1, 0.4, 0.333333, 1 )
 frames = ExtResource( 11 )
 animation = "idle"
+frame = 3
 offset = Vector2( 0, -7 )
 script = ExtResource( 10 )
 

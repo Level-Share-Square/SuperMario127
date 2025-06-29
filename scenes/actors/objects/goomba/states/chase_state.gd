@@ -34,23 +34,22 @@ func _update(delta: float) -> void:
 			
 			if not ledge_detector.is_colliding():
 				jump()
+				print(enemy.is_on_ground())
 	else:
 		if enemy.velocity.y > 0:
 			enemy.sprite.play("fall")
 		else:
 			enemy.sprite.play("jump")
 	
+	enemy.facing_direction = sign(target_player.global_position.x - enemy.global_position.x)
+	enemy.sprite.speed_scale = move_toward(enemy.sprite.speed_scale, chase_speed / move_speed, delta * accel * 60)
+	enemy.velocity.x = move_toward(enemy.velocity.x, enemy.facing_direction * chase_speed, delta * accel * 60)
 	
 	if is_instance_valid(wall_detector):
 		wall_detector.cast_to.x = abs(wall_detector.cast_to.x) * enemy.facing_direction
 		
 		if wall_detector.is_colliding():
-			enemy.facing_direction = -enemy.facing_direction
-			enemy.velocity.x = enemy.facing_direction
-	
-	enemy.facing_direction = sign(target_player.global_position.x - enemy.global_position.x)
-	enemy.sprite.speed_scale = move_toward(enemy.sprite.speed_scale, chase_speed / move_speed, delta * accel * 60)
-	enemy.velocity.x = move_toward(enemy.velocity.x, enemy.facing_direction * chase_speed, delta * accel * 60)
+			enemy.velocity.x = -enemy.facing_direction
 
 
 func _stop() -> void:

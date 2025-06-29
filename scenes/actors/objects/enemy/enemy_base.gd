@@ -110,8 +110,13 @@ func _physics_process(delta):
 		if body is PhysicsBody2D:
 			if body.can_collide_with(self):
 				remove_collision_exception_with(body)
+				floor_detector.remove_exception(body)
 			else:
 				add_collision_exception_with(body)
+				floor_detector.add_exception(body)
+	
+	if is_on_ceiling() and velocity.y < 0:
+		velocity.y = -velocity.y
 	
 	velocity = move_and_slide_with_snap(velocity, 
 		working_snap_vector if velocity.y >= 0 else Vector2.ZERO, 
@@ -119,7 +124,7 @@ func _physics_process(delta):
 
 
 func is_on_ground() -> bool:
-	return is_on_floor() or floor_detector.is_colliding()
+	return floor_detector.is_colliding()
 
 
 func create_coin(velocity: Vector2, offset: Vector2) -> void:
