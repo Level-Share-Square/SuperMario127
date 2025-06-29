@@ -219,6 +219,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Dive.gd"
 }, {
+"base": "Teleporter",
+"class": "DoorTeleport",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/door/door.gd"
+}, {
 "base": "LevelDataLoader",
 "class": "Editor",
 "language": "GDScript",
@@ -344,7 +349,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/misc/http_thumbnails.gd"
 }, {
-"base": "ScrollContainer",
+"base": "Reference",
 "class": "HelpPage",
 "language": "GDScript",
 "path": "res://scenes/oldeditor/window/HelpPage.gd"
@@ -529,7 +534,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/ParticleCollection.gd"
 }, {
-"base": "Resource",
+"base": "Reference",
 "class": "PlaceableItem",
 "language": "GDScript",
 "path": "res://scenes/editor/items/placeable_item.gd"
@@ -872,6 +877,7 @@ _global_script_class_icons={
 "DiscordResult": "",
 "DiscordUser": "",
 "DiveState": "",
+"DoorTeleport": "",
 "Editor": "",
 "EditorButton": "",
 "EditorHitbox": "",
@@ -1048,12 +1054,12 @@ enabled=PoolStringArray( "res://addons/discord_game_sdk/plugin.cfg" )
 
 [global]
 
-"Game Version"="0.9.2"
 physics=false
 change=false
 audio=false
 transforms=false
 fps=true
+"Game Version"="0.9.2"
 
 [importer_defaults]
 
