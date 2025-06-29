@@ -246,7 +246,7 @@ func activate_shine(animation: int, temporary: bool = false, manual_start_cutsce
 		var cutscene: CameraCutscene = CameraCutscene.new()
 		cutscene.cutscene_type = cutscene.Type.AUTO
 		cutscene.tween_ease = Tween.EASE_IN_OUT
-		cutscene.transition_type = Tween.TRANS_QUAD
+		cutscene.transition_type = Tween.TRANS_LINEAR
 		cutscene.time = 0.25
 		cutscene.animation = "appear"
 		cutscene.set_up(self, global_position)
@@ -255,7 +255,7 @@ func activate_shine(animation: int, temporary: bool = false, manual_start_cutsce
 		var cutscene: CameraCutscene = CameraCutscene.new()
 		cutscene.cutscene_type = cutscene.Type.AUTO
 		cutscene.tween_ease = Tween.EASE_IN_OUT
-		cutscene.transition_type = Tween.TRANS_QUAD
+		cutscene.transition_type = Tween.TRANS_LINEAR
 		cutscene.time = 0.25
 		cutscene.animation = "appear_short"
 		cutscene.set_up(self, global_position)

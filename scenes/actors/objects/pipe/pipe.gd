@@ -86,7 +86,7 @@ func start_entrance_animation(character: Character, is_gp: bool = false) -> void
 		# warning-ignore: return_value_discarded
 		tween.interpolate_callback(audio_player, slide_length, "play")
 		# warning-ignore: return_value_discarded
-		tween.interpolate_callback(self, entering_pipe_length, "emit_signal", "entrance_completed")
+		tween.interpolate_callback(self, slide_length + entering_pipe_length, "emit_signal", "entrance_completed")
 
 		# warning-ignore: return_value_discarded
 		tween.start()

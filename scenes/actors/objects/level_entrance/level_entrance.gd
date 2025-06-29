@@ -16,4 +16,5 @@ func _init():
 
 
 func start_exit_animation(character: Character) -> void:
+	character.show()
 	finish_exit_animation(character)

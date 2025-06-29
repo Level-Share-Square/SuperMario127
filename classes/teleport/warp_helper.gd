@@ -18,7 +18,7 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 		tween = Tween.new()
 		add_child(tween)
 		
-		tween.interpolate_property(character.camera, "position", null, end_point, CAMERA_TWEEN_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+		tween.interpolate_property(character.camera, "position", null, end_point, CAMERA_TWEEN_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		tween.start()
 	else:
 		transition_in(character)
