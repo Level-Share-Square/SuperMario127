@@ -15,6 +15,9 @@ export (float) var slide_to_center_length := 0.5
 export (float) var entering_door_length := 0.75 
 export (float) var exiting_door_length := 0.75
 
+export(Array, Texture) var palette_textures
+export(Array, SpriteFrames) var palette_frames
+
 var stored_character : Character
 
 
@@ -115,3 +118,17 @@ func _physics_process(_delta) -> void:
 ### MISC
 func is_rainbow(body) -> bool:
 	return body.powerup != null and body.powerup.id == "Rainbow"
+
+
+func _ready() -> void:
+	._ready()
+	
+	if is_preview:
+		z_index = 0
+		door_sprite.z_index = 0
+
+	if palette != 0:
+		door_sprite.set_sprite_frames(palette_frames[palette - 1])
+	if scale.x < 1:
+		scale.x = abs(scale.x)
+		door_sprite.flip_h = true
