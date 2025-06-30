@@ -5,7 +5,6 @@ onready var canvas_background = $Background
 onready var canvas_mask = $Light2D
 onready var tween = $Tween
 onready var transition_audio = $TransitionAudio
-onready var transition_audio_2 = $TransitionAudio2
 
 signal transition_finished
 

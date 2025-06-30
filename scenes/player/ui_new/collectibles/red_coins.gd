@@ -7,16 +7,18 @@ onready var counter: Label = $HBoxContainer/Counter
 
 var max_reds: int
 
+
 func _ready():
-	# sigh, have to wait for the player scene to finish up their work
-	yield(get_tree(), "physics_frame")
-	yield(get_tree(), "physics_frame")
-	
+	hide()
+	var shared_node: LevelShared = get_tree().get_current_scene().get_shared_node()
+	shared_node.get_node("Objects").connect("objects_ready", self, "delayed_ready")
+
+func delayed_ready():
 	var variables: LevelVars = Singleton.CurrentLevelData.level_data.vars
 	max_reds = variables.max_red_coins
 	
 	if max_reds > 0:
-		visible = true
+		show()
 		variables.connect("red_coin_collected", self, "collect_coin")
 		
 		var new_coins: int = variables.red_coins_collected[0]

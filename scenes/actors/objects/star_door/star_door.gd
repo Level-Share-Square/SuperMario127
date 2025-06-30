@@ -1,14 +1,12 @@
-extends TeleportObject
+extends DoorTeleport
 
 
 const SINGLE_VOLUME: float = -8.0
 const DOUBLE_VOLUME: float = 6.0
 
-onready var collision_shape: CollisionShape2D = $DoorEnterLogic/Area2D/CollisionShape2D
-onready var icon: AnimatedSprite = $DoorEnterLogic/Icon
-onready var door: AnimatedSprite = $DoorEnterLogic/Door
-onready var audio_player: AudioStreamPlayer = $DoorEnterLogic/AudioStreamPlayer
-onready var door_enter_logic: Node2D = $DoorEnterLogic
+onready var icon_sprite = $IconSprite
+onready var collision_shape = $Area2D/CollisionShape2D
+onready var door_background = $ZIndex/DoorBackground
 
 export var double_door_frames: SpriteFrames
 export var single_door_frames: SpriteFrames
@@ -33,7 +31,6 @@ var palette_dict = {
 	4: "plank"
 }
 
-var stored_character : Character
 var current_level_info : LevelInfo
 var required_amount := 1
 var collectible := "shine"
@@ -42,35 +39,136 @@ var text := ""
 var prev_coll
 var insufficient_text: String = "Sorry! You need {num} {col} to open this door!"
 var is_single: bool = false
+var reset_read_timer := 0.0
 
 var possible_coll = ["shine", "star coin", "coin", "star bit", "unknown"]
 var coll
 
-const OPEN_DOOR_WAIT = 0.45
 
+# overriding cos star doors have a bunch of unique properties that need accounting for
+### PROPERTIES
 func _set_properties() -> void:
-	savable_properties = ["area_id", "destination_tag", "teleportation_mode", "collectible", "required_amount", "insufficient_text", "is_single"]
-	editable_properties = ["area_id", "destination_tag", "teleportation_mode", "collectible", "required_amount", "insufficient_text"]
-	
-func _set_property_values() -> void:
+	savable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "collectible", "required_amount", "insufficient_text", "is_single"]
+	editable_properties = ["target_area", "tag", "teleport_mode", "max_pan_distance", "level_path", "collectible", "required_amount", "insufficient_text"]
 
-	set_property("area_id", area_id)
-	set_property("destination_tag", destination_tag)
-	set_property("teleportation_mode", teleportation_mode, true, "Teleport Mode")
+
+func _set_property_values() -> void:
+	set_property("target_area", target_area)
+	set_property("tag", tag)
+	set_property("teleport_mode", teleport_mode, true)
+	set_property_menu("teleport_mode", ["option", 3, 0, ["Location", "Area", "Level"]])
 	set_bool_alias("teleportation_mode", "Remote", "Local")
+	set_property("max_pan_distance", max_pan_distance)
+	set_property("level_path", level_path)
+
 	set_property("collectible", collectible)
 	set_property_menu("collectible", ["option_string", possible_coll, 0, ["Shines", "Star Coins", "Coins", "Star Bits", "Empty"]])
 	set_property("required_amount", required_amount)
-	set_property("force_fadeout", force_fadeout)
 	set_property("insufficient_text", insufficient_text)
 	set_property("is_single", is_single)
 
 
-func _init():
-	teleportation_mode = false
-	object_type = "door"
+func _on_property_changed(key, value):
+	if key == "collectible":
+		prev_coll = collectible
+		if prev_coll != coll:
+			if collectible != "unknown" and possible_coll.has(collectible):
+				icon_sprite.animation = palette_dict[palette] + "_" + collectible
+			else:
+				icon_sprite.animation = "null"
+		coll = collectible
+
+
+## ANIMATION
+func start_entrance_animation(character: Character, open_door: bool = true) -> void:
+	stored_character = character
+	var can_enter = true
+	
+	# yucky code to stop character from entering if they dont have enough
+	if collectible == "coin":
+		if Singleton.CurrentLevelData.level_data.vars.coins_collected < required_amount:
+			can_enter = false
+	elif collectible == "star bit":
+		var star_bits_collected: int = Singleton.CurrentLevelData.level_data.vars.purple_starbits_collected[Singleton.CurrentLevelData.area][0]
+		if star_bits_collected < required_amount:
+			can_enter = false
+	else:
+		var collected = 0
+		#yuck
+		for col in collectible_dictionary:
+			if collectible_dictionary[col]:
+				collected += 1
+		if collected < required_amount:
+			can_enter = false
+	
+	if not Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and (
+		collectible == "shine" or collectible == "star coin"):
+		can_enter = true
+	
+	.start_entrance_animation(character, can_enter)
+	if not can_enter:
+		# calculate the amount of time it should take based on the players distance from the center
+		var distance_from_center_normalized: float = abs((character.position.x - global_position.x)) / collision_width 
+		distance_from_center_normalized = clamp(distance_from_center_normalized, 0.1, 1)
+		var slide_length: float = slide_to_center_length * distance_from_center_normalized
+		
+		# copied this from the sign code
+		character.sprite.animation = "enterDoor" + ("Right" if character.facing_direction == 1 else "Left")
+		character.sprite.playing = true
+		
+		# warning-ignore: return_value_discarded
+		tween.interpolate_property(character, "position:x", null, global_position.x, slide_length)
+		# warning-ignore: return_value_discarded
+		tween.interpolate_callback(self, slide_length / 2.75, "open_menu_ui", character)
+		# warning-ignore: return_value_discarded
+		tween.start()
+		
+		disconnect("entrance_completed", self, "begin_warp")
+
+
+func animate_door(is_backwards: bool) -> void:
+	# this function just plays the door animation, so code doesn't have to repeat
+	icon_sprite.play(
+		palette_dict[palette] + "_" + collectible,
+		is_backwards)
+	door_sprite.play(
+		palette_dict[palette] + "_" + collectible,
+		is_backwards)
+	audio_player.stream = open_audio if not is_backwards else close_audio
+	audio_player.play()
+
+
+# i probably could do this cleaner but eh
+func restore_control():
+	stored_character.velocity = Vector2.ZERO
+	stored_character.toggle_movement(true)
+	stored_character.invulnerable = false 
+	stored_character.controllable = true
+	stored_character.movable = true
+	
+	stored_character.get_state_node("JumpState").jump_buffer = 0 # prevent character from jumping right after closing menu
+	stored_character.inputs[Character.input_names.jump][1] = false
+	stored_character.set_collision_layer_bit(1, true)
+	stored_character.set_inter_player_collision(true) 
+	
+	stored_character.sprite.animation = "exitDoor" + ("Right" if stored_character.facing_direction == 1 else "Left")
+	stored_character.sprite.playing = true
+
+
+### MISC
+func _physics_process(delta):
+	if reset_read_timer > 0:
+		reset_read_timer -= delta
+		if reset_read_timer <= 0:
+			busy = false
+
+func open_menu_ui(character):
+	get_tree().get_current_scene().get_node("%SignText").open(text, self, character)
 
 func _ready() -> void:
+	._ready()
+	icon_sprite.flip_h = door_sprite.flip_h
+	
 	# weird system but whateverrr :p
 	# also reusing the paratroopa one cuz idk dont feel like making new script
 	var scene = get_tree().current_scene
@@ -78,36 +176,30 @@ func _ready() -> void:
 		set_property("is_single", true)
 	
 	# set up single vs double doors
-	door.frames = single_door_frames if is_single else double_door_frames
-	icon.frames = single_icon_frames if is_single else double_icon_frames
+	door_sprite.set_sprite_frames(single_door_frames if is_single else double_door_frames)
+	icon_sprite.set_sprite_frames(single_icon_frames if is_single else double_icon_frames)
 	collision_shape.shape = single_area_shape if is_single else double_area_shape
 	
-	door_enter_logic.open_audio = single_open_audio if is_single else double_open_audio
-	door_enter_logic.close_audio = single_close_audio if is_single else double_close_audio
+	open_audio = single_open_audio if is_single else double_open_audio
+	close_audio = single_close_audio if is_single else double_close_audio
 	audio_player.volume_db = SINGLE_VOLUME if is_single else DOUBLE_VOLUME
+	door_background.rect_position.x = -12 if is_single else -24
+	door_background.rect_size.x = 24 if is_single else 48
 	
 	# everything else :D
 	prev_coll = collectible
 	coll = collectible
-	.ready() #calls parent class "TeleportObject"i
+	
 	if is_preview:
 		z_index = 0
-		icon.z_index = 0
-		door.z_index = 0
-	if collectible != "unknown" and possible_coll.has(collectible):
-		icon.animation = palette_dict[palette] + "_" + collectible
-	else:
-		icon.animation = "null"
-	door.animation = palette_dict[palette]
-	if scale.x < 1:
-		scale.x = abs(scale.x)
-		icon.flip_h = true
-		door.flip_h = true
+		icon_sprite.z_index = 0
+		door_sprite.z_index = 0
 	
-	var append_tag
-	if destination_tag != "default_teleporter" || destination_tag != null:
-		append_tag = destination_tag.to_lower()
-	Singleton.CurrentLevelData.level_data.vars.teleporters.append([append_tag, self])
+	if collectible != "unknown" and possible_coll.has(collectible):
+		icon_sprite.animation = palette_dict[palette] + "_" + collectible
+	else:
+		icon_sprite.animation = "null"
+	door_sprite.animation = palette_dict[palette]
 	
 	current_level_info = Singleton.CurrentLevelData.level_info
 	match(collectible):
@@ -121,7 +213,7 @@ func _ready() -> void:
 			pass
 		_:
 			collectible_dictionary = current_level_info.collected_shines
-	
+
 	var collectible_text: String = collectible
 	if required_amount != 1: collectible_text += "s"
 	text = insufficient_text.format({
@@ -129,32 +221,5 @@ func _ready() -> void:
 		"col": collectible_text
 	})
 	
-
-func connect_local_members():
-	door_enter_logic.connect("start_door_logic", self, "_start_local_transition")
-	door_enter_logic.connect("exit", self, "_start_local_transition")
-
-func connect_remote_members():
-	door_enter_logic.connect("start_door_logic", self, "change_areas")
-
-func start_exit_anim(character):
-	door_enter_logic.start_door_exit_animation(character, teleportation_mode)
-
-func exit_local_teleport():
-	if tp_pair != self:
-		door_enter_logic.is_idle = true
-
-func exit_remote_teleport():
-	Singleton.CurrentLevelData.level_data.vars.transition_data = []
-	door_enter_logic.is_idle = true
-
-func _process(delta):
-	prev_coll = collectible
-	if prev_coll != coll:
-		if collectible != "unknown" and possible_coll.has(collectible):
-			icon.animation = palette_dict[palette] + "_" + collectible
-		else:
-			icon.animation = "null"
-	coll = collectible
-	if "\n" in destination_tag:
-		destination_tag = destination_tag.replace("\n", "")
+	_on_property_changed("collectible", collectible)
+	connect("property_changed", self, "_on_property_changed")

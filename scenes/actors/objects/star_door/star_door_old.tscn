@@ -1,0 +1,56 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scenes/actors/objects/star_door/single_enter_area.tres" type="Shape2D" id=1]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/frames_emblem_double.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/actors/objects/star_door/double_enter_area.tres" type="Shape2D" id=3]
+[ext_resource path="res://scenes/actors/objects/door/nsmbwiiDoor1.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/actors/objects/star_door/Door Textures/frames_single.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://scenes/actors/objects/star_door/single_open.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/actors/objects/star_door/double_close.ogg" type="AudioStream" id=7]
+[ext_resource path="res://scenes/actors/objects/star_door/star_door_old.gd" type="Script" id=8]
+[ext_resource path="res://scenes/actors/objects/star_door/Emblem Overlays/frames_emblem_single.tres" type="SpriteFrames" id=9]
+[ext_resource path="res://scenes/actors/objects/star_door/Door Textures/frames_double.tres" type="SpriteFrames" id=10]
+[ext_resource path="res://scenes/actors/objects/star_door/single_close.wav" type="AudioStream" id=11]
+[ext_resource path="res://scenes/actors/objects/star_door/double_open.ogg" type="AudioStream" id=12]
+[ext_resource path="res://scenes/actors/objects/star_door/star_door_enter_logic.gd" type="Script" id=13]
+
+[node name="StarDoor" type="Node2D"]
+script = ExtResource( 8 )
+double_door_frames = ExtResource( 10 )
+single_door_frames = ExtResource( 5 )
+double_icon_frames = ExtResource( 2 )
+single_icon_frames = ExtResource( 9 )
+double_area_shape = ExtResource( 3 )
+single_area_shape = ExtResource( 1 )
+double_open_audio = ExtResource( 12 )
+double_close_audio = ExtResource( 7 )
+single_open_audio = ExtResource( 6 )
+single_close_audio = ExtResource( 11 )
+
+[node name="DoorEnterLogic" type="Node2D" parent="."]
+script = ExtResource( 13 )
+open_audio = ExtResource( 12 )
+close_audio = ExtResource( 7 )
+
+[node name="Tween" type="Tween" parent="DoorEnterLogic"]
+
+[node name="Area2D" type="Area2D" parent="DoorEnterLogic"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorEnterLogic/Area2D"]
+position = Vector2( 0.5163, 0 )
+shape = ExtResource( 3 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DoorEnterLogic"]
+stream = ExtResource( 4 )
+volume_db = 6.0
+bus = "Sounds"
+
+[node name="Door" type="AnimatedSprite" parent="DoorEnterLogic"]
+z_index = -3
+frames = ExtResource( 10 )
+animation = "wood"
+
+[node name="Icon" type="AnimatedSprite" parent="DoorEnterLogic"]
+z_index = -2
+frames = ExtResource( 2 )
+animation = "wood_shine"
