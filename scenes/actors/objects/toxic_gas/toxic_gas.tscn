@@ -1,10 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/actors/objects/liquid/liquid_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/toxic_gas/toxic_gas.gdshader" type="Shader" id=2]
 [ext_resource path="res://scenes/actors/objects/toxic_gas/toxic_gas.gd" type="Script" id=3]
 [ext_resource path="res://scenes/actors/objects/toxic_gas/main.png" type="Texture" id=4]
 [ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=6]
+resource_local_to_scene = true
+extents = Vector2( 900, 300 )
 
 [sub_resource type="OpenSimplexNoise" id=4]
 octaves = 6
@@ -42,6 +46,7 @@ visible = false
 
 [node name="CollisionShape2D" parent="LiquidArea" index="0"]
 position = Vector2( 128, 128 )
+shape = SubResource( 6 )
 
 [node name="Icon" type="Sprite" parent="." index="1"]
 position = Vector2( 30, 82 )

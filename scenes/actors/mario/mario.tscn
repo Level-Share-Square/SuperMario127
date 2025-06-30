@@ -683,6 +683,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [ -1, -9 ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite:speed_scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
 
 [sub_resource type="Animation" id=63]
 length = 0.75
@@ -758,6 +770,18 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ -9, -9, -1 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite:speed_scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
 }
 
 [sub_resource type="Animation" id=97]
