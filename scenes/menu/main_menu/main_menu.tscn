@@ -302,9 +302,9 @@ alignment = 2
 
 [node name="DevLevels" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 20.0
+margin_top = 16.0
 margin_right = 237.0
-margin_bottom = 52.0
+margin_bottom = 49.0
 focus_neighbour_top = NodePath("../HBoxContainer/Options")
 focus_neighbour_bottom = NodePath("../LSS")
 theme_type_variation = "Special"
@@ -329,9 +329,9 @@ patch_margin_bottom = 11
 
 [node name="LSS" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 68.0
+margin_top = 65.0
 margin_right = 237.0
-margin_bottom = 100.0
+margin_bottom = 98.0
 focus_neighbour_top = NodePath("../DevLevels")
 focus_neighbour_bottom = NodePath("../SavedLevels")
 text = "  Level Share Square"
@@ -340,9 +340,9 @@ script = ExtResource( 8 )
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/LSS"]
 margin_left = 34.0
-margin_top = 1.0
+margin_top = 1.5
 margin_right = 59.0
-margin_bottom = 27.0
+margin_bottom = 27.5
 texture = ExtResource( 7 )
 expand = true
 script = ExtResource( 17 )
@@ -365,9 +365,9 @@ patch_margin_bottom = 11
 
 [node name="SavedLevels" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 116.0
+margin_top = 114.0
 margin_right = 237.0
-margin_bottom = 148.0
+margin_bottom = 147.0
 focus_neighbour_top = NodePath("../LSS")
 focus_neighbour_bottom = NodePath("../HBoxContainer/Options")
 text = "Saved Levels"
@@ -377,9 +377,9 @@ script = ExtResource( 8 )
 [node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/SavedLevels"]
 visible = false
 margin_left = 95.0
-margin_top = 4.0
+margin_top = 4.5
 margin_right = 112.0
-margin_bottom = 24.0
+margin_bottom = 24.5
 texture = ExtResource( 18 )
 expand = true
 script = ExtResource( 17 )
@@ -401,19 +401,19 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="Padding" type="Control" parent="MarginContainer/VBoxContainer"]
-margin_top = 164.0
+margin_top = 163.0
 margin_right = 237.0
-margin_bottom = 164.0
+margin_bottom = 163.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 180.0
+margin_top = 179.0
 margin_right = 237.0
 margin_bottom = 212.0
 custom_constants/separation = 6
 
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 87.0
-margin_bottom = 32.0
+margin_bottom = 33.0
 rect_pivot_offset = Vector2( -390.345, -217.728 )
 focus_neighbour_left = NodePath("../Credits")
 focus_neighbour_top = NodePath("../../SavedLevels")
@@ -431,9 +431,9 @@ script = SubResource( 10 )
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Exit"]
 margin_left = 25.0
-margin_top = 4.0
+margin_top = 4.5
 margin_right = 45.0
-margin_bottom = 24.0
+margin_bottom = 24.5
 mouse_filter = 2
 texture = ExtResource( 23 )
 expand = true
@@ -466,7 +466,7 @@ patch_margin_bottom = 11
 unique_name_in_owner = true
 margin_left = 93.0
 margin_right = 129.0
-margin_bottom = 32.0
+margin_bottom = 33.0
 rect_min_size = Vector2( 36, 0 )
 focus_neighbour_left = NodePath("../Exit")
 focus_neighbour_top = NodePath("../../SavedLevels")
@@ -476,9 +476,9 @@ script = ExtResource( 4 )
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Options"]
 margin_left = 5.0
-margin_top = 3.0
+margin_top = 3.5
 margin_right = 31.0
-margin_bottom = 29.0
+margin_bottom = 29.5
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 13, 13 )
 texture = ExtResource( 21 )
@@ -504,7 +504,7 @@ patch_margin_bottom = 11
 [node name="Discord" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 135.0
 margin_right = 171.0
-margin_bottom = 32.0
+margin_bottom = 33.0
 rect_min_size = Vector2( 36, 0 )
 focus_neighbour_left = NodePath("../Options")
 focus_neighbour_top = NodePath("../../SavedLevels")
@@ -514,9 +514,9 @@ script = ExtResource( 4 )
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Discord"]
 margin_left = 5.0
-margin_top = 3.0
+margin_top = 3.5
 margin_right = 31.0
-margin_bottom = 29.0
+margin_bottom = 29.5
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 13, 13 )
 texture = ExtResource( 20 )
@@ -543,7 +543,7 @@ patch_margin_bottom = 11
 unique_name_in_owner = true
 margin_left = 177.0
 margin_right = 213.0
-margin_bottom = 32.0
+margin_bottom = 33.0
 rect_min_size = Vector2( 36, 0 )
 focus_neighbour_left = NodePath("../Discord")
 focus_neighbour_top = NodePath("../../SavedLevels")
@@ -553,9 +553,9 @@ script = ExtResource( 4 )
 
 [node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Credits"]
 margin_left = 5.0
-margin_top = 3.0
+margin_top = 3.5
 margin_right = 31.0
-margin_bottom = 29.0
+margin_bottom = 29.5
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 13, 13 )
 texture = ExtResource( 22 )
@@ -581,7 +581,7 @@ patch_margin_bottom = 11
 [node name="Padding" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 219.0
 margin_right = 237.0
-margin_bottom = 32.0
+margin_bottom = 33.0
 rect_min_size = Vector2( 18, 0 )
 
 [node name="LogoAnchor" type="Control" parent="."]

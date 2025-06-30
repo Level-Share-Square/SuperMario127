@@ -16,16 +16,16 @@ var max_shown: bool
 var max_purples: int
 var required_purples: int
 
-var variables: LevelVars = Singleton.CurrentLevelData.level_data.vars
+var variables: LevelVars
 
 
 func _ready():
 	hide()
-	
-	# sigh, have to wait for the player scene to finish up their work
-	yield(get_tree(), "physics_frame")
-	yield(get_tree(), "physics_frame")
-	
+	var shared_node: LevelShared = get_tree().get_current_scene().get_shared_node()
+	shared_node.get_node("Objects").connect("objects_ready", self, "delayed_ready")
+
+func delayed_ready():
+	variables = Singleton.CurrentLevelData.level_data.vars
 	max_purples = variables.max_purple_starbits
 	if max_purples <= 0: return
 	

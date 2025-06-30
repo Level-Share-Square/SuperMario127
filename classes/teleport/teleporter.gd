@@ -65,6 +65,8 @@ func finish_exit_animation(character: Character) -> void:
 ### MISC
 func _ready():
 	Singleton.CurrentLevelData.level_data.vars.teleporters.append([tag.to_lower(), self])
+	if "\n" in tag:
+		tag = tag.replace("\n", "")
 
 
 func begin_warp(character: Character) -> void:
