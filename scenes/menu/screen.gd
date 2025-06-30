@@ -20,4 +20,3 @@ func transition(new_screen_name: String):
 
 func animation_finished(_anim_name: String, new_screen_name: String):
 	emit_signal("screen_change", new_screen_name)
-	emit_signal("screen_change", new_screen_name)
