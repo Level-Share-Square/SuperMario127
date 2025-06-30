@@ -58,7 +58,7 @@ shape = SubResource( 1 )
 
 [node name="ExitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -8.0
+volume_db = -6.0
 bus = "Sounds"
 
 [node name="ZIndex" type="Node2D" parent="."]

@@ -76,4 +76,7 @@ func begin_warp(character: Character) -> void:
 			warp_helper.area_warp(character, tag, target_area)
 		
 		TeleportMode.Level:
-			warp_helper.level_warp(character, level_path, tag, target_area)
+			if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
+				warp_helper.level_warp(character, level_path, tag, target_area)
+			else:
+				warp_helper.location_warp(character, "", max_pan_distance)

@@ -54,7 +54,7 @@ func start_entrance_animation(character: Character) -> void:
 	yield(tween, "tween_all_completed")
 	
 	Singleton.SceneTransitions.play_transition_audio()
-	if teleport_mode == TeleportMode.Level:
+	if teleport_mode == TeleportMode.Level and Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
 		# warning-ignore: return_value_discarded
 		tween.interpolate_property(character.camera, "zoom", null, Vector2(0.75, 0.75), 1.25, Tween.TRANS_LINEAR)
 	# warning-ignore: return_value_discarded
