@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=256 format=2]
+[gd_resource type="SpriteFrames" load_steps=257 format=2]
 
 [ext_resource path="res://scenes/actors/mario/nozzles/rocket_mario.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/mario/nozzles/rocket_mario_shine_get.png" type="Texture" id=2]
@@ -196,6 +196,10 @@ region = Rect2( 144, 0, 48, 48 )
 [sub_resource type="AtlasTexture" id=110]
 atlas = ExtResource( 1 )
 region = Rect2( 192, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=244]
+atlas = ExtResource( 1 )
+region = Rect2( 480, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=113]
 atlas = ExtResource( 1 )
@@ -1061,6 +1065,11 @@ animations = [ {
 "loop": false,
 "name": "enterDoorRight",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 244 ) ],
+"loop": false,
+"name": "enterPainting",
+"speed": 0.0
 }, {
 "frames": [ SubResource( 113 ), SubResource( 114 ), SubResource( 115 ) ],
 "loop": false,

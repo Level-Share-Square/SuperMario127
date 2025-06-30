@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=240 format=2]
+[gd_resource type="SpriteFrames" load_steps=241 format=2]
 
 [ext_resource path="res://scenes/actors/mario/nozzles/rocket_luigi.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/mario/nozzles/rocket_luigi_shine_get.png" type="Texture" id=2]
@@ -172,6 +172,10 @@ region = Rect2( 144, 0, 48, 48 )
 [sub_resource type="AtlasTexture" id=112]
 atlas = ExtResource( 1 )
 region = Rect2( 192, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=228]
+atlas = ExtResource( 1 )
+region = Rect2( 480, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=142]
 atlas = ExtResource( 1 )
@@ -997,6 +1001,11 @@ animations = [ {
 "loop": false,
 "name": "enterDoorRight",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 228 ) ],
+"loop": false,
+"name": "enterPainting",
+"speed": 0.0
 }, {
 "frames": [ SubResource( 142 ), SubResource( 143 ), SubResource( 144 ) ],
 "loop": false,

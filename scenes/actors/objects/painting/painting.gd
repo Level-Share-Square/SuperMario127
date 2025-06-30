@@ -8,6 +8,7 @@ onready var bg = $"%BG"
 onready var custom_image = $"%CustomImage"
 
 export(float) var slide_to_center_length := 0.5
+export var placeholder_texture: StreamTexture
 
 var busy: bool = false
 var stored_character: Character
@@ -19,7 +20,7 @@ func start_entrance_animation(character: Character) -> void:
 	
 	busy = true
 	character.sound_player.play_jump_sound()
-	character.sprite.animation = "jump" + ("Right" if character.facing_direction == 1 else "Left")
+	character.sprite.animation = "enterPainting"
 	character.sprite.playing = true
 
 	var slide_length : float = slide_to_center_length
@@ -30,9 +31,9 @@ func start_entrance_animation(character: Character) -> void:
 	slide_length = slide_to_center_length * distance_from_center_normalized
 	
 	# warning-ignore: return_value_discarded
-	tween.interpolate_property(character, "position:y", null, global_position.y - 16, 0.6, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	tween.interpolate_property(character, "position:y", null, global_position.y - 8, 0.6, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	# warning-ignore: return_value_discarded
-	tween.interpolate_property(character.sprite, "scale", null, Vector2(0.9, 0.9), 0.6)
+	tween.interpolate_property(character.sprite, "scale", null, Vector2(0.95, 0.95), 0.6)
 	# warning-ignore: return_value_discarded
 	tween.start()
 	
@@ -41,11 +42,11 @@ func start_entrance_animation(character: Character) -> void:
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character, "position:y", null, global_position.y, 0.2, Tween.TRANS_QUAD, Tween.EASE_IN)
 	# warning-ignore: return_value_discarded
-	tween.interpolate_property(character.sprite, "scale", null, Vector2(0.7, 0.7), 0.2)
+	tween.interpolate_property(character.sprite, "scale", null, Vector2(0.8, 0.8), 0.2)
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character.sprite, "modulate", null, Color(5, 5, 5, 0), 0.2)
 	# warning-ignore: return_value_discarded
-	tween.interpolate_property(bg.material, "shader_param/height", null, 0.03, 0.2, Tween.TRANS_QUAD, Tween.EASE_IN, 0.1)
+	tween.interpolate_property(bg.material, "shader_param/height", null, 0.07, 0.2, Tween.TRANS_QUAD, Tween.EASE_IN, 0.1)
 	# warning-ignore: return_value_discarded
 	tween.start()
 	
@@ -74,15 +75,18 @@ func start_exit_animation(character: Character) -> void:
 	
 	busy = true
 	character.visible = false
+	character.sprite.scale = Vector2(0.8, 0.8)
+	character.sprite.modulate = Color(5, 5, 5, 0)
+	
 	# warning-ignore: return_value_discarded
-	tween.interpolate_property(bg.material, "shader_param/height", 0, 0.03, 0.25, Tween.TRANS_QUAD, Tween.EASE_IN)
+	tween.interpolate_property(bg.material, "shader_param/height", 0, 0.1, 0.25, Tween.TRANS_QUAD, Tween.EASE_IN)
 	# warning-ignore: return_value_discarded
 	tween.start()
 	
 	yield(get_tree().create_timer(0.25), "timeout")
 	
 	# warning-ignore: return_value_discarded
-	tween.interpolate_property(character.sprite, "scale", Vector2(0.7, 0.7), Vector2.ONE, 0.2)
+	tween.interpolate_property(character.sprite, "scale", Vector2(0.8, 0.8), Vector2.ONE, 0.2)
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character.sprite, "modulate", Color(5, 5, 5, 0), Color.white, 0.2)
 	# warning-ignore: return_value_discarded
@@ -149,11 +153,25 @@ func _ready() -> void:
 	if scale.x < 1:
 		scale.x = abs(scale.x)
 	
-	if teleport_mode == TeleportMode.Level: 
-		if Singleton.CurrentLevelData.is_campaign:
-			var working_folder: String = Singleton.CurrentLevelData.working_folder
-			var thumb_path: String = level_list_util.get_level_thumbnail_path(level_path, working_folder)
-			if level_list_util.file_exists(thumb_path):
-				custom_image.texture = level_list_util.get_image_from_path(thumb_path)
-	else:
-		custom_image.visible = false
+	painting_resized()
+	_on_property_changed("teleport_mode", teleport_mode)
+	connect("property_changed", self, "_on_property_changed")
+
+
+func _on_property_changed(key, value):
+	if key == "teleport_mode" or key == "level_path":
+		if teleport_mode == TeleportMode.Level: 
+			if Singleton.CurrentLevelData.is_campaign:
+				var working_folder: String = Singleton.CurrentLevelData.working_folder
+				var thumb_path: String = level_list_util.get_level_thumbnail_path(level_path, working_folder)
+				if level_list_util.file_exists(thumb_path):
+					custom_image.texture = level_list_util.get_image_from_path(thumb_path)
+					custom_image.visible = true
+				else:
+					custom_image.texture = placeholder_texture
+		else:
+			custom_image.visible = false
+
+
+func painting_resized():
+	bg.material.set_shader_param("ratio", Vector2(bg.rect_size.x / bg.rect_size.y, 1))
