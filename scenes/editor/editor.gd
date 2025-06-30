@@ -5,17 +5,26 @@ extends LevelDataLoader
 const mode: int = 1
 const TILE_SIZE := Vector2(32, 32)
 
+
 export(NodePath) var shared_path
 
 var placed_item_property = null
 
+var mouse_position := Vector2.ZERO
+var mouse_tile_position := Vector2.ZERO
+
+var last_mouse_pos := Vector2.ZERO
+var last_mouse_tile_pos := Vector2.ZERO
+
+var left_held: bool = false
+var right_held: bool = false
+
 # Just useless debug stuff don't mind this
 #var temp
 
-onready var current_tool : EditorTool = $Tools/Pen
+onready var current_tool = $Tools/Pen
 
 onready var tools_container = $Tools
-
 
 
 func _ready():
@@ -48,14 +57,30 @@ func _ready():
 		Singleton.CurrentLevelData.unsaved_editor_changes = false
 
 
-func _input(event):
-	pass
+func _unhandled_input(event):
+	if event.is_action_pressed("place"):
+		left_held = true
+	elif event.is_action_released("place"):
+		left_held = false
+		
+	if event.is_action_pressed("erase"):
+		right_held = true
+	elif event.is_action_released("erase"):
+		right_held = false
+	
+	print("left: ", left_held)
+	print("right: ", right_held)
 
 
 func _physics_process(delta):
+	mouse_position = get_global_mouse_position()
+	mouse_tile_position = (mouse_position / 32).floor()
+	
 	if is_instance_valid(current_tool):
 		current_tool._update(delta)
 	
+	last_mouse_pos = mouse_position
+	last_mouse_tile_pos = mouse_tile_position
 
 
 func _update_editor_framerate():

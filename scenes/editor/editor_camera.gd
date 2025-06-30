@@ -7,6 +7,9 @@ export var zoom_level: float = 1.0
 var editor: Editor = get_owner()
 
 
+signal zoom_changed(zoom_level)
+
+
 func _input(event):
 	var zoom_amount = 0.25
 	if Input.is_action_pressed("8_pixel_lock"):
