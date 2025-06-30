@@ -498,6 +498,8 @@ margin_left = 6.0
 margin_top = -54.0
 margin_right = 54.0
 margin_bottom = -6.0
+focus_mode = 0
+enabled_focus_mode = 0
 texture_normal = ExtResource( 29 )
 expand = true
 

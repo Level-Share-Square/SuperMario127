@@ -58,14 +58,14 @@ func _ready():
 
 
 func _unhandled_input(event):
-	if event.is_action_pressed("place"):
+	if Input.is_action_pressed("place"):
 		left_held = true
-	elif event.is_action_released("place"):
+	else:
 		left_held = false
 		
-	if event.is_action_pressed("erase"):
+	if Input.is_action_pressed("erase"):
 		right_held = true
-	elif event.is_action_released("erase"):
+	else:
 		right_held = false
 	
 	print("left: ", left_held)

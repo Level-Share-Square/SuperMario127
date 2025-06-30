@@ -219,11 +219,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Dive.gd"
 }, {
-"base": "Teleporter",
-"class": "DoorTeleport",
-"language": "GDScript",
-"path": "res://scenes/actors/objects/door/door.gd"
-}, {
 "base": "LevelDataLoader",
 "class": "Editor",
 "language": "GDScript",
@@ -882,7 +877,6 @@ _global_script_class_icons={
 "DiscordResult": "",
 "DiscordUser": "",
 "DiveState": "",
-"DoorTeleport": "",
 "Editor": "",
 "EditorButton": "",
 "EditorHitbox": "",
