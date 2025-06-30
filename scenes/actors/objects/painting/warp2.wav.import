@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Painting Enter.wav-bfb65a567e05639b245aef6b1b6f1fe1.sample"
+path="res://.import/warp2.wav-f2b818f70f53ae431392e69ce15118df.sample"
 
 [deps]
 
-source_file="res://assets/sounds/Painting Enter.wav"
-dest_files=[ "res://.import/Painting Enter.wav-bfb65a567e05639b245aef6b1b6f1fe1.sample" ]
+source_file="res://scenes/actors/objects/painting/warp2.wav"
+dest_files=[ "res://.import/warp2.wav-f2b818f70f53ae431392e69ce15118df.sample" ]
 
 [params]
 
