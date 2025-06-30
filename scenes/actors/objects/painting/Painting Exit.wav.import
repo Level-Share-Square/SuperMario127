@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/nsmbwiiDoor2.wav-394f95d63c538ad839813fbd2c996e51.sample"
+path="res://.import/Painting Exit.wav-1111eed10a15538ded2c8dd2751af4e8.sample"
 
 [deps]
 
-source_file="res://scenes/actors/objects/painting/nsmbwiiDoor2.wav"
-dest_files=[ "res://.import/nsmbwiiDoor2.wav-394f95d63c538ad839813fbd2c996e51.sample" ]
+source_file="res://scenes/actors/objects/painting/Painting Exit.wav"
+dest_files=[ "res://.import/Painting Exit.wav-1111eed10a15538ded2c8dd2751af4e8.sample" ]
 
 [params]
 

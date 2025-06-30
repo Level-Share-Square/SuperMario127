@@ -2970,6 +2970,16 @@ icon = ExtResource( 1187 )
 preview = ExtResource( 1187 )
 placement_action = ExtResource( 33 )
 
+[node name="Painting" type="Node" parent="PlaceableItems/TeleportGroup"]
+script = ExtResource( 24 )
+object_id = 148
+is_object = true
+object_center = Vector2( 32, 0 )
+tile_mode_offset = Vector2( 0, -32 )
+tile_mode_step = 64
+icon = ExtResource( 44 )
+preview = ExtResource( 49 )
+
 [node name="CollectiblesGroup" type="Node" parent="PlaceableItems"]
 script = ExtResource( 25 )
 color = Color( 0.121569, 0.129412, 0.517647, 1 )

@@ -86,6 +86,7 @@ func set_checkpoint(body):
 		Singleton.CheckpointSaved.switch_state = Singleton.CurrentLevelData.level_data.vars.switch_state.duplicate(true)
 	Singleton.CheckpointSaved.liquid_positions = Singleton.CurrentLevelData.level_data.vars.liquid_positions.duplicate(true)
 	Singleton.CheckpointSaved.activated_shine_ids = Singleton.CurrentLevelData.level_data.vars.activated_shine_ids.duplicate(true)
+	
 	Singleton.CurrentLevelData.level_transition_data = {}
 	
 	for checkpoint in Singleton.CurrentLevelData.level_data.vars.checkpoints:

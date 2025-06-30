@@ -86,10 +86,11 @@ func setup_level(level_info: LevelInfo, level_id: String, working_folder: String
 	
 	Singleton.CurrentLevelData.level_info.selected_shine = -1
 	Singleton.CurrentLevelData.area = 0
+	Singleton.CheckpointSaved.reset()
 
 ## loads shine select if there's more than 1 shine,
 ## else loads directly into level
-func start_level(level_info: LevelInfo, level_id: String, working_folder: String, start_in_edit_mode: bool, skip_shine_select: bool = false, hub_level: String = "", do_transition: bool = true):
+func start_level(level_info: LevelInfo, level_id: String, working_folder: String, start_in_edit_mode: bool, skip_shine_select: bool = false, hub_level: String = "", do_transition: bool = true, play_warp_sound: bool = true):
 	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
 	# using collected_shines for the size check because there can only be one entry in collected shines per id, while shine_details can have multiple shines with the same id
 	var goal_scene = EDITOR_PATH if start_in_edit_mode else PLAYER_PATH
@@ -118,7 +119,8 @@ func start_level(level_info: LevelInfo, level_id: String, working_folder: String
 		var _connect = Singleton.SceneTransitions.connect("transition_finished", self, "setup_level", [level_info, level_id, working_folder, hub_level], CONNECT_ONESHOT)
 		_connect = Singleton.SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [goal_scene], CONNECT_ONESHOT)
 		
-		Singleton.SceneTransitions.play_transition_audio()
+		if play_warp_sound:
+			Singleton.SceneTransitions.play_transition_audio()
 		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)
 	else:
 		setup_level(level_info, level_id, working_folder, hub_level)

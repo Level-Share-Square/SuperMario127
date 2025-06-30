@@ -67,7 +67,7 @@ func start_exit_animation(character: Character) -> void:
 	character.anim_player.connect("animation_finished", self, "exit_animation_finished", [character], CONNECT_ONESHOT)
 	
 	yield(get_tree(), "idle_frame")
-	character.show()
+	reset_sprite(character)
 
 func exit_animation_finished(_animation: String, character: Character):
 	character.sprite.animation = "exitDoor" + ("Right" if character.facing_direction == 1 else "Left")
@@ -82,6 +82,14 @@ func animate_door(animation : String) -> void:
 	door_sprite.playing = true
 	audio_player.stream = open_audio if animation == "open" else close_audio
 	audio_player.play()
+
+
+func reset_sprite(character : Character): #This is here in case Mario came from a painting to a door
+	character.show()
+	character.z_index = -1
+	character.sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	character.sprite.scale = Vector2(1.0, 1.0)
+	character.sprite.position = Vector2.ZERO
 
 
 ### AREA2D STUFF

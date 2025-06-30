@@ -5,6 +5,7 @@ onready var canvas_background = $Background
 onready var canvas_mask = $Light2D
 onready var tween = $Tween
 onready var transition_audio = $TransitionAudio
+onready var transition_audio_2 = $TransitionAudio2
 
 signal transition_finished
 
@@ -103,3 +104,6 @@ func do_transition_animation(transition_texture : StreamTexture = cutout_circle,
 
 func play_transition_audio():
 	transition_audio.play()
+
+func play_transition_audio_2():
+	transition_audio_2.play()

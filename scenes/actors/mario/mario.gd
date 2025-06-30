@@ -459,6 +459,8 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	elif Singleton.CheckpointSaved.current_checkpoint_id != -1:
 		position = Singleton.CheckpointSaved.current_spawn_pos
 		reset_physics_interpolation()
+		toggle_movement(true)
+		show()
 	elif level_target_tag != "":
 		do_teleport = true
 		target_tag = level_target_tag
@@ -470,7 +472,6 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		var shared_node: LevelShared = get_tree().get_current_scene().get_shared_node()
 		yield(shared_node.get_objects_node(), "objects_ready")
 		
-		show()
 		var teleporter: GameObject = find_teleporter(target_tag)
 		print(target_tag, teleporter)
 		if not is_instance_valid(teleporter):
@@ -481,8 +482,14 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 			global_position = teleporter.global_position
 			reset_physics_interpolation()
 			
+			if not teleporter.has_method("is_level_entrance"):
+				# to stop tweens from failing to play on startup
+				yield(get_tree().create_timer(0.3), "timeout")
+			
+			show()
 			teleporter.start_exit_animation(self)
 		else:
+			show()
 			toggle_movement(true)
 
 

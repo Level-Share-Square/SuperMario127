@@ -137,9 +137,6 @@ func start_exit_animation(character: Character) -> void:
 	# when mario finishes exiting, run a function (one shot)
 	# warning-ignore: return_value_discarded
 	tween.connect("tween_all_completed", self, "emit_signal", ["exit_completed"], CONNECT_ONESHOT)
-
-	# temp fix, why doesn't this work on startup??
-	yield(get_tree().create_timer(0.25), "timeout")
 	
 	# warning-ignore: return_value_discarded
 	tween.start()

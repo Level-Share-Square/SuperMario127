@@ -7,6 +7,8 @@ const CAMERA_TWEEN_TIME := 0.5
 onready var teleporter: GameObject = get_parent()
 var timer_manager
 
+export var play_warp_sound: bool = true # for level warping specifically
+
 
 ### WARP FUNCTIONS ####
 func location_warp(character: Character, target_tag: String, max_pan_distance: int) -> void:
@@ -124,7 +126,7 @@ func level_warp(character: Character, target_level: String,
 	
 	Singleton.Music.reset_music()
 	Singleton.Music.stop()
-	Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, false, false, hub_level)
+	Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, false, false, hub_level, true, play_warp_sound)
 
 
 ### OTHER ###
