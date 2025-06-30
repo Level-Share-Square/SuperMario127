@@ -39,6 +39,7 @@ func start_entrance_animation(character: Character) -> void:
 	
 	yield(get_tree().create_timer(0.6), "timeout")
 	
+	bg.material.set_shader_param("offset", (character.position.x - position.x) / (bg.rect_size.x/2))
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character, "position:y", null, global_position.y, 0.2, Tween.TRANS_QUAD, Tween.EASE_IN)
 	# warning-ignore: return_value_discarded
@@ -78,6 +79,7 @@ func start_exit_animation(character: Character) -> void:
 	character.sprite.scale = Vector2(0.8, 0.8)
 	character.sprite.modulate = Color(5, 5, 5, 0)
 	
+	bg.material.set_shader_param("offset", 0)
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(bg.material, "shader_param/height", 0, 0.1, 0.25, Tween.TRANS_QUAD, Tween.EASE_IN)
 	# warning-ignore: return_value_discarded
