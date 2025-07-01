@@ -1,0 +1,891 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=2]
+[ext_resource path="res://scenes/menu/box_shadow.png" type="Texture" id=3]
+[ext_resource path="res://scenes/menu/screen.gd" type="Script" id=4]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=6]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-vertical.gd" type="Script" id=9]
+[ext_resource path="res://scenes/actors/objects/hover_box/hover_box.png" type="Texture" id=10]
+[ext_resource path="res://scenes/menu/levels_list/icons/star_coin.png" type="Texture" id=11]
+[ext_resource path="res://scenes/menu/levels_list/icons/shine.png" type="Texture" id=12]
+[ext_resource path="res://scenes/actors/objects/turbo_box/turbo_box.png" type="Texture" id=13]
+[ext_resource path="res://scenes/actors/objects/rocket_box/rocket_box.png" type="Texture" id=14]
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0.0502793, 0.944134, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.831373, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture2D" id=7]
+gradient = SubResource( 6 )
+fill_from = Vector2( 0, 1 )
+fill_to = Vector2( 0, 0 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 28
+outline_size = 2
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+extra_spacing_char = -1
+font_data = ExtResource( 8 )
+
+[sub_resource type="Gradient" id=4]
+colors = PoolColorArray( 1, 1, 1, 0, 0.72549, 0.843137, 0.937255, 1 )
+
+[sub_resource type="GradientTexture2D" id=5]
+gradient = SubResource( 4 )
+fill_to = Vector2( 0, 1 )
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("RichTextLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MarginContainer2/VBoxContainer/Control/HBoxContainer:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MarginContainer2/VBoxContainer/WhiteBar:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -64 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("MarginContainer2/VBoxContainer/WhiteBar2:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 505 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "transition"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.4 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer2/VBoxContainer/Control/HBoxContainer:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.7, 0.8 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MarginContainer2/VBoxContainer/WhiteBar:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -96 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MarginContainer2/VBoxContainer/WhiteBar2:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 401 ), Vector2( 0, 505 ) ]
+}
+
+[node name="FileSelect" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Focus" type="Control" parent="."]
+script = ExtResource( 6 )
+default_focus_path = NodePath("../MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 7 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 5 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+modulate = Color( 0, 0, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -21.0
+margin_top = -31.0
+margin_right = 18.0
+margin_bottom = 34.0
+rect_rotation = -5.0
+rect_pivot_offset = Vector2( 384, 216 )
+mouse_filter = 2
+custom_constants/margin_right = 0
+custom_constants/margin_top = -4
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = -4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+margin_top = -4.0
+margin_right = 807.0
+margin_bottom = 501.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="WhiteBar" type="TextureRect" parent="MarginContainer2/VBoxContainer"]
+margin_top = -64.0
+margin_right = 807.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 96 )
+mouse_filter = 2
+texture = SubResource( 7 )
+expand = true
+flip_h = true
+flip_v = true
+
+[node name="Return" type="Button" parent="MarginContainer2/VBoxContainer/WhiteBar"]
+margin_left = 28.0
+margin_top = 28.0
+margin_right = 141.0
+margin_bottom = 61.0
+rect_rotation = 5.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../../WhiteBar2/EraseFile")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../../Control/HBoxContainer/FileA/Button")
+size_flags_vertical = 0
+theme_type_variation = "Red"
+text = "Return"
+align = 2
+script = ExtResource( 2 )
+lerp_speed = 18.0
+
+[node name="Shadow" type="NinePatchRect" parent="MarginContainer2/VBoxContainer/WhiteBar/Return"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 3 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer2/VBoxContainer/WhiteBar"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 32.0
+rect_rotation = 5.0
+rect_pivot_offset = Vector2( 384, 48 )
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="MarginContainer2/VBoxContainer/WhiteBar/CenterContainer"]
+margin_left = 325.0
+margin_top = 49.0
+margin_right = 482.0
+margin_bottom = 79.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 3 )
+text = "Select a file!"
+align = 1
+valign = 1
+
+[node name="Shadow" type="Label" parent="MarginContainer2/VBoxContainer/WhiteBar/CenterContainer/Title"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 3.0
+margin_bottom = 3.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "Select a file!"
+align = 1
+valign = 1
+clip_text = true
+
+[node name="Padding" type="Control" parent="MarginContainer2/VBoxContainer"]
+margin_top = 96.0
+margin_right = 807.0
+margin_bottom = 160.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="MarginContainer2/VBoxContainer"]
+margin_top = 160.0
+margin_right = 807.0
+margin_bottom = 336.0
+rect_min_size = Vector2( 0, 176 )
+rect_pivot_offset = Vector2( 384, 88 )
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 0.8, 0.8 )
+rect_pivot_offset = Vector2( 352, 96 )
+mouse_filter = 2
+custom_constants/separation = 48
+alignment = 1
+
+[node name="FileA" type="Control" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer"]
+margin_left = 91.0
+margin_right = 267.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 176, 176 )
+
+[node name="Button" type="Button" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA"]
+margin_right = 176.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 176, 176 )
+rect_rotation = 5.0
+rect_pivot_offset = Vector2( 88, 88 )
+focus_neighbour_left = NodePath("../../FileC/Button")
+focus_neighbour_top = NodePath("../../../../WhiteBar/Return")
+focus_neighbour_right = NodePath("../../FileB/Button")
+focus_neighbour_bottom = NodePath("../../../../WhiteBar2/EraseFile")
+theme_type_variation = "SaveCard"
+script = ExtResource( 9 )
+
+[node name="Gradient" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+mouse_filter = 2
+texture = SubResource( 5 )
+expand = true
+
+[node name="Panel" type="Panel" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_type_variation = "SaveOutline"
+
+[node name="Info" type="MarginContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 156.0
+margin_bottom = 156.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info/VBoxContainer"]
+margin_right = 136.0
+margin_bottom = 25.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info/VBoxContainer/HBoxContainer"]
+margin_right = 25.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 25, 0 )
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="FileName" type="Label" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info/VBoxContainer/HBoxContainer"]
+margin_left = 29.0
+margin_right = 80.0
+margin_bottom = 25.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+text = "File A"
+
+[node name="Padding" type="Control" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info/VBoxContainer"]
+margin_top = 25.0
+margin_right = 136.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 0, 8 )
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="Collectibles" type="GridContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info/VBoxContainer"]
+margin_top = 33.0
+margin_right = 136.0
+margin_bottom = 109.0
+mouse_filter = 2
+custom_constants/hseparation = 12
+
+[node name="Shines" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info/VBoxContainer/Collectibles"]
+margin_right = 100.0
+margin_bottom = 36.0
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info/VBoxContainer/Collectibles/Shines"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info/VBoxContainer/Collectibles/Shines/Control"]
+modulate = Color( 0, 0.0431373, 0.313726, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info/VBoxContainer/Collectibles/Shines"]
+margin_left = 40.0
+margin_top = 5.0
+margin_right = 100.0
+margin_bottom = 30.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+text = "32/128"
+align = 1
+valign = 1
+
+[node name="StarCoins" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info/VBoxContainer/Collectibles"]
+margin_top = 40.0
+margin_right = 100.0
+margin_bottom = 76.0
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info/VBoxContainer/Collectibles/StarCoins"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info/VBoxContainer/Collectibles/StarCoins/Control"]
+modulate = Color( 0, 0.0431373, 0.313726, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -14.0
+margin_top = -14.0
+margin_right = 14.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 28, 28 )
+mouse_filter = 2
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info/VBoxContainer/Collectibles/StarCoins"]
+margin_left = 40.0
+margin_top = 5.0
+margin_right = 100.0
+margin_bottom = 30.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+text = "32/128"
+align = 1
+valign = 1
+
+[node name="Padding2" type="Control" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info/VBoxContainer"]
+margin_top = 109.0
+margin_right = 136.0
+margin_bottom = 111.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="Completion" type="Label" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileA/Button/Info/VBoxContainer"]
+margin_top = 111.0
+margin_right = 136.0
+margin_bottom = 136.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+text = "25%"
+align = 2
+
+[node name="FileB" type="Control" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer"]
+margin_left = 315.0
+margin_right = 491.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 176, 176 )
+
+[node name="Button" type="Button" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB"]
+margin_right = 176.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 176, 176 )
+rect_rotation = 5.0
+rect_pivot_offset = Vector2( 88, 88 )
+focus_neighbour_left = NodePath("../../FileA/Button")
+focus_neighbour_top = NodePath("../../../../WhiteBar/Return")
+focus_neighbour_right = NodePath("../../FileC/Button")
+focus_neighbour_bottom = NodePath("../../../../WhiteBar2/EraseFile")
+theme_type_variation = "SaveCard"
+script = ExtResource( 9 )
+
+[node name="Gradient" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+mouse_filter = 2
+texture = SubResource( 5 )
+expand = true
+
+[node name="Panel" type="Panel" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_type_variation = "SaveOutline"
+
+[node name="Info" type="MarginContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 156.0
+margin_bottom = 156.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info/VBoxContainer"]
+margin_right = 136.0
+margin_bottom = 25.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info/VBoxContainer/HBoxContainer"]
+margin_right = 25.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 25, 0 )
+mouse_filter = 2
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 6
+
+[node name="FileName" type="Label" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info/VBoxContainer/HBoxContainer"]
+margin_left = 29.0
+margin_right = 78.0
+margin_bottom = 25.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+text = "File B"
+
+[node name="Padding" type="Control" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info/VBoxContainer"]
+margin_top = 25.0
+margin_right = 136.0
+margin_bottom = 68.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="Collectibles" type="GridContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info/VBoxContainer"]
+visible = false
+margin_top = 38.0
+margin_right = 152.0
+margin_bottom = 114.0
+mouse_filter = 2
+custom_constants/hseparation = 12
+
+[node name="Shines" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info/VBoxContainer/Collectibles"]
+margin_right = 66.0
+margin_bottom = 36.0
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info/VBoxContainer/Collectibles/Shines"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info/VBoxContainer/Collectibles/Shines/Control"]
+modulate = Color( 0, 0.0431373, 0.313726, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info/VBoxContainer/Collectibles/Shines"]
+margin_left = 40.0
+margin_top = 5.0
+margin_right = 66.0
+margin_bottom = 30.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+text = "32/128"
+align = 1
+valign = 1
+
+[node name="StarCoins" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info/VBoxContainer/Collectibles"]
+margin_top = 40.0
+margin_right = 66.0
+margin_bottom = 76.0
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info/VBoxContainer/Collectibles/StarCoins"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info/VBoxContainer/Collectibles/StarCoins/Control"]
+modulate = Color( 0, 0.0431373, 0.313726, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -14.0
+margin_top = -14.0
+margin_right = 14.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 28, 28 )
+mouse_filter = 2
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info/VBoxContainer/Collectibles/StarCoins"]
+margin_left = 40.0
+margin_top = 5.0
+margin_right = 66.0
+margin_bottom = 30.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+text = "32/128"
+align = 1
+valign = 1
+
+[node name="Padding2" type="Control" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info/VBoxContainer"]
+margin_top = 68.0
+margin_right = 136.0
+margin_bottom = 111.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="Completion" type="Label" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileB/Button/Info/VBoxContainer"]
+margin_top = 111.0
+margin_right = 136.0
+margin_bottom = 136.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+text = "New Game"
+align = 2
+
+[node name="FileC" type="Control" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer"]
+margin_left = 539.0
+margin_right = 715.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 176, 176 )
+
+[node name="Button" type="Button" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC"]
+margin_right = 176.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 176, 176 )
+rect_rotation = 5.0
+rect_pivot_offset = Vector2( 88, 88 )
+focus_neighbour_left = NodePath("../../FileB/Button")
+focus_neighbour_top = NodePath("../../../../WhiteBar/Return")
+focus_neighbour_right = NodePath("../../FileA/Button")
+focus_neighbour_bottom = NodePath("../../../../WhiteBar2/EraseFile")
+theme_type_variation = "SaveCard"
+script = ExtResource( 9 )
+
+[node name="Gradient" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+mouse_filter = 2
+texture = SubResource( 5 )
+expand = true
+
+[node name="Panel" type="Panel" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_type_variation = "SaveOutline"
+
+[node name="Info" type="MarginContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 156.0
+margin_bottom = 156.0
+mouse_filter = 2
+custom_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info/VBoxContainer"]
+margin_right = 136.0
+margin_bottom = 25.0
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info/VBoxContainer/HBoxContainer"]
+margin_right = 25.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 25, 0 )
+mouse_filter = 2
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 6
+
+[node name="FileName" type="Label" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info/VBoxContainer/HBoxContainer"]
+margin_left = 29.0
+margin_right = 79.0
+margin_bottom = 25.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+text = "File C"
+
+[node name="Padding" type="Control" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info/VBoxContainer"]
+margin_top = 25.0
+margin_right = 136.0
+margin_bottom = 68.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="Collectibles" type="GridContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info/VBoxContainer"]
+visible = false
+margin_top = 38.0
+margin_right = 152.0
+margin_bottom = 114.0
+mouse_filter = 2
+custom_constants/hseparation = 12
+
+[node name="Shines" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info/VBoxContainer/Collectibles"]
+margin_right = 66.0
+margin_bottom = 36.0
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info/VBoxContainer/Collectibles/Shines"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info/VBoxContainer/Collectibles/Shines/Control"]
+modulate = Color( 0, 0.0431373, 0.313726, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info/VBoxContainer/Collectibles/Shines"]
+margin_left = 40.0
+margin_top = 5.0
+margin_right = 66.0
+margin_bottom = 30.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+text = "32/128"
+align = 1
+valign = 1
+
+[node name="StarCoins" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info/VBoxContainer/Collectibles"]
+margin_top = 40.0
+margin_right = 66.0
+margin_bottom = 76.0
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info/VBoxContainer/Collectibles/StarCoins"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info/VBoxContainer/Collectibles/StarCoins/Control"]
+modulate = Color( 0, 0.0431373, 0.313726, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -14.0
+margin_top = -14.0
+margin_right = 14.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 28, 28 )
+mouse_filter = 2
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info/VBoxContainer/Collectibles/StarCoins"]
+margin_left = 40.0
+margin_top = 5.0
+margin_right = 66.0
+margin_bottom = 30.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+text = "32/128"
+align = 1
+valign = 1
+
+[node name="Padding2" type="Control" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info/VBoxContainer"]
+margin_top = 68.0
+margin_right = 136.0
+margin_bottom = 111.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="Completion" type="Label" parent="MarginContainer2/VBoxContainer/Control/HBoxContainer/FileC/Button/Info/VBoxContainer"]
+margin_top = 111.0
+margin_right = 136.0
+margin_bottom = 136.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+text = "New Game"
+align = 2
+
+[node name="Padding2" type="Control" parent="MarginContainer2/VBoxContainer"]
+margin_top = 336.0
+margin_right = 807.0
+margin_bottom = 401.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="WhiteBar2" type="TextureRect" parent="MarginContainer2/VBoxContainer"]
+margin_top = 505.0
+margin_right = 807.0
+margin_bottom = 609.0
+rect_min_size = Vector2( 0, 104 )
+mouse_filter = 2
+texture = SubResource( 7 )
+expand = true
+
+[node name="EraseFile" type="Button" parent="MarginContainer2/VBoxContainer/WhiteBar2"]
+margin_left = 642.0
+margin_top = 28.0
+margin_right = 773.0
+margin_bottom = 61.0
+rect_rotation = 5.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../../Control/HBoxContainer/FileC/Button")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../../WhiteBar/Return")
+size_flags_vertical = 0
+theme_type_variation = "Red"
+text = "Erase File"
+align = 0
+script = ExtResource( 2 )
+lerp_speed = 18.0
+direction = 1
+
+[node name="Shadow" type="NinePatchRect" parent="MarginContainer2/VBoxContainer/WhiteBar2/EraseFile"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 3 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/transition = SubResource( 2 )
+
+[connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/WhiteBar/Return" to="." method="transition" binds= [ "LevelsList" ]]

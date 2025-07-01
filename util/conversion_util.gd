@@ -294,8 +294,6 @@ static func convert_054_to_055(result):
 						object.properties[12] = required_amount
 						object.properties[13] = insufficient_text
 						object.properties[14] = is_single
-						
-				
 				
 				new_objects.append(object)
 			area_result.objects = new_objects

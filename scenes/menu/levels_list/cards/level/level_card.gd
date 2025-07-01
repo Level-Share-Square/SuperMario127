@@ -53,6 +53,8 @@ func setup(
 #		level_code = level_list_util.load_level_code_file(LevelData.DEFAULT_CODE_PATH)
 #		level_info = LevelInfo.new(id, parent_folder, level_code)
 	
+	if is_campaign: return
+	
 	# load save file
 	var save_path: String = level_list_util.get_level_save_path(id, parent_folder)
 	if level_list_util.file_exists(save_path):

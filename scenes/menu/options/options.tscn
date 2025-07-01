@@ -31,12 +31,12 @@
 [sub_resource type="CanvasItemMaterial" id=11]
 blend_mode = 1
 
-[sub_resource type="Gradient" id=12]
+[sub_resource type="Gradient" id=32]
 offsets = PoolRealArray( 0, 0.25, 0.75, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1 )
 
 [sub_resource type="GradientTexture2D" id=13]
-gradient = SubResource( 12 )
+gradient = SubResource( 32 )
 fill_to = Vector2( 0, 1 )
 
 [sub_resource type="Gradient" id=2]

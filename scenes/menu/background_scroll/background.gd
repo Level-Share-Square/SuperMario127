@@ -2,6 +2,7 @@ extends Control
 tool
 
 onready var overlay = $Overlay
+onready var scroll = $Scroll
 
 export var overlay_tint: Color setget set_color
 func set_color(new_value: Color):
@@ -21,3 +22,8 @@ func _ready():
 	overlay.modulate = overlay_tint
 	overlay.material = overlay.material.duplicate()
 	overlay.material.set_shader_param("u_amount", static_amount)
+
+
+func _process(delta):
+	if not is_visible_in_tree(): return
+	scroll.modulate.a = modulate.a

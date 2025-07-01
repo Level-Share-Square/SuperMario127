@@ -13,6 +13,7 @@ onready var parent_screen := $"%LevelView"
 
 onready var level_grid := $"%LevelGrid"
 onready var level_panel := $"%LevelPanel"
+onready var campaign_panel := $"%CampaignPanel"
 onready var old_levels := $"%OldLevels"
 onready var loader := $"%Loader"
 onready var focus = $"%Focus"

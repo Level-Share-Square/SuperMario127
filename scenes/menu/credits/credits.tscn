@@ -232,7 +232,7 @@ modulate = Color( 1, 1, 1, 0 )
 anchor_bottom = 1.0
 margin_top = 432.0
 margin_right = 768.0
-margin_bottom = 7984.0
+margin_bottom = 10576.0
 custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center]Super Mario 127
@@ -648,15 +648,15 @@ custom_constants/margin_bottom = 24
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 margin_left = 16.0
 margin_top = 12.0
-margin_right = 116.0
+margin_right = 117.0
 margin_bottom = 104.0
 rect_pivot_offset = Vector2( -228, -180 )
 alignment = 2
 
 [node name="Speed" type="Button" parent="MarginContainer/VBoxContainer"]
-margin_top = 12.0
-margin_right = 100.0
-margin_bottom = 44.0
+margin_top = 10.0
+margin_right = 101.0
+margin_bottom = 43.0
 focus_neighbour_top = NodePath("../Skip")
 focus_neighbour_bottom = NodePath("../Skip")
 text = "Speed (5x)"
@@ -679,8 +679,8 @@ patch_margin_right = 11
 patch_margin_bottom = 11
 
 [node name="Skip" type="Button" parent="MarginContainer/VBoxContainer"]
-margin_top = 60.0
-margin_right = 100.0
+margin_top = 59.0
+margin_right = 101.0
 margin_bottom = 92.0
 focus_neighbour_top = NodePath("../Speed")
 focus_neighbour_bottom = NodePath("../Speed")

@@ -43,6 +43,10 @@ onready var star_coin_label := $InfoTab/Info/StarCoins/Label
 export var completion_color: Color = Color("ffffc4")
 onready var percentage_label := $InfoTab/Info/Completion/Percentage
 
+onready var shines = $InfoTab/Info/Shines
+onready var star_coins = $InfoTab/Info/StarCoins
+onready var completion = $InfoTab/Info/Completion
+
 ### time scores
 onready var time_scores_container: VBoxContainer = $ScoresTab/Panel/ScrollContainer/MarginContainer/VBoxContainer
 
@@ -50,6 +54,7 @@ onready var time_scores_container: VBoxContainer = $ScoresTab/Panel/ScrollContai
 onready var play_button = $Buttons/PlayLevel
 onready var back_button = $Buttons/Return
 onready var edit_button = $Buttons/EditLevel
+onready var view_tab = $Buttons/ViewTab
 onready var reset_button = $Buttons/ResetSave
 onready var delete_button = $Buttons/DeleteLevel
 
@@ -110,7 +115,13 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 		
 		return
 	
-	play_button.visible = true
+	play_button.visible = not is_campaign
+	view_tab.visible = not is_campaign
+	reset_button.visible = not is_campaign
+	
+	shines.visible = not is_campaign
+	star_coins.visible = not is_campaign
+	completion.visible = not is_campaign
 	
 	title.text = level_info.level_name
 	title_shadow.text = title.text
@@ -146,6 +157,8 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 		foreground.visible = false
 	
 	
+	if is_campaign: return
+	
 	# load save file
 	var save_path: String = level_list_util.get_level_save_path(level_id, working_folder)
 	if level_list_util.file_exists(save_path):
@@ -166,6 +179,7 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 	var completion_percent: float = stepify(total_collected / total_collectibles, 0.01) * 100
 	percentage_label.modulate = completion_color if (completion_percent >= 100) else Color.white
 	percentage_label.text = str(completion_percent) + "%"
+
 
 func load_time_scores():
 	for child in time_scores_container.get_children():
