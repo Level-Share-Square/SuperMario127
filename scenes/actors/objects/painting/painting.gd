@@ -149,6 +149,11 @@ func _ready() -> void:
 	custom_image.material = bg.material
 	bg.material.set_shader_param("height", 0)
 	
+	var image = bg.texture.get_data()
+	var image_texture = ImageTexture.new()
+	image_texture.create_from_image(image, 41)
+	bg.texture = image_texture
+	
 	if is_preview:
 		z_index = 0
 
