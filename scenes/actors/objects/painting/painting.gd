@@ -41,7 +41,7 @@ func start_entrance_animation(character: Character) -> void:
 	
 	bg.material.set_shader_param("offset", (character.position.x - position.x) / (bg.rect_size.x/2))
 	# warning-ignore: return_value_discarded
-	tween.interpolate_property(character, "position:y", null, global_position.y - 4, 0.2, Tween.TRANS_QUAD, Tween.EASE_IN)
+	tween.interpolate_property(character, "position:y", null, global_position.y, 0.2, Tween.TRANS_QUAD, Tween.EASE_IN)
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character.sprite, "scale", null, Vector2(0.8, 0.8), 0.2)
 	# warning-ignore: return_value_discarded

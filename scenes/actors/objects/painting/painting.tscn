@@ -50,7 +50,6 @@ play_warp_sound = false
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, 24 )
