@@ -4,8 +4,8 @@ extends Teleporter
 onready var tween: Tween = $Tween
 onready var exit_sound = $ExitSound
 onready var collision_width: float = $Area2D/CollisionShape2D.shape.extents.x
-onready var bg = $"%BG"
-onready var custom_image = $"%CustomImage"
+onready var bg: TextureRect = $"%BG"
+onready var custom_image: TextureRect = $"%CustomImage"
 
 export(float) var slide_to_center_length := 0.5
 export var placeholder_texture: StreamTexture
@@ -31,7 +31,7 @@ func start_entrance_animation(character: Character) -> void:
 	slide_length = slide_to_center_length * distance_from_center_normalized
 	
 	# warning-ignore: return_value_discarded
-	tween.interpolate_property(character, "position:y", null, global_position.y - 8, 0.6, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	tween.interpolate_property(character, "position:y", null, global_position.y - 12, 0.6, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character.sprite, "scale", null, Vector2(0.95, 0.95), 0.6)
 	# warning-ignore: return_value_discarded
@@ -41,7 +41,7 @@ func start_entrance_animation(character: Character) -> void:
 	
 	bg.material.set_shader_param("offset", (character.position.x - position.x) / (bg.rect_size.x/2))
 	# warning-ignore: return_value_discarded
-	tween.interpolate_property(character, "position:y", null, global_position.y, 0.2, Tween.TRANS_QUAD, Tween.EASE_IN)
+	tween.interpolate_property(character, "position:y", null, global_position.y - 4, 0.2, Tween.TRANS_QUAD, Tween.EASE_IN)
 	# warning-ignore: return_value_discarded
 	tween.interpolate_property(character.sprite, "scale", null, Vector2(0.8, 0.8), 0.2)
 	# warning-ignore: return_value_discarded
@@ -168,6 +168,8 @@ func _on_property_changed(key, value):
 				var thumb_path: String = level_list_util.get_level_thumbnail_path(level_path, working_folder)
 				if level_list_util.file_exists(thumb_path):
 					custom_image.texture = level_list_util.get_image_from_path(thumb_path)
+					custom_image.texture = custom_image.texture.duplicate()
+					custom_image.texture.flags = 41
 					custom_image.visible = true
 				else:
 					custom_image.texture = placeholder_texture
