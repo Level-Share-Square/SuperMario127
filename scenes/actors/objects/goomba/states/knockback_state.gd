@@ -1,6 +1,13 @@
 extends EnemyState
 
 
+onready var hit_sound: AudioStreamPlayer2D = enemy.get_node("Sounds/Hit")
+
+
+func _start():
+	hit_sound.play()
+
+
 func _update(delta: float):
 	enemy.sprite.rotation_degrees += (enemy.velocity.x / 15.0)
 	

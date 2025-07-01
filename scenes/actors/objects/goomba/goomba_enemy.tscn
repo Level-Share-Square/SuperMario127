@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scenes/actors/objects/enemy/enemy_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/actors/objects/goomba/goomba_enemy.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://scenes/actors/objects/goomba/sounds/stomp.wav" type="AudioStream" id=13]
 [ext_resource path="res://scenes/actors/objects/goomba/animations/poof.png" type="Texture" id=14]
 [ext_resource path="res://scenes/actors/objects/goomba/states/chase_state.gd" type="Script" id=15]
+[ext_resource path="res://scenes/actors/objects/bullet_bill/sound.wav" type="AudioStream" id=16]
 
 [sub_resource type="CapsuleShape2D" id=36]
 radius = 7.0
@@ -517,7 +518,11 @@ position = Vector2( 0, -20 )
 [node name="Stomp" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
 stream = ExtResource( 13 )
 
-[node name="Poof" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+[node name="Hit" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+stream = ExtResource( 16 )
+volume_db = -5.0
+
+[node name="Poof" type="AudioStreamPlayer2D" parent="Sounds" index="2"]
 stream = ExtResource( 12 )
 
 [node name="SpawnParticles" parent="." index="13"]
