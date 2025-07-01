@@ -28,8 +28,10 @@ func update_buttons(path: String = ""):
 	tween.interpolate_property(self, "modulate:a", modulate.a, target_alpha, TWEEN_TIME)
 	tween.start()
 	
+	var is_campaign = list_handler.is_campaign
 	var is_root_folder = list_handler.working_folder == level_list_util.BASE_FOLDER
 	var is_dev_folder = list_handler.working_folder == level_list_util.DEV_FOLDER
 	$Back.visible = is_root_folder or is_dev_folder
-	$FolderSettings.visible = not is_root_folder and not is_dev_folder
+	$FolderSettings.visible = not is_root_folder and not is_dev_folder and not is_campaign
+	$CampaignSettings.visible = is_campaign
 	$Add.visible = not is_dev_folder

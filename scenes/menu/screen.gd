@@ -20,3 +20,7 @@ func transition(new_screen_name: String):
 
 func animation_finished(_anim_name: String, new_screen_name: String):
 	emit_signal("screen_change", new_screen_name)
+
+
+func _on_EditCampaign_pressed():
+	pass # Replace with function body.

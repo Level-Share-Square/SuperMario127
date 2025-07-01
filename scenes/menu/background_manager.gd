@@ -3,10 +3,10 @@ extends Node2D
 
 onready var backgrounds = $Backgrounds
 
-const BG_ID: int = 10
-const PARALLAX_ID: int = 1
-const PARALLAX_OFFSET: int = 160
-const PARALLAX_PALETTE: int = 1
+const BG_ID: int = 1
+const PARALLAX_ID: int = 13
+const PARALLAX_OFFSET: int = 65
+const PARALLAX_PALETTE: int = 0
 const SCROLL_SPEED: float = 300.0
 
 const BACKGROUNDS := [

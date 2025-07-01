@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=83 format=2]
+[gd_resource type="Theme" load_steps=87 format=2]
 
 [ext_resource path="res://assets/fonts/DelfinoFont20.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/options/buttons/grabber_highlight.png" type="Texture" id=2]
@@ -582,6 +582,41 @@ margin_bottom = 3.0
 axis_stretch_horizontal = 1
 modulate_color = Color( 0.682353, 0.682353, 0.682353, 1 )
 
+[sub_resource type="StyleBoxFlat" id=92]
+bg_color = Color( 0.917647, 0.964706, 1, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 32
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 32
+shadow_color = Color( 0, 0, 0, 0.25098 )
+shadow_size = 8
+shadow_offset = Vector2( 4, 8 )
+
+[sub_resource type="StyleBoxFlat" id=89]
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 32
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 32
+shadow_color = Color( 0, 0, 0, 0.25098 )
+shadow_size = 8
+shadow_offset = Vector2( 4, 8 )
+
+[sub_resource type="StyleBoxTexture" id=90]
+
+[sub_resource type="StyleBoxFlat" id=91]
+bg_color = Color( 1, 1, 1, 1 )
+draw_center = false
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 32
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 32
+
 [sub_resource type="Gradient" id=19]
 offsets = PoolRealArray( 0.335196, 0.653631 )
 colors = PoolColorArray( 0.290196, 0, 0.490196, 1, 0.545098, 0.278431, 0.6, 1 )
@@ -831,6 +866,14 @@ Red/styles/hover = SubResource( 16 )
 Red/styles/normal = SubResource( 14 )
 Red/styles/pressed = SubResource( 17 )
 RichTextLabel/fonts/normal_font = ExtResource( 5 )
+SaveCard/base_type = "Button"
+SaveCard/styles/hover = SubResource( 92 )
+SaveCard/styles/normal = SubResource( 89 )
+SaveCard/styles/pressed = SubResource( 89 )
+SaveDecor/base_type = "Panel"
+SaveDecor/styles/panel = SubResource( 90 )
+SaveOutline/base_type = "Panel"
+SaveOutline/styles/panel = SubResource( 91 )
 Special/base_type = "Button"
 Special/colors/font_color = Color( 1, 1, 1, 1 )
 Special/colors/font_color_focus = Color( 1, 1, 1, 1 )

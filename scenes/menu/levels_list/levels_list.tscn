@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/actors/objects/cloud_platform/texture.png" type="Texture" id=2]
@@ -55,6 +55,7 @@
 [ext_resource path="res://scenes/menu/levels_list/misc/http_thumbnails.gd" type="Script" id=53]
 [ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=54]
 [ext_resource path="res://scenes/menu/text_edit_unfocus.gd" type="Script" id=55]
+[ext_resource path="res://scenes/menu/levels_list/campaign_panel.gd" type="Script" id=56]
 
 [sub_resource type="CanvasItemMaterial" id=22]
 blend_mode = 1
@@ -224,6 +225,92 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=14]
+resource_name = "transition"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0, 1 ),
+"update": 0,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="DynamicFont" id=31]
+size = 28
+outline_size = 2
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+extra_spacing_char = -1
+font_data = ExtResource( 11 )
+
+[sub_resource type="Animation" id=29]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 0.9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=30]
 resource_name = "transition"
 length = 0.3
 tracks/0/type = "value"
@@ -655,6 +742,41 @@ script = ExtResource( 29 )
 offset = Vector2( 53, -1 )
 
 [node name="Shadow" type="NinePatchRect" parent="Panel/Buttons/FolderSettings"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 8 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="CampaignSettings" type="Button" parent="Panel/Buttons"]
+visible = false
+margin_left = 125.0
+margin_right = 281.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 1 )
+text = "Campaign Settings       "
+script = ExtResource( 3 )
+
+[node name="Icon" type="TextureRect" parent="Panel/Buttons/CampaignSettings"]
+margin_left = 130.0
+margin_top = 1.0
+margin_right = 150.0
+margin_bottom = 21.0
+mouse_filter = 2
+texture = ExtResource( 39 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( 62, -1 )
+
+[node name="Shadow" type="NinePatchRect" parent="Panel/Buttons/CampaignSettings"]
 modulate = Color( 1, 1, 1, 0.25098 )
 show_behind_parent = true
 anchor_right = 1.0
@@ -1342,6 +1464,392 @@ script = ExtResource( 22 )
 anims/RESET = SubResource( 13 )
 anims/transition = SubResource( 14 )
 
+[node name="CampaignInfo" type="MarginContainer" parent="Panel/Subscreens"]
+unique_name_in_owner = true
+visible = false
+modulate = Color( 0, 0, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 336, 156 )
+rect_clip_content = true
+script = ExtResource( 9 )
+
+[node name="Focus" type="Control" parent="Panel/Subscreens/CampaignInfo"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 660.0
+margin_bottom = 301.0
+script = ExtResource( 26 )
+default_focus_path = NodePath("../CampaignPanel/InfoTab/VBoxContainer/Buttons/PlayCampaign")
+
+[node name="CampaignPanel" type="Control" parent="Panel/Subscreens/CampaignInfo"]
+unique_name_in_owner = true
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 660.0
+margin_bottom = 301.0
+script = ExtResource( 56 )
+
+[node name="InfoTab" type="Control" parent="Panel/Subscreens/CampaignInfo/CampaignPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Info" type="VBoxContainer" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -346.0
+margin_top = 12.0
+margin_right = -10.0
+margin_bottom = 279.0
+custom_constants/separation = 0
+alignment = 1
+
+[node name="Title" type="Label" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info"]
+margin_right = 336.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 31 )
+text = "Super Mario 4D Galaxy 12"
+align = 1
+valign = 1
+
+[node name="Shadow" type="Label" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info/Title"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 3.0
+margin_bottom = 3.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_fonts/font = SubResource( 31 )
+text = "Super Mario 4D Galaxy 12"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Author" type="Label" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info"]
+margin_top = 30.0
+margin_right = 336.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 23 )
+text = "by Mario"
+align = 1
+valign = 1
+clip_text = true
+
+[node name="Padding" type="Control" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info"]
+margin_top = 47.0
+margin_right = 336.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 0, 8 )
+
+[node name="Collectibles" type="HBoxContainer" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info"]
+margin_top = 55.0
+margin_right = 336.0
+margin_bottom = 91.0
+alignment = 1
+
+[node name="ShineIcon" type="Control" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info/Collectibles"]
+margin_left = 112.0
+margin_right = 148.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info/Collectibles/ShineIcon"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 6
+
+[node name="Shines" type="Label" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info/Collectibles"]
+margin_left = 152.0
+margin_top = 5.0
+margin_right = 164.0
+margin_bottom = 30.0
+text = "4"
+align = 1
+valign = 1
+
+[node name="Padding" type="Control" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info/Collectibles"]
+margin_left = 168.0
+margin_right = 168.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 0, 8 )
+
+[node name="StarCoinIcon" type="Control" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info/Collectibles"]
+margin_left = 172.0
+margin_right = 208.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info/Collectibles/StarCoinIcon"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -14.0
+margin_top = -14.0
+margin_right = 14.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 28, 28 )
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 6
+
+[node name="StarCoins" type="Label" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info/Collectibles"]
+margin_left = 212.0
+margin_top = 5.0
+margin_right = 224.0
+margin_bottom = 30.0
+text = "4"
+align = 1
+valign = 1
+
+[node name="Padding2" type="Control" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info"]
+margin_top = 91.0
+margin_right = 336.0
+margin_bottom = 103.0
+rect_min_size = Vector2( 0, 12 )
+
+[node name="Panel" type="Panel" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info"]
+self_modulate = Color( 0, 0, 0, 0.501961 )
+show_behind_parent = true
+margin_top = 103.0
+margin_right = 336.0
+margin_bottom = 267.0
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="Description" type="RichTextLabel" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info/Panel/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 332.0
+margin_bottom = 160.0
+custom_fonts/normal_font = ExtResource( 23 )
+bbcode_enabled = true
+bbcode_text = "[center]After two years of working on this level (on and off but still), it's finally complete; Super Mario 63 Tall Tall Mountain +!
+
+
+This level is a complete remake and expansion of Super Mario 63's Tall Tall Mountain with a BOATLOAD of new features, including:
+
+- TWO NEW AREAS to explore! A town at the base of the mountain where residents reside, and a new secret area with gravity-defying water!
+
+- NINE* NEW SHINES to gather! These are split up into FOUR new main quest shines and FIVE new \"green shines\" on top of the already existing five, totaling FOURTEEN* SHINES!
+
+- FIFTEEN NEW STAR COINS to locate, totaling TWENTY STAR COINS! (Struggling to find some? Perhaps the doctor in the lab by the lake may be of use...)
+
+- Altered level design from the original to be more fair, \"well designed\", to make more room for new content, or to fit better with SM127's movement.
+
+- Secrets to find not discussed here!
+
+- And more...
+
+
+Now that this update is out, you might see me make more levels, so stay tuned for that!
+Anyways, have fun!
+
+v1.01 (7/29): Quick hotfix to disable some unnecessary pipes, and to mae one of the more hidden star coins easier to find[/center]"
+text = "After two years of working on this level (on and off but still), it's finally complete; Super Mario 63 Tall Tall Mountain +!
+
+
+This level is a complete remake and expansion of Super Mario 63's Tall Tall Mountain with a BOATLOAD of new features, including:
+
+- TWO NEW AREAS to explore! A town at the base of the mountain where residents reside, and a new secret area with gravity-defying water!
+
+- NINE* NEW SHINES to gather! These are split up into FOUR new main quest shines and FIVE new \"green shines\" on top of the already existing five, totaling FOURTEEN* SHINES!
+
+- FIFTEEN NEW STAR COINS to locate, totaling TWENTY STAR COINS! (Struggling to find some? Perhaps the doctor in the lab by the lake may be of use...)
+
+- Altered level design from the original to be more fair, \"well designed\", to make more room for new content, or to fit better with SM127's movement.
+
+- Secrets to find not discussed here!
+
+- And more...
+
+
+Now that this update is out, you might see me make more levels, so stay tuned for that!
+Anyways, have fun!
+
+v1.01 (7/29): Quick hotfix to disable some unnecessary pipes, and to mae one of the more hidden star coins easier to find"
+
+[node name="ButtonScroller" type="Button" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info/Panel/MarginContainer/Description"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+flat = true
+script = ExtResource( 19 )
+scroll_path = NodePath("..")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab"]
+margin_left = 12.0
+margin_right = 268.0
+margin_bottom = 279.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Thumbnail" type="TextureRect" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer"]
+margin_top = 27.0
+margin_right = 256.0
+margin_bottom = 171.0
+rect_min_size = Vector2( 256, 144 )
+texture = ExtResource( 10 )
+expand = true
+
+[node name="Foreground" type="TextureRect" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Thumbnail"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 24 )
+expand = true
+
+[node name="Shadow" type="NinePatchRect" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Thumbnail"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 8 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Buttons" type="GridContainer" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer"]
+margin_left = 20.0
+margin_top = 191.0
+margin_right = 236.0
+margin_bottom = 251.0
+size_flags_horizontal = 6
+custom_constants/vseparation = 20
+custom_constants/hseparation = 24
+columns = 2
+
+[node name="PlayCampaign" type="Button" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons"]
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 20 )
+size_flags_horizontal = 6
+theme_type_variation = "AlternateButton"
+text = "Play"
+align = 0
+script = ExtResource( 3 )
+lerp_speed = 12.0
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons/PlayCampaign"]
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+margin_left = 35.0
+margin_top = 4.0
+margin_right = 47.0
+margin_bottom = 16.0
+mouse_filter = 2
+texture = ExtResource( 30 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( 35, 0 )
+
+[node name="EditCampaign" type="Button" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons"]
+margin_left = 120.0
+margin_right = 216.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 20 )
+size_flags_horizontal = 6
+theme_type_variation = "AlternateButton"
+text = "Edit"
+align = 0
+script = ExtResource( 3 )
+lerp_speed = 12.0
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons/EditCampaign"]
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+margin_left = 33.0
+margin_top = 1.0
+margin_right = 51.0
+margin_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource( 28 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( 33, 0 )
+
+[node name="Return" type="Button" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons"]
+margin_top = 40.0
+margin_right = 96.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 96, 20 )
+size_flags_horizontal = 6
+theme_type_variation = "AlternateButton"
+custom_colors/font_color_focus = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_hover = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_pressed = Color( 0.694118, 0.2, 0.2, 1 )
+text = "Return"
+align = 0
+script = ExtResource( 3 )
+lerp_speed = 12.0
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons/Return"]
+modulate = Color( 0.694118, 0.2, 0.2, 1 )
+margin_left = 48.0
+margin_right = 66.0
+margin_bottom = 18.0
+mouse_filter = 2
+texture = ExtResource( 35 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( 48, -1 )
+
+[node name="DeleteCampaign" type="Button" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons"]
+margin_left = 120.0
+margin_top = 40.0
+margin_right = 216.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 96, 20 )
+size_flags_horizontal = 6
+theme_type_variation = "AlternateButtonRed"
+text = "Delete"
+align = 0
+script = ExtResource( 3 )
+lerp_speed = 12.0
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons/DeleteCampaign"]
+margin_left = 45.0
+margin_top = 2.0
+margin_right = 61.0
+margin_bottom = 18.0
+mouse_filter = 2
+texture = ExtResource( 34 )
+expand = true
+script = ExtResource( 29 )
+countdown_path = NodePath("../PressCountdown")
+count_offsets = [ 0, 16, 18, 18, 17, 17 ]
+offset = Vector2( 45, 0 )
+
+[node name="PressCountdown" type="Node" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons/DeleteCampaign"]
+script = ExtResource( 22 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Subscreens/CampaignInfo"]
+anims/RESET = SubResource( 29 )
+anims/transition = SubResource( 30 )
+
 [node name="AddElement" type="MarginContainer" parent="Panel/Subscreens"]
 visible = false
 modulate = Color( 0, 0, 1, 0 )
@@ -2000,10 +2508,12 @@ script = ExtResource( 15 )
 [connection signal="screen_opened" from="." to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="screen_opened"]
 [connection signal="pressed" from="Panel/Buttons/Back" to="." method="transition" binds= [ "MainMenu" ]]
 [connection signal="pressed" from="Panel/Buttons/FolderSettings" to="Panel/Subscreens/LevelView" method="transition" binds= [ "FolderSettings" ]]
+[connection signal="pressed" from="Panel/Buttons/CampaignSettings" to="Panel/Subscreens/LevelView" method="transition" binds= [ "CampaignSettings" ]]
 [connection signal="pressed" from="Panel/Buttons/Add" to="Panel/Subscreens/LevelView" method="transition" binds= [ "AddElement" ]]
 [connection signal="screen_opened" from="Panel/Subscreens/LevelView" to="Panel/Subscreens/LevelView/Focus" method="focus_node" flags=3]
 [connection signal="back_press" from="Panel/Subscreens/LevelView/Focus" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="go_back"]
 [connection signal="next_page" from="Panel/Subscreens/LevelView/ScrollContainer" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/Loader" method="next_page"]
+[connection signal="directory_changed" from="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" to="Panel/Subscreens/AddElement/Control/ElementAddButtons" method="adjust_visibility"]
 [connection signal="directory_changed" from="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="update_folder_name"]
 [connection signal="screen_opened" from="Panel/Subscreens/LevelInfo" to="Panel/Subscreens/LevelInfo/Focus" method="focus_node" flags=3]
 [connection signal="back_press" from="Panel/Subscreens/LevelInfo/Focus" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelView" ]]
@@ -2021,6 +2531,16 @@ script = ExtResource( 15 )
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelInfo/LevelPanel" method="delete_level"]
 [connection signal="text_changed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/PressCountdown" to="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/DeleteLevel/Icon" method="update_offset"]
+[connection signal="screen_opened" from="Panel/Subscreens/CampaignInfo" to="Panel/Subscreens/CampaignInfo/Focus" method="focus_node" flags=3]
+[connection signal="back_press" from="Panel/Subscreens/CampaignInfo/Focus" to="Panel/Subscreens/CampaignInfo" method="transition" binds= [ "LevelView" ]]
+[connection signal="pressed" from="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons/PlayCampaign" to="." method="transition" binds= [ "FileSelect" ]]
+[connection signal="pressed" from="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons/PlayCampaign" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/Loader" method="clear_level_queue"]
+[connection signal="pressed" from="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons/EditCampaign" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/Loader" method="clear_level_queue"]
+[connection signal="pressed" from="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons/EditCampaign" to="Panel/Subscreens/CampaignInfo/CampaignPanel" method="edit_campaign"]
+[connection signal="pressed" from="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons/Return" to="Panel/Subscreens/CampaignInfo" method="transition" binds= [ "LevelView" ]]
+[connection signal="pressed" from="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons/DeleteCampaign/PressCountdown" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="change_focus"]
+[connection signal="pressed" from="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons/DeleteCampaign/PressCountdown" to="Panel/Subscreens/CampaignInfo" method="transition" binds= [ "LevelView" ]]
+[connection signal="text_changed" from="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons/DeleteCampaign/PressCountdown" to="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Buttons/DeleteCampaign/Icon" method="update_offset"]
 [connection signal="screen_opened" from="Panel/Subscreens/AddElement" to="Panel/Subscreens/AddElement/Focus" method="focus_node" flags=3]
 [connection signal="back_press" from="Panel/Subscreens/AddElement/Focus" to="Panel/Subscreens/AddElement" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/AddElement/Control/ElementAddButtons/Return" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" method="change_focus"]
