@@ -539,6 +539,7 @@ extents = Vector2( 48, 28 )
 [node name="Bowser Banner" type="Node2D"]
 position = Vector2( 0, 90 )
 script = ExtResource( 3 )
+layer_shift = 2
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -45 )
@@ -569,3 +570,9 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Area2D"]
 shape = SubResource( 8 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 0, -90 )
+rect = Rect2( -128, -128, 256, 256 )
+pause_animated_sprites = false
+process_parent = true

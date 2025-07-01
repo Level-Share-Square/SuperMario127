@@ -28,9 +28,6 @@ func _ready():
 		$AnimatedSprite.z_index = 0
 	$AnimatedSprite.animation = String(palette)
 	$Color.animation = String(palette)
-	
-	self.show_above_layer = true
-	update_layer()
 
 
 func _process(delta):
