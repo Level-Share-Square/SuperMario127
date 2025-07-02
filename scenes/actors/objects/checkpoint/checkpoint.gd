@@ -21,7 +21,7 @@ func _set_properties():
 func _set_property_values():
 	set_property("save_water_level", save_water_level, true)
 	set_property("spawn_offset", spawn_offset, true)
-	set_property("save_switch_state", save_switch_state, true)	
+	set_property("save_switch_state", save_switch_state, true)
 
 func _ready():
 	if is_preview: return
@@ -32,9 +32,8 @@ func _ready():
 	else:
 		display.visible = true
 	
-	
 	Singleton.CurrentLevelData.set_checkpoint_ids()
-	id = level_object.get_ref().properties[7]
+	id = level_object.get_ref().properties[9]
 	if Singleton.CheckpointSaved.current_checkpoint_id == id:
 		is_used = true
 	

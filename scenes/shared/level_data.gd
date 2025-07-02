@@ -170,7 +170,8 @@ func set_checkpoint_ids():
 	for area in Singleton.CurrentLevelData.level_data.areas:
 		for object in area.objects:
 			if object.type_id == 82:
-				object.properties[7] = checkpoint_id
+				object.properties.resize(10)
+				object.properties[9] = checkpoint_id
 				checkpoint_id += 1
 	return checkpoint_id
 
