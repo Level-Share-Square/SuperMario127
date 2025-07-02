@@ -506,6 +506,7 @@ texture_normal = ExtResource( 29 )
 expand = true
 
 [node name="ItemPickerWindow" parent="UI" instance=ExtResource( 9 )]
+visible = false
 
 [node name="EditorOptionsWindow" parent="UI" instance=ExtResource( 21 )]
 margin_left = 344.0

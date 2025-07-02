@@ -1,4 +1,4 @@
-[gd_scene load_steps=193 format=2]
+[gd_scene load_steps=194 format=2]
 
 [ext_resource path="res://scenes/actors/mario/animation_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scenes/actors/mario/states/Bounce.gd" type="Script" id=2]
@@ -16,7 +16,6 @@
 [ext_resource path="res://scenes/actors/mario/states/Getup.gd" type="Script" id=14]
 [ext_resource path="res://scenes/actors/mario/alt_frames.tres" type="SpriteFrames" id=15]
 [ext_resource path="res://scenes/actors/mario/luigi_alt_frames.tres" type="SpriteFrames" id=16]
-[ext_resource path="res://assets/tiles/spotlight_mask.png" type="Texture" id=17]
 [ext_resource path="res://scenes/actors/mario/states/GroundPoundStart.gd" type="Script" id=18]
 [ext_resource path="res://scenes/actors/mario/states/GroundPound.gd" type="Script" id=19]
 [ext_resource path="res://scenes/actors/mario/states/GroundPoundEnd.gd" type="Script" id=20]
@@ -110,6 +109,18 @@ length = 13.0
 
 [sub_resource type="RectangleShape2D" id=108]
 extents = Vector2( 0.05, 0.5 )
+
+[sub_resource type="Gradient" id=112]
+offsets = PoolRealArray( 0, 0.900735, 1 )
+colors = PoolColorArray( 0, 0, 0, 0.196078, 0, 0, 0, 0.196078, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture2D" id=113]
+gradient = SubResource( 112 )
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+fill_to = Vector2( 0.95, 0.5 )
 
 [sub_resource type="CanvasItemMaterial" id=8]
 particles_animation = true
@@ -1597,8 +1608,8 @@ disabled = true
 
 [node name="Spotlight" type="Light2D" parent="."]
 light_mask = 0
-texture = ExtResource( 17 )
-texture_scale = 0.75
+position = Vector2( 0, 8 )
+texture = SubResource( 113 )
 mode = 3
 range_height = 1.0
 range_item_cull_mask = 524288
