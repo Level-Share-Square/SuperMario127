@@ -136,7 +136,7 @@ func _ready() -> void:
 
 func on_place():
 	Singleton.CurrentLevelData.set_shine_ids()
-	id = level_object.get_ref().properties[12]
+	id = level_object.get_ref().properties[13]
 	set_property("id", id)
 
 
@@ -338,8 +338,8 @@ func collect(body : PhysicsBody2D) -> void:
 
 		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
 			score_from_before = Singleton.CurrentLevelData.time_score
-			Singleton.CurrentLevelData.level_info.set_shine_collected(id, false)
-			Singleton.CurrentLevelData.level_info.update_time_and_coin_score(id, true)
+			Singleton.CurrentLevelData.level_info.set_shine_collected(id, Singleton.CurrentLevelData.selected_file > -2)
+			Singleton.CurrentLevelData.level_info.update_time_and_coin_score(id, Singleton.CurrentLevelData.selected_file > -2)
 			Singleton.CurrentLevelData.stop_tracking_time_score()
 			if !do_kick_out:
 				var level_info = Singleton.CurrentLevelData.level_info

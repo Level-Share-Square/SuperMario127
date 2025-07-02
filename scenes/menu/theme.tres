@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=87 format=2]
+[gd_resource type="Theme" load_steps=88 format=2]
 
 [ext_resource path="res://assets/fonts/DelfinoFont20.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/options/buttons/grabber_highlight.png" type="Texture" id=2]
@@ -13,6 +13,23 @@ outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 extra_spacing_char = -1
 font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=93]
+bg_color = Color( 0.71, 0.71, 0.71, 0.941176 )
+skew = Vector2( 0.5, 0 )
+border_width_left = 6
+border_width_right = 6
+border_color = Color( 0.709804, 0.752941, 1, 0.501961 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+shadow_color = Color( 0, 0, 0, 0.25098 )
+shadow_size = 2
+shadow_offset = Vector2( 6, 6 )
 
 [sub_resource type="StyleBoxEmpty" id=50]
 
@@ -744,11 +761,12 @@ corner_radius_bottom_left = 6
 default_font = ExtResource( 1 )
 AlternateButton/base_type = "Button"
 AlternateButton/colors/font_color = Color( 0.0431373, 0.290196, 0.427451, 1 )
-AlternateButton/colors/font_color_disabled = Color( 0.109804, 0.109804, 0.109804, 1 )
+AlternateButton/colors/font_color_disabled = Color( 0.0431373, 0.290196, 0.427451, 1 )
 AlternateButton/colors/font_color_focus = Color( 0.0431373, 0.290196, 0.427451, 1 )
 AlternateButton/colors/font_color_hover = Color( 0.0431373, 0.290196, 0.427451, 1 )
 AlternateButton/colors/font_color_pressed = Color( 0.0431373, 0.290196, 0.427451, 1 )
 AlternateButton/fonts/font = SubResource( 11 )
+AlternateButton/styles/disabled = SubResource( 93 )
 AlternateButton/styles/focus = SubResource( 50 )
 AlternateButton/styles/hover = SubResource( 51 )
 AlternateButton/styles/normal = SubResource( 25 )

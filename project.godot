@@ -219,6 +219,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/mario/states/Dive.gd"
 }, {
+"base": "Teleporter",
+"class": "DoorTeleport",
+"language": "GDScript",
+"path": "res://scenes/actors/objects/door/door.gd"
+}, {
 "base": "LevelDataLoader",
 "class": "Editor",
 "language": "GDScript",
@@ -349,7 +354,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/misc/http_thumbnails.gd"
 }, {
-"base": "ScrollContainer",
+"base": "Reference",
 "class": "HelpPage",
 "language": "GDScript",
 "path": "res://scenes/oldeditor/window/HelpPage.gd"
@@ -534,7 +539,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/ParticleCollection.gd"
 }, {
-"base": "Resource",
+"base": "Reference",
 "class": "PlaceableItem",
 "language": "GDScript",
 "path": "res://scenes/editor/items/placeable_item.gd"
@@ -815,6 +820,11 @@ _global_script_classes=[ {
 "path": "res://util/new/levels_list/lss_link_util.gd"
 }, {
 "base": "Reference",
+"class": "save_meta_util",
+"language": "GDScript",
+"path": "res://util/new/levels_list/save_meta_util.gd"
+}, {
+"base": "Reference",
 "class": "sort_file_util",
 "language": "GDScript",
 "path": "res://util/new/levels_list/sort_file_util.gd"
@@ -877,6 +887,7 @@ _global_script_class_icons={
 "DiscordResult": "",
 "DiscordUser": "",
 "DiveState": "",
+"DoorTeleport": "",
 "Editor": "",
 "EditorButton": "",
 "EditorHitbox": "",
@@ -996,6 +1007,7 @@ _global_script_class_icons={
 "level_code_util": "",
 "level_list_util": "",
 "lss_link_util": "",
+"save_meta_util": "",
 "sort_file_util": "",
 "text_replace_util": "",
 "uuid_util": "",

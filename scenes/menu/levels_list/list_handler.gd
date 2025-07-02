@@ -67,7 +67,7 @@ func insert_campaign():
 	folder_id = level_list_util.get_valid_folder_name(folder_id, working_folder)
 	
 	var folder_path: String = level_list_util.get_folder_path(folder_id, working_folder)
-	level_list_util.create_level_folder(folder_path)
+	level_list_util.create_campaign_folder(folder_path)
 	
 	sort_file_util.add_to_sort(folder_id, working_folder, sort_file_util.CAMPAIGNS)
 	loader.add_campaign_card(folder_id, working_folder, true, true)
@@ -93,12 +93,18 @@ func insert_level(level_code: String = "", folder: String = working_folder):
 	
 	level_list_util.save_level_code_file(level_code, file_path)
 	sort_file_util.add_to_sort(level_id, folder, sort_file_util.LEVELS)
-	loader.add_level_card(level_id, folder, true, true, level_code)
+	loader.add_level_card(level_id, folder, true, true, level_code, is_campaign)
+	
+	if is_campaign:
+		save_meta_util.update_all_with_level(level_id, working_folder, false)
 
 
 func remove_level(level_id: String, folder: String = working_folder):
 	level_list_util.wipe_level_files(level_id, folder)
 	level_grid.get_node(level_id).call_deferred("queue_free")
+
+	if is_campaign:
+		save_meta_util.update_all_with_level(level_id, working_folder, true)
 
 
 func go_back():

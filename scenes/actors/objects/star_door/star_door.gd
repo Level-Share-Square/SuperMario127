@@ -101,8 +101,12 @@ func start_entrance_animation(character: Character, open_door: bool = true) -> v
 		if collected < required_amount:
 			can_enter = false
 	
-	if not Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and (
-		collectible == "shine" or collectible == "star coin"):
+	if (
+		not Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible 
+		or Singleton.CurrentLevelData.selected_file == -2
+	) and (
+		collectible == "shine" or collectible == "star coin"
+	):
 		can_enter = true
 	
 	.start_entrance_animation(character, can_enter)
