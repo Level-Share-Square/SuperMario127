@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://assets/particles/shiny_particle_material.tres" type="Material" id=2]
@@ -12,8 +12,10 @@
 [ext_resource path="res://scenes/actors/objects/shine/frames_recolorable.tres" type="SpriteFrames" id=10]
 [ext_resource path="res://scenes/actors/objects/shine/frames_collected.tres" type="SpriteFrames" id=11]
 [ext_resource path="res://scenes/actors/objects/shine/collect.wav" type="AudioStream" id=12]
+[ext_resource path="res://scenes/actors/objects/shine/shine_appear_short_bad.wav" type="AudioStream" id=13]
 [ext_resource path="res://scenes/actors/mario/FluddAnimSync.gd" type="Script" id=14]
 [ext_resource path="res://scenes/actors/objects/shine/shine_rays.gd" type="Script" id=15]
+[ext_resource path="res://scenes/actors/objects/shine/shine_appear_sound_bad.wav" type="AudioStream" id=16]
 [ext_resource path="res://scenes/actors/objects/shine/shine_rays.gdshader" type="Shader" id=17]
 
 [sub_resource type="StreamTexture" id=1]
@@ -105,7 +107,7 @@ shader = ExtResource( 17 )
 shader_param/ray_count = 4
 shader_param/ray_distance = 0.45
 shader_param/ray_seperation_degrees = 22.0
-shader_param/rotation = 4.86663
+shader_param/rotation = 4.71736
 
 [sub_resource type="CanvasItemMaterial" id=33]
 particles_animation = true
@@ -434,6 +436,7 @@ tracks/10/keys = {
 
 [sub_resource type="Animation" id=22]
 length = 4.8
+step = 0.025
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:speed_scale")
 tracks/0/interp = 1
@@ -635,14 +638,14 @@ tracks/16/path = NodePath("AppearSFX")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/imported = false
-tracks/16/enabled = true
+tracks/16/enabled = false
 tracks/16/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": null
+"stream": ExtResource( 16 )
 } ],
-"times": PoolRealArray( 0 )
+"times": PoolRealArray( 0.1 )
 }
 tracks/17/type = "value"
 tracks/17/path = NodePath("AnimatedSprite:modulate:a")
@@ -849,7 +852,7 @@ tracks/12/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 12 )
+"stream": ExtResource( 13 )
 } ],
 "times": PoolRealArray( 0 )
 }
@@ -1252,7 +1255,7 @@ volume_db = -8.0
 bus = "Sounds"
 
 [node name="AppearSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 12 )
+stream = ExtResource( 16 )
 bus = "Sounds"
 
 [node name="AmbientSound" type="AudioStreamPlayer2D" parent="."]
@@ -1280,7 +1283,7 @@ playing = true
 
 [node name="AnimatedSpriteOutline" type="AnimatedSprite" parent="AnimatedSprite"]
 frames = SubResource( 20 )
-frame = 5
+frame = 1
 script = ExtResource( 14 )
 
 [node name="Particles2D" type="Particles2D" parent="AnimatedSprite"]
@@ -1313,6 +1316,7 @@ ray_distance = 0.45
 
 [node name="SpawnParticles" type="Particles2D" parent="."]
 visible = false
+modulate = Color( 1, 1, 1, 0 )
 material = SubResource( 33 )
 position = Vector2( 0, 4 )
 emitting = false
