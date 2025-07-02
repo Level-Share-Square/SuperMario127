@@ -18,7 +18,7 @@ const BACKGROUNDS := [
 	[10, 1, 1, 160],
 ]
 
-var current_star_coins: int = 100
+var current_star_coins: int = 0
 var total_star_coins: int = 100
 
 
@@ -40,7 +40,7 @@ func get_random_preset() -> Array:
 	randomize()
 	
 	var star_coin_percentage: float = current_star_coins/total_star_coins
-	var max_index = round(BACKGROUNDS.size() * star_coin_percentage)
-	var index = round(rand_range(0, max_index - 1))
+	var max_index = round((BACKGROUNDS.size() - 1) * star_coin_percentage)
+	var index = round(rand_range(0, max_index))
 	
 	return BACKGROUNDS[index]

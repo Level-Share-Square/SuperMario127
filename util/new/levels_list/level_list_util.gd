@@ -32,6 +32,12 @@ static func generate_level_id() -> String:
 
 
 static func move_level_files(level_id: String, working_folder: String, new_folder: String):
+	# weird workaround to allow using save_meta_util without cyclic reference error
+	var save_meta_script = load("res://util/new/levels_list/save_meta_util.gd")
+		
+	if is_campaign(working_folder):
+		save_meta_script.update_all_with_level(level_id, working_folder, true)
+		
 	sort_file_util.remove_from_sort(level_id, working_folder, sort_file_util.LEVELS)
 	sort_file_util.add_to_sort(level_id, new_folder, sort_file_util.LEVELS)
 
@@ -39,10 +45,16 @@ static func move_level_files(level_id: String, working_folder: String, new_folde
 	var new_file_path: String = get_level_file_path(level_id, new_folder)
 	move_file(file_path, new_file_path)
 	
-	var save_path: String = get_level_save_path(level_id, working_folder)
-	var new_save_path: String = get_level_save_path(level_id, new_folder)
-	if file_exists(save_path):
-		move_file(save_path, new_save_path)
+	if not is_campaign(working_folder):
+		var save_path: String = get_level_save_path(level_id, working_folder, -1)
+		var new_save_path: String = get_level_save_path(level_id, new_folder, -1)
+		if file_exists(save_path):
+			move_file(save_path, new_save_path)
+	else:
+		for i in range(3):
+			var save_path: String = get_level_save_path(level_id, working_folder, -1)
+			if file_exists(save_path):
+				delete_file(save_path)
 	
 	var thumbnail_path: String = get_level_thumbnail_path(level_id, working_folder)
 	var new_thumbnail_path: String = get_level_thumbnail_path(level_id, new_folder, false)
@@ -66,6 +78,9 @@ static func move_level_files(level_id: String, working_folder: String, new_folde
 	if lss_id != "":
 		lss_link_util.remove_level_from_link(lss_id)
 		lss_link_util.add_level_to_link(lss_id, new_file_path)
+	
+	if is_campaign(new_folder):
+		save_meta_script.update_all_with_level(level_id, new_folder, false)
 
 
 static func wipe_level_files(level_id: String, working_folder: String):
@@ -74,9 +89,10 @@ static func wipe_level_files(level_id: String, working_folder: String):
 	var file_path: String = get_level_file_path(level_id, working_folder)
 	delete_file(file_path)
 	
-	var save_path: String = get_level_save_path(level_id, working_folder)
-	if file_exists(save_path):
-		delete_file(save_path)
+	for save_slot in range(4):
+		var save_path: String = get_level_save_path(level_id, working_folder, save_slot - 1)
+		if file_exists(save_path):
+			delete_file(save_path)
 
 	var thumbnail_path: String = get_level_thumbnail_path(level_id, working_folder)
 	if file_exists(thumbnail_path):
@@ -142,6 +158,41 @@ static func create_level_folder(path: String):
 	
 	sort_file_util.save_sort_file(path, {})
 
+static func create_campaign_folder(path: String):
+	var dir := Directory.new()
+	if !dir.dir_exists(path):
+		#warning-ignore:return_value_discarded
+		dir.make_dir(path)
+	else:
+		return # not worth wasting time on the rest then
+		
+	for i in range(3):
+		if !dir.dir_exists(path + "/saves" + str(i)):
+			#warning-ignore:return_value_discarded
+			dir.make_dir(path + "/saves" + str(i))
+
+	if !dir.dir_exists(path + "/thumbnails"):
+		#warning-ignore:return_value_discarded
+		dir.make_dir(path + "/thumbnails")
+
+	if !dir.dir_exists(path + "/music"):
+		#warning-ignore:return_value_discarded
+		dir.make_dir(path + "/music")
+	
+	var info_dict: Dictionary = campaign_info_util.create_info_dict()
+	campaign_info_util.save_info_file(path, info_dict)
+	
+	sort_file_util.save_sort_file(path, {})
+
+static func delete_campaign_folder(path: String):
+	var parent_folder: String = get_parent_from_path(path)
+	var folder_id: String = get_last_in_path(path)
+	sort_file_util.remove_from_sort(folder_id, parent_folder, sort_file_util.CAMPAIGNS)
+	delete_file(path)
+
+static func is_campaign(path: String):
+	return file_exists(path + "/info.json")
+
 static func init_levels_list():
 	var dir := Directory.new()
 	if !dir.dir_exists(BASE_FOLDER):
@@ -159,7 +210,7 @@ static func init_levels_list():
 			print("Version outdated, updating dev levels...")
 			setup_dev = true
 			for reset_id in internal_sort.get("reset_levels", []):
-				var save_path: String = get_level_save_path(reset_id, DEV_FOLDER)
+				var save_path: String = get_level_save_path(reset_id, DEV_FOLDER, -1)
 				if file_exists(save_path):
 					delete_file(save_path)
 					print("Save file deleted for level id ", reset_id)
@@ -227,8 +278,17 @@ static func save_level_code_file(level_code: String, file_path: String):
 
 
 ## SAVE FILES
-static func get_level_save_path(level_id: String, working_folder: String) -> String:
-	return working_folder + "/saves/" + level_id + ".127save"
+static func get_save_folder(working_folder: String, selected_file: int = -1) -> String:
+	var save_folder: String = "/saves"
+	if selected_file == -2: return ""
+	if selected_file > -1:
+		save_folder += str(selected_file)
+	save_folder += "/"
+	return working_folder + save_folder
+
+static func get_level_save_path(level_id: String, working_folder: String, selected_file: int = -1) -> String:
+	var save_folder: String = get_save_folder(working_folder, selected_file)
+	return save_folder + level_id + ".127save"
 
 static func load_level_save_file(file_path: String) -> Dictionary:
 	var file := File.new()

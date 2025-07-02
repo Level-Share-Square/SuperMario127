@@ -14,6 +14,9 @@ func _ready():
 	shared_node.get_node("Objects").connect("objects_ready", self, "delayed_ready")
 
 func delayed_ready():
+	# yield one more frame since the player scene needs to set things up
+	yield(get_tree(), "physics_frame")
+	
 	var variables: LevelVars = Singleton.CurrentLevelData.level_data.vars
 	max_reds = variables.max_red_coins
 	

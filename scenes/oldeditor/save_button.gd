@@ -34,11 +34,16 @@ func _pressed():
 		file_path
 	)
 	
-	var save_path = level_list_util.get_level_save_path(
-		level_id, working_folder
-	)
-	if level_list_util.file_exists(save_path):
-		level_list_util.delete_file(save_path)
+	for save_slot in range(4):
+		var save_path = level_list_util.get_level_save_path(
+			level_id, working_folder, save_slot - 1
+		)
+		if level_list_util.file_exists(save_path):
+			level_list_util.delete_file(save_path)
+	
+	Singleton.CurrentLevelData.level_info.reset_save_data(false)
+	Singleton.CurrentLevelData.level_info.init_collectibles()
+	save_meta_util.update_all_with_level(level_id, working_folder, false, Singleton.CurrentLevelData.level_info)
 	
 	Singleton.CurrentLevelData.unsaved_editor_changes = false
 		

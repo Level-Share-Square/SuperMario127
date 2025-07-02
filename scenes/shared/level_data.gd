@@ -4,6 +4,7 @@ var level_id: String
 var working_folder: String = level_list_util.BASE_FOLDER
 var hub_level: String = ""
 var is_campaign: bool = false
+var selected_file: int = -1
 
 var level_transition_data: Dictionary
 var hub_return_data: Dictionary
@@ -152,7 +153,7 @@ func set_shine_ids():
 	for area in Singleton.CurrentLevelData.level_data.areas:
 		for object in area.objects:
 			if object.type_id == 2:
-				object.properties[12] = last_shine_id
+				object.properties[13] = last_shine_id
 				last_shine_id += 1
 	return last_shine_id
 
@@ -161,7 +162,7 @@ func set_star_coin_ids():
 	for area in Singleton.CurrentLevelData.level_data.areas:
 		for object in area.objects:
 			if object.type_id == 52:
-				object.properties[5] = last_star_coin_id
+				object.properties[6] = last_star_coin_id
 				last_star_coin_id += 1
 	return last_star_coin_id
 

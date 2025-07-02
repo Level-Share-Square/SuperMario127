@@ -127,6 +127,17 @@ func load_in() -> void:
 	thumbnail_sky = level_data.areas[0].settings.sky
 	thumbnail_background = level_data.areas[0].settings.background
 
+	init_collectibles()
+	
+	is_fully_loaded = true
+
+
+func init_collectibles():
+	shine_details = []
+	star_coin_details = []
+	collected_shines = {}
+	collected_star_coins = {}
+	time_scores = {}
 	# loop through all objects in all areas to find the number of shines and star coins
 	for area in level_data.areas:
 		for object in area.objects:
@@ -140,11 +151,11 @@ func load_in() -> void:
 						"color": object.properties[12].to_rgba32() if typeof(object.properties[12]) == TYPE_COLOR else Color(1, 1, 0).to_rgba32(),
 						"id": object.properties[13],
 						"do_kick_out": object.properties[14],
-						"enabled": object.properties[3]
+						"enabled": object.properties[4]
 					}
 					# Lol band aid
 					if object.properties.size() > 13:
-						shine_dictionary["sort_order"] = object.properties[14]
+						shine_dictionary["sort_order"] = object.properties[15]
 					else:
 						shine_dictionary["sort_order"] = object.properties[12]
 					
@@ -153,7 +164,6 @@ func load_in() -> void:
 					for shine in shine_details:
 						if shine["id"] == shine_dictionary["id"]:
 							repeated_shine = true
-							break
 					
 					if !repeated_shine and shine_dictionary["enabled"]:
 						shine_details.append(shine_dictionary)
@@ -171,9 +181,8 @@ func load_in() -> void:
 					for id in star_coin_details:
 						if id == star_coin_id:
 							repeated_star_coin = true
-							break
 					
-					if enabled:
+					if !repeated_star_coin and enabled:
 						star_coin_details.append(star_coin_id)
 						
 						# initialize collected star coins
@@ -181,11 +190,9 @@ func load_in() -> void:
 
 			shine_details.sort_custom(self, "shine_sort")
 			star_coin_details.sort()
-	
-	is_fully_loaded = true
 
 
-func reset_save_data(delete_file: bool = true) -> void:
+func reset_save_data(delete_file: bool = true, selected_file: int = -1) -> void:
 	for collected_shine in collected_shines:
 		collected_shines[collected_shine] = false
 	for collected_star_coin in collected_star_coins:
@@ -195,8 +202,8 @@ func reset_save_data(delete_file: bool = true) -> void:
 	for key in time_scores.keys():
 		time_scores[key] = EMPTY_TIME_SCORE
 	
-	if delete_file and level_list_util.file_exists(get_save_path()):
-		level_list_util.delete_file(get_save_path())
+	if delete_file and level_list_util.file_exists(get_save_path(selected_file)):
+		level_list_util.delete_file(get_save_path(selected_file))
 	
 	# delete replays
 	for shine in shine_details:
@@ -206,8 +213,10 @@ func reset_save_data(delete_file: bool = true) -> void:
 
 
 ### new functions designed to save separately to the level code
-func get_save_path() -> String:
-	return level_list_util.get_level_save_path(level_id, level_folder)
+func get_save_path(selected_file: int = -3) -> String:
+	if selected_file == -3:
+		selected_file = Singleton.CurrentLevelData.selected_file
+	return level_list_util.get_level_save_path(level_id, level_folder, selected_file)
 
 func get_save_file_dictionary() -> Dictionary:
 	var save_dictionary : Dictionary = \
@@ -266,15 +275,28 @@ func load_from_dictionary(save_dictionary : Dictionary) -> void:
 static func shine_sort(item1 : Dictionary, item2 : Dictionary) -> bool:
 	return item1["sort_order"] < item2["sort_order"]
 
+func update_meta_file() -> void:
+	var selected_file: int = Singleton.CurrentLevelData.selected_file
+	var level_id: String = Singleton.CurrentLevelData.level_id
+	var campaign_path: String = Singleton.CurrentLevelData.working_folder
+	var save_folder: String = level_list_util.get_save_folder(campaign_path, selected_file)
+	var meta_dict: Dictionary = save_meta_util.load_meta_file(save_folder)
+	meta_dict = save_meta_util.update_meta_level(level_id, meta_dict, campaign_path, selected_file, self)
+	save_meta_util.save_meta_file(save_folder, meta_dict)
+
 func set_shine_collected(shine_id : int, save_to_disk : bool = true) -> void:
 	collected_shines[str(shine_id)] = true
 	if save_to_disk:
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
+		if Singleton.CurrentLevelData.selected_file > -1:
+			update_meta_file()
 
 func set_star_coin_collected(star_coin_id : int, save_to_disk : bool = true) -> void:
 	collected_star_coins[str(star_coin_id)] = true
 	if save_to_disk:
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
+		if Singleton.CurrentLevelData.selected_file > -1:
+			update_meta_file()
 
 func set_fludd_activated(fludd_id : int, save_to_disk : bool = true) -> void:
 	activated_fludds[fludd_id] = true

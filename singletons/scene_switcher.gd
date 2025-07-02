@@ -36,26 +36,27 @@ func quit_level(do_transition: bool = true):
 		## this is getting to be too much boilerplate
 		var level_id: String = Singleton.CurrentLevelData.hub_level
 		var working_folder: String = Singleton.CurrentLevelData.working_folder
-		var level_info: LevelInfo = Singleton.SceneSwitcher.load_level_info(level_id, working_folder)
+		var level_info: LevelInfo = load_level_info(level_id, working_folder)
 		var hub_level: String = Singleton.CurrentLevelData.hub_level
+		var selected_file: int = Singleton.CurrentLevelData.selected_file
 		
 		Singleton.CurrentLevelData.level_transition_data = Singleton.CurrentLevelData.hub_return_data
 		Singleton.CurrentLevelData.hub_return_data = {}
 		
 		if do_transition:
-			var _connect = Singleton.SceneTransitions.connect("transition_finished", Singleton.SceneSwitcher, "start_level", 
+			var _connect = Singleton.SceneTransitions.connect("transition_finished", self, "start_level", 
 			[level_info, level_id, working_folder, false, true, hub_level, false], CONNECT_ONESHOT)
 			Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)
 		else:
 			yield(get_tree(), "physics_frame")
-			Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, false, true, hub_level, false)
+			start_level(level_info, level_id, working_folder, false, true, hub_level, false, true, selected_file)
 	else:
 		Singleton.CurrentLevelData.level_transition_data = {}
 		Singleton.CurrentLevelData.hub_return_data = {}
 		if do_transition:
-			Singleton.SceneSwitcher.quit_to_menu_with_transition("levels_screen")
+			quit_to_menu_with_transition("levels_screen")
 		else:
-			Singleton.SceneSwitcher.quit_to_menu("levels_screen")
+			quit_to_menu("levels_screen")
 
 
 func load_level_info(level_id: String, working_folder: String) -> LevelInfo:
@@ -70,9 +71,9 @@ func load_level_info(level_id: String, working_folder: String) -> LevelInfo:
 	return level_info
 
 
-func setup_level(level_info: LevelInfo, level_id: String, working_folder: String, hub_level: String = ""):
+func setup_level(level_info: LevelInfo, level_id: String, working_folder: String, hub_level: String = "", selected_file: int = -1):
 	# load save file, if it exists
-	var save_path: String = level_list_util.get_level_save_path(level_id, working_folder)
+	var save_path: String = level_list_util.get_level_save_path(level_id, working_folder, selected_file)
 	if level_list_util.file_exists(save_path):
 		level_info.load_save_from_dictionary(level_list_util.load_level_save_file(save_path))
 	
@@ -83,6 +84,7 @@ func setup_level(level_info: LevelInfo, level_id: String, working_folder: String
 	Singleton.CurrentLevelData.level_id = level_id
 	Singleton.CurrentLevelData.hub_level = hub_level
 	Singleton.CurrentLevelData.is_campaign = not (hub_level == "")
+	Singleton.CurrentLevelData.selected_file = selected_file
 	
 	Singleton.CurrentLevelData.level_info.selected_shine = -1
 	Singleton.CurrentLevelData.area = 0
@@ -90,7 +92,7 @@ func setup_level(level_info: LevelInfo, level_id: String, working_folder: String
 
 ## loads shine select if there's more than 1 shine,
 ## else loads directly into level
-func start_level(level_info: LevelInfo, level_id: String, working_folder: String, start_in_edit_mode: bool, skip_shine_select: bool = false, hub_level: String = "", do_transition: bool = true, play_warp_sound: bool = true):
+func start_level(level_info: LevelInfo, level_id: String, working_folder: String, start_in_edit_mode: bool, skip_shine_select: bool = false, hub_level: String = "", do_transition: bool = true, play_warp_sound: bool = true, selected_file: int = -1):
 	# if it's a multi-shine level, open the shine select screen, otherwise open the level directly 
 	# using collected_shines for the size check because there can only be one entry in collected shines per id, while shine_details can have multiple shines with the same id
 	var goal_scene = EDITOR_PATH if start_in_edit_mode else PLAYER_PATH
@@ -116,14 +118,14 @@ func start_level(level_info: LevelInfo, level_id: String, working_folder: String
 	
 	if do_transition:
 		# setup level when the transition finishes so music doesnt bug out
-		var _connect = Singleton.SceneTransitions.connect("transition_finished", self, "setup_level", [level_info, level_id, working_folder, hub_level], CONNECT_ONESHOT)
+		var _connect = Singleton.SceneTransitions.connect("transition_finished", self, "setup_level", [level_info, level_id, working_folder, hub_level, selected_file], CONNECT_ONESHOT)
 		_connect = Singleton.SceneTransitions.connect("transition_finished", get_tree(), "change_scene", [goal_scene], CONNECT_ONESHOT)
 		
 		if play_warp_sound:
 			Singleton.SceneTransitions.play_transition_audio()
 		Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)
 	else:
-		setup_level(level_info, level_id, working_folder, hub_level)
+		setup_level(level_info, level_id, working_folder, hub_level, selected_file)
 		get_tree().change_scene(goal_scene)
 
 ## start level without setting any variables

@@ -19,7 +19,7 @@ func setup(
 	id = _id
 	parent_folder = _parent_folder
 	
-	sort_type = sort_file_util.FOLDERS
+	sort_type = sort_file_util.CAMPAIGNS
 	can_sort = _can_sort
 	move_to_front = _move_to_front
 

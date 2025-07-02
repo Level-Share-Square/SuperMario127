@@ -1,6 +1,8 @@
 class_name campaign_info_util
 
 
+const DEFAULT_AUTHOR: String = "Unknown"
+const DEFAULT_DESCRIPTION: String = "This is a campaign. Add some levels and give it a try!̣\n\nNote that you'll need to set a hub level in Campaign Settings first."
 const EMPTY_DICTIONARY: Dictionary = {}
 
 
@@ -30,3 +32,12 @@ static func save_info_file(working_folder: String, save_dict: Dictionary):
 	
 	file.store_string(JSON.print(save_dict))
 	file.close()
+
+
+static func create_info_dict() -> Dictionary:
+	var info: Dictionary = {}
+	info["author"] = DEFAULT_AUTHOR
+	info["description"] = DEFAULT_DESCRIPTION
+	info["hub_level"] = ""
+	info["intro_level"] = ""
+	return info

@@ -112,7 +112,7 @@ func level_warp(character: Character, target_level: String,
 	var level_info: LevelInfo = Singleton.SceneSwitcher.load_level_info(level_id, working_folder)
 	
 	var hub_level: String = Singleton.CurrentLevelData.hub_level
-	var is_campaign: bool = Singleton.CurrentLevelData.is_campaign
+	var selected_file: int = Singleton.CurrentLevelData.selected_file
 	
 	if target_area != -1:
 		Singleton.CurrentLevelData.level_transition_data = {
@@ -126,7 +126,7 @@ func level_warp(character: Character, target_level: String,
 	
 	Singleton.Music.reset_music()
 	Singleton.Music.stop()
-	Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, false, false, hub_level, true, play_warp_sound)
+	Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, false, false, hub_level, true, play_warp_sound, selected_file)
 
 
 ### OTHER ###

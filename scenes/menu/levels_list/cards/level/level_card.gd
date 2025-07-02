@@ -56,7 +56,7 @@ func setup(
 	if is_campaign: return
 	
 	# load save file
-	var save_path: String = level_list_util.get_level_save_path(id, parent_folder)
+	var save_path: String = level_list_util.get_level_save_path(id, parent_folder, -1)
 	if level_list_util.file_exists(save_path):
 		level_info.load_save_from_dictionary(level_list_util.load_level_save_file(save_path))
 		has_save = true

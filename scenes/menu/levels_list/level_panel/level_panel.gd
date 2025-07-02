@@ -13,6 +13,7 @@ var level_info: LevelInfo
 var can_edit: bool
 var is_campaign: bool
 var previous_number_of_players: int = 0
+var starting_level: bool = false
 
 ### tabs
 onready var info_tab: Control = $InfoTab
@@ -65,14 +66,22 @@ func load_collectibles_info(level_info: LevelInfo)-> void:
 	var total_shine_count: int = collectible_counts["total_shines"]
 	var collected_shine_count: int = collectible_counts["collected_shines"]
 	
-	shine_label.text = str(collected_shine_count) + "/" + str(total_shine_count)
-	shine_label.modulate = completion_color if (collected_shine_count >= total_shine_count) else Color.white
+	if is_campaign:
+		shine_label.text = str(total_shine_count)
+		shine_label.modulate = Color.white
+	else:
+		shine_label.text = str(collected_shine_count) + "/" + str(total_shine_count)
+		shine_label.modulate = completion_color if (collected_shine_count >= total_shine_count) else Color.white
 	
 	var total_star_coin_count: int = collectible_counts["total_star_coins"]
 	var collected_star_coin_count: int = collectible_counts["collected_star_coins"]
 	
-	star_coin_label.text = str(collected_star_coin_count) + "/" + str(total_star_coin_count)
-	star_coin_label.modulate = completion_color if (collected_star_coin_count >= total_star_coin_count) else Color.white
+	if is_campaign:
+		star_coin_label.text = str(total_star_coin_count)
+		star_coin_label.modulate = Color.white
+	else:
+		star_coin_label.text = str(collected_star_coin_count) + "/" + str(total_star_coin_count)
+		star_coin_label.modulate = completion_color if (collected_star_coin_count >= total_star_coin_count) else Color.white
 
 func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder: String, _can_edit: bool = true, _is_campaign: bool = false):
 	yield(get_parent(), "screen_opened")
@@ -115,12 +124,10 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 		
 		return
 	
-	play_button.visible = not is_campaign
+	play_button.visible = true
 	view_tab.visible = not is_campaign
 	reset_button.visible = not is_campaign
 	
-	shines.visible = not is_campaign
-	star_coins.visible = not is_campaign
 	completion.visible = not is_campaign
 	
 	title.text = level_info.level_name
@@ -156,11 +163,8 @@ func load_level_info(_level_info: LevelInfo, _level_id: String, _working_folder:
 		thumbnail.texture = cached_image
 		foreground.visible = false
 	
-	
-	if is_campaign: return
-	
 	# load save file
-	var save_path: String = level_list_util.get_level_save_path(level_id, working_folder)
+	var save_path: String = level_list_util.get_level_save_path(level_id, working_folder, -1)
 	if level_list_util.file_exists(save_path):
 		level_info.load_save_from_dictionary(level_list_util.load_level_save_file(save_path))
 	load_time_scores()
@@ -237,14 +241,19 @@ func delete_level():
 
 
 func start_level(start_in_edit_mode : bool):
+	if starting_level: return
+	starting_level = true
+	
+	var selected_file = -2 if is_campaign else -1
+	
 	Singleton.SceneSwitcher.menu_return_screen = "LevelsList"
-	# next time deal with the whole hub level junk i guess
 	Singleton.SceneSwitcher.menu_return_args = [level_info, level_id, working_folder, can_edit, is_campaign]
-	Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, start_in_edit_mode, false, get_hub_level())
+	Singleton.SceneSwitcher.start_level(level_info, level_id, working_folder, start_in_edit_mode, false, get_hub_level(), true, true, selected_file)
 
 
 func get_hub_level() -> String:
 	if is_campaign:
-		return "d0754fc4-41e4-4570-bddb-f53a01a3c4ed" #TEMP
+		var info_dict: Dictionary = campaign_info_util.load_info_file(working_folder)
+		return info_dict.get("hub_level", "")
 	else:
 		return ""
