@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
-[ext_resource path="res://scenes/editor/items/placeable_items/coin_editor_data.tres" type="Resource" id=2]
+[ext_resource path="res://scenes/editor/items/placeable_items/coin.tres" type="Resource" id=2]
 [ext_resource path="res://assets/tiles/bricks/bricks_editor_data.tres" type="Resource" id=3]
 
 [resource]

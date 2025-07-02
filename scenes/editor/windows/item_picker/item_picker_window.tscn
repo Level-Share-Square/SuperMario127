@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/editor/items/placeable_item.gd" type="Script" id=6]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/preview.png" type="Texture" id=7]
 [ext_resource path="res://scenes/editor/group_button.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/editor/items/placeable_items/coin_editor_data.tres" type="Resource" id=9]
+[ext_resource path="res://scenes/editor/items/placeable_items/coin.tres" type="Resource" id=9]
 [ext_resource path="res://scenes/editor/items/items.tres" type="Resource" id=10]
 [ext_resource path="res://scenes/editor/windows/item_picker/items_box.gd" type="Script" id=11]
 
@@ -238,8 +238,8 @@ margin_bottom = -6.0
 scroll_horizontal_enabled = false
 
 [node name="ItemsMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll" index="0"]
-margin_right = 34.0
-margin_bottom = 57.0
+margin_right = 5.0
+margin_bottom = 25.0
 custom_constants/margin_right = 1
 custom_constants/margin_top = 1
 custom_constants/margin_left = 1
@@ -248,16 +248,16 @@ custom_constants/margin_bottom = 4
 [node name="ItemsBox" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat" index="0"]
 margin_left = 1.0
 margin_top = 1.0
-margin_right = 33.0
-margin_bottom = 53.0
+margin_right = 4.0
+margin_bottom = 21.0
 script = ExtResource( 11 )
 placeable_items = ExtResource( 10 )
 item_button_scene = ExtResource( 5 )
 
 [node name="TileItems" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox" index="0"]
 unique_name_in_owner = true
-margin_right = 32.0
-margin_bottom = 32.0
+margin_left = 1.0
+margin_right = 1.0
 size_flags_horizontal = 6
 size_flags_vertical = 3
 custom_constants/vseparation = 10
@@ -265,8 +265,7 @@ custom_constants/hseparation = 8
 columns = 4
 
 [node name="Test" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox/TileItems" index="0" instance=ExtResource( 5 )]
-margin_right = 32.0
-margin_bottom = 32.0
+visible = false
 placeable_item = ExtResource( 9 )
 
 [node name="Test2" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox/TileItems" index="1" instance=ExtResource( 5 )]
@@ -294,17 +293,17 @@ margin_bottom = 106.0
 placeable_item = SubResource( 11 )
 
 [node name="HSeparator" type="HSeparator" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox" index="1"]
-margin_top = 36.0
-margin_right = 32.0
-margin_bottom = 48.0
+margin_top = 4.0
+margin_right = 3.0
+margin_bottom = 16.0
 custom_constants/separation = 12
 custom_styles/separator = SubResource( 10 )
 
 [node name="ObjectItems" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox" index="2"]
 unique_name_in_owner = true
-margin_top = 52.0
-margin_right = 32.0
-margin_bottom = 52.0
+margin_top = 20.0
+margin_right = 3.0
+margin_bottom = 20.0
 custom_constants/vseparation = 10
 custom_constants/hseparation = 8
 
