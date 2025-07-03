@@ -83,7 +83,7 @@ func setup_level(level_info: LevelInfo, level_id: String, working_folder: String
 	Singleton.CurrentLevelData.working_folder = working_folder
 	Singleton.CurrentLevelData.level_id = level_id
 	Singleton.CurrentLevelData.hub_level = hub_level
-	Singleton.CurrentLevelData.is_campaign = not (hub_level == "")
+	Singleton.CurrentLevelData.is_campaign = level_list_util.is_campaign(working_folder)
 	Singleton.CurrentLevelData.selected_file = selected_file
 	
 	Singleton.CurrentLevelData.level_info.selected_shine = -1
