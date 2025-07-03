@@ -272,13 +272,29 @@ static func convert_054_to_055(result):
 						object.properties[11] = color
 						object.properties[8] = int(teleport_mode) # true = remote, false = local (why was it that way :/)
 						object.properties[9] = 0 if force_fadeout == true else 800 # setting max pan distance to 0 acts the same as force fadeout
+						object.properties[10] = ""
 						
 					48: # door
 						object.properties.resize(10)
 						var teleport_mode = object.properties[8]
 						var force_fadeout = object.properties[9]
+						object.properties[8] = int(teleport_mode) # true = remote, false = local
+						object.properties[9] = 0 if force_fadeout == true else 800 # setting max pan distance to 0 acts the same as force fadeout
+						
+					112: # area transition:
+						object.properties.resize(14)
+						var teleport_mode = object.properties[8]
+						var vertical = object.properties[9]
+						var parts = object.properties[10]
+						var stops_camera = object.properties[11]
+						var force_fadeout = object.properties[12]
 						object.properties[8] = int(teleport_mode) # true = remote, false = local (why was it that way :/)
 						object.properties[9] = 0 if force_fadeout == true else 800 # setting max pan distance to 0 acts the same as force fadeout
+						object.properties[10] = ""
+						object.properties[11] = vertical
+						object.properties[12] = parts
+						object.properties[13] = stops_camera
+		
 						
 					113: # star door
 						object.properties.resize(15)
@@ -287,13 +303,15 @@ static func convert_054_to_055(result):
 						var required_amount = object.properties[10]
 						var insufficient_text = object.properties[11]
 						var is_single = object.properties[12]
-						object.properties[8] = int(teleport_mode) # true = remote, false = local (why was it that way :/)
+						object.properties[8] = int(teleport_mode) # true = remote, false = local
 						object.properties[9] = 800 # max pan distance - just setting back to defaults so they arent borked
 						object.properties[10] = "" # level path
 						object.properties[11] = collectible
 						object.properties[12] = required_amount
 						object.properties[13] = insufficient_text
 						object.properties[14] = is_single
+					
+					
 				
 				new_objects.append(object)
 			area_result.objects = new_objects

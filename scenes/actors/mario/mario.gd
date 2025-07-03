@@ -471,10 +471,11 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 	
 	if do_teleport:
 		var shared_node: LevelShared = get_tree().get_current_scene().get_shared_node()
-		yield(shared_node.get_objects_node(), "objects_ready")
+		var objects_node: Node = shared_node.get_objects_node()
+		if not objects_node.loaded:
+			yield(objects_node, "objects_ready")
 		
 		var teleporter: GameObject = find_teleporter(target_tag)
-		print(target_tag, teleporter)
 		if not is_instance_valid(teleporter):
 			target_tag = "_entrance"
 			teleporter = find_teleporter(target_tag)

@@ -23,6 +23,8 @@ func back():
 	Singleton.SceneSwitcher.quit_level()
 
 func _ready():
+	get_tree().paused = false
+	
 	mission_select_sfx.play()
 	
 	level_title.text = level_info.level_name

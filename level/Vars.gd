@@ -23,6 +23,7 @@ var teleporters = []
 var transition_data: Dictionary = {}
 var transition_character_data = []
 var transition_character_data_2 = []
+var area_transition_helper: AreaTransitionHelper
 var liquids = []
 var liquid_positions = []
 var checkpoints = []
@@ -61,6 +62,7 @@ func init():
 	transition_data = {}
 	transition_character_data = []
 	transition_character_data_2 = []
+	area_transition_helper = null
 
 func toggle_switch_state(var channel : int):
 	if !switch_state.has(channel):

@@ -35,7 +35,11 @@ func quit():
 	Singleton.SceneSwitcher.quit_level()
 
 func set_quit_name():
-	quit.text = QUIT_TEXT if Singleton.CurrentLevelData.is_hub_level() else HUB_TEXT
+	quit.text = QUIT_TEXT if (
+		Singleton.CurrentLevelData.is_hub_level() 
+		or not Singleton.CurrentLevelData.is_campaign
+	) else HUB_TEXT
+	
 	icon.offset = Vector2(
 		QUIT_OFFSET if Singleton.CurrentLevelData.is_hub_level() else HUB_OFFSET,
 	0)

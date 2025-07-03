@@ -70,6 +70,7 @@ func create_object(object, add_to_data):
 		return object_node
 	else:
 		print("Object type doesn't exist. [ID: " + str(object.type_id) + "]")
+		object_ready()
 
 
 func get_object_at_position(position: Vector2):

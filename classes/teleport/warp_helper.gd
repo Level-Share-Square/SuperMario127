@@ -8,6 +8,9 @@ onready var teleporter: GameObject = get_parent()
 var timer_manager
 
 export var play_warp_sound: bool = true # for level warping specifically
+export var one_way: bool = false # if true, won't bring mario back to the warp when returning from hub
+export var hide_character: bool = true
+export var set_position: bool = true
 
 
 ### WARP FUNCTIONS ####
@@ -16,11 +19,21 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 	var tween: Tween
 	var do_pan: bool = teleporter.global_position.distance_to(target_teleporter.global_position) < max_pan_distance
 	if do_pan:
-		var end_point = target_teleporter.global_position
+		character.camera.auto_move = false
+		
+		var end_point: Vector2 = target_teleporter.global_position
+		if Singleton.CurrentLevelData.level_data.vars.area_transition_helper != null and target_teleporter is AreaTransition:
+			end_point = Singleton.CurrentLevelData.level_data.vars.area_transition_helper.find_camera_position(
+				target_teleporter.vertical, 
+				target_teleporter.global_position, 
+				character.camera.base_size, 
+				target_teleporter.parts * 32
+			)
+		
 		tween = Tween.new()
 		add_child(tween)
 		
-		tween.interpolate_property(character.camera, "position", null, end_point, CAMERA_TWEEN_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tween.interpolate_property(character.camera, "position", null, end_point, CAMERA_TWEEN_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		tween.start()
 	else:
 		transition_in(character)
@@ -28,13 +41,17 @@ func location_warp(character: Character, target_tag: String, max_pan_distance: i
 	
 	yield(get_tree().create_timer(WAIT_TIME), "timeout")
 	
-	character.hide()
-	character.global_position = target_teleporter.global_position
-	character.reset_physics_interpolation()
+	if hide_character:
+		character.hide()
+	if set_position:
+		character.global_position = target_teleporter.global_position
+		character.reset_physics_interpolation()
 	
 	if do_pan:
 		yield(tween, "tween_all_completed")
 		tween.queue_free()
+		character.camera.last_position = character.camera.position
+		character.camera.auto_move = true
 	else:
 		character.camera.skip_to_player = true
 		character.camera.global_position = character.global_position
@@ -99,7 +116,6 @@ func area_warp(character: Character, target_tag: String, target_area: int) -> vo
 #	]
 	Singleton.CurrentLevelData.level_data.vars.transition_data = {"target_tag": target_tag}
 	character.switch_areas(target_area, 0.5)
-	print(target_area)
 
 
 ## setting target area to -1 will enter mario into the level normally, other
@@ -120,9 +136,13 @@ func level_warp(character: Character, target_level: String,
 	else:
 		Singleton.CurrentLevelData.level_transition_data = {}
 	
-	if Singleton.CurrentLevelData.level_id == hub_level:
-		Singleton.CurrentLevelData.hub_return_data = {
-			"target_area": Singleton.CurrentLevelData.area, "target_tag": target_tag}
+	if Singleton.CurrentLevelData.is_hub_level():
+		if one_way:
+			Singleton.CurrentLevelData.hub_return_data = {}
+		else:
+			Singleton.CurrentLevelData.hub_return_data = {
+				"target_area": Singleton.CurrentLevelData.area, "target_tag": target_tag}
+			
 	
 	Singleton.Music.reset_music()
 	Singleton.Music.stop()
