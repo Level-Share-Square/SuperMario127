@@ -4,6 +4,7 @@ extends Control
 const DEFAULT_TEXT: String = "None"
 
 onready var list_handler = $"%ListHandler"
+onready var level_grid = $"%LevelGrid"
 onready var title = $InfoTab/Info/Title
 onready var author = $InfoTab/Info/Author
 onready var description = $InfoTab/Info/Panel/MarginContainer/Description
@@ -36,6 +37,15 @@ func load_campaign_info(_campaign_path: String) -> void:
 	hub_option.add_item(DEFAULT_TEXT)
 	
 	level_ids = []
+	
+	level_grid.disconnect("child_entered_tree", self, "card_added")
+	level_grid.disconnect("child_exited_tree", self, "card_removed")
+	
+	for card in level_grid.get_children():
+		card_added(card)
+		
+	level_grid.connect("child_entered_tree", self, "card_added")
+	level_grid.connect("child_exited_tree", self, "card_removed")
 
 
 func card_added(card: BaseCard):

@@ -2776,8 +2776,6 @@ script = ExtResource( 15 )
 [connection signal="directory_changed" from="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" to="Panel/Subscreens/AddElement/Control/ElementAddButtons" method="adjust_visibility"]
 [connection signal="directory_changed" from="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="update_folder_name"]
 [connection signal="directory_changed" from="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" to="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel" method="load_campaign_info"]
-[connection signal="child_entered_tree" from="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/LevelGrid" to="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel" method="card_added"]
-[connection signal="child_exiting_tree" from="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/LevelGrid" to="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel" method="card_removed"]
 [connection signal="screen_opened" from="Panel/Subscreens/LevelInfo" to="Panel/Subscreens/LevelInfo/Focus" method="focus_node" flags=3]
 [connection signal="back_press" from="Panel/Subscreens/LevelInfo/Focus" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/Return" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelView" ]]
