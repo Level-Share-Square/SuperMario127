@@ -50,7 +50,7 @@ func is_hub_level() -> bool:
 	return is_campaign and level_id == hub_level
 
 func is_playing_hub_level() -> bool:
-	return is_hub_level() and selected_file > 0 
+	return is_hub_level() and selected_file > -1
 
 func get_meta_collectibles() -> Dictionary:
 	var save_folder: String = level_list_util.get_save_folder(working_folder, selected_file)

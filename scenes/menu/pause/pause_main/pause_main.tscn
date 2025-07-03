@@ -695,22 +695,9 @@ rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 160, 0 )
 script = ExtResource( 23 )
 
-[node name="CountersBG" type="Panel" parent="Counters"]
-modulate = Color( 0, 0, 0, 0.25098 )
-margin_top = 12.0
-margin_right = 181.0
-margin_bottom = 36.0
-rect_rotation = 1.0
-custom_styles/panel = SubResource( 22 )
-
-[node name="CountersBG2" type="Panel" parent="Counters/CountersBG"]
-margin_right = 181.0
-margin_bottom = 24.0
-rect_rotation = -3.0
-custom_styles/panel = SubResource( 22 )
-
 [node name="CountersLabels" type="MarginContainer" parent="Counters"]
-margin_right = 160.0
+margin_left = 16.0
+margin_right = 176.0
 margin_bottom = 48.0
 grow_horizontal = 0
 custom_constants/margin_right = 8
@@ -718,18 +705,45 @@ custom_constants/margin_top = 8
 custom_constants/margin_left = 8
 custom_constants/margin_bottom = 8
 
+[node name="Control" type="Control" parent="Counters/CountersLabels"]
+margin_left = 8.0
+margin_top = 12.0
+margin_right = 174.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="CountersBG" type="Panel" parent="Counters/CountersLabels/Control"]
+modulate = Color( 0, 0, 0, 0.25098 )
+anchor_right = 1.0
+rect_min_size = Vector2( 0, 24 )
+rect_rotation = 1.5
+size_flags_vertical = 4
+custom_styles/panel = SubResource( 22 )
+
+[node name="CountersBG2" type="Panel" parent="Counters/CountersLabels/Control/CountersBG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_rotation = -3.0
+custom_styles/panel = SubResource( 22 )
+
 [node name="HBoxContainer" type="HBoxContainer" parent="Counters/CountersLabels"]
-show_behind_parent = true
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 152.0
+margin_right = 174.0
 margin_bottom = 40.0
 grow_horizontal = 0
 alignment = 2
 
+[node name="Padding3" type="Control" parent="Counters/CountersLabels/HBoxContainer"]
+margin_right = 4.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 4, 0 )
+
 [node name="ShineIcon" type="Control" parent="Counters/CountersLabels/HBoxContainer"]
-margin_left = 2.0
-margin_right = 30.0
+margin_left = 8.0
+margin_right = 36.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 28, 28 )
 
@@ -741,22 +755,22 @@ expand = true
 stretch_mode = 6
 
 [node name="ShineCounter" type="Label" parent="Counters/CountersLabels/HBoxContainer"]
-margin_left = 34.0
+margin_left = 40.0
 margin_top = 3.0
-margin_right = 64.0
+margin_right = 70.0
 margin_bottom = 28.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "0/5"
 
 [node name="Padding" type="Control" parent="Counters/CountersLabels/HBoxContainer"]
-margin_left = 68.0
-margin_right = 70.0
+margin_left = 74.0
+margin_right = 76.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 2, 0 )
 
 [node name="StarCoinIcon" type="Control" parent="Counters/CountersLabels/HBoxContainer"]
-margin_left = 74.0
-margin_right = 102.0
+margin_left = 80.0
+margin_right = 108.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 28, 28 )
 
@@ -774,18 +788,18 @@ expand = true
 stretch_mode = 6
 
 [node name="StarCoinCounter" type="Label" parent="Counters/CountersLabels/HBoxContainer"]
-margin_left = 106.0
+margin_left = 112.0
 margin_top = 3.0
-margin_right = 136.0
+margin_right = 142.0
 margin_bottom = 28.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "0/5"
 
 [node name="Padding2" type="Control" parent="Counters/CountersLabels/HBoxContainer"]
-margin_left = 140.0
-margin_right = 144.0
+margin_left = 146.0
+margin_right = 166.0
 margin_bottom = 32.0
-rect_min_size = Vector2( 4, 0 )
+rect_min_size = Vector2( 20, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )
