@@ -439,7 +439,7 @@ func _process(delta : float) -> void:
 		Singleton.CurrentLevelData.level_info.load_in()
 		level_list_util.save_level_code_file(level_code, file_path)
 		
-		level_list_util.autoave_level_to_disk(level_code, "user://autosaves/" + "main_" + str(level_info.level_name) + ".autosave")
+		level_list_util.autosave_level_to_disk(level_code, "user://autosaves/" + "main_" + str(level_info.level_name) + ".autosave")
 		level_list_util.autosave_level_to_disk(level_code, "user://autosaves/" + str(level_info.level_name) + "_" + str(time) + ".autosave")
 		Singleton.CurrentLevelData.unsaved_editor_changes = false
 		
