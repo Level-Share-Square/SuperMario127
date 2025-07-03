@@ -123,7 +123,7 @@ func start_entrance_animation(character: Character) -> void:
 			character.state, 
 			character.facing_direction, 
 			to_local(character.position), 
-			self.vertical
+			vertical
 		)
 	
 	var sprite_rotation: float = character.sprite.rotation
@@ -151,6 +151,9 @@ func start_exit_animation(character: Character) -> void:
 	else:
 		character.position = global_position
 	character.reset_physics_interpolation()
+	
+	if character.camera.skip_to_player:
+		character.camera.global_position = character.global_position
 	
 	yield(get_tree().create_timer(0.1), "timeout")
 	is_idle = true
