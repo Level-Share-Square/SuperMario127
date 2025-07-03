@@ -88,6 +88,10 @@ func setup_level(level_info: LevelInfo, level_id: String, working_folder: String
 	
 	Singleton.CurrentLevelData.level_info.selected_shine = -1
 	Singleton.CurrentLevelData.area = 0
+	
+	if not Singleton.CurrentLevelData.level_transition_data.empty():
+		Singleton.CurrentLevelData.area = Singleton.CurrentLevelData.level_transition_data.get("target_area", 0)
+	
 	Singleton.CheckpointSaved.reset()
 
 ## loads shine select if there's more than 1 shine,

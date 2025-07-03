@@ -443,7 +443,7 @@ func load_in(level_data : LevelData, level_area : LevelArea):
 		return
 	
 	# time score
-	if Singleton.CurrentLevelData.level_data.vars.transition_data.get("target_tag", "") == "" and Singleton.CheckpointSaved.current_checkpoint_id == -1:
+	if Singleton.CurrentLevelData.level_data.vars.transition_data.empty() and Singleton.CheckpointSaved.current_checkpoint_id == -1:
 		Singleton.CurrentLevelData.start_tracking_time_score()
 	else:
 		var score_from_before = Singleton.CurrentLevelData.time_score
