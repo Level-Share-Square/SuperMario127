@@ -45,7 +45,7 @@ func quit_level(do_transition: bool = true):
 		
 		if do_transition:
 			var _connect = Singleton.SceneTransitions.connect("transition_finished", self, "start_level", 
-			[level_info, level_id, working_folder, false, true, hub_level, false], CONNECT_ONESHOT)
+			[level_info, level_id, working_folder, false, true, hub_level, false, true, selected_file], CONNECT_ONESHOT)
 			Singleton.SceneTransitions.do_transition_fade(Singleton.SceneTransitions.DEFAULT_TRANSITION_TIME)
 		else:
 			yield(get_tree(), "physics_frame")

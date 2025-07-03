@@ -414,6 +414,7 @@ custom_constants/separation = 12
 script = ExtResource( 10 )
 
 [node name="Quit" type="Button" parent="Buttons/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 margin_right = 109.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 47, 22 )
@@ -483,10 +484,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = 384.0
-margin_top = -32.0
-margin_right = 888.001
-margin_bottom = 400.0
+margin_left = -384.0
+margin_top = -248.0
+margin_right = 120.001
+margin_bottom = 184.0
 rect_min_size = Vector2( 504, 0 )
 script = ExtResource( 12 )
 
@@ -686,10 +687,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 696.0
-margin_top = 392.0
-margin_right = 856.0
-margin_bottom = 440.0
+margin_left = -72.0
+margin_top = -40.0
+margin_right = 88.0
+margin_bottom = 8.0
 rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 160, 0 )
 script = ExtResource( 23 )
@@ -791,6 +792,7 @@ anims/RESET = SubResource( 5 )
 anims/transition = SubResource( 6 )
 
 [connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3]
+[connection signal="screen_opened" from="." to="Buttons/ButtonFunctions" method="set_quit_name"]
 [connection signal="screen_opened" from="." to="Counters" method="screen_opened"]
 [connection signal="back_press" from="Focus" to="Focus" method="set_default_focus" binds= [ "%Resume" ]]
 [connection signal="back_press" from="Focus" to="Buttons/ButtonFunctions" method="resume"]

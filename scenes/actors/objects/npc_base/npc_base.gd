@@ -126,7 +126,13 @@ func _ready():
 					break
 		
 		if required_shines > 0:
-			var collected_shines: int = Singleton.CurrentLevelData.level_info.collected_shines.values().count(true)
+			var collected_shines: int
+			if Singleton.CurrentLevelData.is_playing_hub_level():
+				var total_dict: Dictionary = Singleton.CurrentLevelData.get_meta_collectibles()
+				collected_shines = total_dict.get("collected_shines", 0)
+			else:
+				collected_shines = Singleton.CurrentLevelData.level_info.collected_shines.values().count(true)
+			
 			if collected_shines < required_shines:
 				queue_free()
 

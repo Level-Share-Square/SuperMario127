@@ -1,5 +1,15 @@
 extends Node
 
+
+const QUIT_TEXT: String = "Quit"
+const QUIT_OFFSET: int = -40
+const HUB_TEXT: String = "To Hub"
+const HUB_OFFSET: int = -56
+
+onready var quit = $"%Quit"
+onready var icon = quit.get_node("Icon")
+onready var countdown = quit.get_node("Countdown")
+
 export var root_path: NodePath
 onready var root_scene: Control = get_node(root_path)
 
@@ -23,3 +33,11 @@ func quit():
 	Singleton.Music.change_song(Singleton.Music.last_song, 0)
 	Singleton.Music.stop_temporary_music()
 	Singleton.SceneSwitcher.quit_level()
+
+func set_quit_name():
+	quit.text = QUIT_TEXT if Singleton.CurrentLevelData.is_hub_level() else HUB_TEXT
+	icon.offset = Vector2(
+		QUIT_OFFSET if Singleton.CurrentLevelData.is_hub_level() else HUB_OFFSET,
+	0)
+	
+	countdown.initial_text = quit.text
