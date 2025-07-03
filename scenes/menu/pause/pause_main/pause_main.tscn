@@ -741,7 +741,7 @@ stretch_mode = 6
 
 [node name="ShineCounter" type="Label" parent="Counters/CountersLabels/HBoxContainer"]
 margin_left = 34.0
-margin_top = 4.0
+margin_top = 3.0
 margin_right = 64.0
 margin_bottom = 28.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -774,7 +774,7 @@ stretch_mode = 6
 
 [node name="StarCoinCounter" type="Label" parent="Counters/CountersLabels/HBoxContainer"]
 margin_left = 106.0
-margin_top = 4.0
+margin_top = 3.0
 margin_right = 136.0
 margin_bottom = 28.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )

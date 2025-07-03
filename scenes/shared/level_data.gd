@@ -45,6 +45,15 @@ func create_level_data():
 	level_data.check_validity()
 	pick_random_music()
 
+## campaign
+func is_playing_hub_level() -> bool:
+	return is_campaign and level_id == hub_level and selected_file > 0 
+
+func get_meta_collectibles() -> Dictionary:
+	var save_folder: String = level_list_util.get_save_folder(working_folder, selected_file)
+	var meta_dict: Dictionary = save_meta_util.load_meta_file(save_folder)
+	return save_meta_util.get_collectible_totals(meta_dict)
+
 ## caching
 var object_id_map: IdMap
 var background_id_mapper: IdMap
@@ -186,7 +195,3 @@ func get_red_coins_before_area(area_id : int):
 	return last_red_coin_id
 
 
-## temp
-func _unhandled_input(event):
-	if event.is_action_pressed("flip_object"):
-		print(is_campaign)

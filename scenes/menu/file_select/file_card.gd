@@ -40,11 +40,11 @@ func load_file_info(_campaign_path: String):
 		
 		collected_shines = total_dict.get("collected_shines", 0)
 		var total_shines: int = total_dict.get("total_shines", 0)
-		shines_label.text = str(collected_shines) + "/" + str(total_shines)
+		shines_label.text = "%s/%s" % [collected_shines, total_shines]
 		
 		var collected_star_coins: int = total_dict.get("collected_star_coins", 0)
 		var total_star_coins: int = total_dict.get("total_star_coins", 0)
-		star_coins_label.text = str(collected_star_coins) + "/" + str(total_star_coins)
+		star_coins_label.text = "%s/%s" % [collected_star_coins, total_star_coins]
 		
 		var shines_percentage: float = float(collected_shines) / max(total_shines, 1)
 		var star_coins_percentage: float = float(collected_star_coins) / max(total_star_coins, 1)

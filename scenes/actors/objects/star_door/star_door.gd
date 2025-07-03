@@ -34,7 +34,7 @@ var palette_dict = {
 var current_level_info : LevelInfo
 var required_amount := 1
 var collectible := "shine"
-var collectible_dictionary : Dictionary
+var collectible_count: int
 var text := ""
 var prev_coll
 var insufficient_text: String = "Sorry! You need {num} {col} to open this door!"
@@ -93,12 +93,7 @@ func start_entrance_animation(character: Character, open_door: bool = true) -> v
 		if star_bits_collected < required_amount:
 			can_enter = false
 	else:
-		var collected = 0
-		#yuck
-		for col in collectible_dictionary:
-			if collectible_dictionary[col]:
-				collected += 1
-		if collected < required_amount:
+		if collectible_count < required_amount:
 			can_enter = false
 	
 	if (
@@ -208,15 +203,22 @@ func _ready() -> void:
 	current_level_info = Singleton.CurrentLevelData.level_info
 	match(collectible):
 		"shine":
-			collectible_dictionary = current_level_info.collected_shines
+			collectible_count = current_level_info.collected_shines.values().count(true)
 		"star coin":
-			collectible_dictionary = current_level_info.collected_star_coins
+			collectible_count = current_level_info.collected_star_coins.values().count(true)
 		"coin":
 			pass
 		"star bit":
 			pass
 		_:
-			collectible_dictionary = current_level_info.collected_shines
+			collectible_count = current_level_info.collected_shines.values().count(true)
+	
+	if collectible == "shine" or "star coin" and Singleton.CurrentLevelData.is_playing_hub_level():
+		var total_dict: Dictionary = Singleton.CurrentLevelData.get_meta_collectibles()
+		if collectible == "shine":
+			collectible_count = total_dict.get("collected_shines", 0)
+		elif collectible == "star_coin":
+			collectible_count = total_dict.get("collected_star_coins", 0)
 
 	var collectible_text: String = collectible
 	if required_amount != 1: collectible_text += "s"
