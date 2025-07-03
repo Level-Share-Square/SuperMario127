@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=90 format=2]
 
 [ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/actors/objects/cloud_platform/texture.png" type="Texture" id=2]
@@ -56,6 +56,7 @@
 [ext_resource path="res://scenes/menu/line_edit_unfocus.gd" type="Script" id=54]
 [ext_resource path="res://scenes/menu/text_edit_unfocus.gd" type="Script" id=55]
 [ext_resource path="res://scenes/menu/levels_list/campaign_panel.gd" type="Script" id=56]
+[ext_resource path="res://scenes/menu/levels_list/campaign_settings.gd" type="Script" id=57]
 
 [sub_resource type="CanvasItemMaterial" id=22]
 blend_mode = 1
@@ -493,6 +494,93 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=24]
+resource_name = "transition"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ) ]
+}
+
+[sub_resource type="StyleBoxEmpty" id=34]
+
+[sub_resource type="StyleBoxEmpty" id=35]
+
+[sub_resource type="StyleBoxEmpty" id=36]
+
+[sub_resource type="StyleBoxEmpty" id=37]
+
+[sub_resource type="Animation" id=32]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 0.9 ) ]
+}
+
+[sub_resource type="Animation" id=33]
 resource_name = "transition"
 length = 0.3
 tracks/0/type = "value"
@@ -1512,6 +1600,7 @@ custom_fonts/font = SubResource( 31 )
 text = "Super Mario 4D Galaxy 12"
 align = 1
 valign = 1
+autowrap = true
 
 [node name="Shadow" type="Label" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/Info/Title"]
 show_behind_parent = true
@@ -1524,6 +1613,7 @@ custom_fonts/font = SubResource( 31 )
 text = "Super Mario 4D Galaxy 12"
 align = 1
 valign = 1
+autowrap = true
 clip_text = true
 __meta__ = {
 "_edit_use_anchors_": true
@@ -1639,13 +1729,6 @@ margin_right = 256.0
 margin_bottom = 171.0
 rect_min_size = Vector2( 256, 144 )
 texture = ExtResource( 10 )
-expand = true
-
-[node name="Foreground" type="TextureRect" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Thumbnail"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 24 )
 expand = true
 
 [node name="Shadow" type="NinePatchRect" parent="Panel/Subscreens/CampaignInfo/CampaignPanel/InfoTab/VBoxContainer/Thumbnail"]
@@ -2056,9 +2139,9 @@ folder_name_edit_path = NodePath("HBoxContainer/FolderName")
 folder_name_label_path = NodePath("../Panel/MarginContainer/VBoxContainer/FolderName")
 
 [node name="Return" type="Button" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
-margin_top = 59.0
+margin_top = 74.0
 margin_right = 163.0
-margin_bottom = 79.0
+margin_bottom = 94.0
 rect_min_size = Vector2( 0, 20 )
 focus_neighbour_top = NodePath("../DeleteFolder")
 theme_type_variation = "AlternateButton"
@@ -2083,15 +2166,15 @@ script = ExtResource( 29 )
 offset = Vector2( -49, 0 )
 
 [node name="Padding" type="Control" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
-margin_top = 89.0
+margin_top = 104.0
 margin_right = 163.0
-margin_bottom = 99.0
+margin_bottom = 114.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
-margin_top = 109.0
+margin_top = 124.0
 margin_right = 163.0
-margin_bottom = 129.0
+margin_bottom = 144.0
 size_flags_horizontal = 3
 custom_constants/separation = 0
 
@@ -2112,9 +2195,9 @@ margin_bottom = 20.0
 rect_min_size = Vector2( 24, 0 )
 
 [node name="RenameFolder" type="Button" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
-margin_top = 139.0
+margin_top = 154.0
 margin_right = 163.0
-margin_bottom = 159.0
+margin_bottom = 174.0
 rect_min_size = Vector2( 0, 20 )
 theme_type_variation = "AlternateButton"
 text = "Rename Folder"
@@ -2122,9 +2205,9 @@ align = 2
 script = ExtResource( 14 )
 
 [node name="Padding2" type="Control" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
-margin_top = 169.0
+margin_top = 184.0
 margin_right = 163.0
-margin_bottom = 169.0
+margin_bottom = 184.0
 
 [node name="ExportFolder" type="Button" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
 visible = false
@@ -2138,9 +2221,9 @@ align = 2
 script = ExtResource( 14 )
 
 [node name="DeleteFolder" type="Button" parent="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons"]
-margin_top = 209.0
+margin_top = 194.0
 margin_right = 163.0
-margin_bottom = 229.0
+margin_bottom = 214.0
 rect_min_size = Vector2( 0, 20 )
 focus_neighbour_bottom = NodePath("../Return")
 theme_type_variation = "AlternateButtonRed"
@@ -2186,21 +2269,21 @@ margin_bottom = 278.0
 
 [node name="FolderName" type="Label" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer"]
 margin_right = 424.0
-margin_bottom = 24.0
+margin_bottom = 25.0
 text = "New Folder"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 40.0
+margin_top = 41.0
 margin_right = 424.0
-margin_bottom = 56.0
+margin_bottom = 58.0
 alignment = 1
 
 [node name="Levels" type="Label" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 14.0
 margin_right = 146.0
-margin_bottom = 16.0
+margin_bottom = 17.0
 rect_min_size = Vector2( 132, 0 )
 custom_fonts/font = ExtResource( 23 )
 text = "Levels in Folder: 0"
@@ -2209,7 +2292,7 @@ align = 1
 [node name="Shines" type="Label" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 150.0
 margin_right = 278.0
-margin_bottom = 16.0
+margin_bottom = 17.0
 rect_min_size = Vector2( 128, 0 )
 custom_fonts/font = ExtResource( 23 )
 text = "Shines Total: 0"
@@ -2218,7 +2301,7 @@ align = 1
 [node name="StarCoins" type="Label" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 282.0
 margin_right = 410.0
-margin_bottom = 16.0
+margin_bottom = 17.0
 rect_min_size = Vector2( 128, 0 )
 custom_fonts/font = ExtResource( 23 )
 text = "Star Coins Total: 0"
@@ -2226,32 +2309,32 @@ align = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 72.0
+margin_top = 74.0
 margin_right = 424.0
-margin_bottom = 88.0
+margin_bottom = 91.0
 custom_constants/separation = 16
 alignment = 1
 
 [node name="Completion" type="Label" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 40.0
-margin_right = 190.0
-margin_bottom = 16.0
+margin_left = 35.0
+margin_right = 185.0
+margin_bottom = 17.0
 rect_min_size = Vector2( 150, 0 )
 custom_fonts/font = ExtResource( 23 )
 text = "Total Completion: 100%"
 align = 1
 
 [node name="BestTimes" type="Label" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 206.0
-margin_right = 383.0
-margin_bottom = 16.0
+margin_left = 201.0
+margin_right = 388.0
+margin_bottom = 17.0
 rect_min_size = Vector2( 160, 0 )
 custom_fonts/font = ExtResource( 23 )
 text = "Best Times Total: 100h 15m 50s"
 align = 1
 
 [node name="useless filler of space" type="Control" parent="Panel/Subscreens/FolderSettings/Control/Panel/MarginContainer/VBoxContainer"]
-margin_top = 104.0
+margin_top = 107.0
 margin_right = 424.0
 margin_bottom = 266.0
 rect_clip_content = true
@@ -2411,6 +2494,253 @@ texture = ExtResource( 44 )
 anims/RESET = SubResource( 23 )
 anims/transition = SubResource( 24 )
 
+[node name="CampaignSettings" type="MarginContainer" parent="Panel/Subscreens"]
+visible = false
+modulate = Color( 0, 0, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 0.9, 0.9 )
+rect_pivot_offset = Vector2( 0, 313 )
+rect_clip_content = true
+script = ExtResource( 9 )
+
+[node name="Focus" type="Control" parent="Panel/Subscreens/CampaignSettings"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 660.0
+margin_bottom = 301.0
+script = ExtResource( 26 )
+
+[node name="CampaignSettingsPanel" type="Control" parent="Panel/Subscreens/CampaignSettings"]
+unique_name_in_owner = true
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 660.0
+margin_bottom = 301.0
+mouse_filter = 2
+script = ExtResource( 57 )
+
+[node name="InfoTab" type="Control" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Info" type="VBoxContainer" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/InfoTab"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -346.0
+margin_top = 12.0
+margin_right = -10.0
+margin_bottom = 279.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Title" type="LineEdit" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/InfoTab/Info"]
+margin_right = 336.0
+margin_bottom = 23.0
+custom_fonts/font = ExtResource( 48 )
+text = "Super Mario 4D Galaxy 12"
+align = 1
+placeholder_text = "Campaign Name"
+script = ExtResource( 54 )
+
+[node name="Author" type="LineEdit" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/InfoTab/Info"]
+margin_top = 33.0
+margin_right = 336.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 48 )
+text = "Unknown"
+align = 1
+placeholder_text = "Author"
+script = ExtResource( 54 )
+
+[node name="Panel" type="Panel" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/InfoTab/Info"]
+self_modulate = Color( 0, 0, 0, 0.501961 )
+show_behind_parent = true
+margin_top = 66.0
+margin_right = 336.0
+margin_bottom = 201.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/InfoTab/Info/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="Description" type="TextEdit" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/InfoTab/Info/Panel/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 332.0
+margin_bottom = 131.0
+custom_styles/read_only = SubResource( 34 )
+custom_styles/focus = SubResource( 35 )
+custom_styles/normal = SubResource( 36 )
+custom_styles/completion = SubResource( 37 )
+text = "After two years of working on this level (on and off but still), it's finally complete; Super Mario 63 Tall Tall Mountain +!
+
+
+This level is a complete remake and expansion of Super Mario 63's Tall Tall Mountain with a BOATLOAD of new features, including:
+
+- TWO NEW AREAS to explore! A town at the base of the mountain where residents reside, and a new secret area with gravity-defying water!
+
+- NINE* NEW SHINES to gather! These are split up into FOUR new main quest shines and FIVE new \"green shines\" on top of the already existing five, totaling FOURTEEN* SHINES!
+
+- FIFTEEN NEW STAR COINS to locate, totaling TWENTY STAR COINS! (Struggling to find some? Perhaps the doctor in the lab by the lake may be of use...)
+
+- Altered level design from the original to be more fair, \"well designed\", to make more room for new content, or to fit better with SM127's movement.
+
+- Secrets to find not discussed here!
+
+- And more...
+
+
+Now that this update is out, you might see me make more levels, so stay tuned for that!
+Anyways, have fun!
+
+v1.01 (7/29): Quick hotfix to disable some unnecessary pipes, and to mae one of the more hidden star coins easier to find"
+wrap_enabled = true
+
+[node name="ButtonScroller" type="Button" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/InfoTab/Info/Panel/MarginContainer/Description"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+flat = true
+script = ExtResource( 19 )
+scroll_path = NodePath("..")
+
+[node name="Intro" type="HBoxContainer" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/InfoTab/Info"]
+margin_top = 211.0
+margin_right = 336.0
+margin_bottom = 234.0
+
+[node name="Label" type="Label" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/InfoTab/Info/Intro"]
+margin_top = 2.0
+margin_right = 103.0
+margin_bottom = 21.0
+custom_fonts/font = ExtResource( 48 )
+text = "Opening Level: "
+
+[node name="IntroOption" type="OptionButton" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/InfoTab/Info/Intro"]
+margin_left = 107.0
+margin_right = 336.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+theme_type_variation = "OptionAlt"
+text = "Select..."
+
+[node name="Hub" type="HBoxContainer" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/InfoTab/Info"]
+margin_top = 244.0
+margin_right = 336.0
+margin_bottom = 267.0
+
+[node name="Label" type="Label" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/InfoTab/Info/Hub"]
+margin_top = 2.0
+margin_right = 73.0
+margin_bottom = 21.0
+custom_fonts/font = ExtResource( 48 )
+text = "Hub Level: "
+
+[node name="HubOption" type="OptionButton" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/InfoTab/Info/Hub"]
+margin_left = 77.0
+margin_right = 336.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+theme_type_variation = "OptionAlt"
+text = "Select..."
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel"]
+margin_left = 12.0
+margin_right = 268.0
+margin_bottom = 279.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Thumbnail" type="TextureRect" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/VBoxContainer"]
+margin_top = 7.0
+margin_right = 256.0
+margin_bottom = 151.0
+rect_min_size = Vector2( 256, 144 )
+texture = ExtResource( 10 )
+expand = true
+
+[node name="Shadow" type="NinePatchRect" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/VBoxContainer/Thumbnail"]
+modulate = Color( 1, 1, 1, 0.25098 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 6.0
+margin_bottom = 6.0
+texture = ExtResource( 8 )
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 11
+
+[node name="Buttons" type="GridContainer" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/VBoxContainer"]
+margin_left = 80.0
+margin_top = 171.0
+margin_right = 176.0
+margin_bottom = 271.0
+size_flags_horizontal = 6
+custom_constants/vseparation = 20
+custom_constants/hseparation = 24
+
+[node name="SetCover" type="Button" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/VBoxContainer/Buttons"]
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 20 )
+theme_type_variation = "AlternateButton"
+text = "Set Cover"
+align = 0
+script = ExtResource( 3 )
+lerp_speed = 12.0
+
+[node name="SaveInfo" type="Button" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/VBoxContainer/Buttons"]
+margin_top = 40.0
+margin_right = 96.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 96, 20 )
+theme_type_variation = "AlternateButton"
+text = "Save Info"
+align = 0
+script = ExtResource( 3 )
+lerp_speed = 12.0
+
+[node name="Return" type="Button" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/VBoxContainer/Buttons"]
+margin_top = 80.0
+margin_right = 96.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 96, 20 )
+theme_type_variation = "AlternateButton"
+custom_colors/font_color_focus = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_hover = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_pressed = Color( 0.694118, 0.2, 0.2, 1 )
+text = "Return"
+align = 0
+script = ExtResource( 3 )
+lerp_speed = 12.0
+
+[node name="Icon" type="TextureRect" parent="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/VBoxContainer/Buttons/Return"]
+modulate = Color( 0.694118, 0.2, 0.2, 1 )
+margin_left = 48.0
+margin_right = 66.0
+margin_bottom = 18.0
+mouse_filter = 2
+texture = ExtResource( 35 )
+expand = true
+script = ExtResource( 29 )
+offset = Vector2( 48, -1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Subscreens/CampaignSettings"]
+anims/RESET = SubResource( 32 )
+anims/transition = SubResource( 33 )
+
 [node name="DragCursor" type="Area2D" parent="."]
 unique_name_in_owner = true
 collision_layer = 0
@@ -2445,6 +2775,9 @@ script = ExtResource( 15 )
 [connection signal="next_page" from="Panel/Subscreens/LevelView/ScrollContainer" to="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/Loader" method="next_page"]
 [connection signal="directory_changed" from="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" to="Panel/Subscreens/AddElement/Control/ElementAddButtons" method="adjust_visibility"]
 [connection signal="directory_changed" from="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="update_folder_name"]
+[connection signal="directory_changed" from="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/ListHandler" to="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel" method="load_campaign_info"]
+[connection signal="child_entered_tree" from="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/LevelGrid" to="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel" method="card_added"]
+[connection signal="child_exiting_tree" from="Panel/Subscreens/LevelView/ScrollContainer/MarginContainer/LevelGrid" to="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel" method="card_removed"]
 [connection signal="screen_opened" from="Panel/Subscreens/LevelInfo" to="Panel/Subscreens/LevelInfo/Focus" method="focus_node" flags=3]
 [connection signal="back_press" from="Panel/Subscreens/LevelInfo/Focus" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelView" ]]
 [connection signal="pressed" from="Panel/Subscreens/LevelInfo/LevelPanel/Buttons/Return" to="Panel/Subscreens/LevelInfo" method="transition" binds= [ "LevelView" ]]
@@ -2491,4 +2824,8 @@ script = ExtResource( 15 )
 [connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/RenameFolder" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="rename_folder"]
 [connection signal="pressed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/DeleteFolder/PressCountdown" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons" method="delete_folder"]
 [connection signal="text_changed" from="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/DeleteFolder/PressCountdown" to="Panel/Subscreens/FolderSettings/Control/FolderSettingButtons/DeleteFolder/Icon" method="update_offset"]
+[connection signal="screen_opened" from="Panel/Subscreens/CampaignSettings" to="Panel/Subscreens/CampaignSettings/Focus" method="focus_node" flags=3]
+[connection signal="back_press" from="Panel/Subscreens/CampaignSettings/Focus" to="Panel/Subscreens/CampaignSettings" method="transition" binds= [ "LevelView" ]]
+[connection signal="pressed" from="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/VBoxContainer/Buttons/SaveInfo" to="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel" method="save_info"]
+[connection signal="pressed" from="Panel/Subscreens/CampaignSettings/CampaignSettingsPanel/VBoxContainer/Buttons/Return" to="Panel/Subscreens/CampaignSettings" method="transition" binds= [ "LevelView" ]]
 [connection signal="area_entered" from="DragCursor" to="DragCursor" method="_area_entered"]

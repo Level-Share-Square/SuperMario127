@@ -12,13 +12,15 @@ onready var completion = $Button/Info/VBoxContainer/Completion
 export var file_id: int = 0
 var campaign_path: String
 var file_exists: bool
+# saved because the game should send you to the intro level if you don't have any shines
+var collected_shines: int = 0
 
 
 func play_level():
 	var save_folder: String = level_list_util.get_save_folder(campaign_path, file_id)
 	if not level_list_util.file_exists(save_folder + "meta.127save"):
 		create_file()
-	file_manager.play_level(file_id)
+	file_manager.play_level(file_id, collected_shines)
 
 
 func load_file_info(_campaign_path: String):
@@ -35,9 +37,8 @@ func load_file_info(_campaign_path: String):
 		var meta_dict: Dictionary = save_meta_util.load_meta_file(save_folder)
 		var total_dict: Dictionary = save_meta_util.get_collectible_totals(meta_dict)
 		collectibles.visible = true
-		print(file_id, ": ", meta_dict)
 		
-		var collected_shines: int = total_dict.get("collected_shines", 0)
+		collected_shines = total_dict.get("collected_shines", 0)
 		var total_shines: int = total_dict.get("total_shines", 0)
 		shines_label.text = str(collected_shines) + "/" + str(total_shines)
 		

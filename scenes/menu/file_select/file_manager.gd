@@ -19,7 +19,7 @@ func screen_opened():
 		file_card.load_file_info(campaign_path)
 
 
-func play_level(selected_file: int) -> void:
+func play_level(selected_file: int, collected_shines: int = 0) -> void:
 	if level_played: return
 	level_played = true
 	
@@ -31,6 +31,6 @@ func play_level(selected_file: int) -> void:
 	Singleton.Music.reset_music()
 	Singleton.Music.stop()
 	
-	var level_id = intro_level if intro_level != "" else hub_level
+	var level_id = intro_level if (intro_level != "" and collected_shines < 1) else hub_level
 	var level_info: LevelInfo = Singleton.SceneSwitcher.load_level_info(level_id, campaign_path)
 	Singleton.SceneSwitcher.start_level(level_info, level_id, campaign_path, false, false, hub_level, true, true, selected_file)

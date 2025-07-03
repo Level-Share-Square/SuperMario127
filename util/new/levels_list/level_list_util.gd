@@ -32,11 +32,18 @@ static func generate_level_id() -> String:
 
 
 static func move_level_files(level_id: String, working_folder: String, new_folder: String):
-	# weird workaround to allow using save_meta_util without cyclic reference error
+	# weird workaround to allow using these classes without cyclic reference error
 	var save_meta_script = load("res://util/new/levels_list/save_meta_util.gd")
+	var campaign_info_script = load("res://util/new/levels_list/campaign_info_util.gd")
 		
 	if is_campaign(working_folder):
 		save_meta_script.update_all_with_level(level_id, working_folder, true)
+		var info_dict: Dictionary = campaign_info_script.load_info_file(working_folder)
+		if info_dict.get("hub_level", "") == level_id:
+			info_dict["hub_level"] = ""
+		if info_dict.get("intro_level", "") == level_id:
+			info_dict["intro_level"] = ""
+		campaign_info_script.save_info_file(working_folder, info_dict)
 		
 	sort_file_util.remove_from_sort(level_id, working_folder, sort_file_util.LEVELS)
 	sort_file_util.add_to_sort(level_id, new_folder, sort_file_util.LEVELS)
@@ -189,6 +196,15 @@ static func delete_campaign_folder(path: String):
 	var folder_id: String = get_last_in_path(path)
 	sort_file_util.remove_from_sort(folder_id, parent_folder, sort_file_util.CAMPAIGNS)
 	delete_file(path)
+
+static func rename_campaign_folder(path: String, new_id: String):
+	var parent_folder: String = get_parent_from_path(path)
+	var folder_id: String = get_last_in_path(path)
+	
+	sort_file_util.remove_from_sort(folder_id, parent_folder, sort_file_util.CAMPAIGNS)
+	sort_file_util.add_to_sort(new_id, parent_folder, sort_file_util.CAMPAIGNS)
+	
+	move_file(path, get_folder_path(new_id, parent_folder))
 
 static func is_campaign(path: String):
 	return file_exists(path + "/info.json")
