@@ -1,7 +1,7 @@
 extends Node
 
 const PLAYER_PATH = "res://scenes/player/player.tscn"
-const EDITOR_PATH = "res://scenes/oldeditor/editor.tscn"
+const EDITOR_PATH = "res://scenes/editor/editor.tscn"
 const SHINE_SELECT_PATH = "res://scenes/menu/shine_select/shine_select.tscn"
 
 #### scene switching

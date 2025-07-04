@@ -113,7 +113,7 @@ func switch_scenes():
 			Singleton2.dead = true
 		elif Singleton2.dead == true:
 			pass
-	var _change_scene = get_tree().change_scene("res://scenes/oldeditor/editor.tscn")
+	var _change_scene = get_tree().change_scene("res://scenes/editor/editor.tscn")
 
 func reload_scene():
 	GhostArrays.reload = get_tree().reload_current_scene()
