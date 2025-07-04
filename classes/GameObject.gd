@@ -39,8 +39,6 @@ var editable_properties : PoolStringArray = []
 var property_value_to_name := {}
 var property_value_menus := {}
 
-signal process
-signal physics_process
 signal property_changed(key, value)
 
 var process_frame_counter = 0
@@ -71,7 +69,7 @@ func _ready():
 	
 	if get_tree().current_scene.mode == 1:
 		if not is_instance_valid(editor_hitbox):
-			var editor_hitbox = Area2D.new()
+			editor_hitbox = Area2D.new()
 			editor_hitbox.name = "EditorHitbox"
 			editor_hitbox.monitorable = false
 			editor_hitbox.monitoring = false
@@ -81,10 +79,10 @@ func _ready():
 			collision_shape.shape = RectangleShape2D.new()
 			editor_hitbox.add_child(collision_shape)
 		
-		if is_instance_valid(editor_hitbox):
-			var editor = get_tree().current_scene
-			editor_hitbox.connect("mouse_entered", editor, "object_hovered", [self])
-			editor_hitbox.connect("mouse_exited", editor, "object_unhovered", [self])
+		
+		var editor = get_tree().current_scene
+		editor_hitbox.connect("mouse_entered", editor, "object_hovered", [self])
+		editor_hitbox.connect("mouse_exited", editor, "object_unhovered", [self])
 	else:
 		editor_hitbox.queue_free()
 	

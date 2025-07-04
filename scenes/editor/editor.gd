@@ -80,10 +80,14 @@ func _physics_process(delta):
 func object_hovered(object: GameObject):
 	# Look you come up with a better object ID system when you have none
 	hovered_objects.get_or_add(object.name, object)
+	object.modulate.a = .5
+	print(hovered_objects)
 
 
 func object_unhovered(object: GameObject):
 	hovered_objects.erase(object.name)
+	object.modulate.a = 1
+	print(hovered_objects)
 
 
 func _update_editor_framerate():

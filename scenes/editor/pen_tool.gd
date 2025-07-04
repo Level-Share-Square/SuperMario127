@@ -16,8 +16,7 @@ func _update(delta: float):
 		if tile_mode:
 			place_tile(placeable_items.placeable_items["bricks"])
 		else:
-			if Input.is_action_just_pressed("place"):
-				place_object(placeable_items.placeable_items["coin"])
+			place_object(placeable_items.placeable_items["coin"])
 
 
 func place_tile(tile_item: PlaceableTile):
@@ -41,9 +40,14 @@ func place_tile(tile_item: PlaceableTile):
 
 
 func place_object(object_item: PlaceableObject):
-	var data = create_object_data(editor.mouse_position.snapped(Vector2(8, 8)), object_item.object_id, object_item.palette)
-	
-	shared.create_object(data, true)
+	if Input.is_action_just_pressed("place"):
+		var data = create_object_data(editor.mouse_position.snapped(Vector2(8, 8)), object_item.object_id, object_item.palette)
+		shared.create_object(data, true)
+	elif Input.is_action_pressed("erase"):
+		for object in editor.hovered_objects.values():
+			editor.hovered_objects.erase(object.name)
+			shared.destroy_object(object, true)
+			break
 
 
 func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectData:
