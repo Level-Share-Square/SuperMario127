@@ -10,11 +10,10 @@ export(NodePath) var shared_path
 
 var placed_item_property = null
 
-var mouse_position := Vector2.ZERO
-var mouse_tile_position := Vector2.ZERO
+var hovered_objects: Dictionary = {}
 
+var mouse_position := Vector2.ZERO
 var last_mouse_pos := Vector2.ZERO
-var last_mouse_tile_pos := Vector2.ZERO
 
 var left_held: bool = false
 var right_held: bool = false
@@ -67,20 +66,24 @@ func _unhandled_input(event):
 		right_held = true
 	else:
 		right_held = false
-	
-	print("left: ", left_held)
-	print("right: ", right_held)
 
 
 func _physics_process(delta):
 	mouse_position = get_global_mouse_position()
-	mouse_tile_position = (mouse_position / 32).floor()
 	
 	if is_instance_valid(current_tool):
 		current_tool._update(delta)
 	
 	last_mouse_pos = mouse_position
-	last_mouse_tile_pos = mouse_tile_position
+
+
+func object_hovered(object: GameObject):
+	# Look you come up with a better object ID system when you have none
+	hovered_objects.get_or_add(object.name, object)
+
+
+func object_unhovered(object: GameObject):
+	hovered_objects.erase(object.name)
 
 
 func _update_editor_framerate():
