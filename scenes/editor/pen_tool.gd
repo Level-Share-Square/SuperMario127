@@ -40,7 +40,7 @@ func place_tile(tile_item: PlaceableTile):
 
 
 func place_object(object_item: PlaceableObject):
-	if Input.is_action_just_pressed("place"):
+	if Input.is_action_just_pressed("place") and editor.hovered_objects.size() <= 0:
 		var data = create_object_data(editor.mouse_position.snapped(Vector2(8, 8)), object_item.object_id, object_item.palette)
 		shared.create_object(data, true)
 	elif Input.is_action_pressed("erase"):
