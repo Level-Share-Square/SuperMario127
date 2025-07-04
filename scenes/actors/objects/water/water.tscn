@@ -37,7 +37,7 @@ float rand(vec2 co){
 }
 
 float sine(vec2 uv_coords, float time, float arg1, float arg2) {
-	return sin((uv_coords.x * arg1) + time * arg2);
+	return sin((uv_coords.x * arg1 * (x_size / 1500.0)) + time * arg2);
 }
 
 void fragment() {
