@@ -25,20 +25,20 @@
 [ext_resource path="res://scenes/menu/pause/pause_main/counters.gd" type="Script" id=23]
 [ext_resource path="res://scenes/menu/level_portal/icons/ratings.png" type="Texture" id=24]
 
-[sub_resource type="Gradient" id=1]
+[sub_resource type="Gradient" id=25]
 offsets = PoolRealArray( 0.0502793, 0.944134, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.831373, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture2D" id=18]
-gradient = SubResource( 1 )
+gradient = SubResource( 25 )
 fill_from = Vector2( 0, 1 )
 fill_to = Vector2( 0, 0 )
 
-[sub_resource type="Gradient" id=16]
+[sub_resource type="Gradient" id=24]
 colors = PoolColorArray( 0, 0.0431373, 0.313726, 0.878431, 0.0392157, 0.282353, 0.423529, 0.25098 )
 
 [sub_resource type="GradientTexture2D" id=17]
-gradient = SubResource( 16 )
+gradient = SubResource( 24 )
 fill = 1
 fill_from = Vector2( 0, 1 )
 
@@ -115,7 +115,7 @@ tracks/1/keys = {
 "values": [ Vector2( 384, -32 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Buttons:rect_position")
+tracks/2/path = NodePath("Buttons:rect_position:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -124,7 +124,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -247, 252 ) ]
+"values": [ -247.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("BlueBar:rect_position")
@@ -204,7 +204,7 @@ tracks/1/keys = {
 "values": [ Vector2( 264, 0 ), Vector2( 384, -32 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Buttons:rect_position")
+tracks/2/path = NodePath("Buttons:rect_position:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -213,7 +213,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.35 ),
 "transitions": PoolRealArray( 2, 1 ),
 "update": 0,
-"values": [ Vector2( -12, 252 ), Vector2( -247, 252 ) ]
+"values": [ -12.0, -247.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("BlueBar:rect_position")
@@ -294,7 +294,7 @@ modulate = Color( 0, 0.0431373, 0.313726, 0.878431 )
 margin_left = -2.0
 margin_top = 443.0
 margin_right = 488.0
-margin_bottom = 656.0
+margin_bottom = 655.999
 rect_rotation = 15.0
 texture = SubResource( 18 )
 expand = true
@@ -302,7 +302,6 @@ expand = true
 [node name="Buttons" type="MarginContainer" parent="."]
 modulate = Color( 0, 0, 1, 0 )
 margin_left = -247.0
-margin_top = 252.0
 margin_right = 47.0
 margin_bottom = 432.0
 custom_constants/margin_right = 0
@@ -316,15 +315,16 @@ root_path = NodePath("../..")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Buttons"]
 margin_right = 230.0
-margin_bottom = 152.0
+margin_bottom = 404.0
 rect_min_size = Vector2( 230, 0 )
 size_flags_horizontal = 0
 alignment = 2
 
 [node name="Resume" type="Button" parent="Buttons/VBoxContainer"]
 unique_name_in_owner = true
+margin_top = 252.0
 margin_right = 230.0
-margin_bottom = 22.0
+margin_bottom = 274.0
 rect_min_size = Vector2( 0, 22 )
 theme_type_variation = "OptionsToggle"
 text = "Resume"
@@ -345,9 +345,9 @@ script = ExtResource( 15 )
 offset = Vector2( -64, 0 )
 
 [node name="Retry" type="Button" parent="Buttons/VBoxContainer"]
-margin_top = 38.0
+margin_top = 290.0
 margin_right = 230.0
-margin_bottom = 60.0
+margin_bottom = 312.0
 rect_min_size = Vector2( 0, 22 )
 theme_type_variation = "OptionsToggle"
 text = "Retry"
@@ -368,9 +368,10 @@ script = ExtResource( 15 )
 offset = Vector2( -52, 0 )
 
 [node name="RetryStart" type="Button" parent="Buttons/VBoxContainer"]
-margin_top = 76.0
+unique_name_in_owner = true
+margin_top = 328.0
 margin_right = 230.0
-margin_bottom = 98.0
+margin_bottom = 350.0
 rect_min_size = Vector2( 0, 22 )
 theme_type_variation = "OptionsToggle"
 custom_colors/font_color_focus = Color( 0.694118, 0.2, 0.2, 1 )
@@ -401,15 +402,41 @@ script = ExtResource( 9 )
 countdown_style = 1
 countdown_time = 3
 
-[node name="Padding" type="Control" parent="Buttons/VBoxContainer"]
-margin_top = 114.0
+[node name="ShineMap" type="Button" parent="Buttons/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_top = 328.0
 margin_right = 230.0
-margin_bottom = 114.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 0, 22 )
+theme_type_variation = "OptionsToggle"
+text = "Shine Map"
+align = 2
+icon_align = 1
+script = ExtResource( 13 )
+
+[node name="Icon" type="TextureRect" parent="Buttons/VBoxContainer/ShineMap"]
+modulate = Color( 0.0431373, 0.290196, 0.427451, 1 )
+margin_left = 134.0
+margin_top = 2.0
+margin_right = 152.0
+margin_bottom = 20.0
+mouse_filter = 2
+texture = ExtResource( 22 )
+expand = true
+stretch_mode = 6
+script = ExtResource( 15 )
+offset = Vector2( -78, 0 )
+
+[node name="Padding" type="Control" parent="Buttons/VBoxContainer"]
+margin_top = 366.0
+margin_right = 230.0
+margin_bottom = 366.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Buttons/VBoxContainer"]
-margin_top = 130.0
+margin_top = 382.0
 margin_right = 230.0
-margin_bottom = 152.0
+margin_bottom = 404.0
 custom_constants/separation = 12
 script = ExtResource( 10 )
 
@@ -442,17 +469,6 @@ offset = Vector2( -40, 0 )
 script = ExtResource( 9 )
 countdown_style = 2
 countdown_time = 3
-
-[node name="ShineMap" type="Button" parent="Buttons/VBoxContainer/HBoxContainer"]
-visible = false
-margin_left = 59.0
-margin_right = 142.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 0, 22 )
-size_flags_horizontal = 3
-theme_type_variation = "OptionsToggle"
-text = "Shine Map"
-script = ExtResource( 14 )
 
 [node name="Options" type="Button" parent="Buttons/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -815,6 +831,8 @@ anims/transition = SubResource( 6 )
 [connection signal="pressed" from="Buttons/VBoxContainer/Retry" to="Buttons/ButtonFunctions" method="retry"]
 [connection signal="pressed" from="Buttons/VBoxContainer/RetryStart/Countdown" to="Buttons/ButtonFunctions" method="retry_start"]
 [connection signal="text_changed" from="Buttons/VBoxContainer/RetryStart/Countdown" to="Buttons/VBoxContainer/RetryStart/Icon" method="update_offset"]
+[connection signal="pressed" from="Buttons/VBoxContainer/ShineMap" to="." method="transition" binds= [ "ShineMap" ]]
+[connection signal="pressed" from="Buttons/VBoxContainer/ShineMap" to="Focus" method="set_default_focus" binds= [ "%ShineMap" ]]
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/Quit/Countdown" to="Buttons/ButtonFunctions" method="quit"]
 [connection signal="text_changed" from="Buttons/VBoxContainer/HBoxContainer/Quit/Countdown" to="Buttons/VBoxContainer/HBoxContainer/Quit/Icon" method="update_offset"]
 [connection signal="pressed" from="Buttons/VBoxContainer/HBoxContainer/Options" to="." method="transition" binds= [ "Options" ]]

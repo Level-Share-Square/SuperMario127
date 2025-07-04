@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
 [ext_resource path="res://scenes/menu/pause/pause_main/pause_main.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/menu/pause/pause_controller.gd" type="Script" id=4]
+[ext_resource path="res://scenes/menu/pause/shine_map/shine_map.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -139,6 +140,11 @@ visible = false
 [node name="Options" parent="Screens" instance=ExtResource( 1 )]
 visible = false
 
+[node name="ShineMap" parent="Screens" instance=ExtResource( 5 )]
+visible = false
+
 [connection signal="timeout" from="Cooldown" to="." method="cooldown_timeout"]
+[connection signal="screen_opened" from="Screens/MainMenu" to="Screens/MainMenu/Counters" method="screen_opened"]
 [connection signal="start_transition" from="Screens/MainMenu" to="Cooldown" method="start"]
 [connection signal="start_transition" from="Screens/Options" to="Cooldown" method="start"]
+[connection signal="screen_opened" from="Screens/ShineMap" to="Screens/ShineMap/MarginContainer/Panel/MarginContainer/ScrollContainer/CenterContainer/Levels" method="screen_opened"]

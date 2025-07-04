@@ -10,7 +10,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 72, 78 )
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=4]
 code = "// Converted/modified from ShaderToy: https://www.shadertoy.com/view/ldBXDD
 // Attach this shader to a ColorRect
 
@@ -31,7 +31,7 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+shader = SubResource( 4 )
 shader_param/wave_count = 12.0
 shader_param/speed = 9.0
 shader_param/height = 0.0

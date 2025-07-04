@@ -1,0 +1,394 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://scenes/menu/theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/menu/ui_focus.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/hover.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/click2.wav" type="AudioStream" id=4]
+[ext_resource path="res://scenes/menu/screen.gd" type="Script" id=5]
+[ext_resource path="res://scenes/menu/pause/shine_map/levels.gd" type="Script" id=6]
+[ext_resource path="res://scenes/menu/levels_list/icons/back.png" type="Texture" id=7]
+[ext_resource path="res://scenes/menu/button_scripts/button_scroller.gd" type="Script" id=8]
+[ext_resource path="res://scenes/menu/button_scripts/button_hover-horizontal.gd" type="Script" id=13]
+[ext_resource path="res://scenes/menu/button_scripts/icon_helper.gd" type="Script" id=15]
+
+[sub_resource type="Gradient" id=16]
+colors = PoolColorArray( 0, 0.0431373, 0.313726, 0.878431, 0.0392157, 0.282353, 0.423529, 0.25098 )
+
+[sub_resource type="GradientTexture2D" id=17]
+gradient = SubResource( 16 )
+fill = 1
+fill_from = Vector2( 0, 1 )
+
+[sub_resource type="Gradient" id=23]
+offsets = PoolRealArray( 0.0502793, 0.944134, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.831373, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture2D" id=24]
+gradient = SubResource( 23 )
+fill_from = Vector2( 0, 1 )
+fill_to = Vector2( 0, 0 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Buttons:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -247.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Buttons:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MarginContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MarginContainer:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 4, 32 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Background:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 724, 50 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Background:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("BlueBar:rect_position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -16, 430 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "transition"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Buttons:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ -12.0, -247.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Buttons:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MarginContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MarginContainer:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 4, 32 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Background:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 740, 18 ), Vector2( 744, 50 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Background:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("BlueBar:rect_position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( -16, 366 ), Vector2( -16, 430 ) ]
+}
+
+[node name="ShineMap" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+theme = ExtResource( 1 )
+script = ExtResource( 5 )
+
+[node name="Focus" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+default_focus_path = NodePath("../Buttons/VBoxContainer/Return")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 3 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 4 )
+volume_db = -10.0
+bus = "Sounds"
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 724.0
+margin_top = 50.0
+margin_right = 1150.0
+margin_bottom = 552.0
+rect_rotation = 89.0
+texture = SubResource( 17 )
+expand = true
+
+[node name="Glow" type="TextureRect" parent="Background"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 4.0
+margin_bottom = 4.0
+rect_rotation = -3.0
+texture = SubResource( 17 )
+expand = true
+
+[node name="Glow2" type="TextureRect" parent="Background/Glow"]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 4.0
+margin_bottom = 4.0
+rect_rotation = 4.0
+texture = SubResource( 17 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = 4.0
+margin_bottom = 32.0
+custom_constants/margin_right = 24
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
+
+[node name="Panel" type="PanelContainer" parent="MarginContainer"]
+self_modulate = Color( 0, 0, 0, 0 )
+margin_left = 264.0
+margin_top = 36.0
+margin_right = 744.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 480, 396 )
+rect_clip_content = true
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 476.0
+margin_bottom = 392.0
+custom_constants/margin_bottom = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Panel/MarginContainer"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 460.0
+margin_bottom = 388.0
+rect_clip_content = false
+size_flags_horizontal = 9
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/Panel/MarginContainer/ScrollContainer"]
+margin_right = 448.0
+size_flags_horizontal = 3
+
+[node name="Levels" type="VBoxContainer" parent="MarginContainer/Panel/MarginContainer/ScrollContainer/CenterContainer"]
+margin_left = 224.0
+margin_right = 224.0
+custom_constants/separation = 0
+script = ExtResource( 6 )
+
+[node name="ButtonScroller" type="Button" parent="MarginContainer/Panel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 476.0
+margin_bottom = 392.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+flat = true
+script = ExtResource( 8 )
+scroll_path = NodePath("../MarginContainer/ScrollContainer")
+scroll_speed = 4.0
+
+[node name="BlueBar" type="TextureRect" parent="."]
+modulate = Color( 0, 0.0431373, 0.313726, 0.878431 )
+margin_left = -16.0
+margin_top = 430.0
+margin_right = 255.0
+margin_bottom = 547.0
+rect_rotation = 15.0
+texture = SubResource( 24 )
+expand = true
+
+[node name="Buttons" type="MarginContainer" parent="."]
+modulate = Color( 0, 0, 1, 0 )
+margin_left = -247.0
+margin_right = -17.0
+margin_bottom = 432.0
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Buttons"]
+margin_right = 144.0
+margin_bottom = 412.0
+rect_min_size = Vector2( 144, 0 )
+size_flags_horizontal = 0
+alignment = 2
+
+[node name="Return" type="Button" parent="Buttons/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 390.0
+margin_right = 144.0
+margin_bottom = 412.0
+rect_min_size = Vector2( 47, 22 )
+size_flags_horizontal = 3
+theme_type_variation = "OptionsToggle"
+custom_colors/font_color_focus = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_hover = Color( 0.694118, 0.2, 0.2, 1 )
+custom_colors/font_color_pressed = Color( 0.694118, 0.2, 0.2, 1 )
+text = "Return"
+align = 2
+script = ExtResource( 13 )
+lerp_speed = 18.0
+
+[node name="Icon" type="TextureRect" parent="Buttons/VBoxContainer/Return"]
+modulate = Color( 0.694118, 0.2, 0.2, 1 )
+margin_left = 72.0
+margin_top = 3.0
+margin_right = 88.0
+margin_bottom = 19.0
+mouse_filter = 2
+texture = ExtResource( 7 )
+expand = true
+script = ExtResource( 15 )
+disabled_color = Color( 0.427451, 0.2, 0.2, 1 )
+count_offsets = [ 0, -19, -21, -21 ]
+offset = Vector2( -56, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/transition = SubResource( 2 )
+
+[connection signal="screen_opened" from="." to="Focus" method="focus_node" flags=3]
+[connection signal="screen_opened" from="." to="MarginContainer/Panel/MarginContainer/ScrollContainer/CenterContainer/Levels" method="screen_opened"]
+[connection signal="back_press" from="Focus" to="Focus" method="set_default_focus" binds= [ "%Resume" ]]
+[connection signal="pressed" from="Buttons/VBoxContainer/Return" to="." method="transition" binds= [ "MainMenu" ]]

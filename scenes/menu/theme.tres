@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=92 format=2]
+[gd_resource type="Theme" load_steps=95 format=2]
 
 [ext_resource path="res://assets/fonts/DelfinoFont20.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/options/buttons/grabber_highlight.png" type="Texture" id=2]
@@ -234,6 +234,11 @@ shadow_color = Color( 0.145098, 0, 0.0313726, 0.25098 )
 shadow_size = 2
 shadow_offset = Vector2( 2, 4 )
 anti_aliasing_size = 2.0
+
+[sub_resource type="StyleBoxLine" id=98]
+color = Color( 1, 1, 1, 0.501961 )
+grow_begin = 0.0
+grow_end = 0.0
 
 [sub_resource type="ImageTexture" id=41]
 
@@ -655,6 +660,19 @@ corner_radius_top_right = 32
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 32
 
+[sub_resource type="StyleBoxFlat" id=97]
+content_margin_left = 6.0
+content_margin_right = 6.0
+content_margin_top = 6.0
+content_margin_bottom = 6.0
+bg_color = Color( 0, 0, 0, 0.752941 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 0 )
+border_blend = true
+
 [sub_resource type="Gradient" id=19]
 offsets = PoolRealArray( 0.335196, 0.653631 )
 colors = PoolColorArray( 0.290196, 0, 0.490196, 1, 0.545098, 0.278431, 0.6, 1 )
@@ -778,6 +796,12 @@ bg_color = Color( 1, 1, 1, 0.376471 )
 corner_radius_top_left = 6
 corner_radius_bottom_left = 6
 
+[sub_resource type="StyleBoxLine" id=99]
+color = Color( 1, 1, 1, 0.501961 )
+grow_begin = 0.0
+grow_end = 0.0
+vertical = true
+
 [resource]
 default_font = ExtResource( 1 )
 AlternateButton/base_type = "Button"
@@ -815,6 +839,7 @@ Cursor/base_type = "Panel"
 Cursor/styles/panel = SubResource( 88 )
 FolderPanel/base_type = "Panel"
 FolderPanel/styles/panel = SubResource( 53 )
+HSeparator/styles/separator = SubResource( 98 )
 HSlider/icons/grabber = ExtResource( 3 )
 HSlider/icons/grabber_disabled = SubResource( 41 )
 HSlider/icons/grabber_highlight = ExtResource( 2 )
@@ -919,6 +944,9 @@ SaveDecor/base_type = "Panel"
 SaveDecor/styles/panel = SubResource( 90 )
 SaveOutline/base_type = "Panel"
 SaveOutline/styles/panel = SubResource( 91 )
+ShineTooltip/base_type = "Label"
+ShineTooltip/fonts/font = ExtResource( 5 )
+ShineTooltip/styles/normal = SubResource( 97 )
 Special/base_type = "Button"
 Special/colors/font_color = Color( 1, 1, 1, 1 )
 Special/colors/font_color_focus = Color( 1, 1, 1, 1 )
@@ -944,3 +972,4 @@ VScrollBar/styles/grabber = SubResource( 45 )
 VScrollBar/styles/grabber_highlight = SubResource( 47 )
 VScrollBar/styles/grabber_pressed = SubResource( 48 )
 VScrollBar/styles/scroll = SubResource( 46 )
+VSeparator/styles/separator = SubResource( 99 )

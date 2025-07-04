@@ -494,6 +494,7 @@ enabled_focus_mode = 0
 flat = true
 
 [node name="TextureButton" type="TextureButton" parent="UI/EditorUI"]
+visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -506,7 +507,6 @@ texture_normal = ExtResource( 29 )
 expand = true
 
 [node name="ItemPickerWindow" parent="UI" instance=ExtResource( 9 )]
-visible = false
 
 [node name="EditorOptionsWindow" parent="UI" instance=ExtResource( 21 )]
 margin_left = 344.0

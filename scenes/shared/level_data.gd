@@ -52,9 +52,12 @@ func is_hub_level() -> bool:
 func is_playing_hub_level() -> bool:
 	return is_hub_level() and selected_file > -1
 
-func get_meta_collectibles() -> Dictionary:
+func get_meta_dict() -> Dictionary:
 	var save_folder: String = level_list_util.get_save_folder(working_folder, selected_file)
-	var meta_dict: Dictionary = save_meta_util.load_meta_file(save_folder)
+	return save_meta_util.load_meta_file(save_folder)
+
+func get_meta_collectibles() -> Dictionary:
+	var meta_dict: Dictionary = get_meta_dict()
 	return save_meta_util.get_collectible_totals(meta_dict)
 
 ## caching

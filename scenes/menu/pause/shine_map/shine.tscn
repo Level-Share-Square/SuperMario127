@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/actors/objects/shine/frames_normal.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://scenes/actors/objects/shine/frames_outline.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://scenes/menu/pause/shine_map/custom_tooltip.gd" type="Script" id=4]
+
+[node name="Shine" type="Control"]
+margin_right = 27.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 32, 32 )
+script = ExtResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 2.5, 0 )
+frames = ExtResource( 1 )
+centered = false
+
+[node name="Outline" type="AnimatedSprite" parent="AnimatedSprite"]
+frames = ExtResource( 2 )
+centered = false

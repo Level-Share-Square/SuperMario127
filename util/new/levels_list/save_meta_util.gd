@@ -74,11 +74,17 @@ static func update_meta_level(level_id: String, meta_dict: Dictionary, campaign_
 	var collectible_counts: Dictionary = level_info.get_collectible_counts()
 	meta_dict["levels"][level_id]["total_shines"] = collectible_counts["total_shines"]
 	meta_dict["levels"][level_id]["total_star_coins"] = collectible_counts["total_star_coins"]
+	meta_dict["levels"][level_id]["collected_star_coins"] = level_info.collected_star_coins.values()
 	
 	meta_dict["levels"][level_id]["collected_shines"] = []
-	meta_dict["levels"][level_id]["collected_star_coins"] = level_info.collected_star_coins.values()
-	for shine_detail in level_info.shine_details:
-		meta_dict["levels"][level_id]["collected_shines"].append(level_info.collected_shines[str(shine_detail.get("id", 0))])
+	meta_dict["levels"][level_id]["shine_details"] = []
+	meta_dict["levels"][level_id]["shine_times"] = []
+	
+	for shine_dictionary in level_info.shine_details:
+		var shine_id: String = str(shine_dictionary.get("id", 0))
+		meta_dict["levels"][level_id]["collected_shines"].append(level_info.collected_shines[shine_id])
+		meta_dict["levels"][level_id]["shine_details"].append(shine_dictionary)
+		meta_dict["levels"][level_id]["shine_times"].append(level_info.time_scores[shine_id])
 	
 	return meta_dict
 
