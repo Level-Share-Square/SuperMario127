@@ -364,7 +364,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/misc/http_thumbnails.gd"
 }, {
-"base": "Reference",
+"base": "ScrollContainer",
 "class": "HelpPage",
 "language": "GDScript",
 "path": "res://scenes/oldeditor/window/HelpPage.gd"
@@ -549,7 +549,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/ParticleCollection.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "PlaceableItem",
 "language": "GDScript",
 "path": "res://scenes/editor/items/placeable_item.gd"
@@ -825,6 +825,11 @@ _global_script_classes=[ {
 "path": "res://util/new/levels_list/level_list_util.gd"
 }, {
 "base": "Reference",
+"class": "line_util",
+"language": "GDScript",
+"path": "res://util/new/line_util.gd"
+}, {
+"base": "Reference",
 "class": "lss_link_util",
 "language": "GDScript",
 "path": "res://util/new/levels_list/lss_link_util.gd"
@@ -1018,6 +1023,7 @@ _global_script_class_icons={
 "input_util": "",
 "level_code_util": "",
 "level_list_util": "",
+"line_util": "",
 "lss_link_util": "",
 "save_meta_util": "",
 "sort_file_util": "",

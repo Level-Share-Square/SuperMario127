@@ -22,6 +22,8 @@ export var layer_shift: int = 0
 export var lock_layer: bool = false
 export var ignore_layer_disabling: bool = false
 
+export var generate_editor_hitbox: bool = false
+
 var layer: int = 3
 var z_layer: int = 0
 
@@ -39,8 +41,6 @@ var editable_properties : PoolStringArray = []
 var property_value_to_name := {}
 var property_value_menus := {}
 
-signal process
-signal physics_process
 signal property_changed(key, value)
 
 var process_frame_counter = 0
@@ -50,6 +50,9 @@ var has_process_connection = false
 var has_physics_connection = false
 
 export var help_menu_text := "Base help menu text."
+
+onready var editor_hitbox: Area2D = get_node_or_null("EditorHitbox")
+
 
 func _ready():
 	if visible == false and mode == 1:
@@ -65,18 +68,41 @@ func _ready():
 	
 	z_layer = layer + LevelShared.layer_index_offset
 	
-	if get_tree().current_scene.name == "Editor":
-		var polygons: Array = []
-		create_collision_polygons_from_tree(self, Transform2D.IDENTITY, polygons)
-		
-		if polygons.size() > 0:
-			var hitbox := EditorHitbox.new()
-			hitbox.name = "EditorHitbox"
+	
+	if get_tree().current_scene.mode == 1:
+		if generate_editor_hitbox:
+			if is_instance_valid(editor_hitbox):
+				editor_hitbox.queue_free()
+			
+			editor_hitbox = Area2D.new()
+			editor_hitbox.name = "EditorHitbox"
+			editor_hitbox.monitorable = false
+			editor_hitbox.monitoring = false
+			add_child(editor_hitbox)
+			
+			var polygons: Array = []
+			create_collision_polygons_from_tree(self, Transform2D.IDENTITY, polygons)
 			
 			for polygon in polygons:
-				hitbox.add_child(polygon)
+				editor_hitbox.add_child(polygon)
 			
-			add_child(hitbox)
+		elif not is_instance_valid(editor_hitbox):
+			editor_hitbox = Area2D.new()
+			editor_hitbox.name = "EditorHitbox"
+			editor_hitbox.monitorable = false
+			editor_hitbox.monitoring = false
+			add_child(editor_hitbox)
+			
+			var collision_shape = CollisionShape2D.new()
+			collision_shape.shape = RectangleShape2D.new()
+			editor_hitbox.add_child(collision_shape)
+		
+		var editor = get_tree().current_scene
+		editor_hitbox.connect("mouse_entered", editor, "object_hovered", [self])
+		editor_hitbox.connect("mouse_exited", editor, "object_unhovered", [self])
+	else:
+		if is_instance_valid(editor_hitbox):
+			editor_hitbox.queue_free()
 	
 	if lock_layer:
 		set_property_menu("layer", ["option", 1, layer, ['Way Background', 'Very Background', 'Background', 'Ground', 'Foreground', 'Very Foreground']])
@@ -121,6 +147,7 @@ func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D
 	for child in node.get_children():
 		if child is Node2D:
 			create_collision_polygons_from_tree(child, node_transform * child.transform, array)
+
 
 
 func is_savable_property(key) -> bool:
@@ -240,4 +267,3 @@ func parts_input_handler(event, object):
 					object.parts = 1
 				object.set_property("parts", object.parts, true)
 				object.update_parts()
-

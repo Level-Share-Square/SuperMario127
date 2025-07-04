@@ -1,5 +1,6 @@
 extends EditorTool
 
+# temporary for testing
 export var placeable_items: Resource
 
 var level_bounds: Rect2
@@ -15,28 +16,38 @@ func _update(delta: float):
 		if tile_mode:
 			place_tile(placeable_items.placeable_items["bricks"])
 		else:
-			if Input.is_action_just_pressed("place"):
-				place_object(placeable_items.placeable_items["coin"])
+			place_object(placeable_items.placeable_items["coin"])
 
 
 func place_tile(tile_item: PlaceableTile):
-	var mouse_tile_position = editor.mouse_tile_position
-	var last_mouse_tile_pos = editor.last_mouse_tile_pos
+	var mouse_tile_position = (editor.mouse_position / editor.TILE_SIZE.x).floor()
+	var last_mouse_tile_pos = (editor.last_mouse_pos / editor.TILE_SIZE.y).floor()
 	
-	if not level_bounds.has_point(editor.mouse_tile_position):
+	if not level_bounds.has_point(mouse_tile_position):
 		return
 	
 	if last_mouse_tile_pos != mouse_tile_position or Input.is_action_just_pressed("place") or Input.is_action_just_pressed("erase"):
+		var tiles: PoolVector2Array = line_util.get_line(mouse_tile_position, last_mouse_tile_pos)
+		
 		if editor.left_held and not editor.right_held:
-			shared.set_tile(mouse_tile_position.x, mouse_tile_position.y, LevelShared.TileLayers.Middle, tile_item.tileset_id, tile_item.tile_id, tile_item.palette)
+			for pos in tiles:
+				if level_bounds.has_point(pos):
+					shared.set_tile(pos.x, pos.y, LevelShared.TileLayers.Middle, tile_item.tileset_id, tile_item.tile_id, tile_item.palette)
 		elif editor.right_held and not editor.left_held:
-			shared.set_tile(mouse_tile_position.x, mouse_tile_position.y, LevelShared.TileLayers.Middle, 0, 0, 0)
+			for pos in tiles:
+				if level_bounds.has_point(pos):
+					shared.set_tile(pos.x, pos.y, LevelShared.TileLayers.Middle, 0, 0, 0)
 
 
 func place_object(object_item: PlaceableObject):
-	var data = create_object_data(editor.mouse_position, object_item.object_id, object_item.palette)
-	
-	shared.create_object(data, true)
+	if Input.is_action_just_pressed("place") and editor.hovered_objects.size() <= 0:
+		var data = create_object_data(editor.mouse_position.snapped(Vector2(8, 8)), object_item.object_id, object_item.palette)
+		shared.create_object(data, true)
+	elif Input.is_action_pressed("erase"):
+		for object in editor.hovered_objects.values():
+			editor.hovered_objects.erase(object.name)
+			shared.destroy_object(object, true)
+			break
 
 
 func create_object_data(position: Vector2, object_id: int, palette: int) -> ObjectData:
@@ -51,5 +62,3 @@ func create_object_data(position: Vector2, object_id: int, palette: int) -> Obje
 	data.properties.append(LevelShared.Layers.Middle)
 	
 	return data
-	
-	
