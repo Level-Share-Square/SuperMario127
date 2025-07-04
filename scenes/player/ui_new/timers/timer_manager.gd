@@ -28,7 +28,7 @@ func setting_changed(key: String, new_value: bool):
 func update_visibility():
 	var current_scene = get_tree().get_current_scene()
 	if "mode" in current_scene:
-		time_score.visible = (shown and current_scene.mode == 0 and Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible)
+		time_score.visible = (shown and current_scene.mode == 0 and Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible and not Singleton.CurrentLevelData.is_hub_level())
 	else:
 		time_score.visible = false
 
