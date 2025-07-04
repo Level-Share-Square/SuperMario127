@@ -22,6 +22,8 @@ export var layer_shift: int = 0
 export var lock_layer: bool = false
 export var ignore_layer_disabling: bool = false
 
+export var generate_editor_hitbox: bool = false
+
 var layer: int = 3
 var z_layer: int = 0
 
@@ -68,7 +70,23 @@ func _ready():
 	
 	
 	if get_tree().current_scene.mode == 1:
-		if not is_instance_valid(editor_hitbox):
+		if generate_editor_hitbox:
+			if is_instance_valid(editor_hitbox):
+				editor_hitbox.queue_free()
+			
+			editor_hitbox = Area2D.new()
+			editor_hitbox.name = "EditorHitbox"
+			editor_hitbox.monitorable = false
+			editor_hitbox.monitoring = false
+			add_child(editor_hitbox)
+			
+			var polygons: Array = []
+			create_collision_polygons_from_tree(self, Transform2D.IDENTITY, polygons)
+			
+			for polygon in polygons:
+				editor_hitbox.add_child(polygon)
+			
+		elif not is_instance_valid(editor_hitbox):
 			editor_hitbox = Area2D.new()
 			editor_hitbox.name = "EditorHitbox"
 			editor_hitbox.monitorable = false
@@ -79,12 +97,12 @@ func _ready():
 			collision_shape.shape = RectangleShape2D.new()
 			editor_hitbox.add_child(collision_shape)
 		
-		
 		var editor = get_tree().current_scene
 		editor_hitbox.connect("mouse_entered", editor, "object_hovered", [self])
 		editor_hitbox.connect("mouse_exited", editor, "object_unhovered", [self])
 	else:
-		editor_hitbox.queue_free()
+		if is_instance_valid(editor_hitbox):
+			editor_hitbox.queue_free()
 	
 	if lock_layer:
 		set_property_menu("layer", ["option", 1, layer, ['Way Background', 'Very Background', 'Background', 'Ground', 'Foreground', 'Very Foreground']])
@@ -92,6 +110,44 @@ func _ready():
 		set_property_menu("layer", ["option", 6, 0, ['Way Background', 'Very Background', 'Background', 'Ground', 'Foreground', 'Very Foreground']])
 	
 	update_layer()
+
+
+func create_collision_polygons_from_tree(node: Node, node_transform: Transform2D, array: Array) -> void:
+	if node is Sprite:
+		var bitmap := BitMap.new()
+		bitmap.create_from_image_alpha(node.texture.get_data())
+		
+		var rect : Rect2
+		if node.region_enabled:
+			rect = node.region_rect
+		else:
+			rect.size = node.texture.get_size()
+		
+		var polygons: Array = bitmap.opaque_to_polygons(rect)
+		for polygon in polygons:
+			for i in range(polygon.size()):
+				var point: Vector2 = polygon[i]
+				point -= rect.position
+				
+				if node.flip_h:
+					point.x = rect.size.x - point.x - 1.0
+				if node.flip_v:
+					point.y = rect.size.y - point.y - 1.0
+				
+				if node.centered:
+					point -= rect.size / 2.0
+				
+				polygon[i] = point
+			
+			var collision_polygon := CollisionPolygon2D.new()
+			collision_polygon.transform = node_transform.translated(node.offset)
+			collision_polygon.polygon = polygon
+			array.append(collision_polygon)
+	
+	for child in node.get_children():
+		if child is Node2D:
+			create_collision_polygons_from_tree(child, node_transform * child.transform, array)
+
 
 
 func is_savable_property(key) -> bool:

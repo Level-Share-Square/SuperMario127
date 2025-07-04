@@ -135,7 +135,9 @@ func update_parts():
 	bounce_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 + 1.5
 	bottom_collision_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 - 2
 	platform_area_shape.shape.extents.x = (left_width + (part_width * parts) + right_width) / 2 + 20
-
+	
+	$VisibilityEnabler2D.rect.size.x = part_width + 224
+	
 	note.position.x = sprite.rect_size.x / 2
 
 func add_body_to_bounce(body):
