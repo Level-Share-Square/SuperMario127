@@ -337,8 +337,10 @@ func collect(body : PhysicsBody2D) -> void:
 		visible = false
 
 		if Singleton.ModeSwitcher.get_node("ModeSwitcherButton").invisible:
+			var is_new_record: bool = Singleton.CurrentLevelData.level_info.is_new_record(id)
+			
 			score_from_before = Singleton.CurrentLevelData.time_score
-			Singleton.CurrentLevelData.level_info.set_shine_collected(id, Singleton.CurrentLevelData.selected_file > -2)
+			Singleton.CurrentLevelData.level_info.set_shine_collected(id, false)
 			Singleton.CurrentLevelData.level_info.update_time_and_coin_score(id, Singleton.CurrentLevelData.selected_file > -2)
 			Singleton.CurrentLevelData.stop_tracking_time_score()
 			if !do_kick_out:
@@ -347,6 +349,12 @@ func collect(body : PhysicsBody2D) -> void:
 				if new_shine_id < level_info.shine_details.size():
 					level_info.selected_shine = new_shine_id
 				get_tree().get_current_scene().get_node("%PauseController").emit_signal("shine_collected")
+			elif Singleton.CurrentLevelData.is_playing_campaign():
+				Singleton.CurrentLevelData.shine_kickout_data = {
+					"title": title,
+					"time_score": score_from_before,
+					"new_record": is_new_record
+				}
 
 func start_shine_dance() -> void:
 	character.set_state_by_name("NoActionState", get_physics_process_delta_time())

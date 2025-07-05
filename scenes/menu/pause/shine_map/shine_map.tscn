@@ -266,12 +266,10 @@ expand = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-anchor_right = 1.0
-anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 32.0
-margin_right = 4.0
-margin_bottom = 32.0
+margin_right = 772.0
+margin_bottom = 464.0
 custom_constants/margin_right = 24
 custom_constants/margin_top = 0
 custom_constants/margin_left = 0

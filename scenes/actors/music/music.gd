@@ -26,6 +26,7 @@ var cur_setting = -1
 var song_cache := []
 var loop := 1.0
 
+var play_music := true
 var play_water := false
 var has_water := false
 var temp_music := false
@@ -194,7 +195,7 @@ func _process(delta) -> void:
 	# change this script so this entire block ceases to exist because it is bad and it makes me simultaniously mad and sad
 	# scenes should ask the music singleton to change the music, the music singleton shouldn't check every frame for if it should change the music
 	if "mode" in current_scene: #script will crash if the scene root doesn't have this property defined
-		var level_song = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.music
+		var level_song = Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area].settings.music if play_music else 0
 		current_song = level_song
 		if current_scene.mode != last_mode or typeof(last_song) != typeof(level_song):
 			change_song(last_song, level_song)

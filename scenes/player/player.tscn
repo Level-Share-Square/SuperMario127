@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=2]
+[gd_scene load_steps=97 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -27,7 +27,7 @@
 [ext_resource path="res://scenes/player/ui_new/text/sign_text.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=26]
 [ext_resource path="res://assets/fonts/New Super Mario Font U.ttf" type="DynamicFontData" id=27]
-[ext_resource path="res://scenes/player/ui_new/shine_get.gd" type="Script" id=28]
+[ext_resource path="res://scenes/player/ui_new/shine/shine_get.gd" type="Script" id=28]
 [ext_resource path="res://scenes/player/ui_new/collectibles/purple_starbits.gd" type="Script" id=29]
 [ext_resource path="res://scenes/player/ui_new/touch/gesture_controls.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/player/ui_new/collectibles/show_max_purples.gd" type="Script" id=31]
@@ -40,6 +40,9 @@
 [ext_resource path="res://scenes/actors/objects/bullet_bill/seek.wav" type="AudioStream" id=38]
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=39]
 [ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
+[ext_resource path="res://scenes/player/ui_new/shine/shine_results.gd" type="Script" id=41]
+[ext_resource path="res://scenes/player/ui_new/shine/High Score.mp3" type="AudioStream" id=42]
+[ext_resource path="res://scenes/player/ui_new/shine/new_record.gd" type="Script" id=43]
 [ext_resource path="res://scenes/actors/objects/p_switch/tick.wav" type="AudioStream" id=58]
 [ext_resource path="res://scenes/actors/objects/p_switch/tick_end.wav" type="AudioStream" id=59]
 [ext_resource path="res://scenes/actors/objects/boo/laugh.wav" type="AudioStream" id=60]
@@ -448,6 +451,210 @@ outline_color = Color( 0, 0.0431373, 0.313726, 1 )
 use_filter = true
 extra_spacing_char = -1
 font_data = ExtResource( 26 )
+
+[sub_resource type="Animation" id=236]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/CenterContainer/TimeScore:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/CenterContainer/TimeScore:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4.0 ]
+}
+
+[sub_resource type="Animation" id=237]
+resource_name = "transition"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 0.9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/CenterContainer/TimeScore:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/CenterContainer/TimeScore:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 0.0, 4.0 ]
+}
+
+[sub_resource type="Animation" id=240]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/NewRecord:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/NewRecord:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 4 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/NewRecord:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=241]
+resource_name = "new_record"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/NewRecord:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.01 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("VBoxContainer/NewRecord:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 4 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("VBoxContainer/NewRecord:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=239]
+outline_size = 2
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 26 )
+
+[sub_resource type="DynamicFont" id=234]
+outline_size = 2
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 26 )
+
+[sub_resource type="StyleBoxFlat" id=235]
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 4.0
+expand_margin_right = 4.0
 
 [sub_resource type="Animation" id=206]
 length = 0.001
@@ -1202,6 +1409,178 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="ShineResults" type="PanelContainer" parent="UIUnder/HUD/Control"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 12.0
+rect_scale = Vector2( 0.8, 0.9 )
+rect_pivot_offset = Vector2( 372, 408 )
+size_flags_horizontal = 4
+size_flags_vertical = 3
+script = ExtResource( 41 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UIUnder/HUD/Control/ShineResults"]
+anims/RESET = SubResource( 236 )
+anims/transition = SubResource( 237 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="UIUnder/HUD/Control/ShineResults"]
+anims/RESET = SubResource( 240 )
+anims/new_record = SubResource( 241 )
+
+[node name="ShowTimer" type="Timer" parent="UIUnder/HUD/Control/ShineResults"]
+wait_time = 0.5
+one_shot = true
+
+[node name="HideTimer" type="Timer" parent="UIUnder/HUD/Control/ShineResults"]
+wait_time = 2.0
+one_shot = true
+
+[node name="RecordTimer" type="Timer" parent="UIUnder/HUD/Control/ShineResults"]
+wait_time = 3.0
+one_shot = true
+
+[node name="HighScore" type="AudioStreamPlayer" parent="UIUnder/HUD/Control/ShineResults"]
+stream = ExtResource( 42 )
+volume_db = 2.0
+bus = "Sounds"
+
+[node name="Count" type="AudioStreamPlayer" parent="UIUnder/HUD/Control/ShineResults"]
+stream = ExtResource( 9 )
+volume_db = -4.0
+bus = "Sounds"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIUnder/HUD/Control/ShineResults"]
+margin_left = 303.0
+margin_top = 334.0
+margin_right = 440.0
+margin_bottom = 404.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+custom_constants/separation = 4
+
+[node name="NewRecord" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 4.0
+margin_right = 137.0
+margin_bottom = 23.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 239 )
+text = "New record!"
+align = 1
+script = ExtResource( 43 )
+max_rotation = 2.0
+rotation_speed = 2.0
+
+[node name="Backing" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/NewRecord"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 239 )
+text = "New record!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer"]
+margin_right = 137.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 0, 19 )
+
+[node name="TimeScore" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/CenterContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 32.0
+margin_top = 4.0
+margin_right = 105.0
+margin_bottom = 23.0
+rect_pivot_offset = Vector2( 30, 9 )
+custom_fonts/font = SubResource( 234 )
+text = "-00:00.00-"
+align = 1
+
+[node name="Backing" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/CenterContainer/TimeScore"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_fonts/font = SubResource( 234 )
+text = "-00:00.00-"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="GetLabel" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer"]
+margin_top = 23.0
+margin_right = 137.0
+margin_bottom = 47.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 11 )
+text = "You got a Shine!"
+align = 1
+
+[node name="Panel" type="Panel" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/GetLabel"]
+modulate = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+show_behind_parent = true
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+rect_min_size = Vector2( 0, 8 )
+custom_styles/panel = SubResource( 235 )
+
+[node name="Backing" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/GetLabel"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "You got a Shine!"
+align = 1
+
+[node name="ShineName" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer"]
+margin_top = 51.0
+margin_right = 137.0
+margin_bottom = 70.0
+custom_fonts/font = SubResource( 234 )
+text = "P-Switch Speedrun"
+align = 1
+
+[node name="Panel" type="Panel" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/ShineName"]
+modulate = Color( 0.247059, 0.27451, 0.737255, 0.752941 )
+show_behind_parent = true
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_bottom = 6.0
+rect_min_size = Vector2( 0, 8 )
+custom_styles/panel = SubResource( 235 )
+
+[node name="Backing" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/ShineName"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_fonts/font = SubResource( 234 )
+text = "P-Switch Speedrun"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
 [node name="SignText" parent="UIUnder" instance=ExtResource( 25 )]
 unique_name_in_owner = true
 modulate = Color( 1, 1, 1, 0 )
@@ -1787,6 +2166,7 @@ align = 1
 valign = 1
 
 [node name="GestureControls" parent="UIOver" instance=ExtResource( 30 )]
+visible = false
 __meta__ = {
 "_edit_lock_": true
 }
@@ -2044,6 +2424,10 @@ stream = ExtResource( 59 )
 bus = "Sounds"
 
 [connection signal="child_entered_tree" from="UIUnder/HUD/Control/TimerManager/RadialTimers" to="UIUnder/HUD/Control/TimerManager/RadialTimers/PurpleStarbits" method="child_entered_tree"]
+[connection signal="timeout" from="UIUnder/HUD/Control/ShineResults/ShowTimer" to="UIUnder/HUD/Control/ShineResults" method="start"]
+[connection signal="timeout" from="UIUnder/HUD/Control/ShineResults/HideTimer" to="UIUnder/HUD/Control/ShineResults" method="hide_ui"]
+[connection signal="timeout" from="UIUnder/HUD/Control/ShineResults/RecordTimer" to="UIUnder/HUD/Control/ShineResults" method="hide_ui"]
+[connection signal="resized" from="UIUnder/HUD/Control/ShineResults/VBoxContainer/NewRecord" to="UIUnder/HUD/Control/ShineResults/VBoxContainer/NewRecord" method="resized"]
 [connection signal="player_removed" from="Viewports" to="Viewports/ViewportContainer/CanvasLayer2/Stamina" method="player_removed"]
 [connection signal="player_removed" from="Viewports" to="Viewports/ViewportContainer2/CanvasLayer2/Stamina" method="player_removed"]
 
