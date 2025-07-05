@@ -159,3 +159,5 @@ bus = "Sounds"
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 rect = Rect2( -128, -128, 256, 256 )
+pause_animations = false
+physics_process_parent = true
