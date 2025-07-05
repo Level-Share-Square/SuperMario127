@@ -35,10 +35,7 @@ func _ready():
 		target_score = Singleton.CurrentLevelData.shine_kickout_data.get("time_score", 0)
 		new_record = Singleton.CurrentLevelData.shine_kickout_data.get("new_record", false)
 		Singleton.CurrentLevelData.shine_kickout_data = {}
-		Singleton.Music.play_music = false
 		show_timer.start()
-	else:
-		Singleton.Music.play_music = true
 
 
 func start():
@@ -74,6 +71,7 @@ func _physics_process(delta):
 func hide_ui():
 	if new_record:
 		new_record = false
+		Singleton.Music.volume_multiplier = 0.33
 		animation_player_2.play("new_record")
 		high_score_sound.play()
 		record_timer.start()
@@ -81,4 +79,4 @@ func hide_ui():
 		if record_label.is_visible_in_tree():
 			animation_player_2.play_backwards("new_record")
 		animation_player.play("transition")
-		Singleton.Music.play_music = true
+		Singleton.Music.volume_multiplier = 1
