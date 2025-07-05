@@ -4,8 +4,12 @@
 code = "shader_type canvas_item;
 
 void fragment() {
-	COLOR = texture(TEXTURE, UV);
-	COLOR.a = COLOR.a / (sin(TIME) + 2.5f);
+	float a = fract(sin(dot(UV, vec2(12.9898, 78.233) * TIME)) * 438.5453) * 2.0;
+	vec4 col = texture(TEXTURE, UV);
+	
+	col.a *= pow(a, 50.0);
+	col.a = clamp(col.a, 0.0, 1.0);
+	COLOR = col;
 }"
 
 [resource]

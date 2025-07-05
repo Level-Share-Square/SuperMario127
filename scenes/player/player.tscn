@@ -640,13 +640,6 @@ use_filter = true
 extra_spacing_char = -1
 font_data = ExtResource( 26 )
 
-[sub_resource type="DynamicFont" id=234]
-outline_size = 2
-outline_color = Color( 0, 0.0431373, 0.313726, 1 )
-use_filter = true
-extra_spacing_char = -1
-font_data = ExtResource( 26 )
-
 [sub_resource type="StyleBoxFlat" id=235]
 bg_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 16
@@ -655,6 +648,13 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 expand_margin_left = 4.0
 expand_margin_right = 4.0
+
+[sub_resource type="DynamicFont" id=234]
+outline_size = 2
+outline_color = Color( 0, 0.0431373, 0.313726, 1 )
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 26 )
 
 [sub_resource type="Animation" id=206]
 length = 0.001
@@ -1410,6 +1410,7 @@ __meta__ = {
 }
 
 [node name="ShineResults" type="PanelContainer" parent="UIUnder/HUD/Control"]
+pause_mode = 1
 modulate = Color( 1, 1, 1, 0 )
 self_modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
@@ -1489,40 +1490,9 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer"]
-margin_right = 137.0
-margin_bottom = 19.0
-rect_min_size = Vector2( 0, 19 )
-
-[node name="TimeScore" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/CenterContainer"]
-modulate = Color( 1, 1, 1, 0 )
-margin_left = 32.0
-margin_top = 4.0
-margin_right = 105.0
-margin_bottom = 23.0
-rect_pivot_offset = Vector2( 30, 9 )
-custom_fonts/font = SubResource( 234 )
-text = "-00:00.00-"
-align = 1
-
-[node name="Backing" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/CenterContainer/TimeScore"]
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 1.0
-margin_bottom = 1.0
-custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
-custom_fonts/font = SubResource( 234 )
-text = "-00:00.00-"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
 [node name="GetLabel" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer"]
-margin_top = 23.0
 margin_right = 137.0
-margin_bottom = 47.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 11 )
 text = "You got a Shine!"
@@ -1550,9 +1520,9 @@ text = "You got a Shine!"
 align = 1
 
 [node name="ShineName" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer"]
-margin_top = 51.0
+margin_top = 28.0
 margin_right = 137.0
-margin_bottom = 70.0
+margin_bottom = 47.0
 custom_fonts/font = SubResource( 234 )
 text = "P-Switch Speedrun"
 align = 1
@@ -1576,6 +1546,37 @@ margin_bottom = 1.0
 custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
 custom_fonts/font = SubResource( 234 )
 text = "P-Switch Speedrun"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer"]
+margin_top = 51.0
+margin_right = 137.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 19 )
+
+[node name="TimeScore" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/CenterContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 32.0
+margin_top = 4.0
+margin_right = 105.0
+margin_bottom = 23.0
+rect_pivot_offset = Vector2( 30, 9 )
+custom_fonts/font = SubResource( 234 )
+text = "-00:00.00-"
+align = 1
+
+[node name="Backing" type="Label" parent="UIUnder/HUD/Control/ShineResults/VBoxContainer/CenterContainer/TimeScore"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+custom_colors/font_color = Color( 0, 0.0431373, 0.313726, 1 )
+custom_fonts/font = SubResource( 234 )
+text = "-00:00.00-"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": true
