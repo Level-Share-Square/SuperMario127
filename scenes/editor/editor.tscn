@@ -496,7 +496,6 @@ stream = ExtResource( 18 )
 volume_db = -10.0
 bus = "Sounds"
 
-[connection signal="zoom_changed" from="EditorCamera" to="UI/Grid" method="update_visibility"]
 [connection signal="pressed" from="UI/EditorUI/Utilities/ItemPicker" to="UI/ItemPickerWindow" method="popup" binds= [ Rect2( 496, 80, 260, 260 ) ]]
 [connection signal="pressed" from="UI/EditorUI/Utilities/Settings" to="UI/EditorOptionsWindow" method="popup" binds= [ Rect2( 344, 66, 420, 220 ) ]]
 [connection signal="open_editor_settings" from="UI/EditorOptionsWindow" to="Options/ScreenManager" method="screen_change" binds= [ "Options" ]]

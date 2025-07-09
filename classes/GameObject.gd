@@ -1,21 +1,9 @@
+class_name GameObject
 extends Node2D
 
-class_name GameObject
 
-var global := {}
-var editor_aliases := {}
+const BG_MODULATE := Color(0.54, 0.54, 0.54)
 
-var mode: int = 0
-var level_data = null
-var level_area = null
-var level_object: WeakRef = null
-var hovered := false
-var shared: LevelShared = null
-
-var enabled := true
-var preview_position := Vector2(72, 92)
-var palette := 0
-var palettes := 0
 
 export(LevelShared.Layers) var default_layer: int = 3
 export var layer_shift: int = 0
@@ -24,34 +12,41 @@ export var ignore_layer_disabling: bool = false
 
 export var generate_editor_hitbox: bool = false
 
+var global := {}
+var editor_aliases := {}
+
+var mode: int = 0
+var level_data: LevelData = null
+var level_area: LevelArea = null
+var level_object: WeakRef = null
+var shared: LevelShared = null
+
+var hovered: bool = false
+
+var enabled: bool = true
+var preview_position := Vector2(72, 92)
+var palette: int = 0
+var palettes: int = 0
+
 var layer: int = 3
 var z_layer: int = 0
-
-const BG_MODULATE := Color(0.54, 0.54, 0.54)
 
 # true if creating a GameObject for the object settings preview
 var is_preview : bool = false
 
-var base_savable_properties : PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible", "layer"]
-var savable_properties : PoolStringArray = []
+var base_savable_properties: PoolStringArray = ["position", "scale", "rotation_degrees", "enabled", "visible", "layer"]
+var savable_properties: PoolStringArray = []
 
-var base_editable_properties : PoolStringArray = ["enabled", "visible", "rotation_degrees", "scale", "position", "layer"]
-var editable_properties : PoolStringArray = []
+var base_editable_properties: PoolStringArray = ["enabled", "visible", "rotation_degrees", "scale", "position", "layer"]
+var editable_properties: PoolStringArray = []
 
 var property_value_to_name := {}
 var property_value_menus := {}
 
-signal property_changed(key, value)
-
-var process_frame_counter = 0
-var physics_frame_counter = 0
-
-var has_process_connection = false
-var has_physics_connection = false
-
-export var help_menu_text := "Base help menu text."
-
 onready var editor_hitbox: Area2D = get_node_or_null("EditorHitbox")
+
+
+signal property_changed(key, value)
 
 
 func _ready():

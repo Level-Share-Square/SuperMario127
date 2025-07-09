@@ -4,7 +4,7 @@ extends EditorTool
 export var placeable_items: Resource
 
 var level_bounds: Rect2
-var tile_mode: bool = true
+var tile_mode: bool = false
 
 
 func _ready():
