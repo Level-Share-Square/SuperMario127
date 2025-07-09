@@ -8,6 +8,7 @@ var selected_file: int = -1
 
 var level_transition_data: Dictionary
 var hub_return_data: Dictionary
+var shine_kickout_data: Dictionary
 
 var level_info : LevelInfo
 var level_data : LevelData
@@ -50,7 +51,10 @@ func is_hub_level() -> bool:
 	return is_campaign and level_id == hub_level
 
 func is_playing_hub_level() -> bool:
-	return is_hub_level() and selected_file > -1
+	return is_hub_level() and is_playing_campaign()
+
+func is_playing_campaign() -> bool:
+	return is_campaign and selected_file > -1
 
 func get_meta_dict() -> Dictionary:
 	var save_folder: String = level_list_util.get_save_folder(working_folder, selected_file)

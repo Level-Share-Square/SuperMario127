@@ -315,6 +315,14 @@ func update_time_and_coin_score(shine_id : int, save_to_disk : bool = true):
 		Singleton2.save_ghost = true
 	if save_to_disk:
 		level_list_util.save_level_save_file(get_save_file_dictionary(), get_save_path())
+		if Singleton.CurrentLevelData.selected_file > -1:
+			update_meta_file()
+
+func is_new_record(shine_id : int) -> bool:
+	var new_time_score = Singleton.CurrentLevelData.time_score
+	if new_time_score < time_scores[str(shine_id)] or time_scores[str(shine_id)] == EMPTY_TIME_SCORE:
+		return true
+	return false
 
 func get_level_background_texture() -> StreamTexture:
 	var background_resource = Singleton.CurrentLevelData.get_cached_background(thumbnail_sky)

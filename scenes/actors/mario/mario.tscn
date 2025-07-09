@@ -1623,12 +1623,14 @@ playing = true
 
 [node name="Fludd" type="AnimatedSprite" parent="Sprite"]
 visible = false
+use_parent_material = true
 frames = ExtResource( 23 )
 animation = "idleRight"
 script = ExtResource( 63 )
 
 [node name="Wings" type="AnimatedSprite" parent="Sprite"]
 visible = false
+use_parent_material = true
 frames = ExtResource( 65 )
 animation = "idleRight"
 script = ExtResource( 63 )
@@ -1636,6 +1638,7 @@ script = ExtResource( 63 )
 [node name="Water2" type="AnimatedSprite" parent="Sprite"]
 visible = false
 show_behind_parent = true
+use_parent_material = true
 position = Vector2( -7, -6 )
 rotation = -0.00178115
 frames = ExtResource( 24 )
@@ -1645,6 +1648,7 @@ centered = false
 
 [node name="Water" type="AnimatedSprite" parent="Sprite"]
 visible = false
+use_parent_material = true
 position = Vector2( -16, -24 )
 rotation = 1.5708
 frames = ExtResource( 24 )

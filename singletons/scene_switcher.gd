@@ -53,6 +53,7 @@ func quit_level(do_transition: bool = true):
 	else:
 		Singleton.CurrentLevelData.level_transition_data = {}
 		Singleton.CurrentLevelData.hub_return_data = {}
+		Singleton.CurrentLevelData.shine_kickout_data = {}
 		if do_transition:
 			quit_to_menu_with_transition("levels_screen")
 		else:
