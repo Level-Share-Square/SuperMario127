@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -16,15 +16,10 @@
 [ext_resource path="res://scenes/editor/assets/gear_popup_pressed.svg" type="Texture" id=14]
 [ext_resource path="res://scenes/editor/assets/gear_popup_hover.svg" type="Texture" id=15]
 [ext_resource path="res://scenes/editor/base_button_sound.gd" type="Script" id=16]
-[ext_resource path="res://assets/tiles/bricks_yellow/icon.png" type="Texture" id=17]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=18]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=19]
 [ext_resource path="res://scenes/editor/assets/gear_popup.svg" type="Texture" id=20]
 [ext_resource path="res://scenes/editor/windows/editor_options_window_2.tscn" type="PackedScene" id=21]
-[ext_resource path="res://scenes/actors/objects/rock/icon.png" type="Texture" id=22]
-[ext_resource path="res://scenes/actors/objects/yellow_coin/icon.png" type="Texture" id=23]
-[ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=24]
-[ext_resource path="res://scenes/actors/objects/cannon/icon.png" type="Texture" id=25]
 [ext_resource path="res://scenes/oldeditor/placement/rectangle_fill.gd" type="Script" id=26]
 [ext_resource path="res://scenes/editor/pen_tool.gd" type="Script" id=27]
 [ext_resource path="res://scenes/oldeditor/assets/grid.png" type="Texture" id=28]
@@ -36,44 +31,8 @@
 [ext_resource path="res://scenes/editor/windows/editor_window.gd" type="Script" id=34]
 [ext_resource path="res://scenes/editor/windows/item_picker/items_box.gd" type="Script" id=35]
 [ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=36]
-[ext_resource path="res://scenes/editor/windows/item_suitcase_button/item_selection.gd" type="Script" id=37]
 [ext_resource path="res://scenes/editor/windows/editor_window_icon.gd" type="Script" id=38]
 [ext_resource path="res://scenes/editor/assets/magnifying_glass_v2.svg" type="Texture" id=40]
-
-[sub_resource type="InputEventKey" id=3]
-scancode = 49
-physical_scancode = 49
-
-[sub_resource type="ShortCut" id=4]
-shortcut = SubResource( 3 )
-
-[sub_resource type="InputEventKey" id=1]
-scancode = 50
-physical_scancode = 50
-
-[sub_resource type="ShortCut" id=2]
-shortcut = SubResource( 1 )
-
-[sub_resource type="InputEventKey" id=5]
-scancode = 51
-physical_scancode = 51
-
-[sub_resource type="ShortCut" id=6]
-shortcut = SubResource( 5 )
-
-[sub_resource type="InputEventKey" id=7]
-scancode = 52
-physical_scancode = 52
-
-[sub_resource type="ShortCut" id=8]
-shortcut = SubResource( 7 )
-
-[sub_resource type="InputEventKey" id=11]
-scancode = 53
-physical_scancode = 53
-
-[sub_resource type="ShortCut" id=12]
-shortcut = SubResource( 11 )
 
 [sub_resource type="Shader" id=13]
 code = "//from https://godotshaders.com/shader/2d-outline-inline/
@@ -265,13 +224,13 @@ script = ExtResource( 8 )
 
 [node name="Top" type="PanelContainer" parent="UI/EditorUI/ItemSuitcase"]
 margin_right = 184.0
-margin_bottom = 51.0
+margin_bottom = 19.0
 
 [node name="TopMat" type="MarginContainer" parent="UI/EditorUI/ItemSuitcase/Top"]
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 178.0
-margin_bottom = 45.0
+margin_bottom = 13.0
 custom_constants/margin_right = 2
 custom_constants/margin_top = 2
 custom_constants/margin_left = 2
@@ -281,82 +240,15 @@ custom_constants/margin_bottom = 5
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 170.0
-margin_bottom = 34.0
+margin_bottom = 2.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 custom_constants/separation = 2
 
-[node name="Item" type="Button" parent="UI/EditorUI/ItemSuitcase/Top/TopMat/TopItems"]
-margin_right = 32.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-shortcut = SubResource( 4 )
-icon = ExtResource( 22 )
-flat = true
-expand_icon = true
-script = ExtResource( 37 )
-
-[node name="Item2" type="Button" parent="UI/EditorUI/ItemSuitcase/Top/TopMat/TopItems"]
-margin_left = 34.0
-margin_right = 66.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-shortcut = SubResource( 2 )
-icon = ExtResource( 23 )
-flat = true
-icon_align = 1
-expand_icon = true
-
-[node name="Item3" type="Button" parent="UI/EditorUI/ItemSuitcase/Top/TopMat/TopItems"]
-margin_left = 68.0
-margin_right = 100.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-shortcut = SubResource( 6 )
-icon = ExtResource( 17 )
-flat = true
-expand_icon = true
-script = ExtResource( 37 )
-
-[node name="Item4" type="Button" parent="UI/EditorUI/ItemSuitcase/Top/TopMat/TopItems"]
-margin_left = 102.0
-margin_right = 134.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-shortcut = SubResource( 8 )
-icon = ExtResource( 25 )
-flat = true
-expand_icon = true
-
-[node name="Item5" type="Button" parent="UI/EditorUI/ItemSuitcase/Top/TopMat/TopItems"]
-margin_left = 136.0
-margin_right = 168.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-shortcut = SubResource( 12 )
-icon = ExtResource( 24 )
-flat = true
-expand_icon = true
-
 [node name="Bottom" type="PanelContainer" parent="UI/EditorUI/ItemSuitcase"]
-margin_top = 45.0
+margin_top = 13.0
 margin_right = 184.0
-margin_bottom = 64.0
+margin_bottom = 32.0
 
 [node name="BottomMat" type="MarginContainer" parent="UI/EditorUI/ItemSuitcase/Bottom"]
 margin_left = 6.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/misc/gear.svg" type="Texture" id=1]
 [ext_resource path="res://scenes/editor/editor_button.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/misc/editor_theme.tres" type="Theme" id=11]
 [ext_resource path="res://assets/fonts/delfino.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://scenes/editor/windows/areas.gd" type="Script" id=13]
+[ext_resource path="res://scenes/editor/windows/music.gd" type="Script" id=14]
 
 [sub_resource type="Shader" id=1]
 code = "//from https://godotshaders.com/shader/2d-outline-inline/
@@ -104,6 +105,7 @@ use_filter = true
 font_data = ExtResource( 12 )
 
 [node name="EditorOptionsWindow" instance=ExtResource( 3 )]
+visible = false
 script = ExtResource( 9 )
 title = "Level Settings"
 window_size = Vector2( 420, 220 )
@@ -144,7 +146,6 @@ all_tabs_in_front = true
 use_hidden_tabs_for_min_size = true
 
 [node name="Level" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs" index="0"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -240,6 +241,7 @@ text = "Write a description of your level here."
 wrap_enabled = true
 
 [node name="Areas" type="ScrollContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs" index="1"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -251,7 +253,7 @@ script = ExtResource( 13 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Areas" index="0"]
 margin_right = 390.0
-margin_bottom = 99.0
+margin_bottom = 35.0
 size_flags_horizontal = 3
 
 [node name="Add" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Areas/VBoxContainer" index="0"]
@@ -274,6 +276,7 @@ margin_right = -6.0
 margin_bottom = -6.0
 scroll_horizontal_enabled = false
 scroll_deadzone = 7
+script = ExtResource( 14 )
 
 [node name="CenterContainer" type="CenterContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Music" index="0"]
 margin_right = 386.0
@@ -281,35 +284,61 @@ margin_bottom = 140.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Music/CenterContainer" index="0"]
-margin_left = 165.0
-margin_top = 45.0
-margin_right = 221.0
-margin_bottom = 94.0
-custom_constants/separation = 9
-alignment = 1
-
-[node name="LineEdit" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer" index="0"]
-margin_right = 56.0
-margin_bottom = 19.0
-size_flags_vertical = 4
-align = 1
-placeholder_text = "Link"
-
-[node name="WindowClose" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer" index="1"]
-margin_top = 28.0
-margin_right = 56.0
-margin_bottom = 49.0
-rect_min_size = Vector2( 21, 21 )
+[node name="WindowClose" type="Button" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Music/CenterContainer" index="0"]
+margin_left = 170.0
+margin_top = 59.0
+margin_right = 216.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 20.194, 21 )
 hint_tooltip = "Close"
 focus_mode = 0
 theme = ExtResource( 11 )
 theme_type_variation = "de"
 custom_fonts/font = SubResource( 3 )
 enabled_focus_mode = 0
-text = "Find "
+text = "Save"
 icon_align = 1
 script = ExtResource( 6 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Music/CenterContainer" index="1"]
+margin_left = 41.0
+margin_top = 28.0
+margin_right = 345.0
+margin_bottom = 111.0
+custom_constants/separation = 47
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer" index="0"]
+margin_right = 304.0
+margin_bottom = 19.0
+
+[node name="OggLink" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer/HBoxContainer" index="0"]
+margin_right = 150.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+align = 1
+expand_to_text_length = true
+placeholder_text = "Link to .ogg File"
+
+[node name="Loop" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer/HBoxContainer" index="1"]
+margin_left = 154.0
+margin_right = 304.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+align = 1
+expand_to_text_length = true
+placeholder_text = "Loop Point (ms)"
+
+[node name="Control" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Music/CenterContainer/VBoxContainer" index="1"]
+margin_top = 66.0
+margin_right = 304.0
+margin_bottom = 83.0
+text = "Success!"
+align = 1
 
 [node name="Environment" type="ScrollContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs" index="3"]
 visible = false
