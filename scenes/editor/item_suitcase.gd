@@ -27,11 +27,13 @@ func _ready():
 		buttons.append(button)
 	item_base.queue_free()
 
+
 func item_selected(placeable_item: Resource):
 	bottom_row.move_child(bottom_row.get_children()[max_bottom - 1], 0)
 	bottom_row.get_children()[0].set_item(placeable_item)
 	bottom_row.get_children()[0].visible = true
-	
+
+
 func new_favorite_selected(placeable_item: Resource, button):
 	if button in top_row.get_children():
 		button.visible = false

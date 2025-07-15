@@ -8,6 +8,7 @@ onready var grid: TextureRect = $"%Grid"
 
 signal item_selected(placeable_item)
 
+
 func _ready():
 	set_item(placeable_item)
 

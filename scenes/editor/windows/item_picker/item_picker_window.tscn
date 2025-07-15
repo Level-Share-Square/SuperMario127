@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/editor/assets/magnifying_glass_v2.svg" type="Texture" id=2]
+[ext_resource path="res://scenes/editor/windows/item_picker/item_picker_window.gd" type="Script" id=3]
 [ext_resource path="res://scenes/editor/windows/item_picker/item_button.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/editor/group_button.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/editor/items/items.tres" type="Resource" id=10]
@@ -101,9 +102,7 @@ thickness = 2
 visible = false
 margin_right = 256.0
 margin_bottom = 256.0
-title = "Item Picker"
-icon = ExtResource( 2 )
-icon_tooltip = "Use this window to pick a tile or object to place!"
+script = ExtResource( 3 )
 window_size = Vector2( 256, 256 )
 
 [node name="Border" parent="WindowBack" index="0"]

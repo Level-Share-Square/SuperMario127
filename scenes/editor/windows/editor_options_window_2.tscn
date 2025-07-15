@@ -105,7 +105,6 @@ use_filter = true
 font_data = ExtResource( 12 )
 
 [node name="EditorOptionsWindow" instance=ExtResource( 3 )]
-visible = false
 script = ExtResource( 9 )
 title = "Level Settings"
 window_size = Vector2( 420, 220 )

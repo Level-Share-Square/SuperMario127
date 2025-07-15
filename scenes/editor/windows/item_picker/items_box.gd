@@ -27,7 +27,7 @@ func load_items(items: Dictionary):
 		elif item is PlaceableObject:
 			object_items_box.add_child(item_button)
 			
-		print(item_button.connect("item_selected", get_node("%ItemSuitcase"), "item_selected"))
+		item_button.connect("item_selected", owner, "item_selected")
 
 
 func get_items_by_group(group: String) -> Dictionary:

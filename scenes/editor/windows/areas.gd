@@ -1,9 +1,12 @@
 extends ScrollContainer
 
+
 onready var v_box_container = $VBoxContainer
 onready var new_area = $VBoxContainer/Add
 
+
 const AREA_PANEL_SCENE = "res://scenes/editor/windows/area_panel.tscn"
+
 
 func _ready():
 	var _connect = get_parent().connect("window_opened", self, "reload_areas")
@@ -11,6 +14,7 @@ func _ready():
 	if Singleton.CurrentLevelData.level_data.areas.size() >= 32:
 		new_area.disabled = true
 	reload_areas()
+
 
 func reload_areas():
 	# child die funny
@@ -30,6 +34,7 @@ func reload_areas():
 	v_box_container.add_child(Control.new()) # because godot :mov:
 	
 	new_area.disabled = (Singleton.CurrentLevelData.level_data.areas.size() >= 32)
+
 
 func create_area():
 	if Singleton.CurrentLevelData.level_data.areas.size() != 32:
