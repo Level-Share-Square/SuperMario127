@@ -37,7 +37,6 @@ func item_selected(placeable_item: Resource):
 func new_favorite_selected(placeable_item: Resource, button):
 	if button in top_row.get_children():
 		button.visible = false
-		print(button.visible)
 		top_row.move_child(button, 4)
 		return
 	top_row.move_child(top_row.get_children()[max_top - 1], 0)

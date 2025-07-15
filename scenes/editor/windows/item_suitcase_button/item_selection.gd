@@ -6,7 +6,6 @@ var button_pressed: bool
 var hold_timer = 2
 
 signal new_item_selected(placeable_item)
-signal new_favorite_selected(placeable_item)
 
 func _ready():
 	set_item(placeable_item)
