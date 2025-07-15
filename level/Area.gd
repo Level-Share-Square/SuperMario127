@@ -39,6 +39,7 @@ func duplicate_objects(base_objects: Array):
 
 func duplicate_settings(base_settings):
 	var new_settings = LevelAreaSettings.new()
+	new_settings.name = base_settings.name
 	new_settings.sky = base_settings.sky
 	new_settings.background = base_settings.background
 	new_settings.background_palette = base_settings.background_palette

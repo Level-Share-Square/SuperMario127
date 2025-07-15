@@ -13,8 +13,8 @@ func _ready():
 
 func _update(delta: float):
 	if editor.left_held or editor.right_held:
-		if tile_mode:
-			place_tile(placeable_items.placeable_items["bricks"])
+		if editor.selected_item is PlaceableTile:
+			place_tile(editor.selected_item)
 		else:
 			place_object(editor.selected_item)
 

@@ -1,5 +1,6 @@
 class_name LevelAreaSettings
 
+var name: String = ""
 var sky: int = 1
 var background: int = 1
 var background_palette: int = 0

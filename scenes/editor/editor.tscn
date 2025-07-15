@@ -325,6 +325,7 @@ shortcut = SubResource( 6 )
 icon = ExtResource( 17 )
 flat = true
 expand_icon = true
+script = ExtResource( 37 )
 
 [node name="Item4" type="Button" parent="UI/EditorUI/ItemSuitcase/Top/TopMat/TopItems"]
 margin_left = 102.0
