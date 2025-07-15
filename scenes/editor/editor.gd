@@ -4,6 +4,7 @@ extends LevelDataLoader
 
 const mode: int = 1
 const TILE_SIZE := Vector2(32, 32)
+export var placeable_items: Resource
 
 
 export(NodePath) var shared_path
@@ -11,6 +12,7 @@ export(NodePath) var shared_path
 var placed_item_property = null
 
 var hovered_objects: Dictionary = {}
+var selected_item: PlaceableItem
 
 var mouse_position := Vector2.ZERO
 var last_mouse_pos := Vector2.ZERO
@@ -27,6 +29,7 @@ onready var tools_container = $Tools
 
 
 func _ready():
+	selected_item = placeable_items.placeable_items["coin"]
 	#this is to dynamically update the framerate
 	_update_editor_framerate()
 	
@@ -57,15 +60,8 @@ func _ready():
 
 
 func _unhandled_input(event):
-	if Input.is_action_pressed("place"):
-		left_held = true
-	else:
-		left_held = false
-		
-	if Input.is_action_pressed("erase"):
-		right_held = true
-	else:
-		right_held = false
+	left_held = Input.is_action_pressed("place")
+	right_held = Input.is_action_pressed("erase")
 
 
 func _physics_process(delta):
@@ -103,3 +99,6 @@ func switch_scenes():
 
 func get_shared_node() -> LevelShared:
 	return get_node(shared_path) as LevelShared
+	
+func new_item_selected(placeable_item):
+	selected_item = placeable_item

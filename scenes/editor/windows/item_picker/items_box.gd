@@ -26,6 +26,8 @@ func load_items(items: Dictionary):
 			tile_items_box.add_child(item_button)
 		elif item is PlaceableObject:
 			object_items_box.add_child(item_button)
+			
+		print(item_button.connect("item_selected", get_node("%ItemSuitcase"), "item_selected"))
 
 
 func get_items_by_group(group: String) -> Dictionary:

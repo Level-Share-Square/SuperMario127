@@ -16,7 +16,7 @@ func _update(delta: float):
 		if tile_mode:
 			place_tile(placeable_items.placeable_items["bricks"])
 		else:
-			place_object(placeable_items.placeable_items["coin"])
+			place_object(editor.selected_item)
 
 
 func place_tile(tile_item: PlaceableTile):

@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/editor/windows/item_picker/item_button.gd" type="Script" id=4]
 [ext_resource path="res://scenes/editor/windows/item_picker/editor_button_content.gd" type="Script" id=5]
 
-[node name="Button" type="Button"]
+[node name="ItemSelectButton" type="Button"]
 margin_right = 48.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )

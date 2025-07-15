@@ -7,6 +7,8 @@ var toggle_state = false
 
 
 func _button_down():
+	if "ItemSelectButton" in get_parent().name:
+		get_parent().emit_signal("item_selected", get_parent().placeable_item)
 	if toggle:
 		rect_position += pressed_offset * (Vector2(-1, -1) if toggle_state else Vector2.ONE)
 	else:

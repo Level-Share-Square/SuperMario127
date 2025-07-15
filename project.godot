@@ -154,72 +154,72 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/text/dialogue.gd"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordActivity",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordActivityAssets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_assets.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordActivityManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_manager.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordActivityParty",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_party.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordActivitySecrets",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_secrets.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordActivityTimestamps",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_activity_timestamps.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordCore",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_core.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordLobby",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordLobbyManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_manager.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordLobbyTransaction",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_lobby_transaction.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordOverlayManager",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_overlay_manager.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordPartySize",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_party_size.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordResult",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_result.gdns"
 }, {
-"base": "",
+"base": "Reference",
 "class": "DiscordUser",
 "language": "NativeScript",
 "path": "res://addons/discord_game_sdk/discord_user.gdns"
@@ -254,7 +254,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/editor/editor_tool.gd"
 }, {
-"base": "Popup",
+"base": "Reference",
 "class": "EditorWindow",
 "language": "GDScript",
 "path": "res://scenes/editor/windows/editor_window.gd"
@@ -1038,6 +1038,7 @@ config/name="Super Mario 127"
 run/main_scene="res://scenes/menu/launcher/launcher.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="dev"
+boot_splash/show_image=false
 boot_splash/image="res://assets/misc/startup_new.png"
 boot_splash/bg_color=Color( 0.431373, 0.0352941, 0.34902, 1 )
 config/icon="res://assets/misc/icon.png"
@@ -1071,16 +1072,18 @@ second_button/url=""
 
 window/size/width=768
 window/size/height=432
+window/size/resizable=false
 window/size/test_width=1536
 window/size/test_height=864
 mouse_cursor/custom_image="res://assets/misc/cursor.png"
 mouse_cursor/tooltip_position_offset=Vector2( 0, 0 )
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+window/options/ninepatch_mode=0
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/discord_game_sdk/plugin.cfg", "res://addons/native_dialogs/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/discord_game_sdk/plugin.cfg" )
 
 [global]
 
@@ -1484,6 +1487,7 @@ toggle_enabled={
 
 [layer_names]
 
+2d_render/layer_1="player"
 2d_render/layer_2="fade_cutout"
 2d_render/layer_20="fg_clip"
 2d_physics/layer_1="terrain"
@@ -1539,5 +1543,6 @@ batching/precision/uv_contract=true
 gles3/shaders/shader_compilation_mode=2
 limits/buffers/canvas_polygon_buffer_size_kb=1024
 limits/buffers/canvas_polygon_index_buffer_size_kb=1024
+limits/rendering/max_renderable_elements=131072
 environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
 quality/2d/use_pixel_snap=false
