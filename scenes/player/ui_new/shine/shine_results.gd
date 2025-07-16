@@ -45,7 +45,7 @@ func start():
 	animation_player.play_backwards("transition")
 
 
-func _physics_process(delta):
+func _process(delta):
 	if not shown or time_label.modulate.a <= 0: return
 	
 	var last_text: String = time_label.text
@@ -53,10 +53,14 @@ func _physics_process(delta):
 	time_label.text = "-" + LevelInfo.generate_time_string(time_score) + "-"
 	time_backing.text = time_label.text
 	
+	var target_distance: float = (float(target_score) - float(time_score)) / float(target_score)
+	var start_distance: float = float(time_score) / float(target_score)
+	count_sound.volume_db = -min(target_distance*2, start_distance/6)*15
+	
 	sound_cooldown -= 1
-	if time_label.text != last_text and sound_cooldown <= 0:
+	if time_score != target_score and sound_cooldown <= 0:
 		count_sound.play()
-		sound_cooldown = 3
+		sound_cooldown = 4
 	
 	if is_equal_approx(stepify(time_score, 0.1), stepify(target_score, 0.1)):
 		time_score = target_score
