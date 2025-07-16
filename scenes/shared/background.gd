@@ -64,6 +64,10 @@ func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rec
 		do_auto_scroll = true
 		parallax_node.scroll_base_scale.x = 0
 		auto_scroll_speed = speed_override
+	else:
+		do_auto_scroll = false
+		parallax_node.scroll_base_scale.x = 1
+		auto_scroll_speed = 0
 		
 func _process(delta):
 	if do_auto_scroll:
