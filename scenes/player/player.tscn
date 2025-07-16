@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=2]
+[gd_scene load_steps=98 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=2]
@@ -41,8 +41,9 @@
 [ext_resource path="res://scenes/actors/objects/yellow_coin/sound.wav" type="AudioStream" id=39]
 [ext_resource path="res://scenes/player/shared_sounds.gd" type="Script" id=40]
 [ext_resource path="res://scenes/player/ui_new/shine/shine_results.gd" type="Script" id=41]
-[ext_resource path="res://scenes/player/ui_new/shine/High Score.mp3" type="AudioStream" id=42]
+[ext_resource path="res://scenes/player/ui_new/shine/high_score.wav" type="AudioStream" id=42]
 [ext_resource path="res://scenes/player/ui_new/shine/new_record.gd" type="Script" id=43]
+[ext_resource path="res://scenes/player/ui_new/shine/127tally_drum.wav" type="AudioStream" id=44]
 [ext_resource path="res://scenes/actors/objects/p_switch/tick.wav" type="AudioStream" id=58]
 [ext_resource path="res://scenes/actors/objects/p_switch/tick_end.wav" type="AudioStream" id=59]
 [ext_resource path="res://scenes/actors/objects/boo/laugh.wav" type="AudioStream" id=60]
@@ -593,10 +594,22 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/NewRecord:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1.3, 1.5 ) ]
+}
 
 [sub_resource type="Animation" id=241]
 resource_name = "new_record"
-length = 0.3
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("VBoxContainer/NewRecord:visible")
 tracks/0/interp = 1
@@ -632,6 +645,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 2, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("VBoxContainer/NewRecord:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.4 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ Vector2( 1.3, 1.5 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="DynamicFont" id=239]
@@ -1444,12 +1469,11 @@ one_shot = true
 
 [node name="HighScore" type="AudioStreamPlayer" parent="UIUnder/HUD/Control/ShineResults"]
 stream = ExtResource( 42 )
-volume_db = 2.0
+volume_db = 3.0
 bus = "Sounds"
 
 [node name="Count" type="AudioStreamPlayer" parent="UIUnder/HUD/Control/ShineResults"]
-stream = ExtResource( 9 )
-volume_db = -4.0
+stream = ExtResource( 44 )
 bus = "Sounds"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIUnder/HUD/Control/ShineResults"]
@@ -1467,6 +1491,8 @@ modulate = Color( 1, 1, 1, 0 )
 margin_top = 4.0
 margin_right = 137.0
 margin_bottom = 23.0
+rect_scale = Vector2( 1.3, 1.5 )
+rect_pivot_offset = Vector2( 68, 9 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 239 )
 text = "New record!"
