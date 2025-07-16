@@ -50,7 +50,7 @@ func load_settings():
 	if current_palette == 0:
 		foreground.texture = foreground_resource.preview
 	else:
-		foreground.texture = foreground_resource.palettes[current_palette]
+		foreground.texture = foreground_resource.palettes[current_palette - 1]
 	yield(get_tree().create_timer(0.2), "timeout")
 	background_dropdown._select_int(background_index)
 	foreground_dropdown._select_int(foreground_index)
