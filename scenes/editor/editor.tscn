@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://scenes/editor/assets/gear_popup.svg" type="Texture" id=20]
 [ext_resource path="res://scenes/editor/windows/editor_options_window_2.tscn" type="PackedScene" id=21]
 [ext_resource path="res://scenes/editor/action_manager/action_manager.gd" type="Script" id=22]
+[ext_resource path="res://generation/generated_tiles.res" type="TileSet" id=23]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=24]
 [ext_resource path="res://scenes/oldeditor/placement/rectangle_fill.gd" type="Script" id=26]
 [ext_resource path="res://scenes/editor/pen_tool.gd" type="Script" id=27]
 [ext_resource path="res://scenes/oldeditor/assets/grid.png" type="Texture" id=28]
@@ -44,6 +46,7 @@ limit_left = -10000000
 limit_top = -10000000
 
 [node name="Tools" type="Control" parent="."]
+unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
@@ -68,6 +71,19 @@ z_index = 10
 mouse_filter = 2
 color = Color( 1, 1, 1, 0.501961 )
 
+[node name="TileBuffer" type="TileMap" parent="."]
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0.75 )
+z_index = 128
+tile_set = ExtResource( 23 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 64
+collision_layer = 0
+collision_mask = 0
+navigation_layers = 0
+occluder_light_mask = 0
+format = 1
+
 [node name="ActionManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource( 22 )
@@ -81,16 +97,46 @@ anchor_bottom = 1.0
 mouse_filter = 2
 theme = ExtResource( 4 )
 
-[node name="Utilities" type="HBoxContainer" parent="UI/EditorUI"]
-margin_left = 672.0
-margin_top = 5.0
-margin_right = 762.0
-margin_bottom = 53.0
+[node name="MarginContainer" type="MarginContainer" parent="UI/EditorUI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -189.0
+margin_bottom = 56.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="Utilities" type="HBoxContainer" parent="UI/EditorUI/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 185.0
+margin_bottom = 52.0
+mouse_filter = 2
 size_flags_horizontal = 10
 size_flags_vertical = 6
+alignment = 2
 
-[node name="ItemPicker" type="TextureButton" parent="UI/EditorUI/Utilities"]
+[node name="Undo" type="Button" parent="UI/EditorUI/MarginContainer/Utilities"]
 margin_right = 42.0
+margin_bottom = 48.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Undo"
+script = ExtResource( 24 )
+
+[node name="Redo" type="Button" parent="UI/EditorUI/MarginContainer/Utilities"]
+margin_left = 46.0
+margin_right = 87.0
+margin_bottom = 48.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Redo"
+script = ExtResource( 24 )
+
+[node name="ItemPicker" type="TextureButton" parent="UI/EditorUI/MarginContainer/Utilities"]
+margin_left = 91.0
+margin_right = 133.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 42, 48 )
 focus_mode = 0
@@ -102,9 +148,9 @@ expand = true
 stretch_mode = 5
 script = ExtResource( 16 )
 
-[node name="Settings" type="TextureButton" parent="UI/EditorUI/Utilities"]
-margin_left = 46.0
-margin_right = 90.0
+[node name="Settings" type="TextureButton" parent="UI/EditorUI/MarginContainer/Utilities"]
+margin_left = 137.0
+margin_right = 181.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 44, 0 )
 focus_mode = 0
@@ -252,7 +298,9 @@ stream = ExtResource( 18 )
 volume_db = -10.0
 bus = "Sounds"
 
-[connection signal="pressed" from="UI/EditorUI/Utilities/ItemPicker" to="UI/ItemPickerWindow" method="popup" binds= [ Rect2( 450, 60, 248, 248 ) ]]
-[connection signal="pressed" from="UI/EditorUI/Utilities/Settings" to="UI/EditorOptionsWindow" method="popup" binds= [ Rect2( 344, 66, 420, 220 ) ]]
+[connection signal="pressed" from="UI/EditorUI/MarginContainer/Utilities/Undo" to="ActionManager" method="undo"]
+[connection signal="pressed" from="UI/EditorUI/MarginContainer/Utilities/Redo" to="ActionManager" method="redo"]
+[connection signal="pressed" from="UI/EditorUI/MarginContainer/Utilities/ItemPicker" to="UI/ItemPickerWindow" method="popup" binds= [ Rect2( 450, 60, 248, 248 ) ]]
+[connection signal="pressed" from="UI/EditorUI/MarginContainer/Utilities/Settings" to="UI/EditorOptionsWindow" method="popup" binds= [ Rect2( 344, 66, 420, 220 ) ]]
 [connection signal="item_selected" from="UI/ItemPickerWindow" to="UI/EditorUI/ItemSuitcase" method="item_selected"]
 [connection signal="open_editor_settings" from="UI/EditorOptionsWindow" to="Options/ScreenManager" method="screen_change" binds= [ "Options" ]]

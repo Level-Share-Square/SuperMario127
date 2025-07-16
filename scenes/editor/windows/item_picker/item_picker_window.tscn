@@ -184,7 +184,6 @@ icon = ExtResource( 2 )
 color = Color( 0, 0.294118, 0.705882, 1 )
 
 [node name="SearchMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="1"]
-visible = false
 margin_left = 14.0
 margin_right = 232.0
 margin_bottom = 19.0

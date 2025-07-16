@@ -113,11 +113,12 @@ func set_tile_visual(x: int, y: int, layer: int, tileset_id: int, tile_id: int, 
 	var cache_tile = get_tile(tileset_id, tile_id, palette_id)
 	var layer_tilemap_node = back_tilemap_node
 	if layer == 3:
-		layer_tilemap_node = very_back_tilemap_node	
+		layer_tilemap_node = very_back_tilemap_node
 	elif layer == 1:
-		layer_tilemap_node = middle_tilemap_node	
+		layer_tilemap_node = middle_tilemap_node
 	elif layer == 2:
-		layer_tilemap_node = front_tilemap_node	
+		layer_tilemap_node = front_tilemap_node
+	
 	if layer_tilemap_node.get_cell(x, y) != cache_tile:
 		layer_tilemap_node.set_cell(x, y, cache_tile)
 		if(update_bitmask):

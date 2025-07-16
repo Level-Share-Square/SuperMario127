@@ -1,4 +1,4 @@
-class_name Action
+class_name OldAction
 
 var type := "none"
 var data = []

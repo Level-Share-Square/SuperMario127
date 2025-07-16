@@ -14,14 +14,9 @@ var placed_item_property = null
 var hovered_objects: Dictionary = {}
 var selected_item: PlaceableItem
 
-var mouse_position := Vector2.ZERO
-var last_mouse_pos := Vector2.ZERO
-
-var left_held: bool = false
-var right_held: bool = false
-
-onready var tools_container: ToolManager = $Tools
-onready var action_manager = $"%ActionManager"
+onready var tool_manager: ToolManager = $"%Tools"
+onready var action_manager: ActionManager = $"%ActionManager"
+onready var tile_buffer: TileMap = $"%TileBuffer"
 
 onready var save_button = $UI/EditorUI/Utilities/Save
 onready var editor_options = $UI/EditorOptionsWindow
@@ -30,7 +25,7 @@ onready var backgrounds = $Backgrounds
 
 
 func _ready():
-	selected_item = placeable_items.placeable_items["obj_coin"]
+	selected_item = placeable_items.placeable_items["til_grass"]
 	#this is to dynamically update the framerate
 	_update_editor_framerate()
 	
@@ -58,15 +53,6 @@ func _ready():
 		Singleton.ModeSwitcher.button.change_visuals(0)
 	
 		Singleton.CurrentLevelData.unsaved_editor_changes = false
-
-
-func _unhandled_input(event):
-	left_held = Input.is_action_pressed("place")
-	right_held = Input.is_action_pressed("erase")
-
-
-func _physics_process(delta):
-	mouse_position = get_global_mouse_position()
 
 
 func on_save_pressed():
