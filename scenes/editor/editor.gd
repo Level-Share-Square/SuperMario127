@@ -20,17 +20,14 @@ var last_mouse_pos := Vector2.ZERO
 var left_held: bool = false
 var right_held: bool = false
 
-# Just useless debug stuff don't mind this
-#var temp
-
-onready var current_tool = $Tools/Pen
-
-onready var tools_container = $Tools
+onready var tools_container: ToolManager = $Tools
+onready var action_manager = $"%ActionManager"
 
 onready var save_button = $UI/EditorUI/Utilities/Save
 onready var editor_options = $UI/EditorOptionsWindow
 
 onready var backgrounds = $Backgrounds
+
 
 func _ready():
 	selected_item = placeable_items.placeable_items["coin"]
@@ -70,11 +67,7 @@ func _unhandled_input(event):
 
 func _physics_process(delta):
 	mouse_position = get_global_mouse_position()
-	
-	if is_instance_valid(current_tool):
-		current_tool._update(delta)
-	
-	last_mouse_pos = mouse_position
+
 
 func on_save_pressed():
 

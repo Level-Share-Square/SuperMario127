@@ -14,11 +14,11 @@ func _ready():
 	load_items(get_items_by_group(initial_group))
 
 
-func load_items(items: Dictionary):
+func load_items(items: Array):
 	if items.size() <= 0:
 		return
 	
-	for item in items.values():
+	for item in items:
 		var item_button = item_button_scene.instance()
 		item_button.placeable_item = item
 		
@@ -30,18 +30,21 @@ func load_items(items: Dictionary):
 		item_button.connect("item_selected", owner, "item_selected")
 
 
-func get_items_by_group(group: String) -> Dictionary:
+func get_items_by_group(group: String) -> Array:
 	var items: Dictionary = placeable_items.placeable_items
-	var filtered_items: Dictionary = {}
+	var filtered_items: Array
 	
-	for item in items.keys():
-		var item_data = items[item]
-		
-		if group == "":
-			filtered_items.get_or_add(item, item_data)
+	for item_data in items.values():
+		if group.empty():
+			filtered_items.append(item_data)
 		else:
 			if group in item_data.groups:
-				filtered_items.get_or_add(item, item_data)
+				filtered_items.append(item_data)
+	
+	filtered_items.sort_custom(self, "_sort_by_priority")
+	for item in filtered_items:
+		print(item.item_name)
+		print(item.priority)
 	
 	return filtered_items
 
@@ -85,5 +88,7 @@ func fuzzy_score(input: String, item_name: String):
 	return score if i == input.length() else 0
 
 
-func _sort_by_score(a, b):
-	return int(b["score"] - a["score"])
+func _sort_by_priority(a, b):
+	if a["priority"] > b["priority"]:
+		return true
+	return false

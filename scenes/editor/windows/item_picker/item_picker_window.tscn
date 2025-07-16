@@ -99,7 +99,6 @@ grow_end = -7.0
 thickness = 2
 
 [node name="ItemPickerWindow" instance=ExtResource( 1 )]
-visible = false
 margin_right = 256.0
 margin_bottom = 256.0
 script = ExtResource( 3 )
@@ -242,10 +241,7 @@ item_button_scene = ExtResource( 5 )
 
 [node name="TileItems" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox" index="0"]
 unique_name_in_owner = true
-margin_left = 1.0
-margin_right = 1.0
-size_flags_horizontal = 6
-size_flags_vertical = 3
+margin_right = 3.0
 custom_constants/vseparation = 10
 custom_constants/hseparation = 8
 columns = 4
@@ -287,6 +283,7 @@ margin_right = 3.0
 margin_bottom = 20.0
 custom_constants/vseparation = 10
 custom_constants/hseparation = 8
+columns = 4
 
 [node name="ItemsPanel" type="PanelContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="2"]
 visible = false
