@@ -4,6 +4,7 @@ extends LevelDataLoader
 
 const mode: int = 1
 const TILE_SIZE := Vector2(32, 32)
+export var placeable_items: Resource
 
 
 export(NodePath) var shared_path
@@ -11,22 +12,20 @@ export(NodePath) var shared_path
 var placed_item_property = null
 
 var hovered_objects: Dictionary = {}
+var selected_item: PlaceableItem
 
-var mouse_position := Vector2.ZERO
-var last_mouse_pos := Vector2.ZERO
+onready var tool_manager: ToolManager = $"%Tools"
+onready var action_manager: ActionManager = $"%ActionManager"
+onready var tile_buffer: TileMap = $"%TileBuffer"
 
-var left_held: bool = false
-var right_held: bool = false
+onready var save_button = $UI/EditorUI/Utilities/Save
+onready var editor_options = $UI/EditorOptionsWindow
 
-# Just useless debug stuff don't mind this
-#var temp
-
-onready var current_tool = $Tools/Pen
-
-onready var tools_container = $Tools
+onready var backgrounds = $Backgrounds
 
 
 func _ready():
+	selected_item = placeable_items.placeable_items["til_grass"]
 	#this is to dynamically update the framerate
 	_update_editor_framerate()
 	
@@ -56,25 +55,32 @@ func _ready():
 		Singleton.CurrentLevelData.unsaved_editor_changes = false
 
 
-func _unhandled_input(event):
-	if Input.is_action_pressed("place"):
-		left_held = true
-	else:
-		left_held = false
-		
-	if Input.is_action_pressed("erase"):
-		right_held = true
-	else:
-		right_held = false
+func on_save_pressed():
 
-
-func _physics_process(delta):
-	mouse_position = get_global_mouse_position()
+	Singleton.CurrentLevelData.level_info.level_name = editor_options.level_name.text
+	Singleton.CurrentLevelData.level_info.level_author = editor_options.author.text
+	Singleton.CurrentLevelData.level_info.level_description = editor_options.description.text
+	Singleton.CurrentLevelData.level_info.thumbnail_url = editor_options.thumbnail_url.text
 	
-	if is_instance_valid(current_tool):
-		current_tool._update(delta)
+	var level_id: String = Singleton.CurrentLevelData.level_id
+	var working_folder: String = Singleton.CurrentLevelData.working_folder
+	var level_code: String = Singleton.CurrentLevelData.level_data.get_encoded_level_data()
 	
-	last_mouse_pos = mouse_position
+	var file_path = level_list_util.get_level_file_path(level_id, working_folder)
+	level_list_util.save_level_code_file(level_code, file_path)
+	
+	for save_slot in range(4):
+		var save_path = level_list_util.get_level_save_path(
+			level_id, working_folder, save_slot - 1
+		)
+		if level_list_util.file_exists(save_path):
+			level_list_util.delete_file(save_path)
+			
+	Singleton.CurrentLevelData.level_info.reset_save_data(false)
+	Singleton.CurrentLevelData.level_info.init_collectibles()
+	save_meta_util.update_all_with_level(level_id, working_folder, false, Singleton.CurrentLevelData.level_info)
+	
+	Singleton.CurrentLevelData.unsaved_editor_changes = false
 
 
 func object_hovered(object: GameObject):
@@ -103,3 +109,6 @@ func switch_scenes():
 
 func get_shared_node() -> LevelShared:
 	return get_node(shared_path) as LevelShared
+	
+func new_item_selected(placeable_item):
+	selected_item = placeable_item

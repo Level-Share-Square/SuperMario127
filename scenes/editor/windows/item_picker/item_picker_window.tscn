@@ -1,16 +1,15 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/editor/windows/editor_window.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/editor/assets/magnifying_glass_v2.svg" type="Texture" id=2]
+[ext_resource path="res://scenes/editor/windows/item_picker/item_picker_window.gd" type="Script" id=3]
+[ext_resource path="res://scenes/editor/windows/item_picker/groups.gd" type="Script" id=4]
 [ext_resource path="res://scenes/editor/windows/item_picker/item_button.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/editor/items/placeable_item.gd" type="Script" id=6]
-[ext_resource path="res://scenes/actors/objects/yellow_coin/preview.png" type="Texture" id=7]
 [ext_resource path="res://scenes/editor/group_button.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/editor/items/placeable_items/coin.tres" type="Resource" id=9]
 [ext_resource path="res://scenes/editor/items/items.tres" type="Resource" id=10]
 [ext_resource path="res://scenes/editor/windows/item_picker/items_box.gd" type="Script" id=11]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=13]
 code = "//from https://godotshaders.com/shader/2d-outline-inline/
 shader_type canvas_item;
 
@@ -84,7 +83,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+shader = SubResource( 13 )
 shader_param/color = Color( 0.768627, 0.768627, 0.768627, 1 )
 shader_param/width = 11.6364
 shader_param/pattern = 0
@@ -94,16 +93,6 @@ shader_param/inside = false
 shader_param/add_margins = true
 shader_param/texture_offset = Vector2( 0, 2 )
 
-[sub_resource type="Resource" id=11]
-script = ExtResource( 6 )
-item_name = "Coin"
-groups = PoolStringArray(  )
-change_to = ""
-items_in_sequence = 0
-index_in_sequence = 0
-icons = [ ExtResource( 7 ) ]
-previews = [ ExtResource( 7 ) ]
-
 [sub_resource type="StyleBoxLine" id=10]
 color = Color( 1, 1, 1, 0.470588 )
 grow_begin = -5.0
@@ -111,12 +100,10 @@ grow_end = -7.0
 thickness = 2
 
 [node name="ItemPickerWindow" instance=ExtResource( 1 )]
-visible = false
 margin_right = 256.0
 margin_bottom = 256.0
-title = "Item Picker"
-icon = ExtResource( 2 )
-icon_tooltip = "Use this window to pick a tile or object to place!"
+script = ExtResource( 3 )
+title = "Item Selector"
 window_size = Vector2( 256, 256 )
 
 [node name="Border" parent="WindowBack" index="0"]
@@ -170,58 +157,83 @@ custom_constants/separation = 3
 
 [node name="GroupsBox" type="ScrollContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="0"]
 margin_right = 244.0
-margin_bottom = 34.0
+margin_bottom = 28.0
 scroll_vertical_enabled = false
 
 [node name="GroupMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox" index="0"]
-margin_right = 276.0
-margin_bottom = 26.0
+margin_right = 236.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
 custom_constants/margin_right = 2
-custom_constants/margin_top = 1
+custom_constants/margin_top = 3
 custom_constants/margin_left = 2
 custom_constants/margin_bottom = 6
 
 [node name="Groups" type="HBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat" index="0"]
 margin_left = 2.0
-margin_top = 1.0
-margin_right = 274.0
-margin_bottom = 20.0
+margin_top = 3.0
+margin_right = 234.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
 custom_constants/separation = 6
+script = ExtResource( 4 )
 
 [node name="Search" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="0" instance=ExtResource( 8 )]
+unique_name_in_owner = true
 icon = ExtResource( 2 )
 color = Color( 0, 0.294118, 0.705882, 1 )
 
-[node name="Special" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="1" instance=ExtResource( 8 )]
+[node name="SearchMat" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="1"]
 margin_left = 14.0
-margin_right = 65.0
+margin_right = 232.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+custom_constants/margin_top = 2
+custom_constants/margin_bottom = -2
+
+[node name="SearchBar" type="LineEdit" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups/SearchMat" index="0"]
+unique_name_in_owner = true
+margin_top = 2.0
+margin_right = 218.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+placeholder_text = "Search..."
+
+[node name="Special" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="2" instance=ExtResource( 8 )]
+visible = false
+margin_left = 181.0
+margin_right = 232.0
 text = "Special"
 expand_icon = false
 color = Color( 0.556863, 0.152941, 0.658824, 1 )
 
-[node name="Dialogue" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="2" instance=ExtResource( 8 )]
-margin_left = 71.0
-margin_right = 135.0
+[node name="Dialogue" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="3" instance=ExtResource( 8 )]
+visible = false
+margin_left = 168.0
+margin_right = 232.0
 text = "Dialogue"
 expand_icon = false
 color = Color( 0.5, 0.325, 0, 1 )
 
-[node name="Switches" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="3" instance=ExtResource( 8 )]
-margin_left = 141.0
-margin_right = 204.0
+[node name="Switches" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="4" instance=ExtResource( 8 )]
+visible = false
+margin_left = 203.0
+margin_right = 266.0
 text = "Switches"
 expand_icon = false
 color = Color( 0.098, 0.2156, 0.98, 1 )
 
-[node name="Teleport" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="4" instance=ExtResource( 8 )]
-margin_left = 210.0
-margin_right = 272.0
+[node name="Teleport" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/GroupsBox/GroupMat/Groups" index="5" instance=ExtResource( 8 )]
+visible = false
+margin_left = 272.0
+margin_right = 334.0
 text = "Teleport"
 expand_icon = false
 color = Color( 0.117647, 0.686275, 0, 1 )
 
 [node name="TabContainer" type="TabContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="1"]
-margin_top = 37.0
+margin_top = 31.0
 margin_right = 244.0
 margin_bottom = 211.0
 size_flags_horizontal = 3
@@ -250,47 +262,42 @@ margin_left = 1.0
 margin_top = 1.0
 margin_right = 4.0
 margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
 script = ExtResource( 11 )
 placeable_items = ExtResource( 10 )
 item_button_scene = ExtResource( 5 )
 
 [node name="TileItems" type="GridContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox" index="0"]
 unique_name_in_owner = true
-margin_left = 1.0
-margin_right = 1.0
-size_flags_horizontal = 6
-size_flags_vertical = 3
+margin_right = 3.0
 custom_constants/vseparation = 10
 custom_constants/hseparation = 8
 columns = 4
 
 [node name="Test" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox/TileItems" index="0" instance=ExtResource( 5 )]
 visible = false
-placeable_item = ExtResource( 9 )
 
 [node name="Test2" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox/TileItems" index="1" instance=ExtResource( 5 )]
 visible = false
 margin_left = 56.0
 margin_right = 104.0
-placeable_item = SubResource( 11 )
 
 [node name="Test3" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox/TileItems" index="2" instance=ExtResource( 5 )]
 visible = false
 margin_left = 112.0
 margin_right = 160.0
-placeable_item = SubResource( 11 )
 
 [node name="Test4" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox/TileItems" index="3" instance=ExtResource( 5 )]
 visible = false
 margin_left = 168.0
 margin_right = 216.0
-placeable_item = SubResource( 11 )
 
 [node name="Test5" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox/TileItems" index="4" instance=ExtResource( 5 )]
 visible = false
 margin_top = 58.0
 margin_bottom = 106.0
-placeable_item = SubResource( 11 )
 
 [node name="HSeparator" type="HSeparator" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox/TabContainer/ItemsScroll/ItemsMat/ItemsBox" index="1"]
 margin_top = 4.0
@@ -304,8 +311,11 @@ unique_name_in_owner = true
 margin_top = 20.0
 margin_right = 3.0
 margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/vseparation = 10
 custom_constants/hseparation = 8
+columns = 4
 
 [node name="ItemsPanel" type="PanelContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/ContentBox" index="2"]
 visible = false

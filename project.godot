@@ -14,10 +14,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/level_portal/login/account_info.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "Action",
 "language": "GDScript",
-"path": "res://scenes/oldeditor/action.gd"
+"path": "res://scenes/editor/action_manager/actions/action.gd"
+}, {
+"base": "Node",
+"class": "ActionManager",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/action_manager.gd"
 }, {
 "base": "Teleporter",
 "class": "AreaTransition",
@@ -364,7 +369,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/menu/levels_list/misc/http_thumbnails.gd"
 }, {
-"base": "Reference",
+"base": "ScrollContainer",
 "class": "HelpPage",
 "language": "GDScript",
 "path": "res://scenes/oldeditor/window/HelpPage.gd"
@@ -524,6 +529,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://level/ObjectData.gd"
 }, {
+"base": "Reference",
+"class": "OldAction",
+"language": "GDScript",
+"path": "res://scenes/oldeditor/action.gd"
+}, {
 "base": "NinePatchRect",
 "class": "OldEditorWindow",
 "language": "GDScript",
@@ -549,7 +559,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://classes/ParticleCollection.gd"
 }, {
-"base": "Reference",
+"base": "Action",
+"class": "PlaceObjectAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/place_object.gd"
+}, {
+"base": "Action",
+"class": "PlaceTilesAction",
+"language": "GDScript",
+"path": "res://scenes/editor/action_manager/actions/place_tiles.gd"
+}, {
+"base": "Resource",
 "class": "PlaceableItem",
 "language": "GDScript",
 "path": "res://scenes/editor/items/placeable_item.gd"
@@ -719,6 +739,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/player/ui_new/timers/timer_manager.gd"
 }, {
+"base": "Control",
+"class": "ToolManager",
+"language": "GDScript",
+"path": "res://scenes/editor/tool_manager.gd"
+}, {
 "base": "Node",
 "class": "TouchCheck",
 "language": "GDScript",
@@ -862,6 +887,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AccountInfo": "",
 "Action": "",
+"ActionManager": "",
 "AreaTransition": "",
 "AreaTransitionHelper": "",
 "BackflipState": "",
@@ -963,11 +989,14 @@ _global_script_class_icons={
 "NoActionState": "",
 "Nozzle": "",
 "ObjectData": "",
+"OldAction": "",
 "OldEditorWindow": "",
 "OptionBase": "",
 "PanningCamera2D": "",
 "ParallaxLayerResource": "",
 "ParticlesCollection": "",
+"PlaceObjectAction": "",
+"PlaceTilesAction": "",
 "PlaceableItem": "",
 "PlaceableItemList": "",
 "PlaceableItemOld": "",
@@ -1002,6 +1031,7 @@ _global_script_class_icons={
 "TileMapLayer": "",
 "TimerBase": "",
 "TimerManager": "",
+"ToolManager": "",
 "TouchCheck": "",
 "ToxicGas": "",
 "TurboNozzle": "",
@@ -1038,6 +1068,7 @@ config/name="Super Mario 127"
 run/main_scene="res://scenes/menu/launcher/launcher.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="dev"
+boot_splash/show_image=false
 boot_splash/image="res://assets/misc/startup_new.png"
 boot_splash/bg_color=Color( 0.431373, 0.0352941, 0.34902, 1 )
 config/icon="res://assets/misc/icon.png"
@@ -1071,12 +1102,14 @@ second_button/url=""
 
 window/size/width=768
 window/size/height=432
+window/size/resizable=false
 window/size/test_width=1536
 window/size/test_height=864
 mouse_cursor/custom_image="res://assets/misc/cursor.png"
 mouse_cursor/tooltip_position_offset=Vector2( 0, 0 )
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+window/options/ninepatch_mode=0
 
 [editor_plugins]
 
@@ -1484,6 +1517,7 @@ toggle_enabled={
 
 [layer_names]
 
+2d_render/layer_1="player"
 2d_render/layer_2="fade_cutout"
 2d_render/layer_20="fg_clip"
 2d_physics/layer_1="terrain"
@@ -1539,5 +1573,6 @@ batching/precision/uv_contract=true
 gles3/shaders/shader_compilation_mode=2
 limits/buffers/canvas_polygon_buffer_size_kb=1024
 limits/buffers/canvas_polygon_index_buffer_size_kb=1024
+limits/rendering/max_renderable_elements=131072
 environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
 quality/2d/use_pixel_snap=false

@@ -1,4 +1,4 @@
-extends Control
+extends Panel
 
 
 export var pressed_offset := Vector2(0, 2)
@@ -13,6 +13,8 @@ func _button_down():
 		rect_position += pressed_offset * (Vector2(-1, -1) if toggle_state else Vector2.ONE)
 	else:
 		rect_position += pressed_offset
+	
+	add_stylebox_override("panel", get_parent().get_stylebox("pressed"))
 
 
 func _button_up():
@@ -20,7 +22,8 @@ func _button_up():
 		rect_position -= pressed_offset * (Vector2(-1, -1) if not toggle_state else Vector2.ONE)
 	else:
 		rect_position -= pressed_offset
-
+	
+	add_stylebox_override("panel", get_parent().get_stylebox("normal"))
 
 
 func _toggle(value: bool):

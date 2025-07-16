@@ -1,12 +1,34 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=15 format=2]
 
 [ext_resource path="res://scenes/editor/items/placeable_items.gd" type="Script" id=1]
 [ext_resource path="res://scenes/editor/items/placeable_items/coin.tres" type="Resource" id=2]
-[ext_resource path="res://assets/tiles/bricks/bricks_editor_data.tres" type="Resource" id=3]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/bricks.tres" type="Resource" id=3]
+[ext_resource path="res://scenes/editor/items/placeable_items/blue_coin.tres" type="Resource" id=4]
+[ext_resource path="res://scenes/editor/items/placeable_items/red_coin.tres" type="Resource" id=5]
+[ext_resource path="res://scenes/editor/items/placeable_items/level_entrance.tres" type="Resource" id=6]
+[ext_resource path="res://scenes/editor/items/placeable_items/shine.tres" type="Resource" id=7]
+[ext_resource path="res://scenes/editor/items/placeable_items/metal_platform.tres" type="Resource" id=8]
+[ext_resource path="res://scenes/editor/items/placeable_items/big_tree.tres" type="Resource" id=9]
+[ext_resource path="res://scenes/editor/items/placeable_items/mushroom_top.tres" type="Resource" id=10]
+[ext_resource path="res://scenes/editor/items/placeable_items/mushroom_body.tres" type="Resource" id=11]
+[ext_resource path="res://scenes/editor/items/placeable_items/cloud_platform.tres" type="Resource" id=12]
+[ext_resource path="res://scenes/editor/items/placeable_items/mushroom_curve.tres" type="Resource" id=13]
+[ext_resource path="res://scenes/editor/items/placeable_items/placeable_tiles/grass.tres" type="Resource" id=14]
 
 [resource]
 script = ExtResource( 1 )
 placeable_items = {
-"bricks": ExtResource( 3 ),
-"coin": ExtResource( 2 )
+"obj_big_tree": ExtResource( 9 ),
+"obj_blue_coin": ExtResource( 4 ),
+"obj_cloud_platform": ExtResource( 12 ),
+"obj_coin": ExtResource( 2 ),
+"obj_mario": ExtResource( 6 ),
+"obj_metal_platform": ExtResource( 8 ),
+"obj_mushroom_body": ExtResource( 11 ),
+"obj_mushroom_curve": ExtResource( 13 ),
+"obj_mushroom_top": ExtResource( 10 ),
+"obj_red_coin": ExtResource( 5 ),
+"obj_shine": ExtResource( 7 ),
+"til_brick": ExtResource( 3 ),
+"til_grass": ExtResource( 14 )
 }

@@ -17,6 +17,8 @@ export(Array, Texture) var previews
 export var placement_action: Script
 export var removal_action: Script
 
+export var priority: int = 0
+
 var icon: Texture = Texture.new()
 var preview: Texture = Texture.new()
 var palette: int = 0

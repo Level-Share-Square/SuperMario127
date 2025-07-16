@@ -42,13 +42,13 @@
 #		else:
 #			Singleton.SavedLevels.wipe_template_levels()
 #			save()
-	
+
 #		if data.has("numberOfTiles"):
 #			Singleton.EditorSavedSettings.data_tiles = data["numberOfTiles"]
-		
+
 #		if data.has("savedPalettes"):
 #			Singleton.EditorSavedSettings.tileset_palettes = data["savedPalettes"]
-	
+
 #		yield(Singleton.EditorSavedSettings.get_tree().create_timer(1), "timeout")
 
 #		if data.has("windowScale"):

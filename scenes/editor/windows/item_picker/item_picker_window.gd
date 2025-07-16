@@ -1,5 +1,8 @@
 extends EditorWindow
 
 
-func close():
-	
+signal item_selected(item)
+
+
+func item_selected(item: PlaceableItem):
+	emit_signal("item_selected", item)

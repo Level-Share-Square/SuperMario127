@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scenes/menu/options/options.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/menu/menu_controller/screen_manager.gd" type="Script" id=2]
@@ -7,22 +7,23 @@
 [ext_resource path="res://scenes/shared/shared.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/shared/backgrounds.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/editor/editor_camera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/editor/tool_manager.gd" type="Script" id=8]
 [ext_resource path="res://scenes/editor/windows/item_picker/item_picker_window.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/editor/assets/item_picker.svg" type="Texture" id=10]
 [ext_resource path="res://scenes/editor/assets/item_picker_pressed.svg" type="Texture" id=11]
 [ext_resource path="res://scenes/editor/assets/item_picker_hover.svg" type="Texture" id=12]
+[ext_resource path="res://scenes/editor/windows/item_suitcase_button/item_selection.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/editor/assets/gear_popup_pressed.svg" type="Texture" id=14]
 [ext_resource path="res://scenes/editor/assets/gear_popup_hover.svg" type="Texture" id=15]
 [ext_resource path="res://scenes/editor/base_button_sound.gd" type="Script" id=16]
-[ext_resource path="res://assets/tiles/bricks_yellow/icon.png" type="Texture" id=17]
+[ext_resource path="res://scenes/editor/item_suitcase.gd" type="Script" id=17]
 [ext_resource path="res://scenes/oldeditor/sounds/click2.wav" type="AudioStream" id=18]
 [ext_resource path="res://scenes/oldeditor/sounds/hover.wav" type="AudioStream" id=19]
 [ext_resource path="res://scenes/editor/assets/gear_popup.svg" type="Texture" id=20]
 [ext_resource path="res://scenes/editor/windows/editor_options_window_2.tscn" type="PackedScene" id=21]
-[ext_resource path="res://scenes/actors/objects/rock/icon.png" type="Texture" id=22]
-[ext_resource path="res://scenes/actors/objects/yellow_coin/icon.png" type="Texture" id=23]
-[ext_resource path="res://scenes/actors/mario/icon.png" type="Texture" id=24]
-[ext_resource path="res://scenes/actors/objects/cannon/icon.png" type="Texture" id=25]
+[ext_resource path="res://scenes/editor/action_manager/action_manager.gd" type="Script" id=22]
+[ext_resource path="res://generation/generated_tiles.res" type="TileSet" id=23]
+[ext_resource path="res://scenes/menu/button_scripts/button_sound.gd" type="Script" id=24]
 [ext_resource path="res://scenes/oldeditor/placement/rectangle_fill.gd" type="Script" id=26]
 [ext_resource path="res://scenes/editor/pen_tool.gd" type="Script" id=27]
 [ext_resource path="res://scenes/oldeditor/assets/grid.png" type="Texture" id=28]
@@ -30,61 +31,32 @@
 [ext_resource path="res://scenes/editor/grid.gd" type="Script" id=30]
 [ext_resource path="res://scenes/editor/items/items.tres" type="Resource" id=31]
 
-[sub_resource type="InputEventKey" id=3]
-scancode = 49
-physical_scancode = 49
-
-[sub_resource type="ShortCut" id=4]
-shortcut = SubResource( 3 )
-
-[sub_resource type="InputEventKey" id=1]
-scancode = 50
-physical_scancode = 50
-
-[sub_resource type="ShortCut" id=2]
-shortcut = SubResource( 1 )
-
-[sub_resource type="InputEventKey" id=5]
-scancode = 51
-physical_scancode = 51
-
-[sub_resource type="ShortCut" id=6]
-shortcut = SubResource( 5 )
-
-[sub_resource type="InputEventKey" id=7]
-scancode = 52
-physical_scancode = 52
-
-[sub_resource type="ShortCut" id=8]
-shortcut = SubResource( 7 )
-
-[sub_resource type="InputEventKey" id=11]
-scancode = 53
-physical_scancode = 53
-
-[sub_resource type="ShortCut" id=12]
-shortcut = SubResource( 11 )
-
 [node name="Editor" type="Node2D"]
 script = ExtResource( 3 )
 nodes_to_load = [ NodePath("Backgrounds"), NodePath("Shared"), NodePath("EditorCamera") ]
+placeable_items = ExtResource( 31 )
 shared_path = NodePath("Shared")
 
 [node name="Backgrounds" parent="." instance=ExtResource( 6 )]
 
 [node name="Shared" parent="." instance=ExtResource( 5 )]
 
+[node name="EditorCamera" parent="." instance=ExtResource( 7 )]
+limit_left = -10000000
+limit_top = -10000000
+
 [node name="Tools" type="Control" parent="."]
+unique_name_in_owner = true
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
+script = ExtResource( 8 )
 
 [node name="Pen" type="Control" parent="Tools"]
 margin_right = 40.0
 margin_bottom = 40.0
 mouse_filter = 2
 script = ExtResource( 27 )
-placeable_items = ExtResource( 31 )
 
 [node name="RectangleFill" type="Control" parent="Tools"]
 margin_right = 40.0
@@ -99,9 +71,22 @@ z_index = 10
 mouse_filter = 2
 color = Color( 1, 1, 1, 0.501961 )
 
-[node name="EditorCamera" parent="." instance=ExtResource( 7 )]
-limit_left = -10000000
-limit_top = -10000000
+[node name="TileBuffer" type="TileMap" parent="."]
+unique_name_in_owner = true
+modulate = Color( 1, 1, 1, 0.75 )
+z_index = 128
+tile_set = ExtResource( 23 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 64
+collision_layer = 0
+collision_mask = 0
+navigation_layers = 0
+occluder_light_mask = 0
+format = 1
+
+[node name="ActionManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 22 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -112,16 +97,46 @@ anchor_bottom = 1.0
 mouse_filter = 2
 theme = ExtResource( 4 )
 
-[node name="Utilities" type="HBoxContainer" parent="UI/EditorUI"]
-margin_left = 672.0
-margin_top = 5.0
-margin_right = 762.0
-margin_bottom = 53.0
+[node name="MarginContainer" type="MarginContainer" parent="UI/EditorUI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -189.0
+margin_bottom = 56.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="Utilities" type="HBoxContainer" parent="UI/EditorUI/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 185.0
+margin_bottom = 52.0
+mouse_filter = 2
 size_flags_horizontal = 10
 size_flags_vertical = 6
+alignment = 2
 
-[node name="ItemPicker" type="TextureButton" parent="UI/EditorUI/Utilities"]
+[node name="Undo" type="Button" parent="UI/EditorUI/MarginContainer/Utilities"]
 margin_right = 42.0
+margin_bottom = 48.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Undo"
+script = ExtResource( 24 )
+
+[node name="Redo" type="Button" parent="UI/EditorUI/MarginContainer/Utilities"]
+margin_left = 46.0
+margin_right = 87.0
+margin_bottom = 48.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Redo"
+script = ExtResource( 24 )
+
+[node name="ItemPicker" type="TextureButton" parent="UI/EditorUI/MarginContainer/Utilities"]
+margin_left = 91.0
+margin_right = 133.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 42, 48 )
 focus_mode = 0
@@ -133,9 +148,9 @@ expand = true
 stretch_mode = 5
 script = ExtResource( 16 )
 
-[node name="Settings" type="TextureButton" parent="UI/EditorUI/Utilities"]
-margin_left = 46.0
-margin_right = 90.0
+[node name="Settings" type="TextureButton" parent="UI/EditorUI/MarginContainer/Utilities"]
+margin_left = 137.0
+margin_right = 181.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 44, 0 )
 focus_mode = 0
@@ -154,16 +169,17 @@ margin_right = 188.0
 margin_bottom = 162.0
 mouse_filter = 0
 custom_constants/separation = -6
+script = ExtResource( 17 )
 
 [node name="Top" type="PanelContainer" parent="UI/EditorUI/ItemSuitcase"]
 margin_right = 184.0
-margin_bottom = 51.0
+margin_bottom = 19.0
 
 [node name="TopMat" type="MarginContainer" parent="UI/EditorUI/ItemSuitcase/Top"]
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 178.0
-margin_bottom = 45.0
+margin_bottom = 13.0
 custom_constants/margin_right = 2
 custom_constants/margin_top = 2
 custom_constants/margin_left = 2
@@ -173,86 +189,21 @@ custom_constants/margin_bottom = 5
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 170.0
-margin_bottom = 34.0
+margin_bottom = 2.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 custom_constants/separation = 2
 
-[node name="Item" type="Button" parent="UI/EditorUI/ItemSuitcase/Top/TopMat/TopItems"]
-margin_right = 32.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-shortcut = SubResource( 4 )
-icon = ExtResource( 22 )
-flat = true
-expand_icon = true
-
-[node name="Item2" type="Button" parent="UI/EditorUI/ItemSuitcase/Top/TopMat/TopItems"]
-margin_left = 34.0
-margin_right = 66.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-shortcut = SubResource( 2 )
-icon = ExtResource( 23 )
-flat = true
-icon_align = 1
-expand_icon = true
-
-[node name="Item3" type="Button" parent="UI/EditorUI/ItemSuitcase/Top/TopMat/TopItems"]
-margin_left = 68.0
-margin_right = 100.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-shortcut = SubResource( 6 )
-icon = ExtResource( 17 )
-flat = true
-expand_icon = true
-
-[node name="Item4" type="Button" parent="UI/EditorUI/ItemSuitcase/Top/TopMat/TopItems"]
-margin_left = 102.0
-margin_right = 134.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-shortcut = SubResource( 8 )
-icon = ExtResource( 25 )
-flat = true
-expand_icon = true
-
-[node name="Item5" type="Button" parent="UI/EditorUI/ItemSuitcase/Top/TopMat/TopItems"]
-margin_left = 136.0
-margin_right = 168.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-shortcut = SubResource( 12 )
-icon = ExtResource( 24 )
-flat = true
-expand_icon = true
-
 [node name="Bottom" type="PanelContainer" parent="UI/EditorUI/ItemSuitcase"]
-margin_top = 45.0
+margin_top = 13.0
 margin_right = 184.0
-margin_bottom = 164.0
+margin_bottom = 32.0
 
 [node name="BottomMat" type="MarginContainer" parent="UI/EditorUI/ItemSuitcase/Bottom"]
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 178.0
-margin_bottom = 113.0
+margin_bottom = 13.0
 custom_constants/margin_right = 2
 custom_constants/margin_top = 5
 custom_constants/margin_left = 2
@@ -261,170 +212,15 @@ custom_constants/margin_bottom = 2
 [node name="Items" type="GridContainer" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat"]
 margin_left = 2.0
 margin_top = 5.0
-margin_right = 170.0
-margin_bottom = 105.0
+margin_right = 2.0
+margin_bottom = 5.0
 size_flags_horizontal = 2
 size_flags_vertical = 6
 custom_constants/vseparation = 2
 custom_constants/hseparation = 2
 columns = 5
 
-[node name="Item6" type="Button" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items"]
-margin_right = 32.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-flat = true
-
-[node name="Item7" type="Button" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items"]
-margin_left = 34.0
-margin_right = 66.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-flat = true
-
-[node name="Item8" type="Button" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items"]
-margin_left = 68.0
-margin_right = 100.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-flat = true
-
-[node name="Item9" type="Button" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items"]
-margin_left = 102.0
-margin_right = 134.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-flat = true
-
-[node name="Item10" type="Button" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items"]
-margin_left = 136.0
-margin_right = 168.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-flat = true
-
-[node name="Item11" type="Button" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items"]
-margin_top = 34.0
-margin_right = 32.0
-margin_bottom = 66.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-flat = true
-
-[node name="Item12" type="Button" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items"]
-margin_left = 34.0
-margin_top = 34.0
-margin_right = 66.0
-margin_bottom = 66.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-flat = true
-
-[node name="Item13" type="Button" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items"]
-margin_left = 68.0
-margin_top = 34.0
-margin_right = 100.0
-margin_bottom = 66.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-flat = true
-
-[node name="Item14" type="Button" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items"]
-margin_left = 102.0
-margin_top = 34.0
-margin_right = 134.0
-margin_bottom = 66.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-flat = true
-
-[node name="Item15" type="Button" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items"]
-margin_left = 136.0
-margin_top = 34.0
-margin_right = 168.0
-margin_bottom = 66.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-flat = true
-
-[node name="Item16" type="Button" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items"]
-margin_top = 68.0
-margin_right = 32.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-flat = true
-
-[node name="Item17" type="Button" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items"]
-margin_left = 34.0
-margin_top = 68.0
-margin_right = 66.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-flat = true
-
-[node name="Item18" type="Button" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items"]
-margin_left = 68.0
-margin_top = 68.0
-margin_right = 100.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-flat = true
-
-[node name="Item19" type="Button" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items"]
-margin_left = 102.0
-margin_top = 68.0
-margin_right = 134.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-flat = true
-
-[node name="Item20" type="Button" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items"]
-margin_left = 136.0
-margin_top = 68.0
-margin_right = 168.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 32, 32 )
-focus_mode = 0
-theme_type_variation = "ButtonEmpty"
-enabled_focus_mode = 0
-flat = true
+[node name="ItemBase" parent="UI/EditorUI/ItemSuitcase/Bottom/BottomMat/Items" instance=ExtResource( 13 )]
 
 [node name="TextureButton" type="TextureButton" parent="UI/EditorUI"]
 visible = false
@@ -440,8 +236,13 @@ texture_normal = ExtResource( 29 )
 expand = true
 
 [node name="ItemPickerWindow" parent="UI" instance=ExtResource( 9 )]
+margin_left = 450.0
+margin_top = 60.0
+margin_right = 706.0
+margin_bottom = 316.0
 
 [node name="EditorOptionsWindow" parent="UI" instance=ExtResource( 21 )]
+visible = false
 margin_left = 344.0
 margin_top = 66.0
 margin_right = 763.0
@@ -455,6 +256,7 @@ script = ExtResource( 30 )
 motion_mirroring = Vector2( 3072, 1664 )
 
 [node name="GridTexture" type="TextureRect" parent="UI/Grid/GridRepeat"]
+unique_name_in_owner = true
 margin_right = 3072.0
 margin_bottom = 1664.0
 mouse_filter = 2
@@ -496,6 +298,9 @@ stream = ExtResource( 18 )
 volume_db = -10.0
 bus = "Sounds"
 
-[connection signal="pressed" from="UI/EditorUI/Utilities/ItemPicker" to="UI/ItemPickerWindow" method="popup" binds= [ Rect2( 496, 80, 260, 260 ) ]]
-[connection signal="pressed" from="UI/EditorUI/Utilities/Settings" to="UI/EditorOptionsWindow" method="popup" binds= [ Rect2( 344, 66, 420, 220 ) ]]
+[connection signal="pressed" from="UI/EditorUI/MarginContainer/Utilities/Undo" to="ActionManager" method="undo"]
+[connection signal="pressed" from="UI/EditorUI/MarginContainer/Utilities/Redo" to="ActionManager" method="redo"]
+[connection signal="pressed" from="UI/EditorUI/MarginContainer/Utilities/ItemPicker" to="UI/ItemPickerWindow" method="popup" binds= [ Rect2( 450, 60, 248, 248 ) ]]
+[connection signal="pressed" from="UI/EditorUI/MarginContainer/Utilities/Settings" to="UI/EditorOptionsWindow" method="popup" binds= [ Rect2( 344, 66, 420, 220 ) ]]
+[connection signal="item_selected" from="UI/ItemPickerWindow" to="UI/EditorUI/ItemSuitcase" method="item_selected"]
 [connection signal="open_editor_settings" from="UI/EditorOptionsWindow" to="Options/ScreenManager" method="screen_change" binds= [ "Options" ]]

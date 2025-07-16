@@ -11,10 +11,10 @@ func _ready():
 	ready = true
 
 func load_in(_level_data : LevelData, level_area : LevelArea):
-	update_background(level_area.settings.sky, level_area.settings.background, level_area.settings.bounds, 0, level_area.settings.background_palette)
+	update_background(level_area.settings.sky, level_area.settings.background, level_area.settings.bounds, 0, level_area.settings.background_palette, level_area.settings.bg_autoscroll_speed)
 
 func update_background_area(area : LevelArea):
-	update_background(area.settings.sky, area.settings.background, area.settings.bounds, 0, area.settings.background_palette)
+	update_background(area.settings.sky, area.settings.background, area.settings.bounds, 0, area.settings.background_palette, area.settings.bg_autoscroll_speed)
 
 func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rect2(0, 0, 0, 0), extra_y_offset : float = 0, background_palette : int = 0, speed_override: float = 0):
 	if !ready:
@@ -58,19 +58,17 @@ func update_background(sky : int = 1, background : int = 1, bounds : Rect2 = Rec
 		
 		parallax_node.offset.y += extra_y_offset
 	
-	auto_scroll_speed = 0
 	parallax_node.scroll_base_scale.x = 1
 	
-	if foreground_resource.auto_scroll_speed > 0.0:
-		do_auto_scroll = true
-		parallax_node.scroll_base_scale.x = 0
-		auto_scroll_speed = foreground_resource.auto_scroll_speed
-	
-	if speed_override > 0:
+	if abs(speed_override) > 0:
 		do_auto_scroll = true
 		parallax_node.scroll_base_scale.x = 0
 		auto_scroll_speed = speed_override
-
+	else:
+		do_auto_scroll = false
+		parallax_node.scroll_base_scale.x = 1
+		auto_scroll_speed = 0
+		
 func _process(delta):
 	if do_auto_scroll:
 		parallax_node.scroll_base_offset.x += auto_scroll_speed*delta

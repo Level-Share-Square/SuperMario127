@@ -1140,7 +1140,6 @@ func _physics_process(delta: float) -> void:
 		if player_id == Singleton.PlayerSettings.my_player_index and is_network_master():
 			rpc_unreliable("sync", position, velocity, sprite.frame, sprite.animation, sprite.rotation_degrees, attacking, big_attack, heavy, dead, controllable)
 			#print("hi")
-	
 	update_ghost()
 
 
@@ -1150,15 +1149,15 @@ func update_ghost():
 		GhostArrays.temp_ga.append(ANIM_IDS[sprite.animation])
 		GhostArrays.temp_gsr.append(int(sprite.rotation_degrees))
 		GhostArrays.temp_gar.append(Singleton.CurrentLevelData.area)
-	
+
 	var level_info = Singleton.CurrentLevelData.level_info
 	if Singleton2.save_ghost == true and GhostArrays.dont_save == false:
 		Singleton2.save_ghost = false
-		
+
 		var directory := Directory.new()
 		if !directory.dir_exists("user://replays"):
 			directory.make_dir("user://replays")
-		
+
 		file.open("user://replays/" + str(level_info.level_name) + "_" + str(level_info.selected_shine) + ".127ghost", File.WRITE)
 		file.store_var(GhostArrays.temp_gp)
 		file.store_var(GhostArrays.temp_ga)
@@ -1166,7 +1165,8 @@ func update_ghost():
 		file.store_var(GhostArrays.temp_gar)
 		file.close()
 
-		
+	
+
 func encode_int_bytes(val: int, num: int) -> PoolByteArray:
 	var output = PoolByteArray([])
 	for i in range(num):
