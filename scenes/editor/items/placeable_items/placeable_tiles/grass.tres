@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=12 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/grass/palette_icons/2_block.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/grass/palette_icons/1_block.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/grass/palette_icons/4_block.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/grass/palette_icons/3_block.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/grass/palette_icons/5_block.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/grass/palette_icons/8_block.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/grass/palette_icons/9_slab.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/grass/palette_icons/7_block.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/grass/icon.png" type="Texture" id=10]
+[ext_resource path="res://assets/tiles/grass/palette_icons/6_block.png" type="Texture" id=11]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Grass"
+groups = PoolStringArray( "special" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 10 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ) ]
+previews = [ ExtResource( 10 ) ]
+tileset_id = 2
+tile_id = 0

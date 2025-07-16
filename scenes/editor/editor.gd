@@ -30,7 +30,7 @@ onready var backgrounds = $Backgrounds
 
 
 func _ready():
-	selected_item = placeable_items.placeable_items["coin"]
+	selected_item = placeable_items.placeable_items["obj_coin"]
 	#this is to dynamically update the framerate
 	_update_editor_framerate()
 	
