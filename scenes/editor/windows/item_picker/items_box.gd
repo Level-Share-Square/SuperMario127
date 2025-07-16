@@ -9,16 +9,23 @@ export var initial_group: String = ""
 onready var tile_items_box: GridContainer = get_node("%TileItems")
 onready var object_items_box: GridContainer = get_node("%ObjectItems")
 
+onready var search_bar = get_node("%SearchBar")
+
 
 func _ready():
+	search_bar.connect("text_changed", self, "_on_search")
 	load_items(get_items_by_group(initial_group))
 
 
-func load_items(items: Dictionary):
+func load_items(items: Array):
+	for i in tile_items_box.get_children():
+		i.queue_free()
+	for i in object_items_box.get_children():
+		i.queue_free()
 	if items.size() <= 0:
 		return
 	
-	for item in items.values():
+	for item in items:
 		var item_button = item_button_scene.instance()
 		item_button.placeable_item = item
 		
@@ -30,60 +37,63 @@ func load_items(items: Dictionary):
 		item_button.connect("item_selected", owner, "item_selected")
 
 
-func get_items_by_group(group: String) -> Dictionary:
+func get_items_by_group(group: String) -> Array:
 	var items: Dictionary = placeable_items.placeable_items
-	var filtered_items: Dictionary = {}
+	var filtered_items: Array
 	
-	for item in items.keys():
-		var item_data = items[item]
-		
+	for item_data in items.values():
 		if group == "":
-			filtered_items.get_or_add(item, item_data)
+			filtered_items.append(item_data)
 		else:
 			if group in item_data.groups:
-				filtered_items.get_or_add(item, item_data)
+				filtered_items.append(item_data)
 	
 	return filtered_items
 
+func _on_search(new_text):
+	sort_by_fuzzy_search(new_text)
 
-func get_items_by_search(input: String) -> Dictionary:
-	input = input.to_lower()
-	
-	var items: Dictionary = placeable_items.placeable_items
-	var filtered_items: Dictionary = {}
-	
-	# Get the names and IDs in a dictionary, and score them based on how well
-	# they fit the input
-	var item_names: Dictionary = {}
-	var item_scores: Dictionary = {}
-	for item in items.keys():
-		var score = fuzzy_score(input, items[item].item_name)
-		if score > 0:
-			item_names.get_or_add(item, items[item].item_name)
-			item_scores.get_or_add(item, score)
-	
-	# Then iterate on the dictionary while seeing if any names fit
-	for item in item_names.keys():
-		if not item_names[item].to_lower.find(input) == -1:
-			filtered_items.get_or_add(item, items[item])
-	
-	return filtered_items
+#Bad sorting algorithm -dignity
+func sort_by_fuzzy_search(search: String):
+	if search == "":
+		load_items(get_items_by_group(initial_group))
+		return
+	var score_dictionary: Dictionary
+	for key in placeable_items.placeable_items:
+		print(key.substr(4, key.length()).length())
+		var item = key
+		var score = 0
+		for letter_item in item.substr(4, item.length()):
+			for letter_search in search:
+				if letter_search.to_lower() == letter_item.to_lower():
+					score += 1
+				score_dictionary[item] = score
 
-
-func fuzzy_score(input: String, item_name: String):
-	var score = 0
-	var i = 0
-	for character in item_name:
-		if i >= input.length():
+	var score_array: Array 
+	for i in score_dictionary:
+		score_array.append({i: score_dictionary[i]})
+			
+	while true:
+		var fail = false
+		for pair in score_array:
+			var current_index = score_array.find(pair)
+			var current_score = pair[pair.keys()[0]]
+			if score_array.find(pair) + 1 == score_array.size():
+				break
+			var next_score = score_array[score_array.find(pair) + 1][score_array[score_array.find(pair) + 1].keys()[0]]
+			if next_score > current_score:
+				var temp_pair = pair
+				score_array.remove(current_index)
+				score_array.insert(current_index + 1, pair)
+				fail = true
+		if fail == false:
 			break
-		
-		if character == input[i]:
-			score += 1
-		
-		i += 1
 	
-	return score if i == input.length() else 0
-
-
-func _sort_by_score(a, b):
-	return int(b["score"] - a["score"])
+	var return_array: Array
+	for pair in score_array:
+		var key = pair.keys()[0]
+		return_array.append(placeable_items.placeable_items[key])
+	return_array = return_array.slice(0, 9)
+	load_items(return_array)
+	return return_array
+		

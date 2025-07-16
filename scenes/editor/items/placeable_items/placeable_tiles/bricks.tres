@@ -1,0 +1,24 @@
+[gd_resource type="Resource" load_steps=11 format=2]
+
+[ext_resource path="res://scenes/editor/items/placeable_tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/4_block.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/6Extra-striped_brick_icon.png" type="Texture" id=3]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/5Brown-striped_brick_icon.png" type="Texture" id=4]
+[ext_resource path="res://assets/tiles/bricks/icon.png" type="Texture" id=5]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/7White-striped_brick_icon.png" type="Texture" id=6]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/2_block.png" type="Texture" id=7]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/3_block.png" type="Texture" id=8]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/1_block.png" type="Texture" id=9]
+[ext_resource path="res://assets/tiles/bricks/palette_icons/0_block.png" type="Texture" id=10]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Bricks"
+groups = PoolStringArray( "special" )
+change_to = ""
+items_in_sequence = 0
+index_in_sequence = 0
+icons = [ ExtResource( 5 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 6 ) ]
+previews = [ ExtResource( 5 ) ]
+tileset_id = 1
+tile_id = 0

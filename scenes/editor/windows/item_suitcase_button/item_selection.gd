@@ -13,7 +13,7 @@ func _ready():
 	connect("button_down", self, "button_held")
 	connect("button_up", self, "button_released")
 
-func _process(delta):
+func check_held():
 	if button_pressed == true:
 		yield(get_tree().create_timer(hold_timer), "timeout")
 		if button_pressed == true:
@@ -23,6 +23,7 @@ func _process(delta):
 			#I HATE THIS ENGINE
 			get_parent().get_parent().get_parent().get_parent().new_favorite_selected(placeable_item, self)
 			button_pressed = false
+			return
 		
 
 func set_item(value: PlaceableItem):
@@ -38,6 +39,7 @@ func button_pressed():
 	
 func button_held():
 	button_pressed = true
+	check_held()
 	
 func button_released():
 	button_pressed = false
