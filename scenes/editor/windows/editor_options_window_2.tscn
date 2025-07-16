@@ -110,7 +110,6 @@ use_filter = true
 font_data = ExtResource( 12 )
 
 [node name="EditorOptionsWindow" instance=ExtResource( 3 )]
-visible = false
 script = ExtResource( 9 )
 title = "Level Settings"
 window_size = Vector2( 420, 220 )
@@ -151,6 +150,7 @@ all_tabs_in_front = true
 use_hidden_tabs_for_min_size = true
 
 [node name="Level" type="MarginContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs" index="0"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -353,7 +353,6 @@ text = "Success!"
 align = 1
 
 [node name="Environment" type="ScrollContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs" index="3"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -441,16 +440,16 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer" index="0"]
 margin_right = 188.0
-margin_bottom = 142.0
+margin_bottom = 132.0
 size_flags_horizontal = 3
-custom_constants/separation = 11
+custom_constants/separation = 6
 
 [node name="Background" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/VBoxContainer" index="0"]
-margin_right = 180.0
+margin_right = 188.0
 margin_bottom = 40.0
 
 [node name="Label" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/VBoxContainer/Background" index="0"]
-margin_right = 180.0
+margin_right = 188.0
 margin_bottom = 17.0
 text = "Background"
 align = 1
@@ -458,17 +457,17 @@ align = 1
 [node name="BGDropdown" type="OptionButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/VBoxContainer/Background" index="1"]
 unique_name_in_owner = true
 margin_top = 21.0
-margin_right = 180.0
+margin_right = 188.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 150, 0 )
 
 [node name="Foreground" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/VBoxContainer" index="1"]
-margin_top = 51.0
-margin_right = 180.0
-margin_bottom = 91.0
+margin_top = 46.0
+margin_right = 188.0
+margin_bottom = 86.0
 
 [node name="Label" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/VBoxContainer/Foreground" index="0"]
-margin_right = 180.0
+margin_right = 188.0
 margin_bottom = 17.0
 text = "Foreground"
 align = 1
@@ -476,17 +475,17 @@ align = 1
 [node name="FGDropdown" type="OptionButton" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/VBoxContainer/Foreground" index="1"]
 unique_name_in_owner = true
 margin_top = 21.0
-margin_right = 180.0
+margin_right = 188.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 150, 0 )
 
 [node name="Autoscroll" type="VBoxContainer" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/VBoxContainer" index="2"]
-margin_top = 102.0
-margin_right = 180.0
-margin_bottom = 142.0
+margin_top = 92.0
+margin_right = 188.0
+margin_bottom = 132.0
 
 [node name="Label" type="Label" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/VBoxContainer/Autoscroll" index="0"]
-margin_right = 180.0
+margin_right = 188.0
 margin_bottom = 17.0
 text = "Autoscroll Speed"
 align = 1
@@ -494,8 +493,10 @@ align = 1
 [node name="ASPick" type="SpinBox" parent="WindowBack/WindowMat/HeaderContentDivider/ContentMat/Tabs/Environment/HBoxContainer/ScrollContainer/VBoxContainer/Autoscroll" index="1"]
 unique_name_in_owner = true
 margin_top = 21.0
-margin_right = 180.0
+margin_right = 188.0
 margin_bottom = 40.0
+min_value = -1000.0
+max_value = 1000.0
 script = ExtResource( 5 )
 
 [node name="ResizeHandle" parent="." index="1"]

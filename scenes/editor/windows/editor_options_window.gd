@@ -12,5 +12,5 @@ func on_editor_settings_pressed():
 	hide()
 	emit_signal("open_editor_settings")
 
-func new_selection():
+func update_background():
 	owner.backgrounds.update_background_area(Singleton.CurrentLevelData.level_data.areas[Singleton.CurrentLevelData.area])

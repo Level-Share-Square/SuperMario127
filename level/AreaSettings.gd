@@ -4,6 +4,7 @@ var name: String = ""
 var sky: int = 1
 var background: int = 1
 var background_palette: int = 0
+var bg_autoscroll_speed: float = 0.0
 var music = 1
 var bounds: Rect2 = Rect2(0, 0, 80, 30)
 var gravity: float = 7.82
