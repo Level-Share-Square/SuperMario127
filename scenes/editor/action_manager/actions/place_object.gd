@@ -13,4 +13,5 @@ func _do() -> void:
 
 var object: GameObject
 func _undo() -> void:
-	shared.destroy_object(object, true)
+	if is_instance_valid(object):
+		shared.destroy_object(object, true)

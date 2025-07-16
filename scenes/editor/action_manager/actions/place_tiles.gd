@@ -29,8 +29,10 @@ class Tile:
 func _do() -> void:
 	undo_tiles.clear()
 	for tile in do_tiles:
+		var last_tile = shared.get_tile(tile.x, tile.y, layer)
+		
 		undo_tiles.append(
-			Tile.new(tile, layer, tileset_id, tile_id, palette)
+			Tile.new(tile, layer, last_tile[0], last_tile[1], last_tile[2])
 		)
 		
 		shared.set_tile(tile.x, tile.y, layer, tileset_id, tile_id, palette)
@@ -43,7 +45,7 @@ func _undo() -> void:
 			tile.pos.x, 
 			tile.pos.y, 
 			tile.lay, 
-			0, 
-			0, 
-			0
+			tile.tileset, 
+			tile.tile, 
+			tile.pal
 		)
